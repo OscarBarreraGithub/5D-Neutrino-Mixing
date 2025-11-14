@@ -9,14 +9,16 @@ Each has a bulk mass and couples on the IR brane to a “Higgs-like” field thr
 When the theory is written in 4D KK language, two different mass matrices appear:
 
 **(a) Charged-lepton (Dirac) mass matrix**
+
 $$
-m_E \simeq 2 v k, f_L Y_E f_E ,
+m_E \simeq 2 v k f_L Y_E f_E ,
 $$
+
 relating left-handed doublets to right-handed singlets.
 This is an ordinary **Dirac-type** matrix: it couples L↔E, and has one block per KK level.
 
-**(b) Neutral-lepton (Majorana + Dirac) mass matrix**
-In the basis ($\nu_L$, N, $N^(1)$, $N^c(1)$) it looks schematically like
+**(b) Neutral-lepton (Majorana + Dirac) mass matrix** looks schematically like
+
 $$
 M_N =
 \begin{pmatrix}
@@ -26,6 +28,7 @@ Y_N v f_L     & M_{Maj}^{(01)T} & M_{Maj}^{(1)} & M_{KK}\\
 0              & 0               & M_{KK}        & 0
 \end{pmatrix},
 $$
+
 where the $M_{Maj}$ entries come from UV-brane Majorana terms, and the $M_{KK}$ entries from the extra-dimension excitations.
 
 This is the full object we want to diagonalize mixes light neutrinos, heavy sterile states, and their first KK partners.
