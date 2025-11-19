@@ -90,9 +90,9 @@ The solver uses a robust seeding strategy:
 *   **Integer Order**: If $\nu$ is an integer, we use `scipy.special.jn_zeros` to get the exact locations of the zeros of $J_\nu(x)$.
 *   **Non-Integer Order**: We use the Bessel asymptotic expansion for large arguments:
 
-    $$
-     x_n \approx \left(n + \frac{\nu}{2} - \frac{1}{4}\right)\pi 
-     $$
+$$
+x_n \approx \left(n + \frac{\nu}{2} - \frac{1}{4}\right)\pi 
+$$
     
 
 These seeds are used to create **brackets** (intervals $[a, b]$ where the sign of $F(x)$ changes). We then pass these brackets to `scipy.optimize.brentq` (Brent's method), which is guaranteed to converge if a sign change exists.
