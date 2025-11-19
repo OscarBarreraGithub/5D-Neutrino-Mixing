@@ -66,13 +66,21 @@ $$
 ### 1. Numerical Stability
 
 The standard condition for KK modes often looks like a ratio:
-$$ \frac{J_\nu(x)}{Y_\nu(x)} = \frac{J_\nu(\epsilon x)}{Y_\nu(\epsilon x)} $$
+
+$$
+ \frac{J_\nu(x)}{Y_\nu(x)} = \frac{J_\nu(\epsilon x)}{Y_\nu(\epsilon x)} 
+$$
+
 Directly implementing this is numerically dangerous for two reasons:
 1.  **Singularities**: $Y_\nu(z)$ has zeros, causing the ratio to blow up to infinity.
 2.  **Small Argument Divergence**: As $z \to 0$, $Y_\nu(z) \to -\infty$.
 
 The solver instead finds roots of the "cross-product" equation:
-$$ F(x) = J_\nu(x) Y_\nu(\epsilon x) - J_\nu(\epsilon x) Y_\nu(x) = 0 $$
+
+$$
+F(x) = J_\nu(x) Y_\nu(\epsilon x) - J_\nu(\epsilon x) Y_\nu(x) = 0 
+$$
+
 This function behaves well when $\epsilon$ is extremely small, which is typical for RS models.
 
 ### 2. Intelligent Seeding
@@ -81,7 +89,10 @@ Finding roots of oscillating functions is tricky; if you guess wrong, you might 
 The solver uses a robust seeding strategy:
 *   **Integer Order**: If $\nu$ is an integer, we use `scipy.special.jn_zeros` to get the exact locations of the zeros of $J_\nu(x)$.
 *   **Non-Integer Order**: We use the Bessel asymptotic expansion for large arguments:
-    $$ x_n \approx \left(n + \frac{\nu}{2} - \frac{1}{4}\right)\pi $$
+
+    $$
+     x_n \approx \left(n + \frac{\nu}{2} - \frac{1}{4}\right)\pi 
+     $$
     
 
 These seeds are used to create **brackets** (intervals $[a, b]$ where the sign of $F(x)$ changes). We then pass these brackets to `scipy.optimize.brentq` (Brent's method), which is guaranteed to converge if a sign change exists.
