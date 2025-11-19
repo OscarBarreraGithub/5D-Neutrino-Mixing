@@ -20,14 +20,15 @@ With those quantities available you can immediately compute
 $f_{IR}(c, \epsilon)$ and $f_UV(c, \epsilon)$ as defined in `wavefuncs.py`
 
 The IR “overlap factor” for a canonically normalized fermion zero mode is
+
 $$
-f_{\mathrm{IR}}^2=\frac{\tfrac12 - c}{1 - \epsilon^{\,1-2c}} \, .
+f_{\mathrm{IR}}^2=\frac{\tfrac12 - c}{1 - \epsilon^{1-2c}}
 $$
 
 while for the UV we have
 
 $$
-\left(f_N^{\mathrm{UV}}\right)^2=\frac{\tfrac12 - c}{\epsilon^{\,2c-1}-1} \, .
+\left(f_N^{\mathrm{UV}}\right)^2=\frac{\tfrac12 - c}{\epsilon^{2c-1}-1}
 $$
 
 Note: the `f_IR` function returns $f_{\mathrm{IR}}$, not $f_{\mathrm{IR}}^2$
