@@ -1,0 +1,202 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Conventions for 5D Neutrino Mixing Derivations}
+\author{Project Reference Document}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Geometry}
+
+\subsection{Metric and Coordinates}
+
+We work in a slice of AdS$_5$ with the warped metric
+\begin{equation}
+    ds^2 = e^{-2\sigma(y)} \eta_{\mu\nu} dx^\mu dx^\nu + dy^2
+\end{equation}
+where $\sigma(y) = k|y|$ and $y \in [-\pi r_c, \pi r_c]$ is the orbifold coordinate.
+
+\subsection{Conformal Coordinates}
+
+In conformal coordinates $z$, the metric becomes
+\begin{equation}
+    ds^2 = \frac{1}{(kz)^2} \left( \eta_{\mu\nu} dx^\mu dx^\nu + dz^2 \right)
+\end{equation}
+with
+\begin{align}
+    z_h &= \frac{1}{k} && \text{(UV brane)} \\
+    z_v &= \frac{e^{\pi k r_c}}{k} = \frac{1}{\Lambda} && \text{(IR brane)}
+\end{align}
+
+\subsection{Warp Factor}
+
+The warp factor is defined as
+\begin{equation}
+    \boxed{\varepsilon \equiv \frac{\Lambda}{k} = e^{-\pi k r_c} = \frac{z_h}{z_v}}
+\end{equation}
+where $k$ is the AdS curvature and $\Lambda$ is the IR (KK) scale.
+
+\subsection{Derived Quantities}
+
+The compactification radius:
+\begin{equation}
+    r_c = \frac{\ln(k/\Lambda)}{\pi k} = -\frac{\ln \varepsilon}{\pi k}
+\end{equation}
+
+%--------------------------------------------------
+\section{Bulk Fermions}
+
+\subsection{5D Mass Parameter}
+
+For a bulk fermion with 5D Dirac mass $M_5$, we define the dimensionless parameter
+\begin{equation}
+    \boxed{c = \frac{M_5}{k} + \frac{1}{2}}
+\end{equation}
+so that $M_5 = k(c - 1/2)$.
+
+\subsection{Alpha Parameter}
+
+For Bessel function equations, we use
+\begin{equation}
+    \boxed{\alpha = \abs{c + \frac{1}{2}}}
+\end{equation}
+
+\subsection{Zero-Mode Localization}
+
+\begin{itemize}
+    \item $c > 1/2$: Zero mode localized toward UV brane
+    \item $c < 1/2$: Zero mode localized toward IR brane
+    \item $c = 1/2$: Flat profile
+\end{itemize}
+
+%--------------------------------------------------
+\section{Overlap Factors (f-factors)}
+
+\subsection{IR Brane Overlap}
+
+The normalized zero-mode value at the IR brane:
+\begin{equation}
+    \boxed{f_{\text{IR}}^2(c) = \frac{\frac{1}{2} - c}{1 - \varepsilon^{1-2c}}}
+\end{equation}
+
+\textbf{Limits:}
+\begin{itemize}
+    \item $c \to 1/2$: $f_{\text{IR}}^2 \to -1/\ln\varepsilon$ (use L'H\^{o}pital)
+    \item $c \ll 1/2$: $f_{\text{IR}}^2 \to 1/2 - c$ (IR localized)
+    \item $c \gg 1/2$: $f_{\text{IR}}^2 \to (1/2 - c) \varepsilon^{1-2c}$ (UV localized, exponentially suppressed)
+\end{itemize}
+
+\subsection{UV Brane Overlap}
+
+For right-handed neutrinos with UV Majorana mass:
+\begin{equation}
+    \boxed{f_{\text{UV}}^2(c) = \frac{\frac{1}{2} - c}{\varepsilon^{2c-1} - 1}}
+\end{equation}
+
+%--------------------------------------------------
+\section{KK Mode Boundary Conditions}
+
+\subsection{LH Zero Mode ($++$)}
+
+For fermions with a left-handed zero mode, the KK masses satisfy
+\begin{equation}
+    \boxed{\frac{J_{\alpha \mp 1}(m_n z_h)}{Y_{\alpha \mp 1}(m_n z_h)} = \frac{J_{\alpha \mp 1}(m_n z_v)}{Y_{\alpha \mp 1}(m_n z_v)}}
+\end{equation}
+where the upper sign is for $c > -1/2$ and the lower sign for $c < -1/2$.
+
+The Bessel mixing coefficient:
+\begin{equation}
+    -b_\alpha(m_n) = \frac{J_{\alpha \mp 1}(m_n z_h)}{Y_{\alpha \mp 1}(m_n z_h)}
+\end{equation}
+
+\subsection{RH Zero Mode ($--$)}
+
+For fermions with a right-handed zero mode:
+\begin{equation}
+    \boxed{\frac{J_{\alpha}(m_n z_h)}{Y_{\alpha}(m_n z_h)} = \frac{J_{\alpha}(m_n z_v)}{Y_{\alpha}(m_n z_v)}}
+\end{equation}
+
+\subsection{Gauge Bosons (NN)}
+
+For gauge bosons with Neumann BCs at both branes:
+\begin{equation}
+    \boxed{\frac{J_0(m_n z_v)}{Y_0(m_n z_v)} = \frac{J_0(m_n z_h)}{Y_0(m_n z_h)}}
+\end{equation}
+
+\subsection{KK Wavefunction Normalization}
+
+The normalization factor for KK modes:
+\begin{equation}
+    N_n^2 = \frac{1}{2\pi r_c} \left[ z_v^2 \left(J_\alpha(m_n z_v) + b_\alpha Y_\alpha(m_n z_v)\right)^2 - z_h^2 \left(J_\alpha(m_n z_h) + b_\alpha Y_\alpha(m_n z_h)\right)^2 \right]
+\end{equation}
+
+%--------------------------------------------------
+\section{Mass Formulas}
+
+\subsection{Charged Leptons}
+
+With Higgs and Yukawa couplings localized on the IR brane:
+\begin{equation}
+    \boxed{m_{E_i} = 2 v k \, f_{L_i} \, Y_{E_i} \, f_{E_i}}
+\end{equation}
+where $v \simeq 174$ GeV is the electroweak VEV.
+
+\subsection{Neutrino Seesaw}
+
+For the Type-I seesaw with UV-localized Majorana mass $M_N$:
+\begin{equation}
+    \boxed{m_{\nu_i} \simeq \frac{2 k^2 v^2 f_L^2 f_N^2}{(f_N^{\text{UV}})^2 M_N} Y_{N_i}^2}
+\end{equation}
+in the universal limit $c_{L_i} = c_L$, $c_{N_i} = c_N$, $M_{N_i} = M_N$.
+
+%--------------------------------------------------
+\section{PMNS Convention}
+
+In the charged-lepton mass basis, the PMNS matrix relates flavor to mass eigenstates:
+\begin{equation}
+    \ket{\nu_\alpha} = \sum_i V_{\alpha i}^* \ket{\nu_i}
+\end{equation}
+
+The neutrino Yukawa matrix in this basis:
+\begin{equation}
+    Y_N = V_{\text{PMNS}} \cdot \text{diag}(Y_{N_1}, Y_{N_2}, Y_{N_3})
+\end{equation}
+
+%--------------------------------------------------
+\section{Physical Constants}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Quantity & Symbol & Value \\
+\hline
+Planck mass & $M_{\text{Pl}}$ & $1.2209 \times 10^{19}$ GeV \\
+Electroweak VEV & $v$ & $174$ GeV \\
+Typical IR scale & $\Lambda$ & $\mathcal{O}(1-10)$ TeV \\
+\hline
+\end{tabular}
+\end{center}
+
+%--------------------------------------------------
+\section{Code Mapping}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Formula & Implementation \\
+\hline
+Warp parameters & \texttt{warpConfig/baseParams.py::get\_warp\_params()} \\
+$f_{\text{IR}}$, $f_{\text{UV}}$ & \texttt{warpConfig/wavefuncs.py::f\_IR(), f\_UV()} \\
+KK masses & \texttt{solvers/bessel.py::solve\_kk()} \\
+PMNS matrix & \texttt{neutrinos/neutrinoValues.py::get\_pmns()} \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}

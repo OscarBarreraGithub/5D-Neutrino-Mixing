@@ -1,3 +1,19 @@
+# Python
 __pycache__/
 */__pycache__/
 **/__pycache__/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# LaTeX build artifacts
+build/
+**/build/
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
