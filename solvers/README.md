@@ -51,6 +51,27 @@ $$
 x \equiv m z_\nu \quad\Rightarrow\quad m=\frac{x}{z_\nu}=x\Lambda.
 $$
 
+## 2) What the boundary conditions mean (and why ++ vs --)
+
+We live on an interval $z \in [z_{\text{UV}}, z_{\text{IR}}]$ with two branes. At each end you must tell the field how to behave:
+
+- **Neumann (N)** = “flat slope” at the brane: derivative vanishes (loosely, $\partial_z$ of the relevant object is zero there).
+- **Dirichlet (D)** = “pinned to zero” at the brane: the field (or the relevant component) vanishes there.
+
+On an orbifold, fields are either even ($\to$ Neumann) or odd ($\to$ Dirichlet) at a boundary.  
+Writing the parity at UV and IR gives the two-character shorthand:
+
+- `++` = even at UV **and** IR $\Rightarrow$ Neumann at both ends  
+- `--` = odd at UV **and** IR $\Rightarrow$ Dirichlet at both ends  
+
+### Why does that matter?
+
+- A mode with Neumann at both ends can have a flat, massless **“zero mode.”**  
+  That’s how you keep a massless photon/gauge zero mode before EWSB: you take $A_\mu$ with NN (`++`).
+
+- Dirichlet at an end kills a zero mode (you can’t be nonzero and also vanish there), pushing the lightest state up to the KK scale.
+
+
 ------
 ### Algorithm (high level)
 

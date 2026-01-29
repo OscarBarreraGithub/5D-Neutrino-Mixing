@@ -17,7 +17,3 @@ Notebook demonstrating how to import `neutrinoValues` and `massConstraints`, com
 ### `PMNS.ipynb`
 
 Notebook that builds the PMNS matrix from model parameters. Note: there may be a subtlety in the sign/convention of the Majorana phase.
-
-### Todo
-
-- implement uncertainty propagation into the sweeps
