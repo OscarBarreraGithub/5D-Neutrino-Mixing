@@ -12,7 +12,7 @@ try:
     from yukawa import compute_all_yukawas
 except ModuleNotFoundError as exc:
     raise ModuleNotFoundError(
-        \"Cannot import 'yukawa'. Install the repo first: `pip install -e .`.\"
+        "Cannot import 'yukawa'. Install the repo first: `pip install -e .`."
     ) from exc
 
 
