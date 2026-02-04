@@ -3,6 +3,7 @@
 import csv as csv_mod
 
 import numpy as np
+import pytest
 
 from scanParams import ScanConfig, run_scan
 
@@ -60,3 +61,37 @@ def test_extra_filter():
     results = run_scan(config, extra_filters=[always_reject], progress_every=0)
     assert not results[0]['passes_all']
     assert 'custom_reject' in results[0]['reject_reason']
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "expected_msg"),
+    [
+        ({"c_E_fixed": None, "c_E_grid": None}, "Either c_E_fixed or c_E_grid"),
+        ({"c_E_fixed": [0.7, 0.6]}, "c_E_fixed must contain exactly 3 values"),
+        ({"c_E_grid": [np.array([0.7]), np.array([0.6])]}, "c_E_grid must contain exactly 3 arrays"),
+    ],
+)
+def test_scan_config_validates_c_e_inputs(kwargs, expected_msg):
+    """ScanConfig should reject missing or malformed c_E inputs."""
+    base = dict(
+        c_L_values=np.array([0.58]),
+        c_N_values=np.array([0.27]),
+    )
+    base.update(kwargs)
+    with pytest.raises(ValueError, match=expected_msg):
+        ScanConfig(**base)
+
+
+def test_scan_config_accepts_c_e_grid():
+    """ScanConfig should accept a 3-array c_E_grid."""
+    config = ScanConfig(
+        c_L_values=np.array([0.58]),
+        c_N_values=np.array([0.27]),
+        c_E_fixed=None,
+        c_E_grid=[
+            np.array([0.70, 0.72]),
+            np.array([0.55]),
+            np.array([0.45]),
+        ],
+    )
+    assert config.total_points == 2
