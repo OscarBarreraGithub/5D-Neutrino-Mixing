@@ -10,9 +10,10 @@ import numpy as np
 
 try:
     from yukawa import compute_all_yukawas
+    from flavorConstraints import check_mu_to_e_gamma
 except ModuleNotFoundError as exc:
     raise ModuleNotFoundError(
-        "Cannot import 'yukawa'. Install the repo first: `pip install -e .`."
+        "Cannot import packages. Install the repo first: `pip install -e .`."
     ) from exc
 
 
@@ -59,6 +60,20 @@ def main() -> int:
         return 1
 
     print("All checks passed within 2% relative tolerance.")
+    print()
+
+    # --- μ→eγ constraint check (informational) ---
+    lfv = check_mu_to_e_gamma(result)
+    print("μ→eγ constraint (at M_KK = 3 TeV):")
+    print(f"  |(Ȳ_N Ȳ_N†)₁₂| = {lfv['lhs']:.6f}")
+    print(f"  Bound            = {lfv['rhs']:.6f}")
+    print(f"  Ratio            = {lfv['ratio']:.4f}")
+    print(f"  Passes           = {lfv['passes']}")
+    if not lfv['passes']:
+        # The benchmark point requires M_KK > 3 TeV to satisfy μ→eγ.
+        min_mkk = 3000.0 * np.sqrt(lfv['ratio'])
+        print(f"  → Minimum M_KK for this point ≈ {min_mkk:.0f} GeV")
+
     return 0
 
 
