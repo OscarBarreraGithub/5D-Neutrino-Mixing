@@ -28,6 +28,12 @@ Bulk fermions have a dimensionless mass parameter **c** that controls their zero
 
 This is the central mechanism: mass hierarchies arise from geometry, not from hierarchical 5D couplings.
 
+**Convention:** throughout this repo we define
+```
+c = M_5 / k
+```
+so that `M_5 = k c` and the Bessel order used in KK equations is `alpha = |c + 1/2|`.
+
 ### Overlap Factors (f-factors)
 
 The normalized zero-mode wavefunction values at the branes:

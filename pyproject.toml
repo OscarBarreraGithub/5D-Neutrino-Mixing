@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rs-5d-neutrino-mixing"
+version = "0.1.0"
+description = "RS 5D lepton-sector tools: overlaps, KK masses, neutrino data, Yukawa inversion"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Oscar Barrera" }
+]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "warpConfig",
+  "neutrinos",
+  "solvers",
+  "diagonalization",
+  "yukawa",
+  "scanParams",
+  "flavorConstraints"
+]

@@ -220,7 +220,7 @@ def compute_all_yukawas(
     ... )
     >>> print(f"f_L = {result.f_L:.4f}")  # Should be ~0.016
     >>> print(f"Ȳ_E = {result.Y_E_bar}")  # Should be O(1) to O(few)
-    >>> print(f"Ȳ_N = {result.Y_N_bar}")  # Should be O(0.01) to O(0.1)
+    >>> print(f"Ȳ_N = {result.Y_N_bar}")  # Should be O(0.2) to O(1.0)
     """
     # Import dependencies (local import to avoid circular deps)
     from warpConfig.baseParams import get_warp_params, MPL, V_EWSB

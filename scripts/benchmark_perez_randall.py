@@ -6,15 +6,14 @@ Run:
 """
 
 import sys
-from pathlib import Path
 import numpy as np
 
-# Ensure repo root is on sys.path when running as a script
-ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-
-from yukawa import compute_all_yukawas
+try:
+    from yukawa import compute_all_yukawas
+except ModuleNotFoundError as exc:
+    raise ModuleNotFoundError(
+        \"Cannot import 'yukawa'. Install the repo first: `pip install -e .`.\"
+    ) from exc
 
 
 def main() -> int:
