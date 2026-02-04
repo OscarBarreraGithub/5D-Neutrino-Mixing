@@ -61,8 +61,14 @@ def check_mu_to_e_gamma(
         'product_matrix' : np.ndarray
             The full 3×3 Hermitian matrix Ȳ_N Ȳ_N†.
     """
-    k = yukawa_result.params['k']
-    M_KK = yukawa_result.params['Lambda_IR']
+    try:
+        params = yukawa_result.params
+        k = params['k']
+        M_KK = params['Lambda_IR']
+    except Exception as exc:
+        raise ValueError(
+            "yukawa_result must include params with 'k' and 'Lambda_IR'."
+        ) from exc
 
     # Build the rescaled Yukawa matrix: Ȳ_N = 2k · Y_N_matrix
     Y_N_bar_matrix = 2.0 * k * yukawa_result.Y_N_matrix
@@ -114,7 +120,7 @@ def check_mu_to_e_gamma_raw(
     dict
         Same keys as ``check_mu_to_e_gamma``.
     """
-    Y_N_bar = np.asarray(Y_N_bar, dtype=float)
+    Y_N_bar = np.asarray(Y_N_bar, dtype=complex)
     pmns = np.asarray(pmns, dtype=complex)
 
     # Ȳ_N_matrix = U · diag(Ȳ_N)
