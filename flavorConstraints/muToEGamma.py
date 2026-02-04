@@ -17,8 +17,8 @@ Physics:
 
         |(Ȳ_N Ȳ_N†)₁₂| ≤ C × (M_KK / 3 TeV)²
 
-    with C = 0.028 from naive dimensional analysis of the dipole operator
-    (Perez & Randall, arXiv:0805.4652).
+    with C = 0.02 from naive dimensional analysis of the brane-localized
+    dipole operator (Perez & Randall, arXiv:0805.4652, Eq. 4.14).
 
 Reference:
     Perez & Randall, arXiv:0805.4652
@@ -28,10 +28,30 @@ from typing import Dict, Union
 
 import numpy as np
 
+PREFAC_BR = 4.0e-8
+# Paper-era experimental limit used in Perez & Randall (MEGA):
+BR_LIMIT_PAPER = 1.2e-11
+# Paper bound quoted for IR-brane Higgs, Eq. (4.14)
+C_PAPER = 0.02
+
+
+def coefficient_from_br_limit(br_limit: float, prefactor: float = PREFAC_BR) -> float:
+    """Compute C from a μ→eγ branching ratio limit.
+
+    Uses the NDA estimate:
+        BR(μ→eγ) ≈ prefactor × |(Ȳ_N Ȳ_N†)₁₂|² × (3 TeV / M_KK)⁴
+
+    so C = sqrt(BR_limit / prefactor).
+    """
+    if br_limit <= 0:
+        raise ValueError("br_limit must be positive")
+    if prefactor <= 0:
+        raise ValueError("prefactor must be positive")
+    return float(np.sqrt(br_limit / prefactor))
 
 def check_mu_to_e_gamma(
     yukawa_result,
-    C: float = 0.028,
+    C: float = C_PAPER,
     reference_scale: float = 3000.0,
 ) -> Dict[str, Union[float, bool, complex, np.ndarray]]:
     """Check the μ→eγ dipole constraint on the neutrino Yukawa.
@@ -41,7 +61,7 @@ def check_mu_to_e_gamma(
     yukawa_result : yukawa.compute_yukawas.YukawaResult
         Output of ``compute_all_yukawas()``.
     C : float, optional
-        Numerical coefficient in the bound.  Default 0.028.
+        Numerical coefficient in the bound.  Default 0.02 (Perez–Randall).
     reference_scale : float, optional
         Reference KK scale in GeV (denominator).  Default 3000 (= 3 TeV).
 
@@ -97,7 +117,7 @@ def check_mu_to_e_gamma_raw(
     Y_N_bar: np.ndarray,
     pmns: np.ndarray,
     M_KK: float,
-    C: float = 0.028,
+    C: float = C_PAPER,
     reference_scale: float = 3000.0,
 ) -> Dict[str, Union[float, bool, complex, np.ndarray]]:
     """Standalone μ→eγ check from raw arrays (no YukawaResult needed).
@@ -111,7 +131,7 @@ def check_mu_to_e_gamma_raw(
     M_KK : float
         KK mass scale in GeV (= Λ_IR).
     C : float, optional
-        Numerical coefficient.  Default 0.028.
+        Numerical coefficient.  Default 0.02 (Perez–Randall).
     reference_scale : float, optional
         Reference KK scale in GeV.  Default 3000.
 

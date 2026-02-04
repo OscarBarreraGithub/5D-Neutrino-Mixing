@@ -10,6 +10,13 @@ pip install -e .
 
 Dependencies: `numpy`, `scipy`.
 
+## Tests
+
+```bash
+pip install -e .[dev]
+pytest -q
+```
+
 [`neutrinos`](neutrinos)
 - Computes neutrino mass spectra, the PMNS matrix, and allowed parameter ranges under experimental constraints.
 
