@@ -31,7 +31,8 @@ import numpy as np
 PREFAC_BR = 4.0e-8
 # Paper-era experimental limit used in Perez & Randall (MEGA):
 BR_LIMIT_PAPER = 1.2e-11
-# Paper bound quoted for IR-brane Higgs, Eq. (4.14)
+# Paper bound quoted for IR-brane Higgs, Eq. (4.14).
+# Note: sqrt(BR_LIMIT_PAPER / PREFAC_BR) ≈ 0.0173; the paper rounds up to 0.02.
 C_PAPER = 0.02
 
 
