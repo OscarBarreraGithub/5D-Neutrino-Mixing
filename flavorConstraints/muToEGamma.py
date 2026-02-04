@@ -70,7 +70,7 @@ def check_mu_to_e_gamma(
     # Compute the Hermitian product Ȳ_N Ȳ_N†
     product = Y_N_bar_matrix @ Y_N_bar_matrix.conj().T
 
-    # Extract the (μ, e) = (1, 2) element  →  0-indexed (0, 1)
+    # Extract the (e, μ) = (1, 2) element  →  0-indexed (0, 1)
     off_diagonal_12 = product[0, 1]
     lhs = float(np.abs(off_diagonal_12))
 
