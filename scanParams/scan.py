@@ -86,6 +86,17 @@ class ScanConfig:
     lfv_C: float = 0.02
     lfv_reference_scale: float = 3000.0
 
+    def __post_init__(self):
+        if self.c_E_grid is not None:
+            if len(self.c_E_grid) != 3:
+                raise ValueError(
+                    f"c_E_grid must contain exactly 3 arrays, got {len(self.c_E_grid)}")
+        elif self.c_E_fixed is None:
+            raise ValueError("Either c_E_fixed or c_E_grid must be provided")
+        elif len(self.c_E_fixed) != 3:
+            raise ValueError(
+                f"c_E_fixed must contain exactly 3 values, got {len(self.c_E_fixed)}")
+
     @property
     def total_points(self) -> int:
         """Total number of grid points."""
