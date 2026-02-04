@@ -109,7 +109,7 @@ def compute_neutrino_yukawas(
     >>> f_N_UV = f_UV(0.27, epsilon)
     >>> m1, m2, m3, _ = compute_masses(0.002, 'normal')
     >>> result = compute_neutrino_yukawas(f_L, f_N, f_N_UV, 1.22e18, (m1, m2, m3), MPL)
-    >>> print(result['Y_N_bar'])  # Should be O(0.01) to O(0.1)
+    >>> print(result['Y_N_bar'])  # Should be O(0.2) to O(1.0)
     """
     # Convert to numpy array and eV to GeV
     m_nu_eV = np.asarray(neutrino_masses_eV, dtype=float)

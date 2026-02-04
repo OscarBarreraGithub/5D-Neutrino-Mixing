@@ -40,7 +40,7 @@ All derivations use the conventions defined in [conventions.tex](conventions.tex
 - Warp factor: ε = Λ/k = e^(-πkr_c) = z_h/z_v
 
 ### Bulk Mass Parameter
-- 5D fermion mass: M_5 = k(c - 1/2)
+- 5D fermion mass: M_5 = k c
 - α parameter: α = |c + 1/2|
 
 ### Boundary Conditions

@@ -14,7 +14,10 @@ from typing import Tuple
 
 import numpy as np
 
-from neutrinoValues import compute_masses, sum_mass_constraint
+try:
+    from .neutrinoValues import compute_masses, sum_mass_constraint
+except ImportError:  # fallback for running as a script
+    from neutrinoValues import compute_masses, sum_mass_constraint
 
 
 def find_allowed_lightest_masses(

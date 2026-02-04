@@ -191,7 +191,7 @@ For naturalness, we want |Ȳ| ~ O(1). Perturbativity requires |Ȳ| < 4.
 
 The dimensionless bulk mass parameter c is defined as:
 ```
-c = M_5/k + 1/2
+c = M_5/k
 ```
 where M_5 is the 5D Dirac mass and k is the AdS curvature.
 

@@ -37,7 +37,7 @@ f_UV²(c) = (1/2 - c) / (ε^(2c-1) - 1)
 Derive the full z-dependent zero-mode profile g(z) for a bulk fermion with parameter c.
 
 ### Starting Point
-5D fermion action in AdS₅ with bulk mass M_5 = k(c - 1/2).
+5D fermion action in AdS₅ with bulk mass M_5 = k c.
 
 ### Required Result
 The normalized wavefunction g(z) satisfying:

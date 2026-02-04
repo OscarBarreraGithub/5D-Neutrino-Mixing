@@ -223,13 +223,6 @@ def compute_all_yukawas(
     >>> print(f"Ȳ_N = {result.Y_N_bar}")  # Should be O(0.01) to O(0.1)
     """
     # Import dependencies (local import to avoid circular deps)
-    import sys
-    import os
-    # Add parent directory to path if needed for imports
-    parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    if parent_dir not in sys.path:
-        sys.path.insert(0, parent_dir)
-
     from warpConfig.baseParams import get_warp_params, MPL, V_EWSB
     from warpConfig.wavefuncs import f_IR, f_UV
     from neutrinos.neutrinoValues import compute_masses, get_pmns
