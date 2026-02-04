@@ -68,25 +68,29 @@ $$Y_N \to V_{\text{PMNS}} \cdot \text{diag}(Y_{N_1}, Y_{N_2}, Y_{N_3})$$
 
 ```
 5D-Neutrino-Mixing/
-├── warpConfig/        # Geometry parameters and f-factor computation
+├── warpConfig/        # ✅ Geometry parameters and f-factor computation
 │   ├── baseParams.py  #   get_warp_params(k, Lambda) → {ε, r_c, z_h, z_v, ...}
 │   └── wavefuncs.py   #   f_IR(c, ε), f_UV(c, ε) — vectorized
 │
-├── solvers/           # KK tower mass solver
+├── solvers/           # ✅ KK tower mass solver
 │   └── bessel.py      #   solve_kk(species, bc, geometry, c) → masses
 │
-├── neutrinos/         # Neutrino phenomenology
+├── neutrinos/         # ✅ Neutrino phenomenology
 │   ├── neutrinoValues.py    #   compute_masses(), get_pmns()
 │   └── massConstraints.py   #   find_allowed_lightest_masses()
 │
-├── diagonalization/   # Matrix diagonalization
+├── diagonalization/   # ✅ Matrix diagonalization
 │   └── diag.py        #   SVD() for Dirac, Takagi() for Majorana matrices
 │
-├── flavorConstraints/ # LFV bounds (μ→eγ)
+├── yukawa/            # ✅ NEW: Yukawa computation from parameters
+│   ├── compute_yukawas.py   #   compute_all_yukawas() → YukawaResult
+│   ├── charged_lepton.py    #   Charged lepton Yukawa inversion
+│   ├── neutrino.py          #   Neutrino Yukawa (seesaw inversion)
+│   └── constants.py         #   PDG lepton masses
 │
-├── yukawa/            # Extract Y_E from observed lepton masses
+├── flavorConstraints/ # 📝 Stub: LFV bounds (μ→eγ)
 │
-├── scanParams/        # Parameter space sweep driver
+├── scanParams/        # 📝 Stub: Parameter space sweep driver
 │
 └── derivations/       # LaTeX derivations (detailed physics)
 ```
@@ -99,7 +103,33 @@ $$Y_N \to V_{\text{PMNS}} \cdot \text{diag}(Y_{N_1}, Y_{N_2}, Y_{N_3})$$
 
 ## Workflow
 
-A typical parameter scan proceeds as:
+### Quick Method (Recommended)
+
+Use the `yukawa` module to compute everything in one call:
+
+```python
+from yukawa import compute_all_yukawas
+
+result = compute_all_yukawas(
+    Lambda_IR=3000,           # KK scale (GeV)
+    c_L=0.58,                 # Lepton doublet bulk mass
+    c_E=[0.75, 0.60, 0.50],   # RH charged lepton bulk masses
+    c_N=0.27,                 # RH neutrino bulk mass
+    M_N=1.22e18,              # UV Majorana mass (GeV)
+    lightest_nu_mass=0.002,   # Lightest neutrino mass (eV)
+    ordering='normal'
+)
+
+# Check results
+print(result.Y_E_bar)         # Rescaled charged lepton Yukawas
+print(result.Y_N_bar)         # Rescaled neutrino Yukawas
+print(result.is_perturbative())  # Check |Ȳ| < 4
+print(result.summary())       # Full output
+```
+
+### Step-by-Step Method
+
+For more control, you can proceed step-by-step:
 
 1. **Set geometry**: Choose (k, Λ) → compute warp parameters
    ```python
@@ -150,10 +180,47 @@ A typical parameter scan proceeds as:
 
 ## Current Status
 
-See [TODO.md](TODO.md) for outstanding items. Key areas:
-- **Stable**: warpConfig, neutrinos, diagonalization
-- **In progress**: KK mass derivations, seesaw precision checks
-- **Planned**: High-precision diagonalization, uncertainty propagation
+**See [PROJECT_STATUS.md](PROJECT_STATUS.md) for detailed implementation status and next steps.**
+
+### Recently Completed (January 2025)
+
+The `yukawa/` module is now fully implemented. It computes Yukawa couplings from RS parameters:
+
+```python
+from yukawa import compute_all_yukawas
+
+result = compute_all_yukawas(
+    Lambda_IR=3000,           # KK scale (GeV)
+    c_L=0.58,                 # Lepton doublet bulk mass
+    c_E=[0.75, 0.60, 0.50],   # RH charged lepton bulk masses
+    c_N=0.27,                 # RH neutrino bulk mass
+    M_N=1.22e18,              # UV Majorana mass (GeV)
+    lightest_nu_mass=0.002,   # Lightest neutrino mass (eV)
+    ordering='normal'
+)
+
+print(result.Y_E_bar)         # Rescaled charged lepton Yukawas Ȳ_E
+print(result.Y_N_bar)         # Rescaled neutrino Yukawas Ȳ_N
+print(result.is_perturbative())  # Check |Ȳ| < 4
+```
+
+### Module Status
+
+| Module | Status | Description |
+|--------|--------|-------------|
+| `warpConfig/` | ✅ Complete | Geometry and f-factor computation |
+| `solvers/` | ✅ Complete | KK mass solver |
+| `neutrinos/` | ✅ Complete | PDG data, PMNS, mass constraints |
+| `diagonalization/` | ✅ Complete | SVD and Takagi factorization |
+| `yukawa/` | ✅ **NEW** | Yukawa computation from parameters |
+| `flavorConstraints/` | 📝 Stub | μ→eγ bounds (not yet implemented) |
+| `scanParams/` | 📝 Stub | Parameter sweep driver (not yet implemented) |
+
+### Next Steps
+
+1. **Parameter scanning**: Use `compute_all_yukawas()` in loops to find natural Yukawa regions
+2. **Flavor constraints**: Implement μ→eγ bound checking
+3. **Optimization**: Fit parameters to minimize |Ȳ - 1|
 
 ---
 
