@@ -1,6 +1,6 @@
 # 5D Neutrino Mixing - Project Status
 
-**Last Updated:** January 2025
+**Last Updated:** February 5, 2026
 
 This document provides a comprehensive overview of the project's current state, goals, and next steps. It is designed to help new contributors (or a new Claude instance) quickly understand the codebase.
 
@@ -76,11 +76,13 @@ Perez & Randall, "Natural Neutrino Masses and Mixings from Warped Geometry", arX
 | `neutrinos/neutrinoValues.py` | ✅ Complete | PDG neutrino data, PMNS matrix |
 | `neutrinos/massConstraints.py` | ✅ Complete | Allowed neutrino mass sweeper |
 | `diagonalization/diag.py` | ✅ Complete | SVD and Takagi factorization |
-| **`yukawa/` (NEW)** | ✅ Complete | Yukawa computation from parameters |
+| `yukawa/` | ✅ Complete | Yukawa computation from parameters |
+| `flavorConstraints/muToEGamma.py` | ✅ Complete | μ→eγ NDA dipole bound (paper + MEG II 2024) |
+| `scanParams/scan.py` | ✅ Complete | Grid scan driver with LFV/naturalness/perturbativity filters |
 
-### 3.2 Yukawa Module (Just Implemented)
+### 3.2 Yukawa Module
 
-The `yukawa/` module was just implemented. It provides:
+The `yukawa/` module provides:
 
 **Main API:**
 ```python
@@ -117,12 +119,16 @@ print(result.summary())       # Full formatted output
 - Ȳ_N ≈ [0.2, 0.4, 1.0] (O(0.1) to O(1))
 - Round-trip consistency check passes
 
-### 3.3 Stub Modules (Not Yet Implemented)
+### 3.3 LFV Constraint Default (Decision)
 
-| Module | Status | Description |
-|--------|--------|-------------|
-| `flavorConstraints/` | 📝 Stub | μ→eγ and other LFV constraints |
-| `scanParams/` | 📝 Stub | Parameter space sweep driver |
+We standardize on the **MEG II 2024** bound for scans:
+
+- `scanParams.ScanConfig.lfv_C` defaults to \(C \approx 4.33\times10^{-3}\)
+  (from BR(μ→eγ) < 7.5×10⁻¹³).
+- `flavorConstraints.check_mu_to_e_gamma()` keeps the **Perez–Randall**
+  default `C_PAPER = 0.02` for reproducing the paper’s setup.
+
+Override `lfv_C` explicitly to switch between historical and current limits.
 
 ---
 
@@ -153,7 +159,7 @@ print(result.summary())       # Full formatted output
 │   ├── diag.py               #   SVD() for Dirac, Takagi() for Majorana
 │   └── diagonalizationTest.ipynb
 │
-├── yukawa/                   # ✅ NEW: Yukawa computation
+├── yukawa/                   # ✅ Yukawa computation
 │   ├── __init__.py           #   Package exports
 │   ├── constants.py          #   PDG lepton masses
 │   ├── charged_lepton.py     #   compute_charged_lepton_yukawas()
@@ -161,10 +167,12 @@ print(result.summary())       # Full formatted output
 │   ├── compute_yukawas.py    #   compute_all_yukawas(), YukawaResult
 │   └── README.md             #   Module documentation
 │
-├── flavorConstraints/        # 📝 Stub: LFV bounds
+├── flavorConstraints/        # ✅ LFV bounds (μ→eγ)
+│   ├── muToEGamma.py         #   NDA dipole bound helper
 │   └── README.md             #   μ→eγ constraint description
 │
-├── scanParams/               # 📝 Stub: Parameter sweep driver
+├── scanParams/               # ✅ Parameter sweep driver
+│   ├── scan.py               #   Grid scan + CSV export
 │   └── README.md             #   Grid scan description
 │
 ├── derivations/              # LaTeX derivations
@@ -206,67 +214,44 @@ where M_5 is the 5D Dirac mass and k is the AdS curvature.
 
 ## 6. Next Steps
 
-### 6.1 Immediate (Parameter Scanning)
+### 6.1 Immediate (Run Scans + Summaries)
 
-Now that `compute_all_yukawas()` is implemented, the next step is to use it for parameter scanning:
+The scan driver is implemented in `scanParams`. Use it for the first full
+parameter sweep and write a brief summary of viable regions.
 
-1. **Simple grid scan**: Loop over (c_L, c_E, c_N, Λ_IR, M_N) and call `compute_all_yukawas()` for each point
-2. **Filter for naturalness**: Keep points where `result.is_perturbative()` returns True and Ȳ ~ O(1)
-3. **Store viable points**: Save parameters and Yukawas for viable regions
-
-Example scanning code:
+Example scan:
 ```python
 import numpy as np
-from yukawa import compute_all_yukawas
+from scanParams import ScanConfig, run_scan
 
-viable_points = []
+config = ScanConfig(
+    Lambda_IR=3000.0,
+    M_N=1.22e18,
+    lightest_nu_mass=0.002,
+    ordering='normal',
+    c_L_values=np.linspace(0.50, 0.70, 21),
+    c_N_values=np.linspace(0.20, 0.50, 21),
+    c_E_fixed=[0.75, 0.60, 0.50],
+    # Default uses MEG II 2024 C ≈ 4.33e-3; set to 0.02 for Perez–Randall.
+    lfv_C=0.00433,
+)
 
-for c_L in np.linspace(0.5, 0.7, 20):
-    for c_N in np.linspace(0.2, 0.5, 20):
-        for Lambda_IR in [3000, 5000, 10000]:
-            # Vary c_E to fit charged lepton masses
-            for c_E_tau in np.linspace(0.4, 0.6, 10):
-                c_E = [0.8, 0.65, c_E_tau]  # Rough starting point
-
-                result = compute_all_yukawas(
-                    Lambda_IR=Lambda_IR,
-                    c_L=c_L,
-                    c_E=c_E,
-                    c_N=c_N,
-                    M_N=1e14,
-                    lightest_nu_mass=0.001,
-                    ordering='normal'
-                )
-
-                # Check if natural and perturbative
-                if result.is_perturbative() and np.all(result.Y_E_bar > 0.5):
-                    viable_points.append({
-                        'params': result.params,
-                        'Y_E_bar': result.Y_E_bar.tolist(),
-                        'Y_N_bar': result.Y_N_bar.tolist(),
-                    })
-
-print(f"Found {len(viable_points)} viable points")
+results = run_scan(config, output_csv="scan_results.csv", progress_every=100)
 ```
 
 ### 6.2 Future Enhancements
 
-1. **Flavor constraints** (`flavorConstraints/`):
-   - Implement μ→eγ bound checking
-   - The constraint from the paper: |(Ȳ_N Ȳ_N†)₁₂| ≤ 0.028·(M_KK/3TeV)²
-
-2. **Optimization/fitting**:
+1. **Optimization/fitting**:
    - Instead of grid scan, use scipy.optimize to find parameters that minimize |Ȳ - 1|
    - Fit c_E values to reproduce exact charged lepton masses
 
-3. **Electroweak precision**:
+2. **Electroweak precision**:
    - Check Z→ℓℓ constraints on wavefunction overlaps
    - Verify KK scale is high enough
 
-4. **Full scan driver** (`scanParams/`):
-   - Implement the grid scan logic described in scanParams/README.md
-   - Add result storage (CSV/HDF5)
-   - Add plotting utilities
+3. **Additional LFV / constraints**:
+   - Extend beyond μ→eγ NDA bound when needed
+   - Compare paper vs updated bounds in summary plots
 
 ---
 
@@ -291,6 +276,10 @@ result = compute_all_yukawas(
 print(result.summary())
 "
 ```
+
+### 7.3 Test Status
+
+As of **2026-02-05**, `pytest -q` passes (35 tests).
 
 ---
 

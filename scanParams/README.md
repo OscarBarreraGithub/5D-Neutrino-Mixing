@@ -15,6 +15,10 @@ config = ScanConfig(
 results = run_scan(config, output_csv="scan_results.csv")
 ```
 
+**LFV default:** `ScanConfig.lfv_C` defaults to the MEG II 2024 bound
+(\(C \approx 4.33\times10^{-3}\)). Set `lfv_C=0.02` to reproduce the
+Perez–Randall (paper-era) constraint.
+
 ## Full Example
 
 ```python
@@ -38,7 +42,8 @@ config = ScanConfig(
     # Filter thresholds
     max_Y_bar=4.0,
     naturalness_range=(0.1, 4.0),
-    lfv_C=0.02,
+    # Default uses MEG II 2024 bound (C ≈ 4.33e-3); use 0.02 to reproduce Perez–Randall.
+    lfv_C=0.00433,
     lfv_reference_scale=3000.0,
 )
 

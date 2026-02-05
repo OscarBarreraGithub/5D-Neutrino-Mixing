@@ -88,15 +88,15 @@ $$Y_N \to V_{\text{PMNS}} \cdot \text{diag}(Y_{N_1}, Y_{N_2}, Y_{N_3})$$
 ├── diagonalization/   # ✅ Matrix diagonalization
 │   └── diag.py        #   SVD() for Dirac, Takagi() for Majorana matrices
 │
-├── yukawa/            # ✅ NEW: Yukawa computation from parameters
+├── yukawa/            # ✅ Yukawa computation from parameters
 │   ├── compute_yukawas.py   #   compute_all_yukawas() → YukawaResult
 │   ├── charged_lepton.py    #   Charged lepton Yukawa inversion
 │   ├── neutrino.py          #   Neutrino Yukawa (seesaw inversion)
 │   └── constants.py         #   PDG lepton masses
 │
-├── flavorConstraints/ # 📝 Stub: LFV bounds (μ→eγ)
+├── flavorConstraints/ # ✅ LFV bounds (μ→eγ)
 │
-├── scanParams/        # 📝 Stub: Parameter space sweep driver
+├── scanParams/        # ✅ Parameter space sweep driver
 │
 └── derivations/       # LaTeX derivations (detailed physics)
 ```
@@ -159,7 +159,7 @@ For more control, you can proceed step-by-step:
 
 6. **Apply constraints**:
    - Yukawa perturbativity: |Ȳ| = 2k|Y| < O(few)
-   - Flavor bounds: μ→eγ dipole operator
+   - Flavor bounds: μ→eγ dipole operator (scan default uses MEG II 2024 C ≈ 4.33e-3; set C=0.02 for Perez–Randall)
    - EW precision: KK mass scale sufficiently high
 
 7. **Collect viable points**: Store parameters that pass all filters
@@ -218,15 +218,15 @@ print(result.is_perturbative())  # Check |Ȳ| < 4
 | `solvers/` | ✅ Complete | KK mass solver |
 | `neutrinos/` | ✅ Complete | PDG data, PMNS, mass constraints |
 | `diagonalization/` | ✅ Complete | SVD and Takagi factorization |
-| `yukawa/` | ✅ **NEW** | Yukawa computation from parameters |
-| `flavorConstraints/` | 📝 Stub | μ→eγ bounds (not yet implemented) |
-| `scanParams/` | 📝 Stub | Parameter sweep driver (not yet implemented) |
+| `yukawa/` | ✅ Complete | Yukawa computation from parameters |
+| `flavorConstraints/` | ✅ Complete | μ→eγ NDA dipole bound (paper + MEG II 2024) |
+| `scanParams/` | ✅ Complete | Grid-scan driver with perturbativity/naturalness/LFV filters |
 
 ### Next Steps
 
-1. **Parameter scanning**: Use `compute_all_yukawas()` in loops to find natural Yukawa regions
-2. **Flavor constraints**: Implement μ→eγ bound checking
-3. **Optimization**: Fit parameters to minimize |Ȳ - 1|
+1. **Run scans + summarize**: use `scanParams` to map viable regions and write a short results note.
+2. **Constraint upgrades**: add/confirm EW precision and any additional LFV constraints beyond μ→eγ.
+3. **Optimization**: fit parameters to minimize |Ȳ - 1| after initial grid results.
 
 ---
 

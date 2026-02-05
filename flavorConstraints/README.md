@@ -60,6 +60,13 @@ C_{\rm MEGII} = \sqrt{\frac{7.5\times10^{-13}}{4\times10^{-8}}} \approx 4.33\tim
 You can pass this as `C` explicitly or compute it via
 `coefficient_from_br_limit()`.
 
+## Repo default
+
+- `check_mu_to_e_gamma()` defaults to `C_PAPER = 0.02` to reproduce the
+  Perez–Randall setup.
+- `scanParams.ScanConfig` defaults to the **MEG II 2024** value
+  (\(C \approx 4.33\times10^{-3}\)) for current scans.
+
 ## API
 
 - `check_mu_to_e_gamma(yukawa_result, C=C_PAPER, reference_scale=3000)`

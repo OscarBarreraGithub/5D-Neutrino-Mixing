@@ -58,7 +58,8 @@ class ScanConfig:
     naturalness_range : (float, float)
         Accepted range for every |Y_bar| entry.
     lfv_C : float
-        Coefficient for the mu-to-e-gamma bound.
+        Coefficient for the mu-to-e-gamma bound. Default is the
+        MEG II 2024 limit translated to the NDA coefficient.
     lfv_reference_scale : float
         Reference KK scale for the LFV bound (GeV).
     """
@@ -83,7 +84,8 @@ class ScanConfig:
     # Filter thresholds
     max_Y_bar: float = 4.0
     naturalness_range: Tuple[float, float] = (0.1, 4.0)
-    lfv_C: float = 0.02
+    # MEG II 2024 limit: BR < 7.5e-13  ->  C ≈ 4.33e-3
+    lfv_C: float = 0.00433
     lfv_reference_scale: float = 3000.0
 
     def __post_init__(self):

@@ -32,3 +32,12 @@ functions used throughout the project.
 
 [`solvers`](solvers)
 - This solver finds the Kaluza–Klein (KK) masses in Randall–Sundrum models by solving the Bessel-function boundary conditions that quantize 5D bulk fields. The bulk equations reduce to Bessel’s equation in conformal (z) coordinates; the UV/IR boundary conditions give transcendental equations whose roots are the KK masses.
+
+[`flavorConstraints`](flavorConstraints)
+- Implements the μ→eγ NDA dipole bound (Perez–Randall and MEG II 2024).
+
+[`scanParams`](scanParams)
+- Grid-scan driver to sweep RS lepton-sector parameters and filter by perturbativity, naturalness, and LFV bounds.
+
+[`qcd`](qcd)
+- Computes the QCD running coupling α_s(μ) with threshold matching.
