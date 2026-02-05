@@ -168,3 +168,33 @@ def test_matching_round_trip():
     a4 = match_alpha_s(a, n_f_from=6, n_f_to=5, matching_loops=3)
     a6 = match_alpha_s(a4, n_f_from=5, n_f_to=6, matching_loops=3)
     assert np.isclose(a, a6, rtol=1e-6)
+
+
+# ---------- Precision presets ----------
+
+
+def test_precision_low():
+    """precision='low' gives 3-loop running with continuous matching."""
+    a = alpha_s(1000.0, precision='low')
+    a_explicit = alpha_s(1000.0, n_loops=3, matching_loops=0)
+    assert np.isclose(a, a_explicit)
+
+
+def test_precision_high():
+    """precision='high' gives 4-loop running with 3-loop matching."""
+    a = alpha_s(1000.0, precision='high')
+    a_explicit = alpha_s(1000.0, n_loops=4, matching_loops=3)
+    assert np.isclose(a, a_explicit)
+
+
+def test_precision_low_vs_high():
+    """Low and high precision agree to ~1% at 1 TeV."""
+    a_low = alpha_s(1000.0, precision='low')
+    a_high = alpha_s(1000.0, precision='high')
+    assert abs(a_low - a_high) / a_high < 0.01
+
+
+def test_precision_invalid():
+    """Invalid precision raises ValueError."""
+    with pytest.raises(ValueError):
+        alpha_s(1000.0, precision='medium')

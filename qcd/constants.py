@@ -21,7 +21,7 @@ M_TOP_MS = 163.5
 # Top pole mass (kept for reference / optional use)
 M_TOP_POLE = 172.69
 
-# Backward-compatible alias (default threshold choice)
+# Default alias — points to MS-bar mass (changed from pole mass in v0.2)
 M_TOP = M_TOP_MS
 
 # Ordered flavor thresholds: (mass_GeV, n_f_below, n_f_above)

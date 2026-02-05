@@ -47,6 +47,7 @@ def alpha_s(
     mu_ref: float = M_Z,
     thresholds: Optional[List[Tuple[float, int, int]]] = None,
     matching_loops: Optional[int] = None,
+    precision: Optional[str] = None,
     rtol: float = 1e-10,
     atol: float = 1e-12,
 ) -> float:
@@ -68,6 +69,11 @@ def alpha_s(
     matching_loops : int or None, optional
         Decoupling order at thresholds (0–3).  Default is n_loops-1,
         capped at 3 (i.e., 3-loop matching for 4-loop running).
+    precision : str or None, optional
+        Convenience preset that overrides *n_loops* and *matching_loops*:
+        ``'low'`` selects 3-loop running with continuous threshold matching;
+        ``'high'`` selects 4-loop running with 3-loop decoupling.
+        Default ``None`` (use explicit parameters).
     rtol, atol : float, optional
         ODE integrator tolerances.
 
@@ -88,7 +94,20 @@ def alpha_s(
     >>> from qcd import alpha_s
     >>> f"{alpha_s(1000.0):.4f}"   # 4-loop, 1 TeV
     '0.0884'
+    >>> alpha_s(3000.0, precision='low')   # 3-loop, continuous matching
+    >>> alpha_s(3000.0, precision='high')  # 4-loop, 3-loop decoupling
     """
+    # Apply precision preset (overrides n_loops and matching_loops)
+    if precision is not None:
+        if precision == 'low':
+            n_loops, matching_loops = 3, 0
+        elif precision == 'high':
+            n_loops, matching_loops = 4, 3
+        else:
+            raise ValueError(
+                f"precision must be 'low' or 'high', got {precision!r}"
+            )
+
     if mu <= 0:
         raise ValueError(f"mu must be positive, got {mu}")
     if alpha_s_ref <= 0:
@@ -179,6 +198,7 @@ def alpha_s_array(
     mu_ref: float = M_Z,
     thresholds: Optional[List[Tuple[float, int, int]]] = None,
     matching_loops: Optional[int] = None,
+    precision: Optional[str] = None,
 ) -> np.ndarray:
     """Compute alpha_s at multiple scales.
 
@@ -187,13 +207,17 @@ def alpha_s_array(
     mu_values : array-like
         Energy scales (GeV).
     n_loops : int, optional
-        Loop order (1–4).  Default 3.
+        Loop order (1–4).  Default 4.
     alpha_s_ref : float, optional
         Reference value.  Default ALPHA_S_MZ.
     mu_ref : float, optional
         Reference scale (GeV).  Default M_Z.
     thresholds : list or None, optional
         Flavor thresholds.  Default from constants.py.
+    matching_loops : int or None, optional
+        Decoupling order at thresholds (0–3).
+    precision : str or None, optional
+        ``'low'`` or ``'high'`` preset.  See :func:`alpha_s`.
 
     Returns
     -------
@@ -208,5 +232,6 @@ def alpha_s_array(
             alpha_s_ref=alpha_s_ref, mu_ref=mu_ref,
             thresholds=thresholds,
             matching_loops=matching_loops,
+            precision=precision,
         )
     return result

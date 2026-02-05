@@ -2,18 +2,18 @@
 
 Provides numerical computation of the strong coupling constant alpha_s(mu)
 at arbitrary energy scales via MS-bar RG evolution with flavor threshold
-crossings.  Primarily used for neutron EDM calculations at TeV scales.
+crossings.
 
 Example
 -------
 >>> from qcd import alpha_s
 >>>
->>> # alpha_s at 1 TeV (4-loop running, 3-loop matching by default)
+>>> # Default: 4-loop running, 3-loop decoupling
 >>> a_s = alpha_s(1000.0)
->>> print(f"alpha_s(1 TeV) = {a_s:.4f}")
->>> 
->>> # alpha_s at 3 TeV (2-loop)
->>> a_s_2loop = alpha_s(3000.0, n_loops=2)
+>>>
+>>> # Precision presets
+>>> alpha_s(3000.0, precision='low')   # 3-loop, continuous matching
+>>> alpha_s(3000.0, precision='high')  # 4-loop, 3-loop decoupling
 """
 
 from .running import alpha_s, alpha_s_array

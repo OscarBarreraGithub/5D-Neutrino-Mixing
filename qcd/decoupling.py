@@ -1,7 +1,7 @@
 """Decoupling relations for alpha_s across heavy-quark thresholds.
 
 Implements MS-bar decoupling constants through O(alpha_s^3) at mu = m_h.
-The relation is (Chetyrkin–Kuhn–Steinhauser):
+The relation is (Chetyrkin, Kniehl, Steinhauser, PRL 79 (1997) 2184):
 
     alpha_s^(n_l)(mu) = alpha_s^(n_l+1)(mu) *
         [1 + c2 * (alpha_s/pi)^2 + c3 * (alpha_s/pi)^3 + ...]
