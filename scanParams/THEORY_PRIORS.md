@@ -94,8 +94,12 @@ The key restriction is not "no c scans"; it is "no arbitrary independent c scans
 Perez-Randall style logic implies a strong degeneracy prior for lepton doublets:
 
 - use one shared `c_L0` in v1 (generation-universal),
-- if splittings are enabled later, enforce `|delta c_Li| / c_L0 <= O(1%)`
-  (use `0.8%` as the benchmark prior from the paper discussion).
+- enforce a primary wavefunction prior `max_fL_ratio` (v1 default `1.1`) where
+  pairwise LH overlap ratios must satisfy `max_ij[f_Li/f_Lj] <= max_fL_ratio`,
+- derive `delta_cL_max` from the exact `f_IR(c, epsilon)` implementation for
+  each `(k, Lambda_IR, c_L0)` and record it in metadata,
+- if splittings are enabled later, apply the derived `delta_cL_max` rather than
+  a hard-coded universal percentage on `c_L`.
 
 For right-handed neutrinos in v1:
 
@@ -115,7 +119,7 @@ For charged singlets:
 | `Lambda_IR` | scan | `3000` to `7000` GeV | outer geometry loop |
 | `k` | fixed but explicit | `1.2209e19 GeV` | keep configurable in schema |
 | `xi_KK` | fixed but explicit | `1.0` | maps `Lambda_IR` to `M_KK` |
-| `c_L0` | scan | uniform linear `0.52` to `0.70` | universal in v1 |
+| `c_L0` | scan | uniform linear `0.52` to `0.70` | universal in v1; `delta_cL_max` derived from `max_fL_ratio` |
 | `c_N0` | scan | uniform linear `0.15` to `0.45` | universal in v1; avoids most pathological IR-heavy corner |
 | `c_E1,c_E2,c_E3` | scan | each uniform linear `0.45` to `0.90` | sample then sort descending |
 | `MN_mode` | fixed in baseline | `fixed_ratio` + preset `PR_benchmark` | means `MN_over_k = 0.1` |
@@ -182,6 +186,7 @@ Every run should store at minimum:
 - code identity: `git_commit` (full hash), `dirty_tree`,
 - randomness: `rng_seed_global`, and deterministic per-sample seed (`rng_seed_sample` or deterministic derivation rule),
 - scan priors and mode labels: all knobs in Sec. 7,
+- c_L degeneracy metadata: `max_fL_ratio`, derived `delta_cL_max_*` fields,
 - LFV metadata: all fields in Sec. 4,
 - Yukawa sampling metadata: magnitude prior, phase prior, i.i.d. policy, any rescaling policy,
 - score metadata: score formula id/version and weight values,

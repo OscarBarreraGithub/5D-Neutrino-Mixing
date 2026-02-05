@@ -13,6 +13,7 @@ This file tracks atomic implementation tasks for the scanner refactor.
 - [x] T4: Add anarchic Yukawa sampling/scoring module and integrate optional scoring into scan rows.
 - [x] T5: Expand tests for config validation, metadata, KK/LFV behavior, and anarchy determinism.
 - [x] T6: Update scanner docs (`README`, theory note references if needed) and run full test suite.
+- [x] T7: Replace fixed `% c_L` degeneracy assumption with wavefunction-ratio prior (`max_fL_ratio`) and derived `delta_cL_max` metadata.
 
 ## Completion Log
 
@@ -22,3 +23,4 @@ This file tracks atomic implementation tasks for the scanner refactor.
 - 2026-02-05: T4 completed (`scanParams/anarchy.py` and optional score integration).
 - 2026-02-05: T5 completed (`tests/test_scan.py`, `tests/test_mu_to_e_gamma.py` expanded).
 - 2026-02-05: T6 completed (`scanParams/README.md` updated, full tests pass: `42 passed`).
+- 2026-02-05: T7 completed (`max_fL_ratio` implemented in `ScanConfig`; per-point `delta_cL_max_{symmetric,one_sided}` derived from `f_IR`; docs and tests updated; full tests pass: `45 passed`).

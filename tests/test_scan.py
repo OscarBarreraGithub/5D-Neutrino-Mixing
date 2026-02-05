@@ -95,6 +95,7 @@ def test_extra_filter():
         ),
         ({"MN_mode": "scan_ratio", "MN_over_k_values": None}, "MN_over_k_values must be provided"),
         ({"ordering": "inverted"}, "supports only ordering='normal'"),
+        ({"max_fL_ratio": 1.0}, "max_fL_ratio must be > 1"),
     ],
 )
 def test_scan_config_validates_inputs(kwargs, expected_msg):
@@ -146,6 +147,29 @@ def test_lfv_uses_xi_kk_mapping():
     c_val = coefficient_from_br_limit(config.br_limit, prefactor=config.prefac_br)
     assert np.isclose(row["M_KK"], 6000.0)
     assert np.isclose(row["lfv_rhs"], c_val * (6000.0 / config.lfv_reference_scale) ** 2)
+
+
+def test_c_l_degeneracy_metadata_tracks_wavefunction_ratio_prior():
+    """delta_cL metadata should be derived from max_fL_ratio and f_IR."""
+    config = _benchmark_config(max_fL_ratio=1.1)
+    row = run_scan(config, progress_every=0)[0]
+
+    assert np.isclose(row["max_fL_ratio"], 1.1)
+    assert row["delta_cL_max_symmetric"] > 0
+    assert row["delta_cL_max_one_sided"] > 0
+    assert row["delta_cL_max_symmetric"] < row["delta_cL_max_one_sided"]
+    # Benchmark values for c_L=0.58, Lambda_IR=3 TeV, k=1.2209e19 GeV.
+    assert np.isclose(row["delta_cL_max_symmetric"], 0.0016, rtol=0.1)
+    assert np.isclose(row["delta_cL_max_one_sided"], 0.0032, rtol=0.1)
+
+
+def test_c_l_degeneracy_window_expands_with_larger_ratio_tolerance():
+    """Larger max_fL_ratio should give a larger allowed delta_cL window."""
+    row_tight = run_scan(_benchmark_config(max_fL_ratio=1.05), progress_every=0)[0]
+    row_loose = run_scan(_benchmark_config(max_fL_ratio=1.2), progress_every=0)[0]
+
+    assert row_loose["delta_cL_max_symmetric"] > row_tight["delta_cL_max_symmetric"]
+    assert row_loose["delta_cL_max_one_sided"] > row_tight["delta_cL_max_one_sided"]
 
 
 def test_anarchy_scoring_is_deterministic_for_fixed_seed():

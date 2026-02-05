@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 import csv
 import itertools
 import subprocess
@@ -28,6 +28,7 @@ from flavorConstraints import (
     coefficient_from_br_limit,
 )
 from warpConfig.baseParams import MPL
+from warpConfig.wavefuncs import f_IR
 from yukawa import YukawaResult, compute_all_yukawas
 from .anarchy import AnarchyConfig, sample_anarchy_state
 
@@ -50,6 +51,11 @@ CSV_COLUMNS = [
     "lfv_C",
     "lfv_reference_scale",
     "xi_KK",
+    "max_fL_ratio",
+    "delta_cL_max_symmetric",
+    "delta_cL_max_one_sided",
+    "delta_cL_max_symmetric_over_cL_pct",
+    "delta_cL_max_one_sided_over_cL_pct",
     "k",
     "MN_mode",
     "MN_over_k",
@@ -147,6 +153,67 @@ def _sample_seed(global_seed: Optional[int], sample_index: int) -> Optional[int]
     return int(seed_seq.generate_state(1, dtype=np.uint64)[0])
 
 
+def _ratio_from_delta(c0: float, delta: float, epsilon: float, mode: str) -> float:
+    """Return f_IR ratio at a given delta for a selected degeneracy mode."""
+    if mode == "symmetric":
+        num = float(f_IR(c0 - delta, epsilon))
+        den = float(f_IR(c0 + delta, epsilon))
+        return num / den
+    if mode == "one_sided":
+        num = float(f_IR(c0 - delta, epsilon))
+        den = float(f_IR(c0, epsilon))
+        return num / den
+    raise ValueError(f"Unknown mode: {mode}")
+
+
+def _solve_delta_c_for_ratio(
+    c0: float,
+    epsilon: float,
+    max_fL_ratio: float,
+    mode: str,
+) -> float:
+    """Solve for delta c such that the selected ratio equals max_fL_ratio."""
+    # Keep search away from c -> 0.5 singular neighborhood.
+    hi = min(0.05, max(1e-6, c0 - 0.500001))
+    lo = 0.0
+
+    # Expand bracket if needed (should be rare in scanner ranges).
+    ratio_hi = _ratio_from_delta(c0, hi, epsilon, mode)
+    if ratio_hi < max_fL_ratio:
+        for _ in range(8):
+            candidate = hi * 2.0
+            if candidate >= 0.2:
+                break
+            hi = candidate
+            ratio_hi = _ratio_from_delta(c0, hi, epsilon, mode)
+            if ratio_hi >= max_fL_ratio:
+                break
+        if ratio_hi < max_fL_ratio:
+            return hi
+
+    for _ in range(80):
+        mid = 0.5 * (lo + hi)
+        ratio_mid = _ratio_from_delta(c0, mid, epsilon, mode)
+        if ratio_mid > max_fL_ratio:
+            hi = mid
+        else:
+            lo = mid
+    return lo
+
+
+def _derive_cL_degeneracy_metadata(c_L0: float, k: float, Lambda_IR: float, max_fL_ratio: float) -> Dict[str, float]:
+    """Compute derived delta-c tolerances from a wavefunction-ratio prior."""
+    epsilon = float(Lambda_IR / k)
+    d_sym = _solve_delta_c_for_ratio(c_L0, epsilon, max_fL_ratio=max_fL_ratio, mode="symmetric")
+    d_one = _solve_delta_c_for_ratio(c_L0, epsilon, max_fL_ratio=max_fL_ratio, mode="one_sided")
+    return {
+        "delta_cL_max_symmetric": d_sym,
+        "delta_cL_max_one_sided": d_one,
+        "delta_cL_max_symmetric_over_cL_pct": 100.0 * d_sym / c_L0 if c_L0 != 0 else np.nan,
+        "delta_cL_max_one_sided_over_cL_pct": 100.0 * d_one / c_L0 if c_L0 != 0 else np.nan,
+    }
+
+
 # ── Configuration ────────────────────────────────────────────────────────
 
 
@@ -201,6 +268,7 @@ class ScanConfig:
     # Filter thresholds
     max_Y_bar: float = 4.0
     naturalness_range: Tuple[float, float] = (0.1, 4.0)
+    max_fL_ratio: float = 1.1
 
     # Metadata controls
     rng_seed_global: Optional[int] = None
@@ -226,6 +294,8 @@ class ScanConfig:
             raise ValueError("br_limit must be positive")
         if self.prefac_br <= 0:
             raise ValueError("prefac_br must be positive")
+        if self.max_fL_ratio <= 1.0:
+            raise ValueError("max_fL_ratio must be > 1")
 
         self.Lambda_IR_values = _as_1d_float_array("Lambda_IR_values", self.Lambda_IR_values)
         self.c_L_values = _as_1d_float_array("c_L_values", self.c_L_values)
@@ -322,6 +392,12 @@ def _evaluate_point(
     """Evaluate one parameter point and return a row dict."""
     M_N = float(MN_over_k * config.k)
     M_KK = float(config.xi_KK * Lambda_IR)
+    cL_degeneracy = _derive_cL_degeneracy_metadata(
+        c_L0=c_L,
+        k=config.k,
+        Lambda_IR=Lambda_IR,
+        max_fL_ratio=config.max_fL_ratio,
+    )
 
     row: Dict[str, Any] = {
         "sample_index": sample_index,
@@ -335,6 +411,11 @@ def _evaluate_point(
         "lfv_C": lfv_C,
         "lfv_reference_scale": config.lfv_reference_scale,
         "xi_KK": config.xi_KK,
+        "max_fL_ratio": config.max_fL_ratio,
+        "delta_cL_max_symmetric": cL_degeneracy["delta_cL_max_symmetric"],
+        "delta_cL_max_one_sided": cL_degeneracy["delta_cL_max_one_sided"],
+        "delta_cL_max_symmetric_over_cL_pct": cL_degeneracy["delta_cL_max_symmetric_over_cL_pct"],
+        "delta_cL_max_one_sided_over_cL_pct": cL_degeneracy["delta_cL_max_one_sided_over_cL_pct"],
         "k": config.k,
         "MN_mode": config.MN_mode,
         "MN_over_k": MN_over_k,

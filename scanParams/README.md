@@ -30,6 +30,7 @@ config = ScanConfig(
     c_L_values=np.linspace(0.52, 0.70, 10),
     c_N_values=np.linspace(0.15, 0.45, 10),
     c_E_fixed=[0.75, 0.60, 0.50],
+    max_fL_ratio=1.1,
 
     # UV Majorana mode
     MN_mode="fixed_ratio",
@@ -85,6 +86,21 @@ To reproduce the Perez-Randall paper-era bound, set:
 ```python
 config = ScanConfig(br_limit=1.2e-11)
 ```
+
+## c_L Degeneracy Prior
+
+The scanner treats `max_fL_ratio` as the primary LH-degeneracy prior:
+
+- default: `max_fL_ratio = 1.1`,
+- this is interpreted as an allowed wavefunction ratio tolerance, not a fixed `%` on `c_L`.
+
+For each sample point, the scanner computes derived tolerances from the exact
+`warpConfig.wavefuncs.f_IR` function:
+
+- `delta_cL_max_symmetric` from `f(c_L-delta)/f(c_L+delta) = max_fL_ratio`,
+- `delta_cL_max_one_sided` from `f(c_L-delta)/f(c_L) = max_fL_ratio`.
+
+These derived values are emitted in each row for reproducibility.
 
 ## c_E Ordering Convention
 
@@ -148,6 +164,7 @@ CSV includes:
 
 - scan point parameters: `Lambda_IR`, `M_KK`, `k`, `MN_over_k`, `M_N`, `c_*`, neutrino inputs,
 - LFV metadata: `lfv_model`, `br_limit`, `prefac_br`, `lfv_C`, `xi_KK`, reference scale,
+- c_L degeneracy metadata: `max_fL_ratio`, `delta_cL_max_*`,
 - reproducibility fields: `git_commit`, `dirty_tree`, global/sample RNG seeds,
 - computed outputs: Yukawas, overlaps, filter booleans, `reject_reason`,
 - optional anarchic metrics.
