@@ -24,7 +24,7 @@ Reference:
     Perez & Randall, arXiv:0805.4652
 """
 
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
 import numpy as np
 
@@ -54,6 +54,7 @@ def check_mu_to_e_gamma(
     yukawa_result,
     C: float = C_PAPER,
     reference_scale: float = 3000.0,
+    M_KK_override: Optional[float] = None,
 ) -> Dict[str, Union[float, bool, complex, np.ndarray]]:
     """Check the μ→eγ dipole constraint on the neutrino Yukawa.
 
@@ -65,6 +66,9 @@ def check_mu_to_e_gamma(
         Numerical coefficient in the bound.  Default 0.02 (Perez–Randall).
     reference_scale : float, optional
         Reference KK scale in GeV (denominator).  Default 3000 (= 3 TeV).
+    M_KK_override : float, optional
+        If provided, use this value (GeV) for M_KK instead of
+        ``yukawa_result.params['Lambda_IR']``.
 
     Returns
     -------
@@ -90,6 +94,8 @@ def check_mu_to_e_gamma(
         raise ValueError(
             "yukawa_result must include params with 'k' and 'Lambda_IR'."
         ) from exc
+    if M_KK_override is not None:
+        M_KK = float(M_KK_override)
 
     # Build the rescaled Yukawa matrix: Ȳ_N = 2k · Y_N_matrix
     Y_N_bar_matrix = 2.0 * k * yukawa_result.Y_N_matrix

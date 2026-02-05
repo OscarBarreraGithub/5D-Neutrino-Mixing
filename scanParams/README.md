@@ -1,6 +1,18 @@
-# scanParams — Parameter Space Scanner
+# scanParams - Parameter Space Scanner
 
-Grid-scan driver for the RS lepton-sector parameter space. Loops over bulk mass parameters `(c_L, c_N)` (and optionally `c_E`) at fixed geometry and Majorana mass, evaluates Yukawa couplings, and filters for perturbativity, naturalness, and the mu-to-e-gamma bound. Results are written to CSV.
+Grid-scan driver for the RS lepton-sector parameter space.
+
+The scanner evaluates `yukawa.compute_all_yukawas()` over configured grids,
+then applies:
+
+- perturbativity,
+- naturalness,
+- mu->e gamma LFV bound.
+
+Results are returned as rows (list of dicts) and can be written to CSV.
+
+Theory/parameter-prior note: [`THEORY_PRIORS.md`](THEORY_PRIORS.md)
+Task tracking for this refactor: [`IMPLEMENTATION_TASKS.md`](IMPLEMENTATION_TASKS.md)
 
 ## Quick Start
 
@@ -9,105 +21,138 @@ import numpy as np
 from scanParams import ScanConfig, run_scan
 
 config = ScanConfig(
-    c_L_values=np.linspace(0.50, 0.70, 21),
-    c_N_values=np.linspace(0.20, 0.50, 21),
-)
-results = run_scan(config, output_csv="scan_results.csv")
-```
+    # Geometry
+    k=1.2209e19,
+    Lambda_IR_values=np.array([3000.0, 5000.0, 7000.0]),
+    xi_KK=1.0,
 
-**LFV default:** `ScanConfig.lfv_C` defaults to the MEG II 2024 bound
-(\(C \approx 4.33\times10^{-3}\)). Set `lfv_C=0.02` to reproduce the
-Perez–Randall (paper-era) constraint.
-
-## Full Example
-
-```python
-import numpy as np
-from scanParams import ScanConfig, run_scan
-
-config = ScanConfig(
-    # Fixed physics
-    Lambda_IR=5000.0,
-    M_N=1e14,
-    lightest_nu_mass=0.001,
-    ordering='normal',
-
-    # Scan grids
-    c_L_values=np.linspace(0.50, 0.70, 21),
-    c_N_values=np.linspace(0.20, 0.50, 21),
-
-    # Fixed charged-lepton bulk masses (default)
+    # Bulk masses
+    c_L_values=np.linspace(0.52, 0.70, 10),
+    c_N_values=np.linspace(0.15, 0.45, 10),
     c_E_fixed=[0.75, 0.60, 0.50],
 
-    # Filter thresholds
-    max_Y_bar=4.0,
-    naturalness_range=(0.1, 4.0),
-    # Default uses MEG II 2024 bound (C ≈ 4.33e-3); use 0.02 to reproduce Perez–Randall.
-    lfv_C=0.00433,
-    lfv_reference_scale=3000.0,
+    # UV Majorana mode
+    MN_mode="fixed_ratio",
+    MN_over_k=0.1,
+
+    # Neutrino mass prior (broad mode)
+    lightest_nu_mass_values=np.logspace(-5, np.log10(3e-2), 8),
+
+    # Reproducibility metadata
+    rng_seed_global=20260205,
+    record_git_metadata=True,
 )
 
-results = run_scan(config, output_csv="scan_results.csv", progress_every=50)
-
-# Count accepted points
-accepted = [r for r in results if r['passes_all']]
-print(f"{len(accepted)} / {len(results)} points accepted")
+rows = run_scan(config, output_csv="scan_results.csv", progress_every=200)
 ```
 
-### Scanning over c_E (5D grid)
+## Majorana Modes
+
+`M_N` is controlled by `MN_mode`:
+
+- `fixed_ratio`: use one value `MN_over_k` for all points.
+- `scan_ratio`: scan `MN_over_k_values`.
+
+`M_N` is always derived internally as:
+
+- `M_N = MN_over_k * k`
+
+### Example: scan `MN_over_k`
 
 ```python
 config = ScanConfig(
-    c_L_values=np.linspace(0.55, 0.65, 5),
-    c_N_values=np.linspace(0.25, 0.35, 5),
-    c_E_grid=[
-        np.linspace(0.70, 0.80, 3),   # c_E1 (electron)
-        np.linspace(0.55, 0.65, 3),   # c_E2 (muon)
-        np.linspace(0.45, 0.55, 3),   # c_E3 (tau)
-    ],
+    MN_mode="scan_ratio",
+    MN_over_k_values=np.logspace(-6, 0, 7),
 )
-# 5 x 5 x 3 x 3 x 3 = 675 points
-results = run_scan(config, output_csv="scan_5d.csv")
 ```
 
-### Custom filters
+## LFV Convention
+
+LFV is specified by an experimental BR bound and converted to internal `C`:
+
+- input: `br_limit`, `prefac_br`, `lfv_reference_scale`, `xi_KK`
+- derived per run: `lfv_C = sqrt(br_limit / prefac_br)`
+
+Defaults:
+
+- `br_limit = 1.5e-13` (MEG II 2025),
+- `prefac_br = 4e-8`,
+- `lfv_reference_scale = 3000 GeV`,
+- `xi_KK = 1.0`, with `M_KK = xi_KK * Lambda_IR`.
+
+To reproduce the Perez-Randall paper-era bound, set:
 
 ```python
-def require_tau_yukawa_near_one(result):
-    """Require |Y_E_bar_tau| between 0.5 and 2."""
+config = ScanConfig(br_limit=1.2e-11)
+```
+
+## c_E Ordering Convention
+
+If `sort_c_E_descending=True` (default), each sampled triplet is relabeled by sorting:
+
+- `c_E1 >= c_E2 >= c_E3`
+
+This is a labeling convention implemented by sorting values, not reject-until-ordered sampling.
+
+## Anarchic Yukawa Scoring Mode
+
+Optional anarchic-prior metadata/scoring can be added per point.
+
+```python
+from scanParams import AnarchyConfig, ScanConfig
+
+config = ScanConfig(
+    anarchy=AnarchyConfig(
+        magnitude_min=1/3,
+        magnitude_max=3,
+        yN_overall_min=0.01,
+        yN_overall_max=0.2,
+        w_band=1.0,
+        w_cond=1.0,
+        w_fit=0.0,
+    ),
+    anarchy_min_score=-5.0,  # optional additional filter
+    rng_seed_global=7,
+)
+```
+
+Rows include:
+
+- `anarchy_score`,
+- `anarchy_band_penalty`,
+- `anarchy_condition_penalty`,
+- `anarchy_yN_overall`,
+- score weights (`anarchy_w_band`, `anarchy_w_cond`, `anarchy_w_fit`).
+
+## API
+
+- `ScanConfig`: scanner configuration dataclass.
+- `run_scan(config, output_csv=None, extra_filters=None, progress_every=100)`.
+- `AnarchyConfig`: anarchic sampling/scoring configuration dataclass.
+
+### `extra_filters`
+
+Each extra filter takes a `YukawaResult` and returns `(passes, label)`.
+
+```python
+def require_tau_near_one(result):
     y_tau = abs(result.Y_E_bar[2])
-    ok = 0.5 <= y_tau <= 2.0
-    return (ok, "tau_yukawa")
+    return (0.5 <= y_tau <= 2.0, "tau_yukawa")
 
-results = run_scan(config, extra_filters=[require_tau_yukawa_near_one])
+rows = run_scan(config, extra_filters=[require_tau_near_one])
 ```
 
-## CSV Columns
+## CSV Output
 
-| Column | Description |
-|--------|-------------|
-| `c_L`, `c_N`, `c_E1`, `c_E2`, `c_E3` | Bulk mass parameters |
-| `Lambda_IR`, `M_N`, `lightest_nu_mass`, `ordering` | Fixed physics inputs |
-| `Y_E_bar_1`, `Y_E_bar_2`, `Y_E_bar_3` | Rescaled charged-lepton Yukawas |
-| `Y_N_bar_1`, `Y_N_bar_2`, `Y_N_bar_3` | Rescaled neutrino Yukawas |
-| `f_L`, `f_N`, `f_N_UV` | Overlap factors |
-| `max_Y_bar` | max(\|Y_E_bar\|, \|Y_N_bar\|) |
-| `perturbative` | All \|Y_bar\| < max_Y_bar? |
-| `natural` | All \|Y_bar\| in naturalness_range? |
-| `lfv_passes` | mu-to-e-gamma constraint satisfied? |
-| `lfv_ratio` | LHS/RHS of the LFV bound (>1 violates) |
-| `passes_all` | All filters passed? |
-| `reject_reason` | Semicolon-separated failure labels |
+CSV includes:
 
-## Plotting
+- scan point parameters: `Lambda_IR`, `M_KK`, `k`, `MN_over_k`, `M_N`, `c_*`, neutrino inputs,
+- LFV metadata: `lfv_model`, `br_limit`, `prefac_br`, `lfv_C`, `xi_KK`, reference scale,
+- reproducibility fields: `git_commit`, `dirty_tree`, global/sample RNG seeds,
+- computed outputs: Yukawas, overlaps, filter booleans, `reject_reason`,
+- optional anarchic metrics.
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
+## Notes
 
-data = np.genfromtxt("scan_results.csv", delimiter=',', names=True, dtype=None, encoding='utf-8')
-mask = data['passes_all'].astype(bool)
-plt.scatter(data['c_L'][mask], data['c_N'][mask], c='green', label='accepted')
-plt.scatter(data['c_L'][~mask], data['c_N'][~mask], c='red', alpha=0.2, label='rejected')
-plt.xlabel('$c_L$'); plt.ylabel('$c_N$'); plt.legend(); plt.show()
-```
+- v1 scan currently enforces `ordering='normal'`.
+- If `record_git_metadata=True`, commit hash and dirty-tree status are embedded in each row.
