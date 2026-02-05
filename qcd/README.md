@@ -1,19 +1,22 @@
 # QCD Running Coupling Module
 
-Computes the strong coupling constant $\alpha_s(\mu)$ at arbitrary energy scales via numerical integration of the $\overline{\text{MS}}$ beta function. Primarily used to evaluate $\alpha_s$ at 1–10 TeV for neutron EDM calculations in the Randall-Sundrum model.
+Computes the strong coupling constant $\alpha_s(\mu)$ at arbitrary energy scales via numerical integration of the $\overline{\text{MS}}$ beta function with MS-bar decoupling at flavor thresholds.
 
 ## Quick Start
 
 ```python
-from qcd import alpha_s
+from qcd import alpha_s, alpha_s_array
+import numpy as np
 
-# alpha_s at 3 TeV (4-loop running, 3-loop matching by default)
+# Default: 4-loop running, 3-loop decoupling
 a_s = alpha_s(3000.0)
-print(f"alpha_s(3 TeV) = {a_s:.4f}")   # ~0.0796
+print(f"alpha_s(3 TeV) = {a_s:.4f}")   # ~0.0797
+
+# Precision presets
+alpha_s(3000.0, precision='low')   # 3-loop, continuous matching
+alpha_s(3000.0, precision='high')  # 4-loop, 3-loop decoupling (same as default)
 
 # alpha_s at multiple scales
-from qcd import alpha_s_array
-import numpy as np
 scales = np.array([1000, 3000, 5000, 10000])
 print(alpha_s_array(scales))
 ```
@@ -90,19 +93,25 @@ At $\mu = 3$ TeV (a typical KK scale), $\alpha_s/\pi \approx 0.025$, so perturba
 
 ## API Reference
 
-### `alpha_s(mu, n_loops=3, alpha_s_ref=0.1180, mu_ref=91.1876, thresholds=None)`
+### `alpha_s(mu, n_loops=4, ..., precision=None)`
 
 Compute $\alpha_s(\mu)$ by integrating the beta function from the reference scale.
 
 - **`mu`** — target energy scale in GeV
-- **`n_loops`** — loop order (1–4), default 3 (NNLO)
+- **`n_loops`** — loop order (1–4), default 4 (N³LO)
 - **`alpha_s_ref`** — reference coupling value, default $\alpha_s(M_Z)$
 - **`mu_ref`** — reference scale in GeV, default $M_Z$
 - **`thresholds`** — list of `(mass, n_f_below, n_f_above)` tuples; pass `[]` to disable
+- **`matching_loops`** — decoupling order at thresholds (0–3); default `n_loops - 1`
+- **`precision`** — `'low'` (3-loop, LO matching) or `'high'` (4-loop, 3-loop decoupling); overrides `n_loops`/`matching_loops` when set
 
 ### `alpha_s_array(mu_values, ...)`
 
-Convenience wrapper that evaluates `alpha_s` at each element of an array.
+Convenience wrapper that evaluates `alpha_s` at each element of an array. Accepts the same keyword arguments.
+
+### `match_alpha_s(alpha_s, n_f_from, n_f_to, matching_loops)`
+
+Apply MS-bar decoupling relation across a single flavor threshold.
 
 ### `beta_coefficients(n_f, n_loops)`
 
@@ -123,6 +132,7 @@ qcd/
 ├── __init__.py        # Package exports
 ├── constants.py       # PDG 2024 values (alpha_s(M_Z), quark masses, thresholds)
 ├── beta_function.py   # Beta coefficients and ODE right-hand side
+├── decoupling.py      # MS-bar decoupling relations at flavor thresholds
 ├── running.py         # Numerical RG integration (main logic)
 ├── alphaS.ipynb       # Demonstration notebook with plots
 └── README.md          # This file
@@ -132,4 +142,5 @@ qcd/
 
 - PDG 2024, "Quantum Chromodynamics" review — $\alpha_s(M_Z)$, quark masses, beta function formulas
 - van Ritbergen, Vermaseren, Larin, Phys. Lett. B400 (1997) 379 [[hep-ph/9701390](https://arxiv.org/abs/hep-ph/9701390)] — 4-loop $\beta_3$
-- Chetyrkin, Kuhn, Sturm, Eur. Phys. J. C48 (2006) 107 — threshold matching corrections
+- Chetyrkin, Kniehl, Steinhauser, PRL 79 (1997) 2184 — $\alpha_s$ decoupling coefficients through 3-loop
+- Chetyrkin, Kuhn, Sturm, Eur. Phys. J. C48 (2006) 107 — mass decoupling relations
