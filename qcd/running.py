@@ -7,9 +7,9 @@ The integration uses t = ln(mu^2) as the evolution variable so the ODE is
     d(alpha_s)/dt = beta(alpha_s)
 with no explicit mu dependence on the RHS.
 
-At flavor thresholds alpha_s is matched continuously (leading order).
-Higher-order decoupling corrections (Chetyrkin–Kuhn–Sturm 2006) are not
-implemented; they are <0.1% at the top threshold.
+At flavor thresholds alpha_s is matched with MS-bar decoupling constants
+through the requested loop order (default: 3-loop matching for 4-loop
+running). The default assumes matching at mu = m_h, so log terms vanish.
 
 References
 ----------
@@ -24,6 +24,7 @@ from scipy.integrate import solve_ivp
 
 from .constants import ALPHA_S_MZ, M_Z, THRESHOLD_LIST
 from .beta_function import beta_rhs
+from .decoupling import match_alpha_s
 
 
 def _n_f_at_scale(mu: float, thresholds: List[Tuple[float, int, int]]) -> int:
@@ -41,10 +42,11 @@ def _n_f_at_scale(mu: float, thresholds: List[Tuple[float, int, int]]) -> int:
 
 def alpha_s(
     mu: float,
-    n_loops: int = 3,
+    n_loops: int = 4,
     alpha_s_ref: float = ALPHA_S_MZ,
     mu_ref: float = M_Z,
     thresholds: Optional[List[Tuple[float, int, int]]] = None,
+    matching_loops: Optional[int] = None,
     rtol: float = 1e-10,
     atol: float = 1e-12,
 ) -> float:
@@ -55,7 +57,7 @@ def alpha_s(
     mu : float
         Target energy scale (GeV).  Must be positive.
     n_loops : int, optional
-        Loop order for the beta function (1–4).  Default 3 (NNLO).
+        Loop order for the beta function (1–4).  Default 4 (N^3LO).
     alpha_s_ref : float, optional
         alpha_s at the reference scale.  Default 0.1180 (PDG 2024).
     mu_ref : float, optional
@@ -63,6 +65,9 @@ def alpha_s(
     thresholds : list of (float, int, int) or None, optional
         Flavor thresholds as (mass_GeV, n_f_below, n_f_above).
         Default uses PDG quark masses.  Pass ``[]`` to disable.
+    matching_loops : int or None, optional
+        Decoupling order at thresholds (0–3).  Default is n_loops-1,
+        capped at 3 (i.e., 3-loop matching for 4-loop running).
     rtol, atol : float, optional
         ODE integrator tolerances.
 
@@ -81,7 +86,7 @@ def alpha_s(
     Examples
     --------
     >>> from qcd import alpha_s
-    >>> f"{alpha_s(1000.0):.4f}"   # 3-loop, 1 TeV
+    >>> f"{alpha_s(1000.0):.4f}"   # 4-loop, 1 TeV
     '0.0884'
     """
     if mu <= 0:
@@ -94,6 +99,10 @@ def alpha_s(
     if thresholds is None:
         thresholds = list(THRESHOLD_LIST)
     thresholds = sorted(thresholds, key=lambda x: x[0])
+    if matching_loops is None:
+        matching_loops = max(0, min(n_loops - 1, 3))
+    if matching_loops < 0 or matching_loops > 3:
+        raise ValueError(f"matching_loops must be 0..3, got {matching_loops}")
 
     # Trivial case
     if np.isclose(mu, mu_ref, rtol=1e-12):
@@ -114,22 +123,23 @@ def alpha_s(
 
     crossings.sort(key=lambda x: x[0], reverse=(not running_up))
 
-    # Build integration segments: (t_start, t_end, n_f)
+    # Build integration segments: (t_start, t_end, n_f, n_f_next)
     segments = []
     current_t = t_ref
     current_nf = _n_f_at_scale(mu_ref, thresholds)
 
     for t_thresh, nf_below, nf_above in crossings:
-        segments.append((current_t, t_thresh, current_nf))
+        next_nf = nf_above if running_up else nf_below
+        segments.append((current_t, t_thresh, current_nf, next_nf))
         current_t = t_thresh
-        current_nf = nf_above if running_up else nf_below
+        current_nf = next_nf
 
-    segments.append((current_t, t_target, current_nf))
+    segments.append((current_t, t_target, current_nf, None))
 
     # Integrate each segment
     current_alpha = alpha_s_ref
 
-    for t_start, t_end, nf in segments:
+    for t_start, t_end, nf, nf_next in segments:
         if np.isclose(t_start, t_end, rtol=1e-14):
             continue
 
@@ -153,16 +163,22 @@ def alpha_s(
             )
 
         current_alpha = float(sol.y[0, -1])
+        if nf_next is not None and matching_loops > 0:
+            current_alpha = match_alpha_s(
+                current_alpha, n_f_from=nf, n_f_to=nf_next,
+                matching_loops=matching_loops,
+            )
 
     return current_alpha
 
 
 def alpha_s_array(
     mu_values,
-    n_loops: int = 3,
+    n_loops: int = 4,
     alpha_s_ref: float = ALPHA_S_MZ,
     mu_ref: float = M_Z,
     thresholds: Optional[List[Tuple[float, int, int]]] = None,
+    matching_loops: Optional[int] = None,
 ) -> np.ndarray:
     """Compute alpha_s at multiple scales.
 
@@ -191,5 +207,6 @@ def alpha_s_array(
             mu_val, n_loops=n_loops,
             alpha_s_ref=alpha_s_ref, mu_ref=mu_ref,
             thresholds=thresholds,
+            matching_loops=matching_loops,
         )
     return result

@@ -7,9 +7,9 @@ Computes the strong coupling constant $\alpha_s(\mu)$ at arbitrary energy scales
 ```python
 from qcd import alpha_s
 
-# alpha_s at 3 TeV (3-loop, default)
+# alpha_s at 3 TeV (4-loop running, 3-loop matching by default)
 a_s = alpha_s(3000.0)
-print(f"alpha_s(3 TeV) = {a_s:.4f}")   # 0.0796
+print(f"alpha_s(3 TeV) = {a_s:.4f}")   # ~0.0796
 
 # alpha_s at multiple scales
 from qcd import alpha_s_array
@@ -65,22 +65,24 @@ with no explicit $\mu$ on the right-hand side. This ODE is integrated numericall
 
 ### Flavor thresholds
 
-As $\mu$ crosses a quark mass threshold, the number of active flavors changes and the beta function coefficients shift discontinuously. For running from $M_Z$ to TeV scales, the only crossing is the top quark at $m_t = 172.69$ GeV:
+As $\mu$ crosses a quark mass threshold, the number of active flavors changes and the beta function coefficients shift discontinuously. For running from $M_Z$ to TeV scales, the only crossing is the top quark, and by default we match at $m_t(m_t) \approx 163.5$ GeV:
 
 $$
 M_Z \;\xrightarrow{n_f = 5}\; m_t \;\xrightarrow{n_f = 6}\; \mu_{\text{target}}
 $$
 
-The integration is split into segments at each threshold. At leading order, $\alpha_s$ is continuous across thresholds (no matching correction). Higher-order decoupling corrections (Chetyrkin–Kuhn–Sturm 2006) are $\lesssim 0.1\%$ at the top threshold — well below the $\pm 0.8\%$ uncertainty on $\alpha_s(M_Z)$ itself.
+The integration is split into segments at each threshold. We apply MS-bar decoupling
+corrections through the requested matching order (default is 3-loop matching for
+4-loop running). The default matching scale is $\mu = m_h$, so log terms vanish.
 
 ### Reference values
 
-| Scale | $\alpha_s$ (3-loop) |
+| Scale | $\alpha_s$ (4-loop) |
 |-------|:-------------------:|
 | $M_Z = 91.19$ GeV | 0.1180 (input) |
-| $m_t = 172.7$ GeV | 0.1076 |
+| $m_t = 163.5$ GeV | 0.1084 |
 | 1 TeV | 0.0885 |
-| 3 TeV | 0.0796 |
+| 3 TeV | 0.0797 |
 | 5 TeV | 0.0761 |
 | 10 TeV | 0.0718 |
 
