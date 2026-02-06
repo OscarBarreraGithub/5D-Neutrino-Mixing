@@ -1,6 +1,8 @@
 #!/bin/bash
 # Example:
 #   sbatch --array=0-15 scripts/run_scan_sharded.sbatch
+# Fine-grained example:
+#   sbatch --array=0-31 --export=ALL,N_C_L=121,N_C_N=121,N_LAMBDA=9,N_MLIGHTEST=41 scripts/run_scan_sharded.sbatch
 
 #SBATCH --job-name=rs-scan
 #SBATCH --account=iaifi_lab
@@ -24,10 +26,22 @@ export TOTAL_SHARDS="${SLURM_ARRAY_TASK_COUNT:-${TOTAL_SHARDS:-1}}"
 export SHARD_ID="${SLURM_ARRAY_TASK_ID:-0}"
 
 # Optional knobs via environment variables.
-export BASE_SEED="${BASE_SEED:-20260205}"
-export N_C_L="${N_C_L:-61}"
-export N_C_N="${N_C_N:-61}"
-export N_MLIGHTEST="${N_MLIGHTEST:-25}"
+BASE_SEED="${BASE_SEED:-20260205}"
+K_GEV="${K_GEV:-1.2209e19}"
+N_C_L="${N_C_L:-61}"
+N_C_N="${N_C_N:-61}"
+N_LAMBDA="${N_LAMBDA:-5}"
+N_MLIGHTEST="${N_MLIGHTEST:-25}"
+C_L_MIN="${C_L_MIN:-0.52}"
+C_L_MAX="${C_L_MAX:-0.70}"
+C_N_MIN="${C_N_MIN:-0.15}"
+C_N_MAX="${C_N_MAX:-0.45}"
+LAMBDA_MIN="${LAMBDA_MIN:-3000.0}"
+LAMBDA_MAX="${LAMBDA_MAX:-7000.0}"
+MLIGHTEST_MIN="${MLIGHTEST_MIN:-1e-5}"
+MLIGHTEST_MAX="${MLIGHTEST_MAX:-3e-2}"
+export TOTAL_SHARDS SHARD_ID BASE_SEED K_GEV N_C_L N_C_N N_LAMBDA N_MLIGHTEST
+export C_L_MIN C_L_MAX C_N_MIN C_N_MAX LAMBDA_MIN LAMBDA_MAX MLIGHTEST_MIN MLIGHTEST_MAX
 
 echo "Running shard ${SHARD_ID}/${TOTAL_SHARDS}"
 echo "ROOT_DIR=${ROOT_DIR}"
@@ -42,15 +56,36 @@ total_shards = int(os.environ["TOTAL_SHARDS"])
 shard_id = int(os.environ["SHARD_ID"])
 
 base_seed = int(os.environ["BASE_SEED"])
+k_gev = float(os.environ["K_GEV"])
 n_c_l = int(os.environ["N_C_L"])
 n_c_n = int(os.environ["N_C_N"])
+n_lambda = int(os.environ["N_LAMBDA"])
 n_mlightest = int(os.environ["N_MLIGHTEST"])
+c_l_min = float(os.environ["C_L_MIN"])
+c_l_max = float(os.environ["C_L_MAX"])
+c_n_min = float(os.environ["C_N_MIN"])
+c_n_max = float(os.environ["C_N_MAX"])
+lambda_min = float(os.environ["LAMBDA_MIN"])
+lambda_max = float(os.environ["LAMBDA_MAX"])
+mlightest_min = float(os.environ["MLIGHTEST_MIN"])
+mlightest_max = float(os.environ["MLIGHTEST_MAX"])
+
+if any(n < 1 for n in (n_c_l, n_c_n, n_lambda, n_mlightest)):
+    raise ValueError("N_C_L, N_C_N, N_LAMBDA, N_MLIGHTEST must all be >= 1")
+if c_l_max < c_l_min:
+    raise ValueError("C_L_MAX must be >= C_L_MIN")
+if c_n_max < c_n_min:
+    raise ValueError("C_N_MAX must be >= C_N_MIN")
+if lambda_max < lambda_min:
+    raise ValueError("LAMBDA_MAX must be >= LAMBDA_MIN")
+if mlightest_min <= 0 or mlightest_max <= 0 or mlightest_max < mlightest_min:
+    raise ValueError("Require 0 < MLIGHTEST_MIN <= MLIGHTEST_MAX")
 
 # Global grids (from scanner theory priors).
-all_c_L = np.linspace(0.52, 0.70, n_c_l)
-all_c_N = np.linspace(0.15, 0.45, n_c_n)
-all_lambda_ir = np.array([3000.0, 4000.0, 5000.0, 6000.0, 7000.0], dtype=float)
-all_m_lightest = np.logspace(-5, np.log10(3e-2), n_mlightest)
+all_c_L = np.linspace(c_l_min, c_l_max, n_c_l)
+all_c_N = np.linspace(c_n_min, c_n_max, n_c_n)
+all_lambda_ir = np.linspace(lambda_min, lambda_max, n_lambda)
+all_m_lightest = np.logspace(np.log10(mlightest_min), np.log10(mlightest_max), n_mlightest)
 
 # Shard over c_L so each task gets a deterministic subset.
 c_l_shards = np.array_split(all_c_L, total_shards)
@@ -62,7 +97,7 @@ if c_l_local.size == 0:
 
 config = ScanConfig(
     # Geometry and priors
-    k=1.2209e19,
+    k=k_gev,
     Lambda_IR_values=all_lambda_ir,
     xi_KK=1.0,
     max_fL_ratio=1.1,
@@ -95,4 +130,3 @@ n_pass = sum(1 for r in rows if r["passes_all"])
 print(f"[shard {shard_id}] wrote {out_csv}")
 print(f"[shard {shard_id}] accepted {n_pass}/{n_total}")
 PY
-

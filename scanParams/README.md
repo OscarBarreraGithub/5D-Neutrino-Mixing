@@ -113,6 +113,8 @@ This is a labeling convention implemented by sorting values, not reject-until-or
 ## Anarchic Yukawa Scoring Mode
 
 Optional anarchic-prior metadata/scoring can be added per point.
+In the scanner, this score is computed deterministically from the solved
+`Ybar_N` matrix for each physics point (not from a separate random draw).
 
 ```python
 from scanParams import AnarchyConfig, ScanConfig
@@ -128,7 +130,6 @@ config = ScanConfig(
         w_fit=0.0,
     ),
     anarchy_min_score=-5.0,  # optional additional filter
-    rng_seed_global=7,
 )
 ```
 
@@ -144,7 +145,7 @@ Rows include:
 
 - `ScanConfig`: scanner configuration dataclass.
 - `run_scan(config, output_csv=None, extra_filters=None, progress_every=100)`.
-- `AnarchyConfig`: anarchic sampling/scoring configuration dataclass.
+- `AnarchyConfig`: anarchic-prior scoring configuration dataclass.
 
 ### `extra_filters`
 
@@ -168,6 +169,41 @@ CSV includes:
 - reproducibility fields: `git_commit`, `dirty_tree`, global/sample RNG seeds,
 - computed outputs: Yukawas, overlaps, filter booleans, `reject_reason`,
 - optional anarchic metrics.
+
+## Two-Stage Cluster Workflow
+
+`run_scan` already computes and stores every scanned point (accepted and rejected).
+This supports post-hoc recategorization without rerunning the expensive grid solve.
+
+Submit scan + dependent reclassification in one step:
+
+```bash
+TOTAL_SHARDS=32 N_C_L=121 N_C_N=121 N_LAMBDA=9 N_MLIGHTEST=41 \
+RECLASS_ANARCHY_MIN_SCORE=-2.5 \
+scripts/submit_scan_pipeline.sh
+```
+
+This submits:
+
+- `scripts/run_scan_sharded.sbatch` as an array (`0..TOTAL_SHARDS-1`),
+- `scripts/reclassify_scan_shards.sbatch` with `afterok` dependency on the scan job.
+
+Use:
+
+```bash
+python scripts/reclassify_scan.py \
+  scan_outputs/scan_shard_000_of_016.csv \
+  scan_outputs/scan_shard_000_of_016_reclass.csv \
+  --max-y-bar 4.0 \
+  --natural-min 0.1 \
+  --natural-max 4.0 \
+  --compute-anarchy \
+  --anarchy-min-score -2.5 \
+  --anarchy-w-band 1.0 \
+  --anarchy-w-cond 1.0
+```
+
+This adds `reclass_*` columns so you can compare old vs new categorization.
 
 ## Notes
 

@@ -1,10 +1,8 @@
-"""Anarchic Yukawa sampling and scoring utilities.
+"""Anarchic Yukawa utilities.
 
-This module provides a reproducible definition of the v1 "anarchic prior":
-- i.i.d. complex entries,
-- log-uniform magnitudes,
-- uniform phases,
-- optional score used to prioritize candidates.
+This module supports two workflows:
+- sampling random anarchic matrices,
+- scoring a solved Yukawa matrix deterministically against anarchic priors.
 """
 
 from __future__ import annotations
@@ -49,6 +47,14 @@ def _log_uniform(rng: np.random.Generator, low: float, high: float, size: Tuple[
     return np.exp(rng.uniform(log_low, log_high, size=size))
 
 
+def _log_band_penalty(values: np.ndarray, low: float, high: float) -> np.ndarray:
+    """Element-wise squared log penalty for values outside [low, high]."""
+    safe = np.clip(np.asarray(values, dtype=float), np.finfo(float).tiny, None)
+    upper = np.maximum(0.0, np.log(safe) - np.log(high))
+    lower = np.maximum(0.0, np.log(low) - np.log(safe))
+    return upper * upper + lower * lower
+
+
 def sample_complex_matrix(
     rng: np.random.Generator,
     shape: Tuple[int, int],
@@ -66,9 +72,7 @@ def sample_complex_matrix(
 def band_penalty(matrix: np.ndarray, magnitude_min: float, magnitude_max: float) -> float:
     """Penalty for matrix entries outside [magnitude_min, magnitude_max]."""
     abs_entries = np.abs(np.asarray(matrix, dtype=complex))
-    upper = np.maximum(0.0, np.log(abs_entries) - np.log(magnitude_max))
-    lower = np.maximum(0.0, np.log(magnitude_min) - np.log(abs_entries))
-    return float(np.sum(upper * upper + lower * lower))
+    return float(np.sum(_log_band_penalty(abs_entries, magnitude_min, magnitude_max)))
 
 
 def compute_anarchy_score(
@@ -86,9 +90,68 @@ def compute_anarchy_score(
     (score, condition_penalty)
     """
     cond_val = float(np.linalg.cond(ytilde_n))
-    cond_penalty = float(np.log(cond_val) ** 2)
+    if not np.isfinite(cond_val) or cond_val <= 0:
+        cond_penalty = float("inf")
+    else:
+        cond_penalty = float(np.log(cond_val) ** 2)
     score = -w_band * p_band - w_cond * cond_penalty - w_fit * float(chi2_total)
     return float(score), cond_penalty
+
+
+def infer_overall_scale(y_n_bar_matrix: np.ndarray) -> float:
+    """Infer yN_overall from a solved matrix using geometric-mean magnitude."""
+    abs_entries = np.abs(np.asarray(y_n_bar_matrix, dtype=complex)).reshape(-1)
+    finite = abs_entries[np.isfinite(abs_entries)]
+    if finite.size == 0:
+        raise ValueError("y_n_bar_matrix must contain at least one finite entry")
+    finite = np.clip(finite, np.finfo(float).tiny, None)
+    return float(np.exp(np.mean(np.log(finite))))
+
+
+def score_anarchy_from_matrix(
+    y_n_bar_matrix: np.ndarray,
+    config: AnarchyConfig,
+    chi2_total: float = 0.0,
+) -> Dict[str, object]:
+    """Score a solved Ybar_N matrix against the anarchic prior."""
+    y_n_bar_matrix = np.asarray(y_n_bar_matrix, dtype=complex)
+    if y_n_bar_matrix.shape != (3, 3):
+        raise ValueError(f"y_n_bar_matrix must have shape (3, 3), got {y_n_bar_matrix.shape}")
+
+    yN_overall = infer_overall_scale(y_n_bar_matrix)
+    ytilde_n = y_n_bar_matrix / yN_overall
+
+    p_band_entries = band_penalty(ytilde_n, config.magnitude_min, config.magnitude_max)
+    p_band_overall = float(
+        _log_band_penalty(
+            np.array([yN_overall], dtype=float),
+            config.yN_overall_min,
+            config.yN_overall_max,
+        )[0]
+    )
+    p_band = p_band_entries + p_band_overall
+
+    score, cond_penalty = compute_anarchy_score(
+        ytilde_n,
+        p_band=p_band,
+        w_band=config.w_band,
+        w_cond=config.w_cond,
+        w_fit=config.w_fit,
+        chi2_total=chi2_total,
+    )
+
+    return {
+        "Ytilde_N": ytilde_n,
+        "yN_overall": yN_overall,
+        "band_penalty": p_band,
+        "band_penalty_entries": p_band_entries,
+        "band_penalty_overall": p_band_overall,
+        "condition_penalty": cond_penalty,
+        "score": score,
+        "w_band": float(config.w_band),
+        "w_cond": float(config.w_cond),
+        "w_fit": float(config.w_fit),
+    }
 
 
 def sample_anarchy_state(
@@ -115,7 +178,15 @@ def sample_anarchy_state(
     )
     yN_overall = float(_log_uniform(rng, config.yN_overall_min, config.yN_overall_max, size=(1,))[0])
 
-    p_band = band_penalty(ytilde_n, config.magnitude_min, config.magnitude_max)
+    p_band_entries = band_penalty(ytilde_n, config.magnitude_min, config.magnitude_max)
+    p_band_overall = float(
+        _log_band_penalty(
+            np.array([yN_overall], dtype=float),
+            config.yN_overall_min,
+            config.yN_overall_max,
+        )[0]
+    )
+    p_band = p_band_entries + p_band_overall
     score, cond_penalty = compute_anarchy_score(
         ytilde_n,
         p_band=p_band,
@@ -130,6 +201,8 @@ def sample_anarchy_state(
         "Ytilde_N": ytilde_n,
         "yN_overall": yN_overall,
         "band_penalty": p_band,
+        "band_penalty_entries": p_band_entries,
+        "band_penalty_overall": p_band_overall,
         "condition_penalty": cond_penalty,
         "score": score,
         "w_band": float(config.w_band),

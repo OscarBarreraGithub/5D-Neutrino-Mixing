@@ -179,6 +179,12 @@ Minimal v1 anarchic score (documented default):
 
 Default score weights must be stored in metadata (`w_band`, `w_cond`, `w_fit`).
 
+Implementation note for this branch:
+
+- scanner acceptance applies the anarchic score to the solved Yukawa point by
+  decomposing `Ybar_N = yN_overall * Ytilde_N` with geometric-mean `yN_overall`,
+- no additional random-matrix draw is used in the acceptance filter.
+
 ## 11) Cluster Reproducibility Metadata Contract
 
 Every run should store at minimum:

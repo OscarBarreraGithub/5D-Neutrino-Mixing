@@ -183,6 +183,15 @@ def test_anarchy_scoring_is_deterministic_for_fixed_seed():
     assert np.isclose(row1["anarchy_yN_overall"], row2["anarchy_yN_overall"])
 
 
+def test_anarchy_scoring_is_seed_independent_for_same_point():
+    """Anarchy score should be tied to physics point, not RNG seed."""
+    row1 = run_scan(_benchmark_config(anarchy=AnarchyConfig(), rng_seed_global=1), progress_every=0)[0]
+    row2 = run_scan(_benchmark_config(anarchy=AnarchyConfig(), rng_seed_global=987654), progress_every=0)[0]
+
+    assert np.isclose(row1["anarchy_score"], row2["anarchy_score"])
+    assert np.isclose(row1["anarchy_yN_overall"], row2["anarchy_yN_overall"])
+
+
 def test_anarchy_min_score_filter_rejects_low_score_points():
     """Points below anarchy_min_score should fail with explicit reason."""
     config = _benchmark_config(

@@ -30,7 +30,7 @@ from flavorConstraints import (
 from warpConfig.baseParams import MPL
 from warpConfig.wavefuncs import f_IR
 from yukawa import YukawaResult, compute_all_yukawas
-from .anarchy import AnarchyConfig, sample_anarchy_state
+from .anarchy import AnarchyConfig, score_anarchy_from_matrix
 
 
 # Published MEG II bound (2025): BR(mu -> e gamma) < 1.5e-13 (90% CL).
@@ -535,13 +535,13 @@ def _evaluate_point(
         if not ok:
             reasons.append(label)
 
-    # 5) Optional anarchic-prior score.
+    # 5) Optional anarchic-prior score from the solved Yukawa point.
     if config.anarchy is not None:
-        if rng_seed_sample is None:
-            rng = np.random.default_rng()
-        else:
-            rng = np.random.default_rng(rng_seed_sample)
-        anarchy_state = sample_anarchy_state(rng=rng, config=config.anarchy)
+        y_n_bar_matrix = 2.0 * config.k * result.Y_N_matrix
+        anarchy_state = score_anarchy_from_matrix(
+            y_n_bar_matrix=y_n_bar_matrix,
+            config=config.anarchy,
+        )
         row["anarchy_score"] = anarchy_state["score"]
         row["anarchy_band_penalty"] = anarchy_state["band_penalty"]
         row["anarchy_condition_penalty"] = anarchy_state["condition_penalty"]
