@@ -5,7 +5,7 @@
 #SBATCH --job-name=rs-scan
 #SBATCH --account=iaifi_lab
 #SBATCH --partition=shared
-#SBATCH --time=08:00:00
+#SBATCH --time=00:30:00
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=6G
 #SBATCH --output=logs/scan_%A_%a.out
@@ -19,14 +19,15 @@ cd "$ROOT_DIR"
 mkdir -p logs scan_outputs
 
 # Use array count when available; fallback to TOTAL_SHARDS env or 1.
-TOTAL_SHARDS="${SLURM_ARRAY_TASK_COUNT:-${TOTAL_SHARDS:-1}}"
-SHARD_ID="${SLURM_ARRAY_TASK_ID:-0}"
+# Export so the Python heredoc subprocess can see them via os.environ.
+export TOTAL_SHARDS="${SLURM_ARRAY_TASK_COUNT:-${TOTAL_SHARDS:-1}}"
+export SHARD_ID="${SLURM_ARRAY_TASK_ID:-0}"
 
 # Optional knobs via environment variables.
-BASE_SEED="${BASE_SEED:-20260205}"
-N_C_L="${N_C_L:-61}"
-N_C_N="${N_C_N:-61}"
-N_MLIGHTEST="${N_MLIGHTEST:-25}"
+export BASE_SEED="${BASE_SEED:-20260205}"
+export N_C_L="${N_C_L:-61}"
+export N_C_N="${N_C_N:-61}"
+export N_MLIGHTEST="${N_MLIGHTEST:-25}"
 
 echo "Running shard ${SHARD_ID}/${TOTAL_SHARDS}"
 echo "ROOT_DIR=${ROOT_DIR}"
