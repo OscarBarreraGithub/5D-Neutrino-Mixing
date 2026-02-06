@@ -18,3 +18,8 @@ build/
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+
+# Scan artifacts
+logs/
+scan_outputs/
+*_executed.ipynb
