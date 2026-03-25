@@ -1,5 +1,8 @@
 # 5D Neutrino Mixing - Project Status
 
+> Archived status snapshot. Canonical current docs live in the repo root
+> `README.md` and module `README.md` files.
+
 **Last Updated:** February 5, 2026
 
 This document provides a comprehensive overview of the project's current state, goals, and next steps. It is designed to help new contributors (or a new Claude instance) quickly understand the codebase.
@@ -77,7 +80,7 @@ Perez & Randall, "Natural Neutrino Masses and Mixings from Warped Geometry", arX
 | `neutrinos/massConstraints.py` | ✅ Complete | Allowed neutrino mass sweeper |
 | `diagonalization/diag.py` | ✅ Complete | SVD and Takagi factorization |
 | `yukawa/` | ✅ Complete | Yukawa computation from parameters |
-| `flavorConstraints/muToEGamma.py` | ✅ Complete | μ→eγ NDA dipole bound (paper + MEG II 2024) |
+| `flavorConstraints/muToEGamma.py` | ✅ Complete | μ→eγ NDA dipole bound (paper + MEG II 2025) |
 | `scanParams/scan.py` | ✅ Complete | Grid scan driver with LFV/naturalness/perturbativity filters |
 
 ### 3.2 Yukawa Module
@@ -121,14 +124,16 @@ print(result.summary())       # Full formatted output
 
 ### 3.3 LFV Constraint Default (Decision)
 
-We standardize on the **MEG II 2024** bound for scans:
+We standardize on the **MEG II 2025** bound for scans:
 
-- `scanParams.ScanConfig.lfv_C` defaults to \(C \approx 4.33\times10^{-3}\)
-  (from BR(μ→eγ) < 7.5×10⁻¹³).
+- `scanParams.ScanConfig.br_limit` defaults to `1.5e-13`.
+- The scan coefficient `lfv_C` is derived per run as
+  \(C = \sqrt{\mathrm{BR_{limit}} / 4\times10^{-8}} \approx 1.94\times10^{-3}\).
 - `flavorConstraints.check_mu_to_e_gamma()` keeps the **Perez–Randall**
   default `C_PAPER = 0.02` for reproducing the paper’s setup.
 
-Override `lfv_C` explicitly to switch between historical and current limits.
+Override `br_limit` or pass `C` explicitly to switch between historical and
+current limits.
 
 ---
 
@@ -225,15 +230,16 @@ import numpy as np
 from scanParams import ScanConfig, run_scan
 
 config = ScanConfig(
-    Lambda_IR=3000.0,
-    M_N=1.22e18,
-    lightest_nu_mass=0.002,
-    ordering='normal',
+    Lambda_IR_values=np.array([3000.0]),
+    MN_mode="fixed_ratio",
+    MN_over_k=0.1,
+    lightest_nu_mass_values=np.array([0.002]),
     c_L_values=np.linspace(0.50, 0.70, 21),
     c_N_values=np.linspace(0.20, 0.50, 21),
     c_E_fixed=[0.75, 0.60, 0.50],
-    # Default uses MEG II 2024 C ≈ 4.33e-3; set to 0.02 for Perez–Randall.
-    lfv_C=0.00433,
+    # Default uses MEG II 2025 br_limit = 1.5e-13; set br_limit=1.2e-11
+    # to reproduce the Perez-Randall paper-era limit.
+    br_limit=1.5e-13,
 )
 
 results = run_scan(config, output_csv="scan_results.csv", progress_every=100)

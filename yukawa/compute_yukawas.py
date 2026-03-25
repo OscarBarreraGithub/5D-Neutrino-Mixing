@@ -21,7 +21,8 @@ Usage:
 """
 
 from dataclasses import dataclass
-from typing import Union, Dict, Tuple, Optional
+from typing import Dict, Optional, Tuple, Union
+
 import numpy as np
 
 from .charged_lepton import compute_charged_lepton_yukawas
@@ -130,11 +131,19 @@ class YukawaResult:
             "",
             "Charged Lepton Yukawas:",
             f"  Y_E (5D) = {self.Y_E}",
-            f"  Ȳ_E (rescaled) = [{self.Y_E_bar[0]:.4f}, {self.Y_E_bar[1]:.4f}, {self.Y_E_bar[2]:.4f}]",
+            (
+                "  Ȳ_E (rescaled) = ["
+                f"{self.Y_E_bar[0]:.4f}, {self.Y_E_bar[1]:.4f}, "
+                f"{self.Y_E_bar[2]:.4f}]"
+            ),
             "",
             "Neutrino Yukawas:",
             f"  Y_N (5D) = {self.Y_N}",
-            f"  Ȳ_N (rescaled) = [{self.Y_N_bar[0]:.6f}, {self.Y_N_bar[1]:.6f}, {self.Y_N_bar[2]:.6f}]",
+            (
+                "  Ȳ_N (rescaled) = ["
+                f"{self.Y_N_bar[0]:.6f}, {self.Y_N_bar[1]:.6f}, "
+                f"{self.Y_N_bar[2]:.6f}]"
+            ),
             "",
             f"Perturbative (|Ȳ| < 4): {self.is_perturbative()}",
             "=" * 60,
@@ -223,9 +232,9 @@ def compute_all_yukawas(
     >>> print(f"Ȳ_N = {result.Y_N_bar}")  # Should be O(0.2) to O(1.0)
     """
     # Import dependencies (local import to avoid circular deps)
-    from warpConfig.baseParams import get_warp_params, MPL, V_EWSB
-    from warpConfig.wavefuncs import f_IR, f_UV
     from neutrinos.neutrinoValues import compute_masses, get_pmns
+    from warpConfig.baseParams import MPL, get_warp_params
+    from warpConfig.wavefuncs import f_IR, f_UV
 
     # Set defaults
     if k is None:

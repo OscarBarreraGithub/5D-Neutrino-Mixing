@@ -40,7 +40,9 @@ class AnarchyConfig:
             raise ValueError("yN_overall_max must be greater than yN_overall_min")
 
 
-def _log_uniform(rng: np.random.Generator, low: float, high: float, size: Tuple[int, ...]) -> np.ndarray:
+def _log_uniform(
+    rng: np.random.Generator, low: float, high: float, size: Tuple[int, ...]
+) -> np.ndarray:
     """Sample a log-uniform random array over [low, high]."""
     log_low = np.log(low)
     log_high = np.log(high)
@@ -176,7 +178,9 @@ def sample_anarchy_state(
         phase_min=config.phase_min,
         phase_max=config.phase_max,
     )
-    yN_overall = float(_log_uniform(rng, config.yN_overall_min, config.yN_overall_max, size=(1,))[0])
+    yN_overall = float(
+        _log_uniform(rng, config.yN_overall_min, config.yN_overall_max, size=(1,))[0]
+    )
 
     p_band_entries = band_penalty(ytilde_n, config.magnitude_min, config.magnitude_max)
     p_band_overall = float(

@@ -47,14 +47,14 @@ they quote the bound
 
 This **C = 0.02** is the default in `check_mu_to_e_gamma()`.
 
-### Updated limit (MEG II 2024)
+### Updated limit (MEG II 2025)
 
-The MEG II 2024 result gives
-\(\mathrm{BR}(\mu\to e\gamma) < 7.5\times10^{-13}\) (90% CL).
+The published MEG II 2025 result gives
+\(\mathrm{BR}(\mu\to e\gamma) < 1.5\times10^{-13}\) (90% CL).
 Using the same NDA formula above:
 
 \[
-C_{\rm MEGII} = \sqrt{\frac{7.5\times10^{-13}}{4\times10^{-8}}} \approx 4.33\times10^{-3}.
+C_{\rm MEGII} = \sqrt{\frac{1.5\times10^{-13}}{4\times10^{-8}}} \approx 1.94\times10^{-3}.
 \]
 
 You can pass this as `C` explicitly or compute it via
@@ -64,8 +64,9 @@ You can pass this as `C` explicitly or compute it via
 
 - `check_mu_to_e_gamma()` defaults to `C_PAPER = 0.02` to reproduce the
   Perez–Randall setup.
-- `scanParams.ScanConfig` defaults to the **MEG II 2024** value
-  (\(C \approx 4.33\times10^{-3}\)) for current scans.
+- `scanParams.ScanConfig` defaults to the **MEG II 2025** bound
+  `br_limit = 1.5e-13` and derives `lfv_C` per run via
+  `coefficient_from_br_limit()`.
 
 ## API
 

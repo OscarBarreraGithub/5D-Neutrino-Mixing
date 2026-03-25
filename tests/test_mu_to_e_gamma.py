@@ -9,7 +9,6 @@ from flavorConstraints.muToEGamma import (
 from neutrinos.neutrinoValues import pmns_matrix
 from yukawa import compute_all_yukawas
 
-
 # PDG-style mixing values (as used in neutrinoValues.py)
 SIN2_THETA12 = 0.307
 SIN2_THETA23 = 0.534

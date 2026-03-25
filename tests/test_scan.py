@@ -7,6 +7,7 @@ import pytest
 
 from flavorConstraints import coefficient_from_br_limit
 from scanParams import AnarchyConfig, ScanConfig, run_scan
+from scanParams.scan import BR_LIMIT_MEGII_2025
 
 
 def _benchmark_config(**overrides):
@@ -42,6 +43,18 @@ def test_benchmark_point_in_scan():
     assert np.isclose(
         row["lfv_C"],
         coefficient_from_br_limit(config.br_limit, prefactor=config.prefac_br),
+        rtol=1e-12,
+    )
+
+
+def test_scan_default_lfv_matches_documented_megii_2025_limit():
+    """Default scan LFV settings should match the documented MEG II 2025 limit."""
+    config = ScanConfig(record_git_metadata=False)
+    assert config.br_limit == BR_LIMIT_MEGII_2025
+    assert np.isclose(config.br_limit, 1.5e-13)
+    assert np.isclose(
+        coefficient_from_br_limit(config.br_limit, prefactor=config.prefac_br),
+        0.0019364916731037085,
         rtol=1e-12,
     )
 
@@ -185,8 +198,12 @@ def test_anarchy_scoring_is_deterministic_for_fixed_seed():
 
 def test_anarchy_scoring_is_seed_independent_for_same_point():
     """Anarchy score should be tied to physics point, not RNG seed."""
-    row1 = run_scan(_benchmark_config(anarchy=AnarchyConfig(), rng_seed_global=1), progress_every=0)[0]
-    row2 = run_scan(_benchmark_config(anarchy=AnarchyConfig(), rng_seed_global=987654), progress_every=0)[0]
+    row1 = run_scan(
+        _benchmark_config(anarchy=AnarchyConfig(), rng_seed_global=1), progress_every=0
+    )[0]
+    row2 = run_scan(
+        _benchmark_config(anarchy=AnarchyConfig(), rng_seed_global=987654), progress_every=0
+    )[0]
 
     assert np.isclose(row1["anarchy_score"], row2["anarchy_score"])
     assert np.isclose(row1["anarchy_yN_overall"], row2["anarchy_yN_overall"])

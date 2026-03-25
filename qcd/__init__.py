@@ -16,27 +16,27 @@ Example
 >>> alpha_s(3000.0, precision='high')  # 4-loop, 3-loop decoupling
 """
 
-from .running import alpha_s, alpha_s_array
-from .decoupling import match_alpha_s
 from .beta_function import (
-    beta_coefficients,
-    beta_rhs,
     beta_0,
     beta_1,
     beta_2,
     beta_3,
+    beta_coefficients,
+    beta_rhs,
 )
 from .constants import (
     ALPHA_S_MZ,
     ALPHA_S_MZ_UNCERTAINTY,
-    M_Z,
-    M_CHARM,
     M_BOTTOM,
+    M_CHARM,
     M_TOP,
     M_TOP_MS,
     M_TOP_POLE,
+    M_Z,
     THRESHOLD_LIST,
 )
+from .decoupling import match_alpha_s
+from .running import alpha_s, alpha_s_array
 
 __all__ = [
     # Main API

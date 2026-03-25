@@ -1,6 +1,13 @@
-# 5D Neutrino Mixing — Project Guide
+# 5D Neutrino Mixing — Agent Notes
 
-This repository implements a parameter sweep for the lepton sector in a Randall-Sundrum warped extra dimension. The goal is to find regions of parameter space that reproduce observed charged lepton masses and viable light neutrino masses using geometric localization rather than hierarchical Yukawa couplings.
+This file is agent-facing context for working in the repo. Canonical user-facing
+documentation lives in `README.md` and the module `README.md` files. Historical
+status and planning notes live under `docs/archive/`.
+
+This repository implements a parameter sweep for the lepton sector in a
+Randall-Sundrum warped extra dimension. The goal is to find regions of parameter
+space that reproduce observed charged lepton masses and viable light neutrino
+masses using geometric localization rather than hierarchical Yukawa couplings.
 
 ---
 
@@ -159,7 +166,9 @@ For more control, you can proceed step-by-step:
 
 6. **Apply constraints**:
    - Yukawa perturbativity: |Ȳ| = 2k|Y| < O(few)
-   - Flavor bounds: μ→eγ dipole operator (scan default uses MEG II 2024 C ≈ 4.33e-3; set C=0.02 for Perez–Randall)
+   - Flavor bounds: μ→eγ dipole operator (scan default uses the published
+     MEG II 2025 limit `br_limit = 1.5e-13`, which implies `C ≈ 1.94e-3`;
+     set `C=0.02` for Perez-Randall reproduction)
    - EW precision: KK mass scale sufficiently high
 
 7. **Collect viable points**: Store parameters that pass all filters
@@ -184,49 +193,13 @@ For more control, you can proceed step-by-step:
 
 ---
 
-## Current Status
+## Working Notes
 
-**See [PROJECT_STATUS.md](PROJECT_STATUS.md) for detailed implementation status and next steps.**
-
-### Recently Completed (January 2025)
-
-The `yukawa/` module is now fully implemented. It computes Yukawa couplings from RS parameters:
-
-```python
-from yukawa import compute_all_yukawas
-
-result = compute_all_yukawas(
-    Lambda_IR=3000,           # KK scale (GeV)
-    c_L=0.58,                 # Lepton doublet bulk mass
-    c_E=[0.75, 0.60, 0.50],   # RH charged lepton bulk masses
-    c_N=0.27,                 # RH neutrino bulk mass
-    M_N=1.22e18,              # UV Majorana mass (GeV)
-    lightest_nu_mass=0.002,   # Lightest neutrino mass (eV)
-    ordering='normal'
-)
-
-print(result.Y_E_bar)         # Rescaled charged lepton Yukawas Ȳ_E
-print(result.Y_N_bar)         # Rescaled neutrino Yukawas Ȳ_N
-print(result.is_perturbative())  # Check |Ȳ| < 4
-```
-
-### Module Status
-
-| Module | Status | Description |
-|--------|--------|-------------|
-| `warpConfig/` | ✅ Complete | Geometry and f-factor computation |
-| `solvers/` | ✅ Complete | KK mass solver |
-| `neutrinos/` | ✅ Complete | PDG data, PMNS, mass constraints |
-| `diagonalization/` | ✅ Complete | SVD and Takagi factorization |
-| `yukawa/` | ✅ Complete | Yukawa computation from parameters |
-| `flavorConstraints/` | ✅ Complete | μ→eγ NDA dipole bound (paper + MEG II 2024) |
-| `scanParams/` | ✅ Complete | Grid-scan driver with perturbativity/naturalness/LFV filters |
-
-### Next Steps
-
-1. **Run scans + summarize**: use `scanParams` to map viable regions and write a short results note.
-2. **Constraint upgrades**: add/confirm EW precision and any additional LFV constraints beyond μ→eγ.
-3. **Optimization**: fit parameters to minimize |Ȳ - 1| after initial grid results.
+- Canonical install and validation commands live in `README.md`.
+- Scanner defaults should be read from `scanParams/scan.py`; the current LFV
+  default is the published MEG II 2025 bound `br_limit = 1.5e-13`.
+- Historical snapshots may describe superseded APIs; use `docs/archive/` for
+  context, not as the canonical source of truth.
 
 ---
 

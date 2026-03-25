@@ -5,7 +5,9 @@ for 5D fermion zero modes in a warped geometry.
 """
 
 from typing import Union
+
 import numpy as np
+
 
 def f_IR(c: Union[float, np.ndarray], epsilon: float) -> Union[float, np.ndarray]:
     """
@@ -28,10 +30,10 @@ def f_IR(c: Union[float, np.ndarray], epsilon: float) -> Union[float, np.ndarray
     """
     c_arr = np.asarray(c, dtype=float)
     res_sq = np.zeros_like(c_arr)
-    
+
     # Handle the singularity at c = 0.5
     mask = ~np.isclose(c_arr, 0.5)
-    
+
     # For c != 0.5
     if np.any(mask):
         c_safe = c_arr[mask]
@@ -45,10 +47,10 @@ def f_IR(c: Union[float, np.ndarray], epsilon: float) -> Union[float, np.ndarray
     # Limit_{c->0.5} f^2 = 1 / (-2 * ln(epsilon))
     if np.any(~mask):
         res_sq[~mask] = 1.0 / (-2.0 * np.log(epsilon))
-        
-    # Ensure non-negative before sqrt (numerical noise might cause issues if result is effectively 0)
+
+    # Ensure non-negative before sqrt; numerical noise can drive tiny values below zero.
     res_sq = np.maximum(res_sq, 0.0)
-    
+
     return np.sqrt(res_sq)
 
 
@@ -73,10 +75,10 @@ def f_UV(c: Union[float, np.ndarray], epsilon: float) -> Union[float, np.ndarray
     """
     c_arr = np.asarray(c, dtype=float)
     res_sq = np.zeros_like(c_arr)
-    
+
     # Handle the singularity at c = 0.5
     mask = ~np.isclose(c_arr, 0.5)
-    
+
     # For c != 0.5
     if np.any(mask):
         c_safe = c_arr[mask]
@@ -87,9 +89,8 @@ def f_UV(c: Union[float, np.ndarray], epsilon: float) -> Union[float, np.ndarray
     # Limit_{c->0.5} f^2 = 1 / (-2 * ln(epsilon))
     if np.any(~mask):
         res_sq[~mask] = 1.0 / (-2.0 * np.log(epsilon))
-        
+
     # Ensure non-negative
     res_sq = np.maximum(res_sq, 0.0)
 
     return np.sqrt(res_sq)
-

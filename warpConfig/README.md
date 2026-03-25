@@ -62,5 +62,3 @@ quantities. For a Monte-Carlo sweep or a script, just call ``get_warp_params``
 for each desired value of ``Lambda_IR`` and pass the returned ``epsilon`` into
 ``f_IR``/``f_UV``. The functions are lightweight and vectorized, so a loop or
 vectorized mapping will be efficient for typical scans.
-
-

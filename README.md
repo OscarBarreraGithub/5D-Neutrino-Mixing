@@ -1,21 +1,31 @@
 # Constraining a Warped 5th Dimension
 
-This repository explores the constraints on warped five-dimensional Randall-Sundrum models.
+This repository contains numerical tools for Randall-Sundrum lepton-sector studies:
+zero-mode overlaps, KK spectra, Yukawa inversion, lepton-flavor constraints, and
+parameter scans.
 
-## Install (Recommended)
-
-```bash
-pip install -e .
-```
-
-Dependencies: `numpy`, `scipy`.
-
-## Tests
+## Install
 
 ```bash
 pip install -e .[dev]
-pytest -q
 ```
+
+## Validate
+
+```bash
+ruff check .
+pytest -q
+python scripts/benchmark_perez_randall.py
+```
+
+## Notes
+
+- `scanParams.ScanConfig` defaults to the published **MEG II 2025** bound
+  `br_limit = 1.5e-13`; the derived scan coefficient `lfv_C` is computed per run.
+- Tracked notebooks are exploratory analysis artifacts and should remain output-free.
+- Historical status and planning notes live under [`docs/archive`](docs/archive).
+
+## Packages
 
 [`neutrinos`](neutrinos)
 - Computes neutrino mass spectra, the PMNS matrix, and allowed parameter ranges under experimental constraints.
@@ -34,7 +44,8 @@ functions used throughout the project.
 - This solver finds the Kaluza–Klein (KK) masses in Randall–Sundrum models by solving the Bessel-function boundary conditions that quantize 5D bulk fields. The bulk equations reduce to Bessel’s equation in conformal (z) coordinates; the UV/IR boundary conditions give transcendental equations whose roots are the KK masses.
 
 [`flavorConstraints`](flavorConstraints)
-- Implements the μ→eγ NDA dipole bound (Perez–Randall and MEG II 2024).
+- Implements the μ→eγ NDA dipole bound, keeping the Perez-Randall paper coefficient
+  available while scans default to the published MEG II 2025 limit.
 
 [`scanParams`](scanParams)
 - Grid-scan driver to sweep RS lepton-sector parameters and filter by perturbativity, naturalness, and LFV bounds.

@@ -21,7 +21,12 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("input_csv", help="Path to original scan CSV")
     parser.add_argument("output_csv", help="Path to write reclassified CSV")
 
-    parser.add_argument("--max-y-bar", type=float, default=4.0, help="Perturbativity bound on max |Y_bar|")
+    parser.add_argument(
+        "--max-y-bar",
+        type=float,
+        default=4.0,
+        help="Perturbativity bound on max |Y_bar|",
+    )
     parser.add_argument(
         "--natural-min",
         type=float,
@@ -135,7 +140,8 @@ def main() -> int:
         writer.writerows(out_rows)
 
     print(f"Wrote {len(out_rows)} rows to {output_path}")
-    print(f"Reclassified acceptance: {n_pass}/{len(out_rows)} ({100.0 * n_pass / max(len(out_rows), 1):.1f}%)")
+    acceptance = 100.0 * n_pass / max(len(out_rows), 1)
+    print(f"Reclassified acceptance: {n_pass}/{len(out_rows)} ({acceptance:.1f}%)")
     return 0
 
 

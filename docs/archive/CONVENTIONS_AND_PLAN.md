@@ -1,5 +1,8 @@
 # Conventions and Consistency Plan
 
+> Archived planning note. Canonical current docs live in the repo root
+> `README.md` and module `README.md` files.
+
 Date: 2026-02-04
 
 This document records the **canonical physics conventions**, the current **mismatches**, and the **fix plan** so the codebase stays consistent.
@@ -91,7 +94,7 @@ Status: All items below have been corrected in this worktree. Kept here for trac
      - `Y_N_bar ~ [0.20, 0.43, 1.02]`
 
 6. **Dependencies**
-   - Add `requirements.txt` or `pyproject.toml` with `numpy`, `scipy`.
+   - Keep dependency metadata in `pyproject.toml`.
 
 ## 4) Verification Checklist
 

@@ -7,8 +7,8 @@ This solver finds the Kaluza–Klein (KK) masses in Randall–Sundrum models by 
 * **Geometry / scale**
 
   * $k$ and $\Lambda \equiv ke^{-\pi k r_c}$ in the format of [`warpConfig`](warpConfig)
- 
- 
+
+
 * **Field & boundary data**
 
   * **Species**: `gauge` or `fermion`.
@@ -58,15 +58,15 @@ We live on an interval $z \in [z_{\text{UV}}, z_{\text{IR}}]$ with two branes. A
 - **Neumann (N)** = “flat slope” at the brane: derivative vanishes (loosely, $\partial_z$ of the relevant object is zero there).
 - **Dirichlet (D)** = “pinned to zero” at the brane: the field (or the relevant component) vanishes there.
 
-On an orbifold, fields are either even ($\to$ Neumann) or odd ($\to$ Dirichlet) at a boundary.  
+On an orbifold, fields are either even ($\to$ Neumann) or odd ($\to$ Dirichlet) at a boundary.
 Writing the parity at UV and IR gives the two-character shorthand:
 
-- `++` = even at UV **and** IR $\Rightarrow$ Neumann at both ends  
-- `--` = odd at UV **and** IR $\Rightarrow$ Dirichlet at both ends  
+- `++` = even at UV **and** IR $\Rightarrow$ Neumann at both ends
+- `--` = odd at UV **and** IR $\Rightarrow$ Dirichlet at both ends
 
 ### Why does that matter?
 
-- A mode with Neumann at both ends can have a flat, massless **“zero mode.”**  
+- A mode with Neumann at both ends can have a flat, massless **“zero mode.”**
   That’s how you keep a massless photon/gauge zero mode before EWSB: you take $A_\mu$ with NN (`++`).
 
 - Dirichlet at an end kills a zero mode (you can’t be nonzero and also vanish there), pushing the lightest state up to the KK scale.
@@ -89,7 +89,7 @@ Writing the parity at UV and IR gives the two-character shorthand:
 The standard condition for KK modes often looks like a ratio:
 
 $$
- \frac{J_\nu(x)}{Y_\nu(x)} = \frac{J_\nu(\epsilon x)}{Y_\nu(\epsilon x)} 
+ \frac{J_\nu(x)}{Y_\nu(x)} = \frac{J_\nu(\epsilon x)}{Y_\nu(\epsilon x)}
 $$
 
 Directly implementing this is numerically dangerous for two reasons:
@@ -99,7 +99,7 @@ Directly implementing this is numerically dangerous for two reasons:
 The solver instead finds roots of the "cross-product" equation:
 
 $$
-F(x) = J_\nu(x) Y_\nu(\epsilon x) - J_\nu(\epsilon x) Y_\nu(x) = 0 
+F(x) = J_\nu(x) Y_\nu(\epsilon x) - J_\nu(\epsilon x) Y_\nu(x) = 0
 $$
 
 This function behaves well when $\epsilon$ is extremely small, which is typical for RS models.
@@ -112,9 +112,9 @@ The solver uses a robust seeding strategy:
 *   **Non-Integer Order**: We use the Bessel asymptotic expansion for large arguments:
 
 $$
-x_n \approx \left(n + \frac{\nu}{2} - \frac{1}{4}\right)\pi 
+x_n \approx \left(n + \frac{\nu}{2} - \frac{1}{4}\right)\pi
 $$
-    
+
 
 These seeds are used to create **brackets** (intervals $[a, b]$ where the sign of $F(x)$ changes). We then pass these brackets to `scipy.optimize.brentq` (Brent's method), which is guaranteed to converge if a sign change exists.
 
@@ -126,4 +126,3 @@ The code supports an `exact=False` mode. In RS, the hierarchy $\epsilon = \Lambd
 *   The cross-product term dominated by $Y_\nu(\epsilon x)$ forces $J_\nu(x)$ to be very close to 0.
 
 Thus, solving $J_\nu(x) = 0$ is a very nice approximation. The solver includes this mode for speed, though the exact mode is fast enough for most purposes.
-
