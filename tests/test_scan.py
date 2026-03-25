@@ -28,7 +28,7 @@ def _benchmark_config(**overrides):
 
 
 def test_benchmark_point_in_scan():
-    """Perez-Randall-like benchmark point should evaluate consistently."""
+    """Paper-inspired repo benchmark point should evaluate consistently."""
     config = _benchmark_config()
     results = run_scan(config, progress_every=0)
     assert len(results) == 1
@@ -37,7 +37,7 @@ def test_benchmark_point_in_scan():
     # Perturbative (max |Y_bar| < 4 for default; Y_E_bar_3 ~ 5.4 exceeds)
     assert not row["perturbative"]
     assert np.isclose(row["Y_E_bar_1"], 2.94, rtol=0.05)
-    assert np.isclose(row["Y_N_bar_3"], 1.024, rtol=0.05)
+    assert np.isclose(row["Y_N_bar_3"], 1.022, rtol=0.05)
     assert np.isclose(row["M_N"], 1.22e18, rtol=1e-12)
     assert np.isclose(row["M_KK"], 3000.0)
     assert np.isclose(
@@ -51,6 +51,7 @@ def test_scan_default_lfv_matches_documented_megii_2025_limit():
     """Default scan LFV settings should match the documented MEG II 2025 limit."""
     config = ScanConfig(record_git_metadata=False)
     assert config.br_limit == BR_LIMIT_MEGII_2025
+    assert np.isclose(config.xi_KK, 1.0)
     assert np.isclose(config.br_limit, 1.5e-13)
     assert np.isclose(
         coefficient_from_br_limit(config.br_limit, prefactor=config.prefac_br),

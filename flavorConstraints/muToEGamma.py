@@ -34,6 +34,28 @@ BR_LIMIT_PAPER = 1.2e-11
 # Paper bound quoted for IR-brane Higgs, Eq. (4.14).
 # Note: sqrt(BR_LIMIT_PAPER / PREFAC_BR) ≈ 0.0173; the paper rounds up to 0.02.
 C_PAPER = 0.02
+# Optional utility for converting the geometric IR scale into the first gauge KK
+# mass, m_{g^(1)} = x_1 * Lambda_IR, with x_1 from the (NN) Bessel equation.
+# This is not the repo's default LFV convention.
+GAUGE_KK_ROOT_NN = 2.448687135269161
+
+
+def default_m_kk_from_lambda_ir(Lambda_IR: float, xi_KK: float = GAUGE_KK_ROOT_NN) -> float:
+    """Map the geometric IR scale to an explicit physical KK-mass convention.
+
+    Parameters
+    ----------
+    Lambda_IR : float
+        Geometric IR scale, Lambda_IR = 1 / z_v.
+    xi_KK : float, optional
+        Chosen physical-mass convention. Default is the first gauge KK root for
+        Neumann-Neumann boundary conditions.
+    """
+    if Lambda_IR <= 0:
+        raise ValueError("Lambda_IR must be positive")
+    if xi_KK <= 0:
+        raise ValueError("xi_KK must be positive")
+    return float(xi_KK * Lambda_IR)
 
 
 def coefficient_from_br_limit(br_limit: float, prefactor: float = PREFAC_BR) -> float:
@@ -67,8 +89,9 @@ def check_mu_to_e_gamma(
     reference_scale : float, optional
         Reference KK scale in GeV (denominator).  Default 3000 (= 3 TeV).
     M_KK_override : float, optional
-        If provided, use this value (GeV) for M_KK instead of
-        ``yukawa_result.params['Lambda_IR']``.
+        If provided, use this value (GeV) for M_KK instead of the value stored
+        in ``yukawa_result.params['M_KK']`` or, as a fallback, the repo's
+        internal LFV convention ``M_KK = Lambda_IR``.
 
     Returns
     -------
@@ -89,11 +112,14 @@ def check_mu_to_e_gamma(
     try:
         params = yukawa_result.params
         k = params['k']
-        M_KK = params['Lambda_IR']
+        Lambda_IR = params['Lambda_IR']
     except Exception as exc:
         raise ValueError(
             "yukawa_result must include params with 'k' and 'Lambda_IR'."
         ) from exc
+    # Internal LFV convention: unless a point stores an explicit M_KK or the
+    # caller overrides it, use the geometric IR scale directly.
+    M_KK = float(params.get('M_KK', Lambda_IR))
     if M_KK_override is not None:
         M_KK = float(M_KK_override)
 
@@ -136,7 +162,9 @@ def check_mu_to_e_gamma_raw(
     pmns : np.ndarray of shape (3, 3)
         PMNS mixing matrix.
     M_KK : float
-        KK mass scale in GeV (= Λ_IR).
+        KK scale in GeV for the chosen LFV convention. The repo default uses
+        ``M_KK = Lambda_IR``; physical first-KK masses should be passed
+        explicitly and paired with a consistent reference scale.
     C : float, optional
         Numerical coefficient.  Default 0.02 (Perez–Randall).
     reference_scale : float, optional

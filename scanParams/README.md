@@ -81,6 +81,11 @@ Defaults:
 - `lfv_reference_scale = 3000 GeV`,
 - `xi_KK = 1.0`, with `M_KK = xi_KK * Lambda_IR`.
 
+Here `Lambda_IR = 1 / z_v` is the geometric IR scale. The default
+`xi_KK = 1.0` is an internal LFV normalization choice, not a claim that every
+physical first KK mode has mass `Lambda_IR`. If you switch to a physical
+first-KK convention, also update `lfv_reference_scale` consistently.
+
 To reproduce the Perez-Randall paper-era bound, set:
 
 ```python

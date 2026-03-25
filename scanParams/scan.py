@@ -22,11 +22,7 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
-from flavorConstraints import (
-    PREFAC_BR,
-    check_mu_to_e_gamma,
-    coefficient_from_br_limit,
-)
+from flavorConstraints import PREFAC_BR, check_mu_to_e_gamma, coefficient_from_br_limit
 from warpConfig.baseParams import MPL
 from warpConfig.wavefuncs import f_IR
 from yukawa import YukawaResult, compute_all_yukawas
@@ -228,6 +224,9 @@ class ScanConfig:
     - ``k`` is explicit and fixed by default.
     - ``M_N`` is derived from ``MN_over_k``.
     - ``M_KK`` used in LFV checks is ``xi_KK * Lambda_IR``.
+    - The default is the internal LFV convention ``xi_KK = 1.0``.
+    - If you switch to a physical first-KK convention, update the LFV
+      reference-scale normalization consistently.
     """
 
     # Geometry / fixed physics

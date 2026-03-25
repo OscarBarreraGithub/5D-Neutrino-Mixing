@@ -26,6 +26,13 @@ Physics:
 
     For perturbativity, we require |Ȳ| < 4.
 
+    This scalar formula is the universal-limit reduction of Perez & Randall
+    Eq. (6). The repo's commonly used validation point with
+    ``c_L = 0.58``, ``c_N = 0.27``, ``c_E = [0.75, 0.60, 0.50]``,
+    ``Lambda_IR = 3000 GeV``, and ``M_N = 1.22e18 GeV`` is a repo-local,
+    paper-inspired benchmark. It should not be described as an exact
+    reproduction of the paper's Eq. (10) Yukawa values.
+
 Reference:
     Perez & Randall, arXiv:0805.4652, Eq. (6)
 """

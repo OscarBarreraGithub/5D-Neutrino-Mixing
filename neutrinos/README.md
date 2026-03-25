@@ -5,6 +5,9 @@ The functions allow either normal or inverted mass ordering.
 ### `neutrinoValues.py`
 
 Here we set the default neutrino parameters derived from experiments (mass-squared splittings, mixing angles, etc..) and helper functions to compute neutrino masses and the PMNS matrix.
+The current defaults are the NuFIT 6.1 (2025) best-fit values from the
+`IC24 with SK atmospheric data` release. The dataset/version is recorded in
+`neutrinoValues.NUFIT_DATASET` and `neutrinoValues.NUFIT_REFERENCE`.
 
 ### `massConstraints.py`
 

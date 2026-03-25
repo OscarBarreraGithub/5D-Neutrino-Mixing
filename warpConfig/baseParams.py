@@ -10,7 +10,7 @@ MBARPL = 2.435e18    # reduced Planck mass (GeV)
 # Default values. Can be adjusted after importing
 # later with e.g. params_local = get_warp_params(Lambda_IR=3000)
 DEFAULT_K = MPL
-DEFAULT_LAMBDA_IR = 3000.0  # 3 TeV
+DEFAULT_LAMBDA_IR = 3000.0  # geometric IR scale, Lambda_IR = 1 / z_v
 
 def get_warp_params(k=DEFAULT_K, Lambda_IR=DEFAULT_LAMBDA_IR):
     """
@@ -21,7 +21,8 @@ def get_warp_params(k=DEFAULT_K, Lambda_IR=DEFAULT_LAMBDA_IR):
     k : float
         AdS curvature (mass dim +1). Default is MPL.
     Lambda_IR : float
-        IR scale (KK mode mass scale) = k * exp(-pi k rc). Default is 3000 GeV (3 TeV).
+        Geometric IR scale Lambda_IR = k * exp(-pi k rc) = 1 / z_v.
+        Physical KK masses are sector-dependent roots times Lambda_IR.
 
     Returns:
     --------
@@ -49,7 +50,7 @@ def get_warp_params(k=DEFAULT_K, Lambda_IR=DEFAULT_LAMBDA_IR):
 
     return {
         "k": k,
-        "Lambda_IR": Lambda_IR, # IR "KK scale" knob: Lambda = k * exp(-pi k rc)
+        "Lambda_IR": Lambda_IR, # geometric IR scale: Lambda = k * exp(-pi k rc) = 1 / z_v
         "epsilon": epsilon, # epsilon = exp(-pi k rc) = Lambda / k
         "rc": rc, # radius of the orbifold (mass dim -1)
         "z_h": 1.0 / k, # UV brane position in conformal coord (1/k)

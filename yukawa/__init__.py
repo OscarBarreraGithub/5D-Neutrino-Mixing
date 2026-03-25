@@ -8,7 +8,7 @@ Example
 >>> from yukawa import compute_all_yukawas
 >>>
 >>> result = compute_all_yukawas(
-...     Lambda_IR=3000,           # 3 TeV KK scale
+...     Lambda_IR=3000,           # geometric IR scale 1/z_v
 ...     c_L=0.58,                 # Lepton doublet bulk mass
 ...     c_E=[0.75, 0.60, 0.50],   # RH charged lepton bulk masses
 ...     c_N=0.27,                 # RH neutrino bulk mass

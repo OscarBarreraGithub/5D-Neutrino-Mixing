@@ -113,6 +113,7 @@ Will extend `solvers/bessel.py` to return N_n and b_α alongside masses.
 The current `solvers/bessel.py`:
 - ✅ Solves for KK masses via root-finding
 - ✅ Returns b_n coefficients
-- ⚠️ Uses simplified α-1 / α for ++/-- (needs α∓1 based on sign of c+1/2)
+- ✅ Uses the `α∓1` / `α` orders for `++` / `--`, including the `c < -1/2`
+  branch for `++`
 - ❌ Does not compute N_n normalization
 - ❌ Does not return full g(z) wavefunctions

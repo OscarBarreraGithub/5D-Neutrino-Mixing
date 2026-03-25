@@ -90,8 +90,12 @@ def _nu_for(species: str, bc: str, c: Optional[float]) -> Tuple[float, str]:
             raise ValueError("Fermion requires bulk mass parameter c.")
         alpha = abs(c + 0.5)
         if bc == "++":
-            # Do not clamp to 0. Negative orders are valid (e.g. c < 0.5)
-            return alpha - 1.0, "nu=alpha-1 (fermion, ++)"
+            # For LH zero modes the matching uses J_{alpha∓1}/Y_{alpha∓1},
+            # with the upper sign for c > -1/2 and the lower sign for c < -1/2.
+            # At c = -1/2 the ±1 orders are equivalent up to an overall sign.
+            if c >= -0.5:
+                return alpha - 1.0, "nu=alpha-1 (fermion, ++, c>=-1/2)"
+            return alpha + 1.0, "nu=alpha+1 (fermion, ++, c<-1/2)"
         elif bc == "--":
             return alpha, "nu=alpha (fermion, --)"
         else:

@@ -14,10 +14,10 @@ These are the explicit choices to keep the code **PDG-aligned** while staying co
 - **Bulk mass parameter**: `c = M5 / k` (no `+ 1/2` shift).
   - Rationale: this is the convention implicitly used by the overlap formulas and the KK solver (`alpha = |c + 1/2|`).
 - **Default curvature scale**: `k = M_Pl = 1.2209e19 GeV` (not reduced Planck).
-  - Rationale: matches existing `warpConfig/baseParams.py` and the current benchmark results against Perez–Randall.
+  - Rationale: matches existing `warpConfig/baseParams.py` and the current repo-local validation benchmark.
 - **PMNS convention**: PDG parameterization, with Majorana phases on the right:
   - `U_PMNS = U(θ12, θ23, θ13, δ) * diag(1, e^{i α/2}, e^{i β/2})`
-  - Use the PDG central values for angles and δ; keep δ values split by ordering as in `neutrinos/neutrinoValues.py`.
+  - Use the NuFIT central values for angles and δ; keep ordering dependence as in `neutrinos/neutrinoValues.py`.
 - **Mass/Yukawa formulas**: keep the factor-of-2 normalization exactly as used in the code:
   - `m_Ei = 2 v k f_L Y_Ei f_Ei`
   - `m_νi = (2 k^2 v^2 f_L^2 f_N^2)/((f_N^UV)^2 M_N) * Y_Ni^2`
@@ -86,7 +86,7 @@ Status: All items below have been corrected in this worktree. Kept here for trac
 
 5. **Verification script / test**
    - Add a small `scripts/benchmark_perez_randall.py` (or a `tests/` check)
-     that validates the benchmark point:
+     that validates the repo-local paper-inspired benchmark point:
      - `f_L ~ 0.016`
      - `f_N ~ 0.48`
      - `f_N^UV ~ 1.2e-4`
@@ -98,11 +98,12 @@ Status: All items below have been corrected in this worktree. Kept here for trac
 
 ## 4) Verification Checklist
 
-- Benchmark reproduces Perez–Randall point within ~1–2%.
+- Benchmark reproduces the repo-local validation point within ~1–2%.
 - `c -> 1/2` overlap limit matches `-1/(2 ln epsilon)` numerically.
 - `Y_N Y_N^dagger` uses the same PMNS convention as `neutrinoValues.get_pmns()`.
 - All modules import cleanly from repo root.
 
 ## 5) Open Questions
 
-None at this time. If any new ambiguity appears, add it here before changing conventions.
+- The repo-local validation point is not a literal reproduction of
+  Perez–Randall Eq. (10) / Table I. Keep benchmark wording explicit.

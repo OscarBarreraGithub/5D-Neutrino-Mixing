@@ -76,7 +76,7 @@ Perez & Randall, "Natural Neutrino Masses and Mixings from Warped Geometry", arX
 | `warpConfig/baseParams.py` | ✅ Complete | Geometry parameters (ε, rc, etc.) |
 | `warpConfig/wavefuncs.py` | ✅ Complete | f_IR and f_UV overlap factors |
 | `solvers/bessel.py` | ✅ Complete | KK mass solver (Bessel equations) |
-| `neutrinos/neutrinoValues.py` | ✅ Complete | PDG neutrino data, PMNS matrix |
+| `neutrinos/neutrinoValues.py` | ✅ Complete | NuFIT oscillation data, PMNS matrix |
 | `neutrinos/massConstraints.py` | ✅ Complete | Allowed neutrino mass sweeper |
 | `diagonalization/diag.py` | ✅ Complete | SVD and Takagi factorization |
 | `yukawa/` | ✅ Complete | Yukawa computation from parameters |
@@ -116,11 +116,12 @@ print(result.summary())       # Full formatted output
 - `is_perturbative()`: Check if all |Ȳ| < 4
 - `summary()`: Formatted output string
 
-**Verified against Perez-Randall benchmark (Table I):**
+**Verified against the repo-local paper-inspired benchmark:**
 - f_L ≈ 0.016, f_N ≈ 0.48, f_N^UV ≈ 0.00012 (match paper)
 - Ȳ_E ≈ [2.9, 4.4, 5.4] (O(1) to O(few))
 - Ȳ_N ≈ [0.2, 0.4, 1.0] (O(0.1) to O(1))
 - Round-trip consistency check passes
+- This is not a literal Eq. (10) / Table I reproduction.
 
 ### 3.3 LFV Constraint Default (Decision)
 
@@ -155,7 +156,7 @@ current limits.
 │   └── besselExample.ipynb   #   Working examples
 │
 ├── neutrinos/                # ✅ Neutrino phenomenology
-│   ├── neutrinoValues.py     #   PDG data, compute_masses(), get_pmns()
+│   ├── neutrinoValues.py     #   NuFIT data, compute_masses(), get_pmns()
 │   ├── massConstraints.py    #   find_allowed_lightest_masses()
 │   ├── PMNS.ipynb            #   PMNS matrix examples
 │   └── allowedMass.ipynb     #   Allowed mass ranges

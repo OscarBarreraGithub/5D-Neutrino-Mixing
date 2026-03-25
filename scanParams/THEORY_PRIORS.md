@@ -81,7 +81,8 @@ Required LFV metadata for reproducibility:
 
 v1 policy (explicit):
 
-- use central oscillation inputs from `neutrinos/neutrinoValues.py`,
+- use central oscillation inputs from `neutrinos/neutrinoValues.py`
+  (NuFIT 6.1, `IC24 with SK atmospheric data`),
 - do not scan oscillation parameters in v1,
 - no oscillation chi2 in v1; acceptance is based on the model constraints already implemented in the scan pipeline.
 
@@ -211,6 +212,6 @@ Every run should store at minimum:
 - Csaki, C. et al. *Neutrino masses in models with warped extra dimensions* (2000): https://www.sciencedirect.com/science/article/pii/S0370269300012925
 - Chen, M. C. and Yu, J. H. *Minimal Flavor Violation in the Lepton Sector of the Randall-Sundrum Model* (2008): https://www.sciencedirect.com/science/article/pii/S0370269308004745
 - MEG II Collaboration, published limit (2025): https://arxiv.org/abs/2504.15711
-- NuFIT 6.0 global analysis (2024): https://arxiv.org/abs/2410.05380
+- NuFIT 6.1 official results page (2025): https://www.nu-fit.org/?q=node/309
 - Planck 2018 cosmology (A&A 2020): https://www.aanda.org/articles/aa/full_html/2020/09/aa33910-18/aa33910-18.html
 - DESI BAO + CMB + SN mass-sum update (2024): https://www.osti.gov/pages/biblio/2371418

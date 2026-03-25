@@ -3,11 +3,11 @@
 This module provides the main entry point for computing all Yukawa couplings
 (charged leptons and neutrinos) from the RS model input parameters.
 
-Usage:
+    Usage:
     from yukawa import compute_all_yukawas
 
     result = compute_all_yukawas(
-        Lambda_IR=3000,           # 3 TeV KK scale
+        Lambda_IR=3000,           # geometric IR scale 1/z_v
         c_L=0.58,                 # Lepton doublet bulk mass
         c_E=[0.75, 0.60, 0.50],   # RH charged lepton bulk masses
         c_N=0.27,                 # RH neutrino bulk mass
@@ -217,7 +217,7 @@ def compute_all_yukawas(
 
     Examples
     --------
-    >>> # Benchmark point from Perez-Randall paper
+    >>> # Paper-inspired bulk-mass point used for repo validation
     >>> result = compute_all_yukawas(
     ...     Lambda_IR=3000,
     ...     c_L=0.58,
@@ -230,6 +230,12 @@ def compute_all_yukawas(
     >>> print(f"f_L = {result.f_L:.4f}")  # Should be ~0.016
     >>> print(f"Ȳ_E = {result.Y_E_bar}")  # Should be O(1) to O(few)
     >>> print(f"Ȳ_N = {result.Y_N_bar}")  # Should be O(0.2) to O(1.0)
+
+    Notes
+    -----
+    The benchmark-like input above matches the repo's current conventions and
+    validation tests. It is paper-inspired, but it is not a literal
+    reproduction of Perez–Randall Eq. (10) / Table I Yukawa entries.
     """
     # Import dependencies (local import to avoid circular deps)
     from neutrinos.neutrinoValues import compute_masses, get_pmns

@@ -20,8 +20,18 @@ python scripts/benchmark_perez_randall.py
 
 ## Notes
 
+- `Lambda_IR` denotes the geometric IR scale `1 / z_v`. Physical first-KK
+  masses are sector-dependent roots times `Lambda_IR`.
 - `scanParams.ScanConfig` defaults to the published **MEG II 2025** bound
   `br_limit = 1.5e-13`; the derived scan coefficient `lfv_C` is computed per run.
+- The repo's default LFV convention is `M_KK = Lambda_IR` (`xi_KK = 1.0`).
+  Physical first-KK mass conventions are available only as explicit utilities.
+- `scripts/benchmark_perez_randall.py` keeps a historical filename, but the
+  validated point is a repo-local, paper-inspired benchmark rather than a
+  literal reproduction of Perez–Randall Eq. (10) / Table I.
+- `scripts/audit_perez_randall_consistency.py` documents the conclusion of the
+  reproduction audit: the displayed Eq. (10) neutrino Yukawas do not
+  numerically reproduce Eq. (7) when combined with Eq. (6) and Eq. (11).
 - Tracked notebooks are exploratory analysis artifacts and should remain output-free.
 - Historical status and planning notes live under [`docs/archive`](docs/archive).
 

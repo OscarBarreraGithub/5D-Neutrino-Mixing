@@ -64,15 +64,32 @@ You can pass this as `C` explicitly or compute it via
 
 - `check_mu_to_e_gamma()` defaults to `C_PAPER = 0.02` to reproduce the
   Perez–Randall setup.
+- `check_mu_to_e_gamma()` uses the repo's internal LFV convention
+  `M_KK = Lambda_IR` unless you pass `M_KK_override` or provide an explicit
+  `params["M_KK"]`.
 - `scanParams.ScanConfig` defaults to the **MEG II 2025** bound
   `br_limit = 1.5e-13` and derives `lfv_C` per run via
   `coefficient_from_br_limit()`.
+- `Lambda_IR` is the geometric IR scale `1 / z_v`, not a universal physical
+  first-KK mass. Sector-dependent physical masses can be written as
+  `m^(1) = x_1 * Lambda_IR`.
+
+## KK-Scale Conventions
+
+- Internal LFV convention in this repo: `M_KK = Lambda_IR`, paired with
+  `reference_scale = 3000 GeV`.
+- Optional physical-mass utility:
+  `default_m_kk_from_lambda_ir(Lambda_IR)` returns the first gauge KK mass
+  `m_g^(1) = 2.448687... * Lambda_IR`.
+- If you evaluate the LFV bound in a physical-mass convention, change both
+  `M_KK` and the reference-scale normalization consistently.
 
 ## API
 
 - `check_mu_to_e_gamma(yukawa_result, C=C_PAPER, reference_scale=3000)`
 - `check_mu_to_e_gamma_raw(Y_N_bar, pmns, M_KK, C=C_PAPER, reference_scale=3000)`
 - `coefficient_from_br_limit(br_limit, prefactor=4e-8)`
+- `default_m_kk_from_lambda_ir(Lambda_IR, xi_KK=GAUGE_KK_ROOT_NN)`
 
 ## Notes
 
