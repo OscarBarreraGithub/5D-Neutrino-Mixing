@@ -44,7 +44,7 @@ def find_allowed_lightest_masses(
         raise ValueError("step must be positive")
     if max_lightest <= 0:
         raise ValueError("max_lightest must be positive")
-    
+
     m1_values = []
     m2_values = []
     m3_values = []
@@ -66,7 +66,7 @@ def find_allowed_lightest_masses(
         m2_values.append(m2)
         m3_values.append(m3)
         Mtot_values.append(Mtot)
-        
+
         m += step
 
     return (

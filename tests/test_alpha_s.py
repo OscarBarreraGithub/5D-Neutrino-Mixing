@@ -7,9 +7,8 @@ and known analytic results.
 import numpy as np
 import pytest
 
-from qcd import alpha_s, alpha_s_array, match_alpha_s, ALPHA_S_MZ, M_Z, M_TOP_MS
-from qcd.beta_function import beta_0, beta_1, beta_2, beta_coefficients
-
+from qcd import ALPHA_S_MZ, M_TOP_MS, M_Z, alpha_s, alpha_s_array, match_alpha_s
+from qcd.beta_function import beta_0, beta_1, beta_coefficients
 
 # ---------- Beta function coefficients ----------
 

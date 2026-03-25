@@ -26,7 +26,8 @@ Reference:
     Perez & Randall, arXiv:0805.4652, Eq. (5)
 """
 
-from typing import Union, Dict, Tuple
+from typing import Dict, Tuple, Union
+
 import numpy as np
 
 from .constants import LEPTON_MASSES

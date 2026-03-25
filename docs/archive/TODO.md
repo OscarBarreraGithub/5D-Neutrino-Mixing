@@ -1,5 +1,7 @@
 ## To Do
 
+> Archived todo snapshot.
+
 [`derivations`](derivations)
 
 - [ ] KK mass for even modes
@@ -34,7 +36,7 @@
 - [ ] implement high precision diagonalization
 
 [`warpConfig`](warpConfig)
-- [ ] 
+- [ ]
 
 [`solvers`](solvers)
 - [ ] update Bessel function... needs to have $\alpha \, \pm$ 1
@@ -52,9 +54,3 @@
 [`warpConfig`](warpConfig)
 
 [`solvers`](solvers)
-
-
-
-
-
-

@@ -22,8 +22,8 @@ from typing import List, Optional, Tuple
 import numpy as np
 from scipy.integrate import solve_ivp
 
-from .constants import ALPHA_S_MZ, M_Z, THRESHOLD_LIST
 from .beta_function import beta_rhs
+from .constants import ALPHA_S_MZ, M_Z, THRESHOLD_LIST
 from .decoupling import match_alpha_s
 
 

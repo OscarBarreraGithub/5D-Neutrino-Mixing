@@ -30,7 +30,8 @@ Reference:
     Perez & Randall, arXiv:0805.4652, Eq. (6)
 """
 
-from typing import Union, Dict, Tuple
+from typing import Dict, Tuple, Union
+
 import numpy as np
 
 from .constants import EV_TO_GEV

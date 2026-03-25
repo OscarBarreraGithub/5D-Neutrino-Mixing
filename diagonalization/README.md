@@ -42,24 +42,24 @@ This is the full object we want to diagonalize mixes light neutrinos, heavy ster
 
 ### Matrix Diagonalization: Hermitian, SVD, and Takagi
 
-Different kinds of matrices can be “diagonalized” in different ways, depending on their symmetry and properties. 
+Different kinds of matrices can be “diagonalized” in different ways, depending on their symmetry and properties.
 
 Hermitian matrices represent self-adjoint transformations. They can be “rotated” by a unitary $U$ to reveal real eigenvalues $\Lambda$, corresponding to intrinsic directions and magnitudes of stretching. On such matrices we can use Eigendecomposition:
 
-- **Eigendecomposition**  
-  - **Applies to:** Hermitian (or real symmetric) matrices, where $A = A^\dagger$.  
-  - **Form:** $A = U \Lambda U^\dagger$.  
+- **Eigendecomposition**
+  - **Applies to:** Hermitian (or real symmetric) matrices, where $A = A^\dagger$.
+  - **Form:** $A = U \Lambda U^\dagger$.
 
 For more general complex matrices, we use the fact that every linear transformation can be decomposed into a rotation $V^\dagger$, a scaling $\Sigma$, and another rotation $U$. The *singular values* in $\Sigma$ quantify how $A$ stretches space along orthogonal directions.
 
-- **Singular Value Decomposition (SVD)**  
-  - **Applies to:** Complex matrices (square or rectangular).  
-  - **Form:** $A = U \Sigma V^\dagger$.  
+- **Singular Value Decomposition (SVD)**
+  - **Applies to:** Complex matrices (square or rectangular).
+  - **Form:** $A = U \Sigma V^\dagger$.
 
 However, SVD assumes you have two independent vector spaces (e.g. left and right handed components in a Dirac mass term). For Majorana terms, the field equals its charge conjugate, so those two spaces are identified.   So, SVD would overcount degrees of freedom and destroy the symmetry $M_N = M_N^T$ that the Majorana mass matrix must satisfy.
 
 Instead, we use the fact that a symmetric complex matrix can be diagonalized by a single unitary matrix on both sides (with a transpose instead of a dagger). The diagonal entries of $\Sigma$ are the singular values of $A$.
 
-- **Takagi Factorization**  
-  - **Applies to:** Complex symmetric matrices, where $A = A^T$.  
-  - **Form:** $A = U \Sigma U^T$.  
+- **Takagi Factorization**
+  - **Applies to:** Complex symmetric matrices, where $A = A^T$.
+  - **Form:** $A = U \Sigma U^T$.

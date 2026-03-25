@@ -1,4 +1,5 @@
 from typing import Tuple
+
 import numpy as np
 
 __all__ = ["SVD", "Takagi"]
@@ -36,7 +37,7 @@ def Takagi(
     Autonne–Takagi decomposition of a complex symmetric matrix.
 
      See `Houde et al. Matrix decompositions in Quantum Optics:
-     Takagi/Autonne, Bloch-Messiah/Euler, Iwasawa, and Williamson 
+     Takagi/Autonne, Bloch-Messiah/Euler, Iwasawa, and Williamson
 
 
     Computes U, r such that A ≈ U @ diag(r) @ U.T with r ≥ 0 and U unitary.

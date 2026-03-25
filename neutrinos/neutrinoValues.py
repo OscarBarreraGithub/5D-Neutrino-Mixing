@@ -1,6 +1,6 @@
 """neutrinoValues.py
 
-This module provides the experimental constraints needed 
+This module provides the experimental constraints needed
 to compute neutrino masses.
 
 Both normal and inverted mass orderings are supported.
@@ -9,9 +9,9 @@ Both normal and inverted mass orderings are supported.
 
 from __future__ import annotations
 
-import numpy as np
 from typing import Tuple
-import cmath
+
+import numpy as np
 
 # Constraint on the sum of neutrino masses from cosmology (in eV)
 sum_mass_constraint = 0.082  # eV
@@ -56,7 +56,9 @@ __all__ = [
 ]
 
 
-def compute_masses(lightest_mass: float, ordering: str = "normal") -> Tuple[float, float, float, float]:
+def compute_masses(
+   lightest_mass: float, ordering: str = "normal"
+) -> Tuple[float, float, float, float]:
    """Compute neutrino masses and their sum.
 
    Args:
@@ -128,7 +130,7 @@ def pmns_matrix(theta12, theta23, theta13, delta_cp, alpha=0.0, beta=0.0):
     c23 = np.cos(theta23)
     s13 = np.sin(theta13)
     c13 = np.cos(theta13)
-    
+
     # CP phase term
     # Note: In PDG, the term is e^{-i \delta} in the (0,2) element.
     # And e^{i \delta} appears in the other terms.
@@ -160,6 +162,5 @@ def pmns_matrix(theta12, theta23, theta13, delta_cp, alpha=0.0, beta=0.0):
     # Apply Majorana phases on the right: diag(1, e^{i α/2}, e^{i β/2})
     # These are often denoted as alpha21 and alpha31
     maj_phases = np.diag([1.0 + 0j, np.exp(1j * alpha / 2.0), np.exp(1j * beta / 2.0)])
-    
-    return np.dot(U, maj_phases)
 
+    return np.dot(U, maj_phases)

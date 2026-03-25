@@ -21,16 +21,16 @@ Example
 >>> print(f"Perturbative: {result.is_perturbative()}")
 """
 
-from .compute_yukawas import compute_all_yukawas, YukawaResult
 from .charged_lepton import compute_charged_lepton_yukawas
-from .neutrino import compute_neutrino_yukawas
+from .compute_yukawas import YukawaResult, compute_all_yukawas
 from .constants import (
+    EV_TO_GEV,
+    LEPTON_MASSES,
     M_ELECTRON,
     M_MUON,
     M_TAU,
-    LEPTON_MASSES,
-    EV_TO_GEV,
 )
+from .neutrino import compute_neutrino_yukawas
 
 __all__ = [
     # Main API

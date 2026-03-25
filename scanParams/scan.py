@@ -12,13 +12,13 @@ Conventions implemented here follow ``scanParams/THEORY_PRIORS.md``:
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 import csv
 import itertools
 import subprocess
 import time
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
@@ -30,8 +30,8 @@ from flavorConstraints import (
 from warpConfig.baseParams import MPL
 from warpConfig.wavefuncs import f_IR
 from yukawa import YukawaResult, compute_all_yukawas
-from .anarchy import AnarchyConfig, score_anarchy_from_matrix
 
+from .anarchy import AnarchyConfig, score_anarchy_from_matrix
 
 # Published MEG II bound (2025): BR(mu -> e gamma) < 1.5e-13 (90% CL).
 BR_LIMIT_MEGII_2025 = 1.5e-13
@@ -201,7 +201,9 @@ def _solve_delta_c_for_ratio(
     return lo
 
 
-def _derive_cL_degeneracy_metadata(c_L0: float, k: float, Lambda_IR: float, max_fL_ratio: float) -> Dict[str, float]:
+def _derive_cL_degeneracy_metadata(
+    c_L0: float, k: float, Lambda_IR: float, max_fL_ratio: float
+) -> Dict[str, float]:
     """Compute derived delta-c tolerances from a wavefunction-ratio prior."""
     epsilon = float(Lambda_IR / k)
     d_sym = _solve_delta_c_for_ratio(c_L0, epsilon, max_fL_ratio=max_fL_ratio, mode="symmetric")
@@ -330,7 +332,9 @@ class ScanConfig:
         # Build charged-lepton c_E points.
         if self.c_E_grid is not None:
             if len(self.c_E_grid) != 3:
-                raise ValueError(f"c_E_grid must contain exactly 3 arrays, got {len(self.c_E_grid)}")
+                raise ValueError(
+                    f"c_E_grid must contain exactly 3 arrays, got {len(self.c_E_grid)}"
+                )
             c1 = _as_1d_float_array("c_E_grid[0]", self.c_E_grid[0])
             c2 = _as_1d_float_array("c_E_grid[1]", self.c_E_grid[1])
             c3 = _as_1d_float_array("c_E_grid[2]", self.c_E_grid[2])
@@ -340,7 +344,9 @@ class ScanConfig:
             if self.c_E_fixed is None:
                 raise ValueError("Either c_E_fixed or c_E_grid must be provided")
             if len(self.c_E_fixed) != 3:
-                raise ValueError(f"c_E_fixed must contain exactly 3 values, got {len(self.c_E_fixed)}")
+                raise ValueError(
+                    f"c_E_fixed must contain exactly 3 values, got {len(self.c_E_fixed)}"
+                )
             points = [tuple(map(float, self.c_E_fixed))]
 
         if self.sort_c_E_descending:
@@ -604,7 +610,14 @@ def run_scan(
         config.lightest_nu_mass_values,
     )
 
-    for sample_index, (Lambda_IR, c_L, c_N, c_E, MN_over_k, lightest_nu_mass) in enumerate(scan_iter):
+    for sample_index, (
+        Lambda_IR,
+        c_L,
+        c_N,
+        c_E,
+        MN_over_k,
+        lightest_nu_mass,
+    ) in enumerate(scan_iter):
         seed = _sample_seed(config.rng_seed_global, sample_index)
 
         row = _evaluate_point(

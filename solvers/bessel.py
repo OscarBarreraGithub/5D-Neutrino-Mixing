@@ -19,13 +19,14 @@ Dependencies:
 """
 
 from __future__ import annotations
+
 import math
 import warnings
-from typing import Callable, Dict, List, Optional, Tuple, Any
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import numpy as np
-from scipy.special import jv, yv, jn_zeros  # jn_zeros only for integer order
 from scipy.optimize import brentq
+from scipy.special import jn_zeros, jv, yv  # jn_zeros only for integer order
 
 # =========================
 # 0) GLOBAL / DEFAULT PARAMS
@@ -48,7 +49,7 @@ def _validate_geometry(geo: Dict[str, Any]) -> Dict[str, float]:
     """
     Validate that the geometry dict has the necessary keys.
     It expects the output format of warpConfig.baseParams.get_warp_params.
-    
+
     Required keys:
       - Lambda_IR
       - z_v
@@ -56,13 +57,13 @@ def _validate_geometry(geo: Dict[str, Any]) -> Dict[str, float]:
     """
     # Copy to avoid mutating input
     g = geo.copy()
-    
+
     # Ensure essential keys exist
     required = ["Lambda_IR", "z_v", "epsilon"]
     missing = [k for k in required if k not in g]
     if missing:
         raise ValueError(f"Geometry dict missing required keys: {missing}. ")
-         
+
     return g
 
 
@@ -245,8 +246,7 @@ def solve_kk(species: str,
     """
     # Validate and normalize the geometry dict
     geometry = _validate_geometry(geometry)
-    
-    z_v = geometry["z_v"]
+
     eps = geometry["epsilon"]
     Lam = geometry["Lambda_IR"]
 
@@ -271,11 +271,21 @@ def solve_kk(species: str,
     # If we still need more brackets, do a linear scan
     if len(brackets) < n_roots:
         # Step ~ π is a decent spacing for consecutive roots
-        extra = _scan_for_brackets(F, x_start=seeds[-1] if len(seeds) else 0.5, step=math.pi, n_needed=n_roots - len(brackets), x_max=x_max)
+        extra = _scan_for_brackets(
+            F,
+            x_start=seeds[-1] if len(seeds) else 0.5,
+            step=math.pi,
+            n_needed=n_roots - len(brackets),
+            x_max=x_max,
+        )
         brackets.extend(extra)
 
     if len(brackets) < n_roots:
-        warnings.warn(f"Only found {len(brackets)} sign-change brackets up to x={x_max}. Returning fewer roots.")
+        warnings.warn(
+            f"Only found {len(brackets)} sign-change brackets up to x={x_max}. "
+            "Returning fewer roots.",
+            stacklevel=2,
+        )
         n_roots = len(brackets)
 
     # Solve each bracket with Brent
@@ -322,6 +332,3 @@ def solve_kk(species: str,
         geometry=geometry,
     )
     return masses, extras
-
-
-

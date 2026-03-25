@@ -6,11 +6,12 @@ Run:
 """
 
 import sys
+
 import numpy as np
 
 try:
-    from yukawa import compute_all_yukawas
     from flavorConstraints import check_mu_to_e_gamma
+    from yukawa import compute_all_yukawas
 except ModuleNotFoundError as exc:
     raise ModuleNotFoundError(
         "Cannot import packages. Install the repo first: `pip install -e .`."
