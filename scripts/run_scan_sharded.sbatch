@@ -2,16 +2,18 @@
 # Production scan — Stage 1 (c_E grid, M_N/k scan, Λ_IR 3–15 TeV)
 #
 # Launch:
-#   sbatch --array=0-63 scripts/run_scan_sharded.sbatch
+#   sbatch --array=0-1052 scripts/run_scan_sharded.sbatch
 #
-# Expected: ~91M total points, ~1.4M per shard, ~2h per shard at 180 pts/s.
+# Sharding: flattened (c_L, c_N) grid = 81 × 13 = 1053 pairs.
+# Each shard iterates over the remaining axes (c_N_inner, c_E, M_N/k, m_lightest).
+# Expected: ~91M total points, ~87k per shard, ~8 min per shard at 180 pts/s.
 
 #SBATCH --job-name=rs-scan
-#SBATCH --account=iaifi_lab
-#SBATCH --partition=shared
-#SBATCH --time=03:00:00
+#SBATCH --account=randall_lab
+#SBATCH --partition=sapphire
+#SBATCH --time=01:00:00
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=6G
+#SBATCH --mem=4G
 #SBATCH --output=logs/scan_%A_%a.out
 #SBATCH --error=logs/scan_%A_%a.err
 
@@ -100,27 +102,36 @@ all_c_N = np.linspace(c_n_min, c_n_max, n_c_n)
 all_lambda_ir = np.linspace(lambda_min, lambda_max, n_lambda)
 all_m_lightest = np.logspace(np.log10(mlightest_min), np.log10(mlightest_max), n_mlightest)
 
-# Shard over c_L so each task gets a deterministic subset.
-c_l_shards = np.array_split(all_c_L, total_shards)
-c_l_local = c_l_shards[shard_id]
+# Shard over flattened (c_L, Lambda_IR) pairs for fine-grained parallelism.
+# 81 c_L × 13 Lambda_IR = 1053 pairs — one pair per shard at default settings.
+pairs = [(i, j) for i in range(len(all_c_L)) for j in range(len(all_lambda_ir))]
+shard_pairs = np.array_split(pairs, total_shards)
+my_pairs = shard_pairs[shard_id]
 
-if c_l_local.size == 0:
-    print(f"[shard {shard_id}] No c_L points assigned; exiting cleanly.")
+if len(my_pairs) == 0:
+    print(f"[shard {shard_id}] No (c_L, Lambda_IR) pairs assigned; exiting cleanly.")
     raise SystemExit(0)
+
+# Group by unique c_L and Lambda_IR indices in this shard.
+c_l_indices = sorted(set(int(p[0]) for p in my_pairs))
+lambda_indices = sorted(set(int(p[1]) for p in my_pairs))
+c_l_local = all_c_L[c_l_indices]
+lambda_local = all_lambda_ir[lambda_indices]
 
 n_cE = len(c_e1_values) * len(c_e2_values) * len(c_e3_values)
 n_pts = (
-    len(all_lambda_ir) * len(c_l_local) * len(all_c_N)
+    len(lambda_local) * len(c_l_local) * len(all_c_N)
     * n_cE * len(mn_over_k_values) * len(all_m_lightest)
 )
 print(f"[shard {shard_id}] c_L points: {len(c_l_local)}, "
+      f"Lambda_IR points: {len(lambda_local)}, "
       f"c_E combos: {n_cE}, M_N/k points: {len(mn_over_k_values)}, "
       f"total: {n_pts}")
 
 config = ScanConfig(
     # Geometry and priors
     k=k_gev,
-    Lambda_IR_values=all_lambda_ir,
+    Lambda_IR_values=lambda_local,
     xi_KK=1.0,
     max_fL_ratio=1.1,
     # Bulk masses
@@ -149,7 +160,7 @@ config = ScanConfig(
     record_git_metadata=True,
 )
 
-out_csv = f"scan_outputs/scan_shard_{shard_id:03d}_of_{total_shards:03d}.csv"
+out_csv = f"scan_outputs/scan_shard_{shard_id:04d}_of_{total_shards:04d}.csv"
 rows = run_scan(config, output_csv=out_csv, progress_every=5000)
 
 n_total = len(rows)

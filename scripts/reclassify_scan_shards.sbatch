@@ -5,8 +5,8 @@
 #   sbatch --export=ALL,TOTAL_SHARDS=16 scripts/reclassify_scan_shards.sbatch
 
 #SBATCH --job-name=rs-reclass
-#SBATCH --account=iaifi_lab
-#SBATCH --partition=shared
+#SBATCH --account=randall_lab
+#SBATCH --partition=sapphire
 #SBATCH --time=02:00:00
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4G
@@ -80,8 +80,8 @@ fi
 mkdir -p "$OUTPUT_DIR"
 
 for shard_id in $(seq 0 $((TOTAL_SHARDS - 1))); do
-  in_csv=$(printf "%s/scan_shard_%03d_of_%03d.csv" "$INPUT_DIR" "$shard_id" "$TOTAL_SHARDS")
-  out_csv=$(printf "%s/scan_shard_%03d_of_%03d_%s.csv" "$OUTPUT_DIR" "$shard_id" "$TOTAL_SHARDS" "$OUTPUT_TAG")
+  in_csv=$(printf "%s/scan_shard_%04d_of_%04d.csv" "$INPUT_DIR" "$shard_id" "$TOTAL_SHARDS")
+  out_csv=$(printf "%s/scan_shard_%04d_of_%04d_%s.csv" "$OUTPUT_DIR" "$shard_id" "$TOTAL_SHARDS" "$OUTPUT_TAG")
 
   if [[ ! -f "$in_csv" ]]; then
     echo "ERROR: Missing shard file: $in_csv"
