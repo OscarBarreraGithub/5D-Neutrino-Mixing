@@ -22,7 +22,7 @@ plt.rcParams.update({
 
 # Load data
 print("Loading scan data...")
-files = sorted(glob.glob('scan_outputs/scan_shard_*_of_016.csv'))
+files = sorted(glob.glob('scan_outputs/scan_shard_*_of_1053.csv'))[::40]  # sample every 40th shard
 df = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
 
 # LFV constants
