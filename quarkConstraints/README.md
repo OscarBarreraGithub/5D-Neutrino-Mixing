@@ -67,5 +67,29 @@ The first milestone should be: "can we reproduce the paper’s qualitative claim
 that a small `r` suppresses down-sector flavor violation while preserving CKM
 fit quality?"
 
+## Current status
+
+The quark-sector MFV scaffold is now present in this repo:
+
+- MFV-native spurion inputs in `model.py`
+- exact quark mass-matrix and CKM fitting in `fit.py`
+- deterministic benchmarks and validation helpers
+- lightweight proxy and alignment diagnostics
+- a scan wrapper and benchmark script
+
+This is usable as a repo-local exploratory implementation, not yet as a
+paper-level reproduction.
+
+## Current caveats
+
+- the bulk-mass eigenvalue to `c` map is still a repo-local surrogate
+- the default benchmark is a deterministic regression point, not a literal
+  0710.1869 benchmark reconstruction
+- the rough SM-like target set is intended for exploratory fitting only
+- the `h_RS`-style quantity is still a proxy and currently uses the repo's IR
+  scale conventions rather than a fully sector-specific physical KK-mass map
+
 See [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) for the converged
-minimal implementation proposal.
+minimal implementation proposal, and
+[`AGENT_ORCHESTRATION_PLAN.md`](AGENT_ORCHESTRATION_PLAN.md) for the multi-agent
+execution plan.
