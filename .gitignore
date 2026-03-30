@@ -14,6 +14,7 @@ htmlcov/
 .ruff_cache/
 .mypy_cache/
 .nox/
+.codex
 
 # macOS
 .DS_Store
@@ -33,4 +34,3 @@ build/
 # Scan artifacts
 logs/
 scan_outputs/
-*_executed.ipynb

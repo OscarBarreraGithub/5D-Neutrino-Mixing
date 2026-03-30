@@ -6,9 +6,11 @@ constrained the RS5D parameter space.
 """
 
 import glob
+from pathlib import Path
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.lines import Line2D
 
@@ -19,6 +21,8 @@ plt.rcParams.update({
     'axes.titlesize': 14,
     'axes.labelsize': 12,
 })
+FIG_DIR = Path("results/figures")
+FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # Load data
 print("Loading scan data...")
@@ -277,8 +281,6 @@ ax7.text(0.05, 0.95, summary_text, transform=ax7.transAxes,
 fig.suptitle('The MEG II Revolution: How a 100× Better Experiment Changed RS5D Phenomenology',
              fontsize=16, weight='bold', y=0.995)
 
-plt.savefig('meg2_constraint_comparison.png', dpi=150, bbox_inches='tight')
-plt.savefig('meg2_constraint_comparison.pdf', bbox_inches='tight')
-print("\nSaved: meg2_constraint_comparison.png")
-print("Saved: meg2_constraint_comparison.pdf")
+plt.savefig(FIG_DIR / 'meg2_constraint_comparison.png', dpi=150, bbox_inches='tight')
+print("\nSaved: results/figures/meg2_constraint_comparison.png")
 plt.show()

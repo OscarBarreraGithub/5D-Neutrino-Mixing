@@ -1,0 +1,66 @@
+# quarkConstraints
+
+Quark-sector implementation notes for the Randall-Sundrum MFV model of
+Fitzpatrick, Perez, and Randall:
+
+- arXiv: [0710.1869](https://arxiv.org/abs/0710.1869)
+- PDF: [0710.1869](https://arxiv.org/pdf/0710.1869)
+- Local PDF: [`0710.1869v1.pdf`](0710.1869v1.pdf)
+- Journal: Phys. Rev. Lett. 100, 171604 (2008)
+
+The paper’s core claim is that 5D minimal flavor violation can collapse the
+generic RS flavor/CP problem into a controlled next-to-MFV structure. The
+key low-energy dial is the parameter `r`, which suppresses down-sector flavor
+violation and can make KK scales near 2 TeV viable.
+
+## Recommended implementation phases
+
+The implementation should be built in stages, with strict scope control.
+
+### Phase 1: Model spec + benchmark reproduction
+
+Implement only the model layer that is directly supported by the paper:
+
+- `C_u,d ~ Y_u,d^\dagger Y_u,d`
+- `C_Q ~ r Y_u Y_u^\dagger + Y_d Y_d^\dagger`
+- quark zero-mode overlaps `F_Q`, `F_u`, `F_d`
+- quark masses and CKM fit residuals
+- reproduction of the paper’s benchmark structure and favored `r ~ 0.1-0.4`
+
+This phase answers whether the repo’s warp-profile machinery can represent the
+paper’s MFV/NMFV flavor geometry at all.
+
+### Phase 2: Cheap flavor diagnostics
+
+Add fast diagnostics that follow the paper’s logic but stop short of full
+hadronic phenomenology:
+
+- KK-gluon coupling matrices in the quark mass basis
+- `h_RS`-style suppression proxies
+- left-left and left-right `Delta F = 2` proxy summaries
+- down-sector versus up-sector misalignment diagnostics
+
+This phase answers whether the model really shifts the dangerous flavor tension
+out of the down sector, as claimed.
+
+### Phase 3: External-observable integration
+
+Only after phases 1 and 2 are stable should the repo grow a fuller constraint
+stack:
+
+- kaon, `B`, and `D` mixing observables with external EFT inputs
+- EDM calculations
+- scan integration with explicit provenance for non-paper ingredients
+
+## Recommended boundaries
+
+Do not start with a full kaon/EDM package. The first useful version should
+test the structural claim of the paper, not pretend to be a complete flavor
+phenomenology engine.
+
+The first milestone should be: "can we reproduce the paper’s qualitative claim
+that a small `r` suppresses down-sector flavor violation while preserving CKM
+fit quality?"
+
+See [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) for the converged
+minimal implementation proposal.

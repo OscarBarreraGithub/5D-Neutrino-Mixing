@@ -32,7 +32,8 @@ python scripts/benchmark_perez_randall.py
 - `scripts/audit_perez_randall_consistency.py` documents the conclusion of the
   reproduction audit: the displayed Eq. (10) neutrino Yukawas do not
   numerically reproduce Eq. (7) when combined with Eq. (6) and Eq. (11).
-- Tracked notebooks are exploratory analysis artifacts and should remain output-free.
+- Tracked notebooks are committed as executed analysis artifacts.
+- Generated standalone figures live under `results/figures/`.
 - Historical status and planning notes live under [`docs/archive`](docs/archive).
 
 ## Packages
@@ -59,6 +60,9 @@ functions used throughout the project.
 
 [`scanParams`](scanParams)
 - Grid-scan driver to sweep RS lepton-sector parameters and filter by perturbativity, naturalness, and LFV bounds.
+
+[`quarkConstraints`](quarkConstraints)
+- Planned quark-sector MFV/NMFV implementation for CKM fits, flavor bounds, and CP diagnostics.
 
 [`qcd`](qcd)
 - Computes the QCD running coupling α_s(μ) with threshold matching.
