@@ -23,7 +23,14 @@ def test_quark_scan_returns_rows_and_writes_csv(tmp_path):
 
     assert len(rows) == 2
     assert "fit_score" in rows[0]
+    assert "M_KK" in rows[0]
+    assert "xi_KK" in rows[0]
     assert "proxy_h_rs" in rows[0]
+    assert "deltaf2_passes" in rows[0]
+    assert "epsilon_k_ratio" in rows[0]
+    assert "b_d_mix_ratio" in rows[0]
+    assert "b_s_mix_ratio" in rows[0]
+    assert "d_mix_ratio" in rows[0]
     assert "passes_all" in rows[0]
 
     with open(csv_path, encoding="utf-8") as handle:
@@ -32,3 +39,20 @@ def test_quark_scan_returns_rows_and_writes_csv(tmp_path):
 
     assert len(file_rows) == 2
     assert "alignment_ratio" in file_rows[0]
+    assert "deltaf2_max_ratio" in file_rows[0]
+    assert "fit_parameterization" in file_rows[0]
+
+
+def test_quark_scan_threads_explicit_xi_kk_into_mkk():
+    config = QuarkScanConfig(
+        r_values=[0.25],
+        overall_scale_values=[3.0],
+        Lambda_IR_values=[3000.0],
+        xi_KK=2.0,
+        record_git_metadata=False,
+        max_nfev=80,
+    )
+    row = run_quark_scan(config, progress_every=0)[0]
+
+    assert row["xi_KK"] == 2.0
+    assert row["M_KK"] == 6000.0

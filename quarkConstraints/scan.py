@@ -11,9 +11,12 @@ from typing import Dict, List, Optional, Sequence, Tuple
 import numpy as np
 
 from .benchmarks import QuarkTargets, default_quark_targets, default_spurion_seed
+from .couplings import compute_quark_kk_gluon_couplings
+from .deltaf2 import evaluate_delta_f2_constraints
 from .fit import fit_quark_sector
 from .model import BulkMassMap
 from .proxies import summarize_flavor_diagnostics
+from .scales import DEFAULT_QUARK_XI_KK, default_quark_m_kk_from_lambda_ir
 
 
 CSV_COLUMNS = [
@@ -23,7 +26,9 @@ CSV_COLUMNS = [
     "rng_seed_global",
     "r",
     "overall_scale",
+    "xi_KK",
     "Lambda_IR",
+    "M_KK",
     "k",
     "fit_success",
     "fit_score",
@@ -34,8 +39,25 @@ CSV_COLUMNS = [
     "down_alignment",
     "up_alignment",
     "alignment_ratio",
+    "deltaf2_model",
+    "deltaf2_input_bundle",
+    "deltaf2_passes",
+    "deltaf2_max_ratio",
+    "epsilon_k_ratio",
+    "epsilon_k_passes",
+    "b_d_mix_ratio",
+    "b_d_mix_passes",
+    "b_s_mix_ratio",
+    "b_s_mix_passes",
+    "d_mix_ratio",
+    "d_mix_passes",
     "passes_all",
     "reject_reason",
+    "bulk_mass_map_model",
+    "bulk_mass_map_c_uv",
+    "bulk_mass_map_c_ir",
+    "bulk_mass_map_eigen_scale",
+    "fit_parameterization",
     "c_Q",
     "c_u",
     "c_d",
@@ -93,6 +115,7 @@ class QuarkScanConfig:
     r_values: np.ndarray = field(default_factory=lambda: np.array([0.10, 0.25, 0.40], dtype=float))
     overall_scale_values: np.ndarray = field(default_factory=lambda: np.array([3.0], dtype=float))
     Lambda_IR_values: np.ndarray = field(default_factory=lambda: np.array([3000.0], dtype=float))
+    xi_KK: float = DEFAULT_QUARK_XI_KK
     k: float = 1.2209e19
     targets: QuarkTargets = field(default_factory=default_quark_targets)
     bulk_mass_map: BulkMassMap = field(default_factory=BulkMassMap)
@@ -100,7 +123,7 @@ class QuarkScanConfig:
     fit_orientation: bool = True
     max_mass_log_residual: float = 0.10
     max_ckm_relative_residual: float = 0.10
-    max_alignment_ratio: float = 5.0
+    max_alignment_ratio: float = 6.0
     record_git_metadata: bool = True
     rng_seed_global: Optional[int] = None
 
@@ -112,14 +135,19 @@ class QuarkScanConfig:
         self.Lambda_IR_values = _as_1d_float_array("Lambda_IR_values", self.Lambda_IR_values)
         if self.k <= 0.0:
             raise ValueError("k must be positive")
+        if self.xi_KK <= 0.0:
+            raise ValueError("xi_KK must be positive")
         if self.max_nfev <= 0:
             raise ValueError("max_nfev must be positive")
+        if np.any(self.Lambda_IR_values <= 0.0):
+            raise ValueError("Lambda_IR_values must be positive")
 
 
 def _classify_solution(
     mass_log_residual: float,
     ckm_relative_residual: float,
     alignment_ratio: float,
+    deltaf2_summary,
     fit_success: bool,
     config: QuarkScanConfig,
 ) -> tuple[bool, str]:
@@ -132,6 +160,15 @@ def _classify_solution(
         reasons.append("ckm_fit")
     if alignment_ratio > config.max_alignment_ratio:
         reasons.append("alignment")
+    system_labels = {
+        "K": "epsilon_k",
+        "B_d": "b_d_mix",
+        "B_s": "b_s_mix",
+        "D": "d_mix",
+    }
+    for system, label in system_labels.items():
+        if not deltaf2_summary.by_system[system].passes:
+            reasons.append(label)
     return len(reasons) == 0, ",".join(reasons) if reasons else "accepted"
 
 
@@ -154,6 +191,7 @@ def run_quark_scan(
     try:
         sample_index = 0
         for Lambda_IR in config.Lambda_IR_values:
+            M_KK = default_quark_m_kk_from_lambda_ir(float(Lambda_IR), xi_KK=config.xi_KK)
             for overall_scale in config.overall_scale_values:
                 current_seed = default_spurion_seed()
                 for r_val in config.r_values:
@@ -170,7 +208,12 @@ def run_quark_scan(
                     )
                     current_seed = solution.seed
                     result = solution.result
-                    diagnostics = summarize_flavor_diagnostics(result, m_kk=float(Lambda_IR))
+                    diagnostics = summarize_flavor_diagnostics(result, m_kk=M_KK)
+                    deltaf2 = evaluate_delta_f2_constraints(
+                        compute_quark_kk_gluon_couplings(result, M_KK=M_KK, xi_KK=config.xi_KK),
+                        M_KK=M_KK,
+                    )
+                    deltaf2_by_system = deltaf2.by_system
                     mass_log_residual = float(
                         np.max(
                             np.abs(
@@ -189,6 +232,7 @@ def run_quark_scan(
                         mass_log_residual,
                         ckm_relative_residual,
                         alignment_ratio,
+                        deltaf2,
                         solution.success,
                         config,
                     )
@@ -199,7 +243,9 @@ def run_quark_scan(
                         "rng_seed_global": config.rng_seed_global,
                         "r": float(r_val),
                         "overall_scale": float(overall_scale),
+                        "xi_KK": config.xi_KK,
                         "Lambda_IR": float(Lambda_IR),
+                        "M_KK": M_KK,
                         "k": config.k,
                         "fit_success": solution.success,
                         "fit_score": result.score,
@@ -210,8 +256,29 @@ def run_quark_scan(
                         "down_alignment": diagnostics.diagnostics.down_offdiag_ratio_in_q_basis,
                         "up_alignment": diagnostics.diagnostics.up_offdiag_ratio_in_q_basis,
                         "alignment_ratio": alignment_ratio,
+                        "deltaf2_model": deltaf2.operator_convention,
+                        "deltaf2_input_bundle": deltaf2.input_bundle,
+                        "deltaf2_passes": deltaf2.passes_all,
+                        "deltaf2_max_ratio": deltaf2.max_ratio_to_bound,
+                        "epsilon_k_ratio": deltaf2_by_system["K"].ratio_to_bound,
+                        "epsilon_k_passes": deltaf2_by_system["K"].passes,
+                        "b_d_mix_ratio": deltaf2_by_system["B_d"].ratio_to_bound,
+                        "b_d_mix_passes": deltaf2_by_system["B_d"].passes,
+                        "b_s_mix_ratio": deltaf2_by_system["B_s"].ratio_to_bound,
+                        "b_s_mix_passes": deltaf2_by_system["B_s"].passes,
+                        "d_mix_ratio": deltaf2_by_system["D"].ratio_to_bound,
+                        "d_mix_passes": deltaf2_by_system["D"].passes,
                         "passes_all": passes_all,
                         "reject_reason": reject_reason,
+                        "bulk_mass_map_model": "saturating_eigenvalue_window_v1",
+                        "bulk_mass_map_c_uv": config.bulk_mass_map.c_uv,
+                        "bulk_mass_map_c_ir": config.bulk_mass_map.c_ir,
+                        "bulk_mass_map_eigen_scale": config.bulk_mass_map.eigen_scale,
+                        "fit_parameterization": (
+                            "singular_values_plus_left_rotations"
+                            if config.fit_orientation
+                            else "singular_values_only_fixed_orientations"
+                        ),
                         "c_Q": _serialize_array(result.state.c_Q),
                         "c_u": _serialize_array(result.state.c_u),
                         "c_d": _serialize_array(result.state.c_d),

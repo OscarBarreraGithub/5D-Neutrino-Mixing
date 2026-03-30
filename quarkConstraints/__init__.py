@@ -9,6 +9,18 @@ from .benchmarks import (
     default_spurion_seed,
     rough_sm_targets,
 )
+from .couplings import QuarkMassBasisCouplings, compute_quark_kk_gluon_couplings
+from .deltaf2 import (
+    DELTA_F2_INPUT_BUNDLE,
+    DELTA_F2_OPERATOR_CONVENTION,
+    DeltaF2ConstraintSummary,
+    DeltaF2Input,
+    DeltaF2ObservableSummary,
+    DeltaF2WilsonSet,
+    compute_delta_f2_wilsons,
+    default_delta_f2_inputs,
+    evaluate_delta_f2_constraints,
+)
 from .fit import (
     QuarkFitResult,
     QuarkFitSeed,
@@ -38,17 +50,31 @@ from .proxies import (
     summarize_flavor_diagnostics,
 )
 from .scan import QuarkScanConfig, run_quark_scan
+from .scales import (
+    DEFAULT_QUARK_TARGET_SCALE_GEV,
+    DEFAULT_QUARK_XI_KK,
+    default_quark_m_kk_from_lambda_ir,
+)
 from .validation import benchmark_fit_summary, benchmark_plot_data, benchmark_solution, r_sweep_plot_data
 
 __all__ = [
     "AlignmentDiagnostics",
     "BulkMassMap",
+    "DELTA_F2_INPUT_BUNDLE",
+    "DELTA_F2_OPERATOR_CONVENTION",
+    "DEFAULT_QUARK_TARGET_SCALE_GEV",
+    "DEFAULT_QUARK_XI_KK",
+    "DeltaF2ConstraintSummary",
+    "DeltaF2Input",
+    "DeltaF2ObservableSummary",
+    "DeltaF2WilsonSet",
     "ProxySummary",
     "QuarkBenchmark",
     "QuarkBulkState",
     "QuarkFitResult",
     "QuarkFitSeed",
     "QuarkFitSolution",
+    "QuarkMassBasisCouplings",
     "QuarkScanConfig",
     "QuarkSpurionPoint",
     "QuarkTargets",
@@ -63,12 +89,17 @@ __all__ = [
     "ckm_like_unitary",
     "ckm_observables",
     "compute_alignment_diagnostics",
+    "compute_delta_f2_wilsons",
+    "compute_quark_kk_gluon_couplings",
     "compute_proxy_summary",
     "default_quark_benchmark",
+    "default_delta_f2_inputs",
+    "default_quark_m_kk_from_lambda_ir",
     "default_quark_targets",
     "default_spurion_seed",
     "derive_bulk_state",
     "evaluate_quark_fit",
+    "evaluate_delta_f2_constraints",
     "fit_quark_sector",
     "jarlskog_invariant",
     "r_sweep_plot_data",

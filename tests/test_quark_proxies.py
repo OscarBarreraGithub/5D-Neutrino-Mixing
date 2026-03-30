@@ -25,6 +25,16 @@ def test_proxy_summary_is_positive_and_down_sector_is_more_aligned():
     assert ratio < 5.0
 
 
+def test_proxy_summary_respects_explicit_mkk_override():
+    result = fit_quark_sector(default_quark_targets(), overall_scale=3.0, max_nfev=120).result
+    default_summary = summarize_flavor_diagnostics(result)
+    overridden = summarize_flavor_diagnostics(result, m_kk=6000.0)
+
+    assert np.isclose(default_summary.m_kk, result.point.Lambda_IR)
+    assert np.isclose(overridden.m_kk, 6000.0)
+    assert np.isclose(overridden.h_rs_proxy / default_summary.h_rs_proxy, 0.25)
+
+
 def test_r_sweep_proxy_summary_shows_down_sector_suppression_for_small_r():
     """The down-sector proxy and relative alignment pressure should shrink as r decreases."""
     sweep = sweep_r_proxy_summary([0.05, 0.1, 0.25, 0.4, 1.0])

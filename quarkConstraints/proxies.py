@@ -10,6 +10,7 @@ import numpy as np
 from .benchmarks import benchmark_spurion_input, default_quark_targets, default_spurion_seed
 from .fit import QuarkFitResult, fit_quark_sector
 from .model import QuarkBulkState, QuarkSpurionPoint, derive_bulk_state
+from .scales import DEFAULT_QUARK_XI_KK, default_quark_m_kk_from_lambda_ir
 
 
 @dataclass(frozen=True)
@@ -28,6 +29,7 @@ class ProxySummary:
 
     h_rs_proxy: float
     f_q3: float
+    m_kk: float
     q_overlap_hierarchy: np.ndarray
     r_value: float
     diagnostics: AlignmentDiagnostics
@@ -75,6 +77,7 @@ def compute_proxy_summary(
     fit_result: QuarkFitResult,
     *,
     m_kk: float | None = None,
+    xi_KK: float = DEFAULT_QUARK_XI_KK,
 ) -> ProxySummary:
     """Compute the paper-inspired down-sector proxy summary.
 
@@ -85,7 +88,11 @@ def compute_proxy_summary(
     sector dependent in the broader repo conventions.
     """
     state = fit_result.bulk_state
-    kk_mass = float(m_kk if m_kk is not None else state.point.Lambda_IR)
+    kk_mass = float(
+        m_kk
+        if m_kk is not None
+        else default_quark_m_kk_from_lambda_ir(state.point.Lambda_IR, xi_KK=xi_KK)
+    )
     f_q3 = float(np.max(state.F_Q))
     q_overlap_hierarchy = np.asarray(state.F_Q / max(f_q3, 1e-30), dtype=float)
     h_rs_proxy = 0.5 * (3000.0 / kk_mass) ** 2 * (f_q3 / 0.3) ** 4
@@ -93,6 +100,7 @@ def compute_proxy_summary(
     return ProxySummary(
         h_rs_proxy=float(h_rs_proxy),
         f_q3=f_q3,
+        m_kk=kk_mass,
         q_overlap_hierarchy=q_overlap_hierarchy,
         r_value=float(state.point.r),
         diagnostics=diagnostics,
@@ -103,9 +111,10 @@ def summarize_flavor_diagnostics(
     fit_result: QuarkFitResult,
     *,
     m_kk: float | None = None,
+    xi_KK: float = DEFAULT_QUARK_XI_KK,
 ) -> ProxySummary:
     """Backward-compatible alias used by scripts and validation helpers."""
-    return compute_proxy_summary(fit_result, m_kk=m_kk)
+    return compute_proxy_summary(fit_result, m_kk=m_kk, xi_KK=xi_KK)
 
 
 def alignment_diagnostics(fit_result: QuarkFitResult) -> AlignmentDiagnostics:
@@ -113,18 +122,24 @@ def alignment_diagnostics(fit_result: QuarkFitResult) -> AlignmentDiagnostics:
     return compute_alignment_diagnostics(fit_result.point, bulk_state=fit_result.bulk_state)
 
 
-def h_rs_proxy(fit_result: QuarkFitResult, *, m_kk: float | None = None) -> float:
+def h_rs_proxy(
+    fit_result: QuarkFitResult,
+    *,
+    m_kk: float | None = None,
+    xi_KK: float = DEFAULT_QUARK_XI_KK,
+) -> float:
     """Compatibility wrapper returning the paper-style proxy value only."""
-    return compute_proxy_summary(fit_result, m_kk=m_kk).h_rs_proxy
+    return compute_proxy_summary(fit_result, m_kk=m_kk, xi_KK=xi_KK).h_rs_proxy
 
 
 def suppression_summary(
     fit_result: QuarkFitResult,
     *,
     m_kk: float | None = None,
+    xi_KK: float = DEFAULT_QUARK_XI_KK,
 ) -> dict[str, float]:
     """Compatibility wrapper returning a flat summary dict."""
-    summary = compute_proxy_summary(fit_result, m_kk=m_kk)
+    summary = compute_proxy_summary(fit_result, m_kk=m_kk, xi_KK=xi_KK)
     return {
         "h_rs_proxy": float(summary.h_rs_proxy),
         "down_alignment": float(summary.diagnostics.down_offdiag_ratio_in_q_basis),
@@ -133,7 +148,8 @@ def suppression_summary(
             summary.diagnostics.down_offdiag_ratio_in_q_basis
             / max(summary.diagnostics.up_offdiag_ratio_in_q_basis, 1e-30)
         ),
-        "f_q_hierarchy": float(summary.q_overlap_hierarchy[-1]),
+        "f_q_hierarchy": float(np.min(summary.q_overlap_hierarchy)),
+        "M_KK": float(summary.m_kk),
         "r": float(summary.r_value),
     }
 
@@ -143,6 +159,7 @@ def sweep_r_proxy_summary(
     *,
     Lambda_IR: float = 3000.0,
     refit: bool = True,
+    xi_KK: float = DEFAULT_QUARK_XI_KK,
 ) -> list[ProxySummary]:
     """Evaluate the benchmark while varying the down-sector protection dial."""
     targets = default_quark_targets()
@@ -170,7 +187,7 @@ def sweep_r_proxy_summary(
                 max_nfev=1,
                 fit_orientation=False,
             ).result
-        summaries.append(compute_proxy_summary(fit))
+        summaries.append(compute_proxy_summary(fit, xi_KK=xi_KK))
     return summaries
 
 

@@ -2,7 +2,8 @@
 
 import numpy as np
 
-from quarkConstraints import default_quark_benchmark, rough_sm_targets
+from quarkConstraints.benchmarks import default_quark_targets, default_quark_benchmark, rough_sm_targets
+from quarkConstraints.scales import DEFAULT_QUARK_TARGET_SCALE_GEV, default_quark_m_kk_from_lambda_ir
 
 
 def test_rough_sm_targets_have_expected_shapes():
@@ -11,6 +12,19 @@ def test_rough_sm_targets_have_expected_shapes():
     assert targets.up_masses.shape == (3,)
     assert targets.down_masses.shape == (3,)
     assert targets.ckm.shape == (3, 3)
+    assert targets.label == "rough-sm-like-compatibility"
+
+
+def test_default_quark_targets_use_fixed_scale_label():
+    targets = default_quark_targets()
+
+    assert targets.label == "sm-like-mu-3tev-v1"
+    assert np.isclose(DEFAULT_QUARK_TARGET_SCALE_GEV, 3000.0)
+
+
+def test_default_quark_m_kk_from_lambda_ir_respects_explicit_convention():
+    assert np.isclose(default_quark_m_kk_from_lambda_ir(3000.0), 3000.0)
+    assert np.isclose(default_quark_m_kk_from_lambda_ir(3000.0, xi_KK=2.5), 7500.0)
 
 
 def test_default_benchmark_has_expected_metadata():
@@ -19,3 +33,5 @@ def test_default_benchmark_has_expected_metadata():
     assert bench.name == "repo-local-mfv-benchmark"
     assert bench.point.metadata["preferred_r_window"] == (0.1, 0.4)
     assert np.isclose(bench.point.metadata["overall_y"], 2.8)
+    assert np.isclose(bench.point.metadata["default_target_scale_GeV"], 3000.0)
+    assert bench.point.metadata["default_target_label"] == "sm-like-mu-3tev-v1"

@@ -73,12 +73,19 @@ The quark-sector MFV scaffold is now present in this repo:
 
 - MFV-native spurion inputs in `model.py`
 - exact quark mass-matrix and CKM fitting in `fit.py`
+- explicit quark KK-scale conventions in `scales.py`
+- mass-basis KK-gluon couplings in `couplings.py`
+- a repo-owned `Delta F = 2` exclusion slice in `deltaf2.py`
 - deterministic benchmarks and validation helpers
 - lightweight proxy and alignment diagnostics
 - a scan wrapper and benchmark script
 
 This is usable as a repo-local exploratory implementation, not yet as a
 paper-level reproduction.
+
+The default target table is now a repo-owned fixed-scale bundle at
+`mu = 3 TeV` (`default_quark_targets()`), while `rough_sm_targets()` remains
+as a compatibility helper for the earlier exploratory naming.
 
 ## Current caveats
 
@@ -87,10 +94,11 @@ paper-level reproduction.
   faithful derivation of the paper's benchmark relations
 - the default benchmark is a deterministic regression point, not a literal
   0710.1869 benchmark reconstruction
-- the rough SM-like target set is intended for exploratory fitting only
 - the current fitter does not explore the full spurion parameterization:
   it optimizes singular values and left rotations, while right rotations are
   inherited from the seed/template
+- the `Delta F = 2` layer is a fixed-convention v1 exclusion slice with a
+  repo-owned input bundle, not a full EFT/RG evolution package
 - the `h_RS`-style quantity is still a proxy and uses the repo convention
   `M_KK ≡ Lambda_IR` by default for bookkeeping and internal comparisons
 - that `M_KK ≡ Lambda_IR` choice is a convention, not a literal physical

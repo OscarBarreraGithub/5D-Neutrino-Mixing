@@ -25,6 +25,7 @@ def test_benchmark_fit_summary_passes_for_default_solution():
     assert summary.passes_ckm
     assert summary.passes_proxy
     assert summary.passes_alignment
+    assert summary.passes_deltaf2
     assert summary.passes_all
 
 
@@ -40,9 +41,15 @@ def test_benchmark_plot_data_has_expected_shapes():
     assert data["c_u"].shape == (3,)
     assert data["c_d"].shape == (3,)
     assert data["F_Q"].shape == (3,)
+    assert data["M_KK"].shape == (1,)
     assert data["mass_residual_norm"].shape == (1,)
     assert data["ckm_residual_norm"].shape == (1,)
     assert data["alignment_ratio"].shape == (1,)
+    assert data["deltaf2_max_ratio"].shape == (1,)
+    assert data["epsilon_k_ratio"].shape == (1,)
+    assert data["b_d_ratio"].shape == (1,)
+    assert data["b_s_ratio"].shape == (1,)
+    assert data["d_ratio"].shape == (1,)
 
 
 def test_r_sweep_plot_data_shows_expected_suppression_trend():
@@ -54,4 +61,8 @@ def test_r_sweep_plot_data_shows_expected_suppression_trend():
     assert data["c_u"].shape == (5, 3)
     assert data["c_d"].shape == (5, 3)
     assert data["alignment_ratio"].shape == (5,)
+    assert data["epsilon_k_ratio"].shape == (5,)
+    assert data["b_d_ratio"].shape == (5,)
+    assert data["b_s_ratio"].shape == (5,)
+    assert data["d_ratio"].shape == (5,)
     assert r_sweep_trends_ok(data)

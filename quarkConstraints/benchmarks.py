@@ -13,6 +13,22 @@ from .model import (
     build_mfv_point_from_singular_values,
     ckm_like_unitary,
 )
+from .scales import DEFAULT_QUARK_TARGET_SCALE_GEV
+
+
+_TARGET_CKM = ckm_like_unitary(
+    RotationParameters(theta12=0.2274, theta13=0.00368, theta23=0.0415, delta=1.196)
+)
+# Repo-owned fixed-scale target bundle for the v1 exclusion slice. The values
+# are kept deliberately stable so the fit/scan layer remains deterministic while
+# the observable stack is added on top.
+_FIXED_SCALE_TARGETS_MU_3TEV_V1 = {
+    "scale_GeV": DEFAULT_QUARK_TARGET_SCALE_GEV,
+    "provenance": "repo-owned fixed-scale quark target bundle for the v1 exclusion slice",
+    "up_masses": np.array([0.0013, 0.62, 172.0], dtype=float),
+    "down_masses": np.array([0.0028, 0.057, 2.86], dtype=float),
+    "ckm": _TARGET_CKM,
+}
 
 
 def _as_real_vector(name: str, values: np.ndarray | list[float] | tuple[float, ...]) -> np.ndarray:
@@ -79,21 +95,24 @@ class EvaluatedBenchmark:
 
 
 def default_quark_targets() -> QuarkTargets:
-    """Return a rough SM-like target set for exploratory fits."""
-    ckm = ckm_like_unitary(
-        RotationParameters(theta12=0.2274, theta13=0.00368, theta23=0.0415, delta=1.196)
-    )
+    """Return the default fixed-scale quark target table at ``mu = 3 TeV``."""
     return QuarkTargets(
-        up_masses=np.array([0.0013, 0.62, 172.0], dtype=float),
-        down_masses=np.array([0.0028, 0.057, 2.86], dtype=float),
-        ckm=ckm,
-        label="rough-sm-like",
+        up_masses=_FIXED_SCALE_TARGETS_MU_3TEV_V1["up_masses"],
+        down_masses=_FIXED_SCALE_TARGETS_MU_3TEV_V1["down_masses"],
+        ckm=_FIXED_SCALE_TARGETS_MU_3TEV_V1["ckm"],
+        label="sm-like-mu-3tev-v1",
     )
 
 
 def rough_sm_targets() -> QuarkTargets:
-    """Backward-compatible alias for the default exploratory targets."""
-    return default_quark_targets()
+    """Compatibility helper for the old rough-SM-like target nomenclature."""
+    targets = default_quark_targets()
+    return QuarkTargets(
+        up_masses=targets.up_masses,
+        down_masses=targets.down_masses,
+        ckm=targets.ckm,
+        label="rough-sm-like-compatibility",
+    )
 
 
 def default_spurion_seed() -> SpurionSeed:
@@ -128,7 +147,13 @@ def benchmark_spurion_input(
         down_right=seed.down_right,
         Lambda_IR=Lambda_IR,
         label="repo-local-mfv-benchmark",
-        metadata={"preferred_r_window": (0.1, 0.4), "overall_y": seed.overall_scale},
+        metadata={
+            "preferred_r_window": (0.1, 0.4),
+            "overall_y": seed.overall_scale,
+            "default_target_scale_GeV": DEFAULT_QUARK_TARGET_SCALE_GEV,
+            "default_target_label": default_quark_targets().label,
+            "kk_scale_convention": "repo-default-xi_KK=1.0-so-M_KK-equals-Lambda_IR",
+        },
     )
 
 
@@ -148,7 +173,8 @@ def default_quark_benchmark() -> QuarkBenchmark:
         targets=targets,
         notes=(
             "Deterministic repo-local regression point. "
-            "Use default_quark_targets() when fitting to rough SM-like data."
+            "Use default_quark_targets() for the repo-owned fixed-scale "
+            "mu = 3 TeV target table."
         ),
     )
 
@@ -166,7 +192,7 @@ def solve_default_benchmark(
     overall_scale: float | None = None,
     max_nfev: int = 150,
 ) -> QuarkFitSolution:
-    """Solve the rough SM-like fit starting from the deterministic seed."""
+    """Solve the fixed-scale fit starting from the deterministic seed."""
     seed = default_spurion_seed()
     scale = seed.overall_scale if overall_scale is None else overall_scale
     return fit_quark_sector(
