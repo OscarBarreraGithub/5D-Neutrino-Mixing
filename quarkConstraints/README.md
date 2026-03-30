@@ -82,12 +82,20 @@ paper-level reproduction.
 
 ## Current caveats
 
-- the bulk-mass eigenvalue to `c` map is still a repo-local surrogate
+- the bulk-mass eigenvalue to `c` map is still a repo-local surrogate:
+  `BulkMassMap` is an MFV-native numerical device, not yet a uniquely
+  faithful derivation of the paper's benchmark relations
 - the default benchmark is a deterministic regression point, not a literal
   0710.1869 benchmark reconstruction
 - the rough SM-like target set is intended for exploratory fitting only
-- the `h_RS`-style quantity is still a proxy and currently uses the repo's IR
-  scale conventions rather than a fully sector-specific physical KK-mass map
+- the current fitter does not explore the full spurion parameterization:
+  it optimizes singular values and left rotations, while right rotations are
+  inherited from the seed/template
+- the `h_RS`-style quantity is still a proxy and uses the repo convention
+  `M_KK ≡ Lambda_IR` by default for bookkeeping and internal comparisons
+- that `M_KK ≡ Lambda_IR` choice is a convention, not a literal physical
+  identification of the first KK mass; physical first-KK masses remain sector
+  dependent and should be supplied explicitly for quantitative comparisons
 
 See [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) for the converged
 minimal implementation proposal, and

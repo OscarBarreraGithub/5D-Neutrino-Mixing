@@ -79,6 +79,10 @@ def compute_proxy_summary(
     """Compute the paper-inspired down-sector proxy summary.
 
     The `h_RS` quantity here is a proxy, not a full observable prediction.
+    When `m_kk` is omitted, this helper follows the repo convention
+    `M_KK ≡ Lambda_IR` for internal comparisons. That is a bookkeeping choice,
+    not a literal identification of the physical first KK mass, which remains
+    sector dependent in the broader repo conventions.
     """
     state = fit_result.bulk_state
     kk_mass = float(m_kk if m_kk is not None else state.point.Lambda_IR)

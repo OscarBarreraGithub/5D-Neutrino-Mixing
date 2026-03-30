@@ -404,7 +404,13 @@ def fit_quark_sector(
     max_nfev: int = 200,
     fit_orientation: bool = True,
 ) -> QuarkFitSolution:
-    """Fit a compact spurion seed to target masses and CKM data."""
+    """Fit a compact spurion seed to target masses and CKM data.
+
+    The current parameterization optimizes the spurion singular values and the
+    left-rotation angles/phases. Right rotations are carried through from the
+    input seed/template, so this is a benchmark-oriented restricted fit rather
+    than a full exploration of the entire spurion parameter space.
+    """
     if seed is None:
         from .benchmarks import default_spurion_seed
 
