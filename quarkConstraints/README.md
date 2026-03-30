@@ -21,10 +21,14 @@ The implementation should be built in stages, with strict scope control.
 
 Implement only the model layer that is directly supported by the paper:
 
+- an MFV-native quark input space built from anarchic spurions `Y_u`, `Y_d`,
+  their relative flavor orientation, the overall Yukawa scale, and `r`
 - `C_u,d ~ Y_u,d^\dagger Y_u,d`
 - `C_Q ~ r Y_u Y_u^\dagger + Y_d Y_d^\dagger`
-- quark zero-mode overlaps `F_Q`, `F_u`, `F_d`
-- quark masses and CKM fit residuals
+- derived bulk-mass eigenvalues and quark zero-mode overlaps `F_Q`, `F_u`,
+  `F_d`
+- quark masses and CKM fit residuals from diagonalizing the full mass matrices,
+  not from overlap ratios alone
 - reproduction of the paper’s benchmark structure and favored `r ~ 0.1-0.4`
 
 This phase answers whether the repo’s warp-profile machinery can represent the
@@ -36,9 +40,10 @@ Add fast diagnostics that follow the paper’s logic but stop short of full
 hadronic phenomenology:
 
 - KK-gluon coupling matrices in the quark mass basis
-- `h_RS`-style suppression proxies
+- `h_RS`-style suppression proxies, explicitly treated as proxies
 - left-left and left-right `Delta F = 2` proxy summaries
-- down-sector versus up-sector misalignment diagnostics
+- matrix-level alignment and down-sector versus up-sector misalignment
+  diagnostics
 
 This phase answers whether the model really shifts the dangerous flavor tension
 out of the down sector, as claimed.
