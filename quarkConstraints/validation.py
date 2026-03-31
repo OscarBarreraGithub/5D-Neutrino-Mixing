@@ -184,7 +184,8 @@ def benchmark_plot_data(
         ),
         "ckm_residual_norm": np.array([np.linalg.norm(result.ckm_residuals)], dtype=float),
         "benchmark_proxy_limit": np.array([DEFAULT_QUARK_BENCHMARK_H_RS_MAX], dtype=float),
-        "proxy_limit": np.array([DEFAULT_QUARK_PAPER_H_RS_MAX], dtype=float),
+        "proxy_limit": np.array([DEFAULT_QUARK_BENCHMARK_H_RS_MAX], dtype=float),
+        "paper_proxy_target": np.array([DEFAULT_QUARK_PAPER_H_RS_MAX], dtype=float),
         "h_rs_proxy": np.array([diagnostics.h_rs_proxy], dtype=float),
         "down_misalignment": np.array(
             [diagnostics.diagnostics.down_misalignment_in_q_basis],

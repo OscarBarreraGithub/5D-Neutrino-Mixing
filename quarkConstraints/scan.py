@@ -16,7 +16,11 @@ from .deltaf2 import evaluate_delta_f2_constraints
 from .fit import fit_quark_sector
 from .model import BulkMassMap
 from .proxies import summarize_flavor_diagnostics
-from .scales import DEFAULT_QUARK_XI_KK, default_quark_m_kk_from_lambda_ir
+from .scales import (
+    DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
+    DEFAULT_QUARK_XI_KK,
+    default_quark_m_kk_from_lambda_ir,
+)
 
 
 CSV_COLUMNS = [
@@ -123,6 +127,7 @@ class QuarkScanConfig:
     fit_orientation: bool = True
     max_mass_log_residual: float = 0.10
     max_ckm_relative_residual: float = 0.10
+    max_proxy_h_rs: float = DEFAULT_QUARK_BENCHMARK_H_RS_MAX
     max_alignment_ratio: float = 6.0
     record_git_metadata: bool = True
     rng_seed_global: Optional[int] = None
@@ -139,13 +144,21 @@ class QuarkScanConfig:
             raise ValueError("xi_KK must be positive")
         if self.max_nfev <= 0:
             raise ValueError("max_nfev must be positive")
+        if self.max_proxy_h_rs <= 0.0:
+            raise ValueError("max_proxy_h_rs must be positive")
         if np.any(self.Lambda_IR_values <= 0.0):
             raise ValueError("Lambda_IR_values must be positive")
+        if self.rng_seed_global is not None:
+            raise ValueError(
+                "rng_seed_global is not yet supported for stochastic seeding; "
+                "leave it unset until randomized scan initialization is implemented"
+            )
 
 
 def _classify_solution(
     mass_log_residual: float,
     ckm_relative_residual: float,
+    proxy_h_rs: float,
     alignment_ratio: float,
     deltaf2_summary,
     fit_success: bool,
@@ -158,6 +171,8 @@ def _classify_solution(
         reasons.append("mass_fit")
     if ckm_relative_residual > config.max_ckm_relative_residual:
         reasons.append("ckm_fit")
+    if proxy_h_rs > config.max_proxy_h_rs:
+        reasons.append("proxy_h_rs")
     if alignment_ratio > config.max_alignment_ratio:
         reasons.append("alignment")
     system_labels = {
@@ -231,6 +246,7 @@ def run_quark_scan(
                     passes_all, reject_reason = _classify_solution(
                         mass_log_residual,
                         ckm_relative_residual,
+                        diagnostics.h_rs_proxy,
                         alignment_ratio,
                         deltaf2,
                         solution.success,

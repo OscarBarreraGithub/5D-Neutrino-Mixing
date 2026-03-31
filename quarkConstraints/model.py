@@ -80,6 +80,8 @@ class QuarkSpurionPoint:
         object.__setattr__(self, "Y_d", _as_complex_matrix("Y_d", self.Y_d))
         if not np.isfinite(self.r):
             raise ValueError("r must be finite")
+        if self.r < 0.0:
+            raise ValueError("r must be non-negative in the current MFV implementation")
         if self.Lambda_IR <= 0.0:
             raise ValueError("Lambda_IR must be positive")
         if self.k <= 0.0:

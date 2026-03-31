@@ -58,7 +58,7 @@ def test_explicit_mkk_override_changes_scale_and_running():
 
     assert np.isclose(default_couplings.M_KK, result.point.Lambda_IR)
     assert np.isclose(overridden.M_KK, 6000.0)
-    assert np.isclose(overridden.xi_KK, 7.0)
+    assert np.isclose(overridden.xi_KK, 2.0)
     assert overridden.alpha_s < default_couplings.alpha_s
     assert overridden.g_s < default_couplings.g_s
 

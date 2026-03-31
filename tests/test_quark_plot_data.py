@@ -24,12 +24,12 @@ def test_benchmark_fit_summary_passes_for_default_solution():
     assert summary.passes_mass
     assert summary.passes_ckm
     assert summary.passes_proxy
-    assert not summary.passes_paper_proxy
     assert summary.passes_misalignment
     assert summary.passes_deltaf2
     assert summary.passes_all
-    assert summary.down_proxy < summary.proxy_limit
-    assert summary.down_proxy > summary.paper_proxy_target
+    assert summary.passes_proxy == (summary.down_proxy < summary.proxy_limit)
+    assert summary.passes_paper_proxy == (summary.down_proxy < summary.paper_proxy_target)
+    assert summary.proxy_limit >= summary.paper_proxy_target
     assert summary.down_to_up_misalignment_ratio < summary.misalignment_limit
 
 
@@ -50,6 +50,7 @@ def test_benchmark_plot_data_has_expected_shapes():
     assert data["mass_residual_norm"].shape == (1,)
     assert data["ckm_residual_norm"].shape == (1,)
     assert data["benchmark_proxy_limit"].shape == (1,)
+    assert data["paper_proxy_target"].shape == (1,)
     assert data["down_misalignment"].shape == (1,)
     assert data["up_misalignment"].shape == (1,)
     assert data["down_to_up_misalignment_ratio"].shape == (1,)

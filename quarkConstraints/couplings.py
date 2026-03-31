@@ -123,6 +123,11 @@ def compute_quark_kk_gluon_couplings(
     )
     if resolved_mkk <= 0.0:
         raise ValueError("M_KK must be positive")
+    resolved_xi_kk = (
+        float(resolved_mkk / state.point.Lambda_IR)
+        if M_KK is not None
+        else float(xi_KK)
+    )
 
     running_alpha_s = float(alpha_s(resolved_mkk, precision="high"))
     g_s = float(sqrt(4.0 * pi * running_alpha_s))
@@ -134,7 +139,7 @@ def compute_quark_kk_gluon_couplings(
 
     return QuarkMassBasisCouplings(
         M_KK=resolved_mkk,
-        xi_KK=float(xi_KK),
+        xi_KK=resolved_xi_kk,
         alpha_s=running_alpha_s,
         g_s=g_s,
         left_overlap=left_overlap,

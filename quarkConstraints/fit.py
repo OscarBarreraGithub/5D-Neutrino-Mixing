@@ -246,7 +246,7 @@ def fit_residuals(
     ckm_abs_residuals = np.abs(np.abs(ckm) - targets.abs_ckm)
     ckm_obs_residuals = (
         ckm_observables(ckm) - targets.ckm_observables
-    ) / np.maximum(targets.ckm_observables, 1e-8)
+    ) / np.maximum(np.abs(targets.ckm_observables), 1e-8)
 
     total_score = float(
         np.sqrt(

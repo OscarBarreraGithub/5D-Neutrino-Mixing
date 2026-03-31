@@ -4,11 +4,12 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from quarkConstraints.benchmarks import benchmark_spurion_input
-from quarkConstraints.model import derive_bulk_state
+from quarkConstraints.model import QuarkSpurionPoint, derive_bulk_state
 
 
 def test_bulk_state_matrices_are_hermitian_and_overlaps_are_finite():
@@ -40,3 +41,10 @@ def test_bulk_basis_rotations_diagonalize_spurion_invariants():
     assert np.allclose(diag_q, np.diag(state.eig_Q), atol=1e-10)
     assert np.allclose(diag_u, np.diag(state.eig_u), atol=1e-10)
     assert np.allclose(diag_d, np.diag(state.eig_d), atol=1e-10)
+
+
+def test_negative_r_is_rejected_at_model_construction():
+    point = benchmark_spurion_input()
+
+    with pytest.raises(ValueError, match="non-negative"):
+        QuarkSpurionPoint(Y_u=point.Y_u, Y_d=point.Y_d, r=-0.1)

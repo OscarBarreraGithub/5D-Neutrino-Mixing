@@ -8,7 +8,7 @@ from typing import Sequence
 import numpy as np
 
 from .benchmarks import benchmark_spurion_input, default_quark_targets, default_spurion_seed
-from .fit import QuarkFitResult, fit_quark_sector
+from .fit import QuarkFitResult, evaluate_quark_fit, fit_quark_sector
 from .model import QuarkBulkState, QuarkSpurionPoint, derive_bulk_state
 from .scales import DEFAULT_QUARK_XI_KK, default_quark_m_kk_from_lambda_ir
 
@@ -158,28 +158,36 @@ def suppression_summary(
     *,
     m_kk: float | None = None,
     xi_KK: float = DEFAULT_QUARK_XI_KK,
+    include_legacy_alignment_aliases: bool = False,
 ) -> dict[str, float]:
     """Compatibility wrapper returning a flat summary dict.
 
-    The legacy ``alignment`` keys are preserved for downstream consumers, but
-    they store misalignment fractions rather than alignment strengths.
+    By default this helper returns only correctly named misalignment quantities.
+    Set ``include_legacy_alignment_aliases=True`` to also emit the old
+    ``alignment`` keys as aliases for those same misalignment fractions.
     """
     summary = compute_proxy_summary(fit_result, m_kk=m_kk, xi_KK=xi_KK)
     down_misalignment = float(summary.diagnostics.down_misalignment_in_q_basis)
     up_misalignment = float(summary.diagnostics.up_misalignment_in_q_basis)
     misalignment_ratio = float(summary.diagnostics.down_to_up_misalignment_ratio)
-    return {
+    out = {
         "h_rs_proxy": float(summary.h_rs_proxy),
         "down_misalignment": down_misalignment,
         "up_misalignment": up_misalignment,
         "down_to_up_misalignment_ratio": misalignment_ratio,
-        "down_alignment": down_misalignment,
-        "up_alignment": up_misalignment,
-        "down_to_up_alignment_ratio": misalignment_ratio,
         "f_q_hierarchy": float(np.min(summary.q_overlap_hierarchy)),
         "M_KK": float(summary.m_kk),
         "r": float(summary.r_value),
     }
+    if include_legacy_alignment_aliases:
+        out.update(
+            {
+                "down_alignment": down_misalignment,
+                "up_alignment": up_misalignment,
+                "down_to_up_alignment_ratio": misalignment_ratio,
+            }
+        )
+    return out
 
 
 def sweep_r_proxy_summary(
@@ -223,16 +231,23 @@ def sweep_r(
     point: QuarkSpurionPoint,
     r_values: Sequence[float],
 ) -> list[dict[str, float]]:
-    """Compatibility wrapper returning flat rows over an r sweep."""
+    """Compatibility wrapper returning flat rows over an r sweep.
+
+    This sweep keeps the supplied spurion matrices fixed and varies only ``r``
+    and the derived bulk-state observables.
+    """
     rows: list[dict[str, float]] = []
     for r_value in np.asarray(r_values, dtype=float):
-        fit = fit_quark_sector(
-            default_quark_targets(),
+        swept_point = QuarkSpurionPoint(
+            Y_u=point.Y_u,
+            Y_d=point.Y_d,
             r=float(r_value),
             Lambda_IR=point.Lambda_IR,
-            seed=default_spurion_seed(),
-            overall_scale=default_spurion_seed().overall_scale,
-            max_nfev=120,
-        ).result
+            k=point.k,
+            v=point.v,
+            label=f"{point.label}-r-{r_value:.6g}",
+            metadata=dict(point.metadata),
+        )
+        fit = evaluate_quark_fit(swept_point)
         rows.append(suppression_summary(fit))
     return rows

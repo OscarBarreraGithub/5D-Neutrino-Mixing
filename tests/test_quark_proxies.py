@@ -7,9 +7,10 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from quarkConstraints.benchmarks import default_quark_targets
+from quarkConstraints.benchmarks import benchmark_spurion_input, default_quark_targets
 from quarkConstraints.fit import fit_quark_sector
-from quarkConstraints.proxies import summarize_flavor_diagnostics, sweep_r_proxy_summary
+from quarkConstraints.model import QuarkSpurionPoint
+from quarkConstraints.proxies import summarize_flavor_diagnostics, suppression_summary, sweep_r, sweep_r_proxy_summary
 
 
 def test_proxy_summary_is_positive_and_down_sector_misalignment_stays_controlled():
@@ -43,3 +44,32 @@ def test_r_sweep_proxy_summary_shows_down_sector_suppression_for_small_r():
 
     assert down_proxy[0] <= down_proxy[-1]
     assert alignment_ratio[0] <= alignment_ratio[-1]
+
+
+def test_suppression_summary_uses_misalignment_keys_by_default():
+    result = fit_quark_sector(default_quark_targets(), overall_scale=3.0, max_nfev=120).result
+    summary = suppression_summary(result)
+
+    assert "down_misalignment" in summary
+    assert "up_misalignment" in summary
+    assert "down_to_up_misalignment_ratio" in summary
+    assert "down_alignment" not in summary
+
+
+def test_sweep_r_tracks_the_supplied_point_rather_than_the_benchmark_seed():
+    point_a = benchmark_spurion_input(r=0.25)
+    point_b = QuarkSpurionPoint(
+        Y_u=1.1 * point_a.Y_u,
+        Y_d=0.9 * point_a.Y_d,
+        r=point_a.r,
+        Lambda_IR=point_a.Lambda_IR,
+        k=point_a.k,
+        v=point_a.v,
+        label="modified-point",
+    )
+    rows_a = sweep_r(point_a, [0.1, 0.3])
+    rows_b = sweep_r(point_b, [0.1, 0.3])
+
+    assert rows_a != rows_b
+    assert rows_a[0]["r"] == 0.1
+    assert rows_b[1]["r"] == 0.3

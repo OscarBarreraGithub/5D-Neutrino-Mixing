@@ -56,3 +56,27 @@ def test_quark_scan_threads_explicit_xi_kk_into_mkk():
 
     assert row["xi_KK"] == 2.0
     assert row["M_KK"] == 6000.0
+
+
+def test_quark_scan_rejects_points_that_fail_the_repo_proxy_gate():
+    config = QuarkScanConfig(
+        r_values=[0.4],
+        overall_scale_values=[3.0],
+        Lambda_IR_values=[3000.0],
+        record_git_metadata=False,
+        max_nfev=100,
+    )
+    row = run_quark_scan(config, progress_every=0)[0]
+
+    assert row["proxy_h_rs"] > config.max_proxy_h_rs
+    assert row["passes_all"] is False
+    assert "proxy_h_rs" in row["reject_reason"]
+
+
+def test_quark_scan_rejects_unimplemented_rng_seed_global():
+    try:
+        QuarkScanConfig(rng_seed_global=123)
+    except ValueError as exc:
+        assert "not yet supported" in str(exc)
+    else:
+        raise AssertionError("rng_seed_global should be rejected until stochastic seeding exists")
