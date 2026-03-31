@@ -67,5 +67,51 @@ The first milestone should be: "can we reproduce the paper’s qualitative claim
 that a small `r` suppresses down-sector flavor violation while preserving CKM
 fit quality?"
 
+## Current status
+
+The quark-sector MFV scaffold is now present in this repo:
+
+- MFV-native spurion inputs in `model.py`
+- exact quark mass-matrix and CKM fitting in `fit.py`
+- explicit quark KK-scale conventions in `scales.py`
+- mass-basis KK-gluon couplings in `couplings.py`
+- a repo-owned `Delta F = 2` exclusion slice in `deltaf2.py`
+- deterministic benchmarks and validation helpers
+- lightweight proxy and quark-basis misalignment diagnostics
+- a scan wrapper and benchmark script
+
+This is usable as a repo-local exploratory implementation, not yet as a
+paper-level reproduction.
+
+The default target table is now a repo-owned fixed-scale bundle at
+`mu = 3 TeV` (`default_quark_targets()`), while `rough_sm_targets()` remains
+as a compatibility helper for the earlier exploratory naming.
+
+## Current caveats
+
+- the bulk-mass eigenvalue to `c` map is still a repo-local surrogate:
+  `BulkMassMap` is an MFV-native numerical device, not yet a uniquely
+  faithful derivation of the paper's benchmark relations
+- the default benchmark is a deterministic regression point, not a literal
+  0710.1869 benchmark reconstruction
+- the current fitter does not explore the full spurion parameterization:
+  it optimizes singular values and left rotations, while right rotations are
+  inherited from the seed/template
+- the `Delta F = 2` layer is a fixed-convention v1 exclusion slice with a
+  repo-owned input bundle, not a full EFT/RG evolution package
+- the low-level helpers still default to the repo bookkeeping convention
+  `M_KK ≡ Lambda_IR`, and the benchmark/validation path now keeps that choice
+  explicit through `DEFAULT_QUARK_BENCHMARK_XI_KK = 1.0` so it can be updated
+  deliberately later
+- the `h_RS`-style quantity is still only a proxy; the validation summary now
+  reports both the current repo bookkeeping gate (`h_RS < 1`) and the stricter
+  paper-scale target (`h_RS <~ 0.3`) instead of conflating them
+- the off-diagonal `q`-basis diagnostics are misalignment fractions: smaller
+  means more aligned. Some legacy helper outputs still use `alignment_*`
+  labels for backward compatibility, but they refer to these misalignment
+  fractions rather than an inverse alignment score
+
 See [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) for the converged
-minimal implementation proposal.
+minimal implementation proposal, and
+[`AGENT_ORCHESTRATION_PLAN.md`](AGENT_ORCHESTRATION_PLAN.md) for the multi-agent
+execution plan.
