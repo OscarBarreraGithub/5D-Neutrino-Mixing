@@ -3,7 +3,14 @@
 import numpy as np
 
 from quarkConstraints.benchmarks import default_quark_targets, default_quark_benchmark, rough_sm_targets
-from quarkConstraints.scales import DEFAULT_QUARK_TARGET_SCALE_GEV, default_quark_m_kk_from_lambda_ir
+from quarkConstraints.scales import (
+    DEFAULT_QUARK_BENCHMARK_XI_KK,
+    DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
+    DEFAULT_QUARK_TARGET_SCALE_GEV,
+    GAUGE_KK_ROOT_NN,
+    DEFAULT_QUARK_XI_KK,
+    default_quark_m_kk_from_lambda_ir,
+)
 
 
 def test_rough_sm_targets_have_expected_shapes():
@@ -25,6 +32,9 @@ def test_default_quark_targets_use_fixed_scale_label():
 def test_default_quark_m_kk_from_lambda_ir_respects_explicit_convention():
     assert np.isclose(default_quark_m_kk_from_lambda_ir(3000.0), 3000.0)
     assert np.isclose(default_quark_m_kk_from_lambda_ir(3000.0, xi_KK=2.5), 7500.0)
+    assert np.isclose(GAUGE_KK_ROOT_NN, 2.448687135269161)
+    assert np.isclose(DEFAULT_QUARK_BENCHMARK_XI_KK, DEFAULT_QUARK_XI_KK)
+    assert np.isclose(DEFAULT_QUARK_BENCHMARK_H_RS_MAX, 1.0)
 
 
 def test_default_benchmark_has_expected_metadata():

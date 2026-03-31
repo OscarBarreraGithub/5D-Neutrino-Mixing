@@ -24,9 +24,13 @@ def test_benchmark_fit_summary_passes_for_default_solution():
     assert summary.passes_mass
     assert summary.passes_ckm
     assert summary.passes_proxy
-    assert summary.passes_alignment
+    assert not summary.passes_paper_proxy
+    assert summary.passes_misalignment
     assert summary.passes_deltaf2
     assert summary.passes_all
+    assert summary.down_proxy < summary.proxy_limit
+    assert summary.down_proxy > summary.paper_proxy_target
+    assert summary.down_to_up_misalignment_ratio < summary.misalignment_limit
 
 
 def test_benchmark_plot_data_has_expected_shapes():
@@ -41,9 +45,14 @@ def test_benchmark_plot_data_has_expected_shapes():
     assert data["c_u"].shape == (3,)
     assert data["c_d"].shape == (3,)
     assert data["F_Q"].shape == (3,)
+    assert data["xi_KK"].shape == (1,)
     assert data["M_KK"].shape == (1,)
     assert data["mass_residual_norm"].shape == (1,)
     assert data["ckm_residual_norm"].shape == (1,)
+    assert data["benchmark_proxy_limit"].shape == (1,)
+    assert data["down_misalignment"].shape == (1,)
+    assert data["up_misalignment"].shape == (1,)
+    assert data["down_to_up_misalignment_ratio"].shape == (1,)
     assert data["alignment_ratio"].shape == (1,)
     assert data["deltaf2_max_ratio"].shape == (1,)
     assert data["epsilon_k_ratio"].shape == (1,)
@@ -60,6 +69,9 @@ def test_r_sweep_plot_data_shows_expected_suppression_trend():
     assert data["c_Q"].shape == (5, 3)
     assert data["c_u"].shape == (5, 3)
     assert data["c_d"].shape == (5, 3)
+    assert data["down_misalignment"].shape == (5,)
+    assert data["up_misalignment"].shape == (5,)
+    assert data["down_to_up_misalignment_ratio"].shape == (5,)
     assert data["alignment_ratio"].shape == (5,)
     assert data["epsilon_k_ratio"].shape == (5,)
     assert data["b_d_ratio"].shape == (5,)

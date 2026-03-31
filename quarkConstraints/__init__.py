@@ -51,8 +51,13 @@ from .proxies import (
 )
 from .scan import QuarkScanConfig, run_quark_scan
 from .scales import (
+    DEFAULT_QUARK_BENCHMARK_XI_KK,
+    DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
+    DEFAULT_QUARK_MAX_MISALIGNMENT_STRESS,
+    DEFAULT_QUARK_PAPER_H_RS_MAX,
     DEFAULT_QUARK_TARGET_SCALE_GEV,
     DEFAULT_QUARK_XI_KK,
+    GAUGE_KK_ROOT_NN,
     default_quark_m_kk_from_lambda_ir,
 )
 from .validation import benchmark_fit_summary, benchmark_plot_data, benchmark_solution, r_sweep_plot_data
@@ -62,6 +67,10 @@ __all__ = [
     "BulkMassMap",
     "DELTA_F2_INPUT_BUNDLE",
     "DELTA_F2_OPERATOR_CONVENTION",
+    "DEFAULT_QUARK_BENCHMARK_XI_KK",
+    "DEFAULT_QUARK_BENCHMARK_H_RS_MAX",
+    "DEFAULT_QUARK_MAX_MISALIGNMENT_STRESS",
+    "DEFAULT_QUARK_PAPER_H_RS_MAX",
     "DEFAULT_QUARK_TARGET_SCALE_GEV",
     "DEFAULT_QUARK_XI_KK",
     "DeltaF2ConstraintSummary",
@@ -70,6 +79,7 @@ __all__ = [
     "DeltaF2WilsonSet",
     "ProxySummary",
     "QuarkBenchmark",
+    "GAUGE_KK_ROOT_NN",
     "QuarkBulkState",
     "QuarkFitResult",
     "QuarkFitSeed",

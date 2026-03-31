@@ -15,12 +15,30 @@ from .scales import DEFAULT_QUARK_XI_KK, default_quark_m_kk_from_lambda_ir
 
 @dataclass(frozen=True)
 class AlignmentDiagnostics:
-    """Matrix-level alignment diagnostics for one quark-sector point."""
+    """Matrix-level quark-basis diagnostics for one quark-sector point.
+
+    The ``*_offdiag_ratio_in_q_basis`` entries are off-diagonal Frobenius
+    fractions, so smaller values mean stronger alignment. The older
+    ``alignment`` naming is kept for compatibility, but these are best read as
+    misalignment fractions.
+    """
 
     down_commutator_norm: float
     up_commutator_norm: float
     down_offdiag_ratio_in_q_basis: float
     up_offdiag_ratio_in_q_basis: float
+
+    @property
+    def down_misalignment_in_q_basis(self) -> float:
+        return self.down_offdiag_ratio_in_q_basis
+
+    @property
+    def up_misalignment_in_q_basis(self) -> float:
+        return self.up_offdiag_ratio_in_q_basis
+
+    @property
+    def down_to_up_misalignment_ratio(self) -> float:
+        return float(self.down_offdiag_ratio_in_q_basis / max(self.up_offdiag_ratio_in_q_basis, 1e-30))
 
 
 @dataclass(frozen=True)
@@ -45,7 +63,10 @@ def _commutator_norm(a: np.ndarray, b: np.ndarray) -> float:
 
 
 def _offdiag_ratio(matrix: np.ndarray) -> float:
-    """Return the off-diagonal Frobenius fraction of a matrix."""
+    """Return the off-diagonal Frobenius fraction of a matrix.
+
+    Smaller values indicate stronger alignment with the chosen basis.
+    """
     arr = np.asarray(matrix, dtype=np.complex128).copy()
     np.fill_diagonal(arr, 0.0)
     denom = np.linalg.norm(matrix, ord="fro")
@@ -138,16 +159,23 @@ def suppression_summary(
     m_kk: float | None = None,
     xi_KK: float = DEFAULT_QUARK_XI_KK,
 ) -> dict[str, float]:
-    """Compatibility wrapper returning a flat summary dict."""
+    """Compatibility wrapper returning a flat summary dict.
+
+    The legacy ``alignment`` keys are preserved for downstream consumers, but
+    they store misalignment fractions rather than alignment strengths.
+    """
     summary = compute_proxy_summary(fit_result, m_kk=m_kk, xi_KK=xi_KK)
+    down_misalignment = float(summary.diagnostics.down_misalignment_in_q_basis)
+    up_misalignment = float(summary.diagnostics.up_misalignment_in_q_basis)
+    misalignment_ratio = float(summary.diagnostics.down_to_up_misalignment_ratio)
     return {
         "h_rs_proxy": float(summary.h_rs_proxy),
-        "down_alignment": float(summary.diagnostics.down_offdiag_ratio_in_q_basis),
-        "up_alignment": float(summary.diagnostics.up_offdiag_ratio_in_q_basis),
-        "down_to_up_alignment_ratio": float(
-            summary.diagnostics.down_offdiag_ratio_in_q_basis
-            / max(summary.diagnostics.up_offdiag_ratio_in_q_basis, 1e-30)
-        ),
+        "down_misalignment": down_misalignment,
+        "up_misalignment": up_misalignment,
+        "down_to_up_misalignment_ratio": misalignment_ratio,
+        "down_alignment": down_misalignment,
+        "up_alignment": up_misalignment,
+        "down_to_up_alignment_ratio": misalignment_ratio,
         "f_q_hierarchy": float(np.min(summary.q_overlap_hierarchy)),
         "M_KK": float(summary.m_kk),
         "r": float(summary.r_value),

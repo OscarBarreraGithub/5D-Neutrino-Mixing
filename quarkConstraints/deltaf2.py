@@ -99,11 +99,20 @@ class DeltaF2WilsonCoefficients:
 
 @dataclass(frozen=True)
 class DeltaF2ObservableSummary:
-    """Compact per-system exclusion summary."""
+    """Compact per-system exclusion summary.
+
+    ``effective_amplitude`` is the conservative exclusion surrogate used for
+    pass/fail: the largest weighted operator contribution after the common
+    reference-scale factor is applied. ``coherent_amplitude`` keeps the old
+    summed-operator diagnostic for bookkeeping, but it no longer controls the
+    exclusion decision because cancellations between unlike operators are not a
+    safe acceptance criterion.
+    """
 
     input: DeltaF2Input
     wilsons: DeltaF2WilsonCoefficients
     effective_amplitude: float
+    coherent_amplitude: float
     ratio_to_bound: float
     passes: bool
     dominant_operator: str
@@ -358,13 +367,17 @@ def evaluate_delta_f2_constraints(
             for name, value in weighted.items()
         }
         dominant_operator = max(operator_sizes, key=operator_sizes.get)
-        effective_amplitude = float(item.reference_scale**2 * abs(sum(weighted.values())))
+        coherent_amplitude = float(item.reference_scale**2 * abs(sum(weighted.values())))
+        # Use the largest weighted operator as the exclusion surrogate so that
+        # unlike operators cannot hide behind artificial cancellations.
+        effective_amplitude = float(operator_sizes[dominant_operator])
         ratio_to_bound = float(effective_amplitude / item.bound)
         observables.append(
             DeltaF2ObservableSummary(
                 input=item,
                 wilsons=coeffs,
                 effective_amplitude=effective_amplitude,
+                coherent_amplitude=coherent_amplitude,
                 ratio_to_bound=ratio_to_bound,
                 passes=ratio_to_bound <= 1.0,
                 dominant_operator=dominant_operator,

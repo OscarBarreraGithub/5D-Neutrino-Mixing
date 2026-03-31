@@ -77,7 +77,7 @@ The quark-sector MFV scaffold is now present in this repo:
 - mass-basis KK-gluon couplings in `couplings.py`
 - a repo-owned `Delta F = 2` exclusion slice in `deltaf2.py`
 - deterministic benchmarks and validation helpers
-- lightweight proxy and alignment diagnostics
+- lightweight proxy and quark-basis misalignment diagnostics
 - a scan wrapper and benchmark script
 
 This is usable as a repo-local exploratory implementation, not yet as a
@@ -99,11 +99,17 @@ as a compatibility helper for the earlier exploratory naming.
   inherited from the seed/template
 - the `Delta F = 2` layer is a fixed-convention v1 exclusion slice with a
   repo-owned input bundle, not a full EFT/RG evolution package
-- the `h_RS`-style quantity is still a proxy and uses the repo convention
-  `M_KK ≡ Lambda_IR` by default for bookkeeping and internal comparisons
-- that `M_KK ≡ Lambda_IR` choice is a convention, not a literal physical
-  identification of the first KK mass; physical first-KK masses remain sector
-  dependent and should be supplied explicitly for quantitative comparisons
+- the low-level helpers still default to the repo bookkeeping convention
+  `M_KK ≡ Lambda_IR`, and the benchmark/validation path now keeps that choice
+  explicit through `DEFAULT_QUARK_BENCHMARK_XI_KK = 1.0` so it can be updated
+  deliberately later
+- the `h_RS`-style quantity is still only a proxy; the validation summary now
+  reports both the current repo bookkeeping gate (`h_RS < 1`) and the stricter
+  paper-scale target (`h_RS <~ 0.3`) instead of conflating them
+- the off-diagonal `q`-basis diagnostics are misalignment fractions: smaller
+  means more aligned. Some legacy helper outputs still use `alignment_*`
+  labels for backward compatibility, but they refer to these misalignment
+  fractions rather than an inverse alignment score
 
 See [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) for the converged
 minimal implementation proposal, and

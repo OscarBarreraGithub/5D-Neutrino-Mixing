@@ -12,14 +12,11 @@ from quarkConstraints.fit import fit_quark_sector
 from quarkConstraints.proxies import summarize_flavor_diagnostics, sweep_r_proxy_summary
 
 
-def test_proxy_summary_is_positive_and_down_sector_is_more_aligned():
-    """The fitted benchmark should stay in the proxy-favored alignment window."""
+def test_proxy_summary_is_positive_and_down_sector_misalignment_stays_controlled():
+    """The fitted benchmark should keep the down-sector misalignment stress O(1)."""
     result = fit_quark_sector(default_quark_targets(), overall_scale=3.0, max_nfev=120).result
     summary = summarize_flavor_diagnostics(result)
-    ratio = (
-        summary.diagnostics.down_offdiag_ratio_in_q_basis
-        / max(summary.diagnostics.up_offdiag_ratio_in_q_basis, 1e-30)
-    )
+    ratio = summary.diagnostics.down_to_up_misalignment_ratio
 
     assert summary.h_rs_proxy > 0.0
     assert ratio < 5.0
@@ -36,15 +33,11 @@ def test_proxy_summary_respects_explicit_mkk_override():
 
 
 def test_r_sweep_proxy_summary_shows_down_sector_suppression_for_small_r():
-    """The down-sector proxy and relative alignment pressure should shrink as r decreases."""
+    """The down-sector proxy and relative misalignment stress should shrink as r decreases."""
     sweep = sweep_r_proxy_summary([0.05, 0.1, 0.25, 0.4, 1.0])
     down_proxy = np.array([item.h_rs_proxy for item in sweep], dtype=float)
     alignment_ratio = np.array(
-        [
-            item.diagnostics.down_offdiag_ratio_in_q_basis
-            / max(item.diagnostics.up_offdiag_ratio_in_q_basis, 1e-30)
-            for item in sweep
-        ],
+        [item.diagnostics.down_to_up_misalignment_ratio for item in sweep],
         dtype=float,
     )
 

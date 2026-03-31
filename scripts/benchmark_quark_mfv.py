@@ -17,17 +17,25 @@ from quarkConstraints.couplings import compute_quark_kk_gluon_couplings
 from quarkConstraints.deltaf2 import evaluate_delta_f2_constraints
 from quarkConstraints.fit import fit_quark_sector
 from quarkConstraints.proxies import summarize_flavor_diagnostics
-from quarkConstraints.scales import default_quark_m_kk_from_lambda_ir
+from quarkConstraints.scales import (
+    DEFAULT_QUARK_BENCHMARK_XI_KK,
+    DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
+    DEFAULT_QUARK_PAPER_H_RS_MAX,
+    default_quark_m_kk_from_lambda_ir,
+)
+from quarkConstraints.validation import benchmark_fit_summary
 
 
 def main() -> int:
     targets = default_quark_targets()
     solution = fit_quark_sector(targets, r=0.25, overall_scale=3.0, max_nfev=150)
     result = solution.result
-    m_kk = default_quark_m_kk_from_lambda_ir(result.point.Lambda_IR)
+    xi_kk = DEFAULT_QUARK_BENCHMARK_XI_KK
+    m_kk = default_quark_m_kk_from_lambda_ir(result.point.Lambda_IR, xi_KK=xi_kk)
     diagnostics = summarize_flavor_diagnostics(result, m_kk=m_kk)
-    couplings = compute_quark_kk_gluon_couplings(result, M_KK=m_kk)
-    deltaf2 = evaluate_delta_f2_constraints(couplings, M_KK=m_kk)
+    couplings = compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_kk)
+    deltaf2 = evaluate_delta_f2_constraints(couplings, M_KK=m_kk, xi_KK=xi_kk)
+    fit_summary = benchmark_fit_summary(solution, xi_KK=xi_kk)
 
     print("Quark-sector MFV benchmark")
     print(f"  success       = {solution.success}")
@@ -37,6 +45,7 @@ def main() -> int:
     print(f"  residual_norm = {result.residual_norm:.6e}")
     print(f"  target label  = {targets.label}")
     print(f"  Lambda_IR     = {result.point.Lambda_IR:.2f} GeV")
+    print(f"  xi_KK         = {xi_kk:.6f} (explicit repo bookkeeping convention)")
     print(f"  M_KK          = {m_kk:.2f} GeV")
     print()
     print("Target vs fitted up-sector masses [GeV]")
@@ -60,10 +69,14 @@ def main() -> int:
     print("Flavor diagnostics")
     print(f"  h_RS proxy      = {diagnostics.h_rs_proxy:.6e}")
     print(
-        "  down alignment  = "
-        f"{diagnostics.diagnostics.down_offdiag_ratio_in_q_basis:.6e}"
+        "  down misalign.  = "
+        f"{diagnostics.diagnostics.down_misalignment_in_q_basis:.6e}"
     )
-    print(f"  up alignment    = {diagnostics.diagnostics.up_offdiag_ratio_in_q_basis:.6e}")
+    print(f"  up misalign.    = {diagnostics.diagnostics.up_misalignment_in_q_basis:.6e}")
+    print(
+        "  down/up stress  = "
+        f"{diagnostics.diagnostics.down_to_up_misalignment_ratio:.6e}"
+    )
     print()
     print("Mass-basis KK-gluon couplings |g_ij|")
     for label, matrix in (
@@ -85,16 +98,14 @@ def main() -> int:
             f"pass={item.passes} dominant={item.dominant_operator}"
         )
     print(f"  overall pass    = {deltaf2.passes_all}")
+    print()
+    print("Validation gates")
+    print(f"  benchmark h_RS < {DEFAULT_QUARK_BENCHMARK_H_RS_MAX:.2f} = {fit_summary.passes_proxy}")
+    print(f"  paper h_RS < {DEFAULT_QUARK_PAPER_H_RS_MAX:.2f}     = {fit_summary.passes_paper_proxy}")
+    print(f"  misalignment gate = {fit_summary.passes_misalignment}")
+    print(f"  Delta F = 2 gate  = {fit_summary.passes_deltaf2}")
 
-    max_mass_residual = np.max(
-        np.abs(np.concatenate([result.mass_residuals_up, result.mass_residuals_down]))
-    )
-    max_ckm_residual = np.max(np.abs(result.ckm_residuals))
-    if not solution.success:
-        return 1
-    if max_mass_residual > 1.0e-2 or max_ckm_residual > 1.0e-2:
-        return 1
-    if not deltaf2.passes_all:
+    if not solution.success or not fit_summary.passes_all:
         return 1
     return 0
 

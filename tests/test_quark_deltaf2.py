@@ -41,6 +41,27 @@ def _zero_couplings(M_KK: float = 3000.0) -> QuarkMassBasisCouplings:
     )
 
 
+def _sd_couplings(left: float, right: float, M_KK: float = 3000.0) -> QuarkMassBasisCouplings:
+    zeros = np.zeros((3, 3), dtype=np.complex128)
+    left_down = zeros.copy()
+    right_down = zeros.copy()
+    left_down[0, 1] = left_down[1, 0] = left
+    right_down[0, 1] = right_down[1, 0] = right
+    return QuarkMassBasisCouplings(
+        M_KK=M_KK,
+        xi_KK=1.0,
+        alpha_s=0.09,
+        g_s=1.0,
+        left_overlap=zeros,
+        right_up_overlap=zeros,
+        right_down_overlap=zeros,
+        left_up=zeros,
+        left_down=left_down,
+        right_up=zeros,
+        right_down=right_down,
+    )
+
+
 def test_deltaf2_wilsons_vanish_for_trivial_aligned_couplings():
     summary = evaluate_delta_f2_constraints(_zero_couplings())
 
@@ -66,6 +87,18 @@ def test_deltaf2_wilsons_scale_down_with_larger_mkk():
     nominal_summary = evaluate_delta_f2_constraints(result, M_KK=3000.0)
     heavier_summary = evaluate_delta_f2_constraints(result, M_KK=6000.0)
     assert heavier_summary.worst_ratio < nominal_summary.worst_ratio
+
+
+def test_deltaf2_pass_fail_uses_dominant_operator_not_coherent_cancellation():
+    summary = evaluate_delta_f2_constraints(
+        _sd_couplings(left=0.0012662771285475794, right=0.04808397328881469)
+    )
+    kaon = summary.get("epsilon_k")
+
+    assert kaon.coherent_amplitude < kaon.bound
+    assert np.isclose(kaon.effective_amplitude, kaon.dominant_operator_size)
+    assert kaon.dominant_operator == "C4_LR"
+    assert not kaon.passes
 
 
 def test_default_benchmark_point_has_stable_deltaf2_outputs():
