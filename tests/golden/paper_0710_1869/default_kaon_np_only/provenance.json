@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "bundle_id": "provenance.kaon.pr1.table_i_eq3_example.central.v1",
+    "mode": "paper_0710_1869",
+    "point_id": "pr1.table_i_eq3_example.v1.kaon.central.np_only.v1",
+    "schema_name": "paper_0710_1869.provenance_bundle",
+    "schema_version": 1
+  },
+  "records": [
+    {
+      "category": "paper",
+      "citation": "arXiv:0710.1869",
+      "label": "0710.1869 paper-mode scope",
+      "record_id": "paper.0710.1869.v1",
+      "source": "doi:10.48550/arXiv.0710.1869",
+      "version": "arXiv:0710.1869"
+    },
+    {
+      "category": "code",
+      "citation": "arXiv:0710.1869 matching path",
+      "label": "Default kaon KK-gluon matching export",
+      "record_id": "matching.kaon.default.v1",
+      "source": "quarkConstraints.paper_0710_1869.eft_deltaf2.matching_kkgluon",
+      "version": "paper-mode:v1"
+    },
+    {
+      "category": "code",
+      "citation": "BMU hep-ph/0005183 Q1 running path",
+      "label": "Default kaon LO RG export",
+      "record_id": "rg.kaon.default_lo.v1",
+      "source": "quarkConstraints.paper_0710_1869.eft_deltaf2.rg",
+      "version": "paper-mode:v1"
+    },
+    {
+      "category": "hadronic-input-bundle",
+      "citation": "PR5a kaon hadronic bundle: NP-only M12 support for Q1_VLL and Q1_VRR only. Non-zero LR operator contributions remain unsupported end-to-end.",
+      "label": "Default kaon hadronic input bundle",
+      "record_id": "hadronic.kaon.pdg2024_flag2024.v1",
+      "source": "hadronic.kaon.pdg2024_flag2024.v1",
+      "version": "paper_sourced_defaults.v1"
+    },
+    {
+      "category": "particle-property",
+      "citation": "Uses the PDG neutral-kaon mass m_K0 = 497.611 MeV.",
+      "label": "K0 mass listing",
+      "record_id": "pdg.2024.k0.mass.v1",
+      "source": "PDG 2024 neutral kaon listing",
+      "version": "2024"
+    },
+    {
+      "category": "review-average",
+      "citation": "PR5a reuses the PDG/FLAG charged-kaon decay constant fK+ = 155.7 MeV as f_K in the kaon NP-only slice. No separate isospin correction is applied.",
+      "label": "Eq. (72.14)",
+      "record_id": "pdg.2024.fkplus.eq72.14.v1",
+      "source": "PDG 2024 Leptonic Decays of Charged Pseudoscalar Mesons, Eq. (72.14)",
+      "version": "2024"
+    },
+    {
+      "category": "derived-from-rgi",
+      "citation": "Uses the FLAG average hat{B}_K = 0.7625 and converts it to B_K(mu_had) with the paper-mode LO Q1 inverse-running convention.",
+      "label": "Sec. 17.3.2, kaon bag parameter discussion",
+      "record_id": "pdg.2024.flag.hat_bk.sec17.3.2.v1",
+      "source": "PDG 2024 Lattice QCD review, Sec. 17.3.2, FLAG average",
+      "version": "2024"
+    }
+  ]
+}

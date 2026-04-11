@@ -1,0 +1,78 @@
+{
+  "delta_m_observable_id": "Delta_m_K_NP",
+  "delta_m_relation_id": "delta_m_k_np.equals.2_re_m12_k_np.v1",
+  "interpretation": "kaon.np_only.v1",
+  "m12_observable_id": "M12_K_NP",
+  "m12_value": {
+    "imag": -9.322420653906486e-15,
+    "real": -1.3495753042583394e-14
+  },
+  "metadata": {
+    "bundle_id": "observable.kaon.pr1.table_i_eq3_example.central.v1",
+    "mode": "paper_0710_1869",
+    "point_id": "pr1.table_i_eq3_example.v1.kaon.central.np_only.v1",
+    "schema_name": "paper_0710_1869.observable_bundle",
+    "schema_version": 1
+  },
+  "notes": "PR5a kaon NP-only observable result: M12_K^NP from Q1_VLL/Q1_VRR only at mu_had. epsilon_K and LR contributions remain outside the honest supported scope under the frozen LR audit contract.",
+  "observable_scope_id": "kaon.np_only.m12.v1",
+  "observables": [
+    {
+      "name": "M12_K_NP.re",
+      "system": "kaon",
+      "units": "GeV",
+      "value": -1.3495753042583394e-14
+    },
+    {
+      "name": "M12_K_NP.im",
+      "system": "kaon",
+      "units": "GeV",
+      "value": -9.322420653906486e-15
+    },
+    {
+      "name": "Delta_m_K_NP",
+      "system": "kaon",
+      "units": "GeV",
+      "value": -2.6991506085166787e-14
+    }
+  ],
+  "operator_basis": "kk_gluon_tree_np_only.v1",
+  "operator_normalization": "paper_0710_1869.deltaf2.kk_gluon_tree_color_normalization.v1",
+  "provenance_ids": [
+    "paper.0710.1869.v1",
+    "matching.kaon.default.v1",
+    "rg.kaon.default_lo.v1",
+    "hadronic.kaon.pdg2024_flag2024.v1",
+    "pdg.2024.k0.mass.v1",
+    "pdg.2024.fkplus.eq72.14.v1",
+    "pdg.2024.flag.hat_bk.sec17.3.2.v1"
+  ],
+  "renormalization_scheme": "bmu.hep-ph-0005183.ndr-ms.lo.v1",
+  "scales": [
+    {
+      "name": "mu_match",
+      "role": "matching scale",
+      "value_gev": 3000.0
+    },
+    {
+      "name": "mu_had",
+      "role": "hadronic evaluation scale",
+      "value_gev": 2.0
+    },
+    {
+      "name": "m_g1",
+      "role": "KK-gluon propagator mass",
+      "value_gev": 3000.0
+    }
+  ],
+  "source_hadronic_bundle_id": "hadronic.kaon.pr5a.v1",
+  "source_wilson_bundle_id": "wilson.kaon.pr1.table_i_eq3_example.central.v1",
+  "supported_operator_names": [
+    "Q1_VLL",
+    "Q1_VRR"
+  ],
+  "unsupported_operator_names": [
+    "Q4_LR",
+    "Q5_LR"
+  ]
+}

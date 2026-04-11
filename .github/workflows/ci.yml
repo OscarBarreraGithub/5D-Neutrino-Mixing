@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  repo_v1_regression:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,3 +30,54 @@ jobs:
 
       - name: Run Perez-Randall benchmark
         run: python scripts/benchmark_perez_randall.py
+
+      - name: Run quark MFV benchmark
+        run: python scripts/benchmark_quark_mfv.py
+
+      - name: Run quark Delta F = 2 r-sweep smoke check
+        run: python scripts/plot_quark_deltaf2_r_sweep.py --max-nfev 60 --xi-kk 1.0
+
+  paper_0710_1869_acceptance:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package and dev dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[dev]'
+
+      - name: Lint paper-facing slice
+        run: |
+          ruff check \
+            quarkConstraints/paper_0710_1869 \
+            scripts/benchmark_quark_0710_1869.py \
+            tests/test_paper_*.py
+
+      - name: Run paper-facing contract tests
+        run: |
+          pytest -q \
+            tests/test_paper_benchmarks.py \
+            tests/test_paper_couplings.py \
+            tests/test_paper_eft_matching.py \
+            tests/test_paper_eft_rg_lo.py \
+            tests/test_paper_hadronic_inputs.py \
+            tests/test_paper_model.py \
+            tests/test_paper_mode_contracts.py \
+            tests/test_paper_observables.py \
+            tests/test_paper_artifact_contracts.py
+
+      - name: Run paper 0710.1869 acceptance benchmark
+        run: |
+          if [ -d quarkConstraints/paper_0710_1869 ]; then
+            python scripts/benchmark_quark_0710_1869.py --require-package
+          else
+            python scripts/benchmark_quark_0710_1869.py
+          fi
