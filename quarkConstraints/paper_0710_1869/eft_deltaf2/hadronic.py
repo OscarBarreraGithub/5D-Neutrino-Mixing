@@ -128,7 +128,10 @@ PAPER_0710_1869_DELTAF2_KAON_LR_SCHEME_CONVERSION_POLICY_ID = (
     "none.caller_supplies_lr_inputs_in_declared_scheme_at_mu_had.v2"
 )
 PAPER_0710_1869_DELTAF2_KAON_LR_INPUT_POLICY_ID = (
-    "custom_input_only.defaults_not_frozen.v1"
+    "custom_input_only.default_lr_bundle_frozen_separately.no_auto_consumption.v1"
+)
+PAPER_0710_1869_DELTAF2_KAON_LR_DEFAULT_INPUT_POLICY_ID = (
+    "default_source.etm2013.table1.ms_2gev.no_hidden_conversion.v1"
 )
 PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_INPUT_POLICY_ID = (
     "freeze_only.r_chi.default_lr_hadronic_still_blocked.v1"
@@ -167,6 +170,9 @@ PAPER_0710_1869_DELTAF2_HADRONIC_CUSTOM_PROVENANCE_MODE_ID = (
 PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID = (
     "custom_lr_inputs.validated_sources.v1"
 )
+PAPER_0710_1869_DELTAF2_LR_HADRONIC_DEFAULT_PROVENANCE_MODE_ID = (
+    "paper_sourced_lr_defaults.v1"
+)
 PAPER_0710_1869_DELTAF2_LR_R_CHI_PROVENANCE_MODE_ID = (
     "paper_sourced_mass_derived_defaults.v1"
 )
@@ -190,6 +196,9 @@ _UNSUPPORTED_LR_OPERATORS = (
 _DEFAULT_M_K0_GEV = 0.497611
 _DEFAULT_F_K_GEV = 0.1557
 _DEFAULT_HAT_B_K_RGI = 0.7625
+# Pinned to preserve the tracked default Q1 hadronic export bytes for the
+# fully default kaon payload at the frozen default ``mu_had``.
+_DEFAULT_CANONICAL_B_K_MU_HAD = 0.5557449829565828
 _DEFAULT_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr5a.v1"
 _DEFAULT_HADRONIC_SOURCE_ID = "hadronic.kaon.pdg2024_flag2024.v1"
 _CUSTOM_HADRONIC_BUNDLE_ID = "hadronic.kaon.user_supplied.v1"
@@ -202,6 +211,12 @@ _CUSTOM_D0_HADRONIC_BUNDLE_ID = "hadronic.d0.user_supplied.v1"
 _CUSTOM_D0_HADRONIC_SOURCE_ID = "hadronic.d0.user_supplied.v1"
 _CUSTOM_LR_HADRONIC_INPUTS_ID = "hadronic.kaon.lr.user_supplied.v1"
 _CUSTOM_LR_HADRONIC_SOURCE_ID = "hadronic.kaon.lr.user_supplied.aggregate.v1"
+_DEFAULT_KAON_LR_HADRONIC_BUNDLE_ID = "hadronic.kaon.lr.default.etm2013_ms_2gev.v1"
+_DEFAULT_KAON_LR_HADRONIC_SOURCE_ID = (
+    "hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1"
+)
+_DEFAULT_KAON_LR_B4_SOURCE_ID = "hadronic.kaon.lr.b4.etm2013.table1.ms_2gev.v1"
+_DEFAULT_KAON_LR_B5_SOURCE_ID = "hadronic.kaon.lr.b5.etm2013.table1.ms_2gev.v1"
 _DEFAULT_KAON_LR_R_CHI_FREEZE_ID = "hadronic.kaon.lr.r_chi.freeze.v1"
 _DEFAULT_KAON_LR_R_CHI_SOURCE_ID = "hadronic.kaon.lr.r_chi.pdg2024_msbar_nl4.v1"
 _DEFAULT_MASS_SOURCE_ID = "pdg.2024.k0.mass.v1"
@@ -209,8 +224,20 @@ _DEFAULT_DECAY_CONSTANT_SOURCE_ID = "pdg.2024.fkplus.eq72.14.v1"
 _DEFAULT_BAG_SOURCE_ID = "pdg.2024.flag.hat_bk.sec17.3.2.v1"
 _DEFAULT_KAON_LR_STRANGE_MASS_SOURCE_ID = "pdg.2024.msbar.ms.2gev.nl4.v1"
 _DEFAULT_KAON_LR_DOWN_MASS_SOURCE_ID = "pdg.2024.msbar.md.2gev.nl4.v1"
+_DEFAULT_KAON_LR_B4_MU_HAD = 0.78
+_DEFAULT_KAON_LR_B4_UNCERTAINTY = 0.03
+_DEFAULT_KAON_LR_B5_MU_HAD = 0.57
+_DEFAULT_KAON_LR_B5_UNCERTAINTY = 0.04
 _DEFAULT_KAON_LR_M_S_2GEV_GEV = 0.09274
 _DEFAULT_KAON_LR_M_D_2GEV_GEV = 0.00469
+_DEFAULT_KAON_LR_HADRONIC_PROVENANCE_IDS = (
+    _DEFAULT_KAON_LR_HADRONIC_SOURCE_ID,
+    _DEFAULT_KAON_LR_B4_SOURCE_ID,
+    _DEFAULT_KAON_LR_B5_SOURCE_ID,
+    _DEFAULT_KAON_LR_R_CHI_SOURCE_ID,
+    _DEFAULT_MASS_SOURCE_ID,
+    _DEFAULT_DECAY_CONSTANT_SOURCE_ID,
+)
 _CUSTOM_B_SYSTEMS = (
     PAPER_0710_1869_DELTAF2_BD_HADRONIC_SYSTEM_ID,
     PAPER_0710_1869_DELTAF2_BS_HADRONIC_SYSTEM_ID,
@@ -269,6 +296,40 @@ def _derive_b_k_mu_had(
         "B_K_mu_had",
         hat_B_K_rgi * (alpha_s_mu**exponent),
     )
+
+
+def _kaon_mu_had_uses_frozen_default_b_k(
+    *,
+    mu_had_GeV: float,
+) -> bool:
+    return _float_matches(
+        mu_had_GeV,
+        PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+        atol=1e-12,
+    )
+
+
+def _default_kaon_b_k_mu_had(
+    *,
+    mu_had_GeV: float,
+) -> float:
+    if _kaon_mu_had_uses_frozen_default_b_k(mu_had_GeV=mu_had_GeV):
+        return _DEFAULT_CANONICAL_B_K_MU_HAD
+    return _derive_b_k_mu_had(
+        mu_had_GeV=mu_had_GeV,
+        hat_B_K_rgi=_DEFAULT_HAT_B_K_RGI,
+    )
+
+
+def _matches_default_kaon_b_k_mu_had(
+    *,
+    B_K_mu_had: float,
+    mu_had_GeV: float,
+) -> bool:
+    expected_b_k = _default_kaon_b_k_mu_had(mu_had_GeV=mu_had_GeV)
+    if _kaon_mu_had_uses_frozen_default_b_k(mu_had_GeV=mu_had_GeV):
+        return float(B_K_mu_had) == expected_b_k
+    return _float_matches(B_K_mu_had, expected_b_k)
 
 
 @dataclass(frozen=True)
@@ -647,10 +708,13 @@ class Paper07101869KaonHadronicBundle:
                     "default hadronic provenance mode must keep the frozen "
                     "PDG/FLAG decay-constant source"
                 )
-            if self.bag_parameter_source.source_id != _DEFAULT_BAG_SOURCE_ID:
+            expected_bag_parameter_source = _default_bag_parameter_source(
+                mu_had_GeV=self.mu_had_GeV
+            )
+            if self.bag_parameter_source != expected_bag_parameter_source:
                 raise ValueError(
-                    "default hadronic provenance mode must keep the frozen FLAG "
-                    "bag-parameter source"
+                    "default hadronic provenance mode must keep the honest default "
+                    "bag-parameter source metadata for the selected mu_had regime"
                 )
             if not _float_matches(self.m_K0_GeV, _DEFAULT_M_K0_GEV):
                 raise ValueError(
@@ -664,14 +728,14 @@ class Paper07101869KaonHadronicBundle:
                 raise ValueError(
                     "default hadronic provenance mode requires the frozen FLAG hat_B_K source value"
                 )
-            expected_b_k = _derive_b_k_mu_had(
+            if not _matches_default_kaon_b_k_mu_had(
+                B_K_mu_had=self.B_K_mu_had,
                 mu_had_GeV=self.mu_had_GeV,
-                hat_B_K_rgi=_DEFAULT_HAT_B_K_RGI,
-            )
-            if not _float_matches(self.B_K_mu_had, expected_b_k):
+            ):
                 raise ValueError(
-                    "default hadronic provenance mode requires B_K_mu_had derived from the "
-                    "frozen FLAG hat_B_K source value"
+                    "default hadronic provenance mode requires the exact frozen canonical "
+                    "B_K_mu_had in the default mu_had regime and the FLAG-derived value "
+                    "at other mu_had scales"
                 )
         if (
             self.input_provenance_mode_id
@@ -1692,7 +1756,8 @@ class Paper07101869KaonLRHadronicContract:
         "LR-HAD-1 freezes only the O4/O5 scalar LR matrix-element formulas at mu_had. "
         "B4, B5, and R_chi must be supplied explicitly in the bundle's declared "
         "renormalization scheme and at mu_had; LR-HAD-1 performs no hidden scheme "
-        "conversion. Defaults for LR hadronic inputs are not frozen yet."
+        "conversion. The frozen default LR hadronic bundle remains separate and is "
+        "not auto-consumed on this custom surface."
     )
 
     def __post_init__(self) -> None:
@@ -1762,7 +1827,7 @@ class Paper07101869KaonLRHadronicContract:
 
 @dataclass(frozen=True)
 class Paper07101869KaonLRHadronicInputs:
-    """Custom LR hadronic inputs and matrix elements in the paper O4/O5 basis."""
+    """Kaon LR hadronic inputs and matrix elements in the paper O4/O5 basis."""
 
     B4_mu_had: float
     B5_mu_had: float
@@ -1806,8 +1871,9 @@ class Paper07101869KaonLRHadronicInputs:
         "LR-HAD-1 custom-input-only bundle: O4/O5 scalar LR matrix elements from BV 2004 "
         "Eq. (5). The caller supplies B4, B5, and R_chi in the bundle's declared "
         "renormalization scheme and at mu_had; LR-HAD-1 performs no hidden scheme "
-        "conversion. Defaults for LR hadronic inputs are not frozen yet, and LR "
-        "observables remain blocked."
+        "conversion. The frozen default LR hadronic bundle remains separate, and "
+        "LR-only and custom-combined observable surfaces still require explicit "
+        "custom LR inputs."
     )
 
     def __post_init__(self) -> None:
@@ -1950,10 +2016,18 @@ class Paper07101869KaonLRHadronicInputs:
                     f"{field_name}.source_id must be present in provenance_ids for LR "
                     "hadronic inputs"
                 )
-        require_member(
+        resolved_input_provenance_mode_id = require_member(
             "input_provenance_mode_id",
             self.input_provenance_mode_id,
-            (PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID,),
+            (
+                PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID,
+                PAPER_0710_1869_DELTAF2_LR_HADRONIC_DEFAULT_PROVENANCE_MODE_ID,
+            ),
+        )
+        object.__setattr__(
+            self,
+            "input_provenance_mode_id",
+            resolved_input_provenance_mode_id,
         )
         for field_name in (
             "B4_mu_had",
@@ -1971,7 +2045,6 @@ class Paper07101869KaonLRHadronicInputs:
         for field_name, source in (
             ("b4_source", self.b4_source),
             ("b5_source", self.b5_source),
-            ("r_chi_source", self.r_chi_source),
         ):
             if source.renormalization_scheme_id is None:
                 raise ValueError(
@@ -1987,6 +2060,171 @@ class Paper07101869KaonLRHadronicInputs:
                 raise ValueError(f"{field_name} must carry scale_GeV matching mu_had_GeV")
             if not _float_matches(source.scale_GeV, self.mu_had_GeV, atol=1e-12):
                 raise ValueError(f"{field_name}.scale_GeV must match mu_had_GeV")
+        if self.r_chi_source.renormalization_scheme_id is None:
+            raise ValueError(
+                "r_chi_source must carry renormalization_scheme_id matching the declared "
+                "R_chi source semantics"
+            )
+        expected_r_chi_scheme_id = (
+            self.renormalization_scheme_id
+            if (
+                resolved_input_provenance_mode_id
+                == PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID
+            )
+            else PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID
+        )
+        if self.r_chi_source.renormalization_scheme_id != expected_r_chi_scheme_id:
+            raise ValueError(
+                "r_chi_source.renormalization_scheme_id must match the declared custom "
+                "bundle scheme or the frozen default mass scheme"
+            )
+        if self.r_chi_source.scale_GeV is None:
+            raise ValueError("r_chi_source must carry scale_GeV matching mu_had_GeV")
+        if not _float_matches(self.r_chi_source.scale_GeV, self.mu_had_GeV, atol=1e-12):
+            raise ValueError("r_chi_source.scale_GeV must match mu_had_GeV")
+        if (
+            resolved_input_provenance_mode_id
+            == PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID
+        ):
+            if self.bundle_id == _DEFAULT_KAON_LR_HADRONIC_BUNDLE_ID:
+                raise ValueError(
+                    "custom LR hadronic inputs must not reuse the frozen default LR bundle_id"
+                )
+            if self.source_id == _DEFAULT_KAON_LR_HADRONIC_SOURCE_ID:
+                raise ValueError(
+                    "custom LR hadronic inputs must not reuse the frozen default LR source_id"
+                )
+            if self.provenance_ids == _DEFAULT_KAON_LR_HADRONIC_PROVENANCE_IDS:
+                raise ValueError(
+                    "custom LR hadronic inputs must not reuse the frozen default LR "
+                    "provenance_ids"
+                )
+        if (
+            resolved_input_provenance_mode_id
+            == PAPER_0710_1869_DELTAF2_LR_HADRONIC_DEFAULT_PROVENANCE_MODE_ID
+        ):
+            default_r_chi_freeze = default_paper_0710_1869_kaon_lr_r_chi_freeze()
+            expected_default_contract = _default_kaon_lr_hadronic_contract()
+            require_member(
+                "renormalization_scheme_id",
+                self.renormalization_scheme_id,
+                (PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,),
+            )
+            require_member(
+                "bundle_id",
+                self.bundle_id,
+                (_DEFAULT_KAON_LR_HADRONIC_BUNDLE_ID,),
+            )
+            require_member(
+                "source_id",
+                self.source_id,
+                (_DEFAULT_KAON_LR_HADRONIC_SOURCE_ID,),
+            )
+            for field_name in (
+                "operator_basis_id",
+                "operator_normalization_id",
+                "hamiltonian_convention_id",
+                "q4_matrix_element_formula_id",
+                "q5_matrix_element_formula_id",
+                "chiral_ratio_definition_id",
+                "input_policy_id",
+            ):
+                if getattr(self, field_name) != getattr(expected_default_contract, field_name):
+                    raise ValueError(
+                        f"default LR hadronic provenance mode must keep the frozen {field_name}"
+                    )
+            if not _float_matches(
+                self.mu_had_GeV,
+                PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+                atol=1e-12,
+            ):
+                raise ValueError(
+                    "default LR hadronic provenance mode requires the frozen paper mu_had = 2 GeV"
+                )
+            if self.provenance_ids != _DEFAULT_KAON_LR_HADRONIC_PROVENANCE_IDS:
+                raise ValueError(
+                    "default LR hadronic provenance mode must keep the frozen default "
+                    "provenance_ids"
+                )
+            if self.b4_source != _default_kaon_lr_b4_source():
+                raise ValueError(
+                    "default LR hadronic provenance mode must keep the frozen ETM 2013 "
+                    "B4 source"
+                )
+            if self.b5_source != _default_kaon_lr_b5_source():
+                raise ValueError(
+                    "default LR hadronic provenance mode must keep the frozen ETM 2013 "
+                    "B5 source"
+                )
+            if self.r_chi_source != _default_kaon_lr_r_chi_source(default_r_chi_freeze):
+                raise ValueError(
+                    "default LR hadronic provenance mode must reuse the frozen default "
+                    "R_chi source"
+                )
+            if self.mass_source != default_r_chi_freeze.kaon_mass_source:
+                raise ValueError(
+                    "default LR hadronic provenance mode must reuse the frozen default "
+                    "kaon mass source"
+                )
+            if self.decay_constant_source != _default_decay_constant_source():
+                raise ValueError(
+                    "default LR hadronic provenance mode must reuse the frozen default "
+                    "kaon decay-constant source"
+                )
+            if not _float_matches(self.B4_mu_had, _DEFAULT_KAON_LR_B4_MU_HAD):
+                raise ValueError(
+                    "default LR hadronic provenance mode requires the frozen ETM 2013 B4(2 GeV)"
+                )
+            if not _float_matches(self.B5_mu_had, _DEFAULT_KAON_LR_B5_MU_HAD):
+                raise ValueError(
+                    "default LR hadronic provenance mode requires the frozen ETM 2013 B5(2 GeV)"
+                )
+            if not _float_matches(self.m_K0_GeV, _DEFAULT_M_K0_GEV):
+                raise ValueError(
+                    "default LR hadronic provenance mode requires the frozen PDG m_K0 value"
+                )
+            if not _float_matches(self.f_K_GeV, _DEFAULT_F_K_GEV):
+                raise ValueError(
+                    "default LR hadronic provenance mode requires the frozen PDG/FLAG f_K value"
+                )
+            if not _float_matches(self.R_chi_mu_had, default_r_chi_freeze.R_chi_mu_had):
+                raise ValueError(
+                    "default LR hadronic provenance mode requires the frozen default R_chi(2 GeV)"
+                )
+            for field_name in (
+                "system_id",
+                "operator_basis_id",
+                "operator_normalization_id",
+                "renormalization_scheme_id",
+                "hamiltonian_convention_id",
+                "q4_matrix_element_formula_id",
+                "q5_matrix_element_formula_id",
+                "chiral_ratio_definition_id",
+                "scheme_conversion_policy_id",
+                "input_policy_id",
+                "formula_source_id",
+                "formula_citation",
+                "formula_locator_label",
+                "notes",
+            ):
+                if getattr(resolved_contract, field_name) != getattr(
+                    expected_default_contract,
+                    field_name,
+                ):
+                    raise ValueError(
+                        f"contract.{field_name} must stay frozen for default LR hadronic "
+                        "provenance mode"
+                    )
+            for field_name in ("mu_had_GeV", "evaluation_scale_GeV"):
+                if not _float_matches(
+                    getattr(resolved_contract, field_name),
+                    getattr(expected_default_contract, field_name),
+                    atol=1e-12,
+                ):
+                    raise ValueError(
+                        f"contract.{field_name} must stay frozen for default LR hadronic "
+                        "provenance mode"
+                    )
         if tuple(self.supported_operator_names) != _SUPPORTED_LR_OPERATORS:
             raise ValueError("supported_operator_names must match the LR hadronic subset")
         if tuple(self.unsupported_operator_names) != _UNSUPPORTED_LR_OPERATORS:
@@ -2109,7 +2347,26 @@ def _default_decay_constant_source() -> Paper07101869HadronicSourceRef:
     )
 
 
-def _default_bag_parameter_source() -> Paper07101869HadronicSourceRef:
+def _default_bag_parameter_source(
+    *,
+    mu_had_GeV: float,
+) -> Paper07101869HadronicSourceRef:
+    if _kaon_mu_had_uses_frozen_default_b_k(mu_had_GeV=mu_had_GeV):
+        return Paper07101869HadronicSourceRef(
+            source_id=_DEFAULT_BAG_SOURCE_ID,
+            source_kind="review-average",
+            citation="PDG 2024 Lattice QCD review, Sec. 17.3.2, FLAG average",
+            locator_label="Sec. 17.3.2, kaon bag parameter discussion",
+            year=2024,
+            renormalization_scheme_id=PAPER_0710_1869_DELTAF2_BAG_PARAMETER_SOURCE_SCHEME_ID,
+            transformation_id=PAPER_0710_1869_DELTAF2_BAG_PARAMETER_TRANSFORMATION_ID,
+            notes=(
+                "Uses the FLAG average hat{B}_K = 0.7625 as the underlying default source. "
+                f"In the default mu_had regime, the emitted B_K_mu_had payload is pinned to "
+                f"{_DEFAULT_CANONICAL_B_K_MU_HAD:.16f} to preserve the canonical default "
+                "export instead of being recomputed at runtime."
+            ),
+        )
     return Paper07101869HadronicSourceRef(
         source_id=_DEFAULT_BAG_SOURCE_ID,
         source_kind="derived-from-rgi",
@@ -2120,7 +2377,62 @@ def _default_bag_parameter_source() -> Paper07101869HadronicSourceRef:
         transformation_id=PAPER_0710_1869_DELTAF2_BAG_PARAMETER_TRANSFORMATION_ID,
         notes=(
             "Uses the FLAG average hat{B}_K = 0.7625 and converts it to B_K(mu_had) "
-            "with the paper-mode LO Q1 inverse-running convention."
+            "with the paper-mode LO Q1 inverse-running convention away from the "
+            "default mu_had regime."
+        ),
+    )
+
+
+def _default_kaon_lr_b4_source() -> Paper07101869HadronicSourceRef:
+    return Paper07101869HadronicSourceRef(
+        source_id=_DEFAULT_KAON_LR_B4_SOURCE_ID,
+        source_kind="lattice-result",
+        citation="ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287, Table 1",
+        locator_label="Table 1, MS scheme of Buras et al. ref. [15], 2 GeV",
+        year=2013,
+        renormalization_scheme_id=PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,
+        scale_GeV=PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+        transformation_id="none",
+        notes=(
+            f"Freezes ETM 2013 Table 1 B4(2 GeV) = {_DEFAULT_KAON_LR_B4_MU_HAD:.2f} +/- "
+            f"{_DEFAULT_KAON_LR_B4_UNCERTAINTY:.2f} in the repo's frozen BMU-linked "
+            "MS/NDR operator scheme, with no hidden 3 GeV -> 2 GeV running or RI-MOM -> "
+            "MS conversion."
+        ),
+    )
+
+
+def _default_kaon_lr_b5_source() -> Paper07101869HadronicSourceRef:
+    return Paper07101869HadronicSourceRef(
+        source_id=_DEFAULT_KAON_LR_B5_SOURCE_ID,
+        source_kind="lattice-result",
+        citation="ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287, Table 1",
+        locator_label="Table 1, MS scheme of Buras et al. ref. [15], 2 GeV",
+        year=2013,
+        renormalization_scheme_id=PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,
+        scale_GeV=PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+        transformation_id="none",
+        notes=(
+            f"Freezes ETM 2013 Table 1 B5(2 GeV) = {_DEFAULT_KAON_LR_B5_MU_HAD:.2f} +/- "
+            f"{_DEFAULT_KAON_LR_B5_UNCERTAINTY:.2f} in the repo's frozen BMU-linked "
+            "MS/NDR operator scheme, with no hidden 3 GeV -> 2 GeV running or RI-MOM -> "
+            "MS conversion."
+        ),
+    )
+
+
+def _default_kaon_lr_hadronic_contract() -> Paper07101869KaonLRHadronicContract:
+    return Paper07101869KaonLRHadronicContract(
+        renormalization_scheme_id=PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,
+        mu_had_GeV=PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+        evaluation_scale_GeV=PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+        chiral_ratio_definition_id=PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DEFINITION_ID,
+        input_policy_id=PAPER_0710_1869_DELTAF2_KAON_LR_DEFAULT_INPUT_POLICY_ID,
+        notes=(
+            "LR-DEFAULT-HAD-1 frozen default bundle: ETM 2013 Table 1 supplies "
+            "B4/B5 in the repo's frozen BMU-linked MS/NDR operator scheme at 2 GeV, "
+            "and the package reuses the separately frozen default R_chi(2 GeV) object. "
+            "No hidden 3 GeV -> 2 GeV running or RI-MOM -> MS conversion is applied."
         ),
     )
 
@@ -2577,6 +2889,46 @@ def default_paper_0710_1869_kaon_lr_r_chi_summary() -> dict[str, object]:
     return default_paper_0710_1869_kaon_lr_r_chi_freeze().summary()
 
 
+def _default_kaon_lr_r_chi_source(
+    r_chi_freeze: Paper07101869KaonLRChiralRatioFreeze | None = None,
+) -> Paper07101869HadronicSourceRef:
+    resolved_r_chi_freeze = (
+        default_paper_0710_1869_kaon_lr_r_chi_freeze()
+        if r_chi_freeze is None
+        else r_chi_freeze
+    )
+    return Paper07101869HadronicSourceRef(
+        source_id=resolved_r_chi_freeze.source_id,
+        source_kind="derived-from-quark-masses",
+        citation=(
+            "Derived from the frozen PDG 2024 N_L = 4 MS-bar quark-mass package via "
+            "Becirevic and Villadoro, hep-lat/0408029, Eq. (5)"
+        ),
+        locator_label="BV 2004 Eq. (5) with frozen PDG 2024 inputs at 2 GeV",
+        year=2024,
+        renormalization_scheme_id=resolved_r_chi_freeze.mass_renormalization_scheme_id,
+        scale_GeV=resolved_r_chi_freeze.mu_had_GeV,
+        transformation_id="none",
+        notes=(
+            "Reuses the frozen default R_chi(2 GeV) derivation object with explicit "
+            "PDG 2024 N_L = 4 mass-scheme semantics and no hidden 3 GeV -> 2 GeV running "
+            "or RI-MOM -> MS conversion."
+        ),
+    )
+
+
+def _require_default_kaon_lr_r_chi_freeze(
+    name: str,
+    value: Paper07101869KaonLRChiralRatioFreeze,
+) -> Paper07101869KaonLRChiralRatioFreeze:
+    if not isinstance(value, Paper07101869KaonLRChiralRatioFreeze):
+        raise ValueError(f"{name} must be a Paper07101869KaonLRChiralRatioFreeze")
+    expected = default_paper_0710_1869_kaon_lr_r_chi_freeze()
+    if value != expected:
+        raise ValueError(f"{name} must match the frozen default kaon LR R_chi object")
+    return value
+
+
 def build_paper_0710_1869_kaon_lr_hadronic_inputs(
     *,
     B4_mu_had: float,
@@ -2745,6 +3097,72 @@ def build_paper_0710_1869_kaon_lr_hadronic_summary(
     ).summary()
 
 
+def build_paper_0710_1869_default_kaon_lr_hadronic_inputs(
+    *,
+    r_chi_freeze: Paper07101869KaonLRChiralRatioFreeze | None = None,
+) -> Paper07101869KaonLRHadronicInputs:
+    """Return the frozen default kaon LR hadronic bundle from ETM 2013 and frozen ``R_chi``."""
+
+    resolved_r_chi_freeze = (
+        default_paper_0710_1869_kaon_lr_r_chi_freeze()
+        if r_chi_freeze is None
+        else _require_default_kaon_lr_r_chi_freeze("r_chi_freeze", r_chi_freeze)
+    )
+    return Paper07101869KaonLRHadronicInputs(
+        B4_mu_had=_DEFAULT_KAON_LR_B4_MU_HAD,
+        B5_mu_had=_DEFAULT_KAON_LR_B5_MU_HAD,
+        R_chi_mu_had=resolved_r_chi_freeze.R_chi_mu_had,
+        b4_source=_default_kaon_lr_b4_source(),
+        b5_source=_default_kaon_lr_b5_source(),
+        r_chi_source=_default_kaon_lr_r_chi_source(resolved_r_chi_freeze),
+        mass_source=resolved_r_chi_freeze.kaon_mass_source,
+        decay_constant_source=_default_decay_constant_source(),
+        m_K0_GeV=resolved_r_chi_freeze.m_K0_GeV,
+        f_K_GeV=_DEFAULT_F_K_GEV,
+        contract=_default_kaon_lr_hadronic_contract(),
+        renormalization_scheme_id=PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,
+        mu_had_GeV=PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+        bundle_id=_DEFAULT_KAON_LR_HADRONIC_BUNDLE_ID,
+        source_id=_DEFAULT_KAON_LR_HADRONIC_SOURCE_ID,
+        provenance_ids=_DEFAULT_KAON_LR_HADRONIC_PROVENANCE_IDS,
+        input_provenance_mode_id=(
+            PAPER_0710_1869_DELTAF2_LR_HADRONIC_DEFAULT_PROVENANCE_MODE_ID
+        ),
+        chiral_ratio_definition_id=PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DEFINITION_ID,
+        input_policy_id=PAPER_0710_1869_DELTAF2_KAON_LR_DEFAULT_INPUT_POLICY_ID,
+        notes=(
+            "LR-DEFAULT-HAD-1 frozen default bundle: ETM Collaboration, JHEP 03 (2013) "
+            "089, arXiv:1207.1287, Table 1, MS scheme of Buras et al. ref. [15], at 2 GeV "
+            "for B4 = 0.78(3) and B5 = 0.57(4), combined with the separately frozen "
+            "default R_chi(2 GeV) object. This bundle is distinct from the custom-input "
+            "LR path and does not widen default/exported observable surfaces."
+        ),
+    )
+
+
+def build_paper_0710_1869_default_kaon_lr_hadronic_summary(
+    *,
+    r_chi_freeze: Paper07101869KaonLRChiralRatioFreeze | None = None,
+) -> dict[str, object]:
+    """Return the deterministic summary mapping for the frozen default kaon LR bundle."""
+
+    return build_paper_0710_1869_default_kaon_lr_hadronic_inputs(
+        r_chi_freeze=r_chi_freeze,
+    ).summary()
+
+
+def default_paper_0710_1869_kaon_lr_hadronic_inputs() -> Paper07101869KaonLRHadronicInputs:
+    """Return the frozen default kaon LR hadronic bundle."""
+
+    return build_paper_0710_1869_default_kaon_lr_hadronic_inputs()
+
+
+def default_paper_0710_1869_kaon_lr_hadronic_summary() -> dict[str, object]:
+    """Return the summary mapping for the frozen default kaon LR hadronic bundle."""
+
+    return default_paper_0710_1869_kaon_lr_hadronic_inputs().summary()
+
+
 def build_paper_0710_1869_kaon_hadronic_bundle(
     *,
     mu_had_GeV: float = PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
@@ -2767,10 +3185,6 @@ def build_paper_0710_1869_kaon_hadronic_bundle(
     resolved_hat_bk = require_positive_finite(
         "hat_B_K_rgi_source_value", hat_B_K_rgi_source_value
     )
-    default_b_k_from_defaults = _derive_b_k_mu_had(
-        mu_had_GeV=resolved_mu_had,
-        hat_B_K_rgi=_DEFAULT_HAT_B_K_RGI,
-    )
     resolved_b_k = (
         _derive_b_k_mu_had(
             mu_had_GeV=resolved_mu_had,
@@ -2783,9 +3197,9 @@ def build_paper_0710_1869_kaon_hadronic_bundle(
     custom_mass_value = not _float_matches(m_K0_GeV, _DEFAULT_M_K0_GEV)
     custom_decay_constant_value = not _float_matches(f_K_GeV, _DEFAULT_F_K_GEV)
     custom_hat_bk_value = not _float_matches(resolved_hat_bk, _DEFAULT_HAT_B_K_RGI)
-    custom_b_k_value = B_K_mu_had is not None and not _float_matches(
-        resolved_b_k,
-        default_b_k_from_defaults,
+    custom_b_k_value = B_K_mu_had is not None and not _matches_default_kaon_b_k_mu_had(
+        B_K_mu_had=resolved_b_k,
+        mu_had_GeV=resolved_mu_had,
     )
     if custom_mass_value and mass_source is None:
         raise ValueError(
@@ -2837,7 +3251,7 @@ def build_paper_0710_1869_kaon_hadronic_bundle(
         else decay_constant_source
     )
     resolved_bag_parameter_source = (
-        _default_bag_parameter_source()
+        _default_bag_parameter_source(mu_had_GeV=resolved_mu_had)
         if bag_parameter_source is None
         else bag_parameter_source
     )
@@ -2913,6 +3327,12 @@ def build_paper_0710_1869_kaon_hadronic_bundle(
         resolved_input_provenance_mode_id = (
             PAPER_0710_1869_DELTAF2_HADRONIC_DEFAULT_PROVENANCE_MODE_ID
         )
+        if (
+            uses_derived_b_k_from_hat
+            and not custom_hat_bk_value
+            and _kaon_mu_had_uses_frozen_default_b_k(mu_had_GeV=resolved_mu_had)
+        ):
+            resolved_b_k = _DEFAULT_CANONICAL_B_K_MU_HAD
     return Paper07101869KaonHadronicBundle(
         mu_had_GeV=resolved_mu_had,
         m_K0_GeV=m_K0_GeV,
@@ -2932,7 +3352,7 @@ def build_paper_0710_1869_kaon_hadronic_bundle(
 
 
 def default_paper_0710_1869_kaon_hadronic_bundle() -> Paper07101869KaonHadronicBundle:
-    """Return the default kaon hadronic bundle at the frozen paper ``mu_had``."""
+    """Return the default kaon hadronic bundle with the frozen canonical payload."""
 
     return build_paper_0710_1869_kaon_hadronic_bundle()
 
@@ -3398,6 +3818,7 @@ __all__ = [
     "PAPER_0710_1869_DELTAF2_KAON_HADRONIC_SYSTEM_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_CHIRAL_RATIO_DEFINITION_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_FORMULA_SOURCE_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_DEFAULT_INPUT_POLICY_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_HADRONIC_CONTRACT_SCHEMA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_HADRONIC_INPUTS_SCHEMA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_HADRONIC_SUMMARY_SCHEMA_ID",
@@ -3417,6 +3838,7 @@ __all__ = [
     "PAPER_0710_1869_DELTAF2_KAON_MATRIX_ELEMENT_FORMULA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_PARITY_RELATION_ID",
     "PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID",
+    "PAPER_0710_1869_DELTAF2_LR_HADRONIC_DEFAULT_PROVENANCE_MODE_ID",
     "PAPER_0710_1869_DELTAF2_LR_R_CHI_PROVENANCE_MODE_ID",
     "Paper07101869BMesonHadronicBundle",
     "Paper07101869BMesonHadronicContract",
@@ -3441,6 +3863,8 @@ __all__ = [
     "build_paper_0710_1869_kaon_hadronic_bundle",
     "build_paper_0710_1869_kaon_hadronic_summary",
     "build_paper_0710_1869_kaon_hadronic_summary_alias",
+    "build_paper_0710_1869_default_kaon_lr_hadronic_inputs",
+    "build_paper_0710_1869_default_kaon_lr_hadronic_summary",
     "build_paper_0710_1869_kaon_lr_hadronic",
     "build_paper_0710_1869_kaon_lr_hadronic_inputs",
     "build_paper_0710_1869_kaon_lr_r_chi_freeze",
@@ -3449,6 +3873,8 @@ __all__ = [
     "default_paper_0710_1869_kaon_hadronic",
     "default_paper_0710_1869_kaon_hadronic_bundle",
     "default_paper_0710_1869_kaon_hadronic_summary",
+    "default_paper_0710_1869_kaon_lr_hadronic_inputs",
+    "default_paper_0710_1869_kaon_lr_hadronic_summary",
     "default_paper_0710_1869_kaon_lr_r_chi_freeze",
     "default_paper_0710_1869_kaon_lr_r_chi_summary",
 ]

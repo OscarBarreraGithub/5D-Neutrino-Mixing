@@ -15,7 +15,8 @@ It is intentionally separate from `AGENT_ORCHESTRATION_PLAN.md`.
   physics reviewers, and second-pass reviewers should be deployed and how their
   findings are merged.
 - `paper_0710_1869/CURRENT_STATUS.md` is the authoritative handoff note for
-  the current completed milestone, synced repo state, and next honest slice.
+  the current completed milestone, current local repo state, and
+  next-honest-milestone state.
 
 The central conclusion of those planning/review passes is:
 
@@ -481,9 +482,20 @@ Required outcomes:
   PDG 2024 `N_L = 4` mass-source chain while leaving default `B4/B5` LR
   freezing, LR observables, artifacts, and verifier unchanged, is the
   completed milestone after D0-Q1-CUSTOM-1
-- LR-DEFAULT-HAD-1, freezing sourced default LR `B4/B5` inputs plus a full
-  default LR hadronic bundle, is the next honest milestone after
-  LR-RCHI-FREEZE-1
+- LR-DEFAULT-HAD-1, whose mandatory Phase 1 docs/source-freeze gate is
+  ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287, Table 1, MS scheme
+  of Buras et al. ref. [15], at `2 GeV`, with `B4(2 GeV) = 0.78(3)` and
+  `B5(2 GeV) = 0.57(4)` in the already-frozen BMU-linked MS/NDR path with no
+  hidden `3 GeV -> 2 GeV` running or `RI-MOM -> MS` conversion, is the
+  completed milestone after LR-RCHI-FREEZE-1; it froze only the default kaon
+  LR hadronic bundle while default/exported kaon outputs, benchmark numerics,
+  artifacts, and the standalone verifier remained Q1-only, the frozen default
+  LR bundle did not become an automatic input for the custom LR-only or
+  combined `Q1 + LR` surfaces, and 2026-04-12 second-pass review plus clean
+  verification jobs `5228468`-`5228471` closed the slice
+- next milestone: `none`; there is no remaining scientific/code milestone
+  inside the current claim boundary, and only release hygiene remains before a
+  release-clean publication handoff
 - literature-style regression checks
 
 Exit criteria:

@@ -132,6 +132,7 @@ DEFAULT_LR_HADRONIC_EXPORT_NAMES = (
     "default_paper_0710_1869_kaon_lr_hadronic",
     "default_paper_0710_1869_kaon_lr_hadronic_summary",
 )
+DEFAULT_LR_HADRONIC_VALUE_EXPORT_NAMES = DEFAULT_LR_HADRONIC_EXPORT_NAMES[:-1]
 KAON_LR_R_CHI_FREEZE_EXPORT_NAMES = (
     "default_paper_0710_1869_kaon_lr_r_chi_freeze",
     "build_paper_0710_1869_kaon_lr_r_chi_freeze",
@@ -285,6 +286,51 @@ EXPECTED_KAON_LR_R_CHI_FREEZE_SCHEMA_ID = (
 EXPECTED_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_summary.v1"
 )
+EXPECTED_DEFAULT_LR_HADRONIC_BUNDLE_ID = "hadronic.kaon.lr.default.etm2013_ms_2gev.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID = (
+    "hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_INPUT_POLICY_ID = (
+    "default_source.etm2013.table1.ms_2gev.no_hidden_conversion.v1"
+)
+EXPECTED_CUSTOM_LR_HADRONIC_INPUT_POLICY_ID = (
+    "custom_input_only.default_lr_bundle_frozen_separately.no_auto_consumption.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID = (
+    "hadronic.kaon.lr.b4.etm2013.table1.ms_2gev.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID = (
+    "hadronic.kaon.lr.b5.etm2013.table1.ms_2gev.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID = "hadronic.kaon.lr.r_chi.pdg2024_msbar_nl4.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID = "pdg.2024.k0.mass.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID = "pdg.2024.fkplus.eq72.14.v1"
+EXPECTED_DEFAULT_LR_OPERATOR_BASIS_ID = "kk_gluon_tree_np_only.v1"
+EXPECTED_DEFAULT_LR_OPERATOR_NORMALIZATION_ID = (
+    "paper_0710_1869.deltaf2.kk_gluon_tree_color_normalization.v1"
+)
+EXPECTED_DEFAULT_LR_HAMILTONIAN_CONVENTION_ID = "heff.sum_ci_qi.no_hc_factor.v1"
+EXPECTED_DEFAULT_LR_Q4_FORMULA_ID = (
+    "kaon.q4_lr.o4_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+)
+EXPECTED_DEFAULT_LR_Q5_FORMULA_ID = (
+    "kaon.q5_lr.o5_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_ETM_CITATION = (
+    "ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE = 0.78
+EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE = 0.57
+EXPECTED_DEFAULT_LR_HADRONIC_PROVENANCE_IDS = [
+    EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID,
+]
+EXPECTED_DEFAULT_LR_SUPPORTED_OPERATORS = {"Q4_LR", "Q5_LR"}
+EXPECTED_DEFAULT_LR_UNSUPPORTED_OPERATORS = {"Q1_VLL", "Q1_VRR"}
 EXPECTED_CUSTOM_TOTAL_SCOPE_ID = "kaon.np_only.custom_total.q1_plus_lr.v1"
 EXPECTED_CUSTOM_TOTAL_INTERPRETATION_ID = "kaon.np_only.custom_total.q1_plus_lr.v1"
 EXPECTED_CUSTOM_TOTAL_M12_OBSERVABLE_ID = "M12_K_NP_CUSTOM_TOTAL"
@@ -478,6 +524,11 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--emit-default-hadronic-json",
+        action="store_true",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--emit-default-lr-hadronic-json",
         action="store_true",
         help=argparse.SUPPRESS,
     )
@@ -1607,6 +1658,20 @@ def _default_hadronic_payload(modules: Mapping[str, Any]) -> dict[str, Any]:
     return _payload_from_value(callable_obj())
 
 
+def _default_hadronic_builder_payload(modules: Mapping[str, Any]) -> dict[str, Any]:
+    module = modules["eft_deltaf2.hadronic"]
+    builder = _get_callable(
+        module,
+        HADRONIC_BUILDER_NAMES,
+    )
+    if not callable(builder):
+        raise AssertionError(
+            "hadronic module is present but exposes no default hadronic builder; expected one "
+            "of " + ", ".join(HADRONIC_BUILDER_NAMES)
+        )
+    return _payload_from_value(builder())
+
+
 def _default_hadronic_value(modules: Mapping[str, Any]) -> Any:
     module = modules["eft_deltaf2.hadronic"]
     callable_obj = _get_callable(
@@ -1619,6 +1684,47 @@ def _default_hadronic_value(modules: Mapping[str, Any]) -> Any:
             + ", ".join(DEFAULT_HADRONIC_EXPORT_NAMES + DEFAULT_HADRONIC_SUMMARY_NAMES)
         )
     return callable_obj()
+
+
+def _default_kaon_lr_hadronic_payload(modules: Mapping[str, Any]) -> dict[str, Any]:
+    module = modules["eft_deltaf2.hadronic"]
+    callable_obj = _get_callable(
+        module,
+        DEFAULT_LR_HADRONIC_EXPORT_NAMES,
+    )
+    if not callable(callable_obj):
+        raise AssertionError(
+            "hadronic module is present but exposes no default LR hadronic export; expected one "
+            "of " + ", ".join(DEFAULT_LR_HADRONIC_EXPORT_NAMES)
+        )
+    return _payload_from_value(callable_obj())
+
+
+def _default_kaon_lr_hadronic_value(modules: Mapping[str, Any]) -> Any:
+    module = modules["eft_deltaf2.hadronic"]
+    callable_obj = _get_callable(
+        module,
+        DEFAULT_LR_HADRONIC_VALUE_EXPORT_NAMES,
+    )
+    if not callable(callable_obj):
+        raise AssertionError(
+            "hadronic module is present but exposes no default LR hadronic object export; "
+            "expected one of " + ", ".join(DEFAULT_LR_HADRONIC_VALUE_EXPORT_NAMES)
+        )
+    return callable_obj()
+
+
+def _default_kaon_lr_hadronic_builder_payload(
+    modules: Mapping[str, Any],
+) -> dict[str, Any]:
+    module = modules["eft_deltaf2.hadronic"]
+    builder = getattr(module, "build_paper_0710_1869_default_kaon_lr_hadronic_inputs", None)
+    if not callable(builder):
+        raise AssertionError(
+            "hadronic module is present but exposes no default LR hadronic builder; "
+            "expected build_paper_0710_1869_default_kaon_lr_hadronic_inputs"
+        )
+    return _payload_from_value(builder())
 
 
 def _default_kaon_lr_r_chi_freeze_payload(modules: Mapping[str, Any]) -> dict[str, Any]:
@@ -1855,6 +1961,60 @@ def _extract_lr_matrix_element(
         return float(candidate)
     except (TypeError, ValueError):
         return None
+
+
+def _source_metadata_text(payload: Mapping[str, Any], source_key: str) -> str:
+    source_payload = _nested_value(payload, ((source_key,),))
+    if not isinstance(source_payload, Mapping):
+        return ""
+    return " ".join(
+        str(source_payload.get(field_name, ""))
+        for field_name in ("citation", "locator_label", "notes")
+    )
+
+
+def _normalized_metadata_text(value: object) -> str:
+    lowered = str(value).strip().lower().replace("-", " ").replace("_", " ")
+    return " ".join(lowered.split())
+
+
+def _is_current_custom_lr_input_policy(policy_id: object) -> bool:
+    lowered = str(policy_id).strip().lower()
+    return bool(lowered) and lowered == EXPECTED_CUSTOM_LR_HADRONIC_INPUT_POLICY_ID.lower()
+
+
+def _has_current_custom_lr_note_core(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return bool(lowered) and "defaults not frozen" not in lowered
+
+
+def _is_current_custom_lr_contract_notes(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return (
+        _has_current_custom_lr_note_core(notes)
+        and "frozen default lr hadronic bundle remains separate" in lowered
+        and "not auto consumed on this custom surface" in lowered
+    )
+
+
+def _is_current_custom_lr_bundle_notes(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return (
+        _has_current_custom_lr_note_core(notes)
+        and "frozen default lr hadronic bundle remains separate" in lowered
+        and (
+            "lr only and custom combined observable surfaces still "
+            "require explicit custom lr inputs"
+            in lowered
+        )
+    )
+
+
+def _is_custom_input_only_guard_error(error: str | None) -> bool:
+    if not error:
+        return False
+    lowered = error.lower()
+    return "input_provenance_mode_id" in lowered or "custom" in lowered
 
 
 def _replace_rg_lr_wilsons(
@@ -3286,10 +3446,13 @@ def _build_hadronic_summary(modules: Mapping[str, Any]) -> tuple[list[str], dict
         return ([str(exc)], {"status": "missing_default_hadronic_export"})
 
     second = _default_hadronic_payload(modules)
+    builder_default_payload = _default_hadronic_builder_payload(modules)
     deterministic = json.dumps(payload, sort_keys=True) == json.dumps(second, sort_keys=True)
     failures = []
     if not deterministic:
         failures.append("default hadronic export is not deterministic within one process")
+    if builder_default_payload != payload:
+        failures.append("default hadronic export does not match the builder default payload")
     cross_process_payload = _cross_process_default_hadronic_payload()
     cross_process_deterministic = json.dumps(payload, sort_keys=True) == json.dumps(
         cross_process_payload,
@@ -3514,6 +3677,7 @@ def _build_hadronic_summary(modules: Mapping[str, Any]) -> tuple[list[str], dict
         "bag_source_transformation_matches_bundle": (
             bag_parameter_source_transformation_id == bag_parameter_transformation_id
         ),
+        "default_export_matches_builder_default": builder_default_payload == payload,
         "supported_operator_subset_is_pr5a": isinstance(operator_names, Sequence)
         and not isinstance(operator_names, (str, bytes, bytearray))
         and {str(item) for item in operator_names} == EXPECTED_SUPPORTED_OPERATORS,
@@ -3539,6 +3703,549 @@ def _build_hadronic_summary(modules: Mapping[str, Any]) -> tuple[list[str], dict
         "bag_parameter_source_scheme_id": bag_parameter_source_scheme_id,
         "bag_parameter_transformation_id": bag_parameter_transformation_id,
         "mu_had_GeV": float(mu_had_GeV) if mu_had_GeV is not None else None,
+        "checks": checks,
+        "payload": payload,
+    }
+
+
+def _build_default_lr_hadronic_probe_summary(
+    modules: Mapping[str, Any],
+) -> tuple[list[str], dict[str, Any]]:
+    hadronic_module = modules.get("eft_deltaf2.hadronic")
+    if hadronic_module is None:
+        return [], {"status": "missing"}
+
+    try:
+        payload = _default_kaon_lr_hadronic_payload(modules)
+        second_payload = _default_kaon_lr_hadronic_payload(modules)
+        default_lr_value = _default_kaon_lr_hadronic_value(modules)
+        builder_payload = _default_kaon_lr_hadronic_builder_payload(modules)
+        cross_process_payload = _cross_process_default_lr_hadronic_payload()
+    except AssertionError as exc:
+        return ([str(exc)], {"status": "missing_default_lr_hadronic_export"})
+    except Exception as exc:  # pragma: no cover - surfaced in acceptance payload
+        return ([f"{type(exc).__name__}: {exc}"], {"status": "error", "error": str(exc)})
+
+    payload_canonical_json, payload_sha256 = _canonical_payload_json_and_sha256(payload)
+    second_payload_canonical_json, second_payload_sha256 = (
+        _canonical_payload_json_and_sha256(second_payload)
+    )
+    cross_process_payload_canonical_json, cross_process_payload_sha256 = (
+        _canonical_payload_json_and_sha256(cross_process_payload)
+    )
+
+    system_id = _nested_value(payload, (("system_id",),))
+    scheme_id = _nested_value(
+        payload,
+        (
+            ("scheme_id",),
+            ("renormalization_scheme_id",),
+            ("contract", "renormalization_scheme_id"),
+        ),
+    )
+    mu_had_GeV = _nested_value(
+        payload,
+        (
+            ("mu_had_GeV",),
+            ("evaluation_scale_GeV",),
+            ("contract", "mu_had_GeV"),
+        ),
+    )
+    bundle_id = _nested_value(payload, (("bundle_id",),))
+    source_id = _nested_value(payload, (("source_id",),))
+    basis_id = _nested_value(
+        payload,
+        (
+            ("operator_basis_id",),
+            ("contract", "operator_basis_id"),
+        ),
+    )
+    normalization_id = _nested_value(
+        payload,
+        (
+            ("operator_normalization_id",),
+            ("contract", "operator_normalization_id"),
+        ),
+    )
+    hamiltonian_convention_id = _nested_value(
+        payload,
+        (
+            ("hamiltonian_convention_id",),
+            ("contract", "hamiltonian_convention_id"),
+        ),
+    )
+    contract_basis_id = _nested_value(payload, (("contract", "operator_basis_id"),))
+    contract_normalization_id = _nested_value(
+        payload,
+        (("contract", "operator_normalization_id"),),
+    )
+    contract_hamiltonian_convention_id = _nested_value(
+        payload,
+        (("contract", "hamiltonian_convention_id"),),
+    )
+    provenance_ids = _nested_value(
+        payload,
+        (
+            ("provenance_ids",),
+            ("tags", "provenance_ids"),
+        ),
+    )
+    input_policy_id = _nested_value(
+        payload,
+        (
+            ("input_policy_id",),
+            ("contract", "input_policy_id"),
+            ("tags", "input_policy_id"),
+        ),
+    )
+    b4_mu_had = _nested_value(payload, (("B4_mu_had",),))
+    b5_mu_had = _nested_value(payload, (("B5_mu_had",),))
+    r_chi_mu_had = _nested_value(payload, (("R_chi_mu_had",),))
+    m_K0_GeV = _nested_value(payload, (("m_K0_GeV",),))
+    f_K_GeV = _nested_value(payload, (("f_K_GeV",),))
+    q4_formula_id = _nested_value(
+        payload,
+        (
+            ("q4_matrix_element_formula_id",),
+            ("contract", "q4_matrix_element_formula_id"),
+        ),
+    )
+    q5_formula_id = _nested_value(
+        payload,
+        (
+            ("q5_matrix_element_formula_id",),
+            ("contract", "q5_matrix_element_formula_id"),
+        ),
+    )
+    q4_matrix_element_GeV4 = _extract_lr_matrix_element(payload, "Q4_LR")
+    q5_matrix_element_GeV4 = _extract_lr_matrix_element(payload, "Q5_LR")
+    supported_operator_names = _string_list(
+        _nested_value(
+            payload,
+            (
+                ("supported_operator_names",),
+                ("contract", "supported_operator_names"),
+            ),
+        )
+    )
+    unsupported_operator_names = _string_list(
+        _nested_value(
+            payload,
+            (
+                ("unsupported_operator_names",),
+                ("contract", "unsupported_operator_names"),
+            ),
+        )
+    )
+
+    b4_source_id = _nested_value(payload, (("b4_source", "source_id"),))
+    b5_source_id = _nested_value(payload, (("b5_source", "source_id"),))
+    b4_source_transformation_id = _nested_value(
+        payload,
+        (("b4_source", "transformation_id"),),
+    )
+    b5_source_transformation_id = _nested_value(
+        payload,
+        (("b5_source", "transformation_id"),),
+    )
+    r_chi_source_id = _nested_value(payload, (("r_chi_source", "source_id"),))
+    mass_source_id = _nested_value(payload, (("mass_source", "source_id"),))
+    decay_constant_source_id = _nested_value(
+        payload,
+        (("decay_constant_source", "source_id"),),
+    )
+    b4_source_scheme_id = _nested_value(payload, (("b4_source", "renormalization_scheme_id"),))
+    b5_source_scheme_id = _nested_value(payload, (("b5_source", "renormalization_scheme_id"),))
+    r_chi_source_scheme_id = _nested_value(
+        payload,
+        (("r_chi_source", "renormalization_scheme_id"),),
+    )
+    b4_source_scale_GeV = _nested_value(payload, (("b4_source", "scale_GeV"),))
+    b5_source_scale_GeV = _nested_value(payload, (("b5_source", "scale_GeV"),))
+    r_chi_source_scale_GeV = _nested_value(payload, (("r_chi_source", "scale_GeV"),))
+    b4_source_metadata_text = _source_metadata_text(payload, "b4_source")
+    b5_source_metadata_text = _source_metadata_text(payload, "b5_source")
+
+    expected_q4 = None
+    expected_q5 = None
+    if all(
+        _positive_finite(value)
+        for value in (b4_mu_had, r_chi_mu_had, m_K0_GeV, f_K_GeV)
+    ):
+        expected_q4 = (
+            2.0
+            * float(r_chi_mu_had)
+            * (float(m_K0_GeV) ** 2)
+            * (float(f_K_GeV) ** 2)
+            * float(b4_mu_had)
+        )
+    if all(
+        _positive_finite(value)
+        for value in (b5_mu_had, r_chi_mu_had, m_K0_GeV, f_K_GeV)
+    ):
+        expected_q5 = (
+            (2.0 / 3.0)
+            * float(r_chi_mu_had)
+            * (float(m_K0_GeV) ** 2)
+            * (float(f_K_GeV) ** 2)
+            * float(b5_mu_had)
+        )
+
+    custom_lr_only_rejection_error = None
+    custom_combined_rejection_error = None
+    custom_lr_only_rejects_default_lr_bundle = False
+    custom_combined_rejects_default_lr_bundle = False
+    observable_module = modules.get("eft_deltaf2.observables")
+    if (
+        observable_module is not None
+        and bool(scheme_id)
+        and _positive_finite(mu_had_GeV)
+    ):
+        lr_evaluator = _get_callable(observable_module, CUSTOM_LR_OBSERVABLE_EXPORT_NAMES)
+        if callable(lr_evaluator):
+            try:
+                probe_rg_value = _replace_rg_lr_wilsons(
+                    _default_rg_value(modules),
+                    q4_lr=LR_OBSERVABLE_PROBE_Q4,
+                    q5_lr=LR_OBSERVABLE_PROBE_Q5,
+                    renormalization_scheme_id=str(scheme_id),
+                    matching_scale_GeV=float(mu_had_GeV),
+                )
+                _invoke_observable_evaluation(
+                    lr_evaluator,
+                    rg_value=probe_rg_value,
+                    hadronic_value=default_lr_value,
+                )
+            except ValueError as exc:
+                custom_lr_only_rejection_error = f"{type(exc).__name__}: {exc}"
+                custom_lr_only_rejects_default_lr_bundle = _is_custom_input_only_guard_error(
+                    custom_lr_only_rejection_error
+                )
+            except Exception as exc:  # pragma: no cover - surfaced in acceptance payload
+                custom_lr_only_rejection_error = f"{type(exc).__name__}: {exc}"
+
+        combined_evaluator = _get_callable(
+            observable_module,
+            CUSTOM_TOTAL_OBSERVABLE_EXPORT_NAMES,
+        )
+        if callable(combined_evaluator):
+            try:
+                custom_q1_hadronic = _build_custom_q1_hadronic_bundle(
+                    modules,
+                    mu_had_GeV=float(mu_had_GeV),
+                )
+                combined_rg_value = _replace_rg_lr_wilsons(
+                    _default_rg_value(modules),
+                    q4_lr=LR_OBSERVABLE_PROBE_Q4,
+                    q5_lr=LR_OBSERVABLE_PROBE_Q5,
+                    renormalization_scheme_id=str(scheme_id),
+                    matching_scale_GeV=float(mu_had_GeV),
+                )
+                _invoke_custom_total_observable_evaluation(
+                    combined_evaluator,
+                    rg_value=combined_rg_value,
+                    q1_hadronic_bundle=custom_q1_hadronic,
+                    lr_hadronic_inputs=default_lr_value,
+                )
+            except ValueError as exc:
+                custom_combined_rejection_error = f"{type(exc).__name__}: {exc}"
+                custom_combined_rejects_default_lr_bundle = _is_custom_input_only_guard_error(
+                    custom_combined_rejection_error
+                )
+            except Exception as exc:  # pragma: no cover - surfaced in acceptance payload
+                custom_combined_rejection_error = f"{type(exc).__name__}: {exc}"
+
+    default_lr_rejection_checks: dict[str, bool] = {}
+    default_lr_rejection_errors: dict[str, str] = {}
+    for check_name, mutation in (
+        (
+            "drifted_b4_value_rejected",
+            lambda bundle: {"B4_mu_had": float(bundle.B4_mu_had) + 0.01},
+        ),
+        (
+            "drifted_b5_value_rejected",
+            lambda bundle: {"B5_mu_had": float(bundle.B5_mu_had) + 0.01},
+        ),
+        (
+            "drifted_source_id_rejected",
+            lambda bundle: {"source_id": f"{bundle.source_id}.drift"},
+        ),
+        (
+            "drifted_b4_source_id_rejected",
+            lambda bundle: {
+                "b4_source": dataclasses.replace(
+                    bundle.b4_source,
+                    source_id=f"{bundle.b4_source.source_id}.drift",
+                )
+            },
+        ),
+        (
+            "drifted_b5_source_id_rejected",
+            lambda bundle: {
+                "b5_source": dataclasses.replace(
+                    bundle.b5_source,
+                    source_id=f"{bundle.b5_source.source_id}.drift",
+                )
+            },
+        ),
+        (
+            "drifted_r_chi_source_id_rejected",
+            lambda bundle: {
+                "r_chi_source": dataclasses.replace(
+                    bundle.r_chi_source,
+                    source_id=f"{bundle.r_chi_source.source_id}.drift",
+                )
+            },
+        ),
+        (
+            "drifted_bundle_scheme_rejected",
+            lambda bundle: {
+                "renormalization_scheme_id": f"{bundle.renormalization_scheme_id}.drift"
+            },
+        ),
+        (
+            "forced_r_chi_source_bundle_scheme_rejected",
+            lambda bundle: {
+                "r_chi_source": dataclasses.replace(
+                    bundle.r_chi_source,
+                    renormalization_scheme_id=str(bundle.renormalization_scheme_id),
+                )
+            },
+        ),
+        (
+            "drifted_mu_had_rejected",
+            lambda bundle: {"mu_had_GeV": float(bundle.mu_had_GeV) + 0.25},
+        ),
+        (
+            "hidden_conversion_policy_drift_rejected",
+            lambda _bundle: {
+                "input_policy_id": "default_source.etm2013.table1.ms_2gev.hidden_conversion.v1"
+            },
+        ),
+        (
+            "hidden_r_chi_conversion_drift_rejected",
+            lambda bundle: {
+                "r_chi_source": dataclasses.replace(
+                    bundle.r_chi_source,
+                    transformation_id="ri_mom_to_ms.hidden_conversion_probe.v1",
+                )
+            },
+        ),
+    ):
+        try:
+            dataclasses.replace(default_lr_value, **mutation(default_lr_value))
+        except ValueError as exc:
+            default_lr_rejection_checks[check_name] = True
+            default_lr_rejection_errors[check_name] = f"{type(exc).__name__}: {exc}"
+        except Exception as exc:  # pragma: no cover - surfaced in acceptance payload
+            default_lr_rejection_checks[check_name] = False
+            default_lr_rejection_errors[check_name] = f"{type(exc).__name__}: {exc}"
+        else:  # pragma: no cover - surfaced in acceptance payload
+            default_lr_rejection_checks[check_name] = False
+            default_lr_rejection_errors[check_name] = "mutation unexpectedly accepted"
+
+    export_matches_builder_default = builder_payload == payload
+    checks = {
+        "probe_payload_is_deterministic": payload_canonical_json == second_payload_canonical_json,
+        "probe_payload_is_cross_process_deterministic": (
+            payload_canonical_json == cross_process_payload_canonical_json
+        ),
+        "probe_payload_sha256_matches_repeat": payload_sha256 == second_payload_sha256,
+        "probe_payload_sha256_matches_cross_process": (
+            payload_sha256 == cross_process_payload_sha256
+        ),
+        "system_is_kaon": _is_kaon_system(system_id),
+        "mu_had_is_2gev": _positive_finite(mu_had_GeV)
+        and math.isclose(float(mu_had_GeV), 2.0, rel_tol=0.0, abs_tol=1.0e-12),
+        "default_export_matches_builder_default": export_matches_builder_default,
+        "bundle_id_is_exact": bundle_id == EXPECTED_DEFAULT_LR_HADRONIC_BUNDLE_ID,
+        "source_id_is_exact": source_id == EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID,
+        "operator_basis_id_is_exact": basis_id == EXPECTED_DEFAULT_LR_OPERATOR_BASIS_ID,
+        "operator_normalization_id_is_exact": (
+            normalization_id == EXPECTED_DEFAULT_LR_OPERATOR_NORMALIZATION_ID
+        ),
+        "hamiltonian_convention_id_is_exact": (
+            hamiltonian_convention_id == EXPECTED_DEFAULT_LR_HAMILTONIAN_CONVENTION_ID
+        ),
+        "input_policy_id_is_exact": (
+            input_policy_id == EXPECTED_DEFAULT_LR_HADRONIC_INPUT_POLICY_ID
+        ),
+        "provenance_ids_match_frozen_source_package": isinstance(provenance_ids, Sequence)
+        and not isinstance(provenance_ids, (str, bytes, bytearray))
+        and list(provenance_ids) == EXPECTED_DEFAULT_LR_HADRONIC_PROVENANCE_IDS,
+        "supported_operator_subset_is_lr_only": (
+            set(supported_operator_names) == EXPECTED_DEFAULT_LR_SUPPORTED_OPERATORS
+        ),
+        "unsupported_operator_subset_is_q1_only": (
+            set(unsupported_operator_names) == EXPECTED_DEFAULT_LR_UNSUPPORTED_OPERATORS
+        ),
+        "b4_value_matches_etm2013_table1": _positive_finite(b4_mu_had)
+        and math.isclose(
+            float(b4_mu_had),
+            EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE,
+            rel_tol=0.0,
+            abs_tol=1.0e-15,
+        ),
+        "b5_value_matches_etm2013_table1": _positive_finite(b5_mu_had)
+        and math.isclose(
+            float(b5_mu_had),
+            EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE,
+            rel_tol=0.0,
+            abs_tol=1.0e-15,
+        ),
+        "r_chi_matches_frozen_default": _positive_finite(r_chi_mu_had)
+        and math.isclose(
+            float(r_chi_mu_had),
+            EXPECTED_KAON_LR_R_CHI_EXACT_VALUE,
+            rel_tol=0.0,
+            abs_tol=1.0e-15,
+        ),
+        "q4_formula_id_is_exact": q4_formula_id == EXPECTED_DEFAULT_LR_Q4_FORMULA_ID,
+        "q5_formula_id_is_exact": q5_formula_id == EXPECTED_DEFAULT_LR_Q5_FORMULA_ID,
+        "b4_source_id_is_exact": b4_source_id == EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID,
+        "b5_source_id_is_exact": b5_source_id == EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID,
+        "b4_source_transformation_id_is_none": b4_source_transformation_id == "none",
+        "b5_source_transformation_id_is_none": b5_source_transformation_id == "none",
+        "r_chi_source_id_is_exact": (
+            r_chi_source_id == EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID
+        ),
+        "mass_source_id_is_exact": mass_source_id == EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID,
+        "decay_constant_source_id_is_exact": (
+            decay_constant_source_id == EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID
+        ),
+        "contract_operator_basis_id_is_exact": (
+            contract_basis_id == EXPECTED_DEFAULT_LR_OPERATOR_BASIS_ID
+        ),
+        "contract_operator_normalization_id_is_exact": (
+            contract_normalization_id == EXPECTED_DEFAULT_LR_OPERATOR_NORMALIZATION_ID
+        ),
+        "contract_hamiltonian_convention_id_is_exact": (
+            contract_hamiltonian_convention_id
+            == EXPECTED_DEFAULT_LR_HAMILTONIAN_CONVENTION_ID
+        ),
+        "b4_source_scheme_matches_bundle": bool(scheme_id)
+        and b4_source_scheme_id == scheme_id,
+        "b5_source_scheme_matches_bundle": bool(scheme_id)
+        and b5_source_scheme_id == scheme_id,
+        "r_chi_source_scheme_matches_frozen_mass_scheme": (
+            r_chi_source_scheme_id == EXPECTED_KAON_LR_R_CHI_MASS_SCHEME_ID
+        ),
+        "r_chi_source_scheme_stays_distinct_from_bundle_scheme": bool(scheme_id)
+        and bool(r_chi_source_scheme_id)
+        and r_chi_source_scheme_id != scheme_id,
+        "b4_source_scale_matches_bundle": _positive_finite(mu_had_GeV)
+        and _positive_finite(b4_source_scale_GeV)
+        and math.isclose(
+            float(b4_source_scale_GeV),
+            float(mu_had_GeV),
+            rel_tol=0.0,
+            abs_tol=1.0e-12,
+        ),
+        "b5_source_scale_matches_bundle": _positive_finite(mu_had_GeV)
+        and _positive_finite(b5_source_scale_GeV)
+        and math.isclose(
+            float(b5_source_scale_GeV),
+            float(mu_had_GeV),
+            rel_tol=0.0,
+            abs_tol=1.0e-12,
+        ),
+        "r_chi_source_scale_matches_bundle": _positive_finite(mu_had_GeV)
+        and _positive_finite(r_chi_source_scale_GeV)
+        and math.isclose(
+            float(r_chi_source_scale_GeV),
+            float(mu_had_GeV),
+            rel_tol=0.0,
+            abs_tol=1.0e-12,
+        ),
+        "b4_source_mentions_etm2013_table1_ms_2gev": (
+            EXPECTED_DEFAULT_LR_HADRONIC_ETM_CITATION in b4_source_metadata_text
+            and "Table 1" in b4_source_metadata_text
+            and "Buras" in b4_source_metadata_text
+            and "2 GeV" in b4_source_metadata_text
+            and "B4" in b4_source_metadata_text
+            and f"{EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE:.2f}" in b4_source_metadata_text
+        ),
+        "b5_source_mentions_etm2013_table1_ms_2gev": (
+            EXPECTED_DEFAULT_LR_HADRONIC_ETM_CITATION in b5_source_metadata_text
+            and "Table 1" in b5_source_metadata_text
+            and "Buras" in b5_source_metadata_text
+            and "2 GeV" in b5_source_metadata_text
+            and "B5" in b5_source_metadata_text
+            and f"{EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE:.2f}" in b5_source_metadata_text
+        ),
+        "q4_matches_bv2004_eq5": expected_q4 is not None
+        and q4_matrix_element_GeV4 is not None
+        and math.isclose(q4_matrix_element_GeV4, expected_q4, rel_tol=0.0, abs_tol=1.0e-15),
+        "q5_matches_bv2004_eq5": expected_q5 is not None
+        and q5_matrix_element_GeV4 is not None
+        and math.isclose(q5_matrix_element_GeV4, expected_q5, rel_tol=0.0, abs_tol=1.0e-15),
+        "custom_lr_only_rejects_default_lr_bundle": custom_lr_only_rejects_default_lr_bundle,
+        "custom_combined_rejects_default_lr_bundle": (
+            custom_combined_rejects_default_lr_bundle
+        ),
+        "custom_lr_surfaces_still_require_custom_inputs": (
+            custom_lr_only_rejects_default_lr_bundle
+            and custom_combined_rejects_default_lr_bundle
+        ),
+        **default_lr_rejection_checks,
+    }
+    failures = [
+        f"default LR hadronic acceptance check failed: {name}"
+        for name, ok in checks.items()
+        if not ok
+    ]
+    if not export_matches_builder_default:
+        failures.append(
+            "default LR hadronic acceptance check failed: builder payload drifts from export"
+        )
+    return failures, {
+        "status": "ok",
+        "deterministic": checks["probe_payload_is_deterministic"],
+        "cross_process_deterministic": checks["probe_payload_is_cross_process_deterministic"],
+        "payload_sha256": payload_sha256,
+        "same_process_repeat_payload_sha256": second_payload_sha256,
+        "cross_process_payload_sha256": cross_process_payload_sha256,
+        "system_id": system_id,
+        "scheme_id": scheme_id,
+        "mu_had_GeV": float(mu_had_GeV) if mu_had_GeV is not None else None,
+        "bundle_id": bundle_id,
+        "source_id": source_id,
+        "provenance_ids": (
+            list(provenance_ids)
+            if isinstance(provenance_ids, Sequence)
+            and not isinstance(provenance_ids, (str, bytes, bytearray))
+            else None
+        ),
+        "input_policy_id": input_policy_id,
+        "B4_mu_had": float(b4_mu_had) if b4_mu_had is not None else None,
+        "B5_mu_had": float(b5_mu_had) if b5_mu_had is not None else None,
+        "R_chi_mu_had": float(r_chi_mu_had) if r_chi_mu_had is not None else None,
+        "m_K0_GeV": float(m_K0_GeV) if m_K0_GeV is not None else None,
+        "f_K_GeV": float(f_K_GeV) if f_K_GeV is not None else None,
+        "q4_matrix_element_GeV4": q4_matrix_element_GeV4,
+        "q5_matrix_element_GeV4": q5_matrix_element_GeV4,
+        "b4_source_id": b4_source_id,
+        "b5_source_id": b5_source_id,
+        "r_chi_source_id": r_chi_source_id,
+        "mass_source_id": mass_source_id,
+        "decay_constant_source_id": decay_constant_source_id,
+        "b4_source_scheme_id": b4_source_scheme_id,
+        "b5_source_scheme_id": b5_source_scheme_id,
+        "r_chi_source_scheme_id": r_chi_source_scheme_id,
+        "b4_source_scale_GeV": (
+            float(b4_source_scale_GeV) if b4_source_scale_GeV is not None else None
+        ),
+        "b5_source_scale_GeV": (
+            float(b5_source_scale_GeV) if b5_source_scale_GeV is not None else None
+        ),
+        "r_chi_source_scale_GeV": (
+            float(r_chi_source_scale_GeV) if r_chi_source_scale_GeV is not None else None
+        ),
+        "b4_source_metadata_text": b4_source_metadata_text,
+        "b5_source_metadata_text": b5_source_metadata_text,
+        "custom_lr_only_rejection_error": custom_lr_only_rejection_error,
+        "custom_combined_rejection_error": custom_combined_rejection_error,
+        "default_lr_rejection_errors": default_lr_rejection_errors,
         "checks": checks,
         "payload": payload,
     }
@@ -3636,7 +4343,7 @@ def _build_lr_r_chi_freeze_probe_summary(
             float(m_K0_GeV) / (float(m_s_mu_had_GeV) + float(m_d_mu_had_GeV))
         ) ** 2
 
-    default_lr_hadronic_still_blocked = not any(
+    default_lr_hadronic_available = any(
         callable(getattr(hadronic_module, export_name, None))
         for export_name in DEFAULT_LR_HADRONIC_EXPORT_NAMES
     )
@@ -3802,7 +4509,6 @@ def _build_lr_r_chi_freeze_probe_summary(
         "operator_vs_mass_scheme_not_aliased": bool(operator_scheme_id)
         and bool(mass_scheme_id)
         and operator_scheme_id != mass_scheme_id,
-        "default_lr_hadronic_still_blocked": default_lr_hadronic_still_blocked,
         "custom_lr_only_rejects_r_chi_freeze": custom_lr_only_rejects_r_chi_freeze,
         "custom_combined_rejects_r_chi_freeze": custom_combined_rejects_r_chi_freeze,
         "custom_lr_only_rejection_message_is_explicit_type_guard": (
@@ -3866,7 +4572,7 @@ def _build_lr_r_chi_freeze_probe_summary(
             if down_mass_source_scale_GeV is not None
             else None
         ),
-        "default_lr_hadronic_still_blocked": default_lr_hadronic_still_blocked,
+        "default_lr_hadronic_available": default_lr_hadronic_available,
         "default_lr_hadronic_exports_present": {
             export_name: callable(getattr(hadronic_module, export_name, None))
             for export_name in DEFAULT_LR_HADRONIC_EXPORT_NAMES
@@ -4013,6 +4719,10 @@ def _build_custom_lr_hadronic_probe_summary(
             ("tags", "input_provenance_mode_id"),
         ),
     )
+    input_policy_id = _nested_value(payload, (("input_policy_id",),))
+    contract_input_policy_id = _nested_value(payload, (("contract", "input_policy_id"),))
+    bundle_notes = _nested_value(payload, (("notes",),))
+    contract_notes = _nested_value(payload, (("contract", "notes"),))
     contract_id = _nested_value(
         payload,
         (
@@ -4065,7 +4775,7 @@ def _build_custom_lr_hadronic_probe_summary(
         * LR_HADRONIC_PROBE_B5
     )
 
-    observable_blocked = False
+    default_q1_only_observable_surface_rejects_custom_lr_bundle = False
     observable_error = None
     observable_module = modules.get("eft_deltaf2.observables")
     if observable_module is not None:
@@ -4090,7 +4800,7 @@ def _build_custom_lr_hadronic_probe_summary(
             )
         except ValueError as exc:
             observable_error = str(exc)
-            observable_blocked = (
+            default_q1_only_observable_surface_rejects_custom_lr_bundle = (
                 (
                     "Q4_LR" in observable_error
                     and "Q5_LR" in observable_error
@@ -4107,6 +4817,19 @@ def _build_custom_lr_hadronic_probe_summary(
         "default_lr_fields_absent": default_lr_fields_absent,
         "custom_mode_only": bool(input_provenance_mode_id)
         and "custom" in str(input_provenance_mode_id).lower(),
+        "input_policy_id_present": bool(input_policy_id),
+        "contract_input_policy_id_present": bool(contract_input_policy_id),
+        "input_policy_id_matches_contract": input_policy_id == contract_input_policy_id,
+        "input_policy_id_is_current_custom_frozen_default_bundle_no_auto_consumption": (
+            _is_current_custom_lr_input_policy(input_policy_id)
+            and _is_current_custom_lr_input_policy(contract_input_policy_id)
+        ),
+        "bundle_notes_match_current_custom_lr_contract": _is_current_custom_lr_bundle_notes(
+            bundle_notes
+        ),
+        "contract_notes_match_current_custom_lr_contract": (
+            _is_current_custom_lr_contract_notes(contract_notes)
+        ),
         "contract_id_present": bool(contract_id),
         "q4_formula_id_present": bool(q4_formula_id),
         "q5_formula_id_present": bool(q5_formula_id),
@@ -4136,7 +4859,9 @@ def _build_custom_lr_hadronic_probe_summary(
         and math.isclose(q4_matrix_element_GeV4, expected_q4, rel_tol=0.0, abs_tol=1e-15),
         "q5_matches_bv2004_eq5": q5_matrix_element_GeV4 is not None
         and math.isclose(q5_matrix_element_GeV4, expected_q5, rel_tol=0.0, abs_tol=1e-15),
-        "observables_remain_blocked": observable_blocked,
+        "default_q1_only_observable_surface_rejects_custom_lr_bundle": (
+            default_q1_only_observable_surface_rejects_custom_lr_bundle
+        ),
     }
     failures = [
         f"custom LR hadronic acceptance check failed: {name}"
@@ -4148,6 +4873,10 @@ def _build_custom_lr_hadronic_probe_summary(
         "default_bundle_unchanged": default_bundle_unchanged,
         "default_lr_fields_absent": default_lr_fields_absent,
         "input_provenance_mode_id": input_provenance_mode_id,
+        "input_policy_id": input_policy_id,
+        "contract_input_policy_id": contract_input_policy_id,
+        "bundle_notes": bundle_notes,
+        "contract_notes": contract_notes,
         "contract_id": contract_id,
         "q4_formula_id": q4_formula_id,
         "q5_formula_id": q5_formula_id,
@@ -5301,6 +6030,10 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
     failures.extend(lr_freeze_failures)
     hadronic_failures, hadronic_summary = _build_hadronic_summary(imported_modules)
     failures.extend(hadronic_failures)
+    default_lr_hadronic_failures, default_lr_hadronic_summary = (
+        _build_default_lr_hadronic_probe_summary(imported_modules)
+    )
+    failures.extend(default_lr_hadronic_failures)
     lr_r_chi_freeze_failures, lr_r_chi_freeze_summary = _build_lr_r_chi_freeze_probe_summary(
         imported_modules
     )
@@ -5337,6 +6070,14 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
     )
     failures.extend(artifact_failures)
 
+    def _append_post_aggregation_failure(
+        summary_name: str,
+        check_name: str,
+        passed: bool,
+    ) -> None:
+        if not passed:
+            failures.append(f"{summary_name}: {check_name} is false")
+
     if custom_lr_observable_summary.get("status") == "ok":
         custom_checks = custom_lr_observable_summary.setdefault("checks", {})
         default_observables_unchanged = (
@@ -5368,6 +6109,76 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
         )
         custom_checks["default_observables_unchanged"] = default_observables_unchanged
         custom_checks["default_artifacts_unchanged"] = default_artifacts_unchanged
+        _append_post_aggregation_failure(
+            "custom_lr_observable_probe",
+            "default_observables_unchanged",
+            default_observables_unchanged,
+        )
+        _append_post_aggregation_failure(
+            "custom_lr_observable_probe",
+            "default_artifacts_unchanged",
+            default_artifacts_unchanged,
+        )
+
+    if default_lr_hadronic_summary.get("status") == "ok":
+        custom_checks = default_lr_hadronic_summary.setdefault("checks", {})
+        default_q1_hadronic_bundle_stays_q1_only = (
+            hadronic_summary.get("status") == "ok"
+            and hadronic_summary.get("checks", {}).get("supported_operator_subset_is_pr5a")
+            is True
+            and hadronic_summary.get("checks", {}).get("unsupported_operator_subset_is_lr_only")
+            is True
+        )
+        default_observables_unchanged = (
+            observable_summary.get("status") == "ok"
+            and set(observable_summary.get("observable_names", [])) == SUPPORTED_OBSERVABLE_ROWS
+            and observable_summary.get("checks", {}).get("m12_re_matches_frozen_reference")
+            is True
+            and observable_summary.get("checks", {}).get("m12_im_matches_frozen_reference")
+            is True
+            and observable_summary.get("checks", {}).get("delta_m_matches_frozen_reference")
+            is True
+        )
+        default_artifacts_unchanged = (
+            artifact_summary.get("status") == "ok"
+            and set(artifact_summary.get("observable_rows", []))
+            == EXPECTED_ARTIFACT_OBSERVABLE_ROWS
+            and artifact_summary.get("checks", {}).get("observable_values_match_frozen_reference")
+            is True
+            and artifact_summary.get("checks", {}).get(
+                "tracked_default_exports_match_current_export"
+            )
+            is True
+        )
+        default_lr_hadronic_summary["default_q1_hadronic_bundle_stays_q1_only"] = (
+            default_q1_hadronic_bundle_stays_q1_only
+        )
+        default_lr_hadronic_summary["default_observables_unchanged"] = (
+            default_observables_unchanged
+        )
+        default_lr_hadronic_summary["default_artifacts_unchanged"] = (
+            default_artifacts_unchanged
+        )
+        custom_checks["default_q1_hadronic_bundle_stays_q1_only"] = (
+            default_q1_hadronic_bundle_stays_q1_only
+        )
+        custom_checks["default_observables_unchanged"] = default_observables_unchanged
+        custom_checks["default_artifacts_unchanged"] = default_artifacts_unchanged
+        _append_post_aggregation_failure(
+            "default_lr_hadronic_probe",
+            "default_q1_hadronic_bundle_stays_q1_only",
+            default_q1_hadronic_bundle_stays_q1_only,
+        )
+        _append_post_aggregation_failure(
+            "default_lr_hadronic_probe",
+            "default_observables_unchanged",
+            default_observables_unchanged,
+        )
+        _append_post_aggregation_failure(
+            "default_lr_hadronic_probe",
+            "default_artifacts_unchanged",
+            default_artifacts_unchanged,
+        )
 
     if lr_r_chi_freeze_summary.get("status") == "ok":
         custom_checks = lr_r_chi_freeze_summary.setdefault("checks", {})
@@ -5401,18 +6212,49 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
         )
         custom_checks["default_observables_unchanged"] = default_observables_unchanged
         custom_checks["default_artifacts_unchanged"] = default_artifacts_unchanged
-        custom_checks["default_observable_values_match_frozen_reference"] = (
+        _append_post_aggregation_failure(
+            "lr_r_chi_freeze_probe",
+            "default_hadronic_bundle_stays_q1_only",
+            default_hadronic_bundle_stays_q1_only,
+        )
+        _append_post_aggregation_failure(
+            "lr_r_chi_freeze_probe",
+            "default_observables_unchanged",
+            default_observables_unchanged,
+        )
+        _append_post_aggregation_failure(
+            "lr_r_chi_freeze_probe",
+            "default_artifacts_unchanged",
+            default_artifacts_unchanged,
+        )
+        default_observable_values_match_frozen_reference = (
             observable_summary.get("checks", {}).get("m12_re_matches_frozen_reference") is True
             and observable_summary.get("checks", {}).get("m12_im_matches_frozen_reference")
             is True
             and observable_summary.get("checks", {}).get("delta_m_matches_frozen_reference")
             is True
         )
-        custom_checks["default_artifact_exports_match_tracked_files"] = (
+        custom_checks["default_observable_values_match_frozen_reference"] = (
+            default_observable_values_match_frozen_reference
+        )
+        _append_post_aggregation_failure(
+            "lr_r_chi_freeze_probe",
+            "default_observable_values_match_frozen_reference",
+            default_observable_values_match_frozen_reference,
+        )
+        default_artifact_exports_match_tracked_files = (
             artifact_summary.get("checks", {}).get(
                 "tracked_default_exports_match_current_export"
             )
             is True
+        )
+        custom_checks["default_artifact_exports_match_tracked_files"] = (
+            default_artifact_exports_match_tracked_files
+        )
+        _append_post_aggregation_failure(
+            "lr_r_chi_freeze_probe",
+            "default_artifact_exports_match_tracked_files",
+            default_artifact_exports_match_tracked_files,
         )
 
     if custom_combined_observable_summary.get("status") == "ok":
@@ -5434,6 +6276,16 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
         )
         custom_checks["default_observables_unchanged"] = default_observables_unchanged
         custom_checks["default_artifacts_unchanged"] = default_artifacts_unchanged
+        _append_post_aggregation_failure(
+            "custom_combined_observable_probe",
+            "default_observables_unchanged",
+            default_observables_unchanged,
+        )
+        _append_post_aggregation_failure(
+            "custom_combined_observable_probe",
+            "default_artifacts_unchanged",
+            default_artifacts_unchanged,
+        )
 
     for custom_b_summary in (
         custom_bd_observable_summary,
@@ -5456,6 +6308,16 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
         custom_b_summary["default_artifacts_unchanged"] = default_artifacts_unchanged
         custom_checks["default_observables_unchanged"] = default_observables_unchanged
         custom_checks["default_artifacts_unchanged"] = default_artifacts_unchanged
+        _append_post_aggregation_failure(
+            f"custom_{custom_b_summary.get('system_id', 'unknown')}_observable_probe",
+            "default_observables_unchanged",
+            default_observables_unchanged,
+        )
+        _append_post_aggregation_failure(
+            f"custom_{custom_b_summary.get('system_id', 'unknown')}_observable_probe",
+            "default_artifacts_unchanged",
+            default_artifacts_unchanged,
+        )
 
     summary = {
         "static": static_summary,
@@ -5470,6 +6332,7 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
         "eft_rg_lr_probe": lr_running_probe_summary,
         "lr_contract_freeze": lr_freeze_summary,
         "hadronic_inputs": hadronic_summary,
+        "default_lr_hadronic_probe": default_lr_hadronic_summary,
         "lr_r_chi_freeze_probe": lr_r_chi_freeze_summary,
         "custom_lr_hadronic_probe": custom_lr_hadronic_summary,
         "custom_lr_observable_probe": custom_lr_observable_summary,
@@ -5534,6 +6397,18 @@ def _cross_process_default_hadronic_payload() -> dict[str, Any]:
     return json.loads(completed.stdout)
 
 
+def _cross_process_default_lr_hadronic_payload() -> dict[str, Any]:
+    command = [sys.executable, str(Path(__file__).resolve()), "--emit-default-lr-hadronic-json"]
+    completed = subprocess.run(
+        command,
+        check=True,
+        capture_output=True,
+        text=True,
+        cwd=str(REPO_ROOT),
+    )
+    return json.loads(completed.stdout)
+
+
 def _cross_process_lr_r_chi_freeze_payload() -> dict[str, Any]:
     command = [sys.executable, str(Path(__file__).resolve()), "--emit-lr-r-chi-freeze-json"]
     completed = subprocess.run(
@@ -5586,6 +6461,7 @@ def main() -> int:
             or args.emit_default_matching_json
             or args.emit_default_rg_json
             or args.emit_default_hadronic_json
+            or args.emit_default_lr_hadronic_json
             or args.emit_default_observable_json
             or args.emit_lr_r_chi_freeze_json
             or args.emit_custom_bd_observable_probe_json
@@ -5628,6 +6504,18 @@ def main() -> int:
         print(json.dumps(_default_hadronic_payload(imported_modules), sort_keys=True))
         return 0
 
+    if args.emit_default_lr_hadronic_json:
+        imported_modules, _, _ = _import_paper_modules()
+        module = imported_modules.get("eft_deltaf2.hadronic")
+        if module is None:
+            print(json.dumps({"status": "missing"}, sort_keys=True))
+            return 0
+        try:
+            print(json.dumps(_default_kaon_lr_hadronic_payload(imported_modules), sort_keys=True))
+        except AssertionError:
+            print(json.dumps({"status": "missing"}, sort_keys=True))
+        return 0
+
     if args.emit_lr_r_chi_freeze_json:
         imported_modules, _, _ = _import_paper_modules()
         module = imported_modules.get("eft_deltaf2.hadronic")
@@ -5635,7 +6523,12 @@ def main() -> int:
             print(json.dumps({"status": "missing"}, sort_keys=True))
             return 0
         try:
-            print(json.dumps(_default_kaon_lr_r_chi_freeze_payload(imported_modules), sort_keys=True))
+            print(
+                json.dumps(
+                    _default_kaon_lr_r_chi_freeze_payload(imported_modules),
+                    sort_keys=True,
+                )
+            )
         except AssertionError:
             print(json.dumps({"status": "missing"}, sort_keys=True))
         return 0

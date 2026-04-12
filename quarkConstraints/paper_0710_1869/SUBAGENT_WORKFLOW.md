@@ -15,7 +15,7 @@ compaction.
 Start each new paper-mode turn with
 [`CURRENT_STATUS.md`](./CURRENT_STATUS.md). That file is the authoritative
 handoff note for the current completed milestone, preserved claim boundary,
-repo sync state, and single next honest milestone.
+repo sync state, and next-honest-milestone state.
 
 ## Scope
 
@@ -66,10 +66,17 @@ plan. The workflow below assumes:
   `N_L = 4` mass-source chain, while LR observables remain custom-input-only
   and the default/exported kaon path, artifacts, and standalone verifier
   remain unchanged
-- next narrow physics milestone after LR-RCHI-FREEZE-1: LR-DEFAULT-HAD-1,
-  freezing sourced default LR `B4/B5` inputs plus the default LR hadronic
-  bundle while keeping artifact/verifier widening, conservative-bound D
-  interpretation, and `epsilon_K` as later slices
+- completed LR-DEFAULT-HAD-1 scope: the default kaon LR hadronic bundle is
+  frozen under the already-frozen ETM 2013 Table 1 MS(Buras) `2 GeV` source
+  gate and no-hidden-conversion rule, while the default/exported kaon outputs,
+  benchmark numerics, artifacts, and standalone verifier remain Q1-only; the
+  frozen default LR bundle is not auto-consumed by the custom LR-only or
+  combined `Q1 + LR` surfaces, and artifact/verifier widening,
+  conservative-bound D interpretation, and `epsilon_K` remain later/out of
+  scope
+- no remaining scientific/code milestone is open relative to the current
+  paper-facing claim boundary; any widening beyond it must be named as a new
+  later slice
 - PR6 boundary: deterministic Wilson, hadronic, observable, and provenance
   artifacts for the default kaon benchmark
 - PR7 boundary: JSON-only verifier input and independent recomputation of
@@ -756,6 +763,82 @@ Unsafe ownership split:
   `R_chi` freeze
 - concurrent edits to the same paper EFT file by two implementation workers
 
+### LR-DEFAULT-HAD-1 milestone
+
+`LR-DEFAULT-HAD-1` is completed as of 2026-04-12. It closed the already-frozen
+Phase 1 docs/source gate by landing only the Phase 2 default-kaon LR hadronic
+implementation/acceptance slice and by keeping the paper-facing boundary
+unchanged.
+
+Exact source gate:
+
+- ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287, Table 1, MS scheme
+  of Buras et al. ref. [15], at `2 GeV`
+- freeze `B4(2 GeV) = 0.78(3)` and `B5(2 GeV) = 0.57(4)` as the canonical
+  default source package in the already-frozen BMU-linked MS/NDR scheme
+- `bundle_id = hadronic.kaon.lr.default.etm2013_ms_2gev.v1`
+- `source_id = hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1`
+- `provenance_ids = (hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1,`
+  `hadronic.kaon.lr.b4.etm2013.table1.ms_2gev.v1,`
+  `hadronic.kaon.lr.b5.etm2013.table1.ms_2gev.v1,`
+  `hadronic.kaon.lr.r_chi.pdg2024_msbar_nl4.v1,`
+  `pdg.2024.k0.mass.v1, pdg.2024.fkplus.eq72.14.v1)`
+- `input_policy_id =`
+  `default_source.etm2013.table1.ms_2gev.no_hidden_conversion.v1`
+- no hidden `3 GeV -> 2 GeV` running, `RI-MOM -> MS` conversion, or
+  projector/operator-normalization drift is allowed in the default path
+- the closure gate required independent review and verification; those gates
+  are now satisfied on the current local tree
+
+Boundary:
+
+- implement only the default kaon LR hadronic bundle around the already-frozen
+  `R_chi(mu_had = 2.0 GeV)` contract and the frozen ETM 2013 `B4/B5` source
+  package
+- keep default/exported kaon outputs, artifacts, and the standalone verifier
+  Q1-only
+- do not auto-consume the frozen default LR hadronic bundle from the kaon
+  LR-only or custom combined surfaces; those stay custom-input-only
+- keep `epsilon_K`, artifact/verifier widening, and conservative-bound `D0`
+  interpretation out of scope
+
+Closure protocol used:
+
+1. Phase 1 docs/source gate stayed frozen and was not reopened by
+   implementation workers.
+2. One implementation worker and one tests/acceptance worker ran in parallel
+   for Phase 2 on disjoint write sets.
+3. One logic checker, one numerical checker, and one physics checker ran in
+   parallel.
+4. Findings were routed back through one orchestrator handoff.
+5. One second-pass non-author re-review closed the slice after the post-ruff
+   logic check stayed clean.
+
+Safe ownership split:
+
+- implementation worker:
+  `quarkConstraints/paper_0710_1869/eft_deltaf2/hadronic.py` and any narrowly
+  required paper-only hadronic public aliases only
+- tests/acceptance worker:
+  `scripts/benchmark_quark_0710_1869.py` and `tests/test_paper_*.py` only
+- docs worker: this file plus `quarkConstraints/PAPER_AGENT_WORKFLOW.md`,
+  `quarkConstraints/PAPER_READY_REPRODUCTION_PLAN.md`, and
+  `quarkConstraints/paper_0710_1869/CURRENT_STATUS.md` only
+
+Recorded closure evidence on 2026-04-12:
+
+- second-pass logic, numerical, and physics adjudication each reported no
+  blocking or medium findings
+- the post-ruff-fix logic re-review was clean and semantics-preserving
+- fresh clean verification jobs `5228468`-`5228471` completed:
+  `ruff`, `pytest` (`231 passed, 1 skipped`), benchmark
+  (`tracked_default_exports_match_current_export = true`,
+  `writer_outputs_are_deterministic = true`), and export
+  (`manifest_stable=yes`)
+
+Any audit-only follow-up revisiting the closed `LR-DEFAULT-HAD-1` slice should
+still use `gpt-5.4` with `xhigh`.
+
 ## Required Review Matrix
 
 Every PR6/PR7 slice, and every future physics-bearing paper slice, must satisfy
@@ -1426,3 +1509,15 @@ Reuse this checklist for every later paper-mode slice.
     LR freezing and LR-DEFAULT-HAD-1 remain deferred until after this slice,
     and default/exported kaon numerics, artifacts, verifier behavior, and
     `epsilon_K` remain out of scope until later slices.
+17. LR-DEFAULT-HAD-1 starts from the already-frozen ETM 2013 Table 1
+    MS(Buras) `2 GeV` source gate with `B4(2 GeV) = 0.78(3)`,
+    `B5(2 GeV) = 0.57(4)`, frozen ids
+    `hadronic.kaon.lr.default.etm2013_ms_2gev.v1`,
+    `hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1`, and
+    `default_source.etm2013.table1.ms_2gev.no_hidden_conversion.v1`; Phase 2
+    closed by implementing only the default LR hadronic bundle and acceptance
+    on disjoint write sets while default/exported kaon outputs remained
+    Q1-only; the frozen default LR bundle is not auto-consumed by the custom
+    LR-only or combined surfaces, and 2026-04-12 second-pass review plus clean
+    jobs `5228468`-`5228471` left no further scientific/code milestone inside
+    the current claim boundary.

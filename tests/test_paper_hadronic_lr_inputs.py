@@ -30,12 +30,16 @@ CUSTOM_LR_HADRONIC_BUILDER_NAMES = (
     "build_paper_0710_1869_custom_kaon_lr_hadronic",
     "build_paper_0710_1869_kaon_lr_hadronic",
 )
+DEFAULT_LR_HADRONIC_BUILDER_NAMES = (
+    "build_paper_0710_1869_default_kaon_lr_hadronic_inputs",
+)
 DEFAULT_LR_HADRONIC_EXPORT_NAMES = (
     "default_paper_0710_1869_kaon_lr_hadronic_inputs",
     "default_paper_0710_1869_kaon_lr_hadronic_bundle",
     "default_paper_0710_1869_kaon_lr_hadronic",
     "default_paper_0710_1869_kaon_lr_hadronic_summary",
 )
+DEFAULT_LR_HADRONIC_VALUE_EXPORT_NAMES = DEFAULT_LR_HADRONIC_EXPORT_NAMES[:-1]
 KAON_LR_R_CHI_FREEZE_EXPORT_NAMES = (
     "default_paper_0710_1869_kaon_lr_r_chi_freeze",
     "build_paper_0710_1869_kaon_lr_r_chi_freeze",
@@ -96,6 +100,53 @@ EXPECTED_KAON_LR_R_CHI_FREEZE_SCHEMA_ID = (
 EXPECTED_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_summary.v1"
 )
+EXPECTED_DEFAULT_LR_HADRONIC_BUNDLE_ID = "hadronic.kaon.lr.default.etm2013_ms_2gev.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID = (
+    "hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_INPUT_POLICY_ID = (
+    "default_source.etm2013.table1.ms_2gev.no_hidden_conversion.v1"
+)
+EXPECTED_CUSTOM_LR_HADRONIC_INPUT_POLICY_ID = (
+    "custom_input_only.default_lr_bundle_frozen_separately.no_auto_consumption.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID = (
+    "hadronic.kaon.lr.b4.etm2013.table1.ms_2gev.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID = (
+    "hadronic.kaon.lr.b5.etm2013.table1.ms_2gev.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID = "hadronic.kaon.lr.r_chi.pdg2024_msbar_nl4.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID = "pdg.2024.k0.mass.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID = "pdg.2024.fkplus.eq72.14.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_ETM_CITATION = (
+    "ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE = 0.78
+EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE = 0.57
+EXPECTED_DEFAULT_LR_HADRONIC_OPERATOR_BASIS_ID = "kk_gluon_tree_np_only.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_OPERATOR_NORMALIZATION_ID = (
+    "paper_0710_1869.deltaf2.kk_gluon_tree_color_normalization.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_HAMILTONIAN_CONVENTION_ID = (
+    "heff.sum_ci_qi.no_hc_factor.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_Q4_MATRIX_ELEMENT_FORMULA_ID = (
+    "kaon.q4_lr.o4_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_Q5_MATRIX_ELEMENT_FORMULA_ID = (
+    "kaon.q5_lr.o5_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_PROVENANCE_IDS = [
+    EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID,
+]
+EXPECTED_DEFAULT_LR_HADRONIC_SUPPORTED_OPERATORS = ["Q4_LR", "Q5_LR"]
+EXPECTED_DEFAULT_LR_HADRONIC_UNSUPPORTED_OPERATORS = ["Q1_VLL", "Q1_VRR"]
 
 
 def _load_hadronic_module():
@@ -159,7 +210,17 @@ def _get_class(module: Any, names: Sequence[str]) -> type[Any] | None:
     return None
 
 
-def _default_hadronic_bundle(module: Any) -> Any:
+def _default_kaon_hadronic(module: Any) -> Any:
+    callable_obj = _get_callable(module, DEFAULT_HADRONIC_EXPORT_NAMES)
+    if not callable(callable_obj):
+        raise AssertionError(
+            "hadronic layer exists but exposes no default kaon hadronic export; expected one "
+            "of " + ", ".join(DEFAULT_HADRONIC_EXPORT_NAMES)
+        )
+    return callable_obj()
+
+
+def _default_kaon_hadronic_builder(module: Any) -> Any:
     builder = _get_callable(module, HADRONIC_BUILDER_NAMES)
     if not callable(builder):
         raise AssertionError(
@@ -167,6 +228,10 @@ def _default_hadronic_bundle(module: Any) -> Any:
             + ", ".join(HADRONIC_BUILDER_NAMES)
         )
     return builder()
+
+
+def _default_hadronic_bundle(module: Any) -> Any:
+    return _default_kaon_hadronic_builder(module)
 
 
 def _custom_lr_hadronic_builder(module: Any) -> Any:
@@ -203,6 +268,26 @@ def _default_kaon_lr_r_chi_freeze(module: Any) -> Any:
         raise AssertionError(
             "hadronic layer exposes no frozen LR R_chi helper; expected one of "
             + ", ".join(KAON_LR_R_CHI_FREEZE_EXPORT_NAMES)
+        )
+    return callable_obj()
+
+
+def _default_kaon_lr_hadronic(module: Any) -> Any:
+    callable_obj = _get_callable(module, DEFAULT_LR_HADRONIC_VALUE_EXPORT_NAMES)
+    if not callable(callable_obj):
+        raise AssertionError(
+            "hadronic layer exposes no default LR bundle helper; expected one of "
+            + ", ".join(DEFAULT_LR_HADRONIC_VALUE_EXPORT_NAMES)
+        )
+    return callable_obj()
+
+
+def _default_kaon_lr_hadronic_builder(module: Any) -> Any:
+    callable_obj = _get_callable(module, DEFAULT_LR_HADRONIC_BUILDER_NAMES)
+    if not callable(callable_obj):
+        raise AssertionError(
+            "hadronic layer exposes no default LR builder helper; expected one of "
+            + ", ".join(DEFAULT_LR_HADRONIC_BUILDER_NAMES)
         )
     return callable_obj()
 
@@ -444,6 +529,61 @@ def _extract_lr_matrix_element(payload: Mapping[str, Any], operator_name: str) -
         return None
 
 
+def _source_metadata_text(payload: Mapping[str, Any], source_key: str) -> str:
+    source_payload = payload.get(source_key)
+    if not isinstance(source_payload, Mapping):
+        raise AssertionError(f"{source_key} must be present in the LR hadronic payload")
+    return " ".join(
+        str(source_payload.get(field_name, ""))
+        for field_name in ("citation", "locator_label", "notes")
+    )
+
+
+def _normalized_metadata_text(value: object) -> str:
+    lowered = str(value).strip().lower().replace("-", " ").replace("_", " ")
+    return " ".join(lowered.split())
+
+
+def _is_current_custom_lr_input_policy(policy_id: object) -> bool:
+    lowered = str(policy_id).strip().lower()
+    return bool(lowered) and lowered == EXPECTED_CUSTOM_LR_HADRONIC_INPUT_POLICY_ID.lower()
+
+
+def _has_current_custom_lr_note_core(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return bool(lowered) and "defaults not frozen" not in lowered
+
+
+def _is_current_custom_lr_contract_notes(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return (
+        _has_current_custom_lr_note_core(notes)
+        and "frozen default lr hadronic bundle remains separate" in lowered
+        and "not auto consumed on this custom surface" in lowered
+    )
+
+
+def _is_current_custom_lr_bundle_notes(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return (
+        _has_current_custom_lr_note_core(notes)
+        and "frozen default lr hadronic bundle remains separate" in lowered
+        and (
+            "lr only and custom combined observable surfaces still "
+            "require explicit custom lr inputs"
+            in lowered
+        )
+    )
+
+
+def test_default_kaon_hadronic_export_matches_builder_default_payload() -> None:
+    module = _load_hadronic_module()
+
+    assert _payload_from_value(_default_kaon_hadronic_builder(module)) == _payload_from_value(
+        _default_kaon_hadronic(module)
+    )
+
+
 def test_custom_lr_hadronic_builder_is_custom_only_and_matches_bv2004_eq5() -> None:
     module = _load_hadronic_module()
     default_bundle = _default_hadronic_bundle(module)
@@ -524,6 +664,15 @@ def test_custom_lr_hadronic_builder_is_custom_only_and_matches_bv2004_eq5() -> N
     )
     assert input_provenance_mode_id is not None
     assert "custom" in str(input_provenance_mode_id).lower()
+    input_policy_id = _nested_value(payload, (("input_policy_id",),))
+    contract_input_policy_id = _nested_value(payload, (("contract", "input_policy_id"),))
+    bundle_notes = _nested_value(payload, (("notes",),))
+    contract_notes = _nested_value(payload, (("contract", "notes"),))
+    assert _is_current_custom_lr_input_policy(input_policy_id)
+    assert _is_current_custom_lr_input_policy(contract_input_policy_id)
+    assert input_policy_id == contract_input_policy_id
+    assert _is_current_custom_lr_bundle_notes(bundle_notes)
+    assert _is_current_custom_lr_contract_notes(contract_notes)
 
     contract_id = _nested_value(
         payload,
@@ -902,6 +1051,20 @@ def test_default_kaon_lr_r_chi_freeze_is_deterministic_and_matches_bv2004_defini
             "(?i)mu_had_GeV",
         ),
         (
+            lambda freeze: {"source_id": f"{freeze.source_id}.drift"},
+            "(?i)source_id",
+        ),
+        (
+            lambda _freeze: {
+                "no_hidden_conversion_policy_id": "freeze.hidden_conversion.policy_drift.v1"
+            },
+            "(?i)no_hidden_conversion_policy_id",
+        ),
+        (
+            lambda _freeze: {"input_policy_id": "freeze.hidden_conversion.input_policy_drift.v1"},
+            "(?i)input_policy_id",
+        ),
+        (
             lambda _freeze: {"mass_active_flavor_policy_id": "wrong.active_flavor.v1"},
             "(?i)mass_active_flavor_policy_id",
         ),
@@ -926,8 +1089,342 @@ def test_default_kaon_lr_r_chi_freeze_rejects_metadata_drift(
         dataclasses.replace(freeze_value, **mutator(freeze_value))
 
 
-def test_lr_r_chi_freeze_does_not_expose_default_lr_hadronic_bundle_builder() -> None:
+def test_default_kaon_lr_hadronic_bundle_is_deterministic_and_carries_frozen_etm_metadata() -> None:
     module = _load_hadronic_module()
+    payload = _payload_from_value(_default_kaon_lr_hadronic(module))
+    second_payload = _payload_from_value(_default_kaon_lr_hadronic(module))
+    contract = payload["contract"]
 
-    for export_name in DEFAULT_LR_HADRONIC_EXPORT_NAMES:
-        assert not callable(getattr(module, export_name, None))
+    assert payload == second_payload
+    assert payload["system_id"] == "kaon"
+    assert float(payload["mu_had_GeV"]) == pytest.approx(2.0, rel=0.0, abs=1.0e-12)
+    assert payload["bundle_id"] == EXPECTED_DEFAULT_LR_HADRONIC_BUNDLE_ID
+    assert payload["source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID
+    assert payload["input_policy_id"] == EXPECTED_DEFAULT_LR_HADRONIC_INPUT_POLICY_ID
+    assert (
+        payload["operator_basis_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_OPERATOR_BASIS_ID
+    )
+    assert (
+        payload["operator_normalization_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_OPERATOR_NORMALIZATION_ID
+    )
+    assert (
+        payload["hamiltonian_convention_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_HAMILTONIAN_CONVENTION_ID
+    )
+    assert (
+        payload["q4_matrix_element_formula_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_Q4_MATRIX_ELEMENT_FORMULA_ID
+    )
+    assert (
+        payload["q5_matrix_element_formula_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_Q5_MATRIX_ELEMENT_FORMULA_ID
+    )
+    assert contract["input_policy_id"] == EXPECTED_DEFAULT_LR_HADRONIC_INPUT_POLICY_ID
+    assert (
+        contract["operator_basis_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_OPERATOR_BASIS_ID
+    )
+    assert (
+        contract["operator_normalization_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_OPERATOR_NORMALIZATION_ID
+    )
+    assert (
+        contract["hamiltonian_convention_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_HAMILTONIAN_CONVENTION_ID
+    )
+    assert payload["provenance_ids"] == EXPECTED_DEFAULT_LR_HADRONIC_PROVENANCE_IDS
+    assert payload["supported_operator_names"] == EXPECTED_DEFAULT_LR_HADRONIC_SUPPORTED_OPERATORS
+    assert (
+        payload["unsupported_operator_names"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_UNSUPPORTED_OPERATORS
+    )
+    assert float(payload["B4_mu_had"]) == pytest.approx(
+        EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(payload["B5_mu_had"]) == pytest.approx(
+        EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(payload["R_chi_mu_had"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_EXACT_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert payload["b4_source"]["source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID
+    assert payload["b5_source"]["source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID
+    assert payload["b4_source"]["transformation_id"] == "none"
+    assert payload["b5_source"]["transformation_id"] == "none"
+    assert payload["r_chi_source"]["source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID
+    assert payload["mass_source"]["source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID
+    assert (
+        payload["decay_constant_source"]["source_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID
+    )
+    for source_key in ("b4_source", "b5_source"):
+        assert (
+            payload[source_key]["renormalization_scheme_id"]
+            == payload["renormalization_scheme_id"]
+        )
+        assert float(payload[source_key]["scale_GeV"]) == pytest.approx(
+            float(payload["mu_had_GeV"]),
+            rel=0.0,
+            abs=1.0e-12,
+        )
+    assert (
+        payload["r_chi_source"]["renormalization_scheme_id"]
+        == EXPECTED_KAON_LR_R_CHI_MASS_SCHEME_ID
+    )
+    assert (
+        payload["r_chi_source"]["renormalization_scheme_id"]
+        != payload["renormalization_scheme_id"]
+    )
+    assert float(payload["r_chi_source"]["scale_GeV"]) == pytest.approx(
+        float(payload["mu_had_GeV"]),
+        rel=0.0,
+        abs=1.0e-12,
+    )
+
+    b4_source_text = _source_metadata_text(payload, "b4_source")
+    b5_source_text = _source_metadata_text(payload, "b5_source")
+    for source_text, operator_label, bag_value in (
+        (b4_source_text, "B4", EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE),
+        (b5_source_text, "B5", EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE),
+    ):
+        assert EXPECTED_DEFAULT_LR_HADRONIC_ETM_CITATION in source_text
+        assert "Table 1" in source_text
+        assert "Buras" in source_text
+        assert "2 GeV" in source_text
+        assert operator_label in source_text
+        assert f"{bag_value:.2f}" in source_text
+
+    expected_q4 = (
+        2.0
+        * float(payload["R_chi_mu_had"])
+        * (float(payload["m_K0_GeV"]) ** 2)
+        * (float(payload["f_K_GeV"]) ** 2)
+        * float(payload["B4_mu_had"])
+    )
+    expected_q5 = (
+        (2.0 / 3.0)
+        * float(payload["R_chi_mu_had"])
+        * (float(payload["m_K0_GeV"]) ** 2)
+        * (float(payload["f_K_GeV"]) ** 2)
+        * float(payload["B5_mu_had"])
+    )
+    assert float(payload["q4_matrix_element_GeV4"]) == pytest.approx(
+        expected_q4,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(payload["q5_matrix_element_GeV4"]) == pytest.approx(
+        expected_q5,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+
+
+def test_default_kaon_lr_hadronic_export_matches_builder_default_payload() -> None:
+    module = _load_hadronic_module()
+    export_payload = _payload_from_value(_default_kaon_lr_hadronic(module))
+    builder_payload = _payload_from_value(_default_kaon_lr_hadronic_builder(module))
+
+    assert export_payload == builder_payload
+
+
+@pytest.mark.parametrize(
+    ("mutator", "error_pattern"),
+    (
+        (
+            lambda bundle: {"B4_mu_had": float(bundle.B4_mu_had) + 0.01},
+            "(?i)(B4\\(2 GeV\\)|B4_mu_had)",
+        ),
+        (
+            lambda bundle: {"B5_mu_had": float(bundle.B5_mu_had) + 0.01},
+            "(?i)(B5\\(2 GeV\\)|B5_mu_had)",
+        ),
+        (
+            lambda bundle: {"source_id": f"{bundle.source_id}.drift"},
+            "(?i)source_id",
+        ),
+        (
+            lambda bundle: {
+                "b4_source": dataclasses.replace(
+                    bundle.b4_source,
+                    source_id=f"{bundle.b4_source.source_id}.drift",
+                )
+            },
+            "(?i)(B4 source|b4_source|source_id)",
+        ),
+        (
+            lambda bundle: {
+                "b5_source": dataclasses.replace(
+                    bundle.b5_source,
+                    source_id=f"{bundle.b5_source.source_id}.drift",
+                )
+            },
+            "(?i)(B5 source|b5_source|source_id)",
+        ),
+        (
+            lambda bundle: {
+                "r_chi_source": dataclasses.replace(
+                    bundle.r_chi_source,
+                    source_id=f"{bundle.r_chi_source.source_id}.drift",
+                )
+            },
+            "(?i)(R_chi source|r_chi_source|source_id)",
+        ),
+        (
+            lambda bundle: {
+                "renormalization_scheme_id": f"{bundle.renormalization_scheme_id}.drift"
+            },
+            "(?i)(renormalization_scheme_id|scheme)",
+        ),
+        (
+            lambda bundle: {"operator_basis_id": f"{bundle.operator_basis_id}.drift"},
+            "(?i)operator_basis_id",
+        ),
+        (
+            lambda bundle: {
+                "operator_normalization_id": f"{bundle.operator_normalization_id}.drift"
+            },
+            "(?i)operator_normalization_id",
+        ),
+        (
+            lambda bundle: {
+                "hamiltonian_convention_id": (
+                    f"{bundle.hamiltonian_convention_id}.drift"
+                )
+            },
+            "(?i)hamiltonian_convention_id",
+        ),
+        (
+            lambda bundle: {
+                "q4_matrix_element_formula_id": (
+                    f"{bundle.q4_matrix_element_formula_id}.drift"
+                )
+            },
+            "(?i)q4_matrix_element_formula_id",
+        ),
+        (
+            lambda bundle: {
+                "q5_matrix_element_formula_id": (
+                    f"{bundle.q5_matrix_element_formula_id}.drift"
+                )
+            },
+            "(?i)q5_matrix_element_formula_id",
+        ),
+        (
+            lambda bundle: {
+                "r_chi_source": dataclasses.replace(
+                    bundle.r_chi_source,
+                    renormalization_scheme_id=str(bundle.renormalization_scheme_id),
+                )
+            },
+            "(?i)(r_chi_source\\.renormalization_scheme_id|frozen default mass scheme)",
+        ),
+        (
+            lambda bundle: {"mu_had_GeV": float(bundle.mu_had_GeV) + 0.25},
+            "(?i)(mu_had|scale)",
+        ),
+        (
+            lambda _bundle: {
+                "input_policy_id": "default_source.etm2013.table1.ms_2gev.hidden_conversion.v1"
+            },
+            "(?i)input_policy_id",
+        ),
+        (
+            lambda bundle: {
+                "contract": dataclasses.replace(
+                    bundle.contract,
+                    input_policy_id=f"{bundle.contract.input_policy_id}.drift",
+                )
+            },
+            "(?i)contract\\.input_policy_id",
+        ),
+        (
+            lambda bundle: {
+                "contract": dataclasses.replace(
+                    bundle.contract,
+                    operator_basis_id=f"{bundle.contract.operator_basis_id}.drift",
+                )
+            },
+            "(?i)contract\\.operator_basis_id",
+        ),
+        (
+            lambda bundle: {
+                "contract": dataclasses.replace(
+                    bundle.contract,
+                    operator_normalization_id=(
+                        f"{bundle.contract.operator_normalization_id}.drift"
+                    ),
+                )
+            },
+            "(?i)contract\\.operator_normalization_id",
+        ),
+        (
+            lambda bundle: {
+                "contract": dataclasses.replace(
+                    bundle.contract,
+                    hamiltonian_convention_id=(
+                        f"{bundle.contract.hamiltonian_convention_id}.drift"
+                    ),
+                )
+            },
+            "(?i)contract\\.hamiltonian_convention_id",
+        ),
+        (
+            lambda bundle: {
+                "contract": dataclasses.replace(
+                    bundle.contract,
+                    q4_matrix_element_formula_id=(
+                        f"{bundle.contract.q4_matrix_element_formula_id}.drift"
+                    ),
+                )
+            },
+            "(?i)contract\\.q4_matrix_element_formula_id",
+        ),
+        (
+            lambda bundle: {
+                "contract": dataclasses.replace(
+                    bundle.contract,
+                    q5_matrix_element_formula_id=(
+                        f"{bundle.contract.q5_matrix_element_formula_id}.drift"
+                    ),
+                )
+            },
+            "(?i)contract\\.q5_matrix_element_formula_id",
+        ),
+        (
+            lambda bundle: {
+                "contract": dataclasses.replace(
+                    bundle.contract,
+                    formula_source_id=f"{bundle.contract.formula_source_id}.drift",
+                )
+            },
+            "(?i)contract\\.formula_source_id",
+        ),
+        (
+            lambda bundle: {
+                "r_chi_source": dataclasses.replace(
+                    bundle.r_chi_source,
+                    transformation_id="ri_mom_to_ms.hidden_conversion_probe.v1",
+                )
+            },
+            "(?i)(R_chi source|r_chi_source|frozen default)",
+        ),
+    ),
+)
+def test_default_kaon_lr_hadronic_bundle_rejects_frozen_default_drift(
+    mutator: Any,
+    error_pattern: str,
+) -> None:
+    module = _load_hadronic_module()
+    default_bundle = _default_kaon_lr_hadronic(module)
+
+    with pytest.raises(ValueError, match=error_pattern):
+        dataclasses.replace(default_bundle, **mutator(default_bundle))

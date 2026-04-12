@@ -4,9 +4,9 @@ This document is the persistent execution playbook for the dedicated
 `paper_0710_1869` path.
 
 It is narrower than
-[`AGENT_ORCHESTRATION_PLAN.md`](/Users/oscar/Documents/Research_Code/Randall/5D-Neutrino-Mixing/quarkConstraints/AGENT_ORCHESTRATION_PLAN.md)
+[`AGENT_ORCHESTRATION_PLAN.md`](./AGENT_ORCHESTRATION_PLAN.md)
 and should be used together with
-[`PAPER_READY_REPRODUCTION_PLAN.md`](/Users/oscar/Documents/Research_Code/Randall/5D-Neutrino-Mixing/quarkConstraints/PAPER_READY_REPRODUCTION_PLAN.md).
+[`PAPER_READY_REPRODUCTION_PLAN.md`](./PAPER_READY_REPRODUCTION_PLAN.md).
 
 It exists for one reason: after context compaction, a new orchestrator should be
 able to resume the paper program without rediscovering the role split, review
@@ -17,16 +17,17 @@ graph, theory anchors, or verification gates.
 Before planning the next slice, read
 [`paper_0710_1869/CURRENT_STATUS.md`](./paper_0710_1869/CURRENT_STATUS.md).
 It is the authoritative handoff note for the current completed milestone, the
-preserved paper-facing boundary, the synced `main` state, and the single next
-honest milestone.
+preserved paper-facing boundary, the current local-worktree handoff state
+(which may not yet be synced to `origin/main`), and the next-honest-milestone
+state.
 
 ## Scope
 
 This workflow applies only to the paper-facing path under:
 
-- `/Users/oscar/Documents/Research_Code/Randall/5D-Neutrino-Mixing/quarkConstraints/paper_0710_1869`
-- `/Users/oscar/Documents/Research_Code/Randall/5D-Neutrino-Mixing/scripts/benchmark_quark_0710_1869.py`
-- `/Users/oscar/Documents/Research_Code/Randall/5D-Neutrino-Mixing/tests/test_paper_*`
+- `quarkConstraints/paper_0710_1869/`
+- `scripts/benchmark_quark_0710_1869.py`
+- `tests/test_paper_*`
 
 It does not govern `repo_v1` implementation work except where paper CI must
 prove isolation from `repo_v1`.
@@ -474,6 +475,40 @@ Required deployment order:
 4. one orchestrator handoff of consolidated findings back to the worker
 5. one second-pass non-author re-review before closure
 
+## LR-DEFAULT-HAD-1 Milestone
+
+`LR-DEFAULT-HAD-1` is completed as of 2026-04-12. It closed the default-kaon
+LR hadronic bundle slice without widening the paper-facing claim boundary.
+
+- Phase 1 docs/source gate is frozen to ETM Collaboration,
+  JHEP 03 (2013) 089, arXiv:1207.1287, Table 1, MS scheme of Buras et al.
+  ref. [15], at `2 GeV`, with `B4(2 GeV) = 0.78(3)` and
+  `B5(2 GeV) = 0.57(4)`
+- frozen ids:
+  `bundle_id = hadronic.kaon.lr.default.etm2013_ms_2gev.v1`,
+  `source_id = hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1`,
+  `provenance_ids = (hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1,`
+  `hadronic.kaon.lr.b4.etm2013.table1.ms_2gev.v1,`
+  `hadronic.kaon.lr.b5.etm2013.table1.ms_2gev.v1,`
+  `hadronic.kaon.lr.r_chi.pdg2024_msbar_nl4.v1,`
+  `pdg.2024.k0.mass.v1, pdg.2024.fkplus.eq72.14.v1)`, and
+  `input_policy_id =`
+  `default_source.etm2013.table1.ms_2gev.no_hidden_conversion.v1`
+- keep the canonical default source package in the already-frozen BMU-linked
+  MS/NDR scheme with unchanged projector/operator-normalization contract
+- no hidden `3 GeV -> 2 GeV` running or `RI-MOM -> MS` conversion in the
+  default path
+- the completed slice froze only the default kaon LR hadronic bundle around
+  the already-frozen `R_chi(mu_had = 2.0 GeV)` contract
+- keep default/exported kaon numerics, benchmark outputs, bundles/artifacts,
+  and verifier behavior Q1-only
+- the frozen default LR hadronic bundle is not auto-consumed by the kaon
+  LR-only or custom combined surfaces; those remain custom-input-only
+- keep `epsilon_K`, artifact/verifier widening, and conservative-bound `D0`
+  interpretation out of scope
+- no remaining scientific/code milestone is open relative to the current claim
+  boundary; only release hygiene remains before a release-clean handoff
+
 ## Theory Guidance
 
 The physics reviewer for the paper path should use these anchors:
@@ -484,10 +519,14 @@ The physics reviewer for the paper path should use these anchors:
 - `Ciuchini, hep-ph/9711402` for basis and scheme caveats
 - `BV 2004, hep-lat/0408029` for the LR matrix-element formulas and the exact
   `R_chi` definition
+- ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287, Table 1, MS scheme
+  of Buras et al. ref. [15], at `2 GeV`, for the frozen default kaon LR
+  `B4/B5` inputs `B4(2 GeV) = 0.78(3)` and `B5(2 GeV) = 0.57(4)` used by
+  `LR-DEFAULT-HAD-1`
 - PDG 2024 quark masses review for the frozen `m_s(2 GeV)` / `m_d(2 GeV)`
   source chain used by LR-RCHI-FREEZE-1
 - PDG/FLAG-derived hadronic references already encoded in
-  `/Users/oscar/Documents/Research_Code/Randall/5D-Neutrino-Mixing/quarkConstraints/paper_0710_1869/eft_deltaf2/hadronic.py`
+  [`paper_0710_1869/eft_deltaf2/hadronic.py`](./paper_0710_1869/eft_deltaf2/hadronic.py)
 
 For LR-MAP-1, the reviewer must read first:
 
@@ -937,6 +976,28 @@ Required checks for LR-RCHI-FREEZE-1:
     bundle introduction, continued custom-input-only LR observables, and that
     LR-DEFAULT-HAD-1 remains deferred
 
+## LR-DEFAULT-HAD-1 Verification Record
+
+`LR-DEFAULT-HAD-1` satisfied its closure gates on 2026-04-12.
+
+1. `ruff` job `5228468`: `COMPLETED`, exit `0:0`, `All checks passed!`
+2. `pytest` job `5228469`: `COMPLETED`, exit `0:0`,
+   `231 passed, 1 skipped in 699.20s`
+3. `benchmark` job `5228470`: `COMPLETED`, exit `0:0`,
+   `tracked_default_exports_match_current_export = true` and
+   `writer_outputs_are_deterministic = true`
+4. `export` job `5228471`: `COMPLETED`, exit `0:0`, `manifest_stable=yes`;
+   the same four tracked artifact SHA256 values were present before and after
+   export
+5. second-pass logic adjudication: no blocking or medium logic, scope, or
+   contract finding remained
+6. second-pass numerical adjudication: no blocking or medium numerical,
+   determinism, or verification finding remained
+7. second-pass physics adjudication: no blocking or medium finding remained;
+   the custom LR policy id and note text stayed honest for the milestone
+   boundary
+8. post-ruff-fix logic re-review: clean, non-blocking, and semantics-preserving
+
 ## Environment Note
 
 If worker execution is attempted through nested `codex exec` inside this app
@@ -959,7 +1020,7 @@ This limitation is environmental, not a paper-path design decision.
 For a future orchestrator after compaction:
 
 1. Read
-   [`PAPER_READY_REPRODUCTION_PLAN.md`](/Users/oscar/Documents/Research_Code/Randall/5D-Neutrino-Mixing/quarkConstraints/PAPER_READY_REPRODUCTION_PLAN.md)
+   [`PAPER_READY_REPRODUCTION_PLAN.md`](./PAPER_READY_REPRODUCTION_PLAN.md)
    and this file first.
 2. Confirm the current milestone and frozen scope.
 3. Rebuild clean file ownership boundaries before launching workers.
@@ -998,3 +1059,15 @@ For a future orchestrator after compaction:
     LR freezing and LR-DEFAULT-HAD-1 remain deferred until after this slice,
     and default/exported kaon numerics, artifacts, verifier behavior, and
     `epsilon_K` remain for later slices.
+16. LR-DEFAULT-HAD-1 starts from the frozen ETM 2013 Table 1 MS(Buras)
+    `2 GeV` source gate with `B4(2 GeV) = 0.78(3)`,
+    `B5(2 GeV) = 0.57(4)`, `bundle_id =
+    hadronic.kaon.lr.default.etm2013_ms_2gev.v1`, `source_id =
+    hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1`, and
+    `input_policy_id =
+    default_source.etm2013.table1.ms_2gev.no_hidden_conversion.v1`; only the
+    default LR hadronic bundle and its acceptance closed on the current local
+    tree, while default/exported kaon outputs remain Q1-only, the frozen
+    bundle is not auto-consumed by the custom LR-only or combined surfaces,
+    and 2026-04-12 review/verification left no further scientific/code
+    milestone inside the current claim boundary.

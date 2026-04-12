@@ -105,6 +105,40 @@ EXPECTED_KAON_LR_R_CHI_FREEZE_SCHEMA_ID = (
 EXPECTED_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_summary.v1"
 )
+EXPECTED_DEFAULT_LR_HADRONIC_BUNDLE_ID = "hadronic.kaon.lr.default.etm2013_ms_2gev.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID = (
+    "hadronic.kaon.lr.default.etm2013_ms_2gev.aggregate.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_INPUT_POLICY_ID = (
+    "default_source.etm2013.table1.ms_2gev.no_hidden_conversion.v1"
+)
+EXPECTED_CUSTOM_LR_HADRONIC_INPUT_POLICY_ID = (
+    "custom_input_only.default_lr_bundle_frozen_separately.no_auto_consumption.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID = (
+    "hadronic.kaon.lr.b4.etm2013.table1.ms_2gev.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID = (
+    "hadronic.kaon.lr.b5.etm2013.table1.ms_2gev.v1"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID = "hadronic.kaon.lr.r_chi.pdg2024_msbar_nl4.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID = "pdg.2024.k0.mass.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID = "pdg.2024.fkplus.eq72.14.v1"
+EXPECTED_DEFAULT_LR_HADRONIC_ETM_CITATION = (
+    "ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287"
+)
+EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE = 0.78
+EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE = 0.57
+EXPECTED_DEFAULT_LR_HADRONIC_PROVENANCE_IDS = [
+    EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID,
+    EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID,
+]
+EXPECTED_DEFAULT_LR_HADRONIC_SUPPORTED_OPERATORS = ["Q4_LR", "Q5_LR"]
+EXPECTED_DEFAULT_LR_HADRONIC_UNSUPPORTED_OPERATORS = ["Q1_VLL", "Q1_VRR"]
 EXPECTED_CUSTOM_B_Q1_PROBE_CONFIG = {
     "B_d": {
         "scope_id": "bd.np_only.custom_q1.m12.v1",
@@ -173,6 +207,57 @@ def _assert_complex_vector_payload(
     assert len(value) == len(expected)
     for observed, expected_item in zip(value, expected, strict=True):
         _assert_complex_payload(observed, expected_item)
+
+
+def _assert_etm_source_metadata_text(
+    metadata_text: str,
+    *,
+    operator_label: str,
+    bag_value: float,
+) -> None:
+    assert EXPECTED_DEFAULT_LR_HADRONIC_ETM_CITATION in metadata_text
+    assert "Table 1" in metadata_text
+    assert "Buras" in metadata_text
+    assert "2 GeV" in metadata_text
+    assert operator_label in metadata_text
+    assert f"{bag_value:.2f}" in metadata_text
+
+
+def _normalized_metadata_text(value: object) -> str:
+    lowered = str(value).strip().lower().replace("-", " ").replace("_", " ")
+    return " ".join(lowered.split())
+
+
+def _is_current_custom_lr_input_policy(policy_id: object) -> bool:
+    lowered = str(policy_id).strip().lower()
+    return bool(lowered) and lowered == EXPECTED_CUSTOM_LR_HADRONIC_INPUT_POLICY_ID.lower()
+
+
+def _has_current_custom_lr_note_core(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return bool(lowered) and "defaults not frozen" not in lowered
+
+
+def _is_current_custom_lr_contract_notes(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return (
+        _has_current_custom_lr_note_core(notes)
+        and "frozen default lr hadronic bundle remains separate" in lowered
+        and "not auto consumed on this custom surface" in lowered
+    )
+
+
+def _is_current_custom_lr_bundle_notes(notes: object) -> bool:
+    lowered = _normalized_metadata_text(notes)
+    return (
+        _has_current_custom_lr_note_core(notes)
+        and "frozen default lr hadronic bundle remains separate" in lowered
+        and (
+            "lr only and custom combined observable surfaces still "
+            "require explicit custom lr inputs"
+            in lowered
+        )
+    )
 
 
 def _assert_custom_b_observable_probe(summary: dict[str, object], system_id: str) -> None:
@@ -605,6 +690,7 @@ def test_acceptance_benchmark_reports_custom_lr_hadronic_probe() -> None:
     checks = probe["checks"]
 
     assert hadronic_summary["status"] == "ok"
+    assert hadronic_summary["checks"]["default_export_matches_builder_default"] is True
     assert hadronic_summary["checks"]["supported_operator_subset_is_pr5a"] is True
     assert hadronic_summary["checks"]["unsupported_operator_subset_is_lr_only"] is True
 
@@ -612,6 +698,11 @@ def test_acceptance_benchmark_reports_custom_lr_hadronic_probe() -> None:
     assert probe["default_bundle_unchanged"] is True
     assert probe["default_lr_fields_absent"] is True
     assert "custom" in str(probe["input_provenance_mode_id"]).lower()
+    assert _is_current_custom_lr_input_policy(probe["input_policy_id"])
+    assert _is_current_custom_lr_input_policy(probe["contract_input_policy_id"])
+    assert probe["input_policy_id"] == probe["contract_input_policy_id"]
+    assert _is_current_custom_lr_bundle_notes(probe["bundle_notes"])
+    assert _is_current_custom_lr_contract_notes(probe["contract_notes"])
     assert probe["contract_id"]
     assert probe["q4_formula_id"]
     assert probe["q5_formula_id"]
@@ -672,6 +763,15 @@ def test_acceptance_benchmark_reports_custom_lr_hadronic_probe() -> None:
     )
     assert checks["default_bundle_unchanged"] is True
     assert checks["default_lr_fields_absent"] is True
+    assert checks["input_policy_id_present"] is True
+    assert checks["contract_input_policy_id_present"] is True
+    assert checks["input_policy_id_matches_contract"] is True
+    assert (
+        checks["input_policy_id_is_current_custom_frozen_default_bundle_no_auto_consumption"]
+        is True
+    )
+    assert checks["bundle_notes_match_current_custom_lr_contract"] is True
+    assert checks["contract_notes_match_current_custom_lr_contract"] is True
     assert checks["custom_mode_only"] is True
     assert checks["contract_id_present"] is True
     assert checks["q4_formula_id_present"] is True
@@ -682,7 +782,183 @@ def test_acceptance_benchmark_reports_custom_lr_hadronic_probe() -> None:
     assert checks["source_scale_matches_declared_mu_had"] is True
     assert checks["q4_matches_bv2004_eq5"] is True
     assert checks["q5_matches_bv2004_eq5"] is True
-    assert checks["observables_remain_blocked"] is True
+    assert checks["default_q1_only_observable_surface_rejects_custom_lr_bundle"] is True
+
+
+def test_acceptance_benchmark_reports_default_lr_hadronic_probe() -> None:
+    summary = _run_acceptance_benchmark()
+    hadronic_summary = summary["hadronic_inputs"]
+    probe = summary["default_lr_hadronic_probe"]
+    checks = probe["checks"]
+
+    assert probe["status"] == "ok"
+    assert probe["deterministic"] is True
+    assert probe["cross_process_deterministic"] is True
+    assert probe["payload_sha256"] == _canonical_payload_sha256(probe["payload"])
+    assert probe["same_process_repeat_payload_sha256"] == probe["payload_sha256"]
+    assert probe["cross_process_payload_sha256"] == probe["payload_sha256"]
+    assert probe["system_id"] == "kaon"
+    assert float(probe["mu_had_GeV"]) == pytest.approx(2.0, rel=0.0, abs=1.0e-12)
+    assert probe["bundle_id"] == EXPECTED_DEFAULT_LR_HADRONIC_BUNDLE_ID
+    assert probe["source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID
+    assert probe["input_policy_id"] == EXPECTED_DEFAULT_LR_HADRONIC_INPUT_POLICY_ID
+    assert probe["provenance_ids"] == EXPECTED_DEFAULT_LR_HADRONIC_PROVENANCE_IDS
+    assert (
+        probe["payload"]["supported_operator_names"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_SUPPORTED_OPERATORS
+    )
+    assert (
+        probe["payload"]["unsupported_operator_names"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_UNSUPPORTED_OPERATORS
+    )
+    assert float(probe["B4_mu_had"]) == pytest.approx(
+        EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(probe["B5_mu_had"]) == pytest.approx(
+        EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(probe["R_chi_mu_had"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_EXACT_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert probe["b4_source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_B4_SOURCE_ID
+    assert probe["b5_source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_B5_SOURCE_ID
+    assert probe["r_chi_source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_R_CHI_SOURCE_ID
+    assert probe["mass_source_id"] == EXPECTED_DEFAULT_LR_HADRONIC_MASS_SOURCE_ID
+    assert (
+        probe["decay_constant_source_id"]
+        == EXPECTED_DEFAULT_LR_HADRONIC_DECAY_CONSTANT_SOURCE_ID
+    )
+    assert probe["b4_source_scheme_id"] == probe["scheme_id"]
+    assert probe["b5_source_scheme_id"] == probe["scheme_id"]
+    assert probe["r_chi_source_scheme_id"] == EXPECTED_KAON_LR_R_CHI_MASS_SCHEME_ID
+    assert probe["r_chi_source_scheme_id"] != probe["scheme_id"]
+    assert float(probe["b4_source_scale_GeV"]) == pytest.approx(
+        float(probe["mu_had_GeV"]),
+        rel=0.0,
+        abs=1.0e-12,
+    )
+    assert float(probe["b5_source_scale_GeV"]) == pytest.approx(
+        float(probe["mu_had_GeV"]),
+        rel=0.0,
+        abs=1.0e-12,
+    )
+    assert float(probe["r_chi_source_scale_GeV"]) == pytest.approx(
+        float(probe["mu_had_GeV"]),
+        rel=0.0,
+        abs=1.0e-12,
+    )
+    _assert_etm_source_metadata_text(
+        str(probe["b4_source_metadata_text"]),
+        operator_label="B4",
+        bag_value=EXPECTED_DEFAULT_LR_HADRONIC_B4_VALUE,
+    )
+    _assert_etm_source_metadata_text(
+        str(probe["b5_source_metadata_text"]),
+        operator_label="B5",
+        bag_value=EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE,
+    )
+
+    expected_q4 = (
+        2.0
+        * float(probe["R_chi_mu_had"])
+        * (float(probe["m_K0_GeV"]) ** 2)
+        * (float(probe["f_K_GeV"]) ** 2)
+        * float(probe["B4_mu_had"])
+    )
+    expected_q5 = (
+        (2.0 / 3.0)
+        * float(probe["R_chi_mu_had"])
+        * (float(probe["m_K0_GeV"]) ** 2)
+        * (float(probe["f_K_GeV"]) ** 2)
+        * float(probe["B5_mu_had"])
+    )
+    assert float(probe["q4_matrix_element_GeV4"]) == pytest.approx(
+        expected_q4,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(probe["q5_matrix_element_GeV4"]) == pytest.approx(
+        expected_q5,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert hadronic_summary["status"] == "ok"
+    assert hadronic_summary["checks"]["default_export_matches_builder_default"] is True
+    assert hadronic_summary["checks"]["supported_operator_subset_is_pr5a"] is True
+    assert hadronic_summary["checks"]["unsupported_operator_subset_is_lr_only"] is True
+    for key in (
+        "default_export_matches_builder_default",
+        "operator_basis_id_is_exact",
+        "operator_normalization_id_is_exact",
+        "hamiltonian_convention_id_is_exact",
+        "q4_formula_id_is_exact",
+        "q5_formula_id_is_exact",
+        "b4_source_transformation_id_is_none",
+        "b5_source_transformation_id_is_none",
+        "contract_operator_basis_id_is_exact",
+        "contract_operator_normalization_id_is_exact",
+        "contract_hamiltonian_convention_id_is_exact",
+    ):
+        assert checks[key] is True
+    assert checks["probe_payload_is_deterministic"] is True
+    assert checks["probe_payload_is_cross_process_deterministic"] is True
+    assert checks["probe_payload_sha256_matches_repeat"] is True
+    assert checks["probe_payload_sha256_matches_cross_process"] is True
+    assert checks["system_is_kaon"] is True
+    assert checks["mu_had_is_2gev"] is True
+    assert checks["bundle_id_is_exact"] is True
+    assert checks["source_id_is_exact"] is True
+    assert checks["input_policy_id_is_exact"] is True
+    assert checks["provenance_ids_match_frozen_source_package"] is True
+    assert checks["supported_operator_subset_is_lr_only"] is True
+    assert checks["unsupported_operator_subset_is_q1_only"] is True
+    assert checks["b4_value_matches_etm2013_table1"] is True
+    assert checks["b5_value_matches_etm2013_table1"] is True
+    assert checks["r_chi_matches_frozen_default"] is True
+    assert checks["b4_source_id_is_exact"] is True
+    assert checks["b5_source_id_is_exact"] is True
+    assert checks["r_chi_source_id_is_exact"] is True
+    assert checks["mass_source_id_is_exact"] is True
+    assert checks["decay_constant_source_id_is_exact"] is True
+    assert checks["b4_source_scheme_matches_bundle"] is True
+    assert checks["b5_source_scheme_matches_bundle"] is True
+    assert checks["r_chi_source_scheme_matches_frozen_mass_scheme"] is True
+    assert checks["r_chi_source_scheme_stays_distinct_from_bundle_scheme"] is True
+    assert checks["b4_source_scale_matches_bundle"] is True
+    assert checks["b5_source_scale_matches_bundle"] is True
+    assert checks["r_chi_source_scale_matches_bundle"] is True
+    assert checks["b4_source_mentions_etm2013_table1_ms_2gev"] is True
+    assert checks["b5_source_mentions_etm2013_table1_ms_2gev"] is True
+    assert checks["q4_matches_bv2004_eq5"] is True
+    assert checks["q5_matches_bv2004_eq5"] is True
+    assert checks["drifted_b4_value_rejected"] is True
+    assert checks["drifted_b5_value_rejected"] is True
+    assert checks["drifted_source_id_rejected"] is True
+    assert checks["drifted_b4_source_id_rejected"] is True
+    assert checks["drifted_b5_source_id_rejected"] is True
+    assert checks["drifted_r_chi_source_id_rejected"] is True
+    assert checks["drifted_bundle_scheme_rejected"] is True
+    assert checks["forced_r_chi_source_bundle_scheme_rejected"] is True
+    assert checks["drifted_mu_had_rejected"] is True
+    assert checks["hidden_conversion_policy_drift_rejected"] is True
+    assert checks["hidden_r_chi_conversion_drift_rejected"] is True
+    assert checks["custom_lr_only_rejects_default_lr_bundle"] is True
+    assert checks["custom_combined_rejects_default_lr_bundle"] is True
+    assert checks["custom_lr_surfaces_still_require_custom_inputs"] is True
+    assert checks["default_q1_hadronic_bundle_stays_q1_only"] is True
+    assert checks["default_observables_unchanged"] is True
+    assert checks["default_artifacts_unchanged"] is True
+    assert "input_provenance_mode_id" in str(probe["custom_lr_only_rejection_error"])
+    assert "input_provenance_mode_id" in str(probe["custom_combined_rejection_error"])
+    assert probe["default_q1_hadronic_bundle_stays_q1_only"] is True
+    assert probe["default_observables_unchanged"] is True
+    assert probe["default_artifacts_unchanged"] is True
 
 
 def test_acceptance_benchmark_reports_lr_r_chi_freeze_probe() -> None:
@@ -740,12 +1016,10 @@ def test_acceptance_benchmark_reports_lr_r_chi_freeze_probe() -> None:
         probe["strange_mass_source_id"],
         probe["down_mass_source_id"],
     ]
-    assert probe["default_lr_hadronic_still_blocked"] is True
-    assert all(
-        callable_status is False
-        for callable_status in probe["default_lr_hadronic_exports_present"].values()
-    )
+    assert probe["default_lr_hadronic_available"] is True
+    assert any(probe["default_lr_hadronic_exports_present"].values()) is True
     assert hadronic_summary["status"] == "ok"
+    assert hadronic_summary["checks"]["default_export_matches_builder_default"] is True
     assert hadronic_summary["checks"]["supported_operator_subset_is_pr5a"] is True
     assert hadronic_summary["checks"]["unsupported_operator_subset_is_lr_only"] is True
     assert float(probe["strange_mass_source_scale_GeV"]) == pytest.approx(
@@ -798,17 +1072,19 @@ def test_acceptance_benchmark_reports_lr_r_chi_freeze_probe() -> None:
     assert checks["m_k0_gev_matches_exact_freeze"] is True
     assert checks["r_chi_mu_had_matches_exact_freeze"] is True
     assert checks["operator_vs_mass_scheme_not_aliased"] is True
-    assert checks["default_lr_hadronic_still_blocked"] is True
     assert checks["custom_lr_only_rejects_r_chi_freeze"] is True
     assert checks["custom_combined_rejects_r_chi_freeze"] is True
     assert checks["custom_lr_only_rejection_message_is_explicit_type_guard"] is True
     assert checks["custom_combined_rejection_message_is_explicit_type_guard"] is True
     assert checks["custom_lr_surfaces_still_require_custom_inputs"] is True
-    assert checks["default_hadronic_bundle_stays_q1_only"] is True
-    assert checks["default_observables_unchanged"] is True
-    assert checks["default_artifacts_unchanged"] is True
-    assert checks["default_observable_values_match_frozen_reference"] is True
-    assert checks["default_artifact_exports_match_tracked_files"] is True
+    for key in (
+        "default_hadronic_bundle_stays_q1_only",
+        "default_observables_unchanged",
+        "default_artifacts_unchanged",
+        "default_observable_values_match_frozen_reference",
+        "default_artifact_exports_match_tracked_files",
+    ):
+        assert checks[key] is True
     assert (
         probe["custom_lr_only_rejection_error"]
         == "ValueError: hadronic_inputs must be a Paper07101869KaonLRHadronicInputs"

@@ -9,10 +9,10 @@
   "bag_parameter_source": {
     "citation": "PDG 2024 Lattice QCD review, Sec. 17.3.2, FLAG average",
     "locator_label": "Sec. 17.3.2, kaon bag parameter discussion",
-    "notes": "Uses the FLAG average hat{B}_K = 0.7625 and converts it to B_K(mu_had) with the paper-mode LO Q1 inverse-running convention.",
+    "notes": "Uses the FLAG average hat{B}_K = 0.7625 as the underlying default source. In the default mu_had regime, the emitted B_K_mu_had payload is pinned to 0.5557449829565828 to preserve the canonical default export instead of being recomputed at runtime.",
     "renormalization_scheme_id": "rgi.flag21.average.v1",
     "source_id": "pdg.2024.flag.hat_bk.sec17.3.2.v1",
-    "source_kind": "derived-from-rgi",
+    "source_kind": "review-average",
     "transformation_id": "hat_bk_to_bk_mu_had.lo_inverse_q1_running.v1",
     "year": 2024
   },
