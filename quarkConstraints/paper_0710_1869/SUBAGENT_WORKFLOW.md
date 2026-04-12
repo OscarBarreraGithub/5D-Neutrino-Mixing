@@ -10,6 +10,13 @@ Its job is narrower than the higher-level plans: it freezes how the repo should
 deploy subagents for PR6, PR7, and later paper-mode slices after context
 compaction.
 
+## Current Status
+
+Start each new paper-mode turn with
+[`CURRENT_STATUS.md`](./CURRENT_STATUS.md). That file is the authoritative
+handoff note for the current completed milestone, preserved claim boundary,
+repo sync state, and single next honest milestone.
+
 ## Scope
 
 This workflow governs only:
@@ -53,14 +60,16 @@ plan. The workflow below assumes:
   available under exact Wilson/hadronic alignment, while the kaon
   default/exported Q1 path, artifacts, and standalone verifier remain
   unchanged
-- next narrow physics milestone after D0-Q1-CUSTOM-1: LR-RCHI-FREEZE-1,
-  freezing only the kaon LR `R_chi(mu_had)` semantics/provenance at
+- landed LR-RCHI-FREEZE-1 scope: only the kaon LR
+  `R_chi(mu_had)` semantics/provenance are frozen at
   `mu_had = 2.0 GeV` under the exact BV 2004 definition and a PDG 2024
   `N_L = 4` mass-source chain, while LR observables remain custom-input-only
   and the default/exported kaon path, artifacts, and standalone verifier
   remain unchanged
-- default `B4/B5` LR freezing, LR-DEFAULT-HAD-1, artifact/verifier widening,
-  conservative-bound D interpretation, and `epsilon_K` remain later slices
+- next narrow physics milestone after LR-RCHI-FREEZE-1: LR-DEFAULT-HAD-1,
+  freezing sourced default LR `B4/B5` inputs plus the default LR hadronic
+  bundle while keeping artifact/verifier widening, conservative-bound D
+  interpretation, and `epsilon_K` as later slices
 - PR6 boundary: deterministic Wilson, hadronic, observable, and provenance
   artifacts for the default kaon benchmark
 - PR7 boundary: JSON-only verifier input and independent recomputation of

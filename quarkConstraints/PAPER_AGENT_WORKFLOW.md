@@ -12,6 +12,14 @@ It exists for one reason: after context compaction, a new orchestrator should be
 able to resume the paper program without rediscovering the role split, review
 graph, theory anchors, or verification gates.
 
+## Current Status
+
+Before planning the next slice, read
+[`paper_0710_1869/CURRENT_STATUS.md`](./paper_0710_1869/CURRENT_STATUS.md).
+It is the authoritative handoff note for the current completed milestone, the
+preserved paper-facing boundary, the synced `main` state, and the single next
+honest milestone.
+
 ## Scope
 
 This workflow applies only to the paper-facing path under:
@@ -434,7 +442,7 @@ Required deployment order:
 
 ## LR-RCHI-FREEZE-1 Milestone
 
-The next honest paper-mode slice after D0-Q1-CUSTOM-1 is LR-RCHI-FREEZE-1:
+The completed paper-mode slice after D0-Q1-CUSTOM-1 is LR-RCHI-FREEZE-1:
 
 - add only the kaon LR `R_chi(mu_had)` semantics/provenance freeze at
   `mu_had = 2.0 GeV`

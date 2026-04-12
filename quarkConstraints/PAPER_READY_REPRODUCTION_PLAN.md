@@ -14,6 +14,8 @@ It is intentionally separate from `AGENT_ORCHESTRATION_PLAN.md`.
   planners, implementation workers, logic reviewers, numerical checkers,
   physics reviewers, and second-pass reviewers should be deployed and how their
   findings are merged.
+- `paper_0710_1869/CURRENT_STATUS.md` is the authoritative handoff note for
+  the current completed milestone, synced repo state, and next honest slice.
 
 The central conclusion of those planning/review passes is:
 
@@ -477,10 +479,11 @@ Required outcomes:
 - LR-RCHI-FREEZE-1, freezing only the kaon LR `R_chi(mu_had)` semantics and
   provenance at `mu_had = 2.0 GeV` under the exact BV 2004 definition and a
   PDG 2024 `N_L = 4` mass-source chain while leaving default `B4/B5` LR
-  freezing, LR observables, artifacts, and verifier unchanged, is the next
-  milestone after D0-Q1-CUSTOM-1
+  freezing, LR observables, artifacts, and verifier unchanged, is the
+  completed milestone after D0-Q1-CUSTOM-1
 - LR-DEFAULT-HAD-1, freezing sourced default LR `B4/B5` inputs plus a full
-  default LR hadronic bundle, is deferred until after LR-RCHI-FREEZE-1
+  default LR hadronic bundle, is the next honest milestone after
+  LR-RCHI-FREEZE-1
 - literature-style regression checks
 
 Exit criteria:
