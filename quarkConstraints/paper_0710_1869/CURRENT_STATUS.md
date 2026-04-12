@@ -7,15 +7,16 @@ Updated on 2026-04-12.
 
 ## Current Repo State
 
-- branch state: local `main` tracks `origin/main`
-- `HEAD` at status refresh: `e174324548a24c625f79b98b502ea6bbb9d1ee04`
-- `origin/main` currently resolves to the same commit, but the verified
-  `LR-DEFAULT-HAD-1` closure delta remains local, dirty, uncommitted, and not
-  pushed
-- treat the current local worktree, not `origin/main`, as authoritative for
-  the verified pre-release state; release hygiene is still pending
-- current tracked local delta includes these owned docs plus the verified
-  `LR-DEFAULT-HAD-1` package, acceptance, and paper-artifact/golden updates:
+- branch state: the authoritative handoff is the exact published commit that
+  carries this note for this paper-facing module, not any later-moving branch
+  tip
+- the verified `LR-DEFAULT-HAD-1` closure patchset was committed and pushed on
+  2026-04-12 as `df67be1dd5d08a27563c4bb31d62e94bd2e82e1b`
+  (`paper_0710_1869: close LR-DEFAULT-HAD-1 patchset`)
+- this note describes the durable published handoff state, not the earlier
+  pre-release local/dirty worktree
+- the published closure patchset includes these owned package, acceptance, and
+  paper-artifact/golden updates:
   `quarkConstraints/paper_0710_1869/__init__.py`,
   `quarkConstraints/paper_0710_1869/eft_deltaf2/__init__.py`,
   `quarkConstraints/paper_0710_1869/eft_deltaf2/hadronic.py`,
@@ -26,7 +27,8 @@ Updated on 2026-04-12.
   `tests/golden/paper_0710_1869/default_kaon_np_only/provenance.json`,
   `tests/test_paper_benchmarks.py`, and
   `tests/test_paper_hadronic_lr_inputs.py`
-- untracked local SLURM stderr files remain under `.slurm-lr-default-had-1-IsA813/`
+- expendable untracked SLURM stdout/stderr residue from the pre-release runs
+  was removed and is not part of the handoff state
 
 ## Current Completed Milestone
 
@@ -91,9 +93,8 @@ Fresh clean verification jobs on 2026-04-12 (verification root:
 - next milestone: `none`
 - there is no remaining scientific/code milestone relative to the current
   frozen paper-facing claim boundary
-- only release hygiene remains before a release-clean handoff: sync docs/status
-  wording to the closed state, decide how to handle the dirty local worktree,
-  and commit/push only after that hygiene work is approved
+- the paper-facing module is publishable on its current claim boundary, with no
+  remaining milestone or release-hygiene follow-up inside that boundary
 
 Any future widening beyond this boundary, including artifact/verifier
 widening, conservative-bound `D0` interpretation, `epsilon_K`, or automatic
