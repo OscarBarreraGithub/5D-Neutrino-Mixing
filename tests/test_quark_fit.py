@@ -14,7 +14,12 @@ from quarkConstraints.fit import QuarkTargets, fit_quark_sector, fit_residuals
 def test_fit_quark_sector_improves_seed_score_and_matches_targets():
     """The fit should improve sharply over the seed and reproduce the targets."""
     targets = default_quark_targets()
-    solution = fit_quark_sector(targets, seed=default_spurion_seed(), overall_scale=3.0, max_nfev=120)
+    solution = fit_quark_sector(
+        targets,
+        seed=default_spurion_seed(),
+        overall_scale=3.0,
+        max_nfev=120,
+    )
 
     assert solution.success
     assert solution.result.score < solution.initial_score
@@ -41,9 +46,27 @@ def test_ckm_observable_residuals_are_invariant_under_jarlskog_sign_convention()
         label="conjugated-targets",
     )
 
-    residuals = fit_residuals(solution.result.masses_up, solution.result.masses_down, ckm, targets)
-    flipped = fit_residuals(solution.result.masses_up, solution.result.masses_down, np.conjugate(ckm), flipped_targets)
+    residuals = fit_residuals(
+        solution.result.masses_up,
+        solution.result.masses_down,
+        ckm,
+        targets,
+    )
+    flipped = fit_residuals(
+        solution.result.masses_up,
+        solution.result.masses_down,
+        np.conjugate(ckm),
+        flipped_targets,
+    )
 
-    assert np.allclose(residuals["ckm_observable_residuals"][:3], flipped["ckm_observable_residuals"][:3], atol=1e-12)
-    assert np.isclose(residuals["ckm_observable_residuals"][3], -flipped["ckm_observable_residuals"][3], atol=1e-12)
+    assert np.allclose(
+        residuals["ckm_observable_residuals"][:3],
+        flipped["ckm_observable_residuals"][:3],
+        atol=1e-12,
+    )
+    assert np.isclose(
+        residuals["ckm_observable_residuals"][3],
+        -flipped["ckm_observable_residuals"][3],
+        atol=1e-12,
+    )
     assert np.isclose(residuals["total_score"], flipped["total_score"], atol=1e-12)

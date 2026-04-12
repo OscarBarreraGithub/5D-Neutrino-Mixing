@@ -2,13 +2,17 @@
 
 import numpy as np
 
-from quarkConstraints.benchmarks import default_quark_targets, default_quark_benchmark, rough_sm_targets
+from quarkConstraints.benchmarks import (
+    default_quark_benchmark,
+    default_quark_targets,
+    rough_sm_targets,
+)
 from quarkConstraints.scales import (
-    DEFAULT_QUARK_BENCHMARK_XI_KK,
     DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
+    DEFAULT_QUARK_BENCHMARK_XI_KK,
     DEFAULT_QUARK_TARGET_SCALE_GEV,
-    GAUGE_KK_ROOT_NN,
     DEFAULT_QUARK_XI_KK,
+    GAUGE_KK_ROOT_NN,
     default_quark_m_kk_from_lambda_ir,
 )
 

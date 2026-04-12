@@ -11,8 +11,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from matplotlib.patches import Rectangle
-from matplotlib.lines import Line2D
 
 # Plotting style
 plt.rcParams.update({
@@ -125,7 +123,7 @@ for lam in lam_vals:
         n_paper_abs.append(len(paper_here))
         n_megii_abs.append(len(megii_here))
 
-lam_tev = [l/1000 for l in lam_vals]
+lam_tev = [lam / 1000 for lam in lam_vals]
 
 ax2.plot(lam_tev, acc_paper, 'o-', color='#2ecc71', lw=3, ms=10,
          label='Paper-era (MEGA 2008)', markeredgecolor='darkgreen', markeredgewidth=1.5)
@@ -169,7 +167,7 @@ ax3.set_xlabel(r'$M_{KK}$ (TeV)', fontsize=12)
 ax3.set_ylabel('Viable points', fontsize=12)
 ax3.set_title('Absolute Number of Viable Points', fontsize=13, weight='bold')
 ax3.set_xticks(x)
-ax3.set_xticklabels([f'{l:.0f}' for l in lam_tev])
+ax3.set_xticklabels([f'{lam:.0f}' for lam in lam_tev])
 ax3.legend(fontsize=10)
 ax3.grid(True, alpha=0.3, axis='y')
 
@@ -184,7 +182,7 @@ bars = ax4.bar(lam_tev, shrinkage, color='#e67e22', edgecolor='darkorange',
                linewidth=2, width=0.6)
 
 # Add value labels
-for i, (x_val, y_val) in enumerate(zip(lam_tev, shrinkage)):
+for x_val, y_val in zip(lam_tev, shrinkage):
     ax4.text(x_val, y_val, f'{y_val:.1f}×', ha='center', va='bottom',
             fontsize=10, weight='bold')
 

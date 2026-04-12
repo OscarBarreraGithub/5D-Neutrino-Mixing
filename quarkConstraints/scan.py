@@ -22,7 +22,6 @@ from .scales import (
     default_quark_m_kk_from_lambda_ir,
 )
 
-
 CSV_COLUMNS = [
     "sample_index",
     "git_commit",

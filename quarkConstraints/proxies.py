@@ -7,7 +7,7 @@ from typing import Sequence
 
 import numpy as np
 
-from .benchmarks import benchmark_spurion_input, default_quark_targets, default_spurion_seed
+from .benchmarks import default_quark_targets, default_spurion_seed
 from .fit import QuarkFitResult, evaluate_quark_fit, fit_quark_sector
 from .model import QuarkBulkState, QuarkSpurionPoint, derive_bulk_state
 from .scales import DEFAULT_QUARK_XI_KK, default_quark_m_kk_from_lambda_ir
@@ -38,7 +38,10 @@ class AlignmentDiagnostics:
 
     @property
     def down_to_up_misalignment_ratio(self) -> float:
-        return float(self.down_offdiag_ratio_in_q_basis / max(self.up_offdiag_ratio_in_q_basis, 1e-30))
+        return float(
+            self.down_offdiag_ratio_in_q_basis
+            / max(self.up_offdiag_ratio_in_q_basis, 1e-30)
+        )
 
 
 @dataclass(frozen=True)

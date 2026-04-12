@@ -10,7 +10,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from quarkConstraints.benchmarks import benchmark_spurion_input, default_quark_targets
 from quarkConstraints.fit import fit_quark_sector
 from quarkConstraints.model import QuarkSpurionPoint
-from quarkConstraints.proxies import summarize_flavor_diagnostics, suppression_summary, sweep_r, sweep_r_proxy_summary
+from quarkConstraints.proxies import (
+    summarize_flavor_diagnostics,
+    suppression_summary,
+    sweep_r,
+    sweep_r_proxy_summary,
+)
 
 
 def test_proxy_summary_is_positive_and_down_sector_misalignment_stays_controlled():

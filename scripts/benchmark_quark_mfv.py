@@ -12,21 +12,21 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from quarkConstraints.benchmarks import default_quark_targets
-from quarkConstraints.couplings import compute_quark_kk_gluon_couplings
-from quarkConstraints.deltaf2 import evaluate_delta_f2_constraints
-from quarkConstraints.fit import fit_quark_sector
-from quarkConstraints.proxies import summarize_flavor_diagnostics
-from quarkConstraints.scales import (
-    DEFAULT_QUARK_BENCHMARK_XI_KK,
-    DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
-    DEFAULT_QUARK_PAPER_H_RS_MAX,
-    default_quark_m_kk_from_lambda_ir,
-)
-from quarkConstraints.validation import benchmark_fit_summary
-
 
 def main() -> int:
+    from quarkConstraints.benchmarks import default_quark_targets
+    from quarkConstraints.couplings import compute_quark_kk_gluon_couplings
+    from quarkConstraints.deltaf2 import evaluate_delta_f2_constraints
+    from quarkConstraints.fit import fit_quark_sector
+    from quarkConstraints.proxies import summarize_flavor_diagnostics
+    from quarkConstraints.scales import (
+        DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
+        DEFAULT_QUARK_BENCHMARK_XI_KK,
+        DEFAULT_QUARK_PAPER_H_RS_MAX,
+        default_quark_m_kk_from_lambda_ir,
+    )
+    from quarkConstraints.validation import benchmark_fit_summary
+
     targets = default_quark_targets()
     solution = fit_quark_sector(targets, r=0.25, overall_scale=3.0, max_nfev=150)
     result = solution.result
@@ -87,7 +87,9 @@ def main() -> int:
     ):
         print(
             f"  {label:10s} = "
-            f"(|12|={abs(matrix[0, 1]):.6e}, |13|={abs(matrix[0, 2]):.6e}, |23|={abs(matrix[1, 2]):.6e})"
+            f"(|12|={abs(matrix[0, 1]):.6e}, "
+            f"|13|={abs(matrix[0, 2]):.6e}, "
+            f"|23|={abs(matrix[1, 2]):.6e})"
         )
     print()
     print("Delta F = 2 summary")
@@ -100,8 +102,14 @@ def main() -> int:
     print(f"  overall pass    = {deltaf2.passes_all}")
     print()
     print("Validation gates")
-    print(f"  benchmark h_RS < {DEFAULT_QUARK_BENCHMARK_H_RS_MAX:.2f} = {fit_summary.passes_proxy}")
-    print(f"  paper h_RS < {DEFAULT_QUARK_PAPER_H_RS_MAX:.2f}     = {fit_summary.passes_paper_proxy}")
+    print(
+        f"  benchmark h_RS < {DEFAULT_QUARK_BENCHMARK_H_RS_MAX:.2f} "
+        f"= {fit_summary.passes_proxy}"
+    )
+    print(
+        f"  paper h_RS < {DEFAULT_QUARK_PAPER_H_RS_MAX:.2f}     "
+        f"= {fit_summary.passes_paper_proxy}"
+    )
     print(f"  misalignment gate = {fit_summary.passes_misalignment}")
     print(f"  Delta F = 2 gate  = {fit_summary.passes_deltaf2}")
 

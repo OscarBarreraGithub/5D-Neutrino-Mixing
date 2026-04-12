@@ -6,15 +6,20 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .fit import QuarkFitResult, QuarkFitSolution, QuarkTargets, evaluate_quark_fit, fit_quark_sector
+from .fit import (
+    QuarkFitResult,
+    QuarkFitSolution,
+    QuarkTargets,
+    evaluate_quark_fit,
+    fit_quark_sector,
+)
 from .model import (
-    RotationParameters,
     QuarkSpurionPoint,
+    RotationParameters,
     build_mfv_point_from_singular_values,
     ckm_like_unitary,
 )
 from .scales import DEFAULT_QUARK_TARGET_SCALE_GEV
-
 
 _TARGET_CKM = ckm_like_unitary(
     RotationParameters(theta12=0.2274, theta13=0.00368, theta23=0.0415, delta=1.196)

@@ -14,8 +14,6 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from quarkConstraints.validation import r_sweep_plot_data
-
 FIG_DIR = REPO_ROOT / "results" / "figures"
 
 DEFAULT_R_VALUES = (0.05, 0.1, 0.25, 0.4, 1.0)
@@ -80,11 +78,31 @@ def _plot_epsilon_k_vs_r(data: dict[str, np.ndarray], path: Path) -> None:
         label=r"$\epsilon_K$ ratio",
     )
     ax.axhline(1.0, color="black", ls="--", lw=1.5, alpha=0.8, label="repo pass/fail = 1")
-    ax.fill_between(r_values, epsilon_k_ratio, 1.0, where=epsilon_k_ratio <= 1.0, color="#d5f5e3", alpha=0.45)
-    ax.fill_between(r_values, epsilon_k_ratio, 1.0, where=epsilon_k_ratio > 1.0, color="#fadbd8", alpha=0.45)
+    ax.fill_between(
+        r_values,
+        epsilon_k_ratio,
+        1.0,
+        where=epsilon_k_ratio <= 1.0,
+        color="#d5f5e3",
+        alpha=0.45,
+    )
+    ax.fill_between(
+        r_values,
+        epsilon_k_ratio,
+        1.0,
+        where=epsilon_k_ratio > 1.0,
+        color="#fadbd8",
+        alpha=0.45,
+    )
 
     for x_val, y_val in zip(r_values, epsilon_k_ratio):
-        ax.annotate(f"{y_val:.2f}", (x_val, y_val), textcoords="offset points", xytext=(0, 8), ha="center")
+        ax.annotate(
+            f"{y_val:.2f}",
+            (x_val, y_val),
+            textcoords="offset points",
+            xytext=(0, 8),
+            ha="center",
+        )
 
     ax.set_title(r"$K^0-\bar{K}^0$ Proxy Constraint vs $r$")
     ax.set_xlabel(r"$r$")
@@ -98,6 +116,8 @@ def _plot_epsilon_k_vs_r(data: dict[str, np.ndarray], path: Path) -> None:
 
 
 def main() -> int:
+    from quarkConstraints.validation import r_sweep_plot_data
+
     args = _parse_args()
     _configure_style()
     FIG_DIR.mkdir(parents=True, exist_ok=True)

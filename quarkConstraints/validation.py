@@ -14,8 +14,8 @@ from .fit import QuarkFitSolution, fit_quark_sector
 from .model import BulkMassMap
 from .proxies import summarize_flavor_diagnostics
 from .scales import (
-    DEFAULT_QUARK_BENCHMARK_XI_KK,
     DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
+    DEFAULT_QUARK_BENCHMARK_XI_KK,
     DEFAULT_QUARK_MAX_MISALIGNMENT_STRESS,
     DEFAULT_QUARK_PAPER_H_RS_MAX,
     default_quark_m_kk_from_lambda_ir,
@@ -179,7 +179,11 @@ def benchmark_plot_data(
         "xi_KK": np.array([xi_KK], dtype=float),
         "M_KK": np.array([m_kk], dtype=float),
         "mass_residual_norm": np.array(
-            [np.linalg.norm(np.concatenate([result.mass_residuals_up, result.mass_residuals_down]))],
+            [
+                np.linalg.norm(
+                    np.concatenate([result.mass_residuals_up, result.mass_residuals_down])
+                )
+            ],
             dtype=float,
         ),
         "ckm_residual_norm": np.array([np.linalg.norm(result.ckm_residuals)], dtype=float),

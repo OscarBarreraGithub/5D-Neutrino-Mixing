@@ -28,11 +28,11 @@ def _default_quark_m_kk_from_lambda_ir(Lambda_IR: float, xi_KK: float = 1.0) -> 
         from .scales import default_quark_m_kk_from_lambda_ir
 
         return default_quark_m_kk_from_lambda_ir(Lambda_IR, xi_KK=xi_KK)
-    except Exception:
+    except Exception as err:
         if Lambda_IR <= 0.0:
-            raise ValueError("Lambda_IR must be positive")
+            raise ValueError("Lambda_IR must be positive") from err
         if xi_KK <= 0.0:
-            raise ValueError("xi_KK must be positive")
+            raise ValueError("xi_KK must be positive") from err
         return float(xi_KK * Lambda_IR)
 
 

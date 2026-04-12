@@ -15,8 +15,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Mapping, Sequence
 
-import numpy as np
-
 from .couplings import QuarkMassBasisCouplings, compute_quark_kk_gluon_couplings
 from .fit import QuarkFitResult
 from .scales import DEFAULT_QUARK_TARGET_SCALE_GEV, DEFAULT_QUARK_XI_KK

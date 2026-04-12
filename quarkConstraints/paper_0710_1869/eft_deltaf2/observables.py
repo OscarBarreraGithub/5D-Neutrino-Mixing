@@ -638,15 +638,24 @@ def _require_d0_q1_hadronic_compatibility(
         raise ValueError(
             "hadronic contract operator_normalization_id must match the D0 bundle normalization"
         )
-    if hadronic_contract.renormalization_scheme_id != hadronic_bundle.renormalization_scheme_id:
-        raise ValueError("hadronic contract renormalization_scheme_id must match the D0 bundle scheme")
+    if (
+        hadronic_contract.renormalization_scheme_id
+        != hadronic_bundle.renormalization_scheme_id
+    ):
+        raise ValueError(
+            "hadronic contract renormalization_scheme_id must match the D0 bundle scheme"
+        )
     if hadronic_contract.hamiltonian_convention_id != hadronic_bundle.hamiltonian_convention_id:
         raise ValueError(
             "hadronic contract hamiltonian_convention_id must match the frozen paper convention"
         )
-    if hadronic_contract.matrix_element_formula_id != hadronic_bundle.matrix_element_formula_id:
+    if (
+        hadronic_contract.matrix_element_formula_id
+        != hadronic_bundle.matrix_element_formula_id
+    ):
         raise ValueError(
-            "hadronic contract matrix_element_formula_id must match the D0 Q1 matrix-element formula"
+            "hadronic contract matrix_element_formula_id must match "
+            "the D0 Q1 matrix-element formula"
         )
     if hadronic_contract.parity_relation_id != hadronic_bundle.parity_relation_id:
         raise ValueError(
@@ -665,20 +674,31 @@ def _require_d0_q1_hadronic_compatibility(
         rel_tol=0.0,
         abs_tol=1e-12,
     ):
-        raise ValueError("hadronic contract evaluation_scale_GeV must match the D0 bundle mu_had_GeV")
+        raise ValueError(
+            "hadronic contract evaluation_scale_GeV must match the D0 bundle mu_had_GeV"
+        )
     if hadronic_bundle.system_id != PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID:
         raise ValueError("hadronic bundle must be D0-only for the custom D0 observable path")
     if hadronic_bundle.operator_basis_id != PAPER_0710_1869_DELTAF2_OPERATOR_BASIS_ID:
         raise ValueError("hadronic bundle operator_basis_id must match the frozen paper basis")
-    if hadronic_bundle.operator_normalization_id != PAPER_0710_1869_DELTAF2_OPERATOR_NORMALIZATION_ID:
+    if (
+        hadronic_bundle.operator_normalization_id
+        != PAPER_0710_1869_DELTAF2_OPERATOR_NORMALIZATION_ID
+    ):
         raise ValueError(
             "hadronic bundle operator_normalization_id must match the frozen paper normalization"
         )
-    if hadronic_bundle.hamiltonian_convention_id != PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID:
+    if (
+        hadronic_bundle.hamiltonian_convention_id
+        != PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID
+    ):
         raise ValueError(
             "hadronic bundle hamiltonian_convention_id must match the frozen paper convention"
         )
-    if hadronic_bundle.matrix_element_formula_id != PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID:
+    if (
+        hadronic_bundle.matrix_element_formula_id
+        != PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID
+    ):
         raise ValueError(
             "hadronic bundle matrix_element_formula_id must match the frozen D0 Q1 formula"
         )
@@ -718,7 +738,9 @@ def _require_d0_q1_hadronic_compatibility(
         rel_tol=0.0,
         abs_tol=1e-12,
     ):
-        raise ValueError("hadronic bundle mu_had_GeV must match the evolved Wilson evaluation scale")
+        raise ValueError(
+            "hadronic bundle mu_had_GeV must match the evolved Wilson evaluation scale"
+        )
     if abs(wilsons.q4_lr) > _ZERO_TOLERANCE or abs(wilsons.q5_lr) > _ZERO_TOLERANCE:
         raise ValueError(
             "custom D0 Q1 observables currently support only Q1_VLL/Q1_VRR; non-zero "

@@ -144,7 +144,9 @@ class QuarkFitResult:
     def residual_norm(self) -> float:
         return float(
             np.linalg.norm(
-                np.concatenate([self.mass_residuals_up, self.mass_residuals_down, self.ckm_residuals])
+                np.concatenate(
+                    [self.mass_residuals_up, self.mass_residuals_down, self.ckm_residuals]
+                )
             )
         )
 
