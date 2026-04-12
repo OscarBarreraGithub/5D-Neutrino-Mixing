@@ -394,6 +394,78 @@ Required deployment order:
 4. one orchestrator handoff of consolidated findings back to the worker
 5. one second-pass non-author re-review before closure
 
+## D0-Q1-CUSTOM-1 Milestone
+
+The next honest paper-mode slice after BS-Q1-CUSTOM-1 is D0-Q1-CUSTOM-1:
+
+- add only a custom-input-only Q1 NP-only `D0` observable surface
+- add only a custom-input-only `D0` Q1 hadronic bundle
+- add only the minimal `D0` system/matching helper needed to source the
+  evolved Wilson snapshot with `system_id = "D0"`, `sector_id = "up"`, and
+  `flavor_indices = (0, 1)`
+- require exact alignment between the Wilson snapshot and the custom `D0`
+  hadronic bundle on `system_id`, operator basis id, operator normalization
+  id, renormalization scheme id, and `mu_had`/evaluation scale
+- require the custom `D0` hadronic bundle to carry the frozen Hamiltonian
+  convention id
+- require the Wilson-side `D0` guard `sector_id = "up"` and
+  `generations = (0, 1)`
+- expose only `M12_D0_NP` and `Delta_m_D0_NP = 2 Re(M12_D0_NP)`
+- reject nonzero `Q4_LR` / `Q5_LR` in this slice
+- do not add conservative-bound or long-distance D-mixing interpretation in
+  this slice
+- keep the kaon default/exported Q1 path unchanged
+- keep the kaon LR-only and custom combined surfaces available
+- keep the custom `B_d` / `B_s` Q1 surfaces available
+- keep artifacts, the standalone verifier, and default result bundles
+  unchanged
+- keep sourced default LR inputs, artifact/verifier widening, and `epsilon_K`
+  out of scope
+
+Required deployment order:
+
+1. two planners and one theory checker in parallel, with explicit convergence
+   on the narrowest honest `D0` slice before coding
+2. implementation worker and tests/acceptance worker in parallel only after
+   BS-Q1-CUSTOM-1 is confirmed frozen and unchanged
+3. logic checker, numerical checker, and physics checker in parallel
+4. one orchestrator handoff of consolidated findings back to the worker
+5. one second-pass non-author re-review before closure
+
+## LR-RCHI-FREEZE-1 Milestone
+
+The next honest paper-mode slice after D0-Q1-CUSTOM-1 is LR-RCHI-FREEZE-1:
+
+- add only the kaon LR `R_chi(mu_had)` semantics/provenance freeze at
+  `mu_had = 2.0 GeV`
+- allow only a dedicated derived-`R_chi` contract, builder, or summary inside
+  the hadronic layer if needed
+- freeze the exact BV 2004 definition
+  `R_chi(mu) = [m_K / (m_s(mu) + m_d(mu))]^2`
+- freeze the PDG 2024 `N_L = 4` mass-source chain for `m_s(2 GeV)` and
+  `m_d(2 GeV)`
+- reuse the already-frozen kaon-mass source from the default kaon Q1 path
+- require explicit mass-side renormalization-scheme metadata,
+  active-flavor-policy metadata, derivation-policy metadata, and a
+  no-hidden-conversion rule
+- keep default `B4/B5` LR freezing out of scope
+- keep sourced default LR hadronic bundles and LR-DEFAULT-HAD-1 out of scope
+- keep the kaon LR-only and custom combined surfaces custom-input-only
+- keep the default/exported kaon Q1 path unchanged
+- keep artifacts, the standalone verifier, and default result bundles
+  unchanged
+- keep `epsilon_K` blocked
+
+Required deployment order:
+
+1. two planners and one theory checker in parallel, with explicit convergence
+   on the exact `R_chi` source chain and policy ids before coding
+2. implementation worker and tests/acceptance worker in parallel only after
+   D0-Q1-CUSTOM-1 is confirmed frozen and unchanged
+3. logic checker, numerical checker, and physics checker in parallel
+4. one orchestrator handoff of consolidated findings back to the worker
+5. one second-pass non-author re-review before closure
+
 ## Theory Guidance
 
 The physics reviewer for the paper path should use these anchors:
@@ -402,6 +474,10 @@ The physics reviewer for the paper path should use these anchors:
 - `BMU, hep-ph/0005183` for LO ADM and RG conventions already frozen in the
   repo
 - `Ciuchini, hep-ph/9711402` for basis and scheme caveats
+- `BV 2004, hep-lat/0408029` for the LR matrix-element formulas and the exact
+  `R_chi` definition
+- PDG 2024 quark masses review for the frozen `m_s(2 GeV)` / `m_d(2 GeV)`
+  source chain used by LR-RCHI-FREEZE-1
 - PDG/FLAG-derived hadronic references already encoded in
   `/Users/oscar/Documents/Research_Code/Randall/5D-Neutrino-Mixing/quarkConstraints/paper_0710_1869/eft_deltaf2/hadronic.py`
 
@@ -541,6 +617,55 @@ For BS-Q1-CUSTOM-1, the reviewer must specifically check:
 - artifacts, verifier behavior, and default result bundles remain unchanged
 - sourced default LR inputs, artifact/verifier widening, and `epsilon_K`
   remain out of scope
+
+For D0-Q1-CUSTOM-1, the reviewer must specifically check:
+
+- LR-MAP-1, LR-RG-1, LR-HAD-1, LR-OBS-1, LR-TOTAL-1, and BS-Q1-CUSTOM-1 remain
+  frozen and unchanged
+- the new surface is custom-input-only Q1 NP-only `D0` rather than a widened
+  kaon/exported API
+- the new slice adds only the custom `D0` Q1 hadronic bundle and the minimal
+  `D0` system/matching helper
+- exact alignment is enforced between the Wilson snapshot and the custom `D0`
+  hadronic bundle on `system_id`, operator basis id, operator normalization
+  id, renormalization scheme id, and `mu_had`/evaluation scale
+- the custom `D0` hadronic bundle carries the frozen Hamiltonian convention id
+- the Wilson-side `D0` guard requires `sector_id = "up"` and
+  `generations = (0, 1)`
+- the slice exposes only `M12_D0_NP` and `Delta_m_D0_NP = 2 Re(M12_D0_NP)`
+- nonzero `Q4_LR` / `Q5_LR` remains rejected in the `D0` slice
+- no conservative-bound or long-distance D-mixing interpretation is implied
+- the kaon default/exported Q1 path remains unchanged
+- the kaon LR-only and custom combined surfaces remain available and unchanged
+- the custom `B_d` / `B_s` Q1 surfaces remain available and unchanged
+- artifacts, verifier behavior, and default result bundles remain unchanged
+- sourced default LR inputs, artifact/verifier widening, and `epsilon_K`
+  remain out of scope
+
+For LR-RCHI-FREEZE-1, the reviewer must specifically check:
+
+- LR-MAP-1, LR-RG-1, LR-HAD-1, LR-OBS-1, LR-TOTAL-1, BS-Q1-CUSTOM-1, and
+  D0-Q1-CUSTOM-1 remain frozen and unchanged
+- the new slice freezes only the kaon LR `R_chi(mu_had)` semantics/provenance
+  at `mu_had = 2.0 GeV` rather than widening a kaon/exported API
+- the exact BV 2004 definition
+  `R_chi(mu) = [m_K / (m_s(mu) + m_d(mu))]^2` is the only allowed derivation
+  rule in this slice
+- the frozen mass-source chain is PDG 2024 with `N_L = 4` at `2 GeV` for
+  `m_s` and `m_d`
+- the kaon-mass source is reused from the already-frozen default kaon Q1 path
+- the slice records explicit mass-side renormalization-scheme,
+  active-flavor-policy, derivation-policy, and no-hidden-conversion metadata
+- mass-side scheme semantics remain distinct from the BMU operator
+  renormalization scheme used by the LR operator layer
+- no hidden `3 GeV -> 2 GeV` running, RI/MOM -> NDR conversion, or quark-mass
+  matching/evolution is implied in this slice
+- default `B4/B5` LR freezing and LR-DEFAULT-HAD-1 remain out of scope
+- the kaon LR-only and custom combined surfaces remain custom-input-only and
+  unchanged
+- the kaon default/exported Q1 path remains unchanged
+- artifacts, verifier behavior, and default result bundles remain unchanged
+- `epsilon_K` remains blocked
 
 ## PR6/PR7 Verification Rules
 
@@ -733,6 +858,77 @@ Required checks for BS-Q1-CUSTOM-1:
     and continued availability of the kaon LR-only and custom combined
     surfaces
 
+## D0-Q1-CUSTOM-1 Verification Rules
+
+Required checks for D0-Q1-CUSTOM-1:
+
+1. targeted `ruff check` on changed paper files
+2. targeted `pytest -q` for touched `tests/test_paper_*.py`
+3. at least one positive test showing the custom-input-only `D0` Q1 observable
+   path succeeds only when the Wilson snapshot and hadronic bundle are exactly
+   aligned
+4. at least one negative test showing mismatched `system_id`, `sector_id`,
+   `generations`, basis, normalization, renormalization scheme id,
+   `mu_had`/evaluation scale, or Hamiltonian convention id is rejected for
+   `D0`
+5. at least one negative test showing nonzero `Q4_LR` / `Q5_LR` remains out
+   of scope for the `D0` slice
+6. at least one negative test showing the kaon default/exported Q1 path
+   remains unchanged
+7. at least one negative test showing the kaon LR-only and custom combined
+   surfaces remain available and unchanged
+8. at least one negative test showing the custom `B_d` / `B_s` Q1 surfaces
+   remain available and unchanged
+9. at least one negative test showing artifacts and the standalone verifier
+   remain unchanged and isolated from the new custom `D0` surface
+10. at least one negative test showing `epsilon_K` remains blocked
+11. explicit physics review confirming the custom-input-only `D0` Q1 NP-only
+    scope, the exact Wilson/hadronic alignment rule on shared tags, the
+    Wilson-side `sector_id = "up"` and `generations = (0, 1)` guard, and that
+    conservative-bound D interpretation plus sourced default LR inputs remain
+    out of scope
+12. explicit numerical review confirming the `D0` observable path obeys the
+    frozen NP-only Q1 semantics without drifting into the kaon default/exported
+    numerics
+13. explicit logic review confirming API boundaries, kaon/export isolation,
+    continued availability of the kaon LR-only and custom combined surfaces,
+    and continued availability of the custom `B_d` / `B_s` Q1 surfaces
+
+## LR-RCHI-FREEZE-1 Verification Rules
+
+Required checks for LR-RCHI-FREEZE-1:
+
+1. targeted `ruff check` on changed paper files
+2. targeted `pytest -q` for touched `tests/test_paper_*.py`
+3. at least one positive test showing the frozen `R_chi` payload is
+   deterministic across repeated builds
+4. at least one positive test showing `R_chi(mu_had)` matches the exact BV
+   2004 definition from the frozen `m_K`, `m_s(2 GeV)`, and `m_d(2 GeV)`
+   inputs
+5. at least one negative test showing missing or drifted `m_K`, `m_s`, or
+   `m_d` source ids, mass-side renormalization-scheme metadata,
+   active-flavor-policy metadata, or derivation-policy metadata is rejected
+6. at least one negative test showing drift away from `mu_had = 2.0 GeV`,
+   `N_L = 4`, or the no-hidden-conversion rule is rejected
+7. at least one negative test showing hidden `3 GeV -> 2 GeV` running,
+   RI/MOM -> NDR conversion, or quark-mass matching/evolution is rejected
+8. at least one negative test showing default `B4/B5` LR freezing and sourced
+   default LR hadronic bundles remain absent in this slice
+9. at least one negative test showing the kaon LR-only and custom combined
+   surfaces remain custom-input-only and unchanged
+10. at least one negative test showing the kaon default/exported Q1 path,
+    artifacts, and the standalone verifier remain unchanged
+11. benchmark or contract summary reports a separate `R_chi` freeze only,
+    with unchanged kaon/exported scope
+12. explicit physics review confirming the exact BV 2004 definition, the exact
+    PDG 2024 `N_L = 4` mass-source chain, the separated mass/operator scheme
+    semantics, and the no-hidden-conversion rule
+13. explicit numerical review confirming deterministic `R_chi` outputs without
+    drifting into the default/exported kaon numerics
+14. explicit logic review confirming API boundaries, no default LR hadronic
+    bundle introduction, continued custom-input-only LR observables, and that
+    LR-DEFAULT-HAD-1 remains deferred
+
 ## Environment Note
 
 If worker execution is attempted through nested `codex exec` inside this app
@@ -783,3 +979,14 @@ For a future orchestrator after compaction:
     observable surfaces plus custom `B_d` / `B_s` hadronic bundles; `D0`,
     sourced default LR inputs, artifact/verifier widening, and `epsilon_K`
     remain for later slices.
+14. D0-Q1-CUSTOM-1 may add only the custom-input-only Q1 NP-only `D0`
+    observable surface, the custom `D0` Q1 hadronic bundle, and the minimal
+    `D0` system/matching helper; conservative-bound D interpretation, sourced
+    default LR inputs, artifact/verifier widening, default/exported kaon
+    numerics, and `epsilon_K` remain for later slices.
+15. LR-RCHI-FREEZE-1 may add only the kaon LR `R_chi(mu_had)`
+    semantics/provenance freeze at `mu_had = 2.0 GeV` under the exact BV 2004
+    definition and the PDG 2024 `N_L = 4` mass-source chain; default `B4/B5`
+    LR freezing and LR-DEFAULT-HAD-1 remain deferred until after this slice,
+    and default/exported kaon numerics, artifacts, verifier behavior, and
+    `epsilon_K` remain for later slices.

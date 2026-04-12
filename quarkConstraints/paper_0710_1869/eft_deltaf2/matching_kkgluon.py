@@ -428,6 +428,21 @@ def default_paper_0710_1869_bs_deltaf2_system() -> Paper07101869DeltaF2System:
     )
 
 
+def default_paper_0710_1869_d0_deltaf2_system() -> Paper07101869DeltaF2System:
+    """Return the custom D0-system definition for paper-mode DeltaF=2 matching."""
+
+    return Paper07101869DeltaF2System(
+        system_id="D0",
+        sector_id="up",
+        flavor_indices=(0, 1),
+        label="D0-D0bar",
+        notes=(
+            "Custom D0 benchmark system: c-u mixing with left-up-aligned and "
+            "right-up-diagonal KK-gluon matrices."
+        ),
+    )
+
+
 def match_paper_0710_1869_kk_gluon_deltaf2(
     system: Paper07101869DeltaF2System | None = None,
     *,
@@ -547,6 +562,14 @@ def match_default_paper_0710_1869_bs_kk_gluon_deltaf2() -> Paper07101869KKGluonD
 
     return match_paper_0710_1869_kk_gluon_deltaf2(
         system=default_paper_0710_1869_bs_deltaf2_system()
+    )
+
+
+def match_default_paper_0710_1869_d0_kk_gluon_deltaf2() -> Paper07101869KKGluonDeltaF2Match:
+    """Return the custom D0 matching point for the paper-owned Q1 slice."""
+
+    return match_paper_0710_1869_kk_gluon_deltaf2(
+        system=default_paper_0710_1869_d0_deltaf2_system()
     )
 
 
@@ -688,6 +711,36 @@ def default_paper_0710_1869_bs_matching() -> Paper07101869KKGluonDeltaF2Match:
     return build_paper_0710_1869_bs_matching()
 
 
+def build_paper_0710_1869_d0_matching(
+    *,
+    kk_couplings: Paper07101869KKGluonCouplings | None = None,
+    kk_gluon_couplings: Paper07101869KKGluonCouplings | None = None,
+    couplings: Paper07101869KKGluonCouplings | None = None,
+    benchmark: Paper07101869Benchmark | None = None,
+    scale_point: Paper07101869ScalePoint | None = None,
+    coupling_contract: Paper07101869CouplingContract | None = None,
+    wilson_contract: Paper07101869DeltaF2WilsonContract | None = None,
+) -> Paper07101869KKGluonDeltaF2Match:
+    """Build the deterministic custom D0 matching object."""
+
+    return match_kkgluon_to_deltaf2(
+        system=default_paper_0710_1869_d0_deltaf2_system(),
+        benchmark=benchmark,
+        scale_point=scale_point,
+        coupling_contract=coupling_contract,
+        wilson_contract=wilson_contract,
+        kk_couplings=kk_couplings,
+        kk_gluon_couplings=kk_gluon_couplings,
+        couplings=couplings,
+    )
+
+
+def default_paper_0710_1869_d0_matching() -> Paper07101869KKGluonDeltaF2Match:
+    """Return the deterministic custom D0 matching object."""
+
+    return build_paper_0710_1869_d0_matching()
+
+
 def build_paper_0710_1869_deltaf2_matching(
     *,
     kk_couplings: Paper07101869KKGluonCouplings | None = None,
@@ -827,6 +880,35 @@ def default_paper_0710_1869_bs_matching_summary() -> dict[str, object]:
     return build_paper_0710_1869_bs_matching_summary()
 
 
+def build_paper_0710_1869_d0_matching_summary(
+    *,
+    kk_couplings: Paper07101869KKGluonCouplings | None = None,
+    kk_gluon_couplings: Paper07101869KKGluonCouplings | None = None,
+    couplings: Paper07101869KKGluonCouplings | None = None,
+    benchmark: Paper07101869Benchmark | None = None,
+    scale_point: Paper07101869ScalePoint | None = None,
+    coupling_contract: Paper07101869CouplingContract | None = None,
+    wilson_contract: Paper07101869DeltaF2WilsonContract | None = None,
+) -> dict[str, object]:
+    """Build the deterministic custom D0 matching summary mapping."""
+
+    return build_paper_0710_1869_d0_matching(
+        kk_couplings=kk_couplings,
+        kk_gluon_couplings=kk_gluon_couplings,
+        couplings=couplings,
+        benchmark=benchmark,
+        scale_point=scale_point,
+        coupling_contract=coupling_contract,
+        wilson_contract=wilson_contract,
+    ).summary()
+
+
+def default_paper_0710_1869_d0_matching_summary() -> dict[str, object]:
+    """Return the deterministic custom D0 matching summary mapping."""
+
+    return build_paper_0710_1869_d0_matching_summary()
+
+
 def build_paper_0710_1869_deltaf2_matching_summary(
     *,
     kk_couplings: Paper07101869KKGluonCouplings | None = None,
@@ -893,6 +975,8 @@ __all__ = [
     "build_paper_0710_1869_bd_matching_summary",
     "build_paper_0710_1869_bs_matching",
     "build_paper_0710_1869_bs_matching_summary",
+    "build_paper_0710_1869_d0_matching",
+    "build_paper_0710_1869_d0_matching_summary",
     "build_paper_0710_1869_kaon_matching",
     "build_paper_0710_1869_kaon_matching_summary",
     "build_paper_0710_1869_kkgluon_matching",
@@ -903,6 +987,9 @@ __all__ = [
     "default_paper_0710_1869_bs_deltaf2_system",
     "default_paper_0710_1869_bs_matching",
     "default_paper_0710_1869_bs_matching_summary",
+    "default_paper_0710_1869_d0_deltaf2_system",
+    "default_paper_0710_1869_d0_matching",
+    "default_paper_0710_1869_d0_matching_summary",
     "default_paper_0710_1869_deltaf2_matching",
     "default_paper_0710_1869_deltaf2_matching_summary",
     "default_paper_0710_1869_kaon_deltaf2_system",
@@ -913,6 +1000,7 @@ __all__ = [
     "match_kkgluon_to_deltaf2",
     "match_default_paper_0710_1869_bd_kk_gluon_deltaf2",
     "match_default_paper_0710_1869_bs_kk_gluon_deltaf2",
+    "match_default_paper_0710_1869_d0_kk_gluon_deltaf2",
     "match_default_paper_0710_1869_kaon_kk_gluon_deltaf2",
     "match_paper_0710_1869_kkgluon_to_deltaf2",
     "match_paper_0710_1869_kk_gluon_deltaf2",

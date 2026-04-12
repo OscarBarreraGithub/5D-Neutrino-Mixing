@@ -14,6 +14,9 @@ from .hadronic import (
     PAPER_0710_1869_DELTAF2_BS_HADRONIC_SYSTEM_ID,
     PAPER_0710_1869_DELTAF2_BS_MATRIX_ELEMENT_FORMULA_ID,
     PAPER_0710_1869_DELTAF2_BS_PARITY_RELATION_ID,
+    PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID,
+    PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID,
+    PAPER_0710_1869_DELTAF2_D0_PARITY_RELATION_ID,
     PAPER_0710_1869_DELTAF2_HADRONIC_CUSTOM_PROVENANCE_MODE_ID,
     PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID,
     PAPER_0710_1869_DELTAF2_KAON_HADRONIC_SYSTEM_ID,
@@ -24,6 +27,7 @@ from .hadronic import (
     PAPER_0710_1869_DELTAF2_KAON_PARITY_RELATION_ID,
     PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID,
     Paper07101869BMesonHadronicBundle,
+    Paper07101869D0HadronicBundle,
     Paper07101869KaonHadronicBundle,
     Paper07101869KaonLRHadronicInputs,
     default_paper_0710_1869_kaon_hadronic_bundle,
@@ -109,6 +113,16 @@ PAPER_0710_1869_DELTAF2_BS_CUSTOM_Q1_M12_OBSERVABLE_ID = "M12_Bs_NP_CUSTOM_Q1"
 PAPER_0710_1869_DELTAF2_BS_CUSTOM_Q1_DELTA_M_OBSERVABLE_ID = (
     "Delta_m_Bs_NP_CUSTOM_Q1"
 )
+PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.d0_custom_q1_observable_result.v1"
+)
+PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SUMMARY_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.d0_custom_q1_observable_summary.v1"
+)
+PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SCOPE_ID = "d0.np_only.custom_q1.m12.v1"
+PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_INTERPRETATION_ID = "d0.np_only.custom_q1.v1"
+PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_M12_OBSERVABLE_ID = "M12_D0_NP"
+PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_DELTA_M_OBSERVABLE_ID = "Delta_m_D0_NP"
 
 _ZERO_TOLERANCE = 1e-30
 
@@ -610,6 +624,108 @@ _CUSTOM_B_Q1_DELTA_M_ID_BY_SYSTEM = {
 }
 
 
+def _require_d0_q1_hadronic_compatibility(
+    *,
+    wilsons: Paper07101869DeltaF2RGWilsonSnapshot,
+    hadronic_bundle: Paper07101869D0HadronicBundle,
+) -> None:
+    hadronic_contract = hadronic_bundle.contract
+    if hadronic_contract.system_id != hadronic_bundle.system_id:
+        raise ValueError("hadronic contract system_id must match the D0 bundle system_id")
+    if hadronic_contract.operator_basis_id != hadronic_bundle.operator_basis_id:
+        raise ValueError("hadronic contract operator_basis_id must match the D0 bundle basis")
+    if hadronic_contract.operator_normalization_id != hadronic_bundle.operator_normalization_id:
+        raise ValueError(
+            "hadronic contract operator_normalization_id must match the D0 bundle normalization"
+        )
+    if hadronic_contract.renormalization_scheme_id != hadronic_bundle.renormalization_scheme_id:
+        raise ValueError("hadronic contract renormalization_scheme_id must match the D0 bundle scheme")
+    if hadronic_contract.hamiltonian_convention_id != hadronic_bundle.hamiltonian_convention_id:
+        raise ValueError(
+            "hadronic contract hamiltonian_convention_id must match the frozen paper convention"
+        )
+    if hadronic_contract.matrix_element_formula_id != hadronic_bundle.matrix_element_formula_id:
+        raise ValueError(
+            "hadronic contract matrix_element_formula_id must match the D0 Q1 matrix-element formula"
+        )
+    if hadronic_contract.parity_relation_id != hadronic_bundle.parity_relation_id:
+        raise ValueError(
+            "hadronic contract parity_relation_id must match the D0 VLL/VRR parity relation"
+        )
+    if not math.isclose(
+        hadronic_contract.mu_had_GeV,
+        hadronic_bundle.mu_had_GeV,
+        rel_tol=0.0,
+        abs_tol=1e-12,
+    ):
+        raise ValueError("hadronic contract mu_had_GeV must match the D0 bundle mu_had_GeV")
+    if not math.isclose(
+        hadronic_contract.evaluation_scale_GeV,
+        hadronic_bundle.mu_had_GeV,
+        rel_tol=0.0,
+        abs_tol=1e-12,
+    ):
+        raise ValueError("hadronic contract evaluation_scale_GeV must match the D0 bundle mu_had_GeV")
+    if hadronic_bundle.system_id != PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID:
+        raise ValueError("hadronic bundle must be D0-only for the custom D0 observable path")
+    if hadronic_bundle.operator_basis_id != PAPER_0710_1869_DELTAF2_OPERATOR_BASIS_ID:
+        raise ValueError("hadronic bundle operator_basis_id must match the frozen paper basis")
+    if hadronic_bundle.operator_normalization_id != PAPER_0710_1869_DELTAF2_OPERATOR_NORMALIZATION_ID:
+        raise ValueError(
+            "hadronic bundle operator_normalization_id must match the frozen paper normalization"
+        )
+    if hadronic_bundle.hamiltonian_convention_id != PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID:
+        raise ValueError(
+            "hadronic bundle hamiltonian_convention_id must match the frozen paper convention"
+        )
+    if hadronic_bundle.matrix_element_formula_id != PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID:
+        raise ValueError(
+            "hadronic bundle matrix_element_formula_id must match the frozen D0 Q1 formula"
+        )
+    if hadronic_bundle.parity_relation_id != PAPER_0710_1869_DELTAF2_D0_PARITY_RELATION_ID:
+        raise ValueError(
+            "hadronic bundle parity_relation_id must match the frozen D0 VLL/VRR parity relation"
+        )
+    require_member(
+        "hadronic_bundle.input_provenance_mode_id",
+        hadronic_bundle.input_provenance_mode_id,
+        (PAPER_0710_1869_DELTAF2_HADRONIC_CUSTOM_PROVENANCE_MODE_ID,),
+    )
+    if wilsons.system_id != PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID:
+        raise ValueError("custom D0 observable evaluation requires D0 RG-tagged wilsons")
+    if wilsons.sector_id != "up":
+        raise ValueError("custom D0 observable evaluation requires the up-sector system")
+    if tuple(wilsons.generations) != (0, 1):
+        raise ValueError(
+            "custom D0 observable evaluation requires generations=(0, 1) "
+            "for the D0 slice"
+        )
+    if wilsons.operator_basis_id != hadronic_bundle.operator_basis_id:
+        raise ValueError(
+            "hadronic bundle operator_basis_id is incompatible with the RG Wilson snapshot"
+        )
+    if wilsons.operator_normalization_id != hadronic_bundle.operator_normalization_id:
+        raise ValueError(
+            "hadronic bundle operator_normalization_id is incompatible with the RG Wilson snapshot"
+        )
+    if wilsons.renormalization_scheme_id != hadronic_bundle.renormalization_scheme_id:
+        raise ValueError(
+            "hadronic bundle renormalization_scheme_id is incompatible with the RG Wilson snapshot"
+        )
+    if not math.isclose(
+        wilsons.matching_scale_GeV,
+        hadronic_bundle.mu_had_GeV,
+        rel_tol=0.0,
+        abs_tol=1e-12,
+    ):
+        raise ValueError("hadronic bundle mu_had_GeV must match the evolved Wilson evaluation scale")
+    if abs(wilsons.q4_lr) > _ZERO_TOLERANCE or abs(wilsons.q5_lr) > _ZERO_TOLERANCE:
+        raise ValueError(
+            "custom D0 Q1 observables currently support only Q1_VLL/Q1_VRR; non-zero "
+            "Q4_LR/Q5_LR remain out of scope for the D0 slice."
+        )
+
+
 def _require_custom_b_q1_hadronic_compatibility(
     *,
     wilsons: Paper07101869DeltaF2RGWilsonSnapshot,
@@ -745,6 +861,21 @@ def _compute_custom_b_q1_m12_value(
 ) -> complex:
     return _require_finite_complex(
         m12_name,
+        (
+            (wilsons.q1_vll + wilsons.q1_vrr)
+            * hadronic_bundle.q1_matrix_element_GeV4
+            / (2.0 * hadronic_bundle.meson_mass_GeV)
+        ),
+    )
+
+
+def _compute_d0_q1_m12_value(
+    *,
+    wilsons: Paper07101869DeltaF2RGWilsonSnapshot,
+    hadronic_bundle: Paper07101869D0HadronicBundle,
+) -> complex:
+    return _require_finite_complex(
+        "M12_D0_NP_GeV",
         (
             (wilsons.q1_vll + wilsons.q1_vrr)
             * hadronic_bundle.q1_matrix_element_GeV4
@@ -1135,6 +1266,186 @@ class Paper07101869BMesonCustomQ1ObservableResult:
         return {
             **self.as_dict(),
             "schema_id": _CUSTOM_B_Q1_SUMMARY_SCHEMA_BY_SYSTEM[self.system_id],
+        }
+
+
+@dataclass(frozen=True)
+class Paper07101869D0CustomQ1ObservableResult:
+    """Self-describing custom Q1-only D0 observable result at ``mu_had``."""
+
+    hadronic_bundle: Paper07101869D0HadronicBundle
+    wilsons: Paper07101869DeltaF2RGWilsonSnapshot
+    M12_D0_NP_GeV: complex
+    delta_m_D0_NP_GeV: float
+    observable_scope_id: str = PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SCOPE_ID
+    interpretation: str = PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_INTERPRETATION_ID
+    m12_observable_id: str = PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_M12_OBSERVABLE_ID
+    delta_m_observable_id: str = PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_DELTA_M_OBSERVABLE_ID
+    schema_id: str = PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SCHEMA_ID
+    mode_id: str = PAPER_0710_1869_MODE_ID
+    paper_id: str = PAPER_0710_1869_PAPER_ID
+    notes: str = (
+        "Custom D0 NP-only observable result: M12_D0^NP and Delta_m_D0^NP from "
+        "Q1_VLL/Q1_VRR only under exact RG/hadronic alignment. This does not widen the "
+        "default/exported kaon Q1-only observable or artifact surface."
+    )
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "schema_id",
+            require_known_schema_id(
+                "schema_id",
+                self.schema_id,
+                expected=PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SCHEMA_ID,
+            ),
+        )
+        require_member("mode_id", self.mode_id, (PAPER_0710_1869_MODE_ID,))
+        require_member("paper_id", self.paper_id, (PAPER_0710_1869_PAPER_ID,))
+        if not isinstance(self.hadronic_bundle, Paper07101869D0HadronicBundle):
+            raise ValueError("hadronic_bundle must be a Paper07101869D0HadronicBundle")
+        if not isinstance(self.wilsons, Paper07101869DeltaF2RGWilsonSnapshot):
+            raise ValueError("wilsons must be a Paper07101869DeltaF2RGWilsonSnapshot")
+        require_known_schema_id(
+            "wilsons.schema_id",
+            self.wilsons.schema_id,
+            expected=PAPER_0710_1869_DELTAF2_RG_WILSON_SCHEMA_ID,
+        )
+        _require_d0_q1_hadronic_compatibility(
+            wilsons=self.wilsons,
+            hadronic_bundle=self.hadronic_bundle,
+        )
+        for field_name in (
+            "observable_scope_id",
+            "interpretation",
+            "m12_observable_id",
+            "delta_m_observable_id",
+            "notes",
+        ):
+            object.__setattr__(
+                self,
+                field_name,
+                require_nonempty_identifier(field_name, getattr(self, field_name)),
+            )
+        object.__setattr__(
+            self,
+            "M12_D0_NP_GeV",
+            _require_finite_complex("M12_D0_NP_GeV", self.M12_D0_NP_GeV),
+        )
+        numeric_delta_m = float(self.delta_m_D0_NP_GeV)
+        if not math.isfinite(numeric_delta_m):
+            raise ValueError("delta_m_D0_NP_GeV must be finite")
+        object.__setattr__(self, "delta_m_D0_NP_GeV", numeric_delta_m)
+        expected_delta_m = 2.0 * float(self.M12_D0_NP_GeV.real)
+        if not math.isclose(
+            self.delta_m_D0_NP_GeV,
+            expected_delta_m,
+            rel_tol=0.0,
+            abs_tol=1e-18,
+        ):
+            raise ValueError("delta_m_D0_NP_GeV must equal 2 * Re(M12_D0_NP_GeV)")
+
+    @property
+    def benchmark_id(self) -> str:
+        return self.wilsons.benchmark_id
+
+    @property
+    def system_id(self) -> str:
+        return self.hadronic_bundle.system_id
+
+    @property
+    def scale_label(self) -> str:
+        return self.wilsons.scale_label
+
+    @property
+    def mu_had_GeV(self) -> float:
+        return self.hadronic_bundle.mu_had_GeV
+
+    @property
+    def operator_basis_id(self) -> str:
+        return self.hadronic_bundle.operator_basis_id
+
+    @property
+    def operator_normalization_id(self) -> str:
+        return self.hadronic_bundle.operator_normalization_id
+
+    @property
+    def renormalization_scheme_id(self) -> str:
+        return self.hadronic_bundle.renormalization_scheme_id
+
+    @property
+    def re_M12_D0_NP_GeV(self) -> float:
+        return float(self.M12_D0_NP_GeV.real)
+
+    @property
+    def im_M12_D0_NP_GeV(self) -> float:
+        return float(self.M12_D0_NP_GeV.imag)
+
+    @property
+    def tags(self) -> dict[str, object]:
+        return {
+            **self.wilsons.tags,
+            **self.hadronic_bundle.tags,
+            "observable_scope_id": self.observable_scope_id,
+            "interpretation": self.interpretation,
+            "m12_observable_id": self.m12_observable_id,
+            "delta_m_observable_id": self.delta_m_observable_id,
+        }
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "schema_id": self.schema_id,
+            "mode_id": self.mode_id,
+            "paper_id": self.paper_id,
+            "benchmark_id": self.benchmark_id,
+            "system_id": self.system_id,
+            "scale_label": self.scale_label,
+            "operator_basis_id": self.operator_basis_id,
+            "operator_normalization_id": self.operator_normalization_id,
+            "renormalization_scheme_id": self.renormalization_scheme_id,
+            "rg_scheme_id": self.wilsons.contract.rg_scheme_id,
+            "matrix_element_formula_id": self.hadronic_bundle.matrix_element_formula_id,
+            "hamiltonian_convention_id": self.hadronic_bundle.hamiltonian_convention_id,
+            "observable_scope_id": self.observable_scope_id,
+            "interpretation": self.interpretation,
+            "m12_observable_id": self.m12_observable_id,
+            "delta_m_observable_id": self.delta_m_observable_id,
+            "mu_had_GeV": self.mu_had_GeV,
+            "matching_scale_GeV": self.wilsons.matching_scale_GeV,
+            "source_matching_scale_GeV": self.wilsons.source_matching_scale_GeV,
+            "propagator_mass_GeV": self.wilsons.propagator_mass_GeV,
+            "q1_matrix_element_GeV4": self.hadronic_bundle.q1_matrix_element_GeV4,
+            "M12_NP_GeV": _complex_as_dict(self.M12_D0_NP_GeV),
+            "M12_D0_NP_GeV": _complex_as_dict(self.M12_D0_NP_GeV),
+            "re_M12_NP_GeV": self.re_M12_D0_NP_GeV,
+            "re_M12_D0_NP_GeV": self.re_M12_D0_NP_GeV,
+            "im_M12_NP_GeV": self.im_M12_D0_NP_GeV,
+            "im_M12_D0_NP_GeV": self.im_M12_D0_NP_GeV,
+            "delta_m_NP_GeV": self.delta_m_D0_NP_GeV,
+            "delta_m_D0_NP_GeV": self.delta_m_D0_NP_GeV,
+            "observables": {
+                self.m12_observable_id: {
+                    "re": self.re_M12_D0_NP_GeV,
+                    "im": self.im_M12_D0_NP_GeV,
+                },
+                self.delta_m_observable_id: self.delta_m_D0_NP_GeV,
+            },
+            "coefficients": {
+                "Q1_VLL": _complex_as_dict(self.wilsons.q1_vll),
+                "Q1_VRR": _complex_as_dict(self.wilsons.q1_vrr),
+                PAPER_0710_1869_DELTAF2_Q4_LR: _complex_as_dict(self.wilsons.q4_lr),
+                PAPER_0710_1869_DELTAF2_Q5_LR: _complex_as_dict(self.wilsons.q5_lr),
+            },
+            "hadronic_bundle": self.hadronic_bundle.as_dict(),
+            "wilsons": self.wilsons.as_dict(),
+            "tags": self.tags,
+            "notes": self.notes,
+        }
+
+    def summary(self) -> dict[str, object]:
+        return {
+            **self.as_dict(),
+            "schema_id": PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SUMMARY_SCHEMA_ID,
         }
 
 
@@ -1592,6 +1903,8 @@ def compute_kaon_lr_only_observables(
         raise ValueError(
             "rg_result_or_wilsons must be provided for LR-only observable evaluation"
         )
+    if not isinstance(hadronic_inputs, Paper07101869KaonLRHadronicInputs):
+        raise ValueError("hadronic_inputs must be a Paper07101869KaonLRHadronicInputs")
     resolved_wilsons = _resolve_rg_wilsons(rg_result_or_wilsons)
     _require_lr_hadronic_compatibility(
         wilsons=resolved_wilsons,
@@ -1743,6 +2056,40 @@ def compute_bs_custom_q1_observables(
     )
 
 
+def compute_d0_custom_q1_observables(
+    rg_result_or_wilsons: (
+        Paper07101869DeltaF2RGResult | Paper07101869DeltaF2RGWilsonSnapshot | None
+    ) = None,
+    *,
+    hadronic_bundle: Paper07101869D0HadronicBundle | None = None,
+) -> Paper07101869D0CustomQ1ObservableResult:
+    """Compute the custom Q1-only D0 observable subset from evolved paper-mode Wilsons."""
+
+    if hadronic_bundle is None:
+        raise ValueError("hadronic_bundle must be provided for custom D0 observable evaluation")
+    if rg_result_or_wilsons is None:
+        raise ValueError(
+            "rg_result_or_wilsons must be provided for custom D0 observable evaluation"
+        )
+    if not isinstance(hadronic_bundle, Paper07101869D0HadronicBundle):
+        raise ValueError("hadronic_bundle must be a Paper07101869D0HadronicBundle")
+    resolved_wilsons = _resolve_rg_wilsons(rg_result_or_wilsons)
+    _require_d0_q1_hadronic_compatibility(
+        wilsons=resolved_wilsons,
+        hadronic_bundle=hadronic_bundle,
+    )
+    m12_value = _compute_d0_q1_m12_value(
+        wilsons=resolved_wilsons,
+        hadronic_bundle=hadronic_bundle,
+    )
+    return Paper07101869D0CustomQ1ObservableResult(
+        hadronic_bundle=hadronic_bundle,
+        wilsons=resolved_wilsons,
+        M12_D0_NP_GeV=m12_value,
+        delta_m_D0_NP_GeV=2.0 * float(m12_value.real),
+    )
+
+
 def evaluate_paper_0710_1869_bd_custom_q1_observables(
     rg_result_or_wilsons: (
         Paper07101869DeltaF2RGResult | Paper07101869DeltaF2RGWilsonSnapshot | None
@@ -1798,6 +2145,36 @@ def evaluate_bs_custom_q1_observables(
     """Compatibility alias for the custom Q1-only B_s observable computation."""
 
     return evaluate_paper_0710_1869_bs_custom_q1_observables(
+        rg_result_or_wilsons,
+        hadronic_bundle=hadronic_bundle,
+    )
+
+
+def evaluate_paper_0710_1869_d0_custom_q1_observables(
+    rg_result_or_wilsons: (
+        Paper07101869DeltaF2RGResult | Paper07101869DeltaF2RGWilsonSnapshot | None
+    ) = None,
+    *,
+    hadronic_bundle: Paper07101869D0HadronicBundle | None = None,
+) -> Paper07101869D0CustomQ1ObservableResult:
+    """Compatibility alias for the custom Q1-only D0 observable computation."""
+
+    return compute_d0_custom_q1_observables(
+        rg_result_or_wilsons,
+        hadronic_bundle=hadronic_bundle,
+    )
+
+
+def evaluate_d0_custom_q1_observables(
+    rg_result_or_wilsons: (
+        Paper07101869DeltaF2RGResult | Paper07101869DeltaF2RGWilsonSnapshot | None
+    ) = None,
+    *,
+    hadronic_bundle: Paper07101869D0HadronicBundle | None = None,
+) -> Paper07101869D0CustomQ1ObservableResult:
+    """Compatibility alias for the custom Q1-only D0 observable computation."""
+
+    return evaluate_paper_0710_1869_d0_custom_q1_observables(
         rg_result_or_wilsons,
         hadronic_bundle=hadronic_bundle,
     )
@@ -2134,6 +2511,38 @@ def build_paper_0710_1869_bs_custom_q1_observable_summary(
     ).summary()
 
 
+def build_paper_0710_1869_d0_custom_q1_observable_result(
+    *,
+    rg_result: Paper07101869DeltaF2RGResult | None = None,
+    wilsons: Paper07101869DeltaF2RGWilsonSnapshot | None = None,
+    hadronic_bundle: Paper07101869D0HadronicBundle | None = None,
+) -> Paper07101869D0CustomQ1ObservableResult:
+    """Return the deterministic custom D0 Q1-only observable result."""
+
+    if rg_result is not None and wilsons is not None:
+        raise ValueError("provide either rg_result or wilsons, not both")
+    resolved_input = rg_result if rg_result is not None else wilsons
+    return compute_d0_custom_q1_observables(
+        resolved_input,
+        hadronic_bundle=hadronic_bundle,
+    )
+
+
+def build_paper_0710_1869_d0_custom_q1_observable_summary(
+    *,
+    rg_result: Paper07101869DeltaF2RGResult | None = None,
+    wilsons: Paper07101869DeltaF2RGWilsonSnapshot | None = None,
+    hadronic_bundle: Paper07101869D0HadronicBundle | None = None,
+) -> dict[str, object]:
+    """Return the deterministic summary mapping for the custom D0 Q1-only observable result."""
+
+    return build_paper_0710_1869_d0_custom_q1_observable_result(
+        rg_result=rg_result,
+        wilsons=wilsons,
+        hadronic_bundle=hadronic_bundle,
+    ).summary()
+
+
 __all__ = [
     "PAPER_0710_1869_DELTAF2_BD_CUSTOM_Q1_DELTA_M_OBSERVABLE_ID",
     "PAPER_0710_1869_DELTAF2_BD_CUSTOM_Q1_INTERPRETATION_ID",
@@ -2147,6 +2556,12 @@ __all__ = [
     "PAPER_0710_1869_DELTAF2_BS_CUSTOM_Q1_OBSERVABLE_SCHEMA_ID",
     "PAPER_0710_1869_DELTAF2_BS_CUSTOM_Q1_OBSERVABLE_SCOPE_ID",
     "PAPER_0710_1869_DELTAF2_BS_CUSTOM_Q1_OBSERVABLE_SUMMARY_SCHEMA_ID",
+    "PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_DELTA_M_OBSERVABLE_ID",
+    "PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_INTERPRETATION_ID",
+    "PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_M12_OBSERVABLE_ID",
+    "PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SCHEMA_ID",
+    "PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SCOPE_ID",
+    "PAPER_0710_1869_DELTAF2_D0_CUSTOM_Q1_OBSERVABLE_SUMMARY_SCHEMA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_CUSTOM_TOTAL_DELTA_M_OBSERVABLE_ID",
     "PAPER_0710_1869_DELTAF2_KAON_CUSTOM_TOTAL_INTERPRETATION_ID",
     "PAPER_0710_1869_DELTAF2_KAON_CUSTOM_TOTAL_M12_OBSERVABLE_ID",
@@ -2166,6 +2581,7 @@ __all__ = [
     "PAPER_0710_1869_DELTAF2_KAON_NP_OBSERVABLE_SCOPE_ID",
     "PAPER_0710_1869_DELTAF2_KAON_NP_OBSERVABLE_SUMMARY_SCHEMA_ID",
     "Paper07101869BMesonCustomQ1ObservableResult",
+    "Paper07101869D0CustomQ1ObservableResult",
     "Paper07101869KaonCustomTotalObservableResult",
     "Paper07101869KaonLROnlyObservableResult",
     "Paper07101869KaonNPObservableResult",
@@ -2173,6 +2589,8 @@ __all__ = [
     "build_paper_0710_1869_bd_custom_q1_observable_summary",
     "build_paper_0710_1869_bs_custom_q1_observable_result",
     "build_paper_0710_1869_bs_custom_q1_observable_summary",
+    "build_paper_0710_1869_d0_custom_q1_observable_result",
+    "build_paper_0710_1869_d0_custom_q1_observable_summary",
     "build_paper_0710_1869_kaon_custom_total_observable_result",
     "build_paper_0710_1869_kaon_custom_total_observable_summary",
     "build_paper_0710_1869_kaon_lr_only_observable_result",
@@ -2183,6 +2601,7 @@ __all__ = [
     "build_paper_0710_1869_kaon_np_observable_summary",
     "compute_bd_custom_q1_observables",
     "compute_bs_custom_q1_observables",
+    "compute_d0_custom_q1_observables",
     "compute_kaon_custom_total_observables",
     "compute_kaon_lr_only_observables",
     "compute_kaon_np_observables",
@@ -2192,11 +2611,13 @@ __all__ = [
     "default_paper_0710_1869_kaon_np_observable_summary",
     "evaluate_bd_custom_q1_observables",
     "evaluate_bs_custom_q1_observables",
+    "evaluate_d0_custom_q1_observables",
     "evaluate_kaon_custom_total_observables",
     "evaluate_kaon_lr_only_observables",
     "evaluate_kaon_np_observables",
     "evaluate_paper_0710_1869_bd_custom_q1_observables",
     "evaluate_paper_0710_1869_bs_custom_q1_observables",
+    "evaluate_paper_0710_1869_d0_custom_q1_observables",
     "evaluate_paper_0710_1869_kaon_custom_total_observables",
     "evaluate_paper_0710_1869_kaon_lr_only_observables",
     "evaluate_paper_0710_1869_kaon_observables",

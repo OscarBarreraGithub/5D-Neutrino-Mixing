@@ -82,6 +82,10 @@ CUSTOM_LR_HADRONIC_BUILDER_NAMES = (
     "build_paper_0710_1869_custom_kaon_lr_hadronic",
     "build_paper_0710_1869_kaon_lr_hadronic",
 )
+KAON_LR_R_CHI_FREEZE_EXPORT_NAMES = (
+    "default_paper_0710_1869_kaon_lr_r_chi_freeze",
+    "build_paper_0710_1869_kaon_lr_r_chi_freeze",
+)
 HADRONIC_SOURCE_REF_CLASS_NAMES = (
     "Paper07101869LRHadronicSourceRef",
     "Paper07101869HadronicSourceRef",
@@ -233,6 +237,8 @@ B_CUSTOM_Q1_PROBE_CONFIG = {
         "meson_decay_constant_GeV": 0.190,
         "bag_parameter_mu_had": 0.92,
         "source_prefix": "hadronic.bd.custom_q1_probe",
+        "expected_sector_id": "down",
+        "lr_error_pattern": r"Q4_LR/Q5_LR remain out of scope for the B-system slice",
     },
     "B_s": {
         "matching_names": (
@@ -261,6 +267,41 @@ B_CUSTOM_Q1_PROBE_CONFIG = {
         "meson_decay_constant_GeV": 0.230,
         "bag_parameter_mu_had": 0.91,
         "source_prefix": "hadronic.bs.custom_q1_probe",
+        "expected_sector_id": "down",
+        "lr_error_pattern": r"Q4_LR/Q5_LR remain out of scope for the B-system slice",
+    },
+    "D0": {
+        "matching_names": (
+            "default_paper_0710_1869_d0_matching",
+            "build_paper_0710_1869_d0_matching",
+            "match_default_paper_0710_1869_d0_kk_gluon_deltaf2",
+        ),
+        "hadronic_builder_names": (
+            "build_paper_0710_1869_d0_hadronic_bundle",
+            "build_paper_0710_1869_d0_hadronic",
+        ),
+        "observable_names": (
+            "evaluate_paper_0710_1869_d0_custom_q1_observables",
+            "evaluate_d0_custom_q1_observables",
+            "build_paper_0710_1869_d0_custom_q1_observable_result",
+            "compute_d0_custom_q1_observables",
+        ),
+        "scope_id": "d0.np_only.custom_q1.m12.v1",
+        "interpretation_id": "d0.np_only.custom_q1.v1",
+        "m12_id": "M12_D0_NP",
+        "delta_m_id": "Delta_m_D0_NP",
+        "mass_param": "m_D0_GeV",
+        "decay_param": "f_D0_GeV",
+        "bag_param": "B_D0_mu_had",
+        "meson_mass_GeV": 1.86484,
+        "meson_decay_constant_GeV": 0.212,
+        "bag_parameter_mu_had": 0.80,
+        "probe_q1_vll": complex(3.25e-13, -1.10e-13),
+        "probe_q1_vrr": complex(-4.50e-14, 2.50e-14),
+        "require_nonzero_probe": True,
+        "source_prefix": "hadronic.d0.custom_q1_probe",
+        "expected_sector_id": "up",
+        "lr_error_pattern": r"Q4_LR/Q5_LR remain out of scope for the D0 slice",
     },
 }
 LR_OBSERVABLE_PROBE_Q4 = complex(1.25e-12, -4.0e-13)
@@ -392,6 +433,16 @@ def _custom_lr_hadronic_builder(module: Any) -> Any:
         + " or an LR-extended "
         + ", ".join(HADRONIC_BUILDER_NAMES)
     )
+
+
+def _default_kaon_lr_r_chi_freeze() -> Any:
+    hadronic_module = _load_hadronic_module()
+    callable_obj = _get_callable(hadronic_module, KAON_LR_R_CHI_FREEZE_EXPORT_NAMES)
+    assert callable_obj is not None, (
+        "hadronic layer exposes no frozen LR R_chi helper; expected one of "
+        + ", ".join(KAON_LR_R_CHI_FREEZE_EXPORT_NAMES)
+    )
+    return callable_obj()
 
 
 def _build_hadronic_source_ref(
@@ -861,11 +912,21 @@ def _build_custom_b_rg_result(
     module = importlib.import_module("quarkConstraints.paper_0710_1869.eft_deltaf2.rg")
     callable_obj = _get_callable(module, PARAMETERIZED_RG_NAMES)
     assert callable_obj is not None, "RG layer exposes no callable evolution API"
-    return _invoke_rg_evolution(
+    rg_result = _invoke_rg_evolution(
         callable_obj,
         value=_default_b_matching_object(system_id),
         mu_low_GeV=float(mu_low_GeV),
     )
+    config = B_CUSTOM_Q1_PROBE_CONFIG[system_id]
+    wilson_updates: dict[str, complex] = {}
+    if "probe_q1_vll" in config:
+        wilson_updates["q1_vll"] = complex(config["probe_q1_vll"])
+    if "probe_q1_vrr" in config:
+        wilson_updates["q1_vrr"] = complex(config["probe_q1_vrr"])
+    if not wilson_updates:
+        return rg_result
+    updated_wilsons = dataclasses.replace(rg_result.wilsons, **wilson_updates)
+    return dataclasses.replace(rg_result, wilsons=updated_wilsons)
 
 
 def _build_custom_b_hadronic_bundle(
@@ -1766,6 +1827,26 @@ def test_custom_lr_only_observable_path_rejects_scale_mismatch() -> None:
         )
 
 
+def test_custom_lr_only_observable_path_rejects_frozen_r_chi_object() -> None:
+    module = _load_observables_module()
+    evaluator = _get_custom_lr_observable_evaluator(module)
+    frozen_r_chi = _default_kaon_lr_r_chi_freeze()
+    probe_wilsons = _build_lr_probe_wilsons(
+        renormalization_scheme_id=str(frozen_r_chi.operator_renormalization_scheme_id),
+        matching_scale_GeV=float(frozen_r_chi.mu_had_GeV),
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="hadronic_inputs must be a Paper07101869KaonLRHadronicInputs",
+    ):
+        _invoke_observable_evaluation(
+            evaluator,
+            rg_value=probe_wilsons,
+            hadronic_value=frozen_r_chi,
+        )
+
+
 def test_default_q1_only_observable_path_still_rejects_nonzero_lr_without_custom_api() -> None:
     module = _load_observables_module()
     default_evaluator = _get_observable_evaluator(module)
@@ -1974,6 +2055,36 @@ def test_custom_total_observable_path_rejects_default_q1_hadronic_bundle() -> No
         )
 
 
+def test_custom_total_observable_path_rejects_frozen_r_chi_object() -> None:
+    module = _load_observables_module()
+    combined_evaluator = _get_custom_total_observable_evaluator(module)
+    frozen_r_chi = _default_kaon_lr_r_chi_freeze()
+    custom_q1_hadronic = _build_custom_q1_hadronic_bundle(
+        mu_had_GeV=float(frozen_r_chi.mu_had_GeV),
+    )
+    combined_wilsons = dataclasses.replace(
+        _default_rg_result().wilsons,
+        matching_scale_GeV=float(frozen_r_chi.mu_had_GeV),
+        contract=dataclasses.replace(
+            _default_rg_result().wilsons.contract,
+            renormalization_scheme_id=str(frozen_r_chi.operator_renormalization_scheme_id),
+        ),
+        q4_lr=LR_OBSERVABLE_PROBE_Q4,
+        q5_lr=LR_OBSERVABLE_PROBE_Q5,
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="lr_hadronic_inputs must be a Paper07101869KaonLRHadronicInputs",
+    ):
+        _invoke_custom_total_observable_evaluation(
+            combined_evaluator,
+            rg_value=combined_wilsons,
+            q1_hadronic_bundle=custom_q1_hadronic,
+            lr_hadronic_inputs=frozen_r_chi,
+        )
+
+
 def test_default_q1_only_path_remains_blocked_while_custom_total_path_succeeds() -> None:
     module = _load_observables_module()
     default_evaluator = _get_observable_evaluator(module)
@@ -2001,7 +2112,7 @@ def test_default_q1_only_path_remains_blocked_while_custom_total_path_succeeds()
     assert "epsilon_K_NP" not in combined_payload.get("observables", {})
 
 
-@pytest.mark.parametrize("system_id", ("B_d", "B_s"))
+@pytest.mark.parametrize("system_id", tuple(B_CUSTOM_Q1_PROBE_CONFIG))
 def test_custom_b_q1_observable_paths_match_hand_calculation(system_id: str) -> None:
     module = _load_observables_module()
     evaluator = _get_custom_b_q1_observable_evaluator(module, system_id)
@@ -2038,6 +2149,9 @@ def test_custom_b_q1_observable_paths_match_hand_calculation(system_id: str) -> 
         rel=0.0,
         abs=1.0e-12,
     )
+    if bool(config.get("require_nonzero_probe", False)):
+        assert abs(expected_m12) > 0.0
+        assert abs(observed_m12) > 0.0
     assert observed_m12.real == pytest.approx(expected_m12.real, rel=0.0, abs=1.0e-24)
     assert observed_m12.imag == pytest.approx(expected_m12.imag, rel=0.0, abs=1.0e-24)
     assert float(payload["delta_m_NP_GeV"]) == pytest.approx(
@@ -2068,7 +2182,7 @@ def test_custom_b_q1_observable_paths_match_hand_calculation(system_id: str) -> 
     )
 
 
-@pytest.mark.parametrize("system_id", ("B_d", "B_s"))
+@pytest.mark.parametrize("system_id", tuple(B_CUSTOM_Q1_PROBE_CONFIG))
 def test_custom_b_q1_observable_paths_reject_scheme_mismatch(system_id: str) -> None:
     module = _load_observables_module()
     evaluator = _get_custom_b_q1_observable_evaluator(module, system_id)
@@ -2090,7 +2204,7 @@ def test_custom_b_q1_observable_paths_reject_scheme_mismatch(system_id: str) -> 
         )
 
 
-@pytest.mark.parametrize("system_id", ("B_d", "B_s"))
+@pytest.mark.parametrize("system_id", tuple(B_CUSTOM_Q1_PROBE_CONFIG))
 def test_custom_b_q1_observable_paths_reject_mu_had_mismatch(system_id: str) -> None:
     module = _load_observables_module()
     evaluator = _get_custom_b_q1_observable_evaluator(module, system_id)
@@ -2108,7 +2222,7 @@ def test_custom_b_q1_observable_paths_reject_mu_had_mismatch(system_id: str) -> 
         )
 
 
-@pytest.mark.parametrize("system_id", ("B_d", "B_s"))
+@pytest.mark.parametrize("system_id", tuple(B_CUSTOM_Q1_PROBE_CONFIG))
 @pytest.mark.parametrize(
     ("field_name", "error_pattern"),
     (
@@ -2141,7 +2255,10 @@ def test_custom_b_q1_observable_paths_reject_alignment_tag_mismatch(
         )
 
 
-@pytest.mark.parametrize(("system_id", "wrong_system_id"), (("B_d", "B_s"), ("B_s", "B_d")))
+@pytest.mark.parametrize(
+    ("system_id", "wrong_system_id"),
+    (("B_d", "B_s"), ("B_s", "B_d"), ("D0", "B_d")),
+)
 def test_custom_b_q1_observable_paths_reject_system_mismatch(
     system_id: str,
     wrong_system_id: str,
@@ -2166,7 +2283,7 @@ def test_custom_b_q1_observable_paths_reject_system_mismatch(
         )
 
 
-@pytest.mark.parametrize("system_id", ("B_d", "B_s"))
+@pytest.mark.parametrize("system_id", tuple(B_CUSTOM_Q1_PROBE_CONFIG))
 def test_custom_b_q1_observable_paths_reject_nonzero_lr(system_id: str) -> None:
     module = _load_observables_module()
     evaluator = _get_custom_b_q1_observable_evaluator(module, system_id)
@@ -2179,7 +2296,7 @@ def test_custom_b_q1_observable_paths_reject_nonzero_lr(system_id: str) -> None:
 
     with pytest.raises(
         ValueError,
-        match=r"Q4_LR/Q5_LR remain out of scope for the B-system slice",
+        match=str(B_CUSTOM_Q1_PROBE_CONFIG[system_id]["lr_error_pattern"]),
     ):
         _invoke_observable_evaluation(
             evaluator,
@@ -2188,22 +2305,82 @@ def test_custom_b_q1_observable_paths_reject_nonzero_lr(system_id: str) -> None:
         )
 
 
-def test_d0_remains_out_of_scope_for_custom_b_q1_surfaces() -> None:
+@pytest.mark.parametrize("system_id", tuple(B_CUSTOM_Q1_PROBE_CONFIG))
+def test_custom_b_q1_observable_paths_reject_sector_mismatch(system_id: str) -> None:
+    module = _load_observables_module()
+    evaluator = _get_custom_b_q1_observable_evaluator(module, system_id)
+    hadronic_bundle, rg_result = _build_custom_b_probe_inputs(system_id)
+    expected_sector_id = str(B_CUSTOM_Q1_PROBE_CONFIG[system_id]["expected_sector_id"])
+    wrong_sector_id = "up" if expected_sector_id == "down" else "down"
+    mismatched_wilsons = dataclasses.replace(
+        rg_result.wilsons,
+        sector_id=wrong_sector_id,
+    )
+
+    with pytest.raises(ValueError, match="sector"):
+        _invoke_observable_evaluation(
+            evaluator,
+            rg_value=mismatched_wilsons,
+            hadronic_value=hadronic_bundle,
+        )
+
+
+def test_d0_custom_q1_observable_paths_reject_generation_mismatch() -> None:
+    module = _load_observables_module()
+    evaluator = _get_custom_b_q1_observable_evaluator(module, "D0")
+    hadronic_bundle, rg_result = _build_custom_b_probe_inputs("D0")
+    mismatched_wilsons = dataclasses.replace(
+        rg_result.wilsons,
+        generations=(1, 2),
+    )
+
+    with pytest.raises(ValueError, match="generations"):
+        _invoke_observable_evaluation(
+            evaluator,
+            rg_value=mismatched_wilsons,
+            hadronic_value=hadronic_bundle,
+        )
+
+
+def test_d0_custom_q1_matching_helper_uses_up_sector_generations() -> None:
+    matching_module = importlib.import_module(
+        "quarkConstraints.paper_0710_1869.eft_deltaf2.matching_kkgluon"
+    )
+    builder = getattr(matching_module, "default_paper_0710_1869_d0_deltaf2_system", None)
+    assert callable(builder)
+    system = builder()
+
+    assert system.system_id == "D0"
+    assert system.sector_id == "up"
+    assert tuple(system.flavor_indices) == (0, 1)
+
+
+def test_d0_custom_q1_hadronic_contract_rejects_non_d0_system_id() -> None:
     module = _load_observables_module()
     hadronic_module = _load_hadronic_module()
 
-    assert getattr(module, "evaluate_d0_custom_q1_observables", None) is None
-    assert getattr(module, "compute_d0_custom_q1_observables", None) is None
+    assert callable(getattr(module, "evaluate_d0_custom_q1_observables", None))
+    assert callable(getattr(module, "compute_d0_custom_q1_observables", None))
 
-    contract_cls = getattr(hadronic_module, "Paper07101869BMesonHadronicContract", None)
+    contract_cls = getattr(hadronic_module, "Paper07101869D0HadronicContract", None)
     assert isinstance(contract_cls, type)
 
     with pytest.raises(ValueError, match="system_id"):
         contract_cls(
-            system_id="D0",
+            system_id="B_d",
             renormalization_scheme_id="bmu.hep-ph-0005183.ndr-ms.lo.v1",
             mu_had_GeV=B_CUSTOM_Q1_PROBE_MU_HAD_GEV,
             evaluation_scale_GeV=B_CUSTOM_Q1_PROBE_MU_HAD_GEV,
+        )
+
+
+def test_d0_custom_q1_hadronic_bundle_rejects_hamiltonian_convention_mutation() -> None:
+    hadronic_bundle, _ = _build_custom_b_probe_inputs("D0")
+
+    with pytest.raises(ValueError, match="hamiltonian_convention_id|convention"):
+        dataclasses.replace(
+            hadronic_bundle,
+            hamiltonian_convention_id=f"{hadronic_bundle.hamiltonian_convention_id}.wrong",
         )
 
 

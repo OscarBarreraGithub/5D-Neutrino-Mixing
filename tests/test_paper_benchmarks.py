@@ -88,6 +88,23 @@ EXPECTED_CUSTOM_TOTAL_SCOPE_ID = "kaon.np_only.custom_total.q1_plus_lr.v1"
 EXPECTED_CUSTOM_TOTAL_INTERPRETATION_ID = "kaon.np_only.custom_total.q1_plus_lr.v1"
 EXPECTED_CUSTOM_TOTAL_M12_OBSERVABLE_ID = "M12_K_NP_CUSTOM_TOTAL"
 EXPECTED_CUSTOM_TOTAL_DELTA_M_OBSERVABLE_ID = "Delta_m_K_NP_CUSTOM_TOTAL"
+EXPECTED_KAON_LR_R_CHI_MASS_SCHEME_ID = "pdg.2024.msbar.running_masses.at_2gev.v1"
+EXPECTED_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID = (
+    "pdg.2024.quark_masses.n_l_4.at_2gev.explicit.v1"
+)
+EXPECTED_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID = (
+    "none.freeze_pdg2024_msbar_nl4_inputs_at_2gev.v1"
+)
+EXPECTED_KAON_LR_R_CHI_M_S_2GEV_GEV = 0.09274
+EXPECTED_KAON_LR_R_CHI_M_D_2GEV_GEV = 0.00469
+EXPECTED_KAON_LR_R_CHI_M_K0_GEV = 0.497611
+EXPECTED_KAON_LR_R_CHI_EXACT_VALUE = 26.085222120747908
+EXPECTED_KAON_LR_R_CHI_FREEZE_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_freeze.v1"
+)
+EXPECTED_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_summary.v1"
+)
 EXPECTED_CUSTOM_B_Q1_PROBE_CONFIG = {
     "B_d": {
         "scope_id": "bd.np_only.custom_q1.m12.v1",
@@ -100,6 +117,13 @@ EXPECTED_CUSTOM_B_Q1_PROBE_CONFIG = {
         "interpretation_id": "bs.np_only.custom_q1.v1",
         "m12_id": "M12_Bs_NP_CUSTOM_Q1",
         "delta_m_id": "Delta_m_Bs_NP_CUSTOM_Q1",
+    },
+    "D0": {
+        "scope_id": "d0.np_only.custom_q1.m12.v1",
+        "interpretation_id": "d0.np_only.custom_q1.v1",
+        "m12_id": "M12_D0_NP",
+        "delta_m_id": "Delta_m_D0_NP",
+        "require_nonzero_probe": True,
     },
 }
 
@@ -210,6 +234,9 @@ def _assert_custom_b_observable_probe(summary: dict[str, object], system_id: str
     assert checks["probe_payload_sha256_matches_cross_process"] is True
     assert checks["q1_matrix_element_present"] is True
     assert checks["lr_coefficients_remain_zero"] is True
+    if bool(expected.get("require_nonzero_probe", False)):
+        assert checks["probe_payload_is_nonzero"] is True
+        assert abs(expected_m12) > 0.0
     assert checks["default_observables_unchanged"] is True
     assert checks["default_artifacts_unchanged"] is True
     assert probe["default_observables_unchanged"] is True
@@ -658,6 +685,143 @@ def test_acceptance_benchmark_reports_custom_lr_hadronic_probe() -> None:
     assert checks["observables_remain_blocked"] is True
 
 
+def test_acceptance_benchmark_reports_lr_r_chi_freeze_probe() -> None:
+    summary = _run_acceptance_benchmark()
+    hadronic_summary = summary["hadronic_inputs"]
+    probe = summary["lr_r_chi_freeze_probe"]
+    checks = probe["checks"]
+
+    assert probe["status"] == "ok"
+    assert probe["deterministic"] is True
+    assert probe["cross_process_deterministic"] is True
+    assert probe["payload_sha256"] == _canonical_payload_sha256(probe["payload"])
+    assert probe["same_process_repeat_payload_sha256"] == probe["payload_sha256"]
+    assert probe["cross_process_payload_sha256"] == probe["payload_sha256"]
+    assert probe["system_id"] == "kaon"
+    assert float(probe["mu_had_GeV"]) == pytest.approx(2.0, rel=0.0, abs=1.0e-12)
+    assert probe["freeze_id"]
+    assert probe["source_id"]
+    assert "derived" in str(probe["input_provenance_mode_id"]).lower()
+    assert "freeze_only" in str(probe["input_policy_id"]).lower()
+    assert probe["object_schema_id"] == EXPECTED_KAON_LR_R_CHI_FREEZE_SCHEMA_ID
+    assert probe["summary_schema_id"] == EXPECTED_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID
+    assert probe["operator_scheme_id"] == probe["operator_renormalization_scheme_id"]
+    assert probe["mass_scheme_id"] == probe["mass_renormalization_scheme_id"]
+    assert probe["mass_scheme_id"] == EXPECTED_KAON_LR_R_CHI_MASS_SCHEME_ID
+    assert probe["operator_scheme_id"] != probe["mass_scheme_id"]
+    assert (
+        probe["mass_active_flavor_policy_id"]
+        == EXPECTED_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID
+    )
+    assert probe["derivation_formula_id"]
+    assert probe["derivation_formula_source_id"]
+    assert (
+        probe["no_hidden_conversion_policy_id"]
+        == EXPECTED_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID
+    )
+    assert float(probe["m_K0_GeV"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_M_K0_GEV,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(probe["m_s_mu_had_GeV"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_M_S_2GEV_GEV,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(probe["m_d_mu_had_GeV"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_M_D_2GEV_GEV,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert probe["provenance_ids"] == [
+        probe["source_id"],
+        probe["kaon_mass_source_id"],
+        probe["strange_mass_source_id"],
+        probe["down_mass_source_id"],
+    ]
+    assert probe["default_lr_hadronic_still_blocked"] is True
+    assert all(
+        callable_status is False
+        for callable_status in probe["default_lr_hadronic_exports_present"].values()
+    )
+    assert hadronic_summary["status"] == "ok"
+    assert hadronic_summary["checks"]["supported_operator_subset_is_pr5a"] is True
+    assert hadronic_summary["checks"]["unsupported_operator_subset_is_lr_only"] is True
+    assert float(probe["strange_mass_source_scale_GeV"]) == pytest.approx(
+        float(probe["mu_had_GeV"]),
+        rel=0.0,
+        abs=1.0e-12,
+    )
+    assert float(probe["down_mass_source_scale_GeV"]) == pytest.approx(
+        float(probe["mu_had_GeV"]),
+        rel=0.0,
+        abs=1.0e-12,
+    )
+    expected_r_chi = (
+        float(probe["m_K0_GeV"])
+        / (float(probe["m_s_mu_had_GeV"]) + float(probe["m_d_mu_had_GeV"]))
+    ) ** 2
+    assert expected_r_chi == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_EXACT_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(probe["R_chi_mu_had"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_EXACT_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert checks["probe_payload_is_deterministic"] is True
+    assert checks["probe_payload_is_cross_process_deterministic"] is True
+    assert checks["probe_payload_sha256_matches_repeat"] is True
+    assert checks["probe_payload_sha256_matches_cross_process"] is True
+    assert checks["object_schema_is_exact"] is True
+    assert checks["summary_schema_is_exact"] is True
+    assert checks["object_and_summary_schema_are_distinct"] is True
+    assert checks["system_is_kaon"] is True
+    assert checks["mass_scale_is_2gev"] is True
+    assert checks["formula_matches_bv2004"] is True
+    assert checks["mass_sources_frozen"] is True
+    assert checks["mass_sources_at_declared_scale"] is True
+    assert checks["mass_scheme_is_explicit"] is True
+    assert checks["mass_scheme_id_is_exact"] is True
+    assert checks["active_flavor_policy_is_frozen"] is True
+    assert checks["active_flavor_policy_is_explicit_n_l_4"] is True
+    assert checks["derivation_formula_frozen"] is True
+    assert checks["provenance_mode_is_derived_default"] is True
+    assert checks["input_policy_is_r_chi_freeze_only"] is True
+    assert checks["no_hidden_conversion_policy"] is True
+    assert checks["no_hidden_conversion_policy_is_explicit"] is True
+    assert checks["m_s_mu_had_matches_exact_freeze"] is True
+    assert checks["m_d_mu_had_matches_exact_freeze"] is True
+    assert checks["m_k0_gev_matches_exact_freeze"] is True
+    assert checks["r_chi_mu_had_matches_exact_freeze"] is True
+    assert checks["operator_vs_mass_scheme_not_aliased"] is True
+    assert checks["default_lr_hadronic_still_blocked"] is True
+    assert checks["custom_lr_only_rejects_r_chi_freeze"] is True
+    assert checks["custom_combined_rejects_r_chi_freeze"] is True
+    assert checks["custom_lr_only_rejection_message_is_explicit_type_guard"] is True
+    assert checks["custom_combined_rejection_message_is_explicit_type_guard"] is True
+    assert checks["custom_lr_surfaces_still_require_custom_inputs"] is True
+    assert checks["default_hadronic_bundle_stays_q1_only"] is True
+    assert checks["default_observables_unchanged"] is True
+    assert checks["default_artifacts_unchanged"] is True
+    assert checks["default_observable_values_match_frozen_reference"] is True
+    assert checks["default_artifact_exports_match_tracked_files"] is True
+    assert (
+        probe["custom_lr_only_rejection_error"]
+        == "ValueError: hadronic_inputs must be a Paper07101869KaonLRHadronicInputs"
+    )
+    assert (
+        probe["custom_combined_rejection_error"]
+        == "ValueError: lr_hadronic_inputs must be a Paper07101869KaonLRHadronicInputs"
+    )
+    assert probe["default_hadronic_bundle_stays_q1_only"] is True
+    assert probe["default_observables_unchanged"] is True
+    assert probe["default_artifacts_unchanged"] is True
+
+
 def test_acceptance_benchmark_reports_custom_lr_observable_probe() -> None:
     summary = _run_acceptance_benchmark()
     probe = summary["custom_lr_observable_probe"]
@@ -768,6 +932,11 @@ def test_acceptance_benchmark_reports_custom_bd_observable_probe() -> None:
 def test_acceptance_benchmark_reports_custom_bs_observable_probe() -> None:
     summary = _run_acceptance_benchmark()
     _assert_custom_b_observable_probe(summary, "B_s")
+
+
+def test_acceptance_benchmark_reports_custom_d0_observable_probe() -> None:
+    summary = _run_acceptance_benchmark()
+    _assert_custom_b_observable_probe(summary, "D0")
 
 
 def test_acceptance_benchmark_keeps_default_kaon_reference_numbers_fixed() -> None:

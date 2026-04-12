@@ -60,6 +60,15 @@ PAPER_0710_1869_DELTAF2_BS_HADRONIC_CONTRACT_SCHEMA_ID = (
 PAPER_0710_1869_DELTAF2_BS_HADRONIC_SUMMARY_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.eft_deltaf2.bs_hadronic_summary.v1"
 )
+PAPER_0710_1869_DELTAF2_D0_HADRONIC_BUNDLE_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.d0_hadronic_bundle.v1"
+)
+PAPER_0710_1869_DELTAF2_D0_HADRONIC_CONTRACT_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.d0_hadronic_contract.v1"
+)
+PAPER_0710_1869_DELTAF2_D0_HADRONIC_SUMMARY_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.d0_hadronic_summary.v1"
+)
 PAPER_0710_1869_DELTAF2_KAON_LR_HADRONIC_INPUTS_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_hadronic_inputs.v1"
 )
@@ -69,9 +78,16 @@ PAPER_0710_1869_DELTAF2_KAON_LR_HADRONIC_CONTRACT_SCHEMA_ID = (
 PAPER_0710_1869_DELTAF2_KAON_LR_HADRONIC_SUMMARY_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_hadronic_summary.v1"
 )
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FREEZE_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_freeze.v1"
+)
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_summary.v1"
+)
 PAPER_0710_1869_DELTAF2_KAON_HADRONIC_SYSTEM_ID = "kaon"
 PAPER_0710_1869_DELTAF2_BD_HADRONIC_SYSTEM_ID = "B_d"
 PAPER_0710_1869_DELTAF2_BS_HADRONIC_SYSTEM_ID = "B_s"
+PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID = "D0"
 PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID = (
     "heff.sum_ci_qi.no_hc_factor.v1"
 )
@@ -84,6 +100,9 @@ PAPER_0710_1869_DELTAF2_BD_MATRIX_ELEMENT_FORMULA_ID = (
 PAPER_0710_1869_DELTAF2_BS_MATRIX_ELEMENT_FORMULA_ID = (
     "bs.q1_vll_vrr.8over3_fbs2_mbs2_bbs_mu.v1"
 )
+PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID = (
+    "d0.q1_vll_vrr.8over3_fd2_md2_bd0_mu.v1"
+)
 PAPER_0710_1869_DELTAF2_KAON_LR_Q4_MATRIX_ELEMENT_FORMULA_ID = (
     "kaon.q4_lr.o4_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
 )
@@ -93,14 +112,35 @@ PAPER_0710_1869_DELTAF2_KAON_LR_Q5_MATRIX_ELEMENT_FORMULA_ID = (
 PAPER_0710_1869_DELTAF2_KAON_LR_CHIRAL_RATIO_DEFINITION_ID = (
     "kaon.lr.chiral_ratio.r_chi.mu_had.custom_input.v1"
 )
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DEFINITION_ID = (
+    "kaon.lr.chiral_ratio.r_chi.mu_had.pdg2024_nl4_derived.v1"
+)
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DERIVATION_FORMULA_ID = (
+    "kaon.lr.chiral_ratio.r_chi.bv2004.eq5.mk_over_ms_plus_md.squared.v1"
+)
 PAPER_0710_1869_DELTAF2_KAON_LR_FORMULA_SOURCE_ID = (
     "becirevic-villadoro.hep-lat-0408029.eq5.o4_o5.matrix_elements.v1"
+)
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FORMULA_SOURCE_ID = (
+    "becirevic-villadoro.hep-lat-0408029.eq5.r_chi.definition.v1"
 )
 PAPER_0710_1869_DELTAF2_KAON_LR_SCHEME_CONVERSION_POLICY_ID = (
     "none.caller_supplies_lr_inputs_in_declared_scheme_at_mu_had.v2"
 )
 PAPER_0710_1869_DELTAF2_KAON_LR_INPUT_POLICY_ID = (
     "custom_input_only.defaults_not_frozen.v1"
+)
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_INPUT_POLICY_ID = (
+    "freeze_only.r_chi.default_lr_hadronic_still_blocked.v1"
+)
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID = (
+    "pdg.2024.msbar.running_masses.at_2gev.v1"
+)
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID = (
+    "pdg.2024.quark_masses.n_l_4.at_2gev.explicit.v1"
+)
+PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID = (
+    "none.freeze_pdg2024_msbar_nl4_inputs_at_2gev.v1"
 )
 PAPER_0710_1869_DELTAF2_KAON_PARITY_RELATION_ID = (
     "kaon.q1_vll_equals_q1_vrr.by_parity.v1"
@@ -110,6 +150,9 @@ PAPER_0710_1869_DELTAF2_BD_PARITY_RELATION_ID = (
 )
 PAPER_0710_1869_DELTAF2_BS_PARITY_RELATION_ID = (
     "bs.q1_vll_equals_q1_vrr.by_parity.v1"
+)
+PAPER_0710_1869_DELTAF2_D0_PARITY_RELATION_ID = (
+    "d0.q1_vll_equals_q1_vrr.by_parity.v1"
 )
 PAPER_0710_1869_DELTAF2_BAG_PARAMETER_SOURCE_SCHEME_ID = "rgi.flag21.average.v1"
 PAPER_0710_1869_DELTAF2_BAG_PARAMETER_TRANSFORMATION_ID = (
@@ -123,6 +166,9 @@ PAPER_0710_1869_DELTAF2_HADRONIC_CUSTOM_PROVENANCE_MODE_ID = (
 )
 PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID = (
     "custom_lr_inputs.validated_sources.v1"
+)
+PAPER_0710_1869_DELTAF2_LR_R_CHI_PROVENANCE_MODE_ID = (
+    "paper_sourced_mass_derived_defaults.v1"
 )
 
 _SUPPORTED_OPERATORS = (
@@ -152,11 +198,19 @@ _CUSTOM_BD_HADRONIC_BUNDLE_ID = "hadronic.bd.user_supplied.v1"
 _CUSTOM_BD_HADRONIC_SOURCE_ID = "hadronic.bd.user_supplied.v1"
 _CUSTOM_BS_HADRONIC_BUNDLE_ID = "hadronic.bs.user_supplied.v1"
 _CUSTOM_BS_HADRONIC_SOURCE_ID = "hadronic.bs.user_supplied.v1"
+_CUSTOM_D0_HADRONIC_BUNDLE_ID = "hadronic.d0.user_supplied.v1"
+_CUSTOM_D0_HADRONIC_SOURCE_ID = "hadronic.d0.user_supplied.v1"
 _CUSTOM_LR_HADRONIC_INPUTS_ID = "hadronic.kaon.lr.user_supplied.v1"
 _CUSTOM_LR_HADRONIC_SOURCE_ID = "hadronic.kaon.lr.user_supplied.aggregate.v1"
+_DEFAULT_KAON_LR_R_CHI_FREEZE_ID = "hadronic.kaon.lr.r_chi.freeze.v1"
+_DEFAULT_KAON_LR_R_CHI_SOURCE_ID = "hadronic.kaon.lr.r_chi.pdg2024_msbar_nl4.v1"
 _DEFAULT_MASS_SOURCE_ID = "pdg.2024.k0.mass.v1"
 _DEFAULT_DECAY_CONSTANT_SOURCE_ID = "pdg.2024.fkplus.eq72.14.v1"
 _DEFAULT_BAG_SOURCE_ID = "pdg.2024.flag.hat_bk.sec17.3.2.v1"
+_DEFAULT_KAON_LR_STRANGE_MASS_SOURCE_ID = "pdg.2024.msbar.ms.2gev.nl4.v1"
+_DEFAULT_KAON_LR_DOWN_MASS_SOURCE_ID = "pdg.2024.msbar.md.2gev.nl4.v1"
+_DEFAULT_KAON_LR_M_S_2GEV_GEV = 0.09274
+_DEFAULT_KAON_LR_M_D_2GEV_GEV = 0.00469
 _CUSTOM_B_SYSTEMS = (
     PAPER_0710_1869_DELTAF2_BD_HADRONIC_SYSTEM_ID,
     PAPER_0710_1869_DELTAF2_BS_HADRONIC_SYSTEM_ID,
@@ -771,6 +825,10 @@ def _require_custom_b_system_id(name: str, value: str) -> str:
     return require_member(name, value, _CUSTOM_B_SYSTEMS)
 
 
+def _require_d0_system_id(name: str, value: str) -> str:
+    return require_member(name, value, (PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID,))
+
+
 @dataclass(frozen=True)
 class Paper07101869BMesonHadronicContract:
     """Custom-input-only Q1 hadronic contract for B_d/B_s observables."""
@@ -1199,6 +1257,406 @@ class Paper07101869BMesonHadronicBundle:
         return {
             **self.as_dict(),
             "schema_id": _B_MESON_SUMMARY_SCHEMA_BY_SYSTEM[self.system_id],
+        }
+
+
+@dataclass(frozen=True)
+class Paper07101869D0HadronicContract:
+    """Custom-input-only Q1 hadronic contract for D0 observables."""
+
+    system_id: str = PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID
+    renormalization_scheme_id: str = PAPER_0710_1869_DELTAF2_RG_SCHEME_ID
+    mu_had_GeV: float = PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV
+    evaluation_scale_GeV: float = PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV
+    operator_basis_id: str = PAPER_0710_1869_DELTAF2_OPERATOR_BASIS_ID
+    operator_normalization_id: str = PAPER_0710_1869_DELTAF2_OPERATOR_NORMALIZATION_ID
+    parity_relation_id: str = PAPER_0710_1869_DELTAF2_D0_PARITY_RELATION_ID
+    matrix_element_formula_id: str = PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID
+    hamiltonian_convention_id: str = PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID
+    schema_id: str = PAPER_0710_1869_DELTAF2_D0_HADRONIC_CONTRACT_SCHEMA_ID
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "system_id", _require_d0_system_id("system_id", self.system_id))
+        object.__setattr__(
+            self,
+            "schema_id",
+            require_known_schema_id(
+                "schema_id",
+                self.schema_id,
+                expected=PAPER_0710_1869_DELTAF2_D0_HADRONIC_CONTRACT_SCHEMA_ID,
+            ),
+        )
+        object.__setattr__(
+            self,
+            "operator_basis_id",
+            require_member(
+                "operator_basis_id",
+                self.operator_basis_id,
+                (PAPER_0710_1869_DELTAF2_OPERATOR_BASIS_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "operator_normalization_id",
+            require_member(
+                "operator_normalization_id",
+                self.operator_normalization_id,
+                (PAPER_0710_1869_DELTAF2_OPERATOR_NORMALIZATION_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "renormalization_scheme_id",
+            require_nonempty_identifier(
+                "renormalization_scheme_id",
+                self.renormalization_scheme_id,
+            ),
+        )
+        for field_name in ("mu_had_GeV", "evaluation_scale_GeV"):
+            object.__setattr__(
+                self,
+                field_name,
+                require_positive_finite(field_name, getattr(self, field_name)),
+            )
+        object.__setattr__(
+            self,
+            "parity_relation_id",
+            require_member(
+                "parity_relation_id",
+                self.parity_relation_id,
+                (PAPER_0710_1869_DELTAF2_D0_PARITY_RELATION_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "matrix_element_formula_id",
+            require_member(
+                "matrix_element_formula_id",
+                self.matrix_element_formula_id,
+                (PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "hamiltonian_convention_id",
+            require_member(
+                "hamiltonian_convention_id",
+                self.hamiltonian_convention_id,
+                (PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID,),
+            ),
+        )
+
+    @property
+    def scheme_id(self) -> str:
+        return self.renormalization_scheme_id
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "schema_id": self.schema_id,
+            "system_id": self.system_id,
+            "operator_basis_id": self.operator_basis_id,
+            "operator_normalization_id": self.operator_normalization_id,
+            "renormalization_scheme_id": self.renormalization_scheme_id,
+            "scheme_id": self.scheme_id,
+            "mu_had_GeV": self.mu_had_GeV,
+            "evaluation_scale_GeV": self.evaluation_scale_GeV,
+            "parity_relation_id": self.parity_relation_id,
+            "matrix_element_formula_id": self.matrix_element_formula_id,
+            "hamiltonian_convention_id": self.hamiltonian_convention_id,
+        }
+
+
+@dataclass(frozen=True)
+class Paper07101869D0HadronicBundle:
+    """Custom-input-only Q1 hadronic bundle for D0 observables."""
+
+    meson_mass_GeV: float
+    meson_decay_constant_GeV: float
+    bag_parameter_mu_had: float
+    mass_source: Paper07101869HadronicSourceRef
+    decay_constant_source: Paper07101869HadronicSourceRef
+    bag_parameter_source: Paper07101869HadronicSourceRef
+    renormalization_scheme_id: str
+    mu_had_GeV: float
+    system_id: str = PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID
+    contract: Paper07101869D0HadronicContract | None = None
+    operator_basis_id: str = PAPER_0710_1869_DELTAF2_OPERATOR_BASIS_ID
+    operator_normalization_id: str = PAPER_0710_1869_DELTAF2_OPERATOR_NORMALIZATION_ID
+    bundle_id: str | None = None
+    source_id: str | None = None
+    provenance_ids: tuple[str, ...] | None = None
+    input_provenance_mode_id: str = PAPER_0710_1869_DELTAF2_HADRONIC_CUSTOM_PROVENANCE_MODE_ID
+    hamiltonian_convention_id: str = PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID
+    matrix_element_formula_id: str = PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID
+    parity_relation_id: str = PAPER_0710_1869_DELTAF2_D0_PARITY_RELATION_ID
+    supported_operator_names: tuple[str, ...] = _SUPPORTED_OPERATORS
+    unsupported_operator_names: tuple[str, ...] = _UNSUPPORTED_OPERATORS
+    schema_id: str = PAPER_0710_1869_DELTAF2_D0_HADRONIC_BUNDLE_SCHEMA_ID
+    mode_id: str = PAPER_0710_1869_MODE_ID
+    paper_id: str = PAPER_0710_1869_PAPER_ID
+    notes: str | None = None
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "system_id", _require_d0_system_id("system_id", self.system_id))
+        object.__setattr__(
+            self,
+            "schema_id",
+            require_known_schema_id(
+                "schema_id",
+                self.schema_id,
+                expected=PAPER_0710_1869_DELTAF2_D0_HADRONIC_BUNDLE_SCHEMA_ID,
+            ),
+        )
+        require_member("mode_id", self.mode_id, (PAPER_0710_1869_MODE_ID,))
+        require_member("paper_id", self.paper_id, (PAPER_0710_1869_PAPER_ID,))
+        object.__setattr__(
+            self,
+            "operator_basis_id",
+            require_member(
+                "operator_basis_id",
+                self.operator_basis_id,
+                (PAPER_0710_1869_DELTAF2_OPERATOR_BASIS_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "operator_normalization_id",
+            require_member(
+                "operator_normalization_id",
+                self.operator_normalization_id,
+                (PAPER_0710_1869_DELTAF2_OPERATOR_NORMALIZATION_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "renormalization_scheme_id",
+            require_nonempty_identifier(
+                "renormalization_scheme_id",
+                self.renormalization_scheme_id,
+            ),
+        )
+        for field_name in (
+            "meson_mass_GeV",
+            "meson_decay_constant_GeV",
+            "bag_parameter_mu_had",
+            "mu_had_GeV",
+        ):
+            object.__setattr__(
+                self,
+                field_name,
+                require_positive_finite(field_name, getattr(self, field_name)),
+            )
+        for field_name in ("mass_source", "decay_constant_source", "bag_parameter_source"):
+            if not isinstance(getattr(self, field_name), Paper07101869HadronicSourceRef):
+                raise ValueError(f"{field_name} must be a Paper07101869HadronicSourceRef")
+        object.__setattr__(
+            self,
+            "matrix_element_formula_id",
+            require_member(
+                "matrix_element_formula_id",
+                self.matrix_element_formula_id,
+                (PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "parity_relation_id",
+            require_member(
+                "parity_relation_id",
+                self.parity_relation_id,
+                (PAPER_0710_1869_DELTAF2_D0_PARITY_RELATION_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "hamiltonian_convention_id",
+            require_member(
+                "hamiltonian_convention_id",
+                self.hamiltonian_convention_id,
+                (PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID,),
+            ),
+        )
+        object.__setattr__(
+            self,
+            "input_provenance_mode_id",
+            require_member(
+                "input_provenance_mode_id",
+                self.input_provenance_mode_id,
+                (PAPER_0710_1869_DELTAF2_HADRONIC_CUSTOM_PROVENANCE_MODE_ID,),
+            ),
+        )
+        resolved_contract = self.contract
+        if resolved_contract is None:
+            resolved_contract = Paper07101869D0HadronicContract(
+                system_id=self.system_id,
+                operator_basis_id=self.operator_basis_id,
+                operator_normalization_id=self.operator_normalization_id,
+                renormalization_scheme_id=self.renormalization_scheme_id,
+                mu_had_GeV=self.mu_had_GeV,
+                evaluation_scale_GeV=self.mu_had_GeV,
+                parity_relation_id=self.parity_relation_id,
+                matrix_element_formula_id=self.matrix_element_formula_id,
+                hamiltonian_convention_id=self.hamiltonian_convention_id,
+            )
+            object.__setattr__(self, "contract", resolved_contract)
+        if not isinstance(resolved_contract, Paper07101869D0HadronicContract):
+            raise ValueError("contract must be a Paper07101869D0HadronicContract")
+        if resolved_contract.system_id != self.system_id:
+            raise ValueError("contract.system_id must match the D0 bundle system_id")
+        if resolved_contract.operator_basis_id != self.operator_basis_id:
+            raise ValueError("contract.operator_basis_id must match the D0 bundle basis")
+        if resolved_contract.operator_normalization_id != self.operator_normalization_id:
+            raise ValueError(
+                "contract.operator_normalization_id must match the D0 bundle normalization"
+            )
+        if resolved_contract.renormalization_scheme_id != self.renormalization_scheme_id:
+            raise ValueError(
+                "contract.renormalization_scheme_id must match the D0 bundle scheme"
+            )
+        if resolved_contract.parity_relation_id != self.parity_relation_id:
+            raise ValueError("contract.parity_relation_id must match the D0 bundle parity relation")
+        if resolved_contract.matrix_element_formula_id != self.matrix_element_formula_id:
+            raise ValueError(
+                "contract.matrix_element_formula_id must match the D0 bundle formula"
+            )
+        if resolved_contract.hamiltonian_convention_id != self.hamiltonian_convention_id:
+            raise ValueError(
+                "contract.hamiltonian_convention_id must match the D0 bundle convention"
+            )
+        if not _float_matches(resolved_contract.mu_had_GeV, self.mu_had_GeV, atol=1e-12):
+            raise ValueError("contract.mu_had_GeV must match the D0 bundle mu_had_GeV")
+        if not _float_matches(resolved_contract.evaluation_scale_GeV, self.mu_had_GeV, atol=1e-12):
+            raise ValueError(
+                "contract.evaluation_scale_GeV must match the D0 bundle mu_had_GeV"
+            )
+        resolved_bundle_id = (
+            _CUSTOM_D0_HADRONIC_BUNDLE_ID
+            if self.bundle_id is None
+            else require_nonempty_identifier("bundle_id", self.bundle_id)
+        )
+        resolved_source_id = (
+            _CUSTOM_D0_HADRONIC_SOURCE_ID
+            if self.source_id is None
+            else require_nonempty_identifier("source_id", self.source_id)
+        )
+        resolved_provenance_ids = (
+            (resolved_source_id,)
+            if self.provenance_ids is None
+            else tuple(
+                require_nonempty_identifier("provenance_id", provenance_id)
+                for provenance_id in self.provenance_ids
+            )
+        )
+        if resolved_bundle_id == _DEFAULT_HADRONIC_BUNDLE_ID:
+            raise ValueError("custom D0 hadronic inputs must not reuse the default bundle_id")
+        if resolved_source_id == _DEFAULT_HADRONIC_SOURCE_ID:
+            raise ValueError("custom D0 hadronic inputs must not reuse the default source_id")
+        if resolved_provenance_ids == (_DEFAULT_HADRONIC_SOURCE_ID,):
+            raise ValueError("custom D0 hadronic inputs must not reuse the default provenance_ids")
+        if resolved_source_id not in resolved_provenance_ids:
+            raise ValueError("source_id must be present in provenance_ids for D0 bundles")
+        object.__setattr__(self, "bundle_id", resolved_bundle_id)
+        object.__setattr__(self, "source_id", resolved_source_id)
+        object.__setattr__(self, "provenance_ids", resolved_provenance_ids)
+        if self.bag_parameter_source.renormalization_scheme_id is None:
+            raise ValueError(
+                "bag_parameter_source must carry renormalization_scheme_id matching the "
+                "D0 bundle renormalization scheme"
+            )
+        if self.bag_parameter_source.renormalization_scheme_id != self.renormalization_scheme_id:
+            raise ValueError(
+                "bag_parameter_source.renormalization_scheme_id must match "
+                "renormalization_scheme_id"
+            )
+        if self.bag_parameter_source.scale_GeV is None:
+            raise ValueError(
+                "bag_parameter_source must carry scale_GeV matching the D0 bundle mu_had_GeV"
+            )
+        if not _float_matches(self.bag_parameter_source.scale_GeV, self.mu_had_GeV, atol=1e-12):
+            raise ValueError("bag_parameter_source.scale_GeV must match mu_had_GeV")
+        if tuple(self.supported_operator_names) != _SUPPORTED_OPERATORS:
+            raise ValueError("supported_operator_names must match the Q1-only supported subset")
+        if tuple(self.unsupported_operator_names) != _UNSUPPORTED_OPERATORS:
+            raise ValueError("unsupported_operator_names must match the guarded LR subset")
+        resolved_notes = (
+            "Custom D0 hadronic bundle: NP-only Q1_VLL/Q1_VRR support at declared mu_had "
+            "and renormalization scheme. No frozen default lattice dataset is assumed in "
+            "this slice."
+            if self.notes is None
+            else self.notes
+        )
+        object.__setattr__(self, "notes", require_nonempty_identifier("notes", resolved_notes))
+
+    @property
+    def q1_matrix_element_GeV4(self) -> float:
+        return _require_finite_float(
+            "q1_matrix_element_GeV4",
+            (8.0 / 3.0)
+            * (self.meson_decay_constant_GeV**2)
+            * (self.meson_mass_GeV**2)
+            * self.bag_parameter_mu_had,
+        )
+
+    @property
+    def tags(self) -> dict[str, object]:
+        return {
+            "mode_id": self.mode_id,
+            "paper_id": self.paper_id,
+            "system_id": self.system_id,
+            "operator_basis_id": self.operator_basis_id,
+            "operator_normalization_id": self.operator_normalization_id,
+            "renormalization_scheme_id": self.renormalization_scheme_id,
+            "contract": self.contract.as_dict(),
+            "bundle_id": self.bundle_id,
+            "source_id": self.source_id,
+            "provenance_ids": list(self.provenance_ids),
+            "input_provenance_mode_id": self.input_provenance_mode_id,
+            "mu_had_GeV": self.mu_had_GeV,
+            "evaluation_scale_GeV": self.contract.evaluation_scale_GeV,
+            "supported_operator_names": list(self.supported_operator_names),
+            "unsupported_operator_names": list(self.unsupported_operator_names),
+            "matrix_element_formula_id": self.matrix_element_formula_id,
+            "hamiltonian_convention_id": self.hamiltonian_convention_id,
+            "parity_relation_id": self.parity_relation_id,
+        }
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "schema_id": self.schema_id,
+            "mode_id": self.mode_id,
+            "paper_id": self.paper_id,
+            "system_id": self.system_id,
+            "operator_basis_id": self.operator_basis_id,
+            "operator_normalization_id": self.operator_normalization_id,
+            "renormalization_scheme_id": self.renormalization_scheme_id,
+            "scheme_id": self.contract.scheme_id,
+            "contract": self.contract.as_dict(),
+            "bundle_id": self.bundle_id,
+            "source_id": self.source_id,
+            "provenance_ids": list(self.provenance_ids),
+            "input_provenance_mode_id": self.input_provenance_mode_id,
+            "mu_had_GeV": self.mu_had_GeV,
+            "evaluation_scale_GeV": self.contract.evaluation_scale_GeV,
+            "meson_mass_GeV": self.meson_mass_GeV,
+            "meson_decay_constant_GeV": self.meson_decay_constant_GeV,
+            "bag_parameter_mu_had": self.bag_parameter_mu_had,
+            "matrix_element_formula_id": self.matrix_element_formula_id,
+            "hamiltonian_convention_id": self.hamiltonian_convention_id,
+            "parity_relation_id": self.parity_relation_id,
+            "supported_operator_names": list(self.supported_operator_names),
+            "unsupported_operator_names": list(self.unsupported_operator_names),
+            "mass_source": self.mass_source.as_dict(),
+            "decay_constant_source": self.decay_constant_source.as_dict(),
+            "bag_parameter_source": self.bag_parameter_source.as_dict(),
+            "q1_matrix_element_GeV4": self.q1_matrix_element_GeV4,
+            "tags": self.tags,
+            "notes": self.notes,
+        }
+
+    def summary(self) -> dict[str, object]:
+        return {
+            **self.as_dict(),
+            "schema_id": PAPER_0710_1869_DELTAF2_D0_HADRONIC_SUMMARY_SCHEMA_ID,
         }
 
 
@@ -1665,6 +2123,458 @@ def _default_bag_parameter_source() -> Paper07101869HadronicSourceRef:
             "with the paper-mode LO Q1 inverse-running convention."
         ),
     )
+
+
+def _default_kaon_lr_strange_mass_source() -> Paper07101869HadronicSourceRef:
+    return Paper07101869HadronicSourceRef(
+        source_id=_DEFAULT_KAON_LR_STRANGE_MASS_SOURCE_ID,
+        source_kind="review-average",
+        citation="PDG 2024 Quark Masses review, final averages at 2 GeV in the N_L = 4 theory",
+        locator_label="final averages at 2 GeV in the N_L = 4 theory",
+        year=2024,
+        renormalization_scheme_id=PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID,
+        scale_GeV=PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+        transformation_id="none",
+        notes=(
+            "Freezes m_s(2 GeV) = 92.74 MeV in the MS-bar mass scheme with explicit "
+            "N_L = 4 semantics and no hidden running or threshold matching."
+        ),
+    )
+
+
+def _default_kaon_lr_down_mass_source() -> Paper07101869HadronicSourceRef:
+    return Paper07101869HadronicSourceRef(
+        source_id=_DEFAULT_KAON_LR_DOWN_MASS_SOURCE_ID,
+        source_kind="review-average",
+        citation="PDG 2024 Quark Masses review, final averages at 2 GeV in the N_L = 4 theory",
+        locator_label="final averages at 2 GeV in the N_L = 4 theory",
+        year=2024,
+        renormalization_scheme_id=PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID,
+        scale_GeV=PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+        transformation_id="none",
+        notes=(
+            "Freezes m_d(2 GeV) = 4.69 MeV in the MS-bar mass scheme with explicit "
+            "N_L = 4 semantics and no hidden running or threshold matching."
+        ),
+    )
+
+
+def _derive_kaon_lr_r_chi(
+    *,
+    m_K0_GeV: float,
+    m_s_mu_had_GeV: float,
+    m_d_mu_had_GeV: float,
+) -> float:
+    denominator = require_positive_finite(
+        "m_s_mu_had_GeV_plus_m_d_mu_had_GeV",
+        m_s_mu_had_GeV + m_d_mu_had_GeV,
+    )
+    return _require_finite_float(
+        "R_chi_mu_had",
+        (m_K0_GeV / denominator) ** 2,
+    )
+
+
+@dataclass(frozen=True)
+class Paper07101869KaonLRChiralRatioFreeze:
+    """Frozen kaon LR ``R_chi(mu_had)`` derivation metadata for LR-RCHI-FREEZE-1."""
+
+    m_K0_GeV: float
+    m_s_mu_had_GeV: float
+    m_d_mu_had_GeV: float
+    kaon_mass_source: Paper07101869HadronicSourceRef
+    strange_mass_source: Paper07101869HadronicSourceRef
+    down_mass_source: Paper07101869HadronicSourceRef
+    system_id: str = PAPER_0710_1869_DELTAF2_KAON_HADRONIC_SYSTEM_ID
+    mu_had_GeV: float = PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV
+    operator_renormalization_scheme_id: str = PAPER_0710_1869_DELTAF2_RG_SCHEME_ID
+    mass_renormalization_scheme_id: str = PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID
+    mass_active_flavor_policy_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID
+    )
+    chiral_ratio_definition_id: str = PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DEFINITION_ID
+    derivation_formula_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DERIVATION_FORMULA_ID
+    )
+    derivation_formula_source_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FORMULA_SOURCE_ID
+    )
+    no_hidden_conversion_policy_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID
+    )
+    input_policy_id: str = PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_INPUT_POLICY_ID
+    input_provenance_mode_id: str = PAPER_0710_1869_DELTAF2_LR_R_CHI_PROVENANCE_MODE_ID
+    freeze_id: str = _DEFAULT_KAON_LR_R_CHI_FREEZE_ID
+    source_id: str = _DEFAULT_KAON_LR_R_CHI_SOURCE_ID
+    provenance_ids: tuple[str, ...] = (
+        _DEFAULT_KAON_LR_R_CHI_SOURCE_ID,
+        _DEFAULT_MASS_SOURCE_ID,
+        _DEFAULT_KAON_LR_STRANGE_MASS_SOURCE_ID,
+        _DEFAULT_KAON_LR_DOWN_MASS_SOURCE_ID,
+    )
+    formula_citation: str = "Becirevic and Villadoro, hep-lat/0408029, Eq. (5)"
+    formula_locator_label: str = "Eq. (5)"
+    schema_id: str = PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FREEZE_SCHEMA_ID
+    mode_id: str = PAPER_0710_1869_MODE_ID
+    paper_id: str = PAPER_0710_1869_PAPER_ID
+    notes: str = (
+        "LR-RCHI-FREEZE-1 freezes only the kaon LR chiral ratio semantics at mu_had = "
+        "2 GeV. R_chi is derived from the BV 2004 definition using the package's frozen "
+        "neutral-kaon mass and PDG 2024 MS-bar quark masses in the explicit N_L = 4 "
+        "theory. This slice does not freeze default B4/B5 or widen LR observables."
+    )
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "schema_id",
+            require_known_schema_id(
+                "schema_id",
+                self.schema_id,
+                expected=PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FREEZE_SCHEMA_ID,
+            ),
+        )
+        require_member("mode_id", self.mode_id, (PAPER_0710_1869_MODE_ID,))
+        require_member("paper_id", self.paper_id, (PAPER_0710_1869_PAPER_ID,))
+        require_member(
+            "system_id",
+            self.system_id,
+            (PAPER_0710_1869_DELTAF2_KAON_HADRONIC_SYSTEM_ID,),
+        )
+        for field_name in (
+            "operator_renormalization_scheme_id",
+            "mass_renormalization_scheme_id",
+            "mass_active_flavor_policy_id",
+            "chiral_ratio_definition_id",
+            "derivation_formula_id",
+            "derivation_formula_source_id",
+            "no_hidden_conversion_policy_id",
+            "input_policy_id",
+            "input_provenance_mode_id",
+            "freeze_id",
+            "source_id",
+            "formula_citation",
+            "formula_locator_label",
+            "notes",
+        ):
+            object.__setattr__(
+                self,
+                field_name,
+                require_nonempty_identifier(field_name, getattr(self, field_name)),
+            )
+        require_member(
+            "operator_renormalization_scheme_id",
+            self.operator_renormalization_scheme_id,
+            (PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,),
+        )
+        require_member(
+            "mass_renormalization_scheme_id",
+            self.mass_renormalization_scheme_id,
+            (PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID,),
+        )
+        require_member(
+            "mass_active_flavor_policy_id",
+            self.mass_active_flavor_policy_id,
+            (PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID,),
+        )
+        require_member(
+            "chiral_ratio_definition_id",
+            self.chiral_ratio_definition_id,
+            (PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DEFINITION_ID,),
+        )
+        require_member(
+            "derivation_formula_id",
+            self.derivation_formula_id,
+            (PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DERIVATION_FORMULA_ID,),
+        )
+        require_member(
+            "derivation_formula_source_id",
+            self.derivation_formula_source_id,
+            (PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FORMULA_SOURCE_ID,),
+        )
+        require_member(
+            "no_hidden_conversion_policy_id",
+            self.no_hidden_conversion_policy_id,
+            (PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID,),
+        )
+        require_member(
+            "input_policy_id",
+            self.input_policy_id,
+            (PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_INPUT_POLICY_ID,),
+        )
+        require_member(
+            "input_provenance_mode_id",
+            self.input_provenance_mode_id,
+            (PAPER_0710_1869_DELTAF2_LR_R_CHI_PROVENANCE_MODE_ID,),
+        )
+        require_member("freeze_id", self.freeze_id, (_DEFAULT_KAON_LR_R_CHI_FREEZE_ID,))
+        require_member("source_id", self.source_id, (_DEFAULT_KAON_LR_R_CHI_SOURCE_ID,))
+        object.__setattr__(
+            self,
+            "mu_had_GeV",
+            require_positive_finite("mu_had_GeV", self.mu_had_GeV),
+        )
+        if not _float_matches(
+            self.mu_had_GeV,
+            PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+            atol=1e-12,
+        ):
+            raise ValueError("mu_had_GeV must stay frozen at the paper mu_had = 2 GeV")
+        for field_name, expected_value in (
+            ("m_K0_GeV", _DEFAULT_M_K0_GEV),
+            ("m_s_mu_had_GeV", _DEFAULT_KAON_LR_M_S_2GEV_GEV),
+            ("m_d_mu_had_GeV", _DEFAULT_KAON_LR_M_D_2GEV_GEV),
+        ):
+            object.__setattr__(
+                self,
+                field_name,
+                require_positive_finite(field_name, getattr(self, field_name)),
+            )
+            if not _float_matches(getattr(self, field_name), expected_value, atol=1e-15):
+                raise ValueError(f"{field_name} must stay frozen for LR-RCHI-FREEZE-1")
+        if not isinstance(self.kaon_mass_source, Paper07101869HadronicSourceRef):
+            raise ValueError("kaon_mass_source must be a Paper07101869HadronicSourceRef")
+        if not isinstance(self.strange_mass_source, Paper07101869HadronicSourceRef):
+            raise ValueError("strange_mass_source must be a Paper07101869HadronicSourceRef")
+        if not isinstance(self.down_mass_source, Paper07101869HadronicSourceRef):
+            raise ValueError("down_mass_source must be a Paper07101869HadronicSourceRef")
+        if self.kaon_mass_source != _default_mass_source():
+            raise ValueError("kaon_mass_source must reuse the frozen default kaon mass source")
+        if self.strange_mass_source != _default_kaon_lr_strange_mass_source():
+            raise ValueError(
+                "strange_mass_source must match the frozen PDG 2024 m_s(2 GeV) source"
+            )
+        if self.down_mass_source != _default_kaon_lr_down_mass_source():
+            raise ValueError(
+                "down_mass_source must match the frozen PDG 2024 m_d(2 GeV) source"
+            )
+        if (
+            self.operator_renormalization_scheme_id
+            == self.mass_renormalization_scheme_id
+        ):
+            raise ValueError(
+                "operator_renormalization_scheme_id must stay distinct from "
+                "mass_renormalization_scheme_id"
+            )
+        expected_provenance_ids = (
+            _DEFAULT_KAON_LR_R_CHI_SOURCE_ID,
+            _DEFAULT_MASS_SOURCE_ID,
+            _DEFAULT_KAON_LR_STRANGE_MASS_SOURCE_ID,
+            _DEFAULT_KAON_LR_DOWN_MASS_SOURCE_ID,
+        )
+        object.__setattr__(
+            self,
+            "provenance_ids",
+            tuple(
+                require_nonempty_identifier("provenance_id", provenance_id)
+                for provenance_id in self.provenance_ids
+            ),
+        )
+        if self.provenance_ids != expected_provenance_ids:
+            raise ValueError("provenance_ids must stay frozen for LR-RCHI-FREEZE-1")
+
+    @property
+    def R_chi_mu_had(self) -> float:
+        return _derive_kaon_lr_r_chi(
+            m_K0_GeV=self.m_K0_GeV,
+            m_s_mu_had_GeV=self.m_s_mu_had_GeV,
+            m_d_mu_had_GeV=self.m_d_mu_had_GeV,
+        )
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "schema_id": self.schema_id,
+            "mode_id": self.mode_id,
+            "paper_id": self.paper_id,
+            "system_id": self.system_id,
+            "mu_had_GeV": self.mu_had_GeV,
+            "operator_renormalization_scheme_id": self.operator_renormalization_scheme_id,
+            "operator_scheme_id": self.operator_renormalization_scheme_id,
+            "mass_renormalization_scheme_id": self.mass_renormalization_scheme_id,
+            "mass_scheme_id": self.mass_renormalization_scheme_id,
+            "mass_active_flavor_policy_id": self.mass_active_flavor_policy_id,
+            "chiral_ratio_definition_id": self.chiral_ratio_definition_id,
+            "derivation_formula_id": self.derivation_formula_id,
+            "derivation_formula_source_id": self.derivation_formula_source_id,
+            "no_hidden_conversion_policy_id": self.no_hidden_conversion_policy_id,
+            "input_policy_id": self.input_policy_id,
+            "freeze_id": self.freeze_id,
+            "source_id": self.source_id,
+            "provenance_ids": list(self.provenance_ids),
+            "input_provenance_mode_id": self.input_provenance_mode_id,
+            "m_K0_GeV": self.m_K0_GeV,
+            "m_s_mu_had_GeV": self.m_s_mu_had_GeV,
+            "m_d_mu_had_GeV": self.m_d_mu_had_GeV,
+            "R_chi_mu_had": self.R_chi_mu_had,
+            "formula_citation": self.formula_citation,
+            "formula_locator_label": self.formula_locator_label,
+            "kaon_mass_source": self.kaon_mass_source.as_dict(),
+            "strange_mass_source": self.strange_mass_source.as_dict(),
+            "down_mass_source": self.down_mass_source.as_dict(),
+            "notes": self.notes,
+        }
+
+    def summary(self) -> dict[str, object]:
+        return {
+            **self.as_dict(),
+            "schema_id": PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID,
+        }
+
+
+def build_paper_0710_1869_kaon_lr_r_chi_freeze(
+    *,
+    m_K0_GeV: float = _DEFAULT_M_K0_GEV,
+    m_s_mu_had_GeV: float = _DEFAULT_KAON_LR_M_S_2GEV_GEV,
+    m_d_mu_had_GeV: float = _DEFAULT_KAON_LR_M_D_2GEV_GEV,
+    kaon_mass_source: Paper07101869HadronicSourceRef | None = None,
+    strange_mass_source: Paper07101869HadronicSourceRef | None = None,
+    down_mass_source: Paper07101869HadronicSourceRef | None = None,
+    mu_had_GeV: float = PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+    operator_renormalization_scheme_id: str = PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,
+    mass_renormalization_scheme_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID
+    ),
+    mass_active_flavor_policy_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID
+    ),
+    chiral_ratio_definition_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DEFINITION_ID
+    ),
+    derivation_formula_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DERIVATION_FORMULA_ID
+    ),
+    derivation_formula_source_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FORMULA_SOURCE_ID
+    ),
+    no_hidden_conversion_policy_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID
+    ),
+    input_policy_id: str = PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_INPUT_POLICY_ID,
+    input_provenance_mode_id: str = PAPER_0710_1869_DELTAF2_LR_R_CHI_PROVENANCE_MODE_ID,
+    freeze_id: str = _DEFAULT_KAON_LR_R_CHI_FREEZE_ID,
+    source_id: str = _DEFAULT_KAON_LR_R_CHI_SOURCE_ID,
+    provenance_ids: tuple[str, ...] | list[str] | None = None,
+) -> Paper07101869KaonLRChiralRatioFreeze:
+    """Return the frozen kaon LR ``R_chi(mu_had)`` provenance object."""
+
+    resolved_kaon_mass_source = (
+        _default_mass_source() if kaon_mass_source is None else kaon_mass_source
+    )
+    resolved_strange_mass_source = (
+        _default_kaon_lr_strange_mass_source()
+        if strange_mass_source is None
+        else strange_mass_source
+    )
+    resolved_down_mass_source = (
+        _default_kaon_lr_down_mass_source()
+        if down_mass_source is None
+        else down_mass_source
+    )
+    resolved_provenance_ids = (
+        (
+            _DEFAULT_KAON_LR_R_CHI_SOURCE_ID,
+            _DEFAULT_MASS_SOURCE_ID,
+            _DEFAULT_KAON_LR_STRANGE_MASS_SOURCE_ID,
+            _DEFAULT_KAON_LR_DOWN_MASS_SOURCE_ID,
+        )
+        if provenance_ids is None
+        else tuple(
+            require_nonempty_identifier("provenance_id", provenance_id)
+            for provenance_id in tuple(provenance_ids)
+        )
+    )
+    return Paper07101869KaonLRChiralRatioFreeze(
+        m_K0_GeV=m_K0_GeV,
+        m_s_mu_had_GeV=m_s_mu_had_GeV,
+        m_d_mu_had_GeV=m_d_mu_had_GeV,
+        kaon_mass_source=resolved_kaon_mass_source,
+        strange_mass_source=resolved_strange_mass_source,
+        down_mass_source=resolved_down_mass_source,
+        mu_had_GeV=mu_had_GeV,
+        operator_renormalization_scheme_id=operator_renormalization_scheme_id,
+        mass_renormalization_scheme_id=mass_renormalization_scheme_id,
+        mass_active_flavor_policy_id=mass_active_flavor_policy_id,
+        chiral_ratio_definition_id=chiral_ratio_definition_id,
+        derivation_formula_id=derivation_formula_id,
+        derivation_formula_source_id=derivation_formula_source_id,
+        no_hidden_conversion_policy_id=no_hidden_conversion_policy_id,
+        input_policy_id=input_policy_id,
+        input_provenance_mode_id=input_provenance_mode_id,
+        freeze_id=freeze_id,
+        source_id=source_id,
+        provenance_ids=resolved_provenance_ids,
+    )
+
+
+def default_paper_0710_1869_kaon_lr_r_chi_freeze() -> Paper07101869KaonLRChiralRatioFreeze:
+    """Return the default frozen kaon LR ``R_chi(mu_had)`` provenance object."""
+
+    return build_paper_0710_1869_kaon_lr_r_chi_freeze()
+
+
+def build_paper_0710_1869_kaon_lr_r_chi_summary(
+    *,
+    m_K0_GeV: float = _DEFAULT_M_K0_GEV,
+    m_s_mu_had_GeV: float = _DEFAULT_KAON_LR_M_S_2GEV_GEV,
+    m_d_mu_had_GeV: float = _DEFAULT_KAON_LR_M_D_2GEV_GEV,
+    kaon_mass_source: Paper07101869HadronicSourceRef | None = None,
+    strange_mass_source: Paper07101869HadronicSourceRef | None = None,
+    down_mass_source: Paper07101869HadronicSourceRef | None = None,
+    mu_had_GeV: float = PAPER_0710_1869_DELTAF2_DEFAULT_MU_HAD_GEV,
+    operator_renormalization_scheme_id: str = PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,
+    mass_renormalization_scheme_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID
+    ),
+    mass_active_flavor_policy_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID
+    ),
+    chiral_ratio_definition_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DEFINITION_ID
+    ),
+    derivation_formula_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DERIVATION_FORMULA_ID
+    ),
+    derivation_formula_source_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FORMULA_SOURCE_ID
+    ),
+    no_hidden_conversion_policy_id: str = (
+        PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID
+    ),
+    input_policy_id: str = PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_INPUT_POLICY_ID,
+    input_provenance_mode_id: str = PAPER_0710_1869_DELTAF2_LR_R_CHI_PROVENANCE_MODE_ID,
+    freeze_id: str = _DEFAULT_KAON_LR_R_CHI_FREEZE_ID,
+    source_id: str = _DEFAULT_KAON_LR_R_CHI_SOURCE_ID,
+    provenance_ids: tuple[str, ...] | list[str] | None = None,
+) -> dict[str, object]:
+    """Return the deterministic summary mapping for the frozen kaon LR ``R_chi`` object."""
+
+    return build_paper_0710_1869_kaon_lr_r_chi_freeze(
+        m_K0_GeV=m_K0_GeV,
+        m_s_mu_had_GeV=m_s_mu_had_GeV,
+        m_d_mu_had_GeV=m_d_mu_had_GeV,
+        kaon_mass_source=kaon_mass_source,
+        strange_mass_source=strange_mass_source,
+        down_mass_source=down_mass_source,
+        mu_had_GeV=mu_had_GeV,
+        operator_renormalization_scheme_id=operator_renormalization_scheme_id,
+        mass_renormalization_scheme_id=mass_renormalization_scheme_id,
+        mass_active_flavor_policy_id=mass_active_flavor_policy_id,
+        chiral_ratio_definition_id=chiral_ratio_definition_id,
+        derivation_formula_id=derivation_formula_id,
+        derivation_formula_source_id=derivation_formula_source_id,
+        no_hidden_conversion_policy_id=no_hidden_conversion_policy_id,
+        input_policy_id=input_policy_id,
+        input_provenance_mode_id=input_provenance_mode_id,
+        freeze_id=freeze_id,
+        source_id=source_id,
+        provenance_ids=provenance_ids,
+    ).summary()
+
+
+def default_paper_0710_1869_kaon_lr_r_chi_summary() -> dict[str, object]:
+    """Return the summary mapping for the frozen default kaon LR ``R_chi`` object."""
+
+    return default_paper_0710_1869_kaon_lr_r_chi_freeze().summary()
 
 
 def build_paper_0710_1869_kaon_lr_hadronic_inputs(
@@ -2365,6 +3275,100 @@ def build_paper_0710_1869_bs_hadronic_summary(
     ).summary()
 
 
+def build_paper_0710_1869_d0_hadronic_bundle(
+    *,
+    mu_had_GeV: float,
+    renormalization_scheme_id: str,
+    m_D0_GeV: float,
+    f_D0_GeV: float,
+    B_D0_mu_had: float,
+    mass_source: Paper07101869HadronicSourceRef,
+    decay_constant_source: Paper07101869HadronicSourceRef,
+    bag_parameter_source: Paper07101869HadronicSourceRef,
+    bundle_id: str | None = None,
+    source_id: str | None = None,
+    provenance_ids: tuple[str, ...] | list[str] | None = None,
+) -> Paper07101869D0HadronicBundle:
+    """Build the custom-input-only D0 Q1 hadronic bundle."""
+
+    resolved_provenance_ids = None if provenance_ids is None else tuple(provenance_ids)
+    return Paper07101869D0HadronicBundle(
+        mu_had_GeV=mu_had_GeV,
+        renormalization_scheme_id=renormalization_scheme_id,
+        meson_mass_GeV=m_D0_GeV,
+        meson_decay_constant_GeV=f_D0_GeV,
+        bag_parameter_mu_had=B_D0_mu_had,
+        mass_source=mass_source,
+        decay_constant_source=decay_constant_source,
+        bag_parameter_source=bag_parameter_source,
+        bundle_id=bundle_id,
+        source_id=source_id,
+        provenance_ids=resolved_provenance_ids,
+    )
+
+
+def build_paper_0710_1869_d0_hadronic(
+    *,
+    mu_had_GeV: float,
+    renormalization_scheme_id: str,
+    m_D0_GeV: float,
+    f_D0_GeV: float,
+    B_D0_mu_had: float,
+    mass_source: Paper07101869HadronicSourceRef,
+    decay_constant_source: Paper07101869HadronicSourceRef,
+    bag_parameter_source: Paper07101869HadronicSourceRef,
+    bundle_id: str | None = None,
+    source_id: str | None = None,
+    provenance_ids: tuple[str, ...] | list[str] | None = None,
+) -> Paper07101869D0HadronicBundle:
+    """Compatibility alias for the custom-input-only D0 Q1 hadronic bundle."""
+
+    return build_paper_0710_1869_d0_hadronic_bundle(
+        mu_had_GeV=mu_had_GeV,
+        renormalization_scheme_id=renormalization_scheme_id,
+        m_D0_GeV=m_D0_GeV,
+        f_D0_GeV=f_D0_GeV,
+        B_D0_mu_had=B_D0_mu_had,
+        mass_source=mass_source,
+        decay_constant_source=decay_constant_source,
+        bag_parameter_source=bag_parameter_source,
+        bundle_id=bundle_id,
+        source_id=source_id,
+        provenance_ids=provenance_ids,
+    )
+
+
+def build_paper_0710_1869_d0_hadronic_summary(
+    *,
+    mu_had_GeV: float,
+    renormalization_scheme_id: str,
+    m_D0_GeV: float,
+    f_D0_GeV: float,
+    B_D0_mu_had: float,
+    mass_source: Paper07101869HadronicSourceRef,
+    decay_constant_source: Paper07101869HadronicSourceRef,
+    bag_parameter_source: Paper07101869HadronicSourceRef,
+    bundle_id: str | None = None,
+    source_id: str | None = None,
+    provenance_ids: tuple[str, ...] | list[str] | None = None,
+) -> dict[str, object]:
+    """Return the summary mapping for the custom-input-only D0 Q1 hadronic bundle."""
+
+    return build_paper_0710_1869_d0_hadronic_bundle(
+        mu_had_GeV=mu_had_GeV,
+        renormalization_scheme_id=renormalization_scheme_id,
+        m_D0_GeV=m_D0_GeV,
+        f_D0_GeV=f_D0_GeV,
+        B_D0_mu_had=B_D0_mu_had,
+        mass_source=mass_source,
+        decay_constant_source=decay_constant_source,
+        bag_parameter_source=bag_parameter_source,
+        bundle_id=bundle_id,
+        source_id=source_id,
+        provenance_ids=provenance_ids,
+    ).summary()
+
+
 __all__ = [
     "PAPER_0710_1869_DELTAF2_BAG_PARAMETER_SOURCE_SCHEME_ID",
     "PAPER_0710_1869_DELTAF2_BAG_PARAMETER_TRANSFORMATION_ID",
@@ -2380,6 +3384,12 @@ __all__ = [
     "PAPER_0710_1869_DELTAF2_BS_HADRONIC_SYSTEM_ID",
     "PAPER_0710_1869_DELTAF2_BS_MATRIX_ELEMENT_FORMULA_ID",
     "PAPER_0710_1869_DELTAF2_BS_PARITY_RELATION_ID",
+    "PAPER_0710_1869_DELTAF2_D0_HADRONIC_BUNDLE_SCHEMA_ID",
+    "PAPER_0710_1869_DELTAF2_D0_HADRONIC_CONTRACT_SCHEMA_ID",
+    "PAPER_0710_1869_DELTAF2_D0_HADRONIC_SUMMARY_SCHEMA_ID",
+    "PAPER_0710_1869_DELTAF2_D0_HADRONIC_SYSTEM_ID",
+    "PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID",
+    "PAPER_0710_1869_DELTAF2_D0_PARITY_RELATION_ID",
     "PAPER_0710_1869_DELTAF2_HADRONIC_SOURCE_SCHEMA_ID",
     "PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID",
     "PAPER_0710_1869_DELTAF2_KAON_HADRONIC_BUNDLE_SCHEMA_ID",
@@ -2392,17 +3402,30 @@ __all__ = [
     "PAPER_0710_1869_DELTAF2_KAON_LR_HADRONIC_INPUTS_SCHEMA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_HADRONIC_SUMMARY_SCHEMA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_INPUT_POLICY_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DEFINITION_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_DERIVATION_FORMULA_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FORMULA_SOURCE_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_FREEZE_SCHEMA_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_INPUT_POLICY_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_MASS_SCHEME_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID",
+    "PAPER_0710_1869_DELTAF2_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_Q4_MATRIX_ELEMENT_FORMULA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_Q5_MATRIX_ELEMENT_FORMULA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_LR_SCHEME_CONVERSION_POLICY_ID",
     "PAPER_0710_1869_DELTAF2_KAON_MATRIX_ELEMENT_FORMULA_ID",
     "PAPER_0710_1869_DELTAF2_KAON_PARITY_RELATION_ID",
     "PAPER_0710_1869_DELTAF2_LR_HADRONIC_CUSTOM_PROVENANCE_MODE_ID",
+    "PAPER_0710_1869_DELTAF2_LR_R_CHI_PROVENANCE_MODE_ID",
     "Paper07101869BMesonHadronicBundle",
     "Paper07101869BMesonHadronicContract",
+    "Paper07101869D0HadronicBundle",
+    "Paper07101869D0HadronicContract",
     "Paper07101869HadronicSourceRef",
     "Paper07101869KaonHadronicContract",
     "Paper07101869KaonHadronicBundle",
+    "Paper07101869KaonLRChiralRatioFreeze",
     "Paper07101869KaonLRHadronicContract",
     "Paper07101869KaonLRHadronicInputs",
     "build_paper_0710_1869_bd_hadronic",
@@ -2411,14 +3434,21 @@ __all__ = [
     "build_paper_0710_1869_bs_hadronic",
     "build_paper_0710_1869_bs_hadronic_bundle",
     "build_paper_0710_1869_bs_hadronic_summary",
+    "build_paper_0710_1869_d0_hadronic",
+    "build_paper_0710_1869_d0_hadronic_bundle",
+    "build_paper_0710_1869_d0_hadronic_summary",
     "build_paper_0710_1869_kaon_hadronic",
     "build_paper_0710_1869_kaon_hadronic_bundle",
     "build_paper_0710_1869_kaon_hadronic_summary",
     "build_paper_0710_1869_kaon_hadronic_summary_alias",
     "build_paper_0710_1869_kaon_lr_hadronic",
     "build_paper_0710_1869_kaon_lr_hadronic_inputs",
+    "build_paper_0710_1869_kaon_lr_r_chi_freeze",
+    "build_paper_0710_1869_kaon_lr_r_chi_summary",
     "build_paper_0710_1869_kaon_lr_hadronic_summary",
     "default_paper_0710_1869_kaon_hadronic",
     "default_paper_0710_1869_kaon_hadronic_bundle",
     "default_paper_0710_1869_kaon_hadronic_summary",
+    "default_paper_0710_1869_kaon_lr_r_chi_freeze",
+    "default_paper_0710_1869_kaon_lr_r_chi_summary",
 ]

@@ -69,7 +69,9 @@ Milestones must be named explicitly:
 
 - Milestone 1: kaon-only NP observable reproduction with full LO RG running and
   independent verification
-- Milestone 2: extend the same paper-mode contract to B and D observables
+- Milestone 2: extend the same paper-mode contract through explicit custom
+  neutral-meson slices, starting with `B_d` / `B_s` Q1 NP-only surfaces and
+  then a separate `D0` Q1 NP-only amplitude surface
 
 ## Non-Negotiable Pre-Implementation Decisions
 
@@ -149,7 +151,10 @@ Initial recommendation:
 
 - Kaons: NP-only `Re(M12^NP)` and `Im(M12^NP)` interpretation
 - B systems: NP-only `|M12^NP|` / `Delta M`
-- D system: NP-only conservative bound
+- D system: first a custom-input-only NP-only amplitude surface
+  `M12_D0^NP` / `Delta m_D0^NP = 2 Re(M12_D0^NP)` under exact alignment, with
+  any conservative-bound interpretation deferred to a later separately sourced
+  milestone
 
 ### F. Input and Provenance Contract
 
@@ -464,6 +469,18 @@ Required outcomes:
   observable surfaces plus custom `B_d` / `B_s` hadronic bundles under exact
   Wilson/hadronic alignment while leaving the kaon default/exported Q1 path,
   artifacts, and verifier unchanged, is the next milestone after LR-TOTAL-1
+- D0-Q1-CUSTOM-1, adding only a custom-input-only Q1 NP-only `D0`
+  hadronic/observable surface plus the minimal `D0` system/matching helper
+  under exact Wilson/hadronic alignment while leaving the kaon
+  default/exported Q1 path, artifacts, and verifier unchanged, is the next
+  milestone after BS-Q1-CUSTOM-1
+- LR-RCHI-FREEZE-1, freezing only the kaon LR `R_chi(mu_had)` semantics and
+  provenance at `mu_had = 2.0 GeV` under the exact BV 2004 definition and a
+  PDG 2024 `N_L = 4` mass-source chain while leaving default `B4/B5` LR
+  freezing, LR observables, artifacts, and verifier unchanged, is the next
+  milestone after D0-Q1-CUSTOM-1
+- LR-DEFAULT-HAD-1, freezing sourced default LR `B4/B5` inputs plus a full
+  default LR hadronic bundle, is deferred until after LR-RCHI-FREEZE-1
 - literature-style regression checks
 
 Exit criteria:

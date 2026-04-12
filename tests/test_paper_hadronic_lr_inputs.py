@@ -30,6 +30,20 @@ CUSTOM_LR_HADRONIC_BUILDER_NAMES = (
     "build_paper_0710_1869_custom_kaon_lr_hadronic",
     "build_paper_0710_1869_kaon_lr_hadronic",
 )
+DEFAULT_LR_HADRONIC_EXPORT_NAMES = (
+    "default_paper_0710_1869_kaon_lr_hadronic_inputs",
+    "default_paper_0710_1869_kaon_lr_hadronic_bundle",
+    "default_paper_0710_1869_kaon_lr_hadronic",
+    "default_paper_0710_1869_kaon_lr_hadronic_summary",
+)
+KAON_LR_R_CHI_FREEZE_EXPORT_NAMES = (
+    "default_paper_0710_1869_kaon_lr_r_chi_freeze",
+    "build_paper_0710_1869_kaon_lr_r_chi_freeze",
+)
+KAON_LR_R_CHI_SUMMARY_EXPORT_NAMES = (
+    "default_paper_0710_1869_kaon_lr_r_chi_summary",
+    "build_paper_0710_1869_kaon_lr_r_chi_summary",
+)
 HADRONIC_SOURCE_REF_CLASS_NAMES = (
     "Paper07101869LRHadronicSourceRef",
     "Paper07101869HadronicSourceRef",
@@ -65,6 +79,23 @@ LR_HADRONIC_PROBE_SOURCE_ID = "hadronic.kaon.lr_custom_probe.sources.v1"
 LR_HADRONIC_PROBE_B4_SOURCE_ID = "hadronic.kaon.lr_custom_probe.b4.v1"
 LR_HADRONIC_PROBE_B5_SOURCE_ID = "hadronic.kaon.lr_custom_probe.b5.v1"
 LR_HADRONIC_PROBE_R_CHI_SOURCE_ID = "hadronic.kaon.lr_custom_probe.rchi.v1"
+EXPECTED_KAON_LR_R_CHI_MASS_SCHEME_ID = "pdg.2024.msbar.running_masses.at_2gev.v1"
+EXPECTED_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID = (
+    "pdg.2024.quark_masses.n_l_4.at_2gev.explicit.v1"
+)
+EXPECTED_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID = (
+    "none.freeze_pdg2024_msbar_nl4_inputs_at_2gev.v1"
+)
+EXPECTED_KAON_LR_R_CHI_M_S_2GEV_GEV = 0.09274
+EXPECTED_KAON_LR_R_CHI_M_D_2GEV_GEV = 0.00469
+EXPECTED_KAON_LR_R_CHI_M_K0_GEV = 0.497611
+EXPECTED_KAON_LR_R_CHI_EXACT_VALUE = 26.085222120747908
+EXPECTED_KAON_LR_R_CHI_FREEZE_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_freeze.v1"
+)
+EXPECTED_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID = (
+    "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_lr_r_chi_summary.v1"
+)
 
 
 def _load_hadronic_module():
@@ -164,6 +195,26 @@ def _custom_lr_hadronic_builder(module: Any) -> Any:
         + " or an LR-extended "
         + ", ".join(HADRONIC_BUILDER_NAMES)
     )
+
+
+def _default_kaon_lr_r_chi_freeze(module: Any) -> Any:
+    callable_obj = _get_callable(module, KAON_LR_R_CHI_FREEZE_EXPORT_NAMES)
+    if not callable(callable_obj):
+        raise AssertionError(
+            "hadronic layer exposes no frozen LR R_chi helper; expected one of "
+            + ", ".join(KAON_LR_R_CHI_FREEZE_EXPORT_NAMES)
+        )
+    return callable_obj()
+
+
+def _default_kaon_lr_r_chi_summary(module: Any) -> dict[str, Any]:
+    callable_obj = _get_callable(module, KAON_LR_R_CHI_SUMMARY_EXPORT_NAMES)
+    if not callable(callable_obj):
+        raise AssertionError(
+            "hadronic layer exposes no frozen LR R_chi summary helper; expected one of "
+            + ", ".join(KAON_LR_R_CHI_SUMMARY_EXPORT_NAMES)
+        )
+    return _payload_from_value(callable_obj())
 
 
 def _build_source_ref(
@@ -741,3 +792,142 @@ def test_custom_lr_hadronic_builder_rejects_source_scheme_or_scale_mismatch(
 
     with pytest.raises((TypeError, ValueError, AssertionError), match=error_pattern):
         builder(**kwargs)
+
+
+def test_default_kaon_lr_r_chi_freeze_is_deterministic_and_matches_bv2004_definition() -> None:
+    module = _load_hadronic_module()
+
+    freeze_value = _default_kaon_lr_r_chi_freeze(module)
+    second_value = _default_kaon_lr_r_chi_freeze(module)
+    payload = _payload_from_value(freeze_value.as_dict())
+    second_payload = _payload_from_value(second_value.as_dict())
+    summary_payload = _default_kaon_lr_r_chi_summary(module)
+
+    assert payload == second_payload
+    assert payload["schema_id"] == EXPECTED_KAON_LR_R_CHI_FREEZE_SCHEMA_ID
+    assert payload["system_id"] == "kaon"
+    assert float(payload["mu_had_GeV"]) == pytest.approx(2.0, rel=0.0, abs=1.0e-12)
+    assert payload["freeze_id"]
+    assert payload["source_id"]
+    assert "derived" in str(payload["input_provenance_mode_id"]).lower()
+    assert payload["operator_renormalization_scheme_id"] == payload["operator_scheme_id"]
+    assert payload["mass_renormalization_scheme_id"] == payload["mass_scheme_id"]
+    assert payload["mass_renormalization_scheme_id"] == EXPECTED_KAON_LR_R_CHI_MASS_SCHEME_ID
+    assert payload["operator_scheme_id"] != payload["mass_scheme_id"]
+    assert (
+        payload["mass_active_flavor_policy_id"]
+        == EXPECTED_KAON_LR_R_CHI_ACTIVE_FLAVOR_POLICY_ID
+    )
+    assert payload["derivation_formula_id"]
+    assert payload["derivation_formula_source_id"]
+    assert (
+        payload["no_hidden_conversion_policy_id"]
+        == EXPECTED_KAON_LR_R_CHI_NO_HIDDEN_CONVERSION_POLICY_ID
+    )
+    assert float(payload["m_K0_GeV"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_M_K0_GEV,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(payload["m_s_mu_had_GeV"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_M_S_2GEV_GEV,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(payload["m_d_mu_had_GeV"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_M_D_2GEV_GEV,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert payload["provenance_ids"] == [
+        payload["source_id"],
+        payload["kaon_mass_source"]["source_id"],
+        payload["strange_mass_source"]["source_id"],
+        payload["down_mass_source"]["source_id"],
+    ]
+    assert (
+        payload["strange_mass_source"]["renormalization_scheme_id"]
+        == payload["mass_renormalization_scheme_id"]
+    )
+    assert (
+        payload["down_mass_source"]["renormalization_scheme_id"]
+        == payload["mass_renormalization_scheme_id"]
+    )
+    assert float(payload["strange_mass_source"]["scale_GeV"]) == pytest.approx(
+        float(payload["mu_had_GeV"]),
+        rel=0.0,
+        abs=1.0e-12,
+    )
+    assert float(payload["down_mass_source"]["scale_GeV"]) == pytest.approx(
+        float(payload["mu_had_GeV"]),
+        rel=0.0,
+        abs=1.0e-12,
+    )
+
+    expected_r_chi = (float(payload["m_K0_GeV"]) / (
+        float(payload["m_s_mu_had_GeV"]) + float(payload["m_d_mu_had_GeV"])
+    )) ** 2
+    assert expected_r_chi == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_EXACT_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(payload["R_chi_mu_had"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_EXACT_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert float(summary_payload["R_chi_mu_had"]) == pytest.approx(
+        EXPECTED_KAON_LR_R_CHI_EXACT_VALUE,
+        rel=0.0,
+        abs=1.0e-15,
+    )
+    assert summary_payload["schema_id"] == EXPECTED_KAON_LR_R_CHI_SUMMARY_SCHEMA_ID
+    assert summary_payload["schema_id"] != payload["schema_id"]
+
+
+@pytest.mark.parametrize(
+    ("mutator", "error_pattern"),
+    (
+        (
+            lambda freeze: {"provenance_ids": tuple(freeze.provenance_ids[:-1])},
+            "(?i)provenance_ids",
+        ),
+        (
+            lambda _freeze: {"derivation_formula_id": ""},
+            "(?i)derivation_formula_id",
+        ),
+        (
+            lambda freeze: {"mu_had_GeV": float(freeze.mu_had_GeV) + 0.25},
+            "(?i)mu_had_GeV",
+        ),
+        (
+            lambda _freeze: {"mass_active_flavor_policy_id": "wrong.active_flavor.v1"},
+            "(?i)mass_active_flavor_policy_id",
+        ),
+        (
+            lambda freeze: {
+                "mass_renormalization_scheme_id": str(
+                    freeze.operator_renormalization_scheme_id
+                )
+            },
+            "(?i)(mass_renormalization_scheme_id|distinct)",
+        ),
+    ),
+)
+def test_default_kaon_lr_r_chi_freeze_rejects_metadata_drift(
+    mutator: Any,
+    error_pattern: str,
+) -> None:
+    module = _load_hadronic_module()
+    freeze_value = _default_kaon_lr_r_chi_freeze(module)
+
+    with pytest.raises(ValueError, match=error_pattern):
+        dataclasses.replace(freeze_value, **mutator(freeze_value))
+
+
+def test_lr_r_chi_freeze_does_not_expose_default_lr_hadronic_bundle_builder() -> None:
+    module = _load_hadronic_module()
+
+    for export_name in DEFAULT_LR_HADRONIC_EXPORT_NAMES:
+        assert not callable(getattr(module, export_name, None))

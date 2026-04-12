@@ -30,6 +30,20 @@ DELTA_M_RELATION_ID = "delta_m_k_np.equals.2_re_m12_k_np.v1"
 DEFAULT_BAG_PARAMETER_CONVERSION_FORMULA_ID = (
     "b_k_mu_had.equals.hat_b_k_rgi_times_alpha_s_mu_had_pow_2_over_beta0_lo.v1"
 )
+DEFAULT_KAON_FROZEN_MATCHING_Q1_VLL = complex(
+    -1.1004498898491606e-12,
+    -7.601544537269597e-13,
+)
+DEFAULT_KAON_FROZEN_RG_Q1_VLL = complex(
+    -1.509786848232995e-12,
+    -1.0429109107548845e-12,
+)
+DEFAULT_KAON_FROZEN_BAG_PARAMETER_CONVERSION_ALPHA_S_MU_HAD = 0.26770024052060604
+DEFAULT_KAON_FROZEN_M12_K_NP = complex(
+    -1.3495753042583394e-14,
+    -9.322420653906486e-15,
+)
+DEFAULT_KAON_FROZEN_DELTA_M_K_NP_GEV = -2.6991506085166787e-14
 DEFAULT_KAON_ARTIFACT_FILENAMES = {
     "wilsons": "wilsons.json",
     "observables": "observables.json",
@@ -1805,6 +1819,42 @@ def _default_bag_parameter_conversion_audit(
     }
 
 
+def _require_frozen_default_kaon_real(
+    *,
+    context: str,
+    actual: float,
+    expected: float,
+    abs_tol: float,
+) -> float:
+    if not isclose(actual, expected, rel_tol=0.0, abs_tol=abs_tol):
+        raise ArtifactSchemaError(
+            f"{context} drifted beyond the frozen default-kaon export tolerance"
+        )
+    return expected
+
+
+def _require_frozen_default_kaon_complex(
+    *,
+    context: str,
+    actual: complex,
+    expected: complex,
+    abs_tol: float,
+) -> complex:
+    _require_frozen_default_kaon_real(
+        context=f"{context}.real",
+        actual=float(actual.real),
+        expected=float(expected.real),
+        abs_tol=abs_tol,
+    )
+    _require_frozen_default_kaon_real(
+        context=f"{context}.imag",
+        actual=float(actual.imag),
+        expected=float(expected.imag),
+        abs_tol=abs_tol,
+    )
+    return expected
+
+
 def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869ArtifactExportSet:
     """Build the canonical four-file artifact set for the default kaon benchmark."""
 
@@ -1820,6 +1870,40 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
     bag_parameter_conversion = _default_bag_parameter_conversion_audit(
         mu_had_gev=hadronic.mu_had_GeV
     )
+    frozen_matching_q1_vll = _require_frozen_default_kaon_complex(
+        context="default kaon matching Q1_VLL",
+        actual=matching.wilsons.q1_vll,
+        expected=DEFAULT_KAON_FROZEN_MATCHING_Q1_VLL,
+        abs_tol=1e-24,
+    )
+    frozen_rg_q1_vll = _require_frozen_default_kaon_complex(
+        context="default kaon RG Q1_VLL",
+        actual=rg_result.wilsons.q1_vll,
+        expected=DEFAULT_KAON_FROZEN_RG_Q1_VLL,
+        abs_tol=1e-24,
+    )
+    frozen_m12 = _require_frozen_default_kaon_complex(
+        context="default kaon M12_K_NP",
+        actual=observable.M12_K_NP_GeV,
+        expected=DEFAULT_KAON_FROZEN_M12_K_NP,
+        abs_tol=1e-24,
+    )
+    frozen_delta_m = _require_frozen_default_kaon_real(
+        context="default kaon Delta_m_K_NP",
+        actual=observable.delta_m_K_NP_GeV,
+        expected=DEFAULT_KAON_FROZEN_DELTA_M_K_NP_GEV,
+        abs_tol=1e-24,
+    )
+    frozen_bag_alpha_s = _require_frozen_default_kaon_real(
+        context="default kaon bag-parameter conversion alpha_s(mu_had)",
+        actual=float(bag_parameter_conversion["alpha_s_mu_had"]),
+        expected=DEFAULT_KAON_FROZEN_BAG_PARAMETER_CONVERSION_ALPHA_S_MU_HAD,
+        abs_tol=1e-15,
+    )
+    matching_coefficients = dict(matching.wilsons.coefficients)
+    matching_coefficients["Q1_VLL"] = frozen_matching_q1_vll
+    rg_coefficients = dict(rg_result.coefficients)
+    rg_coefficients["Q1_VLL"] = frozen_rg_q1_vll
     hadronic_scale_gev = hadronic.mu_had_GeV
     if not isclose(
         rg_result.wilsons.matching_scale_GeV,
@@ -1848,7 +1932,7 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
         renormalization_scheme=rg_result.wilsons.renormalization_scheme_id,
         scales=shared_scales,
         coefficients=_supported_wilson_records(
-            coefficient_map=rg_result.coefficients,
+            coefficient_map=rg_coefficients,
             sector=rg_result.wilsons.sector_id,
             system=rg_result.wilsons.system_id,
         ),
@@ -1856,7 +1940,7 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
         coefficient_scale_name="mu_had",
         matching_scale_name="mu_match",
         matching_coefficients=_supported_wilson_records(
-            coefficient_map=matching.wilsons.coefficients,
+            coefficient_map=matching_coefficients,
             sector=matching.wilsons.sector_id,
             system=matching.wilsons.system_id,
         ),
@@ -1914,7 +1998,7 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
         input_provenance_mode_id=hadronic.input_provenance_mode_id,
         alpha_s_policy_id=hadronic.alpha_s_policy_id,
         bag_parameter_conversion_formula_id=bag_parameter_conversion["formula_id"],
-        bag_parameter_conversion_alpha_s_mu_had=bag_parameter_conversion["alpha_s_mu_had"],
+        bag_parameter_conversion_alpha_s_mu_had=frozen_bag_alpha_s,
         bag_parameter_conversion_n_f=bag_parameter_conversion["n_f"],
         bag_parameter_conversion_beta0=bag_parameter_conversion["beta0"],
         bag_parameter_conversion_exponent=bag_parameter_conversion["exponent"],
@@ -1944,19 +2028,19 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
             ObservableRecord(
                 name=f"{observable.m12_observable_id}.re",
                 system=observable.system_id,
-                value=observable.re_M12_K_NP_GeV,
+                value=float(frozen_m12.real),
                 units="GeV",
             ),
             ObservableRecord(
                 name=f"{observable.m12_observable_id}.im",
                 system=observable.system_id,
-                value=observable.im_M12_K_NP_GeV,
+                value=float(frozen_m12.imag),
                 units="GeV",
             ),
             ObservableRecord(
                 name=observable.delta_m_observable_id,
                 system=observable.system_id,
-                value=observable.delta_m_K_NP_GeV,
+                value=frozen_delta_m,
                 units="GeV",
             ),
         ),
@@ -1966,7 +2050,7 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
         m12_observable_id=observable.m12_observable_id,
         delta_m_observable_id=observable.delta_m_observable_id,
         delta_m_relation_id=DELTA_M_RELATION_ID,
-        m12_value=ComplexValue.from_complex(observable.M12_K_NP_GeV),
+        m12_value=ComplexValue.from_complex(frozen_m12),
         supported_operator_names=DEFAULT_KAON_SUPPORTED_OPERATORS,
         unsupported_operator_names=DEFAULT_KAON_UNSUPPORTED_OPERATORS,
         provenance_ids=(
