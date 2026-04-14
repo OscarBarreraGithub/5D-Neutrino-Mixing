@@ -74,7 +74,7 @@ def _complex_from_payload(name: str, payload: Any) -> complex:
 
 
 def _system_id_for_input_id(input_id: str) -> str:
-    if input_id == "epsilon_K":
+    if input_id in ("epsilon_K", "K"):
         return "K"
     if input_id in {"B_d", "B_s", "D0"}:
         return input_id
@@ -400,6 +400,11 @@ def build_modern_point_matching(
     prefactor = 1.0 / (couplings.M_KK**2)
     system_matches: list[ModernSystemMatching] = []
     for system_input in bundle.neutral_meson_inputs:
+        # K shares the same Wilson coefficients as epsilon_K; skip to avoid
+        # duplicate matching system entries.  The phenomenology sidecar
+        # evaluates K (Delta m_K) and epsilon_K from the same "K" backend.
+        if system_input.system_id == "K":
+            continue
         i, j = system_input.generations
         if system_input.sector_id == "down":
             left = _matrix_entry(couplings.left_down, i, j)

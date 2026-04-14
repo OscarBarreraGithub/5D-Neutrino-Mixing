@@ -509,7 +509,8 @@ class ModernScanResultRecord:
             != MODERN_POINT_PHENOMENOLOGY_NON_CP_ACCEPTANCE_SYSTEM_IDS
         ):
             raise ValueError(
-                "non_cp_acceptance_system_ids must be exactly ('B_d', 'B_s', 'D0')"
+                "non_cp_acceptance_system_ids must be exactly "
+                f"{MODERN_POINT_PHENOMENOLOGY_NON_CP_ACCEPTANCE_SYSTEM_IDS!r}"
             )
         object.__setattr__(
             self,
@@ -630,7 +631,7 @@ class ModernScanResultRecord:
             )
         expected_failing_system_ids = tuple(
             system_id
-            for system_id in ("epsilon_K", "B_d", "B_s", "D0")
+            for system_id in ("epsilon_K", "K", "B_d", "B_s", "D0")
             if (
                 system_id in self.failing_non_cp_system_ids
                 or system_id in self.diagnostic_failing_system_ids
@@ -640,14 +641,10 @@ class ModernScanResultRecord:
             raise ValueError(
                 "failing_system_ids must mirror the union of non-CP and diagnostic failures"
             )
-        expected_blocked_system_ids = tuple(
-            system_id
-            for system_id in ("K",)
-            if system_id in self.blocked_system_ids
-        )
-        if self.blocked_system_ids != expected_blocked_system_ids:
+        # No systems are blocked in the full Delta F = 2 release
+        if self.blocked_system_ids != ():
             raise ValueError(
-                "blocked_system_ids must preserve the frozen blocked-system order"
+                "blocked_system_ids must be empty in the full Delta F = 2 release"
             )
         expected_max_ratio = max(canonical_ratios.values(), default=0.0)
         object.__setattr__(self, "max_ratio_to_bound", float(self.max_ratio_to_bound))
@@ -1956,6 +1953,24 @@ def pilot_scan_config() -> ModernScanConfig:
     )
 
 
+def exploratory_scan_config() -> ModernScanConfig:
+    return ModernScanConfig(
+        r_values=np.logspace(np.log10(0.05), np.log10(0.8), 8),
+        overall_scale_values=np.array([3.0], dtype=float),
+        Lambda_IR_values=np.logspace(np.log10(1500.0), np.log10(10000.0), 8),
+        max_nfev=80,
+    )
+
+
+def production_scan_config() -> ModernScanConfig:
+    return ModernScanConfig(
+        r_values=np.logspace(np.log10(0.03), np.log10(1.0), 20),
+        overall_scale_values=np.array([2.0, 3.0, 4.0, 5.0], dtype=float),
+        Lambda_IR_values=np.logspace(np.log10(1000.0), np.log10(15000.0), 15),
+        max_nfev=120,
+    )
+
+
 def write_scan_config(config: ModernScanConfig, path: str | Path) -> Path:
     return _write_json(Path(path), config.as_dict())
 
@@ -2051,7 +2066,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "write-preset",
         help="write a smoke or pilot config snapshot",
     )
-    preset_parser.add_argument("preset", choices=("smoke", "pilot"))
+    preset_parser.add_argument("preset", choices=("smoke", "pilot", "exploratory", "production"))
     preset_parser.add_argument("output")
 
     run_parser = subparsers.add_parser(
@@ -2109,7 +2124,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(argv)
     if args.command == "write-preset":
-        config = smoke_scan_config() if args.preset == "smoke" else pilot_scan_config()
+        _preset_configs = {
+            "smoke": smoke_scan_config,
+            "pilot": pilot_scan_config,
+            "exploratory": exploratory_scan_config,
+            "production": production_scan_config,
+        }
+        config = _preset_configs[args.preset]()
         write_scan_config(config, args.output)
         return 0
     if args.command == "run-shard":
@@ -2186,10 +2207,12 @@ __all__ = [
     "enumerate_scan_points",
     "enumerate_modern_scan_points",
     "enumerate_modern_scan_shard_points",
+    "exploratory_scan_config",
     "main",
     "merge_scan_shards",
     "merge_modern_scan_shards",
     "pilot_scan_config",
+    "production_scan_config",
     "point_in_shard",
     "read_scan_config",
     "run_modern_scan_shard",

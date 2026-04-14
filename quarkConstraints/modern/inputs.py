@@ -48,7 +48,7 @@ MODERN_DEFAULT_QUARK_MASS_TARGET_SCHEMA_ID = (
 MODERN_DEFAULT_QCD_METADATA_SCHEMA_ID = (
     "quarkConstraints.modern.inputs.modern_default.qcd_metadata.v1"
 )
-MODERN_DEFAULT_NEUTRAL_MESON_SYSTEM_IDS = ("epsilon_K", "B_d", "B_s", "D0")
+MODERN_DEFAULT_NEUTRAL_MESON_SYSTEM_IDS = ("epsilon_K", "K", "B_d", "B_s", "D0")
 MODERN_DEFAULT_WEIGHT_POLICY_ID = (
     "quarkConstraints.modern.inputs.modern_default.operator_weights.repo_deltaf2_v1"
 )
@@ -894,15 +894,27 @@ def default_modern_default_neutral_meson_inputs() -> tuple[ModernDefaultNeutralM
     return (
         ModernDefaultNeutralMesonInput(
             system_id="epsilon_K",
-            observable_kind="cp_violation_surrogate",
+            observable_kind="cp_violation_epsilon_k",
             backend_key="epsilon_k",
             display_name="epsilon_K",
             column_name="epsilon_k_ratio",
             reject_reason="epsilon_k",
             sector_id="down",
             generations=(0, 1),
-            bound=2.0e-8,
-            note="Repo-owned kaon CP-violating surrogate bound from the v1 Delta F = 2 slice.",
+            bound=4.18e-4,
+            note="Kaon CP violation evaluated with proper hadronic matrix elements (BMU basis).",
+        ),
+        ModernDefaultNeutralMesonInput(
+            system_id="K",
+            observable_kind="non_cp_mixing_amplitude_kaon",
+            backend_key="epsilon_k",
+            display_name="K mixing (Delta m_K)",
+            column_name="delta_mk_ratio",
+            reject_reason="delta_mk",
+            sector_id="down",
+            generations=(0, 1),
+            bound=1.742e-15,
+            note="Kaon mass difference evaluated with proper hadronic matrix elements (BMU basis).",
         ),
         ModernDefaultNeutralMesonInput(
             system_id="B_d",

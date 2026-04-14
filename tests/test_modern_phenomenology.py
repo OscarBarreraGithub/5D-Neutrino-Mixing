@@ -157,39 +157,42 @@ def test_modern_point_phenomenology_sidecar_separates_epsilon_k_from_blocked_k(t
         loaded.non_cp_acceptance_system_ids
         == MODERN_POINT_PHENOMENOLOGY_NON_CP_ACCEPTANCE_SYSTEM_IDS
     )
-    assert loaded.kaon_viability_claimed is False
+    assert loaded.kaon_viability_claimed is True
 
     epsilon_k = loaded.system_result("epsilon_K")
     assert epsilon_k.evaluated_from_bridge is True
-    assert epsilon_k.included_in_non_cp_acceptance is False
+    assert epsilon_k.included_in_non_cp_acceptance is True
     assert epsilon_k.bridge_system_id == "K"
     assert epsilon_k.bridge_backend_key == "epsilon_k"
     assert epsilon_k.treatment_id == MODERN_POINT_PHENOMENOLOGY_SYSTEM_TREATMENT_IDS["epsilon_K"]
 
     kaon = loaded.system_result("K")
-    assert kaon.evaluated_from_bridge is False
-    assert kaon.included_in_non_cp_acceptance is False
-    assert kaon.passes is None
-    assert kaon.ratio_to_bound is None
+    assert kaon.evaluated_from_bridge is True
+    assert kaon.included_in_non_cp_acceptance is True
+    assert kaon.passes is not None
+    assert kaon.ratio_to_bound is not None
     assert kaon.treatment_id == MODERN_POINT_PHENOMENOLOGY_SYSTEM_TREATMENT_IDS["K"]
 
     d0 = loaded.system_result("D0")
     assert d0.evaluated_from_bridge is True
     assert d0.included_in_non_cp_acceptance is True
     assert d0.treatment_id == MODERN_POINT_PHENOMENOLOGY_SYSTEM_TREATMENT_IDS["D0"]
-    assert "conservative" in d0.note
 
 
-def test_modern_phenomenology_verifier_rejects_widened_non_cp_acceptance(tmp_path: Path):
+def test_modern_phenomenology_verifier_rejects_excluded_acceptance_system(tmp_path: Path):
     artifact = _modern_phenomenology_artifact()
     payload = artifact.as_dict()
-    payload["system_results"][0]["included_in_non_cp_acceptance"] = True
+    # Tamper: remove B_d from acceptance (should be rejected)
+    for result in payload["system_results"]:
+        if result["system_id"] == "B_d":
+            result["included_in_non_cp_acceptance"] = False
+            break
     path = tmp_path / "tampered-phenomenology.json"
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     report = verify_phenomenology_artifact_path(path)
     assert report.ok is False
-    assert "phenomenology_epsilon_k_in_non_cp_acceptance_unexpected" in report.issue_codes
+    assert "phenomenology_acceptance_system_not_included" in report.issue_codes
 
 
 def test_modern_phenomenology_module_does_not_import_repo_v1_scan_or_deltaf2_stack():

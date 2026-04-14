@@ -393,3 +393,120 @@ def evaluate_delta_f2_constraints(
 
 
 DeltaF2WilsonSet = DeltaF2WilsonCoefficients
+
+
+# ---------------------------------------------------------------------------
+# Kaon hadronic parameters for proper epsilon_K and Delta m_K evaluation
+# ---------------------------------------------------------------------------
+
+F_K = 0.1557              # GeV, kaon decay constant (PDG)
+M_K = 0.49761             # GeV, kaon mass (PDG)
+DELTA_M_K = 3.484e-15     # GeV, K_L - K_S mass difference (PDG)
+M_S_2GEV = 0.0934         # GeV, strange quark MS-bar mass at 2 GeV (FLAG)
+M_D_2GEV = 0.00467        # GeV, down quark MS-bar mass at 2 GeV (FLAG)
+B_1_K = 0.717             # VLL bag parameter (lattice, FLAG average)
+B_4_K = 0.78              # LR bag parameter (ETM 2013)
+B_5_K = 0.57              # LR bag parameter (ETM 2013)
+KAPPA_EPSILON = 0.94       # multiplicative correction (Buras et al.)
+EPSILON_K_EXP = 2.228e-3   # experimental value (PDG)
+EPSILON_K_SM = 1.81e-3     # SM prediction (CKMfitter central value)
+
+KAON_HADRONIC_PARAMS_V1 = "kaon_hadronic_params_bmu_2gev_v1"
+
+
+def _kaon_matrix_elements() -> dict[str, float]:
+    """Compute kaon hadronic matrix elements in the BMU basis at mu = 2 GeV.
+
+    Returns a dict with keys 'O1_VLL', 'O4_LR', 'O5_LR' giving the real-valued
+    hadronic matrix elements <K-bar|O_i|K> for each operator.  O1_VRR has the
+    same matrix element as O1_VLL by parity.
+    """
+    fk2_mk = F_K**2 * M_K
+    m_ratio_sq = (M_K / (M_S_2GEV + M_D_2GEV)) ** 2
+
+    o1_vll = (2.0 / 3.0) * fk2_mk * B_1_K
+    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * B_4_K
+    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * B_5_K
+
+    return {
+        "O1_VLL": o1_vll,
+        "O4_LR": o4_lr,
+        "O5_LR": o5_lr,
+    }
+
+
+def _compute_m12_np(wilsons: DeltaF2WilsonCoefficients) -> complex:
+    """Compute M_12^NP = sum_i C_i * <K-bar|O_i|K> for the kaon system."""
+    me = _kaon_matrix_elements()
+    return (
+        wilsons.c1_vll * me["O1_VLL"]
+        + wilsons.c1_vrr * me["O1_VLL"]   # VRR has same ME as VLL by parity
+        + wilsons.c4_lr * me["O4_LR"]
+        + wilsons.c5_lr * me["O5_LR"]
+    )
+
+
+@dataclass(frozen=True)
+class EpsilonKResult:
+    """NP contribution to epsilon_K from Delta F = 2 operators."""
+
+    im_m12_np: float           # Im(M_12^NP) in GeV
+    epsilon_k_np: float        # |epsilon_K^NP|
+    epsilon_k_np_budget: float  # allowed NP budget |epsilon_K^exp - epsilon_K^SM|
+    ratio_to_budget: float     # epsilon_k_np / budget
+    passes: bool               # ratio <= 1.0
+
+
+@dataclass(frozen=True)
+class DeltaMKResult:
+    """NP contribution to Delta m_K."""
+
+    abs_m12_np: float       # |M_12^NP| in GeV
+    ratio_to_exp: float     # |M_12^NP| / (Delta_m_K / 2)
+    passes: bool            # ratio <= 1.0 (NP shouldn't exceed experimental value)
+
+
+def evaluate_epsilon_k(
+    wilsons: DeltaF2WilsonCoefficients,
+) -> EpsilonKResult:
+    """Evaluate the NP contribution to epsilon_K using proper hadronic matrix elements.
+
+    This uses the physical formula:
+        epsilon_K^NP = (kappa_epsilon / (sqrt(2) * Delta_m_K)) * Im(M_12^NP)
+    and compares to the experimental budget |epsilon_K^exp - epsilon_K^SM|.
+    """
+    import math
+
+    m12_np = _compute_m12_np(wilsons)
+    im_m12_np = float(m12_np.imag)
+    epsilon_k_np = abs(KAPPA_EPSILON / (math.sqrt(2.0) * DELTA_M_K) * im_m12_np)
+    budget = abs(EPSILON_K_EXP - EPSILON_K_SM)
+    ratio = epsilon_k_np / budget if budget > 0.0 else float("inf")
+
+    return EpsilonKResult(
+        im_m12_np=im_m12_np,
+        epsilon_k_np=epsilon_k_np,
+        epsilon_k_np_budget=budget,
+        ratio_to_budget=ratio,
+        passes=ratio <= 1.0,
+    )
+
+
+def evaluate_delta_mk(
+    wilsons: DeltaF2WilsonCoefficients,
+) -> DeltaMKResult:
+    """Evaluate the NP contribution to Delta m_K.
+
+    The constraint is |M_12^NP| < Delta_m_K / 2 (NP should not exceed the
+    experimental mass difference).
+    """
+    m12_np = _compute_m12_np(wilsons)
+    abs_m12_np = abs(m12_np)
+    half_dm = DELTA_M_K / 2.0
+    ratio = abs_m12_np / half_dm if half_dm > 0.0 else float("inf")
+
+    return DeltaMKResult(
+        abs_m12_np=abs_m12_np,
+        ratio_to_exp=ratio,
+        passes=ratio <= 1.0,
+    )

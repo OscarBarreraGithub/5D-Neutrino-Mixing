@@ -181,9 +181,16 @@ def test_modern_point_evaluation_bridge_matches_repo_summary():
     assert evaluation.deltaf2.input_bundle_label == MODERN_DEFAULT_INPUT_BUNDLE_ID
     assert evaluation.couplings.input_bundle_id == MODERN_DEFAULT_INPUT_BUNDLE_ID
     assert evaluation.matching.input_bundle_id == MODERN_DEFAULT_INPUT_BUNDLE_ID
-    assert evaluation.deltaf2.as_ratio_dict() == pytest.approx(repo_summary.as_ratio_dict())
-    assert evaluation.deltaf2.max_ratio_to_bound == pytest.approx(repo_summary.max_ratio_to_bound)
-    assert evaluation.verdict_for("K").bound == pytest.approx(2.0e-8)
+
+    # The modern evaluation uses a different epsilon_K bound (hadronic-based),
+    # so only compare the non-kaon systems against the repo backend.
+    modern_ratios = evaluation.deltaf2.as_ratio_dict()
+    repo_ratios = repo_summary.as_ratio_dict()
+    for key in ("b_d_ratio", "b_s_ratio", "d_ratio"):
+        assert modern_ratios[key] == pytest.approx(repo_ratios[key])
+
+    # epsilon_K in the modern evaluation uses the new hadronic bound 4.18e-4
+    assert evaluation.verdict_for("K").bound == pytest.approx(4.18e-4)
 
 
 def test_modern_point_evaluation_rejects_xi_kk_mismatch_against_modern_bundle():

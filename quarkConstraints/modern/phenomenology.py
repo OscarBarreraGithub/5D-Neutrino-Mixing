@@ -31,15 +31,15 @@ MODERN_POINT_PHENOMENOLOGY_ARTIFACT_SCHEMA_ID = (
 )
 MODERN_POINT_PHENOMENOLOGY_ARTIFACT_SCHEMA_VERSION = 1
 MODERN_POINT_PHENOMENOLOGY_RELEASE_SCOPE_ID = (
-    "quarkConstraints.modern.phenomenology.release.non_cp_deltaf2.v1"
+    "quarkConstraints.modern.phenomenology.release.full_deltaf2.v1"
 )
 MODERN_POINT_PHENOMENOLOGY_BRIDGE_SCHEMA_ID = (
     "quarkConstraints.modern.artifacts.bridge.v1"
 )
-MODERN_POINT_PHENOMENOLOGY_NON_CP_ACCEPTANCE_SYSTEM_IDS = ("B_d", "B_s", "D0")
+MODERN_POINT_PHENOMENOLOGY_NON_CP_ACCEPTANCE_SYSTEM_IDS = ("epsilon_K", "K", "B_d", "B_s", "D0")
 MODERN_POINT_PHENOMENOLOGY_SYSTEM_TREATMENT_IDS = {
-    "epsilon_K": "cp_diagnostic_only",
-    "K": "blocked_pending_distinct_kaon_mixing_backend",
+    "epsilon_K": "cp_violation_epsilon_k",
+    "K": "non_cp_mixing_amplitude_kaon",
     "B_d": "non_cp_mixing_amplitude_surrogate",
     "B_s": "non_cp_mixing_amplitude_surrogate",
     "D0": "conservative_non_cp_mixing_amplitude_surrogate",
@@ -382,6 +382,115 @@ def _operator_sizes_from_bridge_match(
     return operator_sizes, dominant_operator, float(operator_sizes[dominant_operator])
 
 
+# --------------------------------------------------------------------------
+# Kaon hadronic parameters (inline, no deltaf2 import)
+# --------------------------------------------------------------------------
+
+_KAON_F_K = 0.1557
+_KAON_M_K = 0.49761
+_KAON_DELTA_M_K = 3.484e-15
+_KAON_M_S_2GEV = 0.0934
+_KAON_M_D_2GEV = 0.00467
+_KAON_B_1 = 0.717
+_KAON_B_4 = 0.78
+_KAON_B_5 = 0.57
+_KAON_KAPPA_EPSILON = 0.94
+_KAON_EPSILON_K_EXP = 2.228e-3
+_KAON_EPSILON_K_SM = 1.81e-3
+
+
+def _kaon_m12_np_from_bridge_match(
+    system_match: Mapping[str, Any],
+) -> complex:
+    """Compute M_12^NP for kaon system from bridge Wilson coefficients."""
+    c1_vll = _complex_from_payload("system_match.c1_vll", system_match["c1_vll"])
+    c1_vrr = _complex_from_payload("system_match.c1_vrr", system_match["c1_vrr"])
+    c4_lr = _complex_from_payload("system_match.c4_lr", system_match["c4_lr"])
+    c5_lr = _complex_from_payload("system_match.c5_lr", system_match["c5_lr"])
+
+    fk2_mk = _KAON_F_K**2 * _KAON_M_K
+    m_ratio_sq = (_KAON_M_K / (_KAON_M_S_2GEV + _KAON_M_D_2GEV)) ** 2
+
+    o1_vll = (2.0 / 3.0) * fk2_mk * _KAON_B_1
+    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * _KAON_B_4
+    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * _KAON_B_5
+
+    return (
+        c1_vll * o1_vll
+        + c1_vrr * o1_vll  # VRR has same ME as VLL by parity
+        + c4_lr * o4_lr
+        + c5_lr * o5_lr
+    )
+
+
+def _evaluate_epsilon_k_from_bridge(
+    system_match: Mapping[str, Any],
+) -> tuple[float, dict[str, float], str, float]:
+    """Evaluate epsilon_K^NP from bridge match and return (ratio_to_budget, operator_sizes, dominant, dominant_size)."""
+    m12_np = _kaon_m12_np_from_bridge_match(system_match)
+    im_m12_np = m12_np.imag
+    epsilon_k_np = abs(_KAON_KAPPA_EPSILON / (math.sqrt(2.0) * _KAON_DELTA_M_K) * im_m12_np)
+    budget = abs(_KAON_EPSILON_K_EXP - _KAON_EPSILON_K_SM)
+    ratio = epsilon_k_np / budget if budget > 0.0 else float("inf")
+
+    # Provide per-operator breakdown using imaginary parts
+    c1_vll = _complex_from_payload("system_match.c1_vll", system_match["c1_vll"])
+    c1_vrr = _complex_from_payload("system_match.c1_vrr", system_match["c1_vrr"])
+    c4_lr = _complex_from_payload("system_match.c4_lr", system_match["c4_lr"])
+    c5_lr = _complex_from_payload("system_match.c5_lr", system_match["c5_lr"])
+
+    fk2_mk = _KAON_F_K**2 * _KAON_M_K
+    m_ratio_sq = (_KAON_M_K / (_KAON_M_S_2GEV + _KAON_M_D_2GEV)) ** 2
+    o1_vll = (2.0 / 3.0) * fk2_mk * _KAON_B_1
+    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * _KAON_B_4
+    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * _KAON_B_5
+    prefactor = abs(_KAON_KAPPA_EPSILON / (math.sqrt(2.0) * _KAON_DELTA_M_K))
+
+    operator_sizes = {
+        "C1_VLL": float(prefactor * abs(c1_vll.imag * o1_vll)),
+        "C1_VRR": float(prefactor * abs(c1_vrr.imag * o1_vll)),
+        "C4_LR": float(prefactor * abs(c4_lr.imag * o4_lr)),
+        "C5_LR": float(prefactor * abs(c5_lr.imag * o5_lr)),
+    }
+    dominant_operator = max(operator_sizes, key=operator_sizes.get)
+    dominant_size = float(operator_sizes[dominant_operator])
+
+    return ratio, operator_sizes, dominant_operator, dominant_size
+
+
+def _evaluate_delta_mk_from_bridge(
+    system_match: Mapping[str, Any],
+) -> tuple[float, dict[str, float], str, float]:
+    """Evaluate Delta m_K NP contribution from bridge match."""
+    m12_np = _kaon_m12_np_from_bridge_match(system_match)
+    abs_m12_np = abs(m12_np)
+    half_dm = _KAON_DELTA_M_K / 2.0
+    ratio = abs_m12_np / half_dm if half_dm > 0.0 else float("inf")
+
+    # Per-operator breakdown using absolute values
+    c1_vll = _complex_from_payload("system_match.c1_vll", system_match["c1_vll"])
+    c1_vrr = _complex_from_payload("system_match.c1_vrr", system_match["c1_vrr"])
+    c4_lr = _complex_from_payload("system_match.c4_lr", system_match["c4_lr"])
+    c5_lr = _complex_from_payload("system_match.c5_lr", system_match["c5_lr"])
+
+    fk2_mk = _KAON_F_K**2 * _KAON_M_K
+    m_ratio_sq = (_KAON_M_K / (_KAON_M_S_2GEV + _KAON_M_D_2GEV)) ** 2
+    o1_vll = (2.0 / 3.0) * fk2_mk * _KAON_B_1
+    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * _KAON_B_4
+    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * _KAON_B_5
+
+    operator_sizes = {
+        "C1_VLL": float(abs(c1_vll * o1_vll)),
+        "C1_VRR": float(abs(c1_vrr * o1_vll)),
+        "C4_LR": float(abs(c4_lr * o4_lr)),
+        "C5_LR": float(abs(c5_lr * o5_lr)),
+    }
+    dominant_operator = max(operator_sizes, key=operator_sizes.get)
+    dominant_size = float(operator_sizes[dominant_operator])
+
+    return ratio, operator_sizes, dominant_operator, dominant_size
+
+
 @dataclass(frozen=True)
 class ModernPhenomenologySystemResult:
     """Explicit per-system modern phenomenology result for the QS5 sidecar."""
@@ -663,12 +772,12 @@ class ModernPointPhenomenologyArtifactV1:
     )
     non_cp_passes: bool = False
     failing_non_cp_system_ids: tuple[str, ...] = ()
-    kaon_viability_claimed: bool = False
+    kaon_viability_claimed: bool = True
     notes: str = (
-        "Explicit modern QS5 sidecar for the first non-CP release. B_d, B_s, "
-        "and conservative D0 are acceptance-bearing here; epsilon_K is tracked "
-        "as a CP diagnostic only, and a separate non-CP kaon-viability claim "
-        "remains blocked until a distinct modern K backend exists."
+        "Explicit modern QS5 sidecar for the full Delta F = 2 release. All five "
+        "systems (epsilon_K, K, B_d, B_s, D0) are acceptance-bearing. epsilon_K "
+        "uses proper hadronic matrix elements for CP violation, and K uses "
+        "proper hadronic matrix elements for non-CP kaon mass difference."
     )
 
     def __post_init__(self) -> None:
@@ -770,7 +879,8 @@ class ModernPointPhenomenologyArtifactV1:
         object.__setattr__(self, "xi_KK", _require_positive_float("xi_KK", self.xi_KK))
         if tuple(self.non_cp_acceptance_system_ids) != MODERN_POINT_PHENOMENOLOGY_NON_CP_ACCEPTANCE_SYSTEM_IDS:
             raise ValueError(
-                "non_cp_acceptance_system_ids must be exactly ('B_d', 'B_s', 'D0')"
+                "non_cp_acceptance_system_ids must be exactly "
+                f"{MODERN_POINT_PHENOMENOLOGY_NON_CP_ACCEPTANCE_SYSTEM_IDS!r}"
             )
         normalized_results = tuple(self.system_results)
         if tuple(result.system_id for result in normalized_results) != MODERN_PHENOMENOLOGY_SYSTEM_IDS:
@@ -802,8 +912,8 @@ class ModernPointPhenomenologyArtifactV1:
             "kaon_viability_claimed",
             _require_bool("kaon_viability_claimed", self.kaon_viability_claimed),
         )
-        if self.kaon_viability_claimed:
-            raise ValueError("kaon_viability_claimed must remain false for this release scope")
+        if not self.kaon_viability_claimed:
+            raise ValueError("kaon_viability_claimed must be true for the full Delta F = 2 release scope")
         object.__setattr__(self, "notes", _require_text("notes", self.notes))
 
     @property
@@ -1014,49 +1124,45 @@ class ModernPointPhenomenologyArtifactV1:
         for system_id in MODERN_PHENOMENOLOGY_SYSTEM_IDS:
             policy_system = resolved_policy.system_policy(system_id)
             treatment_id = MODERN_POINT_PHENOMENOLOGY_SYSTEM_TREATMENT_IDS[system_id]
-            if system_id == "K":
-                results.append(
-                    ModernPhenomenologySystemResult(
-                        system_id=system_id,
-                        policy_system_id=policy_system.system_id,
-                        policy_id=policy_system.policy_id,
-                        policy_display_name=policy_system.display_name,
-                        observable_kind="not_available_in_current_bundle",
-                        treatment_id=treatment_id,
-                        evaluated_from_bridge=False,
-                        included_in_non_cp_acceptance=False,
-                        note=(
-                            "No distinct CP-even kaon-mixing observable is exported in the "
-                            "current modern bundle. This first non-CP release therefore does "
-                            "not claim kaon viability."
-                        ),
-                    )
-                )
-                continue
-            bridge_system_id = "K" if system_id == "epsilon_K" else system_id
+            bridge_system_id = "K" if system_id in ("epsilon_K", "K") else system_id
             system_match = system_matches[bridge_system_id]
             input_item = bundle_inputs[system_id]
-            operator_sizes, dominant_operator, dominant_size = _operator_sizes_from_bridge_match(
-                system_match,
-                ll_weight=weights.ll_weight,
-                rr_weight=weights.rr_weight,
-                lr1_weight=weights.lr1_weight,
-                lr2_weight=weights.lr2_weight,
-                reference_scale=weights.reference_scale_GeV,
-            )
-            ratio_to_bound = float(dominant_size / input_item.bound)
-            base_note = input_item.note
+
             if system_id == "epsilon_K":
-                note = (
-                    f"{base_note} Tracked explicitly as a CP diagnostic only and "
-                    "excluded from non-CP acceptance."
+                # CP-violating epsilon_K uses proper hadronic matrix elements
+                ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
+                    _evaluate_epsilon_k_from_bridge(system_match)
                 )
-            elif system_id == "D0":
                 note = (
-                    f"{base_note} Included in non-CP acceptance with conservative D0 treatment."
+                    f"{input_item.note} Evaluated with proper hadronic matrix elements "
+                    "for CP-violating kaon mixing. Included in acceptance."
+                )
+            elif system_id == "K":
+                # Non-CP Delta m_K uses proper hadronic matrix elements
+                ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
+                    _evaluate_delta_mk_from_bridge(system_match)
+                )
+                note = (
+                    f"{input_item.note} Evaluated with proper hadronic matrix elements "
+                    "for non-CP kaon mass difference. Included in acceptance."
                 )
             else:
-                note = f"{base_note} Included in non-CP acceptance."
+                operator_sizes, dominant_operator, dominant_size = _operator_sizes_from_bridge_match(
+                    system_match,
+                    ll_weight=weights.ll_weight,
+                    rr_weight=weights.rr_weight,
+                    lr1_weight=weights.lr1_weight,
+                    lr2_weight=weights.lr2_weight,
+                    reference_scale=weights.reference_scale_GeV,
+                )
+                ratio_to_bound = float(dominant_size / input_item.bound)
+                if system_id == "D0":
+                    note = (
+                        f"{input_item.note} Included in acceptance with conservative D0 treatment."
+                    )
+                else:
+                    note = f"{input_item.note} Included in acceptance."
+
             results.append(
                 ModernPhenomenologySystemResult(
                     system_id=system_id,

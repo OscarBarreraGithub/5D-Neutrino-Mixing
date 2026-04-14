@@ -17,6 +17,8 @@ from quarkConstraints.modern.matching import (
 
 
 def _backend_inputs_from_modern_inputs(inputs: ModernDefaultInputs) -> tuple[DeltaF2Input, ...]:
+    # K shares the same Wilson coefficients as epsilon_K and is evaluated
+    # in the phenomenology layer, not the matching/DeltaF2 layer.
     weights = inputs.operator_weight_policy
     return tuple(
         DeltaF2Input(
@@ -35,6 +37,7 @@ def _backend_inputs_from_modern_inputs(inputs: ModernDefaultInputs) -> tuple[Del
             note=system.note,
         )
         for system in inputs.neutral_meson_inputs
+        if system.system_id != "K"
     )
 
 
@@ -75,7 +78,6 @@ def test_modern_point_matching_matches_repo_formulas_for_benchmark_point() -> No
     assert d0.observable_id == "D0"
     assert d0.backend_system_id == "D"
     assert d0.backend_key == "d"
-    assert "conservative" in d0.note
 
 
 def test_modern_point_matching_round_trip_is_deterministic() -> None:

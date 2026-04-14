@@ -147,9 +147,9 @@ def test_modern_scan_resume_is_idempotent(tmp_path: Path, monkeypatch, modern_sc
     assert rows[0]["phenomenology_release_scope_id"] == (
         modern_scan_module.MODERN_POINT_PHENOMENOLOGY_RELEASE_SCOPE_ID
     )
-    assert rows[0]["non_cp_acceptance_system_ids"] == ["B_d", "B_s", "D0"]
-    assert rows[0]["diagnostic_only_system_ids"] == ["epsilon_K"]
-    assert rows[0]["blocked_system_ids"] == ["K"]
+    assert rows[0]["non_cp_acceptance_system_ids"] == ["epsilon_K", "K", "B_d", "B_s", "D0"]
+    assert rows[0]["diagnostic_only_system_ids"] == []
+    assert rows[0]["blocked_system_ids"] == []
     assert rows[0]["phenomenology_verifier_ok"] is True
 
     second_manifest = modern_scan_module.run_modern_scan_shard(
@@ -299,9 +299,9 @@ def test_modern_scan_shard_and_merge_smoke_path(
         == modern_scan_module.MODERN_POINT_PHENOMENOLOGY_RELEASE_SCOPE_ID
         for row in merged_rows
     )
-    assert all(row["non_cp_acceptance_system_ids"] == ["B_d", "B_s", "D0"] for row in merged_rows)
-    assert all(row["diagnostic_only_system_ids"] == ["epsilon_K"] for row in merged_rows)
-    assert all(row["blocked_system_ids"] == ["K"] for row in merged_rows)
+    assert all(row["non_cp_acceptance_system_ids"] == ["epsilon_K", "K", "B_d", "B_s", "D0"] for row in merged_rows)
+    assert all(row["diagnostic_only_system_ids"] == [] for row in merged_rows)
+    assert all(row["blocked_system_ids"] == [] for row in merged_rows)
 
     artifact_path = output_root / str(merged_rows[0]["artifact_path"])
     bridge_artifact_path = output_root / str(merged_rows[0]["bridge_artifact_path"])
@@ -379,7 +379,7 @@ def test_modern_scan_accepts_preset_config_at_run_root(
     assert run_config_payload["config"]["schema_id"] == modern_scan_module.MODERN_SCAN_CONFIG_SCHEMA_ID
 
 
-def test_modern_scan_acceptance_ignores_diagnostic_epsilon_k_failure(
+def test_modern_scan_rejects_epsilon_k_acceptance_failure(
     tmp_path: Path,
     monkeypatch,
     modern_scan_module,
@@ -406,7 +406,7 @@ def test_modern_scan_acceptance_ignores_diagnostic_epsilon_k_failure(
         record_git_metadata=False,
         max_nfev=1,
     )
-    output_root = tmp_path / "diagnostic-failure-run"
+    output_root = tmp_path / "epsilon-k-failure-run"
 
     modern_scan_module.run_modern_scan_shard(
         config,
@@ -418,12 +418,12 @@ def test_modern_scan_acceptance_ignores_diagnostic_epsilon_k_failure(
         output_root / "shards" / "shard-00000-of-00001" / "results.jsonl"
     )[0]
 
-    assert row["accepted"] is True
-    assert row["phenomenology_passes"] is True
-    assert row["failing_non_cp_system_ids"] == []
-    assert row["diagnostic_failing_system_ids"] == ["epsilon_K"]
-    assert list(row["non_cp_ratio_to_bound_by_system"]) == ["B_d", "B_s", "D0"]
-    assert row["diagnostic_ratio_to_bound_by_system"] == {"epsilon_K": 2.0}
+    # epsilon_K is now acceptance-bearing, so its failure blocks acceptance
+    assert row["accepted"] is False
+    assert row["phenomenology_passes"] is False
+    assert row["failing_non_cp_system_ids"] == ["epsilon_K"]
+    assert row["diagnostic_failing_system_ids"] == []
+    assert "epsilon_K" in row["non_cp_ratio_to_bound_by_system"]
 
 
 def test_modern_scan_rejects_non_cp_acceptance_failure(
@@ -469,4 +469,4 @@ def test_modern_scan_rejects_non_cp_acceptance_failure(
     assert row["phenomenology_passes"] is False
     assert row["failing_non_cp_system_ids"] == ["B_d"]
     assert row["diagnostic_failing_system_ids"] == []
-    assert row["blocked_system_ids"] == ["K"]
+    assert row["blocked_system_ids"] == []

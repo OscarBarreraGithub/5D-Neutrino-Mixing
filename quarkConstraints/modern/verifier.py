@@ -994,14 +994,17 @@ def verify_phenomenology_artifact(
         _append_issue(
             issues,
             code="phenomenology_non_cp_acceptance_system_ids_mismatch",
-            message="artifact non_cp_acceptance_system_ids must be exactly B_d/B_s/D0",
+            message=(
+                "artifact non_cp_acceptance_system_ids must be exactly "
+                f"{contract.non_cp_acceptance_system_ids!r}"
+            ),
             subject="non_cp_acceptance_system_ids",
         )
-    if artifact.kaon_viability_claimed:
+    if not artifact.kaon_viability_claimed:
         _append_issue(
             issues,
-            code="phenomenology_kaon_viability_claim_widened",
-            message="artifact must not claim kaon viability in this non-CP release scope",
+            code="phenomenology_kaon_viability_claim_missing",
+            message="artifact must claim kaon viability in the full Delta F = 2 release scope",
             subject="kaon_viability_claimed",
         )
     if not math.isfinite(artifact.M_KK) or artifact.M_KK <= 0.0:
@@ -1059,43 +1062,19 @@ def verify_phenomenology_artifact(
                 ),
                 subject=result.system_id,
             )
-        if result.system_id == "K":
-            if result.evaluated_from_bridge:
-                _append_issue(
-                    issues,
-                    code="phenomenology_k_evaluated_from_bridge_unexpected",
-                    message="K must remain blocked, not bridge-evaluated, in this release scope",
-                    subject=result.system_id,
-                )
-            if result.included_in_non_cp_acceptance:
-                _append_issue(
-                    issues,
-                    code="phenomenology_k_in_non_cp_acceptance_unexpected",
-                    message="K must not be included in non-CP acceptance in this release scope",
-                    subject=result.system_id,
-                )
-            continue
         if not result.evaluated_from_bridge:
             _append_issue(
                 issues,
                 code="phenomenology_bridge_evaluation_missing",
-                message="evaluated systems must be sourced from the exported bridge artifact",
+                message="all systems must be sourced from the exported bridge artifact",
                 subject=result.system_id,
             )
             continue
-        if result.system_id == "epsilon_K":
-            if result.included_in_non_cp_acceptance:
-                _append_issue(
-                    issues,
-                    code="phenomenology_epsilon_k_in_non_cp_acceptance_unexpected",
-                    message="epsilon_K must remain diagnostic-only in this non-CP release scope",
-                    subject=result.system_id,
-                )
-        elif not result.included_in_non_cp_acceptance:
+        if not result.included_in_non_cp_acceptance:
             _append_issue(
                 issues,
                 code="phenomenology_acceptance_system_not_included",
-                message="B_d, B_s, and D0 must remain in non-CP acceptance",
+                message="all systems must be included in acceptance",
                 subject=result.system_id,
             )
         if result.passes is False and result.included_in_non_cp_acceptance:

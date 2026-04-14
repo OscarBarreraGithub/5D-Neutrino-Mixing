@@ -137,6 +137,9 @@ def _coerce_fit_result(
 def _deltaf2_inputs_from_modern_inputs(
     bundle: ModernDefaultInputs,
 ) -> tuple[DeltaF2Input, ...]:
+    # The K system shares the same backend key as epsilon_K and is evaluated
+    # separately via hadronic matrix elements in the phenomenology layer.
+    # Skip it here to avoid duplicate backend keys in the DeltaF2 layer.
     weights = bundle.operator_weight_policy
     return tuple(
         DeltaF2Input(
@@ -158,6 +161,7 @@ def _deltaf2_inputs_from_modern_inputs(
             ),
         )
         for system in bundle.neutral_meson_inputs
+        if system.system_id != "K"
     )
 
 
