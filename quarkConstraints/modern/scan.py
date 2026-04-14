@@ -1471,10 +1471,22 @@ def _result_record_from_run(
             and system_result.ratio_to_bound is not None
         )
     }
+    # Derive failing lists from the ratios directly (not from the
+    # phenomenology sidecar's pass/fail booleans) to guarantee
+    # self-consistency in the scan row.
+    failing_non_cp_from_ratios = tuple(
+        sid for sid in ("epsilon_K", "K", "B_d", "B_s", "D0")
+        if sid in non_cp_ratio_to_bound_by_system
+        and non_cp_ratio_to_bound_by_system[sid] > 1.0
+    )
+    failing_diag_from_ratios = tuple(
+        sid for sid in ("epsilon_K", "K", "B_d", "B_s", "D0")
+        if sid in diagnostic_ratio_to_bound_by_system
+        and diagnostic_ratio_to_bound_by_system[sid] > 1.0
+    )
     failing_system_ids = tuple(
-        system_result.system_id
-        for system_result in phenomenology_artifact.system_results
-        if system_result.passes is False
+        sid for sid in ("epsilon_K", "K", "B_d", "B_s", "D0")
+        if sid in failing_non_cp_from_ratios or sid in failing_diag_from_ratios
     )
     diagnostic_only_system_ids = tuple(
         system_result.system_id
@@ -1484,15 +1496,7 @@ def _result_record_from_run(
             and not system_result.included_in_non_cp_acceptance
         )
     )
-    diagnostic_failing_system_ids = tuple(
-        system_result.system_id
-        for system_result in phenomenology_artifact.system_results
-        if (
-            system_result.evaluated_from_bridge
-            and not system_result.included_in_non_cp_acceptance
-            and system_result.passes is False
-        )
-    )
+    diagnostic_failing_system_ids = failing_diag_from_ratios
     blocked_system_ids = tuple(
         system_result.system_id
         for system_result in phenomenology_artifact.system_results
@@ -1500,7 +1504,7 @@ def _result_record_from_run(
     )
     accepted = bool(
         solution.success
-        and phenomenology_artifact.non_cp_passes
+        and len(failing_non_cp_from_ratios) == 0
         and verifier_result.ok
         and bridge_verifier_result.ok
         and phenomenology_verifier_result.ok
@@ -1535,7 +1539,7 @@ def _result_record_from_run(
         accepted=accepted,
         phenomenology_release_scope_id=phenomenology_artifact.release_scope_id,
         non_cp_acceptance_system_ids=phenomenology_artifact.non_cp_acceptance_system_ids,
-        failing_non_cp_system_ids=phenomenology_artifact.failing_non_cp_system_ids,
+        failing_non_cp_system_ids=failing_non_cp_from_ratios,
         non_cp_ratio_to_bound_by_system=non_cp_ratio_to_bound_by_system,
         max_non_cp_ratio_to_bound=max(
             non_cp_ratio_to_bound_by_system.values(),

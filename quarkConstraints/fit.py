@@ -685,12 +685,17 @@ def fit_quark_sector(
     initial_result = evaluate_quark_fit(initial_point, targets, bulk_mass_map=bulk_map)
 
     def residual_vector(vector: np.ndarray) -> np.ndarray:
-        candidate = _decode_seed(vector, template, fit_orientation)
-        point = _seed_to_point(candidate, r=r, Lambda_IR=Lambda_IR, k=k)
-        result = evaluate_quark_fit(point, targets, bulk_mass_map=bulk_map)
-        return np.concatenate(
-            [result.mass_residuals_up, result.mass_residuals_down, result.ckm_residuals]
-        )
+        try:
+            candidate = _decode_seed(vector, template, fit_orientation)
+            point = _seed_to_point(candidate, r=r, Lambda_IR=Lambda_IR, k=k)
+            result = evaluate_quark_fit(point, targets, bulk_mass_map=bulk_map)
+            return np.concatenate(
+                [result.mass_residuals_up, result.mass_residuals_down, result.ckm_residuals]
+            )
+        except (ValueError, np.linalg.LinAlgError):
+            # Return large residuals for unphysical parameter regions
+            # (e.g., negative bulk-mass eigenvalues at extreme r/scale)
+            return np.full(10, 1e6)
 
     optimum = least_squares(
         residual_vector,
