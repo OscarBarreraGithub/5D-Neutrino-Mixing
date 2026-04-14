@@ -2002,6 +2002,16 @@ def production_scan_config() -> ModernScanConfig:
     )
 
 
+def dense_scan_config() -> ModernScanConfig:
+    """Dense scan preset: 100 r × 20 overall_scale × 50 Lambda_IR = 100,000 points."""
+    return ModernScanConfig(
+        r_values=np.logspace(np.log10(0.02), np.log10(2.0), 100),
+        overall_scale_values=np.linspace(1.5, 6.0, 20),
+        Lambda_IR_values=np.logspace(np.log10(500.0), np.log10(20000.0), 50),
+        max_nfev=120,
+    )
+
+
 def write_scan_config(config: ModernScanConfig, path: str | Path) -> Path:
     return _write_json(Path(path), config.as_dict())
 
@@ -2097,7 +2107,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "write-preset",
         help="write a smoke or pilot config snapshot",
     )
-    preset_parser.add_argument("preset", choices=("smoke", "pilot", "exploratory", "production"))
+    preset_parser.add_argument("preset", choices=("smoke", "pilot", "exploratory", "production", "dense"))
     preset_parser.add_argument("output")
 
     run_parser = subparsers.add_parser(
@@ -2160,6 +2170,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "pilot": pilot_scan_config,
             "exploratory": exploratory_scan_config,
             "production": production_scan_config,
+            "dense": dense_scan_config,
         }
         config = _preset_configs[args.preset]()
         write_scan_config(config, args.output)
@@ -2238,6 +2249,7 @@ __all__ = [
     "enumerate_scan_points",
     "enumerate_modern_scan_points",
     "enumerate_modern_scan_shard_points",
+    "dense_scan_config",
     "exploratory_scan_config",
     "main",
     "merge_scan_shards",

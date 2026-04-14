@@ -169,23 +169,41 @@ def _deltaf2_summary_from_matching(
     matching: ModernPointMatching,
     *,
     bundle: ModernDefaultInputs,
+    apply_qcd_running: bool = True,
+    mu_had: float = 2.0,
 ) -> DeltaF2ConstraintSummary:
+    from ..qcd_running import evolve_deltaf2_wilsons
+
     backend_inputs = {
         item.key: item for item in _deltaf2_inputs_from_modern_inputs(bundle)
     }
     observables: list[DeltaF2ObservableSummary] = []
     for system in matching.systems:
         item = backend_inputs[system.backend_key]
+        c1_vll = complex(system.c1_vll)
+        c1_vrr = complex(system.c1_vrr)
+        c4_lr = complex(system.c4_lr)
+        c5_lr = complex(system.c5_lr)
+        evolved_scale = float(system.matching_scale_GeV)
+
+        if apply_qcd_running:
+            c1_vll, c1_vrr, c4_lr, c5_lr = evolve_deltaf2_wilsons(
+                c1_vll, c1_vrr, c4_lr, c5_lr,
+                mu_high=float(system.matching_scale_GeV),
+                mu_low=mu_had,
+            )
+            evolved_scale = mu_had
+
         wilsons = DeltaF2WilsonCoefficients(
             input=item,
             M_KK=float(matching.M_KK),
-            matching_scale=float(system.matching_scale_GeV),
+            matching_scale=evolved_scale,
             left_coupling=complex(system.left_coupling),
             right_coupling=complex(system.right_coupling),
-            c1_vll=complex(system.c1_vll),
-            c1_vrr=complex(system.c1_vrr),
-            c4_lr=complex(system.c4_lr),
-            c5_lr=complex(system.c5_lr),
+            c1_vll=c1_vll,
+            c1_vrr=c1_vrr,
+            c4_lr=c4_lr,
+            c5_lr=c5_lr,
         )
         weighted = {
             "C1_VLL": item.ll_weight * wilsons.c1_vll,

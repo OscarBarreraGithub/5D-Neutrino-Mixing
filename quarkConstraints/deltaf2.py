@@ -342,8 +342,36 @@ def evaluate_delta_f2_constraints(
     M_KK: float | None = None,
     xi_KK: float = DEFAULT_QUARK_XI_KK,
     inputs: Sequence[DeltaF2Input] | None = None,
+    apply_qcd_running: bool = True,
+    mu_had: float = 2.0,
 ) -> DeltaF2ConstraintSummary:
-    """Evaluate the repo-owned ``Delta F = 2`` benchmark bundle."""
+    """Evaluate the repo-owned ``Delta F = 2`` benchmark bundle.
+
+    By default, Wilson coefficients are QCD-evolved from the matching scale
+    (M_KK) down to the hadronic scale ``mu_had`` (default 2 GeV) using
+    leading-log RG running before applying the exclusion bound. This is the
+    physically correct procedure since the hadronic matrix elements are
+    evaluated at mu_had.
+
+    Set ``apply_qcd_running=False`` to recover the previous behavior of using
+    Wilson coefficients at the matching scale without running (backward
+    compatible).
+
+    Parameters
+    ----------
+    source : QuarkFitResult or QuarkMassBasisCouplings
+        Fitted result or explicit mass-basis couplings.
+    M_KK : float, optional
+        KK mass scale in GeV.
+    xi_KK : float
+        KK convention factor.
+    inputs : sequence of DeltaF2Input, optional
+        Override the default input bundle.
+    apply_qcd_running : bool
+        If True (default), evolve Wilson coefficients from M_KK to mu_had.
+    mu_had : float
+        Hadronic scale for RG evolution in GeV (default 2.0).
+    """
     couplings = _coerce_couplings(source, M_KK=M_KK, xi_KK=xi_KK)
     coefficients = compute_delta_f2_wilsons(
         couplings,
@@ -353,12 +381,17 @@ def evaluate_delta_f2_constraints(
     )
     observables: list[DeltaF2ObservableSummary] = []
     for coeffs in coefficients:
-        item = coeffs.input
+        # Optionally evolve Wilson coefficients to the hadronic scale
+        if apply_qcd_running:
+            evolved_coeffs = _evolve_wilsons(coeffs, mu_had=mu_had)
+        else:
+            evolved_coeffs = coeffs
+        item = evolved_coeffs.input
         weighted = {
-            "C1_VLL": item.ll_weight * coeffs.c1_vll,
-            "C1_VRR": item.rr_weight * coeffs.c1_vrr,
-            "C4_LR": item.lr1_weight * coeffs.c4_lr,
-            "C5_LR": item.lr2_weight * coeffs.c5_lr,
+            "C1_VLL": item.ll_weight * evolved_coeffs.c1_vll,
+            "C1_VRR": item.rr_weight * evolved_coeffs.c1_vrr,
+            "C4_LR": item.lr1_weight * evolved_coeffs.c4_lr,
+            "C5_LR": item.lr2_weight * evolved_coeffs.c5_lr,
         }
         operator_sizes = {
             name: float(item.reference_scale**2 * abs(value))
@@ -373,7 +406,7 @@ def evaluate_delta_f2_constraints(
         observables.append(
             DeltaF2ObservableSummary(
                 input=item,
-                wilsons=coeffs,
+                wilsons=evolved_coeffs,
                 effective_amplitude=effective_amplitude,
                 coherent_amplitude=coherent_amplitude,
                 ratio_to_bound=ratio_to_bound,
@@ -393,6 +426,38 @@ def evaluate_delta_f2_constraints(
 
 
 DeltaF2WilsonSet = DeltaF2WilsonCoefficients
+
+
+def _evolve_wilsons(
+    wilsons: DeltaF2WilsonCoefficients,
+    mu_had: float = 2.0,
+) -> DeltaF2WilsonCoefficients:
+    """Return a new DeltaF2WilsonCoefficients with QCD-evolved coefficients.
+
+    Uses leading-log QCD RG evolution from the matching scale (M_KK) down to
+    mu_had, following the anomalous dimensions of Buras, Misiak, Urban (2000).
+    """
+    from .qcd_running import evolve_deltaf2_wilsons
+
+    c_vll_low, c_vrr_low, c4_lr_low, c5_lr_low = evolve_deltaf2_wilsons(
+        wilsons.c1_vll,
+        wilsons.c1_vrr,
+        wilsons.c4_lr,
+        wilsons.c5_lr,
+        mu_high=wilsons.matching_scale,
+        mu_low=mu_had,
+    )
+    return DeltaF2WilsonCoefficients(
+        input=wilsons.input,
+        M_KK=wilsons.M_KK,
+        matching_scale=mu_had,
+        left_coupling=wilsons.left_coupling,
+        right_coupling=wilsons.right_coupling,
+        c1_vll=c_vll_low,
+        c1_vrr=c_vrr_low,
+        c4_lr=c4_lr_low,
+        c5_lr=c5_lr_low,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -510,3 +575,56 @@ def evaluate_delta_mk(
         ratio_to_exp=ratio,
         passes=ratio <= 1.0,
     )
+
+
+def evaluate_epsilon_k_with_running(
+    wilsons: DeltaF2WilsonCoefficients,
+    mu_had: float = 2.0,
+) -> EpsilonKResult:
+    """Like ``evaluate_epsilon_k`` but with QCD RG evolution from M_KK to mu_had.
+
+    The Wilson coefficients are evolved from the matching scale stored in
+    ``wilsons.matching_scale`` (typically M_KK) down to ``mu_had`` (default 2 GeV)
+    using leading-log QCD running before evaluating epsilon_K with the hadronic
+    matrix elements at that scale.
+
+    Parameters
+    ----------
+    wilsons : DeltaF2WilsonCoefficients
+        Wilson coefficients at the matching scale.
+    mu_had : float
+        Hadronic scale in GeV (default 2.0).
+
+    Returns
+    -------
+    EpsilonKResult
+        The epsilon_K evaluation with RG-evolved Wilson coefficients.
+    """
+    evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
+    return evaluate_epsilon_k(evolved)
+
+
+def evaluate_delta_mk_with_running(
+    wilsons: DeltaF2WilsonCoefficients,
+    mu_had: float = 2.0,
+) -> DeltaMKResult:
+    """Like ``evaluate_delta_mk`` but with QCD RG evolution from M_KK to mu_had.
+
+    The Wilson coefficients are evolved from the matching scale stored in
+    ``wilsons.matching_scale`` (typically M_KK) down to ``mu_had`` (default 2 GeV)
+    using leading-log QCD running before evaluating Delta m_K.
+
+    Parameters
+    ----------
+    wilsons : DeltaF2WilsonCoefficients
+        Wilson coefficients at the matching scale.
+    mu_had : float
+        Hadronic scale in GeV (default 2.0).
+
+    Returns
+    -------
+    DeltaMKResult
+        The Delta m_K evaluation with RG-evolved Wilson coefficients.
+    """
+    evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
+    return evaluate_delta_mk(evolved)
