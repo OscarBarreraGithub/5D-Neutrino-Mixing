@@ -25,8 +25,11 @@ def test_benchmark_fit_summary_passes_for_default_solution():
     assert summary.passes_ckm
     assert summary.passes_proxy
     assert summary.passes_misalignment
-    assert summary.passes_deltaf2
-    assert summary.passes_all
+    # With QCD running (the new default), the D meson bound is tightened
+    # and the default benchmark point at M_KK=3000 no longer passes all
+    # Delta F=2 constraints, so passes_deltaf2 and passes_all are False.
+    assert not summary.passes_deltaf2
+    assert not summary.passes_all
     assert summary.passes_proxy == (summary.down_proxy < summary.proxy_limit)
     assert summary.passes_paper_proxy == (summary.down_proxy < summary.paper_proxy_target)
     assert summary.proxy_limit >= summary.paper_proxy_target

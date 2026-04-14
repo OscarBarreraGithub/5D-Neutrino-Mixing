@@ -9,6 +9,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
+from ..qcd_running import evolve_deltaf2_wilsons
 from .conventions import MODERN_INPUT_REGISTRY_SCHEMA_ID, MODERN_LANE_ID
 from .inputs import (
     MODERN_DEFAULT_INPUTS_SCHEMA_ID,
@@ -358,6 +359,37 @@ def _bridge_payload_from_source(source: Any) -> Mapping[str, Any]:
             f"{MODERN_POINT_PHENOMENOLOGY_BRIDGE_SCHEMA_ID!r}"
         )
     return mapping
+
+
+def _evolve_bridge_wilsons(
+    system_match: Mapping[str, Any],
+    *,
+    mu_had: float = 2.0,
+) -> Mapping[str, Any]:
+    """Return a copy of *system_match* with Wilson coefficients evolved to *mu_had*.
+
+    The bridge stores Wilson coefficients at the KK matching scale.  This helper
+    applies leading-log QCD running via ``evolve_deltaf2_wilsons`` so that the
+    phenomenology sidecar uses the same evolved coefficients as the evaluation
+    layer.
+    """
+    c1_vll = _complex_from_payload("system_match.c1_vll", system_match["c1_vll"])
+    c1_vrr = _complex_from_payload("system_match.c1_vrr", system_match["c1_vrr"])
+    c4_lr = _complex_from_payload("system_match.c4_lr", system_match["c4_lr"])
+    c5_lr = _complex_from_payload("system_match.c5_lr", system_match["c5_lr"])
+    mu_high = float(system_match["matching_scale_GeV"])
+
+    c1_vll_ev, c1_vrr_ev, c4_lr_ev, c5_lr_ev = evolve_deltaf2_wilsons(
+        c1_vll, c1_vrr, c4_lr, c5_lr,
+        mu_high=mu_high,
+        mu_low=mu_had,
+    )
+    evolved = dict(system_match)
+    evolved["c1_vll"] = {"real": c1_vll_ev.real, "imag": c1_vll_ev.imag}
+    evolved["c1_vrr"] = {"real": c1_vrr_ev.real, "imag": c1_vrr_ev.imag}
+    evolved["c4_lr"] = {"real": c4_lr_ev.real, "imag": c4_lr_ev.imag}
+    evolved["c5_lr"] = {"real": c5_lr_ev.real, "imag": c5_lr_ev.imag}
+    return evolved
 
 
 def _operator_sizes_from_bridge_match(
@@ -1126,29 +1158,33 @@ class ModernPointPhenomenologyArtifactV1:
             treatment_id = MODERN_POINT_PHENOMENOLOGY_SYSTEM_TREATMENT_IDS[system_id]
             bridge_system_id = "K" if system_id in ("epsilon_K", "K") else system_id
             system_match = system_matches[bridge_system_id]
+            # Evolve Wilson coefficients from matching scale to hadronic
+            # scale so the sidecar is consistent with the evaluation layer
+            # (which applies QCD running by default).
+            evolved_match = _evolve_bridge_wilsons(system_match)
             input_item = bundle_inputs[system_id]
 
             if system_id == "epsilon_K":
                 # CP-violating epsilon_K uses proper hadronic matrix elements
                 ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
-                    _evaluate_epsilon_k_from_bridge(system_match)
+                    _evaluate_epsilon_k_from_bridge(evolved_match)
                 )
                 note = (
                     f"{input_item.note} Evaluated with proper hadronic matrix elements "
-                    "for CP-violating kaon mixing. Included in acceptance."
+                    "for CP-violating kaon mixing (QCD-evolved). Included in acceptance."
                 )
             elif system_id == "K":
                 # Non-CP Delta m_K uses proper hadronic matrix elements
                 ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
-                    _evaluate_delta_mk_from_bridge(system_match)
+                    _evaluate_delta_mk_from_bridge(evolved_match)
                 )
                 note = (
                     f"{input_item.note} Evaluated with proper hadronic matrix elements "
-                    "for non-CP kaon mass difference. Included in acceptance."
+                    "for non-CP kaon mass difference (QCD-evolved). Included in acceptance."
                 )
             else:
                 operator_sizes, dominant_operator, dominant_size = _operator_sizes_from_bridge_match(
-                    system_match,
+                    evolved_match,
                     ll_weight=weights.ll_weight,
                     rr_weight=weights.rr_weight,
                     lr1_weight=weights.lr1_weight,
@@ -1158,10 +1194,10 @@ class ModernPointPhenomenologyArtifactV1:
                 ratio_to_bound = float(dominant_size / input_item.bound)
                 if system_id == "D0":
                     note = (
-                        f"{input_item.note} Included in acceptance with conservative D0 treatment."
+                        f"{input_item.note} Included in acceptance with conservative D0 treatment (QCD-evolved)."
                     )
                 else:
-                    note = f"{input_item.note} Included in acceptance."
+                    note = f"{input_item.note} Included in acceptance (QCD-evolved)."
 
             results.append(
                 ModernPhenomenologySystemResult(

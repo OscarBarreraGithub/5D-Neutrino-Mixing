@@ -95,7 +95,9 @@ def test_deltaf2_pass_fail_uses_dominant_operator_not_coherent_cancellation():
     )
     kaon = summary.get("epsilon_k")
 
-    assert kaon.coherent_amplitude < kaon.bound
+    # With QCD running the LR operators are enhanced, so coherent_amplitude
+    # now exceeds the bound as well.  The important invariant is that pass/fail
+    # is decided by the dominant single operator, not the coherent sum.
     assert np.isclose(kaon.effective_amplitude, kaon.dominant_operator_size)
     assert kaon.dominant_operator == "C4_LR"
     assert not kaon.passes
@@ -104,8 +106,11 @@ def test_deltaf2_pass_fail_uses_dominant_operator_not_coherent_cancellation():
 def test_default_benchmark_point_has_stable_deltaf2_outputs():
     summary = evaluate_delta_f2_constraints(_fit_result(0.25), M_KK=3000.0)
 
-    assert summary.passes_all
+    # With QCD running (the new default), the D meson constraint is tightened
+    # and the benchmark point at M_KK=3000 no longer passes all systems.
+    # epsilon_K, B_d, and B_s still pass; D is marginally excluded.
     assert summary.get("epsilon_k").ratio_to_bound < 1.0
     assert summary.get("b_d").ratio_to_bound < 1.0
     assert summary.get("b_s").ratio_to_bound < 1.0
-    assert summary.get("d").ratio_to_bound < 1.0
+    assert summary.get("d").ratio_to_bound > 1.0
+    assert not summary.passes_all
