@@ -2018,6 +2018,16 @@ def dense_scan_config() -> ModernScanConfig:
     )
 
 
+def dense_wide_yukawa_scan_config() -> ModernScanConfig:
+    """Wide Yukawa diagnostic: 50 r × 40 overall_scale × 50 Lambda_IR = 100,000 points."""
+    return ModernScanConfig(
+        r_values=np.logspace(np.log10(0.02), np.log10(2.0), 50),
+        overall_scale_values=np.logspace(np.log10(0.001), np.log10(100.0), 40),
+        Lambda_IR_values=np.logspace(np.log10(500.0), np.log10(20000.0), 50),
+        max_nfev=120,
+    )
+
+
 def write_scan_config(config: ModernScanConfig, path: str | Path) -> Path:
     return _write_json(Path(path), config.as_dict())
 
@@ -2113,7 +2123,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "write-preset",
         help="write a smoke or pilot config snapshot",
     )
-    preset_parser.add_argument("preset", choices=("smoke", "pilot", "exploratory", "production", "dense"))
+    preset_parser.add_argument("preset", choices=("smoke", "pilot", "exploratory", "production", "dense", "dense_wide_yukawa"))
     preset_parser.add_argument("output")
 
     run_parser = subparsers.add_parser(
@@ -2177,6 +2187,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "exploratory": exploratory_scan_config,
             "production": production_scan_config,
             "dense": dense_scan_config,
+            "dense_wide_yukawa": dense_wide_yukawa_scan_config,
         }
         config = _preset_configs[args.preset]()
         write_scan_config(config, args.output)

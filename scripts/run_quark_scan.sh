@@ -19,12 +19,12 @@ if [[ "$PRESET" == "production" ]]; then
     TIME="01:00:00"
     MEM="4G"
     RUN_DIR="${REPO_ROOT}/scan_outputs/production_${TIMESTAMP}"
-elif [[ "$PRESET" == "dense" ]]; then
+elif [[ "$PRESET" == "dense" || "$PRESET" == "dense_wide_yukawa" ]]; then
     TOTAL_SHARDS=200
     PARTITION="serial_requeue"
     TIME="02:00:00"
     MEM="4G"
-    RUN_DIR="${REPO_ROOT}/scan_outputs/dense_${TIMESTAMP}"
+    RUN_DIR="${REPO_ROOT}/scan_outputs/${PRESET}_${TIMESTAMP}"
 elif [[ "$PRESET" == "exploratory" ]]; then
     TOTAL_SHARDS=8
     PARTITION="serial_requeue"
