@@ -633,19 +633,21 @@ class ModernScanResultRecord:
                 "ratio_to_bound_by_system must mirror the union of non-CP and "
                 "diagnostic evaluated systems"
             )
-        if tuple(self.failing_non_cp_system_ids) != tuple(
-            system_id
-            for system_id, ratio in self.non_cp_ratio_to_bound_by_system.items()
+        # Validate that failing lists are consistent with ratios (set
+        # comparison to avoid ordering sensitivity).
+        expected_failing_non_cp = frozenset(
+            sid for sid, ratio in self.non_cp_ratio_to_bound_by_system.items()
             if ratio > 1.0
-        ):
+        )
+        if frozenset(self.failing_non_cp_system_ids) != expected_failing_non_cp:
             raise ValueError(
                 "failing_non_cp_system_ids must match the failing acceptance-bearing systems"
             )
-        if tuple(self.diagnostic_failing_system_ids) != tuple(
-            system_id
-            for system_id, ratio in self.diagnostic_ratio_to_bound_by_system.items()
+        expected_failing_diag = frozenset(
+            sid for sid, ratio in self.diagnostic_ratio_to_bound_by_system.items()
             if ratio > 1.0
-        ):
+        )
+        if frozenset(self.diagnostic_failing_system_ids) != expected_failing_diag:
             raise ValueError(
                 "diagnostic_failing_system_ids must match the failing diagnostic systems"
             )
