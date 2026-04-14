@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from dataclasses import dataclass, field
@@ -146,6 +147,25 @@ def _targets_payload(targets: QuarkTargets) -> dict[str, Any]:
 def _write_json(path: Path, payload: Mapping[str, Any]) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(_canonical_json(payload), encoding="utf-8")
+    return path
+
+
+def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> Path:
+    """Write JSON atomically via temp file + rename to avoid race conditions."""
+    import tempfile
+    path.parent.mkdir(parents=True, exist_ok=True)
+    content = _canonical_json(payload)
+    fd, tmp = tempfile.mkstemp(dir=path.parent, suffix=".tmp", prefix=".config_")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+        os.replace(tmp, path)
+    except BaseException:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
     return path
 
 
@@ -1271,7 +1291,18 @@ def _write_run_config_snapshot(run_dir: Path, config: ModernScanConfig) -> Path:
         "notes": MODERN_SCAN_NOTES,
     }
     if run_config_path.exists():
-        existing = _read_json(run_config_path)
+        # Retry reads to handle concurrent shard writes (atomic rename
+        # ensures we never see a partial file, but a brief window exists
+        # where the file doesn't exist between unlink and rename).
+        for _attempt in range(5):
+            try:
+                existing = _read_json(run_config_path)
+                break
+            except (json.JSONDecodeError, FileNotFoundError):
+                import time
+                time.sleep(0.2)
+        else:
+            existing = _read_json(run_config_path)
         if existing.get("schema_id") == MODERN_SCAN_CONFIG_SCHEMA_ID:
             existing_config = ModernScanConfig.from_dict(existing)
             if existing_config.config_hash != config.config_hash:
@@ -1279,7 +1310,7 @@ def _write_run_config_snapshot(run_dir: Path, config: ModernScanConfig) -> Path:
                     f"run config at {run_config_path} has hash {existing_config.config_hash!r}, "
                     f"expected {config.config_hash!r}"
                 )
-            _write_json(run_config_path, payload)
+            _atomic_write_json(run_config_path, payload)
             return run_config_path
         existing_hash = existing.get("config_hash")
         if existing_hash != config.config_hash:
@@ -1288,7 +1319,7 @@ def _write_run_config_snapshot(run_dir: Path, config: ModernScanConfig) -> Path:
                 f"expected {config.config_hash!r}"
             )
         return run_config_path
-    _write_json(run_config_path, payload)
+    _atomic_write_json(run_config_path, payload)
     return run_config_path
 
 
