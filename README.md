@@ -1,7 +1,8 @@
 # Constraining a Warped 5th Dimension
 
-This repository contains numerical tools for Randall-Sundrum lepton-sector studies:
-zero-mode overlaps, KK spectra, Yukawa inversion, lepton-flavor constraints, and
+This repository contains numerical tools for Randall-Sundrum flavor studies
+across the lepton and quark sectors: zero-mode overlaps, KK spectra, Yukawa
+inversion, lepton-flavor constraints, quark-sector MFV workflows, and
 parameter scans.
 
 ## Install
@@ -62,7 +63,10 @@ functions used throughout the project.
 - Grid-scan driver to sweep RS lepton-sector parameters and filter by perturbativity, naturalness, and LFV bounds.
 
 [`quarkConstraints`](quarkConstraints)
-- Planned quark-sector MFV/NMFV implementation for CKM fits, flavor bounds, and CP diagnostics.
+- Active quark-sector MFV program with an exploratory `repo_v1` lane, a frozen
+  `paper_0710_1869` lane, and a planned `modern` production lane. See
+  [`quarkConstraints/QUARK_COMPLETION_PROGRAM.md`](quarkConstraints/QUARK_COMPLETION_PROGRAM.md)
+  and [`quarkConstraints/README.md`](quarkConstraints/README.md).
 
 [`qcd`](qcd)
 - Computes the QCD running coupling α_s(μ) with threshold matching.

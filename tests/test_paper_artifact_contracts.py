@@ -5,6 +5,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from dataclasses import asdict, replace
@@ -35,8 +36,10 @@ from quarkConstraints.paper_0710_1869.artifacts import (
     WilsonCoefficientRecord,
     artifact_from_dict,
     build_default_paper_0710_1869_kaon_artifact_export_set,
+    build_strict_paper_0710_1869_kaon_artifact_export_set,
     read_artifact,
     write_default_paper_0710_1869_kaon_artifact_exports,
+    write_strict_paper_0710_1869_kaon_artifact_exports,
 )
 from quarkConstraints.paper_0710_1869.verifier import (
     TolerancePolicy,
@@ -47,6 +50,9 @@ from quarkConstraints.paper_0710_1869.verifier import (
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 BENCHMARK_SCRIPT = REPO_ROOT / "scripts" / "benchmark_quark_0710_1869.py"
+STRICT_PAPER_ARTIFACT_ROOT_ENV = (
+    "QUARKCONSTRAINTS_PAPER_0710_1869_STRICT_ARTIFACT_ROOT"
+)
 GOLDEN_ARTIFACT_DIR = (
     REPO_ROOT / "tests" / "golden" / "paper_0710_1869" / "default_kaon_np_only"
 )
@@ -56,9 +62,24 @@ EXPECTED_ARTIFACT_FILENAMES = {
     "observables": "observables.json",
     "provenance": "provenance.json",
 }
+STRICT_PAPER_POINT_ID = "pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_WILSON_BUNDLE_ID = "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_OBSERVABLE_BUNDLE_ID = "observable.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_PROVENANCE_BUNDLE_ID = "provenance.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_CONVENTIONS_ID = "strict.paper.conventions.v1"
+STRICT_PAPER_MATCHING_ID = "strict.paper.matching.v1"
+STRICT_PAPER_RG_ID = "strict.paper.rg.v1"
+STRICT_PAPER_HADRONIC_SOURCE_ID = "strict.paper.hadronic.source.v1"
+STRICT_PAPER_MASS_SOURCE_ID = "strict.paper.mass.source.v1"
+STRICT_PAPER_DECAY_CONSTANT_SOURCE_ID = "strict.paper.decay.constant.source.v1"
+STRICT_PAPER_BAG_SOURCE_ID = "strict.paper.bag.source.v1"
 
 
 def _export_default_artifacts(tmp_path: Path) -> dict[str, object]:
+    strict_canonical_root = tmp_path / "strict_paper_kaon_isolated"
+    env = os.environ.copy()
+    env[STRICT_PAPER_ARTIFACT_ROOT_ENV] = str(strict_canonical_root)
     completed = subprocess.run(
         [
             sys.executable,
@@ -71,6 +92,7 @@ def _export_default_artifacts(tmp_path: Path) -> dict[str, object]:
         capture_output=True,
         text=True,
         cwd=str(REPO_ROOT),
+        env=env,
     )
     return json.loads(completed.stdout)
 
@@ -329,6 +351,21 @@ def _sample_quartet() -> tuple[
     return wilson, hadronic, observable, provenance
 
 
+def _strict_sample_quartet() -> tuple[
+    WilsonArtifactBundleV1,
+    HadronicArtifactBundleV1,
+    ObservableArtifactBundleV1,
+    ProvenanceBundleV1,
+]:
+    export_set = build_strict_paper_0710_1869_kaon_artifact_export_set()
+    return (
+        export_set.wilson_bundle,
+        export_set.hadronic_bundle,
+        export_set.observable_bundle,
+        export_set.provenance_bundle,
+    )
+
+
 def _replace_coefficient_value(
     bundle: WilsonArtifactBundleV1,
     *,
@@ -512,6 +549,58 @@ def test_verifier_accepts_consistent_artifact_quartet(tmp_path: Path) -> None:
     assert report.provenance_bundle_id == provenance.metadata.bundle_id
     assert report.coefficient_count == len(wilson.coefficients)
     assert report.observable_count == len(observable.observables)
+
+
+def test_verifier_accepts_strict_paper_artifact_quartet_with_distinct_ids_and_same_numbers(
+    tmp_path: Path,
+) -> None:
+    default_export_set = build_default_paper_0710_1869_kaon_artifact_export_set()
+    strict_export_set = build_strict_paper_0710_1869_kaon_artifact_export_set()
+    default_wilson = default_export_set.wilson_bundle
+    default_hadronic = default_export_set.hadronic_bundle
+    default_observable = default_export_set.observable_bundle
+    default_provenance = default_export_set.provenance_bundle
+    strict_wilson = strict_export_set.wilson_bundle
+    strict_hadronic = strict_export_set.hadronic_bundle
+    strict_observable = strict_export_set.observable_bundle
+    strict_provenance = strict_export_set.provenance_bundle
+
+    assert strict_wilson.metadata.point_id == strict_hadronic.metadata.point_id
+    assert strict_wilson.metadata.point_id == strict_observable.metadata.point_id
+    assert strict_wilson.metadata.point_id == strict_provenance.metadata.point_id
+    assert strict_wilson.metadata.point_id != default_wilson.metadata.point_id
+    assert strict_wilson.metadata.bundle_id != default_wilson.metadata.bundle_id
+    assert strict_hadronic.metadata.bundle_id != default_hadronic.metadata.bundle_id
+    assert strict_observable.metadata.bundle_id != default_observable.metadata.bundle_id
+    assert strict_provenance.metadata.bundle_id != default_provenance.metadata.bundle_id
+    assert set(strict_wilson.provenance_ids).isdisjoint(default_wilson.provenance_ids)
+    assert set(strict_hadronic.provenance_ids).isdisjoint(default_hadronic.provenance_ids)
+    assert set(strict_observable.provenance_ids).isdisjoint(default_observable.provenance_ids)
+    assert strict_hadronic.q1_matrix_element_GeV4 == default_hadronic.q1_matrix_element_GeV4
+    assert strict_hadronic.B_K_mu_had == default_hadronic.B_K_mu_had
+    assert strict_observable.m12_value == default_observable.m12_value
+    assert tuple(record.value.to_complex() for record in strict_wilson.coefficients) == tuple(
+        record.value.to_complex() for record in default_wilson.coefficients
+    )
+
+    writer_paths = write_strict_paper_0710_1869_kaon_artifact_exports(tmp_path)
+    assert writer_paths.wilson_path.name == "wilsons.json"
+    assert writer_paths.hadronic_path.name == "hadronic.json"
+    assert writer_paths.observable_path.name == "observables.json"
+    assert writer_paths.provenance_path.name == "provenance.json"
+
+    verifier_payload = _verify_exported_artifacts(tmp_path)
+
+    assert verifier_payload["ok"] is True
+    assert verifier_payload["import_isolation_ok"] is True
+    assert verifier_payload["schema_ok"] is True
+    assert verifier_payload["numeric_match_ok"] is True
+    assert verifier_payload["scope_ok"] is True
+    assert verifier_payload["point_id"] == STRICT_PAPER_POINT_ID
+    assert verifier_payload["bundle_ids"]["wilsons"] == STRICT_PAPER_WILSON_BUNDLE_ID
+    assert verifier_payload["bundle_ids"]["hadronic"] == STRICT_PAPER_HADRONIC_BUNDLE_ID
+    assert verifier_payload["bundle_ids"]["observables"] == STRICT_PAPER_OBSERVABLE_BUNDLE_ID
+    assert verifier_payload["bundle_ids"]["provenance"] == STRICT_PAPER_PROVENANCE_BUNDLE_ID
 
 
 def test_verifier_reports_cross_bundle_contract_failures() -> None:

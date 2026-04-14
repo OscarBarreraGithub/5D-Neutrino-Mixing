@@ -16,6 +16,7 @@ import importlib
 import inspect
 import json
 import math
+import os
 import subprocess
 import sys
 import tempfile
@@ -27,6 +28,9 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PAPER_PACKAGE_DIR = REPO_ROOT / "quarkConstraints" / "paper_0710_1869"
 EXPECTED_MODE_ID = "paper_0710_1869"
+STRICT_PAPER_ARTIFACT_ROOT_ENV = (
+    "QUARKCONSTRAINTS_PAPER_0710_1869_STRICT_ARTIFACT_ROOT"
+)
 REQUIRED_MODULE_IMPORT_ORDER = (
     "validation",
     "conventions",
@@ -444,6 +448,11 @@ EXPECTED_M12_K_NP = {
     "imag": -9.322420653906486e-15,
 }
 EXPECTED_DELTA_M_K_NP_GEV = -2.6991506085166787e-14
+STRICT_PAPER_ARTIFACT_POINT_ID = "pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_WILSON_BUNDLE_ID = "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_OBSERVABLE_BUNDLE_ID = "observable.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_PROVENANCE_BUNDLE_ID = "provenance.kaon.pr1.table_i_eq3_example.strict_paper.v1"
 ARTIFACT_EXPORT_FILENAMES = {
     "wilson": "wilsons.json",
     "hadronic": "hadronic.json",
@@ -638,6 +647,24 @@ def _build_default_artifact_exports(modules: Mapping[str, Any]) -> dict[str, Any
     }
 
 
+def _build_strict_paper_artifact_exports(modules: Mapping[str, Any]) -> dict[str, Any]:
+    artifact_module = modules["artifacts"]
+    export_set = artifact_module.build_strict_paper_0710_1869_kaon_artifact_export_set()
+    return {
+        "point_id": export_set.wilson_bundle.metadata.point_id,
+        "bundle_ids": {
+            "wilsons": export_set.wilson_bundle.metadata.bundle_id,
+            "hadronic": export_set.hadronic_bundle.metadata.bundle_id,
+            "observables": export_set.observable_bundle.metadata.bundle_id,
+            "provenance": export_set.provenance_bundle.metadata.bundle_id,
+        },
+        "wilson_bundle": export_set.wilson_bundle,
+        "hadronic_bundle": export_set.hadronic_bundle,
+        "observable_bundle": export_set.observable_bundle,
+        "provenance_bundle": export_set.provenance_bundle,
+    }
+
+
 def _default_artifact_file_paths(
     artifact_module: Any,
     destination: Path,
@@ -645,6 +672,29 @@ def _default_artifact_file_paths(
     path_factory = getattr(
         artifact_module,
         "default_paper_0710_1869_kaon_artifact_export_paths",
+        None,
+    )
+    if callable(path_factory):
+        resolved = path_factory(destination)
+        return {
+            "wilson": resolved.wilson_path,
+            "hadronic": resolved.hadronic_path,
+            "observable": resolved.observable_path,
+            "provenance": resolved.provenance_path,
+        }
+    return {
+        name: destination / filename
+        for name, filename in ARTIFACT_EXPORT_FILENAMES.items()
+    }
+
+
+def _strict_paper_artifact_file_paths(
+    artifact_module: Any,
+    destination: Path,
+) -> dict[str, Path]:
+    path_factory = getattr(
+        artifact_module,
+        "strict_paper_0710_1869_kaon_artifact_export_paths",
         None,
     )
     if callable(path_factory):
@@ -669,6 +719,28 @@ def _export_default_artifacts(
     exports = _build_default_artifact_exports(modules)
     artifact_module = modules["artifacts"]
     file_paths = _default_artifact_file_paths(artifact_module, destination)
+    exports["wilson_bundle"].write_json(file_paths["wilson"])
+    exports["hadronic_bundle"].write_json(file_paths["hadronic"])
+    exports["observable_bundle"].write_json(file_paths["observable"])
+    exports["provenance_bundle"].write_json(file_paths["provenance"])
+    return {
+        **exports,
+        "file_paths": file_paths,
+        "file_sha256": {
+            name: _sha256_digest(path)
+            for name, path in file_paths.items()
+        },
+    }
+
+
+def _export_strict_paper_artifacts(
+    modules: Mapping[str, Any],
+    destination: Path,
+) -> dict[str, Any]:
+    destination.mkdir(parents=True, exist_ok=True)
+    exports = _build_strict_paper_artifact_exports(modules)
+    artifact_module = modules["artifacts"]
+    file_paths = _strict_paper_artifact_file_paths(artifact_module, destination)
     exports["wilson_bundle"].write_json(file_paths["wilson"])
     exports["hadronic_bundle"].write_json(file_paths["hadronic"])
     exports["observable_bundle"].write_json(file_paths["observable"])
@@ -5692,6 +5764,13 @@ def _materialize_artifact_summary(
         }
         for record in wilson_bundle.coefficients
     }
+    matching_coefficient_summary = {
+        record.operator: {
+            "real": float(record.value.real),
+            "imag": float(record.value.imag),
+        }
+        for record in wilson_bundle.matching_coefficients
+    }
     checks = {
         "exported_files_present": all(path.exists() for path in file_paths.values()),
         "schema_ok": bool(verifier_payload.get("schema_ok")),
@@ -5776,6 +5855,7 @@ def _materialize_artifact_summary(
         "observable_rows": observable_names,
         "observable_values": observable_values,
         "coefficients": coefficient_summary,
+        "matching_coefficients": matching_coefficient_summary,
         "hadronic_bundle_id": hadronic_bundle.metadata.bundle_id,
         "hadronic_schema_id": hadronic_bundle.metadata.schema_name,
         "file_sha256": exported["file_sha256"],
@@ -5790,6 +5870,265 @@ def _materialize_artifact_summary(
         "recomputed": verifier_payload.get("recomputed", {}),
         "load_error": verifier_payload.get("load_error"),
         "checks": checks,
+    }
+
+
+def _materialize_strict_paper_artifact_summary(
+    modules: Mapping[str, Any],
+    export_dir: Path,
+) -> tuple[list[str], dict[str, Any]]:
+    exported = _export_strict_paper_artifacts(modules, export_dir)
+    artifact_module = modules["artifacts"]
+    default_exports = _build_default_artifact_exports(modules)
+    file_paths = exported["file_paths"]
+    verifier_payload = _run_independent_verifier(
+        wilson_path=file_paths["wilson"],
+        hadronic_path=file_paths["hadronic"],
+        observable_path=file_paths["observable"],
+        provenance_path=file_paths["provenance"],
+    )
+    with tempfile.TemporaryDirectory(prefix="paper_0710_1869_strict_writer_") as writer_tmpdir:
+        writer_paths = artifact_module.write_strict_paper_0710_1869_kaon_artifact_exports(
+            writer_tmpdir
+        )
+        writer_file_sha256 = {
+            "wilson": _sha256_digest(writer_paths.wilson_path),
+            "hadronic": _sha256_digest(writer_paths.hadronic_path),
+            "observable": _sha256_digest(writer_paths.observable_path),
+            "provenance": _sha256_digest(writer_paths.provenance_path),
+        }
+    strict_canonical_root = os.environ.get(STRICT_PAPER_ARTIFACT_ROOT_ENV)
+    strict_canonical_root_source = (
+        "env_override" if strict_canonical_root is not None else "repo_default"
+    )
+    effective_canonical_paths = artifact_module.strict_paper_0710_1869_kaon_artifact_export_paths(
+        root_dir=strict_canonical_root
+    )
+    repo_tracked_canonical_paths = artifact_module.strict_paper_0710_1869_kaon_artifact_export_paths()
+    canonical_paths = effective_canonical_paths
+    canonical_file_paths = {
+        "wilson": canonical_paths.wilson_path,
+        "hadronic": canonical_paths.hadronic_path,
+        "observable": canonical_paths.observable_path,
+        "provenance": canonical_paths.provenance_path,
+    }
+    repo_tracked_file_paths = {
+        "wilson": repo_tracked_canonical_paths.wilson_path,
+        "hadronic": repo_tracked_canonical_paths.hadronic_path,
+        "observable": repo_tracked_canonical_paths.observable_path,
+        "provenance": repo_tracked_canonical_paths.provenance_path,
+    }
+    existing_canonical = {
+        name: path for name, path in canonical_file_paths.items() if path.exists()
+    }
+    existing_repo_tracked_canonical = {
+        name: path for name, path in repo_tracked_file_paths.items() if path.exists()
+    }
+    canonical_export_count = len(existing_canonical)
+    canonical_export_file_count = len(canonical_file_paths)
+    canonical_export_files_present = canonical_export_count == canonical_export_file_count
+    canonical_export_files_absent = canonical_export_count == 0
+    canonical_export_tree_is_complete_or_absent = (
+        canonical_export_count in (0, canonical_export_file_count)
+    )
+    repo_tracked_export_count = len(existing_repo_tracked_canonical)
+    repo_tracked_export_files_present = repo_tracked_export_count == len(
+        repo_tracked_file_paths
+    )
+    canonical_file_sha256 = (
+        {name: _sha256_digest(path) for name, path in canonical_file_paths.items()}
+        if canonical_export_files_present
+        else {}
+    )
+    repo_tracked_file_sha256 = (
+        {name: _sha256_digest(path) for name, path in repo_tracked_file_paths.items()}
+        if repo_tracked_export_files_present
+        else {}
+    )
+    hadronic_bundle = exported["hadronic_bundle"]
+    observable_bundle = exported["observable_bundle"]
+    wilson_bundle = exported["wilson_bundle"]
+    default_hadronic_bundle = default_exports["hadronic_bundle"]
+    default_observable_bundle = default_exports["observable_bundle"]
+    default_wilson_bundle = default_exports["wilson_bundle"]
+    wilson_scale_map = {scale.name: float(scale.value_gev) for scale in wilson_bundle.scales}
+
+    observable_names = [record.name for record in observable_bundle.observables]
+    observable_values = {
+        record.name: float(record.value)
+        for record in observable_bundle.observables
+    }
+    coefficient_summary = {
+        record.operator: {
+            "real": float(record.value.real),
+            "imag": float(record.value.imag),
+        }
+        for record in wilson_bundle.coefficients
+    }
+    matching_coefficient_summary = {
+        record.operator: {
+            "real": float(record.value.real),
+            "imag": float(record.value.imag),
+        }
+        for record in wilson_bundle.matching_coefficients
+    }
+    default_coefficient_summary = {
+        record.operator: {
+            "real": float(record.value.real),
+            "imag": float(record.value.imag),
+        }
+        for record in default_wilson_bundle.coefficients
+    }
+    default_matching_coefficient_summary = {
+        record.operator: {
+            "real": float(record.value.real),
+            "imag": float(record.value.imag),
+        }
+        for record in default_wilson_bundle.matching_coefficients
+    }
+    strict_provenance_ids = (
+        set(wilson_bundle.provenance_ids)
+        | set(hadronic_bundle.provenance_ids)
+        | set(observable_bundle.provenance_ids)
+    )
+    default_provenance_ids = (
+        set(default_wilson_bundle.provenance_ids)
+        | set(default_hadronic_bundle.provenance_ids)
+        | set(default_observable_bundle.provenance_ids)
+    )
+    default_observable_values = {
+        record.name: float(record.value)
+        for record in default_observable_bundle.observables
+    }
+    checks = {
+        "exported_files_present": all(path.exists() for path in file_paths.values()),
+        "schema_ok": bool(verifier_payload.get("schema_ok")),
+        "import_isolation_ok": bool(verifier_payload.get("import_isolation_ok")),
+        "numeric_match_ok": bool(verifier_payload.get("numeric_match_ok")),
+        "scope_ok": bool(verifier_payload.get("scope_ok")),
+        "point_id_matches_strict_paper_contract": (
+            verifier_payload.get("point_id") == STRICT_PAPER_ARTIFACT_POINT_ID
+        ),
+        "bundle_ids_match_strict_paper_contract": verifier_payload.get("bundle_ids", {}) == {
+            "wilsons": STRICT_PAPER_WILSON_BUNDLE_ID,
+            "hadronic": STRICT_PAPER_HADRONIC_BUNDLE_ID,
+            "observables": STRICT_PAPER_OBSERVABLE_BUNDLE_ID,
+            "provenance": STRICT_PAPER_PROVENANCE_BUNDLE_ID,
+        },
+        "observable_source_wilson_bundle_linked": (
+            observable_bundle.source_wilson_bundle_id == wilson_bundle.metadata.bundle_id
+        ),
+        "observable_source_hadronic_bundle_linked": (
+            observable_bundle.source_hadronic_bundle_id == hadronic_bundle.metadata.bundle_id
+        ),
+        "hadronic_mu_had_matches_wilson_scale": (
+            wilson_scale_map.get("mu_had") == float(hadronic_bundle.mu_had_GeV)
+        ),
+        "hadronic_operator_normalization_matches_wilson": (
+            hadronic_bundle.operator_normalization == wilson_bundle.operator_normalization
+        ),
+        "observable_operator_normalization_matches_wilson": (
+            observable_bundle.operator_normalization == wilson_bundle.operator_normalization
+        ),
+        "observable_rows_match_honest_scope": set(observable_names)
+        == EXPECTED_ARTIFACT_OBSERVABLE_ROWS,
+        "strict_numerics_match_default_export": (
+            math.isclose(
+                float(hadronic_bundle.q1_matrix_element_GeV4),
+                float(default_hadronic_bundle.q1_matrix_element_GeV4),
+                rel_tol=0.0,
+                abs_tol=1.0e-24,
+            )
+            and math.isclose(
+                float(hadronic_bundle.B_K_mu_had),
+                float(default_hadronic_bundle.B_K_mu_had),
+                rel_tol=0.0,
+                abs_tol=1.0e-24,
+            )
+            and observable_values == default_observable_values
+            and coefficient_summary == default_coefficient_summary
+            and matching_coefficient_summary == default_matching_coefficient_summary
+        ),
+        "strict_provenance_ids_are_disjoint_from_default": strict_provenance_ids.isdisjoint(
+            default_provenance_ids
+        ),
+        "strict_source_bundle_ids_are_distinct_from_default": (
+            hadronic_bundle.metadata.bundle_id != default_hadronic_bundle.metadata.bundle_id
+            and observable_bundle.metadata.bundle_id
+            != default_observable_bundle.metadata.bundle_id
+            and wilson_bundle.metadata.bundle_id != default_wilson_bundle.metadata.bundle_id
+        ),
+        "writer_outputs_are_deterministic": exported["file_sha256"] == writer_file_sha256,
+        "canonical_root_source": strict_canonical_root_source,
+        "canonical_root_path": str(canonical_paths.root_dir),
+        "repo_tracked_canonical_root_path": str(repo_tracked_canonical_paths.root_dir),
+        "canonical_export_files_present": canonical_export_files_present,
+        "canonical_export_tree_is_complete_or_absent": canonical_export_tree_is_complete_or_absent,
+        "effective_strict_exports_match_current_export": (
+            canonical_export_files_present and exported["file_sha256"] == canonical_file_sha256
+        ),
+        "repo_tracked_strict_exports_match_current_export": (
+            repo_tracked_export_files_present
+            and exported["file_sha256"] == repo_tracked_file_sha256
+        ),
+    }
+    required_check_skips = (
+        {"canonical_export_files_present", "effective_strict_exports_match_current_export"}
+        if canonical_export_files_absent
+        else set()
+    )
+    if strict_canonical_root is not None:
+        required_check_skips.add("repo_tracked_strict_exports_match_current_export")
+    required_checks = {
+        name: ok
+        for name, ok in checks.items()
+        if name not in required_check_skips
+    }
+    failures = [
+        f"strict-paper artifact acceptance check failed: {name}"
+        for name, ok in required_checks.items()
+        if not ok
+    ]
+    failures.extend(
+        f"strict-paper artifact verifier issue: {code}"
+        for code in verifier_payload.get("issue_codes", [])
+    )
+    return failures, {
+        "status": "ok" if not failures else "failed",
+        "point_id": verifier_payload.get("point_id"),
+        "strict_point_id": verifier_payload.get("point_id"),
+        "bundle_ids": verifier_payload.get("bundle_ids", {}),
+        "strict_bundle_ids": verifier_payload.get("bundle_ids", {}),
+        "provenance_ids": sorted(strict_provenance_ids),
+        "strict_provenance_ids": sorted(strict_provenance_ids),
+        "tolerance_policy": verifier_payload.get("tolerance_policy", {}),
+        "tolerances": verifier_payload.get("tolerances", {}),
+        "schema_ok": bool(verifier_payload.get("schema_ok")),
+        "import_isolation_ok": bool(verifier_payload.get("import_isolation_ok")),
+        "numeric_match_ok": bool(verifier_payload.get("numeric_match_ok")),
+        "scope_ok": bool(verifier_payload.get("scope_ok")),
+        "observable_rows": observable_names,
+        "observable_values": observable_values,
+        "coefficients": coefficient_summary,
+        "matching_coefficients": matching_coefficient_summary,
+        "canonical_root_source": strict_canonical_root_source,
+        "canonical_root_path": str(canonical_paths.root_dir),
+        "repo_tracked_canonical_root_path": str(repo_tracked_canonical_paths.root_dir),
+        "hadronic_bundle_id": hadronic_bundle.metadata.bundle_id,
+        "hadronic_schema_id": hadronic_bundle.metadata.schema_name,
+        "file_sha256": exported["file_sha256"],
+        "canonical_file_sha256": canonical_file_sha256,
+        "writer_file_sha256": writer_file_sha256,
+        "issue_codes": verifier_payload.get("issue_codes", []),
+        "issues": verifier_payload.get("issues", []),
+        "unexpected_import_targets": verifier_payload.get("unexpected_import_targets", []),
+        "loaded_forbidden_modules": verifier_payload.get("loaded_forbidden_modules", []),
+        "numeric_checks": verifier_payload.get("numeric_checks", {}),
+        "numeric_diffs": verifier_payload.get("numeric_diffs", {}),
+        "recomputed": verifier_payload.get("recomputed", {}),
+        "load_error": verifier_payload.get("load_error"),
+        "checks": checks,
+        "default_bundle_ids": default_exports["bundle_ids"],
     }
 
 
@@ -5814,6 +6153,32 @@ def _build_artifact_summary(
 
     with tempfile.TemporaryDirectory(prefix="paper_0710_1869_artifacts_") as tmpdir:
         return _materialize_artifact_summary(modules, Path(tmpdir))
+
+
+def _build_strict_paper_artifact_summary(
+    modules: Mapping[str, Any],
+    export_dir: Path | None = None,
+) -> tuple[list[str], dict[str, Any]]:
+    required_modules = {
+        "artifacts",
+        "verifier",
+        "eft_deltaf2.hadronic",
+        "eft_deltaf2.matching_kkgluon",
+        "eft_deltaf2.rg",
+        "eft_deltaf2.observables",
+    }
+    missing = sorted(name for name in required_modules if name not in modules)
+    if missing:
+        return [], {"status": "missing", "missing_modules": missing}
+
+    if export_dir is not None:
+        return _materialize_strict_paper_artifact_summary(
+            modules,
+            Path(export_dir) / "strict_paper",
+        )
+
+    with tempfile.TemporaryDirectory(prefix="paper_0710_1869_strict_artifacts_") as tmpdir:
+        return _materialize_strict_paper_artifact_summary(modules, Path(tmpdir))
 
 
 def _forbidden_modules_loaded() -> list[str]:
@@ -5911,6 +6276,26 @@ def _structural_payload(modules: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _strict_paper_payload(modules: Mapping[str, Any]) -> dict[str, Any]:
+    conventions = modules["conventions"].default_paper_0710_1869_conventions()
+    scale_point = modules["scales"].default_paper_0710_1869_scales()
+    benchmark = modules["benchmarks"].default_paper_0710_1869_pr1_benchmark()
+    request = modules["scan"].Paper07101869ScanRequest(
+        conventions=conventions,
+        scale_points=(scale_point,),
+    )
+    rows = modules["scan"].build_strict_paper_scan_rows(
+        request,
+        benchmark_id=benchmark.benchmark_id,
+    )
+    return {
+        "conventions": conventions,
+        "benchmark": benchmark,
+        "request": request,
+        "rows": rows,
+    }
+
+
 def _build_structural_summary(modules: Mapping[str, Any]) -> tuple[list[str], dict[str, Any]]:
     missing = [name for name in ("conventions", "scales", "scan") if name not in modules]
     if missing:
@@ -5951,6 +6336,101 @@ def _build_structural_summary(modules: Mapping[str, Any]) -> tuple[list[str], di
     }
     failures = [
         f"structural benchmark check failed: {name}"
+        for name, ok in checks.items()
+        if not ok
+    ]
+    return failures, {"checks": checks, "payload": first}
+
+
+def _build_strict_paper_summary(modules: Mapping[str, Any]) -> tuple[list[str], dict[str, Any]]:
+    missing = [name for name in ("benchmarks", "conventions", "scales", "scan") if name not in modules]
+    if missing:
+        missing_list = ", ".join(missing)
+        return [f"strict-paper benchmark is missing modules: {missing_list}"], {}
+
+    first = _canonicalize(_strict_paper_payload(modules))
+    second = _canonicalize(_strict_paper_payload(modules))
+    deterministic = json.dumps(first, sort_keys=True) == json.dumps(second, sort_keys=True)
+
+    rows = first.get("rows", [])
+    request_payload = first.get("request", {})
+    conventions_payload = first.get("conventions", {})
+    benchmark_payload = first.get("benchmark", {})
+    request_scale_points = request_payload.get("scale_points", [])
+    scale_by_label = {
+        str(scale.get("label")): scale
+        for scale in request_scale_points
+        if isinstance(scale, Mapping) and scale.get("label") is not None
+    }
+
+    def _row_expected_propagator_mass_GeV(row: Mapping[str, Any]) -> float:
+        point_id = str(row.get("point_id"))
+        scale = scale_by_label.get(point_id, {})
+        effective_scale = scale.get("m_KK_eff_GeV")
+        if effective_scale is not None:
+            return float(effective_scale)
+        return float(scale.get("m_g1_GeV"))
+
+    checks = {
+        "deterministic": deterministic,
+        "row_count_positive": len(rows) > 0,
+        "row_mode_ids_match": all(row.get("mode_id") == EXPECTED_MODE_ID for row in rows),
+        "row_paper_ids_match": all(
+            row.get("paper_id") == conventions_payload.get("paper_id") for row in rows
+        ),
+        "row_claim_levels_are_strict_paper": all(
+            row.get("claim_level_id") == "strict_paper" for row in rows
+        ),
+        "row_statuses_are_strict_paper": all(
+            row.get("status") == "strict_paper" for row in rows
+        ),
+        "row_conventions_schema_ids_match": all(
+            row.get("conventions_schema_id") == conventions_payload.get("schema_id")
+            for row in rows
+        ),
+        "row_provenance_policy_ids_match": all(
+            row.get("provenance_policy_id") == conventions_payload.get("provenance_policy_id")
+            for row in rows
+        ),
+        "row_verifier_policy_ids_match": all(
+            row.get("verifier_policy_id") == conventions_payload.get("verifier_policy_id")
+            for row in rows
+        ),
+        "row_seed_mapping_policy_ids_match": all(
+            row.get("seed_to_profile_mapping_policy_id")
+            == conventions_payload.get("seed_to_profile_mapping_policy_id")
+            for row in rows
+        ),
+        "row_universal_term_policy_ids_match": all(
+            row.get("universal_term_coefficient_policy_id")
+            == conventions_payload.get("universal_term_coefficient_policy_id")
+            for row in rows
+        ),
+        "row_profile_derivation_policy_ids_match": all(
+            row.get("profile_derivation_policy_id")
+            == conventions_payload.get("profile_derivation_policy_id")
+            for row in rows
+        ),
+        "row_benchmark_ids_match_reproduced_benchmark": all(
+            row.get("benchmark_id") == benchmark_payload.get("benchmark_id") for row in rows
+        ),
+        "row_input_bundle_ids_are_frozen": all(
+            row.get("input_bundle_id")
+            == "pr1.table_i_eq3_example.strict_paper.input_bundle.v1"
+            for row in rows
+        ),
+        "row_input_provenance_ids_are_frozen": all(
+            row.get("input_provenance_id")
+            == "pr1.table_i_eq3_example.strict_paper.input_provenance.v1"
+            for row in rows
+        ),
+        "propagator_mass_matches_scale_contract": all(
+            float(row.get("propagator_mass_GeV")) == _row_expected_propagator_mass_GeV(row)
+            for row in rows
+        ),
+    }
+    failures = [
+        f"strict-paper benchmark check failed: {name}"
         for name, ok in checks.items()
         if not ok
     ]
@@ -6014,6 +6494,8 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
 
     structural_failures, structural_summary = _build_structural_summary(imported_modules)
     failures.extend(structural_failures)
+    strict_paper_failures, strict_paper_summary = _build_strict_paper_summary(imported_modules)
+    failures.extend(strict_paper_failures)
     pr1_failures, pr1_summary = _build_pr1_benchmark_summary(imported_modules)
     failures.extend(pr1_failures)
     coupling_failures, coupling_summary = _build_coupling_summary(imported_modules)
@@ -6069,6 +6551,11 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
         export_dir=export_dir,
     )
     failures.extend(artifact_failures)
+    strict_artifact_failures, strict_artifact_summary = _build_strict_paper_artifact_summary(
+        imported_modules,
+        export_dir=export_dir,
+    )
+    failures.extend(strict_artifact_failures)
 
     def _append_post_aggregation_failure(
         summary_name: str,
@@ -6325,6 +6812,7 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
         "conventions": convention_summary,
         "scales": scale_summary,
         "structural_benchmark": structural_summary,
+        "strict_paper_benchmark": strict_paper_summary,
         "pr1_benchmark": pr1_summary,
         "couplings": coupling_summary,
         "eft_matching": matching_summary,
@@ -6342,6 +6830,7 @@ def _collect_summary(export_dir: Path | None = None) -> tuple[dict[str, Any], li
         "custom_d0_observable_probe": custom_d0_observable_summary,
         "observables": observable_summary,
         "artifacts": artifact_summary,
+        "strict_paper_artifacts": strict_artifact_summary,
     }
     return summary, failures
 

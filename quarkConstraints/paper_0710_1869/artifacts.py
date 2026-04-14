@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from math import isclose, isfinite
 from pathlib import Path
 from typing import Any, TypeAlias
@@ -24,6 +24,12 @@ DEFAULT_KAON_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr5a.v1"
 DEFAULT_KAON_OBSERVABLE_BUNDLE_ID = "observable.kaon.pr1.table_i_eq3_example.central.v1"
 DEFAULT_KAON_PROVENANCE_BUNDLE_ID = "provenance.kaon.pr1.table_i_eq3_example.central.v1"
 DEFAULT_KAON_ARTIFACT_DIR = _REPO_ROOT / "results" / "paper_0710_1869" / "default_kaon"
+STRICT_PAPER_ARTIFACT_POINT_ID = "pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_WILSON_BUNDLE_ID = "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_OBSERVABLE_BUNDLE_ID = "observable.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_PROVENANCE_BUNDLE_ID = "provenance.kaon.pr1.table_i_eq3_example.strict_paper.v1"
+STRICT_PAPER_ARTIFACT_DIR = _REPO_ROOT / "results" / "paper_0710_1869" / "strict_paper_kaon"
 DEFAULT_KAON_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR")
 DEFAULT_KAON_UNSUPPORTED_OPERATORS = ("Q4_LR", "Q5_LR")
 DELTA_M_RELATION_ID = "delta_m_k_np.equals.2_re_m12_k_np.v1"
@@ -56,6 +62,13 @@ DEFAULT_KAON_ARTIFACT_FILENAMES = {
 DEFAULT_PAPER_PROVENANCE_ID = "paper.0710.1869.v1"
 DEFAULT_MATCHING_PROVENANCE_ID = "matching.kaon.default.v1"
 DEFAULT_RG_PROVENANCE_ID = "rg.kaon.default_lo.v1"
+STRICT_PAPER_CONVENTIONS_PROVENANCE_ID = "strict.paper.conventions.v1"
+STRICT_PAPER_MATCHING_PROVENANCE_ID = "strict.paper.matching.v1"
+STRICT_PAPER_RG_PROVENANCE_ID = "strict.paper.rg.v1"
+STRICT_PAPER_HADRONIC_SOURCE_ID = "strict.paper.hadronic.source.v1"
+STRICT_PAPER_MASS_SOURCE_ID = "strict.paper.mass.source.v1"
+STRICT_PAPER_DECAY_CONSTANT_SOURCE_ID = "strict.paper.decay.constant.source.v1"
+STRICT_PAPER_BAG_SOURCE_ID = "strict.paper.bag.source.v1"
 
 JSONDict: TypeAlias = dict[str, Any]
 
@@ -1744,6 +1757,14 @@ def _artifact_source_from_mapping(source_mapping: Mapping[str, Any]) -> Artifact
     return ArtifactSourceRecord.from_dict(source_mapping)
 
 
+def _artifact_source_with_id(
+    source: ArtifactSourceRecord,
+    *,
+    source_id: str,
+) -> ArtifactSourceRecord:
+    return replace(source, source_id=source_id)
+
+
 def _build_default_wilson_scales(
     *,
     matching_scale_gev: float,
@@ -2115,6 +2136,135 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
     )
 
 
+def build_strict_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869ArtifactExportSet:
+    """Build the strict-paper artifact quartet with default kaon numerics and strict IDs."""
+
+    default_export_set = build_default_paper_0710_1869_kaon_artifact_export_set()
+    default_wilson = default_export_set.wilson_bundle
+    default_hadronic = default_export_set.hadronic_bundle
+    default_observable = default_export_set.observable_bundle
+
+    strict_mass_source = _artifact_source_with_id(
+        default_hadronic.mass_source,
+        source_id=STRICT_PAPER_MASS_SOURCE_ID,
+    )
+    strict_decay_constant_source = _artifact_source_with_id(
+        default_hadronic.decay_constant_source,
+        source_id=STRICT_PAPER_DECAY_CONSTANT_SOURCE_ID,
+    )
+    strict_bag_parameter_source = _artifact_source_with_id(
+        default_hadronic.bag_parameter_source,
+        source_id=STRICT_PAPER_BAG_SOURCE_ID,
+    )
+
+    strict_wilson_bundle = replace(
+        default_wilson,
+        metadata=ArtifactMetadata.create(
+            schema_name=WILSON_BUNDLE_SCHEMA,
+            bundle_id=STRICT_PAPER_WILSON_BUNDLE_ID,
+            point_id=STRICT_PAPER_ARTIFACT_POINT_ID,
+        ),
+        provenance_ids=(
+            STRICT_PAPER_CONVENTIONS_PROVENANCE_ID,
+            STRICT_PAPER_MATCHING_PROVENANCE_ID,
+            STRICT_PAPER_RG_PROVENANCE_ID,
+        ),
+    )
+    strict_hadronic_bundle = replace(
+        default_hadronic,
+        metadata=ArtifactMetadata.create(
+            schema_name=HADRONIC_BUNDLE_SCHEMA,
+            bundle_id=STRICT_PAPER_HADRONIC_BUNDLE_ID,
+            point_id=STRICT_PAPER_ARTIFACT_POINT_ID,
+        ),
+        benchmark_id="kaon.np_only.strict_paper.v1",
+        source_id=STRICT_PAPER_HADRONIC_SOURCE_ID,
+        hadronic_source_id=STRICT_PAPER_HADRONIC_SOURCE_ID,
+        mass_source_id=STRICT_PAPER_MASS_SOURCE_ID,
+        decay_constant_source_id=STRICT_PAPER_DECAY_CONSTANT_SOURCE_ID,
+        bag_parameter_source_id=STRICT_PAPER_BAG_SOURCE_ID,
+        source_wilson_bundle_id=STRICT_PAPER_WILSON_BUNDLE_ID,
+        mass_source=strict_mass_source,
+        decay_constant_source=strict_decay_constant_source,
+        bag_parameter_source=strict_bag_parameter_source,
+        provenance_ids=(
+            STRICT_PAPER_HADRONIC_SOURCE_ID,
+            STRICT_PAPER_MASS_SOURCE_ID,
+            STRICT_PAPER_DECAY_CONSTANT_SOURCE_ID,
+            STRICT_PAPER_BAG_SOURCE_ID,
+        ),
+    )
+    strict_observable_bundle = replace(
+        default_observable,
+        metadata=ArtifactMetadata.create(
+            schema_name=OBSERVABLE_BUNDLE_SCHEMA,
+            bundle_id=STRICT_PAPER_OBSERVABLE_BUNDLE_ID,
+            point_id=STRICT_PAPER_ARTIFACT_POINT_ID,
+        ),
+        source_wilson_bundle_id=STRICT_PAPER_WILSON_BUNDLE_ID,
+        source_hadronic_bundle_id=STRICT_PAPER_HADRONIC_BUNDLE_ID,
+        provenance_ids=(
+            STRICT_PAPER_CONVENTIONS_PROVENANCE_ID,
+            STRICT_PAPER_MATCHING_PROVENANCE_ID,
+            STRICT_PAPER_RG_PROVENANCE_ID,
+            STRICT_PAPER_HADRONIC_SOURCE_ID,
+            STRICT_PAPER_MASS_SOURCE_ID,
+            STRICT_PAPER_DECAY_CONSTANT_SOURCE_ID,
+            STRICT_PAPER_BAG_SOURCE_ID,
+        ),
+    )
+    strict_provenance_bundle = ProvenanceBundleV1(
+        metadata=ArtifactMetadata.create(
+            schema_name=PROVENANCE_BUNDLE_SCHEMA,
+            bundle_id=STRICT_PAPER_PROVENANCE_BUNDLE_ID,
+            point_id=STRICT_PAPER_ARTIFACT_POINT_ID,
+        ),
+        records=(
+            ProvenanceRecord(
+                record_id=STRICT_PAPER_CONVENTIONS_PROVENANCE_ID,
+                category="paper",
+                label="strict paper conventions",
+                version="arXiv:0710.1869",
+                source="doi:10.48550/arXiv.0710.1869",
+                citation="arXiv:0710.1869",
+            ),
+            ProvenanceRecord(
+                record_id=STRICT_PAPER_MATCHING_PROVENANCE_ID,
+                category="code",
+                label="strict paper matching export",
+                version="paper-mode:v1",
+                source="quarkConstraints.paper_0710_1869.eft_deltaf2.matching_kkgluon",
+                citation="arXiv:0710.1869 matching path",
+            ),
+            ProvenanceRecord(
+                record_id=STRICT_PAPER_RG_PROVENANCE_ID,
+                category="code",
+                label="strict paper LO RG export",
+                version="paper-mode:v1",
+                source="quarkConstraints.paper_0710_1869.eft_deltaf2.rg",
+                citation="BMU hep-ph/0005183 Q1 running path",
+            ),
+            ProvenanceRecord(
+                record_id=STRICT_PAPER_HADRONIC_SOURCE_ID,
+                category="hadronic-input-bundle",
+                label="strict paper hadronic input bundle",
+                version=str(strict_hadronic_bundle.input_provenance_mode_id),
+                source="strict paper hadronic source",
+                citation=strict_hadronic_bundle.notes,
+            ),
+            _provenance_record_from_source(strict_mass_source),
+            _provenance_record_from_source(strict_decay_constant_source),
+            _provenance_record_from_source(strict_bag_parameter_source),
+        ),
+    )
+    return Paper07101869ArtifactExportSet(
+        wilson_bundle=strict_wilson_bundle,
+        hadronic_bundle=strict_hadronic_bundle,
+        observable_bundle=strict_observable_bundle,
+        provenance_bundle=strict_provenance_bundle,
+    )
+
+
 def build_default_paper_0710_1869_kaon_hadronic_artifact_bundle() -> HadronicArtifactBundleV1:
     """Return the canonical hadronic artifact bundle for the default kaon benchmark."""
 
@@ -2125,6 +2275,12 @@ def default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869ArtifactE
     """Compatibility alias for the canonical default kaon artifact export set."""
 
     return build_default_paper_0710_1869_kaon_artifact_export_set()
+
+
+def strict_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869ArtifactExportSet:
+    """Compatibility alias for the strict-paper kaon artifact export set."""
+
+    return build_strict_paper_0710_1869_kaon_artifact_export_set()
 
 
 def default_paper_0710_1869_kaon_artifact_export_paths(
@@ -2142,6 +2298,21 @@ def default_paper_0710_1869_kaon_artifact_export_paths(
     )
 
 
+def strict_paper_0710_1869_kaon_artifact_export_paths(
+    root_dir: str | Path | None = None,
+) -> Paper07101869ArtifactExportPaths:
+    """Return the deterministic filesystem layout for the strict-paper kaon artifact set."""
+
+    resolved_root = STRICT_PAPER_ARTIFACT_DIR if root_dir is None else Path(root_dir)
+    return Paper07101869ArtifactExportPaths(
+        root_dir=resolved_root,
+        wilson_path=resolved_root / DEFAULT_KAON_ARTIFACT_FILENAMES["wilsons"],
+        hadronic_path=resolved_root / DEFAULT_KAON_ARTIFACT_FILENAMES["hadronic"],
+        observable_path=resolved_root / DEFAULT_KAON_ARTIFACT_FILENAMES["observables"],
+        provenance_path=resolved_root / DEFAULT_KAON_ARTIFACT_FILENAMES["provenance"],
+    )
+
+
 def write_default_paper_0710_1869_kaon_artifact_exports(
     root_dir: str | Path | None = None,
 ) -> Paper07101869ArtifactExportPaths:
@@ -2149,6 +2320,21 @@ def write_default_paper_0710_1869_kaon_artifact_exports(
 
     export_set = build_default_paper_0710_1869_kaon_artifact_export_set()
     paths = default_paper_0710_1869_kaon_artifact_export_paths(root_dir=root_dir)
+    paths.root_dir.mkdir(parents=True, exist_ok=True)
+    export_set.wilson_bundle.write_json(paths.wilson_path)
+    export_set.hadronic_bundle.write_json(paths.hadronic_path)
+    export_set.observable_bundle.write_json(paths.observable_path)
+    export_set.provenance_bundle.write_json(paths.provenance_path)
+    return paths
+
+
+def write_strict_paper_0710_1869_kaon_artifact_exports(
+    root_dir: str | Path | None = None,
+) -> Paper07101869ArtifactExportPaths:
+    """Write the strict-paper kaon artifact set under a deterministic results path."""
+
+    export_set = build_strict_paper_0710_1869_kaon_artifact_export_set()
+    paths = strict_paper_0710_1869_kaon_artifact_export_paths(root_dir=root_dir)
     paths.root_dir.mkdir(parents=True, exist_ok=True)
     export_set.wilson_bundle.write_json(paths.wilson_path)
     export_set.hadronic_bundle.write_json(paths.hadronic_path)
@@ -2190,14 +2376,31 @@ __all__ = [
     "PaperArtifactBundle",
     "ProvenanceBundleV1",
     "ProvenanceRecord",
+    "STRICT_PAPER_ARTIFACT_DIR",
+    "STRICT_PAPER_ARTIFACT_POINT_ID",
+    "STRICT_PAPER_BAG_SOURCE_ID",
+    "STRICT_PAPER_CONVENTIONS_PROVENANCE_ID",
+    "STRICT_PAPER_DECAY_CONSTANT_SOURCE_ID",
+    "STRICT_PAPER_HADRONIC_BUNDLE_ID",
+    "STRICT_PAPER_HADRONIC_SOURCE_ID",
+    "STRICT_PAPER_MASS_SOURCE_ID",
+    "STRICT_PAPER_MATCHING_PROVENANCE_ID",
+    "STRICT_PAPER_OBSERVABLE_BUNDLE_ID",
+    "STRICT_PAPER_PROVENANCE_BUNDLE_ID",
+    "STRICT_PAPER_RG_PROVENANCE_ID",
+    "STRICT_PAPER_WILSON_BUNDLE_ID",
     "WILSON_BUNDLE_SCHEMA",
     "WilsonArtifactBundleV1",
     "WilsonCoefficientRecord",
     "artifact_from_dict",
     "build_default_paper_0710_1869_kaon_artifact_export_set",
     "build_default_paper_0710_1869_kaon_hadronic_artifact_bundle",
+    "build_strict_paper_0710_1869_kaon_artifact_export_set",
     "default_paper_0710_1869_kaon_artifact_export_paths",
     "default_paper_0710_1869_kaon_artifact_export_set",
     "read_artifact",
+    "strict_paper_0710_1869_kaon_artifact_export_paths",
+    "strict_paper_0710_1869_kaon_artifact_export_set",
     "write_default_paper_0710_1869_kaon_artifact_exports",
+    "write_strict_paper_0710_1869_kaon_artifact_exports",
 ]

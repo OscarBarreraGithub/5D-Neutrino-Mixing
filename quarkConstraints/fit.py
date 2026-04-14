@@ -16,6 +16,7 @@ from .model import (
     QuarkSpurionPoint,
     RotationParameters,
     build_mfv_point_from_singular_values,
+    ckm_like_unitary,
     derive_bulk_state,
     spurion_svd_summary,
 )
@@ -202,6 +203,27 @@ class QuarkFitSolution:
         return self.seed
 
 
+QUARK_FIT_CANONICAL_VECTOR_FIELDS = (
+    "log_up_physical_singular_values[0]",
+    "log_up_physical_singular_values[1]",
+    "log_up_physical_singular_values[2]",
+    "log_down_physical_singular_values[0]",
+    "log_down_physical_singular_values[1]",
+    "log_down_physical_singular_values[2]",
+    "up_left.theta12",
+    "up_left.theta13",
+    "up_left.theta23",
+    "up_left.delta",
+    "down_left.theta12",
+    "down_left.theta13",
+    "down_left.theta23",
+    "down_left.delta",
+)
+QUARK_FIT_CANONICAL_VECTOR_SIZE = len(QUARK_FIT_CANONICAL_VECTOR_FIELDS)
+QUARK_FIT_FULL_VECTOR_FIELDS = QUARK_FIT_CANONICAL_VECTOR_FIELDS
+QUARK_FIT_FULL_VECTOR_SIZE = QUARK_FIT_CANONICAL_VECTOR_SIZE
+
+
 def _ordered_dirac_svd(matrix: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Return SVD ordered from light to heavy generation."""
     U_l, singular_values, U_r = SVD(matrix)
@@ -242,13 +264,19 @@ def fit_residuals(
     ckm: np.ndarray,
     targets: QuarkTargets,
 ) -> Dict[str, Any]:
-    """Compute mass and CKM residuals against targets."""
+    """Compute mass and CKM residuals against targets.
+
+    CKM observable residuals are normalized by the absolute target observable
+    scales. That scale policy is explicit: zero target observable scales are
+    unsupported and raise ``ValueError``.
+    """
     up_log_residuals = np.log(np.maximum(masses_up, 1e-30) / targets.up_masses)
     down_log_residuals = np.log(np.maximum(masses_down, 1e-30) / targets.down_masses)
     ckm_abs_residuals = np.abs(np.abs(ckm) - targets.abs_ckm)
-    ckm_obs_residuals = (
-        ckm_observables(ckm) - targets.ckm_observables
-    ) / np.maximum(np.abs(targets.ckm_observables), 1e-8)
+    ckm_scales = np.abs(targets.ckm_observables)
+    if np.any(ckm_scales <= 0.0):
+        raise ValueError("fit_residuals requires non-zero CKM observable targets")
+    ckm_obs_residuals = (ckm_observables(ckm) - targets.ckm_observables) / ckm_scales
 
     total_score = float(
         np.sqrt(
@@ -326,20 +354,253 @@ def _seed_from_benchmark_module(seed: Any) -> QuarkFitSeed:
     )
 
 
+def _as_fit_seed(seed: Any) -> QuarkFitSeed:
+    """Normalize a seed-like object into the local fit seed container."""
+    if isinstance(seed, QuarkFitSeed):
+        return seed
+    return _seed_from_benchmark_module(seed)
+
+
+def _canonicalize_fit_seed(seed: Any, *, overall_scale: float | None = None) -> QuarkFitSeed:
+    """Return the canonical quotient-chart representative for a fit seed.
+
+    The canonical representative absorbs the common scale into the physical
+    singular spectra, wraps the left rotations into the fixed domain, and
+    fixes the right rotations to the identity representative.
+    """
+    fit_seed = _as_fit_seed(seed)
+    effective_scale = fit_seed.overall_scale if overall_scale is None else float(overall_scale)
+    if not np.isfinite(effective_scale) or effective_scale <= 0.0:
+        raise ValueError("overall_scale must be finite and strictly positive")
+    up_physical = _require_positive_physical_spectrum(
+        "up physical singular values",
+        effective_scale * fit_seed.up_singular_values,
+    )
+    down_physical = _require_positive_physical_spectrum(
+        "down physical singular values",
+        effective_scale * fit_seed.down_singular_values,
+    )
+    return QuarkFitSeed(
+        up_singular_values=up_physical,
+        down_singular_values=down_physical,
+        overall_scale=1.0,
+        up_left=_canonicalize_rotation(fit_seed.up_left),
+        up_right=RotationParameters(),
+        down_left=_canonicalize_rotation(fit_seed.down_left),
+        down_right=RotationParameters(),
+    )
+
+
+def _rotation_to_vector(rotation: RotationParameters) -> np.ndarray:
+    return np.array(
+        [rotation.theta12, rotation.theta13, rotation.theta23, rotation.delta],
+        dtype=float,
+    )
+
+
+def _rotation_from_vector(values: np.ndarray) -> RotationParameters:
+    return RotationParameters(*np.asarray(values, dtype=float))
+
+
+def _require_positive_physical_spectrum(name: str, values: np.ndarray) -> np.ndarray:
+    arr = np.asarray(values, dtype=float)
+    if arr.shape != (3,):
+        raise ValueError(f"{name} must have shape (3,)")
+    if np.any(~np.isfinite(arr)) or np.any(arr <= 0.0):
+        raise ValueError(f"{name} must be strictly positive")
+    return arr
+
+
+def _canonicalize_angle(angle: float) -> float:
+    """Map an angle into the half-open interval [-pi, pi)."""
+    return float(((float(angle) + np.pi) % (2.0 * np.pi)) - np.pi)
+
+
+def _canonicalize_rotation(rotation: RotationParameters) -> RotationParameters:
+    """Return the canonical representative for a left-rotation block.
+
+    All four coordinates are wrapped into the same half-open interval so the
+    quotient chart has no exact `2π` translation redundancy.
+    """
+    return RotationParameters(
+        theta12=_canonicalize_angle(rotation.theta12),
+        theta13=_canonicalize_angle(rotation.theta13),
+        theta23=_canonicalize_angle(rotation.theta23),
+        delta=_canonicalize_angle(rotation.delta),
+    )
+
+
+def _rotation_from_unitary(matrix: np.ndarray) -> RotationParameters:
+    """Extract a canonical ``RotationParameters`` representative from a unitary."""
+    U = np.asarray(matrix, dtype=np.complex128)
+    if U.shape != (3, 3):
+        raise ValueError("rotation unitary must have shape (3, 3)")
+    theta13 = float(np.arcsin(np.clip(np.abs(U[0, 2]), 0.0, 1.0)))
+    theta12 = float(np.arctan2(np.abs(U[0, 1]), max(np.abs(U[0, 0]), 1e-15)))
+    theta23 = float(np.arctan2(np.abs(U[1, 2]), max(np.abs(U[2, 2]), 1e-15)))
+    quartet = U[0, 0] * U[1, 2] * np.conjugate(U[0, 2]) * np.conjugate(U[2, 2])
+    delta = float(_canonicalize_angle(np.angle(quartet)))
+    return _canonicalize_rotation(
+        RotationParameters(theta12=theta12, theta13=theta13, theta23=theta23, delta=delta)
+    )
+
+
+def _rotation_from_ckm_observables(observables: np.ndarray) -> RotationParameters:
+    """Build a canonical CKM-like representative from observable magnitudes.
+
+    The fit score only depends on the reduced CKM observable set, so the
+    returned seed is reported in a fixed common-left gauge with the up-sector
+    left rotation set to the identity representative and the down-sector left
+    rotation rebuilt from the fitted observables.
+    """
+    obs = np.round(np.asarray(observables, dtype=float), 5)
+    if obs.shape != (4,):
+        raise ValueError("CKM observables must have shape (4,)")
+    vus, vcb, vub, jarlskog = obs
+    s13 = float(np.clip(abs(vub), 0.0, 1.0))
+    c13 = float(np.sqrt(max(1.0 - s13 * s13, 0.0)))
+    s12 = float(np.clip(abs(vus) / max(c13, 1e-15), 0.0, 1.0))
+    s23 = float(np.clip(abs(vcb) / max(c13, 1e-15), 0.0, 1.0))
+    c12 = float(np.sqrt(max(1.0 - s12 * s12, 0.0)))
+    c23 = float(np.sqrt(max(1.0 - s23 * s23, 0.0)))
+    denominator = max(c12 * c13 * c13 * c23 * s12 * s13 * s23, 1e-30)
+    delta = float(np.arcsin(np.clip(jarlskog / denominator, -1.0, 1.0)))
+    return _canonicalize_rotation(
+        RotationParameters(
+            theta12=float(np.arcsin(s12)),
+            theta13=float(np.arcsin(s13)),
+            theta23=float(np.arcsin(s23)),
+            delta=delta,
+        )
+    )
+
+
+def _sort_physical_spectrum(
+    singular_values: np.ndarray,
+    rotation: RotationParameters,
+) -> tuple[np.ndarray, RotationParameters]:
+    """Sort a physical spectrum and permute the matching left unitary."""
+    spectrum = np.asarray(singular_values, dtype=float)
+    if spectrum.shape != (3,):
+        raise ValueError("physical singular values must have shape (3,)")
+    order = np.argsort(spectrum, kind="mergesort")
+    sorted_spectrum = spectrum[order]
+    rotated = ckm_like_unitary(rotation)[:, order]
+    return sorted_spectrum, _rotation_from_unitary(rotated)
+
+
+def _canonicalize_reported_seed(
+    seed: QuarkFitSeed,
+    *,
+    ckm_observables: np.ndarray,
+) -> QuarkFitSeed:
+    """Canonicalize a fitted seed into the frozen reported representative."""
+    up_singular_values = np.sort(
+        _require_positive_physical_spectrum("up physical singular values", seed.up_singular_values)
+    )
+    down_singular_values = np.sort(
+        _require_positive_physical_spectrum("down physical singular values", seed.down_singular_values)
+    )
+    up_singular_values = np.round(up_singular_values, 5)
+    down_singular_values = np.round(down_singular_values, 5)
+    down_left = _rotation_from_ckm_observables(ckm_observables)
+    return QuarkFitSeed(
+        up_singular_values=up_singular_values,
+        down_singular_values=down_singular_values,
+        overall_scale=1.0,
+        up_left=RotationParameters(),
+        up_right=RotationParameters(),
+        down_left=RotationParameters(
+            theta12=float(np.round(down_left.theta12, 5)),
+            theta13=float(np.round(down_left.theta13, 5)),
+            theta23=float(np.round(down_left.theta23, 5)),
+            delta=float(np.round(down_left.delta, 5)),
+        ),
+        down_right=RotationParameters(),
+    )
+
+
+def encode_quark_fit_canonical_vector(seed: Any) -> np.ndarray:
+    """Encode the quotient-chart fit vector.
+
+    Frozen order:
+    log physical up singular values (light to heavy), log physical down
+    singular values (light to heavy), then the left-rotation blocks
+    ``up_left`` and ``down_left`` in ``(theta12, theta13, theta23, delta)``
+    order.
+
+    The common overall scale is absorbed into the singular values. Right
+    rotations and the external ``r`` dial remain outside this chart.
+    """
+    fit_seed = _as_fit_seed(seed)
+    up_physical = _require_positive_physical_spectrum(
+        "up physical singular values",
+        fit_seed.overall_scale * fit_seed.up_singular_values,
+    )
+    down_physical = _require_positive_physical_spectrum(
+        "down physical singular values",
+        fit_seed.overall_scale * fit_seed.down_singular_values,
+    )
+    values = [
+        *np.log(up_physical),
+        *np.log(down_physical),
+        *_rotation_to_vector(_canonicalize_rotation(fit_seed.up_left)),
+        *_rotation_to_vector(_canonicalize_rotation(fit_seed.down_left)),
+    ]
+    vector = np.asarray(values, dtype=float)
+    if vector.shape != (QUARK_FIT_CANONICAL_VECTOR_SIZE,):
+        raise AssertionError("unexpected quark canonical-vector shape")
+    return vector
+
+
+def decode_quark_fit_canonical_vector(vector: np.ndarray) -> QuarkFitSeed:
+    """Decode the quotient-chart fit vector back into a fit seed.
+
+    The decoded representative is normalized with ``overall_scale = 1`` and
+    identity right rotations.
+    """
+    arr = np.asarray(vector, dtype=float)
+    if arr.shape != (QUARK_FIT_CANONICAL_VECTOR_SIZE,):
+        raise ValueError(
+            f"canonical quark fit vector must have shape ({QUARK_FIT_CANONICAL_VECTOR_SIZE},)"
+        )
+    return QuarkFitSeed(
+        up_singular_values=np.exp(arr[:3]),
+        down_singular_values=np.exp(arr[3:6]),
+        overall_scale=1.0,
+        up_left=_canonicalize_rotation(_rotation_from_vector(arr[6:10])),
+        up_right=RotationParameters(),
+        down_left=_canonicalize_rotation(_rotation_from_vector(arr[10:14])),
+        down_right=RotationParameters(),
+    )
+
+
+def encode_quark_fit_full_vector(seed: Any) -> np.ndarray:
+    """Compatibility alias for the canonical quotient-chart vector."""
+    return encode_quark_fit_canonical_vector(seed)
+
+
+def decode_quark_fit_full_vector(
+    vector: np.ndarray,
+) -> QuarkFitSeed:
+    """Compatibility alias for the canonical quotient-chart decoder."""
+    return decode_quark_fit_canonical_vector(vector)
+
+
 def _encode_seed(seed: QuarkFitSeed, fit_orientation: bool) -> np.ndarray:
     """Encode a fit seed into an optimization vector."""
     values = [*np.log(seed.up_singular_values), *np.log(seed.down_singular_values)]
     if fit_orientation:
         values.extend(
             [
-                seed.up_left.theta12,
-                seed.up_left.theta13,
-                seed.up_left.theta23,
-                seed.up_left.delta,
-                seed.down_left.theta12,
-                seed.down_left.theta13,
-                seed.down_left.theta23,
-                seed.down_left.delta,
+                _canonicalize_rotation(seed.up_left).theta12,
+                _canonicalize_rotation(seed.up_left).theta13,
+                _canonicalize_rotation(seed.up_left).theta23,
+                _canonicalize_rotation(seed.up_left).delta,
+                _canonicalize_rotation(seed.down_left).theta12,
+                _canonicalize_rotation(seed.down_left).theta13,
+                _canonicalize_rotation(seed.down_left).theta23,
+                _canonicalize_rotation(seed.down_left).delta,
             ]
         )
     return np.asarray(values, dtype=float)
@@ -355,19 +616,19 @@ def _decode_seed(
     up_singular_values = np.exp(arr[:3])
     down_singular_values = np.exp(arr[3:6])
     if fit_orientation:
-        up_left = RotationParameters(*arr[6:10])
-        down_left = RotationParameters(*arr[10:14])
+        up_left = _canonicalize_rotation(RotationParameters(*arr[6:10]))
+        down_left = _canonicalize_rotation(RotationParameters(*arr[10:14]))
     else:
-        up_left = template.up_left
-        down_left = template.down_left
+        up_left = _canonicalize_rotation(template.up_left)
+        down_left = _canonicalize_rotation(template.down_left)
     return QuarkFitSeed(
         up_singular_values=up_singular_values,
         down_singular_values=down_singular_values,
-        overall_scale=template.overall_scale,
+        overall_scale=1.0,
         up_left=up_left,
-        up_right=template.up_right,
+        up_right=RotationParameters(),
         down_left=down_left,
-        down_right=template.down_right,
+        down_right=RotationParameters(),
     )
 
 
@@ -408,26 +669,17 @@ def fit_quark_sector(
 ) -> QuarkFitSolution:
     """Fit a compact spurion seed to target masses and CKM data.
 
-    The current parameterization optimizes the spurion singular values and the
-    left-rotation angles/phases. Right rotations are carried through from the
-    input seed/template, so this is a benchmark-oriented restricted fit rather
-    than a full exploration of the entire spurion parameter space.
+    The optimizer state is the canonical quotient chart:
+    absorbed-scale physical singular values plus left-rotation coordinates.
+    When ``fit_orientation`` is false, the left rotations are held fixed at the
+    canonicalized template representative and only the physical spectra are
+    searched.
     """
     if seed is None:
         from .benchmarks import default_spurion_seed
 
         seed = default_spurion_seed()
-    template = _seed_from_benchmark_module(seed)
-    if overall_scale is not None and overall_scale != template.overall_scale:
-        template = QuarkFitSeed(
-            up_singular_values=template.up_singular_values,
-            down_singular_values=template.down_singular_values,
-            overall_scale=float(overall_scale),
-            up_left=template.up_left,
-            up_right=template.up_right,
-            down_left=template.down_left,
-            down_right=template.down_right,
-        )
+    template = _canonicalize_fit_seed(seed, overall_scale=overall_scale)
 
     initial_point = _seed_to_point(template, r=r, Lambda_IR=Lambda_IR, k=k)
     initial_result = evaluate_quark_fit(initial_point, targets, bulk_mass_map=bulk_map)
@@ -445,9 +697,10 @@ def fit_quark_sector(
         x0=_encode_seed(template, fit_orientation),
         max_nfev=max_nfev,
     )
-    best_seed = _decode_seed(optimum.x, template, fit_orientation)
-    best_point = _seed_to_point(best_seed, r=r, Lambda_IR=Lambda_IR, k=k)
+    raw_best_seed = _decode_seed(optimum.x, template, fit_orientation)
+    best_point = _seed_to_point(raw_best_seed, r=r, Lambda_IR=Lambda_IR, k=k)
     best_result = evaluate_quark_fit(best_point, targets, bulk_mass_map=bulk_map)
+    best_seed = _canonicalize_reported_seed(raw_best_seed, ckm_observables=best_result.ckm_observables)
     return QuarkFitSolution(
         seed=best_seed,
         result=best_result,

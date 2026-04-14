@@ -96,6 +96,87 @@ def _load_operators_module():
     return importlib.import_module("quarkConstraints.paper_0710_1869.eft_deltaf2.operators")
 
 
+def _physical_bulk_state() -> Any:
+    benchmarks_module = importlib.import_module("quarkConstraints.paper_0710_1869.benchmarks")
+    model_module = importlib.import_module("quarkConstraints.paper_0710_1869.model")
+
+    seed = benchmarks_module.Paper07101869BenchmarkSpurionSeed(
+        up_singular_values=(0.45, 1.2, 3.4),
+        down_singular_values=(0.15, 0.55, 1.7),
+        overall_scale=0.8,
+        up_left=model_module.Paper07101869RotationParameters.from_degrees(
+            theta12_deg=19.0,
+            theta13_deg=4.0,
+            theta23_deg=11.0,
+            delta=0.3,
+        ),
+        up_right=model_module.Paper07101869RotationParameters.from_degrees(
+            theta12_deg=13.0,
+            theta13_deg=7.0,
+            theta23_deg=5.0,
+            delta=0.1,
+        ),
+        down_left=model_module.Paper07101869RotationParameters.from_degrees(
+            theta12_deg=7.0,
+            theta13_deg=2.0,
+            theta23_deg=9.0,
+            delta=0.5,
+        ),
+        down_right=model_module.Paper07101869RotationParameters.from_degrees(
+            theta12_deg=17.0,
+            theta13_deg=3.0,
+            theta23_deg=6.0,
+            delta=0.2,
+        ),
+        notes="matching-test-seed",
+    )
+    benchmark = benchmarks_module.default_paper_0710_1869_pr1_benchmark()
+    physical_point = benchmarks_module.build_paper_0710_1869_seeded_physical_point(
+        benchmark,
+        seed,
+        metadata={"test_case": "matching_acceptance"},
+    )
+    return model_module.derive_paper_0710_1869_physical_bulk_state(physical_point)
+
+
+def _physical_kk_gluon_adapter_callable(module: Any) -> Any:
+    for name in (
+        "build_paper_0710_1869_physical_kk_gluon_couplings",
+        "build_paper_0710_1869_kk_gluon_couplings_from_physical_bulk_state",
+        "build_paper_0710_1869_kk_gluon_couplings_from_physical_state",
+    ):
+        candidate = getattr(module, name, None)
+        if callable(candidate):
+            return candidate
+
+    candidate = getattr(module, "build_paper_0710_1869_kk_gluon_couplings", None)
+    if callable(candidate):
+        try:
+            parameters = inspect.signature(candidate).parameters
+        except (TypeError, ValueError):
+            parameters = {}
+        if any(name in parameters for name in ("physical_bulk_state", "bulk_state")):
+            return candidate
+    return None
+
+
+def _build_physical_kk_gluon_couplings() -> Any:
+    kkgluon_module = importlib.import_module("quarkConstraints.paper_0710_1869.kkgluon")
+    adapter = _physical_kk_gluon_adapter_callable(kkgluon_module)
+    if not callable(adapter):
+        pytest.skip("physical bulk-state KK-gluon adapter not exposed yet")
+
+    physical_bulk_state = _physical_bulk_state()
+    try:
+        parameters = inspect.signature(adapter).parameters
+    except (TypeError, ValueError):
+        parameters = {}
+    for name in ("physical_bulk_state", "bulk_state", "physical_state"):
+        if name in parameters:
+            return adapter(**{name: physical_bulk_state})
+    pytest.skip("physical bulk-state KK-gluon adapter exposes no supported keyword parameter")
+
+
 def _canonicalize(value: Any) -> Any:
     if dataclasses.is_dataclass(value) and not isinstance(value, type):
         return _canonicalize(dataclasses.asdict(value))
@@ -444,6 +525,40 @@ def test_matching_scale_tags_track_mu_match_not_propagator_mass() -> None:
     assert base_propagator_mass == pytest.approx(base_scale.propagator_mass_GeV)
     assert heavier_propagator_mass == pytest.approx(heavier_scale.propagator_mass_GeV)
     assert base_propagator_mass != pytest.approx(heavier_propagator_mass)
+
+
+def test_matching_accepts_physical_bulk_state_couplings_without_new_logic() -> None:
+    module = _load_matching_module()
+    callable_obj = _get_callable(module, PARAMETERIZED_MATCHING_NAMES)
+    if not callable(callable_obj):
+        pytest.skip("parameterized matching callable is not exposed yet")
+
+    kkgluon_module = importlib.import_module("quarkConstraints.paper_0710_1869.kkgluon")
+    if _physical_kk_gluon_adapter_callable(kkgluon_module) is None:
+        pytest.skip("physical bulk-state KK-gluon adapter not exposed yet")
+
+    physical_couplings = _build_physical_kk_gluon_couplings()
+    assert isinstance(
+        physical_couplings,
+        kkgluon_module.Paper07101869PhysicalKKGluonCouplings,
+    )
+    assert (
+        physical_couplings.physical_profile_status_id
+        == kkgluon_module.PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID
+    )
+    payload = _payload_from_value(_invoke_matching(callable_obj, kk_couplings=physical_couplings))
+
+    assert float(
+        _require_mapping_value(payload, ("mu_match_GeV", "matching_scale_GeV"), "mu_match tag")
+    ) == pytest.approx(float(physical_couplings.normalization.mu_match_GeV))
+    assert float(
+        _require_mapping_value(payload, ("propagator_mass_GeV",), "propagator-mass tag")
+    ) == pytest.approx(float(physical_couplings.normalization.propagator_mass_GeV))
+    assert _coefficient_abs_map(payload)
+    assert _require_mapping_value(payload, ("benchmark_id",), "benchmark identifier") == physical_couplings.benchmark_id
+    assert _require_mapping_value(payload, ("scale_label",), "scale label") == physical_couplings.normalization.scale_label
+    assert _require_mapping_value(payload, ("left_basis_id",), "left basis identifier") == physical_couplings.left_down_aligned.basis_id
+    assert _require_mapping_value(payload, ("right_basis_id",), "right basis identifier") == physical_couplings.right_down.basis_id
 
 
 def test_lr_operator_descriptors_are_explicit_and_non_placeholder() -> None:

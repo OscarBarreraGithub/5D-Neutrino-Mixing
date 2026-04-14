@@ -47,8 +47,8 @@ and `B5(2 GeV) = 0.57(4)` around the already-frozen kaon LR
 
 ## Preserved Boundary
 
-- default/exported kaon observable path, benchmark numerics, paper artifacts,
-  and standalone verifier remain Q1-only
+- default kaon observable path, benchmark numerics, paper artifacts, and
+  standalone verifier remain Q1-only
 - the default kaon LR hadronic bundle is now frozen in the paper package under
   the ETM 2013 Table 1 MS(Buras) `2 GeV` source gate, but it is not
   auto-consumed by the kaon LR-only or combined `Q1 + LR` custom surfaces
@@ -60,6 +60,28 @@ and `B5(2 GeV) = 0.57(4)` around the already-frozen kaon LR
   `RI-MOM -> MS` conversion is allowed in the default LR hadronic path
 - artifact/verifier widening, conservative-bound `D0` interpretation, and
   `epsilon_K` remain out of scope
+
+## Working-Tree Note Outside The Published Boundary
+
+- the statements above remain the authoritative published-boundary status for
+  commit `df67be1dd5d08a27563c4bb31d62e94bd2e82e1b`
+- later local working-tree changes do not modify that frozen boundary unless a
+  new milestone is explicitly opened and closed
+- as of the current working tree on 2026-04-12, the repo also contains a
+  narrowed noncanonical QS1 structural/reference slice under
+  `quarkConstraints.paper_0710_1869`
+- that working-tree slice adds seeded structural MFV eigensystems, Eq. (3)
+  diagnostics, and a benchmark-reference mass probe with explicit noncanonical
+  attachment/provenance markers
+- the current working tree now also contains a hard-gated QS1 physical bridge
+  under the frozen seed-to-profile contract
+- that broader working-tree state is still not enough to justify a full
+  allowed quark Yukawa claim; QS2-QS7 remain before the broader program can
+  make that claim
+- for broader cross-lane program state, use
+  [`../QUARK_COMPLETION_PROGRAM.md`](../QUARK_COMPLETION_PROGRAM.md) and
+  [`../README.md`](../README.md); for the frozen published paper-facing
+  boundary, this status note remains authoritative
 
 ## Verification State
 

@@ -12,7 +12,29 @@ import pytest
 from quarkConstraints.paper_0710_1869.conventions import (
     PAPER_0710_1869_CONVENTIONS_SCHEMA_ID,
     PAPER_0710_1869_MODE_ID,
+    PAPER_0710_1869_KK_GLUON_NORMALIZATION_ID,
+    PAPER_0710_1869_MATCHING_ID,
+    PAPER_0710_1869_OPERATOR_BASIS_ID,
+    PAPER_0710_1869_PROFILE_DERIVATION_POLICY_ID,
+    PAPER_0710_1869_PROVENANCE_POLICY_ID,
+    PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_POLICY_ID,
+    PAPER_0710_1869_UNIVERSAL_TERM_COEFFICIENT_POLICY_ID,
+    PAPER_0710_1869_VERIFIER_POLICY_ID,
     Paper07101869Conventions,
+)
+from quarkConstraints.paper_0710_1869.inputs import (
+    PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT,
+    PAPER_0710_1869_AFFINE_BULK_MASS_SECTOR_POLICY_SCHEMA_ID,
+    PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET,
+    PAPER_0710_1869_BULK_MASS_PARAMETERIZATION_ID,
+    PAPER_0710_1869_EIGENVALUE_ORDERING_ID,
+    PAPER_0710_1869_PHYSICAL_SEED_TO_PROFILE_CONTRACT_SCHEMA_ID,
+    PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_SCHEMA_ID,
+    PAPER_0710_1869_UNIVERSAL_TERM_POLICY_SCHEMA_ID,
+    Paper07101869AffineBulkMassSectorPolicy,
+    Paper07101869PhysicalSeedToProfileContract,
+    Paper07101869SeedToProfileMappingPolicy,
+    Paper07101869UniversalTermPolicy,
 )
 from quarkConstraints.paper_0710_1869.scales import (
     PAPER_0710_1869_SCALES_SCHEMA_ID,
@@ -75,9 +97,22 @@ def test_conventions_validate_default_canonical_contract():
 
     assert conventions.schema_id == PAPER_0710_1869_CONVENTIONS_SCHEMA_ID
     assert conventions.mode_id == PAPER_0710_1869_MODE_ID
+    assert conventions.seed_to_profile_mapping_policy_id == (
+        PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_POLICY_ID
+    )
+    assert conventions.universal_term_coefficient_policy_id == (
+        PAPER_0710_1869_UNIVERSAL_TERM_COEFFICIENT_POLICY_ID
+    )
+    assert conventions.profile_derivation_policy_id == (
+        PAPER_0710_1869_PROFILE_DERIVATION_POLICY_ID
+    )
+    assert conventions.operator_basis_id == PAPER_0710_1869_OPERATOR_BASIS_ID
+    assert conventions.matching_id == PAPER_0710_1869_MATCHING_ID
+    assert conventions.kk_gluon_normalization_id == PAPER_0710_1869_KK_GLUON_NORMALIZATION_ID
+    assert conventions.provenance_policy_id == PAPER_0710_1869_PROVENANCE_POLICY_ID
+    assert conventions.verifier_policy_id == PAPER_0710_1869_VERIFIER_POLICY_ID
     assert conventions.rg_order == "lo"
     assert conventions.observable_scope == "np_only"
-    assert conventions.verifier_policy_id == "independent_verifier.required.v1"
 
 
 @pytest.mark.parametrize(
@@ -92,6 +127,146 @@ def test_conventions_validate_default_canonical_contract():
 def test_conventions_reject_invalid_identifiers(overrides, expected_message):
     with pytest.raises(ValueError, match=expected_message):
         Paper07101869Conventions(**overrides)
+
+
+def test_qs1_physical_seed_to_profile_policies_default_to_frozen_contract():
+    sector_policy = Paper07101869AffineBulkMassSectorPolicy()
+    universal_policy = Paper07101869UniversalTermPolicy()
+    mapping_policy = Paper07101869SeedToProfileMappingPolicy()
+    contract = Paper07101869PhysicalSeedToProfileContract()
+
+    assert sector_policy.schema_id == PAPER_0710_1869_AFFINE_BULK_MASS_SECTOR_POLICY_SCHEMA_ID
+    assert sector_policy.leading_term_coefficient == (
+        PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT
+    )
+    assert sector_policy.universal_offset == PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET
+
+    assert universal_policy.schema_id == PAPER_0710_1869_UNIVERSAL_TERM_POLICY_SCHEMA_ID
+    assert universal_policy.policy_id == PAPER_0710_1869_UNIVERSAL_TERM_COEFFICIENT_POLICY_ID
+    assert [policy.sector_id for policy in universal_policy.sector_policies] == ["Q", "u", "d"]
+    assert [
+        (policy.leading_term_coefficient, policy.universal_offset)
+        for policy in universal_policy.sector_policies
+    ] == [(1.0, 0.0), (1.0, 0.0), (1.0, 0.0)]
+
+    assert mapping_policy.schema_id == PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_SCHEMA_ID
+    assert mapping_policy.policy_id == PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_POLICY_ID
+    assert mapping_policy.bulk_mass_parameterization_id == PAPER_0710_1869_BULK_MASS_PARAMETERIZATION_ID
+    assert mapping_policy.eigenvalue_ordering_id == PAPER_0710_1869_EIGENVALUE_ORDERING_ID
+    assert mapping_policy.profile_derivation_policy_id == (
+        PAPER_0710_1869_PROFILE_DERIVATION_POLICY_ID
+    )
+    assert mapping_policy.uses_hidden_bulk_mass_map_surrogate is False
+
+    assert contract.schema_id == PAPER_0710_1869_PHYSICAL_SEED_TO_PROFILE_CONTRACT_SCHEMA_ID
+    assert contract.mapping_policy.policy_id == PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_POLICY_ID
+    assert contract.universal_term_policy.policy_id == (
+        PAPER_0710_1869_UNIVERSAL_TERM_COEFFICIENT_POLICY_ID
+    )
+    assert contract.mapping_policy.bulk_mass_parameterization_id == (
+        PAPER_0710_1869_BULK_MASS_PARAMETERIZATION_ID
+    )
+    assert contract.mapping_policy.eigenvalue_ordering_id == PAPER_0710_1869_EIGENVALUE_ORDERING_ID
+    assert [
+        (policy.leading_term_coefficient, policy.universal_offset)
+        for policy in contract.universal_term_policy.sector_policies
+    ] == [(1.0, 0.0), (1.0, 0.0), (1.0, 0.0)]
+
+
+@pytest.mark.parametrize(
+    ("overrides", "expected_message"),
+    [
+        ({"leading_term_coefficient": 1.5}, "leading_term_coefficient"),
+        ({"universal_offset": 0.25}, "universal_offset"),
+    ],
+)
+def test_affine_sector_policy_rejects_widened_numerics(overrides, expected_message):
+    with pytest.raises(ValueError, match=expected_message):
+        Paper07101869AffineBulkMassSectorPolicy(**overrides)
+
+
+@pytest.mark.parametrize(
+    ("overrides", "expected_message"),
+    [
+        ({"seed_to_profile_mapping_policy_id": "widened"}, "seed_to_profile_mapping_policy_id"),
+        ({"universal_term_coefficient_policy_id": "widened"}, "universal_term_coefficient_policy_id"),
+        ({"profile_derivation_policy_id": "widened"}, "profile_derivation_policy_id"),
+    ],
+)
+def test_conventions_reject_widened_qs1_policy_ids(overrides, expected_message):
+    with pytest.raises(ValueError, match=expected_message):
+        Paper07101869Conventions(**overrides)
+
+
+@pytest.mark.parametrize(
+    ("overrides", "expected_message"),
+    [
+        ({"operator_basis_id": "widened"}, "operator_basis_id"),
+        ({"matching_id": "widened"}, "matching_id"),
+        ({"kk_gluon_normalization_id": "widened"}, "kk_gluon_normalization_id"),
+        ({"provenance_policy_id": "widened"}, "provenance_policy_id"),
+        ({"verifier_policy_id": "widened"}, "verifier_policy_id"),
+    ],
+)
+def test_conventions_reject_widened_canonical_bundle_ids(overrides, expected_message):
+    with pytest.raises(ValueError, match=expected_message):
+        Paper07101869Conventions(**overrides)
+
+
+@pytest.mark.parametrize(
+    ("overrides", "expected_message"),
+    [
+        ({"policy_id": "widened"}, "policy_id"),
+        ({"bulk_mass_parameterization_id": "widened"}, "bulk_mass_parameterization_id"),
+        ({"eigenvalue_ordering_id": "widened"}, "eigenvalue_ordering_id"),
+        ({"profile_derivation_policy_id": "widened"}, "profile_derivation_policy_id"),
+    ],
+)
+def test_seed_to_profile_mapping_policy_rejects_widened_overrides(overrides, expected_message):
+    with pytest.raises(ValueError, match=expected_message):
+        Paper07101869SeedToProfileMappingPolicy(**overrides)
+
+
+def test_universal_term_policy_rejects_widened_sector_coefficients():
+    widened = Paper07101869AffineBulkMassSectorPolicy()
+    object.__setattr__(widened, "leading_term_coefficient", 2.0)
+
+    with pytest.raises(ValueError, match="sector_policies must keep leading_term_coefficient"):
+        Paper07101869UniversalTermPolicy(
+            sector_policies=(
+                widened,
+                Paper07101869AffineBulkMassSectorPolicy(sector_id="u"),
+                Paper07101869AffineBulkMassSectorPolicy(sector_id="d"),
+            )
+        )
+
+
+def test_physical_seed_to_profile_contract_rejects_widened_nested_policy_ids():
+    mapping_policy = Paper07101869SeedToProfileMappingPolicy()
+    object.__setattr__(mapping_policy, "policy_id", "widened")
+
+    with pytest.raises(ValueError, match="policy_id must be exactly"):
+        Paper07101869PhysicalSeedToProfileContract(mapping_policy=mapping_policy)
+
+
+def test_physical_seed_to_profile_contract_revalidates_nested_policy_contents():
+    universal_policy = Paper07101869UniversalTermPolicy()
+    object.__setattr__(
+        universal_policy.sector_policies[0],
+        "leading_term_coefficient",
+        2.0,
+    )
+
+    with pytest.raises(ValueError, match="leading_term_coefficient"):
+        Paper07101869PhysicalSeedToProfileContract(universal_term_policy=universal_policy)
+
+
+def test_physical_seed_to_profile_contract_revalidates_mapping_policy_contents():
+    mapping_policy = Paper07101869SeedToProfileMappingPolicy()
+    object.__setattr__(mapping_policy, "eigenvalue_ordering_id", "widened")
+
+    with pytest.raises(ValueError, match="eigenvalue_ordering_id"):
+        Paper07101869PhysicalSeedToProfileContract(mapping_policy=mapping_policy)
 
 
 def test_scale_point_keeps_matching_and_coupling_scales_explicit():

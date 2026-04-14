@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from collections.abc import Mapping
 from dataclasses import dataclass
 
 import numpy as np
@@ -23,7 +24,13 @@ from .couplings import (
     default_paper_0710_1869_coupling_contract,
     evaluate_paper_0710_1869_gauge_coupling,
 )
+from .fit import (
+    build_paper_0710_1869_physical_mass_matrices,
+    paper_physical_mass_ckm_probe_observables,
+)
 from .model import (
+    PAPER_0710_1869_POINT_DERIVED_PHYSICAL_STATUS_ID,
+    Paper07101869PhysicalBulkState,
     Paper07101869V5KMParameters,
     build_table_i_benchmark_from_inputs,
     paper_v5km_matrix,
@@ -47,13 +54,32 @@ PAPER_0710_1869_LEFT_UP_ALIGNED_BASIS_ID = "left_handed.up_aligned_identity.v1"
 PAPER_0710_1869_LEFT_DOWN_ALIGNED_BASIS_ID = (
     "left_handed.down_aligned_using_v5km_example.v1"
 )
+PAPER_0710_1869_PHYSICAL_LEFT_UP_ALIGNED_BASIS_ID = (
+    "left_handed.up_aligned_using_qs1_mass_probe_u_l_u.v1"
+)
+PAPER_0710_1869_PHYSICAL_LEFT_DOWN_ALIGNED_BASIS_ID = (
+    "left_handed.down_aligned_using_qs1_mass_probe_u_l_d.v1"
+)
 PAPER_0710_1869_RIGHT_DIAGONAL_BASIS_ID = "right_handed.table_i_diagonal_basis.v1"
+PAPER_0710_1869_PHYSICAL_RIGHT_UP_ALIGNED_BASIS_ID = (
+    "right_handed.up_aligned_using_qs1_mass_probe_u_r_u.v1"
+)
+PAPER_0710_1869_PHYSICAL_RIGHT_DOWN_ALIGNED_BASIS_ID = (
+    "right_handed.down_aligned_using_qs1_mass_probe_u_r_d.v1"
+)
 PAPER_0710_1869_LEFT_HANDED_BASIS_POLICY_ID = (
     "left_handed.paired_up_and_down_aligned_outputs.v1"
+)
+PAPER_0710_1869_PHYSICAL_LEFT_HANDED_BASIS_POLICY_ID = (
+    "left_handed.paired_up_and_down_aligned_outputs.from_qs1_mass_probe.v1"
 )
 PAPER_0710_1869_RIGHT_HANDED_BASIS_POLICY_ID = (
     "right_handed.diagonal_only_until_paper_owned_rotations_exist.v1"
 )
+PAPER_0710_1869_PHYSICAL_RIGHT_HANDED_BASIS_POLICY_ID = (
+    "right_handed.paired_up_and_down_aligned_outputs.from_qs1_mass_probe.v1"
+)
+PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID = PAPER_0710_1869_POINT_DERIVED_PHYSICAL_STATUS_ID
 
 
 def _as_complex_matrix3(name: str, values: np.ndarray) -> np.ndarray:
@@ -378,7 +404,11 @@ class Paper07101869KKGluonCouplings:
                 field_name,
                 require_nonempty_identifier(field_name, getattr(self, field_name)),
             )
-        require_member("benchmark_status", self.benchmark_status, ("sourced_structural_only",))
+        require_member(
+            "benchmark_status",
+            self.benchmark_status,
+            _allowed_kk_gluon_status_ids(),
+        )
         for field_name in ("theta12_deg", "theta23_deg", "theta13_deg", "delta"):
             numeric = float(getattr(self, field_name))
             if not math.isfinite(numeric):
@@ -392,6 +422,53 @@ class Paper07101869KKGluonCouplings:
         ):
             if not isinstance(getattr(self, field_name), Paper07101869KKGluonFlavorMatrix):
                 raise ValueError(f"{field_name} must be a Paper07101869KKGluonFlavorMatrix")
+
+    def as_dict(self) -> dict[str, object]:
+        """Return a deterministic representation of the KK-gluon couplings object."""
+        return {
+            "schema_id": self.schema_id,
+            "mode_id": self.mode_id,
+            "paper_id": self.paper_id,
+            "benchmark_id": self.benchmark_id,
+            "benchmark_label": self.benchmark_label,
+            "benchmark_status": self.benchmark_status,
+            "theta12_deg": self.theta12_deg,
+            "theta23_deg": self.theta23_deg,
+            "theta13_deg": self.theta13_deg,
+            "delta": self.delta,
+            "left_handed_basis_policy_id": self.left_handed_basis_policy_id,
+            "right_handed_basis_policy_id": self.right_handed_basis_policy_id,
+            "contract": {
+                "schema_id": self.contract.schema_id,
+                "dimensionless_matrix_policy_id": self.contract.dimensionless_matrix_policy_id,
+                "mu_gs_semantics_id": self.contract.mu_gs_semantics_id,
+                "universal_subtraction_policy_id": self.contract.universal_subtraction_policy_id,
+                "propagator_mass_rule_id": self.contract.propagator_mass_rule_id,
+                "single_mode_scale_policy_id": self.contract.single_mode_scale_policy_id,
+                "effective_scale_policy_id": self.contract.effective_scale_policy_id,
+            },
+            "normalization": {
+                "schema_id": self.normalization.schema_id,
+                "contract_schema_id": self.normalization.contract_schema_id,
+                "scale_label": self.normalization.scale_label,
+                "mu_gs_GeV": self.normalization.mu_gs_GeV,
+                "mu_match_GeV": self.normalization.mu_match_GeV,
+                "m_g1_GeV": self.normalization.m_g1_GeV,
+                "propagator_mass_GeV": self.normalization.propagator_mass_GeV,
+                "alpha_s_mu_gs": self.normalization.alpha_s_mu_gs,
+                "g_s_mu_gs": self.normalization.g_s_mu_gs,
+                "kk_gluon_normalization_id": self.normalization.kk_gluon_normalization_id,
+                "mu_gs_semantics_id": self.normalization.mu_gs_semantics_id,
+                "scale_policy_id": self.normalization.scale_policy_id,
+                "propagator_mass_rule_id": self.normalization.propagator_mass_rule_id,
+            },
+            "left_up_aligned": self.left_up_aligned.as_dict(),
+            "left_down_aligned": self.left_down_aligned.as_dict(),
+            "right_up": self.right_up.as_dict(),
+            "right_down": self.right_down.as_dict(),
+            "notes": self.notes,
+            "summary": self.summary().as_dict(),
+        }
 
     def summary(self) -> "Paper07101869KKGluonBenchmarkSummary":
         """Return the deterministic benchmark summary."""
@@ -426,6 +503,86 @@ class Paper07101869KKGluonCouplings:
             ),
             notes=self.notes,
         )
+
+
+@dataclass(frozen=True)
+class Paper07101869PhysicalKKGluonCouplings(Paper07101869KKGluonCouplings):
+    """Physical-side KK-gluon wrapper built from a point-derived bulk state."""
+
+    physical_profile_status_id: str = PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID
+    notes: str = (
+        "Physical-side KK-gluon adapter sourced from the point-derived QS1 bulk state. "
+        "Benchmark-facing schema compatibility is retained, but the left-handed Q-sector "
+        "bases are the physical QS1 SVD outputs U_L_u and U_L_d. Right-handed u/d blocks "
+        "are likewise built in the physical QS1 SVD bases U_R_u and U_R_d."
+    )
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        object.__setattr__(
+            self,
+            "physical_profile_status_id",
+            require_member(
+                "physical_profile_status_id",
+                self.physical_profile_status_id,
+                (PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID,),
+            ),
+        )
+        require_member(
+            "benchmark_status",
+            self.benchmark_status,
+            (PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID,),
+        )
+        require_member(
+            "left_handed_basis_policy_id",
+            self.left_handed_basis_policy_id,
+            (PAPER_0710_1869_PHYSICAL_LEFT_HANDED_BASIS_POLICY_ID,),
+        )
+        require_member(
+            "right_handed_basis_policy_id",
+            self.right_handed_basis_policy_id,
+            (PAPER_0710_1869_PHYSICAL_RIGHT_HANDED_BASIS_POLICY_ID,),
+        )
+
+    def summary(self) -> "Paper07101869PhysicalKKGluonBenchmarkSummary":
+        """Return the deterministic summary for the physical adapter wrapper."""
+        return Paper07101869PhysicalKKGluonBenchmarkSummary(
+            benchmark_id=self.benchmark_id,
+            benchmark_label=self.benchmark_label,
+            benchmark_status=self.benchmark_status,
+            scale_label=self.normalization.scale_label,
+            scale_policy_id=self.normalization.scale_policy_id,
+            kk_gluon_normalization_id=self.normalization.kk_gluon_normalization_id,
+            dimensionless_matrix_policy_id=self.contract.dimensionless_matrix_policy_id,
+            mu_gs_semantics_id=self.contract.mu_gs_semantics_id,
+            universal_subtraction_policy_id=self.contract.universal_subtraction_policy_id,
+            propagator_mass_rule_id=self.contract.propagator_mass_rule_id,
+            left_handed_basis_policy_id=self.left_handed_basis_policy_id,
+            right_handed_basis_policy_id=self.right_handed_basis_policy_id,
+            mu_gs_GeV=self.normalization.mu_gs_GeV,
+            mu_match_GeV=self.normalization.mu_match_GeV,
+            m_g1_GeV=self.normalization.m_g1_GeV,
+            propagator_mass_GeV=self.normalization.propagator_mass_GeV,
+            alpha_s_mu_gs=self.normalization.alpha_s_mu_gs,
+            g_s_mu_gs=self.normalization.g_s_mu_gs,
+            theta12_deg=self.theta12_deg,
+            theta23_deg=self.theta23_deg,
+            theta13_deg=self.theta13_deg,
+            delta=self.delta,
+            matrix_summaries=(
+                self.left_up_aligned.summary(),
+                self.left_down_aligned.summary(),
+                self.right_up.summary(),
+                self.right_down.summary(),
+            ),
+            notes=self.notes,
+            physical_profile_status_id=self.physical_profile_status_id,
+        )
+
+    def as_dict(self) -> dict[str, object]:
+        payload = super().as_dict()
+        payload["physical_profile_status_id"] = self.physical_profile_status_id
+        return payload
 
 
 @dataclass(frozen=True)
@@ -474,7 +631,11 @@ class Paper07101869KKGluonBenchmarkSummary:
         object.__setattr__(self, "paper_id", require_nonempty_identifier("paper_id", self.paper_id))
         require_member("mode_id", self.mode_id, (PAPER_0710_1869_MODE_ID,))
         require_member("paper_id", self.paper_id, (PAPER_0710_1869_PAPER_ID,))
-        require_member("benchmark_status", self.benchmark_status, ("sourced_structural_only",))
+        require_member(
+            "benchmark_status",
+            self.benchmark_status,
+            _allowed_kk_gluon_status_ids(),
+        )
         require_member(
             "scale_policy_id",
             self.scale_policy_id,
@@ -573,11 +734,76 @@ class Paper07101869KKGluonBenchmarkSummary:
         }
 
 
+@dataclass(frozen=True)
+class Paper07101869PhysicalKKGluonBenchmarkSummary(
+    Paper07101869KKGluonBenchmarkSummary
+):
+    """Physical-side summary wrapper for the KK-gluon adapter."""
+
+    physical_profile_status_id: str = PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        object.__setattr__(
+            self,
+            "physical_profile_status_id",
+            require_member(
+                "physical_profile_status_id",
+                self.physical_profile_status_id,
+                (PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID,),
+            ),
+        )
+        require_member(
+            "benchmark_status",
+            self.benchmark_status,
+            (PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID,),
+        )
+
+    def as_dict(self) -> dict[str, object]:
+        payload = super().as_dict()
+        payload["physical_profile_status_id"] = self.physical_profile_status_id
+        return payload
+
+
 def _real_triplet_tuple(
     name: str, values: tuple[float, float, float] | list[float] | np.ndarray
 ) -> tuple[float, float, float]:
     arr = _as_real_triplet(name, values)
     return tuple(float(value) for value in arr)
+
+
+def _allowed_kk_gluon_status_ids() -> tuple[str, ...]:
+    return (
+        "sourced_structural_only",
+        PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID,
+    )
+
+
+def _physical_benchmark_metadata(
+    physical_bulk_state: Paper07101869PhysicalBulkState,
+) -> tuple[str, str, float, float, float, float]:
+    metadata = physical_bulk_state.point.metadata
+    benchmark_id = physical_bulk_state.point.label
+    benchmark_label = physical_bulk_state.point.label
+    theta12_deg = 0.0
+    theta23_deg = 0.0
+    theta13_deg = 0.0
+    delta = 0.0
+
+    if isinstance(metadata, Mapping):
+        raw_benchmark_id = metadata.get("benchmark_id")
+        raw_benchmark_label = metadata.get("benchmark_label")
+        if isinstance(raw_benchmark_id, str) and raw_benchmark_id:
+            benchmark_id = raw_benchmark_id
+        if isinstance(raw_benchmark_label, str) and raw_benchmark_label:
+            benchmark_label = raw_benchmark_label
+        raw_eq3 = metadata.get("benchmark_eq3_example")
+        if isinstance(raw_eq3, Mapping):
+            theta12_deg = float(raw_eq3.get("theta12_deg", theta12_deg))
+            theta23_deg = float(raw_eq3.get("theta23_deg", theta23_deg))
+            theta13_deg = float(raw_eq3.get("theta13_deg", theta13_deg))
+            delta = float(raw_eq3.get("delta", delta))
+    return benchmark_id, benchmark_label, theta12_deg, theta23_deg, theta13_deg, delta
 
 
 def _build_matrix_block(
@@ -603,6 +829,33 @@ def _build_matrix_block(
         universal_subtracted_dimensionless=subtracted,
         raw_gs_normalized=_hermitian(g_s * raw),
         universal_subtracted_gs_normalized=_hermitian(g_s * subtracted),
+    )
+
+
+def _build_physical_matrix_block(
+    *,
+    label: str,
+    sector_id: str,
+    chiral_id: str,
+    basis_id: str,
+    profiles: tuple[float, float, float] | list[float] | np.ndarray,
+    rotation: list[list[float]] | list[list[complex]] | np.ndarray,
+    normalization: Paper07101869GaugeCouplingNormalization,
+) -> Paper07101869KKGluonFlavorMatrix:
+    profile_vector = _as_real_triplet("profiles", profiles)
+    rotation_matrix = _as_complex_matrix3("rotation", np.asarray(rotation, dtype=np.complex128))
+    raw_dimensionless = _hermitian(
+        rotation_matrix.conjugate().T
+        @ np.diag(profile_vector**2).astype(np.complex128)
+        @ rotation_matrix
+    )
+    return _build_matrix_block(
+        label=label,
+        sector_id=sector_id,
+        chiral_id=chiral_id,
+        basis_id=basis_id,
+        raw_dimensionless=raw_dimensionless,
+        normalization=normalization,
     )
 
 
@@ -705,6 +958,100 @@ def build_paper_0710_1869_kk_gluon_couplings(
     )
 
 
+def build_paper_0710_1869_kk_gluon_couplings_from_physical_bulk_state(
+    physical_bulk_state: Paper07101869PhysicalBulkState,
+    *,
+    scale_point: Paper07101869ScalePoint | None = None,
+    contract: Paper07101869CouplingContract | None = None,
+) -> Paper07101869PhysicalKKGluonCouplings:
+    """Build the honest QS2 physical KK-gluon adapter from a QS1 physical bulk state."""
+    if not isinstance(physical_bulk_state, Paper07101869PhysicalBulkState):
+        raise ValueError("physical_bulk_state must be a Paper07101869PhysicalBulkState")
+    if (
+        physical_bulk_state.physical_profile_status_id
+        != PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID
+    ):
+        raise ValueError(
+            "physical_bulk_state must carry the exact point-derived QS1 physical status"
+        )
+
+    resolved_scale = default_paper_0710_1869_scales() if scale_point is None else scale_point
+    if not isinstance(resolved_scale, Paper07101869ScalePoint):
+        raise ValueError("scale_point must be a Paper07101869ScalePoint")
+
+    resolved_contract = (
+        default_paper_0710_1869_coupling_contract() if contract is None else contract
+    )
+    if not isinstance(resolved_contract, Paper07101869CouplingContract):
+        raise ValueError("contract must be a Paper07101869CouplingContract")
+
+    normalization = evaluate_paper_0710_1869_gauge_coupling(
+        resolved_scale,
+        contract=resolved_contract,
+    )
+    M_u, M_d = build_paper_0710_1869_physical_mass_matrices(physical_bulk_state)
+    observables = paper_physical_mass_ckm_probe_observables(M_u, M_d)
+
+    left_up_aligned = _build_physical_matrix_block(
+        label="left_up_aligned",
+        sector_id="Q",
+        chiral_id="left",
+        basis_id=PAPER_0710_1869_PHYSICAL_LEFT_UP_ALIGNED_BASIS_ID,
+        profiles=physical_bulk_state.F_Q,
+        rotation=observables["U_L_u"],
+        normalization=normalization,
+    )
+    left_down_aligned = _build_physical_matrix_block(
+        label="left_down_aligned",
+        sector_id="Q",
+        chiral_id="left",
+        basis_id=PAPER_0710_1869_PHYSICAL_LEFT_DOWN_ALIGNED_BASIS_ID,
+        profiles=physical_bulk_state.F_Q,
+        rotation=observables["U_L_d"],
+        normalization=normalization,
+    )
+    right_up = _build_physical_matrix_block(
+        label="right_up_aligned",
+        sector_id="u",
+        chiral_id="right",
+        basis_id=PAPER_0710_1869_PHYSICAL_RIGHT_UP_ALIGNED_BASIS_ID,
+        profiles=physical_bulk_state.F_u,
+        rotation=observables["U_R_u"],
+        normalization=normalization,
+    )
+    right_down = _build_physical_matrix_block(
+        label="right_down_aligned",
+        sector_id="d",
+        chiral_id="right",
+        basis_id=PAPER_0710_1869_PHYSICAL_RIGHT_DOWN_ALIGNED_BASIS_ID,
+        profiles=physical_bulk_state.F_d,
+        rotation=observables["U_R_d"],
+        normalization=normalization,
+    )
+    benchmark_id, benchmark_label, theta12_deg, theta23_deg, theta13_deg, delta = (
+        _physical_benchmark_metadata(physical_bulk_state)
+    )
+
+    return Paper07101869PhysicalKKGluonCouplings(
+        contract=resolved_contract,
+        normalization=normalization,
+        left_up_aligned=left_up_aligned,
+        left_down_aligned=left_down_aligned,
+        right_up=right_up,
+        right_down=right_down,
+        benchmark_id=benchmark_id,
+        benchmark_label=benchmark_label,
+        benchmark_status=physical_bulk_state.physical_profile_status_id,
+        theta12_deg=theta12_deg,
+        theta23_deg=theta23_deg,
+        theta13_deg=theta13_deg,
+        delta=delta,
+        left_handed_basis_policy_id=PAPER_0710_1869_PHYSICAL_LEFT_HANDED_BASIS_POLICY_ID,
+        right_handed_basis_policy_id=PAPER_0710_1869_PHYSICAL_RIGHT_HANDED_BASIS_POLICY_ID,
+        physical_profile_status_id=physical_bulk_state.physical_profile_status_id,
+    )
+
+
 def default_paper_0710_1869_kk_gluon_couplings() -> Paper07101869KKGluonCouplings:
     """Return the default deterministic KK-gluon benchmark layer."""
     return build_paper_0710_1869_kk_gluon_couplings()
@@ -736,14 +1083,24 @@ __all__ = [
     "PAPER_0710_1869_LEFT_DOWN_ALIGNED_BASIS_ID",
     "PAPER_0710_1869_LEFT_HANDED_BASIS_POLICY_ID",
     "PAPER_0710_1869_LEFT_UP_ALIGNED_BASIS_ID",
+    "PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID",
+    "PAPER_0710_1869_PHYSICAL_LEFT_DOWN_ALIGNED_BASIS_ID",
+    "PAPER_0710_1869_PHYSICAL_LEFT_HANDED_BASIS_POLICY_ID",
+    "PAPER_0710_1869_PHYSICAL_LEFT_UP_ALIGNED_BASIS_ID",
+    "PAPER_0710_1869_PHYSICAL_RIGHT_DOWN_ALIGNED_BASIS_ID",
+    "PAPER_0710_1869_PHYSICAL_RIGHT_HANDED_BASIS_POLICY_ID",
+    "PAPER_0710_1869_PHYSICAL_RIGHT_UP_ALIGNED_BASIS_ID",
     "PAPER_0710_1869_RIGHT_DIAGONAL_BASIS_ID",
     "PAPER_0710_1869_RIGHT_HANDED_BASIS_POLICY_ID",
     "Paper07101869KKGluonBenchmarkSummary",
     "Paper07101869KKGluonCouplings",
     "Paper07101869KKGluonFlavorMatrix",
     "Paper07101869KKGluonMatrixSummary",
+    "Paper07101869PhysicalKKGluonBenchmarkSummary",
+    "Paper07101869PhysicalKKGluonCouplings",
     "build_paper_0710_1869_kk_gluon_benchmark_summary",
     "build_paper_0710_1869_kk_gluon_couplings",
+    "build_paper_0710_1869_kk_gluon_couplings_from_physical_bulk_state",
     "default_paper_0710_1869_kk_gluon_benchmark_summary",
     "default_paper_0710_1869_kk_gluon_couplings",
 ]

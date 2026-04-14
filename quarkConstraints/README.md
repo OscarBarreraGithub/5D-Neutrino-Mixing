@@ -13,7 +13,35 @@ generic RS flavor/CP problem into a controlled next-to-MFV structure. The
 key low-energy dial is the parameter `r`, which suppresses down-sector flavor
 violation and can make KK scales near 2 TeV viable.
 
-## Recommended implementation phases
+## Program docs
+
+- [`QUARK_COMPLETION_PROGRAM.md`](./QUARK_COMPLETION_PROGRAM.md): umbrella
+  post-paper program contract for the three-lane quark architecture
+- [`AGENT_ORCHESTRATION_PLAN.md`](./AGENT_ORCHESTRATION_PLAN.md):
+  exploratory `repo_v1` orchestration
+- [`PAPER_READY_REPRODUCTION_PLAN.md`](./PAPER_READY_REPRODUCTION_PLAN.md):
+  paper-facing reproduction critical path
+- [`PAPER_AGENT_WORKFLOW.md`](./PAPER_AGENT_WORKFLOW.md): persistent paper
+  execution workflow to use together with the paper status and reproduction
+  docs, not as a standalone replacement for them
+- [`paper_0710_1869/CURRENT_STATUS.md`](./paper_0710_1869/CURRENT_STATUS.md):
+  authoritative frozen paper boundary
+
+Current broader-program status:
+- the frozen published paper-facing boundary still has `next milestone: none`
+  in [`paper_0710_1869/CURRENT_STATUS.md`](./paper_0710_1869/CURRENT_STATUS.md)
+- the current working tree now includes a narrowed noncanonical QS1
+  structural/reference slice plus a hard-gated QS1 physical bridge in
+  `paper_0710_1869`
+- that is still not enough for a full allowed quark Yukawa claim: QS2-QS7
+  remain before the broader program can claim an allowed region, as tracked in
+  [`QUARK_COMPLETION_PROGRAM.md`](./QUARK_COMPLETION_PROGRAM.md)
+
+## Historical exploratory roadmap
+
+This section is retained as context for how the original `repo_v1`
+exploratory lane was staged. It is not the current blocker list for the
+broader quark program.
 
 The implementation should be built in stages, with strict scope control.
 
@@ -57,7 +85,7 @@ stack:
 - EDM calculations
 - scan integration with explicit provenance for non-paper ingredients
 
-## Recommended boundaries
+## Historical exploratory boundary
 
 Do not start with a full kaon/EDM package. The first useful version should
 test the structural claim of the paper, not pretend to be a complete flavor
@@ -69,7 +97,25 @@ fit quality?"
 
 ## Current status
 
-The quark-sector MFV scaffold is now present in this repo:
+The quark-sector work is active and currently split into lanes:
+
+- `repo_v1`: the top-level `quarkConstraints/` modules are the exploratory,
+  repo-local MFV implementation
+- `paper_0710_1869`: the frozen paper-facing audit/reproduction lane
+- `modern`: the planned canonical production lane defined in
+  [`QUARK_COMPLETION_PROGRAM.md`](./QUARK_COMPLETION_PROGRAM.md)
+
+The current working tree also carries one narrower cross-lane bridge under the
+paper package:
+
+- a noncanonical seeded structural/reference slice in
+  `quarkConstraints.paper_0710_1869`
+- this slice provides seeded structural MFV eigensystems and a
+  benchmark-reference mass probe with explicit noncanonical provenance
+- it is useful for broader-program staging, but it is not part of the frozen
+  published paper-facing claim boundary
+
+The current exploratory scaffold includes:
 
 - MFV-native spurion inputs in `model.py`
 - exact quark mass-matrix and CKM fitting in `fit.py`
@@ -114,4 +160,5 @@ as a compatibility helper for the earlier exploratory naming.
 See [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) for the converged
 minimal implementation proposal, and
 [`AGENT_ORCHESTRATION_PLAN.md`](AGENT_ORCHESTRATION_PLAN.md) for the multi-agent
-execution plan.
+execution plan. For the broader post-paper program, see
+[`QUARK_COMPLETION_PROGRAM.md`](./QUARK_COMPLETION_PROGRAM.md).

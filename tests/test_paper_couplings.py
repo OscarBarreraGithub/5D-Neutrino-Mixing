@@ -6,6 +6,8 @@ API is still landing. They are strict once the coupling module exists.
 
 from __future__ import annotations
 
+import importlib
+import inspect
 import json
 import subprocess
 import sys
@@ -54,6 +56,83 @@ def _load_kkgluon_module():
     if not _has_paper_couplings_module():
         pytest.skip("paper_0710_1869 coupling slice not implemented yet")
     return __import__("quarkConstraints.paper_0710_1869.kkgluon", fromlist=["*"])
+
+
+def _physical_bulk_state() -> object:
+    benchmarks_module = importlib.import_module("quarkConstraints.paper_0710_1869.benchmarks")
+    model_module = importlib.import_module("quarkConstraints.paper_0710_1869.model")
+
+    seed = benchmarks_module.Paper07101869BenchmarkSpurionSeed(
+        up_singular_values=(0.45, 1.2, 3.4),
+        down_singular_values=(0.15, 0.55, 1.7),
+        overall_scale=0.8,
+        up_left=model_module.Paper07101869RotationParameters.from_degrees(
+            theta12_deg=19.0,
+            theta13_deg=4.0,
+            theta23_deg=11.0,
+            delta=0.3,
+        ),
+        up_right=model_module.Paper07101869RotationParameters.from_degrees(
+            theta12_deg=13.0,
+            theta13_deg=7.0,
+            theta23_deg=5.0,
+            delta=0.1,
+        ),
+        down_left=model_module.Paper07101869RotationParameters.from_degrees(
+            theta12_deg=7.0,
+            theta13_deg=2.0,
+            theta23_deg=9.0,
+            delta=0.5,
+        ),
+        down_right=model_module.Paper07101869RotationParameters.from_degrees(
+            theta12_deg=17.0,
+            theta13_deg=3.0,
+            theta23_deg=6.0,
+            delta=0.2,
+        ),
+        notes="couplings-test-seed",
+    )
+    benchmark = benchmarks_module.default_paper_0710_1869_pr1_benchmark()
+    physical_point = benchmarks_module.build_paper_0710_1869_seeded_physical_point(
+        benchmark,
+        seed,
+        metadata={"test_case": "couplings_acceptance"},
+    )
+    return model_module.derive_paper_0710_1869_physical_bulk_state(physical_point)
+
+
+def _physical_kk_gluon_adapter_callable(module):
+    for name in (
+        "build_paper_0710_1869_physical_kk_gluon_couplings",
+        "build_paper_0710_1869_kk_gluon_couplings_from_physical_bulk_state",
+        "build_paper_0710_1869_kk_gluon_couplings_from_physical_state",
+    ):
+        candidate = getattr(module, name, None)
+        if callable(candidate):
+            return candidate
+
+    candidate = getattr(module, "build_paper_0710_1869_kk_gluon_couplings", None)
+    if callable(candidate):
+        try:
+            parameters = inspect.signature(candidate).parameters
+        except (TypeError, ValueError):
+            parameters = {}
+        if any(name in parameters for name in ("physical_bulk_state", "bulk_state")):
+            return candidate
+    return None
+
+
+def _invoke_physical_kk_gluon_adapter(callable_obj, physical_bulk_state):
+    try:
+        parameters = inspect.signature(callable_obj).parameters
+    except (TypeError, ValueError):
+        parameters = {}
+    for name in ("physical_bulk_state", "bulk_state", "physical_state"):
+        if name in parameters:
+            return callable_obj(**{name: physical_bulk_state})
+    raise AssertionError(
+        "physical bulk-state adapter exists but exposes no supported keyword parameter"
+    )
 
 
 def test_importing_paper_couplings_does_not_load_repo_v1_modules() -> None:
@@ -221,4 +300,34 @@ def test_default_kkgluon_benchmark_summary_is_present_and_deterministic() -> Non
     assert (
         matrix_summaries["right_down_diagonal"]["universal_subtracted_offdiag_fro_norm"]
         == pytest.approx(0.0)
+    )
+
+
+def test_physical_bulk_state_adapter_is_deterministic_and_distinct_from_reference_path() -> None:
+    module = _load_kkgluon_module()
+    adapter = _physical_kk_gluon_adapter_callable(module)
+    if not callable(adapter):
+        pytest.skip("physical bulk-state KK-gluon adapter not exposed yet")
+
+    physical_bulk_state = _physical_bulk_state()
+    first = _invoke_physical_kk_gluon_adapter(adapter, physical_bulk_state)
+    second = _invoke_physical_kk_gluon_adapter(adapter, physical_bulk_state)
+    benchmark_default = module.default_paper_0710_1869_kk_gluon_couplings()
+
+    assert isinstance(first, module.Paper07101869PhysicalKKGluonCouplings)
+    assert isinstance(second, module.Paper07101869PhysicalKKGluonCouplings)
+    assert json.dumps(first.as_dict(), sort_keys=True) == json.dumps(second.as_dict(), sort_keys=True)
+    assert first.physical_profile_status_id == module.PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID
+    assert second.physical_profile_status_id == module.PAPER_0710_1869_PHYSICAL_KK_GLUON_STATUS_ID
+    assert first.left_up_aligned.basis_id != benchmark_default.left_up_aligned.basis_id
+    assert first.left_down_aligned.basis_id != benchmark_default.left_down_aligned.basis_id
+    assert first.right_up.basis_id != benchmark_default.right_up.basis_id
+    assert first.right_down.basis_id != benchmark_default.right_down.basis_id
+    assert second.left_up_aligned.basis_id != benchmark_default.left_up_aligned.basis_id
+    assert second.left_down_aligned.basis_id != benchmark_default.left_down_aligned.basis_id
+    assert second.right_up.basis_id != benchmark_default.right_up.basis_id
+    assert second.right_down.basis_id != benchmark_default.right_down.basis_id
+    assert (
+        json.dumps(first.summary().as_dict(), sort_keys=True)
+        != json.dumps(benchmark_default.summary().as_dict(), sort_keys=True)
     )

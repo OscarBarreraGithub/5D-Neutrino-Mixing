@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
+import shutil
+from contextlib import contextmanager
 from dataclasses import asdict
 from pathlib import Path
 
@@ -11,6 +14,7 @@ import pytest
 
 from quarkConstraints.paper_0710_1869.artifacts import (
     write_default_paper_0710_1869_kaon_artifact_exports,
+    write_strict_paper_0710_1869_kaon_artifact_exports,
 )
 from quarkConstraints.paper_0710_1869.benchmarks import (
     PAPER_0710_1869_BENCHMARK_SCHEMA_ID,
@@ -49,6 +53,9 @@ from quarkConstraints.paper_0710_1869.verifier import TolerancePolicy
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_ROOT = REPO_ROOT / "quarkConstraints" / "paper_0710_1869"
 BENCHMARK_SCRIPT = REPO_ROOT / "scripts" / "benchmark_quark_0710_1869.py"
+STRICT_PAPER_ARTIFACT_ROOT_ENV = (
+    "QUARKCONSTRAINTS_PAPER_0710_1869_STRICT_ARTIFACT_ROOT"
+)
 GOLDEN_ARTIFACT_DIR = (
     REPO_ROOT / "tests" / "golden" / "paper_0710_1869" / "default_kaon_np_only"
 )
@@ -176,16 +183,31 @@ def _canonical_tolerance_policy() -> dict[str, object]:
     return asdict(TolerancePolicy())
 
 
-def _run_acceptance_benchmark(*args: str) -> dict[str, object]:
+def _run_acceptance_benchmark(
+    *args: str,
+    strict_canonical_root: Path | None = None,
+) -> dict[str, object]:
+    env = os.environ.copy()
+    if strict_canonical_root is not None:
+        env[STRICT_PAPER_ARTIFACT_ROOT_ENV] = str(strict_canonical_root)
     completed = subprocess.run(
         [sys.executable, str(BENCHMARK_SCRIPT), "--emit-json", *args],
         check=False,
         capture_output=True,
         text=True,
         cwd=REPO_ROOT,
+        env=env,
     )
     assert completed.stdout, completed.stderr
     return json.loads(completed.stdout)
+
+
+@contextmanager
+def _temporarily_hide_strict_canonical_exports(tmp_path: Path):
+    canonical_dir = tmp_path / "strict_paper_kaon"
+    if canonical_dir.exists():
+        shutil.rmtree(canonical_dir)
+    yield canonical_dir
 
 
 def _canonical_payload_sha256(value: object) -> str:
@@ -1265,3 +1287,113 @@ def test_acceptance_benchmark_exports_canonical_artifacts_deterministically(tmp_
 
     assert artifact_summary["file_sha256"] == repeat_summary["artifacts"]["file_sha256"]
     assert artifact_summary["file_sha256"] == artifact_summary["writer_file_sha256"]
+
+
+def test_acceptance_benchmark_reports_strict_paper_artifact_summary_and_exports(
+    tmp_path: Path,
+) -> None:
+    benchmark_dir = tmp_path / "benchmark"
+    repeat_dir = tmp_path / "repeat"
+    writer_dir = tmp_path / "writer"
+
+    with _temporarily_hide_strict_canonical_exports(tmp_path) as canonical_dir:
+        assert not canonical_dir.exists()
+
+        summary = _run_acceptance_benchmark(
+            "--export-artifacts-dir",
+            str(benchmark_dir),
+            strict_canonical_root=canonical_dir,
+        )
+        strict_summary = summary.get("strict_paper_artifacts")
+        if not strict_summary:
+            pytest.fail("strict-paper artifact summary path not exposed yet")
+
+        assert summary["artifacts"]["status"] == "ok"
+        assert strict_summary["status"] == "ok"
+        assert strict_summary["canonical_root_source"] == "env_override"
+        assert strict_summary["canonical_root_path"] == str(canonical_dir)
+        checks = strict_summary["checks"]
+        assert checks["point_id_matches_strict_paper_contract"] is True
+        assert checks["bundle_ids_match_strict_paper_contract"] is True
+        assert checks["strict_numerics_match_default_export"] is True
+        assert checks["strict_provenance_ids_are_disjoint_from_default"] is True
+        assert checks["strict_source_bundle_ids_are_distinct_from_default"] is True
+        assert checks["canonical_export_files_present"] is False
+        assert checks["canonical_export_tree_is_complete_or_absent"] is True
+        assert checks["effective_strict_exports_match_current_export"] is False
+        assert strict_summary["canonical_file_sha256"] == {}
+        assert (
+            strict_summary["matching_coefficients"]
+            == summary["artifacts"]["matching_coefficients"]
+        )
+
+        write_strict_paper_0710_1869_kaon_artifact_exports(canonical_dir)
+
+        corrupted_provenance_file = canonical_dir / EXPECTED_ARTIFACT_FILENAMES["provenance"]
+        corrupted_provenance_file.unlink()
+
+        partial_summary = _run_acceptance_benchmark(
+            "--export-artifacts-dir",
+            str(repeat_dir),
+            strict_canonical_root=canonical_dir,
+        )
+        partial_strict_summary = partial_summary.get("strict_paper_artifacts")
+        if not partial_strict_summary:
+            pytest.fail(
+                "strict-paper artifact summary path not exposed after partial canonical write"
+            )
+
+        partial_checks = partial_strict_summary["checks"]
+        assert partial_strict_summary["canonical_root_source"] == "env_override"
+        assert partial_strict_summary["canonical_root_path"] == str(canonical_dir)
+        assert partial_summary["strict_paper_artifacts"]["status"] == "failed"
+        assert partial_checks["canonical_export_files_present"] is False
+        assert partial_checks["canonical_export_tree_is_complete_or_absent"] is False
+        assert partial_checks["effective_strict_exports_match_current_export"] is False
+
+        write_strict_paper_0710_1869_kaon_artifact_exports(canonical_dir)
+        repeat_summary = _run_acceptance_benchmark(
+            "--export-artifacts-dir",
+            str(repeat_dir),
+            strict_canonical_root=canonical_dir,
+        )
+        repeat_strict_summary = repeat_summary.get("strict_paper_artifacts")
+        if not repeat_strict_summary:
+            pytest.fail("strict-paper artifact summary path not exposed after canonical write")
+
+        repeat_checks = repeat_strict_summary["checks"]
+        assert repeat_strict_summary["canonical_root_source"] == "env_override"
+        assert repeat_strict_summary["canonical_root_path"] == str(canonical_dir)
+        assert repeat_strict_summary["repo_tracked_canonical_root_path"] == str(
+            REPO_ROOT / "results" / "paper_0710_1869" / "strict_paper_kaon"
+        )
+        assert repeat_checks["canonical_export_files_present"] is True
+        assert repeat_checks["effective_strict_exports_match_current_export"] is True
+        assert repeat_checks["canonical_export_tree_is_complete_or_absent"] is True
+        assert repeat_strict_summary["canonical_file_sha256"] == repeat_strict_summary["file_sha256"]
+        assert (
+            repeat_strict_summary["matching_coefficients"]
+            == repeat_summary["artifacts"]["matching_coefficients"]
+        )
+
+    writer_paths = write_strict_paper_0710_1869_kaon_artifact_exports(writer_dir)
+    strict_export_dir = benchmark_dir / "strict_paper"
+    repeat_strict_export_dir = repeat_dir / "strict_paper"
+    writer_files = {
+        "wilsons": writer_paths.wilson_path,
+        "hadronic": writer_paths.hadronic_path,
+        "observables": writer_paths.observable_path,
+        "provenance": writer_paths.provenance_path,
+    }
+    for key, filename in EXPECTED_ARTIFACT_FILENAMES.items():
+        exported = strict_export_dir / filename
+        repeated = repeat_strict_export_dir / filename
+        writer_export = writer_files[key]
+        assert exported.exists(), filename
+        assert repeated.exists(), filename
+        assert writer_export.exists(), filename
+        assert exported.read_text(encoding="utf-8") == repeated.read_text(encoding="utf-8")
+        assert exported.read_text(encoding="utf-8") == writer_export.read_text(encoding="utf-8")
+
+    assert strict_summary["file_sha256"] == repeat_strict_summary["file_sha256"]
+    assert strict_summary["file_sha256"] == strict_summary["writer_file_sha256"]

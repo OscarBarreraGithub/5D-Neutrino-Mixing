@@ -34,3 +34,7 @@ build/
 # Scan artifacts
 logs/
 scan_outputs/
+
+# Temporary scratch files
+tmp*.json
+tmp-*

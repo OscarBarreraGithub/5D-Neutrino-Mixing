@@ -1,0 +1,99 @@
+{
+  "B_K_mu_had": 0.5557449829565828,
+  "alpha_s_policy_id": "qcd.alpha_s.lo.beta0.thresholds_continuous.v1",
+  "bag_parameter_conversion_alpha_s_mu_had": 0.26770024052060604,
+  "bag_parameter_conversion_beta0": 8.333333333333334,
+  "bag_parameter_conversion_exponent": 0.24,
+  "bag_parameter_conversion_formula_id": "b_k_mu_had.equals.hat_b_k_rgi_times_alpha_s_mu_had_pow_2_over_beta0_lo.v1",
+  "bag_parameter_conversion_n_f": 4,
+  "bag_parameter_source": {
+    "citation": "PDG 2024 Lattice QCD review, Sec. 17.3.2, FLAG average",
+    "locator_label": "Sec. 17.3.2, kaon bag parameter discussion",
+    "notes": "Uses the FLAG average hat{B}_K = 0.7625 as the underlying default source. In the default mu_had regime, the emitted B_K_mu_had payload is pinned to 0.5557449829565828 to preserve the canonical default export instead of being recomputed at runtime.",
+    "renormalization_scheme_id": "rgi.flag21.average.v1",
+    "source_id": "strict.paper.bag.source.v1",
+    "source_kind": "review-average",
+    "transformation_id": "hat_bk_to_bk_mu_had.lo_inverse_q1_running.v1",
+    "year": 2024
+  },
+  "bag_parameter_source_id": "strict.paper.bag.source.v1",
+  "bag_parameter_source_scheme_id": "rgi.flag21.average.v1",
+  "bag_parameter_transformation_id": "hat_bk_to_bk_mu_had.lo_inverse_q1_running.v1",
+  "benchmark_id": "kaon.np_only.strict_paper.v1",
+  "decay_constant_source": {
+    "citation": "PDG 2024 Leptonic Decays of Charged Pseudoscalar Mesons, Eq. (72.14)",
+    "locator_label": "Eq. (72.14)",
+    "notes": "PR5a reuses the PDG/FLAG charged-kaon decay constant fK+ = 155.7 MeV as f_K in the kaon NP-only slice. No separate isospin correction is applied.",
+    "source_id": "strict.paper.decay.constant.source.v1",
+    "source_kind": "review-average",
+    "transformation_id": "charged_kaon_decay_constant_reused_as_fK.v1",
+    "year": 2024
+  },
+  "decay_constant_source_id": "strict.paper.decay.constant.source.v1",
+  "f_K_GeV": 0.1557,
+  "hadronic_source_id": "strict.paper.hadronic.source.v1",
+  "hamiltonian_convention_id": "heff.sum_ci_qi.no_hc_factor.v1",
+  "hat_B_K_rgi_source_value": 0.7625,
+  "input_provenance_mode_id": "paper_sourced_defaults.v1",
+  "m_K0_GeV": 0.497611,
+  "mass_source": {
+    "citation": "PDG 2024 neutral kaon listing",
+    "locator_label": "K0 mass listing",
+    "notes": "Uses the PDG neutral-kaon mass m_K0 = 497.611 MeV.",
+    "source_id": "strict.paper.mass.source.v1",
+    "source_kind": "particle-property",
+    "transformation_id": "none",
+    "year": 2024
+  },
+  "mass_source_id": "strict.paper.mass.source.v1",
+  "matrix_element_formula_id": "kaon.q1_vll_vrr.8over3_fk2_mk2_bk_mu.v1",
+  "metadata": {
+    "bundle_id": "hadronic.kaon.pr1.table_i_eq3_example.strict_paper.v1",
+    "mode": "paper_0710_1869",
+    "point_id": "pr1.table_i_eq3_example.strict_paper.v1",
+    "schema_name": "paper_0710_1869.hadronic_bundle",
+    "schema_version": 1
+  },
+  "mu_had_GeV": 2.0,
+  "notes": "PR5a kaon hadronic bundle: NP-only M12 support for Q1_VLL and Q1_VRR only. Non-zero LR operator contributions remain unsupported end-to-end.",
+  "operator_basis": "kk_gluon_tree_np_only.v1",
+  "operator_normalization": "paper_0710_1869.deltaf2.kk_gluon_tree_color_normalization.v1",
+  "parity_relation_id": "kaon.q1_vll_equals_q1_vrr.by_parity.v1",
+  "provenance_ids": [
+    "strict.paper.hadronic.source.v1",
+    "strict.paper.mass.source.v1",
+    "strict.paper.decay.constant.source.v1",
+    "strict.paper.bag.source.v1"
+  ],
+  "q1_matrix_element_GeV4": 0.008896136795909601,
+  "renormalization_scheme": "bmu.hep-ph-0005183.ndr-ms.lo.v1",
+  "scales": [
+    {
+      "name": "mu_match",
+      "role": "matching scale",
+      "value_gev": 3000.0
+    },
+    {
+      "name": "mu_had",
+      "role": "hadronic evaluation scale",
+      "value_gev": 2.0
+    },
+    {
+      "name": "m_g1",
+      "role": "KK-gluon propagator mass",
+      "value_gev": 3000.0
+    }
+  ],
+  "source_id": "strict.paper.hadronic.source.v1",
+  "source_wilson_bundle_id": "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1",
+  "supported_operator_names": [
+    "Q1_VLL",
+    "Q1_VRR"
+  ],
+  "system": "kaon",
+  "system_id": "kaon",
+  "unsupported_operator_names": [
+    "Q4_LR",
+    "Q5_LR"
+  ]
+}

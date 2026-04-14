@@ -4,11 +4,101 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from quarkConstraints.benchmarks import default_quark_targets, default_spurion_seed
-from quarkConstraints.fit import QuarkTargets, fit_quark_sector, fit_residuals
+from quarkConstraints.fit import (
+    QUARK_FIT_CANONICAL_VECTOR_FIELDS,
+    QUARK_FIT_CANONICAL_VECTOR_SIZE,
+    QuarkFitSeed,
+    QuarkTargets,
+    evaluate_quark_fit,
+    decode_quark_fit_canonical_vector,
+    encode_quark_fit_canonical_vector,
+    fit_quark_sector,
+    fit_residuals,
+)
+from quarkConstraints.model import RotationParameters, build_mfv_point_from_singular_values
+
+
+def _fit_seed_from_benchmark() -> QuarkFitSeed:
+    seed = default_spurion_seed()
+    return QuarkFitSeed(
+        up_singular_values=seed.up_singular_values,
+        down_singular_values=seed.down_singular_values,
+        overall_scale=seed.overall_scale,
+        up_left=seed.up_left,
+        up_right=seed.up_right,
+        down_left=seed.down_left,
+        down_right=seed.down_right,
+    )
+
+
+def _assert_rotation_close(actual: RotationParameters, expected: RotationParameters) -> None:
+    assert np.isclose(actual.theta12, expected.theta12)
+    assert np.isclose(actual.theta13, expected.theta13)
+    assert np.isclose(actual.theta23, expected.theta23)
+    assert np.isclose(actual.delta, expected.delta)
+
+
+def _canonical_angle(angle: float) -> float:
+    return float(((float(angle) + np.pi) % (2.0 * np.pi)) - np.pi)
+
+
+def _identity_rotation() -> RotationParameters:
+    return RotationParameters()
+
+
+def _rotation_from_ckm_observables(observables: np.ndarray) -> RotationParameters:
+    vus, vcb, vub, jarlskog = np.round(np.asarray(observables, dtype=float), 5)
+    s13 = float(np.clip(abs(vub), 0.0, 1.0))
+    c13 = float(np.sqrt(max(1.0 - s13 * s13, 0.0)))
+    s12 = float(np.clip(abs(vus) / max(c13, 1e-15), 0.0, 1.0))
+    s23 = float(np.clip(abs(vcb) / max(c13, 1e-15), 0.0, 1.0))
+    c12 = float(np.sqrt(max(1.0 - s12 * s12, 0.0)))
+    c23 = float(np.sqrt(max(1.0 - s23 * s23, 0.0)))
+    denominator = max(c12 * c13 * c13 * c23 * s12 * s13 * s23, 1e-30)
+    delta = float(np.arcsin(np.clip(jarlskog / denominator, -1.0, 1.0)))
+    return RotationParameters(
+        theta12=float(np.round(np.arcsin(s12), 5)),
+        theta13=float(np.round(np.arcsin(s13), 5)),
+        theta23=float(np.round(np.arcsin(s23), 5)),
+        delta=float(np.round(((delta + np.pi) % (2.0 * np.pi)) - np.pi, 5)),
+    )
+
+
+def _quotient_equivalent_seed(seed: QuarkFitSeed) -> QuarkFitSeed:
+    return QuarkFitSeed(
+        up_singular_values=seed.up_singular_values / 7.0,
+        down_singular_values=seed.down_singular_values / 7.0,
+        overall_scale=seed.overall_scale * 7.0,
+        up_left=RotationParameters(
+            theta12=seed.up_left.theta12 + 2.0 * np.pi,
+            theta13=seed.up_left.theta13 - 2.0 * np.pi,
+            theta23=seed.up_left.theta23 + 2.0 * np.pi,
+            delta=seed.up_left.delta - 2.0 * np.pi,
+        ),
+        up_right=RotationParameters(
+            theta12=seed.up_right.theta12 + 0.31,
+            theta13=seed.up_right.theta13 - 0.27,
+            theta23=seed.up_right.theta23 + 0.19,
+            delta=seed.up_right.delta - 0.11,
+        ),
+        down_left=RotationParameters(
+            theta12=seed.down_left.theta12 - 2.0 * np.pi,
+            theta13=seed.down_left.theta13 + 2.0 * np.pi,
+            theta23=seed.down_left.theta23 - 2.0 * np.pi,
+            delta=seed.down_left.delta + 2.0 * np.pi,
+        ),
+        down_right=RotationParameters(
+            theta12=seed.down_right.theta12 - 0.17,
+            theta13=seed.down_right.theta13 + 0.23,
+            theta23=seed.down_right.theta23 - 0.29,
+            delta=seed.down_right.delta + 0.41,
+        ),
+    )
 
 
 def test_fit_quark_sector_improves_seed_score_and_matches_targets():
@@ -28,11 +118,65 @@ def test_fit_quark_sector_improves_seed_score_and_matches_targets():
     assert np.max(np.abs(solution.result.ckm_residuals)) < 1.0e-2
 
 
+def test_fit_quark_sector_returns_the_canonical_quotient_representative():
+    solution = fit_quark_sector(default_quark_targets(), seed=default_spurion_seed(), overall_scale=3.0, max_nfev=120)
+
+    assert np.isclose(solution.seed.overall_scale, 1.0)
+    assert np.all(np.diff(solution.seed.up_singular_values) >= -1e-12)
+    assert np.all(np.diff(solution.seed.down_singular_values) >= -1e-12)
+    _assert_rotation_close(solution.seed.up_left, _identity_rotation())
+    _assert_rotation_close(solution.seed.up_right, _identity_rotation())
+    _assert_rotation_close(solution.seed.down_right, _identity_rotation())
+    _assert_rotation_close(solution.seed.down_left, _rotation_from_ckm_observables(solution.result.ckm_observables))
+    np.testing.assert_allclose(
+        encode_quark_fit_canonical_vector(solution.seed),
+        encode_quark_fit_canonical_vector(decode_quark_fit_canonical_vector(encode_quark_fit_canonical_vector(solution.seed))),
+        rtol=0.0,
+        atol=1e-12,
+    )
+
+
 def test_fitted_ckm_matrix_is_unitary():
     """The extracted CKM matrix should remain unitary after exact diagonalization."""
     solution = fit_quark_sector(default_quark_targets(), overall_scale=3.0, max_nfev=120)
     ckm = solution.result.ckm_matrix
     assert np.allclose(ckm.conjugate().T @ ckm, np.eye(3), atol=1e-10)
+
+
+def test_fit_quark_sector_is_invariant_under_quotient_directions():
+    targets = default_quark_targets()
+    base_seed = _fit_seed_from_benchmark()
+    shifted_seed = _quotient_equivalent_seed(base_seed)
+
+    base_solution = fit_quark_sector(targets, seed=base_seed, max_nfev=120)
+    shifted_solution = fit_quark_sector(targets, seed=shifted_seed, max_nfev=120)
+
+    assert np.isclose(base_solution.initial_score, shifted_solution.initial_score, rtol=0.0, atol=1e-9)
+    assert np.isclose(base_solution.result.score, shifted_solution.result.score, rtol=0.0, atol=1e-8)
+    np.testing.assert_allclose(
+        base_solution.result.mass_residuals_up,
+        shifted_solution.result.mass_residuals_up,
+        rtol=0.0,
+        atol=2e-4,
+    )
+    np.testing.assert_allclose(
+        base_solution.result.mass_residuals_down,
+        shifted_solution.result.mass_residuals_down,
+        rtol=0.0,
+        atol=2e-4,
+    )
+    np.testing.assert_allclose(
+        base_solution.result.ckm_residuals,
+        shifted_solution.result.ckm_residuals,
+        rtol=0.0,
+        atol=3e-7,
+    )
+    np.testing.assert_allclose(
+        encode_quark_fit_canonical_vector(base_solution.seed),
+        encode_quark_fit_canonical_vector(shifted_solution.seed),
+        rtol=0.0,
+        atol=1e-12,
+    )
 
 
 def test_ckm_observable_residuals_are_invariant_under_jarlskog_sign_convention():
@@ -70,3 +214,357 @@ def test_ckm_observable_residuals_are_invariant_under_jarlskog_sign_convention()
         atol=1e-12,
     )
     assert np.isclose(residuals["total_score"], flipped["total_score"], atol=1e-12)
+
+
+def test_full_vector_shape_and_field_order_are_deterministic():
+    seed = _fit_seed_from_benchmark()
+    vector = encode_quark_fit_canonical_vector(seed)
+
+    assert QUARK_FIT_CANONICAL_VECTOR_FIELDS == (
+        "log_up_physical_singular_values[0]",
+        "log_up_physical_singular_values[1]",
+        "log_up_physical_singular_values[2]",
+        "log_down_physical_singular_values[0]",
+        "log_down_physical_singular_values[1]",
+        "log_down_physical_singular_values[2]",
+        "up_left.theta12",
+        "up_left.theta13",
+        "up_left.theta23",
+        "up_left.delta",
+        "down_left.theta12",
+        "down_left.theta13",
+        "down_left.theta23",
+        "down_left.delta",
+    )
+    assert vector.shape == (QUARK_FIT_CANONICAL_VECTOR_SIZE,)
+    np.testing.assert_allclose(vector[:3], np.log(seed.overall_scale * seed.up_singular_values))
+    np.testing.assert_allclose(
+        vector[3:6], np.log(seed.overall_scale * seed.down_singular_values)
+    )
+    np.testing.assert_allclose(
+        vector[6:10],
+        np.array(
+            [
+                _canonical_angle(seed.up_left.theta12),
+                _canonical_angle(seed.up_left.theta13),
+                _canonical_angle(seed.up_left.theta23),
+                _canonical_angle(seed.up_left.delta),
+            ],
+            dtype=float,
+        ),
+    )
+    np.testing.assert_allclose(
+        vector[10:14],
+        np.array(
+            [
+                _canonical_angle(seed.down_left.theta12),
+                _canonical_angle(seed.down_left.theta13),
+                _canonical_angle(seed.down_left.theta23),
+                _canonical_angle(seed.down_left.delta),
+            ],
+            dtype=float,
+        ),
+    )
+
+
+def test_canonical_vector_encode_decode_is_idempotent_on_normalized_representative():
+    seed = _fit_seed_from_benchmark()
+    vector = encode_quark_fit_canonical_vector(seed)
+    recovered = decode_quark_fit_canonical_vector(vector)
+    round_tripped = encode_quark_fit_canonical_vector(recovered)
+
+    np.testing.assert_allclose(
+        recovered.up_singular_values,
+        seed.overall_scale * seed.up_singular_values,
+    )
+    np.testing.assert_allclose(
+        recovered.down_singular_values,
+        seed.overall_scale * seed.down_singular_values,
+    )
+    assert np.isclose(recovered.overall_scale, 1.0)
+    _assert_rotation_close(recovered.up_left, seed.up_left)
+    _assert_rotation_close(recovered.down_left, seed.down_left)
+    assert np.isclose(recovered.up_right.theta12, 0.0)
+    assert np.isclose(recovered.up_right.theta13, 0.0)
+    assert np.isclose(recovered.up_right.theta23, 0.0)
+    assert np.isclose(recovered.up_right.delta, 0.0)
+    assert np.isclose(recovered.down_right.theta12, 0.0)
+    assert np.isclose(recovered.down_right.theta13, 0.0)
+    assert np.isclose(recovered.down_right.theta23, 0.0)
+    assert np.isclose(recovered.down_right.delta, 0.0)
+    np.testing.assert_allclose(round_tripped, vector, rtol=0.0, atol=0.0)
+
+
+def test_canonical_vector_quotients_out_common_scale():
+    seed = QuarkFitSeed(
+        up_singular_values=np.array([0.25, 0.5, 1.0], dtype=float),
+        down_singular_values=np.array([0.125, 0.25, 0.75], dtype=float),
+        overall_scale=1.0,
+        up_left=RotationParameters(theta12=0.1, theta13=0.2, theta23=0.3, delta=0.4),
+        up_right=RotationParameters(theta12=0.05, theta13=0.06, theta23=0.07, delta=0.08),
+        down_left=RotationParameters(theta12=0.11, theta13=0.12, theta23=0.13, delta=0.14),
+        down_right=RotationParameters(theta12=0.09, theta13=0.04, theta23=0.03, delta=0.02),
+    )
+    altered = QuarkFitSeed(
+        up_singular_values=seed.up_singular_values / 8.0,
+        down_singular_values=seed.down_singular_values / 8.0,
+        overall_scale=seed.overall_scale * 8.0,
+        up_left=seed.up_left,
+        up_right=seed.up_right,
+        down_left=seed.down_left,
+        down_right=seed.down_right,
+    )
+
+    base_vector = encode_quark_fit_canonical_vector(seed)
+    altered_vector = encode_quark_fit_canonical_vector(altered)
+    np.testing.assert_allclose(base_vector, altered_vector, rtol=0.0, atol=0.0)
+
+    base_point = build_mfv_point_from_singular_values(
+        up_singular_values=seed.up_singular_values,
+        down_singular_values=seed.down_singular_values,
+        overall_scale=seed.overall_scale,
+        r=0.25,
+        up_left=seed.up_left,
+        up_right=seed.up_right,
+        down_left=seed.down_left,
+        down_right=seed.down_right,
+        label="base-right-rotation-regression",
+    )
+    altered_point = build_mfv_point_from_singular_values(
+        up_singular_values=altered.up_singular_values,
+        down_singular_values=altered.down_singular_values,
+        overall_scale=altered.overall_scale,
+        r=0.25,
+        up_left=altered.up_left,
+        up_right=altered.up_right,
+        down_left=altered.down_left,
+        down_right=altered.down_right,
+        label="altered-right-rotation-regression",
+    )
+
+    base_result = evaluate_quark_fit(base_point, default_quark_targets())
+    altered_result = evaluate_quark_fit(altered_point, default_quark_targets())
+
+    assert np.isclose(base_result.score, altered_result.score, rtol=0.0, atol=1e-9)
+    np.testing.assert_allclose(
+        base_result.masses_up,
+        altered_result.masses_up,
+        rtol=0.0,
+        atol=1e-9,
+    )
+    np.testing.assert_allclose(
+        base_result.masses_down,
+        altered_result.masses_down,
+        rtol=0.0,
+        atol=1e-9,
+    )
+    np.testing.assert_allclose(
+        base_result.ckm_observables,
+        altered_result.ckm_observables,
+        rtol=0.0,
+        atol=2e-9,
+    )
+    np.testing.assert_allclose(base_result.state.c_u, altered_result.state.c_u, rtol=0.0, atol=1e-9)
+    np.testing.assert_allclose(base_result.state.c_d, altered_result.state.c_d, rtol=0.0, atol=1e-9)
+
+
+def test_canonical_vector_quotients_out_right_rotations_without_changing_observables():
+    seed = _fit_seed_from_benchmark()
+    altered = QuarkFitSeed(
+        up_singular_values=seed.up_singular_values,
+        down_singular_values=seed.down_singular_values,
+        overall_scale=seed.overall_scale,
+        up_left=seed.up_left,
+        up_right=RotationParameters(
+            theta12=seed.up_right.theta12 + 0.11,
+            theta13=seed.up_right.theta13 + 0.07,
+            theta23=seed.up_right.theta23 + 0.05,
+            delta=seed.up_right.delta + 0.13,
+        ),
+        down_left=seed.down_left,
+        down_right=RotationParameters(
+            theta12=seed.down_right.theta12 - 0.09,
+            theta13=seed.down_right.theta13 + 0.04,
+            theta23=seed.down_right.theta23 + 0.02,
+            delta=seed.down_right.delta - 0.15,
+        ),
+    )
+
+    base_vector = encode_quark_fit_canonical_vector(seed)
+    altered_vector = encode_quark_fit_canonical_vector(altered)
+    np.testing.assert_allclose(base_vector, altered_vector, rtol=0.0, atol=0.0)
+
+    base_point = build_mfv_point_from_singular_values(
+        up_singular_values=seed.up_singular_values,
+        down_singular_values=seed.down_singular_values,
+        overall_scale=seed.overall_scale,
+        r=0.25,
+        up_left=seed.up_left,
+        up_right=seed.up_right,
+        down_left=seed.down_left,
+        down_right=seed.down_right,
+        label="base-right-rotation-regression",
+    )
+    altered_point = build_mfv_point_from_singular_values(
+        up_singular_values=altered.up_singular_values,
+        down_singular_values=altered.down_singular_values,
+        overall_scale=altered.overall_scale,
+        r=0.25,
+        up_left=altered.up_left,
+        up_right=altered.up_right,
+        down_left=altered.down_left,
+        down_right=altered.down_right,
+        label="altered-right-rotation-regression",
+    )
+
+    base_result = evaluate_quark_fit(base_point, default_quark_targets())
+    altered_result = evaluate_quark_fit(altered_point, default_quark_targets())
+
+    assert np.isclose(base_result.score, altered_result.score, rtol=0.0, atol=1e-9)
+    np.testing.assert_allclose(
+        base_result.masses_up,
+        altered_result.masses_up,
+        rtol=0.0,
+        atol=1e-9,
+    )
+    np.testing.assert_allclose(
+        base_result.masses_down,
+        altered_result.masses_down,
+        rtol=0.0,
+        atol=1e-9,
+    )
+    np.testing.assert_allclose(
+        base_result.ckm_observables,
+        altered_result.ckm_observables,
+        rtol=0.0,
+        atol=2e-9,
+    )
+    np.testing.assert_allclose(base_result.state.c_u, altered_result.state.c_u, rtol=0.0, atol=1e-9)
+    np.testing.assert_allclose(base_result.state.c_d, altered_result.state.c_d, rtol=0.0, atol=1e-9)
+
+
+def test_canonical_vector_wraps_left_angles_into_fundamental_domain():
+    seed = _fit_seed_from_benchmark()
+    shifted = QuarkFitSeed(
+        up_singular_values=seed.up_singular_values,
+        down_singular_values=seed.down_singular_values,
+        overall_scale=seed.overall_scale,
+        up_left=RotationParameters(
+            theta12=seed.up_left.theta12 + 2.0 * np.pi,
+            theta13=seed.up_left.theta13,
+            theta23=seed.up_left.theta23,
+            delta=seed.up_left.delta,
+        ),
+        up_right=seed.up_right,
+        down_left=RotationParameters(
+            theta12=seed.down_left.theta12,
+            theta13=seed.down_left.theta13,
+            theta23=seed.down_left.theta23,
+            delta=seed.down_left.delta - 4.0 * np.pi,
+        ),
+        down_right=seed.down_right,
+    )
+
+    base_vector = encode_quark_fit_canonical_vector(seed)
+    shifted_vector = encode_quark_fit_canonical_vector(shifted)
+    np.testing.assert_allclose(base_vector, shifted_vector, rtol=0.0, atol=1e-15)
+
+    recovered = decode_quark_fit_canonical_vector(shifted_vector)
+    assert -np.pi <= recovered.up_left.theta12 < np.pi
+    assert -np.pi <= recovered.down_left.theta12 < np.pi
+    assert np.isclose(recovered.up_left.theta12, _canonical_angle(seed.up_left.theta12), rtol=0.0, atol=1e-12)
+    assert np.isclose(
+        recovered.down_left.theta12,
+        _canonical_angle(seed.down_left.theta12),
+        rtol=0.0,
+        atol=1e-12,
+    )
+
+
+def test_fit_orientation_false_remains_deterministic_and_restricted():
+    targets = default_quark_targets()
+    base_seed = _fit_seed_from_benchmark()
+    shifted_seed = _quotient_equivalent_seed(base_seed)
+
+    base_solution = fit_quark_sector(
+        targets,
+        seed=base_seed,
+        max_nfev=120,
+        fit_orientation=False,
+    )
+    shifted_solution = fit_quark_sector(
+        targets,
+        seed=shifted_seed,
+        max_nfev=120,
+        fit_orientation=False,
+    )
+
+    np.testing.assert_allclose(
+        base_solution.initial_score,
+        shifted_solution.initial_score,
+        rtol=0.0,
+        atol=1e-9,
+    )
+    np.testing.assert_allclose(
+        base_solution.result.masses_up,
+        shifted_solution.result.masses_up,
+        rtol=0.0,
+        atol=2e-4,
+    )
+    np.testing.assert_allclose(
+        base_solution.result.masses_down,
+        shifted_solution.result.masses_down,
+        rtol=0.0,
+        atol=2e-4,
+    )
+    np.testing.assert_allclose(
+        base_solution.result.ckm_residuals,
+        shifted_solution.result.ckm_residuals,
+        rtol=0.0,
+        atol=3e-7,
+    )
+    np.testing.assert_allclose(
+        encode_quark_fit_canonical_vector(base_solution.seed),
+        encode_quark_fit_canonical_vector(shifted_solution.seed),
+        rtol=0.0,
+        atol=1e-12,
+    )
+    assert np.isclose(base_solution.seed.overall_scale, 1.0)
+    assert np.all(np.diff(base_solution.seed.up_singular_values) >= -1e-12)
+    assert np.all(np.diff(base_solution.seed.down_singular_values) >= -1e-12)
+    _assert_rotation_close(base_solution.seed.up_left, _identity_rotation())
+    _assert_rotation_close(base_solution.seed.up_right, _identity_rotation())
+    _assert_rotation_close(base_solution.seed.down_right, _identity_rotation())
+    _assert_rotation_close(
+        base_solution.seed.down_left,
+        _rotation_from_ckm_observables(base_solution.result.ckm_observables),
+    )
+
+
+def test_fit_residuals_reject_zero_ckm_observable_scales():
+    targets = QuarkTargets(
+        up_masses=np.array([1.0, 2.0, 3.0], dtype=float),
+        down_masses=np.array([4.0, 5.0, 6.0], dtype=float),
+        ckm=np.eye(3, dtype=np.complex128),
+        label="zero-observable-scale-target",
+    )
+    masses_up = np.array([1.0, 2.0, 3.0], dtype=float)
+    masses_down = np.array([4.0, 5.0, 6.0], dtype=float)
+
+    with pytest.raises(ValueError, match="non-zero CKM observable targets"):
+        fit_residuals(masses_up, masses_down, np.eye(3, dtype=np.complex128), targets)
+
+
+def test_canonical_encoder_rejects_non_positive_physical_singular_values():
+    seed = QuarkFitSeed(
+        up_singular_values=np.array([0.0, 0.5, 1.0], dtype=float),
+        down_singular_values=np.array([0.2, 0.3, 0.4], dtype=float),
+        overall_scale=1.0,
+        up_left=RotationParameters(),
+        up_right=RotationParameters(),
+        down_left=RotationParameters(),
+        down_right=RotationParameters(),
+    )
+
+    with pytest.raises(ValueError, match="up physical singular values must be strictly positive"):
+        encode_quark_fit_canonical_vector(seed)
