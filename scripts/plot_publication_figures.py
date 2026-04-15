@@ -370,21 +370,14 @@ def _plot_exclusion_boundaries(data: dict[str, Any], output_dir: Path) -> list[P
             label=SYSTEM_LABELS[sys_id],
         )
 
-    # Combined exclusion contour (thick black)
-    ax.contour(
-        R_grid, M_grid, interp_max,
-        levels=[0.0],
-        colors=["black"],
-        linewidths=[3],
-        linestyles=["solid"],
-    )
-    ax.plot([], [], color="black", linewidth=3, linestyle="solid", label="Combined")
+    # The green/red shading already marks the combined allowed/excluded
+    # boundary, so no additional black contour line is needed.
 
     # Region labels
     # Find a point safely in the allowed region (high M_KK, mid r)
     mid_r = 0.5 * (log_r.min() + log_r.max())
     high_mkk = log_mkk.max() - 0.15 * (log_mkk.max() - log_mkk.min())
-    low_mkk = log_mkk.min() + 0.15 * (log_mkk.max() - log_mkk.min())
+    low_mkk = log_mkk.min() + 0.25 * (log_mkk.max() - log_mkk.min())
 
     ax.text(
         mid_r, high_mkk, "Allowed",
@@ -579,17 +572,7 @@ def _plot_mkk_bound_comparison(data: dict[str, Any], output_dir: Path) -> list[P
             linewidths=0.8, zorder=5,
         )
 
-    # Reference line at 3 TeV (LHC direct search reach)
-    ax.axhline(
-        3.0, color="gray", linestyle="dashed", linewidth=1.2, alpha=0.7, zorder=1,
-    )
-    ax.text(
-        r_vals[len(r_vals) // 2] if len(r_vals) > 0 else 1.0,
-        3.15,
-        "LHC direct search reach",
-        fontsize=9.5, color="gray", ha="center", va="bottom",
-        fontstyle="italic",
-    )
+    # (LHC direct search line removed for cleaner presentation)
 
     ax.set_xscale("log")
     ax.set_xlabel(r"$r$", fontsize=14)
