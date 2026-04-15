@@ -16,13 +16,17 @@ from quarkConstraints.modern.inputs import default_modern_default_inputs
 
 def test_modern_point_couplings_matches_repo_formula_for_benchmark_point() -> None:
     fit_result = evaluate_default_benchmark().result
+    inputs = default_modern_default_inputs()
     modern = build_modern_point_couplings(
         fit_result,
         point_id="benchmark-point",
         point_label="benchmark-label",
     )
-    repo = compute_quark_kk_gluon_couplings(fit_result)
-    inputs = default_modern_default_inputs()
+    # The repo formula must be called with the same g_s_star that the modern
+    # bundle uses (default 3.0) so the coupling matrices agree.
+    repo = compute_quark_kk_gluon_couplings(
+        fit_result, g_s_star=inputs.qcd_metadata.g_s_star,
+    )
 
     assert modern.schema_id == MODERN_POINT_COUPLINGS_SCHEMA_ID
     assert modern.point_id == "benchmark-point"

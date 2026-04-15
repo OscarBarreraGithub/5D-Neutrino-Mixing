@@ -760,12 +760,15 @@ class ModernDefaultQCDMetadata:
     alpha_s_reference_value: float = MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV
     alpha_s_policy_id: str = MODERN_DEFAULT_ALPHA_S_POLICY_ID
     alpha_s_precision: str = "high"
+    g_s_star: float | None = 3.0
     scale_convention_provenance_record_id: str = MODERN_DEFAULT_PROVENANCE_RECORD_IDS[2]
     alpha_s_provenance_record_id: str = MODERN_DEFAULT_PROVENANCE_RECORD_IDS[3]
     notes: str = (
         "Reference-only QCD metadata for the repo-owned mu = 3 TeV benchmark. "
         "The alpha_s value is a frozen cross-check number, not a claim of a "
-        "full RG or EFT package."
+        "full RG or EFT package. The g_s_star value is the enhanced 5D KK-gluon "
+        "coupling (one-loop estimate from Gedalia et al. 2009); set to None to "
+        "fall back to the perturbative g_s(M_KK)."
     )
 
     def __post_init__(self) -> None:
@@ -806,6 +809,11 @@ class ModernDefaultQCDMetadata:
         )
         object.__setattr__(self, "alpha_s_policy_id", _require_text("alpha_s_policy_id", self.alpha_s_policy_id))
         object.__setattr__(self, "alpha_s_precision", _require_text("alpha_s_precision", self.alpha_s_precision))
+        if self.g_s_star is not None:
+            g_s_star_val = float(self.g_s_star)
+            if g_s_star_val <= 0.0:
+                raise ValueError("g_s_star must be positive when provided")
+            object.__setattr__(self, "g_s_star", g_s_star_val)
         object.__setattr__(
             self,
             "scale_convention_provenance_record_id",
@@ -837,6 +845,7 @@ class ModernDefaultQCDMetadata:
             "alpha_s_reference_value": self.alpha_s_reference_value,
             "alpha_s_policy_id": self.alpha_s_policy_id,
             "alpha_s_precision": self.alpha_s_precision,
+            "g_s_star": self.g_s_star,
             "scale_convention_provenance_record_id": self.scale_convention_provenance_record_id,
             "alpha_s_provenance_record_id": self.alpha_s_provenance_record_id,
             "notes": self.notes,

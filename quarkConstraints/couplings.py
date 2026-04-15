@@ -98,6 +98,7 @@ def compute_quark_kk_gluon_couplings(
     *,
     M_KK: float | None = None,
     xi_KK: float = 1.0,
+    g_s_star: float | None = None,
 ) -> QuarkMassBasisCouplings:
     """Return mass-basis KK-gluon couplings for a fitted MFV point.
 
@@ -111,9 +112,21 @@ def compute_quark_kk_gluon_couplings(
     xi_KK
         Conversion factor between the geometric IR scale and the KK scale when
         ``M_KK`` is not supplied. The repo default is ``1.0``.
+    g_s_star
+        Enhanced 5D KK-gluon coupling. In RS models the first KK-gluon mode
+        has a wavefunction peaked near the IR brane, enhancing its coupling to
+        zero-mode quarks by a factor ``sqrt(2 k pi r_c)`` relative to the SM
+        ``g_s``. Typical values are ``~6`` at tree level (Csaki, Falkowski,
+        Weiler 2008) or ``~3`` at one-loop level (Gedalia, Grossman, Nir, Perez
+        2009). When provided, this value is used directly as the gauge coupling
+        multiplying the overlap matrices instead of the perturbative
+        ``g_s(M_KK)``. When ``None`` (default), falls back to the 4D
+        perturbative coupling ``g_s = sqrt(4 pi alpha_s(M_KK))``.
     """
     if xi_KK <= 0.0:
         raise ValueError("xi_KK must be positive")
+    if g_s_star is not None and float(g_s_star) <= 0.0:
+        raise ValueError("g_s_star must be positive when provided")
 
     state = fit_result.state
     resolved_mkk = (
@@ -130,7 +143,8 @@ def compute_quark_kk_gluon_couplings(
     )
 
     running_alpha_s = float(alpha_s(resolved_mkk, precision="high"))
-    g_s = float(sqrt(4.0 * pi * running_alpha_s))
+    perturbative_g_s = float(sqrt(4.0 * pi * running_alpha_s))
+    effective_g_s = float(g_s_star) if g_s_star is not None else perturbative_g_s
 
     left_overlap = _mass_basis_overlap(fit_result.U_L_d, state.F_Q)
     right_down_overlap = _mass_basis_overlap(fit_result.U_R_d, state.F_d)
@@ -141,12 +155,12 @@ def compute_quark_kk_gluon_couplings(
         M_KK=resolved_mkk,
         xi_KK=resolved_xi_kk,
         alpha_s=running_alpha_s,
-        g_s=g_s,
+        g_s=effective_g_s,
         left_overlap=left_overlap,
         right_up_overlap=right_up_overlap,
         right_down_overlap=right_down_overlap,
-        left_up=_hermitian(g_s * left_up_overlap),
-        left_down=_hermitian(g_s * left_overlap),
-        right_up=_hermitian(g_s * right_up_overlap),
-        right_down=_hermitian(g_s * right_down_overlap),
+        left_up=_hermitian(effective_g_s * left_up_overlap),
+        left_down=_hermitian(effective_g_s * left_overlap),
+        right_up=_hermitian(effective_g_s * right_up_overlap),
+        right_down=_hermitian(effective_g_s * right_down_overlap),
     )

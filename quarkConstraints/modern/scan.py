@@ -261,6 +261,7 @@ class ModernScanConfig:
     Lambda_IR_values: np.ndarray = field(default_factory=lambda: np.array([3000.0], dtype=float))
     xi_KK: float = DEFAULT_QUARK_XI_KK
     k: float = 1.2209e19
+    g_s_star: float | None = 3.0
     targets: QuarkTargets = field(default_factory=default_quark_targets)
     max_nfev: int = 120
     fit_orientation: bool = True
@@ -295,6 +296,11 @@ class ModernScanConfig:
             raise ValueError("Lambda_IR_values must be strictly positive")
         object.__setattr__(self, "xi_KK", _require_positive_float("xi_KK", self.xi_KK))
         object.__setattr__(self, "k", _require_positive_float("k", self.k))
+        if self.g_s_star is not None:
+            g_s_star_val = float(self.g_s_star)
+            if g_s_star_val <= 0.0:
+                raise ValueError("g_s_star must be positive when provided")
+            object.__setattr__(self, "g_s_star", g_s_star_val)
         if not isinstance(self.targets, QuarkTargets):
             raise ValueError("targets must be a QuarkTargets instance")
         object.__setattr__(self, "max_nfev", _require_positive_int("max_nfev", self.max_nfev))
@@ -325,6 +331,7 @@ class ModernScanConfig:
             "Lambda_IR_values": [float(value) for value in self.Lambda_IR_values],
             "xi_KK": self.xi_KK,
             "k": self.k,
+            "g_s_star": self.g_s_star,
             "targets": _targets_payload(self.targets),
             "max_nfev": self.max_nfev,
             "fit_orientation": self.fit_orientation,
@@ -336,6 +343,8 @@ class ModernScanConfig:
         targets_payload = dict(payload["targets"])
         ckm_real = np.asarray(targets_payload["ckm_real"], dtype=float)
         ckm_imag = np.asarray(targets_payload["ckm_imag"], dtype=float)
+        raw_g_s_star = payload.get("g_s_star", 3.0)
+        g_s_star = None if raw_g_s_star is None else float(raw_g_s_star)
         return cls(
             schema_id=str(payload["schema_id"]),
             claim_level=str(payload["claim_level"]),
@@ -344,6 +353,7 @@ class ModernScanConfig:
             Lambda_IR_values=np.asarray(payload["Lambda_IR_values"], dtype=float),
             xi_KK=float(payload["xi_KK"]),
             k=float(payload["k"]),
+            g_s_star=g_s_star,
             targets=QuarkTargets(
                 up_masses=np.asarray(targets_payload["up_masses"], dtype=float),
                 down_masses=np.asarray(targets_payload["down_masses"], dtype=float),
@@ -1714,6 +1724,7 @@ def run_modern_scan_shard(
             xi_KK=point.xi_KK,
             point_id=point.point_id,
             point_label=point.point_label,
+            g_s_star=config.g_s_star,
         )
         artifact = build_modern_point_artifact(
             _ArtifactSource(

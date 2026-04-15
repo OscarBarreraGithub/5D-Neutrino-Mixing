@@ -176,7 +176,14 @@ def test_modern_point_evaluation_bridge_matches_repo_summary():
         policy=default_modern_phenomenology_policy(),
         inputs=ModernDefaultInputs(),
     )
-    repo_summary = evaluate_delta_f2_constraints(result)
+    # The repo backend uses perturbative g_s; pass g_s_star=None to match.
+    from quarkConstraints.couplings import compute_quark_kk_gluon_couplings
+
+    repo_summary = evaluate_delta_f2_constraints(
+        compute_quark_kk_gluon_couplings(
+            result, g_s_star=ModernDefaultInputs().qcd_metadata.g_s_star,
+        ),
+    )
 
     assert evaluation.deltaf2.input_bundle_label == MODERN_DEFAULT_INPUT_BUNDLE_ID
     assert evaluation.couplings.input_bundle_id == MODERN_DEFAULT_INPUT_BUNDLE_ID

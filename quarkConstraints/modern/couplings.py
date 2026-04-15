@@ -8,6 +8,8 @@ from typing import Any
 import numpy as np
 
 from ..couplings import QuarkMassBasisCouplings, compute_quark_kk_gluon_couplings
+
+_SENTINEL = object()  # used to distinguish "not passed" from explicit None
 from ..fit import QuarkFitResult, QuarkFitSolution
 from .conventions import MODERN_LANE_ID
 from .inputs import (
@@ -265,8 +267,19 @@ def build_modern_point_couplings(
     point_label: str | None = None,
     M_KK: float | None = None,
     xi_KK: float | None = None,
+    g_s_star: float | None = _SENTINEL,
 ) -> ModernPointCouplings:
-    """Build the schemaed modern coupling bridge for one fitted point."""
+    """Build the schemaed modern coupling bridge for one fitted point.
+
+    Parameters
+    ----------
+    g_s_star
+        Enhanced 5D KK-gluon coupling. When omitted, the value is read from
+        the input bundle's QCD metadata (default 3.0). When explicitly set
+        (including ``None``), that value is forwarded directly to
+        :func:`compute_quark_kk_gluon_couplings`; passing ``None`` falls back
+        to the perturbative ``g_s(M_KK)``.
+    """
 
     fit_result = _coerce_fit_result(source)
     bundle = default_modern_default_inputs() if inputs is None else inputs
@@ -275,12 +288,14 @@ def build_modern_point_couplings(
     resolved_xi_kk = bundle.qcd_metadata.xi_KK if xi_KK is None else float(xi_KK)
     if abs(resolved_xi_kk - bundle.qcd_metadata.xi_KK) > 1e-12:
         raise ValueError("xi_KK must match modern input bundle qcd_metadata.xi_KK")
+    resolved_g_s_star = bundle.qcd_metadata.g_s_star if g_s_star is _SENTINEL else g_s_star
     from ..couplings import compute_quark_kk_gluon_couplings
 
     couplings = compute_quark_kk_gluon_couplings(
         fit_result,
         M_KK=M_KK,
         xi_KK=resolved_xi_kk,
+        g_s_star=resolved_g_s_star,
     )
     state = fit_result.state
     resolved_point_label = fit_result.point.label if point_label is None else str(point_label)
@@ -316,6 +331,7 @@ def default_modern_point_couplings(
     point_label: str | None = None,
     M_KK: float | None = None,
     xi_KK: float | None = None,
+    g_s_star: float | None = _SENTINEL,
 ) -> ModernPointCouplings:
     """Return the canonical modern coupling bridge for one fitted point."""
 
@@ -326,6 +342,7 @@ def default_modern_point_couplings(
         point_label=point_label,
         M_KK=M_KK,
         xi_KK=xi_KK,
+        g_s_star=g_s_star,
     )
 
 

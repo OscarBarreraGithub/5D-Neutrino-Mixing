@@ -6,6 +6,8 @@ from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Mapping
 
+_SENTINEL = object()  # used to distinguish "not passed" from explicit None
+
 from ..deltaf2 import (
     DeltaF2ConstraintSummary,
     DeltaF2Input,
@@ -618,8 +620,18 @@ def evaluate_modern_point(
     point_label: str | None = None,
     M_KK: float | None = None,
     xi_KK: float = DEFAULT_QUARK_XI_KK,
+    g_s_star: float | None = _SENTINEL,
 ) -> ModernPointEvaluation:
-    """Evaluate one fitted modern point against the explicit per-point contract."""
+    """Evaluate one fitted modern point against the explicit per-point contract.
+
+    Parameters
+    ----------
+    g_s_star
+        Enhanced 5D KK-gluon coupling override. When provided (including
+        ``None``), this value is forwarded to :func:`build_modern_point_couplings`
+        instead of the value from the input bundle's QCD metadata. When omitted,
+        the input bundle's ``qcd_metadata.g_s_star`` is used.
+    """
     fit_result = _coerce_fit_result(source)
     resolved_policy = default_modern_phenomenology_policy() if policy is None else policy
     resolved_inputs = default_modern_default_inputs() if inputs is None else inputs
@@ -635,6 +647,9 @@ def evaluate_modern_point(
     )
     resolved_point_label = fit_result.point.label if point_label is None else str(point_label)
     resolved_point_id = resolved_point_label if point_id is None else str(point_id)
+    resolved_g_s_star = (
+        resolved_inputs.qcd_metadata.g_s_star if g_s_star is _SENTINEL else g_s_star
+    )
     couplings = build_modern_point_couplings(
         fit_result,
         inputs=resolved_inputs,
@@ -642,6 +657,7 @@ def evaluate_modern_point(
         point_label=resolved_point_label,
         M_KK=resolved_m_kk,
         xi_KK=xi_KK,
+        g_s_star=resolved_g_s_star,
     )
     matching = build_modern_point_matching(
         couplings,
@@ -704,10 +720,10 @@ def default_modern_point_evaluation(
     point_label: str | None = None,
     M_KK: float | None = None,
     xi_KK: float = DEFAULT_QUARK_XI_KK,
+    g_s_star: float | None = _SENTINEL,
 ) -> ModernPointEvaluation:
     """Return the deterministic modern point evaluation for one source point."""
-    return evaluate_modern_point(
-        source,
+    kwargs: dict = dict(
         policy=policy,
         inputs=inputs,
         point_id=point_id,
@@ -715,3 +731,6 @@ def default_modern_point_evaluation(
         M_KK=M_KK,
         xi_KK=xi_KK,
     )
+    if g_s_star is not _SENTINEL:
+        kwargs["g_s_star"] = g_s_star
+    return evaluate_modern_point(source, **kwargs)

@@ -46,7 +46,9 @@ def test_modern_point_matching_matches_repo_formulas_for_benchmark_point() -> No
     inputs = ModernDefaultInputs()
     modern_couplings = build_modern_point_couplings(fit_result)
     modern_matching = build_modern_point_matching(modern_couplings, inputs=inputs)
-    repo_couplings = compute_quark_kk_gluon_couplings(fit_result)
+    repo_couplings = compute_quark_kk_gluon_couplings(
+        fit_result, g_s_star=inputs.qcd_metadata.g_s_star,
+    )
     repo_matching = compute_delta_f2_wilsons(
         repo_couplings,
         inputs=_backend_inputs_from_modern_inputs(inputs),
