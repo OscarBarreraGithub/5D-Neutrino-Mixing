@@ -107,9 +107,17 @@ def extract_arrays(rows: list[dict[str, Any]]) -> dict[str, np.ndarray]:
             if val is not None:
                 ratios[sid][i] = float(val)
 
-    return dict(r=r, mkk=mkk, scale=scale, accepted=accepted,
-                fit_score=fit_score, **{f"ratio_{sid}": ratios[sid]
-                                        for sid in SYSTEM_IDS})
+    out = dict(r=r, mkk=mkk, scale=scale, accepted=accepted,
+               fit_score=fit_score, **{f"ratio_{sid}": ratios[sid]
+                                       for sid in SYSTEM_IDS})
+    # Filter out points with poor fit quality (score > 0.1 means quark
+    # masses/CKM are not reproduced, so Wilson coefficients are unreliable)
+    good = fit_score < 0.1
+    if not np.all(good):
+        n_bad = int((~good).sum())
+        print(f"  Filtered {n_bad} point(s) with fit_score > 0.1")
+        out = {k: v[good] for k, v in out.items()}
+    return out
 
 
 def aggregate_over_scale(data: dict[str, np.ndarray],

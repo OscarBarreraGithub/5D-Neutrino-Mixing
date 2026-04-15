@@ -127,6 +127,11 @@ def _extract_arrays(records: list[dict[str, Any]]) -> dict[str, Any]:
         converged = rec.get("fit_converged", rec.get("fit_success", True))
         if not converged:
             continue
+        # Skip points with poor fit quality (score > 0.1 means quark
+        # masses/CKM are not reproduced, so Wilson coefficients are wrong)
+        fit_score = rec.get("fit_score", 0.0)
+        if fit_score > 0.1:
+            continue
 
         r_vals.append(float(rec["r"]))
         mkk = float(rec.get("M_KK", rec["Lambda_IR"]))
