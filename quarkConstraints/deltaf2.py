@@ -228,12 +228,12 @@ DEFAULT_DELTA_F2_INPUTS_V1: tuple[DeltaF2Input, ...] = (
         reject_reason="b_d_mix",
         sector="down",
         generations=(0, 2),
-        bound=4.0e-7,
+        bound=1.667e-13,
         ll_weight=1.0,
         rr_weight=1.0,
         lr1_weight=7.0,
         lr2_weight=2.0,
-        note="Repo-owned B_d benchmark normalization at the 3 TeV matching scale.",
+        note="B_d mixing with proper hadronic matrix elements (FLAG 2024 / PDG).",
     ),
     DeltaF2Input(
         key="b_s",
@@ -242,12 +242,12 @@ DEFAULT_DELTA_F2_INPUTS_V1: tuple[DeltaF2Input, ...] = (
         reject_reason="b_s_mix",
         sector="down",
         generations=(1, 2),
-        bound=5.5e-6,
+        bound=5.844e-12,
         ll_weight=1.0,
         rr_weight=1.0,
         lr1_weight=7.0,
         lr2_weight=2.0,
-        note="Repo-owned B_s benchmark normalization at the 3 TeV matching scale.",
+        note="B_s mixing with proper hadronic matrix elements (FLAG 2024 / PDG).",
     ),
     DeltaF2Input(
         key="d",
@@ -256,14 +256,23 @@ DEFAULT_DELTA_F2_INPUTS_V1: tuple[DeltaF2Input, ...] = (
         reject_reason="d_mix",
         sector="up",
         generations=(0, 1),
-        bound=8.5e-9,
+        bound=3.125e-15,
         ll_weight=1.0,
         rr_weight=1.0,
         lr1_weight=7.0,
         lr2_weight=2.0,
-        note="Repo-owned D-mixing normalization for the first exclusion slice.",
+        note="D0 mixing with proper hadronic matrix elements (FLAG 2024 / HFLAV).",
     ),
 )
+
+
+# Legacy operator-weight bounds (for backward compatibility with use_hadronic=False)
+LEGACY_OPERATOR_WEIGHT_BOUNDS: dict[str, float] = {
+    "epsilon_k": 2.0e-8,
+    "b_d": 4.0e-7,
+    "b_s": 5.5e-6,
+    "d": 8.5e-9,
+}
 
 
 def default_delta_f2_inputs() -> tuple[DeltaF2Input, ...]:
@@ -336,6 +345,105 @@ def compute_delta_f2_wilsons(
     return tuple(out)
 
 
+def _hadronic_eval_for_system(
+    key: str,
+    wilsons: DeltaF2WilsonCoefficients,
+) -> tuple[float, float, float, dict[str, float], str, float] | None:
+    """Attempt proper hadronic evaluation for a known meson system.
+
+    Returns (ratio_to_bound, effective_amplitude, coherent_amplitude,
+             operator_sizes, dominant_operator, dominant_size) or None if
+    the system key is not recognized for hadronic evaluation.
+    """
+    if key == "epsilon_k":
+        eps_result = evaluate_epsilon_k(wilsons)
+        # Build per-operator breakdown for epsilon_K (imaginary parts)
+        import math
+        me = _kaon_matrix_elements()
+        prefactor = abs(KAPPA_EPSILON / (math.sqrt(2.0) * DELTA_M_K))
+        operator_sizes = {
+            "C1_VLL": float(prefactor * abs(wilsons.c1_vll.imag * me["O1_VLL"])),
+            "C1_VRR": float(prefactor * abs(wilsons.c1_vrr.imag * me["O1_VLL"])),
+            "C4_LR": float(prefactor * abs(wilsons.c4_lr.imag * me["O4_LR"])),
+            "C5_LR": float(prefactor * abs(wilsons.c5_lr.imag * me["O5_LR"])),
+        }
+        dominant_operator = max(operator_sizes, key=operator_sizes.get)
+        dominant_size = float(operator_sizes[dominant_operator])
+        effective_amplitude = eps_result.epsilon_k_np
+        return (
+            eps_result.ratio_to_budget,
+            effective_amplitude,
+            effective_amplitude,
+            operator_sizes,
+            dominant_operator,
+            dominant_size,
+        )
+    elif key == "b_d":
+        result = evaluate_bd_mixing(wilsons)
+        me_vll, me_lr4, me_lr5 = _meson_matrix_elements(
+            F_BD, M_BD, M_B_QUARK, M_D_QUARK_BD, B_1_BD, B_4_BD, B_5_BD
+        )
+        operator_sizes = {
+            "C1_VLL": float(abs(wilsons.c1_vll * me_vll)),
+            "C1_VRR": float(abs(wilsons.c1_vrr * me_vll)),
+            "C4_LR": float(abs(wilsons.c4_lr * me_lr4)),
+            "C5_LR": float(abs(wilsons.c5_lr * me_lr5)),
+        }
+        dominant_operator = max(operator_sizes, key=operator_sizes.get)
+        dominant_size = float(operator_sizes[dominant_operator])
+        return (
+            result.ratio_to_budget,
+            result.abs_m12_np,
+            result.abs_m12_np,
+            operator_sizes,
+            dominant_operator,
+            dominant_size,
+        )
+    elif key == "b_s":
+        result = evaluate_bs_mixing(wilsons)
+        me_vll, me_lr4, me_lr5 = _meson_matrix_elements(
+            F_BS, M_BS, M_B_QUARK, M_S_QUARK_BS, B_1_BS, B_4_BS, B_5_BS
+        )
+        operator_sizes = {
+            "C1_VLL": float(abs(wilsons.c1_vll * me_vll)),
+            "C1_VRR": float(abs(wilsons.c1_vrr * me_vll)),
+            "C4_LR": float(abs(wilsons.c4_lr * me_lr4)),
+            "C5_LR": float(abs(wilsons.c5_lr * me_lr5)),
+        }
+        dominant_operator = max(operator_sizes, key=operator_sizes.get)
+        dominant_size = float(operator_sizes[dominant_operator])
+        return (
+            result.ratio_to_budget,
+            result.abs_m12_np,
+            result.abs_m12_np,
+            operator_sizes,
+            dominant_operator,
+            dominant_size,
+        )
+    elif key == "d":
+        result = evaluate_d0_mixing(wilsons)
+        me_vll, me_lr4, me_lr5 = _meson_matrix_elements(
+            F_D, M_D0, M_C_QUARK, M_U_QUARK, B_1_D, B_4_D, B_5_D
+        )
+        operator_sizes = {
+            "C1_VLL": float(abs(wilsons.c1_vll * me_vll)),
+            "C1_VRR": float(abs(wilsons.c1_vrr * me_vll)),
+            "C4_LR": float(abs(wilsons.c4_lr * me_lr4)),
+            "C5_LR": float(abs(wilsons.c5_lr * me_lr5)),
+        }
+        dominant_operator = max(operator_sizes, key=operator_sizes.get)
+        dominant_size = float(operator_sizes[dominant_operator])
+        return (
+            result.ratio_to_budget,
+            result.abs_m12_np,
+            result.abs_m12_np,
+            operator_sizes,
+            dominant_operator,
+            dominant_size,
+        )
+    return None
+
+
 def evaluate_delta_f2_constraints(
     source: QuarkFitResult | QuarkMassBasisCouplings,
     *,
@@ -344,6 +452,7 @@ def evaluate_delta_f2_constraints(
     inputs: Sequence[DeltaF2Input] | None = None,
     apply_qcd_running: bool = True,
     mu_had: float = 2.0,
+    use_hadronic: bool = True,
 ) -> DeltaF2ConstraintSummary:
     """Evaluate the repo-owned ``Delta F = 2`` benchmark bundle.
 
@@ -356,6 +465,11 @@ def evaluate_delta_f2_constraints(
     Set ``apply_qcd_running=False`` to recover the previous behavior of using
     Wilson coefficients at the matching scale without running (backward
     compatible).
+
+    When ``use_hadronic=True`` (the default), all meson systems are evaluated
+    using proper hadronic matrix elements (BMU basis). Set
+    ``use_hadronic=False`` to revert to the old operator-weight surrogate
+    for B_d, B_s, and D (while epsilon_K always uses hadronic evaluation).
 
     Parameters
     ----------
@@ -371,6 +485,8 @@ def evaluate_delta_f2_constraints(
         If True (default), evolve Wilson coefficients from M_KK to mu_had.
     mu_had : float
         Hadronic scale for RG evolution in GeV (default 2.0).
+    use_hadronic : bool
+        If True (default), use proper hadronic matrix elements for all systems.
     """
     couplings = _coerce_couplings(source, M_KK=M_KK, xi_KK=xi_KK)
     coefficients = compute_delta_f2_wilsons(
@@ -387,22 +503,42 @@ def evaluate_delta_f2_constraints(
         else:
             evolved_coeffs = coeffs
         item = evolved_coeffs.input
-        weighted = {
-            "C1_VLL": item.ll_weight * evolved_coeffs.c1_vll,
-            "C1_VRR": item.rr_weight * evolved_coeffs.c1_vrr,
-            "C4_LR": item.lr1_weight * evolved_coeffs.c4_lr,
-            "C5_LR": item.lr2_weight * evolved_coeffs.c5_lr,
-        }
-        operator_sizes = {
-            name: float(item.reference_scale**2 * abs(value))
-            for name, value in weighted.items()
-        }
-        dominant_operator = max(operator_sizes, key=operator_sizes.get)
-        coherent_amplitude = float(item.reference_scale**2 * abs(sum(weighted.values())))
-        # Use the largest weighted operator as the exclusion surrogate so that
-        # unlike operators cannot hide behind artificial cancellations.
-        effective_amplitude = float(operator_sizes[dominant_operator])
-        ratio_to_bound = float(effective_amplitude / item.bound)
+
+        # Try proper hadronic evaluation
+        hadronic_result = None
+        if use_hadronic:
+            hadronic_result = _hadronic_eval_for_system(item.key, evolved_coeffs)
+
+        if hadronic_result is not None:
+            (
+                ratio_to_bound,
+                effective_amplitude,
+                coherent_amplitude,
+                operator_sizes,
+                dominant_operator,
+                dominant_size,
+            ) = hadronic_result
+        else:
+            # Fallback: old operator-weight surrogate with legacy bounds
+            weighted = {
+                "C1_VLL": item.ll_weight * evolved_coeffs.c1_vll,
+                "C1_VRR": item.rr_weight * evolved_coeffs.c1_vrr,
+                "C4_LR": item.lr1_weight * evolved_coeffs.c4_lr,
+                "C5_LR": item.lr2_weight * evolved_coeffs.c5_lr,
+            }
+            operator_sizes = {
+                name: float(item.reference_scale**2 * abs(value))
+                for name, value in weighted.items()
+            }
+            dominant_operator = max(operator_sizes, key=operator_sizes.get)
+            coherent_amplitude = float(
+                item.reference_scale**2 * abs(sum(weighted.values()))
+            )
+            effective_amplitude = float(operator_sizes[dominant_operator])
+            dominant_size = effective_amplitude
+            legacy_bound = LEGACY_OPERATOR_WEIGHT_BOUNDS.get(item.key, item.bound)
+            ratio_to_bound = float(effective_amplitude / legacy_bound)
+
         observables.append(
             DeltaF2ObservableSummary(
                 input=item,
@@ -412,7 +548,7 @@ def evaluate_delta_f2_constraints(
                 ratio_to_bound=ratio_to_bound,
                 passes=ratio_to_bound <= 1.0,
                 dominant_operator=dominant_operator,
-                dominant_operator_size=operator_sizes[dominant_operator],
+                dominant_operator_size=dominant_size,
                 weighted_operator_sizes=operator_sizes,
             )
         )
@@ -477,6 +613,48 @@ EPSILON_K_EXP = 2.228e-3   # experimental value (PDG)
 EPSILON_K_SM = 1.81e-3     # SM prediction (CKMfitter central value)
 
 KAON_HADRONIC_PARAMS_V1 = "kaon_hadronic_params_bmu_2gev_v1"
+
+# ---------------------------------------------------------------------------
+# B_d meson hadronic parameters (FLAG 2024 / PDG)
+# ---------------------------------------------------------------------------
+
+F_BD = 0.1900               # GeV, decay constant (FLAG 2024)
+M_BD = 5.27972              # GeV, meson mass (PDG)
+M_B_QUARK = 4.18            # GeV, b quark MS-bar mass at m_b
+M_D_QUARK_BD = 0.00467      # GeV, d quark MS-bar mass at 2 GeV
+B_1_BD = 0.87               # VLL bag parameter (FLAG 2024, renormalized)
+B_4_BD = 1.02               # LR bag parameter (FLAG 2024)
+B_5_BD = 0.96               # LR bag parameter (FLAG 2024)
+DELTA_M_BD_EXP = 3.334e-13  # GeV, experimental (PDG)
+DELTA_M_BD_SM = 3.6e-13     # GeV, SM prediction (CKMfitter)
+
+# ---------------------------------------------------------------------------
+# B_s meson hadronic parameters (FLAG 2024 / PDG)
+# ---------------------------------------------------------------------------
+
+F_BS = 0.2303               # GeV, decay constant (FLAG 2024)
+M_BS = 5.36692              # GeV, meson mass (PDG)
+M_S_QUARK_BS = 0.0934       # GeV, s quark MS-bar mass at 2 GeV
+B_1_BS = 0.87               # VLL bag parameter (FLAG 2024)
+B_4_BS = 1.02               # LR bag parameter (FLAG 2024)
+B_5_BS = 0.96               # LR bag parameter (FLAG 2024)
+DELTA_M_BS_EXP = 1.1688e-11 # GeV, experimental (PDG)
+DELTA_M_BS_SM = 1.17e-11    # GeV, SM prediction (CKMfitter)
+
+# ---------------------------------------------------------------------------
+# D0 meson hadronic parameters (FLAG 2024 / PDG / HFLAV)
+# ---------------------------------------------------------------------------
+
+F_D = 0.2120                # GeV, decay constant (FLAG 2024)
+M_D0 = 1.86484              # GeV, meson mass (PDG)
+M_C_QUARK = 1.27            # GeV, c quark MS-bar mass at m_c
+M_U_QUARK = 0.00216         # GeV, u quark MS-bar mass at 2 GeV
+B_1_D = 0.75                # VLL bag parameter (less precise)
+B_4_D = 1.0                 # LR bag parameter (estimated)
+B_5_D = 1.0                 # LR bag parameter (estimated)
+DELTA_M_D_EXP = 6.25e-15    # GeV, experimental (HFLAV)
+
+MESON_HADRONIC_PARAMS_V1 = "meson_hadronic_params_bmu_2gev_v1"
 
 
 def _kaon_matrix_elements() -> dict[str, float]:
@@ -628,3 +806,162 @@ def evaluate_delta_mk_with_running(
     """
     evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
     return evaluate_delta_mk(evolved)
+
+
+# ---------------------------------------------------------------------------
+# Generic meson M_12^NP computation for ANY pseudoscalar meson
+# ---------------------------------------------------------------------------
+
+
+def _meson_matrix_elements(
+    f_P: float,
+    m_P: float,
+    m_q1: float,
+    m_q2: float,
+    B_1: float,
+    B_4: float,
+    B_5: float,
+) -> tuple[float, float, float]:
+    """Hadronic matrix elements for a generic pseudoscalar meson.
+
+    Returns (me_vll, me_lr4, me_lr5) in GeV^3.
+    Same structure as ``_kaon_matrix_elements`` but with meson-specific inputs.
+    """
+    fp2_mp = f_P**2 * m_P
+    r_chi = (m_P / (m_q1 + m_q2)) ** 2
+    me_vll = (2.0 / 3.0) * fp2_mp * B_1
+    me_lr4 = (r_chi / 6.0 + 0.25) * fp2_mp * B_4
+    me_lr5 = (r_chi / 2.0 + 1.0 / 12.0) * fp2_mp * B_5
+    return me_vll, me_lr4, me_lr5
+
+
+def compute_m12_np(
+    wilsons: DeltaF2WilsonCoefficients,
+    f_P: float,
+    m_P: float,
+    m_q1: float,
+    m_q2: float,
+    B_1: float,
+    B_4: float,
+    B_5: float,
+) -> complex:
+    """Compute M_12^NP from Wilson coefficients and hadronic parameters."""
+    me_vll, me_lr4, me_lr5 = _meson_matrix_elements(
+        f_P, m_P, m_q1, m_q2, B_1, B_4, B_5
+    )
+    return (
+        wilsons.c1_vll * me_vll
+        + wilsons.c1_vrr * me_vll
+        + wilsons.c4_lr * me_lr4
+        + wilsons.c5_lr * me_lr5
+    )
+
+
+@dataclass(frozen=True)
+class MesonMixingResult:
+    """NP contribution to meson mixing for B_d, B_s, or D0."""
+
+    system: str          # "B_d", "B_s", "D0"
+    abs_m12_np: float    # |M_12^NP| in GeV
+    budget: float        # allowed NP budget in GeV (half of Delta m)
+    ratio_to_budget: float  # abs_m12_np / budget
+    passes: bool         # ratio <= 1.0
+
+
+def _bd_budget() -> float:
+    """NP budget for B_d mixing: max(DeltaM_exp/2, |DeltaM_exp - DeltaM_SM|/2)."""
+    return max(DELTA_M_BD_EXP / 2.0, abs(DELTA_M_BD_EXP - DELTA_M_BD_SM) / 2.0)
+
+
+def _bs_budget() -> float:
+    """NP budget for B_s mixing: max(DeltaM_exp/2, |DeltaM_exp - DeltaM_SM|/2)."""
+    return max(DELTA_M_BS_EXP / 2.0, abs(DELTA_M_BS_EXP - DELTA_M_BS_SM) / 2.0)
+
+
+def _d0_budget() -> float:
+    """NP budget for D0 mixing: DeltaM_exp/2 (long-distance SM dominates)."""
+    return DELTA_M_D_EXP / 2.0
+
+
+def evaluate_bd_mixing(
+    wilsons: DeltaF2WilsonCoefficients,
+) -> MesonMixingResult:
+    """Evaluate the NP contribution to B_d mixing using proper hadronic matrix elements."""
+    m12 = compute_m12_np(
+        wilsons, F_BD, M_BD, M_B_QUARK, M_D_QUARK_BD, B_1_BD, B_4_BD, B_5_BD
+    )
+    abs_m12 = abs(m12)
+    budget = _bd_budget()
+    ratio = abs_m12 / budget if budget > 0.0 else float("inf")
+    return MesonMixingResult(
+        system="B_d",
+        abs_m12_np=abs_m12,
+        budget=budget,
+        ratio_to_budget=ratio,
+        passes=ratio <= 1.0,
+    )
+
+
+def evaluate_bs_mixing(
+    wilsons: DeltaF2WilsonCoefficients,
+) -> MesonMixingResult:
+    """Evaluate the NP contribution to B_s mixing using proper hadronic matrix elements."""
+    m12 = compute_m12_np(
+        wilsons, F_BS, M_BS, M_B_QUARK, M_S_QUARK_BS, B_1_BS, B_4_BS, B_5_BS
+    )
+    abs_m12 = abs(m12)
+    budget = _bs_budget()
+    ratio = abs_m12 / budget if budget > 0.0 else float("inf")
+    return MesonMixingResult(
+        system="B_s",
+        abs_m12_np=abs_m12,
+        budget=budget,
+        ratio_to_budget=ratio,
+        passes=ratio <= 1.0,
+    )
+
+
+def evaluate_d0_mixing(
+    wilsons: DeltaF2WilsonCoefficients,
+) -> MesonMixingResult:
+    """Evaluate the NP contribution to D0 mixing using proper hadronic matrix elements."""
+    m12 = compute_m12_np(
+        wilsons, F_D, M_D0, M_C_QUARK, M_U_QUARK, B_1_D, B_4_D, B_5_D
+    )
+    abs_m12 = abs(m12)
+    budget = _d0_budget()
+    ratio = abs_m12 / budget if budget > 0.0 else float("inf")
+    return MesonMixingResult(
+        system="D0",
+        abs_m12_np=abs_m12,
+        budget=budget,
+        ratio_to_budget=ratio,
+        passes=ratio <= 1.0,
+    )
+
+
+def evaluate_bd_mixing_with_running(
+    wilsons: DeltaF2WilsonCoefficients,
+    mu_had: float = 2.0,
+) -> MesonMixingResult:
+    """Like ``evaluate_bd_mixing`` but with QCD RG evolution from M_KK to mu_had."""
+    evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
+    return evaluate_bd_mixing(evolved)
+
+
+def evaluate_bs_mixing_with_running(
+    wilsons: DeltaF2WilsonCoefficients,
+    mu_had: float = 2.0,
+) -> MesonMixingResult:
+    """Like ``evaluate_bs_mixing`` but with QCD RG evolution from M_KK to mu_had."""
+    evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
+    return evaluate_bs_mixing(evolved)
+
+
+def evaluate_d0_mixing_with_running(
+    wilsons: DeltaF2WilsonCoefficients,
+    mu_had: float = 2.0,
+) -> MesonMixingResult:
+    """Like ``evaluate_d0_mixing`` but with QCD RG evolution from M_KK to mu_had."""
+    evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
+    return evaluate_d0_mixing(evolved)

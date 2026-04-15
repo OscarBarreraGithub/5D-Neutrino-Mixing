@@ -11,6 +11,7 @@ from ..deltaf2 import (
     DeltaF2Input,
     DeltaF2ObservableSummary,
     DeltaF2WilsonCoefficients,
+    _hadronic_eval_for_system,
 )
 from ..fit import QuarkFitResult, QuarkFitSolution
 from ..scales import DEFAULT_QUARK_XI_KK, default_quark_m_kk_from_lambda_ir
@@ -205,20 +206,39 @@ def _deltaf2_summary_from_matching(
             c4_lr=c4_lr,
             c5_lr=c5_lr,
         )
-        weighted = {
-            "C1_VLL": item.ll_weight * wilsons.c1_vll,
-            "C1_VRR": item.rr_weight * wilsons.c1_vrr,
-            "C4_LR": item.lr1_weight * wilsons.c4_lr,
-            "C5_LR": item.lr2_weight * wilsons.c5_lr,
-        }
-        operator_sizes = {
-            name: float(item.reference_scale**2 * abs(value))
-            for name, value in weighted.items()
-        }
-        dominant_operator = max(operator_sizes, key=operator_sizes.get)
-        coherent_amplitude = float(item.reference_scale**2 * abs(sum(weighted.values())))
-        effective_amplitude = float(operator_sizes[dominant_operator])
-        ratio_to_bound = float(effective_amplitude / item.bound)
+
+        # Use proper hadronic evaluation for all systems
+        hadronic_result = _hadronic_eval_for_system(item.key, wilsons)
+
+        if hadronic_result is not None:
+            (
+                ratio_to_bound,
+                effective_amplitude,
+                coherent_amplitude,
+                operator_sizes,
+                dominant_operator,
+                dominant_size,
+            ) = hadronic_result
+        else:
+            # Fallback: old operator-weight surrogate
+            weighted = {
+                "C1_VLL": item.ll_weight * wilsons.c1_vll,
+                "C1_VRR": item.rr_weight * wilsons.c1_vrr,
+                "C4_LR": item.lr1_weight * wilsons.c4_lr,
+                "C5_LR": item.lr2_weight * wilsons.c5_lr,
+            }
+            operator_sizes = {
+                name: float(item.reference_scale**2 * abs(value))
+                for name, value in weighted.items()
+            }
+            dominant_operator = max(operator_sizes, key=operator_sizes.get)
+            coherent_amplitude = float(
+                item.reference_scale**2 * abs(sum(weighted.values()))
+            )
+            effective_amplitude = float(operator_sizes[dominant_operator])
+            dominant_size = effective_amplitude
+            ratio_to_bound = float(effective_amplitude / item.bound)
+
         observables.append(
             DeltaF2ObservableSummary(
                 input=item,
@@ -228,7 +248,7 @@ def _deltaf2_summary_from_matching(
                 ratio_to_bound=ratio_to_bound,
                 passes=ratio_to_bound <= 1.0,
                 dominant_operator=dominant_operator,
-                dominant_operator_size=operator_sizes[dominant_operator],
+                dominant_operator_size=dominant_size,
                 weighted_operator_sizes=operator_sizes,
             )
         )

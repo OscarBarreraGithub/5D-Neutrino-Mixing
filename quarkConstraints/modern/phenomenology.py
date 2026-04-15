@@ -41,9 +41,9 @@ MODERN_POINT_PHENOMENOLOGY_NON_CP_ACCEPTANCE_SYSTEM_IDS = ("epsilon_K", "K", "B_
 MODERN_POINT_PHENOMENOLOGY_SYSTEM_TREATMENT_IDS = {
     "epsilon_K": "cp_violation_epsilon_k",
     "K": "non_cp_mixing_amplitude_kaon",
-    "B_d": "non_cp_mixing_amplitude_surrogate",
-    "B_s": "non_cp_mixing_amplitude_surrogate",
-    "D0": "conservative_non_cp_mixing_amplitude_surrogate",
+    "B_d": "non_cp_mixing_amplitude_hadronic",
+    "B_s": "non_cp_mixing_amplitude_hadronic",
+    "D0": "conservative_non_cp_mixing_amplitude_hadronic",
 }
 
 
@@ -521,6 +521,159 @@ def _evaluate_delta_mk_from_bridge(
     dominant_size = float(operator_sizes[dominant_operator])
 
     return ratio, operator_sizes, dominant_operator, dominant_size
+
+
+# --------------------------------------------------------------------------
+# B_d, B_s, D0 hadronic parameters (inline, no deltaf2 import)
+# --------------------------------------------------------------------------
+
+_BD_F = 0.1900
+_BD_M = 5.27972
+_BD_MQ1 = 4.18
+_BD_MQ2 = 0.00467
+_BD_B1 = 0.87
+_BD_B4 = 1.02
+_BD_B5 = 0.96
+_BD_DM_EXP = 3.334e-13
+_BD_DM_SM = 3.6e-13
+
+_BS_F = 0.2303
+_BS_M = 5.36692
+_BS_MQ1 = 4.18
+_BS_MQ2 = 0.0934
+_BS_B1 = 0.87
+_BS_B4 = 1.02
+_BS_B5 = 0.96
+_BS_DM_EXP = 1.1688e-11
+_BS_DM_SM = 1.17e-11
+
+_D0_F = 0.2120
+_D0_M = 1.86484
+_D0_MQ1 = 1.27
+_D0_MQ2 = 0.00216
+_D0_B1 = 0.75
+_D0_B4 = 1.0
+_D0_B5 = 1.0
+_D0_DM_EXP = 6.25e-15
+
+
+def _meson_matrix_elements_inline(
+    f_P: float,
+    m_P: float,
+    m_q1: float,
+    m_q2: float,
+    B_1: float,
+    B_4: float,
+    B_5: float,
+) -> tuple[float, float, float]:
+    """Compute (me_vll, me_lr4, me_lr5) for a generic pseudoscalar meson."""
+    fp2_mp = f_P**2 * m_P
+    r_chi = (m_P / (m_q1 + m_q2)) ** 2
+    me_vll = (2.0 / 3.0) * fp2_mp * B_1
+    me_lr4 = (r_chi / 6.0 + 0.25) * fp2_mp * B_4
+    me_lr5 = (r_chi / 2.0 + 1.0 / 12.0) * fp2_mp * B_5
+    return me_vll, me_lr4, me_lr5
+
+
+def _m12_np_from_bridge_generic(
+    system_match: Mapping[str, Any],
+    f_P: float,
+    m_P: float,
+    m_q1: float,
+    m_q2: float,
+    B_1: float,
+    B_4: float,
+    B_5: float,
+) -> complex:
+    """Compute M_12^NP for a generic meson system from bridge Wilson coefficients."""
+    c1_vll = _complex_from_payload("system_match.c1_vll", system_match["c1_vll"])
+    c1_vrr = _complex_from_payload("system_match.c1_vrr", system_match["c1_vrr"])
+    c4_lr = _complex_from_payload("system_match.c4_lr", system_match["c4_lr"])
+    c5_lr = _complex_from_payload("system_match.c5_lr", system_match["c5_lr"])
+    me_vll, me_lr4, me_lr5 = _meson_matrix_elements_inline(
+        f_P, m_P, m_q1, m_q2, B_1, B_4, B_5
+    )
+    return (
+        c1_vll * me_vll
+        + c1_vrr * me_vll
+        + c4_lr * me_lr4
+        + c5_lr * me_lr5
+    )
+
+
+def _evaluate_meson_mixing_from_bridge(
+    system_match: Mapping[str, Any],
+    f_P: float,
+    m_P: float,
+    m_q1: float,
+    m_q2: float,
+    B_1: float,
+    B_4: float,
+    B_5: float,
+    budget: float,
+) -> tuple[float, dict[str, float], str, float]:
+    """Evaluate meson mixing from bridge match using proper hadronic matrix elements.
+
+    Returns (ratio_to_budget, operator_sizes, dominant_operator, dominant_size).
+    """
+    m12_np = _m12_np_from_bridge_generic(
+        system_match, f_P, m_P, m_q1, m_q2, B_1, B_4, B_5
+    )
+    abs_m12_np = abs(m12_np)
+    ratio = abs_m12_np / budget if budget > 0.0 else float("inf")
+
+    # Per-operator breakdown
+    c1_vll = _complex_from_payload("system_match.c1_vll", system_match["c1_vll"])
+    c1_vrr = _complex_from_payload("system_match.c1_vrr", system_match["c1_vrr"])
+    c4_lr = _complex_from_payload("system_match.c4_lr", system_match["c4_lr"])
+    c5_lr = _complex_from_payload("system_match.c5_lr", system_match["c5_lr"])
+    me_vll, me_lr4, me_lr5 = _meson_matrix_elements_inline(
+        f_P, m_P, m_q1, m_q2, B_1, B_4, B_5
+    )
+
+    operator_sizes = {
+        "C1_VLL": float(abs(c1_vll * me_vll)),
+        "C1_VRR": float(abs(c1_vrr * me_vll)),
+        "C4_LR": float(abs(c4_lr * me_lr4)),
+        "C5_LR": float(abs(c5_lr * me_lr5)),
+    }
+    dominant_operator = max(operator_sizes, key=operator_sizes.get)
+    dominant_size = float(operator_sizes[dominant_operator])
+
+    return ratio, operator_sizes, dominant_operator, dominant_size
+
+
+def _evaluate_bd_mixing_from_bridge(
+    system_match: Mapping[str, Any],
+) -> tuple[float, dict[str, float], str, float]:
+    """Evaluate B_d mixing NP contribution from bridge match."""
+    budget = max(_BD_DM_EXP / 2.0, abs(_BD_DM_EXP - _BD_DM_SM) / 2.0)
+    return _evaluate_meson_mixing_from_bridge(
+        system_match, _BD_F, _BD_M, _BD_MQ1, _BD_MQ2,
+        _BD_B1, _BD_B4, _BD_B5, budget,
+    )
+
+
+def _evaluate_bs_mixing_from_bridge(
+    system_match: Mapping[str, Any],
+) -> tuple[float, dict[str, float], str, float]:
+    """Evaluate B_s mixing NP contribution from bridge match."""
+    budget = max(_BS_DM_EXP / 2.0, abs(_BS_DM_EXP - _BS_DM_SM) / 2.0)
+    return _evaluate_meson_mixing_from_bridge(
+        system_match, _BS_F, _BS_M, _BS_MQ1, _BS_MQ2,
+        _BS_B1, _BS_B4, _BS_B5, budget,
+    )
+
+
+def _evaluate_d0_mixing_from_bridge(
+    system_match: Mapping[str, Any],
+) -> tuple[float, dict[str, float], str, float]:
+    """Evaluate D0 mixing NP contribution from bridge match."""
+    budget = _D0_DM_EXP / 2.0
+    return _evaluate_meson_mixing_from_bridge(
+        system_match, _D0_F, _D0_M, _D0_MQ1, _D0_MQ2,
+        _D0_B1, _D0_B4, _D0_B5, budget,
+    )
 
 
 @dataclass(frozen=True)
@@ -1182,6 +1335,30 @@ class ModernPointPhenomenologyArtifactV1:
                     f"{input_item.note} Evaluated with proper hadronic matrix elements "
                     "for non-CP kaon mass difference (QCD-evolved). Included in acceptance."
                 )
+            elif system_id == "B_d":
+                ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
+                    _evaluate_bd_mixing_from_bridge(evolved_match)
+                )
+                note = (
+                    f"{input_item.note} Evaluated with proper hadronic matrix elements "
+                    "for B_d mixing (QCD-evolved). Included in acceptance."
+                )
+            elif system_id == "B_s":
+                ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
+                    _evaluate_bs_mixing_from_bridge(evolved_match)
+                )
+                note = (
+                    f"{input_item.note} Evaluated with proper hadronic matrix elements "
+                    "for B_s mixing (QCD-evolved). Included in acceptance."
+                )
+            elif system_id == "D0":
+                ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
+                    _evaluate_d0_mixing_from_bridge(evolved_match)
+                )
+                note = (
+                    f"{input_item.note} Evaluated with proper hadronic matrix elements "
+                    "for D0 mixing (QCD-evolved). Included in acceptance."
+                )
             else:
                 operator_sizes, dominant_operator, dominant_size = _operator_sizes_from_bridge_match(
                     evolved_match,
@@ -1192,12 +1369,7 @@ class ModernPointPhenomenologyArtifactV1:
                     reference_scale=weights.reference_scale_GeV,
                 )
                 ratio_to_bound = float(dominant_size / input_item.bound)
-                if system_id == "D0":
-                    note = (
-                        f"{input_item.note} Included in acceptance with conservative D0 treatment (QCD-evolved)."
-                    )
-                else:
-                    note = f"{input_item.note} Included in acceptance (QCD-evolved)."
+                note = f"{input_item.note} Included in acceptance (QCD-evolved)."
 
             results.append(
                 ModernPhenomenologySystemResult(

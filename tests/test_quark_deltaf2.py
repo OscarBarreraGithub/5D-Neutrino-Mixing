@@ -90,8 +90,12 @@ def test_deltaf2_wilsons_scale_down_with_larger_mkk():
 
 
 def test_deltaf2_pass_fail_uses_dominant_operator_not_coherent_cancellation():
+    # With the hadronic evaluation, epsilon_K uses Im(M_12) so real couplings
+    # give epsilon_K = 0.  Use the operator-weight fallback to test the old
+    # pass/fail invariant that the dominant operator controls acceptance.
     summary = evaluate_delta_f2_constraints(
-        _sd_couplings(left=0.0012662771285475794, right=0.04808397328881469)
+        _sd_couplings(left=0.0012662771285475794, right=0.04808397328881469),
+        use_hadronic=False,
     )
     kaon = summary.get("epsilon_k")
 
@@ -106,11 +110,10 @@ def test_deltaf2_pass_fail_uses_dominant_operator_not_coherent_cancellation():
 def test_default_benchmark_point_has_stable_deltaf2_outputs():
     summary = evaluate_delta_f2_constraints(_fit_result(0.25), M_KK=3000.0)
 
-    # With QCD running (the new default), the D meson constraint is tightened
-    # and the benchmark point at M_KK=3000 no longer passes all systems.
-    # epsilon_K, B_d, and B_s still pass; D is marginally excluded.
+    # With proper hadronic matrix elements (default since the v2 update),
+    # all four systems pass at M_KK = 3 TeV for the benchmark point.
     assert summary.get("epsilon_k").ratio_to_bound < 1.0
     assert summary.get("b_d").ratio_to_bound < 1.0
     assert summary.get("b_s").ratio_to_bound < 1.0
-    assert summary.get("d").ratio_to_bound > 1.0
-    assert not summary.passes_all
+    assert summary.get("d").ratio_to_bound < 1.0
+    assert summary.passes_all
