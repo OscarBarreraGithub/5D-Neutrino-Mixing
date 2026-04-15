@@ -31,7 +31,8 @@ def _offdiag_norm(matrix: np.ndarray) -> float:
 
 def test_mass_basis_couplings_have_expected_shapes_and_are_finite():
     result = _fit_solution(0.25).result
-    couplings = compute_quark_kk_gluon_couplings(result)
+    # perturbative g_s (legacy repo_v1 behavior)
+    couplings = compute_quark_kk_gluon_couplings(result, g_s_star=None)
 
     for matrix in (
         couplings.left_up,
@@ -53,8 +54,9 @@ def test_mass_basis_couplings_have_expected_shapes_and_are_finite():
 
 def test_explicit_mkk_override_changes_scale_and_running():
     result = _fit_solution(0.25).result
-    default_couplings = compute_quark_kk_gluon_couplings(result)
-    overridden = compute_quark_kk_gluon_couplings(result, M_KK=6000.0, xi_KK=7.0)
+    # perturbative g_s (legacy repo_v1 behavior)
+    default_couplings = compute_quark_kk_gluon_couplings(result, g_s_star=None)
+    overridden = compute_quark_kk_gluon_couplings(result, M_KK=6000.0, xi_KK=7.0, g_s_star=None)
 
     assert np.isclose(default_couplings.M_KK, result.point.Lambda_IR)
     assert np.isclose(overridden.M_KK, 6000.0)
@@ -81,8 +83,9 @@ def test_small_r_reduces_down_sector_left_handed_offdiagonals():
         max_nfev=120,
     ).result
 
-    small_couplings = compute_quark_kk_gluon_couplings(small_r)
-    large_couplings = compute_quark_kk_gluon_couplings(large_r)
+    # perturbative g_s (legacy repo_v1 behavior)
+    small_couplings = compute_quark_kk_gluon_couplings(small_r, g_s_star=None)
+    large_couplings = compute_quark_kk_gluon_couplings(large_r, g_s_star=None)
 
     assert _offdiag_norm(small_couplings.left_down) < _offdiag_norm(large_couplings.left_down)
     assert abs(small_couplings.left_down[1, 2]) < abs(large_couplings.left_down[1, 2])

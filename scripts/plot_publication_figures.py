@@ -200,14 +200,19 @@ def _configure_style() -> None:
 def _aggregate_best_scale(
     data: dict[str, Any],
 ) -> tuple[np.ndarray, np.ndarray, dict[str, np.ndarray], np.ndarray]:
-    """At each unique (r, M_KK) grid point, pick the overall_scale that
-    minimizes max_ratio (the 'best' point).
+    """At each unique (r, M_KK) grid point, marginalize over overall_scale
+    independently for each system and for the combined contour.
+
+    For each system's contour, we pick the overall_scale that minimizes
+    THAT system's ratio_to_bound.  For the combined contour, we pick the
+    overall_scale that minimizes the combined max(all 5 ratios).
 
     Returns
     -------
     r_agg, mkk_agg : 1-D arrays of unique (r, M_KK) values.
-    ratios_agg : dict mapping system_id -> 1-D array of best ratio values.
-    max_ratio_agg : 1-D array of best max-ratio values.
+    ratios_agg : dict mapping system_id -> 1-D array of per-system-best
+        ratio values (each system marginalized independently).
+    max_ratio_agg : 1-D array of best max-ratio values (combined contour).
     """
     r = data["r"]
     mkk = data["M_KK"]
@@ -223,27 +228,32 @@ def _aggregate_best_scale(
     max_ratios: list[float] = []
 
     for (r_val, mkk_val), indices in grid.items():
-        # For each point, compute max_ratio across systems
-        best_idx = None
-        best_max_ratio = float("inf")
-        for idx in indices:
-            rt = ratios_list[idx]
-            if not rt:
-                continue
-            mr = max(rt.get(s, 0.0) for s in SYSTEM_IDS)
-            if mr < best_max_ratio:
-                best_max_ratio = mr
-                best_idx = idx
-
-        if best_idx is None:
+        # Filter to indices that have non-empty ratio dicts
+        valid_indices = [idx for idx in indices if ratios_list[idx]]
+        if not valid_indices:
             continue
 
         r_out.append(r_val)
         mkk_out.append(mkk_val)
+
+        # Combined contour: find the scale that minimizes max(all 5 ratios)
+        best_max_ratio = float("inf")
+        for idx in valid_indices:
+            rt = ratios_list[idx]
+            mr = max(rt.get(s, 0.0) for s in SYSTEM_IDS)
+            if mr < best_max_ratio:
+                best_max_ratio = mr
         max_ratios.append(best_max_ratio)
-        best_ratios = ratios_list[best_idx]
+
+        # Per-system contours: independently minimize each system's ratio
         for s in SYSTEM_IDS:
-            sys_ratios[s].append(best_ratios.get(s, 0.0))
+            best_sys_ratio = float("inf")
+            for idx in valid_indices:
+                rt = ratios_list[idx]
+                sr = rt.get(s, 0.0)
+                if sr < best_sys_ratio:
+                    best_sys_ratio = sr
+            sys_ratios[s].append(best_sys_ratio)
 
     r_agg = np.asarray(r_out)
     mkk_agg = np.asarray(mkk_out)

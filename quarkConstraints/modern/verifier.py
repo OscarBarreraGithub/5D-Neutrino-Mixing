@@ -46,7 +46,7 @@ ALLOWED_ABSOLUTE_LOCAL_IMPORTS = (
     f"{PACKAGE_ROOT}.artifacts",
     f"{PACKAGE_ROOT}.phenomenology",
 )
-MODERN_BRIDGE_INPUTS_SCHEMA_ID = "quarkConstraints.modern.inputs.modern_default_inputs.v1"
+MODERN_BRIDGE_INPUTS_SCHEMA_ID = "quarkConstraints.modern.inputs.modern_default_inputs.v2"
 FORBIDDEN_EXTERNAL_MODULE_PREFIXES = (
     "quarkConstraints.benchmarks",
     "quarkConstraints.couplings",

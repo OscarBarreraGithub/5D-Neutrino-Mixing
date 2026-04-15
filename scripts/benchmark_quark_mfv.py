@@ -33,7 +33,8 @@ def main() -> int:
     xi_kk = DEFAULT_QUARK_BENCHMARK_XI_KK
     m_kk = default_quark_m_kk_from_lambda_ir(result.point.Lambda_IR, xi_KK=xi_kk)
     diagnostics = summarize_flavor_diagnostics(result, m_kk=m_kk)
-    couplings = compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_kk)
+    # perturbative g_s (legacy repo_v1 behavior)
+    couplings = compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_kk, g_s_star=None)
     deltaf2 = evaluate_delta_f2_constraints(couplings, M_KK=m_kk, xi_KK=xi_kk)
     fit_summary = benchmark_fit_summary(solution, xi_KK=xi_kk)
 

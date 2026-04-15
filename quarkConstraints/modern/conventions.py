@@ -5,13 +5,13 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 
 MODERN_LANE_ID = "modern"
-MODERN_CONVENTIONS_SCHEMA_ID = "quarkConstraints.modern.conventions.v1"
+MODERN_CONVENTIONS_SCHEMA_ID = "quarkConstraints.modern.conventions.v2"
 MODERN_INPUT_REGISTRY_SCHEMA_ID = "quarkConstraints.modern.inputs.registry.v1"
 MODERN_INPUT_NAMESPACE = "quarkConstraints.modern.inputs"
 MODERN_PROVENANCE_NAMESPACE = "quarkConstraints.modern.provenance"
-MODERN_BUNDLE_ID_TEMPLATE = f"{MODERN_INPUT_NAMESPACE}.{{family_id}}.{{bundle_slug}}.v1"
+MODERN_BUNDLE_ID_TEMPLATE = f"{MODERN_INPUT_NAMESPACE}.{{family_id}}.{{bundle_slug}}.v2"
 MODERN_PROVENANCE_ID_TEMPLATE = (
-    f"{MODERN_PROVENANCE_NAMESPACE}.{{family_id}}.{{bundle_slug}}.v1"
+    f"{MODERN_PROVENANCE_NAMESPACE}.{{family_id}}.{{bundle_slug}}.v2"
 )
 MODERN_STRICT_PAPER_BUNDLE_FAMILY_ID = "strict_paper_inputs"
 MODERN_DEFAULT_BUNDLE_FAMILY_ID = "modern_default_inputs"

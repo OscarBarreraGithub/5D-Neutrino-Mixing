@@ -291,7 +291,9 @@ def _coerce_couplings(
     required = ("M_KK", "left_down", "right_down", "left_up", "right_up")
     if all(hasattr(source, name) for name in required):
         return source  # type: ignore[return-value]
-    return compute_quark_kk_gluon_couplings(source, M_KK=M_KK, xi_KK=xi_KK)
+    # perturbative g_s (legacy repo_v1 behavior); callers that want g_s*
+    # enhancement should pre-compute couplings with g_s_star=<value>.
+    return compute_quark_kk_gluon_couplings(source, M_KK=M_KK, xi_KK=xi_KK, g_s_star=None)
 
 
 def _pair_couplings(

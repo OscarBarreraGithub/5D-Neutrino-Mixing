@@ -343,7 +343,10 @@ class ModernScanConfig:
         targets_payload = dict(payload["targets"])
         ckm_real = np.asarray(targets_payload["ckm_real"], dtype=float)
         ckm_imag = np.asarray(targets_payload["ckm_imag"], dtype=float)
-        raw_g_s_star = payload.get("g_s_star", 3.0)
+        # Preserve historical meaning: configs written before g_s* was
+        # introduced used perturbative g_s (i.e. g_s_star=None).  Default
+        # to None so we don't silently inject g_s*=3 into old configs.
+        raw_g_s_star = payload.get("g_s_star", None)
         g_s_star = None if raw_g_s_star is None else float(raw_g_s_star)
         return cls(
             schema_id=str(payload["schema_id"]),

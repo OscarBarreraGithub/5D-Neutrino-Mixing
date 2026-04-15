@@ -108,7 +108,8 @@ def benchmark_fit_summary(
     m_kk = default_quark_m_kk_from_lambda_ir(result.point.Lambda_IR, xi_KK=xi_KK)
     diagnostics = summarize_flavor_diagnostics(result, m_kk=m_kk)
     deltaf2 = evaluate_delta_f2_constraints(
-        compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_KK),
+        # perturbative g_s (legacy repo_v1 behavior)
+        compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_KK, g_s_star=None),
         M_KK=m_kk,
     )
     deltaf2_by_system = deltaf2.by_system
@@ -158,7 +159,8 @@ def benchmark_plot_data(
     m_kk = default_quark_m_kk_from_lambda_ir(result.point.Lambda_IR, xi_KK=xi_KK)
     diagnostics = summarize_flavor_diagnostics(result, m_kk=m_kk)
     deltaf2 = evaluate_delta_f2_constraints(
-        compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_KK),
+        # perturbative g_s (legacy repo_v1 behavior)
+        compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_KK, g_s_star=None),
         M_KK=m_kk,
     )
     deltaf2_by_system = deltaf2.by_system
@@ -271,7 +273,8 @@ def r_sweep_plot_data(
         m_kk = default_quark_m_kk_from_lambda_ir(result.point.Lambda_IR, xi_KK=xi_KK)
         diagnostics = summarize_flavor_diagnostics(result, m_kk=m_kk)
         deltaf2 = evaluate_delta_f2_constraints(
-            compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_KK),
+            # perturbative g_s (legacy repo_v1 behavior)
+            compute_quark_kk_gluon_couplings(result, M_KK=m_kk, xi_KK=xi_KK, g_s_star=None),
             M_KK=m_kk,
         )
         deltaf2_by_system = deltaf2.by_system

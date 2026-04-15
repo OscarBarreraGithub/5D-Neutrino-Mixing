@@ -26,7 +26,7 @@ from .conventions import (
 )
 
 MODERN_STRICT_PAPER_INPUTS_SCHEMA_ID = "quarkConstraints.modern.inputs.strict_paper_inputs.v1"
-MODERN_DEFAULT_INPUTS_SCHEMA_ID = "quarkConstraints.modern.inputs.modern_default_inputs.v1"
+MODERN_DEFAULT_INPUTS_SCHEMA_ID = "quarkConstraints.modern.inputs.modern_default_inputs.v2"
 MODERN_DEFAULT_RESOLUTION_POLICY_ID = (
     "quarkConstraints.modern.inputs.modern_default.explicit_repo_payloads.v1"
 )

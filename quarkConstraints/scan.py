@@ -224,7 +224,8 @@ def run_quark_scan(
                     result = solution.result
                     diagnostics = summarize_flavor_diagnostics(result, m_kk=M_KK)
                     deltaf2 = evaluate_delta_f2_constraints(
-                        compute_quark_kk_gluon_couplings(result, M_KK=M_KK, xi_KK=config.xi_KK),
+                        # perturbative g_s (legacy repo_v1 behavior)
+                        compute_quark_kk_gluon_couplings(result, M_KK=M_KK, xi_KK=config.xi_KK, g_s_star=None),
                         M_KK=M_KK,
                     )
                     deltaf2_by_system = deltaf2.by_system

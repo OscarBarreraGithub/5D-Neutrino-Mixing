@@ -439,7 +439,8 @@ class TestEpsilonKWithRunning:
         from quarkConstraints.couplings import compute_quark_kk_gluon_couplings
         from quarkConstraints.deltaf2 import compute_delta_f2_wilsons
 
-        couplings = compute_quark_kk_gluon_couplings(fitted_point)
+        # perturbative g_s (legacy repo_v1 behavior)
+        couplings = compute_quark_kk_gluon_couplings(fitted_point, g_s_star=None)
         wilsons_tuple = compute_delta_f2_wilsons(couplings)
         for w in wilsons_tuple:
             if w.input.key == "epsilon_k":

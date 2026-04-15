@@ -16,7 +16,7 @@ MODERN_POINT_BRIDGE_ARTIFACT_SCHEMA_VERSION = 1
 MODERN_POINT_COUPLINGS_SCHEMA_ID = "quarkConstraints.modern.couplings.point.v1"
 MODERN_POINT_MATCHING_SCHEMA_ID = "quarkConstraints.modern.matching.point.v1"
 MODERN_POINT_MATCHING_SYSTEM_SCHEMA_ID = "quarkConstraints.modern.matching.system.v1"
-MODERN_DEFAULT_INPUTS_SCHEMA_ID = "quarkConstraints.modern.inputs.modern_default_inputs.v1"
+MODERN_DEFAULT_INPUTS_SCHEMA_ID = "quarkConstraints.modern.inputs.modern_default_inputs.v2"
 MODERN_POINT_EVALUATION_SCHEMA_ID = "quarkConstraints.modern.evaluation.v1"
 MODERN_MATCHING_SYSTEM_IDS = ("K", "B_d", "B_s", "D0")
 
