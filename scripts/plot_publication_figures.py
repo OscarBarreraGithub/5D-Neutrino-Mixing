@@ -24,11 +24,17 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 from scipy.interpolate import griddata  # noqa: E402
+
+from quarkConstraints.scales import GAUGE_KK_ROOT_NN  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -62,6 +68,8 @@ BOUND_RATIOS: dict[str, float] = {
     "D0": 0.106,
 }
 
+DEFAULT_PUBLICATION_XI_KK = GAUGE_KK_ROOT_NN
+
 
 # ---------------------------------------------------------------------------
 # Argument parsing
@@ -84,6 +92,16 @@ def _parse_args() -> argparse.Namespace:
         help=(
             "Directory for output figures.  "
             "Defaults to results/figures/publication relative to the repo root."
+        ),
+    )
+    parser.add_argument(
+        "--xi-kk",
+        type=float,
+        default=DEFAULT_PUBLICATION_XI_KK,
+        help=(
+            "Physical KK-gluon mass convention used on the plot axis, "
+            "m_g^(1) = xi_kk * Lambda_IR. "
+            f"Default: {DEFAULT_PUBLICATION_XI_KK:.6f}."
         ),
     )
     return parser.parse_args()
@@ -119,6 +137,7 @@ def _extract_arrays(records: list[dict[str, Any]]) -> dict[str, Any]:
     r_vals: list[float] = []
     mkk_vals: list[float] = []
     scale_vals: list[float] = []
+    xi_vals: list[float] = []
     accepted_vals: list[bool] = []
     ratios_list: list[dict[str, float]] = []
     failing_list: list[list[str]] = []
@@ -137,6 +156,7 @@ def _extract_arrays(records: list[dict[str, Any]]) -> dict[str, Any]:
         mkk = float(rec.get("M_KK", rec["Lambda_IR"]))
         mkk_vals.append(mkk)
         scale_vals.append(float(rec["overall_scale"]))
+        xi_vals.append(float(rec.get("xi_KK", 1.0)))
         accepted_vals.append(bool(rec["accepted"]))
         ratios_list.append(
             {str(k): float(v) for k, v in rec.get("ratio_to_bound_by_system", {}).items()}
@@ -149,10 +169,63 @@ def _extract_arrays(records: list[dict[str, Any]]) -> dict[str, Any]:
         "r": np.asarray(r_vals),
         "M_KK": np.asarray(mkk_vals),
         "overall_scale": np.asarray(scale_vals),
+        "xi_KK": np.asarray(xi_vals),
         "accepted": np.asarray(accepted_vals, dtype=bool),
         "ratios": ratios_list,
         "failing": failing_list,
     }
+
+
+def _apply_publication_convention(
+    data: dict[str, Any],
+    *,
+    xi_kk: float,
+) -> dict[str, Any]:
+    """Relabel the saved scan into a paper-like KK-gluon convention.
+
+    The stored `repo_v1` scan rows use the bookkeeping convention
+    `M_KK = xi_scan * Lambda_IR`.  Publication plots should instead be
+    expressed in terms of a physical first KK-gluon mass
+    `m_g^(1) = xi_kk * Lambda_IR`.
+
+    Because the tree-level `Delta F = 2` ratios scale as `1 / M^2`, the saved
+    ratios can be converted post hoc without re-running the fit.
+    """
+    if xi_kk <= 0.0:
+        raise ValueError("xi_kk must be positive")
+
+    scan_mkk = np.asarray(data["M_KK"], dtype=float)
+    scan_xi = np.asarray(data["xi_KK"], dtype=float)
+
+    mkk_out: list[float] = []
+    ratios_out: list[dict[str, float]] = []
+    accepted_out: list[bool] = []
+
+    for idx, scan_mass in enumerate(scan_mkk):
+        xi_scan = float(scan_xi[idx])
+        axis_scale = xi_kk / xi_scan
+        mkk_out.append(float(scan_mass) * axis_scale)
+
+        # Only convert the mass convention. The saved scan already carries the
+        # coupling choice used at evaluation time.
+        ratio_scale = 1.0 / (axis_scale**2)
+
+        ratios = {
+            system_id: float(data["ratios"][idx].get(system_id, 0.0)) * ratio_scale
+            for system_id in SYSTEM_IDS
+        }
+        ratios_out.append(ratios)
+        accepted_out.append(max(ratios.values()) <= 1.0)
+
+    out = dict(data)
+    out["M_KK"] = np.asarray(mkk_out, dtype=float)
+    out["ratios"] = ratios_out
+    out["accepted"] = np.asarray(accepted_out, dtype=bool)
+    out["publication_convention"] = {
+        "xi_kk": float(xi_kk),
+        "scan_coupling_mode": "saved_scan",
+    }
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -200,19 +273,21 @@ def _configure_style() -> None:
 def _aggregate_best_scale(
     data: dict[str, Any],
 ) -> tuple[np.ndarray, np.ndarray, dict[str, np.ndarray], np.ndarray]:
-    """At each unique (r, M_KK) grid point, marginalize over overall_scale
-    independently for each system and for the combined contour.
+    """At each unique (r, M_KK) grid point, pick one common best-fit point.
 
-    For each system's contour, we pick the overall_scale that minimizes
-    THAT system's ratio_to_bound.  For the combined contour, we pick the
-    overall_scale that minimizes the combined max(all 5 ratios).
+    The earlier plotting code took an independent envelope over
+    `overall_scale` for each system.  That was overly optimistic because the
+    five exclusion contours no longer came from one physical MFV point.
+    Publication figures instead use the single overall_scale that minimizes the
+    combined max(all 5 ratios), and then read off every system from that same
+    point.
 
     Returns
     -------
     r_agg, mkk_agg : 1-D arrays of unique (r, M_KK) values.
-    ratios_agg : dict mapping system_id -> 1-D array of per-system-best
-        ratio values (each system marginalized independently).
-    max_ratio_agg : 1-D array of best max-ratio values (combined contour).
+    ratios_agg : dict mapping system_id -> 1-D array of ratio values evaluated
+        at the combined best point.
+    max_ratio_agg : 1-D array of the minimized combined max-ratio values.
     """
     r = data["r"]
     mkk = data["M_KK"]
@@ -236,24 +311,16 @@ def _aggregate_best_scale(
         r_out.append(r_val)
         mkk_out.append(mkk_val)
 
-        # Combined contour: find the scale that minimizes max(all 5 ratios)
-        best_max_ratio = float("inf")
-        for idx in valid_indices:
-            rt = ratios_list[idx]
-            mr = max(rt.get(s, 0.0) for s in SYSTEM_IDS)
-            if mr < best_max_ratio:
-                best_max_ratio = mr
-        max_ratios.append(best_max_ratio)
+        best_idx = min(
+            valid_indices,
+            key=lambda idx: max(ratios_list[idx].get(s, 0.0) for s in SYSTEM_IDS),
+        )
+        best_ratios = ratios_list[best_idx]
+        max_ratios.append(max(best_ratios.get(s, 0.0) for s in SYSTEM_IDS))
 
-        # Per-system contours: independently minimize each system's ratio
+        # Every system is read off from the same combined best point.
         for s in SYSTEM_IDS:
-            best_sys_ratio = float("inf")
-            for idx in valid_indices:
-                rt = ratios_list[idx]
-                sr = rt.get(s, 0.0)
-                if sr < best_sys_ratio:
-                    best_sys_ratio = sr
-            sys_ratios[s].append(best_sys_ratio)
+            sys_ratios[s].append(best_ratios.get(s, 0.0))
 
     r_agg = np.asarray(r_out)
     mkk_agg = np.asarray(mkk_out)
@@ -394,7 +461,7 @@ def _plot_exclusion_boundaries(data: dict[str, Any], output_dir: Path) -> list[P
 
     # Convert log-scale tick labels back to real values
     ax.set_xlabel(r"$r$", fontsize=14)
-    ax.set_ylabel(r"$M_{\rm KK}$ [TeV]", fontsize=14)
+    ax.set_ylabel(r"$m_{g^{(1)}}$ [TeV]", fontsize=14)
 
     # Custom tick formatter for log-scale axes
     _set_log_ticks(ax, "x", log_r.min(), log_r.max())
@@ -576,7 +643,7 @@ def _plot_mkk_bound_comparison(data: dict[str, Any], output_dir: Path) -> list[P
 
     ax.set_xscale("log")
     ax.set_xlabel(r"$r$", fontsize=14)
-    ax.set_ylabel(r"Minimum $M_{\rm KK}$ [TeV]", fontsize=14)
+    ax.set_ylabel(r"Minimum $m_{g^{(1)}}$ [TeV]", fontsize=14)
 
     ax.legend(
         loc="best",
@@ -624,9 +691,18 @@ def main() -> int:
         return 1
 
     data = _extract_arrays(records)
+    data = _apply_publication_convention(
+        data,
+        xi_kk=float(args.xi_kk),
+    )
     n_total = len(data["r"])
     n_accepted = int(np.sum(data["accepted"]))
     print(f"Loaded {n_total} converged points ({n_accepted} accepted).")
+    print(
+        "Publication convention: "
+        f"m_g^(1) = {args.xi_kk:.6f} * Lambda_IR; "
+        "saved scan couplings left unchanged."
+    )
 
     if n_total == 0:
         print("ERROR: no converged points to plot.", file=sys.stderr)
