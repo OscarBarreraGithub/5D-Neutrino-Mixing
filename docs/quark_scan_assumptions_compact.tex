@@ -98,8 +98,10 @@ U_{\mathrm{left}}^\dagger$ is generally dense. Before the fit starts,
 
 The consequence of $U_{\mathrm{right}} = I$ is important: the right-handed
 bulk mass matrices $C_u = Y_u^\dagger Y_u$ and $C_d = Y_d^\dagger Y_d$ are
-diagonal by construction. All off-diagonal flavor structure lives in the
-left-handed matrix $C_Q$, which is the only source of tree-level FCNCs.
+diagonal by construction, so the dominant source of flavor misalignment is the
+left-handed matrix $C_Q$. (Right-handed off-diagonal couplings can still appear
+after the SVD rotation to the mass basis, but the restriction to diagonal $C_u$,
+$C_d$ removes much of the freedom that a general scan would have.)
 This restricts the scan to 15 free parameters (6 singular values +
 8 left-rotation angles + 1 overall scale) out of the 37 that a pair of
 general $3\times3$ complex matrices would have.
@@ -119,8 +121,11 @@ bulk localization of the quark zero modes:
 In the NMFV literature the full form is $C_Q = \alpha_Q\,\mathbf{I} +
 \beta_Q\,Y_d Y_d^\dagger + \gamma_Q\,Y_u Y_u^\dagger$, where $\alpha_Q$ is
 a flavor-universal bulk mass and $r = \gamma_Q / \beta_Q$. Our scan omits the
-$\alpha_Q\,\mathbf{I}$ term; the role of $\alpha_Q$ is played instead by the
-nonlinear map described in the next section.
+$\alpha_Q\,\mathbf{I}$ term entirely. In its place, an ad hoc nonlinear map
+(next section) clamps the eigenvalues into a bounded window after
+diagonalization. This is not equivalent to including $\alpha_Q$: it preserves
+the eigenvectors but distorts the eigenvalue splittings in a way that has no
+counterpart in the MFV spurion expansion.
 
 The parameter $r$ controls alignment. When $r = 0$, $C_Q \propto Y_d Y_d^\dagger$,
 which can be diagonalized simultaneously with $Y_d$. In that basis the
@@ -142,10 +147,9 @@ We diagonalize each $C_X$ to get eigenvalues $\lambda_i$ and a rotation
 matrix. The rotation for $C_Q$ is physically important: it defines the
 transformation from the flavor basis to the bulk-mass eigenbasis.
 
-The eigenvalues of $C_Q$ are non-negative, but they are not directly the
-bulk mass parameters $c$ that enter the $f$-factor formula. We need a map
-$\lambda \to c$. Because our $C_Q$ has no $\alpha_Q$ term, the eigenvalues
-can range from 0 to arbitrarily large values, so we apply a bounded sigmoid:
+The eigenvalues are non-negative, but they are not directly the bulk mass
+parameters $c$ that enter the $f$-factor formula. We apply an ad hoc bounded
+sigmoid to all three sectors ($Q$, $u$, $d$) with the same parameters:
 \begin{equation}
   c = 0.72 - 0.42\,\frac{\lambda}{\lambda + 1}\,.
 \end{equation}
@@ -156,14 +160,21 @@ $f_{\mathrm{IR}} \sim 0.45$, which forces the top Yukawa singular value to
 be $\sim 2.4$ to reproduce $m_t = 172$~GeV (perturbative but above the naive
 $O(1)$ expectation).
 
-The sigmoid is an artifact of omitting $\alpha_Q$. In the standard
-parametrization, $\alpha_Q$ provides a flavor-universal baseline, and the
-eigenvalues of $C_Q$ are directly the bulk masses $c_{Q,i}$ with no need for
-a nonlinear map.
+This map is not equivalent to the standard NMFV parametrization. It preserves
+the eigenvectors of $C_X$ but distorts the eigenvalue splittings in a
+nonlinear way that has no counterpart in the spurion expansion. It also uses
+the same map for all three sectors, removing sector-dependent universal offsets
+(i.e.\ independent $\alpha_Q$, $\alpha_u$, $\alpha_d$) and
+sign/cancellation freedom in the $O(1)$ coefficients. In the standard
+parametrization, $\alpha_Q$ provides a flavor-universal baseline and the
+eigenvalues of $C_Q$ are directly the bulk masses with no remapping needed.
 
-\textcolor{red}{\textbf{To do:} With the explicit $(\alpha_Q, \beta_Q,
-\gamma_Q)$ parametrization, the sigmoid would be replaced by a direct
-identification $c_{Q,i} = \text{eigenvalue}_i(C_Q)$.}
+\textcolor{red}{\textbf{To do:} The ad hoc sigmoid is the assumption most
+likely to bias both the top-sector masses and the FCNC bounds. With the
+explicit $(\alpha_Q, \beta_Q, \gamma_Q)$ parametrization (and analogous
+$\alpha_u$, $\alpha_d$ for the RH sectors), the sigmoid would be replaced by a
+direct identification $c_{X,i} = \text{eigenvalue}_i(C_X)$, with independent
+baselines per sector.}
 
 
 %% ====================================================================
@@ -271,11 +282,12 @@ $\gs \sim 6$ vs.\ one-loop $\gs \sim 3$ is a factor of 4 in ${\gs}^2$.}
 \section{KK-gluon couplings in the mass basis}
 
 After the fit converges we have the diagonal overlaps $F_Q$, $F_u$, $F_d$ and
-the left/right rotation matrices $U_L^{u,d}$, $U_R^{u,d}$ from the SVD. The
-first KK-gluon excitation couples to zero-mode quarks through their IR-brane
-overlap; in the bulk-mass eigenbasis this coupling is diagonal
-($\gs \operatorname{diag}(F^2)$), but in the physical mass basis it picks up
-off-diagonal entries from the rotations:
+the left/right rotation matrices $U_L^{u,d}$, $U_R^{u,d}$ from the SVD. We
+model the KK-gluon coupling to zero-mode quarks as proportional to
+$\operatorname{diag}(F^2)$ in the bulk-mass eigenbasis (an overlap ansatz that
+captures localization dependence but is not the full 5D overlap integral).
+In the physical mass basis this picks up off-diagonal entries from the
+rotations:
 \begin{equation}
   g_{L}^{\mathrm{down}}[i,j] = \gs \cdot
     \bigl(U_L^{d\,\dagger} \operatorname{diag}(F_Q^2)\, U_L^d\bigr)_{ij},
@@ -373,7 +385,10 @@ document.
 
 Five meson systems are tested: $\epsilon_K$, $\Delta M_K$, $\Delta M_{B_d}$,
 $\Delta M_{B_s}$, $\Delta M_{D^0}$. A point passes only if all five satisfy
-$\text{ratio} \le 1$.
+$\text{ratio} \le 1$. These are deliberately conservative acceptance rules
+(generous budgets, NP-only with no SM interference), so the resulting bounds
+should be read as a weak ``best-case NP-only envelope,'' not as a sharp
+physical exclusion in a global-fit sense.
 
 For $\epsilon_K$, the observable is
 $\epsilon_K^{\mathrm{NP}} = |\kappa_\epsilon / (\sqrt{2}\,\Delta m_K)| \cdot

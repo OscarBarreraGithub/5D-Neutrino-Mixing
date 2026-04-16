@@ -292,10 +292,12 @@ to identity:
 \end{align}
 
 So $C_u$ and $C_d$ (defined next) are automatically diagonal, while $C_Q$ is
-generally dense.  All off-diagonal flavor structure in the left-handed quark
-sector, and therefore all tree-level FCNCs, come from the combination of the
-two left rotations $U_{\mathrm{left}}^u$ and $U_{\mathrm{left}}^d$
-through~$C_Q$.
+generally dense.  The dominant source of flavor misalignment in this scan is
+the left-handed matrix $C_Q$, built from the combination of the two left
+rotations $U_{\mathrm{left}}^u$ and $U_{\mathrm{left}}^d$. (Right-handed
+off-diagonal couplings can still appear after the SVD rotation to the mass
+basis, but the restriction to diagonal $C_u$, $C_d$ removes much of the
+freedom a general scan would have.)
 
 We freeze right rotations to identity, which restricts the Yukawa space to 15
 free parameters instead of 37 for two general complex $3\times 3$ matrices.
@@ -350,12 +352,13 @@ $C_Q = \alpha_Q\,\mathbf{I} + \beta_Q\,Y_d Y_d^\dagger +
 \gamma_Q\,Y_u Y_u^\dagger$.
 The $\alpha_Q\,\mathbf{I}$ term provides a flavor-universal baseline bulk mass
 (typically $\alpha_Q \sim 0.5$--$0.7$ to localize quarks near the UV brane).
-Our scan omits $\alpha_Q\,\mathbf{I}$.  Its role is instead played by the
-BulkMassMap (\hyperref[sec:step5]{Step~5}), which maps the eigenvalues of $C_Q$
-onto a bounded physical range $[0.30,\,0.72]$.  The BulkMassMap gives
-$c_Q = 0.72$ when the eigenvalue is zero (equivalent to $\alpha_Q = 0.72$),
-but for nonzero eigenvalues the relationship is nonlinear (sigmoid), not linear
-as it would be with explicit $\alpha_Q$.
+Our scan omits $\alpha_Q\,\mathbf{I}$ entirely.  In its place, an ad hoc
+nonlinear map (\hyperref[sec:step5]{Step~5}) clamps the eigenvalues of $C_Q$
+into a bounded window $[0.30,\,0.72]$ after diagonalization. This is not
+equivalent to including $\alpha_Q$: $\alpha_Q\,\mathbf{I}$ is a linear
+flavor-universal matrix term in the spurion expansion, whereas the sigmoid is
+a nonlinear spectral remap that preserves eigenvectors but distorts eigenvalue
+splittings in a way that has no counterpart in the MFV expansion.
 
 \textcolor{red}{\textbf{To do:} The note from Jackie prescribes the explicit
 $(\alpha_Q,\,\beta_Q,\,\gamma_Q)$ parametrization with $C_Q =
@@ -420,20 +423,22 @@ cannot produce $c < 0.30$.  This forces the top Yukawa singular value to be
 $\sim 2.4$ to reproduce $m_t = 172$~GeV (see \hyperref[sec:step8]{Step~8}),
 which is perturbative but larger than the ``anarchic $O(1)$'' expectation.
 
-The sigmoid is needed because we omit $\alpha_Q$ from $C_Q$: without a
-flavor-universal piece, the eigenvalues of $C_Q$ can range from 0 to
-$\infty$, and there is no guarantee they land in a physically sensible bulk
-mass window.  The sigmoid clamps them into $[0.30,\,0.72]$ by construction.
-In the standard parametrization with explicit $(\alpha_Q,\,\beta_Q)$, no such
-map is needed: the eigenvalues of $C_Q$ \emph{are} the bulk masses directly,
-and $\alpha_Q$ provides the baseline that keeps them in range.
+The same sigmoid is applied to all three sectors ($Q$, $u$, $d$) with the
+same parameters.  This removes sector-dependent universal offsets (i.e.\
+independent $\alpha_Q$, $\alpha_u$, $\alpha_d$) and sign/cancellation freedom
+in the $O(1)$ coefficients.  It is not equivalent to the standard NMFV
+parametrization: $\alpha_Q\,\mathbf{I}$ is a linear flavor-universal matrix
+term, whereas the sigmoid is a post-diagonalization spectral remap that
+preserves eigenvectors but distorts eigenvalue splittings nonlinearly.  In the
+standard parametrization, $\alpha_Q$ provides the baseline and the eigenvalues
+of $C_Q$ are directly the bulk masses, with no remapping needed.
 
-\textcolor{red}{\textbf{To do:} With the explicit
-$(\alpha_Q,\,\beta_Q,\,\gamma_Q)$ parametrization (see the $C_Q$ TODO above),
-the BulkMassMap would be replaced by a direct identification
-$c_{Q,i} = \text{eigenvalue}_i(C_Q)$, with $\alpha_Q$ providing the
-flavor-universal offset. The sigmoid is an artifact of the current
-parametrization and should be removed in future scans.}
+\textcolor{red}{\textbf{To do:} The ad hoc sigmoid is the assumption most
+likely to bias both the top-sector masses and the FCNC bounds.  With the
+explicit $(\alpha_Q,\,\beta_Q,\,\gamma_Q)$ parametrization (and analogous
+$\alpha_u$, $\alpha_d$ for the RH sectors), it would be replaced by a direct
+identification $c_{X,i} = \text{eigenvalue}_i(C_X)$, with independent baselines
+per sector.}
 
 %% ====================================================================
 \section{Zero-Mode Overlaps}
@@ -700,10 +705,10 @@ $F_u$, $F_d$, and (2)~the unitary rotation matrices $U_L^u$, $U_R^u$,
 $U_L^d$, $U_R^d$ from the SVD of the mass matrices.  These are combined to
 build the KK-gluon coupling matrices in the physical quark mass basis.
 
-The first KK-gluon excitation couples to zero-mode quarks proportionally to
-their IR-brane wavefunction values squared.  In the bulk-mass eigenbasis, this
-coupling is diagonal: $\gs\cdot\operatorname{diag}(F^2)$.  To get the coupling
-in the mass basis, we rotate:
+We model the KK-gluon coupling to zero-mode quarks as proportional to
+$\operatorname{diag}(F^2)$ in the bulk-mass eigenbasis (an overlap ansatz that
+captures localization dependence but is not the full 5D overlap integral in
+exact RS notation).  Multiplied by $\gs$ and rotated into the mass basis:
 \begin{equation}
   (\text{overlap})_{ij}^{\text{mass basis}} = \bigl(U^\dagger \cdot
     \operatorname{diag}(F^2) \cdot U\bigr)_{ij}
@@ -1164,7 +1169,10 @@ $D^0$ & $6.25\times10^{-15}$~GeV & Long-distance dominated (HFLAV) \\
 
 A scan point is accepted if the ratio to bound is $\le 1.0$ for all five
 systems simultaneously: $\epsilon_K$, $\Delta M_K$, $\Delta M_{B_d}$,
-$\Delta M_{B_s}$, $\Delta M_{D^0}$.
+$\Delta M_{B_s}$, $\Delta M_{D^0}$. These are deliberately conservative
+acceptance rules (generous budgets, NP-only with no SM interference), so the
+resulting bounds should be read as a weak ``best-case NP-only envelope,'' not
+as a sharp physical exclusion in a global-fit sense.
 
 Additionally, the fit must have converged with $\text{fit\_score} \le 0.1$
 (meaning the quark masses and CKM are reproduced well enough that the Wilson
