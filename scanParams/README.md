@@ -12,7 +12,6 @@ then applies:
 Results are returned as rows (list of dicts) and can be written to CSV.
 
 Theory/parameter-prior note: [`THEORY_PRIORS.md`](THEORY_PRIORS.md)
-Task tracking for this refactor: [`IMPLEMENTATION_TASKS.md`](IMPLEMENTATION_TASKS.md)
 
 ## Quick Start
 

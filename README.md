@@ -33,8 +33,12 @@ python scripts/benchmark_perez_randall.py
 - `scripts/audit_perez_randall_consistency.py` documents the conclusion of the
   reproduction audit: the displayed Eq. (10) neutrino Yukawas do not
   numerically reproduce Eq. (7) when combined with Eq. (6) and Eq. (11).
-- Tracked notebooks are committed as executed analysis artifacts.
-- Generated standalone figures live under `results/figures/`.
+- Tracked notebooks live under [`notebooks/`](notebooks/) as executed analysis
+  artifacts.
+- Tracked standalone figure exports are limited to
+  `results/figures/yukawa_mkk_tradeoff_2008_vs_2024.png`,
+  `results/figures/publication/fig1_exclusion_boundaries.png`, and
+  `results/figures/publication/fig2_mkk_bound_2007_vs_modern.png`.
 - Tracked repo docs under [`docs/`](docs/) are intentionally limited to
   [`quark_scan_assumptions_compact.tex`](docs/quark_scan_assumptions_compact.tex)
   and its compiled PDF.
@@ -67,8 +71,8 @@ functions used throughout the project.
 [`quarkConstraints`](quarkConstraints)
 - Active quark-sector MFV program with an exploratory `repo_v1` lane, a frozen
   `paper_0710_1869` lane, and a planned `modern` production lane. See
-  [`quarkConstraints/QUARK_COMPLETION_PROGRAM.md`](quarkConstraints/QUARK_COMPLETION_PROGRAM.md)
-  and [`quarkConstraints/README.md`](quarkConstraints/README.md).
+  [`quarkConstraints/README.md`](quarkConstraints/README.md) and
+  [`quarkConstraints/PAPER_0710_1869.md`](quarkConstraints/PAPER_0710_1869.md).
 
 [`qcd`](qcd)
 - Computes the QCD running coupling α_s(μ) with threshold matching.

@@ -36,6 +36,15 @@ docs/*
 !docs/quark_scan_assumptions_compact.pdf
 !docs/quark_scan_assumptions_compact.tex
 
+# Keep tracked figure exports limited to the collaborator-facing set.
+results/figures/*.png
+results/figures/*.pdf
+results/figures/**/*.png
+results/figures/**/*.pdf
+!results/figures/yukawa_mkk_tradeoff_2008_vs_2024.png
+!results/figures/publication/fig1_exclusion_boundaries.png
+!results/figures/publication/fig2_mkk_bound_2007_vs_modern.png
+
 # Scan artifacts
 logs/
 scan_outputs/
@@ -43,3 +52,6 @@ scan_outputs/
 # Temporary scratch files
 tmp*.json
 tmp-*
+
+# One-off notebook output kept out of version control.
+scripts/alpha_s_tev.pdf

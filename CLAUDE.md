@@ -205,7 +205,8 @@ For more control, you can proceed step-by-step:
 
 ## References
 
-- **Research Paper.pdf**: Full derivations and theoretical motivation
+- Primary paper references are linked from `README.md` and the module
+  `README.md` files.
 - **derivations/**: LaTeX documents with step-by-step calculations
 - Agashe et al. (hep-ph/0412089): RS flavor framework
 - Perez et al.: Lepton sector constraints in warped models
