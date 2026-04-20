@@ -1,8 +1,8 @@
 # 5D Neutrino Mixing — Agent Notes
 
 This file is agent-facing context for working in the repo. Canonical user-facing
-documentation lives in `README.md` and the module `README.md` files. Historical
-status and planning notes live under `docs/archive/`.
+documentation lives in `README.md` and the module `README.md` files. Superseded
+planning notes should be recovered from git history when needed.
 
 This repository implements a parameter sweep for the lepton sector in a
 Randall-Sundrum warped extra dimension. The goal is to find regions of parameter
@@ -198,7 +198,7 @@ For more control, you can proceed step-by-step:
 - Canonical install and validation commands live in `README.md`.
 - Scanner defaults should be read from `scanParams/scan.py`; the current LFV
   default is the published MEG II 2025 bound `br_limit = 1.5e-13`.
-- Historical snapshots may describe superseded APIs; use `docs/archive/` for
+- Historical snapshots may describe superseded APIs; use git history for
   context, not as the canonical source of truth.
 
 ---

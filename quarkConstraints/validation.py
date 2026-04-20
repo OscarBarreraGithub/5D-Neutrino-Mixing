@@ -11,7 +11,7 @@ from .benchmarks import QuarkTargets, default_quark_targets, default_spurion_see
 from .couplings import compute_quark_kk_gluon_couplings
 from .deltaf2 import evaluate_delta_f2_constraints
 from .fit import QuarkFitSolution, fit_quark_sector
-from .model import BulkMassMap
+from .model import BulkMassMap, build_mfv_point_from_singular_values, derive_bulk_state
 from .proxies import summarize_flavor_diagnostics
 from .scales import (
     DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
@@ -310,6 +310,170 @@ def r_sweep_plot_data(
         "c_u": np.asarray(c_u, dtype=float),
         "c_d": np.asarray(c_d, dtype=float),
         "F_Q3": np.asarray(f_q3, dtype=float),
+    }
+
+
+def bulk_mass_map_comparison_data(
+    *,
+    r_values: Sequence[float] = (0.0, 0.02, 0.05, 0.1, 0.25, 0.5, 1.0, 2.0),
+    overall_scale_values: Sequence[float] = (1.5, 2.8, 4.0, 6.0),
+    Lambda_IR: float = 3000.0,
+    bulk_map: BulkMassMap | None = None,
+) -> Dict[str, np.ndarray]:
+    """Return a deterministic eigenvalue-vs-bulk-mass comparison bundle.
+
+    The comparison uses the repo-local sigmoid ``BulkMassMap`` together with its
+    affine small-eigenvalue surrogate
+
+    ``c_affine(lambda) = c_uv - (c_uv - c_ir) * lambda / eigen_scale``.
+
+    This is the alpha-style map that matches the sigmoid at ``lambda = 0`` and
+    has the same initial slope there, while leaving the large-eigenvalue tail
+    unsaturated.
+    """
+    bulk_map = BulkMassMap() if bulk_map is None else bulk_map
+    seed = default_spurion_seed()
+
+    r_arr = np.sort(np.asarray(r_values, dtype=float))
+    scale_arr = np.sort(np.asarray(overall_scale_values, dtype=float))
+    if r_arr.ndim != 1 or r_arr.size == 0:
+        raise ValueError("r_values must be a non-empty 1D array")
+    if scale_arr.ndim != 1 or scale_arr.size == 0:
+        raise ValueError("overall_scale_values must be a non-empty 1D array")
+    if np.any(~np.isfinite(r_arr)) or np.any(r_arr < 0.0):
+        raise ValueError("r_values must be finite and non-negative")
+    if np.any(~np.isfinite(scale_arr)) or np.any(scale_arr <= 0.0):
+        raise ValueError("overall_scale_values must be finite and strictly positive")
+    if not np.isfinite(Lambda_IR) or Lambda_IR <= 0.0:
+        raise ValueError("Lambda_IR must be finite and strictly positive")
+
+    eig_by_sector: dict[str, list[np.ndarray]] = {"Q": [], "u": [], "d": []}
+    c_sigmoid_by_sector: dict[str, list[np.ndarray]] = {"Q": [], "u": [], "d": []}
+    sample_r_by_sector: dict[str, list[np.ndarray]] = {"Q": [], "u": [], "d": []}
+    sample_scale_by_sector: dict[str, list[np.ndarray]] = {"Q": [], "u": [], "d": []}
+
+    for r_value in r_arr:
+        for scale_value in scale_arr:
+            point = build_mfv_point_from_singular_values(
+                up_singular_values=seed.up_singular_values,
+                down_singular_values=seed.down_singular_values,
+                overall_scale=float(scale_value),
+                r=float(r_value),
+                up_left=seed.up_left,
+                up_right=seed.up_right,
+                down_left=seed.down_left,
+                down_right=seed.down_right,
+                Lambda_IR=float(Lambda_IR),
+                label="bulk-mass-map-comparison",
+                metadata={"comparison_only": True},
+            )
+            state = derive_bulk_state(point, bulk_mass_map=bulk_map)
+            eig_by_sector["Q"].append(state.eig_Q)
+            eig_by_sector["u"].append(state.eig_u)
+            eig_by_sector["d"].append(state.eig_d)
+            c_sigmoid_by_sector["Q"].append(state.c_Q)
+            c_sigmoid_by_sector["u"].append(state.c_u)
+            c_sigmoid_by_sector["d"].append(state.c_d)
+            for sector_id in ("Q", "u", "d"):
+                sample_r_by_sector[sector_id].append(np.full(3, float(r_value), dtype=float))
+                sample_scale_by_sector[sector_id].append(
+                    np.full(3, float(scale_value), dtype=float)
+                )
+
+    eig_q_samples = np.concatenate(eig_by_sector["Q"]).astype(float)
+    eig_u_samples = np.concatenate(eig_by_sector["u"]).astype(float)
+    eig_d_samples = np.concatenate(eig_by_sector["d"]).astype(float)
+    c_q_sigmoid_samples = np.concatenate(c_sigmoid_by_sector["Q"]).astype(float)
+    c_u_sigmoid_samples = np.concatenate(c_sigmoid_by_sector["u"]).astype(float)
+    c_d_sigmoid_samples = np.concatenate(c_sigmoid_by_sector["d"]).astype(float)
+    sample_r_values = np.concatenate(
+        (
+            np.concatenate(sample_r_by_sector["Q"]),
+            np.concatenate(sample_r_by_sector["u"]),
+            np.concatenate(sample_r_by_sector["d"]),
+        )
+    ).astype(float)
+    sample_scale_values = np.concatenate(
+        (
+            np.concatenate(sample_scale_by_sector["Q"]),
+            np.concatenate(sample_scale_by_sector["u"]),
+            np.concatenate(sample_scale_by_sector["d"]),
+        )
+    ).astype(float)
+
+    eig_samples = np.concatenate((eig_q_samples, eig_u_samples, eig_d_samples))
+    c_sigmoid_samples = np.concatenate(
+        (c_q_sigmoid_samples, c_u_sigmoid_samples, c_d_sigmoid_samples)
+    )
+
+    affine_alpha = float(bulk_map.c_uv)
+    affine_beta = -float(bulk_map.c_uv - bulk_map.c_ir) / float(bulk_map.eigen_scale)
+    c_q_affine_samples = affine_alpha + affine_beta * eig_q_samples
+    c_u_affine_samples = affine_alpha + affine_beta * eig_u_samples
+    c_d_affine_samples = affine_alpha + affine_beta * eig_d_samples
+    c_affine_samples = affine_alpha + affine_beta * eig_samples
+    c_affine_clipped_samples = np.clip(c_affine_samples, bulk_map.c_ir, bulk_map.c_uv)
+
+    observed_lambda_max = max(float(np.max(eig_samples)), float(bulk_map.eigen_scale))
+    lambda_grid = np.concatenate(
+        (
+            np.array([0.0], dtype=float),
+            np.geomspace(1.0e-6, observed_lambda_max * 1.1, 255),
+        )
+    )
+    c_sigmoid_grid = bulk_map.map_eigenvalues(lambda_grid)
+    c_affine_grid = affine_alpha + affine_beta * lambda_grid
+
+    sector_ids = np.concatenate(
+        (
+            np.full(eig_q_samples.shape, "Q", dtype="<U1"),
+            np.full(eig_u_samples.shape, "u", dtype="<U1"),
+            np.full(eig_d_samples.shape, "d", dtype="<U1"),
+        )
+    )
+    generation_ids = np.tile(np.array([1, 2, 3], dtype=int), r_arr.size * scale_arr.size * 3)
+
+    return {
+        "r_values": r_arr,
+        "overall_scale_values": scale_arr,
+        "sample_r_values": sample_r_values,
+        "sample_overall_scale_values": sample_scale_values,
+        "sector_ids": sector_ids,
+        "generation_ids": generation_ids,
+        "eig_Q_samples": eig_q_samples,
+        "eig_u_samples": eig_u_samples,
+        "eig_d_samples": eig_d_samples,
+        "c_Q_sigmoid_samples": c_q_sigmoid_samples,
+        "c_u_sigmoid_samples": c_u_sigmoid_samples,
+        "c_d_sigmoid_samples": c_d_sigmoid_samples,
+        "c_Q_affine_samples": c_q_affine_samples,
+        "c_u_affine_samples": c_u_affine_samples,
+        "c_d_affine_samples": c_d_affine_samples,
+        "eig_samples": eig_samples,
+        "c_sigmoid_samples": c_sigmoid_samples,
+        "c_affine_samples": c_affine_samples,
+        "c_affine_clipped_samples": c_affine_clipped_samples,
+        "affine_alpha": np.array([affine_alpha], dtype=float),
+        "affine_beta": np.array([affine_beta], dtype=float),
+        "c_uv": np.array([bulk_map.c_uv], dtype=float),
+        "c_ir": np.array([bulk_map.c_ir], dtype=float),
+        "eigen_scale": np.array([bulk_map.eigen_scale], dtype=float),
+        "lambda_grid": lambda_grid,
+        "c_sigmoid_grid": np.asarray(c_sigmoid_grid, dtype=float),
+        "c_affine_grid": np.asarray(c_affine_grid, dtype=float),
+        "observed_lambda_max": np.array([observed_lambda_max], dtype=float),
+        "affine_below_c_ir_fraction": np.array(
+            [np.mean(c_affine_samples < bulk_map.c_ir)],
+            dtype=float,
+        ),
+        "affine_above_c_uv_fraction": np.array(
+            [np.mean(c_affine_samples > bulk_map.c_uv)],
+            dtype=float,
+        ),
+        "median_abs_sigmoid_minus_affine": np.array(
+            [np.median(np.abs(c_sigmoid_samples - c_affine_samples))],
+            dtype=float,
+        ),
     }
 
 

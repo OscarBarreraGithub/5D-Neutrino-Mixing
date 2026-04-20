@@ -31,6 +31,11 @@ build/
 *.fls
 *.fdb_latexmk
 
+# Keep tracked docs limited to the compact quark-scan note.
+docs/*
+!docs/quark_scan_assumptions_compact.pdf
+!docs/quark_scan_assumptions_compact.tex
+
 # Scan artifacts
 logs/
 scan_outputs/

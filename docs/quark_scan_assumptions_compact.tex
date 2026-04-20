@@ -1,9 +1,10 @@
 % quark_scan_assumptions_compact.tex
 % Self-contained walkthrough of the quark-sector scan pipeline.
-% For the full version with all numerical inputs, see quark_scan_assumptions.tex.
+% This compact note is the tracked quark-scan writeup in the repo.
 \documentclass[11pt]{article}
 
 \usepackage[margin=1in]{geometry}
+\usepackage{parskip}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
 \usepackage{xcolor}
@@ -17,28 +18,17 @@
 \newcommand{\Mpl}{M_{\mathrm{Pl}}}
 \newcommand{\gs}{g_s^*}
 
-\title{Quark-Sector Scan: Pipeline and Assumptions}
+\title{Quark Sector Scan: Apr 16}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
 
-This document walks through every step of the pipeline that produces
-\texttt{fig1\_exclusion\_boundaries} and
-\texttt{fig2\_mkk\_bound\_2007\_vs\_modern}, from the geometry to the final
-plots. It is written to be self-contained for someone familiar with
-Randall-Sundrum models but who has not seen the code. The full version
-with all hadronic input tables and extended discussion is in
-\texttt{quark\_scan\_assumptions.tex}.
-
-
 %% ====================================================================
 \section{Geometry}
 
-The background is a Randall-Sundrum~I spacetime: a slice of $\mathrm{AdS}_5$
-compactified on $S^1/\mathbb{Z}_2$, with a UV brane at $y = 0$ and an IR brane
-at $y = \pi r_c$. The metric in conformal coordinates is
+We use the following metric convention
 \begin{equation}
   ds^2 = (kz)^{-2}\bigl(\eta_{\mu\nu}\,dx^\mu\,dx^\nu + dz^2\bigr),
   \qquad \eta = \mathrm{diag}(-1,+1,+1,+1),
@@ -46,7 +36,7 @@ at $y = \pi r_c$. The metric in conformal coordinates is
 with the UV brane at $z = 1/k$ and the IR brane at $z = 1/\LamIR$.
 
 Two inputs fix everything: the AdS curvature $k$ and the IR scale $\LamIR$.
-We set $k = \Mpl = 1.2209\times10^{19}$~GeV throughout and scan $\LamIR$
+We set $k = \Mpl = 1.2209\times10^{19}$~GeV throughout and scan over $\LamIR$
 from 500~GeV to 20~TeV. The warp factor is $\varepsilon = \LamIR / k \sim
 10^{-15}$. The Higgs is taken to be localized on the IR brane, and we use
 $v = 174$~GeV as the electroweak VEV (i.e.\ $\langle H \rangle =
@@ -56,21 +46,19 @@ v_{\mathrm{SM}}/\sqrt{2} = 174$~GeV). Backreaction is neglected.
 %% ====================================================================
 \section{Zero-mode profiles}
 
-Each bulk fermion has a dimensionless mass parameter $c = M_5/k$, which
-controls where its zero mode is localized in the extra dimension. The key
+Each bulk fermion has a dimensionless mass parameter $c$, which
+controls where its zero mode is localized in the extra dimension. 
+\textcolor{red}{\textbf{Possible to do:} We can make this the full integral rather than just the IR overlap}
+The key
 quantity is the zero-mode's overlap with the IR brane, since the Higgs
 (and therefore the Yukawa interaction) lives there:
 \begin{equation}
   f_{\mathrm{IR}}^2(c,\varepsilon)
     = \frac{\tfrac{1}{2} - c}{1 - \varepsilon^{1-2c}}\,.
 \end{equation}
-For $c > 1/2$ the zero mode is localized near the UV brane and $f_{\mathrm{IR}}$
-is exponentially small (light fermion); for $c < 1/2$ it is localized near the
-IR brane and $f_{\mathrm{IR}} \sim O(1)$ (heavy fermion). This is the core of
-the RS flavor mechanism: the quark mass hierarchy comes from the exponential
-sensitivity of $f_{\mathrm{IR}}$ to $c$, not from hierarchical 5D Yukawa
-couplings. For example, at $\LamIR = 3$~TeV, $c = 0.72$ gives
-$f \sim 4\times 10^{-8}$ while $c = 0.30$ gives $f \sim 0.45$.
+This is the point of the RS flavor story: the mass hierarchy comes from the
+exponential sensitivity of $f_{\mathrm{IR}}$ to $c$, not from hierarchical
+5D Yukawa couplings.
 
 
 %% ====================================================================
@@ -83,8 +71,7 @@ parametrize each via a singular value decomposition:
     \cdot \operatorname{diag}(\sigma_1,\sigma_2,\sigma_3)
     \cdot U_{\mathrm{right}}^\dagger,
 \end{equation}
-where $\sigma_i > 0$ are ordered light-to-heavy and $U_{\mathrm{left}}$ is a
-CKM-like unitary parametrized by three angles $(\theta_{12}, \theta_{13},
+where $\sigma_i > 0$ are ordered light-to-heavy and $U_{\mathrm{left}}$ is a unitary parametrized by three angles $(\theta_{12}, \theta_{13},
 \theta_{23})$ and a CP phase $\delta$. The prefactor \texttt{overall\_scale}
 is a common real positive number multiplying both $Y_u$ and $Y_d$; it controls
 the overall magnitude of the Yukawa entries.
@@ -96,15 +83,16 @@ $Y Y^\dagger = U_{\mathrm{left}} \operatorname{diag}(\sigma^2)
 U_{\mathrm{left}}^\dagger$ is generally dense. Before the fit starts,
 \texttt{overall\_scale} is absorbed into the singular values and set to~1.
 
-The consequence of $U_{\mathrm{right}} = I$ is important: the right-handed
+Setting $U_{\mathrm{right}} = I$ matters because the right-handed
 bulk mass matrices $C_u = Y_u^\dagger Y_u$ and $C_d = Y_d^\dagger Y_d$ are
 diagonal by construction, so the dominant source of flavor misalignment is the
 left-handed matrix $C_Q$. (Right-handed off-diagonal couplings can still appear
 after the SVD rotation to the mass basis, but the restriction to diagonal $C_u$,
 $C_d$ removes much of the freedom that a general scan would have.)
 This restricts the scan to 15 free parameters (6 singular values +
-8 left-rotation angles + 1 overall scale) out of the 37 that a pair of
+8 left-rotation angles + 1 overall scale) out of the 36 that a pair of
 general $3\times3$ complex matrices would have.
+
 
 
 %% ====================================================================
@@ -120,62 +108,88 @@ bulk localization of the quark zero modes:
 
 In the NMFV literature the full form is $C_Q = \alpha_Q\,\mathbf{I} +
 \beta_Q\,Y_d Y_d^\dagger + \gamma_Q\,Y_u Y_u^\dagger$, where $\alpha_Q$ is
-a flavor-universal bulk mass and $r = \gamma_Q / \beta_Q$. Our scan omits the
-$\alpha_Q\,\mathbf{I}$ term entirely. In its place, an ad hoc nonlinear map
-(next section) clamps the eigenvalues into a bounded window after
+a flavor-universal bulk mass and $r = \gamma_Q / \beta_Q$. This initial scan omits the
+$\alpha_Q\,\mathbf{I}$ term entirely. 
+\textcolor{red}{\textbf{To do}: rerun the scan to include $\alpha_Q$. This is very simple to do in the code. We can easily change the assumptions and test new models quickly!} clamps the eigenvalues into a bounded window after
 diagonalization. This is not equivalent to including $\alpha_Q$: it preserves
 the eigenvectors but distorts the eigenvalue splittings in a way that has no
 counterpart in the MFV spurion expansion.
 
 The parameter $r$ controls alignment. When $r = 0$, $C_Q \propto Y_d Y_d^\dagger$,
-which can be diagonalized simultaneously with $Y_d$. In that basis the
-left-handed overlap matrix $F_Q$ is diagonal, so there are no tree-level FCNCs
-in the down sector. As $r$ increases, the $Y_u Y_u^\dagger$ term (which
-contains CKM-like rotations relative to $Y_d$) introduces off-diagonal entries
-in $C_Q$, misaligning the left-handed quarks from the down mass eigenbasis and
-generating tree-level FCNCs.
-
-\textcolor{red}{\textbf{To do:} Jackie's note prescribes the explicit
-$(\alpha_Q,\beta_Q,\gamma_Q)$ parametrization with all three as free $O(1)$
-parameters. Future scans should implement this.}
+which can be diagonalized simultaneously with $Y_d$. This follows because $U_{\mathrm{right}} = I$,
+so $Y_d = U_{\mathrm{left}}\,\mathrm{diag}(\sigma)$ and the
+rotation that diagonalizes $C_Q = Y_d Y_d^\dagger$ also diagonalizes
+$Y_d$ itself. In that basis the
+left handed overlap matrix $F_Q$ is diagonal, so there are no tree level FCNCs
+in the down sector. As $r$ increases, the $Y_u Y_u^\dagger$ term introduces off diagonal entries
+in $C_Q$, misaligning the left handed quarks from the down mass eigenbasis and
+generating tree level FCNCs.
 
 
 %% ====================================================================
 \section{From spurion eigenvalues to physical bulk masses}
 
 We diagonalize each $C_X$ to get eigenvalues $\lambda_i$ and a rotation
-matrix. The rotation for $C_Q$ is physically important: it defines the
-transformation from the flavor basis to the bulk-mass eigenbasis.
+matrix. The question is how to turn those eigenvalues into physical bulk mass
+parameters $c_i$. The two frameworks we want to be compatible with handle
+this differently:
+\begin{itemize}
+  \item In 0710.1869, specific benchmark $c$-values are just quoted directly
+    (Table~I), but with ``universal terms and overall order one coefficients
+    omitted for simplicity.'' The bulk masses are input data. This is what I was telling you about earlier.
+  \item In the Csaki et al.\ (0907.0474) convention, the full
+    $C_Q = \alpha_Q\,\mathbf{I} + \beta_Q\,Y_d Y_d^\dagger +
+    \gamma_Q\,Y_u Y_u^\dagger$ is kept, and the eigenvalues of $C_Q$ are
+    directly the bulk masses. The $\alpha_Q$ term keeps the spectrum in a
+    physical window.
+\end{itemize}
 
-The eigenvalues are non-negative, but they are not directly the bulk mass
-parameters $c$ that enter the $f$-factor formula. We apply an ad hoc bounded
-sigmoid to all three sectors ($Q$, $u$, $d$) with the same parameters:
+Since this initial scan omits $\alpha_Q$, the eigenvalues of $C_Q$ are raw
+non-negative numbers on $[0,\infty)$ with nothing anchoring them in a
+physical range. To keep all bulk masses inside $[c_{\mathrm{ir}},
+c_{\mathrm{uv}}]$ we apply the map
 \begin{equation}
-  c = 0.72 - 0.42\,\frac{\lambda}{\lambda + 1}\,.
+  c = c_{\mathrm{uv}} - (c_{\mathrm{uv}} - c_{\mathrm{ir}})
+    \;\frac{\lambda}{\lambda + 1}\,,
 \end{equation}
-This maps $\lambda = 0 \to c = 0.72$ (UV-localized, light), $\lambda = 1
-\to c = 0.51$, and $\lambda \to \infty \to c \to 0.30$ (IR-localized, heavy).
+with $c_{\mathrm{uv}} = 0.72$, $c_{\mathrm{ir}} = 0.30$, giving
+$c = 0.72 - 0.42\,\lambda/(\lambda+1)$. This maps $\lambda = 0 \to c = 0.72$
+(UV-localized), $\lambda \to \infty \to c \to 0.30$ (IR-localized), and is
+applied identically to all three sectors ($Q$, $u$, $d$).
+
+
+The choice of $\lambda/(\lambda+1)$ is not arbitrary; Expanding at small $\lambda$,
+\begin{equation}
+  c \;\approx\; 0.72 - 0.42\,\lambda \qquad (\lambda \ll 1),
+\end{equation}
+which is exactly the linear identification $c = \alpha - \beta\,\lambda$
+that the Csaki et al.\ parametrization would give. Over the actual scan,
+the $C_Q$, $C_u$, $C_d$ eigenvalues have median $\lambda \approx 0.02$,
+and in that regime the sigmoid and the affine map agree to better than
+$10^{-3}$. The sigmoid only departs from linearity in the large-$\lambda$
+tail (eigenvalues up to $\sim\!11$), where you end up having that the affine map would push
+$\sim\!26\%$ of points below $c_{\mathrm{ir}} = 0.30$ into unphysical
+territory.
+
+
 The window $[0.30, 0.72]$ is a design choice: $c = 0.30$ gives
-$f_{\mathrm{IR}} \sim 0.45$, which forces the top Yukawa singular value to
-be $\sim 2.4$ to reproduce $m_t = 172$~GeV (perturbative but above the naive
-$O(1)$ expectation).
+$f_{\mathrm{IR}} \sim 0.45$, which forces the top Yukawa to $\sim 2.4$
+to reproduce $m_t = 172$~GeV (perturbative but above the naive $O(1)$
+expectation). Using the same map for all three sectors removes the
+independent baselines ($\alpha_Q$, $\alpha_u$, $\alpha_d$) that the full
+parametrization would provide.
 
-This map is not equivalent to the standard NMFV parametrization. It preserves
-the eigenvectors of $C_X$ but distorts the eigenvalue splittings in a
-nonlinear way that has no counterpart in the spurion expansion. It also uses
-the same map for all three sectors, removing sector-dependent universal offsets
-(i.e.\ independent $\alpha_Q$, $\alpha_u$, $\alpha_d$) and
-sign/cancellation freedom in the $O(1)$ coefficients. In the standard
-parametrization, $\alpha_Q$ provides a flavor-universal baseline and the
-eigenvalues of $C_Q$ are directly the bulk masses with no remapping needed.
+\textcolor{red}{\textbf{Note:} With the explicit $(\alpha_Q, \beta_Q,
+\gamma_Q)$ parametrization the sigmoid goes away entirely. That is, eigenvalues are
+directly the bulk masses. The sigmoid
+is an assumption that is likely to bias the top sector masses and the FCNC
+bounds.}
 
-\textcolor{red}{\textbf{To do:} The ad hoc sigmoid is the assumption most
-likely to bias both the top-sector masses and the FCNC bounds. With the
-explicit $(\alpha_Q, \beta_Q, \gamma_Q)$ parametrization (and analogous
-$\alpha_u$, $\alpha_d$ for the RH sectors), the sigmoid would be replaced by a
-direct identification $c_{X,i} = \text{eigenvalue}_i(C_X)$, with independent
-baselines per sector.}
-
+\textcolor{red}{\textbf{Note:} The entire analysis is tree-level.
+In the Csaki et al.\ (0907.0474) ``shining'' framework, up type Yukawa
+loops induce radiative flavor misalignment, generating off-diagonal
+down type Yukawas and kinetic mixings that can be numerically important
+near current bounds.}
 
 %% ====================================================================
 \section{Zero-mode overlaps, basis rotation, and mass matrices}
@@ -183,21 +197,13 @@ baselines per sector.}
 With the physical bulk masses in hand, we compute the IR-brane overlaps
 $F_Q[i] = f_{\mathrm{IR}}(c_Q[i], \varepsilon)$ for the left-handed doublets,
 and similarly $F_u$, $F_d$ for the right-handed singlets. We then rotate the
-Yukawas into the bulk-mass eigenbasis:
-$Y^{\mathrm{bulk}} = \text{rot}_Q^\dagger \cdot Y \cdot \text{rot}_{u,d}$.
-This rotation diagonalizes the bulk masses (so we can apply $F$ as a diagonal
-matrix), but it does not diagonalize the Yukawas; $Y^{\mathrm{bulk}}$ is
-generally a dense $3\times3$ complex matrix.
-
-The effective 4D quark mass matrices are then
+Yukawas into the bulk-mass eigenbasis, and the effective 4D quark mass matrices are then
 \begin{equation}
   M_{u,d} = 2v \cdot \operatorname{diag}(F_Q) \cdot Y_{u,d}^{\mathrm{bulk}}
     \cdot \operatorname{diag}(F_{u,d}),
 \end{equation}
 where $2v = 348$~GeV $\approx \sqrt{2}\,v_{\mathrm{SM}}$. The 5D Yukawas
-in this convention are dimensionless. The physical quark mass for generation
-$i$ is roughly $m_i \sim 2v\,F_Q[i]\,Y_{ii}^{\mathrm{bulk}}\,F_{u\text{ or }d}[i]$:
-the mass hierarchy comes from the exponential spread in the $F$-factors.
+in this convention are dimensionless. 
 
 
 %% ====================================================================
@@ -209,18 +215,16 @@ quark masses as singular values. The CKM matrix is $V_{\mathrm{CKM}} =
 (U_L^u)^\dagger U_L^d$, from which we extract $|V_{us}|$, $|V_{cb}|$,
 $|V_{ub}|$, and the Jarlskog invariant $J$.
 
-The entire chain from Yukawa parameters to masses and CKM is wrapped in a
-Trust Region Reflective optimizer, which adjusts 14 free parameters (6
+We wrap the whole chain (Yukawa parameters $\to$ masses + CKM) in an optimizer that adjusts 14 free parameters (6
 log-singular-values $+$ 8 left-rotation angles) to match the observed quark
 masses and CKM elements. The residual is a 10-component vector: 6 log-mass
 ratios plus 4 fractional CKM deviations. We define the fit score as the RMS
 of these 10 residuals; points with score $> 0.1$ (roughly $> 10\%$ average
 deviation) are discarded.
 
-The target masses ($m_u = 1.3$~MeV, $m_c = 620$~MeV, $m_t = 172$~GeV,
-$m_d = 2.8$~MeV, $m_s = 57$~MeV, $m_b = 2.86$~GeV) are repo-owned values
+The target masses are hard coded values
 chosen for scan stability, not $\overline{\mathrm{MS}}$ masses at a consistent
-scale. This is an uncontrolled systematic.
+scale.
 
 \textcolor{red}{\textbf{To do:} Use PDG $\overline{\mathrm{MS}}$ masses at a
 consistent renormalization scale.}
@@ -229,9 +233,7 @@ consistent renormalization scale.}
 %% ====================================================================
 \section{The scan}
 
-With the physics pipeline established (Yukawas $\to$ bulk masses $\to$
-overlaps $\to$ mass matrices $\to$ fit), we can describe the scan itself. It
-sweeps three parameters on a grid:
+The scan sweeps three parameters on a grid:
 
 \begin{center}
 \begin{tabular}{@{}llll@{}}
@@ -253,7 +255,13 @@ entries are large and the fitter has to make the singular values small to
 compensate; if it is small, the singular values have to be large. These
 different configurations produce different off-diagonal entries in the mass
 basis and therefore different FCNC predictions, even though the diagonal masses
-come out the same. Over the scan range 1.5 to 6.0, the largest singular value
+come out the same. Since the fitter freely adjusts all
+six singular values, \texttt{overall\_scale} is formally reabsorbable and is
+not an independent physical degree of freedom. Its role is just that of a scan hyperparameter, since different values seed the optimizer in
+different basins of the fit landscape.
+
+
+Over the scan range 1.5 to 6.0, the largest singular value
 (top-like) runs from $\sim 1.5$ to $\sim 6$ and the smallest (up-like) from
 $\sim 0.005$ to $\sim 0.02$. At the high end the top Yukawa is well above the
 naive $O(1)$ expectation. $\LamIR$ sets the KK scale and therefore the
@@ -264,15 +272,12 @@ from the same deterministic seed.
 
 At scan time several quantities are held fixed. The KK-mass convention is
 $\xi_{\mathrm{KK}} = 1.0$, meaning $\Mkk = \LamIR$ in the Wilson coefficient
-propagator (corrected post-hoc at plotting time; see below). The enhanced
-KK-gluon coupling is $\gs = 3.0$, the one-loop estimate from
-Gedalia et al.\ (2009).
+propagator; the enhanced
+KK-gluon coupling is $\gs = 3.0$.
 
 \textcolor{red}{\textbf{To do:} Future scans should set
-$\xi_{\mathrm{KK}} = 2.4487$ (the physical first KK-gluon mass from the
-gauge-sector Bessel root) so that $\Mkk = m_g^{(1)}$ from the start. The
-current post-hoc correction fixes the $1/\Mkk^2$ propagator but not the QCD
-running start scale.}
+$\xi_{\mathrm{KK}}$ at the physical first KK-gluon mass from the
+gauge-sector Bessel root) so that $\Mkk = m_g^{(1)}$ from the start.}
 
 \textcolor{red}{\textbf{To do:} Confirm $\gs$ with Lisa. Tree-level
 $\gs \sim 6$ vs.\ one-loop $\gs \sim 3$ is a factor of 4 in ${\gs}^2$.}
@@ -284,8 +289,7 @@ $\gs \sim 6$ vs.\ one-loop $\gs \sim 3$ is a factor of 4 in ${\gs}^2$.}
 After the fit converges we have the diagonal overlaps $F_Q$, $F_u$, $F_d$ and
 the left/right rotation matrices $U_L^{u,d}$, $U_R^{u,d}$ from the SVD. We
 model the KK-gluon coupling to zero-mode quarks as proportional to
-$\operatorname{diag}(F^2)$ in the bulk-mass eigenbasis (an overlap ansatz that
-captures localization dependence but is not the full 5D overlap integral).
+$\operatorname{diag}(F^2)$ in the bulk-mass eigenbasis.
 In the physical mass basis this picks up off-diagonal entries from the
 rotations:
 \begin{equation}
@@ -297,50 +301,43 @@ $g_L^{\mathrm{up}}$ (using $U_L^u$, $F_Q$), and $g_R^{\mathrm{up}}$ (using
 $U_R^u$, $F_u$). Note that $F_Q$ enters both LH couplings because $u_L$ and
 $d_L$ share the same $SU(2)$ doublet.
 
-These coupling matrices are Hermitian. Their off-diagonal entries, which are
-generically complex, drive flavor-changing neutral currents. Since $\gs$
-enters all Wilson coefficients as ${\gs}^2$, the choice between the tree-level
-value ($\gs \sim 6$) and the one-loop value ($\gs = 3$) is a factor of 4 in
-all constraint ratios.
-
 
 %% ====================================================================
 \section{Wilson coefficients}
 
 Integrating out the KK-gluon at tree level at the scale $\mu = \Mkk$ gives
-four $\Delta F = 2$ operators in the BMU basis (Buras, Misiak, Urban,
-hep-ph/0005183):
+four $\Delta F = 2$ operators. The operators below are labeled
+$(Q_4^{\mathrm{LR}}, Q_5^{\mathrm{LR}})$, which is the SUSY basis
+convention (Gabbiani et al.), not the BMU basis $(Q_1^{\mathrm{LR}},
+Q_2^{\mathrm{LR}})$. The anomalous dimension matrix in
+Section~10 and the matrix elements in Section~12 are also written in
+the SUSY basis. 
 \begin{align}
   C_1^{\mathrm{VLL}} &= \frac{(g_L[i,j])^2}{6\,\Mkk^2}\,, \qquad
   C_1^{\mathrm{VRR}} = \frac{(g_R[i,j])^2}{6\,\Mkk^2}\,, \\[4pt]
   C_4^{\mathrm{LR}} &= -\frac{g_L[i,j]\,g_R[i,j]}{\Mkk^2}\,, \qquad
   C_5^{\mathrm{LR}} = \frac{g_L[i,j]\,g_R[i,j]}{3\,\Mkk^2}\,.
 \end{align}
-The coefficients $1/6$, $-1$, $+1/3$ come from the color algebra of
-$t$-channel KK-gluon exchange after Fierz rearrangement. Only VLL, VRR, and
-LR operators appear at tree level (no SLL/SRR, which would require scalar
-currents). The Wilson coefficients are complex; their imaginary parts carry
-CP violation and are essential for the $\epsilon_K$ constraint.
-
 The five meson systems and their quark-pair indices are: $\epsilon_K$ and
 $\Delta M_K$ use $(d,s)$; $B_d$ uses $(d,b)$; $B_s$ uses $(s,b)$; $D^0$
-uses $(u,c)$. We include only the first KK-gluon mode (higher modes are a
-$\sim 10$--$20\%$ correction) and use $\Mkk = \LamIR$ as both the
+uses $(u,c)$. We include only the first KK-gluon mode (\textcolor{red}{Possible To do: we can include higher modes for the subleading correction}) and use $\Mkk = \LamIR$ as both the
 propagator mass and matching scale.
 
 
 %% ====================================================================
 \section{QCD running}
 
-The Wilson coefficients are matched at $\Mkk$ (multi-TeV) and the hadronic
+The Wilson coefficients are matched at $\Mkk$ and the hadronic
 matrix elements are evaluated at $\mu_{\mathrm{had}} = 2$~GeV, so we evolve
-the coefficients down using leading-log QCD RG equations. The VLL and VRR
-operators run multiplicatively with anomalous dimension $\gamma = 4$. The LR
+the coefficients down using leading log QCD RG equations. The LR
 operators $C_4$ and $C_5$ mix via the $2\times2$ anomalous dimension matrix
 \begin{equation}
   \gamma_{\mathrm{LR}} = \begin{pmatrix} 8 & -4 \\ -16/3 & -28/3 \end{pmatrix}.
 \end{equation}
-The dominant eigenvalue is large and positive, giving a $3$--$5\times$
+This is the anomalous dimension matrix
+in the SUSY $(C_4, C_5)$ basis, not the BMU $(C_1^{\mathrm{LR}},
+C_2^{\mathrm{LR}})$ basis, which matches the code. 
+The dominant eigenvalue is large and positive, giving a $3$ to $5\times$
 enhancement of the LR operators at low scales. Combined with the chiral
 enhancement factor $r_\chi = (m_K/(m_s + m_d))^2 \approx 25$ in the kaon
 matrix elements, this is why $\epsilon_K$ is the most powerful constraint.
@@ -361,7 +358,9 @@ contracted with hadronic matrix elements to get the NP mixing amplitude:
     + C_4^{\mathrm{LR}} \cdot \mathrm{ME}_{\mathrm{LR4}}
     + C_5^{\mathrm{LR}} \cdot \mathrm{ME}_{\mathrm{LR5}},
 \end{equation}
-where VRR and VLL share the same matrix element by parity. The matrix
+where VRR and VLL share the same matrix element by parity. 
+
+\textcolor{red}{\textbf{To do:} I am pretty sure I have a factor of 2 subtlety here I need to fix. The matrix
 elements are
 \begin{equation}
   \mathrm{ME}_{\mathrm{VLL}} = \tfrac{2}{3} f_P^2 m_P B_1, \qquad
@@ -370,37 +369,47 @@ elements are
   \mathrm{ME}_{\mathrm{LR5}} = \bigl(\tfrac{r_\chi}{2} + \tfrac{1}{12}\bigr)
     f_P^2 m_P B_5,
 \end{equation}
-with $r_\chi = (m_P / (m_{q_1} + m_{q_2}))^2$. Here $M_{12}$ is the full
-off-diagonal element $\langle\bar{P}|H_{\mathrm{eff}}|P\rangle$ in GeV (no
-$1/(2m_P)$ normalization), so $\Delta m = 2|M_{12}|$.
+with $r_\chi = (m_P / (m_{q_1} + m_{q_2}))^2$. The matrix elements above
+already absorb the $1/(2m_P)$ state-normalization factor, so $M_{12} =
+\sum_i C_i \cdot \mathrm{ME}_i$ is the standard off-diagonal mass-matrix
+element in GeV and $\Delta m = 2|M_{12}|$. The code computes
+$\mathrm{ME}_{\mathrm{VLL}} = \tfrac{2}{3}\,f_P^2\,m_P\,B_1$ and contracts
+it directly with $C_i$ to obtain $M_{12}$, but elsewhere we compute
+$\langle Q_1\rangle = \tfrac{8}{3}\,f_P^2\,m_P^2\,B_K$ and divides by
+$2m_P$ explicitly. With the same $B_1 = B_K$.}
+
 
 Hadronic inputs (decay constants, bag parameters, quark masses) come from
 FLAG~2024 and PDG~2024, with the exception of the $D^0$ LR bag parameters
-$B_4$, $B_5$ which are estimated at 1.0. Full input tables are in the long
-document.
+$B_4$, $B_5$ which are estimated at 1.0.
 
 
 %% ====================================================================
 \section{Acceptance criteria}
 
-Five meson systems are tested: $\epsilon_K$, $\Delta M_K$, $\Delta M_{B_d}$,
-$\Delta M_{B_s}$, $\Delta M_{D^0}$. A point passes only if all five satisfy
-$\text{ratio} \le 1$. These are deliberately conservative acceptance rules
-(generous budgets, NP-only with no SM interference), so the resulting bounds
-should be read as a weak ``best-case NP-only envelope,'' not as a sharp
-physical exclusion in a global-fit sense.
+For each parameter point we compute the KK-gluon contribution to five meson
+mixing observables: $\epsilon_K$, $\Delta M_K$, $\Delta M_{B_d}$,
+$\Delta M_{B_s}$, $\Delta M_{D^0}$. Each one gets a ``budget,'' the
+amount of room the experimental measurement leaves for new physics beyond the
+SM. We form the ratio
+\begin{equation}
+  \text{ratio} = \frac{\text{KK-gluon prediction}}{\text{budget}}\,,
+\end{equation}
+and a point passes only if all five ratios are $\le 1$
+The budgets are deliberately generous, so these bounds should be read as a
+weak ``best-case envelope,'' not a sharp exclusion.
 
 For $\epsilon_K$, the observable is
 $\epsilon_K^{\mathrm{NP}} = |\kappa_\epsilon / (\sqrt{2}\,\Delta m_K)| \cdot
 |\mathrm{Im}(M_{12}^{\mathrm{NP}})|$
 with $\kappa_\epsilon = 0.94$, and the budget is the exp--SM gap:
 $|2.228\times10^{-3} - 1.81\times10^{-3}| = 4.18\times10^{-4}$.
-The absolute value discards the sign of the NP phase (no constructive/destructive
-interference with SM).
+The absolute value discards the sign of the so there is no constructive/destructive
+interference with SM.
 
 For $\Delta M_K$, the budget is $\Delta m_K^{\mathrm{exp}} / 2$ (the SM
-prediction is long-distance dominated and unreliable, so the entire
-experimental value is treated as room for NP).
+prediction is long distance dominated and unreliable, so the entire
+experimental value is treated as room for new physics).
 
 For $B_d$ and $B_s$, the budget is
 $\max(\Delta m^{\mathrm{exp}}/2,\; |\Delta m^{\mathrm{exp}} -
@@ -409,10 +418,12 @@ $\Delta m^{\mathrm{exp}}/2$. For $D^0$ it is simply
 $\Delta m^{\mathrm{exp}}/2$.
 
 
+\textcolor{red}{\textbf{To do:} I think there is a lot to improve here. Right now we only check whether the RS
+contribution fits inside this defined budget for each system independently.}
+
 %% ====================================================================
 \section{Post-processing and figures}
 
-Points with fit score $> 0.1$ or failed convergence are discarded.
 
 Because the scan used $\Mkk = \LamIR$ as the propagator mass, but the
 physical first KK-gluon mass is $m_g^{(1)} = \xi_{\mathrm{kk}} \LamIR$ with
@@ -423,58 +434,19 @@ QCD running start scale (see the TODO above).
 
 At each $(r, \Mkk)$ grid point there are up to 20 \texttt{overall\_scale}
 values. The plotter picks the single \texttt{overall\_scale} that minimizes
-$\max(\text{all 5 ratios})$, so that all five contour lines in Figure~1 come
+$\max(\text{all 5 ratios})$, so that all five contour lines in the figure come
 from one physically consistent MFV point.
 
-Both figures are best-case envelopes: the fitter found the most favorable
-Yukawa structure at each grid point, and the plotter picked the most favorable
-\texttt{overall\_scale}. The contour shows the lowest $\Mkk$ at which any
-fitted point survives. This is an existence bound, not a statement about
+Both figures are best-case envelopes: the fitter picks the most favorable
+Yukawa structure at each grid point, and the plotter picks the most favorable
+\texttt{overall\_scale}. So the contour shows the lowest $\Mkk$ at which
+any fitted point survives; it is not a statement about
 typical NMFV behavior.
 
 \textcolor{red}{\textbf{To do:} These figures answer ``can NMFV ever allow
-$\Mkk$ this low?'' Jackie's note asks for an ensemble analysis: random $O(1)$
+$\Mkk$ this low?'' Your note asks for an ensemble analysis: random $O(1)$
 Yukawas in the explicit $(\alpha_Q, \beta_Q, \gamma_Q)$ parametrization, keep
 points reproducing quark masses, histogram $\Mkk$ where
 $\mathrm{Im}(C_4^K)$ meets its bound. Both analyses are needed.}
-
-Figure~1 shows per-system exclusion contours in the $(r, m_g^{(1)})$ plane at
-ratio $= 1$. $\epsilon_K$ dominates at moderate $r$; $\Delta M_K$ at large $r$.
-
-Figure~2 shows the minimum $m_g^{(1)}$ vs.\ $r$, comparing modern (2024+) and
-2007-era bounds. The 2007 rescaling factors (modern/2007 bound ratio) are:
-$\epsilon_K$: 0.70, $\Delta M_K$: 0.70, $B_d$: 0.67, $B_s$: 0.37,
-$D^0$: 0.106. The tightening is modest at small $r$ (where $\epsilon_K$
-dominates) and dramatic at large $r$ (where $B_s$ and $D^0$ dominate).
-
-
-%% ====================================================================
-\section{Summary of assumptions}
-
-\begin{enumerate}[itemsep=2pt]
-  \item RS1 geometry with $k = \Mpl$, Higgs on the IR brane, no backreaction.
-  \item Yukawas parametrized via SVD with $U_{\mathrm{right}} = I$ (15 free
-    parameters). Only $C_Q$ has off-diagonal structure.
-  \item $C_Q = r\,Y_u Y_u^\dagger + Y_d Y_d^\dagger$, no $\alpha_Q$ term.
-    Eigenvalues mapped to $c \in [0.30, 0.72]$ via a sigmoid (artifact of
-    omitting $\alpha_Q$).
-  \item 14-parameter TRF fit, 120 evaluations, deterministic seed. Best-case
-    optimization, not random sampling.
-  \item $\gs = 3.0$ (one-loop), entering as ${\gs}^2$ in all Wilson
-    coefficients. Factor of 9 relative to perturbative $g_s$.
-  \item Tree-level matching at $\Mkk = \LamIR$, first KK-gluon mode only.
-  \item LO anomalous dimensions, one-loop $\alpha_s$,
-    $\mu_{\mathrm{had}} = 2$~GeV.
-  \item FLAG 2024 / PDG 2024 hadronic inputs. $D^0$ $B_{4,5}$ estimated at
-    1.0.
-  \item $\epsilon_K$ budget: exp--SM gap. $\Delta M_K$: exp/2. $B_{d,s}$:
-    $\max(\text{exp}/2, |\text{exp}-\text{SM}|/2)$. $D^0$: exp/2.
-  \item Publication axis: $m_g^{(1)} = 2.4487\,\LamIR$ with ratio
-    $/\xi_{\mathrm{kk}}^2$ correction.
-  \item Figures show an existence bound (best-case envelope), not typical NMFV
-    behavior.
-  \item Fit targets are repo-owned effective masses, not consistent
-    $\overline{\mathrm{MS}}$.
-\end{enumerate}
 
 \end{document}

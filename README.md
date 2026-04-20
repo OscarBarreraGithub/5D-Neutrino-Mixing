@@ -35,7 +35,9 @@ python scripts/benchmark_perez_randall.py
   numerically reproduce Eq. (7) when combined with Eq. (6) and Eq. (11).
 - Tracked notebooks are committed as executed analysis artifacts.
 - Generated standalone figures live under `results/figures/`.
-- Historical status and planning notes live under [`docs/archive`](docs/archive).
+- Tracked repo docs under [`docs/`](docs/) are intentionally limited to
+  [`quark_scan_assumptions_compact.tex`](docs/quark_scan_assumptions_compact.tex)
+  and its compiled PDF.
 
 ## Packages
 

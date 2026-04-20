@@ -43,6 +43,7 @@ _EXPORTS = {
     "benchmark_plot_data": (".validation", "benchmark_plot_data"),
     "benchmark_solution": (".validation", "benchmark_solution"),
     "benchmark_spurion_input": (".benchmarks", "benchmark_spurion_input"),
+    "bulk_mass_map_comparison_data": (".validation", "bulk_mass_map_comparison_data"),
     "build_mass_matrices": (".fit", "build_mass_matrices"),
     "build_mfv_point_from_singular_values": (".model", "build_mfv_point_from_singular_values"),
     "build_spurion_matrix": (".model", "build_spurion_matrix"),
