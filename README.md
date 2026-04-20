@@ -37,8 +37,8 @@ python scripts/benchmark_perez_randall.py
   artifacts.
 - Tracked standalone figure exports are limited to
   `results/figures/yukawa_mkk_tradeoff_2008_vs_2024.png`,
-  `results/figures/publication/fig1_exclusion_boundaries.png`, and
-  `results/figures/publication/fig2_mkk_bound_2007_vs_modern.png`.
+  `results/figures/quark/fig1_exclusion_boundaries.png`, and
+  `results/figures/quark/fig2_mkk_bound_2007_vs_modern.png`.
 - Tracked repo docs under [`docs/`](docs/) are intentionally limited to
   [`quark_scan_assumptions_compact.tex`](docs/quark_scan_assumptions_compact.tex)
   and its compiled PDF.

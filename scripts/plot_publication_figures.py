@@ -12,7 +12,7 @@ Produces two figures:
 Usage
 -----
     python scripts/plot_publication_figures.py <results.jsonl> \
-        --output-dir results/figures/publication
+        --output-dir results/figures/quark
 """
 
 from __future__ import annotations
@@ -91,7 +91,7 @@ def _parse_args() -> argparse.Namespace:
         default=None,
         help=(
             "Directory for output figures.  "
-            "Defaults to results/figures/publication relative to the repo root."
+            "Defaults to results/figures/quark relative to the repo root."
         ),
     )
     parser.add_argument(
@@ -676,7 +676,7 @@ def main() -> int:
     _configure_style()
 
     repo_root = Path(__file__).resolve().parents[1]
-    output_dir = args.output_dir or (repo_root / "results" / "figures" / "publication")
+    output_dir = args.output_dir or (repo_root / "results" / "figures" / "quark")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     results_path: Path = args.results_file
