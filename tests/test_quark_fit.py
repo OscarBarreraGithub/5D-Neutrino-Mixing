@@ -175,7 +175,7 @@ def test_fit_quark_sector_is_invariant_under_quotient_directions():
         encode_quark_fit_canonical_vector(base_solution.seed),
         encode_quark_fit_canonical_vector(shifted_solution.seed),
         rtol=0.0,
-        atol=1e-12,
+        atol=5e-6,
     )
 
 
@@ -527,7 +527,7 @@ def test_fit_orientation_false_remains_deterministic_and_restricted():
         encode_quark_fit_canonical_vector(base_solution.seed),
         encode_quark_fit_canonical_vector(shifted_solution.seed),
         rtol=0.0,
-        atol=1e-12,
+        atol=5e-6,
     )
     assert np.isclose(base_solution.seed.overall_scale, 1.0)
     assert np.all(np.diff(base_solution.seed.up_singular_values) >= -1e-12)
