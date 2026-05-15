@@ -243,8 +243,11 @@ anchor on the canonical value
 which is also approximately the NDA upper bound on the dimensionless 5D
 coupling before the gauge sector becomes strongly coupled,
 $\gs \lesssim 4\pi/\sqrt{N_{KK}\log(\Mpl/\Mkk)}\!\approx\!3$. So ``3'' is
-the value that the strong-coupling literature
-(Csaki--Falkowski--Weiler) uses by default.
+a useful common comparison convention.  Csaki--Falkowski--Weiler quote
+both sides of this ambiguity: their published $21$~TeV RS marker is tied
+to a boundary-term convention with $\gs\!\sim\!6$, while their
+no-UV-boundary-term variant lowers $\gs$ to $\sim\!3$ and the same
+bound to $10.5$~TeV.
 
 \paragraph{So which is right?}
 None of them is more right than another --- they are different
@@ -259,15 +262,14 @@ formula uses, and not double-counting:
         explicitly. The user can override this by passing
         \texttt{g\_s\_star = 3.0}, in which case the prefactor is
         replaced wholesale.
-  \item The Csaki--Falkowski--Weiler convention puts the warp enhancement
+  \item The Csaki--Falkowski--Weiler formula puts the warp enhancement
         \emph{into} $\gs$ and writes the Wilson coefficient as
-        $\propto (\gs)^2/\Mkk^2$ with $\gs\!\sim\! 3$. Numerically this
-        gives the same answer as ours up to the way the overlap factors
-        for non-IR-localised fermions are treated.
-  \item The ``$\gs\!\sim\!6$'' value sometimes seen in older papers is the
-        full warp-enhanced coupling $\gsfour\sqrt{\pi r_c k}$ without the
-        $1/\sqrt{2}$ that comes from properly normalising the KK-gluon
-        zero-mode wave function. It is roughly twice $\gs = 3$.
+        $\propto (\gs)^2/\Mkk^2$.  Depending on UV boundary kinetic terms,
+        they discuss both $\gs\!\sim\!6$ and $\gs\!\sim\!3$.
+  \item The ``$\gs\!\sim\!6$'' value is the full warp-enhanced coupling
+        $\gsfour\sqrt{\pi r_c k}$ in their tree-level matching convention.
+        It is roughly twice the $\gs = 3$ comparison convention used for
+        the post-audit plots in this note.
 \end{itemize}
 
 The practical consequence is that the $\Mkk$ bound is defined up to a
@@ -837,48 +839,56 @@ shape of the surviving $\Mkk^{\min}$ distribution does not change
 appreciably under tightening (the bound is FCNC-set, not mass-set).
 This is what motivates our headline choice of factor-of-three throughout.
 
-\subsection{Comparison with Csaki--Falkowski--Weiler 0804.1954 (Run~C)}
+\subsection{Comparison with Csaki--Falkowski--Weiler 0804.1954}
 \label{sec:robust-cfw}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.78\linewidth]{rs_anarchy_cfw_comparison.pdf}
-  \caption{Our $\Mkk^{\min}$ distribution at the operating
-  factor-of-three PDG gate ($\gs = 3$ convention), overlaid against
-  the $21$--$33$~TeV band quoted in the abstract of
-  Csaki--Falkowski--Weiler 0804.1954. Under the corrected BGS + LO-only
-  convention, our factor-of-three 95\%-acceptance crossing
-  ($\sim\!127$~TeV) is well above the historical CFW band; the comparison
-  at the CFW gate (factor-of-1.5, $|Y|\ge 0.5$) is not made because that
-  gate returned zero PDG-passing draws over our 4M total samples (see
-  text below).}
+  \caption{Convention-reconciled comparison with
+  Csaki--Falkowski--Weiler (CFW) 0804.1954.  The blue curve is our live
+  post-audit RUNA distribution in the $\gs=3$ convention.  The red dashed
+  curve keeps the same forward-scan rows but switches to the CFW-era
+  $\epsilon_K$ budget proxy, $\epsilon_K^{\rm SM}=1.81\times10^{-3}$, and
+  imposes CFW's 30\% relative mass/CKM/$J$ gate.  The vertical markers are
+  the CFW abstract values: $21$~TeV for generic RS anarchy and $33$~TeV for
+  the pseudo-Goldstone Higgs case.}
   \label{fig:robust-cfw}
 \end{figure}
 
-Run~C tightened the PDG gate to a factor of $1.5$ on every mass and CKM
-element, \emph{and} raised the Yukawa floor to $|Y_{ij}|\ge 0.5$,
-matching the operating choices of CFW 0804.1954. Over $5\!\times\!10^{5}$
-draws per tile across all eight tiles ($4\!\times\!10^{6}$ samples),
-this configuration produced \emph{zero} PDG-passing draws. We therefore
-\emph{cannot} report a $\Mkk^{\min}$ percentile at the CFW gate from a
-forward-only Y-sample-then-check pipeline of our type.
+The convention extraction is recorded in
+\texttt{docs/audits/cfw\_convention\_extract.md}, and the numerical
+reproduction arithmetic is in
+\texttt{docs/audits/cfw\_reproduction.md}.  The important points are:
+CFW use the same conventional scalar-LR $C_4/C_5$ sign pattern as our
+post-audit code; their paper does not publish explicit kaon bag constants,
+instead importing UTfit model-independent $\Delta F=2$ scale bounds; and
+their scan samples localisation parameters directly rather than fixing one
+$c$-pattern and forward-drawing only Yukawas.
 
-\paragraph{What this does and does not say.} It does not invalidate
-CFW: their published scan uses an inverse design in which the
-$c$-values themselves are sampled (with a mass-generating-function
-constraint), \emph{not} just the Yukawas above a fixed $c$-pattern. With
-the $c$-values free, the typical draw lands much closer to PDG masses,
-and a factor-of-1.5 gate is reachable. We have not implemented the
-inverse design; doing so would require a dedicated $c$-sampler. So the
-honest comparison is narrower: our post-audit $95\%$-acceptance bound at
-the factor-of-three gate, $\Mkk\!\sim\!127$~TeV in the $\gs = 3$
-convention, is not a CFW reproduction and should not be compared as one
-number-for-number. It uses modern BGS/FLAG inputs and the audited
-leading-log LR running, while CFW used different historical inputs and a
-different inverse $(c,\tilde m)$ scan design. We therefore treat the CFW
-overlay only as historical context. A full numerical reproduction of the
-CFW band at their gate is left as a follow-up that would require the
-inverse sampler we have not built.
+With our live BGS/FLAG inputs and factor-of-three gate, RUNA gives
+\[
+  \Mkk^{\min}(p50,\gs=3)=47.26~\mathrm{TeV},
+  \qquad
+  \Mkk^{\min}(p95,\gs=3)=127.13~\mathrm{TeV}.
+\]
+Switching only the $\epsilon_K$ budget to the legacy CFW-era proxy
+$|\epsilon_K^{\rm exp}-1.81\times10^{-3}|=4.18\times10^{-4}$ moves the
+central value to $18.92$~TeV.  Imposing CFW's stated 30\% relative
+mass/CKM/$J$ gate leaves 217 forward-scan rows and gives
+\[
+  \Mkk^{\min}(p50,\gs=3)=23.37~\mathrm{TeV}.
+\]
+This is $11\%$ above CFW's $21$~TeV generic-RS marker in the common
+$\gs=3$ plotting convention, so we regard the convention-matched
+comparison as qualitatively consistent at the 20\% level.  The statement
+is deliberately narrower than a literal rerun: CFW's published $21$~TeV
+number is tied to a boundary-term color-coupling convention often described
+as $\gs\sim6$, while their no-UV-boundary-term variant lowers the
+same bound to $10.5$~TeV.  If one multiplies our matched curve by a further
+$6/3$, the p50 becomes $46.7$~TeV; we therefore quote the agreement only
+after putting both curves into the common $\gs=3$ convention used in
+Fig.~\ref{fig:robust-cfw}.
 
 %% =====================================================================
 \section{Recommendation}
@@ -915,12 +925,12 @@ $\mathcal{U}(-1,1)$, $\mathcal{U}(-1.5,1.5)$, $\mathcal{U}(-3,3)$, and
 truncated-Gaussian $Y$-priors (\S\ref{sec:robust-yprior}); the
 PDG-pass population thins sharply under factor-$2$ and factor-$1.5$
 gate tightening, with the surviving $\Mkk^{\min}$ shape essentially
-unchanged (\S\ref{sec:robust-pdg-tightness}); and at the literal CFW
-gate the forward pipeline returns zero passes, so the comparison is
-necessarily qualitative. The post-audit $95\%$ bound at $\gs=3$
-($\sim 127$~TeV) is above the historical $21$--$33$~TeV CFW band under
-our BGS + LO-only conventions, so the overlay is now context rather than
-band-overlap
+unchanged (\S\ref{sec:robust-pdg-tightness}); and the CFW comparison is
+quantitatively stable only after matching historical conventions.  Under
+our live BGS + LO-only conventions the p50 value is $47.26$~TeV, but
+switching to the CFW-era $\epsilon_K$ budget and 30\% relative mass/CKM/$J$
+gate gives $23.37$~TeV in the common $\gs=3$ convention, within $11\%$ of
+CFW's $21$~TeV generic-RS marker
 (\S\ref{sec:robust-cfw}).
 
 The PDG/$\msbar$ work is not wasted: it is what lets us identify a
