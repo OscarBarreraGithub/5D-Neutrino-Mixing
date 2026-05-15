@@ -850,11 +850,32 @@ This is what motivates our headline choice of factor-of-three throughout.
   post-audit RUNA distribution in the $\gs=3$ convention.  The red dashed
   curve keeps the same forward-scan rows but switches to the CFW-era
   $\epsilon_K$ budget proxy, $\epsilon_K^{\rm SM}=1.81\times10^{-3}$, and
-  imposes CFW's 30\% relative mass/CKM/$J$ gate.  The vertical markers are
-  the CFW abstract values: $21$~TeV for generic RS anarchy and $33$~TeV for
-  the pseudo-Goldstone Higgs case.}
+  imposes CFW's 30\% relative mass/CKM/$J$ gate.  The vertical markers show
+  both CFW color-coupling conventions: RS at $10.5$~TeV for the
+  $\gs=3$ no-UV-boundary-term variant and $21$~TeV for the
+  $\gs\simeq6$ default, plus pGB Higgs markers at $17$~TeV for the
+  no-bare-brane variant and $33$~TeV for the $\gs\simeq6$ default.}
   \label{fig:robust-cfw}
 \end{figure}
+
+\paragraph{Headline.}
+Our post-audit pipeline produces an RS-anarchy $\Mkk^{\min}$ bound that
+is approximately a factor $2.2$ stronger than the CFW 2008 reference at
+matched conventions: at common $\gs=3$, we obtain $23.4$~TeV (50th
+percentile, BGS 2020 + FLAG 2024 + factor-3 PDG gate) versus the CFW
+no-UV-boundary-term result of $10.5$~TeV, or equivalently $47$~TeV
+versus $21$~TeV at common $\gs\simeq6$.  The factor-$2.2$ enhancement is
+attributable to (i) the BGS 2020 SM $\epsilon_K$ prediction giving a
+$6\times$ tighter NP budget than the UTfit-era values CFW used; (ii) the
+FLAG 2024 bag parameters; and (iii) our LO BMU-corrected sign
+convention.  The bound directions are consistent: both confirm an
+$\Mkk > \mathcal{O}(10\,\mathrm{TeV})$ lower bound under anarchic flavor,
+but the precise number reflects newer hadronic inputs and is not a direct
+reproduction of CFW's 2008 numerical result.  The matched-gate subset
+contains only $n=217$ PDG-passing draws; the 95\% binomial Wilson-score
+interval on the p50 is approximately $[21,26]$~TeV at $\gs=3$.  The
+factor-$2.2$ disagreement with CFW is robust to this finite-statistics
+uncertainty.
 
 The convention extraction is recorded in
 \texttt{docs/audits/cfw\_convention\_extract.md}, and the numerical
@@ -879,16 +900,9 @@ mass/CKM/$J$ gate leaves 217 forward-scan rows and gives
 \[
   \Mkk^{\min}(p50,\gs=3)=23.37~\mathrm{TeV}.
 \]
-This is $11\%$ above CFW's $21$~TeV generic-RS marker in the common
-$\gs=3$ plotting convention, so we regard the convention-matched
-comparison as qualitatively consistent at the 20\% level.  The statement
-is deliberately narrower than a literal rerun: CFW's published $21$~TeV
-number is tied to a boundary-term color-coupling convention often described
-as $\gs\sim6$, while their no-UV-boundary-term variant lowers the
-same bound to $10.5$~TeV.  If one multiplies our matched curve by a further
-$6/3$, the p50 becomes $46.7$~TeV; we therefore quote the agreement only
-after putting both curves into the common $\gs=3$ convention used in
-Fig.~\ref{fig:robust-cfw}.
+This is the value used in the headline comparison above; it is not an
+agreement-within-errors reproduction of CFW's default $21$~TeV marker,
+because that marker belongs to the $\gs\simeq6$ boundary-term convention.
 
 %% =====================================================================
 \section{Recommendation}
@@ -926,12 +940,14 @@ truncated-Gaussian $Y$-priors (\S\ref{sec:robust-yprior}); the
 PDG-pass population thins sharply under factor-$2$ and factor-$1.5$
 gate tightening, with the surviving $\Mkk^{\min}$ shape essentially
 unchanged (\S\ref{sec:robust-pdg-tightness}); and the CFW comparison is
-quantitatively stable only after matching historical conventions.  Under
-our live BGS + LO-only conventions the p50 value is $47.26$~TeV, but
-switching to the CFW-era $\epsilon_K$ budget and 30\% relative mass/CKM/$J$
-gate gives $23.37$~TeV in the common $\gs=3$ convention, within $11\%$ of
-CFW's $21$~TeV generic-RS marker
-(\S\ref{sec:robust-cfw}).
+factor-$2.2$ stronger than the 2008 reference once the $g_s^\star$
+conventions are matched.  Under our live BGS + FLAG + LO-only conventions
+the p50 value is $47.26$~TeV at $\gs=3$; the CFW no-UV-boundary-term RS
+marker at the same convention is $10.5$~TeV, while its default
+$\gs\simeq6$ marker is $21$~TeV (\S\ref{sec:robust-cfw}).  The residual is
+attributable to newer $\epsilon_K^{\rm SM}$, FLAG bag inputs, and the
+audited LO BMU sign convention rather than to a percent-level reproduction
+of the CFW number.
 
 The PDG/$\msbar$ work is not wasted: it is what lets us identify a
 ``PDG-passing'' subset of the anarchic ensemble in a defensible,
