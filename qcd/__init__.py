@@ -35,7 +35,8 @@ from .constants import (
     M_Z,
     THRESHOLD_LIST,
 )
-from .decoupling import match_alpha_s
+from .decoupling import match_alpha_s, match_msbar_mass
+from .mass_running import run_msbar_mass
 from .running import alpha_s, alpha_s_array
 
 __all__ = [
@@ -43,6 +44,8 @@ __all__ = [
     'alpha_s',
     'alpha_s_array',
     'match_alpha_s',
+    'match_msbar_mass',
+    'run_msbar_mass',
     # Beta function
     'beta_coefficients',
     'beta_rhs',
