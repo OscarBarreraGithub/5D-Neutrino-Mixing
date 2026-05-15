@@ -1,0 +1,329 @@
+{
+  "tag": "quarkscan-paper-rc1",
+  "tag_status": "deferred until Phase 3 sign-off",
+  "date_sealed": "2026-05-15",
+  "branch": "paper/quark-scan-2026q2",
+  "implementation_branch": "docs/canonical-manifest",
+  "code_sha_at_run_time": "29803fffa70ede4ffab736b4bebc705eeceef0f6",
+  "code_sha_at_run_time_basis": "Inferred from UTC scan directory stamps 20260515T0853* after commit 29803ff and before rerun-record commit db0222366cf53184ed90e7009739005580facec9; tile_summary.json does not embed a git SHA.",
+  "code_sha_at_manifest_seal": "80641cf653a3a304afb40b65ffa0287222eea945",
+  "doi": {
+    "status": "deferred until submission"
+  },
+  "cluster_bundle": {
+    "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/artifacts/quarkscan_paper_rc1_manifest_bundle.tar.gz",
+    "sha256_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/artifacts/quarkscan_paper_rc1_manifest_bundle.tar.gz.sha256",
+    "contents": [
+      "docs/artifact_manifest.md",
+      "artifacts/quarkscan_paper_rc1_manifest.json",
+      "artifacts/checksums.sha256",
+      "artifacts/README.md"
+    ]
+  },
+  "environment": {
+    "conda_env": "/n/home09/obarrera/.conda/envs/ising_bootstrap",
+    "python": "3.11.14",
+    "packages": {
+      "numpy": "2.4.2",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8",
+      "pandas": "3.0.1"
+    }
+  },
+  "canonical_scans": [
+    {
+      "scan": "Baseline 8M (RUNA)",
+      "dir": "scan_outputs/rs_anarchy_runA_20260515T085316",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runA_20260515T085316",
+      "used_for": "All headline p50/p95 quotes; gate sensitivity; PDG-tightness retabulation; CFW projection source",
+      "command": "sbatch scripts/run_rs_anarchy_runA.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_runA_20260515T085316/tile_summary.json",
+        "sha256": "b146fefc0fba7b1fdb0fa488b19c8ccb04066eed860bb02a59a40fabf37bd3ce",
+        "size_bytes": 12431
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_runA_20260515T085316/draws.jsonl",
+        "sha256": "a2d43049d161e041ad9b790e2c95777e72ff0e1af9480dffea4454905d0f8640",
+        "size_bytes": 8208002542
+      },
+      "size_mb": 8208.01
+    },
+    {
+      "scan": "Run3 baseline",
+      "dir": "scan_outputs/rs_anarchy_run3_baseline_20260515T085324",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_baseline_20260515T085324",
+      "used_for": "c-pattern figure",
+      "command": "sbatch --export=ALL,PATTERN_TAG=baseline,C_Q=\"0.63_0.57_0.20\",C_U=\"0.66_0.50_-0.50\",C_D=\"0.66_0.61_0.55\" scripts/run_rs_anarchy_run3.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_run3_baseline_20260515T085324/tile_summary.json",
+        "sha256": "246cf3dfb073aa12e56a27aa3b77a03917623f6c1703f4af91700c97c6c21e24",
+        "size_bytes": 12338
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_run3_baseline_20260515T085324/draws.jsonl",
+        "sha256": "d9dabdcb9543d211f88713e77bd9a65a49145ed3386a9102e2f8721134f4f864",
+        "size_bytes": 1640886297
+      },
+      "size_mb": 1640.9
+    },
+    {
+      "scan": "Run3 qtop_shifted",
+      "dir": "scan_outputs/rs_anarchy_run3_qtop_shifted_20260515T085324",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_qtop_shifted_20260515T085324",
+      "used_for": "c-pattern figure",
+      "command": "sbatch --export=ALL,PATTERN_TAG=qtop_shifted,C_Q=\"0.63_0.57_0.30\",C_U=\"0.66_0.50_-0.55\",C_D=\"0.66_0.61_0.55\" scripts/run_rs_anarchy_run3.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_run3_qtop_shifted_20260515T085324/tile_summary.json",
+        "sha256": "ef0fbc2b8238fc57f1e697027db5c790070c460a671e612cd0723d6e6bc25f58",
+        "size_bytes": 12431
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_run3_qtop_shifted_20260515T085324/draws.jsonl",
+        "sha256": "badf0a538efdcdb1620794fd37393e138ff803e84c2e16aa299feb7250af083d",
+        "size_bytes": 1640949589
+      },
+      "size_mb": 1640.96
+    },
+    {
+      "scan": "Run3 moreUV",
+      "dir": "scan_outputs/rs_anarchy_run3_moreUV_20260515T085324",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_moreUV_20260515T085324",
+      "used_for": "c-pattern figure plus zero-pass upper limit",
+      "command": "sbatch --export=ALL,PATTERN_TAG=moreUV,C_Q=\"0.68_0.62_0.25\",C_U=\"0.71_0.55_-0.45\",C_D=\"0.71_0.66_0.60\" scripts/run_rs_anarchy_run3.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_run3_moreUV_20260515T085324/tile_summary.json",
+        "sha256": "3150aadc477183574d07d0be227edc3d646a08c81ce3e668fd5ef8daae3158cd",
+        "size_bytes": 9072
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_run3_moreUV_20260515T085324/draws.jsonl",
+        "sha256": "d199744d5a92cef521051c911b3e750fd48dd9ec6bf431a8d819e0a0d46f79cb",
+        "size_bytes": 1660086647
+      },
+      "size_mb": 1660.1,
+      "zero_pass": {
+        "n": 1600000,
+        "k": 0,
+        "wilson_upper_limit_95": 2.3039946915962305e-06
+      }
+    },
+    {
+      "scan": "Run3 moreIR",
+      "dir": "scan_outputs/rs_anarchy_run3_moreIR_20260515T085324",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_moreIR_20260515T085324",
+      "used_for": "c-pattern figure plus zero-pass upper limit",
+      "command": "sbatch --export=ALL,PATTERN_TAG=moreIR,C_Q=\"0.58_0.52_0.15\",C_U=\"0.61_0.45_-0.55\",C_D=\"0.61_0.56_0.50\" scripts/run_rs_anarchy_run3.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_run3_moreIR_20260515T085324/tile_summary.json",
+        "sha256": "e6899f1af63821ab7afcd6389126d6522eff2f626ac154541c3e679890aa30d5",
+        "size_bytes": 9008
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_run3_moreIR_20260515T085324/draws.jsonl",
+        "sha256": "66ba3a70c5be0f2779bb95853e2c326a9b754f9ae367804e68fb0babbb91b0de",
+        "size_bytes": 1619423363
+      },
+      "size_mb": 1619.43,
+      "zero_pass": {
+        "n": 1600000,
+        "k": 0,
+        "wilson_upper_limit_95": 2.3039946915962305e-06
+      }
+    },
+    {
+      "scan": "RunB narrow_uniform",
+      "dir": "scan_outputs/rs_anarchy_runB_narrow_uniform_20260515T085324",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_narrow_uniform_20260515T085324",
+      "used_for": "Y-prior figure",
+      "command": "sbatch --export=ALL,PRIOR_TAG=narrow_uniform scripts/run_rs_anarchy_runB.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_runB_narrow_uniform_20260515T085324/tile_summary.json",
+        "sha256": "17a0a27ddcc494677720077527dd6a263f2fbfc3b16711e31d1e00aadefb4edb",
+        "size_bytes": 12323
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_runB_narrow_uniform_20260515T085324/draws.jsonl",
+        "sha256": "f73c976a3c5aee29458594b423cd7cc65fefdda6fc33c8381cecc093eed36e83",
+        "size_bytes": 1641777131
+      },
+      "size_mb": 1641.79
+    },
+    {
+      "scan": "RunB wide_uniform",
+      "dir": "scan_outputs/rs_anarchy_runB_wide_uniform_20260515T085325",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_wide_uniform_20260515T085325",
+      "used_for": "Y-prior figure",
+      "command": "sbatch --export=ALL,PRIOR_TAG=wide_uniform scripts/run_rs_anarchy_runB.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_runB_wide_uniform_20260515T085325/tile_summary.json",
+        "sha256": "9ecbe08487ba4aedb2e862f058311e9c81a85fc7bedcd42508ffb38bd62d795a",
+        "size_bytes": 12349
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_runB_wide_uniform_20260515T085325/draws.jsonl",
+        "sha256": "90500218a8b6c6541508a43814671a307921ecf51de255fabbb4be75bf9931c1",
+        "size_bytes": 1638940573
+      },
+      "size_mb": 1638.95
+    },
+    {
+      "scan": "RunB gaussian_3sigma",
+      "dir": "scan_outputs/rs_anarchy_runB_gaussian_3sigma_20260515T085324",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_gaussian_3sigma_20260515T085324",
+      "used_for": "Y-prior figure",
+      "command": "sbatch --export=ALL,PRIOR_TAG=gaussian_3sigma scripts/run_rs_anarchy_runB.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_runB_gaussian_3sigma_20260515T085324/tile_summary.json",
+        "sha256": "6d180ca1e5417fe3c095ea2447058b003d26abf18dbe731f4439d4c4a5d45695",
+        "size_bytes": 12438
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_runB_gaussian_3sigma_20260515T085324/draws.jsonl",
+        "sha256": "aeadd9e1cfba4a8115f3582178a4b964041bb09152812ab72234dd4ebb2f614e",
+        "size_bytes": 1641776536
+      },
+      "size_mb": 1641.79
+    },
+    {
+      "scan": "RunC CFW gate",
+      "dir": "scan_outputs/rs_anarchy_runC_20260515T085323",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runC_20260515T085323",
+      "used_for": "CFW comparison plus zero-pass upper limit",
+      "command": "sbatch scripts/run_rs_anarchy_runC.sbatch",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_runC_20260515T085323/tile_summary.json",
+        "sha256": "92f57214f1e8164eac1dfffeec4c8e26154520d8f8543784f7ea5cead460cf3d",
+        "size_bytes": 8903
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_runC_20260515T085323/draws.jsonl",
+        "sha256": "3f8dee6037c51a344e77cd0992fcb3c51b4c06032c9052bc331679e68384b53f",
+        "size_bytes": 4098957464
+      },
+      "size_mb": 4098.97,
+      "zero_pass": {
+        "n": 4000000,
+        "k": 0,
+        "wilson_upper_limit_95": 9.215991506542227e-07
+      }
+    }
+  ],
+  "historical_cross_checks": [
+    {
+      "scan": "Old 800k baseline",
+      "status": "historical, NOT used for paper claims",
+      "dir": "scan_outputs/rs_anarchy_20260507T030811",
+      "cluster_path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_20260507T030811",
+      "tile_summary": {
+        "path": "scan_outputs/rs_anarchy_20260507T030811/tile_summary.json",
+        "sha256": "28d94014acda9663afbfd87578750be94132110cb38b5d1a626a59684d877b11",
+        "size_bytes": 12125
+      },
+      "draws": {
+        "path": "scan_outputs/rs_anarchy_20260507T030811/draws.jsonl",
+        "sha256": "ffe12d1225309d04275119353e2b345e8b31daa4cdf08e8ac73c2e44d8a6d11a",
+        "size_bytes": 803558753
+      },
+      "size_mb": 803.57
+    }
+  ],
+  "claim_mapping": [
+    {
+      "location": "docs/quark_scan_methodology_note.tex:582",
+      "quoted_number": "47.26 TeV at p50, g_s*=3",
+      "scan_dirs": [
+        "scan_outputs/rs_anarchy_runA_20260515T085316"
+      ],
+      "plot_file": "results/figures/quark/rs_anarchy_mkk_min_hist_gsstar.pdf",
+      "plot_sha256": "153594583823fb3f4d20ec46484194464a0691593d520036dcf35171ef61fa4a"
+    },
+    {
+      "location": "docs/quark_scan_methodology_note.tex:583",
+      "quoted_number": "127.13 TeV at p95, g_s*=3",
+      "scan_dirs": [
+        "scan_outputs/rs_anarchy_runA_20260515T085316"
+      ],
+      "plot_file": "results/figures/quark/rs_anarchy_mkk_min_hist_gsstar.pdf",
+      "plot_sha256": "153594583823fb3f4d20ec46484194464a0691593d520036dcf35171ef61fa4a"
+    },
+    {
+      "location": "docs/quark_scan_methodology_note.tex:736",
+      "quoted_number": "Run3 c-pattern figure; qtop shifted 45.73/120.39 TeV; moreUV/moreIR p_UL=2.3e-6",
+      "scan_dirs": [
+        "scan_outputs/rs_anarchy_run3_baseline_20260515T085324",
+        "scan_outputs/rs_anarchy_run3_qtop_shifted_20260515T085324",
+        "scan_outputs/rs_anarchy_run3_moreUV_20260515T085324",
+        "scan_outputs/rs_anarchy_run3_moreIR_20260515T085324"
+      ],
+      "plot_file": "results/figures/quark/rs_anarchy_mkk_min_hist_by_cvals.pdf",
+      "plot_sha256": "40f3263b61051574375aa5eca41d188d9f6d56852f9966a35f5bd6bc2a97e6da"
+    },
+    {
+      "location": "docs/quark_scan_methodology_note.tex:806",
+      "quoted_number": "RunB 95%-acceptance crossings 46.32/48.77/48.84 TeV perturbative and 132.35/139.34/139.55 TeV at g_s*=3",
+      "scan_dirs": [
+        "scan_outputs/rs_anarchy_runB_narrow_uniform_20260515T085324",
+        "scan_outputs/rs_anarchy_runB_wide_uniform_20260515T085325",
+        "scan_outputs/rs_anarchy_runB_gaussian_3sigma_20260515T085324"
+      ],
+      "plot_file": "results/figures/quark/rs_anarchy_mkk_min_hist_by_yprior_gsstar.pdf",
+      "plot_sha256": "613cc5fd69a8e7d9fbe63450a32e964ea7e81ffd3e3f73f409a6fc6b9e880aa0"
+    },
+    {
+      "location": "docs/quark_scan_methodology_note.tex:854",
+      "quoted_number": "RunC p_pass <= 9.2e-7",
+      "scan_dirs": [
+        "scan_outputs/rs_anarchy_runC_20260515T085323"
+      ],
+      "plot_file": "results/figures/quark/rs_anarchy_cfw_comparison.pdf",
+      "plot_sha256": "b78b5d3c9d20fe22fc1136124da1057565a04a687b38d11068a0f81e23da6f95"
+    },
+    {
+      "location": "docs/quark_scan_methodology_note.tex:889",
+      "quoted_number": "CFW comparison factor 2.2 stronger; matched projection 23.37 TeV; n=217",
+      "scan_dirs": [
+        "scan_outputs/rs_anarchy_runA_20260515T085316"
+      ],
+      "plot_file": "results/figures/quark/rs_anarchy_cfw_comparison.pdf",
+      "plot_sha256": "b78b5d3c9d20fe22fc1136124da1057565a04a687b38d11068a0f81e23da6f95"
+    }
+  ],
+  "audit_dependency_chain": [
+    {
+      "hole": "phase2_h4",
+      "topic": "PDG benchmark fit and strict tests",
+      "signoff": "docs/phase_logs/phase2_h4_signoff.md"
+    },
+    {
+      "hole": "phase2_h5",
+      "topic": "Bag params: FLAG 2024 + BGS 2020",
+      "signoff": "docs/phase_logs/phase2_h5_signoff.md"
+    },
+    {
+      "hole": "phase2_h6",
+      "topic": "Wilson RG: BMU LO + scalar-LR sign",
+      "signoff": "docs/phase_logs/phase2_h6_signoff.md"
+    },
+    {
+      "hole": "invalidation_gate",
+      "topic": "Post-audit rerun clearance",
+      "signoff": "docs/phase_logs/invalidation_gate_signoff.md"
+    },
+    {
+      "hole": "phase2_h7",
+      "topic": "CFW reconciliation: factor-2.2 stronger",
+      "signoff": "docs/phase_logs/phase2_h7_signoff.md"
+    },
+    {
+      "hole": "phase2_h8",
+      "topic": "Zero-pass treatment: Wilson upper limits",
+      "signoff": "docs/phase_logs/phase2_h8_signoff.md"
+    },
+    {
+      "hole": "phase2_h9",
+      "topic": "Scope wording",
+      "signoff": "docs/phase_logs/phase2_h9_signoff.md"
+    }
+  ]
+}
