@@ -1,0 +1,10 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0
+rootdir: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+collected 14 items
+
+tests/test_quark_fit.py ..............                                   [100%]
+
+============================== 14 passed in 3.46s ==============================
