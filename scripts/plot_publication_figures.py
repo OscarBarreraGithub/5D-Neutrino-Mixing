@@ -28,8 +28,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-import matplotlib
-matplotlib.use("Agg")
+# NOTE: no top-level `matplotlib.use(...)` call. Setting a backend at import
+# time hijacks the backend of any notebook that imports this module for its
+# helper functions (e.g. reproduce_fig1_fig2.ipynb uses %matplotlib inline).
+# The CLI entry point in main() sets Agg explicitly before doing any plotting.
+import matplotlib  # noqa: F401
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 from scipy.interpolate import griddata  # noqa: E402
@@ -334,13 +337,16 @@ def _aggregate_best_scale(
 # Figure 1: System-by-system exclusion boundaries
 # ---------------------------------------------------------------------------
 
-def _plot_exclusion_boundaries(data: dict[str, Any], output_dir: Path) -> list[Path]:
-    """Draw per-system and combined exclusion contours in (r, M_KK)."""
+def build_exclusion_boundaries_figure(data: dict[str, Any]) -> plt.Figure | None:
+    """Build fig 1 (per-system + combined exclusion contours) and return the Figure.
+
+    Returns ``None`` if there are too few grid points to interpolate.
+    """
     r_agg, mkk_agg, ratios_agg, max_ratio_agg = _aggregate_best_scale(data)
 
     if len(r_agg) < 4:
         print("WARNING: too few grid points for contour interpolation.", file=sys.stderr)
-        return []
+        return None
 
     # Convert M_KK from GeV to TeV for plotting
     mkk_tev = mkk_agg / 1e3
@@ -476,7 +482,14 @@ def _plot_exclusion_boundaries(data: dict[str, Any], output_dir: Path) -> list[P
     )
 
     fig.tight_layout()
+    return fig
 
+
+def _plot_exclusion_boundaries(data: dict[str, Any], output_dir: Path) -> list[Path]:
+    """Build fig 1 and save PDF + PNG to ``output_dir``."""
+    fig = build_exclusion_boundaries_figure(data)
+    if fig is None:
+        return []
     saved: list[Path] = []
     for ext in ("pdf", "png"):
         out = output_dir / f"fig1_exclusion_boundaries.{ext}"
@@ -564,8 +577,8 @@ def _compute_min_mkk_by_r(
     return sorted_r, min_mkk, has_passing
 
 
-def _plot_mkk_bound_comparison(data: dict[str, Any], output_dir: Path) -> list[Path]:
-    """Figure 2: M_KK lower bound comparing 2007 and modern constraints."""
+def build_mkk_bound_comparison_figure(data: dict[str, Any]) -> plt.Figure:
+    """Build fig 2 (m_gkk lower bound, 2007 vs modern) and return the Figure."""
     r_modern, mkk_modern, has_modern = _compute_min_mkk_by_r(data, use_2007=False)
     r_2007, mkk_2007, has_2007 = _compute_min_mkk_by_r(data, use_2007=True)
 
@@ -657,7 +670,12 @@ def _plot_mkk_bound_comparison(data: dict[str, Any], output_dir: Path) -> list[P
     ax.minorticks_on()
 
     fig.tight_layout()
+    return fig
 
+
+def _plot_mkk_bound_comparison(data: dict[str, Any], output_dir: Path) -> list[Path]:
+    """Build fig 2 and save PDF + PNG to ``output_dir``."""
+    fig = build_mkk_bound_comparison_figure(data)
     saved: list[Path] = []
     for ext in ("pdf", "png"):
         out = output_dir / f"fig2_mkk_bound_2007_vs_modern.{ext}"
@@ -672,6 +690,7 @@ def _plot_mkk_bound_comparison(data: dict[str, Any], output_dir: Path) -> list[P
 # ---------------------------------------------------------------------------
 
 def main() -> int:
+    matplotlib.use("Agg")
     args = _parse_args()
     _configure_style()
 
