@@ -1115,6 +1115,59 @@ is $1.929$.  This is a factor $3.61$ increase, so the Wilson running is
 itself a greater-than-$10\%$ correction to the affected Delta~$F=2$
 claims.
 
+\subsection{Scope and approximations}
+\label{app:scope-and-approximations}
+
+\textbf{KK tower truncation.}  The numerical scan in this note includes
+only the lightest colour-octet KK gluon, i.e.\ the $n=1$ mode, in the
+tree-level $\Delta F=2$ matching.  The full 5D gauge propagator is a tower
+sum, and RS-flavour estimates using tower-summed matching, such as
+Csaki--Falkowski--Weiler
+\href{https://arxiv.org/abs/0804.1954}{arXiv:0804.1954} and related
+flavour-alignment studies such as Csaki--Perez--Surujon--Weiler
+\href{https://arxiv.org/abs/0907.0474}{arXiv:0907.0474}, indicate that
+the omitted higher colour modes increase the relevant Wilson coefficients
+by a further order-$20$--$30\%$ relative to a first-mode-only estimate.
+For the present kaon-dominated result we therefore treat the KK tower
+truncation as an additional $+20$--$30\%$ systematic on the quoted
+$\eK$ ratio.  This is separate from, and not folded into, the BGS
+$\eK^{\mathrm{SM}}$ budget band or the leading-order BMU running
+uncertainty above.
+
+\textbf{EWPO floor.}  The commonly quoted custodial-RS floor
+$\Mkk \gtrsim 3\,\mathrm{TeV}$ from electroweak precision observables is
+an external literature input, not a result of this quark-flavour scan.
+Representative custodial analyses such as
+Carena--Ponton--Santiago--Wagner
+\href{https://arxiv.org/abs/hep-ph/0701055}{arXiv:hep-ph/0701055}
+find gauge-KK lower bounds of about $2$--$3\,\mathrm{TeV}$ from global
+precision-electroweak fits, depending on the model configuration.  This
+repository does not compute the oblique parameters, the $Zb\bar b$
+corrections, or a global EWPO likelihood.  The quark-flavour bound quoted
+here, $\Mkk=47.26\,\mathrm{TeV}$ at $50\%$ acceptance for $\gs=3$, is an
+independent $\Delta F=2$ result and is substantially stronger than that
+external floor.
+
+\textbf{Gauge-coupling convention.}  The paper headline convention is
+$\gs=3$, corresponding to the no-UV-boundary-term comparison convention
+used in the Csaki--Falkowski--Weiler discussion.  The stored code path
+uses the perturbative four-dimensional QCD coupling
+$g_s\simeq1.05$ at the KK scale as its default normalization, and we quote
+the perturbative values beside the $\gs=3$ values so that the rescaling is
+transparent.  The stronger-coupling value $\gs\simeq6$ appears only when
+comparing to the CFW boundary-term default, where their published RS
+marker is $21\,\mathrm{TeV}$ rather than the $10.5\,\mathrm{TeV}$
+no-UV-boundary-term marker.  It is not a third headline convention for
+this paper.
+
+\textbf{Lepton-sector scope.}  This repository is the working home for
+both quark and lepton 5D-flavour studies, but the present methodology note
+and paper address the quark sector only.  The lepton-sector directories
+\texttt{neutrinos/}, \texttt{flavorConstraints/}, and \texttt{yukawa/}
+are follow-up work for a separate analysis.  They have not been audited,
+rerun, or reinterpreted under the present \texttt{deltaf2.py} updates,
+which affect the quark $\Delta F=2$ pipeline.
+
 \subsection{Invalidation-gate rerun}
 \label{app:invalidation-gate-rerun}
 
