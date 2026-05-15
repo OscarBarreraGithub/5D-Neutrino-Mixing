@@ -29,6 +29,11 @@ import numpy as np
 from matplotlib.ticker import FixedLocator, FuncFormatter, NullFormatter
 
 REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+from quarkConstraints.finite_stats import wilson_upper_limit
+
 DEFAULT_OUT = REPO / "results/figures/quark"
 MKK_TICKS = [1, 2, 3, 5, 10, 20, 30, 50, 100, 200]
 PALETTE = {
@@ -37,6 +42,43 @@ PALETTE = {
     "moreUV":         "#2ca02c",
     "moreIR":         "#ff7f0e",
 }
+
+
+def _format_count_short(n: int) -> str:
+    if n >= 1_000_000:
+        return f"{n / 1_000_000:.1f}M"
+    if n >= 1_000:
+        return f"{n / 1_000:.0f}k"
+    return str(n)
+
+
+def _format_sci_tex(x: float) -> str:
+    mantissa, _, exponent = f"{x:.1e}".partition("e")
+    return rf"{mantissa}\times10^{{{int(exponent)}}}"
+
+
+def _zero_pass_label(run_dir: Path) -> str:
+    summary_path = run_dir / "tile_summary.json"
+    if not summary_path.exists():
+        return "0 PDG-passes"
+    data = json.loads(summary_path.read_text())
+    n_total = sum(int(tile["n_draws"]) for tile in data["tiles"])
+    n_pass = sum(int(tile["n_pdg_pass"]) for tile in data["tiles"])
+    if n_pass != 0:
+        return f"{n_pass:,} PDG-passes"
+    p_ul = wilson_upper_limit(0, n_total)
+    return (
+        rf"N={_format_count_short(n_total)}, "
+        rf"$p\leq{_format_sci_tex(p_ul)}$ 95% CL"
+    )
+
+
+def _summary_has_zero_pdg_passes(run_dir: Path) -> bool:
+    summary_path = run_dir / "tile_summary.json"
+    if not summary_path.exists():
+        return False
+    data = json.loads(summary_path.read_text())
+    return sum(int(tile["n_pdg_pass"]) for tile in data["tiles"]) == 0
 
 
 def _load_pdg_passing(draws_path: Path) -> np.ndarray:
@@ -96,6 +138,11 @@ def main():
 
     per_run: Dict[str, np.ndarray] = {}
     for tag, run_dir in runs.items():
+        if _summary_has_zero_pdg_passes(run_dir):
+            print(f"loading {tag} -> {run_dir / 'tile_summary.json'}", flush=True)
+            print(f"  {tag}: 0 PDG-passing draws")
+            per_run[tag] = np.asarray([])
+            continue
         draws = run_dir / "draws.jsonl"
         print(f"loading {tag} -> {draws}", flush=True)
         arr = _load_pdg_passing(draws)
@@ -118,7 +165,7 @@ def main():
     for tag in empty_tags:
         color = PALETTE.get(tag, None)
         ax.plot([], [], color=color, linewidth=2.0, linestyle=":",
-                label=f"{tag} (0 PDG-passes)")
+                label=f"{tag} ({_zero_pass_label(runs[tag])})")
     ax.set_xscale("log")
     ax.xaxis.set_major_locator(FixedLocator(MKK_TICKS))
     ax.xaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x:g}"))
@@ -142,7 +189,7 @@ def main():
     for tag in empty_tags:
         color = PALETTE.get(tag, None)
         ax.plot([], [], color=color, linewidth=2.0, linestyle=":",
-                label=f"{tag} (0 PDG-passes)")
+                label=f"{tag} ({_zero_pass_label(runs[tag])})")
     ax.axhline(50.0, color="k", linewidth=0.7, alpha=0.5, linestyle=":")
     ax.axhline(95.0, color="k", linewidth=0.7, alpha=0.5, linestyle=":")
     ax.set_xscale("log")

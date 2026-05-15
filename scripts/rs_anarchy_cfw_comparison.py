@@ -30,6 +30,11 @@ import numpy as np
 from matplotlib.ticker import FixedLocator, FuncFormatter, NullFormatter
 
 REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+from quarkConstraints.finite_stats import wilson_upper_limit
+
 DEFAULT_OUT = REPO / "results/figures/quark"
 MKK_TICKS = [1, 2, 3, 5, 10, 20, 30, 50, 100, 200]
 
@@ -77,6 +82,44 @@ CURRENT_BAGS = {
     "B_4_K": 0.903,
     "B_5_K": 0.691,
 }
+
+
+def _format_count_short(n: int) -> str:
+    if n >= 1_000_000:
+        return f"{n / 1_000_000:.1f}M"
+    if n >= 1_000:
+        return f"{n / 1_000:.0f}k"
+    return str(n)
+
+
+def _format_sci_tex(x: float) -> str:
+    mantissa, _, exponent = f"{x:.1e}".partition("e")
+    return rf"{mantissa}\times10^{{{int(exponent)}}}"
+
+
+def _zero_pass_summary(run_dir: Path) -> dict[str, float | int] | None:
+    summary_path = run_dir / "tile_summary.json"
+    if not summary_path.exists():
+        return None
+    data = json.loads(summary_path.read_text())
+    n_total = sum(int(tile["n_draws"]) for tile in data["tiles"])
+    n_pass = sum(int(tile["n_pdg_pass"]) for tile in data["tiles"])
+    if n_pass != 0:
+        return None
+    return {
+        "n_total": n_total,
+        "n_pass": n_pass,
+        "p_ul_95": wilson_upper_limit(0, n_total),
+    }
+
+
+def _zero_pass_note(stats: dict[str, float | int] | None) -> str:
+    if stats is None:
+        return "stored gate has zero accepted draws"
+    return (
+        rf"stored gate: N={_format_count_short(int(stats['n_total']))}, "
+        rf"$p\leq{_format_sci_tex(float(stats['p_ul_95']))}$ 95% CL"
+    )
 
 
 @dataclass(frozen=True)
@@ -298,6 +341,7 @@ def main():
         sys.exit(1)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    zero_pass_stats = _zero_pass_summary(run_dir)
 
     try:
         matched_budget, matched_budget_source = _budget_from_args(args)
@@ -390,6 +434,8 @@ def main():
             "pdg_j_factor": curve.pdg_j_factor,
             "relaxed_to_all_ok": curve.key in relaxed_keys,
         })
+        if curve.key in relaxed_keys:
+            curve_summary["zero_pass_note"] = _zero_pass_note(zero_pass_stats)
         summary["curves"][curve.key] = curve_summary
 
     if args.summary_out:
@@ -406,13 +452,19 @@ def main():
         for curve in nonempty_curves:
             arr_plot = np.sort(curve_arrays[curve.key] * (args.gs_star / G_S_PERT))
             cdf = (np.arange(1, arr_plot.size + 1) / arr_plot.size) * 100.0
+            label = f"{curve.label} (n={arr_plot.size:,})"
+            if curve.key in relaxed_keys:
+                label = (
+                    f"{curve.label}\n"
+                    f"({_zero_pass_note(zero_pass_stats)}; all-ok CDF n={arr_plot.size:,})"
+                )
             ax.plot(
                 arr_plot,
                 cdf,
                 color=colors.get(curve.key, None),
                 linewidth=2.4,
                 linestyle=styles.get(curve.key, "-"),
-                label=f"{curve.label} (n={arr_plot.size:,})",
+                label=label,
             )
 
         # CFW benchmarks under both color-coupling conventions.
