@@ -17,8 +17,8 @@ from quarkConstraints.validation import (
 )
 
 
-def test_benchmark_fit_summary_passes_for_default_solution():
-    """The benchmark fit should satisfy the validation gates."""
+def test_benchmark_fit_summary_reports_default_solution_gates():
+    """The benchmark fit summary should expose the current validation gates."""
     solution = benchmark_solution(max_nfev=120)
     summary = benchmark_fit_summary(solution)
 
@@ -26,10 +26,11 @@ def test_benchmark_fit_summary_passes_for_default_solution():
     assert summary.passes_ckm
     assert summary.passes_proxy
     assert summary.passes_misalignment
-    # The benchmark summary uses the repo_v1 perturbative-g_s convention,
-    # so the default point should still satisfy the Delta F=2 gate.
-    assert summary.passes_deltaf2
-    assert summary.passes_all
+    # The Phase 2 hadronic-input and Wilson-RG audits make the default point an
+    # epsilon_K failure, while the non-DeltaF2 fit-quality gates still pass.
+    assert not summary.passes_deltaf2
+    assert not summary.passes_all
+    assert np.isclose(summary.deltaf2_max_ratio, 1.9286313761001348)
     assert summary.passes_proxy == (summary.down_proxy < summary.proxy_limit)
     assert summary.passes_paper_proxy == (summary.down_proxy < summary.paper_proxy_target)
     assert summary.proxy_limit >= summary.paper_proxy_target
@@ -112,7 +113,7 @@ def test_bulk_mass_map_comparison_shows_tangent_match_and_large_lambda_saturatio
     """The sigmoid should agree with the affine tangent at small lambda and saturate later."""
     data = bulk_mass_map_comparison_data(
         r_values=[0.0, 0.25, 1.0],
-        overall_scale_values=[1.5, 6.0],
+        overall_scale_values=[0.5, 6.0],
     )
 
     delta = np.abs(data["c_sigmoid_samples"] - data["c_affine_samples"])

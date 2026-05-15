@@ -987,22 +987,22 @@ The complete inventory is stored in
 values in \path{docs/audits/wilson_rg_reference_values.md}.
 
 The code uses BMU current-current operators for $O_1^{\mathrm{VLL}}$
-and $O_1^{\mathrm{VRR}}$, but the left-right entries are the scalar
-$O_4^{\mathrm{LR}}$, $O_5^{\mathrm{LR}}$ operators paired with the
+and $O_1^{\mathrm{VRR}}$, but the left-right entries are the conventional
+scalar $O_4^{\mathrm{LR}}$, $O_5^{\mathrm{LR}}$ operators paired with the
 FLAG-style $B_4$, $B_5$ matrix elements. The BMU LR block is mapped by
 \[
-  Q_1^{\mathrm{LR,BMU}} = 2 O_5^{\mathrm{LR}},
+  Q_1^{\mathrm{LR,BMU}} = -2 O_5^{\mathrm{LR}},
   \qquad
   Q_2^{\mathrm{LR,BMU}} = O_4^{\mathrm{LR}},
 \]
 so that the coefficient vector satisfies
-$C_{\mathrm{BMU}}=(C_5/2,\ C_4)$.  In the scalar coefficient basis
+$C_{\mathrm{BMU}}=(-C_5/2,\ C_4)$.  In the scalar coefficient basis
 $(C_4,C_5)$, the audited leading-order anomalous dimensions are
 \[
   \gamma_{\mathrm{VLL}}^{(0)} = 4,\qquad
   \gamma_{\mathrm{LR}}^{(0)} =
   \begin{pmatrix}
-    -16 & 6 \\
+    -16 & -6 \\
       0 & 2
   \end{pmatrix}.
 \]
@@ -1011,9 +1011,10 @@ $\eta=\alpha_s(\mu_{\mathrm{high}})/\alpha_s(\mu_{\mathrm{low}})$.
 For $\Mkk=3\,\mathrm{TeV}$ to $2\,\mathrm{GeV}$ this gives
 $C_1^{\mathrm{VLL}}\mapsto0.729\,C_1^{\mathrm{VLL}}$,
 $C_4\mapsto3.538\,C_4$, and
-$C_5\mapsto-0.895\,C_4+0.854\,C_5$ in the code basis.  The crossed
+$C_5\mapsto0.895\,C_4+0.854\,C_5$ in the code basis.  The crossed
 threshold sequence is $n_f=6\to5\to4$ at
-$m_t=163.5\,\mathrm{GeV}$ and $m_b=4.18\,\mathrm{GeV}$; the charm
+$m_t^{\msbar}(m_t)=163.5\,\mathrm{GeV}$ and
+$m_b=4.18\,\mathrm{GeV}$; the charm
 threshold lies below the default kaon endpoint.
 
 This remains a leading-log calculation.  The NLO/NDR evolution matrices
@@ -1032,7 +1033,7 @@ The Wilson-RG fix tightens the Phase~2 invalidation gate that was
 already tripped by the hadronic-input audit.  For the standing
 $r=0.25$, $\Mkk=3\,\mathrm{TeV}$ benchmark, the post-hole-\#5 but
 pre-Wilson-audit $\eK$ ratio was $0.535$; after the Wilson-RG audit it
-is $2.368$.  This is a factor $4.43$ increase, so the Wilson running is
+is $1.929$.  This is a factor $3.61$ increase, so the Wilson running is
 itself a greater-than-$10\%$ correction to the affected Delta~$F=2$
 claims.
 

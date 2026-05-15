@@ -296,13 +296,14 @@ class TestMKKScaling:
 # ===================================================================
 
 class TestNPBudget:
-    """The NP budget |epsilon_K^exp - epsilon_K^SM| should be ~4e-4."""
+    """The NP budget |epsilon_K^exp - epsilon_K^SM| should use BGS 2020."""
 
     def test_np_budget_is_positive_and_correct_order(self):
         budget = abs(EPSILON_K_EXP - EPSILON_K_SM)
-        # Expected: 2.228e-3 - 1.81e-3 = 4.18e-4
-        assert 1e-4 < budget < 1e-3, (
-            f"NP budget = {budget:.3e}, expected ~4e-4"
+        # Expected after the Phase 2 hole #5 audit:
+        # 2.228e-3 - 2.161e-3 = 6.7e-5.
+        assert 1e-5 < budget < 1e-4, (
+            f"NP budget = {budget:.3e}, expected ~6.7e-5"
         )
         # exp > SM, so positive
         assert EPSILON_K_EXP > EPSILON_K_SM, (

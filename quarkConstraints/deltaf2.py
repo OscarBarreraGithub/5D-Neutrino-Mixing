@@ -574,8 +574,14 @@ def _evolve_wilsons(
 
     Uses leading-log QCD RG evolution from the matching scale (M_KK) down to
     mu_had.  VLL/VRR use the BMU current-current anomalous dimension, while
-    the scalar LR coefficients C4_LR/C5_LR are evolved by mapping the BMU
-    Q1_LR/Q2_LR block into the code basis used by the B4/B5 matrix elements.
+    the scalar LR coefficients C4_LR/C5_LR are evolved in the conventional
+    scalar basis used by the B4/B5 matrix elements:
+
+        O4_LR = (bar h^alpha P_L q^alpha)(bar h^beta P_R q^beta)
+        O5_LR = (bar h^alpha P_L q^beta)(bar h^beta P_R q^alpha)
+
+    With BMU's vector LR operator this means Q1_LR^BMU = -2 O5_LR and
+    Q2_LR^BMU = O4_LR.  The FLAG-style B5 input is not sign-flipped.
     """
     from .qcd_running import evolve_deltaf2_wilsons
 
@@ -667,7 +673,13 @@ def _kaon_matrix_elements() -> dict[str, float]:
     Returns a dict with keys 'O1_VLL', 'O4_LR', 'O5_LR' giving the real-valued
     hadronic matrix elements <K-bar|O_i|K> for each operator.  O1_VRR has the
     same matrix element as O1_VLL by parity.  O4_LR/O5_LR are the scalar LR
-    operators paired with the FLAG B4/B5 bag parameters.
+    operators paired with the conventional FLAG B4/B5 bag parameters:
+
+        O4_LR = (bar s^alpha P_L d^alpha)(bar s^beta P_R d^beta)
+        O5_LR = (bar s^alpha P_L d^beta)(bar s^beta P_R d^alpha)
+
+    The O5_LR contraction below carries the conventional positive sign, so the
+    BMU vector-LR Fierz map is Q1_LR^BMU = -2 O5_LR and B_5_K stays positive.
     """
     fk2_mk = F_K**2 * M_K
     m_ratio_sq = (M_K / (M_S_2GEV + M_D_2GEV)) ** 2

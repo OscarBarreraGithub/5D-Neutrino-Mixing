@@ -35,13 +35,14 @@ Code basis:
 
 ```text
 O1_VLL, O1_VRR, O4_LR, O5_LR
-Q1_LR^BMU = 2 O5_LR
+Q1_LR^BMU = -2 O5_LR
 Q2_LR^BMU = O4_LR
-C_BMU = (C5_LR / 2, C4_LR)
+C_BMU = (-C5_LR / 2, C4_LR)
 ```
 
 The VLL/VRR entries are the BMU current-current operators.  The LR entries are
-the scalar `O4/O5` basis used with the code's `B4/B5` matrix elements.
+the conventional scalar `O4/O5` basis used with the code's `B4/B5` matrix
+elements.
 
 ## LO anomalous dimensions used as reference
 
@@ -63,12 +64,12 @@ gamma_LR,BMU^(0) for [C1_LR^BMU, C2_LR^BMU] =
  [ 12, -16]]
 
 gamma_LR,code^(0) for [C4_LR, C5_LR] =
-[[-16,  6],
+[[-16, -6],
  [  0,  2]]
 ```
 
-The scalar-basis off-diagonal is therefore `gamma_45 = 6`, which maps high-scale
-`C5_LR` into low-scale `C4_LR`.  The zero lower-left entry means high-scale
+The scalar-basis off-diagonal is therefore `gamma_45 = -6`, which maps
+high-scale `C5_LR` into low-scale `C4_LR`.  The zero lower-left entry means high-scale
 `C4_LR` does not generate `C5_LR` at LO in this basis.
 
 ## Threshold and alpha_s reference path
@@ -96,7 +97,7 @@ evolution with the closed-form LO reference above.  Its reference values for
 | `C1_VLL = 1` | `(0.729130912171, 0, 0, 0)` |
 | `C1_VRR = 1` | `(0, 0.729130912171, 0, 0)` |
 | `C4_LR = 1` | `(0, 0, 3.53816397486, 0)` |
-| `C5_LR = 1` | `(0, 0, -0.894757448992, 0.853891627884)` |
+| `C5_LR = 1` | `(0, 0, 0.894757448992, 0.853891627884)` |
 
 The maximum relative discrepancy between the code and the closed-form reference
 is `1.300e-16`.

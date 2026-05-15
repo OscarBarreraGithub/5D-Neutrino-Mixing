@@ -5,10 +5,10 @@ from the KK matching scale (multi-TeV) down to the hadronic scale (μ = 2 GeV).
 The anomalous dimension matrix follows Buras, Misiak, and Urban (NPB 2000).
 
 Operator basis: {O1_VLL, O1_VRR, O4_LR, O5_LR}.  The VLL/VRR operators are
-the BMU current-current operators.  The LR entries are the scalar O4/O5
-operators used with the code's B4/B5 matrix elements.  Their LO running is
-obtained from the BMU LR basis by the four-dimensional map
-``Q1_LR^BMU = 2 O5_LR`` and ``Q2_LR^BMU = O4_LR``.
+the BMU current-current operators.  The LR entries are the conventional scalar
+O4/O5 operators used with the code's B4/B5 matrix elements.  Their LO running
+is obtained from the BMU LR basis by the four-dimensional map
+``Q1_LR^BMU = -2 O5_LR`` and ``Q2_LR^BMU = O4_LR``.
 
 Key physics:
   - VLL and VRR operators run multiplicatively (no mixing with LR sector).
@@ -48,11 +48,11 @@ _MC_DEFAULT = 1.27
 _GAMMA_VLL = 4.0
 
 # BMU LR sector for coefficients ordered as [C1_LR^BMU, C2_LR^BMU] is
-# [[2, 0], [12, -16]].  The code stores scalar LR coefficients ordered as
-# [C4_LR, C5_LR], with C_BMU = (C5/2, C4).  Conjugating the BMU matrix gives
-# the scalar-basis coefficient ADM below.
+# [[2, 0], [12, -16]].  The code stores conventional scalar LR coefficients
+# ordered as [C4_LR, C5_LR], with C_BMU = (-C5/2, C4).  Conjugating the BMU
+# matrix gives the scalar-basis coefficient ADM below.
 _GAMMA_LR = np.array([
-    [-16.0, 6.0],
+    [-16.0, -6.0],
     [0.0, 2.0],
 ], dtype=float)
 

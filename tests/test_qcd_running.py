@@ -10,8 +10,9 @@ Tests cover:
 
 The module implements one-loop alpha_s running and leading-log RG evolution with
 the anomalous dimensions gamma_VLL = +4 and the 2x2 LR matrix obtained by
-mapping the Buras-Misiak-Urban LR block into the scalar C4/C5 basis used by
-deltaf2.py.  In the standard BMU Wilson-evolution convention, VLL/VRR are
+mapping the Buras-Misiak-Urban LR block into the conventional scalar C4/C5
+basis used by deltaf2.py.  In the standard BMU Wilson-evolution convention,
+VLL/VRR are
 suppressed when running to lower scales, and the scalar LR sector has an
 enhanced C4 eigenvalue plus a large C5 -> C4 off-diagonal.
 """
@@ -146,7 +147,7 @@ class TestEvolveDeltaF2Wilsons:
     VLL suppression factor when running down (mu_high -> mu_low < mu_high).
     The scalar LR anomalous dimension matrix has one enhanced C4 eigenvalue,
     one mildly suppressed C5 eigenvalue, and a large C5 -> C4 mixing entry
-    inherited from the BMU LR off-diagonal.
+    inherited from the BMU LR off-diagonal and conventional Fierz sign.
     """
 
     def test_near_identity_at_close_scales(self):

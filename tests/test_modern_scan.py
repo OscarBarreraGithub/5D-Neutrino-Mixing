@@ -69,12 +69,14 @@ def _mutated_phenomenology_builder(
             result["ratio_to_bound"] = ratio_to_bound
             result["passes"] = passes
             break
-        if system_id in payload["non_cp_acceptance_system_ids"]:
-            payload["failing_non_cp_system_ids"] = [system_id] if not passes else []
-            payload["non_cp_passes"] = bool(passes)
-        else:
-            payload["failing_non_cp_system_ids"] = []
-            payload["non_cp_passes"] = True
+        non_cp_system_ids = set(payload["non_cp_acceptance_system_ids"])
+        failing_non_cp_system_ids = [
+            result["system_id"]
+            for result in payload["system_results"]
+            if result["system_id"] in non_cp_system_ids and result["passes"] is False
+        ]
+        payload["failing_non_cp_system_ids"] = failing_non_cp_system_ids
+        payload["non_cp_passes"] = not failing_non_cp_system_ids
         return ModernPointPhenomenologyArtifactV1.from_dict(payload)
 
     return _builder
@@ -467,6 +469,6 @@ def test_modern_scan_rejects_non_cp_acceptance_failure(
 
     assert row["accepted"] is False
     assert row["phenomenology_passes"] is False
-    assert row["failing_non_cp_system_ids"] == ["B_d"]
+    assert row["failing_non_cp_system_ids"] == ["epsilon_K", "B_d"]
     assert row["diagnostic_failing_system_ids"] == []
     assert row["blocked_system_ids"] == []

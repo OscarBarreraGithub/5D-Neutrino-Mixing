@@ -4,7 +4,7 @@
 The script compares the public in-code evolution with an independent LO
 textbook calculation in the scalar LR basis used by ``deltaf2.py``:
 
-    Q1_LR^BMU = 2 O5_LR,   Q2_LR^BMU = O4_LR.
+    Q1_LR^BMU = -2 O5_LR,   Q2_LR^BMU = O4_LR.
 
 Run from the repo root:
 
@@ -86,11 +86,11 @@ def scalar_lr_segment_matrix(segment: Segment) -> np.ndarray:
     """Closed-form LO scalar LR matrix for one fixed-n_f segment.
 
     This is the BMU LR LO coefficient block ``[[2, 0], [12, -16]]``
-    conjugated to the code's scalar ``[C4_LR, C5_LR]`` order, giving
-    ``[[-16, 6], [0, 2]]``.
+    conjugated to the code's conventional scalar ``[C4_LR, C5_LR]`` order,
+    giving ``[[-16, -6], [0, 2]]``.
     """
     gamma44 = -16.0
-    gamma45 = 6.0
+    gamma45 = -6.0
     gamma55 = 2.0
     eta = segment.alpha_upper / segment.alpha_lower
     f44 = eta ** (gamma44 / (2.0 * beta0(segment.n_f)))

@@ -122,7 +122,9 @@ def test_default_benchmark_point_has_stable_deltaf2_outputs():
 
     # The Wilson-RG audit tightened the epsilon_K path; this benchmark is now
     # a stable epsilon_K fail while the other hadronic systems still pass.
-    assert np.isclose(summary.get("epsilon_k").ratio_to_bound, 2.367673073409882)
+    epsilon_k_ratio = summary.get("epsilon_k").ratio_to_bound
+    assert np.isclose(epsilon_k_ratio, 1.9286313761001348)
+    assert 1.92 <= epsilon_k_ratio < 2.37
     assert summary.get("epsilon_k").ratio_to_bound > 1.0
     assert summary.get("b_d").ratio_to_bound < 1.0
     assert summary.get("b_s").ratio_to_bound < 1.0
