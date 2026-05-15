@@ -157,8 +157,8 @@ deserves separate treatment because of CP violation:
                {\bigl|\,\eK^{\mathrm{exp}} - \eK^{\mathrm{SM}}\,\bigr|},
           \label{eq:ratio-epsK}
         \end{equation}
-        with $|\eK^{\mathrm{exp}} - \eK^{\mathrm{SM}}| \approx 4.18\times10^{-4}$
-        in our default constants
+        with $|\eK^{\mathrm{exp}} - \eK^{\mathrm{SM}}| \approx 6.7\times10^{-5}$
+        in the audited constants
         (\texttt{deltaf2.py:725--729}). $\eK^{\mathrm{NP}}$ is built from
         $\mathrm{Im}\,M_{12}^{\mathrm{NP}}$, not its magnitude. Here
         $\mathrm{ratio} = 1$ means the new physics fills the entire ``room''
@@ -900,5 +900,77 @@ The PDG/$\msbar$ work is not wasted: it is what lets us identify a
 ``PDG-passing'' subset of the anarchic ensemble in a defensible,
 scale-consistent way. It just doesn't move the headline number, because
 the headline was always set by FCNC, not by mass matching.
+
+\appendix
+
+%% =====================================================================
+\section{Input Audits}
+\label{app:input-audits}
+
+\subsection{Hadronic input provenance}
+\label{app:hadronic-input-provenance}
+
+The $\Delta F=2$ hadronic constants in
+\texttt{quarkConstraints/deltaf2.py} were audited against contemporary
+PDG and lattice inputs. The complete row-by-row inventory is stored in
+\path{docs/audits/bag_param_inventory.md}; Table~\ref{tab:hadronic-provenance}
+summarizes the inputs that either changed or came closest to the
+change threshold.
+
+\begin{table}[h]
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{p{0.17\linewidth}p{0.16\linewidth}p{0.41\linewidth}p{0.14\linewidth}}
+    \toprule
+    Input & Pre-audit value & Canonical source and value & Audit action \\
+    \midrule
+    $B_K$ & $0.717$ & FLAG 2024
+      \href{https://arxiv.org/abs/2411.04268}{arXiv:2411.04268}:
+      $B_K^{\msbar}(2\,\mathrm{GeV})=0.5503(66)$ & Replaced \\
+    $B_4^K$ & $0.78$ & FLAG 2024 Nf=$2+1$ BSM average:
+      $B_4=0.903(14)$ in $\msbar$ at $3\,\mathrm{GeV}$ & Replaced \\
+    $B_5^K$ & $0.57$ & FLAG 2024 Nf=$2+1$ BSM average:
+      $B_5=0.691(14)$ in $\msbar$ at $3\,\mathrm{GeV}$ & Replaced \\
+    $\eK^{\mathrm{SM}}$ & $1.81\times10^{-3}$ & Brod--Gorbahn--Stamou 2020
+      \href{https://arxiv.org/abs/1911.06822}{arXiv:1911.06822}:
+      $2.161\times10^{-3}$ & Replaced \\
+    $B_1^{B_d}$, $B_4^{B_d}$ & $0.87$, $1.02$ & HPQCD 2019
+      \href{https://arxiv.org/abs/1907.01025}{arXiv:1907.01025},
+      Table VI: $0.806$, $1.077$ & Yellow, documented \\
+    $B_1^{B_s}$ & $0.87$ & HPQCD 2019 Table VI: $0.813$ & Yellow, documented \\
+    $B_4^D$ & $1.0$ & ETM 2015
+      \href{https://arxiv.org/abs/1505.06639}{arXiv:1505.06639},
+      Table 2: $0.91$ & Yellow, documented \\
+    Meson masses, decay constants, quark masses, and measured
+      $\Delta m$ values & see inventory & PDG 2024
+      \href{https://pdg.lbl.gov/2024/}{Review of Particle Physics}
+      and FLAG 2024 summary tables & Green \\
+    \bottomrule
+  \end{tabular}
+  \caption{Hadronic-input provenance for the red and yellow rows of the
+  Phase~2 hole~\#5 audit.}
+  \label{tab:hadronic-provenance}
+\end{table}
+
+The red kaon bag-parameter shifts change one-operator $\eK$ amplitude
+estimates at $\Mkk=3$~TeV by $23.2\%$ ($O_1$), $15.8\%$ ($O_4$), and
+$21.2\%$ ($O_5$), using a unit imaginary Wilson coefficient
+$1/\Mkk^2$ as the normalization probe. The updated SM central value also
+shrinks the central-value room
+$|\eK^{\mathrm{exp}}-\eK^{\mathrm{SM}}|$ from
+$4.18\times10^{-4}$ to $6.7\times10^{-5}$, increasing every
+\texttt{epsilon\_k\_ratio} by a factor of $6.24$. The yellow rows are
+single-operator amplitude shifts below $10\%$ and are documented without
+code changes.
+
+The audit checked all scalar hadronic and experimental constants in
+\texttt{deltaf2.py}, including the kaon, $B_d$, $B_s$, and $D^0$
+systems. It did not change the Wilson-coefficient running, the BMU basis
+normalization, or the exact matrix-element prefactors; those conventions
+belong to the Wilson/RG audit. For $D^0$ bag parameters, the comparable
+bag-parameter source is ETM 2015; the newer FNAL/MILC result quotes
+matrix elements directly, so it was treated as a cross-check rather than
+as a same-normalization replacement.
 
 \end{document}
