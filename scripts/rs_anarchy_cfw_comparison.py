@@ -36,8 +36,37 @@ MKK_TICKS = [1, 2, 3, 5, 10, 20, 30, 50, 100, 200]
 G_S_PERT = 1.05
 DEFAULT_GS_STAR = 3.0
 
-CFW_GENERIC_TEV = 21.0
-CFW_PGB_TEV = 33.0
+CFW_RS_GS3_TEV = 10.5
+CFW_RS_GS6_TEV = 21.0
+CFW_PGB_GS3_TEV = 17.0
+CFW_PGB_GS6_TEV = 33.0
+
+CFW_MARKERS = (
+    (
+        CFW_RS_GS3_TEV,
+        "0.35",
+        ":",
+        fr"CFW RS, $g_s^\star=3$ no-UV-boundary ({CFW_RS_GS3_TEV:g} TeV)",
+    ),
+    (
+        CFW_RS_GS6_TEV,
+        "0.35",
+        "-.",
+        fr"CFW RS, $g_s^\star\simeq6$ default ({CFW_RS_GS6_TEV:g} TeV)",
+    ),
+    (
+        CFW_PGB_GS3_TEV,
+        "0.05",
+        (0, (1, 1)),
+        fr"CFW pGB, $g_s^\star=3$ no-bare-brane ({CFW_PGB_GS3_TEV:g} TeV)",
+    ),
+    (
+        CFW_PGB_GS6_TEV,
+        "0.05",
+        "--",
+        fr"CFW pGB, $g_s^\star\simeq6$ default ({CFW_PGB_GS6_TEV:g} TeV)",
+    ),
+)
 
 EPSILON_K_EXP = 2.228e-3
 EPSILON_K_SM_DEFAULT = 2.161e-3
@@ -386,11 +415,15 @@ def main():
                 label=f"{curve.label} (n={arr_plot.size:,})",
             )
 
-        # CFW abstract benchmarks
-        ax.axvline(CFW_GENERIC_TEV, color="grey", linewidth=1.2, linestyle=":",
-                   label=fr"CFW generic anarchic ({CFW_GENERIC_TEV:.0f} TeV)")
-        ax.axvline(CFW_PGB_TEV, color="black", linewidth=1.2, linestyle="--",
-                   label=fr"CFW PGB Higgs ({CFW_PGB_TEV:.0f} TeV)")
+        # CFW benchmarks under both color-coupling conventions.
+        for marker, color, linestyle, label in CFW_MARKERS:
+            ax.axvline(
+                marker,
+                color=color,
+                linewidth=1.2,
+                linestyle=linestyle,
+                label=label,
+            )
 
         ax.axhline(50.0, color="k", linewidth=0.7, alpha=0.4, linestyle=":")
         ax.axhline(95.0, color="k", linewidth=0.7, alpha=0.4, linestyle=":")
