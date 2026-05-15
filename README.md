@@ -39,9 +39,14 @@ python scripts/benchmark_perez_randall.py
   `results/figures/yukawa_mkk_tradeoff_2008_vs_2024.png`,
   `results/figures/quark/fig1_exclusion_boundaries.png`, and
   `results/figures/quark/fig2_mkk_bound_2007_vs_modern.png`.
-- Tracked repo docs under [`docs/`](docs/) are intentionally limited to
-  [`quark_scan_assumptions_compact.tex`](docs/quark_scan_assumptions_compact.tex)
-  and its compiled PDF.
+- Tracked paper docs under [`docs/`](docs/) include the current
+  [`quark_scan_methodology_note.tex`](docs/quark_scan_methodology_note.tex)
+  and the older [`quark_scan_assumptions_compact.tex`](docs/quark_scan_assumptions_compact.tex).
+
+Paper branch note: the active methodology note is
+[`docs/quark_scan_methodology_note.tex`](docs/quark_scan_methodology_note.tex)
+on `paper/quark-scan-2026q2`. The current paper scope is quark-sector only;
+lepton-sector packages remain repo tools for follow-up work.
 
 ## Packages
 
