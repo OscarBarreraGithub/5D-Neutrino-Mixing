@@ -144,17 +144,6 @@ def test_fitted_ckm_matrix_is_unitary():
     assert np.allclose(ckm.conjugate().T @ ckm, np.eye(3), atol=1e-10)
 
 
-@pytest.mark.xfail(
-    reason=(
-        "Legacy default_spurion_seed was tuned for the pre-PDG ad-hoc targets. "
-        "Under the PDG-2024 MS-bar targets the two quotient-equivalent seeds "
-        "land in nearby (but distinct) local minima, so the strict 2e-4 "
-        "cross-seed residual invariance no longer holds. Re-deriving the "
-        "benchmark seed near a unique PDG-target minimum is tracked "
-        "separately; the score-equality and canonical-seed claims still hold."
-    ),
-    strict=False,
-)
 def test_fit_quark_sector_is_invariant_under_quotient_directions():
     targets = default_quark_targets()
     base_seed = _fit_seed_from_benchmark()
@@ -493,15 +482,6 @@ def test_canonical_vector_wraps_left_angles_into_fundamental_domain():
     )
 
 
-@pytest.mark.xfail(
-    reason=(
-        "Same root cause as test_fit_quark_sector_is_invariant_under_quotient_directions: "
-        "legacy benchmark seed lands fit_orientation=False solutions in distinct local "
-        "minima under PDG-2024 targets. The deterministic-and-restricted seed-property "
-        "claims (overall_scale=1, identity rotations, sorted singular values) still hold."
-    ),
-    strict=False,
-)
 def test_fit_orientation_false_remains_deterministic_and_restricted():
     targets = default_quark_targets()
     base_seed = _fit_seed_from_benchmark()

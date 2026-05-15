@@ -189,13 +189,37 @@ def rough_sm_targets() -> QuarkTargets:
 def default_spurion_seed() -> SpurionSeed:
     """Return the deterministic seed used by fits, scans, and plots."""
     return SpurionSeed(
-        up_singular_values=np.array([0.003, 0.12, 1.0], dtype=float),
-        down_singular_values=np.array([0.006, 0.035, 0.45], dtype=float),
+        up_singular_values=np.array(
+            [
+                0.1434280953329283,
+                0.33368791612279205,
+                1.2394579588587887,
+            ],
+            dtype=float,
+        ),
+        down_singular_values=np.array(
+            [
+                0.22903978232967957,
+                0.16350920983304943,
+                0.28800013126033523,
+            ],
+            dtype=float,
+        ),
         overall_scale=2.8,
-        up_left=RotationParameters(theta12=0.02, theta13=0.002, theta23=0.03, delta=0.8),
-        up_right=RotationParameters(theta12=0.04, theta13=0.01, theta23=0.02, delta=0.4),
-        down_left=RotationParameters(theta12=0.23, theta13=0.0035, theta23=0.041, delta=1.2),
-        down_right=RotationParameters(theta12=0.06, theta13=0.015, theta23=0.03, delta=0.5),
+        up_left=RotationParameters(
+            theta12=-2.4040939384155906,
+            theta13=-2.8383004089408406,
+            theta23=-0.20007460664685306,
+            delta=2.05348624211683,
+        ),
+        up_right=RotationParameters(),
+        down_left=RotationParameters(
+            theta12=3.1151255159110542,
+            theta13=2.755960572425262,
+            theta23=0.287658452173571,
+            delta=-0.2529736730248784,
+        ),
+        down_right=RotationParameters(),
     )
 
 
