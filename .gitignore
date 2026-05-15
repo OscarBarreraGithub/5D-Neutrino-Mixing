@@ -65,6 +65,8 @@ data/
 artifacts/*.tar
 artifacts/*.tar.gz
 artifacts/*.tar.gz.sha256
+!artifacts/quarkscan_paper_rc1_manifest_bundle.tar.gz
+!artifacts/quarkscan_paper_rc1_manifest_bundle.tar.gz.sha256
 
 # Temporary scratch files
 tmp*.json
