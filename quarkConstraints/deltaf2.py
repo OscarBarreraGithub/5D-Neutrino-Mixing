@@ -607,12 +607,12 @@ M_K = 0.49761             # GeV, kaon mass (PDG)
 DELTA_M_K = 3.484e-15     # GeV, K_L - K_S mass difference (PDG)
 M_S_2GEV = 0.0934         # GeV, strange quark MS-bar mass at 2 GeV (FLAG)
 M_D_2GEV = 0.00467        # GeV, down quark MS-bar mass at 2 GeV (FLAG)
-B_1_K = 0.717             # VLL bag parameter (lattice, FLAG average)
-B_4_K = 0.78              # LR bag parameter (ETM 2013)
-B_5_K = 0.57              # LR bag parameter (ETM 2013)
+B_1_K = 0.5503            # B_K MS-bar(2 GeV), FLAG 2024
+B_4_K = 0.903             # B_4^K MS-bar(3 GeV), FLAG 2024
+B_5_K = 0.691             # B_5^K MS-bar(3 GeV), FLAG 2024
 KAPPA_EPSILON = 0.94       # multiplicative correction (Buras et al.)
 EPSILON_K_EXP = 2.228e-3   # experimental value (PDG)
-EPSILON_K_SM = 1.81e-3     # SM prediction (CKMfitter central value)
+EPSILON_K_SM = 2.161e-3    # SM epsilon_K, Brod-Gorbahn-Stamou 2020
 
 KAON_HADRONIC_PARAMS_V1 = "kaon_hadronic_params_bmu_2gev_v1"
 

@@ -7,6 +7,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+import quarkConstraints.deltaf2 as deltaf2
 from quarkConstraints.benchmarks import default_quark_targets, default_spurion_seed
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.deltaf2 import compute_delta_f2_wilsons, evaluate_delta_f2_constraints
@@ -105,6 +106,13 @@ def test_deltaf2_pass_fail_uses_dominant_operator_not_coherent_cancellation():
     assert np.isclose(kaon.effective_amplitude, kaon.dominant_operator_size)
     assert kaon.dominant_operator == "C4_LR"
     assert not kaon.passes
+
+
+def test_audited_deltaf2_hadronic_constants_match_selected_sources():
+    assert np.isclose(deltaf2.B_1_K, 0.5503, rtol=1e-3)
+    assert np.isclose(deltaf2.B_4_K, 0.903, rtol=1e-3)
+    assert np.isclose(deltaf2.B_5_K, 0.691, rtol=1e-3)
+    assert np.isclose(deltaf2.EPSILON_K_SM, 2.161e-3, rtol=1e-3)
 
 
 def test_default_benchmark_point_has_stable_deltaf2_outputs():
