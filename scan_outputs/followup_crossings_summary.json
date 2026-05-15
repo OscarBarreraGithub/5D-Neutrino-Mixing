@@ -1,0 +1,355 @@
+{
+  "convention": {
+    "g_s_pert": 1.05,
+    "g_s_star": 3.0,
+    "rescale_factor": 2.857142857142857,
+    "M_KK_units": "TeV",
+    "M_KK_min_per_draw": "(M_KK_tile_GeV / 1000) * sqrt(max_ratio_pdg)",
+    "post_audit_constants": "FLAG 2024/BGS 2020 hadronic inputs plus audited LO Wilson RG"
+  },
+  "invalidation_gate": {
+    "phase2_h5_factor": 6.238805970149273,
+    "phase2_h6_factor_at_benchmark": 3.6052174336881992,
+    "cumulative_benchmark_factor": 22.492252048980177,
+    "note": "The cumulative factor is benchmark-specific; RUNA max-ratio percentiles shift by the empirical factors recorded in docs/phase_logs/invalidation_gate_rerun.md."
+  },
+  "pre_audit_reference": {
+    "RUNA": {
+      "n_pdg_pass": 1532640,
+      "p50_pert_TeV": 3.7040933890567214,
+      "p95_pert_TeV": 9.97532489684291,
+      "p50_gs_star_3_TeV": 10.58312396873349,
+      "p95_gs_star_3_TeV": 28.50092827669403,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runA_20260507T065040"
+    },
+    "RUN3_BASELINE": {
+      "n_pdg_pass": 306480,
+      "p50_pert_TeV": 3.7008461200696336,
+      "p95_pert_TeV": 9.95312003087611,
+      "p50_gs_star_3_TeV": 10.573846057341811,
+      "p95_gs_star_3_TeV": 28.437485802503176,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_baseline_20260507T065529"
+    },
+    "RUN3_QTOP_SHIFTED": {
+      "n_pdg_pass": 224734,
+      "p50_pert_TeV": 3.578486581924837,
+      "p95_pert_TeV": 9.449223584589848,
+      "p50_gs_star_3_TeV": 10.224247376928107,
+      "p95_gs_star_3_TeV": 26.99778167025671,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_qtop_shifted_20260507T065529"
+    },
+    "RUN3_MOREUV": {
+      "n_pdg_pass": 0,
+      "p50_pert_TeV": null,
+      "p95_pert_TeV": null,
+      "p50_gs_star_3_TeV": null,
+      "p95_gs_star_3_TeV": null,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_moreUV_20260507T070052"
+    },
+    "RUN3_MOREIR": {
+      "n_pdg_pass": 0,
+      "p50_pert_TeV": null,
+      "p95_pert_TeV": null,
+      "p50_gs_star_3_TeV": null,
+      "p95_gs_star_3_TeV": null,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_moreIR_20260507T065523"
+    },
+    "RUNB_NARROW": {
+      "n_pdg_pass": 162573,
+      "p50_pert_TeV": 3.8613332771944684,
+      "p95_pert_TeV": 10.19333816905103,
+      "p50_gs_star_3_TeV": 11.032380791984195,
+      "p95_gs_star_3_TeV": 29.1238233401458,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_narrow_uniform_20260507T065416"
+    },
+    "RUNB_WIDE": {
+      "n_pdg_pass": 45742,
+      "p50_pert_TeV": 4.16805639286244,
+      "p95_pert_TeV": 11.294152788505604,
+      "p50_gs_star_3_TeV": 11.908732551035545,
+      "p95_gs_star_3_TeV": 32.26900796715887,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_wide_uniform_20260507T065351"
+    },
+    "RUNB_GAUSS": {
+      "n_pdg_pass": 211869,
+      "p50_pert_TeV": 3.8128364709346148,
+      "p95_pert_TeV": 10.840170780346115,
+      "p50_gs_star_3_TeV": 10.893818488384614,
+      "p95_gs_star_3_TeV": 30.971916515274614,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_gaussian_3sigma_20260507T065141"
+    },
+    "RUNC": {
+      "n_pdg_pass": 0,
+      "p50_pert_TeV": null,
+      "p95_pert_TeV": null,
+      "p50_gs_star_3_TeV": null,
+      "p95_gs_star_3_TeV": null,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runC_20260507T065322"
+    }
+  },
+  "runs": {
+    "RUNA": {
+      "total_rows": 8000000,
+      "ok_rows": 8000000,
+      "pdg_rows": 1532640,
+      "n_pdg_pass": 1532640,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runA_20260515T085316",
+      "p50_pert_TeV": 16.539954110646825,
+      "p95_pert_TeV": 44.496455422586855,
+      "p50_gs_star_3_TeV": 47.25701174470522,
+      "p95_gs_star_3_TeV": 127.1327297788196,
+      "binding_system_counts": {
+        "epsilon_K": 1524978,
+        "Delta_m_K": 7,
+        "Delta_m_Bd": 233,
+        "Delta_m_Bs": 695,
+        "Delta_m_D0": 6727
+      },
+      "binding_system_fractions": {
+        "epsilon_K": 0.995000782962731,
+        "Delta_m_K": 4.567282597348367e-06,
+        "Delta_m_Bd": 0.00015202526359745275,
+        "Delta_m_Bs": 0.0004534659150224449,
+        "Delta_m_D0": 0.00438915857605178
+      },
+      "wilson_score_quantile_ci": {
+        "p50": {
+          "confidence_level": 0.95,
+          "cdf_probability_wilson_low": 0.4992084151510855,
+          "cdf_probability_wilson_high": 0.5007915848489145,
+          "pert_TeV_low": 16.517607059912223,
+          "pert_TeV_high": 16.562428721683293,
+          "gs_star_3_TeV_low": 47.19316302832064,
+          "gs_star_3_TeV_high": 47.32122491909512
+        },
+        "p95": {
+          "confidence_level": 0.95,
+          "cdf_probability_wilson_low": 0.9496538264285609,
+          "cdf_probability_wilson_high": 0.950343917787776,
+          "pert_TeV_low": 44.40934798184715,
+          "pert_TeV_high": 44.58311027191183,
+          "gs_star_3_TeV_low": 126.88385137670613,
+          "gs_star_3_TeV_high": 127.38031506260522
+        }
+      },
+      "epsilon_k_budget_band": {
+        "central_budget": 6.699999999999979e-05,
+        "low_budget_experimental_floor": 1.1e-05,
+        "high_budget_bgs_minus_combined_sigma": 0.00030156555586871646,
+        "sigma_combined": 0.0002345655558687166,
+        "mass_lower_factor_high_budget": 0.47135327983870773,
+        "mass_upper_factor_low_budget": 2.467976720090583,
+        "p50_gs_star_3_TeV_central": 47.25701174470522,
+        "p50_gs_star_3_TeV_low": 22.274747481243136,
+        "p50_gs_star_3_TeV_high": 116.62920484697973,
+        "p50_gs_star_3_TeV_minus": 24.982264263462085,
+        "p50_gs_star_3_TeV_plus": 69.37219310227452,
+        "p50_pert_TeV_central": 16.539954110646825,
+        "p50_pert_TeV_low": 7.7961616184350975,
+        "p50_pert_TeV_high": 40.82022169644291,
+        "p50_pert_TeV_minus": 8.743792492211728,
+        "p50_pert_TeV_plus": 24.28026758579608
+      }
+    },
+    "RUN3_BASELINE": {
+      "total_rows": 1600000,
+      "ok_rows": 1600000,
+      "pdg_rows": 306480,
+      "n_pdg_pass": 306480,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_baseline_20260515T085324",
+      "p50_pert_TeV": 16.542675478479474,
+      "p95_pert_TeV": 44.36628069162948,
+      "p50_gs_star_3_TeV": 47.264787081369924,
+      "p95_gs_star_3_TeV": 126.76080197608422,
+      "binding_system_counts": {
+        "epsilon_K": 304867,
+        "Delta_m_K": 1,
+        "Delta_m_Bd": 55,
+        "Delta_m_Bs": 152,
+        "Delta_m_D0": 1405
+      },
+      "binding_system_fractions": {
+        "epsilon_K": 0.994737013834508,
+        "Delta_m_K": 3.262855651265988e-06,
+        "Delta_m_Bd": 0.00017945706081962933,
+        "Delta_m_Bs": 0.0004959540589924301,
+        "Delta_m_D0": 0.004584312190028713
+      }
+    },
+    "RUN3_QTOP_SHIFTED": {
+      "total_rows": 1600000,
+      "ok_rows": 1600000,
+      "pdg_rows": 224734,
+      "n_pdg_pass": 224734,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_qtop_shifted_20260515T085324",
+      "p50_pert_TeV": 16.00492220142784,
+      "p95_pert_TeV": 42.13765941538475,
+      "p50_gs_star_3_TeV": 45.72834914693668,
+      "p95_gs_star_3_TeV": 120.39331261538501,
+      "binding_system_counts": {
+        "epsilon_K": 223668,
+        "Delta_m_K": 3,
+        "Delta_m_Bd": 21,
+        "Delta_m_Bs": 61,
+        "Delta_m_D0": 981
+      },
+      "binding_system_fractions": {
+        "epsilon_K": 0.9952566144864595,
+        "Delta_m_K": 1.3349114953678572e-05,
+        "Delta_m_Bd": 9.344380467575e-05,
+        "Delta_m_Bs": 0.00027143200405813095,
+        "Delta_m_D0": 0.004365160589852893
+      }
+    },
+    "RUN3_MOREUV": {
+      "total_rows": 1600000,
+      "ok_rows": 1600000,
+      "pdg_rows": 0,
+      "n_pdg_pass": 0,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_moreUV_20260515T085324",
+      "p50_pert_TeV": null,
+      "p95_pert_TeV": null,
+      "p50_gs_star_3_TeV": null,
+      "p95_gs_star_3_TeV": null,
+      "binding_system_counts": {
+        "epsilon_K": 0,
+        "Delta_m_K": 0,
+        "Delta_m_Bd": 0,
+        "Delta_m_Bs": 0,
+        "Delta_m_D0": 0
+      },
+      "binding_system_fractions": {
+        "epsilon_K": null,
+        "Delta_m_K": null,
+        "Delta_m_Bd": null,
+        "Delta_m_Bs": null,
+        "Delta_m_D0": null
+      }
+    },
+    "RUN3_MOREIR": {
+      "total_rows": 1600000,
+      "ok_rows": 1600000,
+      "pdg_rows": 0,
+      "n_pdg_pass": 0,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_run3_moreIR_20260515T085324",
+      "p50_pert_TeV": null,
+      "p95_pert_TeV": null,
+      "p50_gs_star_3_TeV": null,
+      "p95_gs_star_3_TeV": null,
+      "binding_system_counts": {
+        "epsilon_K": 0,
+        "Delta_m_K": 0,
+        "Delta_m_Bd": 0,
+        "Delta_m_Bs": 0,
+        "Delta_m_D0": 0
+      },
+      "binding_system_fractions": {
+        "epsilon_K": null,
+        "Delta_m_K": null,
+        "Delta_m_Bd": null,
+        "Delta_m_Bs": null,
+        "Delta_m_D0": null
+      }
+    },
+    "RUNB_NARROW": {
+      "total_rows": 1600000,
+      "ok_rows": 1600000,
+      "pdg_rows": 162573,
+      "n_pdg_pass": 162573,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_narrow_uniform_20260515T085324",
+      "p50_pert_TeV": 17.426866411170995,
+      "p95_pert_TeV": 46.32133387845005,
+      "p50_gs_star_3_TeV": 49.791046889059984,
+      "p95_gs_star_3_TeV": 132.346668224143,
+      "binding_system_counts": {
+        "epsilon_K": 161797,
+        "Delta_m_K": 1,
+        "Delta_m_Bd": 30,
+        "Delta_m_Bs": 70,
+        "Delta_m_D0": 675
+      },
+      "binding_system_fractions": {
+        "epsilon_K": 0.9952267596710401,
+        "Delta_m_K": 6.151082898144218e-06,
+        "Delta_m_Bd": 0.00018453248694432655,
+        "Delta_m_Bs": 0.00043057580287009527,
+        "Delta_m_D0": 0.004151980956247347
+      }
+    },
+    "RUNB_WIDE": {
+      "total_rows": 1600000,
+      "ok_rows": 1600000,
+      "pdg_rows": 45742,
+      "n_pdg_pass": 45742,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_wide_uniform_20260515T085325",
+      "p50_pert_TeV": 18.464978735182534,
+      "p95_pert_TeV": 48.76785358990704,
+      "p50_gs_star_3_TeV": 52.75708210052153,
+      "p95_gs_star_3_TeV": 139.33672454259155,
+      "binding_system_counts": {
+        "epsilon_K": 45563,
+        "Delta_m_K": 0,
+        "Delta_m_Bd": 11,
+        "Delta_m_Bs": 42,
+        "Delta_m_D0": 126
+      },
+      "binding_system_fractions": {
+        "epsilon_K": 0.9960867474093831,
+        "Delta_m_K": 0.0,
+        "Delta_m_Bd": 0.0002404792094792532,
+        "Delta_m_Bs": 0.0009181933452844214,
+        "Delta_m_D0": 0.002754580035853264
+      }
+    },
+    "RUNB_GAUSS": {
+      "total_rows": 1600000,
+      "ok_rows": 1600000,
+      "pdg_rows": 211869,
+      "n_pdg_pass": 211869,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runB_gaussian_3sigma_20260515T085324",
+      "p50_pert_TeV": 16.91134590227803,
+      "p95_pert_TeV": 48.84334309247338,
+      "p50_gs_star_3_TeV": 48.3181311493658,
+      "p95_gs_star_3_TeV": 139.55240883563823,
+      "binding_system_counts": {
+        "epsilon_K": 210620,
+        "Delta_m_K": 1,
+        "Delta_m_Bd": 41,
+        "Delta_m_Bs": 117,
+        "Delta_m_D0": 1090
+      },
+      "binding_system_fractions": {
+        "epsilon_K": 0.9941048478068996,
+        "Delta_m_K": 4.719897672618457e-06,
+        "Delta_m_Bd": 0.00019351580457735676,
+        "Delta_m_Bs": 0.0005522280276963595,
+        "Delta_m_D0": 0.005144688463154119
+      }
+    },
+    "RUNC": {
+      "total_rows": 4000000,
+      "ok_rows": 4000000,
+      "pdg_rows": 0,
+      "n_pdg_pass": 0,
+      "path": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/rs_anarchy_runC_20260515T085323",
+      "p50_pert_TeV": null,
+      "p95_pert_TeV": null,
+      "p50_gs_star_3_TeV": null,
+      "p95_gs_star_3_TeV": null,
+      "binding_system_counts": {
+        "epsilon_K": 0,
+        "Delta_m_K": 0,
+        "Delta_m_Bd": 0,
+        "Delta_m_Bs": 0,
+        "Delta_m_D0": 0
+      },
+      "binding_system_fractions": {
+        "epsilon_K": null,
+        "Delta_m_K": null,
+        "Delta_m_Bd": null,
+        "Delta_m_Bs": null,
+        "Delta_m_D0": null
+      }
+    }
+  }
+}

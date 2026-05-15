@@ -571,12 +571,13 @@ draws gives Fig.~\ref{fig:mkk-min-hist}.
   \label{fig:mkk-min-hist}
 \end{figure}
 
-The 50\%-acceptance crossing is at $\Mkk = 3.70$~TeV (perturbative
-$g_s$) or $10.58$~TeV ($\gs = 3$); the 95\%-acceptance crossing is at
-$9.98$~TeV / $28.50$~TeV. These are the headline numbers of this analysis,
-quoted from the 8M-draw RUNA reference scan
-(\S\ref{sec:robustness}); the lower-statistics 800k-draw run reproduces
-them to better than $0.5\%$.
+The 50\%-acceptance crossing is at $\Mkk = 16.54$~TeV (perturbative
+$g_s$) or $47.26$~TeV ($\gs = 3$); the 95\%-acceptance crossing is at
+$44.50$~TeV / $127.13$~TeV. These are the headline numbers of this analysis,
+quoted from the post-audit 8M-draw RUNA reference scan
+(\S\ref{sec:robustness}). They are conditional on the BGS~2020 central
+$\eK$ SM prediction and on the leading-log Wilson-RG convention audited in
+Appendix~\ref{app:input-audits}.
 
 \begin{figure}[h]
   \centering
@@ -601,8 +602,9 @@ them to better than $0.5\%$.
 \paragraph{Where the envelope's low tail came from.}
 The histogram in Fig.~\ref{fig:mkk-min-hist} explains why the envelope
 plot tolerated $\Mkk\sim 1$~TeV. The lower tail of the
-$\Mkk^{\min}$ distribution does extend down to $\sim 1$~TeV (a few
-percent of anarchic draws sit there). The Setup~A optimiser was, by
+$\Mkk^{\min}$ distribution still extends below $1$~TeV, though only at
+the per-mille level; a few percent of anarchic draws sit below
+$3$~TeV. The Setup~A optimiser was, by
 construction, finding such tail points and going further --- using the
 basis alignment described in \S\ref{sec:envelope-yukawa} to push the
 off-diagonal Yukawas well below their prior typical values. The envelope's
@@ -621,7 +623,10 @@ artificially small.
   ($\max\mathrm{ratio} < 1, < 0.5, < 0.3$, the last two being
   Buras/UTfit-style ``half'' and ``third'' of the SM--data budget for
   $\eK$), in two gauge-coupling conventions: perturbative
-  $g_s\approx 1.05$ (left) and $\gs = 3$ (right).}
+  $g_s\approx 1.05$ (left) and $\gs = 3$ (right). Under the corrected
+  $\Delta F=2$ constants, the $\gs=3$ crossings lie beyond the plotted
+  tile range and are quoted from the per-draw rescaling in
+  Table~\ref{tab:headline}.}
   \label{fig:gate-sensitivity}
 \end{figure}
 
@@ -634,17 +639,16 @@ artificially small.
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}
 gate / convention      & pert.\ $g_s$ & $\gs=3$ & pert.\ $g_s$ & $\gs=3$ \\
 \midrule
-$\mathrm{ratio} < 1$   & $3.70$~TeV       & $10.58$~TeV    & $9.98$~TeV      & $28.50$~TeV    \\
-$\mathrm{ratio} < 0.5$ & $\sim\!4.4$~TeV  & $\sim\!15$~TeV & $\sim\!14$~TeV  & $\sim\!49$~TeV \\
-$\mathrm{ratio} < 0.3$ & $\sim\!6.0$~TeV  & $\sim\!21$~TeV & $\sim\!19$~TeV  & $> 50$~TeV \\
+$\mathrm{ratio} < 1$   & $16.54$~TeV       & $47.26$~TeV       & $44.50$~TeV       & $127.13$~TeV    \\
+$\mathrm{ratio} < 0.5$ & $\sim\!23.39$~TeV & $\sim\!66.84$~TeV & $\sim\!62.93$~TeV & $\sim\!179.79$~TeV \\
+$\mathrm{ratio} < 0.3$ & $\sim\!30.20$~TeV & $\sim\!86.30$~TeV & $\sim\!81.24$~TeV & $\sim\!232.11$~TeV \\
 \bottomrule
 \end{tabular}
 \caption{The $\Mkk$ at which a given fraction of PDG-passing anarchic
 draws also satisfies all $\Delta F=2$ bounds. The $\mathrm{ratio} < 1$
-row is taken from the high-statistics 8M-draw RUNA reference scan
-(\S\ref{sec:robustness}); the tighter-gate rows are stable across the
-Run~3 baseline, RUNA, and Run~B variants and are quoted to the same
-precision as the original tabulation.}
+row is taken from the post-audit high-statistics 8M-draw RUNA reference
+scan (\S\ref{sec:robustness}); the tighter-gate rows rescale the same
+per-draw $\Mkk^{\min}$ distribution by $1/\sqrt{\mathrm{gate}}$.}
 \label{tab:headline}
 \end{table}
 
@@ -653,7 +657,7 @@ statement is
 
 \begin{quote}\itshape
   Under an $\mathcal{O}(1)$ anarchic prior on the 5D Yukawa entries,
-  $\Mkk \gtrsim 10$~TeV (perturbative $g_s$) to $\gtrsim 28$~TeV
+  $\Mkk \gtrsim 44.5$~TeV (perturbative $g_s$) to $\gtrsim 127$~TeV
   (strong-coupling $\gs = 3$) at $95\%$ acceptance, with a further factor
   $\sim 1.5$ uplift if one demands that the new physics fit inside half
   the SM--data budget rather than saturate it.
@@ -682,22 +686,40 @@ We re-ran the baseline RS-anarchy scan with $8\!\times\!10^{6}$ draws
 (8 $\Mkk$ tiles, 1M draws/tile), yielding $1{,}532{,}640$
 PDG-passing draws. The 50\%-acceptance crossings are
 \begin{equation}
-  \Mkk^{\min}\bigl|_{50\%} \;=\; 3.70~\mathrm{TeV~(pert.)},
+  \Mkk^{\min}\bigl|_{50\%} \;=\; 16.54~\mathrm{TeV~(pert.)},
   \qquad
-  10.58~\mathrm{TeV}~(\gs = 3),
+  47.26~\mathrm{TeV}~(\gs = 3),
 \end{equation}
-and the 95\%-acceptance crossings are $9.98$~TeV / $28.50$~TeV.
-These reproduce the corresponding 800k-draw numbers
-(Run~3 baseline: $3.70$~/$10.57$~TeV at 50\%, $9.95$~/$28.44$~TeV at
-95\%) to better than $0.5\%$. The headline figures
-in \texttt{results/figures/quark/} are now drawn from RUNA; the prior
-800k-draw snapshot is preserved at
-\texttt{results/figures/quark\_baseline\_800k/} for cross-reference.
+and the 95\%-acceptance crossings are $44.50$~TeV / $127.13$~TeV.
+The corresponding finite-Monte-Carlo Wilson-score 95\% intervals are
+$16.52$--$16.56$~TeV at 50\% acceptance and $44.41$--$44.58$~TeV at
+95\% acceptance in the perturbative convention
+($47.19$--$47.32$~TeV and $126.88$--$127.38$~TeV for $\gs=3$).
+The lower-statistics post-audit Run~3 baseline reproduces these numbers
+to within $0.5\%$ (Run~3 baseline: $16.54$~/$47.26$~TeV at 50\%,
+$44.37$~/$126.76$~TeV at 95\%). The headline figures
+in \texttt{results/figures/quark/} are now drawn from RUNA; the
+pre-audit figure snapshot is preserved at
+\texttt{results/figures/quark\_pre\_audit\_constants/} for
+before/after comparison.
+
+The BGS central-value NP-budget decision is a much larger systematic
+than the finite-Monte-Carlo error. Propagating the
+$|\eK^{\mathrm{exp}}-\eK^{\mathrm{SM}}|$ budget band described in
+Appendix~\ref{app:input-audits} gives
+\[
+  \Mkk^{\min}\bigl|_{50\%,\,\gs=3}
+  = 47.26^{+69.37}_{-24.98}\ \mathrm{TeV}
+\]
+for the central RUNA percentile, with the same scale factor giving
+$16.54^{+24.28}_{-8.74}$~TeV in the perturbative convention. This is a
+BGS-budget band, not an NLO Wilson-RG uncertainty; the latter remains an
+order-$10$--$30\%$ theory systematic.
 
 \paragraph{Conclusion.} The headline numbers of \S\ref{sec:result} are
 not a Monte-Carlo fluctuation. They are the converged value of the
 underlying $\Mkk^{\min}$ percentiles of the anarchic ensemble, to within
-$0.5\%$.
+$0.5\%$ under the central BGS + LO-only conventions.
 
 \subsection{$c$-pattern sensitivity (Run~3)}
 \label{sec:robust-cvals}
@@ -710,7 +732,7 @@ $0.5\%$.
   (eq.~(\ref{eq:cvals})) and the \emph{qtop\_shifted} variant
   ($c_{Q_3} = 0.30$, $c_{u_3} = -0.55$). The two uniform-shift variants
   \emph{moreUV} ($c \to c + 0.05$ for every $c$) and \emph{moreIR}
-  ($c \to c - 0.05$) returned zero PDG-passing draws over 800k attempts
+  ($c \to c - 0.05$) returned zero PDG-passing draws over 1.6M attempts
   each and are therefore absent from the figure.}
   \label{fig:robust-cvals}
 \end{figure}
@@ -720,13 +742,13 @@ We perturbed the baseline $c$-pattern in three ways. First, a
 right-handed up quarks slightly more IR-localised
 ($c_{Q_3} = 0.30$, $c_{u_3} = -0.55$, which softens $m_t$ by
 $\approx 16\%$ relative to baseline). The pass rate dropped from
-$\sim 38\%$ to $\sim 28\%$ of draws, and the $\Mkk^{\min}$ distribution
+$\sim 19\%$ to $\sim 14\%$ of draws, and the $\Mkk^{\min}$ distribution
 shifted only mildly: the 50\%- and 95\%-acceptance crossings moved
-to $3.58$~TeV / $9.45$~TeV (perturbative) and
-$10.22$~TeV / $27.0$~TeV ($\gs = 3$), i.e.\ a $\approx 5\%$ softening
+to $16.00$~TeV / $42.14$~TeV (perturbative) and
+$45.73$~TeV / $120.39$~TeV ($\gs = 3$), i.e.\ a $\approx 5\%$ softening
 of the bound. Second, we shifted \emph{every} bulk-mass parameter
 uniformly by $+0.05$ (\emph{moreUV}) and by $-0.05$ (\emph{moreIR}). In
-both cases the resulting 800k-draw scan returned exactly zero
+both cases the resulting 1.6M-draw scan returned exactly zero
 PDG-passing draws.
 
 \paragraph{Why this matters.} The $c$-pattern in eq.~(\ref{eq:cvals})
@@ -762,17 +784,17 @@ Yukawa entries: $\mathcal{U}(-1,1)$ (narrow), $\mathcal{U}(-3,3)$
 (wide), and Gaussian $\sigma=1$ truncated at $|Y|\le 3$
 (``$3\sigma$-truncated normal''). The 95\%-acceptance crossings are
 \begin{equation}
-  10.19,\quad 11.29,\quad 10.84~\mathrm{TeV~(pert.)},
+  46.32,\quad 48.77,\quad 48.84~\mathrm{TeV~(pert.)},
 \end{equation}
 in narrow / wide / Gaussian order, and
 \begin{equation}
-  29.12,\quad 32.27,\quad 30.97~\mathrm{TeV}~(\gs = 3).
+  132.35,\quad 139.34,\quad 139.55~\mathrm{TeV}~(\gs = 3).
 \end{equation}
-The full spread between narrow and wide is therefore $\approx 13\%$ at
+The full spread between narrow and wide is therefore $\approx 5\%$ at
 $95\%$ acceptance, with the Gaussian variant sitting close to the wide
 edge. This confirms (and slightly improves on) the
 $\le 30\%$ statement made in \S\ref{sec:setup-b}: the bound is
-\emph{insensitive} at the $\mathcal{O}(15\%)$ level to the precise
+\emph{insensitive} at the $\mathcal{O}(10\%)$ level to the precise
 shape of the anarchic prior.
 
 \subsection{PDG-gate tightness (Run~1)}
@@ -784,29 +806,29 @@ shape of the anarchic prior.
   \caption{$\Mkk^{\min}$ histograms for three PDG-gate definitions:
   factor-of-three (the default), factor-of-two, and factor-of-1.5
   (CFW-style) on the quark masses and CKM elements. The PDG-pass
-  population shrinks by $\approx 14\!\times$ per factor of $1.5$
-  tightening of the gate; the surviving ensembles produce nearly
-  identical $\Mkk^{\min}$ distributions, indicating that the bound is
-  set by FCNCs, not by mass-matching tightness.}
+  population shrinks rapidly as the gate tightens; the surviving
+  ensembles produce similar $\Mkk^{\min}$ distributions, indicating that
+  the bound is set by FCNCs, not by mass-matching tightness.}
   \label{fig:robust-pdg-tightness}
 \end{figure}
 
-Re-tabulating the same 800k-draw baseline against three different
+Re-tabulating the same post-audit 8M-draw RUNA baseline against three different
 PDG-match tolerances on the masses and CKM elements yields
 \begin{align}
   N_{\mathrm{PDG\ pass}}\bigl(\mathrm{factor\text{-}3}\bigr)
-    &= 153{,}097,\nonumber\\
+    &= 1{,}532{,}640,\nonumber\\
   N_{\mathrm{PDG\ pass}}\bigl(\mathrm{factor\text{-}2}\bigr)
-    &= 11{,}108,\\
+    &= 110{,}519,\\
   N_{\mathrm{PDG\ pass}}\bigl(\mathrm{factor\text{-}1.5}\bigr)
-    &= 115.\nonumber
+    &= 1{,}164.\nonumber
 \end{align}
-The drop is approximately $14\!\times$ per factor of $1.5$ tightening
-of the gate, consistent with the rate at which a 9-dimensional
-log-mass$+$CKM Gaussian shrinks under a uniform tolerance contraction.
-Once one is below $\sim 100$ surviving draws (the factor-1.5 case),
-$\Mkk^{\min}$ percentiles cease to be reliably estimable from this
-particular run.
+The factor-of-three to factor-of-two tightening costs a factor
+$13.9$ in sample size, while the factor-of-two to factor-of-1.5
+tightening costs another factor $\sim 95$. This steep drop is consistent
+with the rate at which a high-dimensional log-mass$+$CKM tolerance volume
+shrinks under a uniform tolerance contraction. With only $1{,}164$
+surviving factor-of-1.5 draws, its tail percentiles remain statistics
+limited even in RUNA.
 
 \paragraph{Conclusion.} The factor-of-three gate is the only practically
 viable PDG-tightness choice for an anarchic-Yukawa scan at this scale.
@@ -824,11 +846,12 @@ This is what motivates our headline choice of factor-of-three throughout.
   \caption{Our $\Mkk^{\min}$ distribution at the operating
   factor-of-three PDG gate ($\gs = 3$ convention), overlaid against
   the $21$--$33$~TeV band quoted in the abstract of
-  Csaki--Falkowski--Weiler 0804.1954. Our 95\%-acceptance crossing
-  ($\sim\!28.5$~TeV) sits inside the CFW band; the comparison at the
-  CFW gate (factor-of-1.5, $|Y|\ge 0.5$) is not made because that gate
-  returned zero PDG-passing draws over our 4M total samples (see text
-  below).}
+  Csaki--Falkowski--Weiler 0804.1954. Under the corrected BGS + LO-only
+  convention, our factor-of-three 95\%-acceptance crossing
+  ($\sim\!127$~TeV) is well above the historical CFW band; the comparison
+  at the CFW gate (factor-of-1.5, $|Y|\ge 0.5$) is not made because that
+  gate returned zero PDG-passing draws over our 4M total samples (see
+  text below).}
   \label{fig:robust-cfw}
 \end{figure}
 
@@ -847,13 +870,15 @@ constraint), \emph{not} just the Yukawas above a fixed $c$-pattern. With
 the $c$-values free, the typical draw lands much closer to PDG masses,
 and a factor-of-1.5 gate is reachable. We have not implemented the
 inverse design; doing so would require a dedicated $c$-sampler. So the
-honest comparison is: our $95\%$-acceptance bound at the factor-of-three
-gate, $\Mkk\!\sim\!28.5$~TeV in the $\gs = 3$ convention, sits inside
-the $21$--$33$~TeV band quoted in the CFW abstract for the
-$\eK$-dominated region. We treat this as \emph{qualitative
-consistency}, not a precise reproduction. A full numerical reproduction
-of the CFW band at their gate is left as a follow-up that would require
-the inverse $(c,\tilde m)$-sampler we have not built.
+honest comparison is narrower: our post-audit $95\%$-acceptance bound at
+the factor-of-three gate, $\Mkk\!\sim\!127$~TeV in the $\gs = 3$
+convention, is not a CFW reproduction and should not be compared as one
+number-for-number. It uses modern BGS/FLAG inputs and the audited
+leading-log LR running, while CFW used different historical inputs and a
+different inverse $(c,\tilde m)$ scan design. We therefore treat the CFW
+overlay only as historical context. A full numerical reproduction of the
+CFW band at their gate is left as a follow-up that would require the
+inverse sampler we have not built.
 
 %% =====================================================================
 \section{Recommendation}
@@ -868,9 +893,10 @@ the inverse $(c,\tilde m)$-sampler we have not built.
         (perturbative vs.\ $\gs = 3$) explicitly shown. The headline
         figures in \texttt{results/figures/quark/} are now generated from
         the 8M-draw RUNA scan
-        (\S\ref{sec:robustness}); the prior 800k-draw snapshot is
-        preserved at \texttt{results/figures/quark\_baseline\_800k/} for
-        cross-reference.
+        (\S\ref{sec:robustness}); the pre-audit figure snapshot is
+        preserved at
+        \texttt{results/figures/quark\_pre\_audit\_constants/} for
+        before/after comparison.
   \item Quote the $\Mkk$ bound as a band, not a single number, and call
         out that the dominant constraint is $\eK$.
   \item Include Fig.~\ref{fig:yukawa-size} as the explanation of why the
@@ -884,16 +910,17 @@ recommendation: the high-statistics RUNA scan reproduces the headline
 percentiles to better than $0.5\%$ (\S\ref{sec:robust-runa}); a uniform
 $\pm 0.05$ shift of the $c$-pattern returns zero PDG-passing draws,
 fixing the $c$-values as a prediction rather than a free choice
-(\S\ref{sec:robust-cvals}); the bound moves by $\lesssim 13\%$ across
+(\S\ref{sec:robust-cvals}); the bound moves by $\lesssim 10\%$ across
 $\mathcal{U}(-1,1)$, $\mathcal{U}(-1.5,1.5)$, $\mathcal{U}(-3,3)$, and
 truncated-Gaussian $Y$-priors (\S\ref{sec:robust-yprior}); the
-PDG-pass population thins by $\approx 14\!\times$ per factor-$1.5$
+PDG-pass population thins sharply under factor-$2$ and factor-$1.5$
 gate tightening, with the surviving $\Mkk^{\min}$ shape essentially
 unchanged (\S\ref{sec:robust-pdg-tightness}); and at the literal CFW
 gate the forward pipeline returns zero passes, so the comparison is
-necessarily qualitative --- our $95\%$ bound at $\gs=3$ ($\sim 28.5$~TeV)
-sits inside the $21$--$33$~TeV band of CFW 0804.1954, which we treat as
-band-overlap rather than a precise reproduction
+necessarily qualitative. The post-audit $95\%$ bound at $\gs=3$
+($\sim 127$~TeV) is above the historical $21$--$33$~TeV CFW band under
+our BGS + LO-only conventions, so the overlay is now context rather than
+band-overlap
 (\S\ref{sec:robust-cfw}).
 
 The PDG/$\msbar$ work is not wasted: it is what lets us identify a
@@ -1036,5 +1063,25 @@ pre-Wilson-audit $\eK$ ratio was $0.535$; after the Wilson-RG audit it
 is $1.929$.  This is a factor $3.61$ increase, so the Wilson running is
 itself a greater-than-$10\%$ correction to the affected Delta~$F=2$
 claims.
+
+\subsection{Invalidation-gate rerun}
+\label{app:invalidation-gate-rerun}
+
+The final-claims invalidation gate was cleared only after the
+hadronic-input sign-off in
+\path{docs/phase_logs/phase2_h5_signoff.md} and the Wilson-RG sign-off
+in \path{docs/phase_logs/phase2_h6_signoff.md}.  The benchmark
+$\eK$ ratio shift is the product $6.2388\times3.6052=22.49$, which is
+far above the 10\% rerun threshold in
+\path{docs/paper_execution_decisions.md}.  The post-audit rerun report is
+\path{docs/phase_logs/invalidation_gate_rerun.md}; it records the nine
+SLURM job IDs, the final states, the exact RUNA halt-trigger check, and
+the before/after percentile table.  The factor $22.49$ is a benchmark
+ratio, not a constant multiplier for every random draw: in the 3~TeV
+RUNA tile the median per-draw $\eK$ ratio shift is $18.55\times$, and
+the median $\max\mathrm{ratio}$ shift is $18.11\times$, because the
+operator mixture and the max-over-systems observable vary draw by draw.
+The rerun nevertheless makes $\eK$ overwhelmingly dominant: it binds
+$99.50\%$ of the post-audit RUNA PDG-passing ensemble.
 
 \end{document}
