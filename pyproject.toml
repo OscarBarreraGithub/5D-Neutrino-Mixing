@@ -66,3 +66,6 @@ select = ["E", "F", "I", "B"]
 "tests/test_paper_*.py" = ["E501", "F401", "I001"]
 "tests/test_qcd_running.py" = ["F401", "I001"]
 "tests/test_quark_fit.py" = ["E501", "I001"]
+
+[tool.pytest.ini_options]
+xfail_strict = true
