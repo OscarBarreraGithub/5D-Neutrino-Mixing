@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import warnings
 from dataclasses import dataclass, field
 
 import numpy as np
+
+from qcd.constants import M_TOP_MS
 
 from .fit import (
     QuarkFitResult,
@@ -19,21 +22,67 @@ from .model import (
     build_mfv_point_from_singular_values,
     ckm_like_unitary,
 )
-from .scales import DEFAULT_QUARK_TARGET_SCALE_GEV
+from .pdg_quark_masses import (
+    PDG_QUARK_MASSES_EDITION,
+    pdg_2sigma_relative_at_scale,
+    pdg_up_down_arrays_at_scale,
+)
+from .scales import DEFAULT_QUARK_FIT_SCALE_GEV, DEFAULT_QUARK_TARGET_SCALE_GEV
 
 _TARGET_CKM = ckm_like_unitary(
     RotationParameters(theta12=0.2274, theta13=0.00368, theta23=0.0415, delta=1.196)
 )
-# Repo-owned fixed-scale target bundle for the v1 exclusion slice. The values
-# are kept deliberately stable so the fit/scan layer remains deterministic while
-# the observable stack is added on top.
+# Legacy v1 fixed-scale target bundle (mu = 3 TeV; ad-hoc round numbers).
+# Retained to support the legacy ``rough_sm_targets`` compatibility path and
+# the synthetic regression test fixtures. Production code now consumes
+# ``_FIXED_SCALE_TARGETS_PDG2024_MT_V1`` below.
 _FIXED_SCALE_TARGETS_MU_3TEV_V1 = {
     "scale_GeV": DEFAULT_QUARK_TARGET_SCALE_GEV,
-    "provenance": "repo-owned fixed-scale quark target bundle for the v1 exclusion slice",
+    "provenance": "legacy v1 fixed-scale target bundle (mu = 3 TeV, ad-hoc rounds)",
     "up_masses": np.array([0.0013, 0.62, 172.0], dtype=float),
     "down_masses": np.array([0.0028, 0.057, 2.86], dtype=float),
     "ckm": _TARGET_CKM,
 }
+
+
+def _build_pdg2024_mt_target_bundle() -> dict[str, object]:
+    """Build the PDG 2024 MS-bar target bundle at ``mu = m_t(m_t)``.
+
+    The light/charm/bottom inputs are RG-evolved from their PDG 2024
+    reference scales to ``mu_common = qcd.constants.M_TOP_MS = 163.5 GeV``
+    using :func:`qcd.mass_running.run_msbar_mass`. Top is run from
+    ``m_t(m_t) = 162.5`` to 163.5 GeV; the effect is per-mille.
+
+    The Wilson-coefficient ``alpha_s`` reference scale is **independent**
+    of this mass-target scale; see ``modern/inputs.py``.
+    """
+    up, down = pdg_up_down_arrays_at_scale(DEFAULT_QUARK_FIT_SCALE_GEV)
+    rel_2sigma = pdg_2sigma_relative_at_scale(DEFAULT_QUARK_FIT_SCALE_GEV)
+    return {
+        "scale_GeV": DEFAULT_QUARK_FIT_SCALE_GEV,
+        "provenance": (
+            "PDG 2024 MS-bar quark masses RG-evolved to mu = m_t(m_t) = "
+            f"{DEFAULT_QUARK_FIT_SCALE_GEV} GeV via qcd.mass_running."
+        ),
+        "edition": PDG_QUARK_MASSES_EDITION,
+        "up_masses": up,
+        "down_masses": down,
+        "ckm": _TARGET_CKM,
+        "up_2sigma_relative": np.array(
+            [rel_2sigma["u"], rel_2sigma["c"], rel_2sigma["t"]],
+            dtype=float,
+        ),
+        "down_2sigma_relative": np.array(
+            [rel_2sigma["d"], rel_2sigma["s"], rel_2sigma["b"]],
+            dtype=float,
+        ),
+        "label": "pdg-2024-msbar-mu-mt-v1",
+    }
+
+
+# Repo-owned PDG-2024 fixed-scale target bundle at mu_common = m_t(m_t).
+# Computed at import time so the values are deterministic and unit-tested.
+_FIXED_SCALE_TARGETS_PDG2024_MT_V1 = _build_pdg2024_mt_target_bundle()
 
 
 def _as_real_vector(name: str, values: np.ndarray | list[float] | tuple[float, ...]) -> np.ndarray:
@@ -100,17 +149,34 @@ class EvaluatedBenchmark:
 
 
 def default_quark_targets() -> QuarkTargets:
-    """Return the default fixed-scale quark target table at ``mu = 3 TeV``."""
+    """Return the default PDG-2024 quark target table at ``mu = m_t(m_t)``.
+
+    The mass targets are PDG 2024 MS-bar values RG-evolved to
+    ``DEFAULT_QUARK_FIT_SCALE_GEV = qcd.constants.M_TOP_MS = 163.5 GeV``;
+    the CKM target is the PDG 2024 central unitary. The Wilson-coefficient
+    ``alpha_s`` reference scale stays at 3 TeV (see ``modern/inputs.py``);
+    the two scales are kept orthogonal.
+    """
     return QuarkTargets(
-        up_masses=_FIXED_SCALE_TARGETS_MU_3TEV_V1["up_masses"],
-        down_masses=_FIXED_SCALE_TARGETS_MU_3TEV_V1["down_masses"],
-        ckm=_FIXED_SCALE_TARGETS_MU_3TEV_V1["ckm"],
-        label="sm-like-mu-3tev-v1",
+        up_masses=_FIXED_SCALE_TARGETS_PDG2024_MT_V1["up_masses"],
+        down_masses=_FIXED_SCALE_TARGETS_PDG2024_MT_V1["down_masses"],
+        ckm=_FIXED_SCALE_TARGETS_PDG2024_MT_V1["ckm"],
+        label="pdg-2024-msbar-mu-mt-v1",
     )
 
 
 def rough_sm_targets() -> QuarkTargets:
-    """Compatibility helper for the old rough-SM-like target nomenclature."""
+    """Compatibility helper for the old rough-SM-like target nomenclature.
+
+    Deprecated: prefer ``default_quark_targets()``. The shape and ordering
+    are preserved.
+    """
+    warnings.warn(
+        "rough_sm_targets() is deprecated; use default_quark_targets() "
+        "for the PDG-2024 MS-bar target bundle at mu = m_t(m_t).",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     targets = default_quark_targets()
     return QuarkTargets(
         up_masses=targets.up_masses,
@@ -155,7 +221,7 @@ def benchmark_spurion_input(
         metadata={
             "preferred_r_window": (0.1, 0.4),
             "overall_y": seed.overall_scale,
-            "default_target_scale_GeV": DEFAULT_QUARK_TARGET_SCALE_GEV,
+            "default_target_scale_GeV": DEFAULT_QUARK_FIT_SCALE_GEV,
             "default_target_label": default_quark_targets().label,
             "kk_scale_convention": "repo-default-xi_KK=1.0-so-M_KK-equals-Lambda_IR",
         },
@@ -178,8 +244,8 @@ def default_quark_benchmark() -> QuarkBenchmark:
         targets=targets,
         notes=(
             "Deterministic repo-local regression point. "
-            "Use default_quark_targets() for the repo-owned fixed-scale "
-            "mu = 3 TeV target table."
+            "Use default_quark_targets() for the PDG-2024 MS-bar target "
+            "bundle RG-evolved to mu = m_t(m_t) = 163.5 GeV."
         ),
     )
 

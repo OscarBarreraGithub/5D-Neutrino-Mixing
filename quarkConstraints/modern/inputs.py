@@ -61,14 +61,42 @@ MODERN_DEFAULT_QCD_METADATA_ID = (
 MODERN_DEFAULT_ALPHA_S_POLICY_ID = (
     "qcd.alpha_s.high_precision.threshold_matched.reference_only.v1"
 )
+# WC alpha_s reference / Delta-F=2 matching scale (UNCHANGED at 3 TeV).
 MODERN_DEFAULT_TARGET_SCALE_GEV = 3000.0
 MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV = 0.0797
+# Mass-target / fitter scoring scale (NEW for the PDG-2024 bundle).
+# Equals ``qcd.constants.M_TOP_MS`` so all PDG quark masses are RG-evolved
+# to a single common scale at which the fitter scores residuals. Kept
+# orthogonal to the WC reference scale above on purpose.
+MODERN_DEFAULT_MASS_TARGET_SCALE_GEV = 163.5
 MODERN_DEFAULT_PROVENANCE_RECORD_IDS = (
     "quarkConstraints.modern.inputs.modern_default.source.fixed_scale_targets.v1",
     "quarkConstraints.modern.inputs.modern_default.source.deltaf2_inputs.v1",
     "quarkConstraints.modern.inputs.modern_default.source.scale_conventions.v1",
     "quarkConstraints.modern.inputs.modern_default.source.alpha_s_reference.v1",
 )
+
+
+def _default_up_masses_tuple() -> tuple[float, float, float]:
+    """Return PDG-2024 up-quark MS-bar mass triplet at ``mu = 163.5 GeV``.
+
+    Sourced from :func:`quarkConstraints.pdg_quark_masses.pdg_up_down_arrays_at_scale`
+    so the modern-lane fence is preserved (no legacy ``benchmarks`` import).
+    The legacy quarkConstraints/benchmarks layer consumes the same helper,
+    so both expose the identical numbers.
+    """
+    from quarkConstraints.pdg_quark_masses import pdg_up_down_arrays_at_scale
+
+    up, _ = pdg_up_down_arrays_at_scale(MODERN_DEFAULT_MASS_TARGET_SCALE_GEV)
+    return (float(up[0]), float(up[1]), float(up[2]))
+
+
+def _default_down_masses_tuple() -> tuple[float, float, float]:
+    """Return PDG-2024 down-quark MS-bar mass triplet at ``mu = 163.5 GeV``."""
+    from quarkConstraints.pdg_quark_masses import pdg_up_down_arrays_at_scale
+
+    _, down = pdg_up_down_arrays_at_scale(MODERN_DEFAULT_MASS_TARGET_SCALE_GEV)
+    return (float(down[0]), float(down[1]), float(down[2]))
 
 
 def _require_text(name: str, value: str) -> str:
@@ -605,7 +633,7 @@ class ModernDefaultCKMTarget:
 
     schema_id: str = MODERN_DEFAULT_CKM_TARGET_SCHEMA_ID
     target_id: str = MODERN_DEFAULT_FIXED_SCALE_TARGET_ID
-    scale_GeV: float = MODERN_DEFAULT_TARGET_SCALE_GEV
+    scale_GeV: float = MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
     parameterization_id: str = "ckm_like_unitary.rotation_parameters.v1"
     theta12: float = 0.2274
     theta13: float = 0.00368
@@ -613,9 +641,11 @@ class ModernDefaultCKMTarget:
     delta: float = 1.196
     provenance_record_id: str = MODERN_DEFAULT_PROVENANCE_RECORD_IDS[0]
     notes: str = (
-        "Repo-owned CKM target metadata for the fixed-scale mu = 3 TeV fit "
-        "bundle. Stores only the explicit angles and phase used to build the "
-        "target unitary."
+        "Repo-owned CKM target metadata for the fixed-scale mass-target fit "
+        "bundle (mu = m_t(m_t) = 163.5 GeV). V_CKM is one-loop QCD-invariant "
+        "between mu_common and mu_had >= m_W, so the same unitary is reused "
+        "wherever V_CKM is needed. Stores only the explicit angles and phase "
+        "used to build the target unitary."
     )
 
     def __post_init__(self) -> None:
@@ -671,17 +701,22 @@ class ModernDefaultQuarkMassTarget:
 
     schema_id: str = MODERN_DEFAULT_QUARK_MASS_TARGET_SCHEMA_ID
     target_id: str = MODERN_DEFAULT_FIXED_SCALE_TARGET_ID
-    scale_GeV: float = MODERN_DEFAULT_TARGET_SCALE_GEV
-    scheme_id: str = "repo_fixed_scale_running_masses.v1"
+    scale_GeV: float = MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
+    scheme_id: str = "pdg_2024_msbar_running_masses.v1"
     up_flavor_ids: tuple[str, str, str] = ("u", "c", "t")
-    up_masses_GeV: tuple[float, float, float] = (0.0013, 0.62, 172.0)
+    up_masses_GeV: tuple[float, float, float] = field(
+        default_factory=lambda: _default_up_masses_tuple()
+    )
     down_flavor_ids: tuple[str, str, str] = ("d", "s", "b")
-    down_masses_GeV: tuple[float, float, float] = (0.0028, 0.057, 2.86)
+    down_masses_GeV: tuple[float, float, float] = field(
+        default_factory=lambda: _default_down_masses_tuple()
+    )
     provenance_record_id: str = MODERN_DEFAULT_PROVENANCE_RECORD_IDS[0]
     notes: str = (
-        "Repo-owned fixed-scale quark mass targets at mu = 3 TeV. This block "
-        "freezes only the explicit benchmark masses used by the current fit "
-        "layer and does not imply a wider running-mass package."
+        "Repo-owned PDG-2024 MS-bar quark mass targets RG-evolved to "
+        "mu = m_t(m_t) = 163.5 GeV. Values are produced by "
+        "quarkConstraints.benchmarks.default_quark_targets(). Wilson-coefficient "
+        "alpha_s reference stays at 3 TeV (orthogonal scale)."
     )
 
     def __post_init__(self) -> None:
@@ -753,7 +788,10 @@ class ModernDefaultQCDMetadata:
 
     schema_id: str = MODERN_DEFAULT_QCD_METADATA_SCHEMA_ID
     metadata_id: str = MODERN_DEFAULT_QCD_METADATA_ID
-    target_scale_GeV: float = MODERN_DEFAULT_TARGET_SCALE_GEV
+    # Mass-target scale (where MS-bar quark masses are reported and the fitter
+    # scores residuals).
+    target_scale_GeV: float = MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
+    # WC matching scale (Delta-F=2). Stays at 3 TeV by design.
     matching_scale_GeV: float = MODERN_DEFAULT_TARGET_SCALE_GEV
     xi_KK: float = 1.0
     alpha_s_reference_scale_GeV: float = MODERN_DEFAULT_TARGET_SCALE_GEV

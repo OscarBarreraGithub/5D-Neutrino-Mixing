@@ -10,7 +10,12 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
-from .benchmarks import QuarkTargets, default_quark_targets, default_spurion_seed
+from .benchmarks import (
+    _FIXED_SCALE_TARGETS_PDG2024_MT_V1,
+    QuarkTargets,
+    default_quark_targets,
+    default_spurion_seed,
+)
 from .couplings import compute_quark_kk_gluon_couplings
 from .deltaf2 import evaluate_delta_f2_constraints
 from .fit import fit_quark_sector
@@ -21,6 +26,49 @@ from .scales import (
     DEFAULT_QUARK_XI_KK,
     default_quark_m_kk_from_lambda_ir,
 )
+
+# Per-flavor mass tolerances at mu_common = m_t(m_t).
+#
+# Initial production policy: use PDG 2024 2sigma relative uncertainties with
+# a deterministic floor of 0.003 (per-mille minimum). After the user runs
+# ``scripts/calibrate_phase0.py``, the floor will be replaced by the
+# 95th-percentile log-residual from the Phase-0 dry scan (gating off).
+#
+# TODO(Phase-0 calibration): replace ``MASS_TOLERANCE_FLOOR`` with the
+# per-flavor calibration loaded from
+# ``data/phase0_residual_calibration.json`` once the scan has been run.
+MASS_TOLERANCE_FLOOR = 0.003
+
+# Per-element CKM 2sigma relative tolerances, derived from PDG 2024 §12
+# global-fit averages of (|V_us|, |V_cb|, |V_ub|, J):
+#
+#   |V_us| = 0.22501 ± 0.00050   → 2sigma rel = 2 * 0.00050 / 0.22501 ≈ 0.0044
+#   |V_cb| = 0.04183 ± 0.00150   → 2sigma rel = 2 * 0.00150 / 0.04183 ≈ 0.0717
+#   |V_ub| = 0.00382 ± 0.00020   → 2sigma rel = 2 * 0.00020 / 0.00382 ≈ 0.1047
+#   J      = 3.08e-5 ± 0.13e-5   → 2sigma rel = 2 * 0.13   / 3.08    ≈ 0.0844
+#
+# |V_ub| spans the inclusive/exclusive PDG-average envelope; 10% covers the
+# full 2sigma band so neither tree-level extraction is silently rejected.
+# Order matches ``QuarkTargets.ckm_observables``: (|V_us|, |V_cb|, |V_ub|, J).
+_CKM_2SIGMA_RELATIVE_DEFAULT = np.array([0.0044, 0.072, 0.10, 0.085], dtype=float)
+
+
+def _default_per_flavor_mass_tolerances() -> tuple[np.ndarray, np.ndarray]:
+    """Return the per-flavor 2sigma relative tolerance vectors.
+
+    Layout:
+        up   = (m_u, m_c, m_t)
+        down = (m_d, m_s, m_b)
+
+    The values combine PDG 2024 2sigma relative uncertainties (from the
+    PDG-derived target bundle) with a uniform floor (`MASS_TOLERANCE_FLOOR`).
+    """
+    bundle = _FIXED_SCALE_TARGETS_PDG2024_MT_V1
+    up_pdg = np.asarray(bundle["up_2sigma_relative"], dtype=float)
+    down_pdg = np.asarray(bundle["down_2sigma_relative"], dtype=float)
+    up = np.maximum(up_pdg, MASS_TOLERANCE_FLOOR)
+    down = np.maximum(down_pdg, MASS_TOLERANCE_FLOOR)
+    return up, down
 
 CSV_COLUMNS = [
     "sample_index",
@@ -113,7 +161,20 @@ def _serialize_array(values: np.ndarray) -> str:
 
 @dataclass
 class QuarkScanConfig:
-    """Configuration for a deterministic quark-sector MFV scan."""
+    """Configuration for a deterministic quark-sector MFV scan.
+
+    Acceptance gating uses two layers of mass / CKM tolerances:
+
+    * Per-quark vectors (``mass_tolerance_up``, ``mass_tolerance_down``)
+      and per-element CKM tolerance (``ckm_tolerance``) — these are the
+      production gates from the plan v3 implementation.
+    * Legacy scalars (``max_mass_log_residual``, ``max_ckm_relative_residual``)
+      — kept for backwards-compatibility with the legacy 0.10 gate. A
+      candidate must clear *both* the per-quark and the legacy thresholds.
+
+    Set ``apply_acceptance_gate=False`` to disable mass/CKM/proxy/alignment
+    gating entirely (used by the Phase-0 calibration sweep).
+    """
 
     r_values: np.ndarray = field(default_factory=lambda: np.array([0.10, 0.25, 0.40], dtype=float))
     overall_scale_values: np.ndarray = field(default_factory=lambda: np.array([3.0], dtype=float))
@@ -126,10 +187,20 @@ class QuarkScanConfig:
     fit_orientation: bool = True
     max_mass_log_residual: float = 0.10
     max_ckm_relative_residual: float = 0.10
+    mass_tolerance_up: np.ndarray = field(
+        default_factory=lambda: _default_per_flavor_mass_tolerances()[0]
+    )
+    mass_tolerance_down: np.ndarray = field(
+        default_factory=lambda: _default_per_flavor_mass_tolerances()[1]
+    )
+    ckm_tolerance: np.ndarray = field(
+        default_factory=lambda: _CKM_2SIGMA_RELATIVE_DEFAULT.copy()
+    )
     max_proxy_h_rs: float = DEFAULT_QUARK_BENCHMARK_H_RS_MAX
     max_alignment_ratio: float = 6.0
     record_git_metadata: bool = True
     rng_seed_global: Optional[int] = None
+    apply_acceptance_gate: bool = True
 
     def __post_init__(self) -> None:
         self.r_values = _as_1d_float_array("r_values", self.r_values)
@@ -147,11 +218,62 @@ class QuarkScanConfig:
             raise ValueError("max_proxy_h_rs must be positive")
         if np.any(self.Lambda_IR_values <= 0.0):
             raise ValueError("Lambda_IR_values must be positive")
+        self.mass_tolerance_up = _as_1d_float_array("mass_tolerance_up", self.mass_tolerance_up)
+        self.mass_tolerance_down = _as_1d_float_array(
+            "mass_tolerance_down", self.mass_tolerance_down
+        )
+        self.ckm_tolerance = _as_1d_float_array("ckm_tolerance", self.ckm_tolerance)
+        if self.mass_tolerance_up.size != 3:
+            raise ValueError("mass_tolerance_up must have shape (3,)")
+        if self.mass_tolerance_down.size != 3:
+            raise ValueError("mass_tolerance_down must have shape (3,)")
+        if self.ckm_tolerance.size != 4:
+            raise ValueError("ckm_tolerance must have shape (4,)")
+        if np.any(self.mass_tolerance_up <= 0.0):
+            raise ValueError("mass_tolerance_up must be strictly positive")
+        if np.any(self.mass_tolerance_down <= 0.0):
+            raise ValueError("mass_tolerance_down must be strictly positive")
+        if np.any(self.ckm_tolerance <= 0.0):
+            raise ValueError("ckm_tolerance must be strictly positive")
         if self.rng_seed_global is not None:
             raise ValueError(
                 "rng_seed_global is not yet supported for stochastic seeding; "
                 "leave it unset until randomized scan initialization is implemented"
             )
+
+
+_UP_FLAVOR_LABELS = ("u", "c", "t")
+_DOWN_FLAVOR_LABELS = ("d", "s", "b")
+_CKM_OBSERVABLE_LABELS = ("Vus", "Vcb", "Vub", "J")
+
+
+def _per_quark_mass_failures(
+    up_log_residuals: np.ndarray,
+    down_log_residuals: np.ndarray,
+    *,
+    tol_up: np.ndarray,
+    tol_down: np.ndarray,
+) -> list[str]:
+    failures: list[str] = []
+    for label, residual, tol in zip(_UP_FLAVOR_LABELS, np.abs(up_log_residuals), tol_up):
+        if residual > tol:
+            failures.append(f"mass_{label}")
+    for label, residual, tol in zip(_DOWN_FLAVOR_LABELS, np.abs(down_log_residuals), tol_down):
+        if residual > tol:
+            failures.append(f"mass_{label}")
+    return failures
+
+
+def _per_ckm_failures(
+    ckm_residuals: np.ndarray,
+    *,
+    tol_ckm: np.ndarray,
+) -> list[str]:
+    failures: list[str] = []
+    for label, residual, tol in zip(_CKM_OBSERVABLE_LABELS, np.abs(ckm_residuals), tol_ckm):
+        if residual > tol:
+            failures.append(f"ckm_{label}")
+    return failures
 
 
 def _classify_solution(
@@ -162,14 +284,38 @@ def _classify_solution(
     deltaf2_summary,
     fit_success: bool,
     config: QuarkScanConfig,
+    *,
+    up_log_residuals: Optional[np.ndarray] = None,
+    down_log_residuals: Optional[np.ndarray] = None,
+    ckm_residuals: Optional[np.ndarray] = None,
 ) -> tuple[bool, str]:
-    reasons = []
+    """Apply the production acceptance gate.
+
+    The function records gating failures in a fixed order; if
+    ``config.apply_acceptance_gate`` is False the function still returns the
+    full list of failure reasons (so Phase-0 calibration sweeps can log
+    everything) but always reports ``passes = True``.
+    """
+    reasons: list[str] = []
     if not fit_success:
         reasons.append("fit_failed")
     if mass_log_residual > config.max_mass_log_residual:
         reasons.append("mass_fit")
     if ckm_relative_residual > config.max_ckm_relative_residual:
         reasons.append("ckm_fit")
+    if up_log_residuals is not None and down_log_residuals is not None:
+        reasons.extend(
+            _per_quark_mass_failures(
+                up_log_residuals,
+                down_log_residuals,
+                tol_up=config.mass_tolerance_up,
+                tol_down=config.mass_tolerance_down,
+            )
+        )
+    if ckm_residuals is not None:
+        reasons.extend(
+            _per_ckm_failures(ckm_residuals, tol_ckm=config.ckm_tolerance)
+        )
     if proxy_h_rs > config.max_proxy_h_rs:
         reasons.append("proxy_h_rs")
     if alignment_ratio > config.max_alignment_ratio:
@@ -183,6 +329,11 @@ def _classify_solution(
     for system, label in system_labels.items():
         if not deltaf2_summary.by_system[system].passes:
             reasons.append(label)
+    if not config.apply_acceptance_gate:
+        # Phase-0 calibration: surface every reason but never gate.
+        return True, "accepted_gate_disabled" if not reasons else (
+            "accepted_gate_disabled:" + ",".join(reasons)
+        )
     return len(reasons) == 0, ",".join(reasons) if reasons else "accepted"
 
 
@@ -251,6 +402,9 @@ def run_quark_scan(
                         deltaf2,
                         solution.success,
                         config,
+                        up_log_residuals=result.mass_residuals_up,
+                        down_log_residuals=result.mass_residuals_down,
+                        ckm_residuals=result.ckm_residuals,
                     )
                     row: Dict[str, object] = {
                         "sample_index": sample_index,

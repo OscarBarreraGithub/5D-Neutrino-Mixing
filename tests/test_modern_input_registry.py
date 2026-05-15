@@ -37,6 +37,7 @@ from quarkConstraints.modern.conventions import (
 from quarkConstraints.modern.inputs import (
     MODERN_DEFAULT_ALPHA_S_POLICY_ID,
     MODERN_DEFAULT_INPUTS_SCHEMA_ID,
+    MODERN_DEFAULT_MASS_TARGET_SCALE_GEV,
     MODERN_DEFAULT_NEUTRAL_MESON_SYSTEM_IDS,
     MODERN_DEFAULT_PROVENANCE_RECORD_IDS,
     MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV,
@@ -47,6 +48,7 @@ from quarkConstraints.modern.inputs import (
     ModernInputRegistry,
     ModernStrictPaperInputs,
 )
+from quarkConstraints.pdg_quark_masses import pdg_up_down_arrays_at_scale
 from quarkConstraints.paper_0710_1869.conventions import PAPER_0710_1869_MODE_ID
 from quarkConstraints.paper_0710_1869.validation import module_has_forbidden_import
 
@@ -125,14 +127,31 @@ def test_modern_registry_freezes_lane_and_schema_ids():
     assert modern_default.ckm_target.theta23 == pytest.approx(0.0415)
     assert modern_default.ckm_target.delta == pytest.approx(1.196)
     assert modern_default.quark_mass_target.scale_GeV == pytest.approx(
-        MODERN_DEFAULT_TARGET_SCALE_GEV
+        MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
     )
-    assert modern_default.quark_mass_target.up_masses_GeV == pytest.approx((0.0013, 0.62, 172.0))
-    assert modern_default.quark_mass_target.down_masses_GeV == pytest.approx((0.0028, 0.057, 2.86))
+    expected_up, expected_down = pdg_up_down_arrays_at_scale(
+        MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
+    )
+    assert modern_default.quark_mass_target.up_masses_GeV == pytest.approx(
+        tuple(expected_up.tolist())
+    )
+    assert modern_default.quark_mass_target.down_masses_GeV == pytest.approx(
+        tuple(expected_down.tolist())
+    )
+    # WC matching scale stays at 3 TeV, orthogonal to the mass-target scale.
     assert modern_default.qcd_metadata.matching_scale_GeV == pytest.approx(
         MODERN_DEFAULT_TARGET_SCALE_GEV
     )
+    assert modern_default.qcd_metadata.target_scale_GeV == pytest.approx(
+        MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
+    )
     assert modern_default.qcd_metadata.xi_KK == pytest.approx(1.0)
+    # Regression guard: alpha_s reference scale is independent of the mass
+    # scale and stays at 3 TeV (Wilson-coefficient running anchor).
+    assert modern_default.qcd_metadata.alpha_s_reference_scale_GeV == pytest.approx(3000.0)
+    assert MODERN_DEFAULT_TARGET_SCALE_GEV == pytest.approx(3000.0)
+    assert MODERN_DEFAULT_MASS_TARGET_SCALE_GEV == pytest.approx(163.5)
+    assert MODERN_DEFAULT_TARGET_SCALE_GEV != MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
     assert modern_default.qcd_metadata.alpha_s_reference_value == pytest.approx(
         MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV
     )
@@ -441,8 +460,14 @@ def test_modern_default_inputs_export_explicit_versioned_numeric_payloads_determ
     assert payload_a["ckm_target"]["schema_id"].endswith(".v1")
     assert payload_a["ckm_target"]["theta12"] == pytest.approx(0.2274)
     assert payload_a["quark_mass_target"]["schema_id"].endswith(".v1")
+    expected_up_payload, expected_down_payload = pdg_up_down_arrays_at_scale(
+        MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
+    )
     assert payload_a["quark_mass_target"]["up_masses_GeV"] == pytest.approx(
-        [0.0013, 0.62, 172.0]
+        list(expected_up_payload.tolist())
+    )
+    assert payload_a["quark_mass_target"]["down_masses_GeV"] == pytest.approx(
+        list(expected_down_payload.tolist())
     )
     assert payload_a["qcd_metadata"]["schema_id"].endswith(".v1")
     assert payload_a["qcd_metadata"]["alpha_s_policy_id"] == MODERN_DEFAULT_ALPHA_S_POLICY_ID

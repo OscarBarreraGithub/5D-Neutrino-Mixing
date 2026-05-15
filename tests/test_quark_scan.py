@@ -59,12 +59,15 @@ def test_quark_scan_threads_explicit_xi_kk_into_mkk():
 
 
 def test_quark_scan_rejects_points_that_fail_the_repo_proxy_gate():
+    # Use a tightened proxy gate so the test does not rely on the exact
+    # numerical proxy of r=0.4 (which depends on the target spectrum).
     config = QuarkScanConfig(
         r_values=[0.4],
         overall_scale_values=[3.0],
         Lambda_IR_values=[3000.0],
         record_git_metadata=False,
         max_nfev=100,
+        max_proxy_h_rs=0.5,
     )
     row = run_quark_scan(config, progress_every=0)[0]
 
