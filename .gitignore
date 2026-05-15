@@ -35,6 +35,12 @@ build/
 docs/*
 !docs/quark_scan_assumptions_compact.pdf
 !docs/quark_scan_assumptions_compact.tex
+!docs/quark_scan_methodology_note.pdf
+!docs/quark_scan_methodology_note.tex
+!docs/paper_execution_decisions.md
+!docs/paper_execution_roadmap.md
+!docs/phase_logs/
+!docs/phase_logs/**
 
 # Keep tracked figure exports limited to the collaborator-facing set.
 results/figures/*.png
@@ -48,6 +54,7 @@ results/figures/**/*.pdf
 # Scan artifacts
 logs/
 scan_outputs/
+data/
 
 # Temporary scratch files
 tmp*.json
@@ -55,3 +62,9 @@ tmp-*
 
 # One-off notebook output kept out of version control.
 scripts/alpha_s_tev.pdf
+
+# Local snapshots used by paper-prep tooling
+snapshots/
+
+# Agent-local workspace (was previously only the global gitignore catching settings.local.json)
+.claude/
