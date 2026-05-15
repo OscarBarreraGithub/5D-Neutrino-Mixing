@@ -73,10 +73,14 @@ branch `paper/quark-scan-2026q2`.
     running). The methodology note documents this overlap explicitly
     (lines 848–852, 921–922).
 
-(b) **moreUV / moreIR / Run C still zero PDG passes — PASS.** Verified
-    via summed `n_pdg_pass` across all tiles: all three return exactly 0.
-    These remain c-pattern × Y-prior artefacts independent of ε_K
-    rescaling, as expected.
+(b) **moreUV / moreIR / Run C finite zero-pass bounds — PASS.** Verified
+    via summed `n_pdg_pass` across all tiles: all three have k=0 in their
+    finite ensembles.  The Wilson-score 95% upper limits are
+    `p_UL=2.304e-6` for Run 3 moreUV (N=1.6M),
+    `p_UL=2.304e-6` for Run 3 moreIR (N=1.6M), and
+    `p_UL=9.216e-7` for Run C (N=4.0M).  These remain c-pattern ×
+    Y-prior finite-ensemble bounds independent of ε_K rescaling, as
+    expected.
 
 (c) **BGS + LO conditional caveat — PASS.** The note carries the caveat
     in multiple load-bearing places: executive paragraph

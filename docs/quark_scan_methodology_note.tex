@@ -487,10 +487,12 @@ Gaussian $\sigma=1$ truncated at $3\sigma$ priors.
 Two practical notes. First, the PDG-pass tolerance in the RS-anarchy
 analysis is loosened from $2\sigma$ to a constant ``factor of 3'' on
 masses and CKM elements, and ``factor of 5'' on the Jarlskog
-invariant $J$. The reason is that purely anarchic draws never land
-within $2\sigma$ of every PDG number; insisting on $2\sigma$ would
-return zero passing draws, regardless of $\Mkk$. The factor-of-3 gate is
-the standard literature compromise. Second, no optimiser is involved: a
+invariant $J$. The reason is practical rather than analytic: at the
+finite ensemble sizes used here, much tighter gates rapidly starve the
+accepted sample, and any zero-pass scan below is quoted as a
+finite-ensemble upper limit rather than as an impossibility theorem. The
+factor-of-3 gate is the standard literature compromise. Second, no
+optimiser is involved: a
 draw that fails the masses by a factor of 5 is recorded as a fail and
 not nudged.
 
@@ -734,8 +736,10 @@ $0.5\%$ under the central BGS + LO-only conventions.
   (eq.~(\ref{eq:cvals})) and the \emph{qtop\_shifted} variant
   ($c_{Q_3} = 0.30$, $c_{u_3} = -0.55$). The two uniform-shift variants
   \emph{moreUV} ($c \to c + 0.05$ for every $c$) and \emph{moreIR}
-  ($c \to c - 0.05$) returned zero PDG-passing draws over 1.6M attempts
-  each and are therefore absent from the figure.}
+  ($c \to c - 0.05$) produced no PDG-passing draws in
+  $N=1{,}600{,}000$ attempts each. The Wilson-score 95\% upper limit is
+  $p_{\rm pass}\le 2.3\times10^{-6}$ for either shifted pattern, so both
+  are shown only through the finite-statistics legend annotation.}
   \label{fig:robust-cvals}
 \end{figure}
 
@@ -750,15 +754,27 @@ to $16.00$~TeV / $42.14$~TeV (perturbative) and
 $45.73$~TeV / $120.39$~TeV ($\gs = 3$), i.e.\ a $\approx 5\%$ softening
 of the bound. Second, we shifted \emph{every} bulk-mass parameter
 uniformly by $+0.05$ (\emph{moreUV}) and by $-0.05$ (\emph{moreIR}). In
-both cases the resulting 1.6M-draw scan returned exactly zero
-PDG-passing draws.
+each case the resulting scan produced no PDG-passing draws in
+$N=1{,}600{,}000$ samples. The binomial Wilson-score 95\% upper limit on
+the PDG-pass fraction is therefore
+\[
+  p_{\rm pass}(\mathrm{moreUV}) \le 2.3\times10^{-6},\qquad
+  p_{\rm pass}(\mathrm{moreIR}) \le 2.3\times10^{-6}.
+\]
+We interpret this as follows: under either uniformly shifted
+$c$-pattern and the default anarchic $Y$-prior, fewer than a few parts in
+$10^6$ of forward Yukawa draws reproduce the SM masses and mixings
+within the factor-3/5 PDG gate, at 95\% confidence. This is a
+finite-ensemble bound, not an analytic impossibility statement.
 
 \paragraph{Why this matters.} The $c$-pattern in eq.~(\ref{eq:cvals})
 is sometimes treated as if it were one of many roughly equivalent
-choices. The Run~3 sweep makes a stronger statement: the pattern is
-roughly the unique $\pm 0.05$-wide attractor in $c$-space at which
-anarchic Yukawas reproduce SM masses. A uniform shift of $0.05$ in
-either direction collapses the PDG-pass rate by orders of magnitude.
+choices. The Run~3 sweep makes a finite-ensemble statement: the tested
+uniform $\pm0.05$ shifts have PDG-pass fractions below
+$2.3\times10^{-6}$ at 95\% confidence, while the baseline and
+\emph{qtop\_shifted} patterns retain $\mathcal{O}(0.1)$ pass rates. A
+uniform shift of $0.05$ in either direction therefore suppresses the
+observed PDG-pass rate by orders of magnitude.
 The $c$-pattern is therefore a \emph{prediction} of the
 hierarchy-by-localisation framework, not a free choice. The
 \emph{qtop\_shifted} variant, which perturbs only $c_{Q_3}$ and
@@ -831,6 +847,15 @@ with the rate at which a high-dimensional log-mass$+$CKM tolerance volume
 shrinks under a uniform tolerance contraction. With only $1{,}164$
 surviving factor-of-1.5 draws, its tail percentiles remain statistics
 limited even in RUNA.
+
+A separate CFW-like Run~C, using the baseline $c$-pattern but the wider
+floored prior $\mathrm{Re},\mathrm{Im}\,Y_{ij}\sim\mathcal{U}(-3,3)$
+with $|Y_{ij}|\ge0.5$, produced no PDG-passing draws in
+$N=4{,}000{,}000$ samples under the factor-1.5 mass/CKM and factor-2.5
+$J$ gate. The corresponding Wilson-score 95\% upper limit is
+$p_{\rm pass}\le 9.2\times10^{-7}$. This is again a finite-ensemble
+statement about that c-pattern $\times$ prior $\times$ gate combination,
+not an analytic exclusion of tighter gates.
 
 \paragraph{Conclusion.} The factor-of-three gate is the only practically
 viable PDG-tightness choice for an anarchic-Yukawa scan at this scale.

@@ -33,22 +33,23 @@ audit convention `z = 1.92`.
 
 | File:line | Claim verbatim | Run dir | N total | N pass observed | Gate definition | p_UL_95 |
 |---|---|---|---:|---:|---|---:|
-| `docs/quark_scan_methodology_note.tex:736-738` | `moreUV ... returned zero PDG-passing draws over 1.6M attempts` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
-| `docs/quark_scan_methodology_note.tex:736-738` | `moreIR ... returned zero PDG-passing draws over 1.6M attempts` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
-| `docs/quark_scan_methodology_note.tex:752-754` | `In both cases the resulting 1.6M-draw scan returned exactly zero PDG-passing draws.` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
-| `docs/quark_scan_methodology_note.tex:752-754` | `In both cases the resulting 1.6M-draw scan returned exactly zero PDG-passing draws.` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
-| `docs/phase_logs/invalidation_gate_rerun.md:93` | `Run 3 moreUV | zero PDG passes | zero PDG passes | zero PDG passes | zero PDG passes` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
-| `docs/phase_logs/invalidation_gate_rerun.md:94` | `Run 3 moreIR | zero PDG passes | zero PDG passes | zero PDG passes | zero PDG passes` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
-| `docs/phase_logs/invalidation_gate_rerun.md:95` | `Run C | zero PDG passes | zero PDG passes | zero PDG passes | zero PDG passes` | `scan_outputs/rs_anarchy_runC_20260515T085323` | 4,000,000 | 0 | factor-1.5 masses/CKM, factor-2.5 J | 9.216e-7 |
-| `docs/phase_logs/invalidation_gate_signoff.md:76-79` | `moreUV / moreIR / Run C still zero PDG passes ... all three return exactly 0` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
-| `docs/phase_logs/invalidation_gate_signoff.md:76-79` | `moreUV / moreIR / Run C still zero PDG passes ... all three return exactly 0` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
-| `docs/phase_logs/invalidation_gate_signoff.md:76-79` | `moreUV / moreIR / Run C still zero PDG passes ... all three return exactly 0` | `scan_outputs/rs_anarchy_runC_20260515T085323` | 4,000,000 | 0 | factor-1.5 masses/CKM, factor-2.5 J | 9.216e-7 |
+| `docs/quark_scan_methodology_note.tex:739-743` | `moreUV ... produced no PDG-passing draws in N=1,600,000 attempts ... p_pass <= 2.3e-6` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
+| `docs/quark_scan_methodology_note.tex:739-743` | `moreIR ... produced no PDG-passing draws in N=1,600,000 attempts ... p_pass <= 2.3e-6` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
+| `docs/quark_scan_methodology_note.tex:757-765` | `the resulting scan produced no PDG-passing draws in N=1,600,000 samples ... p_pass(moreUV) <= 2.3e-6` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
+| `docs/quark_scan_methodology_note.tex:757-765` | `the resulting scan produced no PDG-passing draws in N=1,600,000 samples ... p_pass(moreIR) <= 2.3e-6` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
+| `docs/quark_scan_methodology_note.tex:853-857` | `Run C ... produced no PDG-passing draws in N=4,000,000 samples ... p_pass <= 9.2e-7` | `scan_outputs/rs_anarchy_runC_20260515T085323` | 4,000,000 | 0 | factor-1.5 masses/CKM, factor-2.5 J | 9.216e-7 |
+| `docs/phase_logs/invalidation_gate_rerun.md:93` | `Run 3 moreUV | no PDG passes in N=1.6M; Wilson 95% p_UL=2.304e-6` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
+| `docs/phase_logs/invalidation_gate_rerun.md:94` | `Run 3 moreIR | no PDG passes in N=1.6M; Wilson 95% p_UL=2.304e-6` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
+| `docs/phase_logs/invalidation_gate_rerun.md:95` | `Run C | no PDG passes in N=4.0M; Wilson 95% p_UL=9.216e-7` | `scan_outputs/rs_anarchy_runC_20260515T085323` | 4,000,000 | 0 | factor-1.5 masses/CKM, factor-2.5 J | 9.216e-7 |
+| `docs/phase_logs/invalidation_gate_signoff.md:76-82` | `moreUV / moreIR / Run C finite zero-pass bounds ... k=0 ... p_UL=2.304e-6 ... p_UL=9.216e-7` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
+| `docs/phase_logs/invalidation_gate_signoff.md:76-82` | `moreUV / moreIR / Run C finite zero-pass bounds ... k=0 ... p_UL=2.304e-6 ... p_UL=9.216e-7` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
+| `docs/phase_logs/invalidation_gate_signoff.md:76-82` | `moreUV / moreIR / Run C finite zero-pass bounds ... k=0 ... p_UL=2.304e-6 ... p_UL=9.216e-7` | `scan_outputs/rs_anarchy_runC_20260515T085323` | 4,000,000 | 0 | factor-1.5 masses/CKM, factor-2.5 J | 9.216e-7 |
 
 ## Grep Hits Not Treated As Canonical Zero-Pass Rows
 
 | File:line | Matched text | Disposition |
 |---|---|---|
-| `docs/quark_scan_methodology_note.tex:487-493` | `purely anarchic draws never land within 2\sigma ... zero passing draws` | Absolute language is not tied to a canonical output with N/seed/hash in the current artifacts.  The methodology note is rewritten to avoid quoting it as a zero-pass measurement. |
-| `docs/quark_scan_methodology_note.tex:506` | `nonetheless passes the PDG check` | False-positive grep hit, not a zero-pass claim. |
+| `docs/quark_scan_methodology_note.tex:487-493` | PDG-pass setup paragraph | Rewritten to say tighter gates starve finite ensembles and that zero-pass scans are upper limits, not impossibility statements. |
+| `docs/quark_scan_methodology_note.tex:508` | `nonetheless passes the PDG check` | False-positive grep hit, not a zero-pass claim. |
 | `docs/phase_logs/invalidation_gate_signoff.md:52` | `rejected PDG-passing draws` | False-positive grep hit, not a zero-pass claim. |
 | Other phase-log grep hits without zero-pass language | branch/test/status text | False-positive grep hits, not zero-pass claims. |

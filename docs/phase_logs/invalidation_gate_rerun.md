@@ -90,9 +90,9 @@ convention, conditional on the central BGS + LO-only conventions.
 | Run B narrow_uniform | 11.03 | 49.79 | 29.12 | 132.35 |
 | Run B wide_uniform | 11.91 | 52.76 | 32.27 | 139.34 |
 | Run B gaussian_3sigma | 10.89 | 48.32 | 30.97 | 139.55 |
-| Run 3 moreUV | zero PDG passes | zero PDG passes | zero PDG passes | zero PDG passes |
-| Run 3 moreIR | zero PDG passes | zero PDG passes | zero PDG passes | zero PDG passes |
-| Run C | zero PDG passes | zero PDG passes | zero PDG passes | zero PDG passes |
+| Run 3 moreUV | no PDG passes in N=1.6M; Wilson 95% `p_UL=2.304e-6` | no PDG passes in N=1.6M; Wilson 95% `p_UL=2.304e-6` | no PDG passes in N=1.6M; Wilson 95% `p_UL=2.304e-6` | no PDG passes in N=1.6M; Wilson 95% `p_UL=2.304e-6` |
+| Run 3 moreIR | no PDG passes in N=1.6M; Wilson 95% `p_UL=2.304e-6` | no PDG passes in N=1.6M; Wilson 95% `p_UL=2.304e-6` | no PDG passes in N=1.6M; Wilson 95% `p_UL=2.304e-6` | no PDG passes in N=1.6M; Wilson 95% `p_UL=2.304e-6` |
+| Run C | no PDG passes in N=4.0M; Wilson 95% `p_UL=9.216e-7` | no PDG passes in N=4.0M; Wilson 95% `p_UL=9.216e-7` | no PDG passes in N=4.0M; Wilson 95% `p_UL=9.216e-7` | no PDG passes in N=4.0M; Wilson 95% `p_UL=9.216e-7` |
 
 `scan_outputs/followup_crossings_summary.json` was regenerated with the
 post-audit run paths and retains the pre-audit values under
