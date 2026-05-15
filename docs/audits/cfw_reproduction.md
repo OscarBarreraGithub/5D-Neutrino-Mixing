@@ -8,6 +8,10 @@ Driver: `scripts/rs_anarchy_cfw_comparison.py`.
 
 CFW quote a generic RS anarchic lower bound near `21 TeV` and a
 pseudo-Goldstone Higgs lower bound near `33 TeV` (0804.1954, abstract).
+Those abstract markers use the boundary-term choice associated with
+`g_s^*~6`.  In the no-UV-boundary-term/no-bare-brane variants associated
+with `g_s^*~3`, the corresponding CFW markers are `10.5 TeV` for generic
+RS and about `17 TeV` for the pGB Higgs case.
 For the generic RS number, their load-bearing ingredients are:
 
 - conventional scalar-LR `C4/C5` operators with `C4=-g_R g_L/M_G^2` and
@@ -64,23 +68,37 @@ headline:
 | Post-audit default | 1,532,640 | 16.53995 TeV | 47.25701 TeV | 127.13273 TeV |
 | CFW-matched projection | 217 | 8.18005 TeV | 23.37157 TeV | 52.80281 TeV |
 
-Thus, under the common plotted `g_s^*=3` convention and with the CFW-era
-epsilon budget plus CFW 30% relative gate, our forward-only pipeline gives
+Thus, under the plotted `g_s^*=3` convention and with the CFW-era epsilon
+budget plus CFW 30% relative gate, our forward-only pipeline gives
 
 ```text
 M_KK^min(p50) = 23.37 TeV.
 ```
 
-This is `11.3%` above CFW's `21 TeV` generic-RS marker:
+The corrected convention-matched comparison is against CFW's
+no-UV-boundary-term `10.5 TeV` RS marker, not the default `21 TeV` marker:
 
 ```text
-(23.37157 - 21.0) / 21.0 = 0.1129.
+23.37157 / 10.5 = 2.2259.
 ```
 
-I therefore label the common-convention comparison qualitatively consistent.
-The residual is plausibly due to CFW's inverse localization sampler versus
-our fixed-c forward sampler, plus the fact that their hadronic convention is
-an older UTfit scale table rather than explicit FLAG/BGS inputs.
+Equivalently, rescaling the same projection to `g_s^*~6` gives
+
+```text
+46.74314 / 21.0 = 2.2259.
+```
+
+The reconciliation is therefore not a percent-level agreement claim.  It is a
+factor-`2.2` stronger RS-anarchy bound at matched `g_s^*` conventions.  The
+factor-`2.2` enhancement is attributable to newer BGS-2020
+`epsilon_K^SM`, FLAG-2024 bag parameters, and the audited LO BMU-corrected
+sign convention relative to CFW's UTfit-era constraint inputs.  The
+directions agree: both analyses imply an `M_KK > O(10 TeV)` lower bound
+under anarchic flavor, but the modern pipeline does not reproduce CFW's
+2008 numerical value.  The matched-gate subset has only `n=217` accepted
+draws; its approximate 95% Wilson-score interval on the p50 is
+`[21, 26] TeV` at `g_s^*=3`, which is much too small to erase the factor-2.2
+residual.
 
 ## Step-by-step reconciliation
 
@@ -150,10 +168,13 @@ an older UTfit scale table rather than explicit FLAG/BGS inputs.
 5. Compare to CFW:
 
    ```text
-   common-convention comparison: 23.37 TeV vs 21 TeV -> +11.3%
-   literal g_s^*=6 comparison: 46.74 TeV vs 21 TeV -> residual factor 2.23
+   common g_s^*=3 comparison:
+     our projection 23.37 TeV / CFW no-UV-boundary RS 10.5 TeV = 2.23
+
+   common g_s^*~6 comparison:
+     our rescaled projection 46.74 TeV / CFW default RS 21 TeV = 2.23
    ```
 
-   The paper figure and methodology text use the common `g_s^*=3`
-   convention.  The literal `g_s^*=6` variant is reported as a caveat, not
-   folded into the agreement claim.
+   The paper figure now displays both CFW conventions explicitly.  The
+   conclusion is a factor-2.2 stronger post-audit bound, not a percent-level
+   reproduction of the CFW 2008 marker.
