@@ -45,4 +45,10 @@ Checksums: `artifacts/checksums.sha256`
 - `pdflatex -interaction=nonstopmode quark_scan_methodology_note.tex` was run twice after adding the methodology-note pointer; output is `docs/quark_scan_methodology_note.pdf` with 19 pages.
 - Local cluster bundle created at `artifacts/quarkscan_paper_rc1_manifest_bundle.tar.gz`; SHA256 sidecar records `5402d2ac035801b3a64711e22332ced7cf9bc7e926c0d4414f2a996a9b4b27b7`.
 
+## Peer-review revision
+
+- Unignored the canonical manifest bundle tarball and SHA256 sidecar while leaving heavyweight tar outputs ignored.
+- Added explicit paper-claim mapping rows for the rounded CFW-matched `23.4 TeV` RUNA-derived projection and CFW's external `10.5 TeV` Section 2 literature value.
+- Added the literal `canonical artifact manifest` anchor phrase to the methodology note and rebuilt `docs/quark_scan_methodology_note.pdf` twice with `pdflatex`.
+
 Hole #2 ready for peer review.
