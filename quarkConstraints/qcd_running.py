@@ -4,15 +4,20 @@ This module implements leading-log QCD running of the ΔF=2 Wilson coefficients
 from the KK matching scale (multi-TeV) down to the hadronic scale (μ = 2 GeV).
 The anomalous dimension matrix follows Buras, Misiak, and Urban (NPB 2000).
 
-Operator basis: {O1_VLL, O1_VRR, O4_LR, O5_LR} in the BMU convention.
+Operator basis: {O1_VLL, O1_VRR, O4_LR, O5_LR}.  The VLL/VRR operators are
+the BMU current-current operators.  The LR entries are the scalar O4/O5
+operators used with the code's B4/B5 matrix elements.  Their LO running is
+obtained from the BMU LR basis by the four-dimensional map
+``Q1_LR^BMU = 2 O5_LR`` and ``Q2_LR^BMU = O4_LR``.
 
 Key physics:
   - VLL and VRR operators run multiplicatively (no mixing with LR sector).
-  - O4_LR and O5_LR mix under QCD running via a 2×2 anomalous dimension matrix.
+  - O4_LR and O5_LR mix under QCD running via a 2×2 anomalous dimension matrix;
+    the large scalar-basis C5 -> C4 entry is the mapped BMU LR off-diagonal.
   - The LR operators receive significant enhancement from running, which
     strengthens the kaon mixing constraint.
 
-Threshold matching at m_b and m_c is implemented with continuous Wilson
+Threshold matching at m_t, m_b, and m_c is implemented with continuous Wilson
 coefficients (no finite matching corrections at leading order).
 """
 
@@ -28,24 +33,27 @@ import numpy as np
 
 _ALPHA_S_MZ_DEFAULT = 0.1179
 _MZ_DEFAULT = 91.1876
+_MT_DEFAULT = 163.5
 _MB_DEFAULT = 4.18
 _MC_DEFAULT = 1.27
 
 # ---------------------------------------------------------------------------
-# One-loop anomalous dimensions for ΔF=2 operators (BMU basis)
+# One-loop anomalous dimensions for ΔF=2 operators (BMU and mapped LR basis)
 # ---------------------------------------------------------------------------
 
 # VLL (same for VRR): single anomalous dimension.
 # γ_VLL = 6(N_c-1)/N_c = 4 for N_c=3.
-# Positive γ → coefficient ENHANCED at lower scales (standard BMU convention).
+# Positive γ → coefficient suppressed at lower scales in the BMU Wilson
+# evolution convention.
 _GAMMA_VLL = 4.0
 
-# LR sector: 2×2 anomalous dimension matrix acting on [C4_LR, C5_LR].
-# Positive eigenvalues → LR operators enhanced by QCD running to low scales.
-# The dominant eigenvalue gives the ~3-5× enhancement that drives RS kaon bounds.
+# BMU LR sector for coefficients ordered as [C1_LR^BMU, C2_LR^BMU] is
+# [[2, 0], [12, -16]].  The code stores scalar LR coefficients ordered as
+# [C4_LR, C5_LR], with C_BMU = (C5/2, C4).  Conjugating the BMU matrix gives
+# the scalar-basis coefficient ADM below.
 _GAMMA_LR = np.array([
-    [8.0,      -4.0],
-    [-16.0/3.0, -28.0/3.0],
+    [-16.0, 6.0],
+    [0.0, 2.0],
 ], dtype=float)
 
 
@@ -54,8 +62,10 @@ def _beta0(nf: int) -> float:
     return (33.0 - 2.0 * nf) / 3.0
 
 
-def _nf_for_scale(mu: float, *, m_b: float, m_c: float) -> int:
+def _nf_for_scale(mu: float, *, m_t: float, m_b: float, m_c: float) -> int:
     """Return the number of active quark flavors at scale μ."""
+    if mu > m_t:
+        return 6
     if mu > m_b:
         return 5
     if mu > m_c:
@@ -68,15 +78,16 @@ def run_alpha_s(
     *,
     alpha_s_mz: float = _ALPHA_S_MZ_DEFAULT,
     m_z: float = _MZ_DEFAULT,
+    m_t: float = _MT_DEFAULT,
     m_b: float = _MB_DEFAULT,
     m_c: float = _MC_DEFAULT,
 ) -> float:
-    """One-loop running of α_s with threshold matching at m_b and m_c.
+    """One-loop running of α_s with threshold matching at m_t, m_b, and m_c.
 
     The running uses the one-loop formula:
         α_s(μ) = α_s(μ_ref) / (1 + (β₀ α_s(μ_ref)/(2π)) ln(μ/μ_ref))
 
-    At each quark threshold (m_b, m_c), the coupling is matched continuously
+    At each quark threshold (m_t, m_b, m_c), the coupling is matched continuously
     and the number of active flavors changes.
 
     Parameters
@@ -87,6 +98,8 @@ def run_alpha_s(
         α_s at the Z mass (default 0.1179).
     m_z : float
         Z boson mass in GeV (default 91.1876).
+    m_t : float
+        Top quark threshold in GeV (default 163.5).
     m_b : float
         Bottom quark mass threshold in GeV (default 4.18).
     m_c : float
@@ -106,6 +119,8 @@ def run_alpha_s(
         raise ValueError("mu must be positive")
     if alpha_s_mz <= 0.0:
         raise ValueError("alpha_s_mz must be positive")
+    if not (m_c < m_b < m_z < m_t):
+        raise ValueError("thresholds must satisfy m_c < m_b < m_z < m_t")
 
     # Build the ordered list of thresholds between mu and m_z.
     # We always start at m_z and run to mu, crossing thresholds as needed.
@@ -126,16 +141,20 @@ def run_alpha_s(
             )
         return alpha_ref / denominator
 
-    # Collect thresholds between min(mu, m_z) and max(mu, m_z)
     if mu >= m_z:
-        # Running upward: nf=5 throughout (above m_z, we stay at nf=5)
-        return _run_segment(alpha_s_mz, m_z, mu, 5)
+        # Running upward from alpha_s^(5)(M_Z), crossing the top threshold if
+        # needed.  Matching is continuous at LO.
+        if mu <= m_t:
+            return _run_segment(alpha_s_mz, m_z, mu, 5)
+        alpha_at_top = _run_segment(alpha_s_mz, m_z, m_t, 5)
+        return _run_segment(alpha_at_top, m_t, mu, 6)
 
     # Running downward from m_z
     alpha_current = alpha_s_mz
     mu_current = m_z
 
-    # Thresholds to cross, ordered from high to low
+    # Thresholds to cross, ordered from high to low.  M_Z is below m_t, so the
+    # downward path from the default reference point only crosses b and c.
     thresholds = [(m_b, 5, 4), (m_c, 4, 3)]
 
     for threshold, nf_above, nf_below in thresholds:
@@ -157,11 +176,11 @@ def _vll_evolution_factor(
 ) -> float:
     """Compute the VLL/VRR evolution factor for one nf segment.
 
-    U_VLL = (α_s(μ_low)/α_s(μ_high))^(γ_VLL/(2β₀))
+    U_VLL = (α_s(μ_high)/α_s(μ_low))^(γ_VLL/(2β₀))
     """
     b0 = _beta0(nf)
     exponent = _GAMMA_VLL / (2.0 * b0)
-    return (alpha_s_low / alpha_s_high) ** exponent
+    return (alpha_s_high / alpha_s_low) ** exponent
 
 
 def _lr_evolution_matrix(
@@ -171,12 +190,12 @@ def _lr_evolution_matrix(
 ) -> np.ndarray:
     """Compute the 2×2 LR evolution matrix for one nf segment.
 
-    U_LR = M × diag((α_s_low/α_s_high)^(d_i/(2β₀))) × M⁻¹
+    U_LR = M × diag((α_s_high/α_s_low)^(d_i/(2β₀))) × M⁻¹
 
     where d_i are the eigenvalues of γ_LR and M is the eigenvector matrix.
     """
     b0 = _beta0(nf)
-    ratio = alpha_s_low / alpha_s_high
+    ratio = alpha_s_high / alpha_s_low
 
     # Diagonalize the anomalous dimension matrix
     eigenvalues, M = np.linalg.eig(_GAMMA_LR)
@@ -200,13 +219,14 @@ def evolve_deltaf2_wilsons(
     *,
     alpha_s_mz: float = _ALPHA_S_MZ_DEFAULT,
     m_z: float = _MZ_DEFAULT,
+    m_t: float = _MT_DEFAULT,
     m_b: float = _MB_DEFAULT,
     m_c: float = _MC_DEFAULT,
 ) -> tuple[complex, complex, complex, complex]:
     """Evolve ΔF=2 Wilson coefficients from mu_high to mu_low using LO QCD RG.
 
     The evolution uses leading-log anomalous dimensions from Buras, Misiak,
-    and Urban (NPB 2000). Threshold matching at m_b and m_c is handled with
+    and Urban (NPB 2000). Threshold matching at m_t, m_b, and m_c is handled with
     continuous Wilson coefficients.
 
     Parameters
@@ -223,6 +243,8 @@ def evolve_deltaf2_wilsons(
         α_s(M_Z) (default 0.1179).
     m_z : float
         Z mass in GeV.
+    m_t : float
+        t quark threshold in GeV.
     m_b : float
         b quark threshold in GeV.
     m_c : float
@@ -248,12 +270,12 @@ def evolve_deltaf2_wilsons(
         raise ValueError("mu_high must be positive")
 
     alpha_s_kwargs = dict(
-        alpha_s_mz=alpha_s_mz, m_z=m_z, m_b=m_b, m_c=m_c,
+        alpha_s_mz=alpha_s_mz, m_z=m_z, m_t=m_t, m_b=m_b, m_c=m_c,
     )
 
     # Determine which thresholds lie between mu_low and mu_high
     thresholds = sorted(
-        [t for t in [m_b, m_c] if mu_low < t < mu_high],
+        [t for t in [m_t, m_b, m_c] if mu_low < t < mu_high],
         reverse=True,
     )
 
@@ -268,7 +290,7 @@ def evolve_deltaf2_wilsons(
     for i in range(len(boundaries) - 1):
         mu_upper = boundaries[i]
         mu_lower = boundaries[i + 1]
-        nf = _nf_for_scale(mu_upper, m_b=m_b, m_c=m_c)
+        nf = _nf_for_scale(mu_upper, m_t=m_t, m_b=m_b, m_c=m_c)
 
         alpha_upper = run_alpha_s(mu_upper, **alpha_s_kwargs)
         alpha_lower = run_alpha_s(mu_lower, **alpha_s_kwargs)

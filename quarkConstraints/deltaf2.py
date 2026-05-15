@@ -573,7 +573,9 @@ def _evolve_wilsons(
     """Return a new DeltaF2WilsonCoefficients with QCD-evolved coefficients.
 
     Uses leading-log QCD RG evolution from the matching scale (M_KK) down to
-    mu_had, following the anomalous dimensions of Buras, Misiak, Urban (2000).
+    mu_had.  VLL/VRR use the BMU current-current anomalous dimension, while
+    the scalar LR coefficients C4_LR/C5_LR are evolved by mapping the BMU
+    Q1_LR/Q2_LR block into the code basis used by the B4/B5 matrix elements.
     """
     from .qcd_running import evolve_deltaf2_wilsons
 
@@ -660,11 +662,12 @@ MESON_HADRONIC_PARAMS_V1 = "meson_hadronic_params_bmu_2gev_v1"
 
 
 def _kaon_matrix_elements() -> dict[str, float]:
-    """Compute kaon hadronic matrix elements in the BMU basis at mu = 2 GeV.
+    """Compute kaon matrix elements in the code's O1/O4/O5 basis.
 
     Returns a dict with keys 'O1_VLL', 'O4_LR', 'O5_LR' giving the real-valued
     hadronic matrix elements <K-bar|O_i|K> for each operator.  O1_VRR has the
-    same matrix element as O1_VLL by parity.
+    same matrix element as O1_VLL by parity.  O4_LR/O5_LR are the scalar LR
+    operators paired with the FLAG B4/B5 bag parameters.
     """
     fk2_mk = F_K**2 * M_K
     m_ratio_sq = (M_K / (M_S_2GEV + M_D_2GEV)) ** 2

@@ -100,11 +100,13 @@ def test_deltaf2_pass_fail_uses_dominant_operator_not_coherent_cancellation():
     )
     kaon = summary.get("epsilon_k")
 
-    # With QCD running the LR operators are enhanced, so coherent_amplitude
-    # now exceeds the bound as well.  The important invariant is that pass/fail
-    # is decided by the dominant single operator, not the coherent sum.
+    # The important invariant is that pass/fail is decided by the dominant
+    # single operator, not the coherent sum.
     assert np.isclose(kaon.effective_amplitude, kaon.dominant_operator_size)
-    assert kaon.dominant_operator == "C4_LR"
+    assert kaon.dominant_operator == max(
+        kaon.weighted_operator_sizes,
+        key=kaon.weighted_operator_sizes.get,
+    )
     assert not kaon.passes
 
 
@@ -118,10 +120,11 @@ def test_audited_deltaf2_hadronic_constants_match_selected_sources():
 def test_default_benchmark_point_has_stable_deltaf2_outputs():
     summary = evaluate_delta_f2_constraints(_fit_result(0.25), M_KK=3000.0)
 
-    # With proper hadronic matrix elements (default since the v2 update),
-    # all four systems pass at M_KK = 3 TeV for the benchmark point.
-    assert summary.get("epsilon_k").ratio_to_bound < 1.0
+    # The Wilson-RG audit tightened the epsilon_K path; this benchmark is now
+    # a stable epsilon_K fail while the other hadronic systems still pass.
+    assert np.isclose(summary.get("epsilon_k").ratio_to_bound, 2.367673073409882)
+    assert summary.get("epsilon_k").ratio_to_bound > 1.0
     assert summary.get("b_d").ratio_to_bound < 1.0
     assert summary.get("b_s").ratio_to_bound < 1.0
     assert summary.get("d").ratio_to_bound < 1.0
-    assert summary.passes_all
+    assert not summary.passes_all

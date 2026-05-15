@@ -4,15 +4,16 @@ Tests cover:
   - alpha_s running: reference value, asymptotic freedom, known values, threshold
     continuity, positivity
   - Wilson coefficient evolution: near-identity at close scales, VLL/VRR
-    enhancement, LR mixing and eigenvalue structure, composition, linearity,
+    suppression, LR mixing and eigenvalue structure, composition, linearity,
     phase preservation, operator sector isolation, known factors
   - Integration with epsilon_K: running modifies Wilson coefficients consistently
 
 The module implements one-loop alpha_s running and leading-log RG evolution with
-the anomalous dimensions gamma_VLL = +4 and the 2x2 LR matrix from Buras,
-Misiak, and Urban (NPB 2000).  In the standard BMU convention, VLL/VRR are
-*enhanced* when running to lower scales, and the LR sector has one enhanced
-eigenvalue and one suppressed eigenvalue.
+the anomalous dimensions gamma_VLL = +4 and the 2x2 LR matrix obtained by
+mapping the Buras-Misiak-Urban LR block into the scalar C4/C5 basis used by
+deltaf2.py.  In the standard BMU Wilson-evolution convention, VLL/VRR are
+suppressed when running to lower scales, and the scalar LR sector has an
+enhanced C4 eigenvalue plus a large C5 -> C4 off-diagonal.
 """
 
 import sys
@@ -141,10 +142,11 @@ class TestRunAlphaS:
 class TestEvolveDeltaF2Wilsons:
     """Tests for the evolve_deltaf2_wilsons RG evolution.
 
-    In the BMU convention, gamma_VLL = +4. This produces a VLL
-    *enhancement* factor when running down (mu_high -> mu_low < mu_high).
-    The LR anomalous dimension matrix has one enhanced eigenvalue and one
-    suppressed eigenvalue.
+    In the BMU Wilson-evolution convention, gamma_VLL = +4. This produces a
+    VLL suppression factor when running down (mu_high -> mu_low < mu_high).
+    The scalar LR anomalous dimension matrix has one enhanced C4 eigenvalue,
+    one mildly suppressed C5 eigenvalue, and a large C5 -> C4 mixing entry
+    inherited from the BMU LR off-diagonal.
     """
 
     def test_near_identity_at_close_scales(self):
@@ -180,27 +182,25 @@ class TestEvolveDeltaF2Wilsons:
         with pytest.raises(ValueError):
             evolve_deltaf2_wilsons(1.0, 0.0, 0.0, 0.0, 1.0, 3.0)
 
-    def test_vll_enhancement_from_high_to_low_scale(self):
-        """C_VLL should be enhanced when running from 3 TeV to 2 GeV.
+    def test_vll_suppression_from_high_to_low_scale(self):
+        """C_VLL should be suppressed when running from 3 TeV to 2 GeV.
 
         With gamma_VLL = +4 in the BMU convention, the leading-log factor is
-            (alpha_s(low)/alpha_s(high))^(gamma_VLL/(2*beta_0))
-        Since alpha_s(low) > alpha_s(high), the ratio > 1. With gamma_VLL > 0,
-        the exponent > 0, so the factor > 1 (enhancement).
-        The expected enhancement factor is ~1.3-1.5 from 3 TeV to 2 GeV.
+            (alpha_s(high)/alpha_s(low))^(gamma_VLL/(2*beta_0))
+        Since alpha_s(high) < alpha_s(low), the factor is below 1.
         """
         c_vll_in = 1.0
         result = evolve_deltaf2_wilsons(c_vll_in, 0.0, 0.0, 0.0, _M_KK, 2.0)
         c_vll_out = abs(result[0])
 
-        enhancement = c_vll_out / abs(c_vll_in)
-        assert 1.1 < enhancement < 2.0, (
-            f"VLL enhancement factor = {enhancement}, expected in [1.1, 2.0]"
+        suppression = c_vll_out / abs(c_vll_in)
+        assert 0.6 < suppression < 0.9, (
+            f"VLL suppression factor = {suppression}, expected in [0.6, 0.9]"
         )
 
     def test_vrr_same_factor_as_vll(self):
         """VRR should receive the same evolution factor as VLL since they
-        share the same anomalous dimension gamma = -4.
+        share the same anomalous dimension gamma = +4.
         """
         result = evolve_deltaf2_wilsons(1.0, 1.0, 0.0, 0.0, _M_KK, 2.0)
         assert np.isclose(abs(result[0]), abs(result[1]), rtol=1e-10), (
@@ -211,8 +211,9 @@ class TestEvolveDeltaF2Wilsons:
         """The LR evolution matrix should have one enhanced and one suppressed
         eigenvalue.
 
-        From 3 TeV to 2 GeV, the dominant LR eigenvalue should be ~2.0-3.0
-        (enhancement) and the subdominant should be < 1.0 (suppression).
+        From 3 TeV to 2 GeV, the C4 eigenvalue is strongly enhanced and the C5
+        eigenvalue is mildly suppressed in the scalar basis; the off-diagonal
+        inherited from BMU sends high-scale C5 into low-scale C4.
         """
         # Build the 2x2 evolution matrix from two basis runs
         r_c4 = evolve_deltaf2_wilsons(0.0, 0.0, 1.0, 0.0, _M_KK, 2.0)
@@ -225,29 +226,22 @@ class TestEvolveDeltaF2Wilsons:
         eigenvalues = np.linalg.eigvals(U)
         eig_abs = sorted([abs(e) for e in eigenvalues])
 
-        # Subdominant: suppressed
-        assert eig_abs[0] < 1.0, (
-            f"Subdominant LR eigenvalue = {eig_abs[0]}, expected < 1.0"
+        assert 0.7 < eig_abs[0] < 1.0, (
+            f"Subdominant LR eigenvalue = {eig_abs[0]}, expected in [0.7, 1.0]"
         )
-        # Dominant: enhanced
-        assert eig_abs[1] > 1.5, (
-            f"Dominant LR eigenvalue = {eig_abs[1]}, expected > 1.5"
-        )
-        assert eig_abs[1] < 4.0, (
-            f"Dominant LR eigenvalue = {eig_abs[1]}, expected < 4.0"
+        assert 3.0 < eig_abs[1] < 4.0, (
+            f"Dominant LR eigenvalue = {eig_abs[1]}, expected in [3.0, 4.0]"
         )
 
-    def test_lr_mixing_c4_generates_c5(self):
-        """C4 and C5 mix under running. Starting with C4=1, C5=0 should give
-        nonzero C5 at the low scale.
-        """
+    def test_lr_mixing_c4_does_not_generate_c5_at_lo(self):
+        """Starting with C4=1, C5=0 does not generate C5 in the scalar LO basis."""
         result = evolve_deltaf2_wilsons(0.0, 0.0, 1.0, 0.0, _M_KK, 2.0)
-        assert abs(result[3]) > 1e-3, (
-            f"C5_LR should be nonzero after running with C4 input, got {result[3]}"
+        assert abs(result[3]) < 1e-12, (
+            f"C5_LR should remain zero after running with C4 input, got {result[3]}"
         )
 
     def test_lr_mixing_c5_generates_c4(self):
-        """Starting with C5=1, C4=0 should give nonzero C4 at the low scale."""
+        """Starting with C5=1, C4=0 generates C4 through the mapped BMU block."""
         result = evolve_deltaf2_wilsons(0.0, 0.0, 0.0, 1.0, _M_KK, 2.0)
         assert abs(result[2]) > 1e-3, (
             f"C4_LR should be nonzero after running with C5 input, got {result[2]}"
@@ -350,17 +344,17 @@ class TestEvolveDeltaF2Wilsons:
         )
 
     def test_known_vll_factor_from_leading_log_formula(self):
-        """Verify VLL enhancement factor against an independent leading-log
+        """Verify VLL suppression factor against an independent leading-log
         calculation using run_alpha_s.
 
         The factor for each nf segment is:
-            (alpha_s(mu_low)/alpha_s(mu_high))^(gamma_VLL/(2*beta_0))
+            (alpha_s(mu_high)/alpha_s(mu_low))^(gamma_VLL/(2*beta_0))
         with gamma_VLL = +4.
 
-        We test the single-segment case (mu > m_b, nf=5) to avoid threshold
+        We test the single-segment case (m_b < mu < m_t, nf=5) to avoid threshold
         subtleties.
         """
-        mu_high = 1000.0
+        mu_high = 100.0
         mu_low = 10.0  # both above m_b, so single nf=5 segment
         gamma_vll = 4.0
         nf = 5
@@ -368,7 +362,7 @@ class TestEvolveDeltaF2Wilsons:
 
         alpha_high = run_alpha_s(mu_high)
         alpha_low = run_alpha_s(mu_low)
-        expected_factor = (alpha_low / alpha_high) ** (gamma_vll / (2.0 * beta_0))
+        expected_factor = (alpha_high / alpha_low) ** (gamma_vll / (2.0 * beta_0))
 
         result = evolve_deltaf2_wilsons(1.0, 0.0, 0.0, 0.0, mu_high, mu_low)
         actual_factor = abs(result[0])
@@ -381,19 +375,20 @@ class TestEvolveDeltaF2Wilsons:
         """The determinant of the 2x2 LR evolution matrix should equal
         the product of eigenvalues from the anomalous dimension matrix.
 
-        For a single segment, det(U_LR) = (alpha_low/alpha_high)^(Tr(gamma_LR)/(2*beta_0)).
+        For a single segment, det(U_LR) = (alpha_high/alpha_low)^(Tr(gamma_LR)/(2*beta_0)).
         """
-        mu_high = 1000.0
+        mu_high = 100.0
         mu_low = 10.0  # single nf=5 segment
         nf = 5
         beta_0 = (33.0 - 2.0 * nf) / 3.0
 
-        # gamma_LR trace: 8 - 28/3 = (24-28)/3 = -4/3
-        gamma_lr_trace = 8.0 - 28.0 / 3.0
+        # gamma_LR trace in the scalar [C4_LR, C5_LR] coefficient basis:
+        # -16 + 2 = -14.
+        gamma_lr_trace = -14.0
 
         alpha_high = run_alpha_s(mu_high)
         alpha_low = run_alpha_s(mu_low)
-        expected_det = (alpha_low / alpha_high) ** (gamma_lr_trace / (2.0 * beta_0))
+        expected_det = (alpha_high / alpha_low) ** (gamma_lr_trace / (2.0 * beta_0))
 
         r_c4 = evolve_deltaf2_wilsons(0.0, 0.0, 1.0, 0.0, mu_high, mu_low)
         r_c5 = evolve_deltaf2_wilsons(0.0, 0.0, 0.0, 1.0, mu_high, mu_low)
@@ -416,7 +411,7 @@ class TestEvolveDeltaF2Wilsons:
 class TestEpsilonKWithRunning:
     """Integration tests: epsilon_K with and without QCD running.
 
-    In the BMU convention, VLL is enhanced and the LR sector has a mixed
+    In the BMU convention, VLL is suppressed and the LR sector has a mixed
     enhancement/suppression eigenvalue structure. The net effect on
     epsilon_K depends on the relative sizes and phases of the tree-level
     Wilson coefficients. These tests verify that the evolution is applied
@@ -508,10 +503,10 @@ class TestEpsilonKWithRunning:
                 f"{name} is not finite after evolution: {evolved[i]}"
             )
 
-        # The evolved VLL/VRR should be larger in magnitude (enhanced)
+        # The evolved VLL/VRR should be smaller in magnitude (suppressed)
         if abs(w.c1_vll) > 1e-30:
-            assert abs(evolved[0]) > abs(w.c1_vll), (
-                f"VLL should be enhanced: |evolved| = {abs(evolved[0])}, "
+            assert abs(evolved[0]) < abs(w.c1_vll), (
+                f"VLL should be suppressed: |evolved| = {abs(evolved[0])}, "
                 f"|tree| = {abs(w.c1_vll)}"
             )
 
