@@ -1,0 +1,135 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0
+rootdir: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing
+configfile: pyproject.toml
+plugins: timeout-2.4.0
+collected 14 items
+
+tests/test_quark_fit.py ...F......F...                                   [100%]
+
+=================================== FAILURES ===================================
+_________ test_fit_quark_sector_is_invariant_under_quotient_directions _________
+
+    @pytest.mark.xfail(
+        reason=(
+            "Legacy default_spurion_seed was tuned for the pre-PDG ad-hoc targets. "
+            "Under the PDG-2024 MS-bar targets the two quotient-equivalent seeds "
+            "land in nearby (but distinct) local minima, so the strict 2e-4 "
+            "cross-seed residual invariance no longer holds. Re-deriving the "
+            "benchmark seed near a unique PDG-target minimum is tracked "
+            "separately; the score-equality and canonical-seed claims still hold."
+        ),
+        strict=False,
+    )
+    def test_fit_quark_sector_is_invariant_under_quotient_directions():
+        targets = default_quark_targets()
+        base_seed = _fit_seed_from_benchmark()
+        shifted_seed = _quotient_equivalent_seed(base_seed)
+    
+        base_solution = fit_quark_sector(targets, seed=base_seed, max_nfev=2000)
+        shifted_solution = fit_quark_sector(targets, seed=shifted_seed, max_nfev=2000)
+    
+        assert np.isclose(base_solution.initial_score, shifted_solution.initial_score, rtol=0.0, atol=1e-9)
+        assert np.isclose(base_solution.result.score, shifted_solution.result.score, rtol=0.0, atol=1e-8)
+        np.testing.assert_allclose(
+            base_solution.result.mass_residuals_up,
+            shifted_solution.result.mass_residuals_up,
+            rtol=0.0,
+            atol=2e-4,
+        )
+        np.testing.assert_allclose(
+            base_solution.result.mass_residuals_down,
+            shifted_solution.result.mass_residuals_down,
+            rtol=0.0,
+            atol=2e-4,
+        )
+        np.testing.assert_allclose(
+            base_solution.result.ckm_residuals,
+            shifted_solution.result.ckm_residuals,
+            rtol=0.0,
+            atol=3e-7,
+        )
+>       np.testing.assert_allclose(
+            encode_quark_fit_canonical_vector(base_solution.seed),
+            encode_quark_fit_canonical_vector(shifted_solution.seed),
+            rtol=0.0,
+            atol=5e-6,
+        )
+E       AssertionError: 
+E       Not equal to tolerance rtol=0, atol=5e-06
+E       
+E       Mismatched elements: 6 / 14 (42.9%)
+E       First 5 mismatches are at indices:
+E        [0]: -0.9122987106046175 (ACTUAL), -0.907182339510164 (DESIRED)
+E        [1]: -0.07006844971388457 (ACTUAL), -0.0652854666986295 (DESIRED)
+E        [2]: 1.2442929129225182 (ACTUAL), 1.2434367571248253 (DESIRED)
+E        [3]: -0.781257342811244 (ACTUAL), -0.7655673470900248 (DESIRED)
+E        [4]: -0.44424231962283794 (ACTUAL), -0.44755352920814406 (DESIRED)
+E       Max absolute difference among violations: 0.01569
+E       Max relative difference among violations: 0.0732626
+E        ACTUAL: array([-0.912299, -0.070068,  1.244293, -0.781257, -0.444242, -0.215175,
+E               0.      ,  0.      ,  0.      ,  0.      ,  0.2274  ,  0.00368 ,
+E               0.0415  ,  1.10925 ])
+E        DESIRED: array([-0.907182, -0.065285,  1.243437, -0.765567, -0.447554, -0.216404,
+E               0.      ,  0.      ,  0.      ,  0.      ,  0.2274  ,  0.00368 ,
+E               0.0415  ,  1.10925 ])
+
+tests/test_quark_fit.py:186: AssertionError
+_______ test_fit_orientation_false_remains_deterministic_and_restricted ________
+
+    @pytest.mark.xfail(
+        reason=(
+            "Same root cause as test_fit_quark_sector_is_invariant_under_quotient_directions: "
+            "legacy benchmark seed lands fit_orientation=False solutions in distinct local "
+            "minima under PDG-2024 targets. The deterministic-and-restricted seed-property "
+            "claims (overall_scale=1, identity rotations, sorted singular values) still hold."
+        ),
+        strict=False,
+    )
+    def test_fit_orientation_false_remains_deterministic_and_restricted():
+        targets = default_quark_targets()
+        base_seed = _fit_seed_from_benchmark()
+        shifted_seed = _quotient_equivalent_seed(base_seed)
+    
+        base_solution = fit_quark_sector(
+            targets,
+            seed=base_seed,
+            max_nfev=2000,
+            fit_orientation=False,
+        )
+        shifted_solution = fit_quark_sector(
+            targets,
+            seed=shifted_seed,
+            max_nfev=2000,
+            fit_orientation=False,
+        )
+    
+        np.testing.assert_allclose(
+            base_solution.initial_score,
+            shifted_solution.initial_score,
+            rtol=0.0,
+            atol=1e-9,
+        )
+>       np.testing.assert_allclose(
+            base_solution.result.masses_up,
+            shifted_solution.result.masses_up,
+            rtol=0.0,
+            atol=2e-4,
+        )
+E       AssertionError: 
+E       Not equal to tolerance rtol=0, atol=0.0002
+E       
+E       Mismatched elements: 2 / 3 (66.7%)
+E       Mismatch at indices:
+E        [1]: 0.6044365106628246 (ACTUAL), 0.5907030182740951 (DESIRED)
+E        [2]: 155.72614454726363 (ACTUAL), 249.02679747167505 (DESIRED)
+E       Max absolute difference among violations: 93.30065292
+E       Max relative difference among violations: 0.3746611
+E        ACTUAL: array([1.200731e-03, 6.044365e-01, 1.557261e+02])
+E        DESIRED: array([1.071363e-03, 5.907030e-01, 2.490268e+02])
+
+tests/test_quark_fit.py:529: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_quark_fit.py::test_fit_quark_sector_is_invariant_under_quotient_directions
+FAILED tests/test_quark_fit.py::test_fit_orientation_false_remains_deterministic_and_restricted
+========================= 2 failed, 12 passed in 6.22s =========================
