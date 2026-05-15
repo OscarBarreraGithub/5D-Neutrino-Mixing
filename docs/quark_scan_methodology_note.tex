@@ -89,7 +89,9 @@ from and how a random draw can satisfy PDG masses without any fitting.
 $\Mkk$ bound and its sensitivity to the gate definition.
 \S\ref{sec:robustness} reports five follow-up scans that probe how the
 bound responds to statistics, the $c$-pattern, the $Y$-prior, the
-PDG-gate tightness, and the CFW comparison.
+PDG-gate tightness, and the CFW comparison.  Appendix~\ref{app:scope-and-approximations}
+collects the scope and approximation caveats for the KK tower, EWPO floor,
+gauge-coupling convention, and lepton sector.
 
 %% =====================================================================
 \section{What ``new physics'' is in this scan}
@@ -98,7 +100,9 @@ PDG-gate tightness, and the CFW comparison.
 The 5D Randall--Sundrum model has, in addition to the Standard Model fields,
 an infinite tower of Kaluza--Klein (KK) excitations of every gauge boson and
 fermion. The lightest gluon excitation is the ``KK-gluon''; its mass
-$\Mkk$ is the headline number we are trying to constrain.
+$\Mkk$ is the headline number we are trying to constrain. The scan below
+keeps this lightest colour-octet mode only; the higher-mode tower
+truncation is treated in Appendix~\ref{app:scope-and-approximations}.
 
 The KK-gluon is a colour-octet vector boson whose 5D wave function peaks
 at the IR brane. Crucially, its couplings to the SM quarks are
@@ -108,7 +112,7 @@ weakly. This non-universality is exactly what gives the model its
 attractive flavour-hierarchy explanation, but it is also what generates new
 flavour-changing neutral currents.
 
-When one integrates out the KK-gluon, the resulting effective four-quark
+When one integrates out the lightest KK-gluon, the resulting effective four-quark
 operators contribute to neutral meson mixing in five places:
 \begin{equation}
   \eK,\quad \dmK,\quad \dmBd,\quad \dmBs,\quad \dmD.
@@ -277,11 +281,11 @@ multiplicative factor that depends on how the gauge coupling enters the
 ratio formula. Since $\mathrm{ratio}\propto g^2/\Mkk^2$, switching from
 $\gsfour\!\approx\!1.05$ to $\gs = 3$ multiplies every ratio by
 $(3/1.05)^2 \approx 8.2$, so a fixed acceptance threshold is reached at
-a $\Mkk$ value larger by a factor of $\sqrt{8.2}\approx 2.9$. Switching to
-$\gs = 6$ moves the bound by $\sqrt{(6/1.05)^2}\approx 5.7$. We report all
-of our headline numbers in both perturbative and $\gs = 3$ conventions
-explicitly; the reader who prefers $\gs = 6$ should multiply our
-$\gs = 3$ numbers by a further $\sim 2$.
+a $\Mkk$ value larger by a factor of $\sqrt{8.2}\approx 2.9$. In this
+paper the headline convention is $\gs=3$; perturbative $g_s\simeq1.05$
+numbers are reported as the code-default cross-reference.  The
+$\gs\simeq6$ convention is used only for the CFW boundary-term comparison,
+as summarized in Appendix~\ref{app:scope-and-approximations}.
 
 %% =====================================================================
 \section{Why the envelope plot is an existence statement}
@@ -565,8 +569,8 @@ draws gives Fig.~\ref{fig:mkk-min-hist}.
   restricted to draws that pass the factor-of-three PDG mass and CKM
   match ($1{,}532{,}640$ draws total from the 8M-draw RUNA reference
   scan, pooled across all eight $\Mkk$ tiles). The x-axis is in the
-  $\gs = 3$ convention (Csaki--Falkowski--Weiler-style), the
-  literature-standard for RS flavor anarchy. The grey background is all
+  $\gs = 3$ convention, the headline convention used throughout this
+  note. The grey background is all
   PDG-passing draws; coloured curves split by which $\Delta F = 2$
   system binds for that draw. The vast majority are $\eK$-bound; the
   $\dmK,\dmBd,\dmBs,\dmD$ contributions live in the low-$\Mkk^{\min}$
@@ -575,13 +579,12 @@ draws gives Fig.~\ref{fig:mkk-min-hist}.
   \label{fig:mkk-min-hist}
 \end{figure}
 
-The 50\%-acceptance crossing is at $\Mkk = 16.54$~TeV (perturbative
-$g_s$) or $47.26$~TeV ($\gs = 3$); the 95\%-acceptance crossing is at
-$44.50$~TeV / $127.13$~TeV. These are the headline numbers of this analysis,
-quoted from the post-audit 8M-draw RUNA reference scan
-(\S\ref{sec:robustness}). They are conditional on the BGS~2020 central
-$\eK$ SM prediction and on the leading-log Wilson-RG convention audited in
-Appendix~\ref{app:input-audits}.
+The $\gs=3$ headline crossings are $\Mkk = 47.26$~TeV at $50\%$
+acceptance and $127.13$~TeV at $95\%$ acceptance.  The corresponding
+perturbative code-default crossings are $16.54$~TeV and $44.50$~TeV.
+These are quoted from the post-audit 8M-draw RUNA reference scan
+(\S\ref{sec:robustness}) under the input and scope conventions summarized
+in Appendix~\ref{app:input-audits}.
 
 \begin{figure}[h]
   \centering
@@ -662,7 +665,7 @@ statement is
 \begin{quote}\itshape
   Under an $\mathcal{O}(1)$ anarchic prior on the 5D Yukawa entries,
   $\Mkk \gtrsim 44.5$~TeV (perturbative $g_s$) to $\gtrsim 127$~TeV
-  (strong-coupling $\gs = 3$) at $95\%$ acceptance, with a further factor
+  (headline $\gs = 3$) at $95\%$ acceptance, with a further factor
   $\sim 1.5$ uplift if one demands that the new physics fit inside half
   the SM--data budget rather than saturate it.
 \end{quote}
@@ -717,13 +720,13 @@ Appendix~\ref{app:input-audits} gives
 \]
 for the central RUNA percentile, with the same scale factor giving
 $16.54^{+24.28}_{-8.74}$~TeV in the perturbative convention. This is a
-BGS-budget band, not an NLO Wilson-RG uncertainty; the latter remains an
-order-$10$--$30\%$ theory systematic.
+BGS-budget band; the Wilson-RG and KK-tower systematics are summarized
+in Appendix~\ref{app:input-audits}.
 
 \paragraph{Conclusion.} The headline numbers of \S\ref{sec:result} are
 not a Monte-Carlo fluctuation. They are the converged value of the
 underlying $\Mkk^{\min}$ percentiles of the anarchic ensemble, to within
-$0.5\%$ under the central BGS + LO-only conventions.
+$0.5\%$ under the central BGS input and first-mode/LO scope conventions.
 
 \subsection{$c$-pattern sensitivity (Run~3)}
 \label{sec:robust-cvals}
@@ -966,13 +969,13 @@ PDG-pass population thins sharply under factor-$2$ and factor-$1.5$
 gate tightening, with the surviving $\Mkk^{\min}$ shape essentially
 unchanged (\S\ref{sec:robust-pdg-tightness}); and the CFW comparison is
 factor-$2.2$ stronger than the 2008 reference once the $g_s^\star$
-conventions are matched.  Under our live BGS + FLAG + LO-only conventions
-the p50 value is $47.26$~TeV at $\gs=3$; the CFW no-UV-boundary-term RS
-marker at the same convention is $10.5$~TeV, while its default
-$\gs\simeq6$ marker is $21$~TeV (\S\ref{sec:robust-cfw}).  The residual is
-attributable to newer $\epsilon_K^{\rm SM}$, FLAG bag inputs, and the
-audited LO BMU sign convention rather than to a percent-level reproduction
-of the CFW number.
+conventions are matched.  Under the central BGS/FLAG inputs and the scope
+conventions in Appendix~\ref{app:input-audits}, the p50 value is
+$47.26$~TeV at $\gs=3$; the CFW no-UV-boundary-term RS marker at the same
+convention is $10.5$~TeV, while its default $\gs\simeq6$ marker is
+$21$~TeV (\S\ref{sec:robust-cfw}).  The residual is attributable to newer
+$\epsilon_K^{\rm SM}$, FLAG bag inputs, and the audited LO BMU sign
+convention rather than to a percent-level reproduction of the CFW number.
 
 The PDG/$\msbar$ work is not wasted: it is what lets us identify a
 ``PDG-passing'' subset of the anarchic ensemble in a defensible,
