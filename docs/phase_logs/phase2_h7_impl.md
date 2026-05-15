@@ -60,8 +60,8 @@ Arithmetic:
 1. Start: `47.25701 TeV` (BGS 2020, FLAG 2024, LO RG, factor-3 mass/CKM gate, factor-5 `J`, `g_s^*=3`).
 2. Switch to legacy `epsilon_K^SM=1.81e-3`: budget changes from `6.70e-5` to `4.18e-4`, so `47.25701 / sqrt(4.18e-4 / 6.70e-5) = 18.92 TeV`.
 3. Apply CFW 30% relative mass/CKM/`J` gate: empirical forward subset gives `23.37157 TeV` (`217` rows). This gate hardens the fixed-c forward subset instead of lowering it.
-4. Coupling convention: the regenerated figure is in common `g_s^*=3` units, so the plotted reproduction is `23.37 TeV`. Literal rescaling to `g_s^*=6` would give `46.74 TeV`; this is reported as the coupling-convention caveat, not used for the common-convention agreement claim.
-5. Comparison: `23.37 TeV` vs CFW `21 TeV` differs by `11.3%`, so the common-convention reproduction is qualitatively consistent at the 20% level. The literal `g_s^*=6` comparison is not within 20% and remains a documented convention ambiguity.
+4. Coupling convention: CFW's RS marker is `10.5 TeV` in the no-UV-boundary-term `g_s^*=3` variant and `21 TeV` in the default boundary-term `g_s^*~6` setup. The matched projection is `23.37 TeV` at `g_s^*=3`, or `46.74 TeV` after rescaling to `g_s^*~6`.
+5. Comparison: `23.37157/10.5 = 2.23` and `46.74314/21 = 2.23`. The corrected conclusion is a factor-2.2 stronger post-audit bound at matched conventions, not a percent-level reproduction of CFW's 2008 number.
 
 ## Methodology-note update summary
 
@@ -70,7 +70,7 @@ Updated `docs/quark_scan_methodology_note.tex` and rebuilt `docs/quark_scan_meth
 Changes:
 
 - Replaced the prior Run C zero-pass/qualitative-only CFW wording with the quantitative convention-matched p50 value `23.37 TeV`.
-- Updated Fig. `robust-cfw` caption to describe the blue post-audit curve, red CFW-matched curve, and explicit `21/33 TeV` CFW markers.
+- Updated Fig. `robust-cfw` caption to describe the blue post-audit curve, red CFW-matched curve, and explicit `10.5/21/17/33 TeV` CFW convention markers.
 - Cited `docs/audits/cfw_convention_extract.md` and `docs/audits/cfw_reproduction.md` for provenance.
 - Corrected the earlier coupling-convention paragraph so it no longer says CFW simply uses `g_s^*=3` by default.
 - Rebuilt PDF: `pdfinfo docs/quark_scan_methodology_note.pdf` reports `Pages: 18`.
@@ -80,7 +80,56 @@ Changes:
 - `python scripts/rs_anarchy_cfw_comparison.py --run scan_outputs/rs_anarchy_runA_20260515T085316 --out-dir results/figures/quark --summary-out /tmp/cfw_default_summary.json --no-plot` reproduced p50 `47.26 TeV` and p95 `127.13 TeV`.
 - `python scripts/rs_anarchy_cfw_comparison.py --run scan_outputs/rs_anarchy_runA_20260515T085316 --out-dir results/figures/quark --eps-k-sm 1.81e-3 --pdg-relative-tolerance 0.30 --summary-out /tmp/cfw_matched_summary.json` regenerated `results/figures/quark/rs_anarchy_cfw_comparison.{pdf,png}`.
 - `pdflatex -interaction=nonstopmode quark_scan_methodology_note.tex` from `docs/` exited 0 after fixing the `\gs` double-superscript issue.
-- `pytest -q tests/test_cfw_comparison.py` -> `1 passed in 3.48s`.
+- `/n/home09/obarrera/.conda/envs/ising_bootstrap/bin/pytest -q tests/test_cfw_comparison.py` -> `2 passed in 16.23s`.
 - `pytest -q tests/test_cfw_comparison.py tests/test_quark_deltaf2.py tests/test_wilson_rg_audit.py tests/test_qcd_running.py` -> `36 passed in 9.45s`.
 
 Hole #7 ready for peer review.
+
+## Peer-review revision
+
+Reviewer finding: the first CFW reconciliation mixed `g_s^*` conventions.
+CFW's published RS `21 TeV` bound belongs to the boundary-term choice
+associated with `g_s^*~6`; the no-UV-boundary-term/running variant
+associated with `g_s^*~3` is `10.5 TeV`. The pGB `33 TeV` marker is
+likewise the small-boundary-term `g_s^*~6` setup, with the no-bare-brane
+variant around `17 TeV`.
+
+Corrected comparison numbers:
+
+- CFW-matched projection at common `g_s^*=3`: `23.37157 TeV`.
+- CFW RS marker at common `g_s^*=3`: `10.5 TeV`.
+- Ratio: `23.37157 / 10.5 = 2.23`.
+- Same comparison at common `g_s^*~6`: `46.74314 / 21 = 2.23`.
+- pGB markers now shown separately at `17 TeV` (`g_s^*=3` no-bare-brane)
+  and `33 TeV` (`g_s^*~6` default).
+
+Physical interpretation: the reconciliation is honest but not an
+agreement-within-errors reproduction. The post-audit pipeline gives a
+factor-2.2 stronger RS-anarchy bound at matched conventions. The residual
+is attributable to newer BGS-2020 `epsilon_K^SM` inputs, FLAG-2024 bag
+parameters, and the audited LO BMU-corrected sign convention relative to
+CFW's UTfit-era constraint inputs. Both analyses still point to
+`M_KK > O(10 TeV)` under anarchic flavor.
+
+Revision artifacts:
+
+- `scripts/rs_anarchy_cfw_comparison.py` now draws four CFW vertical
+  markers: RS `10.5/21 TeV` and pGB `17/33 TeV`.
+- `results/figures/quark/rs_anarchy_cfw_comparison.{pdf,png}` were
+  regenerated with `--eps-k-sm 1.81e-3 --pdg-relative-tolerance 0.30`.
+- `docs/quark_scan_methodology_note.tex` now leads the CFW subsection with
+  the factor-2.2 finding and includes the `n=217` finite-statistics caveat
+  (`[21, 26] TeV` Wilson-score p50 interval at `g_s^*=3`).
+- `docs/audits/cfw_reproduction.md` and `docs/audits/cfw_vs_ours.md` now
+  state the matched-convention factor-2.2 result.
+- `tests/test_cfw_comparison.py` now asserts the factor-2.2 matched
+  convention result.
+
+Verification:
+
+- `pdflatex -interaction=nonstopmode quark_scan_methodology_note.tex` from
+  `docs/` exited 0.
+- `/n/home09/obarrera/.conda/envs/ising_bootstrap/bin/pytest -q tests/test_cfw_comparison.py`
+  exited 0 with `2 passed`.
+
+Hole #7 ready for re-review.
