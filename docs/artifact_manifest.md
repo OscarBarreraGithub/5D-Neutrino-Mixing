@@ -39,6 +39,8 @@ Historical cross-check only: `scan_outputs/rs_anarchy_20260507T030811` is the ol
 | `docs/quark_scan_methodology_note.tex:836` | PDG-gate counts `1,532,640`, `110,519`, `1,164` | `rs_anarchy_runA_20260515T085316` | `results/figures/quark/rs_anarchy_mkk_min_hist_by_pdg_tightness.pdf` (`6f53e6aebbb90230df487da6c5a3a2743322f6903fb647d19148c35b114ae8c3`) |
 | `docs/quark_scan_methodology_note.tex:854` | RunC zero-pass finite-ensemble UL `p_pass <= 9.2e-7` | `rs_anarchy_runC_20260515T085323` | `results/figures/quark/rs_anarchy_cfw_comparison.pdf` (`b78b5d3c9d20fe22fc1136124da1057565a04a687b38d11068a0f81e23da6f95`) |
 | `docs/quark_scan_methodology_note.tex:889` | CFW comparison: factor `2.2` stronger; matched projection `23.37 TeV`; `n=217` | `rs_anarchy_runA_20260515T085316` | `results/figures/quark/rs_anarchy_cfw_comparison.pdf` (`b78b5d3c9d20fe22fc1136124da1057565a04a687b38d11068a0f81e23da6f95`) |
+| `docs/quark_scan_methodology_note.tex:892` | CFW-matched p50 projection quoted as `23.4 TeV` (rounded from `23.37 TeV`) | `rs_anarchy_runA_20260515T085316` (matched comparison computed from RUNA with plot-time CFW-era overrides) | `results/figures/quark/rs_anarchy_cfw_comparison.pdf` (`b78b5d3c9d20fe22fc1136124da1057565a04a687b38d11068a0f81e23da6f95`) |
+| `docs/quark_scan_methodology_note.tex:894` | CFW no-UV-boundary-term `g_s^*=3` reference quoted as `10.5 TeV` | external reference, CFW 0804.1954, Section 2 | literature value; no local scan dir |
 
 ## Audit dependency chain
 
