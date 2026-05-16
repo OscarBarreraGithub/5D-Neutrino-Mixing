@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/QjR3YXvOat4psM6wq8sttuVHAtM</id>
+  <title>arXiv Query: search_query=&amp;id_list=2105.10303&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-16T15:59:45Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2105.10303" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2105.10303v1</id>
+    <title>Updated measurement of $R_{K}$ at LHCb</title>
+    <updated>2021-05-21T12:10:06Z</updated>
+    <link href="https://arxiv.org/abs/2105.10303v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.10303v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the Standard Model of particle physics, charged leptons of different flavour couple to the electroweak force carriers with the same interaction strength. This property, known as lepton flavour universality, was found to be consistent with experimental evidence in a wide range of particle decays. Lepton flavour universality can be tested by comparing branching fractions in ratios such as $R_K = \mathcal{B}(B^+ \rightarrow K^+ μ^+ μ^-)/\mathcal{B}(B^+ \rightarrow K^+ e^+ e^-)$. This observable is measured using proton-proton collision data recorded with the LHCb detector at CERN's Large Hadron Collider corresponding to an integrated luminosity of $9 \rm{~fb}^{-1}$. For a dilepton invariant mass range of $q^{2} \in [1.1,6.0]~\rm{Ge}\kern -0.1em \rm{V}^{2}$, the measured value of $R_{K}=0.846\,^{+\,0.042}_{-\,0.039}\,^{+\,0.013}_{-\,0.012}$, where the first uncertainty is statistic and the second systematic, is in tension with the Standard Model predicted value at the $3.1σ$ level raising evidence for lepton flavour universality violation in $B^+ \rightarrow K^+ \ell^+ \ell^-$ decays.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-21T12:10:06Z</published>
+    <arxiv:primary_category term="hep-ex"/>
+    <author>
+      <name>Davide Lancierini</name>
+    </author>
+  </entry>
+</feed>

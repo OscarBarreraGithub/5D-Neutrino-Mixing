@@ -1,0 +1,88 @@
+% Flavor catalog per-process template.
+% process_id: B018
+% family: beauty
+% owner_agent_id: PKA-B018
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B018.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B018: \(R_K\) in \(B^+\to K^+\ell^+\ell^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(R_K\equiv
+\mathcal B(B^+\to K^+\mu^+\mu^-)/\mathcal B(B^+\to K^+e^+e^-)\).
+This beauty-sector entry covers the charged \(B\to K\ell\ell\) lepton-flavor
+universality ratio, not the exclusive \(K^*\) counterpart \(R_{K^*}\) or the
+absolute \(B\to K\ell\ell\) branching fractions.
+
+\subsection*{PDG / equivalent value(s)}
+The current HFLAV-equivalent source is the Dec. 2025 rare-decay table.  For
+the low-\(q^2\) bin \(0.1<q^2<1.1\,{\rm GeV}^2/c^4\), HFLAV lists
+\[
+  R_K = 0.994\pm0.090,
+\]
+from LHCb's \(0.994^{+0.090}_{-0.082}{}^{+0.029}_{-0.027}\) measurement.  For
+the central bin \(1.1<q^2<6.0\,{\rm GeV}^2/c^4\), HFLAV quotes
+\[
+  R_K = 0.947\pm0.047,
+\]
+combining LHCb \(0.949^{+0.042}_{-0.041}\pm0.022\) with CMS
+\(0.78^{+0.46}_{-0.23}{}^{+0.09}_{-0.05}\).  HFLAV also records a Belle-only
+full-\(q^2\) ratio \(1.08\pm0.16\).  Local snapshots are
+\texttt{references/B018/hflav\_dec2025\_rk\_lowq2.txt},
+\texttt{references/B018/hflav\_dec2025\_rk\_centralq2.txt}, and
+\texttt{references/B018/hflav\_dec2025\_rk\_fullq2\_belle.txt}, accessed
+2026-05-16.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\(R_K\) is a clean \(\Delta B=1\) semileptonic FCNC ratio.  In an RS or
+anarchic-flavor interpretation it probes nonuniversal contributions to the
+\(b\to s\ell^+\ell^-\) weak Hamiltonian, especially flavor-changing \(Z\) or
+KK-gauge effects and semileptonic Wilson coefficients \(C_9^{\ell}\) and
+\(C_{10}^{\ell}\).  It is therefore complementary to the repo's neutral-meson
+\(\Delta F=2\) constraints.
+
+\subsection*{Post-2008 developments}
+The CFW 2008 baseline predates the modern \(R_K\) anomaly program.  The key
+post-2008 developments are experimental: LHCb's 2021 update measured
+\(R_K=0.846^{+0.042}_{-0.039}{}^{+0.013}_{-0.012}\) in the central bin and
+reported a \(3.1\sigma\) tension with the SM.  The later LHCb simultaneous
+\(R_K\)/\(R_{K^*}\) analysis using \(9\,{\rm fb}^{-1}\) superseded that result
+and found the four LFU measurements compatible with the SM.  HFLAV Dec. 2025
+therefore treats the charged \(R_K\) bins as SM-consistent averages.  On the
+theory side, Bordone--Isidori--Pattori established the ratio as a clean probe
+once radiative corrections and experimental cuts are handled consistently.
+
+\subsection*{Constraint validity and model dependence}
+This is a robust LFU null test, but not a standalone bound on the current
+quark-scan model.  It requires a \(\Delta B=1\) semileptonic matching
+calculation, bin definitions, QED/radiative treatment, and experimental
+correlations.  A universal shift in electron and muon coefficients cancels
+strongly in the ratio, while lepton-nonuniversal new physics can be visible.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Required greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \(R_K\), \(b\to s\ell\ell\), \(C_9\), \(C_{10}\), or
+LFU implementation.  The implemented flavor surface is neutral-meson mixing:
+\texttt{quarkConstraints/modern/phenomenology.py:23} enumerates only
+\(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\), and
+\texttt{quarkConstraints/deltaf2.py:209} defines the legacy \(\Delta F=2\)
+inputs.  The only live lepton-flavor routine found is
+\texttt{flavorConstraints/muToEGamma.py:75}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Production use would require a new \(\Delta B=1\) semileptonic
+operator basis, matching and running for lepton-flavor-dependent \(C_9\),
+\(C_{10}\), and primed coefficients, SM bin predictions including radiative
+corrections, and likelihood handling for HFLAV/LHCb/CMS inputs.
+
+\subsection*{Key references}
+Process-local snapshots: HFLAV2025Dec:RKBplusKLowQ2,
+HFLAV2025Dec:RKBplusKCentralQ2, HFLAV2025Dec:RKBplusKFullQ2Belle,
+LHCb2023:RKRKstarDetailed, LHCb2021:UpdatedRK,
+BordoneIsidoriPattori2016:RKRKstarSM, and
+CsakiFalkowskiWeiler2008:CompositeFlavor.

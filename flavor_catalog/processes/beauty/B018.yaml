@@ -1,0 +1,106 @@
+schema: flavor_catalog.process.v1
+process_id: B018
+family: beauty
+standard_notation: "R_K"
+process_name: "Lepton-flavor universality ratio in B+ -> K+ ell+ ell-"
+owner: "PKA"
+owner_agent_id: "PKA-B018"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T12:02:05-04:00"
+    timestamp: "2026-05-16T12:02:05-04:00"
+    agent_id: "PKA-B018"
+    reason: "initial PKA draft deposit for assigned B018 R_K process"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T12:02:05-04:00"
+version: "0.1.0"
+source_shas:
+  bordone_isidori_pattori_2016_rk_sm_arxiv1605_07633.txt: "sha256:823eebbe1092f4f33fa957bbd497993f4ecd29f68f5e49ceff6b6ba8cbc5fcea"
+  cfw_0804_1954_arxiv.txt: "sha256:e8dbfb3bef81771a038a1894ff8dbe7b4560839ef4d749d71783dac25983bb1b"
+  hflav_dec2025_rk_centralq2.txt: "sha256:43fd3133f5ac4945d1513ced3cbce5512faf7981db950b0a85cacbf68ec3bf72"
+  hflav_dec2025_rk_fullq2_belle.txt: "sha256:f33098cc54f38393e335c696005843911aa086f1e0455da98e4f02b15fbbeb65"
+  hflav_dec2025_rk_lowq2.txt: "sha256:bcca89f01ff617b34d23e3c6268b6308752588d0f57338f89e4784e45a140c7f"
+  lhcb_2021_rk_arxiv2105_10303.txt: "sha256:6f0e92c95b3b7139bf70009c3b72babcca37938969eb573723382d53fd1d3671"
+  lhcb_2023_rk_rkstar_arxiv2212_09153.txt: "sha256:326871b052913adac96e8e2f3afeec9f34233dcf4e4dcf3ca0a9962094f62128"
+pdg_or_equivalent:
+  source: "HFLAV rare B decays Dec. 2025"
+  access_date: "2026-05-16"
+  year: 2025
+  value_summary: "HFLAV Dec. 2025 lists R_K(B+ -> K+ mu+ mu- / B+ -> K+ e+ e-) = 0.994 +/- 0.090 for 0.1 < q^2 < 1.1 GeV^2/c^4, and 0.947 +/- 0.047 for 1.1 < q^2 < 6.0 GeV^2/c^4."
+  observables:
+    - name: "R_K low-q2"
+      definition: "B(B+ -> K+ mu+ mu-) / B(B+ -> K+ e+ e-)"
+      q2_region: "0.1 < q^2 < 1.1 GeV^2/c^4"
+      value: "0.994"
+      uncertainty: "+/- 0.090"
+      source_key: "HFLAV2025Dec:RKBplusKLowQ2"
+      snapshot_path: "flavor_catalog/references/B018/hflav_dec2025_rk_lowq2.txt"
+      sha256_of_text_snapshot: "sha256:bcca89f01ff617b34d23e3c6268b6308752588d0f57338f89e4784e45a140c7f"
+      inputs:
+        - experiment: "LHCb"
+          value: "0.994"
+          uncertainty: "+0.090/-0.082 stat, +0.029/-0.027 syst"
+          reference: "Phys. Rev. D 108, 032002 (2023)"
+    - name: "R_K central-q2"
+      definition: "B(B+ -> K+ mu+ mu-) / B(B+ -> K+ e+ e-)"
+      q2_region: "1.1 < q^2 < 6.0 GeV^2/c^4"
+      value: "0.947"
+      uncertainty: "+/- 0.047"
+      source_key: "HFLAV2025Dec:RKBplusKCentralQ2"
+      snapshot_path: "flavor_catalog/references/B018/hflav_dec2025_rk_centralq2.txt"
+      sha256_of_text_snapshot: "sha256:43fd3133f5ac4945d1513ced3cbce5512faf7981db950b0a85cacbf68ec3bf72"
+      inputs:
+        - experiment: "LHCb"
+          value: "0.949"
+          uncertainty: "+0.042/-0.041 stat, +/-0.022 syst"
+          reference: "Phys. Rev. D 108, 032002 (2023)"
+        - experiment: "CMS"
+          value: "0.78"
+          uncertainty: "+0.46/-0.23 stat, +0.09/-0.05 syst"
+          reference: "Rept. Prog. Phys. 87, 077802 (2024)"
+    - name: "R_K full-q2 Belle-only"
+      definition: "B(B+ -> K+ mu+ mu-) / B(B+ -> K+ e+ e-)"
+      q2_region: "full m_ll^2 range"
+      value: "1.08"
+      uncertainty: "+/- 0.16"
+      source_key: "HFLAV2025Dec:RKBplusKFullQ2Belle"
+      snapshot_path: "flavor_catalog/references/B018/hflav_dec2025_rk_fullq2_belle.txt"
+      sha256_of_text_snapshot: "sha256:f33098cc54f38393e335c696005843911aa086f1e0455da98e4f02b15fbbeb65"
+      inputs:
+        - experiment: "Belle"
+          value: "1.08"
+          uncertainty: "+0.16/-0.15 stat, +/-0.02 syst"
+          reference: "JHEP 03, 105 (2021)"
+    - name: "superseded LHCb 2021 central-q2 R_K"
+      q2_region: "1.1 < q^2 < 6.0 GeV^2"
+      value: "0.846"
+      uncertainty: "+0.042/-0.039 stat, +0.013/-0.012 syst"
+      significance: "3.1 sigma tension with SM in the 2021 arXiv abstract"
+      source_key: "LHCb2021:UpdatedRK"
+      snapshot_path: "flavor_catalog/references/B018/lhcb_2021_rk_arxiv2105_10303.txt"
+      sha256_of_text_snapshot: "sha256:6f0e92c95b3b7139bf70009c3b72babcca37938969eb573723382d53fd1d3671"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems."
+    - "quarkConstraints/modern/phenomenology.py:166 states that the modern phenomenology fence is policy-only and not a numeric backend."
+    - "quarkConstraints/deltaf2.py:209 defines the implemented legacy Delta F = 2 input set."
+    - "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no b -> s ell ell routine is present."
+    - "Targeted regex search for R_K, b -> s, B+ -> K+, C_9, C_10, lepton universality, and LFU returned no matches in the required code directories."
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"\\\\bR_\\\\{?K\\\\}?\\\\b|b\\\\s*->\\\\s*s|B\\\\+\\\\s*->\\\\s*K\\\\+|B\\\\^\\\\+\\\\s*->\\\\s*K\\\\^\\\\+|C_9|C_10|lepton universality|LFU\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_notes: "Requires a new Delta B = 1 semileptonic weak Hamiltonian, lepton-flavor-dependent C9/C10 and primed coefficients, bin-aware SM/QED predictions, and experimental likelihood/correlation handling."
+open_issues:
+  - "HFLAV Dec. 2025 direct pages are accessible for the R_K bins, but the public rare-decay landing page still advertises older navigation. Checker should confirm Dec. 2025 publication status if strict HFLAV release labeling matters."
+  - "The sidecar records the central HFLAV average and inputs, but does not attempt a global b -> s ll fit or covariance reconstruction."

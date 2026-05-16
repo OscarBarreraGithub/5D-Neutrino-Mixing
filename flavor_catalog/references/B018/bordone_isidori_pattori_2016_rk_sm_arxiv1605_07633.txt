@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/h3o/bx6dYA+wDRfbRUVufLUVKYw</id>
+  <title>arXiv Query: search_query=&amp;id_list=1605.07633&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-16T15:59:45Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1605.07633" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1605.07633v3</id>
+    <title>On the Standard Model predictions for $R_K$ and $R_{K^*}$</title>
+    <updated>2017-05-05T13:08:22Z</updated>
+    <link href="https://arxiv.org/abs/1605.07633v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1605.07633v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We evaluate the impact of radiative corrections in the ratios $Γ[B\to M μ^+μ^-]/Γ[B\to M e^+e^-]$ when the meson $M$ is a $K$ or a $K^*$. Employing the cuts on $m^2_{\ell\ell}$ and the reconstructed $B$-meson mass presently applied by the LHCb Collaboration, such corrections do not exceed a few $\%$. Moreover, their effect is well described (and corrected for) by existing Montecarlo codes. Our analysis reinforces the interest of these observables as clean probe of physics beyond the Standard Model.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-05-24T20:00:32Z</published>
+    <arxiv:comment>6 pages [v3: Added Note on SM predictions for RK* in the low q2 region]</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <author>
+      <name>Marzia Bordone</name>
+    </author>
+    <author>
+      <name>Gino Isidori</name>
+    </author>
+    <author>
+      <name>Andrea Pattori</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-016-4274-7</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-016-4274-7" title="doi"/>
+  </entry>
+</feed>
