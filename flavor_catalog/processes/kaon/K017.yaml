@@ -31,9 +31,19 @@ status_history:
     at: "2026-05-16T13:40:00-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for wa_w4_kaon_edm."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T13:47:19-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T13:47:19-04:00"
+    agent_id: "CA"
+    reason: "Checker found CHK-1 strict provenance issue; see flavor_catalog/worklogs/checker/ca_w4_kaon_edm.md."
+    issues:
+      - "CHK-1: Value-bearing pdg_or_equivalent blocks for the PDG average, NA62 input, KLOE input, and Cirigliano-Rosell SM prediction lack explicit year fields."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:40:00-04:00"
+last_updated_at: "2026-05-16T13:47:19-04:00"
 version: "0.1.1"
 source_shas:
   pdg2025_rk_api_20260516.txt: "sha256:c00ed1ff90dd3cb58e44db0acfa9bdefd07fef7ee6dea6ff0812f416fcd62686"

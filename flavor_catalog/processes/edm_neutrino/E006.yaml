@@ -31,9 +31,19 @@ status_history:
     at: "2026-05-16T13:40:00-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for wa_w4_kaon_edm."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T13:47:19-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T13:47:19-04:00"
+    agent_id: "CA"
+    reason: "Checker found CHK-1 strict provenance issue; see flavor_catalog/worklogs/checker/ca_w4_kaon_edm.md."
+    issues:
+      - "CHK-1: TeX quotes the factor-4 Hg-bound improvement, but no value-bearing pdg_or_equivalent entry records that numerical claim with complete strict metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:40:00-04:00"
+last_updated_at: "2026-05-16T13:47:19-04:00"
 version: "0.1.0"
 source_shas:
   graner2016_arxiv1601_04339.txt: "sha256:44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86"

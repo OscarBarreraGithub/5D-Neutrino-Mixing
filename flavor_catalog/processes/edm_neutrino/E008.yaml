@@ -31,9 +31,17 @@ status_history:
     at: "2026-05-16T13:40:00-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for wa_w4_kaon_edm."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T13:47:19-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T13:47:19-04:00"
+    agent_id: "CA"
+    reason: "Checker verification passed for ca_w4_kaon_edm."
+checker_passed_at: "2026-05-16T13:47:19-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:40:00-04:00"
+last_updated_at: "2026-05-16T13:47:19-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_neutron_edm_datablock.txt: "sha256:2478ea90f896fdb38329e53466629812b28d03da57655b7ac07228007dad90ca"
