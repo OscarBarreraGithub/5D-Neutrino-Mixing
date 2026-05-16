@@ -1,0 +1,58 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T001
+generated_at: "2026-05-16T11:03:23-04:00"
+sources:
+  - key: PDG2025TopFCNCTZQ
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Review of Particle Physics, 2025 update: t-quark listing"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf"
+    sha256_of_local_snapshot: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
+    snapshot_path: "flavor_catalog/references/T001/pdg_2025_top_fcnc_tzq.txt"
+  - key: ATLAS2023TopFCNCTZQ
+    arxiv_id: "2301.11605"
+    DOI: "10.1103/PhysRevD.108.032019"
+    title: "Search for flavor-changing neutral-current couplings between the top quark and the Z boson with proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2301.11605"
+    sha256_of_local_snapshot: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
+    snapshot_path: "flavor_catalog/references/T001/atlas_2301_11605_arxiv_abs.txt"
+  - key: CMS2017TZQFCNC
+    arxiv_id: "1702.01404"
+    DOI: "10.1007/JHEP07(2017)003"
+    title: "Search for associated production of a Z boson with a single top quark and for tZ flavour-changing interactions in pp collisions at sqrt(s) = 8 TeV"
+    authors: "CMS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1702.01404"
+    sha256_of_local_snapshot: "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2"
+    snapshot_path: "flavor_catalog/references/T001/cms_1702_01404_arxiv_abs.txt"
+  - key: AguilarSaavedra2004TopFCNC
+    arxiv_id: "hep-ph/0409342"
+    DOI: "10.48550/arXiv.hep-ph/0409342"
+    title: "Top flavour-changing neutral interactions: theoretical expectations and experimental detection"
+    authors: "J. A. Aguilar-Saavedra"
+    year: 2004
+    url: "https://arxiv.org/abs/hep-ph/0409342"
+    sha256_of_local_snapshot: "sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66"
+    snapshot_path: "flavor_catalog/references/T001/aguilar_saavedra_hepph0409342.txt"
+  - key: CsakiFalkowskiWeiler2008WarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:574e67f28640855d367026f9741c74733b869b753b6ce5598ce7eb1f7d062706"
+    snapshot_path: "flavor_catalog/references/T001/csaki_falkowski_weiler_0804_1954_arxiv_abs.txt"
+  - key: AirenFranceschini2026RSTopFCNC
+    arxiv_id: "2601.14966"
+    DOI: "10.48550/arXiv.2601.14966"
+    title: "Top quark FCNC in Randall-Sundrum models: post-LHC allowed rates and searches at e+e- and mu+mu- colliders"
+    authors: "Sagar Airen, Roberto Franceschini"
+    year: 2026
+    url: "https://arxiv.org/abs/2601.14966"
+    sha256_of_local_snapshot: "sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45"
+    snapshot_path: "flavor_catalog/references/T001/airen_franceschini_2601_14966_arxiv_abs.txt"

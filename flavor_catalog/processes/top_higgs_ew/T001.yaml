@@ -1,0 +1,131 @@
+schema: flavor_catalog.process.v1
+process_id: T001
+family: top_higgs_ew
+standard_notation: '\mathcal{B}(t\to cZ)'
+process_name: "Flavor-changing neutral-current top decay t -> c Z"
+owner: "PKA"
+owner_agent_id: "PKA-T001"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T11:03:23-04:00"
+    timestamp: "2026-05-16T11:03:23-04:00"
+    agent_id: "PKA-T001"
+    reason: "Initial PKA draft and source snapshot deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:03:23-04:00"
+version: "0.1.0"
+source_shas:
+  pdg_2025_top_fcnc_tzq.txt: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
+  atlas_2301_11605_arxiv_abs.txt: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
+  cms_1702_01404_arxiv_abs.txt: "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2"
+  aguilar_saavedra_hepph0409342.txt: "sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66"
+  csaki_falkowski_weiler_0804_1954_arxiv_abs.txt: "sha256:574e67f28640855d367026f9741c74733b869b753b6ce5598ce7eb1f7d062706"
+  airen_franceschini_2601_14966_arxiv_abs.txt: "sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45"
+pdg_or_equivalent:
+  year: 2025
+  source: "Particle Data Group t-quark listing, 2025 update"
+  source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T001/pdg_2025_top_fcnc_tzq.txt"
+  sha256: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
+  values:
+    - value_id: "PDG2025:T001:tZc_left"
+      observable: "B(t -> Z c), left-handed t-c-Z benchmark"
+      year: 2025
+      value: "< 1.3e-4"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      pdg_units: "0.13 x 10^-3"
+      source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf"
+      access_date: "2026-05-16"
+      sha256: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
+    - value_id: "PDG2025:T001:tZc_right"
+      observable: "B(t -> Z c), right-handed t-c-Z benchmark"
+      year: 2025
+      value: "< 1.2e-4"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      pdg_units: "0.12 x 10^-3"
+      source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf"
+      access_date: "2026-05-16"
+      sha256: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
+auxiliary_values:
+  - value_id: "ATLAS2023:T001:dataset"
+    value: "139 fb^-1 at sqrt(s) = 13 TeV"
+    uncertainty: null
+    units: "integrated luminosity and collision energy"
+    source_url: "https://arxiv.org/abs/2301.11605"
+    access_date: "2026-05-16"
+    sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
+  - value_id: "ATLAS2023:T001:tZc_left"
+    value: "< 13e-5"
+    uncertainty: null
+    units: "branching fraction, 95% CL upper limit"
+    source_url: "https://arxiv.org/abs/2301.11605"
+    access_date: "2026-05-16"
+    sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
+  - value_id: "ATLAS2023:T001:tZc_right"
+    value: "< 12e-5"
+    uncertainty: null
+    units: "branching fraction, 95% CL upper limit"
+    source_url: "https://arxiv.org/abs/2301.11605"
+    access_date: "2026-05-16"
+    sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
+  - value_id: "CMS2017:T001:dataset"
+    value: "19.7 fb^-1 at sqrt(s) = 8 TeV"
+    uncertainty: null
+    units: "integrated luminosity and collision energy"
+    source_url: "https://arxiv.org/abs/1702.01404"
+    access_date: "2026-05-16"
+    sha256: "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2"
+  - value_id: "CMS2017:T001:tZc"
+    value: "< 0.049%"
+    uncertainty: null
+    units: "branching fraction, 95% CL upper limit"
+    normalized_value: "< 4.9e-4"
+    source_url: "https://arxiv.org/abs/1702.01404"
+    access_date: "2026-05-16"
+    sha256: "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2"
+  - value_id: "AguilarSaavedra2004:T001:SM"
+    value: "1e-14"
+    uncertainty: null
+    units: "Standard Model branching-fraction estimate"
+    source_url: "https://arxiv.org/abs/hep-ph/0409342"
+    access_date: "2026-05-16"
+    sha256: "sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66"
+  - value_id: "PDG2025:T001:SM"
+    value: "order 1e-14"
+    uncertainty: null
+    units: "Standard Model branching-fraction estimate"
+    source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf"
+    access_date: "2026-05-16"
+    sha256: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
+  - value_id: "AirenFranceschini2026:T001:HL_LHC_projection"
+    value: "approximately 1e-6"
+    uncertainty: null
+    units: "projected equivalent BR(t -> c Z) reach"
+    source_url: "https://arxiv.org/abs/2601.14966"
+    access_date: "2026-05-16"
+    sha256: "sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Required plan greps rerun on 2026-05-16; no source-code implementation of t -> c Z or tcZ found."
+    - "Targeted grep across quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, tests found only generic FCNC prose/comments, not an observable implementation."
+  grep_commands:
+    - 'rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g "!*.ipynb"'
+    - 'rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g "!*.ipynb"'
+    - 'rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints flavorConstraints scanParams tests docs -g "!*.ipynb"'
+    - 'rg -n "t.?->.?c.?Z|t.?->.?Z.?c|tcZ|tZc|FCNC|flavou?r-changing|flavor changing|Z.?c" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "MEDIUM to store the external upper limit, but HIGH for production-grade RS integration because the repo lacks electroweak top-FCNC matching, a tcZ decay-width/production interpretation, and top-sector flavor-rotation plumbing."
+open_issues:
+  - "A future WA/CA should decide whether to quote the left-handed or right-handed ATLAS tensor benchmark as the single headline limit, or keep both."
+  - "A live implementation needs an RS-to-SMEFT/tcZ convention choice before numerical scans can use this limit."

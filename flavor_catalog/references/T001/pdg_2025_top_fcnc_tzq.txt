@@ -1,0 +1,35 @@
+Source: Particle Data Group, 2025 update, top-quark listing.
+URL: https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf
+Access date: 2026-05-16
+Local purpose: minimal excerpt for T001, t -> c Z FCNC branching-fraction limits.
+
+Citation shown on source: S. Navas et al. (Particle Data Group),
+Phys. Rev. D 110, 030001 (2024) and 2025 update.
+
+Relevant PDG excerpt, top-quark FCNC Z q listing:
+
+Gamma(Z q), q = u,c, over Gamma_total.
+Test for Delta T = 1 weak neutral current. Allowed by higher-order electroweak interaction.
+VALUE (units 10^-3), CL%, DOCUMENT ID, TECHNIQUE, COMMENT
+
+< 0.062, 95, AAD 23AS, ATLAS, B(t -> Z u), left-handed t u Z coupling
+< 0.13, 95, AAD 23AS, ATLAS, B(t -> Z c), left-handed t c Z coupling
+< 0.066, 95, AAD 23AS, ATLAS, B(t -> Z u), right-handed t u Z coupling
+< 0.12, 95, AAD 23AS, ATLAS, B(t -> Z c), right-handed t c Z coupling
+< 0.22, 95, SIRUNYAN 17E, CMS, t -> Z u
+< 0.49, 95, SIRUNYAN 17E, CMS, t -> Z c
+< 0.7, 95, AAD 16D, ATLAS, t -> Z q (q = u,c)
+
+PDG note 1:
+AAD 23AS is based on 139 fb^-1 of pp data at sqrt(s) = 13 TeV. Anomalous
+FCNC left-handed and right-handed couplings are searched for through single-top
+production in association with a Z boson and in the decay of a top quark in
+ttbar production. Events with three leptons plus at least one jet, one b-tag,
+and missing transverse momentum are used. The SM predictions of the
+corresponding branching ratios are of the order of 10^-14.
+
+PDG note 2:
+SIRUNYAN 17E is based on 19.7 fb^-1 of pp data at sqrt(s) = 8 TeV. The final
+states ttbar -> l+ l- l' +/- nu + jets are investigated and the cross section
+sigma(pp -> t Z q -> l nu b l+ l- q) = 10^{+8}_{-7} fb is measured, giving
+no sign of FCNC decays of the top quark.
