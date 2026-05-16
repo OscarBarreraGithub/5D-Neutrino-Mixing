@@ -1,0 +1,25 @@
+Source snapshot: PDG live muon listing, NODE=S004
+Process: L004, mu-e conversion in gold
+Access date: 2026-05-16
+URL: https://pdg.lbl.gov/encoder_listings/s004.pdf
+
+Extraction method:
+The PDF was accessed only as an input stream and converted to text with
+pdftotext; the PDF itself is not tracked.  This snapshot records the minimal
+local text extract needed for the L004 catalog value.
+
+PDG generated timestamp observed in streamed text:
+5/14/2026 19:33
+
+Relevant listing:
+LIMIT ON mu- -> e- CONVERSION
+
+Observable:
+sigma(mu- Au -> e- Au) / sigma(mu- Au -> capture)
+
+VALUE        CL%   DOCUMENT ID   TECN   CHG   COMMENT
+<7 x 10^-13  90   BERTL 06      SPEC   -     SINDRUM II
+
+Use in L004:
+Canonical PDG/equivalent current gold-target limit for coherent neutrinoless
+muon-to-electron conversion.

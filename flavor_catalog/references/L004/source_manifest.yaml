@@ -1,0 +1,59 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: L004
+generated_at: "2026-05-16T13:16:42-04:00"
+references:
+  - key: PDG2026_MuonAuConversion
+    arxiv_id: null
+    DOI: null
+    title: "Particle Data Group live muon listing, NODE=S004"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdg.lbl.gov/encoder_listings/s004.pdf"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:f62fe92474a72005f15a29ee456110afe5014e88a79848ae3cd50bd35b4d0a01"
+    snapshot_path: "flavor_catalog/references/L004/pdg2026_muon_listing_s004_au_conversion.txt"
+    use_note: "Canonical PDG live listing value for sigma(mu- Au -> e- Au) / sigma(mu- Au -> capture) < 7e-13 at 90% C.L."
+  - key: SINDRUMII2006_GoldMuE
+    arxiv_id: null
+    DOI: "10.1140/epjc/s2006-02582-x"
+    title: "A search for mu-e conversion in muonic gold"
+    authors: "W. Bertl et al. (SINDRUM II Collaboration)"
+    year: 2006
+    url: "https://api.crossref.org/works/10.1140/epjc/s2006-02582-x"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:d9fb8f22357abdcef206d4a72dcc1f638d42ebcb950998321ad93ed7a8d7b7ad"
+    snapshot_path: "flavor_catalog/references/L004/sindrumii_2006_gold_crossref.txt"
+    use_note: "Bibliographic identity for the BERTL 06 SINDRUM II paper cited by PDG; no publisher PDF tracked."
+  - key: Mu2eTDR2015
+    arxiv_id: "1501.05241"
+    DOI: "10.48550/arXiv.1501.05241"
+    title: "Mu2e Technical Design Report"
+    authors: "L. Bartoszek et al. (Mu2e Collaboration)"
+    year: 2015
+    url: "https://arxiv.org/abs/1501.05241"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:63749e4f29bac16ffde2990da7002e66e4c2a4ae741cb7bb7a6ef7c3e0e8b425"
+    snapshot_path: "flavor_catalog/references/L004/mu2e_tdr_arxiv1501_05241.txt"
+    use_note: "Post-2008 aluminum conversion program context; establishes four-orders-improvement target relative to existing conversion limits."
+  - key: COMETPhaseITDR2020
+    arxiv_id: "1812.09018"
+    DOI: "10.1093/ptep/ptz125"
+    title: "COMET Phase-I Technical Design Report"
+    authors: "R. Abramishvili et al. (COMET Collaboration)"
+    year: 2020
+    url: "https://arxiv.org/abs/1812.09018"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:4b482f0e016575089598cb6a97d1e48832c93065c4def51ef1687dd7ba8bbe8d"
+    snapshot_path: "flavor_catalog/references/L004/comet_phase_i_tdr_arxiv1812_09018.txt"
+    use_note: "Post-2008 aluminum conversion sensitivity context."
+  - key: CFW2008
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:c8d15a5e367bed99d14a581d29563eb43706fcbedf13ef4ca62500028d885222"
+    snapshot_path: "flavor_catalog/references/L004/cfw2008_arxiv0804_1954.txt"
+    use_note: "Catalog-requested 2008 RS-flavor baseline for the post-2008 comparison."

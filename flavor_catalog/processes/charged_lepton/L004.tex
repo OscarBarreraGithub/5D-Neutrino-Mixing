@@ -1,0 +1,82 @@
+% Flavor catalog per-process draft.
+% process_id: L004
+% family: charged_lepton
+% owner_agent_id: PKA-L004
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: L004.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{L004: \texorpdfstring{\(\mu-e\)}{mu-e} Conversion in Gold}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(R_{\mu e}^{\rm Au} =
+\Gamma(\mu^-{\rm Au}\to e^-{\rm Au})/
+\Gamma_{\rm capture}(\mu^-{\rm Au})\).
+This entry covers coherent neutrinoless muon-to-electron conversion in a
+gold target, the strongest published SINDRUM II conversion bound and the
+direct companion to the aluminum and titanium conversion entries.
+
+\subsection*{PDG / equivalent value(s)}
+The streamed PDG live muon listing, generated on 2026-05-14 and accessed on
+2026-05-16, gives
+\[
+  R_{\mu e}^{\rm Au} < 7\times 10^{-13}\qquad (90\%\ {\rm C.L.}) .
+\]
+The PDG line identifies the document as BERTL 06, technique SPEC, comment
+SINDRUM II.  The local minimal text snapshot is
+\texttt{flavor\_catalog/references/L004/pdg2026\_muon\_listing\_s004\_au\_conversion.txt}.
+The SINDRUM II article metadata is separately snapshotted from Crossref for
+\textit{Eur. Phys. J. C} \textbf{47}, 337--346 (2006), DOI
+\texttt{10.1140/epjc/s2006-02582-x}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In a warped lepton-flavor extension, \(\mu-e\) conversion probes more than the
+dipole structure tested by \(\mu\to e\gamma\).  Tree-level or loop-induced
+lepton-quark vector and scalar operators, flavor-changing \(Z\)-like
+couplings, Higgs-mediated scalar currents, and dipoles can all contribute to
+the same coherent nuclear final state.  A heavy target such as gold is useful
+as an existing benchmark, but its interpretation is target and operator
+dependent.
+
+\subsection*{Post-2008 developments}
+Since the arXiv:0804.1954 RS-flavor baseline, no newer gold-target result has
+replaced the SINDRUM II bound in the PDG listing.  The major change is the
+experimental program around lighter targets: the Mu2e Technical Design Report
+states an aluminum conversion search aiming for sensitivity approximately four
+orders of magnitude beyond the previous world-best conversion limits, and the
+COMET Phase-I TDR quotes an aluminum sensitivity goal \(3.1\times10^{-15}\)
+with an expected \(90\%\) upper limit \(7\times10^{-15}\).  Thus the gold
+limit remains the published benchmark, while future comparisons will need
+target-by-target translations.
+
+\subsection*{Constraint validity and model dependence}
+The experimental statement is robust: it is a null search normalized to the
+ordinary muon-capture rate on gold.  The mapping to RS parameters is not a
+single-number rescaling.  It requires a lepton-quark effective operator basis,
+gold nuclear overlap integrals and capture normalization, and a convention for
+combining dipole, scalar, and vector amplitudes.  Comparisons with aluminum or
+titanium limits are therefore model- and operator-dependent.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no SINDRUM, Mu2e, COMET, \(R_{\mu e}\), gold conversion,
+or muon-to-electron conversion implementation.  The only adjacent charged-LFV
+code is the dipole-only \(\mu\to e\gamma\) checker at
+\texttt{flavorConstraints/muToEGamma.py}:75, called by the scan at
+\texttt{scanParams/scan.py}:524.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production constraint needs a new \(\mu-e\) conversion
+observable, lepton-quark Wilson coefficients, target-specific gold nuclear
+inputs, capture-rate normalization, and likely shared EFT matching/running
+with \(\mu\to e\gamma\) and \(\mu\to3e\).  This is a new mode calculation, not
+an input-value update to the existing dipole checker.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2026\_MuonAuConversion}, \texttt{SINDRUMII2006\_GoldMuE},
+\texttt{Mu2eTDR2015}, \texttt{COMETPhaseITDR2020}, and \texttt{CFW2008}.

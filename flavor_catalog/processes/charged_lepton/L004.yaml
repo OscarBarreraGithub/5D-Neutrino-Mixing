@@ -1,0 +1,126 @@
+schema: flavor_catalog.process.v1
+process_id: L004
+family: charged_lepton
+standard_notation: "R_{\\mu e}^{\\rm Au}"
+process_name: "Coherent muon-to-electron conversion in gold"
+owner: "PKA"
+owner_agent_id: "PKA-L004"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:16:42-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:16:42-04:00"
+    agent_id: "PKA-L004"
+    reason: "Initial L004 PKA source extraction and draft sidecar."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T13:16:42-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T13:16:42-04:00"
+    agent_id: "PKA-L004"
+    reason: "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:16:42-04:00"
+version: "0.1.0"
+source_shas:
+  cfw2008_arxiv0804_1954.txt: "sha256:c8d15a5e367bed99d14a581d29563eb43706fcbedf13ef4ca62500028d885222"
+  comet_phase_i_tdr_arxiv1812_09018.txt: "sha256:4b482f0e016575089598cb6a97d1e48832c93065c4def51ef1687dd7ba8bbe8d"
+  mu2e_tdr_arxiv1501_05241.txt: "sha256:63749e4f29bac16ffde2990da7002e66e4c2a4ae741cb7bb7a6ef7c3e0e8b425"
+  pdg2026_muon_listing_s004_au_conversion.txt: "sha256:f62fe92474a72005f15a29ee456110afe5014e88a79848ae3cd50bd35b4d0a01"
+  sindrumii_2006_gold_crossref.txt: "sha256:d9fb8f22357abdcef206d4a72dcc1f638d42ebcb950998321ad93ed7a8d7b7ad"
+pdg_or_equivalent:
+  primary_current_limit:
+    source: "Particle Data Group live muon listing, NODE=S004"
+    year: 2026
+    pdg_generated_timestamp: "2026-05-14T19:33:00"
+    observable: "sigma(mu- Au -> e- Au) / sigma(mu- Au -> capture)"
+    target_material: "Au"
+    value: 7.0e-13
+    relation: "<"
+    confidence_level: "90% C.L."
+    document_id: "BERTL 06"
+    technique: "SPEC"
+    experiment: "SINDRUM II"
+    source_url: "https://pdg.lbl.gov/encoder_listings/s004.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L004/pdg2026_muon_listing_s004_au_conversion.txt"
+    sha256: "f62fe92474a72005f15a29ee456110afe5014e88a79848ae3cd50bd35b4d0a01"
+  experimental_publication:
+    source: "SINDRUM II Collaboration / Crossref DOI metadata"
+    year: 2006
+    title: "A search for mu-e conversion in muonic gold"
+    journal: "European Physical Journal C"
+    volume: 47
+    issue: 2
+    pages: "337-346"
+    doi: "10.1140/epjc/s2006-02582-x"
+    source_url: "https://api.crossref.org/works/10.1140/epjc/s2006-02582-x"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L004/sindrumii_2006_gold_crossref.txt"
+    sha256: "d9fb8f22357abdcef206d4a72dcc1f638d42ebcb950998321ad93ed7a8d7b7ad"
+  post_2008_developments:
+    - source: "Mu2e Technical Design Report"
+      arxiv_id: "1501.05241"
+      year: 2015
+      target_material: "Al"
+      observable: "coherent mu- N -> e- N conversion"
+      quoted_improvement: "approximately four orders of magnitude better than the current world's best limits"
+      source_url: "https://arxiv.org/abs/1501.05241"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L004/mu2e_tdr_arxiv1501_05241.txt"
+      sha256: "63749e4f29bac16ffde2990da7002e66e4c2a4ae741cb7bb7a6ef7c3e0e8b425"
+    - source: "COMET Phase-I Technical Design Report"
+      arxiv_id: "1812.09018"
+      year: 2020
+      target_material: "Al"
+      observable: "coherent mu- N -> e- N conversion"
+      sensitivity_goal: 3.1e-15
+      expected_upper_limit_90cl: 7.0e-15
+      improvement_factor: 100
+      expected_background_events: 0.032
+      source_url: "https://arxiv.org/abs/1812.09018"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L004/comet_phase_i_tdr_arxiv1812_09018.txt"
+      sha256: "4b482f0e016575089598cb6a97d1e48832c93065c4def51ef1687dd7ba8bbe8d"
+  post_2008_baseline:
+    source: "Csaki-Falkowski-Weiler 2008 RS flavor baseline"
+    arxiv_id: "0804.1954"
+    year: 2008
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L004/cfw2008_arxiv0804_1954.txt"
+    sha256: "c8d15a5e367bed99d14a581d29563eb43706fcbedf13ef4ca62500028d885222"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  targeted_grep_commands:
+    - "rg -n \"mu.?-?e.?conversion|mu.?to.?e.?conversion|muon.?to.?electron|Mu2e|mu2e|COMET|comet|SINDRUM|R_mu.?e|Rmu.?e|conversion.*gold|muonic gold|Au.*conversion\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Targeted L004 grep returned no hits in the required code directories."
+    - "Generic conversion hits in quarkConstraints are unrelated bag-parameter/unit-conversion internals, not mu-e conversion observables."
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an adjacent dipole-only LFV checker."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma in scans; no conversion observable is evaluated."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Missing implementation needs a new coherent mu-e conversion observable, lepton-quark Wilson/operator convention, gold target nuclear overlap and capture inputs, and likely EFT matching/running shared with mu->e gamma and mu->3e."
+implementation_difficulty_if_missing: "HIGH"
+open_issues:
+  - "Checker should verify whether the PDG live NODE=S004 stream remains the preferred canonical source over a static annual listing snapshot."
+  - "Future implementation must choose the operator basis and nuclear-overlap convention before comparing Au, Al, and Ti limits directly."
