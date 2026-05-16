@@ -1,0 +1,40 @@
+Source key: FLAG2024:BMixing
+URL: https://arxiv.org/abs/2411.04268
+Access date: 2026-05-16
+arXiv: 2411.04268v3
+Related DOI: 10.1103/nfzp-p5dn
+Title: FLAG Review 2024
+Authors: Y. Aoki et al. (Flavour Lattice Averaging Group)
+Local snapshot purpose: minimal arXiv text/source extract for B_s mixing lattice inputs.
+License note: arXiv text/source extract only; no publisher PDF tracked.
+
+ArXiv metadata excerpt:
+Submitted 6 Nov 2024; last revised 6 Feb 2026. The abstract says the review
+reports heavy-quark decay constants, form factors, and mixing parameters of
+bottom mesons relevant for CKM and unitarity-triangle fits.
+
+Extracted B-mixing context:
+The FLAG Review 2024 section "Neutral B-meson mixing matrix elements" states
+that the Standard Model prediction for Delta m_q is proportional to
+f_{B_q}^2 * Bhat_{B_q}, and that experimentally the mass difference is
+determined from the oscillation frequency. It also says the SU(3)-breaking
+ratio xi can be obtained more precisely than the individual B_q-mixing matrix
+elements because some statistical and systematic errors cancel.
+
+Extracted N_f = 2+1+1 FLAG averages used as auxiliary theory inputs:
+
+  f_{B_s} sqrt(Bhat_{B_s}) = 256.1(5.7) MeV
+  Bhat_{B_s} = 1.232(53)
+  xi = 1.216(16)
+  B_{B_s}/B_{B_d} = 1.008(25)
+
+Correlation caution extracted from the FLAG text:
+FLAG cautions that decay-constant and mixing quantities are often calculated
+on the same or similar ensembles and use the same actions and setups, so
+correlations should be considered in unitarity-triangle fits. FLAG recommends
+using the quoted mixing numbers directly rather than reconstructing
+f_{B_s} sqrt(Bhat_{B_s}) from separate f_{B_s} and Bhat_{B_s} averages.
+
+Catalog note:
+These are theoretical normalization inputs. Per the L001 arbitration policy,
+they belong in auxiliary theory blocks, not in pdg_or_equivalent.

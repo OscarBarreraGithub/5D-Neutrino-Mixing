@@ -1,0 +1,59 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B003
+generated_at: "2026-05-16T15:31:45-04:00"
+references:
+  - key: hflav_2024_dms
+    arxiv_id: "2411.18639"
+    DOI: "10.1103/x87q-tld5"
+    title: "HFLAV 2024 recommended b-hadron lifetime and oscillation averages"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2024
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+    snapshot_path: "flavor_catalog/references/B003/hflav_2024_dms.txt"
+    local_snapshot_policy: "Minimal text extract only; no publisher PDF tracked."
+  - key: hflav_pdg2025_dms
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV PDG 2025 published-only b-hadron lifetime and oscillation averages"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:7b6e88fed6d4dee57e266f79a28c4edb073d668ba0fa2f90dad40cb9f051473c"
+    snapshot_path: "flavor_catalog/references/B003/hflav_pdg2025_dms.txt"
+    local_snapshot_policy: "Minimal text extract only; no publisher PDF tracked."
+  - key: lhcb_2021_deltams_arxiv
+    arxiv_id: "2104.04421"
+    DOI: "10.1038/s41567-021-01394-x"
+    title: "Precise determination of the B0s-B0sbar oscillation frequency"
+    authors: "LHCb Collaboration"
+    year: 2022
+    url: "https://arxiv.org/abs/2104.04421"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:2827716498d99b807d5c042b65a5a67d0898f53617b7889b74009b92433f3ef4"
+    snapshot_path: "flavor_catalog/references/B003/lhcb_2021_deltams_arxiv.txt"
+    local_snapshot_policy: "Minimal arXiv text/source extract; no PDF tracked."
+  - key: flag_2024_bmixing
+    arxiv_id: "2411.04268"
+    DOI: "10.1103/nfzp-p5dn"
+    title: "FLAG Review 2024"
+    authors: "Y. Aoki et al. (Flavour Lattice Averaging Group)"
+    year: 2024
+    url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:0d34c342c10b2479deb261eb8456fc4eb99dc6aeda2d6297172a8eb975aaa283"
+    snapshot_path: "flavor_catalog/references/B003/flag_2024_bmixing.txt"
+    local_snapshot_policy: "Minimal arXiv text/source extract; no PDF tracked."
+  - key: cfw_2008_rs_flavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:894d0bfe37a3fc977af227722075874a4babd171d771b42ba509d7d156069d87"
+    snapshot_path: "flavor_catalog/references/B003/cfw_2008_rs_flavor.txt"
+    local_snapshot_policy: "Minimal arXiv metadata/abstract extract; no PDF tracked."

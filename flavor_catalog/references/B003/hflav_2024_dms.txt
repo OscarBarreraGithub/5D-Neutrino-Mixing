@@ -1,0 +1,33 @@
+Source key: HFLAV2024:DMS
+URL: https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/
+Access date: 2026-05-16
+Local snapshot purpose: minimal text extract for B003 Delta m_s / B_s mixing.
+License note: text snapshot only; no publisher PDF tracked.
+
+Source title:
+Heavy Flavor Averaging Group (HFLAV), 2024 averages for HFLAV write-up.
+
+Context from HFLAV landing page:
+The HFLAV lifetime and oscillation parameters page labels the Fall 2024
+averages as RECOMMENDED, includes preprints, and says they are described in
+Chapter 5 of S. Banerjee et al. (HFLAV), Phys. Rev. D 113 (2026) 012008,
+arXiv:2411.18639.
+
+Extracted value used in B003:
+Section "B_s mixing: oscillations and mass difference" says the combined result
+on B_s^0 mixing is obtained from time-dependent measurements of the oscillation
+frequency Delta m_s at high-energy hadron colliders:
+
+  Delta m_s = 17.766 +/- 0.006 ps^-1  CDF, LHCb, CMS
+
+The same section states that, with 1/Gamma_s = 1.516 +/- 0.006 ps,
+DeltaGamma_s = +0.0781 +/- 0.0035 ps^-1, and the assumption of no CP violation
+in B_s^0 mixing, this leads to:
+
+  x_s = 26.94 +/- 0.10
+  chi_s = 0.499314 +/- 0.000005
+
+Notes for catalog use:
+- The measured observable for pdg_or_equivalent is Delta m_s.
+- Lifetime, width-difference, x_s, and chi_s values are auxiliary derived or
+  companion quantities, not replacements for the measured mass splitting.

@@ -1,0 +1,106 @@
+% Flavor catalog per-process draft.
+% process_id: B003
+% family: beauty
+% owner_agent_id: PKA-B003
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B003.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B003: \(\Delta m_s\) / \(B_s\) Mixing}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\Delta m_s\).  This entry covers the
+\(B_s^0-\bar B_s^0\) mass splitting, equivalently the oscillation frequency
+measured in time-dependent flavor-tagged \(B_s\) decays.  It is the magnitude
+observable in the \(\Delta B=2\), \(b\leftrightarrow s\) neutral-meson mixing
+system.
+
+\subsection*{PDG / equivalent value(s)}
+The current canonical equivalent value is the HFLAV recommended
+lifetime-and-oscillation average snapshotted as
+\texttt{references/B003/hflav\_2024\_dms.txt}:
+\[
+  \Delta m_s = 17.766\pm0.006~{\rm ps}^{-1}
+\]
+from CDF, LHCb, and CMS.  The same HFLAV page gives the derived companion
+quantities \(x_s=26.94\pm0.10\) and
+\(\chi_s=0.499314\pm0.000005\), using
+\(1/\Gamma_s=1.516\pm0.006~{\rm ps}\),
+\(\Delta\Gamma_s=+0.0781\pm0.0035~{\rm ps}^{-1}\), and no CP violation in
+mixing.  The published-only HFLAV/PDG 2025 preparation page, snapshotted as
+\texttt{references/B003/hflav\_pdg2025\_dms.txt}, gives the nearly identical
+\(\Delta m_s=17.765\pm0.006~{\rm ps}^{-1}\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In anarchic Randall--Sundrum flavor, tree-level KK-gluon and electroweak
+exchange generate \(\Delta B=2\) four-quark operators.  \(B_s\) mixing is the
+down-sector \(s-b\) analogue of \(B_d\) mixing and complements the stronger
+kaon constraints by testing a different localization and CKM structure.  The
+existing code treats \(\Delta m_s\) as a direct bound on the new-physics
+contribution to \(M_{12}^s\), with separate weights for current-current and
+left-right operators.
+
+\subsection*{Post-2008 developments}
+The 2008 RS-flavor baseline in \texttt{cfw\_2008\_rs\_flavor} predates the
+precision LHCb \(B_s\) oscillation program.  The key post-2008 experimental
+step for this catalog is the LHCb measurement in
+\texttt{lhcb\_2021\_deltams\_arxiv}: using \(6~{\rm fb}^{-1}\) of Run-2
+\(B_s\to D_s\pi\) data, LHCb finds
+\[
+  \Delta m_s=17.7683\pm0.0051_{\rm stat}\pm0.0032_{\rm syst}~{\rm ps}^{-1},
+\]
+and a LHCb-only combination
+\[
+  \Delta m_s=17.7656\pm0.0057~{\rm ps}^{-1}.
+\]
+On the theory side, \texttt{flag\_2024\_bmixing} records the FLAG Review 2024
+\(N_f=2+1+1\) auxiliary inputs
+\[
+  f_{B_s}\sqrt{\hat B_{B_s}}=256.1\pm5.7~{\rm MeV},\qquad
+  \xi=1.216\pm0.016,
+\]
+with a warning that correlated decay-constant and mixing inputs should not be
+reconstructed from separate averages.
+
+\subsection*{Constraint validity and model dependence}
+The experimental oscillation frequency is very clean.  The model-dependent step
+is translating it into a new-physics allowance: a conservative catalog can bound
+\(|M_{12}^{s,{\rm NP}}|\) directly from the measured splitting, while a sharper
+SM-subtracted interpretation depends on CKM inputs and FLAG lattice matrix
+elements.  The constraint is therefore a robust \(\Delta F=2\) magnitude test,
+but cancellations between SM and new physics or correlated CKM-fit choices
+should be made explicit in any live likelihood.
+
+\subsection*{Code coverage in this repo}
+\textbf{YES.}  The v1 Delta F=2 input bundle defines the \(B_s\) system at
+\texttt{quarkConstraints/deltaf2.py:238} with key \texttt{b\_s} at
+\texttt{quarkConstraints/deltaf2.py:239} and down-sector generations
+\texttt{(1, 2)} at \texttt{quarkConstraints/deltaf2.py:244}.  The hadronic
+constants include the \(B_s\) decay constant at
+\texttt{quarkConstraints/deltaf2.py:645} and \(\Delta m_s\) input at
+\texttt{quarkConstraints/deltaf2.py:651}.  The budget helper is at
+\texttt{quarkConstraints/deltaf2.py:893}; the evaluator is
+\texttt{evaluate\_bs\_mixing} at \texttt{quarkConstraints/deltaf2.py:922},
+with the QCD-running wrapper at \texttt{quarkConstraints/deltaf2.py:969}.
+The modern policy also carries \(B_s\) in
+\texttt{quarkConstraints/modern/phenomenology.py:23}, defines the policy entry
+at \texttt{quarkConstraints/modern/phenomenology.py:135}, and routes it through
+the bridge evaluator at \texttt{quarkConstraints/modern/phenomenology.py:657}
+and \texttt{quarkConstraints/modern/phenomenology.py:1346}.  The shared
+\(\Delta F=2\) operator basis is documented at
+\texttt{quarkConstraints/qcd\_running.py:7}.
+
+\subsection*{Implementation difficulty}
+\textbf{LOW.}  The existing \(\Delta F=2\) basis and RG path already cover the
+needed VLL, VRR, scalar, and left-right structures for \(B_s\) mixing.  Future
+production work is mostly input hygiene: decide the HFLAV/PDG value policy,
+refresh FLAG normalization constants, and document whether the live constraint
+uses a conservative absolute \(M_{12}^{\rm NP}\) budget or an SM-subtracted one.
+
+\subsection*{Key references}
+Process-local reference keys before bibliography consolidation:
+\texttt{hflav\_2024\_dms}, \texttt{hflav\_pdg2025\_dms},
+\texttt{lhcb\_2021\_deltams\_arxiv}, \texttt{flag\_2024\_bmixing}, and
+\texttt{cfw\_2008\_rs\_flavor}.
