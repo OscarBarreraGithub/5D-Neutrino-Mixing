@@ -7,7 +7,7 @@
 % Canonical metadata sidecar: C001.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{C001: \(D^0-\bar D^0\) Mixing}
+\section{\texorpdfstring{C001: \(D^0-\bar D^0\) mixing}{C001: D0-D0bar mixing}}
 
 \subsection*{Process}
 \textbf{Standard notation:} neutral-charm mixing, parameterized by
@@ -18,7 +18,7 @@ used for RS-flavor constraints; the dedicated CP-violation observables
 
 \subsection*{PDG / equivalent value(s)}
 The headline values are the HFLAV CKM25 all-CPV global-fit results, version
-through 14 September 2025:
+through 14 September 2025 (\texttt{hflav\_ckm25\_dmixing\_global\_fit}):
 \[
   x_D=(0.405\pm0.043)\%,\qquad
   y_D=(0.636\pm0.024)\%.
@@ -26,7 +26,8 @@ through 14 September 2025:
 The 95\% C.L. intervals are \(x_D\in[0.320,0.489]\%\) and
 \(y_D\in[0.590,0.682]\%\).  These values are traced to
 \texttt{flavor\_catalog/references/C001/hflav\_ckm25\_dmixing\_global\_fit.txt}
-and to the PDG 2025 Table 70.7 excerpt.  PDG Live separately gives
+and to the PDG 2025 Table 70.7 excerpt.  PDG Live separately gives the
+absolute mass difference (\texttt{pdg2025\_deltam\_d\_pdgLive}),
 \[
   \Delta m_D=(0.997\pm0.116)\times10^{10}\hbar\,{\rm s}^{-1}
              =(6.56\pm0.76)\times10^{-15}\,{\rm GeV},
@@ -34,8 +35,10 @@ and to the PDG 2025 Table 70.7 excerpt.  PDG Live separately gives
 from \texttt{flavor\_catalog/references/C001/pdg2025\_deltam\_d\_pdgLive.txt}.
 For the orchestrator-requested \(\delta y\) block, the sidecar records the
 latest HFLAV/LHCb CPV-sensitive input
-\(\Delta y=(0.031\pm0.035\pm0.013)\%\); it also records the derived
-\(\Delta\Gamma_D/\Gamma_D=2y_D=(1.272\pm0.048)\%\).
+\(\Delta y=(0.031\pm0.035\pm0.013)\%\)
+(\texttt{hflav\_ckm25\_delta\_y\_input}); it also records the derived
+\(\Delta\Gamma_D/\Gamma_D=2y_D=(1.272\pm0.048)\%\)
+(\texttt{hflav\_ckm25\_dmixing\_global\_fit}).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 In anarchic warped models, KK-gluon and other heavy neutral exchanges generate
@@ -46,15 +49,15 @@ useful complementary test of whether the scan's flavor alignment suppresses
 both down- and up-sector neutral currents.
 
 \subsection*{Post-2008 developments}
-The CFW 2008 baseline already treated warped anarchic flavor as strongly
-constrained, with generic RS KK-gluon scales around \(21\) TeV and composite
-pseudo-Goldstone scenarios around \(33\) TeV.  Since then, the charm-mixing
-experimental picture has become much sharper.  LHCb's 2021
-\(D^0\to K_S^0\pi^+\pi^-\) analysis observed a nonzero neutral-charm
-mass difference with significance above seven standard deviations, and the
-current HFLAV/PDG global fits now exclude the no-mixing point at more than
-\(11.5\sigma\).  The same HFLAV fit still finds indirect CP violation
-consistent with zero, so the CP-even magnitudes remain the clean C001 inputs.
+The CFW 2008 baseline (\texttt{cfw2008\_arxiv0804\_1954}) already treated
+warped anarchic flavor as strongly constrained, with generic RS KK-gluon
+scales around \(21\) TeV and composite pseudo-Goldstone scenarios around
+\(33\) TeV.  Since then, the charm-mixing experimental picture has become much
+sharper.  LHCb's 2021 \(D^0\to K_S^0\pi^+\pi^-\) analysis
+(\texttt{lhcb2021\_arxiv2106\_03744}) observed a nonzero neutral-charm mass
+difference, and the current HFLAV/PDG global fits decisively exclude the
+no-mixing point.  The same HFLAV fit remains consistent with no indirect CP
+violation, so the CP-even magnitudes are the clean C001 inputs.
 
 \subsection*{Constraint validity and model dependence}
 As a new-physics constraint this is robust in the sense that any short-distance
@@ -84,7 +87,7 @@ production update would mainly refresh the experimental value and document the
 conservative long-distance treatment, not add a new operator basis.
 
 \subsection*{Key references}
-Process-local keys before bibliography consolidation:
+Process-local source keys before bibliography consolidation:
 \texttt{hflav\_ckm25\_dmixing\_global\_fit},
 \texttt{pdg2025\_deltam\_d\_pdgLive},
 \texttt{pdg2025\_dmixing\_review\_table70\_7},

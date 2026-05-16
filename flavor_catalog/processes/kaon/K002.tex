@@ -8,26 +8,26 @@
 % Canonical metadata sidecar: K002.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{\texorpdfstring{\(\Delta m_K\): \(K_L-K_S\) mass difference}{Delta m K: KL-KS mass difference}}
+\section{\texorpdfstring{K002: \(\Delta m_K\)}{K002: Delta m K}}
 
 \subsection*{Process}
-\textbf{Standard notation:} \(\Delta m_K \equiv m_{K_L}-m_{K_S}\).
-This kaon-family entry covers the CP-even magnitude of neutral-kaon mixing,
-separate from the CP-violating \(\varepsilon_K\) entry.  The process id is
-\(K002\).
+\textbf{Standard notation:} \(\Delta m_K \equiv m_{K_L}-m_{K_S}\).  This entry
+covers the CP-even magnitude of neutral-kaon mixing, separate from the
+CP-violating \(\varepsilon_K\) entry.
 
 \subsection*{PDG / equivalent value(s)}
-The canonical PDG-sidecar value is the 2026 pdgLive fit assuming CPT,
+The canonical PDG-sidecar value is the 2026 pdgLive fit assuming CPT
+(\texttt{pdg\_live\_S013D\_20260516}),
 \[
   \Delta m_K = (0.5293\pm0.0009)\times 10^{10}\,\hbar\,{\rm s}^{-1},
 \]
 with the quoted PDG uncertainty including a scale factor of \(1.3\).  The same
 snapshot gives the companion fit not assuming CPT,
-\((0.5289\pm0.0010)\times 10^{10}\,\hbar\,{\rm s}^{-1}\).  Both values trace to
-\texttt{flavor\_catalog/references/K002/pdg\_live\_S013D\_20260516.txt}.
+\((0.5289\pm0.0010)\times 10^{10}\,\hbar\,{\rm s}^{-1}\).  Both values trace
+to \texttt{flavor\_catalog/references/K002/pdg\_live\_S013D\_20260516.txt}.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
-In anarchic warped flavor models, tree-level exchange of KK gluons generates
+In anarchic warped flavor models, tree-level KK-gluon exchange generates
 \(\Delta S=2\) four-quark operators after rotating to the quark-mass basis.
 \(\Delta m_K\) constrains the real part of the new \(K^0-\bar K^0\) mixing
 amplitude, while \(\varepsilon_K\) constrains its imaginary part.  The same
@@ -39,18 +39,21 @@ large long-distance Standard Model component, so the catalog should treat
 subtraction is supplied.
 
 \subsection*{Post-2008 developments}
-Relative to the arXiv:0804.1954 baseline, the experimental side was updated by
-KTeV's final neutral-kaon analysis, which the PDG fit still uses.  The more
-important post-2008 shift is theoretical: lattice calculations began attacking
-the long-distance contribution directly.  Christ, Izubuchi, Sachrajda, Soni,
-and Yu developed the long-distance method in 2013; Bai et al. then reported a
-first complete lattice calculation in 2014, obtaining
-\(\Delta M_K=3.19(41)(96)\times10^{-12}\,{\rm MeV}\) at heavier-than-physical
-masses.  Later physical-quark-mass studies reported a statistical uncertainty
-approaching \(9\%\) but highlighted remaining systematics.  For BSM
-interpretation, FLAG Review 2024 and the 2024 physical-mass BSM kaon-mixing
-matrix-element calculation update the \(B_K\) and additional four BSM bag-input
-landscape used to translate Wilson coefficients into matrix elements.
+Relative to the CFW 2008 baseline (\texttt{cfw\_2008}), the experimental
+side was updated by KTeV's final neutral-kaon analysis
+(\texttt{ktev\_2011}), which the PDG fit still uses.  The more important
+post-2008 shift is theoretical: lattice calculations began attacking the
+long-distance contribution directly.  Christ et al.
+(\texttt{christ\_2013\_ld\_delta\_mk}) developed the long-distance method,
+and Bai et al. (\texttt{bai\_2014\_delta\_mk}) reported a first complete
+lattice calculation,
+\(\Delta M_K=3.19(41)(96)\times10^{-12}\,{\rm MeV}\), at
+heavier-than-physical masses.  Later physical-quark-mass studies
+(\texttt{wang\_2023\_delta\_mk}) reached statistical uncertainty near
+\(9\%\) while retaining important systematics.  For BSM interpretation, FLAG
+2024 (\texttt{flag2024}) and the physical-mass BSM kaon-mixing calculation
+(\texttt{boyle\_2024\_bsm\_kaon\_mixing}) update the bag inputs used to
+translate Wilson coefficients into matrix elements.
 
 \subsection*{Constraint validity and model dependence}
 The experimental number is precise, but \(\Delta m_K\) is long-distance
@@ -82,7 +85,7 @@ covers the required Wilson coefficients.  A future precision SM-subtracted
 \(\Delta m_K\) likelihood would be a separate high-theory-effort project.
 
 \subsection*{Key references}
-Local source keys: \texttt{pdg\_live\_S013D\_20260516},
+Process-local source keys: \texttt{pdg\_live\_S013D\_20260516},
 \texttt{ktev\_2011}, \texttt{christ\_2013\_ld\_delta\_mk},
 \texttt{bai\_2014\_delta\_mk}, \texttt{wang\_2020\_physical\_delta\_mk},
 \texttt{wang\_2023\_delta\_mk}, \texttt{boyle\_2024\_bsm\_kaon\_mixing},

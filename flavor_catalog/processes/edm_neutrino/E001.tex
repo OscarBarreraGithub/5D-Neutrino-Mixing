@@ -8,7 +8,7 @@
 % Canonical metadata sidecar: E001.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{Electron electric dipole moment}
+\section{E001: Electron electric dipole moment}
 
 \subsection*{Process}
 \textbf{Standard notation:} \(d_e\).  This entry covers the flavor-diagonal
@@ -18,7 +18,7 @@ observable; its RS relevance comes from CP-violating lepton dipoles generated
 by heavy lepton, neutrino, Higgs, or gauge-sector dynamics.
 
 \subsection*{PDG / equivalent value(s)}
-PDG Live 2026 lists the current bound as
+PDG Live 2026 (\texttt{PDG2026:ElectronEDM}) lists the current bound as
 \[
   |d_e| < 4.1\times 10^{-30}\ e\,\mathrm{cm}
   \qquad (90\%~\mathrm{CL}),
@@ -27,10 +27,12 @@ from the Roussy et al. 2023 HfF\({}^+\) molecular-ion measurement; see
 \texttt{flavor\_catalog/references/E001/pdg2026\_electron\_edm\_datablock.txt}.
 The PDG datablock reports the table value as \(<0.041\) in units of
 \(10^{-28}\ e\,\mathrm{cm}\), and records the corresponding measurement as
-\((-1.3\pm2.0_{\rm stat}\pm0.6_{\rm syst})\times10^{-30}\ e\,\mathrm{cm}\).
+\((-1.3\pm2.0_{\rm stat}\pm0.6_{\rm syst})\times10^{-30}\ e\,\mathrm{cm}\)
+(\texttt{Roussy:ElectronEDM2023}).
 The superseded ACME/Andreev 2018 ThO benchmark is
 \(|d_e|<1.1\times10^{-29}\ e\,\mathrm{cm}\) at \(90\%\) CL, with the PDG
-measurement note \((4.3\pm3.1\pm2.6)\times10^{-30}\ e\,\mathrm{cm}\).
+measurement note \((4.3\pm3.1\pm2.6)\times10^{-30}\ e\,\mathrm{cm}\)
+(\texttt{ACME:ElectronEDM2018}).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 The electron EDM constrains the imaginary part of a CP-odd lepton dipole,
@@ -43,16 +45,20 @@ introduce additional complex spurions.  It does not directly constrain the
 current quark-only \(\Delta F=2\) scan.
 
 \subsection*{Post-2008 developments}
-Relative to the 2008 CFW RS-flavor reference point, the experimental EDM
-frontier changed qualitatively.  ACME 2018 set the previous molecular ThO
+Relative to the 2008 CFW RS-flavor reference point
+(\texttt{CsakiFalkowskiWeiler:RSFlavor2008}), the experimental EDM frontier
+changed qualitatively.  ACME 2018 (\texttt{ACME:ElectronEDM2018}) set the
+previous molecular ThO
 limit at \(1.1\times10^{-29}\ e\,\mathrm{cm}\), already strong enough to
 motivate EFT treatments of CP-violating electron dipoles.  Roussy et al. 2023
-then improved the previous best upper bound by about \(2.4\) using trapped
-HfF\({}^+\) molecular ions, yielding the current PDG value above.  The
-post-ACME EFT literature, represented here by Panico, Pomarol, and Riembau
-2019, treats electron EDMs as constraints on CP-violating dipole operators
-and their two-loop anomalous dimensions, which is the natural language for a
-future Wilson-coefficient implementation.
+(\texttt{Roussy:ElectronEDM2023}) then improved the previous best upper
+bound by about \(2.4\) using trapped HfF\({}^+\) molecular ions, yielding the
+current PDG value above.  The post-ACME EFT literature, represented here by
+Panico, Pomarol, and Riembau 2019
+(\texttt{PanicoPomarolRiembau:ElectronEDM2019}), treats electron EDMs as
+constraints on CP-violating dipole operators and their two-loop anomalous
+dimensions, the natural language for a future Wilson-coefficient
+implementation.
 
 \subsection*{Constraint validity and model dependence}
 The experimental null limit is robust as a bound on the effective electron EDM
@@ -83,7 +89,7 @@ existing \(\Delta F=2\) operator basis and the \(\mu\to e\gamma\) NDA helper
 do not provide the needed CP-odd \(d_e\) calculation.
 
 \subsection*{Key references}
-Process-local reference keys before bibliography consolidation:
+Process-local source keys before bibliography consolidation:
 \texttt{PDG2026:ElectronEDM}, \texttt{Roussy:ElectronEDM2023},
 \texttt{ACME:ElectronEDM2018},
 \texttt{PanicoPomarolRiembau:ElectronEDM2019}, and
