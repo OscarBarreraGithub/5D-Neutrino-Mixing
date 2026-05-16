@@ -54,6 +54,10 @@ status_history:
     verdict: "VERIFIED"
     findings_count: 0
     notes: "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+  - state: "SUBTLETY-ADDED"
+    timestamp: "2026-05-16T18:26:12-04:00"
+    agent: "subtlety-writer-wave7"
+    note: "D: photon polarization in radiative B"
 checker_passed_at: "2026-05-16T11:45:36-04:00"
 opus_approved_at: "2026-05-16T14:55:00-04:00"
 fact_checked_at: "2026-05-16T17:52:00-04:00"

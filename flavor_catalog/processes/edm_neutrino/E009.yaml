@@ -81,6 +81,10 @@ status_history:
     verdict: "PARTIAL"
     findings_count: 0
     notes: "Neutron anchor and Weinberg-operator benchmark values verified; INSPIRE Weinberg 1989 URL rendered JS-only, with metadata cross-checked via APS/local snapshot."
+  - state: "SUBTLETY-ADDED"
+    timestamp: "2026-05-16T18:26:12-04:00"
+    agent: "subtlety-writer-wave7"
+    note: "E: EDMs belong inside the flavor fit"
 checker_passed_at: "2026-05-16T16:27:21-04:00"
 opus_approved_at: "2026-05-16T17:30:00-04:00"
 fact_checked_at: "2026-05-16T17:45:00-04:00"

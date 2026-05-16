@@ -80,6 +80,10 @@ status_history:
     verdict: "VERIFIED"
     findings_count: 0
     notes: "All measured HFLAV/PDG values verified; CFW scale context skipped per theory-normalization policy."
+  - state: "SUBTLETY-ADDED"
+    timestamp: "2026-05-16T18:26:12-04:00"
+    agent: "subtlety-writer-wave7"
+    note: "B: down-sector alignment promotes up-sector observables"
 checker_passed_at: "2026-05-16T12:56:21-04:00"
 opus_approved_at: "2026-05-16T14:55:00-04:00"
 fact_checked_at: "2026-05-16T17:58:00-04:00"

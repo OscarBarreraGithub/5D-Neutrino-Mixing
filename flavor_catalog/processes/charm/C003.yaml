@@ -69,6 +69,10 @@ status_history:
     verdict: "VERIFIED"
     findings_count: 0
     notes: "HFLAV direct/indirect CPV averages and LHCb 2019 discovery value verified."
+  - state: "SUBTLETY-ADDED"
+    timestamp: "2026-05-16T18:26:12-04:00"
+    agent: "subtlety-writer-wave7"
+    note: "B: down-sector alignment promotes up-sector observables"
 checker_passed_at: "2026-05-16T14:16:41-04:00"
 opus_approved_at: "2026-05-16T14:55:00-04:00"
 fact_checked_at: "2026-05-16T17:58:00-04:00"

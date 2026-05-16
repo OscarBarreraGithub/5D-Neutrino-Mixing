@@ -58,6 +58,10 @@ status_history:
     verdict: "VERIFIED"
     findings_count: 0
     notes: "Neutron EDM PDG current and superseded limits plus Abel 2020 measurement verified against fetched sources and snapshots."
+  - state: "SUBTLETY-ADDED"
+    timestamp: "2026-05-16T18:26:12-04:00"
+    agent: "subtlety-writer-wave7"
+    note: "E: EDMs belong inside the flavor fit"
 checker_passed_at: "2026-05-16T13:47:19-04:00"
 opus_approved_at: "2026-05-16T14:55:00-04:00"
 fact_checked_at: "2026-05-16T17:45:00-04:00"
