@@ -50,9 +50,18 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "WA cycle 2 addressed CA CHK-1 by adding pdg_or_equivalent.values metadata for the flagged Mu2e and COMET projection/context numbers."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T15:30:46-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T15:30:46-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    cycle: 2
+    reason: "Checker cycle 2 ca_w5a_charged_lepton_edm_v2 verified WA-v2 traceability and checklist items CHK-1..CHK-8."
+checker_passed_at: "2026-05-16T15:30:46-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:15:17-04:00"
+last_updated_at: "2026-05-16T15:30:46-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba"
