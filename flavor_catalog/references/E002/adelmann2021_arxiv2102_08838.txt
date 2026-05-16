@@ -1,0 +1,25 @@
+Source key: Adelmann:MuonEDMPSI2021
+Source: arXiv abstract page for arXiv:2102.08838
+URL: https://arxiv.org/abs/2102.08838
+Access date: 2026-05-16
+Snapshot type: Minimal arXiv metadata and proposal-sensitivity extract.
+
+Title: Search for a muon EDM using the frozen-spin technique.
+Authors: A. Adelmann et al.
+Submitted: 2021-02-17.
+arXiv DOI: 10.48550/arXiv.2102.08838.
+
+Proposal context:
+  The paper is based on a letter of intent submitted to the PSI CHRISP research
+  committee in January 2021. It proposes a frozen-spin muon-EDM search at PSI.
+
+Numerical proposal values from the arXiv abstract:
+  Muon momentum: p = 125 MeV/c.
+  Magnetic field magnitude: |B| = 3 T.
+  Rest-frame electric field: E = 1 GV/m.
+  Expected sensitivity at the PSI muE1 beam line: sigma(d_mu) <= 6 x 10^-23 e cm.
+  Current direct limit quoted in the abstract: |d_mu| <= 1.8 x 10^-19 e cm at 95% CL.
+
+Use in E002:
+  This is a future/proposal source, not a measured PDG-equivalent observable.
+  Its sensitivity numbers are recorded as projections in the YAML sidecar.

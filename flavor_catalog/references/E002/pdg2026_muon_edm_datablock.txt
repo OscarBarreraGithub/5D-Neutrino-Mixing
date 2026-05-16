@@ -1,0 +1,34 @@
+Source key: PDG2026:MuonEDM
+Source: PDG Live S004EDM muon electric dipole moment datablock
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?cl=T&desig=&init=0&node=S004EDM&parCode=S004EDM
+Access date: 2026-05-16
+Snapshot type: Minimal text extract from PDG Live; no publisher PDF.
+
+PDG edition: 2026 Review of Particle Physics.
+PDG citation on page: F. Takahashi et al. (Particle Data Group), Int. J. Mod. Phys. A 41, 2630011 (2026).
+
+Observable: mu electric dipole moment, d.
+PDG note: A nonzero value is forbidden by both T invariance and P invariance.
+
+Datablock: S004EDM
+Table units: VALUE (10^-19 e cm), CL%.
+
+Canonical direct experimental result:
+  <1.8, CL = 95%, Bennett 2009, method MUG2 +/- storage ring.
+Converted value:
+  |d_mu| < 1.8 x 10^-19 e cm at 95% CL.
+
+PDG notes on the Bennett 2009 entries:
+  The canonical limit is the combination of the mu+ and mu- Bennett 2009 measurements.
+  The combined result is also presented as a measurement of (0.0 +/- 0.9) x 10^-19 e cm.
+  The mu+ entry is -0.1 +/- 1.0 in units of 10^-19 e cm, also reported as |d(mu+)| < 2.1 x 10^-19 e cm at 95% CL.
+  The mu- entry is -0.1 +/- 0.7 in units of 10^-19 e cm, also reported as |d(mu-)| < 1.5 x 10^-19 e cm at 95% CL.
+
+PDG non-averaged/theory entry not used as the canonical measured observable:
+  Ema 2022 gives <0.19 in units of 10^-19 e cm at 90% CL as an indirect theory limit.
+  The PDG page states this entry is not used for averages, fits, limits, etc.
+
+PDG reference list entries relevant to this snapshot:
+  Ema 2022, Phys. Rev. Lett. 128, 131803, Improved Indirect Limits on Muon Electric Dipole Moment.
+  Bennett 2009, Phys. Rev. D 80, 052008, Improved Limit on the Muon Electric Dipole Moment.
+  Bailey 1978, J. Phys. G 4, 345, New Limits on the Electric Dipole Moment of Positive and Negative Muons.

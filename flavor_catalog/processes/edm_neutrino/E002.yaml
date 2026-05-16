@@ -1,0 +1,160 @@
+schema: flavor_catalog.process.v1
+process_id: E002
+family: edm_neutrino
+standard_notation: "d_mu"
+process_name: "Muon electric dipole moment"
+owner: "PKA"
+owner_agent_id: "PKA-E002"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:07:18-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:07:18-04:00"
+    agent_id: "PKA-E002"
+    reason: "Initial PKA source extraction and draft started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T14:07:18-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T14:07:18-04:00"
+    agent_id: "PKA-E002"
+    reason: "PKA draft, minimal source snapshots, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:07:18-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_muon_edm_datablock.txt: "sha256:2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1"
+  bennett2009_arxiv0811_1207.txt: "sha256:16ce7a84e7baff9e76d9a96ded01ddfc590057ab8f22f51b9dfd8afc5b878362"
+  adelmann2021_arxiv2102_08838.txt: "sha256:bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5"
+  renga2024_arxiv2409_20050.txt: "sha256:c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728"
+  cfw2008_arxiv0804_1954.txt: "sha256:b4addc6c76bc52bb5b99d1253061b3fa1a5b8e6353d9ded999bbc62813832c3b"
+pdg_or_equivalent:
+  canonical_direct_limit:
+    source: "PDG Live 2026 S004EDM muon electric dipole moment datablock"
+    year: 2026
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?cl=T&desig=&init=0&node=S004EDM&parCode=S004EDM"
+    access_date: "2026-05-16"
+    observable: "Muon electric dipole moment"
+    value_summary: "|d_mu| < 1.8 x 10^-19 e cm at 95% CL"
+    value: 1.8e-19
+    uncertainty: null
+    units: "e cm"
+    limit_operator: "<"
+    confidence_level: "95%"
+    table_value: 1.8
+    table_units: "10^-19 e cm"
+    used_measurement: "Bennett 2009, BNL E821 muon g-2 storage ring"
+    snapshot_path: "flavor_catalog/references/E002/pdg2026_muon_edm_datablock.txt"
+    sha256: "2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1"
+    sha256_of_local_snapshot: "sha256:2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1"
+  pdg_combined_measurement:
+    source: "PDG Live 2026 S004EDM muon electric dipole moment datablock"
+    year: 2026
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?cl=T&desig=&init=0&node=S004EDM&parCode=S004EDM"
+    access_date: "2026-05-16"
+    observable: "Muon electric dipole moment, combined Bennett 2009 measurement as quoted by PDG"
+    value: 0.0
+    uncertainty: 0.9
+    units: "10^-19 e cm"
+    value_summary: "d_mu = (0.0 +/- 0.9) x 10^-19 e cm"
+    snapshot_path: "flavor_catalog/references/E002/pdg2026_muon_edm_datablock.txt"
+    sha256: "2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1"
+    sha256_of_local_snapshot: "sha256:2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1"
+  primary_bnl_measurement:
+    source: "Bennett et al. (Muon g-2 Collaboration), arXiv:0811.1207 / Phys. Rev. D 80, 052008 (2009)"
+    year: 2009
+    source_url: "https://arxiv.org/abs/0811.1207"
+    access_date: "2026-05-16"
+    observable: "Muon electric dipole moment from BNL E821 storage-ring spin precession"
+    value: -0.1
+    uncertainty: 0.9
+    units: "10^-19 e cm"
+    limit_value: 1.9e-19
+    limit_operator: "<"
+    limit_units: "e cm"
+    confidence_level: "95%"
+    value_summary: "d_mu = -0.1(0.9) x 10^-19 e cm; |d_mu| < 1.9 x 10^-19 e cm at 95% CL"
+    snapshot_path: "flavor_catalog/references/E002/bennett2009_arxiv0811_1207.txt"
+    sha256: "16ce7a84e7baff9e76d9a96ded01ddfc590057ab8f22f51b9dfd8afc5b878362"
+    sha256_of_local_snapshot: "sha256:16ce7a84e7baff9e76d9a96ded01ddfc590057ab8f22f51b9dfd8afc5b878362"
+auxiliary_values:
+  psi_frozen_spin_projection:
+    source: "Adelmann et al., arXiv:2102.08838"
+    year: 2021
+    source_url: "https://arxiv.org/abs/2102.08838"
+    access_date: "2026-05-16"
+    classification: "future_projection_not_pdg_or_equivalent"
+    muon_momentum: 125
+    muon_momentum_units: "MeV/c"
+    magnetic_field: 3
+    magnetic_field_units: "T"
+    rest_frame_electric_field: 1
+    rest_frame_electric_field_units: "GV/m"
+    sensitivity_value: 6.0e-23
+    sensitivity_operator: "<="
+    sensitivity_units: "e cm"
+    quoted_current_limit: 1.8e-19
+    quoted_current_limit_units: "e cm"
+    quoted_current_limit_confidence_level: "95%"
+    snapshot_path: "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt"
+    sha256: "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5"
+    sha256_of_local_snapshot: "sha256:bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5"
+  psi_2024_status:
+    source: "Renga for the muEDM collaboration, arXiv:2409.20050"
+    year: 2024
+    source_url: "https://arxiv.org/abs/2409.20050"
+    access_date: "2026-05-16"
+    classification: "future_status_not_pdg_or_equivalent"
+    first_phase_target_year: 2026
+    ultimate_improvement_factor: 100
+    ultimate_goal_period: "early 2030s"
+    snapshot_path: "flavor_catalog/references/E002/renga2024_arxiv2409_20050.txt"
+    sha256: "c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728"
+    sha256_of_local_snapshot: "sha256:c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728"
+paper_era_references:
+  cfw_2008_reference_point:
+    source: "Csaki, Falkowski, and Weiler, arXiv:0804.1954"
+    year: 2008
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    role: "2008 RS-flavor reference point for post-2008 comparison; not a muon-EDM measurement."
+    snapshot_path: "flavor_catalog/references/E002/cfw2008_arxiv0804_1954.txt"
+    sha256: "b4addc6c76bc52bb5b99d1253061b3fa1a5b8e6353d9ded999bbc62813832c3b"
+    sha256_of_local_snapshot: "sha256:b4addc6c76bc52bb5b99d1253061b3fa1a5b8e6353d9ded999bbc62813832c3b"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n 'muEDM|muon.?EDM|muon electric dipole' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n '(^|[^[:alnum:]_])d_mu([^[:alnum:]_]|$)|(^|[^[:alnum:]_])dmu([^[:alnum:]_]|$)' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n 'electric dipole|EDM' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n 'muToEGamma|check_mu_to_e_gamma|PREFAC_BR|BR_LIMIT' flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+  findings:
+    - "Focused greps for muEDM, muon EDM, muon electric dipole, d_mu, and dmu over the required implementation/test directories returned no relevant muon-EDM implementation."
+    - "A broader d_mu-like grep produced only false positives for hadronic scales such as m_d_mu_had_GeV, not the muon EDM observable."
+    - "A focused electric dipole/EDM grep over the required implementation/test directories returned no matches."
+    - "flavorConstraints/muToEGamma.py:3, flavorConstraints/muToEGamma.py:21, and flavorConstraints/muToEGamma.py:81 implement an off-diagonal mu->e gamma dipole constraint, not the flavor-diagonal muon EDM."
+    - "scanParams/scan.py:33 records a MEG II mu->e gamma branching-fraction bound, not a muon EDM constraint."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "Requires a new flavor-diagonal CP-odd lepton dipole observable, lepton/KK loop matching, and likely SMEFT-to-low-energy running. Existing Delta F=2 utilities and the mu->e gamma NDA helper do not compute d_mu."
+open_issues:
+  - "WA/CA should decide how much of the PSI projection detail belongs in the final prose versus auxiliary metadata."
+  - "If promoted to live code, the PI must specify the lepton-sector matching assumptions and whether muon EDM is a hard constraint or a roadmap diagnostic."

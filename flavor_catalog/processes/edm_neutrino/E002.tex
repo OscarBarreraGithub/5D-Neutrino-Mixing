@@ -1,0 +1,88 @@
+% Flavor catalog per-process template.
+% process_id: E002
+% family: edm_neutrino
+% owner_agent_id: PKA-E002
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: E002.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{E002: Muon electric dipole moment}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(d_\mu\).  This entry covers the flavor-diagonal
+CP-odd electric dipole moment of the muon, cataloged in the
+\texttt{edm\_neutrino} family.  It is an EDM-adjacent lepton-sector process,
+not a charged-lepton-flavor-violating decay and not a quark \(\Delta F=2\)
+observable.
+
+\subsection*{PDG / equivalent value(s)}
+PDG Live 2026 (\texttt{PDG2026:MuonEDM}) lists the canonical direct
+experimental bound as
+\[
+  |d_\mu| < 1.8\times10^{-19}\ e\,\mathrm{cm}
+  \qquad (95\%~\mathrm{CL}),
+\]
+from the Bennett et al. BNL E821 storage-ring analysis; see
+\texttt{flavor\_catalog/references/E002/pdg2026\_muon\_edm\_datablock.txt}.
+The same PDG datablock records the combined result as
+\((0.0\pm0.9)\times10^{-19}\ e\,\mathrm{cm}\).  The primary arXiv abstract
+(\texttt{Bennett:MuonEDM2009}) reports
+\(d_\mu=-0.1(0.9)\times10^{-19}\ e\,\mathrm{cm}\) and quotes
+\(|d_\mu|<1.9\times10^{-19}\ e\,\mathrm{cm}\) at \(95\%\) CL.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+A nonzero \(d_\mu\) probes the imaginary part of the flavor-diagonal muon
+dipole operator, schematically
+\(\bar\mu\sigma_{\alpha\beta}\gamma_5\mu F^{\alpha\beta}\).  In warped
+lepton extensions, anarchic charged-lepton and neutrino Yukawa structures can
+generate such dipoles through loop matching involving KK leptons, Higgs
+dynamics, or gauge-sector phases.  The process therefore diagnoses CP
+alignment in the muon sector, complementary to \(\mu\to e\gamma\), but it does
+not directly constrain the existing quark-only scan.
+
+\subsection*{Post-2008 developments}
+Relative to the 2008 CFW warped-flavor reference point
+(\texttt{CsakiFalkowskiWeiler:RSFlavor2008}), the key direct experimental
+development is the BNL E821 publication in 2009.  That analysis used muon
+\(g-2\) storage-ring spin-precession data and remains the basis of the PDG
+direct limit.  The major post-2008 prospective change is the dedicated PSI
+muEDM program.  The 2021 PSI letter of intent
+(\texttt{Adelmann:MuonEDMPSI2021}) proposes a frozen-spin search with
+\(p=125~\mathrm{MeV}/c\), \(|B|=3~\mathrm{T}\), a rest-frame electric field
+of \(1~\mathrm{GV/m}\), and an expected sensitivity
+\(\sigma(d_\mu)\leq6\times10^{-23}\ e\,\mathrm{cm}\).  A 2024 muEDM status
+proceeding (\texttt{Renga:MuonEDMStatus2024}) describes a first phase aimed
+at demonstrating feasibility by 2026, with an ultimate goal of improving the
+sensitivity by a factor of \(100\) by the early 2030s.
+
+\subsection*{Constraint validity and model dependence}
+The PDG number is a robust direct storage-ring bound on a static muon EDM.
+Its interpretation in RS is model-dependent: a live constraint requires the
+lepton-sector CP phases, the dipole matching scale, and the treatment of
+SMEFT/low-energy running to be fixed.  The PSI entries are projections and
+should be treated as roadmap information, not current exclusions.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Focused greps for \texttt{muEDM}, \texttt{muon.?EDM},
+\texttt{muon electric dipole}, \texttt{d\_mu}, and \texttt{dmu} over
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/} found no muon-EDM
+implementation.  The nearby dipole code is the off-diagonal
+\(\mu\to e\gamma\) helper in \texttt{flavorConstraints/muToEGamma.py:3},
+\texttt{:21}, and \texttt{:81}, with the MEG II branching-fraction default at
+\texttt{scanParams/scan.py:33}; that is a different observable.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production implementation needs a new flavor-diagonal
+CP-odd lepton dipole observable, loop matching from the lepton/KK sector, and
+likely SMEFT-to-low-energy running.  The existing \(\Delta F=2\) basis and the
+\(\mu\to e\gamma\) NDA helper do not calculate \(d_\mu\).
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2026:MuonEDM}, \texttt{Bennett:MuonEDM2009},
+\texttt{Adelmann:MuonEDMPSI2021}, \texttt{Renga:MuonEDMStatus2024}, and
+\texttt{CsakiFalkowskiWeiler:RSFlavor2008}.
