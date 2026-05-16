@@ -1,0 +1,132 @@
+schema: flavor_catalog.process.v1
+process_id: B017
+family: beauty
+standard_notation: "B -> X_s ell+ ell-, B -> K(*) ell+ ell-, R_K, R_K*"
+process_name: "Inclusive and exclusive b -> s ell+ ell- rare B decays"
+owner: "PKA"
+owner_agent_id: "PKA-B017"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T11:06:53-04:00"
+    timestamp: "2026-05-16T11:06:53-04:00"
+    agent_id: "PKA-B017"
+    reason: "initial PKA draft deposit for umbrella b -> s ell ell entry"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:15:35-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:15:35-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    reason: "WA polish for batch wa_w23_beauty completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T12:15:35-04:00"
+version: "0.1.0"
+source_shas:
+  cfw_0804_1954_rs_flavor.txt: "sha256:36cc8855f8de4d402dc96628a2534513b3543129acff4d8df277aab5fafc7c03"
+  hflav_dec2025_B0_to_Kst0_ll.txt: "sha256:69c60b8b18cf2f0778a1e58a0eed1232e9faa1bb31aaa3adc977edf879a16090"
+  hflav_dec2025_B_to_Xsll.txt: "sha256:06feaa8868e8a27246bf8fa6e11aaa3bf7749da22cbe0ff33062665784fcd5a4"
+  hflav_dec2025_Bplus_to_Kplus_ll.txt: "sha256:08bac0f7f097ee08b784a8e2d213b9fdb9d2275bb4324896e4fe5c829bd5d873"
+  hflav_dec2025_overview.txt: "sha256:2684978b6a28c097e46b89895ecc0eb042a0f72fee844b291434818779f15b72"
+  lhcb_2003_04831_Kst_angular.txt: "sha256:47c7006b395086af8e837f2f1cac13d36498b2211380f6dc6b28ca45b93f16c8"
+  lhcb_2212_09153_RK_RKst.txt: "sha256:7f1fc972e8258f61b5c711b77c5610b05287cd9851cbedaa6e4c4f5830c7170e"
+  wen_xu_2305_19038_global_fit.txt: "sha256:ba0e8b43a8efbe10d5fef196e2e73a265221a725ef9cbdbad7bbd76178104b8e"
+pdg_or_equivalent:
+  source: "HFLAV rare B decays End of December 2025 plus LHCb Run-1/Run-2 lepton-universality paper"
+  access_date: "2026-05-16"
+  year: 2025
+  value_summary: "HFLAV averages: BR(B -> X_s ell+ ell-) = (5.84 +/- 0.69)e-6, BR(B+ -> K+ ell+ ell-) = (5.76 +/- 0.40)e-7, BR(B0 -> K*(892)0 ell+ ell-) = (9.9 +/- 1.2)e-7. LHCb: R_K(low q2) = 0.994^{+0.090}_{-0.082}^{+0.029}_{-0.027}, R_K(central q2) = 0.949^{+0.042}_{-0.041}^{+0.022}_{-0.022}, R_K*(low q2) = 0.927^{+0.093}_{-0.087}^{+0.036}_{-0.035}, R_K*(central q2) = 1.027^{+0.072}_{-0.068}^{+0.027}_{-0.026}."
+  observables:
+    - name: "BR(B -> X_s ell+ ell-)"
+      year: 2025
+      value: "5.84"
+      uncertainty: "+/- 0.69"
+      units: "10^-6"
+      source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Badmix/BR_Badmix_Xs_l+_l-.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B017/hflav_dec2025_B_to_Xsll.txt"
+      sha256_of_text_snapshot: "sha256:06feaa8868e8a27246bf8fa6e11aaa3bf7749da22cbe0ff33062665784fcd5a4"
+      note: "HFLAV average; HFLAV also lists PDG value 5.84^{+1.31}_{-1.23} in the same units."
+    - name: "BR(B+ -> K+ ell+ ell-)"
+      year: 2025
+      value: "5.76"
+      uncertainty: "+/- 0.40"
+      units: "10^-7"
+      source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_l+_l-.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B017/hflav_dec2025_Bplus_to_Kplus_ll.txt"
+      sha256_of_text_snapshot: "sha256:08bac0f7f097ee08b784a8e2d213b9fdb9d2275bb4324896e4fe5c829bd5d873"
+      note: "HFLAV average; charmonium-treatment differences are noted by HFLAV."
+    - name: "BR(B0 -> K*(892)0 ell+ ell-)"
+      year: 2025
+      value: "9.9"
+      uncertainty: "+/- 1.2"
+      units: "10^-7"
+      source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bd/BR_B0_K*0_l+_l-.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B017/hflav_dec2025_B0_to_Kst0_ll.txt"
+      sha256_of_text_snapshot: "sha256:69c60b8b18cf2f0778a1e58a0eed1232e9faa1bb31aaa3adc977edf879a16090"
+      note: "HFLAV average for K*(892)0 inclusive in lepton flavor."
+    - name: "R_K low-q2"
+      year: 2023
+      value: "0.994"
+      uncertainty: "+0.090/-0.082 stat, +0.029/-0.027 syst"
+      units: "dimensionless"
+      q2_region: "0.1 < q^2 < 1.1 GeV^2/c^4"
+      source_url: "https://arxiv.org/abs/2212.09153"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B017/lhcb_2212_09153_RK_RKst.txt"
+      sha256_of_text_snapshot: "sha256:7f1fc972e8258f61b5c711b77c5610b05287cd9851cbedaa6e4c4f5830c7170e"
+    - name: "R_K central-q2"
+      year: 2023
+      value: "0.949"
+      uncertainty: "+0.042/-0.041 stat, +/-0.022 syst"
+      units: "dimensionless"
+      q2_region: "1.1 < q^2 < 6.0 GeV^2/c^4"
+      source_url: "https://arxiv.org/abs/2212.09153"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B017/lhcb_2212_09153_RK_RKst.txt"
+      sha256_of_text_snapshot: "sha256:7f1fc972e8258f61b5c711b77c5610b05287cd9851cbedaa6e4c4f5830c7170e"
+    - name: "R_K* low-q2"
+      year: 2023
+      value: "0.927"
+      uncertainty: "+0.093/-0.087 stat, +0.036/-0.035 syst"
+      units: "dimensionless"
+      q2_region: "0.1 < q^2 < 1.1 GeV^2/c^4"
+      source_url: "https://arxiv.org/abs/2212.09153"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B017/lhcb_2212_09153_RK_RKst.txt"
+      sha256_of_text_snapshot: "sha256:7f1fc972e8258f61b5c711b77c5610b05287cd9851cbedaa6e4c4f5830c7170e"
+    - name: "R_K* central-q2"
+      year: 2023
+      value: "1.027"
+      uncertainty: "+0.072/-0.068 stat, +0.027/-0.026 syst"
+      units: "dimensionless"
+      q2_region: "1.1 < q^2 < 6.0 GeV^2/c^4"
+      source_url: "https://arxiv.org/abs/2212.09153"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B017/lhcb_2212_09153_RK_RKst.txt"
+      sha256_of_text_snapshot: "sha256:7f1fc972e8258f61b5c711b77c5610b05287cd9851cbedaa6e4c4f5830c7170e"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems."
+    - "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no b -> s ell ell observable is present in flavorConstraints."
+    - "Required plan Section F grep commands and targeted code-only rg searches for C9, C10, R_K, X_s, B_to_K, Kst, Kstar, and P5prime found no live implementation; matches were planner docs or false-positive R_KEYWORD/PAPER names."
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    - "rg -n -e 'C9' -e 'C10' -e 'R_K' -e 'R_\\\\{K' -e 'X_s' -e 'b_to_s' -e 'btos' -e 'B_to_K' -e 'BtoK' -e 'Kst' -e 'Kstar' -e 'P5prime' -e 'P_5' quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd solvers tests -g '!*.ipynb'"
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_notes: "Requires a new Delta B = 1 semileptonic weak Hamiltonian, matching onto C7/C9/C10 and primed operators, q^2-bin-aware predictions, form factors, charm-loop treatment, and correlated experimental likelihoods."
+open_issues:
+  - "B017 was used as an umbrella for the assigned B015-B019 scope; orchestrator may later split inclusive, exclusive, and LFU-ratio entries."
+  - "HFLAV tables are suitable for branching-fraction averages but not for angular-observable likelihoods; WA/CA should decide whether to attach machine-readable LHCb angular tables in a later pass."

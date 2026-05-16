@@ -16,11 +16,11 @@ two-body charmless \(B\to K\pi\) modes with charge conjugates implied.  This
 entry covers branching fractions, direct CP asymmetries, and the
 time-dependent \(C_{K^0\pi^0}\) and \(S_{K^0\pi^0}\) coefficients.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The canonical branching-fraction source is the HFLAV End-of-December 2025
 rare/charmless update, locally snapshot in
-\texttt{references/B032/hflav\_dec2025\_btopik\_values.txt}.  In HFLAV units of
-\(10^{-5}\),
+\texttt{references/B032/hflav\_dec2025\_btopik\_values.txt} under source key
+\texttt{hflav\_dec2025\_btopik}.  In HFLAV units of \(10^{-5}\),
 \[
 \begin{array}{c|c}
 {\rm mode} & {\cal B} \\
@@ -31,12 +31,14 @@ B^0\to K^+\pi^- & 2.007\pm0.040 \\
 B^0\to K^0\pi^0 & 1.012\pm0.043
 \end{array}
 \]
-The same HFLAV snapshot gives direct asymmetries in percent:
+The same HFLAV snapshot gives direct asymmetries in \%:
 \[
-A_{CP}(K^0_S\pi^+)=-2.67\pm0.87,\quad
-A_{CP}(K^+\pi^0)=+2.7\pm1.2,\quad
-A_{CP}(K^+\pi^-)=-8.31\pm0.31,\quad
-A_{CP}(K^0\pi^0)=-1\pm13 .
+A_{CP}(K^0_S\pi^+)=(-2.67\pm0.87)\%,\quad
+A_{CP}(K^+\pi^0)=(+2.7\pm1.2)\%,
+\]
+\[
+A_{CP}(K^+\pi^-)=(-8.31\pm0.31)\%,\quad
+A_{CP}(K^0\pi^0)=(-1\pm13)\% .
 \]
 For the neutral time-dependent mode, the PDG 2025 API snapshot
 \texttt{references/B032/pdg2025\_k0pi0\_time\_dependent\_cp\_api.txt} gives
@@ -59,11 +61,14 @@ Since the arXiv:0804.1954 RS-flavor benchmark era, the main changes are
 experimental.  Belle and BaBar final samples were folded into HFLAV, LHCb
 measured \(A_{CP}(B^+\to K^+\pi^0)=0.025\pm0.015\pm0.006\pm0.003\) and
 explicitly sharpened the charged--neutral \(K\pi\) direct-asymmetry puzzle,
-and Belle II added 2024 measurements of all four \(K\pi\) branching fractions
-and direct asymmetries.  Belle II also measured \(B^0\to K_S^0\pi^0\)
+under source key \texttt{lhcb2021\_bplus\_kplus\_pi0\_acp}, and Belle II
+added 2024 measurements of all four \(K\pi\) branching fractions and direct
+asymmetries under \texttt{belleii2024\_btokpi}.  Belle II also measured
+\(B^0\to K_S^0\pi^0\)
 time-dependent CP in 2023, providing the largest modern input to the
 PDG/HFLAV \(S_{K^0\pi^0}\) average.  The Belle II \(K\pi\) sum-rule test,
-\(-0.03\pm0.13\pm0.04\), is currently consistent with the SM expectation.
+\(-0.03\pm0.13\pm0.04\), is currently consistent with the SM expectation
+(\texttt{belleii2024\_btokpi}).
 
 \subsection*{Constraint validity and model dependence}
 This is an experimentally mature but SM-theory-limited nonleptonic constraint.
@@ -78,7 +83,7 @@ diagnostic until a dedicated likelihood or conservative amplitude scan exists.
 electroweak-penguin strings across \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
-\texttt{tests/} returned exit code 1.  The modern policy surface lists only
+\texttt{tests/} found no implementation.  The modern policy surface lists only
 \(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) at
 \texttt{quarkConstraints/modern/phenomenology.py:23}; its notes say this is a
 policy-only fence with no numeric EFT backend at

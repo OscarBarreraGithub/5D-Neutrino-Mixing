@@ -16,9 +16,17 @@ status_history:
     timestamp: "2026-05-16T12:02:05-04:00"
     agent_id: "PKA-B018"
     reason: "initial PKA draft deposit for assigned B018 R_K process"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:15:35-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:15:35-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    reason: "WA polish for batch wa_w23_beauty completed."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:02:05-04:00"
+last_updated_at: "2026-05-16T12:15:35-04:00"
 version: "0.1.0"
 source_shas:
   bordone_isidori_pattori_2016_rk_sm_arxiv1605_07633.txt: "sha256:823eebbe1092f4f33fa957bbd497993f4ecd29f68f5e49ceff6b6ba8cbc5fcea"

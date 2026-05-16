@@ -1,0 +1,95 @@
+% Flavor catalog per-process template.
+% process_id: B017
+% family: beauty
+% owner_agent_id: PKA-B017
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B017.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B017: \(B^0\to K^{*0}\ell^+\ell^-\) and linked \(b\to s\ell^+\ell^-\) decays}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(B^0\to K^{*}(892)^0\ell^+\ell^-\), with linked
+\(b\to s\ell^+\ell^-\) observables.
+The plan row \(B017\) is the exclusive \(B\to K^*\ell^+\ell^-\) channel.  The
+PKA sidecar also preserves nearby inclusive, exclusive-\(K\), and LFU-ratio
+context from rows \(B015\), \(B016\), \(B018\), and \(B019\).  This TeX entry
+foregrounds the \(K^*\ell\ell\) channel and leaves the final split of those
+linked rows to CA/orchestrator review.
+
+\subsection*{PDG or equivalent value}
+The YAML sidecar is the numerical source of truth.  In HFLAV's December 2025
+rare-decay tables, the exclusive lepton-summed \(K^*\) average is
+\[
+  \mathcal B(B^0\to K^{*}(892)^0\ell^+\ell^-)
+  =(9.9\pm1.2)\times10^{-7},
+\]
+under source key \texttt{HFLAV2025Dec:B0ToKst0ll}.  The same sidecar records
+linked HFLAV averages
+\(\mathcal B(B\to X_s\ell^+\ell^-)=(5.84\pm0.69)\times10^{-6}\) and
+\(\mathcal B(B^+\to K^+\ell^+\ell^-)=(5.76\pm0.40)\times10^{-7}\) under
+\texttt{HFLAV2025Dec:BtoXsll} and \texttt{HFLAV2025Dec:BplusToKplusll}.  For
+the \(K^*\) LFU ratio, the LHCb Run-1/Run-2 analysis
+(\texttt{LHCb2023:RKstar}) reports
+\[
+  R_{K^*}=0.927^{+0.093}_{-0.087}{}^{+0.036}_{-0.035}
+  \quad(0.1<q^2<1.1\,{\rm GeV}^2/c^4),
+\]
+and
+\[
+  R_{K^*}=1.027^{+0.072}_{-0.068}{}^{+0.027}_{-0.026}
+  \quad(1.1<q^2<6.0\,{\rm GeV}^2/c^4).
+\]
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This is a \(\Delta B=1\) FCNC probe of the same flavor structure that drives
+the repo's neutral-meson constraints, but it tests semileptonic operators rather
+than \(\Delta F=2\) four-quark operators.  KK electroweak gauge exchange,
+flavor-changing \(Z\) couplings, and loop-induced dipoles can feed \(C_9\),
+\(C_{10}\), \(C'_9\), and \(C'_{10}\), with \(C_7\) correlations from the
+radiative \(b\to s\gamma\) lane.  Non-universal lepton localization would show
+up most cleanly in \(R_K\) and \(R_{K^*}\), while the branching fractions and
+angular observables probe a broader combination of short-distance coefficients
+and hadronic inputs.
+
+\subsection*{Post-2008 developments}
+Relative to the Csaki--Falkowski--Weiler 2008 RS-flavor baseline, this channel
+has become data-rich.  HFLAV now maintains current rare-\(B\) averages through
+the end of 2025.  LHCb's 2023 simultaneous \(R_K/R_{K^*}\) update superseded
+the earlier LHCb LFU results and moved the clean LFU ratios into agreement with
+the Standard Model.  The \(B^0\to K^{*0}\mu^+\mu^-\) angular program remains
+important: LHCb's 2020 CP-averaged analysis states that the earlier tension
+with SM predictions persists, with significance depending on theory nuisance
+choices.  Post-update global fits therefore no longer look like a simple LFU
+violation story; they are mainly a correlated \(C_9\)-type and
+hadronic-systematics problem.
+
+\subsection*{Constraint validity and model dependence}
+The LFU ratios are comparatively clean null tests.  Branching fractions and
+angular observables are more model- and theory-limited because they require
+form factors, nonlocal charm treatment, bin definitions, and correlated
+experimental likelihoods.  A catalog value is useful, but using this channel as
+a hard RS bound requires a global-fit interface rather than a single-number
+cut.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The modern phenomenology surface lists only
+\(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) systems at
+\texttt{quarkConstraints/modern/phenomenology.py:23}.  The lepton flavor module
+implements \(\mu\to e\gamma\) at \texttt{flavorConstraints/muToEGamma.py:75}.
+Required plan greps plus targeted searches for \(C_9\), \(C_{10}\), \(R_K\),
+\(X_s\), \(K^*\), and \(P'_5\) found no live \(b\to s\ell^+\ell^-\) backend.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production implementation would need a new \(\Delta B=1\)
+semileptonic Hamiltonian, matching onto \(C_7,C_9,C_{10}\) and primed
+operators, RG conventions, \(q^2\)-bin-aware SM predictions, form factors,
+nonlocal charm uncertainties, and experimental covariance handling.
+
+\subsection*{Key references}
+Process-local snapshots: HFLAV2025Dec:BtoXsll,
+HFLAV2025Dec:BplusToKplusll, HFLAV2025Dec:B0ToKst0ll, LHCb2023:RKstar,
+LHCb2020:KstAngular, WenXu2023:BsllGlobalFit, and
+CsakiFalkowskiWeiler2008:CompositeFlavor.

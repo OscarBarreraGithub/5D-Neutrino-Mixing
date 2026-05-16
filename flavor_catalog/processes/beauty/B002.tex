@@ -11,16 +11,18 @@
 \section{B002: \(S_{\psi K_S}\) and \(\sin 2\beta\)}
 
 \subsection*{Process}
-The process is the mixing-induced CP asymmetry in
+\textbf{Standard notation:} \(S_{\psi K_S}\), equivalently
+\(\sin 2\beta\) or \(\sin 2\phi_1\).
+This entry covers the mixing-induced CP asymmetry in
 \(B_d^0\to J/\psi K_S^0\), conventionally reported as
-\(S_{\psi K_S}\simeq \sin 2\beta\) or \(\sin 2\phi_1\).  It is the
-beauty-sector benchmark CP phase of the unitarity triangle and is dominated by
-interference between \(B_d-\bar B_d\) mixing and the \(b\to c\bar c s\)
-tree amplitude.
+\(S_{\psi K_S}\simeq \sin 2\beta\).  It is the beauty-sector benchmark CP
+phase of the unitarity triangle and is dominated by interference between
+\(B_d-\bar B_d\) mixing and the \(b\to c\bar c s\) tree amplitude.
 
-\subsection*{PDG / equivalent value(s)}
-The source-of-truth numerical block is
-\texttt{pdg\_or\_equivalent} in \texttt{B002.yaml}.  HFLAV Summer 2025 gives
+\subsection*{PDG or equivalent value}
+The canonical values are the \texttt{pdg\_or\_equivalent} entries in
+\texttt{B002.yaml}.  HFLAV Summer 2025
+(\texttt{hflav\_triangle\_summer2025\_sin2beta}) gives
 the current all-charmonium average
 \[
   \sin(2\beta)=\sin(2\phi_1)=0.710\pm0.011,
@@ -53,14 +55,16 @@ LHCb measured
 \[
   S_{\psi K_S}=0.717\pm0.013_{\rm stat}\pm0.008_{\rm syst}
 \]
-using \(6\,{\rm fb}^{-1}\), and Belle II measured
+using \(6\,{\rm fb}^{-1}\)
+(\texttt{lhcb\_2024\_spsiks}), and Belle II measured
 \[
   S=0.724\pm0.035_{\rm stat}\pm0.009_{\rm syst}
 \]
-with \(362\,{\rm fb}^{-1}\).  These inputs moved the HFLAV average to the
-percent-level regime.  On the theory side, the main development is not a new
-operator but a sharper accounting of doubly Cabibbo-suppressed penguin
-pollution; Frings--Nierste--Wiebusch quote
+with \(362\,{\rm fb}^{-1}\)
+(\texttt{belleii\_2024\_sin2phi1}).  These inputs moved the HFLAV average to
+the percent-level regime.  On the theory side, the main development is sharper
+accounting of doubly Cabibbo-suppressed penguin pollution; the
+\texttt{frings\_nierste\_wiebusch\_2015} snapshot quotes
 \(|\Delta\phi_d|\le 0.68^\circ\).
 
 \subsection*{Constraint validity and model dependence}
@@ -73,11 +77,12 @@ identification model-dependent, but for RS quark-flavor scans the dominant
 target is the new phase in \(B_d\) mixing.
 
 \subsection*{Code coverage in this repo}
-PARTIAL.  No implementation named \texttt{S\_psi}, \texttt{J/psi K\_S},
+\textbf{PARTIAL.}  No implementation named \texttt{S\_psi}, \texttt{J/psi K\_S},
 \texttt{sin2beta}, or equivalent was found in the required greps.  However,
 \texttt{quarkConstraints/deltaf2.py:225} defines the existing \(B_d\) mixing
-input, \texttt{quarkConstraints/deltaf2.py:631}--\texttt{:638} define its
-hadronic and \(\Delta m_d\) inputs, and
+input, \texttt{quarkConstraints/deltaf2.py:631} and
+\texttt{quarkConstraints/deltaf2.py:638} define its hadronic and
+\(\Delta m_d\) inputs, and
 \texttt{quarkConstraints/deltaf2.py:903} evaluates \(M_{12}^{d,\rm NP}\).
 That evaluator reduces the result to \(\lvert M_{12}^{d,\rm NP}\rvert\) at
 \texttt{quarkConstraints/deltaf2.py:910}, so the phase needed for
@@ -85,7 +90,7 @@ That evaluator reduces the result to \(\lvert M_{12}^{d,\rm NP}\rvert\) at
 documented at \texttt{quarkConstraints/qcd\_running.py:7}.
 
 \subsection*{Implementation difficulty}
-LOW.  The existing \(\Delta F=2\) Wilson and hadronic machinery covers the
+\textbf{LOW.}  The existing \(\Delta F=2\) Wilson and hadronic machinery covers the
 needed operator basis.  The missing work is to retain the complex \(B_d\)
 mixing amplitude, define the SM phase convention and allowed penguin
 uncertainty, and add an observable policy for the measured \(S_{\psi K_S}\).

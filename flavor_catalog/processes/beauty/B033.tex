@@ -11,16 +11,21 @@
 \section{B033: \(B^0\to\phi K_S^0\) Penguin CP Asymmetry}
 
 \subsection*{Process}
-The process is the time-dependent CP asymmetry in the penguin-dominated
+\textbf{Standard notation:} \(S_{\phi K_S}\) and \(C_{\phi K_S}\), equivalently
+\(\sin(2\beta_{\rm eff})_{\phi K^0}\) and \(C_{\phi K^0}\) in the HFLAV
+convention.
+This entry covers the time-dependent CP asymmetry in the penguin-dominated
 beauty decay \(B^0\to\phi K_S^0\), usually reported through
 \(\sin(2\beta_{\rm eff})\) and \(C_{\phi K^0}\).  It probes the
 \(b\to s\bar s s\) loop amplitude and is interpreted by comparing its weak
 phase with the reference \(b\to c\bar c s\) value from
 \(B^0\to J/\psi K_S^0\).
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The source-of-truth numerical block is \texttt{pdg\_or\_equivalent} in
-\texttt{B033.yaml}.  HFLAV Summer 2025 gives, for the \(\phi K^0\) average,
+\texttt{B033.yaml}.  HFLAV Summer 2025
+(\texttt{hflav\_triangle\_summer2025\_phiK0}) gives, for the \(\phi K^0\)
+average,
 \[
   \sin(2\beta_{\rm eff})_{\phi K^0}=0.74\pm0.12,\qquad
   C_{\phi K^0}=-0.09\pm0.12.
@@ -51,10 +56,11 @@ penguin CP phases has been replaced by a stable world average compatible with
 \(S_{\psi K_S}\).  HFLAV Summer 2025 combines BaBar's 2012 Dalitz analysis,
 Belle's 2010 time-dependent Dalitz analysis, and Belle II's 2023
 time-dependent \(B^0\to\phi K_S^0\) measurement.  Belle II is the important
-new post-B-factory input: it measures \(S=0.54\pm0.26^{+0.06}_{-0.08}\) and,
-with HFLAV's \(C=-A\) convention, \(C=-0.31\pm0.20\pm0.05\).  The present
-HFLAV average differs from the charmonium benchmark by only \(0.03\), far below
-the current \(\phi K^0\) uncertainty.
+new post-B-factory input: the \texttt{belleii\_2023\_phik0} snapshot records
+\(S=0.54\pm0.26^{+0.06}_{-0.08}\) and, with HFLAV's \(C=-A\) convention,
+\(C=-0.31\pm0.20\pm0.05\).  The present HFLAV average differs from the
+charmonium benchmark by only \(0.03\), far below the current \(\phi K^0\)
+uncertainty; this difference is recorded explicitly in \texttt{B033.yaml}.
 
 \subsection*{Constraint validity and model dependence}
 This is a useful but theory-limited nonleptonic penguin observable.  It is
@@ -66,7 +72,7 @@ phenomenological likelihood.  Treat it as charmless-penguin contextual input
 unless the PI chooses a specific hadronic framework.
 
 \subsection*{Code coverage in this repo}
-NO.  Focused greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\textbf{NO.}  Focused greps over \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/} found no implementation of \(B\to\phi K\),
@@ -79,7 +85,7 @@ evaluates \(B_s\) mixing.  Those do not compute \(\Delta B=1\) penguin decay
 amplitudes.
 
 \subsection*{Implementation difficulty}
-HIGH.  The existing \(\Delta F=2\) SLL/SLR/VLL/VRR/LR1/LR2 machinery is not
+\textbf{HIGH.}  The existing \(\Delta F=2\) SLL/SLR/VLL/VRR/LR1/LR2 machinery is not
 enough.  A live constraint would require \(\Delta B=1\) four-quark penguin
 operators, matching from RS sources, QCD running to the \(b\) scale, and a
 hadronic treatment of the \(B\to\phi K\) amplitude and strong phases.

@@ -16,14 +16,15 @@
 \(\ell=e,\mu\).  This beauty-family entry covers the tau-versus-light-lepton
 charged-current LFU ratio in exclusive \(b\to c\ell\nu\) semileptonic decays.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The canonical current equivalent value is the HFLAV CKM 2025 joint average,
 updated on 2025-09-28 and snapshotted in
 \texttt{flavor\_catalog/references/B025/hflav\_ckm2025\_rdrds.txt}:
 \[
   R_D = 0.358 \pm 0.024 .
 \]
-The same fit gives \(R_{D^*}=0.281\pm0.011\), correlation
+The source key is \texttt{hflav\_ckm2025\_rdrds}.  The same fit gives
+\(R_{D^*}=0.281\pm0.011\), correlation
 \(\rho(R_D,R_{D^*})=-0.374\), and \(\chi^2/\mathrm{dof}=16.683/14\)
 with confidence level \(0.27\).  For comparison, HFLAV quotes an arithmetic
 SM reference \(R_D=0.296\pm0.004\), \(R_{D^*}=0.254\pm0.005\).  Against that
@@ -63,7 +64,7 @@ implementation should use the two-dimensional likelihood or covariance rather
 than a standalone Gaussian for \(R_D\).
 
 \subsection*{Code coverage in this repo}
-\textbf{NO.}  I reran the required coverage greps over
+\textbf{NO.}  The PKA reran the required coverage greps over
 \texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
 \texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
 \texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/}.  The broad plan

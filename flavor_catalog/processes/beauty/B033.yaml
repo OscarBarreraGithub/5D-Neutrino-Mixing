@@ -23,9 +23,17 @@ status_history:
     at: "2026-05-16T11:59:37-04:00"
     agent_id: "PKA-B033"
     reason: "PKA draft, source snapshots, and code-coverage grep completed."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:15:35-04:00"
+    from: "PKA-DONE"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:15:35-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    reason: "WA polish for batch wa_w23_beauty completed."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:59:37-04:00"
+last_updated_at: "2026-05-16T12:15:35-04:00"
 version: "0.1.0"
 source_shas:
   hflav_triangle_summer2025_phiK0.txt: "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b"

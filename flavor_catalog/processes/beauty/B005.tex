@@ -18,25 +18,28 @@ channel.  It is distinct from the inclusive and exclusive semileptonic
 \(b\to s\ell^+\ell^-\) entries because the final state is purely leptonic and
 the leading hadronic input is the \(B_s\) decay constant.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The current PDG live/API value, accessed on 2026-05-16, is
 \[
   \mathcal{B}(B_s^0\to\mu^+\mu^-)_{\rm exp}
   = (3.34\pm0.27)\times10^{-9}.
 \]
-The local snapshot is
-\texttt{flavor\_catalog/references/B005/pdg\_2026\_bsmumu.txt}.  The same
-value is quoted in the 2024 Czaja--Misiak SM-status review as the present
-weighted experimental average.  That review gives the Standard Model prediction
+The source key is \texttt{PDG2026:BsMuMu}, with local snapshot
+\texttt{flavor\_catalog/references/B005/pdg\_2026\_bsmumu.txt}.  The 2024
+Czaja--Misiak SM-status review quotes the same weighted experimental average
+and gives the Standard Model prediction
 \[
   \mathcal{B}(B_s^0\to\mu^+\mu^-)_{\rm SM}
   = (3.64\pm0.12)\times10^{-9}.
 \]
-For input-tracing, the sidecar also records the HFLAV rare-decay page
-average \((3.45\pm0.29)\times10^{-9}\), CMS
+Its source key is \texttt{CzajaMisiak2024:BsMuMuSM}.  The sidecar retains the
+older HFLAV rare-decay average \((3.45\pm0.29)\times10^{-9}\) as auxiliary
+provenance, together with CMS
 \((3.83^{+0.38}_{-0.36}\,{}^{+0.19}_{-0.16}\,{}^{+0.14}_{-0.13})\times10^{-9}\),
 LHCb \((3.09^{+0.46+0.15}_{-0.43-0.11})\times10^{-9}\), and ATLAS
-\((2.8^{+0.8}_{-0.7})\times10^{-9}\) snapshots.
+\((2.8^{+0.8}_{-0.7})\times10^{-9}\) inputs under the
+\texttt{HFLAV2023:BsMuMu}, \texttt{CMS2023:BsMuMu},
+\texttt{LHCb2022:BsMuMu}, and \texttt{ATLAS2019:BsMuMu} source keys.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 This mode probes the short-distance \(b\to s\mu^+\mu^-\) Hamiltonian in a clean
