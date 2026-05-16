@@ -1,0 +1,85 @@
+% Flavor catalog per-process draft.
+% process_id: T019
+% family: top_higgs_ew
+% owner_agent_id: PKA-T019
+% Canonical metadata sidecar: T019.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(h\to e\tau\)}{h -> e tau} LFV Higgs Decay}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(h\to e^\pm\tau^\mp)\).
+This entry catalogs the lepton-flavor-violating Higgs decay \(h\to e\tau\)
+in the top/Higgs/electroweak family.  It covers direct ATLAS and CMS searches
+for a neutral Higgs boson decaying to an electron and an oppositely charged
+tau lepton.
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth values are in the \texttt{pdg\_or\_equivalent} block of
+\texttt{T019.yaml}.  The PDG 2025 Higgs review summarizes the full
+\(\sqrt{s}=13~\mathrm{TeV}\) Run-2 direct limits on LFV Higgs decays.  For
+\(h\to e\tau\), ATLAS gives
+\[
+  \mathcal{B}(h\to e\tau) < 0.20\% \quad (0.12\%\ \mathrm{expected})
+\]
+at 95\% CL using \(138~\mathrm{fb}^{-1}\).  CMS gives
+\[
+  \mathcal{B}(h\to e\tau) < 0.22\% \quad (0.16\%\ \mathrm{expected})
+\]
+at 95\% CL using \(137~\mathrm{fb}^{-1}\).  The strongest observed
+single-experiment headline value in the local snapshots is therefore the
+ATLAS \(2.0\times 10^{-3}\) branching-fraction limit.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In warped or partially composite lepton sectors, flavor-dependent localization
+can explain charged-lepton masses while leaving the physical Higgs Yukawa
+matrix misaligned with the mass matrix.  The \(h\to e\tau\) limit directly
+tests the \(e\)-\(\tau\) off-diagonal charged-lepton Yukawa entries.  It is
+complementary to dipole constraints such as \(\mu\to e\gamma\), but it is
+not part of the current quark \(\Delta F=2\) scan lane.
+
+\subsection*{Post-2008 developments}
+The baseline arXiv:0804.1954 predates direct LHC Higgs LFV searches.  Harnik,
+Kopp, and Zupan later emphasized that \(h\to\tau e\) could be a discovery
+channel and that branching fractions of order \(10\%\) were still possible in
+generic LFV-Higgs EFT settings after low-energy constraints.  ATLAS performed
+an early \(13~\mathrm{TeV}\) search with \(36.1~\mathrm{fb}^{-1}\), setting
+\(\mathcal{B}(H\to e\tau)<0.47\%\).  The full Run-2 CMS and ATLAS analyses
+then pushed the direct e-tau limit to the few-\(10^{-3}\) level, with no
+significant excess.
+
+\subsection*{Constraint validity and model dependence}
+Experimentally this is a direct upper limit on a Standard-Model-forbidden
+decay.  A literal branching-ratio cut assumes the Higgs production mixture
+and total width used by the collaborations.  A model with altered Higgs
+production rates, new invisible width, or correlated LFV tau decays would need
+a recast.  For the catalog, the limit is robust as an experimental observable
+but model-dependent as an RS acceptance criterion.
+
+\subsection*{Code coverage in this repo}
+Coverage is \textbf{NO}.  The required greps and a targeted search for
+\texttt{h->e tau}, \texttt{H->e tau}, \texttt{etau}, \texttt{Y\_e\_tau}, and
+\texttt{Y\_tau\_e} across \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no observable implementation.  The related LFV backend
+is specifically \(\mu\to e\gamma\)
+(\texttt{flavorConstraints/muToEGamma.py:1};
+\texttt{flavorConstraints/muToEGamma.py:75}), and the scan applies that
+filter at \texttt{scanParams/scan.py:523}--\texttt{scanParams/scan.py:524}.
+The charged-lepton Yukawa helper is diagonal
+(\texttt{yukawa/charged\_lepton.py:1}; \texttt{yukawa/charged\_lepton.py:36}).
+
+\subsection*{Implementation difficulty}
+Production integration is \textbf{HIGH}.  The external limit is simple to
+catalog, but a faithful RS constraint needs a new charged-lepton Higgs-Yukawa
+misalignment calculation, a convention for \(Y_{e\tau}\) and \(Y_{\tau e}\),
+and a Higgs-rate/width interpretation before scan points can be accepted or
+rejected.
+
+\subsection*{Key references}
+\texttt{PDG2025HiggsLFVReview}; \texttt{ATLAS2023HiggsLFVETau};
+\texttt{CMS2021HiggsLFVETau}; \texttt{ATLAS2019HiggsLFVETau};
+\texttt{HarnikKoppZupan2012FlavorViolatingHiggs};
+\texttt{CsakiFalkowskiWeiler2008WarpedFlavor};
+\texttt{PerezRandall2008WarpedLeptonFlavor}.

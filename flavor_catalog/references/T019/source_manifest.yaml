@@ -1,0 +1,68 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T019
+generated_at: "2026-05-16T14:04:43-04:00"
+sources:
+  - key: PDG2025HiggsLFVReview
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Review of Particle Physics, 2025 update: Status of Higgs Boson Physics"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf"
+    sha256_of_local_snapshot: "sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e"
+    snapshot_path: "flavor_catalog/references/T019/pdg2025_higgs_lfv_review.txt"
+    license_note: "Minimal text snapshot only; no publisher PDF tracked."
+  - key: ATLAS2023HiggsLFVETau
+    arxiv_id: "2302.05225"
+    DOI: "10.1007/JHEP07(2023)166"
+    title: "Searches for lepton-flavour-violating decays of the Higgs boson into e tau and mu tau in sqrt(s) = 13 TeV pp collisions with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2302.05225"
+    sha256_of_local_snapshot: "sha256:a430814893db67e975a7485028243375c488bc9d249638fb8c535186376ebfab"
+    snapshot_path: "flavor_catalog/references/T019/atlas2023_higg201911_arxiv_abs.txt"
+  - key: CMS2021HiggsLFVETau
+    arxiv_id: "2105.03007"
+    DOI: "10.1103/PhysRevD.104.032013"
+    title: "Search for lepton-flavor violating decays of the Higgs boson in the mu tau and e tau final states in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2105.03007"
+    sha256_of_local_snapshot: "sha256:6b4f4c02719f17e8117135c0ed9c1aea3ac7ede4feb3af85c7f10acc7ec94d3a"
+    snapshot_path: "flavor_catalog/references/T019/cms2021_hig20009_arxiv_abs.txt"
+  - key: ATLAS2019HiggsLFVETau
+    arxiv_id: "1907.06131"
+    DOI: "10.1016/j.physletb.2019.135069"
+    title: "Searches for lepton-flavour-violating decays of the Higgs boson in sqrt(s) = 13 TeV pp collisions with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1907.06131"
+    sha256_of_local_snapshot: "sha256:726a7510795cbca7ef90dfb9f3c52e942afbff1434086a037496e8e84b755fdf"
+    snapshot_path: "flavor_catalog/references/T019/atlas2019_higg201906_arxiv_abs.txt"
+  - key: HarnikKoppZupan2012FlavorViolatingHiggs
+    arxiv_id: "1209.1397"
+    DOI: "10.1007/JHEP03(2013)026"
+    title: "Flavor Violating Higgs Decays"
+    authors: "Roni Harnik, Joachim Kopp, Jure Zupan"
+    year: 2012
+    url: "https://arxiv.org/abs/1209.1397"
+    sha256_of_local_snapshot: "sha256:50662238edb6f9459f172f2c9129dafcc4accea50fcfa33adfedbf71f63b3740"
+    snapshot_path: "flavor_catalog/references/T019/harnik_kopp_zupan2012_arxiv_abs.txt"
+  - key: CsakiFalkowskiWeiler2008WarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:6fc6289c97a08590b909d1c29a61795b001ab619fd93cbfa454d434d95a5ec6e"
+    snapshot_path: "flavor_catalog/references/T019/csaki_falkowski_weiler2008_arxiv_abs.txt"
+  - key: PerezRandall2008WarpedLeptonFlavor
+    arxiv_id: "0805.4652"
+    DOI: "10.1088/1126-6708/2009/01/077"
+    title: "Natural Neutrino Masses and Mixings from Warped Geometry"
+    authors: "Gilad Perez, Lisa Randall"
+    year: 2008
+    url: "https://arxiv.org/abs/0805.4652"
+    sha256_of_local_snapshot: "sha256:c471b82e57aef1ea0f0e7eb9a931dbcf90bef0b68e3101685af0aeb4ead6dce6"
+    snapshot_path: "flavor_catalog/references/T019/perez_randall2008_arxiv_abs.txt"

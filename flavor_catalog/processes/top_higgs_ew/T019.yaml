@@ -1,0 +1,181 @@
+schema: flavor_catalog.process.v1
+process_id: T019
+family: top_higgs_ew
+standard_notation: '\mathcal{B}(h\to e\tau)'
+process_name: "Lepton-flavor-violating Higgs decay h -> e tau"
+owner: "PKA"
+owner_agent_id: "PKA-T019"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T14:04:43-04:00"
+    timestamp: "2026-05-16T14:04:43-04:00"
+    agent_id: "PKA-T019"
+    reason: "Initial PKA draft and source snapshot deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:04:43-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2025_higgs_lfv_review.txt: "sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e"
+  atlas2023_higg201911_arxiv_abs.txt: "sha256:a430814893db67e975a7485028243375c488bc9d249638fb8c535186376ebfab"
+  cms2021_hig20009_arxiv_abs.txt: "sha256:6b4f4c02719f17e8117135c0ed9c1aea3ac7ede4feb3af85c7f10acc7ec94d3a"
+  atlas2019_higg201906_arxiv_abs.txt: "sha256:726a7510795cbca7ef90dfb9f3c52e942afbff1434086a037496e8e84b755fdf"
+  harnik_kopp_zupan2012_arxiv_abs.txt: "sha256:50662238edb6f9459f172f2c9129dafcc4accea50fcfa33adfedbf71f63b3740"
+  csaki_falkowski_weiler2008_arxiv_abs.txt: "sha256:6fc6289c97a08590b909d1c29a61795b001ab619fd93cbfa454d434d95a5ec6e"
+  perez_randall2008_arxiv_abs.txt: "sha256:c471b82e57aef1ea0f0e7eb9a931dbcf90bef0b68e3101685af0aeb4ead6dce6"
+pdg_or_equivalent:
+  year: 2025
+  source: "Particle Data Group, Status of Higgs Boson Physics review, section 11.4.3.2"
+  source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T019/pdg2025_higgs_lfv_review.txt"
+  sha256: "sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e"
+  value_summary: "PDG 2025 quotes full Run-2 ATLAS and CMS 95% CL limits: B(h -> e tau) < 0.20% (0.12% expected) from ATLAS and < 0.22% (0.16% expected) from CMS."
+  values:
+    - value_id: "PDG2025:T019:atlas_run2"
+      observable: "B(h -> e tau), ATLAS full Run-2 direct search"
+      year: 2025
+      value: "< 0.20%"
+      normalized_value: "< 2.0e-3"
+      expected_value: "< 0.12%"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf"
+      primary_source_key: "ATLAS2023:HiggsLFVETau"
+      access_date: "2026-05-16"
+      sha256: "sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e"
+    - value_id: "PDG2025:T019:cms_run2"
+      observable: "B(h -> e tau), CMS full Run-2 direct search"
+      year: 2025
+      value: "< 0.22%"
+      normalized_value: "< 2.2e-3"
+      expected_value: "< 0.16%"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf"
+      primary_source_key: "CMS2021:HiggsLFVETau"
+      access_date: "2026-05-16"
+      sha256: "sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e"
+    - value_id: "ATLAS2023:T019:etau_limit"
+      observable: "B(H -> e tau), ATLAS full Run-2 direct search"
+      year: 2023
+      value: "< 0.20%"
+      normalized_value: "< 2.0e-3"
+      expected_value: "< 0.12%"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/2302.05225"
+      access_date: "2026-05-16"
+      sha256: "sha256:a430814893db67e975a7485028243375c488bc9d249638fb8c535186376ebfab"
+    - value_id: "ATLAS2023:T019:dataset"
+      observable: "ATLAS dataset for h -> e tau direct search"
+      year: 2023
+      value: "138 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/2302.05225"
+      access_date: "2026-05-16"
+      sha256: "sha256:a430814893db67e975a7485028243375c488bc9d249638fb8c535186376ebfab"
+    - value_id: "CMS2021:T019:etau_limit"
+      observable: "B(H -> e tau), CMS full Run-2 direct search"
+      year: 2021
+      value: "< 0.22%"
+      normalized_value: "< 2.2e-3"
+      expected_value: "< 0.16%"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/2105.03007"
+      access_date: "2026-05-16"
+      sha256: "sha256:6b4f4c02719f17e8117135c0ed9c1aea3ac7ede4feb3af85c7f10acc7ec94d3a"
+    - value_id: "CMS2021:T019:dataset"
+      observable: "CMS dataset for h -> e tau direct search"
+      year: 2021
+      value: "137 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/2105.03007"
+      access_date: "2026-05-16"
+      sha256: "sha256:6b4f4c02719f17e8117135c0ed9c1aea3ac7ede4feb3af85c7f10acc7ec94d3a"
+    - value_id: "ATLAS2019:T019:etau_limit"
+      observable: "B(H -> e tau), ATLAS partial Run-2 direct search"
+      year: 2019
+      value: "< 0.47%"
+      normalized_value: "< 4.7e-3"
+      expected_value: "< 0.34%"
+      expected_uncertainty: "+0.13%/-0.10%"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/1907.06131"
+      access_date: "2026-05-16"
+      sha256: "sha256:726a7510795cbca7ef90dfb9f3c52e942afbff1434086a037496e8e84b755fdf"
+    - value_id: "ATLAS2019:T019:dataset"
+      observable: "ATLAS partial Run-2 dataset for h -> e tau direct search"
+      year: 2019
+      value: "36.1 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/1907.06131"
+      access_date: "2026-05-16"
+      sha256: "sha256:726a7510795cbca7ef90dfb9f3c52e942afbff1434086a037496e8e84b755fdf"
+paper_era_references:
+  - key: "CsakiFalkowskiWeiler2008WarpedFlavor"
+    arxiv_id: "0804.1954"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T019/csaki_falkowski_weiler2008_arxiv_abs.txt"
+    sha256: "sha256:6fc6289c97a08590b909d1c29a61795b001ab619fd93cbfa454d434d95a5ec6e"
+    provenance_note: "Requested 2008 warped/anarchic-flavor baseline before the LHC Higgs LFV program; scale statements are theoretical context, not pdg_or_equivalent observables."
+    context_values:
+      - observable: "generic RS KK-gluon lower scale in paper abstract"
+        value: "about 21 TeV"
+      - observable: "composite pseudo-Goldstone Higgs setup scale in paper abstract"
+        value: "about 33 TeV"
+  - key: "PerezRandall2008WarpedLeptonFlavor"
+    arxiv_id: "0805.4652"
+    source_url: "https://arxiv.org/abs/0805.4652"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T019/perez_randall2008_arxiv_abs.txt"
+    sha256: "sha256:c471b82e57aef1ea0f0e7eb9a931dbcf90bef0b68e3101685af0aeb4ead6dce6"
+    provenance_note: "Lepton-sector warped-geometry context for the repo's existing mu -> e gamma LFV lane; scale statements are model-context values."
+    context_values:
+      - observable: "cutoff and Kaluza-Klein mass in the model abstract"
+        value: "cutoff 10 TeV and 3 TeV Kaluza-Klein masses"
+post_2008_theory_context:
+  - key: "HarnikKoppZupan2012FlavorViolatingHiggs"
+    arxiv_id: "1209.1397"
+    source_url: "https://arxiv.org/abs/1209.1397"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T019/harnik_kopp_zupan2012_arxiv_abs.txt"
+    sha256: "sha256:50662238edb6f9459f172f2c9129dafcc4accea50fcfa33adfedbf71f63b3740"
+    context_note: "Theory motivation for direct h -> tau e searches; the order-10% statement is not a measured experimental observable and is intentionally outside pdg_or_equivalent."
+    context_values:
+      - observable: "generic LFV-Higgs EFT allowance for h -> tau e"
+        value: "order 10%"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Targeted grep for h -> e tau / H -> e tau / etau / Y_e_tau / Y_tau_e across the required code directories returned no hits."
+    - "The existing charged-lepton LFV implementation is mu -> e gamma only: flavorConstraints/muToEGamma.py:1 and flavorConstraints/muToEGamma.py:75."
+    - "The scan applies the mu -> e gamma LFV filter at scanParams/scan.py:523 and scanParams/scan.py:524; no h -> e tau branch or Higgs LFV limit is present."
+    - "Charged-lepton Yukawa support is a diagonal mass-relation helper at yukawa/charged_lepton.py:1 and yukawa/charged_lepton.py:36, not a Higgs LFV observable."
+  grep_commands:
+    - 'rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|H.?->|higgs|Higgs|LFV|lepton.?flavou?r|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints flavorConstraints scanParams tests -g "!*.ipynb"'
+    - 'rg -n "h\\s*[-=]>\\s*e\\s*tau|H\\s*[-=]>\\s*e\\s*tau|Higgs.*e\\s*tau|LFV.*Higgs|Higgs.*LFV|Y_e_tau|Y_tau_e|Yetau|etau" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "The direct experimental limit is simple to catalog, but production-grade RS integration needs a new charged-lepton Higgs-Yukawa misalignment calculation, a convention for Y_e_tau/Y_tau_e and their relation to the branching ratio, and a Higgs production/total-width interpretation. The current code only has diagonal charged-lepton Yukawas and a mu -> e gamma dipole filter."
+open_issues:
+  - "WA/CA should decide whether to present the headline as the strongest ATLAS 0.20% observed limit or the PDG pair of ATLAS and CMS full Run-2 limits."
+  - "A live scan implementation must define how RS lepton-sector parameters map to off-diagonal physical Higgs Yukawa couplings and whether non-SM Higgs production or total-width changes are allowed."
