@@ -36,9 +36,19 @@ status_history:
       - "CHK-1: TeX cites Mu3e phase-I and upgrade sensitivity numbers whose pdg_or_equivalent.prospects entries lack per-entry source_url/access_date metadata."
       - "CHK-1: TeX cites the SM-with-neutrino-masses O(10^-54) rate and 10^8 muon-decay-rate context from the prospects sources, but the corresponding prospects entries do not carry complete strict metadata fields."
     reason: "Checker ca_w23_charged_lepton found CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w23_charged_lepton.md."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:44:38-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:44:38-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w23_charged_lepton_v2"
+    reason: "Cycle-2 writer rework addressed CA CHK-1 metadata completeness findings only."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:32:07-04:00"
+last_updated_at: "2026-05-16T12:44:38-04:00"
 version: "0.2.0"
 source_shas:
   agashe2006_rs_lfv_arxiv_hepph_0606021.txt: "sha256:51a5f86a338eb56993ea4dd8112ee25b294ec4b9b31087e3d024261cb66e2f0c"
@@ -79,17 +89,53 @@ pdg_or_equivalent:
       year: 2021
       quantity: "phase-I single-event sensitivity"
       value: 2.0e-15
+      uncertainty: null
+      units: "single-event branching-fraction sensitivity"
       relation: "target"
-      conditions: "Existing PSI beamline, up to 1e8 muon decays per second"
+      source_url: "https://arxiv.org/abs/2009.11690"
+      access_date: "2026-05-16"
+      conditions: "Existing PSI beamline"
+      muon_decay_rate:
+        year: 2021
+        value: 1.0e8
+        uncertainty: null
+        units: "muon decays per second"
+        relation: "up to"
+        source_url: "https://arxiv.org/abs/2009.11690"
+        access_date: "2026-05-16"
+        sha256: "4123a6876f35c6f320b58f807cdad932b2b5bc68e07826114745b512ebbf2c83"
       snapshot_path: "flavor_catalog/references/L002/mu3e_tdr_arxiv2009_11690.txt"
       sha256: "4123a6876f35c6f320b58f807cdad932b2b5bc68e07826114745b512ebbf2c83"
     - source: "Mu3e status and short-term plans"
       arxiv_id: "2501.14667"
       year: 2025
       quantity: "phase-I and upgraded sensitivity scale"
-      phase_i_sensitivity_order: "O(1e-15)"
-      upgraded_sensitivity_order: "O(1e-16)"
-      sm_neutrino_mass_rate_order: "O(1e-54)"
+      source_url: "https://arxiv.org/abs/2501.14667"
+      access_date: "2026-05-16"
+      phase_i_sensitivity_order:
+        year: 2025
+        value: "O(1e-15)"
+        uncertainty: null
+        units: "branching-fraction sensitivity scale"
+        source_url: "https://arxiv.org/abs/2501.14667"
+        access_date: "2026-05-16"
+        sha256: "7d4cc8303d28da15c89bd6ba70fb92643f5b88548b993d6cf70fdda28a6c0129"
+      upgraded_sensitivity_order:
+        year: 2025
+        value: "O(1e-16)"
+        uncertainty: null
+        units: "branching-fraction sensitivity scale"
+        source_url: "https://arxiv.org/abs/2501.14667"
+        access_date: "2026-05-16"
+        sha256: "7d4cc8303d28da15c89bd6ba70fb92643f5b88548b993d6cf70fdda28a6c0129"
+      sm_neutrino_mass_rate_order:
+        year: 2025
+        value: "O(1e-54)"
+        uncertainty: null
+        units: "Standard Model branching-fraction estimate with massive neutrinos"
+        source_url: "https://arxiv.org/abs/2501.14667"
+        access_date: "2026-05-16"
+        sha256: "7d4cc8303d28da15c89bd6ba70fb92643f5b88548b993d6cf70fdda28a6c0129"
       conditions: "Status note; detector commissioning beam time planned for 2025"
       snapshot_path: "flavor_catalog/references/L002/mu3e_status_2025_arxiv2501_14667.txt"
       sha256: "7d4cc8303d28da15c89bd6ba70fb92643f5b88548b993d6cf70fdda28a6c0129"

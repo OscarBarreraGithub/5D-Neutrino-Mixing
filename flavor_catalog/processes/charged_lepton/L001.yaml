@@ -43,9 +43,19 @@ status_history:
       - "CHK-1: TeX cites prior MEG/MEG II numerical limits whose pdg_or_equivalent.prior_experimental_limits entries lack per-entry source_url/access_date metadata."
       - "CHK-1: TeX cites the live repo default C ~= 1.936e-3 and related code-derived numerical values, but pdg_or_equivalent.repo_default lacks year/source_url/access_date/sha256 provenance fields under the strict checker rule."
     reason: "Checker ca_w23_charged_lepton found CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w23_charged_lepton.md."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:44:38-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:44:38-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w23_charged_lepton_v2"
+    reason: "Cycle-2 writer rework addressed CA CHK-1 metadata completeness findings only."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:32:07-04:00"
+last_updated_at: "2026-05-16T12:44:38-04:00"
 version: "0.2.0"
 source_shas:
   megii2025_arxiv2504_15711.txt: "sha256:3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7"
@@ -83,26 +93,41 @@ pdg_or_equivalent:
   prior_experimental_limits:
     - source: "MEG II Collaboration 2024 first dataset"
       arxiv_id: "2310.12614"
+      year: 2024
       value: 7.5e-13
+      uncertainty: null
+      units: "branching fraction"
       relation: "<"
       confidence_level: "90% C.L."
       conditions: "MEG II 2021-only result"
+      source_url: "https://arxiv.org/abs/2310.12614"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/L001/megii2024_arxiv2310_12614.txt"
       sha256: "bf3dddb7b5fd8a5b55a9829f0118db4b27992f4f603c1e792ecf8fcb67255ef0"
     - source: "MEG + MEG II 2024 combination"
       arxiv_id: "2310.12614"
+      year: 2024
       value: 3.1e-13
+      uncertainty: null
+      units: "branching fraction"
       relation: "<"
       confidence_level: "90% C.L."
       conditions: "MEG full dataset combined with MEG II 2021 data"
+      source_url: "https://arxiv.org/abs/2310.12614"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/L001/megii2024_arxiv2310_12614.txt"
       sha256: "bf3dddb7b5fd8a5b55a9829f0118db4b27992f4f603c1e792ecf8fcb67255ef0"
     - source: "MEG Collaboration 2016 full dataset"
       arxiv_id: "1605.05081"
+      year: 2016
       value: 4.2e-13
+      uncertainty: null
+      units: "branching fraction"
       relation: "<"
       confidence_level: "90% C.L."
       conditions: "MEG 2009-2013 data, 7.5e14 stopped muons"
+      source_url: "https://arxiv.org/abs/1605.05081"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/L001/meg2016_arxiv1605_05081.txt"
       sha256: "883288d06a72c35f56718b53fd0c05e030834cd8f6193708234ab3413ce6e00a"
   paper_era_reference:
@@ -119,10 +144,50 @@ pdg_or_equivalent:
     sha256: "850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9"
   repo_default:
     source: "Repo implementation and scan defaults"
-    br_limit: 1.5e-13
-    prefac_br: 4.0e-8
-    lfv_C: 0.0019364916731037085
-    c_paper: 0.02
+    br_limit:
+      year: 2025
+      value: 1.5e-13
+      uncertainty: null
+      units: "branching fraction, 90% C.L. upper limit"
+      source_url: "https://github.com/OscarBarreraGithub/5D-Neutrino-Mixing/blob/17462af601e3d495ca22125a757c02c1354d84cf/scanParams/scan.py#L33"
+      access_date: "2026-05-16"
+      sha256: "4aab2bec426abb2844208db00cd59e9466a877f2ad762cf7a471efd6aa9ed0b8"
+      supporting_source_url: "https://arxiv.org/abs/2504.15711"
+      supporting_snapshot_path: "flavor_catalog/references/L001/megii2025_arxiv2504_15711.txt"
+      supporting_sha256: "3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7"
+    prefac_br:
+      year: 2008
+      value: 4.0e-8
+      uncertainty: null
+      units: "dimensionless branching-fraction prefactor"
+      source_url: "https://github.com/OscarBarreraGithub/5D-Neutrino-Mixing/blob/17462af601e3d495ca22125a757c02c1354d84cf/flavorConstraints/muToEGamma.py#L31"
+      access_date: "2026-05-16"
+      sha256: "bf4e2ee1ea1c7123f0c25d3299e1e76f711178ecf162fb22b3f90a071f214d6a"
+      supporting_source_url: "https://arxiv.org/abs/0805.4652"
+      supporting_snapshot_path: "flavor_catalog/references/L001/perez_randall_2008_arxiv0805_4652.txt"
+      supporting_sha256: "850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9"
+    lfv_C:
+      year: 2026
+      value: 0.0019364916731037085
+      uncertainty: null
+      units: "dimensionless LFV coefficient"
+      source_url: "https://github.com/OscarBarreraGithub/5D-Neutrino-Mixing/blob/17462af601e3d495ca22125a757c02c1354d84cf/flavorConstraints/muToEGamma.py#L61"
+      access_date: "2026-05-16"
+      sha256: "bf4e2ee1ea1c7123f0c25d3299e1e76f711178ecf162fb22b3f90a071f214d6a"
+      derived_from:
+        - "repo_default.br_limit"
+        - "repo_default.prefac_br"
+    c_paper:
+      year: 2008
+      value: 0.02
+      uncertainty: null
+      units: "dimensionless LFV coefficient"
+      source_url: "https://github.com/OscarBarreraGithub/5D-Neutrino-Mixing/blob/17462af601e3d495ca22125a757c02c1354d84cf/flavorConstraints/muToEGamma.py#L36"
+      access_date: "2026-05-16"
+      sha256: "bf4e2ee1ea1c7123f0c25d3299e1e76f711178ecf162fb22b3f90a071f214d6a"
+      supporting_source_url: "https://arxiv.org/abs/0805.4652"
+      supporting_snapshot_path: "flavor_catalog/references/L001/perez_randall_2008_arxiv0805_4652.txt"
+      supporting_sha256: "850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9"
     source_files:
       - "flavorConstraints/muToEGamma.py:20"
       - "flavorConstraints/muToEGamma.py:31"
