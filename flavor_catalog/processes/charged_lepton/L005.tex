@@ -1,0 +1,79 @@
+% Flavor catalog per-process draft.
+% process_id: L005
+% family: charged_lepton
+% owner_agent_id: PKA-L005
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: L005.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{L005: \texorpdfstring{\(\mu-e\)}{mu-e} Conversion in Titanium}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(R_{\mu e}^{\rm Ti} =
+\Gamma(\mu^-{\rm Ti}\to e^-{\rm Ti})/\Gamma_{\rm capture}(\mu^-{\rm Ti})\).
+This entry covers coherent neutrinoless muon-to-electron conversion in a
+titanium target, the SINDRUM II bound that sits between the aluminum program
+entry and the stronger gold-target benchmark.
+
+\subsection*{PDG / equivalent value(s)}
+The streamed PDG live muon listing, generated on 2026-05-14 and accessed on
+2026-05-16, gives
+\[
+  R_{\mu e}^{\rm Ti}<4.3\times10^{-12}\qquad (90\%\ {\rm C.L.}) .
+\]
+The PDG line identifies the source as DOHMEN 93, technique SPEC, comment
+SINDRUM II, and notes that the quoted limit assumes conversion to the nuclear
+ground state.  The local minimal snapshot is
+\texttt{flavor\_catalog/references/L005/pdg2026\_muon\_listing\_s004\_ti\_conversion.txt};
+the SINDRUM II publication metadata is snapshotted separately in
+\texttt{flavor\_catalog/references/L005/sindrumii\_1993\_titanium\_crossref.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In a warped lepton-flavor extension, \(\mu-e\) conversion probes lepton-quark
+contact operators, flavor-changing \(Z\)-like couplings, scalar currents, and
+dipoles.  It is therefore complementary to \(\mu\to e\gamma\), which tests only
+the dipole lane in the current repository.  Titanium is useful historically
+because it is a real published conversion target, but its interpretation is
+not target-universal.
+
+\subsection*{Post-2008 developments}
+No newer titanium-target measurement was found in the PDG stream used here
+after the arXiv:0804.1954 RS-flavor baseline.  The main development since that
+baseline is experimental: Mu2e describes a coherent \(\mu^-N\to e^-N\)
+program aiming roughly four orders of magnitude beyond the previous published
+conversion limits, and COMET Phase-I quotes an aluminum sensitivity goal
+\(3.1\times10^{-15}\) with an expected \(90\%\) upper limit
+\(7.0\times10^{-15}\).  These are not titanium measurements; they explain why
+the Ti number is now primarily a legacy benchmark and target-comparison input.
+
+\subsection*{Constraint validity and model dependence}
+The experimental statement is robust as a null search normalized to the
+ordinary muon-capture rate in titanium.  The mapping to RS parameters is
+model-dependent: dipole, vector, and scalar amplitudes can interfere, and the
+nuclear overlap integrals and capture normalization are target-specific.
+Direct comparison with gold or aluminum therefore requires an operator basis
+and nuclear-convention choice.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no SINDRUM, Mu2e, COMET, \(R_{\mu e}\), titanium
+conversion, or general \(\mu-e\)-conversion implementation.  The only adjacent
+charged-LFV code is the dipole-only \(\mu\to e\gamma\) checker at
+\texttt{flavorConstraints/muToEGamma.py}:75, called by the scan at
+\texttt{scanParams/scan.py}:524.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production constraint needs a new coherent conversion
+observable, lepton-quark Wilson coefficients, titanium nuclear overlap and
+capture inputs, and likely EFT matching/running shared with \(\mu\to e\gamma\)
+and \(\mu\to3e\).  This is a new target-dependent mode calculation, not a new
+limit for the existing dipole checker.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2026\_MuonTiConversion}, \texttt{SINDRUMII1993\_TitaniumMuE},
+\texttt{Mu2eTDR2015}, \texttt{COMETPhaseITDR2020}, and \texttt{CFW2008}.

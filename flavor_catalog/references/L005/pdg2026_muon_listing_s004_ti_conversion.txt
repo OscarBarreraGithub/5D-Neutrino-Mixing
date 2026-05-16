@@ -1,0 +1,31 @@
+Source snapshot: PDG live muon listing, NODE=S004
+Process: L005, mu-e conversion in titanium
+Access date: 2026-05-16
+URL: https://pdg.lbl.gov/encoder_listings/s004.pdf
+
+Extraction method:
+The PDF was accessed only as an input stream and converted to text with
+pdftotext; the PDF itself is not tracked. This snapshot records the minimal
+local text extract needed for the L005 catalog value.
+
+PDG generated timestamp observed in streamed text:
+5/14/2026 19:33
+
+Relevant listing:
+LIMIT ON mu- -> e- CONVERSION
+
+Observable:
+sigma(mu- Ti -> e- Ti) / sigma(mu- Ti -> capture)
+
+VALUE        CL%   DOCUMENT ID   TECN   COMMENT
+<4.3 x 10^-12 90   DOHMEN 93     SPEC   SINDRUM II
+
+PDG note:
+DOHMEN 93 assumes mu- -> e- conversion leaves the nucleus in its ground state.
+
+Reference-list identity in the same PDG stream:
+DOHMEN 93, PL B317 631, C. Dohmen et al. (PSI SINDRUM-II Collab.), REFID=43592.
+
+Use in L005:
+Canonical PDG/equivalent current titanium-target limit for coherent
+neutrinoless muon-to-electron conversion.

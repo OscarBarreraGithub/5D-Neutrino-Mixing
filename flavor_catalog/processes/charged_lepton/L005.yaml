@@ -1,0 +1,130 @@
+schema: flavor_catalog.process.v1
+process_id: L005
+family: charged_lepton
+standard_notation: "R_{\\mu e}^{\\rm Ti}"
+process_name: "Coherent muon-to-electron conversion in titanium"
+owner: "PKA"
+owner_agent_id: "PKA-L005"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:04:48-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:04:48-04:00"
+    agent_id: "PKA-L005"
+    reason: "Initial L005 PKA source extraction and draft sidecar."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T14:04:48-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T14:04:48-04:00"
+    agent_id: "PKA-L005"
+    reason: "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:04:48-04:00"
+version: "0.1.0"
+source_shas:
+  cfw2008_arxiv0804_1954.txt: "sha256:4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba"
+  comet_phase_i_tdr_arxiv1812_09018.txt: "sha256:f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450"
+  mu2e_tdr_arxiv1501_05241.txt: "sha256:da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831"
+  pdg2026_muon_listing_s004_ti_conversion.txt: "sha256:41061ed0e0e6c3a8e54ff2985d48347e0c7128f82e87a69e8831842e53f5aa52"
+  sindrumii_1993_titanium_crossref.txt: "sha256:fc1354e78154dc9a8abb2b85631428f5d20c1c4fb1822037444b15fd249146f8"
+pdg_or_equivalent:
+  primary_current_limit:
+    source: "Particle Data Group live muon listing, NODE=S004"
+    year: 2026
+    pdg_generated_timestamp: "2026-05-14T19:33:00"
+    observable: "sigma(mu- Ti -> e- Ti) / sigma(mu- Ti -> capture)"
+    target_material: "Ti"
+    value: 4.3e-12
+    relation: "<"
+    confidence_level: "90% C.L."
+    document_id: "DOHMEN 93"
+    technique: "SPEC"
+    experiment: "SINDRUM II"
+    pdg_note: "Assumes mu- -> e- conversion leaves the nucleus in its ground state."
+    source_url: "https://pdg.lbl.gov/encoder_listings/s004.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L005/pdg2026_muon_listing_s004_ti_conversion.txt"
+    sha256: "41061ed0e0e6c3a8e54ff2985d48347e0c7128f82e87a69e8831842e53f5aa52"
+  experimental_publication:
+    source: "SINDRUM II Collaboration / Crossref DOI metadata"
+    year: 1993
+    title: "Test of lepton-flavour conservation in mu -> e conversion on titanium"
+    journal: "Physics Letters B"
+    volume: 317
+    issue: 4
+    pages: "631-636"
+    doi: "10.1016/0370-2693(93)91383-X"
+    source_url: "https://api.crossref.org/works/10.1016/0370-2693(93)91383-X"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L005/sindrumii_1993_titanium_crossref.txt"
+    sha256: "fc1354e78154dc9a8abb2b85631428f5d20c1c4fb1822037444b15fd249146f8"
+post_2008_developments:
+  - source: "Mu2e Technical Design Report"
+    arxiv_id: "1501.05241"
+    year: 2015
+    target_material: "Al"
+    observable: "coherent mu- N -> e- N conversion"
+    quoted_improvement: "approximately four orders of magnitude better than the current world's best limits"
+    source_url: "https://arxiv.org/abs/1501.05241"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L005/mu2e_tdr_arxiv1501_05241.txt"
+    sha256: "da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831"
+    note: "Program context only; not a titanium measurement."
+  - source: "COMET Phase-I Technical Design Report"
+    arxiv_id: "1812.09018"
+    year: 2020
+    target_material: "Al"
+    observable: "coherent mu- N -> e- N conversion"
+    sensitivity_goal: 3.1e-15
+    expected_upper_limit_90cl: 7.0e-15
+    improvement_factor: 100
+    expected_background_events: 0.032
+    source_url: "https://arxiv.org/abs/1812.09018"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt"
+    sha256: "f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450"
+    note: "Program context only; not a titanium measurement."
+paper_era_reference:
+  source: "Csaki-Falkowski-Weiler 2008 RS flavor baseline"
+  arxiv_id: "0804.1954"
+  year: 2008
+  source_url: "https://arxiv.org/abs/0804.1954"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/L005/cfw2008_arxiv0804_1954.txt"
+  sha256: "4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba"
+  note: "Theory baseline/provenance only; not a measured observable and not a pdg_or_equivalent value."
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  targeted_grep_commands:
+    - "rg -n \"mu.?-?e.?conversion|mu.?to.?e.?conversion|muon.?to.?electron|Mu2e|mu2e|COMET|comet|SINDRUM|R_mu.?e|Rmu.?e|conversion.*titanium|titanium.*conversion|Ti.*conversion\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Targeted L005 grep returned no hits in the required code directories."
+    - "Generic conversion hits are unit-conversion or bag-parameter-conversion internals, not mu-e conversion observables."
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an adjacent dipole-only LFV checker."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma in scans; no conversion observable is evaluated."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Missing implementation needs a new coherent mu-e conversion observable, lepton-quark Wilson/operator convention, titanium target nuclear overlap and capture inputs, and likely EFT matching/running shared with mu->e gamma and mu->3e."
+implementation_difficulty_if_missing: "HIGH"
+open_issues:
+  - "Checker should verify whether the PDG live NODE=S004 stream remains the preferred canonical source over a static annual listing snapshot."
+  - "Future implementation must choose the operator basis and nuclear-overlap convention before comparing Ti, Au, and Al limits directly."

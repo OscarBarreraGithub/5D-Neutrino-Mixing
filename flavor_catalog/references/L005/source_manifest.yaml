@@ -1,0 +1,59 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: L005
+generated_at: "2026-05-16T14:04:48-04:00"
+references:
+  - key: PDG2026_MuonTiConversion
+    arxiv_id: null
+    DOI: null
+    title: "Particle Data Group live muon listing, NODE=S004"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdg.lbl.gov/encoder_listings/s004.pdf"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:41061ed0e0e6c3a8e54ff2985d48347e0c7128f82e87a69e8831842e53f5aa52"
+    snapshot_path: "flavor_catalog/references/L005/pdg2026_muon_listing_s004_ti_conversion.txt"
+    use_note: "Canonical PDG live listing value for sigma(mu- Ti -> e- Ti) / sigma(mu- Ti -> capture) < 4.3e-12 at 90% C.L."
+  - key: SINDRUMII1993_TitaniumMuE
+    arxiv_id: null
+    DOI: "10.1016/0370-2693(93)91383-X"
+    title: "Test of lepton-flavour conservation in mu -> e conversion on titanium"
+    authors: "C. Dohmen et al. (PSI SINDRUM-II Collaboration)"
+    year: 1993
+    url: "https://api.crossref.org/works/10.1016/0370-2693(93)91383-X"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:fc1354e78154dc9a8abb2b85631428f5d20c1c4fb1822037444b15fd249146f8"
+    snapshot_path: "flavor_catalog/references/L005/sindrumii_1993_titanium_crossref.txt"
+    use_note: "Bibliographic identity for the DOHMEN 93 SINDRUM II paper cited by PDG; no publisher PDF tracked."
+  - key: Mu2eTDR2015
+    arxiv_id: "1501.05241"
+    DOI: "10.48550/arXiv.1501.05241"
+    title: "Mu2e Technical Design Report"
+    authors: "L. Bartoszek et al. (Mu2e Collaboration)"
+    year: 2015
+    url: "https://arxiv.org/abs/1501.05241"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831"
+    snapshot_path: "flavor_catalog/references/L005/mu2e_tdr_arxiv1501_05241.txt"
+    use_note: "Post-2008 conversion-program context; aluminum target, not a titanium measurement."
+  - key: COMETPhaseITDR2020
+    arxiv_id: "1812.09018"
+    DOI: "10.1093/ptep/ptz125"
+    title: "COMET Phase-I Technical Design Report"
+    authors: "R. Abramishvili et al. (COMET Collaboration)"
+    year: 2020
+    url: "https://arxiv.org/abs/1812.09018"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450"
+    snapshot_path: "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt"
+    use_note: "Post-2008 conversion-program context; aluminum target, not a titanium measurement."
+  - key: CFW2008
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba"
+    snapshot_path: "flavor_catalog/references/L005/cfw2008_arxiv0804_1954.txt"
+    use_note: "Catalog-requested 2008 RS-flavor baseline for post-2008 comparison."
