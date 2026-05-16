@@ -62,9 +62,18 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "WA v2 added CA-requested per-value metadata fields for batch wa_w23_beauty_v3."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T13:32:05-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T13:32:05-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    cycle: 3
+    reason: "CA batch ca_w23_beauty_v3 verified WA-v3 metadata completeness and all required checks."
+checker_passed_at: "2026-05-16T13:32:05-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:11:30-04:00"
+last_updated_at: "2026-05-16T13:32:05-04:00"
 version: "0.1.0"
 source_shas:
   belleii2023_b0_ks_pi0_cp_arxiv.txt: "sha256:9b49da234cc9d67d4784725150115865333f5ae7c0590267c2bdecf07a2cbbfa"
