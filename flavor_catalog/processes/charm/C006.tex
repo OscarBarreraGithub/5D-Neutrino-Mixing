@@ -1,0 +1,95 @@
+% Flavor catalog process: C006
+% family: charm
+% owner_agent_id: PKA-C006
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: C006.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{C006: \(D^0\to e^\pm\mu^\mp\)}
+
+\subsection*{Process}
+\textbf{Standard notation:}
+\(\mathcal{B}(D^0\to e^\pm\mu^\mp)\).
+This entry covers the charged-lepton-flavor-violating neutral-charm decay
+\(D^0\to e^\pm\mu^\mp\).  It is a \(\Delta C=1\), \(c\to u e\mu\)
+null test, with charge-conjugate final states included in the experimental
+limit.  In flavor structure it is the up-sector charm analogue of semileptonic
+LFV probes such as \(B^+\to K^+ e^\pm\mu^\mp\), but with a purely leptonic
+two-body \(D^0\) final state.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG Live/API listing S032.40, accessed on 2026-05-16, gives
+\[
+  \mathcal{B}(D^0\to e^\pm\mu^\mp) < 1.3\times 10^{-8}
+  \qquad (90\%~{\rm C.L.}).
+\]
+The used PDG input is the 2016 LHCb search in \(3.0\,{\rm fb}^{-1}\) of
+\(pp\) data at \(\sqrt{s}=7\) and \(8\,{\rm TeV}\), normalized with
+\(D^0\to K^-\pi^+\).  The same LHCb abstract reports no significant excess.
+Earlier post-2008 B-factory limits were weaker: Belle reported
+\(\mathcal{B}(D^0\to e^+\mu^-)+\mathcal{B}(D^0\to\mu^+e^-)<2.6\times10^{-7}\),
+and BaBar reported \(\mathcal{B}(D^0\to e\mu)<3.3\times10^{-7}\), all at
+90\% C.L.  The local snapshots are
+\texttt{flavor\_catalog/references/C006/pdg2026\_d0\_emu\_pdgLive.txt},
+\texttt{lhcb2016\_arxiv1512\_00322.txt},
+\texttt{belle2010\_arxiv1003\_2345.txt}, and
+\texttt{babar2012\_arxiv1206\_5419.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped flavor already generates nonuniversal \(c\)- and \(u\)-quark
+couplings through localization and KK exchange.  C006 additionally requires
+lepton-flavor violation, so it is not a quark-only \(\Delta F=2\) constraint.
+In a lepton-extended RS pipeline it would constrain four-fermion
+\((\bar u\Gamma c)(\bar e\Gamma\mu)\) structures, flavor-changing \(Z\)-like
+couplings combined with lepton flavor violation, scalar exchange, or explicit
+leptoquark/R-parity-violating UV completions.  It is therefore a roadmap
+process for joint up-sector and charged-lepton flavor alignment.
+
+\subsection*{Post-2008 developments}
+The arXiv:0804.1954 RS-flavor baseline predates the modern \(D^0\to e\mu\)
+search sequence.  Belle's 2010 result first pushed the combined charge-mode
+limit to \(2.6\times10^{-7}\), BaBar's 2012 continuum-charm search gave
+\(3.3\times10^{-7}\), and LHCb's 2016 hadron-collider analysis became the
+current PDG-used input at \(1.3\times10^{-8}\).  The LHCb abstract explicitly
+describes the result as an order-of-magnitude improvement over the previous
+limit and notes sensitivity to leptoquark and R-parity-violating SUSY
+parameter space.
+
+\subsection*{Constraint validity and model dependence}
+The experimental upper limit is a clean LFV null result.  The RS interpretation
+is model dependent: the quark-only scan has no charged-LFV \(c\to u e\mu\)
+operator, and different chiral structures map differently onto the two-body
+\(D^0\) rate.  A conservative future use should compare the limit to a defined
+\(\Delta C=1\) LFV Wilson basis, with the \(D^0\) decay constant and lepton
+mass effects stated explicitly, rather than reusing the neutral-meson mixing
+basis.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required greps across \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no
+\(D^0\to e^\pm\mu^\mp\), \(c\to u e\mu\), or rare-charm LFV implementation.
+Nearby hits are different observables: \(D^0\) mixing is configured at
+\texttt{quarkConstraints/deltaf2.py}:252 and evaluated at
+\texttt{quarkConstraints/deltaf2.py}:941; the modern policy surface lists
+only neutral \(D^0\) mixing at
+\texttt{quarkConstraints/modern/phenomenology.py}:23 and evaluates that
+bridge at \texttt{quarkConstraints/modern/phenomenology.py}:668.  The
+\(\mu\to e\gamma\) dipole checker at
+\texttt{flavorConstraints/muToEGamma.py}:75, called from
+\texttt{scanParams/scan.py}:524, is a separate charged-LFV observable.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  A first live constraint would need a new \(\Delta C=1\)
+LFV operator normalization and a \(D^0\to e\mu\) branching-ratio wrapper.  It
+should not require a global fit or the existing \(\Delta F=2\) RG machinery,
+but the current SLL/SLR/VLL/VRR/LR neutral-meson basis is not sufficient.
+
+\subsection*{Key references}
+Process-local keys before bibliography consolidation:
+\texttt{PDG2026:D0EMu}, \texttt{LHCb2016:D0EMu},
+\texttt{Belle2010:D0EMu}, \texttt{BaBar2012:D0EeMuMuEMu}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

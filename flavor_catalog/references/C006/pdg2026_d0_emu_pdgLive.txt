@@ -1,0 +1,50 @@
+Source: PDG Live/API minimal text snapshot
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.40
+Access date: 2026-05-16
+Edition reported by API: 2026
+Local policy: minimal text snapshot only; no publisher PDF stored.
+
+PDG ID: S032.40
+Description: D0 --> mu+- e-+
+Parent: S032, D0
+
+Related data block:
+  pdgid: S032R46
+  description: G(D0 --> mu+- e-+)/G(total)
+  note: A test of lepton family number conservation.
+
+Measurements listed by the API:
+  AAIJ 2016H, LHCb, Phys. Lett. B 754, 167, DOI 10.1016/j.physletb.2016.01.029.
+    Title: Search for the Lepton-Flavour Violating Decay D0 --> e+- mu-+.
+    Comment in PDG API: p p at 7, 8 GeV.
+    Confidence level: 90.0%.
+    VALUE: <1.3 E-8.
+    Limit type: upper.
+    Used in average: true.
+    Used in fit: true.
+
+  LEES 2012Q, BaBar, Phys. Rev. D 86, 032001, DOI 10.1103/PhysRevD.86.032001.
+    Title: Search for the Decay Modes D0 --> e+ e-, D0 --> mu+ mu-, and D0 --> e+- mu+-.
+    Comment: e+ e- near 10.58 GeV.
+    Confidence level: 90.0%.
+    VALUE: <3.3 E-7.
+    Limit type: upper.
+    Used in average: false.
+    Used in fit: false.
+
+  PETRIC 2010, Belle, Phys. Rev. D 81, 091102, DOI 10.1103/PhysRevD.81.091102.
+    Title: Search for Leptonic Decays of D0 Mesons.
+    Comment: e+ e- near Upsilon(4S).
+    Confidence level: 90.0%.
+    VALUE: <2.6 E-7.
+    Limit type: upper.
+    Used in average: false.
+    Used in fit: false.
+
+  AUBERT,B 2004Y, BaBar, Phys. Rev. Lett. 93, 191801,
+    DOI 10.1103/PhysRevLett.93.191801.
+    VALUE: <8.1 E-7 at 90.0% CL.
+
+Extraction note:
+  The current PDG/API headline value for C006 is the LHCb 2016 upper limit
+  B(D0 -> mu+- e-+) < 1.3e-8 at 90% CL.

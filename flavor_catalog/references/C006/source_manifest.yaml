@@ -1,0 +1,60 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: C006
+generated_at: "2026-05-16T14:24:29-04:00"
+license_policy: "minimal text snapshots only; no publisher PDFs tracked"
+references:
+  - key: PDG2026:D0EMu
+    arxiv_id: null
+    DOI: null
+    title: "D0 -> mu+- e-+ decay mode summary"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.40"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C006/pdg2026_d0_emu_pdgLive.txt"
+    sha256_of_local_snapshot: "sha256:87cbe3dec3cf90c4fbfd989cbf320dd6e16eb2c9d749b3843434289e978f572c"
+    notes: "PDG Live/API listing for S032.40; canonical 90% CL upper limit is the LHCb 2016 result."
+  - key: LHCb2016:D0EMu
+    arxiv_id: "1512.00322"
+    DOI: "10.1016/j.physletb.2016.01.029"
+    title: "Search for the lepton-flavour violating decay D0 -> e^+- mu^-+"
+    authors: "LHCb Collaboration"
+    year: 2016
+    url: "https://arxiv.org/abs/1512.00322"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C006/lhcb2016_arxiv1512_00322.txt"
+    sha256_of_local_snapshot: "sha256:caf3d6e3bae80b55d3658da07260696e635347219881f2abb3949b27bfa2140c"
+    notes: "Primary post-2008 experiment and current PDG-used input; 3.0 fb^-1 at 7 and 8 TeV."
+  - key: BaBar2012:D0EeMuMuEMu
+    arxiv_id: "1206.5419"
+    DOI: "10.1103/PhysRevD.86.032001"
+    title: "Search for the decay modes D0 -> e+e-, D0 -> mu+mu-, and D0 -> e mu"
+    authors: "BABAR Collaboration"
+    year: 2012
+    url: "https://arxiv.org/abs/1206.5419"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C006/babar2012_arxiv1206_5419.txt"
+    sha256_of_local_snapshot: "sha256:e5042790a01b509fbcc0b9faa9f286e8ed5b9901aa5e1433d829bd6e68870372"
+    notes: "Independent pre-LHCb B-factory LFV charm limit."
+  - key: Belle2010:D0EMu
+    arxiv_id: "1003.2345"
+    DOI: "10.1103/PhysRevD.81.091102"
+    title: "Search for leptonic decays of D0 mesons"
+    authors: "Belle Collaboration"
+    year: 2010
+    url: "https://arxiv.org/abs/1003.2345"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C006/belle2010_arxiv1003_2345.txt"
+    sha256_of_local_snapshot: "sha256:da7d0fe5b963156bbb0afb7272bb823259dae8becb18cc3afac5d1f109a312cd"
+    notes: "Earlier post-2008 Belle LFV charm limit superseded by LHCb."
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C006/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:28b42057f0ce1199e7d86b3f5d8d3748566ccace05289d05ae59f622c5790246"
+    notes: "Paper-era RS/anarchic-flavor baseline used only for post-2008 framing, not as a measured C006 observable."
