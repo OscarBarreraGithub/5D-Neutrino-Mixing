@@ -1,0 +1,92 @@
+% Flavor catalog per-process draft.
+% process_id: T007
+% family: top_higgs_ew
+% owner_agent_id: PKA-T007
+% Canonical metadata sidecar: T007.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(t\to Hc\)}{t -> H c} FCNC Top-Higgs Decay}
+
+\subsection*{Process}
+The observable is the flavor-changing neutral-current branching fraction
+\(\mathcal{B}(t\to Hc)\), catalog id T007 in the top/Higgs/electroweak
+family.  It covers direct LHC searches for anomalous top--charm--Higgs
+interactions in both \(t\bar t\) events with an FCNC top decay and associated
+single-top plus Higgs production.
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth numerical entries are the \texttt{pdg\_or\_equivalent}
+block in \texttt{T007.yaml}.  The PDG 2026 \texttt{pdgLive} top-quark
+datablock quotes
+\[
+  \mathcal{B}(t\to Hc) < 3.4\times 10^{-4}
+\]
+at 95\% CL as the headline limit (\texttt{PDG2026:T007:tHc\_combined}), based
+on the ATLAS 2024 combined Higgs-decay search.  The local PDG
+snapshot is
+\texttt{flavor\_catalog/references/T007/pdg2026\_top\_hc\_datablock.txt}.
+The ATLAS primary arXiv record gives \(140~\mathrm{fb}^{-1}\) at
+\(\sqrt{s}=13~\mathrm{TeV}\) (\texttt{ATLAS2024:T007:dataset}), a
+multilepton-only limit \(\mathcal{B}(t\to Hc)<3.3\times10^{-4}\)
+with expected \(3.8\times10^{-4}\)
+(\texttt{ATLAS2024:T007:tHc\_multilepton}), and the combined limit
+\(\mathcal{B}(t\to Hc)<3.4\times10^{-4}\) with expected
+\(2.3\times10^{-4}\) (\texttt{ATLAS2024:T007:tHc\_combined}).  The CMS 2025
+record uses \(138~\mathrm{fb}^{-1}\) at \(\sqrt{s}=13~\mathrm{TeV}\) collected
+in 2016--2018 (\texttt{CMS2025:T007:dataset}); its combined limit is
+\(\mathcal{B}(t\to Hc)<0.037\%\), expected \(0.035\%\)
+(\texttt{CMS2025:T007:tHc\_combined}).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped models and composite-Higgs variants can generate off-diagonal
+scalar Yukawa couplings after rotating to the quark mass basis.  The \(t\to Hc\)
+mode probes the same top-sector localization and mixing structure that also
+controls the large top Yukawa, so it is complementary to light-meson
+\(\Delta F=2\) constraints.  For this repo it is best treated as a direct
+top-sector diagnostic, not as a replacement for the existing kaon, \(B\), and
+\(D\)-mixing gates.
+
+\subsection*{Post-2008 developments}
+The requested baseline is arXiv:0804.1954
+(\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}), which predates direct LHC
+top-Higgs FCNC bounds.  Since then, ATLAS and CMS moved the search from
+indirect model estimates to direct limits using many Higgs final states.  ATLAS
+now combines \(H\to WW\), \(H\to ZZ\), \(H\to\tau\tau\),
+\(H\to\gamma\gamma\), and \(H\to b\bar b\) channels in the PDG headline
+(\texttt{PDG2026:T007:tHc\_combined};
+\texttt{ATLAS2024:T007:tHc\_combined}).  CMS has an independent 2025
+combination with \(H\to\gamma\gamma\) and \(H\to b\bar b\) inputs in addition
+to the same-sign lepton analysis (\texttt{CMS2025:T007:tHc\_combined}).  The
+classic top-FCNC review arXiv:hep-ph/0409342 remains useful context for why SM
+top FCNC Higgs amplitudes are negligible while BSM scalar flavor can be visible.
+
+\subsection*{Constraint validity and model dependence}
+The experimental statement is a robust 95\% CL upper limit on an assumed
+single anomalous top-Higgs flavor coupling.  The model interpretation is
+operator-convention dependent: an RS implementation must choose whether the
+scan outputs scalar \(Htc\), \(Hct\), or SMEFT Wilson coefficients, and whether
+associated \(tH\) production is included together with \(t\bar t\) FCNC decays.
+Correlations with \(t\to Hu\) are also analysis-dependent, so this draft keeps
+only the charm-channel bound as the T007 catalog value.
+
+\subsection*{Code coverage in this repo}
+Coverage is \textbf{NO}.  The PKA reran the required plan greps and a
+targeted search for \(t\to Hc\), \(tHc\), \(tcH\), \(Htc\), and \(tqH\) across
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/}.  The only
+targeted non-doc hits were generic FCNC prose/comments in
+\texttt{quarkConstraints/PAPER\_0710\_1869.md:35} and
+\texttt{tests/test\_paper\_couplings.py:258}; there is no \(t\to Hc\)
+observable, likelihood, or limit check.
+
+\subsection*{Implementation difficulty}
+Production integration is \textbf{HIGH}.  Recording the external upper limit is
+straightforward, but using it in scans needs a new top-Higgs FCNC matching layer,
+a scalar-coupling convention, and a decision about combining \(tH\) production
+with \(t\bar t\) FCNC-decay interpretations.
+
+\subsection*{Key references}
+\texttt{PDG2026TopHc}; \texttt{ATLAS2024TopHcMultilepton};
+\texttt{CMS2025TopHcHiggsMediated}; \texttt{AguilarSaavedra2004TopFCNC};
+\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}.
