@@ -34,9 +34,19 @@ status_history:
     batch_id: "ca_w5b_kaon"
     issues:
       - "CHK-1: The PDG partial-rate and extrapolated-total numerical claims in K010.tex are represented in pdg_or_equivalent, but the NA48/1 seven-observed-events and 0.15-background claims are only in supporting_experimental_values, not YAML pdg_or_equivalent entries with full year/value/uncertainty/source_url/access_date/sha256 metadata."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T15:28:45-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T15:28:45-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w5b_kaon_v2"
+    reason: "Cycle 2 metadata rework: promoted CA-listed numerical claims into pdg_or_equivalent values."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:16:18-04:00"
+last_updated_at: "2026-05-16T15:28:45-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_ks_pi0ee_pdgLive.txt: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
@@ -48,11 +58,61 @@ pdg_or_equivalent:
   source: "Particle Data Group 2026 pdgLive listing S012.10"
   source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10"
   access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt"
+  sha256: "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
   year: 2026
   value_summary: "BR(K_S -> pi0 e+ e-, m_ee > 0.165 GeV) = (3.0^{+1.5}_{-1.2} stat +/- 0.2 syst) x 10^-9; PDG footnote gives full-region extrapolation BR = (5.8^{+2.9}_{-2.4}) x 10^-9 using a constant form factor and vector matrix element."
+  values:
+    - observable: "BR(K_S -> pi0 e+ e-, m_ee > 0.165 GeV)"
+      year: 2026
+      value: "3.0e-9"
+      uncertainty: "+1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst"
+      units: "branching fraction"
+      source: "Particle Data Group 2026 pdgLive listing S012.10 / NA48"
+      source_key: "PDG2026:K010"
+      source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt"
+      sha256: "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
+    - observable: "BR(K_S -> pi0 e+ e-), full kinematic region"
+      year: 2026
+      value: "5.8e-9"
+      uncertainty: "+2.9e-9 -2.4e-9"
+      units: "branching fraction"
+      source: "Particle Data Group 2026 pdgLive listing S012.10 / NA48"
+      source_key: "PDG2026:K010"
+      source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt"
+      sha256: "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
+      assumptions: "constant form factor and vector matrix element"
+    - observable: "NA48/1 observed signal candidates"
+      year: 2003
+      value: "7"
+      uncertainty: null
+      units: "events"
+      source: "NA48/1 2003 arXiv hep-ex/0309075"
+      source_key: "NA482003:KSPi0EE"
+      source_url: "https://arxiv.org/abs/hep-ex/0309075"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt"
+      sha256: "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
+    - observable: "NA48/1 expected background"
+      year: 2003
+      value: "0.15"
+      uncertainty: null
+      units: "events"
+      source: "NA48/1 2003 arXiv hep-ex/0309075"
+      source_key: "NA482003:KSPi0EE"
+      source_url: "https://arxiv.org/abs/hep-ex/0309075"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt"
+      sha256: "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
   canonical_measurement:
     observable: "BR(K_S -> pi0 e+ e-, m_ee > 0.165 GeV)"
+    year: 2026
     value: 3.0e-9
+    uncertainty: "+1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst"
     uncertainty_stat_positive: 1.5e-9
     uncertainty_stat_negative: 1.2e-9
     uncertainty_syst: 0.2e-9
@@ -60,30 +120,48 @@ pdg_or_equivalent:
     confidence_level: null
     source_key: "PDG2026:K010"
     experiment_key: "NA482003:KSPi0EE"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt"
+    sha256: "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
     sha256_of_text_snapshot: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
   extrapolated_total_rate:
     observable: "BR(K_S -> pi0 e+ e-), full kinematic region"
+    year: 2026
     value: 5.8e-9
+    uncertainty: "+2.9e-9 -2.4e-9"
     uncertainty_positive: 2.9e-9
     uncertainty_negative: 2.4e-9
     units: "branching fraction"
     assumptions: "constant form factor and vector matrix element"
     source_key: "PDG2026:K010"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt"
+    sha256: "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
     sha256_of_text_snapshot: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
 supporting_experimental_values:
   - observable: "NA48/1 observed signal candidates"
+    year: 2003
     value: 7
+    uncertainty: null
     units: "events"
     source_key: "NA482003:KSPi0EE"
+    source_url: "https://arxiv.org/abs/hep-ex/0309075"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt"
+    sha256: "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
     sha256_of_text_snapshot: "sha256:406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
   - observable: "NA48/1 expected background"
+    year: 2003
     value: 0.15
+    uncertainty: null
     units: "events"
     source_key: "NA482003:KSPi0EE"
+    source_url: "https://arxiv.org/abs/hep-ex/0309075"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt"
+    sha256: "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
     sha256_of_text_snapshot: "sha256:406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
 paper_era_reference:
   - key: "CFW2008:RSFlavor"
