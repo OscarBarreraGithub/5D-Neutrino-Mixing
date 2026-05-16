@@ -1,0 +1,7 @@
+# Flavor Catalog Index
+# Each entry corresponds to one process_id with sidecar status_history.
+# Status legal transitions:
+#   DRAFT -> WRITER-INITIATED -> WRITER-DONE -> CHECKER-DONE -> OPUS-APPROVED
+#   Any non-terminal state may transition to BLOCKED-PI or DEFERRED-SCOPE
+#   on iteration-cap hit.
+processes: []

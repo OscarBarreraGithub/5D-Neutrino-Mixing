@@ -1,0 +1,51 @@
+% flavor_catalog/catalog_master.tex
+% Discovery-mode flavor-constraint catalog master.
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{longtable}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\makeatletter
+\def\input@path{{./}{flavor_catalog/}}
+\makeatother
+
+\input{latex/macros}
+
+\title{Discovery-Mode Flavor Constraint Catalog}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Placeholder abstract for the discovery-mode flavor-constraint catalog companion to the rc1.1 quark-scan paper.
+\end{abstract}
+
+\section{Kaon}
+\input{processes/kaon/index}
+
+\section{Charm}
+\input{processes/charm/index}
+
+\section{Beauty}
+\input{processes/beauty/index}
+
+\section{Top/Higgs/EW}
+\input{processes/top_higgs_ew/index}
+
+\section{Charged Lepton (LFV)}
+\input{processes/charged_lepton/index}
+
+\section{EDM and Neutrino}
+\input{processes/edm_neutrino/index}
+
+\end{document}
