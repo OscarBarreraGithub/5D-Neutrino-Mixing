@@ -44,9 +44,19 @@ status_history:
     issues:
       - "pdg_or_equivalent observable blocks for the HFLAV and PDG values lack explicit year keys and use sha256_of_text_snapshot instead of sha256."
       - "TeX post-2008 numerical claims 3.1 sigma, 5.2 sigma, and 2019--2022 are stored only under post_2008_sources, not pdg_or_equivalent."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T19:01:15-04:00"
+    timestamp: "2026-05-16T19:01:15-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    batch_id: "wa_w7_new_v2"
+    cycle: 2
+    reason: "Addressed CA CHK-1 by normalizing pdg_or_equivalent metadata and removing flagged post-2008 numerical claims from TeX."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T18:55:13-04:00"
+last_updated_at: "2026-05-16T19:01:15-04:00"
 version: "0.1.1"
 source_shas:
   hflav_rare_decays_dec2024_btokstargamma.txt: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
@@ -59,6 +69,7 @@ source_shas:
 pdg_or_equivalent:
   branching_fraction_b0_to_kstar0_gamma:
     source: "HFLAV rare decays, end-of-year 2024"
+    year: 2024
     observable: "B(B0 -> K*(892)0 gamma)"
     value: 0.00004163
     uncertainty: 0.00000092
@@ -66,9 +77,10 @@ pdg_or_equivalent:
     source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt"
-    sha256_of_text_snapshot: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
+    sha256: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
   branching_fraction_bp_to_kstarp_gamma:
     source: "HFLAV rare decays, end-of-year 2024"
+    year: 2024
     observable: "B(B+ -> K*(892)+ gamma)"
     value: 0.0000395
     uncertainty: 0.0000010
@@ -76,9 +88,10 @@ pdg_or_equivalent:
     source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt"
-    sha256_of_text_snapshot: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
+    sha256: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
   isospin_asymmetry_delta0plus:
     source: "HFLAV rare decays, end-of-year 2024"
+    year: 2024
     observable: "Delta_0+(B -> K* gamma)"
     value: 0.059
     uncertainty: 0.014
@@ -87,9 +100,10 @@ pdg_or_equivalent:
     source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt"
-    sha256_of_text_snapshot: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
+    sha256: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
   direct_cp_asymmetry_b_to_kstar_gamma:
     source: "HFLAV rare decays, end-of-year 2024"
+    year: 2024
     observable: "A_CP(B -> K* gamma)"
     value: -0.004
     uncertainty: 0.011
@@ -97,9 +111,10 @@ pdg_or_equivalent:
     source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt"
-    sha256_of_text_snapshot: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
+    sha256: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
   time_dependent_s_kstargamma:
     source: "PDG pdgLive 2025"
+    year: 2025
     observable: "S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)"
     value: -0.08
     uncertainty: 0.17
@@ -107,9 +122,10 @@ pdg_or_equivalent:
     source_url: "https://pdglive.lbl.gov/DataBlock.action?node=S042SX4"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt"
-    sha256_of_text_snapshot: "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b"
+    sha256: "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b"
   time_dependent_c_kstargamma:
     source: "PDG pdgLive 2025"
+    year: 2025
     observable: "C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)"
     value: 0.03
     uncertainty: 0.10
@@ -117,33 +133,33 @@ pdg_or_equivalent:
     source_url: "https://pdglive.lbl.gov/Particle.action?node=S042"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt"
-    sha256_of_text_snapshot: "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b"
+    sha256: "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b"
 paper_era_reference:
   source: "arXiv:0804.1954"
   role: "2008 RS/composite-Higgs flavor baseline for post-2008 comparison, not a measured observable."
   snapshot_path: "flavor_catalog/references/B012/arxiv_0804_1954_cfw_rs_flavor.txt"
-  sha256_of_text_snapshot: "sha256:6ef3289a51f25e27b67d8c319311780ccbf0a3cdbc8b8c4d3756088ce6956a57"
+  sha256: "sha256:6ef3289a51f25e27b67d8c319311780ccbf0a3cdbc8b8c4d3756088ce6956a57"
 post_2008_sources:
   babar_2009:
     source: "arXiv:0906.2177"
     role: "Post-2008 B0/B+ -> K* gamma branching, CP, and isospin measurement."
     snapshot_path: "flavor_catalog/references/B012/arxiv_0906_2177_babar_btokstargamma.txt"
-    sha256_of_text_snapshot: "sha256:77204e193561c9a16c9f80bdf605d871285b9951b4992c5f603978d9e402dc95"
+    sha256: "sha256:77204e193561c9a16c9f80bdf605d871285b9951b4992c5f603978d9e402dc95"
   belle_2017:
     source: "arXiv:1707.00394"
     role: "Belle evidence for isospin violation in B -> K* gamma; source for 3.1 sigma statement."
     snapshot_path: "flavor_catalog/references/B012/arxiv_1707_00394_belle_isospin_cp.txt"
-    sha256_of_text_snapshot: "sha256:826984017c419bd667b63e5f7e63e8130a41c962cf9c1098ad9e00ed3cd5c232"
+    sha256: "sha256:826984017c419bd667b63e5f7e63e8130a41c962cf9c1098ad9e00ed3cd5c232"
   lhcb_2014:
     source: "arXiv:1402.6852"
     role: "LHCb photon-polarization observation in b -> s gamma; source for 5.2 sigma statement."
     snapshot_path: "flavor_catalog/references/B012/arxiv_1402_6852_lhcb_photon_polarization.txt"
-    sha256_of_text_snapshot: "sha256:664bac221a554987f3675e65cc03089b3ce2c184a680f084c3ade1e37d68b951"
+    sha256: "sha256:664bac221a554987f3675e65cc03089b3ce2c184a680f084c3ade1e37d68b951"
   belleii_2024:
     source: "arXiv:2411.10127"
     role: "Belle II 2019-2022 B -> K* gamma update entering HFLAV."
     snapshot_path: "flavor_catalog/references/B012/arxiv_2411_10127_belleii_btokstargamma.txt"
-    sha256_of_text_snapshot: "sha256:e5a40247dd2208524ce0c0fd962ed878939c0a931ce1d921930d6367af77eab1"
+    sha256: "sha256:e5a40247dd2208524ce0c0fd962ed878939c0a931ce1d921930d6367af77eab1"
 code_coverage:
   status: "NO"
   grep_commands:

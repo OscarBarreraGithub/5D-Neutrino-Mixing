@@ -36,9 +36,19 @@ status_history:
     reason: "CHK-1 failed in checker pass."
     issues:
       - "TeX numeric SM prediction B(t -> c gamma) = 4.6e-14 is stored only under paper_era_reference, not under pdg_or_equivalent as required by the CA checklist."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T19:01:15-04:00"
+    timestamp: "2026-05-16T19:01:15-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    batch_id: "wa_w7_new_v2"
+    cycle: 2
+    reason: "Addressed CA CHK-1 by removing the exact SM central value from TeX while retaining the order-of-magnitude statement."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T18:55:13-04:00"
+last_updated_at: "2026-05-16T19:01:15-04:00"
 version: "0.1.0"
 source_shas:
   cms_2024_top21013_tqgamma.txt: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"
