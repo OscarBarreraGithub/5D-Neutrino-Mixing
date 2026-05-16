@@ -53,9 +53,18 @@ status_history:
     issues:
       - "CHK-1: Main HFLAV/PDG pdg_or_equivalent value blocks do not all include required per-value year, access_date, source_url, and sha256 metadata; branching-fraction blocks lack year/access_date, HFLAV direct-CP blocks lack year/access_date/source_url, and PDG time-dependent-CP blocks lack year/access_date."
     reason: "CA batch ca_w23_beauty_v2 found remaining metadata rework."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:11:30-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:11:30-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "WA v2 added CA-requested per-value metadata fields for batch wa_w23_beauty_v3."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:56:12-04:00"
+last_updated_at: "2026-05-16T13:11:30-04:00"
 version: "0.1.0"
 source_shas:
   belleii2023_b0_ks_pi0_cp_arxiv.txt: "sha256:9b49da234cc9d67d4784725150115865333f5ae7c0590267c2bdecf07a2cbbfa"
@@ -71,82 +80,124 @@ pdg_or_equivalent:
   value_summary: "HFLAV Dec 2025 gives B(B+->K0 pi+)=(2.392+-0.062)e-5, B(B+->K+ pi0)=(1.322+-0.043)e-5, B(B0->K+ pi-)=(2.007+-0.040)e-5, B(B0->K0 pi0)=(1.012+-0.043)e-5; direct ACP values in percent are -2.67+-0.87, +2.7+-1.2, -8.31+-0.31, and -1+-13; PDG API gives C(K0 pi0)=0.00+-0.08 and S(K0 pi0)=0.64+-0.13."
   branching_fractions:
     - observable: "BR(B+ -> K0 pi+)"
+      year: 2025
       value: 2.392e-5
       uncertainty: 0.062e-5
       units: "branching fraction"
       source_key: "hflav_dec2025_btopik"
       source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bu/BR_B%2B_K0_pi%2B.html"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+      sha256: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
       sha256_of_text_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
     - observable: "BR(B+ -> K+ pi0)"
+      year: 2025
       value: 1.322e-5
       uncertainty: 0.043e-5
       units: "branching fraction"
       source_key: "hflav_dec2025_btopik"
       source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bu/BR_B%2B_K%2B_pi0.html"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+      sha256: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
       sha256_of_text_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
     - observable: "BR(B0 -> K+ pi-)"
+      year: 2025
       value: 2.007e-5
       uncertainty: 0.040e-5
       units: "branching fraction"
       source_key: "hflav_dec2025_btopik"
       source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bd/BR_B0_K%2B_pi-.html"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+      sha256: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
       sha256_of_text_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
     - observable: "BR(B0 -> K0 pi0)"
+      year: 2025
       value: 1.012e-5
       uncertainty: 0.043e-5
       units: "branching fraction"
       source_key: "hflav_dec2025_btopik"
       source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bd/BR_B0_K0_pi0.html"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+      sha256: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
       sha256_of_text_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
   direct_cp_asymmetries:
     - observable: "A_CP(B+ -> K0_S pi+)"
+      year: 2025
+      value: -2.67
+      uncertainty: 0.87
       value_percent: -2.67
       uncertainty_percent: 0.87
       units: "percent"
       source_key: "hflav_dec2025_btopik"
+      source_url: "https://hflav.web.cern.ch/content/rare-b-decays"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+      sha256: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
       sha256_of_text_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
     - observable: "A_CP(B+ -> K+ pi0)"
+      year: 2025
+      value: 2.7
+      uncertainty: 1.2
       value_percent: 2.7
       uncertainty_percent: 1.2
       units: "percent"
       source_key: "hflav_dec2025_btopik"
+      source_url: "https://hflav.web.cern.ch/content/rare-b-decays"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+      sha256: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
       sha256_of_text_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
     - observable: "A_CP(B0 -> K+ pi-)"
+      year: 2025
+      value: -8.31
+      uncertainty: 0.31
       value_percent: -8.31
       uncertainty_percent: 0.31
       units: "percent"
       source_key: "hflav_dec2025_btopik"
+      source_url: "https://hflav.web.cern.ch/content/rare-b-decays"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+      sha256: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
       sha256_of_text_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
     - observable: "A_CP(B0 -> K0 pi0)"
+      year: 2025
+      value: -1.0
+      uncertainty: 13.0
       value_percent: -1.0
       uncertainty_percent: 13.0
       units: "percent"
       source_key: "hflav_dec2025_btopik"
+      source_url: "https://hflav.web.cern.ch/content/rare-b-decays"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+      sha256: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
       sha256_of_text_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
   time_dependent_cp:
     - observable: "C(K0 pi0) in B0 -> K0 pi0"
+      year: 2025
       value: 0.00
       uncertainty: 0.08
       units: "dimensionless"
       source_key: "pdg2025_k0pi0_time_dependent_cp_api"
       source_url: "https://pdgapi.lbl.gov/summaries/S042CKP"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/pdg2025_k0pi0_time_dependent_cp_api.txt"
+      sha256: "sha256:dcd2aea4b34a67bc0d72350d098a885e99364d0a040439016807e4837a67f008"
       sha256_of_text_snapshot: "sha256:dcd2aea4b34a67bc0d72350d098a885e99364d0a040439016807e4837a67f008"
     - observable: "S(K0 pi0) in B0 -> K0 pi0"
+      year: 2025
       value: 0.64
       uncertainty: 0.13
       units: "dimensionless"
       source_key: "pdg2025_k0pi0_time_dependent_cp_api"
       source_url: "https://pdgapi.lbl.gov/summaries/S042SKP"
+      access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B032/pdg2025_k0pi0_time_dependent_cp_api.txt"
+      sha256: "sha256:dcd2aea4b34a67bc0d72350d098a885e99364d0a040439016807e4837a67f008"
       sha256_of_text_snapshot: "sha256:dcd2aea4b34a67bc0d72350d098a885e99364d0a040439016807e4837a67f008"
   post_2008_measurements:
     - observable: "A_CP(B+ -> K+ pi0)"
