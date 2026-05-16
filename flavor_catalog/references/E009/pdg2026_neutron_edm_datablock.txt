@@ -1,0 +1,29 @@
+Source key: PDG2026:NeutronEDM
+Source: PDG Live S017EDM neutron electric dipole moment datablock
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM
+Access date: 2026-05-16
+Snapshot type: Minimal text extract from PDG Live; no publisher PDF.
+
+PDG edition: 2026 Review of Particle Physics.
+PDG citation on page: F. Takahashi et al. (Particle Data Group), Int. J.
+Mod. Phys. A 41, 2630011 (2026).
+
+Observable: neutron electric dipole moment.
+PDG note: The results are upper limits on |d_n|.
+
+Datablock: S017EDM
+Table units: VALUE (10^-25 e cm), CL%.
+
+Canonical direct result:
+  <0.18, CL = 90%, ABEL 2020, method MRS UCN.
+Converted value:
+  |d_n| < 1.8 x 10^-26 e cm at 90% CL.
+
+PDG measurement note for ABEL 2020:
+  d = (0.0 +/- 1.1 +/- 0.2) x 10^-26 e cm, corresponding to the listed
+  limit.
+
+Use in E009:
+  This is the measured experimental anchor for the Weinberg-operator
+  interpretation. The Wilson coefficient and hadronic normalizations are not
+  PDG observables and are stored in auxiliary theory blocks.
