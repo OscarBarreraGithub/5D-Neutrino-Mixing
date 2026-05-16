@@ -6,7 +6,7 @@ process_name: "Lepton-flavor-violating Higgs decay h -> e tau"
 owner: "PKA"
 owner_agent_id: "PKA-T019"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -25,9 +25,19 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w5a_top_higgs_ew"
     reason: "Writer polish for wa_w5a_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
+  - from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    state: "WRITER-REWORK"
+    at: "2026-05-16T14:44:38-04:00"
+    timestamp: "2026-05-16T14:44:38-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w5a_top_higgs_ew"
+    issues:
+      - "CHK-1: TeX numerical claims for the Harnik-Kopp-Zupan order-10% LFV-Higgs EFT context are outside pdg_or_equivalent.values; the CA checklist requires every TeX numerical physics claim to appear in pdg_or_equivalent with complete metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:21:56-04:00"
+last_updated_at: "2026-05-16T14:44:38-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_higgs_lfv_review.txt: "sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e"

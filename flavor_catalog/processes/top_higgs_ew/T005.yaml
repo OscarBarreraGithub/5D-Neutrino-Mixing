@@ -6,7 +6,7 @@ process_name: "Flavor-changing neutral-current top decay t -> c g"
 owner: "PKA"
 owner_agent_id: "PKA-T005"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -25,9 +25,19 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w5a_top_higgs_ew"
     reason: "Writer polish for wa_w5a_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
+  - from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    state: "WRITER-REWORK"
+    at: "2026-05-16T14:44:38-04:00"
+    timestamp: "2026-05-16T14:44:38-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w5a_top_higgs_ew"
+    issues:
+      - "CHK-1: TeX numerical claims for the SM B(t -> c g)=4.6e-12 benchmark and CFW 21/33 TeV RS context are outside pdg_or_equivalent.values; the CA checklist requires every TeX numerical physics claim to appear in pdg_or_equivalent with complete metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:21:56-04:00"
+last_updated_at: "2026-05-16T14:44:38-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_tug_tcg.txt: "sha256:b58775f55944dad73ff185214195fd4d245431cb400e9f63bf6fcf35b490446a"
