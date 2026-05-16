@@ -1,0 +1,49 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T006
+generated_at: "2026-05-16T14:23:13-04:00"
+sources:
+  - key: PDG2025TopFCNCTUG
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "pdgLive Q007TUG: t-quark FCNC Couplings kappa^{utg}/Lambda and kappa^{ctg}/Lambda"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdglive.lbl.gov/view/Q007TUG"
+    sha256_of_local_snapshot: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"
+    snapshot_path: "flavor_catalog/references/T006/pdg_2025_top_tug.txt"
+  - key: ATLAS2022TopFCNCTUG
+    arxiv_id: "2112.01302"
+    DOI: "10.1140/epjc/s10052-022-10182-7"
+    title: "Search for flavour-changing neutral-current interactions of a top quark and a gluon in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2022
+    url: "https://arxiv.org/abs/2112.01302"
+    sha256_of_local_snapshot: "sha256:ed435aaa49e3ffce3491b530be480a57eafe85aff8852ffa6d739c12324fee76"
+    snapshot_path: "flavor_catalog/references/T006/atlas_2112_01302_arxiv_abs.txt"
+  - key: CMS2017TopFCNCTUG
+    arxiv_id: "1610.03545"
+    DOI: "10.1007/JHEP02(2017)028"
+    title: "Search for anomalous Wtb couplings and flavour-changing neutral currents in t-channel single top quark production in pp collisions at sqrt(s) = 7 and 8 TeV"
+    authors: "CMS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1610.03545"
+    sha256_of_local_snapshot: "sha256:ce1b340512944a2bc29fb5c30702d58f0baa32202f50129c5cd31f45bbf6caf0"
+    snapshot_path: "flavor_catalog/references/T006/cms_1610_03545_arxiv_abs.txt"
+  - key: AguilarSaavedra2004TopFCNC
+    arxiv_id: "hep-ph/0409342"
+    DOI: "10.48550/arXiv.hep-ph/0409342"
+    title: "Top flavour-changing neutral interactions: theoretical expectations and experimental detection"
+    authors: "J. A. Aguilar-Saavedra"
+    year: 2004
+    url: "https://arxiv.org/abs/hep-ph/0409342"
+    sha256_of_local_snapshot: "sha256:ed810970e049bd20488740565ba46036ab0c29892a9991db7819a6c3805f2098"
+    snapshot_path: "flavor_catalog/references/T006/aguilar_saavedra_hepph0409342_tug_sm.txt"
+  - key: CsakiFalkowskiWeiler2008WarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:ecb7012a5d29ab6948daf8068fb2db081a85a1898ffc310a228ccb1f6bb4a951"
+    snapshot_path: "flavor_catalog/references/T006/cfw_0804_1954_rs_flavor.txt"

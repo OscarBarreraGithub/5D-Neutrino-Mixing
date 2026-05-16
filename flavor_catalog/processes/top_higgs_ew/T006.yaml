@@ -1,0 +1,184 @@
+schema: flavor_catalog.process.v1
+process_id: T006
+family: top_higgs_ew
+standard_notation: '\mathcal{B}(t\to u g)'
+process_name: "Flavor-changing neutral-current top decay t -> u g"
+owner: "PKA"
+owner_agent_id: "PKA-T006"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T14:23:13-04:00"
+    timestamp: "2026-05-16T14:23:13-04:00"
+    agent_id: "PKA-T006"
+    reason: "Initial PKA draft and source snapshot deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:23:13-04:00"
+version: "0.1.0"
+source_shas:
+  pdg_2025_top_tug.txt: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"
+  atlas_2112_01302_arxiv_abs.txt: "sha256:ed435aaa49e3ffce3491b530be480a57eafe85aff8852ffa6d739c12324fee76"
+  cms_1610_03545_arxiv_abs.txt: "sha256:ce1b340512944a2bc29fb5c30702d58f0baa32202f50129c5cd31f45bbf6caf0"
+  aguilar_saavedra_hepph0409342_tug_sm.txt: "sha256:ed810970e049bd20488740565ba46036ab0c29892a9991db7819a6c3805f2098"
+  cfw_0804_1954_rs_flavor.txt: "sha256:ecb7012a5d29ab6948daf8068fb2db081a85a1898ffc310a228ccb1f6bb4a951"
+pdg_or_equivalent:
+  year: 2025
+  source: "Particle Data Group pdgLive Q007TUG top-FCNC gluon datablock, 2025 Review of Particle Physics"
+  source_url: "https://pdglive.lbl.gov/view/Q007TUG"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T006/pdg_2025_top_tug.txt"
+  sha256: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"
+  values:
+    - value_id: "PDG2025:T006:ATLAS2022:dataset"
+      observable: "ATLAS dataset for u g -> t single-top FCNC search"
+      year: 2022
+      value: "139 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://pdglive.lbl.gov/view/Q007TUG"
+      supporting_source_url: "https://arxiv.org/abs/2112.01302"
+      access_date: "2026-05-16"
+      sha256: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"
+    - value_id: "PDG2025:T006:ATLAS2022:ug_to_t_cross_section"
+      observable: "sigma(u g -> t) * B(t -> b W) * B(W -> l nu)"
+      year: 2022
+      value: "< 3.0"
+      uncertainty: null
+      units: "pb, 95% CL upper limit"
+      source_url: "https://pdglive.lbl.gov/view/Q007TUG"
+      supporting_source_url: "https://arxiv.org/abs/2112.01302"
+      access_date: "2026-05-16"
+      sha256: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"
+    - value_id: "PDG2025:T006:ATLAS2022:w_leptonic_sum"
+      observable: "B(W -> l nu) sum over e, mu, tau modes used by ATLAS"
+      year: 2022
+      value: "0.325"
+      uncertainty: null
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/2112.01302"
+      access_date: "2026-05-16"
+      sha256: "sha256:ed435aaa49e3ffce3491b530be480a57eafe85aff8852ffa6d739c12324fee76"
+    - value_id: "PDG2025:T006:ATLAS2022:CuGut"
+      observable: "|C_uG^{ut}| / Lambda^2"
+      year: 2022
+      value: "< 0.057"
+      uncertainty: null
+      units: "TeV^-2, 95% CL upper limit"
+      source_url: "https://pdglive.lbl.gov/view/Q007TUG"
+      supporting_source_url: "https://arxiv.org/abs/2112.01302"
+      access_date: "2026-05-16"
+      sha256: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"
+    - value_id: "PDG2025:T006:ATLAS2022:t_ug"
+      observable: "B(t -> u g), ATLAS AAD 2022T EFT interpretation"
+      year: 2022
+      value: "< 6.1e-5"
+      equivalent_value: "< 0.61e-4"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source_url: "https://pdglive.lbl.gov/view/Q007TUG"
+      supporting_source_url: "https://arxiv.org/abs/2112.01302"
+      access_date: "2026-05-16"
+      sha256: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"
+    - value_id: "CMS2017:T006:dataset"
+      observable: "CMS dataset for t-channel single top FCNC search"
+      year: 2017
+      value: "5.0 fb^-1 at sqrt(s) = 7 TeV and 19.7 fb^-1 at sqrt(s) = 8 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/1610.03545"
+      access_date: "2026-05-16"
+      sha256: "sha256:ce1b340512944a2bc29fb5c30702d58f0baa32202f50129c5cd31f45bbf6caf0"
+    - value_id: "CMS2017:T006:kappa_tug"
+      observable: "|kappa_tug| / Lambda"
+      year: 2017
+      value: "< 4.1e-3"
+      uncertainty: null
+      units: "TeV^-1, 95% CL upper limit"
+      source_url: "https://arxiv.org/abs/1610.03545"
+      access_date: "2026-05-16"
+      sha256: "sha256:ce1b340512944a2bc29fb5c30702d58f0baa32202f50129c5cd31f45bbf6caf0"
+    - value_id: "CMS2017:T006:t_ug"
+      observable: "B(t -> u g), CMS t-channel single-top interpretation"
+      year: 2017
+      value: "< 2.0e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source_url: "https://arxiv.org/abs/1610.03545"
+      access_date: "2026-05-16"
+      sha256: "sha256:ce1b340512944a2bc29fb5c30702d58f0baa32202f50129c5cd31f45bbf6caf0"
+theory_context:
+  source: "Aguilar-Saavedra 2004 top-FCNC review"
+  source_url: "https://arxiv.org/abs/hep-ph/0409342"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T006/aguilar_saavedra_hepph0409342_tug_sm.txt"
+  sha256: "sha256:ed810970e049bd20488740565ba46036ab0c29892a9991db7819a6c3805f2098"
+  values:
+    - value_id: "AguilarSaavedra2004:T006:t_cg_SM_source"
+      observable: "Standard Model prediction for B(t -> c g)"
+      year: 2004
+      value: "4.6e-12"
+      uncertainty: "+1.1/-0.9, +/-0.2, +/-0.4, +2.1/-0.7 components as quoted"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/hep-ph/0409342"
+      access_date: "2026-05-16"
+      sha256: "sha256:ed810970e049bd20488740565ba46036ab0c29892a9991db7819a6c3805f2098"
+    - value_id: "AguilarSaavedra2004:T006:CKM_scaling"
+      observable: "Suppression factor for t -> u modes relative to t -> c modes"
+      year: 2004
+      value: "0.0079"
+      uncertainty: null
+      units: "|V_ub / V_cb|^2"
+      source_url: "https://arxiv.org/abs/hep-ph/0409342"
+      access_date: "2026-05-16"
+      sha256: "sha256:ed810970e049bd20488740565ba46036ab0c29892a9991db7819a6c3805f2098"
+    - value_id: "AguilarSaavedra2004:T006:t_ug_SM"
+      observable: "Standard Model estimate for B(t -> u g) inferred from source scaling"
+      year: 2004
+      value: "approximately 3.6e-14"
+      uncertainty: "derived from 4.6e-12 times 0.0079; source gives input uncertainties for the charm mode"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/hep-ph/0409342"
+      access_date: "2026-05-16"
+      sha256: "sha256:ed810970e049bd20488740565ba46036ab0c29892a9991db7819a6c3805f2098"
+paper_era_references:
+  - key: "CsakiFalkowskiWeiler2008WarpedFlavor"
+    source: "arXiv:0804.1954"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T006/cfw_0804_1954_rs_flavor.txt"
+    sha256: "sha256:ecb7012a5d29ab6948daf8068fb2db081a85a1898ffc310a228ccb1f6bb4a951"
+    provenance_note: "Paper-era RS flavor context only; theoretical normalization scales are not measured pdg_or_equivalent observables."
+    values:
+      - value_id: "CFW2008:T006:ordinary_RS_KK_gluon_context"
+        observable: "Generic ordinary-RS KK-gluon mass scale from flavor constraints"
+        year: 2008
+        value: "about 21 TeV"
+        units: "theory-context mass scale"
+      - value_id: "CFW2008:T006:pNGB_Higgs_KK_gluon_context"
+        observable: "Composite pseudo-Goldstone Higgs setup KK-gluon mass scale from flavor constraints"
+        year: 2008
+        value: "about 33 TeV"
+        units: "theory-context mass scale"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Required plan greps rerun on 2026-05-16; no source-code implementation of t -> u g, tug, tqg, C_uG, or u g -> t found."
+    - "Targeted implementation grep found only generic FCNC prose/comment hits at quarkConstraints/PAPER_0710_1869.md:35 and tests/test_paper_couplings.py:258, not an observable implementation."
+    - "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 in the modern quark policy surface."
+    - "quarkConstraints/modern/phenomenology.py:167 says the modern surface is policy-only and does not define a numeric EFT backend."
+  grep_commands:
+    - 'rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g "!*.ipynb"'
+    - 'rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g "!*.ipynb"'
+    - 'rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g "!*.ipynb"'
+    - 'rg -n "t.?->.?u.?g|t.?->.?g.?u|tug|utg|u.?g.?->.?t|tqg|uG|gtu|FCNC|flavou?r-changing|flavor changing" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g "!*.ipynb"'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "Limit cataloging is MEDIUM, but production-grade integration is HIGH because the repo lacks a top chromomagnetic FCNC operator convention, RS-to-SMEFT matching, t -> u g width and u g -> t production normalization, collider/PDF reinterpretation machinery, and QCD-running choices for this operator."
+open_issues:
+  - "WA/CA should decide whether to use the numerically stronger older CMS B(t -> u g) < 2.0e-5 comparison as a prominent cross-check or keep the current PDG/pdgLive ATLAS Run-2 entry as the headline because it uses the latest 13 TeV single-top dataset and SMEFT convention."
+  - "The ATLAS result is quoted for a left-handed SMEFT C_uG interpretation; a live RS implementation needs a convention for chiral chromomagnetic coefficients and correlated operators."
