@@ -6,7 +6,7 @@ process_name: "Muon to three electrons charged-lepton-flavor-violating four-lept
 owner: "PKA"
 owner_agent_id: "PKA-L002"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -24,9 +24,21 @@ status_history:
     at: "2026-05-16T12:15:26-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for wa_w23_charged_lepton; numerical claims checked against sidecar sources."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T12:32:07-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T12:32:07-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w23_charged_lepton"
+    issues:
+      - "CHK-1: TeX cites Mu3e phase-I and upgrade sensitivity numbers whose pdg_or_equivalent.prospects entries lack per-entry source_url/access_date metadata."
+      - "CHK-1: TeX cites the SM-with-neutrino-masses O(10^-54) rate and 10^8 muon-decay-rate context from the prospects sources, but the corresponding prospects entries do not carry complete strict metadata fields."
+    reason: "Checker ca_w23_charged_lepton found CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w23_charged_lepton.md."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:15:26-04:00"
+last_updated_at: "2026-05-16T12:32:07-04:00"
 version: "0.2.0"
 source_shas:
   agashe2006_rs_lfv_arxiv_hepph_0606021.txt: "sha256:51a5f86a338eb56993ea4dd8112ee25b294ec4b9b31087e3d024261cb66e2f0c"

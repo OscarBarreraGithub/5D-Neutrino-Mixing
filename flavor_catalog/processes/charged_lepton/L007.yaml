@@ -6,7 +6,7 @@ process_name: "Tau to mu gamma charged-lepton-flavor-violating dipole decay"
 owner: "PKA"
 owner_agent_id: "PKA-L007"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -31,9 +31,18 @@ status_history:
     at: "2026-05-16T12:15:26-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for wa_w23_charged_lepton; numerical claims checked against sidecar sources."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T12:32:07-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T12:32:07-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w23_charged_lepton"
+    reason: "Checker ca_w23_charged_lepton passed CHK-1 through CHK-8."
+checker_passed_at: "2026-05-16T12:32:07-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:15:26-04:00"
+last_updated_at: "2026-05-16T12:32:07-04:00"
 version: "0.2.0"
 source_shas:
   pdg2025_tau_mu_gamma_pdglive.txt: "sha256:b94475dc141a9a16360a3216d7a5fe29fb05c710a3b133ae9c1c56571d66107f"
