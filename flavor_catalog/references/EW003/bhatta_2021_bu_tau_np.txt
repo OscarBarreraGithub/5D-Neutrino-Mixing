@@ -1,0 +1,21 @@
+Source key: bhatta_2021_bu_tau_np
+Source: A. Bhatta, A. Ray, R. Mohanta, "Exploring the role of new physics in b -> u tau nu decays".
+Citation: Progress of Theoretical and Experimental Physics 2021, 073B04.
+DOI: 10.1093/ptep/ptab080
+URL: https://academic.oup.com/ptep/article/2021/7/073B04/6311276
+Access date: 2026-05-16
+Local snapshot policy: minimal text extract only; open-access HTML used; no PDF tracked.
+
+Extracted framework:
+- Effective Hamiltonian for b -> u tau nu:
+  H_eff = 4 G_F/sqrt(2) V_ub [(1+V_L) O_VL + V_R O_VR + S_L O_SL + S_R O_SR + T_L O_TL].
+- The Wilson coefficients V_L, V_R, S_L, S_R, T_L vanish in the Standard Model in this convention.
+- Operator basis:
+  O_VL = (ubar gamma_mu P_L b)(taubar gamma^mu P_L nu)
+  O_VR = (ubar gamma_mu P_R b)(taubar gamma^mu P_L nu)
+  O_SL = (ubar P_L b)(taubar P_L nu)
+  O_SR = (ubar P_R b)(taubar P_L nu)
+  O_TL = (ubar sigma_mu_nu P_L b)(taubar sigma^mu_nu P_L nu)
+
+Relevance note:
+This source gives the standard model-independent charged-current b->u tau nu translation used to connect |Vub|-sensitive B->pi/rho/omega tau nu and Bs->K(*) tau nu modes to BSM Wilson coefficients.

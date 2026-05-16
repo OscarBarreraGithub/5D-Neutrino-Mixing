@@ -1,0 +1,179 @@
+schema: flavor_catalog.process.v1
+process_id: EW003
+family: top_higgs_ew
+standard_notation: "|V_cb|_inclusive vs |V_cb|_exclusive; |V_ub|_inclusive vs |V_ub|_exclusive"
+process_name: "|V_cb| and |V_ub| inclusive-exclusive semileptonic tensions"
+owner: "PKA"
+owner_agent_id: "PKA-EW003"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:16:19-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:16:19-04:00"
+    agent_id: "PKA-EW003"
+    reason: "Initial PKA draft for NIT-1 pre-approved EW003 CKM semileptonic-tension catalog addition."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:16:19-04:00"
+version: "0.1.0"
+source_shas:
+  bhatta_2021_bu_tau_np.txt: "sha256:9953db6ff1d8f0293b21f2223d5d5e0e3a52710f4b1dad373a82c3b28eb46655"
+  cfw_2008_rs_flavor_baseline.txt: "sha256:ab2b7d9d8a9b6a2d4614e5e7985671c80af7d034940e88de3251637012c76073"
+  flag_2024_b_semileptonic_lattice.txt: "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528"
+  hflav_2023_semileptonic_report.txt: "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229"
+  iguro_2024_bc_tau_global_fit.txt: "sha256:7f194a3e3e6b700210338d28eacfb6c9cf65ef1e921cc7599785fdec4981bcd9"
+  pdg_2024_vcb_vub.txt: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+pdg_or_equivalent:
+  - observable: "PDG 2024 |V_cb| inclusive"
+    value: 42.2
+    uncertainty: 0.5
+    units: "10^-3"
+    source: "PDG 2024 Semileptonic b-Hadron Decays, Determination of Vcb, Vub"
+    source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
+    sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+  - observable: "PDG 2024 |V_cb| exclusive"
+    value: 39.8
+    uncertainty: 0.6
+    units: "10^-3"
+    source: "PDG 2024 Semileptonic b-Hadron Decays, Determination of Vcb, Vub"
+    source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
+    sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+  - observable: "PDG 2024 |V_cb| scaled average"
+    value: 41.1
+    uncertainty: 1.2
+    units: "10^-3"
+    source: "PDG 2024 Semileptonic b-Hadron Decays, Determination of Vcb, Vub"
+    source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
+    sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+  - observable: "PDG 2024 |V_ub| inclusive"
+    value: 4.13
+    uncertainty_components:
+      exp: 0.12
+      theory_plus: 0.13
+      theory_minus: 0.14
+      model: 0.18
+    units: "10^-3"
+    source: "PDG 2024 Semileptonic b-Hadron Decays, Determination of Vcb, Vub"
+    source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
+    sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+  - observable: "PDG 2024 |V_ub| exclusive"
+    value: 3.70
+    uncertainty_components:
+      exp_or_fit: 0.10
+      theory: 0.12
+    units: "10^-3"
+    source: "PDG 2024 Semileptonic b-Hadron Decays, Determination of Vcb, Vub"
+    source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
+    sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+  - observable: "PDG 2024 |V_ub| scaled average"
+    value: 3.82
+    uncertainty: 0.20
+    units: "10^-3"
+    source: "PDG 2024 Semileptonic b-Hadron Decays, Determination of Vcb, Vub"
+    source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
+    sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+  - observable: "HFLAV 2023 preferred inclusive |V_cb|"
+    value: 41.97
+    uncertainty: 0.48
+    units: "10^-3"
+    source: "HFLAV 2023 semileptonic report, arXiv:2411.18639"
+    source_url: "https://arxiv.org/abs/2411.18639"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt"
+    sha256: "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229"
+  - observable: "HFLAV 2023 combined exclusive |V_cb|"
+    value: 39.77
+    uncertainty: 0.46
+    units: "10^-3"
+    source: "HFLAV 2023 semileptonic report, arXiv:2411.18639"
+    source_url: "https://arxiv.org/abs/2411.18639"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt"
+    sha256: "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229"
+  - observable: "HFLAV 2023 combined exclusive |V_ub|"
+    value: 3.43
+    uncertainty: 0.12
+    units: "10^-3"
+    source: "HFLAV 2023 semileptonic report, arXiv:2411.18639"
+    source_url: "https://arxiv.org/abs/2411.18639"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt"
+    sha256: "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229"
+  - observable: "FLAG 2024 B -> D* l nu |V_cb|, Nf=2+1"
+    value: 39.23
+    uncertainty: 0.65
+    units: "10^-3"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/flag_2024_b_semileptonic_lattice.txt"
+    sha256: "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528"
+  - observable: "FLAG 2024 B -> pi l nu |V_ub|, Nf=2+1"
+    value: 3.61
+    uncertainty: 0.16
+    units: "10^-3"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW003/flag_2024_b_semileptonic_lattice.txt"
+    sha256: "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528"
+additional_numerical_context:
+  - quantity: "PDG 2024 |V_cb| inclusive-exclusive marginal consistency"
+    value: 3.0
+    units: "sigma"
+    source: "PDG 2024 Semileptonic b-Hadron Decays, Determination of Vcb, Vub"
+    snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
+  - quantity: "NIT-1 post-2008 comparison baseline"
+    value: 2008
+    units: "year"
+    source: "Csaki-Falkowski-Weiler, arXiv:0804.1954"
+    snapshot_path: "flavor_catalog/references/EW003/cfw_2008_rs_flavor_baseline.txt"
+code_coverage:
+  status: "PARTIAL"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"Vcb|V_cb|v_cb|Vub|V_ub|v_ub|CKM|semileptonic|B.?->.?D|B.?->.?pi|B.?to.?D|B.?to.?pi|b.?->.?c|b.?->.?u|R\\\\(D|R_D|tau.?nu|taunu|charged.?current\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests warpConfig solvers -g '!*.ipynb'"
+  evidence:
+    - "quarkConstraints/scan.py:42"
+    - "quarkConstraints/scan.py:46"
+    - "quarkConstraints/scan.py:47"
+    - "quarkConstraints/scan.py:52"
+    - "quarkConstraints/scan.py:247"
+    - "tests/test_quark_fit.py:575"
+    - "tests/test_quark_fit.py:587"
+  findings:
+    - "The repo partially covers EW003 through CKM target/tolerance metadata for |V_cb| and |V_ub|."
+    - "No implementation was found for inclusive or exclusive semileptonic B decay rates, HFLAV/FLAG split likelihoods, B->D(*)l nu, B->pi l nu, or b->c/u tau nu charged-current WET operators."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "A live EW003 constraint needs a new charged-current semileptonic likelihood, inclusive-scheme handling, exclusive lattice form-factor inputs, and optional b->c/u tau nu WET operator matching. This is not covered by the existing Delta F = 2 SLL/SLR/VLL/VRR/LR1/LR2 machinery."
+open_issues:
+  - "WA/checker should decide whether EW003 remains an electroweak CKM-input diagnostic or is later split into beauty semileptonic process entries."
+  - "Production implementation would need a policy choice between PDG scaled averages, HFLAV exclusive/inclusive split likelihoods, and global-fit CKM targets already used by quarkConstraints/scan.py."

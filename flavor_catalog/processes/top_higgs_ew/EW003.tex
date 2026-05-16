@@ -1,0 +1,88 @@
+% Flavor catalog per-process template.
+% process_id: EW003
+% family: top_higgs_ew
+% owner_agent_id: PKA-EW003
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: EW003.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(|V_{cb}|\) and \(|V_{ub}|\) Inclusive--Exclusive Tensions}{Vcb and Vub Inclusive--Exclusive Tensions}}
+
+\subsection*{Process}
+This entry covers the inclusive versus exclusive determinations of
+\(|V_{cb}|\) and \(|V_{ub}|\) from semileptonic \(b\)-hadron decays.
+Although the underlying modes are beauty charged currents, the NIT-1 process
+id places the entry in \texttt{top\_higgs\_ew}; it is an electroweak CKM-input
+diagnostic with direct ties to \(b\to c\tau\nu\) and \(b\to u\tau\nu\) BSM
+fits.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical PDG 2024 snapshot is
+\texttt{flavor\_catalog/references/EW003/pdg\_2024\_vcb\_vub.txt}.  PDG quotes
+\(|V_{cb}|_{\rm incl}=(42.2\pm0.5)\times10^{-3}\) and
+\(|V_{cb}|_{\rm excl}=(39.8\pm0.6)\times10^{-3}\), with the scaled average
+\((41.1\pm1.2)\times10^{-3}\) to be treated with caution because the two inputs
+are only marginally consistent, about \(3.0\sigma\).  For \(|V_{ub}|\), PDG
+quotes \((4.13\pm0.12_{\rm exp}{}^{+0.13}_{-0.14}{}_{\rm theo}
+\pm0.18_{\Delta{\rm model}})\times10^{-3}\) inclusive and
+\((3.70\pm0.10\pm0.12)\times10^{-3}\) exclusive, giving
+\((3.82\pm0.20)\times10^{-3}\) after error scaling.  HFLAV's 2023
+semileptonic report refines the split: the preferred inclusive
+\(|V_{cb}|\) input is \((41.97\pm0.48)\times10^{-3}\), while the combined
+exclusive fit gives \((|V_{ub}|,|V_{cb}|)=
+(3.43\pm0.12,39.77\pm0.46)\times10^{-3}\).  FLAG 2024 gives lattice-anchored
+exclusive values \(|V_{cb}|=39.23(65)\times10^{-3}\) for
+\(B\to D^*\ell\nu\) with \(N_f=2+1\), and
+\(|V_{ub}|=(3.61\pm0.16)\times10^{-3}\) for \(B\to\pi\ell\nu\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+The present scan fits CKM observables as output of anarchic quark masses, so
+the inclusive--exclusive split is a diagnostic for how much CKM target choice
+can move flavor predictions.  In an RS extension with non-SM charged-current
+operators, the same observables also set the normalization for \(b\to c\) and
+\(b\to u\) semitauonic Wilson-coefficient fits.
+
+\subsection*{Post-2008 developments}
+Relative to arXiv:0804.1954, the main change is not a new RS formula but a
+new input ecosystem.  Belle, Belle II, BaBar, and LHCb now feed HFLAV averages;
+inclusive \(|V_{cb}|\) uses mature kinetic and \(q^2\)-moment heavy-quark
+expansion fits; and FLAG 2024 provides full-recoil lattice-plus-experiment
+fits for \(B\to D^{(*)}\ell\nu\) and \(B\to\pi\ell\nu\).  The same period also
+turned \(R(D^{(*)})\), \(B_c\to\tau\nu\), and \(B\to(\pi,\rho,\omega)\tau\nu\)
+into standard charged-current EFT interpretation channels.
+
+\subsection*{Constraint validity and model dependence}
+For \(e,\mu\) final states these are CKM extraction inputs, not clean
+standalone BSM exclusions.  Inclusive values depend on heavy-quark expansion
+schemes and shape-function/model choices, while exclusive values depend on
+lattice form factors, parameterization choices, and experimental correlations.
+Tau-mode translations are more model dependent because vector, scalar, and
+tensor operators can change both rates and templates.
+
+\subsection*{Code coverage in this repo}
+\textbf{PARTIAL}.  CKM target handling exists, including \(|V_{cb}|\) and
+\(|V_{ub}|\) tolerances at \texttt{quarkConstraints/scan.py:42},
+\texttt{quarkConstraints/scan.py:46}, \texttt{quarkConstraints/scan.py:47},
+\texttt{quarkConstraints/scan.py:52}, and the regression check at
+\texttt{tests/test\_quark\_fit.py:575}.  No grep hit implements inclusive or
+exclusive semileptonic \(B\) rates, \(B\to D^{(*)}\ell\nu\),
+\(B\to\pi\ell\nu\), or \(b\to c/u\,\tau\nu\) WET operators in
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, or \texttt{tests/}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A production constraint would need a new charged-current
+semileptonic likelihood, scheme handling for inclusive extractions, lattice
+form-factor inputs for exclusive modes, and optional \(b\to c/u\,\tau\nu\)
+Wilson operators.  This is outside the existing \(\Delta F=2\) basis.
+
+\subsection*{Key references}
+\texttt{pdg\_2024\_vcb\_vub};
+\texttt{hflav\_2023\_semileptonic\_report};
+\texttt{flag\_2024\_b\_semileptonic\_lattice};
+\texttt{iguro\_2024\_bc\_tau\_global\_fit};
+\texttt{bhatta\_2021\_bu\_tau\_np};
+\texttt{cfw\_2008\_rs\_flavor\_baseline}.
