@@ -1,0 +1,22 @@
+Source key: flag2024_b_mixing
+Source: FLAG Review 2024.
+URL: https://arxiv.org/abs/2411.04268
+arXiv: 2411.04268 [hep-lat]
+DOI: 10.48550/arXiv.2411.04268
+Related DOI: 10.1103/nfzp-p5dn
+Access date: 2026-05-16
+Snapshot policy: Minimal arXiv metadata/abstract extract only. No PDF cached.
+
+ArXiv metadata:
+- Submitted: 2024-11-06.
+- Current version on access date: v3, last revised 2026-02-06.
+- Comments: 437 pages, 53 figures, 189 tables; version as published in PRD.
+
+Extracted context from the arXiv abstract:
+- FLAG reviews lattice-QCD results related to pion, kaon, D-meson, B-meson, and nucleon physics.
+- For the heavy-quark sector, FLAG provides results for mc and mb and for decay constants, form factors, and mixing parameters of charmed and bottom mesons and baryons.
+- The abstract states these heavy-quark quantities are relevant for CKM matrix elements and the global CKM unitarity-triangle fit.
+
+Use in B001:
+- Auxiliary lattice/theory context for B_d mixing matrix elements and decay constants. These are not measured experimental observables and therefore belong outside the pdg_or_equivalent block.
+- The in-code B_d hadronic constants in quarkConstraints/deltaf2.py are documented as "FLAG 2024 / PDG"; the exact repo values are recorded in B001.yaml under auxiliary_theory_inputs.

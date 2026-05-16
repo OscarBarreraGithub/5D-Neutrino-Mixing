@@ -1,0 +1,91 @@
+% Flavor catalog per-process draft.
+% process_id: B001
+% family: beauty
+% owner_agent_id: PKA-B001
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B001.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B001: \(\Delta m_d\) in \(B_d\) mixing}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\Delta m_d\).
+This entry covers the mass splitting of the neutral \(B_d\) eigenstates,
+equivalently the oscillation frequency in \(B^0_d-\bar B^0_d\) mixing.  It is
+the beauty-sector down-type \(\Delta F=2\) magnitude constraint already used by
+the quark-scan code.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical measured value is the HFLAV/PDG 2025 average stored in
+\texttt{B001.yaml} under \texttt{pdg\_or\_equivalent}.  HFLAV gives
+\[
+  \Delta m_d = 0.5069 \pm 0.0019\ {\rm ps}^{-1},
+\]
+using time-dependent measurements from ALEPH, DELPHI, L3, OPAL, CDF, D0,
+BABAR, Belle, and LHCb.  With the HFLAV assumptions of no CP violation in
+mixing and no \(B^0\) width difference, the same snapshot records the companion
+world averages \(x_d=0.7697\pm0.0035\) and \(\chi_d=0.1860\pm0.0011\).  The
+local source snapshot is
+\texttt{flavor\_catalog/references/B001/hflav\_pdg2025\_bd\_mixing.txt},
+accessed on 2026-05-16.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped models generate tree-level flavor-changing neutral currents
+from KK gluon and electroweak exchange after rotating to the quark-mass basis.
+\(B_d\) mixing probes the \(b\leftrightarrow d\) down-sector alignment and is a
+direct test of the same Wilson-coefficient pipeline used for kaon and \(B_s\)
+mixing.  Compared with \(\varepsilon_K\), it is less chirally enhanced but
+constrains a different row-column structure of the anarchic profiles.
+
+\subsection*{Post-2008 developments}
+The arXiv:0804.1954 RS-flavor baseline highlighted KK-gluon flavor bounds at
+about \(21\,{\rm TeV}\) in standard RS scenarios and about \(33\,{\rm TeV}\) in
+the pseudo-Goldstone setup, with boundary kinetic terms and flavor assumptions
+left as important caveats.  Since then, the experimental story for
+\(\Delta m_d\) has become a precision-average story rather than a discovery
+story.  Belle II has already repeated the benchmark measurement with early
+SuperKEKB data, reporting
+\[
+  \Delta m_d = 0.516 \pm 0.008_{\rm stat}\pm0.005_{\rm syst}\ {\rm ps}^{-1}
+\]
+from \(190\,{\rm fb}^{-1}\).  On the theory side, FLAG Review 2024 updates the
+lattice heavy-quark inputs relevant for \(B\)-mixing matrix elements and global
+unitarity-triangle fits; those inputs are theory normalization data, not the
+measured observable.
+
+\subsection*{Constraint validity and model dependence}
+This is a robust neutral-meson-mixing magnitude constraint.  The experimental
+average is precise, but turning it into a new-physics exclusion requires a
+policy for the SM contribution and CKM inputs.  The current code uses an
+allowed NP budget rather than a full correlated CKM fit, so catalog users
+should treat it as a conservative magnitude screen, not as a global-fit
+replacement.
+
+\subsection*{Code coverage in this repo}
+\textbf{YES-D2-BD.}  The legacy \(\Delta F=2\) backend defines the \(B_d\)
+input at \texttt{quarkConstraints/deltaf2.py:225} and notes the hadronic
+matrix-element treatment at \texttt{quarkConstraints/deltaf2.py:236}.
+The in-code \(B_d\) hadronic and experimental constants are at
+\texttt{quarkConstraints/deltaf2.py:631}--\texttt{638}.  The scan dispatches
+\texttt{b\_d} through \texttt{evaluate\_bd\_mixing} at
+\texttt{quarkConstraints/deltaf2.py:383}--\texttt{391}; the evaluator itself is
+\texttt{quarkConstraints/deltaf2.py:903}--\texttt{915}, with the running wrapper
+at \texttt{quarkConstraints/deltaf2.py:960}--\texttt{966}.  The modern metadata
+layer also carries \(B_d\) as a policy system at
+\texttt{quarkConstraints/modern/phenomenology.py:23} and mirrors the input at
+\texttt{quarkConstraints/modern/inputs.py:967}--\texttt{976}.
+
+\subsection*{Implementation difficulty}
+\textbf{LOW.}  The existing \(\Delta F=2\) SLL/SLR/VLL/VRR/LR machinery and
+BMU-style running cover the \(B_d\) mixing magnitude observable.  A future
+production refresh would mainly improve provenance, unit conversion, and
+likelihood policy rather than adding new operators or RG evolution.
+
+\subsection*{Key references}
+Process-local reference keys before bibliography consolidation:
+\texttt{hflav\_pdg2025\_bd\_mixing},
+\texttt{belleii\_2023\_bd\_mixing},
+\texttt{flag2024\_b\_mixing}, and
+\texttt{cfw\_2008\_rs\_flavor}.
