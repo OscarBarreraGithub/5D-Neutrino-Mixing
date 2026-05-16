@@ -1,0 +1,124 @@
+schema: flavor_catalog.process.v1
+process_id: "K005"
+family: "kaon"
+standard_notation: "K_L \\to \\pi^0 \\nu\\bar\\nu"
+process_name: "CP-violating rare neutral-kaon decay to pi0 plus neutrinos"
+owner: "PKA"
+owner_agent_id: "PKA-K005"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T11:04:18-04:00"
+    timestamp: "2026-05-16T11:04:18-04:00"
+    agent_id: "PKA-K005"
+    reason: "initial K005 source extraction and raw process draft"
+  - from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    state: "PKA-DONE"
+    at: "2026-05-16T11:05:58-04:00"
+    timestamp: "2026-05-16T11:05:58-04:00"
+    agent_id: "PKA-K005"
+    reason: "raw PKA deposit complete"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:05:58-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_pdgLive_S013R40.txt: "sha256:9772703902465867a6be4f8abb2b3893f4aed60e43ade76cf191384ba66f2dfb"
+  koto2025_prl134081802_arxiv2411_11237.txt: "sha256:97178b5f26d18e7dfd8986a665b4e6196ebd951d27582806d74e61dd877dcf7d"
+  brod_gorbahn_stamou2021_arxiv2105_02868.txt: "sha256:864ac68f32c5fc9d1df086930b385481a32d2c37937b5d185341767e296c3dfb"
+  buras_venturini2022_arxiv2203_10099.txt: "sha256:088ac9757e7a5aec4317393328329b29ede68d2f83868b8669f0de392e675dd1"
+  na62_2026_arxiv2604_12649.txt: "sha256:a9c940a6313f26e602e8c863f1b143500fd16ba0c712e842ad1ed8716f34a17e"
+  buchalla_buras1996_arxiv_hep-ph_9607447.txt: "sha256:1231c0cd072a1398ec4374f8a420e759f843943869073ccd01452547cf042a2c"
+pdg_or_equivalent:
+  - observable: "B(K_L^0 -> pi^0 nu nubar)"
+    year: 2026
+    value: "<2.2e-9"
+    uncertainty: null
+    units: "dimensionless branching fraction"
+    confidence_level: "90%"
+    source: "PDG pdgLive S013R40, 2026 Review of Particle Physics"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S013R40"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K005/pdg2026_pdgLive_S013R40.txt"
+    sha256_of_text_snapshot: "sha256:9772703902465867a6be4f8abb2b3893f4aed60e43ade76cf191384ba66f2dfb"
+    notes: "PDG table value <0.22 in units of 10^{-8}; document ID AHN 2025."
+experimental_inputs:
+  - observable: "B(K_L -> pi^0 nu nubar)"
+    year: 2025
+    value: "<2.2e-9"
+    uncertainty: null
+    units: "dimensionless branching fraction"
+    confidence_level: "90%"
+    source: "KOTO Collaboration, PRL 134 081802"
+    source_url: "https://arxiv.org/abs/2411.11237"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K005/koto2025_prl134081802_arxiv2411_11237.txt"
+    sha256_of_text_snapshot: "sha256:97178b5f26d18e7dfd8986a665b4e6196ebd951d27582806d74e61dd877dcf7d"
+    supporting_numbers:
+      expected_background: "0.252 +- 0.055(stat) +0.052/-0.067(syst)"
+      single_event_sensitivity: "(9.33 +- 0.06(stat) +- 0.84(syst))e-10"
+      observed_signal_region_events: 0
+  - observable: "B(K^+ -> pi^+ nu nubar)"
+    year: 2026
+    value: "9.6e-11"
+    uncertainty: "+1.9e-11/-1.8e-11"
+    units: "dimensionless branching fraction"
+    confidence_level: null
+    source: "NA62 Collaboration Moriond 2026 contribution"
+    source_url: "https://arxiv.org/abs/2604.12649"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K005/na62_2026_arxiv2604_12649.txt"
+    sha256_of_text_snapshot: "sha256:a9c940a6313f26e602e8c863f1b143500fd16ba0c712e842ad1ed8716f34a17e"
+    notes: "Related charged golden mode; included for K -> pi nu nubar program context."
+theory_inputs:
+  - observable: "B(K_L -> pi^0 nu nubar)_SM"
+    year: 2021
+    value: "2.59e-11"
+    uncertainty: "0.29e-11"
+    units: "dimensionless branching fraction"
+    source: "Brod, Gorbahn, Stamou, arXiv:2105.02868"
+    source_url: "https://arxiv.org/abs/2105.02868"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K005/brod_gorbahn_stamou2021_arxiv2105_02868.txt"
+    sha256_of_text_snapshot: "sha256:864ac68f32c5fc9d1df086930b385481a32d2c37937b5d185341767e296c3dfb"
+  - observable: "B(K_L -> pi^0 nu nubar)_SM"
+    year: 2022
+    value: "2.94e-11"
+    uncertainty: "0.15e-11"
+    units: "dimensionless branching fraction"
+    source: "Buras and Venturini, arXiv:2203.10099 / EPJC 83, 66"
+    source_url: "https://arxiv.org/abs/2203.10099"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K005/buras_venturini2022_arxiv2203_10099.txt"
+    sha256_of_text_snapshot: "sha256:088ac9757e7a5aec4317393328329b29ede68d2f83868b8669f0de392e675dd1"
+    assumptions: "No NP in |epsilon_K| and S_{psi K_S}; |V_cb|- and |V_ub|-independent determination."
+code_coverage:
+  status: "NO"
+  inspected_paths:
+    - "quarkConstraints/"
+    - "qcd/"
+    - "flavorConstraints/"
+    - "neutrinos/"
+    - "yukawa/"
+    - "warpConfig/"
+    - "solvers/"
+    - "scanParams/"
+    - "tests/"
+  grep_commands:
+    - "rg -n --glob '!*.ipynb' \"K_L\\s*->\\s*pi|K_L|KL|pi0\\s*nu|pi\\^0\\s*nu|nu\\s*nubar|nunu|KOTO|NA62|rare kaon\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests"
+    - "rg -n --glob '!*.ipynb' \"s->d|s to d|sd|FCNC|Z penguin|penguin|semileptonic\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests"
+  evidence:
+    - "No implementation hit for K_L -> pi^0 nu nubar, KOTO, NA62, or s->d nu nubar rare-decay strings."
+    - "The only relevant K_L string hit was quarkConstraints/deltaf2.py:615, DELTA_M_K = 3.484e-15 GeV, a K_L-K_S mass-difference input, not this decay."
+    - "Related kaon Delta F=2 coverage exists in quarkConstraints/deltaf2.py and quarkConstraints/modern/phenomenology.py, but it is mixing-only."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Requires a new Delta S = 1 semileptonic s->d nu nubar observable path, CP-odd K_L projection, normalization/interference with SM amplitudes, and neutrino-flavor treatment; the current repo has only Delta F=2 kaon mixing machinery."
+open_issues:
+  - "HFLAV was not used as a canonical source because it averages b-hadron, c-hadron, and tau properties, not rare kaon modes."
+  - "WA/CA should decide whether to include an explicit Grossman-Nir-bound reference in the polished process text."
+  - "KOTO 2025 is the direct limit currently mirrored by PDG live; future KOTO/KOTO-II results should be watched."
