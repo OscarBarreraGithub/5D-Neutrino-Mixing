@@ -13,12 +13,12 @@
 \subsection*{Process}
 \textbf{Standard notation:} \(\mathcal{B}(K_S\to\pi^0 e^+e^-)\).
 This entry covers the short-lived neutral-kaon rare semileptonic mode
-\(K_S\to\pi^0 e^+e^-\), a CP-conserving/CP-allowed \(\Delta S=1\)
-weak-neutral-current decay.  It is the electron-mode \(K_S\) companion to
+\(K_S\to\pi^0 e^+e^-\), a \(\Delta S=1\) weak-neutral-current decay.  It is
+the electron-mode \(K_S\) companion to
 \(K008\) because it fixes the indirect-CP input used in \(K_L\to\pi^0 e^+e^-\)
 phenomenology.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The canonical PDG 2026 pdgLive listing \(S012.10\), accessed 2026-05-16, gives
 the NA48/1 measurement
 \[
@@ -32,14 +32,12 @@ constant form factor and vector matrix element,
   \mathcal{B}(K_S\to\pi^0 e^+e^-)
   = \left(5.8^{+2.9}_{-2.4}\right)\times10^{-9}.
 \]
-The local PDG snapshot is
-\texttt{flavor\_catalog/references/K010/pdg2026\_ks\_pi0ee\_pdgLive.txt}; the
-NA48/1 arXiv abstract-page snapshot is
-\texttt{flavor\_catalog/references/K010/na48\_2003\_ks\_pi0ee\_arxiv.txt}.
-NA48/1 reports 7 observed events with an expected background of 0.15 events in
-the high-intensity \(K_S\) data set.
+Both values trace to \texttt{pdg2026\_ks\_pi0ee\_pdgLive.txt} in the YAML
+\texttt{pdg\_or\_equivalent} block.  The NA48/1 arXiv snapshot reports seven
+observed events with an expected background of \(0.15\) events
+(\texttt{na48\_2003\_ks\_pi0ee\_arxiv.txt}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 This mode probes \(s\to d e^+e^-\) semileptonic neutral-current structure,
 not the \(\Delta F=2\) kaon-mixing lane already implemented in the repository.
 In warped or anarchic-flavor models it is sensitive, through a hadronic
@@ -56,9 +54,10 @@ white paper emphasizes \(K_{L,S}\to\pi^0\ell^+\ell^-\) branching ratios and
 \(\varepsilon'/\varepsilon\), \(\varepsilon_K\), and \(\Delta M_K\).  The
 modern literature also treats this \(K_S\) input as part of the indirect-CP
 normalization for the \(K_L\) modes rather than as a standalone clean Wilson
-coefficient bound.
+coefficient bound (\texttt{aebischer\_buras\_kumar\_2022\_arxiv.txt},
+\texttt{isidori\_smith\_unterdorfer\_2004\_arxiv.txt}).
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 Class: long-distance-limited rare kaon decay.  The measured partial branching
 fraction is robust, but the full-kinematic number is model-dependent because
 it assumes a vector matrix element and a unit form factor.  A model constraint

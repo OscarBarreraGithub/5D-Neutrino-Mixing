@@ -13,44 +13,49 @@
 \subsection*{Process}
 \textbf{Standard notation:} \(K_L \to \pi^0\mu^+\mu^-\).  This entry covers the
 long-lived neutral-kaon rare semileptonic muon channel, a \(\Delta S=1\)
-weak-neutral-current process with indirect CP violation, direct CP violation,
-their interference, and a numerically important CP-conserving two-photon
-component.
+weak-neutral-current process receiving indirect-CP, direct-CP, interference,
+and CP-conserving two-photon contributions.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The canonical measured limit is
 \[
   {\cal B}(K_L \to \pi^0\mu^+\mu^-) < 3.8\times10^{-10}
   \quad(90\%\ {\rm CL}),
 \]
-from the 2026 PDG pdgLive entry \(S013.16/S013R30\), accessed 2026-05-16; see
-\texttt{flavor\_catalog/references/K009/pdg2026\_kl\_pi0mumu\_pdgLive.txt}.
-PDG traces the active limit to the KTeV search in PRL 84, 5279.  The KTeV
-abstract records two observed events, \(0.87\pm0.15\) expected background
-events, and the same \(3.8\times10^{-10}\) upper limit.
+from the 2026 PDG pdgLive entry \(S013.16/S013R30\), accessed 2026-05-16
+(\texttt{pdg2026\_kl\_pi0mumu\_pdgLive.txt}).  PDG traces the active limit to
+the KTeV search in PRL 84, 5279.  The KTeV snapshot records two observed
+events, \(0.87\pm0.15\) expected background events, and the same
+\(3.8\times10^{-10}\) upper limit
+(\texttt{ktev2000\_kl\_pi0mumu\_arxiv.txt}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 This mode probes \(s\to d\mu^+\mu^-\) semileptonic and electroweak-penguin
 structures, not the \(\Delta F=2\) KK-gluon mixing lane currently implemented.
 In RS or anarchic-flavor variants it is sensitive to flavor-changing \(Z\)
 couplings, heavy neutral gauge exchange, and short-distance vector/axial
-operators.  Compared with the electron counterpart \(K008\), the muon mode has
-less helicity suppression in the CP-conserving two-photon amplitude, so a
-future signal would require separating CPV short-distance information from
-long-distance hadronic input.
+operators.  The muon mode's CP-conserving two-photon contribution is
+numerically important in the PKA theory decomposition, so a future signal would
+require separating CPV short-distance information from long-distance hadronic
+input.
 
 \subsection*{Post-2008 developments}
 No post-2008 experimental result was found that supersedes the KTeV/PDG
 \(K_L\to\pi^0\mu^+\mu^-\) limit.  The supporting short-lived mode remains the
 NA48/PDG \(K_S\to\pi^0\mu^+\mu^-\) value
 \((2.9^{+1.5}_{-1.2}\pm0.2)\times10^{-9}\), based on six observed events and
-\(0.22^{+0.18}_{-0.11}\) expected background events.  Since
-arXiv:0804.1954, the main developments are interpretive: exploratory lattice
-work has started on long-distance \(K\to\pi\ell^+\ell^-\) amplitudes, and the
-Snowmass rare-kaon white paper keeps \(K_{L,S}\to\pi^0\ell^+\ell^-\) branching
-ratios and spectra in the short-distance rare-kaon program.
+\(0.22^{+0.18}_{-0.11}\) expected background events
+(\texttt{na48\_ks\_pi0mumu\_pdgLive.txt},
+\texttt{na48\_ks\_pi0mumu\_arxiv.txt}).  Since arXiv:0804.1954, the main
+developments are interpretive: exploratory lattice work has started on
+long-distance \(K\to\pi\ell^+\ell^-\) amplitudes
+(\texttt{christ\_feng\_juettner\_lawson\_portelli\_sachrajda2016\_lattice\_arxiv.txt}),
+and the Snowmass rare-kaon white paper keeps
+\(K_{L,S}\to\pi^0\ell^+\ell^-\) branching ratios and spectra in the
+short-distance rare-kaon program
+(\texttt{aebischer\_buras\_kumar2022\_rare\_kaon\_arxiv.txt}).
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 Class: long-distance-limited and CP-decomposition-dependent.  The
 Isidori--Smith--Unterdorfer decomposition writes the rate as mixing,
 interference, direct, and CP-conserving pieces multiplying \(10^{-12}\).  For
@@ -63,7 +68,9 @@ the muon mode the coefficients are
 \]
 with \(|a_S|=1.2\pm0.2\).  The same paper quotes the constructive-interference
 SM expectation as \((1.5\pm0.3)\times10^{-11}\), well below the current
-experimental limit.
+experimental limit.  These numerical theory inputs are recorded in the YAML
+\texttt{theory\_decomposition} block and trace to
+\texttt{isidori\_smith\_unterdorfer2004\_kl\_pi0mumu\_arxiv.txt}.
 
 \subsection*{Code coverage in this repo}
 \textbf{NO.}  Targeted greps over \texttt{quarkConstraints/}, \texttt{qcd/},
