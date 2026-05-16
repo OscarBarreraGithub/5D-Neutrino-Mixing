@@ -1,0 +1,81 @@
+% Flavor catalog process L010
+% Canonical metadata sidecar: L010.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{L010: \texorpdfstring{\(\tau^- \to e^-e^+e^-\)}{tau -> 3e} LFV}
+
+\subsection*{Process}
+The process is the charged-lepton-flavor-violating four-lepton decay
+\(\tau^- \to e^-e^+e^-\), with charge-conjugate tau-plus decays included when
+experiments quote combined limits.  It belongs to the
+\texttt{charged\_lepton} family and is the electron-flavor counterpart of the
+tau three-muon entry L009.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG live tau datablock S035R58 gives
+\[
+  \mathcal{B}(\tau^- \to e^-e^+e^-) < 2.7\times 10^{-8}
+  \quad (90\%~{\rm CL}).
+\]
+PDG attributes the selected limit to the Belle 2010 analysis by Hayasaka
+et al., based on \(782~{\rm fb}^{-1}\) of \(e^+e^-\) data at
+\(\sqrt{s}=10.6~{\rm GeV}\).  The local PDG snapshot is
+\texttt{flavor\_catalog/references/L010/pdg2025\_tau3e\_pdglive\_s035r58.txt}.
+The Belle primary paper reports the same \(2.7\times10^{-8}\) limit.  The
+BaBar 2010 analysis provides the principal independent cross-check,
+\(\mathcal{B}<2.9\times10^{-8}\) at \(90\%\) CL with \(468~{\rm fb}^{-1}\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This mode tests lepton-sector flavor violation that is not forced to be
+dipole dominated.  Warped lepton extensions can generate
+\(\tau eee\) through flavor-nonuniversal lepton profiles, KK neutral-gauge
+exchange, flavor-changing \(Z\) couplings, or scalar exchange.  It is therefore
+complementary to \(\tau\to e\gamma\) and \(\mu\to e\gamma\): an off-shell
+photon can contribute, but contact four-lepton operators can be the leading
+effect in models with tree-level lepton-current misalignment.
+
+\subsection*{Post-2008 developments}
+Relative to the arXiv:0804.1954 RS-flavor baseline, the direct experimental
+bound became a B-factory \(10^{-8}\)-level constraint in 2010.  Belle set the
+current PDG-selected limit, and BaBar reached a comparable \(2.9\times10^{-8}\)
+limit in the same year.  No newer LHCb electron-mode value is used here:
+LHCb's active tau-to-three-leptons program is for the all-muon companion mode.
+For prospects, the Belle II Physics Book treats tau LFV modes with three
+charged leptons as part of the high-luminosity program and quotes expected
+\(50~{\rm ab}^{-1}\) sensitivity at the \(\mathcal{O}(10^{-9})\) to
+\(\mathcal{O}(10^{-10})\) level for favorable low-background modes.
+
+\subsection*{Constraint validity and model dependence}
+Experimentally this is a clean upper limit on a forbidden charged-LFV decay.
+Its interpretation in the present quark-scan repository is lepton-extension
+only: there is no tau-sector matching or four-lepton LFV observable in the
+current scan.  As a future RS constraint it is model dependent because
+dipole-only, contact-operator, and full lepton-EFT assumptions give different
+correlations with \(\tau\to e\gamma\), \(\tau\to 3\mu\), \(\mu\to e\gamma\),
+and \(\mu\to 3e\).
+
+\subsection*{Code coverage in this repo}
+Code coverage is \textbf{NO}.  Targeted greps over \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no implementation of
+\(\tau\to3e\), tau four-lepton LFV, or charged-lepton contact LFV.  The
+adjacent implemented LFV surface is only \(\mu\to e\gamma\):
+\texttt{flavorConstraints/muToEGamma.py:75} and
+\texttt{scanParams/scan.py:524}.  The modern phenomenology registry is limited
+to neutral-meson systems at \texttt{quarkConstraints/modern/phenomenology.py:23}.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM}.  A first implementation needs a new four-lepton LFV observable
+and a convention for lepton-flavor Wilson coefficients or RS matching.  It
+does not require lattice inputs or hadronic long-distance calculations, but a
+production implementation should specify dipole/contact interference and
+correlations with the existing \(\mu\to e\gamma\) lane.
+
+\subsection*{Key references}
+Process-local raw keys: \texttt{PDG2025\_Tau3E},
+\texttt{Belle2010\_Tau3Leptons}, \texttt{BaBar2010\_Tau3Leptons},
+\texttt{BelleIIPhysicsBook2019\_TauLFV},
+\texttt{LHCb2026\_Tau3MuContext},
+\texttt{AgasheBlechmanPetriello2006\_RSLFV}, and
+\texttt{CFW2008\_RSWarpedFlavor}.

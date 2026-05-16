@@ -1,0 +1,74 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: L010
+generated_at: "2026-05-16T13:14:43-04:00"
+references:
+  - key: PDG2025_Tau3E
+    arxiv_id: null
+    doi: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group tau branching-ratio listing, PDG live datablock S035R58"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdglive.lbl.gov/BranchingRatio.action?desig=38&parCode=S035&home="
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/pdg2025_tau3e_pdglive_s035r58.txt"
+    sha256_of_local_snapshot: "sha256:7b5e0e7346d47cfaf87b63f80ae8b81e1afa05769c5343e9efd4d22a09ce3fb6"
+  - key: Belle2010_Tau3Leptons
+    arxiv_id: "1001.3221"
+    doi: "10.1016/j.physletb.2010.03.037"
+    title: "Search for Lepton Flavor Violating Tau Decays into Three Leptons with 719 Million Produced Tau+Tau- Pairs"
+    authors: "K. Hayasaka et al. (Belle Collaboration)"
+    year: 2010
+    url: "https://arxiv.org/abs/1001.3221"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/belle2010_tau3leptons_arxiv1001_3221.txt"
+    sha256_of_local_snapshot: "sha256:073a16f37d0c1f91ed80253da220cf6b48adb4766abc9b60d132118b289cc9e9"
+  - key: BaBar2010_Tau3Leptons
+    arxiv_id: "1002.4550"
+    doi: "10.1103/PhysRevD.81.111101"
+    title: "Limits on tau Lepton-Flavor Violating Decays in three charged leptons"
+    authors: "J. P. Lees et al. (BaBar Collaboration)"
+    year: 2010
+    url: "https://arxiv.org/abs/1002.4550"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/babar2010_tau3leptons_arxiv1002_4550.txt"
+    sha256_of_local_snapshot: "sha256:1e8f127cfa3ed821cfdcdf015d7a3dd7faf93ebd5dcc622cb4065ffb40075d91"
+  - key: BelleIIPhysicsBook2019_TauLFV
+    arxiv_id: "1808.10567"
+    doi: "10.1093/ptep/ptz106"
+    title: "The Belle II Physics Book"
+    authors: "E. Kou, P. Urquijo, W. Altmannshofer, et al."
+    year: 2019
+    url: "https://arxiv.org/abs/1808.10567"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/belleii_physics_book_1808_10567_tau_lfv.txt"
+    sha256_of_local_snapshot: "sha256:6220aa9ad8677c094ec957784a66d1396ac0afcab8f106df662da4c7bab90628"
+  - key: LHCb2026_Tau3MuContext
+    arxiv_id: "2601.20785"
+    doi: null
+    title: "Search for tau- -> mu- mu+ mu- decays at the LHCb experiment with Run 2 data"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2026
+    url: "https://arxiv.org/abs/2601.20785"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/lhcb2026_tau3mu_context_arxiv2601_20785.txt"
+    sha256_of_local_snapshot: "sha256:47c77466983096f12464ae70f6b5f8f81002b06fcc54ac32c1e345002855dad0"
+  - key: AgasheBlechmanPetriello2006_RSLFV
+    arxiv_id: "hep-ph/0606021"
+    doi: "10.1103/PhysRevD.74.053011"
+    title: "Probing the Randall-Sundrum geometric origin of flavor with lepton flavor violation"
+    authors: "Kaustubh Agashe, Andrew E. Blechman, Frank Petriello"
+    year: 2006
+    url: "https://arxiv.org/abs/hep-ph/0606021"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/agashe2006_rs_lfv_arxiv_hepph0606021.txt"
+    sha256_of_local_snapshot: "sha256:4b21c0ebcb02e09b66ed82daed4e626052b07b3d16ae2db4464ec579955d2bc4"
+  - key: CFW2008_RSWarpedFlavor
+    arxiv_id: "0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:6ecc1801908254fc925a6c4b8190750d3d2546b077f29c7cf48899cc1b95a892"

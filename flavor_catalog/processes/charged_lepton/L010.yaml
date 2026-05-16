@@ -1,0 +1,154 @@
+schema: flavor_catalog.process.v1
+process_id: L010
+family: charged_lepton
+standard_notation: "\\mathcal{B}(\\tau^-\\to e^-e^+e^-)"
+process_name: "Tau to three electrons charged-lepton-flavor-violating four-lepton decay"
+owner: "PKA"
+owner_agent_id: "PKA-L010"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:14:43-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:14:43-04:00"
+    agent_id: "PKA-L010"
+    reason: "Initial L010 PKA source extraction and draft sidecar started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T13:14:43-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T13:14:43-04:00"
+    agent_id: "PKA-L010"
+    reason: "PKA draft, source snapshots, code-coverage grep, and worklog deposited."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:14:43-04:00"
+version: "0.1.0"
+source_shas:
+  agashe2006_rs_lfv_arxiv_hepph0606021.txt: "sha256:4b21c0ebcb02e09b66ed82daed4e626052b07b3d16ae2db4464ec579955d2bc4"
+  babar2010_tau3leptons_arxiv1002_4550.txt: "sha256:1e8f127cfa3ed821cfdcdf015d7a3dd7faf93ebd5dcc622cb4065ffb40075d91"
+  belle2010_tau3leptons_arxiv1001_3221.txt: "sha256:073a16f37d0c1f91ed80253da220cf6b48adb4766abc9b60d132118b289cc9e9"
+  belleii_physics_book_1808_10567_tau_lfv.txt: "sha256:6220aa9ad8677c094ec957784a66d1396ac0afcab8f106df662da4c7bab90628"
+  cfw2008_arxiv0804_1954.txt: "sha256:6ecc1801908254fc925a6c4b8190750d3d2546b077f29c7cf48899cc1b95a892"
+  lhcb2026_tau3mu_context_arxiv2601_20785.txt: "sha256:47c77466983096f12464ae70f6b5f8f81002b06fcc54ac32c1e345002855dad0"
+  pdg2025_tau3e_pdglive_s035r58.txt: "sha256:7b5e0e7346d47cfaf87b63f80ae8b81e1afa05769c5343e9efd4d22a09ce3fb6"
+pdg_or_equivalent:
+  primary_current_limit:
+    source: "PDG live tau branching-ratio datablock S035R58, 2025 update"
+    year: 2025
+    observable: "Branching fraction upper limit for tau^- -> e^- e+ e^-"
+    value: 2.7e-8
+    relation: "<"
+    confidence_level: "90% C.L."
+    source_url: "https://pdglive.lbl.gov/BranchingRatio.action?desig=38&parCode=S035&home="
+    datablock_url: "https://pdglive.lbl.gov/DataBlock.action?node=S035R58"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/pdg2025_tau3e_pdglive_s035r58.txt"
+    sha256: "7b5e0e7346d47cfaf87b63f80ae8b81e1afa05769c5343e9efd4d22a09ce3fb6"
+    pdg_reference_entry: "HAYASAKA 2010, Belle"
+    data_sample: "782 fb^-1"
+    center_of_mass_energy: "10.6 GeV"
+  primary_experiment:
+    source: "Belle Collaboration"
+    arxiv_id: "1001.3221"
+    doi: "10.1016/j.physletb.2010.03.037"
+    year: 2010
+    observable: "Branching fraction upper limit for tau^- -> e^- e+ e^-"
+    value: 2.7e-8
+    relation: "<"
+    confidence_level: "90% C.L."
+    data_sample: "782 fb^-1, 719 million tau+tau- pairs"
+    center_of_mass_energy: "10.6 GeV"
+    efficiency_percent: 6.0
+    expected_background_events: "0.21 +/- 0.15"
+    systematic_uncertainty_percent: 9.8
+    observed_signal_region_events: 0
+    source_url: "https://arxiv.org/abs/1001.3221"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/belle2010_tau3leptons_arxiv1001_3221.txt"
+    sha256: "073a16f37d0c1f91ed80253da220cf6b48adb4766abc9b60d132118b289cc9e9"
+  supporting_experiment:
+    source: "BaBar Collaboration"
+    arxiv_id: "1002.4550"
+    doi: "10.1103/PhysRevD.81.111101"
+    year: 2010
+    observable: "Branching fraction upper limit for tau^- -> e^- e+ e^-"
+    value: 2.9e-8
+    relation: "<"
+    confidence_level: "90% C.L."
+    data_sample: "468 fb^-1"
+    center_of_mass_energy: "10.6 GeV"
+    efficiency_percent: "8.6 +/- 0.2"
+    expected_background_events: "0.12 +/- 0.02"
+    expected_limit_90cl: 3.4e-8
+    observed_signal_region_events: 0
+    source_url: "https://arxiv.org/abs/1002.4550"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/babar2010_tau3leptons_arxiv1002_4550.txt"
+    sha256: "1e8f127cfa3ed821cfdcdf015d7a3dd7faf93ebd5dcc622cb4065ffb40075d91"
+  prospects:
+    source: "Belle II Physics Book"
+    arxiv_id: "1808.10567"
+    doi: "10.1093/ptep/ptz106"
+    year: 2019
+    statement: "Belle II expects tau LFV sensitivity at O(10^-9)--O(10^-10) for favorable low-background modes with 50 ab^-1."
+    integrated_luminosity: "50 ab^-1"
+    source_url: "https://arxiv.org/abs/1808.10567"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/belleii_physics_book_1808_10567_tau_lfv.txt"
+    sha256: "6220aa9ad8677c094ec957784a66d1396ac0afcab8f106df662da4c7bab90628"
+  lhcb_context:
+    source: "LHCb Collaboration Run 2 tau->3mu preprint"
+    arxiv_id: "2601.20785"
+    year: 2026
+    statement: "Context only: LHCb targets the tau^- -> mu^- mu+ mu^- companion mode; no tau^- -> e^- e+ e^- limit is used for L010."
+    source_url: "https://arxiv.org/abs/2601.20785"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L010/lhcb2026_tau3mu_context_arxiv2601_20785.txt"
+    sha256: "47c77466983096f12464ae70f6b5f8f81002b06fcc54ac32c1e345002855dad0"
+  rs_context:
+    - source: "Agashe-Blechman-Petriello RS LFV analysis"
+      arxiv_id: "hep-ph/0606021"
+      doi: "10.1103/PhysRevD.74.053011"
+      year: 2006
+      snapshot_path: "flavor_catalog/references/L010/agashe2006_rs_lfv_arxiv_hepph0606021.txt"
+      sha256: "4b21c0ebcb02e09b66ed82daed4e626052b07b3d16ae2db4464ec579955d2bc4"
+    - source: "Csaki-Falkowski-Weiler 2008 RS flavor baseline"
+      arxiv_id: "0804.1954"
+      doi: "10.1088/1126-6708/2008/09/008"
+      year: 2008
+      snapshot_path: "flavor_catalog/references/L010/cfw2008_arxiv0804_1954.txt"
+      sha256: "6ecc1801908254fc925a6c4b8190750d3d2546b077f29c7cf48899cc1b95a892"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|tau.?to|3.?e|eee|four.?lepton|contact\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"tau.?->.?3e|tau.?to.?3e|tau.*e.?e.?e|three.?electron|e.?e.?e.*tau|tau.?->.?e.?e.?e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+  negative_result:
+    - "No tau->3e, tau four-lepton, or charged-lepton contact LFV implementation found in required code paths."
+    - "The only charged-lepton LFV implementation surfaced by grep is the adjacent mu->e gamma dipole checker."
+  adjacent_noncoverage_evidence:
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma in the scan."
+    - "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 systems."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "A new four-lepton/contact LFV observable and lepton-sector Wilson-coefficient convention are needed. No lattice inputs or hadronic long-distance calculations are required for a first bound."
+implementation_difficulty_if_missing: "MEDIUM"
+open_issues:
+  - "Checker should confirm that no post-2010 Belle II, LHCb, ATLAS, or CMS tau->3e result supersedes the PDG-selected Belle 2010 value."
+  - "Future implementation needs a lepton-contact operator basis and a decision on whether to include dipole/contact interference."

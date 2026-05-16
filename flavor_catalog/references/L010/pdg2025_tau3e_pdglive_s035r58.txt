@@ -1,0 +1,39 @@
+source_key: pdg2025_tau3e_pdglive_s035r58
+source_type: PDG live minimal text snapshot
+url: https://pdglive.lbl.gov/BranchingRatio.action?desig=38&parCode=S035&home=
+datablock_url: https://pdglive.lbl.gov/DataBlock.action?node=S035R58
+access_date: 2026-05-16
+license_policy: minimal text extract only; no PDG PDF stored
+
+Citation line:
+S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024)
+and 2025 update.
+
+Relevant PDG live particle:
+S035 tau-
+
+Relevant PDG live branching-ratio entry:
+PDGID: S035R58
+Gamma_210 / Gamma_total
+Mode: tau- -> e- e+ e-
+Category: Lepton Family number (LF), Lepton number (L), or Baryon number (B)
+violating modes.
+
+PDG selected limit:
+BR(tau- -> e- e+ e-) < 2.7 x 10^-8, CL = 90%.
+Selected data entry: HAYASAKA 2010, Belle, 782 fb^-1 at e+e- center-of-mass
+energy 10.6 GeV.
+
+Other listed data in the same PDG datablock, marked by PDG as not used for
+averages, fits, limits, etc.:
+- LEES 2010A, BaBar: < 2.9 x 10^-8 at 90% CL, 468 fb^-1 at e+e- center-of-mass
+  energy 10.6 GeV.
+- MIYAZAKI 2008, Belle: < 3.6 x 10^-8 at 90% CL, 535 fb^-1 at e+e- center-of-mass
+  energy 10.6 GeV.
+- AUBERT 2007BK, BaBar: < 4.3 x 10^-8 at 90% CL, 376 fb^-1 at e+e- center-of-mass
+  energy 10.6 GeV.
+
+Extraction note:
+The selected PDG value is used as the canonical L010 current limit. The
+datablock also confirms that the BaBar 2010 result is supporting but not the
+PDG-selected best limit for this mode.
