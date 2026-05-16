@@ -46,9 +46,21 @@ status_history:
     agent_id: "WA-v2"
     batch_id: "wa_w6_beauty_v2"
     reason: "Cycle-2 writer rework addressed ca_w6_beauty CHK-1 metadata-completeness findings."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T16:27:35-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T16:27:35-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w6_beauty_v2"
+    issues:
+      - "CHK-1: TeX still quotes CFW 21 TeV and 33 TeV context values outside pdg_or_equivalent; WA-v2 added complete metadata under paper_era_reference instead."
+      - "CHK-1: TeX still quotes Belle II Delta m_d = 0.516 +/- 0.008(stat) +/- 0.005(syst) ps^-1 and 190 fb^-1 outside pdg_or_equivalent; WA-v2 added complete metadata under recent_experimental_inputs instead."
+    reason: "Cycle-2 checker found strict CHK-1 pdg_or_equivalent placement gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty_v2.md."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:17:46-04:00"
+last_updated_at: "2026-05-16T16:27:35-04:00"
 version: "0.1.0"
 source_shas:
   hflav_pdg2025_bd_mixing.txt: "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711"

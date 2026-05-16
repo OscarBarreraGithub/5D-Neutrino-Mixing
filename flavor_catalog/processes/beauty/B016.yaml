@@ -6,7 +6,7 @@ process_name: "Exclusive B -> K ell+ ell- branching fractions"
 owner: "PKA"
 owner_agent_id: "PKA-B016"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -45,9 +45,18 @@ status_history:
     agent_id: "WA-v2"
     batch_id: "wa_w6_beauty_v2"
     reason: "Cycle-2 writer rework addressed ca_w6_beauty CHK-1 metadata-completeness findings."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T16:27:35-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T16:27:35-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w6_beauty_v2"
+    reason: "Cycle-2 checker verified CHK-1 through CHK-8 for B016."
+checker_passed_at: "2026-05-16T16:27:35-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:17:46-04:00"
+last_updated_at: "2026-05-16T16:27:35-04:00"
 version: "0.1.0"
 source_shas:
   babar_0807_4119_BtoKll.txt: "sha256:9befb573f3193d7cb5f584c576f0d3a7da3691d65f59b5ff1316ff6cd126dc8e"
