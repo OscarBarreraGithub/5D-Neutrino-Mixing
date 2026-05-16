@@ -54,9 +54,18 @@ status_history:
     agent_id: "CA"
     batch_id: "ca_w23_kaon_charm_edm_v2"
     reason: "Checker re-check completed for K002 after WA-v2 metadata rework."
+  - state: "OPUS-APPROVED"
+    timestamp: "2026-05-16T14:55:00-04:00"
+    agent: "Opus-round-1"
+    round_id: "opus_round_001"
+    from: "CHECKER-DONE"
+    to: "OPUS-APPROVED"
+    at: "2026-05-16T14:55:00-04:00"
+    agent_id: "Opus-round-1"
+    reason: "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
 checker_passed_at: "2026-05-16T12:56:21-04:00"
-opus_approved_at: null
-last_updated_at: "2026-05-16T12:56:21-04:00"
+opus_approved_at: "2026-05-16T14:55:00-04:00"
+last_updated_at: "2026-05-16T14:55:00-04:00"
 version: "0.1.0"
 pdg_or_equivalent:
   pdg_fit_assuming_cpt:

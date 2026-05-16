@@ -50,9 +50,18 @@ status_history:
     agent_id: "CA-ca_w4_charm_v2"
     cycle: 2
     reason: "Cycle-2 checker re-check passed CHK-1 through CHK-8."
+  - state: "OPUS-APPROVED"
+    timestamp: "2026-05-16T14:55:00-04:00"
+    agent: "Opus-round-1"
+    round_id: "opus_round_001"
+    from: "CHECKER-DONE"
+    to: "OPUS-APPROVED"
+    at: "2026-05-16T14:55:00-04:00"
+    agent_id: "Opus-round-1"
+    reason: "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
 checker_passed_at: "2026-05-16T14:16:41-04:00"
-opus_approved_at: null
-last_updated_at: "2026-05-16T14:16:41-04:00"
+opus_approved_at: "2026-05-16T14:55:00-04:00"
+last_updated_at: "2026-05-16T14:55:00-04:00"
 version: "0.1.0"
 source_shas:
   belle_belleii2025_arxiv2410_22961.txt: "sha256:7b03797e8fda5ca0a4465772838df3aa05c6f84d7750f6a2326429497d578c4e"
