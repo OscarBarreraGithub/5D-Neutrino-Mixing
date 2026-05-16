@@ -14,12 +14,14 @@
 \textbf{Standard notation:} \(R_{\mu e}^{\rm Ti} =
 \Gamma(\mu^-{\rm Ti}\to e^-{\rm Ti})/\Gamma_{\rm capture}(\mu^-{\rm Ti})\).
 This entry covers coherent neutrinoless muon-to-electron conversion in a
-titanium target, the SINDRUM II bound that sits between the aluminum program
-entry and the stronger gold-target benchmark.
+titanium target.  The SINDRUM II titanium result should be kept separate from
+aluminum and gold conversion limits because nuclear overlap and capture inputs
+are target-dependent.
 
 \subsection*{PDG / equivalent value(s)}
-The streamed PDG live muon listing, generated on 2026-05-14 and accessed on
-2026-05-16, gives
+The sidecar block \texttt{pdg\_or\_equivalent.primary\_current\_limit}, from
+the PDG live muon listing generated on 2026-05-14 and accessed on 2026-05-16,
+gives
 \[
   R_{\mu e}^{\rm Ti}<4.3\times10^{-12}\qquad (90\%\ {\rm C.L.}) .
 \]
@@ -40,10 +42,11 @@ not target-universal.
 
 \subsection*{Post-2008 developments}
 No newer titanium-target measurement was found in the PDG stream used here
-after the arXiv:0804.1954 RS-flavor baseline.  The main development since that
-baseline is experimental: Mu2e describes a coherent \(\mu^-N\to e^-N\)
-program aiming roughly four orders of magnitude beyond the previous published
-conversion limits, and COMET Phase-I quotes an aluminum sensitivity goal
+after the \texttt{CFW2008} RS-flavor baseline.  The main developments are
+prospective aluminum programs: the sidecar \texttt{post\_2008\_developments}
+entry for the Mu2e TDR records a coherent \(\mu^-N\to e^-N\) program aiming
+roughly four orders of magnitude beyond previous published conversion limits,
+and the COMET Phase-I entry records an aluminum sensitivity goal
 \(3.1\times10^{-15}\) with an expected \(90\%\) upper limit
 \(7.0\times10^{-15}\).  These are not titanium measurements; they explain why
 the Ti number is now primarily a legacy benchmark and target-comparison input.

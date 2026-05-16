@@ -16,9 +16,17 @@ status_history:
     at: "2026-05-16T14:05:10-04:00"
     agent_id: "PKA-L006"
     reason: "Initial L006 PKA source extraction and draft sidecar."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T14:23:54-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T14:23:54-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    reason: "Writer polish completed for batch wa_w5a_charged_lepton_edm; prior sidecar had no explicit PKA-DONE transition."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:05:10-04:00"
+last_updated_at: "2026-05-16T14:23:54-04:00"
 version: "0.1.0"
 source_shas:
   agashe2006_rs_lfv_arxiv_hepph0606021.txt: "sha256:492db37edb6f351f66add5b8b6b826119f694c981bc6fb1b77fe31e3da7db00c"

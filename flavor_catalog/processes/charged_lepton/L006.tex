@@ -17,14 +17,17 @@ spontaneous muonium-to-antimuonium conversion, a \(\Delta L_\mu=-\Delta L_e=2\)
 lepton-flavor-violating oscillation process, not a dipole decay.
 
 \subsection*{PDG / equivalent value(s)}
-The current PDG 2026 muon listing, datablock S004MC, gives the canonical
-effective-coupling limit
+The sidecar block
+\texttt{pdg\_or\_equivalent.pdg\_effective\_coupling\_limit}, from the 2026
+PDG muon listing datablock S004MC, gives the canonical effective-coupling
+limit
 \[
   G_C/G_F < 0.0030 \qquad (90\%\ {\rm C.L.})
 \]
 for the stated \((V-A)\times(V-A)\) four-lepton effective Lagrangian.  The same
-PDG datablock footnote records the underlying MACS/PSI probability limit from
-Willmann et al.,
+PDG datablock, mirrored in
+\texttt{pdg\_or\_equivalent.primary\_current\_probability\_limit}, records the
+underlying MACS/PSI probability limit from Willmann et al.,
 \[
   P_{M\bar M} < 8.3\times 10^{-11}\qquad (90\%\ {\rm C.L.})
 \]
@@ -45,13 +48,14 @@ therefore complementary to L001: the present repo checks only
 four-lepton observable.
 
 \subsection*{Post-2008 developments}
-Relative to the arXiv:0804.1954 era, the experimental bound itself has not
+Relative to the \texttt{CFW2008} era, the experimental bound itself has not
 changed: PDG still uses the 1999 MACS/PSI result.  The main post-2008 movement
-is prospective.  The Snowmass 2021 whitepaper frames MACE as a next-generation
-search intended to improve sensitivity by more than two orders of magnitude,
-and the 2024 MACE conceptual design targets conversion probabilities beyond
-the \(10^{-13}\) level.  On the theory side, recent EFT work separates
-\(\Delta L_\mu=-\Delta L_e=2\) operators from ordinary one-unit LFV and notes
+is prospective.  The sidecar \texttt{prospects} entries record the Snowmass
+2021 statement that MACE is intended to improve probability sensitivity by
+more than two orders of magnitude and the 2024 MACE conceptual-design target
+beyond the \(10^{-13}\) level.  On the theory side,
+\texttt{post\_2008\_theory\_context} records recent EFT work separating
+\(\Delta L_\mu=-\Delta L_e=2\) operators from ordinary one-unit LFV and noting
 that muonium conversion probes only part of that operator class.
 
 \subsection*{Constraint validity and model dependence}

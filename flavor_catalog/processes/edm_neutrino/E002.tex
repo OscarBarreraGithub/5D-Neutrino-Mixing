@@ -18,7 +18,8 @@ not a charged-lepton-flavor-violating decay and not a quark \(\Delta F=2\)
 observable.
 
 \subsection*{PDG / equivalent value(s)}
-PDG Live 2026 (\texttt{PDG2026:MuonEDM}) lists the canonical direct
+The sidecar block \texttt{pdg\_or\_equivalent.canonical\_direct\_limit}, from
+PDG Live 2026 (\texttt{PDG2026:MuonEDM}), lists the canonical direct
 experimental bound as
 \[
   |d_\mu| < 1.8\times10^{-19}\ e\,\mathrm{cm}
@@ -26,9 +27,11 @@ experimental bound as
 \]
 from the Bennett et al. BNL E821 storage-ring analysis; see
 \texttt{flavor\_catalog/references/E002/pdg2026\_muon\_edm\_datablock.txt}.
-The same PDG datablock records the combined result as
-\((0.0\pm0.9)\times10^{-19}\ e\,\mathrm{cm}\).  The primary arXiv abstract
-(\texttt{Bennett:MuonEDM2009}) reports
+The sidecar block \texttt{pdg\_or\_equivalent.pdg\_combined\_measurement}
+records the combined result as
+\((0.0\pm0.9)\times10^{-19}\ e\,\mathrm{cm}\).  The
+\texttt{pdg\_or\_equivalent.primary\_bnl\_measurement} block, from
+\texttt{Bennett:MuonEDM2009}, reports
 \(d_\mu=-0.1(0.9)\times10^{-19}\ e\,\mathrm{cm}\) and quotes
 \(|d_\mu|<1.9\times10^{-19}\ e\,\mathrm{cm}\) at \(95\%\) CL.
 
@@ -49,12 +52,14 @@ development is the BNL E821 publication in 2009.  That analysis used muon
 \(g-2\) storage-ring spin-precession data and remains the basis of the PDG
 direct limit.  The major post-2008 prospective change is the dedicated PSI
 muEDM program.  The 2021 PSI letter of intent
+\texttt{auxiliary\_values.psi\_frozen\_spin\_projection}
 (\texttt{Adelmann:MuonEDMPSI2021}) proposes a frozen-spin search with
 \(p=125~\mathrm{MeV}/c\), \(|B|=3~\mathrm{T}\), a rest-frame electric field
 of \(1~\mathrm{GV/m}\), and an expected sensitivity
-\(\sigma(d_\mu)\leq6\times10^{-23}\ e\,\mathrm{cm}\).  A 2024 muEDM status
-proceeding (\texttt{Renga:MuonEDMStatus2024}) describes a first phase aimed
-at demonstrating feasibility by 2026, with an ultimate goal of improving the
+\(\sigma(d_\mu)\leq6\times10^{-23}\ e\,\mathrm{cm}\).  The
+\texttt{auxiliary\_values.psi\_2024\_status} entry
+(\texttt{Renga:MuonEDMStatus2024}) describes a first phase aimed at
+demonstrating feasibility by 2026, with an ultimate goal of improving the
 sensitivity by a factor of \(100\) by the early 2030s.
 
 \subsection*{Constraint validity and model dependence}
