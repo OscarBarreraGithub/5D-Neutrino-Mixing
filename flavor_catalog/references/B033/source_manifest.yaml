@@ -1,0 +1,49 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B033
+generated_at: "2026-05-16T11:59:37-04:00"
+references:
+  - key: hflav_triangle_summer2025_phiK0
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV CPV & Unitarity Triangle Parameters: Results for Summer 2025"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/"
+    sha256_of_local_snapshot: "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b"
+    snapshot_path: "flavor_catalog/references/B033/hflav_triangle_summer2025_phiK0.txt"
+  - key: babar_2012_b0_kkks
+    arxiv_id: "1201.5897"
+    DOI: "10.1103/PhysRevD.85.112010"
+    title: "Study of CP violation in Dalitz-plot analyses of B0 -> K+K-KS, B+ -> K+K-K+, and B+ -> KSKSK+"
+    authors: "J. P. Lees et al. (BaBar Collaboration)"
+    year: 2012
+    url: "https://arxiv.org/abs/1201.5897"
+    sha256_of_local_snapshot: "sha256:4e1b5caba5f089035ae28e27bb99a764bcddadf37708f84c1659e35865417aa8"
+    snapshot_path: "flavor_catalog/references/B033/babar_2012_b0_kkks_arxiv.txt"
+  - key: belle_2010_b0_kkks
+    arxiv_id: "1007.3848"
+    DOI: "10.1103/PhysRevD.82.073011"
+    title: "Measurement of CP violating asymmetries in B0 -> K+ K- K0_S decays with a time-dependent Dalitz approach"
+    authors: "Y. Nakahama et al. (Belle Collaboration)"
+    year: 2010
+    url: "https://arxiv.org/abs/1007.3848"
+    sha256_of_local_snapshot: "sha256:0a4a899245d3e8880a8f64210bbfd981f2bb02ca884e60ceb3f8c1bd59562465"
+    snapshot_path: "flavor_catalog/references/B033/belle_2010_b0_kkks_arxiv.txt"
+  - key: belleii_2023_phik0
+    arxiv_id: "2307.02802"
+    DOI: "10.1103/PhysRevD.108.072012"
+    title: "Measurement of CP asymmetries in B0 -> phi K0_S decays with Belle II"
+    authors: "I. Adachi et al. (Belle II Collaboration)"
+    year: 2023
+    url: "https://arxiv.org/abs/2307.02802"
+    sha256_of_local_snapshot: "sha256:46d751b86a3d999c9787c0fa0e7c2e8ed99413180c72bd2252d2d85113396639"
+    snapshot_path: "flavor_catalog/references/B033/belleii_2023_phik0_arxiv.txt"
+  - key: csaki_falkowski_weiler_2008
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "C. Csaki, A. Falkowski, A. Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:a53534cc37da7f71bf04f1be4fd81ed3029a44aead112f0e32233ee1490176ef"
+    snapshot_path: "flavor_catalog/references/B033/csaki_falkowski_weiler_2008_arxiv.txt"

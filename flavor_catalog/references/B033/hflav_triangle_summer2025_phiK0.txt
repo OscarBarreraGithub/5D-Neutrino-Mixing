@@ -1,0 +1,50 @@
+Source: HFLAV CPV & Unitarity Triangle Parameters
+Update: Summer 2025, EPS 2025 / Lepton Photon 2025 / CKM 2025 and PDG 2025
+URL: https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/
+Access date: 2026-05-16
+Local snapshot purpose: Minimal extract for B033, B0 -> phi K0 time-dependent CP asymmetry.
+
+Context from the HFLAV page:
+HFLAV lists B_d -> phi K_S under "Time-dependent CP Asymmetries in b -> qq-bar s
+(penguin) Transitions".  The page states that in the Standard Model the
+b -> s penguin transition carries approximately the same weak phase as the
+b -> c c-bar s amplitude used to obtain sin(2 beta), and that new virtual
+particles may generate deviations from sin(2 beta_eff)(b -> qq-bar s) ~
+sin(2 beta)(b -> c c-bar s).
+
+HFLAV convention:
+S = -eta_CP * sin(2 beta_eff), C = -A.  The same HFLAV page later states
+eta_CP = -1 for phi K_S, eta' K_S, etc., so the listed sin(2 beta_eff)
+equals the usual S coefficient for phi K_S under this convention.
+
+Extracted HFLAV Summer 2025 phi K0 table:
+
+Mode: phi K0
+Experiment/input:
+  BaBar, PRD 85 (2012) 112010, N(BB)=470M:
+    sin(2 beta_eff) = 0.66 +/- 0.17 +/- 0.07
+    C_CP = 0.05 +/- 0.18 +/- 0.05
+  Belle, PRD 82 (2010) 073011, N(BB)=657M:
+    sin(2 beta_eff) = 0.90 +0.09 -0.19
+    C_CP = -0.04 +/- 0.20 +/- 0.10 +/- 0.02
+  Belle II, PRD 108 (2023) 072012, N(BB)=387M:
+    sin(2 beta_eff) = 0.54 +/- 0.26 +0.06 -0.08
+    C_CP = -0.31 +/- 0.20 +/- 0.05
+    S-C statistical correlation = 0.01
+
+HFLAV averages:
+  sin(2 beta_eff)(phi K0) = 0.74 +/- 0.12
+    chi2 = 1.5 / 2 dof, CL = 0.46, equivalent pull = 0.7 sigma
+  C_CP(phi K0) = -0.09 +/- 0.12
+    chi2 = 1.7 / 2 dof, CL = 0.42, equivalent pull = 0.8 sigma
+
+Comparison benchmark on the same HFLAV Summer 2025 page:
+  All-charmonium average sin(2 beta) = sin(2 phi_1) = 0.710 +/- 0.011
+    stat-only uncertainty = 0.010, CL = 0.34
+  J/psi K0 average sin(2 beta) = 0.710 +/- 0.011
+  J/psi K_S mode average = 0.712 +/- 0.011
+
+Reference labels appearing in the HFLAV table:
+  BaBar: PRD 85 (2012) 112010
+  Belle: PRD 82 (2010) 073011
+  Belle II: PRD 108 (2023) 072012

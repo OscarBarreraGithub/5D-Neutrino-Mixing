@@ -1,0 +1,93 @@
+% Flavor catalog per-process draft.
+% process_id: B033
+% family: beauty
+% owner_agent_id: PKA-B033
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B033.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B033: \(B^0\to\phi K_S^0\) Penguin CP Asymmetry}
+
+\subsection*{Process}
+The process is the time-dependent CP asymmetry in the penguin-dominated
+beauty decay \(B^0\to\phi K_S^0\), usually reported through
+\(\sin(2\beta_{\rm eff})\) and \(C_{\phi K^0}\).  It probes the
+\(b\to s\bar s s\) loop amplitude and is interpreted by comparing its weak
+phase with the reference \(b\to c\bar c s\) value from
+\(B^0\to J/\psi K_S^0\).
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth numerical block is \texttt{pdg\_or\_equivalent} in
+\texttt{B033.yaml}.  HFLAV Summer 2025 gives, for the \(\phi K^0\) average,
+\[
+  \sin(2\beta_{\rm eff})_{\phi K^0}=0.74\pm0.12,\qquad
+  C_{\phi K^0}=-0.09\pm0.12.
+\]
+HFLAV uses \(S=-\eta_{CP}\sin(2\beta_{\rm eff})\) and quotes
+\(\eta_{CP}=-1\) for \(\phi K_S\), so this \(\sin(2\beta_{\rm eff})\) is the
+usual \(S_{\phi K_S}\) coefficient in this convention.  The comparison
+benchmark on the same HFLAV page is the all-charmonium
+\[
+  \sin(2\beta)=0.710\pm0.011,
+\]
+with the strict \(J/\psi K_S\) mode average \(0.712\pm0.011\).  The local
+snapshot is \texttt{references/B033/hflav\_triangle\_summer2025\_phiK0.txt},
+accessed on 2026-05-16.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In anarchic warped models, KK gluons, electroweak KK modes, or flavor-changing
+\(Z/H\)-like effects can add new weak phases to \(b\to s\bar s s\)
+\(\Delta B=1\) amplitudes.  \(B^0\to\phi K_S^0\) is therefore a diagnostic of
+new penguin phases that would not be captured by a pure \(\Delta m_{B_s}\) or
+\(\Delta m_{B_d}\) magnitude constraint.  A large departure of
+\(S_{\phi K_S}\) from \(S_{\psi K_S}\) would point to decay-amplitude new
+physics rather than just the CKM phase measured in the golden charmonium mode.
+
+\subsection*{Post-2008 developments}
+Since the arXiv:0804.1954 RS-flavor baseline, the old B-factory tension in
+penguin CP phases has been replaced by a stable world average compatible with
+\(S_{\psi K_S}\).  HFLAV Summer 2025 combines BaBar's 2012 Dalitz analysis,
+Belle's 2010 time-dependent Dalitz analysis, and Belle II's 2023
+time-dependent \(B^0\to\phi K_S^0\) measurement.  Belle II is the important
+new post-B-factory input: it measures \(S=0.54\pm0.26^{+0.06}_{-0.08}\) and,
+with HFLAV's \(C=-A\) convention, \(C=-0.31\pm0.20\pm0.05\).  The present
+HFLAV average differs from the charmonium benchmark by only \(0.03\), far below
+the current \(\phi K^0\) uncertainty.
+
+\subsection*{Constraint validity and model dependence}
+This is a useful but theory-limited nonleptonic penguin observable.  It is
+cleaner as a null test than as a standalone hard bound: the SM prediction is
+close to \(\sin(2\beta)\), but subleading amplitudes and hadronic strong
+phases are mode dependent.  A production implementation would need a
+\(\Delta B=1\) operator basis, RG evolution, and a hadronic amplitude or
+phenomenological likelihood.  Treat it as charmless-penguin contextual input
+unless the PI chooses a specific hadronic framework.
+
+\subsection*{Code coverage in this repo}
+NO.  Focused greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no implementation of \(B\to\phi K\),
+\(b\to s\bar s s\) penguin CP asymmetries, \(\sin(2\beta_{\rm eff})\), or
+time-dependent charmless \(B\) CP observables.  The nearest adjacent code is
+neutral-meson mixing: \texttt{quarkConstraints/deltaf2.py:209} defines the
+\(\Delta F=2\) input registry, \texttt{quarkConstraints/deltaf2.py:903}
+evaluates \(B_d\) mixing, and \texttt{quarkConstraints/deltaf2.py:922}
+evaluates \(B_s\) mixing.  Those do not compute \(\Delta B=1\) penguin decay
+amplitudes.
+
+\subsection*{Implementation difficulty}
+HIGH.  The existing \(\Delta F=2\) SLL/SLR/VLL/VRR/LR1/LR2 machinery is not
+enough.  A live constraint would require \(\Delta B=1\) four-quark penguin
+operators, matching from RS sources, QCD running to the \(b\) scale, and a
+hadronic treatment of the \(B\to\phi K\) amplitude and strong phases.
+
+\subsection*{Key references}
+Process-local raw reference keys before bibliography consolidation:
+\texttt{hflav\_triangle\_summer2025\_phiK0},
+\texttt{babar\_2012\_b0\_kkks},
+\texttt{belle\_2010\_b0\_kkks},
+\texttt{belleii\_2023\_phik0}, and
+\texttt{csaki\_falkowski\_weiler\_2008}.

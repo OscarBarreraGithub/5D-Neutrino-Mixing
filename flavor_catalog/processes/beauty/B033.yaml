@@ -1,0 +1,170 @@
+schema: flavor_catalog.process.v1
+process_id: B033
+family: beauty
+standard_notation: "S_{\\phi K_S},\\ C_{\\phi K_S}"
+process_name: "B -> phi K_S penguin CP asymmetry"
+owner: "PKA"
+owner_agent_id: "PKA-B033"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:59:37-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:59:37-04:00"
+    agent_id: "PKA-B033"
+    reason: "Initial PKA sidecar for B -> phi K_S penguin CP asymmetry."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T11:59:37-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T11:59:37-04:00"
+    agent_id: "PKA-B033"
+    reason: "PKA draft, source snapshots, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:59:37-04:00"
+version: "0.1.0"
+source_shas:
+  hflav_triangle_summer2025_phiK0.txt: "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b"
+  babar_2012_b0_kkks_arxiv.txt: "sha256:4e1b5caba5f089035ae28e27bb99a764bcddadf37708f84c1659e35865417aa8"
+  belle_2010_b0_kkks_arxiv.txt: "sha256:0a4a899245d3e8880a8f64210bbfd981f2bb02ca884e60ceb3f8c1bd59562465"
+  belleii_2023_phik0_arxiv.txt: "sha256:46d751b86a3d999c9787c0fa0e7c2e8ed99413180c72bd2252d2d85113396639"
+  csaki_falkowski_weiler_2008_arxiv.txt: "sha256:a53534cc37da7f71bf04f1be4fd81ed3029a44aead112f0e32233ee1490176ef"
+pdg_or_equivalent:
+  canonical_hflav_phiK0:
+    source: "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025"
+    year: 2025
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B033/hflav_triangle_summer2025_phiK0.txt"
+    sha256_of_text_snapshot: "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b"
+    convention: "HFLAV quotes S = -eta_CP sin(2 beta_eff), C = -A; eta_CP = -1 for phi K_S."
+    observables:
+      - name: "sin(2 beta_eff)(phi K0)"
+        latex: "\\sin(2\\beta_{\\rm eff})_{\\phi K^0}"
+        value: 0.74
+        uncertainty: 0.12
+        units: "dimensionless"
+        chi2: 1.5
+        dof: 2
+        confidence_level: 0.46
+        pull_sigma: 0.7
+      - name: "C_CP(phi K0)"
+        latex: "C_{\\phi K^0}"
+        value: -0.09
+        uncertainty: 0.12
+        units: "dimensionless"
+        chi2: 1.7
+        dof: 2
+        confidence_level: 0.42
+        pull_sigma: 0.8
+  hflav_comparison_sin2beta:
+    source: "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025"
+    year: 2025
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B033/hflav_triangle_summer2025_phiK0.txt"
+    sha256_of_text_snapshot: "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b"
+    observables:
+      - name: "sin(2 beta), all charmonium"
+        value: 0.710
+        uncertainty: 0.011
+        stat_only_uncertainty: 0.010
+        confidence_level: 0.34
+        units: "dimensionless"
+      - name: "sin(2 beta), J/psi K_S mode"
+        value: 0.712
+        uncertainty: 0.011
+        units: "dimensionless"
+      - name: "difference sin(2 beta_eff)(phi K0) - sin(2 beta all charmonium)"
+        value: 0.03
+        uncertainty_note: "Difference of central values only; uncertainty is dominated by the 0.12 phi K0 average uncertainty."
+        units: "dimensionless"
+  hflav_inputs:
+    source: "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B033/hflav_triangle_summer2025_phiK0.txt"
+    inputs:
+      - experiment: "BaBar"
+        publication_year: 2012
+        n_bb_millions: 470
+        sin2beta_eff_value: 0.66
+        sin2beta_eff_stat_uncertainty: 0.17
+        sin2beta_eff_syst_uncertainty: 0.07
+        c_cp_value: 0.05
+        c_cp_stat_uncertainty: 0.18
+        c_cp_syst_uncertainty: 0.05
+        publication: "Phys. Rev. D 85 (2012) 112010"
+      - experiment: "Belle"
+        publication_year: 2010
+        n_bb_millions: 657
+        sin2beta_eff_value: 0.90
+        sin2beta_eff_upper_uncertainty: 0.09
+        sin2beta_eff_lower_uncertainty: 0.19
+        c_cp_value: -0.04
+        c_cp_stat_uncertainty: 0.20
+        c_cp_syst_uncertainty: 0.10
+        c_cp_model_uncertainty: 0.02
+        publication: "Phys. Rev. D 82 (2010) 073011"
+      - experiment: "Belle II"
+        publication_year: 2023
+        n_bb_millions: 387
+        sin2beta_eff_value: 0.54
+        sin2beta_eff_stat_uncertainty: 0.26
+        sin2beta_eff_upper_syst_uncertainty: 0.06
+        sin2beta_eff_lower_syst_uncertainty: 0.08
+        c_cp_value: -0.31
+        c_cp_stat_uncertainty: 0.20
+        c_cp_syst_uncertainty: 0.05
+        sc_statistical_correlation: 0.01
+        publication: "Phys. Rev. D 108 (2023) 072012"
+  belleii_2023_primary_input:
+    source: "Belle II Collaboration"
+    year: 2023
+    arxiv_id: "2307.02802"
+    doi: "10.1103/PhysRevD.108.072012"
+    source_url: "https://arxiv.org/abs/2307.02802"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B033/belleii_2023_phik0_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:46d751b86a3d999c9787c0fa0e7c2e8ed99413180c72bd2252d2d85113396639"
+    signal_events: 162
+    signal_events_uncertainty: 17
+    n_bb_millions: 387
+    n_bb_uncertainty_millions: 6
+    s_value: 0.54
+    s_stat_uncertainty: 0.26
+    s_upper_syst_uncertainty: 0.06
+    s_lower_syst_uncertainty: 0.08
+    a_value: 0.31
+    a_stat_uncertainty: 0.20
+    a_syst_uncertainty: 0.05
+  rs_flavor_baseline:
+    source: "Csaki, Falkowski, and Weiler"
+    year: 2008
+    arxiv_id: "0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B033/csaki_falkowski_weiler_2008_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:a53534cc37da7f71bf04f1be4fd81ed3029a44aead112f0e32233ee1490176ef"
+code_coverage:
+  status: "NO"
+  grep_commands:
+    - "rg -n \"phi.?K|phiK|B.?->.?phi|B.*phi|beta_eff|sin2.?beta|S_CP|C_CP\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b\\s*->\\s*s|q\\s*(q-bar|qbar|\\\\bar\\{q\\})\\s*s|penguin|charmless|time-dependent CP|B0.*phi|phi.*K\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|MODERN_PHENOMENOLOGY_SYSTEM_IDS|B_d neutral|B_s neutral\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Focused B033 greps found no direct implementation of B -> phi K, beta_eff, sin2beta_eff, b -> s sbar s penguin CP asymmetries, or time-dependent charmless B CP observables in the requested implementation/test directories."
+    - "Nearest adjacent code only: quarkConstraints/deltaf2.py:209 defines the Delta F=2 input registry."
+    - "Nearest adjacent code only: quarkConstraints/deltaf2.py:903 evaluates B_d mixing."
+    - "Nearest adjacent code only: quarkConstraints/deltaf2.py:922 evaluates B_s mixing."
+    - "Nearest adjacent code only: quarkConstraints/modern/phenomenology.py:23 lists epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems; it does not include Delta B=1 penguin decays."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "B033 needs a Delta B=1 nonleptonic b -> s sbar s operator and amplitude treatment. The existing Delta F=2 SLL/SLR/VLL/VRR/LR1/LR2 neutral-meson machinery does not compute B -> phi K decay amplitudes, strong phases, or time-dependent penguin CP likelihoods."
+open_issues:
+  - "WA/CA should decide whether to present B033 as a hard constraint or as contextual penguin-phase evidence, because a live bound is hadronic-framework dependent."
+  - "If promoted to code, the PI should choose a Delta B=1 operator basis and hadronic treatment before implementation."
