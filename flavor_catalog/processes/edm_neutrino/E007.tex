@@ -1,0 +1,116 @@
+% Flavor catalog per-process template.
+% process_id: E007
+% family: edm_neutrino
+% owner_agent_id: PKA-E007
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: E007.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{E007: Radium and xenon electric dipole moments}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(d_{\mathrm{Ra}}\) for
+\(^{225}\mathrm{Ra}\) and \(d_{\mathrm{Xe}}\) for
+\(^{129}\mathrm{Xe}\).  This entry covers atomic EDM searches in radium and
+xenon, cataloged in the \texttt{edm\_neutrino} family as complementary
+diamagnetic-atom and nuclear CP probes beyond the neutron and
+\(^{199}\mathrm{Hg}\) benchmark constraints.
+
+\subsection*{PDG / equivalent value(s)}
+No standalone PDG Live Ra/Xe atom-EDM datablock was located for this PKA
+deposit, so the direct experiment papers are used as PDG-equivalent sources.
+For \(^{225}\mathrm{Ra}\), the canonical Argonne direct limit is the Bishof
+et al. result
+\[
+  |d(^{225}\mathrm{Ra})| < 1.4\times10^{-23}\ e\,\mathrm{cm}
+  \qquad (95\%~\mathrm{C.L.}),
+\]
+from \texttt{flavor\_catalog/references/E007/bishof2016\_arxiv1606\_04931.txt}.
+The earlier proof-of-principle Ra measurement gave
+\(|d(^{225}\mathrm{Ra})|<5.0\times10^{-22}\ e\,\mathrm{cm}\) at
+\(95\%\) confidence and is kept as a superseded post-2008 milestone.
+
+For \(^{129}\mathrm{Xe}\), the strongest direct limit in the deposited
+sources is Sachdeva et al.,
+\[
+  d_A(^{129}\mathrm{Xe}) =
+  (1.4 \pm 6.6_{\rm stat} \pm 2.0_{\rm syst})\times10^{-28}\ e\,\mathrm{cm},
+  \qquad
+  |d_A(^{129}\mathrm{Xe})| < 1.4\times10^{-27}\ e\,\mathrm{cm}
+  \quad (95\%~\mathrm{C.L.}).
+\]
+An independent Heidelberg-centered \(^{129}\mathrm{Xe}\) measurement gives
+\((-4.7\pm6.4)\times10^{-28}\ e\,\mathrm{cm}\) and
+\(|d_{\mathrm{Xe}}|<1.5\times10^{-27}\ e\,\mathrm{cm}\) at
+\(95\%\) C.L.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Warped anarchic flavor models generically contain new CP phases.  Loop
+matching can generate quark EDMs, chromo-EDMs, the Weinberg three-gluon
+operator, and semileptonic CP-odd operators.  Diamagnetic atoms do not map
+directly onto one elementary dipole; their dominant hadronic response is
+usually expressed through nuclear Schiff moments and CP-odd hadronic
+interactions.  \(^{225}\mathrm{Ra}\) is especially useful because octupole
+deformation enhances Schiff-moment sensitivity, while \(^{129}\mathrm{Xe}\)
+offers a mature noble-gas co-magnetometer platform with different nuclear and
+atomic systematics.
+
+\subsection*{Post-2008 developments}
+Relative to the 2008 warped-flavor baseline of
+\texttt{CsakiFalkowskiWeiler:RSFlavor2008}, Ra and Xe EDMs moved from mostly
+future context into direct experimental inputs.  Argonne reported the first
+\(^{225}\mathrm{Ra}\) EDM measurement in 2015 and improved it in 2016 by a
+factor of \(36\).  The 2016 Ra paper also records planned sensitivity at the
+\(1\times10^{-28}\ e\,\mathrm{cm}\) statistical level with
+\(4\times10^{-29}\ e\,\mathrm{cm}\) systematic uncertainty.  The deposited
+Argonne program page states the physical motivation: \(^{225}\mathrm{Ra}\)
+has a \(15\) day half-life, spin \(1/2\), and expected sensitivity to
+T-odd, P-odd effects \(2\)--\(3\) orders of magnitude larger than
+\(^{199}\mathrm{Hg}\).
+
+For Xe, the 2019 comagnetometer measurements established \(10^{-27}\)
+\(e\,\mathrm{cm}\)-level direct limits.  The DFG Heidelberg upgrade proposal
+for 2021--2026 aims to improve the present \(1.5\times10^{-27}\ e\,\mathrm{cm}\)
+limit by more than \(2\) orders of magnitude.  KU Leuven's 2023--2027
+RaF/AcF molecular project is not a direct Ra-atom limit, but it is relevant
+future context because embedding octupole-enhanced Ra or Ac nuclei in dipolar
+molecules can enhance Schiff-moment sensitivity by several orders of
+magnitude.
+
+\subsection*{Constraint validity and model dependence}
+The direct atom-EDM limits are robust null searches for P- and T-violating
+energy shifts.  Their interpretation in an RS pipeline is highly
+model-dependent: one must choose a CP-odd low-energy operator basis, run and
+match through QCD thresholds, and adopt hadronic, nuclear, and atomic
+coefficients.  These entries should therefore be treated as EDM-adjacent
+loop/nuclear-translation probes, not as direct \(\Delta F=2\) quark-scan
+constraints.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Required greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no Ra, Xe, Schiff-moment, diamagnetic-atom, chromo-EDM,
+or Weinberg-operator implementation.  The only nearby dipole code is the
+off-diagonal \(\mu\to e\gamma\) helper at
+\texttt{flavorConstraints/muToEGamma.py:3},
+\texttt{flavorConstraints/muToEGamma.py:21}, and
+\texttt{flavorConstraints/muToEGamma.py:81}; that code is not an atomic or
+hadronic EDM calculation.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A live E007 constraint needs new CP-odd quark/gluon and
+semileptonic matching, RG evolution to hadronic scales, and separate
+nuclear/atomic response layers for Ra and Xe.  The existing
+SLL/SLR/VLL/VRR/LR \(\Delta F=2\) basis and the \(\mu\to e\gamma\) dipole
+helper do not cover this observable.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{Bishof:Ra225EDM2016}, \texttt{Parker:Ra225EDM2015},
+\texttt{Sachdeva:Xe129EDM2019}, \texttt{Allmendinger:Xe129EDM2019},
+\texttt{Argonne:Ra225EDMPage}, \texttt{DFG:Xe129Upgrade2026},
+\texttt{KULeuven:RaFMoleculeProject2023}, and
+\texttt{CsakiFalkowskiWeiler:RSFlavor2008}.

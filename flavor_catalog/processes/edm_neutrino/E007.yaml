@@ -1,0 +1,179 @@
+schema: flavor_catalog.process.v1
+process_id: E007
+family: edm_neutrino
+standard_notation: "d_Ra, d_Xe"
+process_name: "Radium-225 and xenon-129 electric dipole moments"
+owner: "PKA"
+owner_agent_id: "PKA-E007"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:23:46-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:23:46-04:00"
+    agent_id: "PKA-E007"
+    reason: "Initial PKA source extraction and draft started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T14:23:46-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T14:23:46-04:00"
+    agent_id: "PKA-E007"
+    reason: "PKA draft, minimal source snapshots, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:23:46-04:00"
+version: "0.1.0"
+source_shas:
+  bishof2016_arxiv1606_04931.txt: "sha256:a9042e38b7b39cebf7ceeb3e42126f2541557d4b6bfbe36c2847f7efe8d46d57"
+  parker2015_arxiv1504_07477.txt: "sha256:ff5adb5cdce9deb89ae97616f345881398a04fa0b83d26c15b3ae3036355b269"
+  sachdeva2019_arxiv1909_12800.txt: "sha256:abce59966ada768fec68b0e9bd9bc68eb89955b8f69bf258a19e41d79183f175"
+  allmendinger2019_arxiv1904_12295.txt: "sha256:94e4abc0ed9f32df163e52ae44b20d2a1cb6b4ec5bd27ce458bf01c3251cad28"
+  argonne_ra225_edm_page.txt: "sha256:25c46e30859af0b3e040aa247e5815c440c90fbd2f4768b54f2a20eb4669f83e"
+  dfg_heil_schmidt_129xe_upgrade.txt: "sha256:b4163f93306438aade52d99a36561430771cf0808ccea8fca73319a74ab1a608"
+  kuleuven_raf_acf_project.txt: "sha256:af8f9a8fa4f9c17a2031be0b4135fa638007d34a077e37846c7789355c6ffe3e"
+  cfw2008_arxiv0804_1954.txt: "sha256:2142e4b2c2a261917d12e7446f05bf9c89ae3528d587c1c9d54102b7f3c5b30c"
+pdg_or_equivalent:
+  ra225_current_direct_limit:
+    source: "Bishof et al., Phys. Rev. C 94, 025501 (2016); arXiv:1606.04931"
+    year: 2016
+    source_url: "https://arxiv.org/abs/1606.04931"
+    access_date: "2026-05-16"
+    observable: "Radium-225 atomic electric dipole moment"
+    value_summary: "|d(225Ra)| < 1.4 x 10^-23 e cm at 95% confidence upper limit; factor 36 improvement over the previous result."
+    value: 1.4e-23
+    units: "e cm"
+    limit_operator: "<"
+    confidence_level: "95%"
+    improvement_factor: 36
+    snapshot_path: "flavor_catalog/references/E007/bishof2016_arxiv1606_04931.txt"
+    sha256_of_local_snapshot: "sha256:a9042e38b7b39cebf7ceeb3e42126f2541557d4b6bfbe36c2847f7efe8d46d57"
+  ra225_first_measurement:
+    source: "Parker et al., Phys. Rev. Lett. 114, 233002 (2015); arXiv:1504.07477"
+    year: 2015
+    source_url: "https://arxiv.org/abs/1504.07477"
+    access_date: "2026-05-16"
+    observable: "First Radium-225 atomic electric dipole moment measurement"
+    value_summary: "|d(225Ra)| < 5.0 x 10^-22 e cm at 95% confidence."
+    value: 5.0e-22
+    units: "e cm"
+    limit_operator: "<"
+    confidence_level: "95%"
+    snapshot_path: "flavor_catalog/references/E007/parker2015_arxiv1504_07477.txt"
+    sha256_of_local_snapshot: "sha256:ff5adb5cdce9deb89ae97616f345881398a04fa0b83d26c15b3ae3036355b269"
+  xe129_best_direct_limit:
+    source: "Sachdeva et al., Phys. Rev. Lett. 123, 143003 (2019); arXiv:1909.12800"
+    year: 2019
+    source_url: "https://arxiv.org/abs/1909.12800"
+    access_date: "2026-05-16"
+    observable: "Xenon-129 atomic electric dipole moment"
+    value_summary: "d_A(129Xe) = (1.4 +/- 6.6_stat +/- 2.0_syst) x 10^-28 e cm; |d_A(129Xe)| < 1.4 x 10^-27 e cm at 95% CL; factor five more sensitive than 2001."
+    central_value: 1.4e-28
+    statistical_uncertainty: 6.6e-28
+    systematic_uncertainty: 2.0e-28
+    limit_value: 1.4e-27
+    units: "e cm"
+    limit_operator: "<"
+    confidence_level: "95%"
+    improvement_factor: 5
+    snapshot_path: "flavor_catalog/references/E007/sachdeva2019_arxiv1909_12800.txt"
+    sha256_of_local_snapshot: "sha256:abce59966ada768fec68b0e9bd9bc68eb89955b8f69bf258a19e41d79183f175"
+  xe129_independent_heidelberg_limit:
+    source: "Allmendinger et al., Phys. Rev. A 100, 022505 (2019); arXiv:1904.12295"
+    year: 2019
+    source_url: "https://arxiv.org/abs/1904.12295"
+    access_date: "2026-05-16"
+    observable: "Independent Xenon-129 atomic electric dipole moment measurement"
+    value_summary: "d_Xe = (-4.7 +/- 6.4) x 10^-28 e cm; |d_Xe| < 1.5 x 10^-27 e cm at 95% C.L."
+    central_value: -4.7e-28
+    total_uncertainty: 6.4e-28
+    limit_value: 1.5e-27
+    units: "e cm"
+    limit_operator: "<"
+    confidence_level: "95%"
+    snapshot_path: "flavor_catalog/references/E007/allmendinger2019_arxiv1904_12295.txt"
+    sha256_of_local_snapshot: "sha256:94e4abc0ed9f32df163e52ae44b20d2a1cb6b4ec5bd27ce458bf01c3251cad28"
+post_2008_context:
+  baseline:
+    key: "CsakiFalkowskiWeiler:RSFlavor2008"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    year: 2008
+    value_summary: "Warped/composite flavor baseline; arXiv abstract quotes generic KK-gluon mass bounds near 21 TeV and pseudo-Goldstone scenario bounds near 33 TeV."
+    snapshot_path: "flavor_catalog/references/E007/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:2142e4b2c2a261917d12e7446f05bf9c89ae3528d587c1c9d54102b7f3c5b30c"
+  argonne_ra225_program_context:
+    key: "Argonne:Ra225EDMPage"
+    source_url: "https://www.phy.anl.gov/mep/atta/research/radiumedm.html"
+    access_date: "2026-05-16"
+    value_summary: "Argonne page states 225Ra has t_1/2 = 15 d, spin 1/2, nuclear octupole deformation, and expected sensitivity to T-odd, P-odd effects 2-3 orders of magnitude larger than 199Hg."
+    half_life_days: 15
+    spin: "1/2"
+    expected_relative_sensitivity_vs_hg_orders: "2-3"
+    snapshot_path: "flavor_catalog/references/E007/argonne_ra225_edm_page.txt"
+    sha256_of_local_snapshot: "sha256:25c46e30859af0b3e040aa247e5815c440c90fbd2f4768b54f2a20eb4669f83e"
+  ra225_future_sensitivity_from_bishof:
+    key: "Bishof:Ra225EDM2016"
+    source_url: "https://arxiv.org/abs/1606.04931"
+    year: 2016
+    value_summary: "Bishof et al. project 1 x 10^-28 e cm statistical sensitivity and 4 x 10^-29 e cm systematic uncertainty after planned upgrades."
+    projected_statistical_sensitivity: 1.0e-28
+    projected_systematic_uncertainty: 4.0e-29
+    units: "e cm"
+    snapshot_path: "flavor_catalog/references/E007/bishof2016_arxiv1606_04931.txt"
+    sha256_of_local_snapshot: "sha256:a9042e38b7b39cebf7ceeb3e42126f2541557d4b6bfbe36c2847f7efe8d46d57"
+  heidelberg_xe_upgrade:
+    key: "DFG:Xe129Upgrade2026"
+    source_url: "https://gepris.dfg.de/gepris/projekt/455449148?language=en"
+    access_date: "2026-05-16"
+    year_range: "2021-2026"
+    value_summary: "DFG proposal states an upgrade aims to improve the present 1.5E-27 e cm 129Xe EDM limit by more than 2 orders of magnitude, using 3He/129Xe clock comparison with SQUID readout and a new magnetically shielded room."
+    starting_limit_value: 1.5e-27
+    units: "e cm"
+    target_improvement_orders: ">2"
+    snapshot_path: "flavor_catalog/references/E007/dfg_heil_schmidt_129xe_upgrade.txt"
+    sha256_of_local_snapshot: "sha256:b4163f93306438aade52d99a36561430771cf0808ccea8fca73319a74ab1a608"
+  kuleuven_raf_acf_molecule_context:
+    key: "KULeuven:RaFMoleculeProject2023"
+    source_url: "https://research.kuleuven.be/portal/en/project/3E230783"
+    access_date: "2026-05-16"
+    year_range: "2023-2027"
+    value_summary: "KU Leuven project page states that embedding neutron-rich Ra and Ac isotopes in dipolar molecules such as RaF and AcF can enhance Schiff-moment sensitivity by several orders of magnitude."
+    target_molecules:
+      - "RaF"
+      - "AcF"
+    sensitivity_enhancement: "several orders of magnitude"
+    snapshot_path: "flavor_catalog/references/E007/kuleuven_raf_acf_project.txt"
+    sha256_of_local_snapshot: "sha256:af8f9a8fa4f9c17a2031be0b4135fa638007d34a077e37846c7789355c6ffe3e"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"Ra|radium|225Ra|d_Ra|dRa|Xe|xenon|129Xe|d_Xe|dXe|Schiff|octupole|diamagnetic|atomic EDM|chromo[- ]?EDM|CEDM|Weinberg|CP[- ]odd|electric dipole|EDM|dipole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  findings:
+    - "Focused Ra/Xe/radium/xenon/Schiff/diamagnetic EDM grep over required implementation and test directories found no 225Ra or 129Xe EDM implementation."
+    - "Generic EDM/dipole grep found only the off-diagonal mu->e gamma dipole helper, not an atomic or hadronic EDM calculation."
+    - "flavorConstraints/muToEGamma.py:3 describes an off-diagonal LFV dipole constraint."
+    - "flavorConstraints/muToEGamma.py:21 cites the Perez-Randall mu->e gamma dipole operator."
+    - "flavorConstraints/muToEGamma.py:81 implements check_mu_to_e_gamma, not d_Ra or d_Xe."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "Requires new CP-odd quark/gluon and semileptonic operator matching, RG evolution through QCD thresholds, and separate nuclear/atomic response models for Ra and Xe Schiff-moment dominated observables. Existing Delta F=2 and mu->e gamma code paths do not provide this observable."
+open_issues:
+  - "CA should verify whether a current PDG Review text table includes standalone 225Ra or 129Xe atom-EDM rows; the PKA found experiment-paper values instead."
+  - "If promoted to live code, the PI must specify the CP-odd low-energy operator basis and acceptable nuclear/atomic Schiff-moment inputs for Ra and Xe."
+  - "Coordinate with E004, E006, E008, and E009 to avoid double-counting neutron, Hg, chromo-EDM, and Weinberg-operator translations as independent measurements."

@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Argonne Physics Division - Atom Trap Trace Analysis</title>
+  <link href="http://www.anl.gov/favicon.ico" rel="SHORTCUT ICON" />
+  <link href="/argonne.css" rel="stylesheet" type="text/css" />
+  <!--[if IE 6]>
+    <style type="text/css">
+      @import url(/ie6menubar.css);
+    </style>
+  <![endif]-->
+  <link href="/music.css" rel="stylesheet" type="text/css" />
+  <script src="/argonne.js" type="text/javascript"></script>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <style type="text/css">
+<!--
+.style1 {font-style: italic}
+.style2 {font-style: italic}
+.style3 {font-style: italic}
+-->
+  </style>
+</head>
+
+<body>
+
+<!-- stdheader.html, Ken Teh, Sep 2006
+
+Argonne web layout standard header
+
+-->
+
+<div class="logo">
+  <a href="https://www.anl.gov/"><img
+    src="/images/argonne_header_logo.jpg"
+    alt="[Argonne Logo]" align="left" border="0" /></a>
+  <a href="https://science.energy.gov/"><img
+  	src="/images/header_doe.gif"
+	alt="[DOE Logo]" hspace="20" vspace="25" border="0" align="right" /></a>
+  <div class="logoright">
+    <a href="/index.html">Physics Division</a>
+  </div>
+</div>
+
+<div class="menubar">
+  <ul id="menu">
+ 	<li><a href="https://www.anl.gov/phy">PHY Homepage</a></li>
+  	<li><a href="https://www.anl.gov/atlas">ATLAS Homepage</a></li>
+  	<li><a href="https://wiki.anl.gov/phy">PHY Wiki (Internal)</a></li>
+  </ul>
+</div>
+
+<div class="breadcrumbs">
+  <script type="text/javascript">
+    if (window.navigator.appName.indexOf("Microsoft") != -1) {
+      var themenu = document.getElementById("menu");
+      iedropdown(themenu);
+    }
+    breadcrumbs();
+  </script>
+</div>
+
+
+
+<div class="thinwide">
+
+<div class="thin"><div class="leftmenu">
+
+<h3><a href="/mep/atta/index.html">Atom Trapping</a></h3>
+
+<ul>
+    <li>Research Links</li>
+<ul>
+	    <li><a href="https://www.anl.gov/phy/tracer">TRACER Center</a></li>
+	    <li><a href="https://www.anl.gov/phy/atom-trapping">Atom Trapping</a></li>
+	    <li><a href="https://www.anl.gov/phy/physics-beyond-the-standard-model-0">BSM Physics</a></li>
+  </ul> 
+       	
+    <li><a href="/mep/atta/members.html">Members</a></li>
+  <li><a href="/mep/atta/publications/index.html">Publications</a></li>
+</ul>
+
+<ul>
+  <li><a href="/mcaw2014/index.html">MCAW2014</a><br />
+  </li>
+  <li><a href="/events/tangr2012/index.html">TANGR2012</a><br />
+  </li>
+</ul>
+
+<ul>  
+  <li><a href="https://wiki.inside.anl.gov/inside/Atom_Trappers">Atom Trapper Wiki</a></li>
+</ul>
+
+
+</div></div>
+
+<div class="wide"><div class="content">
+<h2>Electric Dipole Moment of <sup>225</sup>Ra<br />
+</h2>
+<h3>Time-reversal symmetry</h3>
+<p align="justify">Physical laws were at first 
+thought to be identical under CP-reversal, T-reversal, and CPT-reversal. Here 
+CP-reversal exchanges all the particles involved with their anti-particle 
+partners, T-reversal reverses the direction of time, and CPT-reversal is the 
+combination of CP-reversal and T-reversal. In 1964, however, CP-symmetry was 
+found to be slightly violated in the neutral kaon system by Christenson et al.<sup>1</sup> 
+Since then, the CP-symmetry has been the focus of intense research effort and 
+remains today one of the most fundamental issues in physics. Indeed the 
+violation of CP-symmetry is responsible for the fact that the Universe is 
+dominated by matter over anti-matter. Assuming CPT-symmetry holds -- and all 
+experiments so far support this assumption -- the violation of CP-symmetry then 
+implies the violation of T-symmetry. Recently, the KTeV collaboration at Fermi 
+Lab has studied the neutral kaon system with much improved sensitivity and 
+observed more direct evidence that suggests the violation of T-symmetry.<sup>2</sup> 
+
+Meanwhile, two on-going large experimental groups, the BaBar collaboration<sup>3</sup> 
+(~ 600 people) at SLAC and the Belle collaboration at KEK have recently observed 
+similar CP-violation effects in the neutral B-meson system. These observed 
+CP-violation effects are consistent with the Standard Model.<sup>4</sup></span></p>
+<table border="0" cellspacing="0" cellpadding="0" align="right" width="240" style="width: 2.5in" id="table1">
+  <tr>
+    <td width="10" rowspan="2" style="width:7.5pt;padding:7.5pt 7.5pt 7.5pt 7.5pt">&nbsp;</td>
+    <td style="padding:7.5pt 7.5pt 7.5pt 7.5pt"><p><img
+src="/mep/atta/images/EDM_Figure.jpg" alt="" width="300" height="269" border="0" v:shapes="_x0000_s1027" /></p></td>
+  </tr>
+  <tr>
+    <td style="padding:7.5pt 7.5pt 7.5pt 7.5pt"><div align="center"><span class="style3"><b> Figure 1.</b> Under T-reversal, the spin direction reverses while the 
+      EDM direction remains the same, thus a particle that possesses both an 
+      EDM and a spin is converted into a different kind of particle, and 
+      T-symmetry is violated.</span></div></td>
+  </tr>
+</table>
+<h3>Atomic electric-dipole moment</h3>
+<p align="justify">In parallel with the effort in 
+the high-energy physics field, there has been extensive effort in the search of 
+new types of CP-violation or T-violation effects in low-energy phenomena, where 
+the search of an atomic electric-dipole moment (EDM) has achieved the greatest 
+sensitivity. So far all searches have generated null results.<sup>5</sup> An 
+observation of a non-zero EDM would present direct evidence of T-violation (Fig. 
+1), and help understand the mechanism that causes such violations. The observed 
+CP-violation effects in both the kaon and B-meson systems are too small to 
+explain the observed matter-antimatter asymmetry in the Universe. This leads to 
+the hypothesis that there are sources of CP-violation besides those known in the 
+Standard Model. Extensions to the Standard Model such as Supersymmetry (SUSY), 
+Multi-Higgs models, and Left-Right (L-R) Symmetric models all predict a 
+relatively large EDM that would be accessible with the next generation of EDM-search 
+experiments.<sup>6</sup> Therefore, the EDM provides an outstanding opportunity 
+to search for new physics beyond the Standard Model.</p>
+
+<h3><sup>225</sup>Ra - an attractive case</h3>
+<p align="justify"><sup>225</sup>Ra is an 
+especially good case for the search of the EDM because it has a relatively long 
+lifetime (t<sub>1/2</sub> = 15 d), and has spin 1/2 which eliminates systematic 
+effects due to electric quadrupole coupling. Moreover, its nuclear octupole 
+deformation enhances the atomic EDM by increasing the Schiff moment collectively 
+and by the parity doubling of the energy levels.<sup>7,8</sup>&nbsp; For example, the 
+sensitivity to T-odd, P-odd effects in <sup>225</sup>Ra is expected to be 2-3 
+orders of magnitude larger than in <sup>199</sup>Hg, which has been used by 
+previous searches to set the lowest limit (&lt; 3 x 10<sup>-29</sup> e-cm)<sup>5</sup> 
+
+so far on the atomic EDM.</p>
+<h3>Laser trapping and cooling radium atoms</h3>
+<p align="justify">We have recently demonstrated 
+laser trapping and cooling of <sup>225</sup>Ra atoms<sup>9</sup> with the scheme 
+illustrated in Fig. 2. The laser trap allows us to collect <sup>225</sup>Ra 
+atoms that are otherwise too rare to be used for the search with the 
+conventional atomic-beam or vapor-cell type methods. Moreover, an EDM 
+measurement on atoms in a laser trap would benefit from the advantages of high 
+electric field, long coherence time, and a negligible so-called &quot;<b>v x E</b>&quot; 
+systematic effect.</p>
+
+<p align="center"> <img border=0 width=389 height=440 src="image002.gif" v:shapes="_x0000_s1026"></p>
+<p align="center"><span class="style2"><b>Figure 2.</b> Atomic  energy diagram of radium. The MOT uses 7s<sup>2</sup> <sup>1</sup>S<sub>0</sub> 
+- 7p <sup>3</sup>P<sub>1 </sub>as the primary trapping transition and 6d <sup>3</sup>D<sub>1</sub> 
+- 7p <sup>1</sup>P<sub>1</sub> as the repump transition. Room-temperature 
+blackbody radiation was found to serve as an important source to repump atoms at 
+7p <sup>3</sup>P<sub>0</sub> - 6d <sup>3</sup>D<sub>1</sub>.</font></span></p>
+
+<p align="justify">In the next phase of the 
+experiment (Fig. 3), the cold <sup>225</sup>Ra atoms will be transferred from 
+the MOT to an optical dipole trap, moved to a neighboring EDM-probing region, 
+and their spin-precession frequency will be measured. The change of the 
+precession frequency upon reversal of the electric field presents the signature 
+of an EDM.</p>
+
+<div align="center"><img border=0 width=576 height=432
+src="image004.gif" v:shapes="_x0000_s1025"></div>
+<p align="center">
+  <span class="style1"><b>Figure 3.</b> Schematic of the EDM  setup.</span></p>
+<p align="justify">&nbsp;</p>
+
+<h3>&nbsp;</h3>
+<h3><span style="color: windowtext">References</span></h3>
+<p>1.&nbsp;&nbsp; J. H. Christensen et al., PRL 13 (1964) 138.<br>
+2.&nbsp;&nbsp; A. Alavi-Harati et al. (KTeV Collaboration), 
+PRL 83 (1999) 22.<br>
+3.&nbsp;&nbsp; S. Prell for the BaBar Collaboration, hep-ex/0112013.<br>
+
+4.&nbsp;&nbsp; S. M. Barr, Int. J. Mod. Phys. A8 (1993) 209.<br>
+5.&nbsp;&nbsp; E. D. Commins et al., PRA50 (1994); P. G. Harris et al., 
+PRL 82 (1999). W.C. Griffith et al., PRL 102 (2009).<br>
+6.&nbsp;&nbsp; I. B. Khriplovich &amp; S. K. Lamoreaux, CP Violation without 
+Strangeness (Springer, 1997).<br>
+7.&nbsp;&nbsp; V. Spevak, N. Auerbach, and V. Flambaum, PRC 56 (1997) 1357.
+
+<span lang="IT">V. A. Dzuba et al., PRA 61 (2000) 062509</span><br>
+8.&nbsp;&nbsp; J. Engel et al., PRC 61, 
+035502 (2000); PRC 68, 
+025501 (2003); PRL 94, 
+232502 (2005)<br>
+9.&nbsp;&nbsp; J.R. Guest et al., PRL 98, 093001 (2007)<br />
+10. R.H. Parker et al., PRC 86, 065503 (2012)<br />
+  11. R.H. Parker et al., PRL 114, 233002 (2015)</p>
+</div>
+</div>
+
+
+<div class="clearthinwide">&nbsp;</div>
+</div>
+
+<!-- stdfooter.html, Ken Teh, Sep 2006
+-->
+<div class="footer">
+<!-- <hr size="1" /> -->
+  <a href="http://science.energy.gov/">U.S. Department of Energy Office of Science</a> | <a href="http://www.uchicagoargonnellc.org/">UChicago Argonne LLC<br />
+  </a><a href="http://www.anl.gov/notice.html">Privacy&amp;Security Notice</a> &nbsp;|&nbsp;
+  <a href="/contact_us.html">Contact Us</a> &nbsp;|&nbsp;
+  <a href="http://public-search.anl.gov">Search</a> </div>
+
+</body>
+</html>
