@@ -1,0 +1,157 @@
+schema: flavor_catalog.process.v1
+process_id: T017
+family: top_higgs_ew
+standard_notation: '\mathcal{B}(Z\to\mu^\pm\tau^\mp)'
+process_name: "Lepton-flavor-violating Z decay Z -> mu tau"
+owner: "PKA"
+owner_agent_id: "PKA-T017"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T14:27:26-04:00"
+    timestamp: "2026-05-16T14:27:26-04:00"
+    agent_id: "PKA-T017"
+    reason: "Initial PKA draft and source snapshot deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:27:26-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2025_z_lfv_listing.txt: "sha256:38a914a87c02df8e1e29bc6c744ca6923b9690fa9624cf0ee7feec58c9e154c5"
+  atlas2021_z_lfv_tau_arxiv_abs.txt: "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0"
+  cms2025_smp23003_arxiv_abs.txt: "sha256:0dee8d38e4f27ce15e49f5c91fb2f9cdc873aa0047d9c4f3404a800b5119b217"
+  calibbi_marcano_roy2021_arxiv_abs.txt: "sha256:d9a926db4f51080feef71e839f88aabff89b347dcfd156437b086c584add35a6"
+  csaki_falkowski_weiler2008_arxiv_abs.txt: "sha256:5c5c51789ec1d4c15414a7d81d23245cd7bd079812c792d4d1abf7c31b811cb2"
+  perez_randall2008_arxiv_abs.txt: "sha256:ee704b97ddbb31a451549afa1e129e93be1b77034f4e3f8b35ab66dcb2175485"
+pdg_or_equivalent:
+  year: 2025
+  source: "Particle Data Group 2025 Z-boson listing, with ATLAS and CMS direct-search snapshots"
+  source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T017/pdg2025_z_lfv_listing.txt"
+  sha256: "sha256:38a914a87c02df8e1e29bc6c744ca6923b9690fa9624cf0ee7feec58c9e154c5"
+  value_summary: "PDG 2025 lists the charge-summed 95% CL upper limit B(Z -> mu tau) < 6.5 x 10^-6. ATLAS 2021 gives the same combined limit; CMS 2025 gives observed (expected) 95% CL limits of 12.0 (5.3) x 10^-6."
+  values:
+    - value_id: "PDG2025:T017:zmutau_limit"
+      observable: "B(Z -> mu+- tau-+), charge-summed PDG listing"
+      year: 2025
+      value: "< 6.5e-6"
+      normalized_value: "< 6.5e-6"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+      snapshot_path: "flavor_catalog/references/T017/pdg2025_z_lfv_listing.txt"
+      access_date: "2026-05-16"
+      sha256: "sha256:38a914a87c02df8e1e29bc6c744ca6923b9690fa9624cf0ee7feec58c9e154c5"
+      note: "PDG footnote [c]: value is for the sum of the indicated charge states."
+    - value_id: "ATLAS2021:T017:zmutau_combined_limit"
+      observable: "B(Z -> mu tau), ATLAS combination with previous hadronic-tau analyses"
+      year: 2021
+      value: "< 6.5e-6"
+      normalized_value: "< 6.5e-6"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/2105.12491"
+      snapshot_path: "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt"
+      access_date: "2026-05-16"
+      sha256: "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0"
+    - value_id: "ATLAS2021:T017:zmutau_leptonic_tau_limit"
+      observable: "B(Z -> mu tau), ATLAS leptonically decaying tau analysis only"
+      year: 2021
+      value: "< 7.2e-6"
+      normalized_value: "< 7.2e-6"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/2105.12491"
+      snapshot_path: "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt"
+      access_date: "2026-05-16"
+      sha256: "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0"
+    - value_id: "ATLAS2021:T017:dataset"
+      observable: "ATLAS dataset for leptonically decaying tau Z LFV search"
+      year: 2021
+      value: "139 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/2105.12491"
+      snapshot_path: "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt"
+      access_date: "2026-05-16"
+      sha256: "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0"
+    - value_id: "CMS2025:T017:zmutau_limit"
+      observable: "B(Z -> mu tau), CMS direct search"
+      year: 2025
+      value: "< 12.0e-6"
+      normalized_value: "< 1.20e-5"
+      expected_value: "< 5.3e-6"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/2508.07512"
+      snapshot_path: "flavor_catalog/references/T017/cms2025_smp23003_arxiv_abs.txt"
+      access_date: "2026-05-16"
+      sha256: "sha256:0dee8d38e4f27ce15e49f5c91fb2f9cdc873aa0047d9c4f3404a800b5119b217"
+    - value_id: "CMS2025:T017:dataset"
+      observable: "CMS dataset for Z LFV direct search"
+      year: 2025
+      value: "138 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/2508.07512"
+      snapshot_path: "flavor_catalog/references/T017/cms2025_smp23003_arxiv_abs.txt"
+      access_date: "2026-05-16"
+      sha256: "sha256:0dee8d38e4f27ce15e49f5c91fb2f9cdc873aa0047d9c4f3404a800b5119b217"
+context_references:
+  - key: "CalibbiMarcanoRoy2021:T017:teraZ"
+    source_url: "https://arxiv.org/abs/2107.10273"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T017/calibbi_marcano_roy2021_arxiv_abs.txt"
+    sha256: "sha256:d9a926db4f51080feef71e839f88aabff89b347dcfd156437b086c584add35a6"
+    provenance: "Future-collider and SMEFT context; not a measured experimental observable."
+    reference_values:
+      - observable: "Planned Tera-Z sample scale"
+        value: "O(10^12) produced Z decays"
+paper_era_references:
+  - key: "CsakiFalkowskiWeiler2008WarpedFlavor"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T017/csaki_falkowski_weiler2008_arxiv_abs.txt"
+    sha256: "sha256:5c5c51789ec1d4c15414a7d81d23245cd7bd079812c792d4d1abf7c31b811cb2"
+    provenance: "Paper-era warped-flavor baseline requested for post-2008 comparison."
+    reference_values:
+      - observable: "Generic RS KK-gluon lower scale from abstract"
+        value: "about 21 TeV"
+      - observable: "Composite-Higgs variant KK-gluon lower scale from abstract"
+        value: "about 33 TeV"
+  - key: "PerezRandall2008WarpedLeptonFlavor"
+    source_url: "https://arxiv.org/abs/0805.4652"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T017/perez_randall2008_arxiv_abs.txt"
+    sha256: "sha256:ee704b97ddbb31a451549afa1e129e93be1b77034f4e3f8b35ab66dcb2175485"
+    provenance: "Paper-era lepton-sector warped-flavor model context, not a measured observable."
+    reference_values:
+      - observable: "Lepton-sector model cutoff and KK scale from abstract"
+        value: "cutoff 10 TeV and 3 TeV Kaluza-Klein masses"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Targeted grep for Z -> mu tau / Z -> tau mu / Zmutau / ZMuTau / LFV Z strings across required code directories returned no hits."
+    - "The only charged-lepton LFV implementation found is mu -> e gamma: flavorConstraints/muToEGamma.py:75."
+    - "The scan calls the mu -> e gamma LFV filter at scanParams/scan.py:524."
+    - "The modern phenomenology policy surface is limited to epsilon_K, K, B_d, B_s, and D0: quarkConstraints/modern/phenomenology.py:23."
+  grep_commands:
+    - 'rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "Z.?->.?mu.?tau|Z.?->.?tau.?mu|Z.?to.?mu.?tau|Z.?to.?tau.?mu|Zmutau|ZMuTau|mu.?tau.*Z|tau.?mu.*Z|lepton.?flavou?r.*Z|LFV.*Z" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "The repo lacks LFV Z operators and lepton-sector electroweak matching; production use would need a new Z_mu_tau coupling convention, left/right operator mapping, RS gauge/mass mixing inputs, and a combination policy with tau LFV and Higgs LFV constraints."
+open_issues:
+  - "CA should verify whether the next PDG listing keeps the ATLAS 6.5e-6 observed limit or incorporates CMS 2025 only as a weaker cross-check."
+  - "A live scan implementation needs a convention for left- and right-handed off-diagonal Z_mu_tau couplings and their correlation with tau LFV observables."
