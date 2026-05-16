@@ -16,9 +16,18 @@ status_history:
     timestamp: "2026-05-16T14:04:43-04:00"
     agent_id: "PKA-T019"
     reason: "Initial PKA draft and source snapshot deposit."
+  - from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T14:21:56-04:00"
+    timestamp: "2026-05-16T14:21:56-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    batch_id: "wa_w5a_top_higgs_ew"
+    reason: "Writer polish for wa_w5a_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:04:43-04:00"
+last_updated_at: "2026-05-16T14:21:56-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_higgs_lfv_review.txt: "sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e"

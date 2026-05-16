@@ -18,11 +18,14 @@ production, \(c g\to t\), then translated into an equivalent top-decay
 branching fraction under a specified chromomagnetic-operator convention.
 
 \subsection*{PDG / equivalent value(s)}
-The canonical experimental source is the PDG/pdgLive Q007TUG top-FCNC gluon
-datablock, accessed on 2026-05-16
-(\texttt{references/T005/pdg\_2025\_top\_tug\_tcg.txt}).  Its current ATLAS
-entry, AAD 2022T, uses \(139~\mathrm{fb}^{-1}\) of \(13~\mathrm{TeV}\) \(pp\)
-data.  For the charm-gluon production mode it gives
+The source-of-truth values are in the \texttt{pdg\_or\_equivalent} block of
+\texttt{T005.yaml}.  The canonical experimental source is the PDG/pdgLive
+Q007TUG top-FCNC gluon datablock, accessed on 2026-05-16
+(\texttt{PDG2025TopFCNCTUG};
+\texttt{references/T005/pdg\_2025\_top\_tug\_tcg.txt}).  Its ATLAS Run-2
+entry, AAD 2022T, uses \(139~\mathrm{fb}^{-1}\) of \(13~\mathrm{TeV}\)
+\(pp\) data (\texttt{ATLAS2022TopFCNCTUG}).  For the charm-gluon production
+mode the PDG block gives
 \[
   \sigma(cg\to t)\,{\cal B}(t\to bW)\,{\cal B}(W\to \ell\nu)<4.7~\mathrm{pb}
 \]
@@ -32,12 +35,15 @@ at 95\% CL, interpreted in the EFT basis as
   \qquad
   {\cal B}(t\to c g)<3.7\times10^{-4}.
 \]
+(\texttt{PDG2025TopFCNCTUG}; \texttt{ATLAS2022TopFCNCTUG}).
 The same PDG block records the CMS 7 and 8 TeV comparison result based on
 \(5.0~\mathrm{fb}^{-1}\) and \(19.7~\mathrm{fb}^{-1}\):
 \(|\kappa_{tcg}|/\Lambda<1.8\times10^{-2}~\mathrm{TeV}^{-1}\), corresponding to
-\({\cal B}(t\to c g)<4.1\times10^{-4}\).  For SM context, not as a measured
-PDG value, Aguilar-Saavedra gives
-\({\cal B}(t\to c g)=4.6\times10^{-12}\) as the central SM benchmark.
+\({\cal B}(t\to c g)<4.1\times10^{-4}\)
+(\texttt{CMS2017TopFCNCTUG}).  For SM context, not as a measured PDG value,
+Aguilar-Saavedra gives
+\({\cal B}(t\to c g)=4.6\times10^{-12}\) as the central SM benchmark
+(\texttt{AguilarSaavedra2004TopFCNC}).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 This channel probes color-carrying top-charm flavor violation rather than the
@@ -52,13 +58,16 @@ channels such as \(t\to cZ\) or \(t\to cH\).
 The 2008 CFW reference point emphasized KK-gluon exchange and generic
 anarchic-flavor bounds near \(21~\mathrm{TeV}\) for ordinary RS and
 \(33~\mathrm{TeV}\) in the composite pseudo-Goldstone Higgs setup, but it did
-not provide a direct \(t\to c g\) catalog limit.  Since then the important
+not provide a direct \(t\to c g\) catalog limit
+(\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}).  Since then the important
 change is experimental: LHC searches now constrain the top-gluon FCNC operator
-directly.  CMS used 7 and 8 TeV t-channel single-top data, while ATLAS later
-used the full Run-2 \(139~\mathrm{fb}^{-1}\) dataset at 13 TeV with a neural
-network separation of \(ug\to t\), \(cg\to t\), and backgrounds.  The resulting
-limits remain many orders of magnitude above the SM prediction, so they are
-new-physics limits rather than SM precision tests.
+directly.  CMS used 7 and 8 TeV t-channel single-top data
+(\texttt{CMS2017TopFCNCTUG}), while ATLAS later used the full Run-2
+\(139~\mathrm{fb}^{-1}\) dataset at 13 TeV with a neural-network separation of
+\(ug\to t\), \(cg\to t\), and backgrounds
+(\texttt{ATLAS2022TopFCNCTUG}).  The resulting limits remain many orders of
+magnitude above the SM prediction, so they are new-physics limits rather than
+SM precision tests.
 
 \subsection*{Constraint validity and model dependence}
 The experimental upper bound is clean in the sense that the SM rate is
