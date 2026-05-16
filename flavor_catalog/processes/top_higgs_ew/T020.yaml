@@ -16,9 +16,18 @@ status_history:
     timestamp: "2026-05-16T15:31:57-04:00"
     agent_id: "PKA-T020"
     reason: "Initial PKA draft and source snapshot deposit."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T15:53:39-04:00"
+    agent: "WA"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T15:53:39-04:00"
+    agent_id: "WA"
+    batch_id: "wa_w6_charged_lepton_top"
+    reason: "Writer polish completed for mixed charged-lepton/top-Higgs batch; numerical claims checked against YAML source keys."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:31:57-04:00"
+last_updated_at: "2026-05-16T15:53:39-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_higgs_lfv_review.txt: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"

@@ -12,27 +12,27 @@
 This entry catalogs the lepton-flavor-violating Higgs decay \(h\to e\mu\)
 in the top/Higgs/electroweak family.  It covers direct ATLAS and CMS searches
 for a \(125~\mathrm{GeV}\) Higgs boson decaying to an opposite-sign
-electron--muon pair.
+electron--muon pair (\texttt{PDG2025HiggsLFVReview}).
 
-\subsection*{PDG / equivalent value(s)}
-The source-of-truth values are in the \texttt{pdg\_or\_equivalent} block of
-\texttt{T020.yaml}.  The PDG 2025 Higgs review summarizes the full
-\(\sqrt{s}=13~\mathrm{TeV}\) Run-2 direct limits on LFV Higgs decays
-(\texttt{PDG2025HiggsLFVReview}).  For \(h\to e\mu\), PDG quotes
+\subsection*{PDG-or-equivalent value(s)}
+The source-of-truth values are in \texttt{T020.yaml:pdg\_or\_equivalent}.  The
+PDG 2025 Higgs review summarizes the full \(\sqrt{s}=13~\mathrm{TeV}\) Run-2
+direct limits on LFV Higgs decays (\texttt{PDG2025HiggsLFVReview}).  For
+\(h\to e\mu\), PDG quotes
 \[
   \mathcal{B}(h\to e\mu) < 4.4\times 10^{-5}
   \quad (4.7\times 10^{-5}\ \mathrm{expected})
 \]
-from CMS at 95\% CL using \(138~\mathrm{fb}^{-1}\)
+from CMS at \(95\%\) CL using \(138~\mathrm{fb}^{-1}\)
 (\texttt{CMS2023HiggsLFVEMu}; \texttt{PDG2025:T020:cms\_run2}).  PDG also
 quotes the ATLAS limit
 \[
   \mathcal{B}(h\to e\mu) < 6.2\times 10^{-5}
   \quad (5.9\times 10^{-5}\ \mathrm{expected})
 \]
-at 95\% CL (\texttt{PDG2025:T020:atlas\_run2}).  The primary ATLAS abstract
-reports the same search as \(6.1\times 10^{-5}\) observed and
-\(5.8\times 10^{-5}\) expected with \(139~\mathrm{fb}^{-1}\)
+at \(95\%\) CL (\texttt{PDG2025:T020:atlas\_run2}).  The primary ATLAS abstract
+reports the same search as \(6.1\times10^{-5}\) observed and
+\(5.8\times10^{-5}\) expected with \(139~\mathrm{fb}^{-1}\)
 (\texttt{ATLAS2020HiggsEMu}); the PDG rounding is kept as the catalog
 headline.  The CMS number is the strongest direct single-experiment limit.
 
@@ -49,15 +49,16 @@ lepton-sector extension.
 The requested arXiv:0804.1954 baseline predates the LHC Higgs LFV program
 (\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}).  Harnik, Kopp, and Zupan
 then framed flavor-violating Higgs decays as direct discovery channels and
-showed that lepton-flavor-violating Higgs branching fractions could be sizable
-in generic EFT settings (\texttt{HarnikKoppZupan2012FlavorViolatingHiggs}).
-ATLAS produced the first full Run-2 \(h\to e\mu\) limit with
+showed that LFV Higgs branching fractions can be sizable in generic EFT
+settings (\texttt{HarnikKoppZupan2012FlavorViolatingHiggs}).  ATLAS produced a
+full Run-2 \(h\to e\mu\) limit with
 \(139~\mathrm{fb}^{-1}\) (\texttt{ATLAS2020HiggsEMu}).  CMS later used
 \(138~\mathrm{fb}^{-1}\), improved the direct Higgs limit to
 \(4.4\times10^{-5}\), and extended the same \(e\mu\) mass scan to
-\(110\)--\(160~\mathrm{GeV}\), where a \(146~\mathrm{GeV}\) excess with
-local/global significance \(3.8/2.8\sigma\) was reported but not interpreted
-as evidence (\texttt{CMS2023HiggsLFVEMu}).
+\(110\)--\(160~\mathrm{GeV}\).  The largest excess was near
+\(146~\mathrm{GeV}\), with local/global significance \(3.8/2.8\sigma\);
+CMS did not interpret it as evidence (\texttt{CMS2023HiggsLFVEMu};
+\texttt{CMS2023:T020:mass\_scan}).
 
 \subsection*{Constraint validity and model dependence}
 Experimentally this is a clean direct upper limit on a Standard-Model-forbidden
@@ -80,12 +81,14 @@ The existing lepton LFV backend is specifically \(\mu\to e\gamma\)
 at \texttt{scanParams/scan.py:523}--\texttt{scanParams/scan.py:524}.  The
 charged-lepton Yukawa helper is diagonal
 (\texttt{yukawa/charged\_lepton.py:1}; \texttt{yukawa/charged\_lepton.py:36}).
+See \texttt{T020.yaml:code\_coverage}.
 
 \subsection*{Implementation difficulty}
 Production integration is \textbf{HIGH}.  The direct limit is easy to catalog,
 but a scan constraint needs a new charged-lepton Higgs-Yukawa misalignment
 calculation, a convention for \(Y_{e\mu}\) and \(Y_{\mu e}\), and a Higgs-rate
-or total-width interpretation before accepting or rejecting points.
+or total-width interpretation before accepting or rejecting points
+(\texttt{T020.yaml:implementation\_difficulty\_rationale}).
 
 \subsection*{Key references}
 \texttt{PDG2025HiggsLFVReview}; \texttt{CMS2023HiggsLFVEMu};

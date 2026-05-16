@@ -14,22 +14,25 @@
 \textbf{Standard notation:} \(\nu_\mu N\to\nu_\mu N\mu^+\mu^-\).
 This charged-lepton-sector entry covers muon-neutrino trident production on a
 nuclear target.  It is flavor-sensitive but not charged-lepton-flavor
-violation: the useful handle is the muon-neutrino/muon current, usually phrased
-as a contact interaction or a gauged \(L_\mu-L_\tau\) mediator.
+violation: the relevant handle is the muon-neutrino/muon current, usually
+phrased as a contact interaction or a gauged \(L_\mu-L_\tau\) mediator.
 
-\subsection*{PDG / equivalent value(s)}
-There is no HFLAV-style average.  The current measured inputs are the historical
-experiment ratios to the Standard Model prediction recorded in
+\subsection*{PDG-or-equivalent value(s)}
+There is no PDG or HFLAV-style average.  The catalog input is the set of
+historical measured ratios to the Standard Model prediction recorded in
 \texttt{L023.yaml:pdg\_or\_equivalent.measured\_observables}:
 \[
   \sigma_{\rm CHARM-II}/\sigma_{\rm SM}=1.58\pm0.64,\qquad
   \sigma_{\rm CCFR}/\sigma_{\rm SM}=0.82\pm0.28,\qquad
   \sigma_{\rm NuTeV}/\sigma_{\rm SM}=0.72^{+1.73}_{-0.72}.
 \]
-The CCFR value is the strongest practical bound; the local CCFR snapshot also
-records the primary event-count basis, \(37.0\pm12.4\) corrected trident events
-against \(45.3\pm2.3\) Standard Model events.  CHARM-II is the CERN-SPS
-observation input, and NuTeV remains a preliminary/weak observation input.
+These values trace to the DUNE trident compilation
+(\texttt{Altmannshofer2019DUNETridents}); the CCFR input is also anchored by
+the primary snapshot \texttt{CCFR1991TridentsWZ}, which records
+\(37.0\pm12.4\) corrected trident events against \(45.3\pm2.3\) Standard
+Model events.  The CCFR ratio is the strongest practical historical bound;
+CHARM-II is the CERN-SPS observation input, and NuTeV is a weak preliminary
+input.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 Trident production constrains second-generation lepton currents rather than the
@@ -40,18 +43,20 @@ and axial analogues.  The constraint is therefore a distinct muon contact/gauge
 constraint, complementary to dipole LFV such as \(\mu\to e\gamma\).
 
 \subsection*{Post-2008 developments}
-Relative to the arXiv:0804.1954-era RS flavor baseline, the important updates
-are reinterpretations and future-experiment studies.  Altmannshofer--Gori--
-Pospelov--Yavin (2014) made the CCFR measurement a standard \(L_\mu-L_\tau\)
-constraint, including the \(0.82\pm0.28\) ratio and the familiar 95\% CL
-exclusion contours.  Belle-II studies then connected the same gauge-current
-parameter space to \(e^+e^-\to\gamma+\) missing energy at
-\(\sqrt{s}=10.58\) GeV and an intended \(50\,{\rm ab}^{-1}\) data set, but this
-is auxiliary collider reach rather than a trident measurement.  The DUNE study
-quotes the historical CHARM-II/CCFR/NuTeV ratios and projects a DUNE near
-detector trident measurement: its abstract gives about 25\% accuracy after
-roughly three years in each beam mode, while the body uses a 40\% baseline and
-a 25\% improved contour.
+Relative to the arXiv:0804.1954-era RS flavor baseline
+(\texttt{CsakiFalkowskiWeiler2008Flavor}), the important updates are
+reinterpretations and future-experiment studies.  Altmannshofer--Gori--
+Pospelov--Yavin made the CCFR measurement a standard \(L_\mu-L_\tau\)
+constraint, using \(0.82\pm0.28\) and presenting \(95\%\) CL exclusion contours
+(\texttt{Altmannshofer2014TridentProbe}).  Belle-II studies connected the same
+gauge-current parameter space to \(e^+e^-\to\gamma+\) missing energy at
+\(\sqrt{s}=10.58~\mathrm{GeV}\) with a \(50~\mathrm{ab}^{-1}\) luminosity goal,
+which is auxiliary collider reach rather than a trident measurement
+(\texttt{KanetaShimomura2017BelleIITrident}).  The DUNE study repeats the
+historical CHARM-II/CCFR/NuTeV ratios and projects a near-detector trident
+measurement: its abstract gives about \(25\%\) accuracy after roughly three
+years in each beam mode, while the body uses a \(40\%\) baseline and a
+\(25\%\) improved contour (\texttt{Altmannshofer2019DUNETridents}).
 
 \subsection*{Constraint validity and model dependence}
 The experimental observable is cleanly electroweak, but the bound is not a
@@ -67,19 +72,20 @@ cannot be borrowed from the meson-mixing or dipole backends.
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/} found no trident, CCFR, NuTeV, CHARM-II, DUNE, or
 \(L_\mu-L_\tau\) implementation.  The only ``CHARM'' hits are QCD charm-mass
-threshold constants, not this process.
+threshold constants, not this process (\texttt{L023.yaml:code\_coverage}).
 
 \subsection*{Implementation difficulty}
 \textbf{HIGH.}  A production constraint would need a new lepton-current
 operator convention, mediator matching, nuclear/target treatment, neutrino-flux
 integration, and an experiment-specific rate or likelihood.  This is a new mode
 calculation, not a parameter update to the existing \(\Delta F=2\) or
-\(\mu\to e\gamma\) paths.
+\(\mu\to e\gamma\) paths
+(\texttt{L023.yaml:implementation\_difficulty\_reason}).
 
 \subsection*{Key references}
 Process-local source keys before bibliography consolidation:
-\texttt{CCFR1991TridentsWZ}, \texttt{CHARMII1990FirstObservation},
-\texttt{NuTeV1998Trident}, \texttt{Altmannshofer2014TridentProbe},
-\texttt{Altmannshofer2019DUNETridents},
-\texttt{KanetaShimomura2017BelleIITrident}, and
+\texttt{CCFR1991TridentsWZ}; \texttt{CHARMII1990FirstObservation};
+\texttt{NuTeV1998Trident}; \texttt{Altmannshofer2014TridentProbe};
+\texttt{Altmannshofer2019DUNETridents};
+\texttt{KanetaShimomura2017BelleIITrident};
 \texttt{CsakiFalkowskiWeiler2008Flavor}.
