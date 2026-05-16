@@ -8,22 +8,21 @@
 \section{\texorpdfstring{\(t\to Hc\)}{t -> H c} FCNC Top-Higgs Decay}
 
 \subsection*{Process}
-The observable is the flavor-changing neutral-current branching fraction
-\(\mathcal{B}(t\to Hc)\), catalog id T007 in the top/Higgs/electroweak
-family.  It covers direct LHC searches for anomalous top--charm--Higgs
-interactions in both \(t\bar t\) events with an FCNC top decay and associated
-single-top plus Higgs production.
+\textbf{Standard notation:} \(\mathcal{B}(t\to Hc)\).
+This entry catalogs the flavor-changing neutral-current top-Higgs decay
+\(t\to Hc\) in the top/Higgs/electroweak family.  It covers direct LHC
+searches for anomalous top--charm--Higgs interactions in both \(t\bar t\)
+events with an FCNC top decay and associated single-top plus Higgs production.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG-or-equivalent value}
 The source-of-truth numerical entries are the \texttt{pdg\_or\_equivalent}
 block in \texttt{T007.yaml}.  The PDG 2026 \texttt{pdgLive} top-quark
-datablock quotes
+datablock quotes the ATLAS-combination headline
 \[
   \mathcal{B}(t\to Hc) < 3.4\times 10^{-4}
 \]
-at 95\% CL as the headline limit (\texttt{PDG2026:T007:tHc\_combined}), based
-on the ATLAS 2024 combined Higgs-decay search.  The local PDG
-snapshot is
+at 95\% CL (\texttt{PDG2026:T007:tHc\_combined}), based on the ATLAS 2024
+combined Higgs-decay search.  The local PDG snapshot is
 \texttt{flavor\_catalog/references/T007/pdg2026\_top\_hc\_datablock.txt}.
 The ATLAS primary arXiv record gives \(140~\mathrm{fb}^{-1}\) at
 \(\sqrt{s}=13~\mathrm{TeV}\) (\texttt{ATLAS2024:T007:dataset}), a
@@ -58,16 +57,17 @@ now combines \(H\to WW\), \(H\to ZZ\), \(H\to\tau\tau\),
 combination with \(H\to\gamma\gamma\) and \(H\to b\bar b\) inputs in addition
 to the same-sign lepton analysis (\texttt{CMS2025:T007:tHc\_combined}).  The
 classic top-FCNC review arXiv:hep-ph/0409342 remains useful context for why SM
-top FCNC Higgs amplitudes are negligible while BSM scalar flavor can be visible.
+top FCNC Higgs amplitudes are negligible while BSM scalar flavor can be visible
+(\texttt{AguilarSaavedra2004TopFCNC}).
 
 \subsection*{Constraint validity and model dependence}
-The experimental statement is a robust 95\% CL upper limit on an assumed
-single anomalous top-Higgs flavor coupling.  The model interpretation is
+The experimental statement is a 95\% CL upper limit on an assumed single
+anomalous top-Higgs flavor coupling.  The model interpretation is
 operator-convention dependent: an RS implementation must choose whether the
 scan outputs scalar \(Htc\), \(Hct\), or SMEFT Wilson coefficients, and whether
 associated \(tH\) production is included together with \(t\bar t\) FCNC decays.
-Correlations with \(t\to Hu\) are also analysis-dependent, so this draft keeps
-only the charm-channel bound as the T007 catalog value.
+Correlations with \(t\to Hu\) are analysis-dependent, so this entry keeps only
+the charm-channel bound as the T007 catalog value.
 
 \subsection*{Code coverage in this repo}
 Coverage is \textbf{NO}.  The PKA reran the required plan greps and a
