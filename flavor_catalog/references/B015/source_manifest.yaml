@@ -1,0 +1,64 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B015
+sources:
+  - key: HFLAV2024Dec:BtoXsll
+    arxiv_id: null
+    DOI: null
+    title: "B -> X_s ell+ ell- HFLAV rare-decay average"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2024
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/html/radll/Badmix/BR_Badmix_Xs_l+_l-.html"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:94a3f65a624045d8e83f48bf2f4f1f0384f5488eb33752416243a9807aeeaa00"
+    snapshot_path: "flavor_catalog/references/B015/hflav_dec2024_B_to_Xsll.txt"
+  - key: BaBar2014:BtoXsll
+    arxiv_id: "1312.5364"
+    DOI: "10.1103/PhysRevLett.112.211802"
+    title: "Measurement of the B->Xsl+l- branching fraction and search for direct CP violation from a sum of exclusive final states"
+    authors: "BABAR Collaboration, J. P. Lees et al."
+    year: 2014
+    url: "https://arxiv.org/abs/1312.5364"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:fcaba867afcd945d15f231279f3463665cfb09e619906bd1d454544869d6daa2"
+    snapshot_path: "flavor_catalog/references/B015/babar_1312_5364_arxiv.txt"
+  - key: Belle2005:BtoXsll
+    arxiv_id: "hep-ex/0503044"
+    DOI: "10.1103/PhysRevD.72.092005"
+    title: "Improved Measurement of the Electroweak Penguin Process B->Xsll"
+    authors: "Belle Collaboration, M. Iwasaki et al."
+    year: 2005
+    url: "https://arxiv.org/abs/hep-ex/0503044"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:1f51dd799054c6b51ff7485346a900a4fddb426f8a30d2f72dd8a0a9be632eb2"
+    snapshot_path: "flavor_catalog/references/B015/belle_hepex_0503044_arxiv.txt"
+  - key: HuberHurthLunghi2015:BtoXsll
+    arxiv_id: "1503.04849"
+    DOI: null
+    title: "Inclusive B -> X_s l^+ l^-: Complete angular analysis and a thorough study of collinear photons"
+    authors: "Tobias Huber, Tobias Hurth, Enrico Lunghi"
+    year: 2015
+    url: "https://arxiv.org/abs/1503.04849"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:735177a8007fb4fd8bcbeb55de106423c53e1bf68154f4a132b79ea6a041d5b1"
+    snapshot_path: "flavor_catalog/references/B015/huber_hurth_lunghi_1503_04849_arxiv.txt"
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:3083cfa5f4d74bd36b120690ad7386f73e5114e934afffd9d62035620f5b2c0e"
+    snapshot_path: "flavor_catalog/references/B015/cfw_0804_1954_arxiv.txt"
+  - key: PromptIdCheck:B015
+    arxiv_id: null
+    DOI: null
+    title: "Rejected arXiv identifier check for B015 prompt"
+    authors: "PKA-B015"
+    year: 2026
+    url: null
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:6ad6093d3ee9ee1b9a806a83db28d6c192ada6c91e6c97db1b5c9d1c32dc590b"
+    snapshot_path: "flavor_catalog/references/B015/miscited_prompt_arxiv_ids.txt"
+    disposition: "rejected; prompt arXiv IDs did not match inclusive B -> X_s ell+ ell- measurements"

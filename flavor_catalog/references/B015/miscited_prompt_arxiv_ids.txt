@@ -1,0 +1,22 @@
+Source key: PromptIdCheck:B015
+Access date: 2026-05-16
+Purpose: rejected-source note for arXiv identifiers named in the B015 prompt.
+
+The prompt listed arXiv:1311.7283 and arXiv:1503.04114 as BaBar/Belle
+inclusive B -> X_s l+ l- measurement anchors. These identifiers were checked
+and are not the inclusive B -> X_s l+ l- measurements.
+
+arXiv:1311.7283:
+  Title: Topology of the view complex
+  Subject area: Computer Science / Distributed, Parallel, and Cluster Computing
+  Decision: rejected as unrelated to B015.
+
+arXiv:1503.04114:
+  Title: Search for resonant pair production of Higgs bosons decaying to two
+  bottom quark-antiquark pairs in proton-proton collisions at 8 TeV
+  Collaboration: CMS
+  Decision: rejected as unrelated to B015.
+
+Correct primary arXiv records used instead:
+  BaBar inclusive B -> X_s l+ l-: arXiv:1312.5364
+  Belle inclusive B -> X_s l+ l-: arXiv:hep-ex/0503044
