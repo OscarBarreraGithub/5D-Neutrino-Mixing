@@ -6,7 +6,7 @@ process_name: "B_s -> phi phi b->s sbar s penguin"
 owner: "PKA"
 owner_agent_id: "PKA-B034"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -31,9 +31,17 @@ status_history:
     at: "2026-05-16T14:24:00-04:00"
     agent_id: "WA"
     reason: "writer polish for batch wa_w5a_beauty"
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T14:45:00-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T14:45:00-04:00"
+    agent_id: "CA"
+    reason: "checker batch ca_w5a_beauty passed CHK-1..CHK-8"
+checker_passed_at: "2026-05-16T14:45:00-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:24:00-04:00"
+last_updated_at: "2026-05-16T14:45:00-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:120dec32d04361d274e5d249d34f50ab32347701fefed20adbaae1d62ddad03c"

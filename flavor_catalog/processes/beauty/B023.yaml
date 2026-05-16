@@ -24,9 +24,19 @@ status_history:
     at: "2026-05-16T14:24:00-04:00"
     agent_id: "WA"
     reason: "writer polish for batch wa_w5a_beauty"
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T14:45:00-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T14:45:00-04:00"
+    agent_id: "CA"
+    reason: "checker batch ca_w5a_beauty found traceability issue"
+    issues:
+      - "CHK-1: TeX quotes Belle 2017 combined B -> K* nu nubar <2.7e-5 and Buras 2015 SM BR(B0 -> K*0 nu nubar) = (9.2 +/-1.0)e-6, but those values are outside pdg_or_equivalent."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:24:00-04:00"
+last_updated_at: "2026-05-16T14:45:00-04:00"
 version: "0.1.0"
 source_shas:
   babar2013_arxiv1303_7465.txt: "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b"

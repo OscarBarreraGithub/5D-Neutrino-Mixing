@@ -24,9 +24,21 @@ status_history:
     at: "2026-05-16T14:24:00-04:00"
     agent_id: "WA"
     reason: "writer polish for batch wa_w5a_beauty"
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T14:45:00-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T14:45:00-04:00"
+    agent_id: "CA"
+    reason: "checker batch ca_w5a_beauty found traceability/schema issues"
+    issues:
+      - "CHK-1: TeX post-2008 CDF numerical claims (24 signal events, 5.8 sigma, 6.8 fb^-1, 1.96 TeV, and BR = (1.73 +/-0.42 +/-0.55)e-6) are recorded under supporting_measurements rather than pdg_or_equivalent."
+      - "CHK-1: B021 pdg_or_equivalent observables lack an explicit year field in the YAML block."
+      - "CHK-2: source_manifest.yaml entries use local_snapshot_path instead of the required snapshot_path field."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:24:00-04:00"
+last_updated_at: "2026-05-16T14:45:00-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_lambdab_lambdamumu.txt: "sha256:73959783ca3c1de31cd9479c24825c19140d59641809cfe9a2cc3c9a528fddcd"
