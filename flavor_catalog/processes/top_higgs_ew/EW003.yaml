@@ -16,9 +16,20 @@ status_history:
     at: "2026-05-16T13:16:19-04:00"
     agent_id: "PKA-EW003"
     reason: "Initial PKA draft for NIT-1 pre-approved EW003 CKM semileptonic-tension catalog addition."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T13:46:24-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T13:46:24-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w4_ew"
+    issues:
+      - "CHK-1: EW003 pdg_or_equivalent value blocks do not carry a year field, and the 3.0 sigma marginal-consistency claim is recorded only under additional_numerical_context rather than as a pdg_or_equivalent entry with full metadata."
+      - "CHK-4: status_history contains WRITER-INITIATED but no WRITER-DONE transition; the most recent pre-CA entry was WRITER-INITIATED, and no EW001/EW002/EW003 WA batch worklog was found."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:16:19-04:00"
+last_updated_at: "2026-05-16T13:46:24-04:00"
 version: "0.1.0"
 source_shas:
   bhatta_2021_bu_tau_np.txt: "sha256:9953db6ff1d8f0293b21f2223d5d5e0e3a52710f4b1dad373a82c3b28eb46655"
