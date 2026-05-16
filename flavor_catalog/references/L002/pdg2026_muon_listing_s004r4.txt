@@ -1,0 +1,38 @@
+Source snapshot: PDG pdgLive muon particle listing, datablock S004R4
+Process: L002, mu+ -> e+ e- e+
+Access date: 2026-05-16
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004R4
+PDF listing checked temporarily from: https://pdg.lbl.gov/encoder_listings/s004.pdf
+
+PDG citation displayed by pdgLive:
+2026 Review of Particle Physics.
+F. Takahashi et al. (Particle Data Group), Int. J. Mod. Phys. A 41, 2630011 (2026).
+
+Datablock context:
+Particle: muon. Section: mu- branching ratios; mu+ modes are charge conjugates.
+Node: S004R4.
+Mode in PDF text extraction: Gamma(e- e+ e-) / Gamma_total, Gamma6 / Gamma.
+PDG note: forbidden by lepton family number conservation.
+Value units in the datablock: 10^-12.
+
+Current PDG limit row from pdgLive S004R4:
+VALUE: <1.0
+CL%: 90
+DOCUMENT ID: BELLGARDT 1988
+TECHNIQUE: SPEC
+CHARGE: +
+COMMENT: SINDRUM
+
+Interpreted canonical value:
+B(mu+ -> e+ e- e+) < 1.0e-12 at 90% CL.
+
+PDF text-extraction cross-check, /tmp/pdg_s004_muon_listing.txt:
+Gamma e- e+ e- / Gamma_total
+Gamma6 / Gamma
+Forbidden by lepton family number conservation.
+VALUE (units 10^-12)
+BELLGARDT 88 SPEC + SINDRUM
+< 1.0
+90
+
+No publisher PDF is tracked in the repository; this is a minimal text snapshot.

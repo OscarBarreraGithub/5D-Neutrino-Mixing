@@ -1,0 +1,103 @@
+schema: flavor_catalog.process.v1
+process_id: L002
+family: charged_lepton
+standard_notation: "\\mathcal{B}(\\mu^+\\to e^+e^-e^+)"
+process_name: "Muon to three electrons charged-lepton-flavor-violating four-lepton decay"
+owner: "PKA"
+owner_agent_id: "PKA-L002"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:59:12-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:59:12-04:00"
+    agent_id: "PKA-L002"
+    reason: "Initial L002 PKA source extraction and draft sidecar."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:59:12-04:00"
+version: "0.1.0"
+source_shas:
+  agashe2006_rs_lfv_arxiv_hepph_0606021.txt: "sha256:51a5f86a338eb56993ea4dd8112ee25b294ec4b9b31087e3d024261cb66e2f0c"
+  cfw2008_arxiv0804_1954.txt: "sha256:f9f12e5b1a406cb547c991af56870464723da031d223212a223dde87e6a0234e"
+  crivellin2017_mu_e_eft_arxiv1702_03020.txt: "sha256:9fb2b5c1a49cd3ad22e90bc461ed159fd45531c672c8e1785e0ef8761a06867b"
+  mu3e_status_2025_arxiv2501_14667.txt: "sha256:7d4cc8303d28da15c89bd6ba70fb92643f5b88548b993d6cf70fdda28a6c0129"
+  mu3e_tdr_arxiv2009_11690.txt: "sha256:4123a6876f35c6f320b58f807cdad932b2b5bc68e07826114745b512ebbf2c83"
+  pdg2026_muon_listing_s004r4.txt: "sha256:72b7c9181196e76762dccaa10eaf850e48af827fff86c77c1bc53bd6aa459b1b"
+  sindrum1988_inspire_abstract.txt: "sha256:87086d504690190dce79af233ebe80a2087a08ec55a68f699d48520ccb0645dc"
+pdg_or_equivalent:
+  primary_current_limit:
+    source: "Particle Data Group 2026 pdgLive muon listing, datablock S004R4"
+    year: 2026
+    observable: "Branching fraction upper limit for mu+ -> e+ e- e+"
+    value: 1.0e-12
+    relation: "<"
+    confidence_level: "90% C.L."
+    conditions: "PDG S004R4 value units are 10^-12; row is <1.0, CL 90, BELLGARDT 1988, SINDRUM"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004R4"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L002/pdg2026_muon_listing_s004r4.txt"
+    sha256: "72b7c9181196e76762dccaa10eaf850e48af827fff86c77c1bc53bd6aa459b1b"
+  original_experiment:
+    source: "SINDRUM Collaboration, U. Bellgardt et al."
+    year: 1988
+    observable: "Gamma(mu -> 3e) / Gamma(mu -> e 2nu)"
+    value: 1.0e-12
+    relation: "<"
+    confidence_level: "90% C.L."
+    doi: "10.1016/0550-3213(88)90462-2"
+    source_url: "https://inspirehep.net/api/literature/251865"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L002/sindrum1988_inspire_abstract.txt"
+    sha256: "87086d504690190dce79af233ebe80a2087a08ec55a68f699d48520ccb0645dc"
+  prospects:
+    - source: "Mu3e phase-I technical design"
+      arxiv_id: "2009.11690"
+      year: 2021
+      quantity: "phase-I single-event sensitivity"
+      value: 2.0e-15
+      relation: "target"
+      conditions: "Existing PSI beamline, up to 1e8 muon decays per second"
+      snapshot_path: "flavor_catalog/references/L002/mu3e_tdr_arxiv2009_11690.txt"
+      sha256: "4123a6876f35c6f320b58f807cdad932b2b5bc68e07826114745b512ebbf2c83"
+    - source: "Mu3e status and short-term plans"
+      arxiv_id: "2501.14667"
+      year: 2025
+      quantity: "phase-I and upgraded sensitivity scale"
+      phase_i_sensitivity_order: "O(1e-15)"
+      upgraded_sensitivity_order: "O(1e-16)"
+      sm_neutrino_mass_rate_order: "O(1e-54)"
+      conditions: "Status note; detector commissioning beam time planned for 2025"
+      snapshot_path: "flavor_catalog/references/L002/mu3e_status_2025_arxiv2501_14667.txt"
+      sha256: "7d4cc8303d28da15c89bd6ba70fb92643f5b88548b993d6cf70fdda28a6c0129"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+  targeted_grep_commands:
+    - "rg -n \"mu.?->.?3e|mu.?to.?3e|mu3e|eee|three.?electron|four.?lepton|contact\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+  evidence:
+    - "Targeted mu->3e/Mu3e/contact grep returned no hits in the required code directories."
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an adjacent dipole-only LFV checker."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma in the scan; no mu->3e observable is evaluated."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "Missing implementation needs a new four-lepton/contact LFV operator convention, branching-ratio formula, and RS lepton-sector matching hook. It does not require lattice inputs or hadronic long-distance calculations for a first implementation."
+implementation_difficulty_if_missing: "MEDIUM"
+open_issues:
+  - "WA/CA should confirm whether to quote only the 2026 PDG S004R4 limit or also the SINDRUM paper value in the first sentence."
+  - "Future implementation should decide whether a tree-level contact-only approximation is enough or whether to include the full EFT/RG mixing with mu->e gamma and mu-e conversion."

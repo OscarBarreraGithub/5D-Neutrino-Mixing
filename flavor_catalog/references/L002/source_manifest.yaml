@@ -1,0 +1,75 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: L002
+generated_at: "2026-05-16T11:59:12-04:00"
+references:
+  - key: PDG2026_MuonS004R4
+    arxiv_id: null
+    DOI: "10.1142/S0217751X26300115"
+    title: "Particle Data Group 2026 muon listing, datablock S004R4"
+    authors: "F. Takahashi et al. (Particle Data Group)"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004R4"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:72b7c9181196e76762dccaa10eaf850e48af827fff86c77c1bc53bd6aa459b1b"
+    snapshot_path: "flavor_catalog/references/L002/pdg2026_muon_listing_s004r4.txt"
+  - key: SINDRUM1988_Mu3e
+    arxiv_id: null
+    DOI: "10.1016/0550-3213(88)90462-2"
+    title: "Search for the Decay mu+ -> e+ e+ e-"
+    authors: "U. Bellgardt et al. (SINDRUM Collaboration)"
+    year: 1988
+    url: "https://inspirehep.net/api/literature/251865"
+    supporting_url: "https://www.sciencedirect.com/science/article/pii/0550321388904622"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:87086d504690190dce79af233ebe80a2087a08ec55a68f699d48520ccb0645dc"
+    snapshot_path: "flavor_catalog/references/L002/sindrum1988_inspire_abstract.txt"
+  - key: Mu3eTDR2021
+    arxiv_id: "2009.11690"
+    DOI: "10.1016/j.nima.2021.165679"
+    title: "Technical design of the phase I Mu3e experiment"
+    authors: "K. Arndt et al. (Mu3e Collaboration)"
+    year: 2021
+    url: "https://arxiv.org/abs/2009.11690"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:4123a6876f35c6f320b58f807cdad932b2b5bc68e07826114745b512ebbf2c83"
+    snapshot_path: "flavor_catalog/references/L002/mu3e_tdr_arxiv2009_11690.txt"
+  - key: Mu3eStatus2025
+    arxiv_id: "2501.14667"
+    DOI: "10.48550/arXiv.2501.14667"
+    title: "The Mu3e Experiment: Status and Short-Term Plans"
+    authors: "Robert Mihai Amarinei"
+    year: 2025
+    url: "https://arxiv.org/abs/2501.14667"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:7d4cc8303d28da15c89bd6ba70fb92643f5b88548b993d6cf70fdda28a6c0129"
+    snapshot_path: "flavor_catalog/references/L002/mu3e_status_2025_arxiv2501_14667.txt"
+  - key: CrivellinDavidsonPrunaSigner2017_MuEFT
+    arxiv_id: "1702.03020"
+    DOI: "10.1007/JHEP05(2017)117"
+    title: "Renormalisation-group improved analysis of mu -> e processes in a systematic effective-field-theory approach"
+    authors: "Andreas Crivellin, Sacha Davidson, Giovanni Marco Pruna, Adrian Signer"
+    year: 2017
+    url: "https://arxiv.org/abs/1702.03020"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:9fb2b5c1a49cd3ad22e90bc461ed159fd45531c672c8e1785e0ef8761a06867b"
+    snapshot_path: "flavor_catalog/references/L002/crivellin2017_mu_e_eft_arxiv1702_03020.txt"
+  - key: AgasheBlechmanPetriello2006_RSLFV
+    arxiv_id: "hep-ph/0606021"
+    DOI: "10.1103/PhysRevD.74.053011"
+    title: "Probing the Randall-Sundrum geometric origin of flavor with lepton flavor violation"
+    authors: "Kaustubh Agashe, Andrew E. Blechman, Frank Petriello"
+    year: 2006
+    url: "https://arxiv.org/abs/hep-ph/0606021"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:51a5f86a338eb56993ea4dd8112ee25b294ec4b9b31087e3d024261cb66e2f0c"
+    snapshot_path: "flavor_catalog/references/L002/agashe2006_rs_lfv_arxiv_hepph_0606021.txt"
+  - key: CFW2008
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:f9f12e5b1a406cb547c991af56870464723da031d223212a223dde87e6a0234e"
+    snapshot_path: "flavor_catalog/references/L002/cfw2008_arxiv0804_1954.txt"
