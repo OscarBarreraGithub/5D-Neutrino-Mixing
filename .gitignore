@@ -45,14 +45,21 @@ docs/*
 !docs/phase_logs/
 !docs/phase_logs/**
 
-# Keep tracked figure exports limited to the collaborator-facing set.
+# Keep tracked figure exports limited to the methodology-note figure set.
 results/figures/*.png
 results/figures/*.pdf
 results/figures/**/*.png
 results/figures/**/*.pdf
 !results/figures/yukawa_mkk_tradeoff_2008_vs_2024.png
-!results/figures/quark/fig1_exclusion_boundaries.png
-!results/figures/quark/fig2_mkk_bound_2007_vs_modern.png
+!results/figures/quark/yukawa_size_envelope_vs_anarchic.pdf
+!results/figures/quark/rs_anarchy_mkk_min_hist_gsstar.pdf
+!results/figures/quark/rs_anarchy_max_ratio_vs_mkk.pdf
+!results/figures/quark/rs_anarchy_per_system_pass_rate.pdf
+!results/figures/quark/rs_anarchy_gate_sensitivity.pdf
+!results/figures/quark/rs_anarchy_mkk_min_hist_by_cvals.pdf
+!results/figures/quark/rs_anarchy_mkk_min_hist_by_yprior_gsstar.pdf
+!results/figures/quark/rs_anarchy_mkk_min_hist_by_pdg_tightness.pdf
+!results/figures/quark/rs_anarchy_cfw_comparison.pdf
 
 # Scan artifacts
 logs/

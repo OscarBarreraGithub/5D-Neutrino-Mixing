@@ -35,10 +35,9 @@ python scripts/benchmark_perez_randall.py
   numerically reproduce Eq. (7) when combined with Eq. (6) and Eq. (11).
 - Tracked notebooks live under [`notebooks/`](notebooks/) as executed analysis
   artifacts.
-- Tracked standalone figure exports are limited to
-  `results/figures/yukawa_mkk_tradeoff_2008_vs_2024.png`,
-  `results/figures/quark/fig1_exclusion_boundaries.png`, and
-  `results/figures/quark/fig2_mkk_bound_2007_vs_modern.png`.
+- Tracked paper figure exports are limited to the figures referenced by
+  [`docs/quark_scan_methodology_note.tex`](docs/quark_scan_methodology_note.tex);
+  older exploratory quark figures are kept out of the submission figure set.
 - Tracked paper docs under [`docs/`](docs/) include the current
   [`quark_scan_methodology_note.tex`](docs/quark_scan_methodology_note.tex)
   and the older [`quark_scan_assumptions_compact.tex`](docs/quark_scan_assumptions_compact.tex).
