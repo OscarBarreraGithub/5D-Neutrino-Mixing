@@ -1,0 +1,93 @@
+% Flavor catalog per-process template.
+% process_id: EW002
+% family: top_higgs_ew
+% owner_agent_id: PKA-EW002
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: EW002.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{First-Row CKM Unitarity and the Cabibbo Anomaly}{First-Row CKM Unitarity and the Cabibbo Anomaly}}
+
+\subsection*{Process}
+This entry covers the first-row CKM test
+\(\Delta_{\rm CKM}^{(1)}\equiv |V_{ud}|^2+|V_{us}|^2+|V_{ub}|^2-1\).
+It combines superallowed nuclear beta-decay, neutron/pion beta-decay cross
+checks, kaon \(K_{\ell3}\) and \(K_{\mu2}/\pi_{\mu2}\) inputs, and lattice
+normalizations of \(f_+(0)\) and \(f_K/f_\pi\).  The catalog scope is the
+Cabibbo-angle anomaly as a precision charged-current constraint, not a single
+kaon branching fraction.
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth numerical entries are in \texttt{EW002.yaml}.  The current
+PDG \(V_{ud},V_{us}\) review, published with the 2024 Review of Particle
+Physics and updated in 2025, uses the superallowed-beta value
+\(|V_{ud}|=0.97367(32)\) and a kaon-sector average
+\(|V_{us}|=0.22431(85)\), with scale factor \(S=2.5\).  Its quoted first-row
+sum is
+\[
+|V_{ud}|^2+|V_{us}|^2+|V_{ub}|^2=0.9983(6)(4),
+\]
+an overall \(2\sigma\) deficit, rising to about \(3\sigma\) if nuclear-structure
+uncertainties are not included.  FLAG 2024 gives the sharper semileptonic-kaon
+comparison: \(|V_{us}|f_+(0)=0.21654(41)\), \(f_+(0)=0.9698(17)\) for
+\(N_f=2+1+1\), hence \(|V_{us}|=0.22328(58)\).  Combining this with the PDG
+beta-decay \(V_{ud}\) gives \(|V_u|^2=0.99802(66)\), a roughly \(3.0\sigma\)
+deviation.  The same FLAG review notes that the \(f_K/f_\pi\) route gives a
+weaker \(|V_u|^2=0.99888(67)\), about \(1.7\sigma\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Warped and partially composite models can perturb the apparent CKM matrix
+through mixing with KK or vector-like quarks, non-universal \(W\)-quark
+couplings, and correlated shifts in \(Z\)-quark couplings.  Thus EW002 probes a
+charged-current direction complementary to the existing \(\Delta F=2\) neutral
+meson constraints.  In lepton-extended variants, a new contribution to muon
+decay can also change the inferred \(G_F\), feeding directly into beta- and
+kaon-decay CKM extractions.
+
+\subsection*{Post-2008 developments}
+Relative to arXiv:0804.1954, which emphasized RS-GIM and neutral-current
+flavor bounds with quoted KK-gluon scales near \(21\) and \(33\,\mathrm{TeV}\),
+the post-2008 story is a new charged-current precision problem.  Hardy--Towner
+2020 shifted the superallowed result to \(|V_{ud}|=0.97373(31)\) after updated
+radiative-correction theory.  PDG now quotes a closely related
+\(|V_{ud}|=0.97367(32)\) and explicitly frames the first-row test as a possible
+\(2\)--\(3\sigma\) inconsistency.  FLAG 2024 supplies sub-percent lattice inputs
+for \(f_+(0)\) and \(f_K/f_\pi\), with QED and strong-isospin corrections now
+central to the comparison.  The modern SMEFT literature treats the anomaly as a
+modified \(W\)-coupling problem correlated with electroweak precision and FCNC
+observables.
+
+\subsection*{Constraint validity and model dependence}
+The unitarity sum is experimentally clean but theory-limited.  The limiting
+issues are the inner electroweak radiative correction and nuclear-structure
+terms in \(V_{ud}\), lattice \(f_+(0)\) and \(f_K/f_\pi\), kaon radiative and
+isospin-breaking corrections, and correlations between \(K_{\ell3}\) and
+\(K_{\mu2}\).  Its new-physics interpretation is global-fit-dependent: a shift
+can live in semileptonic charged currents, \(G_F\), right-handed \(W\) couplings,
+or correlated \(Z\) and \(\Delta F=2\) effects.
+
+\subsection*{Code coverage in this repo}
+\textbf{PARTIAL}.  The repo fits and gates a unitary CKM target: PDG-derived
+per-element tolerances are documented at \texttt{quarkConstraints/scan.py:42},
+the reduced observable set \((|V_{us}|,|V_{cb}|,|V_{ub}|,J)\) is implemented at
+\texttt{quarkConstraints/fit.py:47}, and the modern default CKM target is stored
+at \texttt{quarkConstraints/modern/inputs.py:631}.  However, greps found no
+\(V_{ud}\), superallowed-beta, \(K_{\ell3}\), \(f_+(0)\), or
+\(\Delta_{\rm CKM}\) likelihood implementing EW002 as a constraint.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A production constraint needs new charged-current SMEFT or
+direct RS \(W\)-coupling matching, optional \(G_F\) shifts for lepton extensions,
+and a correlated low-energy likelihood using beta, kaon, radiative-correction,
+and lattice inputs.  This is outside the existing \(\Delta F=2\)
+SLL/SLR/VLL/VRR/LR1/LR2 machinery.
+
+\subsection*{Key references}
+\texttt{pdg\_2025\_vud\_vus\_ckm\_unitarity};
+\texttt{flag\_2024\_vus\_ckm\_unitarity};
+\texttt{hardy\_towner\_2020\_superallowed\_vud};
+\texttt{bryman\_cirigliano\_crivellin\_inguglia\_2022\_lfu\_ckm};
+\texttt{crivellin\_kirk\_kitahara\_mescia\_2022\_vlq\_caa};
+\texttt{cfw\_2008\_rs\_flavor}.

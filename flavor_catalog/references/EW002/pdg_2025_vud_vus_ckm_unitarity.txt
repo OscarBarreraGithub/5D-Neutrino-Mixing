@@ -1,0 +1,29 @@
+Source key: pdg_2025_vud_vus_ckm_unitarity
+Source: Particle Data Group, "Vud, Vus, the Cabibbo Angle, and CKM Unitarity"
+Edition: Review of Particle Physics 2024, 2025 update
+URL: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+Access date: 2026-05-16
+Snapshot type: minimal value extract; no PDF stored.
+
+Values used in EW002:
+- First-row test: |Vud|^2 + |Vus|^2 + |Vub|^2 = 1.
+- PDG says |Vub|^2 is about 1.7e-5 and is negligible for the Vud/Vus discussion.
+- Superallowed nuclear beta decays: Vud = 0.97367 with component errors
+  0.00011_exp, 0.00013_DeltaR^V, 0.00027_NS, total 0.00032.
+- Kaon semileptonic product: f_+(0)|Vus| = 0.21656(35).
+- FLAG-style lattice inputs quoted by PDG: f_+(0) = 0.9677(27) for
+  Nf = 2+1 and f_+(0) = 0.9698(17) for Nf = 2+1+1.
+- K_l3 extraction: |Vus| = 0.22330 with errors 0.00004_exp+RC and
+  0.00004_lattice in the compact PDG line; the preceding sentence gives the
+  total 0.00053 breakdown as 0.00035_exp, 0.00039_LAT, 0.00008_RC+IB.
+- Kaon-sector average used by PDG for the first-row test: Vus = 0.22431(85)
+  with scale factor S = 2.5.
+- PDG unitarity consistency check: |Vud|^2 + |Vus|^2 + |Vub|^2 =
+  0.9983(6)(4), about an overall 2 sigma deviation; PDG notes it increases
+  to about 3 sigma if nuclear-structure uncertainties are ignored.
+
+Relevance notes:
+- PDG frames Eq. 67.2 as the most stringent CKM unitarity test and states that
+  it is again showing a possible 2 to 3 sigma inconsistency.
+- PDG lists possible interpretations as Vud theory, lattice f_+(0), or new
+  physics.

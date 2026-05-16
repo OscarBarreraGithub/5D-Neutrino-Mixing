@@ -1,0 +1,58 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: EW002
+created_at: "2026-05-16T13:14:07-04:00"
+references:
+  - key: pdg_2025_vud_vus_ckm_unitarity
+    arxiv_id: null
+    doi: "10.1103/PhysRevD.110.030001"
+    title: "Vud, Vus, the Cabibbo Angle, and CKM Unitarity"
+    authors: "Particle Data Group; E. Blucher, G. D'Ambrosio, W. J. Marciano"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    sha256_of_local_snapshot: "9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a"
+    snapshot_path: "flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt"
+  - key: flag_2024_vus_ckm_unitarity
+    arxiv_id: "2411.04268"
+    doi: null
+    title: "FLAG Review 2024"
+    authors: "Flavour Lattice Averaging Group"
+    year: 2024
+    url: "https://arxiv.org/abs/2411.04268"
+    sha256_of_local_snapshot: "b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c"
+    snapshot_path: "flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt"
+  - key: hardy_towner_2020_superallowed_vud
+    arxiv_id: null
+    doi: "10.1103/PhysRevC.102.045501"
+    title: "Superallowed 0+ -> 0+ nuclear beta decays: 2020 critical survey, with implications for Vud and CKM unitarity"
+    authors: "J. C. Hardy, I. S. Towner"
+    year: 2020
+    url: "https://www.osti.gov/pages/biblio/1780888"
+    sha256_of_local_snapshot: "913ac2c95b8296f78dab3323d0909ed714dbb571a30ac92bb1633715ae853196"
+    snapshot_path: "flavor_catalog/references/EW002/hardy_towner_2020_superallowed_vud.txt"
+  - key: bryman_cirigliano_crivellin_inguglia_2022_lfu_ckm
+    arxiv_id: "2111.05338"
+    doi: "10.1146/annurev-nucl-110121-051223"
+    title: "Testing Lepton Flavor Universality with Pion, Kaon, Tau, and Beta Decays"
+    authors: "D. Bryman, V. Cirigliano, A. Crivellin, G. Inguglia"
+    year: 2022
+    url: "https://arxiv.org/abs/2111.05338"
+    sha256_of_local_snapshot: "d3c41387de757db6c5f7f82d0e29eab69851bbe09f02a5b153cb7e3d0f7ad2b8"
+    snapshot_path: "flavor_catalog/references/EW002/bryman_cirigliano_crivellin_inguglia_2022_lfu_ckm.txt"
+  - key: crivellin_kirk_kitahara_mescia_2022_vlq_caa
+    arxiv_id: "2212.06862"
+    doi: "10.1007/JHEP03(2023)234"
+    title: "Global Fit of Modified Quark Couplings to EW Gauge Bosons and Vector-Like Quarks in Light of the Cabibbo Angle Anomaly"
+    authors: "A. Crivellin, M. Kirk, T. Kitahara, F. Mescia"
+    year: 2023
+    url: "https://arxiv.org/abs/2212.06862"
+    sha256_of_local_snapshot: "ee55b56572cf5d12fff63519cae204b22ef86c24d337657c1abc3e99da5c3f2b"
+    snapshot_path: "flavor_catalog/references/EW002/crivellin_kirk_kitahara_mescia_2022_vlq_caa.txt"
+  - key: cfw_2008_rs_flavor
+    arxiv_id: "0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "C. Csaki, A. Falkowski, A. Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "d22463e7e9e006a15a880b12181a6cb1311e713084fc13fff901ac5fe0430b9a"
+    snapshot_path: "flavor_catalog/references/EW002/cfw_2008_rs_flavor.txt"

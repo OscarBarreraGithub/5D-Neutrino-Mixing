@@ -1,0 +1,231 @@
+schema: flavor_catalog.process.v1
+process_id: EW002
+family: top_higgs_ew
+standard_notation: "\\Delta_{\\rm CKM}^{(1)} = |V_{ud}|^2 + |V_{us}|^2 + |V_{ub}|^2 - 1"
+process_name: "First-row CKM unitarity and the Cabibbo angle anomaly"
+owner: "PKA"
+owner_agent_id: "PKA-EW002"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:14:07-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:14:07-04:00"
+    agent_id: "PKA-EW002"
+    reason: "Initial PKA draft for NIT-1 pre-approved EW002 CKM-unitarity catalog addition."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:14:07-04:00"
+version: "0.1.0"
+source_shas:
+  bryman_cirigliano_crivellin_inguglia_2022_lfu_ckm.txt: "sha256:d3c41387de757db6c5f7f82d0e29eab69851bbe09f02a5b153cb7e3d0f7ad2b8"
+  cfw_2008_rs_flavor.txt: "sha256:d22463e7e9e006a15a880b12181a6cb1311e713084fc13fff901ac5fe0430b9a"
+  crivellin_kirk_kitahara_mescia_2022_vlq_caa.txt: "sha256:ee55b56572cf5d12fff63519cae204b22ef86c24d337657c1abc3e99da5c3f2b"
+  flag_2024_vus_ckm_unitarity.txt: "sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c"
+  hardy_towner_2020_superallowed_vud.txt: "sha256:913ac2c95b8296f78dab3323d0909ed714dbb571a30ac92bb1633715ae853196"
+  pdg_2025_vud_vus_ckm_unitarity.txt: "sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a"
+pdg_or_equivalent:
+  - value_id: "PDG2025:EW002:Vud_superallowed"
+    observable: "|V_ud| from superallowed nuclear beta decays"
+    year: 2025
+    value: 0.97367
+    uncertainty: 0.00032
+    units: "dimensionless"
+    source: "PDG Vud, Vus, Cabibbo Angle, and CKM Unitarity review, RPP 2024 with 2025 update"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt"
+    sha256: "sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a"
+  - value_id: "PDG2025:EW002:Vus_fplus_product"
+    observable: "f_+(0) |V_us| from K_l3 inputs"
+    year: 2025
+    value: 0.21656
+    uncertainty: 0.00035
+    units: "dimensionless"
+    source: "PDG Vud, Vus, Cabibbo Angle, and CKM Unitarity review"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt"
+    sha256: "sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a"
+  - value_id: "PDG2025:EW002:Vus_Kl3"
+    observable: "|V_us| from K_l3 using Nf=2+1+1 f_+(0)"
+    year: 2025
+    value: 0.22330
+    uncertainty: 0.00053
+    units: "dimensionless"
+    source: "PDG Vud, Vus, Cabibbo Angle, and CKM Unitarity review"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt"
+    sha256: "sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a"
+  - value_id: "PDG2025:EW002:Vus_kaon_average"
+    observable: "|V_us| kaon-sector average used by PDG for first-row test"
+    year: 2025
+    value: 0.22431
+    uncertainty: 0.00085
+    scale_factor: 2.5
+    units: "dimensionless"
+    source: "PDG Vud, Vus, Cabibbo Angle, and CKM Unitarity review"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt"
+    sha256: "sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a"
+  - value_id: "PDG2025:EW002:first_row_sum"
+    observable: "|V_ud|^2 + |V_us|^2 + |V_ub|^2"
+    year: 2025
+    value: 0.9983
+    uncertainties:
+      Vud_squared: 0.0006
+      Vus_squared: 0.0004
+      combined_quoted_elsewhere: 0.0007
+    significance: "about 2 sigma overall; about 3 sigma if nuclear-structure uncertainties are ignored"
+    units: "dimensionless"
+    source: "PDG Vud, Vus, Cabibbo Angle, and CKM Unitarity review"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt"
+    sha256: "sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a"
+  - value_id: "FLAG2024:EW002:Vus_fplus_product"
+    observable: "|V_us| f_+(0) from kaon semileptonic decays"
+    year: 2024
+    value: 0.21654
+    uncertainty: 0.00041
+    units: "dimensionless"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt"
+    sha256: "sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c"
+  - value_id: "FLAG2024:EW002:fplus_Nf211"
+    observable: "f_+(0), direct lattice average"
+    year: 2024
+    value: 0.9698
+    uncertainty: 0.0017
+    units: "dimensionless"
+    nf: "2+1+1"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt"
+    sha256: "sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c"
+  - value_id: "FLAG2024:EW002:Vus_from_fplus_Nf211"
+    observable: "|V_us| from f_+(0), Nf=2+1+1"
+    year: 2024
+    value: 0.22328
+    uncertainty: 0.00058
+    units: "dimensionless"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt"
+    sha256: "sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c"
+  - value_id: "FLAG2024:EW002:first_row_sum_fplus"
+    observable: "|V_u|^2 using f_+(0), Nf=2+1+1, and beta-decay Vud"
+    year: 2024
+    value: 0.99802
+    uncertainty: 0.00066
+    significance_sigma: 3.0
+    units: "dimensionless"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt"
+    sha256: "sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c"
+  - value_id: "FLAG2024:EW002:first_row_sum_fkfpi"
+    observable: "|V_u|^2 using f_K/f_pi, Nf=2+1+1, and beta-decay Vud"
+    year: 2024
+    value: 0.99888
+    uncertainty: 0.00067
+    significance_sigma: 1.7
+    units: "dimensionless"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt"
+    sha256: "sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c"
+  - value_id: "HardyTowner2020:EW002:Vud"
+    observable: "|V_ud| from 2020 superallowed 0+ -> 0+ beta-decay survey"
+    year: 2020
+    value: 0.97373
+    uncertainty: 0.00031
+    units: "dimensionless"
+    source: "Hardy and Towner, Phys. Rev. C 102, 045501"
+    source_url: "https://www.osti.gov/pages/biblio/1780888"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/hardy_towner_2020_superallowed_vud.txt"
+    sha256: "sha256:913ac2c95b8296f78dab3323d0909ed714dbb571a30ac92bb1633715ae853196"
+  - value_id: "BCBCI2022:EW002:Delta_CKM_global"
+    observable: "Delta_CKM global-fit review value"
+    year: 2022
+    value: -0.00195
+    uncertainty: 0.00053
+    units: "dimensionless"
+    source: "Bryman, Cirigliano, Crivellin, Inguglia, arXiv:2111.05338"
+    source_url: "https://arxiv.org/abs/2111.05338"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/bryman_cirigliano_crivellin_inguglia_2022_lfu_ckm.txt"
+    sha256: "sha256:d3c41387de757db6c5f7f82d0e29eab69851bbe09f02a5b153cb7e3d0f7ad2b8"
+  - value_id: "CKKM2022:EW002:Caa_significance_context"
+    observable: "Cabibbo-angle anomaly significance context"
+    year: 2022
+    value: "about 3 sigma"
+    units: "qualitative significance"
+    source: "Crivellin, Kirk, Kitahara, Mescia, arXiv:2212.06862"
+    source_url: "https://arxiv.org/abs/2212.06862"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/crivellin_kirk_kitahara_mescia_2022_vlq_caa.txt"
+    sha256: "sha256:ee55b56572cf5d12fff63519cae204b22ef86c24d337657c1abc3e99da5c3f2b"
+  - value_id: "CFW2008:EW002:rs_kk_gluon_bound"
+    observable: "Generic RS KK-gluon mass bound context"
+    year: 2008
+    value: 21.0
+    units: "TeV"
+    source: "Csaki, Falkowski, Weiler, arXiv:0804.1954"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/cfw_2008_rs_flavor.txt"
+    sha256: "sha256:d22463e7e9e006a15a880b12181a6cb1311e713084fc13fff901ac5fe0430b9a"
+  - value_id: "CFW2008:EW002:composite_higgs_kk_bound"
+    observable: "Composite pseudo-Goldstone Higgs KK-gluon mass bound context"
+    year: 2008
+    value: 33.0
+    units: "TeV"
+    source: "Csaki, Falkowski, Weiler, arXiv:0804.1954"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW002/cfw_2008_rs_flavor.txt"
+    sha256: "sha256:d22463e7e9e006a15a880b12181a6cb1311e713084fc13fff901ac5fe0430b9a"
+code_coverage:
+  status: "PARTIAL"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  evidence:
+    - "quarkConstraints/scan.py:42 documents PDG-derived per-element CKM tolerances."
+    - "quarkConstraints/scan.py:247 defines the reduced CKM scan labels as Vus, Vcb, Vub, and J."
+    - "quarkConstraints/fit.py:47 implements the reduced CKM observable set used for fits."
+    - "quarkConstraints/fit.py:267 computes CKM residuals against target observables."
+    - "quarkConstraints/modern/inputs.py:631 stores a frozen modern default CKM target."
+    - "tests/test_quark_fit.py:575 anchors the target CKM convention against PDG 2024."
+  missing:
+    - "No Vud, superallowed-beta, neutron/pion beta, K_l3/f_+(0), K_mu2/f_K/f_pi, or Delta_CKM likelihood/check was found."
+    - "Existing CKM code uses a unitary target as a fit/gating input; it does not implement first-row unitarity as an independent charged-current constraint."
+  grep_commands:
+    - "rg -n \"Vud|V_us|Vus|V_ub|Vub|CKM|Cabibbo|unitarity|Delta_CKM|DeltaCKM|Wolfenstein|lambda|K.?l3|superallowed|beta decay|Ft|f_\\\\+\\\\(0\\\\)|fK|f_pi\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|CKM|Cabibbo|Vus|Vud\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma|CKM|Cabibbo|Vus|Vud\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "A live EW002 constraint requires new charged-current SMEFT or direct RS W-quark matching, optional G_F-shift handling for lepton-sector variants, and a correlated beta/kaon/lattice/radiative-correction likelihood. The existing Delta F = 2 basis and CKM fit gate do not cover this observable."
+open_issues:
+  - "WA/checker should decide whether the headline catalog value should be PDG's conservative 0.9983(7) sum or FLAG's sharper K_l3 plus beta-decay 0.99802(66) comparison."

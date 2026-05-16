@@ -1,0 +1,34 @@
+Source key: flag_2024_vus_ckm_unitarity
+Source: Flavour Lattice Averaging Group, FLAG Review 2024
+arXiv: 2411.04268
+URL: https://arxiv.org/abs/2411.04268
+Access date: 2026-05-16
+Snapshot type: minimal value extract from arXiv PDF text; no PDF stored.
+
+Values used in EW002:
+- Experimental kaon inputs in Sec. 5.1:
+  |Vus| f_+(0) = 0.21654(41).
+  |Vus/Vud| f_K+-/f_pi+- = 0.27599(41).
+- Direct lattice average for semileptonic form factor:
+  f_+(0) = 0.9698(17) for Nf = 2+1+1.
+  f_+(0) = 0.9677(27) for Nf = 2+1.
+- Direct lattice average for charged decay-constant ratio:
+  f_K+-/f_pi+- = 1.1934(19) for Nf = 2+1+1.
+  f_K+-/f_pi+- = 1.1916(34) for Nf = 2+1.
+- Extraction from f_+(0), Nf = 2+1+1:
+  |Vus| = 0.22328(58).
+- Conversion from f_K+-/f_pi+-, Nf = 2+1+1:
+  |Vus|/|Vud| = 0.23126(50).
+- |Vub| input for the first-row test:
+  |Vub| = 3.82(24)e-3.
+- First-row sum using Nf = 2+1+1 f_+(0) and the PDG beta-decay Vud:
+  |Vu|^2 = 0.99802(66), about a 3.0 sigma deviation from unity.
+- First-row sum using Nf = 2+1+1 f_K+-/f_pi+- and the same Vud:
+  |Vu|^2 = 0.99888(67), about a 1.7 sigma deviation from unity.
+- Nf = 2+1 comparison:
+  f_+(0) plus beta-decay Vud gives |Vu|^2 = 0.99824(69), about 2.5 sigma;
+  f_K+-/f_pi+- gives |Vu|^2 = 0.99903(72), about 1.4 sigma.
+
+Relevance notes:
+- FLAG emphasizes that QED and strong-isospin effects are mandatory at the
+  sub-percent precision now reached by kaon and lattice inputs.
