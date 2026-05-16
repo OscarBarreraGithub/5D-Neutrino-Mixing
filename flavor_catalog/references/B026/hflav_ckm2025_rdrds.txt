@@ -1,0 +1,524 @@
+<html>
+<head>
+   <title>Average of R(D) and R(D*)</title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<h2>Average of R(D) and R(D<sup>*</sup>) for CKM 2025</h2>
+
+<p> Last update on 28.09.2025
+
+<p>This web page contains the averages of the ratios of Branching Fractions 
+R(D*)=BF(B&rarr;D*&tau;&nu;<sub>&tau;</sub>)/BF(B&rarr;D* l &nu;<sub>l</sub>) 
+and R(D)=BF(B&rarr;D&tau;&nu;<sub>&tau;</sub>)/BF(B&rarr;D l &nu;<sub>l</sub>). 
+<br> In the present average we consider the following measurements:</p>
+<ul>
+    <li>BaBar Collaboration: Phys.Rev.Lett 109, 101802 (2012) <a href="http://arxiv.org/abs/1205.5442">[arXiv:1205.5442]</a> and 
+    Phys.Rev.D 88, 072012 (2013) <a href="http://arxiv.org/abs/1303.0571">[arXiv:1303.0571]</a>    
+    <br>Combined measurement of R(D) and R(D<sup>*+</sup>) based on the hadronic tagging sample and it is a combined. 
+    We use the results obtained imposing the isospin relations R(D<sup>0</sup>)=R(D<sup>+</sup>) and R(D<sup>*0</sup>)=R(D<sup>*+</sup>).  
+    </li> 
+
+    <li>Belle Collaboration: Phys.Rev. D92, 072014 (2015) <a href="http://arxiv.org/abs/1507.03233">[arXiv:1507.03233]</a>
+    <br>Similar to the BaBar analysis: combined  measurement of R(D) and R(D*), based on the hadronic tagging sample.
+    </li>
+
+    <li>Belle Collaboration: Phys.Rev.Lett. 118, 211801 (2017) <a href="http://arxiv.org/abs/1612.00529">[arXiv:1612.00529]</a> and
+    Phys.Rev.D 97, 012004 (2018) <a href="https://arxiv.org/abs/1709.00129">[arXiv:1709.00129]</a>    
+    <br>Measurement of R(D<sup>*+</sup>) based on an hadronic tagging sample. The &tau; is reconstructed in the hadronic
+    decay channels &tau;&rarr;&pi;&nu; and &tau;&rarr;&rho;&nu;. This is a simultaneous measurement of R(D*) and the 
+    &tau; polarization.
+    </li>
+
+    <li>Belle Collaboration: Phys.Rev.Lett. 124 (2020) 16, 161803 <a href="https://arxiv.org/abs/1910.05864">[arXiv:1910.05864]</a>
+    <br>Combined measurement of R(D) and R(D<sup>*+</sup>), based on a semileptonic tagging method. This supersedes the published  
+    measurement: Phys.Rev. D94, 072007 (2016) <a href="http://arxiv.org/abs/1607.07923">[arXiv:1607.07923]</a>
+ 
+    <li>LHCb Collaboration: Phys. Rev. Lett. 131, 111802 <a href="https://arxiv.org/abs/2302.02886">[arXiv:2302.02886]</a> 
+    <br>Combined measurement of R(D) and R(D<sup>*+</sup>). Only the &tau;&rarr;&mu;&nu;<sub>&mu;</sub>&nu;<sub>&tau;</sub> decay mode is used. 
+    </li>
+
+    <li>LHCb Collaboration: Phys. Rev. D 108, 012018 <a href="https://arxiv.org/abs/2305.01463">[arXiv:2305.01463]</a> and 
+    <br>Measurement of R(D<sup>*+</sup>) where &tau; is reconstructed in the three-prong hadronic decay channels &tau;&rarr;3&pi;(&pi;<sup>0</sup>)&nu;. 
+
+    <!--
+    <li>Belle II Collaboration: Phys. Rev. D 110, 072020 (2024) <a href="https://arxiv.org/abs/2401.02840">[arXiv:2401.02840]</a>
+    <br>Measurement of R(D*), based on the hadronic tagging sample.
+    </li>
+    -->
+    
+     <li>LHCb Collaboration: Phys. Rev. Lett. 134, 061801 (2025) <a href="https://arxiv.org/abs/2406.03387">[arXiv:2406.03387]</a>
+    <br>Measurement of R(D<sup>+</sup>) and R(D<sup>*+</sup>), using the &tau;&rarr;&mu;&nu;<sub>&mu;</sub>&nu;<sub>&tau;</sub> decay mode.
+     </li>
+
+     <li>Belle II Collaboration: Phys. Rev. D 112 (2025) 3, 032010 <a href="https://arxiv.org/abs/2504.11220">[arXiv:2504.11220]</a>
+    <br>Measurement of R(D<sup>+</sup>) and R(D<sup>*+</sup>), using semileptonic B tagging decay.
+     </li>
+
+     <li>Belle II Collaboration: Presented at CKM 2025 <a href="https://indico.cern.ch/event/1440982/contributions/6576608/attachments/3136874/5566279/2025_CKM_LFU_belleII_itsaklid.pdf">[talk]</a>
+	 <br>Measurement of R(D<sup>+</sup>) and R(D<sup>*+</sup>), using hadronic B tagging decay, supersedes the Belle II Measurement of R(D*), based on the hadronic tagging sample Phys. Rev. D 110, 072020 (2024) <a href="https://arxiv.org/abs/2401.02840">[arXiv:2401.02840]</a>.
+     </li>
+    </li>
+ 
+</ul>    
+
+</p>
+
+<br>In the average we assume 100% correlation for the systematic uncertainties 
+associated with the B&rarr;D<sup>(*)</sup> form factors, the D<sup>**</sup> composition and shapes, and the &tau; branching fractions. 
+The other uncertainties are considered uncorrelated between the various experiments. The average is obtained using the the <a href="https://gitlab.cern.ch/vchobano/combination-code">CoCo</a> averaging tool.
+
+</p>
+<br>
+
+<table border=1 cellpadding=1 cellspacing=1>
+  <thead>
+    <tr valign=top>
+      <th bgcolor="#c0c0c0"> Experiment </th>
+      <th bgcolor="#c0c0c0"> R(D*)</th>
+      <th bgcolor="#c0c0c0"> R(D)</th>
+      <th bgcolor="#c0c0c0"> Rescaled Correlation (stat/total) </th>
+      <th bgcolor="#c0c0c0"> Inputs</th>
+      <th bgcolor="#c0c0c0"> Remarks</th>
+    </tr>
+  </thead>
+
+    <tr valign=top>
+      <td><!--ana-->BaBar </td>
+      <td><!--val-->0.332 &plusmn;  0.024 &plusmn;  0.018 </td>
+      <td><!--xval-->0.440 &plusmn;  0.058 &plusmn;  0.042 </td> 
+      <td><!--corr-->-0.45/-0.27 </td>
+      <td><a href="../../r_dtaunu/babar_input.json">input</a></td>
+      <td>Phys.Rev.Lett. 109,101802 (2012) <a href="http://arxiv.org/abs/1205.5442">arXiv:1205.5442_[hep-ex]</a> 
+       Phys.Rev.D 88, 072012 (2013) <a href="http://arxiv.org/abs/1303.0571">arXiv:1303.0571_[hep-ex]</a></td>
+    </tr>
+
+    <tr valign=top>
+      <td><!--ana-->BELLE<sup>a</sup> </td>
+      <td><!--val-->0.293 &plusmn;  0.038 &plusmn;  0.015 </td>
+      <td><!--xval-->0.375 &plusmn;  0.064 &plusmn;  0.026 </td>
+      <td><!--corr-->-0.56/-0.49 </td>
+      <td><a href="../../r_dtaunu/belle_a_input.json">input</a></td>
+      <td>Phys.Rev.D 92, 072014 (2015) <a href="http://arxiv.org/abs/1507.03233">arXiv:1507.03233 [hep-ex]</a></td>
+    </tr>
+
+  <tr valign=top>
+      <td><!--ana-->BELLE<sup>b</sup> </td>
+      <td><!--val-->0.270 &plusmn;  0.035 <sup>+ 0.028</sup><sub>-0.025</sub></td>
+      <td><!--xval--> - </td>
+      <td><!--corr--> - </td>
+      <td><a href="../../r_dtaunu/belle_b_input.json">input</a></td>
+      <td>Phys.Rev.Lett.118,211801 (2017) <a href="http://arxiv.org/abs/1612.00529">arXiv:1612.00529 [hep-ex]</a>
+      Phys.Rev.D 97, 012004 (2018) <a href="http://arxiv.org/abs/1709.00129">arXiv:1709.00129_[hep-ex]</a></td>
+  </tr>
+
+  <tr valign=top>
+      <td><!--ana-->BELLE<sup>c</sup> </td>
+      <td><!--val-->0.283 &plusmn;  0.018 &plusmn;  0.014 </td>
+      <td><!--xval-->0.307 &plusmn;  0.037 &plusmn;  0.016 </td>
+      <td><!--corr--> -0.53/-0.51 </td>
+      <td><a href="../../r_dtaunu/belle_c_input.json">input</a></td>
+      <td>Phys.Rev.Lett. 124 (2020) 16, 161803 <a href="https://arxiv.org/abs/1910.05864">arXiv:1910.05864 [hep-ex]</a></td>
+  </tr>
+ 
+  <tr valign=top>
+      <td><!--ana-->LHCb<sup>a</sup> </td>
+      <td><!--val-->0.281 &plusmn;  0.018 &plusmn;  0.024 </td>
+      <td><!--xval--> 0.441 &plusmn; 0.060 &plusmn; 0.066  </td>
+      <td><!--corr--> -0.49/-0.43  </td>
+      <td><a href="../../r_dtaunu/lhcb_a_input.json">input</a></td>
+      <td>Phys. Rev. Lett. 131, 111802 <a href="https://arxiv.org/abs/2302.02886">[arXiv:2302.02886]</a></td>
+  </tr>
+
+ <tr valign=top>
+      <td><!--ana-->LHCb<sup>b</sup> </td>
+      <td><!--val-->0.267 &plusmn;  0.012 &plusmn;  0.019</td>
+      <td><!--xval--> - </td>
+      <td><!--corr--> - </td>
+      <td><a href="../../r_dtaunu/lhcb_b_input.json">input</a></td>
+      <td>Phys. Rev. D 108, 012018 <a href="https://arxiv.org/abs/2305.01463">[arXiv:2305.01463]</a>
+     </td>
+  </tr>
+
+  <tr valign=top>
+      <td><!--ana-->LHCb<sup>c</sup> </td>
+      <td><!--val-->0.402 &plusmn;  0.081 &plusmn;  0.085 </td>
+      <td><!--xval--> 0.249 &plusmn; 0.043 &plusmn; 0.047  </td>
+      <td><!--corr--> -0.48/-0.39  </td>
+      <td><a href="../../r_dtaunu/lhcb_c_input.json">input</a></td>
+      <td>Phys. Rev. Lett. 134, 061801 (2025) <a href="https://arxiv.org/abs/2406.03387">[arXiv:2406.03387]</a></td>
+  </tr>
+
+  <tr valign=top>
+      <td><!--ana-->Belle II<sup>b</sup> </td>
+      <td><!--val-->0.306 &plusmn;  0.034 &plusmn;  0.018 </td>
+      <td><!--xval-->  0.418  &plusmn; 0.074 &plusmn; 0.051  </td>
+      <td><!--corr--> -0.27/-0.22  </td>
+      <td><a href="../../r_dtaunu/belleII_sl_input.json">input</a></td>
+      <td>Phys. Rev. D 112 (2025) 3, 032010  <a href="https://arxiv.org/abs/2504.11220">[arXiv:2504.11220]</a></a></td>
+  </tr>
+
+  <tr valign=top>
+      <td><!--ana-->Belle II<sup>a</sup> </td>
+      <td><!--val-->0.242 &plusmn;  0.019 &plusmn;  0.016 </td>
+      <td><!--xval-->  0.439  &plusmn; 0.055 &plusmn; 0.046  </td>
+      <td><!--corr--> -0.40/-0.20  </td>
+      <td><a href="../../r_dtaunu/belleII_had_input_new.json">input</a></td>
+      <td>Presented at CKM 2025 <a href="https://indico.cern.ch/event/1440982/contributions/6576608/attachments/3136874/5566279/2025_CKM_LFU_belleII_itsaklid.pdf">[talk]</a></a></td>
+  </tr>
+
+    <tr> 
+      <td bgcolor="#ccccc0"><b><!--ana-->Average</b> 
+         <a href="../../r_dtaunu/logfile_ckm25_new.txt">logfile.txt</a>&nbsp;
+        </td>
+      <td bgcolor="#ccccc0"><b><!--val-->0.281 &plusmn;  0.011 </b> </td>
+      <td bgcolor="#ccccc0"><b><!--xval-->0.358 &plusmn;  0.024 </b> </td>
+      <td bgcolor="#ccccc0"><b><!--corr-->-0.374 </b> </td>
+      <td bgcolor="#ccccc0"><b><!--chi2-->chi2/dof = 16.683/14 (CL = 0.27) </b> </td>
+      <td bgcolor="#ccccc0">
+          <!--R(D)-R(D*), 68% C.L. contours <a href="../../r_dtaunu//eos/project-h/hflav/www/semi/spring25/r_dtaunu/RdRdst_hflav_spring2025_68.pdf">rdrds.pdf</a>&nbsp;-->
+          R(D)-R(D*), 68% C.L. contours <a href="../../r_dtaunu/rdrds_ckm2025_new.pdf">rdrds.pdf</a>&nbsp;
+          <br>
+	  
+	  <br> For visualisation only (HFLAV average uses always the individual measurements as inputs)
+          <br> R(D)-R(D*), 68% C.L. single experiment contours <a href="../../r_dtaunu/rdrds_ckm2025_experiments.pdf">rdrds_experiments.pdf</a>&nbsp;
+          <br>
+	  
+	  <!-- 
+          <br>R(D) <a href="../../r_dtaunu/rdrds_rd_spring2025.pdf">.pdf</a>&nbsp;
+	  -->
+          <!--
+          (with the SM predictions)
+          -->
+          <br>R(D) <a href="../../r_dtaunu/rdrds_rd_ckm25.pdf">.pdf</a>&nbsp;
+          <br>R(D*) <a href="../../r_dtaunu/rdrds_rds_ckm25.pdf">.pdf</a>&nbsp;
+	  
+          <!--          (with the SM predictions)
+          <br>R(D*) <a href="../../r_dtaunu/rdrds_rds_ckm25.pdf">.pdf</a>&nbsp;
+          -->
+      </td>  
+    </tr>
+
+</table>
+
+
+<br>
+<h3> Compatibility with SM predictions </h3>
+<p> SM predictions for R(D) based on following Lattice calculations:</p>
+<ul>
+    <li> R(D) =0.299 &plusmn; 0.011, J.A.Bailey et al. [FNAL/MILC Collaboration], Phys.Rev.D 92, 034506 (2015)<a 
+href="http://arxiv.org/abs/1503.07237">arXiv:1503.07237 [hep-lat]</a></li>
+    <li> R(D) =0.300 &plusmn; 0.008, H. Na et al., Phys.Rev.D 92, 054410 (2015) <a href="http://arxiv.org/abs/1505.03925">arXiv:1505.03925 [hep-lat]</a></li>
+</ul>
+
+The prediction obtained combining the two calculation above FLAG Collaboration  <a href="https://arxiv.org/abs/2411.04268">arXiv:2411.04268 [hep-lat] </a>) is R(D) =0.2938 &plusmn;  0.054. 
+
+</p> P. Gambino and D. Bigi in  Phys.Rev.D 94, 094008 (2016) <a href="https://arxiv.org/abs/1606.08030">arXiv:1606.08030 [hep-ph]</a></li> 
+combined the two lattice calculations, with the experimental Form Factor of B&rarr; D l &nu; from
+BaBar (2010) and Belle (2016), obtaining R(D) = 0.299 &plusmn; 0.003. The result is compatible with the above calculations, 
+but more accurate. Similar calculations were performed more recently by other groups (see table below for references).
+
+<br>
+<p> The SM prediction for R(D<sup>*</sup>) widely used for many  HFLAV reports was: </p>
+<ul>
+  <li> R(D<sup>*</sup>)=0.252 &plusmn;  0.003, S.Fajfer, J.F.Kamenik, and I.Nisandzic, Phys.Rev.D85(2012) 094025 <a href="http://arxiv.org/abs/1203.2654">arXiv:1203.2654 [hep-ph]</a> </li>
+</ul>    
+
+<!--
+New calculations have become available since the 2017. The most relevant input to these new calculations are: form factors obtained fitting with the BGL parameterization the unfolded spectrum from Belle with tagged B-hadron sample <a href="https://arxiv.org/abs/1702.01521">arXiv:1702.01521_[hep-ex]</a> and 
+untagged Phys.Rev.D 100 , 052007 (2019) <a href="https://arxiv.org/abs/1809.03290">arXiv:1809.03290_[hep-ex]</a>.  
+-->
+
+<!--
+<p>
+The BaBar collaboration computed an indipendent prediction of R(D<sup>*</sup>)=0.253 &plusmn;  0.005, from a full angular analysis of 
+B&rarr;D<sup>*</sup>l &nu; Phys.Rev.Lett. 123 (2019) 9, 091801. 
+-->
+
+<p>
+In 2021 FNAL/MILC released the first unquenched Lattice calculation of B&rarr;D<sup>*</sup>l &nu; form factors at non-zero recoil,
+A.Bazavov et al. [<a href="http://arxiv.org/abs/2105.14019">Eur. Phys. J. C 82, 1141 (2022)</a>] </td>, 
+predicting a value of R(D<sup>*</sup>)=0.265 &plusmn;  0.013, using only Lattice inputs. 
+In addition, since 2023, two indipendent lattice calculations at non-zero recoil are available: from HPQCD <a href="https://arxiv.org/abs/2304.03137">arXiv:2304.03137[hep-lat]</a> (R(D<sup>*</sup>)=0.273 &plusmn;  0.015), and JLQCD <a href="https://arxiv.org/abs/2306.05657">arXiv:2306.05657[hep-lat]</a> (R(D<sup>*</sup>)=0.252 &plusmn;  0.022), have been released. 
+
+Various indipendent analyses of these three lattice data has been performed by various groups. The first were performed by G. Martinelli et al. [<a href="http://arxiv.org/abs/2109.15248">Eur. Phys. J. C 84 (2024) 400</a>] and I.Ray et al. [<a href="https://arxiv.org/abs/2305.11855">JHEP 01 (2024) 022</a>], and the results reported in the table below. In these papers result combined with experimental inputs from Belle and Belle II on B&rarr;D<sup>*</sup>l &nu; are reported along with results based on lattice only calculations. 
+
+
+
+<!--
+<p>
+A combined fit of the lattice calculations for both  B&rarr;Dl &nu; and B&rarr;D<sup>*</sup>l &nu; has been recently 
+released by I.Ray and S.Nandi <a href="https://arxiv.org/abs/2305.11855">arXiv:2305.11855[hep-ph]</a>. 
+The predicted values for the ratios are R(D)=0.304(3) and R(D<sup>*</sup>)=0.258(0.012).
+In this paper also inputs from LCSR (N.Gubernari, A.Kokulu, D.van Dyk, <a href="https://arxiv.org/abs/1811.00983">JHEP 01, 150 (2019)</a>) 
+and measurements of the differential distributions are considered.
+As expected this fit configuration gives a considerably smaller uncertainty for R(<sup>*</sup>); the results are R(D)=0.300(3) and R(D<sup>*</sup>)=0.251(1).
+In the table below only the results based on Lattice calculations are reported.
+
+<p>
+These new calculations are in good agreement between each other, and consistent with 
+old predictions for R(D<sup>*</sup>). But there are inconsistencies on the shape of some of the form factors for B&rarr;D<sup>*</sup>l &nu;. More studies are required to
+clarify the origin of the discrepancies.
+Critical analyses of the various calculations and experimental inputs for both B&rarr;Dl &nu; and B&rarr;D<sup>*</sup>l &nu;, as perfomed by I.Ray and S.Nandi, would be desirable.
+-->
+
+<!-- There are differences in the evaluation of the theoretical uncertainty associated mainly with assumptions on the pseudoscalar Form Factor. 
+-->
+
+<!--
+<p>
+The central values of the SM predictions, and their uncertainty estimates, will evolve as more precise measurements of B&rarr;D(<sup>*</sup>)l &nu; spectra and new calculations become available. 
+The disagreement on the treatment of the theoretical uncertaitines can be settled when further calculations 
+of the B&rarr;D<sup>*</sup> Form Factors beyond the zero recoil limit as well as information on the pseudoscalar Form Factor will be available.
+-->
+
+<br><br>
+
+ <!-- <table border=1 cellpadding=1 cellspacing=1>
+  <thead>
+    <tr valign=top>
+      <th bgcolor="#c0c0c0">  </th>
+      <th bgcolor="#c0c0c0"> R(D)</th>
+      <th bgcolor="#c0c0c0"> R(D<sup>*</sup>)</th>
+    </tr>
+  </thead>
+
+    <tr valign=top>
+      <td> D.Bigi, P.Gambino, Phys.Rev. D94 (2016) no.9, 094008 [<a href="http://arxiv.org/abs/1606.08030">arXiv:1606.08030 [hep-ph]</a>] </td>
+      <td>0.299 &plusmn;  0.003 </td>
+      <td> </td>
+    </tr>
+
+    <tr valign=top>
+      <td> P.Gambino, M.Jung, S.Schacht, Phys.Lett.B795 (2019) 386 [<a href="http://arxiv.org/abs/1905.08209">arXiv:1905.08209 [hep-ph]</a>] </td>
+      <td>  </td>
+      <td> 0.254 &plus; 0.007 &minus; 0.006 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> M.Bordone, M.Jung, Danny van Dyk, Eur.Phy.J.C 80 (2020) 2, 74 [<a href="https://arxiv.org/abs/1908.09398">arXiv:1908.09398 [hep-ph]</a>] </td>
+      <td>0.298 &plusmn;  0.003 </td>
+      <td>0.247 &plusmn;  0.006 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> F.Bernlochner, Z.Ligeti, M.Papucci, D.Robinson, Phys.Rev. D95 (2017) no.11, 115008 [<a href="http://arxiv.org/abs/1703.05330">arXiv:1703.05330 [hep-ph]</a>] </td>
+      <td>0.299 &plusmn;  0.003 </td>
+      <td>0.257 &plusmn;  0.003 </td>
+    </tr>
+    
+    <tr valign=top>
+      <td> S.Jaiswal, S.Nandi, S.K.Patra, JHEP 1712 (2017) 060 [<a href="http://arxiv.org/abs/1707.09977">arXiv:1707.09977 [hep-ph]</a>] </td>
+      <td>0.299 &plusmn;  0.004 </td>
+      <td>0.257 &plusmn;  0.005 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> BaBar Collaboration,     Phys.Rev.Lett. 123 (2019) 9, 091801 [<a href="http://arxiv.org/abs/1903.10002">arXiv:1903.10002 [hep-ex]</a>] </td>
+      <td> </td>
+      <td>0.253 &plusmn;  0.005 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> G. Martinelli, S. Simula, L. Vittorio, Phys.RevD 105 (2022) 3, 034503 [<a href="https://arxiv.org/abs/2105.08674">arXiv:2105.08674 [hep-ph]</a>] </td>
+      <td>0.296 &plusmn;  0.008 </td>
+      <td></td>
+    </tr>
+
+
+
+    <tr> 
+      <td bgcolor="#ccccc0"><b>Arithmetic average</b> </td>
+      <td bgcolor="#ccccc0"><b>0.298 &plusmn;  0.004 </b> </td>
+      <td bgcolor="#ccccc0"><b>0.254 &plusmn;  0.005 </b> </td>
+    </tr>
+
+    <tr valign=top>
+      <td> D.Bigi, P.Gambino, S.Schacht, JHEP 1711 (2017) 061 [<a href="http://arxiv.org/abs/1707.09509">arXiv:1707.09509 [hep-ph]</a>] </td>
+      <td> </td>
+      <td>0.260 &plusmn;  0.008 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> M.Bordone, M.Jung, Danny van Dyk, Eur.Phy.J.C 80 (2020) 2, 74 [<a href="https://arxiv.org/abs/1908.09398">arXiv:1908.09398 [hep-ph]</a>] </td>
+      <td>0.297 &plusmn;  0.003 </td>
+      <td>0.250 &plusmn;  0.003 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> FNAL/MILC,  A.Bazavov et al. Eur. Phys. J. C 82 (2022) 1141 [<a href="http://arxiv.org/abs/2105.14019">arXiv:2105.14019 [hep-lat]</a>] </td>
+      <td> </td>
+      <td>0.265 &plusmn;  0.013 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> G. Martinelli, S. Simula, L. Vittorio, Eur. Phys. J. C 82 (2022) 1083 [<a href="http://arxiv.org/abs/2109.15248">arXiv:2109.15248 [hep-ph]</a>] </td>
+      <td> </td>
+      <td>0.275 &plusmn;  0.008 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> HPQCD,  J.Harrison, C.Davies, [<a href="http://arxiv.org/abs/2304.03137">arXiv:2304.03137 [hep-lat]</a>] </td>
+      <td> </td>
+      <td>0.279 &plusmn;  0.013 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> JLQCD,  Y.Aoki et al.  [<a href="http://arxiv.org/abs/2306.05657">arXiv:2306.05657 [hep-lat]</a>] </td>
+      <td> </td>
+      <td>0.252 &plusmn;  0.022 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> I.Ray, S.Nandi  [<a href="http://arxiv.org/abs/2305.11855">arXiv:2305.11855 [hep-lat]</a>] </td>
+      <td>0.304 &plusmn;  0.003 </td>
+      <td>0.258 &plusmn; 0.012 </td>
+    </tr>
+
+</table> 
+
+<br>
+
+<p> -->
+
+<p> In the following table SM predictions are reported along with the compatibility of the current HFLAV average with each of them. The correlation between  R(D) and R(D<sup>*</sup>) theory prediction has been used when avaialable in the publication.
+  
+<br><br>
+
+<table border=1 cellpadding=1 cellspacing=1>
+  <thead>
+    <tr valign=top>
+      <th bgcolor="#c0c0c0">  </th>
+      <th bgcolor="#c0c0c0"> R(D)</th>
+      <th bgcolor="#c0c0c0"> R(D<sup>*</sup>)</th>
+      <th bgcolor="#c0c0c0"> Compatibility in &sigma;</th>
+    </tr>
+  </thead>
+
+    <tr valign=top>
+      <td> D.Bigi, P.Gambino, Phys.Rev. D94 (2016) no.9, 094008 [<a href="http://arxiv.org/abs/1606.08030">arXiv:1606.08030 [hep-ph]</a>] </td>
+      <td>0.299 &plusmn;  0.003 </td>
+      <td> </td>
+      <td>2.44 </td>
+    </tr>
+    
+    <tr valign=top>
+      <td> M.Bordone, M.Jung, Danny van Dyk, Eur.Phy.J.C 80 (2020) 2, 74 [<a href="https://arxiv.org/abs/1908.09398">arXiv:1908.09398 [hep-ph]</a>] </td>
+      <td>0.298 &plusmn;  0.003 </td>
+      <td>0.247 &plusmn;  0.006 </td>
+      <td> 4.13</td>
+    </tr>
+
+    <tr valign=top>
+      <td> G. Martinelli, S. Simula, L. Vittorio, Phys.RevD 105 (2022) 3, 034503 [<a href="https://arxiv.org/abs/2105.08674">arXiv:2105.08674 [hep-ph]</a>] </td>
+      <td>0.296 &plusmn;  0.008 </td>
+      <td></td>
+      <td>2.45</td>
+    </tr>
+    
+    <tr valign=top>
+      <td> F. U. Bernlochner, Z. Ligeti, M. Papucci, M. T. Prim, D. J. Robinson, C. Xiong, Phys. Rev. D 106 (2022) 096015 [<a href="https://arxiv.org/abs/2206.11281">arXiv:2206.11281 [hep-ph]</a>] </td>
+      <td>0.288 &plusmn;  0.004 </td>
+      <td>0.249 &plusmn;  0.003 </td>
+      <td> 4.67</td>
+    </tr>
+    
+    <tr valign=top>
+      <td> I.Ray, S.Nandi, JHEP 01 (2024) 022 [<a href="http://arxiv.org/abs/2305.11855">arXiv:2305.11855 [hep-lat]</a>] </td>
+      <td>0.304 &plusmn;  0.003 </td>
+      <td>0.258 &plusmn; 0.012 </td>
+      <td>2.59 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> FLAG Collaboration, [<a href="https://arxiv.org/abs/2411.04268">arXiv:2411.04268 [hep-lat]</a>] </td>
+      <td>0.2938 &plusmn;  0.0054 </td>
+      <td> </td>
+      <td>2.61 </td>
+    </tr>
+
+<!--
+  <tr valign=top>
+      <td> FLAG Collaboration,  Eur. Phys. J. C 82 (2022) 869 [<a href="https://arxiv.org/abs/2111.09849">arXiv:2111.09849 [hep-ex]</a>] </td>
+      <td>0.2951 &plusmn;  0.0031 </td>
+      <td> </td>
+      <td>2.04 </td>
+    </tr>
+-->
+
+    <tr valign=top>
+      <td> BaBar Collaboration,     Phys.Rev.Lett. 123 (2019) 9, 091801 [<a href="http://arxiv.org/abs/1903.10002">arXiv:1903.10002 [hep-ex]</a>] </td>
+      <td> </td>
+      <td>0.253 &plusmn;  0.005 </td>
+      <td>2.37 </td>
+    </tr>
+    
+    <tr valign=top>
+      <td> P.Gambino, M.Jung, S.Schacht, Phys.Lett.B795 (2019) 386 [<a href="http://arxiv.org/abs/1905.08209">arXiv:1905.08209 [hep-ph]</a>] </td>
+      <td>  </td>
+      <td> 0.254 &plus; 0.007 &minus; 0.006 </td>
+      <td> 2.16</td>
+    </tr>
+    
+    <tr valign=top>
+      <td> G. Martinelli, S. Simula, L. Vittorio,  Eur. Phys. J. C 84 (2024) 400 [<a href="https://arxiv.org/abs/2310.03680">arXiv:2310.03680 [hep-ph]</a>] </td>
+      <td></td>
+      <td>0.262 &plusmn;  0.009 </td>
+      <td>1.37 </td>
+    </tr>
+
+
+
+    <tr> 
+      <td bgcolor="#ccccc0"><b>Arithmetic average</b> </td>
+      <td bgcolor="#ccccc0"><b>0.296 &plusmn;  0.004 </b> </td>
+      <td bgcolor="#ccccc0"><b>0.254 &plusmn;  0.005 </b> </td>
+      <td bgcolor="#ccccc0"><b>3.79 </b> </td>
+    </tr>
+
+    <tr valign=top>
+      <td> FLAG Collaboration, R(D<sup>*</sup>) Nf=2+1 [<a href="https://arxiv.org/abs/2411.04268">arXiv:2411.04268 [hep-lat]</a>] </td>
+      <td>0.2938 &plusmn;  0.0054 </td>
+      <td>0.2582 &plusmn; 0.0051  </td>
+      <td>3.53 </td>
+    </tr>
+
+    <tr valign=top>
+      <td> FLAG Collaboration, R(D<sup>*</sup>) Nf=2+1+1 [<a href="https://arxiv.org/abs/2411.04268">arXiv:2411.04268 [hep-lat]</a>] </td>
+      <td>0.2938 &plusmn;  0.0054 </td>
+      <td>0.275 &plusmn; 0.015  </td>
+      <td>2.30 </td>
+    </tr>
+
+  <tr valign=top>
+      <td> FLAG Collaboration, R(D<sup>*</sup>) G. Martinelli et. al. [<a href="https://arxiv.org/abs/2411.04268">arXiv:2411.04268 [hep-lat]</a>, <a href="https://arxiv.org/abs/2310.03680">arXiv:2310.03680 [hep-ph]</a>] </td>
+      <td>0.2938 &plusmn;  0.0054 </td>
+      <td>0.262 &plusmn; 0.009  </td>
+      <td>2.98 </td>
+    </tr>
+
+    
+</table> 
+
+<br>
+
+<p> 
+
+<!--The arithmetic average is used only for illustration and doesn't imply consent from the authors of the calculations.
+The SM uncertainty is currently subject to debate that HFLAV is following without taking a stance in this.
+-->
+<p> R(D) and R(D<sup>*</sup>) exceed the SM predictions (arithmetic average) given above, by 2.5&sigma; and 2.3&sigma; respectively.  
+Considering the R(D)-R(D<sup>*</sup>)) correlation of -0.374, the resulting combined &chi;<sup>2</sup> is 17.63 for 2 degree of freedom, 
+corresponding to a p-value of 1.48 x 10<sup>-4</sup>. The difference with the SM predictions reported above, corresponds to about 3.8&sigma;. 
+<!--Using the R(D*) prediction with the largest theoretical uncertainty, D.Bigi et al. <a href="http://arxiv.org/abs/1707.09509">arXiv:1707.09509 [hep-ph]</a>, the difference with the SM is reduced to 3.62&sigma;. 
+-->
+
+<br>
+
+<h2>Acknowledgments</h2>
+We thank Veronika Georgieva Chobanova for the development of the <a href="https://gitlab.cern.ch/vchobano/combination-code">CoCo</a> averaging tool and the support provided.
+
+
+</body>
+</html>
+

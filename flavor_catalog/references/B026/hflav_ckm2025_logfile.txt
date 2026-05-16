@@ -1,0 +1,2303 @@
+>
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+\ResultSet Combination Code 
+
+readResultListJSON: is reading the ResultSet files
+../inputs/hflav_ckm2025/babar_input.json
+../inputs/hflav_ckm2025/lhcb_a_input.json
+../inputs/hflav_ckm2025/lhcb_b_input.json
+../inputs/hflav_ckm2025/lhcb_c_input.json
+../inputs/hflav_ckm2025/belle_a_input.json
+../inputs/hflav_ckm2025/belle_b_input.json
+../inputs/hflav_ckm2025/belle_c_input.json
+../inputs/hflav_ckm2025/belleII_had_input.json
+../inputs/hflav_ckm2025/belleII_sl_input.json
+
+readResultListJSON:  Output written all files combined into:  outputs/CombinationInputOnefile.json
+
+readResultListJSON: is reading the Intercorrelartion configuration files
+IntercorrelationMaps-RDRDst_full_AVG.json
+
+SanityCheck: Performing self sanity check of ResultList big correlation matrix
+
+SanityCheck: PASSED
+
+--------------------------------------
+ShowAll (all details)
+
+
+----------ResultSet------------
+Label =  BaBar 
+
+Description:
+BaBar
+
+
+RD              :  	 0.44  +/-  0.058  +/-    0.0426      =       0.44  +/-    0.0719
+RDst            :  	 0.332  +/-  0.024  +/-    0.0184      =       0.332  +/-    0.0302
+
+Statistical Correlation Matrix:
+   1.0000	-0.4500	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrMCst1
+[0.01936 0.00664]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF1
+[0.00088  0.000664]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrDss
+[0.00308 0.00166]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.00352  0.000996]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDsstSl
+[0.00792  0.005644]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: corDpipi
+[0.00924  0.008632]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrMCst2
+[0.01056 0.00498]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrfDss
+[0.022   0.00664]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrCrossF
+[0.00572  0.001328]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrIso
+[0.00528  0.000996]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrMCst3
+[0.01364 0.00498]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrEffCorr
+[0.01716  0.007636]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrMCst4
+[0.00792  0.003984]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF2
+[0.00704  0.001328]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrLepID
+[0.00264  0.001992]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrDsDp
+[0.00044  0.000332]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrDet
+[0.00308  0.002324]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: corTauBr
+[0.00088  0.000664]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.3122	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  LHCb_Run1_Muonic 
+
+Description:
+LHCb muonic Run1
+
+
+RD              :  	 0.441  +/-  0.06  +/-    0.0697      =       0.441  +/-    0.0919
+RDst            :  	 0.281  +/-  0.018  +/-    0.0254      =       0.281  +/-    0.0311
+
+Statistical Correlation Matrix:
+   1.0000	-0.4900	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 0.0000	
+  	 1.0000	
+
+Systematic Error: lhcMcst1
+[0.025 0.015]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: lhcMcs2
+[0.037 0.   ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDDtemp
+[0.032 0.008]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF1
+[0.021 0.007]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDssSl
+[0.012 0.008]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDDstau
+[0.012 0.003]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcMisMu
+[0.008 0.001]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDssTau
+[0.005 0.005]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcComb
+[0.001 0.   ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcRis
+[0.001 0.   ]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDDMod
+[0.007 0.006]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: DssComp
+[0.024 0.006]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcbDTMC
+[0.0075 0.004 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcCoul
+[0.003 0.002]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcMisUnf
+[0.012 0.007]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcBar
+[0.012 0.007]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDTMC
+[0.006 0.004]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corTauBr
+[0.00088 0.00056]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 0.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.3972	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  LHCb_Hadronic 
+
+Description:
+LHCb hadronic Run1 + 16
+
+
+RDst            :  	 0.264454  +/-  0.011498  +/-    0.0201      =       0.264454  +/-    0.0232
+
+Statistical Correlation Matrix:
+   1.0000	
+
+Systematic Error: CorrSyst
+[0.]
+   1.0000	
+
+Systematic Error: corDtlFF1
+[0.0047602]
+   1.0000	
+
+Systematic Error: DssComp
+[0.0047602]
+   1.0000	
+
+Systematic Error: MCstat
+[0.0052626]
+   1.0000	
+
+Systematic Error: lhHU
+[0.01302436]
+   1.0000	
+
+Systematic Error: corDtlFF2
+[0.00238009]
+   1.0000	
+
+Systematic Error: corTauBr3pi
+[0.00185118]
+   1.0000	
+
+Systematic Error: BRDs3pi
+[0.01063105]
+   1.0000	
+
+Systematic Error: BRDsmunu
+[0.00637334]
+   1.0000	
+
+Systematic Error: UnCorrSyst
+[0.]
+   1.0000	
+
+Systematic Error: ExtInput
+[0.]
+   1.0000	
+
+Correlation Matrix:
+   1.0000	
+
+----------ResultSet------------
+Label =  LHCb_RD 
+
+Description:
+LHCb RDplus
+
+
+RD              :  	 0.2491293339825128  +/-  0.0473  +/-    0.0489      =       0.2491293339825128  +/-    0.0680
+RDst            :  	 0.40160171415738816  +/-  0.0937  +/-    0.0746      =       0.40160171415738816  +/-    0.1198
+
+Statistical Correlation Matrix:
+   1.0000	-0.4770	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: B2DFF
+[0.00503198 0.0167741 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF1
+[0.02113433 0.02861465]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDssSl
+[0.00805117 0.00888041]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: B2DstarstarBF
+[0.01811514 0.0167741 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDssTau
+[0.00201279 0.01776081]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDDstau
+[0.00402559 0.01480068]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: misIDeff
+[0.01509 0.00197]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: inflight
+[0.01207 0.01184]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: MBDD
+[0.01308 0.0177 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: DststBF
+[0.0161  0.00296]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: BuDD
+[0.0150959 0.023681 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: MCstatRDplus
+[0.009057 0.0296  ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: CombShape
+[0.0050319 0.0197   ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: dataMC
+[0.01409 0.00493]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: MuonID
+[0.00805 0.02664]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: MultCand
+[0.0070447 0.01677  ]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: Multiplicative
+[0.007   0.01635]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corTauBr
+[0.00057 0.00092]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 0.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.4759	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  Bellea 
+
+Description:
+Belle a
+
+
+RD              :  	 0.375  +/-  0.064  +/-    0.0265      =       0.375  +/-    0.0693
+RDst            :  	 0.293  +/-  0.038  +/-    0.0151      =       0.293  +/-    0.0409
+
+Statistical Correlation Matrix:
+   1.0000	-0.5600	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrDss
+[0.01575  0.004395]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.004875 0.00879 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: faked
+[0.001875 0.000879]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: fakel
+[0.001875 0.001758]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: dsy
+[0.000375 0.000293]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: resty
+[0.000375 0.      ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: erfdp
+[0.009375 0.002051]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: erfdz
+[0.00675  0.001172]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: erfdsp
+[0.004875 0.007325]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: erfdsz
+[0.002625 0.003223]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: cfgp
+[0.00825 0.00586]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: cfg0
+[0.006375 0.00293 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: erfwc
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: mmiss
+[0.00225 0.00293]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: snb
+[0.012    0.002344]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: lpid
+[0.001875 0.001465]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.4959	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  Belleb 
+
+Description:
+Belle b
+
+
+RDst            :  	 0.27  +/-  0.035  +/-    0.0272      =       0.27  +/-    0.0443
+
+Statistical Correlation Matrix:
+   1.0000	
+
+Systematic Error: CorrSyst
+[0.]
+   1.0000	
+
+Systematic Error: DssComp
+[0.006399]
+   1.0000	
+
+Systematic Error: bbrDs
+[0.00648]
+   1.0000	
+
+Systematic Error: otherUnc
+[0.0243]
+   1.0000	
+
+Systematic Error: tauBF
+[0.00081]
+   1.0000	
+
+Systematic Error: lepEff
+[0.00567]
+   1.0000	
+
+Systematic Error: tagEff
+[0.00378]
+   1.0000	
+
+Systematic Error: dssRec
+[0.00351]
+   1.0000	
+
+Systematic Error: dMesBf
+[0.00189]
+   1.0000	
+
+Systematic Error: nbb
+[0.00108]
+   1.0000	
+
+Systematic Error: UnCorrSyst
+[0.]
+   1.0000	
+
+Correlation Matrix:
+   1.0000	
+
+----------ResultSet------------
+Label =  Bellec 
+
+Description:
+Belle c
+
+
+RD              :  	 0.307  +/-  0.037  +/-    0.0160      =       0.307  +/-    0.0403
+RDst            :  	 0.283  +/-  0.018  +/-    0.0140      =       0.283  +/-    0.0228
+
+Statistical Correlation Matrix:
+   1.0000	-0.5300	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bllMCstat
+[0.01166293 0.005377  ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bllMcstatCor
+[0.006754 0.003396]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.0023332 0.0039903]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: faked
+[0.0005833 0.0003113]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: fakel
+[0.0011052 0.0009339]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF1
+[0.0016885 0.0007924]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bdslnu
+[1.535e-04 5.660e-05]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: dkp
+[0.0010745 0.0003679]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: dst
+[1.228e-04 5.660e-05]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corTauBr
+[0.0004605 0.0003962]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: slBtagCalib
+[0.0002149 0.0001415]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: slCrossF
+[0.0051883 0.0012452]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: slEff
+[0.0059251 0.0116596]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: slSoftPi
+[0.0002456 0.0002264]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: slLumi
+[0.000307  0.0001132]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.5093	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BelleII 
+
+Description:
+Belle II
+
+
+RDst            :  	 0.242  +/-  0.019  +/-    0.0168      =       0.242  +/-    0.0253
+RD              :  	 0.439  +/-  0.055  +/-    0.0453      =       0.439  +/-    0.0712
+
+Statistical Correlation Matrix:
+   1.0000	-0.4000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.007 0.015]
+   1.0000	 0.0100	
+  	 1.0000	
+
+Systematic Error: B2Cor
+[0.006 0.012]
+   1.0000	 0.9600	
+  	 1.0000	
+
+Systematic Error: B2Unc
+[0.014 0.041]
+   1.0000	-0.2800	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.2817	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BelleII_sl 
+
+Description:
+Belle II sl
+
+
+RD              :  	 0.418  +/-  0.074  +/-    0.0502      =       0.418  +/-    0.0894
+RDst            :  	 0.306  +/-  0.034  +/-    0.0190      =       0.306  +/-    0.0389
+
+Statistical Correlation Matrix:
+   1.0000	-0.2720	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.026961  0.0009792]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: B2MCR
+[0.03344  0.014382]
+   1.0000	-0.2940	
+  	 1.0000	
+
+Systematic Error: B2Cor
+[0.0247038 0.0028764]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: B2UncR
+[0.0078166 0.0119952]
+   1.0000	 0.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.2244	
+  	 1.0000	
+
+-----------Intercorrelations added---------
+
+
+Intercorrleation Maps read in:
+
+For rs1 =  All   rs2 =  All
+
+The set of corrrelation maps is: 
+{'lhcMcst1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMcst2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDtemp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDssSl': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhHU': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDstau': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMisMu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDssTau': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDssFF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcComb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcRis': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDMod': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'DssComp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcbDTMC': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcCoul': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMisUnf': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcBar': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDTMC': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDs': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst3': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst4': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrfDss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDsstSl': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDpipi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrCrossF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrIso': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrEffCorr': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrLepID': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDsDp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDet': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dsscomp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'faked': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'fakel': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bllMCstat': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bllMCstatCor': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDtlFF1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDtlFF2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bdslnu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dkp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dst': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corTauBr': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corTauBr3pi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'BRDs3pi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'BRDsmunu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dsy': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'resty': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdz': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdsp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdsz': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'cfgp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'cfg0': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfwc': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'mmiss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'snb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lpid': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slBtagCalib': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slCrossF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slSoftPi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slLumi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'otherUnc': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'tauBF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lepEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'tagEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dssRec': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dMesBf': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2MCR': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2Cor': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2UncR': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'nbb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}}
+
+The set of parameter equivalences is: 
+
+
+
+IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: B2Cor
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Run1_Muonic : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Hadronic : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Run1_Muonic : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Hadronic : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellea : applied full intercorr for: bbrDss
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corDssSl
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Run1_Muonic : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Hadronic : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Hadronic : applied full intercorr for: corDtlFF2
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Run1_Muonic : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellec : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=BaBar  rs2=Bellea : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: faked
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: fakel
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: lhcDDstau
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: lhcDssTau
+
+--------------------------------------
+Show (brief)
+
+
+----------ResultSet------------
+Label =  BaBar 
+
+Description:
+BaBar
+
+
+RD              :  	 0.44  +/-  0.058  +/-    0.0426      =       0.44  +/-    0.0719
+RDst            :  	 0.332  +/-  0.024  +/-    0.0184      =       0.332  +/-    0.0302
+
+Statistical Correlation Matrix:
+   1.0000	-0.4500	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  LHCb_Run1_Muonic 
+
+Description:
+LHCb muonic Run1
+
+
+RD              :  	 0.441  +/-  0.06  +/-    0.0697      =       0.441  +/-    0.0919
+RDst            :  	 0.281  +/-  0.018  +/-    0.0254      =       0.281  +/-    0.0311
+
+Statistical Correlation Matrix:
+   1.0000	-0.4900	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  LHCb_Hadronic 
+
+Description:
+LHCb hadronic Run1 + 16
+
+
+RDst            :  	 0.264454  +/-  0.011498  +/-    0.0201      =       0.264454  +/-    0.0232
+
+Statistical Correlation Matrix:
+   1.0000	
+
+----------ResultSet------------
+Label =  LHCb_RD 
+
+Description:
+LHCb RDplus
+
+
+RD              :  	 0.2491293339825128  +/-  0.0473  +/-    0.0489      =       0.2491293339825128  +/-    0.0680
+RDst            :  	 0.40160171415738816  +/-  0.0937  +/-    0.0746      =       0.40160171415738816  +/-    0.1198
+
+Statistical Correlation Matrix:
+   1.0000	-0.4770	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  Bellea 
+
+Description:
+Belle a
+
+
+RD              :  	 0.375  +/-  0.064  +/-    0.0265      =       0.375  +/-    0.0693
+RDst            :  	 0.293  +/-  0.038  +/-    0.0151      =       0.293  +/-    0.0409
+
+Statistical Correlation Matrix:
+   1.0000	-0.5600	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  Belleb 
+
+Description:
+Belle b
+
+
+RDst            :  	 0.27  +/-  0.035  +/-    0.0272      =       0.27  +/-    0.0443
+
+Statistical Correlation Matrix:
+   1.0000	
+
+----------ResultSet------------
+Label =  Bellec 
+
+Description:
+Belle c
+
+
+RD              :  	 0.307  +/-  0.037  +/-    0.0160      =       0.307  +/-    0.0403
+RDst            :  	 0.283  +/-  0.018  +/-    0.0140      =       0.283  +/-    0.0228
+
+Statistical Correlation Matrix:
+   1.0000	-0.5300	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BelleII 
+
+Description:
+Belle II
+
+
+RDst            :  	 0.242  +/-  0.019  +/-    0.0168      =       0.242  +/-    0.0253
+RD              :  	 0.439  +/-  0.055  +/-    0.0453      =       0.439  +/-    0.0712
+
+Statistical Correlation Matrix:
+   1.0000	-0.4000	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BelleII_sl 
+
+Description:
+Belle II sl
+
+
+RD              :  	 0.418  +/-  0.074  +/-    0.0502      =       0.418  +/-    0.0894
+RDst            :  	 0.306  +/-  0.034  +/-    0.0190      =       0.306  +/-    0.0389
+
+Statistical Correlation Matrix:
+   1.0000	-0.2720	
+  	 1.0000	
+
+-----------Intercorrelations added---------
+
+
+Intercorrleation Maps read in:
+
+For rs1 =  All   rs2 =  All
+
+The set of corrrelation maps is: 
+{'lhcMcst1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMcst2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDtemp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDssSl': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhHU': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDstau': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMisMu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDssTau': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDssFF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcComb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcRis': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDMod': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'DssComp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcbDTMC': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcCoul': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMisUnf': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcBar': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDTMC': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDs': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst3': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst4': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrfDss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDsstSl': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDpipi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrCrossF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrIso': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrEffCorr': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrLepID': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDsDp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDet': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dsscomp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'faked': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'fakel': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bllMCstat': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bllMCstatCor': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDtlFF1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDtlFF2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bdslnu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dkp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dst': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corTauBr': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corTauBr3pi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'BRDs3pi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'BRDsmunu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dsy': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'resty': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdz': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdsp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdsz': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'cfgp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'cfg0': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfwc': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'mmiss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'snb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lpid': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slBtagCalib': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slCrossF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slSoftPi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slLumi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'otherUnc': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'tauBF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lepEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'tagEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dssRec': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dMesBf': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2MCR': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2Cor': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2UncR': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'nbb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}}
+
+The set of parameter equivalences is: 
+
+
+
+IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: B2Cor
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Run1_Muonic : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Hadronic : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Run1_Muonic : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Hadronic : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=Bellea : applied full intercorr for: bbrDss
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corDssSl
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Run1_Muonic : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Hadronic : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Hadronic : applied full intercorr for: corDtlFF2
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_Run1_Muonic : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_RD  rs2=Bellec : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=BaBar  rs2=Bellea : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=Bellec : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: faked
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: fakel
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: lhcDDstau
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: lhcDssTau
+
+SanityCheck: Performing self sanity check of ResultList big correlation matrix
+
+SanityCheck: PASSED
+
+Main program has set up this Input file(s):  ['../inputs/RDRDst_CKM2025_step2.json']
+
+The combination has been configured with these intercorrelations file(s):  ['IntercorrelationMaps-RDRDst_full_AVG.json']
+
+ Starting Minuit fit
+<ValueView RD=0.3581223333780133 RDst=0.2813804703888323>
+<ErrorView RD=0.024011213883217912 RDst=0.010833835796060143>
+
+IMinuit average 
+   RD              :  	   0.3581  +/-    0.0240
+   RDst            :  	   0.2814  +/-    0.0108
+
+
+
+IMinuit MINOS average 
+   RD              :  	   0.3581  +  0.0240  -0.0240
+   RDst            :  	   0.2814  +  0.0108  -0.0108
+
+
+Simple Average of ResultList:
+   RD              :  	   0.3566   +-     0.0244
+   RDst            :  	   0.2804   +-     0.0104
+
+ Final Corrmat: 
+   1.0000	-0.3722	
+  	 1.0000	
+nInputs = 16 nFitParams= 2
+chi2 = 16.683 nDoF = 14.0 chi2/nDoF = 1.192 p-value = 0.273456
+Output file written:  JSON file containing simple average ResultSet: outputs/LHCbSimpleAverageResultSet.json
+Output file written:  JSON file containing final combined ResultSet: outputs/RDRDst_wRDplus_RDstHadFix_PRLBelleII_scaleRDstHadInput_report_BelleIISL.json
+
+readResultListJSON: is reading the ResultSet files
+RDRDst_wRDplus_RDstHadFix_PRLBelleII_scaleRDstHadInput_report_BelleIISL.json
+
+readResultListJSON:  Output written all files combined into:  outputs/CombinationInputOnefile.json
+
+readResultListJSON: is reading the Intercorrelartion configuration files
+
+SanityCheck: Performing self sanity check of ResultList big correlation matrix
+
+SanityCheck: PASSED
+
+--------------------------------------
+Adjusting multiplicative systematics
+--------------------------------------
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+\ResultSet Combination Code 
+
+readResultListJSON: is reading the ResultSet files
+../inputs/RDRDst_CKM2025_step2.json
+
+readResultListJSON:  Output written all files combined into:  outputs/CombinationInputOnefile.json
+
+readResultListJSON: is reading the Intercorrelartion configuration files
+IntercorrelationMaps-RDRDst_full_AVG.json
+
+SanityCheck: Performing self sanity check of ResultList big correlation matrix
+
+SanityCheck: PASSED
+
+--------------------------------------
+ShowAll (all details)
+
+
+----------ResultSet------------
+Label =  LHCb_Run1_Muonic 
+
+Description:
+LHCb muonic Run1
+
+
+RD              :  	 0.3581  +/-  0.06  +/-    0.0696      =       0.3581  +/-    0.0919
+RDst            :  	 0.2814  +/-  0.018  +/-    0.0254      =       0.2814  +/-    0.0311
+
+Statistical Correlation Matrix:
+   1.0000	-0.4900	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 0.0000	
+  	 1.0000	
+
+Systematic Error: lhcMcst1
+[0.025 0.015]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: lhcMcs2
+[0.037 0.   ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDDtemp
+[0.032 0.008]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF1
+[0.021 0.007]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDssSl
+[0.012 0.008]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDDstau
+[0.012 0.003]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcMisMu
+[0.008 0.001]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDssTau
+[0.005 0.005]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcComb
+[0.001 0.   ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcRis
+[0.001 0.   ]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDDMod
+[0.007 0.006]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: DssComp
+[0.024 0.006]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcbDTMC
+[0.0075 0.004 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcCoul
+[0.003 0.002]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcMisUnf
+[0.012 0.007]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcBar
+[0.012 0.007]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDTMC
+[0.00487211 0.00400569]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corTauBr
+[0.00071458 0.0005608 ]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 0.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.3959	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  LHCb_Hadronic 
+
+Description:
+LHCb hadronic Run1 + 16
+
+
+RDst            :  	 0.2814  +/-  0.011498  +/-    0.0207      =       0.2814  +/-    0.0236
+
+Statistical Correlation Matrix:
+   1.0000	
+
+Systematic Error: CorrSyst
+[0.]
+   1.0000	
+
+Systematic Error: corDtlFF1
+[0.0047602]
+   1.0000	
+
+Systematic Error: DssComp
+[0.0047602]
+   1.0000	
+
+Systematic Error: MCstat
+[0.0052626]
+   1.0000	
+
+Systematic Error: lhHU
+[0.01302436]
+   1.0000	
+
+Systematic Error: corDtlFF2
+[0.0025326]
+   1.0000	
+
+Systematic Error: corTauBr3pi
+[0.0019698]
+   1.0000	
+
+Systematic Error: BRDs3pi
+[0.01131228]
+   1.0000	
+
+Systematic Error: BRDsmunu
+[0.00678174]
+   1.0000	
+
+Systematic Error: UnCorrSyst
+[0.]
+   1.0000	
+
+Systematic Error: ExtInput
+[0.]
+   1.0000	
+
+Correlation Matrix:
+   1.0000	
+
+----------ResultSet------------
+Label =  Belleb 
+
+Description:
+Belle b
+
+
+RDst            :  	 0.2814  +/-  0.035  +/-    0.0273      =       0.2814  +/-    0.0444
+
+Statistical Correlation Matrix:
+   1.0000	
+
+Systematic Error: CorrSyst
+[0.]
+   1.0000	
+
+Systematic Error: DssComp
+[0.006399]
+   1.0000	
+
+Systematic Error: bbrDs
+[0.00648]
+   1.0000	
+
+Systematic Error: otherUnc
+[0.0243]
+   1.0000	
+
+Systematic Error: tauBF
+[0.0008442]
+   1.0000	
+
+Systematic Error: lepEff
+[0.0059094]
+   1.0000	
+
+Systematic Error: tagEff
+[0.0039396]
+   1.0000	
+
+Systematic Error: dssRec
+[0.0036582]
+   1.0000	
+
+Systematic Error: dMesBf
+[0.0019698]
+   1.0000	
+
+Systematic Error: nbb
+[0.0011256]
+   1.0000	
+
+Systematic Error: UnCorrSyst
+[0.]
+   1.0000	
+
+Correlation Matrix:
+   1.0000	
+
+----------ResultSet------------
+Label =  Bellea 
+
+Description:
+Belle a
+
+
+RD              :  	 0.3581  +/-  0.064  +/-    0.0263      =       0.3581  +/-    0.0692
+RDst            :  	 0.2814  +/-  0.038  +/-    0.0150      =       0.2814  +/-    0.0408
+
+Statistical Correlation Matrix:
+   1.0000	-0.5600	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrDss
+[0.01575  0.004395]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.004875 0.00879 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: faked
+[0.001875 0.000879]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: fakel
+[0.001875 0.001758]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: dsy
+[0.000375 0.000293]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: resty
+[0.000375 0.      ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: erfdp
+[0.0089595 0.0019698]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: erfdz
+[0.0064458 0.0011256]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: erfdsp
+[0.0046553 0.007035 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: erfdsz
+[0.0025067 0.0030954]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: cfgp
+[0.00825 0.00586]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: cfg0
+[0.006375 0.00293 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: erfwc
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: mmiss
+[0.00225 0.00293]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: snb
+[0.012    0.002344]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: lpid
+[0.0017905 0.001407 ]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.4964	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  Bellec 
+
+Description:
+Belle c
+
+
+RD              :  	 0.3581  +/-  0.037  +/-    0.0160      =       0.3581  +/-    0.0403
+RDst            :  	 0.2814  +/-  0.018  +/-    0.0140      =       0.2814  +/-    0.0228
+
+Statistical Correlation Matrix:
+   1.0000	-0.5300	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bllMCstat
+[0.01166293 0.005377  ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bllMcstatCor
+[0.006754 0.003396]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.0023332 0.0039903]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: faked
+[0.0005833 0.0003113]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: fakel
+[0.0011052 0.0009339]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF1
+[0.0016885 0.0007924]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bdslnu
+[1.7905e-04 5.6280e-05]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: dkp
+[0.00125335 0.00036582]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: dst
+[1.4324e-04 5.6280e-05]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corTauBr
+[0.00053715 0.00039396]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: slBtagCalib
+[0.0002149 0.0001415]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: slCrossF
+[0.0051883 0.0012452]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: slEff
+[0.0059251 0.0116596]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: slSoftPi
+[0.0002456 0.0002264]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: slLumi
+[0.000307  0.0001132]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.5093	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BaBar 
+
+Description:
+BaBar
+
+
+RD              :  	 0.3581  +/-  0.058  +/-    0.0420      =       0.3581  +/-    0.0716
+RDst            :  	 0.2814  +/-  0.024  +/-    0.0181      =       0.2814  +/-    0.0301
+
+Statistical Correlation Matrix:
+   1.0000	-0.4500	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrMCst1
+[0.01936 0.00664]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF1
+[0.00088  0.000664]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrDss
+[0.00308 0.00166]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.00352  0.000996]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDsstSl
+[0.00792  0.005644]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: corDpipi
+[0.00924  0.008632]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrMCst2
+[0.01056 0.00498]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrfDss
+[0.022   0.00664]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrCrossF
+[0.00572  0.001328]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrIso
+[0.00528  0.000996]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrMCst3
+[0.01364 0.00498]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrEffCorr
+[0.01716  0.007636]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: bbrMCst4
+[0.0064458  0.00333768]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF2
+[0.0057296 0.0011256]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrLepID
+[0.0021486 0.0016884]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrDsDp
+[0.0003581 0.0002814]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: bbrDet
+[0.0025067 0.0019698]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: corTauBr
+[0.0007162 0.0005628]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.3228	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BelleII 
+
+Description:
+Belle II
+
+
+RDst            :  	 0.2814  +/-  0.019  +/-    0.0168      =       0.2814  +/-    0.0253
+RD              :  	 0.3581  +/-  0.055  +/-    0.0453      =       0.3581  +/-    0.0712
+
+Statistical Correlation Matrix:
+   1.0000	-0.4000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.007 0.015]
+   1.0000	 0.0100	
+  	 1.0000	
+
+Systematic Error: B2Cor
+[0.006 0.012]
+   1.0000	 0.9600	
+  	 1.0000	
+
+Systematic Error: B2Unc
+[0.014 0.041]
+   1.0000	-0.2800	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.2817	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BelleII_sl 
+
+Description:
+Belle II sl
+
+
+RD              :  	 0.3581  +/-  0.074  +/-    0.0502      =       0.3581  +/-    0.0894
+RDst            :  	 0.2814  +/-  0.034  +/-    0.0190      =       0.2814  +/-    0.0389
+
+Statistical Correlation Matrix:
+   1.0000	-0.2720	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: dsscomp
+[0.026961  0.0009792]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: B2MCR
+[0.03344  0.014382]
+   1.0000	-0.2940	
+  	 1.0000	
+
+Systematic Error: B2Cor
+[0.0247038 0.0028764]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: B2UncR
+[0.0078166 0.0119952]
+   1.0000	 0.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.2244	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  LHCb_RD 
+
+Description:
+LHCb RDplus
+
+
+RD              :  	 0.3581  +/-  0.0473  +/-    0.0494      =       0.3581  +/-    0.0684
+RDst            :  	 0.2814  +/-  0.0937  +/-    0.0737      =       0.2814  +/-    0.1192
+
+Statistical Correlation Matrix:
+   1.0000	-0.4770	
+  	 1.0000	
+
+Systematic Error: CorrSyst
+[0. 0.]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: B2DFF
+[0.00503198 0.0167741 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDtlFF1
+[0.02113433 0.02861465]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corDssSl
+[0.00805117 0.00888041]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: B2DstarstarBF
+[0.01811514 0.0167741 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDssTau
+[0.00201279 0.01776081]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: lhcDDstau
+[0.00402559 0.01480068]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: misIDeff
+[0.01509 0.00197]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: inflight
+[0.01207 0.01184]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: MBDD
+[0.01308 0.0177 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: DststBF
+[0.0161  0.00296]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: BuDD
+[0.0150959 0.023681 ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: MCstatRDplus
+[0.009057 0.0296  ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: CombShape
+[0.0050319 0.0197   ]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: dataMC
+[0.01409 0.00493]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: MuonID
+[0.00805 0.02664]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: MultCand
+[0.0070447 0.01677  ]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: Multiplicative
+[0.01006184 0.01145635]
+   1.0000	-1.0000	
+  	 1.0000	
+
+Systematic Error: corTauBr
+[0.00081932 0.00064464]
+   1.0000	 1.0000	
+  	 1.0000	
+
+Systematic Error: UnCorrSyst
+[0. 0.]
+   1.0000	 0.0000	
+  	 1.0000	
+
+Correlation Matrix:
+   1.0000	-0.4756	
+  	 1.0000	
+
+-----------Intercorrelations added---------
+
+
+Intercorrleation Maps read in:
+
+For rs1 =  All   rs2 =  All
+
+The set of corrrelation maps is: 
+{'lhcMcst1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMcst2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDtemp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDssSl': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhHU': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDstau': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMisMu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDssTau': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDssFF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcComb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcRis': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDMod': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'DssComp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcbDTMC': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcCoul': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMisUnf': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcBar': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDTMC': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDs': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst3': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst4': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrfDss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDsstSl': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDpipi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrCrossF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrIso': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrEffCorr': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrLepID': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDsDp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDet': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dsscomp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'faked': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'fakel': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bllMCstat': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bllMCstatCor': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDtlFF1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDtlFF2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bdslnu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dkp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dst': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corTauBr': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corTauBr3pi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'BRDs3pi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'BRDsmunu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dsy': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'resty': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdz': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdsp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdsz': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'cfgp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'cfg0': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfwc': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'mmiss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'snb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lpid': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slBtagCalib': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slCrossF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slSoftPi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slLumi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'otherUnc': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'tauBF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lepEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'tagEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dssRec': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dMesBf': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2MCR': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2Cor': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2UncR': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'nbb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}}
+
+The set of parameter equivalences is: 
+
+
+
+IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: B2Cor
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BelleII_sl  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BaBar : applied full intercorr for: bbrDss
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corDssSl
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BaBar : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BaBar : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=Bellec  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BaBar : applied full intercorr for: corDtlFF2
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BaBar : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=Bellec  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BaBar : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: faked
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: fakel
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: lhcDDstau
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: lhcDssTau
+
+--------------------------------------
+Show (brief)
+
+
+----------ResultSet------------
+Label =  LHCb_Run1_Muonic 
+
+Description:
+LHCb muonic Run1
+
+
+RD              :  	 0.3581  +/-  0.06  +/-    0.0696      =       0.3581  +/-    0.0919
+RDst            :  	 0.2814  +/-  0.018  +/-    0.0254      =       0.2814  +/-    0.0311
+
+Statistical Correlation Matrix:
+   1.0000	-0.4900	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  LHCb_Hadronic 
+
+Description:
+LHCb hadronic Run1 + 16
+
+
+RDst            :  	 0.2814  +/-  0.011498  +/-    0.0207      =       0.2814  +/-    0.0236
+
+Statistical Correlation Matrix:
+   1.0000	
+
+----------ResultSet------------
+Label =  Belleb 
+
+Description:
+Belle b
+
+
+RDst            :  	 0.2814  +/-  0.035  +/-    0.0273      =       0.2814  +/-    0.0444
+
+Statistical Correlation Matrix:
+   1.0000	
+
+----------ResultSet------------
+Label =  Bellea 
+
+Description:
+Belle a
+
+
+RD              :  	 0.3581  +/-  0.064  +/-    0.0263      =       0.3581  +/-    0.0692
+RDst            :  	 0.2814  +/-  0.038  +/-    0.0150      =       0.2814  +/-    0.0408
+
+Statistical Correlation Matrix:
+   1.0000	-0.5600	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  Bellec 
+
+Description:
+Belle c
+
+
+RD              :  	 0.3581  +/-  0.037  +/-    0.0160      =       0.3581  +/-    0.0403
+RDst            :  	 0.2814  +/-  0.018  +/-    0.0140      =       0.2814  +/-    0.0228
+
+Statistical Correlation Matrix:
+   1.0000	-0.5300	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BaBar 
+
+Description:
+BaBar
+
+
+RD              :  	 0.3581  +/-  0.058  +/-    0.0420      =       0.3581  +/-    0.0716
+RDst            :  	 0.2814  +/-  0.024  +/-    0.0181      =       0.2814  +/-    0.0301
+
+Statistical Correlation Matrix:
+   1.0000	-0.4500	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BelleII 
+
+Description:
+Belle II
+
+
+RDst            :  	 0.2814  +/-  0.019  +/-    0.0168      =       0.2814  +/-    0.0253
+RD              :  	 0.3581  +/-  0.055  +/-    0.0453      =       0.3581  +/-    0.0712
+
+Statistical Correlation Matrix:
+   1.0000	-0.4000	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  BelleII_sl 
+
+Description:
+Belle II sl
+
+
+RD              :  	 0.3581  +/-  0.074  +/-    0.0502      =       0.3581  +/-    0.0894
+RDst            :  	 0.2814  +/-  0.034  +/-    0.0190      =       0.2814  +/-    0.0389
+
+Statistical Correlation Matrix:
+   1.0000	-0.2720	
+  	 1.0000	
+
+----------ResultSet------------
+Label =  LHCb_RD 
+
+Description:
+LHCb RDplus
+
+
+RD              :  	 0.3581  +/-  0.0473  +/-    0.0494      =       0.3581  +/-    0.0684
+RDst            :  	 0.2814  +/-  0.0937  +/-    0.0737      =       0.2814  +/-    0.1192
+
+Statistical Correlation Matrix:
+   1.0000	-0.4770	
+  	 1.0000	
+
+-----------Intercorrelations added---------
+
+
+Intercorrleation Maps read in:
+
+For rs1 =  All   rs2 =  All
+
+The set of corrrelation maps is: 
+{'lhcMcst1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMcst2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDtemp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDssSl': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhHU': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDstau': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMisMu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDssTau': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDssFF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcComb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcRis': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDDMod': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'DssComp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcbDTMC': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcCoul': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcMisUnf': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcBar': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lhcDTMC': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDs': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst3': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrMCst4': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrfDss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDsstSl': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDpipi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrCrossF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrIso': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrEffCorr': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrLepID': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDsDp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bbrDet': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dsscomp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'faked': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'fakel': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bllMCstat': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bllMCstatCor': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDtlFF1': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corDtlFF2': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'bdslnu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dkp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dst': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corTauBr': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'corTauBr3pi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'BRDs3pi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'BRDsmunu': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dsy': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'resty': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdz': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdsp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfdsz': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'cfgp': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'cfg0': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'erfwc': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'mmiss': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'snb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lpid': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slBtagCalib': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slCrossF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slSoftPi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'slLumi': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'otherUnc': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'tauBF': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'lepEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'tagEff': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dssRec': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'dMesBf': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2MCR': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2Cor': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'B2UncR': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}, 'nbb': {'ictype': 'FULL', 'scale': 1.0, 'strategy': 'AVG'}}
+
+The set of parameter equivalences is: 
+
+
+
+IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: B2Cor
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellea : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII_sl : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=BelleII_sl  rs2=LHCb_RD : no correlation map for : CorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : applied full intercorr for: DssComp
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Belleb : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellea : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Belleb  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellec  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : no correlation map for : UnCorrSyst
+IntercorrelationMaps: rs1=Bellea  rs2=BaBar : applied full intercorr for: bbrDss
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corDssSl
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_Hadronic : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BaBar : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=Bellec : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BaBar : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=Bellec  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : applied full intercorr for: corDtlFF1
+IntercorrelationMaps: rs1=LHCb_Hadronic  rs2=BaBar : applied full intercorr for: corDtlFF2
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=Bellec : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=BaBar : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=Bellec  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=BaBar  rs2=LHCb_RD : applied full intercorr for: corTauBr
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BaBar : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BaBar : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellec  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BaBar  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: dsscomp
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: faked
+IntercorrelationMaps: rs1=Bellea  rs2=Bellec : applied full intercorr for: fakel
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: lhcDDstau
+IntercorrelationMaps: rs1=LHCb_Run1_Muonic  rs2=LHCb_RD : applied full intercorr for: lhcDssTau
+
+SanityCheck: Performing self sanity check of ResultList big correlation matrix
+
+SanityCheck: PASSED
+
+Main program has set up this Input file(s):  ['../inputs/RDRDst_CKM2025_step2.json']
+
+The combination has been configured with these intercorrelations file(s):  ['IntercorrelationMaps-RDRDst_full_AVG.json']
+
+ Starting Minuit fit
+<ValueView RD=0.3581 RDst=0.2814>
+<ErrorView RD=0.024026264307415002 RDst=0.01086734029656071>
+
+IMinuit average 
+   RD              :  	   0.3581  +/-    0.0240
+   RDst            :  	   0.2814  +/-    0.0109
+
+
+
+IMinuit MINOS average 
+   RD              :  	   0.3581  +  0.0240  -0.0240
+   RDst            :  	   0.2814  +  0.0109  -0.0109
+
+
+Simple Average of ResultList:
+   RD              :  	   0.3581   +-     0.0244
+   RDst            :  	   0.2814   +-     0.0104
+
+ Final Corrmat: 
+   1.0000	-0.3742	
+  	 1.0000	
+
+
+

@@ -1,0 +1,192 @@
+schema: flavor_catalog.process.v1
+process_id: B026
+family: beauty
+standard_notation: "R_{D^*}"
+process_name: "LFU ratio in B -> D* tau nu over B -> D* light-lepton nu"
+owner: "PKA"
+owner_agent_id: "PKA-B026"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:20:55-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:20:55-04:00"
+    agent_id: "PKA-B026"
+    reason: "Initial PKA source extraction and process draft for B026."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T13:20:55-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T13:20:55-04:00"
+    agent_id: "PKA-B026"
+    reason: "PKA draft, source snapshots, code-coverage grep, and sidecar completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:20:55-04:00"
+version: "0.1.1"
+source_shas:
+  babar2012_arxiv1205_5442.txt: "sha256:93de45aad78fd4a9a4f4add72f26fc30be0c8df67b584889cc2ee99397ced424"
+  babar2013_arxiv1303_0571.txt: "sha256:212ee5f4879f28b67cc0a7a275fc8197b83daf8d2f802c42c35aa23e2737b28c"
+  belle2015_arxiv1507_03233.txt: "sha256:9699240efd24c3b240148567b65bb8eacbb1d6053124909d4638bed57b6a4cc0"
+  belle2017_arxiv1612_00529.txt: "sha256:51a51077004480ab347c63f8a44c504c7ca491d5ea6bdb9e20d80dbf762d5a11"
+  belle2018_arxiv1709_00129.txt: "sha256:90ab16730f8d8d660b8a50c14b15c3541e23fe93555175626166edaabaca16ea"
+  belle2019_arxiv1910_05864.txt: "sha256:3515901f77138305102bdd8ee0ce7d634be8306f86a4279c127aaa848cf4d821"
+  belleii2024_arxiv2401_02840.txt: "sha256:8d770d89b9ae6935b3bce46ef88745cf56f0637f2bcda378f9af504c8aa50774"
+  belleii2025_arxiv2504_11220.txt: "sha256:8048cbbc38593d691d9e456abf43cdbeb43747af57f60d530ca3cd1b371eeeda"
+  cfw2008_arxiv0804_1954.txt: "sha256:f4d01ad93ca681bddea9733c79df6d767f5e1f8321c8766a24a8a4992f08beb0"
+  flag2024_arxiv2411_04268.txt: "sha256:6960608d52fd2f87e117c5e26de235954a0499a97eb1ac70be4d25b20af91c79"
+  hflav_ckm2025_logfile.txt: "sha256:484f6ee19b8eaa50d6a304a3d5d211861dc28a94581dbb9d6656ad8a18a49422"
+  hflav_ckm2025_rdrds.txt: "sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8"
+  lhcb2023_arxiv2302_02886.txt: "sha256:04ff0a6c66b812d9486853cff71b286450d7662d1f56f738e154fb382a6aa71c"
+  lhcb2023_arxiv2305_01463.txt: "sha256:30e82b86bc6ccfdaff175315909741045128c6355802f0682c9c5fcbbae6fb10"
+  lhcb2025_arxiv2406_03387.txt: "sha256:cf8199e9d4230262942409252d35a5ccb6a27643149936acd62d3000bda1219a"
+  sha256sums.txt: "sha256:c0cd47b81ab5414e62e408e9bc3fe4a2bc2d2a00ab2bd8853b59d78fd5e06298"
+pdg_or_equivalent:
+  canonical_average:
+    source: "HFLAV semileptonic B averages, CKM 2025"
+    year: 2025
+    update_date: "2025-09-28"
+    observable: "R(D*) = B(B -> D* tau nu_tau) / B(B -> D* l nu_l), l=e,mu"
+    value: 0.281
+    uncertainty: 0.011
+    units: "dimensionless ratio"
+    fit_context: "Joint HFLAV R(D)-R(D*) average using CoCo; rounded display value from HTML table."
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B026/hflav_ckm2025_rdrds.txt"
+    sha256: "4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8"
+    logfile_snapshot_path: "flavor_catalog/references/B026/hflav_ckm2025_logfile.txt"
+    logfile_sha256: "484f6ee19b8eaa50d6a304a3d5d211861dc28a94581dbb9d6656ad8a18a49422"
+  joint_fit_context:
+    source: "HFLAV semileptonic B averages, CKM 2025"
+    rd_value: 0.358
+    rd_uncertainty: 0.024
+    rdstar_value: 0.281
+    rdstar_uncertainty: 0.011
+    correlation_rd_rdstar: -0.374
+    chi2: 16.683
+    dof: 14
+    confidence_level: 0.27
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B026/hflav_ckm2025_rdrds.txt"
+    sha256: "4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8"
+  sm_reference_used_by_hflav:
+    source: "HFLAV CKM 2025 arithmetic SM reference table"
+    rd_value: 0.296
+    rd_uncertainty: 0.004
+    rdstar_value: 0.254
+    rdstar_uncertainty: 0.005
+    rd_pull_sigma: 2.5
+    rdstar_pull_sigma: 2.3
+    combined_chi2: 17.63
+    combined_dof: 2
+    combined_p_value: 0.000148
+    combined_sigma: 3.8
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B026/hflav_ckm2025_rdrds.txt"
+    sha256: "4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8"
+  selected_experimental_inputs:
+    - experiment: "BaBar"
+      year: 2012
+      rdstar_value: 0.332
+      rdstar_stat_uncertainty: 0.024
+      rdstar_syst_uncertainty: 0.018
+      source_key: "babar2012_arxiv1205_5442"
+      snapshot_path: "flavor_catalog/references/B026/babar2012_arxiv1205_5442.txt"
+      sha256: "93de45aad78fd4a9a4f4add72f26fc30be0c8df67b584889cc2ee99397ced424"
+    - experiment: "Belle"
+      year: 2015
+      rdstar_value: 0.293
+      rdstar_stat_uncertainty: 0.038
+      rdstar_syst_uncertainty: 0.015
+      source_key: "belle2015_arxiv1507_03233"
+      snapshot_path: "flavor_catalog/references/B026/belle2015_arxiv1507_03233.txt"
+      sha256: "9699240efd24c3b240148567b65bb8eacbb1d6053124909d4638bed57b6a4cc0"
+    - experiment: "Belle"
+      year: 2017
+      rdstar_value: 0.270
+      rdstar_stat_uncertainty: 0.035
+      rdstar_syst_uncertainty_plus: 0.028
+      rdstar_syst_uncertainty_minus: 0.025
+      source_key: "belle2017_arxiv1612_00529"
+      snapshot_path: "flavor_catalog/references/B026/belle2017_arxiv1612_00529.txt"
+      sha256: "51a51077004480ab347c63f8a44c504c7ca491d5ea6bdb9e20d80dbf762d5a11"
+    - experiment: "Belle"
+      year: 2020
+      rdstar_value: 0.283
+      rdstar_stat_uncertainty: 0.018
+      rdstar_syst_uncertainty: 0.014
+      source_key: "belle2019_arxiv1910_05864"
+      snapshot_path: "flavor_catalog/references/B026/belle2019_arxiv1910_05864.txt"
+      sha256: "3515901f77138305102bdd8ee0ce7d634be8306f86a4279c127aaa848cf4d821"
+    - experiment: "LHCb"
+      year: 2023
+      rdstar_value: 0.281
+      rdstar_stat_uncertainty: 0.018
+      rdstar_syst_uncertainty: 0.024
+      source_key: "lhcb2023_arxiv2302_02886"
+      snapshot_path: "flavor_catalog/references/B026/lhcb2023_arxiv2302_02886.txt"
+      sha256: "04ff0a6c66b812d9486853cff71b286450d7662d1f56f738e154fb382a6aa71c"
+    - experiment: "LHCb"
+      year: 2023
+      rdstar_value: 0.267
+      rdstar_stat_uncertainty: 0.012
+      rdstar_syst_uncertainty: 0.019
+      source_key: "lhcb2023_arxiv2305_01463"
+      snapshot_path: "flavor_catalog/references/B026/lhcb2023_arxiv2305_01463.txt"
+      sha256: "30e82b86bc6ccfdaff175315909741045128c6355802f0682c9c5fcbbae6fb10"
+    - experiment: "LHCb"
+      year: 2025
+      rdstar_value: 0.402
+      rdstar_stat_uncertainty: 0.081
+      rdstar_syst_uncertainty: 0.085
+      source_key: "lhcb2025_arxiv2406_03387"
+      snapshot_path: "flavor_catalog/references/B026/lhcb2025_arxiv2406_03387.txt"
+      sha256: "cf8199e9d4230262942409252d35a5ccb6a27643149936acd62d3000bda1219a"
+    - experiment: "Belle II"
+      year: 2025
+      rdstar_value: 0.306
+      rdstar_stat_uncertainty: 0.034
+      rdstar_syst_uncertainty: 0.018
+      source_key: "belleii2025_arxiv2504_11220"
+      snapshot_path: "flavor_catalog/references/B026/belleii2025_arxiv2504_11220.txt"
+      sha256: "8048cbbc38593d691d9e456abf43cdbeb43747af57f60d530ca3cd1b371eeeda"
+    - experiment: "Belle II"
+      year: 2025
+      rdstar_value: 0.242
+      rdstar_stat_uncertainty: 0.019
+      rdstar_syst_uncertainty: 0.016
+      source_key: "hflav_ckm2025_rdrds"
+      snapshot_path: "flavor_catalog/references/B026/hflav_ckm2025_rdrds.txt"
+      sha256: "4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|b.?->.?c|X_s|K\\\\*|R_K|R_D|R\\\\(D\\\\*\\\\)|R_D\\\\*|D\\\\*.*tau|B.*D\\\\*.*tau|charged.?current|charged.?Higgs|leptoquark|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+  targeted_grep_commands:
+    - "rg -n -i \"R\\\\(D\\\\*\\\\)|R_Dstar|R_D\\\\*|RDst|D\\\\*.*tau|Dstar.*tau|B.?->.?D\\\\*|b.?->.?c|charged.?Higgs|leptoquark|semileptonic\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Required broad greps found the existing Delta F=2 and mu->e gamma surfaces, but no R(D*) observable implementation."
+    - "Targeted R(D*)/D* tau/B -> D*/b -> c/charged-Higgs/leptoquark search over the required implementation directories returned no hits."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "A live R(D*) constraint needs charged-current semileptonic matching, B -> D* form-factor integration, and the correlated R(D)-R(D*) HFLAV likelihood; none is present in the current Delta F=2 or mu->e gamma code."
+open_issues:
+  - "The prompt mentions an approximately 3.3 sigma HFLAV tension, while the current HFLAV CKM 2025 page updated on 2025-09-28 quotes 3.8 sigma against its arithmetic SM reference; WA/CA should decide whether to mention older editions."
+  - "The Belle II CKM-2025 hadronic-tag input is a conference talk PDF on Indico; this PKA did not snapshot the PDF under the no-publisher/no-PDF policy and uses the HFLAV table entry instead."
