@@ -34,9 +34,18 @@ status_history:
     reason: "Checker ca_w5a_charged_lepton_edm found a strict CHK-1 metadata-placement issue."
     issues:
       - "CHK-1: L006.tex quotes MACE/Snowmass prospective numerical claims, including more than two orders of magnitude and 10^-13 probability reach, but those values are in prospects rather than pdg_or_equivalent entries with the required per-claim metadata."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T15:15:17-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T15:15:17-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "WA cycle 2 addressed CA CHK-1 by adding pdg_or_equivalent.values metadata for the flagged MACE/Snowmass prospect numbers."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:30-04:00"
+last_updated_at: "2026-05-16T15:15:17-04:00"
 version: "0.1.0"
 source_shas:
   agashe2006_rs_lfv_arxiv_hepph0606021.txt: "sha256:492db37edb6f351f66add5b8b6b826119f694c981bc6fb1b77fe31e3da7db00c"
@@ -85,6 +94,31 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/L006/willmann1999_macs_arxiv_hepex9807011.txt"
     sha256: "3e22390c63c86fed7723e8b38cb2ecb3bd2d486df610bafb40fffa5e167b76a4"
+  values:
+    - value_id: "Bai2022:L006:mace_sensitivity_improvement"
+      observable: "MACE prospective probability-sensitivity improvement target"
+      year: 2022
+      value: 2
+      relation: ">"
+      uncertainty: null
+      units: "orders of magnitude improvement"
+      source_url: "https://arxiv.org/abs/2203.11406"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L006/bai2022_snowmass_mace_arxiv2203_11406.txt"
+      sha256: "04c55fc736d4de4e510187d160fe1f91bf9c324195a2c6c38db4d04179eba016"
+      classification: "prospective sensitivity target"
+    - value_id: "Bai2024:L006:mace_probability_reach"
+      observable: "MACE target muonium-to-antimuonium conversion-probability reach"
+      year: 2024
+      value: 1.0e-13
+      relation: "beyond the level of"
+      uncertainty: null
+      units: "conversion probability"
+      source_url: "https://arxiv.org/abs/2410.18817"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L006/bai2024_mace_cdr_arxiv2410_18817.txt"
+      sha256: "6acea5b25a8a05a9cc2527d59a3aafca9099e861aaa5fa3adc4ac06d0e413632"
+      classification: "prospective probability reach"
 prospects:
   - source: "Snowmass2021 Whitepaper: Muonium to antimuonium conversion"
     arxiv_id: "2203.11406"

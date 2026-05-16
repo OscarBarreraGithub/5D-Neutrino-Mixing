@@ -41,9 +41,18 @@ status_history:
     reason: "Checker ca_w5a_charged_lepton_edm found a strict CHK-1 metadata-placement issue."
     issues:
       - "CHK-1: L005.tex quotes Mu2e four-orders context and COMET Phase-I 3.1e-15 / 7.0e-15 / 90% numerical prospect claims, but those values are in post_2008_developments rather than pdg_or_equivalent entries with the required per-claim metadata."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T15:15:17-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T15:15:17-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "WA cycle 2 addressed CA CHK-1 by adding pdg_or_equivalent.values metadata for the flagged Mu2e and COMET projection/context numbers."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:30-04:00"
+last_updated_at: "2026-05-16T15:15:17-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba"
@@ -82,6 +91,42 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/L005/sindrumii_1993_titanium_crossref.txt"
     sha256: "fc1354e78154dc9a8abb2b85631428f5d20c1c4fb1822037444b15fd249146f8"
+  values:
+    - value_id: "Mu2eTDR2015:L005:program_improvement_context"
+      observable: "Mu2e coherent mu- N -> e- N program improvement context"
+      year: 2015
+      value: 4
+      qualifier: "roughly"
+      uncertainty: null
+      units: "orders of magnitude improvement beyond previous published conversion limits"
+      source_url: "https://arxiv.org/abs/1501.05241"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L005/mu2e_tdr_arxiv1501_05241.txt"
+      sha256: "da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831"
+      classification: "program context; aluminum conversion program, not a titanium measurement"
+    - value_id: "COMETPhaseITDR2020:L005:single_event_sensitivity"
+      observable: "COMET Phase-I Al coherent mu- N -> e- N single-event sensitivity"
+      year: 2020
+      value: 3.1e-15
+      uncertainty: null
+      units: "conversion ratio single-event sensitivity"
+      source_url: "https://arxiv.org/abs/1812.09018"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt"
+      sha256: "f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450"
+      classification: "prospective aluminum sensitivity; not a titanium measurement"
+    - value_id: "COMETPhaseITDR2020:L005:expected_upper_limit_90cl"
+      observable: "COMET Phase-I Al coherent mu- N -> e- N expected upper limit"
+      year: 2020
+      value: 7.0e-15
+      uncertainty: null
+      units: "conversion ratio upper limit"
+      confidence_level: "90% C.L."
+      source_url: "https://arxiv.org/abs/1812.09018"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt"
+      sha256: "f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450"
+      classification: "prospective aluminum upper limit; not a titanium measurement"
 post_2008_developments:
   - source: "Mu2e Technical Design Report"
     arxiv_id: "1501.05241"

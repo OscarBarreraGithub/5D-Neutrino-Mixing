@@ -41,9 +41,18 @@ status_history:
     reason: "Checker ca_w5a_charged_lepton_edm found a strict CHK-1 metadata-placement issue."
     issues:
       - "CHK-1: E002.tex quotes PSI projection/status numbers (125 MeV/c, 3 T, 1 GV/m, <=6e-23 e cm, 2026, factor 100, early 2030s), but those values are in auxiliary_values rather than pdg_or_equivalent entries with the required per-claim metadata."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T15:15:17-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T15:15:17-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "WA cycle 2 addressed CA CHK-1 by adding pdg_or_equivalent.values metadata for the flagged PSI projection/status numbers."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:30-04:00"
+last_updated_at: "2026-05-16T15:15:17-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_muon_edm_datablock.txt: "sha256:2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1"
@@ -100,6 +109,85 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/E002/bennett2009_arxiv0811_1207.txt"
     sha256: "16ce7a84e7baff9e76d9a96ded01ddfc590057ab8f22f51b9dfd8afc5b878362"
     sha256_of_local_snapshot: "sha256:16ce7a84e7baff9e76d9a96ded01ddfc590057ab8f22f51b9dfd8afc5b878362"
+  values:
+    - value_id: "Adelmann2021:E002:muon_momentum"
+      observable: "PSI frozen-spin muEDM proposal muon momentum"
+      year: 2021
+      value: 125
+      uncertainty: null
+      units: "MeV/c"
+      source_url: "https://arxiv.org/abs/2102.08838"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt"
+      sha256: "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5"
+      classification: "future_projection"
+    - value_id: "Adelmann2021:E002:magnetic_field"
+      observable: "PSI frozen-spin muEDM proposal magnetic field magnitude"
+      year: 2021
+      value: 3
+      uncertainty: null
+      units: "T"
+      source_url: "https://arxiv.org/abs/2102.08838"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt"
+      sha256: "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5"
+      classification: "future_projection"
+    - value_id: "Adelmann2021:E002:rest_frame_electric_field"
+      observable: "PSI frozen-spin muEDM proposal rest-frame electric field"
+      year: 2021
+      value: 1
+      uncertainty: null
+      units: "GV/m"
+      source_url: "https://arxiv.org/abs/2102.08838"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt"
+      sha256: "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5"
+      classification: "future_projection"
+    - value_id: "Adelmann2021:E002:sensitivity"
+      observable: "PSI frozen-spin muEDM proposal expected EDM sensitivity"
+      year: 2021
+      value: 6.0e-23
+      relation: "<="
+      uncertainty: null
+      units: "e cm"
+      source_url: "https://arxiv.org/abs/2102.08838"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt"
+      sha256: "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5"
+      classification: "future_projection"
+    - value_id: "Renga2024:E002:first_phase_target_year"
+      observable: "PSI muEDM status first-phase feasibility target"
+      year: 2024
+      value: 2026
+      uncertainty: null
+      units: "calendar year"
+      source_url: "https://arxiv.org/abs/2409.20050"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/E002/renga2024_arxiv2409_20050.txt"
+      sha256: "c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728"
+      classification: "future_status"
+    - value_id: "Renga2024:E002:ultimate_improvement_factor"
+      observable: "PSI muEDM status ultimate sensitivity-improvement goal"
+      year: 2024
+      value: 100
+      uncertainty: null
+      units: "improvement factor"
+      source_url: "https://arxiv.org/abs/2409.20050"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/E002/renga2024_arxiv2409_20050.txt"
+      sha256: "c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728"
+      classification: "future_status"
+    - value_id: "Renga2024:E002:ultimate_goal_period"
+      observable: "PSI muEDM status ultimate-goal period"
+      year: 2024
+      value: "early 2030s"
+      uncertainty: null
+      units: "time period"
+      source_url: "https://arxiv.org/abs/2409.20050"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/E002/renga2024_arxiv2409_20050.txt"
+      sha256: "c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728"
+      classification: "future_status"
 auxiliary_values:
   psi_frozen_spin_projection:
     source: "Adelmann et al., arXiv:2102.08838"
