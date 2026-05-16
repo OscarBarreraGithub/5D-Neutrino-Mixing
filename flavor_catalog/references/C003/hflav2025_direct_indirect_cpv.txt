@@ -1,0 +1,36 @@
+Minimal text snapshot for C003.
+
+Key: hflav2025_direct_indirect_cpv
+Source: Heavy Flavor Averaging Group (HFLAV), "Combination of Direct and Indirect CP Violation"
+URL: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM23/DCPV/direct_indirect_cpv.html
+Access date: 2026-05-16
+Snapshot policy: manually reduced text extract only; no PDF or image is tracked.
+
+Page header:
+Combination of Direct and Indirect CP Violation
+(updated 16 April 2025)
+
+Definitions and fit inputs:
+Delta A_CP = A_CP(KK) - A_CP(pi pi).
+The combination uses measurements of Delta A_CP and A_Gamma to fit
+Delta a_CP^dir and a_CP^ind.  HFLAV states that statistical and systematic
+uncertainties are added in quadrature when calculating the chi^2.
+
+Selected rows from the HFLAV table:
+2019 LHCb, Delta A_CP = (-0.09 +/- 0.08 stat +/- 0.05 syst)%,
+6 fb^-1 at sqrt(s) = 13 TeV, B -> D0 mu X flavor tag,
+reference: R. Aaij et al. (LHCb Collaboration), arXiv:1903.08726.
+
+2019 LHCb, Delta A_CP = (-0.182 +/- 0.032 stat +/- 0.009 syst)%,
+6 fb^-1 at sqrt(s) = 13 TeV, prompt D* flavor tag,
+reference: R. Aaij et al. (LHCb Collaboration), arXiv:1903.08726.
+
+Fit result as displayed by HFLAV:
+Agreement with no CP violation: CL = 6.9 x 10^-8.
+Text below the plot: Delta chi^2 from the no-CPV point is 32.3,
+corresponding to CL = 9.7 x 10^-8 for two degrees of freedom,
+or 5.3 standard deviations.
+
+Central values and one-standard-deviation errors:
+a_CP^ind = (-0.010 +/- 0.012)%
+Delta a_CP^dir = (-0.159 +/- 0.029)%

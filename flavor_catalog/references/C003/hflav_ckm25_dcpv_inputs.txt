@@ -1,0 +1,37 @@
+Minimal text snapshot for C003.
+
+Key: hflav_ckm25_dcpv_inputs
+Source: Heavy Flavor Averaging Group (HFLAV), "D Mixing Results allowing for CPV", CKM25
+URL: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html
+Related HFLAV table PDF, not tracked: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/figures/table_results.pdf
+Access date: 2026-05-16
+Snapshot policy: manually reduced HTML/PDF-text extract only; no PDF or image is tracked.
+
+HFLAV description:
+For this version of the global fit, there are 63 experimental measurements.
+The fitted parameters include A_D, A_pi, and A_K, the direct CP-violating
+parameters for D0 -> K+ pi-, D0 -> pi+ pi-, and D0 -> K+ K-, respectively.
+
+Selected measured-observable input:
+Index 60:
+Observable: A_CP^K - A_CP^pi
+Value: (-0.154 +/- 0.029)%
+Source: LHCb, 8.9 fb^-1 pp collisions at sqrt(s) = 7, 8, 13 TeV.
+Flavor tags: D*+ -> D0 pi+ and B -> D0 mu- X.
+Mean time inputs: (<t>_K - <t>_pi) / tau_D = 0.115 +/- 0.002;
+<t> / tau_D = 1.71 +/- 0.10.
+
+Selected measured-observable input:
+Index 61:
+Observable: A_CP^K
+Value: (0.068 +/- 0.054 stat +/- 0.016 syst)%
+Source: LHCb, 5.7 fb^-1 pp collisions at sqrt(s) = 13 TeV,
+D*+ -> D0 pi+ flavor tags.
+Mean time input: <t>_K / tau_D = 1.7097 +/- 0.0050.
+
+Final HFLAV CKM25 table_results.pdf extract from pdftotext:
+All-CPV-allowed fit #3:
+A_D (%) = -0.81 +/- 0.88, 95% C.L. interval [-2.54, 0.92].
+A_pi (%) = 0.225 +/- 0.057, 95% C.L. interval [0.11, 0.34].
+A_K (%) = 0.068 +/- 0.051, 95% C.L. interval [-0.03, 0.17].
+chi^2/d.o.f. = 70.711/(63 - 10) = 1.33.

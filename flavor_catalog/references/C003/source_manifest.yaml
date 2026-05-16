@@ -1,0 +1,46 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: C003
+generated_at: "2026-05-16T12:58:29-04:00"
+license_policy: "Minimal text snapshots only; no publisher PDFs are tracked."
+references:
+  - key: hflav2025_direct_indirect_cpv
+    arxiv_id: null
+    DOI: null
+    title: "Combination of Direct and Indirect CP Violation"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM23/DCPV/direct_indirect_cpv.html"
+    snapshot_path: "flavor_catalog/references/C003/hflav2025_direct_indirect_cpv.txt"
+    sha256_of_local_snapshot: "sha256:50781ba7963bece8557bde594e6b8b71b7c31d3f5d3c1216028fd163550495cb"
+    notes: "Direct-vs-indirect CPV combination with Delta a_CP^dir, a_CP^ind, and no-CPV significance."
+  - key: hflav_ckm25_dcpv_inputs
+    arxiv_id: null
+    DOI: null
+    title: "D Mixing Results allowing for CPV, CKM25"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    supporting_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/figures/table_results.pdf"
+    snapshot_path: "flavor_catalog/references/C003/hflav_ckm25_dcpv_inputs.txt"
+    sha256_of_local_snapshot: "sha256:ca6fa2bc4a1cf6cec7988acd6dd5208785446a214241b6dc8cb78ca433721c12"
+    notes: "CKM25 measured input A_CP^K - A_CP^pi and fitted A_pi, A_K parameters; supporting PDF was text-extracted only."
+  - key: lhcb2019_arxiv1903_08726
+    arxiv_id: "1903.08726"
+    DOI: "10.1103/PhysRevLett.122.211803"
+    title: "Observation of CP violation in charm decays"
+    authors: "LHCb Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1903.08726"
+    snapshot_path: "flavor_catalog/references/C003/lhcb2019_arxiv1903_08726.txt"
+    sha256_of_local_snapshot: "sha256:c0d7f9a85048f58c5e51fdc28c9b6035658a2898b940742a6bbd237eff5d9b64"
+    notes: "ArXiv abstract metadata for the LHCb 2019 discovery; no PDF tracked."
+  - key: cfw2008_arxiv0804_1954
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaki, Falkowski, and Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    snapshot_path: "flavor_catalog/references/C003/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:1b19e96d30f72bd6d162019be90e6779adf242a429f50685fb8757335e1cc299"
+    notes: "ArXiv abstract metadata used as the post-2008 RS-flavor baseline."

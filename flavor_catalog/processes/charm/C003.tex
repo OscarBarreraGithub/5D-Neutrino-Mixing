@@ -1,0 +1,83 @@
+% Flavor catalog process: C003
+% family: charm
+% owner_agent_id: PKA-C003
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: C003.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{C003: \(\Delta A_{CP}(D^0\to K^+K^-,\pi^+\pi^-)\)}{C003: Delta ACP in D0 -> KK, pi pi}}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\Delta A_{CP}\equiv
+A_{CP}(D^0\to K^+K^-)-A_{CP}(D^0\to\pi^+\pi^-)\).  This entry covers
+time-integrated direct CP violation in singly Cabibbo-suppressed neutral-charm
+decays; indirect CP violation in charm mixing is cataloged separately.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical equivalent source is HFLAV.  The direct-vs-indirect CPV
+combination updated in 2025 gives
+\[
+  \Delta a_{CP}^{\rm dir}=(-0.159\pm0.029)\% ,
+\]
+with \(a_{CP}^{\rm ind}=(-0.010\pm0.012)\%\) and a no-CPV discrepancy quoted
+as \(5.3\sigma\).  The local snapshot is
+\texttt{flavor\_catalog/references/C003/hflav2025\_direct\_indirect\_cpv.txt}.
+The LHCb 2019 discovery anchor gives
+\[
+  \Delta A_{CP}=(-15.4\pm2.9)\times10^{-4}=(-0.154\pm0.029)\% ,
+\]
+as recorded in \texttt{lhcb2019\_arxiv1903\_08726.txt}.  HFLAV CKM25 also
+lists the same measured input \(A_{CP}^K-A_{CP}^{\pi}=(-0.154\pm0.029)\%\)
+and the all-CPV fit parameters \(A_{\pi}=(0.225\pm0.057)\%\) and
+\(A_K=(0.068\pm0.051)\%\), traced to
+\texttt{hflav\_ckm25\_dcpv\_inputs.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped flavor generically carries new CP phases in both up- and
+down-sector flavor transitions.  Unlike neutral-charm mixing, this is not a \(\Delta C=2\)
+mixing constraint: it probes \(\Delta C=1\) nonleptonic amplitudes, including
+possible chromomagnetic dipoles and four-quark penguin structures.  It is
+therefore a diagnostic for BSM CP phases in \(c\to u\) transitions that can be
+hidden by a neutral-meson-mixing-only scan.
+
+\subsection*{Post-2008 developments}
+The CFW 2008 RS-flavor baseline predates the charm direct-CP observation.
+The important post-2008 change is experimental: LHCb reported the first
+observation of CP violation in charm decays in 2019, and HFLAV now provides a
+compact direct-vs-indirect CPV combination with percent-level fit parameters.
+The 2025 CKM25 charm fit additionally folds the \(\Delta A_{CP}\) input into a
+global all-CPV fit together with \(A_K\) and \(A_{\pi}\).
+
+\subsection*{Constraint validity and model dependence}
+The experimental observable is robust because the difference cancels many
+production and detection asymmetries.  Interpreting it as a bound on a specific
+new-physics Wilson coefficient is much less clean: Standard Model long-distance
+charm amplitudes are difficult to compute, and the HFLAV extraction separates
+direct and indirect CPV using small mixing corrections.  Treat this as a
+model-dependent \(\Delta C=1\) CP-phase constraint, not as a clean
+short-distance subtraction.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required grep finds neutral \(D^0\)-mixing support but no
+direct charm CP-asymmetry implementation.  The current implemented charm
+surface is \texttt{evaluate\_d0\_mixing} at
+\texttt{quarkConstraints/deltaf2.py:941}; the modern policy labels \(D^0\) as
+conservative non-CP mixing at \texttt{quarkConstraints/modern/phenomenology.py:46}.
+Focused searches for \texttt{DeltaA\_CP}, \texttt{A\_CP}, direct CP, and
+\(D^0\to K^+K^-,\pi^+\pi^-\) across the required implementation directories
+found no C003 observable.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Production integration would require a new \(\Delta C=1\)
+operator/matching layer, RG treatment for the relevant four-quark and dipole
+operators, and a hadronic-amplitude or likelihood prescription for the
+nonleptonic charm modes.  The existing \(\Delta F=2\) basis does not cover it.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{hflav2025\_direct\_indirect\_cpv},
+\texttt{hflav\_ckm25\_dcpv\_inputs},
+\texttt{lhcb2019\_arxiv1903\_08726}, and
+\texttt{cfw2008\_arxiv0804\_1954}.

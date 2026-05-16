@@ -1,0 +1,155 @@
+schema: flavor_catalog.process.v1
+process_id: C003
+family: charm
+standard_notation: "\\Delta A_{CP}(D^0\\to K^+K^-,\\pi^+\\pi^-)"
+process_name: "Direct CP violation in D0 -> K+K- and D0 -> pi+pi-"
+owner: "PKA"
+owner_agent_id: "PKA-C003"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T12:58:29-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T12:58:29-04:00"
+    agent_id: "PKA-C003"
+    reason: "Initial PKA source extraction and C003 draft started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T12:58:29-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T12:58:29-04:00"
+    agent_id: "PKA-C003"
+    reason: "PKA draft, minimal source snapshots, sidecar, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T12:58:29-04:00"
+version: "0.1.0"
+source_shas:
+  cfw2008_arxiv0804_1954.txt: "sha256:1b19e96d30f72bd6d162019be90e6779adf242a429f50685fb8757335e1cc299"
+  hflav2025_direct_indirect_cpv.txt: "sha256:50781ba7963bece8557bde594e6b8b71b7c31d3f5d3c1216028fd163550495cb"
+  hflav_ckm25_dcpv_inputs.txt: "sha256:ca6fa2bc4a1cf6cec7988acd6dd5208785446a214241b6dc8cb78ca433721c12"
+  lhcb2019_arxiv1903_08726.txt: "sha256:c0d7f9a85048f58c5e51fdc28c9b6035658a2898b940742a6bbd237eff5d9b64"
+  source_manifest.yaml: "sha256:52650d10ec6b5993dcbc0e3bf95541d7186a1888835a0dfc1727780a3e6446ea"
+  sha256sums.txt: "sha256:ab77ce88e084acc1e5a0ccded734c450945671fbfe03b6ae35f1aa9d8b6218ca"
+pdg_or_equivalent:
+  hflav_direct_cpv_average:
+    source: "HFLAV Combination of Direct and Indirect CP Violation"
+    year: 2025
+    observable: "Delta a_CP^dir"
+    value: -0.159
+    uncertainty: 0.029
+    units: "percent"
+    value_summary: "Delta a_CP^dir = (-0.159 +/- 0.029)%"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM23/DCPV/direct_indirect_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C003/hflav2025_direct_indirect_cpv.txt"
+    sha256_of_local_snapshot: "sha256:50781ba7963bece8557bde594e6b8b71b7c31d3f5d3c1216028fd163550495cb"
+  hflav_indirect_cpv_companion:
+    source: "HFLAV Combination of Direct and Indirect CP Violation"
+    year: 2025
+    observable: "a_CP^ind"
+    value: -0.010
+    uncertainty: 0.012
+    units: "percent"
+    value_summary: "a_CP^ind = (-0.010 +/- 0.012)%"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM23/DCPV/direct_indirect_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C003/hflav2025_direct_indirect_cpv.txt"
+    sha256_of_local_snapshot: "sha256:50781ba7963bece8557bde594e6b8b71b7c31d3f5d3c1216028fd163550495cb"
+  hflav_no_cpv_test:
+    source: "HFLAV Combination of Direct and Indirect CP Violation"
+    year: 2025
+    observable: "No-CPV point in the Delta a_CP^dir vs a_CP^ind fit"
+    delta_chi2: 32.3
+    confidence_level_table: "6.9e-8"
+    confidence_level_text: "9.7e-8 for two degrees of freedom"
+    significance_sigma: 5.3
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM23/DCPV/direct_indirect_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C003/hflav2025_direct_indirect_cpv.txt"
+    sha256_of_local_snapshot: "sha256:50781ba7963bece8557bde594e6b8b71b7c31d3f5d3c1216028fd163550495cb"
+  lhcb2019_discovery_average:
+    source: "LHCb Collaboration, arXiv:1903.08726 / Phys. Rev. Lett. 122, 211803"
+    year: 2019
+    observable: "Delta A_CP = A_CP(D0 -> K-K+) - A_CP(D0 -> pi-pi+)"
+    value: -15.4
+    uncertainty: 2.9
+    scale: "1e-4"
+    value_percent: -0.154
+    uncertainty_percent: 0.029
+    units: "dimensionless asymmetry"
+    value_summary: "Delta A_CP = (-15.4 +/- 2.9) x 10^-4 = (-0.154 +/- 0.029)%"
+    source_url: "https://arxiv.org/abs/1903.08726"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C003/lhcb2019_arxiv1903_08726.txt"
+    sha256_of_local_snapshot: "sha256:c0d7f9a85048f58c5e51fdc28c9b6035658a2898b940742a6bbd237eff5d9b64"
+  hflav_ckm25_delta_acp_input:
+    source: "HFLAV CKM25 D Mixing Results allowing for CPV"
+    year: 2025
+    observable: "A_CP^K - A_CP^pi"
+    value: -0.154
+    uncertainty: 0.029
+    units: "percent"
+    conditions: "8.9 fb^-1 pp collisions at sqrt(s) = 7, 8, 13 TeV; D*+ and semileptonic B flavor tags"
+    time_acceptance_delta: "0.115 +/- 0.002"
+    time_acceptance_mean: "1.71 +/- 0.10"
+    value_summary: "A_CP^K - A_CP^pi = (-0.154 +/- 0.029)%"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C003/hflav_ckm25_dcpv_inputs.txt"
+    sha256_of_local_snapshot: "sha256:ca6fa2bc4a1cf6cec7988acd6dd5208785446a214241b6dc8cb78ca433721c12"
+  hflav_ckm25_Api_fit:
+    source: "HFLAV CKM25 table_results.pdf text extraction"
+    year: 2025
+    observable: "A_pi in all-CPV-allowed fit #3"
+    value: 0.225
+    uncertainty: 0.057
+    units: "percent"
+    confidence_interval_95_percent: [0.11, 0.34]
+    value_summary: "A_pi = (0.225 +/- 0.057)%"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/figures/table_results.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C003/hflav_ckm25_dcpv_inputs.txt"
+    sha256_of_local_snapshot: "sha256:ca6fa2bc4a1cf6cec7988acd6dd5208785446a214241b6dc8cb78ca433721c12"
+  hflav_ckm25_AK_fit:
+    source: "HFLAV CKM25 table_results.pdf text extraction"
+    year: 2025
+    observable: "A_K in all-CPV-allowed fit #3"
+    value: 0.068
+    uncertainty: 0.051
+    units: "percent"
+    confidence_interval_95_percent: [-0.03, 0.17]
+    value_summary: "A_K = (0.068 +/- 0.051)%"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/figures/table_results.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C003/hflav_ckm25_dcpv_inputs.txt"
+    sha256_of_local_snapshot: "sha256:ca6fa2bc4a1cf6cec7988acd6dd5208785446a214241b6dc8cb78ca433721c12"
+  cfw2008_context:
+    source: "Csaki, Falkowski, and Weiler, arXiv:0804.1954"
+    year: 2008
+    observable: "Contextual RS-flavor baseline for post-2008 comparison"
+    value_summary: "CFW 2008 predates the LHCb direct-charm-CP observation and quotes generic RS flavor bounds around 21 TeV, or around 33 TeV in the composite pseudo-Goldstone scenario."
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C003/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:1b19e96d30f72bd6d162019be90e6779adf242a429f50685fb8757335e1cc299"
+code_coverage:
+  status: "NO"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"Delta[ _-]?A_?CP|DeltaA_CP|\\\\bA_CP\\\\b|ACP\\\\(|a_CP|A\\\\{CP\\\\}|direct CP|CP asym|D0.*K\\\\+K|D0.*pi\\\\+pi|charm CP|c.?->.?u|c.?to.?u\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"direct.?cp|delta.?a.?cp|a.?cp.*kk|a.?cp.*pi|charm.?cp|D0.*K.*K|D0.*pi.*pi\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -i -g '!*.ipynb'"
+  evidence:
+    - "No direct charm CP-asymmetry implementation was found by focused grep across the required implementation directories."
+    - "Focused direct-CP grep matched only unrelated neutrino delta_CP symbols at neutrinos/neutrinoValues.py:65-66 and broad neutral-D mixing symbols, not C003."
+    - "quarkConstraints/deltaf2.py:941 implements evaluate_d0_mixing for Delta F = 2 neutral-D mixing, not Delta A_CP."
+    - "quarkConstraints/modern/phenomenology.py:46 labels D0 as conservative_non_cp_mixing_amplitude_hadronic."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "A production constraint would need new Delta C = 1 operator matching, RG treatment for four-quark and chromomagnetic operators, and a nonleptonic charm hadronic-amplitude or likelihood prescription; the current Delta F = 2 machinery does not cover this observable."
+open_issues:
+  - "WA/CA should decide whether to headline HFLAV Delta a_CP^dir or the directly measured Delta A_CP input. This PKA uses HFLAV Delta a_CP^dir as the canonical equivalent value and records the LHCb/HFLAV Delta A_CP input as the discovery anchor."
