@@ -1,0 +1,49 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T008
+generated_at: "2026-05-16T18:26:54-04:00"
+sources:
+  - key: PDG2026TopHu
+    arxiv_id: null
+    DOI: "10.1142/S0217751X26300115"
+    title: "Review of Particle Physics, 2026 update: t -> H u pdgLive datablock"
+    authors: "F. Takahashi et al. (Particle Data Group)"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/BranchingRatio.action?desig=12&parCode=Q007&home="
+    sha256_of_local_snapshot: "sha256:33554bc8abefddd49a757bdacc3e5034bee76fa2b7556d19bc188e39487c23df"
+    snapshot_path: "flavor_catalog/references/T008/pdg2026_top_hu_datablock.txt"
+  - key: CMS2022TopHuDiphoton
+    arxiv_id: "2111.02219"
+    DOI: "10.1103/PhysRevLett.129.032001"
+    title: "Search for flavor-changing neutral current interactions of the top quark and Higgs boson in final states with two photons in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2022
+    url: "https://arxiv.org/abs/2111.02219"
+    sha256_of_local_snapshot: "sha256:6fa74c1e8b51b9ba6999fa5c5ec95828bd176dd7aeac7c0560b14642b60b618a"
+    snapshot_path: "flavor_catalog/references/T008/cms_2111_02219_arxiv_abs.txt"
+  - key: ATLAS2024TopHuMultilepton
+    arxiv_id: "2404.02123"
+    DOI: "10.1140/epjc/s10052-024-12994-1"
+    title: "Search for flavour-changing neutral-current couplings between the top quark and the Higgs boson in multi-lepton final states in 13 TeV pp collisions with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2404.02123"
+    sha256_of_local_snapshot: "sha256:358dbdb2af5b428dc91450b517bc7bb17e45590c3b0878601831803dd1802b74"
+    snapshot_path: "flavor_catalog/references/T008/atlas_2404_02123_arxiv_abs.txt"
+  - key: CMS2025TopHuHiggsMediated
+    arxiv_id: "2407.15172"
+    DOI: "10.1103/95q6-vvlp"
+    title: "Search for flavor-changing neutral current interactions of the top quark mediated by a Higgs boson in proton-proton collisions at 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2025
+    url: "https://arxiv.org/abs/2407.15172"
+    sha256_of_local_snapshot: "sha256:6de117876a96d982f59e31db64e7c1c1d0cb142013c80466f8bf4acfeb3caa59"
+    snapshot_path: "flavor_catalog/references/T008/cms_2407_15172_arxiv_abs.txt"
+  - key: CsakiFalkowskiWeiler2008WarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:a693c4778401ec0366886a78ed3bca061f2668ed3edb54f13e905cc8a500863c"
+    snapshot_path: "flavor_catalog/references/T008/cfw_0804_1954_arxiv_abs.txt"

@@ -1,0 +1,55 @@
+Source: Particle Data Group pdgLive, 2026 Review of Particle Physics, top-quark listing.
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLive/BranchingRatio.action?desig=12&parCode=Q007&home=
+Datablock URL: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=Q007R00&_eventName=showBR
+Access date: 2026-05-16
+Local purpose: minimal excerpt for T008, t -> H u FCNC branching-fraction limits.
+
+Citation shown on source: F. Takahashi et al. (Particle Data Group),
+Int. J. Mod. Phys. A 41, 2630011 (2026).
+
+Relevant PDG excerpt:
+
+t -> H u
+Gamma(t -> H u) / Gamma_total
+Gamma_11 / Gamma
+
+VALUE (units 10^-4), CL%, DOCUMENT ID, TECHNIQUE, COMMENT
+
+< 1.9, 95, TUMASYAN 2022A, CMS, t -> H u (H -> gamma gamma)
+
+The following data are listed below the PDG "do not use for averages, fits,
+limits, etc." separator:
+
+< 7.2, 95, HAYRAPETYAN 2025AD, CMS, 2 leptons same sign + >=1 jet
+< 2.8, 95, AAD 2024AU, ATLAS, pp -> tH or t -> H u
+  (H -> W W, Z Z, tau tau)
+< 2.6, 95, AAD 2024AU, ATLAS, pp -> tH or t -> H u
+  (combined H -> W W, Z Z, tau tau, gamma gamma, b b)
+
+Relevant PDG notes:
+TUMASYAN 2022A is based on 137 fb^-1 at sqrt(s) = 13 TeV of pp data. The
+processes considered include both associated production of a single top quark
+with a Higgs boson and the decay t -> H u in ttbar production using
+H -> gamma gamma.
+
+HAYRAPETYAN 2025AD is based on 138 fb^-1 at sqrt(s) = 13 TeV of pp data.
+Events with t and H are considered, produced via ttbar or single-top
+production and anomalous Hut couplings.
+
+AAD 2024AU is based on 140 fb^-1 at sqrt(s) = 13 TeV of pp data. The
+processes considered include both associated production of a single top quark
+with a Higgs boson and the decay t -> H u in ttbar production using either
+three or five Higgs decay modes, depending on the row.
+
+Reference table entries:
+TUMASYAN 2022A: Phys. Rev. Lett. 129, 032001. "Search for Flavor-Changing
+Neutral Current Interactions of the Top Quark and Higgs Boson in Final States
+with Two Photons in Proton-Proton Collisions at sqrt(s) = 13 TeV."
+
+HAYRAPETYAN 2025AD: Phys. Rev. D 112, 032008. "Search for flavor-changing
+neutral current interactions of the top quark mediated by a Higgs boson in
+proton-proton collisions at 13 TeV."
+
+AAD 2024AU: Eur. Phys. J. C 84, 757. "Search for flavour-changing
+neutral-current couplings between the top quark and the Higgs boson in
+multi-lepton final states in 13 TeV pp collisions with the ATLAS detector."

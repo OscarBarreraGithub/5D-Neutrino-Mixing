@@ -1,0 +1,140 @@
+schema: flavor_catalog.process.v1
+process_id: T008
+family: top_higgs_ew
+standard_notation: '\mathcal{B}(t\to H u)'
+process_name: "Flavor-changing neutral-current top decay t -> H u"
+owner: "PKA"
+owner_agent_id: "PKA-T008"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T18:26:54-04:00"
+    timestamp: "2026-05-16T18:26:54-04:00"
+    agent_id: "PKA-T008"
+    reason: "Initial PKA draft and source snapshot deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T18:26:54-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_top_hu_datablock.txt: "sha256:33554bc8abefddd49a757bdacc3e5034bee76fa2b7556d19bc188e39487c23df"
+  cms_2111_02219_arxiv_abs.txt: "sha256:6fa74c1e8b51b9ba6999fa5c5ec95828bd176dd7aeac7c0560b14642b60b618a"
+  atlas_2404_02123_arxiv_abs.txt: "sha256:358dbdb2af5b428dc91450b517bc7bb17e45590c3b0878601831803dd1802b74"
+  cms_2407_15172_arxiv_abs.txt: "sha256:6de117876a96d982f59e31db64e7c1c1d0cb142013c80466f8bf4acfeb3caa59"
+  cfw_0804_1954_arxiv_abs.txt: "sha256:a693c4778401ec0366886a78ed3bca061f2668ed3edb54f13e905cc8a500863c"
+pdg_or_equivalent:
+  year: 2026
+  source: "Particle Data Group pdgLive t -> H u datablock, 2026 Review of Particle Physics"
+  source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/BranchingRatio.action?desig=12&parCode=Q007&home="
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T008/pdg2026_top_hu_datablock.txt"
+  sha256: "sha256:33554bc8abefddd49a757bdacc3e5034bee76fa2b7556d19bc188e39487c23df"
+  values:
+    - value_id: "PDG2026:T008:tHu_headline"
+      observable: "B(t -> H u), PDG headline limit from CMS H -> gamma gamma"
+      year: 2026
+      value: "< 1.9e-4"
+      pdg_units: "< 1.9 x 10^-4"
+      confidence_level: "95% CL"
+      source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=Q007R00&_eventName=showBR"
+      local_snapshot: "flavor_catalog/references/T008/pdg2026_top_hu_datablock.txt"
+      sha256: "sha256:33554bc8abefddd49a757bdacc3e5034bee76fa2b7556d19bc188e39487c23df"
+    - value_id: "CMS2022:T008:dataset"
+      observable: "CMS H -> gamma gamma dataset"
+      year: 2022
+      value: "137 fb^-1 at sqrt(s) = 13 TeV"
+      source_url: "https://arxiv.org/abs/2111.02219"
+      local_snapshot: "flavor_catalog/references/T008/cms_2111_02219_arxiv_abs.txt"
+      sha256: "sha256:6fa74c1e8b51b9ba6999fa5c5ec95828bd176dd7aeac7c0560b14642b60b618a"
+    - value_id: "CMS2022:T008:tHu_diphoton"
+      observable: "B(t -> H u), CMS H -> gamma gamma"
+      year: 2022
+      value: "< 0.019%"
+      normalized_value: "< 1.9e-4"
+      expected: "< 0.031%"
+      normalized_expected: "< 3.1e-4"
+      confidence_level: "95% CL"
+      source_url: "https://arxiv.org/abs/2111.02219"
+      local_snapshot: "flavor_catalog/references/T008/cms_2111_02219_arxiv_abs.txt"
+      sha256: "sha256:6fa74c1e8b51b9ba6999fa5c5ec95828bd176dd7aeac7c0560b14642b60b618a"
+    - value_id: "ATLAS2024:T008:dataset"
+      observable: "ATLAS multilepton tHq dataset"
+      year: 2024
+      value: "140 fb^-1 at sqrt(s) = 13 TeV"
+      source_url: "https://arxiv.org/abs/2404.02123"
+      local_snapshot: "flavor_catalog/references/T008/atlas_2404_02123_arxiv_abs.txt"
+      sha256: "sha256:358dbdb2af5b428dc91450b517bc7bb17e45590c3b0878601831803dd1802b74"
+    - value_id: "ATLAS2024:T008:tHu_multilepton"
+      observable: "B(t -> H u), ATLAS multilepton-only result"
+      year: 2024
+      value: "< 2.8e-4"
+      expected: "< 3.0e-4"
+      confidence_level: "95% CL"
+      source_url: "https://arxiv.org/abs/2404.02123"
+      local_snapshot: "flavor_catalog/references/T008/atlas_2404_02123_arxiv_abs.txt"
+      sha256: "sha256:358dbdb2af5b428dc91450b517bc7bb17e45590c3b0878601831803dd1802b74"
+    - value_id: "ATLAS2024:T008:tHu_combined"
+      observable: "B(t -> H u), ATLAS combination with H -> bb, gamma gamma, and tau tau searches"
+      year: 2024
+      value: "< 2.6e-4"
+      expected: "< 1.8e-4"
+      confidence_level: "95% CL"
+      source_url: "https://arxiv.org/abs/2404.02123"
+      local_snapshot: "flavor_catalog/references/T008/atlas_2404_02123_arxiv_abs.txt"
+      sha256: "sha256:358dbdb2af5b428dc91450b517bc7bb17e45590c3b0878601831803dd1802b74"
+    - value_id: "CMS2025:T008:dataset"
+      observable: "CMS same-sign dilepton tHq dataset"
+      year: 2025
+      value: "138 fb^-1 at sqrt(s) = 13 TeV, collected in 2016-2018"
+      source_url: "https://arxiv.org/abs/2407.15172"
+      local_snapshot: "flavor_catalog/references/T008/cms_2407_15172_arxiv_abs.txt"
+      sha256: "sha256:6de117876a96d982f59e31db64e7c1c1d0cb142013c80466f8bf4acfeb3caa59"
+    - value_id: "CMS2025:T008:tHu_samesign"
+      observable: "B(t -> H u), CMS same-sign dilepton search"
+      year: 2025
+      value: "< 0.072%"
+      normalized_value: "< 7.2e-4"
+      expected: "< 0.059%"
+      normalized_expected: "< 5.9e-4"
+      confidence_level: "95% CL"
+      source_url: "https://arxiv.org/abs/2407.15172"
+      local_snapshot: "flavor_catalog/references/T008/cms_2407_15172_arxiv_abs.txt"
+      sha256: "sha256:6de117876a96d982f59e31db64e7c1c1d0cb142013c80466f8bf4acfeb3caa59"
+    - value_id: "CMS2025:T008:tHu_combined"
+      observable: "B(t -> H u), CMS combination with H -> gamma gamma and H -> bb searches"
+      year: 2025
+      value: "< 0.019%"
+      normalized_value: "< 1.9e-4"
+      expected: "< 0.027%"
+      normalized_expected: "< 2.7e-4"
+      confidence_level: "95% CL"
+      source_url: "https://arxiv.org/abs/2407.15172"
+      local_snapshot: "flavor_catalog/references/T008/cms_2407_15172_arxiv_abs.txt"
+      sha256: "sha256:6de117876a96d982f59e31db64e7c1c1d0cb142013c80466f8bf4acfeb3caa59"
+paper_era_reference:
+  key: "CsakiFalkowskiWeiler2008WarpedFlavor"
+  source_url: "https://arxiv.org/abs/0804.1954"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T008/cfw_0804_1954_arxiv_abs.txt"
+  sha256: "sha256:a693c4778401ec0366886a78ed3bca061f2668ed3edb54f13e905cc8a500863c"
+  note: "Paper-era RS/composite-Higgs flavor context only; not a measured t -> H u observable."
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Required plan greps rerun on 2026-05-16 across quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, and tests; no source-code implementation of t -> H u, tHu, tuH, Hut, Htu, or tqH found."
+    - "Targeted grep found only generic FCNC prose/comments outside the catalog in quarkConstraints/PAPER_0710_1869.md:35 and tests/test_paper_couplings.py:258."
+  grep_commands:
+    - 'rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints flavorConstraints scanParams tests -g "!*.ipynb"'
+    - 'rg -n "t.?->.?u.?H|t.?->.?H.?u|tHu|tuH|Hut|Htu|tqH|t.?->.?q.?H|FCNC|flavou?r-changing|flavor changing" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "A live constraint needs a new top-Higgs FCNC matching layer, scalar Htu/Hut coupling convention, and an analysis-level prescription for combining associated tH production with ttbar FCNC decay interpretations."
+open_issues:
+  - "The user prompt quoted an approximate 90% CL limit, but PDG 2026 and the CMS/ATLAS primary sources state 95% CL."
+  - "WA/CA should decide whether the PDG headline CMS diphoton row or the CMS 2025 combination with the same observed limit should be the single prose headline."
