@@ -1,0 +1,119 @@
+schema: flavor_catalog.process.v1
+process_id: K004
+family: kaon
+standard_notation: "K^+ \\to \\pi^+ \\nu\\bar{\\nu}"
+process_name: "Charged rare kaon decay K+ -> pi+ nu nubar"
+owner: "PKA"
+owner_agent_id: "PKA-K004"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:03:14-04:00"
+    agent_id: "PKA-K004"
+    reason: "PKA source extraction and draft started"
+  - from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T11:28:00-04:00"
+    agent_id: "PKA-K004"
+    reason: "Initial K004 source snapshots, sidecar, TeX draft, and worklog deposited"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:28:00-04:00"
+version: "0.1.0"
+source_shas:
+  na62_2026_arxiv2604_12649.txt: "sha256:db5484ce8b53f8211c1504373be79c3f0fcc8a7a70b590960ec2667724ada029"
+  na62_2025_arxiv2412_12015.txt: "sha256:4bdb16bba0eddd0c907d9739299df9d4b8b4be208be4937e9123ac5a48e22674"
+  buras_venturini_2022_arxiv2203_10099.txt: "sha256:a50d05504c227424b5ee33bc5be01241376d02f2c02e77b43334449d78185ad0"
+  brod_gorbahn_stamou_2021_arxiv2105_02868.txt: "sha256:128d738454823c50bbd056152b556c1dfa996c0cac8928ef911c16a3bcf97015"
+  cfw_2008_arxiv0804_1954.txt: "sha256:88e65fabef3b99bf46ad714ee0532d2447bc7e90ab7920a8d73833c404a9a821"
+pdg_or_equivalent:
+  latest_experimental_value:
+    source: "NA62 preliminary 2026 Moriond contribution"
+    year: 2026
+    value: "9.6"
+    uncertainty: "+1.9/-1.8"
+    scale: "1e-11"
+    units: "dimensionless branching fraction"
+    dataset: "NA62 2016--2024"
+    value_summary: "B(K+ -> pi+ nu nubar) = (9.6^{+1.9}_{-1.8}) x 10^{-11}"
+    precision_note: "abstract states precision better than 20%"
+    status: "preliminary conference contribution, arXiv v3"
+    source_url: "https://arxiv.org/abs/2604.12649"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K004/na62_2026_arxiv2604_12649.txt"
+    sha256_of_local_snapshot: "sha256:db5484ce8b53f8211c1504373be79c3f0fcc8a7a70b590960ec2667724ada029"
+  published_observation_anchor:
+    source: "NA62 Collaboration, JHEP 02 (2025) 191"
+    year: 2025
+    value: "13.0"
+    uncertainty: "+3.3/-3.0"
+    scale: "1e-11"
+    units: "dimensionless branching fraction"
+    dataset: "NA62 2016--2022"
+    value_summary: "B(K+ -> pi+ nu nubar) = (13.0^{+3.3}_{-3.0}) x 10^{-11}"
+    signal_candidates: 51
+    expected_background_events: "18^{+3}_{-2}"
+    significance_note: "above 5 sigma"
+    source_url: "https://arxiv.org/abs/2412.12015"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K004/na62_2025_arxiv2412_12015.txt"
+    sha256_of_local_snapshot: "sha256:4bdb16bba0eddd0c907d9739299df9d4b8b4be208be4937e9123ac5a48e22674"
+  sm_prediction_buras_venturini_2022:
+    source: "Buras and Venturini, arXiv:2203.10099"
+    year: 2022
+    value: "8.60"
+    uncertainty: "0.42"
+    scale: "1e-11"
+    units: "dimensionless branching fraction"
+    value_summary: "B(K+ -> pi+ nu nubar)_SM = (8.60 +/- 0.42) x 10^{-11}"
+    assumption: "Assumes no new physics in |epsilon_K| and S_{psi K_S} for the CKM-input strategy"
+    source_url: "https://arxiv.org/abs/2203.10099"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K004/buras_venturini_2022_arxiv2203_10099.txt"
+    sha256_of_local_snapshot: "sha256:a50d05504c227424b5ee33bc5be01241376d02f2c02e77b43334449d78185ad0"
+  sm_prediction_brod_gorbahn_stamou_2021:
+    source: "Brod, Gorbahn, and Stamou, arXiv:2105.02868"
+    year: 2021
+    value: "7.73"
+    uncertainty: "0.61"
+    scale: "1e-11"
+    units: "dimensionless branching fraction"
+    value_summary: "BR(K+ -> pi+ nu nubar) = 7.73(61) x 10^{-11}"
+    uncertainty_note: "abstract states uncertainties are dominated by parametric input"
+    source_url: "https://arxiv.org/abs/2105.02868"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K004/brod_gorbahn_stamou_2021_arxiv2105_02868.txt"
+    sha256_of_local_snapshot: "sha256:128d738454823c50bbd056152b556c1dfa996c0cac8928ef911c16a3bcf97015"
+  cfw_2008_context:
+    source: "Csaki, Falkowski, and Weiler, JHEP 0809:008"
+    year: 2008
+    value_summary: "CFW abstract quotes a generic RS KK-gluon mass bound of about 21 TeV and about 33 TeV for the composite pseudo-Goldstone scenario"
+    units: "TeV for contextual RS mass-scale discussion, not a branching fraction"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K004/cfw_2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:88e65fabef3b99bf46ad714ee0532d2447bc7e90ab7920a8d73833c404a9a821"
+code_coverage:
+  status: "NO"
+  evidence: []
+  required_grep_commands:
+    - command: "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+      result_summary: "Only existing Delta F = 2 neutral-meson and mu->e gamma surfaces; no K+ -> pi+ nu nubar implementation."
+    - command: "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+      result_summary: "Hits are catalog plan text, generic neutrino utilities, and unrelated flavor surfaces; no live charged rare-kaon branching-ratio constraint."
+    - command: "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+      result_summary: "Modern and legacy quark surfaces enumerate epsilon_K, K, B_d, B_s, and D0 Delta F = 2 systems only."
+    - command: "rg -n \"K\\^?\\+.*pi\\^?\\+.*nu|K\\+.*pi\\+.*nu|pi\\+.*nu.*nu|pi.*nu.*nubar|Kp.*Pip|K.*pi.*nubar|NA62|KOTO\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+      result_summary: "Specific rare-kaon search returns only catalog planning documents, not implementation files."
+  near_miss_evidence:
+    - "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, D0."
+    - "quarkConstraints/deltaf2.py:211 defines epsilon_K, not K+ -> pi+ nu nubar."
+    - "quarkConstraints/deltaf2.py:755 defines Delta m_K helper, not a Delta F = 1 semileptonic decay."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "Requires a new Delta F = 1 semileptonic s -> d nu nubar operator basis and branching-ratio formula with SM--NP interference, but uses standard clean hadronic input."
+open_issues:
+  - "CA should decide whether the preliminary 2026 NA62 combination or the published 2025 JHEP observation should be the headline value after PDG/NA62 updates."
+  - "If promoted to a live constraint, specify whether the RS matching is EFT-input-only or includes full KK/Z/neutrino-sector matching."

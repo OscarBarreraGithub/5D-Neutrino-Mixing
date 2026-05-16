@@ -1,0 +1,91 @@
+% Flavor catalog process: K004
+% family: kaon
+% owner_agent_id: PKA-K004
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K004.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{K004: \(K^+ \to \pi^+ \nu\bar{\nu}\)}
+
+\subsection*{Process}
+Standard notation: \(K^+ \to \pi^+ \nu\bar{\nu}\).  This entry covers the
+charged ``golden'' kaon decay governed by the short-distance
+\(s\to d\nu\bar{\nu}\) flavor-changing neutral current, with emphasis on the
+real-part sensitivity that complements \(K_L\to\pi^0\nu\bar{\nu}\).
+
+\subsection*{PDG / equivalent value(s)}
+For this draft the canonical experimental-equivalent value is the latest NA62
+combination, rather than an older PDG average:
+\[
+  \BRof{K^+ \to \pi^+ \nu\bar{\nu}}
+  = \left(9.6^{+1.9}_{-1.8}\right)\times 10^{-11},
+\]
+from NA62 data collected in 2016--2024.  The local snapshot is
+\url{flavor_catalog/references/K004/na62_2026_arxiv2604_12649.txt}.  The
+published 2016--2022 observation anchor is
+\(\left(13.0^{+3.3}_{-3.0}\right)\times 10^{-11}\), with 51 signal candidates
+and an expected background of \(18^{+3}_{-2}\) events; see
+\url{flavor_catalog/references/K004/na62_2025_arxiv2412_12015.txt}.  For the
+SM comparison, the sidecar records the Buras--Venturini benchmark
+\(\BR_{\rm SM}=\left(8.60\pm0.42\right)\times10^{-11}\) and the
+Brod--Gorbahn--Stamou update
+\(\BR_{\rm SM}=7.73(61)\times10^{-11}\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped models can generate misaligned \(s\)-\(d\) neutral currents
+through KK gauge exchange, \(Z\)-coupling shifts, or related electroweak
+matching effects.  Unlike the current quark lane's \(\DeltaFtwo\) kaon
+observables, this is a \(\Delta F=1\) semileptonic process.  It therefore
+tests whether the model has controlled short-distance neutral currents beyond
+the four-quark \(K\)-mixing sector.  The charged mode is especially useful
+because it is theoretically clean, uses a hadronic matrix element tied to
+semileptonic kaon data, and can interfere with the SM amplitude rather than
+only setting an incoherent upper bound.
+
+\subsection*{Post-2008 developments}
+The CFW-era RS discussion used \(\DeltaFtwo\) flavor bounds as the central
+pressure point, quoting a generic RS KK-gluon mass scale of about \(21\) TeV
+and a composite pseudo-Goldstone scenario scale of about \(33\) TeV.  Since
+that era, the charged rare-kaon channel has become experimentally active:
+NA62 reported the published observation in 2025 and a newer 2026 preliminary
+combination with sub-20-percent precision.  On the theory side, post-2008 SM
+updates have sharpened the short-distance prediction and exposed the role of
+CKM-input choices: Brod--Gorbahn--Stamou quote \(7.73(61)\times10^{-11}\),
+while Buras--Venturini quote \((8.60\pm0.42)\times10^{-11}\) using a strategy
+designed to avoid the direct \(|V_{cb}|\) and \(|V_{ub}|\) tensions.
+
+\subsection*{Constraint validity and model dependence}
+As an experimental branching-ratio constraint this mode is clean, but its use
+inside an RS scan is model-dependent.  A production constraint needs Wilson
+coefficients for
+\((\bar{s}\gamma_\mu P_{L,R}d)(\bar{\nu}\gamma^\mu(1-\gamma_5)\nu)\), a
+choice of neutrino-flavor treatment, and a convention for SM--NP interference.
+The Buras--Venturini SM number also assumes no new-physics infection in the
+\(\DeltaFtwo\) inputs used to remove CKM ambiguities, so a checker should keep
+that assumption visible if the catalog later turns this process into a hard
+bound.
+
+\subsection*{Code coverage in this repo}
+Coverage status: NO.  The required grep sweep finds kaon mixing, generic
+neutrino-mass utilities, and the catalog planning row, but no implementation
+of \(K^+\to\pi^+\nu\bar{\nu}\), no \(\Delta F=1\) \(s\to d\nu\bar{\nu}\)
+operator, and no branching-ratio acceptance gate.  The closest quark-code
+surfaces are the \(\DeltaFtwo\) entries in
+\texttt{quarkConstraints/deltaf2.py} and the modern policy list
+\texttt{MODERN\_PHENOMENOLOGY\_SYSTEM\_IDS = (epsilon\_K, K, B\_d, B\_s, D0)}.
+
+\subsection*{Implementation difficulty}
+Implementation difficulty: MEDIUM.  The observable needs a new \(\Delta F=1\)
+semileptonic operator basis and a branching-ratio formula with SM--NP
+interference, but the hadronic input is standard and this channel does not
+require the angular likelihood machinery needed for many \(b\to s\ell\ell\)
+observables.  The difficulty would become HIGH only if the catalog requires a
+full RS tower and neutrino-sector matching rather than an EFT Wilson input.
+
+\subsection*{Key references}
+Process-local reference keys before bibliography consolidation:
+NA62:KpPipNunu2026, NA62:KpPipNunu2025,
+BurasVenturini:KpPipNunu2022, BrodGorbahnStamou:KpPipNunu2021, and
+CsakiFalkowskiWeiler:RSFlavor2008.
