@@ -11,34 +11,46 @@
 \section{\texorpdfstring{\(t\to u g\)}{t -> u g} Top-Gluon FCNC}
 
 \subsection*{Process}
-The observable is the flavor-changing neutral-current top decay
-\(\mathcal{B}(t\to u g)\), catalog id T006 in the top/Higgs/electroweak
-family.  Experimentally it is constrained mainly through anomalous single-top
-production, \(u g\to t\), then translated into an equivalent top-decay
-branching fraction under a specified chromomagnetic-operator convention.
+\textbf{Standard notation:} \(\mathcal{B}(t\to u g)\).
+This entry covers the flavor-changing neutral-current top decay \(t\to u g\),
+catalog id T006 in the top/Higgs/electroweak family.  Experimentally it is
+constrained mainly through anomalous single-top production, \(u g\to t\), then
+translated into an equivalent top-decay branching fraction under a specified
+chromomagnetic-operator convention.
 
 \subsection*{PDG / equivalent value(s)}
 The canonical experimental source is the PDG/pdgLive Q007TUG top-FCNC gluon
 datablock, accessed on 2026-05-16
-(\texttt{references/T006/pdg\_2025\_top\_tug.txt}).  Its current ATLAS entry,
-AAD 2022T, uses \(139~\mathrm{fb}^{-1}\) of \(13~\mathrm{TeV}\) \(pp\) data.
-For the up-gluon production mode it gives
+(\texttt{PDG2025:T006:ATLAS2022:t\_ug};
+\texttt{references/T006/pdg\_2025\_top\_tug.txt}).  Its current ATLAS entry,
+AAD 2022T, uses \(139~\mathrm{fb}^{-1}\) of \(13~\mathrm{TeV}\) \(pp\) data
+(\texttt{PDG2025:T006:ATLAS2022:dataset}).  For the up-gluon production mode
+it gives
 \[
-  \sigma(ug\to t)\,{\cal B}(t\to bW)\,{\cal B}(W\to \ell\nu)<3.0~\mathrm{pb}
+  \sigma(ug\to t)\,\mathcal{B}(t\to bW)\,
+  \mathcal{B}(W\to \ell\nu)<3.0~\mathrm{pb}
 \]
-at 95\% CL, with the ATLAS leptonic-\(W\) sum
-\({\cal B}(W\to\ell\nu)=0.325\).  The same entry gives
+at 95\% CL (\texttt{PDG2025:T006:ATLAS2022:ug\_to\_t\_cross\_section}), with
+the ATLAS leptonic-\(W\) sum \(\mathcal{B}(W\to\ell\nu)=0.325\)
+(\texttt{PDG2025:T006:ATLAS2022:w\_leptonic\_sum}).  The same entry gives
 \[
   |C^{ut}_{uG}|/\Lambda^2 < 0.057~\mathrm{TeV}^{-2},
   \qquad
-  {\cal B}(t\to u g)<6.1\times10^{-5}.
+  \mathcal{B}(t\to u g)<6.1\times10^{-5}.
 \]
+These coefficient and branching-fraction limits are recorded as
+\texttt{PDG2025:T006:ATLAS2022:CuGut} and
+\texttt{PDG2025:T006:ATLAS2022:t\_ug}.
 The PDG block also records the CMS 7 and 8 TeV comparison result based on
-\(5.0~\mathrm{fb}^{-1}\) and \(19.7~\mathrm{fb}^{-1}\):
+\(5.0~\mathrm{fb}^{-1}\) and \(19.7~\mathrm{fb}^{-1}\)
+(\texttt{CMS2017:T006:dataset}):
 \(|\kappa_{tug}|/\Lambda<4.1\times10^{-3}~\mathrm{TeV}^{-1}\), corresponding
-to \({\cal B}(t\to u g)<2.0\times10^{-5}\).  For SM context, not as a measured
-PDG value, Aguilar-Saavedra's charm-mode result and CKM scaling imply
-\({\cal B}(t\to u g)\simeq3.6\times10^{-14}\).
+to \(\mathcal{B}(t\to u g)<2.0\times10^{-5}\)
+(\texttt{CMS2017:T006:kappa\_tug}; \texttt{CMS2017:T006:t\_ug}).  For SM
+context, not as a measured PDG value, Aguilar-Saavedra's charm-mode result and
+CKM scaling imply
+\(\mathcal{B}(t\to u g)\simeq3.6\times10^{-14}\)
+(\texttt{AguilarSaavedra2004:T006:t\_ug\_SM}).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 This channel probes color-carrying first--third generation up-sector flavor
@@ -52,11 +64,10 @@ electroweak channels such as \(t\to uZ\) or \(t\to uH\).
 \subsection*{Post-2008 developments}
 The paper-era CFW reference point, arXiv:0804.1954, predates the LHC
 single-top FCNC program and is used here only as RS-flavor context.  Since
-then, CMS used 7 and 8 TeV t-channel single-top data, and ATLAS used the full
-Run-2 \(139~\mathrm{fb}^{-1}\) dataset at 13 TeV with neural-network separation
-of \(ug\to t\), \(cg\to t\), and backgrounds.  The resulting bounds remain far
-above the SM prediction, so they are new-physics limits rather than SM
-precision tests.
+then, CMS and ATLAS have interpreted single-top data in top-gluon FCNC
+operators, with the ATLAS Run-2 dataset supplying the current PDG/pdgLive
+entry.  The resulting bounds remain far above the SM prediction, so they are
+new-physics limits rather than SM precision tests.
 
 \subsection*{Constraint validity and model dependence}
 The experimental upper bound is clean because the SM signal is negligible at

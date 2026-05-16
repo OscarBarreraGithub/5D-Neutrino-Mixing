@@ -16,9 +16,17 @@ status_history:
     timestamp: "2026-05-16T14:23:05-04:00"
     agent_id: "PKA-T016"
     reason: "Initial PKA draft and source snapshot deposit."
+  - from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T14:44:48-04:00"
+    timestamp: "2026-05-16T14:44:48-04:00"
+    agent_id: "WA"
+    agent: "WA"
+    reason: "Writer polish completed for wa_w5b_top_higgs_ew."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:23:05-04:00"
+last_updated_at: "2026-05-16T14:44:48-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_z_lfv_listing.txt: "sha256:d6c641885851da0e0895f20907389b7fc2dce1c50d2df5b787da97ba81820bab"
