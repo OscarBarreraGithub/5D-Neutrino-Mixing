@@ -1,0 +1,88 @@
+% Flavor catalog per-process template.
+% process_id: B006
+% family: beauty
+% owner_agent_id: PKA-B006
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B006.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B006: \(B^0\to\mu^+\mu^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(B^0\to\mu^+\mu^-)\).
+This entry covers the rare leptonic \(b\to d\mu^+\mu^-\) flavor-changing
+neutral-current decay of the neutral \(B_d\) meson.  It is the \(b\to d\)
+analogue of \(B_s^0\to\mu^+\mu^-\), but is CKM-suppressed and currently enters
+the catalog as an upper limit rather than an observed branching fraction.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG live/API listing \texttt{S042.7}, accessed on 2026-05-16, gives
+\[
+  \mathcal{B}(B^0\to\mu^+\mu^-) < 1.5\times10^{-10}\quad(90\%\ {\rm CL}).
+\]
+The PDG input used for this limit is the CMS Run 2 result, which also reports
+\(<1.9\times10^{-10}\) at \(95\%\) CL.  The local canonical snapshot is
+\texttt{flavor\_catalog/references/B006/pdg\_2026\_bdmumu.txt}, with source key
+\texttt{PDG2026:BdMuMu}.  As an equivalent HFLAV rare-decay ratio constraint,
+the April 2023 table gives
+\[
+  \mathcal{B}(B^0\to\mu^+\mu^-)/\mathcal{B}(B_s^0\to\mu^+\mu^-) < 8.1\times10^{-2}
+  \quad(90\%\ {\rm CL}),
+\]
+using the LHCb input.  For scale, the reduced-uncertainty Standard Model
+prediction recorded in \texttt{BobethEtAl2013:BdMuMuSM} is
+\[
+  \mathcal{B}(B_d\to\mu^+\mu^-)_{\rm SM}=(1.06\pm0.09)\times10^{-10}.
+\]
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This mode is a clean \(\Delta B=1\) leptonic rare decay.  In warped/anarchic
+flavor models, flavor-changing \(Z\), KK electroweak gauge, Higgs, radion, or
+other scalar exchanges can contribute to axial-vector, scalar, and pseudoscalar
+\(b\to d\mu\mu\) Wilson coefficients.  Scalar and pseudoscalar terms are
+especially diagnostic because they can compete with the helicity-suppressed
+Standard Model amplitude.
+
+\subsection*{Post-2008 developments}
+Since the arXiv:0804.1954 RS-flavor baseline, this channel moved from
+pre-LHC upper limits to a mature LHC rare-decay search.  ATLAS combined Run 1
+and 2015--2016 data to set \(2.1\times10^{-10}\) at \(95\%\) CL.  LHCb later
+set \(2.6\times10^{-10}\) at \(95\%\) CL and constrained the \(B^0/B_s^0\)
+dimuon branching-ratio ratio.  CMS Run 2, with \(140\,{\rm fb}^{-1}\) at
+\(\sqrt{s}=13\) TeV, now supplies the PDG canonical \(90\%\)-CL limit.  On the
+theory side, \(B_{s,d}\to\ell^+\ell^-\) Standard Model predictions now include
+reduced perturbative electroweak and QCD uncertainties.
+
+\subsection*{Constraint validity and model dependence}
+The experimental object is robust as an upper limit on a short-distance
+branching fraction, but the catalog interpretation is model-dependent.  A live
+constraint needs a consistent \(\Delta B=1\) Hamiltonian, CKM convention,
+normalization to \(f_{B_d}\), and treatment of scalar/pseudoscalar operators.
+Unlike angular \(b\to d\ell\ell\) modes it does not require a multi-bin
+form-factor likelihood.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required catalog greps over \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no \(B^0\to\mu^+\mu^-\) or
+\(b\to d\mu\mu\) observable implementation.  Nearby hits such as
+\texttt{quarkConstraints/deltaf2.py:225} and
+\texttt{quarkConstraints/deltaf2.py:903} are \(B_d\) \(\Delta F=2\) mixing
+entries, not this rare leptonic \(\Delta B=1\) decay.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  This requires a new \(\Delta B=1\) leptonic rare-decay
+observable and Wilson normalization for \(C_{10}^{(\prime)}\),
+\(C_S^{(\prime)}\), and \(C_P^{(\prime)}\).  It should not need new lattice
+matrix-element machinery beyond decay-constant inputs, RG for a full angular
+analysis, or exclusive semileptonic form factors.
+
+\subsection*{Key references}
+Process-local raw reference keys before bibliography consolidation:
+\texttt{PDG2026:BdMuMu}, \texttt{HFLAV2023:BdOverBsMuMu},
+\texttt{CMS2023:BdMuMu}, \texttt{LHCb2022:BdMuMu},
+\texttt{ATLAS2019:BdMuMu}, \texttt{BobethEtAl2013:BdMuMuSM}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

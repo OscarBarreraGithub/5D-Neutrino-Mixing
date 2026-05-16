@@ -1,0 +1,39 @@
+Source key: PDG2026:BdMuMu
+Source: Particle Data Group pdgLive/API listing S042.7
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.7
+HTML summary URL: https://pdglive.lbl.gov/view/S042.7
+Access date: 2026-05-16
+Edition: 2026
+Local snapshot purpose: canonical current PDG value for B0 -> mu+ mu-.
+
+Relevant PDG API metadata:
+request_timestamp: 2026-05-16 10:12:21 PST
+pdgid: S042.7
+description: B0 --> mu+ mu-
+parent_pdgid: S042
+parent_description: B0
+related_data pdgid: S042R7
+related_data description: G(B0 --> mu+ mu-)/G(total)
+note: Test for DeltaB=1 weak neutral current. Allowed by higher-order electroweak interactions.
+
+Canonical summary row:
+Mode: B0 -> mu+ mu-
+Fraction Gamma_i/Gamma: < 1.5 E-10
+Confidence level: 90%
+PDG summary display value: <1.5 x 10^-10
+
+Input measurement used in PDG average/fit:
+document_id: TUMASYAN 2023A
+publication_name: Phys. Lett. B 842 (2023) 137955
+publication_year: 2023
+doi: 10.1016/j.physletb.2023.137955
+inspire_id: 2616304
+technique: CMS
+title: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+measurement value: < 1.5 E-10
+confidence_level: 90.0
+footnote: Corresponds to a 95% CL upper limit of <1.9E-10.
+
+Other recent input rows retained for provenance:
+AAIJ 2022, Phys. Rev. Lett. 128 041801, LHCb: (1.2 +0.8 -0.7 +-0.1) E-10; corresponds to a 95% CL upper limit of <2.6E-10.
+AABOUD 2019L, JHEP 1904 098, ATLAS: (-1.9 +-1.6) E-10; corresponds to a 95% CL upper limit of <2.1E-10.
