@@ -18,10 +18,11 @@ beauty-family entry covers charged-current lepton-flavor-universality tests in
 exclusive \(b\to c\ell\nu\) transitions with a vector charm meson in the final
 state.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The canonical current equivalent value is the HFLAV CKM 2025 joint
 \(R_D\)-\(R_{D^*}\) average, updated on 2025-09-28 and snapshotted in
-\texttt{flavor\_catalog/references/B026/hflav\_ckm2025\_rdrds.txt}:
+\texttt{flavor\_catalog/references/B026/hflav\_ckm2025\_rdrds.txt} with source
+key \texttt{hflav\_ckm2025\_rdrds}:
 \[
   R_{D^*}=0.281\pm0.011 .
 \]
@@ -35,7 +36,7 @@ current combined \(R_D\)-\(R_{D^*}\) discrepancy as \(3.8\sigma\)
 \(2.3\sigma\).  All numerical values in this paragraph use source key
 \texttt{hflav\_ckm2025\_rdrds}.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 \(R_{D^*}\) is not a neutral-meson \(\Delta F=2\) bound and does not constrain
 the current quark-scan backend directly.  It becomes relevant in warped or
 anarchic extensions with non-universal charged currents, third-generation
@@ -45,21 +46,24 @@ normalization uncertainties cancel, making it a sensitive diagnostic once a
 model predicts the \(b\to c\tau\nu\) Wilson coefficients.
 
 \subsection*{Post-2008 developments}
-The 2008 CFW/Perez-Randall-era baseline predates the \(R_D^{(*)}\) anomaly
+The 2008 CFW/Perez-Randall-era baseline
+(\texttt{cfw2008\_arxiv0804\_1954}) predates the \(R_D^{(*)}\) anomaly
 program.  The post-2008 experimental sequence starts with BaBar's 2012 and
-2013 excess in \(B\to D^{(*)}\tau\nu\), followed by Belle hadronic-tag,
+2013 excess in \(B\to D^{(*)}\tau\nu\)
+(\texttt{babar2012\_arxiv1205\_5442};
+\texttt{babar2013\_arxiv1303\_0571}), followed by Belle hadronic-tag,
 tau-polarization, and semileptonic-tag measurements, LHCb muonic-tau and
-three-prong-tau measurements, and Belle II semileptonic-tag plus CKM-2025
-hadronic-tag inputs.  HFLAV now performs a correlated average over these
-measurements rather than comparing one experiment to one SM number.  On the SM
-side, \(B\to D^*\ell\nu\) form-factor theory changed materially after 2008:
-HFLAV cites the 2012 benchmark prediction, the 2021 FNAL/MILC nonzero-recoil
-lattice calculation, 2023 HPQCD and JLQCD lattice results, and FLAG 2024
-summary inputs.  The residual tension is therefore tied to correlated
-experimental averaging and form-factor conventions, not to a missing basic SM
-prediction.
+three-prong-tau measurements, and Belle II inputs recorded in the HFLAV CKM
+2025 average.  HFLAV now performs a correlated average rather than comparing
+one experiment to one SM number (\texttt{hflav\_ckm2025\_rdrds};
+\texttt{hflav\_ckm2025\_logfile}).  On the SM side,
+\(B\to D^*\ell\nu\) form-factor theory changed materially after 2008: HFLAV
+cites benchmark, FNAL/MILC, HPQCD, JLQCD, and FLAG inputs, with the local FLAG
+snapshot stored as \texttt{flag2024\_arxiv2411\_04268}.  The residual tension
+is therefore tied to correlated experimental averaging and form-factor
+conventions, not to a missing basic SM prediction.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 The HFLAV average is a robust experimental summary, but interpreting it as an
 RS constraint is highly model-dependent.  A live likelihood needs the
 \((\bar c\,\Gamma b)(\bar\tau\,\Gamma\nu)\) charged-current operator basis,
@@ -87,19 +91,19 @@ and \(\mu\to e\gamma\) surfaces and should target \texttt{quarkConstraints/moder
 only if the PI later approves implementation.
 
 \subsection*{Key references}
-Process-local snapshots before bibliography consolidation:
-\texttt{hflav\_ckm2025\_rdrds.txt},
-\texttt{hflav\_ckm2025\_logfile.txt},
-\texttt{babar2012\_arxiv1205\_5442.txt},
-\texttt{babar2013\_arxiv1303\_0571.txt},
-\texttt{belle2015\_arxiv1507\_03233.txt},
-\texttt{belle2017\_arxiv1612\_00529.txt},
-\texttt{belle2018\_arxiv1709\_00129.txt},
-\texttt{belle2019\_arxiv1910\_05864.txt},
-\texttt{lhcb2023\_arxiv2302\_02886.txt},
-\texttt{lhcb2023\_arxiv2305\_01463.txt},
-\texttt{lhcb2025\_arxiv2406\_03387.txt},
-\texttt{belleii2024\_arxiv2401\_02840.txt},
-\texttt{belleii2025\_arxiv2504\_11220.txt},
-\texttt{flag2024\_arxiv2411\_04268.txt}, and
-\texttt{cfw2008\_arxiv0804\_1954.txt}.
+Process-local reference keys before bibliography consolidation:
+\texttt{hflav\_ckm2025\_rdrds},
+\texttt{hflav\_ckm2025\_logfile},
+\texttt{babar2012\_arxiv1205\_5442},
+\texttt{babar2013\_arxiv1303\_0571},
+\texttt{belle2015\_arxiv1507\_03233},
+\texttt{belle2017\_arxiv1612\_00529},
+\texttt{belle2018\_arxiv1709\_00129},
+\texttt{belle2019\_arxiv1910\_05864},
+\texttt{lhcb2023\_arxiv2302\_02886},
+\texttt{lhcb2023\_arxiv2305\_01463},
+\texttt{lhcb2025\_arxiv2406\_03387},
+\texttt{belleii2024\_arxiv2401\_02840},
+\texttt{belleii2025\_arxiv2504\_11220},
+\texttt{flag2024\_arxiv2411\_04268}, and
+\texttt{cfw2008\_arxiv0804\_1954}.

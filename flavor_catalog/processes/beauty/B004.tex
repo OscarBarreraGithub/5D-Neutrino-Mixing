@@ -12,15 +12,16 @@
 
 \subsection*{Process}
 \textbf{Standard notation:} \(\phi_s^{c\bar c s}\), often shortened to
-\(\phi_s\).  This entry covers the mixing-induced CP phase measured in
+\(\phi_s\).  This entry covers the mixing-induced CP phase extracted from
 time-dependent angular analyses of \(B_s^0\to J/\psi K^+K^-\) near the
-\(\phi(1020)\) resonance, conventionally reported as \(B_s^0\to J/\psi\phi\).
-Because the final state is vector--vector, the experimental extraction also
-separates CP-even and CP-odd angular components.
+\(\phi\) resonance, conventionally reported as \(B_s^0\to J/\psi\phi\).
+The vector--vector final state requires the experimental fit to separate
+CP-even and CP-odd angular components.
 
 \subsection*{PDG or equivalent value}
-The canonical source is the HFLAV PDG 2025 \(\phi_s\) input table, snapshotted
-as \texttt{references/B004/hflav\_pdg2025\_phis\_inputs.txt}.  HFLAV gives the
+The canonical equivalent source is the HFLAV PDG 2025 \(\phi_s\) input table,
+snapshotted as \texttt{references/B004/hflav\_pdg2025\_phis\_inputs.txt} with
+source key \texttt{hflav\_pdg2025\_phis\_inputs}.  HFLAV gives the
 all-combined average
 \[
   \phi_s^{c\bar c s}=-0.041\pm0.016~{\rm rad},
@@ -34,15 +35,16 @@ For the strict \(B_s^0\to J/\psi K^+K^-\) channel combination, HFLAV gives
   \Delta\Gamma_s=+0.077\pm0.006~{\rm ps}^{-1}.
 \]
 The dominant recent LHCb Run-2 input, snapshotted as
-\texttt{references/B004/lhcb\_2024\_jpsikk\_phis\_arxiv.txt}, reports
+\texttt{references/B004/lhcb\_2024\_jpsikk\_phis\_arxiv.txt} with source key
+\texttt{lhcb\_2024\_jpsikk\_phis\_arxiv}, reports
 \[
   \phi_s=-0.039\pm0.022_{\rm stat}\pm0.006_{\rm syst}~{\rm rad}
 \]
 from \(6~{\rm fb}^{-1}\) and approximately \(349000\) signal decays.  The same
-paper quotes the CKM-fit Standard Model expectation
+source quotes the CKM-fit Standard Model expectation
 \(-2\beta_s=-0.0368^{+0.0009}_{-0.0006}~{\rm rad}\).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 In anarchic warped models, tree-level KK-gluon and electroweak exchange can
 generate a complex new contribution to \(B_s-\bar B_s\) mixing.  \(\phi_s\) is
 therefore the phase complement to the \(\Delta m_s\) magnitude constraint: a
@@ -52,17 +54,18 @@ amplitude is the CKM-favored \(b\to c\bar c s\) transition, while new physics
 mainly enters through \(\Delta B=2\) mixing.
 
 \subsection*{Post-2008 developments}
-The arXiv:0804.1954 baseline predates the LHCb era and used RS flavor as a
-generic \(\Delta F=2\) stress test rather than a precision \(\phi_s\) input.
-Since then, Tevatron, ATLAS, CMS, and especially LHCb measurements have turned
-\(\phi_s\) from an exploratory new-physics search into a percent-level phase
-test.  The 2024 LHCb Run-2 analysis superseded the earlier Run-2 result in the
-same channel, added improved flavor tagging and decay-time calibration, and
-found no evidence for polarization dependence.  HFLAV's PDG 2025 combination
-now reaches \(0.016~{\rm rad}\) precision and is consistent with the small SM
-phase.
+The 2008 RS-flavor baseline in \texttt{cfw\_2008\_rs\_flavor} predates the
+LHCb era and treats neutral-meson mixing as a generic \(\Delta F=2\) stress
+test rather than as a precision \(\phi_s\) input.  Since then, Tevatron, ATLAS,
+CMS, and especially LHCb measurements have turned \(\phi_s\) into a
+precision phase test.  The 2024 LHCb Run-2 analysis superseded the earlier
+Run-2 result in the same channel, added improved flavor tagging and decay-time
+calibration, and found no evidence for polarization dependence
+(\texttt{lhcb\_2024\_jpsikk\_phis\_arxiv}).  HFLAV's PDG 2025 combination now
+reaches \(0.016~{\rm rad}\) precision and is consistent with the small SM phase
+(\texttt{hflav\_pdg2025\_phis\_inputs}).
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 This is a robust neutral-meson-mixing phase constraint, but it is not identical
 to a pure \(\arg M_{12}^s\) observable without assumptions.  The interpretation
 uses a CKM phase convention, assumes no large new physics in the tree-dominated
