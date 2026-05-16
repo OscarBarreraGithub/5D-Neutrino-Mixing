@@ -1,0 +1,85 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: K002
+access_date: "2026-05-16"
+references:
+  - key: pdg_live_S013D_20260516
+    arxiv_id: null
+    DOI: null
+    title: "pdgLive DataBlock S013D: m(K_L^0)-m(K_S^0)"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?home=sumtabM&node=S013D"
+    sha256_of_local_snapshot: "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
+    snapshot_path: "flavor_catalog/references/K002/pdg_live_S013D_20260516.txt"
+  - key: ktev_2011
+    arxiv_id: "1011.0127"
+    DOI: "10.1103/PhysRevD.83.092001"
+    title: "Precise Measurements of Direct CP Violation, CPT Symmetry, and Other Parameters in the Neutral Kaon System"
+    authors: "KTeV Collaboration, E. Abouzaid et al."
+    year: 2011
+    url: "https://arxiv.org/abs/1011.0127"
+    sha256_of_local_snapshot: "34d89cdb549cb5d0121ee2117531e29853acaeb0948165577269522898b89b8b"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_1011.0127_ktev_2011.txt"
+  - key: christ_2013_ld_delta_mk
+    arxiv_id: "1212.5931"
+    DOI: "10.1103/PhysRevD.88.014508"
+    title: "Long distance contribution to the K_L-K_S mass difference"
+    authors: "N. H. Christ, T. Izubuchi, C. T. Sachrajda, A. Soni, J. Yu"
+    year: 2013
+    url: "https://arxiv.org/abs/1212.5931"
+    sha256_of_local_snapshot: "d7dd7d548c831d6e753999048c0d545b91e6eebc6367066cde94deb3f2b02a46"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_1212.5931_christ_2013_ld_delta_mk.txt"
+  - key: bai_2014_delta_mk
+    arxiv_id: "1406.0916"
+    DOI: "10.1103/PhysRevLett.113.112003"
+    title: "K_L-K_S mass difference from lattice QCD"
+    authors: "Z. Bai, N. H. Christ, T. Izubuchi, C. T. Sachrajda, A. Soni, J. Yu"
+    year: 2014
+    url: "https://arxiv.org/abs/1406.0916"
+    sha256_of_local_snapshot: "94522a76f8bfa763c4b6bbf66fbed2d0b14c5679e65d8a5f50783dd199a7dfe5"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_1406.0916_bai_2014_delta_mk.txt"
+  - key: wang_2020_physical_delta_mk
+    arxiv_id: "2001.06374"
+    DOI: "10.48550/arXiv.2001.06374"
+    title: "Calculation of the K_L-K_S mass difference for physical quark masses"
+    authors: "Bigeng Wang"
+    year: 2020
+    url: "https://arxiv.org/abs/2001.06374"
+    sha256_of_local_snapshot: "1cd19e6f700c320917252cc97e5e21b8e27726c20eaa93e3eee4061df749c40a"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_2001.06374_wang_2020_physical_delta_mk.txt"
+  - key: wang_2023_delta_mk
+    arxiv_id: "2301.01387"
+    DOI: "10.22323/1.396.0141"
+    title: "Calculating Delta m_K with lattice QCD"
+    authors: "Bigeng Wang"
+    year: 2023
+    url: "https://arxiv.org/abs/2301.01387"
+    sha256_of_local_snapshot: "26d8bab47c57de8cc8b749f1964f38e2d429005760ac4048f209377da66f0505"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_2301.01387_wang_2023_delta_mk.txt"
+  - key: boyle_2024_bsm_kaon_mixing
+    arxiv_id: "2404.02297"
+    DOI: "10.48550/arXiv.2404.02297"
+    title: "Kaon mixing beyond the standard model with physical masses"
+    authors: "Peter A. Boyle, Felix Erben, Jonathan M. Flynn, Nicolas Garron, Julia Kettle, Rajnandini Mukherjee, J. Tobias Tsang"
+    year: 2024
+    url: "https://arxiv.org/abs/2404.02297"
+    sha256_of_local_snapshot: "15cd1fadcfebdc9cbbf9add25c80890008a560a09d221a923dd154a5c342bb19"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_2404.02297_boyle_2024_bsm_kaon_mixing.txt"
+  - key: flag2024
+    arxiv_id: "2411.04268"
+    DOI: "10.1103/nfzp-p5dn"
+    title: "FLAG Review 2024"
+    authors: "Y. Aoki et al. (Flavour Lattice Averaging Group)"
+    year: 2024
+    url: "https://arxiv.org/abs/2411.04268"
+    sha256_of_local_snapshot: "ff3400ae8b8efff9a24094cf8f1e0dad3fff091f153c5707b7aaff07afbab172"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_2411.04268_flag2024.txt"
+  - key: cfw_2008
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "a422d6ca8e017bd350c57b78001fc29e86783eb126448f138759f8d4e412ca59"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_0804.1954_cfw_2008.txt"

@@ -1,0 +1,89 @@
+% Flavor catalog per-process template.
+% process_id: K002
+% family: kaon
+% owner_agent_id: PKA-K002
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K002.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(\Delta m_K\): \(K_L-K_S\) mass difference}{Delta m K: KL-KS mass difference}}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\Delta m_K \equiv m_{K_L}-m_{K_S}\).
+This kaon-family entry covers the CP-even magnitude of neutral-kaon mixing,
+separate from the CP-violating \(\varepsilon_K\) entry.  The process id is
+\(K002\).
+
+\subsection*{PDG / equivalent value(s)}
+The canonical PDG-sidecar value is the 2026 pdgLive fit assuming CPT,
+\[
+  \Delta m_K = (0.5293\pm0.0009)\times 10^{10}\,\hbar\,{\rm s}^{-1},
+\]
+with the quoted PDG uncertainty including a scale factor of \(1.3\).  The same
+snapshot gives the companion fit not assuming CPT,
+\((0.5289\pm0.0010)\times 10^{10}\,\hbar\,{\rm s}^{-1}\).  Both values trace to
+\texttt{flavor\_catalog/references/K002/pdg\_live\_S013D\_20260516.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In anarchic warped flavor models, tree-level exchange of KK gluons generates
+\(\Delta S=2\) four-quark operators after rotating to the quark-mass basis.
+\(\Delta m_K\) constrains the real part of the new \(K^0-\bar K^0\) mixing
+amplitude, while \(\varepsilon_K\) constrains its imaginary part.  The same
+VLL, VRR, SLL/SLR, and LR operator structures used for the repo's neutral-meson
+mixing lane apply here, and the LR matrix elements remain chirally enhanced.
+The important physics caveat is that the measured mass splitting contains a
+large long-distance Standard Model component, so the catalog should treat
+\(\Delta m_K\) as a conservative magnitude bound unless a controlled SM
+subtraction is supplied.
+
+\subsection*{Post-2008 developments}
+Relative to the arXiv:0804.1954 baseline, the experimental side was updated by
+KTeV's final neutral-kaon analysis, which the PDG fit still uses.  The more
+important post-2008 shift is theoretical: lattice calculations began attacking
+the long-distance contribution directly.  Christ, Izubuchi, Sachrajda, Soni,
+and Yu developed the long-distance method in 2013; Bai et al. then reported a
+first complete lattice calculation in 2014, obtaining
+\(\Delta M_K=3.19(41)(96)\times10^{-12}\,{\rm MeV}\) at heavier-than-physical
+masses.  Later physical-quark-mass studies reported a statistical uncertainty
+approaching \(9\%\) but highlighted remaining systematics.  For BSM
+interpretation, FLAG Review 2024 and the 2024 physical-mass BSM kaon-mixing
+matrix-element calculation update the \(B_K\) and additional four BSM bag-input
+landscape used to translate Wilson coefficients into matrix elements.
+
+\subsection*{Constraint validity and model dependence}
+The experimental number is precise, but \(\Delta m_K\) is long-distance
+limited as a new-physics constraint.  A conservative RS scan can require the
+absolute new-physics contribution not to exceed the measured splitting, or use
+only a fraction of it by policy.  A sharper bound would require specifying the
+short-distance charm-loop treatment, the long-distance lattice input, and the
+CPT-fit convention.  This entry is therefore robust as a conservative
+\(\Delta F=2\) magnitude check, but not as a clean SM-subtracted exclusion.
+
+\subsection*{Code coverage in this repo}
+\textbf{PARTIAL.}  The methodology note lists \(\Delta m_K\) among the five
+\(\Delta F=2\) scan observables at
+\texttt{docs/quark\_scan\_methodology\_note.tex:118}.  The legacy kaon helper
+sets the PDG mass splitting at \texttt{quarkConstraints/deltaf2.py:615} and
+implements \texttt{evaluate\_delta\_mk} at
+\texttt{quarkConstraints/deltaf2.py:755}.  The modern lane also has a
+\texttt{K} input displayed as \(\Delta m_K\) at
+\texttt{quarkConstraints/modern/inputs.py:958} and a bridge evaluator at
+\texttt{quarkConstraints/modern/phenomenology.py:493}.  I keep the status
+partial because the legacy default kaon input is still the \(\varepsilon_K\)
+entry at \texttt{quarkConstraints/deltaf2.py:209}, and the catalog has not
+audited a standalone long-distance policy.
+
+\subsection*{Implementation difficulty}
+\textbf{LOW.}  No new operator basis is needed for a conservative catalog or
+scan-side magnitude bound: the existing \(\Delta F=2\) VLL/VRR/LR machinery
+covers the required Wilson coefficients.  A future precision SM-subtracted
+\(\Delta m_K\) likelihood would be a separate high-theory-effort project.
+
+\subsection*{Key references}
+Local source keys: \texttt{pdg\_live\_S013D\_20260516},
+\texttt{ktev\_2011}, \texttt{christ\_2013\_ld\_delta\_mk},
+\texttt{bai\_2014\_delta\_mk}, \texttt{wang\_2020\_physical\_delta\_mk},
+\texttt{wang\_2023\_delta\_mk}, \texttt{boyle\_2024\_bsm\_kaon\_mixing},
+\texttt{flag2024}, and \texttt{cfw\_2008}.

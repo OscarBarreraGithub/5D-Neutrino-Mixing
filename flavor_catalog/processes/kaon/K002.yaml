@@ -1,0 +1,145 @@
+schema: flavor_catalog.process.v1
+process_id: K002
+family: kaon
+standard_notation: "\\Delta m_K"
+process_name: "K_L-K_S mass difference"
+owner: PKA
+owner_agent_id: PKA-K002
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:36:41-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:36:41-04:00"
+    agent_id: "PKA-K002"
+    reason: "Initial PKA draft and source deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:36:41-04:00"
+version: "0.1.0"
+pdg_or_equivalent:
+  year: 2026
+  source: "Particle Data Group pdgLive DataBlock S013D"
+  observable: "m(K_L^0) - m(K_S^0)"
+  value: 0.5293
+  uncertainty: 0.0009
+  units: "10^10 hbar s^-1"
+  display_value: "Delta m_K = (0.5293 +/- 0.0009) x 10^10 hbar s^-1"
+  assumptions:
+    - "PDG OUR FIT assuming CPT"
+    - "PDG uncertainty includes scale factor S = 1.3"
+  source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?home=sumtabM&node=S013D"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/K002/pdg_live_S013D_20260516.txt"
+  sha256_of_text_snapshot: "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
+supporting_values:
+  - key: pdg_fit_not_assuming_cpt
+    source: "Particle Data Group pdgLive DataBlock S013D"
+    value: 0.5289
+    uncertainty: 0.0010
+    units: "10^10 hbar s^-1"
+    display_value: "OUR FIT not assuming CPT: 0.5289 +/- 0.0010"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?home=sumtabM&node=S013D"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/pdg_live_S013D_20260516.txt"
+    sha256_of_text_snapshot: "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
+  - key: ktev_2011_delta_m
+    source: "KTeV Collaboration, arXiv:1011.0127"
+    value: 5270
+    uncertainty: 12
+    units: "10^6 hbar/s"
+    display_value: "Delta m = (5270 +/- 12) x 10^6 hbar/s"
+    source_url: "https://arxiv.org/abs/1011.0127"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_1011.0127_ktev_2011.txt"
+    sha256_of_text_snapshot: "34d89cdb549cb5d0121ee2117531e29853acaeb0948165577269522898b89b8b"
+  - key: christ_2013_ld_delta_mk_range_low
+    source: "Christ et al., arXiv:1212.5931"
+    value: "6.58(30)"
+    units: "10^-12 MeV"
+    display_value: "Delta M_K lower end of exploratory range: 6.58(30) x 10^-12 MeV"
+    source_url: "https://arxiv.org/abs/1212.5931"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_1212.5931_christ_2013_ld_delta_mk.txt"
+    sha256_of_text_snapshot: "d7dd7d548c831d6e753999048c0d545b91e6eebc6367066cde94deb3f2b02a46"
+  - key: christ_2013_ld_delta_mk_range_high
+    source: "Christ et al., arXiv:1212.5931"
+    value: "11.89(81)"
+    units: "10^-12 MeV"
+    display_value: "Delta M_K upper end of exploratory range: 11.89(81) x 10^-12 MeV"
+    source_url: "https://arxiv.org/abs/1212.5931"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_1212.5931_christ_2013_ld_delta_mk.txt"
+    sha256_of_text_snapshot: "d7dd7d548c831d6e753999048c0d545b91e6eebc6367066cde94deb3f2b02a46"
+  - key: bai_2014_lattice_delta_mk
+    source: "Bai et al., arXiv:1406.0916"
+    value: 3.19
+    statistical_uncertainty: 0.41
+    systematic_uncertainty: 0.96
+    units: "10^-12 MeV"
+    display_value: "Delta M_K = 3.19(41)(96) x 10^-12 MeV"
+    source_url: "https://arxiv.org/abs/1406.0916"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_1406.0916_bai_2014_delta_mk.txt"
+    sha256_of_text_snapshot: "94522a76f8bfa763c4b6bbf66fbed2d0b14c5679e65d8a5f50783dd199a7dfe5"
+  - key: wang_2023_statistical_error
+    source: "Bigeng Wang, arXiv:2301.01387"
+    value: 9
+    units: "percent"
+    display_value: "statistical error approaches 9%"
+    source_url: "https://arxiv.org/abs/2301.01387"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_2301.01387_wang_2023_delta_mk.txt"
+    sha256_of_text_snapshot: "26d8bab47c57de8cc8b749f1964f38e2d429005760ac4048f209377da66f0505"
+  - key: boyle_2024_bsm_bag_parameters
+    source: "Boyle et al., arXiv:2404.02297"
+    units: "MSbar at 3 GeV"
+    display_value: "B_K=B_1=0.5240(17)(54), B_2=0.4794(25)(35), B_3=0.746(13)(17), B_4=0.897(02)(10), B_5=0.6882(78)(94)"
+    source_url: "https://arxiv.org/abs/2404.02297"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_2404.02297_boyle_2024_bsm_kaon_mixing.txt"
+    sha256_of_text_snapshot: "15cd1fadcfebdc9cbbf9add25c80890008a560a09d221a923dd154a5c342bb19"
+source_shas:
+  pdg_live_S013D_20260516.txt: "sha256:b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
+  arxiv_1011.0127_ktev_2011.txt: "sha256:34d89cdb549cb5d0121ee2117531e29853acaeb0948165577269522898b89b8b"
+  arxiv_1212.5931_christ_2013_ld_delta_mk.txt: "sha256:d7dd7d548c831d6e753999048c0d545b91e6eebc6367066cde94deb3f2b02a46"
+  arxiv_1406.0916_bai_2014_delta_mk.txt: "sha256:94522a76f8bfa763c4b6bbf66fbed2d0b14c5679e65d8a5f50783dd199a7dfe5"
+  arxiv_2001.06374_wang_2020_physical_delta_mk.txt: "sha256:1cd19e6f700c320917252cc97e5e21b8e27726c20eaa93e3eee4061df749c40a"
+  arxiv_2301.01387_wang_2023_delta_mk.txt: "sha256:26d8bab47c57de8cc8b749f1964f38e2d429005760ac4048f209377da66f0505"
+  arxiv_2404.02297_boyle_2024_bsm_kaon_mixing.txt: "sha256:15cd1fadcfebdc9cbbf9add25c80890008a560a09d221a923dd154a5c342bb19"
+  arxiv_2411.04268_flag2024.txt: "sha256:ff3400ae8b8efff9a24094cf8f1e0dad3fff091f153c5707b7aaff07afbab172"
+  arxiv_0804.1954_cfw_2008.txt: "sha256:a422d6ca8e017bd350c57b78001fc29e86783eb126448f138759f8d4e412ca59"
+code_coverage:
+  status: "PARTIAL"
+  searched_directories:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    - "rg -n \"Delta m_K|Delta M_K|Delta_m_K|DELTA_M_K|evaluate_delta_mk|K_L|K_S|neutral-kaon|kaon mass difference|K neutral-kaon|non-CP kaon|_KAON_DELTA_M_K\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "docs/quark_scan_methodology_note.tex:118 lists Delta F = 2 neutral-meson observables, including Delta m_K."
+    - "quarkConstraints/deltaf2.py:615 defines DELTA_M_K as the PDG K_L-K_S mass difference."
+    - "quarkConstraints/deltaf2.py:755 defines evaluate_delta_mk."
+    - "quarkConstraints/deltaf2.py:802 defines evaluate_delta_mk_with_running."
+    - "quarkConstraints/modern/inputs.py:958 defines the K mixing (Delta m_K) display name."
+    - "quarkConstraints/modern/phenomenology.py:493 defines _evaluate_delta_mk_from_bridge."
+    - "quarkConstraints/modern/phenomenology.py:1329 routes system_id K through the Delta m_K bridge evaluator."
+    - "quarkConstraints/deltaf2.py:209 legacy DEFAULT_DELTA_F2_INPUTS_V1 includes epsilon_K but not a standalone Delta m_K kaon input."
+implementation_difficulty: LOW
+implementation_difficulty_reason: "Existing Delta F = 2 Wilson basis and kaon matrix-element machinery cover a conservative Delta m_K magnitude constraint; no new operator is required. Precision SM-subtracted treatment remains long-distance-theory-limited."
+open_issues:
+  - "Checker should decide whether final prose should display the CPT-assuming PDG fit only, or also retain the no-CPT fit as a companion value."
+  - "A future writer should normalize the code-coverage label against the newer modern lane, which now contains an explicit K Delta m_K bridge evaluator even though the assignment row labeled K002 as PARTIAL-D2-KM."
