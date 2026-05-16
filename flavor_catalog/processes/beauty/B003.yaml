@@ -58,9 +58,19 @@ status_history:
     issues:
       - "CHK-1: TeX still quotes FLAG f_Bs sqrt(Bhat_Bs) = 256.1 +/- 5.7 MeV and xi = 1.216 +/- 0.016 outside pdg_or_equivalent; WA-v2 added complete metadata under auxiliary_theory_inputs instead."
     reason: "Cycle-2 checker found a strict CHK-1 pdg_or_equivalent placement gap; see flavor_catalog/worklogs/checker/ca_w6_beauty_v2.md."
-checker_passed_at: null
-opus_approved_at: null
-last_updated_at: "2026-05-16T16:27:35-04:00"
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T16:42:00-04:00"
+    agent: "Opus-arbitration"
+    cycle: 3
+    from: "WRITER-REWORK"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T16:42:00-04:00"
+    agent_id: "Opus-arbitration"
+    opus_approved_at: "2026-05-16T16:42:00-04:00"
+    reason: "APPROVE-OVERRIDE per L001 / B021_B023 precedent: pdg_or_equivalent is for measured experimental observables. The FLAG 2024 lattice inputs f_Bs sqrt(Bhat_Bs) = 256.1 +/- 5.7 MeV and xi = 1.216 +/- 0.016 are theoretical normalization averages and correctly live under auxiliary_theory_inputs.flag_2024_bmixing with full strict metadata. The HFLAV Fall 2024 recommended Delta m_s = 17.766 +/- 0.006 ps^-1, the HFLAV companion quantities (x_s, chi_s, 1/Gamma_s, DeltaGamma_s), the HFLAV/PDG 2025 cross-check, and the dominant LHCb 2022 input are all already in pdg_or_equivalent with complete metadata. See flavor_catalog/signoff/by_process/B001_B003.md."
+checker_passed_at: "2026-05-16T16:42:00-04:00"
+opus_approved_at: "2026-05-16T16:42:00-04:00"
+last_updated_at: "2026-05-16T16:42:00-04:00"
 version: "0.1.0"
 source_shas:
   cfw_2008_rs_flavor.txt: "sha256:894d0bfe37a3fc977af227722075874a4babd171d771b42ba509d7d156069d87"
