@@ -1,0 +1,45 @@
+Source: arXiv abstract and arXiv source extract
+URL: https://arxiv.org/abs/2011.00217
+Source archive URL: https://arxiv.org/e-print/2011.00217
+Access date: 2026-05-16
+arXiv: 2011.00217
+DOI: 10.1007/JHEP06(2021)044
+Journal: JHEP 06 (2021) 044
+Report number: LHCb-PAPER-2020-007; CERN-EP-2020-140
+Title: Searches for 25 rare and forbidden decays of D+ and Ds+ mesons
+Authors: LHCb Collaboration
+
+Abstract-page metadata extract:
+
+A search is performed for rare and forbidden charm decays of the form
+D_(s)+ -> h^+- l+ l^(')-+, where h is a pion or kaon and the leptons are
+electrons or muons. The measurements use proton-proton collision data
+corresponding to an integrated luminosity of 1.6 fb^-1, collected by LHCb
+in 2016. No evidence is observed for the 25 decay modes investigated, and
+90% confidence-level limits on branching fractions are set between
+1.4 x 10^-8 and 6.4 x 10^-6.
+
+Source extract from src/1-introduction.tex:
+
+Four of the decay channels (D+ -> pi+ e+ e-, D+ -> pi+ mu+ mu-,
+Ds+ -> K+ e+ e-, Ds+ -> K+ mu+ mu-) involve flavor-changing neutral-current
+transitions. These processes are rare in the Standard Model because only
+weak-annihilation processes can occur at tree level. At the loop level,
+FCNC transitions are GIM suppressed. The source states that short-distance
+SM branching fractions are of order 10^-12, while significant long-distance
+contributions from dilepton resonances are expected to dominate across the
+dilepton invariant-mass-squared distribution. The analysis uses 1.6 fb^-1
+of 2016 LHCb data. Four resonant D_(s)+ -> pi+ phi(->ll) decays are used
+for calibration and normalization.
+
+Source extract from src/7-results.tex, Table "The single event sensitivities
+(SES), and upper limits on the branching fractions obtained using the CL_s
+method, for each signal decay channel":
+
+Branching fraction upper limit [10^-9]
+Decay              D+ SES   D+ 90% CL   D+ 95% CL   Ds+ SES   Ds+ 90% CL   Ds+ 95% CL
+D+ -> pi+ mu+ mu-    0.6        67          74          2.4        180          210
+
+Interpretation for C007:
+  B(D+ -> pi+ mu+ mu-) < 67 x 10^-9 = 6.7 x 10^-8 at 90% CL.
+  Companion 95% CL limit: <74 x 10^-9 = 7.4 x 10^-8.

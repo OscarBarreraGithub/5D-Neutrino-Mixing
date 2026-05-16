@@ -1,0 +1,60 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: C007
+generated_at: "2026-05-16T13:13:46-04:00"
+license_policy: "minimal text snapshots only; no publisher PDFs tracked"
+references:
+  - key: PDG2026:DPlusPiMuMu
+    arxiv_id: null
+    DOI: null
+    title: "D+ -> pi+ mu+ mu- decay-mode summary"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.42"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C007/pdg2026_dplus_piplus_mumu_pdgLive.txt"
+    sha256_of_local_snapshot: "sha256:1bfa609f88a7b60809d98a416abd581d00872547ea851e6eabb4f61c51d94adc"
+    notes: "PDG Live/API listing S031.42; current used limit is LHCb 2021T <6.7e-8 at 90% CL."
+  - key: LHCb2021:DPlusPiMuMu
+    arxiv_id: "2011.00217"
+    DOI: "10.1007/JHEP06(2021)044"
+    title: "Searches for 25 rare and forbidden decays of D+ and Ds+ mesons"
+    authors: "LHCb Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2011.00217"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt"
+    sha256_of_local_snapshot: "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac"
+    notes: "Primary current experimental source; Table in arXiv source gives D+ -> pi+ mu+ mu- limit 67 x 10^-9 at 90% CL and 74 x 10^-9 at 95% CL."
+  - key: LHCb2013:DPlusPiMuMu
+    arxiv_id: "1304.6365"
+    DOI: "10.1016/j.physletb.2013.06.010"
+    title: "Search for D+(s) to pi+ mu+ mu- and D+(s) to pi- mu+ mu+ decays"
+    authors: "LHCb Collaboration"
+    year: 2013
+    url: "https://arxiv.org/abs/1304.6365"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C007/lhcb2013_arxiv1304_6365.txt"
+    sha256_of_local_snapshot: "sha256:64daf4ae376043bdac07a5dd86a090c00f9d74464c1e209569075b90c581deee"
+    notes: "Predecessor LHCb nonresonant search; 1.0 fb^-1 at 7 TeV; <7.3e-8 at 90% CL and <8.3e-8 at 95% CL."
+  - key: DeBoerHiller2015:RareCharmLeptons
+    arxiv_id: "1510.00311"
+    DOI: "10.1103/PhysRevD.93.074001"
+    title: "Flavor & new physics opportunities with rare charm decays into leptons"
+    authors: "Stefan de Boer and Gudrun Hiller"
+    year: 2015
+    url: "https://arxiv.org/abs/1510.00311"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C007/deboer_hiller2015_arxiv1510_00311.txt"
+    sha256_of_local_snapshot: "sha256:52cda0c2388f717bd54329d6c7dc2251b637ac56ae115712b0a8f1764a457792"
+    notes: "Post-2008 theory context for D_(s) -> P l+ l- rare charm Wilson-coefficient and resonance interpretation."
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C007/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:4703263c1d560f5af74636df56cd97f76edc56b1d0fb7f65443b2a07eaea6885"
+    notes: "2008 RS/anarchic-flavor baseline for the post-2008 comparison."

@@ -1,0 +1,95 @@
+% Flavor catalog process: C007
+% family: charm
+% owner_agent_id: PKA-C007
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: C007.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{C007: \(D^+\to\pi^+\mu^+\mu^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:}
+\(\mathcal{B}(D^+\to\pi^+\mu^+\mu^-)\).
+This entry covers the rare charged-charm semileptonic decay
+\(D^+\to\pi^+\mu^+\mu^-\), a \(\Delta C=1\), \(c\to u\mu^+\mu^-\)
+flavor-changing neutral-current probe.  Charge-conjugate modes are implied by
+the experimental sources.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG Live/API entry S031.42, accessed on 2026-05-16, lists
+\[
+  \mathcal{B}(D^+\to\pi^+\mu^+\mu^-) < 6.7\times 10^{-8}
+  \qquad (90\%~{\rm C.L.})
+\]
+from the LHCb 2021 search in \(1.6\,{\rm fb}^{-1}\) of 2016 \(pp\) data.
+The LHCb source table gives the companion 95\% C.L. limit
+\(7.4\times10^{-8}\).  The predecessor LHCb 2013 nonresonant search, using
+\(1.0\,{\rm fb}^{-1}\) at \(\sqrt{s}=7\,{\rm TeV}\), reported
+\(7.3(8.3)\times10^{-8}\) at 90\% (95\%) C.L.  These numbers are traced to
+\texttt{flavor\_catalog/references/C007/pdg2026\_dplus\_piplus\_mumu\_pdgLive.txt},
+\texttt{lhcb2021\_arxiv2011\_00217.txt}, and
+\texttt{lhcb2013\_arxiv1304\_6365.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped models can induce up-sector flavor-changing neutral currents
+through nonuniversal KK gauge couplings, \(Z\)-like flavor violation, Higgs or
+radion scalar effects, and lepton-current extensions.  This process is the
+charged semileptonic \(\Delta C=1\) analogue of the implemented neutral
+\(D^0\)-mixing lane: it probes \(c\to u\) vector, axial-vector, and possible
+scalar semileptonic operators rather than four-quark \(\Delta F=2\) operators.
+It is therefore a roadmap constraint for a broader flavor backend, not a
+constraint currently applied by the quark scan.
+
+\subsection*{Post-2008 developments}
+The arXiv:0804.1954 RS-flavor baseline predates the modern LHCb rare-charm
+program.  Since then, LHCb first set nonresonant \(D^+\to\pi^+\mu^+\mu^-\)
+limits at the \(10^{-8}\) level in 2013 and then folded the channel into a
+2021 search for 25 rare or forbidden \(D^+\) and \(D_s^+\) decays.  The 2021
+analysis found no evidence in any of the investigated modes and tightened the
+PDG-listed C007 limit to \(6.7\times10^{-8}\) at 90\% C.L.  On the theory side,
+post-2008 rare-charm EFT work, especially de Boer and Hiller 2015, clarified
+that \(D_{(s)}\to P\ell^+\ell^-\) branching-ratio recasts must separate
+short-distance Wilson coefficients from resonance-dominated long-distance
+physics; the LHCb 2021 introduction quotes short-distance SM branching
+fractions of order \(10^{-12}\), with dilepton resonances dominating the
+physical spectrum.
+
+\subsection*{Constraint validity and model dependence}
+The experimental upper limit is robust as a counting result, but its use as an
+RS short-distance bound is model dependent.  Long-distance hadronic resonances,
+weak-annihilation effects, and the exact phase-space definition of the
+``nonresonant'' signal matter.  A conservative catalog use is an upper bound on
+additional short-distance \(c\to u\mu^+\mu^-\) contributions in the same
+experimental region, with an explicit recast needed before treating it as a
+hard scan veto.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required catalog greps and a focused search for
+\texttt{D+.*pi+.*mu}, \texttt{c.?->.?u}, \texttt{rare.?charm},
+\texttt{semileptonic.*charm}, \texttt{C9}, and \texttt{C10} found no
+\(D^+\to\pi^+\mu^+\mu^-\) implementation in \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, or \texttt{tests/}.  Nearby hits are unrelated:
+\(D^0\) mixing appears at \texttt{quarkConstraints/deltaf2.py:252} and
+\texttt{quarkConstraints/deltaf2.py:941}, the modern policy lists only
+\(D^0\) mixing at \texttt{quarkConstraints/modern/phenomenology.py:23} and
+\texttt{quarkConstraints/modern/phenomenology.py:668}, and
+\(\mu\to e\gamma\) is separate at
+\texttt{flavorConstraints/muToEGamma.py:75}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production implementation needs a new \(\Delta C=1\)
+semileptonic operator basis and matching for \(C_{9,10}^{(\prime)}\) and
+possible scalar/tensor terms, plus a \(D\to\pi\mu^+\mu^-\) mode calculation
+with form factors, phase-space cuts, and a documented treatment of resonant
+long-distance contributions.
+
+\subsection*{Key references}
+Process-local keys before bibliography consolidation:
+\texttt{PDG2026:DPlusPiMuMu}, \texttt{LHCb2021:DPlusPiMuMu},
+\texttt{LHCb2013:DPlusPiMuMu},
+\texttt{DeBoerHiller2015:RareCharmLeptons}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

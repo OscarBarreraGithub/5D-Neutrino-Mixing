@@ -1,0 +1,55 @@
+Source: Particle Data Group PDG Live/API
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.42
+Access date: 2026-05-16
+Edition: 2026
+PDG ID: S031.42
+Description: D+ --> pi+ mu+ mu-
+
+Relevant extracted data block:
+
+related_data:
+  pdgid: S031R54
+  description: G(D+ --> pi+ mu+ mu-)/G(total)
+  note: A test for the DeltaC = 1 weak neutral current. Allowed by
+        higher-order electroweak interactions.
+
+Measurements:
+
+AAIJ 2021T
+  publication: JHEP 2106 044
+  publication_year: 2021
+  DOI: 10.1007/JHEP06(2021)044
+  title: Searches for 25 rare and forbidden decays of D+ and Ds+ mesons
+  technique: LHCB
+  comment: 1.6 fb**-1 p p
+  confidence_level: 90.0
+  measurement:
+    column_name: VALUE
+    value: 6.7E-8
+    value_text: <6.7 E-8
+    limit_type: U
+    used_in_average: true
+    used_in_fit: true
+    display_value_text: <6.7 E-8
+
+AAIJ 2013AF
+  publication: PL B724 203
+  publication_year: 2013
+  DOI: 10.1016/j.physletb.2013.06.010
+  title: Search for D_(s)()+ --> pi+ mu+ mu- and D_(s)()+ --> pi- mu+ mu+ Decays
+  technique: LHCB
+  comment: p p at 7 TeV
+  confidence_level: 90.0
+  measurement:
+    column_name: VALUE
+    value: 7.3E-8
+    value_text: <7.3 E-8
+    limit_type: U
+    used_in_average: false
+    used_in_fit: false
+    display_value_text: <7.3 E-8
+
+Older PDG-listed limits include BaBar 2011 (<6.5 E-6), D0 2008
+(<3.9 E-6, continuum away from phi(1020)), FOCUS 2003 (<8.8 E-6),
+E791 1999 (<1.5 E-5), E687 1997 (<8.9 E-5), and E791 1996
+(<1.8 E-5), all at 90% confidence level.
