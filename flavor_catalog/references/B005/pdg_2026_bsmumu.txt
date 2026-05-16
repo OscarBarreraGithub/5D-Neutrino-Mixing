@@ -1,0 +1,33 @@
+Source key: PDG2026:BsMuMu
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086
+API URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.15
+Access date: 2026-05-16
+Local snapshot purpose: current canonical PDG value and input trace for B_s0 -> mu+ mu-.
+
+PDG citation shown on page:
+S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.
+
+PDG live page extract:
+PDGID: S086.15
+Mode: B_s0 -> mu+ mu-
+Fraction (Gamma_i / Gamma): (3.34 +/- 0.27) x 10^-9
+
+PDG API extract:
+request_timestamp: 2026-05-16 08:33:24 PST
+edition: 2026
+pdgid: S086.15
+description: B_s()0 --> mu+ mu-
+related_data pdgid: S086R14
+related_data description: G(B_s0 --> mu+ mu-)/G(total)
+note: Test for DeltaB = 1 weak neutral current.
+
+Selected API measurement inputs used in average:
+CMS, Tumasyan 2023A, Phys. Lett. B842 137955, doi 10.1016/j.physletb.2023.137955:
+value_text "(3.83 +0.38-0.36 +0.24-0.21) E-9", used_in_average true.
+LHCb, Aaij 2022 / LHCb 9 fb^-1 analysis:
+value_text "(3.09 +0.46-0.43 +0.15-0.11) E-9", used_in_average true.
+ATLAS, JHEP 04 (2019) 098:
+value_text "(2.8 +0.8-0.7) E-9", used_in_average true.
+
+License note from PDG live page:
+Except where otherwise noted, content of the 2025 Review of Particle Physics is licensed under CC BY 4.0.

@@ -1,0 +1,97 @@
+% Flavor catalog per-process template.
+% process_id: B005
+% family: beauty
+% owner_agent_id: PKA-B005
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B005.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B005: \(B_s^0\to\mu^+\mu^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(B_s^0\to\mu^+\mu^-)\).
+This entry covers the time-integrated rare leptonic decay \(B_s^0\to\mu^+\mu^-\),
+a helicity-suppressed \(b\to s\ell^+\ell^-\) flavor-changing neutral-current
+channel.  It is distinct from the inclusive and exclusive semileptonic
+\(b\to s\ell^+\ell^-\) entries because the final state is purely leptonic and
+the leading hadronic input is the \(B_s\) decay constant.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG live/API value, accessed on 2026-05-16, is
+\[
+  \mathcal{B}(B_s^0\to\mu^+\mu^-)_{\rm exp}
+  = (3.34\pm0.27)\times10^{-9}.
+\]
+The local snapshot is
+\texttt{flavor\_catalog/references/B005/pdg\_2026\_bsmumu.txt}.  The same
+value is quoted in the 2024 Czaja--Misiak SM-status review as the present
+weighted experimental average.  That review gives the Standard Model prediction
+\[
+  \mathcal{B}(B_s^0\to\mu^+\mu^-)_{\rm SM}
+  = (3.64\pm0.12)\times10^{-9}.
+\]
+For input-tracing, the sidecar also records the HFLAV rare-decay page
+average \((3.45\pm0.29)\times10^{-9}\), CMS
+\((3.83^{+0.38}_{-0.36}\,{}^{+0.19}_{-0.16}\,{}^{+0.14}_{-0.13})\times10^{-9}\),
+LHCb \((3.09^{+0.46+0.15}_{-0.43-0.11})\times10^{-9}\), and ATLAS
+\((2.8^{+0.8}_{-0.7})\times10^{-9}\) snapshots.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This mode probes the short-distance \(b\to s\mu^+\mu^-\) Hamiltonian in a clean
+single-number observable.  In anarchic RS scenarios, flavor-changing neutral
+gauge couplings, KK electroweak exchange, Higgs/radion scalar exchange, or
+leptoquark-like completions can shift axial-vector, scalar, and pseudoscalar
+Wilson coefficients.  The scalar and pseudoscalar terms are especially
+important because they can remove the Standard Model helicity suppression and
+are prominent in large-\(\tan\beta\) supersymmetric or extended-Higgs
+interpretations.
+
+\subsection*{Post-2008 developments}
+Since the arXiv:0804.1954 RS-flavor baseline, this channel changed from an
+upper-limit target into a precision observable.  LHCb and CMS first established
+the decay, and the present average combines modern LHCb, CMS, and ATLAS inputs.
+CMS now reports the most precise single-experiment branching-fraction
+measurement, while LHCb provides a simultaneous branching-fraction and
+effective-lifetime analysis.  Theory has also improved: modern SM predictions
+include precise lattice \(f_{B_s}\), CKM inputs, electroweak and QCD
+corrections, and the time-integration correction associated with the
+\(B_s\) width difference.
+
+\subsection*{Constraint validity and model dependence}
+This is a robust short-distance rare-decay constraint, but it is not covered by
+the repo's neutral-meson-mixing machinery.  The SM comparison is clean relative
+to angular \(b\to s\ell\ell\) observables, yet it still depends on the
+definition of the time-integrated branching fraction, \(f_{B_s}\), CKM inputs,
+and the treatment of scalar and pseudoscalar operators.  It is directly useful
+for models that predict \(C_{10}^{(\prime)}\), \(C_S^{(\prime)}\), or
+\(C_P^{(\prime)}\), including scalar leptoquarks, \(Z'\) models, and
+tan-beta-enhanced Higgs sectors.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required catalog greps and a focused search for
+\texttt{B\_s.*mu}, \texttt{mumu}, \texttt{C10}, scalar/pseudoscalar rare-decay
+terms, and \(b\to s\mu\mu\) found no live \(B_s^0\to\mu^+\mu^-\) implementation
+in \texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, or \texttt{tests/}.  The nearest
+related code is \(B_s\) mixing, e.g. \texttt{quarkConstraints/deltaf2.py:239}
+and \texttt{quarkConstraints/deltaf2.py:922}, which is a \(\Delta F=2\)
+observable rather than this \(\Delta B=1\) decay.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  A catalog-to-code implementation needs a new \(\Delta B=1\)
+leptonic rare-decay observable, Wilson conventions for
+\(C_{10}^{(\prime)}, C_S^{(\prime)}, C_P^{(\prime)}\), and a branching-ratio
+formula with the \(B_s\) lifetime and width-difference convention.  It does not
+need an angular likelihood or exclusive form factors, but a production-grade
+RS matching path would need carefully documented scalar and electroweak
+operator normalization.
+
+\subsection*{Key references}
+Process-local raw reference keys before bibliography consolidation:
+\texttt{PDG2026:BsMuMu}, \texttt{HFLAV2023:BsMuMu},
+\texttt{CMS2023:BsMuMu}, \texttt{LHCb2022:BsMuMu},
+\texttt{ATLAS2019:BsMuMu}, \texttt{CzajaMisiak2024:BsMuMuSM}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

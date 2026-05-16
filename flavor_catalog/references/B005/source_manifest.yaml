@@ -1,0 +1,76 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B005
+generated_at: "2026-05-16T11:37:28-04:00"
+license_policy: "minimal text snapshots only; no publisher PDFs tracked"
+references:
+  - key: PDG2026:BsMuMu
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "B_s0 -> mu+ mu- decay mode summary"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086"
+    api_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.15"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B005/pdg_2026_bsmumu.txt"
+    sha256_of_local_snapshot: "sha256:c42edfb94b6a989935deb4f9a6c69762a49c063ce46d2e34466c3fbbbead8016"
+  - key: HFLAV2023:BsMuMu
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV rare-decay average for B_s0 -> mu+ mu-"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2023
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Apr2023/html/Bs/BR_Bs0_mu%2B_mu-.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B005/hflav_2023_bsmumu.txt"
+    sha256_of_local_snapshot: "sha256:cb9109a94b5b51fda6057ec5250b4b2bede182e09c2d70418e6edc953178dafe"
+  - key: CMS2023:BsMuMu
+    arxiv_id: "2212.10311"
+    DOI: "10.1016/j.physletb.2023.137955"
+    title: "Measurement of the B0_S -> mu+mu- decay properties and search for the B0 -> mu+mu- decay in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2212.10311"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B005/cms_2212_10311_bsmumu.txt"
+    sha256_of_local_snapshot: "sha256:b821377272dc3d3dd8f6d129de050940ba9f4cce40271c905bdaa90c22dc6095"
+  - key: LHCb2022:BsMuMu
+    arxiv_id: "2108.09283"
+    DOI: "10.1103/PhysRevD.105.012010"
+    title: "Measurement of the B_s0 -> mu+mu- decay properties and search for the B0 -> mu+mu- and B_s0 -> mu+mu- gamma decays"
+    authors: "LHCb Collaboration"
+    year: 2022
+    url: "https://arxiv.org/abs/2108.09283"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B005/lhcb_2108_09283_bsmumu.txt"
+    sha256_of_local_snapshot: "sha256:fc1427e831e02c11fe09c6fcdd6c1c26893f0b54024f69bc0a1f2bb04afbc5fe"
+  - key: ATLAS2019:BsMuMu
+    arxiv_id: "1812.03017"
+    DOI: "10.1007/JHEP04(2019)098"
+    title: "Study of the rare decays of B_s0 and B0 mesons into muon pairs using data collected during 2015 and 2016 with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1812.03017"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B005/atlas_1812_03017_bsmumu.txt"
+    sha256_of_local_snapshot: "sha256:9724967bfdd6abd69f3f7be384911b5288fdf372735c159c9dae402dbccbca2e"
+  - key: CzajaMisiak2024:BsMuMuSM
+    arxiv_id: "2407.03810"
+    DOI: "10.48550/arXiv.2407.03810"
+    title: "Current Status of the Standard Model Prediction for the B_s -> mu+ mu- Branching Ratio"
+    authors: "Mateusz Czaja and Mikolaj Misiak"
+    year: 2024
+    url: "https://arxiv.org/abs/2407.03810"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B005/czaja_misiak_2407_03810_bsmumu_sm.txt"
+    sha256_of_local_snapshot: "sha256:ab871a13e9b00043a36f8876b094588c03ab84673f26445c62a637f22349fdd6"
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B005/cfw_0804_1954_rs_flavor.txt"
+    sha256_of_local_snapshot: "sha256:c77d1c4b7347579c78d7f196bca9e2c09d6b70a9a88b1721c5a63db3ee176008"

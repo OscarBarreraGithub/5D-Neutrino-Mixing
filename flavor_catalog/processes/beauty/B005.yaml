@@ -1,0 +1,106 @@
+schema: flavor_catalog.process.v1
+process_id: B005
+family: beauty
+standard_notation: "\\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)"
+process_name: "Rare leptonic decay B_s0 -> mu+ mu-"
+owner: "PKA"
+owner_agent_id: "PKA-B005"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T11:37:28-04:00"
+    timestamp: "2026-05-16T11:37:28-04:00"
+    agent_id: "PKA-B005"
+    reason: "Initial PKA draft deposit for B_s0 -> mu+ mu-."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:37:28-04:00"
+version: "0.1.0"
+source_shas:
+  atlas_1812_03017_bsmumu.txt: "sha256:9724967bfdd6abd69f3f7be384911b5288fdf372735c159c9dae402dbccbca2e"
+  cfw_0804_1954_rs_flavor.txt: "sha256:c77d1c4b7347579c78d7f196bca9e2c09d6b70a9a88b1721c5a63db3ee176008"
+  cms_2212_10311_bsmumu.txt: "sha256:b821377272dc3d3dd8f6d129de050940ba9f4cce40271c905bdaa90c22dc6095"
+  czaja_misiak_2407_03810_bsmumu_sm.txt: "sha256:ab871a13e9b00043a36f8876b094588c03ab84673f26445c62a637f22349fdd6"
+  hflav_2023_bsmumu.txt: "sha256:cb9109a94b5b51fda6057ec5250b4b2bede182e09c2d70418e6edc953178dafe"
+  lhcb_2108_09283_bsmumu.txt: "sha256:fc1427e831e02c11fe09c6fcdd6c1c26893f0b54024f69bc0a1f2bb04afbc5fe"
+  pdg_2026_bsmumu.txt: "sha256:c42edfb94b6a989935deb4f9a6c69762a49c063ce46d2e34466c3fbbbead8016"
+pdg_or_equivalent:
+  source: "Particle Data Group pdgLive/API"
+  source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086"
+  api_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.15"
+  access_date: "2026-05-16"
+  year: 2026
+  value_summary: "PDG live/API S086.15 gives BR(B_s0 -> mu+ mu-) = (3.34 +/- 0.27)e-9."
+  canonical_experimental_average:
+    observable: "BR(B_s0 -> mu+ mu-)"
+    value: 3.34e-9
+    uncertainty: 0.27e-9
+    units: "branching fraction"
+    conditions: "PDG live/API decay mode summary; time-integrated experimental branching fraction"
+    source_key: "PDG2026:BsMuMu"
+    snapshot_path: "flavor_catalog/references/B005/pdg_2026_bsmumu.txt"
+    sha256_of_text_snapshot: "sha256:c42edfb94b6a989935deb4f9a6c69762a49c063ce46d2e34466c3fbbbead8016"
+  hflav_historical_average:
+    observable: "BR(B_s0 -> mu+ mu-)"
+    value: 3.45e-9
+    uncertainty: 0.29e-9
+    units: "branching fraction"
+    conditions: "HFLAV Apr 2023 rare-decay page; units 10^-9; ATLAS correlation with B0 -> mu+ mu- not included"
+    source_key: "HFLAV2023:BsMuMu"
+    snapshot_path: "flavor_catalog/references/B005/hflav_2023_bsmumu.txt"
+    sha256_of_text_snapshot: "sha256:cb9109a94b5b51fda6057ec5250b4b2bede182e09c2d70418e6edc953178dafe"
+  standard_model_prediction:
+    source: "Czaja and Misiak 2024"
+    observable: "SM BR(B_s -> mu+ mu-)"
+    value: 3.64e-9
+    uncertainty: 0.12e-9
+    units: "branching fraction"
+    source_key: "CzajaMisiak2024:BsMuMuSM"
+    source_url: "https://arxiv.org/abs/2407.03810"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B005/czaja_misiak_2407_03810_bsmumu_sm.txt"
+    sha256_of_text_snapshot: "sha256:ab871a13e9b00043a36f8876b094588c03ab84673f26445c62a637f22349fdd6"
+  input_measurements:
+    - source: "CMS2023:BsMuMu"
+      observable: "BR(B_s0 -> mu+ mu-)"
+      value: 3.83e-9
+      uncertainties: "+0.38/-0.36 stat, +0.19/-0.16 syst, +0.14/-0.13 fs/fu"
+      source_url: "https://arxiv.org/abs/2212.10311"
+      snapshot_path: "flavor_catalog/references/B005/cms_2212_10311_bsmumu.txt"
+      sha256_of_text_snapshot: "sha256:b821377272dc3d3dd8f6d129de050940ba9f4cce40271c905bdaa90c22dc6095"
+    - source: "LHCb2022:BsMuMu"
+      observable: "BR(B_s0 -> mu+ mu-)"
+      value: 3.09e-9
+      uncertainties: "+0.46/-0.43 stat, +0.15/-0.11 syst"
+      auxiliary_observable: "effective lifetime = (2.07 +/- 0.29 +/- 0.03) ps"
+      source_url: "https://arxiv.org/abs/2108.09283"
+      snapshot_path: "flavor_catalog/references/B005/lhcb_2108_09283_bsmumu.txt"
+      sha256_of_text_snapshot: "sha256:fc1427e831e02c11fe09c6fcdd6c1c26893f0b54024f69bc0a1f2bb04afbc5fe"
+    - source: "ATLAS2019:BsMuMu"
+      observable: "BR(B_s0 -> mu+ mu-), ATLAS Run 1 + 2015-2016 combination"
+      value: 2.8e-9
+      uncertainties: "+0.8/-0.7"
+      source_url: "https://arxiv.org/abs/1812.03017"
+      snapshot_path: "flavor_catalog/references/B005/atlas_1812_03017_bsmumu.txt"
+      sha256_of_text_snapshot: "sha256:9724967bfdd6abd69f3f7be384911b5288fdf372735c159c9dae402dbccbca2e"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Focused grep for B_s.*mu, Bs.*mu, B0_s.*mu, mu+mu, mumu, C10, scalar/pseudoscalar, rare decay, and rare_decay in required implementation/test directories found no B_s0 -> mu+ mu- observable implementation."
+    - "quarkConstraints/deltaf2.py:239 defines the existing b_s input as B_s mixing, not B_s -> mu+ mu-."
+    - "quarkConstraints/deltaf2.py:922 defines evaluate_bs_mixing for Delta F = 2 B_s mixing."
+    - "quarkConstraints/modern/phenomenology.py:657 evaluates B_s mixing from the bridge match; no Delta B = 1 rare leptonic branch is present."
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"B_s.*mu|Bs.*mu|B0_s.*mu|mu\\\\+.*mu|mumu|muon.*muon|C_10|C10|scalar.*operator|pseudoscalar|rare decay|rare_decay\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_if_missing: "MEDIUM"
+implementation_notes: "Needs a new Delta B = 1 leptonic rare-decay observable and Wilson normalization for C10, scalar, and pseudoscalar operators; no angular likelihood or exclusive form-factor machinery is required for this pure leptonic rate."
+open_issues:
+  - "WA/CA should decide whether to retain the older HFLAV Apr 2023 average in prose or keep it only as an auxiliary source now that PDG live/API and the 2024 SM-status review quote the newer 3.34 +/- 0.27 world average."
