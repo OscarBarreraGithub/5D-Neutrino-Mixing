@@ -6,7 +6,7 @@ process_name: "Inclusive and exclusive b -> s ell+ ell- rare B decays"
 owner: "PKA"
 owner_agent_id: "PKA-B017"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -24,9 +24,19 @@ status_history:
     agent: "WA"
     agent_id: "WA"
     reason: "WA polish for batch wa_w23_beauty completed."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T12:34:18-04:00"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T12:34:18-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    issues:
+      - "CHK-2: B017 source_manifest.yaml and all process-local reference snapshots are untracked, so cited references do not resolve to tracked text snapshots."
+    reason: "CA batch ca_w23_beauty found required rework."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:15:35-04:00"
+last_updated_at: "2026-05-16T12:34:18-04:00"
 version: "0.1.0"
 source_shas:
   cfw_0804_1954_rs_flavor.txt: "sha256:36cc8855f8de4d402dc96628a2534513b3543129acff4d8df277aab5fafc7c03"

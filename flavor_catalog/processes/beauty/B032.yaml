@@ -6,7 +6,7 @@ process_name: "Bbar -> pi Kbar nonleptonic charmless"
 owner: "PKA"
 owner_agent_id: "PKA-B032"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -24,9 +24,19 @@ status_history:
     agent: "WA"
     agent_id: "WA"
     reason: "WA polish for batch wa_w23_beauty completed."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T12:34:18-04:00"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T12:34:18-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    issues:
+      - "CHK-1: TeX post-2008 numeric claims for LHCb A_CP(B+ -> K+ pi0)=0.025 +/- 0.015 +/- 0.006 +/- 0.003 and the Belle II Kpi sum-rule value -0.03 +/- 0.13 +/- 0.04 lack corresponding pdg_or_equivalent value blocks."
+    reason: "CA batch ca_w23_beauty found required rework."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:15:35-04:00"
+last_updated_at: "2026-05-16T12:34:18-04:00"
 version: "0.1.0"
 source_shas:
   belleii2023_b0_ks_pi0_cp_arxiv.txt: "sha256:9b49da234cc9d67d4784725150115865333f5ae7c0590267c2bdecf07a2cbbfa"

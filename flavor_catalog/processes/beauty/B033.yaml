@@ -6,7 +6,7 @@ process_name: "B -> phi K_S penguin CP asymmetry"
 owner: "PKA"
 owner_agent_id: "PKA-B033"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -31,9 +31,17 @@ status_history:
     agent: "WA"
     agent_id: "WA"
     reason: "WA polish for batch wa_w23_beauty completed."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T12:34:18-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T12:34:18-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    reason: "CA batch ca_w23_beauty verified CHK-1 through CHK-8."
+checker_passed_at: "2026-05-16T12:34:18-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:15:35-04:00"
+last_updated_at: "2026-05-16T12:34:18-04:00"
 version: "0.1.0"
 source_shas:
   hflav_triangle_summer2025_phiK0.txt: "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b"
