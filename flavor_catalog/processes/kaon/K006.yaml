@@ -1,0 +1,93 @@
+schema: flavor_catalog.process.v1
+process_id: K006
+family: kaon
+standard_notation: "K_L -> mu+ mu-"
+process_name: "Long-lived neutral-kaon dimuon decay"
+owner: "PKA"
+owner_agent_id: "PKA-K006"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:04:05-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:04:05-04:00"
+    agent_id: "PKA-K006"
+    reason: "initial PKA source extraction and draft"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:04:05-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2024_kl_decay_modes.txt: "sha256:7b8d82405b9c4bf76bf9efb6c3db59a5bd21ae2d77339e6ef0dce389ef50c585"
+  ambrose_e871_2000_pubmed.txt: "sha256:d38cf3e1320ba09054b9dcea5926eb81def60bc838b3feefca6a3859e067c071"
+  isidori_unterdorfer_2004_arxiv.txt: "sha256:20e19ea8bbf09e4f693cf253d3b3aa5a067af2af140a076e2b4ed96af7dbf08f"
+  dambrosio_kitahara_2017_arxiv.txt: "sha256:36951fc2670a81fb327473faa963617565f86f0172ec993f207e381aeda8b073"
+  dery_ghosh_grossman_schacht_2021_arxiv.txt: "sha256:b8fe01acff7a3a256be5caf59a35d41c719dad83b4eda1dbd9b7d286b323721b"
+  chao_christ_2024_arxiv.txt: "sha256:0f6e418c75fae81da42f96222ef20a67e09130d44162978a503e74834dea4531"
+pdg_or_equivalent:
+  year: 2024
+  observable: "BR(K_L -> mu+ mu-)"
+  value: "6.84e-9"
+  uncertainty: "0.11e-9"
+  units: "branching fraction"
+  confidence_level: null
+  source: "Particle Data Group 2024 Review of Particle Physics, K0_L listing, Gamma_24"
+  source_url: "https://pdg.lbl.gov/2024/listings/rpp2024-list-K-zero-L.pdf"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/K006/pdg2024_kl_decay_modes.txt"
+  sha256_of_text_snapshot: "7b8d82405b9c4bf76bf9efb6c3db59a5bd21ae2d77339e6ef0dce389ef50c585"
+supporting_numeric_values:
+  - observable: "BNL E871 BR(K_L -> mu+ mu-) measurement"
+    year: 2000
+    value: "7.18e-9"
+    uncertainty: "0.17e-9"
+    units: "branching fraction"
+    source_url: "https://pubmed.ncbi.nlm.nih.gov/11017525/"
+    snapshot_path: "flavor_catalog/references/K006/ambrose_e871_2000_pubmed.txt"
+    sha256_of_text_snapshot: "d38cf3e1320ba09054b9dcea5926eb81def60bc838b3feefca6a3859e067c071"
+  - observable: "BNL E871 normalization ratio Gamma(K_L -> mu+ mu-) / Gamma(K_L -> pi+ pi-)"
+    year: 2000
+    value: "3.474e-6"
+    uncertainty: "0.057e-6"
+    units: "ratio"
+    source_url: "https://pubmed.ncbi.nlm.nih.gov/11017525/"
+    snapshot_path: "flavor_catalog/references/K006/ambrose_e871_2000_pubmed.txt"
+    sha256_of_text_snapshot: "d38cf3e1320ba09054b9dcea5926eb81def60bc838b3feefca6a3859e067c071"
+  - observable: "Conservative upper bound on B(K_L -> mu+ mu-)_short"
+    year: 2004
+    value: "<2.5e-9"
+    uncertainty: null
+    units: "branching fraction"
+    source_url: "https://arxiv.org/abs/hep-ph/0311084"
+    snapshot_path: "flavor_catalog/references/K006/isidori_unterdorfer_2004_arxiv.txt"
+    sha256_of_text_snapshot: "20e19ea8bbf09e4f693cf253d3b3aa5a067af2af140a076e2b4ed96af7dbf08f"
+  - observable: "Hadronic uncertainty quoted for proposed clean K_S ell=0 extraction"
+    year: 2021
+    value: "<1%"
+    uncertainty: null
+    units: "relative hadronic uncertainty"
+    source_url: "https://arxiv.org/abs/2104.06427"
+    snapshot_path: "flavor_catalog/references/K006/dery_ghosh_grossman_schacht_2021_arxiv.txt"
+    sha256_of_text_snapshot: "b8fe01acff7a3a256be5caf59a35d41c719dad83b4eda1dbd9b7d286b323721b"
+  - observable: "Target accuracy quoted for lattice-QCD two-photon amplitude framework"
+    year: 2024
+    value: "10%"
+    uncertainty: null
+    units: "relative target accuracy"
+    source_url: "https://arxiv.org/abs/2406.07447"
+    snapshot_path: "flavor_catalog/references/K006/chao_christ_2024_arxiv.txt"
+    sha256_of_text_snapshot: "0f6e418c75fae81da42f96222ef20a67e09130d44162978a503e74834dea4531"
+code_coverage:
+  status: "NO"
+  grep_commands:
+    - "rg -n --glob '!*.ipynb' --glob '!*.png' --glob '!*.pdf' \"K_L|K0_L|KL|K\\\\s*->\\\\s*mu|mu\\\\+\\\\s*mu|mu\\\\^-|mumu|dimuon|s->d|s -> d|weak neutral current|Z penguin|box\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests"
+  result: "No K_L -> mu+ mu- or s -> d dilepton constraint implementation found; nearest hits are Delta F=2 kaon-mixing quantities, not this rare decay."
+  nearest_hits:
+    - "quarkConstraints/deltaf2.py:615: DELTA_M_K = 3.484e-15 # GeV, K_L - K_S mass difference (PDG)"
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Requires a new s -> d mu+ mu- short-distance operator/matching path plus long-distance two-photon treatment or a documented SM subtraction; no current repo likelihood or hadronic input model exists for this rare decay."
+open_issues:
+  - "WA/CA should verify whether a final PDG 2026 K0_L listing supersedes the 2024 PDF before catalog freeze."

@@ -1,0 +1,58 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: K006
+created_at: "2026-05-16T11:04:05-04:00"
+sources:
+  - key: "PDG2024:K006"
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Review of Particle Physics, K0_L listing"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2024
+    url: "https://pdg.lbl.gov/2024/listings/rpp2024-list-K-zero-L.pdf"
+    sha256_of_local_snapshot: "sha256:7b8d82405b9c4bf76bf9efb6c3db59a5bd21ae2d77339e6ef0dce389ef50c585"
+    snapshot_path: "flavor_catalog/references/K006/pdg2024_kl_decay_modes.txt"
+  - key: "Ambrose2000:E871KLMuMu"
+    arxiv_id: null
+    DOI: "10.1103/PhysRevLett.84.1389"
+    title: "Improved branching ratio measurement for the decay K(0)(L) --> mu(+)mu(-)"
+    authors: "D. Ambrose et al. (BNL E871 Collaboration)"
+    year: 2000
+    url: "https://pubmed.ncbi.nlm.nih.gov/11017525/"
+    sha256_of_local_snapshot: "sha256:d38cf3e1320ba09054b9dcea5926eb81def60bc838b3feefca6a3859e067c071"
+    snapshot_path: "flavor_catalog/references/K006/ambrose_e871_2000_pubmed.txt"
+  - key: "IsidoriUnterdorfer2004:KLMuMuSD"
+    arxiv_id: "hep-ph/0311084"
+    DOI: "10.1088/1126-6708/2004/01/009"
+    title: "On the short-distance constraints from K_{L,S} -> mu^+ mu^-"
+    authors: "Gino Isidori and Rene Unterdorfer"
+    year: 2004
+    url: "https://arxiv.org/abs/hep-ph/0311084"
+    sha256_of_local_snapshot: "sha256:20e19ea8bbf09e4f693cf253d3b3aa5a067af2af140a076e2b4ed96af7dbf08f"
+    snapshot_path: "flavor_catalog/references/K006/isidori_unterdorfer_2004_arxiv.txt"
+  - key: "DAmbrosioKitahara2017:KMuMuCP"
+    arxiv_id: "1707.06999"
+    DOI: "10.1103/PhysRevLett.119.201802"
+    title: "Direct CP Violation in K -> mu^+ mu^-"
+    authors: "Giancarlo D'Ambrosio and Teppei Kitahara"
+    year: 2017
+    url: "https://arxiv.org/abs/1707.06999"
+    sha256_of_local_snapshot: "sha256:36951fc2670a81fb327473faa963617565f86f0172ec993f207e381aeda8b073"
+    snapshot_path: "flavor_catalog/references/K006/dambrosio_kitahara_2017_arxiv.txt"
+  - key: "DeryGhoshGrossmanSchacht2021:KMuMuClean"
+    arxiv_id: "2104.06427"
+    DOI: "10.1007/JHEP07(2021)103"
+    title: "K -> mu^+ mu^- as a clean probe of short-distance physics"
+    authors: "Avital Dery, Mitrajyoti Ghosh, Yuval Grossman, and Stefan Schacht"
+    year: 2021
+    url: "https://arxiv.org/abs/2104.06427"
+    sha256_of_local_snapshot: "sha256:b8fe01acff7a3a256be5caf59a35d41c719dad83b4eda1dbd9b7d286b323721b"
+    snapshot_path: "flavor_catalog/references/K006/dery_ghosh_grossman_schacht_2021_arxiv.txt"
+  - key: "ChaoChrist2024:KLMuMuLattice"
+    arxiv_id: "2406.07447"
+    DOI: "10.48550/arXiv.2406.07447"
+    title: "Calculating the two-photon exchange contribution to K_L -> mu^+ mu^- decay"
+    authors: "En-Hung Chao and Norman Christ"
+    year: 2024
+    url: "https://arxiv.org/abs/2406.07447"
+    sha256_of_local_snapshot: "sha256:0f6e418c75fae81da42f96222ef20a67e09130d44162978a503e74834dea4531"
+    snapshot_path: "flavor_catalog/references/K006/chao_christ_2024_arxiv.txt"
