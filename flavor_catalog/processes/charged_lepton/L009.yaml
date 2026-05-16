@@ -1,0 +1,145 @@
+schema: flavor_catalog.process.v1
+process_id: L009
+family: charged_lepton
+standard_notation: "\\mathcal{B}(\\tau^-\\to\\mu^-\\mu^+\\mu^-)"
+process_name: "Tau to three muons charged-lepton-flavor-violating four-lepton decay"
+owner: "PKA"
+owner_agent_id: "PKA-L009"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T12:58:51-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T12:58:51-04:00"
+    agent_id: "PKA-L009"
+    reason: "Initial L009 PKA source extraction and draft sidecar started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T12:58:51-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T12:58:51-04:00"
+    agent_id: "PKA-L009"
+    reason: "PKA draft, source snapshots, code-coverage grep, and worklog deposited."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T12:58:51-04:00"
+version: "0.1.0"
+source_shas:
+  babar_2010_arxiv_1002_4550.txt: "sha256:54ab0277d6fb40bbda3655287d7f22294e59e4ef514b9b582bf67f3df29fc9c4"
+  belle_2010_arxiv_1001_3221.txt: "sha256:936ff58b0f65798ae9c8facbc9a94b5f3dd3a096ed1b5c9b327ea3d74e8ebad3"
+  belleii_2024_arxiv_2405_07386.txt: "sha256:190f6aa5e4a0f421fc2cb9a5b1dea0b7fcd09c185981c7d476df6ad61e3d4b0d"
+  cfw_2008_arxiv_0804_1954.txt: "sha256:ab5bcb4a790f1d70393432ad125da961bef70d82d400d68b15d1cec48a0fce86"
+  lhcb_2015_arxiv_1409_8548.txt: "sha256:83be33ccf77324f00efc380d8ea2be07bbe7e35e906a47380e016660c40206e9"
+  lhcb_2026_arxiv_2601_20785.txt: "sha256:5dbcfd57d132fd93adba7800e9df25e2548f99012b0078cbdd06dd2744d5d777"
+  pdg_2025_tau_listing.txt: "sha256:ad13c510e28abf9791e8457bb28fa4b28cc9d4c7b0904b8b7eb247c769d356e2"
+pdg_or_equivalent:
+  primary_current_limit:
+    source: "Particle Data Group 2025 tau listing"
+    year: 2025
+    observable: "Branching fraction upper limit for tau^- -> mu^- mu+ mu^-"
+    value: 1.9e-8
+    relation: "<"
+    confidence_level: "90% C.L."
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-tau.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L009/pdg_2025_tau_listing.txt"
+    sha256: "ad13c510e28abf9791e8457bb28fa4b28cc9d4c7b0904b8b7eb247c769d356e2"
+    pdg_reference_entry: "ADACHI 24R, Belle II, 424 fb^-1"
+  primary_experiment:
+    source: "Belle II Collaboration"
+    arxiv_id: "2405.07386"
+    doi: "10.1007/JHEP09(2024)062"
+    year: 2024
+    observable: "Branching fraction upper limit for tau^- -> mu^- mu+ mu^-"
+    value: 1.9e-8
+    relation: "<"
+    confidence_level: "90% C.L."
+    data_sample: "424 fb^-1"
+    source_url: "https://arxiv.org/abs/2405.07386"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L009/belleii_2024_arxiv_2405_07386.txt"
+    sha256: "190f6aa5e4a0f421fc2cb9a5b1dea0b7fcd09c185981c7d476df6ad61e3d4b0d"
+  post_pdg_update:
+    source: "LHCb Collaboration Run 2 preprint"
+    arxiv_id: "2601.20785"
+    year: 2026
+    observable: "Branching fraction upper limit for tau^- -> mu^- mu+ mu^-"
+    value_90cl: 1.9e-8
+    value_95cl: 2.3e-8
+    relation: "<"
+    data_sample: "5.4 fb^-1 pp collisions at sqrt(s) = 13 TeV"
+    source_url: "https://arxiv.org/abs/2601.20785"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L009/lhcb_2026_arxiv_2601_20785.txt"
+    sha256: "5dbcfd57d132fd93adba7800e9df25e2548f99012b0078cbdd06dd2744d5d777"
+  historical_experimental_limits:
+    - source: "Belle Collaboration 2010"
+      arxiv_id: "1001.3221"
+      doi: "10.1016/j.physletb.2010.03.037"
+      year: 2010
+      value: 2.1e-8
+      relation: "<"
+      confidence_level: "90% C.L."
+      data_sample: "782 fb^-1"
+      snapshot_path: "flavor_catalog/references/L009/belle_2010_arxiv_1001_3221.txt"
+      sha256: "936ff58b0f65798ae9c8facbc9a94b5f3dd3a096ed1b5c9b327ea3d74e8ebad3"
+    - source: "BaBar Collaboration 2010"
+      arxiv_id: "1002.4550"
+      doi: "10.1103/PhysRevD.81.111101"
+      year: 2010
+      value: 3.3e-8
+      relation: "<"
+      confidence_level: "90% C.L."
+      data_sample: "468 fb^-1"
+      snapshot_path: "flavor_catalog/references/L009/babar_2010_arxiv_1002_4550.txt"
+      sha256: "54ab0277d6fb40bbda3655287d7f22294e59e4ef514b9b582bf67f3df29fc9c4"
+    - source: "LHCb Collaboration 2015"
+      arxiv_id: "1409.8548"
+      doi: "10.1007/JHEP02(2015)121"
+      year: 2015
+      value: 4.6e-8
+      relation: "<"
+      confidence_level: "90% C.L."
+      data_sample: "1.0 fb^-1 at 7 TeV plus 2.0 fb^-1 at 8 TeV"
+      snapshot_path: "flavor_catalog/references/L009/lhcb_2015_arxiv_1409_8548.txt"
+      sha256: "83be33ccf77324f00efc380d8ea2be07bbe7e35e906a47380e016660c40206e9"
+  rs_context:
+    source: "Csaki-Falkowski-Weiler 2008 RS flavor baseline"
+    arxiv_id: "0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    year: 2008
+    snapshot_path: "flavor_catalog/references/L009/cfw_2008_arxiv_0804_1954.txt"
+    sha256: "ab5bcb4a790f1d70393432ad125da961bef70d82d400d68b15d1cec48a0fce86"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  required_grep_commands:
+    - "rg -n \"tau.?->|tau.?to|taumu|tau.*3.?mu|3.?mu|mu.?mu.?mu|LFV|lepton.?flavo.?r|muToEGamma|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+  negative_result:
+    - "No tau->3mu, tau four-lepton, or charged-lepton contact LFV implementation found in required code paths."
+    - "The only LFV implementation surfaced by grep is the adjacent mu->e gamma dipole checker."
+  adjacent_noncoverage_evidence:
+    - "flavorConstraints/muToEGamma.py:1 documents mu->e gamma only."
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma in the scan."
+    - "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 systems."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "A new four-lepton/contact LFV observable and lepton-sector Wilson-coefficient convention are needed. A first bound does not require lattice inputs or hadronic long-distance calculations, but correlations with dipoles and other LFV modes must be specified."
+implementation_difficulty_if_missing: "MEDIUM"
+open_issues:
+  - "Checker should confirm whether the 2026 LHCb preprint should be promoted to co-primary with Belle II despite postdating the PDG 2025 listing."
+  - "Future implementation needs a lepton-contact operator basis and a decision on whether to include dipole/contact interference."
