@@ -44,9 +44,18 @@ status_history:
     cycle: 2
     batch_id: "wa_w5b_top_higgs_ew_v2"
     reason: "Promoted the TeX-cited SM B(t -> u g) context value into pdg_or_equivalent.values with complete source metadata per CA CHK-1 finding."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T15:55:18-04:00"
+    timestamp: "2026-05-16T15:55:18-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w5b_top_higgs_ew_v2"
+    reason: "Cycle-3 checker re-check passed CHK-1 through CHK-8 after WA-v2."
+checker_passed_at: "2026-05-16T15:55:18-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:27:46-04:00"
+last_updated_at: "2026-05-16T15:55:18-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_tug.txt: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"
