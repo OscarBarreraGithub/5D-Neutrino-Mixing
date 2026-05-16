@@ -24,9 +24,19 @@ status_history:
     at: "2026-05-16T14:44:59-04:00"
     agent_id: "WA"
     reason: "Writer polish complete for batch wa_w5b_kaon."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T15:16:18-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T15:16:18-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w5b_kaon"
+    issues:
+      - "CHK-1: Several numerical claims in K009.tex are source-backed in supporting_experimental_values or theory_decomposition, but not represented as YAML pdg_or_equivalent entries with full year/value/uncertainty/source_url/access_date/sha256 metadata. Examples include the KTeV two-candidate and 0.87 +/- 0.15 background claim, the supporting K_S -> pi0 mu+ mu- 2.9e-9 value and 0.22 +0.18 -0.11 background claim, and the Isidori-Smith-Unterdorfer coefficient and SM-expectation block."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:59-04:00"
+last_updated_at: "2026-05-16T15:16:18-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_kl_pi0mumu_pdgLive.txt: "sha256:c4ebbf6334bac98ec7396446dcec9e020c25cdcd5f17b7b7f09f446f5d3b47e1"

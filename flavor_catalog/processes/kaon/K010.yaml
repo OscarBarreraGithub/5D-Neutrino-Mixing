@@ -24,9 +24,19 @@ status_history:
     at: "2026-05-16T14:44:59-04:00"
     agent_id: "WA"
     reason: "Writer polish complete for batch wa_w5b_kaon."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T15:16:18-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T15:16:18-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w5b_kaon"
+    issues:
+      - "CHK-1: The PDG partial-rate and extrapolated-total numerical claims in K010.tex are represented in pdg_or_equivalent, but the NA48/1 seven-observed-events and 0.15-background claims are only in supporting_experimental_values, not YAML pdg_or_equivalent entries with full year/value/uncertainty/source_url/access_date/sha256 metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:59-04:00"
+last_updated_at: "2026-05-16T15:16:18-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_ks_pi0ee_pdgLive.txt: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
