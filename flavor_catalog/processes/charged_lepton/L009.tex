@@ -5,29 +5,37 @@
 \section{L009: \texorpdfstring{\(\tau^- \to \mu^-\mu^+\mu^-\)}{tau -> 3 mu} LFV}
 
 \subsection*{Process}
-The process is the charged-lepton-flavor-violating four-lepton decay
-\(\tau^- \to \mu^-\mu^+\mu^-\), including the charge-conjugate tau-plus mode
-where experiments quote combined limits.  This entry belongs to the
-\texttt{charged\_lepton} family and is the contact-operator counterpart to
-the tau dipole searches.
+\textbf{Standard notation:}
+\(\mathcal{B}(\tau^- \to \mu^-\mu^+\mu^-)\).
+This entry covers the charged-lepton-flavor-violating four-lepton decay
+\(\tau^- \to \mu^-\mu^+\mu^-\), including charge-conjugate modes when
+experiments quote combined limits.  It is the contact-operator counterpart to
+the tau dipole searches in the \texttt{charged\_lepton} family.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG-or-equivalent value}
 The current PDG tau listing gives
 \[
   \mathcal{B}(\tau^- \to \mu^-\mu^+\mu^-) < 1.9\times 10^{-8}
   \quad (90\%~{\rm CL}),
 \]
 with the PDG-selected entry attributed to the Belle II ADACHI 24R result
-using \(424~{\rm fb}^{-1}\) of \(e^+e^-\) data.  The local PDG extract is
+using \(424~{\rm fb}^{-1}\) of \(e^+e^-\) data
+(\texttt{L009.yaml:pdg\_or\_equivalent.primary\_current\_limit}).  The local
+PDG extract is
 \texttt{flavor\_catalog/references/L009/pdg\_2025\_tau\_listing.txt}.
 The Belle II primary paper reports the same \(1.9\times 10^{-8}\) 90\% CL
-limit.  A newer LHCb Run 2 preprint, not yet part of that PDG listing, also
-sets \(1.9\,(2.3)\times 10^{-8}\) at 90\% (95\%) CL with \(5.4~{\rm fb}^{-1}\)
-of \(13~{\rm TeV}\) \(pp\) data.  Older benchmark limits are Belle 2010
-\(<2.1\times 10^{-8}\), BaBar 2010 \(<3.3\times 10^{-8}\), and LHCb 2015
-\(<4.6\times 10^{-8}\), all at 90\% CL.
+limit (\texttt{L009.yaml:pdg\_or\_equivalent.primary\_experiment}).  A newer
+LHCb Run 2 preprint, not yet part of that PDG listing, also sets
+\(1.9\,(2.3)\times 10^{-8}\) at 90\% (95\%) CL with \(5.4~{\rm fb}^{-1}\) of
+\(13~{\rm TeV}\) \(pp\) data
+(\texttt{L009.yaml:pdg\_or\_equivalent.post\_pdg\_update}).  Historical
+benchmarks are Belle 2010 \(<2.1\times 10^{-8}\), BaBar 2010
+\(<3.3\times 10^{-8}\), and LHCb 2015 \(<4.6\times 10^{-8}\), all at 90\% CL
+(\texttt{L009.yaml:pdg\_or\_equivalent.historical\_experimental\_limits[0]},
+\texttt{L009.yaml:pdg\_or\_equivalent.historical\_experimental\_limits[1]},
+and \texttt{L009.yaml:pdg\_or\_equivalent.historical\_experimental\_limits[2]}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 This mode tests lepton-sector flavor violation that need not be dipole
 dominated.  In warped or composite-flavor extensions, flavor-nonuniversal
 lepton profiles, KK gauge exchange, flavor-changing \(Z\) couplings, or
@@ -39,16 +47,21 @@ to contact LFV.
 
 \subsection*{Post-2008 developments}
 Relative to the arXiv:0804.1954 RS-flavor baseline, the experimental
-frontier moved from B-factory-era \(10^{-7}\)-scale expectations into stable
-\(10^{-8}\)-scale limits.  Belle and BaBar published full three-lepton tau
-searches in 2010, Belle reaching \(2.1\times 10^{-8}\) for this channel and
-BaBar reaching \(3.3\times 10^{-8}\).  LHCb then demonstrated a hadron-collider
-tau-to-three-muons program, setting \(4.6\times 10^{-8}\) with Run 1 data and,
-in 2026, \(1.9\times 10^{-8}\) with Run 2.  Belle II now supplies the PDG
-benchmark, \(1.9\times 10^{-8}\), with an analysis explicitly optimized for
-inclusive tau reconstruction and multivariate background rejection.
+frontier moved to \(10^{-8}\)-level limits
+(\texttt{L009.yaml:pdg\_or\_equivalent.rs\_context};
+\texttt{L009.yaml:pdg\_or\_equivalent.historical\_experimental\_limits}).  Belle
+and BaBar published full three-lepton tau searches in 2010, reaching
+\(2.1\times 10^{-8}\) and \(3.3\times 10^{-8}\), respectively
+(\texttt{L009.yaml:pdg\_or\_equivalent.historical\_experimental\_limits[0]} and
+\texttt{L009.yaml:pdg\_or\_equivalent.historical\_experimental\_limits[1]}).
+LHCb demonstrated a hadron-collider tau-to-three-muons program, setting
+\(4.6\times 10^{-8}\) with Run 1 data and \(1.9\times 10^{-8}\) with Run 2
+(\texttt{L009.yaml:pdg\_or\_equivalent.historical\_experimental\_limits[2]};
+\texttt{L009.yaml:pdg\_or\_equivalent.post\_pdg\_update}).  Belle II now
+supplies the PDG benchmark, \(1.9\times 10^{-8}\)
+(\texttt{L009.yaml:pdg\_or\_equivalent.primary\_current\_limit}).
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 Experimentally this is a clean upper limit on a forbidden charged-LFV decay.
 As a constraint on the current quark-scan code it is lepton-extension-only:
 the present quark Delta F=2 pipeline has no direct tau-lepton matching.  As a
@@ -58,7 +71,7 @@ give different correlations with \(\tau\to\mu\gamma\), \(\mu\to e\gamma\), and
 \(\mu\to 3e\).
 
 \subsection*{Code coverage in this repo}
-Code coverage is \textbf{NO}.  Targeted greps over \texttt{quarkConstraints/},
+\textbf{NO.}  Targeted greps over \texttt{quarkConstraints/},
 \texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
 \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
 \texttt{scanParams/}, and \texttt{tests/} found no implementation of
@@ -69,7 +82,7 @@ The modern phenomenology surface is neutral-meson mixing only, see
 \texttt{quarkConstraints/modern/phenomenology.py:23}.
 
 \subsection*{Implementation difficulty}
-\textbf{MEDIUM}.  A first implementation needs a new four-lepton LFV observable
+\textbf{MEDIUM.}  A first implementation needs a new four-lepton LFV observable
 and a convention for lepton-flavor Wilson coefficients or RS matching.  It
 does not require lattice inputs or hadronic long-distance treatment, but a
 production-grade implementation should decide whether to include dipole/contact

@@ -14,48 +14,54 @@
 \textbf{Standard notation:} \(R_{\mu e}^{\rm Al} =
 \Gamma(\mu^-{\rm Al}\to e^-{\rm Al})/\Gamma_{\rm capture}(\mu^-{\rm Al})\).
 This entry covers coherent neutrinoless muon-to-electron conversion on an
-aluminum target, the design target for Mu2e and COMET.  It is a
-charged-lepton-flavor-violating nuclear process, not part of the quark
-\(\Delta F=2\) scan lane.
+aluminum target, the design target for Mu2e and COMET.  It is a charged-LFV
+nuclear process and is outside the current quark \(\Delta F=2\) scan lane.
 
-\subsection*{PDG / equivalent value(s)}
-There is no published direct aluminum-target limit in the sources snapshotted
-for this PKA pass.  The current published benchmark for coherent conversion is
-the SINDRUM II gold result,
+\subsection*{PDG-or-equivalent value}
+The PKA snapshots contain no published direct aluminum-target limit
+(\texttt{L003.yaml:pdg\_or\_equivalent.aluminum\_status}).  The current
+published benchmark across targets is the SINDRUM II gold result,
 \[
   R_{\mu e}^{\rm Au} < 7\times10^{-13}\quad (90\%\ {\rm C.L.}),
 \]
-recorded in \texttt{L003.yaml:current\_world\_limit} and snapshotted at
+from \texttt{L003.yaml:pdg\_or\_equivalent.current\_world\_limit}; the local
+snapshot is
 \texttt{flavor\_catalog/references/L003/sindrumii\_2006\_gold\_juser.txt}.
-For aluminum, the catalog value is therefore prospective.  The Mu2e
-full-exposure projection gives single-event sensitivity
-\(2.8\times10^{-17}\) and an expected \(90\%\) C.L. upper limit
-\(6.7\times10^{-17}\).  Mu2e Run I separately quotes an expected no-signal
-limit \(R_{\mu e}<6.2\times10^{-16}\) and discovery sensitivity
-\(1.2\times10^{-15}\).  COMET Phase-I quotes \(3.1\times10^{-15}\)
-single-event sensitivity and a \(7\times10^{-15}\) expected upper limit, while
-the COMET Phase-II planning snapshot quotes \(2.6\times10^{-17}\).
+This is not an aluminum measurement.  Aluminum inputs in the sidecar are
+prospects: Mu2e quotes \(2.8\times10^{-17}\) single-event sensitivity and an
+expected \(90\%\) C.L. upper limit \(6.7\times10^{-17}\)
+(\texttt{L003.yaml:pdg\_or\_equivalent.aluminum\_projections[0]}), Mu2e Run I
+quotes \(R_{\mu e}<6.2\times10^{-16}\) expected sensitivity and
+\(1.2\times10^{-15}\) discovery sensitivity
+(\texttt{L003.yaml:pdg\_or\_equivalent.aluminum\_projections[1]}), COMET
+Phase-I quotes \(3.1\times10^{-15}\) single-event sensitivity and a
+\(7.0\times10^{-15}\) expected upper limit
+(\texttt{L003.yaml:pdg\_or\_equivalent.aluminum\_projections[2]}), and COMET
+Phase-II planning quotes \(2.6\times10^{-17}\) single-event sensitivity
+(\texttt{L003.yaml:pdg\_or\_equivalent.aluminum\_projections[3]}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 In a warped lepton-flavor extension, coherent conversion probes dipole,
 scalar, and vector lepton-quark operators.  KK gauge exchange, \(Z\)-like
 flavor violation, Higgs-mediated scalar currents, and lepton-sector dipoles can
-all feed the same nuclear final state.  The observable is especially useful
-because it is often more sensitive to contact interactions than
-\(\mu\to e\gamma\), so it tests parts of the lepton extension that the current
-repo dipole checker cannot see.
+feed the same nuclear final state.  The observable is complementary to
+\(\mu\to e\gamma\) because it can be contact-operator dominated, so it tests
+lepton-extension structure not covered by the current dipole checker.
 
 \subsection*{Post-2008 developments}
-Relative to the arXiv:0804.1954 RS-flavor baseline, the main development is
-experimental: aluminum conversion became a flagship next-generation CLFV
-target.  Mu2e published staged Run I sensitivity projections, and Mu2e-II
-records a proposed PIP-II upgrade aiming for at least another order of
-magnitude beyond Mu2e.  COMET published a Phase-I technical design and a
-staged Phase-II strategy.  These developments move the process from a
-SINDRUM-II-era contextual bound to a near-term discovery channel with projected
-sensitivity roughly four orders below the gold benchmark.
+Relative to the arXiv:0804.1954 RS-flavor baseline
+(\texttt{L003.yaml:pdg\_or\_equivalent.post\_2008\_baseline}), the main change
+is experimental.  Mu2e published staged aluminum sensitivity projections, and
+Mu2e-II records a proposed PIP-II upgrade aiming for at least one additional
+order of magnitude beyond Mu2e
+(\texttt{L003.yaml:pdg\_or\_equivalent.aluminum\_projections[4]}).  COMET
+published Phase-I and Phase-II aluminum strategies
+(\texttt{L003.yaml:pdg\_or\_equivalent.aluminum\_projections[2]} and
+\texttt{L003.yaml:pdg\_or\_equivalent.aluminum\_projections[3]}).  The process
+therefore moved from SINDRUM-II context to a near-term dedicated aluminum
+search program.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 The experimental signature is robust: a monoenergetic conversion electron from
 a stopped negative muon with no neutrinos.  The mapping to RS parameters is
 model-dependent.  It requires a lepton-quark operator basis, target-dependent
@@ -69,9 +75,8 @@ aluminum limit without a nuclear/operator translation.
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/} found no Mu2e, COMET, SINDRUM, \(R_{\mu e}\), or
 \(\mu-e\)-conversion implementation.  The only adjacent LFV code is the
-\(\mu\to e\gamma\) dipole checker at
-\texttt{flavorConstraints/muToEGamma.py}:75 and its scan call at
-\texttt{scanParams/scan.py}:524.
+\(\mu\to e\gamma\) dipole checker at \texttt{flavorConstraints/muToEGamma.py}:75
+and its scan call at \texttt{scanParams/scan.py}:524.
 
 \subsection*{Implementation difficulty}
 \textbf{HIGH.}  A production implementation needs new lepton-quark Wilson

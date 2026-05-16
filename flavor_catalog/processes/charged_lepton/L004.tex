@@ -18,20 +18,24 @@ This entry covers coherent neutrinoless muon-to-electron conversion in a
 gold target, the strongest published SINDRUM II conversion bound and the
 direct companion to the aluminum and titanium conversion entries.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG-or-equivalent value}
 The streamed PDG live muon listing, generated on 2026-05-14 and accessed on
 2026-05-16, gives
 \[
   R_{\mu e}^{\rm Au} < 7\times 10^{-13}\qquad (90\%\ {\rm C.L.}) .
 \]
-The PDG line identifies the document as BERTL 06, technique SPEC, comment
-SINDRUM II.  The local minimal text snapshot is
+These dates, the \(7\times10^{-13}\) value, and the \(90\%\) C.L. qualifier are
+recorded in
+\texttt{L004.yaml:pdg\_or\_equivalent.primary\_current\_limit}.  The PDG line
+identifies the document as BERTL 06, technique SPEC, comment SINDRUM II.  The
+local minimal text snapshot is
 \texttt{flavor\_catalog/references/L004/pdg2026\_muon\_listing\_s004\_au\_conversion.txt}.
 The SINDRUM II article metadata is separately snapshotted from Crossref for
 \textit{Eur. Phys. J. C} \textbf{47}, 337--346 (2006), DOI
-\texttt{10.1140/epjc/s2006-02582-x}.
+\texttt{10.1140/epjc/s2006-02582-x}
+(\texttt{L004.yaml:pdg\_or\_equivalent.experimental\_publication}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 In a warped lepton-flavor extension, \(\mu-e\) conversion probes more than the
 dipole structure tested by \(\mu\to e\gamma\).  Tree-level or loop-induced
 lepton-quark vector and scalar operators, flavor-changing \(Z\)-like
@@ -42,16 +46,21 @@ dependent.
 
 \subsection*{Post-2008 developments}
 Since the arXiv:0804.1954 RS-flavor baseline, no newer gold-target result has
-replaced the SINDRUM II bound in the PDG listing.  The major change is the
-experimental program around lighter targets: the Mu2e Technical Design Report
+replaced the SINDRUM II bound in the PDG listing
+(\texttt{L004.yaml:pdg\_or\_equivalent.primary\_current\_limit};
+\texttt{L004.yaml:pdg\_or\_equivalent.post\_2008\_baseline}).  The major
+change is the experimental program around lighter targets: the Mu2e Technical
+Design Report
 states an aluminum conversion search aiming for sensitivity approximately four
-orders of magnitude beyond the previous world-best conversion limits, and the
+orders of magnitude beyond the previous world-best conversion limits
+(\texttt{L004.yaml:pdg\_or\_equivalent.post\_2008\_developments[0]}), and the
 COMET Phase-I TDR quotes an aluminum sensitivity goal \(3.1\times10^{-15}\)
-with an expected \(90\%\) upper limit \(7\times10^{-15}\).  Thus the gold
-limit remains the published benchmark, while future comparisons will need
+with an expected \(90\%\) upper limit \(7.0\times10^{-15}\)
+(\texttt{L004.yaml:pdg\_or\_equivalent.post\_2008\_developments[1]}).  Thus the
+gold limit remains the published benchmark, while future comparisons will need
 target-by-target translations.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 The experimental statement is robust: it is a null search normalized to the
 ordinary muon-capture rate on gold.  The mapping to RS parameters is not a
 single-number rescaling.  It requires a lepton-quark effective operator basis,

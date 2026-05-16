@@ -5,13 +5,14 @@
 \section{L010: \texorpdfstring{\(\tau^- \to e^-e^+e^-\)}{tau -> 3e} LFV}
 
 \subsection*{Process}
-The process is the charged-lepton-flavor-violating four-lepton decay
-\(\tau^- \to e^-e^+e^-\), with charge-conjugate tau-plus decays included when
-experiments quote combined limits.  It belongs to the
-\texttt{charged\_lepton} family and is the electron-flavor counterpart of the
-tau three-muon entry L009.
+\textbf{Standard notation:}
+\(\mathcal{B}(\tau^- \to e^-e^+e^-)\).
+This entry covers the charged-lepton-flavor-violating four-lepton decay
+\(\tau^- \to e^-e^+e^-\), including charge-conjugate modes when experiments
+quote combined limits.  It is the electron-flavor counterpart of L009
+\(\tau\to3\mu\) in the \texttt{charged\_lepton} family.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG-or-equivalent value}
 The current PDG live tau datablock S035R58 gives
 \[
   \mathcal{B}(\tau^- \to e^-e^+e^-) < 2.7\times 10^{-8}
@@ -19,13 +20,17 @@ The current PDG live tau datablock S035R58 gives
 \]
 PDG attributes the selected limit to the Belle 2010 analysis by Hayasaka
 et al., based on \(782~{\rm fb}^{-1}\) of \(e^+e^-\) data at
-\(\sqrt{s}=10.6~{\rm GeV}\).  The local PDG snapshot is
+\(\sqrt{s}=10.6~{\rm GeV}\)
+(\texttt{L010.yaml:pdg\_or\_equivalent.primary\_current\_limit}).  The local
+PDG snapshot is
 \texttt{flavor\_catalog/references/L010/pdg2025\_tau3e\_pdglive\_s035r58.txt}.
-The Belle primary paper reports the same \(2.7\times10^{-8}\) limit.  The
-BaBar 2010 analysis provides the principal independent cross-check,
-\(\mathcal{B}<2.9\times10^{-8}\) at \(90\%\) CL with \(468~{\rm fb}^{-1}\).
+The Belle primary paper reports the same \(2.7\times10^{-8}\) limit
+(\texttt{L010.yaml:pdg\_or\_equivalent.primary\_experiment}).  The BaBar 2010
+analysis provides the principal independent cross-check,
+\(\mathcal{B}<2.9\times10^{-8}\) at \(90\%\) CL with \(468~{\rm fb}^{-1}\)
+(\texttt{L010.yaml:pdg\_or\_equivalent.supporting\_experiment}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 This mode tests lepton-sector flavor violation that is not forced to be
 dipole dominated.  Warped lepton extensions can generate
 \(\tau eee\) through flavor-nonuniversal lepton profiles, KK neutral-gauge
@@ -36,16 +41,22 @@ effect in models with tree-level lepton-current misalignment.
 
 \subsection*{Post-2008 developments}
 Relative to the arXiv:0804.1954 RS-flavor baseline, the direct experimental
-bound became a B-factory \(10^{-8}\)-level constraint in 2010.  Belle set the
-current PDG-selected limit, and BaBar reached a comparable \(2.9\times10^{-8}\)
-limit in the same year.  No newer LHCb electron-mode value is used here:
-LHCb's active tau-to-three-leptons program is for the all-muon companion mode.
-For prospects, the Belle II Physics Book treats tau LFV modes with three
-charged leptons as part of the high-luminosity program and quotes expected
-\(50~{\rm ab}^{-1}\) sensitivity at the \(\mathcal{O}(10^{-9})\) to
-\(\mathcal{O}(10^{-10})\) level for favorable low-background modes.
+bound became a B-factory \(10^{-8}\)-level constraint in 2010
+(\texttt{L010.yaml:pdg\_or\_equivalent.rs\_context};
+\texttt{L010.yaml:pdg\_or\_equivalent.primary\_experiment}).  Belle set the
+current PDG-selected limit \(2.7\times10^{-8}\), and BaBar reached the
+comparable \(2.9\times10^{-8}\) limit
+(\texttt{L010.yaml:pdg\_or\_equivalent.primary\_current\_limit};
+\texttt{L010.yaml:pdg\_or\_equivalent.supporting\_experiment}).  No newer LHCb
+electron-mode value is used here: the snapshotted LHCb source is for the
+all-muon companion mode only
+(\texttt{L010.yaml:pdg\_or\_equivalent.lhcb\_context}).  For prospects, the
+Belle II Physics Book quotes \(50~{\rm ab}^{-1}\) sensitivity at the
+\(\mathcal{O}(10^{-9})\)--\(\mathcal{O}(10^{-10})\) level for favorable
+low-background tau LFV modes
+(\texttt{L010.yaml:pdg\_or\_equivalent.prospects}).
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 Experimentally this is a clean upper limit on a forbidden charged-LFV decay.
 Its interpretation in the present quark-scan repository is lepton-extension
 only: there is no tau-sector matching or four-lepton LFV observable in the
@@ -55,7 +66,7 @@ correlations with \(\tau\to e\gamma\), \(\tau\to 3\mu\), \(\mu\to e\gamma\),
 and \(\mu\to 3e\).
 
 \subsection*{Code coverage in this repo}
-Code coverage is \textbf{NO}.  Targeted greps over \texttt{quarkConstraints/},
+\textbf{NO.}  Targeted greps over \texttt{quarkConstraints/},
 \texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
 \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
 \texttt{scanParams/}, and \texttt{tests/} found no implementation of
@@ -66,7 +77,7 @@ adjacent implemented LFV surface is only \(\mu\to e\gamma\):
 to neutral-meson systems at \texttt{quarkConstraints/modern/phenomenology.py:23}.
 
 \subsection*{Implementation difficulty}
-\textbf{MEDIUM}.  A first implementation needs a new four-lepton LFV observable
+\textbf{MEDIUM.}  A first implementation needs a new four-lepton LFV observable
 and a convention for lepton-flavor Wilson coefficients or RS matching.  It
 does not require lattice inputs or hadronic long-distance calculations, but a
 production implementation should specify dipole/contact interference and

@@ -23,9 +23,18 @@ status_history:
     at: "2026-05-16T12:58:05-04:00"
     agent_id: "PKA-L003"
     reason: "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:31:05-04:00"
+    agent: "WA"
+    from: "PKA-DONE"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:31:05-04:00"
+    agent_id: "WA"
+    batch_id: "wa_w4_charged_lepton"
+    reason: "Writer polish completed for wa_w4_charged_lepton; numerical claims checked against sidecar sources."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:58:05-04:00"
+last_updated_at: "2026-05-16T13:31:05-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:31cd61190125beaeba52eef6a16759df2152178c4e143808ff025c9b48afc166"

@@ -13,14 +13,13 @@
 \subsection*{Process}
 \textbf{Standard notation:} \(\mathcal{B}(\tau^-\to e^-\gamma)\).
 This entry covers the charged-lepton-flavor-violating radiative tau decay and
-its use as a tau-sector dipole probe of the tau-electron charged-lepton flavor
-transition.  It is the electron-channel companion to L007
-\(\tau\to\mu\gamma\), and is complementary to the much tighter L001
-\(\mu\to e\gamma\) constraint.
+its use as a tau-sector dipole probe of the tau-electron transition.  It is
+the electron-channel companion to L007 \(\tau\to\mu\gamma\) and complements
+the much tighter L001 \(\mu\to e\gamma\) constraint.
 
-\subsection*{PDG / equivalent value(s)}
-The current PDG/equivalent value is the sidecar
-\texttt{L008.yaml:primary\_current\_limit} upper limit
+\subsection*{PDG-or-equivalent value}
+The current PDG/equivalent value is
+\texttt{L008.yaml:pdg\_or\_equivalent.primary\_current\_limit},
 \[
   \mathcal{B}(\tau^-\to e^-\gamma) < 3.3\times10^{-8}
   \quad (90\%\ {\rm C.L.}),
@@ -28,14 +27,19 @@ The current PDG/equivalent value is the sidecar
 from the PDGLive \(S035.32\) tau decay-mode summary, locally snapshotted at
 \texttt{flavor\_catalog/references/L008/pdg2025\_tau\_e\_gamma\_pdglive.txt}.
 The primary experiment behind this value is the BaBar full-data search using
-\((963\pm7)\times10^6\) tau decays, recorded in
-\texttt{L008.yaml:primary\_experiment}, which quotes
+\((963\pm7)\times10^6\) tau decays
+(\texttt{L008.yaml:pdg\_or\_equivalent.primary\_experiment}), which quotes
 \(\mathcal{B}(\tau\to e\gamma)<3.3\times10^{-8}\) at \(90\%\) C.L.  Belle's
 full-data 2021 update used \(988\,{\rm fb}^{-1}\) and obtained
-\(\mathcal{B}(\tau^\pm\to e^\pm\gamma)\le5.6\times10^{-8}\); it is an
-important cross-check but not the strongest electron-mode limit.
+\(\mathcal{B}(\tau^\pm\to e^\pm\gamma)\le5.6\times10^{-8}\)
+(\texttt{L008.yaml:pdg\_or\_equivalent.recent\_belle\_cross\_check}); it is an
+important cross-check but not the strongest electron-mode limit.  The Belle II
+Physics Book records a \(50\,{\rm ab}^{-1}\) prospect of
+\(1.2\times10^{-8}\) for this channel
+(\texttt{L008.yaml:pdg\_or\_equivalent.belle\_ii\_projection}), not a current
+bound.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 In warped lepton-flavor extensions, this mode constrains brane-localized or
 loop-induced charged-lepton dipoles with a \(\tau e\) flavor spurion.  It is
 not a constraint on the current quark \(\Delta F=2\) scan, but it is a useful
@@ -48,14 +52,19 @@ violation is controlled.
 \subsection*{Post-2008 developments}
 Relative to the arXiv:0804.1954 RS flavor baseline, the main experimental
 development is the BaBar 2010 full-data result, which remains the canonical
-PDG value for \(\tau\to e\gamma\).  Belle later repeated the search with its
-full \(988\,{\rm fb}^{-1}\) data set and found no significant excess, setting
-the weaker electron-mode limit \(5.6\times10^{-8}\) at \(90\%\) C.L.  The
-Belle II Physics Book projects a \(50\,{\rm ab}^{-1}\) reach of
-\(<12\times10^{-9}\) for this channel, but the PKA pass found no Belle II
-measurement superseding the BaBar/PDG bound.
+PDG value for \(\tau\to e\gamma\)
+(\texttt{L008.yaml:pdg\_or\_equivalent.primary\_experiment};
+\texttt{L008.yaml:pdg\_or\_equivalent.rs\_context}).  Belle later repeated the
+search with its full \(988\,{\rm fb}^{-1}\) data set and found no significant
+excess, setting the weaker electron-mode limit \(5.6\times10^{-8}\) at
+\(90\%\) C.L.
+(\texttt{L008.yaml:pdg\_or\_equivalent.recent\_belle\_cross\_check}).  The PKA
+pass found no Belle II measurement superseding the BaBar/PDG bound; the
+sidecar records only the \(50\,{\rm ab}^{-1}\),
+\(1.2\times10^{-8}\) Belle II prospect
+(\texttt{L008.yaml:pdg\_or\_equivalent.belle\_ii\_projection}).
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 Experimentally this is a clean null search for charged-lepton flavor
 violation, with a negligible Standard Model rate.  Its RS interpretation is
 model-dependent: the bound constrains a dipole coefficient only after choosing
