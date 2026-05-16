@@ -1,0 +1,87 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$B\to K\nu\bar{\nu}$}\label{sec:nunubar}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Lastly, we study the rare decays $B\to K\nu\bar{\nu}$, which are of phenomenological interest~\cite{Descotes-Genon:2020buf}. Precise measurements in this channel could shed light on new physics models to explain lepton flavour universality violation~\cite{Altmannshofer:2020axr,BhupalDev:2021ipu}.
+
+There is limited experimental data at the present time, and currently no experimental results have conclusively demonstrated a non-zero branching fraction. However, more experimental results are anticipated in the near future, and the upper limit on the branching fraction may soon be driven down close to theoretical determinations~\cite{Halder:2021sgd}.
+
+We can calculate the short distance (SD) contribution to the differential branching fraction (summed over neutrino flavours)~\cite{Du:2015tda,Altmannshofer:2009ma,Buras:2014fpa}, which depends only on the vector form factor. 
+%
+\begin{equation}\label{eq:nunubarBF}
+  \begin{split}
+    \frac{d\mathcal{B}(B\to K\nu\bar{\nu})_{\text{SD}}}{dq^2} =& \frac{G_F^2\alpha_{\mathrm{EW}}^2(M_Z)X_t^2}{32\pi^5\sin^4\theta_W}\\
+    &\times\tau_B|V_{tb}V^*_{ts}|^2|\vec{p}_K|^3f^2_+(q^2),
+  \end{split}
+\end{equation}
+%
+with $X_t=1.469(17)$~\cite{Brod:2010hi}, $\sin^2\theta_W=0.23121(4)$~\cite{Zyla:2020zbs} and $1/\alpha_{\rm EW}(M_Z)=127.952(9)$~\cite{Zyla:2020zbs}. Other parameters are given in Table~\ref{tab-SMparams}. We evaluate this expression using our improved vector form factor determined in~\cite{BtoK}, including uncertainties for strong-isospin breaking discussed in Section~\ref{sec:isospin}. If the reader wishes to reproduce this, $f_+(q^2)$ can be easily obtained using the code attached to~\cite{BtoK}. Note that no QED uncertainty is required in this case. 
+
+This short distance expression is sufficient to describe the case of $B^0\to K^0\nu\bar{\nu}$ decays and dominates the branching fraction in $B^+\to K^+\nu_{\ell}\bar{\nu_{\ell}}$ decays. In the case of $B^+\to K^+\nu_{\tau}\bar{\nu_{\tau}}$ however, long distance (LD) effects from a double charged-current interaction have a noticeable contribution. These are given by~\cite{Kamenik:2009kc}
+%
+\begin{equation}
+  \begin{split}
+    \mathcal{B}(B^+\to K^+\nu_{\tau}\bar{\nu}_{\tau})_{\mathrm{LD}}=&\frac{|G_F^2V_{ub}V^*_{us}f_{K^+}f_{B^+}|^2}{128\pi^2M^3_{B^+}}\\
+    &\times\frac{ m_{\tau}(M^2_{B^+}-m_{\tau}^2)^2(M^2_{K^+}-m_{\tau}^2)^2}{\Gamma_{\tau}\Gamma_{B^+}}.
+  \end{split}
+\end{equation}
+%
+
+We take the following parameter values to determine this branching fraction. 
+$|V_{ub}|=0.00370(10)(12)$ is given from exclusive $B\to\pi\ell\nu$ decays in~\cite{Zyla:2020zbs,HFLAV:2019otj}, based on experimental data and lattice QCD form factors from~\cite{Lattice:2015tia,Flynn:2015mha}. 
+Other values, $|V_{us}|f_{K^+}=0.03509(4)(4)\,\mathrm{GeV}$~\cite{Zyla:2020zbs,Rosner:2015wva,Moulson:2014cra}, $f_{B^+}=0.1894(8)(11)(3)(1)\,\mathrm{GeV}$~\cite{Bazavov:2017lyh} and $\tau_\tau=0.2903(5)\,\mathrm{ps}$~\cite{Zyla:2020zbs} are used to obtain 
+\begin{equation}
+\label{eq:nuLD}
+\mathcal{B}(B^+\to K^+\nu_{\tau}\bar{\nu_{\tau}})_{\text{LD}} = 6.09(53)\times10^{-7} \,. 
+\end{equation}
+This is a minor update on the $6.22(60)\times10^{-7}$ calculated in~\cite{Du:2015tda}, and represents an adjustment of about +10\% (or roughly $1.5\sigma$) to our $\mathcal{B}(B^+\to K^+\nu_{\tau}\bar{\nu_{\tau}})_{\text{SD}}$ result.  
+
+Our results for the differential branching fractions for the short-distance contribution are shown in Figure~\ref{fig:nuinqsq} for both the charged and neutral $B$ meson cases. Note that there is no issue with $c\overline{c}$ resonances or nonfactorisable terms in this case so the SM calculation is very straightforward and simply requires an accurate vector form factor. From the differential branching fraction we calculate the total branching fractions, adding in the long-distance contribution to the charged case. These values are given in Table~\ref{tab-neutrino}, and show a total uncertainty of around 7\%. Of this uncertainty 5\% comes from the vector form factor, 4.4\% from the CKM elements $|V_{tb}V_{ts}^*|$ and 2.3\% from $X_t^2$. 
+
+Table~\ref{tab-neutrino} also compares our values to experimental limits and earlier theoretical results. Our results sit slightly higher than previous theoretical determinations and have smaller uncertainty. The comparison of our $B^+\to K^+\nu\bar{\nu}$ branching fraction result with other theoretical values is shown in Figure~\ref{fig:the_neutrino_branching}. Results in various $q^2$ bins are presented in Table~\ref{tab:BKnunubins}.
+
+
+%
+\begin{table}
+  \begin{center}
+    \begin{tabular}{ccc}
+      \hline
+      \hline	
+      Decay  		& $\mathcal{B}\times 10^{6}$		     & Reference    \\ 
+      \hline
+      $B^0\to K_S^0\nu\bar{\nu}$ & $<13$ (90\% CL) Exp.&  \cite{Grygier:2017tzo}\\
+      \hline
+      \multirow{4}{*}{$B^0\to K^0\nu\bar{\nu}$} & $<49$ (90\% CL) Exp.& \cite{Lees:2013kla}\\
+                        & 4.01(49) & \cite{Du:2015tda}\\
+                        & $4.1^{+1.3}_{-1.0}$ & \cite{Wang:2012ab}\\
+                        & 4.60(34) & HPQCD '22\\
+      \hline
+      \multirow{7}{*}{$B^+\to K^+\nu\bar{\nu}$} & $<16$ (90\% CL) Exp.& \cite{Lees:2013kla}\\
+                        & $<19$ (90\% CL) Exp.& \cite{Grygier:2017tzo}\\
+                        & $<41$ (90\% CL) Exp. & \cite{Belle-II:2021rof} \\
+                        & 5.10(80) & \cite{Altmannshofer:2009ma,Kamenik:2009kc}\\
+                        & $4.4^{+1.4}_{-1.1}$ & \cite{Wang:2012ab}\\
+                        & 3.98(47) & \cite{Buras:2014fpa} \\
+                        & 4.94(52) & \cite{Du:2015tda}\\
+                        & 4.53(64) &\cite{Buras:2021nns}\\
+                        & 4.65(62) &\cite{Buras:2022wpw}\\
+                        & 5.58(37) & HPQCD '22\\
+      \hline
+      \hline
+    \end{tabular}\caption{Summary of experimental and theoretical results for the branching fraction $\mathcal{B}(B\to K\nu\bar{\nu})$, summed over neutrino flavours. Our results are denoted by `HPQCD '22' and include the long-distance contribution of Eq.~\eqref{eq:nuLD} in the charged $B$ case. Experimental results are given as 90\% confidence limit and marked `Exp.'. In the case of~\cite{Buras:2021nns}, we use $|V_{tb}V_{ts}^*|$ (Table~\ref{tab-SMparams}) to obtain the result.}
+  \includegraphics[width=0.48\textwidth]{the_neutrino_branching1.pdf}
+  \caption{Our result for $\mathcal{B}(B^+\to K^+\nu\bar{\nu})$, including long distance effects, compared with other theory calculations from Table~\ref{tab-neutrino}~\cite{Altmannshofer:2009ma,Kamenik:2009kc,Wang:2012ab,Buras:2014fpa,Du:2015tda,Buras:2021nns,Buras:2022wpw}.}
+  \label{fig:the_neutrino_branching}
+\end{figure}
+%
+\begin{figure}
+  \includegraphics[width=0.48\textwidth]{neutrino_branching1.pdf}
+  \caption{Our result (black filled star) for $\mathcal{B}(B^+\to K^+\nu\bar{\nu})$, summing short- and long-distance effects, compared with current 90\% confidence limits from BaBar~\cite{Lees:2013kla} and Belle II~\cite{Belle-II:2021rof} (blue lines). Red filled squares with error bars show the expected precision to be achieved by Belle II with 5~$\text{ab}^{-1}$ and 50~$\text{ab}^{-1}$~\cite{Halder:2021sgd}, assuming our result is obtained for the central value.}
+  \label{fig:neutrino_branching}
+\end{figure}
+%
+
+Current experimental bounds on the $B\to K\nu\overline{\nu}$ branching fraction are roughly an order of magnitude larger than the SM expectation given by the theory results of Table~\ref{tab-neutrino}. The uncertainty that we have achieved here, however, complements the $\approx10\%$ error expected from Belle II with 50~$\text{ab}^{-1}$~\cite{Halder:2021sgd}, allowing for a more stringent test of this quantity in future. This is demonstrated in Figure~\ref{fig:neutrino_branching}, which compares our result with the 90\% confidence limits set by BaBar~\cite{Lees:2013kla} and Belle II~\cite{Belle-II:2021rof} in Table~\ref{tab-neutrino}, as well as the precision forecast by Belle II with 5~$\text{ab}^{-1}$ and 50~$\text{ab}^{-1}$~\cite{Halder:2021sgd}, assuming a result centred on our value. 
+We have also provided improved results for the form-factor-dependent pieces that, multiplied by appropriate Wilson coefficients, give the branching fraction for the lepton flavour number violating decay $B\to K \ell_1^+\ell_2^-$. Table~\ref{tab:abef} gives our results for all 3 lepton flavour pairs and for charged and neutral $B$ mesons, with uncertainties of 6--7\%. These can be used to constrain BSM models in future searches for this decay. 
+
+Finally,  Table~\ref{tab-neutrino} gives our improved SM values for $\mathcal{B}(B^+\to K^+\nu\bar{\nu})$ and $\mathcal{B}(B^0\to K^0\nu\bar{\nu})$. We have uncertainties below 10\%, commensurate with that expected from Belle II with $50~\mathrm{ab}^{-1}$ worth of data. This decay mode, expected to reach 3$\sigma$ significance at Belle II with $5~\mathrm{ab}^{-1}$ of data, is an exciting possibility for future tests for BSM physics, since it is theoretically `cleaner' than $B \to K\ell^+\ell^-$ across the full $q^2$ range with no need for vetoed regions. 
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${\cal B}(B^+ \to K^+ \nu \bar{\nu})$</title>
+<script>MathJax = {tex: {inlineMath: [['$', '$']]}};</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<h1>${\cal B}(B^+ \to K^+ \nu \bar{\nu})$</h1>
+<p><img src="BR_B+_K+_nu_nubar.png"></p>
+<p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>-5</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+<tr><td><b>Average</b></td><td><b>$1.38 \pm0.35$</b></td><td>5.55</td><td>$p=0.23$ (ndf=4)</td><td></td></tr>
+<tr><td><i>PDG</i></td><td><i>$2.30\,^{+0.71}_{-0.64}$</i></td><td></td><td><a href="https://pdglive.lbl.gov/BranchingRatio.action?desig=273&parCode=S041">pdgLive</a></td><td></td></tr>
+<tr><td>Belle</td><td>$1.00 \pm0.60$</td><td>0.41</td>
+<td><a href="https://inspirehep.net/literature/1512929">Phys.Rev.D <b>96</b>,091101 (2017)</a></td><td>Semileptonic tag. Paper only reports UL. The value reported here is calculated in Ref.~\cite{Belle-II:2023esi}. </td></tr>
+<tr><td>Belle II</td><td>$2.3 \pm0.5\,^{+0.5}_{-0.4}$</td><td>2.05</td>
+<td><a href="https://inspirehep.net/literature/2725943">Phys.Rev.D <b>109</b>,112006 (2024)</a></td><td></td></tr>
+<tr><td>BaBar</td><td>$0.20\,^{+0.80}_{-0.70}$</td><td>2.19</td>
+<td><a href="https://inspirehep.net/literature/868017">Phys.Rev.D <b>82</b>,112002 (2010)</a></td><td>Semileptonic tag. </td></tr>
+<tr><td>Belle</td><td>$2.90 \pm1.60$</td><td>0.90</td>
+<td><a href="https://inspirehep.net/literature/1223991">Phys.Rev.D <b>87</b>,111103 (2013)</a></td><td>Hadronic tag. Paper only reports UL. The value reported here is calculated in Ref.~\cite{Belle-II:2023esi}. </td></tr>
+<tr><td>BaBar</td><td>$1.50\,^{+1.70}_{-0.80}\,^{+0.40}_{-0.20}$</td><td>0.01</td>
+<td><a href="https://inspirehep.net/literature/1225884">Phys.Rev.D <b>87</b>,112005 (2013)</a></td><td>Hadronic tag. </td></tr>
+</table>
+</p>
+</body>
+</html>

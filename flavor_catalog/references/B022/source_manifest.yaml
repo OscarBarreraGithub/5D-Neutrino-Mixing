@@ -1,0 +1,73 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B022
+sources:
+  - key: HFLAV2025Dec:BplusKplusNuNu
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV Dec. 2025 table for B+ -> K+ nu nubar"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_nu_nubar.html"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:4c562ccd073f823063b1dd4960842bddc64c52bd91368c5c1f2d86e512145d49"
+    snapshot_path: "flavor_catalog/references/B022/hflav_dec2025_bplus_kplus_nunu.txt"
+  - key: PDG2026:BplusKplusNuNu
+    arxiv_id: null
+    DOI: null
+    title: "PDG live/API listing S041.273 for B+ -> K+ nubar nu"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S041.273"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:af37fb3659510fda527bb190e325585eff507cf14abe2f5e628132ac293be2e1"
+    snapshot_path: "flavor_catalog/references/B022/pdg2026_bplus_kplus_nunu_api.txt"
+  - key: BelleII2024:BplusKplusNuNu
+    arxiv_id: "2311.14647"
+    DOI: "10.1103/PhysRevD.109.112006"
+    title: "Evidence for B+ -> K+ nu nubar decays"
+    authors: "Belle II Collaboration, I. Adachi et al."
+    year: 2024
+    url: "https://docs.belle2.org/pub_data/documents/4404/"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:5e8e54e24cbc3d59e277ca1e3c0e0647fbd2287785fa9118a9a6733992bc2412"
+    snapshot_path: "flavor_catalog/references/B022/belleii2024_bplus_kplus_nunu_pubdb.txt"
+  - key: BelleII2025:BKnnLikelihood
+    arxiv_id: "2507.12393"
+    DOI: "10.1103/pr66-sd36"
+    title: "Model-agnostic likelihood for the reinterpretation of the B+ -> K+ nu nubar measurement at Belle II"
+    authors: "Belle II Collaboration, M. Abumusabh et al."
+    year: 2025
+    url: "https://docs.belle2.org/pub_data/publications/4277/"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:8a0601cb9b3a44e8a4f376f9f039d22b387b6365781b00b6b3da257907954324"
+    snapshot_path: "flavor_catalog/references/B022/belleii2025_likelihood_pubdb.txt"
+  - key: BaBar2013:BKstarNuNu
+    arxiv_id: "1303.7465"
+    DOI: "10.1103/PhysRevD.87.112005"
+    title: "Search for B -> K(*) nu nubar and invisible quarkonium decays"
+    authors: "BaBar Collaboration"
+    year: 2013
+    url: "https://export.arxiv.org/api/query?id_list=1303.7465"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b"
+    snapshot_path: "flavor_catalog/references/B022/babar2013_btokstarnunu_arxiv.txt"
+  - key: HPQCD2023:BtoKNuNuSM
+    arxiv_id: "2207.13371"
+    DOI: "10.1103/PhysRevD.107.014511"
+    title: "Standard Model predictions for B -> K l+l-, B -> K l1-l2+ and B -> K nu nubar using form factors from Nf=2+1+1 lattice QCD"
+    authors: "W. G. Parrott, C. Bouchard, C. T. H. Davies"
+    year: 2023
+    url: "https://arxiv.org/abs/2207.13371"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:66d8ba9efc52bb64659d75613f8b6065421252f3af1f4c0331f4da09a3e29d4e"
+    snapshot_path: "flavor_catalog/references/B022/hpqcd2023_btoknunu_sm_arxiv.txt"
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://export.arxiv.org/api/query?id_list=0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:fc0dbdf5c402036324a5e72ea2fd59a57eb44a196fcf8ae7683c038adee6bd7d"
+    snapshot_path: "flavor_catalog/references/B022/cfw2008_rs_flavor_arxiv.txt"

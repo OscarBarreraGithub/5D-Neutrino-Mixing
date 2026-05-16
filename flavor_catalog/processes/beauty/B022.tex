@@ -1,0 +1,93 @@
+% Flavor catalog per-process template.
+% process_id: B022
+% family: beauty
+% owner_agent_id: PKA-B022
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B022.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B022: \(B^+\to K^+\nu\bar{\nu}\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(B^+\to K^+\nu\bar{\nu})\).
+This beauty-sector entry covers the leading exclusive invisible
+\(b\to s\nu\bar{\nu}\) mode, with emphasis on the charged channel now measured
+by Belle II.  The related vector mode \(B\to K^*\nu\bar{\nu}\) is B023.
+
+\subsection*{PDG / equivalent value(s)}
+The current HFLAV-equivalent Dec. 2025 table gives
+\[
+  \mathcal{B}(B^+\to K^+\nu\bar{\nu})=(1.38\pm0.35)\times10^{-5},
+\]
+with local snapshot
+\texttt{flavor\_catalog/references/B022/hflav\_dec2025\_bplus\_kplus\_nunu.txt}
+accessed 2026-05-16.  The same HFLAV table displays the PDG value
+\((2.30^{+0.71}_{-0.64})\times10^{-5}\), and the PDG live/API listing records
+the Belle II evidence input
+\((2.3\pm0.5_{\rm stat}{}^{+0.5}_{-0.4}{}_{\rm syst})\times10^{-5}\)
+(\texttt{PDG2026:BplusKplusNuNu}, \texttt{BelleII2024:BplusKplusNuNu}).
+Belle II used \(362~{\rm fb}^{-1}\) at the \(\Upsilon(4S)\), reported
+3.5\(\sigma\) evidence for the decay, and found the combined result
+2.7\(\sigma\) above the Standard Model expectation.  For theory orientation,
+the HPQCD 2023 SM prediction is
+\((5.58\pm0.37)\times10^{-6}\), summed over neutrino flavours and including the
+charged-mode long-distance term (\texttt{HPQCD2023:BtoKNuNuSM}).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This mode probes a \(\Delta B=1\) neutral-current transition with missing
+energy.  In RS/anarchic-flavor models it can receive contributions from
+flavor-changing \(b\)-\(s\) currents coupled to \(Z\), KK electroweak gauge
+bosons, or other neutral invisible states.  It is complementary to
+\(\Delta F=2\) \(B_s\) mixing because it tests a semileptonic/invisible
+operator, not a neutral-meson mixing amplitude.
+
+\subsection*{Post-2008 developments}
+The CFW 2008 RS-flavor baseline predates the modern \(B\to K\nu\bar{\nu}\)
+program.  BaBar later set hadronic-tag limits, including
+\(\mathcal{B}(B^+\to K^+\nu\bar{\nu})<3.7\times10^{-5}\) at 90\% CL
+(\texttt{BaBar2013:BKstarNuNu}).  Belle II changed the status of the mode with
+the 2024 evidence measurement quoted above.  On the theory side, modern lattice
+form factors now give a sub-10\% SM prediction, and Belle II has released a
+2025 model-agnostic likelihood package to reinterpret the measurement under
+non-SM invisible kinematics or WET coefficient choices
+(\texttt{BelleII2025:BKnnLikelihood}).
+
+\subsection*{Constraint validity and model dependence}
+The SM prediction is comparatively clean: there are no charmonium veto regions
+as in \(b\to s\ell^+\ell^-\), and the dominant hadronic input is the
+\(B\to K\) vector form factor.  The experimental extraction is less universal:
+Belle II's headline branching fraction assumes SM kinematics, while invisible
+new particles can change the \(q^2\) spectrum and selection efficiency.  A live
+constraint should therefore use either the published likelihood or a validated
+reweighting prescription rather than only a one-bin branching-fraction pull.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Required greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \(B\to K\nu\bar{\nu}\), \(b\to s\nu\bar{\nu}\), or
+rare invisible decay implementation.  The modern phenomenology surface lists
+only \(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) at
+\texttt{quarkConstraints/modern/phenomenology.py:23}; its note says this is
+policy-only at \texttt{quarkConstraints/modern/phenomenology.py:166}.  The
+legacy \(\Delta F=2\) inputs are at \texttt{quarkConstraints/deltaf2.py:209},
+with \(B_d\) and \(B_s\) mixing evaluators at
+\texttt{quarkConstraints/deltaf2.py:903} and
+\texttt{quarkConstraints/deltaf2.py:922}.  The only live lepton-flavor routine
+seen is \(\mu\to e\gamma\) at \texttt{flavorConstraints/muToEGamma.py:75}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  This would require a new \(\Delta B=1\) \(b\to s\nu\bar{\nu}\)
+Hamiltonian, exclusive \(B\to K\) form-factor integration, invisible-final-state
+acceptance treatment, and Belle II likelihood or kinematic-reweighting support.
+The existing neutral-meson \(\Delta F=2\) SLL/SLR/VLL/VRR/LR machinery does not
+cover this observable.
+
+\subsection*{Key references}
+Process-local keys before bibliography consolidation:
+\texttt{HFLAV2025Dec:BplusKplusNuNu}, \texttt{PDG2026:BplusKplusNuNu},
+\texttt{BelleII2024:BplusKplusNuNu}, \texttt{BelleII2025:BKnnLikelihood},
+\texttt{BaBar2013:BKstarNuNu}, \texttt{HPQCD2023:BtoKNuNuSM}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

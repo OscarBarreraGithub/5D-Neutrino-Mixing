@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="/static/main.js"></script>
+    <script type="text/javascript" src="/static/pub_data/js/util.js"></script>
+    <script type="text/javascript" src="/static/pub_data/js/comments.js"></script>
+    <script type="text/javascript" src="/static/pub_data/js/notifications.js"></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$']]   // allow $ as delimiters for inline math
+        },
+        output: {
+          font: 'mathjax-newcm',
+          fontPath: "/static/mathjax-newcm-font"
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="/static/mathjax/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/pub_data/css/style.css">
+    <title>
+      PubDB | BELLE2-PUB-PH-2023-028
+    </title>
+    
+    
+</head>
+
+<body>
+
+  
+  
+
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      update_notification_count();
+    });
+  </script>
+
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" style="box-shadow: 0px 5px 10px rgba(1, 1, 1, 0.2);">
+      <span class="navbar-brand">
+        <a href="/pub_data/">
+          <img src="/static/pub_data/img/logo.png" alt="Logo" style="height: 2.5rem; width: auto; margin-right: 0.5rem; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.4));">
+        </a>
+          Belle II Publications
+      </span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          
+          
+          <li class="nav-item "><a class="nav-link" href="/pub_data/publications/">Publications</a></li>
+          
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          
+          <li class="nav-item"><a class="nav-link" href="/oidc/authenticate/">Login</a></li>
+          
+        </ul>
+      </div>
+  </nav>
+  
+
+  <div class="container-fluid" id="main_page">
+    
+
+<div class="container">
+  <div id="messages">
+    
+</div>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Evidence for $B^+ \to K^+ \nu \bar{\nu}$ decays</h1>
+    
+  </div>
+  <span class="text-muted text-sm">Sumitted to PubDB: 2023-02-08</span><br>
+  <p>
+    Category: Physics / performance paper
+  </p>
+  <p>Tags: </p>
+
+  <table class="table table-bordered">
+  <tr class="d-flex">
+    <th class="col-2">Principal Authors</th>
+    <td class="col-10">
+      
+        <a href="mailto:claudia.cecchi@pg.infn.it">Claudia Cecchi</a>, 
+      
+        <a href="mailto:jacopo.cerasoli@gmail.com">Jacopo Cerasoli</a>, 
+      
+        <a href="mailto:filippo.dattola@desy.de">Filippo Dattola</a>, 
+      
+        <a href="mailto:giulio.dujany@iphc.cnrs.fr">Giulio Dujany</a>, 
+      
+        <a href="mailto:yulan.fan@desy.de">Yulan Fan</a>, 
+      
+        <a href="mailto:eldar.ganiev@ijs.si">Eldar Ganiev</a>, 
+      
+        <a href="mailto:alexander.glazov@desy.de">Alexander Glazov</a>, 
+      
+        <a href="mailto:yubohan@hawaii.edu">Yubo Han</a>, 
+      
+        <a href="mailto:elisa.manoni@pg.infn.it">Elisa Manoni</a>, 
+      
+        <a href="mailto:lucas.martel@iphc.cnrs.fr">Lucas Martel</a>, 
+      
+        <a href="mailto:stefano.moneta@pg.infn.it">Stefano Moneta</a>, 
+      
+        <a href="mailto:cyrraz.physics@protonmail.com">Cyrille Praz</a>, 
+      
+        <a href="mailto:isabelle.ripp@iphc.cnrs.fr">Isabelle Ripp-Baudot</a>, 
+      
+        <a href="mailto:slavomira.stefkova@uni-bonn.de">Slavomira Stefkova</a>, 
+      
+        <a href="mailto:roberta.volpe@cern.ch">Roberta Volpe</a>
+      
+    </td>
+  </tr>
+  
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">Date</th>
+    <td class="col-10">2024-06-01</td>
+  </tr>
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">Working group</th>
+    <td class="col-10">Radiative and Electroweak Penguin</td>
+  </tr>
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">Belle II Number</th>
+    <td class="col-10">BELLE2-PUB-PH-2023-028</td>
+  </tr>
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">Abstract</th>
+    <td class="col-10">We search for the rare decay $B^{+}\rightarrow K^{+}\nu\bar{\nu}$ in a $362\ \rm{fb}^{-1}$ sample of electron-positron collisions at the $\Upsilon(4S)$ resonance collected with the Belle II detector at the SuperKEKB collider. We use the inclusive properties of the accompanying $B$ meson in $\Upsilon(4S) \to B\kern 0.18em\overline{\kern -0.18em B}{}$ events to suppress background from other decays of the signal $B$ candidate and light-quark pair production. We validate the measurement with an auxiliary analysis based on a conventional hadronic reconstruction of the accompanying $B$ meson. For background suppression, we exploit distinct signal features using machine learning methods tuned with simulated data. The signal-reconstruction efficiency and background suppression are validated through various control channels. The branching fraction is extracted in a maximum likelihood fit. Our inclusive and hadronic analyses yield consistent results for the $B^{+}\rightarrow K^{+}\nu\bar{\nu}$ branching fraction of $\left[2.7\pm 0.5(\mathrm{stat})\pm 0.5(\mathrm{syst})\right] \times 10^{-5}$ and $\left[1.1^{+0.9}_{-0.8}(\mathrm{stat}){}^{+0.8}_{-0.5}(\mathrm{syst})\right] \times 10^{-5}$, respectively. Combining the results, we determine the branching fraction of the decay $B^{+}\rightarrow K^{+}\nu\bar{\nu}$ to be $\left[2.3 \pm 0.5(\mathrm{stat})^{+0.5}_{-0.4}(\mathrm{syst})\right]\times 10^{-5}$, providing the first evidence for this decay at $3.5$ standard deviations. The combined result is $2.7$ standard deviations above the standard model expectation.</td>
+  </tr>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">ArXiv</th>
+    <td class="col-10"><a href="https://arxiv.org/abs/2311.14647" rel="nofollow">https://arxiv.org/abs/2311.14647</a></td>
+  </tr>
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">Inspire</th>
+    <td class="col-10"><a href="https://inspirehep.net/literature/2725943" rel="nofollow">https://inspirehep.net/literature/2725943</a></td>
+  </tr>
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">DOI</th>
+    <td class="col-10">10.1103/PhysRevD.109.112006</td>
+  </tr>
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">Reference</th>
+    <td class="col-10">Phys.Rev.D 109, 112006 (2024)</td>
+  </tr>
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">Bibtex<button class="btn btn-secondary btn-sm mx-2 px-1 py-0" onclick="CopyBibtex()">copy</button></th>
+    <td class="col-10"><pre>@article{Belle-II:2023esi,
+    author = &quot;Adachi, I. and others&quot;,
+    collaboration = &quot;Belle-II&quot;,
+    title = &quot;{Evidence for B+{\textrightarrow}K+{\ensuremath{\nu}}{\ensuremath{\nu}}{\textasciimacron} decays}&quot;,
+    eprint = &quot;2311.14647&quot;,
+    archivePrefix = &quot;arXiv&quot;,
+    primaryClass = &quot;hep-ex&quot;,
+    reportNumber = &quot;Belle II Preprint 2023-017, KEK Preprint 2023-35&quot;,
+    doi = &quot;10.1103/PhysRevD.109.112006&quot;,
+    journal = &quot;Phys. Rev. D&quot;,
+    volume = &quot;109&quot;,
+    number = &quot;11&quot;,
+    pages = &quot;112006&quot;,
+    year = &quot;2024&quot;
+}
+</pre></td>
+  </tr>
+  
+  
+  
+  
+  
+  <tr class="d-flex">
+    <th class="col-2">Journal</th>
+    <td class="col-10">Phys.Rev.D</td>
+  </tr>
+  
+  
+  
+  
+  
+  
+  
+</table>
+
+<script>
+function CopyBibtex() {
+  navigator.clipboard.writeText(`@article{Belle-II:2023esi,
+    author = "Adachi, I. and others",
+    collaboration = "Belle-II",
+    title = "{Evidence for B+{\textrightarrow}K+{\ensuremath{\nu}}{\ensuremath{\nu}}{\textasciimacron} decays}",
+    eprint = "2311.14647",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "Belle II Preprint 2023-017, KEK Preprint 2023-35",
+    doi = "10.1103/PhysRevD.109.112006",
+    journal = "Phys. Rev. D",
+    volume = "109",
+    number = "11",
+    pages = "112006",
+    year = "2024"
+}
+`);
+}
+</script>
+
+
+  <div class="d-flex justify-content-between align-items-center">
+    <h3>Files</h3>
+    
+  </div>
+  
+<ul class="list-unstyled icon-list">
+  
+  <li class="mb-2">
+    <i class="bi bi-download"></i>
+    <span>
+      <a href="/files/4404/BELLE2-PUB-PH-2023-028/1/BELLE2-PUB-PH-2023-028.pdf">BELLE2-PUB-PH-2023-028.pdf</a> (versions: <a href="/files/4404/BELLE2-PUB-PH-2023-028/1/BELLE2-PUB-PH-2023-028.pdf">1</a>)
+      <br>
+      <span class="text-muted text-sm">latest upload: 2025-03-10</span>
+    </span>
+  </li>
+  
+</ul>
+
+
+</div>
+
+
+  </div>
+
+  <footer class="footer text-muted text-sm">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        
+        <div class="col">
+          
+          <b>Belle II PubDB</b><br>
+          maintained by Arul Prakash, Thomas Kuhr<br>
+          Powered by <a class="text-muted text-sm" href="https://gitlab.desy.de/belle2/admin/pubdb/-/tree/0.12.2">
+            PubDB v0.12.2
+            </a><br>
+          last updated: 2026-05-12<br>
+        </div>
+        <div class="col text-center">
+          <b>Links</b><br>
+          <a href="https://xwiki.desy.de/xwiki/bin/view/BI/Belle%20II%20Collaborative%20Services%20and%20Tools/PubDB/" target="_blank" rel="noopener noreferrer" class="text-muted text-sm">PubDB XWiki page <i class="bi bi-box-arrow-up-right"></i></a><br>
+          <a href="https://www.desy.de/imprint/index_eng.html" target="_blank" rel="noopener noreferrer" class="text-muted text-sm">Imprint <i class="bi bi-box-arrow-up-right"></i></a>
+        </div>
+        <div class="col text-end">
+          <b>Want to give feedback?</b><br>
+          create an issue on <a href="https://gitlab.desy.de/belle2/admin/pubdb/-/issues" class="text-muted text-sm">GitLab</a><br>
+          or write a mail to <br> <a href="mailto:pubdb-support@belle2.org" class="text-muted text-sm">pubdb-support@belle2.org</a>
+        </div>
+      
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

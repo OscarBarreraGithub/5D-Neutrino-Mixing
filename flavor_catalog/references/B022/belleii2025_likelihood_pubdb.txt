@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="/static/main.js"></script>
+    <script type="text/javascript" src="/static/pub_data/js/util.js"></script>
+    <script type="text/javascript" src="/static/pub_data/js/comments.js"></script>
+    <script type="text/javascript" src="/static/pub_data/js/notifications.js"></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$']]   // allow $ as delimiters for inline math
+        },
+        output: {
+          font: 'mathjax-newcm',
+          fontPath: "/static/mathjax-newcm-font"
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="/static/mathjax/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/pub_data/css/style.css">
+    <title>
+      PubDB | BELLE2-PUB-PH-2024-038
+    </title>
+    
+    
+</head>
+
+<body>
+
+  
+  
+
+  
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" style="box-shadow: 0px 5px 10px rgba(1, 1, 1, 0.2);">
+    <span class="navbar-brand">
+    <a href="/pub_data/">
+        <img src="/static/pub_data/img/logo.png" alt="Logo" style="height: 2.5rem; width: auto; margin-right: 0.5rem; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.4));">
+    </a>
+        Belle II Publications
+    </span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        
+        <li class="nav-item "><a class="nav-link" href="/pub_data/publications/">Physics Publications</a></li>
+    </ul>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/pub_data/">All Documents</a></li>
+    </ul>
+
+    </div>
+</nav>
+
+
+  <div class="container-fluid" id="main_page">
+    
+
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Model-agnostic likelihood for the reinterpretation of the $\boldsymbol{B^{+}\to K^{+} \nu \bar{\nu}}$ measurement at Belle II</h1>
+  </div>
+
+  <table class="table table-bordered">
+    <tr class="d-flex">
+      <th class="col-2">Abstract</th>
+      <td class="col-10">
+        We recently measured the branching fraction of the $B^{+}\rightarrow K^{+}\nu\bar{\nu}$ decay using 362~fb$^{-1}$ of on-resonance $e^+e^-$ collision data under the assumption of Standard Model kinematics, providing the first evidence for this decay. 
+To facilitate future reinterpretations and maximize the scientific impact of this measurement, we publicly release the full analysis likelihood along with all necessary material required for reinterpretation under arbitrary theoretical models sensitive to this measurement.
+In this work, we demonstrate how the measurement can be reinterpreted within the framework of the Weak Effective Theory. Using a kinematic reweighting technique in combination with the published likelihood, we derive marginal posterior distributions for the Wilson coefficients, construct credible intervals, and assess the goodness of fit to the Belle~II data.
+For the Weak Effective Theory Wilson coefficients, the posterior mode of the magnitudes $|C_\mathrm{VL}+C_\mathrm{VR}|$, $|C_\mathrm{SL}+C_\mathrm{SR}|$, and $|C_\mathrm{TL}|$ corresponds to the point ${(11.3, 0.0, 8.2)}$. The respective 95\% credible intervals are $[1.9, 16.2]$, $[0.0, 15.4]$, and $[0.0, 11.2]$.
+      </td>
+    </tr>
+    <tr class="d-flex">
+      <th class="col-2">Tags</th>
+      <td class="col-10">
+        
+      </td>
+    </tr>
+    <tr class="d-flex">
+      <th class="col-2">Working group</th>
+      <td class="col-10">
+        Radiative and Electroweak Penguin
+      </td>
+    </tr>
+    <tr class="d-flex">
+      <th class="col-2">Principal authors</th>
+      <td class="col-10">
+        <a href="mailto:b2n-2024-041@belle2.org">@</a>&nbsp;
+        
+        Lorenz Gaertner, Nikolai Krug, Thomas Kuhr, Slavomira Stefkova
+        
+        
+      </td>
+    </tr>
+    <tr class="d-flex">
+      <th class="col-2">Reference</th>
+      <td class="col-10">
+        Phys.Rev.D 112, 092016 (2025), DOI: 10.1103/pr66-sd36
+      </td>
+    </tr>
+    
+    <tr class="d-flex">
+      <th class="col-2">Document</th>
+      <td class="col-10">
+        <a href="/files/4277/BELLE2-PUB-PH-2024-038/22/BELLE2-PUB-PH-2024-038.pdf">BELLE2-PUB-PH-2024-038</a>
+      </td>
+    </tr>
+    
+    <tr class="d-flex">
+      <th class="col-2">Links</th>
+      <td class="col-10">
+        <a href="https://arxiv.org/abs/2507.12393" target="_blank">arXiv:2507.12393</a>,
+        <a href="https://inspirehep.net/literature/2947386" target="_blank">Inspire</a>,
+        <a href="https://doi.org/10.1103/pr66-sd36" target="_blank">PRD</a>
+      </td>
+    </tr>
+    
+    <tr class="d-flex">
+      <th class="col-2">Bibtex<button class="btn btn-secondary btn-sm mx-2 px-1 py-0" onclick="CopyBibtex()">copy</button></th>
+      <td class="col-10">
+        <pre id="bibtex">@article{Belle-II:2025lfq,
+    author = &quot;Abumusabh, Merna and others&quot;,
+    collaboration = &quot;Belle-II&quot;,
+    title = &quot;{Model-agnostic likelihood for the reinterpretation of the B+{\textrightarrow}K+vv{\textasciimacron} measurement at Belle II}&quot;,
+    eprint = &quot;2507.12393&quot;,
+    archivePrefix = &quot;arXiv&quot;,
+    primaryClass = &quot;hep-ex&quot;,
+    reportNumber = &quot;Belle II Preprint 2025-021 KEK Preprint 2025-20&quot;,
+    doi = &quot;10.1103/pr66-sd36&quot;,
+    journal = &quot;Phys. Rev. D&quot;,
+    volume = &quot;112&quot;,
+    number = &quot;9&quot;,
+    pages = &quot;092016&quot;,
+    year = &quot;2025&quot;
+}</pre>
+      </td>
+    </tr>
+    
+  </table>
+
+  
+  <hr class="hr">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="/files/plots/EWP-001/ita_number_density.png" width="100%">
+    </div>
+    <div class="col-sm-8">
+        <p>The ITA binned joint number densities. The horizontal axis corresponds to the generated $q^2$. The vertical axis represents the binning used in the ${B^{+}\to K^{+}\nu\bar{\nu}}$ analysis~\cite{Belle-II:2023esi}.    The heatmap shows the weighted signal events.</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-download"></i>
+                <span>
+                    <a href="/files/plots/EWP-001/ita_number_density.pdf">ita_number_density.pdf</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+  <hr class="hr">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="/files/plots/EWP-001/knunu_theory.png" width="100%">
+    </div>
+    <div class="col-sm-8">
+        <p>The ${B^{+}\to K^{+}\nu\bar{\nu}}$ differential branching fraction prediction from Eq. (9). Individual contributions are shown here with the combinations of vector, scalar and tensor Wilson coefficients set to unity, respectively. The uncertainties shown (bands) stem from the hadronic parameters.</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-download"></i>
+                <span>
+                    <a href="/files/plots/EWP-001/knunu_theory.pdf">knunu_theory.pdf</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+  <hr class="hr">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="/files/plots/EWP-001/362fb-full.png" width="100%">
+    </div>
+    <div class="col-sm-8">
+        <p>The marginalized posterior for the Wilson coefficients in Eq. (9). We adopt the convention that $C_{\mathrm{VL}}+C_{\mathrm{VR}}$, $C_{\mathrm{SL}}+C_{\mathrm{SR}}$ and $C_{\mathrm{TL}}$ are real valued.    Diagonal and off-diagonal panels show the 1-dimensional and 2-dimensional sample density PDFs on a linear scale, respectively. The overall scale is omitted, as all relevant information is contained in the shape of the distribution. The contours indicate $68\%$ and $95\%$ credible intervals. The dashed black lines and cross mark the SM point; the dash-dotted yellow lines and cross indicate the posterior mode; dotted red lines mark the symmetry axes used for sample symmetrization.</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-download"></i>
+                <span>
+                    <a href="/files/plots/EWP-001/362fb-full.pdf">362fb-full.pdf</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+  <hr class="hr">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="/files/plots/EWP-001/post_fit_yields.png" width="100%">
+    </div>
+    <div class="col-sm-8">
+        <p>Observed and predicted best-fit yields in the highest-sensitivity bins of the analysis. These correspond to the $\eta(\mathrm{BDT}_2)&gt;0.98$ region of the ITA. The signal is shown for the unconstrained ${B^{+}\to K^{+}\nu\bar{\nu}}$ SM (\textit{left}) and the WET (\textit{right}) predictions.
+    The predicted background yields are shown individually for the neutral and charged \B-meson decays, and the summed five continuum categories.
+    Pulls are shown in the lower panels.</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-download"></i>
+                <span>
+                    <a href="/files/plots/EWP-001/post_fit_yields.pdf">post_fit_yields.pdf</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+
+</div>
+
+<script>
+function CopyBibtex() {
+  navigator.clipboard.writeText(`@article{Belle-II:2025lfq,
+    author = "Abumusabh, Merna and others",
+    collaboration = "Belle-II",
+    title = "{Model-agnostic likelihood for the reinterpretation of the B+{\textrightarrow}K+vv{\textasciimacron} measurement at Belle II}",
+    eprint = "2507.12393",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    reportNumber = "Belle II Preprint 2025-021 KEK Preprint 2025-20",
+    doi = "10.1103/pr66-sd36",
+    journal = "Phys. Rev. D",
+    volume = "112",
+    number = "9",
+    pages = "092016",
+    year = "2025"
+}`);
+}
+</script>
+
+
+  </div>
+
+  <footer class="footer text-muted text-sm">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        
+
+<div class="col">
+    
+    Belle II PubDB v0.12.2
+</div>
+<div class="col text-center">
+    <a href="https://www.desy.de/imprint/index_eng.html" target="_blank" rel="noopener noreferrer" class="text-muted text-sm">Imprint <i class="bi bi-box-arrow-up-right"></i></a>
+</div>
+<div class="col text-end">
+    <a href="mailto:pubdb-support@belle2.org" class="text-muted text-sm">Contact</a>
+</div>
+
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

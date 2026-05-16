@@ -1,0 +1,133 @@
+schema: flavor_catalog.process.v1
+process_id: B022
+family: beauty
+standard_notation: "\\mathcal{B}(B^+\\to K^+\\nu\\bar{\\nu})"
+process_name: "Invisible rare decay B+ -> K+ nu nubar"
+owner: "PKA"
+owner_agent_id: "PKA-B022"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T14:09:07-04:00"
+    timestamp: "2026-05-16T14:09:07-04:00"
+    agent_id: "PKA-B022"
+    reason: "initial PKA draft deposit for assigned B022 B -> K nu nubar process"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:09:07-04:00"
+version: "0.1.0"
+source_shas:
+  babar2013_btokstarnunu_arxiv.txt: "sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b"
+  belleii2024_bplus_kplus_nunu_pubdb.txt: "sha256:5e8e54e24cbc3d59e277ca1e3c0e0647fbd2287785fa9118a9a6733992bc2412"
+  belleii2025_likelihood_pubdb.txt: "sha256:8a0601cb9b3a44e8a4f376f9f039d22b387b6365781b00b6b3da257907954324"
+  cfw2008_rs_flavor_arxiv.txt: "sha256:fc0dbdf5c402036324a5e72ea2fd59a57eb44a196fcf8ae7683c038adee6bd7d"
+  hflav_dec2025_bplus_kplus_nunu.txt: "sha256:4c562ccd073f823063b1dd4960842bddc64c52bd91368c5c1f2d86e512145d49"
+  hpqcd2023_btoknunu_sm_arxiv.txt: "sha256:66d8ba9efc52bb64659d75613f8b6065421252f3af1f4c0331f4da09a3e29d4e"
+  pdg2026_bplus_kplus_nunu_api.txt: "sha256:af37fb3659510fda527bb190e325585eff507cf14abe2f5e628132ac293be2e1"
+pdg_or_equivalent:
+  source: "HFLAV Dec. 2025 rare B decays, cross-checked against PDG live/API 2026"
+  source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_nu_nubar.html"
+  access_date: "2026-05-16"
+  year: 2025
+  value_summary: "HFLAV Dec. 2025 quotes BR(B+ -> K+ nu nubar) = (1.38 +/- 0.35)e-5. The PDG live/API 2026 listing records the Belle II evidence measurement (2.3 +/- 0.5(stat) +0.5/-0.4(syst))e-5, displayed by HFLAV as a PDG value (2.30 +0.71/-0.64)e-5."
+  observables:
+    - name: "HFLAV average"
+      observable: "BR(B+ -> K+ nu nubar)"
+      value: 1.38e-5
+      uncertainty: 0.35e-5
+      units: "branching fraction"
+      source_key: "HFLAV2025Dec:BplusKplusNuNu"
+      source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_nu_nubar.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B022/hflav_dec2025_bplus_kplus_nunu.txt"
+      sha256_of_text_snapshot: "sha256:4c562ccd073f823063b1dd4960842bddc64c52bd91368c5c1f2d86e512145d49"
+    - name: "PDG display value"
+      observable: "BR(B+ -> K+ nu nubar)"
+      value: 2.30e-5
+      uncertainty_positive: 0.71e-5
+      uncertainty_negative: 0.64e-5
+      units: "branching fraction"
+      source_key: "PDG2026:BplusKplusNuNu"
+      source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S041.273"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B022/pdg2026_bplus_kplus_nunu_api.txt"
+      sha256_of_text_snapshot: "sha256:af37fb3659510fda527bb190e325585eff507cf14abe2f5e628132ac293be2e1"
+    - name: "Belle II evidence measurement"
+      observable: "BR(B+ -> K+ nu nubar)"
+      value: 2.3e-5
+      statistical_uncertainty: 0.5e-5
+      systematic_uncertainty_positive: 0.5e-5
+      systematic_uncertainty_negative: 0.4e-5
+      units: "branching fraction"
+      dataset: "362 fb^-1 at the Upsilon(4S)"
+      signal_significance: "3.5 sigma"
+      sm_excess: "2.7 sigma above the Standard Model expectation"
+      source_key: "BelleII2024:BplusKplusNuNu"
+      source_url: "https://docs.belle2.org/pub_data/documents/4404/"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B022/belleii2024_bplus_kplus_nunu_pubdb.txt"
+      sha256_of_text_snapshot: "sha256:5e8e54e24cbc3d59e277ca1e3c0e0647fbd2287785fa9118a9a6733992bc2412"
+    - name: "BaBar hadronic-tag limit"
+      observable: "BR(B+ -> K+ nu nubar)"
+      upper_limit: 3.7e-5
+      confidence_level: "90%"
+      units: "branching fraction"
+      source_key: "BaBar2013:BKstarNuNu"
+      source_url: "https://export.arxiv.org/api/query?id_list=1303.7465"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B022/babar2013_btokstarnunu_arxiv.txt"
+      sha256_of_text_snapshot: "sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b"
+theory_inputs:
+  - name: "HPQCD SM prediction"
+    observable: "SM BR(B+ -> K+ nu nubar)"
+    value: 5.58e-6
+    uncertainty: 0.37e-6
+    units: "branching fraction"
+    note: "Summed over neutrino flavours; includes long-distance contribution in the charged-B case."
+    source_key: "HPQCD2023:BtoKNuNuSM"
+    source_url: "https://arxiv.org/abs/2207.13371"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B022/hpqcd2023_btoknunu_sm_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:66d8ba9efc52bb64659d75613f8b6065421252f3af1f4c0331f4da09a3e29d4e"
+paper_era_references:
+  - key: "CsakiFalkowskiWeiler2008:CompositeFlavor"
+    role: "2008 RS/anarchic-flavor baseline for post-2008 comparison; no B -> K nu nubar experimental value is taken from this source."
+    source_url: "https://export.arxiv.org/api/query?id_list=0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B022/cfw2008_rs_flavor_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:fc0dbdf5c402036324a5e72ea2fd59a57eb44a196fcf8ae7683c038adee6bd7d"
+reinterpretation_references:
+  - key: "BelleII2025:BKnnLikelihood"
+    role: "Model-agnostic likelihood release for reinterpreting the Belle II B+ -> K+ nu nubar measurement under non-SM invisible kinematics or WET coefficients."
+    source_url: "https://docs.belle2.org/pub_data/publications/4277/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B022/belleii2025_likelihood_pubdb.txt"
+    sha256_of_text_snapshot: "sha256:8a0601cb9b3a44e8a4f376f9f039d22b387b6365781b00b6b3da257907954324"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Targeted grep for B+ -> K+ nu nubar, B -> K nu, b -> s nu nubar, invisible modes, rare_decay, and WET-like CVL/CVR labels found no observable implementation in the required code directories; incidental hits were generic Delta F = 2 C_VLL/C_VRR tests and scan parameter names."
+    - "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems."
+    - "quarkConstraints/modern/phenomenology.py:166 states that this surface is a policy-only fence and does not define a numeric EFT backend."
+    - "quarkConstraints/deltaf2.py:209 defines the legacy Delta F = 2 input tuple."
+    - "quarkConstraints/deltaf2.py:903 and quarkConstraints/deltaf2.py:922 implement B_d and B_s neutral-meson mixing, not Delta B = 1 rare invisible decays."
+    - "flavorConstraints/muToEGamma.py:75 implements the separate mu -> e gamma dipole check; no b -> s nu nubar routine is present."
+  commands:
+    - >-
+      rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "B\\+.*K\\+.*nu|B.?->.?K.?nu|K\\+.*nu.*nubar|nu.*nubar|invisible|C_L|C_R|CVL|CVR|C_VL|C_VR|b.?->.?s.*nu|b.?to.?s.*nu|rare_decay|rare decay" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "A live constraint needs a new Delta B = 1 b -> s nu nubar weak-Hamiltonian normalization, exclusive B -> K form-factor integration, neutrino/invisible final-state treatment, and likely Belle II likelihood or kinematic-reweighting support. The existing Delta F = 2 SLL/SLR/VLL/VRR/LR1/LR2 neutral-meson basis does not compute this mode."
+open_issues:
+  - "Checker should decide whether the headline prose should prefer the HFLAV Dec. 2025 average or the PDG live/Belle II evidence value, because HFLAV combines inferred central values from older searches while PDG live displays the Belle II evidence measurement."
+  - "No experimental likelihood or correlations are reproduced here; the 2025 Belle II likelihood release is only recorded as a source for later implementation work."

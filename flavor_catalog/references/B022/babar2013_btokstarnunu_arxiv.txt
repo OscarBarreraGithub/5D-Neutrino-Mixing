@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/IIBvcrmkcpLvSxFa+aSvY138FOY</id>
+  <title>arXiv Query: search_query=&amp;id_list=1303.7465&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-16T18:08:34Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1303.7465" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1303.7465v2</id>
+    <title>Search for B --&gt; K(*) nu nubar and invisible quarkonium decays</title>
+    <updated>2013-06-11T18:41:41Z</updated>
+    <link href="https://arxiv.org/abs/1303.7465v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1303.7465v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We search for the flavor-changing neutral-current decays B-&gt;K(*)nu nubar, and the invisible decays J/psi-&gt;nu nubar and psi(2S)-&gt;nu nubar via B-&gt;K(*)J/psi and B-&gt;K(*)psi(2S) respectively, using a data sample of 471 x10^6 BB pairs collected by the BaBar experiment. We fully reconstruct the hadronic decay of one of the B mesons in the Upsilon(4S)-&gt;BB decay, and search for the B-&gt;K(*)nu nubar decay in the rest of the event. We observe no significant excess of signal decays over background and report branching fraction upper limits of BR(B+-&gt;K+nu nubar)&lt;3.7 x10^-5, BR(B0-&gt;K0nu nubar)&lt; 8.1 x10^-5, BR(B+-&gt;K*+nu nubar)&lt;11.6 x10^-5, BR(B0-&gt;K*0nu nubar)&lt;9.3 x10^-5, and combined upper limits of BR(B-&gt;Knu nubar)&lt;3.2 x10^-5 and BR(B-&gt;K*nu nubar)&lt;7.9 x10^-5, all at the 90% confidence level. For the invisible quarkonium decays, we report branching fraction upper limits of BR(J/psi-&gt;nu nubar)&lt;3.9 x10^-3 and BR(psi(2S)-&gt;nu nubar)&lt;15.5 x10^-3 at the 90% confidence level. Using the improved kinematic resolution achieved from hadronic reconstruction, we also provide partial branching fraction limits for the B-&gt;K(*)nu nubar decays over the full kinematic spectrum.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-03-29T19:29:05Z</published>
+    <arxiv:comment>13 pages, 8 postscript figures, published by Phys. Rev. D</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. D 87, 112005 (2013)</arxiv:journal_ref>
+    <author>
+      <name> The BABAR Collaboration</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.87.112005</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.87.112005" title="doi"/>
+  </entry>
+</feed>
