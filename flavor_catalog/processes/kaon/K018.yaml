@@ -41,9 +41,19 @@ status_history:
     batch_id: "ca_w6_kaon"
     issues:
       - "CHK-1: TeX displays FLAG/derived auxiliary numerical values f_+(0)=0.9698(17), |V_us|=0.22330(53), and |V_us|=0.22328(58) that trace to auxiliary_inputs, not to pdg_or_equivalent entries as required by this CA batch prompt; the PDG-derived auxiliary |V_us| block also lacks source_url/access_date fields."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T16:17:02-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T16:17:02-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w6_kaon_v2"
+    reason: "Cycle-2 writer rework addressed CA CHK-1 by promoting displayed FLAG/derived auxiliary numerical values into pdg_or_equivalent with complete metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:07:12-04:00"
+last_updated_at: "2026-05-16T16:17:02-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:68edf12334b909abe22a3d24cda1ee06591e3b1a371daa26be79d92dadd79249"
@@ -152,11 +162,11 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K018/flavianet2010_kl3.txt"
     sha256: "sha256:c8855c1e4539b66e5595b6ccb71122f80ce8084944c4fdd83a5a7089d520464f"
-auxiliary_inputs:
   - value_id: "PDG2025:K018:Vus_from_Kl3"
     observable: "|V_us| derived from K_l3 and FLAG f_+(0), Nf=2+1+1"
     year: 2025
     value: 0.22330
+    uncertainty: 0.00053
     uncertainty_total: 0.00053
     uncertainty_breakdown:
       experimental: 0.00035
@@ -164,6 +174,8 @@ auxiliary_inputs:
       radiative_isospin: 0.00008
     units: "dimensionless"
     source: "PDG 2025 update, Eq. 67.13"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
     sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
   - value_id: "FLAG2024:K018:fplus_Nf211"

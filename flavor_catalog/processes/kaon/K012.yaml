@@ -34,9 +34,19 @@ status_history:
     batch_id: "ca_w6_kaon"
     issues:
       - "CHK-1: TeX displays supporting numerical values (<2.2e-10, <0.8(1.0)e-9, approximately 5e-12, and <1% hadronic uncertainty) that trace to supporting_numeric_values, not to pdg_or_equivalent entries as required by this CA batch prompt."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T16:17:02-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T16:17:02-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w6_kaon_v2"
+    reason: "Cycle-2 writer rework addressed CA CHK-1 by promoting displayed supporting numerical values into pdg_or_equivalent with complete metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:07:12-04:00"
+last_updated_at: "2026-05-16T16:17:02-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_ks_decay_modes.txt: "sha256:5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882"
@@ -45,68 +55,83 @@ source_shas:
   chobanova_2018_ksmumu_susy_arxiv.txt: "sha256:7b25e1bf225ff51a308f24c5f6c50d55b9b8ad934aaf4d931415b975df09db0d"
   dery_ghosh_grossman_schacht_2021_kmumu_arxiv.txt: "sha256:ecf9094e578273fa701698ea835e5342f5ce0fecd8f8147d35b9d70b9bb4557a"
 pdg_or_equivalent:
-  year: 2025
-  observable: "BR(K_S^0 -> mu+ mu-)"
-  value: "<2.1e-10"
-  uncertainty: null
-  units: "branching fraction"
-  confidence_level: "90%"
-  source: "Particle Data Group 2025 update, K0S particle listing, Gamma_12"
-  source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-S.pdf"
-  access_date: "2026-05-16"
-  snapshot_path: "flavor_catalog/references/K012/pdg2025_ks_decay_modes.txt"
-  sha256_of_text_snapshot: "5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882"
-supporting_numeric_values:
-  - observable: "LHCb 2016-2018 standalone BR(K_S^0 -> mu+ mu-) limit"
+  - value_id: "PDG2025:K012:headline_limit"
+    year: 2025
+    observable: "BR(K_S^0 -> mu+ mu-)"
+    value: "<2.1e-10"
+    uncertainty: null
+    units: "branching fraction"
+    confidence_level: "90%"
+    source: "Particle Data Group 2025 update, K0S particle listing, Gamma_12"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-S.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K012/pdg2025_ks_decay_modes.txt"
+    sha256: "sha256:5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882"
+  - value_id: "LHCb2020:K012:standalone_2016_2018_limit"
+    observable: "LHCb 2016-2018 standalone BR(K_S^0 -> mu+ mu-) limit"
     year: 2020
     value: "<2.2e-10"
     uncertainty: null
     units: "branching fraction"
     confidence_level: "90%"
+    source: "LHCb Collaboration, Constraints on the K0_S -> mu+ mu- branching fraction, arXiv:2001.10354"
     source_url: "https://arxiv.org/abs/2001.10354"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K012/lhcb_2020_ksmumu_arxiv.txt"
-    sha256_of_text_snapshot: "d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7"
-  - observable: "LHCb combined BR(K_S^0 -> mu+ mu-) limit"
+    sha256: "sha256:d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7"
+  - value_id: "LHCb2020:K012:combined_limit"
+    observable: "LHCb combined BR(K_S^0 -> mu+ mu-) limit"
     year: 2020
     value: "<2.1e-10"
     uncertainty: null
     units: "branching fraction"
     confidence_level: "90%"
+    source: "LHCb Collaboration, Constraints on the K0_S -> mu+ mu- branching fraction, arXiv:2001.10354"
     source_url: "https://arxiv.org/abs/2001.10354"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K012/lhcb_2020_ksmumu_arxiv.txt"
-    sha256_of_text_snapshot: "d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7"
-  - observable: "LHCb 2017 Run-1 BR(K_S^0 -> mu+ mu-) limit"
+    sha256: "sha256:d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7"
+  - value_id: "LHCb2017:K012:run1_limit"
+    observable: "LHCb 2017 Run-1 BR(K_S^0 -> mu+ mu-) limit"
     year: 2017
     value: "<0.8e-9 at 90%; <1.0e-9 at 95%"
     uncertainty: null
     units: "branching fraction"
     confidence_level: "90% and 95%"
+    source: "LHCb Collaboration, Improved limit on the branching fraction of the rare decay K0_S -> mu+ mu-, arXiv:1706.00758"
     source_url: "https://arxiv.org/abs/1706.00758"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K012/lhcb_2017_ksmumu_arxiv.txt"
-    sha256_of_text_snapshot: "a35a20eef31d2eb0d3d2b85cc496f4e61846e54d137b79107f941ef7525d406e"
-  - observable: "Standard Model estimate for BR(K_S^0 -> mu+ mu-)"
+    sha256: "sha256:a35a20eef31d2eb0d3d2b85cc496f4e61846e54d137b79107f941ef7525d406e"
+  - value_id: "Chobanova2018:K012:sm_estimate"
+    observable: "Standard Model estimate for BR(K_S^0 -> mu+ mu-)"
     year: 2018
     value: "approximately 5e-12"
     uncertainty: null
     units: "branching fraction"
     confidence_level: null
+    source: "Chobanova et al., Probing SUSY effects in K_S^0 -> mu+ mu-, arXiv:1711.11030"
     source_url: "https://arxiv.org/abs/1711.11030"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K012/chobanova_2018_ksmumu_susy_arxiv.txt"
-    sha256_of_text_snapshot: "7b25e1bf225ff51a308f24c5f6c50d55b9b8ad934aaf4d931415b975df09db0d"
-  - observable: "Hadronic uncertainty target for time-dependent ell=0 K_S extraction"
+    sha256: "sha256:7b25e1bf225ff51a308f24c5f6c50d55b9b8ad934aaf4d931415b975df09db0d"
+  - value_id: "DeryGhoshGrossmanSchacht2021:K012:ell0_hadronic_uncertainty"
+    observable: "Hadronic uncertainty target for time-dependent ell=0 K_S extraction"
     year: 2021
     value: "<1%"
     uncertainty: null
     units: "relative hadronic uncertainty"
     confidence_level: null
+    source: "Dery, Ghosh, Grossman, and Schacht, K -> mu+ mu- as a clean probe of short-distance physics, arXiv:2104.06427"
     source_url: "https://arxiv.org/abs/2104.06427"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K012/dery_ghosh_grossman_schacht_2021_kmumu_arxiv.txt"
-    sha256_of_text_snapshot: "ecf9094e578273fa701698ea835e5342f5ce0fecd8f8147d35b9d70b9bb4557a"
+    sha256: "sha256:ecf9094e578273fa701698ea835e5342f5ce0fecd8f8147d35b9d70b9bb4557a"
 auxiliary_blocks:
   paper_era_reference:
     note: "arXiv:0804.1954 is used only as the requested post-2008 chronology boundary; no K012 numerical value from that paper is used in this PKA draft."
   theory_context:
-    - "The SM prediction and clean ell=0 proposal are auxiliary theory context, not entries in pdg_or_equivalent."
+    - "The SM prediction and clean ell=0 proposal remain auxiliary theory context; their displayed numerical claims are listed in pdg_or_equivalent for CHK-1 metadata completeness."
 code_coverage:
   status: "NO"
   grep_commands:
