@@ -1,0 +1,94 @@
+% Flavor catalog per-process entry.
+% process_id: K010
+% family: kaon
+% owner_agent_id: PKA-K010
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K010.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{K010: \(K_S \to \pi^0 e^+e^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(K_S\to\pi^0 e^+e^-)\).
+This entry covers the short-lived neutral-kaon rare semileptonic mode
+\(K_S\to\pi^0 e^+e^-\), a CP-conserving/CP-allowed \(\Delta S=1\)
+weak-neutral-current decay.  It is the electron-mode \(K_S\) companion to
+\(K008\) because it fixes the indirect-CP input used in \(K_L\to\pi^0 e^+e^-\)
+phenomenology.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical PDG 2026 pdgLive listing \(S012.10\), accessed 2026-05-16, gives
+the NA48/1 measurement
+\[
+  \mathcal{B}(K_S\to\pi^0 e^+e^-;\,m_{ee}>0.165~{\rm GeV})
+  = \left(3.0^{+1.5}_{-1.2}\,{\rm stat}\pm0.2\,{\rm syst}\right)
+    \times10^{-9}.
+\]
+The same listing records the NA48/1 full-kinematic extrapolation, using a
+constant form factor and vector matrix element,
+\[
+  \mathcal{B}(K_S\to\pi^0 e^+e^-)
+  = \left(5.8^{+2.9}_{-2.4}\right)\times10^{-9}.
+\]
+The local PDG snapshot is
+\texttt{flavor\_catalog/references/K010/pdg2026\_ks\_pi0ee\_pdgLive.txt}; the
+NA48/1 arXiv abstract-page snapshot is
+\texttt{flavor\_catalog/references/K010/na48\_2003\_ks\_pi0ee\_arxiv.txt}.
+NA48/1 reports 7 observed events with an expected background of 0.15 events in
+the high-intensity \(K_S\) data set.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This mode probes \(s\to d e^+e^-\) semileptonic neutral-current structure,
+not the \(\Delta F=2\) kaon-mixing lane already implemented in the repository.
+In warped or anarchic-flavor models it is sensitive, through a hadronic
+long-distance amplitude, to flavor-changing \(Z\), photon-penguin, and heavy
+neutral-gauge effects.  Its most immediate catalog role is as an experimental
+normalization for the indirect-CP part of \(K_L\to\pi^0 e^+e^-\), so it should
+be kept distinct from short-distance theory prefactors or NDA normalizations.
+
+\subsection*{Post-2008 developments}
+No post-2008 measurement was found that supersedes the NA48/1 value used by
+PDG.  The important developments are interpretive: the rare-kaon Snowmass
+white paper emphasizes \(K_{L,S}\to\pi^0\ell^+\ell^-\) branching ratios and
+\(q^2\) distributions as new-physics probes, with correlations to
+\(\varepsilon'/\varepsilon\), \(\varepsilon_K\), and \(\Delta M_K\).  The
+modern literature also treats this \(K_S\) input as part of the indirect-CP
+normalization for the \(K_L\) modes rather than as a standalone clean Wilson
+coefficient bound.
+
+\subsection*{Constraint validity and model dependence}
+Class: long-distance-limited rare kaon decay.  The measured partial branching
+fraction is robust, but the full-kinematic number is model-dependent because
+it assumes a vector matrix element and a unit form factor.  A model constraint
+must specify whether it uses the directly measured \(m_{ee}>0.165\) GeV region
+or the extrapolated total rate, and whether it predicts the chiral
+long-distance amplitude or only a short-distance \(s\to d e^+e^-\) Wilson
+coefficient.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Focused greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \(K_S\to\pi^0 e^+e^-\), \(S012.10\),
+\(a_S\), or \(s\to d e^+e^-\) implementation.  The nearest kaon coverage is
+\(\Delta F=2\): \texttt{quarkConstraints/deltaf2.py:209} starts the default
+neutral-meson-mixing inputs, \texttt{quarkConstraints/deltaf2.py:755}
+evaluates \(\Delta m_K\), and
+\texttt{quarkConstraints/modern/phenomenology.py:23} lists only
+\(\varepsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D0\) policy systems.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Production integration would need a new \(\Delta S=1\)
+semileptonic rare-kaon observable, Wilson normalization for \(s\to d e^+e^-\),
+and a documented treatment of the \(K_S\) form factor or a conservative
+experimental-input-only interpretation.  The existing SLL/SLR/VLL/VRR/LR
+\(\Delta F=2\) basis does not cover this decay.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2026:K010}, \texttt{NA482003:KSPi0EE},
+\texttt{IsidoriSmithUnterdorfer2004:KPi0LL},
+\texttt{AebischerBurasKumar2022:RareKaons}, and
+\texttt{CFW2008:RSFlavor}.

@@ -1,0 +1,60 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: K010
+created_at: "2026-05-16T14:22:29-04:00"
+license_policy: "minimal text snapshots only; no publisher PDFs tracked"
+sources:
+  - key: "PDG2026:K010"
+    arxiv_id: null
+    DOI: null
+    title: "PDG pdgLive K0S -> pi0 e+ e- listing S012.10"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt"
+    sha256_of_local_snapshot: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
+    license_note: "Minimal PDG API text snapshot only; no PDG PDF tracked."
+  - key: "NA482003:KSPi0EE"
+    arxiv_id: "hep-ex/0309075"
+    DOI: "10.1016/j.physletb.2003.10.001"
+    title: "Observation of the rare decay Ks->pi0e+e-"
+    authors: "NA48/1 Collaboration"
+    year: 2003
+    url: "https://arxiv.org/abs/hep-ex/0309075"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt"
+    sha256_of_local_snapshot: "sha256:406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
+    license_note: "ArXiv abstract-page text snapshot only; no PDF tracked."
+  - key: "IsidoriSmithUnterdorfer2004:KPi0LL"
+    arxiv_id: "hep-ph/0404127"
+    DOI: "10.1140/epjc/s2004-01880-7"
+    title: "The rare decay KL -> pi0 mu+ mu- within the SM"
+    authors: "Gino Isidori, Christopher Smith, Rene Unterdorfer"
+    year: 2004
+    url: "https://arxiv.org/abs/hep-ph/0404127"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K010/isidori_smith_unterdorfer_2004_arxiv.txt"
+    sha256_of_local_snapshot: "sha256:32066a94f013a4fc70cd7d7ecb583a4083944a7ab6754b8a3ae2e67f130fab7d"
+    license_note: "ArXiv abstract-page text snapshot only; no PDF tracked."
+  - key: "AebischerBurasKumar2022:RareKaons"
+    arxiv_id: "2203.09524"
+    DOI: null
+    title: "On the Importance of Rare Kaon Decays: A Snowmass 2021 White Paper"
+    authors: "Jason Aebischer, Andrzej J. Buras, Jacky Kumar"
+    year: 2022
+    url: "https://arxiv.org/abs/2203.09524"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K010/aebischer_buras_kumar_2022_arxiv.txt"
+    sha256_of_local_snapshot: "sha256:6c5ca61b13d7793bbcb53802130c9f324dd7902dc83163673d0055a20e15835e"
+    license_note: "ArXiv abstract-page text snapshot only; no PDF tracked."
+  - key: "CFW2008:RSFlavor"
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K010/cfw2008_rs_flavor_arxiv.txt"
+    sha256_of_local_snapshot: "sha256:7b5ea823d3e19e41401892e8051fc6b1f3c0557dded5e21ee8087f82c0008e8f"
+    license_note: "ArXiv abstract-page text snapshot only; no PDF tracked."

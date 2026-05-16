@@ -1,0 +1,103 @@
+schema: flavor_catalog.process.v1
+process_id: K010
+family: kaon
+standard_notation: "\\mathcal{B}(K_S\\to\\pi^0 e^+e^-)"
+process_name: "Short-lived neutral-kaon rare semileptonic electron mode"
+owner: "PKA"
+owner_agent_id: "PKA-K010"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:22:29-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:22:29-04:00"
+    agent_id: "PKA-K010"
+    reason: "Initial PKA source extraction and draft for K_S -> pi0 e+ e-."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:22:29-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_ks_pi0ee_pdgLive.txt: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
+  na48_2003_ks_pi0ee_arxiv.txt: "sha256:406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
+  isidori_smith_unterdorfer_2004_arxiv.txt: "sha256:32066a94f013a4fc70cd7d7ecb583a4083944a7ab6754b8a3ae2e67f130fab7d"
+  aebischer_buras_kumar_2022_arxiv.txt: "sha256:6c5ca61b13d7793bbcb53802130c9f324dd7902dc83163673d0055a20e15835e"
+  cfw2008_rs_flavor_arxiv.txt: "sha256:7b5ea823d3e19e41401892e8051fc6b1f3c0557dded5e21ee8087f82c0008e8f"
+pdg_or_equivalent:
+  source: "Particle Data Group 2026 pdgLive listing S012.10"
+  source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10"
+  access_date: "2026-05-16"
+  year: 2026
+  value_summary: "BR(K_S -> pi0 e+ e-, m_ee > 0.165 GeV) = (3.0^{+1.5}_{-1.2} stat +/- 0.2 syst) x 10^-9; PDG footnote gives full-region extrapolation BR = (5.8^{+2.9}_{-2.4}) x 10^-9 using a constant form factor and vector matrix element."
+  canonical_measurement:
+    observable: "BR(K_S -> pi0 e+ e-, m_ee > 0.165 GeV)"
+    value: 3.0e-9
+    uncertainty_stat_positive: 1.5e-9
+    uncertainty_stat_negative: 1.2e-9
+    uncertainty_syst: 0.2e-9
+    units: "branching fraction"
+    confidence_level: null
+    source_key: "PDG2026:K010"
+    experiment_key: "NA482003:KSPi0EE"
+    snapshot_path: "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt"
+    sha256_of_text_snapshot: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
+  extrapolated_total_rate:
+    observable: "BR(K_S -> pi0 e+ e-), full kinematic region"
+    value: 5.8e-9
+    uncertainty_positive: 2.9e-9
+    uncertainty_negative: 2.4e-9
+    units: "branching fraction"
+    assumptions: "constant form factor and vector matrix element"
+    source_key: "PDG2026:K010"
+    snapshot_path: "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt"
+    sha256_of_text_snapshot: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
+supporting_experimental_values:
+  - observable: "NA48/1 observed signal candidates"
+    value: 7
+    units: "events"
+    source_key: "NA482003:KSPi0EE"
+    snapshot_path: "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
+  - observable: "NA48/1 expected background"
+    value: 0.15
+    units: "events"
+    source_key: "NA482003:KSPi0EE"
+    snapshot_path: "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b"
+paper_era_reference:
+  - key: "CFW2008:RSFlavor"
+    relation: "RS/anarchic-flavor baseline for post-2008 comparison; not a K010 measured observable."
+    source_url: "https://arxiv.org/abs/0804.1954"
+    snapshot_path: "flavor_catalog/references/K010/cfw2008_rs_flavor_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:7b5ea823d3e19e41401892e8051fc6b1f3c0557dded5e21ee8087f82c0008e8f"
+  - key: "IsidoriSmithUnterdorfer2004:KPi0LL"
+    relation: "Theory context explaining why improved K_S -> pi0 l+ l- data reduces parametric uncertainty in K_L -> pi0 l+ l- predictions; not the K010 measured observable."
+    source_url: "https://arxiv.org/abs/hep-ph/0404127"
+    snapshot_path: "flavor_catalog/references/K010/isidori_smith_unterdorfer_2004_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:32066a94f013a4fc70cd7d7ecb583a4083944a7ab6754b8a3ae2e67f130fab7d"
+post_2008_developments:
+  - key: "AebischerBurasKumar2022:RareKaons"
+    relation: "Post-2008 rare-kaon review emphasizing K_{L,S} -> pi0 l+ l- branching ratios and q^2 spectra as new-physics probes."
+    source_url: "https://arxiv.org/abs/2203.09524"
+    snapshot_path: "flavor_catalog/references/K010/aebischer_buras_kumar_2022_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:6c5ca61b13d7793bbcb53802130c9f324dd7902dc83163673d0055a20e15835e"
+code_coverage:
+  status: "NO"
+  grep_commands:
+    - "rg -n \"K0S|K_S|KS|K\\(S\\)|pi0 e|pi\\^0 e|pi0e|S012\\.10|a_S|a_\\{S\\}|s\\s*->\\s*d.*e|DeltaS = 1|weak neutral current|rare kaon|semileptonic\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\*|R_K|R_D|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|K_L|K0L|K\\+.*pi\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma|evaluate_delta_mk\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+  result: "No K_S -> pi0 e+ e-, S012.10, a_S, or s -> d e+ e- implementation found in the requested directories. Hits for K_S are Delta F = 2 kaon mass-difference text or unrelated CKS matching."
+  nearest_existing_coverage:
+    - "quarkConstraints/deltaf2.py:209: DEFAULT_DELTA_F2_INPUTS_V1 starts the existing Delta F=2 observable list."
+    - "quarkConstraints/deltaf2.py:755: evaluate_delta_mk implements K_L-K_S mass-difference NP evaluation."
+    - "quarkConstraints/modern/phenomenology.py:23: MODERN_PHENOMENOLOGY_SYSTEM_IDS = (\"epsilon_K\", \"K\", \"B_d\", \"B_s\", \"D0\")"
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_notes: "Needs a new Delta S = 1 semileptonic rare-kaon observable, s -> d e+e- Wilson normalization, and a documented long-distance/form-factor treatment; existing Delta F=2 SLL/SLR/VLL/VRR/LR1/LR2 machinery does not cover this decay."
+open_issues:
+  - "Checker should confirm whether the catalog wants the directly measured m_ee > 0.165 GeV partial branching fraction or the model-extrapolated full-rate number as the default plotting value."

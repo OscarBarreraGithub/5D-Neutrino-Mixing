@@ -1,0 +1,52 @@
+Source key: PDG2026:K010
+Source: Particle Data Group pdgLive JSON API
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10
+Access date: 2026-05-16
+Edition reported by API: 2026
+PDG listing: S012.10
+Description: K0S --> pi0 e+ e-
+
+Relevant PDG API text snapshot:
+
+status_code: 200
+request_timestamp: 2026-05-16 11:21:56 PST
+pdgid: S012.10
+description: K0S --> pi0 e+ e-
+parent_pdgid: S012
+parent_description: K(S)0
+
+related_data:
+  pdgid: S012R10
+  description: G(K0S --> pi0 e+ e-)/G(total)
+  note: Test for DeltaS = 1 weak neutral current. Allowed by first-order weak interaction combined with electromagnetic interaction.
+
+Measurement used in average/fit:
+  document_id: BATLEY 2003
+  publication_name: PL B576 43
+  publication_year: 2003
+  doi: 10.1016/j.physletb.2003.10.001
+  inspire_id: 629156
+  title: Observation of the Rare Decay K0S --> pi0 e+ e-
+  event_count: 7
+  technique: NA48
+  comment: m(ee)>0.165 GeV
+  value_text: (3.0+1.5-1.2+-0.2) E-9
+  value: 3.0000000000000004E-9
+  error_positive: 1.5132745950421556E-9
+  error_negative: 1.216552506059644E-9
+  stat_error_positive: 1.5000000000000002E-9
+  stat_error_negative: 1.2E-9
+  syst_error_positive: 2.0000000000000003E-10
+  syst_error_negative: 2.0000000000000003E-10
+  used_in_average: true
+  used_in_fit: true
+
+PDG footnote:
+  BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.
+
+Older limits listed by PDG, not used in the average:
+  LAI 2001: <140E-9 at 90% CL, NA48.
+  BARR 1993B: <1100E-9 at 90% CL, NA31.
+  GIBBONS 1988: <45000E-9 at 90% CL, E731.
+
+License note: minimal text snapshot only; no PDG PDF tracked.
