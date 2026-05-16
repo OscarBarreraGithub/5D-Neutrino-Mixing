@@ -35,9 +35,19 @@ status_history:
     batch_id: "ca_w5a_top_higgs_ew"
     issues:
       - "CHK-1: TeX numerical claims for the SM B(t -> c g)=4.6e-12 benchmark and CFW 21/33 TeV RS context are outside pdg_or_equivalent.values; the CA checklist requires every TeX numerical physics claim to appear in pdg_or_equivalent with complete metadata."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T15:14:09-04:00"
+    timestamp: "2026-05-16T15:14:09-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    batch_id: "wa_w5a_top_higgs_ew_v2"
+    cycle: 2
+    reason: "Cycle-2 writer rework: mirrored CA-flagged SM and CFW numerical context claims into pdg_or_equivalent.values with complete metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:38-04:00"
+last_updated_at: "2026-05-16T15:14:09-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_tug_tcg.txt: "sha256:b58775f55944dad73ff185214195fd4d245431cb400e9f63bf6fcf35b490446a"
@@ -129,6 +139,33 @@ pdg_or_equivalent:
       source_url: "https://arxiv.org/abs/1610.03545"
       access_date: "2026-05-16"
       sha256: "sha256:75352c02b40e4f89fe4d6ba987d417f9c9b5e036b504c8bf0cc65fb180fb0470"
+    - value_id: "AguilarSaavedra2004:T005:SM"
+      observable: "Standard Model prediction for B(t -> c g), theory-context benchmark"
+      year: 2004
+      value: "4.6e-12"
+      uncertainty: "+1.1/-0.9 stat-like, +/-0.2, +/-0.4, +2.1/-0.7 theory components as quoted"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/hep-ph/0409342"
+      access_date: "2026-05-16"
+      sha256: "sha256:098fd502e902dff4a5607dd161b294970d04dae132e0485006c7167be089e782"
+    - value_id: "CFW2008:T005:ordinary_RS_KK_gluon_context"
+      observable: "Generic ordinary-RS KK-gluon mass scale from flavor constraints, theory context"
+      year: 2008
+      value: "about 21 TeV"
+      uncertainty: null
+      units: "TeV, theory-context mass scale"
+      source_url: "https://arxiv.org/abs/0804.1954"
+      access_date: "2026-05-16"
+      sha256: "sha256:1ecc5891da03b3e2d7433922f51b60fa29ff0bc93a317aee557439c5c4aeb439"
+    - value_id: "CFW2008:T005:pNGB_Higgs_KK_gluon_context"
+      observable: "Composite pseudo-Goldstone Higgs setup KK-gluon mass scale from flavor constraints, theory context"
+      year: 2008
+      value: "about 33 TeV"
+      uncertainty: null
+      units: "TeV, theory-context mass scale"
+      source_url: "https://arxiv.org/abs/0804.1954"
+      access_date: "2026-05-16"
+      sha256: "sha256:1ecc5891da03b3e2d7433922f51b60fa29ff0bc93a317aee557439c5c4aeb439"
 theory_context:
   source: "Aguilar-Saavedra 2004 top-FCNC review"
   source_url: "https://arxiv.org/abs/hep-ph/0409342"
@@ -152,18 +189,26 @@ paper_era_references:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/T005/cfw_0804_1954_rs_flavor.txt"
     sha256: "sha256:1ecc5891da03b3e2d7433922f51b60fa29ff0bc93a317aee557439c5c4aeb439"
-    provenance_note: "Paper-era RS flavor context only; the KK-gluon mass numbers are theoretical/model-normalization context, not measured pdg_or_equivalent observables."
+    provenance_note: "Paper-era RS flavor context only; the KK-gluon mass numbers are theoretical/model-normalization context and are mirrored in pdg_or_equivalent.values for CHK-1 traceability."
     values:
       - value_id: "CFW2008:T005:ordinary_RS_KK_gluon_context"
         observable: "Generic ordinary-RS KK-gluon mass scale from flavor constraints"
         year: 2008
         value: "about 21 TeV"
+        uncertainty: null
         units: "theory-context mass scale"
+        source_url: "https://arxiv.org/abs/0804.1954"
+        access_date: "2026-05-16"
+        sha256: "sha256:1ecc5891da03b3e2d7433922f51b60fa29ff0bc93a317aee557439c5c4aeb439"
       - value_id: "CFW2008:T005:pNGB_Higgs_KK_gluon_context"
         observable: "Composite pseudo-Goldstone Higgs setup KK-gluon mass scale from flavor constraints"
         year: 2008
         value: "about 33 TeV"
+        uncertainty: null
         units: "theory-context mass scale"
+        source_url: "https://arxiv.org/abs/0804.1954"
+        access_date: "2026-05-16"
+        sha256: "sha256:1ecc5891da03b3e2d7433922f51b60fa29ff0bc93a317aee557439c5c4aeb439"
 code_coverage:
   status: "NO"
   evidence:

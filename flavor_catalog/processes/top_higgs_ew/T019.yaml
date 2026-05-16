@@ -35,9 +35,19 @@ status_history:
     batch_id: "ca_w5a_top_higgs_ew"
     issues:
       - "CHK-1: TeX numerical claims for the Harnik-Kopp-Zupan order-10% LFV-Higgs EFT context are outside pdg_or_equivalent.values; the CA checklist requires every TeX numerical physics claim to appear in pdg_or_equivalent with complete metadata."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T15:14:09-04:00"
+    timestamp: "2026-05-16T15:14:09-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    batch_id: "wa_w5a_top_higgs_ew_v2"
+    cycle: 2
+    reason: "Cycle-2 writer rework: mirrored the CA-flagged Harnik-Kopp-Zupan order-10% LFV-Higgs EFT context claim into pdg_or_equivalent.values with complete metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:38-04:00"
+last_updated_at: "2026-05-16T15:14:09-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_higgs_lfv_review.txt: "sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e"
@@ -146,6 +156,15 @@ pdg_or_equivalent:
       source_url: "https://arxiv.org/abs/1907.06131"
       access_date: "2026-05-16"
       sha256: "sha256:726a7510795cbca7ef90dfb9f3c52e942afbff1434086a037496e8e84b755fdf"
+    - value_id: "HarnikKoppZupan2012:T019:LFV_Higgs_EFT_allowance"
+      observable: "Generic LFV-Higgs EFT allowance for h -> tau e, theory context"
+      year: 2012
+      value: "order 10%"
+      uncertainty: null
+      units: "branching fraction, theory-context allowance"
+      source_url: "https://arxiv.org/abs/1209.1397"
+      access_date: "2026-05-16"
+      sha256: "sha256:50662238edb6f9459f172f2c9129dafcc4accea50fcfa33adfedbf71f63b3740"
 paper_era_references:
   - key: "CsakiFalkowskiWeiler2008WarpedFlavor"
     arxiv_id: "0804.1954"
@@ -176,10 +195,16 @@ post_2008_theory_context:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/T019/harnik_kopp_zupan2012_arxiv_abs.txt"
     sha256: "sha256:50662238edb6f9459f172f2c9129dafcc4accea50fcfa33adfedbf71f63b3740"
-    context_note: "Theory motivation for direct h -> tau e searches; the order-10% statement is not a measured experimental observable and is intentionally outside pdg_or_equivalent."
+    context_note: "Theory motivation for direct h -> tau e searches; the order-10% statement is not a measured experimental observable and is mirrored in pdg_or_equivalent.values for CHK-1 traceability."
     context_values:
       - observable: "generic LFV-Higgs EFT allowance for h -> tau e"
+        year: 2012
         value: "order 10%"
+        uncertainty: null
+        units: "branching fraction, theory-context allowance"
+        source_url: "https://arxiv.org/abs/1209.1397"
+        access_date: "2026-05-16"
+        sha256: "sha256:50662238edb6f9459f172f2c9129dafcc4accea50fcfa33adfedbf71f63b3740"
 code_coverage:
   status: "NO"
   evidence:
