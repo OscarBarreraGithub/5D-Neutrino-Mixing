@@ -1,0 +1,97 @@
+% Flavor catalog per-process template.
+% process_id: K003
+% family: kaon
+% owner_agent_id: PKA-K003
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K003.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(\varepsilon'/\varepsilon\) in \(K\to\pi\pi\)}{epsilon prime over epsilon in K to pi pi}}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathrm{Re}(\varepsilon'/\varepsilon)\).
+This entry covers direct CP violation in the two-pion decay amplitudes of
+neutral kaons, commonly written through
+\(\mathrm{Re}(\varepsilon'/\varepsilon)=(1-|\eta_{00}/\eta_{+-}|)/3\).
+The process id is \(K003\), matching the kaon-sector row for
+``epsilon'/epsilon'' in plan v1.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical numerical value is taken from the sidecar
+\texttt{pdg\_or\_equivalent} block:
+\[
+  \mathrm{Re}(\varepsilon'/\varepsilon)=0.00166\pm0.00023
+  = (16.6\pm2.3)\times 10^{-4}.
+\]
+The local PDG snapshot is
+\texttt{flavor\_catalog/references/K003/pdg\_live\_S013\_20260516.txt}.
+The companion PDG DataBlock snapshot records the measurement table and the
+two dominant modern inputs: KTeV reports
+\((19.2\pm2.1)\times10^{-4}\), while NA48 reports
+\((14.7\pm2.2)\times10^{-4}\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Unlike \(\varepsilon_K\), this is a \(\Delta S=1\) nonleptonic observable.
+It tests CP-odd short-distance contributions to the \(K\to\pi\pi\) amplitudes
+after they are filtered through long-distance QCD.  In warped or composite
+flavor models with anarchic Yukawas, the dangerous effects are not the
+repo's current neutral-meson-mixing operators but new penguin, scalar/tensor,
+and dipole structures.  BSM master-formula work identifies strong sensitivity
+to electroweak left-right penguin \(Q_8\), QCD penguin \(Q_6\), and
+chromo-magnetic \(O_{8g}\)-type operators, making the channel a natural
+stress test for UV completions with non-minimal chirality structure.
+
+\subsection*{Post-2008 developments}
+The experimental average has not been replaced by a new kaon experiment, but
+KTeV's final \(K\to\pi\pi\) result was published after the CFW-era reference
+point.  The major post-2008 changes are theoretical.  RBC/UKQCD produced a
+physical-kinematics lattice calculation of \(A_0\) and \(\varepsilon'\),
+finding \(\mathrm{Re}(\varepsilon'/\varepsilon)=
+21.7(2.6)(6.2)(5.0)\times10^{-4}\).  Aebischer, Bobeth, and Buras then
+reanalysed the same ratio with NNLO electroweak-penguin corrections and
+ChPT isospin-breaking inputs, obtaining
+\((17.4\pm6.1)\times10^{-4}\) in the octet treatment and
+\((13.9\pm5.2)\times10^{-4}\) in the nonet treatment.  In parallel, 2019
+BSM master-formula papers organized the \(\Delta S=1\) operator dependence
+in WET/SMEFT language rather than treating \(\varepsilon'/\varepsilon\) as a
+single phenomenological number.
+
+\subsection*{Constraint validity and model dependence}
+As a catalog constraint, \(K003\) is highly informative but not plug-and-play.
+The experimental number is cleanly established, while the SM subtraction and
+BSM interpretation depend on hadronic matrix elements, isospin breaking,
+operator matching, and RG evolution.  It should be classified as a
+theory-limited, model-dependent \(\Delta S=1\) amplitude constraint rather
+than a robust tree-level exclusion like the current \(\Delta F=2\) kaon lane.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no direct implementation of
+\(\varepsilon'/\varepsilon\), \(K\to\pi\pi\), \(\Delta S=1\), \(Q_6\),
+\(Q_8\), or \(O_{8g}\).  The nearby kaon code is explicitly a
+\(\Delta F=2\) benchmark slice in \texttt{quarkConstraints/deltaf2.py:1},
+with default inputs for \(\varepsilon_K\) at
+\texttt{quarkConstraints/deltaf2.py:209} and an
+\(\varepsilon_K\) evaluator at \texttt{quarkConstraints/deltaf2.py:729}.
+The modern policy surface likewise enumerates only
+\(\varepsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) systems at
+\texttt{quarkConstraints/modern/phenomenology.py:23}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production constraint would require a new \(\Delta S=1\)
+operator basis, matching from the warped/composite UV model to WET/SMEFT
+coefficients, RG running to hadronic scales, and lattice/ChPT inputs for
+\(K\to\pi\pi\) matrix elements.  The current \(\Delta F=2\) VLL/VRR/LR
+machinery cannot be reused as a direct evaluator.
+
+\subsection*{Key references}
+Local source keys: \texttt{pdg\_live\_S013\_20260516},
+\texttt{pdg\_live\_S013EPS\_datablock\_20260516}, \texttt{ktev\_2011},
+\texttt{na48\_2002}, \texttt{rbc\_ukqcd\_2020},
+\texttt{aebischer\_buras\_2020}, \texttt{bsm\_master\_2019},
+\texttt{bsm\_anatomy\_2019}, and \texttt{cfw\_2008}.
+

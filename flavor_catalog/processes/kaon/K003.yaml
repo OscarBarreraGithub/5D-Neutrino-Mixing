@@ -1,0 +1,141 @@
+schema: flavor_catalog.process.v1
+process_id: K003
+family: kaon
+standard_notation: "\\mathrm{Re}(\\varepsilon'/\\varepsilon)"
+process_name: "Direct CP violation in K -> pi pi"
+owner: PKA
+owner_agent_id: PKA-K003
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:07:50-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:07:50-04:00"
+    agent_id: "PKA-K003"
+    reason: "Initial PKA draft and source deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:07:50-04:00"
+version: "0.1.0"
+pdg_or_equivalent:
+  year: 2025
+  source: "Particle Data Group pdgLive K0 listing, row S013EPS"
+  observable: "Re(epsilon'/epsilon)"
+  value: 0.00166
+  uncertainty: 0.00023
+  units: "dimensionless"
+  display_value: "Re(epsilon'/epsilon) = 0.00166 +/- 0.00023 = (16.6 +/- 2.3) x 10^-4"
+  source_url: "https://pdglive.lbl.gov/Particle.action?home=MXXX020&init=0&node=S013"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/K003/pdg_live_S013_20260516.txt"
+  sha256_of_text_snapshot: "230285c9b8cbc43b2cf24f502a757d4962d6a6c069bee84ff1a3885214eef954"
+supporting_values:
+  - key: pdg_datablock_fit
+    source: "Particle Data Group pdgLive DataBlock S013EPS"
+    value: 1.67
+    uncertainty: 0.23
+    units: "10^-3"
+    display_value: "OUR FIT: 1.67 +/- 0.23 in units of 10^-3"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/DataBlock.action?cl=CPV&desig=&init=0&node=S013EPS&parCode=S013EPS"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K003/pdg_live_S013EPS_datablock_20260516.txt"
+    sha256_of_text_snapshot: "283335664646847da421f3a291c3ba0f872a876bb366e6d1443f2ad8853a0d2b"
+  - key: pdg_datablock_average
+    source: "Particle Data Group pdgLive DataBlock S013EPS"
+    value: 1.68
+    uncertainty: 0.20
+    units: "10^-3"
+    display_value: "OUR AVERAGE: 1.68 +/- 0.20 in units of 10^-3"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/DataBlock.action?cl=CPV&desig=&init=0&node=S013EPS&parCode=S013EPS"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K003/pdg_live_S013EPS_datablock_20260516.txt"
+    sha256_of_text_snapshot: "283335664646847da421f3a291c3ba0f872a876bb366e6d1443f2ad8853a0d2b"
+  - key: ktev_2011
+    source: "KTeV Collaboration, arXiv:1011.0127"
+    value: 19.2
+    uncertainty: 2.1
+    units: "10^-4"
+    display_value: "Re(epsilon'/epsilon) = (19.2 +/- 2.1) x 10^-4"
+    source_url: "https://arxiv.org/abs/1011.0127"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_1011.0127_ktev_2011.txt"
+    sha256_of_text_snapshot: "8257d37c79b0d6ad9aabec44bf349de4179b2963b0281ddc5668d4cb319cb67b"
+  - key: na48_2002
+    source: "NA48 Collaboration, arXiv:hep-ex/0208009"
+    value: 14.7
+    uncertainty: 2.2
+    units: "10^-4"
+    display_value: "Re(epsilon'/epsilon) = (14.7 +/- 2.2) x 10^-4"
+    source_url: "https://arxiv.org/abs/hep-ex/0208009"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_hep-ex_0208009_na48_2002.txt"
+    sha256_of_text_snapshot: "72baed88144b5602618bcdbdf30be48da6485fbf9a4ecda1fc65e3549208fe67"
+  - key: rbc_ukqcd_2020
+    source: "RBC and UKQCD Collaborations, arXiv:2004.09440"
+    value: 21.7
+    uncertainty: "2.6(stat), 6.2(syst), 5.0(isospin breaking)"
+    units: "10^-4"
+    display_value: "Re(epsilon'/epsilon) = 21.7(2.6)(6.2)(5.0) x 10^-4"
+    source_url: "https://arxiv.org/abs/2004.09440"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_2004.09440_rbcukqcd_2020.txt"
+    sha256_of_text_snapshot: "ed6a62e309e14474e096d064f03080077c920674e772c4b1eede57530b5180d4"
+  - key: aebischer_buras_2020_octet
+    source: "Aebischer, Bobeth, and Buras, arXiv:2005.05978"
+    value: 17.4
+    uncertainty: 6.1
+    units: "10^-4"
+    display_value: "(epsilon'/epsilon)_SM^(8) = (17.4 +/- 6.1) x 10^-4"
+    source_url: "https://arxiv.org/abs/2005.05978"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_2005.05978_aebischer_buras_2020.txt"
+    sha256_of_text_snapshot: "c133e14c8a137a53a819a925d64cb85821349fd2770963226233880117afebe4"
+  - key: aebischer_buras_2020_nonet
+    source: "Aebischer, Bobeth, and Buras, arXiv:2005.05978"
+    value: 13.9
+    uncertainty: 5.2
+    units: "10^-4"
+    display_value: "(epsilon'/epsilon)_SM^(9) = (13.9 +/- 5.2) x 10^-4"
+    source_url: "https://arxiv.org/abs/2005.05978"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_2005.05978_aebischer_buras_2020.txt"
+    sha256_of_text_snapshot: "c133e14c8a137a53a819a925d64cb85821349fd2770963226233880117afebe4"
+source_shas:
+  pdg_live_S013_20260516.txt: "sha256:230285c9b8cbc43b2cf24f502a757d4962d6a6c069bee84ff1a3885214eef954"
+  pdg_live_S013EPS_datablock_20260516.txt: "sha256:283335664646847da421f3a291c3ba0f872a876bb366e6d1443f2ad8853a0d2b"
+  arxiv_1011.0127_ktev_2011.txt: "sha256:8257d37c79b0d6ad9aabec44bf349de4179b2963b0281ddc5668d4cb319cb67b"
+  arxiv_hep-ex_0208009_na48_2002.txt: "sha256:72baed88144b5602618bcdbdf30be48da6485fbf9a4ecda1fc65e3549208fe67"
+  arxiv_2004.09440_rbcukqcd_2020.txt: "sha256:ed6a62e309e14474e096d064f03080077c920674e772c4b1eede57530b5180d4"
+  arxiv_2005.05978_aebischer_buras_2020.txt: "sha256:c133e14c8a137a53a819a925d64cb85821349fd2770963226233880117afebe4"
+  arxiv_1807.02520_bsm_master_formula_2019.txt: "sha256:7b7d7a235bd1662a684fa8da2000035359fae194f347faebf68de100cbc96835"
+  arxiv_1808.00466_bsm_anatomy_2019.txt: "sha256:9ae9683bb35a5d025f07b33d9d1993af425365ae505ea919734566a32bab9dae"
+  arxiv_0804.1954_cfw_2008.txt: "sha256:e2e0ad246258366c6b5d232cc0b20f8d1d4fb9382b2d209862ec225351220c85"
+code_coverage:
+  status: "NO"
+  searched_directories:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"epsilon_prime|eps_prime|epsilon.?/epsilon|varepsilon.?/varepsilon|K.?->.?pi.?pi|KtoPiPi|Delta S.?=.?1|DeltaS1|chromomagnetic|O_8g|Q_6|Q_8\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"epsilon.?prime|eps.?prime|epsilon'|varepsilon.?prime|epsilon\\s*/\\s*epsilon|eps\\s*/\\s*eps|K.*pi.*pi|pi.*pi.*K|chromomagnetic|penguin|Q_6|Q_8|Delta I|DeltaI|A0|A2|Re A0|Re A2\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "No direct K003 matches from the focused grep command; exit status 1."
+    - "quarkConstraints/deltaf2.py:1 implements a Delta F = 2 benchmark observable layer, not Delta S = 1 K -> pi pi amplitudes."
+    - "quarkConstraints/deltaf2.py:209 lists epsilon_K, B_d, B_s, and D mixing inputs."
+    - "quarkConstraints/deltaf2.py:729 defines evaluate_epsilon_k, not epsilon'/epsilon."
+    - "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 policy systems."
+implementation_difficulty: HIGH
+implementation_difficulty_reason: "Requires new Delta S = 1 WET/SMEFT matching, RG evolution, K -> pi pi matrix elements, and treatment of electroweak/QCD penguin plus chromomagnetic operators; the repo's Delta F = 2 machinery is not a direct evaluator."
+open_issues:
+  - "Checker should confirm whether the catalog standard prefers the PDG listing value 0.00166 +/- 0.00023 or the S013EPS DataBlock OUR AVERAGE 1.68 +/- 0.20 in units of 10^-3."
+

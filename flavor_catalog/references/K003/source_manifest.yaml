@@ -1,0 +1,86 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: K003
+access_date: "2026-05-16"
+references:
+  - key: pdg_live_S013_20260516
+    arxiv_id: null
+    DOI: null
+    title: "pdgLive K0 particle listing, S013EPS row"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdglive.lbl.gov/Particle.action?home=MXXX020&init=0&node=S013"
+    sha256_of_local_snapshot: "230285c9b8cbc43b2cf24f502a757d4962d6a6c069bee84ff1a3885214eef954"
+    snapshot_path: "flavor_catalog/references/K003/pdg_live_S013_20260516.txt"
+  - key: pdg_live_S013EPS_datablock_20260516
+    arxiv_id: null
+    DOI: null
+    title: "pdgLive DataBlock S013EPS"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/DataBlock.action?cl=CPV&desig=&init=0&node=S013EPS&parCode=S013EPS"
+    sha256_of_local_snapshot: "283335664646847da421f3a291c3ba0f872a876bb366e6d1443f2ad8853a0d2b"
+    snapshot_path: "flavor_catalog/references/K003/pdg_live_S013EPS_datablock_20260516.txt"
+  - key: ktev_2011
+    arxiv_id: "1011.0127"
+    DOI: "10.1103/PhysRevD.83.092001"
+    title: "Precise Measurements of Direct CP Violation, CPT Symmetry, and Other Parameters in the Neutral Kaon System"
+    authors: "KTeV Collaboration, E. Abouzaid et al."
+    year: 2011
+    url: "https://arxiv.org/abs/1011.0127"
+    sha256_of_local_snapshot: "8257d37c79b0d6ad9aabec44bf349de4179b2963b0281ddc5668d4cb319cb67b"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_1011.0127_ktev_2011.txt"
+  - key: na48_2002
+    arxiv_id: "hep-ex/0208009"
+    DOI: "10.1016/S0370-2693(02)02476-0"
+    title: "A precision measurement of direct CP violation in the decay of neutral kaons into two pions"
+    authors: "J. R. Batley et al. (NA48 Collaboration)"
+    year: 2002
+    url: "https://arxiv.org/abs/hep-ex/0208009"
+    sha256_of_local_snapshot: "72baed88144b5602618bcdbdf30be48da6485fbf9a4ecda1fc65e3549208fe67"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_hep-ex_0208009_na48_2002.txt"
+  - key: rbc_ukqcd_2020
+    arxiv_id: "2004.09440"
+    DOI: "10.1103/PhysRevD.102.054509"
+    title: "Direct CP violation and the Delta I=1/2 rule in K->pipi decay from the Standard Model"
+    authors: "Ryan Abbott et al. (RBC and UKQCD Collaborations)"
+    year: 2020
+    url: "https://arxiv.org/abs/2004.09440"
+    sha256_of_local_snapshot: "ed6a62e309e14474e096d064f03080077c920674e772c4b1eede57530b5180d4"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_2004.09440_rbcukqcd_2020.txt"
+  - key: aebischer_buras_2020
+    arxiv_id: "2005.05978"
+    DOI: "10.1140/epjc/s10052-020-8267-1"
+    title: "epsilon'/epsilon in the Standard Model at the Dawn of the 2020s"
+    authors: "Jason Aebischer, Christoph Bobeth, Andrzej J. Buras"
+    year: 2020
+    url: "https://arxiv.org/abs/2005.05978"
+    sha256_of_local_snapshot: "c133e14c8a137a53a819a925d64cb85821349fd2770963226233880117afebe4"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_2005.05978_aebischer_buras_2020.txt"
+  - key: bsm_master_2019
+    arxiv_id: "1807.02520"
+    DOI: "10.1016/j.physletb.2019.04.016"
+    title: "Master formula for epsilon'/epsilon beyond the Standard Model"
+    authors: "Jason Aebischer, Christoph Bobeth, Andrzej J. Buras, Jean-Marc Gerard, David M. Straub"
+    year: 2019
+    url: "https://arxiv.org/abs/1807.02520"
+    sha256_of_local_snapshot: "7b7d7a235bd1662a684fa8da2000035359fae194f347faebf68de100cbc96835"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_1807.02520_bsm_master_formula_2019.txt"
+  - key: bsm_anatomy_2019
+    arxiv_id: "1808.00466"
+    DOI: "10.1140/epjc/s10052-019-6715-6"
+    title: "Anatomy of epsilon'/epsilon beyond the Standard Model"
+    authors: "Jason Aebischer, Christoph Bobeth, Andrzej J. Buras, David M. Straub"
+    year: 2019
+    url: "https://arxiv.org/abs/1808.00466"
+    sha256_of_local_snapshot: "9ae9683bb35a5d025f07b33d9d1993af425365ae505ea919734566a32bab9dae"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_1808.00466_bsm_anatomy_2019.txt"
+  - key: cfw_2008
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "e2e0ad246258366c6b5d232cc0b20f8d1d4fb9382b2d209862ec225351220c85"
+    snapshot_path: "flavor_catalog/references/K003/arxiv_0804.1954_cfw_2008.txt"
+
