@@ -1,0 +1,220 @@
+schema: flavor_catalog.process.v1
+process_id: K018
+family: kaon
+standard_notation: "K_{l3}: K -> pi e nu and K -> pi mu nu; |V_us| f_+(0)"
+process_name: "Kaon semileptonic decays and source-level V_us input"
+owner: "PKA"
+owner_agent_id: "PKA-K018"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T15:31:04-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T15:31:04-04:00"
+    agent_id: "PKA-K018"
+    reason: "PKA source extraction and K018 draft started"
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T15:31:04-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T15:31:04-04:00"
+    agent_id: "PKA-K018"
+    reason: "Initial K018 source snapshots, sidecar, TeX draft, and worklog deposited"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T15:31:04-04:00"
+version: "0.1.0"
+source_shas:
+  cfw2008_arxiv0804_1954.txt: "sha256:68edf12334b909abe22a3d24cda1ee06591e3b1a371daa26be79d92dadd79249"
+  flag2024_kaon_semileptonic.txt: "sha256:7a1062d3a82bfd02a302caca71990d4af246ca570dca4e84d2eae66d367284f9"
+  flavianet2010_kl3.txt: "sha256:c8855c1e4539b66e5595b6ccb71122f80ce8084944c4fdd83a5a7089d520464f"
+  pdg2025_vud_vus_kl3.txt: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+pdg_or_equivalent:
+  - value_id: "PDG2025:K018:average_fplus_vus"
+    observable: "|V_us| f_+(0) from K_l3 average"
+    year: 2025
+    value: 0.21656
+    uncertainty: 0.00035
+    units: "dimensionless"
+    source: "PDG Vud, Vus, the Cabibbo Angle, and CKM Unitarity review, 2025 update"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
+    sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+    value_summary: "|V_us| f_+(0) = 0.21656(35), average including correlation effects"
+  - value_id: "PDG2025:K018:Kpm_e3"
+    observable: "|V_us| f_+(0) from K+- e3"
+    year: 2025
+    value: 0.2169
+    uncertainty: 0.0006
+    units: "dimensionless"
+    source: "PDG Table 67.1"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
+    sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+  - value_id: "PDG2025:K018:Kpm_mu3"
+    observable: "|V_us| f_+(0) from K+- mu3"
+    year: 2025
+    value: 0.2168
+    uncertainty: 0.0010
+    units: "dimensionless"
+    source: "PDG Table 67.1"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
+    sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+  - value_id: "PDG2025:K018:KL_e3"
+    observable: "|V_us| f_+(0) from K_L e3"
+    year: 2025
+    value: 0.2162
+    uncertainty: 0.0005
+    units: "dimensionless"
+    source: "PDG Table 67.1"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
+    sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+  - value_id: "PDG2025:K018:KL_mu3"
+    observable: "|V_us| f_+(0) from K_L mu3"
+    year: 2025
+    value: 0.2165
+    uncertainty: 0.0006
+    units: "dimensionless"
+    source: "PDG Table 67.1"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
+    sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+  - value_id: "PDG2025:K018:KS_e3"
+    observable: "|V_us| f_+(0) from K_S e3"
+    year: 2025
+    value: 0.2169
+    uncertainty: 0.0008
+    units: "dimensionless"
+    source: "PDG Table 67.1"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
+    sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+  - value_id: "PDG2025:K018:KS_mu3"
+    observable: "|V_us| f_+(0) from K_S mu3"
+    year: 2025
+    value: 0.2125
+    uncertainty: 0.0047
+    units: "dimensionless"
+    source: "PDG Table 67.1"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
+    sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+  - value_id: "FlaviaNet2010:K018:average_fplus_vus"
+    observable: "|V_us| f_+(0) from K_l3 average"
+    year: 2010
+    value: 0.2163
+    uncertainty: 0.0005
+    units: "dimensionless"
+    fit_quality: "chi2/ndf = 0.77/4, P = 94%"
+    source: "FlaviaNet Working Group on Kaon Decays, arXiv:1005.2323"
+    source_url: "https://arxiv.org/abs/1005.2323"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/flavianet2010_kl3.txt"
+    sha256: "sha256:c8855c1e4539b66e5595b6ccb71122f80ce8084944c4fdd83a5a7089d520464f"
+  - value_id: "FlaviaNet2010:K018:r_mue"
+    observable: "K_mu3 / K_e3 lepton-universality ratio r_mu e"
+    year: 2010
+    value: 1.002
+    uncertainty: 0.005
+    units: "dimensionless"
+    source: "FlaviaNet Working Group on Kaon Decays, arXiv:1005.2323"
+    source_url: "https://arxiv.org/abs/1005.2323"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/flavianet2010_kl3.txt"
+    sha256: "sha256:c8855c1e4539b66e5595b6ccb71122f80ce8084944c4fdd83a5a7089d520464f"
+auxiliary_inputs:
+  - value_id: "PDG2025:K018:Vus_from_Kl3"
+    observable: "|V_us| derived from K_l3 and FLAG f_+(0), Nf=2+1+1"
+    year: 2025
+    value: 0.22330
+    uncertainty_total: 0.00053
+    uncertainty_breakdown:
+      experimental: 0.00035
+      lattice: 0.00039
+      radiative_isospin: 0.00008
+    units: "dimensionless"
+    source: "PDG 2025 update, Eq. 67.13"
+    snapshot_path: "flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt"
+    sha256: "sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66"
+  - value_id: "FLAG2024:K018:fplus_Nf211"
+    observable: "f_+(0), direct lattice average"
+    year: 2024
+    value: 0.9698
+    uncertainty: 0.0017
+    nf: "2+1+1"
+    units: "dimensionless"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/flag2024_kaon_semileptonic.txt"
+    sha256: "sha256:7a1062d3a82bfd02a302caca71990d4af246ca570dca4e84d2eae66d367284f9"
+  - value_id: "FLAG2024:K018:Vus_from_fplus_Nf211"
+    observable: "|V_us| derived from |V_us| f_+(0) and f_+(0)"
+    year: 2024
+    value: 0.22328
+    uncertainty: 0.00058
+    nf: "2+1+1"
+    units: "dimensionless"
+    source: "FLAG Review 2024, arXiv:2411.04268"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/flag2024_kaon_semileptonic.txt"
+    sha256: "sha256:7a1062d3a82bfd02a302caca71990d4af246ca570dca4e84d2eae66d367284f9"
+paper_era_reference:
+  - value_id: "CFW2008:K018:rs_flavor_context"
+    observable: "2008-era RS flavor context, not a K_l3 measured observable"
+    year: 2008
+    values:
+      generic_rs_kk_gluon_scale_TeV: 21
+      composite_higgs_kk_gluon_scale_TeV: 33
+    source: "Csaki, Falkowski, Weiler, arXiv:0804.1954"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K018/cfw2008_arxiv0804_1954.txt"
+    sha256: "sha256:68edf12334b909abe22a3d24cda1ee06591e3b1a371daa26be79d92dadd79249"
+code_coverage:
+  status: "PARTIAL"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  evidence:
+    - "quarkConstraints/scan.py:43 documents PDG-derived global-fit averages including |V_us|."
+    - "quarkConstraints/scan.py:247 labels the reduced CKM observable set as Vus, Vcb, Vub, J."
+    - "tests/test_quark_fit.py:587 anchors the |V_us| target convention against PDG 2024."
+  missing:
+    - "No K_l3, K_e3, K_mu3, |V_us| f_+(0), f_+(0), radiative/isospin correction, or semileptonic-kaon likelihood implementation was found."
+    - "quarkConstraints/modern/phenomenology.py:23 limits the modern phenomenology systems to epsilon_K, K, B_d, B_s, and D0."
+  grep_commands:
+    - command: "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "Finds Delta F = 2 neutral-meson and mu->e gamma surfaces only."
+    - command: "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "No K_l3 implementation; hits are unrelated Delta F = 2, LFV, QCD, and benchmark surfaces."
+    - command: "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+      result_summary: "Confirms implemented/policy surfaces are neutral-meson Delta F = 2 systems plus mu->e gamma."
+    - command: "rg -n \"K.?l3|K_l3|Kell3|Ke3|Kmu3|K.?->.?pi.?e.?nu|K.?->.?pi.?mu.?nu|Vus.*f|f_\\\\+\\\\(0\\\\)|semileptonic kaon|Cabibbo|V_us|Vus\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "Finds only generic CKM |V_us| fit targets and tests, not K_l3 source observables."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "A live K018 constraint requires a new charged-current semileptonic observable or EW002 sub-likelihood, radiative/isospin and phase-space conventions, lattice f_+(0) provenance, and BSM charged-current matching. Existing Delta F = 2 operators do not cover it."
+open_issues:
+  - "WA/CA should decide whether K018 remains PARTIAL because generic |V_us| exists in the quark fit, or is downgraded to NO for missing source-level K_l3 rates."
+  - "If promoted to live code, PI must choose whether K018 is represented as an independent K_l3 likelihood or only as an input block to EW002 CKM unitarity."

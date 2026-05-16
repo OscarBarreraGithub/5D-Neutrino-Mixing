@@ -1,0 +1,49 @@
+Source snapshot: PDG Review "Vud, Vus, the Cabibbo Angle, and CKM Unitarity"
+Access date: 2026-05-16
+URL: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+Edition/date on source: 2025 update, source text dated 1st December 2025
+Local extraction: pdftotext excerpt only; publisher PDF not tracked.
+
+Relevant extraction for K018:
+
+PDG Section 67.2 gives the photon-inclusive K_l3 rate formula
+for K -> pi l nu, l = e or mu. It states that the experimental
+measurements are the semileptonic decay widths from branching
+fractions and lifetimes, plus measured form factors for phase-space
+integrals. Theory enters through short-distance electroweak
+corrections, long-distance radiative corrections, isospin-breaking
+corrections, and f_+(0).
+
+The review says that following Moulson and the FlaviaNet group, with
+recent QED-radiative-correction improvements and the isospin-violating
+effect included, the K_l3 products are:
+
+Table 67.1: |Vus| f_+(0) from K_l3, based on Refs. [25,56]
+
+Decay mode        |Vus| f_+(0)
+K+- e3            0.2169(6)
+K+- mu3           0.2168(10)
+K_L e3            0.2162(5)
+K_L mu3           0.2165(6)
+K_S e3            0.2169(8)
+K_S mu3           0.2125(47)
+Average           0.21656(35)
+
+Equation (67.11): f_+(0) |Vus| = 0.21656(35), labeled FLAVIANET.
+
+The same passage states that the result leads to
+|Vus| = 0.22330(35)_exp (39)_LAT (8)_RC+IB (53)_TOT.
+
+FLAG lattice inputs quoted by PDG in Eq. (67.12):
+f_+(0) = 0.9677(27), Nf = 2 + 1
+f_+(0) = 0.9698(17), Nf = 2 + 1 + 1
+
+PDG Eq. (67.13) updates the K_l3 extraction to:
+|Vus| = 0.2238(4)_exp+RC (6)_lattice for Nf = 2 + 1
+|Vus| = 0.22330(4)_exp+RC (4)_lattice for Nf = 2 + 1 + 1
+
+Catalog note:
+For the K018 sidecar, the measured PDG/FlaviaNet observables are the
+mode-by-mode and averaged |Vus| f_+(0) products. The f_+(0) lattice
+normalization and derived |Vus| values are auxiliary/theory inputs, not
+standalone measured PDG observables.

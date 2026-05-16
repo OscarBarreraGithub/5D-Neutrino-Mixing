@@ -1,0 +1,42 @@
+Source snapshot: FLAG Review 2024, light-meson kaon/pion decay section
+Access date: 2026-05-16
+URL: https://arxiv.org/abs/2411.04268
+arXiv: 2411.04268
+Title: FLAG Review 2024
+Local extraction: pdftotext excerpt only; arXiv PDF not tracked.
+
+Relevant extraction for K018:
+
+FLAG Section 5 covers leptonic and semileptonic kaon and pion decay,
+|Vud|, and |Vus|. Section 5.1 states that precision experimental data
+on kaon decays determine:
+
+|Vus| f_+(0) = 0.21654(41)
+|Vus / Vud| f_K+- / f_pi+- = 0.27599(41)
+
+FLAG defines f_+(q^2) as a form factor relevant for the semileptonic
+decay K0 -> pi- l nu and emphasizes the q^2 = 0 value:
+f_+(0) = f_+^{K0 pi-}(0).
+
+FLAG Section 5.3.1 states that the Nf = 2 + 1 + 1 average for f_+(0)
+is based on FNAL/MILC 18 and ETM 16, while the Nf = 2 + 1 average is
+based on FNAL/MILC 12I and RBC/UKQCD 15A:
+
+direct, Nf = 2 + 1 + 1: f_+(0) = 0.9698(17)
+direct, Nf = 2 + 1:     f_+(0) = 0.9677(27)
+
+FLAG Section 5.3.3 converts these averages into CKM elements. For
+Nf = 2 + 1 + 1, Eq. (72) maps into:
+
+|Vus| = 0.22328(58)
+
+FLAG Section 5.4 tests first-row CKM unitarity. Combining f_+(0) for
+Nf = 2 + 1 + 1 with the PDG estimate of |Vud| gives:
+
+|Vu|^2 = 0.99802(66)
+
+Catalog note:
+For K018, FLAG is used as the current lattice/theory normalization
+and a cross-check on the experimental |Vus| f_+(0) product. The
+measured semileptonic product belongs in pdg_or_equivalent; f_+(0),
+derived |Vus|, and unitarity sums are auxiliary/theory or EW002 inputs.

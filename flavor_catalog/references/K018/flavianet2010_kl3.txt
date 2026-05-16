@@ -1,0 +1,51 @@
+Source snapshot: FlaviaNet Working Group on Kaon Decays
+Access date: 2026-05-16
+URL: https://arxiv.org/abs/1005.2323
+arXiv: 1005.2323
+DOI: 10.1140/epjc/s10052-010-1406-3
+Title: An evaluation of |Vus| and precise tests of the Standard Model
+       from world data on leptonic and semileptonic kaon decays
+Local extraction: pdftotext excerpt only; arXiv PDF not tracked.
+
+Relevant extraction for K018:
+
+Section 2.2 gives the Standard Model photon-inclusive K_l3(gamma)
+rate expression. It uses the combination |Vus| f_+^{K0 pi-}(0),
+phase-space integrals I_Kl, the short-distance electroweak correction
+S_EW, long-distance electromagnetic corrections, and SU(2)-breaking
+corrections.
+
+Section 4.1, "Determination of |Vus| f_+(0)", states that for the five
+decay modes with rate measurements the FlaviaNet analysis evaluates
+|Vus| f_+(0) from decay-rate data, phase-space integrals from
+dispersive fits, long-distance radiative corrections, and SU(2)
+breaking corrections. The principal experimental result is:
+
+|Vus| f_+(0) = 0.2163(5)
+
+It reports chi2/ndf = 0.77/4, P = 94%.
+
+Table 14 values:
+
+Mode             |Vus| f_+(0)
+K_L -> pi e nu    0.2163(6)
+K_L -> pi mu nu   0.2166(6)
+K_S -> pi e nu    0.2155(13)
+K+- -> pi e nu    0.2160(11)
+K+- -> pi mu nu   0.2158(14)
+Average           0.2163(5)
+
+Section 4.3 compares Ke3 and Kmu3 values as a lepton-universality
+test and gives:
+
+r_mu e = 1.002(5)
+
+Section 4.5 uses |Vus| f_+(0) = 0.2163(5) with f_+(0) = 0.959(5)
+and K_l2 information for a then-current CKM unitarity test; it finds:
+
+Delta_CKM = -0.0001(6)
+
+Catalog note:
+This is the post-2008 FlaviaNet consolidation that the 2025 PDG review
+still labels as the K_l3 product convention. It is the historical bridge
+between older PDG averages and the modern K018 input used by EW002.
