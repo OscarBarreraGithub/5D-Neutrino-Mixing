@@ -31,9 +31,19 @@ status_history:
     agent: "WA"
     agent_id: "WA"
     reason: "Writer polish completed for batch wa_w5a_charged_lepton_edm."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T14:44:30-04:00"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T14:44:30-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    reason: "Checker ca_w5a_charged_lepton_edm found a strict CHK-1 metadata-placement issue."
+    issues:
+      - "CHK-1: L005.tex quotes Mu2e four-orders context and COMET Phase-I 3.1e-15 / 7.0e-15 / 90% numerical prospect claims, but those values are in post_2008_developments rather than pdg_or_equivalent entries with the required per-claim metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:23:54-04:00"
+last_updated_at: "2026-05-16T14:44:30-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba"
