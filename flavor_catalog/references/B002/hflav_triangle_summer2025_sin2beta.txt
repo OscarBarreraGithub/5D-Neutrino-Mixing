@@ -1,0 +1,33 @@
+Source: HFLAV CPV & Unitarity Triangle Parameters, "Results for Summer 2025"
+URL: https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/
+Accessed: 2026-05-16
+Snapshot purpose: Minimal value extract for B002, S_{psi K_S} / sin(2 beta).
+
+Relevant HFLAV section:
+Time-dependent CP asymmetries in b -> c cbar s transitions.
+Parameter: sin(2 beta) == sin(2 phi_1).
+
+Canonical extracted average:
+All charmonium, including earlier sin(2 beta) measurements:
+  sin(2 beta) == sin(2 phi_1) = 0.710 +/- 0.011
+  stat-only uncertainty = 0.010
+  CL = 0.34
+
+Corresponding beta solutions reported by HFLAV:
+  beta == phi_1 = 22.63^{+0.45}_{-0.44} degrees
+  or beta == phi_1 = 67.37^{+0.44}_{-0.45} degrees
+
+Mode-specific line relevant to the assigned process:
+  B_d -> J/psi K_S: average S = 0.712 +/- 0.011
+  stat-only uncertainty = 0.011
+
+Inputs named by HFLAV in this block:
+  BaBar PRD 79 (2009) 072009
+  Belle PRL 108 (2012) 171802
+  Belle II PRD 110 (2024) 012001
+  LHCb PRL 132 (2024) 021801 and JHEP 11 (2017) 170
+
+Notes:
+  HFLAV states that the latest LHCb publication includes Run 2 results for
+  J/psi K_S and psi(2S) K_S and includes averages with previous Run 1 results.
+  HFLAV performs its own average for the LHCb Run 1+2 psi(2S) K_S component.

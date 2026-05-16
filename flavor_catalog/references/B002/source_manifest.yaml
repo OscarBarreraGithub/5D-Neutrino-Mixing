@@ -1,0 +1,58 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B002
+generated_at: "2026-05-16T11:35:56-04:00"
+references:
+  - key: hflav_triangle_summer2025_sin2beta
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV CPV & Unitarity Triangle Parameters: Results for Summer 2025"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/"
+    sha256_of_local_snapshot: "sha256:ea3e6af5b240bd78cf81404140586a8fd7b9d77f644aa9cac33010770bbca6bf"
+    snapshot_path: "flavor_catalog/references/B002/hflav_triangle_summer2025_sin2beta.txt"
+  - key: lhcb_2024_spsiks
+    arxiv_id: "2309.09728"
+    DOI: "10.1103/PhysRevLett.132.021801"
+    title: "Measurement of CP violation in B0 -> psi(-> l+ l-) K0_S(-> pi+ pi-) decays"
+    authors: "LHCb Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2309.09728"
+    sha256_of_local_snapshot: "sha256:6833aa00aa16c108bdb71df19b820c905e30a154375491ad547d5bfab534842f"
+    snapshot_path: "flavor_catalog/references/B002/lhcb_2024_spsiks_arxiv.txt"
+  - key: belleii_2024_sin2phi1
+    arxiv_id: "2402.17260"
+    DOI: "10.1103/PhysRevD.110.012001"
+    title: "New graph-neural-network flavor tagger for Belle II and measurement of sin2 phi_1 in B0 -> J/psi K0_S decays"
+    authors: "Belle II Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2402.17260"
+    sha256_of_local_snapshot: "sha256:6ca46cf84f709356303a05eae997e1dad6d854267c4118cbd66919f7950ddf48"
+    snapshot_path: "flavor_catalog/references/B002/belleii_2024_sin2phi1_arxiv.txt"
+  - key: frings_nierste_wiebusch_2015
+    arxiv_id: "1503.00859"
+    DOI: "10.1103/PhysRevLett.115.061802"
+    title: "Penguin contributions to CP phases in B_{d,s} decays to charmonium"
+    authors: "P. Frings, U. Nierste, M. Wiebusch"
+    year: 2015
+    url: "https://arxiv.org/abs/1503.00859"
+    sha256_of_local_snapshot: "sha256:dcd9b65df65af11b86ce1233c0bea55d56680d74b3428cd8d0f55cd3a7695178"
+    snapshot_path: "flavor_catalog/references/B002/frings_nierste_wiebusch_2015_arxiv.txt"
+  - key: faller_fleischer_jung_mannel_2008
+    arxiv_id: "0809.0842"
+    DOI: "10.1103/PhysRevD.79.014030"
+    title: "The Golden Modes B0 -> J/psi K_{S,L} in the Era of Precision Flavour Physics"
+    authors: "S. Faller, R. Fleischer, M. Jung, T. Mannel"
+    year: 2009
+    url: "https://arxiv.org/abs/0809.0842"
+    sha256_of_local_snapshot: "sha256:2e542901b83959ad3ec0848cf9daeb88e8af57781432e2e1bb55d7006ff3a8e8"
+    snapshot_path: "flavor_catalog/references/B002/faller_fleischer_jung_mannel_2008_arxiv.txt"
+  - key: csaki_falkowski_weiler_2008
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "C. Csaki, A. Falkowski, A. Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:a2d9be2799dde999266cc3c1aa5dee3c2e1696dfed22a00ad718fdc1cee96c16"
+    snapshot_path: "flavor_catalog/references/B002/csaki_falkowski_weiler_2008_arxiv.txt"

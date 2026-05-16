@@ -1,0 +1,19 @@
+Source: Belle II Collaboration, "New graph-neural-network flavor tagger for Belle II and measurement of sin2 phi_1 in B0 -> J/psi K0_S decays"
+URL: https://arxiv.org/abs/2402.17260
+arXiv: 2402.17260
+Journal: Phys. Rev. D 110 (2024) 012001
+DOI: 10.1103/PhysRevD.110.012001
+Accessed: 2026-05-16
+Snapshot purpose: Minimal post-2008 primary Belle II input for B002.
+
+Extracted from the arXiv abstract:
+  Belle II evaluates a graph-neural-network flavor tagger using B decays in
+  a 362 fb^-1 sample collected at the Upsilon(4S) resonance.
+
+Reported B0 -> J/psi K0_S CP-violation parameters:
+  S = 0.724 +/- 0.035(stat) +/- 0.009(syst)
+  C = -0.035 +/- 0.026(stat) +/- 0.029(syst)
+
+Flavor-tagging performance quoted in the abstract:
+  effective tagging efficiency = (37.40 +/- 0.43(stat) +/- 0.36(syst)) percent
+  improvement over the previous Belle II algorithm = 18 percent

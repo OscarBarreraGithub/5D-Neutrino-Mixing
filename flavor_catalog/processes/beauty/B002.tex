@@ -1,0 +1,100 @@
+% Flavor catalog per-process draft.
+% process_id: B002
+% family: beauty
+% owner_agent_id: PKA-B002
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B002.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B002: \(S_{\psi K_S}\) and \(\sin 2\beta\)}
+
+\subsection*{Process}
+The process is the mixing-induced CP asymmetry in
+\(B_d^0\to J/\psi K_S^0\), conventionally reported as
+\(S_{\psi K_S}\simeq \sin 2\beta\) or \(\sin 2\phi_1\).  It is the
+beauty-sector benchmark CP phase of the unitarity triangle and is dominated by
+interference between \(B_d-\bar B_d\) mixing and the \(b\to c\bar c s\)
+tree amplitude.
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth numerical block is
+\texttt{pdg\_or\_equivalent} in \texttt{B002.yaml}.  HFLAV Summer 2025 gives
+the current all-charmonium average
+\[
+  \sin(2\beta)=\sin(2\phi_1)=0.710\pm0.011,
+\]
+with a stat-only uncertainty of \(0.010\) and fit CL \(0.34\), accessed on
+2026-05-16 in
+\texttt{references/B002/hflav\_triangle\_summer2025\_sin2beta.txt}.  The
+same HFLAV block gives the direct \(J/\psi K_S\) mode average
+\[
+  S_{\psi K_S}=0.712\pm0.011.
+\]
+The corresponding physical CKM-angle solution is
+\(\beta=(22.63^{+0.45}_{-0.44})^\circ\), with the trigonometric alternate
+solution also stored in the sidecar.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In anarchic warped models, tree-level KK-gluon and electroweak exchange can
+generate a new complex contribution to \(M_{12}^d\).  \(S_{\psi K_S}\) is
+therefore the phase counterpart of the existing \(B_d\) mass-difference
+constraint: a scan point can satisfy \(\Delta m_d\) while still shifting
+\(\arg(M_{12}^d)\).  This observable is especially useful because the decay
+amplitude is CKM-favored and theoretically clean compared with many hadronic
+beauty modes.
+
+\subsection*{Post-2008 developments}
+Since the arXiv:0804.1954 RS-flavor baseline, the central experimental story
+is precision rather than discovery.  Belle and BaBar final samples established
+the B-factory anchor, and the post-2023 update added two important inputs:
+LHCb measured
+\[
+  S_{\psi K_S}=0.717\pm0.013_{\rm stat}\pm0.008_{\rm syst}
+\]
+using \(6\,{\rm fb}^{-1}\), and Belle II measured
+\[
+  S=0.724\pm0.035_{\rm stat}\pm0.009_{\rm syst}
+\]
+with \(362\,{\rm fb}^{-1}\).  These inputs moved the HFLAV average to the
+percent-level regime.  On the theory side, the main development is not a new
+operator but a sharper accounting of doubly Cabibbo-suppressed penguin
+pollution; Frings--Nierste--Wiebusch quote
+\(|\Delta\phi_d|\le 0.68^\circ\).
+
+\subsection*{Constraint validity and model dependence}
+This is a robust neutral-meson-mixing phase constraint, but a catalog number
+is not a standalone exclusion without a CKM convention.  A live implementation
+must decide whether the SM \(\beta\) input is fixed from a global fit or fitted
+simultaneously, and how to budget the small penguin phase.  New physics in the
+decay amplitude would make the usual \(S_{\psi K_S}\simeq \sin 2\beta\)
+identification model-dependent, but for RS quark-flavor scans the dominant
+target is the new phase in \(B_d\) mixing.
+
+\subsection*{Code coverage in this repo}
+PARTIAL.  No implementation named \texttt{S\_psi}, \texttt{J/psi K\_S},
+\texttt{sin2beta}, or equivalent was found in the required greps.  However,
+\texttt{quarkConstraints/deltaf2.py:225} defines the existing \(B_d\) mixing
+input, \texttt{quarkConstraints/deltaf2.py:631}--\texttt{:638} define its
+hadronic and \(\Delta m_d\) inputs, and
+\texttt{quarkConstraints/deltaf2.py:903} evaluates \(M_{12}^{d,\rm NP}\).
+That evaluator reduces the result to \(\lvert M_{12}^{d,\rm NP}\rvert\) at
+\texttt{quarkConstraints/deltaf2.py:910}, so the phase needed for
+\(S_{\psi K_S}\) is not exposed.  The shared \(\Delta F=2\) running basis is
+documented at \texttt{quarkConstraints/qcd\_running.py:7}.
+
+\subsection*{Implementation difficulty}
+LOW.  The existing \(\Delta F=2\) Wilson and hadronic machinery covers the
+needed operator basis.  The missing work is to retain the complex \(B_d\)
+mixing amplitude, define the SM phase convention and allowed penguin
+uncertainty, and add an observable policy for the measured \(S_{\psi K_S}\).
+
+\subsection*{Key references}
+Process-local raw reference keys before bibliography consolidation:
+\texttt{hflav\_triangle\_summer2025\_sin2beta},
+\texttt{lhcb\_2024\_spsiks},
+\texttt{belleii\_2024\_sin2phi1},
+\texttt{frings\_nierste\_wiebusch\_2015},
+\texttt{faller\_fleischer\_jung\_mannel\_2008}, and
+\texttt{csaki\_falkowski\_weiler\_2008}.
