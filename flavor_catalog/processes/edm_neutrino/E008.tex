@@ -14,27 +14,30 @@
 \textbf{Standard notation:} \(\tilde d_q\), the flavor-diagonal quark
 chromo-electric dipole moment in the CP-odd operator
 \(\bar q T^a \sigma^{\mu\nu}\gamma_5 q\,G^a_{\mu\nu}\).  This entry covers
-EFT-level bounds on light-quark qCEDMs inferred from neutron and
-\(^{199}\mathrm{Hg}\) EDM searches, not a directly measured particle property.
+EFT-level benchmark bounds on light-quark qCEDMs inferred from neutron and
+\(^{199}\mathrm{Hg}\) EDM searches.  These are interpretation-level
+translations, not directly measured particle properties.
 
 \subsection*{PDG / equivalent value(s)}
 The experimental anchors are the PDG Live 2026 neutron limit
 \[
   |d_n| < 1.8\times10^{-26}\ e\,\mathrm{cm}\quad(90\%~\mathrm{CL})
 \]
-from Abel 2020, and the Graner et al. 2016 mercury result
+from Abel 2020 (\texttt{PDG2026:NeutronEDM}), and the Graner et al. 2016
+mercury result
 \[
   d_{\rm Hg}=(2.20\pm2.75_{\rm stat}\pm1.48_{\rm syst})\times10^{-30}
   \ e\,\mathrm{cm},\qquad
   |d_{\rm Hg}|<7.4\times10^{-30}\ e\,\mathrm{cm}\quad(95\%~\mathrm{CL}).
 \]
-Using the Pospelov--Ritz QCD-sum-rule relation with the quark EDMs set to
-zero gives the central neutron translation
+The mercury anchor is \texttt{Graner:HgEDM2016}.  Using the Pospelov--Ritz
+QCD-sum-rule relation with the quark EDMs set to zero gives the central
+neutron translation
 \[
   |\tilde d_d+0.5\,\tilde d_u| < 1.6\times10^{-26}\ \mathrm{cm},
 \]
-with the quoted \((1\pm0.5)\) hadronic normalization uncertainty.  Using the
-standard mercury estimate
+with the quoted \((1\pm0.5)\) hadronic normalization uncertainty
+(\texttt{PospelovRitz:NeutronCEDM2000}).  Using the standard mercury estimate
 \[
   d_{\rm Hg}=7\times10^{-3}e(\tilde d_u-\tilde d_d)+10^{-2}d_e+\cdots
 \]
@@ -42,6 +45,9 @@ and setting non-qCEDM sources to zero gives the central equivalent bound
 \[
   |\tilde d_u-\tilde d_d| < 1.1\times10^{-27}\ \mathrm{cm}.
 \]
+This mercury translation uses
+\texttt{OlivePospelovRitzSantoso:HgCEDM2005}.  Both qCEDM numbers are
+one-source-at-a-time benchmarks, not correlated global EDM-fit limits.
 The local snapshots are
 \texttt{flavor\_catalog/references/E008/pdg2026\_neutron\_edm\_datablock.txt}
 and \texttt{flavor\_catalog/references/E008/graner2016\_hg199\_arxiv1601\_04339.txt};
@@ -59,12 +65,15 @@ wrong-chirality Yukawa structures.
 Relative to the CFW 2008 RS-flavor baseline, the experimental inputs tightened:
 the direct neutron anchor is now the 2020 PDG limit above, and the 2016
 \(^{199}\mathrm{Hg}\) result improved the prior mercury limit by a factor of
-4.  Koenig, Neubert, and Straub 2014 recast electromagnetic and chromomagnetic
-quark dipoles in partial-compositeness and warped-language Wilson coefficients,
-finding strong neutron-EDM pressure when wrong-chirality Yukawas are present.
-On the theory side, Bhattacharya et al. 2024 target the isovector qCEDM
-neutron matrix element with lattice QCD and explicit control of power-divergent
-operator mixing.
+4 (\texttt{PDG2026:NeutronEDM}; \texttt{Graner:HgEDM2016};
+\texttt{CsakiFalkowskiWeiler:RSFlavor2008}).  Koenig, Neubert, and Straub
+2014 recast electromagnetic and chromomagnetic quark dipoles in
+partial-compositeness and warped-language Wilson coefficients, finding strong
+neutron-EDM pressure when wrong-chirality Yukawas are present
+(\texttt{KoenigNeubertStraub:DipoleComposite2014}).  On the theory side,
+Bhattacharya et al. 2024 target the isovector qCEDM neutron matrix element with
+lattice QCD and explicit control of power-divergent operator mixing
+(\texttt{Bhattacharya:IsoVectorQCEDM2024}).
 
 \subsection*{Constraint validity and model dependence}
 The direct neutron and mercury limits are robust null measurements.  The qCEDM
