@@ -24,9 +24,22 @@ status_history:
     at: "2026-05-16T15:54:12-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for WA batch wa_w6_beauty."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T16:07:43-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T16:07:43-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w6_beauty"
+    issues:
+      - "CHK-1: TeX quotes HFLAV companion values x_s, chi_s, 1/Gamma_s, and DeltaGamma_s, but they are not represented in pdg_or_equivalent value blocks."
+      - "CHK-1: TeX quotes LHCb Run-2 dataset and Delta m_s values that are in pdg_or_equivalent.dominant_lhcb_input, but that value block lacks an explicit year field."
+      - "CHK-1: TeX quotes FLAG f_Bs sqrt(Bhat_Bs) and xi numerical inputs under auxiliary_theory_inputs rather than pdg_or_equivalent."
+    reason: "Checker ca_w6_beauty found strict CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty.md."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:54:12-04:00"
+last_updated_at: "2026-05-16T16:07:43-04:00"
 version: "0.1.0"
 source_shas:
   cfw_2008_rs_flavor.txt: "sha256:894d0bfe37a3fc977af227722075874a4babd171d771b42ba509d7d156069d87"

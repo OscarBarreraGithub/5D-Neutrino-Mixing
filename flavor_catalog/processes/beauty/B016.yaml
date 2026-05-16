@@ -24,9 +24,20 @@ status_history:
     at: "2026-05-16T15:54:12-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for WA batch wa_w6_beauty."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T16:07:43-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T16:07:43-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w6_beauty"
+    issues:
+      - "CHK-1: TeX quotes the two HFLAV branching-fraction values, and the corresponding pdg_or_equivalent.observables entries carry value, uncertainty, source URL, access date, snapshot path, and sha256, but each per-observable value block lacks an explicit year field."
+    reason: "Checker ca_w6_beauty found strict CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty.md."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:54:12-04:00"
+last_updated_at: "2026-05-16T16:07:43-04:00"
 version: "0.1.0"
 source_shas:
   babar_0807_4119_BtoKll.txt: "sha256:9befb573f3193d7cb5f584c576f0d3a7da3691d65f59b5ff1316ff6cd126dc8e"
