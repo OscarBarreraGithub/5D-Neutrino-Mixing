@@ -6,7 +6,7 @@ process_name: "Neutral charm mixing"
 owner: "PKA"
 owner_agent_id: "PKA-C001"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -31,9 +31,20 @@ status_history:
     at: "2026-05-16T12:14:32-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for batch wa_w23_kaon_charm_edm."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T12:33:01-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T12:33:01-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w23_kaon_charm_edm"
+    reason: "Checker ca_w23_kaon_charm_edm found a CHK-1 numerical-metadata gap."
+    issues:
+      - "CHK-1: C001.tex quotes CFW contextual KK-gluon scales of about 21 TeV and 33 TeV, but C001.yaml has no corresponding pdg_or_equivalent block carrying those values with source URL, access date, snapshot path, and sha256."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:14:32-04:00"
+last_updated_at: "2026-05-16T12:33:01-04:00"
 version: "0.1.1"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce"

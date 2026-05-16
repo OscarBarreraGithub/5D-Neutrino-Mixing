@@ -6,7 +6,7 @@ process_name: "Indirect CP violation in K0-K0bar mixing"
 owner: "PKA"
 owner_agent_id: "PKA-K001"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -24,9 +24,18 @@ status_history:
     at: "2026-05-16T12:14:32-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for batch wa_w23_kaon_charm_edm."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T12:33:01-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T12:33:01-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w23_kaon_charm_edm"
+    reason: "Checker ca_w23_kaon_charm_edm passed CHK-1 through CHK-8."
+checker_passed_at: "2026-05-16T12:33:01-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:14:32-04:00"
+last_updated_at: "2026-05-16T12:33:01-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_epsilon_k.txt: "sha256:9ada2a952ab9f8b69d7a29ec6b7ffa12571fa9140ca281c9ceee8a66b1dc7770"

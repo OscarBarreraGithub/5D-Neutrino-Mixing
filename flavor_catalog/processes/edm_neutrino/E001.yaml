@@ -6,7 +6,7 @@ process_name: "Electron electric dipole moment"
 owner: "PKA"
 owner_agent_id: "PKA-E001"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -31,9 +31,20 @@ status_history:
     at: "2026-05-16T12:14:32-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for batch wa_w23_kaon_charm_edm."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T12:33:01-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T12:33:01-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w23_kaon_charm_edm"
+    reason: "Checker ca_w23_kaon_charm_edm found CHK-1 structured-metadata gaps."
+    issues:
+      - "CHK-1: E001.tex numerical claims are in pdg_or_equivalent blocks, but the canonical, Roussy 2023, and ACME 2018 blocks lack explicit year fields; the Roussy and ACME values/uncertainties are stored only in summary strings rather than structured value, uncertainty/statistical/systematic, and CL fields."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:14:32-04:00"
+last_updated_at: "2026-05-16T12:33:01-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_electron_edm_datablock.txt: "sha256:aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20"
