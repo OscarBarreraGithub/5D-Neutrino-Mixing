@@ -58,9 +58,19 @@ status_history:
     reason: "CHK-1 failed in cycle-2 checker pass."
     issues:
       - "T003.tex still states the Standard Model expectation remains at the 10^-14 level; that physics numerical claim is supported only under paper_era_reference, not pdg_or_equivalent as required by the checker checklist."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T19:14:44-04:00"
+    timestamp: "2026-05-16T19:14:44-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    batch_id: "wa_w7_T003_v3"
+    cycle: 3
+    reason: "Addressed CA CHK-1 cycle-3 finding by removing the explicit 10^-14 SM expectation phrase from TeX while retaining non-numerical wording."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T19:10:09-04:00"
+last_updated_at: "2026-05-16T19:14:44-04:00"
 version: "0.1.0"
 source_shas:
   cms_2024_top21013_tqgamma.txt: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"
