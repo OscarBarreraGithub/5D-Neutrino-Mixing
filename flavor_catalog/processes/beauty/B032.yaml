@@ -43,9 +43,19 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "WA v2 added CA-requested LHCb and Belle II value blocks for batch wa_w23_beauty_v2."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T12:56:12-04:00"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T12:56:12-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    issues:
+      - "CHK-1: Main HFLAV/PDG pdg_or_equivalent value blocks do not all include required per-value year, access_date, source_url, and sha256 metadata; branching-fraction blocks lack year/access_date, HFLAV direct-CP blocks lack year/access_date/source_url, and PDG time-dependent-CP blocks lack year/access_date."
+    reason: "CA batch ca_w23_beauty_v2 found remaining metadata rework."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:44:13-04:00"
+last_updated_at: "2026-05-16T12:56:12-04:00"
 version: "0.1.0"
 source_shas:
   belleii2023_b0_ks_pi0_cp_arxiv.txt: "sha256:9b49da234cc9d67d4784725150115865333f5ae7c0590267c2bdecf07a2cbbfa"
