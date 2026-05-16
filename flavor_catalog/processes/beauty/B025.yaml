@@ -48,9 +48,17 @@ status_history:
     at: "2026-05-16T14:55:00-04:00"
     agent_id: "Opus-round-1"
     reason: "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T17:52:00-04:00"
+    agent: "factcheck-codex-beauty"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
 checker_passed_at: "2026-05-16T12:34:18-04:00"
 opus_approved_at: "2026-05-16T14:55:00-04:00"
-last_updated_at: "2026-05-16T14:55:00-04:00"
+fact_checked_at: "2026-05-16T17:52:00-04:00"
+fact_check_verdict: "VERIFIED"
+last_updated_at: "2026-05-16T17:52:00-04:00"
 version: "0.1.1"
 source_shas:
   hflav_ckm2025_rdrds.txt: "sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8"

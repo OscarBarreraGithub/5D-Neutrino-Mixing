@@ -60,9 +60,17 @@ status_history:
     agent_id: "Opus-round-2"
     round_id: "opus_round_002"
     reason: "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T17:52:00-04:00"
+    agent: "factcheck-codex-beauty"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
 checker_passed_at: "2026-05-16T15:31:00-04:00"
 opus_approved_at: "2026-05-16T17:30:00-04:00"
-last_updated_at: "2026-05-16T17:30:00-04:00"
+fact_checked_at: "2026-05-16T17:52:00-04:00"
+fact_check_verdict: "VERIFIED"
+last_updated_at: "2026-05-16T17:52:00-04:00"
 version: "0.1.0"
 source_shas:
   babar2013_btokstarnunu_arxiv.txt: "sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b"
