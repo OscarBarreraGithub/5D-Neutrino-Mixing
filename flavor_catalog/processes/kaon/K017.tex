@@ -1,0 +1,90 @@
+% Flavor catalog process: K017
+% family: kaon
+% owner_agent_id: PKA-K017
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K017.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{K017: \(K^+ \to \ell^+ \nu\) and \(R_K\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(R_K =
+\Gamma(K^+\to e^+\nu_e(\gamma))/\Gamma(K^+\to\mu^+\nu_\mu(\gamma))\).
+This entry covers the charged-kaon leptonic lepton-flavor-universality
+ratio, with the inclusive internal-bremsstrahlung convention used in the PDG
+and NA62 measurements.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG API average for the ratio is
+\[
+  R_K = (2.488\pm0.009)\times10^{-5},
+\]
+from PDG API node \texttt{S010R28}, accessed on 2026-05-16 and snapshotted at
+\texttt{flavor\_catalog/references/K017/pdg2025\_rk\_api\_20260516.txt}.  The
+same snapshot records the main used inputs: NA62 reports
+\((2.488\pm0.007_{\rm stat}\pm0.007_{\rm syst})\times10^{-5}\), while KLOE
+reports \((2.493\pm0.025_{\rm stat}\pm0.019_{\rm syst})\times10^{-5}\).
+For SM comparison, Cirigliano--Rosell give
+\[
+  R_K^{\rm SM}=(2.477\pm0.001)\times10^{-5},
+\]
+from \texttt{flavor\_catalog/references/K017/cirigliano\_rosell\_2007\_arxiv0707\_4464.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This is not a neutral-meson \(\Delta F=2\) observable, so it does not probe
+the existing quark scan's KK-gluon mixing lane directly.  Its value is that
+the ratio cancels the common \(V_{us}\), \(f_K\), and much of the kaon-rate
+normalization, leaving a helicity-suppressed charged-current LFU test.
+Nonminimal warped models with lepton localization, heavy neutral leptons,
+nonunitary charged currents, charged scalars, or nonuniversal \(W\)-coupling
+shifts can modify \(K_{e2}\) relative to \(K_{\mu2}\).  In a quark-only RS
+interpretation it should therefore be cataloged as a lepton-extension or
+charged-current diagnostic, not as a hard bound on the current anarchic
+quark fit.
+
+\subsection*{Post-2008 developments}
+The 2008 CFW baseline predates the precision \(R_K\) consolidation and did
+not make this charged-current LFU ratio a central RS constraint.  Since then,
+KLOE published a precise inclusive measurement in 2009, the FlaviaNet kaon
+working group consolidated the post-2008 kaon-decay inputs in 2010, and NA62
+superseded earlier charged-kaon data with its full 2007--2008 result in 2013.
+The modern PDG average is now driven by those post-2008 measurements.  The
+theory reference value was already exceptionally clean before 2008, but the
+experimental precision has caught up enough that \(R_K\) is a useful
+null-test for scalar or right-handed charged-current effects that evade many
+hadronic uncertainties.
+
+\subsection*{Constraint validity and model dependence}
+As a measured ratio, \(R_K\) is robust and experimentally clean, provided the
+radiative convention is kept fixed: the PDG/NA62 ratio includes internal
+bremsstrahlung, while direct-emission radiation is separated.  Its mapping
+onto this repository's default model is model-dependent.  A minimal quark
+flavor scan with no nonstandard charged-current lepton sector has no direct
+parameter controlling this observable, whereas a 5D lepton extension or
+charged-scalar completion could generate visible effects through chirality-
+enhanced scalar amplitudes or lepton-nonuniversal \(W\) couplings.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required coverage greps across \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} find no \(K^+\to e^+\nu\),
+\(K^+\to\mu^+\nu\), \(K_{\ell2}\), or \(R_K\) implementation.  The nearest
+surfaces are the \(\Delta F=2\) default inputs in
+\texttt{quarkConstraints/deltaf2.py:209} and the modern policy fence
+\texttt{quarkConstraints/modern/phenomenology.py:23}, which enumerates only
+\(\varepsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D0\).
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  A catalog-to-code implementation would need a new
+charged-current leptonic-decay observable, including the SM amplitude,
+radiative-convention bookkeeping, and whatever BSM operator basis the PI wants
+to expose.  The ratio avoids new lattice matrix elements, but it is not covered
+by the existing \(\Delta F=2\) SLL/SLR/VLL/VRR/LR machinery.
+
+\subsection*{Key references}
+Process-local reference keys before bibliography consolidation:
+PDG2025:K017RK, NA62:RK2013, KLOE:RK2009, CiriglianoRosell:RKSM2007,
+FlaviaNet:Kaon2010, and CsakiFalkowskiWeiler:RSFlavor2008.

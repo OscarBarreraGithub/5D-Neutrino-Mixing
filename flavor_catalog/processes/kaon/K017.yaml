@@ -1,0 +1,113 @@
+schema: flavor_catalog.process.v1
+process_id: K017
+family: kaon
+standard_notation: "R_K = Gamma(K^+ -> e^+ nu_e(gamma)) / Gamma(K^+ -> mu^+ nu_mu(gamma))"
+process_name: "Charged-kaon leptonic lepton-universality ratio"
+owner: "PKA"
+owner_agent_id: "PKA-K017"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:16:00-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:16:00-04:00"
+    agent_id: "PKA-K017"
+    reason: "PKA source extraction and K017 draft started"
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T13:24:00-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T13:24:00-04:00"
+    agent_id: "PKA-K017"
+    reason: "Initial K017 source snapshots, sidecar, TeX draft, and worklog deposited"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:36:00-04:00"
+version: "0.1.1"
+source_shas:
+  pdg2025_rk_api_20260516.txt: "sha256:c00ed1ff90dd3cb58e44db0acfa9bdefd07fef7ee6dea6ff0812f416fcd62686"
+  na62_2013_arxiv1212_4012.txt: "sha256:b6389e67165375f69c6fdfeb59c5b893cba3698addd7799e9fa0afdc562d1d70"
+  kloe_2009_arxiv0907_3594.txt: "sha256:c473017a6d6ddef9fd82af1f6d0333bf038d3d277cf753269c041a6cb2da4560"
+  cirigliano_rosell_2007_arxiv0707_4464.txt: "sha256:9178029253ec1db10f368940480a7b0d44db98d10184ef47631efec3a9dbf50c"
+  flavianet_2010_arxiv1005_2323.txt: "sha256:fd49e3af6bb2e12268f48aa977c831bc952aeb8752c54a607331a2eb5a17c4e5"
+  cfw_2008_arxiv0804_1954.txt: "sha256:11bb7cddcd7fd3ed0f0722ef301231f23bcddba554fc2cdd56be94e219df578b"
+pdg_or_equivalent:
+  canonical_ratio:
+    source: "PDG API / PDG Live summary S010R28"
+    edition: "2025"
+    citation: "S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update"
+    value: "2.488"
+    uncertainty: "0.009"
+    scale: "1e-5"
+    units: "dimensionless decay-rate ratio"
+    value_summary: "R_K = Gamma(K+ -> e+ nu_e)/Gamma(K+ -> mu+ nu_mu) = (2.488 +/- 0.009) x 10^{-5}"
+    pdg_identifier: "S010R28"
+    source_url: "https://pdgapi.lbl.gov/summaries/S010R28"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K017/pdg2025_rk_api_20260516.txt"
+    sha256_of_local_snapshot: "sha256:c00ed1ff90dd3cb58e44db0acfa9bdefd07fef7ee6dea6ff0812f416fcd62686"
+  dominant_experimental_input:
+    source: "NA62 Collaboration, Phys. Lett. B 719 (2013) 326"
+    arxiv_id: "1212.4012"
+    value: "2.488"
+    stat_uncertainty: "0.007"
+    syst_uncertainty: "0.007"
+    scale: "1e-5"
+    units: "dimensionless decay-rate ratio"
+    value_summary: "R_K = (2.488 +/- 0.007_stat +/- 0.007_syst) x 10^{-5}"
+    convention: "Fully inclusive in internal bremsstrahlung per PDG listing footnote"
+    source_url: "https://arxiv.org/abs/1212.4012"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K017/na62_2013_arxiv1212_4012.txt"
+    sha256_of_local_snapshot: "sha256:b6389e67165375f69c6fdfeb59c5b893cba3698addd7799e9fa0afdc562d1d70"
+  supporting_experimental_input_kloe:
+    source: "KLOE Collaboration, Eur. Phys. J. C 64 (2009) 627"
+    arxiv_id: "0907.3594"
+    value: "2.493"
+    stat_uncertainty: "0.025"
+    syst_uncertainty: "0.019"
+    scale: "1e-5"
+    units: "dimensionless decay-rate ratio"
+    value_summary: "R_K = (2.493 +/- 0.025_stat +/- 0.019_syst) x 10^{-5}"
+    convention: "Internal bremsstrahlung included and direct-emission contribution excluded per PDG listing footnote"
+    source_url: "https://arxiv.org/abs/0907.3594"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K017/kloe_2009_arxiv0907_3594.txt"
+    sha256_of_local_snapshot: "sha256:c473017a6d6ddef9fd82af1f6d0333bf038d3d277cf753269c041a6cb2da4560"
+  sm_prediction:
+    source: "Cirigliano and Rosell, JHEP 0710 (2007) 005"
+    arxiv_id: "0707.4464"
+    value: "2.477"
+    uncertainty: "0.001"
+    scale: "1e-5"
+    units: "dimensionless decay-rate ratio"
+    value_summary: "R_K^SM = (2.477 +/- 0.001) x 10^{-5}"
+    source_url: "https://arxiv.org/abs/0707.4464"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K017/cirigliano_rosell_2007_arxiv0707_4464.txt"
+    sha256_of_local_snapshot: "sha256:9178029253ec1db10f368940480a7b0d44db98d10184ef47631efec3a9dbf50c"
+code_coverage:
+  status: "NO"
+  evidence: []
+  required_grep_commands:
+    - command: "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "Finds existing Delta F = 2 neutral-meson and mu->e gamma code surfaces only; no K_l2 or charged-kaon LFU observable."
+    - command: "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "Hits unrelated mu->e gamma, Delta F = 2, QCD running, and benchmark text; no K+ -> l+ nu ratio implementation."
+    - command: "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+      result_summary: "Confirms implemented/policy surfaces are epsilon_K, K, B_d, B_s, D0 mixing plus mu->e gamma."
+    - command: "rg -n \"K\\\\+.*e\\\\+.*nu|K\\\\+.*mu\\\\+.*nu|K\\\\s*->\\\\s*l\\\\s*nu|Kell2|K_l2|Kmu2|Ke2\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "No matches."
+  near_miss_evidence:
+    - "quarkConstraints/deltaf2.py:209 defines the default Delta F = 2 input tuple, not a charged-current leptonic decay."
+    - "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 policy systems."
+    - "quarkConstraints/modern/phenomenology.py:165 states the modern surface is policy-only and does not define a numeric EFT backend."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "Needs a new charged-current leptonic-decay observable and BSM operator/matching convention; no new lattice input is needed because the ratio cancels f_K, but existing Delta F = 2 machinery does not cover it."
+implementation_difficulty_if_missing: "MEDIUM"
+open_issues:
+  - "WA/CA should decide whether to keep the PDG API 2025 label or rename the source key if PDGLive publishes a 2026 API edition before final signoff."
+  - "If promoted to a live constraint, PI must specify whether the supported BSM parameterization is scalar, right-handed charged-current, sterile-neutrino mixing, or a general EFT ratio wrapper."

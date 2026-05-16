@@ -1,0 +1,57 @@
+Source snapshot: PDG API / PDG Live
+Access date: 2026-05-16
+API info URL: https://pdgapi.lbl.gov/info
+Ratio summary URL: https://pdgapi.lbl.gov/summaries/S010R28
+Listing URL: https://pdgapi.lbl.gov/listings/S010.11
+PDG edition returned by API: 2025
+Citation returned by API: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+License returned by API: CC BY 4.0
+
+Canonical ratio summary:
+pdgid: S010R28
+description: G(K+ --> e+ nu_e)/G(K+ --> mu+ nu_mu)
+pdg_values:
+  value: 2.488452029520296E-5
+  error_positive: 9.441409926605985E-8
+  error_negative: 9.441409926605985E-8
+  value_text: "(2.488+-0.009)E-5"
+  type: "OUR AVERAGE"
+
+Related listing anchor from S010.11:
+pdgid: S010.11
+description: K+ --> e+ nu_e
+related_data pdgid: S010R28
+related_data description: G(K+ --> e+ nu_e)/G(K+ --> mu+ nu_mu)
+
+Used measurements in the S010R28 listing:
+LAZZERONI 2013, PL B719 326, doi 10.1016/j.physletb.2013.01.037,
+title "Precision Measurement of the Ratio of the Charged Kaon Leptonic
+Decay Rates", NA62, event_count 150k:
+  value_text: "(2.488+-0.007+-0.007) E-5"
+  value: 2.4880000000000002E-5
+  stat_error_positive: 7.0E-8
+  syst_error_positive: 7.0E-8
+  used_in_average: true
+  footnote: ratio is fully inclusive, including internal bremsstrahlung.
+
+AMBROSINO 2009E, EPJ C64 627, doi 10.1140/epjc/s10052-009-1177-x,
+title "Precise Measurement of Gamma(K --> e nu ( gamma ))/Gamma(K --> mu nu
+( gamma )) and Study of K --> e nu gamma", KLOE, event_count 13.8k:
+  value_text: "(2.493 +-0.025 +-0.019) E-5"
+  value: 2.493E-5
+  stat_error_positive: 2.5000000000000004E-7
+  syst_error_positive: 1.9E-7
+  used_in_average: true
+  footnote: ratio includes internal bremsstrahlung and ignores direct emission.
+
+Individual PDG branching-fraction anchors from S010:
+K+ --> e+ nu_e:
+  pdgid: S010.11
+  value_text: "(1.582+-0.007)E-5"
+  value: 0.00001581666685179286
+  type: "OUR AVERAGE"
+K+ --> mu+ nu_mu:
+  pdgid: S010.1
+  value_text: "(63.56+-0.11)E-2"
+  value: 0.6356026422917163
+  type: "OUR FIT"
