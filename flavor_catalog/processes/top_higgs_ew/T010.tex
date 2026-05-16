@@ -13,17 +13,19 @@
 \subsection*{Process}
 This entry covers the bottom-quark Z-pole observables \(R_b^0\),
 \(A_{\rm FB}^{0,b}\), and \(A_b\).  Plan v1 lists \(R_b\) as T010 and the
-asymmetries as T011; this PKA draft uses T010 because the assignment requested
-the combined \(Z\to b\bar b\) pole-observable package.
+asymmetries as T011; this entry follows the batch assignment and treats them as
+one \(Z\to b\bar b\) pole-observable package.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG-or-equivalent value}
 The canonical current values are taken from the PDG Z-boson listing snapshot in
-\texttt{flavor\_catalog/references/T010/pdg\_2025\_z\_boson.txt}.  The sidecar
-records \(R_b^0=0.21629\pm0.00066\), \(A_{\rm FB}^{0,b}=0.0992\pm0.0016\)
-(the PDG listing gives this as \(9.92\pm0.16\) percent), and
-\(A_b=0.923\pm0.020\).  The original LEP/SLC final combination is also
-snapshotted in \texttt{lepslc\_2006\_z\_resonance.txt}; it records the same
-central values and identifies the \(A_{\rm FB}^{0,b}\) comparison as the
+\texttt{flavor\_catalog/references/T010/pdg\_2025\_z\_boson.txt}; the same
+snapshot is recorded in the \texttt{T010.yaml} \texttt{pdg\_or\_equivalent}
+block.  It gives \(R_b^0=0.21629\pm0.00066\),
+\(A_{\rm FB}^{0,b}=0.0992\pm0.0016\) after converting the listed
+\(9.92\pm0.16\%\), and \(A_b=0.923\pm0.020\)
+(\texttt{pdg\_2025\_z\_boson.txt}).  The original LEP/SLC final combination is
+also snapshotted in \texttt{lepslc\_2006\_z\_resonance.txt}; it records the
+same central values and identifies the \(A_{\rm FB}^{0,b}\) comparison as the
 largest Z-pole pull, \(2.8\sigma\), relative to the Standard Model fit.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
@@ -43,9 +45,11 @@ Z-pole combination, so the PDG value remains legacy-data dominated.  The
 post-CFW theory story did change: Casagrande et al. gave a detailed RS
 electroweak-precision treatment including Zbb couplings, while later SM work
 completed the fermionic two-loop description of Z partial widths and branching
-ratios.  Future-collider studies now revisit the experimental systematics of
-\(R_b\) and \(A_{\rm FB}^b\), with the FCC-ee projection captured as a
-post-2008 prospective reference rather than a current constraint.
+ratios (\texttt{freitas\_2014\_z\_widths}).  Future-collider studies now
+revisit the experimental systematics of \(R_b\) and \(A_{\rm FB}^b\); the
+FCC-ee projection quotes relative uncertainties of order \(0.01\%\), but it is
+a prospective reference rather than a current constraint
+(\texttt{fcc\_ee\_2025\_zbb\_projection.txt}).
 
 \subsection*{Constraint validity and model dependence}
 This is a precision electroweak coupling constraint, not a flavor-changing
@@ -58,7 +62,7 @@ substantially.  \(A_{\rm FB}^{0,b}\) also contains the initial-state leptonic
 asymmetry input, so \(A_b\) is the cleaner bottom-coupling handle.
 
 \subsection*{Code coverage in this repo}
-NO.  The required greps found no implementation of \(R_b\), \(A_b\),
+\textbf{NO}.  The required greps found no implementation of \(R_b\), \(A_b\),
 \(A_{\rm FB}^{0,b}\), or a Zbb electroweak-pole likelihood in
 \texttt{quarkConstraints/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
 \texttt{yukawa/}, \texttt{qcd/}, \texttt{warpConfig/}, \texttt{solvers/},
@@ -67,7 +71,7 @@ generic \(M_Z\) support in \texttt{qcd/running.py:3},
 \texttt{qcd/constants.py:11}, and \texttt{quarkConstraints/qcd\_running.py:100}.
 
 \subsection*{Implementation difficulty}
-HIGH.  A catalog-only record is straightforward, but a live constraint would
+\textbf{HIGH}.  A catalog-only record is straightforward, but a live constraint would
 need a new electroweak-pole observable module, a correlated treatment of the
 LEP/SLC pseudo-observables, and model-specific matching from the 5D spectrum to
 \(\delta g_{Lb}\) and \(\delta g_{Rb}\).  The largest blocker is not lattice
