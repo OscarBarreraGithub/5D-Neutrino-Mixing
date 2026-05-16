@@ -53,9 +53,18 @@ status_history:
     reason: "checker batch ca_w5a_beauty_v2 found remaining source-manifest issue"
     issues:
       - "CHK-2: TeX cites BaBar2013:BKstarNuNu, but source_manifest.yaml contains BaBar2013:BKstarNunu; the cited reference key does not resolve."
-checker_passed_at: null
-opus_approved_at: null
-last_updated_at: "2026-05-16T15:31:00-04:00"
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T16:05:00-04:00"
+    agent: "Opus-arbitration"
+    agent_id: "Opus-arbitration"
+    from: "WRITER-REWORK"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T16:05:00-04:00"
+    cycle: 3
+    reason: "Opus arbitration APPROVE-WITH-PATCH per plan v1 :620-622: WA/CA cycle-3 cap reached. CHK-2 is a real but trivial citation-key typo (TeX BaBar2013:BKstarNuNu vs. canonical BaBar2013:BKstarNunu used by B023.yaml experiment_inputs and references/B023/source_manifest.yaml; line 98 of the TeX key-references list already used the canonical lowercase form). Patch applied: B023.tex lines 36 and 55 changed from BaBar2013:BKstarNuNu to BaBar2013:BKstarNunu. All three occurrences now resolve to the manifest key. See flavor_catalog/signoff/by_process/B021_B023.md."
+checker_passed_at: "2026-05-16T16:05:00-04:00"
+opus_approved_at: "2026-05-16T16:05:00-04:00"
+last_updated_at: "2026-05-16T16:05:00-04:00"
 version: "0.1.0"
 source_shas:
   babar2013_arxiv1303_7465.txt: "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b"

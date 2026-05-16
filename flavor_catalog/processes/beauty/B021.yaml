@@ -55,9 +55,18 @@ status_history:
     reason: "checker batch ca_w5a_beauty_v2 found remaining traceability issue"
     issues:
       - "CHK-1: TeX states that LHCb used 3.0 fb^-1, but the 3.0 fb^-1 dataset number remains only under supporting_measurements and is not promoted to pdg_or_equivalent."
-checker_passed_at: null
-opus_approved_at: null
-last_updated_at: "2026-05-16T15:31:00-04:00"
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T16:05:00-04:00"
+    agent: "Opus-arbitration"
+    agent_id: "Opus-arbitration"
+    from: "WRITER-REWORK"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T16:05:00-04:00"
+    cycle: 3
+    reason: "Opus arbitration APPROVE-OVERRIDE per plan v1 :620-622: WA/CA cycle-3 cap reached. CA's CHK-1 reading is over-aggressive. The LHCb 3.0 fb^-1 dataset integrated luminosity is dataset metadata, not a measured experimental observable; it correctly lives in supporting_measurements with full provenance (snapshot_path, sha256_of_text_snapshot, source_url, access_date) and points to the same LHCb 2015 snapshot already promoted under pdg_or_equivalent.observables for dBR/dq^2 and angular observables. Per the L001 precedent (flavor_catalog/signoff/by_process/L001.md), pdg_or_equivalent is for measured observables; experimental dataset normalization/luminosity metadata belongs in supporting_measurements (or paper_era_reference for theoretical normalization scales). No TeX or sidecar edits required. See flavor_catalog/signoff/by_process/B021_B023.md."
+checker_passed_at: "2026-05-16T16:05:00-04:00"
+opus_approved_at: "2026-05-16T16:05:00-04:00"
+last_updated_at: "2026-05-16T16:05:00-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_lambdab_lambdamumu.txt: "sha256:73959783ca3c1de31cd9479c24825c19140d59641809cfe9a2cc3c9a528fddcd"
