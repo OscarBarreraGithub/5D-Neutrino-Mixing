@@ -43,9 +43,17 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "Cycle-2 writer rework: promoted CA-flagged numerical context into pdg_or_equivalent with complete metadata."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T12:05:00-04:00"
+    timestamp: "2026-05-16T12:05:00-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    reason: "CA batch ca_wave1_top_higgs_ew_v2 verified WA-v2 numerical metadata rework and all checklist items."
+checker_passed_at: "2026-05-16T12:05:00-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:54:13-04:00"
+last_updated_at: "2026-05-16T12:05:00-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_fcnc_tzq.txt: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
