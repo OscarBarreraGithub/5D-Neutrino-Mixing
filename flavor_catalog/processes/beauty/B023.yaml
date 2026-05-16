@@ -43,9 +43,19 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "Cycle-2 writer rework: added the CA-flagged Belle 2017 combined limit and Buras 2015 SM prediction under pdg_or_equivalent.values."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T15:31:00-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T15:31:00-04:00"
+    agent_id: "CA"
+    reason: "checker batch ca_w5a_beauty_v2 found remaining source-manifest issue"
+    issues:
+      - "CHK-2: TeX cites BaBar2013:BKstarNuNu, but source_manifest.yaml contains BaBar2013:BKstarNunu; the cited reference key does not resolve."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:14:20-04:00"
+last_updated_at: "2026-05-16T15:31:00-04:00"
 version: "0.1.0"
 source_shas:
   babar2013_arxiv1303_7465.txt: "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b"

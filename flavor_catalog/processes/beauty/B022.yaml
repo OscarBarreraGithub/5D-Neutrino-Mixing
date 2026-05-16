@@ -43,9 +43,17 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "Cycle-2 writer rework: added the CA-flagged HPQCD SM prediction under pdg_or_equivalent.values with complete metadata."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T15:31:00-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T15:31:00-04:00"
+    agent_id: "CA"
+    reason: "checker batch ca_w5a_beauty_v2 passed CHK-1 through CHK-8"
+checker_passed_at: "2026-05-16T15:31:00-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:14:20-04:00"
+last_updated_at: "2026-05-16T15:31:00-04:00"
 version: "0.1.0"
 source_shas:
   babar2013_btokstarnunu_arxiv.txt: "sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b"

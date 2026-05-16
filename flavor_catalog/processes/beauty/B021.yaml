@@ -45,9 +45,19 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "Cycle-2 writer rework: added CA-flagged CDF value metadata under pdg_or_equivalent and explicit years for existing observable blocks."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T15:31:00-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T15:31:00-04:00"
+    agent_id: "CA"
+    reason: "checker batch ca_w5a_beauty_v2 found remaining traceability issue"
+    issues:
+      - "CHK-1: TeX states that LHCb used 3.0 fb^-1, but the 3.0 fb^-1 dataset number remains only under supporting_measurements and is not promoted to pdg_or_equivalent."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:14:20-04:00"
+last_updated_at: "2026-05-16T15:31:00-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_lambdab_lambdamumu.txt: "sha256:73959783ca3c1de31cd9479c24825c19140d59641809cfe9a2cc3c9a528fddcd"
