@@ -1,0 +1,91 @@
+% Flavor catalog process: K001
+% family: kaon
+% owner_agent_id: PKA-K001
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K001.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{K001: \(\epsilon_K\)}
+
+\subsection*{Process}
+Standard notation: \(\epsilon_K\).  This entry covers indirect CP violation in
+neutral-kaon mixing, i.e. the CP-violating part of the \(K^0\)-\(\bar K^0\)
+\(\Delta F=2\) amplitude.  It is the headline kaon CP constraint for anarchic
+warped flavor because new phases in \(s\)-\(d\) mixing are strongly amplified
+by the small observed value.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical experimental value is the PDG kaon CP-violation magnitude
+\[
+  |\epsilon| = (2.228 \pm 0.011)\times 10^{-3},
+\]
+with the related phase \(\phi_\epsilon=(43.5\pm0.5)^\circ\).  The local text
+snapshot is
+\url{flavor_catalog/references/K001/pdg2026_epsilon_k.txt}.  For the SM
+comparison used by the current legacy code, Brod--Gorbahn--Stamou quote
+\[
+  |\epsilon_K|_{\rm SM}
+  = (2.161 \pm 0.153_{\rm param.}\pm0.076_{\rm non\mbox{-}pert.}
+     \pm0.065_{\rm pert.})\times10^{-3}
+  = 2.16(18)\times10^{-3}.
+\]
+The updated FLAG kaon-bag input to keep visible is the \(N_f=2+1\) average
+\(\hat B_K=0.7533(91)\), with \(B_K^{\overline{\rm MS}}(2\,{\rm GeV})=
+0.5503(66)\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In anarchic RS models, KK-gluon and electroweak gauge exchange generate
+misaligned four-quark operators for \(K^0\)-\(\bar K^0\) mixing.  The
+left-right matrix elements are chirally enhanced, and generic complex phases
+turn \(\epsilon_K\) into one of the strongest constraints on the KK scale.
+The CFW baseline already tied warped anarchic flavor to KK-gluon masses of
+about \(21\) TeV in standard RS and about \(33\) TeV in the composite
+pseudo-Goldstone variant.
+
+\subsection*{Post-2008 developments}
+Since arXiv:0804.1954, the experimental central value has remained very
+precise, so the important changes are theory and lattice inputs rather than a
+new observation.  BGS reformulated the SM prediction with manifest CKM
+unitarity and reduced the charm short-distance uncertainty, giving the
+\(2.161\times10^{-3}\) central value used in the repository's legacy
+\(\Delta F=2\) path.  FLAG 2024 updates the kaon bag averages and now quotes
+the \(N_f=2+1\) \(\hat B_K\) and \(B_K^{\overline{\rm MS}}\) values recorded
+above.  These updates matter because the catalog should distinguish a hard
+experimental number, a theory budget, and mutable lattice inputs.
+
+\subsection*{Constraint validity and model dependence}
+As an RS constraint this is robust for generic tree-level \(\Delta F=2\)
+new physics with arbitrary CP phases.  The model dependence enters through
+the matching convention, QCD running, hadronic matrix elements, and the choice
+of how much of \(|\epsilon_K^{\rm exp}-\epsilon_K^{\rm SM}|\) is assigned as
+the allowed NP budget.  It is not a standalone measurement of one Wilson
+coefficient; it constrains the imaginary part of the full \(K\)-mixing
+amplitude.
+
+\subsection*{Code coverage in this repo}
+Coverage status: YES.  The legacy implementation registers
+\texttt{epsilon\_k} in
+\texttt{quarkConstraints/deltaf2.py:209}--\texttt{212}, stores the PDG and
+BGS constants at \texttt{quarkConstraints/deltaf2.py:622}--\texttt{623}, and
+evaluates the observable in \texttt{quarkConstraints/deltaf2.py:729}.  The
+QCD-running wrapper is at \texttt{quarkConstraints/deltaf2.py:775}.  The
+modern policy surface also enumerates \texttt{epsilon\_K} at
+\texttt{quarkConstraints/modern/phenomenology.py:23} and routes it through
+the bridge evaluator at \texttt{quarkConstraints/modern/phenomenology.py:458}
+and \texttt{quarkConstraints/modern/phenomenology.py:1320}.  Tests exercise
+the evaluator at \texttt{tests/test\_epsilon\_k\_physics.py:166} and
+\texttt{tests/test\_epsilon\_k\_physics.py:421}.
+
+\subsection*{Implementation difficulty}
+Implementation difficulty: LOW.  The needed \(\Delta F=2\) operator basis,
+hadronic contraction, QCD-running wrapper, and pass/fail budget already exist.
+A future production cleanup should reconcile the legacy and modern frozen
+input constants, but no new operator, lattice machinery, or exclusive-mode
+calculation is needed for catalog-level coverage.
+
+\subsection*{Key references}
+Process-local reference keys before bibliography consolidation:
+PDG2026:EpsilonK, BrodGorbahnStamou:EpsilonK2020, FLAG2024:BK, and
+CsakiFalkowskiWeiler:RSFlavor2008.

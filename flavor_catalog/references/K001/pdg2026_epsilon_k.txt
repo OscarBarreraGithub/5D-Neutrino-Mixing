@@ -1,0 +1,17 @@
+Source key: PDG2026:EpsilonK
+Source: Particle Data Group, 2026 Review of Particle Physics, review "CP Violation in K0_L Decays".
+URL: https://pdg.lbl.gov/2026/reviews/rpp2026-rev-cp-viol-kl-decays.pdf
+Access date: 2026-05-16
+Snapshot type: minimal text extract only; no PDF stored in repository.
+
+Relevant extracted values:
+- The review states that CP violation was observed in K0 decays at a level given by epsilon approximately 2.3e-3.
+- Equation 68.8a gives |epsilon| = (2.228 +/- 0.011) x 10^-3.
+- Equation 68.8b gives phi_epsilon = (43.5 +/- 0.5) degrees.
+- Equation 68.8f gives A_L = (3.32 +/- 0.06) x 10^-3.
+
+Notes for K001:
+Use |epsilon| = (2.228 +/- 0.011) x 10^-3 as the canonical experimental
+epsilon_K magnitude unless the checker selects a PDG data-block value with
+newer metadata. The phase and semileptonic asymmetry are context values, not
+the headline K001 constraint.

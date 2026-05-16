@@ -1,0 +1,115 @@
+schema: flavor_catalog.process.v1
+process_id: K001
+family: kaon
+standard_notation: "\\epsilon_K"
+process_name: "Indirect CP violation in K0-K0bar mixing"
+owner: "PKA"
+owner_agent_id: "PKA-K001"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:38:00-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:38:00-04:00"
+    agent_id: "PKA-K001"
+    reason: "Initial PKA source extraction and draft deposit for epsilon_K."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:38:00-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_epsilon_k.txt: "sha256:9ada2a952ab9f8b69d7a29ec6b7ffa12571fa9140ca281c9ceee8a66b1dc7770"
+  bgs2020_epsilon_k_arxiv1911_06822.txt: "sha256:56faa9c2fed84b9740b0b858c8f1e10a408d030a627bfee18e57af1c72ab0984"
+  flag2024_bk_arxiv2411_04268.txt: "sha256:513caa2edf3dc444b0c588d4a7aa2e85862b6712acf157160f68789688344608"
+  cfw2008_rs_flavor_arxiv0804_1954.txt: "sha256:e6330846f14867e4f9534d83813719e893b16ac3c48ce58202cfe4209a55fac1"
+pdg_or_equivalent:
+  canonical_experimental_value:
+    source: "Particle Data Group, 2026 Review of Particle Physics, CP Violation in K0_L Decays"
+    year: 2026
+    observable: "|epsilon|"
+    value: 0.002228
+    uncertainty: 0.000011
+    units: "dimensionless"
+    display_value: "|epsilon| = (2.228 +/- 0.011) x 10^-3"
+    related_phase: "phi_epsilon = (43.5 +/- 0.5) degrees"
+    related_semileptonic_asymmetry: "A_L = (3.32 +/- 0.06) x 10^-3"
+    source_url: "https://pdg.lbl.gov/2026/reviews/rpp2026-rev-cp-viol-kl-decays.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K001/pdg2026_epsilon_k.txt"
+    sha256_of_local_snapshot: "sha256:9ada2a952ab9f8b69d7a29ec6b7ffa12571fa9140ca281c9ceee8a66b1dc7770"
+  standard_model_reference:
+    source: "Brod, Gorbahn, and Stamou, Phys. Rev. Lett. 125, 171803 (2020)"
+    year: 2020
+    observable: "|epsilon_K|_SM"
+    value: 0.002161
+    grouped_uncertainties:
+      parametric: 0.000153
+      non_perturbative: 0.000076
+      perturbative: 0.000065
+    total_display_value: "2.16(18) x 10^-3"
+    units: "dimensionless"
+    source_url: "https://arxiv.org/abs/1911.06822"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K001/bgs2020_epsilon_k_arxiv1911_06822.txt"
+    sha256_of_local_snapshot: "sha256:56faa9c2fed84b9740b0b858c8f1e10a408d030a627bfee18e57af1c72ab0984"
+  flag_bag_parameters:
+    source: "FLAG Review 2024, arXiv:2411.04268 v3"
+    year: 2024
+    preferred_theory: "N_f = 2+1 for epsilon_K three-flavour expression"
+    hat_B_K_Nf21: "0.7533(91)"
+    B_K_MSbar_2GeV_Nf21: "0.5503(66)"
+    B_K_MSbar_3GeV_Nf21: "0.5324(64)"
+    hat_B_K_Nf211: "0.717(18)(16)"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K001/flag2024_bk_arxiv2411_04268.txt"
+    sha256_of_local_snapshot: "sha256:513caa2edf3dc444b0c588d4a7aa2e85862b6712acf157160f68789688344608"
+  rs_2008_context:
+    source: "Csaki, Falkowski, and Weiler, JHEP 0809:008 (2008)"
+    year: 2008
+    value_summary: "Generic RS flavor constraints imply KK-gluon mass about 21 TeV; pseudo-Goldstone scenario about 33 TeV."
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K001/cfw2008_rs_flavor_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:e6330846f14867e4f9534d83813719e893b16ac3c48ce58202cfe4209a55fac1"
+code_coverage:
+  status: "YES"
+  coverage_alias: "YES-D2-KCP"
+  searched_directories:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_epsilon_k|evaluate_delta_mk|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "quarkConstraints/deltaf2.py:209 defines DEFAULT_DELTA_F2_INPUTS_V1."
+    - "quarkConstraints/deltaf2.py:211 selects key='epsilon_k' and line 212 display_name='epsilon_K'."
+    - "quarkConstraints/deltaf2.py:622 stores EPSILON_K_EXP = 2.228e-3."
+    - "quarkConstraints/deltaf2.py:623 stores EPSILON_K_SM = 2.161e-3."
+    - "quarkConstraints/deltaf2.py:729 defines evaluate_epsilon_k."
+    - "quarkConstraints/deltaf2.py:735 documents epsilon_K^NP = kappa_epsilon Im(M12^NP)/(sqrt(2) Delta_m_K)."
+    - "quarkConstraints/deltaf2.py:775 defines evaluate_epsilon_k_with_running."
+    - "quarkConstraints/modern/phenomenology.py:23 enumerates epsilon_K in MODERN_PHENOMENOLOGY_SYSTEM_IDS."
+    - "quarkConstraints/modern/phenomenology.py:426 stores the modern bridge kaon B_1 constant."
+    - "quarkConstraints/modern/phenomenology.py:431 stores the modern bridge SM epsilon_K constant."
+    - "quarkConstraints/modern/phenomenology.py:458 defines _evaluate_epsilon_k_from_bridge."
+    - "quarkConstraints/modern/phenomenology.py:1320 routes the epsilon_K system to the bridge evaluator."
+    - "tests/test_epsilon_k_physics.py:166 exercises evaluate_epsilon_k."
+    - "tests/test_epsilon_k_physics.py:421 checks finite epsilon_K result fields."
+implementation_difficulty: "LOW"
+implementation_difficulty_if_missing: null
+implementation_difficulty_reason: "Existing Delta F = 2 SLL/SLR/VLL/VRR/LR1/LR2-style kaon-mixing machinery already covers epsilon_K; catalog promotion mainly needs input/provenance reconciliation."
+open_issues:
+  - "Checker should decide whether the sidecar should use the PDG review extract or a pdgLive JSON data-block snapshot as the canonical source path."
+  - "The legacy deltaf2 path and modern bridge path both cover epsilon_K, but their frozen constants differ; a production cleanup should reconcile the SM budget and FLAG input provenance."

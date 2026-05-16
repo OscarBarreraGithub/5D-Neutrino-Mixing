@@ -1,0 +1,18 @@
+Source key: FLAG2024:BK
+Source: FLAG Collaboration, "FLAG Review 2024".
+arXiv: 2411.04268
+URL: https://arxiv.org/abs/2411.04268
+Access date: 2026-05-16
+Snapshot type: minimal TeX-source extract from arXiv source; no PDF stored in repository.
+
+Relevant extracted values from BK/BK.tex in arXiv source v3:
+- The review states that the expression of epsilon_K in terms of B_K is derived in the three-flavour theory.
+- For N_f = 2+1, the FLAG average is Bhat_K = 0.7533(91).
+- For N_f = 2+1, the converted values are B_K^MSbar(2 GeV) = 0.5503(66) and B_K^MSbar(3 GeV) = 0.5324(64).
+- For N_f = 2+1+1, the FLAG entry quotes Bhat_K = 0.717(18)(16), B_K^MSbar(2 GeV) = 0.524(13)(12), and B_K^MSbar(3 GeV) = 0.507(13)(11).
+
+Notes for K001:
+The live legacy code uses B_1_K = 0.5503, matching the N_f = 2+1
+B_K^MSbar(2 GeV) value above. The BGS 2020 paper used the earlier
+FLAG-2019-style Bhat_K = 0.7625(97), so the catalog should keep the SM
+prediction and updated bag-input provenance distinct.

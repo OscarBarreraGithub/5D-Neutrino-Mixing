@@ -1,0 +1,18 @@
+Source key: BrodGorbahnStamou:EpsilonK2020
+Source: Joachim Brod, Martin Gorbahn, Emmanuel Stamou, "Standard-model prediction of epsilon_K with manifest CKM unitarity".
+arXiv: 1911.06822
+Journal reference: Phys. Rev. Lett. 125, 171803 (2020)
+URL: https://arxiv.org/abs/1911.06822
+Access date: 2026-05-16
+Snapshot type: arXiv abstract and TeX-source value extract; no PDF stored in repository.
+
+Relevant extracted values:
+- Abstract: epsilon_K = 2.16(6)(8)(15) x 10^-3. The three uncertainties are QCD short-distance, long-distance, and parametric.
+- TeX-source equation gives |epsilon_K| = (2.161 +/- 0.153_param. +/- 0.064_eta_tt +/- 0.008_eta_ut +/- 0.027_Bhat_K +/- 0.052_xi_s +/- 0.046_kappa_epsilon) x 10^-3.
+- The same equation groups this as (2.161 +/- 0.153_param. +/- 0.076_non-pert. +/- 0.065_pert.) x 10^-3 = 2.16(18) x 10^-3.
+- The phenomenological formula uses kappa_epsilon = 0.94(2) and, in the original 2020 input set, Bhat_K = 0.7625(97).
+
+Notes for K001:
+The repo constant EPSILON_K_SM = 2.161e-3 is traceable to the central value in
+this paper. The total quoted uncertainty is approximately 0.18e-3 after
+combining the grouped errors.
