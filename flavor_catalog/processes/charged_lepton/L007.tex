@@ -11,13 +11,15 @@
 \section{L007: \texorpdfstring{\(\tau\to\mu\gamma\)}{tau -> mu gamma} Dipole LFV}
 
 \subsection*{Process}
-Standard notation: \(\tau^-\to\mu^-\gamma\).  This entry covers the
-charged-lepton-flavor-violating radiative tau decay and its use as a tau-sector
-dipole probe, complementary to the much tighter \(\mu\to e\gamma\) constraint
-but involving the \(2\)-\(3\) lepton-flavor transition.
+\textbf{Standard notation:} \(\mathcal{B}(\tau^-\to\mu^-\gamma)\).
+This entry covers the charged-lepton-flavor-violating radiative tau decay and
+its use as a tau-sector dipole probe, complementary to the much tighter
+\(\mu\to e\gamma\) constraint but involving the \(2\)-\(3\) lepton-flavor
+transition.
 
-\subsection*{PDG / equivalent value(s)}
-The current PDG/equivalent value is the upper limit
+\subsection*{PDG-or-equivalent value}
+The current PDG/equivalent value is the sidecar
+\texttt{L007.yaml:primary\_current\_limit} upper limit
 \[
   \mathcal{B}(\tau^-\to\mu^-\gamma) < 4.2\times10^{-8}
   \quad (90\%\ {\rm C.L.}),
@@ -25,12 +27,13 @@ The current PDG/equivalent value is the upper limit
 from the PDGLive \(S035.31\) tau decay-mode summary, locally snapshotted at
 \texttt{flavor\_catalog/references/L007/pdg2025\_tau\_mu\_gamma\_pdglive.txt}.
 The primary experiment behind this value is the Belle full-data search using
-\(988\,{\rm fb}^{-1}\), which quotes
+\(988\,{\rm fb}^{-1}\), recorded in \texttt{L007.yaml:primary\_experiment},
+which quotes
 \(\mathcal{B}(\tau^\pm\to\mu^\pm\gamma)\le 4.2\times10^{-8}\) at \(90\%\)
 C.L.; the local Belle snapshot is
 \texttt{flavor\_catalog/references/L007/belle2021\_tau\_lgamma\_arxiv2103\_12994.txt}.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 In warped lepton-flavor extensions, this mode constrains the same class of
 brane-localized or loop-induced charged-lepton dipoles as \(\mu\to e\gamma\),
 but with the \(\tau\mu\) flavor spurion instead of the \(e\mu\) spurion.  It is
@@ -44,13 +47,14 @@ assumptions under which charged-lepton flavor violation is controlled.
 Since the arXiv:0804.1954 RS flavor baseline, the experimental limit was
 sharpened by the full-data \(B\)-factory searches.  BaBar's post-2008
 full-data search used \((963\pm7)\times10^6\) tau decays and set
-\(\mathcal{B}(\tau\to\mu\gamma)<4.4\times10^{-8}\) at \(90\%\) C.L.  Belle's
-2021 full-data update improved the canonical \(\tau\to\mu\gamma\) value to
-\(4.2\times10^{-8}\).  I found no Belle II measurement superseding Belle for
-this channel in this PKA pass; the Belle II Physics Book projects a reach of
-about \(<5\times10^{-9}\) with \(50\,{\rm ab}^{-1}\).
+\(\mathcal{B}(\tau\to\mu\gamma)<4.4\times10^{-8}\) at \(90\%\) C.L.
+(\texttt{L007.yaml:prior\_experimental\_limit}).  Belle's 2021 full-data update
+improved the canonical \(\tau\to\mu\gamma\) value to \(4.2\times10^{-8}\).  The
+PKA pass found no Belle II measurement superseding Belle for this channel; the
+sidecar records only a Belle II Physics Book projection of
+\(<5\times10^{-9}\) with \(50\,{\rm ab}^{-1}\), not a current bound.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 Experimentally this is a clean null search for charged-lepton flavor violation,
 with negligible Standard Model rates.  Its RS interpretation is model-dependent:
 the bound constrains a dipole coefficient or lepton-flavor spurion only after a
@@ -59,7 +63,7 @@ mass convention.  The catalog should classify it as robust experimentally but
 lepton-extension-only and dipole-model-dependent for this repo.
 
 \subsection*{Code coverage in this repo}
-NO.  The required catalog grep over \texttt{quarkConstraints/}, \texttt{qcd/},
+\textbf{NO.}  The required catalog grep over \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/} found no \(\tau\to\mu\gamma\) implementation.  The adjacent
@@ -70,14 +74,15 @@ that checker in scans.  Those lines are reusable design evidence, not L007
 coverage.
 
 \subsection*{Implementation difficulty}
-MEDIUM.  A future implementation can reuse the existing LFV dipole pattern, but
-it must generalize the flavor indices and rate normalization from \(\mu\to e\gamma\)
-to tau decays, add a tau-sector branching-ratio limit, and decide whether the
-same RS lepton-spurion assumptions apply.  No new hadronic matrix elements,
-lattice inputs, or QCD running are needed.
+\textbf{MEDIUM.}  A future implementation can reuse the existing LFV dipole
+pattern, but it must generalize the flavor indices and rate normalization from
+\(\mu\to e\gamma\) to tau decays, add a tau-sector branching-ratio limit, and
+decide whether the same RS lepton-spurion assumptions apply.  No new hadronic
+matrix elements, lattice inputs, or QCD running are needed.
 
 \subsection*{Key references}
-Process-local source keys: \texttt{PDG2025:TauMuGamma},
-\texttt{Belle2021:TauLGamma}, \texttt{BaBar2010:TauLGamma},
-\texttt{BelleIIPhysicsBook2019:TauLFV}, \texttt{CFW2008:RSWarpedFlavor}, and
-\texttt{PerezRandall2008:WarpedNeutrinos}.
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2025\_TauMuGamma}, \texttt{Belle2021\_TauLGamma},
+\texttt{BaBar2010\_TauLGamma}, \texttt{BelleIIPhysicsBook2019\_TauLFV},
+\texttt{CFW2008\_RSWarpedFlavor}, and
+\texttt{PerezRandall2008\_WarpedNeutrinos}.

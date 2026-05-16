@@ -11,25 +11,30 @@
 \section{L001: \texorpdfstring{\(\mu\to e\gamma\)}{mu -> e gamma} Dipole LFV}
 
 \subsection*{Process}
-Standard notation: \(\mu^+\to e^+\gamma\).  This entry covers the charged-lepton
-flavor-violating radiative muon decay and the dipole-style bound on the
-off-diagonal \(e\mu\) lepton-flavor spurion used by the current RS lepton-sector
-scan.  It is a charged-lepton-family process, not part of the quark
-\(\Delta F=2\) scan lane.
+\textbf{Standard notation:} \(\mathcal{B}(\mu^+\to e^+\gamma)\).
+This entry covers the charged-lepton-flavor-violating radiative muon decay and
+the dipole-style bound on the off-diagonal \(e\mu\) lepton-flavor spurion used
+by the current RS lepton-sector scan.  It is a charged-lepton process, not part
+of the quark \(\Delta F=2\) lane.
 
-\subsection*{PDG / equivalent value(s)}
-The current primary-experiment limit is the MEG II 2025 result,
+\subsection*{PDG-or-equivalent value}
+The current primary-experiment limit is the MEG II 2025 result recorded in
+\texttt{L001.yaml:primary\_current\_limit},
 \[
   \mathcal{B}(\mu^+\to e^+\gamma) < 1.5\times 10^{-13}\quad (90\%\ {\rm C.L.}),
 \]
 from the 2021--2022 MEG II data set, with quoted search sensitivity
-\(2.2\times10^{-13}\).  The local source snapshot is
+\(2.2\times10^{-13}\).  The local snapshot is
 \texttt{flavor\_catalog/references/L001/megii2025\_arxiv2504\_15711.txt}.
-For audit context, the PDG 2025 muon listing snapshot still records
-\(<3.1\times10^{-13}\) at \(90\%\) C.L.; this is the MEG+MEG II 2021 combined
-limit and appears to lag the later published MEG II 2025 paper.
+For audit context, \texttt{L001.yaml:pdg\_2025\_listing} records the PDG 2025
+muon-listing value
+\[
+  \mathcal{B}(\mu^+\to e^+\gamma) < 3.1\times10^{-13}\quad (90\%\ {\rm C.L.}),
+\]
+which is the MEG+MEG II 2021 combined limit and appears to lag the later MEG II
+2025 publication.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 In the lepton extension of the warped model, \(\mu\to e\gamma\) probes
 brane-localized or loop-induced dipoles controlled by the off-diagonal
 combination \((\bar Y_N\bar Y_N^\dagger)_{12}\).  The repo implements the
@@ -37,20 +42,23 @@ Perez--Randall NDA form
 \(\mathcal{B}\simeq 4\times10^{-8}\,|(\bar Y_N\bar Y_N^\dagger)_{12}|^2
 (3\,{\rm TeV}/M_{\rm KK})^4\), converts an experimental branching-ratio limit
 to \(C=\sqrt{\mathcal{B}_{\rm lim}/(4\times10^{-8})}\), and uses the updated
-MEG II limit in the scan default.  Numerically, the live default gives
-\(C\simeq1.936\times10^{-3}\), compared with the paper-era \(C=0.02\).
+MEG II limit in the scan default.  Those numerical inputs are the
+\texttt{L001.yaml:paper\_era\_reference} and \texttt{L001.yaml:repo\_default}
+entries: the live default gives \(C\simeq1.936\times10^{-3}\), compared with
+the paper-era \(C=0.02\).
 
 \subsection*{Post-2008 developments}
 Relative to the arXiv:0804.1954 RS-flavor baseline and the contemporaneous
 Perez--Randall lepton paper, the experimental story changed substantially.
-Perez--Randall used the MEGA-era \(\mathcal{B}<1.2\times10^{-11}\) input.  The
-full MEG data set from 2009--2013 pushed the limit to \(4.2\times10^{-13}\).
-MEG II then reported a 2021-only result of \(7.5\times10^{-13}\), whose
-combination with MEG gave \(3.1\times10^{-13}\).  The 2025 MEG II 2021--2022
-analysis now gives \(1.5\times10^{-13}\), and the published article states a
-target sensitivity near \(6\times10^{-14}\) with additional data.
+Perez--Randall used the MEGA-era
+\(\mathcal{B}(\mu\to e\gamma)<1.2\times10^{-11}\) input
+(\texttt{L001.yaml:paper\_era\_reference}).  The full MEG 2009--2013 data set
+then gave \(4.2\times10^{-13}\), MEG II's 2021-only result gave
+\(7.5\times10^{-13}\), and the MEG+MEG II combination gave
+\(3.1\times10^{-13}\) (\texttt{L001.yaml:prior\_experimental\_limits}).  The
+MEG II 2021--2022 analysis now sets the \(1.5\times10^{-13}\) primary value.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 The experimental bound is clean: a signal would be charged-lepton flavor
 violation with negligible Standard Model background.  Its translation into this
 repo is model-dependent, because it relies on the chosen RS lepton spurion, NDA
@@ -59,12 +67,13 @@ The catalog should therefore classify it as a robust experimental limit but a
 lepton-extension-only, dipole/NDA model interpretation.
 
 \subsection*{Code coverage in this repo}
-YES.  The implementation is in \texttt{flavorConstraints/muToEGamma.py}: the
-module documents the \(\mu\to e\gamma\) dipole constraint at line 1, records
-the paper-era \(C=0.02\) coefficient at line 20, defines
-\(\texttt{PREFAC\_BR}=4.0\times10^{-8}\) at line 31, converts branching-ratio
-limits to \(C\) at line 61, and exposes \(\texttt{check\_mu\_to\_e\_gamma}\) at
-line 75.  The scan default is the MEG II 2025 value:
+\textbf{YES.}  The sidecar \texttt{code\_coverage.evidence} block lists the
+implementation in \texttt{flavorConstraints/muToEGamma.py}: the module
+documents the \(\mu\to e\gamma\) dipole constraint, records the paper-era
+\(C=0.02\) coefficient, defines
+\(\texttt{PREFAC\_BR}=4.0\times10^{-8}\), converts branching-ratio limits to
+\(C\), and exposes \(\texttt{check\_mu\_to\_e\_gamma}\).  The scan default is the
+MEG II 2025 value:
 \texttt{scanParams/scan.py}:32--33 sets
 \(\texttt{BR\_LIMIT\_MEGII\_2025}=1.5\times10^{-13}\), and line 264 makes it the
 default \(\texttt{ScanConfig.br\_limit}\).  Tests at
@@ -72,13 +81,14 @@ default \(\texttt{ScanConfig.br\_limit}\).  Tests at
 \texttt{tests/test\_scan.py}:50 exercise the updated limit.
 
 \subsection*{Implementation difficulty}
-LOW for cataloging and present code coverage, because the observable is already
-implemented and the scan default matches the primary 2025 result.  A future
-production-grade integration refresh is MEDIUM: the code should audit the
+\textbf{LOW} for cataloging and present code coverage, because the observable
+is already implemented and the scan default matches the primary 2025 result.  A
+future production refresh is \textbf{MEDIUM}: the code should audit the
 paper-era NDA normalization, \(M_{\rm KK}\) convention, and whether the final
-catalog should expose both the paper-reproduction and MEG II 2025 modes.
+catalog should expose both paper-reproduction and MEG II 2025 modes.
 
 \subsection*{Key references}
-Process-local source keys: \texttt{MEGII2025:MuEGamma},
-\texttt{MEGII2024:MuEGammaFirst}, \texttt{MEG2016:MuEGammaFull},
-\texttt{PDG2025:MuonListing}, and \texttt{PerezRandall2008:WarpedNeutrinos}.
+Process-local source keys before bibliography consolidation:
+\texttt{MEGII2025\_MuEGamma}, \texttt{MEGII2024\_MuEGammaFirst},
+\texttt{MEG2016\_MuEGammaFull}, \texttt{PDG2025\_MuonListing}, and
+\texttt{PerezRandall2008\_WarpedNeutrinos}.

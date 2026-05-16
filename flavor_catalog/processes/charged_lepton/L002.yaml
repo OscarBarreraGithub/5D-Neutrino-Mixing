@@ -16,10 +16,18 @@ status_history:
     at: "2026-05-16T11:59:12-04:00"
     agent_id: "PKA-L002"
     reason: "Initial L002 PKA source extraction and draft sidecar."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:15:26-04:00"
+    agent: "WA"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:15:26-04:00"
+    agent_id: "WA"
+    reason: "Writer polish completed for wa_w23_charged_lepton; numerical claims checked against sidecar sources."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:59:12-04:00"
-version: "0.1.0"
+last_updated_at: "2026-05-16T12:15:26-04:00"
+version: "0.2.0"
 source_shas:
   agashe2006_rs_lfv_arxiv_hepph_0606021.txt: "sha256:51a5f86a338eb56993ea4dd8112ee25b294ec4b9b31087e3d024261cb66e2f0c"
   cfw2008_arxiv0804_1954.txt: "sha256:f9f12e5b1a406cb547c991af56870464723da031d223212a223dde87e6a0234e"
