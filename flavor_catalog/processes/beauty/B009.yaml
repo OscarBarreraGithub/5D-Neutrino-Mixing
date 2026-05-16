@@ -1,0 +1,146 @@
+schema: flavor_catalog.process.v1
+process_id: B009
+family: beauty
+standard_notation: "\\mathcal{B}(B^+\\to\\tau^+\\nu_\\tau)"
+process_name: "Leptonic B+ -> tau+ nu_tau branching fraction"
+owner: "PKA"
+owner_agent_id: "PKA-B009"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:10:00-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:10:00-04:00"
+    agent_id: "PKA-B009"
+    reason: "Initial PKA source extraction and draft skeleton per dispatch prompt."
+  - from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T11:10:00-04:00"
+    agent_id: "PKA-B009"
+    reason: "PKA draft, source snapshots, coverage grep, and sidecar completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:10:00-04:00"
+version: "0.1.1"
+source_shas:
+  hflav_dec2025_btaunu.txt: "sha256:7a4e4079a8223ced909c49a8bfffb849edc7b3bbb19d258a9e03ec4d8c37a970"
+  pdg2025_btaunu_api.txt: "sha256:7e0c8745233bb0ac010ee8d85386ba9b6311015e32968d69dba51f0641e05939"
+  utfit_summer2024_btaunu.txt: "sha256:c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3"
+  belle2013_arxiv1208_4678.txt: "sha256:34fba2f4ff096b66dbb6bcb182d154df731b46b2c0ace0d269f30d30e83f1a69"
+  belle2015_arxiv1503_05613.txt: "sha256:aa5550faa3fc2752f0ae6ce0d3a0fe0ba154a4d4bd05bcec6f8754c02297281e"
+  belleii2025_arxiv2502_04885.txt: "sha256:8aed992571791c691faeb3ee65798c7bde8794603b683f2d3d38418b3aa264e6"
+  babar2013_arxiv1207_0698.txt: "sha256:eb7d51abe66f1efb067f8d38563d34d3e78f649ed79c3b7dc9cf4ea8f2ce323b"
+  babar2010_arxiv0912_2453.txt: "sha256:0e3378f2fc0ef5c4640d50c3a8faeef92bc14ea6c4f22eb082fa15bf94db86be"
+  cfw2008_arxiv0804_1954.txt: "sha256:96029befd316c9a3c5ed9ee85a94a4efcbc72bd8dcb5a233bc2bd7b8133c6161"
+pdg_or_equivalent:
+  canonical_average:
+    source: "HFLAV Rare B decays, End of December 2025 update"
+    year: 2025
+    value: 1.12
+    uncertainty: 0.19
+    units: "10^-4 branching fraction"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Leptonic/BR_B+_tau+_nutau.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B009/hflav_dec2025_btaunu.txt"
+    sha256: "7a4e4079a8223ced909c49a8bfffb849edc7b3bbb19d258a9e03ec4d8c37a970"
+  pdg_2025_average:
+    source: "PDG 2025 REST API, S041.184"
+    year: 2025
+    value: 1.09
+    uncertainty: "+0.25/-0.24"
+    units: "10^-4 branching fraction"
+    source_url: "https://pdgapi.lbl.gov/summaries/S041.184"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B009/pdg2025_btaunu_api.txt"
+    sha256: "7e0c8745233bb0ac010ee8d85386ba9b6311015e32968d69dba51f0641e05939"
+  sm_prediction:
+    source: "UTfit Standard Model Fit results: Summer 2024"
+    year: 2024
+    value: 0.865
+    uncertainty: 0.041
+    units: "10^-4 branching fraction"
+    source_url: "https://www.utfit.org/foswiki/bin/view/UTfit/ResultsSummer2024SM"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B009/utfit_summer2024_btaunu.txt"
+    sha256: "c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3"
+  experimental_inputs:
+    - experiment: "Belle"
+      year: 2013
+      value: 0.72
+      uncertainty: "+0.27/-0.25 stat, 0.11 syst"
+      units: "10^-4 branching fraction"
+      method: "Hadronic tagging"
+      source_key: "belle2013_arxiv1208_4678"
+      snapshot_path: "flavor_catalog/references/B009/belle2013_arxiv1208_4678.txt"
+      sha256: "34fba2f4ff096b66dbb6bcb182d154df731b46b2c0ace0d269f30d30e83f1a69"
+    - experiment: "Belle"
+      year: 2015
+      value: 1.25
+      uncertainty: "0.28 stat, 0.27 syst"
+      units: "10^-4 branching fraction"
+      method: "Semileptonic tagging"
+      source_key: "belle2015_arxiv1503_05613"
+      snapshot_path: "flavor_catalog/references/B009/belle2015_arxiv1503_05613.txt"
+      sha256: "aa5550faa3fc2752f0ae6ce0d3a0fe0ba154a4d4bd05bcec6f8754c02297281e"
+    - experiment: "Belle II"
+      year: 2025
+      value: 1.24
+      uncertainty: "0.41 stat, 0.19 syst"
+      units: "10^-4 branching fraction"
+      method: "Hadronic tagging"
+      source_key: "belleii2025_arxiv2502_04885"
+      snapshot_path: "flavor_catalog/references/B009/belleii2025_arxiv2502_04885.txt"
+      sha256: "8aed992571791c691faeb3ee65798c7bde8794603b683f2d3d38418b3aa264e6"
+    - experiment: "BaBar"
+      year: 2013
+      value: 1.83
+      uncertainty: "+0.53/-0.49 stat, 0.24 syst"
+      units: "10^-4 branching fraction"
+      method: "Hadronic tagging"
+      source_key: "babar2013_arxiv1207_0698"
+      snapshot_path: "flavor_catalog/references/B009/babar2013_arxiv1207_0698.txt"
+      sha256: "eb7d51abe66f1efb067f8d38563d34d3e78f649ed79c3b7dc9cf4ea8f2ce323b"
+    - experiment: "BaBar"
+      year: 2010
+      value: 1.70
+      uncertainty: "0.80 stat, 0.20 syst"
+      units: "10^-4 branching fraction"
+      method: "Semileptonic tagging"
+      source_key: "babar2010_arxiv0912_2453"
+      snapshot_path: "flavor_catalog/references/B009/babar2010_arxiv0912_2453.txt"
+      sha256: "0e3378f2fc0ef5c4640d50c3a8faeef92bc14ea6c4f22eb082fa15bf94db86be"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  auxiliary_search_paths:
+    - "docs"
+    - "scripts"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+  targeted_grep_commands:
+    - "rg -n -F \"B^+ -> tau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n -F \"B+ --> tau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"B\\\\+.*tau|B\\\\^\\\\+.*tau|tau.*nu|b.?->.?u|charged.?current|charged.?Higgs|leptoquark|W'|Wprime\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Required broad greps found the existing Delta F=2 and mu->e gamma surfaces, but no B+ -> tau+ nu observable implementation."
+    - "Targeted searches over quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, and tests returned no B+ -> tau+ nu, b->u tau nu, charged-Higgs, Wprime, or leptoquark implementation hits."
+    - "Auxiliary docs searches hit only the flavor-catalog planning rows: docs/phase_logs/flavor_catalog_plan_v1.md:271 and docs/phase_logs/flavor_catalog_plan_v0.md:241; those were not counted as code coverage."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "A live constraint would need a new charged-current leptonic-B observable and model matching to W'/charged-scalar/leptoquark-like amplitudes, but the experimental average and SM inputs are standard and no new QCD RG machinery is expected for the catalog-level formula."
+open_issues:
+  - "Writer/checker should decide whether the final prose should use HFLAV Dec. 2025 or PDG 2025 as the display canonical value; this PKA sidecar records both and uses HFLAV as the canonical current average."
+  - "If the catalog later wants a direct f_B |V_ub| construction rather than the UTfit SM prediction, it should add explicit FLAG f_B and |V_ub| snapshots."

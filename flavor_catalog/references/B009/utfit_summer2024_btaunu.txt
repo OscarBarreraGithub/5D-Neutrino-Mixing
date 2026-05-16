@@ -1,0 +1,18 @@
+Source: UTfit, Standard Model Fit results: Summer 2024
+URL: https://www.utfit.org/foswiki/bin/view/UTfit/ResultsSummer2024SM
+Access date: 2026-05-16
+Fetch note: local curl used -k because the UTfit server certificate chain used a weak-key certificate rejected by current curl defaults.
+
+Context excerpt:
+"Table of inputs, posterior values and predictions from the global fit."
+"Predictions are obtained by removing the given constraint from the global fit."
+
+Row excerpt:
+Parameter: B(B\rightarrow\tau\nu) \cdot 10^{4}
+Input value: 1.06 \pm 0.19
+Full fit: 0.872 \pm 0.041
+SM Prediction: 0.865 \pm 0.041
+Pull: 1.0
+
+Interpretation for this catalog entry:
+UTfit quotes the B -> tau nu branching fraction in units of 10^-4. The SM prediction used here is therefore (0.865 +- 0.041) x 10^-4.

@@ -1,0 +1,85 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B009
+created_at: "2026-05-16T11:10:00-04:00"
+references:
+  - key: hflav_dec2025_btaunu
+    arxiv_id: null
+    doi: null
+    title: "HFLAV Rare B decays: B+ -> tau+ nu_tau, End of December 2025 update"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Leptonic/BR_B+_tau+_nutau.html"
+    snapshot_path: "flavor_catalog/references/B009/hflav_dec2025_btaunu.txt"
+    sha256_of_local_snapshot: "7a4e4079a8223ced909c49a8bfffb849edc7b3bbb19d258a9e03ec4d8c37a970"
+  - key: pdg2025_btaunu_api
+    arxiv_id: null
+    doi: "10.1103/PhysRevD.110.030001"
+    title: "PDG 2025 API entry S041.184 for B+ -> tau+ nu_tau"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdgapi.lbl.gov/summaries/S041.184"
+    snapshot_path: "flavor_catalog/references/B009/pdg2025_btaunu_api.txt"
+    sha256_of_local_snapshot: "7e0c8745233bb0ac010ee8d85386ba9b6311015e32968d69dba51f0641e05939"
+  - key: utfit_summer2024_btaunu
+    arxiv_id: null
+    doi: null
+    title: "UTfit Standard Model Fit results: Summer 2024"
+    authors: "UTfit Collaboration"
+    year: 2024
+    url: "https://www.utfit.org/foswiki/bin/view/UTfit/ResultsSummer2024SM"
+    snapshot_path: "flavor_catalog/references/B009/utfit_summer2024_btaunu.txt"
+    sha256_of_local_snapshot: "c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3"
+  - key: belle2013_arxiv1208_4678
+    arxiv_id: "1208.4678"
+    doi: "10.1103/PhysRevLett.110.131801"
+    title: "Evidence for B- -> tau- nu_tau-bar with a Hadronic Tagging Method Using the Full Data Sample of Belle"
+    authors: "Belle Collaboration, K. Hara et al."
+    year: 2013
+    url: "https://arxiv.org/abs/1208.4678"
+    snapshot_path: "flavor_catalog/references/B009/belle2013_arxiv1208_4678.txt"
+    sha256_of_local_snapshot: "34fba2f4ff096b66dbb6bcb182d154df731b46b2c0ace0d269f30d30e83f1a69"
+  - key: belle2015_arxiv1503_05613
+    arxiv_id: "1503.05613"
+    doi: "10.1103/PhysRevD.92.051102"
+    title: "Measurement of the branching fraction of B^+ -> tau^+ nu_tau decays with the semileptonic tagging method"
+    authors: "Belle Collaboration, B. Kronenbitter et al."
+    year: 2015
+    url: "https://arxiv.org/abs/1503.05613"
+    snapshot_path: "flavor_catalog/references/B009/belle2015_arxiv1503_05613.txt"
+    sha256_of_local_snapshot: "aa5550faa3fc2752f0ae6ce0d3a0fe0ba154a4d4bd05bcec6f8754c02297281e"
+  - key: belleii2025_arxiv2502_04885
+    arxiv_id: "2502.04885"
+    doi: "10.1103/dcwd-5tg4"
+    title: "Measurement of B^+ -> tau^+ nu_tau branching fraction with a hadronic tagging method at Belle II"
+    authors: "Belle II Collaboration, I. Adachi et al."
+    year: 2025
+    url: "https://arxiv.org/abs/2502.04885"
+    snapshot_path: "flavor_catalog/references/B009/belleii2025_arxiv2502_04885.txt"
+    sha256_of_local_snapshot: "8aed992571791c691faeb3ee65798c7bde8794603b683f2d3d38418b3aa264e6"
+  - key: babar2013_arxiv1207_0698
+    arxiv_id: "1207.0698"
+    doi: "10.1103/PhysRevD.88.031102"
+    title: "Evidence of B -> tau nu decays with hadronic B tags"
+    authors: "BABAR Collaboration"
+    year: 2013
+    url: "https://arxiv.org/abs/1207.0698"
+    snapshot_path: "flavor_catalog/references/B009/babar2013_arxiv1207_0698.txt"
+    sha256_of_local_snapshot: "eb7d51abe66f1efb067f8d38563d34d3e78f649ed79c3b7dc9cf4ea8f2ce323b"
+  - key: babar2010_arxiv0912_2453
+    arxiv_id: "0912.2453"
+    doi: "10.1103/PhysRevD.81.051101"
+    title: "A Search for B+ -> tau+ nu Recoiling Against B- -> D0 l- nu X"
+    authors: "BABAR Collaboration, B. Aubert et al."
+    year: 2010
+    url: "https://arxiv.org/abs/0912.2453"
+    snapshot_path: "flavor_catalog/references/B009/babar2010_arxiv0912_2453.txt"
+    sha256_of_local_snapshot: "0e3378f2fc0ef5c4640d50c3a8faeef92bc14ea6c4f22eb082fa15bf94db86be"
+  - key: cfw2008_arxiv0804_1954
+    arxiv_id: "0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    snapshot_path: "flavor_catalog/references/B009/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "96029befd316c9a3c5ed9ee85a94a4efcbc72bd8dcb5a233bc2bd7b8133c6161"

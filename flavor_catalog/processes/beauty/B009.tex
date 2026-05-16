@@ -1,0 +1,101 @@
+% Flavor catalog per-process draft.
+% process_id: B009
+% family: beauty
+% owner_agent_id: PKA-B009
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B009.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B009: \(B^+\to\tau^+\nu_\tau\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(B^+\to\tau^+\nu_\tau)\).
+This entry covers the purely leptonic charged-\(B\) branching fraction, including
+the Belle, Belle II, BaBar, PDG, and HFLAV averages collected in the sidecar.
+It is a beauty-family charged-current observable rather than a neutral-meson
+mixing constraint.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical sidecar value is the HFLAV End-of-December-2025 average
+\[
+  \mathcal{B}(B^+\to\tau^+\nu_\tau) = (1.12 \pm 0.19)\times 10^{-4},
+\]
+from the local snapshot
+\texttt{flavor\_catalog/references/B009/hflav\_dec2025\_btaunu.txt}.
+The PDG 2025 REST entry gives the compatible average
+\((1.09^{+0.25}_{-0.24})\times 10^{-4}\), with the PDG uncertainty scaled by
+the factor recorded in \texttt{pdg2025\_btaunu\_api.txt}.  HFLAV lists the
+post-2008 inputs as Belle hadronic tag \((0.72^{+0.27}_{-0.25}\pm0.11)\times
+10^{-4}\), Belle semileptonic tag \((1.25\pm0.28\pm0.27)\times10^{-4}\),
+Belle II hadronic tag \((1.24\pm0.41\pm0.19)\times10^{-4}\), BaBar hadronic
+tag \((1.83^{+0.53}_{-0.49}\pm0.24)\times10^{-4}\), and BaBar semileptonic
+tag \((1.70\pm0.80\pm0.20)\times10^{-4}\).  For comparison to the
+\(|V_{ub}| f_B\) Standard Model prediction, the sidecar records the UTfit
+Summer 2024 SM prediction \((0.865\pm0.041)\times10^{-4}\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This channel probes \(b\to u\tau\nu\) charged currents.  In the SM it is fixed
+by \(f_B |V_{ub}|\), the charged-\(B\) lifetime, and the tau mass; therefore it
+is a clean place where a new charged current can interfere with the SM
+amplitude.  It is directly relevant to charged-Higgs, \(W'\), and leptoquark
+benchmarks.  For warped or anarchic-flavor extensions, it is not part of the
+current quark \(\Delta F=2\) lane, but it would test KK charged-gauge-boson or
+non-minimal charged-scalar effects in the \(b\)-to-\(u\) current and in the
+tau-neutrino current.
+
+\subsection*{Post-2008 developments}
+Relative to the Csaki--Falkowski--Weiler 2008 flavor baseline
+(\texttt{cfw2008\_arxiv0804\_1954.txt}), the measurement landscape changed
+substantially.  BaBar published semileptonic-tag and hadronic-tag results in
+2010 and 2013.  Belle superseded earlier evidence with the full-data hadronic
+tag result in 2013 and a semileptonic-tag full-sample result in 2015.  Belle II
+added a hadronic-FEI measurement in 2025, which HFLAV includes in its latest
+average while noting that the red Belle II input is not part of the PDG
+average.  On the theory/global-fit side, UTfit now quotes a sub-5-percent SM
+prediction for the branching fraction in its Summer 2024 fit table, making the
+dominant comparison issue the \(|V_{ub}|\) and global-fit convention rather
+than a missing hadronic matrix element.
+
+\subsection*{Constraint validity and model dependence}
+The experimental average is straightforward, but the constraint is
+model-dependent.  It is robust as a charged-current amplitude test; it is not a
+generic RS bound unless the model supplies a calculable \(b\to u\tau\nu\)
+matching contribution.  A charged scalar, \(W'\), or leptoquark can interfere
+constructively or destructively with the SM, so a one-number exclusion requires
+the operator normalization and neutrino-flavor assumptions.  The SM comparison
+is global-fit dependent through \(|V_{ub}|\), even though the leptonic decay
+constant input itself is now standard.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  I reran the required coverage greps over
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/}.  The broad plan
+greps find the existing neutral \(\Delta F=2\) and \(\mu\to e\gamma\) surfaces,
+but no charged-current leptonic-\(B\) observable.  Targeted searches for
+\texttt{B\string^+ -> tau}, \texttt{B+ --> tau}, \texttt{tau.*nu},
+\texttt{b.*->.*u}, \texttt{charged Higgs}, \texttt{leptoquark}, and \(W'\)
+returned no code hits.  Docs-only catalog-planning rows were not counted as
+implementation evidence.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  The catalog-level formula is simple and uses standard
+experimental and lattice/CKM inputs, but production use would require a new
+charged-current observable and model-specific matching for \(W'\),
+charged-scalar, or leptoquark amplitudes.  It should not extend the legacy
+\texttt{deltaf2.py} path; if promoted, it belongs in the modern constraint
+surface.
+
+\subsection*{Key references}
+Process-local snapshots before bibliography consolidation:
+\texttt{hflav\_dec2025\_btaunu.txt},
+\texttt{pdg2025\_btaunu\_api.txt},
+\texttt{utfit\_summer2024\_btaunu.txt},
+\texttt{belle2013\_arxiv1208\_4678.txt},
+\texttt{belle2015\_arxiv1503\_05613.txt},
+\texttt{belleii2025\_arxiv2502\_04885.txt},
+\texttt{babar2013\_arxiv1207\_0698.txt},
+\texttt{babar2010\_arxiv0912\_2453.txt}, and
+\texttt{cfw2008\_arxiv0804\_1954.txt}.

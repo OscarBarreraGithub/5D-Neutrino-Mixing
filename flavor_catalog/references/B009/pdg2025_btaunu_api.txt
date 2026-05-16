@@ -1,0 +1,23 @@
+Source: PDG REST API summary and listing for S041.184
+URL summary: https://pdgapi.lbl.gov/summaries/S041.184
+URL listing: https://pdgapi.lbl.gov/listings/S041.184
+Access date: 2026-05-16
+
+Summary excerpt:
+edition: 2025
+pdgid: S041.184
+description: B+ --> tau+ nu_tau
+section: Semileptonic and leptonic modes
+pdg_values:
+  value: 1.09376418135583E-4
+  error_positive: 2.46801309137533E-5
+  error_negative: 2.36425623126656E-5
+  value_text: "(1.09+-0.24)E-4"
+  scale_factor: 1.178431
+  type: OUR AVERAGE
+
+Listing excerpt, inputs used in PDG average:
+KRONENBITTER 2015, PR D92 051102, DOI 10.1103/PhysRevD.92.051102, title "Measurement of the Branching Fraction of B+ --> tau+ nu_tau Decays with the Semileptonic Tagging Method": value_text "(1.25 +-0.28 +-0.27) E-4", used_in_average true.
+HARA 2013, PRL 110 131801, DOI 10.1103/PhysRevLett.110.131801, title "Evidence for B- --> tau- nubar_tau with a Hadronic Tagging Method Using the Full Data Sample of Belle": value_text "(0.72 +0.27 -0.25 +- 0.11) E-4", used_in_average true.
+LEES 2013K, PR D88 031102, DOI 10.1103/PhysRevD.88.031102, title "Evidence of Decays with Hadronic B Tags": value_text "(1.83 +0.53-0.49 +-0.24) E-4", used_in_average true.
+AUBERT 2010E, PR D81 051101, DOI 10.1103/PhysRevD.81.051101, title "A Search for B+ --> lepton+ nu_lepton Recoiling Against B- --> D0 lepton- nubar X": value_text "(1.7 +-0.8 +-0.2) E-4", used_in_average true.
