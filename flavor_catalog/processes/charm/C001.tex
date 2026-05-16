@@ -1,0 +1,92 @@
+% Flavor catalog process: C001
+% family: charm
+% owner_agent_id: PKA-C001
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: C001.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{C001: \(D^0-\bar D^0\) Mixing}
+
+\subsection*{Process}
+\textbf{Standard notation:} neutral-charm mixing, parameterized by
+\(x_D=\Delta m_D/\Gamma_D\), \(y_D=\Delta\Gamma_D/(2\Gamma_D)\), and
+\(\Delta m_D=|m_1-m_2|\).  This entry covers the CP-even mixing magnitudes
+used for RS-flavor constraints; the dedicated CP-violation observables
+\(|q/p|\) and \(\phi_D\) belong to C002.
+
+\subsection*{PDG / equivalent value(s)}
+The headline values are the HFLAV CKM25 all-CPV global-fit results, version
+through 14 September 2025:
+\[
+  x_D=(0.405\pm0.043)\%,\qquad
+  y_D=(0.636\pm0.024)\%.
+\]
+The 95\% C.L. intervals are \(x_D\in[0.320,0.489]\%\) and
+\(y_D\in[0.590,0.682]\%\).  These values are traced to
+\texttt{flavor\_catalog/references/C001/hflav\_ckm25\_dmixing\_global\_fit.txt}
+and to the PDG 2025 Table 70.7 excerpt.  PDG Live separately gives
+\[
+  \Delta m_D=(0.997\pm0.116)\times10^{10}\hbar\,{\rm s}^{-1}
+             =(6.56\pm0.76)\times10^{-15}\,{\rm GeV},
+\]
+from \texttt{flavor\_catalog/references/C001/pdg2025\_deltam\_d\_pdgLive.txt}.
+For the orchestrator-requested \(\delta y\) block, the sidecar records the
+latest HFLAV/LHCb CPV-sensitive input
+\(\Delta y=(0.031\pm0.035\pm0.013)\%\); it also records the derived
+\(\Delta\Gamma_D/\Gamma_D=2y_D=(1.272\pm0.048)\%\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In anarchic warped models, KK-gluon and other heavy neutral exchanges generate
+\(\Delta C=2\) four-quark operators connecting \(u\) and \(c\).  The same
+operator-basis logic used for \(K\), \(B_d\), and \(B_s\) mixing applies, but
+the charm system is up-sector and long-distance dominated.  It is therefore a
+useful complementary test of whether the scan's flavor alignment suppresses
+both down- and up-sector neutral currents.
+
+\subsection*{Post-2008 developments}
+The CFW 2008 baseline already treated warped anarchic flavor as strongly
+constrained, with generic RS KK-gluon scales around \(21\) TeV and composite
+pseudo-Goldstone scenarios around \(33\) TeV.  Since then, the charm-mixing
+experimental picture has become much sharper.  LHCb's 2021
+\(D^0\to K_S^0\pi^+\pi^-\) analysis observed a nonzero neutral-charm
+mass difference with significance above seven standard deviations, and the
+current HFLAV/PDG global fits now exclude the no-mixing point at more than
+\(11.5\sigma\).  The same HFLAV fit still finds indirect CP violation
+consistent with zero, so the CP-even magnitudes remain the clean C001 inputs.
+
+\subsection*{Constraint validity and model dependence}
+As a new-physics constraint this is robust in the sense that any short-distance
+\(\Delta C=2\) amplitude contributes to \(M_{12}^D\).  It is also
+SM-theory-limited: the observed mixing is believed to be dominated by
+long-distance Standard Model amplitudes that are hard to compute.  The safe
+catalog interpretation is therefore conservative, bounding the magnitude of a
+new-physics contribution rather than subtracting a precise SM prediction.
+
+\subsection*{Code coverage in this repo}
+\textbf{YES.}  The legacy lane has a default D-mixing input at
+\texttt{quarkConstraints/deltaf2.py:252}, with reject reason
+\texttt{d\_mix} at \texttt{quarkConstraints/deltaf2.py:256}, D0 hadronic inputs
+starting at \texttt{quarkConstraints/deltaf2.py:655}, and
+\texttt{DELTA\_M\_D\_EXP} at \texttt{quarkConstraints/deltaf2.py:665}.  The
+numeric evaluator is \texttt{evaluate\_d0\_mixing} at
+\texttt{quarkConstraints/deltaf2.py:941}.  The scan writes
+\texttt{d\_mix\_ratio} at \texttt{quarkConstraints/scan.py:103} and
+\texttt{quarkConstraints/scan.py:439}.  The modern policy surface also lists
+\(D^0\) at \texttt{quarkConstraints/modern/phenomenology.py:23} and evaluates
+the bridge result at \texttt{quarkConstraints/modern/phenomenology.py:1356}.
+
+\subsection*{Implementation difficulty}
+\textbf{LOW.}  The existing \(\Delta F=2\) machinery already contains the
+D0 evaluator and the required VLL/VRR/LR operator structure.  A future
+production update would mainly refresh the experimental value and document the
+conservative long-distance treatment, not add a new operator basis.
+
+\subsection*{Key references}
+Process-local keys before bibliography consolidation:
+\texttt{hflav\_ckm25\_dmixing\_global\_fit},
+\texttt{pdg2025\_deltam\_d\_pdgLive},
+\texttt{pdg2025\_dmixing\_review\_table70\_7},
+\texttt{lhcb2021\_arxiv2106\_03744}, and
+\texttt{cfw2008\_arxiv0804\_1954}.

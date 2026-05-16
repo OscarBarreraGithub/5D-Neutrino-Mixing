@@ -1,0 +1,125 @@
+schema: flavor_catalog.process.v1
+process_id: C001
+family: charm
+standard_notation: "D^0-\\bar{D}^0 mixing: x_D, y_D, \\Delta m_D"
+process_name: "Neutral charm mixing"
+owner: "PKA"
+owner_agent_id: "PKA-C001"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:37:08-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:37:08-04:00"
+    agent_id: "PKA-C001"
+    reason: "Initial PKA source extraction and C001 draft started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T11:37:08-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T11:37:08-04:00"
+    agent_id: "PKA-C001"
+    reason: "PKA draft, minimal source snapshots, sidecar, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:37:08-04:00"
+version: "0.1.1"
+source_shas:
+  cfw2008_arxiv0804_1954.txt: "sha256:224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce"
+  hflav_ckm25_delta_y_input.txt: "sha256:024569bebcc21564ca10be45fe7c9cf5c8b6a3e7b519e7cee739336610db638a"
+  hflav_ckm25_dmixing_global_fit.txt: "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91"
+  lhcb2021_arxiv2106_03744.txt: "sha256:b9aaca434c4728681dce0492b5fd97f1fb9d87e4ecd86e55bc097909ee3eba8a"
+  pdg2025_deltam_d_pdgLive.txt: "sha256:398d3420f232e48d561ec00486761e12426ee9d99a62074f0ba069421634efcd"
+  pdg2025_dmixing_review_table70_7.txt: "sha256:3ba681465e2673aa3abe13ce0b4a9c713301fe50ab9d607ff783cfb16d4c2d0b"
+  source_manifest.yaml: "sha256:5fff2b5dbf53a3a08167e3896318dc5770d14c87112088ed8771a8bcea211696"
+pdg_or_equivalent:
+  x_D:
+    source: "HFLAV CKM25 global fit, all-CPV fit"
+    year: 2025
+    observable: "x_D = Delta m_D / Gamma_D"
+    value: 0.405
+    uncertainty: 0.043
+    units: "percent"
+    confidence_interval_95_percent: [0.320, 0.489]
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C001/hflav_ckm25_dmixing_global_fit.txt"
+    sha256_of_local_snapshot: "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91"
+  y_D:
+    source: "HFLAV CKM25 global fit, all-CPV fit"
+    year: 2025
+    observable: "y_D = Delta Gamma_D / (2 Gamma_D)"
+    value: 0.636
+    uncertainty: 0.024
+    units: "percent"
+    confidence_interval_95_percent: [0.590, 0.682]
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C001/hflav_ckm25_dmixing_global_fit.txt"
+    sha256_of_local_snapshot: "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91"
+  Delta_m_D:
+    source: "PDG Live S032D, produced by HFLAV"
+    year: 2025
+    observable: "|m(D1^0) - m(D2^0)| = x Gamma"
+    value: 0.997
+    uncertainty: 0.116
+    units: "10^10 hbar s^-1"
+    value_GeV: 6.562e-15
+    uncertainty_GeV: 0.764e-15
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/DataBlock.action?node=S032D"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C001/pdg2025_deltam_d_pdgLive.txt"
+    sha256_of_local_snapshot: "sha256:398d3420f232e48d561ec00486761e12426ee9d99a62074f0ba069421634efcd"
+  delta_y:
+    source: "HFLAV CKM25 measured-observable input table"
+    year: 2025
+    observable: "Delta y in the LHCb D0 -> K0_S pi+ pi- CPV-allowed input"
+    value: 0.031
+    statistical_uncertainty: 0.035
+    systematic_uncertainty: 0.013
+    units: "percent"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C001/hflav_ckm25_delta_y_input.txt"
+    sha256_of_local_snapshot: "sha256:024569bebcc21564ca10be45fe7c9cf5c8b6a3e7b519e7cee739336610db638a"
+  DeltaGamma_over_Gamma_D:
+    source: "Derived from HFLAV CKM25 all-CPV y_D"
+    year: 2025
+    observable: "Delta Gamma_D / Gamma_D = 2 y_D"
+    value: 1.272
+    uncertainty: 0.048
+    units: "percent"
+    derivation: "2 * (0.636 +/- 0.024)%"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C001/hflav_ckm25_dmixing_global_fit.txt"
+    sha256_of_local_snapshot: "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91"
+code_coverage:
+  status: "YES"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"D0|D\\\\^0|D mixing|d_mix|Delta_M_D|DELTA_M_D|DELTA_M_D_EXP|evaluate_d0_mixing|x_D|y_D|delta_y\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "quarkConstraints/deltaf2.py:252 defines the default D-mixing DeltaF2Input."
+    - "quarkConstraints/deltaf2.py:256 wires the D-mixing reject reason to d_mix."
+    - "quarkConstraints/deltaf2.py:655 starts the D0 hadronic-parameter block."
+    - "quarkConstraints/deltaf2.py:665 sets DELTA_M_D_EXP = 6.25e-15 GeV from HFLAV."
+    - "quarkConstraints/deltaf2.py:941 defines evaluate_d0_mixing."
+    - "quarkConstraints/deltaf2.py:949 uses the D0 budget in the evaluator."
+    - "quarkConstraints/scan.py:103 includes d_mix_ratio in scan output columns."
+    - "quarkConstraints/scan.py:439 records d_mix_ratio from the D-system DeltaF2 result."
+    - "quarkConstraints/modern/phenomenology.py:23 includes D0 in the modern policy surface."
+    - "quarkConstraints/modern/phenomenology.py:46 labels D0 as conservative non-CP mixing."
+    - "quarkConstraints/modern/phenomenology.py:668 defines _evaluate_d0_mixing_from_bridge."
+    - "quarkConstraints/modern/phenomenology.py:1356 evaluates D0 mixing from the QCD-evolved bridge."
+    - "quarkConstraints/modern/inputs.py:991 defines the modern D0 neutral-meson input."
+    - "quarkConstraints/modern/matching.py:28 includes D0 in MODERN_MATCHING_SYSTEM_IDS."
+implementation_difficulty: "LOW"
+implementation_difficulty_reason: "The existing Delta F = 2 neutral-meson machinery already covers D0 mixing with VLL/VRR/LR operator support and a D0-specific evaluator; catalog updates mainly require source/value refresh and sidecar provenance."
+open_issues:
+  - "The orchestrator requested a delta_y block. This PKA records the HFLAV Delta y CPV input and also records DeltaGamma/Gamma = 2 y_D so WA/CA can choose the preferred headline convention."

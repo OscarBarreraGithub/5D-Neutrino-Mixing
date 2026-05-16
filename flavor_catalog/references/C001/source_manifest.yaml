@@ -1,0 +1,64 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: C001
+generated_at: "2026-05-16T11:37:08-04:00"
+references:
+  - key: hflav_ckm25_dmixing_global_fit
+    arxiv_id: null
+    DOI: null
+    title: "Global Fit for D0-D0bar Mixing and CP Violation"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    snapshot_path: "flavor_catalog/references/C001/hflav_ckm25_dmixing_global_fit.txt"
+    sha256_of_local_snapshot: "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91"
+    notes: "All-CPV HFLAV CKM25 fit values for x, y, x12, y12 and derived 2y."
+  - key: hflav_ckm25_delta_y_input
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV CKM25 measured-observable input: x_CP, y_CP, Delta x, Delta y"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    snapshot_path: "flavor_catalog/references/C001/hflav_ckm25_delta_y_input.txt"
+    sha256_of_local_snapshot: "sha256:024569bebcc21564ca10be45fe7c9cf5c8b6a3e7b519e7cee739336610db638a"
+    notes: "Latest LHCb D0 -> K0_S pi+ pi- Delta y input as displayed by HFLAV."
+  - key: pdg2025_deltam_d_pdgLive
+    arxiv_id: null
+    DOI: null
+    title: "PDG Live D0 mass-difference listing S032D"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/DataBlock.action?node=S032D"
+    snapshot_path: "flavor_catalog/references/C001/pdg2025_deltam_d_pdgLive.txt"
+    sha256_of_local_snapshot: "sha256:398d3420f232e48d561ec00486761e12426ee9d99a62074f0ba069421634efcd"
+    notes: "PDG/HFLAV Delta m_D value in units of 10^10 hbar s^-1 and converted GeV value."
+  - key: pdg2025_dmixing_review_table70_7
+    arxiv_id: null
+    DOI: null
+    title: "D0-D0bar Mixing review, Table 70.7"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-d-dbar-mixing.pdf"
+    snapshot_path: "flavor_catalog/references/C001/pdg2025_dmixing_review_table70_7.txt"
+    sha256_of_local_snapshot: "sha256:3ba681465e2673aa3abe13ce0b4a9c713301fe50ab9d607ff783cfb16d4c2d0b"
+    notes: "Minimal text excerpt only; no PDG PDF is tracked."
+  - key: lhcb2021_arxiv2106_03744
+    arxiv_id: "2106.03744"
+    DOI: "10.1103/PhysRevLett.127.111801"
+    title: "Observation of the mass difference between neutral charm-meson eigenstates"
+    authors: "LHCb Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2106.03744"
+    snapshot_path: "flavor_catalog/references/C001/lhcb2021_arxiv2106_03744.txt"
+    sha256_of_local_snapshot: "sha256:b9aaca434c4728681dce0492b5fd97f1fb9d87e4ecd86e55bc097909ee3eba8a"
+    notes: "ArXiv abstract metadata only; no PDF tracked."
+  - key: cfw2008_arxiv0804_1954
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    snapshot_path: "flavor_catalog/references/C001/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce"
+    notes: "ArXiv abstract metadata used as the post-2008 baseline; no PDF tracked."

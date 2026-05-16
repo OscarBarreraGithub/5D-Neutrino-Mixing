@@ -1,0 +1,23 @@
+Source snapshot for C001: HFLAV CKM25 CPV-sensitive Delta y input
+Accessed: 2026-05-16
+URL: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html
+
+This snapshot records the HFLAV input row containing x_CP, y_CP, Delta x, and Delta y,
+because the C001 dispatch asks for a separate delta_y sidecar block.
+
+Relevant page context:
+- Global fit version through 14 September 2025.
+- The measured-observables table includes LHCb D0 -> K0_S pi+ pi- measurements.
+- For the 5.4 fb^-1 sqrt(s)=13 TeV LHCb result allowing CPV, the table gives:
+
+Observable   Value
+x_CP         (0.400 +/- 0.045 +/- 0.020)%
+y_CP         (0.551 +/- 0.116 +/- 0.059)%
+Delta x      (-0.029 +/- 0.018 +/- 0.001)%
+Delta y      (0.031 +/- 0.035 +/- 0.013)%
+
+Source line in HFLAV table:
+LHCb, D0 -> K0_S pi+ pi- results using 5.4 fb^-1 at sqrt(s)=13 TeV,
+D*+ -> D0 pi+ and B -> D0 mu- X flavor tags, allowing CP violation.
+
+HFLAV points to inspire record 2694330 for this input.

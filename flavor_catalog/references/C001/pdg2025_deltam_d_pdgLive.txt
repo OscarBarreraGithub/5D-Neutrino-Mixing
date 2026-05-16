@@ -1,0 +1,21 @@
+Source snapshot for C001: PDG Live Delta m_D listing
+Accessed: 2026-05-16
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/DataBlock.action?node=S032D
+PDGID: S032D
+
+Selected PDG Live text for the D0 mass difference:
+
+Heading:
+|m(D1^0) - m(D2^0)| = x Gamma
+
+Definition note:
+The experiments usually present x = Delta m / Gamma. Then Delta m = x Gamma = x hbar / tau.
+
+Value table excerpt:
+VALUE (10^10 hbar s^-1)
+0.997 +/- 0.116  OUR EVALUATION (Produced by HFLAV)
+0.98 +/- 0.11    OUR AVERAGE
+
+Catalog conversion using hbar = 6.582119569e-25 GeV s:
+Delta m_D = (0.997 +/- 0.116) x 10^10 hbar s^-1
+          = (6.562 +/- 0.764) x 10^-15 GeV.

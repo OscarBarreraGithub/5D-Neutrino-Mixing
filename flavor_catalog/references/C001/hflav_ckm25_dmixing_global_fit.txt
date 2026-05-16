@@ -1,0 +1,27 @@
+Source snapshot for C001: HFLAV CKM25 D0 mixing global fit
+Accessed: 2026-05-16
+URL: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html
+Linked table URL: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/figures/table_results.pdf
+License note: HFLAV web site states HFLAV plots and tables are CC BY 4.0.
+
+Context extracted from the HFLAV page:
+- Global Fit for D0-D0bar Mixing and CP Violation.
+- Version through 14 September 2025.
+- Definitions: x = (m2 - m1)/Gamma and y = (Gamma2 - Gamma1)/(2 Gamma).
+- The all-CPV fit uses 63 experimental inputs.
+
+Selected table_results.pdf text, extracted only for the C001 observables:
+
+Parameter                           No indirect CPV     No subleading amplitudes     All CPV       95% C.L. interval in All CPV
+x (%)                               0.398 +/- 0.043     0.405 +/- 0.043              0.405 +/- 0.043 [0.320, 0.489]
+y (%)                               0.636 +/- 0.023     0.638 +/- 0.023              0.636 +/- 0.024 [0.590, 0.682]
+|q/p|                               1                   1.002 +/- 0.005              0.983 +0.015/-0.014 [0.955, 1.012]
+phi (degrees)                       0                   -0.08 +/- 0.19               -1.51 +1.03/-1.06 [-3.63, 0.51]
+x12 (%)                             0.398 +/- 0.043     0.409 +/- 0.044              0.406 +/- 0.043 [0.321, 0.490]
+y12 (%)                             0.636 +/- 0.023     0.637 +/- 0.024              0.635 +/- 0.024 [0.589, 0.682]
+phiM (degrees)                      0                   -0.78 +1.60/-1.63            -0.03 +0.70/-0.71 [-1.48, 1.35]
+phiGamma (degrees)                  0                   0                            2.03 +1.54/-1.52 [-0.94, 5.08]
+chi2/d.o.f.                         72.817/(63-7)       72.797/(63-8)                70.711/(63-10)
+
+Derived for catalog convenience from the all-CPV y value:
+DeltaGamma_D/Gamma_D = 2 y = (1.272 +/- 0.048)%.
