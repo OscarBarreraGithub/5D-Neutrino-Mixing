@@ -6,7 +6,7 @@ process_name: "Rare leptonic decay D0 -> e+ e-"
 owner: "PKA"
 owner_agent_id: "PKA-C005"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -25,9 +25,18 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w5a_kaon_charm"
     reason: "Writer polish completed for C005 in mixed kaon/charm batch."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T14:42:33-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T14:42:33-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w5a_kaon_charm"
+    reason: "All CA checks CHK-1 through CHK-8 passed for C005."
+checker_passed_at: "2026-05-16T14:42:33-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:25:39-04:00"
+last_updated_at: "2026-05-16T14:42:33-04:00"
 version: "0.1.0"
 source_shas:
   babar2012_arxiv1206_5419.txt: "sha256:baa27432071416ee0f5f0582df4c770a7d5e8f7b449351d64da28ff3dcd623b3"

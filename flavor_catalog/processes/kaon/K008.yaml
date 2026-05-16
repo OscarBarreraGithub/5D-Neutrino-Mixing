@@ -25,9 +25,19 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w5a_kaon_charm"
     reason: "Writer polish completed for K008 in mixed kaon/charm batch."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T14:42:33-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T14:42:33-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w5a_kaon_charm"
+    issues:
+      - "CHK-1: Several numerical claims in K008.tex are source-backed in the sidecar but are not represented as YAML pdg_or_equivalent entries with full year/value/uncertainty/source_url/access_date/sha256 metadata. Examples include the KTeV one-candidate and 0.99 +/- 0.35 background claim, the standalone 3.5e-10 limit, the KTeV theory-context 3e-11, 8-45e-12, 3-6e-12, and 40% claims, and the Isidori-Smith-Unterdorfer coefficient block."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:25:39-04:00"
+last_updated_at: "2026-05-16T14:42:33-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_kl_pi0ee_pdgLive.txt: "sha256:6578aa4b77ae9958c4fd532c29d09a04ea455a2426983a59df2f47f8f7b03202"
