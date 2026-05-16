@@ -25,9 +25,18 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w7_new_processes"
     reason: "Writer polish for wa_w7_new_processes; template sections normalized and numerical claims checked against sidecar/source snapshots."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T18:55:13-04:00"
+    timestamp: "2026-05-16T18:55:13-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w7_new_processes"
+    reason: "CA verified CHK-1 through CHK-8 for ca_w7_new_processes."
+checker_passed_at: "2026-05-16T18:55:13-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T18:39:34-04:00"
+last_updated_at: "2026-05-16T18:55:13-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_top_hu_datablock.txt: "sha256:33554bc8abefddd49a757bdacc3e5034bee76fa2b7556d19bc188e39487c23df"

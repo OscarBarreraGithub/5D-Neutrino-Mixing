@@ -32,9 +32,21 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w7_new_processes"
     reason: "Writer polish for wa_w7_new_processes; template sections normalized and numerical claims checked against sidecar/source snapshots."
+  - from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    state: "WRITER-REWORK"
+    at: "2026-05-16T18:55:13-04:00"
+    timestamp: "2026-05-16T18:55:13-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w7_new_processes"
+    reason: "CHK-1 failed in checker pass."
+    issues:
+      - "pdg_or_equivalent observable blocks for the HFLAV and PDG values lack explicit year keys and use sha256_of_text_snapshot instead of sha256."
+      - "TeX post-2008 numerical claims 3.1 sigma, 5.2 sigma, and 2019--2022 are stored only under post_2008_sources, not pdg_or_equivalent."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T18:39:34-04:00"
+last_updated_at: "2026-05-16T18:55:13-04:00"
 version: "0.1.1"
 source_shas:
   hflav_rare_decays_dec2024_btokstargamma.txt: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
