@@ -36,9 +36,19 @@ status_history:
       - "CHK-1: TeX quotes CFW 21 TeV and 33 TeV RS-flavor context values, but these are not represented in pdg_or_equivalent value blocks with complete metadata."
       - "CHK-1: TeX quotes the Belle II Delta m_d = 0.516 +/- 0.008(stat) +/- 0.005(syst) ps^-1 measurement and 190 fb^-1 dataset, but those numerical claims are under recent_experimental_inputs rather than pdg_or_equivalent."
     reason: "Checker ca_w6_beauty found strict CHK-1 placement gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty.md."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T16:17:46-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T16:17:46-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w6_beauty_v2"
+    reason: "Cycle-2 writer rework addressed ca_w6_beauty CHK-1 metadata-completeness findings."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:07:43-04:00"
+last_updated_at: "2026-05-16T16:17:46-04:00"
 version: "0.1.0"
 source_shas:
   hflav_pdg2025_bd_mixing.txt: "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711"
@@ -84,24 +94,54 @@ recent_experimental_inputs:
     source: "Belle II Collaboration, Phys. Rev. D 107, L091102 (2023)"
     arxiv_id: "2302.12791"
     observable: "Delta m_d"
+    year: 2023
     value: 0.516
+    uncertainty: "+/- 0.008(stat) +/- 0.005(syst)"
     stat_uncertainty: 0.008
     syst_uncertainty: 0.005
     units: "ps^-1"
-    luminosity_fb_inverse: 190
+    integrated_luminosity:
+      year: 2023
+      value: 190
+      uncertainty: null
+      units: "fb^-1"
+      source_url: "https://arxiv.org/abs/2302.12791"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B001/belleii_2023_bd_mixing_arxiv.txt"
+      sha256: "sha256:10ad4816deaa89773086726d6b43bcc3c759a36ec49b5c451dbbc711df1d4da6"
     signal_decays: 33000
     source_url: "https://arxiv.org/abs/2302.12791"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B001/belleii_2023_bd_mixing_arxiv.txt"
+    sha256: "sha256:10ad4816deaa89773086726d6b43bcc3c759a36ec49b5c451dbbc711df1d4da6"
     sha256_of_text_snapshot: "sha256:10ad4816deaa89773086726d6b43bcc3c759a36ec49b5c451dbbc711df1d4da6"
 paper_era_reference:
   cfw_2008_rs_flavor:
     source: "Csaki, Falkowski, and Weiler 2008"
     arxiv_id: "0804.1954"
-    standard_rs_kk_gluon_bound_TeV: 21
-    pseudo_goldstone_scenario_bound_TeV: 33
+    standard_rs_kk_gluon_bound:
+      year: 2008
+      value: 21
+      uncertainty: null
+      units: "TeV"
+      source_url: "https://arxiv.org/abs/0804.1954"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B001/cfw_2008_rs_flavor_arxiv.txt"
+      sha256: "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c"
+    pseudo_goldstone_scenario_bound:
+      year: 2008
+      value: 33
+      uncertainty: null
+      units: "TeV"
+      source_url: "https://arxiv.org/abs/0804.1954"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B001/cfw_2008_rs_flavor_arxiv.txt"
+      sha256: "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c"
     use: "RS-flavor baseline for post-2008 comparison; not a measured experimental observable."
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B001/cfw_2008_rs_flavor_arxiv.txt"
+    sha256: "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c"
     sha256_of_text_snapshot: "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c"
 auxiliary_lattice_inputs:
   flag2024_context:

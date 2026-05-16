@@ -35,9 +35,19 @@ status_history:
     issues:
       - "CHK-1: TeX quotes the two HFLAV branching-fraction values, and the corresponding pdg_or_equivalent.observables entries carry value, uncertainty, source URL, access date, snapshot path, and sha256, but each per-observable value block lacks an explicit year field."
     reason: "Checker ca_w6_beauty found strict CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty.md."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T16:17:46-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T16:17:46-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w6_beauty_v2"
+    reason: "Cycle-2 writer rework addressed ca_w6_beauty CHK-1 metadata-completeness findings."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:07:43-04:00"
+last_updated_at: "2026-05-16T16:17:46-04:00"
 version: "0.1.0"
 source_shas:
   babar_0807_4119_BtoKll.txt: "sha256:9befb573f3193d7cb5f584c576f0d3a7da3691d65f59b5ff1316ff6cd126dc8e"
@@ -53,6 +63,7 @@ pdg_or_equivalent:
   value_summary: "HFLAV averages: BR(B+ -> K+ ell+ ell-) = (5.76 +/- 0.40)e-7 and BR(B0 -> K0 ell+ ell-) = (3.28 +/- 0.32)e-7."
   observables:
     - name: "BR(B+ -> K+ ell+ ell-)"
+      year: 2025
       value: "5.76"
       uncertainty: "+/- 0.40"
       units: "10^-7"
@@ -60,9 +71,11 @@ pdg_or_equivalent:
       source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_l+_l-.html"
       access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B016/hflav_dec2025_Bplus_to_Kplus_ll.txt"
+      sha256: "sha256:d57204eb4634e0ad43be577e1efc1ed874cdd586452f7b0b796c210191c6da25"
       sha256_of_text_snapshot: "sha256:d57204eb4634e0ad43be577e1efc1ed874cdd586452f7b0b796c210191c6da25"
       note: "HFLAV average; HFLAV notes differing treatment of charmonium intermediate components."
     - name: "BR(B0 -> K0 ell+ ell-)"
+      year: 2025
       value: "3.28"
       uncertainty: "+/- 0.32"
       units: "10^-7"
@@ -70,6 +83,7 @@ pdg_or_equivalent:
       source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bd/BR_B0_K0_l+_l-.html"
       access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B016/hflav_dec2025_B0_to_K0_ll.txt"
+      sha256: "sha256:44551ba39055e7a12e74a5c97de51e8ef651139a515a17bf4becbc6b45c41281"
       sha256_of_text_snapshot: "sha256:44551ba39055e7a12e74a5c97de51e8ef651139a515a17bf4becbc6b45c41281"
       note: "HFLAV average; the LHCb input is muon-only and HFLAV notes differing charmonium treatment."
 paper_era_reference:

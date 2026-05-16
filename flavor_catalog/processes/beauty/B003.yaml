@@ -37,9 +37,19 @@ status_history:
       - "CHK-1: TeX quotes LHCb Run-2 dataset and Delta m_s values that are in pdg_or_equivalent.dominant_lhcb_input, but that value block lacks an explicit year field."
       - "CHK-1: TeX quotes FLAG f_Bs sqrt(Bhat_Bs) and xi numerical inputs under auxiliary_theory_inputs rather than pdg_or_equivalent."
     reason: "Checker ca_w6_beauty found strict CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty.md."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T16:17:46-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T16:17:46-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w6_beauty_v2"
+    reason: "Cycle-2 writer rework addressed ca_w6_beauty CHK-1 metadata-completeness findings."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:07:43-04:00"
+last_updated_at: "2026-05-16T16:17:46-04:00"
 version: "0.1.0"
 source_shas:
   cfw_2008_rs_flavor.txt: "sha256:894d0bfe37a3fc977af227722075874a4babd171d771b42ba509d7d156069d87"
@@ -51,6 +61,7 @@ pdg_or_equivalent:
   canonical_hflav_recommended:
     source: "HFLAV Fall 2024 recommended b-hadron lifetime and oscillation averages"
     publication_context: "Phys. Rev. D 113 (2026) 012008 / arXiv:2411.18639"
+    year: 2024
     observable: "Delta m_s"
     value: 17.766
     uncertainty: 0.006
@@ -59,9 +70,63 @@ pdg_or_equivalent:
     source_url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B003/hflav_2024_dms.txt"
+    sha256: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+    sha256_of_text_snapshot: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+  companion_x_s:
+    source: "HFLAV Fall 2024 recommended b-hadron lifetime and oscillation averages"
+    publication_context: "Phys. Rev. D 113 (2026) 012008 / arXiv:2411.18639"
+    year: 2024
+    observable: "x_s"
+    value: 26.94
+    uncertainty: 0.10
+    units: "dimensionless"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B003/hflav_2024_dms.txt"
+    sha256: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+    sha256_of_text_snapshot: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+  companion_chi_s:
+    source: "HFLAV Fall 2024 recommended b-hadron lifetime and oscillation averages"
+    publication_context: "Phys. Rev. D 113 (2026) 012008 / arXiv:2411.18639"
+    year: 2024
+    observable: "chi_s"
+    value: 0.499314
+    uncertainty: 0.000005
+    units: "dimensionless"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B003/hflav_2024_dms.txt"
+    sha256: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+    sha256_of_text_snapshot: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+  companion_inverse_gamma_s:
+    source: "HFLAV Fall 2024 recommended b-hadron lifetime and oscillation averages"
+    publication_context: "Phys. Rev. D 113 (2026) 012008 / arXiv:2411.18639"
+    year: 2024
+    observable: "1/Gamma_s"
+    value: 1.516
+    uncertainty: 0.006
+    units: "ps"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B003/hflav_2024_dms.txt"
+    sha256: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+    sha256_of_text_snapshot: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
+  companion_delta_gamma_s:
+    source: "HFLAV Fall 2024 recommended b-hadron lifetime and oscillation averages"
+    publication_context: "Phys. Rev. D 113 (2026) 012008 / arXiv:2411.18639"
+    year: 2024
+    observable: "DeltaGamma_s"
+    value: 0.0781
+    uncertainty: 0.0035
+    units: "ps^-1"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B003/hflav_2024_dms.txt"
+    sha256: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
     sha256_of_text_snapshot: "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a"
   pdg2025_published_only_crosscheck:
     source: "HFLAV averages prepared for PDG 2025"
+    year: 2025
     observable: "Delta m_s"
     value: 17.765
     uncertainty: 0.006
@@ -70,44 +135,76 @@ pdg_or_equivalent:
     source_url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B003/hflav_pdg2025_dms.txt"
+    sha256: "sha256:7b6e88fed6d4dee57e266f79a28c4edb073d668ba0fa2f90dad40cb9f051473c"
     sha256_of_text_snapshot: "sha256:7b6e88fed6d4dee57e266f79a28c4edb073d668ba0fa2f90dad40cb9f051473c"
   dominant_lhcb_input:
     source: "LHCb Collaboration, Nature Physics 18 (2022) 1-5"
     arxiv_id: "2104.04421"
+    year: 2022
     observable: "Delta m_s from Bs -> Ds pi, Run 2"
     value: 17.7683
+    uncertainty: "+/- 0.0051(stat) +/- 0.0032(syst)"
     stat_uncertainty: 0.0051
     syst_uncertainty: 0.0032
     units: "ps^-1"
-    luminosity_fb_inverse: 6
-    lhcb_combined_value: 17.7656
-    lhcb_combined_uncertainty: 0.0057
+    integrated_luminosity:
+      year: 2022
+      value: 6
+      uncertainty: null
+      units: "fb^-1"
+      source_url: "https://arxiv.org/abs/2104.04421"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B003/lhcb_2021_deltams_arxiv.txt"
+      sha256: "sha256:2827716498d99b807d5c042b65a5a67d0898f53617b7889b74009b92433f3ef4"
+    lhcb_combination:
+      year: 2022
+      value: 17.7656
+      uncertainty: 0.0057
+      units: "ps^-1"
+      source_url: "https://arxiv.org/abs/2104.04421"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B003/lhcb_2021_deltams_arxiv.txt"
+      sha256: "sha256:2827716498d99b807d5c042b65a5a67d0898f53617b7889b74009b92433f3ef4"
     source_url: "https://arxiv.org/abs/2104.04421"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B003/lhcb_2021_deltams_arxiv.txt"
+    sha256: "sha256:2827716498d99b807d5c042b65a5a67d0898f53617b7889b74009b92433f3ef4"
     sha256_of_text_snapshot: "sha256:2827716498d99b807d5c042b65a5a67d0898f53617b7889b74009b92433f3ef4"
 auxiliary_theory_inputs:
   flag_2024_bmixing:
     source: "FLAG Review 2024"
     arxiv_id: "2411.04268"
+    year: 2024
     note: "Theoretical lattice normalization inputs; not measured pdg_or_equivalent observables."
     n_f: "2+1+1"
     f_Bs_sqrt_Bhat_Bs:
+      year: 2024
       value: 256.1
       uncertainty: 5.7
       units: "MeV"
+      source_url: "https://arxiv.org/abs/2411.04268"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B003/flag_2024_bmixing.txt"
+      sha256: "sha256:0d34c342c10b2479deb261eb8456fc4eb99dc6aeda2d6297172a8eb975aaa283"
     Bhat_Bs:
       value: 1.232
       uncertainty: 0.053
     xi:
+      year: 2024
       value: 1.216
       uncertainty: 0.016
+      units: "dimensionless"
+      source_url: "https://arxiv.org/abs/2411.04268"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B003/flag_2024_bmixing.txt"
+      sha256: "sha256:0d34c342c10b2479deb261eb8456fc4eb99dc6aeda2d6297172a8eb975aaa283"
     B_Bs_over_B_Bd:
       value: 1.008
       uncertainty: 0.025
     source_url: "https://arxiv.org/abs/2411.04268"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B003/flag_2024_bmixing.txt"
+    sha256: "sha256:0d34c342c10b2479deb261eb8456fc4eb99dc6aeda2d6297172a8eb975aaa283"
     sha256_of_text_snapshot: "sha256:0d34c342c10b2479deb261eb8456fc4eb99dc6aeda2d6297172a8eb975aaa283"
 paper_era_reference:
   cfw_2008_rs_flavor:
