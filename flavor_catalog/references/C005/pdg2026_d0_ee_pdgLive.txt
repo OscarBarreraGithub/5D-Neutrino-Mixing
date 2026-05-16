@@ -1,0 +1,67 @@
+Source: PDG Live/API minimal text snapshot
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.39
+Access date: 2026-05-16
+Edition reported by API: 2026
+Local policy: minimal text snapshot only; no publisher PDF stored.
+
+PDG ID: S032.39
+Description: D0 --> e+ e-
+Parent: S032, D0
+
+Related data block:
+  pdgid: S032R44
+  description: G(D0 --> e+ e-)/G(total)
+  note: A test for the DeltaC = 1 weak neutral current. Allowed by
+        first-order weak interaction combined with electromagnetic interaction.
+
+Measurements listed by the API:
+  PETRIC 2010, Belle, Phys. Rev. D 81, 091102, DOI 10.1103/PhysRevD.81.091102.
+    Title: Search for Leptonic Decays of D0 Mesons.
+    Comment: e+ e- near Upsilon(4S).
+    Confidence level: 90.0%.
+    VALUE: <7.9 E-8.
+    Limit type: upper.
+    Used in average: true.
+    Used in fit: true.
+
+  LEES 2012Q, BaBar, Phys. Rev. D 86, 032001, DOI 10.1103/PhysRevD.86.032001.
+    Title: Search for the Decay Modes D0 --> e+ e-, D0 --> mu+ mu-, and D0 --> e+- mu+-.
+    Comment: e+ e- near 10.58 GeV.
+    Confidence level: 90.0%.
+    VALUE: <1.7 E-7.
+    Limit type: upper.
+    Used in average: false.
+    Used in fit: false.
+
+  AUBERT,B 2004Y, BaBar, Phys. Rev. Lett. 93, 191801,
+    DOI 10.1103/PhysRevLett.93.191801.
+    VALUE: <1.2 E-6 at 90.0% CL.
+
+  PRIPSTEIN 2000, E789, Phys. Rev. D 61, 032005,
+    DOI 10.1103/PhysRevD.61.032005.
+    VALUE: <8.19 E-6 at 90.0% CL.
+
+  AITALA 1999G, E791, Phys. Lett. B 462, 401,
+    DOI 10.1016/S0370-2693(99)00902-8.
+    VALUE: <6.2 E-6 at 90.0% CL.
+
+  FREYBERGER 1996, CLEO, Phys. Rev. Lett. 76, 3065,
+    DOI 10.1103/PhysRevLett.76.3065.
+    VALUE: <1.3 E-5 at 90.0% CL.
+
+  ADLER 1988, Mark III, Phys. Rev. D 37, 2023,
+    DOI 10.1103/PhysRevD.37.2023.
+    VALUE: <1.3 E-4 at 90.0% CL.
+
+  ALBRECHT 1988G, ARGUS, Phys. Lett. B 209, 380,
+    DOI 10.1016/0370-2693(88)90967-7.
+    VALUE: <1.7 E-4 at 90.0% CL.
+
+  HAAS 1988, CLEO, Phys. Rev. Lett. 60, 1614,
+    DOI 10.1103/PhysRevLett.60.1614.
+    VALUE: <2.2 E-4 at 90.0% CL.
+
+Extraction note:
+  The current PDG/API headline value for C005 is the Belle 2010 upper limit
+  B(D0 -> e+ e-) < 7.9e-8 at 90% CL. No LHCb D0 -> e+ e- measurement appears
+  in this PDG API measurement list at the access date above.

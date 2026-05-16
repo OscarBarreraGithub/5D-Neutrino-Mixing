@@ -1,0 +1,27 @@
+Source: arXiv API minimal text snapshot
+URL: https://arxiv.org/abs/1003.2345
+API URL: https://export.arxiv.org/api/query?id_list=1003.2345
+Access date: 2026-05-16
+Local policy: arXiv text snapshot only; no PDF stored.
+
+arXiv:1003.2345v2 [hep-ex]
+Title: Search for leptonic decays of D0 mesons
+Authors: M. Petric, M. Staric, for the Belle Collaboration
+Published: 2010-03-11
+Updated: 2010-06-02
+Journal reference: Phys. Rev. D 81, 091102(R) (2010)
+DOI: 10.1103/PhysRevD.81.091102
+Comments: 6 pages, 3 figures
+
+arXiv API abstract snapshot:
+  The Belle analysis searched for the flavor-changing neutral current decays
+  D0 -> mu+mu- and D0 -> e+e-, and for the lepton-flavor violating decays
+  D0 -> e+- mu-+ using 660 fb^-1 of data collected with the Belle detector at
+  the KEKB asymmetric-energy e+e- collider. No evidence was found for any of
+  these decays. Belle obtained upper limits on the branching fractions:
+  B(D0 -> mu+mu-) < 1.4 x 10^-7, B(D0 -> e+e-) < 7.9 x 10^-8, and
+  B(D0 -> e+mu-) + B(D0 -> mu+e-) < 2.6 x 10^-7 at 90% confidence level.
+
+Extraction note:
+  This is the current PDG-used measurement for D0 -> e+ e- as of the
+  2026 PDG Live/API query.

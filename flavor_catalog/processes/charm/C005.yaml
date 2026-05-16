@@ -1,0 +1,109 @@
+schema: flavor_catalog.process.v1
+process_id: C005
+family: charm
+standard_notation: "\\mathcal{B}(D^0\\to e^+e^-)"
+process_name: "Rare leptonic decay D0 -> e+ e-"
+owner: "PKA"
+owner_agent_id: "PKA-C005"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:08:00-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:08:00-04:00"
+    agent_id: "PKA-C005"
+    reason: "Initial PKA source extraction and C005 draft deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:08:00-04:00"
+version: "0.1.0"
+source_shas:
+  babar2012_arxiv1206_5419.txt: "sha256:baa27432071416ee0f5f0582df4c770a7d5e8f7b449351d64da28ff3dcd623b3"
+  belle2010_arxiv1003_2345.txt: "sha256:cb1da7b14457481e7a26dce21877fef4a35ee61df4e187dc19447cbf5e2eefaf"
+  burdman2002_arxiv_hepph0112235.txt: "sha256:25f176716b7e85dc563e5cbee9943494bd883b2103c625c00f6165b98ff8168e"
+  cfw2008_arxiv0804_1954.txt: "sha256:91056272adfbc8775ad7260735074975b6ace586470eea3af391dd3992ffe68f"
+  pdg2026_d0_ee_pdgLive.txt: "sha256:11656d94c38f54a6f06734b55b13adf5517bd43558778c0cf92f3e449f67384c"
+  source_manifest.yaml: "sha256:935f056ed557a9cd06d8468f00180366e9625fd5f68f38cfefca3ec549a7c3f3"
+pdg_or_equivalent:
+  canonical_current_limit:
+    source: "PDG Live/API S032.39"
+    source_key: "PDG2026:D0Ee"
+    year: 2026
+    observable: "BR(D0 -> e+ e-)"
+    limit_type: "upper"
+    value: 7.9e-8
+    confidence_level: 0.90
+    units: "branching fraction"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.39"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C005/pdg2026_d0_ee_pdgLive.txt"
+    sha256_of_text_snapshot: "sha256:11656d94c38f54a6f06734b55b13adf5517bd43558778c0cf92f3e449f67384c"
+  belle_current_result:
+    source: "Belle Phys. Rev. D 81 (2010) 091102 / arXiv:1003.2345"
+    source_key: "Belle2010:D0Ee"
+    year: 2010
+    observable: "BR(D0 -> e+ e-)"
+    limit_type: "upper"
+    value: 7.9e-8
+    confidence_level: 0.90
+    integrated_luminosity_fb_inv: 660
+    units: "branching fraction"
+    source_url: "https://arxiv.org/abs/1003.2345"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C005/belle2010_arxiv1003_2345.txt"
+    sha256_of_text_snapshot: "sha256:cb1da7b14457481e7a26dce21877fef4a35ee61df4e187dc19447cbf5e2eefaf"
+  babar_independent_result:
+    source: "BABAR Phys. Rev. D 86 (2012) 032001 / arXiv:1206.5419"
+    source_key: "BaBar2012:D0EeMuMuEMu"
+    year: 2012
+    observable: "BR(D0 -> e+ e-)"
+    limit_type: "upper"
+    value: 1.7e-7
+    confidence_level: 0.90
+    integrated_luminosity_fb_inv: 468
+    units: "branching fraction"
+    source_url: "https://arxiv.org/abs/1206.5419"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C005/babar2012_arxiv1206_5419.txt"
+    sha256_of_text_snapshot: "sha256:baa27432071416ee0f5f0582df4c770a7d5e8f7b449351d64da28ff3dcd623b3"
+paper_era_reference:
+  rs_baseline:
+    source: "Csaki, Falkowski, Weiler 2008"
+    source_key: "CsakiFalkowskiWeiler2008:CompositeFlavor"
+    year: 2008
+    generic_rs_kk_gluon_scale_TeV: 21
+    composite_pseudo_goldstone_kk_gluon_scale_TeV: 33
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C005/cfw2008_arxiv0804_1954.txt"
+    sha256_of_text_snapshot: "sha256:91056272adfbc8775ad7260735074975b6ace586470eea3af391dd3992ffe68f"
+theory_context:
+  rare_charm_model_dependence:
+    source: "Burdman, Golowich, Hewett, Pakvasa 2002"
+    source_key: "BurdmanGolowichHewettPakvasa2002:RareCharm"
+    year: 2002
+    topic: "Rare charm c -> u l+ l- short-distance and long-distance context"
+    source_url: "https://arxiv.org/abs/hep-ph/0112235"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C005/burdman2002_arxiv_hepph0112235.txt"
+    sha256_of_text_snapshot: "sha256:25f176716b7e85dc563e5cbee9943494bd883b2103c625c00f6165b98ff8168e"
+code_coverage:
+  status: "NO"
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"D0.*e\\\\+e-|D0.*ee|D\\\\^0.*e\\\\+e-|D0.?->.?e|rare.?charm|c.?->.?u.*e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Focused exact C005 search returned no matches in the required implementation/test directories."
+    - "quarkConstraints/deltaf2.py:252 and quarkConstraints/deltaf2.py:941 are D0 mixing hits, not D0 -> e+ e-."
+    - "quarkConstraints/modern/phenomenology.py:23 and quarkConstraints/modern/phenomenology.py:668 are D0 mixing policy/evaluator hits, not rare leptonic charm."
+    - "flavorConstraints/muToEGamma.py:75 is the separate mu -> e gamma LFV dipole check."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "D0 -> e+ e- needs a new Delta C = 1 rare leptonic observable with lepton-current normalization, electron-mode acceptance conventions, and long-distance treatment; the existing Delta F = 2 basis does not cover it."
+open_issues:
+  - "Dispatch note described an LHCb upper limit, but PDG Live/API S032.39 accessed on 2026-05-16 lists Belle 2010 as the current used D0 -> e+ e- limit and contains no LHCb D0 -> e+ e- entry. WA/CA should reconcile the prompt note with the PDG record."
