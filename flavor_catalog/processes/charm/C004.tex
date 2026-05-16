@@ -1,0 +1,97 @@
+% Flavor catalog process: C004
+% family: charm
+% owner_agent_id: PKA-C004
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: C004.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{C004: \(D^0\to\mu^+\mu^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(D^0\to\mu^+\mu^-)\).
+This entry covers the rare neutral-charm leptonic decay
+\(D^0\to\mu^+\mu^-\), a \(\Delta C=1\), \(c\to u\ell^+\ell^-\)
+flavor-changing neutral-current test.  It is distinct from C001/C002
+neutral-charm mixing and from semileptonic rare-charm modes because the final
+state is purely leptonic and directly probes axial-vector, scalar, and
+pseudoscalar short-distance operators.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG Live/API entry S032.28, accessed on 2026-05-16, gives the
+headline limit
+\[
+  \mathcal{B}(D^0\to\mu^+\mu^-) < 2.1\times10^{-9}
+  \qquad (90\%~{\rm C.L.}).
+\]
+The same PDG entry notes that the underlying CMS 2025 analysis reports the
+95\% C.L. limit
+\[
+  \mathcal{B}(D^0\to\mu^+\mu^-) < 2.4\times10^{-9}.
+\]
+These values are traced to
+\texttt{flavor\_catalog/references/C004/pdg2026\_d0\_mumu\_pdgLive.txt}
+and \texttt{cms2025\_d0\_mumu\_public.txt}.  The requested LHCb predecessor
+used \(9\,{\rm fb}^{-1}\) at 7, 8, and 13 TeV and set
+\(\mathcal{B}(D^0\to\mu^+\mu^-)<3.1\times10^{-9}\) at 90\% C.L.,
+with a 95\% C.L. companion limit of \(3.5\times10^{-9}\)
+(\texttt{lhcb2023\_arxiv2212\_11203}).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped models can generate flavor-changing \(c\to u\) neutral-current
+couplings through KK gauge exchange, electroweak \(Z\)-like effects, Higgs or
+radion scalar exchange, or lepton-sector extensions.  This channel is therefore
+a useful up-sector \(\Delta C=1\) complement to the implemented \(\Delta F=2\)
+D-mixing constraint.  For the present quark-only scan it is best treated as a
+catalog and roadmap entry; a live constraint would require lepton-current
+normalization in addition to the quark flavor spurions.
+
+\subsection*{Post-2008 developments}
+Since the arXiv:0804.1954 warped-flavor baseline, the experimental bound has
+moved by orders of magnitude.  LHCb's full Run 1+2 search improved the rare
+charm dimuon limit to \(3.1\times10^{-9}\) at 90\% C.L.  CMS then used the
+Run 3 inclusive dimuon-trigger program, \(64.5\,{\rm fb}^{-1}\) from
+2022--2023, to set the stronger 95\% C.L. limit of \(2.4\times10^{-9}\).
+On the theory side, the 2024 rare-charm EFT analysis incorporated recent
+\(\Delta C=1\) data, including \(D^0\to\mu^+\mu^-\), into constraints on
+\(C_{7,9,10}^{(\prime)}\) while emphasizing that null-test observables still
+leave room for new physics.
+
+\subsection*{Constraint validity and model dependence}
+The experimental limit is robust, but the Standard Model prediction is not a
+clean short-distance number.  The classic rare-charm calculation estimates the
+long-distance two-photon contribution as
+\(\mathcal{B}(D^0\to\mu^+\mu^-)_{\gamma\gamma}
+\simeq 2.7\times10^{-5}\mathcal{B}(D^0\to\gamma\gamma)\), implying a
+long-distance floor of at least \(3\times10^{-13}\) for the assumptions quoted
+there.  The safe catalog use is therefore an upper bound on extra
+short-distance contributions, not a precision SM subtraction.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required catalog greps and a focused search for
+\texttt{D0.*mu}, \texttt{c.?->.?u}, \texttt{rare.?charm},
+\texttt{C10}, \texttt{C\_S}, \texttt{C\_P}, and scalar/pseudoscalar rare-decay
+terms found no live \(D^0\to\mu^+\mu^-\) implementation in
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, or \texttt{tests/}.  Nearby hits are
+unrelated: \(D^0\) mixing appears at \texttt{quarkConstraints/deltaf2.py:256}
+and \texttt{quarkConstraints/deltaf2.py:941}, while
+\(\mu\to e\gamma\) is handled separately at
+\texttt{flavorConstraints/muToEGamma.py:75}.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  A future implementation needs a new \(\Delta C=1\) leptonic
+rare-decay observable and Wilson mapping for \(C_{10}^{(\prime)}\),
+\(C_S^{(\prime)}\), and \(C_P^{(\prime)}\).  It does not require angular
+likelihood machinery, but it must document the long-distance treatment and the
+lepton-current conventions.
+
+\subsection*{Key references}
+Process-local keys before bibliography consolidation:
+\texttt{PDG2026:D0MuMu}, \texttt{CMS2025:D0MuMu},
+\texttt{LHCb2023:D0MuMu},
+\texttt{BurdmanGolowichHewettPakvasa2002:RareCharm},
+\texttt{GisbertHillerSuelmann2024:RareCharmEFT}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

@@ -1,0 +1,29 @@
+Source: arXiv abstract and TeX source excerpts
+URL: https://arxiv.org/abs/hep-ph/0112235
+Access date: 2026-05-16
+Local policy: arXiv text snapshot only; no PDF stored.
+
+arXiv:hep-ph/0112235 [hep-ph]
+Title: Rare Charm Decays in the Standard Model and Beyond
+Authors: Gustavo Burdman, Eugene Golowich, JoAnne Hewett, Sandip Pakvasa
+Submitted: 18 Dec 2001; last revised: 1 Mar 2002
+Journal reference: Phys. Rev. D 66 (2002) 014009
+DOI: 10.1103/PhysRevD.66.014009
+
+Minimal theory snapshot:
+  The abstract states that the work studies rare charm decays, including
+  short-distance QCD corrections and long-range effects.
+  For c -> u l+ l- transitions, it states that sensitivity to short-distance
+  physics exists in kinematic regions away from vector-meson resonances that
+  dominate the total rate.
+
+TeX-source extraction for D0 -> mu+ mu-:
+  The two-photon unitarity contribution is modeled through
+  D0 -> gamma gamma -> l+ l-.
+  The relation quoted in the source is
+    Br(D0 -> mu+ mu-)^(gamma gamma) ~= 2.7 x 10^-5 Br(D0 -> gamma gamma).
+  The source summary says the long-distance contribution favors a branching
+  ratio somewhere in excess of 10^-13 and, using Br(D0 -> gamma gamma) >= 10^-8,
+  anticipates at least 3 x 10^-13 for D0 -> mu+ mu-.
+  The same paper quotes a VMD estimate
+    Br(D0 -> gamma gamma)^(vmd) = (3.5 +4.0 -2.6) x 10^-8.

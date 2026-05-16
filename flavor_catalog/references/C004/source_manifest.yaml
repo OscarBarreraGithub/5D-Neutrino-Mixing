@@ -1,0 +1,71 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: C004
+generated_at: "2026-05-16T13:00:00-04:00"
+license_policy: "minimal text snapshots only; no publisher PDFs tracked"
+references:
+  - key: PDG2026:D0MuMu
+    arxiv_id: null
+    DOI: null
+    title: "D0 -> mu+ mu- decay mode summary"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.28"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/pdg2026_d0_mumu_pdgLive.txt"
+    sha256_of_local_snapshot: "sha256:34cff61f22c2c5436c2504547a59e06a4ac59d7639113237705cdf1a02703a02"
+    notes: "PDG Live/API listing for S032.28, including CMS 2025 and LHCb 2023 limits."
+  - key: CMS2025:D0MuMu
+    arxiv_id: "2506.06152"
+    DOI: "10.1103/zc76-rgcp"
+    title: "Search for the rare decay D0 -> mu+ mu- in proton-proton collisions at sqrt(s) = 13.6 TeV"
+    authors: "CMS Collaboration"
+    year: 2025
+    url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/BPH-23-008/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/cms2025_d0_mumu_public.txt"
+    sha256_of_local_snapshot: "sha256:46aaaf8dc7fbde4d049eeafe34f5b3424e6898d1fe23bf750980ef4b8808a878"
+    notes: "Current strongest single experimental search; no significant excess; 95% CL limit."
+  - key: LHCb2023:D0MuMu
+    arxiv_id: "2212.11203"
+    DOI: "10.1103/PhysRevLett.131.041804"
+    title: "Search for rare decays of D0 mesons into two muons"
+    authors: "LHCb Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2212.11203"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/lhcb2023_arxiv2212_11203.txt"
+    sha256_of_local_snapshot: "sha256:a94f1dbcfa8dfc63351ea9b4efe01c76050b0264afd4877dfe9b4c0b68420f92"
+    notes: "Requested LHCb predecessor result using 9 fb^-1 at 7, 8, and 13 TeV."
+  - key: BurdmanGolowichHewettPakvasa2002:RareCharm
+    arxiv_id: "hep-ph/0112235"
+    DOI: "10.1103/PhysRevD.66.014009"
+    title: "Rare Charm Decays in the Standard Model and Beyond"
+    authors: "Gustavo Burdman, Eugene Golowich, JoAnne Hewett, Sandip Pakvasa"
+    year: 2002
+    url: "https://arxiv.org/abs/hep-ph/0112235"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/burdman2002_arxiv_hepph0112235.txt"
+    sha256_of_local_snapshot: "sha256:ec7271413986bf79dd6ec0470f2d418b7ac5fb493adb16a77cf369fd1a44e19d"
+    notes: "SM long-distance D0 -> gamma gamma -> mu+ mu- estimate."
+  - key: GisbertHillerSuelmann2024:RareCharmEFT
+    arxiv_id: null
+    DOI: "10.1007/JHEP12(2024)102"
+    title: "Effective field theory analysis of rare |Delta c| = |Delta u| = 1 charm decays"
+    authors: "Hector Gisbert, Gudrun Hiller, Dominik Suelmann"
+    year: 2024
+    url: "https://link.springer.com/article/10.1007/JHEP12(2024)102"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/gisbert_hiller_suelmann2024_rare_charm_eft.txt"
+    sha256_of_local_snapshot: "sha256:7432c6e611dbba7e22b6a313d7ed97d7439ff6232472ba5cc4acf18cbed5599b"
+    notes: "Post-2008 EFT context for rare Delta C = 1 charm data."
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:6cfcdc586775c968dee3a3d30c197cc7b2b2c1f8bff0890293164d7b87166e4e"
+    notes: "RS/anarchic-flavor baseline used for post-2008 framing."

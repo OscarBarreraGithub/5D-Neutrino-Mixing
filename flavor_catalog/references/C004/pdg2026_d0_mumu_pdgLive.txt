@@ -1,0 +1,39 @@
+Source: Particle Data Group pdgLive JSON API
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.28
+Access date: 2026-05-16
+PDG edition returned by API: 2026
+Local policy: minimal text snapshot only; no PDG PDF stored.
+
+PDGID: S032.28
+Description: D0 --> mu+ mu-
+Related data block: S032R7, G(D0 --> mu+ mu-)/G(total)
+PDG note: A test for the DeltaC = 1 weak neutral current. Allowed by first-order
+weak interaction combined with electromagnetic interaction.
+
+Current PDG-used measurement:
+  document_id: CHEKHOVSKY 2025F
+  publication_name: PRL 135 151803
+  publication_year: 2025
+  doi: 10.1103/zc76-rgcp
+  technique: CMS
+  comment: p p at 13.6 TeV
+  confidence_level: 90.0
+  value_text: <2.1 E-9
+  limit_type: U
+  used_in_average: true
+  used_in_fit: true
+  footnote: CHEKHOVSKY 2025F reports a 95% CL limit of < 2.4E-9.
+
+Previous LHCb best limit retained for process context:
+  document_id: AAIJ 2023R
+  publication_name: PRL 131 041804
+  publication_year: 2023
+  doi: 10.1103/PhysRevLett.131.041804
+  technique: LHCB
+  comment: p p at 7, 8, 13 TeV
+  confidence_level: 90.0
+  value_text: <3.1 E-9
+  limit_type: U
+  used_in_average: false
+  used_in_fit: false
+  footnote: AAIJ 2023R reports a 95% CL limit of < 3.5E-9.

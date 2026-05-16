@@ -1,0 +1,127 @@
+schema: flavor_catalog.process.v1
+process_id: C004
+family: charm
+standard_notation: "\\mathcal{B}(D^0\\to\\mu^+\\mu^-)"
+process_name: "Rare leptonic decay D0 -> mu+ mu-"
+owner: "PKA"
+owner_agent_id: "PKA-C004"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:00:00-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:00:00-04:00"
+    agent_id: "PKA-C004"
+    reason: "Initial PKA source extraction and C004 draft deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:00:00-04:00"
+version: "0.1.0"
+source_shas:
+  burdman2002_arxiv_hepph0112235.txt: "sha256:ec7271413986bf79dd6ec0470f2d418b7ac5fb493adb16a77cf369fd1a44e19d"
+  cfw2008_arxiv0804_1954.txt: "sha256:6cfcdc586775c968dee3a3d30c197cc7b2b2c1f8bff0890293164d7b87166e4e"
+  cms2025_d0_mumu_public.txt: "sha256:46aaaf8dc7fbde4d049eeafe34f5b3424e6898d1fe23bf750980ef4b8808a878"
+  gisbert_hiller_suelmann2024_rare_charm_eft.txt: "sha256:7432c6e611dbba7e22b6a313d7ed97d7439ff6232472ba5cc4acf18cbed5599b"
+  lhcb2023_arxiv2212_11203.txt: "sha256:a94f1dbcfa8dfc63351ea9b4efe01c76050b0264afd4877dfe9b4c0b68420f92"
+  pdg2026_d0_mumu_pdgLive.txt: "sha256:34cff61f22c2c5436c2504547a59e06a4ac59d7639113237705cdf1a02703a02"
+  source_manifest.yaml: "sha256:1dee59ad6f71331771d987579c6fb150186cf4d732582ca6372a48eb91907010"
+pdg_or_equivalent:
+  canonical_current_limit:
+    source: "PDG Live/API S032.28"
+    source_key: "PDG2026:D0MuMu"
+    year: 2026
+    observable: "BR(D0 -> mu+ mu-)"
+    limit_type: "upper"
+    value: 2.1e-9
+    confidence_level: 0.90
+    units: "branching fraction"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.28"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/pdg2026_d0_mumu_pdgLive.txt"
+    sha256_of_text_snapshot: "sha256:34cff61f22c2c5436c2504547a59e06a4ac59d7639113237705cdf1a02703a02"
+  cms_current_95cl_limit:
+    source: "CMS public result page / PRL 135 (2025) 151803"
+    source_key: "CMS2025:D0MuMu"
+    year: 2025
+    observable: "BR(D0 -> mu+ mu-)"
+    limit_type: "upper"
+    value: 2.4e-9
+    confidence_level: 0.95
+    integrated_luminosity_fb_inv: 64.5
+    collision_energy_TeV: 13.6
+    dataset_years: "2022-2023"
+    units: "branching fraction"
+    source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/BPH-23-008/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/cms2025_d0_mumu_public.txt"
+    sha256_of_text_snapshot: "sha256:46aaaf8dc7fbde4d049eeafe34f5b3424e6898d1fe23bf750980ef4b8808a878"
+  lhcb_previous_limit:
+    source: "LHCb PRL 131 (2023) 041804 / arXiv:2212.11203"
+    source_key: "LHCb2023:D0MuMu"
+    year: 2023
+    observable: "BR(D0 -> mu+ mu-)"
+    limit_type: "upper"
+    value: 3.1e-9
+    confidence_level: 0.90
+    companion_95cl_limit: 3.5e-9
+    integrated_luminosity_fb_inv: 9.0
+    collision_energies_TeV: [7, 8, 13]
+    units: "branching fraction"
+    source_url: "https://arxiv.org/abs/2212.11203"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/lhcb2023_arxiv2212_11203.txt"
+    sha256_of_text_snapshot: "sha256:a94f1dbcfa8dfc63351ea9b4efe01c76050b0264afd4877dfe9b4c0b68420f92"
+  standard_model_long_distance_context:
+    source: "Burdman, Golowich, Hewett, Pakvasa 2002"
+    source_key: "BurdmanGolowichHewettPakvasa2002:RareCharm"
+    year: 2002
+    observable: "Long-distance two-photon contribution to D0 -> mu+ mu-"
+    relation_to_d0_gammagamma_factor: 2.7e-5
+    quoted_minimum_branching_fraction: 3.0e-13
+    d0_gammagamma_vmd_estimate: 3.5e-8
+    d0_gammagamma_vmd_uncertainty_plus: 4.0e-8
+    d0_gammagamma_vmd_uncertainty_minus: 2.6e-8
+    units: "branching fraction"
+    source_url: "https://arxiv.org/abs/hep-ph/0112235"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/burdman2002_arxiv_hepph0112235.txt"
+    sha256_of_text_snapshot: "sha256:ec7271413986bf79dd6ec0470f2d418b7ac5fb493adb16a77cf369fd1a44e19d"
+  post_2008_eft_context:
+    source: "Gisbert, Hiller, Suelmann 2024"
+    source_key: "GisbertHillerSuelmann2024:RareCharmEFT"
+    year: 2024
+    observable: "Rare |Delta c| = |Delta u| = 1 global EFT context"
+    wilson_coefficients_discussed: ["C7", "C9", "C10", "C7prime", "C9prime", "C10prime"]
+    source_url: "https://link.springer.com/article/10.1007/JHEP12(2024)102"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/gisbert_hiller_suelmann2024_rare_charm_eft.txt"
+    sha256_of_text_snapshot: "sha256:7432c6e611dbba7e22b6a313d7ed97d7439ff6232472ba5cc4acf18cbed5599b"
+  cfw2008_rs_baseline:
+    source: "Csaki, Falkowski, Weiler 2008"
+    source_key: "CsakiFalkowskiWeiler2008:CompositeFlavor"
+    year: 2008
+    generic_rs_kk_gluon_scale_TeV: 21
+    composite_pseudo_goldstone_kk_gluon_scale_TeV: 33
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C004/cfw2008_arxiv0804_1954.txt"
+    sha256_of_text_snapshot: "sha256:6cfcdc586775c968dee3a3d30c197cc7b2b2c1f8bff0890293164d7b87166e4e"
+code_coverage:
+  status: "NO"
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"D0.*mu|D\\\\^0.*mu|D0.*mumu|mu\\\\+.*mu|muon.*muon|c.?->.?u|Delta.?C|rare.?charm|rare_decay|C_10|C10|C_S|C_P|pseudoscalar|scalar.*operator\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Focused C004 searches found no D0 -> mu+ mu- or Delta C = 1 rare leptonic observable implementation in the required implementation/test directories."
+    - "quarkConstraints/deltaf2.py:256 and quarkConstraints/deltaf2.py:941 are D0 mixing hits, not D0 -> mu+ mu-."
+    - "flavorConstraints/muToEGamma.py:75 is the separate mu -> e gamma LFV dipole check, not a charm dimuon decay."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_if_missing: "MEDIUM"
+implementation_difficulty_reason: "Needs a new Delta C = 1 rare leptonic branching-ratio observable and Wilson/operator normalization for axial-vector, scalar, and pseudoscalar dimuon operators; no angular likelihood is required."
+open_issues:
+  - "Dispatch text described the LHCb result as the most recent limit. PDG Live/API 2026 now includes a stronger CMS 2025 result; WA/CA should decide whether the final prose headlines the PDG 90% CL value or the CMS 95% CL result."
