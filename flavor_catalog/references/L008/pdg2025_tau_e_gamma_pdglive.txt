@@ -1,0 +1,35 @@
+Source snapshot: PDGLive tau decay mode summary
+URL: https://pdglive.lbl.gov/view/S035.32
+Access date: 2026-05-16
+Process: L008, tau- -> e- gamma
+Snapshot type: minimal text excerpt; math notation rendered in ASCII.
+License note: PDG 2025 Review content states CC BY 4.0 except where noted.
+
+Citation shown by PDGLive:
+S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024)
+and 2025 update.
+
+Relevant excerpt:
+
+PDGID: S035.32
+Decay mode summary: tau- -> e- gamma
+Gamma_186 / Gamma_total:
+  tau- -> e- gamma  < 3.3 x 10^-8
+  confidence level: 90%
+
+PDG API related-data entry:
+  description: G(tau- --> e- gamma)/G(total)
+  note: Test of lepton family number conservation.
+  measurement used in average/fit: AUBERT 2010B, PRL 104 021802,
+    DOI 10.1103/PhysRevLett.104.021802, BaBar, 516 fb^-1
+  value_text: <3.3 E-8
+  confidence_level: 90.0
+
+Category:
+Lepton Family number (LF), Lepton number (L), or Baryon number (B)
+violating modes.
+
+Extraction note:
+This is the canonical current PDG/equivalent upper limit used for L008.
+The value matches the BaBar full-data 2010 result and is quoted as a
+branching-fraction upper limit at 90% confidence level.

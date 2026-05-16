@@ -1,0 +1,131 @@
+schema: flavor_catalog.process.v1
+process_id: L008
+family: charged_lepton
+standard_notation: "\\mathcal{B}(\\tau^-\\to e^-\\gamma)"
+process_name: "Tau to e gamma charged-lepton-flavor-violating dipole decay"
+owner: "PKA"
+owner_agent_id: "PKA-L008"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T12:59:36-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T12:59:36-04:00"
+    agent_id: "PKA-L008"
+    reason: "Initial L008 PKA source extraction and draft sidecar."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T12:59:36-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T12:59:36-04:00"
+    agent_id: "PKA-L008"
+    reason: "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T12:59:36-04:00"
+version: "0.1.1"
+source_shas:
+  pdg2025_tau_e_gamma_pdglive.txt: "sha256:c529b7a831823ca0e2a5d46a9b2bacd1d88be995f87024f9451740cad5b3d604"
+  babar2010_tau_lgamma_arxiv0908_2381.txt: "sha256:a5acbe43ca0f328761fe37e586320eee3cfd2d397c0df6f7e966b4c75526b4ca"
+  belle2021_tau_lgamma_arxiv2103_12994.txt: "sha256:4a79ee0135bca0e407963f706982d15779d33d6befb7cd5541523bdf635d53aa"
+  belleii_physics_book_1808_10567_tau_lfv.txt: "sha256:ed834e84963c7b4cf4cc53213fe7ffca267d446ea9775bcde55efde02d9df87f"
+  cfw2008_arxiv0804_1954.txt: "sha256:85dd0c4246a7846aa21b20093e491a19c5d24f25f3dfa302e3640487a285546c"
+  perez_randall2008_arxiv0805_4652.txt: "sha256:f741eb0780ba0f465df33738891fe6f7de5808e911a41c4f1a5a458ef3349066"
+pdg_or_equivalent:
+  primary_current_limit:
+    source: "Particle Data Group 2025 PDGLive tau decay summary, PDGID S035.32"
+    year: 2025
+    observable: "Branching fraction upper limit for tau- -> e- gamma"
+    value: 3.3e-8
+    relation: "<"
+    confidence_level: "90% C.L."
+    source_url: "https://pdglive.lbl.gov/view/S035.32"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L008/pdg2025_tau_e_gamma_pdglive.txt"
+    sha256: "c529b7a831823ca0e2a5d46a9b2bacd1d88be995f87024f9451740cad5b3d604"
+  primary_experiment:
+    source: "BaBar Collaboration full-data tau -> l gamma search"
+    arxiv_id: "0908.2381"
+    DOI: "10.1103/PhysRevLett.104.021802"
+    year: 2010
+    observable: "Branching fraction upper limit for tau -> e gamma"
+    value: 3.3e-8
+    relation: "<"
+    confidence_level: "90% C.L."
+    data_sample: "(963 +- 7) x 10^6 tau decays"
+    source_url: "https://arxiv.org/abs/0908.2381"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L008/babar2010_tau_lgamma_arxiv0908_2381.txt"
+    sha256: "a5acbe43ca0f328761fe37e586320eee3cfd2d397c0df6f7e966b4c75526b4ca"
+  recent_belle_cross_check:
+    source: "Belle Collaboration full-data tau -> l gamma search"
+    arxiv_id: "2103.12994"
+    DOI: "10.1007/JHEP10(2021)019"
+    year: 2021
+    observable: "Branching fraction upper limit for tau+- -> e+- gamma"
+    value: 5.6e-8
+    relation: "<="
+    confidence_level: "90% C.L."
+    data_sample: "988 fb^-1 Belle full data"
+    source_url: "https://arxiv.org/abs/2103.12994"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L008/belle2021_tau_lgamma_arxiv2103_12994.txt"
+    sha256: "4a79ee0135bca0e407963f706982d15779d33d6befb7cd5541523bdf635d53aa"
+  belle_ii_projection:
+    source: "Belle II Physics Book"
+    arxiv_id: "1808.10567"
+    DOI: "10.1093/ptep/ptz106"
+    year: 2019
+    observable: "Projected branching-fraction sensitivity for tau -> e gamma"
+    projected_limit: 1.2e-8
+    relation: "<"
+    luminosity: "50 ab^-1"
+    conditions: "Prospect only, not a current experimental limit"
+    source_url: "https://arxiv.org/abs/1808.10567"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L008/belleii_physics_book_1808_10567_tau_lfv.txt"
+    sha256: "ed834e84963c7b4cf4cc53213fe7ffca267d446ea9775bcde55efde02d9df87f"
+  rs_context:
+    - source: "Csaki-Falkowski-Weiler 2008 RS flavor baseline"
+      arxiv_id: "0804.1954"
+      snapshot_path: "flavor_catalog/references/L008/cfw2008_arxiv0804_1954.txt"
+      sha256: "85dd0c4246a7846aa21b20093e491a19c5d24f25f3dfa302e3640487a285546c"
+    - source: "Perez-Randall 2008 warped-neutrino lepton-MFV source"
+      arxiv_id: "0805.4652"
+      snapshot_path: "flavor_catalog/references/L008/perez_randall2008_arxiv0805_4652.txt"
+      sha256: "f741eb0780ba0f465df33738891fe6f7de5808e911a41c4f1a5a458ef3349066"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  targeted_grep_commands:
+    - "rg -n \"tau.?e.?gamma|tau.*e.*gamma|tau.?->.?e.?gamma|tau.?->.?e|tau.*gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"tau.?e.?gamma|tau.*e.*gamma|tau.?->.?e|e.?gamma|l.?gamma|dipole|muToEGamma|check_mu_to_e_gamma|BR_LIMIT_MEGII_2025\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  broader_grep_commands:
+    - "rg -n \"tau.?->|tau.*gamma|e.?gamma|mu.?gamma|muToEGamma|BR_LIMIT|MEG|LFV|lepton.?flavor|lepton.?flavour|dipole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"check_mu_to_e_gamma|mu.?e.?gamma|tau.?e.?gamma|tau.?mu.?gamma|Tau|tau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  negative_result:
+    - "The targeted tau/e/gamma grep over the required code paths returned no matches."
+    - "The broader greps only found the L001 mu->e gamma dipole surface and generic tau-Yukawa documentation examples."
+  adjacent_noncoverage_evidence:
+    - "flavorConstraints/muToEGamma.py:1 documents mu->e gamma, not tau->e gamma."
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma."
+    - "scanParams/scan.py:523 marks scan step 3 as mu -> e gamma."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "The repo has an adjacent mu->e gamma dipole pattern, but L008 needs a generalized lepton-dipole observable with tau-e flavor indices, tau lifetime/normalization, and a process-specific branching-ratio limit. No new hadronic matrix elements, lattice inputs, or QCD running are needed."
+implementation_difficulty_if_missing: "MEDIUM"
+open_issues:
+  - "Checker should confirm whether any Belle II tau -> e gamma result appeared after the Belle full-data 2021 paper; this PKA pass found only Belle II prospects, not a superseding measurement."
+  - "A future implementation should decide whether to generalize the existing muToEGamma checker or create a separate tau radiative LFV module with explicit flavor-index and lifetime inputs."
