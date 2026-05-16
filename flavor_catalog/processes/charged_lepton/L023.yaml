@@ -1,0 +1,154 @@
+schema: flavor_catalog.process.v1
+process_id: L023
+family: charged_lepton
+standard_notation: "\\nu_\\mu N\\to\\nu_\\mu N\\mu^+\\mu^-"
+process_name: "Muon-neutrino trident production"
+owner: "PKA"
+owner_agent_id: "PKA-L023"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T15:34:00-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T15:34:00-04:00"
+    agent_id: "PKA-L023"
+    reason: "Initial L023 PKA source extraction and draft sidecar."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T15:34:00-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T15:34:00-04:00"
+    agent_id: "PKA-L023"
+    reason: "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T15:34:00-04:00"
+version: "0.1.0"
+source_shas:
+  altmannshofer2014_trident_arxiv.txt: "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8"
+  ccfr1991_prl_snapshot.txt: "sha256:903c8a531035948c89a55a1a2ba6582664ad73fc0dbc3761d017de9b7c1abafa"
+  cfw2008_arxiv0804_1954.txt: "sha256:d14c34e9fe34549695c8e17a0417ce63be255fd6b4b7bfec77921f63760b242a"
+  charmii1990_cds_snapshot.txt: "sha256:cb4aac26fd26f6937cabbb53f0eb973700192460b8b44b0b1b977113e31d44a2"
+  dune2019_tridents_arxiv.txt: "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+  kaneta2017_belleii_arxiv.txt: "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5"
+  nutev1998_arxiv_snapshot.txt: "sha256:b0153f6d1c7c404c2e0833d3beffe404955e208cf871a1d23585eac9502b8634"
+pdg_or_equivalent:
+  source: "No PDG/HFLAV average identified; use experiment and DUNE/Altmannshofer compiled ratios to the Standard Model."
+  access_date: "2026-05-16"
+  value_summary: "sigma_exp/sigma_SM ratios: CHARM-II 1.58 +/- 0.64; CCFR 0.82 +/- 0.28; NuTeV 0.72 +1.73 -0.72."
+  measured_observables:
+    - experiment: "CHARM-II"
+      observable: "sigma_exp/sigma_SM for nu_mu N -> nu_mu N mu+ mu-"
+      value: 1.58
+      uncertainty: 0.64
+      uncertainty_type: "symmetric"
+      units: "dimensionless ratio"
+      confidence_level: null
+      source: "Altmannshofer et al. 2019 DUNE trident compilation"
+      primary_experiment_source: "D. Geiregat et al. (CHARM-II), Phys. Lett. B 245 (1990) 271-275"
+      source_url: "https://arxiv.org/abs/1902.06765"
+      primary_source_url: "https://cds.cern.ch/record/208653"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+      supporting_snapshot_path: "flavor_catalog/references/L023/charmii1990_cds_snapshot.txt"
+      sha256: "19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+      supporting_sha256: "cb4aac26fd26f6937cabbb53f0eb973700192460b8b44b0b1b977113e31d44a2"
+      notes: "Altmannshofer et al. 2014 quote the same central value with uncertainty 0.57; WA/CA should verify the preferred uncertainty convention."
+    - experiment: "CCFR"
+      observable: "sigma_exp/sigma_SM for nu_mu N -> nu_mu N mu+ mu-"
+      value: 0.82
+      uncertainty: 0.28
+      uncertainty_type: "symmetric"
+      units: "dimensionless ratio"
+      confidence_level: null
+      source: "CCFR primary event counts and DUNE/Altmannshofer compiled ratio"
+      primary_event_count_observed: "37.0 +/- 12.4"
+      primary_event_count_sm: "45.3 +/- 2.3"
+      source_url: "https://pubmed.ncbi.nlm.nih.gov/10043703/"
+      supporting_source_url: "https://arxiv.org/abs/1902.06765"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L023/ccfr1991_prl_snapshot.txt"
+      supporting_snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+      sha256: "903c8a531035948c89a55a1a2ba6582664ad73fc0dbc3761d017de9b7c1abafa"
+      supporting_sha256: "19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+      notes: "Strongest practical historical trident bound; used for 95% CL exclusion contours in later BSM reinterpretations."
+    - experiment: "NuTeV"
+      observable: "sigma_exp/sigma_SM for nu_mu N -> nu_mu N mu+ mu-"
+      value: 0.72
+      uncertainty_plus: 1.73
+      uncertainty_minus: 0.72
+      uncertainty_type: "asymmetric"
+      units: "dimensionless ratio"
+      confidence_level: null
+      source: "Altmannshofer et al. 2019 DUNE trident compilation"
+      primary_event_count_data: 17
+      primary_background_estimate: "9.8 +/- 2.9"
+      primary_event_count_sm: "10.8 +/- 0.3"
+      source_url: "https://arxiv.org/abs/1902.06765"
+      primary_source_url: "https://arxiv.org/abs/hep-ex/9811012"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+      supporting_snapshot_path: "flavor_catalog/references/L023/nutev1998_arxiv_snapshot.txt"
+      sha256: "19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+      supporting_sha256: "b0153f6d1c7c404c2e0833d3beffe404955e208cf871a1d23585eac9502b8634"
+      notes: "Preliminary/weak input; DUNE source says no signal could be established at NuTeV."
+paper_era_reference:
+  source: "Csaki, Falkowski, and Weiler 2008"
+  arxiv_id: "0804.1954"
+  role: "2008 RS/composite-flavor baseline for the requested post-2008 comparison; no trident numerical observable extracted."
+  source_url: "https://arxiv.org/abs/0804.1954"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/L023/cfw2008_arxiv0804_1954.txt"
+  sha256: "d14c34e9fe34549695c8e17a0417ce63be255fd6b4b7bfec77921f63760b242a"
+auxiliary_context:
+  theory_reinterpretation:
+    - source: "Altmannshofer et al. 2014"
+      arxiv_id: "1406.2332"
+      role: "BSM reinterpretation of CCFR/CHARM-II trident measurements for L_mu - L_tau and related muon-force models."
+      ccfr_ratio_used: "0.82 +/- 0.28"
+      charmii_ratio_used: "1.58 +/- 0.57"
+      exclusion_confidence_level: "95% C.L. contours for CCFR in model plots"
+      source_url: "https://arxiv.org/abs/1406.2332"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L023/altmannshofer2014_trident_arxiv.txt"
+      sha256: "b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8"
+  projections:
+    - source: "Altmannshofer et al. 2019 DUNE tridents"
+      arxiv_id: "1902.06765"
+      role: "DUNE near-detector projection; not a measured observable."
+      abstract_accuracy_projection: "about 25% after about 3 years each in neutrino and antineutrino modes"
+      body_baseline_accuracy: "40%"
+      improved_contour_accuracy: "25%"
+      uncut_event_rate_context: "roughly 240 nu_mu -> nu_mu mu+ mu- events per year"
+      selected_event_context: "O(10) signal events/year after detailed cuts"
+      source_url: "https://arxiv.org/abs/1902.06765"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+      sha256: "19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+    - source: "Kaneta and Shimomura 2017"
+      arxiv_id: "1701.00156"
+      role: "Belle-II complement for L_mu - L_tau gauge boson searches; not a trident measurement."
+      belleii_center_of_mass_energy_GeV: 10.58
+      belleii_goal_luminosity_ab_inv: 50
+      source_url: "https://arxiv.org/abs/1701.00156"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt"
+      sha256: "9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5"
+code_coverage:
+  status: "NO"
+  evidence: []
+  grep_commands:
+    - "rg -n \"neutrino.?trident|trident|nu_mu.*mu|muon.?pair|CCFR|NuTeV|CHARM-II|CHARM II|L_mu.?-.?L_tau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"trident|Trident|L_mu|Ltau|L_tau|CCFR|NuTeV|CHARM|Belle.?II|DUNE\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "Plan-v1 broad grep commands were also rerun over quarkConstraints, flavorConstraints, scanParams, neutrinos, yukawa, qcd, scripts, tests, and docs."
+  false_positive_notes:
+    - "The broad CHARM grep only found qcd charm-quark mass constants and tests, not CHARM-II trident code."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Missing implementation requires a new neutrino-trident mode calculation: lepton-current operator conventions, mediator matching, nuclear form factors/target handling, neutrino flux integration, and experiment-specific rate or likelihood treatment."
+implementation_difficulty_if_missing: "HIGH"
+open_issues:
+  - "CHARM-II uncertainty convention differs across common compilations: Altmannshofer 2014 quotes 1.58 +/- 0.57, while the DUNE 2019 table quotes 1.58 +/- 0.64."
+  - "DUNE projection wording differs between the arXiv abstract (~25%) and final TeX body/conclusion (40% baseline plus 25% improved contour)."

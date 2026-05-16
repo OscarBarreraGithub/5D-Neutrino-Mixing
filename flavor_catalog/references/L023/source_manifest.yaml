@@ -1,0 +1,68 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: L023
+generated_at: "2026-05-16T15:34:00-04:00"
+sources:
+  - key: CCFR1991TridentsWZ
+    arxiv_id: null
+    DOI: "10.1103/PhysRevLett.66.3117"
+    title: "Neutrino tridents and W-Z interference"
+    authors: "S. R. Mishra et al. (CCFR Collaboration)"
+    year: 1991
+    url: "https://pubmed.ncbi.nlm.nih.gov/10043703/"
+    secondary_url: "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.66.3117"
+    sha256_of_local_snapshot: "sha256:903c8a531035948c89a55a1a2ba6582664ad73fc0dbc3761d017de9b7c1abafa"
+    snapshot_path: "flavor_catalog/references/L023/ccfr1991_prl_snapshot.txt"
+  - key: CHARMII1990FirstObservation
+    arxiv_id: null
+    DOI: "10.1016/0370-2693(90)90146-W"
+    title: "First observation of neutrino trident production"
+    authors: "D. Geiregat et al. (CHARM-II Collaboration)"
+    year: 1990
+    url: "https://cds.cern.ch/record/208653"
+    sha256_of_local_snapshot: "sha256:cb4aac26fd26f6937cabbb53f0eb973700192460b8b44b0b1b977113e31d44a2"
+    snapshot_path: "flavor_catalog/references/L023/charmii1990_cds_snapshot.txt"
+  - key: NuTeV1998Trident
+    arxiv_id: "hep-ex/9811012"
+    DOI: null
+    title: "Neutrino Trident Production from NuTeV"
+    authors: "T. Adams et al. (NuTeV Collaboration)"
+    year: 1998
+    url: "https://arxiv.org/abs/hep-ex/9811012"
+    sha256_of_local_snapshot: "sha256:b0153f6d1c7c404c2e0833d3beffe404955e208cf871a1d23585eac9502b8634"
+    snapshot_path: "flavor_catalog/references/L023/nutev1998_arxiv_snapshot.txt"
+  - key: Altmannshofer2014TridentProbe
+    arxiv_id: "1406.2332"
+    DOI: "10.1103/PhysRevLett.113.091801"
+    title: "Neutrino Trident Production: A Powerful Probe of New Physics with Neutrino Beams"
+    authors: "Wolfgang Altmannshofer, Stefania Gori, Maxim Pospelov, Itay Yavin"
+    year: 2014
+    url: "https://arxiv.org/abs/1406.2332"
+    sha256_of_local_snapshot: "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8"
+    snapshot_path: "flavor_catalog/references/L023/altmannshofer2014_trident_arxiv.txt"
+  - key: Altmannshofer2019DUNETridents
+    arxiv_id: "1902.06765"
+    DOI: "10.1103/PhysRevD.100.115029"
+    title: "Neutrino Tridents at DUNE"
+    authors: "Wolfgang Altmannshofer, Stefania Gori, Justo Martin-Albo, Alexandre Sousa, Michael Wallbank"
+    year: 2019
+    url: "https://arxiv.org/abs/1902.06765"
+    sha256_of_local_snapshot: "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+    snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+  - key: KanetaShimomura2017BelleIITrident
+    arxiv_id: "1701.00156"
+    DOI: "10.1093/ptep/ptx050"
+    title: "On the possibility of search for L_mu - L_tau gauge boson at Belle-II and neutrino beam experiments"
+    authors: "Yuya Kaneta and Takashi Shimomura"
+    year: 2017
+    url: "https://arxiv.org/abs/1701.00156"
+    sha256_of_local_snapshot: "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5"
+    snapshot_path: "flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt"
+  - key: CsakiFalkowskiWeiler2008Flavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:d14c34e9fe34549695c8e17a0417ce63be255fd6b4b7bfec77921f63760b242a"
+    snapshot_path: "flavor_catalog/references/L023/cfw2008_arxiv0804_1954.txt"
