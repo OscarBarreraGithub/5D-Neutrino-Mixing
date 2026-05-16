@@ -6,7 +6,7 @@ process_name: "Inclusive b -> s ell+ ell- rare B decay"
 owner: "PKA"
 owner_agent_id: "PKA-B015"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -24,9 +24,20 @@ status_history:
     at: "2026-05-16T11:32:49-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for wa_wave1_beauty; numerical claims checked against sidecar sources."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T11:45:36-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T11:45:36-04:00"
+    agent_id: "CA"
+    issues:
+      - "CHK-1: TeX branching-fraction and q2-bin numerical claims map to pdg_or_equivalent observables that lack per-observable year/source_url/access_date metadata."
+      - "CHK-1: TeX quotes the Belle II 50 ab^-1 projection, but no pdg_or_equivalent observable records that projection or luminosity."
+    reason: "Checker ca_wave1_beauty found CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_wave1_beauty.md."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:32:49-04:00"
+last_updated_at: "2026-05-16T11:45:36-04:00"
 version: "0.1.0"
 source_shas:
   babar_1312_5364_arxiv.txt: "sha256:fcaba867afcd945d15f231279f3463665cfb09e619906bd1d454544869d6daa2"
