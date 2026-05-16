@@ -6,7 +6,7 @@ process_name: "Rare semileptonic decay D+ -> pi+ mu+ mu-"
 owner: "PKA"
 owner_agent_id: "PKA-C007"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA-ca_w4_charm_v2"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -36,9 +36,18 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "Cycle-2 WA rework addressed CA CHK-1 and CHK-4."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T14:16:41-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T14:16:41-04:00"
+    agent: "CA"
+    agent_id: "CA-ca_w4_charm_v2"
+    cycle: 2
+    reason: "Cycle-2 checker re-check passed CHK-1 through CHK-8."
+checker_passed_at: "2026-05-16T14:16:41-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:58:00-04:00"
+last_updated_at: "2026-05-16T14:16:41-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:4703263c1d560f5af74636df56cd97f76edc56b1d0fb7f65443b2a07eaea6885"
