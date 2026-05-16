@@ -6,7 +6,7 @@ process_name: "Flavor-changing neutral-current top decay t -> u Z"
 owner: "PKA"
 owner_agent_id: "PKA-T002"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -42,9 +42,18 @@ status_history:
     agent_id: "WA-v2"
     cycle: 2
     reason: "Cycle-2 writer rework: promoted CA-flagged numerical claims into pdg_or_equivalent.values with complete metadata."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T12:55:12-04:00"
+    timestamp: "2026-05-16T12:55:12-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w23_top_higgs_ew_v2"
+    reason: "Cycle-2 checker verification passed all CHK-1..CHK-8 requirements."
+checker_passed_at: "2026-05-16T12:55:12-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:43:15-04:00"
+last_updated_at: "2026-05-16T12:55:12-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_fcnc_tzq.txt: "sha256:94cf070f2608fc3eaed5f5ff94b154915b3d6607275a1d8dfb4e9ecfb124e0f3"
