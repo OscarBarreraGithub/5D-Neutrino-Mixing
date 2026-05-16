@@ -7,7 +7,7 @@
 % Canonical metadata sidecar: C008.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{C008: \(D^+\to\pi^+e^\pm\mu^\mp\)}
+\section{C008: \texorpdfstring{\(D^+\to\pi^+e^\pm\mu^\mp\)}{D+ -> pi+ e mu}}
 
 \subsection*{Process}
 \textbf{Standard notation:}
@@ -18,19 +18,20 @@ usually summarized as \(D^+\to\pi^+e^\pm\mu^\mp\).  Charge-conjugate
 decays are implied by the experimental sources.
 
 \subsection*{PDG / equivalent value(s)}
-The current PDG Live/API entries S031.110 and S031.111, accessed on
-2026-05-16, list separate 90\% C.L. upper limits:
+The sidecar sources \texttt{PDG2026:DPlusPiEMuPlus} and
+\texttt{PDG2026:DPlusPiEMuMinus}, PDG Live/API entries S031.110 and
+S031.111 accessed on 2026-05-16, list separate 90\% C.L. upper limits:
 \[
   \mathcal{B}(D^+\to\pi^+e^+\mu^-) < 2.1\times10^{-7},
   \qquad
   \mathcal{B}(D^+\to\pi^+e^-\mu^+) < 2.2\times10^{-7}.
 \]
-Both current limits come from the LHCb 2021 search in \(1.6\,{\rm fb}^{-1}\)
-of 2016 \(pp\) data.  The LHCb source table gives companion 95\% C.L.
-limits of \(2.3\times10^{-7}\) and \(2.2\times10^{-7}\), respectively.
-The predecessor BaBar 2011 search, using \(384\,{\rm fb}^{-1}\), reported
-90\% C.L. limits of \(2.9\times10^{-6}\) and \(3.6\times10^{-6}\).  These
-values are traced to
+Both current limits come from \texttt{LHCb2021:DPlusPiEMu}, a search in
+\(1.6\,{\rm fb}^{-1}\) of 2016 \(pp\) data.  The LHCb table gives companion
+95\% C.L. limits of \(2.3\times10^{-7}\) and \(2.2\times10^{-7}\),
+respectively.  The predecessor search \texttt{BaBar2011:RareForbiddenCharm},
+using \(384\,{\rm fb}^{-1}\), reported 90\% C.L. limits of
+\(2.9\times10^{-6}\) and \(3.6\times10^{-6}\).  These values are traced to
 \texttt{flavor\_catalog/references/C008/pdg2026\_dplus\_piplus\_ep\_mum\_pdgLive.txt},
 \texttt{pdg2026\_dplus\_piplus\_em\_mup\_pdgLive.txt},
 \texttt{lhcb2021\_arxiv2011\_00217.txt}, and
@@ -46,12 +47,15 @@ brane terms can generate it.  It is therefore a useful catalog marker for a
 future combined quark-plus-lepton flavor backend rather than a current veto.
 
 \subsection*{Post-2008 developments}
-The arXiv:0804.1954 RS-flavor baseline predates the modern rare/forbidden
-semileptonic charm searches.  BaBar subsequently set first or improved limits
-for many charged-charm LFV modes in 2011.  LHCb then searched for 25 rare and
-forbidden \(D^+\) and \(D_s^+\) modes with 2016 data and found no significant
-deviation from the background-only hypothesis, tightening the two C008 charge
-channels to the present \(2\times10^{-7}\)-level limits.
+The arXiv:0804.1954 RS-flavor baseline
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor} predates the modern
+rare/forbidden semileptonic charm searches.  BaBar
+\texttt{BaBar2011:RareForbiddenCharm} subsequently set or improved limits for
+charged-charm LFV modes in \(384\,{\rm fb}^{-1}\).  LHCb
+\texttt{LHCb2021:DPlusPiEMu} searched for 25 rare and forbidden \(D^+\) and
+\(D_s^+\) modes in 2016 data, found no significant deviation from background,
+and tightened the two C008 charge channels to the present
+\(2\times10^{-7}\)-level limits.
 
 \subsection*{Constraint validity and model dependence}
 The experimental limits are robust upper bounds on the listed exclusive
@@ -62,7 +66,8 @@ phase-space treatment matching the LHCb analysis.  The Standard Model
 background for charged-LFV final states is negligible for catalog purposes.
 
 \subsection*{Code coverage in this repo}
-\textbf{NO.}  The required coverage greps over \texttt{quarkConstraints/},
+\textbf{NO.}  The sidecar \texttt{code\_coverage} block records the required
+coverage greps over \texttt{quarkConstraints/},
 \texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
 \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
 \texttt{scanParams/}, and \texttt{tests/}, plus a focused search for
