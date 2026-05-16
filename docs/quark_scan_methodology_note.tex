@@ -481,12 +481,15 @@ similar floor in Csaki--Falkowski--Weiler 0804.1954 and Buras \emph{et
 al.} 1110.3534, and unbounded Gaussian draws with cutoff at the NDA
 perturbativity bound $|Y|\lesssim 4\pi/\sqrt{N_{KK}\log\varepsilon}\approx
 3$ in Agashe--Contino--Pomarol--Sundrum hep-ph/0408134. Our choice of
-$1.5$ sits in the middle of this band; in practice the $\Mkk$ bound moves
-by less than $30\%$ between half-range $1.0$ and half-range $3.0$.
-An empirical sensitivity check (Run~B, \S\ref{sec:robustness} below)
-confirms that the $\Mkk^{\min}$ bound moves by $\lesssim 15\%$ across
-$\mathcal{U}(-1,1)$, $\mathcal{U}(-1.5,1.5)$, $\mathcal{U}(-3,3)$, and
-Gaussian $\sigma=1$ truncated at $3\sigma$ priors.
+$1.5$ sits in the middle of this band; the broad literature-prior
+heuristic is that the $\Mkk$ bound moves by less than $30\%$ when the
+half-range is swept from $1.0$ to $3.0$. An empirical sensitivity check
+(Run~B, \S\ref{sec:robustness} below) sharpens this using a different
+metric: the median-scale $\Mkk^{\min}$ bound moves by $\lesssim 15\%$
+across $\mathcal{U}(-1,1)$, $\mathcal{U}(-1.5,1.5)$,
+$\mathcal{U}(-3,3)$, and Gaussian $\sigma=1$ truncated at $3\sigma$
+priors, while the $95\%$-acceptance crossings below have an even smaller
+narrow-to-wide spread.
 
 Two practical notes. First, the PDG-pass tolerance in the RS-anarchy
 analysis is loosened from $2\sigma$ to a constant ``factor of 3'' on
@@ -516,7 +519,7 @@ in eq.~(\ref{eq:cvals}) are deliberately chosen to make the
 Concretely, with the $c$-values above, the IR-overlap factors are
 \begin{align}
   f_Q &\approx (0.0030,\;0.020,\;0.55),\nonumber\\
-  f_u &\approx (0.0011,\;0.117,\;1.00),\\
+  f_u &\approx (0.0011,\;0.16,\;1.00),\\
   f_d &\approx (0.0011,\;0.0058,\;0.036).\nonumber
 \end{align}
 For $\mathcal{O}(1)$ Yukawa entries, the resulting up-quark and down-quark
@@ -524,7 +527,9 @@ mass eigenvalues are then concentrated, in expectation, around
 \begin{align}
   (m_u, m_c, m_t) &\sim 2v \cdot (f_{Q,1}f_{u,1},\;f_{Q,2}f_{u,2},\;
                                   f_{Q,3}f_{u,3})\,\langle Y\rangle
-                  \sim (1\,\mathrm{MeV},\,500\,\mathrm{MeV},\,200\,\mathrm{GeV}),
+                  \sim \bigl(\mathcal{O}(1\,\mathrm{MeV}),\,
+                              \mathcal{O}(1\,\mathrm{GeV}),\,
+                              \mathcal{O}(100\,\mathrm{GeV})\bigr),
                   \nonumber\\
   (m_d, m_s, m_b) &\sim 2v \cdot (f_{Q,1}f_{d,1},\;f_{Q,2}f_{d,2},\;
                                   f_{Q,3}f_{d,3})\,\langle Y\rangle
@@ -813,8 +818,10 @@ in narrow / wide / Gaussian order, and
 \end{equation}
 The full spread between narrow and wide is therefore $\approx 5\%$ at
 $95\%$ acceptance, with the Gaussian variant sitting close to the wide
-edge. This confirms (and slightly improves on) the
-$\le 30\%$ statement made in \S\ref{sec:setup-b}: the bound is
+edge. This is the $95\%$-acceptance version of the Run~B sensitivity
+check advertised in \S\ref{sec:setup-b}: it sits below both the
+$\lesssim 15\%$ median-scale spread in the same empirical scan and the
+broader $\le 30\%$ literature-prior heuristic. The bound is therefore
 \emph{insensitive} at the $\mathcal{O}(10\%)$ level to the precise
 shape of the anarchic prior.
 
@@ -889,10 +896,14 @@ This is what motivates our headline choice of factor-of-three throughout.
 \paragraph{Headline.}
 Our post-audit pipeline produces an RS-anarchy $\Mkk^{\min}$ bound that
 is approximately a factor $2.2$ stronger than the CFW 2008 reference at
-matched conventions: at common $\gs=3$, we obtain $23.4$~TeV (50th
-percentile, BGS 2020 + FLAG 2024 + factor-3 PDG gate) versus the CFW
-no-UV-boundary-term result of $10.5$~TeV, or equivalently $47$~TeV
-versus $21$~TeV at common $\gs\simeq6$.  The factor-$2.2$ enhancement is
+matched conventions: at common $\gs=3$, we obtain $23.37$~TeV (50th
+percentile, CFW 30\%-relative gate, $n=217$ surviving draws) versus the
+CFW no-UV-boundary-term result of $10.5$~TeV, or equivalently
+$46.74$~TeV versus $21$~TeV at common $\gs\simeq6$.\footnote{The
+$46.74$~TeV value is the same CFW-matched projection rescaled by $6/3$.
+It is distinct from the live RUNA p50, $47.26$~TeV at $\gs=3$, which
+uses the unmatched post-audit factor-of-three gate ensemble.}  The
+factor-$2.2$ enhancement is
 attributable to (i) the BGS 2020 SM $\epsilon_K$ prediction giving a
 $6\times$ tighter NP budget than the UTfit-era values CFW used; (ii) the
 FLAG 2024 bag parameters; and (iii) our LO BMU-corrected sign
@@ -970,10 +981,14 @@ gate tightening, with the surviving $\Mkk^{\min}$ shape essentially
 unchanged (\S\ref{sec:robust-pdg-tightness}); and the CFW comparison is
 factor-$2.2$ stronger than the 2008 reference once the $g_s^\star$
 conventions are matched.  Under the central BGS/FLAG inputs and the scope
-conventions in Appendix~\ref{app:input-audits}, the p50 value is
-$47.26$~TeV at $\gs=3$; the CFW no-UV-boundary-term RS marker at the same
-convention is $10.5$~TeV, while its default $\gs\simeq6$ marker is
-$21$~TeV (\S\ref{sec:robust-cfw}).  The residual is attributable to newer
+conventions in Appendix~\ref{app:input-audits}, the live RUNA p50 value
+is $47.26$~TeV at $\gs=3$ for the unmatched default ensemble. The
+factor-$2.2$ CFW framing instead uses the matched-convention comparison,
+$23.37$~TeV versus the CFW no-UV-boundary-term RS marker
+$10.5$~TeV at the same $\gs=3$ convention; equivalently, the same matched
+projection gives $46.74$~TeV versus $21$~TeV at the CFW default
+$\gs\simeq6$ convention (\S\ref{sec:robust-cfw}).  The residual is
+attributable to newer
 $\epsilon_K^{\rm SM}$, FLAG bag inputs, and the audited LO BMU sign
 convention rather than to a percent-level reproduction of the CFW number.
 
