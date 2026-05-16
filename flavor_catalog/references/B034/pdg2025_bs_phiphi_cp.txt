@@ -1,0 +1,23 @@
+Source key: pdg2025_bs_phiphi_cp
+Process: B034
+Source: PDG pdgLive B_s^0 listing S086, CP Violation phase beta_s (b -> s sbar s)
+URL: https://pdg.lbl.gov/encoder_listings/s086.pdf
+Access date: 2026-05-16
+Snapshot type: Minimal text extract from PDG listing; no PDF stored.
+
+Relevant extracted values:
+- PDG table "CP Violation phase beta_s (b -> s sbar s)" reports
+  beta_s = (3.7 +/- 3.5) x 10^-2 rad, document AAIJ 23AT, LHCb,
+  pp at 7, 8, 13 TeV.
+- PDG note for AAIJ 23AT reports phi_s^{s sbar s} = -0.074 +/- 0.069 rad
+  and |lambda| = 1.009 +/- 0.030.
+- Measurement note: time-dependent fit to B_s^0 -> phi phi decays, assuming
+  independence of the helicity of the phi phi decay.
+
+Extraction notes:
+- The beta_s entry is related to the LHCb phase convention by
+  phi_s^{s sbar s} = -2 beta_s^{s sbar s}; this catalog uses the LHCb
+  phi_s notation as the headline observable and records beta_s as the PDG
+  listing convention.
+- Search lines observed from the PDG listing included the generated-page date
+  "11/11/2025" and the AAIJ 23AT note above.

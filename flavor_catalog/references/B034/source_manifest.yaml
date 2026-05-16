@@ -1,0 +1,70 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B034
+generated_at: "2026-05-16T14:06:13-04:00"
+references:
+  - key: pdg2025_bs_phiphi_cp
+    arxiv_id: null
+    DOI: null
+    title: "PDG B_s^0 listing S086: CP Violation phase beta_s (b -> s sbar s)"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdg.lbl.gov/encoder_listings/s086.pdf"
+    access_date: "2026-05-16"
+    license_note: "Minimal text snapshot only; no PDG PDF stored."
+    sha256_of_local_snapshot: "sha256:4c88ea2de1ba29c5435a80bae06cea3f6c2c07bd3e882b18664fb05f25a027ee"
+    snapshot_path: "flavor_catalog/references/B034/pdg2025_bs_phiphi_cp.txt"
+  - key: lhcb2023_bs_phiphi_cp_cds
+    arxiv_id: "2304.06198"
+    DOI: "10.1103/PhysRevLett.131.171802"
+    title: "Precision Measurement of CP Violation in the Penguin-Mediated Decay B_s^0 -> phi phi"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2023
+    url: "https://cds.cern.ch/record/2857424"
+    access_date: "2026-05-16"
+    license_note: "CDS lists publication under CC BY 4.0; minimal text snapshot only."
+    sha256_of_local_snapshot: "sha256:b003cf5fbbdaef3497b6a8c1d84e0deabd619ee23da70a219fd4558c5ce13e5f"
+    snapshot_path: "flavor_catalog/references/B034/lhcb2023_bs_phiphi_cp_cds.txt"
+  - key: lhcb2019_bs_phiphi_cp_cds
+    arxiv_id: "1907.10003"
+    DOI: "10.1007/JHEP12(2019)155"
+    title: "Measurement of CP violation in the B_s^0 -> phi phi decay and search for the B^0 -> phi phi decay"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2019
+    url: "https://cds.cern.ch/record/2684085"
+    access_date: "2026-05-16"
+    license_note: "CDS lists publication and preprint under CC BY 4.0; minimal text snapshot only."
+    sha256_of_local_snapshot: "sha256:37b596af8f6720a84acb6f7730c8e361cd6175795bb71690a8376bdb21b5c6b3"
+    snapshot_path: "flavor_catalog/references/B034/lhcb2019_bs_phiphi_cp_cds.txt"
+  - key: lhcb2014_bs_phiphi_cp_arxiv
+    arxiv_id: "1407.2222"
+    DOI: "10.1103/PhysRevD.90.052011"
+    title: "Measurement of CP violation in B_s^0 -> phi phi decays"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2014
+    url: "https://arxiv.org/abs/1407.2222"
+    access_date: "2026-05-16"
+    license_note: "arXiv abstract/value snapshot only; no PDF stored."
+    sha256_of_local_snapshot: "sha256:21b1b1b7fa258e6648702118626d488c61bea102e3a423fb237194d4321a8b94"
+    snapshot_path: "flavor_catalog/references/B034/lhcb2014_bs_phiphi_cp_arxiv.txt"
+  - key: hflav2024_bs_phiphi_branching
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV Rare B Decays: B_s^0 -> phi(1020) phi(1020)"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2024
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/May2024/html/Bs/BR_Bs0_phi_phi.html"
+    access_date: "2026-05-16"
+    license_note: "HFLAV website/tables licensed CC BY 4.0; minimal text snapshot."
+    sha256_of_local_snapshot: "sha256:0109068c253de87b8482a37a48ae8910de98957e4b3067c4dae21704f92f5b55"
+    snapshot_path: "flavor_catalog/references/B034/hflav2024_bs_phiphi_branching.txt"
+  - key: cfw2008_arxiv0804_1954
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "C. Csaki, A. Falkowski, and A. Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    license_note: "arXiv abstract/context snapshot only; no PDF stored."
+    sha256_of_local_snapshot: "sha256:120dec32d04361d274e5d249d34f50ab32347701fefed20adbaae1d62ddad03c"
+    snapshot_path: "flavor_catalog/references/B034/cfw2008_arxiv0804_1954.txt"

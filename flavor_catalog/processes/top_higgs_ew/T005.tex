@@ -1,0 +1,96 @@
+% Flavor catalog per-process draft.
+% process_id: T005
+% family: top_higgs_ew
+% owner_agent_id: PKA-T005
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: T005.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(t\to c g\)}{t -> c g} Top-Gluon FCNC}
+
+\subsection*{Process}
+The observable is the flavor-changing neutral-current top decay
+\(\mathcal{B}(t\to c g)\), catalog id T005 in the top/Higgs/electroweak
+family.  Experimentally it is constrained mainly through anomalous single-top
+production, \(c g\to t\), then translated into an equivalent top-decay
+branching fraction under a specified chromomagnetic-operator convention.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical experimental source is the PDG/pdgLive Q007TUG top-FCNC gluon
+datablock, accessed on 2026-05-16
+(\texttt{references/T005/pdg\_2025\_top\_tug\_tcg.txt}).  Its current ATLAS
+entry, AAD 2022T, uses \(139~\mathrm{fb}^{-1}\) of \(13~\mathrm{TeV}\) \(pp\)
+data.  For the charm-gluon production mode it gives
+\[
+  \sigma(cg\to t)\,{\cal B}(t\to bW)\,{\cal B}(W\to \ell\nu)<4.7~\mathrm{pb}
+\]
+at 95\% CL, interpreted in the EFT basis as
+\[
+  |C^{ct}_{uG}|/\Lambda^2 < 0.14~\mathrm{TeV}^{-2},
+  \qquad
+  {\cal B}(t\to c g)<3.7\times10^{-4}.
+\]
+The same PDG block records the CMS 7 and 8 TeV comparison result based on
+\(5.0~\mathrm{fb}^{-1}\) and \(19.7~\mathrm{fb}^{-1}\):
+\(|\kappa_{tcg}|/\Lambda<1.8\times10^{-2}~\mathrm{TeV}^{-1}\), corresponding to
+\({\cal B}(t\to c g)<4.1\times10^{-4}\).  For SM context, not as a measured
+PDG value, Aguilar-Saavedra gives
+\({\cal B}(t\to c g)=4.6\times10^{-12}\) as the central SM benchmark.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This channel probes color-carrying top-charm flavor violation rather than the
+neutral-meson \(\Delta F=2\) four-quark operators already audited in the quark
+scan.  In anarchic warped flavor, the heavy color sector and the IR-localized
+top can generate non-universal mass-basis couplings and loop-level
+chromomagnetic dipoles.  A \(t\to c g\) limit is therefore a direct up-sector
+top-flavor diagnostic, complementary to \(D^0\) mixing and to electroweak
+channels such as \(t\to cZ\) or \(t\to cH\).
+
+\subsection*{Post-2008 developments}
+The 2008 CFW reference point emphasized KK-gluon exchange and generic
+anarchic-flavor bounds near \(21~\mathrm{TeV}\) for ordinary RS and
+\(33~\mathrm{TeV}\) in the composite pseudo-Goldstone Higgs setup, but it did
+not provide a direct \(t\to c g\) catalog limit.  Since then the important
+change is experimental: LHC searches now constrain the top-gluon FCNC operator
+directly.  CMS used 7 and 8 TeV t-channel single-top data, while ATLAS later
+used the full Run-2 \(139~\mathrm{fb}^{-1}\) dataset at 13 TeV with a neural
+network separation of \(ug\to t\), \(cg\to t\), and backgrounds.  The resulting
+limits remain many orders of magnitude above the SM prediction, so they are
+new-physics limits rather than SM precision tests.
+
+\subsection*{Constraint validity and model dependence}
+The experimental upper bound is clean in the sense that the SM rate is
+negligible.  Its use as an RS scan cut is model dependent: ATLAS quotes a
+left-handed SMEFT \(C_{uG}^{ct}\) interpretation, while CMS uses an older
+\(\kappa_{tcg}\) convention.  The conversion from single-top production to
+\({\cal B}(t\to c g)\) assumes one FCNC operator at a time, standard top
+decays, and a specific normalization of the chromomagnetic interaction.  A
+model producing both chiralities, contact terms, or correlated heavy-gluon
+resonance effects needs a dedicated reinterpretation.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required plan greps were rerun on 2026-05-16, followed by a
+targeted search for \(t\to c g\), \(tcg\), \(tqg\), \(C_{uG}\), and
+\(cg\to t\) across \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/}.  The only implementation-directory hits were generic FCNC
+prose/comments at \texttt{quarkConstraints/PAPER\_0710\_1869.md:35} and
+\texttt{tests/test\_paper\_couplings.py:258}.  The modern phenomenology surface
+enumerates only \(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) at
+\texttt{quarkConstraints/modern/phenomenology.py:23}, and states that it is
+policy-only at \texttt{quarkConstraints/modern/phenomenology.py:165}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Cataloging the external limit is straightforward, but live
+integration would need a top chromomagnetic FCNC operator convention,
+RS-to-SMEFT matching, decay-width and \(cg\to t\) production normalization,
+PDF/collider acceptance assumptions or a validated recast, and QCD-running
+choices not present in the existing \(\Delta F=2\) code.
+
+\subsection*{Key references}
+\texttt{PDG2025TopFCNCTUG}; \texttt{ATLAS2022TopFCNCTUG};
+\texttt{CMS2017TopFCNCTUG}; \texttt{AguilarSaavedra2004TopFCNC};
+\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}.

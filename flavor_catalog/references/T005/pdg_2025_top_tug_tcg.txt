@@ -1,0 +1,44 @@
+Source: Particle Data Group pdgLive, 2025 Review of Particle Physics.
+PDG node: Q007TUG, t-quark FCNC Couplings kappa^{utg}/Lambda and
+kappa^{ctg}/Lambda.
+URL: https://pdglive.lbl.gov/view/Q007TUG
+Access date: 2026-05-16
+Local purpose: minimal PDG/pdgLive excerpt for T005, t -> c g top-gluon
+FCNC branching-fraction and single-top-production limits.
+
+Citation shown on source:
+S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024)
+and 2025 update.
+
+Relevant PDG/pdgLive excerpts:
+
+The Q007TUG datablock is headed "t-quark FCNC Couplings kappa^{utg}/Lambda
+and kappa^{ctg}/Lambda" and lists values in TeV^{-1} with 95% CL.
+
+PDG footnote 1, AAD 2022T / ATLAS:
+- Based on 139 fb^{-1} of pp data at sqrt(s) = 13 TeV.
+- Single top-quark production limits:
+  sigma(u g -> t) * B(t -> b W) * B(W -> l nu) < 3.0 pb.
+  sigma(c g -> t) * B(t -> b W) * B(W -> l nu) < 4.7 pb.
+- EFT coupling limits:
+  |C_uG^{ut}| / Lambda^2 < 0.057 TeV^{-2}.
+  |C_uG^{ct}| / Lambda^2 < 0.14 TeV^{-2}.
+- Equivalent FCNC top-decay branching-fraction limits:
+  B(t -> u g) < 6.1e-5.
+  B(t -> c g) < 3.7e-4.
+
+PDG footnote 2, KHACHATRYAN 2017G / CMS:
+- Based on 5.0 and 19.7 fb^{-1} of pp data at sqrt(s) = 7 and 8 TeV.
+- t-channel single top production is used.
+- The result corresponds to B(t -> u g) < 2.0e-5 or
+  B(t -> c g) < 4.1e-4.
+
+PDG footnote 3, AAD 2016AS / ATLAS:
+- Based on 20.3 fb^{-1} of pp data at sqrt(s) = 8 TeV.
+- The PDG note lists B(t -> u g) < 4.0e-5 and
+  B(t -> c g) < 20e-5 from the 95% CL upper limit on q g -> t
+  single top-quark production with leptonic W decay.
+
+Licensing note from pdgLive page:
+Except where otherwise noted, content of the 2025 Review of Particle Physics
+is licensed under CC BY 4.0.

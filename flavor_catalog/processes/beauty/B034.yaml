@@ -1,0 +1,183 @@
+schema: flavor_catalog.process.v1
+process_id: B034
+family: beauty
+standard_notation: "\\phi_s^{s\\bar{s}s}, |\\lambda|(B_s^0\\to\\phi\\phi)"
+process_name: "B_s -> phi phi b->s sbar s penguin"
+owner: "PKA"
+owner_agent_id: "PKA-B034"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:06:13-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:06:13-04:00"
+    agent_id: "PKA-B034"
+    reason: "Initial PKA draft for B_s -> phi phi penguin CP phase."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:06:13-04:00"
+version: "0.1.0"
+source_shas:
+  cfw2008_arxiv0804_1954.txt: "sha256:120dec32d04361d274e5d249d34f50ab32347701fefed20adbaae1d62ddad03c"
+  hflav2024_bs_phiphi_branching.txt: "sha256:0109068c253de87b8482a37a48ae8910de98957e4b3067c4dae21704f92f5b55"
+  lhcb2014_bs_phiphi_cp_arxiv.txt: "sha256:21b1b1b7fa258e6648702118626d488c61bea102e3a423fb237194d4321a8b94"
+  lhcb2019_bs_phiphi_cp_cds.txt: "sha256:37b596af8f6720a84acb6f7730c8e361cd6175795bb71690a8376bdb21b5c6b3"
+  lhcb2023_bs_phiphi_cp_cds.txt: "sha256:b003cf5fbbdaef3497b6a8c1d84e0deabd619ee23da70a219fd4558c5ce13e5f"
+  pdg2025_bs_phiphi_cp.txt: "sha256:4c88ea2de1ba29c5435a80bae06cea3f6c2c07bd3e882b18664fb05f25a027ee"
+pdg_or_equivalent:
+  pdg_beta_s_b_to_ssbars:
+    source: "PDG pdgLive B_s^0 listing S086"
+    year: 2025
+    source_url: "https://pdg.lbl.gov/encoder_listings/s086.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B034/pdg2025_bs_phiphi_cp.txt"
+    sha256_of_text_snapshot: "sha256:4c88ea2de1ba29c5435a80bae06cea3f6c2c07bd3e882b18664fb05f25a027ee"
+    convention: "PDG table quotes beta_s for b -> s sbar s in units of 10^-2 rad; LHCb note quotes phi_s^{s sbar s} directly."
+    observables:
+      - name: "beta_s(b -> s sbar s)"
+        latex: "\\beta_s(b\\to s\\bar{s}s)"
+        value: 3.7
+        uncertainty: 3.5
+        units: "10^-2 rad"
+      - name: "phi_s^{s sbar s}, LHCb combined note"
+        latex: "\\phi_s^{s\\bar{s}s}"
+        value: -0.074
+        uncertainty: 0.069
+        units: "rad"
+      - name: "|lambda|, LHCb combined note"
+        latex: "|\\lambda|"
+        value: 1.009
+        uncertainty: 0.030
+        units: "dimensionless"
+  lhcb2023_precision_and_combination:
+    source: "LHCb Collaboration, Phys. Rev. Lett. 131 (2023) 171802"
+    year: 2023
+    arxiv_id: "2304.06198"
+    doi: "10.1103/PhysRevLett.131.171802"
+    source_url: "https://cds.cern.ch/record/2857424"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B034/lhcb2023_bs_phiphi_cp_cds.txt"
+    sha256_of_text_snapshot: "sha256:b003cf5fbbdaef3497b6a8c1d84e0deabd619ee23da70a219fd4558c5ce13e5f"
+    dataset:
+      center_of_mass_energy_TeV: 13
+      integrated_luminosity_fb_inverse: 6
+    observables:
+      - name: "phi_s^{s sbar s}, helicity-independent 2023 fit"
+        value: -0.042
+        stat_uncertainty: 0.075
+        syst_uncertainty: 0.009
+        units: "rad"
+      - name: "|lambda|, helicity-independent 2023 fit"
+        value: 1.004
+        stat_uncertainty: 0.030
+        syst_uncertainty: 0.009
+        units: "dimensionless"
+      - name: "phi_s^{s sbar s}, LHCb Run 1 + Run 2 combination"
+        value: -0.074
+        uncertainty: 0.069
+        units: "rad"
+      - name: "|lambda|, LHCb Run 1 + Run 2 combination"
+        value: 1.009
+        uncertainty: 0.030
+        units: "dimensionless"
+  hflav2024_branching_fraction:
+    source: "HFLAV Rare B Decays, May 2024"
+    year: 2024
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/May2024/html/Bs/BR_Bs0_phi_phi.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B034/hflav2024_bs_phiphi_branching.txt"
+    sha256_of_text_snapshot: "sha256:0109068c253de87b8482a37a48ae8910de98957e4b3067c4dae21704f92f5b55"
+    observables:
+      - name: "B(B_s^0 -> phi(1020) phi(1020))"
+        latex: "\\mathcal{B}(B_s^0\\to\\phi\\phi)"
+        value: 1.85
+        uncertainty: 0.14
+        units: "10^-5"
+        delta_chi2: 8.10
+        p_value: 0.52
+        ndf: 9
+      - name: "LHCb input B(B_s^0 -> phi phi)"
+        value: 1.85
+        stat_uncertainty: 0.05
+        syst_uncertainty: 0.16
+        units: "10^-5"
+      - name: "CDF input B(B_s^0 -> phi phi)"
+        value: 1.85
+        stat_uncertainty: 0.15
+        syst_uncertainty: 0.22
+        units: "10^-5"
+  previous_lhcb_inputs:
+    source: "LHCb 2014 and 2019 B_s^0 -> phi phi CP measurements"
+    access_date: "2026-05-16"
+    values:
+      - source: "LHCb Collaboration, Phys. Rev. D 90 (2014) 052011"
+        year: 2014
+        arxiv_id: "1407.2222"
+        source_url: "https://arxiv.org/abs/1407.2222"
+        snapshot_path: "flavor_catalog/references/B034/lhcb2014_bs_phiphi_cp_arxiv.txt"
+        sha256_of_text_snapshot: "sha256:21b1b1b7fa258e6648702118626d488c61bea102e3a423fb237194d4321a8b94"
+        integrated_luminosity_fb_inverse: 3.0
+        approximate_signal_decays: 4000
+        phi_s_value: -0.17
+        phi_s_stat_uncertainty: 0.15
+        phi_s_syst_uncertainty: 0.03
+        phi_s_units: "rad"
+        a_u_value: -0.003
+        a_u_stat_uncertainty: 0.017
+        a_u_syst_uncertainty: 0.006
+        a_v_value: -0.017
+        a_v_stat_uncertainty: 0.017
+        a_v_syst_uncertainty: 0.006
+      - source: "LHCb Collaboration, JHEP 12 (2019) 155"
+        year: 2019
+        arxiv_id: "1907.10003"
+        source_url: "https://cds.cern.ch/record/2684085"
+        snapshot_path: "flavor_catalog/references/B034/lhcb2019_bs_phiphi_cp_cds.txt"
+        sha256_of_text_snapshot: "sha256:37b596af8f6720a84acb6f7730c8e361cd6175795bb71690a8376bdb21b5c6b3"
+        integrated_luminosity_fb_inverse: 5.0
+        center_of_mass_energies_TeV: [7, 8, 13]
+        approximate_signal_decays: 9000
+        phi_s_value: -0.073
+        phi_s_stat_uncertainty: 0.115
+        phi_s_syst_uncertainty: 0.027
+        phi_s_units: "rad"
+        lambda_value: 0.99
+        lambda_stat_uncertainty: 0.05
+        lambda_syst_uncertainty: 0.01
+        b0_to_phiphi_limit_value: 2.7
+        b0_to_phiphi_limit_units: "10^-8"
+        b0_to_phiphi_limit_confidence_level: 0.90
+paper_era_reference:
+  cfw2008_rs_flavor:
+    source: "Csaki, Falkowski, and Weiler, JHEP 09 (2008) 008"
+    year: 2008
+    arxiv_id: "0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B034/cfw2008_arxiv0804_1954.txt"
+    sha256_of_text_snapshot: "sha256:120dec32d04361d274e5d249d34f50ab32347701fefed20adbaae1d62ddad03c"
+    note: "Theoretical RS/anarchic-flavor baseline only; any KK-scale numbers are not pdg_or_equivalent measured observables."
+code_coverage:
+  status: "NO"
+  grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"B_s.*phi|Bs.*phi|phi.?phi|phi_s\\\\^|phis|sbar.?s|b.?->.?s.?s|penguin|time.?dependent CP|charmless|polarisation|polarization\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Focused B034 grep returned no direct B_s -> phi phi, b -> s sbar s penguin, time-dependent charmless CP, or angular-likelihood implementation in the required directories."
+    - "quarkConstraints/deltaf2.py:239 defines the existing b_s Delta F=2 input key for B_s mixing."
+    - "quarkConstraints/deltaf2.py:651 stores the experimental Delta m_Bs input used by the B_s mixing magnitude constraint."
+    - "quarkConstraints/deltaf2.py:922 defines evaluate_bs_mixing; line 929 reduces the computed M12 to abs(m12), so it does not expose the penguin phase observable."
+    - "quarkConstraints/modern/phenomenology.py:23 lists epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems."
+    - "quarkConstraints/modern/phenomenology.py:657 defines the modern B_s mixing bridge, also as a mixing-magnitude evaluator."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "Requires a new Delta B = 1 nonleptonic b -> s sbar s operator and amplitude/likelihood treatment. Existing Delta F = 2 SLL/SLR/VLL/VRR/LR1/LR2 neutral-meson machinery covers B_s mixing magnitudes but not B_s -> phi phi decay amplitudes, polarization-dependent angular observables, or strong-phase model dependence."
+open_issues:
+  - "WA/CA should decide whether to headline the PDG beta_s convention or the LHCb phi_s^{s sbar s} convention; this draft uses phi_s as the standard notation and records beta_s explicitly."
+  - "A future implementation needs a PI-approved nonleptonic Delta B = 1 framework before this can become a hard scan constraint."
