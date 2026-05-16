@@ -35,6 +35,15 @@ flavor_catalog/
 
 Process drafts belong under `processes/<family>/`. Raw source snapshots and manifests belong under `references/`; use minimal text snapshots with URL, access date, and sha256 for PDG, HFLAV, FLAG, CKMfitter, UTfit, and experiment pages. Do not track publisher PDFs. ArXiv PDFs or text extracts may be deposited only when useful and compatible with the catalog size policy.
 
+## Build
+
+`catalog_master.pdf` is built from 75 OPUS-APPROVED processes across 6 families.
+
+- 4 discovery rounds converged.
+- 2 Opus sign-off rounds: round 1 had 50 APPROVE; round 2 had 21 APPROVE.
+- 5 individual arbitrations completed: L001, B021, B023, B001, B003.
+- Last update timestamp: 2026-05-16.
+
 ## Status
 
 Per-process metadata lives in YAML sidecars; the TeX files contain prose only. The current status is the `to` value of the final `status_history` entry, and there is no separate scalar `status` field.
