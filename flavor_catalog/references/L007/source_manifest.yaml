@@ -1,0 +1,64 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: L007
+generated_at: "2026-05-16T11:58:29-04:00"
+references:
+  - key: PDG2025_TauMuGamma
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group 2025 tau decay mode summary, PDGID S035.31"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdglive.lbl.gov/view/S035.31"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:b94475dc141a9a16360a3216d7a5fe29fb05c710a3b133ae9c1c56571d66107f"
+    snapshot_path: "flavor_catalog/references/L007/pdg2025_tau_mu_gamma_pdglive.txt"
+  - key: Belle2021_TauLGamma
+    arxiv_id: "2103.12994"
+    DOI: "10.1007/JHEP10(2021)019"
+    title: "Search for lepton-flavor-violating tau-lepton decays to l gamma at Belle"
+    authors: "K. Uno et al. (Belle Collaboration)"
+    year: 2021
+    url: "https://arxiv.org/abs/2103.12994"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:99810fa89b36985e94775ac0c9173645a2d07519c8a7e3653dadc0ceb5de9f4f"
+    snapshot_path: "flavor_catalog/references/L007/belle2021_tau_lgamma_arxiv2103_12994.txt"
+  - key: BaBar2010_TauLGamma
+    arxiv_id: "0908.2381"
+    DOI: "10.1103/PhysRevLett.104.021802"
+    title: "Searches for Lepton Flavor Violation in the Decays tau -> e gamma and tau -> mu gamma"
+    authors: "B. Aubert et al. (BaBar Collaboration)"
+    year: 2010
+    url: "https://arxiv.org/abs/0908.2381"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:2528b26a9cbaa6cb58d5805613c9695b75a6d90f2775d797404e6b8d4afc57e2"
+    snapshot_path: "flavor_catalog/references/L007/babar2010_tau_lgamma_arxiv0908_2381.txt"
+  - key: BelleIIPhysicsBook2019_TauLFV
+    arxiv_id: "1808.10567"
+    DOI: "10.1093/ptep/ptz106"
+    title: "The Belle II Physics Book"
+    authors: "E. Kou, P. Urquijo, W. Altmannshofer, et al."
+    year: 2019
+    url: "https://arxiv.org/abs/1808.10567"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:d3789bb9ccd93bbdf3494283da82a40624dffec4012f323b914f8400d896c674"
+    snapshot_path: "flavor_catalog/references/L007/belleii_physics_book_1808_10567_tau_lfv.txt"
+  - key: CFW2008_RSWarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:42dc1c5a05d93d2a6ce44d4763e4fe2a6a41280150654328505f9dc8b836c6c1"
+    snapshot_path: "flavor_catalog/references/L007/cfw2008_arxiv0804_1954.txt"
+  - key: PerezRandall2008_WarpedNeutrinos
+    arxiv_id: "0805.4652"
+    DOI: "10.1088/1126-6708/2009/01/077"
+    title: "Natural Neutrino Masses and Mixings from Warped Geometry"
+    authors: "Gilad Perez and Lisa Randall"
+    year: 2008
+    url: "https://arxiv.org/abs/0805.4652"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:63dee18f0071696b417782e80f374b42f36ec2eac9bca4436bdad75bd5e8f912"
+    snapshot_path: "flavor_catalog/references/L007/perez_randall2008_arxiv0805_4652.txt"
