@@ -36,9 +36,18 @@ status_history:
     reason: "CA batch ca_wave1_top_higgs_ew found CHK-1 numerical-metadata placement issues."
     issues:
       - "CHK-1: contextual numerical claims in the TeX are stored in additional_numerical_context rather than pdg_or_equivalent."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T11:54:13-04:00"
+    timestamp: "2026-05-16T11:54:13-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 writer rework: promoted CA-flagged numerical context into pdg_or_equivalent."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:47:15-04:00"
+last_updated_at: "2026-05-16T11:54:13-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_z_boson.txt: "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815"
@@ -78,7 +87,6 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/T010/pdg_2025_z_boson.txt"
     sha256: "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815"
-additional_numerical_context:
   - observable: "LEP/SLC final-combination pull for A_FB^{0,b}"
     year: 2006
     value: 2.8

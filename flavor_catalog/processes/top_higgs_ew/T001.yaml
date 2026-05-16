@@ -34,9 +34,18 @@ status_history:
     reason: "CA batch ca_wave1_top_higgs_ew found CHK-1 numerical-metadata placement issues."
     issues:
       - "CHK-1: contextual numerical claims in the TeX are stored only in auxiliary_values, not pdg_or_equivalent, and the auxiliary_values entries lack explicit year fields."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T11:54:13-04:00"
+    timestamp: "2026-05-16T11:54:13-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 writer rework: promoted CA-flagged numerical context into pdg_or_equivalent with complete metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:47:15-04:00"
+last_updated_at: "2026-05-16T11:54:13-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_fcnc_tzq.txt: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
@@ -73,64 +82,71 @@ pdg_or_equivalent:
       source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf"
       access_date: "2026-05-16"
       sha256: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
-auxiliary_values:
-  - value_id: "ATLAS2023:T001:dataset"
-    value: "139 fb^-1 at sqrt(s) = 13 TeV"
-    uncertainty: null
-    units: "integrated luminosity and collision energy"
-    source_url: "https://arxiv.org/abs/2301.11605"
-    access_date: "2026-05-16"
-    sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
-  - value_id: "ATLAS2023:T001:tZc_left"
-    value: "< 13e-5"
-    uncertainty: null
-    units: "branching fraction, 95% CL upper limit"
-    source_url: "https://arxiv.org/abs/2301.11605"
-    access_date: "2026-05-16"
-    sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
-  - value_id: "ATLAS2023:T001:tZc_right"
-    value: "< 12e-5"
-    uncertainty: null
-    units: "branching fraction, 95% CL upper limit"
-    source_url: "https://arxiv.org/abs/2301.11605"
-    access_date: "2026-05-16"
-    sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
-  - value_id: "CMS2017:T001:dataset"
-    value: "19.7 fb^-1 at sqrt(s) = 8 TeV"
-    uncertainty: null
-    units: "integrated luminosity and collision energy"
-    source_url: "https://arxiv.org/abs/1702.01404"
-    access_date: "2026-05-16"
-    sha256: "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2"
-  - value_id: "CMS2017:T001:tZc"
-    value: "< 0.049%"
-    uncertainty: null
-    units: "branching fraction, 95% CL upper limit"
-    normalized_value: "< 4.9e-4"
-    source_url: "https://arxiv.org/abs/1702.01404"
-    access_date: "2026-05-16"
-    sha256: "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2"
-  - value_id: "AguilarSaavedra2004:T001:SM"
-    value: "1e-14"
-    uncertainty: null
-    units: "Standard Model branching-fraction estimate"
-    source_url: "https://arxiv.org/abs/hep-ph/0409342"
-    access_date: "2026-05-16"
-    sha256: "sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66"
-  - value_id: "PDG2025:T001:SM"
-    value: "order 1e-14"
-    uncertainty: null
-    units: "Standard Model branching-fraction estimate"
-    source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf"
-    access_date: "2026-05-16"
-    sha256: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
-  - value_id: "AirenFranceschini2026:T001:HL_LHC_projection"
-    value: "approximately 1e-6"
-    uncertainty: null
-    units: "projected equivalent BR(t -> c Z) reach"
-    source_url: "https://arxiv.org/abs/2601.14966"
-    access_date: "2026-05-16"
-    sha256: "sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45"
+    - value_id: "ATLAS2023:T001:dataset"
+      year: 2023
+      value: "139 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/2301.11605"
+      access_date: "2026-05-16"
+      sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
+    - value_id: "ATLAS2023:T001:tZc_left"
+      year: 2023
+      value: "< 13e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source_url: "https://arxiv.org/abs/2301.11605"
+      access_date: "2026-05-16"
+      sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
+    - value_id: "ATLAS2023:T001:tZc_right"
+      year: 2023
+      value: "< 12e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source_url: "https://arxiv.org/abs/2301.11605"
+      access_date: "2026-05-16"
+      sha256: "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2"
+    - value_id: "CMS2017:T001:dataset"
+      year: 2017
+      value: "19.7 fb^-1 at sqrt(s) = 8 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/1702.01404"
+      access_date: "2026-05-16"
+      sha256: "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2"
+    - value_id: "CMS2017:T001:tZc"
+      year: 2017
+      value: "< 0.049%"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      normalized_value: "< 4.9e-4"
+      source_url: "https://arxiv.org/abs/1702.01404"
+      access_date: "2026-05-16"
+      sha256: "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2"
+    - value_id: "AguilarSaavedra2004:T001:SM"
+      year: 2004
+      value: "1e-14"
+      uncertainty: null
+      units: "Standard Model branching-fraction estimate"
+      source_url: "https://arxiv.org/abs/hep-ph/0409342"
+      access_date: "2026-05-16"
+      sha256: "sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66"
+    - value_id: "PDG2025:T001:SM"
+      year: 2025
+      value: "order 1e-14"
+      uncertainty: null
+      units: "Standard Model branching-fraction estimate"
+      source_url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf"
+      access_date: "2026-05-16"
+      sha256: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
+    - value_id: "AirenFranceschini2026:T001:HL_LHC_projection"
+      year: 2026
+      value: "approximately 1e-6"
+      uncertainty: null
+      units: "projected equivalent BR(t -> c Z) reach"
+      source_url: "https://arxiv.org/abs/2601.14966"
+      access_date: "2026-05-16"
+      sha256: "sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45"
 code_coverage:
   status: "NO"
   evidence:
