@@ -6,7 +6,7 @@ process_name: "Flavor-changing neutral-current top decay t -> u g"
 owner: "PKA"
 owner_agent_id: "PKA-T006"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -24,9 +24,19 @@ status_history:
     agent_id: "WA"
     agent: "WA"
     reason: "Writer polish completed for wa_w5b_top_higgs_ew."
+  - from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    state: "WRITER-REWORK"
+    at: "2026-05-16T15:17:15-04:00"
+    timestamp: "2026-05-16T15:17:15-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w5b_top_higgs_ew"
+    issues:
+      - "CHK-1: TeX cites the SM B(t -> u g) approximately 3.6e-14 context value, but that numerical claim is stored in theory_context rather than pdg_or_equivalent.values with the strict CA metadata placement required for all TeX numerical claims."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:48-04:00"
+last_updated_at: "2026-05-16T15:17:15-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_tug.txt: "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61"

@@ -6,7 +6,7 @@ process_name: "Lepton-flavor-violating Z decay Z -> mu tau"
 owner: "PKA"
 owner_agent_id: "PKA-T017"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -24,9 +24,18 @@ status_history:
     agent_id: "WA"
     agent: "WA"
     reason: "Writer polish completed for wa_w5b_top_higgs_ew."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T15:17:15-04:00"
+    timestamp: "2026-05-16T15:17:15-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w5b_top_higgs_ew"
+    reason: "CA batch ca_w5b_top_higgs_ew verified CHK-1 through CHK-8."
+checker_passed_at: "2026-05-16T15:17:15-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:44:48-04:00"
+last_updated_at: "2026-05-16T15:17:15-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_z_lfv_listing.txt: "sha256:38a914a87c02df8e1e29bc6c744ca6923b9690fa9624cf0ee7feec58c9e154c5"
