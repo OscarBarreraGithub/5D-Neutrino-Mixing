@@ -34,9 +34,18 @@ status_history:
     reason: "checker batch ca_w5a_beauty found traceability issue"
     issues:
       - "CHK-1: TeX quotes the HPQCD SM prediction (5.58 +/-0.37)e-6, but that value is under theory_inputs rather than pdg_or_equivalent."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T15:14:20-04:00"
+    timestamp: "2026-05-16T15:14:20-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 writer rework: added the CA-flagged HPQCD SM prediction under pdg_or_equivalent.values with complete metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:45:00-04:00"
+last_updated_at: "2026-05-16T15:14:20-04:00"
 version: "0.1.0"
 source_shas:
   babar2013_btokstarnunu_arxiv.txt: "sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b"
@@ -99,6 +108,19 @@ pdg_or_equivalent:
       access_date: "2026-05-16"
       snapshot_path: "flavor_catalog/references/B022/babar2013_btokstarnunu_arxiv.txt"
       sha256_of_text_snapshot: "sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b"
+  values:
+    - value_id: "HPQCD2023:B022:sm_prediction"
+      observable: "SM BR(B+ -> K+ nu nubar)"
+      year: 2023
+      value: "5.58e-6"
+      uncertainty: "0.37e-6"
+      units: "branching fraction"
+      note: "Summed over neutrino flavours; includes long-distance contribution in the charged-B case."
+      source_key: "HPQCD2023:BtoKNuNuSM"
+      source_url: "https://arxiv.org/abs/2207.13371"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B022/hpqcd2023_btoknunu_sm_arxiv.txt"
+      sha256: "sha256:66d8ba9efc52bb64659d75613f8b6065421252f3af1f4c0331f4da09a3e29d4e"
 theory_inputs:
   - name: "HPQCD SM prediction"
     observable: "SM BR(B+ -> K+ nu nubar)"

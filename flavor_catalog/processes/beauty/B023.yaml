@@ -34,9 +34,18 @@ status_history:
     reason: "checker batch ca_w5a_beauty found traceability issue"
     issues:
       - "CHK-1: TeX quotes Belle 2017 combined B -> K* nu nubar <2.7e-5 and Buras 2015 SM BR(B0 -> K*0 nu nubar) = (9.2 +/-1.0)e-6, but those values are outside pdg_or_equivalent."
+  - from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T15:14:20-04:00"
+    timestamp: "2026-05-16T15:14:20-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 writer rework: added the CA-flagged Belle 2017 combined limit and Buras 2015 SM prediction under pdg_or_equivalent.values."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:45:00-04:00"
+last_updated_at: "2026-05-16T15:14:20-04:00"
 version: "0.1.0"
 source_shas:
   babar2013_arxiv1303_7465.txt: "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b"
@@ -93,6 +102,30 @@ pdg_or_equivalent:
         value: "<4.0e-5"
         confidence_level: "90%"
         reference: "Phys. Rev. D 87, 111103 (2013)"
+  values:
+    - value_id: "Belle2017:B023:combined_vector_limit"
+      observable: "Combined BR(B -> K* nu nubar)"
+      year: 2017
+      value: "<2.7e-5"
+      uncertainty: null
+      confidence_level: "90% CL"
+      units: "branching fraction"
+      source_key: "Belle2017:BHnunuSemileptonic"
+      source_url: "https://arxiv.org/abs/1702.03224"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B023/belle2017_arxiv1702_03224.txt"
+      sha256: "sha256:2a51560a45705af5d66a698c04c839d95773d3f56596ecc3a3a67385019c6c0c"
+    - value_id: "Buras2015:B023:sm_b0_kstar0_nunu"
+      observable: "SM BR(B0 -> K*(892)0 nu nubar)"
+      year: 2015
+      value: "9.2e-6"
+      uncertainty: "1.0e-6"
+      units: "branching fraction"
+      source_key: "BurasGirrbachNoeNiehoffStraub2015:BKstarNunu"
+      source_url: "https://arxiv.org/abs/1409.4557"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B023/buras2015_arxiv1409_4557.txt"
+      sha256: "sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34"
 paper_era_references:
   - key: "CsakiFalkowskiWeiler2008:CompositeFlavor"
     role: "2008 RS/anarchic-flavor baseline specified by the catalog plan"

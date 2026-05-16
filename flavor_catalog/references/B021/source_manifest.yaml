@@ -9,7 +9,7 @@ sources:
     year: 2025
     url: "https://pdgapi.lbl.gov/listings/S040.26"
     access_date: "2026-05-16"
-    local_snapshot_path: "flavor_catalog/references/B021/pdg2025_lambdab_lambdamumu.txt"
+    snapshot_path: "flavor_catalog/references/B021/pdg2025_lambdab_lambdamumu.txt"
     sha256_of_local_snapshot: "sha256:73959783ca3c1de31cd9479c24825c19140d59641809cfe9a2cc3c9a528fddcd"
     license_note: "Minimal text extraction from PDG Live; no PDG PDF stored."
   - key: LHCb2015:LambdaBToLambdaMuMu
@@ -20,7 +20,7 @@ sources:
     year: 2015
     url: "https://arxiv.org/abs/1503.07138"
     access_date: "2026-05-16"
-    local_snapshot_path: "flavor_catalog/references/B021/lhcb_1503_07138_lambdab_lambdamumu.txt"
+    snapshot_path: "flavor_catalog/references/B021/lhcb_1503_07138_lambdab_lambdamumu.txt"
     sha256_of_local_snapshot: "sha256:2feb8efe212b8784a57af13f821aa9f3accadec8513d8d78474b3497fb37d1db"
     license_note: "Minimal arXiv text snapshot; no publisher PDF stored."
   - key: CDF2011:LambdaBToLambdaMuMu
@@ -31,7 +31,7 @@ sources:
     year: 2011
     url: "https://arxiv.org/abs/1107.3753"
     access_date: "2026-05-16"
-    local_snapshot_path: "flavor_catalog/references/B021/cdf_1107_3753_lambdab_observation.txt"
+    snapshot_path: "flavor_catalog/references/B021/cdf_1107_3753_lambdab_observation.txt"
     sha256_of_local_snapshot: "sha256:83084eabd1d4cabbe58651be94c1e657df390d539624ecb32ca63b7292a90d2b"
     license_note: "Minimal arXiv text snapshot; no publisher PDF stored."
   - key: DetmoldLinMeinelWingate2013:LambdaBToLambdaFormFactors
@@ -42,7 +42,7 @@ sources:
     year: 2013
     url: "https://arxiv.org/abs/1212.4827"
     access_date: "2026-05-16"
-    local_snapshot_path: "flavor_catalog/references/B021/detmold_1212_4827_lattice_form_factors.txt"
+    snapshot_path: "flavor_catalog/references/B021/detmold_1212_4827_lattice_form_factors.txt"
     sha256_of_local_snapshot: "sha256:df70a31b0c99da94b24277d2c7c70d02eb18e8be00c9f01866c7c4e9b6e9c23a"
     license_note: "Minimal arXiv text snapshot; no publisher PDF stored."
   - key: CsakiFalkowskiWeiler2008:CompositeFlavor
@@ -53,6 +53,6 @@ sources:
     year: 2008
     url: "https://arxiv.org/abs/0804.1954"
     access_date: "2026-05-16"
-    local_snapshot_path: "flavor_catalog/references/B021/cfw_0804_1954_rs_flavor.txt"
+    snapshot_path: "flavor_catalog/references/B021/cfw_0804_1954_rs_flavor.txt"
     sha256_of_local_snapshot: "sha256:f0623ce8776fdf4e76d20f9f19f9e499c9bdb32229a5e686caefa664e1f48f05"
     license_note: "Minimal arXiv text snapshot; contextual paper-era reference only."
