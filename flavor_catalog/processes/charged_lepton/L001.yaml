@@ -64,9 +64,19 @@ status_history:
     issues:
       - "CHK-2: L001.tex cites arXiv:0804.1954 as the RS-flavor baseline, but flavor_catalog/references/L001/source_manifest.yaml has no matching source_manifest entry or snapshot_path."
     reason: "Checker ca_w23_charged_lepton_v2 found an unresolved TeX citation; see flavor_catalog/worklogs/checker/ca_w23_charged_lepton_v2.md."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:11:19-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:11:19-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w23_charged_lepton_v3"
+    reason: "Cycle-2 writer rework addressed CA CHK-2 unresolved arXiv:0804.1954 citation only."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:56:00-04:00"
+last_updated_at: "2026-05-16T13:11:19-04:00"
 version: "0.2.0"
 source_shas:
   megii2025_arxiv2504_15711.txt: "sha256:3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7"
