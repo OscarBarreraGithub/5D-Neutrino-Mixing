@@ -34,9 +34,18 @@ status_history:
     issues:
       - "CHK-2: B017 source_manifest.yaml and all process-local reference snapshots are untracked, so cited references do not resolve to tracked text snapshots."
     reason: "CA batch ca_w23_beauty found required rework."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:44:13-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:44:13-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "WA v2 staged B017 process-local reference snapshots for batch wa_w23_beauty_v2."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:34:18-04:00"
+last_updated_at: "2026-05-16T12:44:13-04:00"
 version: "0.1.0"
 source_shas:
   cfw_0804_1954_rs_flavor.txt: "sha256:36cc8855f8de4d402dc96628a2534513b3543129acff4d8df277aab5fafc7c03"
