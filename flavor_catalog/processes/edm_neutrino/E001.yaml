@@ -42,9 +42,19 @@ status_history:
     reason: "Checker ca_w23_kaon_charm_edm found CHK-1 structured-metadata gaps."
     issues:
       - "CHK-1: E001.tex numerical claims are in pdg_or_equivalent blocks, but the canonical, Roussy 2023, and ACME 2018 blocks lack explicit year fields; the Roussy and ACME values/uncertainties are stored only in summary strings rather than structured value, uncertainty/statistical/systematic, and CL fields."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:43:45-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:43:45-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w23_kaon_charm_edm_v2"
+    reason: "WA v2 addressed the CA CHK-1 structured-metadata findings only."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:33:01-04:00"
+last_updated_at: "2026-05-16T12:43:45-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_electron_edm_datablock.txt: "sha256:aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20"
@@ -55,33 +65,64 @@ source_shas:
 pdg_or_equivalent:
   canonical_limit:
     source: "PDG Live 2026 S003EDM electron electric dipole moment datablock"
+    year: 2026
     source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S003EDM"
     access_date: "2026-05-16"
     observable: "Electron electric dipole moment"
     value_summary: "|d_e| < 4.1 x 10^-30 e cm at 90% CL"
-    value: "<4.1e-30"
+    value: 4.1e-30
+    uncertainty: null
     units: "e cm"
+    limit_operator: "<"
     confidence_level: "90%"
-    table_value: "<0.041"
+    table_value: 0.041
+    table_limit_operator: "<"
     table_units: "10^-28 e cm"
     used_measurement: "Roussy 2023, HfF+ molecular ions"
     snapshot_path: "flavor_catalog/references/E001/pdg2026_electron_edm_datablock.txt"
+    sha256: "aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20"
     sha256_of_local_snapshot: "sha256:aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20"
   primary_measurement:
     source: "Roussy et al., Science 381, 46 (2023); arXiv:2212.11841"
+    year: 2023
     source_url: "https://arxiv.org/abs/2212.11841"
     access_date: "2026-05-16"
+    observable: "Electron electric dipole moment, HfF+ molecular ions"
+    value: -1.3
+    uncertainty: null
+    statistical_uncertainty: 2.0
+    systematic_uncertainty: 0.6
+    units: "10^-30 e cm"
+    limit_value: 4.1
+    limit_operator: "<"
+    limit_units: "10^-30 e cm"
+    confidence_level: "90%"
     measurement_summary: "d_e = (-1.3 +/- 2.0_stat +/- 0.6_syst) x 10^-30 e cm; |d_e| < 4.1 x 10^-30 e cm at 90% confidence"
     improvement_note: "arXiv abstract states improvement by about 2.4 over previous best upper bound"
     snapshot_path: "flavor_catalog/references/E001/roussy2023_arxiv2212_11841.txt"
+    sha256: "85dfc60b010ccba486ecccfcfacc5a1e89652239d5554e2c97111dcca5d2c0f7"
     sha256_of_local_snapshot: "sha256:85dfc60b010ccba486ecccfcfacc5a1e89652239d5554e2c97111dcca5d2c0f7"
   superseded_acme_2018:
     source: "ACME Collaboration, Andreev et al., Nature 562, 355 (2018)"
+    year: 2018
     source_url: "https://authors.library.caltech.edu/records/6swh6-6ya42"
     access_date: "2026-05-16"
+    observable: "Electron electric dipole moment, ThO benchmark"
     value_summary: "|d_e| < 1.1 x 10^-29 e cm at 90% CL"
+    value: 1.1e-29
+    uncertainty: null
+    units: "e cm"
+    limit_operator: "<"
+    confidence_level: "90%"
+    measurement_value: 4.3
+    measurement_uncertainty: null
+    measurement_uncertainties:
+      - 3.1
+      - 2.6
+    measurement_units: "10^-30 e cm"
     measurement_summary: "d_e = (4.3 +/- 3.1 +/- 2.6) x 10^-30 e cm, as recorded by PDG"
     snapshot_path: "flavor_catalog/references/E001/andreev2018_caltechauthors.txt"
+    sha256: "c81e0a1936ec81eeb04a4064f09f3e5554037aa456436c972118ab3deda1d19a"
     sha256_of_local_snapshot: "sha256:c81e0a1936ec81eeb04a4064f09f3e5554037aa456436c972118ab3deda1d19a"
 code_coverage:
   status: "NO"

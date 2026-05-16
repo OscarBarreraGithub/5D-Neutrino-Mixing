@@ -35,36 +35,81 @@ status_history:
     reason: "Checker ca_w23_kaon_charm_edm found CHK-1 numerical-metadata placement issues."
     issues:
       - "CHK-1: K002.tex quotes the no-CPT PDG fit, Bai 2014 Delta M_K, and Wang 2023 9% statistical-uncertainty claims, but those numerical claims are stored under supporting_values rather than pdg_or_equivalent with the required per-claim metadata."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:43:45-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:43:45-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w23_kaon_charm_edm_v2"
+    reason: "WA v2 addressed the CA CHK-1 metadata-placement findings only."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:33:01-04:00"
+last_updated_at: "2026-05-16T12:43:45-04:00"
 version: "0.1.0"
 pdg_or_equivalent:
-  year: 2026
-  source: "Particle Data Group pdgLive DataBlock S013D"
-  observable: "m(K_L^0) - m(K_S^0)"
-  value: 0.5293
-  uncertainty: 0.0009
-  units: "10^10 hbar s^-1"
-  display_value: "Delta m_K = (0.5293 +/- 0.0009) x 10^10 hbar s^-1"
-  assumptions:
-    - "PDG OUR FIT assuming CPT"
-    - "PDG uncertainty includes scale factor S = 1.3"
-  source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?home=sumtabM&node=S013D"
-  access_date: "2026-05-16"
-  snapshot_path: "flavor_catalog/references/K002/pdg_live_S013D_20260516.txt"
-  sha256_of_text_snapshot: "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
-supporting_values:
-  - key: pdg_fit_not_assuming_cpt
+  pdg_fit_assuming_cpt:
+    year: 2026
     source: "Particle Data Group pdgLive DataBlock S013D"
+    observable: "m(K_L^0) - m(K_S^0)"
+    value: 0.5293
+    uncertainty: 0.0009
+    units: "10^10 hbar s^-1"
+    display_value: "Delta m_K = (0.5293 +/- 0.0009) x 10^10 hbar s^-1"
+    assumptions:
+      - "PDG OUR FIT assuming CPT"
+      - "PDG uncertainty includes scale factor S = 1.3"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?home=sumtabM&node=S013D"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/pdg_live_S013D_20260516.txt"
+    sha256: "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
+    sha256_of_text_snapshot: "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
+  pdg_fit_not_assuming_cpt:
+    year: 2026
+    source: "Particle Data Group pdgLive DataBlock S013D"
+    observable: "m(K_L^0) - m(K_S^0)"
     value: 0.5289
     uncertainty: 0.0010
     units: "10^10 hbar s^-1"
     display_value: "OUR FIT not assuming CPT: 0.5289 +/- 0.0010"
+    assumptions:
+      - "PDG OUR FIT not assuming CPT"
     source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?home=sumtabM&node=S013D"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K002/pdg_live_S013D_20260516.txt"
+    sha256: "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
     sha256_of_text_snapshot: "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b"
+  bai_2014_lattice_delta_mk:
+    year: 2014
+    source: "Bai et al., arXiv:1406.0916"
+    observable: "Exploratory lattice Delta M_K"
+    value: 3.19
+    uncertainty: null
+    statistical_uncertainty: 0.41
+    systematic_uncertainty: 0.96
+    units: "10^-12 MeV"
+    display_value: "Delta M_K = 3.19(41)(96) x 10^-12 MeV"
+    source_url: "https://arxiv.org/abs/1406.0916"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_1406.0916_bai_2014_delta_mk.txt"
+    sha256: "94522a76f8bfa763c4b6bbf66fbed2d0b14c5679e65d8a5f50783dd199a7dfe5"
+    sha256_of_text_snapshot: "94522a76f8bfa763c4b6bbf66fbed2d0b14c5679e65d8a5f50783dd199a7dfe5"
+  wang_2023_statistical_error:
+    year: 2023
+    source: "Bigeng Wang, arXiv:2301.01387"
+    observable: "Physical-mass lattice Delta m_K statistical uncertainty"
+    value: 9
+    uncertainty: null
+    units: "percent"
+    display_value: "statistical error approaches 9%"
+    source_url: "https://arxiv.org/abs/2301.01387"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/K002/arxiv_2301.01387_wang_2023_delta_mk.txt"
+    sha256: "26d8bab47c57de8cc8b749f1964f38e2d429005760ac4048f209377da66f0505"
+    sha256_of_text_snapshot: "26d8bab47c57de8cc8b749f1964f38e2d429005760ac4048f209377da66f0505"
+supporting_values:
   - key: ktev_2011_delta_m
     source: "KTeV Collaboration, arXiv:1011.0127"
     value: 5270
@@ -93,26 +138,6 @@ supporting_values:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/K002/arxiv_1212.5931_christ_2013_ld_delta_mk.txt"
     sha256_of_text_snapshot: "d7dd7d548c831d6e753999048c0d545b91e6eebc6367066cde94deb3f2b02a46"
-  - key: bai_2014_lattice_delta_mk
-    source: "Bai et al., arXiv:1406.0916"
-    value: 3.19
-    statistical_uncertainty: 0.41
-    systematic_uncertainty: 0.96
-    units: "10^-12 MeV"
-    display_value: "Delta M_K = 3.19(41)(96) x 10^-12 MeV"
-    source_url: "https://arxiv.org/abs/1406.0916"
-    access_date: "2026-05-16"
-    snapshot_path: "flavor_catalog/references/K002/arxiv_1406.0916_bai_2014_delta_mk.txt"
-    sha256_of_text_snapshot: "94522a76f8bfa763c4b6bbf66fbed2d0b14c5679e65d8a5f50783dd199a7dfe5"
-  - key: wang_2023_statistical_error
-    source: "Bigeng Wang, arXiv:2301.01387"
-    value: 9
-    units: "percent"
-    display_value: "statistical error approaches 9%"
-    source_url: "https://arxiv.org/abs/2301.01387"
-    access_date: "2026-05-16"
-    snapshot_path: "flavor_catalog/references/K002/arxiv_2301.01387_wang_2023_delta_mk.txt"
-    sha256_of_text_snapshot: "26d8bab47c57de8cc8b749f1964f38e2d429005760ac4048f209377da66f0505"
   - key: boyle_2024_bsm_bag_parameters
     source: "Boyle et al., arXiv:2404.02297"
     units: "MSbar at 3 GeV"

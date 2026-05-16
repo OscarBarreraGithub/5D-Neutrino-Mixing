@@ -42,9 +42,19 @@ status_history:
     reason: "Checker ca_w23_kaon_charm_edm found a CHK-1 numerical-metadata gap."
     issues:
       - "CHK-1: C001.tex quotes CFW contextual KK-gluon scales of about 21 TeV and 33 TeV, but C001.yaml has no corresponding pdg_or_equivalent block carrying those values with source URL, access date, snapshot path, and sha256."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T12:43:45-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T12:43:45-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w23_kaon_charm_edm_v2"
+    reason: "WA v2 addressed the CA CHK-1 metadata-placement finding only."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:33:01-04:00"
+last_updated_at: "2026-05-16T12:43:45-04:00"
 version: "0.1.1"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce"
@@ -116,6 +126,34 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/C001/hflav_ckm25_dmixing_global_fit.txt"
     sha256_of_local_snapshot: "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91"
+  cfw2008_standard_rs_kk_gluon_scale:
+    source: "Csaki-Falkowski-Weiler 2008, arXiv:0804.1954"
+    year: 2008
+    observable: "contextual generic RS KK-gluon mass scale"
+    value: 21
+    uncertainty: null
+    units: "TeV"
+    qualifier: "around"
+    display_value: "generic RS KK-gluon mass bounds around 21 TeV"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C001/cfw2008_arxiv0804_1954.txt"
+    sha256: "224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce"
+    sha256_of_local_snapshot: "sha256:224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce"
+  cfw2008_composite_pseudo_goldstone_kk_gluon_scale:
+    source: "Csaki-Falkowski-Weiler 2008, arXiv:0804.1954"
+    year: 2008
+    observable: "contextual composite pseudo-Goldstone KK-gluon mass scale"
+    value: 33
+    uncertainty: null
+    units: "TeV"
+    qualifier: "around"
+    display_value: "stronger composite pseudo-Goldstone bounds around 33 TeV"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C001/cfw2008_arxiv0804_1954.txt"
+    sha256: "224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce"
+    sha256_of_local_snapshot: "sha256:224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce"
 code_coverage:
   status: "YES"
   required_grep_commands:
