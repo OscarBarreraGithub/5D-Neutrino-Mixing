@@ -1,0 +1,46 @@
+Source: PDG pdgLive REST/API extraction for K0L -> pi0 e+ e-
+URL summary: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/summaries/S013.20
+URL listing: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S013.20
+Accessed: 2026-05-16
+Edition reported by API: 2026
+
+PDG identifier and summary:
+PDGID: S013.20
+Description: K0L --> pi0 e+ e-
+Mode number: 32
+Section: Linear parametrization assuming mu-e universality K_L decay form
+factors; CP- or LF-violating modes, or DeltaS = 1 weak neutral current modes.
+PDG value: <2.8 E-10
+Confidence level: 90%
+Type: OUR AVERAGE
+
+Listing block:
+Related PDGID: S013R34
+Description: G(K0L --> pi0 e+ e-) / G(total)
+PDG note: Violates CP in leading order. Direct and indirect CP-violating
+contributions are expected to be comparable and to dominate the CP-conserving
+part. LAI 2002B result suggests that CP-violation effects dominate. Test for
+DeltaS = 1 weak neutral current. Allowed by higher-order electroweak
+interaction.
+
+Used measurement:
+Document ID: ALAVI-HARATI 2004A
+Publication: PRL 93 021805
+Year: 2004
+DOI: 10.1103/PhysRevLett.93.021805
+Inspire ID: 629154
+Title: Search for the Rare Decay K0L --> pi0 e+ e-
+Technique: KTEV
+Comment: combined result
+Confidence level: 90%
+Value: <2.8E-10
+Used in average: true
+Footnote: Combined result of ALAVI-HARATI 2004A 1999-2000 data set and
+ALAVI-HARATI 2001 1997 data set.
+
+Other listed measurements/provenance:
+ALAVI-HARATI 2004A standalone KTEV 1999-2000 value: <3.5E-10 at 90% CL.
+LAI 2002B, PL B536 229, NA48, CP-conserving part: (0.0047 +0.0022 -0.0018) E-10.
+Footnote: LAI 2002B uses the absence of a signal in K0L --> pi0 gamma gamma
+with m(gamma gamma) < m(pi0) and their a(V) value to predict this value.
+ALAVI-HARATI 2001, PRL 86 397, KTEV 1997 value: <5.1E-10 at 90% CL.

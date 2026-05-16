@@ -1,0 +1,29 @@
+Source: arXiv text extraction
+URL: https://arxiv.org/abs/hep-ph/0404127
+PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127
+Accessed: 2026-05-16
+arXiv: hep-ph/0404127
+Published as: Eur. Phys. J. C 36, 57-66 (2004)
+DOI: 10.1140/epjc/s2004-01879-0
+Title: The rare decay KL -> pi0 mu+ mu- within the SM
+Authors: Gino Isidori, Christopher Smith, Rene Unterdorfer
+
+Relevant extraction:
+The paper writes the neutral-kaon dilepton rate in terms of mixing, direct,
+interference, and CP-conserving pieces:
+B(KL -> pi0 l+ l-) =
+[C_mix^l +/- C_int^l (Im lambda_t / 10^-4)
+ + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.
+
+For the electron mode, the coefficients quoted are:
+C_mix^e = (15.7 +/- 0.3) |a_S|^2
+C_int^e = (6.2 +/- 0.3) |a_S|
+C_dir^e = 2.4 +/- 0.2
+C_CPC^e approx 0
+
+The same paragraph gives |a_S| = 1.2 +/- 0.2 and
+(Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12. The paper reports both signs of the
+interference because the sign of a_S was not fixed model-independently, while
+noting that theoretical arguments point toward constructive interference. For
+the electron mode it states that the decay is completely dominated by the CPV
+part; the CP-conserving two-photon piece is relevant mainly for the muon mode.

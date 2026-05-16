@@ -1,0 +1,34 @@
+Source: PDG pdgLive REST/API extraction for K0S -> pi0 e+ e-
+URL listing: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10
+URL summary: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/summaries/S012.10
+Accessed: 2026-05-16
+Edition reported by API: 2026
+
+PDG identifier and summary:
+PDGID: S012.10
+Description: K0S --> pi0 e+ e-
+PDG value: (3.0 +1.5 -1.2) E-9
+
+Listing block:
+Related PDGID: S012R10
+Description: G(K0S --> pi0 e+ e-) / G(total)
+PDG note: Test for DeltaS = 1 weak neutral current. Allowed by first-order
+weak interaction combined with electromagnetic interaction.
+
+Used measurement:
+Document ID: BATLEY 2003
+Publication: PL B576 43
+Year: 2003
+DOI: 10.1016/j.physletb.2003.10.001
+Inspire ID: 629156
+Title: Observation of the Rare Decay K0S --> pi0 e+ e-
+Technique: NA48
+Event count: 7
+Comment: m(ee)>0.165 GeV
+Value: (3.0 +1.5 -1.2 +-0.2) E-9
+Statistical error: +1.5E-9 / -1.2E-9
+Systematic error: +-0.2E-9
+Used in average: true
+Footnote: BATLEY 2003 extrapolate also to the full kinematical region using
+a constant form factor and a vector matrix element. The resulting branching
+ratio is 5.8 +2.9 -2.4 E-9.

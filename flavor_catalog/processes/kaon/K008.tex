@@ -1,0 +1,89 @@
+% Flavor catalog per-process entry.
+% process_id: K008
+% family: kaon
+% owner_agent_id: PKA-K008
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K008.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{K008: \(K_L \to \pi^0 e^+e^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(K_L \to \pi^0 e^+e^-\).  This entry covers the
+long-lived neutral-kaon rare semileptonic mode \(K008\), a \(\Delta S=1\)
+weak-neutral-current channel whose Standard-Model signal is organized into
+indirect CP violation, direct CP violation, their interference, and a small
+CP-conserving two-photon component.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical measured limit is
+\[
+  {\cal B}(K_L \to \pi^0 e^+e^-) < 2.8\times 10^{-10}\quad(90\%\ {\rm CL}),
+\]
+from the 2026 PDG pdgLive entry \(S013.20\), accessed 2026-05-16; see
+\texttt{flavor\_catalog/references/K008/pdg2026\_kl\_pi0ee\_pdgLive.txt}.
+PDG traces the limit to the KTeV combined result in PRL 93, 021805.  The KTeV
+1999--2000 sample observed one candidate with \(0.99\pm0.35\) expected
+background events and set a standalone \(3.5\times10^{-10}\) limit; combination
+with the 1997 data gives the PDG value.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This decay probes \(s\to d e^+e^-\) electroweak-penguin and semileptonic
+contact structures rather than the \(\Delta F=2\) KK-gluon lane already present
+in the repository.  In anarchic or warped models it is a diagnostic for
+flavor-changing \(Z\) couplings, heavy neutral gauge exchange, and possible
+dipole or photon-penguin effects.  The KTeV paper quotes the SM expectation as
+roughly \(3\times10^{-11}\), with the CP-violating contribution in the
+\(8\)--\(45\times10^{-12}\) range and a direct-CP component entering strongly
+through interference, so the present bound is still above but close to the
+interesting order of magnitude.
+
+\subsection*{Post-2008 developments}
+No post-2008 experiment was found that supersedes the KTeV/PDG \(K_L\to\pi^0
+e^+e^-\) limit.  The important developments are interpretive.  The PDG 2026
+listing now records the CP-conserving contribution inferred from
+\(K_L\to\pi^0\gamma\gamma\) as
+\((0.0047^{+0.0022}_{-0.0018})\times10^{-10}\), supporting the standard view
+that the electron mode is CPV dominated.  The \(K_S\to\pi^0e^+e^-\) input,
+needed for the indirect-CP amplitude, remains the NA48 value
+\((3.0^{+1.5}_{-1.2}\pm0.2)\times10^{-9}\) for \(m_{ee}>0.165\) GeV, with an
+extrapolated full-region value \(5.8^{+2.9}_{-2.4}\times10^{-9}\).  Lattice
+work since 2008 has begun addressing long-distance \(K\to\pi\ell^+\ell^-\)
+amplitudes, and the Snowmass rare-kaon white paper emphasizes
+\(K_{L,S}\to\pi^0\ell^+\ell^-\) branching ratios and \(q^2\) spectra as useful
+SMEFT and short-distance probes.
+
+\subsection*{Constraint validity and model dependence}
+Class: long-distance-limited, CP-decomposition-dependent, and not yet a clean
+single-Wilson-coefficient bound.  A useful implementation must keep the
+indirect CPV piece tied to \(K_S\to\pi^0e^+e^-\), the direct CPV short-distance
+piece, their sign-dependent interference, and the small two-photon CPC
+component separate.  The Isidori--Smith--Unterdorfer decomposition gives
+\(C_{\rm mix}^e=(15.7\pm0.3)|a_S|^2\), \(C_{\rm int}^e=(6.2\pm0.3)|a_S|\),
+\(C_{\rm dir}^e=2.4\pm0.2\), and \(C_{\rm CPC}^e\simeq0\), all multiplying
+\(10^{-12}\) with the appropriate powers of \({\rm Im}\lambda_t/10^{-4}\).
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Targeted greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \(K_L\to\pi^0 e^+e^-\), \(K_S\to\pi^0e^+e^-\),
+\(a_S\), or \(s\to d e^+e^-\) implementation.  Existing kaon coverage is
+\(\Delta F=2\) only, e.g. \texttt{quarkConstraints/deltaf2.py:209} and
+\texttt{quarkConstraints/modern/phenomenology.py:23}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  K008 requires a new \(\Delta S=1\) semileptonic observable,
+short-distance matching to \(s\to d e^+e^-\), treatment of indirect/direct CP
+separation and interference, and long-distance inputs from \(K_S\) and
+\(K_L\to\pi^0\gamma\gamma\).  The existing \(\Delta F=2\) operator basis is not
+sufficient.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2026:K008}, \texttt{KTeV2004:KLPi0EE},
+\texttt{NA482003:KSPi0EE}, \texttt{IsidoriSmithUnterdorfer2004:KLPi0LL},
+\texttt{CFW2008:RSFlavor}, \texttt{ChristEtAl2016:KPiLLLattice}, and
+\texttt{AebischerBurasKumar2022:RareKaons}.
