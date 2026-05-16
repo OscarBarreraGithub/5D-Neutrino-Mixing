@@ -7,53 +7,59 @@
 % Canonical metadata sidecar: C005.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{C005: \(D^0\to e^+e^-\)}
+\section{\texorpdfstring{C005: \(D^0\to e^+e^-\)}{C005: D0 -> e+e-}}
 
 \subsection*{Process}
-\textbf{Standard notation:}
-\(\mathcal{B}(D^0\to e^+e^-)\).
-This entry covers the rare neutral-charm leptonic decay
-\(D^0\to e^+e^-\), a \(\Delta C=1\), \(c\to u e^+e^-\)
-flavor-changing neutral-current probe.  Charge-conjugate modes are implicit in
-the experimental listings.  It is the electron-helicity counterpart to C004,
-\(D^0\to\mu^+\mu^-\), but has a separate experimental history.
+\textbf{Standard notation:} \(\mathcal{B}(D^0\to e^+e^-)\).  This entry
+covers the rare neutral-charm leptonic decay \(D^0\to e^+e^-\), a
+\(\Delta C=1\), \(c\to u e^+e^-\) flavor-changing neutral-current probe.
+Charge-conjugate modes are implicit in the experimental listings.  It is the
+electron-mode counterpart to C004, \(D^0\to\mu^+\mu^-\), but has a separate
+experimental record.
 
 \subsection*{PDG / equivalent value(s)}
-The current PDG Live/API entry S032.39, accessed on 2026-05-16, gives
+The current PDG Live/API entry \(S032.39\), accessed on 2026-05-16, gives
 \[
   \mathcal{B}(D^0\to e^+e^-) < 7.9\times10^{-8}
   \qquad (90\%~{\rm C.L.}).
 \]
-The PDG-used input is the Belle 2010 search with \(660\,{\rm fb}^{-1}\) at
-KEKB.  Belle reports the same \(7.9\times10^{-8}\) upper limit and no signal
-evidence.  The independent BaBar 2012 search used \(468\,{\rm fb}^{-1}\) and
-set the weaker \(1.7\times10^{-7}\) upper limit at the same confidence level.
-These numbers are traced to
-\texttt{flavor\_catalog/references/C005/pdg2026\_d0\_ee\_pdgLive.txt},
-\texttt{belle2010\_arxiv1003\_2345.txt}, and
-\texttt{babar2012\_arxiv1206\_5419.txt}.  The dispatch note called this an
+The sidecar source key is \texttt{PDG2026:D0Ee}, with local snapshot
+\texttt{pdg2026\_d0\_ee\_pdgLive.txt}.  The PDG-used input is the Belle 2010
+search with \(660\,{\rm fb}^{-1}\) at KEKB.  Belle reports the same
+\(7.9\times10^{-8}\) upper limit and no signal evidence
+(\texttt{Belle2010:D0Ee};
+\texttt{belle2010\_arxiv1003\_2345.txt}).  The independent BaBar 2012 search
+used \(468\,{\rm fb}^{-1}\) and set the weaker \(1.7\times10^{-7}\) upper
+limit at 90\% CL
+(\texttt{BaBar2012:D0EeMuMuEMu};
+\texttt{babar2012\_arxiv1206\_5419.txt}).  The dispatch note called this an
 LHCb upper limit, but the accessed PDG/API measurement list contains no LHCb
-\(D^0\to e^+e^-\) entry.
+\(D^0\to e^+e^-\) entry
+(\texttt{pdg2026\_d0\_ee\_pdgLive.txt}).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 Anarchic warped models can induce up-sector flavor-changing neutral currents
 through nonuniversal KK gauge couplings, flavor-violating \(Z\)-like effects,
-Higgs/radion scalar exchange, or lepton-sector extensions.  C005 therefore
-tests a pure \(c\to u\) dilepton amplitude rather than the four-quark
-\(\Delta F=2\) operator basis used for neutral \(D\)-mixing.  For the current
-quark-only scan it is a catalog and roadmap process; a live veto would need
-both the \(c\to u\) current and electron-current normalization.
+Higgs/radion scalar exchange, or lepton-sector extensions
+(\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}).  C005 therefore tests a
+pure \(c\to u\) dilepton amplitude rather than the four-quark \(\Delta F=2\)
+operator basis used for neutral \(D\)-mixing.  For the current quark-only scan
+it is a catalog and roadmap process; a live veto would need both the
+\(c\to u\) current and electron-current normalization.
 
 \subsection*{Post-2008 developments}
-The arXiv:0804.1954 RS-flavor baseline predates the Belle and BaBar leptonic
-\(D^0\) searches.  The main post-2008 experimental development is Belle's
-2010 improvement to the present PDG limit, followed by BaBar's 2012
-cross-check in a different \(e^+e^-\to c\bar c\) sample.  Unlike C004,
-which has newer hadron-collider dimuon searches, the PDG-accessed C005 record
+The 2008 RS-flavor baseline predates the Belle and BaBar leptonic \(D^0\)
+searches (\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}).  The main
+post-2008 experimental development is Belle's 2010 improvement to the current
+PDG limit, followed by BaBar's 2012 cross-check in a separate
+\(e^+e^-\to c\bar c\) sample
+(\texttt{Belle2010:D0Ee}, \texttt{BaBar2012:D0EeMuMuEMu}).  Unlike C004,
+which has newer hadron-collider dimuon searches, the accessed C005 PDG record
 still uses the Belle result as the headline input.  Rare-charm theory work
-continues to emphasize that purely leptonic \(D^0\) limits are clean null
-tests experimentally but require care when separating short-distance new
-physics from long-distance charm dynamics.
+emphasizes that purely leptonic \(D^0\) limits are clean null tests
+experimentally but require care when separating short-distance new physics from
+long-distance charm dynamics
+(\texttt{BurdmanGolowichHewettPakvasa2002:RareCharm}).
 
 \subsection*{Constraint validity and model dependence}
 The upper limit itself is experimentally robust.  Its interpretation as an RS
@@ -62,10 +68,11 @@ bremsstrahlung and electron identification enter the experimental acceptance,
 and the Standard Model rare-charm amplitude is not a precision short-distance
 prediction.  A conservative use is an upper bound on additional short-distance
 \(c\to u e^+e^-\) amplitudes in a specified operator basis, not a direct
-subtraction against a sharply predicted Standard Model rate.
+subtraction against a sharply predicted Standard Model rate
+(\texttt{BurdmanGolowichHewettPakvasa2002:RareCharm}).
 
 \subsection*{Code coverage in this repo}
-\textbf{NO.}  The required catalog greps and a focused search for
+\textbf{NO.}  The PKA greps and a focused search for
 \texttt{D0.*e+e-}, \texttt{D0.*ee}, \texttt{c.?->.?u.*e}, and
 \texttt{rare.?charm} found no \(D^0\to e^+e^-\) implementation in
 \texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
@@ -91,4 +98,5 @@ Process-local keys before bibliography consolidation:
 \texttt{PDG2026:D0Ee}, \texttt{Belle2010:D0Ee},
 \texttt{BaBar2012:D0EeMuMuEMu},
 \texttt{BurdmanGolowichHewettPakvasa2002:RareCharm}, and
-\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.  Numeric claims above are
+tied to these sidecar source keys and local snapshots.
