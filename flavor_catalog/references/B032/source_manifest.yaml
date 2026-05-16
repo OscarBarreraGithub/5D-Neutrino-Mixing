@@ -1,0 +1,60 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B032
+generated_at: "2026-05-16T11:58:56-04:00"
+references:
+  - key: hflav_dec2025_btopik
+    arxiv_id: null
+    doi: null
+    title: "HFLAV Rare B decays: B -> K pi branching fractions and direct CP asymmetries, End of December 2025 update"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav.web.cern.ch/content/rare-b-decays"
+    snapshot_path: "flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt"
+    sha256_of_local_snapshot: "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf"
+    license_note: "HFLAV page states that HFLAV plots and tables are available under CC BY 4.0; local file is a minimal text snapshot."
+  - key: pdg2025_k0pi0_time_dependent_cp_api
+    arxiv_id: null
+    doi: "10.1103/PhysRevD.110.030001"
+    title: "PDG 2025 API entries S042CKP and S042SKP for B0 -> K0 pi0 time-dependent CP"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdgapi.lbl.gov/summaries/S042SKP"
+    snapshot_path: "flavor_catalog/references/B032/pdg2025_k0pi0_time_dependent_cp_api.txt"
+    sha256_of_local_snapshot: "sha256:dcd2aea4b34a67bc0d72350d098a885e99364d0a040439016807e4837a67f008"
+    license_note: "Minimal PDG API text snapshot; no PDG PDF stored."
+  - key: belleii2024_btokpi
+    arxiv_id: "2310.06381"
+    doi: "10.1103/PhysRevD.109.012001"
+    title: "Measurement of branching fractions and direct CP asymmetries for B -> K pi and B -> pi pi decays at Belle II"
+    authors: "Belle II Collaboration, I. Adachi et al."
+    year: 2024
+    url: "https://arxiv.org/abs/2310.06381"
+    snapshot_path: "flavor_catalog/references/B032/belleii2024_btokpi_arxiv.txt"
+    sha256_of_local_snapshot: "sha256:921fc4417a5fcf5e3c4865260dad6ea0d4b8f3605c7c1e51b6b7ab83e348d399"
+  - key: lhcb2021_bplus_kplus_pi0_acp
+    arxiv_id: "2012.12789"
+    doi: "10.1103/PhysRevLett.126.091802"
+    title: "Measurement of CP violation in the decay B+ -> K+ pi0"
+    authors: "LHCb Collaboration, R. Aaij et al."
+    year: 2021
+    url: "https://arxiv.org/abs/2012.12789"
+    snapshot_path: "flavor_catalog/references/B032/lhcb2021_bplus_kplus_pi0_acp_arxiv.txt"
+    sha256_of_local_snapshot: "sha256:3cf10c6a54476f953f6949837b5b100353945cc11fbac2ff27d979e0ae49b54d"
+  - key: belleii2023_b0_ks_pi0_cp
+    arxiv_id: "2305.07555"
+    doi: "10.1103/PhysRevLett.131.111803"
+    title: "Measurement of CP violation in B0 -> K_S0 pi0 decays at Belle II"
+    authors: "Belle II Collaboration, I. Adachi et al."
+    year: 2023
+    url: "https://arxiv.org/abs/2305.07555"
+    snapshot_path: "flavor_catalog/references/B032/belleii2023_b0_ks_pi0_cp_arxiv.txt"
+    sha256_of_local_snapshot: "sha256:9b49da234cc9d67d4784725150115865333f5ae7c0590267c2bdecf07a2cbbfa"
+  - key: cfw2008_rs_flavor
+    arxiv_id: "0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    snapshot_path: "flavor_catalog/references/B032/cfw2008_rs_flavor_arxiv.txt"
+    sha256_of_local_snapshot: "sha256:5220458be12445340f3099ecdbd4e7d98cec9c5dc93e246b28d34c96c634214e"

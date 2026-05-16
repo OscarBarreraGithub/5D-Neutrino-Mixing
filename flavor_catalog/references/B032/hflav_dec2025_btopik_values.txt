@@ -1,0 +1,42 @@
+Source key: hflav_dec2025_btopik
+Source: Heavy Flavor Averaging Group (HFLAV), Rare B decays, End of December 2025 update
+Access date: 2026-05-16
+Overview URL: https://hflav.web.cern.ch/content/rare-b-decays
+Relevant HFLAV URLs:
+- https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bu/BR_B%2B_K0_pi%2B.html
+- https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bu/BR_B%2B_K%2B_pi0.html
+- https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bd/BR_B0_K%2B_pi-.html
+- https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bd/BR_B0_K0_pi0.html
+- https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/ACP/Bu/ACP_B%2B_K0S_pi%2B.html
+- https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/ACP/Bu/ACP_B%2B_K%2B_pi0.html
+- https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/ACP/Bd/ACP_B0_K%2B_pi-.html
+- https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/ACP/Bd/ACP_B0_K0_pi0.html
+
+HFLAV overview metadata:
+- End of December 2025 is marked as the latest rare-B update.
+- Tables include results put on arXiv and InspireHEP until the end of December 2025.
+- PDG averages correspond to PDG 2025.
+- HFLAV states that its plots and tables are available under CC BY 4.0.
+
+Branching-fraction averages from the individual HFLAV HTML pages.
+Units are 10^-5:
+- B(B+ -> K0 pi+) = 2.392 +/- 0.062. HFLAV table p=0.70, ndf=5.
+  The same row lists the PDG value 2.389 +/- 0.063.
+- B(B+ -> K+ pi0) = 1.322 +/- 0.043. HFLAV table p=0.62, ndf=3.
+  The same row lists the PDG value 1.323 +/- 0.043.
+- B(B0 -> K+ pi-) = 2.007 +/- 0.040. HFLAV table p=0.80, ndf=17.
+  The same row lists the PDG value 2.003 +/- 0.041.
+- B(B0 -> K0 pi0) = 1.012 +/- 0.043. HFLAV table p=0.70, ndf=3.
+  The same row lists the PDG value 1.012 +/- 0.043.
+
+Direct CP-asymmetry averages from the individual HFLAV HTML pages.
+Units are 10^-2:
+- A_CP(B+ -> K0_S pi+) = -2.67 +/- 0.87. HFLAV table p=0.77, ndf=4.
+  The update includes an unpublished LHCb input shown in blue: -2.8 +/- 0.5 +/- 0.9.
+- A_CP(B+ -> K+ pi0) = +2.7 +/- 1.2. HFLAV table p=0.62, ndf=4.
+  The LHCb input is +2.5 +/- 1.5 +/- 0.7.
+- A_CP(B0 -> K+ pi-) = -8.31 +/- 0.31. HFLAV table p=0.54, ndf=4.
+  The LHCb input is -8.31 +/- 0.34 and combines Run 2 with Run 1.
+- A_CP(B0 -> K0 pi0) = -1 +/- 13. HFLAV table includes the Belle II input
+  -1 +/- 12 +/- 4, described as a combination of time-integrated and
+  time-dependent analyses using BLUE.

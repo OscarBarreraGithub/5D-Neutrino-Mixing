@@ -1,0 +1,42 @@
+Source key: pdg2025_k0pi0_time_dependent_cp_api
+Source: PDG REST API summaries and listings for S042CKP and S042SKP
+Access date: 2026-05-16
+URLs:
+- https://pdgapi.lbl.gov/summaries/S042CKP
+- https://pdgapi.lbl.gov/listings/S042CKP
+- https://pdgapi.lbl.gov/summaries/S042SKP
+- https://pdgapi.lbl.gov/listings/S042SKP
+
+Summary excerpt:
+- edition: 2025
+- pdgid: S042CKP
+- description: C(K0 pi0) (B0 --> K0 pi0)
+- pdg_values: OUR AVERAGE value_text "0.00+-0.08";
+  numeric value -9.010944052367896E-4; symmetric error 0.07727590775925162.
+
+- edition: 2025
+- pdgid: S042SKP
+- description: S(K0 pi0) (B0 --> K0 pi0)
+- pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+  numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+
+Listing excerpt for S(K0 pi0), inputs marked used in the average:
+- ADACHI 2023E, PRL 131 111803, DOI 10.1103/PhysRevLett.131.111803:
+  S = 0.75 +0.20 -0.23 +/- 0.04, used_in_average true.
+- FUJIKAWA 2010A, PR D81 011101, DOI 10.1103/PhysRevD.81.011101:
+  S = 0.67 +/- 0.31 +/- 0.08, used_in_average true.
+- AUBERT 2009I, PR D79 052003, DOI 10.1103/PhysRevD.79.052003:
+  S = 0.55 +/- 0.20 +/- 0.03, used_in_average true.
+
+Listing excerpt for C(K0 pi0), representative inputs marked used in the fit:
+- ADACHI 2024, PR D109 012001, DOI 10.1103/PhysRevD.109.012001:
+  C = -0.01 +/- 0.12 +/- 0.04, used_in_average true.
+- FUJIKAWA 2010A, PR D81 011101: C = -0.14 +/- 0.13 +/- 0.06,
+  with footnote that the paper reports A = -C.
+- AUBERT 2009I, PR D79 052003: C = 0.13 +/- 0.13 +/- 0.03.
+
+Convention note for catalog prose:
+For the time-dependent B0 -> K0 pi0 CP eigenstate, the coefficient C is the
+direct-CP coefficient in the usual time-dependent notation; many Belle papers
+quote A = -C.  The sidecar records C and S explicitly rather than silently
+converting conventions.
