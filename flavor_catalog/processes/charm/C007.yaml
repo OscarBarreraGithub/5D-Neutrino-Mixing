@@ -27,9 +27,18 @@ status_history:
       - "CHK-1: TeX claims the 2021 LHCb search covered 25 rare/forbidden modes, but no pdg_or_equivalent entry records that numerical claim."
       - "CHK-1: TeX quotes short-distance SM branching fractions of order 10^-12, but no pdg_or_equivalent entry records that numerical claim."
       - "CHK-4: Missing WRITER-DONE status from a WA; latest pre-checker status was WRITER-INITIATED, and no WA batch worklog for C007 was found."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:58:00-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:58:00-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 WA rework addressed CA CHK-1 and CHK-4."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:48:14-04:00"
+last_updated_at: "2026-05-16T13:58:00-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:4703263c1d560f5af74636df56cd97f76edc56b1d0fb7f65443b2a07eaea6885"
@@ -68,6 +77,33 @@ pdg_or_equivalent:
     source_url: "https://arxiv.org/abs/2011.00217"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt"
+    sha256_of_text_snapshot: "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac"
+  lhcb_2021_search_scope:
+    source: "LHCb JHEP 06 (2021) 044 / arXiv:2011.00217"
+    source_key: "LHCb2021:DPlusPiMuMu"
+    year: 2021
+    observable: "Number of rare or forbidden D+ and Ds+ decay modes investigated"
+    value: 25
+    uncertainty: null
+    units: "decay modes"
+    source_url: "https://arxiv.org/abs/2011.00217"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt"
+    sha256: "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac"
+    sha256_of_text_snapshot: "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac"
+  lhcb_2021_short_distance_sm_scale:
+    source: "LHCb JHEP 06 (2021) 044 / arXiv:2011.00217"
+    source_key: "LHCb2021:DPlusPiMuMu"
+    year: 2021
+    observable: "Short-distance Standard Model branching-fraction scale for FCNC D+ and Ds+ modes"
+    value: 1.0e-12
+    uncertainty: null
+    units: "branching fraction, order of magnitude"
+    qualifier: "order of 10^-12"
+    source_url: "https://arxiv.org/abs/2011.00217"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt"
+    sha256: "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac"
     sha256_of_text_snapshot: "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac"
   lhcb_previous_result:
     source: "LHCb Phys. Lett. B 724 (2013) 203 / arXiv:1304.6365"

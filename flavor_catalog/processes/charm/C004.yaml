@@ -26,9 +26,18 @@ status_history:
     issues:
       - "CHK-4: Missing WRITER-DONE status from a WA; latest pre-checker status was WRITER-INITIATED, and no WA batch worklog for C004 was found."
       - "CHK-6: implementation_difficulty is MEDIUM, but the rubric classifies this as HIGH because a live constraint needs a new Delta C = 1 rare-leptonic mode calculation and Wilson normalization."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:58:00-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:58:00-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 WA rework addressed CA CHK-4 and CHK-6."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:48:14-04:00"
+last_updated_at: "2026-05-16T13:58:00-04:00"
 version: "0.1.0"
 source_shas:
   burdman2002_arxiv_hepph0112235.txt: "sha256:ec7271413986bf79dd6ec0470f2d418b7ac5fb493adb16a77cf369fd1a44e19d"
@@ -130,8 +139,8 @@ code_coverage:
     - "Focused C004 searches found no D0 -> mu+ mu- or Delta C = 1 rare leptonic observable implementation in the required implementation/test directories."
     - "quarkConstraints/deltaf2.py:256 and quarkConstraints/deltaf2.py:941 are D0 mixing hits, not D0 -> mu+ mu-."
     - "flavorConstraints/muToEGamma.py:75 is the separate mu -> e gamma LFV dipole check, not a charm dimuon decay."
-implementation_difficulty: "MEDIUM"
-implementation_difficulty_if_missing: "MEDIUM"
-implementation_difficulty_reason: "Needs a new Delta C = 1 rare leptonic branching-ratio observable and Wilson/operator normalization for axial-vector, scalar, and pseudoscalar dimuon operators; no angular likelihood is required."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "D0 -> mu+ mu- is a new c -> u dilepton mode requiring a new Delta C = 1 Wilson coefficient normalization plus long-distance subtraction; it is not covered by the existing Delta F = 2 backend."
 open_issues:
   - "Dispatch text described the LHCb result as the most recent limit. PDG Live/API 2026 now includes a stronger CMS 2025 result; WA/CA should decide whether the final prose headlines the PDG 90% CL value or the CMS 95% CL result."

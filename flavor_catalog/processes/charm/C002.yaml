@@ -32,9 +32,18 @@ status_history:
     agent_id: "CA-ca_w4_charm"
     issues:
       - "CHK-4: Missing WRITER-DONE status from a WA; latest pre-checker status was PKA-DONE, and no WA batch worklog for C002 was found."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:58:00-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:58:00-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 WA rework appended the required WRITER-DONE transition after CA CHK-4."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:48:14-04:00"
+last_updated_at: "2026-05-16T13:58:00-04:00"
 version: "0.1.0"
 source_shas:
   belle_belleii2025_arxiv2410_22961.txt: "sha256:7b03797e8fda5ca0a4465772838df3aa05c6f84d7750f6a2326429497d578c4e"
