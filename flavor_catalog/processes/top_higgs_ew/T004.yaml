@@ -1,0 +1,124 @@
+schema: flavor_catalog.process.v1
+process_id: T004
+family: top_higgs_ew
+standard_notation: '\mathcal{B}(t\to u\gamma)'
+process_name: "Flavor-changing neutral-current top decay t -> u gamma"
+owner: "PKA"
+owner_agent_id: "PKA-T004"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T18:26:35-04:00"
+    timestamp: "2026-05-16T18:26:35-04:00"
+    agent_id: "PKA-T004"
+    reason: "Initial PKA draft and minimal source snapshot deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T18:26:35-04:00"
+version: "0.1.0"
+source_shas:
+  pdg_2026_top_t_gammaq.txt: "sha256:5e72da33cd1bb62fedd59c34d917217a2e12866d742bcb24e9e4e76f36581033"
+  atlas_2205_02537_arxiv_abs.txt: "sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5"
+  cms_2312_08229_public_page.txt: "sha256:1c729a489ac55ce3f5b7be57e7efc62bdc2bf1cf0d43e16f0577b807edcd0cc5"
+  csaki_falkowski_weiler_0804_1954_arxiv_abs.txt: "sha256:14befbbf44bedde27f2a783d8489df937ce3b44ffe755cbd4033fbf9b593bada"
+  aguilar_saavedra_1709_03975_arxiv_abs.txt: "sha256:21341a8358a91169c62f6074d29ec073769a246263f2d89c17e38963c9be9242"
+pdg_or_equivalent:
+  source: "PDG 2026 t-quark listing plus flavor-separated ATLAS/CMS primary results"
+  access_date: "2026-05-16"
+  value_summary: "PDG lists B(t -> gamma q), q = u,c, < 9.5e-6 at 95% CL; the tightest flavor-separated T004 limit found is ATLAS B(t -> u gamma) < 0.85e-5 at 95% CL for the left-handed tqgamma benchmark."
+  values:
+    - value_id: "PDG2026:T004:tgammaq_combined"
+      observable: "B(t -> gamma q), q = u,c"
+      year: 2026
+      value: "< 9.5e-6"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source: "Particle Data Group pdgLive t-quark listing"
+      source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/Particle.action?home=&node=Q007"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/T004/pdg_2026_top_t_gammaq.txt"
+      sha256: "sha256:5e72da33cd1bb62fedd59c34d917217a2e12866d742bcb24e9e4e76f36581033"
+      note: "PDG row is combined over q = u,c and is not a pure t -> u gamma value."
+    - value_id: "ATLAS2023:T004:tugamma_left"
+      observable: "B(t -> u gamma), left-handed tqgamma benchmark"
+      year: 2023
+      value: "< 0.85e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source: "ATLAS arXiv:2205.02537v3"
+      source_url: "https://arxiv.org/abs/2205.02537"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/T004/atlas_2205_02537_arxiv_abs.txt"
+      sha256: "sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5"
+    - value_id: "ATLAS2023:T004:tugamma_right"
+      observable: "B(t -> u gamma), right-handed tqgamma benchmark"
+      year: 2023
+      value: "< 1.2e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source: "ATLAS arXiv:2205.02537v3"
+      source_url: "https://arxiv.org/abs/2205.02537"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/T004/atlas_2205_02537_arxiv_abs.txt"
+      sha256: "sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5"
+    - value_id: "CMS2024:T004:tugamma_observed"
+      observable: "B(t -> u gamma), single nonzero coupling at a time"
+      year: 2024
+      value: "< 0.95e-5"
+      expected_value: "< 1.20e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source: "CMS-TOP-21-013 public result page"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/T004/cms_2312_08229_public_page.txt"
+      sha256: "sha256:1c729a489ac55ce3f5b7be57e7efc62bdc2bf1cf0d43e16f0577b807edcd0cc5"
+auxiliary_experimental_context:
+  - value_id: "ATLAS2023:T004:dataset"
+    year: 2023
+    value: "139 fb^-1 at sqrt(s) = 13 TeV"
+    source_url: "https://arxiv.org/abs/2205.02537"
+    sha256: "sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5"
+  - value_id: "CMS2024:T004:dataset"
+    year: 2024
+    value: "138 fb^-1 at sqrt(s) = 13 TeV"
+    source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/"
+    sha256: "sha256:1c729a489ac55ce3f5b7be57e7efc62bdc2bf1cf0d43e16f0577b807edcd0cc5"
+paper_era_reference:
+  - value_id: "CFW2008:T004:rs_flavor_context"
+    year: 2008
+    source: "Csaki, Falkowski, Weiler, arXiv:0804.1954"
+    role: "Warped-flavor reference epoch for post-2008 comparison."
+    snapshot_path: "flavor_catalog/references/T004/csaki_falkowski_weiler_0804_1954_arxiv_abs.txt"
+    sha256: "sha256:14befbbf44bedde27f2a783d8489df937ce3b44ffe755cbd4033fbf9b593bada"
+  - value_id: "AguilarSaavedra2017:T004:SM_and_projection_context"
+    year: 2017
+    source: "Aguilar-Saavedra, arXiv:1709.03975"
+    role: "Theory/projection context only, not a measured observable."
+    values:
+      - "SM B(t -> c gamma) is order 1e-14; up-quark modes are about one order lower."
+      - "HL-LHC t -> uZ / u gamma sensitivity from Zt/gamma t production: 1e-5 level."
+      - "FCC-hh t -> uZ / u gamma sensitivity: 1e-6 level."
+    snapshot_path: "flavor_catalog/references/T004/aguilar_saavedra_1709_03975_arxiv_abs.txt"
+    sha256: "sha256:21341a8358a91169c62f6074d29ec073769a246263f2d89c17e38963c9be9242"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Required plan greps rerun on 2026-05-16 across quarkConstraints/, qcd/, flavorConstraints/, neutrinos/, yukawa/, warpConfig/, solvers/, scanParams/, and tests/."
+    - "The implemented hits are the existing neutral-meson Delta F = 2 and mu -> e gamma paths; no top FCNC photon observable, tqgamma Wilson coefficient, or t -> u gamma branching-ratio check was found."
+    - "Targeted grep for t -> u gamma / tu gamma / tq gamma / top-photon FCNC returned no matches in the inspected code paths."
+  grep_commands:
+    - 'rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g "!*.ipynb"'
+    - 'rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g "!*.ipynb"'
+    - 'rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g "!*.ipynb"'
+    - 'rg -n "t.?->.?u.?gamma|t.?->.?gamma.?u|tu.?gamma|tq.?gamma|FCNC.*gamma|top.*photon|photon.*top|B\\(t.*u.*gamma\\)|BR\\(t.*u.*gamma\\)" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g "!*.ipynb"'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "Cataloging the limit is straightforward, but production integration needs a new electroweak dipole/top-FCNC operator convention, RS-to-top-flavor matching for t-u rotations, and a t -> u gamma decay-width or production/decay recast path not present in the current Delta F = 2 and mu -> e gamma code."
+open_issues:
+  - "WA/CA should decide whether the headline experimental number should be the ATLAS left-handed benchmark alone or both ATLAS chirality benchmarks."
+  - "A live backend must define the tqgamma operator normalization before applying the branching-fraction bound to scan points."

@@ -1,0 +1,49 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T004
+generated_at: "2026-05-16T18:26:35-04:00"
+sources:
+  - key: PDG2026TopTGammaQ
+    arxiv_id: null
+    DOI: null
+    title: "pdgLive t-quark listing, 2026 Review of Particle Physics"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/Particle.action?home=&node=Q007"
+    sha256_of_local_snapshot: "sha256:5e72da33cd1bb62fedd59c34d917217a2e12866d742bcb24e9e4e76f36581033"
+    snapshot_path: "flavor_catalog/references/T004/pdg_2026_top_t_gammaq.txt"
+  - key: ATLAS2023TopFCNCTQGamma
+    arxiv_id: "2205.02537"
+    DOI: "10.1016/j.physletb.2022.137379"
+    title: "Search for flavour-changing neutral-current couplings between the top quark and the photon with the ATLAS detector at sqrt(s) = 13 TeV"
+    authors: "ATLAS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2205.02537"
+    sha256_of_local_snapshot: "sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5"
+    snapshot_path: "flavor_catalog/references/T004/atlas_2205_02537_arxiv_abs.txt"
+  - key: CMS2024TopFCNCTQGamma
+    arxiv_id: "2312.08229"
+    DOI: "10.1103/PhysRevD.109.072004"
+    title: "Search for flavor changing neutral current interactions of the top quark in final states with a photon and additional jets in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/"
+    sha256_of_local_snapshot: "sha256:1c729a489ac55ce3f5b7be57e7efc62bdc2bf1cf0d43e16f0577b807edcd0cc5"
+    snapshot_path: "flavor_catalog/references/T004/cms_2312_08229_public_page.txt"
+  - key: CsakiFalkowskiWeiler2008WarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:14befbbf44bedde27f2a783d8489df937ce3b44ffe755cbd4033fbf9b593bada"
+    snapshot_path: "flavor_catalog/references/T004/csaki_falkowski_weiler_0804_1954_arxiv_abs.txt"
+  - key: AguilarSaavedra2017UltraBoostedTopFCN
+    arxiv_id: "1709.03975"
+    DOI: "10.1140/epjc/s10052-017-5375-7"
+    title: "Ultraboosted Zt and gamma t production at the HL-LHC and FCC-hh"
+    authors: "J. A. Aguilar-Saavedra"
+    year: 2017
+    url: "https://arxiv.org/abs/1709.03975"
+    sha256_of_local_snapshot: "sha256:21341a8358a91169c62f6074d29ec073769a246263f2d89c17e38963c9be9242"
+    snapshot_path: "flavor_catalog/references/T004/aguilar_saavedra_1709_03975_arxiv_abs.txt"

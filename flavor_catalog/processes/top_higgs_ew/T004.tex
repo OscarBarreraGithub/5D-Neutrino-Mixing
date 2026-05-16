@@ -1,0 +1,86 @@
+% Flavor catalog per-process draft.
+% process_id: T004
+% family: top_higgs_ew
+% owner_agent_id: PKA-T004
+% Canonical metadata sidecar: T004.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(t\to u\gamma\)}{t -> u gamma} FCNC Top Decay}
+
+\subsection*{Process}
+The observable is the flavor-changing neutral-current branching fraction
+\(\mathcal{B}(t\to u\gamma)\), catalog id T004 in the
+top/Higgs/electroweak family.  It covers direct searches for an anomalous
+photon coupling between a top quark and an up quark, including both FCNC
+single-top-plus-photon production and \(t\bar t\) events with one FCNC top
+decay.
+
+\subsection*{PDG / equivalent value(s)}
+The numerical source of truth is the \texttt{pdg\_or\_equivalent} block in
+\texttt{T004.yaml}.  The PDG 2026 top-quark listing gives a combined
+\(t\to\gamma q\), \(q=u,c\), branching-fraction limit
+\[
+  \mathcal{B}(t\to\gamma q) < 9.5\times 10^{-6}
+\]
+at 95\% CL (\texttt{PDG2026:T004:tgammaq\_combined}).  For the
+flavor-separated \(t\to u\gamma\) mode, the tightest primary limit found is the
+ATLAS result:
+\[
+  \mathcal{B}(t\to u\gamma) < 0.85\times 10^{-5}
+\]
+for the left-handed \(tq\gamma\) benchmark and
+\(\mathcal{B}(t\to u\gamma)<1.2\times10^{-5}\) for the right-handed benchmark,
+both at 95\% CL (\texttt{ATLAS2023:T004:tugamma\_left},
+\texttt{ATLAS2023:T004:tugamma\_right}).  CMS later reported
+\(\mathcal{B}(t\to u\gamma)<0.95\times10^{-5}\), with
+\(1.20\times10^{-5}\) expected, at 95\% CL
+(\texttt{CMS2024:T004:tugamma\_observed}).  Local snapshots are under
+\texttt{flavor\_catalog/references/T004/}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In warped or partially composite flavor models, non-universal fermion profiles
+and mass-basis rotations can induce top FCNC couplings.  The photon channel is
+a dipole-like probe, complementary to \(t\to uZ\), \(t\to ug\), and \(t\to uh\).
+Compared with charm final states, T004 isolates the top-up flavor rotation and
+therefore probes a different corner of the anarchic up-sector structure.
+
+\subsection*{Post-2008 developments}
+The comparison baseline is arXiv:0804.1954
+(\texttt{CFW2008:T004:rs\_flavor\_context}).  Since that reference epoch,
+the important change is experimental: ATLAS used \(139~\mathrm{fb}^{-1}\) at
+\(\sqrt{s}=13~\mathrm{TeV}\), while CMS used \(138~\mathrm{fb}^{-1}\) at the
+same energy, to set direct mode-resolved limits
+(\texttt{ATLAS2023:T004:dataset}; \texttt{CMS2024:T004:dataset}).  The
+high-energy single-production strategy also became a standard way to discuss
+future sensitivity: the theory context in
+\texttt{AguilarSaavedra2017:T004:SM\_and\_projection\_context} quotes
+\(10^{-5}\)-level reach at the HL-LHC and \(10^{-6}\)-level reach at an FCC-hh
+for \(t\to uZ/u\gamma\)-equivalent interactions.
+
+\subsection*{Constraint validity and model dependence}
+Experimentally this is a clean null-search upper limit; the SM rate is far
+below current reach and is lower than the corresponding \(t\to c\gamma\) rate
+because of CKM suppression
+(\texttt{AguilarSaavedra2017:T004:SM\_and\_projection\_context}).  The
+interpretation is not model-independent: ATLAS quotes separate chiral
+\(tq\gamma\) tensor benchmarks, and an RS backend must choose an operator
+normalization before comparing scan points to the branching-fraction limit.
+
+\subsection*{Code coverage in this repo}
+Coverage is \textbf{NO}.  The PKA reran the required catalog greps across
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/}.  The targeted \(t\to u\gamma\),
+\(tu\gamma\), \(tq\gamma\), and top-photon FCNC search returned no observable,
+Wilson coefficient, or branching-ratio implementation.
+
+\subsection*{Implementation difficulty}
+Implementation difficulty is \textbf{HIGH}.  The repo has no top-FCNC photon
+dipole basis, no RS-to-\(tu\gamma\) matching convention, and no top radiative
+decay-width or production-recast module.  A production backend would need those
+ingredients before this limit could become a scan cut.
+
+\subsection*{Key references}
+\texttt{PDG2026TopTGammaQ}; \texttt{ATLAS2023TopFCNCTQGamma};
+\texttt{CMS2024TopFCNCTQGamma}; \texttt{CsakiFalkowskiWeiler2008WarpedFlavor};
+\texttt{AguilarSaavedra2017UltraBoostedTopFCN}.
