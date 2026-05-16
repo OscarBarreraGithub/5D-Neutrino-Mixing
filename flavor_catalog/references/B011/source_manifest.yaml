@@ -1,0 +1,67 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B011
+generated_at: "2026-05-16T11:05:37-04:00"
+references:
+  - key: hflav_results_2026
+    arxiv_id: null
+    DOI: null
+    title: "Results"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2026
+    url: "https://hflav.web.cern.ch/results"
+    sha256_of_local_snapshot: "sha256:81dde0df2037a0ef6bfc4f03571bf53c3aa99415291afbf97b51f18cd5670c88"
+    snapshot_path: "flavor_catalog/references/B011/hflav_results_2026-05-16.txt"
+  - key: hflav_rare_decays_dec2024
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV rare decays, end-of-year 2024"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2024
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    sha256_of_local_snapshot: "sha256:43581f22065da1a01e7602183adf5109108e8f6c5f326cc36714eab796978698"
+    snapshot_path: "flavor_catalog/references/B011/hflav_rare_decays_dec2024_table67.txt"
+  - key: pdg2024_b_meson_prod_decay
+    arxiv_id: null
+    DOI: null
+    title: "Production and Decay of b-flavored Hadrons"
+    authors: "Particle Data Group"
+    year: 2024
+    url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-b-meson-prod-decay.pdf"
+    sha256_of_local_snapshot: "sha256:6b39e38c96b2f26905d6ea8b8118297a95741f3869eecc6babb5a46c058264e6"
+    snapshot_path: "flavor_catalog/references/B011/pdg2024_b_meson_prod_decay_excerpt.txt"
+  - key: misiak_rehman_steinhauser_2020
+    arxiv_id: "2002.01548"
+    DOI: "10.1007/JHEP06(2020)175"
+    title: "Towards B -> X_s gamma at the NNLO in QCD without interpolation in m_c"
+    authors: "M. Misiak, A. Rehman, M. Steinhauser"
+    year: 2020
+    url: "https://arxiv.org/abs/2002.01548"
+    sha256_of_local_snapshot: "sha256:8a3ec66a22c38965404f46c2a688b822e403ac138dc4c6e30162baa60a5b9c17"
+    snapshot_path: "flavor_catalog/references/B011/misiak_rehman_steinhauser_2020_arxiv.txt"
+  - key: misiak_et_al_2015
+    arxiv_id: "1503.01789"
+    DOI: "10.1103/PhysRevLett.114.221801"
+    title: "Updated NNLO QCD predictions for the weak radiative B-meson decays"
+    authors: "M. Misiak et al."
+    year: 2015
+    url: "https://arxiv.org/abs/1503.01789"
+    sha256_of_local_snapshot: "sha256:c252dbcd2b423992516bc095e15b0756848e2d859641357166d85823309609f5"
+    snapshot_path: "flavor_catalog/references/B011/misiak_et_al_2015_arxiv.txt"
+  - key: belleii_2022
+    arxiv_id: "2210.10220"
+    DOI: "10.48550/arXiv.2210.10220"
+    title: "Measurement of the photon-energy spectrum in inclusive B -> X_s gamma decays identified using hadronic decays of the recoil B meson in 2019-2021 Belle II data"
+    authors: "Belle II Collaboration"
+    year: 2022
+    url: "https://arxiv.org/abs/2210.10220"
+    sha256_of_local_snapshot: "sha256:6e54bacb4bc89a2a1438f67d7cf683bbac2c38754f5d37e29cef26e9a82d3ad1"
+    snapshot_path: "flavor_catalog/references/B011/belleii_2022_arxiv.txt"
+  - key: belle_2016
+    arxiv_id: "1608.02344"
+    DOI: "10.48550/arXiv.1608.02344"
+    title: "Measurement of the inclusive B -> X_{s+d} gamma branching fraction, photon energy spectrum and HQE parameters"
+    authors: "Belle Collaboration"
+    year: 2016
+    url: "https://arxiv.org/abs/1608.02344"
+    sha256_of_local_snapshot: "sha256:bed874fdad7ce4d2394128377a1c4deea57eb9bea5b5c8c11435a2cdf0864395"
+    snapshot_path: "flavor_catalog/references/B011/belle_2016_arxiv.txt"

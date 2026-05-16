@@ -1,0 +1,108 @@
+schema: flavor_catalog.process.v1
+process_id: B011
+family: beauty
+standard_notation: "\\bar{B}\\to X_s\\gamma"
+process_name: "Inclusive radiative B -> X_s gamma"
+owner: "PKA"
+owner_agent_id: "PKA-B011"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:03:01-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:03:01-04:00"
+    agent_id: "PKA-B011"
+    reason: "Initial PKA sidecar for inclusive B -> X_s gamma."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T11:05:37-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T11:05:37-04:00"
+    agent_id: "PKA-B011"
+    reason: "PKA draft, source snapshots, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:09:12-04:00"
+version: "0.1.1"
+source_shas:
+  hflav_results_2026-05-16.txt: "sha256:81dde0df2037a0ef6bfc4f03571bf53c3aa99415291afbf97b51f18cd5670c88"
+  hflav_rare_decays_dec2024_table67.txt: "sha256:43581f22065da1a01e7602183adf5109108e8f6c5f326cc36714eab796978698"
+  pdg2024_b_meson_prod_decay_excerpt.txt: "sha256:6b39e38c96b2f26905d6ea8b8118297a95741f3869eecc6babb5a46c058264e6"
+  misiak_rehman_steinhauser_2020_arxiv.txt: "sha256:8a3ec66a22c38965404f46c2a688b822e403ac138dc4c6e30162baa60a5b9c17"
+  misiak_et_al_2015_arxiv.txt: "sha256:c252dbcd2b423992516bc095e15b0756848e2d859641357166d85823309609f5"
+  belleii_2022_arxiv.txt: "sha256:6e54bacb4bc89a2a1438f67d7cf683bbac2c38754f5d37e29cef26e9a82d3ad1"
+  belle_2016_arxiv.txt: "sha256:bed874fdad7ce4d2394128377a1c4deea57eb9bea5b5c8c11435a2cdf0864395"
+pdg_or_equivalent:
+  canonical_experimental_average:
+    source: "HFLAV"
+    year: 2024
+    observable: "CP- and isospin-averaged branching fraction B(B -> X_s gamma)"
+    value: 0.000349
+    uncertainty: 0.000019
+    units: "branching fraction"
+    conditions: "E_gamma > 1.6 GeV; HFLAV table units 10^-6 with average 349 +/- 19; extrapolated to common threshold and averaged over charged and neutral B mesons"
+    source_url: "https://hflav.web.cern.ch/results"
+    supporting_source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B011/hflav_results_2026-05-16.txt"
+    supporting_snapshot_path: "flavor_catalog/references/B011/hflav_rare_decays_dec2024_table67.txt"
+    sha256_of_text_snapshot: "sha256:81dde0df2037a0ef6bfc4f03571bf53c3aa99415291afbf97b51f18cd5670c88"
+    supporting_sha256_of_text_snapshot: "sha256:43581f22065da1a01e7602183adf5109108e8f6c5f326cc36714eab796978698"
+  sm_prediction_current:
+    source: "Misiak, Rehman, Steinhauser 2020"
+    year: 2020
+    observable: "SM prediction for B_s gamma"
+    value: 0.000340
+    uncertainty: 0.000017
+    units: "branching fraction"
+    conditions: "E_gamma > 1.6 GeV in the decaying meson rest frame"
+    source_url: "https://arxiv.org/abs/2002.01548"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B011/misiak_rehman_steinhauser_2020_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:8a3ec66a22c38965404f46c2a688b822e403ac138dc4c6e30162baa60a5b9c17"
+  sm_prediction_pdg_review_quote:
+    source: "Misiak et al. 2015 as quoted by PDG 2024 b-hadron review"
+    year: 2015
+    observable: "NNLO SM prediction for b -> s gamma"
+    value: 0.000336
+    uncertainty: 0.000023
+    units: "branching fraction"
+    conditions: "E_gamma >= 1.6 GeV"
+    source_url: "https://arxiv.org/abs/1503.01789"
+    supporting_source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-b-meson-prod-decay.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B011/misiak_et_al_2015_arxiv.txt"
+    supporting_snapshot_path: "flavor_catalog/references/B011/pdg2024_b_meson_prod_decay_excerpt.txt"
+    sha256_of_text_snapshot: "sha256:c252dbcd2b423992516bc095e15b0756848e2d859641357166d85823309609f5"
+    supporting_sha256_of_text_snapshot: "sha256:6b39e38c96b2f26905d6ea8b8118297a95741f3869eecc6babb5a46c058264e6"
+  belleii_input:
+    source: "Belle II Collaboration 2022"
+    year: 2022
+    observable: "Photon-energy spectrum and partial branching fractions for B -> X_s gamma"
+    value: null
+    uncertainty: null
+    units: "branching fraction spectrum"
+    conditions: "HFLAV includes the Belle II input in the Dec 2024 average table"
+    source_url: "https://arxiv.org/abs/2210.10220"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B011/belleii_2022_arxiv.txt"
+    sha256_of_text_snapshot: "sha256:6e54bacb4bc89a2a1438f67d7cf683bbac2c38754f5d37e29cef26e9a82d3ad1"
+code_coverage:
+  status: "NO"
+  grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    - "rg -n \"X_s|Xs|b.?->.?s.?gamma|b.?to.?s.?gamma|B.?->.?X_s.?gamma|C7|C_7|C8|C_8\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+  evidence:
+    - "Focused implementation grep for X_s, b->s gamma, C7, and C8 in implementation/test directories returned exit=1."
+    - "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 in the modern quark policy surface."
+    - "quarkConstraints/modern/phenomenology.py:165 says that surface is policy-only and does not define a numeric EFT backend."
+    - "flavorConstraints/muToEGamma.py:1 is a lepton mu->e gamma dipole constraint, not a quark b->s gamma implementation."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Requires a new b -> s gamma dipole observable with C7/C8 matching, QCD running, inclusive-rate normalization, SM subtraction/uncertainty treatment, and photon-energy-cut conventions not present in the audited Delta F=2 code."
+open_issues:
+  - "WA/CA should decide whether the canonical theory comparison should use the PDG-reviewed 2015 Misiak et al. NNLO number or the 2020 Misiak/Rehman/Steinhauser update as the headline SM prediction; this PKA records both and uses the 2020 update as current."

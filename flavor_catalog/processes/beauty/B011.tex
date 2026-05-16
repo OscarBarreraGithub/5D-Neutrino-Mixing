@@ -1,0 +1,100 @@
+% Flavor catalog per-process draft.
+% process_id: B011
+% family: beauty
+% owner_agent_id: PKA-B011
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B011.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B011: Inclusive \(B\to X_s\gamma\)}
+
+\subsection*{Process}
+The process is the CP- and isospin-averaged inclusive radiative decay
+\(\bar B\to X_s\gamma\), equivalently the partonic FCNC transition
+\(b\to s\gamma\), with the canonical photon-energy threshold
+\(E_\gamma>1.6\,\mathrm{GeV}\).  It is the beauty-sector inclusive radiative
+penguin entry in the catalog and is separated from the exclusive
+\(B\to K^*\gamma\) and \(B_s\to\phi\gamma\) modes.
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth numerical block is
+\texttt{pdg\_or\_equivalent.canonical\_experimental\_average} in
+\texttt{B011.yaml}.  HFLAV gives
+\[
+  {\cal B}(\bar B\to X_s\gamma)_{\rm exp}
+  = (3.49\pm0.19)\times 10^{-4},
+  \qquad E_\gamma>1.6\,\mathrm{GeV},
+\]
+accessed on 2026-05-16, with local snapshots
+\texttt{references/B011/hflav\_results\_2026-05-16.txt} and
+\texttt{references/B011/hflav\_rare\_decays\_dec2024\_table67.txt}.  The
+HFLAV table reports the same average as \(349\pm19\) in units of \(10^{-6}\)
+after extrapolating the Belle, Belle II, BaBar, and CLEO inputs to the common
+threshold.  For theory comparison, the sidecar records the current
+Misiak--Rehman--Steinhauser NNLO SM prediction
+\[
+  {\cal B}(\bar B\to X_s\gamma)_{\rm SM}
+  = (3.40\pm0.17)\times 10^{-4},
+  \qquad E_\gamma>1.6\,\mathrm{GeV},
+\]
+from arXiv:2002.01548.  It also records the PDG-reviewed Misiak et al.
+number \((3.36\pm0.23)\times10^{-4}\) from arXiv:1503.01789.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This observable directly tests the electromagnetic and chromomagnetic dipole
+sector, usually parameterized by \(C_7\) and \(C_8\).  In anarchic RS models,
+KK fermion, gauge, Higgs, or charged-scalar loops can generate flavor-changing
+dipoles even when the tree-level neutral-meson mixing constraints are passed.
+The inclusive rate is therefore a sharp complement to the existing
+\(\Delta F=2\) lane: it probes loop-level chirality-flipping flavor structure
+rather than the four-quark operators currently audited in the quark scan.
+
+\subsection*{Post-2008 developments}
+The main post-CFW updates are experimental averaging and NNLO theory.  Belle
+published a full-data inclusive \(B\to X_{s+d}\gamma\) photon-spectrum
+analysis, Belle II added a hadronic-tag photon-spectrum measurement, and HFLAV
+now averages Belle, Belle II, BaBar, and CLEO inputs at the common
+\(E_\gamma>1.6\,\mathrm{GeV}\) threshold.  On the SM side, Misiak et al.
+updated the NNLO prediction after the original paper-era calculations, and
+Misiak, Rehman, and Steinhauser subsequently incorporated improved treatment
+of nonperturbative effects and progress toward removing the charm-mass
+interpolation.
+
+\subsection*{Constraint validity and model dependence}
+This is a robust loop/dipole constraint but not a plug-in likelihood without
+model work.  The inclusive observable is cleaner than exclusive radiative
+modes, yet its comparison still depends on the photon-energy cut,
+extrapolation to the common threshold, perturbative matching, resolved-photon
+and other nonperturbative uncertainties, and the convention used for
+\(C_7,C_8\).  A catalog-level entry is unambiguous; using it as a hard RS
+constraint requires a dedicated \(b\to s\gamma\) Wilson-coefficient pipeline.
+
+\subsection*{Code coverage in this repo}
+NO.  The required catalog greps were rerun.  A focused implementation grep for
+\texttt{X\_s}, \texttt{b->s gamma}, \texttt{C7}, and \texttt{C8} across
+\texttt{quarkConstraints/}, \texttt{flavorConstraints/}, \texttt{scanParams/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{qcd/}, \texttt{warpConfig/},
+\texttt{solvers/}, and \texttt{tests/} returned no hits.  The modern quark
+surface enumerates only \(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\)
+at \texttt{quarkConstraints/modern/phenomenology.py:23}, and says it is
+policy-only at \texttt{quarkConstraints/modern/phenomenology.py:165}.  The
+only dipole implementation found is the lepton-sector
+\(\mu\to e\gamma\) module at \texttt{flavorConstraints/muToEGamma.py:1}.
+
+\subsection*{Implementation difficulty}
+HIGH.  Production use would need a new \(b\to s\gamma\) observable module,
+matching onto \(C_7\) and \(C_8\), QCD running in the dipole basis,
+normalization to the inclusive rate, and a documented treatment of the SM
+prediction and experimental photon-energy threshold.  None of that machinery
+is present in the audited \(\Delta F=2\) code.
+
+\subsection*{Key references}
+Process-local raw reference keys before bibliography consolidation:
+\texttt{hflav\_rare\_decays\_dec2024},
+\texttt{hflav\_results\_2026},
+\texttt{pdg2024\_b\_meson\_prod\_decay},
+\texttt{misiak\_rehman\_steinhauser\_2020},
+\texttt{misiak\_et\_al\_2015},
+\texttt{belleii\_2022}, and \texttt{belle\_2016}.
