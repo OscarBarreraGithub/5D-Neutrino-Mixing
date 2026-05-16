@@ -1,0 +1,25 @@
+Source: HEPfit, "Precision Electroweak Physics" public page.
+URL: https://hepfit.roma1.infn.it/precisionelectroweak.html
+Access date: 2026-05-16
+Local note: minimal text snapshot only.
+
+Relevant extracted context:
+The page states that HEPfit implements the standard set of electroweak precision
+observables, including Z-pole decay widths, left-right and forward-backward
+asymmetries, the effective weak mixing angle, the W mass and width, top and
+Higgs masses, alpha_s, and Delta alpha_had^(5).
+
+The page lists implemented models including:
+1. The Standard Model of electroweak interactions.
+2. The Standard Model plus new physics as contributions to oblique parameters
+   S, T, U.
+3. The Standard Model plus epsilon_{1,2,3,b} parameters.
+4. New physics modifying bottom-quark neutral-current couplings.
+5. New physics modifying Higgs couplings to electroweak vector bosons.
+6. The dimension-six Standard Model Effective Lagrangian.
+7. Two-Higgs-doublet models.
+
+Use note:
+This source identifies HEPfit's live electroweak precision observable surface
+and its S/T/U model support. Numerical CDF-impact values are snapshotted in the
+separate arXiv:2204.04204 local note.

@@ -1,0 +1,94 @@
+% Flavor catalog per-process template.
+% process_id: E004
+% family: edm_neutrino
+% owner_agent_id: PKA-E004
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: E004.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{E004: Neutron electric dipole moment}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(d_n\).  This entry covers the permanent electric
+dipole moment of the neutron, cataloged in the \texttt{edm\_neutrino} family as
+a hadronic EDM and CP-violation benchmark.  The process is flavor diagonal, but
+it probes CP-odd quark EDMs, quark chromo-EDMs, the QCD \(\theta\) term, and
+the Weinberg three-gluon operator.
+
+\subsection*{PDG / equivalent value(s)}
+PDG Live 2026 (\texttt{PDG2026:NeutronEDM}) lists the current direct neutron
+EDM limit as
+\[
+  |d_n| < 1.8\times 10^{-26}\ e\,\mathrm{cm}
+  \qquad (90\%~\mathrm{CL}),
+\]
+from Abel et al. 2020 using ultracold neutrons and Ramsey separated oscillatory
+fields at PSI.  The PDG table records this as \(<0.18\) in units of
+\(10^{-25}\ e\,\mathrm{cm}\); see
+\texttt{flavor\_catalog/references/E004/pdg2026\_neutron\_edm\_datablock.txt}.
+The associated experimental result is
+\[
+  d_n = (0.0\pm1.1_{\rm stat}\pm0.2_{\rm sys})\times10^{-26}\ e\,\mathrm{cm},
+\]
+recorded both by PDG and in the arXiv snapshot
+\texttt{flavor\_catalog/references/E004/abel2020\_arxiv2001\_11966.txt}.
+PDG also lists the superseded Pendlebury et al. 2015 direct limit
+\(|d_n|<3.0\times10^{-26}\ e\,\mathrm{cm}\) at \(90\%\) CL.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In anarchic warped or composite-Higgs completions, new complex Yukawa spurions
+and KK fermion/gauge loops can generate flavor-diagonal CP-odd dipoles even
+when tree-level \(\Delta F=2\) observables are controlled.  The neutron EDM is
+therefore a standard hadronic CP benchmark for quark EDMs and chromo-EDMs, and
+for threshold-induced Weinberg-operator contributions.  It does not map onto
+the existing neutral-meson mixing basis; it would test a different CP-odd
+operator lane.
+
+\subsection*{Post-2008 developments}
+The 2008 CFW reference point (\texttt{CsakiFalkowskiWeiler:RSFlavor2008})
+focused on warped-flavor bounds such as KK-gluon constraints.  Since then, the
+direct neutron EDM experimental limit improved from the PDG-listed
+Pendlebury-era \(3.0\times10^{-26}\ e\,\mathrm{cm}\) bound to the Abel et al.
+2020 \(1.8\times10^{-26}\ e\,\mathrm{cm}\) bound.  On the model side,
+Koenig, Neubert, and Straub 2014
+(\texttt{KoenigNeubertStraub:DipoleComposite2014}) made quark electromagnetic
+and chromomagnetic dipoles explicit in composite-Higgs and warped
+extra-dimensional language, including the role of ``wrong-chirality'' Yukawas
+and the neutron EDM.  On the hadronic side, lattice work such as Bhattacharya
+et al. 2022 (\texttt{Bhattacharya:NeutronEDMLattice2022}) now directly targets
+the neutron EDM induced by dimension-\(4\) and dimension-\(6\) gluonic CP
+violation and the isovector quark chromo-EDM.
+
+\subsection*{Constraint validity and model dependence}
+The experimental limit is a robust null bound on \(d_n\), but translating it
+into RS parameters is hadronic- and basis-dependent.  A live interpretation
+must specify the UV matching to quark EDM, quark chromo-EDM, \(\theta\), and
+Weinberg coefficients; their QCD running and threshold matching; and the
+low-energy neutron matrix elements.  This is an EDM-adjacent loop constraint,
+not a direct \(\Delta F=2\) or lepton-universality observable.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required catalog greps and a focused search for
+\texttt{neutron[ -]?EDM}, \texttt{nEDM}, \texttt{d\_n}, \texttt{chromo-EDM},
+\texttt{CEDM}, \texttt{Weinberg}, and \texttt{three-gluon} over
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/} found no neutron
+EDM implementation.  The only nearby dipole code is the off-diagonal
+\(\mu\to e\gamma\) helper in \texttt{flavorConstraints/muToEGamma.py:3},
+\texttt{:21}, and \texttt{:81}, which is not a hadronic EDM calculation.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production constraint needs new CP-odd dipole and gluonic
+operator matching, QCD running with thresholds, and hadronic neutron matrix
+elements.  The existing SLL/SLR/VLL/VRR/LR \(\Delta F=2\) infrastructure does
+not cover quark EDMs, chromo-EDMs, or the Weinberg operator.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2026:NeutronEDM}, \texttt{Abel:NeutronEDM2020},
+\texttt{CsakiFalkowskiWeiler:RSFlavor2008},
+\texttt{KoenigNeubertStraub:DipoleComposite2014}, and
+\texttt{Bhattacharya:NeutronEDMLattice2022}.

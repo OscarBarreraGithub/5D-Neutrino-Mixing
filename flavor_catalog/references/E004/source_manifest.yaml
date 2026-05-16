@@ -1,0 +1,57 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: E004
+generated_at: "2026-05-16T12:55:57-04:00"
+references:
+  - key: "PDG2026:NeutronEDM"
+    title: "PDG Live S017EDM neutron electric dipole moment datablock"
+    authors: "F. Takahashi et al. (Particle Data Group)"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM"
+    doi: null
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa"
+    snapshot_path: "flavor_catalog/references/E004/pdg2026_neutron_edm_datablock.txt"
+  - key: "Abel:NeutronEDM2020"
+    arxiv_id: "2001.11966"
+    arxiv_doi: "10.48550/arXiv.2001.11966"
+    doi: "10.1103/PhysRevLett.124.081803"
+    title: "Measurement of the permanent electric dipole moment of the neutron"
+    authors: "C. Abel et al."
+    year: 2020
+    url: "https://arxiv.org/abs/2001.11966"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:b413e25a28afaf7c70ccf642a74d5b1f00e4dad2357732eb0a82899b9546e43b"
+    snapshot_path: "flavor_catalog/references/E004/abel2020_arxiv2001_11966.txt"
+  - key: "CsakiFalkowskiWeiler:RSFlavor2008"
+    arxiv_id: "0804.1954"
+    arxiv_doi: "10.48550/arXiv.0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:4b367894cb4a706f3643fd93b5fcec8c65e8170c979d7e89ec6e5694dc237fec"
+    snapshot_path: "flavor_catalog/references/E004/cfw2008_arxiv0804_1954.txt"
+  - key: "KoenigNeubertStraub:DipoleComposite2014"
+    arxiv_id: "1403.2756"
+    arxiv_doi: "10.48550/arXiv.1403.2756"
+    doi: "10.1140/epjc/s10052-014-2945-9"
+    title: "Dipole operator constraints on composite Higgs models"
+    authors: "Matthias Koenig, Matthias Neubert, David M. Straub"
+    year: 2014
+    url: "https://arxiv.org/abs/1403.2756"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:867e2341ffbb4fcd27486c111cd2828256fff3a8dc41ca5b978b090825f06ce0"
+    snapshot_path: "flavor_catalog/references/E004/koenig_neubert_straub2014_arxiv1403_2756.txt"
+  - key: "Bhattacharya:NeutronEDMLattice2022"
+    arxiv_id: "2203.03746"
+    arxiv_doi: "10.48550/arXiv.2203.03746"
+    doi: null
+    title: "Calculation of neutron electric dipole moment due to the QCD topological term, Weinberg three-gluon operator and the quark chromoelectric moment"
+    authors: "Tanmoy Bhattacharya, Vincenzo Cirigliano, Rajan Gupta, Emanuele Mereghetti, Boram Yoon"
+    year: 2022
+    url: "https://arxiv.org/abs/2203.03746"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:d9b49b5e32646b4ef3862f9cbfe05ccfd5caa4cbd60482e86e1aab7f7b2c35f2"
+    snapshot_path: "flavor_catalog/references/E004/bhattacharya2022_arxiv2203_03746.txt"

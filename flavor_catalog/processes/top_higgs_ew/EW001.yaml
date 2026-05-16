@@ -1,0 +1,225 @@
+schema: flavor_catalog.process.v1
+process_id: EW001
+family: top_higgs_ew
+standard_notation: "S, T, U"
+process_name: "Peskin-Takeuchi oblique electroweak parameters"
+owner: "PKA"
+owner_agent_id: "PKA-EW001"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T12:56:12-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T12:56:12-04:00"
+    agent_id: "PKA-EW001"
+    reason: "Initial PKA draft for NIT-1 pre-approved EW001 oblique-parameter catalog addition."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T12:56:12-04:00"
+version: "0.1.0"
+source_shas:
+  cfw_2008_rs_flavor.txt: "sha256:3233891e61f28ce2755a145f3a3fd48095b5244beff40e72debc41a7f4d029bc"
+  gfitter_oblique_parameters.txt: "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f"
+  hepfit_deblas_2022_cdf_stu.txt: "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7"
+  hepfit_precision_ew_page.txt: "sha256:b9dd49f6cdee7ca973a08afa577c41e7abc17547301690efd58240bce7f2eabd"
+  pdg_2025_electroweak_stu.txt: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  peskin_takeuchi_1992_oblique.txt: "sha256:0a0453cd411843e9f77bb28bbe272d00a7919975c051e99fb2b8ad0c13c1a0c1"
+pdg_or_equivalent:
+  - observable: "PDG 2025 global oblique fit, S with U fixed to zero"
+    year: 2025
+    value: 0.026
+    uncertainty: 0.075
+    units: "dimensionless"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics, Table 10.8"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 global oblique fit, T with U fixed to zero"
+    year: 2025
+    value: 0.047
+    uncertainty: 0.066
+    units: "dimensionless"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics, Table 10.8"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 global oblique fit, U fixed value"
+    year: 2025
+    value: 0.0
+    uncertainty: null
+    units: "dimensionless"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics, Table 10.8"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 correlation rho(S,T), U fixed to zero"
+    year: 2025
+    value: 0.90
+    uncertainty: null
+    units: "dimensionless"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics, Table 10.8"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 global oblique fit, S with S/T/U floating"
+    year: 2025
+    value: 0.021
+    uncertainty: 0.096
+    units: "dimensionless"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics, Table 10.8"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 global oblique fit, T with S/T/U floating"
+    year: 2025
+    value: 0.04
+    uncertainty: 0.12
+    units: "dimensionless"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics, Table 10.8"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 global oblique fit, U with S/T/U floating"
+    year: 2025
+    value: 0.008
+    uncertainty: 0.092
+    units: "dimensionless"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics, Table 10.8"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 warped-extra-dimension S coefficient"
+    year: 2025
+    value: 30.0
+    uncertainty: null
+    units: "coefficient in S approximately coefficient * v^2 / M_KK^2"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 one-sided S upper value used for warped M_KK context"
+    year: 2025
+    value: 0.18
+    uncertainty: null
+    cl: "95% probability"
+    units: "dimensionless"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "PDG 2025 warped M_KK lower-bound context"
+    year: 2025
+    value: 3.2
+    uncertainty: null
+    cl: "95% probability context"
+    units: "TeV"
+    source: "PDG 2025 Electroweak Model and Constraints on New Physics"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
+    sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  - observable: "Gfitter public oblique fit, S"
+    year: 2026
+    value: 0.05
+    uncertainty: 0.11
+    units: "dimensionless"
+    source: "Gfitter Oblique Parameters public page"
+    source_url: "https://project-gfitter.web.cern.ch/Oblique_Parameters/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt"
+    sha256: "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f"
+  - observable: "Gfitter public oblique fit, T"
+    year: 2026
+    value: 0.09
+    uncertainty: 0.13
+    units: "dimensionless"
+    source: "Gfitter Oblique Parameters public page"
+    source_url: "https://project-gfitter.web.cern.ch/Oblique_Parameters/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt"
+    sha256: "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f"
+  - observable: "Gfitter public oblique fit, U"
+    year: 2026
+    value: 0.01
+    uncertainty: 0.11
+    units: "dimensionless"
+    source: "Gfitter Oblique Parameters public page"
+    source_url: "https://project-gfitter.web.cern.ch/Oblique_Parameters/"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt"
+    sha256: "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f"
+  - observable: "HEPfit/de Blas 2022 CDF W mass"
+    year: 2022
+    value: 80.4335
+    uncertainty: 0.0094
+    units: "GeV"
+    source: "de Blas et al. 2022, arXiv:2204.04204"
+    source_url: "https://arxiv.org/abs/2204.04204"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/hepfit_deblas_2022_cdf_stu.txt"
+    sha256: "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7"
+  - observable: "HEPfit/de Blas 2022 standard-average ST fit, S with U fixed to zero"
+    year: 2022
+    value: 0.100
+    uncertainty: 0.073
+    units: "dimensionless"
+    source: "de Blas et al. 2022, arXiv:2204.04204"
+    source_url: "https://arxiv.org/abs/2204.04204"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/hepfit_deblas_2022_cdf_stu.txt"
+    sha256: "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7"
+  - observable: "HEPfit/de Blas 2022 standard-average ST fit, T with U fixed to zero"
+    year: 2022
+    value: 0.202
+    uncertainty: 0.056
+    units: "dimensionless"
+    source: "de Blas et al. 2022, arXiv:2204.04204"
+    source_url: "https://arxiv.org/abs/2204.04204"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/hepfit_deblas_2022_cdf_stu.txt"
+    sha256: "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7"
+  - observable: "HEPfit/de Blas 2022 standard-average STU fit, U"
+    year: 2022
+    value: 0.134
+    uncertainty: 0.087
+    units: "dimensionless"
+    source: "de Blas et al. 2022, arXiv:2204.04204"
+    source_url: "https://arxiv.org/abs/2204.04204"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/EW001/hepfit_deblas_2022_cdf_stu.txt"
+    sha256: "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"oblique|Peskin|Takeuchi|S parameter|T parameter|U parameter|S,T,U|S\\\\s*=|T\\\\s*=|U\\\\s*=|delta.?rho|rho parameter|W mass|m_W|MW|electroweak|EWPO|HEPfit|GFitter\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"Z.?->|h.?->|t.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|epsilon.?prime|eps.?prime|R_K|R_D|B_s.*mu|nu.*nubar|oblique|electroweak|EWPO\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+  findings:
+    - "No S/T/U, oblique-parameter, EWPO likelihood, or W-mass electroweak-fit implementation was found."
+    - "Generic electroweak/QCD constants and VEV comments surfaced but do not implement the constraint: qcd/constants.py:11, qcd/running.py:3, quarkConstraints/qcd_running.py:99, yukawa/neutrino.py:14, yukawa/charged_lepton.py:11."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "A live EW001 constraint needs a new electroweak precision likelihood plus RS matching from gauge/fermion KK spectra to vacuum-polarization self energies or SMEFT bosonic operators. This is outside the existing Delta F = 2 basis and requires new electroweak mode/matching calculations and correlated global-fit handling."
+open_issues:
+  - "WA/checker should decide whether the production catalog wants a PDG-only default likelihood or an optional CDF-W-mass scenario flag."

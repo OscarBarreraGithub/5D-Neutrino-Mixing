@@ -1,0 +1,45 @@
+Source: J. de Blas, M. Pierini, L. Reina, L. Silvestrini,
+"Impact of the recent measurements of the top-quark and W-boson masses on
+electroweak precision fits".
+URL: https://arxiv.org/abs/2204.04204
+arXiv: 2204.04204
+DOI: 10.1103/PhysRevLett.129.271801
+Access date: 2026-05-16
+Local note: minimal text snapshot from the arXiv source; no PDF is stored.
+
+Abstract context:
+The paper compares the electroweak-fit W-mass prediction with averages that
+include the CDF Collaboration measurement and presents updated global fits to
+electroweak precision data in the SM, oblique new-physics models, and SMEFT.
+
+Extracted CDF W mass value quoted in Eq. (1):
+M_W = 80.4335 +/- 0.0094 GeV.
+
+Extracted standard-average oblique-parameter fit, Table STU:
+U = 0 fit:
+S = 0.100 +/- 0.073
+T = 0.202 +/- 0.056
+rho(S,T) = 0.93
+
+S, T, U floating fit:
+S = 0.005 +/- 0.096
+T = 0.040 +/- 0.120
+U = 0.134 +/- 0.087
+Correlations: rho(S,T) = 0.91, rho(S,U) = -0.65, rho(T,U) = -0.88.
+
+Extracted conservative-average oblique-parameter fit, Appendix table:
+U = 0 fit:
+S = 0.086 +/- 0.077
+T = 0.177 +/- 0.070
+rho(S,T) = 0.89
+
+S, T, U floating fit:
+S = 0.004 +/- 0.096
+T = 0.040 +/- 0.120
+U = 0.134 +/- 0.095
+Correlations: rho(S,T) = 0.90, rho(S,U) = -0.60, rho(T,U) = -0.81.
+
+Use note:
+This is a HEPfit-family electroweak precision fit reference for the CDF-W-mass
+impact. It is not the default catalog value because the 2025 PDG review gives a
+newer consolidated electroweak-review fit.

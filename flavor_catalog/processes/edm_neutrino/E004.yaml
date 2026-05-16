@@ -1,0 +1,142 @@
+schema: flavor_catalog.process.v1
+process_id: E004
+family: edm_neutrino
+standard_notation: "d_n"
+process_name: "Neutron electric dipole moment"
+owner: "PKA"
+owner_agent_id: "PKA-E004"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T12:55:57-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T12:55:57-04:00"
+    agent_id: "PKA-E004"
+    reason: "Initial PKA source extraction and draft started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T12:55:57-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T12:55:57-04:00"
+    agent_id: "PKA-E004"
+    reason: "PKA draft, minimal source snapshots, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T12:55:57-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_neutron_edm_datablock.txt: "sha256:211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa"
+  abel2020_arxiv2001_11966.txt: "sha256:b413e25a28afaf7c70ccf642a74d5b1f00e4dad2357732eb0a82899b9546e43b"
+  cfw2008_arxiv0804_1954.txt: "sha256:4b367894cb4a706f3643fd93b5fcec8c65e8170c979d7e89ec6e5694dc237fec"
+  koenig_neubert_straub2014_arxiv1403_2756.txt: "sha256:867e2341ffbb4fcd27486c111cd2828256fff3a8dc41ca5b978b090825f06ce0"
+  bhattacharya2022_arxiv2203_03746.txt: "sha256:d9b49b5e32646b4ef3862f9cbfe05ccfd5caa4cbd60482e86e1aab7f7b2c35f2"
+pdg_or_equivalent:
+  canonical_limit:
+    source: "PDG Live 2026 S017EDM neutron electric dipole moment datablock"
+    year: 2026
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM"
+    access_date: "2026-05-16"
+    observable: "Neutron electric dipole moment"
+    value_summary: "|d_n| < 1.8 x 10^-26 e cm at 90% CL"
+    value: 1.8e-26
+    uncertainty: null
+    units: "e cm"
+    limit_operator: "<"
+    confidence_level: "90%"
+    table_value: 0.18
+    table_limit_operator: "<"
+    table_units: "10^-25 e cm"
+    used_measurement: "Abel et al. 2020, ultracold neutrons at PSI"
+    snapshot_path: "flavor_catalog/references/E004/pdg2026_neutron_edm_datablock.txt"
+    sha256: "211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa"
+    sha256_of_local_snapshot: "sha256:211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa"
+  primary_measurement:
+    source: "Abel et al., Phys. Rev. Lett. 124, 081803 (2020); arXiv:2001.11966"
+    year: 2020
+    source_url: "https://arxiv.org/abs/2001.11966"
+    access_date: "2026-05-16"
+    observable: "Neutron electric dipole moment"
+    value: 0.0
+    statistical_uncertainty: 1.1
+    systematic_uncertainty: 0.2
+    units: "10^-26 e cm"
+    limit_value: 1.8
+    limit_operator: "<"
+    limit_units: "10^-26 e cm"
+    confidence_level: "90%"
+    measurement_summary: "d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm; |d_n| < 1.8 x 10^-26 e cm at 90% CL in PDG"
+    snapshot_path: "flavor_catalog/references/E004/abel2020_arxiv2001_11966.txt"
+    sha256: "b413e25a28afaf7c70ccf642a74d5b1f00e4dad2357732eb0a82899b9546e43b"
+    sha256_of_local_snapshot: "sha256:b413e25a28afaf7c70ccf642a74d5b1f00e4dad2357732eb0a82899b9546e43b"
+  superseded_direct_limit:
+    source: "PDG Live 2026 S017EDM neutron EDM datablock, Pendlebury 2015 row"
+    year: 2015
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM"
+    access_date: "2026-05-16"
+    observable: "Neutron electric dipole moment"
+    value_summary: "|d_n| < 3.0 x 10^-26 e cm at 90% CL, superseded by Abel 2020"
+    value: 3.0e-26
+    uncertainty: null
+    units: "e cm"
+    limit_operator: "<"
+    confidence_level: "90%"
+    table_value: 0.30
+    table_units: "10^-25 e cm"
+    snapshot_path: "flavor_catalog/references/E004/pdg2026_neutron_edm_datablock.txt"
+    sha256: "211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa"
+    sha256_of_local_snapshot: "sha256:211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa"
+post_2008_context:
+  baseline:
+    key: "CsakiFalkowskiWeiler:RSFlavor2008"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    year: 2008
+    value_summary: "Warped/composite flavor baseline; arXiv abstract quotes generic KK-gluon mass bounds near 21 TeV and pseudo-Goldstone scenario bounds near 33 TeV."
+    snapshot_path: "flavor_catalog/references/E004/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:4b367894cb4a706f3643fd93b5fcec8c65e8170c979d7e89ec6e5694dc237fec"
+  composite_dipoles:
+    key: "KoenigNeubertStraub:DipoleComposite2014"
+    source_url: "https://arxiv.org/abs/1403.2756"
+    year: 2014
+    value_summary: "Post-2008 composite-Higgs/warped-language treatment of quark electromagnetic and chromomagnetic dipoles constrained by neutron EDM, B -> X_s gamma, and epsilon'/epsilon."
+    snapshot_path: "flavor_catalog/references/E004/koenig_neubert_straub2014_arxiv1403_2756.txt"
+    sha256_of_local_snapshot: "sha256:867e2341ffbb4fcd27486c111cd2828256fff3a8dc41ca5b978b090825f06ce0"
+  lattice_hadronic_translation:
+    key: "Bhattacharya:NeutronEDMLattice2022"
+    source_url: "https://arxiv.org/abs/2203.03746"
+    year: 2022
+    value_summary: "Lattice calculation target for neutron EDM from dimension-4 and dimension-6 gluonic CP violation and isovector quark chromo-EDM."
+    snapshot_path: "flavor_catalog/references/E004/bhattacharya2022_arxiv2203_03746.txt"
+    sha256_of_local_snapshot: "sha256:d9b49b5e32646b4ef3862f9cbfe05ccfd5caa4cbd60482e86e1aab7f7b2c35f2"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    - "rg -n \"neutron[ -]?EDM|nEDM|S017EDM|\\\\bd_n\\\\b|\\\\bdn\\\\b|chromo[- ]?electric|chromo[- ]?EDM|\\\\bCEDM\\\\b|\\\\bcEDM\\\\b|Weinberg three|three[- ]gluon|CP[- ]odd gluon\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"EDM|electric dipole|dipole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  findings:
+    - "Focused neutron-EDM/CEDM/Weinberg implementation grep over the required implementation/test directories returned exit=1, no matches."
+    - "Generic EDM/dipole grep found only the off-diagonal mu->e gamma dipole helper, not a hadronic neutron EDM constraint."
+    - "flavorConstraints/muToEGamma.py:3 describes an off-diagonal LFV dipole operator."
+    - "flavorConstraints/muToEGamma.py:21 cites the Perez-Randall mu->e gamma dipole operator."
+    - "flavorConstraints/muToEGamma.py:81 implements check_mu_to_e_gamma, not d_n."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "Requires new CP-odd quark EDM, chromo-EDM, and Weinberg-operator matching, QCD running and threshold treatment, and neutron hadronic matrix elements. Existing Delta F=2 and mu->e gamma code paths do not provide this observable."
+open_issues:
+  - "WA/CA should decide how much of the theta-term interpretation belongs in E004 versus separate E008/E009 chromo-EDM/Weinberg entries."
+  - "If promoted to live code, the PI must specify the low-energy CP-odd operator basis and hadronic matrix-element inputs."

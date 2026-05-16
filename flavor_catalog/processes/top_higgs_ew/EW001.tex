@@ -1,0 +1,87 @@
+% Flavor catalog per-process template.
+% process_id: EW001
+% family: top_higgs_ew
+% owner_agent_id: PKA-EW001
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: EW001.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(S,T,U\) Oblique Electroweak Parameters}{S,T,U Oblique Electroweak Parameters}}
+
+\subsection*{Process}
+This entry covers the Peskin--Takeuchi oblique parameters \(S\), \(T\), and
+\(U\), treated as universal new-physics corrections to electroweak gauge-boson
+self energies.  The process is not flavor changing, but it is part of the
+\texttt{top\_higgs\_ew} family because it is a leading precision bound on
+warped, vector-like, composite, and custodial electroweak sectors.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical values are the PDG 2025 electroweak-review fit in
+\texttt{flavor\_catalog/references/EW001/pdg\_2025\_electroweak\_stu.txt},
+accessed on 2026-05-16.  With \(U=0\), PDG quotes
+\(S=0.026\pm0.075\), \(T=0.047\pm0.066\), and
+\(\rho(S,T)=0.90\).  Letting all three float gives
+\(S=0.021\pm0.096\), \(T=0.04\pm0.12\), and
+\(U=0.008\pm0.092\), with correlations recorded in the sidecar.
+For comparison, the public Gfitter oblique page gives
+\(S=0.05\pm0.11\), \(T=0.09\pm0.13\), and \(U=0.01\pm0.11\).
+The CDF-aware HEPfit/de Blas 2022 study quotes
+\(M_W=80.4335\pm0.0094\,\mathrm{GeV}\); in its standard-average
+\(U=0\) oblique fit, \(S=0.100\pm0.073\) and \(T=0.202\pm0.056\),
+while its floating-\(U\) fit has \(U=0.134\pm0.087\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Bulk RS models generically shift \(S\) through mixing of the SM electroweak
+bosons with KK gauge modes, and shift \(T\) when custodial symmetry is broken
+by gauge, Higgs, or fermion embeddings.  PDG summarizes the warped contribution
+as \(S\simeq 30 v^2/M_{\rm KK}^2\) and quotes \(S\leq0.18\) at 95\%
+probability as implying \(M_{\rm KK}\gtrsim3.2\,\mathrm{TeV}\).  These bounds
+are orthogonal to the catalog's \(\Delta F=2\) constraints, but they test the
+same KK spectrum and localization choices before flavor observables are even
+evaluated.
+
+\subsection*{Post-2008 developments}
+Relative to the CFW baseline, arXiv:0804.1954, the important change is not a
+new LEP run but a much more mature global-fit environment: Higgs and top inputs
+are measured directly, full two-loop and selected higher-order SM calculations
+are included, and PDG now presents both \(U=0\) and floating-\(U\) oblique fits.
+The 2022 CDF \(W\)-mass result created a distinct scenario in which \(T\) or
+\(U\) can be pulled positive; the 2025 PDG review treats that impact as a
+global-fit issue rather than replacing the main STU table with the CDF-only
+preference.
+
+\subsection*{Constraint validity and model dependence}
+The STU language is cleanest for heavy, approximately universal new physics
+whose leading effects are vacuum-polarization corrections.  It is less complete
+when vertex corrections, non-universal fermion couplings, light new states, or
+SMEFT flat directions are numerically important.  In RS applications, custodial
+protection, brane kinetic terms, Higgs localization, and vector-like fermion
+embeddings can change the translation from a fitted \(S,T,U\) point to a KK
+mass bound.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO}.  Greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no S/T/U, oblique, EWPO, or W-mass-fit implementation.
+Only generic electroweak constants and VEV comments surfaced, for example
+\texttt{qcd/constants.py:11}, \texttt{qcd/running.py:3},
+\texttt{quarkConstraints/qcd\_running.py:99}, \texttt{yukawa/neutrino.py:14},
+and \texttt{yukawa/charged\_lepton.py:11}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A production constraint would need a new electroweak precision
+likelihood, correlation handling for the PDG/GFitter/HEPfit fit conventions,
+and RS matching from the gauge and fermion KK spectra to vacuum-polarization
+self energies or equivalent SMEFT operators.  This is a new electroweak
+mode/matching calculation, not a reuse of the existing \(\Delta F=2\) basis.
+
+\subsection*{Key references}
+\texttt{pdg\_2025\_electroweak\_stu};
+\texttt{gfitter\_oblique\_parameters};
+\texttt{hepfit\_deblas\_2022\_cdf\_stu};
+\texttt{hepfit\_precision\_ew\_page};
+\texttt{peskin\_takeuchi\_1992\_oblique};
+\texttt{cfw\_2008\_rs\_flavor}.
