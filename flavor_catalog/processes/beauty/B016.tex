@@ -1,0 +1,88 @@
+% Flavor catalog per-process template.
+% process_id: B016
+% family: beauty
+% owner_agent_id: PKA-B016
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B016.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B016: \(B\to K\ell^+\ell^-\) Exclusive Branching Fractions}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(B\to K\ell^+\ell^-\), with \(\ell=e,\mu\).
+This entry covers the exclusive pseudoscalar-kaon \(b\to s\ell^+\ell^-\)
+branching fractions, centered on \(B^+\to K^+\ell^+\ell^-\) and
+\(B^0\to K^0\ell^+\ell^-\).  Lepton-universality ratios are cataloged in
+the companion \(B018\) entry, and vector-kaon angular observables in \(B017\).
+
+\subsection*{PDG / equivalent value(s)}
+The canonical measured values are the HFLAV rare-\(B\) averages from the end
+of December 2025, accessed on 2026-05-16 and snapshotted locally under
+\texttt{flavor\_catalog/references/B016/}.  HFLAV quotes
+\[
+  {\cal B}(B^+\to K^+\ell^+\ell^-)
+  =(5.76\pm0.40)\times10^{-7},
+\]
+and
+\[
+  {\cal B}(B^0\to K^0\ell^+\ell^-)
+  =(3.28\pm0.32)\times10^{-7}.
+\]
+The charged-mode average is source key \texttt{HFLAV2025Dec:BplusToKplusll};
+the neutral-mode average is \texttt{HFLAV2025Dec:B0ToK0ll}.  HFLAV notes that
+treatments of charmonium intermediate components differ among inputs.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This is a \(\Delta B=1\) flavor-changing neutral-current probe of the same
+down-sector flavor structure that appears in \(B_s\) mixing, but it tests
+semileptonic and dipole operators rather than four-quark \(\Delta F=2\)
+operators.  In warped or anarchic-flavor models, flavor-changing \(Z\) or KK
+electroweak-gauge couplings and loop dipoles can feed \(C_7\), \(C_9\),
+\(C_{10}\), and primed semileptonic coefficients.  The branching fractions are
+therefore useful diagnostics of \(b\to s\ell\ell\) structure, while the LFU
+ratios and \(K^*\) angular program carry related but distinct information.
+
+\subsection*{Post-2008 developments}
+Since the arXiv:0804.1954 RS-flavor baseline, this channel moved from sparse
+\(B\)-factory evidence into precision rare-\(B\) phenomenology.  BaBar provided
+early post-baseline \(B\to K^{(*)}\ell^+\ell^-\) asymmetry inputs.  LHCb then
+measured differential \(B\to K^{(*)}\mu^+\mu^-\) branching fractions and
+isospin asymmetries with hadron-collider data, and Belle measured both electron
+and muon \(B\to K\ell\ell\) modes together with \(R_K\).  HFLAV now provides
+current charged and neutral exclusive-\(K\) branching-fraction averages, while
+the separate \(R_K\) updates shifted the clean LFU-anomaly interpretation back
+toward correlated semileptonic-Wilson-coefficient and hadronic-systematics
+questions.
+
+\subsection*{Constraint validity and model dependence}
+The HFLAV branching fractions are measured observables and are appropriate for
+cataloging, but using them as hard RS cuts is model-dependent.  A faithful
+constraint must specify the dilepton \(q^2\) regions, charmonium vetoes,
+form-factor inputs, nonlocal charm treatment, correlations with \(C_7\) from
+\(b\to s\gamma\), and correlations with \(R_K\) and \(B\to K^*\ell\ell\).
+The entry is therefore a semileptonic \(\Delta B=1\) constraint seed, not a
+drop-in replacement for a global \(b\to s\ell\ell\) fit.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The modern phenomenology surface lists only
+\(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) systems at
+\texttt{quarkConstraints/modern/phenomenology.py:23}.  The only live
+lepton-flavor module is \(\mu\to e\gamma\), implemented at
+\texttt{flavorConstraints/muToEGamma.py:75}.  Required greps over the
+implementation directories found no \(B\to K\ell\ell\), \(b\to s\ell\ell\),
+\(C_9\), \(C_{10}\), or \(R_K\) backend.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Integration would require a new \(\Delta B=1\) semileptonic
+Hamiltonian, matching to \(C_7,C_9,C_{10}\) and primed operators, \(q^2\)-bin
+handling, form factors, nonlocal-charm uncertainties, and experimental
+covariance support.  The existing \(\Delta F=2\) basis is not enough.
+
+\subsection*{Key references}
+Process-local snapshots: \texttt{HFLAV2025Dec:BplusToKplusll},
+\texttt{HFLAV2025Dec:B0ToK0ll}, \texttt{Belle2021:BtoKllLFU},
+\texttt{LHCb2014:BtoKmumuDifferential},
+\texttt{BaBar2009:BtoKllAsymmetries}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

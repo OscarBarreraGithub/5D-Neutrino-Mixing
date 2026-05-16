@@ -1,0 +1,84 @@
+schema: flavor_catalog.process.v1
+process_id: B016
+family: beauty
+standard_notation: "B -> K ell+ ell-"
+process_name: "Exclusive B -> K ell+ ell- branching fractions"
+owner: "PKA"
+owner_agent_id: "PKA-B016"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T15:30:06-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T15:30:06-04:00"
+    agent_id: "PKA-B016"
+    reason: "initial PKA draft deposit for B016 exclusive B -> K ell ell"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T15:30:06-04:00"
+version: "0.1.0"
+source_shas:
+  babar_0807_4119_BtoKll.txt: "sha256:9befb573f3193d7cb5f584c576f0d3a7da3691d65f59b5ff1316ff6cd126dc8e"
+  belle_1908_01848_BtoKll.txt: "sha256:608ac260e3a8236c33bd0a84a8454cefcede514cf5e383d6b9cbdf8f9ec9b430"
+  cfw_0804_1954_rs_flavor.txt: "sha256:1f8556acd6364a95e74cc559b1f18cba952982a50d9366d22f6d7f23714fa8a9"
+  hflav_dec2025_B0_to_K0_ll.txt: "sha256:44551ba39055e7a12e74a5c97de51e8ef651139a515a17bf4becbc6b45c41281"
+  hflav_dec2025_Bplus_to_Kplus_ll.txt: "sha256:d57204eb4634e0ad43be577e1efc1ed874cdd586452f7b0b796c210191c6da25"
+  lhcb_1403_8044_BtoKmumu.txt: "sha256:9edc39b83c07966d83264dfec5866a8e68856a6dafd943747352ed84013e7611"
+pdg_or_equivalent:
+  source: "HFLAV rare B decays End of December 2025"
+  access_date: "2026-05-16"
+  year: 2025
+  value_summary: "HFLAV averages: BR(B+ -> K+ ell+ ell-) = (5.76 +/- 0.40)e-7 and BR(B0 -> K0 ell+ ell-) = (3.28 +/- 0.32)e-7."
+  observables:
+    - name: "BR(B+ -> K+ ell+ ell-)"
+      value: "5.76"
+      uncertainty: "+/- 0.40"
+      units: "10^-7"
+      source_key: "HFLAV2025Dec:BplusToKplusll"
+      source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_l+_l-.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B016/hflav_dec2025_Bplus_to_Kplus_ll.txt"
+      sha256_of_text_snapshot: "sha256:d57204eb4634e0ad43be577e1efc1ed874cdd586452f7b0b796c210191c6da25"
+      note: "HFLAV average; HFLAV notes differing treatment of charmonium intermediate components."
+    - name: "BR(B0 -> K0 ell+ ell-)"
+      value: "3.28"
+      uncertainty: "+/- 0.32"
+      units: "10^-7"
+      source_key: "HFLAV2025Dec:B0ToK0ll"
+      source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bd/BR_B0_K0_l+_l-.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B016/hflav_dec2025_B0_to_K0_ll.txt"
+      sha256_of_text_snapshot: "sha256:44551ba39055e7a12e74a5c97de51e8ef651139a515a17bf4becbc6b45c41281"
+      note: "HFLAV average; the LHCb input is muon-only and HFLAV notes differing charmonium treatment."
+paper_era_reference:
+  key: "CsakiFalkowskiWeiler2008:CompositeFlavor"
+  arxiv_id: "0804.1954"
+  snapshot_path: "flavor_catalog/references/B016/cfw_0804_1954_rs_flavor.txt"
+auxiliary_sources:
+  - key: "Belle2021:BtoKllLFU"
+    role: "primary Belle B -> K e e and mu mu measurement entering HFLAV context"
+    snapshot_path: "flavor_catalog/references/B016/belle_1908_01848_BtoKll.txt"
+  - key: "LHCb2014:BtoKmumuDifferential"
+    role: "primary LHCb B -> K mu mu differential branching-fraction and isospin measurement"
+    snapshot_path: "flavor_catalog/references/B016/lhcb_1403_8044_BtoKmumu.txt"
+  - key: "BaBar2009:BtoKllAsymmetries"
+    role: "older BaBar input appearing in HFLAV charged and neutral B -> K ell ell tables"
+    snapshot_path: "flavor_catalog/references/B016/babar_0807_4119_BtoKll.txt"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems."
+    - "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no rare B semileptonic backend is present in flavorConstraints."
+    - "Required greps over quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, and tests found Delta F = 2 and mu -> e gamma support, but no B -> K ell ell, b -> s ell ell, C9, C10, or R_K implementation."
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n -e 'B_to_K' -e 'BtoK' -e 'B -> K' -e 'B\\\\s*to\\\\s*K' -e 'b.?->.?s.?ell' -e 'C9' -e 'C10' -e 'R_K' -e 'Bplus' -e 'Kplus' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_notes: "Requires a new Delta B = 1 semileptonic weak Hamiltonian, matching onto C7/C9/C10 and primed operators, q^2-bin treatment, form factors, nonlocal charm handling, and experimental covariance support."
+open_issues: []

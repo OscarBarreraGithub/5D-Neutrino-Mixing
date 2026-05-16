@@ -1,0 +1,65 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B016
+generated_at: "2026-05-16T15:30:06-04:00"
+license_policy: "Minimal text snapshots only; no publisher PDFs tracked."
+sources:
+  - key: HFLAV2025Dec:BplusToKplusll
+    arxiv_id: null
+    DOI: null
+    title: "B+ -> K+ ell+ ell- HFLAV rare-decay average"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_l+_l-.html"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:d57204eb4634e0ad43be577e1efc1ed874cdd586452f7b0b796c210191c6da25"
+    snapshot_path: "flavor_catalog/references/B016/hflav_dec2025_Bplus_to_Kplus_ll.txt"
+  - key: HFLAV2025Dec:B0ToK0ll
+    arxiv_id: null
+    DOI: null
+    title: "B0 -> K0 ell+ ell- HFLAV rare-decay average"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bd/BR_B0_K0_l+_l-.html"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:44551ba39055e7a12e74a5c97de51e8ef651139a515a17bf4becbc6b45c41281"
+    snapshot_path: "flavor_catalog/references/B016/hflav_dec2025_B0_to_K0_ll.txt"
+  - key: Belle2021:BtoKllLFU
+    arxiv_id: "1908.01848"
+    DOI: "10.1007/JHEP03(2021)105"
+    title: "Test of lepton flavor universality and search for lepton flavor violation in B -> K l l decays"
+    authors: "Belle Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/1908.01848"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:608ac260e3a8236c33bd0a84a8454cefcede514cf5e383d6b9cbdf8f9ec9b430"
+    snapshot_path: "flavor_catalog/references/B016/belle_1908_01848_BtoKll.txt"
+  - key: LHCb2014:BtoKmumuDifferential
+    arxiv_id: "1403.8044"
+    DOI: "10.1007/JHEP06(2014)133"
+    title: "Differential branching fractions and isospin asymmetries of B -> K(*) mu+ mu- decays"
+    authors: "LHCb Collaboration"
+    year: 2014
+    url: "https://arxiv.org/abs/1403.8044"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:9edc39b83c07966d83264dfec5866a8e68856a6dafd943747352ed84013e7611"
+    snapshot_path: "flavor_catalog/references/B016/lhcb_1403_8044_BtoKmumu.txt"
+  - key: BaBar2009:BtoKllAsymmetries
+    arxiv_id: "0807.4119"
+    DOI: "10.1103/PhysRevLett.102.091803"
+    title: "Direct CP, Lepton Flavor and Isospin Asymmetries in the Decays B -> K(*) l+ l-"
+    authors: "BABAR Collaboration"
+    year: 2009
+    url: "https://arxiv.org/abs/0807.4119"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:9befb573f3193d7cb5f584c576f0d3a7da3691d65f59b5ff1316ff6cd126dc8e"
+    snapshot_path: "flavor_catalog/references/B016/babar_0807_4119_BtoKll.txt"
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:1f8556acd6364a95e74cc559b1f18cba952982a50d9366d22f6d7f23714fa8a9"
+    snapshot_path: "flavor_catalog/references/B016/cfw_0804_1954_rs_flavor.txt"
