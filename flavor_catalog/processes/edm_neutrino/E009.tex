@@ -18,20 +18,21 @@ covers EDM constraints on the flavor-diagonal Weinberg three-gluon operator,
 not the lepton-number Weinberg operator for neutrino masses.
 
 \subsection*{PDG / equivalent value(s)}
-There is no directly measured PDG value for \(w\).  The measured anchor is the
-PDG Live 2026 neutron EDM limit
+There is no directly measured PDG value for \(w\).  The experimental anchor is
+the PDG Live 2026 neutron EDM limit (\texttt{PDG2026:NeutronEDM})
 \[
   |d_n| < 1.8\times 10^{-26}\ e\,\mathrm{cm}\quad(90\%~\mathrm{CL}),
 \]
-based on Abel et al. 2020, with
+based on Abel et al. 2020 (\texttt{Abel:NeutronEDM2020}), with
 \[
   d_n=(0.0\pm1.1_{\rm stat}\pm0.2_{\rm sys})\times10^{-26}\ e\,\mathrm{cm}.
 \]
 The local snapshots are
 \texttt{flavor\_catalog/references/E009/pdg2026\_neutron\_edm\_datablock.txt}
-and \texttt{flavor\_catalog/references/E009/abel2020\_neutron\_edm\_arxiv2001\_11966.txt}.
-Theoretical normalizations and one-source-at-a-time Wilson-coefficient bounds
-are recorded only in the YAML auxiliary blocks.
+and
+\texttt{flavor\_catalog/references/E009/abel2020\_neutron\_edm\_arxiv2001\_11966.txt}.
+The sidecar records the convention-dependent Wilson-coefficient translations
+as auxiliary theory inputs rather than as PDG observables.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 Anarchic warped or partial-compositeness models carry new CP phases in the
@@ -41,21 +42,26 @@ contributions to the Weinberg operator.  The operator is therefore a compact
 EDM-adjacent diagnostic of colored CP violation that complements E008.
 
 \subsection*{Post-2008 developments}
-Relative to the arXiv:0804.1954 RS-flavor baseline, the experimental neutron
-anchor moved to the Abel 2020/PDG 2026 limit above.  Composite/warped dipole
-analyses after 2008 emphasized that heavy-quark CEDM running generates a
-finite threshold correction to the three-gluon Weinberg operator
-(\texttt{KoenigNeubertStraub:CompositeDipoles2014}).  The standard
-Pospelov--Ritz paper-era estimate gives
-\(|d_n(w)|\simeq e\,22~\mathrm{MeV}\,w(1~\mathrm{GeV})\), which implies the
-central benchmark \(|w(1~\mathrm{GeV})|<4.1\times10^{-11}\ \mathrm{GeV}^{-2}\)
-from the current neutron limit if all other CP-odd sources vanish.  A later
-sum-rule update gives, in its own \(O_6\) convention,
+Relative to the CFW 2008 RS-flavor baseline
+(\texttt{CsakiFalkowskiWeiler:RSFlavor2008}), the neutron anchor is now the
+Abel 2020 result adopted by PDG Live 2026
+(\texttt{Abel:NeutronEDM2020}; \texttt{PDG2026:NeutronEDM}).  Composite and
+warped dipole analyses after 2008 emphasized that heavy-quark CEDM running
+generates a finite threshold correction to the three-gluon Weinberg operator
+(\texttt{KoenigNeubertStraub:CompositeDipoles2014}).  In the Pospelov--Ritz
+normalization,
+\(|d_n(w)|\simeq e\,22~\mathrm{MeV}\,w(1~\mathrm{GeV})\), which gives the
+central one-source benchmark
+\(|w(1~\mathrm{GeV})|<4.1\times10^{-11}\ \mathrm{GeV}^{-2}\) from the current
+neutron limit when other CP-odd sources are set to zero
+(\texttt{PospelovRitz:EDMReview2005}; \texttt{PDG2026:NeutronEDM}).  Haisch
+and Hala 2019 quote, in their \(O_6\) convention,
 \((d_n/e)_{O_6}=74(1\pm0.5)~\mathrm{MeV}\), corresponding to the central
 benchmark \(|C_6|<1.2\times10^{-11}\ \mathrm{GeV}^{-2}\)
-(\texttt{HaischHala:WeinbergSumRules2019}).  Lattice work using gradient flow
-now explicitly studies the dimension-six gluonic CP-violating matrix element
-and its operator mixing (\texttt{Bhattacharya:WeinbergLattice2022}).
+(\texttt{HaischHala:WeinbergSumRules2019}; \texttt{PDG2026:NeutronEDM}).
+Lattice work using gradient flow now studies the dimension-six gluonic
+CP-violating matrix element and its operator mixing
+(\texttt{Bhattacharya:WeinbergLattice2022}).
 
 \subsection*{Constraint validity and model dependence}
 The neutron EDM limit is robust.  The Weinberg-operator bound is not: it
@@ -70,7 +76,8 @@ probe more CP-odd sources than there are independent low-energy observables.
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/} found no Weinberg, neutron-EDM, or CP-odd gluonic operator
-constraint.  The only nearby dipole implementation is unrelated
+constraint.  As recorded in the sidecar code-coverage block, the only nearby
+dipole implementation is the unrelated
 \(\mu\to e\gamma\) code in \texttt{flavorConstraints/muToEGamma.py:3},
 \texttt{:21}, and \texttt{:81}.
 
@@ -81,7 +88,7 @@ and a chosen hadronic matrix-element convention.  The existing \(\Delta F=2\)
 basis and muon LFV dipole path do not cover this observable.
 
 \subsection*{Key references}
-Process-local keys before bibliography consolidation:
+Process-local source keys before bibliography consolidation:
 \texttt{PDG2026:NeutronEDM}, \texttt{Abel:NeutronEDM2020},
 \texttt{Weinberg:ThreeGluon1989}, \texttt{PospelovRitz:EDMReview2005},
 \texttt{ChuppRamseyMusolf:EDMGlobal2014},
