@@ -45,9 +45,19 @@ status_history:
     batch_id: "wa_w5a_top_higgs_ew_v2"
     cycle: 2
     reason: "Cycle-2 writer rework: mirrored CA-flagged SM and CFW numerical context claims into pdg_or_equivalent.values with complete metadata."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T15:33:52-04:00"
+    timestamp: "2026-05-16T15:33:52-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w5a_top_higgs_ew_v2"
+    cycle: 2
+    reason: "Cycle-2 checker re-check passed CHK-1 through CHK-8 after WA-v2 metadata updates."
+checker_passed_at: "2026-05-16T15:33:52-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:14:09-04:00"
+last_updated_at: "2026-05-16T15:33:52-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_tug_tcg.txt: "sha256:b58775f55944dad73ff185214195fd4d245431cb400e9f63bf6fcf35b490446a"
