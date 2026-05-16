@@ -1,0 +1,29 @@
+Source: PDG pdgLive minimal text snapshot
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.15
+Accessed: 2026-05-16
+Edition: 2026
+PDG listing: S012.15
+PDG data block: S012R16
+Description: K0S --> pi0 mu+ mu-
+Observable: G(K0S --> pi0 mu+ mu-) / G(total)
+
+Relevant PDG extraction:
+The 2026 pdgLive listing gives
+  B(K0S --> pi0 mu+ mu-) =
+  (2.9 +1.5 -1.2 stat +/- 0.2 syst) x 10^-9.
+
+The used measurement is:
+  BATLEY 2004A, NA48/1, PL B599 197,
+  DOI 10.1016/j.physletb.2004.08.058,
+  title "Observation of the Rare Decay K0S --> pi0 mu+ mu-".
+
+PDG records six observed events and notes that the background estimate was
+0.22 +0.18 -0.11 events.  The branching ratio assumes a vector matrix element
+and unit form factor.
+
+Use in K009 catalog:
+This is not the canonical K009 measured upper limit.  It is a supporting
+experimental input for the indirect-CP-violating component of
+K_L -> pi0 mu+ mu-.
+
+License note: minimal PDG API text snapshot only; no PDG PDF tracked.

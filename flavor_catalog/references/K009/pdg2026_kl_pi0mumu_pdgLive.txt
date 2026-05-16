@@ -1,0 +1,29 @@
+Source: PDG pdgLive minimal text snapshot
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S013.16
+Accessed: 2026-05-16
+Edition: 2026
+PDG listing: S013.16
+PDG data block: S013R30
+Description: K0L --> pi0 mu+ mu-
+Observable: G(K0L --> pi0 mu+ mu-) / G(total)
+
+Relevant PDG extraction:
+The 2026 pdgLive listing gives an upper limit
+  B(K0L --> pi0 mu+ mu-) < 0.38 x 10^-9
+at 90% confidence level, i.e.
+  B(K_L -> pi0 mu+ mu-) < 3.8 x 10^-10 (90% CL).
+
+The used measurement is:
+  ALAVI-HARATI 2000D, KTeV, PRL 84 5279,
+  DOI 10.1103/PhysRevLett.84.5279,
+  title "Search for the Decay K0L --> pi0 mu+ mu-".
+
+PDG note for this mode:
+  Violates CP in leading order. Test for DeltaS = 1 weak neutral current.
+  Allowed by higher-order electroweak interaction.
+
+Older non-averaged limit also listed:
+  HARRIS 1993, E799, PRL 71 3914,
+  B(K0L --> pi0 mu+ mu-) < 5.1 x 10^-9 (90% CL).
+
+License note: minimal PDG API text snapshot only; no PDG PDF tracked.

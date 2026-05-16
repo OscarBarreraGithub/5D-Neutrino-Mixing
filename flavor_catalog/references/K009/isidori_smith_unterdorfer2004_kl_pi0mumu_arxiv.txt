@@ -1,0 +1,40 @@
+Source: arXiv source-text extraction
+URL: https://arxiv.org/abs/hep-ph/0404127
+Accessed: 2026-05-16
+arXiv: hep-ph/0404127
+Published as: Eur. Phys. J. C 36, 57-66 (2004)
+DOI: 10.1140/epjc/s2004-01879-0
+Title: The rare decay KL -> pi0 mu+ mu- within the SM
+Authors: Gino Isidori, Christopher Smith, Rene Unterdorfer
+
+Relevant extraction:
+The paper writes
+  B(K_L -> pi0 l+ l-) =
+  [C_mix^l +/- C_int^l (Im lambda_t / 10^-4)
+   + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.
+
+For the muon mode, the quoted coefficients are:
+  C_mix^mu = (3.7 +/- 0.1) |a_S|^2
+  C_int^mu = (1.6 +/- 0.1) |a_S|
+  C_dir^mu = 1.0 +/- 0.1
+  C_CPC^mu = 5.2 +/- 1.6
+
+The same section gives:
+  |a_S| = 1.2 +/- 0.2
+  (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12.
+
+For positive interference the SM prediction is
+  B(K_L -> pi0 mu+ mu-)_SM = (1.5 +/- 0.3) x 10^-11.
+The negative-interference solution is listed as about
+  (1.0 +/- 0.2) x 10^-11.
+
+The CP-conserving two-photon estimate uses
+  R_gammagamma(l = mu) = (3.7 +/- 1.7) x 10^-6
+and gives
+  B(K_L -> pi0 mu+ mu-)_CPC^{0++} = (5.2 +/- 1.6) x 10^-12.
+
+Use in K009 catalog:
+These are theory-decomposition and paper-era reference values, not
+pdg_or_equivalent measured observables.
+
+License note: arXiv text extraction only; no publisher PDF tracked.

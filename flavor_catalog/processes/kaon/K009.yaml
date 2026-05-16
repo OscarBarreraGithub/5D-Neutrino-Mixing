@@ -1,0 +1,131 @@
+schema: flavor_catalog.process.v1
+process_id: K009
+family: kaon
+standard_notation: "K_L -> pi0 mu+ mu-"
+process_name: "Long-lived neutral-kaon rare semileptonic muon mode"
+owner: "PKA"
+owner_agent_id: "PKA-K009"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:29:14-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:29:14-04:00"
+    agent_id: "PKA-K009"
+    reason: "initial PKA source extraction and draft"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:29:14-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_kl_pi0mumu_pdgLive.txt: "sha256:c4ebbf6334bac98ec7396446dcec9e020c25cdcd5f17b7b7f09f446f5d3b47e1"
+  ktev2000_kl_pi0mumu_arxiv.txt: "sha256:0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589"
+  na48_ks_pi0mumu_pdgLive.txt: "sha256:21f62a4394611f7c8fc16d03f30112fce98f9ca790469b3298473af92919ff6f"
+  na48_ks_pi0mumu_arxiv.txt: "sha256:0cee82c75bacb10391d8212179c9622b1e89f66735889b8cc5b1ba0773d137e6"
+  isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt: "sha256:9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3"
+  cfw2008_rs_flavor_arxiv.txt: "sha256:006d54877ceb8bf7eb6092dc6abdf5a5624060b4db7125f01b58f0d4b04d6ab2"
+  christ_feng_juettner_lawson_portelli_sachrajda2016_lattice_arxiv.txt: "sha256:a67f81a2a05b123e7a15cf4d56a165f7f6814a00f798e5c5ad242396b86dc6c7"
+  aebischer_buras_kumar2022_rare_kaon_arxiv.txt: "sha256:20ea8da2e2566502928b32d9fd928f4b33601c9252f14b880332239b88744387"
+pdg_or_equivalent:
+  year: 2026
+  observable: "BR(K_L -> pi0 mu+ mu-)"
+  value: "<3.8e-10"
+  uncertainty: null
+  units: "branching fraction"
+  confidence_level: "90%"
+  source: "Particle Data Group 2026 pdgLive listing S013.16 / S013R30"
+  source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S013.16"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/K009/pdg2026_kl_pi0mumu_pdgLive.txt"
+  sha256_of_text_snapshot: "c4ebbf6334bac98ec7396446dcec9e020c25cdcd5f17b7b7f09f446f5d3b47e1"
+supporting_experimental_values:
+  - observable: "KTeV 1997-data observed candidates for K_L -> pi0 mu+ mu-"
+    year: 2000
+    value: "2"
+    units: "events"
+    source_url: "https://arxiv.org/abs/hep-ex/0001006"
+    snapshot_path: "flavor_catalog/references/K009/ktev2000_kl_pi0mumu_arxiv.txt"
+    sha256_of_text_snapshot: "0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589"
+  - observable: "KTeV 1997-data expected background for K_L -> pi0 mu+ mu-"
+    year: 2000
+    value: "0.87"
+    uncertainty: "0.15"
+    units: "events"
+    source_url: "https://arxiv.org/abs/hep-ex/0001006"
+    snapshot_path: "flavor_catalog/references/K009/ktev2000_kl_pi0mumu_arxiv.txt"
+    sha256_of_text_snapshot: "0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589"
+  - observable: "BR(K_S -> pi0 mu+ mu-) supporting indirect-CP input"
+    year: 2026
+    value: "2.9e-9"
+    uncertainty: "+1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst"
+    units: "branching fraction"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.15"
+    snapshot_path: "flavor_catalog/references/K009/na48_ks_pi0mumu_pdgLive.txt"
+    sha256_of_text_snapshot: "21f62a4394611f7c8fc16d03f30112fce98f9ca790469b3298473af92919ff6f"
+  - observable: "NA48 observed K_S -> pi0 mu+ mu- candidates"
+    year: 2004
+    value: "6"
+    units: "events"
+    source_url: "https://arxiv.org/abs/hep-ex/0409011"
+    snapshot_path: "flavor_catalog/references/K009/na48_ks_pi0mumu_arxiv.txt"
+    sha256_of_text_snapshot: "0cee82c75bacb10391d8212179c9622b1e89f66735889b8cc5b1ba0773d137e6"
+  - observable: "NA48 expected background for K_S -> pi0 mu+ mu-"
+    year: 2004
+    value: "0.22"
+    uncertainty: "+0.18 -0.11"
+    units: "events"
+    source_url: "https://arxiv.org/abs/hep-ex/0409011"
+    snapshot_path: "flavor_catalog/references/K009/na48_ks_pi0mumu_arxiv.txt"
+    sha256_of_text_snapshot: "0cee82c75bacb10391d8212179c9622b1e89f66735889b8cc5b1ba0773d137e6"
+theory_decomposition:
+  source_type: "paper_era_reference; not a pdg_or_equivalent measured observable"
+  source: "Isidori, Smith, Unterdorfer, Eur. Phys. J. C 36 (2004) 57"
+  source_url: "https://arxiv.org/abs/hep-ph/0404127"
+  snapshot_path: "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt"
+  sha256_of_text_snapshot: "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3"
+  formula: "BR(K_L -> pi0 l+ l-) = [C_mix^l +/- C_int^l (Im lambda_t/1e-4) + C_dir^l (Im lambda_t/1e-4)^2 + C_CPC^l] x 1e-12"
+  muon_coefficients:
+    C_mix_mu: "(3.7 +/- 0.1) |a_S|^2"
+    C_int_mu: "(1.6 +/- 0.1) |a_S|"
+    C_dir_mu: "1.0 +/- 0.1"
+    C_CPC_mu: "5.2 +/- 1.6"
+    a_S_abs: "1.2 +/- 0.2"
+    Im_lambda_t_over_1e_minus4_SM: "1.36 +/- 0.12"
+    SM_constructive_interference: "(1.5 +/- 0.3) x 10^-11"
+    SM_destructive_interference: "(1.0 +/- 0.2) x 10^-11"
+    R_gammagamma_mu: "(3.7 +/- 1.7) x 10^-6"
+paper_era_references:
+  - key: "CFW2008:RSFlavor"
+    relation: "RS/anarchic-flavor baseline requested for post-2008 comparison; not a K009 measured value."
+    source_url: "https://arxiv.org/abs/0804.1954"
+    snapshot_path: "flavor_catalog/references/K009/cfw2008_rs_flavor_arxiv.txt"
+    sha256_of_text_snapshot: "006d54877ceb8bf7eb6092dc6abdf5a5624060b4db7125f01b58f0d4b04d6ab2"
+post_2008_developments:
+  - key: "ChristEtAl2016:KPiLLLattice"
+    relation: "Exploratory lattice-QCD method for long-distance K -> pi l+ l- amplitudes."
+    source_url: "https://arxiv.org/abs/1608.07585"
+    snapshot_path: "flavor_catalog/references/K009/christ_feng_juettner_lawson_portelli_sachrajda2016_lattice_arxiv.txt"
+    sha256_of_text_snapshot: "a67f81a2a05b123e7a15cf4d56a165f7f6814a00f798e5c5ad242396b86dc6c7"
+  - key: "AebischerBurasKumar2022:RareKaons"
+    relation: "Snowmass rare-kaon white paper emphasizing K_{L,S} -> pi0 l+ l- branching ratios and spectra."
+    source_url: "https://arxiv.org/abs/2203.09524"
+    snapshot_path: "flavor_catalog/references/K009/aebischer_buras_kumar2022_rare_kaon_arxiv.txt"
+    sha256_of_text_snapshot: "20ea8da2e2566502928b32d9fd928f4b33601c9252f14b880332239b88744387"
+code_coverage:
+  status: "NO"
+  grep_commands:
+    - "rg -n -F -e 'K0L --> pi0 mu+ mu-' -e 'K_L -> pi0 mu' -e 'K_L \\\\to \\\\pi^0\\\\mu' -e 'pi0 mu+ mu-' -e 'S013R30' -e 'S013.16' -e 'S012R16' -e 'a_S' -e 'C_mix' -e 's -> d mu' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+  result: "No K_L -> pi0 mu+ mu-, K_S -> pi0 mu+ mu-, a_S, or s -> d mu+mu- implementation found in the requested code directories."
+  nearest_existing_coverage:
+    - "quarkConstraints/deltaf2.py:209: DEFAULT_DELTA_F2_INPUTS_V1 starts the existing Delta F=2 observable list."
+    - "quarkConstraints/modern/phenomenology.py:23: MODERN_PHENOMENOLOGY_SYSTEM_IDS = (\"epsilon_K\", \"K\", \"B_d\", \"B_s\", \"D0\")"
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Requires a new Delta S = 1 semileptonic rare-kaon observable, short-distance s -> d mu+mu- matching, indirect/direct CP separation with interference, and long-distance two-photon/CPC inputs. Existing Delta F=2 SLL/SLR/VLL/VRR/LR machinery does not cover this mode."
+open_issues:
+  - "Checker should re-query PDG S013.16 before freeze in case a post-snapshot 2026 listing update changes the limit."
+  - "K011 should carry K_S -> pi0 mu+ mu- as its own canonical measured process; K009 uses it only as supporting indirect-CP input."
