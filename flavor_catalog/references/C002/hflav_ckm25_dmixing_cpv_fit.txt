@@ -1,0 +1,35 @@
+Source snapshot for C002: HFLAV CKM25 D0-D0bar mixing CPV global fit
+Accessed: 2026-05-16
+URL: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html
+Linked table URL: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/figures/table_results.pdf
+License note: HFLAV plots and tables are distributed as CC BY 4.0.
+
+Context extracted from the HFLAV page:
+- Global Fit for D0-D0bar Mixing and CP Violation.
+- Version through 14 September 2025.
+- The mass eigenstates are D1 = p|D0> + q|D0bar> and
+  D2 = p|D0> - q|D0bar> in the HFLAV convention.
+- phi is defined as Arg(q/p).
+- x = (m2 - m1)/Gamma and y = (Gamma2 - Gamma1)/(2 Gamma).
+- There are two equivalent parameter sets: x, y, |q/p|, Arg(q/p) = phi;
+  and x12, y12, Arg(M12) = phiM, Arg(Gamma12) = phiGamma.
+- HFLAV states that the latter two parameters in either set govern indirect
+  CP violation.
+- The all-CPV fit uses 63 experimental inputs.
+
+Selected table_results.pdf text, extracted only for the C002 observables:
+
+Parameter                           No indirect CPV     No subleading amplitudes     All CPV       95% C.L. interval in All CPV
+|q/p|                               1                   1.002 +/- 0.005              0.983 +0.015/-0.014 [0.955, 1.012]
+phi (degrees)                       0                   -0.08 +/- 0.19               -1.51 +1.03/-1.06 [-3.63, 0.51]
+phiM (degrees)                      0                   -0.78 +1.60/-1.63            -0.03 +0.70/-0.71 [-1.48, 1.35]
+phiGamma (degrees)                  0                   0                            2.03 +1.54/-1.52 [-0.94, 5.08]
+chi2/d.o.f.                         72.817/(63-7)       72.797/(63-8)                70.711/(63-10)
+
+Additional HFLAV page test:
+- No indirect CP violation point (|q/p|, phi) = (1,0):
+  Delta chi2 = 2.16, consistent with CP conservation at 0.95 sigma.
+
+Catalog use:
+This is the canonical HFLAV equivalent value for C002. The all-CPV fit values
+for |q/p| and phi_D are the values quoted in the C002 process draft.

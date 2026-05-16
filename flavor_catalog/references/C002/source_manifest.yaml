@@ -1,0 +1,54 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: C002
+generated_at: "2026-05-16T13:16:18-04:00"
+references:
+  - key: hflav_ckm25_dmixing_cpv_fit
+    arxiv_id: null
+    DOI: null
+    title: "Global Fit for D0-D0bar Mixing and CP Violation"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    snapshot_path: "flavor_catalog/references/C002/hflav_ckm25_dmixing_cpv_fit.txt"
+    sha256_of_local_snapshot: "sha256:5908d28e0388a717ba62bc4b73e74494cc0ec39404ee14834a7a4a084723977e"
+    notes: "Canonical HFLAV CKM25 all-CPV fit values for |q/p| and phi_D, plus the no-indirect-CPV test."
+  - key: pdg2025_dmixing_review_cpv
+    arxiv_id: null
+    DOI: null
+    title: "D0-D0bar Mixing review, CPV excerpt from Table 70.7"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-d-dbar-mixing.pdf"
+    snapshot_path: "flavor_catalog/references/C002/pdg2025_dmixing_review_cpv.txt"
+    sha256_of_local_snapshot: "sha256:4ffedbd5dcda34e993c18a92430b94ef00c51f43f75cc860812f711a4caefaa2"
+    notes: "Minimal text excerpt only; no PDG PDF is tracked. Cross-checks the HFLAV C002 values."
+  - key: lhcb2023_arxiv2208_06512
+    arxiv_id: "2208.06512"
+    DOI: "10.1103/PhysRevD.108.052005"
+    title: "Model-independent measurement of charm mixing parameters in Bbar -> D0(-> K_S^0 pi+ pi-) mu- nu_bar_mu X decays"
+    authors: "LHCb Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2208.06512"
+    snapshot_path: "flavor_catalog/references/C002/lhcb2023_arxiv2208_06512.txt"
+    sha256_of_local_snapshot: "sha256:e15d0e0fa852d2ec30d0b5e172d81495ecab0156a65b2172605256e323f9375d"
+    notes: "Post-2008 CPV-sensitive charm-mixing input used by the HFLAV global fit."
+  - key: belle_belleii2025_arxiv2410_22961
+    arxiv_id: "2410.22961"
+    DOI: "10.1103/7p5s-f9qp"
+    title: "Model-independent measurement of D0-D0bar mixing parameters in D0 -> K_S^0 pi+ pi- decays at Belle and Belle II"
+    authors: "Belle and Belle II Collaborations"
+    year: 2025
+    url: "https://arxiv.org/abs/2410.22961"
+    snapshot_path: "flavor_catalog/references/C002/belle_belleii2025_arxiv2410_22961.txt"
+    sha256_of_local_snapshot: "sha256:7b03797e8fda5ca0a4465772838df3aa05c6f84d7750f6a2326429497d578c4e"
+    notes: "Post-2008 neutral-D mixing update; contextual rather than the headline C002 CPV value because the quoted result assumes CP symmetry."
+  - key: cfw2008_arxiv0804_1954
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    snapshot_path: "flavor_catalog/references/C002/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:93a902b9d5c7c00b5f8bcbcd8dca1a94f502b4db2f99d602b835d9df18fc8771"
+    notes: "ArXiv abstract metadata used as the 2008 RS-flavor baseline."

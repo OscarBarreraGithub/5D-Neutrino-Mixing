@@ -1,0 +1,86 @@
+% Flavor catalog process: C002
+% family: charm
+% owner_agent_id: PKA-C002
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: C002.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{C002: CP violation in \(D^0-\bar D^0\) mixing}{C002: CP violation in D0-D0bar mixing}}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(|q/p|\) and \(\phi_D=\arg(q/p)\) in
+neutral-charm mixing.  This entry covers indirect CP violation in
+\(D^0-\bar D^0\) oscillations; the CP-even mixing magnitudes
+\(x_D\), \(y_D\), and \(\Delta m_D\) are cataloged separately in C001.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical values are the HFLAV CKM25 all-CPV global-fit results, version
+through 14 September 2025, accessed on 2026-05-16:
+\[
+  |q/p| = 0.983^{+0.015}_{-0.014},\qquad
+  \phi_D = -1.51^{+1.03}_{-1.06}\ {\rm deg}.
+\]
+The corresponding 95\% C.L. intervals are \(|q/p|\in[0.955,1.012]\) and
+\(\phi_D\in[-3.63,0.51]\) degrees.  HFLAV also reports that the no-indirect-CPV
+point \((|q/p|,\phi)=(1,0)\) has \(\Delta\chi^2=2.16\), consistent with CP
+conservation at \(0.95\sigma\).  These numbers are traced to
+\texttt{flavor\_catalog/references/C002/hflav\_ckm25\_dmixing\_cpv\_fit.txt};
+the PDG 2025 review excerpt in
+\texttt{flavor\_catalog/references/C002/pdg2025\_dmixing\_review\_cpv.txt}
+cross-checks the same central values.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped models generate short-distance \(\Delta C=2\) amplitudes
+through flavor-changing neutral-current exchange.  C002 is the CP-odd
+counterpart of the D-mixing magnitude bound: it tests whether the complex
+phase of a new \(c-u\) mixing amplitude is aligned well enough to avoid
+visible indirect CP violation.  It is especially useful because the repo's
+current D0 lane constrains \(|M_{12}^{D,{\rm NP}}|\), while C002 asks about the
+phase-sensitive part of the same amplitude.
+
+\subsection*{Post-2008 developments}
+The baseline RS-flavor paper arXiv:0804.1954 predates the modern high-statistics
+neutral-charm mixing program.  Since then, LHCb added CPV-sensitive
+model-independent \(D^0\to K_S^0\pi^+\pi^-\) inputs, including the
+post-Run-2 result summarized in
+\texttt{lhcb2023\_arxiv2208\_06512.txt}.  Belle and Belle II have also supplied
+new large-sample model-independent mixing information
+(\texttt{belle\_belleii2025\_arxiv2410\_22961.txt}).  HFLAV now combines these
+inputs in a global fit with explicit \(|q/p|\) and \(\phi_D\) parameters, and
+the current result remains compatible with no indirect CP violation.
+
+\subsection*{Constraint validity and model dependence}
+This is a short-distance-sensitive but global-fit-dependent constraint.  The
+experimental fit is precise enough to bound new CP phases, but the Standard
+Model charm-mixing amplitude is long-distance dominated and difficult to
+calculate.  A safe RS interpretation should therefore constrain the allowed
+new-physics phase conservatively, without subtracting a precise SM prediction.
+
+\subsection*{Code coverage in this repo}
+\textbf{PARTIAL.}  The legacy scan defines a D-mixing input at
+\texttt{quarkConstraints/deltaf2.py:252} and evaluates D0 mixing through
+\texttt{evaluate\_d0\_mixing} at \texttt{quarkConstraints/deltaf2.py:941}, but
+that result uses \(|M_{12}^{\rm NP}|\) and returns only a magnitude ratio.
+The scan exports \texttt{d\_mix\_ratio} at \texttt{quarkConstraints/scan.py:103}
+and \texttt{quarkConstraints/scan.py:439}.  The modern policy labels D0 as
+\texttt{conservative\_non\_cp\_mixing\_amplitude\_hadronic} at
+\texttt{quarkConstraints/modern/phenomenology.py:46}.  A paper-mode helper does
+retain complex \(M_{12}^{D0}\) and exposes \texttt{im\_M12\_D0\_NP\_GeV} at
+\texttt{quarkConstraints/paper\_0710\_1869/eft\_deltaf2/observables.py:1403},
+but there is no exported \(|q/p|\) or \(\phi_D\) evaluator.
+
+\subsection*{Implementation difficulty}
+\textbf{LOW.}  The existing \(\Delta F=2\) operator and RG machinery is the
+right basis for C002, so no new operator class is required.  The missing step is
+a CPV observable wrapper or likelihood policy that maps the complex D0 mixing
+amplitude onto a conservative HFLAV \(|q/p|,\phi_D\) constraint.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{hflav\_ckm25\_dmixing\_cpv\_fit},
+\texttt{pdg2025\_dmixing\_review\_cpv},
+\texttt{lhcb2023\_arxiv2208\_06512},
+\texttt{belle\_belleii2025\_arxiv2410\_22961}, and
+\texttt{cfw2008\_arxiv0804\_1954}.

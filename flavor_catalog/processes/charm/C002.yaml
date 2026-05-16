@@ -1,0 +1,121 @@
+schema: flavor_catalog.process.v1
+process_id: C002
+family: charm
+standard_notation: "|q/p|, \\phi_D in D^0-\\bar{D}^0 mixing"
+process_name: "CP violation in neutral-charm mixing"
+owner: "PKA"
+owner_agent_id: "PKA-C002"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:16:18-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:16:18-04:00"
+    agent_id: "PKA-C002"
+    reason: "Initial PKA source extraction and C002 draft started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T13:16:18-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T13:16:18-04:00"
+    agent_id: "PKA-C002"
+    reason: "PKA draft, minimal source snapshots, sidecar, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:16:18-04:00"
+version: "0.1.0"
+source_shas:
+  belle_belleii2025_arxiv2410_22961.txt: "sha256:7b03797e8fda5ca0a4465772838df3aa05c6f84d7750f6a2326429497d578c4e"
+  cfw2008_arxiv0804_1954.txt: "sha256:93a902b9d5c7c00b5f8bcbcd8dca1a94f502b4db2f99d602b835d9df18fc8771"
+  hflav_ckm25_dmixing_cpv_fit.txt: "sha256:5908d28e0388a717ba62bc4b73e74494cc0ec39404ee14834a7a4a084723977e"
+  lhcb2023_arxiv2208_06512.txt: "sha256:e15d0e0fa852d2ec30d0b5e172d81495ecab0156a65b2172605256e323f9375d"
+  pdg2025_dmixing_review_cpv.txt: "sha256:4ffedbd5dcda34e993c18a92430b94ef00c51f43f75cc860812f711a4caefaa2"
+  source_manifest.yaml: "sha256:ed8cc627f4dc1856943e6881922121e8fbe366ea80b44290d76b70f41091b1e6"
+pdg_or_equivalent:
+  q_over_p:
+    source: "HFLAV CKM25 global fit, all-CPV fit"
+    year: 2025
+    hflav_version: "through 14 September 2025"
+    observable: "|q/p| in D0-D0bar mixing"
+    value: 0.983
+    uncertainty_plus: 0.015
+    uncertainty_minus: 0.014
+    units: "dimensionless"
+    confidence_interval_95_percent: [0.955, 1.012]
+    value_summary: "|q/p| = 0.983 +0.015/-0.014"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C002/hflav_ckm25_dmixing_cpv_fit.txt"
+    sha256_of_local_snapshot: "sha256:5908d28e0388a717ba62bc4b73e74494cc0ec39404ee14834a7a4a084723977e"
+  phi_D:
+    source: "HFLAV CKM25 global fit, all-CPV fit"
+    year: 2025
+    hflav_version: "through 14 September 2025"
+    observable: "phi_D = Arg(q/p) in D0-D0bar mixing"
+    value: -1.51
+    uncertainty_plus: 1.03
+    uncertainty_minus: 1.06
+    units: "degrees"
+    confidence_interval_95_percent: [-3.63, 0.51]
+    value_summary: "phi_D = -1.51 +1.03/-1.06 degrees"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C002/hflav_ckm25_dmixing_cpv_fit.txt"
+    sha256_of_local_snapshot: "sha256:5908d28e0388a717ba62bc4b73e74494cc0ec39404ee14834a7a4a084723977e"
+  no_indirect_cpv_test:
+    source: "HFLAV CKM25 global fit, all-CPV fit"
+    year: 2025
+    hflav_version: "through 14 September 2025"
+    observable: "No indirect CP violation point (|q/p|, phi) = (1,0)"
+    delta_chi2: 2.16
+    significance_sigma: 0.95
+    interpretation: "consistent with CP conservation"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C002/hflav_ckm25_dmixing_cpv_fit.txt"
+    sha256_of_local_snapshot: "sha256:5908d28e0388a717ba62bc4b73e74494cc0ec39404ee14834a7a4a084723977e"
+  pdg_cross_check:
+    source: "PDG 2025 D0-D0bar Mixing review, Table 70.7 excerpt"
+    year: 2025
+    observable: "PDG cross-check of HFLAV |q/p| and phi_D"
+    q_over_p_value_summary: "|q/p| = 0.983 +/- 0.015, 95% C.L. [0.96, 1.01]"
+    phi_D_value_summary: "phi_D = -1.51 +/- 1.04 degrees, 95% C.L. [-3.63, 0.51]"
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-d-dbar-mixing.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C002/pdg2025_dmixing_review_cpv.txt"
+    sha256_of_local_snapshot: "sha256:4ffedbd5dcda34e993c18a92430b94ef00c51f43f75cc860812f711a4caefaa2"
+  cfw2008_context:
+    source: "Csaki, Falkowski, and Weiler, arXiv:0804.1954"
+    year: 2008
+    observable: "Contextual RS-flavor baseline for post-2008 comparison"
+    value_summary: "CFW 2008 predates the current HFLAV, LHCb, Belle, and Belle II neutral-charm CPV inputs."
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C002/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:93a902b9d5c7c00b5f8bcbcd8dca1a94f502b4db2f99d602b835d9df18fc8771"
+code_coverage:
+  status: "PARTIAL"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"q/p|q_over_p|qoverp|phi_D|phiD|Arg\\\\(q/p\\\\)|indirect CP|CPV|CP violation|D0.*CP|D mixing.*CP|imaginary|Im\\\\(|M12|Gamma12\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "quarkConstraints/deltaf2.py:252 defines the legacy D-mixing DeltaF2Input."
+    - "quarkConstraints/deltaf2.py:941 defines evaluate_d0_mixing."
+    - "quarkConstraints/deltaf2.py:948-955 reduces D0 mixing to abs(M12_NP), a budget ratio, and a pass/fail flag."
+    - "quarkConstraints/scan.py:103 exports d_mix_ratio, not a CPV observable."
+    - "quarkConstraints/scan.py:439 records d_mix_ratio from the D-system DeltaF2 result."
+    - "quarkConstraints/modern/phenomenology.py:46 classifies D0 as conservative_non_cp_mixing_amplitude_hadronic."
+    - "quarkConstraints/modern/phenomenology.py:668 defines _evaluate_d0_mixing_from_bridge."
+    - "quarkConstraints/paper_0710_1869/eft_deltaf2/observables.py:1300 stores complex M12_D0_NP_GeV in a paper-mode D0 observable result."
+    - "quarkConstraints/paper_0710_1869/eft_deltaf2/observables.py:1403 exposes im_M12_D0_NP_GeV."
+    - "quarkConstraints/paper_0710_1869/eft_deltaf2/observables.py:1440-1445 serializes M12_D0_NP_GeV, re_M12_D0_NP_GeV, and im_M12_D0_NP_GeV."
+    - "No exported scan or modern-phenomenology path was found for HFLAV |q/p| or phi_D."
+implementation_difficulty: "LOW"
+implementation_difficulty_reason: "The existing Delta F = 2 operator basis and D0 M12 machinery cover the relevant short-distance amplitude; implementation would need a CPV observable wrapper or conservative HFLAV likelihood policy, not a new operator or RG calculation."
+open_issues:
+  - "WA/CA should decide whether C002 should remain a qualitative CPV diagnostic or carry a production likelihood using the HFLAV |q/p|-phi_D contour/covariance."
