@@ -291,3 +291,97 @@ Key references checked: PDG 2024 Vcb/Vub review, arXiv:2411.18639, arXiv:2411.04
 | FLAG 2024 `B -> pi l nu` `\|V_ub\| = 3.61 +/- 0.16` | https://arxiv.org/abs/2411.04268 | Y | FLAG 2024 quotes the `B -> pi l nu` value. |
 | PDG 2024 inclusive-exclusive `\|V_cb\|` marginal consistency = `3.0 sigma` | https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf | Y | PDG review states the inclusive/exclusive `\|V_cb\|` tension is about 3 sigma. |
 
+## Wave-7 follow-up addendum: T003, T004, T008, T012
+
+Date: 2026-05-16T19:27:00-04:00
+Agent: factcheck-codex-top_higgs_ew
+Batch label: wave7_top_higgs_ew
+
+I re-fetched the cited CMS/ATLAS public pages, arXiv abstract/PDF pages, PDG
+pdgLive pages, the PDG 2025 Z-boson PDF, and the local snapshots under
+`flavor_catalog/references/<process_id>/`. ArXiv author/title metadata matched
+the manifests for the key references. Theory-normalization-only rows are marked
+`N/A` under the L001 signoff policy.
+
+| Process | Verdict | Mismatches | Unresolvable | Note |
+|---|---:|---:|---:|---|
+| T003 | VERIFIED | 0 | 0 | CMS/ATLAS/PDG `tqgamma` limits and the quoted SM `t -> c gamma` prediction matched. |
+| T004 | VERIFIED | 0 | 0 | PDG/ATLAS/CMS `t -> u gamma` limits, datasets, and projection context matched. |
+| T008 | VERIFIED | 0 | 0 | PDG/CMS/ATLAS `t -> H u` limits and datasets matched. |
+| T012 | VERIFIED | 0 | 0 | PDG 2025 and LEP/SLC `Z -> c cbar` pole observables matched. |
+
+### T003 - VERIFIED
+
+Key references checked: CMS-TOP-21-013 public page and arXiv:2312.08229,
+arXiv:2205.02537, arXiv:hep-ph/0409342, and arXiv:0804.1954. Titles and
+authors match the manifest records.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| CMS2024:T003:dataset = `138 fb^-1 at sqrt(s) = 13 TeV` | https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html | Y | CMS public page/arXiv abstract states 138 fb^-1 at 13 TeV. |
+| CMS2024:T003:tcgamma = `< 1.51e-5`, expected `< 1.54e-5` | https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html | Y | CMS abstract gives observed(expected) `B(t -> c gamma) < 1.51 (1.54) x 10^-5` at 95% CL. |
+| CMS2024:T003:tugamma = `< 0.95e-5`, expected `< 1.20e-5` | https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html | Y | Same CMS source gives `B(t -> u gamma) < 0.95 (1.20) x 10^-5`. |
+| ATLAS2023:T003:dataset = `139 fb^-1 at sqrt(s) = 13 TeV` | https://arxiv.org/abs/2205.02537 | Y | ATLAS abstract states 139 fb^-1 at 13 TeV. |
+| ATLAS2023:T003:tcgamma_left = `< 4.2e-5` | https://arxiv.org/abs/2205.02537 | Y | ATLAS abstract gives the left-handed `t -> c gamma` limit as `4.2 x 10^-5`. |
+| ATLAS2023:T003:tcgamma_right = `< 4.5e-5` | https://arxiv.org/abs/2205.02537 | Y | ATLAS abstract gives the right-handed `t -> c gamma` limit as `4.5 x 10^-5`. |
+| PDG2026:T003:gammaq_summary = `< 9.5e-6` | https://pdgprod.lbl.gov/pdgprod/pdgLive/Particle.action?home=&node=Q007 | Y | pdgLive top listing gives `t -> gamma q (q = u,c) < 9.5 x 10^-6` at 95% CL; footnote confirms the ratio is to `Gamma(t -> Wb)`. |
+| AguilarSaavedra2004:T003:SM = `4.6e-14` | https://arxiv.org/abs/hep-ph/0409342 | Y | Fetched PDF gives `Br(t -> c gamma) = 4.6 x 10^-14` with the quoted uncertainty components. |
+| AguilarSaavedra2004:T003:dipole_normalization = `0.428 * lambda_qt^2` | https://arxiv.org/abs/hep-ph/0409342 | N/A | Formula appears in the source, but it is a theory normalization convention rather than a measured observable. |
+| CsakiFalkowskiWeiler2008WarpedFlavor metadata | https://arxiv.org/abs/0804.1954 | N/A | Key-reference metadata checked; no measured T003 value is taken from this context source. |
+
+### T004 - VERIFIED
+
+Key references checked: PDGLive Q007, arXiv:2205.02537, CMS-TOP-21-013 /
+arXiv:2312.08229, arXiv:0804.1954, and arXiv:1709.03975. Titles and authors
+match the manifest records.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG2026:T004:tgammaq_combined = `< 9.5e-6` | https://pdgprod.lbl.gov/pdgprod/pdgLive/Particle.action?home=&node=Q007 | Y | pdgLive top listing gives the combined `t -> gamma q (q = u,c)` row as `< 9.5 x 10^-6` at 95% CL. |
+| ATLAS2023:T004:tugamma_left = `< 0.85e-5` | https://arxiv.org/abs/2205.02537 | Y | ATLAS abstract gives the left-handed `t -> u gamma` limit as `0.85 x 10^-5`. |
+| ATLAS2023:T004:tugamma_right = `< 1.2e-5` | https://arxiv.org/abs/2205.02537 | Y | ATLAS abstract gives the right-handed `t -> u gamma` limit as `1.2 x 10^-5`. |
+| CMS2024:T004:tugamma_observed = `< 0.95e-5`, expected `< 1.20e-5` | https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/ | Y | CMS public page/arXiv abstract gives observed(expected) `B(t -> u gamma) < 0.95 (1.20) x 10^-5`. |
+| ATLAS2023:T004:dataset = `139 fb^-1 at sqrt(s) = 13 TeV` | https://arxiv.org/abs/2205.02537 | Y | ATLAS abstract states 139 fb^-1 at 13 TeV. |
+| CMS2024:T004:dataset = `138 fb^-1 at sqrt(s) = 13 TeV` | https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/ | Y | CMS public page/arXiv abstract states 138 fb^-1 at 13 TeV. |
+| AguilarSaavedra2017:T004:SM_and_projection_context | https://arxiv.org/abs/1709.03975 | Y | Source exists and quotes SM top-FCNC rates around `10^-14` for charm photon/Z modes, up-quark modes one order lower, and `10^-5`/`10^-6` HL-LHC/FCC-hh projection levels. |
+| CFW2008:T004:rs_flavor_context | https://arxiv.org/abs/0804.1954 | N/A | Key-reference metadata checked; no measured T004 value is taken from this context source. |
+
+### T008 - VERIFIED
+
+Key references checked: PDGLive Q007R00, arXiv:2111.02219, arXiv:2404.02123,
+arXiv:2407.15172, and arXiv:0804.1954. Titles and authors match the manifest
+records.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG2026:T008:tHu_headline = `< 1.9e-4` | https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=Q007R00&_eventName=showBR | Y | pdgLive datablock has units `10^-4` and the CMS `t -> H u` row `< 1.9` at 95% CL. |
+| CMS2022:T008:dataset = `137 fb^-1 at sqrt(s) = 13 TeV` | https://arxiv.org/abs/2111.02219 | Y | CMS diphoton abstract states 137 fb^-1 at 13 TeV. |
+| CMS2022:T008:tHu_diphoton = `< 0.019%`, expected `< 0.031%` | https://arxiv.org/abs/2111.02219 | Y | CMS abstract gives observed(expected) `B(t -> Hu) < 0.019 (0.031)%`. |
+| ATLAS2024:T008:dataset = `140 fb^-1 at sqrt(s) = 13 TeV` | https://arxiv.org/abs/2404.02123 | Y | ATLAS multilepton abstract states 140 fb^-1 at 13 TeV. |
+| ATLAS2024:T008:tHu_multilepton = `< 2.8e-4`, expected `< 3.0e-4` | https://arxiv.org/abs/2404.02123 | Y | ATLAS abstract gives observed(expected) `B(t -> Hu) < 2.8 (3.0) x 10^-4`. |
+| ATLAS2024:T008:tHu_combined = `< 2.6e-4`, expected `< 1.8e-4` | https://arxiv.org/abs/2404.02123 | Y | ATLAS abstract gives combined observed(expected) `B(t -> Hu) < 2.6 (1.8) x 10^-4`. |
+| CMS2025:T008:dataset = `138 fb^-1 at sqrt(s) = 13 TeV, collected in 2016-2018` | https://arxiv.org/abs/2407.15172 | Y | CMS same-sign dilepton abstract states 2016-2018 data, 13 TeV, 138 fb^-1. |
+| CMS2025:T008:tHu_samesign = `< 0.072%`, expected `< 0.059%` | https://arxiv.org/abs/2407.15172 | Y | CMS abstract gives observed(expected) `B(t -> Hu) < 0.072% (0.059%)`. |
+| CMS2025:T008:tHu_combined = `< 0.019%`, expected `< 0.027%` | https://arxiv.org/abs/2407.15172 | Y | CMS abstract gives combined observed(expected) `B(t -> Hu) < 0.019% (0.027%)`. |
+| CsakiFalkowskiWeiler2008WarpedFlavor metadata | https://arxiv.org/abs/0804.1954 | N/A | Key-reference metadata checked; no measured T008 value is taken from this context source. |
+
+### T012 - VERIFIED
+
+Key references checked: PDG 2025 Z-boson PDF, arXiv:hep-ex/0509008,
+arXiv:0804.1954, arXiv:0807.4937, arXiv:1401.2447, and arXiv:2107.00616.
+Titles and authors match the manifest records.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| `R_c^0 = 0.1721 +/- 0.0030` | https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf | Y | PDG 2025 Z listing gives `R_c = Gamma(cc)/Gamma(hadrons) = 0.1721 +/- 0.0030 OUR FIT`. |
+| `A_FB^{0,c} = 0.0707 +/- 0.0035` | https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf | Y | PDG listing gives `7.07 +/- 0.35%`; catalog converts this to `0.0707 +/- 0.0035`. |
+| `A_c = 0.670 +/- 0.027` | https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf | Y | PDG listing gives `0.670 +/- 0.027 OUR FIT`. |
+| LEP/SLC final combination repeats `R_c^0 = 0.1721 +/- 0.0030` | https://arxiv.org/abs/hep-ex/0509008 | Y | Fetched LEP/SLC PDF contains the same `R_c` value. |
+| LEP/SLC final combination repeats `A_FB^{0,c} = 0.0707 +/- 0.0035` | https://arxiv.org/abs/hep-ex/0509008 | Y | Fetched LEP/SLC PDF contains the same charm forward-backward asymmetry. |
+| LEP/SLC final combination repeats `A_c = 0.670 +/- 0.027` | https://arxiv.org/abs/hep-ex/0509008 | Y | Fetched LEP/SLC PDF contains the same `A_c` value. |
+| cfw_2008_rs_flavor metadata | https://arxiv.org/abs/0804.1954 | N/A | Context reference checked; no measured T012 value is taken from this paper. |
+| casagrande_2008_rs_ewpt metadata | https://arxiv.org/abs/0807.4937 | N/A | Context reference checked; no measured T012 value is taken from this paper. |
+| freitas_2014_z_widths metadata | https://arxiv.org/abs/1401.2447 | N/A | Theory-update reference checked; no measured T012 value is taken from this paper. |
+| alcaraz_2021_z_lineshape_fcc metadata | https://arxiv.org/abs/2107.00616 | N/A | Projection/context reference checked; no current measured T012 value is taken from this paper. |
+
+No mismatches or unresolvable URLs were found for the wave-7 follow-up batch.

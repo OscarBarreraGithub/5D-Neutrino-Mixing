@@ -36,9 +36,21 @@ status_history:
     agent_id: "CA"
     batch_id: "ca_w7_new_processes"
     reason: "CA verified CHK-1 through CHK-8 for ca_w7_new_processes."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T19:27:00-04:00"
+    agent: "factcheck-codex-top_higgs_ew"
+    from: "CHECKER-DONE"
+    to: "FACT-CHECKED"
+    at: "2026-05-16T19:27:00-04:00"
+    agent_id: "factcheck-codex-top_higgs_ew"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "Fetched cited PDG/LEP-SLC/arXiv sources; Zcc pole-observable value claims match."
 checker_passed_at: "2026-05-16T18:55:13-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T18:55:13-04:00"
+last_updated_at: "2026-05-16T19:27:00-04:00"
+fact_checked_at: "2026-05-16T19:27:00-04:00"
+fact_check_verdict: "VERIFIED"
 version: "0.1.0"
 source_shas:
   pdg_2025_z_boson_charm.txt: "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2"

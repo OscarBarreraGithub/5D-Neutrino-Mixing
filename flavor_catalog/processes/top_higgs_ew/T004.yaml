@@ -57,9 +57,21 @@ status_history:
     batch_id: "ca_w7_new_v2"
     cycle: 2
     reason: "Cycle-2 checker pass completed; CHK-1 through CHK-8 passed."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T19:27:00-04:00"
+    agent: "factcheck-codex-top_higgs_ew"
+    from: "CHECKER-DONE"
+    to: "FACT-CHECKED"
+    at: "2026-05-16T19:27:00-04:00"
+    agent_id: "factcheck-codex-top_higgs_ew"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "Fetched cited PDG/ATLAS/CMS/arXiv sources; tugamma value claims match."
 checker_passed_at: "2026-05-16T19:10:09-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T19:10:09-04:00"
+last_updated_at: "2026-05-16T19:27:00-04:00"
+fact_checked_at: "2026-05-16T19:27:00-04:00"
+fact_check_verdict: "VERIFIED"
 version: "0.1.0"
 source_shas:
   pdg_2026_top_t_gammaq.txt: "sha256:5e72da33cd1bb62fedd59c34d917217a2e12866d742bcb24e9e4e76f36581033"
