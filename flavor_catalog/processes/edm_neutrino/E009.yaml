@@ -6,7 +6,7 @@ process_name: "Weinberg three-gluon operator"
 owner: "PKA"
 owner_agent_id: "PKA-E009"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -52,9 +52,19 @@ status_history:
     agent_id: "WA-v2"
     batch_id: "wa_w6_edm_v2"
     reason: "Promoted CA-listed benchmark numerical claims to pdg_or_equivalent.values with full metadata."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T16:27:21-04:00"
+    agent: "CA"
+    cycle: 2
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T16:27:21-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w6_edm_v2"
+    reason: "Cycle-2 checker re-check passed after WA-v2 sidecar metadata update."
+checker_passed_at: "2026-05-16T16:27:21-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:17:41-04:00"
+last_updated_at: "2026-05-16T16:27:21-04:00"
 version: "0.1.0"
 source_manifest_sha256: "sha256:2bef193cb12b0b0af11567fc862a28e883a1a3c4550ee7034d66b1e0cdfa3df1"
 source_shas:
