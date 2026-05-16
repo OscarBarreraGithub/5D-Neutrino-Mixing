@@ -6,7 +6,7 @@ process_name: "Coherent muon-to-electron conversion in gold"
 owner: "PKA"
 owner_agent_id: "PKA-L004"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -32,9 +32,18 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w4_charged_lepton"
     reason: "Writer polish completed for wa_w4_charged_lepton; numerical claims checked against sidecar sources."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T13:45:46-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T13:45:46-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w4_charged_lepton"
+    reason: "Checker pass completed for ca_w4_charged_lepton; CHK-1 through CHK-8 passed."
+checker_passed_at: "2026-05-16T13:45:46-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:31:05-04:00"
+last_updated_at: "2026-05-16T13:45:46-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:c8d15a5e367bed99d14a581d29563eb43706fcbedf13ef4ca62500028d885222"
