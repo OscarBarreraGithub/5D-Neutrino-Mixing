@@ -11,17 +11,15 @@
 \section{B011: Inclusive \(B\to X_s\gamma\)}
 
 \subsection*{Process}
-The process is the CP- and isospin-averaged inclusive radiative decay
+\textbf{Standard notation:} \(\mathcal{B}(\bar B\to X_s\gamma)\).
+This entry covers the CP- and isospin-averaged inclusive radiative decay
 \(\bar B\to X_s\gamma\), equivalently the partonic FCNC transition
-\(b\to s\gamma\), with the canonical photon-energy threshold
-\(E_\gamma>1.6\,\mathrm{GeV}\).  It is the beauty-sector inclusive radiative
-penguin entry in the catalog and is separated from the exclusive
+\(b\to s\gamma\), at the canonical photon-energy threshold
+\(E_\gamma>1.6\,\mathrm{GeV}\).  It is separated from the exclusive
 \(B\to K^*\gamma\) and \(B_s\to\phi\gamma\) modes.
 
 \subsection*{PDG / equivalent value(s)}
-The source-of-truth numerical block is
-\texttt{pdg\_or\_equivalent.canonical\_experimental\_average} in
-\texttt{B011.yaml}.  HFLAV gives
+The canonical sidecar value is the HFLAV inclusive average
 \[
   {\cal B}(\bar B\to X_s\gamma)_{\rm exp}
   = (3.49\pm0.19)\times 10^{-4},
@@ -32,19 +30,22 @@ accessed on 2026-05-16, with local snapshots
 \texttt{references/B011/hflav\_rare\_decays\_dec2024\_table67.txt}.  The
 HFLAV table reports the same average as \(349\pm19\) in units of \(10^{-6}\)
 after extrapolating the Belle, Belle II, BaBar, and CLEO inputs to the common
-threshold.  For theory comparison, the sidecar records the current
+threshold.  For theory comparison, the sidecar records the
 Misiak--Rehman--Steinhauser NNLO SM prediction
 \[
   {\cal B}(\bar B\to X_s\gamma)_{\rm SM}
   = (3.40\pm0.17)\times 10^{-4},
   \qquad E_\gamma>1.6\,\mathrm{GeV},
 \]
-from arXiv:2002.01548.  It also records the PDG-reviewed Misiak et al.
-number \((3.36\pm0.23)\times10^{-4}\) from arXiv:1503.01789.
+from \texttt{references/B011/misiak\_rehman\_steinhauser\_2020\_arxiv.txt}
+(arXiv:2002.01548).  It also records the PDG-reviewed Misiak et al. number
+\((3.36\pm0.23)\times10^{-4}\) from
+\texttt{references/B011/misiak\_et\_al\_2015\_arxiv.txt}
+(arXiv:1503.01789).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
-This observable directly tests the electromagnetic and chromomagnetic dipole
-sector, usually parameterized by \(C_7\) and \(C_8\).  In anarchic RS models,
+This observable tests the electromagnetic and chromomagnetic dipole sector,
+usually parameterized by \(C_7\) and \(C_8\).  In anarchic RS models,
 KK fermion, gauge, Higgs, or charged-scalar loops can generate flavor-changing
 dipoles even when the tree-level neutral-meson mixing constraints are passed.
 The inclusive rate is therefore a sharp complement to the existing
@@ -72,7 +73,7 @@ and other nonperturbative uncertainties, and the convention used for
 constraint requires a dedicated \(b\to s\gamma\) Wilson-coefficient pipeline.
 
 \subsection*{Code coverage in this repo}
-NO.  The required catalog greps were rerun.  A focused implementation grep for
+\textbf{NO.}  The required catalog greps were rerun.  A focused implementation grep for
 \texttt{X\_s}, \texttt{b->s gamma}, \texttt{C7}, and \texttt{C8} across
 \texttt{quarkConstraints/}, \texttt{flavorConstraints/}, \texttt{scanParams/},
 \texttt{neutrinos/}, \texttt{yukawa/}, \texttt{qcd/}, \texttt{warpConfig/},
@@ -84,7 +85,7 @@ only dipole implementation found is the lepton-sector
 \(\mu\to e\gamma\) module at \texttt{flavorConstraints/muToEGamma.py:1}.
 
 \subsection*{Implementation difficulty}
-HIGH.  Production use would need a new \(b\to s\gamma\) observable module,
+\textbf{HIGH.}  Production use would need a new \(b\to s\gamma\) observable module,
 matching onto \(C_7\) and \(C_8\), QCD running in the dipole basis,
 normalization to the inclusive rate, and a documented treatment of the SM
 prediction and experimental photon-energy threshold.  None of that machinery

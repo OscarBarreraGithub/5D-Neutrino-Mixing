@@ -16,9 +16,17 @@ status_history:
     timestamp: "2026-05-16T11:23:03-04:00"
     agent_id: "PKA-B015"
     reason: "initial PKA draft deposit for assigned B015 inclusive b -> s ell ell process"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T11:32:49-04:00"
+    agent: "WA"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T11:32:49-04:00"
+    agent_id: "WA"
+    reason: "Writer polish completed for wa_wave1_beauty; numerical claims checked against sidecar sources."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:23:03-04:00"
+last_updated_at: "2026-05-16T11:32:49-04:00"
 version: "0.1.0"
 source_shas:
   babar_1312_5364_arxiv.txt: "sha256:fcaba867afcd945d15f231279f3463665cfb09e619906bd1d454544869d6daa2"

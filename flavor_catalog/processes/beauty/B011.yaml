@@ -23,9 +23,17 @@ status_history:
     at: "2026-05-16T11:05:37-04:00"
     agent_id: "PKA-B011"
     reason: "PKA draft, source snapshots, and code-coverage grep completed."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T11:32:49-04:00"
+    agent: "WA"
+    from: "PKA-DONE"
+    to: "WRITER-DONE"
+    at: "2026-05-16T11:32:49-04:00"
+    agent_id: "WA"
+    reason: "Writer polish completed for wa_wave1_beauty; numerical claims checked against sidecar sources."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:09:12-04:00"
+last_updated_at: "2026-05-16T11:32:49-04:00"
 version: "0.1.1"
 source_shas:
   hflav_results_2026-05-16.txt: "sha256:81dde0df2037a0ef6bfc4f03571bf53c3aa99415291afbf97b51f18cd5670c88"

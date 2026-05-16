@@ -8,28 +8,31 @@
 % Canonical metadata sidecar: B015.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{Inclusive \(B\to X_s\ell^+\ell^-\)}
+\section{B015: Inclusive \(B\to X_s\ell^+\ell^-\)}
 
 \subsection*{Process}
-This umbrella entry covers the inclusive rare electroweak-penguin process
+\textbf{Standard notation:} \(\mathcal{B}(B\to X_s\ell^+\ell^-)\).
+This entry covers the inclusive rare electroweak-penguin process
 \(B\to X_s\ell^+\ell^-\), equivalently inclusive \(b\to s\ell^+\ell^-\),
-with \(\ell=e,\mu\).  It deliberately excludes the exclusive modes
-\(B\to K\ell\ell\) and \(B\to K^*\ell\ell\), and the LFU ratios \(R_K\) and
-\(R_{K^*}\), which are separate catalog entries B016--B019.
+with \(\ell=e,\mu\).  It excludes the exclusive modes \(B\to K\ell\ell\) and
+\(B\to K^*\ell\ell\), and the LFU ratios \(R_K\) and \(R_{K^*}\), which are
+separate catalog entries B016--B019.
 
 \subsection*{PDG / equivalent value(s)}
-The canonical value is the HFLAV December 2024 inclusive average,
+The canonical sidecar value is the HFLAV December 2024 inclusive average,
 \[
-\mathcal B(B\to X_s\ell^+\ell^-)=(5.84\pm0.69)\times10^{-6},
+  \mathcal B(B\to X_s\ell^+\ell^-)=(5.84\pm0.69)\times10^{-6},
 \]
 with the same table listing the PDG value
 \((5.84^{+1.31}_{-1.23})\times10^{-6}\).  HFLAV combines the BaBar input
 \((6.73^{+0.70}_{-0.64}{}^{+0.60}_{-0.56})\times10^{-6}\) and the Belle input
 \((4.11\pm0.83^{+0.85}_{-0.81})\times10^{-6}\); the source notes different
-low-dilepton-mass thresholds and different charmonium treatments.  For the
-standard perturbative bins, Huber--Hurth--Lunghi quote weighted experimental
-averages of \((1.58\pm0.37)\times10^{-6}\) for \(1<q^2<6\,\mathrm{GeV}^2\)
-and \((0.48\pm0.10)\times10^{-6}\) at high \(q^2\).
+low-dilepton-mass thresholds and different charmonium treatments in
+\texttt{references/B015/hflav\_dec2024\_B\_to\_Xsll.txt}.  For the standard
+perturbative bins, Huber--Hurth--Lunghi quote weighted experimental averages
+of \((1.58\pm0.37)\times10^{-6}\) for \(1<q^2<6\,\mathrm{GeV}^2\) and
+\((0.48\pm0.10)\times10^{-6}\) at high \(q^2\), as recorded in
+\texttt{references/B015/huber\_hurth\_lunghi\_1503\_04849\_arxiv.txt}.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 This is a \(\Delta B=1\) semileptonic FCNC channel.  It probes flavor-changing
@@ -40,14 +43,14 @@ useful as a diagnostic of semileptonic Wilson coefficients such as \(C_7\),
 \(C_9\), \(C_{10}\) and their chirality-flipped partners.
 
 \subsection*{Post-2008 developments}
-Since the CFW 2008 RS-flavor baseline, the inclusive channel has gained a full
-BaBar-data-set measurement and a modern HFLAV average, but it remains
-statistics-limited and experimentally based on sum-of-exclusive reconstruction.
-Theory has also matured: the 2015 Huber--Hurth--Lunghi analysis includes NNLO
-QCD, NLO QED, power corrections, collinear-photon effects, and Belle II
-projections with \(50\,\mathrm{ab}^{-1}\).  Current inclusive branching
-fractions are compatible with the SM within uncertainties; the sharper
-exclusive and LFU anomaly discussions belong in B016--B019.
+Since the CFW 2008 RS-flavor baseline, the inclusive channel has gained a
+BaBar measurement and a modern HFLAV average, but it remains statistics-limited
+and experimentally based on sum-of-exclusive reconstruction.  Theory has also
+matured: the 2015 Huber--Hurth--Lunghi analysis includes NNLO QCD, NLO QED,
+power corrections, collinear-photon effects, and Belle II projections with
+\(50\,\mathrm{ab}^{-1}\).  Current inclusive branching fractions are
+compatible with the SM within uncertainties; the sharper exclusive and LFU
+anomaly discussions belong in B016--B019.
 
 \subsection*{Constraint validity and model dependence}
 The inclusive perturbative windows are cleaner than exclusive form-factor
@@ -58,8 +61,8 @@ weak Hamiltonian.  It is best classified as a theory-controlled but
 mode-calculation-limited rare-decay constraint.
 
 \subsection*{Code coverage in this repo}
-\textbf{NO}.  The modern phenomenology policy enumerates only
-\(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D0\) at
+\textbf{NO.}  The modern phenomenology policy enumerates only
+\(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) at
 \texttt{quarkConstraints/modern/phenomenology.py:23}, and states that this is
 policy-only rather than a numeric backend at
 \texttt{quarkConstraints/modern/phenomenology.py:166}.  The only live lepton
@@ -71,7 +74,7 @@ flavor routine found is \(\mu\to e\gamma\) at
 \(X_s\ell\ell\), \(C_9\), or \(C_{10}\) implementation.
 
 \subsection*{Implementation difficulty}
-\textbf{HIGH}.  Production use would require a new \(\Delta B=1\) semileptonic
+\textbf{HIGH.}  Production use would require a new \(\Delta B=1\) semileptonic
 operator basis, matching and running for \(C_7,C_9,C_{10}\) plus primed
 operators, bin-aware SM predictions, charm/QED treatment, and an experimental
 likelihood or covariance model.
