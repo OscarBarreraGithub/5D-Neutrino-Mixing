@@ -6,7 +6,7 @@ process_name: "Lepton-flavor-violating Higgs decay h -> e mu"
 owner: "PKA"
 owner_agent_id: "PKA-T020"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -45,9 +45,18 @@ status_history:
     agent_id: "WA-v2"
     batch_id: "wa_w6_charged_lepton_top_v2"
     reason: "Cycle-2 writer rework added the 125 GeV Higgs mass hypothesis as a pdg_or_equivalent.values entry with full metadata."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T16:28:44-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T16:28:44-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w6_charged_lepton_top_v2"
+    reason: "Cycle-2 checker re-check passed CHK-1 through CHK-8 after WA-v2 metadata fixes."
+checker_passed_at: "2026-05-16T16:28:44-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:18:12-04:00"
+last_updated_at: "2026-05-16T16:28:44-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_higgs_lfv_review.txt: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"

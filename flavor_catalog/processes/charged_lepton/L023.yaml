@@ -6,7 +6,7 @@ process_name: "Muon-neutrino trident production"
 owner: "PKA"
 owner_agent_id: "PKA-L023"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -52,9 +52,18 @@ status_history:
     agent_id: "WA-v2"
     batch_id: "wa_w6_charged_lepton_top_v2"
     reason: "Cycle-2 writer rework duplicated CA-listed auxiliary numerical claims into pdg_or_equivalent.values with full metadata."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T16:28:44-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T16:28:44-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w6_charged_lepton_top_v2"
+    reason: "Cycle-2 checker re-check passed CHK-1 through CHK-8 after WA-v2 metadata fixes."
+checker_passed_at: "2026-05-16T16:28:44-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:18:12-04:00"
+last_updated_at: "2026-05-16T16:28:44-04:00"
 version: "0.1.0"
 source_shas:
   altmannshofer2014_trident_arxiv.txt: "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8"
