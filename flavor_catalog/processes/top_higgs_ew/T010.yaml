@@ -6,7 +6,7 @@ process_name: "Z-pole bottom-quark partial-width ratio and asymmetries"
 owner: "PKA"
 owner_agent_id: "PKA-T010"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 related_process_ids:
   - T011
@@ -26,9 +26,19 @@ status_history:
     agent: "WA"
     agent_id: "WA"
     reason: "Writer polish for wa_wave1_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
+  - from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    state: "WRITER-REWORK"
+    at: "2026-05-16T11:47:15-04:00"
+    timestamp: "2026-05-16T11:47:15-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    reason: "CA batch ca_wave1_top_higgs_ew found CHK-1 numerical-metadata placement issues."
+    issues:
+      - "CHK-1: contextual numerical claims in the TeX are stored in additional_numerical_context rather than pdg_or_equivalent."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:32:50-04:00"
+last_updated_at: "2026-05-16T11:47:15-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_z_boson.txt: "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815"

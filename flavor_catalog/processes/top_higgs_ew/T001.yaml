@@ -6,7 +6,7 @@ process_name: "Flavor-changing neutral-current top decay t -> c Z"
 owner: "PKA"
 owner_agent_id: "PKA-T001"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -24,9 +24,19 @@ status_history:
     agent: "WA"
     agent_id: "WA"
     reason: "Writer polish for wa_wave1_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
+  - from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    state: "WRITER-REWORK"
+    at: "2026-05-16T11:47:15-04:00"
+    timestamp: "2026-05-16T11:47:15-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    reason: "CA batch ca_wave1_top_higgs_ew found CHK-1 numerical-metadata placement issues."
+    issues:
+      - "CHK-1: contextual numerical claims in the TeX are stored only in auxiliary_values, not pdg_or_equivalent, and the auxiliary_values entries lack explicit year fields."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:32:50-04:00"
+last_updated_at: "2026-05-16T11:47:15-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_top_fcnc_tzq.txt: "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44"
