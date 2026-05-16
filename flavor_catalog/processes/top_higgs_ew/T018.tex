@@ -1,0 +1,90 @@
+% Flavor catalog per-process draft.
+% process_id: T018
+% family: top_higgs_ew
+% owner_agent_id: PKA-T018
+% Canonical metadata sidecar: T018.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(h\to\mu\tau\)}{h -> mu tau} LFV Higgs Decay}
+
+\subsection*{Process}
+The observable is the lepton-flavor-violating Higgs branching fraction
+\(\mathcal{B}(h\to\mu^\pm\tau^\mp)\), catalog id T018 in the
+top/Higgs/electroweak family.  It covers direct ATLAS and CMS searches for a
+neutral Higgs boson decaying to a muon and an oppositely charged tau lepton.
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth entries are in the \texttt{pdg\_or\_equivalent} block of
+\texttt{T018.yaml}.  The PDG 2025 Higgs review summarizes the full
+\(\sqrt{s}=13~\mathrm{TeV}\) Run-2 limits:
+\[
+  \mathcal{B}(h\to\mu\tau) < 0.15\%
+\]
+from CMS, with the same \(0.15\%\) expected limit, at 95\% CL
+(\texttt{CMS2021:T018:mutau\_limit}; \texttt{PDG2025:T018:cms\_run2}).  The
+CMS analysis used \(137~\mathrm{fb}^{-1}\)
+(\texttt{CMS2021:T018:dataset}).  The latest ATLAS Run-2 result gives
+\[
+  \mathcal{B}(h\to\mu\tau) < 0.18\% \quad (0.09\%\ \mathrm{expected})
+\]
+at 95\% CL using \(138~\mathrm{fb}^{-1}\)
+(\texttt{ATLAS2023:T018:mutau\_limit};
+\texttt{ATLAS2023:T018:dataset}).  The CMS observed limit is the strongest
+single-experiment headline value in the local snapshots.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In warped or partially composite lepton sectors, fermion localization explains
+charged-lepton masses, but misalignment between the mass matrix and physical
+Higgs couplings can generate off-diagonal Yukawa interactions.  The
+\(h\to\mu\tau\) limit directly tests the \(\mu\)-\(\tau\) charged-lepton
+Yukawa entries and is complementary to dipole LFV constraints such as
+\(\mu\to e\gamma\).  It is therefore relevant only to a lepton-sector extension
+of the current quark scan, not to the existing \(\Delta F=2\) quark lane.
+
+\subsection*{Post-2008 developments}
+The requested baseline is arXiv:0804.1954, before the LHC Higgs LFV program.
+Harnik, Kopp, and Zupan later emphasized that flavor-violating Higgs decays
+could be a direct discovery channel and that \(h\to\tau\mu\) searches could
+beat rare-tau bounds (\texttt{HarnikKoppZupan2012:order10}).  CMS then reported
+the historical \(8~\mathrm{TeV}\) hint: a \(2.4\sigma\) excess with
+\(p=0.010\), best fit
+\(\mathcal{B}(H\to\mu\tau)=(0.84^{+0.39}_{-0.37})\%\), and a 95\% CL limit
+of \(1.51\%\) using \(19.7~\mathrm{fb}^{-1}\)
+(\texttt{CMS2015:T018:hint}; \texttt{CMS2015:T018:dataset};
+\texttt{CMS2015:T018:limit}).  The full Run-2 CMS and ATLAS analyses did not
+confirm a significant signal and pushed the direct limits to the
+\(10^{-3}\)-branching-fraction level.
+
+\subsection*{Constraint validity and model dependence}
+Experimentally this is a direct, clean upper limit on a forbidden SM decay.
+The interpretation assumes the signal production mixture and total Higgs width
+used by each collaboration; a model that changes Higgs production or the total
+width needs a recast rather than a literal branching-ratio cut.  Low-energy
+LFV bounds constrain related Yukawa products, but the direct \(h\to\mu\tau\)
+search is the least model-dependent way to constrain this specific final state.
+
+\subsection*{Code coverage in this repo}
+Coverage is \textbf{NO}.  The required greps and a targeted search for
+\texttt{h->mu tau}, \texttt{H->mu tau}, \texttt{mutau}, and \texttt{Y\_mu\_tau}
+across \texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no observable implementation.
+The existing LFV backend is specifically \(\mu\to e\gamma\)
+(\texttt{flavorConstraints/muToEGamma.py:1};
+\texttt{flavorConstraints/muToEGamma.py:75}), and the scanner applies that
+filter at \texttt{scanParams/scan.py:523}.  Charged-lepton Yukawa helpers are
+diagonal mass-relation utilities, not an \(h\to\mu\tau\) prediction.
+
+\subsection*{Implementation difficulty}
+Production integration is \textbf{HIGH}.  The external limit is easy to store,
+but a faithful RS constraint needs a new charged-lepton Higgs-Yukawa
+misalignment calculation, a convention for \(\mu\tau\) versus \(\tau\mu\)
+couplings, and a Higgs-rate/width interpretation before scan points can be
+accepted or rejected.
+
+\subsection*{Key references}
+\texttt{PDG2025HiggsLFVReview}; \texttt{CMS2021HiggsLFVMuTau};
+\texttt{ATLAS2023HiggsLFVMuTau}; \texttt{CMS2015HiggsLFVMuTauHint};
+\texttt{HarnikKoppZupan2012FlavorViolatingHiggs};
+\texttt{CsakiFalkowskiWeiler2008WarpedFlavor};
+\texttt{PerezRandall2008WarpedLeptonFlavor}.
