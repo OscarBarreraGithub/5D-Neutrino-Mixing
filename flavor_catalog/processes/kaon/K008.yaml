@@ -45,9 +45,18 @@ status_history:
     agent_id: "WA-v2"
     batch_id: "wa_w5a_kaon_charm_v2"
     reason: "Added pdg_or_equivalent values metadata blocks for the CA CHK-1 findings."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T15:30:13-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T15:30:13-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w5a_kaon_charm_v2"
+    reason: "Cycle-2 checker re-check passed CHK-1 through CHK-8 for K008."
+checker_passed_at: "2026-05-16T15:30:13-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:14:07-04:00"
+last_updated_at: "2026-05-16T15:30:13-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_kl_pi0ee_pdgLive.txt: "sha256:6578aa4b77ae9958c4fd532c29d09a04ea455a2426983a59df2f47f8f7b03202"
