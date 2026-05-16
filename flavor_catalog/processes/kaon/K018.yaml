@@ -32,9 +32,18 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w6_kaon"
     reason: "Writer polish complete for batch wa_w6_kaon."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T16:07:12-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T16:07:12-04:00"
+    batch_id: "ca_w6_kaon"
+    issues:
+      - "CHK-1: TeX displays FLAG/derived auxiliary numerical values f_+(0)=0.9698(17), |V_us|=0.22330(53), and |V_us|=0.22328(58) that trace to auxiliary_inputs, not to pdg_or_equivalent entries as required by this CA batch prompt; the PDG-derived auxiliary |V_us| block also lacks source_url/access_date fields."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:54:11-04:00"
+last_updated_at: "2026-05-16T16:07:12-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:68edf12334b909abe22a3d24cda1ee06591e3b1a371daa26be79d92dadd79249"

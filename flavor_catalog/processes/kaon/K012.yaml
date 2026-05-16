@@ -25,9 +25,18 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w6_kaon"
     reason: "Writer polish complete for batch wa_w6_kaon."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T16:07:12-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T16:07:12-04:00"
+    batch_id: "ca_w6_kaon"
+    issues:
+      - "CHK-1: TeX displays supporting numerical values (<2.2e-10, <0.8(1.0)e-9, approximately 5e-12, and <1% hadronic uncertainty) that trace to supporting_numeric_values, not to pdg_or_equivalent entries as required by this CA batch prompt."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:54:11-04:00"
+last_updated_at: "2026-05-16T16:07:12-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_ks_decay_modes.txt: "sha256:5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882"
