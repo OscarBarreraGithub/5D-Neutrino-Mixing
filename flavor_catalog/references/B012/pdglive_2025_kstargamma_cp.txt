@@ -1,0 +1,26 @@
+Source: PDG pdgLive 2025, B0 listing and S042SX4 data block
+URLs:
+  https://pdglive.lbl.gov/Particle.action?node=S042
+  https://pdglive.lbl.gov/DataBlock.action?node=S042SX4
+Access date: 2026-05-16
+Local extraction note: compact text extraction from pdgLive HTML; no PDF is tracked.
+Citation shown by pdgLive: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.
+
+Collapsed B0 listing entries:
+  A_CP(B0 -> K*(892)0 gamma) = -0.006 +/- 0.011
+  C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = 0.03 +/- 0.10
+  S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = -0.08 +/- 0.17
+
+S042SX4 data block:
+Observable: S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)
+  OUR AVERAGE: -0.08 +/- 0.17
+Inputs used by PDG:
+  ADACHI 2025, Belle:      0.00 +0.27 -0.26 +/- 0.03
+  AUBERT 2008BA, BaBar:   -0.03 +/- 0.29 +/- 0.03
+  USHIRODA 2006, Belle:   -0.32 +0.36 -0.33 +/- 0.05
+Older inputs listed but not used:
+  AUBERT,B 2005P, BaBar:  -0.21 +/- 0.40 +/- 0.05; replaced by AUBERT 2008BA
+  USHIRODA 2005, Belle:   -0.79 +0.63 -0.50 +/- 0.10; replaced by USHIRODA 2006
+  AUBERT,B 2004Z, BaBar:   0.25 +/- 0.63 +/- 0.14
+
+This is the catalog headline value for the time-dependent photon-helicity probe.

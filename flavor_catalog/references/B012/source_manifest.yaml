@@ -1,0 +1,67 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B012
+generated_at: "2026-05-16T18:30:24-04:00"
+references:
+  - key: hflav_rare_decays_dec2024_btokstargamma
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV rare decays, end-of-year 2024: B -> K*(892) gamma tables"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2024
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    sha256_of_local_snapshot: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
+    snapshot_path: "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt"
+  - key: pdglive_2025_kstargamma_cp
+    arxiv_id: null
+    DOI: null
+    title: "pdgLive 2025 B0 listing: K*(892)0 gamma CP parameters"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdglive.lbl.gov/DataBlock.action?node=S042SX4"
+    sha256_of_local_snapshot: "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b"
+    snapshot_path: "flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt"
+  - key: belleii_2024_btokstargamma
+    arxiv_id: "2411.10127"
+    DOI: null
+    title: "Measurement of B -> K*(892) gamma decays at Belle II"
+    authors: "Belle II Collaboration, I. Adachi et al."
+    year: 2024
+    url: "https://arxiv.org/abs/2411.10127"
+    sha256_of_local_snapshot: "sha256:e5a40247dd2208524ce0c0fd962ed878939c0a931ce1d921930d6367af77eab1"
+    snapshot_path: "flavor_catalog/references/B012/arxiv_2411_10127_belleii_btokstargamma.txt"
+  - key: belle_2017_isospin_cp
+    arxiv_id: "1707.00394"
+    DOI: null
+    title: "Evidence for Isospin Violation and Measurement of CP Asymmetries in B -> K*(892) gamma"
+    authors: "T. Horiguchi et al. (Belle Collaboration)"
+    year: 2017
+    url: "https://arxiv.org/abs/1707.00394"
+    sha256_of_local_snapshot: "sha256:826984017c419bd667b63e5f7e63e8130a41c962cf9c1098ad9e00ed3cd5c232"
+    snapshot_path: "flavor_catalog/references/B012/arxiv_1707_00394_belle_isospin_cp.txt"
+  - key: babar_2009_btokstargamma
+    arxiv_id: "0906.2177"
+    DOI: "10.1103/PhysRevLett.103.211802"
+    title: "Measurement of Branching Fractions and CP and Isospin Asymmetries in B -> K*(892) gamma Decays"
+    authors: "B. Aubert et al. (BaBar Collaboration)"
+    year: 2009
+    url: "https://arxiv.org/abs/0906.2177"
+    sha256_of_local_snapshot: "sha256:77204e193561c9a16c9f80bdf605d871285b9951b4992c5f603978d9e402dc95"
+    snapshot_path: "flavor_catalog/references/B012/arxiv_0906_2177_babar_btokstargamma.txt"
+  - key: lhcb_2014_photon_polarization
+    arxiv_id: "1402.6852"
+    DOI: null
+    title: "Observation of photon polarization in the b -> s gamma transition"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2014
+    url: "https://arxiv.org/abs/1402.6852"
+    sha256_of_local_snapshot: "sha256:664bac221a554987f3675e65cc03089b3ce2c184a680f084c3ade1e37d68b951"
+    snapshot_path: "flavor_catalog/references/B012/arxiv_1402_6852_lhcb_photon_polarization.txt"
+  - key: cfw_2008_rs_flavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:6ef3289a51f25e27b67d8c319311780ccbf0a3cdbc8b8c4d3756088ce6956a57"
+    snapshot_path: "flavor_catalog/references/B012/arxiv_0804_1954_cfw_rs_flavor.txt"

@@ -1,0 +1,53 @@
+Source: HFLAV rare decays, end-of-year 2024
+URL: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+Access date: 2026-05-16
+Local extraction note: PDF downloaded to /tmp only and converted with pdftotext -layout.
+No publisher PDF is tracked. This file is a minimal text snapshot of the B -> K*(892) gamma rows.
+
+Table 57: Branching fractions of B+ radiative and FCNC decays with leptons, units 10^-6.
+Parameter: B(B+ -> K*(892)+ gamma)
+Measurements:
+  Belle [239]     37.6 +/- 1.0 +/- 1.2
+  Belle II [240]  40.2 +/- 1.3 +/- 1.3
+  BaBar [241]     42.2 +/- 1.4 +/- 1.6
+  CLEO [242]      37.6 +8.9 -8.3 +/- 2.8
+Average columns:
+  HFLAV: 39.5 +/- 1.0
+  PDG:   39.2 +/- 2.2
+
+Table 62: Branching fractions of B0 radiative and FCNC decays with leptons, units 10^-6.
+Parameter: B(B0 -> K*(892)0 gamma)
+Measurements:
+  Belle [239]     39.6 +/- 0.7 +/- 1.4
+  Belle II [240]  41.4 +/- 1.0 +/- 1.0
+  BaBar [241]     44.7 +/- 1.0 +/- 1.6
+  CLEO [242]      45.5 +7.2 -6.8 +/- 3.4
+  LHCb [206], [184] ratios used in HFLAV fit
+Average columns:
+  HFLAV: 41.63 +/- 0.92
+  PDG:   41.77 +/- 2.48
+
+Table 76: Isospin asymmetry in B radiative and FCNC decays.
+Parameter: Delta_0+ (B -> K* gamma)
+Measurements:
+  Belle [239]     0.062 +/- 0.015 +/- 0.013
+  Belle II [240]  0.050 +/- 0.020 +/- 0.015
+  BaBar [241]     0.066 +/- 0.021 +/- 0.022
+Average columns:
+  HFLAV: 0.059 +/- 0.014
+  PDG:   0.063 +/- 0.017
+HFLAV caution: these averages are computed naively and should be treated with caution.
+
+Table 96: CP asymmetries of charmless hadronic B+ / B0 admixture.
+Parameter: A_CP(B -> K* gamma)
+Measurements:
+  Belle [239]     -0.004 +/- 0.014 +/- 0.003
+  BaBar [241]     -0.003 +/- 0.017 +/- 0.007
+Average:
+  -0.004 +/- 0.011
+
+Reference lines relevant to these rows:
+[239] Belle collaboration, T. Horiguchi et al., Evidence for Isospin Violation and Measurement of CP Asymmetries in B -> K*(892) gamma, Phys. Rev. Lett. 119 (2017) 191802, arXiv:1707.00394.
+[240] Belle-II collaboration, I. Adachi et al., Measurement of B -> K*(892) gamma decays at Belle II, arXiv:2411.10127.
+[241] BaBar collaboration, B. Aubert et al., Measurement of Branching Fractions and CP and Isospin Asymmetries in B -> K*(892) gamma Decays, Phys. Rev. Lett. 103 (2009) 211802, arXiv:0906.2177.
+[242] CLEO collaboration, T. E. Coan et al., Study of exclusive radiative B meson decays, Phys. Rev. Lett. 84 (2000) 5283, arXiv:hep-ex/9912057.
