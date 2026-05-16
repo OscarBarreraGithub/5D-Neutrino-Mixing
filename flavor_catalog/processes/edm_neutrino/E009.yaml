@@ -42,9 +42,19 @@ status_history:
     batch_id: "ca_w6_edm"
     issues:
       - "CHK-1: E009.tex lines 53-60 quote Pospelov-Ritz and Haisch-Hala benchmark numerical claims (22 MeV, 1 GeV, 4.1e-11 GeV^-2, 74(1 +/- 0.5) MeV, and 1.2e-11 GeV^-2) that trace to paper_era_reference or auxiliary_theory_inputs blocks rather than pdg_or_equivalent entries with the required strict metadata."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T16:17:41-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T16:17:41-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w6_edm_v2"
+    reason: "Promoted CA-listed benchmark numerical claims to pdg_or_equivalent.values with full metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:06:54-04:00"
+last_updated_at: "2026-05-16T16:17:41-04:00"
 version: "0.1.0"
 source_manifest_sha256: "sha256:2bef193cb12b0b0af11567fc862a28e883a1a3c4550ee7034d66b1e0cdfa3df1"
 source_shas:
@@ -99,6 +109,96 @@ pdg_or_equivalent:
       snapshot_path: "flavor_catalog/references/E009/abel2020_neutron_edm_arxiv2001_11966.txt"
       sha256: "a78b99dfd3961fb8fc756238e7c51f425725bd7590b49e49842e48134559f4fa"
       sha256_of_local_snapshot: "sha256:a78b99dfd3961fb8fc756238e7c51f425725bd7590b49e49842e48134559f4fa"
+  values:
+    - value_id: "PospelovRitz2005:E009:weinberg_normalization"
+      source: "Pospelov and Ritz, Annals Phys. 318, 119-169 (2005); arXiv:hep-ph/0504231"
+      year: 2005
+      source_url: "https://arxiv.org/abs/hep-ph/0504231"
+      access_date: "2026-05-16"
+      observable: "Pospelov-Ritz neutron EDM response to the Weinberg operator"
+      value: 22
+      uncertainty: null
+      units: "MeV"
+      value_summary: "|d_n(w)| approximately e * 22 MeV * w(1 GeV)"
+      operator_normalization: "L_dim=6 includes (1/3) w f^{abc} G^a_{mu nu} Gtilde^{nu beta,b} G^c_beta^mu plus four-fermion terms"
+      neutron_edm_formula: "|d_n(w)| approximately e * 22 MeV * w(1 GeV)"
+      coefficient_value: 22
+      coefficient_units: "MeV"
+      coefficient_scale: "1 GeV"
+      assumptions: "M/mu_IR = 2 and g_s = 2.1 in the review estimate; all other CP-odd sources set to zero for the benchmark."
+      snapshot_path: "flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt"
+      sha256: "sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23"
+    - value_id: "PospelovRitz2005:E009:weinberg_scale"
+      source: "Pospelov and Ritz, Annals Phys. 318, 119-169 (2005); arXiv:hep-ph/0504231"
+      year: 2005
+      source_url: "https://arxiv.org/abs/hep-ph/0504231"
+      access_date: "2026-05-16"
+      observable: "Reference scale for the Pospelov-Ritz Weinberg coefficient"
+      value: 1
+      uncertainty: null
+      units: "GeV"
+      value_summary: "The Pospelov-Ritz benchmark writes the coefficient as w(1 GeV)."
+      snapshot_path: "flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt"
+      sha256: "sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23"
+    - value_id: "PDG2026-PospelovRitz2005:E009:w_bound"
+      source: "Derived from PDG Live 2026 S017EDM neutron EDM datablock plus Pospelov and Ritz 2005"
+      year: 2026
+      source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM; https://arxiv.org/abs/hep-ph/0504231"
+      access_date: "2026-05-16"
+      observable: "Single-source benchmark bound on abs(w(1 GeV))"
+      value: 4.1e-11
+      uncertainty: null
+      units: "GeV^-2"
+      value_summary: "|w(1 GeV)| < 4.1e-11 GeV^-2 from the current neutron limit and Pospelov-Ritz normalization"
+      derived_bound_observable: "abs(w(1 GeV))"
+      derived_bound_operator: "<"
+      derived_bound_value: 4.1e-11
+      derived_bound_units: "GeV^-2"
+      derivation: "9.12e-13 GeV^-1 / 0.022 GeV = 4.15e-11 GeV^-2, rounded to 4.1e-11."
+      assumptions: "Single-source-at-a-time benchmark; assumes no cancellations with theta, quark EDMs, qCEDMs, semileptonic terms, or four-quark operators."
+      snapshot_paths:
+        - "flavor_catalog/references/E009/pdg2026_neutron_edm_datablock.txt"
+        - "flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt"
+      sha256: "sha256:ea22e4f3da86358b3e4fb51bb7774b24fe1d475824e706a120e739e110757881; sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23"
+    - value_id: "HaischHala2019:E009:o6_normalization"
+      source: "Haisch and Hala, JHEP 11, 154 (2019); arXiv:1909.08955"
+      year: 2019
+      source_url: "https://arxiv.org/abs/1909.08955"
+      access_date: "2026-05-16"
+      observable: "Haisch-Hala O6 neutron EDM response"
+      value: 74
+      uncertainty: 0.5
+      uncertainty_type: "relative"
+      units: "MeV"
+      value_summary: "(d_n/e)_O6 = 74(1 +/- 0.5) MeV"
+      operator_normalization: "Dimension-six O6 Weinberg-type three-gluon operator in the Haisch-Hala convention"
+      neutron_edm_formula: "(d_n/e)_O6 = 74 (1 +/- 0.5) MeV"
+      coefficient_value: 74
+      coefficient_relative_uncertainty: 0.5
+      coefficient_units: "MeV"
+      assumptions: "Central one-source-at-a-time benchmark; does not include the 50% matrix-element uncertainty as a confidence interval and assumes no cancellations."
+      snapshot_path: "flavor_catalog/references/E009/haisch_hala2019_weinberg_sum_rules_arxiv1909_08955.txt"
+      sha256: "sha256:ae1c67f2535e7c0340236485a32f25e8c3cf87d8ecf068c02321c84464f07ee7"
+    - value_id: "PDG2026-HaischHala2019:E009:c6_bound"
+      source: "Derived from PDG Live 2026 S017EDM neutron EDM datablock plus Haisch and Hala 2019"
+      year: 2026
+      source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM; https://arxiv.org/abs/1909.08955"
+      access_date: "2026-05-16"
+      observable: "Single-source benchmark bound on abs(C_6) in the Haisch-Hala O6 convention"
+      value: 1.2e-11
+      uncertainty: null
+      units: "GeV^-2"
+      value_summary: "|C_6| < 1.2e-11 GeV^-2 in the Haisch-Hala O6 convention"
+      derived_bound_observable: "abs(C_6) in the Haisch-Hala O6 convention"
+      derived_bound_operator: "<"
+      derived_bound_value: 1.2e-11
+      derived_bound_units: "GeV^-2"
+      derivation: "9.12e-13 GeV^-1 / 0.074 GeV = 1.23e-11 GeV^-2, rounded to 1.2e-11."
+      assumptions: "Central one-source-at-a-time benchmark; does not include the 50% matrix-element uncertainty as a confidence interval and assumes no cancellations."
+      snapshot_paths:
+        - "flavor_catalog/references/E009/pdg2026_neutron_edm_datablock.txt"
+        - "flavor_catalog/references/E009/haisch_hala2019_weinberg_sum_rules_arxiv1909_08955.txt"
+      sha256: "sha256:ea22e4f3da86358b3e4fb51bb7774b24fe1d475824e706a120e739e110757881; sha256:ae1c67f2535e7c0340236485a32f25e8c3cf87d8ecf068c02321c84464f07ee7"
 paper_era_reference:
   cfw_baseline:
     source: "Csaki, Falkowski, and Weiler, JHEP 09 (2008) 008; arXiv:0804.1954"
@@ -108,19 +208,6 @@ paper_era_reference:
     value_summary: "Required RS-flavor baseline for post-2008 comparison; no measured EDM value is taken from this source for E009."
     snapshot_path: "flavor_catalog/references/E009/cfw2008_arxiv0804_1954.txt"
     sha256: "b735d184f50a2a5e9b5291bd040e4c79534b43e280bf6aef4e19d91409c48c98"
-  pospelov_ritz_weinberg_normalization:
-    source: "Pospelov and Ritz, Annals Phys. 318, 119-169 (2005); arXiv:hep-ph/0504231"
-    year: 2005
-    source_url: "https://arxiv.org/abs/hep-ph/0504231"
-    access_date: "2026-05-16"
-    operator_normalization: "L_dim=6 includes (1/3) w f^{abc} G^a_{mu nu} Gtilde^{nu beta,b} G^c_beta^mu plus four-fermion terms"
-    neutron_edm_formula: "|d_n(w)| approximately e * 22 MeV * w(1 GeV)"
-    coefficient_value: 22
-    coefficient_units: "MeV"
-    coefficient_scale: "1 GeV"
-    assumptions: "M/mu_IR = 2 and g_s = 2.1 in the review estimate; all other CP-odd sources set to zero for the benchmark."
-    snapshot_path: "flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt"
-    sha256: "e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23"
 auxiliary_theory_inputs:
   original_operator:
     source: "Weinberg, Phys. Rev. Lett. 63, 2333 (1989)"
@@ -135,14 +222,6 @@ auxiliary_theory_inputs:
     neutron_limit_e_cm: 1.8e-26
     neutron_limit_gev_inverse: 9.12e-13
     conversion_summary: "1.8e-26 cm divided by 1.97327e-14 cm/GeV^-1 gives 9.12e-13 GeV^-1 for d_n/e."
-  pospelov_ritz_benchmark_bound:
-    source: "PospelovRitz:EDMReview2005 plus PDG2026:NeutronEDM"
-    derived_bound_observable: "abs(w(1 GeV))"
-    derived_bound_operator: "<"
-    derived_bound_value: 4.1e-11
-    derived_bound_units: "GeV^-2"
-    derivation: "9.12e-13 GeV^-1 / 0.022 GeV = 4.15e-11 GeV^-2, rounded to 4.1e-11."
-    assumptions: "Single-source-at-a-time benchmark; assumes no cancellations with theta, quark EDMs, qCEDMs, semileptonic terms, or four-quark operators."
   global_analysis_context:
     source: "Chupp and Ramsey-Musolf et al., Phys. Rev. C 91, 035502 (2015); arXiv:1407.1064"
     year: 2014
@@ -167,24 +246,6 @@ auxiliary_theory_inputs:
         units: "TeV"
     snapshot_path: "flavor_catalog/references/E009/koenig_neubert_straub2014_composite_dipoles_arxiv1403_2756.txt"
     sha256: "95cf9d168c450b3f1b68aa74aef16fc8368ed1ed77a43e15500b5bb865ea1684"
-  haisch_hala_sum_rule_normalization:
-    source: "Haisch and Hala, JHEP 11, 154 (2019); arXiv:1909.08955"
-    year: 2019
-    source_url: "https://arxiv.org/abs/1909.08955"
-    access_date: "2026-05-16"
-    operator_normalization: "Dimension-six O6 Weinberg-type three-gluon operator in the Haisch-Hala convention"
-    neutron_edm_formula: "(d_n/e)_O6 = 74 (1 +/- 0.5) MeV"
-    coefficient_value: 74
-    coefficient_relative_uncertainty: 0.5
-    coefficient_units: "MeV"
-    derived_bound_observable: "abs(C_6) in the Haisch-Hala O6 convention"
-    derived_bound_operator: "<"
-    derived_bound_value: 1.2e-11
-    derived_bound_units: "GeV^-2"
-    derivation: "9.12e-13 GeV^-1 / 0.074 GeV = 1.23e-11 GeV^-2, rounded to 1.2e-11."
-    assumptions: "Central one-source-at-a-time benchmark; does not include the 50% matrix-element uncertainty as a confidence interval and assumes no cancellations."
-    snapshot_path: "flavor_catalog/references/E009/haisch_hala2019_weinberg_sum_rules_arxiv1909_08955.txt"
-    sha256: "ae1c67f2535e7c0340236485a32f25e8c3cf87d8ecf068c02321c84464f07ee7"
   lattice_gradient_flow_context:
     source: "Bhattacharya et al., arXiv:2203.03746"
     year: 2022
