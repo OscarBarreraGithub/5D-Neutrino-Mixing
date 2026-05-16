@@ -1,0 +1,90 @@
+% Flavor catalog per-process template.
+% process_id: E001
+% family: edm_neutrino
+% owner_agent_id: PKA-E001
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: E001.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{Electron electric dipole moment}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(d_e\).  This entry covers the flavor-diagonal
+CP-odd electron dipole moment, cataloged in the \texttt{edm\_neutrino} family
+as an EDM-adjacent lepton-sector probe.  It is not a quark \(\Delta F=2\)
+observable; its RS relevance comes from CP-violating lepton dipoles generated
+by heavy lepton, neutrino, Higgs, or gauge-sector dynamics.
+
+\subsection*{PDG / equivalent value(s)}
+PDG Live 2026 lists the current bound as
+\[
+  |d_e| < 4.1\times 10^{-30}\ e\,\mathrm{cm}
+  \qquad (90\%~\mathrm{CL}),
+\]
+from the Roussy et al. 2023 HfF\({}^+\) molecular-ion measurement; see
+\texttt{flavor\_catalog/references/E001/pdg2026\_electron\_edm\_datablock.txt}.
+The PDG datablock reports the table value as \(<0.041\) in units of
+\(10^{-28}\ e\,\mathrm{cm}\), and records the corresponding measurement as
+\((-1.3\pm2.0_{\rm stat}\pm0.6_{\rm syst})\times10^{-30}\ e\,\mathrm{cm}\).
+The superseded ACME/Andreev 2018 ThO benchmark is
+\(|d_e|<1.1\times10^{-29}\ e\,\mathrm{cm}\) at \(90\%\) CL, with the PDG
+measurement note \((4.3\pm3.1\pm2.6)\times10^{-30}\ e\,\mathrm{cm}\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+The electron EDM constrains the imaginary part of a CP-odd lepton dipole,
+schematically \(\mathcal{L}\supset -i d_e\,\bar e\sigma_{\mu\nu}\gamma_5 e
+F^{\mu\nu}/2\).  In warped lepton extensions, anarchic Yukawas and new CP
+phases can feed this operator through loop matching.  The constraint is
+therefore a direct diagnostic of CP alignment in the charged-lepton sector,
+and it is especially relevant when the neutrino sector or bulk Higgs dynamics
+introduce additional complex spurions.  It does not directly constrain the
+current quark-only \(\Delta F=2\) scan.
+
+\subsection*{Post-2008 developments}
+Relative to the 2008 CFW RS-flavor reference point, the experimental EDM
+frontier changed qualitatively.  ACME 2018 set the previous molecular ThO
+limit at \(1.1\times10^{-29}\ e\,\mathrm{cm}\), already strong enough to
+motivate EFT treatments of CP-violating electron dipoles.  Roussy et al. 2023
+then improved the previous best upper bound by about \(2.4\) using trapped
+HfF\({}^+\) molecular ions, yielding the current PDG value above.  The
+post-ACME EFT literature, represented here by Panico, Pomarol, and Riembau
+2019, treats electron EDMs as constraints on CP-violating dipole operators
+and their two-loop anomalous dimensions, which is the natural language for a
+future Wilson-coefficient implementation.
+
+\subsection*{Constraint validity and model dependence}
+The experimental null limit is robust as a bound on the effective electron EDM
+extracted from paramagnetic molecular spectroscopy.  Model interpretation is
+less automatic: paramagnetic systems can also be sensitive to semileptonic
+CP-odd electron-nucleon interactions, and an RS implementation must specify
+which SMEFT or low-energy CP-odd operator basis is being matched.  As a
+catalog constraint this is a lepton-extension and EDM-adjacent loop bound, not
+a standalone exclusion in the existing quark pipeline.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required catalog greps and a focused implementation grep for
+\texttt{electron.?EDM}, \texttt{eEDM}, \texttt{electric dipole}, and
+\texttt{d\_e} over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no electron-EDM implementation.  The only adjacent
+dipole code is the off-diagonal \(\mu\to e\gamma\) bound in
+\texttt{flavorConstraints/muToEGamma.py:1}, \texttt{:3},
+\texttt{:20--21}, and \texttt{:81}; \texttt{scanParams/scan.py:32--33}
+sets a MEG II branching-fraction limit for that different process.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A live implementation needs a new flavor-diagonal CP-odd
+lepton dipole observable, matching from the model's lepton/KK sector to the
+dipole Wilson coefficient, and likely SMEFT-to-low-energy running.  The
+existing \(\Delta F=2\) operator basis and the \(\mu\to e\gamma\) NDA helper
+do not provide the needed CP-odd \(d_e\) calculation.
+
+\subsection*{Key references}
+Process-local reference keys before bibliography consolidation:
+\texttt{PDG2026:ElectronEDM}, \texttt{Roussy:ElectronEDM2023},
+\texttt{ACME:ElectronEDM2018},
+\texttt{PanicoPomarolRiembau:ElectronEDM2019}, and
+\texttt{CsakiFalkowskiWeiler:RSFlavor2008}.

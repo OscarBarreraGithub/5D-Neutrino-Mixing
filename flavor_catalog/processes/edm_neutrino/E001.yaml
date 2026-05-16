@@ -1,0 +1,94 @@
+schema: flavor_catalog.process.v1
+process_id: E001
+family: edm_neutrino
+standard_notation: "d_e"
+process_name: "Electron electric dipole moment"
+owner: "PKA"
+owner_agent_id: "PKA-E001"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:36:52-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:36:52-04:00"
+    agent_id: "PKA-E001"
+    reason: "Initial PKA source extraction and draft started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T11:36:52-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T11:36:52-04:00"
+    agent_id: "PKA-E001"
+    reason: "PKA draft, minimal source snapshots, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:36:52-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_electron_edm_datablock.txt: "sha256:aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20"
+  roussy2023_arxiv2212_11841.txt: "sha256:85dfc60b010ccba486ecccfcfacc5a1e89652239d5554e2c97111dcca5d2c0f7"
+  andreev2018_caltechauthors.txt: "sha256:c81e0a1936ec81eeb04a4064f09f3e5554037aa456436c972118ab3deda1d19a"
+  cfw2008_arxiv0804_1954.txt: "sha256:be9fdb898c2630f4e7965d278ff8bdb29bc2cb5dd172353d8559d0b411e743be"
+  panico2019_arxiv1810_09413.txt: "sha256:c10253ebacc5bb5e929da5be1a353188cf5277ea8d304fe5094115823d0498d8"
+pdg_or_equivalent:
+  canonical_limit:
+    source: "PDG Live 2026 S003EDM electron electric dipole moment datablock"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S003EDM"
+    access_date: "2026-05-16"
+    observable: "Electron electric dipole moment"
+    value_summary: "|d_e| < 4.1 x 10^-30 e cm at 90% CL"
+    value: "<4.1e-30"
+    units: "e cm"
+    confidence_level: "90%"
+    table_value: "<0.041"
+    table_units: "10^-28 e cm"
+    used_measurement: "Roussy 2023, HfF+ molecular ions"
+    snapshot_path: "flavor_catalog/references/E001/pdg2026_electron_edm_datablock.txt"
+    sha256_of_local_snapshot: "sha256:aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20"
+  primary_measurement:
+    source: "Roussy et al., Science 381, 46 (2023); arXiv:2212.11841"
+    source_url: "https://arxiv.org/abs/2212.11841"
+    access_date: "2026-05-16"
+    measurement_summary: "d_e = (-1.3 +/- 2.0_stat +/- 0.6_syst) x 10^-30 e cm; |d_e| < 4.1 x 10^-30 e cm at 90% confidence"
+    improvement_note: "arXiv abstract states improvement by about 2.4 over previous best upper bound"
+    snapshot_path: "flavor_catalog/references/E001/roussy2023_arxiv2212_11841.txt"
+    sha256_of_local_snapshot: "sha256:85dfc60b010ccba486ecccfcfacc5a1e89652239d5554e2c97111dcca5d2c0f7"
+  superseded_acme_2018:
+    source: "ACME Collaboration, Andreev et al., Nature 562, 355 (2018)"
+    source_url: "https://authors.library.caltech.edu/records/6swh6-6ya42"
+    access_date: "2026-05-16"
+    value_summary: "|d_e| < 1.1 x 10^-29 e cm at 90% CL"
+    measurement_summary: "d_e = (4.3 +/- 3.1 +/- 2.6) x 10^-30 e cm, as recorded by PDG"
+    snapshot_path: "flavor_catalog/references/E001/andreev2018_caltechauthors.txt"
+    sha256_of_local_snapshot: "sha256:c81e0a1936ec81eeb04a4064f09f3e5554037aa456436c972118ab3deda1d19a"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"electron.?EDM|eEDM|electric dipole|EDM|electron.*dipole|d_e\\b|\\bde\\s*=|C_e[[:alnum:]_]*EDM\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+  findings:
+    - "Focused electron-EDM implementation grep over the required implementation/test directories returned exit=1, no matches."
+    - "flavorConstraints/muToEGamma.py:1 and flavorConstraints/muToEGamma.py:81 implement mu->e gamma, not flavor-diagonal electron EDM."
+    - "flavorConstraints/muToEGamma.py:3 and flavorConstraints/muToEGamma.py:20 describe an off-diagonal LFV dipole operator bound."
+    - "scanParams/scan.py:32 records a MEG II mu->e gamma branching-fraction bound, not an electron EDM constraint."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "Requires a new flavor-diagonal CP-odd lepton dipole observable, model-to-Wilson matching in the lepton/KK sector, and likely SMEFT/LEFT running. Existing Delta F=2 and mu->e gamma utilities do not provide d_e."
+open_issues:
+  - "WA/CA should decide whether to describe the paramagnetic-molecule constraint purely as d_e or to mention correlated semileptonic CP-odd electron-nucleon operators in a shared EDM caveat."
+  - "If promoted to live code, the PI must specify the lepton-sector matching assumptions and whether EDMs are hard constraints or contextual diagnostics."

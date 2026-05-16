@@ -1,0 +1,27 @@
+Source: arXiv abstract page and arXiv text extraction for arXiv:2212.11841.
+URL: https://arxiv.org/abs/2212.11841
+Accessed: 2026-05-16
+Snapshot policy: minimal arXiv text snapshot; no publisher PDF cached.
+
+Title: A new bound on the electron's electric dipole moment.
+Authors: Tanya S. Roussy, Luke Caldwell, Trevor Wright, William B. Cairncross,
+Yuval Shagam, Kia Boon Ng, Noah Schlossberger, Sun Yool Park, Anzhou Wang,
+Jun Ye, Eric A. Cornell.
+Submitted: 2022-12-22. Last revised: 2022-12-27, v3.
+Journal reference: Science 381, 46 (2023).
+Related DOI: 10.1126/science.adg4084.
+arXiv DOI: 10.48550/arXiv.2212.11841.
+
+ArXiv abstract metadata summary:
+The experiment uses electrons confined inside molecular ions, with a large
+intramolecular electric field and coherence up to 3 s. The result is
+consistent with zero and improves the previous best upper bound by about 2.4.
+The abstract states sensitivity to 10^-19 eV shifts in molecular ions and
+constraints on broad classes of new physics above 10^13 eV.
+
+Extract from pdftotext of arXiv PDF:
+de = (-1.3 +/- 2.0_stat +/- 0.6_syst) x 10^-30 e cm.
+The corresponding upper bound is |de| < 4.1 x 10^-30 e cm at 90% confidence.
+
+Notes:
+This is the current PDG-used measurement for the E001 canonical limit.

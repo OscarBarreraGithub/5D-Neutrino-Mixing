@@ -1,0 +1,33 @@
+Source: PDG Live datablock S003EDM, electron electric dipole moment.
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S003EDM
+Accessed: 2026-05-16
+Snapshot policy: minimal text extraction; no PDG PDF cached.
+
+PDG citation shown on page:
+2026 Review of Particle Physics.
+F. Takahashi et al. (Particle Data Group), Int. J. Mod. Phys. A 41, 2630011 (2026).
+
+Quantity:
+e electric dipole moment d. PDG note: a nonzero value is forbidden by T
+invariance and P invariance.
+
+Measurement table unit:
+VALUE is reported in units of 10^-28 e cm.
+
+Current PDG-used limit:
+ROUSSY 2023, technique ESR, electrons in intramolecular electric field:
+VALUE <0.041, CL 90%.
+Equivalent value: |d_e| < 4.1e-30 e cm at 90% CL.
+PDG footnote: ROUSSY 2023 gives the measurement
+(-1.3 +/- 2.0 +/- 0.6) x 10^-30 e cm corresponding to this limit.
+
+Superseded ACME/Andreev 2018 benchmark:
+ANDREEV 2018, ThO molecules:
+VALUE <0.11, CL 90%.
+Equivalent value: |d_e| < 1.1e-29 e cm at 90% CL.
+PDG footnote: ANDREEV 2018 gives the measurement
+(4.3 +/- 3.1 +/- 2.6) x 10^-30 e cm corresponding to this limit.
+
+Reference list entries shown in the same datablock:
+ROUSSY 2023, Science 381, 46, "An improved bound on the electron's electric dipole moment".
+ANDREEV 2018, Nature 562, 355, "Improved limit on the electric dipole moment of the electron".
