@@ -64,9 +64,17 @@ status_history:
     at: "2026-05-16T14:55:00-04:00"
     agent_id: "Opus-round-1"
     reason: "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T17:58:00-04:00"
+    agent: "factcheck-codex-charged_lepton"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "Measured limits and prospect values matched fetched sources or local snapshots."
 checker_passed_at: "2026-05-16T12:56:00-04:00"
 opus_approved_at: "2026-05-16T14:55:00-04:00"
-last_updated_at: "2026-05-16T14:55:00-04:00"
+last_updated_at: "2026-05-16T17:58:00-04:00"
+fact_checked_at: "2026-05-16T17:58:00-04:00"
+fact_check_verdict: "VERIFIED"
 version: "0.2.0"
 source_shas:
   agashe2006_rs_lfv_arxiv_hepph_0606021.txt: "sha256:51a5f86a338eb56993ea4dd8112ee25b294ec4b9b31087e3d024261cb66e2f0c"

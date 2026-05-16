@@ -70,9 +70,17 @@ status_history:
     agent_id: "Opus-round-2"
     round_id: "opus_round_002"
     reason: "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T17:58:00-04:00"
+    agent: "factcheck-codex-charged_lepton"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "Experimental trident ratios and DUNE/Belle II prospect values matched fetched sources or local snapshots."
 checker_passed_at: "2026-05-16T16:28:44-04:00"
 opus_approved_at: "2026-05-16T17:30:00-04:00"
-last_updated_at: "2026-05-16T17:30:00-04:00"
+last_updated_at: "2026-05-16T17:58:00-04:00"
+fact_checked_at: "2026-05-16T17:58:00-04:00"
+fact_check_verdict: "VERIFIED"
 version: "0.1.0"
 source_shas:
   altmannshofer2014_trident_arxiv.txt: "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8"

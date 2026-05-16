@@ -105,9 +105,17 @@ status_history:
     at: "2026-05-16T14:55:00-04:00"
     agent_id: "Opus-round-1"
     reason: "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T17:58:00-04:00"
+    agent: "factcheck-codex-charged_lepton"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "Measured limits and prospect values matched fetched sources or local snapshots."
 checker_passed_at: "2026-05-16T13:46:00-04:00"
 opus_approved_at: "2026-05-16T14:55:00-04:00"
-last_updated_at: "2026-05-16T14:55:00-04:00"
+last_updated_at: "2026-05-16T17:58:00-04:00"
+fact_checked_at: "2026-05-16T17:58:00-04:00"
+fact_check_verdict: "VERIFIED"
 version: "0.2.0"
 source_shas:
   megii2025_arxiv2504_15711.txt: "sha256:3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7"

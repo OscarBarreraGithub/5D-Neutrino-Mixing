@@ -61,9 +61,17 @@ status_history:
     agent_id: "Opus-round-2"
     round_id: "opus_round_002"
     reason: "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T17:58:00-04:00"
+    agent: "factcheck-codex-charged_lepton"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "PDG canonical muonium value matched; arXiv abstract rounding difference noted in report."
 checker_passed_at: "2026-05-16T15:30:46-04:00"
 opus_approved_at: "2026-05-16T17:30:00-04:00"
-last_updated_at: "2026-05-16T17:30:00-04:00"
+last_updated_at: "2026-05-16T17:58:00-04:00"
+fact_checked_at: "2026-05-16T17:58:00-04:00"
+fact_check_verdict: "VERIFIED"
 version: "0.1.0"
 source_shas:
   agashe2006_rs_lfv_arxiv_hepph0606021.txt: "sha256:492db37edb6f351f66add5b8b6b826119f694c981bc6fb1b77fe31e3da7db00c"
