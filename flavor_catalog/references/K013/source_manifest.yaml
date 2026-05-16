@@ -1,0 +1,57 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: K013
+sources:
+  - key: PDG2025_KL_pi0gammagamma
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group K_L0 listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf"
+    sha256_of_local_snapshot: "sha256:48bdda1e34bb6a347c3fc489d272d5b20c0d15c05f005f032f749229c381339b"
+    snapshot_path: "flavor_catalog/references/K013/pdg2025_kl_pi0gammagamma.txt"
+  - key: KTeV2008_KL_pi0gammagamma
+    arxiv_id: "0805.0031"
+    DOI: "10.1103/PhysRevD.77.112004"
+    title: "Final Results from the KTeV Experiment on the Decay KL -> pi0 gamma gamma"
+    authors: "E. Abouzaid et al. (KTeV Collaboration)"
+    year: 2008
+    url: "https://arxiv.org/abs/0805.0031"
+    sha256_of_local_snapshot: "sha256:5f872c5a8480eccb5f325225479cb3e1e58bcbfba42a6ead2d9b1d8ea2dee289"
+    snapshot_path: "flavor_catalog/references/K013/ktev_abouzaid_2008_arxiv.txt"
+  - key: NA482002_KL_pi0gammagamma
+    arxiv_id: null
+    DOI: "10.1016/S0370-2693(02)01863-4"
+    title: "Precise measurement of the decay K-L -> pi(0) gamma gamma"
+    authors: "A. Lai et al. (NA48 Collaboration)"
+    year: 2002
+    url: "https://iris.unito.it/handle/2318/110341"
+    sha256_of_local_snapshot: "sha256:b8d0f2ce120f87f6f47ab69786557fafeb339390063e1419450b9b57eac0f90a"
+    snapshot_path: "flavor_catalog/references/K013/na48_lai_2002_repo.txt"
+  - key: NA482014_Kpm_pigammagamma
+    arxiv_id: "1310.5499"
+    DOI: null
+    title: "A new measurement of the K^+- -> pi^+- gamma gamma decay at the NA48/2 experiment"
+    authors: "NA48/2 Collaboration"
+    year: 2014
+    url: "https://arxiv.org/abs/1310.5499"
+    sha256_of_local_snapshot: "sha256:5727e0ee905224f20ea9581049a1b91ab4facfb2006bdc5740dbf6af0ad6b8ca"
+    snapshot_path: "flavor_catalog/references/K013/na48_2_batley_2014_arxiv.txt"
+  - key: CappielloCataDAmbrosio2018_radiative_chiral
+    arxiv_id: null
+    DOI: "10.1140/epjc/s10052-018-5748-6"
+    title: "Closing in on the radiative weak chiral couplings"
+    authors: "Luigi Cappiello, Oscar Cata, and Giancarlo D'Ambrosio"
+    year: 2018
+    url: "https://link.springer.com/article/10.1140/epjc/s10052-018-5748-6"
+    sha256_of_local_snapshot: "sha256:7bac918f24574a9d7ce12dced1ea50b90faedc2060a7a9f303ba2d50f5011340"
+    snapshot_path: "flavor_catalog/references/K013/cappiello_cata_dambrosio_2018_springer.txt"
+  - key: GabbianiValencia2001_KL_pi0gammagamma
+    arxiv_id: "hep-ph/0105006"
+    DOI: "10.1103/PhysRevD.64.094008"
+    title: "K_L -> pi0 gamma gamma and the bound on the CP-conserving K_L -> pi0 e+e-"
+    authors: "F. Gabbiani and G. Valencia"
+    year: 2001
+    url: "https://arxiv.org/abs/hep-ph/0105006"
+    sha256_of_local_snapshot: "sha256:a883962e12958d8d9eb543e3bb118d08e5b8eccaabf248cd976f387feeeefe67"
+    snapshot_path: "flavor_catalog/references/K013/gabbiani_valencia_2001_arxiv.txt"

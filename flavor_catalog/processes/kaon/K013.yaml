@@ -1,0 +1,89 @@
+schema: flavor_catalog.process.v1
+process_id: K013
+family: kaon
+standard_notation: "K_L \\to \\pi^0\\gamma\\gamma"
+process_name: "Radiative long-lived neutral-kaon decay to pi0 gamma gamma"
+owner: "PKA"
+owner_agent_id: "PKA-K013"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:08:33-04:00"
+    from: "DRAFT"
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:08:33-04:00"
+    agent_id: "PKA-K013"
+    reason: "initial PKA draft and source deposit"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:08:33-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2025_kl_pi0gammagamma.txt: "sha256:48bdda1e34bb6a347c3fc489d272d5b20c0d15c05f005f032f749229c381339b"
+  ktev_abouzaid_2008_arxiv.txt: "sha256:5f872c5a8480eccb5f325225479cb3e1e58bcbfba42a6ead2d9b1d8ea2dee289"
+  na48_lai_2002_repo.txt: "sha256:b8d0f2ce120f87f6f47ab69786557fafeb339390063e1419450b9b57eac0f90a"
+  na48_2_batley_2014_arxiv.txt: "sha256:5727e0ee905224f20ea9581049a1b91ab4facfb2006bdc5740dbf6af0ad6b8ca"
+  cappiello_cata_dambrosio_2018_springer.txt: "sha256:7bac918f24574a9d7ce12dced1ea50b90faedc2060a7a9f303ba2d50f5011340"
+  gabbiani_valencia_2001_arxiv.txt: "sha256:a883962e12958d8d9eb543e3bb118d08e5b8eccaabf248cd976f387feeeefe67"
+pdg_or_equivalent:
+  year: 2025
+  observable: "BR(K_L -> pi0 gamma gamma)"
+  value: 1.273e-6
+  uncertainty: 0.033e-6
+  units: "dimensionless branching fraction"
+  display: "(1.273 +/- 0.033) x 10^-6"
+  source: "PDG Review of Particle Physics, K_L0 listing, 2025 update"
+  source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/K013/pdg2025_kl_pi0gammagamma.txt"
+  sha256: "sha256:48bdda1e34bb6a347c3fc489d272d5b20c0d15c05f005f032f749229c381339b"
+  average_inputs:
+    - label: "KTeV Abouzaid 2008, PDG-rescaled"
+      experiment: "KTeV"
+      value: 1.28e-6
+      uncertainties: ["0.06e-6", "0.01e-6"]
+      original_reported_branching_fraction: "(1.29 +/- 0.03(stat) +/- 0.05(syst)) x 10^-6"
+      vector_exchange_parameter: "aV = -0.31 +/- 0.05(stat) +/- 0.07(syst)"
+      snapshot_path: "flavor_catalog/references/K013/ktev_abouzaid_2008_arxiv.txt"
+      sha256: "sha256:5f872c5a8480eccb5f325225479cb3e1e58bcbfba42a6ead2d9b1d8ea2dee289"
+    - label: "NA48 Lai 2002, PDG-rescaled"
+      experiment: "NA48"
+      value: 1.27e-6
+      uncertainties: ["0.04e-6", "0.01e-6"]
+      original_reported_branching_fraction: "(1.36 +/- 0.03(stat) +/- 0.03(syst) +/- 0.03(norm)) x 10^-6"
+      vector_exchange_parameter: "aV = -0.46 +/- 0.03(stat) +/- 0.04(syst)"
+      snapshot_path: "flavor_catalog/references/K013/na48_lai_2002_repo.txt"
+      sha256: "sha256:b8d0f2ce120f87f6f47ab69786557fafeb339390063e1419450b9b57eac0f90a"
+related_measurements:
+  - observable: "BR(K^+- -> pi^+- gamma gamma), z > 0.2"
+    value: 0.877e-6
+    uncertainty: 0.089e-6
+    context: "NA48/2 charged-kaon radiative analogue; not the K013 canonical value"
+    source: "NA48/2 Collaboration arXiv:1310.5499"
+    snapshot_path: "flavor_catalog/references/K013/na48_2_batley_2014_arxiv.txt"
+    sha256: "sha256:5727e0ee905224f20ea9581049a1b91ab4facfb2006bdc5740dbf6af0ad6b8ca"
+  - observable: "BR(K^+- -> pi^+- gamma gamma), full range, ChPT assumption"
+    value: 0.910e-6
+    uncertainty: 0.075e-6
+    context: "NA48/2 charged-kaon radiative analogue; model-dependent extrapolation"
+    source: "NA48/2 Collaboration arXiv:1310.5499"
+    snapshot_path: "flavor_catalog/references/K013/na48_2_batley_2014_arxiv.txt"
+    sha256: "sha256:5727e0ee905224f20ea9581049a1b91ab4facfb2006bdc5740dbf6af0ad6b8ca"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "No exact K013 / K_L -> pi0 gamma gamma implementation found in quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, or tests."
+    - "Broader required greps find only existing Delta F=2 kaon-mixing and mu->e gamma surfaces; those are different processes."
+  grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    - "rg -n \"pi0.*gamma.*gamma|pi\\\\^0.*gamma.*gamma|pi.?0.*gamma|K013|\\\\ba_V\\\\b|\\\\baV\\\\b|pigg|gammagamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "Requires a Delta S = 1 radiative/chiral amplitude and long-distance treatment; existing Delta F=2 Wilson running and mu->e gamma dipole checks do not provide the observable."
+open_issues:
+  - "The orchestrator maps the PI's ambiguous K1 -> pi gamma note to K013; retain a PI-confirmation flag."
+  - "The neutral-mode canonical inputs are KTeV and NA48, not NA48/2. NA48/2 is included only as related post-2008 charged-mode context."
