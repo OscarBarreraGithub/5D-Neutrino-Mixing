@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/bomGhp8WFg2ohydwidKCvJ41KL8</id>
+  <title>arXiv Query: search_query=&amp;id_list=2302.02886&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-16T15:57:33Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2302.02886" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2302.02886v3</id>
+    <title>Measurement of the ratios of branching fractions $\mathcal{R}(D^{*})$ and $\mathcal{R}(D^{0})$</title>
+    <updated>2024-04-22T17:17:50Z</updated>
+    <link href="https://arxiv.org/abs/2302.02886v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.02886v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The ratios of branching fractions $\mathcal{R}(D^{*})\equiv\mathcal{B}(\bar{B}\to D^{*}τ^{-}\barν_τ)/\mathcal{B}(\bar{B}\to D^{*}μ^{-}\barν_μ)$ and $\mathcal{R}(D^{0})\equiv\mathcal{B}(B^{-}\to D^{0}τ^{-}\barν_τ)/\mathcal{B}(B^{-}\to D^{0}μ^{-}\barν_μ)$ are measured, assuming isospin symmetry, using a sample of proton-proton collision data corresponding to 3.0 fb${ }^{-1}$ of integrated luminosity recorded by the LHCb experiment during 2011 and 2012. The tau lepton is identified in the decay mode $τ^{-}\toμ^{-}ν_τ\barν_μ$. The measured values are $\mathcal{R}(D^{*})=0.281\pm0.018\pm0.024$ and $\mathcal{R}(D^{0})=0.441\pm0.060\pm0.066$, where the first uncertainty is statistical and the second is systematic. The correlation between these measurements is $ρ=-0.43$. Results are consistent with the current average of these quantities and are at a combined 1.9 standard deviations from the predictions based on lepton flavor universality in the Standard Model.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-06T15:53:08Z</published>
+    <arxiv:comment>All figures and tables, along with any supplementary material and additional information, are available at https://cern.ch/lhcbproject/Publications/p/LHCb-PAPER-2022-039.html (LHCb public pages)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 131 (2023) 111802</arxiv:journal_ref>
+    <author>
+      <name> LHCb Collaboration</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.131.111802</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.131.111802" title="doi"/>
+  </entry>
+</feed>

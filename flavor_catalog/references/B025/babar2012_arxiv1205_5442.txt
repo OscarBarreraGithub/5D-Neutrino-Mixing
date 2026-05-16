@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/cbe7EBWQtAFmtHVVQ+kopZaNbSg</id>
+  <title>arXiv Query: search_query=&amp;id_list=1205.5442&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-16T15:57:28Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1205.5442" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1205.5442v2</id>
+    <title>Evidence for an excess of B -&gt; D(*) Tau Nu decays</title>
+    <updated>2012-09-20T19:54:26Z</updated>
+    <link href="https://arxiv.org/abs/1205.5442v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1205.5442v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Based on the full BaBar data sample, we report improved measurements of the ratios R(D(*)) = B(B -&gt; D(*) Tau Nu)/B(B -&gt; D(*) l Nu), where l is either e or mu. These ratios are sensitive to new physics contributions in the form of a charged Higgs boson. We measure R(D) = 0.440 +- 0.058 +- 0.042 and R(D*) = 0.332 +- 0.024 +- 0.018, which exceed the Standard Model expectations by 2.0 sigma and 2.7 sigma, respectively. Taken together, our results disagree with these expectations at the 3.4 sigma level. This excess cannot be explained by a charged Higgs boson in the type II two-Higgs-doublet model. We also report the observation of the decay B -&gt; D Tau Nu, with a significance of 6.8 sigma.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-05-24T13:43:06Z</published>
+    <arxiv:comment>Expanded section on systematics, text corrections, improved the format of Figure 2 and included the effect of the change of the Tau polarization due to the charged Higgs</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 109, 101802 (2012)</arxiv:journal_ref>
+    <author>
+      <name> The BaBar Collaboration</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.109.101802</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.109.101802" title="doi"/>
+  </entry>
+</feed>

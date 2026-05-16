@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/+Yk/1z3ivYKTYBeMo2bh//gPQt4</id>
+  <title>arXiv Query: search_query=&amp;id_list=0804.1954&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-16T15:57:04Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=0804.1954" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/0804.1954v2</id>
+    <title>The Flavor of the Composite Pseudo-Goldstone Higgs</title>
+    <updated>2008-04-24T17:37:35Z</updated>
+    <link href="https://arxiv.org/abs/0804.1954v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0804.1954v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study the flavor structure of 5D warped models that provide a dual description of a composite pseudo-Goldstone Higgs. We first carefully re-examine the flavor constraints on the mass scale of new physics in the standard Randall-Sundrum-type scenarios, and find that the KK gluon mass should generically be heavier than about 21 TeV. We then compare the flavor structure of the composite Higgs models to those in the RS model. We find new contributions to flavor violation, which while still are suppressed by the RS-GIM mechanism, will enhance the amplitudes of flavor violations. In particular, there is a kinetic mixing term among the SM fields which (although parametrically not enhanced) will make the flavor bounds even more stringent than in RS. This together with the fact that in the pseudo-Goldstone scenario Yukawa couplings are set by a gauge coupling implies the KK gluon mass to be at least about 33 TeV. For both the RS and the composite Higgs models the flavor bounds could be stronger or weaker depending on the assumption on the value of the gluon boundary kinetic term. These strong bounds seem to imply that the fully anarchic approach to flavor in warped extra dimensions is implausible, and there have to be at least some partial flavor symmetries appearing that eliminate part of the sources for flavor violation. We also present complete expressions for the radiatively generated Higgs potential of various 5D implementations of the composite Higgs model, and comment on the 1-5 percent level tuning needed in the top sector to achieve a phenomenologically acceptable vacuum state.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-04-14T19:49:42Z</published>
+    <arxiv:comment>42 pages, 8 figures. v2: References added, typos fixed, extended discussion on fine tuning</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>JHEP 0809:008,2008</arxiv:journal_ref>
+    <author>
+      <name>Csaba Csaki</name>
+    </author>
+    <author>
+      <name>Adam Falkowski</name>
+    </author>
+    <author>
+      <name>Andreas Weiler</name>
+    </author>
+    <arxiv:doi>10.1088/1126-6708/2008/09/008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1126-6708/2008/09/008" title="doi"/>
+  </entry>
+</feed>

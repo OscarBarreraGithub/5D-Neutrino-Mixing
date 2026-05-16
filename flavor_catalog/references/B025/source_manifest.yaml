@@ -1,0 +1,114 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B025
+created_at: "2026-05-16T11:58:45-04:00"
+references:
+  - key: hflav_ckm2025_rdrds
+    arxiv_id: null
+    doi: null
+    title: "HFLAV semileptonic B averages: Average of R(D) and R(D*) for CKM 2025"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/hflav_ckm2025_rdrds.txt"
+    sha256_of_local_snapshot: "4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8"
+  - key: hflav_ckm2025_logfile
+    arxiv_id: null
+    doi: null
+    title: "HFLAV CKM 2025 CoCo logfile for R(D) and R(D*) average"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/r_dtaunu/logfile_ckm25_new.txt"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/hflav_ckm2025_logfile.txt"
+    sha256_of_local_snapshot: "484f6ee19b8eaa50d6a304a3d5d211861dc28a94581dbb9d6656ad8a18a49422"
+  - key: babar2012_arxiv1205_5442
+    arxiv_id: "1205.5442"
+    doi: "10.1103/PhysRevLett.109.101802"
+    title: "Evidence for an excess of B -> D(*) Tau Nu decays"
+    authors: "BaBar Collaboration"
+    year: 2012
+    url: "https://export.arxiv.org/api/query?id_list=1205.5442"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/babar2012_arxiv1205_5442.txt"
+    sha256_of_local_snapshot: "fea3c845ab93b1b869f90807bf47708131e9431bb99b91e9c0455ef4f3a712ef"
+  - key: babar2013_arxiv1303_0571
+    arxiv_id: "1303.0571"
+    doi: "10.1103/PhysRevD.88.072012"
+    title: "Measurement of an Excess of B -> D(*) Tau Nu Decays and Implications for Charged Higgs Bosons"
+    authors: "BaBar Collaboration"
+    year: 2013
+    url: "https://export.arxiv.org/api/query?id_list=1303.0571"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/babar2013_arxiv1303_0571.txt"
+    sha256_of_local_snapshot: "2b92b30aa5e85dd7611daab5896497fe343129e15a007c48f1508875960c8a68"
+  - key: belle2015_arxiv1507_03233
+    arxiv_id: "1507.03233"
+    doi: "10.1103/PhysRevD.92.072014"
+    title: "Measurement of the branching ratio of Bbar -> D(*) tau nu relative to Bbar -> D(*) l nu decays with hadronic tagging at Belle"
+    authors: "Belle Collaboration"
+    year: 2015
+    url: "https://export.arxiv.org/api/query?id_list=1507.03233"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/belle2015_arxiv1507_03233.txt"
+    sha256_of_local_snapshot: "304f8206278dfba0298af3939e79e5e9a70028f9cf27e17a8abc225dd59cdde1"
+  - key: belle2019_arxiv1910_05864
+    arxiv_id: "1910.05864"
+    doi: "10.1103/PhysRevLett.124.161803"
+    title: "Measurement of R(D) and R(D*) with a semileptonic tagging method"
+    authors: "Belle Collaboration"
+    year: 2019
+    url: "https://export.arxiv.org/api/query?id_list=1910.05864"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/belle2019_arxiv1910_05864.txt"
+    sha256_of_local_snapshot: "a228175d16e08c7964819773f77bdd1f627480ec990934d3386ea4ab9113a6d7"
+  - key: lhcb2023_arxiv2302_02886
+    arxiv_id: "2302.02886"
+    doi: "10.1103/PhysRevLett.131.111802"
+    title: "Measurement of the ratios of branching fractions R(D*) and R(D0)"
+    authors: "LHCb Collaboration"
+    year: 2023
+    url: "https://export.arxiv.org/api/query?id_list=2302.02886"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/lhcb2023_arxiv2302_02886.txt"
+    sha256_of_local_snapshot: "04ff0a6c66b812d9486853cff71b286450d7662d1f56f738e154fb382a6aa71c"
+  - key: lhcb2025_arxiv2406_03387
+    arxiv_id: "2406.03387"
+    doi: "10.1103/PhysRevLett.134.061801"
+    title: "Measurement of the branching fraction ratios R(D+) and R(D*+) using muonic tau decays"
+    authors: "LHCb Collaboration"
+    year: 2025
+    url: "https://export.arxiv.org/api/query?id_list=2406.03387"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/lhcb2025_arxiv2406_03387.txt"
+    sha256_of_local_snapshot: "5c33b29d3a60831f210a292a22b21bf590f5345b2655cee68dd062c5df7fa30b"
+  - key: belleii2025_arxiv2504_11220
+    arxiv_id: "2504.11220"
+    doi: "10.1103/fmn3-h8fy"
+    title: "Test of lepton flavor universality with measurements of R(D+) and R(D*+) using semileptonic B tagging at the Belle II experiment"
+    authors: "Belle II Collaboration"
+    year: 2025
+    url: "https://export.arxiv.org/api/query?id_list=2504.11220"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/belleii2025_arxiv2504_11220.txt"
+    sha256_of_local_snapshot: "d1bbba7696d41ba70e631c4fddaaab41f5cc1e29e2d366ee939ea4b0acf80869"
+  - key: flag2024_arxiv2411_04268
+    arxiv_id: "2411.04268"
+    doi: "10.1103/nfzp-p5dn"
+    title: "FLAG Review 2024"
+    authors: "Flavour Lattice Averaging Group"
+    year: 2024
+    url: "https://export.arxiv.org/api/query?id_list=2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/flag2024_arxiv2411_04268.txt"
+    sha256_of_local_snapshot: "22118f8842b4d27565e7bbf268d2291eb92bfdb7002bdb12e659c2cb0df3fe0d"
+  - key: cfw2008_arxiv0804_1954
+    arxiv_id: "0804.1954"
+    doi: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki; Adam Falkowski; Andreas Weiler"
+    year: 2008
+    url: "https://export.arxiv.org/api/query?id_list=0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B025/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "e8dbfb3bef81771a038a1894ff8dbe7b4560839ef4d749d71783dac25983bb1b"
