@@ -1,0 +1,106 @@
+schema: flavor_catalog.process.v1
+process_id: K012
+family: kaon
+standard_notation: "K_S^0 -> mu+ mu-"
+process_name: "Short-lived neutral-kaon dimuon decay"
+owner: "PKA"
+owner_agent_id: "PKA-K012"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T15:30:48-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T15:30:48-04:00"
+    agent_id: "PKA-K012"
+    reason: "initial PKA source extraction and draft"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T15:30:48-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2025_ks_decay_modes.txt: "sha256:5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882"
+  lhcb_2020_ksmumu_arxiv.txt: "sha256:d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7"
+  lhcb_2017_ksmumu_arxiv.txt: "sha256:a35a20eef31d2eb0d3d2b85cc496f4e61846e54d137b79107f941ef7525d406e"
+  chobanova_2018_ksmumu_susy_arxiv.txt: "sha256:7b25e1bf225ff51a308f24c5f6c50d55b9b8ad934aaf4d931415b975df09db0d"
+  dery_ghosh_grossman_schacht_2021_kmumu_arxiv.txt: "sha256:ecf9094e578273fa701698ea835e5342f5ce0fecd8f8147d35b9d70b9bb4557a"
+pdg_or_equivalent:
+  year: 2025
+  observable: "BR(K_S^0 -> mu+ mu-)"
+  value: "<2.1e-10"
+  uncertainty: null
+  units: "branching fraction"
+  confidence_level: "90%"
+  source: "Particle Data Group 2025 update, K0S particle listing, Gamma_12"
+  source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-S.pdf"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/K012/pdg2025_ks_decay_modes.txt"
+  sha256_of_text_snapshot: "5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882"
+supporting_numeric_values:
+  - observable: "LHCb 2016-2018 standalone BR(K_S^0 -> mu+ mu-) limit"
+    year: 2020
+    value: "<2.2e-10"
+    uncertainty: null
+    units: "branching fraction"
+    confidence_level: "90%"
+    source_url: "https://arxiv.org/abs/2001.10354"
+    snapshot_path: "flavor_catalog/references/K012/lhcb_2020_ksmumu_arxiv.txt"
+    sha256_of_text_snapshot: "d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7"
+  - observable: "LHCb combined BR(K_S^0 -> mu+ mu-) limit"
+    year: 2020
+    value: "<2.1e-10"
+    uncertainty: null
+    units: "branching fraction"
+    confidence_level: "90%"
+    source_url: "https://arxiv.org/abs/2001.10354"
+    snapshot_path: "flavor_catalog/references/K012/lhcb_2020_ksmumu_arxiv.txt"
+    sha256_of_text_snapshot: "d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7"
+  - observable: "LHCb 2017 Run-1 BR(K_S^0 -> mu+ mu-) limit"
+    year: 2017
+    value: "<0.8e-9 at 90%; <1.0e-9 at 95%"
+    uncertainty: null
+    units: "branching fraction"
+    confidence_level: "90% and 95%"
+    source_url: "https://arxiv.org/abs/1706.00758"
+    snapshot_path: "flavor_catalog/references/K012/lhcb_2017_ksmumu_arxiv.txt"
+    sha256_of_text_snapshot: "a35a20eef31d2eb0d3d2b85cc496f4e61846e54d137b79107f941ef7525d406e"
+  - observable: "Standard Model estimate for BR(K_S^0 -> mu+ mu-)"
+    year: 2018
+    value: "approximately 5e-12"
+    uncertainty: null
+    units: "branching fraction"
+    confidence_level: null
+    source_url: "https://arxiv.org/abs/1711.11030"
+    snapshot_path: "flavor_catalog/references/K012/chobanova_2018_ksmumu_susy_arxiv.txt"
+    sha256_of_text_snapshot: "7b25e1bf225ff51a308f24c5f6c50d55b9b8ad934aaf4d931415b975df09db0d"
+  - observable: "Hadronic uncertainty target for time-dependent ell=0 K_S extraction"
+    year: 2021
+    value: "<1%"
+    uncertainty: null
+    units: "relative hadronic uncertainty"
+    confidence_level: null
+    source_url: "https://arxiv.org/abs/2104.06427"
+    snapshot_path: "flavor_catalog/references/K012/dery_ghosh_grossman_schacht_2021_kmumu_arxiv.txt"
+    sha256_of_text_snapshot: "ecf9094e578273fa701698ea835e5342f5ce0fecd8f8147d35b9d70b9bb4557a"
+auxiliary_blocks:
+  paper_era_reference:
+    note: "arXiv:0804.1954 is used only as the requested post-2008 chronology boundary; no K012 numerical value from that paper is used in this PKA draft."
+  theory_context:
+    - "The SM prediction and clean ell=0 proposal are auxiliary theory context, not entries in pdg_or_equivalent."
+code_coverage:
+  status: "NO"
+  grep_commands:
+    - 'rg -n --glob "!*.ipynb" "K_S|K0S|K_S0|K0_S|K\^0_?S|K_L|K0_L|mu\+\s*mu|mu\+.*mu\-|mumu|dimuon|s\s*->\s*d|s->d|sd.*mu" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests'
+    - 'rg -n --glob "!*.ipynb" "rare kaon|K.*mu|mu.*mu.*K|branching|BR_LIMIT|Delta F|epsilon_K|Delta m_K" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests'
+    - 'rg -n --glob "!*.ipynb" "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_delta_mk|DELTA_M_K|epsilon_k|kaon" quarkConstraints flavorConstraints scanParams tests'
+  result: "No K_S -> mu+ mu-, rare-kaon dimuon, or s -> d dilepton constraint implementation found. Existing kaon hits are Delta F=2 mixing infrastructure only."
+  nearest_hits:
+    - "quarkConstraints/deltaf2.py:615: DELTA_M_K = 3.484e-15 # GeV, K_L - K_S mass difference (PDG)"
+    - "quarkConstraints/deltaf2.py:623: EPSILON_K_SM = 2.161e-3 # SM epsilon_K, Brod-Gorbahn-Stamou 2020"
+    - "quarkConstraints/modern/phenomenology.py:23: MODERN_PHENOMENOLOGY_SYSTEM_IDS = (\"epsilon_K\", \"K\", \"B_d\", \"B_s\", \"D0\")"
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Requires a new Delta S=1 rare-kaon semileptonic/dilepton observable, Wilson/operator mapping for s -> d mu+ mu-, and a treatment of long-distance and K_S/K_L interference effects; the existing Delta F=2 SLL/SLR/VLL/VRR/LR basis does not cover this decay."
+open_issues:
+  - "WA/CA should verify whether the final catalog wants the PDG 2025 listing limit or the LHCb PRL abstract as the primary displayed source; the numerical value is the same combined 90% CL limit."

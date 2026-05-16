@@ -1,0 +1,43 @@
+Source: Particle Data Group 2025 update, K0S particle listing
+URL: https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-S.pdf
+Accessed: 2026-05-16
+Local extraction: pdftotext -layout from a temporary PDF copy; publisher PDF not tracked.
+
+Minimal excerpt for K_S -> mu+ mu-:
+
+Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024)
+and 2025 update.
+
+K0S decay modes, CP violating and Delta S = 1 weak neutral current modes:
+Gamma_12: mu+ mu-    S1    < 2.1 x 10^-10    CL=90%
+
+Detailed listing:
+Gamma(mu+ mu-) / Gamma(total), Gamma_12 / Gamma.
+Test for Delta S = 1 weak neutral current. Allowed by first-order weak interaction
+combined with electromagnetic interaction.
+
+VALUE                 CL%      DOCUMENT ID       TECN
+<2.1 x 10^-10          90      1 AAIJ 20AE       LHCB
+
+Data not used for current averages, fits, limits:
+<8 x 10^-10            90      2 AAIJ 17BQ       LHCB
+<9 x 10^-9             90      3 AAIJ 13G        LHCB
+
+PDG note 1:
+AAIJ 20AE uses 8.6 fb^-1 of LHCb data from 2011 to 2012 and 2016 to 2018.
+The result utilizes the normalization mode branching fraction
+B(K0S -> pi+ pi-) = (69.20 +/- 0.05) x 10^-2 from PDG 18. Supersedes AAIJ 17BQ.
+
+PDG note 2:
+AAIJ 17BQ uses 3.0 fb^-1 of pp collisions at sqrt(s) = 7 and 8 TeV. The result
+utilizes the normalization mode branching fraction B(K0S -> pi+ pi-) =
+(69.20 +/- 0.05) x 10^-2 from PDG 16. Supersedes AAIJ 13G.
+
+PDG note 3:
+AAIJ 13G uses 1.0 fb^-1 of pp collisions at sqrt(s) = 7 TeV. They obtained
+B(K0S -> mu+ mu-) < 11 x 10^-9 at 95% C.L.
+
+Reference table excerpt:
+AAIJ 20AE, PRL 125 231801, R. Aaij et al. (LHCb Collab.)
+AAIJ 17BQ, EPJ C77 678, R. Aaij et al. (LHCb Collab.)
+AAIJ 13G, JHEP 1301 090, R. Aaij et al. (LHCb Collab.)
