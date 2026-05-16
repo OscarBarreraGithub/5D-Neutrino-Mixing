@@ -6,7 +6,7 @@ process_name: "Flavor-changing neutral-current top decay t -> u gamma"
 owner: "PKA"
 owner_agent_id: "PKA-T004"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -47,9 +47,19 @@ status_history:
     batch_id: "wa_w7_new_v2"
     cycle: 2
     reason: "Addressed CA CHK-1 by removing the flagged luminosity and projection-reach numbers from TeX."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T19:10:09-04:00"
+    timestamp: "2026-05-16T19:10:09-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w7_new_v2"
+    cycle: 2
+    reason: "Cycle-2 checker pass completed; CHK-1 through CHK-8 passed."
+checker_passed_at: "2026-05-16T19:10:09-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T19:01:15-04:00"
+last_updated_at: "2026-05-16T19:10:09-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2026_top_t_gammaq.txt: "sha256:5e72da33cd1bb62fedd59c34d917217a2e12866d742bcb24e9e4e76f36581033"

@@ -46,9 +46,21 @@ status_history:
     batch_id: "wa_w7_new_v2"
     cycle: 2
     reason: "Addressed CA CHK-1 by removing the exact SM central value from TeX while retaining the order-of-magnitude statement."
+  - from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    state: "WRITER-REWORK"
+    at: "2026-05-16T19:10:09-04:00"
+    timestamp: "2026-05-16T19:10:09-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w7_new_v2"
+    cycle: 2
+    reason: "CHK-1 failed in cycle-2 checker pass."
+    issues:
+      - "T003.tex still states the Standard Model expectation remains at the 10^-14 level; that physics numerical claim is supported only under paper_era_reference, not pdg_or_equivalent as required by the checker checklist."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T19:01:15-04:00"
+last_updated_at: "2026-05-16T19:10:09-04:00"
 version: "0.1.0"
 source_shas:
   cms_2024_top21013_tqgamma.txt: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"

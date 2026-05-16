@@ -6,7 +6,7 @@ process_name: "Exclusive radiative B -> K* gamma"
 owner: "PKA"
 owner_agent_id: "PKA-B012"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -54,9 +54,19 @@ status_history:
     batch_id: "wa_w7_new_v2"
     cycle: 2
     reason: "Addressed CA CHK-1 by normalizing pdg_or_equivalent metadata and removing flagged post-2008 numerical claims from TeX."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T19:10:09-04:00"
+    timestamp: "2026-05-16T19:10:09-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    batch_id: "ca_w7_new_v2"
+    cycle: 2
+    reason: "Cycle-2 checker pass completed; CHK-1 through CHK-8 passed."
+checker_passed_at: "2026-05-16T19:10:09-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T19:01:15-04:00"
+last_updated_at: "2026-05-16T19:10:09-04:00"
 version: "0.1.1"
 source_shas:
   hflav_rare_decays_dec2024_btokstargamma.txt: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
