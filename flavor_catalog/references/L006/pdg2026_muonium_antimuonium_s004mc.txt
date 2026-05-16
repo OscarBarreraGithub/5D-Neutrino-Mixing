@@ -1,0 +1,38 @@
+Source snapshot: PDG pdgLive muon listing, datablock S004MC
+Process: L006, muonium-antimuonium conversion
+Access date: 2026-05-16
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004MC
+
+PDG page context:
+2026 Review of Particle Physics.
+Particle: mu
+Heading: LIMIT ON MUONIUM -> ANTIMUONIUM CONVERSION
+PDG note: Forbidden by lepton family number conservation.
+
+PDG observable:
+R_g = G_C / G_F
+
+PDG effective-Lagrangian convention:
+The effective Lagrangian for the mu+ e- -> mu- e+ conversion is assumed to be
+L = 2^(-1/2) G_C [bar psi_mu gamma_lambda (1 - gamma_5) psi_e]
+                    [bar psi_mu gamma_lambda (1 - gamma_5) psi_e] + h.c.
+The experimental result is then an upper limit on G_C/G_F, where G_F is the
+Fermi coupling constant.
+
+Current PDG listed limit:
+VALUE: <0.0030
+CL: 90%
+DOCUMENT ID: WILLMANN 1999
+Technique/comment: SPEC, positive muons at 26 GeV/c
+
+PDG footnote for the current limit:
+WILLMANN 1999 quotes both probability P_M Mbar < 8.3 x 10^-11 at 90% CL in a
+0.1 T field and R_g = G_C / G_F.
+
+PDG references listed for this datablock:
+WILLMANN 1999, Phys. Rev. Lett. 82, 49, "New Bounds from Searching for
+Muonium to Antimuonium Conversion".
+
+Minimal extraction note:
+This is the canonical current PDG/equivalent source for L006. It is a text
+snapshot of the relevant value only, not a publisher PDF.

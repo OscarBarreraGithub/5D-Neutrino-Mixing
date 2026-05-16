@@ -1,0 +1,75 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: L006
+generated_at: "2026-05-16T14:05:10-04:00"
+references:
+  - key: PDG2026_MuoniumAntimuoniumS004MC
+    arxiv_id: null
+    DOI: "10.1142/S0217751X26300115"
+    title: "Particle Data Group 2026 muon listing, datablock S004MC"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004MC"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:ba46a431af4e3530dbdac060d6cea20edf19d1fddaf913997283fb57d1c85a5a"
+    snapshot_path: "flavor_catalog/references/L006/pdg2026_muonium_antimuonium_s004mc.txt"
+  - key: Willmann1999_MACS
+    arxiv_id: "hep-ex/9807011"
+    DOI: "10.1103/PhysRevLett.82.49"
+    title: "New Bounds from Searching for Muonium to Antimuonium Conversion"
+    authors: "L. Willmann et al."
+    year: 1999
+    url: "https://arxiv.org/abs/hep-ex/9807011"
+    supporting_url: "https://research.rug.nl/en/publications/new-bounds-from-a-search-for-muonium-to-antimuonium-conversion"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:3e22390c63c86fed7723e8b38cb2ecb3bd2d486df610bafb40fffa5e167b76a4"
+    snapshot_path: "flavor_catalog/references/L006/willmann1999_macs_arxiv_hepex9807011.txt"
+  - key: Bai2022_SnowmassMuonium
+    arxiv_id: "2203.11406"
+    DOI: "10.48550/arXiv.2203.11406"
+    title: "Snowmass2021 Whitepaper: Muonium to antimuonium conversion"
+    authors: "Ai-Yu Bai et al."
+    year: 2022
+    url: "https://arxiv.org/abs/2203.11406"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:04c55fc736d4de4e510187d160fe1f91bf9c324195a2c6c38db4d04179eba016"
+    snapshot_path: "flavor_catalog/references/L006/bai2022_snowmass_mace_arxiv2203_11406.txt"
+  - key: Bai2024_MACECDR
+    arxiv_id: "2410.18817"
+    DOI: "10.48550/arXiv.2410.18817"
+    title: "Conceptual Design of the Muonium-to-Antimuonium Conversion Experiment (MACE)"
+    authors: "Ai-Yu Bai et al."
+    year: 2024
+    url: "https://arxiv.org/abs/2410.18817"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:6acea5b25a8a05a9cc2527d59a3aafca9099e861aaa5fa3adc4ac06d0e413632"
+    snapshot_path: "flavor_catalog/references/L006/bai2024_mace_cdr_arxiv2410_18817.txt"
+  - key: HeeckSokhashvili2024_DeltaLTwo
+    arxiv_id: "2401.09580"
+    DOI: "10.1016/j.physletb.2024.138621"
+    title: "Lepton flavor violation by two units"
+    authors: "Julian Heeck and Mikheil Sokhashvili"
+    year: 2024
+    url: "https://arxiv.org/abs/2401.09580"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:05fb75e73e13dd60b144cbf08613cfd0bc631b547ab83032acf54e86af5ab6a1"
+    snapshot_path: "flavor_catalog/references/L006/heeck2024_delta_l_two_arxiv2401_09580.txt"
+  - key: AgasheBlechmanPetriello2006_RSLFV
+    arxiv_id: "hep-ph/0606021"
+    DOI: "10.1103/PhysRevD.74.053011"
+    title: "Probing the Randall-Sundrum geometric origin of flavor with lepton flavor violation"
+    authors: "Kaustubh Agashe, Andrew E. Blechman, and Frank Petriello"
+    year: 2006
+    url: "https://arxiv.org/abs/hep-ph/0606021"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:492db37edb6f351f66add5b8b6b826119f694c981bc6fb1b77fe31e3da7db00c"
+    snapshot_path: "flavor_catalog/references/L006/agashe2006_rs_lfv_arxiv_hepph0606021.txt"
+  - key: CFW2008
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:8d8080f5fba7d38fe6e4c3bbc9b64cf852bc0271e12f70638f384e9fdebb35b4"
+    snapshot_path: "flavor_catalog/references/L006/cfw2008_arxiv0804_1954.txt"

@@ -1,0 +1,87 @@
+% Flavor catalog per-process draft.
+% process_id: L006
+% family: charged_lepton
+% owner_agent_id: PKA-L006
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: L006.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{L006: Muonium--Antimuonium Conversion}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(P_{M\bar M}\) and \(G_C/G_F\), where
+\(M=(\mu^+ e^-)\) and \(\bar M=(\mu^- e^+)\).  This charged-lepton entry covers
+spontaneous muonium-to-antimuonium conversion, a \(\Delta L_\mu=-\Delta L_e=2\)
+lepton-flavor-violating oscillation process, not a dipole decay.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG 2026 muon listing, datablock S004MC, gives the canonical
+effective-coupling limit
+\[
+  G_C/G_F < 0.0030 \qquad (90\%\ {\rm C.L.})
+\]
+for the stated \((V-A)\times(V-A)\) four-lepton effective Lagrangian.  The same
+PDG datablock footnote records the underlying MACS/PSI probability limit from
+Willmann et al.,
+\[
+  P_{M\bar M} < 8.3\times 10^{-11}\qquad (90\%\ {\rm C.L.})
+\]
+in a \(0.1~{\rm T}\) magnetic field.  The local canonical snapshot is
+\texttt{flavor\_catalog/references/L006/pdg2026\_muonium\_antimuonium\_s004mc.txt};
+the primary MACS article snapshot is
+\texttt{flavor\_catalog/references/L006/willmann1999\_macs\_arxiv\_hepex9807011.txt}.
+These are upper limits, not measurements of a nonzero conversion rate.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Muonium conversion probes a four-lepton contact structure
+\((\bar\mu\Gamma e)(\bar\mu\Gamma e)\) that violates muon and electron family
+numbers by two units.  In an RS lepton extension, such operators could arise
+from flavor-misaligned heavy neutral or doubly charged states, KK-sector
+lepton-current misalignment, or other non-dipole lepton interactions.  It is
+therefore complementary to L001: the present repo checks only
+\(\mu\to e\gamma\), while L006 would require a separate \(\Delta L=2\)
+four-lepton observable.
+
+\subsection*{Post-2008 developments}
+Relative to the arXiv:0804.1954 era, the experimental bound itself has not
+changed: PDG still uses the 1999 MACS/PSI result.  The main post-2008 movement
+is prospective.  The Snowmass 2021 whitepaper frames MACE as a next-generation
+search intended to improve sensitivity by more than two orders of magnitude,
+and the 2024 MACE conceptual design targets conversion probabilities beyond
+the \(10^{-13}\) level.  On the theory side, recent EFT work separates
+\(\Delta L_\mu=-\Delta L_e=2\) operators from ordinary one-unit LFV and notes
+that muonium conversion probes only part of that operator class.
+
+\subsection*{Constraint validity and model dependence}
+The experimental signature is clean and lepton-sector-only: a confirmed signal
+would be physics beyond the Standard Model.  The quoted \(G_C/G_F\) limit is
+not operator-universal, however; it is tied to the PDG \((V-A)\times(V-A)\)
+normalization.  Any catalog-to-code translation must choose the Lorentz basis,
+magnetic-field treatment, and spin-state normalization before comparing a model
+Wilson coefficient to the MACS probability limit.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  A targeted grep for
+\texttt{muonium|antimuonium|Muonium|Antimuonium|MACE|MACS} over
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} returned no hits.  The adjacent
+charged-lepton LFV implementation is the \(\mu\to e\gamma\) dipole checker at
+\texttt{flavorConstraints/muToEGamma.py}:75, called from
+\texttt{scanParams/scan.py}:524; it does not cover muonium conversion.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  L006 needs a new \(\Delta L_\mu=-\Delta L_e=2\) four-lepton
+operator convention and a bound-state conversion-probability wrapper.  It does
+not require lattice inputs or hadronic long-distance calculations for a first
+catalog-to-code implementation, but a production version should handle
+operator-dependent magnetic-field and spin factors explicitly.
+
+\subsection*{Key references}
+Process-local keys before bibliography consolidation:
+\texttt{PDG2026\_MuoniumAntimuoniumS004MC}, \texttt{Willmann1999\_MACS},
+\texttt{Bai2022\_SnowmassMuonium}, \texttt{Bai2024\_MACECDR},
+\texttt{HeeckSokhashvili2024\_DeltaLTwo},
+\texttt{AgasheBlechmanPetriello2006\_RSLFV}, and \texttt{CFW2008}.

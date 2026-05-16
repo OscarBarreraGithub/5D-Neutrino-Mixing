@@ -1,0 +1,139 @@
+schema: flavor_catalog.process.v1
+process_id: L006
+family: charged_lepton
+standard_notation: "P_{M\\bar M},\\;G_C/G_F"
+process_name: "Muonium-antimuonium conversion"
+owner: "PKA"
+owner_agent_id: "PKA-L006"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:05:10-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:05:10-04:00"
+    agent_id: "PKA-L006"
+    reason: "Initial L006 PKA source extraction and draft sidecar."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:05:10-04:00"
+version: "0.1.0"
+source_shas:
+  agashe2006_rs_lfv_arxiv_hepph0606021.txt: "sha256:492db37edb6f351f66add5b8b6b826119f694c981bc6fb1b77fe31e3da7db00c"
+  bai2022_snowmass_mace_arxiv2203_11406.txt: "sha256:04c55fc736d4de4e510187d160fe1f91bf9c324195a2c6c38db4d04179eba016"
+  bai2024_mace_cdr_arxiv2410_18817.txt: "sha256:6acea5b25a8a05a9cc2527d59a3aafca9099e861aaa5fa3adc4ac06d0e413632"
+  cfw2008_arxiv0804_1954.txt: "sha256:8d8080f5fba7d38fe6e4c3bbc9b64cf852bc0271e12f70638f384e9fdebb35b4"
+  heeck2024_delta_l_two_arxiv2401_09580.txt: "sha256:05fb75e73e13dd60b144cbf08613cfd0bc631b547ab83032acf54e86af5ab6a1"
+  pdg2026_muonium_antimuonium_s004mc.txt: "sha256:ba46a431af4e3530dbdac060d6cea20edf19d1fddaf913997283fb57d1c85a5a"
+  willmann1999_macs_arxiv_hepex9807011.txt: "sha256:3e22390c63c86fed7723e8b38cb2ecb3bd2d486df610bafb40fffa5e167b76a4"
+pdg_or_equivalent:
+  primary_current_probability_limit:
+    source: "Particle Data Group 2026 pdgLive muon listing, datablock S004MC"
+    year: 2026
+    observable: "Muonium-to-antimuonium conversion probability P_M Mbar"
+    value: 8.3e-11
+    relation: "<"
+    confidence_level: "90% C.L."
+    conditions: "PDG footnote to WILLMANN 1999; probability limit in a 0.1 T magnetic field"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004MC"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L006/pdg2026_muonium_antimuonium_s004mc.txt"
+    sha256: "ba46a431af4e3530dbdac060d6cea20edf19d1fddaf913997283fb57d1c85a5a"
+  pdg_effective_coupling_limit:
+    source: "Particle Data Group 2026 pdgLive muon listing, datablock S004MC"
+    year: 2026
+    observable: "R_g = G_C/G_F for PDG's stated (V-A)x(V-A) effective Lagrangian"
+    value: 0.0030
+    relation: "<"
+    confidence_level: "90% C.L."
+    conditions: "Effective Lagrangian convention shown in PDG S004MC; experimental result from WILLMANN 1999"
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004MC"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L006/pdg2026_muonium_antimuonium_s004mc.txt"
+    sha256: "ba46a431af4e3530dbdac060d6cea20edf19d1fddaf913997283fb57d1c85a5a"
+  original_experiment:
+    source: "Willmann et al. MACS/PSI"
+    year: 1999
+    observable: "Muonium-to-antimuonium conversion probability P_M Mbar"
+    value: 8.3e-11
+    relation: "<="
+    confidence_level: "90% C.L."
+    conditions: "0.1 T magnetic field; final article metadata abstract; arXiv abstract records 8.2e-11, so catalog prose follows PDG"
+    doi: "10.1103/PhysRevLett.82.49"
+    arxiv_id: "hep-ex/9807011"
+    source_url: "https://arxiv.org/abs/hep-ex/9807011"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L006/willmann1999_macs_arxiv_hepex9807011.txt"
+    sha256: "3e22390c63c86fed7723e8b38cb2ecb3bd2d486df610bafb40fffa5e167b76a4"
+prospects:
+  - source: "Snowmass2021 Whitepaper: Muonium to antimuonium conversion"
+    arxiv_id: "2203.11406"
+    year: 2022
+    quantity: "MACE sensitivity improvement target"
+    value: "more than two orders of magnitude"
+    relation: "target"
+    source_url: "https://arxiv.org/abs/2203.11406"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L006/bai2022_snowmass_mace_arxiv2203_11406.txt"
+    sha256: "04c55fc736d4de4e510187d160fe1f91bf9c324195a2c6c38db4d04179eba016"
+  - source: "Conceptual Design of the Muonium-to-Antimuonium Conversion Experiment (MACE)"
+    arxiv_id: "2410.18817"
+    year: 2024
+    quantity: "Target conversion-probability reach"
+    value: 1.0e-13
+    relation: "beyond the level of"
+    source_url: "https://arxiv.org/abs/2410.18817"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L006/bai2024_mace_cdr_arxiv2410_18817.txt"
+    sha256: "6acea5b25a8a05a9cc2527d59a3aafca9099e861aaa5fa3adc4ac06d0e413632"
+paper_era_references:
+  - key: "AgasheBlechmanPetriello2006_RSLFV"
+    source_url: "https://arxiv.org/abs/hep-ph/0606021"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L006/agashe2006_rs_lfv_arxiv_hepph0606021.txt"
+    sha256: "492db37edb6f351f66add5b8b6b826119f694c981bc6fb1b77fe31e3da7db00c"
+    provenance_note: "RS lepton-flavor-violation context only; no measured observable value."
+  - key: "CFW2008"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L006/cfw2008_arxiv0804_1954.txt"
+    sha256: "8d8080f5fba7d38fe6e4c3bbc9b64cf852bc0271e12f70638f384e9fdebb35b4"
+    provenance_note: "Requested 2008 comparison point only; no pdg_or_equivalent block."
+post_2008_theory_context:
+  - key: "HeeckSokhashvili2024_DeltaLTwo"
+    source_url: "https://arxiv.org/abs/2401.09580"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L006/heeck2024_delta_l_two_arxiv2401_09580.txt"
+    sha256: "05fb75e73e13dd60b144cbf08613cfd0bc631b547ab83032acf54e86af5ab6a1"
+    provenance_note: "Classifies Delta L_mu = - Delta L_e = 2 operators and muonium-conversion operator coverage."
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+  targeted_grep_commands:
+    - "rg -n \"muonium|antimuonium|Muonium|Antimuonium|MACE|MACS\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"conversion|mu.?e.?conversion|mu.?->.?e|muToEGamma|check_mu_to_e_gamma|LFV|lepton.?flavor\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Targeted muonium/antimuonium/MACE/MACS grep returned no hits in the required implementation directories."
+    - "flavorConstraints/muToEGamma.py:75 defines the adjacent mu->e gamma dipole checker only."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma in the scan; no muonium-conversion observable is evaluated."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "Missing implementation needs a new Delta L_mu = - Delta L_e = 2 four-lepton/contact operator convention and a bound-state conversion-probability observable wrapper. It does not require lattice or hadronic long-distance inputs for a first implementation."
+implementation_difficulty_if_missing: "MEDIUM"
+open_issues:
+  - "CA should confirm the PDG/PRL 8.3e-11 value versus the arXiv abstract's 8.2e-11 wording; this PKA draft follows PDG S004MC as canonical."
+  - "Future implementation must choose Lorentz-operator, magnetic-field, and spin-state conventions before translating G_C/G_F or P_M Mbar into a model coefficient."
