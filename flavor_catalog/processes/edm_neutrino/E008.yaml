@@ -1,0 +1,189 @@
+schema: flavor_catalog.process.v1
+process_id: E008
+family: edm_neutrino
+standard_notation: "\\tilde d_q"
+process_name: "Quark chromo-EDM bounds from neutron and mercury EDMs"
+owner: "PKA"
+owner_agent_id: "PKA-E008"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T13:17:38-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T13:17:38-04:00"
+    agent_id: "PKA-E008"
+    reason: "Initial PKA source extraction and E008 draft started."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T13:17:38-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T13:17:38-04:00"
+    agent_id: "PKA-E008"
+    reason: "PKA draft, qCEDM source snapshots, and code-coverage grep completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:17:38-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2026_neutron_edm_datablock.txt: "sha256:2478ea90f896fdb38329e53466629812b28d03da57655b7ac07228007dad90ca"
+  graner2016_hg199_arxiv1601_04339.txt: "sha256:8c99b7a6bd9c3da640c504273d4d878e267a4df0ec0433cd9481efed400589c5"
+  pospelov_ritz2000_qcedm_neutron_arxiv_hepph0010037.txt: "sha256:9ca4f0955eb509d9e3810119e25cf1d87260c37c55349d2c3305408f6dc82bcb"
+  olive_pospelov_ritz_santoso2005_hg_qcedm_arxiv_hepph0506106.txt: "sha256:6acee076efaef5749898c01fb0bbf64d36c76699c9bc8c6404c0cddc7239550c"
+  cfw2008_arxiv0804_1954.txt: "sha256:e95bdb2ea3b1e6fbd066c12a07fd278e9b09da8e0d8892112bb8d3f1911c9dd2"
+  koenig_neubert_straub2014_composite_dipoles_arxiv1403_2756.txt: "sha256:5f37e64fd698c59f2d1f88764cb7dbaf531ed52f4fc5a196c83470c231b4c3fb"
+  bhattacharya2024_isovector_qcedm_lattice_arxiv2404_13516.txt: "sha256:4ca90ef93b5e3af37da5a2eaca214f3381dd756a7452494b8acdd8a833f92cc4"
+pdg_or_equivalent:
+  experimental_anchors:
+    neutron_edm:
+      source: "PDG Live 2026 S017EDM neutron electric dipole moment datablock"
+      year: 2026
+      source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM"
+      access_date: "2026-05-16"
+      observable: "Neutron electric dipole moment"
+      value_summary: "|d_n| < 1.8 x 10^-26 e cm at 90% CL"
+      value: 1.8e-26
+      uncertainty: null
+      units: "e cm"
+      limit_operator: "<"
+      confidence_level: "90%"
+      table_value: 0.18
+      table_units: "10^-25 e cm"
+      used_measurement: "Abel et al. 2020"
+      snapshot_path: "flavor_catalog/references/E008/pdg2026_neutron_edm_datablock.txt"
+      sha256: "2478ea90f896fdb38329e53466629812b28d03da57655b7ac07228007dad90ca"
+      sha256_of_local_snapshot: "sha256:2478ea90f896fdb38329e53466629812b28d03da57655b7ac07228007dad90ca"
+    mercury_199_edm:
+      source: "Graner et al., Reduced Limit on the Permanent Electric Dipole Moment of 199Hg"
+      year: 2016
+      source_url: "https://arxiv.org/abs/1601.04339"
+      access_date: "2026-05-16"
+      observable: "199Hg atomic electric dipole moment"
+      value: 2.20
+      statistical_uncertainty: 2.75
+      systematic_uncertainty: 1.48
+      units: "10^-30 e cm"
+      limit_value: 7.4
+      limit_operator: "<"
+      limit_units: "10^-30 e cm"
+      confidence_level: "95%"
+      value_summary: "d_Hg = (2.20 +/- 2.75_stat +/- 1.48_syst) x 10^-30 e cm; |d_Hg| < 7.4 x 10^-30 e cm at 95% CL"
+      improvement_factor_over_previous_limit: 4
+      snapshot_path: "flavor_catalog/references/E008/graner2016_hg199_arxiv1601_04339.txt"
+      sha256: "8c99b7a6bd9c3da640c504273d4d878e267a4df0ec0433cd9481efed400589c5"
+      sha256_of_local_snapshot: "sha256:8c99b7a6bd9c3da640c504273d4d878e267a4df0ec0433cd9481efed400589c5"
+  qcedm_translations:
+    neutron_combination:
+      source: "Pospelov and Ritz, Phys. Rev. D 63, 073015 (2001); arXiv:hep-ph/0010037"
+      year: 2000
+      source_url: "https://arxiv.org/abs/hep-ph/0010037"
+      access_date: "2026-05-16"
+      formula: "d_n = (1 +/- 0.5)[1.1 e(tilde d_d + 0.5 tilde d_u) + 1.4(d_d - 0.25 d_u)] under the Peccei-Quinn convention quoted in the source"
+      assumptions: "Set quark EDM terms and other CP-odd sources to zero; use the current PDG neutron EDM limit."
+      coefficient_for_qcedm_combination: 1.1
+      coefficient_uncertainty_summary: "overall factor (1 +/- 0.5)"
+      derived_bound_value: 1.6e-26
+      derived_bound_operator: "<"
+      derived_bound_observable: "abs(tilde d_d + 0.5 tilde d_u)"
+      derived_bound_units: "cm"
+      derivation: "1.8e-26 / 1.1 = 1.636e-26 cm, rounded to 1.6e-26 cm"
+      snapshot_path: "flavor_catalog/references/E008/pospelov_ritz2000_qcedm_neutron_arxiv_hepph0010037.txt"
+      sha256: "9ca4f0955eb509d9e3810119e25cf1d87260c37c55349d2c3305408f6dc82bcb"
+      sha256_of_local_snapshot: "sha256:9ca4f0955eb509d9e3810119e25cf1d87260c37c55349d2c3305408f6dc82bcb"
+    mercury_isovector_combination:
+      source: "Olive, Pospelov, Ritz, and Santoso, Phys. Rev. D 72, 075001 (2005); arXiv:hep-ph/0506106"
+      year: 2005
+      source_url: "https://arxiv.org/abs/hep-ph/0506106"
+      access_date: "2026-05-16"
+      formula: "d_Hg = 7 x 10^-3 e(tilde d_u - tilde d_d) + 10^-2 d_e + additional four-fermion and semileptonic terms"
+      assumptions: "Set electron EDM, semileptonic, four-fermion, theta, and Weinberg contributions to zero; use the Graner 2016 Hg limit."
+      coefficient_for_isovector_qcedm: 7.0e-3
+      coefficient_uncertainty_summary: "overall coefficient has poor precision due to QCD/nuclear cancellations"
+      derived_bound_value: 1.1e-27
+      derived_bound_operator: "<"
+      derived_bound_observable: "abs(tilde d_u - tilde d_d)"
+      derived_bound_units: "cm"
+      derivation: "7.4e-30 / 7.0e-3 = 1.057e-27 cm, rounded to 1.1e-27 cm"
+      snapshot_path: "flavor_catalog/references/E008/olive_pospelov_ritz_santoso2005_hg_qcedm_arxiv_hepph0506106.txt"
+      sha256: "6acee076efaef5749898c01fb0bbf64d36c76699c9bc8c6404c0cddc7239550c"
+      sha256_of_local_snapshot: "sha256:6acee076efaef5749898c01fb0bbf64d36c76699c9bc8c6404c0cddc7239550c"
+  post_2008_context:
+    cfw_baseline:
+      source: "Csaki, Falkowski, and Weiler, JHEP 09 (2008) 008; arXiv:0804.1954"
+      year: 2008
+      source_url: "https://arxiv.org/abs/0804.1954"
+      access_date: "2026-05-16"
+      value_summary: "RS-flavor baseline quotes generic KK-gluon mass bounds near 21 TeV and pseudo-Goldstone scenario bounds near 33 TeV."
+      values:
+        - observable: "generic RS KK-gluon mass scale"
+          value: 21
+          units: "TeV"
+        - observable: "pseudo-Goldstone scenario KK-gluon mass scale"
+          value: 33
+          units: "TeV"
+      snapshot_path: "flavor_catalog/references/E008/cfw2008_arxiv0804_1954.txt"
+      sha256: "e95bdb2ea3b1e6fbd066c12a07fd278e9b09da8e0d8892112bb8d3f1911c9dd2"
+      sha256_of_local_snapshot: "sha256:e95bdb2ea3b1e6fbd066c12a07fd278e9b09da8e0d8892112bb8d3f1911c9dd2"
+    composite_dipoles:
+      source: "Koenig, Neubert, and Straub, Eur. Phys. J. C 74, 2945 (2014); arXiv:1403.2756"
+      year: 2014
+      source_url: "https://arxiv.org/abs/1403.2756"
+      access_date: "2026-05-16"
+      value_summary: "Composite/warped dipole analysis using the older neutron limit |d_n| < 2.9 x 10^-26 e cm at 90% CL; one-at-a-time imaginary Wilson-coefficient scale bounds include Q_uug 1.45 TeV and Q_ddg 3.79 TeV."
+      values:
+        - observable: "older neutron EDM limit used in the 2014 analysis"
+          value: 2.9e-26
+          units: "e cm"
+          confidence_level: "90%"
+        - observable: "model-independent one-at-a-time scale bound for Im Q_uug at 1 TeV"
+          value: 1.45
+          units: "TeV"
+        - observable: "model-independent one-at-a-time scale bound for Im Q_ddg at 1 TeV"
+          value: 3.79
+          units: "TeV"
+      snapshot_path: "flavor_catalog/references/E008/koenig_neubert_straub2014_composite_dipoles_arxiv1403_2756.txt"
+      sha256: "5f37e64fd698c59f2d1f88764cb7dbaf531ed52f4fc5a196c83470c231b4c3fb"
+      sha256_of_local_snapshot: "sha256:5f37e64fd698c59f2d1f88764cb7dbaf531ed52f4fc5a196c83470c231b4c3fb"
+    lattice_qcedm:
+      source: "Bhattacharya et al., arXiv:2404.13516"
+      year: 2024
+      source_url: "https://arxiv.org/abs/2404.13516"
+      access_date: "2026-05-16"
+      value_summary: "Lattice-QCD calculation of the isovector qCEDM contribution to the neutron EDM using four 2+1+1 flavor HISQ ensembles and Wilson-clover quarks; controls power-divergent pseudoscalar mixing with the nonsinglet axial Ward identity and converts to MS at leading-log order."
+      values:
+        - observable: "number of lattice ensembles stated in the abstract"
+          value: 4
+          units: "ensembles"
+      snapshot_path: "flavor_catalog/references/E008/bhattacharya2024_isovector_qcedm_lattice_arxiv2404_13516.txt"
+      sha256: "4ca90ef93b5e3af37da5a2eaca214f3381dd756a7452494b8acdd8a833f92cc4"
+      sha256_of_local_snapshot: "sha256:4ca90ef93b5e3af37da5a2eaca214f3381dd756a7452494b8acdd8a833f92cc4"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"quark.?chromo|chromo.?EDM|CEDM|cEDM|chromoelectric|Weinberg|neutron.?EDM|mercury.?EDM|Hg.?EDM|199Hg|electric dipole moment\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+  findings:
+    - "Focused qCEDM/neutron-EDM/mercury-EDM/Weinberg grep over the required implementation/test directories returned exit=1, no matches."
+    - "Generic EDM/dipole grep found only the off-diagonal mu->e gamma dipole helper and unrelated QCD/Delta F=2 running vocabulary."
+    - "flavorConstraints/muToEGamma.py:3 describes an off-diagonal LFV dipole operator."
+    - "flavorConstraints/muToEGamma.py:21 cites the Perez-Randall mu->e gamma dipole operator."
+    - "flavorConstraints/muToEGamma.py:81 implements check_mu_to_e_gamma, not qCEDM or hadronic EDMs."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "Requires new CP-odd quark EDM/qCEDM operators, RS loop matching, QCD running and threshold mixing, and hadronic/nuclear matrix-element choices. Existing Delta F=2 and mu->e gamma code paths do not provide this observable."
+open_issues:
+  - "The quoted qCEDM limits are central one-source-at-a-time translations, not a global EDM fit. WA/CA should decide whether to present them as bounds, benchmarks, or only EFT translation examples."
+  - "A live implementation would need a PI choice of low-energy CP-odd basis, Peccei-Quinn/theta treatment, and hadronic/nuclear matrix-element defaults."
