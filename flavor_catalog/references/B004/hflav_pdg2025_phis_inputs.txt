@@ -1,0 +1,32 @@
+Source key: HFLAV2025:PhiSInputs
+URL: https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/HFLAV_phis_inputs/HFLAV_phis_inputs.pdf
+Access date: 2026-05-16
+Local snapshot purpose: minimal text extract for B004 phi_s in Bs -> J/psi phi.
+License note: text snapshot only; no publisher PDF tracked.
+
+Source title:
+Heavy Flavor Averaging Group (HFLAV), PDG 2025.
+Table 1: Direct experimental measurements of phi_s^ccs and, wherever applicable,
+DeltaGamma_s using J/psi K+K-, psi(2S)K+K-, J/psi pi+pi-, and Ds+ Ds- decays.
+The first error is statistical and the second systematic. The last two lines
+give HFLAV averages, with DeltaGamma_s uncertainties scaled for inconsistencies
+between Bs0 -> J/psi K+K- measurements.
+
+Extracted values used in B004:
+- LHCb Bs0 -> J/psi K+K-, Run 2, 6 fb^-1:
+  phi_s^ccs = -0.039 +/- 0.022 +/- 0.006 rad;
+  DeltaGamma_s = +0.0845 +/- 0.0044 +/- 0.0024 ps^-1.
+- LHCb above nine measurements combined:
+  phi_s^ccs = -0.033 +/- 0.018 rad;
+  DeltaGamma_s = +0.085 +/- 0.004 ps^-1.
+- Bs0 -> J/psi K+K- combined:
+  phi_s^ccs = -0.050 +/- 0.017 rad;
+  DeltaGamma_s = +0.077 +/- 0.006 ps^-1.
+- All combined:
+  phi_s^ccs = -0.041 +/- 0.016 rad;
+  DeltaGamma_s = +0.079 +/- 0.006 ps^-1.
+
+Reference identities in the HFLAV table for the key post-2008 inputs:
+- LHCb PRL 114, 041801 (2015), arXiv:1411.3104.
+- LHCb PRL 132, 051802 (2024), arXiv:2308.01468.
+- LHCb EPJC 81, 1026 (2021), arXiv:2105.14738.

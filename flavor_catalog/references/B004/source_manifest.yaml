@@ -1,0 +1,37 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B004
+generated_at: "2026-05-16T12:57:27-04:00"
+references:
+  - key: hflav_pdg2025_phis_inputs
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV PDG 2025 phi_s input table"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/HFLAV_phis_inputs/HFLAV_phis_inputs.pdf"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:ae8171d0b32e36087e25893f033989fdde4dd7a4179100746ca18eaec7a79cc0"
+    snapshot_path: "flavor_catalog/references/B004/hflav_pdg2025_phis_inputs.txt"
+    local_snapshot_policy: "Minimal text extract only; no publisher PDF tracked."
+  - key: lhcb_2024_jpsikk_phis_arxiv
+    arxiv_id: "2308.01468"
+    DOI: "10.1103/PhysRevLett.132.051802"
+    title: "Improved measurement of CP violation parameters in Bs0 -> J/psi K+K- decays in the vicinity of the phi(1020) resonance"
+    authors: "LHCb Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2308.01468"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:d94a1b07a02beb47108ac6a5f7a3cc8c143655023c50e78513025e5b5d70a84e"
+    snapshot_path: "flavor_catalog/references/B004/lhcb_2024_jpsikk_phis_arxiv.txt"
+    local_snapshot_policy: "Minimal arXiv text extract; no PDF tracked."
+  - key: cfw_2008_rs_flavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:c15fcb365487c5f464aa94d27d6204c870985326f5cfef70832aa200bac265a0"
+    snapshot_path: "flavor_catalog/references/B004/cfw_2008_rs_flavor.txt"
+    local_snapshot_policy: "Minimal arXiv abstract/context extract; no PDF tracked."
