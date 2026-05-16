@@ -41,10 +41,19 @@ status_history:
     reason: "Checker found CHK-1 strict provenance issue; see flavor_catalog/worklogs/checker/ca_w4_kaon_edm.md."
     issues:
       - "CHK-1: Value-bearing pdg_or_equivalent blocks for the PDG average, NA62 input, KLOE input, and Cirigliano-Rosell SM prediction lack explicit year fields."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:56:26-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:56:26-04:00"
+    agent_id: "WA-v2"
+    reason: "Cycle-2 writer rework added explicit year fields for strict CHK-1 provenance."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:47:19-04:00"
-version: "0.1.1"
+last_updated_at: "2026-05-16T13:56:26-04:00"
+version: "0.1.2"
 source_shas:
   pdg2025_rk_api_20260516.txt: "sha256:c00ed1ff90dd3cb58e44db0acfa9bdefd07fef7ee6dea6ff0812f416fcd62686"
   na62_2013_arxiv1212_4012.txt: "sha256:b6389e67165375f69c6fdfeb59c5b893cba3698addd7799e9fa0afdc562d1d70"
@@ -56,6 +65,7 @@ pdg_or_equivalent:
   canonical_ratio:
     source: "PDG API / PDG Live summary S010R28"
     edition: "2025"
+    year: 2025
     citation: "S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update"
     value: "2.488"
     uncertainty: "0.009"
@@ -70,6 +80,7 @@ pdg_or_equivalent:
   dominant_experimental_input:
     source: "NA62 Collaboration, Phys. Lett. B 719 (2013) 326"
     arxiv_id: "1212.4012"
+    year: 2013
     value: "2.488"
     stat_uncertainty: "0.007"
     syst_uncertainty: "0.007"
@@ -84,6 +95,7 @@ pdg_or_equivalent:
   supporting_experimental_input_kloe:
     source: "KLOE Collaboration, Eur. Phys. J. C 64 (2009) 627"
     arxiv_id: "0907.3594"
+    year: 2009
     value: "2.493"
     stat_uncertainty: "0.025"
     syst_uncertainty: "0.019"
@@ -98,6 +110,7 @@ pdg_or_equivalent:
   sm_prediction:
     source: "Cirigliano and Rosell, JHEP 0710 (2007) 005"
     arxiv_id: "0707.4464"
+    year: 2007
     value: "2.477"
     uncertainty: "0.001"
     scale: "1e-5"
