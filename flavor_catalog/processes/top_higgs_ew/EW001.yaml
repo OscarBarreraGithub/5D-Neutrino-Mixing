@@ -6,7 +6,7 @@ process_name: "Peskin-Takeuchi oblique electroweak parameters"
 owner: "PKA"
 owner_agent_id: "PKA-EW001"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -36,9 +36,19 @@ status_history:
     cycle: 2
     batch_id: "wa_w4_ew_v2"
     reason: "Addressed CA CHK-4 finding by appending WA-v2 completion transition and creating the WA-v2 batch worklog."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T14:16:36-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T14:16:36-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    cycle: 2
+    batch_id: "ca_w4_ew_v2"
+    reason: "Cycle 2 checker re-check passed CHK-1 through CHK-8."
+checker_passed_at: "2026-05-16T14:16:36-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:56:45-04:00"
+last_updated_at: "2026-05-16T14:16:36-04:00"
 version: "0.1.0"
 source_shas:
   cfw_2008_rs_flavor.txt: "sha256:3233891e61f28ce2755a145f3a3fd48095b5244beff40e72debc41a7f4d029bc"
