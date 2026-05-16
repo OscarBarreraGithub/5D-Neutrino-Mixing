@@ -1,0 +1,2092 @@
+Modern Observable Inventory for Warped ExtraDimensional Flavor Models
+Scope and triage
+A modern Randall–Sundrum flavor analysis should be organized by operator classes, not by a short list of
+“famous decays.” In today’s data, the observables that most directly probe warped flavor models are those
+sensitive to tree-level or one-loop effects from heavy KK vectors and fermions: ΔF=2 four-fermion
+operators, modified Z and W couplings, dipole operators, semileptonic FCNCs, and CP-odd dipoles
+such as EDMs. That is why a credible 2026-era inventory must simultaneously cover kaon, Bd,s , charm, top,
+electroweak, charged-lepton-flavor-violation, and EDM observables. Recent measurements underscore this
+−11
+point: NA62 now quotes B(K + → π + ν ν
+ˉ) = 9.6+1.9
+; HFLAV reports that RK and RK ∗ are now
+−1.8 × 10
+consistent with the SM while tensions in b
+pushed μ
+
+→ eγ below 1.5 × 10
+
+−13
+
+.
+
+→ sℓ+ ℓ− angular observables and rates remain; and MEG II has
+
+1
+
+For practical use in a warped-flavor paper, the RS model classes in your prompt can be mapped to
+observables as follows. This is a phenomenology triage, not a substitute for a full operator-level scan:
+RS class
+Anarchic RS
+
+Observables that usually dominate
+
+εK , K -mixing operators, b → sγ , Bd,s mixing and phases, Z → bbˉ, ε′ /ε,
+rare kaons, EDMs, and CLFV if leptons are also anarchic in the bulk
+Same flavor set as anarchic RS, but ZbLˉ
+bL is partially protected, so rare
+
+Custodial RS
+
+semileptonic modes and B -mixing become comparatively more important
+than in non-custodial setups
+
+RS-GIM
+
+Same sectors, but many bounds soften; rare kaons, b
+
+→ sℓℓ, dipoles, and
+
+precision electroweak flavor non-universality remain valuable
+Down-sector FCNCs are often reduced; B -mixing, rare B decays, and
+
+5D MFV RS
+
+electroweak observables remain relevant, but the classic anarchic εK crisis
+is weakened
+
+Down-aligned /
+shining / flavoraligned RS
+Up-aligned RS
+
+Lepton-bulk RS
+
+K and Bd,s FCNCs can be greatly reduced, so D0 -mixing, rare charm, and
+top FCNCs become especially important
+Charm/top bounds soften, so the kaon and B -sector again become the
+dominant constraints
+
+μ → eγ , μ → 3e, μN → eN , τ LFV, LFU tests, and semileptonic LFV
+meson decays become mandatory
+
+1
+
+RS class
+
+Observables that usually dominate
+
+CP-protected / CPaligned RS
+
+EDMs and CP-violating observables such as εK , SϕKS , and Bs penguin
+phases are the place to test whether the protection actually works
+
+The most useful working labels for a fit are:
+• Critical: should be in the baseline likelihood now.
+• Important: include unless you are deliberately narrowing the model space.
+• Secondary: informative and often diagnostic, but presently weaker or theory-limited.
+• Future-facing: not yet decisive, but likely to matter in the near term.
+
+Kaon observables
+The kaon sector is still the single most punishing arena for generic warped flavor. The reason is structural:
+RS models naturally generate new ΔS = 2 operators, especially chirally enhanced LR structures, and
+modified Z -penguins that feed directly into rare kaons. Even in aligned or MFV-inspired versions, kaon
+observables remain the cleanest way to test whether down-sector FCNC protection is truly working.
+
+Observable
+
+What is
+measured and
+transition
+
+Current status and SM
+theory status
+
+Why it matters for RS
+
+Priority
+
+Experiment is
+extremely precise;
+theory is less clean
+than for εK because
+Mass splitting
+ˉ0
+in K 0 –K
+
+ΔmK
+
+mixing,
+s → d, ΔS
+
+2
+
+=
+
+long-distance
+contributions are
+important, so this is
+best treated as a
+conservative
+consistency bound
+rather than a
+sharpened shortdistance constraint.
+FLAG supplies the key
+short-distance hadronic
+
+^K .
+input B
+
+2
+
+2
+
+Sensitive to the same
+KK-gluon / KK-Z fourquark operators that
+make anarchic RS
+difficult; especially
+relevant for anarchic,
+custodial, and generic
+RS-GIM constructions
+
+Critical, but
+treat theory
+cautiously
+
+Observable
+
+What is
+measured and
+transition
+
+Current status and SM
+theory status
+
+Why it matters for RS
+
+Priority
+
+Still the classic killer
+observable for
+anarchic RS because it
+is sensitive to CPviolating LR ΔS = 2
+
+Critical
+
+PDG quotes Re(ε′ /ε)
+separately and the
+kaon CP review gives
+the standard εK
+
+εK
+
+Indirect CP
+violation in
+ˉ0
+K 0 –K
+mixing,
+s → d, ΔS
+
+framework; modern
+
+=
+
+2
+
+lattice-based analyses
+still find that direct SM
+evaluations can show a
+sizable tension
+depending mainly on
+the choice of Vcb , while
+global CKM fits remain
+
+operators; any claimed
+flavor protection in RS
+must be checked here
+first
+
+compatible with the
+SM. 3
+Experimental world
+average remains
+
+Re(ε′ /ε) = (16.6 ±
+2.3) × 10−4 . Theory
+
+ε′ /ε in
+K → ππ
+
+Direct CP
+violation in
+
+s → dqqˉ
+amplitudes
+
+has improved but is not
+yet settled; lattice and
+semi-analytic
+approaches continue to
+refine the SM
+prediction, and the
+uncertainty is still
+driven by hadronic
+matrix elements and
+isospin-breaking
+effects. 4
+NA62 now reports B =
+−11
+(9.6+1.9
+, in
+−1.8 ) × 10
+
+K+ →
+π + ν νˉ
+
+Rare charged
+kaon decay,
+
+s → dννˉ
+
+very good agreement
+with the PDG/SM
+expectation of about
+8 × 10−11 . This is one
+of the cleanest shortdistance flavor
+observables in the field.
+5
+
+Especially important in
+RS because
+electroweak penguins
+and chromomagnetic
+operators can be
+enhanced; it is one of
+the best tests of
+warped down-sector
+CP structure beyond
+
+εK
+
+RS models with
+modified Z or Z ′
+couplings to down
+quarks can shift this
+decay at tree level; it is
+central for anarchic,
+custodial, RS-GIM, and
+also alignment models
+that do not perfectly
+protect s → d
+semileptonic currents
+
+3
+
+Critical
+
+Critical
+
+Observable
+
+What is
+measured and
+transition
+
+Current status and SM
+theory status
+Still not observed; PDG
+
+KL →
+π 0 ν νˉ
+
+CP-violating
+neutral kaon
+decay, s →
+
+dννˉ
+
+KL →
+μ+ μ−
+
+KS →
+μ+ μ−
+
+Rare neutral
+kaon decay,
+
+s → dℓ+ ℓ−
+
+Rare CPsensitive kaon
+decay, s →
+
+dμ+ μ−
+
+KL →
+π 0 e+ e− ,
+KL →
+π 0 μ+ μ−
+
+Rare neutral
+kaon
+semileptonic
+decays, s →
+
+dℓ+ ℓ−
+
+cites a current limit at
+the 10−9 level from
+KOTO, vastly above the
+SM expectation of
+order 3 × 10−11 . The
+SM prediction is
+extremely clean. 6
+Measured precisely,
+with the absorptive
+two-photon
+contribution nearly
+saturating the rate; the
+short-distance
+dispersive piece is
+much harder and has
+seen recent theoretical
+refinement. 7
+PDG quotes an upper
+limit in the 10−10
+range; the SM
+branching ratio is much
+smaller and the
+channel is increasingly
+discussed as an
+interference-based
+probe of short-distance
+physics. 8
+
+Still limit-dominated
+experimentally; PDG
+quotes SM expectations
+at the ∼ 10−11 level,
+with known separation
+into direct-CPV,
+indirect-CPV, and CPconserving pieces. 8
+
+4
+
+Why it matters for RS
+
+In RS this mode
+isolates CP-violating
+s → dZ (∗) couplings
+especially well; it is a
+decisive future
+classifier between CPaligned and nonaligned scenarios
+Valuable because
+warped models often
+modify the same
+semileptonic operators
+that feed K → πνν
+ˉ,
+
+Priority
+
+Critical, with
+a strongly
+future-facing
+experimental
+profile
+
+Important
+
+but here the theory is
+less clean; still useful
+as a cross-check on Z penguin patterns
+Particularly interesting
+for RS models with
+right-handed
+semileptonic currents;
+presently not
+competitive with
+K → πννˉ, but it
+
+Secondary,
+becoming
+future-facing
+
+probes a
+complementary
+operator combination
+These modes are
+valuable if one wants
+to distinguish leftversus right-handed
+semileptonic operators
+in warped scenarios;
+they are not as clean or
+strong as K → πνν
+ˉ,
+but they help with
+operator diagnosis
+
+Important
+
+Observable
+
+LFV kaon
+decays such
+as KL →
+
+μe, K + →
+π + μe
+
+What is
+measured and
+transition
+
+Simultaneous
+quark and
+lepton flavor
+violation
+
+Current status and SM
+theory status
+
+Null tests with very
+strong upper limits
+compiled by PDG; the
+SM background is
+effectively zero. 6
+
+Why it matters for RS
+
+Mandatory if the
+model includes
+nontrivial bulk lepton
+flavor or quark–lepton
+flavor linkages; usually
+subleading to μ → eγ
+and μN
+
+→ eN , but
+
+Priority
+
+Secondary for
+quark-only RS,
+Important for
+lepton-bulk RS
+
+very useful crosschecks
+For the kaon sector, the minimum modern RS baseline is: εK , ε′ /ε, K +
+semileptonic cross-check such as KL
+
+→ π + ν νˉ, KL → π 0 ν νˉ, and one
+
+→ μ+ μ− . If the construction claims down-sector alignment, then the
+
+kaon modes become the place where residual misalignment must be quantified rather than assumed away.
+9
+
+Bottom observables
+The B sector is the broadest modern handle on warped flavor because it probes all of the important RS
+operator classes: ΔB
+
+= 2 mixing, electromagnetic and chromomagnetic dipoles, semileptonic Z -
+
+penguins, Higgs/scalar effects, right-handed currents, and modified charged currents. It is also where
+custodial protection and alignment can reshuffle which measurements dominate.
+
+Observable
+
+What is
+measured and
+transition
+
+Current status and SM
+theory status
+
+HFLAV gives Δmd
+
+Bd and Bs
+Δmd , Δms
+
+mass
+splittings,
+b → d, s,
+
+ΔB = 2
+
+=
+0.5069 ± 0.0019 ps−1
+and Δms = 17.766 ±
+0.006 ps−1 . SM
+interpretation depends
+mainly on lattice inputs
+fB2 q BBq and ξ . 10
+
+5
+
+Why it matters for
+RS
+
+Priority
+
+Benchmark probes
+of KK-gluon and
+electroweak
+ΔB = 2 operators;
+essential in
+anarchic, custodial,
+RS-GIM, and still
+necessary in MFVlike warped setups
+
+Critical
+
+Observable
+
+What is
+measured and
+transition
+
+Current status and SM
+theory status
+
+Why it matters for
+RS
+
+Priority
+
+These are the
+cleanest B -sector
+
+SJ/ψKS ,
+CJ/ψKS , ϕs
+from Bs →
+J/ψϕ
+
+Mixinginduced CP
+phases in b
+
+HFLAV quotes ϕcscˉs
+
+→
+
+ccˉs modes
+
+=
+
+−0.052 ± 0.013 rad; the
+“golden mode” SJ/ψKS
+remains very close to the
+CKM expectation. 11
+
+HFLAV finds ΔΓs
+
+ΔΓs ,
+semileptonic
+asymmetries
+
+ad,s
+sl , ∣q/p∣d,s
+
+=
+0.0781 ± 0.0035 ps−1 ,
+∣qs /ps ∣ = 1.0003 ±
+0.0014, ∣qd /pd ∣ =
+1.0010 ± 0.0008, with no
+
+Width
+differences
+and CPV in
+mixing
+
+established CPV in mixing.
+12
+
+CP phases and are
+central for testing
+new weak phases in
+warped ΔB = 2
+
+Critical
+
+operators; they are
+especially useful in
+CP-aligned vs nonaligned RS
+comparisons
+Not usually the first
+constraint, but they
+are important
+consistency checks
+when an RS fit
+introduces new
+ΔB = 2 phases;
+
+Important
+
+useful for ruling out
+fine-tuned corners
+that survive Δmd,s
+alone
+
+→
+Xs γ)Eγ >1.6 GeV =
+(3.49 ± 0.19) × 10−4 ;
+HFLAV quotes B(B
+
+B → Xs γ
+
+Inclusive
+radiative
+decay, b →
+
+sγ
+
+current NNLO SM
+predictions are at ∼
+3.4 × 10−4 , so the
+agreement is tight.
+
+6
+
+13
+
+A cornerstone
+bound on warped
+dipole operators
+from KK fermion
+loops. It is
+unavoidable in
+anarchic RS and
+remains important
+even when
+semileptonic FCNCs
+are partially aligned
+
+Critical
+
+Observable
+
+Radiative CP
+observables
+
+ACP (B →
+Xs γ), SK ∗ γ ,
+Bs → ϕγ CP
+
+What is
+measured and
+transition
+
+CP and helicity
+structure in
+
+b → sγ
+
+asymmetries
+
+Inclusive
+
+B → Xs ℓ+ ℓ−
+
+Inclusive
+semileptonic
+FCNC, b →
+
+sℓ+ ℓ−
+
+Current status and SM
+theory status
+
+Why it matters for
+RS
+
+Priority
+
+Experimentally weaker
+than the inclusive
+branching ratio, but still
+an important null-test set;
+right-handed dipoles are
+far more visible here than
+in the total rate alone.
+HFLAV maintains
+dedicated radiative-decay
+averages. 14
+
+Especially
+diagnostic for RS
+models with sizable
+right-handed
+currents or split LH/
+RH localization
+patterns
+
+Important
+
+Still theoretically cleaner
+than many exclusive
+channels; global status
+remains shaped by
+tensions in rates and
+angular observables
+rather than LFU ratios.
+HFLAV and LHCb reviews
+both emphasize that LFU
+anomalies have receded,
+but b → sℓℓ tensions
+persist.
+
+Exclusive
+
+B→
+K (∗) ℓ+ ℓ− ,
+including
+angular
+observables
+such as P5′ ,
+
+AFB , FL
+
+Exclusive
+semileptonic
+FCNC, b →
+
+sℓ+ ℓ−
+
+15
+
+HFLAV reports persistent
+tensions in branching
+fractions and angular
+observables; LHCb’s 2024–
+2026 amplitude analyses
+do not favor anomalously
+large long-distance charm
+effects, though a full SM
+interpretation is still
+under active study. 16
+
+7
+
+Important because
+RS often modifies
+C9 , C10 , and their
+primed
+counterparts
+through Z -penguin
+physics; inclusive
+modes help
+distinguish genuine
+short-distance
+effects from
+exclusive hadronic
+issues
+
+Critical
+
+Among the best
+operator-diagnostic
+observables for
+warped Z penguins and righthanded currents;
+they are especially
+valuable in
+custodial
+constructions
+where semileptonic
+currents can be
+prominent
+
+Critical
+
+Observable
+
+What is
+measured and
+transition
+
+Current status and SM
+theory status
+
+=
+0.947 ± 0.047 and
+RK ∗ = 1.028 ± 0.074 in
+the standard low-q 2
+HFLAV now quotes RK
+
+RK , RK ∗
+
+LFU ratios in
+
+b → sℓ+ ℓ−
+
+region, consistent with the
+SM. 12
+
+Bs → μ+ μ− ,
+Bd → μ+ μ− ,
+and the
+
+Bs → μ+ μ−
+effective
+
+Recent theory work
+quotes an SM Bs →
+Rare leptonic
+decays, b →
+
+s, d ℓ+ ℓ−
+
+μ+ μ− prediction around
+3.64 × 10−9 ; current
+averages are close, with
+the measured value still
+somewhat lower but
+statistically compatible.
+
+lifetime
+
+Why it matters for
+RS
+
+Priority
+
+No longer an
+anomaly-driven
+constraint, but still
+mandatory for
+lepton-bulk RS or
+any model with
+non-universal
+lepton localization;
+they cleanly test
+whether RS effects
+are lepton universal
+
+Important
+for leptonbulk RS,
+Secondary
+otherwise
+
+Very important in
+RS because these
+decays are directly
+sensitive to axialvector and scalar
+semileptonic
+operators; they are
+among the cleanest
+b → s tests after
+
+B -mixing and b →
+sγ
+
+17
+
+In RS, b
+
+B → Kννˉ,
+B → K ∗ ν νˉ
+
+Invisible
+semileptonic
+FCNC, b →
+
+sννˉ
+
+Critical
+
+Belle II has reported new
+results, including evidence
+for B + → K + ν ν
+ˉ, and
+these decays remain
+theoretically clean, limited
+mostly by form factors.
+18
+
+8
+
+→ sννˉ
+
+shares the same
+semileptonic
+operator origin as
+b → sℓ+ ℓ− but
+probes different
+lepton structures
+and invisible final
+states; very useful
+in custodial and
+lepton-bulk setups
+
+Important,
+trending
+toward
+Critical
+
+Observable
+
+B + → τ + ντ
+
+What is
+measured and
+transition
+
+Purely leptonic
+chargedcurrent decay,
+
+b → uτν
+
+Current status and SM
+theory status
+
+Belle II reported evidence
+at 3.0σ with B = [1.24 ±
+
+0.41(stat) ±
+0.19(syst)] × 10−4 . The
+SM prediction depends
+mainly on fB and ∣Vub ∣.
+19
+
+HFLAV gives R(D)
+
+R(D), R(D∗ )
+
+LFU ratios in
+
+b → cτν
+
+0.342 ± 0.026,
+R(D∗ ) = 0.286 ± 0.012,
+with a combined tension
+of 3.14σ relative to the
+SM.
+
+B → πK
+branching
+ratios and
+direct CP
+asymmetries
+
+Nonleptonic
+EW-penguin
+and QCDpenguin
+system, mainly
+
+b → sqqˉ
+
+=
+
+12
+
+HFLAV continues to report
+the long-lived “Kπ CP
+puzzle,” with precise
+asymmetries such as
+0
+
++ −
+
+ACP (B → K π ) =
+−0.0836 ± 0.0032.
+Theory is hadronic and
+less clean than in rare
+decays. 12
+
+9
+
+Why it matters for
+RS
+
+Priority
+
+Sensitive to
+modified chargedcurrent couplings in
+RS, including nonuniversal W
+couplings and
+fermion mixing
+effects; also useful
+when connecting
+quark and lepton
+localization
+patterns
+
+Important
+
+Not a “classic RS
+killer,” but
+important in
+models with
+modified lefthanded charged
+currents or lepton
+non-universality;
+worth including if
+the model has
+nontrivial lepton
+localization or
+custodial fermion
+structure
+Important because
+RS can generate
+sizeable
+electroweak
+penguins and righthanded
+contributions.
+These observables
+are best used as
+diagnostics, not as
+stand-alone
+precision fit
+anchors
+
+Important
+
+Important,
+but theorylimited
+
+Observable
+
+SϕKS , Sη′ KS ,
+Bs → ϕϕ CP
+observables
+
+What is
+measured and
+transition
+
+Penguindominated CP
+asymmetries,
+mainly b →
+
+ssˉs
+
+LFV B decays
+such as
+
+B 0 → μτ ,
+B 0 → eτ ,
+B → Kμe
+
+Simultaneous
+quark and
+lepton flavor
+violation
+
+Current status and SM
+theory status
+
+LHCb has made
+increasingly precise
+Bs → ϕϕ measurements,
+with no established
+deviation from the SM; Bd
+penguin CP asymmetries
+remain standard
+components of HFLAV/
+PDG CP summaries. 20
+
+HFLAV quotes, for
+example, B(B 0 →
+
+μ± τ ∓ ) < 1.2 × 10−5 and
+B(B 0 → e± τ ∓ ) <
+1.6 × 10−5 . 12
+
+Why it matters for
+RS
+These are classic RS
+diagnostics for new
+phases in
+electroweak or
+gluonic penguins.
+They matter most if
+a model survives
+the cleaner B -
+
+Priority
+
+Important
+
+mixing and raresemileptonic
+constraints
+Usually subleading
+to μ → eγ and
+
+μN → eN , but
+they become useful
+cross-checks in
+unified quark–
+lepton warped
+
+Secondary
+
+models
+If you need a minimal but still modern B -sector RS core, it is: Δmd,s , SJ/ψKS , ϕs , B
+and/or exclusive b
+
++ −
+
++ −
+
+→ sℓ ℓ , Bs → μ μ , one invisible mode family B → K
+
+penguin-dominated CP set.
+
+(∗)
+
+→ Xs γ , inclusive
+
+ν νˉ, and at least one
+
+21
+
+Charm, top, and electroweak observables
+This is the sector that becomes decisive as soon as you suppress down-sector FCNCs. In particular, downaligned, shining, and some 5D MFV-like constructions can survive kaon bounds only to run into D -mixing
+or top-FCNC trouble.
+
+10
+
+Observable
+
+What is
+measured
+and transition
+
+Current status and
+SM theory status
+HFLAV reports x
+
+D0 mixing: x, y ,
+∣q/p∣, ϕ,
+x12 , y12 , ϕ12
+
+c → u,
+ΔC = 2
+mixing and
+CPV
+
+Why it matters for RS
+
+Priority
+
+=
+
+(0.41 ± 0.04)%,
+y = (0.65 ± 0.02)%,
+∣q/p∣ = 0.994 ±
+0.016, ϕ = (−2.6 ±
+1.2)∘ ; no-mixing is
+
+This is the central
+observable family for
+down-aligned or
+shining RS models,
+
+excluded by more
+than 11σ , but CPV
+
+constraints are
+weakened but upsector FCNCs remain
+
+remains consistent
+with zero. 12
+
+where kaon and B
+
+Critical in
+downaligned/
+shining RS;
+Important
+otherwise
+
+Especially useful
+
+Charm CPV:
+ind
+Δadir
+CP , aCP , AΓ
+
+Direct and
+indirect CPV
+in c → uqqˉ
+decays
+
+HFLAV quotes
+
+Δadir
+CP = (−0.159 ±
+0.029)% and aind
+CP =
+(−0.010 ± 0.012)%.
+12
+
+because CPV
+observables can be
+cleaner NP probes than
+the absolute mixing
+amplitudes in charm;
+RS phases surviving
+kaon protection often
+
+Important
+
+show up here
+
+D0 → μ+ μ−
+
+Rare charm
+FCNC, c →
++ −
+
+uμ μ
+
+Rare
+semileptonic
+charm modes
+such as D →
+
+P ℓ+ ℓ− , D 0 →
+h+ h− ℓ+ ℓ− , and
+angular CP tests
+
+LHCb sets B(D 0
+
+→
+μ μ ) < 3.1 × 10−9
++ −
+
+at 90% CL, the world’s
+best limit. 22
+
+LHCb has already
+performed angular
+analyses in D 0 →
+Rare charm
+FCNCs, c →
+
+uℓ+ ℓ−
+
+π + π − μ+ μ− and
+D0 → K + K − μ+ μ− ,
+and recent rarecharm reviews
+emphasize the
+growing sensitivity of
+this program. 23
+
+11
+
+A null test with tiny SM
+expectations; not as
+constraining as D mixing today, but
+excellent as a crosscheck on up-sector
+semileptonic FCNCs in
+aligned warped models
+
+These are not yet toptier constraints, but
+they are very useful for
+operator diagnosis if a
+model predicts
+semileptonic up-sector
+FCNCs
+
+Important
+
+Secondary,
+but distinctly
+futurefacing
+
+Observable
+
+t → uZ , t →
+cZ
+
+What is
+measured
+and transition
+
+Top FCNC
+decays, t →
+
+qZ
+
+Current status and
+SM theory status
+PDG’s 2024 top review
+quotes 95% CL limits
+
+B(t → Zu) < 6.2 ×
+10−5 and B(t →
+Zc) < 1.3 × 10−4 .
+24
+
+PDG quotes
+combined limits
+
+t → uH , t →
+cH
+
+Top HiggsFCNC decays,
+
+t → qH
+
+B(t → uH) <
+1.9 × 10−4 and
+B(t → cH) < 3.7 ×
+10−4 ; the recent CMS
+analysis reaches
+essentially these
+scales. 25
+
+−5
+
+t → qγ , t → qg
+
+uγ) < 0.85 × 10 ,
+B(t → cγ) < 4.2 ×
+10−5 , B(t → ug) <
+0.61 × 10−4 , and
+B(t → cg) < 3.7 ×
+10−4 . 24
+PDG’s electroweak
+review gives Rb =
+
+0.21629 ± 0.00066
+Z → bbˉ: Rb ,
+Ab , A0,b
+FB
+
+Flavor nonuniversal
+electroweak
+couplings of
+the b quark
+
+versus an SM fit
+
+0.21583 ± 0.00002,
+and notes that the basymmetry extraction
+of sin
+
+2
+
+θW remains
+
+somewhat high
+relative to the global
+fit. 26
+
+12
+
+Priority
+
+One of the cleanest
+collider probes of
+warped up-sector
+FCNCs. If down-sector
+alignment is invoked,
+these modes often
+become decisive
+
+Important
+now; Critical
+in alignedup-sector
+studies
+
+Highly relevant in
+warped models where
+Higgs FCNCs arise from
+fermion mixing and
+Yukawa misalignment;
+complementary to
+t → qZ because the
+
+Important
+
+operator origin is
+different
+
+PDG quotes limits
+such as B(t →
+Top dipole
+FCNC decays
+
+Why it matters for RS
+
+Secondary today, but
+directly related to the
+same dipole structures
+that matter in b → sγ ;
+
+Secondary
+
+useful for global
+consistency checks
+
+This remains a
+signature observable
+for warped models
+because fermion
+localization directly
+ˉ couplings;
+distorts Zbb
+custodial protection
+helps, but any realistic
+RS scan should still
+monitor this sector
+
+Critical in
+non-custodial
+RS;
+Important in
+custodial RS
+
+What is
+measured
+and transition
+
+Observable
+
+Current status and
+SM theory status
+HFLAV gives
+
+LFU and
+universality
+tests in τ
+
+W -coupling
+universality,
+lepton flavor
+
+decays and
+
+nonuniversality
+
+charged
+currents
+
+gτ /gμ = 1.0016 ±
+0.0014, gτ /ge =
+1.0018 ± 0.0014,
+and gμ /ge =
+1.0002 ± 0.0011, all
+consistent with
+universality. 12
+
+Why it matters for RS
+
+Priority
+
+Usually subleading for
+
+Secondary in
+quark-only
+RS,
+Important in
+
+quark-only RS, but
+important once lepton
+profiles are nonuniversal or the model
+perturbs charged
+currents appreciably
+
+lepton-bulk
+RS
+
+For the alignment classes in your prompt, this section is the one that changes the game: down alignment
+suppresses kaon and B FCNCs but elevates D -mixing and top FCNCs from “interesting” to
+“mandatory.”
+
+27
+
+Lepton flavor and CP observables
+If the lepton sector is in the bulk, the fit cannot stop with quark flavor. In that case, the real “golden modes”
+are the three classic muon channels, supplemented by τ LFV, LFV Higgs and Z decays, and EDMs. This
+sector is also the best way to test whether a proposed CP-alignment mechanism actually suppresses all
+dangerous phases rather than only the hadronic ones.
+
+Observable
+
+μ+ → e+ γ
+
+μ+ → e+ e− e+
+
+What is
+measured
+and
+transition
+
+Current status and SM
+theory status
+
+Why it matters for RS
+
+Priority
+
+Charged LFV
+dipole decay
+
+MEG II now reports a
+90% CL upper limit <
+1.5 × 10−13 . The SM
+with neutrino masses is
+effectively zero on this
+scale. 28
+
+The canonical dipole
+constraint on lepton-bulk
+RS. If the lepton Yukawa
+sector is even mildly
+anarchic, this mode is
+often one of the most
+severe bounds
+
+Critical
+
+Charged LFV
+fourfermion and
+dipole decay
+
+The current best limit
+remains < 1.0 × 10−12
+at 90% CL from
+SINDRUM; Mu3e is
+designed to improve by
+several orders of
+magnitude. 29
+
+13
+
+Complementary to μ
+
+→
+
+eγ : it is especially
+valuable when fourfermion operators
+compete with dipoles,
+which is common in
+warped setups with
+heavy vector exchange
+
+Critical
+
+What is
+measured
+and
+transition
+
+Observable
+
+μ− N → e− N
+conversion
+
+τ → μγ , τ →
+eγ , τ → 3μ,
+τ → 3e
+
+LFV Higgs
+decays h →
+
+τμ,
+
+h → τe
+
+LFV Z decays
+
+Z → eμ, Z →
+eτ , Z → μτ
+
+Current status and SM
+theory status
+
+Why it matters for RS
+
+Priority
+
+Often the most powerful
+probe of lepton-bulk RS
+because it receives
+coherent enhancement
+and is sensitive to dipole,
+vector, and scalar
+operator combinations
+
+Critical
+
+Tau LFV
+decays
+
+HFLAV’s 2025 tau
+summary emphasizes
+combined upper limits
+from Belle, BaBar, LHC
+experiments, and new
+Belle II inputs; all
+remain null so far. 31
+
+These do not usually
+beat the muon channels,
+but they are
+indispensable for
+mapping flavor
+hierarchies in the lepton
+sector of warped models
+
+Important
+
+Higgs flavor
+violation
+
+ATLAS and CMS
+continue to find no
+signal; recent LHC
+searches keep the
+corresponding
+branching fractions
+below the per-mille to
+10−3 –10−2 level,
+depending on channel
+and combination. 32
+
+Particularly relevant in
+warped models because
+Higgs FCNCs can arise
+from the same profile
+misalignment that
+induces CLFV and topHiggs FCNCs
+
+Important
+
+Usually secondary in
+today’s fits, but worth
+monitoring in custodial
+or strongly non-universal
+lepton constructions
+
+Secondary
+
+Coherent
+muon–
+electron
+conversion
+in nuclei
+
+Gaugeboson LFV
+
+Current best limit is at
+the O(10−13 ) level
+from SINDRUM II on
+gold; Mu2e aims for ≲
+
+8 × 10−17 sensitivity.
+30
+
+Present collider limits
+are still weaker than
+the muon golden
+channels, but these
+modes remain
+conceptually important
+probes of non-universal
+bulk gauge couplings
+and leptonic mixing.
+33
+
+14
+
+What is
+measured
+and
+transition
+
+Observable
+
+Semileptonic
+LFV meson
+decays such as
+
+KL → μe,
+K → πμe,
+B → Kμe,
+B → μτ
+
+Joint quark–
+lepton flavor
+violation
+
+Current status and SM
+theory status
+
+Kaon modes have
+extremely strong limits
+from PDG compilations,
+while HFLAV tracks
+some B -sector LFV
+averages and limits.
+34
+
+Electron EDM de
+
+CP-odd
+dipole in the
+electron
+sector
+
+A 2023 result improved
+the previous best limit
+by about a factor of 2.4,
+pushing sensitivity into
+the 10−30 e cm regime;
+earlier ACME results
+had already set the
+standard benchmark.
+
+Why it matters for RS
+
+Priority
+
+They are rarely the
+dominant bounds, but
+they provide a powerful
+consistency check once
+quark and lepton flavor
+symmetries are tied
+together in the same 5D
+construction
+
+Secondary
+
+Essential for any CPprotection claim in
+warped models. If CP
+alignment is not truly
+robust, de is often fatal
+
+Critical
+
+35
+
+A classic warped-flavor
+CP constraint,
+complementary to de
+Neutron EDM dn
+
+CP-odd
+hadronic
+dipole
+observable
+
+The best direct bound
+is still at the 10−26 e cm
+level.
+
+36
+
+because the operator
+mapping is different;
+central for testing
+whether a model solves
+the RS CP problem
+rather than just moving
+it
+
+Critical
+
+For any bulk-lepton or quark–lepton unified warped model, the baseline should include all three muon
+golden channels plus de . Tau LFV and LFV Higgs decays should then be added as flavor-structure
+diagnostics.
+
+37
+
+Theory inputs and a recommended baseline dataset
+A modern RS constraints paper does not only need observables; it also needs a clear theory-input
+backbone and a disciplined decision about which observables enter the core likelihood and which are
+handled as diagnostics or projections.
+The authoritative input hierarchy should start with HFLAV for heavy-flavor averages and online updates,
+PDG for kaons, electroweak precision, top, and null-test compilations, and FLAG for lattice-QCD hadronic
+
+^ K , fB
+inputs such as B
+q
+
+BBq , ξ , fB , and form-factor averages whenever available.
+
+15
+
+38
+
+The main theory ingredients that a fit will need are these:
+Observable families
+
+Theory inputs that must be under control
+
+^K , CKM inputs, perturbative short-distance coefficients, treatment of longB
+
+K -mixing and εK
+
+distance pieces
+
+K → ππ hadronic matrix elements, isospin breaking, electroweak penguins,
+
+ε′ /ε
+
+chromomagnetic operators
+
+K → πννˉ, KL →
+π 0 ℓℓ, KL,S → μμ
+
+Short-distance semileptonic Wilson coefficients plus careful long-distance
+handling for the charged-lepton modes 7
+
+Bd,s mixing and
+
+fB2 q BBq , ξ , fB , CKM tree inputs, ΔΓs conventions, and effective-lifetime
+treatment for Bs → μ+ μ− 39
+
+leptonic decays
+
+B → Xs γ , B →
+Xs ℓℓ
+
+NNLO perturbative inputs, consistent treatment of photon-energy cuts, HQE
+parameters
+
+B → K (∗) ℓℓ, Bs →
+ϕμμ, B → K (∗) ν νˉ
+D-mixing and rare
+charm
+
+CLFV and μN
+
+→ eN
+
+Form factors plus a documented treatment of nonlocal charm; LHCb’s latest
+analyses are especially relevant here because they directly test whether
+enlarged hadronic effects can explain the data 40
+For NP fits, matrix elements for ΔC
+
+= 2 operators matter, but the dominant
+
+limitation is that the SM long-distance amplitude is not sharply predicted; CPV
+observables are therefore especially valuable
+Dipole and four-fermion operator basis choice, nuclear overlap integrals, and
+consistent normalization conventions across targets
+Operator-basis matching from the high scale, hadronic and nuclear matrix
+elements for dn , and a transparent treatment of electron-EDM versus
+
+EDMs
+
+semileptonic contributions
+The recommended baseline dataset for a first modern RS flavor paper is therefore:
+Core quark-sector baseline
+εK , ε′ /ε, K + → π + ν νˉ, KL →
+
+π 0 ν νˉ, Δmd,s , SJ/ψKS , ϕs , B → Xs γ , one inclusive and one exclusive b →
+sℓℓ family, Bs → μ μ , B → K (∗) ν νˉ, B → πK , one penguin-phase set such as SϕKS or Bs → ϕϕ, Dˉ. 41
+mixing, t → qZ , and Z → bb
++ −
+
+Add if down-sector alignment is claimed
+Promote D -mixing, charm CPV, D 0 → μ+ μ− , and top FCNCs from “important” to “mandatory,” because
+these are the observables most likely to remain unsuppressed.
+
+42
+
+Add if a bulk lepton sector is present
+μ → eγ , μ → 3e, μN → eN , τ LFV, LFU ratios, LFV Higgs decays, and de ; semileptonic LFV meson decays
+should then be used as cross-checks.
+
+37
+
+16
+
+Treat carefully rather than omit
+ΔmK , KL → μ+ μ− , B → πK , penguin-dominated hadronic CP asymmetries, and rare charm
+semileptonic modes. These are all useful, but they should not be assigned the same theory weight as K
+
+πννˉ, εK , B → Xs γ , or Bs → μ+ μ− .
+
+→
+
+43
+
+Open questions and limitations
+A few parts of the modern landscape remain intrinsically less settled than others. The most important
+limitations are the theory status of ε′ /ε, long-distance contributions in KL → μ+ μ− , nonlocal charm
+effects in exclusive b
+
+→ sℓ+ ℓ− , and the long-distance SM background in charm mixing and rare charm
+
+decays. Those observables should still be in the map, but not all of them should carry equal likelihood
+weight. 44
+The highest-confidence conclusion is straightforward: a serious 2026-era RS flavor inventory is
+necessarily multi-sector. For generic quark-sector RS it begins with kaons, B -mixing, dipoles, rare
+semileptonic B decays, Z
+
+→ bbˉ, and EDMs. For down-aligned or shining constructions it must elevate
+
+charm and top FCNCs. For bulk-lepton versions it must add the muon golden channels and electron EDM
+immediately. That is the observable map most likely to survive into a full numerical fit without major
+omissions. 45
+
+1
+
+5
+
+9
+
+41
+
+45
+
+NA62 Collaboration refines measurement of rare particle decay – Home | CERN
+
+https://home.cern/na62-collaboration-refines-measurement-rare-particle-decay/?utm_source=chatgpt.com
+2
+
+2025 update on $\varepsilon_K$ in the Standard Model ...
+
+https://arxiv.org/pdf/2503.00351?utm_source=chatgpt.com
+3
+
+4
+
+https://pdg.lbl.gov/2024/reviews/rpp2024-rev-cp-violation.pdf
+
+https://pdg.lbl.gov/2024/reviews/rpp2024-rev-cp-violation.pdf?utm_source=chatgpt.com
+6
+
+7
+
+8
+
+34
+
+https://pdg.lbl.gov/2024/reviews/rpp2024-rev-rare-kaon-decays.pdf
+
+https://pdg.lbl.gov/2024/reviews/rpp2024-rev-rare-kaon-decays.pdf?utm_source=chatgpt.com
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+21
+
+27
+
+38
+
+39
+
+42
+
+Results | Heavy Flavor Averaging Group
+
+https://hflav.web.cern.ch/results?utm_source=chatgpt.com
+17
+
+Current Status of the Standard Model Prediction for the B_s -> mu^+ mu^- Branching Ratio
+
+https://arxiv.org/abs/2407.03810?utm_source=chatgpt.com
+18
+
+[2601.11279] Measurements of electroweak penguin and ...
+
+https://arxiv.org/abs/2601.11279?utm_source=chatgpt.com
+19
+
+Measurement of $B^+\toτ^+ν_τ$ branching fraction with a hadronic tagging method at Belle II
+
+https://arxiv.org/abs/2502.04885?utm_source=chatgpt.com
+20
+
+[2304.06198] Precision measurement of $\it{CP} $ violation ...
+
+https://arxiv.org/abs/2304.06198?utm_source=chatgpt.com
+22
+
+[2212.11203] Search for rare decays of $D^0$ mesons into two muons
+
+https://arxiv.org/abs/2212.11203?utm_source=chatgpt.com
+
+17
+
+23
+
+https://cds.cern.ch/record/2904985/files/LHCb-PAPER-2024-005.pdf%3B
+
+https://cds.cern.ch/record/2904985/files/LHCb-PAPER-2024-005.pdf%3B?utm_source=chatgpt.com
+24
+
+25
+
+https://pdg.lbl.gov/2024/reviews/rpp2024-rev-top-quark.pdf
+
+https://pdg.lbl.gov/2024/reviews/rpp2024-rev-top-quark.pdf?utm_source=chatgpt.com
+26
+
+33
+
+rpp2024-rev-standard-model.pdf - PDG
+
+https://pdg.lbl.gov/2024/reviews/rpp2024-rev-standard-model.pdf?utm_source=chatgpt.com
+28
+
+37
+
+New limit on the \mu+->e+\gamma decay with the MEG II ...
+
+https://arxiv.org/pdf/2504.15711?utm_source=chatgpt.com
+29
+
+The Mu3e Experiment
+
+https://www.psi.ch/en/media/78272/download?attachment=&utm_source=chatgpt.com
+30
+
+Mu2e experiment - 2024 Users Meeting
+
+https://indico.fnal.gov/event/64626/contributions/293174/attachments/179696/245519/Mu2e%20experiment%20%202024%20Users%20Meeting.pdf?utm_source=chatgpt.com
+31
+
+Tau decays | Heavy Flavor Averaging Group - CERN
+
+https://hflav.web.cern.ch/content/tau?utm_source=chatgpt.com
+32
+
+New ATLAS result marks milestone in the test of Standard ...
+
+https://atlas.cern/updates/briefing/test-lepton-flavour-violation?utm_source=chatgpt.com
+35
+
+An improved bound on the electron's electric dipole moment
+
+https://inspirehep.net/literature/2617407?utm_source=chatgpt.com
+36
+
+Measurement of the Permanent Electric Dipole Moment of the ...
+
+https://link.aps.org/doi/10.1103/PhysRevLett.124.081803?utm_source=chatgpt.com
+40
+
+A comprehensive analysis of the $B^0\to K^{*0}\mu^+\mu
+
+https://cds.cern.ch/record/2951844/files/2512.18053v1.pdf?utm_source=chatgpt.com
+43
+
+https://cds.cern.ch/record/2909786/files/2409.06545.pdf
+
+https://cds.cern.ch/record/2909786/files/2409.06545.pdf?utm_source=chatgpt.com
+44
+
+PoS(CD2024)051
+
+https://pos.sissa.it/479/051/pdf?utm_source=chatgpt.com
+
+18
+
+
