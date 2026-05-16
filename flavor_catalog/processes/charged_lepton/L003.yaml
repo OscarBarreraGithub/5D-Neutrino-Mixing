@@ -1,0 +1,154 @@
+schema: flavor_catalog.process.v1
+process_id: L003
+family: charged_lepton
+standard_notation: "R_{\\mu e}^{\\rm Al}"
+process_name: "Coherent muon-to-electron conversion in aluminum"
+owner: "PKA"
+owner_agent_id: "PKA-L003"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T12:58:05-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T12:58:05-04:00"
+    agent_id: "PKA-L003"
+    reason: "Initial L003 PKA source extraction and draft sidecar."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T12:58:05-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T12:58:05-04:00"
+    agent_id: "PKA-L003"
+    reason: "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T12:58:05-04:00"
+version: "0.1.0"
+source_shas:
+  cfw2008_arxiv0804_1954.txt: "sha256:31cd61190125beaeba52eef6a16759df2152178c4e143808ff025c9b48afc166"
+  comet_phase_i_tdr_arxiv1812_09018.txt: "sha256:60d10f85dd08477abc638fe6ad0be052f4dde023bbf4d3e82485d8c607e5b8be"
+  comet_strategy_2018_arxiv1812_07824.txt: "sha256:124f578d515ac716ac5310eb2cc0f3668ed19416aae29c97e07ca31a0a7267ad"
+  mu2e_2016_arxiv1606_05559.txt: "sha256:92669d7e4b9375c1661b88b18b79ea83e05aca86abd86665efd8301b981738b0"
+  mu2e_run1_2022_arxiv2210_11380.txt: "sha256:fb6352fbebde4ccb281b9a895d517ed450cf6824dde809653b4bdc18dbd436a2"
+  mu2eii_2022_arxiv2203_07569.txt: "sha256:e6adc7bcc434789b343ff9c95db387dc0ab4f17f08a7d439de71bf629033c3e4"
+  sindrumii_2006_gold_juser.txt: "sha256:9362b4a879d3d50d6f686901b4816e0e390b7076534e24d119c23340196b68a5"
+pdg_or_equivalent:
+  current_world_limit:
+    source: "SINDRUM II Collaboration, JuSER metadata for EPJ C 47, 337-346 (2006)"
+    year: 2006
+    observable: "Gamma(mu- Au -> e- Au(g.s.)) / Gamma_capture(mu- Au)"
+    target_material: "Au"
+    value: 7.0e-13
+    relation: "<"
+    confidence_level: "90% C.L."
+    source_url: "https://juser.fz-juelich.de/record/55087"
+    doi: "10.1140/epjc/s2006-02582-x"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L003/sindrumii_2006_gold_juser.txt"
+    sha256: "9362b4a879d3d50d6f686901b4816e0e390b7076534e24d119c23340196b68a5"
+    note: "Current published benchmark across targets; not an aluminum measurement."
+  aluminum_status:
+    source: "PKA synthesis from Mu2e and COMET projection sources"
+    published_direct_aluminum_limit: null
+    note: "This L003 PKA pass found projections for aluminum but no published direct aluminum-target limit."
+  aluminum_projections:
+    - source: "Mu2e experiment at Fermilab"
+      arxiv_id: "1606.05559"
+      year: 2016
+      target_material: "Al"
+      observable: "R_mue"
+      single_event_sensitivity: 2.8e-17
+      expected_upper_limit_90cl: 6.7e-17
+      relation: "projection"
+      source_url: "https://arxiv.org/abs/1606.05559"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L003/mu2e_2016_arxiv1606_05559.txt"
+      sha256: "92669d7e4b9375c1661b88b18b79ea83e05aca86abd86665efd8301b981738b0"
+    - source: "Mu2e Run I sensitivity projection"
+      arxiv_id: "2210.11380"
+      year: 2023
+      target_material: "Al"
+      observable: "R_mue"
+      expected_upper_limit_90cl: 6.2e-16
+      discovery_sensitivity_5sigma: 1.2e-15
+      expected_background_events: "0.11 +/- 0.03"
+      relation: "projection"
+      source_url: "https://arxiv.org/abs/2210.11380"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L003/mu2e_run1_2022_arxiv2210_11380.txt"
+      sha256: "fb6352fbebde4ccb281b9a895d517ed450cf6824dde809653b4bdc18dbd436a2"
+    - source: "COMET Phase-I Technical Design Report"
+      arxiv_id: "1812.09018"
+      year: 2020
+      target_material: "Al"
+      observable: "R_mue"
+      single_event_sensitivity: 3.1e-15
+      expected_upper_limit_90cl: 7.0e-15
+      expected_background_events: 0.032
+      relation: "projection"
+      source_url: "https://arxiv.org/abs/1812.09018"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L003/comet_phase_i_tdr_arxiv1812_09018.txt"
+      sha256: "60d10f85dd08477abc638fe6ad0be052f4dde023bbf4d3e82485d8c607e5b8be"
+    - source: "COMET European Strategy input"
+      arxiv_id: "1812.07824"
+      year: 2018
+      target_material: "Al"
+      observable: "R_mue"
+      phase_ii_single_event_sensitivity: 2.6e-17
+      data_taking_seconds: 2.0e7
+      relation: "projection"
+      source_url: "https://arxiv.org/abs/1812.07824"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L003/comet_strategy_2018_arxiv1812_07824.txt"
+      sha256: "124f578d515ac716ac5310eb2cc0f3668ed19416aae29c97e07ca31a0a7267ad"
+    - source: "Mu2e-II Snowmass contribution"
+      arxiv_id: "2203.07569"
+      year: 2022
+      target_material: "Al or additional targets to be optimized"
+      observable: "R_mue"
+      sensitivity_goal: "at least one additional order of magnitude beyond Mu2e"
+      relation: "projection"
+      source_url: "https://arxiv.org/abs/2203.07569"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/L003/mu2eii_2022_arxiv2203_07569.txt"
+      sha256: "e6adc7bcc434789b343ff9c95db387dc0ab4f17f08a7d439de71bf629033c3e4"
+  post_2008_baseline:
+    source: "Csaki-Falkowski-Weiler 2008 RS flavor baseline"
+    arxiv_id: "0804.1954"
+    year: 2008
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L003/cfw2008_arxiv0804_1954.txt"
+    sha256: "31cd61190125beaeba52eef6a16759df2152178c4e143808ff025c9b48afc166"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  targeted_grep_commands:
+    - "rg -n \"mu.?-?e.?conversion|mu.?to.?e.?conversion|muon.?to.?electron|mu2e|comet|SINDRUM|R_mu.?e|Rmu.?e|conversion.*aluminum|aluminium\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Targeted L003 grep returned no hits in the required code directories."
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an adjacent dipole-only LFV checker."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma in scans; no conversion observable is evaluated."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "Missing implementation needs a new mu-e conversion observable, lepton-quark Wilson/operator convention, aluminum nuclear overlap and capture inputs, and likely EFT running or matching shared with mu->e gamma and mu->3e. This exceeds a new-operator-only catalog update."
+implementation_difficulty_if_missing: "HIGH"
+open_issues:
+  - "Checker should verify whether a current PDG LFV summary table has a dedicated mu-e conversion entry newer than the experiment/equivalent snapshots used here."
+  - "Future implementation must decide how to translate non-aluminum SINDRUM II limits into aluminum-target coefficients when comparing projections and existing bounds."
