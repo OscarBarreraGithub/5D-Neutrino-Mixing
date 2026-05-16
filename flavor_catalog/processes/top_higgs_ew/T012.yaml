@@ -1,0 +1,108 @@
+schema: flavor_catalog.process.v1
+process_id: T012
+family: top_higgs_ew
+standard_notation: "Z -> c cbar pole observables: R_c, A_FB^{0,c}, A_c"
+process_name: "Z-pole charm-quark partial-width ratio and asymmetries"
+owner: "PKA"
+owner_agent_id: "PKA-T012"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+related_process_ids:
+  - T013
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T18:26:49-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T18:26:49-04:00"
+    agent_id: "PKA-T012"
+    reason: "Initial PKA draft for combined Z -> c cbar pole observables assigned to process id T012."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T18:26:49-04:00"
+version: "0.1.0"
+source_shas:
+  pdg_2025_z_boson_charm.txt: "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2"
+  lepslc_2006_z_resonance_charm.txt: "sha256:6f373a37f4ccb2cd55e7660c60bf7988b5145e742f09a2dfc67b76df1583bb0a"
+  cfw_2008_rs_flavor.txt: "sha256:67d6fdafc6cbda9476f70ed1d7f81ea305965abfc4621a4c51704c9e3477af1f"
+  casagrande_2008_rs_ewpt.txt: "sha256:34fe76fda2d48bd48fcfff239aab61fadf4fb929b96f5868c25981e570839c2a"
+  freitas_2014_z_widths.txt: "sha256:1aa075ebd110e54a1cd5040a0117c3afffe47bf2375e86ba8630a8398f53057a"
+  alcaraz_2021_z_lineshape_fcc.txt: "sha256:1f50633a53829d3e3616277a3912fa54eded8476cce8f8170f521b7d117b6166"
+pdg_or_equivalent:
+  - observable: "R_c^0"
+    year: 2025
+    value: 0.1721
+    uncertainty: 0.0030
+    units: "dimensionless"
+    source: "PDG 2025 Z-boson listing"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt"
+    sha256: "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2"
+  - observable: "A_FB^{0,c}"
+    year: 2025
+    value: 0.0707
+    uncertainty: 0.0035
+    units: "dimensionless"
+    source: "PDG 2025 Z-boson listing; listing gives 7.07 +/- 0.35 percent"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt"
+    sha256: "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2"
+  - observable: "A_c"
+    year: 2025
+    value: 0.670
+    uncertainty: 0.027
+    units: "dimensionless"
+    source: "PDG 2025 Z-boson listing"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt"
+    sha256: "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2"
+paper_era_reference:
+  - key: "cfw_2008_rs_flavor"
+    role: "Baseline arXiv:0804.1954 RS-flavor reference requested by the catalog instructions."
+    snapshot_path: "flavor_catalog/references/T012/cfw_2008_rs_flavor.txt"
+    sha256: "sha256:67d6fdafc6cbda9476f70ed1d7f81ea305965abfc4621a4c51704c9e3477af1f"
+  - key: "casagrande_2008_rs_ewpt"
+    role: "Post-CFW RS electroweak-precision and Z-fermion-coupling interpretation."
+    snapshot_path: "flavor_catalog/references/T012/casagrande_2008_rs_ewpt.txt"
+    sha256: "sha256:34fe76fda2d48bd48fcfff239aab61fadf4fb929b96f5868c25981e570839c2a"
+  - key: "freitas_2014_z_widths"
+    role: "Post-2008 SM theory update for Z partial widths and branching ratios."
+    snapshot_path: "flavor_catalog/references/T012/freitas_2014_z_widths.txt"
+    sha256: "sha256:1aa075ebd110e54a1cd5040a0117c3afffe47bf2375e86ba8630a8398f53057a"
+  - key: "alcaraz_2021_z_lineshape_fcc"
+    role: "Prospective future-collider context for improved heavy-quark Z-pole measurements."
+    snapshot_path: "flavor_catalog/references/T012/alcaraz_2021_z_lineshape_fcc.txt"
+    sha256: "sha256:1f50633a53829d3e3616277a3912fa54eded8476cce8f8170f521b7d117b6166"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"Z.?->.?c|Zcc|Z c|A_FB|Afb|R_c|Rc|A_c|Ac\\\\b|forward-backward|Z-pole|Z pole|delta_g.*c|gLc|gRc|cbar|c cbar\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"R_c|A_FB\\\\^\\\\{0,c\\\\}|A_FB.*c|A_c|Zcc|Z c c|Z.?->.?c|delta_g.*c|gL.?c|gR.?c\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"M_Z|m_Z|Z_MASS|mass.*Z|Z boson|Z-boson\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "qcd/running.py:3"
+    - "qcd/constants.py:11"
+    - "quarkConstraints/qcd_running.py:100"
+  findings:
+    - "No R_c, A_FB^c, A_c, Zcc coupling-shift, or electroweak-pole likelihood implementation was found."
+    - "Process-specific searches returned unrelated R_chi hadronic helpers and bridge-matching class names, not charm Z-pole code."
+    - "Only generic Z-mass/QCD-reference support surfaced at the evidence lines above."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "A live constraint would require new electroweak-pole observable handling, LEP/SLC heavy-flavour covariance data, and model-specific matching to Z c_L and Z c_R coupling shifts; the existing Delta F=2 and lepton-dipole paths do not cover it."
+open_issues:
+  - "Assignment combines plan row T012 with T013 asymmetries; WA/orchestrator should decide whether T013 is marked covered by this combined T012 entry or kept as a separate follow-up."
