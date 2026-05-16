@@ -1,0 +1,105 @@
+schema: flavor_catalog.process.v1
+process_id: T010
+family: top_higgs_ew
+standard_notation: "Z -> b bbar pole observables: R_b, A_FB^{0,b}, A_b"
+process_name: "Z-pole bottom-quark partial-width ratio and asymmetries"
+owner: "PKA"
+owner_agent_id: "PKA-T010"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+related_process_ids:
+  - T011
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:06:37-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:06:37-04:00"
+    agent_id: "PKA-T010"
+    reason: "Initial PKA draft; assignment combines plan rows T010 and T011."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:06:37-04:00"
+version: "0.1.0"
+source_shas:
+  pdg_2025_z_boson.txt: "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815"
+  lepslc_2006_z_resonance.txt: "sha256:fe6c50814880adb49b850fdec012aeaaf77b8e4df3cad1b1c85321003592da66"
+  cfw_2008_rs_flavor.txt: "sha256:842802b12f72f3637edf6820569d8cd2c513958f02aa4e05de95e3f63642286d"
+  casagrande_2008_rs_ewpt.txt: "sha256:f4c7992652d22d9d1c17ba19f8e54104239ac9c94087a0f1fc94f9d9d8a4a20e"
+  freitas_2014_z_widths.txt: "sha256:a7226056d8047b4c0b941ac6a871201a27921027d34259182f9afeb46c450e79"
+  fcc_ee_2025_zbb_projection.txt: "sha256:035f06739e5f73ce6ba13b35d515dd9fcc5470a17b8b6ad2dc9baf2f4bf6d902"
+pdg_or_equivalent:
+  - observable: "R_b^0"
+    year: 2025
+    value: 0.21629
+    uncertainty: 0.00066
+    units: "dimensionless"
+    source: "PDG 2025 Z-boson listing"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T010/pdg_2025_z_boson.txt"
+    sha256: "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815"
+  - observable: "A_FB^{0,b}"
+    year: 2025
+    value: 0.0992
+    uncertainty: 0.0016
+    units: "dimensionless"
+    source: "PDG 2025 Z-boson listing; listing gives 9.92 +/- 0.16 percent"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T010/pdg_2025_z_boson.txt"
+    sha256: "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815"
+  - observable: "A_b"
+    year: 2025
+    value: 0.923
+    uncertainty: 0.020
+    units: "dimensionless"
+    source: "PDG 2025 Z-boson listing"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T010/pdg_2025_z_boson.txt"
+    sha256: "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815"
+additional_numerical_context:
+  - observable: "LEP/SLC final-combination pull for A_FB^{0,b}"
+    year: 2006
+    value: 2.8
+    uncertainty: null
+    units: "standard deviations"
+    source: "LEP/SLC final Z-resonance combination"
+    source_url: "https://arxiv.org/abs/hep-ex/0509008"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T010/lepslc_2006_z_resonance.txt"
+    sha256: "sha256:fe6c50814880adb49b850fdec012aeaaf77b8e4df3cad1b1c85321003592da66"
+  - observable: "FCC-ee projected relative uncertainty for R_b and A_FB^b"
+    year: 2025
+    value: 0.01
+    uncertainty: null
+    units: "percent"
+    source: "Roehrig et al. 2025 FCC-ee projection"
+    source_url: "https://arxiv.org/abs/2502.17281"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T010/fcc_ee_2025_zbb_projection.txt"
+    sha256: "sha256:035f06739e5f73ce6ba13b35d515dd9fcc5470a17b8b6ad2dc9baf2f4bf6d902"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"Z.?->.?b|Zbb|Z b|A_FB|Afb|A_FB|R_b|Rb|A_b|Ab\\\\b|left-right forward|forward-backward|Z-pole|Z pole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+  findings:
+    - "No R_b, A_FB^b, A_b, or Zbb observable implementation was found."
+    - "Only generic Z-mass support surfaced: qcd/running.py:3, qcd/constants.py:11, quarkConstraints/qcd_running.py:100."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "A live constraint would require new electroweak-pole observable handling plus RS matching for shifts in Z b_L and Z b_R couplings, including custodial-protection model dependence and LEP/SLC correlations."
+open_issues:
+  - "Assignment combines plan row T010 with the T011 asymmetry row; WA/orchestrator should decide whether T011 remains a separate follow-up entry or is marked covered by this combined file."

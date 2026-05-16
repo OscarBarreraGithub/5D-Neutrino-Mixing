@@ -1,0 +1,80 @@
+% Flavor catalog per-process template.
+% process_id: T010
+% family: top_higgs_ew
+% owner_agent_id: PKA-T010
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: T010.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(Z \to b\bar b\) Pole Observables}{Z to b bbar Pole Observables}}
+
+\subsection*{Process}
+This entry covers the bottom-quark Z-pole observables \(R_b^0\),
+\(A_{\rm FB}^{0,b}\), and \(A_b\).  Plan v1 lists \(R_b\) as T010 and the
+asymmetries as T011; this PKA draft uses T010 because the assignment requested
+the combined \(Z\to b\bar b\) pole-observable package.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical current values are taken from the PDG Z-boson listing snapshot in
+\texttt{flavor\_catalog/references/T010/pdg\_2025\_z\_boson.txt}.  The sidecar
+records \(R_b^0=0.21629\pm0.00066\), \(A_{\rm FB}^{0,b}=0.0992\pm0.0016\)
+(the PDG listing gives this as \(9.92\pm0.16\) percent), and
+\(A_b=0.923\pm0.020\).  The original LEP/SLC final combination is also
+snapshotted in \texttt{lepslc\_2006\_z\_resonance.txt}; it records the same
+central values and identifies the \(A_{\rm FB}^{0,b}\) comparison as the
+largest Z-pole pull, \(2.8\sigma\), relative to the Standard Model fit.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In warped models with anarchic five-dimensional Yukawas, the third-generation
+left-handed doublet is typically localized closer to the IR brane to account
+for the top mass.  That same localization makes the \(Z b_L\bar b_L\) coupling
+sensitive to gauge-boson and fermion mixing with Kaluza-Klein states.  \(R_b\)
+mostly constrains the total \(Z\to b\bar b\) partial width, while \(A_b\) and
+\(A_{\rm FB}^{0,b}\) test the chiral balance of the bottom coupling.  Custodial
+extensions, especially protections of \(Z b_L\bar b_L\), are therefore not a
+minor detail; they determine whether this observable is a leading bound or a
+diagnostic cross-check.
+
+\subsection*{Post-2008 developments}
+There has not been a new LEP/SLC-style experimental average superseding the
+Z-pole combination, so the PDG value remains legacy-data dominated.  The
+post-CFW theory story did change: Casagrande et al. gave a detailed RS
+electroweak-precision treatment including Zbb couplings, while later SM work
+completed the fermionic two-loop description of Z partial widths and branching
+ratios.  Future-collider studies now revisit the experimental systematics of
+\(R_b\) and \(A_{\rm FB}^b\), with the FCC-ee projection captured as a
+post-2008 prospective reference rather than a current constraint.
+
+\subsection*{Constraint validity and model dependence}
+This is a precision electroweak coupling constraint, not a flavor-changing
+amplitude by itself.  It is highly relevant for RS flavor because the same
+fermion localizations and custodial choices that control flavor violation also
+set the tree-level Z-bottom coupling shifts.  Its interpretation is therefore
+model-dependent: minimal bulk RS, custodial RS, brane kinetic terms, and
+different embeddings of the bottom multiplet can move the constraint
+substantially.  \(A_{\rm FB}^{0,b}\) also contains the initial-state leptonic
+asymmetry input, so \(A_b\) is the cleaner bottom-coupling handle.
+
+\subsection*{Code coverage in this repo}
+NO.  The required greps found no implementation of \(R_b\), \(A_b\),
+\(A_{\rm FB}^{0,b}\), or a Zbb electroweak-pole likelihood in
+\texttt{quarkConstraints/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{qcd/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, or \texttt{tests/}.  The only Z-related matches were
+generic \(M_Z\) support in \texttt{qcd/running.py:3},
+\texttt{qcd/constants.py:11}, and \texttt{quarkConstraints/qcd\_running.py:100}.
+
+\subsection*{Implementation difficulty}
+HIGH.  A catalog-only record is straightforward, but a live constraint would
+need a new electroweak-pole observable module, a correlated treatment of the
+LEP/SLC pseudo-observables, and model-specific matching from the 5D spectrum to
+\(\delta g_{Lb}\) and \(\delta g_{Rb}\).  The largest blocker is not lattice
+input or QCD running; it is the RS electroweak matching and custodial-symmetry
+bookkeeping.
+
+\subsection*{Key references}
+\texttt{pdg\_2025\_z\_boson}; \texttt{lepslc\_2006\_z\_resonance};
+\texttt{cfw\_2008\_rs\_flavor}; \texttt{casagrande\_2008\_rs\_ewpt};
+\texttt{freitas\_2014\_z\_widths}; \texttt{fcc\_ee\_2025\_zbb\_projection}.
