@@ -1,0 +1,31 @@
+Source key: PDG2026:NeutronEDMHgCrossref
+Source: PDG Live 2026 S017EDM neutron electric dipole moment datablock
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM
+Access date: 2026-05-16
+Snapshot type: Minimal PDG datablock extract; no PDF.
+
+PDG citation:
+  F. Takahashi et al. (Particle Data Group), Int. J. Mod. Phys. A 41,
+  2630011 (2026).
+
+Why this is included for E006:
+  PDG does not present the 199Hg atom EDM as a standalone particle-listing
+  observable in this datablock.  Instead, the neutron EDM listing records
+  theory-derived neutron limits that use the measured 199Hg atom EDM.
+
+Relevant PDG rows:
+  S017EDM neutron EDM table units: 10^-25 e cm.
+  Sahoo 2017 row: <0.22 at 95% CL, comment "199Hg atom EDM + theory".
+  Graner 2016 row: <0.16 at 95% CL, comment "MRS 199Hg atom EDM + theory".
+
+Relevant PDG note:
+  Sahoo 2017 develops theory to calculate the neutron EDM limit from the
+  measured limit by Graner 2016 of the 199Hg atom EDM.
+
+Relevant PDG references:
+  Sahoo 2017, Phys. Rev. D 95, 013002, "Improved Limits on the Hadronic and
+  Semi-Hadronic CP Violating Parameters and Role of a Dark Force Carrier in
+  the Electric Dipole Moment of 199Hg".
+  Graner 2016, Phys. Rev. Lett. 116, 161601, "Reduced Limit on the Permanent
+  Electric Dipole Moment of 199Hg".
+  Also listed: Phys. Rev. Lett. 119, 119901 (erratum) to Graner 2016.

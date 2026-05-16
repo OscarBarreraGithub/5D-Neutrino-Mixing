@@ -1,0 +1,101 @@
+% Flavor catalog per-process template.
+% process_id: E006
+% family: edm_neutrino
+% owner_agent_id: PKA-E006
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: E006.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{E006: Mercury-199 electric dipole moment}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(d_{\mathrm{Hg}}\), for neutral
+\(^{199}\mathrm{Hg}\).  This entry covers the permanent EDM of the
+diamagnetic \(^{199}\mathrm{Hg}\) atom, cataloged in the
+\texttt{edm\_neutrino} family as a hadronic/nuclear CP probe.  It is a
+flavor-diagonal observable, but its interpretation constrains CP-odd quark,
+gluon, semileptonic, and nuclear Schiff-moment sources.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical direct experimental limit is the Graner et al. 2016
+\(^{199}\mathrm{Hg}\) result:
+\[
+  |d_{\mathrm{Hg}}| < 7.4\times 10^{-30}\ e\,\mathrm{cm}
+  \qquad (95\%~\mathrm{C.L.}).
+\]
+The local snapshot
+\texttt{flavor\_catalog/references/E006/graner2016\_arxiv1601\_04339.txt}
+records the arXiv v4 abstract value
+\[
+  d_{\mathrm{Hg}}=(2.20\pm2.75_{\rm stat}\pm1.48_{\rm syst})
+  \times10^{-30}\ e\,\mathrm{cm},
+\]
+consistent with zero; the absolute limit is the catalog value.  PDG Live
+2026 does not expose a standalone Hg-atom datablock here, but the neutron and
+proton EDM datablocks cite the same Hg measurement for theory-derived
+nucleon limits.  In the neutron datablock, PDG lists Graner 2016 as a
+\(^{199}\mathrm{Hg}\)-plus-theory row, \(<0.16\) in units of
+\(10^{-25}\ e\,\mathrm{cm}\) at \(95\%\) CL, and Sahoo 2017 as \(<0.22\)
+in the same units and confidence level; see
+\texttt{flavor\_catalog/references/E006/pdg2026\_neutron\_edm\_hg\_crossref.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Warped or composite anarchic flavor models generically contain new CP phases.
+Loop matching can generate quark EDMs, quark chromo-EDMs, the Weinberg
+three-gluon operator, and semileptonic CP-odd operators.  In a diamagnetic
+closed-shell atom such as \(^{199}\mathrm{Hg}\), the dominant hadronic
+sensitivity is usually phrased through the nuclear Schiff moment and
+CP-odd pion-nucleon interactions, rather than through a simple elementary
+fermion EDM.  The observable is therefore complementary to the neutron EDM:
+it probes a different linear combination of CP-odd low-energy operators and
+nuclear matrix elements.
+
+\subsection*{Post-2008 developments}
+Relative to the 2008 CFW warped-flavor baseline
+(\texttt{CsakiFalkowskiWeiler:RSFlavor2008}), the main experimental update is
+the 2016 Washington \(^{199}\mathrm{Hg}\) measurement
+(\texttt{Graner:HgEDM2016}), which improved the previous Hg bound by a factor
+of \(4\) and remains the standard diamagnetic-atom benchmark.  The post-2008
+theory update represented here by Sahoo 2017
+(\texttt{Sahoo:HgEDMTheory2017}) combines the Hg atom limit with relativistic
+atomic calculations and quotes derived limits including
+\(d_n<2.2\times10^{-26}\ |e|\,\mathrm{cm}\),
+\(d_p<2.1\times10^{-25}\ |e|\,\mathrm{cm}\),
+\(|\bar\theta|<1.1\times10^{-10}\), and
+\(|\tilde d_u-\tilde d_d|<5.5\times10^{-27}\ |e|\,\mathrm{cm}\).
+
+\subsection*{Constraint validity and model dependence}
+The experimental atom-EDM bound is robust as a null search for a
+\(P\)- and \(T\)-violating energy shift.  Translating it into RS parameters is
+model-dependent: the result depends on the chosen CP-odd operator basis,
+QCD running and thresholds, atomic many-body coefficients, nuclear Schiff
+moments, hadronic matrix elements, and possible cancellations among sources.
+It should be treated as an EDM-adjacent loop/nuclear-translation constraint,
+not as a direct \(\Delta F=2\) bound in the current quark scan.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required catalog greps and a focused search for
+\texttt{Hg}, \texttt{mercury}, \texttt{199Hg}, \texttt{d\_Hg},
+\texttt{Schiff}, \texttt{diamagnetic}, \texttt{chromo-EDM},
+\texttt{Weinberg}, and generic \texttt{EDM}/\texttt{dipole} terms over
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/} found no
+\(^{199}\mathrm{Hg}\) EDM implementation.  The only nearby dipole code is the
+off-diagonal \(\mu\to e\gamma\) helper in
+\texttt{flavorConstraints/muToEGamma.py:3}, \texttt{:21}, and \texttt{:81}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A live constraint would require new CP-odd quark/gluon and
+semileptonic operator matching, RG running to hadronic scales, and an
+atomic/nuclear translation layer for \(^{199}\mathrm{Hg}\).  The existing
+SLL/SLR/VLL/VRR/LR \(\Delta F=2\) basis and the \(\mu\to e\gamma\) NDA helper
+do not cover this observable.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{Graner:HgEDM2016}, \texttt{PDG2026:NeutronEDMHgCrossref},
+\texttt{Sahoo:HgEDMTheory2017}, and
+\texttt{CsakiFalkowskiWeiler:RSFlavor2008}.
