@@ -11,29 +11,71 @@
 \section{K013: \(K_L \to \pi^0\gamma\gamma\)}
 
 \subsection*{Process}
-\textbf{Standard notation:} \(K_L \to \pi^0\gamma\gamma\).  This entry covers the long-lived neutral-kaon radiative decay listed by PDG as \(\Gamma(\pi^0 2\gamma)/\Gamma_{\rm total}\), process \(K013\) in the kaon family.  The orchestrator decision maps the PI's ambiguous \(K1\to\pi\gamma\) seed to this channel; the neighboring \(K_S\to\pi^0\gamma\gamma\) entry remains a separate process.
+\textbf{Standard notation:} \(K_L \to \pi^0\gamma\gamma\).  This entry covers
+the long-lived neutral-kaon radiative decay listed by PDG as
+\(\Gamma(\pi^0 2\gamma)/\Gamma_{\rm total}\), process \(K013\) in the kaon
+family.  The orchestrator decision maps the PI's ambiguous
+\(K1\to\pi\gamma\) seed to this channel; the neighboring
+\(K_S\to\pi^0\gamma\gamma\) entry remains separate.
 
 \subsection*{PDG / equivalent value(s)}
 The canonical sidecar value is
 \[
   {\cal B}(K_L\to\pi^0\gamma\gamma)=(1.273\pm0.033)\times10^{-6},
 \]
-from the PDG \(K_L^0\) listing, 2025 update, accessed 2026-05-16; see \texttt{flavor\_catalog/references/K013/pdg2025\_kl\_pi0gammagamma.txt}.  PDG forms this average from the KTeV final result and the NA48 measurement after rescaling both to the current \(K_L\to\pi^0\pi^0\) normalization.  The sidecar records the PDG-rescaled inputs, \(1.28\pm0.06\pm0.01\) from KTeV and \(1.27\pm0.04\pm0.01\) from NA48, both in units of \(10^{-6}\), plus the originally reported KTeV and NA48 branching fractions and vector-exchange parameters \(a_V\).
+from the PDG \(K_L^0\) listing, 2025 update, accessed 2026-05-16; see
+\texttt{flavor\_catalog/references/K013/pdg2025\_kl\_pi0gammagamma.txt}.
+PDG forms this average from the KTeV final result and the NA48 measurement
+after rescaling both to the current \(K_L\to\pi^0\pi^0\) normalization.  The
+sidecar records the PDG-rescaled inputs, \(1.28\pm0.06\pm0.01\) from KTeV and
+\(1.27\pm0.04\pm0.01\) from NA48, both in units of \(10^{-6}\), plus the
+originally reported branching fractions and vector-exchange parameters \(a_V\).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
-This is not a clean tree-level KK-gluon constraint like \(\epsilon_K\) or \(\Delta m_K\).  It is a \(\Delta S=1\) radiative rare decay dominated by long-distance chiral dynamics and vector-meson-exchange effects.  Its practical catalog role is diagnostic: it fixes the size and shape of the two-photon amplitude that feeds the CP-conserving part of \(K_L\to\pi^0\ell^+\ell^-\), and it checks whether any proposed RS extension with enhanced \(s\to d\gamma\gamma\), dipole, or electroweak-penguin structure is already in tension with radiative kaon data.
+This is not a clean tree-level KK-gluon constraint like \(\varepsilon_K\) or
+\(\Delta m_K\).  It is a \(\Delta S=1\) radiative rare decay dominated by
+long-distance chiral dynamics and vector-meson-exchange effects.  Its practical
+catalog role is diagnostic: it fixes the size and shape of the two-photon
+amplitude that feeds the CP-conserving part of
+\(K_L\to\pi^0\ell^+\ell^-\), and it checks whether an RS extension with
+enhanced \(s\to d\gamma\gamma\), dipole, or electroweak-penguin structure is
+already in tension with radiative kaon data.
 
 \subsection*{Post-2008 developments}
-Relative to the Csaki-Falkowski-Weiler era, the KTeV full-sample analysis is the decisive update: it superseded the earlier KTeV value and is one of the two inputs in the current PDG average.  I did not find a newer neutral-mode branching-ratio measurement in the PDG 2025 listing.  The main later experimental development is adjacent rather than identical: NA48/2 measured the charged analogue \(K^\pm\to\pi^\pm\gamma\gamma\), with the sidecar recording the model-independent \(z>0.2\) and ChPT-extrapolated branching fractions.  Cappiello, Cata, and D'Ambrosio 2018 also show that the growing radiative-kaon data set constrains weak chiral counterterms, which is the right language for interpreting this mode rather than a short-distance Wilson-only bound.
+Relative to the Csaki--Falkowski--Weiler era, the KTeV full-sample analysis is
+the decisive update: it superseded the earlier KTeV value and is one of the two
+inputs in the current PDG average.  The PKA did not find a newer neutral-mode
+branching-ratio measurement in the PDG 2025 listing.  The main later
+experimental development is adjacent rather than identical: NA48/2 measured the
+charged analogue \(K^\pm\to\pi^\pm\gamma\gamma\), with the sidecar recording
+the model-independent \(z>0.2\) and ChPT-extrapolated branching fractions.
+Cappiello, Cata, and D'Ambrosio 2018 show that radiative-kaon data constrain
+weak chiral counterterms, which is the right language for this mode rather than
+a short-distance Wilson-only bound.
 
 \subsection*{Constraint validity and model dependence}
-Class: long-distance-limited and model-dependent.  The measured branching fraction should not be imposed as a hard RS exclusion without a dedicated \(\Delta S=1\) radiative calculation and a prescription for the SM long-distance amplitude.  It is safer as a consistency target and as an auxiliary input to \(K_L\to\pi^0\ell^+\ell^-\) estimates.  A new-physics interpretation must avoid double counting two-photon contributions already absorbed into chiral counterterms.
+Class: long-distance-limited and model-dependent.  The measured branching
+fraction should not be imposed as a hard RS exclusion without a dedicated
+\(\Delta S=1\) radiative calculation and a prescription for the SM
+long-distance amplitude.  It is safer as a consistency target and as an
+auxiliary input to \(K_L\to\pi^0\ell^+\ell^-\) estimates.  A new-physics
+interpretation must avoid double counting two-photon contributions already
+absorbed into chiral counterterms.
 
 \subsection*{Code coverage in this repo}
-\textbf{NO.}  I reran the plan-required greps and a K013-specific search across \texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/}.  The repository contains kaon \(\Delta F=2\) machinery and unrelated generic \(\gamma\)-symbol occurrences, but no implementation of \(K_L\to\pi^0\gamma\gamma\), no \(a_V\) parameter, and no radiative-kaon likelihood.
+\textbf{NO.}  The PKA reran the plan-required greps and a K013-specific search
+across \texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/}.  The repository
+contains kaon \(\Delta F=2\) machinery and unrelated generic \(\gamma\)-symbol
+occurrences, but no implementation of \(K_L\to\pi^0\gamma\gamma\), no \(a_V\)
+parameter, and no radiative-kaon likelihood.
 
 \subsection*{Implementation difficulty}
-\textbf{HIGH.}  A production constraint would need new \(\Delta S=1\) radiative matching, chiral-amplitude inputs, long-distance SM treatment, and possibly differential-shape information.  The existing \(\Delta F=2\) operator basis and running code are not enough.
+\textbf{HIGH.}  A production constraint would need new \(\Delta S=1\)
+radiative matching, chiral-amplitude inputs, long-distance SM treatment, and
+possibly differential-shape information.  The existing \(\Delta F=2\) operator
+basis and running code are not enough.
 
 \subsection*{Key references}
 Process-local source keys before bibliography consolidation: \texttt{PDG2025\_KL\_pi0gammagamma}, \texttt{KTeV2008\_KL\_pi0gammagamma}, \texttt{NA482002\_KL\_pi0gammagamma}, \texttt{NA482014\_Kpm\_pigammagamma}, \texttt{CappielloCataDAmbrosio2018\_radiative\_chiral}, and \texttt{GabbianiValencia2001\_KL\_pi0gammagamma}.

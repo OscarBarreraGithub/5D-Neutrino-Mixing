@@ -19,9 +19,17 @@ status_history:
     at: "2026-05-16T11:28:00-04:00"
     agent_id: "PKA-K004"
     reason: "Initial K004 source snapshots, sidecar, TeX draft, and worklog deposited"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T11:34:00-04:00"
+    agent: "WA"
+    from: "PKA-DONE"
+    to: "WRITER-DONE"
+    at: "2026-05-16T11:34:00-04:00"
+    agent_id: "WA"
+    reason: "Polished PKA draft for WA batch wa_wave1_kaon."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:28:00-04:00"
+last_updated_at: "2026-05-16T11:34:00-04:00"
 version: "0.1.0"
 source_shas:
   na62_2026_arxiv2604_12649.txt: "sha256:db5484ce8b53f8211c1504373be79c3f0fcc8a7a70b590960ec2667724ada029"

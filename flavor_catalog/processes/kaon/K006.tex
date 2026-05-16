@@ -5,8 +5,8 @@
 \section{\(K_L \to \mu^+\mu^-\)}
 
 \subsection*{Process}
-The process is the long-lived neutral-kaon rare decay
-\(K_L\to\mu^+\mu^-\), catalog id K006 in the kaon family.  It is a
+\textbf{Standard notation:} \(K_L\to\mu^+\mu^-\).  This entry covers the
+long-lived neutral-kaon dimuon decay, catalog id \(K006\).  It is a
 strangeness-changing weak-neutral-current mode.  The observed rate is dominated by
 the two-photon long-distance amplitude, but the dispersive component leaves a
 short-distance window for \(s\to d\) \(Z\)-penguin and electroweak-box effects.
@@ -19,12 +19,10 @@ The YAML sidecar source of truth lists the current PDG value as
 \]
 from the PDG \(K_L^0\) listing, \(\Gamma_{24}\), in the 2024 Review of
 Particle Physics.  The local snapshot is
-\texttt{flavor\_catalog/references/K006/pdg2024\_kl\_decay\_modes.txt}
-with sha256
-\texttt{7b8d82405b9c4bf76bf9efb6c3db59a5bd21ae2d77339e6ef0dce389ef50c585},
-accessed 2026-05-16.  The primary E871 measurement snapshot records
-\(\mathcal{B}=(7.18\pm0.17)\times10^{-9}\), used here only as experimental
-provenance rather than as the catalog average.
+\texttt{flavor\_catalog/references/K006/pdg2024\_kl\_decay\_modes.txt},
+accessed 2026-05-16.  The sidecar also records the primary E871 measurement,
+\(\mathcal{B}=(7.18\pm0.17)\times10^{-9}\), as experimental provenance rather
+than the catalog average.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 In warped or anarchic-flavor models this channel is relevant through the same
@@ -60,7 +58,7 @@ future lattice-assisted SM subtraction, not the total PDG branching fraction as
 a clean short-distance observable.
 
 \subsection*{Code coverage in this repo}
-NO.  A targeted grep across \texttt{quarkConstraints/}, \texttt{qcd/},
+\textbf{NO.}  A targeted grep across \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/}, excluding notebooks and binary-like assets, found no
@@ -69,7 +67,7 @@ nearest kaon hit is \texttt{quarkConstraints/deltaf2.py:615}, which defines the
 \(K_L-K_S\) mass difference for \(\Delta F=2\) mixing, not this decay.
 
 \subsection*{Implementation difficulty}
-HIGH.  Implementing K006 would need a new rare-kaon semileptonic observable,
+\textbf{HIGH.}  Implementing K006 would need a new rare-kaon semileptonic observable,
 short-distance \(s\to d\mu^+\mu^-\) matching, and an explicit treatment of the
 long-distance two-photon dispersive amplitude or a conservative external bound.
 Those ingredients are not present in the audited \(\Delta F=2\) code path.

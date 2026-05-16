@@ -16,9 +16,17 @@ status_history:
     at: "2026-05-16T11:07:50-04:00"
     agent_id: "PKA-K003"
     reason: "Initial PKA draft and source deposit."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T11:34:00-04:00"
+    agent: "WA"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T11:34:00-04:00"
+    agent_id: "WA"
+    reason: "Polished PKA draft for WA batch wa_wave1_kaon."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:07:50-04:00"
+last_updated_at: "2026-05-16T11:34:00-04:00"
 version: "0.1.0"
 pdg_or_equivalent:
   year: 2025
@@ -138,4 +146,3 @@ implementation_difficulty: HIGH
 implementation_difficulty_reason: "Requires new Delta S = 1 WET/SMEFT matching, RG evolution, K -> pi pi matrix elements, and treatment of electroweak/QCD penguin plus chromomagnetic operators; the repo's Delta F = 2 machinery is not a direct evaluator."
 open_issues:
   - "Checker should confirm whether the catalog standard prefers the PDG listing value 0.00166 +/- 0.00023 or the S013EPS DataBlock OUR AVERAGE 1.68 +/- 0.20 in units of 10^-3."
-

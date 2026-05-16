@@ -15,21 +15,21 @@
 This entry covers direct CP violation in the two-pion decay amplitudes of
 neutral kaons, commonly written through
 \(\mathrm{Re}(\varepsilon'/\varepsilon)=(1-|\eta_{00}/\eta_{+-}|)/3\).
-The process id is \(K003\), matching the kaon-sector row for
-``epsilon'/epsilon'' in plan v1.
+The process id is \(K003\).
 
 \subsection*{PDG / equivalent value(s)}
-The canonical numerical value is taken from the sidecar
-\texttt{pdg\_or\_equivalent} block:
+The canonical PDG-sidecar value is
 \[
   \mathrm{Re}(\varepsilon'/\varepsilon)=0.00166\pm0.00023
   = (16.6\pm2.3)\times 10^{-4}.
 \]
-The local PDG snapshot is
+This number is recorded in the YAML \texttt{pdg\_or\_equivalent} block and
+traces to
 \texttt{flavor\_catalog/references/K003/pdg\_live\_S013\_20260516.txt}.
-The companion PDG DataBlock snapshot records the measurement table and the
-two dominant modern inputs: KTeV reports
-\((19.2\pm2.1)\times10^{-4}\), while NA48 reports
+The companion PDG DataBlock snapshot records \(\texttt{OUR FIT}=1.67\pm0.23\)
+and \(\texttt{OUR AVERAGE}=1.68\pm0.20\), both in units of \(10^{-3}\).  The
+same sidecar lists the two dominant experimental inputs: KTeV
+\((19.2\pm2.1)\times10^{-4}\) and NA48
 \((14.7\pm2.2)\times10^{-4}\).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
@@ -44,14 +44,14 @@ chromo-magnetic \(O_{8g}\)-type operators, making the channel a natural
 stress test for UV completions with non-minimal chirality structure.
 
 \subsection*{Post-2008 developments}
-The experimental average has not been replaced by a new kaon experiment, but
-KTeV's final \(K\to\pi\pi\) result was published after the CFW-era reference
-point.  The major post-2008 changes are theoretical.  RBC/UKQCD produced a
-physical-kinematics lattice calculation of \(A_0\) and \(\varepsilon'\),
-finding \(\mathrm{Re}(\varepsilon'/\varepsilon)=
+The experimental average has not been replaced by a newer kaon experiment, but
+KTeV's final \(K\to\pi\pi\) result was published after the CFW-era baseline.
+The main post-2008 changes are theoretical.  RBC/UKQCD produced a
+physical-kinematics lattice calculation of \(A_0\) and \(\varepsilon'\), with
+\(\mathrm{Re}(\varepsilon'/\varepsilon)=
 21.7(2.6)(6.2)(5.0)\times10^{-4}\).  Aebischer, Bobeth, and Buras then
-reanalysed the same ratio with NNLO electroweak-penguin corrections and
-ChPT isospin-breaking inputs, obtaining
+reanalysed the ratio with NNLO electroweak-penguin corrections and ChPT
+isospin-breaking inputs, obtaining
 \((17.4\pm6.1)\times10^{-4}\) in the octet treatment and
 \((13.9\pm5.2)\times10^{-4}\) in the nonet treatment.  In parallel, 2019
 BSM master-formula papers organized the \(\Delta S=1\) operator dependence
@@ -94,4 +94,3 @@ Local source keys: \texttt{pdg\_live\_S013\_20260516},
 \texttt{na48\_2002}, \texttt{rbc\_ukqcd\_2020},
 \texttt{aebischer\_buras\_2020}, \texttt{bsm\_master\_2019},
 \texttt{bsm\_anatomy\_2019}, and \texttt{cfw\_2008}.
-

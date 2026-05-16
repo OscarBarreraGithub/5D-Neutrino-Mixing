@@ -11,10 +11,10 @@
 \section{\(K_L \to \pi^0\nu\bar\nu\)}
 
 \subsection*{Process}
-Standard notation: \(K_L \to \pi^0\nu\bar\nu\).  This entry covers the
+\textbf{Standard notation:} \(K_L \to \pi^0\nu\bar\nu\).  This entry covers the
 CP-violating neutral-kaon golden mode, a \(\Delta S=1\) flavor-changing
 neutral-current decay with an invisible neutrino pair.  The process id is
-K005 from the kaon table in plan v1.
+\(K005\).
 
 \subsection*{PDG / equivalent value(s)}
 The sidecar value is
@@ -22,13 +22,13 @@ The sidecar value is
   {\cal B}(K_L^0 \to \pi^0\nu\bar\nu) < 2.2\times 10^{-9}
   \quad (90\%~{\rm CL}),
 \]
-from the 2026 PDG pdgLive S013R40 table, snapshot
+from the 2026 PDG pdgLive S013R40 table, traced to
 \texttt{flavor\_catalog/references/K005/pdg2026\_pdgLive\_S013R40.txt}.
 The same sidecar records the direct KOTO 2025 input behind the PDG value:
 the 2021 KOTO data set had expected background
 \(0.252\pm0.055_{\rm stat}{}^{+0.052}_{-0.067}{}_{\rm syst}\), single-event
 sensitivity \((9.33\pm0.06_{\rm stat}\pm0.84_{\rm syst})\times10^{-10}\),
-and no signal-region events, yielding the same \(2.2\times10^{-9}\) limit.
+and zero signal-region events, yielding the same \(2.2\times10^{-9}\) limit.
 
 For SM comparison the sidecar gives two current theory benchmarks:
 Brod--Gorbahn--Stamou quote
@@ -57,7 +57,7 @@ older E391a/KOTO pilot limits to the KOTO direct search now mirrored by PDG.
 KOTO's 2025 PRL result improves the previous KOTO direct bound and reports a
 background expectation below one event for the 2021 analysis.  On the charged
 side, NA62 has moved \(K^+\to\pi^+\nu\bar\nu\) from evidence/observation to a
-combined 2016--2024 value with sub-\(20\%\) precision, sharpening the
+combined 2016--2024 value with better-than-\(20\%\) precision, sharpening the
 cross-check between the charged and neutral golden modes.  Theory updates also
 matter: Brod--Gorbahn--Stamou updated the SM \(K\to\pi\nu\bar\nu\) prediction,
 and Buras--Venturini recast the prediction in ratios designed to reduce
@@ -72,7 +72,7 @@ non-neutrino particle, if neutrino flavor structure is non-universal, or if a
 global kaon fit is used to correlate K005 with the charged mode.
 
 \subsection*{Code coverage in this repo}
-Coverage status: NO.  I searched the requested code areas, excluding
+\textbf{NO.}  The PKA searched the requested code areas, excluding
 notebooks, for \(K_L\to\pi^0\nu\bar\nu\), KOTO, NA62, \(s\to d\), penguin,
 and generic rare-kaon strings.  No rare-decay implementation was found.  The
 only relevant \(K_L\) hit was the mixing input
@@ -81,7 +81,7 @@ kaon code is \(\Delta F=2\) mixing machinery rather than a \(\Delta S=1\)
 semileptonic decay calculation.
 
 \subsection*{Implementation difficulty}
-HIGH.  A production implementation would need a new \(s\to d\nu\bar\nu\)
+\textbf{HIGH.}  A production implementation would need a new \(s\to d\nu\bar\nu\)
 Wilson/operator path, the CP-odd \(K_L\) projection, SM normalization and
 interference handling, neutrino-flavor bookkeeping, and a mode-level likelihood
 or limit treatment.  The existing audited code can supply kaon-mixing context,
