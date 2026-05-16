@@ -11,16 +11,18 @@
 \section{\texorpdfstring{\(Z \to c\bar c\) Pole Observables}{Z to c cbar Pole Observables}}
 
 \subsection*{Process}
-This entry covers the charm-quark Z-pole observables \(R_c^0\),
-\(A_{\rm FB}^{0,c}\), and \(A_c\).  Plan v1 lists \(R_c\) as T012 and the
-charm asymmetries as T013; the assignment asks for the combined
-\(Z\to c\bar c\) pole-observable package under process id T012.
+\textbf{Standard notation:} \(R_c^0\), \(A_{\rm FB}^{0,c}\), and \(A_c\).
+This entry covers the charm-quark Z-pole partial-width ratio and asymmetry
+observables under process id T012.  Plan v1 lists \(R_c\) as T012 and the charm
+asymmetries as T013; the dispatch instruction asks for the combined
+\(Z\to c\bar c\) pole-observable package under T012.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG value}
 The canonical current values are taken from the PDG 2025 Z-boson listing
 snapshot in
 \texttt{flavor\_catalog/references/T012/pdg\_2025\_z\_boson\_charm.txt},
-accessed on 2026-05-16.  The measured values are
+accessed on 2026-05-16 (\texttt{pdg\_2025\_z\_boson\_charm}).  The measured
+values are
 \[
 R_c^0 = 0.1721\pm0.0030,\qquad
 A_{\rm FB}^{0,c}=0.0707\pm0.0035,\qquad
@@ -28,11 +30,13 @@ A_c=0.670\pm0.027 .
 \]
 For \(A_{\rm FB}^{0,c}\), the PDG listing gives the Z-pole charge asymmetry
 as \(7.07\pm0.35\%\); the dimensionless value above is the direct percent
-conversion.  The LEP/SLC final-combination snapshot in
+conversion (\texttt{pdg\_2025\_z\_boson\_charm}).  The LEP/SLC
+final-combination snapshot in
 \texttt{flavor\_catalog/references/T012/lepslc\_2006\_z\_resonance\_charm.txt}
-records the same three charm-observable central values and uncertainties.
+records the same three charm-observable central values and uncertainties
+(\texttt{lepslc\_2006\_z\_resonance\_charm}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 These observables constrain flavor-diagonal shifts in the left- and
 right-handed \(Zc\bar c\) couplings.  In anarchic warped models, the charm
 coupling shifts are usually less severe than the \(Zb\bar b\) constraint
@@ -46,18 +50,20 @@ that correlates charm and bottom pseudo-observables.
 \subsection*{Post-2008 developments}
 No new LEP/SLC-style experimental average supersedes the legacy Z-pole charm
 combination, so the PDG value remains data-dominated by the final LEP/SLC
-heavy-flavour fit.  Since arXiv:0804.1954, the RS literature has made the
-model dependence of ordinary \(Zf\bar f\) couplings more explicit; the
-Casagrande--Goertz--Haisch--Neubert--Pfoh setup treats the standard \(Z\)
-couplings, flavor-changing \(Z\) effects, and electroweak precision constraints
-in a unified warped-flavor framework.  On the Standard-Model side, the
+heavy-flavour fit.  Since arXiv:0804.1954 (\texttt{cfw\_2008\_rs\_flavor}),
+the RS literature has made the model dependence of ordinary \(Zf\bar f\)
+couplings more explicit; the Casagrande--Goertz--Haisch--Neubert--Pfoh setup
+treats the standard \(Z\) couplings, flavor-changing \(Z\) effects, and
+electroweak precision constraints in a unified warped-flavor framework
+(\texttt{casagrande\_2008\_rs\_ewpt}).  On the Standard-Model side, the
 fermionic electroweak two-loop calculation of Z partial widths and branching
-ratios was completed in arXiv:1401.2447.  Prospective FCC-ee work, including
-arXiv:2107.00616, now revisits how \(R_c\) and \(A_{\rm FB}^{c}\) could be
-improved with modern heavy-flavour tagging, but those studies are not current
-experimental inputs.
+ratios was completed in arXiv:1401.2447
+(\texttt{freitas\_2014\_z\_widths}).  Prospective FCC-ee work, including
+arXiv:2107.00616 (\texttt{alcaraz\_2021\_z\_lineshape\_fcc}), revisits how
+\(R_c\) and \(A_{\rm FB}^{c}\) could be improved with modern heavy-flavour
+tagging, but those studies are not current experimental inputs.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 This is a precision electroweak coupling constraint, not a flavor-changing
 decay or a stand-alone RS flavor bound.  It is robust as a measured Z-pole
 pseudo-observable, but the translation into a bound on a 5D model is

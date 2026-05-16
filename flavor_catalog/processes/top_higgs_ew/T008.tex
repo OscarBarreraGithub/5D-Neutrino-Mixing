@@ -10,14 +10,13 @@
 \subsection*{Process}
 \textbf{Standard notation:} \(\mathcal{B}(t\to H u)\).
 This entry catalogs the flavor-changing neutral-current top-Higgs decay
-\(t\to H u\) in the top/Higgs/electroweak family.  It covers direct LHC
-searches for anomalous \(Hut\) interactions in \(t\bar t\) events with an FCNC
-top decay and in associated single-top plus Higgs production.
+\(t\to H u\), process id T008 in the top/Higgs/electroweak family.  It covers
+direct LHC searches for anomalous \(Hut\) interactions in \(t\bar t\) events
+with an FCNC top decay and in associated single-top plus Higgs production.
 
-\subsection*{PDG / equivalent value(s)}
-The source-of-truth numerical entries are the \texttt{pdg\_or\_equivalent}
-block in \texttt{T008.yaml}.  The PDG 2026 \texttt{pdgLive} top-quark
-datablock quotes
+\subsection*{PDG value}
+The \texttt{pdg\_or\_equivalent} block in \texttt{T008.yaml} is the numerical
+source of truth.  The PDG 2026 \texttt{pdgLive} top-quark datablock quotes
 \[
   \mathcal{B}(t\to H u) < 1.9\times 10^{-4}
 \]
@@ -29,11 +28,16 @@ and reports the same observed limit, \(0.019\%\), with expected \(0.031\%\)
 (\texttt{CMS2022:T008:tHu\_diphoton}).  PDG also lists, below its
 ``do not use'' separator, the ATLAS multilepton limit
 \(2.8(3.0)\times10^{-4}\) observed(expected) and the ATLAS combination
-\(2.6(1.8)\times10^{-4}\).  The CMS 2025 same-sign-lepton search gives
-\(0.072\%(0.059\%)\), and its combination with CMS \(H\to\gamma\gamma\) and
-\(H\to b\bar b\) searches gives \(0.019\%(0.027\%)\).
+\(2.6(1.8)\times10^{-4}\)
+(\texttt{ATLAS2024:T008:tHu\_multilepton};
+\texttt{ATLAS2024:T008:tHu\_combined}).  The CMS 2025 same-sign-lepton search
+gives \(0.072\%(0.059\%)\), and its combination with CMS
+\(H\to\gamma\gamma\) and \(H\to b\bar b\) searches gives
+\(0.019\%(0.027\%)\)
+(\texttt{CMS2025:T008:tHu\_samesign};
+\texttt{CMS2025:T008:tHu\_combined}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 Warped anarchic flavor and composite-Higgs variants can generate off-diagonal
 scalar Yukawa couplings after rotating to the quark mass basis.  The \(t\to H u\)
 channel probes up-top scalar flavor, complementary to the
@@ -51,9 +55,10 @@ CMS diphoton search, while ATLAS and CMS now also provide multi-channel
 combinations that treat \(t\bar t\) FCNC decay and associated \(tH\)
 production together.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 The experimental statement is a direct 95\% CL upper limit under a single
-anomalous \(Hut\) coupling assumption.  Mapping it into this repo would require
+anomalous \(Hut\) coupling assumption (\texttt{PDG2026:T008:tHu\_headline}).
+Mapping it into this repo would require
 choosing a scalar-Yukawa or SMEFT convention, deciding whether \(Hut\) and
 \(Htu\) are independent, and preserving the analysis-specific combination of
 \(t\bar t\) decay and associated-production topologies.  Correlations with

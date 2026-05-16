@@ -16,9 +16,18 @@ status_history:
     timestamp: "2026-05-16T18:27:46-04:00"
     agent_id: "PKA-T003"
     reason: "Initial PKA draft and source snapshot deposit."
+  - from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T18:39:34-04:00"
+    timestamp: "2026-05-16T18:39:34-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    batch_id: "wa_w7_new_processes"
+    reason: "Writer polish for wa_w7_new_processes; template sections normalized and numerical claims checked against sidecar/source snapshots."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T18:27:46-04:00"
+last_updated_at: "2026-05-16T18:39:34-04:00"
 version: "0.1.0"
 source_shas:
   cms_2024_top21013_tqgamma.txt: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"

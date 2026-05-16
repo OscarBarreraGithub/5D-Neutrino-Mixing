@@ -18,9 +18,18 @@ status_history:
     at: "2026-05-16T18:26:49-04:00"
     agent_id: "PKA-T012"
     reason: "Initial PKA draft for combined Z -> c cbar pole observables assigned to process id T012."
+  - from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-16T18:39:34-04:00"
+    timestamp: "2026-05-16T18:39:34-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    batch_id: "wa_w7_new_processes"
+    reason: "Writer polish for wa_w7_new_processes; template sections normalized and numerical claims checked against sidecar/source snapshots."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T18:26:49-04:00"
+last_updated_at: "2026-05-16T18:39:34-04:00"
 version: "0.1.0"
 source_shas:
   pdg_2025_z_boson_charm.txt: "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2"
