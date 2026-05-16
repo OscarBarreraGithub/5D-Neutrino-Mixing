@@ -1,0 +1,209 @@
+{
+   "status_code":  200,
+   "status_message": "OK",
+   "request_timestamp":    "2026-05-16 11:06:23 PST",
+   "request_url":    "https://pdglive.lbl.gov//api/listings/S042.152",
+   "edition":     "2025",
+   "about":    "For further information see https://pdg.lbl.gov/api",
+   "pdgid":       "S042.152",
+   "description":       "B0 --> K^*(892)0 nu nubar",
+   "parent_pdgid": "S042",
+   "parent_description": "B0",
+"related_data": [{
+   "pdgid":       "S042S50",
+   "description": "G(B0 --> K*(892)0 nu nubar)/G(total)",
+   "note": "Test for DeltaB=1 weak neutral current. Allowed by higher-order electroweak interactions.",
+   "measurements":[ 
+      {  
+ "document_id": "GRYGIER 2017 "
+, "publication_name": "PR D96 091101"
+, "publication_year": 2017
+, "doi": "10.1103/PhysRevD.96.091101"
+, "inspire_id": "1512929"
+, "title": "Search for B --> h nu nubar Decays with Semileptonic Tagging at Belle"
+, "confidence_level": "90.0"
+, "technique": "BELL"
+, "comment": "e+ e- --> Upsilon(4S)"
+, "is_changed": false
+,   "measurement_values":[ 
+      {  
+   "column_name": "VALUE"
+,   "value": 1.8E-5
+,   "value_text": "<1.8 E-5"
+,   "limit_type": "U"
+,   "used_in_average": true
+,   "used_in_fit": true
+,   "display_value_text": "<1.8 E-5"
+,   "display_power_of_ten": 0
+,   "display_in_percent": false
+ }
+   ]
+,   "footnotes":[ 
+      {  
+   "index": 1
+,   "text": "Assumes equal production of B+ and B0 at the Upsilon(4S)."
+,   "is_changed": false
+      }  
+]}
+,
+      {  
+ "document_id": "LEES 2013I"
+, "publication_name": "PR D87 112005"
+, "publication_year": 2013
+, "doi": "10.1103/PhysRevD.87.112005"
+, "inspire_id": "1225884"
+, "title": "Search for B --> K^(*) nu nubar and Invisible Quarkonium Decays"
+, "confidence_level": "90.0"
+, "technique": "BABR"
+, "comment": "e+ e- --> Upsilon(4S)"
+, "is_changed": false
+,   "measurement_values":[ 
+      {  
+   "column_name": "VALUE"
+,   "value": 1.2E-4
+,   "value_text": "<1.2 E-4"
+,   "limit_type": "U"
+,   "used_in_average": false
+,   "used_in_fit": false
+,   "display_value_text": "<1.2 E-4"
+,   "display_power_of_ten": 0
+,   "display_in_percent": false
+ }
+   ]
+,   "footnotes":[ 
+      {  
+   "index": 1
+,   "text": "Assumes equal production of B+ and B0 at the Upsilon(4S)."
+,   "is_changed": false
+      }  
+,      {  
+   "index": 2
+,   "text": "Also reported a limit <9.3E-5 at 90% CL obtained using a fully reconstructed hadronic B-tag evnets."
+,   "is_changed": false
+      }  
+]}
+,
+      {  
+ "document_id": "LUTZ 2013 "
+, "publication_name": "PR D87 111103"
+, "publication_year": 2013
+, "doi": "10.1103/PhysRevD.87.111103"
+, "inspire_id": "1223991"
+, "title": "Search for B --> h^(*) nu nubar with the Full Belle Upsilon(4S) Data Sample"
+, "confidence_level": "90.0"
+, "technique": "BELL"
+, "comment": "e+ e- --> Upsilon(4S)"
+, "is_changed": false
+,   "measurement_values":[ 
+      {  
+   "column_name": "VALUE"
+,   "value": 5.5E-5
+,   "value_text": "<5.5 E-5"
+,   "limit_type": "U"
+,   "used_in_average": false
+,   "used_in_fit": false
+,   "display_value_text": "<5.5 E-5"
+,   "display_power_of_ten": 0
+,   "display_in_percent": false
+ }
+   ]
+,   "footnotes":[ 
+      {  
+   "index": 1
+,   "text": "Assumes equal production of B+ and B0 at the Upsilon(4S)."
+,   "is_changed": false
+      }  
+]}
+,
+      {  
+ "document_id": "AUBERT 2008BC"
+, "publication_name": "PR D78 072007"
+, "publication_year": 2008
+, "doi": "10.1103/PhysRevD.78.072007"
+, "inspire_id": "792828"
+, "title": "Search for B --> K^* nu nubar Decays"
+, "confidence_level": "90.0"
+, "technique": "BABR"
+, "comment": "Repl. by LEES 2013I"
+, "is_changed": false
+,   "measurement_values":[ 
+      {  
+   "column_name": "VALUE"
+,   "value": 1.2E-4
+,   "value_text": "<1.2 E-4"
+,   "limit_type": "U"
+,   "used_in_average": false
+,   "used_in_fit": false
+,   "display_value_text": "<1.2 E-4"
+,   "display_power_of_ten": 0
+,   "display_in_percent": false
+ }
+   ]
+ },
+      {  
+ "document_id": "CHEN 2007D"
+, "publication_name": "PRL 99 221802"
+, "publication_year": 2007
+, "doi": "10.1103/PhysRevLett.99.221802"
+, "inspire_id": "754596"
+, "title": "Search for B --> h^(*) nu nubar Decays at Belle"
+, "confidence_level": "90.0"
+, "technique": "BELL"
+, "comment": "e+ e- --> Upsilon(4S)"
+, "is_changed": false
+,   "measurement_values":[ 
+      {  
+   "column_name": "VALUE"
+,   "value": 3.4E-4
+,   "value_text": "<3.4 E-4"
+,   "limit_type": "U"
+,   "used_in_average": false
+,   "used_in_fit": false
+,   "display_value_text": "<3.4 E-4"
+,   "display_power_of_ten": 0
+,   "display_in_percent": false
+ }
+   ]
+,   "footnotes":[ 
+      {  
+   "index": 1
+,   "text": "Assumes equal production of B+ and B0 at the Upsilon(4S)."
+,   "is_changed": false
+      }  
+]}
+,
+      {  
+ "document_id": "ADAM 1996D"
+, "publication_name": "ZPHY C72 207"
+, "publication_year": 1996
+, "doi": "10.1007/s002880050238"
+, "inspire_id": "421545"
+, "title": "Study of Rare b Decays with the DELPHI Detector at LEP"
+, "confidence_level": "90.0"
+, "technique": "DLPH"
+, "comment": "e+ e- --> Z"
+, "is_changed": false
+,   "measurement_values":[ 
+      {  
+   "column_name": "VALUE"
+,   "value": 0.001
+,   "value_text": "<1.0 E-3"
+,   "limit_type": "U"
+,   "used_in_average": false
+,   "used_in_fit": false
+,   "display_value_text": "<1.0 E-3"
+,   "display_power_of_ten": 0
+,   "display_in_percent": false
+ }
+   ]
+,   "footnotes":[ 
+      {  
+   "index": 3
+,   "text": "ADAM 1996D assumes f(B0) = f(B-) = 0.39 and f(B_{{s}}) = 0.12."
+,   "is_changed": false
+      }  
+]}
+
+   ]
+}]
+}

@@ -1,0 +1,127 @@
+schema: flavor_catalog.process.v1
+process_id: B023
+family: beauty
+standard_notation: "\\mathcal{B}(B\\to K^*\\nu\\bar{\\nu})"
+process_name: "Invisible rare B -> K*(892) nu nubar decays"
+owner: "PKA"
+owner_agent_id: "PKA-B023"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T14:07:02-04:00"
+    timestamp: "2026-05-16T14:07:02-04:00"
+    agent_id: "PKA-B023"
+    reason: "initial PKA draft deposit for assigned B023 B -> K* nu nubar process"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:07:02-04:00"
+version: "0.1.0"
+source_shas:
+  babar2013_arxiv1303_7465.txt: "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b"
+  belle2013_arxiv1303_3719.txt: "sha256:a1177ae028b8856df736308effb4bab36ab6e025eb37a34de21de432d98afbda"
+  belle2017_arxiv1702_03224.txt: "sha256:2a51560a45705af5d66a698c04c839d95773d3f56596ecc3a3a67385019c6c0c"
+  buras2015_arxiv1409_4557.txt: "sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34"
+  cfw2008_arxiv0804_1954.txt: "sha256:67dbd797dd149c1f39d2d172e303d6b69abc3a083069497b0d6c8749e6b9f136"
+  hflav_dec2025_b0_kst0_nunu.txt: "sha256:58e5e6b1dac6c511d0ff051f976b6cebb485832a6ac8fb832204897a21c21b3b"
+  hflav_dec2025_bp_kstp_nunu.txt: "sha256:f0fa6dd78534c4f40f3b97e837c12dd4bb8f535517af7d27aecbcf31f0300c5a"
+  pdg2025_b0_kst0_nunu_api.txt: "sha256:f8d7014f1e7f2fbffd464f3d1c47d4fd36ff559b74f3a2301ec8b966b756dffe"
+  pdg2025_bp_kstp_nunu_api.txt: "sha256:d9aa9db63226950572c8d450fd495b9b727f9ac270336e399d78686a1d41e07b"
+pdg_or_equivalent:
+  source: "PDG Live 2025 API and HFLAV rare B decays Dec. 2025"
+  source_url: "https://hflav.web.cern.ch/content/rare-b-decays"
+  access_date: "2026-05-16"
+  year: 2025
+  value_summary: "PDG/HFLAV list 90% CL upper limits B(B0 -> K*(892)0 nu nubar) < 1.8e-5 and B(B+ -> K*(892)+ nu nubar) < 4.0e-5."
+  observables:
+    - name: "B0 -> K*(892)0 nu nubar"
+      pdg_id: "S042.152"
+      value: "<1.8e-5"
+      confidence_level: "90%"
+      units: "branching fraction"
+      source_key: "PDG2025:B0KstarNunu"
+      source_url: "https://pdgapi.lbl.gov/listings/S042.152"
+      hflav_source_key: "HFLAV2025Dec:B0KstarNunu"
+      hflav_source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bd/BR_B0_K%2A0_nu_nubar.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B023/pdg2025_b0_kst0_nunu_api.txt"
+      sha256: "sha256:f8d7014f1e7f2fbffd464f3d1c47d4fd36ff559b74f3a2301ec8b966b756dffe"
+      hflav_snapshot_path: "flavor_catalog/references/B023/hflav_dec2025_b0_kst0_nunu.txt"
+      hflav_sha256: "sha256:58e5e6b1dac6c511d0ff051f976b6cebb485832a6ac8fb832204897a21c21b3b"
+      leading_input:
+        experiment: "Belle"
+        value: "<1.8e-5"
+        confidence_level: "90%"
+        reference: "Phys. Rev. D 96, 091101 (2017)"
+    - name: "B+ -> K*(892)+ nu nubar"
+      pdg_id: "S041.490"
+      value: "<4.0e-5"
+      confidence_level: "90%"
+      units: "branching fraction"
+      source_key: "PDG2025:BpKstarNunu"
+      source_url: "https://pdgapi.lbl.gov/listings/S041.490"
+      hflav_source_key: "HFLAV2025Dec:BpKstarNunu"
+      hflav_source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B%2B_K%2A%2B_nu_nubar.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B023/pdg2025_bp_kstp_nunu_api.txt"
+      sha256: "sha256:d9aa9db63226950572c8d450fd495b9b727f9ac270336e399d78686a1d41e07b"
+      hflav_snapshot_path: "flavor_catalog/references/B023/hflav_dec2025_bp_kstp_nunu.txt"
+      hflav_sha256: "sha256:f0fa6dd78534c4f40f3b97e837c12dd4bb8f535517af7d27aecbcf31f0300c5a"
+      leading_input:
+        experiment: "Belle"
+        value: "<4.0e-5"
+        confidence_level: "90%"
+        reference: "Phys. Rev. D 87, 111103 (2013)"
+paper_era_references:
+  - key: "CsakiFalkowskiWeiler2008:CompositeFlavor"
+    role: "2008 RS/anarchic-flavor baseline specified by the catalog plan"
+    snapshot_path: "flavor_catalog/references/B023/cfw2008_arxiv0804_1954.txt"
+    sha256: "sha256:67dbd797dd149c1f39d2d172e303d6b69abc3a083069497b0d6c8749e6b9f136"
+theory_context:
+  - key: "BurasGirrbachNoeNiehoffStraub2015:BKstarNunu"
+    role: "post-2008 SM and EFT reference; not a PDG/equivalent measurement"
+    value_summary: "SM prediction B(B0 -> K*(892)0 nu nubar) = (9.2 +/- 1.0)e-6"
+    snapshot_path: "flavor_catalog/references/B023/buras2015_arxiv1409_4557.txt"
+    sha256: "sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34"
+experiment_inputs:
+  - key: "Belle2017:BHnunuSemileptonic"
+    arxiv_id: "1702.03224"
+    role: "Belle semileptonic-tag source for B0 -> K*0 nu nubar < 1.8e-5 and combined B -> K* nu nubar < 2.7e-5"
+    snapshot_path: "flavor_catalog/references/B023/belle2017_arxiv1702_03224.txt"
+    sha256: "sha256:2a51560a45705af5d66a698c04c839d95773d3f56596ecc3a3a67385019c6c0c"
+  - key: "Belle2013:BHnunuHadronic"
+    arxiv_id: "1303.3719"
+    role: "Belle hadronic-tag source for B+ -> K*+ nu nubar < 4.0e-5"
+    snapshot_path: "flavor_catalog/references/B023/belle2013_arxiv1303_3719.txt"
+    sha256: "sha256:a1177ae028b8856df736308effb4bab36ab6e025eb37a34de21de432d98afbda"
+  - key: "BaBar2013:BKstarNunu"
+    arxiv_id: "1303.7465"
+    role: "BaBar hadronic-tag input listed by HFLAV/PDG"
+    snapshot_path: "flavor_catalog/references/B023/babar2013_arxiv1303_7465.txt"
+    sha256: "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Targeted regex search for B -> K* nu nubar, b -> s nu nubar, Kstar nu, nu_nubar, nunu, and invisible B returned no matches in the required code directories."
+    - "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems."
+    - "quarkConstraints/deltaf2.py:209 defines the legacy Delta F = 2 input set."
+    - "quarkConstraints/deltaf2.py:903 and quarkConstraints/deltaf2.py:922 implement B_d and B_s mixing, not Delta B = 1 invisible decays."
+    - "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no b -> s nu nubar routine is present."
+  commands:
+    - >-
+      rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "b.?->.?s|X_s|K\\*|Kstar|K\\^\\*|nu.*nubar|nunu|invisible|B_s.*mu|pi.*nu|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "B\\s*(->|to).*K\\*.*nu|B0.*K\\*|B\\+.*K\\*|Kstar.*nu|K\\*.*nu|K\\^\\*.*nu|b\\s*(->|to)\\s*s\\s*nu|nubar|nu_nubar|nunu|invisible" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_notes: "Requires a new Delta B = 1 b -> s nu nubar operator basis, RS matching for neutral-current left/right coefficients, B -> K* form factors and polarization treatment, and an experimental upper-limit likelihood or validated CL reinterpretation."
+open_issues:
+  - "HFLAV/PDG provide upper limits, not a reusable likelihood; future integration should decide a conservative CL treatment."
+  - "No Belle II B -> K* nu nubar update is present in the HFLAV Dec. 2025 table; checker should verify whether any preliminary Belle II vector-mode result exists outside HFLAV."

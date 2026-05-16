@@ -1,0 +1,24 @@
+Source key: Belle2017:BHnunuSemileptonic
+URL: https://arxiv.org/abs/1702.03224
+Access date: 2026-05-16
+arXiv: 1702.03224
+DOI: 10.1103/PhysRevD.96.091101
+Title: Search for B -> h nu nubar decays with semileptonic tagging at Belle
+Authors: Belle Collaboration, J. Grygier et al.
+Year: 2017
+Local snapshot purpose: primary Belle semileptonic-tag result used by PDG/HFLAV
+for the current strongest B0 -> K*0 nu nubar upper limit.
+
+Source-extracted channel mapping from arXiv TeX source:
+{323}{B+ -> K*+ nu nubar}
+{313}{B0 -> K*0 nu nubar}
+
+Source-extracted result table from arXiv TeX source:
+Channel | Efficiency | Expected limit | Observed limit
+K*+ nu nubar | 0.57 x 10^{-3} | 2.4 x 10^{-5} | 6.1 x 10^{-5}
+K*0 nu nubar | 0.51 x 10^{-3} | 2.4 x 10^{-5} | 1.8 x 10^{-5}
+
+Source-extracted combined-limit text from arXiv TeX source:
+The analysis combines charged and neutral modes by adding negative log
+likelihoods, scaling neutral modes by tau(B+)/tau(B0), and obtains
+B(B -> K* nu nubar) < 2.7 x 10^{-5} at 90% C.L.

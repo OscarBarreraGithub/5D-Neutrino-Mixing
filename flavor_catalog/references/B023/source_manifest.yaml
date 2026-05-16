@@ -1,0 +1,93 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B023
+sources:
+  - key: PDG2025:B0KstarNunu
+    arxiv_id: null
+    DOI: null
+    title: "PDG Live listing S042.152 for B0 -> K*(892)0 nu nubar"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdgapi.lbl.gov/listings/S042.152"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:f8d7014f1e7f2fbffd464f3d1c47d4fd36ff559b74f3a2301ec8b966b756dffe"
+    snapshot_path: "flavor_catalog/references/B023/pdg2025_b0_kst0_nunu_api.txt"
+  - key: PDG2025:BpKstarNunu
+    arxiv_id: null
+    DOI: null
+    title: "PDG Live listing S041.490 for B+ -> K*(892)+ nu nubar"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdgapi.lbl.gov/listings/S041.490"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:d9aa9db63226950572c8d450fd495b9b727f9ac270336e399d78686a1d41e07b"
+    snapshot_path: "flavor_catalog/references/B023/pdg2025_bp_kstp_nunu_api.txt"
+  - key: HFLAV2025Dec:B0KstarNunu
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV Dec. 2025 table for B0 -> K*(892)0 nu nubar"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bd/BR_B0_K%2A0_nu_nubar.html"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:58e5e6b1dac6c511d0ff051f976b6cebb485832a6ac8fb832204897a21c21b3b"
+    snapshot_path: "flavor_catalog/references/B023/hflav_dec2025_b0_kst0_nunu.txt"
+  - key: HFLAV2025Dec:BpKstarNunu
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV Dec. 2025 table for B+ -> K*(892)+ nu nubar"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B%2B_K%2A%2B_nu_nubar.html"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:f0fa6dd78534c4f40f3b97e837c12dd4bb8f535517af7d27aecbcf31f0300c5a"
+    snapshot_path: "flavor_catalog/references/B023/hflav_dec2025_bp_kstp_nunu.txt"
+  - key: Belle2017:BHnunuSemileptonic
+    arxiv_id: "1702.03224"
+    DOI: "10.1103/PhysRevD.96.091101"
+    title: "Search for B -> h nu nubar decays with semileptonic tagging at Belle"
+    authors: "Belle Collaboration, J. Grygier et al."
+    year: 2017
+    url: "https://arxiv.org/abs/1702.03224"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:2a51560a45705af5d66a698c04c839d95773d3f56596ecc3a3a67385019c6c0c"
+    snapshot_path: "flavor_catalog/references/B023/belle2017_arxiv1702_03224.txt"
+  - key: Belle2013:BHnunuHadronic
+    arxiv_id: "1303.3719"
+    DOI: "10.1103/PhysRevD.87.111103"
+    title: "Search for B -> h(*) nu nubar with the full Belle Upsilon(4S) data sample"
+    authors: "Belle Collaboration, O. Lutz et al."
+    year: 2013
+    url: "https://arxiv.org/abs/1303.3719"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:a1177ae028b8856df736308effb4bab36ab6e025eb37a34de21de432d98afbda"
+    snapshot_path: "flavor_catalog/references/B023/belle2013_arxiv1303_3719.txt"
+  - key: BaBar2013:BKstarNunu
+    arxiv_id: "1303.7465"
+    DOI: "10.1103/PhysRevD.87.112005"
+    title: "Search for B -> K(*) nu nubar and invisible quarkonium decays"
+    authors: "BaBar Collaboration, J. P. Lees et al."
+    year: 2013
+    url: "https://arxiv.org/abs/1303.7465"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b"
+    snapshot_path: "flavor_catalog/references/B023/babar2013_arxiv1303_7465.txt"
+  - key: BurasGirrbachNoeNiehoffStraub2015:BKstarNunu
+    arxiv_id: "1409.4557"
+    DOI: "10.1007/JHEP02(2015)184"
+    title: "B -> K(*) nu nubar decays in the Standard Model and beyond"
+    authors: "Andrzej J. Buras, Jennifer Girrbach-Noe, Christoph Niehoff, David M. Straub"
+    year: 2015
+    url: "https://arxiv.org/abs/1409.4557"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34"
+    snapshot_path: "flavor_catalog/references/B023/buras2015_arxiv1409_4557.txt"
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:67dbd797dd149c1f39d2d172e303d6b69abc3a083069497b0d6c8749e6b9f136"
+    snapshot_path: "flavor_catalog/references/B023/cfw2008_arxiv0804_1954.txt"

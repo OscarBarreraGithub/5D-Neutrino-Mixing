@@ -1,0 +1,100 @@
+% Flavor catalog per-process template.
+% process_id: B023
+% family: beauty
+% owner_agent_id: PKA-B023
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B023.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B023: \(B\to K^*\nu\bar{\nu}\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(B\to K^*\nu\bar{\nu})\).
+This beauty-sector entry covers the invisible vector-kaon modes
+\(B^0\to K^{*0}(892)\nu\bar{\nu}\) and
+\(B^+\to K^{*+}(892)\nu\bar{\nu}\).  The pseudoscalar companion
+\(B\to K\nu\bar{\nu}\) is B022.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical current PDG/HFLAV values are upper limits.  HFLAV Dec. 2025,
+cross-linked to PDG Live 2025, lists
+\[
+  \mathcal{B}(B^0\to K^{*0}(892)\nu\bar{\nu}) < 1.8\times 10^{-5},
+  \qquad 90\%~{\rm CL},
+\]
+and
+\[
+  \mathcal{B}(B^+\to K^{*+}(892)\nu\bar{\nu}) < 4.0\times 10^{-5},
+  \qquad 90\%~{\rm CL}.
+\]
+The neutral limit is from Belle's semileptonic-tag search
+(\texttt{Belle2017:BHnunuSemileptonic}); the charged limit is from Belle's
+full-sample hadronic-tag search (\texttt{Belle2013:BHnunuHadronic}).  BaBar's
+2013 hadronic-tag limits, \(<9.3\times10^{-5}\) for \(B^0\to K^{*0}\nu\bar\nu\)
+and \(<11.6\times10^{-5}\) for \(B^+\to K^{*+}\nu\bar\nu\), are superseded but
+remain part of the HFLAV input history.  Local snapshots are under
+\texttt{references/B023/}, accessed 2026-05-16.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+These modes probe the \(\Delta B=1\) FCNC transition \(b\to s\nu\bar{\nu}\).
+In RS/anarchic-flavor models they are sensitive to flavor-changing \(Z\),
+heavy electroweak-gauge, or other neutral-current couplings generated after
+fermion localization and mass-basis rotation.  They are complementary to
+\(B_s\) mixing because the final state tests a semileptonic neutral current,
+not a \(\Delta F=2\) four-quark amplitude, and the \(K^*\) final state can also
+separate left- and right-handed short-distance structures through polarization.
+
+\subsection*{Post-2008 developments}
+The CFW 2008 baseline predates all current \(B\to K^*\nu\bar{\nu}\) limits.
+Belle's 2013 full-\(\Upsilon(4S)\) hadronic-tag analysis set
+\(B^+\to K^{*+}\nu\bar\nu <4.0\times10^{-5}\) and
+\(B^0\to K^{*0}\nu\bar\nu <5.5\times10^{-5}\).  BaBar's 2013 analysis found no
+significant excess and reported a combined
+\(\mathcal{B}(B\to K^*\nu\bar\nu)<7.9\times10^{-5}\).  Belle's 2017
+semileptonic-tag search improved the neutral mode to
+\(<1.8\times10^{-5}\) and obtained a combined vector limit of
+\(<2.7\times10^{-5}\).  Buras--Girrbach-Noe--Niehoff--Straub 2015 updated the
+SM treatment using form factors and electroweak corrections, quoting
+\(\mathcal{B}(B^0\to K^{*0}\nu\bar\nu)=(9.2\pm1.0)\times10^{-6}\), and framed
+the right-handed-current observables used in later new-physics studies.
+
+\subsection*{Constraint validity and model dependence}
+Experimentally this is a clean missing-energy upper limit, but it is not a
+drop-in bound for the present quark scan.  A production constraint needs the
+\(b\to s\nu\bar\nu\) weak Hamiltonian, \(B\to K^*\) form factors, treatment of
+right-handed currents and polarization, and either an experimental likelihood
+or a conservative reinterpretation of the published upper limits.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Targeted greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \(B\to K^*\nu\bar\nu\), \(b\to s\nu\bar\nu\), or
+invisible-\(B\) implementation.  The modern phenomenology surface is limited
+to \(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) at
+\texttt{quarkConstraints/modern/phenomenology.py:23}.  The legacy default
+inputs are \(\Delta F=2\) at \texttt{quarkConstraints/deltaf2.py:209}, with
+\(B_d\) and \(B_s\) mixing evaluators at
+\texttt{quarkConstraints/deltaf2.py:903} and
+\texttt{quarkConstraints/deltaf2.py:922}.  The only live lepton-flavor routine
+found is \(\mu\to e\gamma\) at \texttt{flavorConstraints/muToEGamma.py:75}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Implementing B023 requires a new \(\Delta B=1\)
+\(b\to s\nu\bar\nu\) operator basis, RS matching for neutral-current
+left- and right-handed coefficients, \(B\to K^*\) form-factor and polarization
+treatment, and an upper-limit likelihood or validated CL reinterpretation.
+
+\subsection*{Key references}
+Process-local reference keys before bibliography consolidation:
+\texttt{PDG2025:B0KstarNunu},
+\texttt{PDG2025:BpKstarNunu},
+\texttt{HFLAV2025Dec:B0KstarNunu},
+\texttt{HFLAV2025Dec:BpKstarNunu},
+\texttt{Belle2017:BHnunuSemileptonic},
+\texttt{Belle2013:BHnunuHadronic},
+\texttt{BaBar2013:BKstarNunu},
+\texttt{BurasGirrbachNoeNiehoffStraub2015:BKstarNunu}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.
