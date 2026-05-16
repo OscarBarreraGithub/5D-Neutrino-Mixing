@@ -35,9 +35,19 @@ status_history:
     batch_id: "ca_w6_charged_lepton_top"
     issues:
       - "CHK-1: T020.tex quotes the 125 GeV Higgs mass hypothesis, but YAML pdg_or_equivalent has it only in value_summary/snapshots, not as a per-value entry with year, value, source URL, access date, and sha256."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T16:18:12-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T16:18:12-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w6_charged_lepton_top_v2"
+    reason: "Cycle-2 writer rework added the 125 GeV Higgs mass hypothesis as a pdg_or_equivalent.values entry with full metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:07:43-04:00"
+last_updated_at: "2026-05-16T16:18:12-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_higgs_lfv_review.txt: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"
@@ -55,6 +65,16 @@ pdg_or_equivalent:
   sha256: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"
   value_summary: "PDG 2025 quotes full Run-2 95% CL limits for a 125 GeV Higgs: B(h -> e mu) < 6.2e-5 (5.9e-5 expected) from ATLAS and < 4.4e-5 (4.7e-5 expected) from CMS. The CMS direct limit is strongest."
   values:
+    - value_id: "PDG2025:T020:higgs_mass_hypothesis"
+      observable: "Higgs boson mass hypothesis for h -> e mu direct searches"
+      year: 2025
+      value: 125
+      uncertainty: null
+      units: "GeV"
+      source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf"
+      access_date: "2026-05-16"
+      sha256: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"
+      snapshot_path: "flavor_catalog/references/T020/pdg2025_higgs_lfv_review.txt"
     - value_id: "PDG2025:T020:cms_run2"
       observable: "B(h -> e mu), CMS full Run-2 direct search"
       year: 2025

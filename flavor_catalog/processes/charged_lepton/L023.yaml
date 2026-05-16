@@ -42,9 +42,19 @@ status_history:
     batch_id: "ca_w6_charged_lepton_top"
     issues:
       - "CHK-1: L023.tex includes auxiliary/context numerical claims outside YAML pdg_or_equivalent entries with full provenance: 95% CL Altmannshofer 2014 contours, Belle-II sqrt(s)=10.58 GeV and 50 ab^-1, and DUNE 25%/40%/25% projection wording."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T16:18:12-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T16:18:12-04:00"
+    agent_id: "WA-v2"
+    batch_id: "wa_w6_charged_lepton_top_v2"
+    reason: "Cycle-2 writer rework duplicated CA-listed auxiliary numerical claims into pdg_or_equivalent.values with full metadata."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T16:07:43-04:00"
+last_updated_at: "2026-05-16T16:18:12-04:00"
 version: "0.1.0"
 source_shas:
   altmannshofer2014_trident_arxiv.txt: "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8"
@@ -114,6 +124,84 @@ pdg_or_equivalent:
       sha256: "19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
       supporting_sha256: "b0153f6d1c7c404c2e0833d3beffe404955e208cf871a1d23585eac9502b8634"
       notes: "Preliminary/weak input; DUNE source says no signal could be established at NuTeV."
+  values:
+    - value_id: "Altmannshofer2014:L023:ccfr_exclusion_cl"
+      observable: "CCFR-based BSM exclusion contours in Altmannshofer et al. 2014 trident reinterpretation"
+      year: 2014
+      value: 95
+      uncertainty: null
+      units: "percent confidence level"
+      source_url: "https://arxiv.org/abs/1406.2332"
+      access_date: "2026-05-16"
+      sha256: "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8"
+      snapshot_path: "flavor_catalog/references/L023/altmannshofer2014_trident_arxiv.txt"
+      source_key: "Altmannshofer2014TridentProbe"
+    - value_id: "Kaneta2017:L023:belleii_sqrt_s"
+      observable: "Belle-II center-of-mass energy for auxiliary L_mu - L_tau reach"
+      year: 2017
+      value: 10.58
+      uncertainty: null
+      units: "GeV"
+      source_url: "https://arxiv.org/abs/1701.00156"
+      access_date: "2026-05-16"
+      sha256: "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5"
+      snapshot_path: "flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt"
+      source_key: "KanetaShimomura2017BelleIITrident"
+    - value_id: "Kaneta2017:L023:belleii_luminosity_goal"
+      observable: "Belle-II integrated-luminosity goal for auxiliary L_mu - L_tau reach"
+      year: 2017
+      value: 50
+      uncertainty: null
+      units: "ab^-1"
+      source_url: "https://arxiv.org/abs/1701.00156"
+      access_date: "2026-05-16"
+      sha256: "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5"
+      snapshot_path: "flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt"
+      source_key: "KanetaShimomura2017BelleIITrident"
+    - value_id: "DUNE2019:L023:abstract_accuracy_projection"
+      observable: "DUNE near-detector trident abstract accuracy projection"
+      year: 2019
+      value: 25
+      uncertainty: null
+      units: "percent accuracy"
+      source_url: "https://arxiv.org/abs/1902.06765"
+      access_date: "2026-05-16"
+      sha256: "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+      snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+      source_key: "Altmannshofer2019DUNETridents"
+    - value_id: "DUNE2019:L023:beam_mode_exposure_projection"
+      observable: "DUNE near-detector trident projected running time per beam mode"
+      year: 2019
+      value: "about 3"
+      uncertainty: null
+      units: "years per neutrino and antineutrino beam mode"
+      source_url: "https://arxiv.org/abs/1902.06765"
+      access_date: "2026-05-16"
+      sha256: "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+      snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+      source_key: "Altmannshofer2019DUNETridents"
+    - value_id: "DUNE2019:L023:body_baseline_accuracy"
+      observable: "DUNE near-detector trident body baseline contour accuracy"
+      year: 2019
+      value: 40
+      uncertainty: null
+      units: "percent accuracy"
+      source_url: "https://arxiv.org/abs/1902.06765"
+      access_date: "2026-05-16"
+      sha256: "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+      snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+      source_key: "Altmannshofer2019DUNETridents"
+    - value_id: "DUNE2019:L023:improved_contour_accuracy"
+      observable: "DUNE near-detector trident improved contour accuracy"
+      year: 2019
+      value: 25
+      uncertainty: null
+      units: "percent accuracy"
+      source_url: "https://arxiv.org/abs/1902.06765"
+      access_date: "2026-05-16"
+      sha256: "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052"
+      snapshot_path: "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt"
+      source_key: "Altmannshofer2019DUNETridents"
 paper_era_reference:
   source: "Csaki, Falkowski, and Weiler 2008"
   arxiv_id: "0804.1954"
