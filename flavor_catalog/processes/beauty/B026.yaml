@@ -31,9 +31,17 @@ status_history:
     at: "2026-05-16T13:34:09-04:00"
     agent_id: "WA"
     reason: "Writer polish completed for WA batch wa_w4_beauty."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T13:48:28-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T13:48:28-04:00"
+    agent_id: "CA"
+    reason: "Checker verification passed for CA batch ca_w4_beauty."
+checker_passed_at: "2026-05-16T13:48:28-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:34:09-04:00"
+last_updated_at: "2026-05-16T13:48:28-04:00"
 version: "0.1.1"
 source_shas:
   babar2012_arxiv1205_5442.txt: "sha256:93de45aad78fd4a9a4f4add72f26fc30be0c8df67b584889cc2ee99397ced424"
