@@ -6,7 +6,7 @@ process_name: "Mercury-199 electric dipole moment"
 owner: "PKA"
 owner_agent_id: "PKA-E006"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -50,9 +50,18 @@ status_history:
     at: "2026-05-16T13:56:26-04:00"
     agent_id: "WA-v2"
     reason: "Cycle-2 writer rework added strict metadata for the Graner 2016 factor-4 improvement claim."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T14:16:00-04:00"
+    agent: "CA"
+    cycle: 2
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T14:16:00-04:00"
+    agent_id: "CA"
+    reason: "Cycle-2 checker re-check passed CHK-1 through CHK-8; see flavor_catalog/worklogs/checker/ca_w4_kaon_edm_v2.md."
+checker_passed_at: "2026-05-16T14:16:00-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:56:26-04:00"
+last_updated_at: "2026-05-16T14:16:00-04:00"
 version: "0.1.1"
 source_shas:
   graner2016_arxiv1601_04339.txt: "sha256:44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86"
