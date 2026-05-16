@@ -1,0 +1,144 @@
+schema: flavor_catalog.process.v1
+process_id: B019
+family: beauty
+standard_notation: "R_{K^*}"
+process_name: "Lepton-flavor universality ratio in B0 -> K*0 ell+ ell-"
+owner: "PKA"
+owner_agent_id: "PKA-B019"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T13:15:31-04:00"
+    timestamp: "2026-05-16T13:15:31-04:00"
+    agent_id: "PKA-B019"
+    reason: "initial PKA draft deposit for assigned B019 R_K* process"
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T13:15:31-04:00"
+version: "0.1.0"
+source_shas:
+  bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt: "sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261"
+  cfw_0804_1954_rs_flavor.txt: "sha256:afcd5f8838e5505e87ab3300823eb88991e1bed3fe20972dcbd4c8b09ae93d46"
+  hflav_dec2025_rkstar_centralq2.txt: "sha256:585fdc5f096d46eab0e22db55ae4704254fa4695b0e7aad5bdb372dd6699f792"
+  hflav_dec2025_rkstar_lowq2_lhcb.txt: "sha256:7fbe070228eb26c62cc06f03dcc305d4bd4015b8f2859955af8c1deed2fd7b1e"
+  lhcb_2017_rkstar_arxiv1705_05802.txt: "sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced"
+  lhcb_2023_rk_rkstar_arxiv2212_09153.txt: "sha256:c8bba3b0498fd3b2d1236a85534d8b1a438f240aa7d56a53a94fdf24ed28bf7d"
+pdg_or_equivalent:
+  source: "HFLAV rare B decays Dec. 2025"
+  source_url: "https://hflav.web.cern.ch/content/rare-b-decays"
+  access_date: "2026-05-16"
+  year: 2025
+  value_summary: "HFLAV Dec. 2025 lists R_K* = 0.927 +/- 0.097 for 0.1 < q^2 < 1.1 GeV^2/c^4 and R_K* = 1.028 +/- 0.074 for 1.1 < q^2 < 6.0 GeV^2/c^4 in B0 -> K*(892)0 ell+ ell-."
+  observables:
+    - name: "R_K* low-q2"
+      definition: "B(B0 -> K*(892)0 mu+ mu-) / B(B0 -> K*(892)0 e+ e-)"
+      q2_region: "0.1 < q^2 < 1.1 GeV^2/c^4"
+      year: 2025
+      value: "0.927"
+      uncertainty: "+/- 0.097"
+      units: "dimensionless"
+      source_key: "HFLAV2025Dec:RKstarLowQ2LHCb"
+      source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin1b.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B019/hflav_dec2025_rkstar_lowq2_lhcb.txt"
+      sha256: "sha256:7fbe070228eb26c62cc06f03dcc305d4bd4015b8f2859955af8c1deed2fd7b1e"
+      inputs:
+        - experiment: "LHCb"
+          value: "0.927"
+          uncertainty: "+0.093/-0.087 stat, +0.036/-0.035 syst"
+          reference: "Phys. Rev. D 108, 032002 (2023)"
+    - name: "R_K* central-q2"
+      definition: "B(B0 -> K*(892)0 mu+ mu-) / B(B0 -> K*(892)0 e+ e-)"
+      q2_region: "1.1 < q^2 < 6.0 GeV^2/c^4"
+      year: 2025
+      value: "1.028"
+      uncertainty: "+/- 0.074"
+      units: "dimensionless"
+      source_key: "HFLAV2025Dec:RKstarCentralQ2"
+      source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin2.html"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B019/hflav_dec2025_rkstar_centralq2.txt"
+      sha256: "sha256:585fdc5f096d46eab0e22db55ae4704254fa4695b0e7aad5bdb372dd6699f792"
+      inputs:
+        - experiment: "LHCb"
+          value: "1.027"
+          uncertainty: "+0.072/-0.068 stat, +0.027/-0.026 syst"
+          reference: "Phys. Rev. D 108, 032002 (2023)"
+        - experiment: "Belle"
+          value: "1.06"
+          uncertainty: "+0.63/-0.38 stat, +/-0.14 syst"
+          reference: "Phys. Rev. Lett. 126, 161801 (2021)"
+    - name: "LHCb 2017 low-q2 R_K*"
+      q2_region: "0.045 < q^2 < 1.1 GeV^2/c^4"
+      year: 2017
+      value: "0.66"
+      uncertainty: "+0.11/-0.07 stat, +/-0.03 syst"
+      significance: "2.1--2.3 sigma compatibility with SM depending on theory prediction"
+      source_key: "LHCb2017:RKstar"
+      source_url: "https://arxiv.org/abs/1705.05802"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B019/lhcb_2017_rkstar_arxiv1705_05802.txt"
+      sha256: "sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced"
+    - name: "LHCb 2017 central-q2 R_K*"
+      q2_region: "1.1 < q^2 < 6.0 GeV^2/c^4"
+      year: 2017
+      value: "0.69"
+      uncertainty: "+0.11/-0.07 stat, +/-0.05 syst"
+      significance: "2.4--2.5 sigma compatibility with SM depending on theory prediction"
+      source_key: "LHCb2017:RKstar"
+      source_url: "https://arxiv.org/abs/1705.05802"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B019/lhcb_2017_rkstar_arxiv1705_05802.txt"
+      sha256: "sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced"
+    - name: "LHCb 2023 SM compatibility"
+      year: 2023
+      value: "0.2"
+      units: "standard deviations"
+      source_key: "LHCb2023:RKRKstarDetailed"
+      source_url: "https://arxiv.org/abs/2212.09153"
+      access_date: "2026-05-16"
+      snapshot_path: "flavor_catalog/references/B019/lhcb_2023_rk_rkstar_arxiv2212_09153.txt"
+      sha256: "sha256:c8bba3b0498fd3b2d1236a85534d8b1a438f240aa7d56a53a94fdf24ed28bf7d"
+  theory_inputs:
+    - name: "BIP 2016 central-q2 SM R_K*"
+      value: "1.00"
+      uncertainty: "+/- 0.01_QED"
+      q2_region: "1.1 < q^2 < 6.0 GeV^2"
+      source_key: "BordoneIsidoriPattori2016:RKRKstarSM"
+      snapshot_path: "flavor_catalog/references/B019/bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt"
+      sha256: "sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261"
+    - name: "BIP 2016 low-q2 SM R_K* for LHCb 2023 bin"
+      value: "0.983"
+      uncertainty: "+/- 0.014_th"
+      q2_region: "0.1 < q^2 < 1.1 GeV^2"
+      source_key: "BordoneIsidoriPattori2016:RKRKstarSM"
+      snapshot_path: "flavor_catalog/references/B019/bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt"
+      sha256: "sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Targeted regex search for R_K*, K*0 ee/mumu, C_9, C_10, LFU, lepton universality, and b -> s ell ell returned no matches in the required code directories."
+    - "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems."
+    - "quarkConstraints/modern/phenomenology.py:166 states that the modern phenomenology fence is policy-only."
+    - "quarkConstraints/deltaf2.py:209 defines the legacy Delta F = 2 input set."
+    - "quarkConstraints/deltaf2.py:903 and quarkConstraints/deltaf2.py:922 implement B_d and B_s mixing, not Delta B = 1 semileptonic observables."
+    - "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no b -> s ell ell routine is present."
+  commands:
+    - >-
+      rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|K\\^\\*|Kstar|K\\*0|C_9|C_10|lepton universality|LFU|RKstar|R_Kstar|R_\\{K\\^\\*\\}" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'
+    - >-
+      rg -n "R_?K\\*|R_?Kstar|R_\\{K\\^\\*\\}|B0[_ ]K\\*0|K\\*0[_ ]e|K\\*0[_ ]mu|B\\^0.*K\\^\\*|C_9|C_10|lepton universality|LFU|b\\s*->\\s*s\\s*(ell|l|mu|e)|b\\s*to\\s*s" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_notes: "Requires a new Delta B = 1 semileptonic weak Hamiltonian, lepton-specific Wilson coefficients C9/C10 and primed coefficients, bin-aware SM/QED predictions, and experimental likelihood or covariance handling."
+open_issues:
+  - "HFLAV Dec. 2025 pages are direct EOS output pages; checker should confirm whether the catalog wants the Dec. 2025 direct page label or a broader rare-decay landing-page citation."
+  - "The sidecar stores central HFLAV values and key inputs, but does not reconstruct the HFLAV averaging likelihood or correlations."

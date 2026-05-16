@@ -1,0 +1,94 @@
+% Flavor catalog per-process template.
+% process_id: B019
+% family: beauty
+% owner_agent_id: PKA-B019
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B019.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B019: \(R_{K^*}\) in \(B^0\to K^{*0}\ell^+\ell^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(R_{K^*}\equiv
+\mathcal B(B^0\to K^{*0}\mu^+\mu^-)/\mathcal B(B^0\to
+K^{*0}e^+e^-)\), with \(K^{*0}=K^*(892)^0\).  This beauty-sector entry
+covers the neutral exclusive lepton-universality ratio; \(R_K\) is B018 and
+absolute \(B\to K^*\ell\ell\) rates and angular observables are B017.
+
+\subsection*{PDG / equivalent value(s)}
+The current HFLAV-equivalent Dec. 2025 neutral-\(K^{*0}\) entries give
+\[
+  R_{K^*}=0.927\pm0.097,\qquad 0.1<q^2<1.1~{\rm GeV}^2/c^4,
+\]
+from the LHCb-only Run-1+Run-2 input
+\(0.927^{+0.093}_{-0.087}{}^{+0.036}_{-0.035}\)
+(\texttt{HFLAV2025Dec:RKstarLowQ2LHCb},
+\texttt{LHCb2023:RKRKstarDetailed}).  In the central bin,
+\[
+  R_{K^*}=1.028\pm0.074,\qquad 1.1<q^2<6.0~{\rm GeV}^2/c^4,
+\]
+HFLAV combines the LHCb value
+\(1.027^{+0.072}_{-0.068}{}^{+0.027}_{-0.026}\) with Belle
+\(1.06^{+0.63}_{-0.38}\pm0.14\)
+(\texttt{HFLAV2025Dec:RKstarCentralQ2}).  Local snapshots are
+\texttt{references/B019/hflav\_dec2025\_rkstar\_lowq2\_lhcb.txt} and
+\texttt{references/B019/hflav\_dec2025\_rkstar\_centralq2.txt}, accessed
+2026-05-16.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\(R_{K^*}\) probes \(\Delta B=1\) semileptonic FCNC amplitudes in
+\(b\to s\ell^+\ell^-\).  In RS/anarchic-flavor language it is sensitive to
+nonuniversal lepton couplings and flavor-changing \(b\)-\(s\) currents from
+KK gauge, \(Z\), or other semileptonic effects.  It is therefore
+complementary to the repo's existing neutral-meson \(\Delta F=2\) constraints
+and to B018's pseudoscalar \(R_K\) ratio.
+
+\subsection*{Post-2008 developments}
+The CFW 2008 baseline predates the \(R_{K^*}\) anomaly program.  The key
+post-2008 milestone was the LHCb 2017 measurement:
+\(R_{K^*}=0.66^{+0.11}_{-0.07}\pm0.03\) for
+\(0.045<q^2<1.1~{\rm GeV}^2/c^4\) and
+\(0.69^{+0.11}_{-0.07}\pm0.05\) for
+\(1.1<q^2<6.0~{\rm GeV}^2/c^4\), corresponding to roughly
+\(2.1\)--\(2.5\sigma\) tensions depending on bin and SM prediction.  The
+LHCb 2023 simultaneous \(R_K/R_{K^*}\) analysis superseded that result; its
+\(R_{K^*}\) central values moved upward and the four LFU measurements have
+combined SM compatibility of \(0.2\sigma\).  Theory work by
+Bordone--Isidori--Pattori clarified that the central bin is SM-unity to
+about a \(0.01\) QED uncertainty, while low-\(q^2\) \(R_{K^*}\) needs explicit
+photon-pole and radiative treatment.
+
+\subsection*{Constraint validity and model dependence}
+This is a clean LFU null test, but it is not a drop-in bound for the current
+quark scan.  The ratio cancels many hadronic uncertainties, yet a usable
+constraint still depends on bin definitions, electron bremsstrahlung,
+radiative corrections, correlations, and a model prediction for lepton-specific
+\(C_9^{\ell}\), \(C_{10}^{\ell}\), and primed semileptonic coefficients.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Required greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \(R_{K^*}\), \(K^{*0}e e\), \(K^{*0}\mu\mu\),
+\(C_9\), \(C_{10}\), LFU, or \(b\to s\ell\ell\) implementation.  The modern
+phenomenology surface enumerates only \(\epsilon_K\), \(K\), \(B_d\), \(B_s\),
+and \(D^0\) at \texttt{quarkConstraints/modern/phenomenology.py:23}, and it
+is policy-only at \texttt{quarkConstraints/modern/phenomenology.py:166}.  The
+legacy inputs are \(\Delta F=2\) at
+\texttt{quarkConstraints/deltaf2.py:209}, with \(B_d\) and \(B_s\) mixing
+evaluators at \texttt{quarkConstraints/deltaf2.py:903} and
+\texttt{quarkConstraints/deltaf2.py:922}.  The only live lepton-flavor routine
+found is \(\mu\to e\gamma\) at \texttt{flavorConstraints/muToEGamma.py:75}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Integration requires a new \(\Delta B=1\) semileptonic
+Hamiltonian, lepton-specific \(C_9/C_{10}\) and primed coefficients,
+bin-aware SM/QED predictions, and HFLAV/LHCb likelihood or covariance handling.
+
+\subsection*{Key references}
+Process-local snapshots: HFLAV2025Dec:RKstarLowQ2LHCb,
+HFLAV2025Dec:RKstarCentralQ2, LHCb2023:RKRKstarDetailed,
+LHCb2017:RKstar, BordoneIsidoriPattori2016:RKRKstarSM, and
+CsakiFalkowskiWeiler2008:CompositeFlavor.

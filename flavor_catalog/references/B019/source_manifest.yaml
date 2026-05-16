@@ -1,0 +1,63 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B019
+sources:
+  - key: HFLAV2025Dec:RKstarLowQ2LHCb
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV R_K* table for B0 -> K*(892)0 ll, 0.1 < q^2 < 1.1 GeV^2/c^4"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin1b.html"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:7fbe070228eb26c62cc06f03dcc305d4bd4015b8f2859955af8c1deed2fd7b1e"
+    snapshot_path: "flavor_catalog/references/B019/hflav_dec2025_rkstar_lowq2_lhcb.txt"
+  - key: HFLAV2025Dec:RKstarCentralQ2
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV R_K* table for B0 -> K*(892)0 ll, 1.1 < q^2 < 6.0 GeV^2/c^4"
+    authors: "Heavy Flavor Averaging Group"
+    year: 2025
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin2.html"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:585fdc5f096d46eab0e22db55ae4704254fa4695b0e7aad5bdb372dd6699f792"
+    snapshot_path: "flavor_catalog/references/B019/hflav_dec2025_rkstar_centralq2.txt"
+  - key: LHCb2023:RKRKstarDetailed
+    arxiv_id: "2212.09153"
+    DOI: "10.1103/PhysRevD.108.032002"
+    title: "Measurement of lepton universality parameters in B+ -> K+ ell+ ell- and B0 -> K*0 ell+ ell- decays"
+    authors: "LHCb Collaboration, R. Aaij et al."
+    year: 2023
+    url: "https://arxiv.org/abs/2212.09153"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:c8bba3b0498fd3b2d1236a85534d8b1a438f240aa7d56a53a94fdf24ed28bf7d"
+    snapshot_path: "flavor_catalog/references/B019/lhcb_2023_rk_rkstar_arxiv2212_09153.txt"
+  - key: LHCb2017:RKstar
+    arxiv_id: "1705.05802"
+    DOI: "10.1007/JHEP08(2017)055"
+    title: "Test of lepton universality with B0 -> K*0 ell+ ell- decays"
+    authors: "LHCb Collaboration, R. Aaij et al."
+    year: 2017
+    url: "https://arxiv.org/abs/1705.05802"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced"
+    snapshot_path: "flavor_catalog/references/B019/lhcb_2017_rkstar_arxiv1705_05802.txt"
+  - key: BordoneIsidoriPattori2016:RKRKstarSM
+    arxiv_id: "1605.07633"
+    DOI: "10.1140/epjc/s10052-016-4274-7"
+    title: "On the Standard Model predictions for R_K and R_K*"
+    authors: "Marzia Bordone, Gino Isidori, Andrea Pattori"
+    year: 2016
+    url: "https://arxiv.org/abs/1605.07633"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261"
+    snapshot_path: "flavor_catalog/references/B019/bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt"
+  - key: CsakiFalkowskiWeiler2008:CompositeFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:afcd5f8838e5505e87ab3300823eb88991e1bed3fe20972dcbd4c8b09ae93d46"
+    snapshot_path: "flavor_catalog/references/B019/cfw_0804_1954_rs_flavor.txt"
