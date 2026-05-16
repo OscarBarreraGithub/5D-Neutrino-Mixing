@@ -16,9 +16,18 @@ status_history:
     at: "2026-05-16T15:30:48-04:00"
     agent_id: "PKA-K012"
     reason: "initial PKA source extraction and draft"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T15:54:11-04:00"
+    agent: "WA"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T15:54:11-04:00"
+    agent_id: "WA"
+    batch_id: "wa_w6_kaon"
+    reason: "Writer polish complete for batch wa_w6_kaon."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:30:48-04:00"
+last_updated_at: "2026-05-16T15:54:11-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_ks_decay_modes.txt: "sha256:5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882"

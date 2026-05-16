@@ -10,24 +10,26 @@
 \section{K018: \(K_{\ell3}\) and semileptonic \(V_{us}\)}
 
 \subsection*{Process}
-\textbf{Standard notation:} \(K_{\ell3}\), with
-\(K\to\pi e\nu\) and \(K\to\pi\mu\nu\).  This entry records the kaon
-semileptonic source input \(|V_{us}|f_+(0)\) and its mode-by-mode
-consistency tests; first-row CKM unitarity itself is cataloged in EW002.
+\textbf{Standard notation:} \(K_{\ell3}\), with \(K\to\pi e\nu\) and
+\(K\to\pi\mu\nu\).  This entry records the kaon semileptonic source input
+\(|V_{us}|f_+(0)\) and its mode-by-mode consistency tests.  The first-row CKM
+unitarity combination is cataloged separately in EW002.
 
 \subsection*{PDG / equivalent value(s)}
-The current PDG/FlaviaNet input is
+The sidecar \texttt{pdg\_or\_equivalent} entry
+\texttt{PDG2025:K018:average\_fplus\_vus}, backed by
+\texttt{pdg2025\_vud\_vus\_kl3.txt}, records
 \[
   |V_{us}|f_+(0)=0.21656(35),
 \]
-from the 2025 PDG update, accessed on 2026-05-16 and snapshotted at
-\texttt{flavor\_catalog/references/K018/pdg2025\_vud\_vus\_kl3.txt}
-(\texttt{PDG2025:K018Kl3}).  PDG Table 67.1 gives the contributing products
-\(0.2169(6)\) for \(K^\pm e3\), \(0.2168(10)\) for \(K^\pm\mu3\),
-\(0.2162(5)\) for \(K_L e3\), \(0.2165(6)\) for \(K_L\mu3\),
-\(0.2169(8)\) for \(K_S e3\), and \(0.2125(47)\) for \(K_S\mu3\).
-Using the auxiliary FLAG normalization \(f_+(0)=0.9698(17)\), PDG quotes
-\(|V_{us}|=0.22330(53)\) for \(N_f=2+1+1\) \(K_{\ell3}\) input.
+from the 2025 PDG update, accessed 2026-05-16.  The same sidecar block records
+the PDG Table 67.1 products: \(0.2169(6)\) for \(K^\pm e3\),
+\(0.2168(10)\) for \(K^\pm\mu3\), \(0.2162(5)\) for \(K_L e3\),
+\(0.2165(6)\) for \(K_L\mu3\), \(0.2169(8)\) for \(K_S e3\), and
+\(0.2125(47)\) for \(K_S\mu3\).  The auxiliary sidecar inputs record the FLAG
+\(N_f=2+1+1\) normalization \(f_+(0)=0.9698(17)\) and the PDG-derived
+\(|V_{us}|=0.22330(53)\); these are normalization inputs, not separate
+measured \(K_{\ell3}\) rates.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
 This is a tree-level charged-current process, not a neutral-meson
@@ -41,16 +43,16 @@ does not map this measurement into the existing operator basis.
 
 \subsection*{Post-2008 developments}
 The 2008 RS-flavor baseline \texttt{CsakiFalkowskiWeiler:RSFlavor2008}
-focused on flavor-changing neutral constraints, so the important post-2008
-change for K018 is precision charged-current consolidation.  FlaviaNet 2010
-combined modern branching fractions, lifetimes, form-factor integrals,
-radiative corrections, and isospin breaking into
-\(|V_{us}|f_+(0)=0.2163(5)\), with a \(K_{\mu3}\) versus \(K_{e3}\)
-universality check \(r_{\mu e}=1.002(5)\).  The 2025 PDG update keeps the
-same source-level convention but tightens the average to \(0.21656(35)\).
-FLAG 2024 supplies the current lattice normalization, \(f_+(0)=0.9698(17)\),
-and a corresponding \(|V_{us}|=0.22328(58)\), which feeds the CKM-unitarity
-entry rather than replacing the measured K018 product.
+centered on flavor-changing neutral constraints, so the post-2008 K018 story
+is precision charged-current consolidation.  The sidecar entries
+\texttt{FlaviaNet2010:K018:average\_fplus\_vus} and
+\texttt{FlaviaNet2010:K018:r\_mue} record the 2010 FlaviaNet average
+\(|V_{us}|f_+(0)=0.2163(5)\) and \(K_{\mu3}/K_{e3}\) universality ratio
+\(r_{\mu e}=1.002(5)\).  The 2025 PDG update keeps the same source-level
+convention while tightening the average to \(0.21656(35)\).  FLAG 2024 supplies
+the auxiliary lattice normalization, \(f_+(0)=0.9698(17)\), and the derived
+\(|V_{us}|=0.22328(58)\), which feed the CKM-unitarity entry rather than
+replacing the measured K018 product.
 
 \subsection*{Constraint validity and model dependence}
 The measured \(|V_{us}|f_+(0)\) product is experimentally robust but depends
@@ -80,6 +82,9 @@ charged-current operator constraint.  The existing \(\Delta F=2\)
 SLL/SLR/VLL/VRR/LR machinery does not cover it.
 
 \subsection*{Key references}
-Process-local reference keys before bibliography consolidation:
-PDG2025:K018Kl3, FLAG2024:K018KaonSemileptonic,
-FlaviaNet:K018Kaon2010, and CsakiFalkowskiWeiler:RSFlavor2008.
+\begin{itemize}
+\item \texttt{PDG2025:K018Kl3}: PDG 2025 \(K_{\ell3}\) product average and mode values.
+\item \texttt{FLAG2024:K018KaonSemileptonic}: lattice \(f_+(0)\) normalization and derived \(|V_{us}|\).
+\item \texttt{FlaviaNet:K018Kaon2010}: post-2008 \(K_{\ell3}\) consolidation and \(r_{\mu e}\).
+\item \texttt{CsakiFalkowskiWeiler:RSFlavor2008}: 2008 warped-flavor context.
+\end{itemize}

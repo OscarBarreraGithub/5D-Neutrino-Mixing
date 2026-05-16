@@ -5,24 +5,24 @@
 \section{\(K_S \to \mu^+\mu^-\)}
 
 \subsection*{Process}
-\textbf{Standard notation:} \(K_S^0\to\mu^+\mu^-\).  This entry covers the
-short-lived neutral-kaon dimuon decay, catalog id \(K012\), in the kaon family.
-It is the short-lifetime companion of \(K_L\to\mu^+\mu^-\) and is cataloged as a
-rare \(\Delta S=1\) weak-neutral-current mode.
+\textbf{Standard notation:} \(K_S^0\to\mu^+\mu^-\).  This kaon entry covers the
+short-lived neutral-kaon dimuon decay, the \(K_S\) companion of
+\(K_L\to\mu^+\mu^-\).  It is a rare \(\Delta S=1\)
+weak-neutral-current mode, not a neutral-kaon mixing observable.
 
 \subsection*{PDG / equivalent value(s)}
-The current PDG listing gives the experimental limit
+The sidecar \texttt{pdg\_or\_equivalent} block, backed by the local
+\texttt{pdg2025\_ks\_decay\_modes.txt} snapshot, records the 2025 PDG limit
 \[
   \mathcal{B}(K_S^0\to\mu^+\mu^-) < 2.1\times 10^{-10}
   \quad (90\%~{\rm CL}),
 \]
-from the 2025 PDG \(K_S^0\) particle listing, accessed 2026-05-16.  The local
-snapshot is
-\texttt{flavor\_catalog/references/K012/pdg2025\_ks\_decay\_modes.txt}.  The
-primary source is the LHCb 2020 PRL result: the standalone 2016--2018,
-\(5.6~{\rm fb}^{-1}\), \(13~{\rm TeV}\) analysis gives
-\(\mathcal{B}<2.2\times10^{-10}\) at \(90\%\) CL, and the combination with
-2011--2012 data gives the PDG limit.  The previous LHCb Run-1 result was
+from the \(K_S^0\) particle listing, accessed 2026-05-16.  The supporting
+sidecar values from \texttt{lhcb\_2020\_ksmumu\_arxiv.txt} show the LHCb
+standalone 2016--2018 bound,
+\(\mathcal{B}<2.2\times10^{-10}\) at \(90\%\) CL, and the combined
+\(\mathcal{B}<2.1\times10^{-10}\) at \(90\%\) CL.  The Run-1 predecessor,
+stored in \texttt{lhcb\_2017\_ksmumu\_arxiv.txt}, was
 \(\mathcal{B}<0.8~(1.0)\times10^{-9}\) at \(90\%~(95\%)\) CL.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
@@ -30,19 +30,21 @@ In warped or anarchic-flavor scenarios this mode probes \(s\to d\mu^+\mu^-\)
 neutral currents rather than the \(\Delta F=2\) kaon-mixing surface already
 implemented in the repo.  Modified \(Z\) couplings, heavy neutral-gauge
 exchange, electroweak penguins, and scalar or pseudoscalar lepton operators can
-all feed the dimuon final state.  The Standard Model rate is expected near
-\(5\times10^{-12}\), so the present limit is mainly a bound on large
-new-physics enhancements, not yet a precision SM test.
+feed the dimuon final state.  The sidecar
+\texttt{supporting\_numeric\_values} entry from
+\texttt{chobanova\_2018\_ksmumu\_susy\_arxiv.txt} gives the Standard Model
+scale as approximately \(5\times10^{-12}\), so the present limit mainly bounds
+large new-physics enhancements rather than precision SM-sized effects.
 
 \subsection*{Post-2008 developments}
-The important post-2008 movement is experimental.  LHCb established the first
-modern hadron-collider limits, improved the branching-fraction bound to
-\(0.8\times10^{-9}\) at \(90\%\) CL in 2017, and then to the combined
-\(2.1\times10^{-10}\) limit in 2020.  Theory work also sharpened the target:
-Chobanova et al. quantified how flavor-violating Higgs-penguin effects can
-move the rate around the SM scale, while Dery, Ghosh, Grossman, and Schacht
-showed that time-dependent \(K\to\mu^+\mu^-\) interference can isolate the
-\(\ell=0\) \(K_S\) component with hadronic uncertainty below \(1\%\).
+The post-2008 change is mostly experimental: LHCb moved the bound from the
+Run-1 \(0.8\times10^{-9}\) result to the combined \(2.1\times10^{-10}\)
+limit, with both values recorded in the sidecar.  On the theory side,
+Chobanova et al. supplied the SM-scale and Higgs-penguin context, while Dery,
+Ghosh, Grossman, and Schacht showed that time-dependent
+\(K\to\mu^+\mu^-\) interference can isolate the \(\ell=0\) \(K_S\) component
+with hadronic uncertainty below \(1\%\); the latter number is stored in the
+sidecar entry for \texttt{dery\_ghosh\_grossman\_schacht\_2021\_kmumu\_arxiv.txt}.
 
 \subsection*{Constraint validity and model dependence}
 The experimental upper limit is robust, but a model interpretation is
@@ -69,8 +71,8 @@ SLL/SLR/VLL/VRR/LR \(\Delta F=2\) basis is not sufficient for this observable.
 
 \subsection*{Key references}
 \begin{itemize}
-\item \texttt{PDG2025:K012}: PDG \(K_S^0\) particle listing, \(\Gamma_{12}\).
-\item \texttt{LHCb2020:KSmumu}: combined LHCb upper limit.
+\item \texttt{PDG2025:K012}: PDG \(K_S^0\) particle listing, \(\Gamma_{12}\), and headline limit.
+\item \texttt{LHCb2020:KSmumu}: standalone and combined LHCb upper limits.
 \item \texttt{LHCb2017:KSmumu}: Run-1 predecessor limit.
 \item \texttt{Chobanova2018:KSmumuSUSY}: SM scale and BSM Higgs-penguin context.
 \item \texttt{DeryGhoshGrossmanSchacht2021:KMuMuClean}: time-dependent clean-probe proposal.
