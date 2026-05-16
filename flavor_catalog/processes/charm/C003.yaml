@@ -23,9 +23,18 @@ status_history:
     at: "2026-05-16T12:58:29-04:00"
     agent_id: "PKA-C003"
     reason: "PKA draft, minimal source snapshots, sidecar, and code-coverage grep completed."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T13:48:14-04:00"
+    from: "PKA-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T13:48:14-04:00"
+    agent: "CA"
+    agent_id: "CA-ca_w4_charm"
+    issues:
+      - "CHK-4: Missing WRITER-DONE status from a WA; latest pre-checker status was PKA-DONE, and no WA batch worklog for C003 was found."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:58:29-04:00"
+last_updated_at: "2026-05-16T13:48:14-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:1b19e96d30f72bd6d162019be90e6779adf242a429f50685fb8757335e1cc299"

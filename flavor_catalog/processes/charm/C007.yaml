@@ -16,9 +16,20 @@ status_history:
     at: "2026-05-16T13:13:46-04:00"
     agent_id: "PKA-C007"
     reason: "Initial PKA source extraction and C007 draft deposit."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T13:48:14-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T13:48:14-04:00"
+    agent: "CA"
+    agent_id: "CA-ca_w4_charm"
+    issues:
+      - "CHK-1: TeX claims the 2021 LHCb search covered 25 rare/forbidden modes, but no pdg_or_equivalent entry records that numerical claim."
+      - "CHK-1: TeX quotes short-distance SM branching fractions of order 10^-12, but no pdg_or_equivalent entry records that numerical claim."
+      - "CHK-4: Missing WRITER-DONE status from a WA; latest pre-checker status was WRITER-INITIATED, and no WA batch worklog for C007 was found."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:13:46-04:00"
+last_updated_at: "2026-05-16T13:48:14-04:00"
 version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:4703263c1d560f5af74636df56cd97f76edc56b1d0fb7f65443b2a07eaea6885"
