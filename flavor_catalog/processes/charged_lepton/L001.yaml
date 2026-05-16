@@ -1,0 +1,151 @@
+schema: flavor_catalog.process.v1
+process_id: L001
+family: charged_lepton
+standard_notation: "\\mathcal{B}(\\mu^+\\to e^+\\gamma)"
+process_name: "Muon to electron gamma charged-lepton-flavor-violating dipole decay"
+owner: "PKA"
+owner_agent_id: "PKA-L001"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T11:36:52-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T11:36:52-04:00"
+    agent_id: "PKA-L001"
+    reason: "Initial L001 PKA source extraction and draft sidecar."
+  - state: "PKA-DONE"
+    timestamp: "2026-05-16T11:36:52-04:00"
+    from: "WRITER-INITIATED"
+    to: "PKA-DONE"
+    at: "2026-05-16T11:36:52-04:00"
+    agent_id: "PKA-L001"
+    reason: "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T11:41:17-04:00"
+version: "0.1.1"
+source_shas:
+  megii2025_arxiv2504_15711.txt: "sha256:3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7"
+  megii2024_arxiv2310_12614.txt: "sha256:bf3dddb7b5fd8a5b55a9829f0118db4b27992f4f603c1e792ecf8fcb67255ef0"
+  meg2016_arxiv1605_05081.txt: "sha256:883288d06a72c35f56718b53fd0c05e030834cd8f6193708234ab3413ce6e00a"
+  perez_randall_2008_arxiv0805_4652.txt: "sha256:850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9"
+  pdg2025_muon_listing_s004.txt: "sha256:4baeea03e1eac3a90ee1d972f9b405e77d58872ad1260227b09475285269ae04"
+pdg_or_equivalent:
+  primary_current_limit:
+    source: "MEG II Collaboration"
+    year: 2025
+    observable: "Branching fraction upper limit for mu+ -> e+ gamma"
+    value: 1.5e-13
+    relation: "<"
+    confidence_level: "90% C.L."
+    sensitivity: 2.2e-13
+    conditions: "MEG II 2021-2022 physics runs; published 2025-10-21"
+    source_url: "https://arxiv.org/abs/2504.15711"
+    supporting_source_url: "https://link.springer.com/article/10.1140/epjc/s10052-025-14906-3"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L001/megii2025_arxiv2504_15711.txt"
+    sha256: "3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7"
+  pdg_2025_listing:
+    source: "Particle Data Group 2025 muon listing, NODE=S004R3"
+    year: 2025
+    observable: "Branching fraction upper limit for mu+ -> e+ gamma"
+    value: 3.1e-13
+    relation: "<"
+    confidence_level: "90% C.L."
+    conditions: "PDG listing generated 2025-11-11; appears not to include the later MEG II 2025 1.5e-13 result"
+    source_url: "https://pdg.lbl.gov/encoder_listings/s004.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L001/pdg2025_muon_listing_s004.txt"
+    sha256: "4baeea03e1eac3a90ee1d972f9b405e77d58872ad1260227b09475285269ae04"
+  prior_experimental_limits:
+    - source: "MEG II Collaboration 2024 first dataset"
+      arxiv_id: "2310.12614"
+      value: 7.5e-13
+      relation: "<"
+      confidence_level: "90% C.L."
+      conditions: "MEG II 2021-only result"
+      snapshot_path: "flavor_catalog/references/L001/megii2024_arxiv2310_12614.txt"
+      sha256: "bf3dddb7b5fd8a5b55a9829f0118db4b27992f4f603c1e792ecf8fcb67255ef0"
+    - source: "MEG + MEG II 2024 combination"
+      arxiv_id: "2310.12614"
+      value: 3.1e-13
+      relation: "<"
+      confidence_level: "90% C.L."
+      conditions: "MEG full dataset combined with MEG II 2021 data"
+      snapshot_path: "flavor_catalog/references/L001/megii2024_arxiv2310_12614.txt"
+      sha256: "bf3dddb7b5fd8a5b55a9829f0118db4b27992f4f603c1e792ecf8fcb67255ef0"
+    - source: "MEG Collaboration 2016 full dataset"
+      arxiv_id: "1605.05081"
+      value: 4.2e-13
+      relation: "<"
+      confidence_level: "90% C.L."
+      conditions: "MEG 2009-2013 data, 7.5e14 stopped muons"
+      snapshot_path: "flavor_catalog/references/L001/meg2016_arxiv1605_05081.txt"
+      sha256: "883288d06a72c35f56718b53fd0c05e030834cd8f6193708234ab3413ce6e00a"
+  paper_era_reference:
+    source: "Perez and Randall 2008 / JHEP 2009"
+    arxiv_id: "0805.4652"
+    observable: "RS lepton dipole NDA estimate and paper-era mu -> e gamma bound"
+    branching_ratio_limit_used: 1.2e-11
+    prefactor_br: 4.0e-8
+    c_paper: 0.02
+    confidence_level: "90% C.L. for the MEGA-era input listed by PDG"
+    source_url: "https://arxiv.org/abs/0805.4652"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/L001/perez_randall_2008_arxiv0805_4652.txt"
+    sha256: "850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9"
+  repo_default:
+    source: "Repo implementation and scan defaults"
+    br_limit: 1.5e-13
+    prefac_br: 4.0e-8
+    lfv_C: 0.0019364916731037085
+    c_paper: 0.02
+    source_files:
+      - "flavorConstraints/muToEGamma.py:20"
+      - "flavorConstraints/muToEGamma.py:31"
+      - "flavorConstraints/muToEGamma.py:61"
+      - "scanParams/scan.py:32"
+      - "tests/test_scan.py:50"
+code_coverage:
+  status: "YES"
+  searched_paths:
+    - "quarkConstraints"
+    - "qcd"
+    - "flavorConstraints"
+    - "neutrinos"
+    - "yukawa"
+    - "warpConfig"
+    - "solvers"
+    - "scanParams"
+    - "tests"
+  auxiliary_search_paths:
+    - "docs"
+    - "scripts"
+  required_grep_commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+  targeted_grep_commands:
+    - "rg -n \"mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG|check_mu_to_e_gamma|PREFAC_BR|BR_LIMIT_MEGII_2025|br_limit\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "flavorConstraints/muToEGamma.py:1 documents the mu->e gamma lepton-flavor-violation constraint."
+    - "flavorConstraints/muToEGamma.py:20 records the Perez-Randall paper-era coefficient C = 0.02."
+    - "flavorConstraints/muToEGamma.py:31 defines PREFAC_BR = 4.0e-8."
+    - "flavorConstraints/muToEGamma.py:61 defines coefficient_from_br_limit(br_limit, prefactor=PREFAC_BR)."
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma."
+    - "flavorConstraints/muToEGamma.py:136 applies the C x (M_KK / reference_scale)^2 RHS scaling in the live code."
+    - "scanParams/scan.py:32 records the published MEG II 2025 bound BR(mu -> e gamma) < 1.5e-13."
+    - "scanParams/scan.py:33 defines BR_LIMIT_MEGII_2025 = 1.5e-13."
+    - "scanParams/scan.py:264 makes BR_LIMIT_MEGII_2025 the default ScanConfig.br_limit."
+    - "tests/test_mu_to_e_gamma.py:40 tests that the MEG II 2025 limit tightens C relative to C_PAPER."
+    - "tests/test_scan.py:50 tests that default scan LFV settings match the documented MEG II 2025 limit."
+implementation_difficulty: "LOW"
+implementation_difficulty_reason: "The process already has a live LFV dipole/NDA implementation and scan default. Cataloging only requires source tracking and documenting the difference between the paper-era coefficient and the MEG II 2025 scan default."
+implementation_difficulty_if_missing: "MEDIUM"
+implementation_difficulty_if_missing_reason: "A fresh implementation would require a new lepton-dipole observable and RS lepton-spurion matching, but not new hadronic matrix elements or QCD running."
+open_issues:
+  - "PDG 2025 listing snapshot records <3.1e-13, while the newer published MEG II 2025 primary paper gives <1.5e-13; WA/CA should confirm how to display this lag."
+  - "The live code's mass-scaling convention is explicit and tested, but the paper-era Perez-Randall source text should be rechecked before any future paper-quality derivation of the NDA formula."

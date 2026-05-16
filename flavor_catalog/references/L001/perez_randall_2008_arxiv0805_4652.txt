@@ -1,0 +1,38 @@
+Source snapshot: Perez-Randall RS lepton-flavor reference
+Process: L001, mu -> e gamma
+Snapshot type: minimal text excerpt from arXiv abstract and TeX source; notation rendered in ASCII.
+Access date: 2026-05-16
+
+Primary URL: https://arxiv.org/abs/0805.4652
+
+Bibliographic metadata:
+- arXiv:0805.4652 [hep-ph], submitted 2008-05-30, v3 revised 2009-01-28.
+- Title: Natural Neutrino Masses and Mixings from Warped Geometry.
+- Authors: Gilad Perez and Lisa Randall.
+- Journal reference: JHEP 01 (2009) 077.
+
+Relevant arXiv abstract excerpt:
+The paper studies warped-geometry lepton minimal flavor violation. It states
+that charged-lepton flavor-changing processes are suppressed when the overall
+neutrino-Yukawa scale is slightly smaller than one in units of the curvature,
+allowing a cutoff of 10 TeV and 3 TeV Kaluza-Klein masses.
+
+Relevant TeX-source excerpt from section "mu -> e gamma":
+The source writes the paper-era experimental bound as
+
+  BR(mu -> e gamma) <= 1.2 x 10^-11.
+
+It then estimates, for an IR-brane Higgs,
+
+  BR(mu -> e gamma)^IR ~ 4 x 10^-8
+    x (Ybar_N Ybar_N^\dagger)_{12}^2
+    x (3 TeV / M_KK)^4.
+
+The same section translates this into an order-of-magnitude coefficient
+0.02 for the neutrino-Yukawa product bound and interprets it as requiring
+Y_N k less than or of order 0.1 for the most natural models.
+
+Extraction note:
+The repo code keeps C_PAPER = 0.02 for reproducing the paper-era bound but
+computes updated C values directly from BR_limit and PREFAC_BR = 4 x 10^-8.
+The live implementation's mass-scaling convention is documented in code.

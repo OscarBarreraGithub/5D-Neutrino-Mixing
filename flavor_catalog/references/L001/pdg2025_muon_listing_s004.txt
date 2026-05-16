@@ -1,0 +1,32 @@
+Source snapshot: PDG 2025 muon particle listing
+Process: L001, mu -> e gamma
+Snapshot type: minimal pdftotext excerpt; no PDF stored.
+Access date: 2026-05-16
+
+Primary URL: https://pdg.lbl.gov/encoder_listings/s004.pdf
+
+Bibliographic metadata:
+- Particle Data Group, 2025 muon particle listing, NODE=S004.
+- Source page text shows a generation date of 2025-11-11.
+- PDG API/docs state that 2025 data are licensed CC BY 4.0.
+
+Relevant listing excerpt for mu+ -> e+ gamma, NODE=S004R3:
+
+  [<3.1 x 10^-13 (CL = 90%) OUR 2025 BEST LIMIT]
+  AFANACIEV 25A SPEC +, MEG II at PSI
+
+The same listing marks older entries as not used for averages/fits/limits:
+
+  AFANACIEV 24 SPEC +, MEG II at PSI: <3.1 x 10^-13 at 90% CL
+  BALDINI 16 SPEC +, MEG at PSI: <4.2 x 10^-13 at 90% CL
+  ADAM 13B SPEC +, MEG at PSI: <5.7 x 10^-13 at 90% CL
+  ADAM 11 SPEC +, MEG at PSI: <2.4 x 10^-12 at 90% CL
+  ADAM 10 SPEC +, MEG at PSI: <2.8 x 10^-11 at 90% CL
+  AHMED 02 SPEC +, MEGA: <1.2 x 10^-11 at 90% CL
+  BROOKS 99 SPEC +, LAMPF: <1.2 x 10^-11 at 90% CL
+
+Extraction note:
+At the 2026-05-16 access date the PDG listing has not yet incorporated the
+published MEG II 2025 1.5 x 10^-13 result; this PKA therefore records the
+new MEG II paper as the current PDG-equivalent primary source while retaining
+the PDG listing for audit context.

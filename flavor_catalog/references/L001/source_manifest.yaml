@@ -1,0 +1,55 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: L001
+generated_at: "2026-05-16T11:36:52-04:00"
+references:
+  - key: MEGII2025_MuEGamma
+    arxiv_id: "2504.15711"
+    DOI: "10.1140/epjc/s10052-025-14906-3"
+    title: "New limit on the mu+ -> e+ gamma decay with the MEG II experiment"
+    authors: "K. Afanaciev et al. (MEG II collaboration)"
+    year: 2025
+    url: "https://arxiv.org/abs/2504.15711"
+    supporting_url: "https://link.springer.com/article/10.1140/epjc/s10052-025-14906-3"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7"
+    snapshot_path: "flavor_catalog/references/L001/megii2025_arxiv2504_15711.txt"
+  - key: MEGII2024_MuEGammaFirst
+    arxiv_id: "2310.12614"
+    DOI: "10.1140/epjc/s10052-024-12416-2"
+    title: "A search for mu+ -> e+ gamma with the first dataset of the MEG II experiment"
+    authors: "K. Afanaciev et al. (MEG II collaboration)"
+    year: 2024
+    url: "https://arxiv.org/abs/2310.12614"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:bf3dddb7b5fd8a5b55a9829f0118db4b27992f4f603c1e792ecf8fcb67255ef0"
+    snapshot_path: "flavor_catalog/references/L001/megii2024_arxiv2310_12614.txt"
+  - key: MEG2016_MuEGammaFull
+    arxiv_id: "1605.05081"
+    DOI: "10.1140/epjc/s10052-016-4271-x"
+    title: "Search for the Lepton Flavour Violating Decay mu+ -> e+ gamma with the Full Dataset of the MEG Experiment"
+    authors: "MEG Collaboration"
+    year: 2016
+    url: "https://arxiv.org/abs/1605.05081"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:883288d06a72c35f56718b53fd0c05e030834cd8f6193708234ab3413ce6e00a"
+    snapshot_path: "flavor_catalog/references/L001/meg2016_arxiv1605_05081.txt"
+  - key: PerezRandall2008_WarpedNeutrinos
+    arxiv_id: "0805.4652"
+    DOI: "10.1088/1126-6708/2009/01/077"
+    title: "Natural Neutrino Masses and Mixings from Warped Geometry"
+    authors: "Gilad Perez and Lisa Randall"
+    year: 2008
+    url: "https://arxiv.org/abs/0805.4652"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9"
+    snapshot_path: "flavor_catalog/references/L001/perez_randall_2008_arxiv0805_4652.txt"
+  - key: PDG2025_MuonListing
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group 2025 muon particle listing, NODE=S004"
+    authors: "Particle Data Group"
+    year: 2025
+    url: "https://pdg.lbl.gov/encoder_listings/s004.pdf"
+    access_date: "2026-05-16"
+    sha256_of_local_snapshot: "sha256:4baeea03e1eac3a90ee1d972f9b405e77d58872ad1260227b09475285269ae04"
+    snapshot_path: "flavor_catalog/references/L001/pdg2025_muon_listing_s004.txt"
