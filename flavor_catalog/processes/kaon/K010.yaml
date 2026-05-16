@@ -44,9 +44,18 @@ status_history:
     agent_id: "WA-v2"
     batch_id: "wa_w5b_kaon_v2"
     reason: "Cycle 2 metadata rework: promoted CA-listed numerical claims into pdg_or_equivalent values."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T15:55:40-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T15:55:40-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w5b_kaon_v2"
+    reason: "Cycle 3 checker re-check passed CHK-1 through CHK-8 after WA-v2 metadata rework."
+checker_passed_at: "2026-05-16T15:55:40-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:28:45-04:00"
+last_updated_at: "2026-05-16T15:55:40-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_ks_pi0ee_pdgLive.txt: "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff"
