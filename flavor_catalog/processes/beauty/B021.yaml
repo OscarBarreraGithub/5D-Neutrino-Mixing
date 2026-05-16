@@ -16,9 +16,17 @@ status_history:
     at: "2026-05-16T14:06:23-04:00"
     agent_id: "PKA-B021"
     reason: "initial PKA draft deposit for baryonic b -> s l+l- process"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T14:24:00-04:00"
+    agent: "WA"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T14:24:00-04:00"
+    agent_id: "WA"
+    reason: "writer polish for batch wa_w5a_beauty"
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:06:23-04:00"
+last_updated_at: "2026-05-16T14:24:00-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_lambdab_lambdamumu.txt: "sha256:73959783ca3c1de31cd9479c24825c19140d59641809cfe9a2cc3c9a528fddcd"

@@ -18,7 +18,7 @@ time-dependent angular CP analysis of the charmless penguin decay
 counterpart to the cleaner \(b\to c\bar c s\) phase measurements, but with the
 weak phase attached to a loop-induced decay amplitude.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The current source-of-truth numerical block is \texttt{B034.yaml}.  The PDG
 \(B_s^0\) listing records the \(b\to s\bar{s}s\) convention
 \[
@@ -29,15 +29,17 @@ and its AAIJ 23AT note gives the LHCb combined phase and direct-CP parameter
   \phi_s^{s\bar{s}s}=-0.074\pm0.069\ {\rm rad},\qquad
   |\lambda|=1.009\pm0.030 .
 \]
-The same combined values appear in the LHCb 2023 CDS record.  As contextual
-rate information for the channel, HFLAV May 2024 quotes
+The PDG convention is recorded under \texttt{pdg2025\_bs\_phiphi\_cp}; the
+same combined LHCb values appear in \texttt{lhcb2023\_bs\_phiphi\_cp\_cds}.
+As contextual rate information for the channel, HFLAV May 2024 quotes
 \[
-  {\cal B}(B_s^0\to\phi\phi)=(1.85\pm0.14)\times 10^{-5}.
+  \mathcal B(B_s^0\to\phi\phi)=(1.85\pm0.14)\times 10^{-5}.
 \]
-Local snapshots are in \texttt{flavor\_catalog/references/B034/}, accessed on
+This rate is tracked under \texttt{hflav2024\_bs\_phiphi\_branching}.  Local
+snapshots are in \texttt{flavor\_catalog/references/B034/}, accessed on
 2026-05-16.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 In warped anarchic flavour models, flavour-changing KK gluon, electroweak-KK,
 or misaligned \(Z/H\)-like effects can induce new \(\Delta B=1\) penguin
 operators with phases not fixed by the Standard Model CKM fit.  \(B_s^0\to
@@ -50,16 +52,19 @@ satisfied.
 \subsection*{Post-2008 developments}
 The process matured after the arXiv:0804.1954 era.  LHCb's 2014 analysis used
 \(3.0\,{\rm fb}^{-1}\), about 4000 signal decays, and found
-\(\phi_s=-0.17\pm0.15\pm0.03\ {\rm rad}\).  The 2019 update used
+\(\phi_s=-0.17\pm0.15\pm0.03\ {\rm rad}\)
+(\texttt{lhcb2014\_bs\_phiphi\_cp\_arxiv}).  The 2019 update used
 \(5.0\,{\rm fb}^{-1}\), about 9000 signal decays, and reported
 \(\phi_s^{s\bar{s}s}=-0.073\pm0.115\pm0.027\ {\rm rad}\) with
-\(|\lambda|=0.99\pm0.05\pm0.01\).  The 2023 precision measurement used
+\(|\lambda|=0.99\pm0.05\pm0.01\)
+(\texttt{lhcb2019\_bs\_phiphi\_cp\_cds}).  The 2023 precision measurement used
 \(6\,{\rm fb}^{-1}\) at \(13\,{\rm TeV}\), giving
 \(\phi_s^{s\bar{s}s}=-0.042\pm0.075\pm0.009\ {\rm rad}\) and
-\(|\lambda|=1.004\pm0.030\pm0.009\) before combination.  The combined LHCb
-result remains consistent with CP conservation and Standard Model expectations.
+\(|\lambda|=1.004\pm0.030\pm0.009\) before combination
+(\texttt{lhcb2023\_bs\_phiphi\_cp\_cds}).  The combined LHCb result remains
+consistent with CP conservation and Standard Model expectations.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 This is a strong experimental null test but a model-dependent hard constraint.
 The Standard Model expectation for the penguin phase is close to zero, while
 \(|\lambda|=1\) corresponds to no direct CP violation, but a production bound
@@ -86,7 +91,6 @@ operators, matching, running, angular/polarization likelihood handling, and a
 hadronic-amplitude prescription.
 
 \subsection*{Key references}
-Process-local raw reference keys before bibliography consolidation:
 \texttt{pdg2025\_bs\_phiphi\_cp},
 \texttt{lhcb2023\_bs\_phiphi\_cp\_cds},
 \texttt{lhcb2019\_bs\_phiphi\_cp\_cds},

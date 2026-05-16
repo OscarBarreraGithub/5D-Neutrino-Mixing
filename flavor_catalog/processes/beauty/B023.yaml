@@ -16,9 +16,17 @@ status_history:
     timestamp: "2026-05-16T14:07:02-04:00"
     agent_id: "PKA-B023"
     reason: "initial PKA draft deposit for assigned B023 B -> K* nu nubar process"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T14:24:00-04:00"
+    agent: "WA"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T14:24:00-04:00"
+    agent_id: "WA"
+    reason: "writer polish for batch wa_w5a_beauty"
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:07:02-04:00"
+last_updated_at: "2026-05-16T14:24:00-04:00"
 version: "0.1.0"
 source_shas:
   babar2013_arxiv1303_7465.txt: "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b"

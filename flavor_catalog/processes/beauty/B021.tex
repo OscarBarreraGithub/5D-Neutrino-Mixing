@@ -16,7 +16,7 @@ This is the baryonic exclusive \(b\to s\ell^+\ell^-\) channel.  The current
 canonical measured mode is \(\Lambda_b^0\to\Lambda\mu^+\mu^-\); no comparable
 PDG electron-mode average was found in this PKA pass.
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The sidecar is the numerical source of truth.  PDG Live's 2025
 \(\Lambda_b^0\) listing gives
 \[
@@ -24,7 +24,7 @@ The sidecar is the numerical source of truth.  PDG Live's 2025
   =(1.08\pm0.28)\times10^{-6},
 \]
 from the decay-mode table under source key
-\texttt{PDG2025:LambdaBToLambdaMuMu}.  The supporting LHCb angular analysis
+\texttt{PDG2025:LambdaBToLambdaMuMu}.  The LHCb angular analysis under
 \texttt{LHCb2015:LambdaBToLambdaMuMu} reports, for
 \(15<q^2<20\,{\rm GeV}^2/c^4\),
 \[
@@ -36,7 +36,7 @@ and \(A_{\rm FB}^{\ell}=-0.05\pm0.09\pm0.03\),
 \(A_{\rm FB}^{h}=-0.29\pm0.07\pm0.03\).
 Local snapshots are in \texttt{flavor\_catalog/references/B021/}.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 This mode probes \(\Delta B=1\) semileptonic FCNC operators rather than the
 \(\Delta F=2\) four-quark basis implemented for neutral meson mixing.  Warped
 flavor models can generate flavor-changing \(Z\) couplings, KK electroweak
@@ -47,16 +47,20 @@ a complementary diagnostic of chirality and hadronic systematics.
 
 \subsection*{Post-2008 developments}
 The arXiv:0804.1954 RS-flavor baseline predates this channel as an observed
-rare decay.  CDF reported the first observation in 2011 with 24 signal events,
-5.8 standard-deviation significance, and
-\(\mathcal B=(1.73\pm0.42\pm0.55)\times10^{-6}\).  LHCb then measured
-differential branching fractions with 2011 data and, using \(3.0\,{\rm fb}^{-1}\),
-published the 2015 \(q^2\)-binned branching-fraction and angular analysis used
-above.  Lattice-QCD work by Detmold, Lin, Meinel, and Wingate supplied
-post-2008 \(\Lambda_b\to\Lambda\) form factors, making clear that the baryonic
-mode should not be folded into the mesonic \(B\to K^{(*)}\ell\ell\) treatment.
+rare decay (\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}).  CDF reported
+the first observation in 2011 with 24 signal events, 5.8 standard-deviation
+significance, and
+\(\mathcal B=(1.73\pm0.42\pm0.55)\times10^{-6}\)
+(\texttt{CDF2011:LambdaBToLambdaMuMu}).  LHCb later used
+\(3.0\,{\rm fb}^{-1}\) to publish the \(q^2\)-binned branching-fraction and
+angular analysis quoted above
+(\texttt{LHCb2015:LambdaBToLambdaMuMu}).  Lattice-QCD work by Detmold, Lin,
+Meinel, and Wingate supplied post-2008 \(\Lambda_b\to\Lambda\) form factors,
+so this baryonic mode should not be folded into the mesonic
+\(B\to K^{(*)}\ell\ell\) treatment
+(\texttt{DetmoldLinMeinelWingate2013:LambdaBToLambdaFormFactors}).
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 This is a useful catalog constraint but not a single-number hard bound.  The
 interpretation depends on \(q^2\) binning, charmonium vetoes, normalization to
 \(\Lambda_b^0\to J/\psi\Lambda\), baryonic form factors, and nonlocal charm
