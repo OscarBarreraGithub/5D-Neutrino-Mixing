@@ -16,9 +16,17 @@ status_history:
     at: "2026-05-16T15:30:29-04:00"
     agent_id: "PKA-B001"
     reason: "Initial PKA draft deposit for Delta m_d / B_d mixing."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T15:54:12-04:00"
+    agent: "WA"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-16T15:54:12-04:00"
+    agent_id: "WA"
+    reason: "Writer polish completed for WA batch wa_w6_beauty."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T15:30:29-04:00"
+last_updated_at: "2026-05-16T15:54:12-04:00"
 version: "0.1.0"
 source_shas:
   hflav_pdg2025_bd_mixing.txt: "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711"

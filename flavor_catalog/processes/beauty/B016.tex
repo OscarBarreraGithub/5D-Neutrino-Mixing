@@ -8,7 +8,7 @@
 % Canonical metadata sidecar: B016.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{B016: \(B\to K\ell^+\ell^-\) Exclusive Branching Fractions}
+\section{B016: \(B\to K\ell^+\ell^-\) exclusive branching fractions}
 
 \subsection*{Process}
 \textbf{Standard notation:} \(B\to K\ell^+\ell^-\), with \(\ell=e,\mu\).
@@ -17,24 +17,25 @@ branching fractions, centered on \(B^+\to K^+\ell^+\ell^-\) and
 \(B^0\to K^0\ell^+\ell^-\).  Lepton-universality ratios are cataloged in
 the companion \(B018\) entry, and vector-kaon angular observables in \(B017\).
 
-\subsection*{PDG / equivalent value(s)}
+\subsection*{PDG or equivalent value}
 The canonical measured values are the HFLAV rare-\(B\) averages from the end
 of December 2025, accessed on 2026-05-16 and snapshotted locally under
-\texttt{flavor\_catalog/references/B016/}.  HFLAV quotes
+\texttt{flavor\_catalog/references/B016/}.  For source key
+\texttt{HFLAV2025Dec:BplusToKplusll}, HFLAV quotes
 \[
   {\cal B}(B^+\to K^+\ell^+\ell^-)
   =(5.76\pm0.40)\times10^{-7},
 \]
-and
+and for source key \texttt{HFLAV2025Dec:B0ToK0ll},
 \[
   {\cal B}(B^0\to K^0\ell^+\ell^-)
   =(3.28\pm0.32)\times10^{-7}.
 \]
-The charged-mode average is source key \texttt{HFLAV2025Dec:BplusToKplusll};
-the neutral-mode average is \texttt{HFLAV2025Dec:B0ToK0ll}.  HFLAV notes that
-treatments of charmonium intermediate components differ among inputs.
+Both values are recorded in \texttt{B016.yaml} under
+\texttt{pdg\_or\_equivalent}.  HFLAV notes that treatments of charmonium
+intermediate components differ among inputs.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 This is a \(\Delta B=1\) flavor-changing neutral-current probe of the same
 down-sector flavor structure that appears in \(B_s\) mixing, but it tests
 semileptonic and dipole operators rather than four-quark \(\Delta F=2\)
@@ -45,18 +46,20 @@ therefore useful diagnostics of \(b\to s\ell\ell\) structure, while the LFU
 ratios and \(K^*\) angular program carry related but distinct information.
 
 \subsection*{Post-2008 developments}
-Since the arXiv:0804.1954 RS-flavor baseline, this channel moved from sparse
-\(B\)-factory evidence into precision rare-\(B\) phenomenology.  BaBar provided
-early post-baseline \(B\to K^{(*)}\ell^+\ell^-\) asymmetry inputs.  LHCb then
-measured differential \(B\to K^{(*)}\mu^+\mu^-\) branching fractions and
-isospin asymmetries with hadron-collider data, and Belle measured both electron
-and muon \(B\to K\ell\ell\) modes together with \(R_K\).  HFLAV now provides
-current charged and neutral exclusive-\(K\) branching-fraction averages, while
-the separate \(R_K\) updates shifted the clean LFU-anomaly interpretation back
-toward correlated semileptonic-Wilson-coefficient and hadronic-systematics
-questions.
+Since the arXiv:0804.1954 RS-flavor baseline, source key
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}, this channel moved from
+sparse \(B\)-factory evidence into precision rare-\(B\) phenomenology.  BaBar
+provided early post-baseline \(B\to K^{(*)}\ell^+\ell^-\) asymmetry inputs
+(\texttt{BaBar2009:BtoKllAsymmetries}).  LHCb measured differential
+\(B\to K^{(*)}\mu^+\mu^-\) branching fractions and isospin asymmetries with
+hadron-collider data (\texttt{LHCb2014:BtoKmumuDifferential}), and Belle
+measured both electron and muon \(B\to K\ell\ell\) modes together with \(R_K\)
+(\texttt{Belle2021:BtoKllLFU}).  HFLAV now provides current charged and
+neutral exclusive-\(K\) branching-fraction averages, while the separate \(R_K\)
+updates shifted the clean LFU-anomaly interpretation toward correlated
+semileptonic-Wilson-coefficient and hadronic-systematics questions.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 The HFLAV branching fractions are measured observables and are appropriate for
 cataloging, but using them as hard RS cuts is model-dependent.  A faithful
 constraint must specify the dilepton \(q^2\) regions, charmonium vetoes,
@@ -76,7 +79,8 @@ implementation directories found no \(B\to K\ell\ell\), \(b\to s\ell\ell\),
 
 \subsection*{Implementation difficulty}
 \textbf{HIGH.}  Integration would require a new \(\Delta B=1\) semileptonic
-Hamiltonian, matching to \(C_7,C_9,C_{10}\) and primed operators, \(q^2\)-bin
+Hamiltonian, matching to \(C_7\), \(C_9\), \(C_{10}\), and primed operators,
+\(q^2\)-bin
 handling, form factors, nonlocal-charm uncertainties, and experimental
 covariance support.  The existing \(\Delta F=2\) basis is not enough.
 

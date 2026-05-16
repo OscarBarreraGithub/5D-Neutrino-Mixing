@@ -8,7 +8,7 @@
 % Canonical metadata sidecar: B003.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{B003: \(\Delta m_s\) / \(B_s\) Mixing}
+\section{B003: \(\Delta m_s\) in \(B_s\) mixing}
 
 \subsection*{Process}
 \textbf{Standard notation:} \(\Delta m_s\).  This entry covers the
@@ -17,10 +17,11 @@ measured in time-dependent flavor-tagged \(B_s\) decays.  It is the magnitude
 observable in the \(\Delta B=2\), \(b\leftrightarrow s\) neutral-meson mixing
 system.
 
-\subsection*{PDG / equivalent value(s)}
-The current canonical equivalent value is the HFLAV recommended
-lifetime-and-oscillation average snapshotted as
-\texttt{references/B003/hflav\_2024\_dms.txt}:
+\subsection*{PDG or equivalent value}
+The canonical equivalent value used here is the HFLAV Fall 2024 recommended
+lifetime-and-oscillation average recorded in \texttt{B003.yaml} under
+\texttt{pdg\_or\_equivalent}, source key \texttt{hflav\_2024\_dms}, with local
+snapshot \texttt{flavor\_catalog/references/B003/hflav\_2024\_dms.txt}:
 \[
   \Delta m_s = 17.766\pm0.006~{\rm ps}^{-1}
 \]
@@ -29,11 +30,12 @@ quantities \(x_s=26.94\pm0.10\) and
 \(\chi_s=0.499314\pm0.000005\), using
 \(1/\Gamma_s=1.516\pm0.006~{\rm ps}\),
 \(\Delta\Gamma_s=+0.0781\pm0.0035~{\rm ps}^{-1}\), and no CP violation in
-mixing.  The published-only HFLAV/PDG 2025 preparation page, snapshotted as
-\texttt{references/B003/hflav\_pdg2025\_dms.txt}, gives the nearly identical
-\(\Delta m_s=17.765\pm0.006~{\rm ps}^{-1}\).
+mixing.  The published-only HFLAV/PDG 2025 preparation page, source key
+\texttt{hflav\_pdg2025\_dms}, gives the nearly identical
+\(\Delta m_s=17.765\pm0.006~{\rm ps}^{-1}\), snapshotted at
+\texttt{flavor\_catalog/references/B003/hflav\_pdg2025\_dms.txt}.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS / anarchic flavor}
 In anarchic Randall--Sundrum flavor, tree-level KK-gluon and electroweak
 exchange generate \(\Delta B=2\) four-quark operators.  \(B_s\) mixing is the
 down-sector \(s-b\) analogue of \(B_d\) mixing and complements the stronger
@@ -64,7 +66,7 @@ On the theory side, \texttt{flag\_2024\_bmixing} records the FLAG Review 2024
 with a warning that correlated decay-constant and mixing inputs should not be
 reconstructed from separate averages.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Constraint validity / model dependence}
 The experimental oscillation frequency is very clean.  The model-dependent step
 is translating it into a new-physics allowance: a conservative catalog can bound
 \(|M_{12}^{s,{\rm NP}}|\) directly from the measured splitting, while a sharper
@@ -74,7 +76,7 @@ but cancellations between SM and new physics or correlated CKM-fit choices
 should be made explicit in any live likelihood.
 
 \subsection*{Code coverage in this repo}
-\textbf{YES.}  The v1 Delta F=2 input bundle defines the \(B_s\) system at
+\textbf{YES-D2-BS.}  The v1 \(\Delta F=2\) input bundle defines the \(B_s\) system at
 \texttt{quarkConstraints/deltaf2.py:238} with key \texttt{b\_s} at
 \texttt{quarkConstraints/deltaf2.py:239} and down-sector generations
 \texttt{(1, 2)} at \texttt{quarkConstraints/deltaf2.py:244}.  The hadronic
