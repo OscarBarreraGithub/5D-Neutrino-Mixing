@@ -27,9 +27,19 @@ status_history:
     issues:
       - "CHK-1: EW003 pdg_or_equivalent value blocks do not carry a year field, and the 3.0 sigma marginal-consistency claim is recorded only under additional_numerical_context rather than as a pdg_or_equivalent entry with full metadata."
       - "CHK-4: status_history contains WRITER-INITIATED but no WRITER-DONE transition; the most recent pre-CA entry was WRITER-INITIATED, and no EW001/EW002/EW003 WA batch worklog was found."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:56:45-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:56:45-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    batch_id: "wa_w4_ew_v2"
+    reason: "Addressed CA CHK-1 and CHK-4 findings for EW003 metadata and WA-v2 completion."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:46:24-04:00"
+last_updated_at: "2026-05-16T13:56:45-04:00"
 version: "0.1.0"
 source_shas:
   bhatta_2021_bu_tau_np.txt: "sha256:9953db6ff1d8f0293b21f2223d5d5e0e3a52710f4b1dad373a82c3b28eb46655"
@@ -40,6 +50,7 @@ source_shas:
   pdg_2024_vcb_vub.txt: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
 pdg_or_equivalent:
   - observable: "PDG 2024 |V_cb| inclusive"
+    year: 2024
     value: 42.2
     uncertainty: 0.5
     units: "10^-3"
@@ -49,6 +60,7 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
     sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
   - observable: "PDG 2024 |V_cb| exclusive"
+    year: 2024
     value: 39.8
     uncertainty: 0.6
     units: "10^-3"
@@ -58,6 +70,7 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
     sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
   - observable: "PDG 2024 |V_cb| scaled average"
+    year: 2024
     value: 41.1
     uncertainty: 1.2
     units: "10^-3"
@@ -67,7 +80,9 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
     sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
   - observable: "PDG 2024 |V_ub| inclusive"
+    year: 2024
     value: 4.13
+    uncertainty: null
     uncertainty_components:
       exp: 0.12
       theory_plus: 0.13
@@ -80,7 +95,9 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
     sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
   - observable: "PDG 2024 |V_ub| exclusive"
+    year: 2024
     value: 3.70
+    uncertainty: null
     uncertainty_components:
       exp_or_fit: 0.10
       theory: 0.12
@@ -91,6 +108,7 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
     sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
   - observable: "PDG 2024 |V_ub| scaled average"
+    year: 2024
     value: 3.82
     uncertainty: 0.20
     units: "10^-3"
@@ -100,6 +118,7 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
     sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
   - observable: "HFLAV 2023 preferred inclusive |V_cb|"
+    year: 2023
     value: 41.97
     uncertainty: 0.48
     units: "10^-3"
@@ -109,6 +128,7 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt"
     sha256: "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229"
   - observable: "HFLAV 2023 combined exclusive |V_cb|"
+    year: 2023
     value: 39.77
     uncertainty: 0.46
     units: "10^-3"
@@ -118,6 +138,7 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt"
     sha256: "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229"
   - observable: "HFLAV 2023 combined exclusive |V_ub|"
+    year: 2023
     value: 3.43
     uncertainty: 0.12
     units: "10^-3"
@@ -127,6 +148,7 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt"
     sha256: "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229"
   - observable: "FLAG 2024 B -> D* l nu |V_cb|, Nf=2+1"
+    year: 2024
     value: 39.23
     uncertainty: 0.65
     units: "10^-3"
@@ -136,6 +158,7 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW003/flag_2024_b_semileptonic_lattice.txt"
     sha256: "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528"
   - observable: "FLAG 2024 B -> pi l nu |V_ub|, Nf=2+1"
+    year: 2024
     value: 3.61
     uncertainty: 0.16
     units: "10^-3"
@@ -144,12 +167,17 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/EW003/flag_2024_b_semileptonic_lattice.txt"
     sha256: "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528"
-additional_numerical_context:
-  - quantity: "PDG 2024 |V_cb| inclusive-exclusive marginal consistency"
+  - observable: "PDG 2024 |V_cb| inclusive-exclusive marginal consistency"
+    year: 2024
     value: 3.0
+    uncertainty: null
     units: "sigma"
     source: "PDG 2024 Semileptonic b-Hadron Decays, Determination of Vcb, Vub"
+    source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt"
+    sha256: "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+additional_numerical_context:
   - quantity: "NIT-1 post-2008 comparison baseline"
     value: 2008
     units: "year"

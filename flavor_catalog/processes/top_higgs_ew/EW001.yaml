@@ -26,9 +26,19 @@ status_history:
     batch_id: "ca_w4_ew"
     issues:
       - "CHK-4: status_history contains WRITER-INITIATED but no WRITER-DONE transition; the most recent pre-CA entry was WRITER-INITIATED, and no EW001/EW002/EW003 WA batch worklog was found."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T13:56:45-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T13:56:45-04:00"
+    agent: "WA-v2"
+    agent_id: "WA-v2"
+    cycle: 2
+    batch_id: "wa_w4_ew_v2"
+    reason: "Addressed CA CHK-4 finding by appending WA-v2 completion transition and creating the WA-v2 batch worklog."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T13:46:24-04:00"
+last_updated_at: "2026-05-16T13:56:45-04:00"
 version: "0.1.0"
 source_shas:
   cfw_2008_rs_flavor.txt: "sha256:3233891e61f28ce2755a145f3a3fd48095b5244beff40e72debc41a7f4d029bc"
