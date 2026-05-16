@@ -1,0 +1,90 @@
+% Flavor catalog process: C008
+% family: charm
+% owner_agent_id: PKA-C008
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: C008.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{C008: \(D^+\to\pi^+e^\pm\mu^\mp\)}
+
+\subsection*{Process}
+\textbf{Standard notation:}
+\(\mathcal{B}(D^+\to\pi^+e^+\mu^-)\) and
+\(\mathcal{B}(D^+\to\pi^+e^-\mu^+)\).  This entry covers the two
+opposite-sign charged-lepton-flavor-violating semileptonic charm decays
+usually summarized as \(D^+\to\pi^+e^\pm\mu^\mp\).  Charge-conjugate
+decays are implied by the experimental sources.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG Live/API entries S031.110 and S031.111, accessed on
+2026-05-16, list separate 90\% C.L. upper limits:
+\[
+  \mathcal{B}(D^+\to\pi^+e^+\mu^-) < 2.1\times10^{-7},
+  \qquad
+  \mathcal{B}(D^+\to\pi^+e^-\mu^+) < 2.2\times10^{-7}.
+\]
+Both current limits come from the LHCb 2021 search in \(1.6\,{\rm fb}^{-1}\)
+of 2016 \(pp\) data.  The LHCb source table gives companion 95\% C.L.
+limits of \(2.3\times10^{-7}\) and \(2.2\times10^{-7}\), respectively.
+The predecessor BaBar 2011 search, using \(384\,{\rm fb}^{-1}\), reported
+90\% C.L. limits of \(2.9\times10^{-6}\) and \(3.6\times10^{-6}\).  These
+values are traced to
+\texttt{flavor\_catalog/references/C008/pdg2026\_dplus\_piplus\_ep\_mum\_pdgLive.txt},
+\texttt{pdg2026\_dplus\_piplus\_em\_mup\_pdgLive.txt},
+\texttt{lhcb2021\_arxiv2011\_00217.txt}, and
+\texttt{babar2011\_arxiv1107\_4465.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This process tests a product of up-sector flavor violation and charged-lepton
+flavor violation: schematically, short-distance operators such as
+\((\bar u\,\Gamma c)(\bar e\,\Gamma'\mu)\).  Minimal quark-only RS scans do
+not generate a live constraint for this mode, but lepton-sector extensions
+with nonuniversal KK gauge couplings, scalar exchange, or flavor-violating
+brane terms can generate it.  It is therefore a useful catalog marker for a
+future combined quark-plus-lepton flavor backend rather than a current veto.
+
+\subsection*{Post-2008 developments}
+The arXiv:0804.1954 RS-flavor baseline predates the modern rare/forbidden
+semileptonic charm searches.  BaBar subsequently set first or improved limits
+for many charged-charm LFV modes in 2011.  LHCb then searched for 25 rare and
+forbidden \(D^+\) and \(D_s^+\) modes with 2016 data and found no significant
+deviation from the background-only hypothesis, tightening the two C008 charge
+channels to the present \(2\times10^{-7}\)-level limits.
+
+\subsection*{Constraint validity and model dependence}
+The experimental limits are robust upper bounds on the listed exclusive
+branching fractions.  Their interpretation as RS constraints is model
+dependent because the mapping requires a \(\Delta C=1\), LFV semileptonic
+operator basis, \(D\to\pi\) form factors, lepton-chirality assumptions, and a
+phase-space treatment matching the LHCb analysis.  The Standard Model
+background for charged-LFV final states is negligible for catalog purposes.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required coverage greps over \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/}, plus a focused search for
+\texttt{D+.*pi+.*e.*mu}, \texttt{pi+.*e.*mu}, rare-charm, and
+\texttt{c->u} LFV patterns, found no \(D^+\to\pi^+e^\pm\mu^\mp\)
+implementation.  Nearby hits are unrelated: \(D^0\) mixing appears at
+\texttt{quarkConstraints/deltaf2.py:252} and
+\texttt{quarkConstraints/deltaf2.py:941}, the modern policy lists only
+\(D^0\) mixing at \texttt{quarkConstraints/modern/phenomenology.py:23} and
+\texttt{quarkConstraints/modern/phenomenology.py:668}, and the implemented
+LFV observable is \(\mu\to e\gamma\) at
+\texttt{flavorConstraints/muToEGamma.py:75}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production implementation needs a new \(\Delta C=1\)
+LFV semileptonic operator basis and a \(D^+\to\pi^+e\mu\) branching-fraction
+calculation with form factors, phase-space acceptance, and chirality
+conventions.  This is beyond adding an input to the existing \(\Delta F=2\)
+or \(\mu\to e\gamma\) paths.
+
+\subsection*{Key references}
+Process-local keys before bibliography consolidation:
+\texttt{PDG2026:DPlusPiEMuPlus}, \texttt{PDG2026:DPlusPiEMuMinus},
+\texttt{LHCb2021:DPlusPiEMu}, \texttt{BaBar2011:RareForbiddenCharm}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

@@ -1,0 +1,114 @@
+schema: flavor_catalog.process.v1
+process_id: C008
+family: charm
+standard_notation: "\\mathcal{B}(D^+\\to\\pi^+e^\\pm\\mu^\\mp)"
+process_name: "LFV semileptonic charm decay D+ -> pi+ e mu"
+owner: "PKA"
+owner_agent_id: "PKA-C008"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-16T14:24:55-04:00"
+    from: null
+    to: "WRITER-INITIATED"
+    at: "2026-05-16T14:24:55-04:00"
+    agent_id: "PKA-C008"
+    reason: "Initial PKA source extraction and C008 draft deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T14:24:55-04:00"
+version: "0.1.0"
+source_shas:
+  babar2011_arxiv1107_4465.txt: "sha256:7615bb1fbf36b13a100c993532099e1400fbd2bf6234a0d1d4d0023b53813744"
+  cfw2008_arxiv0804_1954.txt: "sha256:431898148b09ea89c76d7ad41f12c704c19506d27050bde89dab46ef8b8d301d"
+  lhcb2021_arxiv2011_00217.txt: "sha256:ccf385471c7021b92ad44ecde8192170c02bc47bca342a2694da682b18d65358"
+  pdg2026_dplus_piplus_em_mup_pdgLive.txt: "sha256:118afebb925f0dffab91a16185429fa0acd099f15b002345f3b985acabfa5e82"
+  pdg2026_dplus_piplus_ep_mum_pdgLive.txt: "sha256:fda49cf83fefdbc7ff66fdd3b71f55865baf41a3dc2262ed3e723e0b083f40a1"
+  sha256sums.txt: "sha256:c7f4279e862e0eba5a0a0ece793ff9a1572ec80f8f8b103747a98e0a6a36434f"
+  source_manifest.yaml: "sha256:fc3fdb6fc7703d1c7e1dd088a9d7d9e81c357572c5c4b066b9d2f318997fb352"
+pdg_or_equivalent:
+  dplus_piplus_eplus_muminus:
+    source: "PDG Live/API S031.110"
+    source_key: "PDG2026:DPlusPiEMuPlus"
+    year: 2026
+    observable: "BR(D+ -> pi+ e+ mu-)"
+    limit_type: "upper"
+    value: 2.1e-7
+    confidence_level: 0.90
+    units: "branching fraction"
+    current_experimental_source: "LHCb JHEP 06 (2021) 044 / arXiv:2011.00217"
+    companion_95cl_limit: 2.3e-7
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.110"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/pdg2026_dplus_piplus_ep_mum_pdgLive.txt"
+    sha256_of_text_snapshot: "sha256:fda49cf83fefdbc7ff66fdd3b71f55865baf41a3dc2262ed3e723e0b083f40a1"
+  dplus_piplus_eminus_muplus:
+    source: "PDG Live/API S031.111"
+    source_key: "PDG2026:DPlusPiEMuMinus"
+    year: 2026
+    observable: "BR(D+ -> pi+ e- mu+)"
+    limit_type: "upper"
+    value: 2.2e-7
+    confidence_level: 0.90
+    units: "branching fraction"
+    current_experimental_source: "LHCb JHEP 06 (2021) 044 / arXiv:2011.00217"
+    companion_95cl_limit: 2.2e-7
+    source_url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.111"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/pdg2026_dplus_piplus_em_mup_pdgLive.txt"
+    sha256_of_text_snapshot: "sha256:118afebb925f0dffab91a16185429fa0acd099f15b002345f3b985acabfa5e82"
+  lhcb_2021_search_scope:
+    source: "LHCb JHEP 06 (2021) 044 / arXiv:2011.00217"
+    source_key: "LHCb2021:DPlusPiEMu"
+    year: 2021
+    decay_modes_investigated: 25
+    integrated_luminosity_fb_inv: 1.6
+    dataset_year: 2016
+    collision_system: "pp"
+    no_significant_deviation: true
+    source_url: "https://arxiv.org/abs/2011.00217"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/lhcb2021_arxiv2011_00217.txt"
+    sha256_of_text_snapshot: "sha256:ccf385471c7021b92ad44ecde8192170c02bc47bca342a2694da682b18d65358"
+  babar_2011_predecessor:
+    source: "BaBar Phys. Rev. D 84, 072006 / arXiv:1107.4465"
+    source_key: "BaBar2011:RareForbiddenCharm"
+    year: 2011
+    integrated_luminosity_fb_inv: 384
+    confidence_level: 0.90
+    dplus_piplus_eplus_muminus_limit: 2.9e-6
+    dplus_piplus_eminus_muplus_limit: 3.6e-6
+    units: "branching fraction"
+    source_url: "https://arxiv.org/abs/1107.4465"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/babar2011_arxiv1107_4465.txt"
+    sha256_of_text_snapshot: "sha256:7615bb1fbf36b13a100c993532099e1400fbd2bf6234a0d1d4d0023b53813744"
+paper_era_reference:
+  rs_baseline:
+    source: "Csaki, Falkowski, Weiler 2008"
+    source_key: "CsakiFalkowskiWeiler2008:CompositeFlavor"
+    year: 2008
+    use: "Historical RS/anarchic-flavor baseline for the post-2008 comparison; no measured C008 observable is taken from this source."
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/cfw2008_arxiv0804_1954.txt"
+    sha256_of_text_snapshot: "sha256:431898148b09ea89c76d7ad41f12c704c19506d27050bde89dab46ef8b8d301d"
+code_coverage:
+  status: "NO"
+  commands:
+    - "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    - "rg -n \"D\\\\+.*pi\\\\+.*e.*mu|D\\\\^\\\\+.*pi\\\\^\\\\+.*e.*mu|D\\\\+.*pi\\\\+.*mu.*e|D\\\\^\\\\+.*pi\\\\^\\\\+.*mu.*e|pi\\\\+.*e\\\\+.*mu|pi\\\\+.*e-.*mu|semileptonic.*charm|rare.?charm|c.?->.?u.*e.*mu\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Focused implementation-dir search for D+ -> pi+ e mu and rare semileptonic charm patterns returned no matches."
+    - "quarkConstraints/deltaf2.py:252 and quarkConstraints/deltaf2.py:941 are D0 mixing hits, not D+ -> pi+ e mu."
+    - "quarkConstraints/modern/phenomenology.py:23 and quarkConstraints/modern/phenomenology.py:668 are D0 mixing policy/evaluator hits, not rare semileptonic charm."
+    - "flavorConstraints/muToEGamma.py:75 is the separate mu -> e gamma LFV dipole check."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_reason: "Needs a new Delta C = 1 charged-LFV semileptonic operator basis plus a D+ -> pi+ e mu mode calculation with form factors, phase-space acceptance, and chirality conventions."
+open_issues:
+  - "WA/CA should verify whether future recasts should combine the two charge modes or keep the PDG S031.110 and S031.111 limits separate."

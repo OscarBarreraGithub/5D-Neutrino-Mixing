@@ -1,0 +1,60 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: C008
+generated_at: "2026-05-16T14:24:55-04:00"
+license_policy: "minimal text snapshots only; no publisher PDFs tracked"
+references:
+  - key: "PDG2026:DPlusPiEMuPlus"
+    arxiv_id: null
+    DOI: null
+    title: "D+ -> pi+ e+ mu- decay-mode summary"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.110"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/pdg2026_dplus_piplus_ep_mum_pdgLive.txt"
+    sha256_of_local_snapshot: "sha256:fda49cf83fefdbc7ff66fdd3b71f55865baf41a3dc2262ed3e723e0b083f40a1"
+    notes: "PDG Live/API listing S031.110; current used limit is LHCb 2021T <2.1e-7 at 90% CL."
+  - key: "PDG2026:DPlusPiEMuMinus"
+    arxiv_id: null
+    DOI: null
+    title: "D+ -> pi+ e- mu+ decay-mode summary"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.111"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/pdg2026_dplus_piplus_em_mup_pdgLive.txt"
+    sha256_of_local_snapshot: "sha256:118afebb925f0dffab91a16185429fa0acd099f15b002345f3b985acabfa5e82"
+    notes: "PDG Live/API listing S031.111; current used limit is LHCb 2021T <2.2e-7 at 90% CL."
+  - key: "LHCb2021:DPlusPiEMu"
+    arxiv_id: "2011.00217"
+    DOI: "10.1007/JHEP06(2021)044"
+    title: "Searches for 25 rare and forbidden decays of D+ and Ds+ mesons"
+    authors: "LHCb Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2011.00217"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/lhcb2021_arxiv2011_00217.txt"
+    sha256_of_local_snapshot: "sha256:ccf385471c7021b92ad44ecde8192170c02bc47bca342a2694da682b18d65358"
+    notes: "Primary current experimental source; source table gives D+ -> pi+ e+ mu- limit 210 x 10^-9 at 90% CL and D+ -> pi+ e- mu+ limit 220 x 10^-9 at 90% CL."
+  - key: "BaBar2011:RareForbiddenCharm"
+    arxiv_id: "1107.4465"
+    DOI: "10.1103/PhysRevD.84.072006"
+    title: "Searches for Rare or Forbidden Semileptonic Charm Decays"
+    authors: "BaBar Collaboration"
+    year: 2011
+    url: "https://arxiv.org/abs/1107.4465"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/babar2011_arxiv1107_4465.txt"
+    sha256_of_local_snapshot: "sha256:7615bb1fbf36b13a100c993532099e1400fbd2bf6234a0d1d4d0023b53813744"
+    notes: "Post-2008 predecessor search; 384 fb^-1 BaBar data; 90% CL limits <2.9e-6 and <3.6e-6 for the two C008 charge modes."
+  - key: "CsakiFalkowskiWeiler2008:CompositeFlavor"
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/C008/cfw2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:431898148b09ea89c76d7ad41f12c704c19506d27050bde89dab46ef8b8d301d"
+    notes: "2008 RS/anarchic-flavor baseline for post-2008 comparison; not used as a measured-observable source."

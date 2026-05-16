@@ -1,0 +1,45 @@
+Source: arXiv abstract and arXiv source extract
+URL: https://arxiv.org/abs/2011.00217
+Source archive URL: https://arxiv.org/e-print/2011.00217
+Access date: 2026-05-16
+arXiv: 2011.00217
+DOI: 10.1007/JHEP06(2021)044
+Journal: JHEP 06 (2021) 044
+Report number: LHCb-PAPER-2020-007; CERN-EP-2020-140
+Title: Searches for 25 rare and forbidden decays of D+ and Ds+ mesons
+Authors: LHCb Collaboration
+
+Abstract-page metadata extract:
+
+A search is performed for rare and forbidden charm decays of the form
+D_(s)+ -> h^+- l+ l^(')-+, where h is a pion or kaon and the leptons are
+electrons or muons. The measurements use proton-proton collision data
+corresponding to an integrated luminosity of 1.6 fb^-1, collected by LHCb
+in 2016. No evidence is observed for the 25 decay modes investigated, and
+90% confidence-level limits on branching fractions are set between
+1.4 x 10^-8 and 6.4 x 10^-6.
+
+Source extract from template/d2hll-definitions.tex:
+
+  \def\DpTopiemuOS{\decay{\Dp}{\pip\ep\mun}}
+  \def\DpTopimueOS{\decay{\Dp}{\pip\mup\en}}
+
+Source extract from src/7-results.tex:
+
+No significant deviation from the background-only hypothesis is found for
+any channel. Upper limits on branching fractions are determined with the
+CL_s method, and the 90% and 95% confidence-level limits are reported in
+Table 1 of the source.
+
+Branching-fraction upper limit [10^-9], D+ columns:
+
+  Decay macro       Final state                  SES   90% CL   95% CL
+  \DTopiemuOS      D+ -> pi+ e+ mu-             0.6     210      230
+  \DTopimueOS      D+ -> pi+ mu+ e-             0.4     220      220
+
+Interpretation for C008:
+  B(D+ -> pi+ e+ mu-) < 210 x 10^-9 = 2.1 x 10^-7 at 90% CL.
+  Companion 95% CL limit: <230 x 10^-9 = 2.3 x 10^-7.
+
+  B(D+ -> pi+ e- mu+) < 220 x 10^-9 = 2.2 x 10^-7 at 90% CL.
+  Companion 95% CL limit: <220 x 10^-9 = 2.2 x 10^-7.
