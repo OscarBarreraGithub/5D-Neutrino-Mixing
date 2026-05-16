@@ -64,9 +64,21 @@ status_history:
     batch_id: "ca_w7_new_v2"
     cycle: 2
     reason: "Cycle-2 checker pass completed; CHK-1 through CHK-8 passed."
+  - state: "FACT-CHECKED"
+    timestamp: "2026-05-16T19:25:00-04:00"
+    from: "CHECKER-DONE"
+    to: "FACT-CHECKED"
+    at: "2026-05-16T19:25:00-04:00"
+    agent: "factcheck-codex-beauty"
+    agent_id: "factcheck-codex-beauty"
+    verdict: "VERIFIED"
+    findings_count: 0
+    notes: "HFLAV, PDG pdgLive, Belle II, Belle, BaBar, LHCb, and CFW sources match all B012 value-bearing claims."
 checker_passed_at: "2026-05-16T19:10:09-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T19:10:09-04:00"
+fact_checked_at: "2026-05-16T19:25:00-04:00"
+fact_check_verdict: "VERIFIED"
+last_updated_at: "2026-05-16T19:25:00-04:00"
 version: "0.1.1"
 source_shas:
   hflav_rare_decays_dec2024_btokstargamma.txt: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"

@@ -4,13 +4,13 @@ Agent: `factcheck-codex-beauty`
 Date: 2026-05-16
 Branch: `flavor-catalog/2026q2`
 Family: beauty
-Processes: B001 B002 B003 B004 B005 B006 B009 B011 B015 B016 B017 B018 B019 B021 B022 B023 B025 B026 B032 B033 B034
+Processes: B001 B002 B003 B004 B005 B006 B009 B011 B012 B015 B016 B017 B018 B019 B021 B022 B023 B025 B026 B032 B033 B034
 
 ## Summary
 
-All 21 beauty-family process entries were independently checked against the cited web source or the local source snapshot under `flavor_catalog/references/<process_id>/`. I re-fetched all cited arXiv abstract pages used as key references and checked that the author/title metadata matched the catalog citation at the level needed for identification. Measured observables in `pdg_or_equivalent` and measured-observable supporting blocks were checked for the quoted numerical values. Quoted SM predictions or theory paper numerical predictions were checked where the catalog claims to quote them. Theory normalization constants and RS-flavor policy-scale estimates were skipped per the L001 policy carve-out.
+All 22 beauty-family process entries were independently checked against the cited web source or the local source snapshot under `flavor_catalog/references/<process_id>/`. I re-fetched all cited arXiv abstract pages used as key references and checked that the author/title metadata matched the catalog citation at the level needed for identification. Measured observables in `pdg_or_equivalent` and measured-observable supporting blocks were checked for the quoted numerical values. Quoted SM predictions or theory paper numerical predictions were checked where the catalog claims to quote them. Theory normalization constants and RS-flavor policy-scale estimates were skipped per the L001 policy carve-out.
 
-Verdict: 21 VERIFIED / 0 MISMATCH / 0 UNRESOLVABLE.
+Verdict: 22 VERIFIED / 0 MISMATCH / 0 UNRESOLVABLE.
 
 ## B001 - VERIFIED
 
@@ -88,6 +88,22 @@ Verdict: 21 VERIFIED / 0 MISMATCH / 0 UNRESOLVABLE.
 | Supporting HFLAV/PDG radiative-decay sources | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf ; https://pdg.lbl.gov/2024/reviews/rpp2024-rev-b-meson-prod-decay.pdf | Y | Local snapshots match the catalog's quoted average context. |
 | SM prediction `3.40 +/- 0.17 x 10^-4` | https://arxiv.org/abs/2002.01548 | Y | Misiak/Rehman/Steinhauser snapshot contains the quoted SM value. |
 | Older SM comparison `3.36 +/- 0.23 x 10^-4`; Belle II projection/source | https://arxiv.org/abs/1503.01789 ; https://arxiv.org/abs/2210.10220 ; https://arxiv.org/abs/1608.02344 | Y | Metadata matched; numerical values/projection context verified where claimed. |
+
+## B012 - VERIFIED
+
+| Claim | Source URL | Verified? | Note |
+|---|---|---:|---|
+| HFLAV Dec. 2024 `B(B0 -> K*(892)0 gamma) = (41.63 +/- 0.92) x 10^-6` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Fetched HFLAV PDF Table 62 contains the quoted average; local snapshot agrees. |
+| HFLAV Dec. 2024 `B(B+ -> K*(892)+ gamma) = (39.5 +/- 1.0) x 10^-6` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Fetched HFLAV PDF Table 57 contains the quoted average; local snapshot agrees. |
+| HFLAV Dec. 2024 `Delta_0+(B -> K* gamma) = 0.059 +/- 0.014` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Fetched HFLAV PDF text and local snapshot contain the quoted value and the HFLAV caution that Table 76 isospin averages are naive. |
+| HFLAV Dec. 2024 `A_CP(B -> K* gamma) = -0.004 +/- 0.011` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Fetched HFLAV PDF Table 96 contains Belle/BaBar inputs and the `-0.004 +/- 0.011` average. |
+| PDG pdgLive 2025 `S_{K*(892)0 gamma} = -0.08 +/- 0.17` | https://pdglive.lbl.gov/DataBlock.action?node=S042SX4 | Y | Fetched pdgLive HTML contains S042SX4 and `OUR AVERAGE -0.08 +/- 0.17`; local snapshot agrees. |
+| PDG pdgLive 2025 `C_{K*(892)0 gamma} = 0.03 +/- 0.10` | https://pdglive.lbl.gov/Particle.action?node=S042 | Y | Fetched current B0 listing contains `C_{K*(892)0 gamma}` with `0.03 +/- 0.10`; local snapshot agrees. |
+| Belle II 2024 supporting measurement: 2019-2022 data, `365 fb^-1`, `(387 +/- 6) x 10^6 Upsilon(4S)` events, and quoted B -> K* gamma values | https://arxiv.org/abs/2411.10127 | Y | arXiv metadata matches Belle II/I. Adachi; the abstract contains the dataset and the quoted branching-fraction/CP/isospin values. |
+| Belle 2017 support: evidence for isospin violation, `3.1 sigma`, `772 x 10^6 BBbar` pairs | https://arxiv.org/abs/1707.00394 | Y | arXiv metadata matches T. Horiguchi et al. (Belle); abstract contains the significance, dataset, and observable statement. |
+| BaBar 2009 support: `383 million BBbar`, `BF(B0)=4.47... x 10^-5`, `BF(B+)=4.22... x 10^-5`, CP/isospin intervals | https://arxiv.org/abs/0906.2177 | Y | arXiv metadata matches B. Aubert et al. (BaBar); abstract contains the quoted values. |
+| LHCb 2014 support: photon-polarization observation in `b -> s gamma`, `5.2 sigma` | https://arxiv.org/abs/1402.6852 | Y | arXiv metadata matches R. Aaij et al. (LHCb); abstract contains the `5.2 sigma` observation statement. |
+| CFW 2008 key reference metadata | https://arxiv.org/abs/0804.1954 | Y | arXiv title/authors match Csaki, Falkowski, and Weiler; RS flavor-scale numerals treated as theory context under the L001 carve-out. |
 
 ## B015 - VERIFIED
 
