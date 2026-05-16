@@ -1,0 +1,88 @@
+% Flavor catalog per-process draft.
+% process_id: T002
+% family: top_higgs_ew
+% owner_agent_id: PKA-T002
+% Canonical metadata sidecar: T002.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(t\to u Z\)}{t -> u Z} FCNC Top Decay}
+
+\subsection*{Process}
+The process is the flavor-changing neutral-current decay
+\(\mathcal{B}(t\to uZ)\), catalog id T002 in the top/Higgs/electroweak
+family.  It covers direct LHC searches for a top quark coupled to an up quark
+and a \(Z\) boson, including interpretations that combine \(t\bar t\) events
+with one FCNC top decay and single-top production in association with a \(Z\)
+boson.
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth numerical entries are the
+\texttt{pdg\_or\_equivalent} block in \texttt{T002.yaml}.  The current PDG
+2025 top-quark listing quotes the ATLAS AAD 23AS limits in units of
+\(10^{-3}\):
+\[
+  \mathcal{B}(t\to Zu) < 6.2\times 10^{-5}
+\]
+for the left-handed \(tuZ\) benchmark and
+\[
+  \mathcal{B}(t\to Zu) < 6.6\times 10^{-5}
+\]
+for the right-handed benchmark, both at 95\% CL.  The same PDG table records
+the CMS SIRUNYAN 17E comparison limit
+\(\mathcal{B}(t\to Zu)<0.022\%\), also at 95\% CL.  The local PDG snapshot is
+\texttt{flavor\_catalog/references/T002/pdg\_2025\_top\_fcnc\_tzq.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In warped models with bulk fermions, non-universal zero-mode profiles and
+mass-basis rotations can induce flavor off-diagonal neutral-current \(Z\)
+couplings.  The \(t\to uZ\) channel probes the first--third generation
+up-sector rotation and is therefore complementary to charm and neutral-meson
+constraints.  In anarchic RS language it is sensitive to the same profile and
+Yukawa structures that control \(u\)-\(c\)-\(t\) mixing, while remaining a
+direct top observable rather than a low-energy hadronic matrix-element
+constraint.
+
+\subsection*{Post-2008 developments}
+The CFW reference point is arXiv:0804.1954, which framed generic warped-flavor
+bounds before the full LHC top-FCNC program.  Shortly after it, the RS-specific
+Casagrande--Goertz--Haisch--Neubert--Pfoh analysis included
+\(t\to c(u)Z\), noting that \(t\to uZ\) is typically about two orders of
+magnitude below \(t\to cZ\) in the minimal RS model.  Since then the key
+experimental development is flavor-separated LHC sensitivity.  CMS used
+\(19.7~\mathrm{fb}^{-1}\) at \(\sqrt{s}=8~\mathrm{TeV}\) and found
+\(\mathcal{B}(t\to Zu)<0.022\%\).  ATLAS later used
+\(139~\mathrm{fb}^{-1}\) at \(\sqrt{s}=13~\mathrm{TeV}\), combining single-top
+\(tZ\) production and \(t\bar t\) FCNC-decay topologies, and improved the
+\(t\to Zu\) reach to \(6\times10^{-5}\)-level limits.
+
+\subsection*{Constraint validity and model dependence}
+Experimentally this is a clean 95\% CL upper limit; there is no Standard Model
+signal at the observable level.  Aguilar-Saavedra's benchmark SM estimate is
+\(\mathcal{B}(t\to uZ)\simeq 8\times10^{-17}\).  The interpretation is
+operator-dependent: ATLAS quotes left- and right-handed tensor-SMEFT
+benchmarks, while an RS model can generate vector-like \(Ztu\) couplings,
+KK-mediated contact effects, or correlated shifts in other electroweak
+vertices.  A live constraint therefore needs a matching convention before the
+branching-ratio limit can be used as a hard scan cut.
+
+\subsection*{Code coverage in this repo}
+Coverage is \textbf{NO}.  I reran the required plan greps and a targeted search
+for \(t\to uZ\), \(tZu\), \(tuZ\), \(tZq\), and generic FCNC text across
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/}.  The only
+targeted code-directory hits were generic FCNC prose/comments, not an
+observable implementation, likelihood, or branching-ratio check.
+
+\subsection*{Implementation difficulty}
+The cataloging difficulty is medium, but production integration is \textbf{HIGH}.
+The repo has no electroweak top-FCNC operator basis, no \(tuZ\) decay-width or
+single-production reinterpretation, and no top-sector flavor-rotation
+interface.  Implementing it honestly would require new RS-to-SMEFT or direct
+\(Ztu\) matching before comparing this limit to scan points.
+
+\subsection*{Key references}
+\texttt{PDG2025TopFCNCTZQ}; \texttt{ATLAS2023TopFCNCTZQ};
+\texttt{CMS2017TZQFCNC}; \texttt{AguilarSaavedra2004TopFCNC};
+\texttt{CsakiFalkowskiWeiler2008WarpedFlavor};
+\texttt{CasagrandeGoertzHaischNeubertPfoh2008RSFlavor}.
