@@ -1,0 +1,67 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T016
+generated_at: "2026-05-16T14:23:05-04:00"
+sources:
+  - key: PDG2025ZLFVListing
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Review of Particle Physics, 2025 update: Z-boson listing"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    sha256_of_local_snapshot: "sha256:d6c641885851da0e0895f20907389b7fc2dce1c50d2df5b787da97ba81820bab"
+    snapshot_path: "flavor_catalog/references/T016/pdg2025_z_lfv_listing.txt"
+  - key: ATLAS2021ZLFVTau
+    arxiv_id: "2105.12491"
+    DOI: "10.1103/PhysRevLett.127.271801"
+    title: "Search for lepton-flavor-violation in Z-boson decays with tau-leptons with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2105.12491"
+    sha256_of_local_snapshot: "sha256:0869c301a050309a53df19e91d55ad380de936c6fc7c17d3a096a891dfef57d9"
+    snapshot_path: "flavor_catalog/references/T016/atlas2021_prl_z_ltau_arxiv_abs.txt"
+  - key: ATLAS2020ZLFVTauHad
+    arxiv_id: "2010.02566"
+    DOI: "10.1038/s41567-021-01225-z"
+    title: "Search for charged-lepton-flavour violation in Z-boson decays with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2010.02566"
+    sha256_of_local_snapshot: "sha256:e96e6d395dcd7f3691fa26ce8d76c6daadd60e44df353d1e8c6c935e7c486fee"
+    snapshot_path: "flavor_catalog/references/T016/atlas2020_natphys_z_ltau_arxiv_abs.txt"
+  - key: CMS2025ZLFV
+    arxiv_id: "2508.07512"
+    DOI: "10.1103/8lw4-6lyk"
+    title: "Search for charged lepton flavor violating Z and Z' boson decays in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2025
+    url: "https://arxiv.org/abs/2508.07512"
+    sha256_of_local_snapshot: "sha256:9370bd0fcb6e0bf640c805e52fe47bbf20834020746fe298c206be9a83cdf067"
+    snapshot_path: "flavor_catalog/references/T016/cms2025_smp23003_arxiv_abs.txt"
+  - key: CalibbiMarcanoRoy2021ZLFV
+    arxiv_id: "2107.10273"
+    DOI: "10.1140/epjc/s10052-021-09777-3"
+    title: "Z lepton flavour violation as a probe for new physics at future e+e- colliders"
+    authors: "Lorenzo Calibbi, Xabier Marcano, Joydeep Roy"
+    year: 2021
+    url: "https://arxiv.org/abs/2107.10273"
+    sha256_of_local_snapshot: "sha256:b6bc6608c1cd6572c01428b6287853c5870463a9c00290f807a2a5fd9e156e93"
+    snapshot_path: "flavor_catalog/references/T016/calibbi_marcano_roy2021_arxiv_abs.txt"
+  - key: CsakiFalkowskiWeiler2008WarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:14fc3c237532c57d30e98650191433604071e869c2c38d6a2f9539d7254eb76b"
+    snapshot_path: "flavor_catalog/references/T016/csaki_falkowski_weiler2008_arxiv_abs.txt"
+  - key: PerezRandall2008WarpedLeptonFlavor
+    arxiv_id: "0805.4652"
+    DOI: "10.1088/1126-6708/2009/01/077"
+    title: "Natural Neutrino Masses and Mixings from Warped Geometry"
+    authors: "Gilad Perez, Lisa Randall"
+    year: 2008
+    url: "https://arxiv.org/abs/0805.4652"
+    sha256_of_local_snapshot: "sha256:974ccf409a6f1e7040d923a18055f234aa7064f01a698294c8117507c4747f5f"
+    snapshot_path: "flavor_catalog/references/T016/perez_randall2008_arxiv_abs.txt"

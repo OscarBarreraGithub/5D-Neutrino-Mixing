@@ -1,0 +1,90 @@
+% Flavor catalog per-process draft.
+% process_id: T016
+% family: top_higgs_ew
+% owner_agent_id: PKA-T016
+% Canonical metadata sidecar: T016.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(Z\to e\tau\)}{Z -> e tau} LFV Decay}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(Z\to e^\pm\tau^\mp)\).
+This entry covers the charged-lepton-flavor-violating on-shell \(Z\)-boson
+decay into one electron and one tau lepton, summed over charge-conjugate final
+states, in the top/Higgs/electroweak family.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical current listing is the PDG 2025 \(Z\)-boson LFV row, which gives
+\[
+  \mathcal{B}(Z\to e^\pm\tau^\mp) < 5.0\times 10^{-6}
+\]
+at 95\% CL for the charge-summed final state
+(\texttt{PDG2025:T016:zetau\_limit}).  This is the same headline limit as the
+combined ATLAS tau-lepton result
+(\texttt{ATLAS2021:T016:zetau\_combined\_limit}), obtained after combining
+the leptonically decaying tau search with previously published hadronic-tau
+analyses.  The standalone ATLAS leptonically decaying tau channel gives
+\(<7.0\times10^{-6}\) at 95\% CL
+(\texttt{ATLAS2021:T016:zetau\_leptonic\_limit}).  CMS 2025 searched the same
+channel with \(138~\mathrm{fb}^{-1}\) at \(\sqrt{s}=13~\mathrm{TeV}\) and
+quotes an observed (expected) limit of
+\(13.8~(11.4)\times10^{-6}\) at 95\% CL
+(\texttt{CMS2025:T016:zetau\_limit}; \texttt{CMS2025:T016:dataset}).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Warped or partially composite lepton sectors can generate non-universal
+neutral-current couplings before rotating to charged-lepton mass eigenstates.
+After that rotation, a non-diagonal \(Z e\tau\) vertex can appear from gauge
+KK mixing, zero-mode coupling distortions, or lepton-sector flavor breaking.
+This process is therefore a direct collider probe of electroweak lepton-flavor
+violation in a lepton-sector extension, not a constraint implemented in the
+current quark \(\Delta F=2\) scan.
+
+\subsection*{Post-2008 developments}
+The arXiv:0804.1954 warped-flavor baseline predates the LHC \(Z\)-LFV program.
+Since then ATLAS superseded the old LEP-era \(Z\to e\tau\) sensitivity with
+Run-2 searches using hadronically and leptonically decaying tau channels; the
+combined ATLAS result is now the PDG-listed \(5.0\times10^{-6}\) bound.  CMS
+added a full-Run-2 search covering \(Z\to e\mu\), \(Z\to e\tau\), and
+\(Z\to\mu\tau\); its \(e\tau\) result is weaker than the ATLAS/PDG bound but is
+an independent experimental cross-check.  Phenomenology work on future
+\(e^+e^-\) colliders has also sharpened the interpretation: a Tera-\(Z\)
+program with \(\mathcal{O}(10^{12})\) \(Z\) decays is expected to be more
+promising for \(Z\to\tau\ell\) than for \(Z\to\mu e\), because low-energy
+\(\mu\)-flavor constraints are much more restrictive.
+
+\subsection*{Constraint validity and model dependence}
+Experimentally this is a clean direct upper limit on a forbidden Standard
+Model decay, normalized to the inclusive \(Z\) branching fraction.  As a model
+constraint it is not universal: the same effective \(Z e\tau\) structures may
+also induce tau LFV decays, dipoles, or four-lepton operators depending on the
+UV completion.  In the catalog it should be classified as a direct collider
+constraint on an off-diagonal \(Z e\tau\) coupling, with correlations to
+low-energy tau observables left for a future lepton-sector likelihood.
+
+\subsection*{Code coverage in this repo}
+Coverage is \textbf{NO}.  The required broad greps and a targeted search for
+\texttt{Z -> e tau}, \texttt{Z -> tau e}, \texttt{Zetau}, and related
+LFV-\(Z\) strings across \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \(Z\to e\tau\) observable implementation.  The only
+charged-lepton LFV backend seen is \(\mu\to e\gamma\)
+(\texttt{flavorConstraints/muToEGamma.py:75}), called by the scan at
+\texttt{scanParams/scan.py:524}; the modern phenomenology policy surface is
+limited to \(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\)
+(\texttt{quarkConstraints/modern/phenomenology.py:23}).
+
+\subsection*{Implementation difficulty}
+Production integration is \textbf{HIGH}.  Storing the external branching-ratio
+limit is simple, but a live RS constraint needs a new electroweak LFV operator
+convention, matching from lepton localization and \(Z\)-coupling distortions to
+left- and right-handed \(Z e\tau\) amplitudes, and a policy for combining the
+direct \(Z\)-pole bound with low-energy tau LFV limits.
+
+\subsection*{Key references}
+\texttt{PDG2025ZLFVListing}; \texttt{ATLAS2021ZLFVTau};
+\texttt{ATLAS2020ZLFVTauHad}; \texttt{CMS2025ZLFV};
+\texttt{CalibbiMarcanoRoy2021ZLFV};
+\texttt{CsakiFalkowskiWeiler2008WarpedFlavor};
+\texttt{PerezRandall2008WarpedLeptonFlavor}.
