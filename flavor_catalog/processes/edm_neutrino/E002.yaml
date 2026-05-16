@@ -59,9 +59,18 @@ status_history:
     agent_id: "CA"
     cycle: 2
     reason: "Checker cycle 2 ca_w5a_charged_lepton_edm_v2 verified WA-v2 traceability and checklist items CHK-1..CHK-8."
+  - from: "CHECKER-DONE"
+    to: "OPUS-APPROVED"
+    state: "OPUS-APPROVED"
+    at: "2026-05-16T17:30:00-04:00"
+    timestamp: "2026-05-16T17:30:00-04:00"
+    agent: "Opus-round-2"
+    agent_id: "Opus-round-2"
+    round_id: "opus_round_002"
+    reason: "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
 checker_passed_at: "2026-05-16T15:30:46-04:00"
-opus_approved_at: null
-last_updated_at: "2026-05-16T15:30:46-04:00"
+opus_approved_at: "2026-05-16T17:30:00-04:00"
+last_updated_at: "2026-05-16T17:30:00-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_muon_edm_datablock.txt: "sha256:2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1"
