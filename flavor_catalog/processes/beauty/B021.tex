@@ -1,0 +1,86 @@
+% Flavor catalog per-process template.
+% process_id: B021
+% family: beauty
+% owner_agent_id: PKA-B021
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B021.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B021: \(\Lambda_b^0\to\Lambda\ell^+\ell^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\Lambda_b^0\to\Lambda\ell^+\ell^-\).
+This is the baryonic exclusive \(b\to s\ell^+\ell^-\) channel.  The current
+canonical measured mode is \(\Lambda_b^0\to\Lambda\mu^+\mu^-\); no comparable
+PDG electron-mode average was found in this PKA pass.
+
+\subsection*{PDG / equivalent value(s)}
+The sidecar is the numerical source of truth.  PDG Live's 2025
+\(\Lambda_b^0\) listing gives
+\[
+  \mathcal B(\Lambda_b^0\to\Lambda\mu^+\mu^-)
+  =(1.08\pm0.28)\times10^{-6},
+\]
+from the decay-mode table under source key
+\texttt{PDG2025:LambdaBToLambdaMuMu}.  The supporting LHCb angular analysis
+\texttt{LHCb2015:LambdaBToLambdaMuMu} reports, for
+\(15<q^2<20\,{\rm GeV}^2/c^4\),
+\[
+  \frac{d\mathcal B}{dq^2}
+  =(1.18^{+0.09}_{-0.08}\pm0.03\pm0.27)\times10^{-7}
+  ({\rm GeV}^2/c^4)^{-1},
+\]
+and \(A_{\rm FB}^{\ell}=-0.05\pm0.09\pm0.03\),
+\(A_{\rm FB}^{h}=-0.29\pm0.07\pm0.03\).
+Local snapshots are in \texttt{flavor\_catalog/references/B021/}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This mode probes \(\Delta B=1\) semileptonic FCNC operators rather than the
+\(\Delta F=2\) four-quark basis implemented for neutral meson mixing.  Warped
+flavor models can generate flavor-changing \(Z\) couplings, KK electroweak
+exchange, and loop-induced dipoles feeding \(C_7\), \(C_9\), \(C_{10}\), and
+primed semileptonic coefficients.  The baryon final state adds spin and
+polarization information unavailable in \(B\to K^{(*)}\ell^+\ell^-\), so it is
+a complementary diagnostic of chirality and hadronic systematics.
+
+\subsection*{Post-2008 developments}
+The arXiv:0804.1954 RS-flavor baseline predates this channel as an observed
+rare decay.  CDF reported the first observation in 2011 with 24 signal events,
+5.8 standard-deviation significance, and
+\(\mathcal B=(1.73\pm0.42\pm0.55)\times10^{-6}\).  LHCb then measured
+differential branching fractions with 2011 data and, using \(3.0\,{\rm fb}^{-1}\),
+published the 2015 \(q^2\)-binned branching-fraction and angular analysis used
+above.  Lattice-QCD work by Detmold, Lin, Meinel, and Wingate supplied
+post-2008 \(\Lambda_b\to\Lambda\) form factors, making clear that the baryonic
+mode should not be folded into the mesonic \(B\to K^{(*)}\ell\ell\) treatment.
+
+\subsection*{Constraint validity and model dependence}
+This is a useful catalog constraint but not a single-number hard bound.  The
+interpretation depends on \(q^2\) binning, charmonium vetoes, normalization to
+\(\Lambda_b^0\to J/\psi\Lambda\), baryonic form factors, and nonlocal charm
+effects.  Its most robust role is as a \(\Delta B=1\) semileptonic cross-check
+with different hadronic systematics from mesonic rare \(B\) decays.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The modern phenomenology surface lists only
+\(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\) at
+\texttt{quarkConstraints/modern/phenomenology.py:23}.  The only live
+lepton-flavor module is the \(\mu\to e\gamma\) dipole check at
+\texttt{flavorConstraints/muToEGamma.py:75}.  Required plan greps and targeted
+searches for \(\Lambda_b\), \(b\to s\), \(C_9\), \(C_{10}\), and semileptonic
+rare decays found no B021 implementation.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production constraint would need a new \(\Delta B=1\)
+semileptonic Hamiltonian, RS matching onto \(C_7,C_9,C_{10}\) and primed
+operators, baryonic form factors, \(q^2\)-bin predictions, angular likelihoods,
+and experimental covariance/normalization treatment.
+
+\subsection*{Key references}
+\texttt{PDG2025:LambdaBToLambdaMuMu},
+\texttt{LHCb2015:LambdaBToLambdaMuMu},
+\texttt{CDF2011:LambdaBToLambdaMuMu},
+\texttt{DetmoldLinMeinelWingate2013:LambdaBToLambdaFormFactors}, and
+\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.

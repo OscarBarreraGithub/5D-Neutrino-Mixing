@@ -1,0 +1,42 @@
+Source key: PDG2025:LambdaBToLambdaMuMu
+Source: PDG Live, 2025 Review of Particle Physics update
+URL: https://pdgapi.lbl.gov/listings/S040.26
+Related PDG Live page: https://pdglive.lbl.gov/Particle.action?node=S040
+Accessed: 2026-05-16
+License note: PDG Live states Review of Particle Physics content is CC BY 4.0
+Local snapshot type: minimal extracted text; no PDG PDF stored.
+
+PDGID S040.26: Lambda_b()0 --> Lambda mu+ mu-
+Edition: 2025
+PDG summary value from Lambda_b^0 decay-mode table:
+  B(Lambda_b^0 --> Lambda mu+ mu-) = (1.08 +- 0.28) x 10^-6
+  daughter momentum p = 2695 MeV/c
+
+PDG API related data for S040.26:
+  Related PDGID S040R19: G(Lambda_b0 --> Lambda mu+ mu-)/G(total)
+  LHCb input AAIJ 2013AJ, Phys. Lett. B725 (2013) 25:
+    value_text = (0.96 +-0.16 +-0.25) E-6
+    note: summed differential rates excluding J/psi and psi(2S) q^2 regions.
+  CDF input AALTONEN 2011AI, Phys. Rev. Lett. 107 (2011) 201802:
+    value_text = (1.73 +-0.42 +-0.55) E-6
+
+Additional PDG Live Lambda_b^0 page entries relevant to this process:
+  Partial BF B(Lambda_b -> Lambda mu+ mu-) for 15.0 < q^2 < 20.0 GeV^2/c^4:
+    (6.0 +- 1.3) x 10^-7
+  f_L(mu mu) longitudinal polarization fraction:
+    0.61 +0.11 -0.14
+  A_FB^l(mu mu):
+    -0.39 +- 0.04
+  Delta(A_FB^l(mu mu)):
+    -0.05 +- 0.09
+  A_FB^h(p pi):
+    -0.30 +- 0.05
+  A_FB^{l h}:
+    0.25 +- 0.04
+
+Extraction notes:
+  The process catalog uses the total PDG branching fraction as the canonical
+  measured observable for B021. The q^2-binned and angular entries are retained
+  as supporting PDG-equivalent measurements because this baryonic b -> s mu mu
+  mode is experimentally interpreted through bin-dependent form factors and
+  angular distributions.
