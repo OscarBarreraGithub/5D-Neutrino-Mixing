@@ -6,7 +6,7 @@ process_name: "Radium-225 and xenon-129 electric dipole moments"
 owner: "PKA"
 owner_agent_id: "PKA-E007"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -32,9 +32,19 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w5b_charm_edm"
     reason: "Writer polish completed for wa_w5b_charm_edm; numerical claims checked against sidecar/source snapshots."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-16T15:17:35-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-16T15:17:35-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w5b_charm_edm"
+    issues:
+      - "CHK-1: TeX lines 70-84 include projected/context numerical claims (1e-28 e cm, 4e-29 e cm, 15 day half-life, spin 1/2, 2--3 orders, 2021--2026, more than 2 orders, 2023--2027, several orders) that trace to YAML post_2008_context entries rather than pdg_or_equivalent blocks as required by the checker checklist."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:46:21-04:00"
+last_updated_at: "2026-05-16T15:17:35-04:00"
 version: "0.1.0"
 source_shas:
   bishof2016_arxiv1606_04931.txt: "sha256:a9042e38b7b39cebf7ceeb3e42126f2541557d4b6bfbe36c2847f7efe8d46d57"

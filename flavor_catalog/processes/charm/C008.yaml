@@ -6,7 +6,7 @@ process_name: "LFV semileptonic charm decay D+ -> pi+ e mu"
 owner: "PKA"
 owner_agent_id: "PKA-C008"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - state: "WRITER-INITIATED"
@@ -25,9 +25,18 @@ status_history:
     agent_id: "WA"
     batch_id: "wa_w5b_charm_edm"
     reason: "Writer polish completed for wa_w5b_charm_edm; numerical claims checked against sidecar/source snapshots."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-16T15:17:35-04:00"
+    agent: "CA"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-16T15:17:35-04:00"
+    agent_id: "CA"
+    batch_id: "ca_w5b_charm_edm"
+    reason: "Checker verified CHK-1 through CHK-8 for ca_w5b_charm_edm."
+checker_passed_at: "2026-05-16T15:17:35-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T14:46:21-04:00"
+last_updated_at: "2026-05-16T15:17:35-04:00"
 version: "0.1.0"
 source_shas:
   babar2011_arxiv1107_4465.txt: "sha256:7615bb1fbf36b13a100c993532099e1400fbd2bf6234a0d1d4d0023b53813744"
