@@ -81,11 +81,11 @@ kaon code is \(\Delta F=2\) mixing machinery rather than a \(\Delta S=1\)
 semileptonic decay calculation.
 
 \subsection*{Implementation difficulty}
-\textbf{HIGH.}  A production implementation would need a new \(s\to d\nu\bar\nu\)
-Wilson/operator path, the CP-odd \(K_L\) projection, SM normalization and
-interference handling, neutrino-flavor bookkeeping, and a mode-level likelihood
-or limit treatment.  The existing audited code can supply kaon-mixing context,
-but not the rare-decay observable itself.
+\textbf{MEDIUM.}  A production implementation would need a new
+\(s\to d\nu\bar\nu\) Wilson/operator path and the CP-odd \(K_L\) projection,
+but the observable uses standard clean hadronic inputs.  No new lattice, RG, or
+long-distance calculation has been identified; the existing audited code can
+supply kaon-mixing context, but not the rare-decay observable itself.
 
 \subsection*{Key references}
 Process-local keys deposited in \texttt{flavor\_catalog/references/K005/}:

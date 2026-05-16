@@ -40,9 +40,18 @@ status_history:
     agent_id: "CA"
     issues:
       - "CHK-6: Implementation difficulty should be MEDIUM under the rubric. K005 needs a new s->d nu nubar semileptonic operator path and standard hadronic inputs, matching K004; no new lattice/RG/long-distance mode calculation is identified."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-16T11:54:07-04:00"
+    agent: "WA-v2"
+    cycle: 2
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-16T11:54:07-04:00"
+    agent_id: "WA-v2"
+    reason: "Addressed CA CHK-6 by rerating K005 implementation difficulty from HIGH to MEDIUM."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T11:46:24-04:00"
+last_updated_at: "2026-05-16T11:54:07-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_pdgLive_S013R40.txt: "sha256:9772703902465867a6be4f8abb2b3893f4aed60e43ade76cf191384ba66f2dfb"
@@ -133,8 +142,8 @@ code_coverage:
     - "No implementation hit for K_L -> pi^0 nu nubar, KOTO, NA62, or s->d nu nubar rare-decay strings."
     - "The only relevant K_L string hit was quarkConstraints/deltaf2.py:615, DELTA_M_K = 3.484e-15 GeV, a K_L-K_S mass-difference input, not this decay."
     - "Related kaon Delta F=2 coverage exists in quarkConstraints/deltaf2.py and quarkConstraints/modern/phenomenology.py, but it is mixing-only."
-implementation_difficulty: "HIGH"
-implementation_difficulty_reason: "Requires a new Delta S = 1 semileptonic s->d nu nubar observable path, CP-odd K_L projection, normalization/interference with SM amplitudes, and neutrino-flavor treatment; the current repo has only Delta F=2 kaon mixing machinery."
+implementation_difficulty: "MEDIUM"
+implementation_difficulty_reason: "Requires a new Delta S = 1 semileptonic s->d nu nubar observable path and CP-odd K_L projection, but uses standard clean hadronic inputs and no new lattice, RG, or long-distance calculation has been identified."
 open_issues:
   - "HFLAV was not used as a canonical source because it averages b-hadron, c-hadron, and tau properties, not rare kaon modes."
   - "WA/CA should decide whether to include an explicit Grossman-Nir-bound reference in the polished process text."
