@@ -6,7 +6,7 @@ process_name: "Flavor-changing neutral-current top decay t -> H c"
 owner: "PKA"
 owner_agent_id: "PKA-T007"
 writer_agent_id: null
-checker_agent_id: null
+checker_agent_id: "CA"
 opus_signoff_id: null
 status_history:
   - from: null
@@ -24,9 +24,17 @@ status_history:
     agent: "WA"
     agent_id: "WA"
     reason: "Writer polish for wa_w23_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
-checker_passed_at: null
+  - from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    state: "CHECKER-DONE"
+    at: "2026-05-16T12:31:56-04:00"
+    timestamp: "2026-05-16T12:31:56-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    reason: "CA batch ca_w23_top_higgs_ew verified CHK-1 through CHK-8."
+checker_passed_at: "2026-05-16T12:31:56-04:00"
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:15:15-04:00"
+last_updated_at: "2026-05-16T12:31:56-04:00"
 version: "0.1.0"
 source_shas:
   pdg2026_top_hc_datablock.txt: "sha256:6b6d2c99c13e85b27ae9aa2c156ec13e91f088dd3cf3660a1ab9f8e9e1806845"

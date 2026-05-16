@@ -24,9 +24,18 @@ status_history:
     agent: "WA"
     agent_id: "WA"
     reason: "Writer polish for wa_w23_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
+  - from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    state: "WRITER-REWORK"
+    at: "2026-05-16T12:31:56-04:00"
+    timestamp: "2026-05-16T12:31:56-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    issues:
+      - "CHK-1: the headline PDG values omit an explicit uncertainty field, and several TeX numerical claims trace only to auxiliary_values rather than pdg_or_equivalent entries; the auxiliary blocks also lack explicit year/uncertainty fields required by the CA checklist."
 checker_passed_at: null
 opus_approved_at: null
-last_updated_at: "2026-05-16T12:15:15-04:00"
+last_updated_at: "2026-05-16T12:31:56-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_higgs_lfv_review.txt: "sha256:789633a52f0530528f01797e960cd3aac017792fc3481e41c59c5171a4c2eda1"
