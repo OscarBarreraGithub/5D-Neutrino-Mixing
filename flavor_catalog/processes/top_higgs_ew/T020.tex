@@ -1,0 +1,94 @@
+% Flavor catalog per-process draft.
+% process_id: T020
+% family: top_higgs_ew
+% owner_agent_id: PKA-T020
+% Canonical metadata sidecar: T020.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(h\to e\mu\)}{h -> e mu} LFV Higgs Decay}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(\mathcal{B}(h\to e^\pm\mu^\mp)\).
+This entry catalogs the lepton-flavor-violating Higgs decay \(h\to e\mu\)
+in the top/Higgs/electroweak family.  It covers direct ATLAS and CMS searches
+for a \(125~\mathrm{GeV}\) Higgs boson decaying to an opposite-sign
+electron--muon pair.
+
+\subsection*{PDG / equivalent value(s)}
+The source-of-truth values are in the \texttt{pdg\_or\_equivalent} block of
+\texttt{T020.yaml}.  The PDG 2025 Higgs review summarizes the full
+\(\sqrt{s}=13~\mathrm{TeV}\) Run-2 direct limits on LFV Higgs decays
+(\texttt{PDG2025HiggsLFVReview}).  For \(h\to e\mu\), PDG quotes
+\[
+  \mathcal{B}(h\to e\mu) < 4.4\times 10^{-5}
+  \quad (4.7\times 10^{-5}\ \mathrm{expected})
+\]
+from CMS at 95\% CL using \(138~\mathrm{fb}^{-1}\)
+(\texttt{CMS2023HiggsLFVEMu}; \texttt{PDG2025:T020:cms\_run2}).  PDG also
+quotes the ATLAS limit
+\[
+  \mathcal{B}(h\to e\mu) < 6.2\times 10^{-5}
+  \quad (5.9\times 10^{-5}\ \mathrm{expected})
+\]
+at 95\% CL (\texttt{PDG2025:T020:atlas\_run2}).  The primary ATLAS abstract
+reports the same search as \(6.1\times 10^{-5}\) observed and
+\(5.8\times 10^{-5}\) expected with \(139~\mathrm{fb}^{-1}\)
+(\texttt{ATLAS2020HiggsEMu}); the PDG rounding is kept as the catalog
+headline.  The CMS number is the strongest direct single-experiment limit.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Warped or partially composite lepton sectors can generate off-diagonal
+physical Higgs Yukawa couplings after the charged-lepton mass matrix is
+diagonalized.  The \(h\to e\mu\) search directly probes the \(e\)-\(\mu\)
+entries of that Higgs Yukawa matrix and is therefore complementary to the
+repo's existing \(\mu\to e\gamma\) dipole filter.  It is not a constraint on
+the current quark \(\Delta F=2\) scan by itself; it belongs to a future
+lepton-sector extension.
+
+\subsection*{Post-2008 developments}
+The requested arXiv:0804.1954 baseline predates the LHC Higgs LFV program
+(\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}).  Harnik, Kopp, and Zupan
+then framed flavor-violating Higgs decays as direct discovery channels and
+showed that lepton-flavor-violating Higgs branching fractions could be sizable
+in generic EFT settings (\texttt{HarnikKoppZupan2012FlavorViolatingHiggs}).
+ATLAS produced the first full Run-2 \(h\to e\mu\) limit with
+\(139~\mathrm{fb}^{-1}\) (\texttt{ATLAS2020HiggsEMu}).  CMS later used
+\(138~\mathrm{fb}^{-1}\), improved the direct Higgs limit to
+\(4.4\times10^{-5}\), and extended the same \(e\mu\) mass scan to
+\(110\)--\(160~\mathrm{GeV}\), where a \(146~\mathrm{GeV}\) excess with
+local/global significance \(3.8/2.8\sigma\) was reported but not interpreted
+as evidence (\texttt{CMS2023HiggsLFVEMu}).
+
+\subsection*{Constraint validity and model dependence}
+Experimentally this is a clean direct upper limit on a Standard-Model-forbidden
+Higgs decay.  A literal branching-ratio cut assumes the SM-like Higgs
+production mixture and total width used by ATLAS and CMS.  Models with altered
+Higgs production, exotic Higgs width, or correlated low-energy LFV signals need
+a recast.  PDG notes that indirect \(\mu\to e\gamma\)-based constraints are
+stronger for this channel, so this entry should be used as the direct collider
+observable rather than the global \(e\)-\(\mu\) LFV bound.
+
+\subsection*{Code coverage in this repo}
+Coverage is \textbf{NO}.  The required greps and a targeted search for
+\texttt{h->e mu}, \texttt{H->e mu}, \texttt{Y\_e\_mu}, and \texttt{Y\_mu\_e}
+across \texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no observable implementation.
+The existing lepton LFV backend is specifically \(\mu\to e\gamma\)
+(\texttt{flavorConstraints/muToEGamma.py:1};
+\texttt{flavorConstraints/muToEGamma.py:75}), and the scan applies that filter
+at \texttt{scanParams/scan.py:523}--\texttt{scanParams/scan.py:524}.  The
+charged-lepton Yukawa helper is diagonal
+(\texttt{yukawa/charged\_lepton.py:1}; \texttt{yukawa/charged\_lepton.py:36}).
+
+\subsection*{Implementation difficulty}
+Production integration is \textbf{HIGH}.  The direct limit is easy to catalog,
+but a scan constraint needs a new charged-lepton Higgs-Yukawa misalignment
+calculation, a convention for \(Y_{e\mu}\) and \(Y_{\mu e}\), and a Higgs-rate
+or total-width interpretation before accepting or rejecting points.
+
+\subsection*{Key references}
+\texttt{PDG2025HiggsLFVReview}; \texttt{CMS2023HiggsLFVEMu};
+\texttt{ATLAS2020HiggsEMu}; \texttt{HarnikKoppZupan2012FlavorViolatingHiggs};
+\texttt{CsakiFalkowskiWeiler2008WarpedFlavor};
+\texttt{PerezRandall2008WarpedLeptonFlavor}.

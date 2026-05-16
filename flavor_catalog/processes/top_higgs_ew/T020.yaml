@@ -1,0 +1,170 @@
+schema: flavor_catalog.process.v1
+process_id: T020
+family: top_higgs_ew
+standard_notation: '\mathcal{B}(h\to e\mu)'
+process_name: "Lepton-flavor-violating Higgs decay h -> e mu"
+owner: "PKA"
+owner_agent_id: "PKA-T020"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T15:31:57-04:00"
+    timestamp: "2026-05-16T15:31:57-04:00"
+    agent_id: "PKA-T020"
+    reason: "Initial PKA draft and source snapshot deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T15:31:57-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2025_higgs_lfv_review.txt: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"
+  cms2023_hig22002_public_page.txt: "sha256:072412def18c4fb70058cc1f0f2e70200333e76954bc44b82df08462c1552729"
+  atlas2020_higgs_ee_emu_arxiv_abs.txt: "sha256:e1e4c131be4c5306a6634bd292aad98b16d4ace0c7ca19ac0645c984818169ea"
+  harnik_kopp_zupan2012_arxiv_abs.txt: "sha256:f883a0176e86095d3019e7a7c32c5d61c232e9e502dc1f23ebf1cd04fd512514"
+  csaki_falkowski_weiler2008_arxiv_abs.txt: "sha256:e503742cb81accf2d9f9d309fe982118124bc44fea6f15c32a03c3958e8d9f84"
+  perez_randall2008_arxiv_abs.txt: "sha256:8b7b65ca3f6b3dd9c610c0aa81fb25f5a58a7663481a6e563b21cabcff76ce3b"
+pdg_or_equivalent:
+  year: 2025
+  source: "Particle Data Group, Status of Higgs Boson Physics review, section 11.4.3.2"
+  source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T020/pdg2025_higgs_lfv_review.txt"
+  sha256: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"
+  value_summary: "PDG 2025 quotes full Run-2 95% CL limits for a 125 GeV Higgs: B(h -> e mu) < 6.2e-5 (5.9e-5 expected) from ATLAS and < 4.4e-5 (4.7e-5 expected) from CMS. The CMS direct limit is strongest."
+  values:
+    - value_id: "PDG2025:T020:cms_run2"
+      observable: "B(h -> e mu), CMS full Run-2 direct search"
+      year: 2025
+      value: "< 4.4 x 10^-5"
+      normalized_value: "< 4.4e-5"
+      expected_value: "< 4.7 x 10^-5"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf"
+      primary_source_key: "CMS2023HiggsLFVEMu"
+      access_date: "2026-05-16"
+      sha256: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"
+    - value_id: "PDG2025:T020:atlas_run2"
+      observable: "B(h -> e mu), ATLAS full Run-2 direct search"
+      year: 2025
+      value: "< 6.2 x 10^-5"
+      normalized_value: "< 6.2e-5"
+      expected_value: "< 5.9 x 10^-5"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf"
+      primary_source_key: "ATLAS2020HiggsEMu"
+      access_date: "2026-05-16"
+      sha256: "sha256:8178cb0c105536bf15da42c0365fc915ab3ae93e1960172761e47fdbba148fa9"
+    - value_id: "CMS2023:T020:emu_limit"
+      observable: "B(H -> e mu), CMS full Run-2 direct search"
+      year: 2023
+      value: "< 4.4 x 10^-5"
+      normalized_value: "< 4.4e-5"
+      expected_value: "< 4.7 x 10^-5"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/HIG-22-002/"
+      access_date: "2026-05-16"
+      sha256: "sha256:072412def18c4fb70058cc1f0f2e70200333e76954bc44b82df08462c1552729"
+    - value_id: "CMS2023:T020:dataset"
+      observable: "CMS dataset for h -> e mu direct search"
+      year: 2023
+      value: "138 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/HIG-22-002/"
+      access_date: "2026-05-16"
+      sha256: "sha256:072412def18c4fb70058cc1f0f2e70200333e76954bc44b82df08462c1552729"
+    - value_id: "CMS2023:T020:mass_scan"
+      observable: "CMS X -> e mu mass scan range and largest excess"
+      year: 2023
+      value: "110-160 GeV scan; largest excess near 146 GeV"
+      uncertainty: null
+      local_significance: "3.8 sigma"
+      global_significance: "2.8 sigma"
+      interpretation: "insufficient to draw conclusions"
+      units: "mass range and excess significance"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/HIG-22-002/"
+      access_date: "2026-05-16"
+      sha256: "sha256:072412def18c4fb70058cc1f0f2e70200333e76954bc44b82df08462c1552729"
+    - value_id: "ATLAS2020:T020:emu_limit"
+      observable: "B(H -> e mu), ATLAS full Run-2 direct search"
+      year: 2020
+      value: "< 6.1 x 10^-5"
+      normalized_value: "< 6.1e-5"
+      expected_value: "< 5.8 x 10^-5"
+      uncertainty: null
+      confidence_level: "95% CL"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/1909.10235"
+      access_date: "2026-05-16"
+      sha256: "sha256:e1e4c131be4c5306a6634bd292aad98b16d4ace0c7ca19ac0645c984818169ea"
+    - value_id: "ATLAS2020:T020:dataset"
+      observable: "ATLAS dataset for h -> e mu direct search"
+      year: 2020
+      value: "139 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/1909.10235"
+      access_date: "2026-05-16"
+      sha256: "sha256:e1e4c131be4c5306a6634bd292aad98b16d4ace0c7ca19ac0645c984818169ea"
+paper_era_references:
+  - key: "CsakiFalkowskiWeiler2008WarpedFlavor"
+    arxiv_id: "0804.1954"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T020/csaki_falkowski_weiler2008_arxiv_abs.txt"
+    sha256: "sha256:e503742cb81accf2d9f9d309fe982118124bc44fea6f15c32a03c3958e8d9f84"
+    provenance_note: "Requested 2008 warped/anarchic-flavor baseline before direct LHC Higgs LFV searches."
+    context_values:
+      - observable: "generic RS KK-gluon lower scale in paper abstract"
+        value: "about 21 TeV"
+      - observable: "composite pseudo-Goldstone Higgs setup scale in paper abstract"
+        value: "about 33 TeV"
+  - key: "PerezRandall2008WarpedLeptonFlavor"
+    arxiv_id: "0805.4652"
+    source_url: "https://arxiv.org/abs/0805.4652"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T020/perez_randall2008_arxiv_abs.txt"
+    sha256: "sha256:8b7b65ca3f6b3dd9c610c0aa81fb25f5a58a7663481a6e563b21cabcff76ce3b"
+    provenance_note: "Warped lepton-sector context for LFV; not a measured h -> e mu source."
+post_2008_theory_context:
+  - key: "HarnikKoppZupan2012FlavorViolatingHiggs"
+    arxiv_id: "1209.1397"
+    source_url: "https://arxiv.org/abs/1209.1397"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T020/harnik_kopp_zupan2012_arxiv_abs.txt"
+    sha256: "sha256:f883a0176e86095d3019e7a7c32c5d61c232e9e502dc1f23ebf1cd04fd512514"
+    context_note: "Theory motivation for direct LFV Higgs searches; the order-10% statement applies to tau-mu and tau-e examples, not to the measured e-mu limit."
+    context_values:
+      - observable: "generic LFV-Higgs EFT allowance for h -> tau mu and h -> tau e"
+        year: 2012
+        value: "order 10%"
+        uncertainty: null
+        units: "branching fraction, theory-context allowance"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Targeted grep for h -> e mu / H -> e mu / Y_e_mu / Y_mu_e across the required code directories returned no hits."
+    - "The existing charged-lepton LFV implementation is mu -> e gamma only: flavorConstraints/muToEGamma.py:1 and flavorConstraints/muToEGamma.py:75."
+    - "The scan applies the mu -> e gamma LFV filter at scanParams/scan.py:523 and scanParams/scan.py:524; no h -> e mu branch or Higgs LFV limit is present."
+    - "Charged-lepton Yukawa support is a diagonal mass-relation helper at yukawa/charged_lepton.py:1 and yukawa/charged_lepton.py:36, not a Higgs LFV observable."
+  grep_commands:
+    - 'rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|H.?->|higgs|Higgs|LFV|lepton.?flavou?r|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+    - 'rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints flavorConstraints scanParams tests -g "!*.ipynb"'
+    - 'rg -n "h\\s*[-=]>\\s*e\\s*mu|H\\s*[-=]>\\s*e\\s*mu|Higgs.*e\\s*mu|LFV.*Higgs|Higgs.*LFV|Y_e_mu|Y_mu_e|Yemu|emu" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "The direct experimental limit is simple to catalog, but production-grade RS integration needs a new charged-lepton Higgs-Yukawa misalignment calculation, a convention for Y_e_mu/Y_mu_e and their relation to B(h -> e mu), and a Higgs production/total-width interpretation. The current code only has diagonal charged-lepton Yukawas and a mu -> e gamma dipole filter."
+open_issues:
+  - "WA/CA should decide whether to present only the PDG-rounded ATLAS value 6.2e-5 or also note the ATLAS arXiv abstract value 6.1e-5."
+  - "A live scan implementation must define how RS lepton-sector parameters map to off-diagonal physical Higgs Yukawa couplings and whether non-SM Higgs production or total-width changes are allowed."
