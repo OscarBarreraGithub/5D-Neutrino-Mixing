@@ -1,0 +1,91 @@
+% Flavor catalog per-process draft.
+% process_id: T003
+% family: top_higgs_ew
+% owner_agent_id: PKA-T003
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: T003.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(t\to c\gamma\)}{t -> c gamma} FCNC Top-Photon Decay}
+
+\subsection*{Process}
+The observable is the flavor-changing neutral-current branching fraction
+\(\mathcal{B}(t\to c\gamma)\), catalog id T003 in the top/Higgs/electroweak
+family.  It covers LHC searches for a top quark coupled to a charm quark and
+a photon, using both single-top-plus-photon production and \(t\bar t\) events
+with one FCNC top decay.
+
+\subsection*{PDG / equivalent value(s)}
+The current charm-specific experimental limit is the CMS-TOP-21-013 Run-2
+result, based on \(138~\mathrm{fb}^{-1}\) at \(\sqrt{s}=13~\mathrm{TeV}\):
+\[
+  \mathcal{B}(t\to c\gamma)<1.51\times10^{-5}
+\]
+at 95\% CL, with an expected limit of \(1.54\times10^{-5}\)
+(\texttt{CMS2024:T003:tcgamma}).  The ATLAS full-Run-2 result, often quoted as
+the PDG-era comparison value, used \(139~\mathrm{fb}^{-1}\) at the same energy
+and gave
+\[
+  \mathcal{B}(t\to c\gamma)<4.2\times10^{-5}
+\]
+for a left-handed \(tq\gamma\) coupling and \(<4.5\times10^{-5}\) for a
+right-handed coupling (\texttt{ATLAS2023:T003:tcgamma\_left},
+\texttt{ATLAS2023:T003:tcgamma\_right}).  The PDG live top summary separately
+lists a generic \(t\to\gamma q\), \(q=u,c\), row
+\(<9.5\times10^{-6}\) at 95\% CL, defined as
+\(\Gamma(t\to\gamma q)/\Gamma(t\to Wb)\); that row is not charm separated
+(\texttt{PDG2026:T003:gammaq\_summary}).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In anarchic warped flavor, the IR-localized top and non-universal fermion
+profiles can generate mass-basis flavor violation in the up sector.  The
+top-photon channel probes an electromagnetic dipole or heavy-vector matching
+direction that is absent from the existing neutral-meson \(\Delta F=2\) lane.
+It is therefore complementary to T001 (\(t\to cZ\)) and T005 (\(t\to cg\)):
+the same top-charm rotations can appear with different gauge quantum numbers.
+
+\subsection*{Post-2008 developments}
+Relative to the arXiv:0804.1954 paper-era RS baseline, the main change is
+experimental.  The LHC program moved this channel from indirect expectations
+and early single-top reinterpretations to direct full-Run-2 searches with
+separate \(tugamma\) and \(tcgamma\) hypotheses.  ATLAS reached the
+\(4\times10^{-5}\) level in 2023.  CMS then published a 2024 analysis with
+\(138~\mathrm{fb}^{-1}\) and improved the charm-specific limit to
+\(1.51\times10^{-5}\).  The Standard Model expectation remains tiny:
+Aguilar-Saavedra quotes
+\(\mathcal{B}(t\to c\gamma)=4.6\times10^{-14}\), so present bounds are still
+new-physics searches rather than SM precision tests.
+
+\subsection*{Constraint validity and model dependence}
+The upper limit is experimentally clean because the SM decay rate is
+negligible.  Its interpretation is model dependent: CMS quotes a single
+nonzero anomalous coupling at a time, while ATLAS separates left- and
+right-handed \(tq\gamma\) benchmarks.  A warped-model scan would need to map
+its top-sector rotations and electromagnetic dipoles into the same operator
+normalization before using the number as a hard exclusion.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required greps across \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no \(t\to c\gamma\),
+\(tc\gamma\), \(tq\gamma\), or top-photon FCNC implementation.  Existing
+coverage is limited to neutral-meson \(\Delta F=2\) inputs at
+\texttt{quarkConstraints/deltaf2.py:209}, the modern policy list
+\(\epsilon_K,K,B_d,B_s,D^0\) at
+\texttt{quarkConstraints/modern/phenomenology.py:23}, and a lepton-sector
+\(\mu\to e\gamma\) dipole check at \texttt{flavorConstraints/muToEGamma.py:75}.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Cataloging the external upper limit is straightforward, but a
+live RS constraint would require a top electromagnetic FCNC operator
+convention, RS-to-SMEFT or direct dipole matching, a \(t\to c\gamma\) width
+normalization, and a choice about how to reinterpret production-plus-decay LHC
+limits when more than one chirality or flavor coupling is present.
+
+\subsection*{Key references}
+\texttt{CMS2024TopFCNCTQGamma}; \texttt{ATLAS2023TopFCNCTQGamma};
+\texttt{PDG2026TopGammaQSummary}; \texttt{AguilarSaavedra2004TopFCNC};
+\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}.

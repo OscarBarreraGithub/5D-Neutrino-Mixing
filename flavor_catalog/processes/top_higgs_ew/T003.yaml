@@ -1,0 +1,152 @@
+schema: flavor_catalog.process.v1
+process_id: T003
+family: top_higgs_ew
+standard_notation: '\mathcal{B}(t\to c\gamma)'
+process_name: "Flavor-changing neutral-current top decay t -> c gamma"
+owner: "PKA"
+owner_agent_id: "PKA-T003"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - from: null
+    to: "WRITER-INITIATED"
+    state: "WRITER-INITIATED"
+    at: "2026-05-16T18:27:46-04:00"
+    timestamp: "2026-05-16T18:27:46-04:00"
+    agent_id: "PKA-T003"
+    reason: "Initial PKA draft and source snapshot deposit."
+checker_passed_at: null
+opus_approved_at: null
+last_updated_at: "2026-05-16T18:27:46-04:00"
+version: "0.1.0"
+source_shas:
+  cms_2024_top21013_tqgamma.txt: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"
+  atlas_2023_2205_02537_tqgamma.txt: "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e"
+  pdg_2026_top_gammaq_summary.txt: "sha256:e05906a43ebc0bd14877ff94418896f229fcd38334aa69203e646c1d5b2129ae"
+  aguilar_saavedra_hepph0409342_tcgamma_sm.txt: "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b"
+  cfw_0804_1954_rs_flavor.txt: "sha256:405cb4b3d63c65177dbae90e5d9f23c098f29c37e0cdf910a02775ecb60069c0"
+pdg_or_equivalent:
+  year: 2024
+  source: "CMS-TOP-21-013 / Phys. Rev. D 109 (2024) 072004"
+  source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T003/cms_2024_top21013_tqgamma.txt"
+  sha256: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"
+  value_summary: "B(t -> c gamma) < 1.51e-5 at 95% CL, observed; expected 1.54e-5."
+  values:
+    - value_id: "CMS2024:T003:dataset"
+      observable: "CMS dataset for tqgamma FCNC search"
+      year: 2024
+      value: "138 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html"
+      access_date: "2026-05-16"
+      sha256: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"
+    - value_id: "CMS2024:T003:tcgamma"
+      observable: "B(t -> c gamma), CMS single-nonzero-coupling interpretation"
+      year: 2024
+      value: "< 1.51e-5"
+      expected_value: "< 1.54e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html"
+      access_date: "2026-05-16"
+      sha256: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"
+    - value_id: "CMS2024:T003:tugamma"
+      observable: "B(t -> u gamma), CMS single-nonzero-coupling interpretation"
+      year: 2024
+      value: "< 0.95e-5"
+      expected_value: "< 1.20e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html"
+      access_date: "2026-05-16"
+      sha256: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"
+    - value_id: "ATLAS2023:T003:dataset"
+      observable: "ATLAS dataset for tqgamma FCNC search"
+      year: 2023
+      value: "139 fb^-1 at sqrt(s) = 13 TeV"
+      uncertainty: null
+      units: "integrated luminosity and collision energy"
+      source_url: "https://arxiv.org/abs/2205.02537"
+      access_date: "2026-05-16"
+      sha256: "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e"
+    - value_id: "ATLAS2023:T003:tcgamma_left"
+      observable: "B(t -> c gamma), left-handed tqgamma benchmark"
+      year: 2023
+      value: "< 4.2e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source_url: "https://arxiv.org/abs/2205.02537"
+      access_date: "2026-05-16"
+      sha256: "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e"
+    - value_id: "ATLAS2023:T003:tcgamma_right"
+      observable: "B(t -> c gamma), right-handed tqgamma benchmark"
+      year: 2023
+      value: "< 4.5e-5"
+      uncertainty: null
+      units: "branching fraction, 95% CL upper limit"
+      source_url: "https://arxiv.org/abs/2205.02537"
+      access_date: "2026-05-16"
+      sha256: "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e"
+    - value_id: "PDG2026:T003:gammaq_summary"
+      observable: "Gamma(t -> gamma q) / Gamma(t -> W b), q = u,c generic PDG row"
+      year: 2026
+      value: "< 9.5e-6"
+      uncertainty: null
+      units: "ratio, 95% CL upper limit"
+      source_url: "https://pdglive.lbl.gov/Particle.action?node=Q007"
+      access_date: "2026-05-16"
+      sha256: "sha256:e05906a43ebc0bd14877ff94418896f229fcd38334aa69203e646c1d5b2129ae"
+paper_era_reference:
+  source: "Aguilar-Saavedra 2004 top-FCNC review"
+  source_url: "https://arxiv.org/abs/hep-ph/0409342"
+  access_date: "2026-05-16"
+  snapshot_path: "flavor_catalog/references/T003/aguilar_saavedra_hepph0409342_tcgamma_sm.txt"
+  sha256: "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b"
+  values:
+    - value_id: "AguilarSaavedra2004:T003:SM"
+      observable: "Standard Model prediction for B(t -> c gamma)"
+      year: 2004
+      value: "4.6e-14"
+      uncertainty: "+1.2/-1.0, +/-0.2, +/-0.4, +1.6/-0.5 components times 1e-14 as quoted"
+      units: "branching fraction"
+      source_url: "https://arxiv.org/abs/hep-ph/0409342"
+      access_date: "2026-05-16"
+      sha256: "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b"
+    - value_id: "AguilarSaavedra2004:T003:dipole_normalization"
+      observable: "Effective photon dipole normalization Br(t -> q gamma)"
+      year: 2004
+      value: "0.428 * lambda_qt^2"
+      uncertainty: null
+      units: "branching-fraction normalization in the source convention"
+      source_url: "https://arxiv.org/abs/hep-ph/0409342"
+      access_date: "2026-05-16"
+      sha256: "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b"
+paper_era_references:
+  - key: "CsakiFalkowskiWeiler2008WarpedFlavor"
+    source: "arXiv:0804.1954"
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/T003/cfw_0804_1954_rs_flavor.txt"
+    sha256: "sha256:405cb4b3d63c65177dbae90e5d9f23c098f29c37e0cdf910a02775ecb60069c0"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "Required plan greps rerun on 2026-05-16 across quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, and tests; no source-code implementation of t -> c gamma, tcgamma, or tqgamma found."
+    - "Targeted grep for top-photon FCNC and photon dipole terms found only the lepton-sector mu -> e gamma dipole implementation at flavorConstraints/muToEGamma.py:75 and related prose, not a top observable."
+    - "Existing Delta F = 2 coverage starts at quarkConstraints/deltaf2.py:209."
+    - "Modern phenomenology policy enumerates only epsilon_K, K, B_d, B_s, and D0 at quarkConstraints/modern/phenomenology.py:23 and states it is policy-only at quarkConstraints/modern/phenomenology.py:165."
+  grep_commands:
+    - 'rg -n "epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g "!*.ipynb"'
+    - 'rg -n "b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g "!*.ipynb"'
+    - 'rg -n "MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma" quarkConstraints flavorConstraints scanParams tests -g "!*.ipynb"'
+    - 'rg -n "t.?->.?c.?gamma|t.?->.?gamma.?c|tcgamma|tcgamm|tqgamma|t.?c.?photon|c.?gamma|photon.*FCNC|FCNC.*photon|top.*photon|gamma.*top|dipole" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g "!*.ipynb"'
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "MEDIUM to store the external upper limit, but HIGH for production-grade RS integration because the repo lacks a top electromagnetic FCNC operator basis, RS-to-dipole matching, a t -> c gamma width convention, and a validated production-plus-decay recast."
+open_issues:
+  - "The user prompt quoted the older ATLAS 4.2e-5 charm limit as current; CMS-TOP-21-013 now gives 1.51e-5 at 95% CL. WA/CA should confirm whether the catalog headline should use CMS or preserve an ATLAS/PDG-only convention."
+  - "PDG live currently has a generic gamma q row rather than a charm-separated t -> c gamma summary; the sidecar keeps it as context, not the T003 headline."

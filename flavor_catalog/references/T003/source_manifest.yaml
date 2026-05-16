@@ -1,0 +1,49 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T003
+generated_at: "2026-05-16T18:27:46-04:00"
+sources:
+  - key: CMS2024TopFCNCTQGamma
+    arxiv_id: "2312.08229"
+    DOI: "10.1103/PhysRevD.109.072004"
+    title: "Search for flavor changing neutral current interactions of the top quark in final states with a photon and additional jets in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html"
+    sha256_of_local_snapshot: "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987"
+    snapshot_path: "flavor_catalog/references/T003/cms_2024_top21013_tqgamma.txt"
+  - key: ATLAS2023TopFCNCTQGamma
+    arxiv_id: "2205.02537"
+    DOI: "10.1016/j.physletb.2022.137379"
+    title: "Search for flavour-changing neutral-current couplings between the top quark and the photon with the ATLAS detector at sqrt(s) = 13 TeV"
+    authors: "ATLAS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2205.02537"
+    sha256_of_local_snapshot: "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e"
+    snapshot_path: "flavor_catalog/references/T003/atlas_2023_2205_02537_tqgamma.txt"
+  - key: PDG2026TopGammaQSummary
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "pdgLive t-quark decay-mode summary, gamma q (q = u,c)"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2026
+    url: "https://pdglive.lbl.gov/Particle.action?node=Q007"
+    sha256_of_local_snapshot: "sha256:e05906a43ebc0bd14877ff94418896f229fcd38334aa69203e646c1d5b2129ae"
+    snapshot_path: "flavor_catalog/references/T003/pdg_2026_top_gammaq_summary.txt"
+  - key: AguilarSaavedra2004TopFCNC
+    arxiv_id: "hep-ph/0409342"
+    DOI: "10.48550/arXiv.hep-ph/0409342"
+    title: "Top flavour-changing neutral interactions: theoretical expectations and experimental detection"
+    authors: "J. A. Aguilar-Saavedra"
+    year: 2004
+    url: "https://arxiv.org/abs/hep-ph/0409342"
+    sha256_of_local_snapshot: "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b"
+    snapshot_path: "flavor_catalog/references/T003/aguilar_saavedra_hepph0409342_tcgamma_sm.txt"
+  - key: CsakiFalkowskiWeiler2008WarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:405cb4b3d63c65177dbae90e5d9f23c098f29c37e0cdf910a02775ecb60069c0"
+    snapshot_path: "flavor_catalog/references/T003/cfw_0804_1954_rs_flavor.txt"
