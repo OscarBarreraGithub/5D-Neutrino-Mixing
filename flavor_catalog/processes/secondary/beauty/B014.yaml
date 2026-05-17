@@ -1,0 +1,383 @@
+schema: flavor_catalog.process.v1
+process_id: B014
+family: beauty
+priority_tier: SECONDARY
+priority_rationale: "Deferred by DA-4 (round_004_addendum_deferred_scope.md); b -> d gamma exclusive tail; CKM-suppressed by |V_td/V_ts|^2 vs B011/B012. Promoted in Wave-8 because: Top-tier; provides down-sector dipole chirality probe distinct from b -> s gamma. Lower implementation priority than Waves 1-7 PRIMARY entries."
+promoted_in_wave: 8
+standard_notation: "B\\to \\rho\\gamma, B\\to \\omega\\gamma"
+process_name: "Exclusive radiative b -> d gamma decays"
+owner: "PKA"
+owner_agent_id: "PKA-B014"
+writer_agent_id: null
+checker_agent_id: "CA"
+opus_signoff_id: null
+status_history:
+  - state: "DRAFT"
+    timestamp: "2026-05-17T02:14:54-04:00"
+    from: null
+    to: "DRAFT"
+    at: "2026-05-17T02:14:54-04:00"
+    agent_id: "PKA-B014"
+    reason: "B014 SECONDARY sidecar initialized."
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-17T02:14:54-04:00"
+    from: "DRAFT"
+    to: "WRITER-INITIATED"
+    at: "2026-05-17T02:14:54-04:00"
+    agent_id: "PKA-B014"
+    reason: "Initial PKA draft and source deposit for Wave-8 SECONDARY entry."
+last_updated_at: "2026-05-17T02:14:54-04:00"
+version: "0.1.0"
+source_shas:
+  arxiv_0804_1954_cfw_rs_flavor.txt: "sha256:4c73c6f885ba4114d65192ba4faafcb36b7f815340c7f87db485716dda39a616"
+  arxiv_0804_4770_belle_bd_gamma.txt: "sha256:21be9ff26200b7c0388e1aef0d86518bea804ea88f25b1d9f58ee9502f9dcbff"
+  arxiv_0808_1379_babar_rho_omega_gamma.txt: "sha256:9d3949dbce81982995ba5d58a8d9d3802fbb4d1dd0ff0a19cc8bf6c9d8da7f4a"
+  arxiv_1005_4087_babar_xdgamma.txt: "sha256:8046b9a2e7d2a228c2e9141242d1e2d756c95cb2ecc4febca164f7bf0952f94c"
+  arxiv_1005_1224_hurth_nakao_penguins.txt: "sha256:0aafa417357250e7e033ba672206eeb010b35a91614e2486827e6a735da98473"
+  arxiv_1104_3342_c7_c7prime.txt: "sha256:5533e1aa8a67b13feeee360bd09347df49fbcca5c9dbb2f09a2447b50b0f2b57"
+  arxiv_1503_05534_lcsr_form_factors.txt: "sha256:792229d3f5f8269194a6d397d3514d52828752a9600216a2aaa66efeee087a8c"
+  arxiv_2407_08984_belle_belleii_rhogamma.txt: "sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7"
+  arxiv_2507_14401_lhcb_b0rho0gamma.txt: "sha256:e0201f9d11ed7de7513534d310b727cb85f72bf0cdb5741cffff0156616c879b"
+  hflav_rare_decays_dec2024_bd_gamma.txt: "sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1"
+  pdg2025_bplus_rhop_gamma.txt: "sha256:8041b539fb0bb25ef691bfe69bc5ce2acc2f6819700acb0d04d8f5d3e50a9e5b"
+  pdg2025_bzero_rho_omega_gamma.txt: "sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5"
+pdg_or_equivalent:
+  pdg2025_bp_to_rhop_gamma:
+    source: "PDG Review of Particle Physics, B+/- listing, 2025 update"
+    year: 2025
+    observable: "B(B+ -> rho+ gamma)"
+    value: 0.00000098
+    uncertainty: 0.00000025
+    units: "branching fraction"
+    display: "(9.8 +/- 2.5) x 10^-7"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-B-plus-minus.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/pdg2025_bplus_rhop_gamma.txt"
+    sha256: "sha256:8041b539fb0bb25ef691bfe69bc5ce2acc2f6819700acb0d04d8f5d3e50a9e5b"
+  pdg2025_b0_to_rho0_gamma:
+    source: "PDG Review of Particle Physics, B0 listing, 2025 update"
+    year: 2025
+    observable: "B(B0 -> rho0 gamma)"
+    value: 0.00000086
+    uncertainty: 0.00000015
+    units: "branching fraction"
+    display: "(8.6 +/- 1.5) x 10^-7"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt"
+    sha256: "sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5"
+  pdg2025_b0_to_omega_gamma:
+    source: "PDG Review of Particle Physics, B0 listing, 2025 update"
+    year: 2025
+    observable: "B(B0 -> omega gamma)"
+    value: 0.00000044
+    uncertainty_plus: 0.00000018
+    uncertainty_minus: 0.00000016
+    units: "branching fraction"
+    display: "(4.4 +1.8 -1.6) x 10^-7"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt"
+    sha256: "sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5"
+  hflav2024_b_to_rho_gamma:
+    source: "HFLAV rare decays, end-of-year 2024"
+    year: 2024
+    observable: "B(B -> rho gamma)"
+    value: 0.00000140
+    uncertainty: 0.00000022
+    units: "branching fraction"
+    display: "(1.40 +/- 0.22) x 10^-6"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt"
+    sha256: "sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1"
+  hflav2024_b_to_rho_omega_gamma:
+    source: "HFLAV rare decays, end-of-year 2024"
+    year: 2024
+    observable: "B(B -> rho/omega gamma)"
+    value: 0.00000130
+    uncertainty: 0.00000018
+    units: "branching fraction"
+    display: "(1.30 +/- 0.18) x 10^-6"
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt"
+    sha256: "sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1"
+  hflav2024_isospin_rho_gamma:
+    source: "HFLAV rare decays, end-of-year 2024"
+    year: 2024
+    observable: "Gamma(B+ -> rho+ gamma) / [2 Gamma(B0 -> rho0 gamma)] - 1"
+    value: -0.46
+    uncertainty: 0.17
+    units: "dimensionless"
+    note: "HFLAV states the Table 76 isospin averages are computed naively and should be treated with caution."
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt"
+    sha256: "sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1"
+  hflav2024_b_to_xd_gamma:
+    source: "HFLAV rare decays, end-of-year 2024"
+    year: 2024
+    observable: "B(B -> Xd gamma)"
+    value: 0.0000092
+    uncertainty: 0.0000030
+    units: "branching fraction"
+    display: "(9.2 +/- 3.0) x 10^-6"
+    context: "Related semi-inclusive b -> d gamma normalization, not the exclusive B014 headline value."
+    source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt"
+    sha256: "sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1"
+  pdg2025_acp_bp_to_rhop_gamma:
+    source: "PDG Review of Particle Physics, B+/- listing, 2025 update"
+    year: 2025
+    observable: "A_CP(B+ -> rho+ gamma)"
+    value: -0.11
+    uncertainties:
+      statistical: 0.32
+      systematic: 0.09
+    units: "dimensionless"
+    note: "PDG listing contains the Belle 2008 value rather than an averaged PDG value."
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-B-plus-minus.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/pdg2025_bplus_rhop_gamma.txt"
+    sha256: "sha256:8041b539fb0bb25ef691bfe69bc5ce2acc2f6819700acb0d04d8f5d3e50a9e5b"
+  pdg2025_c_b0_to_rho0_gamma:
+    source: "PDG Review of Particle Physics, B0 listing, 2025 update"
+    year: 2025
+    observable: "C(B0 -> rho0 gamma)"
+    value: 0.44
+    uncertainties:
+      statistical: 0.49
+      systematic: 0.14
+    units: "dimensionless"
+    note: "PDG note: Belle reports A, equal to -C."
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt"
+    sha256: "sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5"
+  pdg2025_s_b0_to_rho0_gamma:
+    source: "PDG Review of Particle Physics, B0 listing, 2025 update"
+    year: 2025
+    observable: "S(B0 -> rho0 gamma)"
+    value: -0.83
+    uncertainties:
+      statistical: 0.65
+      systematic: 0.18
+    units: "dimensionless"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt"
+    sha256: "sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5"
+  belle_belleii2024_bp_to_rhop_gamma:
+    source: "arXiv:2407.08984"
+    year: 2024
+    observable: "B(B+ -> rho+ gamma)"
+    value: 0.00000131
+    uncertainties:
+      statistical_plus: 0.00000020
+      statistical_minus: 0.00000019
+      systematic_plus: 0.00000013
+      systematic_minus: 0.00000012
+    units: "branching fraction"
+    display: "(13.1 +2.0 +1.3 -1.9 -1.2) x 10^-7"
+    context: "Post-2008 Belle/Belle II update; not yet used as the conservative catalog headline."
+    source_url: "https://arxiv.org/abs/2407.08984"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt"
+    sha256: "sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7"
+  belle_belleii2024_b0_to_rho0_gamma:
+    source: "arXiv:2407.08984"
+    year: 2024
+    observable: "B(B0 -> rho0 gamma)"
+    value: 0.00000075
+    uncertainties:
+      statistical: 0.00000013
+      systematic_plus: 0.00000010
+      systematic_minus: 0.00000008
+    units: "branching fraction"
+    display: "(7.5 +/- 1.3 +1.0 -0.8) x 10^-7"
+    context: "Post-2008 Belle/Belle II update; not yet used as the conservative catalog headline."
+    source_url: "https://arxiv.org/abs/2407.08984"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt"
+    sha256: "sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7"
+  belle_belleii2024_ai_rho_gamma:
+    source: "arXiv:2407.08984"
+    year: 2024
+    observable: "A_I(B -> rho gamma)"
+    value: 0.109
+    uncertainties:
+      statistical_plus: 0.112
+      statistical_minus: 0.117
+      systematic_plus: 0.078
+      systematic_minus: 0.073
+    units: "dimensionless"
+    display: "(10.9 +11.2 +7.8 -11.7 -7.3)%"
+    source_url: "https://arxiv.org/abs/2407.08984"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt"
+    sha256: "sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7"
+  belle_belleii2024_acp_bp_to_rhop_gamma:
+    source: "arXiv:2407.08984"
+    year: 2024
+    observable: "A_CP(B+ -> rho+ gamma)"
+    value: -0.082
+    uncertainties:
+      statistical: 0.152
+      systematic_plus: 0.016
+      systematic_minus: 0.012
+    units: "dimensionless"
+    display: "(-8.2 +/- 15.2 +1.6 -1.2)%"
+    source_url: "https://arxiv.org/abs/2407.08984"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt"
+    sha256: "sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7"
+  lhcb2025_ratio_b0rho0_to_b0kstar0_gamma:
+    source: "arXiv:2507.14401"
+    year: 2025
+    observable: "B(B0 -> rho(770)0 gamma) / B(B0 -> K*(892)0 gamma)"
+    value: 0.0189
+    uncertainties:
+      statistical: 0.0007
+      systematic: 0.0005
+    units: "dimensionless"
+    context: "Assumes rho(770)0 and K*(892)0 saturate the selected dihadron mass spectra."
+    source_url: "https://arxiv.org/abs/2507.14401"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2507_14401_lhcb_b0rho0gamma.txt"
+    sha256: "sha256:e0201f9d11ed7de7513534d310b727cb85f72bf0cdb5741cffff0156616c879b"
+  lhcb2025_b0_to_rho0_gamma:
+    source: "arXiv:2507.14401"
+    year: 2025
+    observable: "B(B0 -> rho(770)0 gamma)"
+    value: 0.00000079
+    uncertainties:
+      statistical: 0.00000003
+      systematic: 0.00000002
+      normalization: 0.00000002
+    units: "branching fraction"
+    display: "(7.9 +/- 0.3 +/- 0.2 +/- 0.2) x 10^-7"
+    context: "Most precise single B0 -> rho0 gamma measurement in the source set; not yet folded into PDG/HFLAV catalog anchors here."
+    source_url: "https://arxiv.org/abs/2507.14401"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2507_14401_lhcb_b0rho0gamma.txt"
+    sha256: "sha256:e0201f9d11ed7de7513534d310b727cb85f72bf0cdb5741cffff0156616c879b"
+recent_experimental_inputs:
+  belle_belleii_2024:
+    source: "arXiv:2407.08984"
+    role: "Post-2008 Belle/Belle II B -> rho gamma branching-fraction, CP-asymmetry, and isospin-asymmetry update."
+    supporting_measurements:
+      - "772 x 10^6 Belle B Bbar pairs at the Upsilon(4S)."
+      - "387 x 10^6 Belle II B Bbar pairs at the Upsilon(4S)."
+      - "Fitted yields: 114 +/- 12 B+ -> rho+ gamma and 99 +/- 12 B0 -> rho0 gamma."
+    value_keys:
+      - "belle_belleii2024_bp_to_rhop_gamma"
+      - "belle_belleii2024_b0_to_rho0_gamma"
+      - "belle_belleii2024_ai_rho_gamma"
+      - "belle_belleii2024_acp_bp_to_rhop_gamma"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt"
+    sha256: "sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7"
+  lhcb_2025:
+    source: "arXiv:2507.14401"
+    role: "Most precise single B0 -> rho0 gamma measurement available in the source set and ratio to B0 -> K*0 gamma."
+    supporting_measurements:
+      - "9 fb^-1 of pp collision data at sqrt(s) = 7, 8, and 13 TeV."
+      - "Uses a rho(770)0/K*(892)0 saturation assumption for the selected dihadron mass spectra."
+    value_keys:
+      - "lhcb2025_ratio_b0rho0_to_b0kstar0_gamma"
+      - "lhcb2025_b0_to_rho0_gamma"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2507_14401_lhcb_b0rho0gamma.txt"
+    sha256: "sha256:e0201f9d11ed7de7513534d310b727cb85f72bf0cdb5741cffff0156616c879b"
+  babar_2010_xdgamma:
+    source: "arXiv:1005.4087"
+    role: "Semi-inclusive B -> X_{s,d} gamma and |Vtd/Vts| comparison source."
+    supporting_measurements:
+      - "471 million BaBar B Bbar events."
+      - "Seven exclusive final states up to hadronic mass 2.0 GeV/c^2."
+    snapshot_path: "flavor_catalog/references/B014/arxiv_1005_4087_babar_xdgamma.txt"
+    sha256: "sha256:8046b9a2e7d2a228c2e9141242d1e2d756c95cb2ecc4febca164f7bf0952f94c"
+supporting_measurements:
+  babar_2008_exclusive_inputs:
+    source: "arXiv:0808.1379"
+    role: "BaBar 2008 exclusive B+ -> rho+ gamma, B0 -> rho0 gamma, and B0 -> omega gamma input to PDG/HFLAV."
+    dataset_metadata: "465 million B Bbar events at PEP-II."
+    snapshot_path: "flavor_catalog/references/B014/arxiv_0808_1379_babar_rho_omega_gamma.txt"
+    sha256: "sha256:9d3949dbce81982995ba5d58a8d9d3802fbb4d1dd0ff0a19cc8bf6c9d8da7f4a"
+  belle_2008_exclusive_inputs:
+    source: "arXiv:0804.4770"
+    role: "Belle 2008 exclusive b -> d gamma input to PDG/HFLAV and source of the early direct-CP measurement."
+    dataset_metadata: "657 x 10^6 B meson pairs at KEKB."
+    snapshot_path: "flavor_catalog/references/B014/arxiv_0804_4770_belle_bd_gamma.txt"
+    sha256: "sha256:21be9ff26200b7c0388e1aef0d86518bea804ea88f25b1d9f58ee9502f9dcbff"
+paper_era_reference:
+  source: "arXiv:0804.1954"
+  role: "2008 CFW RS/composite-Higgs flavor baseline for post-2008 comparison; not a measured B014 observable."
+  source_url: "https://arxiv.org/abs/0804.1954"
+  access_date: "2026-05-17"
+  snapshot_path: "flavor_catalog/references/B014/arxiv_0804_1954_cfw_rs_flavor.txt"
+  sha256: "sha256:4c73c6f885ba4114d65192ba4faafcb36b7f815340c7f87db485716dda39a616"
+auxiliary_theory_inputs:
+  hurth_nakao_2010:
+    source: "arXiv:1005.1224"
+    role: "Post-2008 radiative-penguin review covering exclusive and inclusive b -> d gamma in relation to b -> s gamma."
+    source_url: "https://arxiv.org/abs/1005.1224"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_1005_1224_hurth_nakao_penguins.txt"
+    sha256: "sha256:0aafa417357250e7e033ba672206eeb010b35a91614e2486827e6a735da98473"
+  descotes_genon_2011_c7_c7prime:
+    source: "arXiv:1104.3342"
+    role: "Wilson-coefficient context for C7 and chirality-flipped C7' constraints from radiative B decays."
+    source_url: "https://arxiv.org/abs/1104.3342"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_1104_3342_c7_c7prime.txt"
+    sha256: "sha256:5533e1aa8a67b13feeee360bd09347df49fbcca5c9dbb2f09a2447b50b0f2b57"
+  bharucha_straub_zwicky_2016:
+    source: "arXiv:1503.05534"
+    role: "LCSR B -> rho and B -> omega form-factor input relevant to exclusive radiative-mode theory uncertainty."
+    source_url: "https://arxiv.org/abs/1503.05534"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_1503_05534_lcsr_form_factors.txt"
+    sha256: "sha256:792229d3f5f8269194a6d397d3514d52828752a9600216a2aaa66efeee087a8c"
+constraint_validity:
+  class: "model-dependent exclusive radiative B constraint"
+  notes:
+    - "Exclusive branching fractions require B -> rho/omega tensor form factors and weak-annihilation/spectator prescriptions before becoming Wilson-coefficient likelihoods."
+    - "Isospin asymmetries are useful diagnostics but HFLAV labels the quoted averages naive and cautions against over-interpretation."
+    - "LHCb 2025 ratio and branching fraction carry a rho(770)0/K*(892)0 saturation assumption for the selected dihadron spectra."
+    - "B014 is down-sector dipole information complementary to b -> s gamma, but lower priority than Waves 1-7 PRIMARY entries."
+code_coverage:
+  status: "NO"
+  grep_commands:
+    - "rg -n \"rho.?gamma|rho\\s*\\+?\\s*gamma|omega.?gamma|b.?->.?d.?gamma|b.?to.?d.?gamma|X_d.?gamma|Xd.?gamma|B.?->.?rho|B.?->.?omega|B014\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"C7'?|C_7'?|O7'?|C8'?|C_8'?|O8'?|dipole|photon.?polar|right.?handed.?dipole|radiative\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  evidence:
+    - "Focused B014 grep for B -> rho gamma, B -> omega gamma, b -> d gamma, Xd gamma, and B014 returned exit=1 with no matches."
+    - "flavorConstraints/muToEGamma.py:75 defines a lepton-sector mu -> e gamma dipole check, not a quark b -> d gamma implementation."
+    - "flavorConstraints/README.md:3 documents the brane-localized dipole NDA estimate for the lepton flavor module only."
+    - "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 in the modern quark policy surface."
+    - "quarkConstraints/deltaf2.py:903, :922, and :941 implement B_d, B_s, and D0 mixing evaluators, not radiative b -> d gamma decays."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "Requires new b -> d gamma electromagnetic/chromomagnetic dipole matching, C7/C7' and C8/C8' RG treatment, exclusive B -> rho/omega form-factor and annihilation inputs, and a likelihood for branching fractions, isospin, CP, and CKM-ratio observables."
+post_2008_developments:
+  experimental:
+    - "arXiv:1005.4087: BaBar semi-inclusive B -> X_{s,d} gamma and |Vtd/Vts| extraction."
+    - "arXiv:2407.08984: Belle/Belle II B -> rho gamma branching-fraction, CP-asymmetry, and isospin-asymmetry update."
+    - "arXiv:2507.14401: LHCb B0 -> rho0 gamma measurement and B0 -> rho0 gamma / B0 -> K*0 gamma ratio."
+  theory:
+    - "arXiv:1005.1224: radiative and electroweak penguin review for inclusive and exclusive b -> d gamma context."
+    - "arXiv:1104.3342: C7/C7' Wilson-coefficient framework for radiative B constraints."
+    - "arXiv:1503.05534: LCSR B -> rho/omega form-factor input for exclusive-mode theory errors."
+rejected_sources:
+  prompt_babar_0805_4796:
+    source: "arXiv:0805.4796"
+    reason: "This is BaBar CP asymmetry in b -> s gamma with exclusive X_s final states, not B -> rho/omega gamma or b -> d gamma; it was not used as a B014 value source."
+  prompt_prl_100_021801:
+    source: "PRL 100 021801"
+    reason: "Could not identify this as the B014 BaBar B -> rho/omega gamma paper; the BaBar exclusive B014 source used here is arXiv:0808.1379 / Phys. Rev. D 78 (2008) 112001."
+open_issues:
+  - "WA/CA should decide whether the 2024 Belle/Belle II and 2025 LHCb single-measurement values should replace or only supplement the conservative PDG/HFLAV anchors in a later catalog pass."
+  - "A production constraint needs a convention for b -> d C7/C7' matching and exclusive form-factor uncertainties before raw branching fractions can be used as hard RS exclusions."

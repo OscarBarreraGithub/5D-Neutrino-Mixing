@@ -1,0 +1,36 @@
+Source: HFLAV rare decays, end-of-year 2024
+URL: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+Access date: 2026-05-17
+Snapshot purpose: B014 canonical HFLAV averages for radiative b -> d gamma modes.
+
+Relevant extract from Table 67, "Branching fractions of radiative, FCNC decays..."
+Units in the table header: [10^-6].
+
+B(B -> Xd gamma)  BaBar [297]  9.2 +/- 2.0 +/- 2.3; average 9.2 +/- 3.0.
+
+B(B -> rho gamma)^7:
+  Belle [279]  1.21 +0.24 -0.22 +/- 0.12; HFLAV average 1.40 +/- 0.22.
+  BaBar [257]  1.73 +0.34 -0.32 +/- 0.17; PDG average 1.39 +0.25 -0.24.
+
+B(B -> rho/omega gamma)^7:
+  Belle [279]  1.14 +/- 0.20 +0.10 -0.12; HFLAV average 1.30 +/- 0.18.
+  BaBar [257]  1.63 +0.30 -0.28 +/- 0.16; PDG average 1.30 +0.23 -0.24.
+
+Footnote 7: "The PDG uncertainty includes a scale factor."
+
+Relevant extract from Table 76, "Isospin asymmetry in B mesons radiative and FCNC decays..."
+The table states that the isospin averages are computed naively and should be treated with caution.
+
+Observable:
+  Gamma(B+ -> rho+ gamma) / [2 Gamma(B0 -> rho0 gamma)] - 1
+Measurements:
+  Belle [279]  -0.48 +0.21 -0.19 +0.08 -0.09
+  BaBar [257]  -0.43 +0.25 -0.22 +/- 0.10
+Average:
+  HFLAV -0.46 +/- 0.17; PDG -0.46 +0.17 -0.16.
+
+Relevant HFLAV bibliography entries:
+  [256] Belle II/Belle Collaboration, I. Adachi et al., "Measurement of branching fractions, CP asymmetry, and isospin asymmetry for B -> rho gamma decays using Belle and Belle II data", arXiv:2407.08984.
+  [257] BaBar Collaboration, B. Aubert et al., "Measurements of Branching Fractions for B+ -> rho+ gamma, B0 -> rho0 gamma, and B0 -> omega gamma", Phys. Rev. D 78 (2008) 112001, arXiv:0808.1379.
+  [279] Belle Collaboration, N. Taniguchi et al., "Measurement of branching fractions, isospin and CP-violating asymmetries for exclusive b -> d gamma modes", Phys. Rev. Lett. 101 (2008) 111801, arXiv:0804.4770.
+  [297] BaBar Collaboration, P. del Amo Sanchez et al., "Study of B -> X gamma Decays and Determination of |Vtd/Vts|", Phys. Rev. D 82 (2010) 051101, arXiv:1005.4087.

@@ -1,0 +1,124 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B014
+generated_at: "2026-05-17T02:14:54-04:00"
+references:
+  - key: hflav_rare_decays_dec2024_bd_gamma
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV rare decays, end-of-year 2024: b -> d gamma and rho/omega gamma tables"
+    authors: "Heavy Flavor Averaging Group (HFLAV)"
+    year: 2024
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1"
+    snapshot_path: "flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt"
+  - key: pdg2025_bplus_rhop_gamma
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "PDG Review of Particle Physics, B+/- listing, 2025 update: rho+ gamma"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-B-plus-minus.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:8041b539fb0bb25ef691bfe69bc5ce2acc2f6819700acb0d04d8f5d3e50a9e5b"
+    snapshot_path: "flavor_catalog/references/B014/pdg2025_bplus_rhop_gamma.txt"
+  - key: pdg2025_bzero_rho_omega_gamma
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "PDG Review of Particle Physics, B0 listing, 2025 update: rho0 gamma and omega gamma"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5"
+    snapshot_path: "flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt"
+  - key: babar_2008_rho_omega_gamma
+    arxiv_id: "0808.1379"
+    DOI: "10.1103/PhysRevD.78.112001"
+    title: "Measurements of Branching Fractions for B+ -> rho+ gamma, B0 -> rho0 gamma, and B0 -> omega gamma"
+    authors: "B. Aubert et al. (BaBar Collaboration)"
+    year: 2008
+    url: "https://arxiv.org/abs/0808.1379"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9d3949dbce81982995ba5d58a8d9d3802fbb4d1dd0ff0a19cc8bf6c9d8da7f4a"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_0808_1379_babar_rho_omega_gamma.txt"
+  - key: belle_2008_bd_gamma
+    arxiv_id: "0804.4770"
+    DOI: "10.1103/PhysRevLett.101.111801"
+    title: "Measurement of branching fractions, isospin and CP-violating asymmetries for exclusive b -> d gamma modes"
+    authors: "N. Taniguchi et al. (Belle Collaboration)"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.4770"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:21be9ff26200b7c0388e1aef0d86518bea804ea88f25b1d9f58ee9502f9dcbff"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_0804_4770_belle_bd_gamma.txt"
+  - key: babar_2010_xdgamma
+    arxiv_id: "1005.4087"
+    DOI: "10.1103/PhysRevD.82.051101"
+    title: "Study of B -> X gamma Decays and Determination of |V_td/V_ts|"
+    authors: "P. del Amo Sanchez et al. (BaBar Collaboration)"
+    year: 2010
+    url: "https://arxiv.org/abs/1005.4087"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:8046b9a2e7d2a228c2e9141242d1e2d756c95cb2ecc4febca164f7bf0952f94c"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_1005_4087_babar_xdgamma.txt"
+  - key: hurth_nakao_2010_penguins
+    arxiv_id: "1005.1224"
+    DOI: "10.1146/annurev.nucl.012809.104424"
+    title: "Radiative and Electroweak Penguin Decays of B Mesons"
+    authors: "Tobias Hurth and Mikihiko Nakao"
+    year: 2010
+    url: "https://arxiv.org/abs/1005.1224"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0aafa417357250e7e033ba672206eeb010b35a91614e2486827e6a735da98473"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_1005_1224_hurth_nakao_penguins.txt"
+  - key: descotes_genon_2011_c7_c7prime
+    arxiv_id: "1104.3342"
+    DOI: "10.1007/JHEP06(2011)099"
+    title: "Exploring New Physics in the C7-C7' plane"
+    authors: "Sebastien Descotes-Genon, Diptimoy Ghosh, Joaquim Matias, Marc Ramon"
+    year: 2011
+    url: "https://arxiv.org/abs/1104.3342"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:5533e1aa8a67b13feeee360bd09347df49fbcca5c9dbb2f09a2447b50b0f2b57"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_1104_3342_c7_c7prime.txt"
+  - key: bharucha_straub_zwicky_2016_lcsr
+    arxiv_id: "1503.05534"
+    DOI: "10.1007/JHEP08(2016)098"
+    title: "B -> V l+ l- in the Standard Model from Light-Cone Sum Rules"
+    authors: "Aoife Bharucha, David M. Straub, Roman Zwicky"
+    year: 2016
+    url: "https://arxiv.org/abs/1503.05534"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:792229d3f5f8269194a6d397d3514d52828752a9600216a2aaa66efeee087a8c"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_1503_05534_lcsr_form_factors.txt"
+  - key: belle_belleii_2024_rhogamma
+    arxiv_id: "2407.08984"
+    DOI: null
+    title: "Measurement of branching fractions, CP asymmetry, and isospin asymmetry for B -> rho gamma decays using Belle and Belle II data"
+    authors: "I. Adachi et al. (Belle II Collaboration)"
+    year: 2024
+    url: "https://arxiv.org/abs/2407.08984"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt"
+  - key: lhcb_2025_b0rho0gamma
+    arxiv_id: "2507.14401"
+    DOI: null
+    title: "Measurement of the B0 -> rho(770)0 gamma branching fraction"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2025
+    url: "https://arxiv.org/abs/2507.14401"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:e0201f9d11ed7de7513534d310b727cb85f72bf0cdb5741cffff0156616c879b"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_2507_14401_lhcb_b0rho0gamma.txt"
+  - key: cfw_2008_rs_flavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4c73c6f885ba4114d65192ba4faafcb36b7f815340c7f87db485716dda39a616"
+    snapshot_path: "flavor_catalog/references/B014/arxiv_0804_1954_cfw_rs_flavor.txt"
