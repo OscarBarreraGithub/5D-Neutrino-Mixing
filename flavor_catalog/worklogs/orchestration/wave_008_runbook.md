@@ -131,16 +131,16 @@ message. Not worth a history rewrite.
 
 | Stage | Agent ID | Started | Background ID | Output path | Status |
 |-------|----------|---------|---------------|-------------|--------|
-| 2.a | scaffold2-master-wire | (pending) | — | `catalog_master.tex` + 3 `processes/secondary/<family>/index.tex` | PENDING |
+| 2.a | scaffold2-master-wire | 02:30 EDT | `btvy6zb3i` (log `/tmp/wave8_logs/scaffold2.log`) | `catalog_master.tex` + 3 `processes/secondary/<family>/index.tex` | DISPATCHED |
 
-### Stage 3: WA (4 batches)
+### Stage 3: WA (4 batches, dispatched in parallel with scaffold2)
 
 | Stage | Agent ID | Started | Background ID | Output path | Status |
 |-------|----------|---------|---------------|-------------|--------|
-| 3.a | WA-w8-kaon-LFV | (pending) | — | K019/K020/K021 | PENDING |
-| 3.b | WA-w8-B-rare-leptonic | (pending) | — | B007/B008 | PENDING |
-| 3.c | WA-w8-B-radiative | (pending) | — | B013/B014 | PENDING |
-| 3.d | WA-w8-T014 | (pending) | — | T014 | PENDING |
+| 3.a | WA-w8-kaon-LFV | 02:30 EDT | `buwec8cf5` (log `/tmp/wave8_logs/wa_kaon_LFV.log`) | K019/K020/K021 + `worklogs/writer/wa_w8_kaon_LFV.md` | DISPATCHED |
+| 3.b | WA-w8-B-rare-leptonic | 02:30 EDT | `bxnxm22g9` (log `/tmp/wave8_logs/wa_B_rare_leptonic.log`) | B007/B008 + `worklogs/writer/wa_w8_B_rare_leptonic.md` | DISPATCHED |
+| 3.c | WA-w8-B-radiative | 02:30 EDT | `bp11p6e5r` (log `/tmp/wave8_logs/wa_B_radiative.log`) | B013/B014 + `worklogs/writer/wa_w8_B_radiative.md` | DISPATCHED |
+| 3.d | WA-w8-T014 | 02:30 EDT | `bj3bejnp7` (log `/tmp/wave8_logs/wa_T014.log`) | T014 + `worklogs/writer/wa_w8_T014.md` | DISPATCHED |
 
 ### Stage 4: CA (4 batches, disjoint from WAs)
 
