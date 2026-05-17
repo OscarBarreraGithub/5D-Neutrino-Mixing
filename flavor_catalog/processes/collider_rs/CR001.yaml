@@ -33,7 +33,16 @@ status_history:
     agent_id: "WA"
     cycle: 1
     reason: "WA-w9-kk-gauge cycle-1 writer polish for Wave-9 collider_rs PRIMARY batch."
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-17T17:33:37-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-17T17:33:37-04:00"
+    agent_id: "CA"
+    cycle: 1
+    reason: "CA-w9-kk-gauge cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w9_kk_gauge.md."
 last_updated_at: "2026-05-17T17:08:57-04:00"
+checker_passed_at: "2026-05-17T17:33:37-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2012_arxiv1207_2409.txt: "sha256:79a0e8ade861cbba8ee8775df6cee090170ac89b6d4bef6360bb396eead71234"
