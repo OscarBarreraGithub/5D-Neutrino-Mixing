@@ -79,11 +79,18 @@ status_history:
     verdict: "PARTIAL"
     findings_count: 1
     reason: "Wave-8 SECONDARY fact-check addendum (factcheck_kaon.md). PARTIAL: NA62 2021 first-author convention metadata; values/year/DOI/URL all verified; metadata-only finding accepted per v0.2 E009 precedent."
+  - state: "WRITER-DONE"
+    from: "FACT-CHECKED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T15:47:36-04:00"
+    agent_id: "WA-v3"
+    cycle: 3
+    reason: "Cycle-3 metadata cleanup: align NA62 2021 first-author string with PDG convention (R. Aliberti et al., matching K021). Clears the cycle-1 fact-check PARTIAL finding; no value/year/DOI/URL change."
 checker_passed_at: "2026-05-17T12:04:08-04:00"
 opus_approved_at: "2026-05-17T14:31:04-04:00"
 fact_checked_at: "2026-05-17T14:31:05-04:00"
 fact_check_verdict: "PARTIAL"
-last_updated_at: "2026-05-17T14:31:05-04:00"
+last_updated_at: "2026-05-17T15:47:36-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_kplus_lfv_semileptonic_api.txt: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
@@ -157,7 +164,7 @@ pdg_or_equivalent:
       access_date: "2026-05-17"
       snapshot_path: "flavor_catalog/references/K020/pdg2025_kplus_lfv_semileptonic_api.txt"
       sha256: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
-      experimental_reference: "E. Cortina Gil et al. (NA62), Phys. Rev. Lett. 127, 131802 (2021)"
+      experimental_reference: "R. Aliberti et al. (NA62), Phys. Rev. Lett. 127, 131802 (2021)"
       doi: "10.1103/PhysRevLett.127.131802"
       arxiv_id: "2105.06759"
       note: "PDG 2025 supersedes the BNL E865 APPEL 2000B limit of 5.2 x 10^-10 for this charge assignment."
