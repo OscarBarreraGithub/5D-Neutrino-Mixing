@@ -74,11 +74,20 @@ status_history:
     verdict: "VERIFIED"
     findings_count: 0
     notes: "HFLAV, PDG pdgLive, Belle II, Belle, BaBar, LHCb, and CFW sources match all B012 value-bearing claims."
+  - state: "OPUS-APPROVED"
+    timestamp: "2026-05-16T20:30:00-04:00"
+    from: "FACT-CHECKED"
+    to: "OPUS-APPROVED"
+    at: "2026-05-16T20:30:00-04:00"
+    agent: "Opus-round-3"
+    agent_id: "Opus-round-3"
+    round_id: "opus_round_003"
+    reason: "Opus round 3 sign-off; full PKA -> WA -> CA cycle-2 -> fact-check VERIFIED; representative exclusive radiative b->s gamma row beyond B011 per Wave-7 promotion; see flavor_catalog/signoff/round_003_index.md."
 checker_passed_at: "2026-05-16T19:10:09-04:00"
-opus_approved_at: null
+opus_approved_at: "2026-05-16T20:30:00-04:00"
 fact_checked_at: "2026-05-16T19:25:00-04:00"
 fact_check_verdict: "VERIFIED"
-last_updated_at: "2026-05-16T19:25:00-04:00"
+last_updated_at: "2026-05-16T20:30:00-04:00"
 version: "0.1.1"
 source_shas:
   hflav_rare_decays_dec2024_btokstargamma.txt: "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d"
