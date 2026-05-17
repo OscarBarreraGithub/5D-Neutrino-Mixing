@@ -18,25 +18,53 @@ The structure below is **what to do if you have to pick this up tomorrow**.
 
 ---
 
-## 1. Final state at handoff (2026-05-16)
+## 1. Final state at handoff (updated 2026-05-17 after Wave-8)
 
 | Artifact | State |
 |---|---|
 | Branch | `flavor-catalog/2026q2` cut from `paper/quark-scan-2026q2` at rc1.1 |
-| Active processes | **80** all OPUS-APPROVED |
-| Deferred-scope | 51 plan-v1 Section C rows explicitly DEFERRED-SCOPE |
-| Out-of-scope | Direct collider tails (KK-gluon, VLQ, custodial-partner searches, high-p_T) — documented as not in scope for low-energy catalog |
-| Master PDF | `flavor_catalog/catalog_master.pdf`, 133 pages |
-| Tags | `flavor-catalog-v0` (75 processes), `flavor-catalog-v0.1` (fact-checked), `flavor-catalog-v0.2` (after Wave-7 + subtleties + addendum) |
-| Companion paper | `quarkscan-paper-rc1.1` on `paper/quark-scan-2026q2` |
+| Active processes | **88 total** — 80 PRIMARY (Waves 1–7) + 8 SECONDARY (Wave-8), all OPUS-APPROVED |
+| Deferred-scope | 51 plan-v1 Section C rows explicitly DEFERRED-SCOPE (minus the 8 promoted in Wave-8 = 43 still deferred) |
+| Out-of-scope | Direct collider tails (KK-gluon, VLQ, custodial-partner searches, high-p_T) |
+| Master PDF | `flavor_catalog/catalog_master.pdf`, **148 pages** (v0.3) |
+| Tags | `flavor-catalog-v0` (75) → `v0.1` (fact-checked) → `v0.2` (80, +Wave-7) → **`v0.3` (88, +Wave-8 SECONDARY)** |
+| Companion paper | `quarkscan-paper-rc1.1` on `paper/quark-scan-2026q2` (frozen) |
+| Priority policy | `flavor_catalog/PRIORITY_TIERS.md` (added in Wave-8). PRIMARY = `processes/<family>/`; SECONDARY = `processes/secondary/<family>/`. |
 
-Most recent Opus round-3 sign-off: 5/5 new (T003, T004, T008, T012, B012)
-APPROVE; subtleties APPROVE; deferred-scope addendum APPROVE.
+Most recent Opus round-4 sign-off: 8/8 SECONDARY APPROVE (K019, K020, K021,
+B007, B008, B013, B014, T014). See
+`flavor_catalog/signoff/round_004_index.md`.
 
-Fact-check status: **79 VERIFIED / 1 PARTIAL / 0 MISMATCH / 0 FAILED**
-across 80 processes. The PARTIAL is E009 (Weinberg three-gluon operator)
-where the INSPIRE URL renders JS-only; the APS journal page and local
-snapshot independently confirm content — no real issue.
+Fact-check status across all 88 processes:
+**86 VERIFIED / 2 PARTIAL / 0 MISMATCH / 0 FAILED**.
+- v0.2 PARTIAL: E009 (Weinberg three-gluon operator) — INSPIRE JS-only;
+  APS journal + local snapshot confirm content.
+- v0.3 PARTIAL: K020 (K+→π+ e μ) — NA62 2021 first-author convention
+  drift; values/year/DOI/URL all verified; same class as E009; accepted
+  per E009 precedent.
+
+## 1a. Wave-8 summary (2026-05-17)
+
+| Stage | Result |
+|---|---|
+| Stage 0 | `flavor_catalog/PRIORITY_TIERS.md` (109 lines) committed `24284d7`. |
+| Stage 1 | 8 PKAs landed (commits `bab5bd0`, `2630168`, `ebd066c`, `e6e1cc3`, `5b68b43`, `6b64a18`, `e348a35`, `17599d5`). All YAMLs carry `priority_tier: SECONDARY`, `promoted_in_wave: 8`. |
+| Stage 2 | `catalog_master.tex` wired with new Secondary section (commit `103833f`); 3 `processes/secondary/<family>/index.tex` stubs. |
+| Stage 3 | 4 WA batches polished + WRITER-DONE (commits `f9c7ff4`, `88f2cde`, `2b23464`, `d198787`). |
+| Stage 4 | 4 CA batches: 7/8 PASS cycle 1; K020 returned WRITER-REWORK on CHK-1 (Sher/E865 limit not promoted). WA-v2 fix (`5c14d2f`) + CA-v2 PASS (`a20d75a`). End state: 8/8 CHECKER-DONE. |
+| Stage 5 | Fact-check addenda for 3 families: 7 VERIFIED / 1 PARTIAL (K020 metadata) / 0 MISMATCH / 0 FAILED (commits `118de1c`, `37514e9`, `7e121c3`). |
+| Stage 6 | Opus round-4 sign-off: 8/8 APPROVE (commit `df7af95`). L001 / B001_B003 precedent uniformly applied. |
+| Stage 7 | Master compile v0.3: 148 pages, 796,017 bytes PDF (commit `76c87ae`). Tag `flavor-catalog-v0.3` pushed to origin. |
+
+Live wave state and dispatch ledger:
+`flavor_catalog/worklogs/orchestration/wave_008_runbook.md`.
+
+Wave-8 takes the catalog from 80 PRIMARY → 80 PRIMARY + 8 SECONDARY.
+SECONDARY entries are repo-structurally separated under
+`processes/secondary/<family>/` (PI request: easy to see + easy to
+separate later). The `priority_tier` YAML field plus the dedicated master
+PDF section give three independent ways to filter PRIMARY vs SECONDARY.
+Future Wave-9 follows the same recipe with `promoted_in_wave: 9`.
 
 ---
 

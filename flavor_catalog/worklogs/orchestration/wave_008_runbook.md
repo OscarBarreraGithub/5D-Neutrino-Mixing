@@ -198,8 +198,27 @@ PARTIAL accepted per v0.2 E009 precedent.
 
 | Stage | Agent ID | Started | Background ID | Output path | Status |
 |-------|----------|---------|---------------|-------------|--------|
-| 7.a | master-compile-v03 | 12:46 EDT | `b547ueyu1` (log `/tmp/wave8_logs/master_compile_v03.log`) | `catalog_master.pdf` + `master_compile_v03_report.md` | DISPATCHED |
-| 7.b | tag-v0.3 | (pending) | — | git tag `flavor-catalog-v0.3` | PENDING |
+| 7.a | master-compile-v03 | 12:46 EDT | `b547ueyu1` | `catalog_master.pdf` + `master_compile_v03_report.md` | DONE (commit `76c87ae`; 148 pages, 796,017 bytes) |
+| 7.b | tag-v0.3 | 14:43 EDT | — | git tag `flavor-catalog-v0.3` | DONE — annotated tag pushed to origin |
+
+---
+
+## 8. Wave-8 close-out
+
+**Wave status: COMPLETE.** 8 SECONDARY entries (K019/K020/K021, B007/B008,
+B013/B014, T014) drafted, polished, verified, fact-checked, signed off,
+compiled, tagged.
+
+Catalog state at v0.3:
+- 80 PRIMARY (v0.2) + 8 SECONDARY (Wave-8) = 88 total OPUS-APPROVED
+- 86 VERIFIED + 2 PARTIAL (E009 v0.2, K020 v0.3 — both metadata-only,
+  accepted per E009 precedent) + 0 MISMATCH + 0 FAILED
+- Master PDF 148 pages
+- Tag `flavor-catalog-v0.3` on commit `76c87ae`
+
+This runbook is now closed. A future Wave-9 should start a new runbook at
+`flavor_catalog/worklogs/orchestration/wave_009_runbook.md` using this
+file as a template.
 
 ---
 
