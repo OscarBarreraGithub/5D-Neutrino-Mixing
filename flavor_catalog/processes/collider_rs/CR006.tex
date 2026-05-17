@@ -2,7 +2,7 @@
 % process_id: CR006
 % family: collider_rs
 % owner_agent_id: PKA-CR006
-% writer_agent_id: null
+% writer_agent_id: WA
 % checker_agent_id: null
 % opus_signoff_id: null
 % Canonical metadata sidecar: CR006.yaml
@@ -53,10 +53,10 @@ are in \texttt{flavor\_catalog/references/CR006/}, especially
 \texttt{cms\_2022\_lnu\_arxiv2202\_06075.txt}, and
 \texttt{cms\_2024\_wprime\_tb\_leptonic\_arxiv2310\_19893.txt}.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
-This is a Wave-9 \textbf{PRIMARY} collider-RS entry, not a Wave-8 SECONDARY
-entry.  Its role is different from the low-energy flavor constraints already
-in the catalog.  The current quark-scan methodology note quotes the
+\subsection*{Relevance to RS}
+This collider-RS resonance search plays a different role from the low-energy
+flavor constraints already in the catalog.  The current quark-scan
+methodology note quotes the
 anarchic-flavor benchmark crossing
 \[
   M_{\rm KK}^{\min}(p50,\; g_s^\star=3) = 47.26~{\rm TeV},
@@ -99,7 +99,7 @@ data and deep-learning top/bottom tagging.  CMS
 138 fb\(^{-1}\), it excludes narrow left- and right-handed \(W'\) bosons below
 3.9 and 4.3 TeV, respectively, and also publishes width-dependent limits.
 
-\subsection*{Constraint validity / model dependence}
+\subsection*{Validity / model dependence}
 The experimental exclusions are robust statements about their stated signal
 models.  Their RS reinterpretation is not automatic.  The leptonic SSM limits
 assume SM-like \(W'\) couplings to light quarks and charged leptons, an
@@ -114,7 +114,7 @@ An RS implementation must compute the production coupling to the incoming
 partons, the \(tb\), \(WZ\), \(Wh\), and exotic-fermion branching fractions,
 and the detector-level acceptance before using these as hard scan cuts.
 
-\subsection*{Code coverage in this repo}
+\subsection*{Code coverage}
 \textbf{NO.}  Greps over \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
@@ -143,7 +143,7 @@ simplified-likelihood material rather than trying to reproduce the ATLAS/CMS
 selection internally.
 
 \subsection*{Key references}
-Process-local source keys before bibliography consolidation:
+Process-local source keys before bibliography consolidation are
 \texttt{PDG2025\_WprimeSearches},
 \texttt{ATLAS2019\_WprimeLnu},
 \texttt{CMS2022\_WprimeLnu},

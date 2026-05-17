@@ -3,10 +3,10 @@ process_id: CR007
 family: collider_rs
 standard_notation: "pp -> G_KK^(1) -> ZZ, WW, gamma gamma, ell ell, t tbar"
 process_name: "Spin-2 KK-graviton resonance (Bulk Randall-Sundrum)"
-sub_class: "KK gauge / spin-2; RS-distinguishing"
+subclass: "KK gauge / spin-2; RS-distinguishing"
 owner: "PKA"
 owner_agent_id: "PKA-CR007"
-writer_agent_id: null
+writer_agent_id: "WA"
 checker_agent_id: null
 opus_signoff_id: null
 status_history:
@@ -24,7 +24,16 @@ status_history:
     at: "2026-05-17T16:36:55-04:00"
     agent_id: "PKA-CR007"
     reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
-last_updated_at: "2026-05-17T16:36:55-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:08:57-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:08:57-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA-w9-kk-gauge cycle-1 writer polish for Wave-9 collider_rs PRIMARY batch."
+last_updated_at: "2026-05-17T17:08:57-04:00"
 version: "0.1.0"
 source_shas:
   agashe_davoudiasl_perez_soni_2007_arxiv_hepph0701186.txt: "sha256:01f8d6556c134a92f6e96265e9cc8924f7ab50283f15357d69bd935239cac187"

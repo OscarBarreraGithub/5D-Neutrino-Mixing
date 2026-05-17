@@ -6,7 +6,7 @@ process_name: "KK-gluon resonance in t-tbar"
 subclass: "KK gauge resonance; canonical RS signature"
 owner: "PKA"
 owner_agent_id: "PKA-CR001"
-writer_agent_id: null
+writer_agent_id: "WA"
 checker_agent_id: null
 opus_signoff_id: null
 status_history:
@@ -24,7 +24,16 @@ status_history:
     at: "2026-05-17T16:37:14-04:00"
     agent_id: "PKA-CR001"
     reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
-last_updated_at: "2026-05-17T16:37:14-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:08:57-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:08:57-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA-w9-kk-gauge cycle-1 writer polish for Wave-9 collider_rs PRIMARY batch."
+last_updated_at: "2026-05-17T17:08:57-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2012_arxiv1207_2409.txt: "sha256:79a0e8ade861cbba8ee8775df6cee090170ac89b6d4bef6360bb396eead71234"

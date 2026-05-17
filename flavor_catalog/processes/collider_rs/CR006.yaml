@@ -6,7 +6,7 @@ process_name: "Charged-current high-mass resonance (KK W)"
 subclass: "KK gauge resonance"
 owner: "PKA"
 owner_agent_id: "PKA-CR006"
-writer_agent_id: null
+writer_agent_id: "WA"
 checker_agent_id: null
 opus_signoff_id: null
 related_process_ids: []
@@ -25,7 +25,16 @@ status_history:
     at: "2026-05-17T16:34:15-04:00"
     agent_id: "PKA-CR006"
     reason: "Initial PKA draft, sidecar, source snapshots, source manifest, checksum file, and worklog deposited."
-last_updated_at: "2026-05-17T16:34:15-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:08:57-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:08:57-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA-w9-kk-gauge cycle-1 writer polish for Wave-9 collider_rs PRIMARY batch."
+last_updated_at: "2026-05-17T17:08:57-04:00"
 version: "0.1.0"
 source_shas:
   agashe_2008_warped_charged_gauge_arxiv0810_1497.txt: "sha256:cc330a863b8d72da41472d2e74b0a7a879521aadf683a02dd0dcd9dd1051b4f0"

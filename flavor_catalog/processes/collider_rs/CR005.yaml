@@ -6,7 +6,7 @@ process_name: "Dilepton high-mass resonance (KK electroweak)"
 subclass: "KK gauge resonance"
 owner: "PKA"
 owner_agent_id: "PKA-CR005"
-writer_agent_id: null
+writer_agent_id: "WA"
 checker_agent_id: null
 opus_signoff_id: null
 related_process_ids: []
@@ -25,7 +25,16 @@ status_history:
     at: "2026-05-17T16:36:22-04:00"
     agent_id: "PKA-CR005"
     reason: "Initial PKA draft, sidecar, source snapshots, source manifest, and worklog deposited."
-last_updated_at: "2026-05-17T16:36:22-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:08:57-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:08:57-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA-w9-kk-gauge cycle-1 writer polish for Wave-9 collider_rs PRIMARY batch."
+last_updated_at: "2026-05-17T17:08:57-04:00"
 version: "0.1.0"
 source_shas:
   agashe_delgado_may_sundrum_2003_arxiv_hepph0308036.txt: "sha256:51f947b231fd9f95451201022f6209d91b66c3cf05185ac2929e89aa331da739"
