@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/yFGZKBF0tyFus62j9+opvhBLLA8</id>
+  <title>arXiv Query: search_query=&amp;id_list=hep-ph/9909255&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=hep-ph/9909255" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/hep-ph/9909255v1</id>
+    <title>Warped Phenomenology</title>
+    <updated>1999-09-06T03:26:20Z</updated>
+    <link href="https://arxiv.org/abs/hep-ph/9909255v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-ph/9909255v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We explore the phenomenology associated with the recently proposed localized gravity model of Randall and Sundrum where gravity propagates in a 5-dimensional non-factorizable geometry and generates the 4-dimensional weak-Planck scale hierarchy by an exponential function of the compactification radius, called a warp factor. The Kaluza-Klein tower of gravitons which emerge in this scenario have strikingly different properties than in the factorizable case with large extra dimensions. We derive the form of the graviton tower interactions with the Standard Model fields and examine their direct production in Drell-Yan and dijet events at the Tevatron and LHC as well as the KK spectrum line-shape at high-energy linear \epem colliders. In the case where the first KK excitation is observed, we outline the procedure to uniquely determine the parameters of this scenario. We also investigate the effect of KK tower exchanges in contact interaction searches. We find that present experiments can place meaningful constraints on the parameters of this model.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1999-09-06T03:26:20Z</published>
+    <arxiv:comment>14 pages, LaTex, 3 figs</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys.Rev.Lett. 84 (2000) 2080</arxiv:journal_ref>
+    <author>
+      <name>H. Davoudiasl</name>
+    </author>
+    <author>
+      <name>J. L. Hewett</name>
+    </author>
+    <author>
+      <name>T. G. Rizzo</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.84.2080</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.84.2080" title="doi"/>
+  </entry>
+</feed>

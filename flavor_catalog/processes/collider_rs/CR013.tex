@@ -1,0 +1,125 @@
+% Flavor catalog per-process template.
+% process_id: CR013
+% family: collider_rs
+% owner_agent_id: PKA-CR013
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR013.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{High-Mass Diphoton Resonances, \(pp\to X\to\gamma\gamma\)}{High-Mass Diphoton Resonances, pp to X to gamma gamma}}
+
+\subsection*{Process}
+This entry covers high-mass diphoton resonance searches,
+\(pp\to X\to\gamma\gamma\), with \(X\) interpreted either as a spin-2
+Randall--Sundrum graviton benchmark or as a generic spin-0 heavy scalar
+benchmark.  The RS-sensitive channel is the spin-2 interpretation, where the
+observed diphoton mass spectrum is translated into limits on the first KK
+graviton mass \(m_{G^*}\) for fixed values of the dimensionless curvature
+coupling \(k/\bar M_{\rm Pl}\).
+
+\subsection*{Current best limit(s)}
+The current channel-specific PDG listing for warped-extra-dimension KK
+gravitons quotes the CMS full-Run-2 diphoton result as
+\[
+  m_{G^*} > 4.8~{\rm TeV}
+  \quad (95\%~{\rm CL},~k/\bar M_{\rm Pl}=0.1),
+\]
+for \(pp\to G^*\to\gamma\gamma\)
+(\texttt{pdg2025\_extra\_dimensions\_listing.txt}).  The same PDG review
+summarizes the CMS 2024 analysis as excluding KK gravitons below
+\(2.2\)--\(5.6\) TeV as \(k/\bar M_{\rm Pl}\) is varied from 0.01 to 0.2,
+and the ATLAS 2021 full-Run-2 diphoton analysis as giving
+\(m_{G^*}>4.5\) TeV at \(k/\bar M_{\rm Pl}=0.1\)
+(\texttt{pdg2025\_extra\_dimensions\_review.txt}).  The CMS public-result
+page and arXiv text record the same 95\% CL exclusion range for the 2024
+diphoton analysis; HEPData provides the corresponding Figure 3 and Figure 4
+upper-limit tables for the spin-2 benchmark
+(\texttt{cms2024\_exo\_22\_024\_public\_page.html},
+\texttt{hepdata2024\_cms\_diphoton\_record.json}).
+
+\subsection*{Relevance to RS / anarchic-flavor pipeline}
+This is a direct collider constraint on a neutral spin-2 resonance with
+diphoton branching fraction, not a low-energy flavor observable.  In a minimal
+RS1-style benchmark, the quoted bound constrains the lightest graviton
+excitation \(m_{G^*}\) after fixing \(k/\bar M_{\rm Pl}\), the production
+cross section, and the branching fraction to \(\gamma\gamma\).  It does not
+directly constrain the KK-gluon mass used in the anarchic-flavor scan unless a
+specific RS spectrum map and coupling convention are supplied.
+
+For the present anarchic-flavor pipeline, the reach is therefore diagnostic
+rather than leading.  The quark-scan methodology note quotes the live
+RS-anarchy median crossing
+\(M_{\rm KK}^{\min}(p50,g_* = 3)=47.26~{\rm TeV}\), far above the few-TeV
+direct diphoton reach.  A TeV-scale diphoton resonance bound is still useful as
+a cross-check on non-anarchic or non-minimal RS scenarios, and it is especially
+relevant when gravity or scalar sectors are light while flavor protection or
+alignment weakens the low-energy bounds.
+
+\subsection*{Post-2010 developments}
+The post-2010 LHC history is a steady increase in energy, luminosity, and
+benchmark coverage relative to the original RS graviton phenomenology papers.
+CMS \(7\) TeV diphoton data in arXiv:1112.0688 and ATLAS \(7\) TeV diphoton
+data in arXiv:1210.8389 established the early LHC resonance limits in the
+\(\gamma\gamma\) channel.  ATLAS arXiv:1504.05511 used the \(8\) TeV
+diphoton spectrum and raised the \(k/\bar M_{\rm Pl}=0.1\) RS-graviton
+limit to \(2.66\) TeV.  CMS arXiv:1809.00327 moved to \(13\) TeV data and
+excluded \(m_{G^*}\) below \(2.3\)--\(4.6\) TeV for coupling parameters from
+0.01 to 0.2.  ATLAS arXiv:2102.13405 used \(139~{\rm fb}^{-1}\) and excluded
+the RS1 benchmark below \(2.2\), \(3.9\), and \(4.5\) TeV for
+\(k/\bar M_{\rm Pl}=0.01\), 0.05, and 0.1.  CMS arXiv:2405.09320 is the
+current full-Run-2 CMS update, with \(138~{\rm fb}^{-1}\), refined diphoton
+background treatments, spin-0 and spin-2 resonance interpretations, and the
+strongest reported RS-graviton diphoton limits for \(k/\bar M_{\rm Pl}\ge
+0.1\).
+
+\subsection*{Constraint validity / model dependence}
+The quoted mass exclusions are benchmark exclusions.  They assume a production
+mechanism, a resonance line shape, a width tied to the chosen
+\(k/\bar M_{\rm Pl}\), and the branching pattern of the RS graviton model used
+by the experiments.  They are not model-independent lower bounds on every RS
+KK mass.  In warped models with Standard Model fields propagating in the bulk,
+the couplings of the KK graviton to \(ee\), \(\mu\mu\), and \(\gamma\gamma\)
+can be suppressed; the PDG review explicitly warns that the dilepton and
+diphoton bounds do not apply directly in that case
+(\texttt{pdg2025\_extra\_dimensions\_review.txt}).  Spin-0 diphoton limits
+are similarly useful only after specifying whether the scalar is a radion,
+singlet, heavy Higgs-like state, or another resonance with a definite
+production and branching model.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO}.  Greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no diphoton, RS-graviton, LHC-resonance, or collider
+direct-search likelihood implementation.  Adjacent evidence is generic only:
+\texttt{solvers/bessel.py:5}--\texttt{6} solves KK masses for gauge bosons
+and fermions in RS backgrounds, \texttt{scanParams/scan.py:399} and
+\texttt{scanParams/scan.py:429} compute and record \(M_{\rm KK}\), and
+\texttt{quarkConstraints/deltaf2.py:1}--\texttt{10} plus
+\texttt{quarkConstraints/deltaf2.py:452}--\texttt{563} implement the
+low-energy \(\Delta F=2\) KK-gluon-inspired exclusion slice.  None of those
+paths evaluates \(pp\to G^*\to\gamma\gamma\), cross-section upper limits, or
+mass-exclusion curves.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A live collider constraint would require a model-specific
+RS spectrum and branching calculator plus a reinterpretation of LHC upper
+limits, or an external collider-recast workflow such as CheckMATE,
+MadAnalysis5, Rivet/Contur, or a dedicated simplified-likelihood treatment.
+The blocker is not data availability; it is the translation from a 5D point to
+production rates, branching ratios, widths, acceptances, and experimental
+likelihoods.
+
+\subsection*{Key references}
+\texttt{PDG2025\_ExtraDimensionsListing};
+\texttt{PDG2025\_ExtraDimensionsReview};
+\texttt{CMS2024\_Diphoton\_ArxivFullText};
+\texttt{CMS2024\_Diphoton\_PublicPage};
+\texttt{CMS2024\_Diphoton\_HEPData};
+\texttt{ATLAS2021\_Diphoton\_ArxivFullText};
+\texttt{CMS2018\_Diphoton\_ArxivFullText};
+\texttt{ATLAS2015\_Diphoton\_ArxivFullText};
+\texttt{RandallSundrum1999};
+\texttt{DavoudiaslHewettRizzo1999}.

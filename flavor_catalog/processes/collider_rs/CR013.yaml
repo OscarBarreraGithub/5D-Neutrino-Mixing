@@ -1,0 +1,344 @@
+schema: flavor_catalog.process.v1
+process_id: CR013
+family: collider_rs
+standard_notation: "pp -> X -> gamma gamma; high-mass spin-0/spin-2 resonance"
+process_name: "Diphoton high-mass resonance (spin-0/2)"
+owner: "PKA"
+owner_agent_id: "PKA-CR013"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+related_process_ids:
+  - CR007
+  - CR009
+  - CR012
+status_history:
+  - state: "DRAFT"
+    timestamp: "2026-05-17T16:34:35-04:00"
+    from: null
+    to: "DRAFT"
+    at: "2026-05-17T16:34:35-04:00"
+    agent_id: "PKA-CR013"
+    reason: "Initial CR013 PRIMARY collider_rs draft skeleton and source research started."
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-17T16:34:35-04:00"
+    from: "DRAFT"
+    to: "WRITER-INITIATED"
+    at: "2026-05-17T16:34:35-04:00"
+    agent_id: "PKA-CR013"
+    reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+checker_passed_at: null
+opus_approved_at: null
+fact_checked_at: null
+fact_check_verdict: null
+last_updated_at: "2026-05-17T16:34:35-04:00"
+version: "0.1.0"
+source_shas:
+  atlas2013_arxiv1210_8389_abstract.xml: "sha256:b2b12a7d2e94f4e4f800ddc9bfa2b3fc3a6848cb4f548ffdacbeddf9742d9b37"
+  atlas2015_arxiv1504_05511_abstract.xml: "sha256:a745d89fac73c9f4c8f2edb93b32a218771b3988de56ade92f263e9ba565a05a"
+  atlas2015_arxiv1504_05511_fulltext.txt: "sha256:fa8a6d18d5636f4b60e307c81d4403c5e6b553578f1582ee23671eff250faf7f"
+  atlas2021_arxiv2102_13405_abstract.xml: "sha256:e62ce6e8f87f4836ad9c454d52763c07077ddd89dc372f568a5640eba2d1666b"
+  atlas2021_arxiv2102_13405_fulltext.txt: "sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95"
+  cms2012_arxiv1112_0688_abstract.xml: "sha256:9460b9985b3be0381666a77eb6e13d1e90d93ceeb57acb8ce577c6089003f942"
+  cms2018_arxiv1809_00327_abstract.xml: "sha256:3ec3d0ba989c573cef5a1bc34a44161c6bebf188c70221dc3d719e5785dffaf8"
+  cms2018_arxiv1809_00327_fulltext.txt: "sha256:6cbc675c212d641f7eec15966c640a1a6521c60a53be17ff1b4b5a9f6b798bfe"
+  cms2024_arxiv2405_09320_abstract.xml: "sha256:71c6b5d57aabacc09819c7ee7b34b714e8767301841e1435945de44874003a85"
+  cms2024_arxiv2405_09320_fulltext.txt: "sha256:9db5214a38ea01255dc0e5ed3fe3b409c97867c6ba712ddea8cd67fb7115fc8e"
+  cms2024_exo_22_024_public_page.html: "sha256:f3ee8d2e3e100f2d6f61d6a9dfb2f7a08d7fe12652d10d31b74384f6874ad0dc"
+  davoudiasl_hewett_rizzo_1999_arxiv_hepph9909255_abstract.xml: "sha256:34444111395a19ae4636e7156f798257f30190eac027f31613421e348603f9c3"
+  hepdata2024_cms_diphoton_record.json: "sha256:46becc63fb1adc658387b9348b5bed0940618354b1b65820ff38137a88d38bbb"
+  pdg2025_extra_dimensions_listing.txt: "sha256:ce4823040682bbcba4893b693dbe6e9c135a2d1e5678d55c5ca1a08fd5553f8d"
+  pdg2025_extra_dimensions_review.txt: "sha256:0dad46ccc4e1fea553c028014d06731a5524ec6769a2b23a7ac3940b8e117755"
+  randall_sundrum_1999_arxiv_hepph9905221_abstract.xml: "sha256:cba0ff32c08a873d5e89c8c59d8a5bd2c051faac3ed86107dd9ff66cac7a1cf5"
+pdg_or_equivalent:
+  canonical_experimental_value:
+    value_id: "PDG2025:CR013:CMS2024_RSG_diphoton_kMPl_0p1"
+    observable: "Lower limit on lightest RS KK graviton mass in pp -> G* -> gamma gamma"
+    year: 2025
+    value: 4.8
+    uncertainty: null
+    units: "TeV"
+    display: "m_G* > 4.8 TeV"
+    limit_type: "lower_limit"
+    cl: "95% CL"
+    experiment: "CMS"
+    analysis_year: 2024
+    model: "Randall-Sundrum warped extra dimension, k/M_P = 0.1"
+    source: "PDG 2025 Extra Dimensions listing, Limits on Kaluza-Klein Gravitons in Warped Extra Dimensions"
+    source_key: "PDG2025_ExtraDimensionsListing"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/pdg2025_extra_dimensions_listing.txt"
+    sha256: "sha256:ce4823040682bbcba4893b693dbe6e9c135a2d1e5678d55c5ca1a08fd5553f8d"
+  values:
+    - value_id: "PDG2025:CR013:CMS2024_RSG_diphoton_kMPl_0p1"
+      observable: "Lower limit on lightest RS KK graviton mass in pp -> G* -> gamma gamma"
+      year: 2025
+      value: 4.8
+      uncertainty: null
+      units: "TeV"
+      display: "m_G* > 4.8 TeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      experiment: "CMS"
+      analysis_year: 2024
+      model: "Randall-Sundrum warped extra dimension, k/M_P = 0.1"
+      source: "PDG 2025 Extra Dimensions listing, document HAYRAPETYAN 24AJ"
+      source_key: "PDG2025_ExtraDimensionsListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR013/pdg2025_extra_dimensions_listing.txt"
+      sha256: "sha256:ce4823040682bbcba4893b693dbe6e9c135a2d1e5678d55c5ca1a08fd5553f8d"
+    - value_id: "CMS2024:CR013:RSG_diphoton_exclusion_range_ktilde_0p01_0p2"
+      observable: "RS graviton mass-exclusion range in pp -> G* -> gamma gamma"
+      year: 2024
+      value: 5.6
+      range_min: 2.2
+      range_max: 5.6
+      uncertainty: null
+      units: "TeV"
+      display: "m_G* below 2.2-5.6 TeV excluded for 0.01 < ktilde < 0.2"
+      limit_type: "lower_limit_range"
+      cl: "95% CL"
+      experiment: "CMS"
+      model: "RS graviton, coupling parameter 0.01 < ktilde < 0.2"
+      source: "CMS EXO-22-024 public result and arXiv:2405.09320"
+      source_key: "CMS2024_Diphoton_PublicPage"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-22-024/"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR013/cms2024_exo_22_024_public_page.html"
+      sha256: "sha256:f3ee8d2e3e100f2d6f61d6a9dfb2f7a08d7fe12652d10d31b74384f6874ad0dc"
+    - value_id: "ATLAS2021:CR013:RSG_diphoton_kMPl_0p1"
+      observable: "Lower limit on RS1 graviton mass in pp -> G* -> gamma gamma"
+      year: 2021
+      value: 4.5
+      uncertainty: null
+      units: "TeV"
+      display: "m_G* > 4.5 TeV for k/M_Pl = 0.1"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      experiment: "ATLAS"
+      model: "RS1 graviton, k/M_Pl = 0.1"
+      source: "ATLAS, Phys. Lett. B 822 (2021) 136651, arXiv:2102.13405"
+      source_key: "ATLAS2021_Diphoton_ArxivFullText"
+      source_url: "https://arxiv.org/abs/2102.13405"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt"
+      sha256: "sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95"
+    - value_id: "ATLAS2021:CR013:RSG_diphoton_kMPl_0p05"
+      observable: "Lower limit on RS1 graviton mass in pp -> G* -> gamma gamma"
+      year: 2021
+      value: 3.9
+      uncertainty: null
+      units: "TeV"
+      display: "m_G* > 3.9 TeV for k/M_Pl = 0.05"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      experiment: "ATLAS"
+      model: "RS1 graviton, k/M_Pl = 0.05"
+      source: "ATLAS, Phys. Lett. B 822 (2021) 136651, arXiv:2102.13405"
+      source_key: "ATLAS2021_Diphoton_ArxivFullText"
+      source_url: "https://arxiv.org/abs/2102.13405"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt"
+      sha256: "sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95"
+    - value_id: "ATLAS2021:CR013:RSG_diphoton_kMPl_0p01"
+      observable: "Lower limit on RS1 graviton mass in pp -> G* -> gamma gamma"
+      year: 2021
+      value: 2.2
+      uncertainty: null
+      units: "TeV"
+      display: "m_G* > 2.2 TeV for k/M_Pl = 0.01"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      experiment: "ATLAS"
+      model: "RS1 graviton, k/M_Pl = 0.01"
+      source: "ATLAS, Phys. Lett. B 822 (2021) 136651, arXiv:2102.13405"
+      source_key: "ATLAS2021_Diphoton_ArxivFullText"
+      source_url: "https://arxiv.org/abs/2102.13405"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt"
+      sha256: "sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95"
+    - value_id: "CMS2018:CR013:RSG_diphoton_exclusion_range_ktilde_0p01_0p2"
+      observable: "RS graviton mass-exclusion range in pp -> G* -> gamma gamma"
+      year: 2018
+      value: 4.6
+      range_min: 2.3
+      range_max: 4.6
+      uncertainty: null
+      units: "TeV"
+      display: "m_G* below 2.3-4.6 TeV excluded for ktilde = 0.01-0.2"
+      limit_type: "lower_limit_range"
+      cl: "95% CL"
+      experiment: "CMS"
+      model: "RS graviton, coupling parameter 0.01-0.2"
+      source: "CMS, Phys. Rev. D 98 (2018) 092001, arXiv:1809.00327"
+      source_key: "CMS2018_Diphoton_ArxivFullText"
+      source_url: "https://arxiv.org/abs/1809.00327"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR013/cms2018_arxiv1809_00327_fulltext.txt"
+      sha256: "sha256:6cbc675c212d641f7eec15966c640a1a6521c60a53be17ff1b4b5a9f6b798bfe"
+    - value_id: "ATLAS2015:CR013:RSG_diphoton_kMPl_0p1"
+      observable: "Lower limit on lightest RS graviton mass in pp -> G* -> gamma gamma"
+      year: 2015
+      value: 2.66
+      uncertainty: null
+      units: "TeV"
+      display: "m_G* > 2.66 TeV for k/M_Pl = 0.1"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      experiment: "ATLAS"
+      model: "RS graviton, k/M_Pl = 0.1"
+      source: "ATLAS, Phys. Rev. D 92 (2015) 032004, arXiv:1504.05511"
+      source_key: "ATLAS2015_Diphoton_ArxivFullText"
+      source_url: "https://arxiv.org/abs/1504.05511"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR013/atlas2015_arxiv1504_05511_fulltext.txt"
+      sha256: "sha256:fa8a6d18d5636f4b60e307c81d4403c5e6b553578f1582ee23671eff250faf7f"
+supporting_measurements:
+  - label: "CMS EXO-22-024 dataset metadata"
+    observable: "integrated luminosity"
+    year: 2024
+    value: 138
+    units: "fb^-1"
+    context: "Dataset descriptor for the CMS 2024 diphoton analysis; not a measured physics observable for pdg_or_equivalent."
+    source: "CMS EXO-22-024 public result"
+    source_key: "CMS2024_Diphoton_PublicPage"
+    source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-22-024/"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/cms2024_exo_22_024_public_page.html"
+    sha256: "sha256:f3ee8d2e3e100f2d6f61d6a9dfb2f7a08d7fe12652d10d31b74384f6874ad0dc"
+  - label: "CMS EXO-22-024 collision energy"
+    observable: "proton-proton center-of-mass energy"
+    year: 2024
+    value: 13
+    units: "TeV"
+    context: "Dataset descriptor for the CMS 2024 diphoton analysis; not promoted per CHK-1 carve-out."
+    source: "CMS EXO-22-024 public result"
+    source_key: "CMS2024_Diphoton_PublicPage"
+    source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-22-024/"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/cms2024_exo_22_024_public_page.html"
+    sha256: "sha256:f3ee8d2e3e100f2d6f61d6a9dfb2f7a08d7fe12652d10d31b74384f6874ad0dc"
+  - label: "ATLAS 2021 dataset metadata"
+    observable: "integrated luminosity"
+    year: 2021
+    value: 139
+    units: "fb^-1"
+    context: "Dataset descriptor for the ATLAS full-Run-2 diphoton analysis; not a measured physics observable for pdg_or_equivalent."
+    source: "ATLAS arXiv:2102.13405"
+    source_key: "ATLAS2021_Diphoton_ArxivFullText"
+    source_url: "https://arxiv.org/abs/2102.13405"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt"
+    sha256: "sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95"
+recent_experimental_inputs:
+  - key: "CMS2012_Diphoton_ArxivAbstract"
+    type: "LHC_search_history"
+    arxiv_id: "1112.0688"
+    why_matters: "Early 7 TeV CMS diphoton extra-dimensions search; established the LHC diphoton channel for RS-graviton interpretations."
+    source_url: "https://arxiv.org/abs/1112.0688"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/cms2012_arxiv1112_0688_abstract.xml"
+    sha256: "sha256:9460b9985b3be0381666a77eb6e13d1e90d93ceeb57acb8ce577c6089003f942"
+  - key: "ATLAS2013_Diphoton_ArxivAbstract"
+    type: "LHC_search_history"
+    arxiv_id: "1210.8389"
+    why_matters: "ATLAS 7 TeV diphoton extra-dimensions search; improved early diphoton bounds and connected gamma gamma with dilepton resonance searches."
+    source_url: "https://arxiv.org/abs/1210.8389"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2013_arxiv1210_8389_abstract.xml"
+    sha256: "sha256:b2b12a7d2e94f4e4f800ddc9bfa2b3fc3a6848cb4f548ffdacbeddf9742d9b37"
+  - key: "ATLAS2015_Diphoton_ArxivFullText"
+    type: "LHC_search_history"
+    arxiv_id: "1504.05511"
+    why_matters: "ATLAS 8 TeV diphoton search; raised the diphoton-only RS-graviton k/M_Pl=0.1 lower limit to 2.66 TeV."
+    source_url: "https://arxiv.org/abs/1504.05511"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2015_arxiv1504_05511_fulltext.txt"
+    sha256: "sha256:fa8a6d18d5636f4b60e307c81d4403c5e6b553578f1582ee23671eff250faf7f"
+  - key: "CMS2018_Diphoton_ArxivFullText"
+    type: "LHC_search_history"
+    arxiv_id: "1809.00327"
+    why_matters: "CMS 13 TeV, 35.9 fb^-1 high-mass diphoton search; expanded resonance interpretations to RS gravitons, ADD, clockwork, and spin-0 resonances."
+    source_url: "https://arxiv.org/abs/1809.00327"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/cms2018_arxiv1809_00327_fulltext.txt"
+    sha256: "sha256:6cbc675c212d641f7eec15966c640a1a6521c60a53be17ff1b4b5a9f6b798bfe"
+  - key: "ATLAS2021_Diphoton_ArxivFullText"
+    type: "LHC_search_history"
+    arxiv_id: "2102.13405"
+    why_matters: "ATLAS full-Run-2 139 fb^-1 diphoton search; improved the RS1 graviton mass limit primarily through increased luminosity."
+    source_url: "https://arxiv.org/abs/2102.13405"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt"
+    sha256: "sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95"
+  - key: "CMS2024_Diphoton_ArxivFullText"
+    type: "LHC_search_history"
+    arxiv_id: "2405.09320"
+    why_matters: "Current CMS full-Run-2 high-mass diphoton search; gives the strongest reported RS-graviton diphoton limits for ktilde >= 0.1."
+    source_url: "https://arxiv.org/abs/2405.09320"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/cms2024_arxiv2405_09320_fulltext.txt"
+    sha256: "sha256:9db5214a38ea01255dc0e5ed3fe3b409c97867c6ba712ddea8cd67fb7115fc8e"
+paper_era_reference:
+  randall_sundrum_1999:
+    source: "Randall and Sundrum, Phys. Rev. Lett. 83 (1999) 3370"
+    arxiv_id: "hep-ph/9905221"
+    source_type: "originating warped-extra-dimension model reference; not a measured observable"
+    relevance: "Defines the warped hierarchy setup underlying the RS graviton interpretation."
+    source_url: "https://arxiv.org/abs/hep-ph/9905221"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/randall_sundrum_1999_arxiv_hepph9905221_abstract.xml"
+    sha256: "sha256:cba0ff32c08a873d5e89c8c59d8a5bd2c051faac3ed86107dd9ff66cac7a1cf5"
+  davoudiasl_hewett_rizzo_1999:
+    source: "Davoudiasl, Hewett, and Rizzo, Phys. Rev. Lett. 84 (2000) 2080"
+    arxiv_id: "hep-ph/9909255"
+    source_type: "paper-era RS graviton collider phenomenology reference; not a measured observable"
+    relevance: "Provides the standard collider interpretation of RS graviton resonances used by later diphoton searches."
+    source_url: "https://arxiv.org/abs/hep-ph/9909255"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/davoudiasl_hewett_rizzo_1999_arxiv_hepph9909255_abstract.xml"
+    sha256: "sha256:34444111395a19ae4636e7156f798257f30190eac027f31613421e348603f9c3"
+auxiliary_theory_inputs:
+  rs_model_dependence:
+    source: "PDG 2025 Extra Dimensions review"
+    source_type: "model-dependence discussion; not a measured observable"
+    relevance: "Explains that diphoton/dilepton bounds depend on the warp parameter and do not directly apply when SM fields propagate in the 5D bulk and KK-graviton couplings to gamma gamma, ee, and mu mu are suppressed."
+    source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-extra-dimensions.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/pdg2025_extra_dimensions_review.txt"
+    sha256: "sha256:0dad46ccc4e1fea553c028014d06731a5524ec6769a2b23a7ac3940b8e117755"
+  hepdata_limit_tables:
+    source: "HEPData record 10.17182/hepdata.150677.v1"
+    source_type: "structured upper-limit table metadata; not itself promoted as a scalar mass limit"
+    relevance: "Identifies the CMS 2024 Figure 3 and Figure 4 spin-2 cross-section upper-limit tables used for detailed reinterpretation."
+    source_url: "https://www.hepdata.net/record/ins2787227"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR013/hepdata2024_cms_diphoton_record.json"
+    sha256: "sha256:46becc63fb1adc658387b9348b5bed0940618354b1b65820ff38137a88d38bbb"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"diphoton|di-photon|gamma.?gamma|photon pair|RS.?graviton|KK.?graviton|Randall.?Sundrum|collider|LHC|high.?mass resonance|spin.?2|spin-2|G\\\\*|m_G\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"M_KK|MKK|Mkk|mkk|KK.*mass|ratio_to_bound|max_ratio|FCNC|Delta F|deltaf2|epsilon_K\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"LHC|collider|resonance|graviton|diphoton|photon|gamma|KK.?gluon|KK.?g\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  findings:
+    - "No pp -> gamma gamma, RS graviton, diphoton resonance, cross-section-limit, or LHC direct-search likelihood implementation was found."
+    - "Adjacent generic RS evidence: solvers/bessel.py:5-6 solves KK masses for RS gauge bosons and fermions, not collider limits."
+    - "Adjacent scan evidence: scanParams/scan.py:399 and scanParams/scan.py:429 compute and record M_KK; quarkConstraints/deltaf2.py:1-10 and 452-563 evaluate low-energy Delta F=2 ratios."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "A live CR013 constraint needs a spectrum/branching model plus collider reinterpretation of cross-section upper limits or a full recast/likelihood workflow; the repo currently has no collider direct-search machinery."
+open_issues:
+  - "WA/CA should decide whether a future sidecar should add table-level HEPData cross-section upper limits at benchmark masses; this PKA draft promotes only the measured mass-exclusion limits explicitly quoted by PDG/CMS/ATLAS."
+  - "A code implementation would need a PI decision on which RS realization maps the scan M_KK, KK-gluon mass, KK-graviton mass, and k/M_P conventions to one another."

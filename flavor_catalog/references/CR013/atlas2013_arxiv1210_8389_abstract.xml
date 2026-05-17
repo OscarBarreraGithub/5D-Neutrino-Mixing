@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/YTg3H2moX4Gfc3Uu3N4GAte8e/8</id>
+  <title>arXiv Query: search_query=&amp;id_list=1210.8389&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1210.8389" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1210.8389v2</id>
+    <title>Search for Extra Dimensions in diphoton events using proton-proton collisions recorded at sqrt(s) = 7 TeV with the ATLAS detector at the LHC</title>
+    <updated>2013-02-21T10:04:36Z</updated>
+    <link href="https://arxiv.org/abs/1210.8389v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1210.8389v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The large difference between the Planck scale and the electroweak scale, known as the hierarchy problem, is addressed in certain models through the postulate of extra spatial dimensions. A search for evidence of extra spatial dimensions in the diphoton channel has been performed using the full set of proton-proton collisions at sqrt(s) = 7 TeV recorded in 2011 with the ATLAS detector at the CERN Large Hadron Collider. This dataset corresponds to an integrated luminosity of 4.9 fb. The diphoton invariant mass spectrum is observed to be in good agreement with the Standard Model expectation. In the context of the model proposed by Arkani-Hamed, Dimopoulos and Dvali, 95% confidence level lower limits of between 2.52 TeV and 3.92 TeV are set on the ultraviolet cutoff scale Ms depending on the number of extra dimensions and the theoretical formalism used. In the context of the Randall--Sundrum model, a lower limit of 2.06 (1.00) TeV at 95% confidence level is set on the mass of the lightest graviton for couplings of k/Mpl = 0.1 (0.01). Combining with the ATLAS dilepton searches based on the 2011 data, the 95% confidence level lower limit on the Randall--Sundrum graviton mass is further tightened to 2.23 (1.03) TeV for k/Mpl = 0.1 (0.01).</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-10-31T16:51:52Z</published>
+    <arxiv:comment>19 pages plus author list (42 pages total), 4 figures, 4 tables, submitted to New Journal of Physics. All figures including auxiliary figures are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2012-06/</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>New J. Phys. 15 (2013) 043007</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1088/1367-2630/15/4/043007</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1367-2630/15/4/043007" title="doi"/>
+  </entry>
+</feed>

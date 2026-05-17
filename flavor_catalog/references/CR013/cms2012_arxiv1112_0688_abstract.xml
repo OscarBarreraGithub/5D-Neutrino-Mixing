@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/kZiBnRVuJDdby0RKOsQQyysM7+k</id>
+  <title>arXiv Query: search_query=&amp;id_list=1112.0688&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1112.0688" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1112.0688v2</id>
+    <title>Search for signatures of extra dimensions in the diphoton mass spectrum at the Large Hadron Collider</title>
+    <updated>2013-01-22T12:23:48Z</updated>
+    <link href="https://arxiv.org/abs/1112.0688v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1112.0688v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for signatures of extra dimensions in the diphoton invariant-mass spectrum has been performed with the CMS detector at the LHC. No excess of events above the standard model expectation is observed using a data sample collected in proton-proton collisions at sqrt(s) = 7 TeV corresponding to an integrated luminosity of 2.2 inverse femtobarns. In the context of the large-extra-dimensions model, lower limits are set on the effective Planck scale in the range of 2.3-3.8 TeV at the 95% confidence level. These limits are the most restrictive bounds on virtual-graviton exchange to date. The most restrictive lower limits to date are also set on the mass of the first graviton excitation in the Randall-Sundrum model in the range of 0.86-1.84 TeV, for values of the associated coupling parameter between 0.01 and 0.10.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-12-03T20:48:10Z</published>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 108 (2012) 111801</arxiv:journal_ref>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.108.111801</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.108.111801" title="doi"/>
+  </entry>
+</feed>

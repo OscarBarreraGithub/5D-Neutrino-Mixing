@@ -1,0 +1,905 @@
+1                                        84. Extra Dimensions
+
+
+                                     84. Extra Dimensions
+
+Revised August 2025 by Z. Demiragli (Boston U.) and A. Pomarol (U. Autònoma de Barcelona;
+IFAE).
+
+
+84.1 Introduction
+    Proposals for a spacetime with more than three spatial dimensions date back to the 1920s,
+mainly through the work of Kaluza and Klein, in an attempt to unify the forces of nature [1].
+Although their initial idea failed, the formalism that they and others developed is still useful
+nowadays. Around 1980, string theory proposed again to enlarge the number of space dimensions,
+this time as a requirement for describing a consistent theory of quantum gravity.        The extra
+dimensions were supposed to be compactified at a scale close to the Planck scale, and thus not
+testable experimentally in the near future.
+    A different approach was given by Arkani-Hamed, Dimopoulos, and Dvali (ADD) in their
+seminal paper in 1998 [2], where they showed that the weakness of gravity could be explained by
+postulating two or more flat extra dimensions in which only gravity could propagate. The size of
+these extra dimensions should range between roughly a millimeter and ∼1/TeV, leading to possible
+observable consequences in current and future experiments. A year later, Randall and Sundrum
+(RS) [3] found a new possibility using a warped geometry, postulating a five-dimensional Anti-de
+Sitter (AdS) spacetime with a compactification scale of order 1/TeV. The origin of the smallness
+of the electroweak scale versus the Planck scale was explained by the gravitational redshift factor
+present in the warped AdS metric. As in the ADD model, originally only gravity was assumed to
+propagate in the extra dimensions, although it was soon clear that this was not necessary in warped
+extra dimensions and also the SM gauge fields [4, 5] and SM fermions [6, 7] could propagate in the
+five-dimensional spacetime.
+    The physics of warped extra-dimensional models has an alternative interpretation by means
+of the AdS/Conformal Field Theory (CFT) correspondence [8–10]. Models with warped extra
+dimensions are related to four-dimensional strongly-interacting theories, allowing an understand-
+ing of the properties of five-dimensional fields as those of four-dimensional composite states [11].
+This approach has opened new directions for tackling outstanding questions in particle physics,
+such as the flavor problem, grand unification, and the origin of electroweak symmetry breaking or
+supersymmetry breaking.
+84.1.1 Experimental Constraints
+    Constraints on extra-dimensional models arise from astrophysical and cosmological considera-
+tions, tabletop experiments exploring gravity at sub-mm distances, and collider experiments. Col-
+lider limits on extra-dimensional models are dominated by LHC results, which can be found on the
+public WWW pages of ATLAS [12] and CMS [13]. This review includes the most recent limits, most
+of which are published results based on 140 fb−1 LHC data collected in 2015-18 at a center-of-mass
+energy of 13 TeV and legacy results from 20 fb−1 of 8 TeV data collected in Run 1. For most of the
+models, Run 2 results surpass the sensitivity of Run 1.
+84.1.2 Kaluza-Klein Theories
+   Field theories with compact extra dimensions can be written as theories in ordinary four di-
+mensions (4D) by performing a Kaluza-Klein (KK) reduction. As an illustration, consider a simple
+example, namely a field theory of a complex scalar in flat five-dimensional (5D) spacetime. The
+
+              S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+                                             1st December, 2025 11:46am
+2                                                 84. Extra Dimensions
+
+
+action will be given by        1
+
+                                            Z                       h                                                i
+                                   S5 = −       d4x dy M5 |∂µ φ|2 + |∂y φ|2 + λ5 |φ|4 ,                                   (84.1)
+
+where y refers to the extra (fifth) dimension. A universal scale M5 has been extracted in front of
+the action in order to keep the 5D field with the same mass-dimension as in 4D. This theory is
+perturbative for energies E <                           3
+                            ∼ `5 M5 /λ5 where `5 = 24π [14].
+    Let us now consider that the fifth dimension is compact with the topology of a circle S 1 of
+radius R, which corresponds to the identification of y with y + 2πR. In such a case, the 5D complex
+scalar field can be expanded in a Fourier series:
+                                                                     ∞
+                                                               1    X
+                                      φ(x, y) = √                       einy/R φ(n) (x) ,                                 (84.2)
+                                                             2πRM5 n=−∞
+
+that, inserted in Eq. (84.1) and integrating over y, gives
+                                                                        (0)        (n)
+                                                            S5 = S4 + S4 ,                                                (84.3)
+
+where                                                   Z           h                                     i
+                                          (0)
+                                       S4 = −                d4x |∂µ φ(0) |2 + λ4 |φ(0) |4 ,                              (84.4)
+
+and,
+                                                                    "                               2                #
+                                                                                                n
+                                                Z                                           
+                                    (n)                 4
+                                                              X
+                                                                                (n) 2                         (n) 2
+                                   S4     =−        dx                  |∂µ φ      | +                   |φ      |
+                                                             n6=0
+                                                                                                R
+                                            + quartic interactions .                                                      (84.5)
+
+The n = 0 mode self-coupling is given by
+                                                                          λ5
+                                                              λ4 =            .                                           (84.6)
+                                                                        2πRM5
+
+The above action corresponds to a 4D theory with a massless scalar φ(0) , referred to as the zero
+mode, and an infinite tower of massive modes φ(n) with n > 0, known as KK modes. The KK
+reduction thus allows a treatment of 5D theories as 4D field theories with an infinite number of
+fields. At energies smaller than 1/R, the KK modes can be neglected, leaving the zero-mode action
+of Eq. (84.4). The strength of the interaction of the zero-mode, given by Eq. (84.6), decreases as R
+increases. Thus, for a large extra dimension R  1/M5 , the massless scalar is very weakly coupled.
+84.2 Large Extra Dimensions for Gravity
+84.2.1 The ADD Scenario
+    The ADD scenario [2, 15] (for a review see, for example, [16]) assumes a D = 4 + δ dimensional
+spacetime, with δ compactified spatial dimensions. The apparent weakness of gravity arises since it
+propagates in the higher-dimensional space. The SM is assumed to be localized in a 4D subspace,
+a 3-brane, as can be found in certain string theory constructions [17, 18]. Gravity is described by
+the Einstein-Hilbert action in D = 4 + δ spacetime dimensions
+                                            2+δ                 √                               √
+                                          M̄D
+                                                    Z                                   Z
+                              SD = −                    d4 xdδ y −g R +                     d4 x −gind LSM ,              (84.7)
+                                            2
+    1
+        Our convention for the metric is ηM N = Diag(−1, 1, 1, 1, 1).
+
+
+                                                            1st December, 2025
+3                                        84. Extra Dimensions
+
+
+where x labels the ordinary four coordinates, y the δ extra coordinates, g refers to the determinant
+of the D-dimensional metric whose Ricci scalar is defined by R, and M̄D is called the reduced Planck
+scale of the D-dimensional theory. In the second term of Eq. (84.7), which gives the gravitational
+interactions of SM fields, the D-dimensional metric reduces to the induced metric on the 3-brane
+where the SM fields propagate. The extra dimensions are assumed to be flat and compactified in
+a volume Vδ . As an example, consider a toroidal compactification of equal radii R and volume
+Vδ = (2πR)δ . After a KK reduction, one finds that the fields that couple to the SM are the spin-2
+gravitational field Gµν (x, y) and a tower of spin-0 KK graviscalars [19]. The graviscalars, however,
+only couple to SM fields through the trace of the energy-momentum tensor, resulting in weaker
+couplings to the SM fields. The Fourier expansion of the spin-2 field is given by
+                                                     1 X i~n·~y/R (~n)
+                             Gµν (x, y) = G(0)
+                                           µν (x) + √          e Gµν (x) ,                              (84.8)
+                                                      Vδ ~n6=0
+
+where ~y = (y1 , y2 , ..., yδ ) are the extra-dimensional coordinates and ~n = (n1 , n2 , ..., nδ ). Eq. (84.8)
+                                                   (0)                     n)
+                                                                          (~
+contains a massless state, the 4D graviton Gµν , and its KK tower Gµν with masses m~2n = |~n|2 /R2 .
+At energies below 1/R the action is that of the zero mode
+
+                               M̄ 2+δ
+                                        Z            q                     Z        q
+                       (0)                   4                                          (0)
+                      S4     =− D           d x Vδ       −g (0) R(0)   +        4
+                                                                               d x −gind LSM ,          (84.9)
+                                 2
+                                                         √
+where we can identify the 4D reduced Planck mass, MP ≡ 1/ 8πGN ' 2.4 × 1018 GeV, as a
+function of the D-dimensional parameters:
+                                                    2+δ        2+δ
+                                        MP2 = V δ M̄D   ≡ R δ MD   .                                   (84.10)
+
+Fixing MD at around the electroweak scale MD ∼ TeV to avoid introducing a new mass scale in
+the model, Eq. (84.10) gives a prediction for R:
+
+                       δ = 1, 2, ..., 6 → R ∼ 109 km , 0.5 mm , ... , 0.1 MeV−1 .                      (84.11)
+
+The option δ = 1 is clearly ruled out, as it leads to modifications of Newton’s law at solar system
+distances. However this is not the case for δ ≥ 2, and possible observable consequences can be
+sought in present and future experiments.
+    Consistency of the model requires a stabilization mechanism for the radii of the extra dimensions,
+to the values shown in Eq. (84.11). The fact that we need R  1/MD leads to a new hierarchy
+problem, the solution of which might require imposing supersymmetry in the extra-dimensional
+bulk (for the case of two extra dimensions see for example [20]).
+84.2.2 Tests of the Gravitational Force Law at Sub-mm Distances
+    The KK modes of the graviton give rise to deviations from Newton’s law of gravitation for
+distances <
+          ∼ R. Such deviations are usually parameterized by a modified Newtonian potential of
+the form
+                                            m1 m2 h            i
+                                V (r) = −GN         1 + α e−r/λ .                     (84.12)
+                                              r
+For a 2-torus compactification, α = 16/3 and λ = R. Searches for deviations from Newton’s law
+of gravitation have been performed in several experiments [21–24]. From Ref. [23] we have the
+constraint R < 30µm at 95% CL for δ = 2, corresponding to MD > 4.0 TeV. We see then that
+bounds from Newton’s law deviations are already pushing the scale MD beyond the TeV for two
+extra dimensions.
+
+                                              1st December, 2025
+4                                    84. Extra Dimensions
+
+
+84.2.3 Astrophysical and Cosmological Constraints
+    The light KK gravitons could be copiously produced in stars, carrying away energy. Ensuring
+that the graviton luminosity is low enough to preserve the agreement of stellar models with observa-
+tions provides powerful bounds on the scale MD . The most stringent bound arises from supernova
+SN1987A, giving MD > 27 (2.4) TeV for δ = 2 (3) [25]. After a supernova explosion, most of
+the KK gravitons stay gravitationally trapped in the remnant neutron star. The requirement that
+neutron stars are not excessively heated by KK decays into photons leads to MD > 1700 (76) TeV
+for δ = 2 (3) [26].
+    Cosmological constraints are also quite stringent [27]. To avoid overclosure of the Universe
+by relic gravitons one needs MD > 7 TeV for δ = 2. Relic KK gravitons decaying into photons
+contribute to the cosmic diffuse gamma radiation, from which one can derive the bound MD > 100
+TeV for δ = 2.
+    We must mention however that bounds coming from the decays of KK gravitons into photons
+can be reduced if we assume that KK gravitons decay mainly into other non-SM states. This could
+happen, for example, if there were other 3-branes with hidden sectors residing on them [15].
+84.2.4 Collider Signals
+84.2.4.1 Graviton and Other Particle Production
+    Although each KK graviton has a purely gravitational coupling, suppressed by 1/MP , inclusive
+processes in which one sums over the almost continuous spectrum of available gravitons have cross
+sections suppressed only by powers of MD . Processes involving gravitons are therefore detectable
+in collider experiments if MD ∼ TeV. A number of experimental searches for evidence of large extra
+dimensions have been performed at colliders, and interpreted in the context of the ADD model.
+    One signature arises from direct graviton emission. By making a derivative expansion of Einstein
+gravity, one can construct an effective theory, valid for energies much lower than MD , and use it
+to make predictions for graviton-emission processes at colliders [19, 28, 29]. Gravitons produced in
+the final state would escape detection, giving rise to missing transverse momentum (pmiss   T ). The
+results quoted below are 95% CL lower limits on MD for a range of values of δ between 2 and 6,
+with more stringent limits corresponding to lower δ values.
+    At hadron colliders, experimentally sensitive channels include the jet (j) + pmiss
+                                                                                    T   and γ + pmiss
+                                                                                                  T
+                                   miss                           −1
+final states. ATLAS (CMS) j + pT results with 139 (137) fb of 13 TeV data provide limits of
+MD > 5.9 − 11.2 TeV [30] (MD > 5.5 − 10.7 TeV [31]). For these analyses, both experiments are
+assuming leading order cross sections. Since the effective theory is only valid for energies much less
+than MD , the results are quoted for the full space,
+                                               √     and include √
+                                                                 the information that suppressing the
+                                     4   2
+graviton cross section by a factor MD /ŝ for ŝ > MD , where ŝ is the parton-level center-of-mass
+energy of the hard collision, weakens the limits on MD by a negligible amount for δ = 2 (∼3% for
+δ = 6). Less stringent limits are obtained by CMS [32] from analysis of 36 fb−1 of 13 TeV data in
+the γ + pmiss
+           T   final state (MD > 2.85 − 2.90 TeV for δ = 3 − 6). The analogous ATLAS search [33]
+uses full Run 2 statistics but does not quote ADD interpretation of the results.
+    In models in which the ADD scenario is embedded in a string theory at the TeV scale [18],
+we expect the string scale Ms to be smaller than MD , and therefore expect production of string
+resonances at the LHC [34]. A result from CMS analyzing the dijet invariant mass distribution for
+137 fb−1 of 13 TeV data excludes string resonances that decay predominantly to q + g with masses
+below 7.9 TeV [35]. ATLAS dijet analysis [36] provides their results in the context of model-
+independent limits on the cross section times acceptance for generic resonances of a variety of
+possible widths, from which one can deduce similar lower mass limits ∼ 8 TeV for string resonances
+decaying to q + g.
+
+                                         1st December, 2025
+5                                    84. Extra Dimensions
+
+
+84.2.4.2 Virtual graviton effects
+    One can also search for virtual graviton effects, the calculation of which however depends on the
+ultraviolet cut-off of the theory and is therefore very model dependent. In the literature, several
+different formulations exist [19,29,37] for the dimension-eight operator for gravity exchange at tree
+level:
+                                          4                  1
+                                                                     
+                                                     µν           µ ν
+                                L8 = ± 4        Tµν T −         T T ,                         (84.13)
+                                       MT T                δ+2 µ ν
+where Tµν is the energy-momentum tensor and MT T is related to MD by some model-dependent
+coefficient [38]. The relations with the parametrization of Refs. [37] and [19] are, respectively,
+MT T = MS and MT T = (2/π)1/4 ΛT . The experimental results below are given as 95% CL lower
+limits on MT T , including in some cases the possibility of both constructive or destructive interfer-
+ence, depending on the sign chosen in Eq. (9).
+    The most stringent limits arise from LHC analyses of the dijet angular distribution. Using
+35.9 fb−1 of 13 TeV data, CMS [39] obtains results that correspond to an approximate limit of
+MT T >∼ 9 TeV.
+    The next most restrictive results come from the analyses of diphoton (MT T > 6.1 TeV from
+ATLAS [40] and MT T > 8.3 TeV from CMS [41]) and dilepton (MT T > 6.5 TeV from CMS [42])
+mass spectra. The complete Run 2 (139 fb−1 ) analysis of ATLAS di-lepton data [43] does not quote
+the limits on the ADD model.
+    At the one-loop level, gravitons can also generate dimension-six operators with coefficients
+that are also model dependent. Experimental bounds on these operators can also give stringent
+constraints on MD [38].
+84.2.4.3 Black Hole Production
+                              √
+    The physics at energies s ∼ MD is sensitive to the details of the unknown quantum theory
+                                                           √
+of gravity. Nevertheless, in the transplanckian regime, s  MD , one can rely on a semiclassical
+description of gravity to obtain predictions. An interesting feature of transplanckian physics is the
+creation of black holes [44, 45] (for a review see, for example, [46]). A black hole is expected to be
+formed in a collision in which the impact parameter is smaller than the Schwarzschild radius [47]:
+                                     "                                  #1/(δ+1)
+                                1 2δ π (δ−3)/2          δ+3       MBH
+                                                             
+                          RS =                 Γ                                   ,          (84.14)
+                               MD    δ+2                 2        MD
+
+where MBH is the mass of the black hole, which would roughly correspond to the total energy
+in the collision. The cross section for black hole production can be estimated to be of the same
+order as the geometric area σ ∼ πRS2 . For MD ∼ TeV, this gives a production of ∼ 107 black
+              √
+holes at the s = 14 TeV LHC with an integrated luminosity of 30 fb−1 [44, 45]. A black hole
+would provide a striking experimental signature since it is expected to thermally radiate with a
+Hawking temperature TH = (δ + 1)/(4πRS ), and therefore would evaporate democratically into all
+SM states. Nevertheless, given the present constraints on MD , the LHC will not be able to reach
+energies much above MD . This implies that predictions based on the semiclassical approximation
+could receive sizable modifications from model-dependent quantum-gravity effects.
+    The most stringent limits on microscopic black holes arise from LHC searches which observed
+no excesses above the SM background in high-multiplicity final states. The results are usually
+quoted as model-independent limits on the cross section for new physics in the final state and
+kinematic region analyzed. These results can then be used to provide constraints of models of
+low-scale gravity and weakly-coupled string theory. In addition, limits are sometimes quoted on
+particular implementations of models, which are used as benchmarks to illustrate the sensitivity.
+
+                                         1st December, 2025
+6                                      84. Extra Dimensions
+
+
+    A CMS analysis [48] of multi-object final states using 36 fb−1 of 13 TeV data, excludes semi-
+classical black holes below masses of up to 10.1 TeV for MD = 2 TeV and δ = 6. Analogous Run 2
+ATLAS analysis [49], using 3.0 fb−1 of 13 TeV data, excludes black hole masses up to 9.0 − 9.7 TeV,
+depending on MD , for δ = 6. Another ATLAS search [50] for an excess of events with multiple
+high transverse momentum objects, including charged leptons and jets, using 3.2 fb−1 of 13 TeV
+data, excludes semiclassical black holes below masses of ∼ 8.7 TeV for MD = 2 TeV and δ = 6.
+    A complementary approach is to look for jet extinction at high transverse momenta, as we
+expect hard short distance scattering processes to be highly suppressed at energies above MD [51].
+The CMS analysis [52] of inclusive jet pT spectrum in 10.7 fb−1 of 8 TeV data set a lower limit of
+3.3 TeV on the extinction mass scale.
+    For black hole masses near MD , the semi-classical approximation is not valid, and one could
+instead expect quantum black holes (QBH) that decay primarily into two-body final states [53].
+In the context of both ADD model with δ = 6 the QBHs have been searched in few final state
+analysis (based on 2.3 fb−1 [54]), dijet [36, 39, 55], (same and different flavor) dilepton [56–60],
+photon+jet [61, 62] and lepton+jet [63] channels by both ATLAS and CMS experiments. The Run
+2 results at 13 TeV provide lower limits on QBH masses of up-to 9.4 TeV in an ADD model with
+δ = 6. The strongest constraints are from dijet searches.
+    In weakly-coupled string models the semiclassical description of gravity fails in the energy
+range between Ms and Ms /gs2 where stringy effects are important. In this regime one expects,
+instead of black holes, the formation of string balls, made of highly excited long strings, that could
+be copiously produced at the LHC for Ms ∼ TeV [64], and would evaporate thermally at the
+Hagedorn temperature giving rise to high-multiplicity events. The same analyses used to search
+for black holes can be interpreted in the context of string balls. For example, for the case of δ = 6
+with Ms = MD /1.26 = 3 TeV, the ATLAS multiple high transverse momentum object analysis [49]
+excludes string balls with masses below 6.5 to 9.0 TeV for values of 0.2 < gs < 0.8. The CMS
+multi-object analysis [48] studies string ball production in two scenarios, both assuming δ = 6.
+For the constant gs = 0.2 and 1 < Ms < 3.5 TeV the string ball masses below 7.2 to 9.4 TeV are
+excluded, while at constant Ms = 3.6 TeV and 0.2 < gs < 0.4 masses below 7.2 to 8.1 TeV are
+excluded.
+84.3 TeV-Scale Extra Dimensions
+84.3.1 Warped Extra Dimensions
+    The RS model [3] is the most attractive setup of warped extra dimensions at the TeV scale, since
+it provides an alternative solution to the hierarchy problem. The RS model is based on a 5D theory
+with the extra dimension compactified in an orbifold, S 1 /Z2 , a circle S 1 with the extra identification
+of y with −y. This corresponds to the segment y ∈ [0, πR], a manifold with boundaries at y = 0
+and y = πR. Let us now assume that this 5D theory has a cosmological constant in the bulk Λ,
+and on the two boundaries Λ0 and ΛπR . The action is given by
+                                 Z        n√ h 1            i √
+                         S5 = − d4x dy −g M53 R + Λ + −g0 δ(y)Λ0
+                                                  2
+                                 √                     o
+                               + −gπR δ(y − πR)ΛπR ,                                               (84.15)
+
+where g0 and gπR are the values of the determinant of the induced metric on the two respective
+boundaries. Einstein’s equations can be solved, giving in this case the metric
+                             ds2 = a(y)2 dxµ dxν ηµν + dy 2 , a(y) = e−ky ,                       (84.16)
+            q
+where k = −Λ/6M53 . Consistency of the solution requires Λ0 = −ΛπR = −Λ/k. The metric
+in Eq. (84.16) corresponds to a 5D AdS space. The factor a(y) is called the “warp” factor and
+
+                                           1st December, 2025
+7                                       84. Extra Dimensions
+
+
+determines how 4D scales change as a function of the position in the extra dimension. In particular,
+this implies that energy scales for 4D fields localized at the boundary at y = πR are red-shifted by a
+factor e−kπR with respect to those localized at y = 0. For this reason, the boundaries at y = 0 and
+y = πR are usually referred to as the ultraviolet (UV) and infrared (IR) boundaries, respectively.
+    As in the ADD case, we can perform a KK reduction and obtain the low-energy effective theory
+of the 4D massless graviton. In this case we obtain
+                                                             M53 
+                                   Z πR                                      
+                           MP2 =          dy e−2ky M53 =           1 − e−2kπR .               (84.17)
+                                    0                        2k
+Taking M5 ∼ k ∼ MP , we can generate an IR-boundary scale of order ke−kπR ∼ TeV for an extra
+dimension of radius R ' 11/k. Mechanisms to stabilize R to this value have been proposed [65, 66]
+that, contrary to the ADD case, do not require introducing any new small or large parameter.
+Therefore a natural solution to the hierarchy problem can be achieved in this framework if the Higgs
+field, whose vacuum expectation value (VEV) is responsible for electroweak symmetry breaking, is
+localized at the IR-boundary where the effective mass scales are of order TeV. The radion field
+is generically heavy in models with a stabilized R. Nevertheless, it has been recently discussed
+that under some conditions a naturally light radion can arise [67–70]. In these cases the radion is
+identified with the dilaton, the Nambu-Goldstone boson associated to the spontaneous breaking of
+scale invariance, and its mass can be naturally below ke−kπR ∼ TeV.
+    In the RS model [3], all the SM fields were assumed to be localized on the IR-boundary. Nev-
+ertheless, for the hierarchy problem, only the Higgs field has to be localized there. SM gauge
+bosons and fermions can propagate in the 5D bulk [4–7] (for a review see, for example, [71, 72]).
+By performing a KK reduction from the 5D action of a gauge boson, we find [4, 5]
+                                                Z πR
+                                        1                   1   πR
+                                            =          dy      = 2 ,                          (84.18)
+                                        g42      0
+                                                             2
+                                                            g5   g5
+where gD (D = 4, 5) is the gauge coupling in D-dimensions. Therefore the 4D gauge couplings can
+be of order one, as is the case of the SM, if one demands g52 ∼ πR. Using kR ∼ 10 and g4 ∼ 0.5,
+one obtains the 5D gauge coupling                   √
+                                            g5 ∼ 4/ k .                                 (84.19)
+Boundary
+  √        kinetic terms for the gauge bosons can modify this relation, allowing for larger values of
+g5 k.
+    Fermions propagating in a warped extra dimension have 4D massless zero-modes with wave-
+functions which vary as f0 ∼ exp[(1/2 − cf )ky], where cf k is their 5D mass [7, 73]. Depending on
+the free parameter cf k, fermions can be localized either towards the UV-boundary (cf > 1/2) or
+IR-boundary (cf < 1/2). Since the Higgs boson is localized on the IR-boundary, one can generate
+exponentially suppressed Yukawa couplings by having the fermion zero-modes localized towards
+the UV-boundary, generating naturally the light SM fermion spectrum [7]. A large overlap with
+the wavefunction of the Higgs is needed for the top quark, in order to generate its large mass,
+thus requiring it to be localized towards the IR-boundary. In conclusion, the large mass hierarchies
+present in the SM fermion spectrum can be easily obtained in warped models via suitable choices
+of the order-one parameters cf [74]. In these scenarios, deviations in flavor physics from the SM
+predictions are expected to arise from flavor-changing KK gluon couplings [75], putting certain
+constraints on the parameters of the models and predicting new physics effects to be observed in
+B-physics processes (see, for example, [76, 77]).
+    The masses of the KK states can also be calculated. One finds [7]
+                                           α 1
+                                                            
+                                   mn ' n + −   πke−πkR ,                                     (84.20)
+                                           2  4
+
+                                           1st December, 2025
+8                                    84. Extra Dimensions
+
+
+where n = 1, 2, ... and α = {|cf − 1/2|, 0, 1} for KK fermions, KK gauge bosons and KK gravitons,
+respectively. Their masses are of order ke−πkR ∼ TeV (for this reason we refer to these scenarios as
+TeV-scale extra dimensions). The first KK state of the gauge bosons would be the lightest, while
+gravitons are expected to be the heaviest.
+84.3.1.1 Models of Electroweak Symmetry Breaking
+    Theories in warped extra dimensions can be used to implement symmetry breaking at low
+energies by boundary conditions (for a review see, for example, [78]). For example, for a U (1) gauge
+symmetry in the 5D bulk, this can be easily achieved by imposing a Dirichlet boundary condition on
+the IR-boundary for the gauge-boson
+                                q
+                                       field, Aµ |y=πR = 0. This makes the zero-mode gauge boson
+get a mass, given by mA = g4 2k/g52 e−πkR . A very different situation occurs if the Dirichlet
+boundary condition is imposed on the UV-boundary, Aµ |y=0 = 0. In this case the zero-mode gauge
+boson disappears from the spectrum. Finally, if a Dirichlet boundary condition is imposed on the
+two boundaries, one obtains a massless 4D scalar corresponding to the fifth component of the 5D
+gauge boson, A5 . Thus, different scenarios can be implemented by appropriately choosing the 5D
+bulk gauge symmetry, G5 , and the symmetries to which it reduces on the UV and IR-boundary,
+HU V and HIR , respectively. In all cases the KK spectrum comes in representations of the group
+G5 .
+     Among the most interesting scenarios are those called gauge-Higgs unified models, where the
+Higgs boson appears as the fifth component of a 5D gauge boson, A5 . The Higgs mass is protected
+by the 5D gauge invariance and can only get a nonzero value from non-local one-loop effects [79].
+To guarantee the relation MW 2 ' M 2 cos2 θ , a custodial SU (2) symmetry is needed in the bulk
+                                    Z      W                    V
+and IR-boundary [80]. The simplest realization [81, 82] has
+                                   G5 = SU (3)c × SO(5) × U (1)X ,
+                                 HIR = SU (3)c × SO(4) × U (1)X ,
+                                HU V = GSM .
+The Higgs boson gets a potential at the one-loop level that triggers a VEV, breaking the electroweak
+symmetry. In these models there is a light Higgs boson whose mass can be around 125 GeV, as
+required by the discovered Higgs boson [83]. This state, as will be explained in Sec. 84.3.2, behaves
+as a composite pseudo-Nambu-Goldstone boson with couplings that deviate from the SM Higgs [84].
+The present experimental determination of the Higgs couplings at the LHC, that agrees with the
+SM predictions, put important constraints on these scenarios [83]. The lightest KK modes of the
+model are color fermions with charges Q = −1/3, 2/3 and 5/3 [85].
+84.3.1.2 Constraints from Electroweak Precision Tests
+    Models in which the SM gauge bosons propagate in 1/TeV-sized extra dimensions give generi-
+cally large corrections to electroweak observables. When the SM fermions are confined on a bound-
+ary these corrections are universal and can be parameterized by four quantities: S,  b Tb, W and Y ,
+as defined in Ref. [86]. For warped models, where the 5D gauge coupling of Eq. (84.19) is large,
+the most relevant parameter is Tb, which gives the bound mKK >     ∼ 10 TeV [71]. When a custodial
+symmetry is imposed [80], the main constraint comes from the Sb parameter, requiring mKK >       ∼3
+TeV, independent of the value of g5 . Corrections to the ZbL b̄L coupling can also be important [71],
+especially in warped models for electroweak symmetry breaking as the ones described above.
+84.3.1.3 Kaluza-Klein Searches
+    The main prediction of 1/TeV-sized extra dimensions is the presence of a discretized KK spec-
+trum, with masses around the TeV scale, associated with the SM fields that propagate in the extra
+dimension.
+
+                                         1st December, 2025
+9                                     84. Extra Dimensions
+
+
+    In the RS model [3], only gravity propagates in the 5D bulk. Experimental searches have been
+performed for the lightest KK graviton through its decay to a variety of SM particle-antiparticle
+pairs. The results are usually interpreted in the plane of the dimensionless coupling k/MP versus
+m1 , where MP is the reduced Planck mass defined previously and m1 is the mass of the lightest
+KK excitation of the graviton. Since the AdS curvature ∼ k cannot exceed the cut-off scale of
+                                         1/3                                √
+the model, which is estimated to be `5 M5 [38], one must demand k  2`5 MP ' 40MP . The
+most stringent limits currently arise from LHC searches for resonances in the dilepton and diphoton
+final states, using 13 TeV collisions. Searches with the γγ final state are an especially powerful
+approach, given that these final states have a branching fraction twice that of any individual lepton
+flavor. The CMS analysis [41] of 138 fb−1 of 13 TeV data excludes KK gravitons below 2.2 to 5.6
+TeV, depending on the value of the coupling k/MP , which is varied between 0.01 and 0.2, while
+ATLAS [87] using 139 fb−1 and provides a lower limit on the KK graviton mass of 4.5 TeV for
+the coupling parameter 0.1. The CMS [42] dilepton analyses, combining results from the ee and
+µµ channels, exclude KK gravitons with masses 2.47–4.78 TeV for k/MP values of 0.01–0.1. The
+ATLAS [88] analysis of 139 fb−1 of Run 2 data does not include a RS KK graviton interpretation
+of the results. Less stringent limits on the KK graviton mass can be derived from analyses of the
+dijet [35, 36, 89, 90], HH [91–100], and V V [101–105] final states, where V can represent either a
+W or Z boson.
+    In addition, both ATLAS and CMS experiments directly search for heavy radions, with masses
+above 1 TeV where the dominant decay mode is to pairs of bosons. The main production mechanism
+is gluon fusion. ATLAS [103] (CMS [106]) excludes radion masses below 3.2 TeV (3.1 TeV) for a
+radion decaying into W W, ZZ. Radions are also searched in final states with pairs of Higgs bosons
+HH [91, 94, 96, 97, 99, 107], and dijet final states [108] with additional gluons. Bounds for a light
+radion (1 keV–10 GeV mass range) can be found in [109].
+    In warped extra-dimensional models in which the SM fields propagate in the 5D bulk, the
+couplings of the KK graviton to ee/µµ/γγ are suppressed [110], and the above bounds do not
+apply. Furthermore, the KK graviton is the heaviest KK state (see Eq. (84.20)), and therefore
+experimental searches for KK gauge bosons and fermions are more appropriate discovery channels
+in these scenarios. For the scenarios discussed above in which only the Higgs boson and the top
+quark decays are localized close to the IR-boundary, the KK gauge bosons mainly decay into top
+quarks, longitudinal
+              q      W/Z bosons, and Higgs bosons. Couplings to light SM fermions are suppressed
+by a factor g/ g52 k ∼ 0.2 [7] for the value of Eq. (84.19) that is considered from now on. Searches
+have been made for evidence of the lightest KK excitation of the gluon, through its decay to tt
+pairs. The searches take into account the natural KK gluon width, which is typically ∼ 15% of its
+mass. The decay of a heavy particle to tt would tend to produce highly boosted top (anti-)quarks
+in the final state. Products of the subsequent hadronic top quark decay would therefore tend to
+be close to each other in the detector. In the case of t → W b → jjb decays, the three jets could
+overlap with one another and not be individually reconstructed with the standard jet algorithms,
+while t → W b → `νb decays could result in the lepton failing standard isolation requirements due
+to its proximity to the b-jet; in both cases, the efficiency for properly reconstructing the final state
+would fall as the mass of the original particle increases. To avoid the loss in sensitivity which
+would result, a number of techniques, known generally as top quark tagging [111, 112], have been
+developed to reconstruct and identify highly boosted top quarks, for example by using a single
+wide jet to contain all the decay products of a hadronic top decay. The large backgrounds from
+QCD jets can then be reduced by requiring the jet mass be consistent with that of a top quark,
+and also by examining the substructure of the wide jet for indication that it resulted from the
+hadronic decay of a top quark. These techniques are key to extending to very high masses the
+
+                                          1st December, 2025
+10                                   84. Extra Dimensions
+
+
+range of accessible resonances decaying to tt pairs. While the ATLAS search in 139 fb−1 of Run
+2 data [113] does not provide a KK interpretation, dedicated analysis from CMS [114] of 36 fb−1
+of 13 TeV data combines di-lepton, lepton-plus-jet, and all-hadronic tt decays and excludes KK
+gluons with masses below 4.55 TeV. ATLAS uses all-hadronic [115] and lepton-plus-jet [116] final
+states to exclude KK gluons up to 3.4 and 3.8 TeV respectively with 36fb−1 of 13 TeV data. The
+results are not directly comparable between the two LHC experiments, since they employ in their
+respective analyses different implementations of the theoretical model. For masses between 3 and
+5 TeV, the cross-section limits are around 20 fb for CMS analysis of 36 fb−1 and 30 fb (4 fb) for
+ATLAS analyses of 36 (139) fb−1 .
+    A gauge boson KK excitation could be also sought through its decay to longitudinal W/Z
+bosons. Recent analyses from ATLAS [117] (and CMS [118]) with 139 (137) fb−1 of 13 TeV data
+searching for heavy vector resonances decaying to a W or Z boson and a Higgs in the q q̄bb̄ final
+state have set a lower limit on the mass of these KK of 3.2√(3.7) TeV (warped models are equivalent
+to the Model B considered in the analyses with gV ∼ g5 k). The decay to a pair of intermediate
+vector bosons has also been exploited to search for KK gravitons in models in which the SM fields
+propagate in the 5D bulk. The analyses typically reconstruct hadronic W/Z decays using variants
+of the boosted techniques mentioned previously. An ATLAS analysis [119] combines leptonic and
+hadronic final states from the KK graviton decay G∗ → V V , where V can represent either a W or
+Z boson, exclude KK gravitons with masses below 2.3 TeV, for a value of k/MP = 1. CMS V V
+analyses [106, 120, 121] using 137 fb−1 of 13 TeV data also exclude KK gravitons with masses below
+1.8 TeV in the context of bulk gravitons for a maximum value of k/MP = 0.5.
+    Additionally, CMS has searched for the pair production of Standard Model Higgs bosons in the
+HH → bb̄ bb̄ final state from the decay of warped extra-dimensional resonances. This has excluded
+KK gravitons with mG < 1.2 TeV under the narrow-width assumption. Similarly, for a radion,
+masses below 2.6 TeV (narrow) and 2.9 TeV (10% width) are excluded [122]. More generally the
+warped extra-dimensional
+                 √ −πkR interpretation in the CMS resonant-HH combination [123] sets a lower
+limit on ΛR ≡ 6e           MP ≈ 16 TeV for radion masses near 1.2 TeV, and excludes k/MP >      ∼ 0.3
+for KK graviton masses in the range 0.3 < mG < 1.5 TeV.
+    CMS has also probed the topology in which a KK gluon (gKK ) decays via an intermediate
+radion (R) to three gluons (ggg) [124]. The analysis reports upper limits on the model-independent
+quantity σ × B(gKK → gR → ggg) × A as a function of the KK-gluon mass mgKK (and the mass
+ratio ρm ≡ mR /mgKK ). A closely related CMS analysis targets the cascade gKK → gR → gW + W −
+in the all-hadronic final state, using 138 fb−1 [125]. It sets model-independent upper limits on
+σ ×B(gKK → gR → gW W )×A as functions of mgKK and mR ; under the benchmark warped extra-
+dimensional couplings considered, exclusions extend up to mgKK ∼ 3.5 TeV with mR ∼ 2.2 TeV.
+    The lightest KK states are, in certain models, the partners of the top quark. For example, in
+5D composite Higgs models these are colored states with charges Q = −1/3, 2/3 and 5/3 (arising
+from SU (2)L doublets with Y = 7/6, 1/6), and masses expected to be below the TeV [85]. They can
+be either singly or pair-produced, and mainly decay into a combination of W/Z with top/bottom
+quarks [126–129]. An exhaustive review of these searches can be found in Ref. [130]. Of particular
+note, the Q = 5/3 state decays mainly into W + t → W + W + b, giving a very clean signature of a
+pair of same-sign leptons in the final state. An analysis by ATLAS [131] searching in the lepton-
+plus-jets final state for evidence of pair production of the Q = 5/3 state provides a lower mass limit
+of 1.25 TeV. A CMS analysis [132] searching for pair production of the Q = 5/3 state using both
+lepton-plus-jets and same sign lepton final states excludes masses below 1.3 TeV. Similarly, searches
+for single production of the Q = 5/3 state [133], also excludes masses up to 0.9 to 1.5 TeV depending
+on the model parameters. Both LHC experiments have searched for pair production of vector-like
+quarks T and B of charges Q = 2/3 and −1/3 respectively, assuming the allowable decays are
+
+                                         1st December, 2025
+11                                   84. Extra Dimensions
+
+
+T → W b/Zt/Ht and B → W t/Zb/Hb. In each case, it is assumed the branching fractions of the
+three decay modes sum to unity, but the individual branching fractions, which are model-dependent,
+are allowed to vary within this constraint. Both ATLAS [134–136] and CMS [137,138] obtain lower
+limits on the mass of the T and B vector-like quarks up to 1.5 TeV and 1.6 TeV respectively. A
+comprehensive review of such CMS searches can be found in Ref. [139].
+    Analyses from ATLAS [140–144] and CMS [133, 145–148] also search for a single top partner
+and single bottom partner production, the cross section for which is model-dependent [149] but
+does not carry the kinematic penalty for producing two heavy objects.
+84.3.2 Connection with Strongly Coupled Models via the AdS/CFT Correspondence
+    The AdS/CFT correspondence [8] provides a connection between warped extra-dimensional
+models and strongly-coupled theories in ordinary 4D. Although the exact connection is only known
+for certain cases, the AdS/CFT techniques have been very useful to obtain, at the qualitative level,
+a 4D holographic description of the various phenomena in warped extra-dimensional models [11,72].
+    The connection goes as follows. The physics of the bulk AdS5 models can be interpreted as
+that of a 4D CFT which is strongly coupled. The extra-dimensional coordinate y plays the role
+of the renormalization scale µ of the CFT by means of the identification µ ≡ ke−ky . Therefore the
+UV-boundary corresponds in the CFT to a UV cut-off scale at ΛU V = k ∼ MP , breaking explicitly
+conformal invariance, while the IR-boundary can be interpreted as a spontaneous breaking of the
+conformal symmetry at energies ke−kπR ∼ TeV. Fields localized on the UV-boundary are elementary
+fields external to the CFT, while fields localized on the IR-boundary and KK states corresponds
+to composite resonances of the CFT. Furthermore, local gauge symmetries in the 5D models, G5 ,
+correspond to global symmetries of the CFT, while the UV-boundary symmetry can be interpreted
+as a gauging of the subgroup HU V of G5 in the CFT. Breaking gauge symmetries by IR-boundary
+conditions corresponds to the spontaneous breaking G5 → HIR in the CFT at energies ∼ ke−kπR .
+Using this correspondence one can easily derive the 4D massless spectrum of the compactified AdS5
+models. One also has the identification k 3 /M53 ≈ 16π 2 /N 2 and g52 k ≈ 16π 2 /N r (r = 1 or 2 for
+CFT fields in the fundamental or adjoint representation of the gauge group), where N plays the
+role of the number of colors of the CFT. Therefore the weak-coupling limit in AdS5 corresponds to
+a large-N expansion in the CFT.
+    Following the above AdS/CFT dictionary one can understand the RS solution to the hierarchy
+problem from a 4D viewpoint. The equivalent 4D model is a CFT with a TeV mass gap and a
+Higgs boson emerging as a composite state. In the particular case where the Higgs is the fifth-
+component of the gauge-boson, A5 [150], this corresponds to models, similar to those proposed in
+Ref. [151–154], where the Higgs is a composite pseudo-Nambu-Goldstone boson arising from the
+spontaneous breaking G5 → HIR in the CFT. The AdS/CFT dictionary tells us that KK states
+must behave as composite resonances. For example, if the SM gauge bosons propagate in the 5D
+bulk, the lowest KK SU (2)L -gauge boson must have properties similar
+                                                                  √      to those of the Techni-rho
+ρT [130] with a coupling toqlongitudinal W/Z bosons given by g5 k ≈ gρT , while the coupling to
+elementary fermions is g 2 / g52 k ≈ g 2 FρT /MρT .
+    Fermions in compactified AdS5 also have a simple 4D holographic interpretation. The 4D
+massless mode described in Sec. 84.3.1 corresponds to an external fermion ψi linearly coupled to a
+fermionic CFT operator Oi : Lint = λi ψ̄i Oi + h.c.. The dimension of the operator Oi is related to
+the 5D fermion mass according to Dim[Oi ] = |cf + 1/2| − 1. Therefore, by varying cf one varies
+Dim[Oi ], making the coupling λi irrelevant (cf > 1/2), marginal (cf = 1/2) or relevant (cf < 1/2).
+When irrelevant, the coupling is exponentially suppressed at low energies, and then the coupling of
+ψi to the CFT (and eventually to the composite Higgs) is very small. When relevant, the coupling
+grows in the IR and become as large as g5 (in units of k), meaning that the fermion is as strongly
+
+                                        1st December, 2025
+12                                   84. Extra Dimensions
+
+
+coupled as the CFT states [81]. In this latter case ψi behaves as a composite fermion.
+84.3.3 Linear dilaton geometry
+    The warp factor a(y) in Eq. (84.16) can be different from the exponential considered above,
+giving rise to a different KK mass spectrum. A particularly interesting case is the linear dilaton
+geometry [155] where the KK states become very narrowly-spaced. These scenarios can also be
+understood in 4D via the clockwork mechanism [156], and for this reason are usually referred to
+as Clockwork/Linear Dilaton (CW/LD) models. The collider phenomenology becomes different in
+these models since the decay of the narrowly-spaced KK spectrum appears as a periodic signal in
+the invariant mass of the decaying products. An excellent detector resolution is needed in order
+to resolve these KK modes which can be done by looking at 2 electrons or 2 photons in the final
+state. A search for this type of KK gravitons decaying into ee [157] and γγ [41,157,158] put bounds
+for M5 in the range of 10 TeV to 1 TeV for values of the lightest KK graviton mass (referred as k
+in [157, 158]) in the range of few TeVs.
+84.3.4 Flat Extra Dimensions
+    Models with quantum gravity at the TeV scale, as in the ADD scenario, can have extra (flat)
+dimensions of 1/TeV size, as happens in string scenarios (see, for example, [159]). All SM fields may
+propagate in these extra dimensions, leading to the possibility of observing their corresponding KK
+states.
+    A simple example is to assume that the SM gauge bosons propagate in a flat five-dimensional
+orbifold S 1 /Z2 of radius R, with the fermions localized on a 4D boundary. The KK gauge    √ bosons
+behave as sequential SM gauge bosons with a coupling to fermions enhanced by a factor 2 [159].
+The experimental limits on such sequential gauge bosons could therefore be recast as limits on KK
+gauge bosons. Such an interpretation of the ATLAS 7 TeV dilepton analysis [160] yielded the bound
+1/R > 4.16 TeV, while a CMS 8 TeV search with a lepton and missing transverse energy in the final
+state [161] give 1/R > 3.4 TeV. Indirect bounds from LEP2 require however 1/R >     ∼ 6 TeV [86, 162],
+a bound that can considerably improve in the future by high-energy measurements of the dilepton
+invariant mass spectrum from Drell-Yan processes at the LHC [163]. More recent LHC limits
+on leptonically decaying gauge bosons [88, 164–168] are not interpreted as bounds on 1/R by the
+collaborations, but the published results allow for independent derivation of such bounds.
+    An alternative scenario, known as Universal Extra Dimensions (UED) [169] (for a review see,
+for example, [170]), assumes that all SM fields propagate universally in a flat orbifold S 1 /Z2 with
+an extra Z2 parity, called KK-parity, that interchanges the two boundaries. In this case, the lowest
+KK state is stable and is a Dark Matter candidate. At colliders, the KK particles would have to be
+created in pairs, and would then cascade decay to the lightest KK particle, which would be stable
+and escape detection. The UED mass-spectrum depends not only on the extra-dimensional radius
+R, but also on the cut-off of the 5D theory Λ, since quantum corrections sensitive to ΛR induce
+mass-splittings between the KK states. Experimental signatures, such as jets or leptons and pmiss T ,
+would be similar to those of typical R-parity conserving SUSY searches. An interpretation of the
+recent LHC experimental SUSY searches for UED models has been presented in Refs. [171, 172]. A
+lower bound 1/R > 1.4 − 1.5 TeV was derived for ΛR in the range 5 − 35 [171]. A recent analysis
+is given in Ref. [173] where it is shown that the minimal UED model is ruled out when LHC data
+is combined with Dark Matter relic density data. Extensions to the minimal UED model where
+boundary terms are included can however be compatible with experiments [173].
+    Finally, realistic models of electroweak symmetry breaking can also be constructed with flat
+extra spatial dimensions, similarly to those in the warped case, requiring, however, the presence
+of sizeable boundary kinetic terms [174]. There is also the possibility of breaking supersymmetry
+by boundary conditions [175]. Models of this type could explain naturally the presence of a Higgs
+
+                                         1st December, 2025
+13                                  84. Extra Dimensions
+
+
+boson lighter than MD ∼ TeV (see, for example, [176–178]).
+References
+ [1] For a comprehensive collection of the original papers see, “Modern Kaluza-Klein Theories”,
+     edited by T. Appelquist et al., Addison-Wesley (1987).
+  [2] N. Arkani-Hamed, S. Dimopoulos and G. Dvali, Phys. Lett. B429, 263 (1998), [hep-
+      ph/9803315].
+  [3] L. Randall and R. Sundrum, Phys. Rev. Lett. 83, 3370 (1999), [hep-ph/9905221].
+  [4] H. Davoudiasl, J. L. Hewett and T. G. Rizzo, Phys. Lett. B473, 43 (2000), [hep-ph/9911262].
+  [5] A. Pomarol, Phys. Lett. B486, 153 (2000), [hep-ph/9911294].
+  [6] S. Chang et al., Phys. Rev. D62, 084025 (2000), [hep-ph/9912498].
+  [7] T. Gherghetta and A. Pomarol, Nucl. Phys. B586, 141 (2000), [hep-ph/0003129].
+  [8] J. M. Maldacena, Int. J. Theor. Phys. 38, 1113 (1999), [Adv. Theor. Math. Phys.2,231(1998)],
+      [hep-th/9711200].
+  [9] E. Witten, Adv. Theor. Math. Phys. 2, 253 (1998), [hep-th/9802150].
+ [10] S. S. Gubser, I. R. Klebanov and A. M. Polyakov, Phys. Lett. B428, 105 (1998), [hep-
+      th/9802109].
+ [11] N. Arkani-Hamed, M. Porrati and L. Randall, JHEP 08, 017 (2001), [hep-th/0012148].
+ [12] ATLAS public results are available on WWW at
+      https://twiki.cern.ch/twiki/bin/view/AtlasPublic.
+ [13] CMS public results are available on WWW at
+      https://cms-results.web.cern.ch/cms-results/public-results/publications.
+ [14] Z. Chacko, M. A. Luty and E. Ponton, JHEP 07, 036 (2000), [hep-ph/9909248].
+ [15] N. Arkani-Hamed, S. Dimopoulos and G. R. Dvali, Phys. Rev. D59, 086004 (1999), [hep-
+      ph/9807344].
+ [16] R. Rattazzi, hep-ph/0607055 (2006); I. Antoniadis, Yellow report CERN-2002-002 (2002).
+ [17] J. D. Lykken, Phys. Rev. D54, R3693 (1996), [hep-th/9603133].
+ [18] I. Antoniadis et al., Phys. Lett. B436, 257 (1998), [hep-ph/9804398].
+ [19] G. F. Giudice, R. Rattazzi and J. D. Wells, Nucl. Phys. B544, 3 (1999), [hep-ph/9811291].
+ [20] N. Arkani-Hamed et al., Phys. Rev. D62, 105002 (2000), [hep-ph/9912453].
+ [21] E. G. Adelberger et al., Prog. Part. Nucl. Phys. 62, 102 (2009).
+ [22] J. Murata and S. Tanaka, Class. Quant. Grav. 32, 3, 033001 (2015), [arXiv:1408.3588].
+ [23] W.-H. Tan et al., Phys. Rev. Lett. 116, 13, 131101 (2016).
+ [24] J. G. Lee et al., Phys. Rev. Lett. 124, 101101 (2020), [arXiv:2002.11761].
+ [25] C. Hanhart et al., Phys. Lett. B509, 1 (2001), [arXiv:astro-ph/0102063].
+ [26] S. Hannestad and G. G. Raffelt, Phys. Rev. D67, 125008 (2003), [Erratum:              Phys.
+      Rev.D69,029901(2004)], [hep-ph/0304029].
+ [27] L. J. Hall and D. Tucker-Smith, Phys. Rev. D60, 085008 (1999), [hep-ph/9904267].
+ [28] E. A. Mirabelli, M. Perelstein and M. E. Peskin, Phys. Rev. Lett. 82, 2236 (1999), [hep-
+      ph/9811337].
+ [29] T. Han, J. D. Lykken and R.-J. Zhang, Phys. Rev. D59, 105006 (1999), [hep-ph/9811350].
+ [30] G. AaD et al. (ATLAS), Phys. Rev. D 103, 112006 (2021), [arXiv:2102.10874].
+
+                                        1st December, 2025
+14                                   84. Extra Dimensions
+
+
+ [31] A. Tumasyan et al. (CMS), JHEP 11, 153 (2021), [arXiv:2107.13021].
+ [32] A. M. Sirunyan et al. (CMS), JHEP 02, 074 (2019), [arXiv:1810.00196].
+ [33] G. Aad et al. (ATLAS), JHEP 02, 226 (2021), [arXiv:2011.05259].
+ [34] S. Cullen, M. Perelstein and M. E. Peskin, Phys. Rev. D62, 055012 (2000), [hep-ph/0001166].
+ [35] A. M. Sirunyan et al. (CMS), JHEP 05, 033 (2020), [arXiv:1911.03947].
+ [36] G. Aad et al. (ATLAS), JHEP 03, 145 (2020), [arXiv:1910.08447].
+ [37] J. L. Hewett, Phys. Rev. Lett. 82, 4765 (1999), [hep-ph/9811356].
+ [38] G. F. Giudice and A. Strumia, Nucl. Phys. B663, 377 (2003), [hep-ph/0301232].
+ [39] A. M. Sirunyan et al. (CMS), Eur. Phys. J. C78, 9, 789 (2018), [arXiv:1803.08030].
+ [40] M. Aaboud et al. (ATLAS), Phys. Lett. B775, 105 (2017), [arXiv:1707.04147].
+ [41] A. Hayrapetyan et al. (CMS), JHEP 08, 215 (2024), [arXiv:2405.09320].
+ [42] A. M. Sirunyan et al., JHEP 07, 7 (2021), [arXiv:2103.02708].
+ [43] G. Aad et al., JHEP 11, 005 (2020), [arXiv:2006.12946].
+ [44] S. B. Giddings and S. D. Thomas, Phys. Rev. D65, 056010 (2002), [hep-ph/0106219].
+ [45] S. Dimopoulos and G. L. Landsberg, Phys. Rev. Lett. 87, 161602 (2001), [hep-ph/0106295].
+ [46] P. Kanti, Int. J. Mod. Phys. A19, 4899 (2004), [hep-ph/0402168].
+ [47] R. C. Myers and M. J. Perry, Annals Phys. 172, 304 (1986).
+ [48] A. M. Sirunyan et al. (CMS), JHEP 11, 042 (2018), [arXiv:1805.06013].
+ [49] G. Aad et al. (ATLAS), JHEP 03, 026 (2016), [arXiv:1512.02586].
+ [50] M. Aaboud et al. (ATLAS), Phys. Lett. B760, 520 (2016), [arXiv:1606.02265].
+ [51] C. Kilic et al., Phys. Rev. D89, 1, 016003 (2014), [arXiv:1207.3525].
+ [52] V. Khachatryan et al. (CMS), Phys. Rev. D90, 3, 032005 (2014), [arXiv:1405.7653].
+ [53] P. Meade and L. Randall, JHEP 05, 003 (2008), [arXiv:0708.3017].
+ [54] A. M. Sirunyan et al. (CMS), Phys. Lett. B774, 279 (2017), [arXiv:1705.01403].
+ [55] G. Aad et al. (ATLAS), Phys. Lett. B 754, 302 (2016), [arXiv:1512.01530].
+ [56] G. Aad et al. (ATLAS) (2023), [arXiv:2307.08567].
+ [57] M. Aaboud et al. (ATLAS), Eur. Phys. J. C 76, 10, 541 (2016), [arXiv:1607.08079].
+ [58] M. Aaboud et al. (ATLAS), Phys. Rev. D98, 9, 092008 (2018), [arXiv:1807.06573].
+ [59] A. Tumasyan et al. (CMS), JHEP 05, 227 (2023), [arXiv:2205.06709].
+ [60] A. M. Sirunyan et al. (CMS), JHEP 04, 073 (2018), [arXiv:1802.01122].
+ [61] A. Tumasyan et al. (CMS) (2023), [arXiv:2305.07998].
+ [62] M. Aaboud et al. (ATLAS), Eur. Phys. J. C 78, 2, 102 (2018), [arXiv:1709.10440].
+ [63] G. Aad et al. (ATLAS), Phys. Rev. D 109, 3, 032010 (2024), [arXiv:2307.14967].
+ [64] S. Dimopoulos and R. Emparan, Phys. Lett. B526, 393 (2002), [hep-ph/0108060].
+ [65] W. D. Goldberger and M. B. Wise, Phys. Rev. Lett. 83, 4922 (1999), [hep-ph/9907447].
+ [66] J. Garriga and A. Pomarol, Phys. Lett. B560, 91 (2003), [hep-th/0212227].
+ [67] See talk by R. Rattazzi at Planck 2010, CERN,
+      http://indico.cern.ch/getFile.py/access?contribId=163&resId=0&materialId=slides&confId=75810.
+ [68] B. Bellazzini et al., Eur. Phys. J. C74, 2790 (2014), [arXiv:1305.3919].
+
+                                        1st December, 2025
+15                                   84. Extra Dimensions
+
+
+ [69] F. Coradeschi et al., JHEP 11, 057 (2013), [arXiv:1306.4601].
+ [70] E. Megias and O. Pujolas, JHEP 08, 081 (2014), [arXiv:1401.4998].
+ [71] E. P. H. Davoudiasl, S. Gopalakrishna and J. Santiago, New J. Phys. 12, 075011 (2010),
+      [arXiv:0908.1968].
+ [72] T. Gherghetta, in “Physics of the large and the small, TASI 09, proceedings of the Theoretical
+      Advanced Study Institute in Elementary Particle Physics, Boulder, Colorado, USA, 1-26 June
+      2009,” 165–232 (2011), [arXiv:1008.2570].
+ [73] Y. Grossman and M. Neubert, Phys. Lett. B474, 361 (2000), [hep-ph/9912408].
+ [74] S. J. Huber and Q. Shafi, Phys. Lett. B498, 256 (2001), [hep-ph/0010195].
+ [75] A. Delgado, A. Pomarol and M. Quiros, JHEP 01, 030 (2000), [hep-ph/9911252].
+ [76] K. Agashe, G. Perez and A. Soni, Phys. Rev. D71, 016002 (2005), [hep-ph/0408134].
+ [77] M. Bauer et al., JHEP 09, 017 (2010), [arXiv:0912.1625].
+ [78] A. Pomarol, Int. J. Mod. Phys. A24, 61 (2009), [ In Kane, Gordon (ed.) et al.: Perspectives
+      on LHC physics ,259(2008)].
+ [79] Y. Hosotani, Phys. Lett. 126B, 309 (1983).
+ [80] K. Agashe et al., JHEP 08, 050 (2003), [hep-ph/0308036].
+ [81] K. Agashe, R. Contino and A. Pomarol, Nucl. Phys. B719, 165 (2005), [hep-ph/0412089].
+ [82] For a review see, for example, R. Contino, arXiv:1005.4269.
+ [83] See, for example, PDG review of Higgs boson in this Review.
+ [84] G. F. Giudice et al., JHEP 06, 045 (2007), [hep-ph/0703164].
+ [85] R. Contino, L. Da Rold and A. Pomarol, Phys. Rev. D75, 055014 (2007), [hep-ph/0612048].
+ [86] R. Barbieri et al., Nucl. Phys. B703, 127 (2004), [hep-ph/0405040].
+ [87] G. Aad et al. (ATLAS), Phys. Lett. B 822, 136651 (2021), [arXiv:2102.13405].
+ [88] G. Aad et al. (ATLAS), Phys. Lett. B796, 68 (2019), [arXiv:1903.06248].
+ [89] A. M. Sirunyan et al. (CMS), JHEP 08, 130 (2018), [arXiv:1806.00843].
+ [90] G. Aad et al. (ATLAS), Phys. Rev. Lett. 125, 13, 131801 (2020), [arXiv:2005.02983].
+ [91] A. M. Sirunyan et al. (CMS), Phys. Rev. Lett. 122, 12, 121803 (2019), [arXiv:1811.09689].
+ [92] M. Aaboud et al. (ATLAS), JHEP 01, 030 (2019), [arXiv:1804.06174].
+ [93] G. Aad et al. (ATLAS), Phys. Lett. B 800, 135103 (2020), [arXiv:1906.02025].
+ [94] G. Aad et al. (ATLAS), Phys. Rev. D 106, 5, 052001 (2022), [arXiv:2112.11876].
+ [95] G. Aad et al. (ATLAS), JHEP 11, 163 (2020), [arXiv:2007.14811].
+ [96] A. M. Sirunyan et al. (CMS), Phys. Rev. D 102, 3, 032003 (2020), [arXiv:2006.06391].
+ [97] A. Tumasyan et al. (CMS), JHEP 05, 005 (2022), [arXiv:2112.03161].
+ [98] A. Tumasyan et al. (CMS), JHEP 11, 057 (2021), [arXiv:2106.10361].
+ [99] A. Tumasyan et al. (CMS), JHEP 07, 095 (2023), [arXiv:2206.10268].
+[100] A. Hayrapetyan et al. (CMS), JHEP 07, 293 (2024), [arXiv:2403.09430].
+[101] G. Aad et al. (ATLAS), JHEP 09, 091 (2019), [Erratum:               JHEP 06, 042 (2020)],
+      [arXiv:1906.08589].
+[102] A. M. Sirunyan et al. (CMS), Eur. Phys. J. C 80, 3, 237 (2020), [arXiv:1906.05977].
+[103] G. Aad et al. (ATLAS), Eur. Phys. J. C 80, 12, 1165 (2020), [arXiv:2004.14636].
+
+                                        1st December, 2025
+16                                  84. Extra Dimensions
+
+
+[104] G. Aad et al. (ATLAS), Eur. Phys. J. C 81, 4, 332 (2021), [arXiv:2009.14791].
+[105] A. Tumasyan et al. (CMS), Phys. Lett. B 844, 137813 (2023), [arXiv:2210.00043].
+[106] A. Tumasyan et al. (CMS), Phys. Rev. D 105, 3, 032008 (2022), [arXiv:2109.06055].
+[107] A. M. Sirunyan et al. (CMS), JHEP 01, 051 (2019), [arXiv:1808.01365].
+[108] A. Tumasyan et al. (CMS), Phys. Lett. B 832, 137263 (2022), [arXiv:2201.02140].
+[109] F. Abu-Ajamieh, J. S. Lee and J. Terning, JHEP 10, 050 (2018), [arXiv:1711.02697].
+[110] K. Agashe et al., Phys. Rev. D76, 036006 (2007), [hep-ph/0701186].
+[111] M. Aaboud et al. (ATLAS), Eur. Phys. J. C 79, 5, 375 (2019), [arXiv:1808.07858].
+[112] A. M. Sirunyan et al. (CMS), JINST 15, 06, P06005 (2020), [arXiv:2004.08262].
+[113] G. Aad et al. (ATLAS), JHEP 10, 061 (2020), [arXiv:2005.05138].
+[114] A. M. Sirunyan et al. (CMS), JHEP 04, 031 (2019), [arXiv:1810.05905].
+[115] M. Aaboud et al. (ATLAS), Phys. Rev. D99, 9, 092004 (2019), [arXiv:1902.10077].
+[116] M. Aaboud et al. (ATLAS), Eur. Phys. J. C78, 7, 565 (2018), [arXiv:1804.10823].
+[117] G. Aad et al. (ATLAS), Phys. Rev. D 102, 11, 112008 (2020), [arXiv:2007.05293].
+[118] A. M. Sirunyan et al. (CMS), Eur. Phys. J. C 81, 8, 688 (2021), [arXiv:2102.08198].
+[119] M. Aaboud et al. (ATLAS), Phys. Rev. D98, 5, 052008 (2018), [arXiv:1808.02380].
+[120] A. Tumasyan et al. (CMS), Phys. Rev. D 106, 1, 012004 (2022), [arXiv:2109.08268].
+[121] A. Tumasyan et al. (CMS), JHEP 04, 087 (2022), [arXiv:2111.13669].
+[122] A. Tumasyan et al. (CMS), JHEP 02, 040 (2025), [arXiv:2407.13872].
+[123] A. Hayrapetyan et al. (CMS), Phys. Rept. 1115, 368 (2025), [arXiv:2403.16926].
+[124] A. Hayrapetyan et al. (CMS), Phys. Rev. Lett. 133, 1, 011801 (2024), [arXiv:2310.14023].
+[125] A. Hayrapetyan et al. (CMS), JHEP 02, 199 (2025), [arXiv:2410.17303].
+[126] R. Contino and G. Servant, JHEP 06, 026 (2008), [arXiv:0801.1679].
+[127] J. A. Aguilar-Saavedra, JHEP 11, 030 (2009), [arXiv:0907.3155].
+[128] J. Mrazek and A. Wulzer, Phys. Rev. D81, 075006 (2010), [arXiv:0909.3977].
+[129] G. Dissertori et al., JHEP 09, 019 (2010), [arXiv:1005.4414].
+[130] See, for example, PDG review of Technicolor searches in this volume.
+[131] M. Aaboud et al. (ATLAS), JHEP 10, 141 (2017), [arXiv:1707.03347].
+[132] A. M. Sirunyan et al. (CMS), JHEP 03, 082 (2019), [arXiv:1810.03188].
+[133] A. M. Sirunyan et al. (CMS), Eur. Phys. J. C 79, 90 (2019), [arXiv:1809.08597].
+[134] G. Aad et al. (ATLAS), Eur. Phys. J. C 83, 8, 719 (2023), [arXiv:2212.05263].
+[135] G. Aad et al. (ATLAS), Phys. Lett. B 843, 138019 (2023), [arXiv:2210.15413].
+[136] M. Aaboud et al. (ATLAS), Phys. Rev. Lett. 121, 21, 211801 (2018), [arXiv:1808.02343].
+[137] A. Tumasyan et al. (CMS), JHEP 07, 020 (2023), [arXiv:2209.07327].
+[138] A. M. Sirunyan et al. (CMS), Phys. Rev. D 102, 112004 (2020), [arXiv:2008.09835].
+[139] A. Hayrapetyan et al. (CMS), Phys. Rept. 1115, 570 (2025), [arXiv:2405.17605].
+[140] G. Aad et al. (ATLAS), JHEP 11, 168 (2023), [arXiv:2308.02595].
+[141] G. Aad et al. (ATLAS), Phys. Rev. D 109, 11, 112012 (2024), [arXiv:2307.07584].
+[142] G. Aad et al. (ATLAS), JHEP 08, 153 (2023), [arXiv:2305.03401].
+
+                                        1st December, 2025
+17                                  84. Extra Dimensions
+
+
+[143] G. Aad et al. (ATLAS), Phys. Rev. D 105, 9, 092012 (2022), [arXiv:2201.07045].
+[144] M. Aaboud et al. (ATLAS), JHEP 05, 164 (2019), [arXiv:1812.07343].
+[145] A. Tumasyan et al. (CMS), JHEP 09, 057 (2023), [arXiv:2302.12802].
+[146] A. Tumasyan et al. (CMS), JHEP 05, 093 (2022), [arXiv:2201.02227].
+[147] A. M. Sirunyan et al. (CMS), JHEP 01, 036 (2020), [arXiv:1909.04721].
+[148] A. M. Sirunyan et al. (CMS), JHEP 06, 031 (2018), [arXiv:1802.01486].
+[149] A. De Simone et al., JHEP 04, 004 (2013), [arXiv:1211.5663].
+[150] R. Contino, Y. Nomura and A. Pomarol, Nucl. Phys. B671, 148 (2003), [hep-ph/0306259].
+[151] D. B. Kaplan and H. Georgi, Phys. Lett. 136B, 183 (1984).
+[152] D. B. Kaplan, H. Georgi and S. Dimopoulos, Phys. Lett. B 136, 187 (1984).
+[153] T. Banks, Nucl. Phys. B 243, 125 (1984).
+[154] H. Georgi, D. B. Kaplan and P. Galison, Phys. Lett. 143B, 152 (1984).
+[155] I. Antoniadis et al., Phys. Rev. Lett. 108, 081602 (2012), [arXiv:1102.4043].
+[156] G. F. Giudice and M. McCullough, JHEP 02, 036 (2017), [arXiv:1610.07962].
+[157] G. Aad et al. (ATLAS), JHEP 10, 079 (2023), [arXiv:2305.10894].
+[158] A. M. Sirunyan et al. (CMS), Phys. Rev. D 98, 9, 092001 (2018), [arXiv:1809.00327].
+[159] I. Antoniadis and K. Benakli, Int. J. Mod. Phys. A15, 4237 (2000), [hep-ph/0007226].
+[160] G. Aad et al. (ATLAS), JHEP 11, 138 (2012), [arXiv:1209.2535].
+[161] V. Khachatryan et al. (CMS), Phys. Rev. D91, 9, 092005 (2015), [arXiv:1408.2745].
+[162] K. Cheung and G. L. Landsberg, Phys. Rev. D65, 076003 (2002), [hep-ph/0110346].
+[163] M. Farina et al., Phys. Lett. B772, 210 (2017), [arXiv:1609.08157].
+[164] M. Aaboud et al. (ATLAS), Eur. Phys. J. C 78, 5, 401 (2018), [arXiv:1706.04786].
+[165] G. Aad et al. (ATLAS), Phys. Rev. D 100, 5, 052013 (2019), [arXiv:1906.05609].
+[166] A. M. Sirunyan et al. (CMS), JHEP 06, 128 (2018), [arXiv:1803.11133].
+[167] A. M. Sirunyan et al. (CMS), JHEP 06, 120 (2018), [arXiv:1803.06292].
+[168] A. Tumasyan et al. (CMS), JHEP 09, 051 (2023), [arXiv:2212.12604].
+[169] T. Appelquist, H.-C. Cheng and B. A. Dobrescu, Phys. Rev. D64, 035002 (2001), [hep-
+      ph/0012100].
+[170] A. Datta, K. Kong and K. T. Matchev, New J. Phys. 12, 075017 (2010), [arXiv:1002.4624].
+[171] N. Deutschmann, T. Flacke and J. S. Kim, Phys. Lett. B771, 515 (2017), [arXiv:1702.00410].
+[172] J. Beuria et al., Comput. Phys. Commun. 226, 187 (2018), [arXiv:1702.00413].
+[173] Avnish et al., Phys. Rev. D 103, 115011 (2021), [arXiv:2012.15137].
+[174] G. Panico, M. Safari and M. Serone, JHEP 02, 103 (2011), [arXiv:1012.2875].
+[175] J. Scherk and J. H. Schwarz, Phys. Lett. 82B, 60 (1979).
+[176] A. Pomarol and M. Quiros, Phys. Lett. B438, 255 (1998), [hep-ph/9806263].
+[177] I. Antoniadis et al., Nucl. Phys. B544, 503 (1999), [hep-ph/9810410].
+[178] R. Barbieri, L. J. Hall and Y. Nomura, Phys. Rev. D63, 105007 (2001), [hep-ph/0011311].
+
+
+
+
+                                        1st December, 2025
+

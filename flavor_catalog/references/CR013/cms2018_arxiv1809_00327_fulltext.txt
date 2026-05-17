@@ -1,0 +1,2103 @@
+                                         EUROPEAN ORGANIZATION FOR NUCLEAR RESEARCH (CERN)
+
+
+                                                                                                          CERN-EP-2018-219
+                                                                                                          2018/11/08
+
+
+
+
+                                         CMS-EXO-17-017
+
+
+
+
+                                         Search for physics beyond the standard model in high-mass
+                                              diphoton events from
+                                                                √ proton-proton collisions at
+                                                                  s = 13 TeV
+arXiv:1809.00327v2 [hep-ex] 7 Nov 2018
+
+
+
+
+                                                                              The CMS Collaboration∗
+
+
+
+                                                                                           Abstract
+
+                                             A search for physics beyond the standard model is performed using√ a sample of high-
+                                             mass diphoton events produced in proton-proton collisions at s = 13 TeV. The data
+                                             sample was collected in 2016 with the CMS detector at the LHC and corresponds
+                                             to an integrated luminosity of 35.9 fb−1 . The search is performed for both resonant
+                                             and nonresonant new physics signatures. At 95% confidence level, lower limits on
+                                             the mass of the first Kaluza–Klein excitation of the graviton in the Randall–Sundrum
+                                             warped extra-dimensional model are determined to be in the range of 2.3 to 4.6 TeV,
+                                             for values of the associated coupling parameter between 0.01 and 0.2. Lower limits
+                                             on the production of scalar resonances and model-independent cross section upper
+                                             limits are also provided. For the large extra-dimensional model of Arkani-Hamed,
+                                             Dimopoulos, and Dvali, lower limits are set on the string mass scale MS ranging from
+                                             5.6 to 9.7 TeV, depending on the model parameters. The first exclusion limits are set
+                                             in the two-dimensional parameter space of a continuum clockwork model.
+
+
+                                                     Published in Physical Review D as doi:10.1103/PhysRevD.98.092001.
+
+
+
+
+                                         c 2018 CERN for the benefit of the CMS Collaboration. CC-BY-4.0 license
+                                          ∗ See   Appendix A for the list of collaboration members
+                                                                                                     1
+
+
+1    Introduction
+While the standard model (SM) of particle physics has been an enormously successful descrip-
+tion of observed phenomena, it is still widely believed to be incomplete. In the SM, the Higgs
+boson mass receives quantum corrections from loops containing SM particles. Because the
+Higgs boson is a fundamental scalar, the magnitude of the mass corrections is set by the cutoff
+parameter of the loop integrals and the only natural mass scale in the SM that can act as a cutoff
+is the Planck scale (MPl ∼ 1019 GeV) at which quantum gravity is expected to emerge. There-
+fore, unless the Higgs boson mass parameter is fine-tuned to an extreme degree, there must
+exist some new physics beyond the SM to constrain these quantum corrections and stabilize
+the mass of the Higgs boson. Many models for such new physics have been proposed. We
+consider three such models in this paper.
+Through their modification of the effective Planck scale, extra spatial dimensions have been
+proposed as a possible solution to this hierarchy problem [1, 2], which arises from the large
+difference between the gravitational and electroweak scales. In the model proposed by Arkani-
+Hamed, Dimopoulos, and Dvali (ADD) [3–5], the existence of nED additional spatial dimen-
+sions, compactified with an average radius rc , produces an effective Planck mass MPl in our
+four-dimensional (4D) world that is related to the true Planck mass by MPl  2 ∼ M2+nED       r nED . It
+                                                                                   Pl(4+nED ) c
+is therefore possible, with appropriate values for nED and rc , that the value of the Planck scale
+in (4+nED )-dimensional spacetime, MPl(4+nED ) , could be of the order of the electroweak scale,
+thus solving the SM hierarchy problem, while still producing the much larger apparent Planck
+scale that we observe in our 4D world. In effect, the true strength of gravity could actually be
+comparable to the electroweak force, and it merely appears weaker because of its propagation
+in the extra dimensions. At the same time, the SM gauge forces and particles are confined to
+our 4D spacetime.
+Randall and Sundrum (RS) proposed an alternative model [6, 7] with just one additional dimen-
+sion that has a warped geometry, described by a curvature parameter k. The extra dimension
+is compactified with radius rc . From the point of view of a 4D observer, a fundamental mass
+parameter m0 defined on the SM brane in the full five-dimensional (5D) theory will appear as
+a physical mass m = e−krc π m0 . In this model, solving the hierarchy problem requires that the
+fundamental mass should be m0 ∼ MPl and the observed mass should be at the TeV scale. Be-
+cause of the exponential warp factor, this large hierarchy can be generated if krc ≈ 11–12, thus
+requiring very little fine tuning.
+A third proposed solution to the hierarchy problem that we consider in this paper is the contin-
+uum clockwork mechanism [8], which coincides with a 5D gravitational theory on a linear dila-
+ton background [9, 10]. The clockwork [11, 12] is a general mechanism that can introduce large
+effective interaction scales from dynamics occurring at much lower energies. This is achieved
+by introducing N copies of some particle content on different sites forming a one-dimensional
+lattice in theory space. The physical mass spectrum consists of a single massless mode localized
+on the end site of the lattice and a set of massive modes (‘gears’) distributed along the sites. In
+the continuum limit of the clockwork with N → ∞, this lattice is interpreted as a physical extra
+dimension.
+In all three models, deviations from the SM expectations should be evident at the CERN LHC
+through Kaluza–Klein (KK) modes of the graviton, which couple to the SM through the stress-
+energy tensor and decay into two SM particles. Searches for pairs of high-mass photons are
+favorable because the SM backgrounds are lower and the mass resolution is better than in the
+dijet channel, and the branching fraction to diphoton final states is larger than that to dilepton
+2
+
+
+final states. In the ADD model, the compactification of the extra dimensions gives rise to a KK
+series of virtual graviton states because the momenta along the extra dimensions are quantized
+and appear as additional contributions to the graviton effective mass. Here, the KK modes are
+very closely spaced, leading to an effective nonresonant enhancement of the diphoton spectrum
+at high invariant mass (mγγ ). In the RS model, the presence of the additional spatial dimension
+quantizes the masses of the KK states. These states are   √ widely spaced and become narrow
+in the limit of small k̃ ≡ k/MPl , where MPl = MPl / 8π is the reduced Planck mass. In
+the continuum clockwork mechanism, the gears play the role of the KK modes. The usual
+massless graviton is accompanied by an infinite tower of massive spin-2 graviton gears with a
+characteristic pattern of masses and couplings. In particular, the masses of the graviton gears
+can be so densely distributed that they produce an approximately continuous contribution to
+the diphoton spectrum as a function of mγγ [13, 14], much like in the ADD model. However,
+unlike the ADD model, the KK modes are entirely on shell, as in the RS case, so interference
+effects are negligible.
+In addition to the above models that could address the hierarchy problem, high-mass diphoton
+events are also potentially sensitive to other beyond-SM physics, such as the decays of heavy
+spin-0 resonances. These spin-0 resonances could arise from extended Higgs sectors [15–17].
+Model-independent cross section limits can be obtained on generic production of exotic spin-0
+and spin-2 resonances decaying to pairs of photons.
+Searches for new physics in the high-mass diphoton channel from Run 2 of the LHC were pre-
+viously √
+        performed by the ATLAS and CMS experiments using pp collisions at a center-of-mass
+energy s = 13 TeV [18–21]. Prior
+                              √    searches have also been performed by both experiments in
+Run 1 of the LHC [22–25], at s = 7 and 8√TeV, and also at the Tevatron by the CDF [26] and
+D0 [27] experiments using pp collisions at s = 1.96 TeV.
+We present new results from a search for beyond-SM physics in the high-mass diphoton spec-
+trum, using data collected with the CMS detector in 2016 corresponding to an integrated lu-
+minosity of 35.9 fb−1 . Two complementary background estimation techniques are used. For
+a search for resonant excesses such as in the RS model, we implement a technique where the
+diphoton spectrum is fit to a parametrized functional form, allowing for a fully data-driven
+description of the shape. To search for nonresonant deviations from the SM prediction like
+those that arise in the ADD and clockwork models, a next-to-next-to-leading-order (NNLO)
+calculation of the SM diphoton background is performed and the background from jets being
+misidentified as photons is estimated from control samples in data.
+The remainder of this document is organized as follows. The CMS detector is described in
+Section 2. Event reconstruction and selection are outlined in Section 3. Section 4 describes
+the simulation of extra-dimensional signal models, and the background determinations for the
+searches for resonant and nonresonant excesses are described in Section 5. Sources of system-
+atic uncertainty are discussed in Section 6. We present our results in Section 7.
+
+
+2   The CMS detector
+The CMS detector is a multi-purpose collider detector at the LHC. The central feature of the
+CMS apparatus is a superconducting solenoid of 6 m internal diameter, providing a magnetic
+field of 3.8 T. Within the solenoid volume are a silicon pixel and strip tracker, a lead tungstate
+crystal electromagnetic calorimeter (ECAL), and a brass and scintillator hadron calorimeter
+(HCAL), each composed of a barrel and two endcap sections. Forward calorimeters extend the
+pseudorapidity (η) coverage provided by the barrel and endcap detectors. Muons are detected
+                                                                                                3
+
+
+in gas-ionization chambers embedded in the steel flux-return yoke outside the solenoid.
+The ECAL barrel (EB) provides coverage in the range |η | < 1.48. This is extended by each
+ECAL endcap (EE) to 1.48 < |η | < 3. In the EB, photons that have energies above the range
+of tens of GeV have an energy resolution of about 1.3% up to |η | = 1, rising to about 2.5% at
+|η | = 1.4. In each EE, photons in this energy range have a resolution between 3 and 4% [28].
+Events of interest are selected using a two-tiered trigger system [29]. The first level, composed
+of custom hardware processors, uses information from the calorimeters and muon detectors to
+select events at a rate of around 100 kHz within a time interval of less than 4 µs. The second
+level, known as the high-level trigger, consists of a farm of processors running a version of the
+full event reconstruction software optimized for fast processing, and reduces the event rate to
+around 1 kHz before data storage.
+A more detailed description of the CMS detector, together with a definition of the coordinate
+system used and the relevant kinematic variables, can be found in Ref. [30].
+
+
+3   Event reconstruction and selection
+Individual particles in the CMS detector are reconstructed using the particle-flow event algo-
+rithm [31]. Photon candidates are reconstructed from energy deposits in the ECAL. Individ-
+ual energy deposits are grouped into superclusters [28] that are compatible with the expected
+shower shape extending along the azimuthal (φ) direction. This allows for the recovery of the
+energy deposited by bremsstrahlung and photon conversions. The clustering algorithm does
+not make any hypothesis as to whether the particle originating from the interaction point is a
+photon or an electron. Thus the same algorithm used for photon reconstruction can be applied
+to Z → e+ e− events and these events are used to measure the efficiency of the photon selection
+criteria and of the photon energy scale and resolution. A more detailed description of photon
+reconstruction in the CMS detector can be found in Ref. [28].
+Reconstructed photon candidates must pass additional identification criteria to suppress
+misidentified jets and electrons, while maintaining high efficiency. These criteria are based
+on observables sensitive to the electromagnetic shower shape and the extra activity surround-
+ing the shower. The electromagnetic shower shape is measured using σηη , the spatial second-
+order moment of the photon candidate in the η direction [28]. Isolation variables are based
+on the total transverse momentum of particle candidates with coordinates (η, φ) reconstructed
+within√ a cone of size ∆R = 0.3 around the photon candidate with coordinates (ηγ , φγ ), where
+∆R = (η − ηγ )2 + (φ − φγ )2 . Separate isolation variables are defined for charged hadron and
+photon candidates. Electrons are vetoed based on hits in the silicon pixel and strip trackers with
+a further check to ensure photon candidates associated with electron tracks are incompatible
+with those resulting from photon conversions.
+Events are selected by a trigger that requires at least two reconstructed photon candidates, each
+with transverse momentum pT > 60 GeV. For these events, the ratio of the energy deposited
+in the HCAL behind each photon candidate and the photon energy in the ECAL is required to
+be less than 0.15. To avoid non-uniform efficiency near the trigger threshold, a more stringent
+selection of photon pT > 75 GeV is applied offline. Events are required to have one photon in
+the EB with |η | < 1.44, and another in either the EB or in an EE, where it must have 1.57 <
+|η | < 2.5. Events with both photon candidates in the EEs are dominated by SM production
+and have negligible sensitivity to the target beyond-SM signals, and thus are omitted from
+this analysis. Two signal regions are considered: one with both photons in the EB, denoted
+4
+
+
+EBEB, and the other with one photon in the EB and the other in either EE, denoted EBEE. The
+invariant mass of the photon pair must satisfy a minimum requirement of mγγ > 230 and
+330 GeV in the EBEB and EBEE categories, respectively. This threshold avoids sculpting of the
+distribution while maintaining full efficiency in each region. In the search for nonresonant
+signals, this requirement is increased to mγγ > 500 GeV in both categories and photon pairs
+must additionally satisfy ∆R > 0.45, to be consistent with the background calculation for SM
+diphoton production, as described in Section 5.2.
+The trigger and identification efficiencies are found to be compatible within uncertainties (3%)
+between data and simulation and the overall efficiency is about 90 (87)% for single photons in
+the barrel (endcaps). The selection criteria as well as the level of agreement between data and
+simulation were determined using simulated signal, background, and control data samples and
+were fixed before inspecting the diphoton invariant mass distribution in the search regions. The
+product of the event selection efficiency (ε) and the detector acceptance (A) is shown in Fig. 1
+for two spin hypotheses in the narrowest resonance-width scenario considered in this analysis,
+as discussed further in Section 4. (For the other two resonance-width hypotheses considered,
+the acceptance values are very close to this one.)
+
+                                                                            13 TeV
+                          0.8
+                    ε×A
+
+
+
+
+                                CMS
+                          0.7   Simulation
+                          0.6
+
+                          0.5
+                                                    ΓX                ∼
+                                                    mX = 1.4 × 10 ,   κ = 0.01
+                                                                 -4
+
+
+                          0.4
+                                                        EBEB J=0         EBEB J=2
+
+                          0.3                           EBEE J=0         EBEE J=2
+
+                          0.2                           Total J=0        Total J=2
+
+
+                          0.1
+
+                           0
+                                 1000        2000     3000            4000
+                                                                        mX (GeV)
+
+Figure 1: The product of the event selection efficiency (ε) and the detector acceptance (A) is
+shown as a function of signal resonance mass mX for the ΓX /mX = 1.4 × 10−4 signal width
+hypothesis. The total (black), EBEB (red), and EBEE (blue) curves are shown for the spin (J)
+hypotheses J = 0 (solid) and J = 2 (dashed).
+
+In order to obtain the optimal energy resolution, the ECAL signals are calibrated and corrected
+for several detector effects. The variation of the crystal transparency during data taking is
+monitored and corrected using a dedicated monitoring system and the single-channel response
+is equalized using collision events. The data used for this analysis were reconstructed with a
+detector calibration optimized for the 2016 data taking conditions. The energies of the photon
+candidates are first measured by the ECAL and are then corrected for shower noncontainment
+effects using a multivariate regression procedure. The corrections are tuned using a simulation
+of photon candidates with energies spanning the entire range explored by this analysis.
+Differences in the photon energy scale and resolution between data and simulation are esti-
+mated using dielectron events. Energy scale and resolution corrections are derived primarily
+                                                                                                5
+
+
+from Z → e+ e− events, with the electrons reconstructed as photons, using the procedure de-
+scribed in Ref. [28]. The corrections are derived in eight categories defined in terms of the R9
+variable (defined as the ratio of the energy deposited in the central 3×3 crystal matrix and the
+full cluster energy) and the location of the photon within the detector along the η direction.
+The size of the energy scale corrections derived from Z → e+ e− events is of the order of 0.5%,
+while the additional Gaussian smearing needed to match the energy resolution of simulated
+events with that in data varies between 0.8 and 1.5% for photon candidates in the EB region
+and between 2 and 2.5% for photon candidates in the EE regions.
+The diphoton mass resolution has contributions from the measurements of the photon energies
+and from the resolution of the measurement between the two photons. If the z position of the
+vertex from which the photons originate is known to within about 10 mm, then the experimen-
+tal angular resolution between the photons makes a negligible contribution to the mass resolu-
+tion. Correctly associating the diphoton candidate with one of the vertices reconstructed from
+the charged-particle tracks in the event satisfies the above requirements since the positions of
+these vertices are measured with far greater precision. The interaction vertex associated with
+the diphoton system is selected using the algorithm described in Refs. [32, 33]. Because photons
+do not deposit ionization energy in the tracker, the assignment of the diphoton candidate to a
+vertex can only be done indirectly by exploiting the properties of each reconstructed vertex.
+Three discriminating variables are calculated for each reconstructed vertex: the p2T sum of the
+charged-particle tracks associated with the vertex, and two variables that quantify the vector
+and scalar balance of pT between the diphoton system and the tracks associated with the vertex.
+In addition, if either photon has an associated track that has been identified as originating from
+a photon conversion to an electron-positron pair, the conversion information is used. These
+variables provide the inputs to a multivariate classifier based on a boosted decision tree used
+to select the reconstructed vertex of the diphoton system. For signal events with diphoton in-
+variant masses above 500 GeV, the fraction of events in which the interaction vertex is correctly
+assigned is approximately 90%.
+
+
+4   Signal simulation
+The ADD signal samples used in this analysis were produced at leading order (LO) using the
+Monte Carlo (MC) event generator SHERPA 2.1.1 [34] with the CT10 set of parton distribution
+functions (PDFs) [35, 36]. These simulations include the effect of interference between the ADD
+signal and the SM diphoton processes, which can be large. To be able to set limits on possible
+deviations from the SM, additional SM-only samples are generated identically, and the differ-
+ence between these and the ADD samples therefore encompasses the combined effects of the
+ADD signal and the interference.
+The implementation of the ADD model within SHERPA is parametrized by the ultraviolet string
+cutoff scale MS , which is related to the fundamental Planck scale and the number of extra di-
+mensions nED . Since the ADD model is an effective theory only valid below the cutoff scale, the
+generated diphoton mass spectra are truncated at the chosen value of MS . The amplitude for
+a process involving virtual graviton exchange involves a sum over the KK tower of graviton
+mass states. This process can be represented by a higher-dimensional operator with coeffi-
+cients suppressed by some mass scale [37], which can be parametrized by ηG = F /MS4 , where
+F is a dimensionless parameter for which several conventions exist in the literature. We con-
+sider the conventions by Giudice, Rattazzi, and Wells (GRW) [38], by Han, Lykken, and Zhang
+6
+
+
+(HLZ) [39], and by Hewett [40], expressed as:
+                                 
+                                 
+                                  1 (GRW),
+                                 log MS2 , if n = 2
+                                 
+                                       
+                                            ŝ          ED
+                           F=                               (HLZ),                               (1)
+                                     2
+                                 
+                                  n  − 2 ,    if n ED > 2
+                                  ED2
+                                 
+                                 
+                                   ± π (Hewett),
+      √
+where ŝ is the center-of-mass energy of the colliding partons.
+Signal model assumptions from different conventions but with the same value of ηG are equiv-
+alent, reducing the number of distinct scenarios allowed by Eq. (1). All possible choices of
+model parameters can be made equivalent to the signals produced using either the convention
+by GRW, HLZ assuming nED = 2, or Hewett using F = −2/π. Twelve model points for each
+choice are generated in the range 3 < MS < 11 TeV. For each model point, the CMS detector
+response is simulated using G EANT 4 [41] and includes the effects of multiple proton-proton
+collisions occurring within the same LHC bunch crossing, known as ‘pileup’.
+No additional samples are needed to generate the clockwork signal; instead the ADD signal
+samples are reinterpreted to produce the clockwork prediction. In the clockwork model, the
+KK modes are all on shell, so there is no interference effect, while the ADD prediction includes
+both a direct term and an interference term. The GRW and negative Hewett models have oppo-
+site signs for the interference term, so the direct term can be isolated by linearly adding, with
+appropriate weights, the predictions assuming the GRW and negative Hewett conventions.
+The direct term is then rescaled by Eq. (2), provided by the authors of Ref. [14]:
+                               s               "                                    # −1
+                        30MS8                        (52 )(7)(17) 
+                                                                             r
+                                       k2 1                             k 9 mγγ
+          θ (mγγ − k )            1− 2           1+                 1−                   .    (2)
+                       283πM53        mγγ m5γγ        (283)(28 )       mγγ       k
+
+Here, MS is defined in the GRW convention, M5 is the fundamental scale of the gravitational
+interactions, and k is the ‘clockwork spring’, which, phenomenologically, controls the energy
+scale at which the KK modes can be excited. To solve the hierarchy problem, M5 should be
+close to the electroweak scale. Demanding perturbativity of the theory imposes the constraint
+k < M5 .
+For resonant diphoton production, the signal distribution in mγγ is determined from the con-
+volution of the intrinsic shape of the resonance and the ECAL detector response. The intrinsic
+shapes of both the spin-0 and spin-2 resonant signals were derived using the PYTHIA 8.2 [42]
+event generator with the NNPDF2.3 [43] set of PDFs and the CUETP8M1 [44] underlying event
+tune. The spin-0 signal corresponds to a heavy SM-like Higgs boson, while the spin-2 sig-
+nal corresponds to the RS graviton. Three signal width hypotheses are considered: ΓX /mX =
+1.4 × 10−4 , 1.4 × 10−2 , and 5.6 × 10−2 , corresponding to a width narrower than, comparable to,
+and wider than the detector resolution, respectively. These three width hypotheses correspond,
+in the case of an RS graviton, to k̃ = 0.01, 0.1, and 0.2, respectively. A set of signal samples was
+simulated excluding the detector response, forming a fine grid of mass points with 125 GeV
+spacing. These samples are used to measure the signal kinematic acceptance and generator-
+level mass shape. The resulting shapes are interpolated to intermediate mass points using a
+parametric description of the distribution. The detector response was determined using signal
+samples simulated with G EANT 4, and includes the effects of pileup. These samples were gen-
+erated assuming small intrinsic width, with additional Gaussian smearing, determined using
+dielectron events, applied to correct the simulated resolution to that of data. Nine equidis-
+tant mass hypotheses in the range 500–4500 GeV were employed. The signal mass resolution,
+                                                                                               7
+
+
+quantified through the ratio of the full width at half maximum (FWHM) of the distribution,
+divided by 2.35, to the peak position, is roughly 1 and 1.5% for the EBEB and EBEE categories,
+respectively.
+For the spin-0 and spin-2 assumptions, in order to determine the signal normalization the final
+selection efficiency was combined with the kinematic acceptance. The former is obtained from
+fully simulated samples and interpolated using a quadratic function of the resonance mass;
+the latter is obtained from the finely spaced grid of samples and parametrized as a quadratic
+function of both the resonance mass and its width.
+
+
+5     Background determination
+The primary background to the signal comes from prompt SM diphoton production. An ad-
+ditional and reducible source of background occurs when a fragmenting jet mimics a genuine
+photon signature in the detector. Two different methods are used to determine the SM back-
+ground. As described in Section 5.1, the resonant signal search uses a maximum likelihood fit
+to the diphoton invariant mass spectrum, seeking a local excess in the data that could indicate
+the presence of beyond-SM physics. The nonresonant signal search uses simulation to model
+the SM diphoton component and a method based on control samples in data to estimate the
+contribution from misidentified jets; this method is described in Section 5.2.
+
+5.1   Background for resonant diphoton search
+In the resonant signal search, the background mγγ spectrum is described by a parametric func-
+tion of mγγ :
+                                               a+b log(mγγ /GeV)
+                                  f (mγγ ) = mγγ                   ,                          (3)
+where the parameters a and b are obtained from a fit to the data and are considered as uncon-
+strained nuisance parameters in the hypothesis test.
+The chosen parametric form is designed to be an approximation of the true but unknown back-
+ground shape. The degree of accuracy with which the model describes the true shape is tested
+using a set of five different parametric models, all of which can describe relatively well the
+observed mγγ spectrum. If the chosen model is flexible enough to accommodate the shape of
+each of the alternative models, then we assume that it would likely be able to describe a similar
+true background shape.
+The accuracy of the background determination is assessed with data using the following pro-
+cedure: five different parametric background models are fit to the data in order to build five
+different truth models, and the accuracy of the chosen parametrization is quantified by study-
+ing the difference between the true and predicted number of background events in several mγγ
+intervals in the search region. The width of these intervals ranges between 10 and 500 GeV,
+in order to keep an equal amount of data in each of the mass ranges. The five functions are
+chosen from five different families of functions. For each family, the function that requires the
+minimum number of parameters to fit the data with a χ2 probability greater then 5% is chosen.
+Pseudo-experiments are drawn from the mass spectrum predicted by the different background
+models. The total number of events in each pseudo-experiment is taken from a Poisson dis-
+tribution where the mean is determined by the observation in data. For each interval, the
+distribution of the pull variable, defined as the difference between the true and predicted num-
+ber of events divided by the estimated statistical uncertainty, is constructed. If the absolute
+value of the median of this distribution is found to be above 0.5 in a window, an additional
+8
+
+
+uncertainty is assigned to the background parametrization. A modified pull distribution is
+then constructed increasing the statistical uncertainty on the fit by an extra term, denoted “bias
+term”, which is parametrized as a smooth function of mγγ , tuned so that the absolute value
+of the median of the modified pull distribution is below 0.5 for all regions. The additional
+uncertainty is then included in the likelihood function by adding to the background model a
+component having the same shape as the signal, with a normalization coefficient distributed
+as a Gaussian function of mean zero and width equal to the integral of the bias term over the
+FWHM of the tested signal shape. The inclusion of the additional component has the effect of
+avoiding falsely positive or negative tests that could be induced by a mismodeling of the back-
+ground shape, and it degrades the analysis sensitivity by 0.1 to 10% depending on the mass
+and width of the signal hypothesis.
+
+5.2   Background for nonresonant diphoton search
+In the search for nonresonant deviations from the SM diphoton spectrum, we make a predic-
+tion of the invariant mass distribution expected from SM diphoton events, as well as of con-
+tributions from photon+jet or dijet events where one or two jets fragment in such a way as to
+resemble a photon signature in the CMS detector. Prompt SM diphoton production can oc-
+cur via quark annihilation or gluon fusion processes. This irreducible background is modeled
+using the MC event generator SHERPA 2.1.1 [34, 45]. Up to three additional jets are added to
+the diphoton final state, to better simulate phase space regions with small-to-medium angular
+separation between the two photons. The CT10 set of PDFs is used for generation, and the gen-
+erated events are subject to a simulation of the CMS detector response based on the G EANT 4
+package [41]. While the inclusion of explicit final-state jets in the SHERPA sample incorporates
+the real radiation component of higher-order corrections to the basic diphoton process, virtual
+corrections are not included in these SHERPA simulated events. This is remedied by performing
+a full NNLO calculation of SM diphoton production using MCFM 8.0 [46]. A K factor, defined
+as the ratio of the MCFM NNLO prediction to the SHERPA prediction, is calculated as a function
+of the diphoton invariant mass. This K factor is then used to reweight and correct the SHERPA
+events (after detector simulation) to obtain the prediction for the SM diphoton invariant mass
+spectrum from two real photons. The K factor is calculated separately for the EBEB and EBEE
+acceptance categories, with the renormalization, factorization, and fragmentation scales for the
+calculation set to be mγγ . Events with very small ∆Rγγ (<0.45) are rejected to avoid an infrared
+divergence. The K factor for the EBEB (EBEE) event category varies from 1.4–1.8 (1.5–2.0) over
+the range 0.5–2.0 TeV. Next-to-leading-order (NLO) K factors are also computed in a similar
+way with both MCFM and DIPHOX [47], and are used to extract systematic uncertainties in the
+shape of the central, NNLO calculation.
+An additional background occurs from SM photon+jet or dijet events when one or two jets
+fragment in such a way as to resemble a photon signature in the detector. Application of shower
+shape and isolation criteria to the identification of photon candidates as described in Section 3
+aims to minimize this reducible background, and we use a data-driven method to estimate
+the remaining contribution. The method assumes that events where a jet has fragmented to
+produce a fake photon signature in the detector can be modeled by other events where the
+jet fragmented differently. We define two distinct categories of jet fragmentation objects, and
+measure the ratio of the yields of objects in these two fragmentation categories, in a jet-triggered
+reference data sample.
+In the first category, whose objects are counted for the numerator of the ratio, are those misiden-
+tified jets that pass the photon identification requirements; these are the ones whose contribu-
+tion to the background we wish to determine. When measured in a reference data sample, how-
+                                                                                                9
+
+
+ever, genuine photons passing the same ID requirements contribute also to this category. This
+contribution is subtracted out statistically, in the following way. The shower shape variable σηη
+is used as a discriminant between genuine photons and jets misidentified as photons. A tem-
+plate is constructed for the σηη distribution of real photons using simulated events, and a σηη
+template for jets misidentified as photons is obtained from a control sample in data enriched
+in such jets, by inverting the identification requirement for charged hadron isolation. These
+templates are then fit to the observed σηη distribution of the numerator objects, to determine
+the relative contribution of genuine photons, which is then subtracted. This template-fitting
+and subtraction procedure is performed in bins of photon pT since the σηη templates are found
+to be pT dependent. After this procedure, what remains is the contribution to the numerator
+object category only from jets that have been misidentified as photons.
+The denominator category consists of ‘photon-like’ jets that pass a less strict version of the
+photon ID, but still have a high electromagnetic energy component. They are additionally
+required to fail at least one of the isolation or shower shape requirements for photon candidate
+identification, ensuring that the two fragmentation categories are mutually exclusive and that
+there is negligible contamination from real photons in the denominator category.
+The ratio of the numbers of objects in the two jet fragmentation categories is measured as a
+function of the photon pT in an independent jet-triggered data sample. The background pre-
+diction for jets that are misidentified as photons is then obtained by considering events con-
+taining objects that pass the looser ‘photon-like’ jet definition, and reweighting those events
+by the relative fragmentation ratio. This contribution from misidentified jets to the diphoton
+spectrum is found to decrease within the mass range 0.5 < mγγ < 1 TeV from 9 to 4% of the
+total background in the EBEB category and from 28 to 17% in the EBEE. For mγγ > 1 TeV, this
+integrated contribution from jets misidentified as photons is predicted to be less than 4 (14)%
+in the EBEB (EBEE).
+
+
+6     Systematic uncertainties
+6.1    Systematic uncertainties for the resonant search
+The systematic uncertainties on the search for resonant diphoton signals are smaller than the
+associated statistical uncertainties. The parametric background model has no associated sys-
+tematic uncertainties, except for the bias term uncertainty described previously. The shape
+coefficients are treated as unconstrained nuisance parameters, and thus the associated uncer-
+tainties contribute to the statistical uncertainty.
+Uncertainties associated with the signal modeling are:
+    • a 2.5% uncertainty in the signal normalization assigned to reflect the uncertainty in
+      the total integrated luminosity [48];
+    • a 6% uncertainty in the signal normalization to reflect uncertainty in the selection
+      efficiency;
+    • a 6% uncertainty in the signal normalization in order to account for the variation
+      in the kinematic acceptance estimated by comparing the use of the alternative PDF
+      sets CT10 [35, 36], NNPDF2.3 [43], and MSTW08 [49] on the signal hypothesis and
+      taking the largest deviation, following the PDF4LHC recommendations [50, 51];
+    • a 1% uncertainty in the photon energy scale is included in the fit to take into account
+      the uncertainty associated with the photon energy scale at the Z boson mass and its
+      extrapolation to higher masses; and
+10
+
+
+     • the uncertainty in the photon energy resolution correction factor evaluated by sum-
+       ming and subtracting 0.5% in quadrature from the estimated additional Gaussian
+       smearing measured at the Z boson peak.
+
+6.2    Systematic uncertainties for the nonresonant search
+Although the SM diphoton background prediction is at NNLO accuracy, there is still the pos-
+sibility of contribution from unaccounted-for higher-order terms. Therefore, we allow the
+normalization of the predicted diphoton background to float freely, constrained only by the
+data (predominantly at low mγγ where the statistical uncertainty is smallest). Floating the
+normalization also absorbs sources of uncertainty associated with the integrated luminosity
+measurement, trigger, and photon selection efficiency. Provided the shape of the signal differs
+significantly from the background, the analysis will still discriminate between the two. Scale
+uncertainties in the K factor calculation are estimated by simultaneously varying the renor-
+malization, factorization, and fragmentation scales between mγγ /2 and 2mγγ . The difference
+between the shape of the NNLO MCFM mγγ spectra and the shape predicted at NLO by MCFM
+and DIPHOX is also taken as an uncertainty and as a conservative bound on the effects of the
+absent higher-order terms.
+Systematic uncertainties associated with the PDFs are calculated using DIPHOX at NLO with a
+consistent set of NLO CT10 PDFs. The 26 eigenvectors of this PDF set are varied individually
+by ±1 standard deviation (rather than taking an envelope), which allows us to treat consis-
+tently the correlations of the uncertainties as a function of mγγ and between the EBEB and
+EBEE categories. Uncertainties due to the photon energy scale and resolution have a negligi-
+ble impact on the nonresonant search. The uncertainty in the misidentification rate for both
+the barrel and endcap is approximately 30%, as estimated from the variation of the fake rate
+as a function of pileup and photon η, and from the degree of variation observed in a test of
+the method using MC simulation. A separate shape uncertainty due to differences in the sam-
+ples from which the fake rate was constructed (using a multijet- or dimuon-triggered data set)
+makes a subdominant contribution.
+Uncertainties in the normalization of the extra dimensional signal from the measured inte-
+grated luminosity and photon selection efficiency are 2.5 and 6%, respectively, in agreement
+with the resonance search. Systematic uncertainties in the signal shape from PDFs are treated
+in the same manner as the background by separately varying the 26 eigenvectors. These un-
+certainties are assumed to be 100% correlated between signal and background. The effect of
+the PDF uncertainty on the signal cross section is treated as a theoretical uncertainty and is not
+propagated in the upper limits.
+
+
+7     Results
+7.1    Results of the search for resonant excesses
+The mγγ distribution of the selected diphoton events and the background parametrization ob-
+tained through an unbinned maximum likelihood fit to these events are shown in Fig. 2. This
+parametric form corresponds to the one chosen to model the background given by Eq. (3), as
+detailed in Section 5.
+The results of the search are interpreted in the framework of a composite statistical hypoth-
+esis test. A simultaneous fit to the invariant mass spectra of the EBEB and EBEE event cat-
+egories is used to study the compatibility of the data with the background-only and the sig-
+nal+background hypotheses.
+7.1                  Results of the search for resonant excesses                                                                           11
+
+                                                 35.9 fb-1 (13 TeV)                                                   35.9 fb-1 (13 TeV)
+  Events / 20 GeV
+
+
+
+
+                                                                      Events / 20 GeV
+                             CMS                 Data                                   103   CMS                     Data
+                      3            EBEB                                                                 EBEE
+                    10                           Fit model                                                            Fit model
+                                                 ± 1 std dev                            102                           ± 1 std dev
+                    102
+
+                                                                                         10
+                     10
+
+
+                      1                                                                   1
+  (data-fit)/σstat
+
+
+
+
+                                                                      (data-fit)/σstat
+                         2                                                                2
+
+                         0                                                                0
+
+                     -2                                                                  -2
+                             500   1000   1500     2000        2500                           500       1000   1500     2000        2500
+                                                       mγ γ (GeV)                                                           mγ γ (GeV)
+Figure 2: Observed diphoton invariant mass spectra for the EBEB (left) and EBEE (right) cate-
+gories. Also shown are the results of a likelihood fit to the background-only hypothesis. The
+shaded region shows the one standard deviation uncertainty band associated with the fit, re-
+flecting the statistical uncertainty of the data. The lower panels show the difference between
+the data and fit, divided by the statistical uncertainty in the data points.
+
+The test statistic used in the hypothesis tests are based on the profile likelihood ratio:
+
+                                                                      L(µS + B|θ̂µ )
+                                                   q(µ) = −2 log                                    ,                                      (4)
+                                                                       L(µ̂S + B|θ̂ )
+
+where S and B are the probability density functions for the resonant diphoton signal produc-
+tion process and the SM background, respectively; µ is the signal strength parameter, defined
+as the ratio between the measured and expected signal cross sections; and θ are the nuisance
+parameters of the model used to account for the associated systematic uncertainties. The no-
+tation x̂ indicates the best fit value of the parameter x, while x̂y denotes the best fit value of x,
+conditionally on y.
+The data are in agreement with the absence of any significant resonant excess of events. The
+largest deviation observed is an approximately 2 standard deviation local excess at 1.2 TeV for
+the wide-width hypothesis, and is similar for both the spin-0 and spin-2 signals.
+To set upper limits on the resonant diphoton production rate, the modified frequentist method,
+commonly known as CLs [52, 53], is used following the prescription described in Ref. [54].
+Asymptotic formulas [55] are used in the calculations of limits.
+Expected and observed upper limits at 95% confidence level (CL) on the production of scalar
+and RS graviton resonances are shown in Fig. 3. Using leading order cross sections from
+PYTHIA , RS gravitons with masses mX below 2.3, 4.1, and 4.6 TeV can be excluded for k̃ = 0.01,
+0.1, and 0.2, respectively, corresponding to ΓX /mX = 1.4 × 10−4 , 1.4 × 10−2 , and 5.6 × 10−2 ,
+respectively.
+Limits can also be set, in a model independent fashion, on the cross sections for events in
+the fiducial volume for the resonant pp → γγ process. The signal shape is modeled in the
+same way as for the benchmark models, while the signal normalization accounts only for the
+detector efficiency and not for any particular signal acceptance. The fiducial volume is defined
+12
+
+
+                                                              35.9 fb-1 (13 TeV)                                                              35.9 fb-1 (13 TeV)
+                              10                                                                            10
+     σ(pp → G → γ γ ) (fb)
+
+
+
+
+                                                                                   σ(pp → S → γ γ ) (fb)
+                                    CMS                   ∼ = 0.01, J=2                                           CMS                   ΓX
+                                                          κ
+                                                                                                                                        mX = 1.4×10 , J=0
+                                                                                                                                                    -4
+
+                                                          Expected limit                                                                Expected limit
+                                                           ± 1 std dev
+                                                                                                                                            ± 1 std dev
+                                                           ± 2 std dev
+                                                          Observed limit                                                                    ± 2 std dev
+                               1                          G→γ γ (LO)                                         1                          Observed limit
+
+
+
+
+                             10-1                                                                          10-1
+
+
+
+
+                              5×102                2×10         3×10                                        5×102                2×10           3×10
+                                               3          3           3                                                      3          3             3
+                                          10                                                                            10
+                                                                    mG (GeV)                                                                         mS (GeV)
+                                                              35.9 fb-1 (13 TeV)                                                              35.9 fb-1 (13 TeV)
+                                                                                                            10
+     σ(pp → G → γ γ ) (fb)
+
+
+
+
+                                                                                   σ(pp → S → γ γ ) (fb)
+                              10                          ∼ = 0.1, J=2                                                                  ΓX
+                                    CMS                   κ                                                       CMS                   mX = 1.4×10 , J=0
+                                                                                                                                                    -2
+
+                                                          Expected limit                                                                Expected limit
+                                                           ± 1 std dev
+                                                                                                                                            ± 1 std dev
+                                                           ± 2 std dev
+                                                          Observed limit                                                                    ± 2 std dev
+                               1                          G→γ γ (LO)                                         1                          Observed limit
+
+
+
+
+                             10-1                                                                          10-1
+
+
+
+
+                              5×102                2×10         3×10                                        5×102                2×10           3×10
+                                               3          3           3                                                      3          3             3
+                                          10                                                                            10
+                                                                    mG (GeV)                                                                         mS (GeV)
+                                                              35.9 fb-1 (13 TeV)                                                              35.9 fb-1 (13 TeV)
+     σ(pp → G → γ γ ) (fb)
+
+
+
+
+                                                                                   σ(pp → S → γ γ ) (fb)
+
+
+
+
+                                    CMS                   ∼ = 0.2, J=2                                            CMS                   ΓX
+                                                          κ                                                 10
+                                                                                                                                        mX = 5.6×10 , J=0
+                                                                                                                                                    -2
+                              10
+                                                          Expected limit                                                                Expected limit
+                                                           ± 1 std dev
+                                                                                                                                            ± 1 std dev
+                                                           ± 2 std dev
+                                                          Observed limit                                                                    ± 2 std dev
+                                                          G→γ γ (LO)                                                                    Observed limit
+                               1                                                                             1
+
+
+
+
+                             10-1                                                                          10-1
+
+
+
+
+                              5×102                2×10        3×10                                         5×102                2×10          3×10
+                                           3          3             3                                                    3          3                3
+                                          10                                                                            10
+                                                                    mG (GeV)                                                                         mS (GeV)
+
+Figure 3: Expected and observed 95% CL upper limits on the production cross section for RS
+gravitons of mass mG and three values of k̃ (left) and for spin-0 resonances of mass mS produced
+via gluon fusion for the three width hypotheses (right). The shaded bands represent the 1 and
+2 standard deviation uncertainty in the expected limit.
+
+by selecting events in which both photons have generator-level pT > 75 GeV, to match the
+selection applied in the event reconstruction and selection. Generator-level photons are also
+required to have an isolation energy of less than 10 GeV in a cone of radius 0.4 around the
+photon direction. The isolation energy is defined as the pT sum of all final state particles except
+neutrinos and the signal photon itself.
+The fit is performed independently in the EBEB and EBEE categories for each of the following
+width hypotheses: ΓX /mX = 1.4 × 10−4 , 1.4 × 10−2 , and 5.6 × 10−2 . The results for the median
+expected exclusion limits on the fiducial cross sections are presented in Fig. 4 for each width
+hypothesis.
+7.2            Results of the search for nonresonant excesses                                                                                                                                              13
+
+
+                                                                                 35.9 fb-1 (13 TeV)                                                                                   35.9 fb-1 (13 TeV)
+                                                                                                                               10
+      σ(pp → X → γ γ ) (fb)
+
+
+
+
+                                                                                                      σ(pp → X → γ γ ) (fb)
+                                     CMS                                   ΓX                                                        CMS                                        ΓX
+                                                                           mX = 1.4×10                                                                                          mX = 1.4×10
+                                                                                       -4                                                                                                   -4
+
+
+                                                                           Expected limit                                                                                       Expected limit
+                                                                               ± 1 std dev                                                                                          ± 1 std dev
+                                1                                              ± 2 std dev                                                                                          ± 2 std dev
+                                                                           Observed limit                                       1                                               Observed limit
+
+
+
+
+                                     p (γ , γ ) > 75 GeV
+                              10-1     T   1   2                                                                                     p (γ , γ ) > 75 GeV
+                                                                                                                              10-1     T   1   2
+                                     |η(γ , γ )| < 1.4442
+                                           1   2                                                                                     |η(γ )| < 1.4442, |η(γ )| > 1.566
+                                                                                                                                           1                    2
+                                     Isogen(γ , γ ) < 10 GeV                                                                         Isogen(γ , γ ) < 10 GeV
+                                                   1   2                                                                                       1   2
+
+
+
+                               5×102                                2×10           3×10                                        5×102                                     2×10           3×10
+                                                            3          3                 3                                                               3                  3                 3
+                                                           10                                                                                          10
+                                                                                        mX (GeV)                                                                                             mX (GeV)
+                                                                                 35.9 fb-1 (13 TeV)                                                                                   35.9 fb-1 (13 TeV)
+                                                                                                                               10
+      σ(pp → X → γ γ ) (fb)
+
+
+
+
+                                                                                                      σ(pp → X → γ γ ) (fb)
+                                     CMS                                   ΓX                                                        CMS                                        ΓX
+                                                                           mX = 1.4×10                                                                                          mX = 1.4×10
+                                                                                       -2                                                                                                   -2
+
+
+                                                                           Expected limit                                                                                       Expected limit
+                                                                               ± 1 std dev                                                                                          ± 1 std dev
+                                1                                              ± 2 std dev                                                                                          ± 2 std dev
+                                                                           Observed limit                                       1                                               Observed limit
+
+
+
+
+                                     p (γ , γ ) > 75 GeV
+                              10-1     T   1   2                                                                                     p (γ , γ ) > 75 GeV
+                                                                                                                              10-1     T   1   2
+                                     |η(γ , γ )| < 1.4442
+                                           1   2                                                                                     |η(γ )| < 1.4442, |η(γ )| > 1.566
+                                                                                                                                           1                    2
+                                     Isogen(γ , γ ) < 10 GeV                                                                         Isogen(γ , γ ) < 10 GeV
+                                                   1   2                                                                                       1   2
+
+
+
+                               5×102                                2×10           3×10                                        5×102                                     2×10           3×10
+                                                            3          3                 3                                                                  3                   3             3
+                                                           10                                                                                          10
+                                                                                        mX (GeV)                                                                                             mX (GeV)
+                                                                                 35.9 fb-1 (13 TeV)                                                                                   35.9 fb-1 (13 TeV)
+                               10
+      σ(pp → X → γ γ ) (fb)
+
+
+
+
+                                                                                                      σ(pp → X → γ γ ) (fb)
+
+
+
+
+                                     CMS                                   ΓX                                                  10    CMS                                        ΓX
+                                                                           mX = 5.6×10                                                                                          mX = 5.6×10
+                                                                                       -2                                                                                                   -2
+
+
+                                                                           Expected limit                                                                                       Expected limit
+                                                                               ± 1 std dev                                                                                          ± 1 std dev
+                                                                               ± 2 std dev                                                                                          ± 2 std dev
+                                1                                          Observed limit                                                                                       Observed limit
+                                                                                                                                1
+
+
+
+
+                                     p (γ , γ ) > 75 GeV                                                                             p (γ , γ ) > 75 GeV
+                              10-1     T   1   2                                                                              10-1     T   1   2
+                                     |η(γ , γ )| < 1.4442                                                                            |η(γ )| < 1.4442, |η(γ )| > 1.566
+                                           1   2                                                                                           1                    2
+                                     Isogen(γ , γ ) < 10 GeV                                                                         Isogen(γ , γ ) < 10 GeV
+                                                   1   2                                                                                       1   2
+
+
+
+                               5×102                                2×10           3×10                                        5×102                                     2×10           3×10
+                                                                3          3             3                                                               3                  3                 3
+                                                           10                                                                                          10
+                                                                                        mX (GeV)                                                                                             mX (GeV)
+
+Figure 4: Expected and observed 95% CL upper limits on the fiducial cross section for the
+resonant pp → γγ process. Shown are the results in the EBEB (left) and EBEE (right) categories
+for the three width hypotheses. The shaded bands represent the 1 and 2 standard deviation
+uncertainty in the expected limit.
+
+7.2                      Results of the search for nonresonant excesses
+In the nonresonant search, constraints on the signals are determined by adopting a Bayesian
+statistical approach. A binned likelihood is constructed from the data, with the binning in
+100 GeV steps beginning at 500 GeV. The signal strengths for each model are assumed to have
+a flat prior (bounded below by zero). Nuisance parameters are assigned to each of the system-
+atic uncertainties described in Section 6.2. Except for the diphoton background normalization
+nuisance parameter, which has a flat prior, the prior shapes are either lognormal or Gaussian,
+depending on whether or not the uncertainty is bounded below by zero. Nuisance parameters
+are marginalized using a Markov chain MC method [56].
+14
+
+
+Figure 5 (upper) presents the data and background prediction “pre-fit,” i.e., before the marginal-
+ization of the nuisance parameters. The shaded bands show the systematic uncertainties, ne-
+glecting the (unbounded) normalization of the diphoton prediction and the NLO shapes. Fig-
+ure 5 (lower) presents the data and background prediction “post-fit,” i.e., after the marginaliza-
+tion of the nuisance parameters. Good agreement is found within the uncertainties for both the
+pre- and post-fit spectra, although the uncertainties are smaller, as expected, in the latter case.
+
+                                                                           35.9 fb-1 (13 TeV)                                                                                 35.9 fb-1 (13 TeV)
+     Events / 100 GeV
+
+
+
+
+                                                                                                        Events / 100 GeV
+                              CMS        EBEB          Data                                                                      CMS        EBEE          Data
+                   103                                                                                               103
+                                                       γ γ pre-fit prediction                                                                             γ γ pre-fit prediction
+
+                         2
+                   10                                  jγ , jj pre-fit prediction                                    10     2
+                                                                                                                                                          jγ , jj pre-fit prediction
+
+
+
+                        10                                                                                                 10
+
+
+                         1                                                                                                  1
+
+
+              10−1                                                                                              10−1
+
+                                                                      (Data-Prediction)/ σmSTAT                                                                          (Data-Prediction)/ σmSTAT
+     Pull
+
+
+
+
+                                                                                                        Pull
+
+
+
+                                                                                            γ γ (GeV)                                                                                          γ γ (GeV)
+                         4                                                                                                  4
+                                                                      ±1 σSYS / σSTAT                                                                                    ±1 σSYS / σSTAT
+                         2                                                                                                  2
+                         0                                                                                                  0
+                        −2                                                                                                 −2
+                        −4                                                                                                 −4
+                             600   800 1000 1200 1400 1600 1800 2000 2200 2400 2600                                             600   800 1000 1200 1400 1600 1800 2000 2200 2400 2600
+                                                                                     mγ γ (GeV)                                                                                         mγ γ (GeV)
+
+                                                                           35.9 fb-1 (13 TeV)                                                                                 35.9 fb-1 (13 TeV)
+     Events / 100 GeV
+
+
+
+
+                                                                                                        Events / 100 GeV
+
+
+
+
+                              CMS        EBEB          Data                                                                      CMS        EBEE          Data
+                   103                                 γ γ post-fit prediction                                       103                                  γ γ post-fit prediction
+                                                       jγ , jj post-fit prediction                                                                        jγ , jj post-fit prediction
+                                                       HLZ nED=2, MS=8 TeV                                                                                HLZ nED=2, MS=8 TeV
+                         2                                                                                                  2
+                   10                                  Clockwork k=0.1 TeV, M5=10 TeV                                10                                   Clockwork k=0.1 TeV, M5=10 TeV
+
+
+                        10                                                                                                 10
+
+
+                         1                                                                                                  1
+
+
+              10−1                                                                                              10−1
+
+                         3                                            (Data-Prediction)/ σmSTAT                             3                                            (Data-Prediction)/ σmSTAT
+     Pull
+
+
+
+
+                                                                                                        Pull
+
+
+
+
+                                                                                            γ γ (GeV)                                                                                          γ γ (GeV)
+                         2                                            ±1 σSYS / σSTAT                                       2                                            ±1 σSYS / σSTAT
+                         1                                                                                                  1
+                         0                                                                                                  0
+                        −1                                                                                                 −1
+                        −2                                                                                                 −2
+                        −3                                                                                                 −3
+                             600   800 1000 1200 1400 1600 1800 2000 2200 2400 2600                                             600   800 1000 1200 1400 1600 1800 2000 2200 2400 2600
+                                                                                     mγ γ (GeV)                                                                                         mγ γ (GeV)
+
+Figure 5: The diphoton invariant mass distributions in the EBEB (left) and EBEE (right) cat-
+egories for the SM diphoton background prediction and the fake background measurement
+compared to the data. The last bin includes the overflow. The error bars on the points indi-
+cate the statistical uncertainty. The upper (lower) plots show the pre-fit (post-fit) background
+estimates. The hatched bands indicate the total pre- or post-fit systematic uncertainties. In-
+variant mass distributions from two signal scenarios are superimposed on the lower plots. The
+bottom panels show the pull distributions, indicating the difference between the data and back-
+ground prediction, divided by the uncertainty in the background, with error bars representing
+the statistical uncertainty and shaded bands showing the one standard deviation systematic
+uncertainty, normalized by the statistical uncertainty.
+
+For the ADD model, upper limits are set at 95% CL on the signal strength, which are translated
+7.2    Results of the search for nonresonant excesses                                                                       15
+
+
+into lower limits on the mass scale MS by interpolating the value of MS that has a signal strength
+of 1.0 excluded. Table 1 summarizes the results for all ADD model conventions probed. The
+excluded values of MS range from 5.6 to 9.7 TeV, depending on the convention.
+
+Table 1: Exclusion lower limits obtained on the mass scale MS (in units of TeV) for various
+conventions used in the calculation of the ADD large extra dimensional scenario, as described
+in Section 4. The total asymmetric uncertainties are shown on the expected limits.
+
+               GRW                Hewett                                           HLZ
+      Signal
+                             negative positive           nED = 2     nED = 3      nED = 4      nED = 5    nED = 6    nED = 7
+
+ Expected      7.1+ 0.7
+                  −0.5          5.5+ 0.1
+                                   −0.3       6.3+ 0.6
+                                                 −0.4     8.4+ 1.3
+                                                             −1.1    8.4+ 0.8
+                                                                        −0.6       7.1+ 0.7
+                                                                                      −0.5     6.4+ 0.6
+                                                                                                  −0.5    6.0+ 0.6
+                                                                                                             −0.4    5.6+ 0.6
+                                                                                                                        −0.4
+ Observed        7.8                 5.6          7.0       9.7        9.3           7.8           7.0      6.6       6.2
+
+The limit-setting strategy for the clockwork model is similar to that for the ADD model. Only
+the portion of the diphoton invariant mass spectrum with mγγ > 900 GeV can be used for
+limit setting on the clockwork model. This constraint is imposed to maintain a statistically
+precise prediction after the translation of the ADD to clockwork signal. The ADD signal is
+only simulated for mγγ > 500 GeV and the constructed clockwork signal acquires sufficient
+statistics only above 900 GeV. A simplifying effect is that the signal strength normalization
+scales as M5−3 , so a direct translation between an upper limit on the signal strength and a lower
+limit on M5 can be made (for a fixed value of k). Figure 6 shows the 95% CL exclusion limits
+in the k–M5 plane. We are able to exclude values of M5 lower than 5 TeV for k values in the
+range of 0.2 GeV to 2.0 TeV. The parameter space with k > M5 is excluded by a perturbativity
+requirement, and this region is denoted ‘nonperturbative’ in the exclusion plot.
+
+                                                                                      -1
+                                                                                35.9 fb (13 TeV)
+                                 102
+                          M5 (TeV)
+
+
+
+
+                                            CMS     95% CL exclusion limits on k-M5 space
+                                                       Observed limit
+                                                       Expected limit
+                                                       ± 1 std dev
+                                                       ± 2 std dev
+                                                       Nonperturbative regime (k > M )
+                                                                                       5
+
+
+
+                                     10
+
+
+
+
+                                      1
+
+                                     10−4         10−3       10−2       10−1               1
+                                                                                           k (TeV)
+Figure 6: The 95% CL exclusion limits for the continuous graviton model in the clockwork
+framework over the k–M5 parameter space. The shaded bands represent the 1 and 2 standard
+deviation uncertainty in the expected limit. The shaded region with k > M5 denotes the area
+where the theory becomes nonperturbative.
+16
+
+
+8    Summary
+A search has been performed for physics beyond the standard model in high-mass diphoton
+events from proton-proton collisions at a center-of-mass energy of 13 TeV. The data used cor-
+respond to an integrated luminosity of 35.9 fb−1 collected by the CMS detector in 2016. A
+resonant peak in the diphoton invariant mass spectrum could indicate the existence of a new
+scalar particle, such as a heavy Higgs boson, or of a Kaluza–Klein excitation of the graviton
+in the Randall–Sundrum model of warped extra dimensions. A nonresonant excess could be a
+signature of large extra dimensions, in the scenario by Arkani-Hamed, Dimopoulos, and Dvali,
+or a continuum clockwork model.
+The data are found to be in agreement with the predicted background from standard model
+sources, and no evidence for new physics is seen. Masses below 2.3–4.6 TeV are excluded at
+95% confidence level for the excited state of the Randall–Sundrum graviton, for a coupling pa-
+rameter in the range 0.01 < k̃ < 0.2. Limits are also set on the production of scalar resonances,
+and model-independent cross section limits have been extracted as a function of diphoton in-
+variant mass for any resonant γγ production process. These results extend the sensitivity of
+the previous search performed by the CMS experiment [19] and are compatible with those
+reported by the ATLAS Collaboration in Ref. [18]. In the large extra-dimensional model of
+Arkani-Hamed, Dimopoulos, and Dvali, exclusion limits on the string mass scale are set in the
+range 5.6 < MS < 9.7 TeV, depending on the specific model convention. These results ex-
+tend the current best lower limits on MS from the diphoton channel as presented in Ref. [18].
+Additionally, the first exclusion limits are set in the two-dimensional parameter space of a con-
+tinuum clockwork model.
+
+
+Acknowledgments
+We congratulate our colleagues in the CERN accelerator departments for the excellent perfor-
+mance of the LHC and thank the technical and administrative staffs at CERN and at other CMS
+institutes for their contributions to the success of the CMS effort. In addition, we gratefully
+acknowledge the computing centers and personnel of the Worldwide LHC Computing Grid
+for delivering so effectively the computing infrastructure essential to our analyses. Finally,
+we acknowledge the enduring support for the construction and operation of the LHC and the
+CMS detector provided by the following funding agencies: BMBWF and FWF (Austria); FNRS
+and FWO (Belgium); CNPq, CAPES, FAPERJ, FAPERGS, and FAPESP (Brazil); MES (Bulgaria);
+CERN; CAS, MoST, and NSFC (China); COLCIENCIAS (Colombia); MSES and CSF (Croa-
+tia); RPF (Cyprus); SENESCYT (Ecuador); MoER, ERC IUT, and ERDF (Estonia); Academy of
+Finland, MEC, and HIP (Finland); CEA and CNRS/IN2P3 (France); BMBF, DFG, and HGF
+(Germany); GSRT (Greece); NKFIA (Hungary); DAE and DST (India); IPM (Iran); SFI (Ireland);
+INFN (Italy); MSIP and NRF (Republic of Korea); MES (Latvia); LAS (Lithuania); MOE and UM
+(Malaysia); BUAP, CINVESTAV, CONACYT, LNS, SEP, and UASLP-FAI (Mexico); MOS (Mon-
+tenegro); MBIE (New Zealand); PAEC (Pakistan); MSHE and NSC (Poland); FCT (Portugal);
+JINR (Dubna); MON, RosAtom, RAS, RFBR, and NRC KI (Russia); MESTD (Serbia); SEIDI,
+CPAN, PCTI, and FEDER (Spain); MOSTR (Sri Lanka); Swiss Funding Agencies (Switzerland);
+MST (Taipei); ThEPCenter, IPST, STAR, and NSTDA (Thailand); TUBITAK and TAEK (Turkey);
+NASU and SFFR (Ukraine); STFC (United Kingdom); DOE and NSF (USA).
+Individuals have received support from the Marie-Curie program and the European Research
+Council and Horizon 2020 Grant, contract No. 675440 (European Union); the Leventis Foun-
+dation; the A. P. Sloan Foundation; the Alexander von Humboldt Foundation; the Belgian Fed-
+References                                                                                   17
+
+
+eral Science Policy Office; the Fonds pour la Formation à la Recherche dans l’Industrie et dans
+l’Agriculture (FRIA-Belgium); the Agentschap voor Innovatie door Wetenschap en Technologie
+(IWT-Belgium); the F.R.S.-FNRS and FWO (Belgium) under the “Excellence of Science - EOS” -
+be.h project n. 30820817; the Ministry of Education, Youth and Sports (MEYS) of the Czech Re-
+public; the Lendület (“Momentum”) Program and the János Bolyai Research Scholarship of the
+Hungarian Academy of Sciences, the New National Excellence Program ÚNKP, the NKFIA re-
+search grants 123842, 123959, 124845, 124850 and 125105 (Hungary); the Council of Science and
+Industrial Research, India; the HOMING PLUS program of the Foundation for Polish Science,
+cofinanced from European Union, Regional Development Fund, the Mobility Plus program of
+the Ministry of Science and Higher Education, the National Science Center (Poland), contracts
+Harmonia 2014/14/M/ST2/00428, Opus 2014/13/B/ST2/02543, 2014/15/B/ST2/03998, and
+2015/19/B/ST2/02861, Sonata-bis 2012/07/E/ST2/01406; the National Priorities Research
+Program by Qatar National Research Fund; the Programa Estatal de Fomento de la Investi-
+gación Cientı́fica y Técnica de Excelencia Marı́a de Maeztu, grant MDM-2015-0509 and the Pro-
+grama Severo Ochoa del Principado de Asturias; the Thalis and Aristeia programs cofinanced
+by EU-ESF and the Greek NSRF; the Rachadapisek Sompot Fund for Postdoctoral Fellowship,
+Chulalongkorn University and the Chulalongkorn Academic into Its 2nd Century Project Ad-
+vancement Project (Thailand); the Welch Foundation, contract C-1845; and the Weston Havens
+Foundation (USA).
+
+
+References
+ [1] E. Witten, “Dynamical breaking of supersymmetry”, Nucl. Phys. B 188 (1981) 513,
+     doi:10.1016/0550-3213(81)90006-7.
+
+ [2] S. Dimopoulos and H. Georgi, “Softly broken supersymmetry and SU(5)”, Nucl. Phys. B
+     193 (1981) 150, doi:10.1016/0550-3213(81)90522-8.
+
+ [3] N. Arkani-Hamed, S. Dimopoulos, and G. R. Dvali, “The hierarchy problem and new
+     dimensions at a millimeter”, Phys. Lett. B 429 (1998) 263,
+     doi:10.1016/S0370-2693(98)00466-3, arXiv:hep-ph/9803315.
+
+ [4] I. Antoniadis, N. Arkani-Hamed, S. Dimopoulos, and G. R. Dvali, “New dimensions at a
+     millimeter to a fermi and superstrings at a TeV”, Phys. Lett. B 436 (1998) 257,
+     doi:10.1016/S0370-2693(98)00860-0, arXiv:hep-ph/9804398.
+
+ [5] N. Arkani-Hamed, S. Dimopoulos, and G. R. Dvali, “Phenomenology, astrophysics and
+     cosmology of theories with submillimeter dimensions and TeV scale quantum gravity”,
+     Phys. Rev. D 59 (1999) 086004, doi:10.1103/PhysRevD.59.086004,
+     arXiv:hep-ph/9807344.
+
+ [6] L. Randall and R. Sundrum, “A large mass hierarchy from a small extra dimension”,
+     Phys. Rev. Lett. 83 (1999) 3370, doi:10.1103/PhysRevLett.83.3370,
+     arXiv:hep-ph/9905221.
+
+ [7] L. Randall and R. Sundrum, “An alternative to compactification”, Phys. Rev. Lett. 83
+     (1999) 4690, doi:10.1103/PhysRevLett.83.4690, arXiv:hep-th/9906064.
+
+ [8] G. F. Giudice and M. McCullough, “A clockwork theory”, JHEP 02 (2017) 036,
+     doi:10.1007/JHEP02(2017)036, arXiv:1610.07962.
+18
+
+
+ [9] I. Antoniadis, S. Dimopoulos, and A. Giveon, “Little string theory at a TeV”, JHEP 05
+     (2001) 055, doi:10.1088/1126-6708/2001/05/055, arXiv:hep-th/0103033.
+
+[10] I. Antoniadis, A. Arvanitaki, S. Dimopoulos, and A. Giveon, “Phenomenology of TeV
+     little string theory from holography”, Phys. Rev. Lett. 108 (2012) 081602,
+     doi:10.1103/PhysRevLett.108.081602, arXiv:1102.4043.
+
+[11] K. Choi and S. H. Im, “Realizing the relaxion from multiple axions and its UV completion
+     with high scale supersymmetry”, JHEP 01 (2016) 149,
+     doi:10.1007/JHEP01(2016)149, arXiv:1511.00132.
+
+[12] D. E. Kaplan and R. Rattazzi, “Large field excursions and approximate discrete
+     symmetries from a clockwork axion”, Phys. Rev. D 93 (2016) 085007,
+     doi:10.1103/PhysRevD.93.085007, arXiv:1511.01827.
+
+[13] M. Baryakhtar, “Graviton phenomenology of linear dilaton geometries”, Phys. Rev. D 85
+     (2012) 125019, doi:10.1103/PhysRevD.85.125019, arXiv:1202.6674.
+
+[14] G. F. Giudice et al., “Clockwork/linear dilaton: structure and phenomenology”, JHEP 06
+     (2018) 009, doi:10.1007/JHEP06(2018)009, arXiv:1711.08437.
+
+[15] G. C. Branco et al., “Theory and phenomenology of two-Higgs-doublet models”, Phys.
+     Rept. 516 (2012) 1, doi:10.1016/j.physrep.2012.02.002, arXiv:1106.0034.
+
+[16] T. D. Lee, “A theory of spontaneous T violation”, Phys. Rev. D 8 (1973) 1226,
+     doi:10.1103/PhysRevD.8.1226.
+
+[17] N. Craig, J. Galloway, and S. Thomas, “Searching for signs of the second Higgs doublet”,
+     (2013). arXiv:1305.2424.
+
+[18] ATLAS Collaboration, “Search for new phenomena in high-mass diphoton final states
+                                                           √
+     using 37 fb−1 of proton–proton collisions collected at s = 13 TeV with the ATLAS
+     detector”, Phys. Lett. B 775 (2017) 105, doi:10.1016/j.physletb.2017.10.039,
+     arXiv:1707.04147.
+
+[19] CMS Collaboration, “Search for high-mass diphoton resonances in proton-proton
+     collisions at 13 TeV and combination with 8 TeV search”, Phys. Lett. B 767 (2017) 147,
+     doi:10.1016/j.physletb.2017.01.027, arXiv:1609.02507.
+                                                                          √
+[20] ATLAS Collaboration, “Search for resonances in diphoton events at s = 13 TeV with
+     the ATLAS detector”, JHEP 09 (2016) 001, doi:10.1007/JHEP09(2016)001,
+     arXiv:1606.03833.
+
+[21] CMS Collaboration, “Search√for resonant production of high-mass photon pairs in
+     proton-proton collisions at s = 8 and 13 TeV”, Phys. Rev. Lett. 117 (2016) 051802,
+     doi:10.1103/PhysRevLett.117.051802, arXiv:1606.04093.
+
+[22] ATLAS
+     √       Collaboration, “Search for high-mass diphoton resonances in pp collisions at
+       s = 8 TeV with the ATLAS detector”, Phys. Rev. D 92 (2015) 032004,
+     doi:10.1103/PhysRevD.92.032004, arXiv:1504.05511.
+
+[23] CMS Collaboration, “Search
+                            √ for diphoton resonances in the mass range from 150 to 850
+     GeV in pp collisions at s = 8 TeV”, Phys. Lett. B 750 (2015) 494,
+     doi:10.1016/j.physletb.2015.09.062, arXiv:1506.02301.
+References                                                                                       19
+
+
+[24] ATLAS Collaboration, “Search for extra
+                                         √ dimensions in diphoton events using
+     proton-proton collisions recorded at s = 7 TeV with the ATLAS detector at the LHC”,
+     New J. Phys. 15 (2013) 043007, doi:10.1088/1367-2630/15/4/043007,
+     arXiv:1210.8389.
+
+[25] CMS Collaboration, “Search for signatures of extra dimensions in the diphoton mass
+     spectrum at the Large Hadron Collider”, Phys. Rev. Lett. 108 (2012) 111801,
+     doi:10.1103/PhysRevLett.108.111801, arXiv:1112.0688.
+
+[26] CDF Collaboration, “Search for new dielectron resonances and Randall-Sundrum
+     gravitons at the Collider Detector at Fermilab”, Phys. Rev. Lett. 107 (2011) 051801,
+     doi:10.1103/PhysRevLett.107.051801, arXiv:1103.4650.
+
+[27] D0 Collaboration, “Search for Randall-Sundrum gravitons in the dielectron and diphoton
+                                                             √
+     final states with 5.4 fb−1 of data from pp collisions at s = 1.96 TeV”, Phys. Rev. Lett. 104
+     (2010) 241802, doi:10.1103/PhysRevLett.104.241802, arXiv:1004.1826.
+
+[28] CMS Collaboration, “Performance of photon√reconstruction and identification with the
+     CMS detector in proton-proton collisions at s = 8 TeV”, JINST 10 (2015) P08010,
+     doi:10.1088/1748-0221/10/08/P08010, arXiv:1502.02702.
+
+[29] CMS Collaboration, “The CMS trigger system”, JINST 12 (2017) P01020,
+     doi:10.1088/1748-0221/12/01/P01020, arXiv:1609.02366.
+
+[30] CMS Collaboration, “The CMS experiment at the CERN LHC”, JINST 3 (2008) S08004,
+     doi:10.1088/1748-0221/3/08/S08004.
+
+[31] CMS Collaboration, “Particle-flow reconstruction and global event description with the
+     CMS detector”, JINST 12 (2017) P10003, doi:10.1088/1748-0221/12/10/P10003,
+     arXiv:1706.04965.
+
+[32] CMS Collaboration, “Observation of the diphoton decay of the Higgs boson and
+     measurement of its properties”, Eur. Phys. J. C 74 (2014) 3076,
+     doi:10.1140/epjc/s10052-014-3076-z, arXiv:1407.0558.
+
+[33] CMS Collaboration, “Measurements of√Higgs boson properties in the diphoton decay
+     channel in proton-proton collisions at s = 13 TeV”, (2018). arXiv:1804.02716.
+     Submitted to JHEP.
+
+[34] T. Gleisberg et al., “Event generation with SHERPA 1.1”, JHEP 02 (2009) 007,
+     doi:10.1088/1126-6708/2009/02/007, arXiv:0811.4622.
+
+[35] H.-L. Lai et al., “New parton distributions for collider physics”, Phys. Rev. D 82 (2010)
+     074024, doi:10.1103/PhysRevD.82.074024, arXiv:1007.2241.
+
+[36] J. Gao et al., “CT10 next-to-next-to-leading order global analysis of QCD”, Phys. Rev. D
+     89 (2014) 033009, doi:10.1103/PhysRevD.89.033009, arXiv:1302.6246.
+
+[37] T. Gleisberg et al., “Helicity formalism for spin-2 particles”, JHEP 09 (2003) 001,
+     doi:10.1088/1126-6708/2003/09/001, arXiv:hep-ph/0306182.
+
+[38] G. F. Giudice, R. Rattazzi, and J. D. Wells, “Quantum gravity and extra dimensions at
+     high-energy colliders”, Nucl. Phys. B 544 (1999) 3,
+     doi:10.1016/S0550-3213(99)00044-9, arXiv:hep-ph/9811291.
+20
+
+
+[39] T. Han, J. D. Lykken, and R.-J. Zhang, “Kaluza-Klein states from large extra dimensions”,
+     Phys. Rev. D 59 (1999) 105006, doi:10.1103/PhysRevD.59.105006,
+     arXiv:hep-ph/9811350.
+[40] J. L. Hewett, “Indirect collider signals for extra dimensions”, Phys. Rev. Lett. 82 (1999)
+     4765, doi:10.1103/PhysRevLett.82.4765, arXiv:hep-ph/9811356.
+[41] GEANT4 Collaboration, “GEANT4—a simulation toolkit”, Nucl. Instrum. Meth. A 506
+     (2003) 250, doi:10.1016/S0168-9002(03)01368-8.
+[42] T. Sjöstrand et al., “An introduction to PYTHIA 8.2”, Comput. Phys. Commun. 191 (2015)
+     159, doi:10.1016/j.cpc.2015.01.024, arXiv:1410.3012.
+[43] NNPDF Collaboration, “Parton distributions with LHC data”, Nucl. Phys. B 867 (2013)
+     244, doi:10.1016/j.nuclphysb.2012.10.003, arXiv:1207.1303.
+[44] CMS Collaboration, “Event generator tunes obtained from underlying event and
+     multiparton scattering measurements”, Eur. Phys. J. C 76 (2016) 155,
+     doi:10.1140/epjc/s10052-016-3988-x, arXiv:1512.00815.
+[45] S. Hoeche, S. Schumann, and F. Siegert, “Hard photon production and matrix-element
+     parton-shower merging”, Phys. Rev. D 81 (2010) 034026,
+     doi:10.1103/PhysRevD.81.034026, arXiv:0912.3501.
+[46] J. M. Campbell, R. K. Ellis, Y. Li, and C. Williams, “Predictions for diphoton production at
+     the LHC through NNLO in QCD”, JHEP 07 (2016) 148,
+     doi:10.1007/JHEP07(2016)148, arXiv:1603.02663.
+[47] T. Binoth, J. P. Guillet, E. Pilon, and M. Werlen, “A full next-to-leading order study of
+     direct photon pair production in hadronic collisions”, Eur. Phys. J. C 16 (2000) 311,
+     doi:10.1007/s100520050024, arXiv:hep-ph/9911340.
+[48] CMS Collaboration, “CMS luminosity measurements for the 2016 data taking period”,
+     CMS Physics Analysis Summary CMS-PAS-LUM-17-001, 2017.
+     https://cds.cern.ch/record/2257069.
+[49] A. D. Martin, W. J. Stirling, R. S. Thorne, and G. Watt, “Parton distributions for the LHC”,
+     Eur. Phys. J. C 63 (2009) 189, doi:10.1140/epjc/s10052-009-1072-5,
+     arXiv:0901.0002.
+[50] S. Alekhin et al., “The PDF4LHC Working Group Interim Report”, (2011).
+     arXiv:1101.0536.
+[51] M. Botje et al., “The PDF4LHC Working Group Interim Recommendations”, (2011).
+     arXiv:1101.0538.
+[52] T. Junk, “Confidence level computation for combining searches with small statistics”,
+     Nucl. Instrum. Meth. A 434 (1999) 435, doi:10.1016/S0168-9002(99)00498-2,
+     arXiv:hep-ex/9902006.
+[53] A. L. Read, “Presentation of search results: the CLs technique”, J. Phys. G 28 (2002) 2693,
+     doi:10.1088/0954-3899/28/10/313.
+[54] ATLAS and CMS Collaborations, “Procedure for the LHC Higgs boson search
+     combination in Summer 2011”, Technical Report CMS-NOTE-2011-005,
+     ATL-PHYS-PUB-2011-11, 2011. https://cds.cern.ch/record/1379837.
+References                                                                                   21
+
+
+[55] G. Cowan, K. Cranmer, E. Gross, and O. Vitells, “Asymptotic formulae for
+     likelihood-based tests of new physics”, Eur. Phys. J. C 71 (2011) 1554,
+     doi:10.1140/epjc/s10052-011-1554-0, arXiv:1007.1727. [Erratum:
+     doi:10.1140/epjc/s10052-013-2501-z].
+
+[56] N. Metropolis et al., “Equation of state calculations by fast computing machines”, J.
+     Chem. Phys. 21 (1953) 1087, doi:10.1063/1.1699114.
+22
+                                                                                                 23
+
+
+A    The CMS Collaboration
+Yerevan Physics Institute, Yerevan, Armenia
+A.M. Sirunyan, A. Tumasyan
+Institut für Hochenergiephysik, Wien, Austria
+W. Adam, F. Ambrogi, E. Asilar, T. Bergauer, J. Brandstetter, M. Dragicevic, J. Erö,
+A. Escalante Del Valle, M. Flechl, R. Frühwirth1 , V.M. Ghete, J. Hrubec, M. Jeitler1 , N. Krammer,
+I. Krätschmer, D. Liko, T. Madlener, I. Mikulec, N. Rad, H. Rohringer, J. Schieck1 , R. Schöfbeck,
+M. Spanring, D. Spitzbart, A. Taurok, W. Waltenberger, J. Wittmann, C.-E. Wulz1 , M. Zarucki
+Institute for Nuclear Problems, Minsk, Belarus
+V. Chekhovsky, V. Mossolov, J. Suarez Gonzalez
+Universiteit Antwerpen, Antwerpen, Belgium
+E.A. De Wolf, D. Di Croce, X. Janssen, J. Lauwers, M. Pieters, H. Van Haevermaet,
+P. Van Mechelen, N. Van Remortel
+Vrije Universiteit Brussel, Brussel, Belgium
+S. Abu Zeid, F. Blekman, J. D’Hondt, I. De Bruyn, J. De Clercq, K. Deroover, G. Flouris,
+D. Lontkovskyi, S. Lowette, I. Marchesini, S. Moortgat, L. Moreels, Q. Python, K. Skovpen,
+S. Tavernier, W. Van Doninck, P. Van Mulders, I. Van Parijs
+Université Libre de Bruxelles, Bruxelles, Belgium
+D. Beghin, B. Bilin, H. Brun, B. Clerbaux, G. De Lentdecker, H. Delannoy, B. Dorney,
+G. Fasanella, L. Favart, R. Goldouzian, A. Grebenyuk, A.K. Kalsi, T. Lenzi, J. Luetic, N. Postiau,
+E. Starling, L. Thomas, C. Vander Velde, P. Vanlaer, D. Vannerom, Q. Wang
+Ghent University, Ghent, Belgium
+T. Cornelis, D. Dobur, A. Fagot, M. Gul, I. Khvastunov2 , D. Poyraz, C. Roskas, D. Trocino,
+M. Tytgat, W. Verbeke, B. Vermassen, M. Vit, N. Zaganidis
+Université Catholique de Louvain, Louvain-la-Neuve, Belgium
+H. Bakhshiansohi, O. Bondu, S. Brochet, G. Bruno, C. Caputo, P. David, C. Delaere, M. Delcourt,
+B. Francois, A. Giammanco, G. Krintiras, V. Lemaitre, A. Magitteri, A. Mertens, M. Musich,
+K. Piotrzkowski, A. Saggio, M. Vidal Marono, S. Wertz, J. Zobec
+Centro Brasileiro de Pesquisas Fisicas, Rio de Janeiro, Brazil
+F.L. Alves, G.A. Alves, M. Correa Martins Junior, G. Correia Silva, C. Hensel, A. Moraes,
+M.E. Pol, P. Rebello Teles
+Universidade do Estado do Rio de Janeiro, Rio de Janeiro, Brazil
+E. Belchior Batista Das Chagas, W. Carvalho, J. Chinellato3 , E. Coelho, E.M. Da Costa,
+G.G. Da Silveira4 , D. De Jesus Damiao, C. De Oliveira Martins, S. Fonseca De Souza,
+H. Malbouisson, D. Matos Figueiredo, M. Melo De Almeida, C. Mora Herrera, L. Mundim,
+H. Nogima, W.L. Prado Da Silva, L.J. Sanchez Rosas, A. Santoro, A. Sznajder, M. Thiel,
+E.J. Tonelli Manganote3 , F. Torres Da Silva De Araujo, A. Vilela Pereira
+Universidade Estadual Paulista a , Universidade Federal do ABC b , São Paulo, Brazil
+S. Ahujaa , C.A. Bernardesa , L. Calligarisa , T.R. Fernandez Perez Tomeia , E.M. Gregoresb ,
+P.G. Mercadanteb , S.F. Novaesa , SandraS. Padulaa
+Institute for Nuclear Research and Nuclear Energy, Bulgarian Academy of Sciences, Sofia,
+24
+
+
+Bulgaria
+A. Aleksandrov, R. Hadjiiska, P. Iaydjiev, A. Marinov, M. Misheva, M. Rodozov, M. Shopova,
+G. Sultanov
+University of Sofia, Sofia, Bulgaria
+A. Dimitrov, L. Litov, B. Pavlov, P. Petkov
+Beihang University, Beijing, China
+W. Fang5 , X. Gao5 , L. Yuan
+Institute of High Energy Physics, Beijing, China
+M. Ahmad, J.G. Bian, G.M. Chen, H.S. Chen, M. Chen, Y. Chen, C.H. Jiang, D. Leggat, H. Liao,
+Z. Liu, F. Romeo, S.M. Shaheen6 , A. Spiezia, J. Tao, C. Wang, Z. Wang, E. Yazgan, H. Zhang,
+S. Zhang6 , J. Zhao
+State Key Laboratory of Nuclear Physics and Technology, Peking University, Beijing, China
+Y. Ban, G. Chen, A. Levin, J. Li, L. Li, Q. Li, Y. Mao, S.J. Qian, D. Wang, Z. Xu
+Tsinghua University, Beijing, China
+Y. Wang
+Universidad de Los Andes, Bogota, Colombia
+C. Avila, A. Cabrera, C.A. Carrillo Montoya,               L.F. Chaparro Sierra,   C. Florez,
+C.F. González Hernández, M.A. Segura Delgado
+University of Split, Faculty of Electrical Engineering, Mechanical Engineering and Naval
+Architecture, Split, Croatia
+B. Courbon, N. Godinovic, D. Lelas, I. Puljak, T. Sculac
+University of Split, Faculty of Science, Split, Croatia
+Z. Antunovic, M. Kovac
+Institute Rudjer Boskovic, Zagreb, Croatia
+V. Brigljevic, D. Ferencek, K. Kadija, B. Mesic, A. Starodumov7 , T. Susa
+University of Cyprus, Nicosia, Cyprus
+M.W. Ather, A. Attikis, M. Kolosova, G. Mavromanolakis, J. Mousa, C. Nicolaou, F. Ptochos,
+P.A. Razis, H. Rykaczewski
+Charles University, Prague, Czech Republic
+M. Finger8 , M. Finger Jr.8
+Escuela Politecnica Nacional, Quito, Ecuador
+E. Ayala
+Universidad San Francisco de Quito, Quito, Ecuador
+E. Carrera Jarrin
+Academy of Scientific Research and Technology of the Arab Republic of Egypt, Egyptian
+Network of High Energy Physics, Cairo, Egypt
+Y. Assran9,10 , S. Elgammal10 , S. Khalil11
+National Institute of Chemical Physics and Biophysics, Tallinn, Estonia
+S. Bhowmik, A. Carvalho Antunes De Oliveira, R.K. Dewanjee, K. Ehataht, M. Kadastik,
+M. Raidal, C. Veelken
+                                                                                                  25
+
+
+Department of Physics, University of Helsinki, Helsinki, Finland
+P. Eerola, H. Kirschenmann, J. Pekkanen, M. Voutilainen
+Helsinki Institute of Physics, Helsinki, Finland
+J. Havukainen, J.K. Heikkilä, T. Järvinen, V. Karimäki, R. Kinnunen, T. Lampén, K. Lassila-
+Perini, S. Laurila, S. Lehti, T. Lindén, P. Luukka, T. Mäenpää, H. Siikonen, E. Tuominen,
+J. Tuominiemi
+Lappeenranta University of Technology, Lappeenranta, Finland
+T. Tuuva
+IRFU, CEA, Université Paris-Saclay, Gif-sur-Yvette, France
+M. Besancon, F. Couderc, M. Dejardin, D. Denegri, J.L. Faure, F. Ferri, S. Ganjour, A. Givernaud,
+P. Gras, G. Hamel de Monchenault, P. Jarry, C. Leloup, E. Locci, J. Malcles, G. Negro, J. Rander,
+A. Rosowsky, M.Ö. Sahin, M. Titov
+Laboratoire Leprince-Ringuet, Ecole polytechnique, CNRS/IN2P3, Université Paris-Saclay,
+Palaiseau, France
+A. Abdulsalam12 , C. Amendola, I. Antropov, F. Beaudette, P. Busson, C. Charlot,
+R. Granier de Cassagnac, I. Kucher, A. Lobanov, J. Martin Blanco, M. Nguyen, C. Ochando,
+G. Ortona, P. Paganini, P. Pigard, J. Rembser, R. Salerno, J.B. Sauvan, Y. Sirois, A.G. Stahl Leiton,
+A. Zabi, A. Zghiche
+Université de Strasbourg, CNRS, IPHC UMR 7178, Strasbourg, France
+J.-L. Agram13 , J. Andrea, D. Bloch, J.-M. Brom, E.C. Chabert, V. Cherepanov, C. Collard,
+E. Conte13 , J.-C. Fontaine13 , D. Gelé, U. Goerlach, M. Jansová, A.-C. Le Bihan, N. Tonon,
+P. Van Hove
+Centre de Calcul de l’Institut National de Physique Nucleaire et de Physique des Particules,
+CNRS/IN2P3, Villeurbanne, France
+S. Gadrat
+Université de Lyon, Université Claude Bernard Lyon 1, CNRS-IN2P3, Institut de Physique
+Nucléaire de Lyon, Villeurbanne, France
+S. Beauceron, C. Bernet, G. Boudoul, N. Chanon, R. Chierici, D. Contardo, P. Depasse,
+H. El Mamouni, J. Fay, L. Finco, S. Gascon, M. Gouzevitch, G. Grenier, B. Ille, F. Lagarde,
+I.B. Laktineh, H. Lattaud, M. Lethuillier, L. Mirabito, A.L. Pequegnot, S. Perries, A. Popov14 ,
+V. Sordini, G. Touquet, M. Vander Donckt, S. Viret
+Georgian Technical University, Tbilisi, Georgia
+A. Khvedelidze8
+Tbilisi State University, Tbilisi, Georgia
+Z. Tsamalaidze8
+RWTH Aachen University, I. Physikalisches Institut, Aachen, Germany
+C. Autermann, L. Feld, M.K. Kiesel, K. Klein, M. Lipinski, M. Preuten, M.P. Rauch,
+C. Schomakers, J. Schulz, M. Teroerde, B. Wittmer, V. Zhukov14
+RWTH Aachen University, III. Physikalisches Institut A, Aachen, Germany
+A. Albert, D. Duchardt, M. Endres, M. Erdmann, S. Ghosh, A. Güth, T. Hebbeker,
+C. Heidemann, K. Hoepfner, H. Keller, L. Mastrolorenzo, M. Merschmeyer, A. Meyer, P. Millet,
+S. Mukherjee, T. Pook, M. Radziej, H. Reithler, M. Rieger, A. Schmidt, D. Teyssier
+26
+
+
+RWTH Aachen University, III. Physikalisches Institut B, Aachen, Germany
+G. Flügge, O. Hlushchenko, T. Kress, A. Künsken, T. Müller, A. Nehrkorn, A. Nowack,
+C. Pistone, O. Pooth, D. Roy, H. Sert, A. Stahl15
+Deutsches Elektronen-Synchrotron, Hamburg, Germany
+M. Aldaya Martin, T. Arndt, C. Asawatangtrakuldee, I. Babounikau, K. Beernaert, O. Behnke,
+U. Behrens, A. Bermúdez Martı́nez, D. Bertsche, A.A. Bin Anuar, K. Borras16 , V. Botta,
+A. Campbell, P. Connor, C. Contreras-Campana, F. Costanza, V. Danilov, A. De Wit,
+M.M. Defranchis, C. Diez Pardos, D. Domı́nguez Damiani, G. Eckerlin, T. Eichhorn, A. Elwood,
+E. Eren, E. Gallo17 , A. Geiser, J.M. Grados Luyando, A. Grohsjean, P. Gunnellini, M. Guthoff,
+M. Haranko, A. Harb, J. Hauk, H. Jung, M. Kasemann, J. Keaveney, C. Kleinwort, J. Knolle,
+D. Krücker, W. Lange, A. Lelek, T. Lenz, K. Lipka, W. Lohmann18 , R. Mankel, I.-A. Melzer-
+Pellmann, A.B. Meyer, M. Meyer, M. Missiroli, G. Mittag, J. Mnich, V. Myronenko, S.K. Pflitsch,
+D. Pitzl, A. Raspereza, M. Savitskyi, P. Saxena, P. Schütze, C. Schwanenberger, R. Shevchenko,
+A. Singh, H. Tholen, O. Turkot, A. Vagnerini, G.P. Van Onsem, R. Walsh, Y. Wen, K. Wichmann,
+C. Wissing, O. Zenaiev
+University of Hamburg, Hamburg, Germany
+R. Aggleton, S. Bein, L. Benato, A. Benecke, V. Blobel, M. Centis Vignali, T. Dreyer, E. Garutti,
+D. Gonzalez, J. Haller, A. Hinzmann, A. Karavdina, G. Kasieczka, R. Klanner, R. Kogler,
+N. Kovalchuk, S. Kurz, V. Kutzner, J. Lange, D. Marconi, J. Multhaup, M. Niedziela,
+C.E.N. Niemeyer, D. Nowatschin, A. Perieanu, A. Reimers, O. Rieger, C. Scharf, P. Schleper,
+S. Schumann, J. Schwandt, J. Sonneveld, H. Stadie, G. Steinbrück, F.M. Stober, M. Stöver,
+A. Vanhoefer, B. Vormwald, I. Zoi
+Karlsruher Institut fuer Technologie, Karlsruhe, Germany
+M. Akbiyik, C. Barth, M. Baselga, S. Baur, E. Butz, R. Caspart, T. Chwalek, F. Colombo,
+W. De Boer, A. Dierlamm, K. El Morabit, N. Faltermann, B. Freund, M. Giffels,
+M.A. Harrendorf, F. Hartmann15 , S.M. Heindl, U. Husemann, F. Kassel15 , I. Katkov14 ,
+S. Kudella, H. Mildner, S. Mitra, M.U. Mozer, Th. Müller, M. Plagge, G. Quast, K. Rabbertz,
+M. Schröder, I. Shvetsov, G. Sieber, H.J. Simonis, R. Ulrich, S. Wayand, M. Weber, T. Weiler,
+S. Williamson, C. Wöhrmann, R. Wolf
+Institute of Nuclear and Particle Physics (INPP), NCSR Demokritos, Aghia Paraskevi,
+Greece
+G. Anagnostou, G. Daskalakis, T. Geralis, A. Kyriakis, D. Loukas, G. Paspalaki, I. Topsis-Giotis
+National and Kapodistrian University of Athens, Athens, Greece
+G. Karathanasis, S. Kesisoglou, P. Kontaxakis, A. Panagiotou, I. Papavergou, N. Saoulidou,
+E. Tziaferi, K. Vellidis
+National Technical University of Athens, Athens, Greece
+K. Kousouris, I. Papakrivopoulos, G. Tsipolitis
+University of Ioánnina, Ioánnina, Greece
+I. Evangelou, C. Foudas, P. Gianneios, P. Katsoulis, P. Kokkas, S. Mallios, N. Manthos,
+I. Papadopoulos, E. Paradas, J. Strologas, F.A. Triantis, D. Tsitsonis
+MTA-ELTE Lendület CMS Particle and Nuclear Physics Group, Eötvös Loránd University,
+Budapest, Hungary
+M. Bartók19 , M. Csanad, N. Filipovic, P. Major, M.I. Nagy, G. Pasztor, O. Surányi, G.I. Veres
+Wigner Research Centre for Physics, Budapest, Hungary
+                                                                                                     27
+
+
+G. Bencze, C. Hajdu, D. Horvath20 , Á. Hunyadi, F. Sikler, T.Á. Vámi, V. Veszpremi,
+G. Vesztergombi†
+Institute of Nuclear Research ATOMKI, Debrecen, Hungary
+N. Beni, S. Czellar, J. Karancsi21 , A. Makovec, J. Molnar, Z. Szillasi
+Institute of Physics, University of Debrecen, Debrecen, Hungary
+P. Raics, Z.L. Trocsanyi, B. Ujvari
+Indian Institute of Science (IISc), Bangalore, India
+S. Choudhury, J.R. Komaragiri, P.C. Tiwari
+National Institute of Science Education and Research, HBNI, Bhubaneswar, India
+S. Bahinipati22 , C. Kar, P. Mal, K. Mandal, A. Nayak23 , D.K. Sahoo22 , S.K. Swain
+Panjab University, Chandigarh, India
+S. Bansal, S.B. Beri, V. Bhatnagar, S. Chauhan, R. Chawla, N. Dhingra, R. Gupta, A. Kaur,
+M. Kaur, S. Kaur, R. Kumar, P. Kumari, M. Lohan, A. Mehta, K. Sandeep, S. Sharma, J.B. Singh,
+A.K. Virdi, G. Walia
+University of Delhi, Delhi, India
+A. Bhardwaj, B.C. Choudhary, R.B. Garg, M. Gola, S. Keshri, Ashok Kumar, S. Malhotra,
+M. Naimuddin, P. Priyanka, K. Ranjan, Aashaq Shah, R. Sharma
+Saha Institute of Nuclear Physics, HBNI, Kolkata, India
+R. Bhardwaj24 , M. Bharti, R. Bhattacharya, S. Bhattacharya, U. Bhawandeep24 , D. Bhowmik,
+S. Dey, S. Dutt24 , S. Dutta, S. Ghosh, K. Mondal, S. Nandan, A. Purohit, P.K. Rout, A. Roy,
+S. Roy Chowdhury, G. Saha, S. Sarkar, M. Sharan, B. Singh, S. Thakur24
+Indian Institute of Technology Madras, Madras, India
+P.K. Behera
+Bhabha Atomic Research Centre, Mumbai, India
+R. Chudasama, D. Dutta, V. Jha, V. Kumar, P.K. Netrakanti, L.M. Pant, P. Shukla
+Tata Institute of Fundamental Research-A, Mumbai, India
+T. Aziz, M.A. Bhat, S. Dugad, G.B. Mohanty, N. Sur, B. Sutar, RavindraKumar Verma
+Tata Institute of Fundamental Research-B, Mumbai, India
+S. Banerjee, S. Bhattacharya, S. Chatterjee, P. Das, M. Guchait, Sa. Jain, S. Karmakar, S. Kumar,
+M. Maity25 , G. Majumder, K. Mazumdar, N. Sahoo, T. Sarkar25
+Indian Institute of Science Education and Research (IISER), Pune, India
+S. Chauhan, S. Dube, V. Hegde, A. Kapoor, K. Kothekar, S. Pandey, A. Rane, S. Sharma
+Institute for Research in Fundamental Sciences (IPM), Tehran, Iran
+S. Chenarani26 , E. Eskandari Tadavani, S.M. Etesami26 , M. Khakzad, M. Mohammadi Na-
+jafabadi, M. Naseri, F. Rezaei Hosseinabadi, B. Safarzadeh27 , M. Zeinali
+University College Dublin, Dublin, Ireland
+M. Felcini, M. Grunewald
+INFN Sezione di Bari a , Università di Bari b , Politecnico di Bari c , Bari, Italy
+M. Abbresciaa,b , C. Calabriaa,b , A. Colaleoa , D. Creanzaa,c , L. Cristellaa,b , N. De Filippisa,c ,
+M. De Palmaa,b , A. Di Florioa,b , F. Erricoa,b , L. Fiorea , A. Gelmia,b , G. Iasellia,c , M. Incea,b ,
+S. Lezkia,b , G. Maggia,c , M. Maggia , G. Minielloa,b , S. Mya,b , S. Nuzzoa,b , A. Pompilia,b ,
+28
+
+
+G. Pugliesea,c , R. Radognaa , A. Ranieria , G. Selvaggia,b , A. Sharmaa , L. Silvestrisa , R. Vendittia ,
+P. Verwilligena , G. Zitoa
+INFN Sezione di Bologna a , Università di Bologna b , Bologna, Italy
+G. Abbiendia , C. Battilanaa,b , D. Bonacorsia,b , L. Borgonovia,b , S. Braibant-Giacomellia,b ,
+R. Campaninia,b , P. Capiluppia,b , A. Castroa,b , F.R. Cavalloa , S.S. Chhibraa,b , C. Cioccaa ,
+G. Codispotia,b , M. Cuffiania,b , G.M. Dallavallea , F. Fabbria , A. Fanfania,b , P. Giacomellia ,
+C. Grandia , L. Guiduccia,b , F. Iemmia,b , S. Marcellinia , G. Masettia , A. Montanaria ,
+F.L. Navarriaa,b , A. Perrottaa , F. Primaveraa,b,15 , A.M. Rossia,b , T. Rovellia,b , G.P. Sirolia,b ,
+N. Tosia
+INFN Sezione di Catania a , Università di Catania b , Catania, Italy
+S. Albergoa,b , A. Di Mattiaa , R. Potenzaa,b , A. Tricomia,b , C. Tuvea,b
+INFN Sezione di Firenze a , Università di Firenze b , Firenze, Italy
+G. Barbaglia , K. Chatterjeea,b , V. Ciullia,b , C. Civininia , R. D’Alessandroa,b , E. Focardia,b ,
+G. Latino, P. Lenzia,b , M. Meschinia , S. Paolettia , L. Russoa,28 , G. Sguazzonia , D. Stroma ,
+L. Viliania
+INFN Laboratori Nazionali di Frascati, Frascati, Italy
+L. Benussi, S. Bianco, F. Fabbri, D. Piccolo
+INFN Sezione di Genova a , Università di Genova b , Genova, Italy
+F. Ferroa , F. Raveraa,b , E. Robuttia , S. Tosia,b
+INFN Sezione di Milano-Bicocca a , Università di Milano-Bicocca b , Milano, Italy
+A. Benagliaa , A. Beschib , L. Brianzaa,b , F. Brivioa,b , V. Cirioloa,b,15 , S. Di Guidaa,d,15 ,
+M.E. Dinardoa,b , S. Fiorendia,b , S. Gennaia , A. Ghezzia,b , P. Govonia,b , M. Malbertia,b ,
+S. Malvezzia , A. Massironia,b , D. Menascea , L. Moronia , M. Paganonia,b , D. Pedrinia ,
+S. Ragazzia,b , T. Tabarelli de Fatisa,b , D. Zuolo
+INFN Sezione di Napoli a , Università di Napoli ’Federico II’ b , Napoli, Italy, Università della
+Basilicata c , Potenza, Italy, Università G. Marconi d , Roma, Italy
+S. Buontempoa , N. Cavalloa,c , A. Di Crescenzoa,b , F. Fabozzia,c , F. Fiengaa , G. Galatia ,
+A.O.M. Iorioa,b , W.A. Khana , L. Listaa , S. Meolaa,d,15 , P. Paoluccia,15 , C. Sciaccaa,b ,
+E. Voevodinaa,b
+INFN Sezione di Padova a , Università di Padova b , Padova, Italy, Università di Trento c ,
+Trento, Italy
+P. Azzia , N. Bacchettaa , A. Bolettia,b , A. Bragagnolo, R. Carlina,b , P. Checchiaa , M. Dall’Ossoa,b ,
+P. De Castro Manzanoa , T. Dorigoa , U. Dossellia , F. Gasparinia,b , U. Gasparinia,b , A. Gozzelinoa ,
+S.Y. Hoh, S. Lacapraraa , P. Lujan, M. Margonia,b , A.T. Meneguzzoa,b , J. Pazzinia,b ,
+N. Pozzobona,b , P. Ronchesea,b , R. Rossina,b , F. Simonettoa,b , A. Tiko, E. Torassaa , S. Venturaa ,
+M. Zanettia,b , P. Zottoa,b
+INFN Sezione di Pavia a , Università di Pavia b , Pavia, Italy
+A. Braghieria , A. Magnania , P. Montagnaa,b , S.P. Rattia,b , V. Rea , M. Ressegottia,b , C. Riccardia,b ,
+P. Salvinia , I. Vaia,b , P. Vituloa,b
+INFN Sezione di Perugia a , Università di Perugia b , Perugia, Italy
+M. Biasinia,b , G.M. Bileia , C. Cecchia,b , D. Ciangottinia,b , L. Fanòa,b , P. Laricciaa,b , R. Leonardia,b ,
+E. Manonia , G. Mantovania,b , V. Mariania,b , M. Menichellia , A. Rossia,b , A. Santocchiaa,b ,
+D. Spigaa
+                                                                                                       29
+
+
+INFN Sezione di Pisa a , Università di Pisa b , Scuola Normale Superiore di Pisa c , Pisa, Italy
+K. Androsova , P. Azzurria , G. Bagliesia , L. Bianchinia , T. Boccalia , L. Borrello, R. Castaldia ,
+M.A. Cioccia,b , R. Dell’Orsoa , G. Fedia , F. Fioria,c , L. Gianninia,c , A. Giassia , M.T. Grippoa ,
+F. Ligabuea,c , E. Mancaa,c , G. Mandorlia,c , A. Messineoa,b , F. Pallaa , A. Rizzia,b , P. Spagnoloa ,
+R. Tenchinia , G. Tonellia,b , A. Venturia , P.G. Verdinia
+INFN Sezione di Roma a , Sapienza Università di Roma b , Rome, Italy
+L. Baronea,b , F. Cavallaria , M. Cipriania,b , D. Del Rea,b , E. Di Marcoa,b , M. Diemoza , S. Gellia,b ,
+E. Longoa,b , B. Marzocchia,b , P. Meridiania , G. Organtinia,b , F. Pandolfia , R. Paramattia,b ,
+F. Preiatoa,b , S. Rahatloua,b , C. Rovellia , F. Santanastasioa,b
+INFN Sezione di Torino a , Università di Torino b , Torino, Italy, Università del Piemonte
+Orientale c , Novara, Italy
+N. Amapanea,b , R. Arcidiaconoa,c , S. Argiroa,b , M. Arneodoa,c , N. Bartosika , R. Bellana,b ,
+C. Biinoa , N. Cartigliaa , F. Cennaa,b , S. Comettia , M. Costaa,b , R. Covarellia,b , N. Demariaa ,
+B. Kiania,b , C. Mariottia , S. Masellia , E. Migliorea,b , V. Monacoa,b , E. Monteila,b , M. Montenoa ,
+M.M. Obertinoa,b , L. Pachera,b , N. Pastronea , M. Pelliccionia , G.L. Pinna Angionia,b ,
+A. Romeroa,b , M. Ruspaa,c , R. Sacchia,b , K. Shchelinaa,b , V. Solaa , A. Solanoa,b , D. Soldia,b ,
+A. Staianoa
+INFN Sezione di Trieste a , Università di Trieste b , Trieste, Italy
+S. Belfortea , V. Candelisea,b , M. Casarsaa , F. Cossuttia , A. Da Rolda,b , G. Della Riccaa,b ,
+F. Vazzolera,b , A. Zanettia
+Kyungpook National University, Daegu, Korea
+D.H. Kim, G.N. Kim, M.S. Kim, J. Lee, S. Lee, S.W. Lee, C.S. Moon, Y.D. Oh, S. Sekmen, D.C. Son,
+Y.C. Yang
+Chonnam National University, Institute for Universe and Elementary Particles, Kwangju,
+Korea
+H. Kim, D.H. Moon, G. Oh
+Hanyang University, Seoul, Korea
+J. Goh29 , T.J. Kim
+Korea University, Seoul, Korea
+S. Cho, S. Choi, Y. Go, D. Gyun, S. Ha, B. Hong, Y. Jo, K. Lee, K.S. Lee, S. Lee, J. Lim, S.K. Park,
+Y. Roh
+Sejong University, Seoul, Korea
+H.S. Kim
+Seoul National University, Seoul, Korea
+J. Almond, J. Kim, J.S. Kim, H. Lee, K. Lee, K. Nam, S.B. Oh, B.C. Radburn-Smith, S.h. Seo,
+U.K. Yang, H.D. Yoo, G.B. Yu
+University of Seoul, Seoul, Korea
+D. Jeon, H. Kim, J.H. Kim, J.S.H. Lee, I.C. Park
+Sungkyunkwan University, Suwon, Korea
+Y. Choi, C. Hwang, J. Lee, I. Yu
+Vilnius University, Vilnius, Lithuania
+V. Dudenas, A. Juodagalvis, J. Vaitkus
+30
+
+
+National Centre for Particle Physics, Universiti Malaya, Kuala Lumpur, Malaysia
+I. Ahmed, Z.A. Ibrahim, M.A.B. Md Ali30 , F. Mohamad Idris31 , W.A.T. Wan Abdullah,
+M.N. Yusli, Z. Zolkapli
+Universidad de Sonora (UNISON), Hermosillo, Mexico
+J.F. Benitez, A. Castaneda Hernandez, J.A. Murillo Quijada
+Centro de Investigacion y de Estudios Avanzados del IPN, Mexico City, Mexico
+H. Castilla-Valdez, E. De La Cruz-Burelo, M.C. Duran-Osuna, I. Heredia-De La Cruz32 ,
+R. Lopez-Fernandez, J. Mejia Guisao, R.I. Rabadan-Trejo, M. Ramirez-Garcia, G. Ramirez-
+Sanchez, R Reyes-Almanza, A. Sanchez-Hernandez
+Universidad Iberoamericana, Mexico City, Mexico
+S. Carrillo Moreno, C. Oropeza Barrera, F. Vazquez Valencia
+Benemerita Universidad Autonoma de Puebla, Puebla, Mexico
+J. Eysermans, I. Pedraza, H.A. Salazar Ibarguen, C. Uribe Estrada
+Universidad Autónoma de San Luis Potosı́, San Luis Potosı́, Mexico
+A. Morelos Pineda
+University of Auckland, Auckland, New Zealand
+D. Krofcheck
+University of Canterbury, Christchurch, New Zealand
+S. Bheesette, P.H. Butler
+National Centre for Physics, Quaid-I-Azam University, Islamabad, Pakistan
+A. Ahmad, M. Ahmad, M.I. Asghar, Q. Hassan, H.R. Hoorani, A. Saddique, M.A. Shah,
+M. Shoaib, M. Waqas
+National Centre for Nuclear Research, Swierk, Poland
+H. Bialkowska, M. Bluj, B. Boimska, T. Frueboes, M. Górski, M. Kazana, K. Nawrocki,
+M. Szleper, P. Traczyk, P. Zalewski
+Institute of Experimental Physics, Faculty of Physics, University of Warsaw, Warsaw, Poland
+K. Bunkowski, A. Byszuk33 , K. Doroba, A. Kalinowski, M. Konecki, J. Krolikowski, M. Misiura,
+M. Olszewski, A. Pyskir, M. Walczak
+Laboratório de Instrumentação e Fı́sica Experimental de Partı́culas, Lisboa, Portugal
+M. Araujo, P. Bargassa, C. Beirão Da Cruz E Silva, A. Di Francesco, P. Faccioli, B. Galinhas,
+M. Gallinaro, J. Hollar, N. Leonardo, M.V. Nemallapudi, J. Seixas, G. Strong, O. Toldaiev,
+D. Vadruccio, J. Varela
+Joint Institute for Nuclear Research, Dubna, Russia
+S. Afanasiev, P. Bunin, M. Gavrilenko, I. Golutvin, I. Gorbunov, A. Kamenev, V. Karjavine,
+A. Lanev, A. Malakhov, V. Matveev34,35 , P. Moisenz, V. Palichik, V. Perelygin, S. Shmatov,
+S. Shulha, N. Skatchkov, V. Smirnov, N. Voytishin, A. Zarubin
+Petersburg Nuclear Physics Institute, Gatchina (St. Petersburg), Russia
+V. Golovtsov, Y. Ivanov, V. Kim36 , E. Kuznetsova37 , P. Levchenko, V. Murzin, V. Oreshkin,
+I. Smirnov, D. Sosnov, V. Sulimov, L. Uvarov, S. Vavilov, A. Vorobyev
+Institute for Nuclear Research, Moscow, Russia
+Yu. Andreev, A. Dermenev, S. Gninenko, N. Golubev, A. Karneyeu, M. Kirsanov, N. Krasnikov,
+A. Pashenkov, D. Tlisov, A. Toropin
+                                                                                               31
+
+
+Institute for Theoretical and Experimental Physics, Moscow, Russia
+V. Epshteyn, V. Gavrilov, N. Lychkovskaya, V. Popov, I. Pozdnyakov, G. Safronov,
+A. Spiridonov, A. Stepennov, V. Stolin, M. Toms, E. Vlasov, A. Zhokin
+Moscow Institute of Physics and Technology, Moscow, Russia
+T. Aushev
+National Research Nuclear University ’Moscow Engineering Physics Institute’ (MEPhI),
+Moscow, Russia
+R. Chistov38 , M. Danilov38 , P. Parygin, D. Philippov, S. Polikarpov38 , E. Tarkovskii
+P.N. Lebedev Physical Institute, Moscow, Russia
+V. Andreev, M. Azarkin35 , I. Dremin35 , M. Kirakosyan35 , S.V. Rusakov, A. Terkulov
+Skobeltsyn Institute of Nuclear Physics, Lomonosov Moscow State University, Moscow,
+Russia
+A. Baskakov, A. Belyaev, E. Boos, M. Dubinin39 , L. Dudko, A. Ershov, A. Gribushin,
+V. Klyukhin, O. Kodolova, I. Lokhtin, I. Miagkov, S. Obraztsov, S. Petrushanko, V. Savrin,
+A. Snigirev
+Novosibirsk State University (NSU), Novosibirsk, Russia
+A. Barnyakov40 , V. Blinov40 , T. Dimova40 , L. Kardapoltsev40 , Y. Skovpen40
+Institute for High Energy Physics of National Research Centre ’Kurchatov Institute’,
+Protvino, Russia
+I. Azhgirey, I. Bayshev, S. Bitioukov, D. Elumakhov, A. Godizov, V. Kachanov, A. Kalinin,
+D. Konstantinov, P. Mandrik, V. Petrov, R. Ryutin, S. Slabospitskii, A. Sobol, S. Troshin,
+N. Tyurin, A. Uzunian, A. Volkov
+National Research Tomsk Polytechnic University, Tomsk, Russia
+A. Babaev, S. Baidali, V. Okhotnikov
+University of Belgrade, Faculty of Physics and Vinca Institute of Nuclear Sciences, Belgrade,
+Serbia
+P. Adzic41 , P. Cirkovic, D. Devetak, M. Dordevic, J. Milosevic
+Centro de Investigaciones Energéticas Medioambientales y Tecnológicas (CIEMAT),
+Madrid, Spain
+J. Alcaraz Maestre, A. Álvarez Fernández, I. Bachiller, M. Barrio Luna, J.A. Brochero Cifuentes,
+M. Cerrada, N. Colino, B. De La Cruz, A. Delgado Peris, C. Fernandez Bedoya,
+J.P. Fernández Ramos, J. Flix, M.C. Fouz, O. Gonzalez Lopez, S. Goy Lopez, J.M. Hernandez,
+M.I. Josa, D. Moran, A. Pérez-Calero Yzquierdo, J. Puerta Pelayo, I. Redondo, L. Romero,
+M.S. Soares, A. Triossi
+Universidad Autónoma de Madrid, Madrid, Spain
+C. Albajar, J.F. de Trocóniz
+Universidad de Oviedo, Oviedo, Spain
+J. Cuevas, C. Erice, J. Fernandez Menendez, S. Folgueras, I. Gonzalez Caballero,
+J.R. González Fernández, E. Palencia Cortezon, V. Rodrı́guez Bouza, S. Sanchez Cruz, P. Vischia,
+J.M. Vizan Garcia
+Instituto de Fı́sica de Cantabria (IFCA), CSIC-Universidad de Cantabria, Santander, Spain
+I.J. Cabrillo, A. Calderon, B. Chazin Quero, J. Duarte Campderros, M. Fernandez,
+P.J. Fernández Manteca, A. Garcı́a Alonso, J. Garcia-Ferrero, G. Gomez, A. Lopez Virto,
+32
+
+
+J. Marco, C. Martinez Rivero, P. Martinez Ruiz del Arbol, F. Matorras, J. Piedra Gomez,
+C. Prieels, T. Rodrigo, A. Ruiz-Jimeno, L. Scodellaro, N. Trevisani, I. Vila, R. Vilar Cortabitarte
+University of Ruhuna, Department of Physics, Matara, Sri Lanka
+N. Wickramage
+CERN, European Organization for Nuclear Research, Geneva, Switzerland
+D. Abbaneo, B. Akgun, E. Auffray, G. Auzinger, P. Baillon, A.H. Ball, D. Barney, J. Bendavid,
+M. Bianco, A. Bocci, C. Botta, E. Brondolin, T. Camporesi, M. Cepeda, G. Cerminara,
+E. Chapon, Y. Chen, G. Cucciati, D. d’Enterria, A. Dabrowski, N. Daci, V. Daponte, A. David,
+A. De Roeck, N. Deelen, M. Dobson, M. Dünser, N. Dupont, A. Elliott-Peisert, P. Everaerts,
+F. Fallavollita42 , D. Fasanella, G. Franzoni, J. Fulcher, W. Funk, D. Gigi, A. Gilbert, K. Gill,
+F. Glege, M. Guilbaud, D. Gulhan, J. Hegeman, C. Heidegger, V. Innocente, A. Jafari, P. Janot,
+O. Karacheban18 , J. Kieseler, A. Kornmayer, M. Krammer1 , C. Lange, P. Lecoq, C. Lourenço,
+L. Malgeri, M. Mannelli, F. Meijers, J.A. Merlin, S. Mersi, E. Meschi, P. Milenovic43 , F. Moortgat,
+M. Mulders, J. Ngadiuba, S. Nourbakhsh, S. Orfanelli, L. Orsini, F. Pantaleo15 , L. Pape, E. Perez,
+M. Peruzzi, A. Petrilli, G. Petrucciani, A. Pfeiffer, M. Pierini, F.M. Pitters, D. Rabady, A. Racz,
+T. Reis, G. Rolandi44 , M. Rovere, H. Sakulin, C. Schäfer, C. Schwick, M. Seidel, M. Selvaggi,
+A. Sharma, P. Silva, P. Sphicas45 , A. Stakia, J. Steggemann, M. Tosi, D. Treille, A. Tsirou,
+V. Veckalns46 , M. Verzetti, W.D. Zeuner
+Paul Scherrer Institut, Villigen, Switzerland
+L. Caminada47 , K. Deiters, W. Erdmann, R. Horisberger, Q. Ingram, H.C. Kaestli, D. Kotlinski,
+U. Langenegger, T. Rohe, S.A. Wiederkehr
+ETH Zurich - Institute for Particle Physics and Astrophysics (IPA), Zurich, Switzerland
+M. Backhaus, L. Bäni, P. Berger, N. Chernyavskaya, G. Dissertori, M. Dittmar, M. Donegà,
+C. Dorfer, C. Grab, D. Hits, J. Hoss, T. Klijnsma, W. Lustermann, R.A. Manzoni, M. Marionneau,
+M.T. Meinhard, F. Micheli, P. Musella, F. Nessi-Tedaldi, J. Pata, F. Pauss, G. Perrin, L. Perrozzi,
+S. Pigazzini, M. Quittnat, D. Ruini, D.A. Sanz Becerra, M. Schönenberger, L. Shchutska,
+V.R. Tavolaro, K. Theofilatos, M.L. Vesterbacka Olsson, R. Wallny, D.H. Zhu
+Universität Zürich, Zurich, Switzerland
+T.K. Aarrestad, C. Amsler48 , D. Brzhechko, M.F. Canelli, A. De Cosa, R. Del Burgo, S. Donato,
+C. Galloni, T. Hreus, B. Kilminster, S. Leontsinis, I. Neutelings, D. Pinna, G. Rauco, P. Robmann,
+D. Salerno, K. Schweiger, C. Seitz, Y. Takahashi, A. Zucchetta
+National Central University, Chung-Li, Taiwan
+Y.H. Chang, K.y. Cheng, T.H. Doan, Sh. Jain, R. Khurana, C.M. Kuo, W. Lin, A. Pozdnyakov,
+S.S. Yu
+National Taiwan University (NTU), Taipei, Taiwan
+P. Chang, Y. Chao, K.F. Chen, P.H. Chen, W.-S. Hou, Arun Kumar, Y.F. Liu, R.-S. Lu, E. Paganis,
+A. Psallidas, A. Steen
+Chulalongkorn University, Faculty of Science, Department of Physics, Bangkok, Thailand
+B. Asavapibhop, N. Srimanobhas, N. Suwonjandee
+Çukurova University, Physics Department, Science and Art Faculty, Adana, Turkey
+A. Bat, F. Boran, S. Cerci49 , S. Damarseckin, Z.S. Demiroglu, F. Dolek, C. Dozen, I. Dumanoglu,
+S. Girgis, G. Gokbulut, Y. Guler, E. Gurpinar, I. Hos50 , C. Isik, E.E. Kangal51 , O. Kara,
+A. Kayis Topaksu, U. Kiminsu, M. Oglakci, G. Onengut, K. Ozdemir52 , A. Polatoz,
+D. Sunar Cerci49 , B. Tali49 , U.G. Tok, S. Turkcapar, I.S. Zorbakir, C. Zorbilmez
+                                                                                                33
+
+
+Middle East Technical University, Physics Department, Ankara, Turkey
+B. Isildak53 , G. Karapinar54 , M. Yalvac, M. Zeyrek
+Bogazici University, Istanbul, Turkey
+I.O. Atakisi, E. Gülmez, M. Kaya55 , O. Kaya56 , S. Ozkorucuklu57 , S. Tekten, E.A. Yetkin58
+Istanbul Technical University, Istanbul, Turkey
+M.N. Agaras, S. Atay, A. Cakir, K. Cankocak, Y. Komurcu, S. Sen59
+Institute for Scintillation Materials of National Academy of Science of Ukraine, Kharkov,
+Ukraine
+B. Grynyov
+National Scientific Center, Kharkov Institute of Physics and Technology, Kharkov, Ukraine
+L. Levchuk
+University of Bristol, Bristol, United Kingdom
+F. Ball, L. Beck, J.J. Brooke, D. Burns, E. Clement, D. Cussans, O. Davignon, H. Flacher,
+J. Goldstein, G.P. Heath, H.F. Heath, L. Kreczko, D.M. Newbold60 , S. Paramesvaran, B. Penning,
+T. Sakuma, D. Smith, V.J. Smith, J. Taylor, A. Titterton
+Rutherford Appleton Laboratory, Didcot, United Kingdom
+K.W. Bell, A. Belyaev61 , C. Brew, R.M. Brown, D. Cieri, D.J.A. Cockerill, J.A. Coughlan,
+K. Harder, S. Harper, J. Linacre, E. Olaiya, D. Petyt, C.H. Shepherd-Themistocleous, A. Thea,
+I.R. Tomalin, T. Williams, W.J. Womersley
+Imperial College, London, United Kingdom
+R. Bainbridge, P. Bloch, J. Borg, S. Breeze, O. Buchmuller, A. Bundock, S. Casasso,
+D. Colling, P. Dauncey, G. Davies, M. Della Negra, R. Di Maria, Y. Haddad, G. Hall, G. Iles,
+T. James, M. Komm, C. Laner, L. Lyons, A.-M. Magnan, S. Malik, A. Martelli, J. Nash62 ,
+A. Nikitenko7 , V. Palladino, M. Pesaresi, A. Richards, A. Rose, E. Scott, C. Seez, A. Shtipliyski,
+G. Singh, M. Stoye, T. Strebler, S. Summers, A. Tapper, K. Uchida, T. Virdee15 , N. Wardle,
+D. Winterbottom, J. Wright, S.C. Zenz
+Brunel University, Uxbridge, United Kingdom
+J.E. Cole, P.R. Hobson, A. Khan, P. Kyberd, C.K. Mackay, A. Morton, I.D. Reid, L. Teodorescu,
+S. Zahid
+Baylor University, Waco, USA
+K. Call, J. Dittmann, K. Hatakeyama, H. Liu, C. Madrid, B. Mcmaster, N. Pastika, C. Smith
+Catholic University of America, Washington DC, USA
+R. Bartek, A. Dominguez
+The University of Alabama, Tuscaloosa, USA
+A. Buccilli, S.I. Cooper, C. Henderson, P. Rumerio, C. West
+Boston University, Boston, USA
+D. Arcaro, T. Bose, D. Gastler, D. Rankin, C. Richardson, J. Rohlf, L. Sulak, D. Zou
+Brown University, Providence, USA
+G. Benelli, X. Coubez, D. Cutts, M. Hadley, J. Hakala, U. Heintz, J.M. Hogan63 , K.H.M. Kwok,
+E. Laird, G. Landsberg, J. Lee, Z. Mao, M. Narain, S. Sagir64 , R. Syarif, E. Usai, D. Yu
+University of California, Davis, Davis, USA
+R. Band, C. Brainerd, R. Breedon, D. Burns, M. Calderon De La Barca Sanchez, M. Chertok,
+34
+
+
+J. Conway, R. Conway, P.T. Cox, R. Erbacher, C. Flores, G. Funk, W. Ko, O. Kukral, R. Lander,
+M. Mulhearn, D. Pellett, J. Pilot, S. Shalhout, M. Shi, D. Stolp, D. Taylor, K. Tos, M. Tripathi,
+Z. Wang, F. Zhang
+University of California, Los Angeles, USA
+M. Bachtis, C. Bravo, R. Cousins, A. Dasgupta, A. Florent, J. Hauser, M. Ignatenko, N. Mccoll,
+S. Regnard, D. Saltzberg, C. Schnaible, V. Valuev
+University of California, Riverside, Riverside, USA
+E. Bouvier, K. Burt, R. Clare, J.W. Gary, S.M.A. Ghiasi Shirazi, G. Hanson, G. Karapostoli,
+E. Kennedy, F. Lacroix, O.R. Long, M. Olmedo Negrete, M.I. Paneva, W. Si, L. Wang, H. Wei,
+S. Wimpenny, B.R. Yates
+University of California, San Diego, La Jolla, USA
+J.G. Branson, S. Cittolin, M. Derdzinski, R. Gerosa, D. Gilbert, B. Hashemi, A. Holzner, D. Klein,
+G. Kole, V. Krutelyov, J. Letts, M. Masciovecchio, D. Olivito, S. Padhi, M. Pieri, M. Sani,
+V. Sharma, S. Simon, M. Tadel, A. Vartak, S. Wasserbaech65 , J. Wood, F. Würthwein, A. Yagil,
+G. Zevi Della Porta
+University of California, Santa Barbara - Department of Physics, Santa Barbara, USA
+N. Amin, R. Bhandari, J. Bradmiller-Feld, C. Campagnari, M. Citron, A. Dishaw, V. Dutta,
+M. Franco Sevilla, L. Gouskos, R. Heller, J. Incandela, A. Ovcharova, H. Qu, J. Richman,
+D. Stuart, I. Suarez, S. Wang, J. Yoo
+California Institute of Technology, Pasadena, USA
+D. Anderson, A. Bornheim, J.M. Lawhorn, H.B. Newman, T.Q. Nguyen, M. Spiropulu,
+J.R. Vlimant, R. Wilkinson, S. Xie, Z. Zhang, R.Y. Zhu
+Carnegie Mellon University, Pittsburgh, USA
+M.B. Andrews, T. Ferguson, T. Mudholkar, M. Paulini, M. Sun, I. Vorobiev, M. Weinberg
+University of Colorado Boulder, Boulder, USA
+J.P. Cumalat, W.T. Ford, F. Jensen, A. Johnson, M. Krohn, E. MacDonald, T. Mulholland, R. Patel,
+K. Stenson, K.A. Ulmer, S.R. Wagner
+Cornell University, Ithaca, USA
+J. Alexander, J. Chaves, Y. Cheng, J. Chu, A. Datta, K. Mcdermott, N. Mirman, J.R. Patterson,
+D. Quach, A. Rinkevicius, A. Ryd, L. Skinnari, L. Soffi, S.M. Tan, Z. Tao, J. Thom, J. Tucker,
+P. Wittich, M. Zientek
+Fermi National Accelerator Laboratory, Batavia, USA
+S. Abdullin, M. Albrow, M. Alyari, G. Apollinari, A. Apresyan, A. Apyan, S. Banerjee,
+L.A.T. Bauerdick, A. Beretvas, J. Berryhill, P.C. Bhat, G. Bolla† , K. Burkett, J.N. Butler,
+A. Canepa, G.B. Cerati, H.W.K. Cheung, F. Chlebana, M. Cremonesi, J. Duarte, V.D. Elvira,
+J. Freeman, Z. Gecse, E. Gottschalk, L. Gray, D. Green, S. Grünendahl, O. Gutsche, J. Hanlon,
+R.M. Harris, S. Hasegawa, J. Hirschauer, Z. Hu, B. Jayatilaka, S. Jindariani, M. Johnson, U. Joshi,
+B. Klima, M.J. Kortelainen, B. Kreis, S. Lammel, D. Lincoln, R. Lipton, M. Liu, T. Liu, J. Lykken,
+K. Maeshima, J.M. Marraffino, D. Mason, P. McBride, P. Merkel, S. Mrenna, S. Nahn, V. O’Dell,
+K. Pedro, C. Pena, O. Prokofyev, G. Rakness, L. Ristori, A. Savoy-Navarro66 , B. Schneider,
+E. Sexton-Kennedy, A. Soha, W.J. Spalding, L. Spiegel, S. Stoynev, J. Strait, N. Strobbe, L. Taylor,
+S. Tkaczyk, N.V. Tran, L. Uplegger, E.W. Vaandering, C. Vernieri, M. Verzocchi, R. Vidal,
+M. Wang, H.A. Weber, A. Whitbeck
+                                                                                                35
+
+
+University of Florida, Gainesville, USA
+D. Acosta, P. Avery, P. Bortignon, D. Bourilkov, A. Brinkerhoff, L. Cadamuro, A. Carnes,
+M. Carver, D. Curry, R.D. Field, S.V. Gleyzer, B.M. Joshi, J. Konigsberg, A. Korytov, K.H. Lo,
+P. Ma, K. Matchev, H. Mei, G. Mitselmakher, K. Shi, D. Sperka, J. Wang, S. Wang
+Florida International University, Miami, USA
+Y.R. Joshi, S. Linn
+Florida State University, Tallahassee, USA
+A. Ackert, T. Adams, A. Askew, S. Hagopian, V. Hagopian, K.F. Johnson, T. Kolberg,
+G. Martinez, T. Perry, H. Prosper, A. Saha, C. Schiber, V. Sharma, R. Yohay
+Florida Institute of Technology, Melbourne, USA
+M.M. Baarmand, V. Bhopatkar, S. Colafranceschi, M. Hohlmann, D. Noonan, M. Rahmani,
+T. Roy, F. Yumiceva
+University of Illinois at Chicago (UIC), Chicago, USA
+M.R. Adams, L. Apanasevich, D. Berry, R.R. Betts, R. Cavanaugh, X. Chen, S. Dittmer,
+O. Evdokimov, C.E. Gerber, D.A. Hangal, D.J. Hofman, K. Jung, J. Kamin, C. Mills,
+I.D. Sandoval Gonzalez, M.B. Tonjes, N. Varelas, H. Wang, X. Wang, Z. Wu, J. Zhang
+The University of Iowa, Iowa City, USA
+M. Alhusseini, B. Bilki67 , W. Clarida, K. Dilsiz68 , S. Durgut, R.P. Gandrajula, M. Haytmyradov,
+V. Khristenko, J.-P. Merlo, A. Mestvirishvili, A. Moeller, J. Nachtman, H. Ogul69 , Y. Onel,
+F. Ozok70 , A. Penzo, C. Snyder, E. Tiras, J. Wetzel
+Johns Hopkins University, Baltimore, USA
+B. Blumenfeld, A. Cocoros, N. Eminizer, D. Fehling, L. Feng, A.V. Gritsan, W.T. Hung,
+P. Maksimovic, J. Roskes, U. Sarica, M. Swartz, M. Xiao, C. You
+The University of Kansas, Lawrence, USA
+A. Al-bataineh, P. Baringer, A. Bean, S. Boren, J. Bowen, A. Bylinkin, J. Castle, S. Khalil,
+A. Kropivnitskaya, D. Majumder, W. Mcbrayer, M. Murray, C. Rogan, S. Sanders, E. Schmitz,
+J.D. Tapia Takaki, Q. Wang
+Kansas State University, Manhattan, USA
+S. Duric, A. Ivanov, K. Kaadze, D. Kim, Y. Maravin, D.R. Mendis, T. Mitchell, A. Modak,
+A. Mohammadi, L.K. Saini, N. Skhirtladze
+Lawrence Livermore National Laboratory, Livermore, USA
+F. Rebassoo, D. Wright
+University of Maryland, College Park, USA
+A. Baden, O. Baron, A. Belloni, S.C. Eno, Y. Feng, C. Ferraioli, N.J. Hadley, S. Jabeen, G.Y. Jeng,
+R.G. Kellogg, J. Kunkle, A.C. Mignerey, F. Ricci-Tam, Y.H. Shin, A. Skuja, S.C. Tonwar, K. Wong
+Massachusetts Institute of Technology, Cambridge, USA
+D. Abercrombie, B. Allen, V. Azzolini, A. Baty, G. Bauer, R. Bi, S. Brandt, W. Busza, I.A. Cali,
+M. D’Alfonso, Z. Demiragli, G. Gomez Ceballos, M. Goncharov, P. Harris, D. Hsu, M. Hu,
+Y. Iiyama, G.M. Innocenti, M. Klute, D. Kovalskyi, Y.-J. Lee, P.D. Luckey, B. Maier, A.C. Marini,
+C. Mcginn, C. Mironov, S. Narayanan, X. Niu, C. Paus, C. Roland, G. Roland, G.S.F. Stephans,
+K. Sumorok, K. Tatar, D. Velicanu, J. Wang, T.W. Wang, B. Wyslouch, S. Zhaozhong
+36
+
+
+University of Minnesota, Minneapolis, USA
+A.C. Benvenuti, R.M. Chatterjee, A. Evans, P. Hansen, S. Kalafut, Y. Kubota, Z. Lesko, J. Mans,
+N. Ruckstuhl, R. Rusack, J. Turkewitz, M.A. Wadud
+University of Mississippi, Oxford, USA
+J.G. Acosta, S. Oliveros
+University of Nebraska-Lincoln, Lincoln, USA
+E. Avdeeva, K. Bloom, D.R. Claes, C. Fangmeier, F. Golf, R. Gonzalez Suarez, R. Kamalieddin,
+I. Kravchenko, J. Monroy, J.E. Siado, G.R. Snow, B. Stieger
+State University of New York at Buffalo, Buffalo, USA
+A. Godshalk, C. Harrington, I. Iashvili, A. Kharchilava, C. Mclean, D. Nguyen, A. Parker,
+S. Rappoccio, B. Roozbahani
+Northeastern University, Boston, USA
+G. Alverson, E. Barberis, C. Freer, A. Hortiangtham, D.M. Morse, T. Orimoto, R. Teix-
+eira De Lima, T. Wamorkar, B. Wang, A. Wisecarver, D. Wood
+Northwestern University, Evanston, USA
+S. Bhattacharya, O. Charaf, K.A. Hahn, N. Mucia, N. Odell, M.H. Schmitt, K. Sung, M. Trovato,
+M. Velasco
+University of Notre Dame, Notre Dame, USA
+R. Bucci, N. Dev, M. Hildreth, K. Hurtado Anampa, C. Jessop, D.J. Karmgard, N. Kellams,
+K. Lannon, W. Li, N. Loukas, N. Marinelli, F. Meng, C. Mueller, Y. Musienko34 , M. Planer,
+A. Reinsvold, R. Ruchti, P. Siddireddy, G. Smith, S. Taroni, M. Wayne, A. Wightman, M. Wolf,
+A. Woodard
+The Ohio State University, Columbus, USA
+J. Alimena, L. Antonelli, B. Bylsma, L.S. Durkin, S. Flowers, B. Francis, A. Hart, C. Hill, W. Ji,
+T.Y. Ling, W. Luo, B.L. Winer, H.W. Wulsin
+Princeton University, Princeton, USA
+S. Cooperstein, P. Elmer, J. Hardenbrook, S. Higginbotham, A. Kalogeropoulos, D. Lange,
+M.T. Lucchini, J. Luo, D. Marlow, K. Mei, I. Ojalvo, J. Olsen, C. Palmer, P. Piroué, J. Salfeld-
+Nebgen, D. Stickland, C. Tully
+University of Puerto Rico, Mayaguez, USA
+S. Malik, S. Norberg
+Purdue University, West Lafayette, USA
+A. Barker, V.E. Barnes, S. Das, L. Gutay, M. Jones, A.W. Jung, A. Khatiwada, B. Mahakud,
+D.H. Miller, N. Neumeister, C.C. Peng, S. Piperov, H. Qiu, J.F. Schulte, J. Sun, F. Wang, R. Xiao,
+W. Xie
+Purdue University Northwest, Hammond, USA
+T. Cheng, J. Dolen, N. Parashar
+Rice University, Houston, USA
+Z. Chen, K.M. Ecklund, S. Freed, F.J.M. Geurts, M. Kilpatrick, W. Li, B.P. Padley, J. Roberts,
+J. Rorie, W. Shi, Z. Tu, J. Zabel, A. Zhang
+University of Rochester, Rochester, USA
+A. Bodek, P. de Barbaro, R. Demina, Y.t. Duh, J.L. Dulemba, C. Fallon, T. Ferbel, M. Galanti,
+A. Garcia-Bellido, J. Han, O. Hindrichs, A. Khukhunaishvili, P. Tan, R. Taus
+                                                                                          37
+
+
+Rutgers, The State University of New Jersey, Piscataway, USA
+A. Agapitos, J.P. Chou, Y. Gershtein, T.A. Gómez Espinosa, E. Halkiadakis, M. Heindl,
+E. Hughes, S. Kaplan, R. Kunnawalkam Elayavalli, S. Kyriacou, A. Lath, R. Montalvo, K. Nash,
+M. Osherson, H. Saka, S. Salur, S. Schnetzer, D. Sheffield, S. Somalwar, R. Stone, S. Thomas,
+P. Thomassen, M. Walker
+University of Tennessee, Knoxville, USA
+A.G. Delannoy, J. Heideman, G. Riley, S. Spanier
+Texas A&M University, College Station, USA
+O. Bouhali71 , A. Celik, M. Dalchenko, M. De Mattia, A. Delgado, S. Dildick, R. Eusebi,
+J. Gilmore, T. Huang, T. Kamon72 , S. Luo, R. Mueller, A. Perloff, L. Perniè, D. Rathjens,
+A. Safonov
+Texas Tech University, Lubbock, USA
+N. Akchurin, J. Damgov, F. De Guio, P.R. Dudero, S. Kunori, K. Lamichhane, S.W. Lee,
+T. Mengke, S. Muthumuni, T. Peltola, S. Undleeb, I. Volobouev, Z. Wang
+Vanderbilt University, Nashville, USA
+S. Greene, A. Gurrola, R. Janjam, W. Johns, C. Maguire, A. Melo, H. Ni, K. Padeken,
+J.D. Ruiz Alvarez, P. Sheldon, S. Tuo, J. Velkovska, M. Verweij, Q. Xu
+University of Virginia, Charlottesville, USA
+M.W. Arenton, P. Barria, B. Cox, R. Hirosky, M. Joyce, A. Ledovskoy, H. Li, C. Neu,
+T. Sinthuprasith, Y. Wang, E. Wolfe, F. Xia
+Wayne State University, Detroit, USA
+R. Harr, P.E. Karchin, N. Poudyal, J. Sturdy, P. Thapa, S. Zaleski
+University of Wisconsin - Madison, Madison, WI, USA
+M. Brodski, J. Buchanan, C. Caillol, D. Carlsmith, S. Dasu, L. Dodd, B. Gomber, M. Grothe,
+M. Herndon, A. Hervé, U. Hussain, P. Klabbers, A. Lanaro, K. Long, R. Loveless, T. Ruggles,
+A. Savin, N. Smith, W.H. Smith, N. Woods
+†: Deceased
+1: Also at Vienna University of Technology, Vienna, Austria
+2: Also at IRFU, CEA, Université Paris-Saclay, Gif-sur-Yvette, France
+3: Also at Universidade Estadual de Campinas, Campinas, Brazil
+4: Also at Federal University of Rio Grande do Sul, Porto Alegre, Brazil
+5: Also at Université Libre de Bruxelles, Bruxelles, Belgium
+6: Also at University of Chinese Academy of Sciences, Beijing, China
+7: Also at Institute for Theoretical and Experimental Physics, Moscow, Russia
+8: Also at Joint Institute for Nuclear Research, Dubna, Russia
+9: Also at Suez University, Suez, Egypt
+10: Now at British University in Egypt, Cairo, Egypt
+11: Also at Zewail City of Science and Technology, Zewail, Egypt
+12: Also at Department of Physics, King Abdulaziz University, Jeddah, Saudi Arabia
+13: Also at Université de Haute Alsace, Mulhouse, France
+14: Also at Skobeltsyn Institute of Nuclear Physics, Lomonosov Moscow State University,
+Moscow, Russia
+15: Also at CERN, European Organization for Nuclear Research, Geneva, Switzerland
+16: Also at RWTH Aachen University, III. Physikalisches Institut A, Aachen, Germany
+17: Also at University of Hamburg, Hamburg, Germany
+38
+
+
+18: Also at Brandenburg University of Technology, Cottbus, Germany
+19: Also at MTA-ELTE Lendület CMS Particle and Nuclear Physics Group, Eötvös Loránd
+University, Budapest, Hungary
+20: Also at Institute of Nuclear Research ATOMKI, Debrecen, Hungary
+21: Also at Institute of Physics, University of Debrecen, Debrecen, Hungary
+22: Also at Indian Institute of Technology Bhubaneswar, Bhubaneswar, India
+23: Also at Institute of Physics, Bhubaneswar, India
+24: Also at Shoolini University, Solan, India
+25: Also at University of Visva-Bharati, Santiniketan, India
+26: Also at Isfahan University of Technology, Isfahan, Iran
+27: Also at Plasma Physics Research Center, Science and Research Branch, Islamic Azad
+University, Tehran, Iran
+28: Also at Università degli Studi di Siena, Siena, Italy
+29: Also at Kyunghee University, Seoul, Korea
+30: Also at International Islamic University of Malaysia, Kuala Lumpur, Malaysia
+31: Also at Malaysian Nuclear Agency, MOSTI, Kajang, Malaysia
+32: Also at Consejo Nacional de Ciencia y Tecnologı́a, Mexico city, Mexico
+33: Also at Warsaw University of Technology, Institute of Electronic Systems, Warsaw, Poland
+34: Also at Institute for Nuclear Research, Moscow, Russia
+35: Now at National Research Nuclear University ’Moscow Engineering Physics Institute’
+(MEPhI), Moscow, Russia
+36: Also at St. Petersburg State Polytechnical University, St. Petersburg, Russia
+37: Also at University of Florida, Gainesville, USA
+38: Also at P.N. Lebedev Physical Institute, Moscow, Russia
+39: Also at California Institute of Technology, Pasadena, USA
+40: Also at Budker Institute of Nuclear Physics, Novosibirsk, Russia
+41: Also at Faculty of Physics, University of Belgrade, Belgrade, Serbia
+42: Also at INFN Sezione di Pavia a , Università di Pavia b , Pavia, Italy
+43: Also at University of Belgrade, Faculty of Physics and Vinca Institute of Nuclear Sciences,
+Belgrade, Serbia
+44: Also at Scuola Normale e Sezione dell’INFN, Pisa, Italy
+45: Also at National and Kapodistrian University of Athens, Athens, Greece
+46: Also at Riga Technical University, Riga, Latvia
+47: Also at Universität Zürich, Zurich, Switzerland
+48: Also at Stefan Meyer Institute for Subatomic Physics (SMI), Vienna, Austria
+49: Also at Adiyaman University, Adiyaman, Turkey
+50: Also at Istanbul Aydin University, Istanbul, Turkey
+51: Also at Mersin University, Mersin, Turkey
+52: Also at Piri Reis University, Istanbul, Turkey
+53: Also at Ozyegin University, Istanbul, Turkey
+54: Also at Izmir Institute of Technology, Izmir, Turkey
+55: Also at Marmara University, Istanbul, Turkey
+56: Also at Kafkas University, Kars, Turkey
+57: Also at Istanbul University, Faculty of Science, Istanbul, Turkey
+58: Also at Istanbul Bilgi University, Istanbul, Turkey
+59: Also at Hacettepe University, Ankara, Turkey
+60: Also at Rutherford Appleton Laboratory, Didcot, United Kingdom
+61: Also at School of Physics and Astronomy, University of Southampton, Southampton,
+United Kingdom
+                                                                          39
+
+
+62:   Also at Monash University, Faculty of Science, Clayton, Australia
+63:   Also at Bethel University, St. Paul, USA
+64:   Also at Karamanoğlu Mehmetbey University, Karaman, Turkey
+65:   Also at Utah Valley University, Orem, USA
+66:   Also at Purdue University, West Lafayette, USA
+67:   Also at Beykent University, Istanbul, Turkey
+68:   Also at Bingol University, Bingol, Turkey
+69:   Also at Sinop University, Sinop, Turkey
+70:   Also at Mimar Sinan University, Istanbul, Istanbul, Turkey
+71:   Also at Texas A&M University at Qatar, Doha, Qatar
+72:   Also at Kyungpook National University, Daegu, Korea
+

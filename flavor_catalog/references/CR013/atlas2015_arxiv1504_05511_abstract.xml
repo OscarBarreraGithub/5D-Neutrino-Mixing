@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/gFJNrXh7ylnV7J948+h6pvHHtz0</id>
+  <title>arXiv Query: search_query=&amp;id_list=1504.05511&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:01Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1504.05511" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1504.05511v2</id>
+    <title>Search for high-mass diphoton resonances in $pp$ collisions at $\sqrt{s}=8$ TeV with the ATLAS detector</title>
+    <updated>2015-08-27T19:02:25Z</updated>
+    <link href="https://arxiv.org/abs/1504.05511v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1504.05511v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article describes a search for high-mass resonances decaying to a pair of photons using a sample of $20.3$ fb$^{-1}$ of $pp$ collisions at $\sqrt{s}=8$ TeV recorded with the ATLAS detector at the Large Hadron Collider. The data are found to be in agreement with the Standard Model prediction, and limits are reported in the framework of the Randall-Sundrum model. This theory leads to the prediction of graviton states, the lightest of which could be observed at the Large Hadron Collider. A lower limit of $2.66$ ($1.41$) TeV at 95% confidence level is set on the mass of the lightest graviton for couplings of $k/\overline{M}_{\mathrm{Pl}} = 0.1$ ($0.01$).</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-04-21T17:10:25Z</published>
+    <arxiv:comment>14 pages plus author list + cover page (31 pages total), 5 figures, 4 tables, submitted to Physical Review D, All figures including auxiliary figures are available at http://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2012-19/</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. D 92, 032004 (2015)</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.92.032004</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.92.032004" title="doi"/>
+  </entry>
+</feed>

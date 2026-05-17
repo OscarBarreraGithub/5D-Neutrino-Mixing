@@ -1,0 +1,1360 @@
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+
+
+ Extra Dimensions
+         For explanation of terms used and discussion of signiﬁcant model
+         dependence of following limits, see the “Extra Dimensions” review.
+         Footnotes describe originally quoted limit. δ indicates the number
+         of extra dimensions.
+         Limits not encoded here are summarized in the “Extra Dimensions”
+         review, where the latest unpublished results are also described.
+See the related review(s):
+  Extra Dimensions
+
+CONTENTS:
+      Limits on R from Deviations in Gravitational Force Law
+      Limits on R from On-Shell Production of Gravitons: δ = 2
+      Mass Limits on MTT
+      Limits on 1/R = Mc
+      Limits on Kaluza-Klein Gravitons in Warped Extra Dimensions
+      Limits on Kaluza-Klein Gluons in Warped Extra Dimensions
+      Black Hole Production Limits
+          − Semiclassical Black Holes
+          − Quantum Black Holes
+
+
+
+Limits on R from Deviations in Gravitational Force Law
+      This section includes limits on the size of extra dimensions from deviations in the New-
+      tonian (1/r2 ) gravitational force law at short distances. Deviations are parametrized
+      by a gravitational potential of the form V = −(G m m’/r) [1 + α exp(−r/R)]. For δ
+      toroidal extra dimensions of equal size, α = 8δ/3. Quoted bounds are for δ = 2 unless
+      otherwise noted.
+VALUE (µm)                   CL%           DOCUMENT ID               TECN      COMMENT
+• • • We do not use the following data for averages, ﬁts, limits, etc. • • •
+                                  1 BLAKEMORE 21                    Optical levitation
+                                  2 HEACOCK         21              Neutron scattering
+                                  3 LEE             20              Torsion pendulum
+< 37                    95        4 TAN             20A             Torsion pendulum
+                                  5 BERGE           18 MICR Space accelerometer
+                                  6 FAYET           18A MICR Space accelerometer
+                                  7 KLIMCHITSK...17A                Torsion oscillator
+                                  8 XU              13              Nuclei properties
+                                  9 BEZERRA         11              Torsion oscillator
+                                 10 SUSHKOV         11              Torsion pendulum
+                                 11 BEZERRA         10              Microcantilever
+                                 12 MASUDA          09              Torsion pendulum
+                                 13 GERACI          08              Microcantilever
+                                 14 TRENKEL         08              Newton’s constant
+                                 15 DECCA           07A             Torsion oscillator
+< 37                    95       16 KAPNER          07              Torsion pendulum
+< 47                    95       17 TU              07              Torsion pendulum
+
+https://pdg.lbl.gov                        Page 1                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+                                       18 SMULLIN             05               Microcantilever
+<130                         95        19 HOYLE               04               Torsion pendulum
+                                       20 CHIAVERINI          03               Microcantilever
+. 200                        95        21 LONG                03               Microcantilever
+<190                         95        22 HOYLE               01               Torsion pendulum
+                                       23 HOSKINS             85               Torsion pendulum
+  1 BLAKEMORE 21 obtain constraints on non-Newtonian forces with strengths α & 108
+    and length scales R > 10 µm. See their Fig. 4 for more details including comparison
+    with previous searches.
+  2 HEACOCK 21 obtain constraints on non-Newtonian forces with strengths 1018 . α .
+     1025 and length scales R ≃ 0.02–10 nm. See their Figure 3 for more details. This
+    improves the results of HADDOCK 18. These constraints do not place limits on the size
+    of extra ﬂat dimensions.
+  3 LEE 20 search for new forces probing a range of α ≃ 0.1–105 and length scales R
+    ≃ 7–90 µm. For δ = 1 the bound on R is 30 µm. See their Fig. 5 for details on the
+    bound.
+  4 TAN 20A search for new forces probing a range of α ≃ 4 × 10−3 –1 × 102 and length
+    scales R ≃ 40–350 µm. See their Fig. 6 for details on the bound.
+  5 BERGE 18 uses results from the MICROSCOPE experiment to obtain constraints on
+    non-Newtonian forces with strengths 10−11 . α . 10−7 and length scales R &
+    105 m. See their Figure 1 for more details. These constraints do not place limits on the
+    size of extra ﬂat dimensions.
+  6 FAYET 18A uses results from the MICROSCOPE experiment to obtain constraints on
+    an EP-violating force possibly arising from a new U(1) gauge boson. For R & 107
+    m the limits are α . a few 10−13 to a few 10−11 depending on the coupling,
+    corresponding to ǫ . 10−24 for the coupling of the new spin-1 or spin-0 mediator.
+    These constraints do not place limits on the size of extra ﬂat dimensions. This extends
+    the results of FAYET 18.
+  7 KLIMCHITSKAYA 17A uses an experiment that measures the diﬀerence of Casimir forces
+    to obtain bounds on non-Newtonian forces with strengths α ≃ 105 –1017 and length
+    scales R = 0.03–10 µm. See their Fig. 3. These constraints do not place limits on the
+    size of extra ﬂat dimensions.
+  8 XU 13 obtain constraints on non-Newtonian forces with strengths α ≃ 1034 –1036 and
+    length scales R ≃ 1–10 fm. See their Fig. 4 for more details. These constraints do not
+    place limits on the size of extra ﬂat dimensions.
+  9 BEZERRA 11 obtain constraints on non-Newtonian forces with strengths 1011 . α .
+      1018 and length scales R = 30–1260 nm. See their Fig. 2 for more details. These
+    constraints do not place limits on the size of extra ﬂat dimensions.
+ 10 SUSHKOV 11 obtain improved limits on non-Newtonian forces with strengths 107 .
+       α . 1011 and length scales 0.4 µm < R < 4 µm (95% CL). See their Fig. 2.
+    These bounds do not place limits on the size of extra ﬂat dimensions. However, a model
+    dependent bound of M∗ > 70 TeV is obtained assuming gauge bosons that couple to
+    baryon number also propagate in (4 + δ) dimensions.
+ 11 BEZERRA 10 obtain improved constraints on non-Newtonian forces with strengths
+    1019 . α . 1029 and length scales R = 1.6–14 nm (95% CL). See their Fig. 1.
+    This bound does not place limits on the size of extra ﬂat dimensions.
+ 12 MASUDA 09 obtain improved constraints on non-Newtonian forces with strengths 109 .
+     α . 1011 and length scales R = 1.0–2.9 µm (95% CL). See their Fig. 3. This bound
+    does not place limits on the size of extra ﬂat dimensions.
+ 13 GERACI 08 obtain improved constraints on non-Newtonian forces with strengths α >
+    14,000 and length scales R = 5–15 µm. See their Fig. 9. This bound does not place
+    limits on the size of extra ﬂat dimensions.
+
+
+
+https://pdg.lbl.gov                        Page 2                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+ 14 TRENKEL 08 uses two independent measurements of Newton’s constant G to constrain
+    new forces with strength α ≃ 10−4 and length scales R = 0.02–1 m. See their Fig. 1.
+    This bound does not place limits on the size of extra ﬂat dimensions.
+ 15 DECCA 07A search for new forces and obtain bounds in the region with strengths α ≃
+     1013 –1018 and length scales R = 20–86 nm. See their Fig. 6. This bound does not
+    place limits on the size of extra ﬂat dimensions.
+ 16 KAPNER 07 search for new forces, probing a range of α ≃ 10−3 –105 and length
+    scales R ≃ 10–1000 µm. For δ = 1 the bound on R is 44 µm. For δ = 2, the bound is
+    expressed in terms of M∗ , here translated to a bound on the radius. See their Fig. 6 for
+    details on the bound.
+ 17 TU 07 search for new forces probing a range of α ≃ 10−1 –105 and length scales R
+    ≃ 20–1000 µm. For δ = 1 the bound on R is 53 µm. See their Fig. 3 for details on the
+    bound.
+ 18 SMULLIN 05 search for new forces, and obtain bounds in the region with strengths
+    α ≃ 103 –108 and length scales R = 6–20 µm. See their Figs. 1 and 16 for details on
+    the bound. This work does not place limits on the size of extra ﬂat dimensions.
+ 19 HOYLE 04 search for new forces, probing α down to 10−2 and distances down to 10µm.
+    Quoted bound on R is for δ = 2. For δ = 1, bound goes to 160 µm. See their Fig. 34
+    for details on the bound.
+ 20 CHIAVERINI 03 search for new forces, probing α above 104 and λ down to 3µm, ﬁnding
+    no signal. See their Fig. 4 for details on the bound. This bound does not place limits on
+    the size of extra ﬂat dimensions.
+ 21 LONG 03 search for new forces, probing α down to 3, and distances down to about
+    10µm. See their Fig. 4 for details on the bound.
+ 22 HOYLE 01 search for new forces, probing α down to 10−2 and distances down to 20µm.
+    See their Fig. 4 for details on the bound. The quoted bound is for α ≥ 3.
+ 23 HOSKINS 85 search for new forces, probing distances down to 4 mm. See their Fig. 13
+    for details on the bound. This bound does not place limits on the size of extra ﬂat
+    dimensions.
+
+
+Limits on R from On-Shell Production of Gravitons: δ = 2
+      This section includes limits on on-shell production of gravitons in collider and astro-
+      physical processes. Bounds quoted are on R, the assumed common radius of the ﬂat
+      extra dimensions, for δ = 2 extra dimensions. Studies often quote bounds in terms of
+      derived parameter; experiments are actually sensitive to the masses of the KK gravi-
+      tons: m~n = ~ n /R. See the Review on “Extra Dimensions” for details. Bounds are
+      given in µm for δ = 2.
+VALUE (µm)                   CL%           DOCUMENT ID               TECN      COMMENT
+<    3.8                95        1 AAD             21F ATLS p p → j G
+<    0.00016            95        2 HANNESTAD 03                    Neutron star heating
+• • • We do not use the following data for averages, ﬁts, limits, etc. • • •
+< 56                    95        3 SIRUNYAN        21A CMS p p → Z G
+<    4.1                95        4 TUMASYAN 21D CMS p p → j G
+                                  5 SIRUNYAN        17AQ CMS p p → γ G
+< 90                    95        6 AABOUD          16F ATLS p p → γ G
+                                  7 KHACHATRY...16N CMS p p → γ G
+                                  8 AAD             15CS ATLS p p → γ G
+< 127                   95        9 AAD             13C ATLS p p → γ G
+< 34.4                  95       10 AAD             13D ATLS p p → j j
+<    0.0087             95       11 AJELLO          12 FLAT Neutron star γ sources
+< 245                   95       12 AALTONEN        08AC CDF        p p → γ G, j G
+< 615                   95       13 ABAZOV          08S D0          pp → γG
+<    0.916              95       14 DAS             08              Supernova cooling
+
+https://pdg.lbl.gov                        Page 3                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+<   350                      95        15 ABULENCIA,A         06     CDF       pp → jG
+<   270                      95        16 ABDALLAH            05B    DLPH      e+ e− → γ G
+<   210                      95        17 ACHARD              04E    L3        e+ e− → γ G
+<   480                      95        18 ACOSTA              04C    CDF       pp → jG
+<     0.00038                95        19 CASSE               04               Neutron star γ sources
+<   610                      95        20 ABAZOV              03     D0        pp → jG
+<     0.96                   95        21 HANNESTAD           03               Supernova cooling
+<     0.096                  95        22 HANNESTAD           03               Diﬀuse γ background
+<     0.051                  95        23 HANNESTAD           03               Neutron star γ sources
+<   300                      95        24 HEISTER             03C    ALEP      e+ e− → γ G
+                                       25 FAIRBAIRN           01               Cosmology
+<     0.66                   95        26 HANHART             01               Supernova cooling
+                                       27 CASSISI             00               Red giants
+<1300                     95           28 ACCIARRI            99S
+                                                             L3                e+ e− → Z G
+ 1 AAD 21F search for p p → j G , using 139 fb−1 of data at √s = 13 TeV to place lower
+   limits on MD for two to six extra dimensions (see their Table X), from which this bound
+   on R is derived. This limit supersedes that in AABOUD 18I.
+ 2 HANNESTAD 03 obtain a limit on R from the heating of old neutron stars by the
+   surrounding cloud of trapped KK gravitons. Limits for all δ ≤ 7 are given in their
+   Tables V and VI. These limits supersede those in HANNESTAD 02.
+ 3 SIRUNYAN 21A search for p p → Z G , using 137 fb−1 of data at √s = 13 TeV to place
+   lower limits on MD for two to seven extra dimensions (see their Figure 12), from which
+   this bound on R is derived. These limits supersede those obtained in SIRUNYAN 18BV.
+ 4 TUMASYAN 21D search for p p → j G , using 137 fb−1 of data at √s = 13 TeV to
+   place lower limits on MD for two to seven extra dimensions (see their Table 3), from
+   which this bound on R is derived. This limit supersedes that in SIRUNYAN 18S.
+ 5 SIRUNYAN 17AQ search for p p → γ G , using 12.9 fb−1 of data at √s = 13 TeV to
+   place limits on MD for three to six extra dimensions (see their Table 3).
+ 6 AABOUD 16F search for p p → γ G , using 3.2 fb−1 of data at √s = 13 TeV to place
+   limits on MD for two to six extra dimensions (see their Figure 9), from which this bound
+   on R is derived.
+ 7 KHACHATRYAN 16N search for p p → γ G , using 19.6 fb−1 of data at √s = 8 TeV
+   to place limits on MD for three to six extra dimensions (see their Table 5).
+ 8 AAD 15CS search for p p → γ G , using 20.3 fb−1 of data at √s = 8 TeV to place lower
+   limits on MD for two to six extra dimensions (see their Fig. 18).
+ 9 AAD 13C search for p p → γ G , using 4.6 fb−1 of data at √s = 7 TeV to place bounds
+   on MD for two to six extra dimensions, from which this bound on R is derived.
+10 AAD 13D search for the dijet decay of quantum black holes in 4.8 fb−1 of data produced
+                       √
+   in p p collisions at s = 7 TeV to place bounds on MD for two to seven extra dimensions,
+   from which these bounds on R are derived. Limits on MD for all δ ≤ 7 are given in
+   their Table 3.
+11 AJELLO 12 obtain a limit on R from the gamma-ray emission of point γ sources that
+   arise from the photon decay of KK gravitons which are gravitationally bound around
+   neutron stars. Limits for all δ ≤ 7 are given in their Table 7.
+12 AALTONEN 08AC search for p p → γ G and p p → j G at √s = 1.96 TeV with 2.0
+   fb−1 and 1.1 fb−1 respectively, in order to place bounds on the fundamental scale and
+   size of the extra dimensions. See their Table III for limits on all δ ≤ 6.
+13 ABAZOV 08S search for p p → γ G , using 1 fb−1 of data at √s = 1.96 TeV to place
+   bounds on MD for two to eight extra dimensions, from which these bounds on R are
+   derived. See their paper for intermediate values of δ.
+14 DAS 08 obtain a limit on R from Kaluza-Klein graviton cooling of SN1987A due to
+   plasmon-plasmon annihilation.
+15 ABULENCIA,A 06 search for p p → j G using 368 pb−1 of data at √s = 1.96 TeV. See
+   their Table II for bounds for all δ ≤ 6.
+
+https://pdg.lbl.gov                        Page 4                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+ 16 ABDALLAH 05B search for e + e − → γ G at √s = 180–209 GeV to place bounds on
+    the size of extra dimensions and the fundamental scale. Limits for all δ ≤ 6 are given
+    in their Table 6. These limits supersede those in ABREU 00Z.
+ 17 ACHARD 04E search for e + e − → γ G at √s = 189–209 GeV to place bounds on the
+    size of extra dimensions and the fundamental scale. See their Table 8 for limits with
+    δ ≤ 8. These limits supersede those in ACCIARRI 99R.
+ 18 ACOSTA 04C search for p p → j G at √s = 1.8 TeV to place bounds on the size of
+    extra dimensions and the fundamental scale. See their paper for bounds on δ = 4, 6.
+ 19 CASSE 04 obtain a limit on R from the gamma-ray emission of point γ sources that
+    arises from the photon decay of gravitons around newly born neutron stars, applying the
+    technique of HANNESTAD 03 to neutron stars in the galactic bulge. Limits for all δ ≤
+    7 are given in their Table I.
+ 20 ABAZOV 03 search for p p → j G at √s=1.8 TeV to place bounds on M for 2 to 7
+                                                                                 D
+    extra dimensions, from which these bounds on R are derived. See their paper for bounds
+    on intermediate values of δ. We quote results without the approximate NLO scaling
+    introduced in the paper.
+ 21 HANNESTAD 03 obtain a limit on R from graviton cooling of supernova SN1987a.
+    Limits for all δ ≤ 7 are given in their Tables V and VI.
+ 22 HANNESTAD 03 obtain a limit on R from gravitons emitted in supernovae and which
+    subsequently decay, contaminating the diﬀuse cosmic γ background. Limits for all δ ≤ 7
+    are given in their Tables V and VI. These limits supersede those in HANNESTAD 02.
+ 23 HANNESTAD 03 obtain a limit on R from gravitons emitted in two recent supernovae
+    and which subsequently decay, creating point γ sources. Limits for all δ ≤ 7 are given in
+    their Tables V and VI. These limits are corrected in the published erratum.
+ 24 HEISTER 03C use the process e + e − → γ G at √s = 189–209 GeV to place bounds
+    on the size of extra dimensions and the scale of gravity. See their Table 4 for limits with
+    δ ≤ 6 for derived limits on MD .
+ 25 FAIRBAIRN 01 obtains bounds on R from over production of KK gravitons in the early
+    universe. Bounds are quoted in paper in terms of fundamental scale of gravity. Bounds
+    depend strongly on temperature of QCD phase transition and range from R< 0.13 µm
+    to 0.001 µm for δ=2; bounds for δ=3,4 can be derived from Table 1 in the paper.
+ 26 HANHART 01 obtain bounds on R from limits on graviton cooling of supernova SN 1987a
+    using numerical simulations of proto-neutron star neutrino emission.
+ 27 CASSISI 00 obtain rough bounds on M (and thus R) from red giant cooling for δ=2,3.
+                                             D
+    See their paper for details.
+ 28 ACCIARRI 99S search for e + e − → Z G at √s=189 GeV. Limits on the gravity scale
+    are found in their Table 2, for δ ≤ 4.
+
+
+Mass Limits on MTT
+      This section includes limits on the cut-oﬀ mass scale, MTT , of dimension-8 operators
+      from KK graviton exchange in models of large extra dimensions. Ambiguities in the
+      UV-divergent summation are absorbed into the parameter λ, which is taken to be λ =
+      ±1 in the following analyses. Bounds for λ = − 1 are shown in parenthesis after the
+      bound for λ = + 1, if appropriate. Diﬀerent papers use slightly diﬀerent deﬁnitions of
+      the mass scale. The deﬁnition used here is related to another popular convention by
+      M4 = (2/π) Λ4 , as discussed in the above Review on “Extra Dimensions.”
+        TT              T
+VALUE (TeV)               CL%           DOCUMENT ID               TECN      COMMENT
+> 9.02                95              1 SIRUNYAN 18DD CMS p p → dijet, ang. distrib.
+>20.6      (> 15.7) 95                2 GIUDICE  03 RVUE Dim-6 operators
+• • • We do not use the following data for averages, ﬁts, limits, etc. • • •
+> 8.3      (>7.1)     95        3 HAYRAPETY...24AJ CMS p p → γ γ
+> 6.7                 95        4 SIRUNYAN       21N CMS p p → e + e − ,µ+ µ−
+> 6.9                 95        5 SIRUNYAN       19AC CMS p p → e + e − ,µ+ µ− ,γ γ
+
+https://pdg.lbl.gov                        Page 5                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+> 6.5                     95          6 AABOUD             17AP   ATLS pp → γγ
+> 3.8                     95          7 AAD                14BE   ATLS p p → e + e − , µ+ µ−
+> 3.2                     95          8 AAD                13E    ATLS p p → e + e − ,µ+ µ− ,γ γ
+                                      9 BAAK               12     RVUE Electroweak
+>   0.90     (>0.92)   95            10 AARON              11C    H1   e± p → e± X
+>   1.48               95            11 ABAZOV             09AE   D0   p p → dijet, ang. distrib.
+>   1.45               95            12 ABAZOV             09D    D0   p p → e + e −, γ γ
+>   1.1      (> 1.0)   95            13 SCHAEL             07A    ALEP e+ e− → e+ e−
+>   0.898    (> 0.998) 95            14 ABDALLAH           06C    DLPH e + e − → ℓ+ ℓ−
+>   0.853    (> 0.939) 95            15 GERDES             06          p p → e + e −, γ γ
+>   0.96     (> 0.93) 95             16 ABAZOV             05V    D0   p p → µ+ µ−
+>   0.78     (> 0.79) 95             17 CHEKANOV           04B    ZEUS e ± p → e ± X
+>   0.805    (> 0.956) 95            18 ABBIENDI           03D    OPAL e + e − → γ γ
+>   0.7      (> 0.7)   95            19 ACHARD             03D    L3   e+ e− → Z Z
+>   0.82     (> 0.78) 95             20 ADLOFF             03     H1   e± p → e± X
+>   1.28     (> 1.25) 95             21 GIUDICE            03     RVUE
+>   0.80     (> 0.85) 95             22 HEISTER            03C    ALEP e + e − → γ γ
+>   0.84     (> 0.99) 95             23 ACHARD             02D    L3   e+ e− → γ γ
+>   1.2      (> 1.1)   95            24 ABBOTT             01     D0   p p → e + e −, γ γ
+>   0.60     (> 0.63) 95             25 ABBIENDI           00R    OPAL e + e − → µ+ µ−
+>   0.63     (> 0.50) 95             25 ABBIENDI           00R    OPAL e + e − → τ + τ −
+>   0.68     (> 0.61) 95             25 ABBIENDI           00R    OPAL e + e − → µ+ µ− ,τ + τ −
+                                     26 ABREU              00A    DLPH e + e − → γ γ
+> 0.680     (> 0.542)     95         27 ABREU              00S    DLPH e + e − → µ+ µ− ,τ + τ −
+> 15–28                   99.7       28 CHANG              00B    RVUE Electroweak
+> 0.98                    95         29 CHEUNG             00     RVUE e + e − → γ γ
+> 0.29–0.38               95         30 GRAESSER           00     RVUE (g−2)µ
+> 0.50–1.1                95         31 HAN                00
+                                                          RVUE Electroweak
+> 2.0      (> 2.0)        95         32 MATHEWS            00
+                                                          RVUE p p → j j
+> 1.0      (> 1.1)        95         33 MELE              RVUE e + e − → V V
+                                                           00
+                                     34 ABBIENDI           99P
+                                                          OPAL
+                                     35 ACCIARRI           99M
+                                                          L3
+                                     36 ACCIARRI           99S
+                                                          L3
+> 1.412     (> 1.077) 95             37 BOURILKOV          99     e+ e− → e+ e−
+ 1 SIRUNYAN 18DD use dijet angular distributions in 35.9 fb−1 of data from p p collisions
+      √
+   at s = 13 TeV to place a lower bound on ΛT , here converted to MT T . This updates
+   the results of SIRUNYAN 17F.
+ 2 GIUDICE 03 place bounds on Λ , the coeﬃcient of the gravitationally-induced dimension-
+                         P        6 P
+   6 operator (2πλ/Λ2 )( f γµ γ 5 f)( f γ µ γ 5 f), using data from a variety of experiments.
+                      6
+   Results are quoted for λ= ± 1 and are independent of δ.
+ 3 HAYRAPETYAN 24AJ use 138 fb−1 of data from p p collisions at √s = 13 TeV to place
+   lower limits on MT T (equivalent to their MS ). This updates the results of SIRUN-
+   YAN 18DU.
+ 4 SIRUNYAN 21N use 137 (140) fb−1 of data from p p collisions at √s = 13 TeV in the
+   dielectron (dimuon) channels to place a lower limit on ΛT , here converted to MT T .
+   Bounds on individual channels can be found in their Table 7.
+ 5 SIRUNYAN 19AC use 35.9 (36.3) fb−1 of data from p p collisions at √s = 13 TeV in
+   the dielectron (dimuon) channels to place a lower limit on ΛT , here converted to MT T .
+   The dielectron and dimuon channels are combined with previous results in the diphoton
+   channel to set the best limit. Bounds on individual channels and diﬀerent priors can be
+   found in their Table 2. This updates the results in KHACHATRYAN 15AE.
+
+
+https://pdg.lbl.gov                        Page 6                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+  6 AABOUD 17AP use 36.7 fb−1 of data from p p collisions at √s = 13 TeV to place lower
+    limits on MT T (equivalent to their MS ). This updates the results of AAD 13AS.
+  7 AAD 14BE use 20 fb−1 of data from p p collisions at √s = 8 TeV in the dilepton channel
+    to place lower limits on MT T (equivalent to their MS ).
+  8 AAD 13E use 4.9 and 5.0 fb−1 of data from p p collisions at √s = 7 TeV in the
+    dielectron and dimuon channels, respectively, to place lower limits on MT T (equivalent
+    to their MS ). The dielectron and dimuon channels are combined with previous results in
+    the diphoton channel to set the best limit. Bounds on individual channels and diﬀerent
+    priors can be found in their Table VIII.
+  9 BAAK 12 use electroweak precision observables to place bounds on the ratio Λ /M
+                                                                                     T    D
+    as a function of MD . See their Fig. 22 for constraints with a Higgs mass of 120 GeV.
+ 10 AARON 11C search for deviations in the diﬀerential cross section of e ± p → e ± X in
+                                 √
+    446 pb−1 of data taken at s = 301 and 319 GeV to place a bound on MT T .
+ 11 ABAZOV 09AE use dijet angular distributions in 0.7 fb−1 of data from p p collisions at
+    √
+      s = 1.96 TeV to place lower bounds on ΛT (equivalent to their MS ), here converted
+    to MT T .
+ 12 ABAZOV 09D use 1.05 fb−1 of data from p p collisions at √s = 1.96 TeV to place lower
+    bounds on ΛT (equivalent to their Ms ), here converted to MT T .
+ 13 SCHAEL 07A use e + e − collisions at √s = 189–209 GeV to place lower limits on Λ ,
+                                                                                          T
+    here converted to limits on MT T .
+ 14 ABDALLAH 06C use e + e − collisions at √s ∼ 130–207 GeV to place lower limits on
+    MT T , which is equivalent to their deﬁnition of Ms . Bound shown includes all possible
+    ﬁnal state leptons, ℓ = e, µ, τ . Bounds on individual leptonic ﬁnal states can be found
+    in their Table 31.
+ 15 GERDES 06 use 100 to 110 pb−1 of data from p p collisions at √s = 1.8 TeV, as
+    recorded by the CDF Collaboration during Run I of the Tevatron. Bound shown includes
+    a K -factor of 1.3. Bounds on individual e + e − and γ γ ﬁnal states are found in their
+    Table I.
+ 16 ABAZOV 05V use 246 pb−1 of data from p p collisions at √s = 1.96 TeV to search for
+    deviations in the diﬀerential cross section to µ+ µ− from graviton exchange.
+ 17 CHEKANOV 04B search for deviations in the diﬀerential cross section of e ± p → e ± X
+    with 130 pb−1 of combined data and Q 2 values up to 40,000 GeV2 to place a bound
+    on MT T .
+ 18 ABBIENDI 03D use e + e − collisions at √s=181–209 GeV to place bounds on the ultra-
+    violet scale MTT , which is equivalent to their deﬁnition of Ms .
+ 19 ACHARD 03D look for deviations in the cross section for e + e − → Z Z from √s =
+    200–209 GeV to place a bound on MTT .
+ 20 ADLOFF 03 search for deviations in the diﬀerential cross section of e ± p → e ± X at
+    √
+      s=301 and 319 GeV to place bounds on MTT .
+ 21 GIUDICE 03 review existing experimental bounds on M
+                                                            TT and derive a combined limit.
+ 22 HEISTER 03C use e + e − collisions at √s= 189–209 GeV to place bounds on the scale
+    of dim-8 gravitational interactions. Their M± is equivalent to our MTT with λ= ± 1.
+                                                  s
+ 23 ACHARD 02 search for s-channel graviton exchange eﬀects in e + e − → γ γ at E
+                                                                                       cm =
+    192–209 GeV.
+ 24 ABBOTT 01 search for variations in diﬀerential cross sections to e + e − and γ γ ﬁnal
+    states at the Tevatron.
+ 25 ABBIENDI 00R uses e + e − collisions at √s= 189 GeV.
+ 26 ABREU 00A search for s-channel graviton exchange eﬀects in e + e − → γ γ at E =
+                                                                                        cm
+    189–202 GeV.
+ 27 ABREU 00S uses e + e − collisions at √s=183 and 189 GeV. Bounds on µ and τ individual
+    ﬁnal states given in paper.
+ 28 CHANG 00B derive 3σ limit on M
+                                          TT of (28,19,15) TeV for δ=(2,4,6) respectively
+    assuming the presence of a torsional coupling in the gravitational action. Highly model
+    dependent.
+
+https://pdg.lbl.gov                        Page 7                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+ 29 CHEUNG 00 obtains limits from anomalous diphoton production at OPAL due to graviton
+    exchange. Original limit for δ=4. However, unknown UV theory renders δ dependence
+    unreliable. Original paper works in HLZ convention.
+ 30 GRAESSER 00 obtains a bound from graviton contributions to g−2 of the muon through
+    loops of 0.29 TeV for δ=2 and 0.38 TeV for δ=4,6. Limits scale as λ1/2 . However
+    calculational scheme not well-deﬁned without speciﬁcation of high-scale theory. See the
+    “Extra Dimensions Review.”
+ 31 HAN 00 calculates corrections to gauge boson self-energies from KK graviton loops and
+    constrain them using S and T. Bounds on MTT range from 0.5 TeV (δ=6) to 1.1 TeV
+    (δ=2); see text. Limits have strong dependence, λδ+ 2 , on unknown λ coeﬃcient.
+ 32 MATHEWS 00 search for evidence of graviton exchange in CDF and DØ dijet production
+    data. See their Table 2 for slightly stronger δ-dependent bounds. Limits expressed in
+    terms of Mf4 = M4 /8.
+                S      TT
+ 33 MELE 00 obtains bound from KK graviton contributions to e + e − → V V (V =γ,W ,Z )
+    at LEP. Authors use Hewett conventions.
+ 34 ABBIENDI 99P search for s-channel graviton exchange eﬀects in e + e − → γ γ at
+    E cm =189 GeV. The limits G+ > 660 GeV and G− > 634 GeV are obtained from
+    combined E cm =183 and 189 GeV data, where G± is a scale related to the fundamental
+    gravity scale.
+ 35 ACCIARRI 99M search for the reaction e + e − → γ G and s-channel graviton exchange
+    eﬀects in e + e − → γ γ, W + W − , Z Z , e + e − , µ+ µ− , τ + τ − , q q at E cm =183 GeV.
+    Limits on the gravity scale are listed in their Tables 1 and 2.
+ 36 ACCIARRI 99S search for the reaction e + e − → Z G and s-channel graviton exchange
+    eﬀects in e + e − → γ γ, W + W − , Z Z , e + e − , µ+ µ− , τ + τ − , q q at E cm =189 GeV.
+    Limits on the gravity scale are listed in their Tables 1 and 2.
+ 37 BOURILKOV 99 performs global analysis of LEP data on e + e − collisions at √s=183
+    and 189 GeV. Bound is on ΛT .
+
+
+Limits on 1/R = Mc
+      This section includes limits on 1/R = Mc , the compactiﬁcation scale in models with
+      one TeV-sized extra dimension, due to exchange of Standard Model KK excitations.
+      Bounds assume fermions are not in the bulk, unless stated otherwise. See the “Extra
+      Dimensions” review for discussion of model dependence.
+VALUE (TeV)           CL%          DOCUMENT ID               TECN      COMMENT
+>4.16             95             1 AAD        12CC ATLS p p → ℓ ℓ
+>6.1                             2 BARBIERI   04 RVUE Electroweak
+• • • We do not use the following data for averages, ﬁts, limits, etc. • • •
+                            3 FLORES          23 RVUE minimal universal extra dims
+                            4 AVNISH          21 RVUE p p → multijet
+                            5 AABOUD          18AV ATLS p p → t t t t
+                            6 AABOUD          18CE ATLS p p → t t t t
+>3.8              95        7 ACCOMANDO 15 RVUE Electroweak
+>3.40             95        8 KHACHATRY...15T CMS p p → ℓ X
+                            9 CHATRCHYAN 13AQ CMS p p → ℓ X
+>1.38             95      10 CHATRCHYAN 13W CMS p p → γ γ, δ=6, M =5 TeV
+                                                                             D
+>0.715            95      11  EDELHAUSER 13 RVUE p p → ℓ ℓ + X
+>1.40             95       12 AAD             12CP ATLS p p → γ γ, δ=6, MD =5 TeV
+>1.23             95       13 AAD             12X ATLS p p → γ γ, δ=6, MD =5 TeV
+>0.26             95      14 ABAZOV           12M D0         p p → µµ
+>0.75             95       15 BAAK            12 RVUE Electroweak
+                           16 FLACKE          12 RVUE Electroweak
+
+https://pdg.lbl.gov                        Page 8                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+>0.43                95       17 NISHIWAKI      12 RVUE H → W W , γ γ
+>0.729               95       18 AAD            11F ATLS p p → γ γ, δ=6, MD =5 TeV
+>0.961               95       19 AAD            11X ATLS p p → γ γ, δ=6, MD =5 TeV
+>0.477               95       20 ABAZOV         10P D0        p p → γ γ, δ=6, MD =5 TeV
+>1.59                95       21 ABAZOV         09AE D0       p p → dijet, angular dist.
+>0.6                 95       22 HAISCH         07 RVUE B → Xs γ
+>0.6                 90       23 GOGOLADZE 06 RVUE Electroweak
+>3.3                 95       24 CORNET         00 RVUE Electroweak
+> 3.3–3.8            95       25 RIZZO          00 RVUE Electroweak
+  1 AAD 12CC use 4.9 and 5.0 fb−1 of data from p p collisions at √s = 7 TeV in the
+    dielectron and dimuon channels, respectively, to place a lower bound on the mass of the
+    lightest KK Z /γ boson (equivalent to 1/R = Mc ). The limit quoted here assumes a ﬂat
+    prior corresponding to when the pure Z /γ KK cross section term dominates. See their
+    Section 15 for more details.
+  2 BARBIERI 04 use electroweak precision observables to place a lower bound on the com-
+    pactiﬁcation scale 1/R. Both the gauge bosons and the Higgs boson are assumed to
+    propagate in the bulk.
+  3 FLORES 23 use a number of 13 TeV Run 2 searches at the LHC to place constraints
+    on the compactiﬁcation scale 1/R and cutoﬀ scale Λ in the minimal universal extra
+    dimension model with Standard Model ﬁelds propagating in the bulk (see their Fig.6).
+  4 AVNISH 21 perform a study on the ATLAS collaboration search for multiple jets plus
+                                                    √
+    missing transverse energy from p p collisions at s = 13 TeV and integrated luminosity
+    of 139 fb−1 , to place constraints on the compactiﬁcation scale and cutoﬀ scale Λ in
+    universal extra dimension models with Standard Model ﬁelds propagating in the bulk.
+  5 AABOUD 18AV use 36.1 fb−1 of data from p p collisions at √s = 13 TeV in ﬁnal states
+    with multiple b-jets, to place a lower bound on the compactiﬁcation scale in a model
+    with two universal extra dimensions. Assuming the radii of the two extra dimensions are
+    equal, a lower limit of 1.8 TeV for the Kaluza-Klein mass is obtained.
+  6 AABOUD 18CE use 36.1 fb−1 of data from p p collisions at √s = 13 TeV in ﬁnal states
+    with same-charge leptons and b-jets, to place a lower bound on the compactiﬁcation
+    scale in a model with two universal extra dimensions. Assuming the radii of the two extra
+    dimensions are equal, a lower limit of 1.45 TeV for the Kaluza-Klein mass is obtained.
+  7 ACCOMANDO 15 use electroweak precision observables to place a lower bound on the
+    compactiﬁcation scale 1/R. See their Fig. 2 for the bound as a function of sinβ, which
+    parametrizes the VEV contribution from brane and bulk Higgs ﬁelds. The quoted value
+    is for the minimum bound which occurs at sinβ = 0.45.
+  8 KHACHATRYAN 15T use 19.7 fb−1 of data from p p collisions at √s = 8 TeV to place
+    a lower bound on the compactiﬁcation scale 1/R.
+  9 CHATRCHYAN 13AQ use 5.0 fb−1 of data from p p collisions at √s = 7 TeV and a
+                                 √
+    further 3.7 fb−1 of data at s = 8 TeV to place a lower bound on the compactiﬁcation
+    scale 1/R, in models with universal extra dimensions and Standard Model ﬁelds propa-
+    gating in the bulk. See their Fig. 5 for the bound as a function of the universal bulk
+    fermion mass parameter µ.
+ 10 CHATRCHYAN 13W use diphoton events with large missing transverse momentum in
+                                                        √
+    4.93 fb−1 of data produced from p p collisions at s = 7 TeV to place a lower bound
+    on the compactiﬁcation scale in a universal extra dimension model with gravitational
+    decays. The bound assumes that the cutoﬀ scale Λ, for the radiative corrections to the
+    Kaluza-Klein masses, satisﬁes Λ/Mc = 20. The model parameters are chosen such that
+    the decay γ ∗ → G γ occurs with an appreciable branching fraction.
+ 11 EDELHAUSER 13 use 19.6 and 20.6 fb−1 of data from p p collisions at √s = 8 TeV
+    analyzed by the CMS Collaboration in the dielectron and dimuon channels, respectively,
+    to place a lower bound on the mass of the second lightest Kaluza-Klein Z /γ boson (con-
+    verted to a limit on 1/R = Mc ). The bound assumes Standard Model ﬁelds propagating
+    in the bulk and that the cutoﬀ scale Λ, for the radiative corrections to the Kaluza-Klein
+    masses, satisﬁes Λ/Mc = 20.
+
+https://pdg.lbl.gov                        Page 9                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+ 12 AAD 12CP use diphoton events with large missing transverse momentum in 4.8 fb−1
+                                                √
+    of data produced from p p collisions at s = 7 TeV to place a lower bound on the
+    compactiﬁcation scale in a universal extra dimension model with gravitational decays.
+    The bound assumes that the cutoﬀ scale Λ, for the radiative corrections to the Kaluza-
+    Klein masses, satisﬁes Λ/Mc = 20. The model parameters are chosen such that the
+    decay γ ∗ → G γ occurs with an appreciable branching fraction.
+ 13 AAD 12X use diphoton events with large missing transverse momentum in 1.07 fb−1
+                                                √
+    of data produced from p p collisions at s = 7 TeV to place a lower bound on the
+    compactiﬁcation scale in a universal extra dimension model with gravitational decays.
+    The bound assumes that the cutoﬀ scale Λ, for the radiative corrections to the Kaluza-
+    Klein masses, satisﬁes Λ/Mc = 20. The model parameters are chosen such that the
+    decay γ ∗ → G γ occurs with an appreciable branching fraction.
+ 14 ABAZOV 12M use same-sign dimuon events in 7.3 fb−1 of data from p p collisions at
+    √
+      s = 1.96 TeV to place a lower bound on the compactiﬁcation scale 1/R, in models
+    with universal extra dimensions where all Standard Model ﬁelds propagate in the bulk.
+ 15 BAAK 12 use electroweak precision observables to place a lower bound on the compact-
+    iﬁcation scale 1/R, in models with universal extra dimensions and Standard Model ﬁelds
+    propagating in the bulk. Bound assumes a 125 GeV Higgs mass. See their Fig. 25 for
+    the bound as a function of the Higgs mass.
+ 16 FLACKE 12 use electroweak precision observables to place a lower bound on the com-
+    pactiﬁcation scale 1/R, in models with universal extra dimensions and Standard Model
+    ﬁelds propagating in the bulk. See their Fig. 1 for the bound as a function of the
+    universal bulk fermion mass parameter µ.
+ 17 NISHIWAKI 12 use up to 2 fb−1 of data from the ATLAS and CMS experiments that
+    constrains the production cross section of a Higgs-like particle to place a lower bound on
+    the compactiﬁcation scale 1/R in universal extra dimension models. The quoted bound
+    assumes Standard Model ﬁelds propagating in the bulk and a 125 GeV Higgs mass. See
+    their Fig. 1 for the bound as a function of the Higgs mass.
+ 18 AAD 11F use diphoton events with large missing transverse energy in 3.1 pb−1 of data
+                                       √
+    produced from p p collisions at s = 7 TeV to place a lower bound on the compactiﬁ-
+    cation scale in a universal extra dimension model with gravitational decays. The bound
+    assumes that the cutoﬀ scale Λ, for the radiative corrections to the Kaluza-Klein masses,
+    satisﬁes Λ/Mc = 20. The model parameters are chosen such that the decay γ ∗ → G γ
+    occurs with an appreciable branching fraction.
+ 19 AAD 11X use diphoton events with large missing transverse energy in 36 pb−1 of data
+                                       √
+    produced from p p collisions at s = 7 TeV to place a lower bound on the compactiﬁ-
+    cation scale in a universal extra dimension model with gravitational decays. The bound
+    assumes that the cutoﬀ scale Λ, for the radiative corrections to the Kaluza-Klein masses,
+    satisﬁes Λ/Mc = 20. The model parameters are chosen such that the decay γ ∗ → G γ
+    occurs with an appreciable branching fraction.
+ 20 ABAZOV 10P use diphoton events with large missing transverse energy in 6.3 fb−1 of
+                                             √
+    data produced from p p collisions at s = 1.96 TeV to place a lower bound on the
+    compactiﬁcation scale in a universal extra dimension model with gravitational decays.
+    The bound assumes that the cutoﬀ scale Λ, for the radiative corrections to the Kaluza-
+    Klein masses, satisﬁes Λ/Mc =20. The model parameters are chosen such that the decay
+    γ ∗ → G γ occurs with an appreciable branching fraction.
+ 21 ABAZOV 09AE use dijet angular distributions in 0.7 fb−1 of data from p p collisions at
+    √
+      s = 1.96 TeV to place a lower bound on the compactiﬁcation scale.
+ 22 HAISCH 07 use inclusive B-meson decays to place a Higgs mass independent bound on
+    the compactiﬁcation scale 1/R in the minimal universal extra dimension model.
+ 23 GOGOLADZE 06 use electroweak precision observables to place a lower bound on the
+    compactiﬁcation scale in models with universal extra dimensions. Bound assumes a 115
+    GeV Higgs mass. See their Fig. 3 for the bound as a function of the Higgs mass.
+ 24 CORNET 00 translates a bound on the coeﬃcient of the 4-fermion operator
+    (ℓ γµ τ a ℓ)(ℓγ µ τ a ℓ) derived by Hagiwara and Matsumoto into a limit on the mass scale
+    of KK W bosons.
+
+https://pdg.lbl.gov                       Page 10                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+ 25 RIZZO 00 obtains limits from global electroweak ﬁts in models with a Higgs in the bulk
+    (3.8 TeV) or on the standard brane (3.3 TeV).
+
+
+Limits on Kaluza-Klein Gravitons in Warped Extra Dimensions
+      This section places limits on the mass of the ﬁrst Kaluza-Klein (KK) excitation of the
+      graviton in the warped extra dimension model of Randall and Sundrum. Bounds in
+      parenthesis assume Standard Model ﬁelds propagate in the bulk. Experimental bounds
+      depend strongly on the warp parameter, k. See the “Extra Dimensions” review for a
+      full discussion.
+
+      Here we list limits for the value of the warp parameter k/M P = 0.1.
+
+VALUE (TeV)            CL%          DOCUMENT ID               TECN      COMMENT
+>4.78             95              1 SIRUNYAN   21N CMS p p                   → G → e + e − , µ+ µ−
+• • • We do not use the following data for averages, ﬁts, limits,            etc. • • •
+                             2 HAYRAPETY...24AE CMS p p                      →   G → HH
+>4.8              95         3 HAYRAPETY...24AJ CMS p p                      →   G → γγ
+                             4 TUMASYAN 24B CMS p p                          →   G → HH
+                             5 TUMASYAN 23AP CMS p p                         →   G → W W, Z Z
+                             6 AAD             22F ATLS p p                  →   G → HH
+                             7 TUMASYAN 22D CMS p p                          →   G → WW
+                             8 TUMASYAN 22J CMS p p                          →   G → ZZ
+                             9 TUMASYAN 22R CMS p p                          →   G → ZZ
+                            10 TUMASYAN 22U CMS p p                          →   G → HH
+                            11 AAD             21AF ATLS p p                 →   G → ZZ
+>4.5              95        12 AAD             21AY ATLS p p                 →   G → γγ
+                            13 AAD             20AT ATLS p p                 →   G → W W, Z Z
+                            14 AAD             20C ATLS p p                  →   G → HH
+                            15 AAD             20T ATLS p p                  →   G → bb
+>2.6              95        16 SIRUNYAN        20AI CMS p p                  →   G → jj
+                            17 SIRUNYAN        20F CMS p p                   →   G → HH
+                            18 AABOUD          19O ATLS p p                  →   G → HH
+                            19 AAD             19D ATLS p p                  →   G → W W, Z Z
+                            20 SIRUNYAN        19BE CMS p p                  →   G → HH
+                            21 AABOUD          18BI ATLS p p                 →   G → tt
+                            22 AABOUD          18CJ ATLS p p                 →   G → V V ,V H,ℓ ℓ
+                            23 AABOUD          18CQ ATLS p p                 →   G → HH
+                            24 AABOUD          18CW ATLS p p                 →   G → HH
+                            25 SIRUNYAN        18AF CMS p p                  →   G → HH
+                            26 SIRUNYAN        18AS CMS p p                  →   G → ZZ
+                            27 SIRUNYAN        18CW CMS p p                  →   G → HH
+                            28 SIRUNYAN        18I CMS p p                   →   G → bb
+                            29 AAD             16R ATLS p p                  →   G → W W ,Z Z
+                            30 AAD             15AZ ATLS p p                 →   G → WW
+                            31 AAD             15CP ATLS p p                 →   G → W W ,Z Z
+>2.68             95        32 AAD             14V ATLS p p                  →   G → e + e − , µ+ µ−
+>1.23 (>0.84)     95        33 AAD             13A ATLS p p                  →   G → WW
+>0.94 (>0.71)     95        34 AAD             13AO ATLS p p                 →   G → WW
+>2.23             95        35 AAD             13AS ATLS p p                 →   γ γ, e + e − , µ+ µ−
+>0.845            95        36 AAD             12AD ATLS p p                 →   G → ZZ
+                            37 AALTONEN        12V CDF       pp              →   G → ZZ
+
+https://pdg.lbl.gov                       Page 11                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+                                 38 BAAK                12    RVUEElectroweak
+                                 39 AALTONEN            11G   CDF pp → G → Z Z
+>1.058               95          40 AALTONEN            11R   CDF p p → G → e + e −, γ γ
+>0.754               95          41 ABAZOV              11H   D0  pp → G → W W
+>0.607                           42 AALTONEN            10N   CDF pp → G → W W
+>1.05                            43 ABAZOV              10F   D0  p p → G → e + e −, γ γ
+                                 44 AALTONEN            08S   CDF pp → G → Z Z
+>0.90                            45 ABAZOV              08J   D0  p p → G → e + e −, γ γ
+                                 46 AALTONEN            07G   CDF pp → G → γγ
+>0.889                           47 AALTONEN            07H   CDF pp → G → ee
+>0.785                           48 ABAZOV              05N   D0  p p → G → ℓ ℓ, γ γ
+>0.71                            49 ABULENCIA           05A   CDF p p → G → ℓℓ
+ 1 SIRUNYAN 21N use 137 (140) fb−1 of data from p p collisions at √s = 13 TeV to
+   search for dilepton resonances in the dielectron (dimuon) channel. See Table 6 for other
+   limits with warp parameter values k/M P = 0.01 and 0.05. This updates the results of
+   SIRUNYAN 18BB.
+ 2 HAYRAPETYAN 24AE use 138 fb−1 of data from p p collisions at √s = 13 TeV to
+   search for Higgs boson pair production in the b b W W ﬁnal state. See their Figure 19
+   for limits on the cross section times branching fraction as a function of the KK graviton
+   mass for k/M P = 0.3, 0.5 and 1.
+ 3 HAYRAPETYAN 24AJ use 138 fb−1 of data from p p collisions at √s = 13 TeV, in the
+   diphoton channel to place a lower limit on the mass of the lightest KK graviton. See
+   their paper for limits with other warp parameter values k/M P = 0.01 and 0.2. This
+   updates the results of SIRUNYAN 18DU.
+ 4 TUMASYAN 24B use 138 fb−1 of data from p p collisions at √s = 13 TeV to search for
+   Higgs boson pair production in the γ γ b b ﬁnal state. See their Figure 6 for limits on the
+   cross section times branching fraction as a function of the KK graviton mass assuming
+   k/M P = 0.5 and 1. This updates the result of SIRUNYAN 19.
+ 5 TUMASYAN 23AP use 138 fb−1 of data from p p collisions at √s = 13 TeV to search
+   for W W , Z Z diboson resonances in q q q q ﬁnal states. See their Figure 7 for the limit
+   on the cross section times branching fraction as a function of the KK graviton mass.
+   Assuming k/M P = 0.5, a graviton mass is excluded below 1400 GeV. This updates the
+   result of SIRUNYAN 20Q.
+ 6 AAD 22F use 126–139 fb−1 of data from p p collisions at √s = 13 TeV to search for
+   Higgs boson pair production in the b b b b ﬁnal state. See their Figure 14 for limits on the
+   cross section times branching fraction as a function of the KK graviton mass. Assuming
+   k/M P = 1, gravitons in the mass range 298–1460 GeV are excluded. This updates the
+   results of AABOUD 19A.
+ 7 TUMASYAN 22D use 137 fb−1 of data from p p collisions at √s = 13 TeV to search for
+   W W resonances in ℓ ν q q ﬁnal states (ℓ = e, µ). See their Figure 6 for the limit on the
+   KK graviton mass as a function of the cross section times branching fraction, including
+   theoretical values for k/M P = 0.5. This updates the results of SIRUNYAN 18AX.
+ 8 TUMASYAN 22J use 137 fb−1 of data from p p collisions at √s = 13 TeV to search
+   for Z Z resonances in the ν ν q q ﬁnal state. See their Figure 10 for the limit on the
+   KK graviton mass as a function of the cross section times branching fraction, assuming
+   k/M P = 0.5 . This updates the result of SIRUNYAN 18BK.
+ 9 TUMASYAN 22R use 138 fb−1 of data from p p collisions at √s = 13 TeV to search for
+   Z Z resonances in 2ℓ 2q ﬁnal states (ℓ = e, µ). See their Figure 8 for the limit on the
+   KK graviton mass as a function of the cross section times branching fraction. Assuming
+   k/M P = 0.5, a graviton mass is excluded below 1200 GeV. This updates the result of
+   SIRUNYAN 18DJ.
+10 TUMASYAN 22U use 138 fb−1 of data from p p collisions at √s = 13 TeV to search
+   for Higgs boson pair production in the b b q q′ ℓ ν, b b ℓ ν ℓ ν and b b ℓ ν ν ℓ ν ν ﬁnal states
+   (ℓ = e, µ). See their Figure 7 for limits on the cross section times branching fraction
+
+
+https://pdg.lbl.gov                       Page 12                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+    as a function of the KK graviton mass, including theoretical values for k/M P = 0.3 and
+    0.5. This updates the results of SIRUNYAN 19CF and SIRUNYAN 18F.
+ 11 AAD 21AF use 139 fb−1 of data from p p collisions at √s = 13 TeV to search for Z Z
+    resonances in the ℓ ℓ ℓ ℓ and ℓ ℓ ν ν ﬁnal states (ℓ=e, µ). See their Figure 8 for the limit
+    on the cross section times branching fraction as a function of the KK graviton mass,
+    including theoretical values for k/M P = 1. This updates the results of AAD 15AU and
+    AABOUD 18BF.
+ 12 AAD 21AY use 139 fb−1 of data from p p collisions at √s = 13 TeV in the diphoton
+    channel to place a lower limit on the mass of the lightest KK graviton. This updates the
+    results of AABOUD 17AP.
+ 13 AAD 20AT use 139 fb−1 of data from p p collisions at √s = 13 TeV to search for diboson
+    resonances in semileptonic ﬁnal states (ℓ ν q q,ℓ ℓ q q, ν ν q q). See their Figure 15 for the
+    limit on the cross section times branching fraction as a function of the KK graviton mass.
+    Lower limits on the graviton mass are also given for k/M P = 1. This updates the results
+    of AABOUD 18AK and AABOUD 18AL.
+ 14 AAD 20C use 36.1 fb−1 of data from p p collisions at √s = 13 TeV to search for Higgs
+    boson pair production in the b b b b, b b W + W − , and b b τ + τ − ﬁnal states. See their
+    Figure 5(b)(c) for limits on the cross section as a function of the KK graviton mass. In
+    the case of k/M P = 1 and 2, gravitons are excluded in the mass range 260–3000 GeV
+    and 260–1760 GeV, respectively.
+ 15 AAD 20T use 139 fb−1 of data from p p collisions at √s = 13 TeV to search for narrow
+    resonances decaying to bottom quark pairs. See their Figure 7 for the limit on the
+    product of the cross section, branching fraction, acceptance and b-tagging eﬃciency as
+    a function of the KK graviton mass. In the case of k/M P = 0.2, KK gravitons in the
+    mass range 1.25–2.8 TeV are excluded.
+ 16 SIRUNYAN 20AI use 137 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for dijet resonances. See their Figure 6 for the limit on the product of the cross section,
+    branching fraction and acceptance as a function of the KK graviton mass. This updates
+    the results of SIRUNYAN 18BO.
+ 17 SIRUNYAN 20F use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to search for
+    Higgs boson pair production in the b b Z Z ﬁnal state. See their Figure 4 for limits on
+    the cross section times branching fraction as a function of the KK graviton mass, and
+    Figure 5 for limits as a function of k/M P .
+ 18 AABOUD 19O use 36.1 fb−1 of data from p p collisions at √s = 13 TeV to search for
+    Higgs boson pair production in the b b W W ﬁnal state. See their Figure 12 for limits
+    on the cross section times branching fraction as a function of the KK graviton mass for
+    k/M P = 1 and k/M P = 2.
+ 19 AAD 19D use 139 fb−1 of data from p p collisions at √s = 13 TeV to search for diboson
+    resonances in the all-hadronic ﬁnal state. See their Figure 9(b) for the limit on the
+    cross section times branching fraction as a function of the KK graviton mass, including
+    theoretical values for k/M P = 1. This updates the results of AABOUD 18F.
+ 20 SIRUNYAN 19BE use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for Higgs boson pair production by combining the results from four ﬁnal states: b b γ γ,
+    b b τ τ , b b b b, and b b V V . See their Figure 7 for limits on the cross section times
+    branching fraction as a function of the KK graviton mass.
+ 21 AABOUD 18BI use 36.1 fb−1 of data from p p collisions at √s = 13 TeV to search for
+    top-quark pairs decaying into the lepton-plus jets topology. See their Figure 16 for the
+    limit on the KK graviton mass as a function of the cross section times branching fraction,
+    including theoretical values for k/M P = 1.
+ 22 AABOUD 18CJ combine the searches for heavy resonances decaying into bosonic and
+                                                                       √
+    leptonic ﬁnal states from 36.1 fb−1 of p p collision data at s = 13 TeV. The lower
+    limit on the KK graviton mass, with k/M P = 1, is 2.3 TeV.
+ 23 AABOUD 18CQ use 36.1 fb−1 of data from p p collisions at √s = 13 TeV to search for
+    Higgs boson pair production in the b b τ + τ − ﬁnal state. See their Figure 2 for limits
+    on the cross section times branching fraction as a function of the KK graviton mass.
+    Assuming k/M P = 1, gravitons in the mass range 325–885 GeV are excluded.
+
+https://pdg.lbl.gov                       Page 13                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+ 24 AABOUD 18CW use 36.1 fb−1 of data from p p collisions at √s = 13 TeV to search for
+    Higgs boson pair production in the γ γ b b ﬁnal state. See their Figure 7 for limits on the
+    cross section times branching fraction as a function of the KK graviton mass.
+ 25 SIRUNYAN 18AF use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to search for
+    Higgs boson pair production in the b b b b ﬁnal state. See their Figure 9 for limits on the
+    cross section times branching fraction as a function of the KK graviton mass, including
+    theoretical values for k/M P = 0.5. This updates the results of KHACHATRYAN 15R.
+ 26 SIRUNYAN 18AS use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to search for
+    Z Z resonances in the ℓ ℓ ν ν ﬁnal state (ℓ=e, µ). See their Figure 5 for the limit on the
+    KK graviton mass as a function of the cross section times branching fraction, including
+    theoretical values for k/M P = 0.1, 0.5, and 1.0.
+ 27 SIRUNYAN 18CW use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for Higgs boson pair production in the b b b b ﬁnal state. See their Figure 8 for limits
+    on the cross section times branching fraction as a function of the KK graviton mass,
+    including theoretical values for k/M P = 0.5.
+ 28 SIRUNYAN 18I use 19.7 fb−1 of data from p p collisions at √s = 8 TeV to search for
+    narrow resonances decaying to bottom quark pairs. See their Figure 3 for the limit on
+    the KK graviton mass as a function of the cross section times branching fraction in the
+    mass range of 325–1200 GeV.
+ 29 AAD 16R use 20.3 fb−1 of data from p p collisions at √s = 8 TeV to place a lower
+    bound on the mass of the lightest KK graviton. See their Figure 4 for the limit on the
+    KK graviton mass as a function of the cross section times branching fraction.
+ 30 AAD 15AZ use 20.3 fb−1 of data from p p collisions at √s = 8 TeV to place a lower
+    bound on the mass of the lightest KK graviton. See their Figure 2 for limits on the KK
+    graviton mass as a function of the cross section times branching ratio.
+ 31 AAD 15CP use 20.3 fb−1 of data from p p collisions at √s = 8 TeV to place a lower
+    bound on the mass of the lightest KK graviton. See their Figures 6b and 6c for the limit
+    on the KK graviton mass as a function of the cross section times branching fraction.
+ 32 AAD 14V use 20.3 (20.5) fb−1 of data from p p collisions at √s = 8 TeV in the dielectron
+    (dimuon) channels to place a lower bound on the mass of the lightest KK graviton. This
+    updates the results of AAD 12CC .
+ 33 AAD 13A use 4.7 fb−1 of data from p p collisions at √s = 7 TeV in the ℓ ν ℓ ν channel,
+    to place a lower bound on the mass of the lightest KK graviton.
+ 34 AAD 13AO use 4.7 fb−1 of data from p p collisions at √s = 7 TeV in the ℓ ν j j channel,
+    to place a lower bound on the mass of the lightest KK graviton.
+ 35 AAD 13AS use 4.9 fb−1 of data from p p collisions at √s = 7 TeV in the diphoton
+    channel to place lower limits on the mass of the lightest KK graviton. The diphoton
+    channel is combined with previous results in the dielectron and dimuon channels to set
+    the best limit. See their Table 2 for warp parameter values k/M P between 0.01 and 0.1.
+    This updates the results of AAD 12Y .
+ 36 AAD 12AD use 1.02 fb−1 of data from p p collisions at √s = 7 TeV to search for KK
+    gravitons in a warped extra dimension decaying to Z Z dibosons in the l l j j and l l l l
+    channels (ℓ=e, µ). The limit is quoted for the combined l l j j + l l l l channels. See their
+    Figure 5 for limits on the cross section σ(G → Z Z ) as a function of the graviton mass.
+ 37 AALTONEN 12V use 6 fb−1 of data from p p collisions at √s = 1.96 TeV to search
+    for KK gravitons in a warped extra dimension decaying to Z Z dibosons in the l l j j
+    and l l l l channels (ℓ=e, µ). It provides improved limits over the previous analysis in
+    AALTONEN 11G. See their Figure 16 for limits from all channels combined on the cross
+    section times branching ratio σ(p p → G ∗ → Z Z ) as a function of the graviton mass.
+ 38 BAAK 12 use electroweak precision observables to place a lower bound on the compact-
+    iﬁcation scale k e−π k R , assuming Standard Model ﬁelds propagate in the bulk and the
+    Higgs is conﬁned to the IR brane. See their Fig. 27 for more details.
+ 39 AALTONEN 11G use 2.5–2.9 fb−1 of data from p p collisions at √s = 1.96 TeV to
+    search for KK gravitons in a warped extra dimension decaying to Z Z dibosons via the
+
+
+
+https://pdg.lbl.gov                       Page 14                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+    e e e e, e e µ µ, µ µ µ µ, e e j j, and µ µ j j channels. See their Fig. 20 for limits on the cross
+    section σ(G → Z Z ) as a function of the graviton mass.
+ 40 AALTONEN 11R uses 5.7 fb−1 of data from p p collisions at √s = 1.96 TeV in the
+    dielectron channel to place a lower bound on the mass of the lightest graviton. It
+    provides combined limits with the diphoton channel analysis of AALTONEN 11U. For
+    warp parameter values k/M P between 0.01 to 0.1 the lower limit on the mass of the
+    lightest graviton is between 612 and 1058 GeV. See their Table I for more details.
+ 41 ABAZOV 11H use 5.4 fb−1 of data from p p collisions at √s = 1.96 TeV to place a
+    lower bound on the mass of the lightest graviton. Their 95% C.L. exclusion limit does
+    not include masses less than 300 GeV.
+ 42 AALTONEN 10N use 2.9 fb−1 of data from p p collisions at √s = 1.96 TeV to place a
+    lower bound on the mass of the lightest graviton.
+ 43 ABAZOV 10F use 5.4 fb−1 of data from p p collisions at √s = 1.96 TeV to place a
+    lower bound on the mass of the lightest graviton. For warp parameter values of k/M P
+    between 0.01 and 0.1 the lower limit on the mass of the lightest graviton is between 560
+    and 1050 GeV. See their Fig. 3 for more details.
+ 44 AALTONEN 08S use p p collisions at √s = 1.96 TeV to search for KK gravitons in
+    warped extra dimensions. They search for graviton resonances decaying to four electrons
+    via two Z bosons using 1.1 fb−1 of data. See their Fig. 8 for limits on σ · B(G → Z Z )
+    versus the graviton mass.
+ 45 ABAZOV 08J use p p collisions at √s = 1.96 TeV to search for KK gravitons in warped
+    extra dimensions. They search for graviton resonances decaying to electrons and photons
+    using 1 fb−1 of data. For warp parameter values of k/M P between 0.01 and 0.1 the
+    lower limit on the mass of the lightest excitation is between 300 and 900 GeV. See their
+    Fig. 4 for more details.
+ 46 AALTONEN 07G use p p collisions at √s = 1.96 TeV to search for KK gravitons in
+    warped extra dimensions. They search for graviton resonances decaying to photons using
+    1.2 fb−1 of data. For warp parameter values of k/M P = 0.1, 0.05, and 0.01 the bounds
+    on the graviton mass are 850, 694, and 230 GeV, respectively. See their Fig. 3 for more
+    details. See also AALTONEN 07H.
+ 47 AALTONEN 07H use p p collisions at √s = 1.96 TeV to search for KK gravitons in
+    warped extra dimensions. They search for graviton resonances decaying to electrons
+    using 1.3 fb−1 of data. For a warp parameter value of k/M P = 0.1 the bound on the
+    graviton mass is 807 GeV. See their Fig. 4 for more details. A combined analysis with
+    the diphoton data of AALTONEN 07G yields for k/M P = 0.1 a graviton mass lower
+    bound of 889 GeV.
+ 48 ABAZOV 05N use p p collisions at √s = 1.96 TeV to search for KK gravitons in warped
+    extra dimensions. They search for graviton resonances decaying to muons, electrons or
+    photons, using 260 pb−1 of data. For warp parameter values of k/M P = 0.1, 0.05, and
+    0.01, the bounds on the graviton mass are 785, 650 and 250 GeV respectively. See their
+    Fig. 3 for more details.
+ 49 ABULENCIA 05A use p p collisions at √s = 1.96 TeV to search for KK gravitons in
+    warped extra dimensions. They search for graviton resonances decaying to muons or
+    electrons, using 200 pb−1 of data. For warp parameter values of k/M P = 0.1, 0.05,
+    and 0.01, the bounds on the graviton mass are 710, 510 and 170 GeV respectively.
+
+
+Limits on Kaluza-Klein Gluons in Warped Extra Dimensions
+       This section places limits on the mass of the ﬁrst Kaluza-Klein (KK) excitation of the
+       gluon in warped extra dimension models with Standard Model ﬁelds propagating in
+       the bulk. Bounds are given for a speciﬁc benchmark model with Γ/m = 15.3% where
+       Γ is the width and m the mass of the KK gluon. See the“Extra Dimensions” review
+       for more discussion.
+VALUE (TeV)                  CL%           DOCUMENT ID               TECN      COMMENT
+>3.8                         95          1 AABOUD             18BI ATLS        gKK → t t → ℓ j
+
+
+https://pdg.lbl.gov                       Page 15                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+• • • We do not use the following data for averages, ﬁts, limits, etc. • • •
+                                     2 HAYRAPETY...24G CMS g
+                                                                      KK → R j → j j j
+                                     3 AABOUD          19AS ATLS gKK → t t → j j
+                                     4 SIRUNYAN        19AL CMS gKK → t T
+>2.5                       95        5 CHATRCHYAN 13BM CMS gKK → t t
+                                     6 CHEN            13A           B → Xs γ
+>1.5                       95        7 AAD             12BV ATLS gKK → t t → ℓ j
+  1 AABOUD 18BI use 36.1 fb−1 of data from p p collisions at √s = 13 TeV. This result
+    updates AAD 13AQ.
+  2 HAYRAPETYAN 24G use 138 fb−1 of data from p p collisions at √s = 13 TeV to place
+    limits on a KK gluon decaying to gluons via a spin-0 radion, R. See their Figure 3 for
+    limits on the cross section times branching fraction as a function of the KK gluon mass
+    and various values of the radion mass. This updates the results of TUMASYAN 22C.
+  3 AABOUD 19AS use 36.1 fb−1 of data from p p collisions at √s = 13 TeV. An upper
+    bound of 3.4 TeV is placed on the KK gluon mass for Γ /m = 30%.
+  4 SIRUNYAN 19AL use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to place
+    limits on a KK gluon decaying to a top quark and a heavy vector-like fermion, T. KK
+    gluon masses between 1.5 and 2.3 TeV and between 2.0 and 2.4 TeV are excluded for T
+    masses of 1.2 and 1.5 TeV, respectively.
+  5 CHATRCHYAN 13BM use 19.7 fb−1 of data from p p collisions at √s = 8 TeV. Bound
+    is for a width of approximately 15–20% of the KK gluon mass.
+  6 CHEN 13A place limits on the KK mass scale for a speciﬁc warped model with custodial
+    symmetry and bulk fermions. See their Figures 4 and 5.
+  7 AAD 12BV use 2.05 fb−1 of data from p p collisions at √s = 7 TeV.
+
+
+
+                                Black Hole Production Limits
+Semiclassical Black Holes
+VALUE (GeV)                          DOCUMENT ID               TECN      COMMENT
+• • • We do not use the following data for averages, ﬁts, limits, etc. • • •
+                                1 SIRUNYAN        18DA CMS p p → multijet
+                                2 AAD             16N ATLS p p → multijet
+                                3 AAD             16O ATLS p p → ℓ + (ℓ ℓ /ℓ j /j j)
+                                4 AAD             13AW ATLS p p → µ µ
+  1 SIRUNYAN 18DA use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for semiclassical black holes decaying to multijet ﬁnal states. No excess of events above
+    the expected level of standard model background was observed. Exclusions at 95% CL
+    are set on the mass threshold for black hole production as a function of the higher-
+    dimensional Planck scale for rotating and nonrotating black holes under several model
+    assumptions (ADD, 2, 4, 6 extra dimensions model) in the 7.1–10.3 TeV range. These
+    limits supersede those in SIRUNYAN 17CP.
+  2 AAD 16N use 3.6 fb−1 of data from p p collisions at √s = 13 TeV to search for semiclas-
+    sical black hole decays to multijet ﬁnal states. No excess of events above the expected
+    level of Standard Model background was observed. Exclusion contours at 95% C.L. are
+    set on the mass threshold for black hole production versus higher-dimensional Planck
+    scale for rotating black holes (ADD, 6 extra dimensions model).
+  3 AAD 16O use 3.2 fb−1 of data from p p collisions at √s = 13 TeV to search for semi-
+    classical black hole decays to high-mass ﬁnal states with leptons and jets. No excess of
+    events above the expected level of Standard Model background was observed. Exclusion
+    contours at 95% C.L. are set on the mass threshold for black hole production versus
+    higher-dimensional Planck scale for rotating black holes (ADD, 2 to 6 extra dimensions).
+
+
+
+https://pdg.lbl.gov                       Page 16                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+  4 AAD 13AW use 20.3 fb−1 of data from p p collisions at √s = 8 TeV to search for semi-
+    classical black hole decays to like-sign dimuon ﬁnal states using large track multiplicity.
+    No excess of events above the expected level of Standard Model background was ob-
+    served. Exclusion contours at 95% C.L. are set on the mass threshold for black hole
+    production versus higher-dimensional Planck scale in various extra dimensions, rotating
+    and non-rotating models.
+
+Quantum Black Holes
+VALUE (GeV)                          DOCUMENT ID               TECN      COMMENT
+• • • We do not use the following data for averages, ﬁts, limits, etc. • • •
+                                1 AAD            24S ATLS p p → ℓ j
+                                2 AAD            23CB ATLS p p → e µ, e τ , µ τ
+                                3 TUMASYAN 23AW CMS p p → τ ν
+                                4 TUMASYAN 23BC CMS p p → γ j
+                                5 TUMASYAN 23H CMS p p → e µ, e τ , µ τ
+                                6 AAD            20T ATLS p p → j j
+                                7 AABOUD         18BA ATLS p p → γ j
+                                8 SIRUNYAN       18AT CMS p p → e µ
+                                9 SIRUNYAN       18DD CMS p p → dijet, ang. distrib.
+                               10 SIRUNYAN       17CP CMS p p → j j
+                               11 KHACHATRY...16BE CMS p p → e µ
+                               12 KHACHATRY...15V CMS p p → j j
+                               13 AAD            14V ATLS p p → e e, µ µ
+                               14 CHATRCHYAN 13A CMS p p → j j
+  1 AAD 24S use 140 fb−1 of data from p p collisions at √s = 13 TeV to search for quantum
+    black hole decays to ﬁnal states with high-invariant-mass lepton + jet. No excess of
+    events above the expected level of Standard Model background was observed. Exclusion
+    limits at 95% C.L. are set on mass thresholds for black hole production in an ADD (6
+    extra dimensions) model and the Randall-Sundrum (one extra dimension) model. The
+    resulting lower mass threshold limits in the ADD (RS) models are 9.2 (6.8) TeV. The
+    ADD limit supersedes that in AAD 14AL.
+  2 AAD 23CB use 139 fb−1 of data from p p collisions at √s = 13 TeV to search for
+    quantum black hole decays with diﬀerent-ﬂavor high-mass dilepton ﬁnal states. No
+    excess of events above the expected level of Standard Model background was observed.
+    Exclusion limits at 95% C.L. are set on mass thresholds for black hole production in ADD
+    (6 extra dimensions) and RS1 models. Assuming the black hole mass threshold is equal
+    to the higher-dimensional Planck scale, mass thresholds below 5.9 (3.8), 5.2 (3.0), and
+    5.1 (3.0) TeV are excluded in the e µ, e τ and µ τ channels for the ADD (RS1) models,
+    respectively. These limits supersede those in AABOUD 18CM.
+  3 TUMASYAN 23AW use 138 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for quantum black hole decays in the tau lepton plus missing transverse momentum ﬁnal
+    state. Assuming the black hole mass threshold is equal to the higher-dimensional Planck
+    scale, threshold masses below 6.6 TeV are excluded in the ADD model with four extra
+    dimensions (see their Figure 8).
+  4 TUMASYAN 23BC use 138 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for quantum black hole decays to ﬁnal states with a photon and a jet. No excess of
+    events above the expected level of Standard Model background was observed. Exclusion
+    limits at 95% C.L. are set on mass thresholds for black hole production in ADD (6
+    extra dimensions) and RS1 models. Assuming the black hole mass threshold is equal
+    to the higher-dimensional Planck scale, mass thresholds below 7.5 TeV and 5.2 TeV are
+    excluded for the ADD and RS1 models, respectively (see their Figure 9).
+  5 TUMASYAN 23H use 138 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for quantum black hole decays with diﬀerent-ﬂavor high-mass dilepton ﬁnal states. No
+    excess of events above the expected level of Standard Model background was observed.
+    Exclusion limits at 95% C.L. are set on mass thresholds for black hole production in the
+
+
+https://pdg.lbl.gov                       Page 17                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+    ADD model (with 4 extra dimensions). Assuming the black hole mass threshold is equal
+    to the higher-dimensional Planck scale, mass thresholds below 5.6, 5.2, and 5.0 TeV are
+    excluded in the e µ, e τ and µ τ channels, respectively.
+  6 AAD 20T use 139 fb−1 of data from p p collisions at √s = 13 TeV to search for quantum
+    black hole decays to ﬁnal states with dijets. No excess of events above the expected
+    level of Standard Model background was observed. Exclusion limits at 95% C.L. are set
+    on mass thresholds for black hole production in an ADD (6 extra dimensions) model.
+    Assuming the black hole mass threshold is equal to the higher-dimensional Planck scale,
+    mass thresholds below 9.4 TeV are excluded. This limit supersedes AABOUD 17AK.
+  7 AABOUD 18BA use 36.7 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for quantum black hole decays to ﬁnal states with a photon and a jet. No excess of
+    events above the expected level of Standard Model background was observed. Exclusion
+    limits at 95% C.L. are set on mass thresholds for black hole production in ADD (6 extra
+    dimensions) and RS1 models. Assuming the black hole mass threshold is equal to the
+    Planck scale, mass thresholds below 7.1 TeV and 4.4 TeV are excluded for the ADD and
+    RS1 models, respectively. These limits supersede those in AAD 16AI.
+  8 SIRUNYAN 18AT use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for quantum black hole decays to e µ ﬁnal states. In Figure 4, lower mass limits of 5.3,
+    5.5 and 5.6 TeV are placed in a model with 4, 5 and 6 extra dimensions, respectively,
+    and a lower mass limit of 3.6 TeV is found for a single warped dimension.
+  9 SIRUNYAN 18DD use 35.9 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for quantum black hole decays in dijet angular distributions. A lower mass limit of 5.9
+    (8.2) TeV is placed in the RS (ADD) model with one (six) extra dimension(s).
+ 10 SIRUNYAN 17CP use 2.3 fb−1 of data from p p collisions at √s = 13 TeV to search
+    for quantum black holes decaying to dijet ﬁnal states. No excess of events above the
+    expected level of standard model background was observed. Limits on the quantum black
+    hole mass threshold are set as a function of the higher-dimensional Planck scale, under
+    the assumption that the mass threshold must exceed the above Planck scale. Depending
+    on the model, mass thresholds in the range up to 5.1–9.0 TeV are excluded.
+ 11 KHACHATRYAN 16BE use 19.7 fb−1 of data from p p collisions at √s = 8 TeV to
+    search for quantum black holes undergoing lepton ﬂavor violating decay to the e µ ﬁnal
+    state. No excess of events above the expected level of standard model background was
+    observed. Exclusion limits at 95% CL are set on mass thresholds for black hole production
+    in the ADD (2–6 ﬂat extra dimensions), RS1 (1 warped extra dimension), and a model
+    with a Planck scale at the TeV scale from a renormalization of the gravitational constant
+    (no extra dimensions). Limits on the black hole mass threshold are set assuming that
+    it is equal to the higher-dimensional Planck scale. Mass thresholds for quantum black
+    holes in the range up to 3.15–3.63 TeV are excluded in the ADD model. In the RS1
+    model, mass thresholds below 2.81 TeV are excluded in the PDG convention for the
+    Schwarzschild radius. In the model with no extra dimensions, mass thresholds below
+    1.99 TeV are excluded.
+ 12 KHACHATRYAN 15V use 19.7 fb−1 of data from p p collisions at √s = 8 TeV to
+    search for quantum black holes decaying to dijet ﬁnal states. No excess of events above
+    the expected level of standard model background was observed. Exclusion limits at
+    95% CL are set on mass thresholds for black hole production in the ADD (2–6 ﬂat
+    extra dimensions) and RS1 (1 warped extra dimension) model. Limits on the black hole
+    mass threshold are set as a function of the higher-dimensional Planck scale, under the
+    assumption that the mass threshold must exceed the above Planck scale. Depending on
+    the model, mass thresholds in the range up to 5.0–6.3 TeV are excluded. This paper
+    supersedes CHATRCHYAN 13AD.
+ 13 AAD 14V use 20.3 (20.5) fb−1 of data in the dielectron (dimuon) channels from p p
+                  √
+    collisions at s = 8 TeV to search for quantum black hole decays involving high-mass
+    dilepton resonances. No excess of events above the expected level of Standard Model
+    background was observed. Exclusion limits at 95% C.L. are set on mass thresholds
+    for black hole production in ADD (6 extra dimensions) and RS1 models. Assuming the
+    black hole mass threshold is equal to the higher-dimensional Planck scale, mass thresholds
+    below 3.65 TeV and 2.24 TeV are excluded for the ADD and RS1 models, respectively.
+
+
+
+https://pdg.lbl.gov                       Page 18                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+ 14 CHATRCHYAN 13A use 5 fb−1 of data from p p collisions at √s = 7 TeV to search
+    for quantum black holes decaying to dijet ﬁnal states. No excess of events above the
+    expected level of standard model background was observed. Exclusion limits at 95%
+    CL are set on mass thresholds for black hole production in the ADD (2–6 ﬂat extra
+    dimensions) and RS (1 warped extra dimension) model. Limits on the black hole mass
+    threshold are set as a function of the higher-dimensional Planck scale, under assumption
+    that the mass threshold must exceed the above Planck scale. Depending on the model,
+    mass thresholds in the range up to 4.0–5.3 TeV are excluded.
+
+                          REFERENCES FOR Extra Dimensions
+AAD            24S    PR D109 032010           G. Aad et al.                        (ATLAS Collab.)
+HAYRAPETY...   24AE   JHEP 2407 293            A. Hayrapetyan et al.                  (CMS Collab.)
+HAYRAPETY...   24AJ   JHEP 2408 215            A. Hayrapetyan et al.                  (CMS Collab.)
+HAYRAPETY...   24G    PRL 133 011801           A. Hayrapetyan et al.                  (CMS Collab.)
+TUMASYAN       24B    JHEP 2405 316            A. Tumasyan et al.                     (CMS Collab.)
+AAD            23CB   JHEP 2310 082            G. Aad et al.                        (ATLAS Collab.)
+FLORES         23     IJMP A38 2350002         M.M. Flores et al.          (WITS, WARS, NIP-UPD+)
+TUMASYAN       23AP   PL B844 137813           A. Tumasyan et al.                     (CMS Collab.)
+TUMASYAN       23AW   JHEP 2309 051            A. Tumasyan et al.                     (CMS Collab.)
+TUMASYAN       23BC   JHEP 2312 189            A. Tumasyan et al.                     (CMS Collab.)
+TUMASYAN       23H    JHEP 2305 227            A. Tumasyan et al.                     (CMS Collab.)
+AAD            22F    PR D105 092002           G. Aad et al.                        (ATLAS Collab.)
+TUMASYAN       22C    PL B832 137263           A. Tumasyan et al.                     (CMS Collab.)
+TUMASYAN       22D    PR D105 032008           A. Tumasyan et al.                     (CMS Collab.)
+TUMASYAN       22J    PR D106 012004           A. Tumasyan et al.                     (CMS Collab.)
+TUMASYAN       22R    JHEP 2204 087            A. Tumasyan et al.                     (CMS Collab.)
+TUMASYAN       22U    JHEP 2205 005            A. Tumasyan et al.                     (CMS Collab.)
+AAD            21AF   EPJ C81 332              G. Aad et al.                        (ATLAS Collab.)
+AAD            21AY   PL B822 136651           G. Aad et al.                        (ATLAS Collab.)
+AAD            21F    PR D103 112006           G. Aad et al.                        (ATLAS Collab.)
+AVNISH         21     PR D103 115011           Avnish et al.
+BLAKEMORE      21     PR D104 L061101          C.P. Blakemore et al.                         (STAN)
+HEACOCK        21     SCI 373 1239             B. Heacock et al.              (NIST, RIKEN, NAGO+)
+SIRUNYAN       21A    EPJ C81 13               A.M. Sirunyan et al.                     (CMS Collab.)
+    Also              EPJ C81 333 (errat.)     A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN       21N    JHEP 2107 208            A.M. Sirunyan et al.                     (CMS Collab.)
+TUMASYAN       21D    JHEP 2111 153            A. Tumasyan et al.                       (CMS Collab.)
+AAD            20AT   EPJ C80 1165             G. Aad et al.                          (ATLAS Collab.)
+AAD            20C    PL B800 135103           G. Aad et al.                          (ATLAS Collab.)
+AAD            20T    JHEP 2003 145            G. Aad et al.                          (ATLAS Collab.)
+LEE            20     PRL 124 101101           J.G. Lee et al.                              (WASH)
+SIRUNYAN       20AI   JHEP 2005 033            A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN       20F    PR D102 032003           A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN       20Q    EPJ C80 237              A.M. Sirunyan et al.                     (CMS Collab.)
+TAN            20A    PRL 124 051301           W.-H. Tan et al.
+AABOUD         19A    JHEP 1901 030            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         19AS   PR D99 092004            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         19O    JHEP 1904 092            M. Aaboud et al.                        (ATLAS   Collab.)
+AAD            19D    JHEP 1909 091            G. Aad et al.                           (ATLAS   Collab.)
+    Also              JHEP 2006 042 (errat.)   G. Aad et al.                           (ATLAS   Collab.)
+SIRUNYAN       19     PL B788 7                A.M. Sirunyan et al.                      (CMS   Collab.)
+SIRUNYAN       19AC   JHEP 1904 114            A.M. Sirunyan et al.                      (CMS   Collab.)
+SIRUNYAN       19AL   EPJ C79 208              A.M. Sirunyan et al.                      (CMS   Collab.)
+SIRUNYAN       19BE   PRL 122 121803           A.M. Sirunyan et al.                      (CMS   Collab.)
+SIRUNYAN       19CF   JHEP 1910 125            A.M. Sirunyan et al.                      (CMS   Collab.)
+AABOUD         18AK   JHEP 1803 042            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18AL   JHEP 1803 009            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18AV   JHEP 1807 089            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18BA   EPJ C78 102              M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18BF   EPJ C78 293              M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18BI   EPJ C78 565              M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18CE   JHEP 1812 039            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18CJ   PR D98 052008            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18CM   PR D98 092008            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18CQ   PRL 121 191801           M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18CW   JHEP 1811 040            M. Aaboud et al.                        (ATLAS   Collab.)
+AABOUD         18F    PL B777 91               M. Aaboud et al.                        (ATLAS   Collab.)
+
+
+https://pdg.lbl.gov                       Page 19                      Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+AABOUD          18I    JHEP 1801 126             M. Aaboud et al.                      (ATLAS Collab.)
+BERGE           18     PRL 120 141101            J. Berge et al.                 (MICROSCOPE Collab.)
+FAYET           18     PR D97 055039             P. Fayet                                      (EPOL)
+FAYET           18A    PR D99 055043             P. Fayet                                (ENSP, EPOL)
+HADDOCK         18     PR D97 062002             C. Haddock et al.               (NAGO, KEK, OSAK+)
+SIRUNYAN        18AF   PL B781 244               A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18AS   JHEP 1803 003             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18AT   JHEP 1804 073             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18AX   JHEP 1805 088             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18BB   JHEP 1806 120             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18BK   JHEP 1807 075             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18BO   JHEP 1808 130             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18BV   EPJ C78 291               A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18CW   JHEP 1808 152             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18DA   JHEP 1811 042             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18DD   EPJ C78 789               A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18DJ   JHEP 1809 101             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18DU   PR D98 092001             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18F    JHEP 1801 054             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18I    PRL 120 201801            A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        18S    PR D97 092005             A.M. Sirunyan et al.                     (CMS Collab.)
+AABOUD          17AK   PR D96 052004             M. Aaboud et al.                      (ATLAS Collab.)
+AABOUD          17AP   PL B775 105               M. Aaboud et al.                      (ATLAS Collab.)
+KLIMCHITSK...   17A    PR D95 123013             G.L. Klimchitskaya, V.M. Mostepanenko
+SIRUNYAN        17AQ   JHEP 1710 073             A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        17CP   PL B774 279               A.M. Sirunyan et al.                     (CMS Collab.)
+SIRUNYAN        17F    JHEP 1707 013             A.M. Sirunyan et al.                     (CMS Collab.)
+AABOUD          16F    JHEP 1606 059             M. Aaboud et al.                      (ATLAS Collab.)
+AAD             16AI   JHEP 1603 041             G. Aad et al.                         (ATLAS Collab.)
+AAD             16N    JHEP 1603 026             G. Aad et al.                         (ATLAS Collab.)
+AAD             16O    PL B760 520               G. Aad et al.                         (ATLAS Collab.)
+AAD             16R    PL B755 285               G. Aad et al.                         (ATLAS Collab.)
+KHACHATRY...    16BE   EPJ C76 317               V. Khachatryan et al.                    (CMS Collab.)
+KHACHATRY...    16N    PL B755 102               V. Khachatryan et al.                    (CMS Collab.)
+AAD             15AU   EPJ C75 69                G. Aad et al.                         (ATLAS Collab.)
+AAD             15AZ   EPJ C75 209               G. Aad et al.                         (ATLAS Collab.)
+   Also                EPJ C75 370 (errat.)      G. Aad et al.                         (ATLAS Collab.)
+AAD             15CP   JHEP 1512 055             G. Aad et al.                         (ATLAS Collab.)
+AAD             15CS   PR D91 012008             G. Aad et al.                         (ATLAS Collab.)
+   Also                PR D92 059903 (errat.)    G. Aad et al.                         (ATLAS Collab.)
+ACCOMANDO       15     MPL A30 1540010           E. Accomando                                 (SHMP)
+KHACHATRY...    15AE   JHEP 1504 025             V. Khachatryan et al.                    (CMS Collab.)
+KHACHATRY...    15R    PL B749 560               V. Khachatryan et al.                    (CMS Collab.)
+KHACHATRY...    15T    PR D91 092005             V. Khachatryan et al.                    (CMS Collab.)
+KHACHATRY...    15V    PR D91 052009             V. Khachatryan et al.                    (CMS Collab.)
+AAD             14AL   PRL 112 091804            G. Aad et al.                         (ATLAS Collab.)
+AAD             14BE   EPJ C74 3134              G. Aad et al.                         (ATLAS Collab.)
+AAD             14V    PR D90 052005             G. Aad et al.                         (ATLAS Collab.)
+AAD             13A    PL B718 860               G. Aad et al.                         (ATLAS Collab.)
+AAD             13AO   PR D87 112006             G. Aad et al.                         (ATLAS Collab.)
+AAD             13AQ   PR D88 012004             G. Aad et al.                         (ATLAS Collab.)
+AAD             13AS   NJP 15 043007             G. Aad et al.                         (ATLAS Collab.)
+AAD             13AW   PR D88 072001             G. Aad et al.                         (ATLAS Collab.)
+AAD             13C    PRL 110 011802            G. Aad et al.                         (ATLAS Collab.)
+AAD             13D    JHEP 1301 029             G. Aad et al.                         (ATLAS Collab.)
+AAD             13E    PR D87 015010             G. Aad et al.                         (ATLAS Collab.)
+CHATRCHYAN      13A    JHEP 1301 013             S. Chatrchyan et al.                     (CMS Collab.)
+CHATRCHYAN      13AD   JHEP 1307 178             S. Chatrchyan et al.                     (CMS Collab.)
+CHATRCHYAN      13AQ   PR D87 072005             S. Chatrchyan et al.                     (CMS Collab.)
+CHATRCHYAN      13BM   PRL 111 211804            S. Chatrchyan et al.                     (CMS Collab.)
+   Also                PRL 112 119903 (errat.)   S. Chatrchyan et al.                     (CMS Collab.)
+CHATRCHYAN      13W    JHEP 1303 111             S. Chatrchyan et al.                     (CMS Collab.)
+CHEN            13A    CP C37 063102             J-B. Chen et al.                               (DALI)
+EDELHAUSER      13     JHEP 1308 091             L. Edelhauser, T. Flacke, M. Kramer   (AACH, KAIST)
+XU              13     JP G40 035107             J. Xu et al.
+AAD             12AD   PL B712 331               G. Aad et al.                         (ATLAS Collab.)
+AAD             12BV   JHEP 1209 041             G. Aad et al.                         (ATLAS Collab.)
+AAD             12CC   JHEP 1211 138             G. Aad et al.                         (ATLAS Collab.)
+AAD             12CP   PL B718 411               G. Aad et al.                         (ATLAS Collab.)
+AAD             12X    PL B710 519               G. Aad et al.                         (ATLAS Collab.)
+AAD             12Y    PL B710 538               G. Aad et al.                         (ATLAS Collab.)
+
+
+https://pdg.lbl.gov                        Page 20                     Created: 12/2/2025 14:26
+     Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+AALTONEN      12V    PR D85 012008            T. Aaltonen et al.                       (CDF Collab.)
+ABAZOV        12M    PRL 108 131802           V.M. Abazov et al.                        (D0 Collab.)
+AJELLO        12     JCAP 1202 012            M. Ajello et al.                   (Fermi-LAT Collab.)
+BAAK          12     EPJ C72 2003             M. Baak et al.                          (Gﬁtter Group)
+FLACKE        12     PR D85 126007            T. Flacke, C. Pasold                          (WURZ)
+NISHIWAKI     12     PL B707 506              K. Nishiwaki et al.                    (KOBE, OSAK)
+AAD           11F    PRL 106 121803           G. Aad et al.                         (ATLAS Collab.)
+AAD           11X    EPJ C71 1744             G. Aad et al.                         (ATLAS Collab.)
+AALTONEN      11G    PR D83 112008            T. Aaltonen et al.                       (CDF Collab.)
+AALTONEN      11R    PRL 107 051801           T. Aaltonen et al.                       (CDF Collab.)
+AALTONEN      11U    PR D83 011102            T. Aaltonen et al.                       (CDF Collab.)
+AARON         11C    PL B705 52               F. D. Aaron et al.                         (H1 Collab.)
+ABAZOV        11H    PRL 107 011801           V.M. Abazov et al.                         (D0 Collab.)
+BEZERRA       11     PR D83 075004            V.B. Bezerra et al.
+SUSHKOV       11     PRL 107 171101           A.O. Sushkov et al.
+AALTONEN      10N    PRL 104 241801           T. Aaltonen et al.                       (CDF Collab.)
+ABAZOV        10F    PRL 104 241802           V.M. Abazov et al.                         (D0 Collab.)
+ABAZOV        10P    PRL 105 221802           V.M. Abazov et al.                         (D0 Collab.)
+BEZERRA       10     PR D81 055003            V.B. Bezerra et al.
+ABAZOV        09AE   PRL 103 191803           V.M. Abazov et al.                         (D0 Collab.)
+ABAZOV        09D    PRL 102 051601           V.M. Abazov et al.                         (D0 Collab.)
+MASUDA        09     PRL 102 171101           M. Masuda, M. Sasaki                             (ICRR)
+AALTONEN      08AC   PRL 101 181602           T. Aaltonen et al.                       (CDF Collab.)
+AALTONEN      08S    PR D78 012008            T. Aaltonen et al.                       (CDF Collab.)
+ABAZOV        08J    PRL 100 091802           V.M. Abazov et al.                         (D0 Collab.)
+ABAZOV        08S    PRL 101 011601           V.M. Abazov et al.                         (D0 Collab.)
+DAS           08     PR D78 063011            P.K. Das, V.H.S. Kumar, P.K. Suresh
+GERACI        08     PR D78 022002            A.A. Geraci et al.                              (STAN)
+TRENKEL       08     PR D77 122001            C. Trenkel
+AALTONEN      07G    PRL 99 171801            T. Aaltonen et al.                       (CDF Collab.)
+AALTONEN      07H    PRL 99 171802            T. Aaltonen et al.                       (CDF Collab.)
+DECCA         07A    EPJ C51 963              R.S. Decca et al.
+HAISCH        07     PR D76 034014            U. Haisch, A. Weiler
+KAPNER        07     PRL 98 021101            D.J. Kapner et al.
+SCHAEL        07A    EPJ C49 411              S. Schael et al.                      (ALEPH Collab.)
+TU            07     PRL 98 201101            L.-C. Tu et al.
+ABDALLAH      06C    EPJ C45 589              J. Abdallah et al.                   (DELPHI Collab.)
+ABULENCIA,A   06     PRL 97 171802            A. Abulencia et al.                      (CDF Collab.)
+GERDES        06     PR D73 112008            D. Gerdes et al.
+GOGOLADZE     06     PR D74 093012            I. Gogoladze, C. Macesanu
+ABAZOV        05N    PRL 95 091801            V.M. Abazov et al.                         (D0 Collab.)
+ABAZOV        05V    PRL 95 161602            V.M. Abazov et al.                         (D0 Collab.)
+ABDALLAH      05B    EPJ C38 395              J. Abdallah et al.                   (DELPHI Collab.)
+ABULENCIA     05A    PRL 95 252001            A. Abulencia et al.                      (CDF Collab.)
+SMULLIN       05     PR D72 122001            S.J. Smullin et al.
+ACHARD        04E    PL B587 16               P. Achard et al.                           (L3 Collab.)
+ACOSTA        04C    PRL 92 121802            D. Acosta et al.                         (CDF Collab.)
+BARBIERI      04     NP B703 127              R. Barbieri et al.
+CASSE         04     PRL 92 111102            M. Casse et al.
+CHEKANOV      04B    PL B591 23               S. Chekanov et al.                      (ZEUS Collab.)
+HOYLE         04     PR D70 042004            C.D. Hoyle et al.                              (WASH)
+ABAZOV        03     PRL 90 251802            V.M. Abazov et al.                         (D0 Collab.)
+ABBIENDI      03D    EPJ C26 331              G. Abbiendi et al.                      (OPAL Collab.)
+ACHARD        03D    PL B572 133              P. Achard et al.                           (L3 Collab.)
+ADLOFF        03     PL B568 35               C. Adloﬀ et al.                            (H1 Collab.)
+CHIAVERINI    03     PRL 90 151101            J. Chiaverini et al.
+GIUDICE       03     NP B663 377              G.F. Giudice, A. Strumia
+HANNESTAD     03     PR D67 125008            S. Hannestad, G.G. Raﬀelt
+    Also             PR D69 029901(errat.)    S. Hannestad, G.G. Raﬀelt
+HEISTER       03C    EPJ C28 1                A. Heister et al.                     (ALEPH Collab.)
+LONG          03     NAT 421 922              J.C. Long et al.
+ACHARD        02     PL B524 65               P. Achard et al.                           (L3 Collab.)
+ACHARD        02D    PL B531 28               P. Achard et al.                           (L3 Collab.)
+HANNESTAD     02     PRL 88 071301            S. Hannestad, G. Raﬀelt
+ABBOTT        01     PRL 86 1156              B. Abbott et al.                           (D0 Collab.)
+FAIRBAIRN     01     PL B508 335              M. Fairbairn
+HANHART       01     PL B509 1                C. Hanhart et al.
+HOYLE         01     PRL 86 1418              C.D. Hoyle et al.
+ABBIENDI      00R    EPJ C13 553              G. Abbiendi et al.                      (OPAL Collab.)
+ABREU         00A    PL B491 67               P. Abreu et al.                      (DELPHI Collab.)
+ABREU         00S    PL B485 45               P. Abreu et al.                      (DELPHI Collab.)
+
+
+https://pdg.lbl.gov                       Page 21                     Created: 12/2/2025 14:26
+    Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+
+
+ABREU        00Z    EPJ C17 53               P. Abreu et al.                       (DELPHI    Collab.)
+CASSISI      00     PL B481 323              S. Cassisi et al.
+CHANG        00B    PRL 85 3765              L.N. Chang et al.
+CHEUNG       00     PR D61 015005            K. Cheung
+CORNET       00     PR D61 037701            F. Cornet, M. Relano, J. Rico
+GRAESSER     00     PR D61 074019            M.L. Graesser
+HAN          00     PR D62 125018            T. Han, D. Marfatia, R.-J. Zhang
+MATHEWS      00     JHEP 0007 008            P. Mathews, S. Raychaudhuri, K. Sridhar
+MELE         00     PR D61 117901            S. Mele, E. Sanchez
+RIZZO        00     PR D61 016007            T.G. Rizzo, J.D. Wells
+ABBIENDI     99P    PL B465 303              G. Abbiendi et al.                      (OPAL    Collab.)
+ACCIARRI     99M    PL B464 135              M. Acciarri et al.                         (L3   Collab.)
+ACCIARRI     99R    PL B470 268              M. Acciarri et al.                         (L3   Collab.)
+ACCIARRI     99S    PL B470 281              M. Acciarri et al.                         (L3   Collab.)
+BOURILKOV    99     JHEP 9908 006            D. Bourilkov
+HOSKINS      85     PR D32 3084              J.K. Hoskins et al.
+
+
+
+
+https://pdg.lbl.gov                      Page 22                     Created: 12/2/2025 14:26
+

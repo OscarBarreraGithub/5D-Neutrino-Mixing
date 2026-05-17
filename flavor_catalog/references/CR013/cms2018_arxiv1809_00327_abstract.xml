@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/fE5HsLuKJOdk/b5y2XVkBoaKXLw</id>
+  <title>arXiv Query: search_query=&amp;id_list=1809.00327&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:01Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1809.00327" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1809.00327v2</id>
+    <title>Search for physics beyond the standard model in high-mass diphoton events from proton-proton collisions at $\sqrt{s} =$ 13 TeV</title>
+    <updated>2018-11-07T15:04:04Z</updated>
+    <link href="https://arxiv.org/abs/1809.00327v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1809.00327v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for physics beyond the standard model is performed using a sample of high-mass diphoton events produced in proton-proton collisions at $\sqrt{s} = $ 13 TeV. The data sample was collected in 2016 with the CMS detector at the LHC and corresponds to an integrated luminosity of 35.9 fb$^{-1}$. The search is performed for both resonant and nonresonant new physics signatures. At 95% confidence level, lower limits on the mass of the first Kaluza-Klein excitation of the graviton in the Randall-Sundrum warped extra-dimensional model are determined to be in the range of 2.3 to 4.6 TeV, for values of the associated coupling parameter between 0.01 and 0.2. Lower limits on the production of scalar resonances and model-independent cross section upper limits are also provided. For the large extra-dimensional model of Arkani-Hamed, Dimopoulos, and Dvali, lower limits are set on the string mass scale $M_S$ ranging from 5.6 to 9.7 TeV, depending on the model parameters. The first exclusion limits are set in the two-dimensional parameter space of a continuum clockwork model.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-09-02T11:16:56Z</published>
+    <arxiv:comment>Replaced with the published version. All the figures and tables, including additional supplementary figures, can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-17-017 (CMS Public Pages)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. D 98, 092001 (2018)</arxiv:journal_ref>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.98.092001</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.98.092001" title="doi"/>
+  </entry>
+</feed>

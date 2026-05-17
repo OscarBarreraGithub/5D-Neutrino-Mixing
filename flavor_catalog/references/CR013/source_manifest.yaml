@@ -1,0 +1,163 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR013
+sources:
+  - key: PDG2025_ExtraDimensionsListing
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group Extra Dimensions listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:ce4823040682bbcba4893b693dbe6e9c135a2d1e5678d55c5ca1a08fd5553f8d"
+    snapshot_path: "flavor_catalog/references/CR013/pdg2025_extra_dimensions_listing.txt"
+  - key: PDG2025_ExtraDimensionsReview
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Extra dimensions searches"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-extra-dimensions.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0dad46ccc4e1fea553c028014d06731a5524ec6769a2b23a7ac3940b8e117755"
+    snapshot_path: "flavor_catalog/references/CR013/pdg2025_extra_dimensions_review.txt"
+  - key: CMS2024_Diphoton_ArxivAbstract
+    arxiv_id: "2405.09320"
+    DOI: "10.1007/JHEP08(2024)215"
+    title: "Search for new physics in high-mass diphoton events from proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2405.09320"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:71c6b5d57aabacc09819c7ee7b34b714e8767301841e1435945de44874003a85"
+    snapshot_path: "flavor_catalog/references/CR013/cms2024_arxiv2405_09320_abstract.xml"
+  - key: CMS2024_Diphoton_ArxivFullText
+    arxiv_id: "2405.09320"
+    DOI: "10.1007/JHEP08(2024)215"
+    title: "Search for new physics in high-mass diphoton events from proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2405.09320"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9db5214a38ea01255dc0e5ed3fe3b409c97867c6ba712ddea8cd67fb7115fc8e"
+    snapshot_path: "flavor_catalog/references/CR013/cms2024_arxiv2405_09320_fulltext.txt"
+  - key: CMS2024_Diphoton_PublicPage
+    arxiv_id: "2405.09320"
+    DOI: "10.1007/JHEP08(2024)215"
+    title: "CMS-EXO-22-024 public result page"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-22-024/"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:f3ee8d2e3e100f2d6f61d6a9dfb2f7a08d7fe12652d10d31b74384f6874ad0dc"
+    snapshot_path: "flavor_catalog/references/CR013/cms2024_exo_22_024_public_page.html"
+  - key: CMS2024_Diphoton_HEPData
+    arxiv_id: "2405.09320"
+    DOI: "10.17182/hepdata.150677.v1"
+    title: "HEPData record for CMS high-mass diphoton EXO-22-024"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://www.hepdata.net/record/ins2787227"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:46becc63fb1adc658387b9348b5bed0940618354b1b65820ff38137a88d38bbb"
+    snapshot_path: "flavor_catalog/references/CR013/hepdata2024_cms_diphoton_record.json"
+  - key: ATLAS2021_Diphoton_ArxivAbstract
+    arxiv_id: "2102.13405"
+    DOI: "10.1016/j.physletb.2021.136651"
+    title: "Search for resonances decaying into photon pairs in 139 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2102.13405"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:e62ce6e8f87f4836ad9c454d52763c07077ddd89dc372f568a5640eba2d1666b"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_abstract.xml"
+  - key: ATLAS2021_Diphoton_ArxivFullText
+    arxiv_id: "2102.13405"
+    DOI: "10.1016/j.physletb.2021.136651"
+    title: "Search for resonances decaying into photon pairs in 139 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2102.13405"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt"
+  - key: CMS2018_Diphoton_ArxivAbstract
+    arxiv_id: "1809.00327"
+    DOI: "10.1103/PhysRevD.98.092001"
+    title: "Search for physics beyond the standard model in high-mass diphoton events from proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1809.00327"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:3ec3d0ba989c573cef5a1bc34a44161c6bebf188c70221dc3d719e5785dffaf8"
+    snapshot_path: "flavor_catalog/references/CR013/cms2018_arxiv1809_00327_abstract.xml"
+  - key: CMS2018_Diphoton_ArxivFullText
+    arxiv_id: "1809.00327"
+    DOI: "10.1103/PhysRevD.98.092001"
+    title: "Search for physics beyond the standard model in high-mass diphoton events from proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1809.00327"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:6cbc675c212d641f7eec15966c640a1a6521c60a53be17ff1b4b5a9f6b798bfe"
+    snapshot_path: "flavor_catalog/references/CR013/cms2018_arxiv1809_00327_fulltext.txt"
+  - key: ATLAS2015_Diphoton_ArxivAbstract
+    arxiv_id: "1504.05511"
+    DOI: "10.1103/PhysRevD.92.032004"
+    title: "Search for high-mass diphoton resonances in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2015
+    url: "https://arxiv.org/abs/1504.05511"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:a745d89fac73c9f4c8f2edb93b32a218771b3988de56ade92f263e9ba565a05a"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2015_arxiv1504_05511_abstract.xml"
+  - key: ATLAS2015_Diphoton_ArxivFullText
+    arxiv_id: "1504.05511"
+    DOI: "10.1103/PhysRevD.92.032004"
+    title: "Search for high-mass diphoton resonances in pp collisions at sqrt(s) = 8 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2015
+    url: "https://arxiv.org/abs/1504.05511"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:fa8a6d18d5636f4b60e307c81d4403c5e6b553578f1582ee23671eff250faf7f"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2015_arxiv1504_05511_fulltext.txt"
+  - key: CMS2012_Diphoton_ArxivAbstract
+    arxiv_id: "1112.0688"
+    DOI: "10.1103/PhysRevLett.108.111801"
+    title: "Search for signatures of extra dimensions in the diphoton mass spectrum at the Large Hadron Collider"
+    authors: "CMS Collaboration"
+    year: 2012
+    url: "https://arxiv.org/abs/1112.0688"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9460b9985b3be0381666a77eb6e13d1e90d93ceeb57acb8ce577c6089003f942"
+    snapshot_path: "flavor_catalog/references/CR013/cms2012_arxiv1112_0688_abstract.xml"
+  - key: ATLAS2013_Diphoton_ArxivAbstract
+    arxiv_id: "1210.8389"
+    DOI: "10.1088/1367-2630/15/4/043007"
+    title: "Search for extra dimensions using diphoton events in 7 TeV proton-proton collisions with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2013
+    url: "https://arxiv.org/abs/1210.8389"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b2b12a7d2e94f4e4f800ddc9bfa2b3fc3a6848cb4f548ffdacbeddf9742d9b37"
+    snapshot_path: "flavor_catalog/references/CR013/atlas2013_arxiv1210_8389_abstract.xml"
+  - key: RandallSundrum1999
+    arxiv_id: "hep-ph/9905221"
+    DOI: "10.1103/PhysRevLett.83.3370"
+    title: "A Large Mass Hierarchy from a Small Extra Dimension"
+    authors: "Lisa Randall and Raman Sundrum"
+    year: 1999
+    url: "https://arxiv.org/abs/hep-ph/9905221"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:cba0ff32c08a873d5e89c8c59d8a5bd2c051faac3ed86107dd9ff66cac7a1cf5"
+    snapshot_path: "flavor_catalog/references/CR013/randall_sundrum_1999_arxiv_hepph9905221_abstract.xml"
+  - key: DavoudiaslHewettRizzo1999
+    arxiv_id: "hep-ph/9909255"
+    DOI: "10.1103/PhysRevLett.84.2080"
+    title: "Phenomenology of the Randall-Sundrum Gauge Hierarchy Model"
+    authors: "Hooman Davoudiasl, John L. Hewett, and Thomas G. Rizzo"
+    year: 1999
+    url: "https://arxiv.org/abs/hep-ph/9909255"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:34444111395a19ae4636e7156f798257f30190eac027f31613421e348603f9c3"
+    snapshot_path: "flavor_catalog/references/CR013/davoudiasl_hewett_rizzo_1999_arxiv_hepph9909255_abstract.xml"
