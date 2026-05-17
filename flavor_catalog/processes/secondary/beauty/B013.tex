@@ -1,8 +1,8 @@
-% Flavor catalog per-process draft.
+% Flavor catalog per-process entry.
 % process_id: B013
 % family: beauty
 % owner_agent_id: PKA-B013
-% writer_agent_id: null
+% writer_agent_id: WA
 % checker_agent_id: null
 % opus_signoff_id: null
 % Canonical metadata sidecar: B013.yaml
@@ -13,7 +13,7 @@
 \subsection*{Process}
 \textbf{Standard notation:} \(B_s^0\to\phi(1020)\gamma\).
 This entry covers the exclusive radiative \(b\to s\gamma\) decay of the
-neutral \(B_s\) meson, including the branching fraction and the
+neutral \(B_s\) meson, with both the branching fraction and the
 time-dependent photon-helicity observables \(S_{\phi\gamma}\),
 \(C_{\phi\gamma}\), and \(A^\Delta_{\phi\gamma}\).
 
@@ -44,30 +44,29 @@ where the first uncertainty is statistical and the second is systematic; see
 and the PDG snapshot.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
-Wave-8 policy tags this entry as \textbf{SECONDARY}; see
-\texttt{flavor\_catalog/PRIORITY\_TIERS.md} for the intended priority-tier
-contract.  The physics motivation is direct: \(B_s^0\to\phi\gamma\) probes the
-electromagnetic dipole transition \(b\to s\gamma\), but with a helicity handle
-that the inclusive \(B\to X_s\gamma\) rate does not provide.  In anarchic RS
-or composite-Higgs variants, KK fermions, KK gauge bosons, and the Higgs
-sector can generate chirality-flipped dipole coefficients \(C_7'\) and
-\(C_8'\).  Those contributions may leave the inclusive rate close to the SM
-while shifting \(A^\Delta_{\phi\gamma}\) or \(S_{\phi\gamma}\), so this mode is
-a useful companion to B011 and B012.
+This Wave-8 entry is \textbf{SECONDARY} under
+\texttt{flavor\_catalog/PRIORITY\_TIERS.md}.  The physics motivation is direct:
+\(B_s^0\to\phi\gamma\) probes the electromagnetic dipole transition
+\(b\to s\gamma\), but with a helicity handle that the inclusive
+\(B\to X_s\gamma\) rate does not provide.  In anarchic RS or composite-Higgs
+variants, KK fermions, KK gauge bosons, and the Higgs sector can generate
+chirality-flipped dipole coefficients \(C_7'\) and \(C_8'\).  Those
+contributions may leave the inclusive rate close to the SM while shifting
+\(A^\Delta_{\phi\gamma}\) or \(S_{\phi\gamma}\), so this mode is a useful
+companion to B011 and B012.
 
 \subsection*{Post-2008 developments}
-The pre-LHC formalism source is Muheim--Xie--Zwicky, arXiv:0802.0876, which
-identified the \(B_s\) width difference as a way to measure the
-\(\sinh(\Delta\Gamma_s t/2)\) coefficient in \(B_s\to\phi\gamma\) and thereby
-probe right-handed photon amplitudes.  Belle measured
-\(B_s^0\to\phi\gamma\) at the \(\Upsilon(5S)\) in arXiv:1411.7771; this is one
-of the inputs to the modern PDG/HFLAV branching-fraction average.  LHCb's
-arXiv:1905.06284 measurement is the current time-dependent CP reference,
-giving the first \(S_{\phi\gamma}\) and \(C_{\phi\gamma}\) measurements in a
-radiative \(B_s\) decay and updating the earlier untagged
-\(A^\Delta_{\phi\gamma}\) result.  LHCb arXiv:2406.00235 added a Run-1/Run-2
-amplitude analysis of \(B_s^0\to K^+K^-\gamma\), clarifying resonant
-composition around the \(\phi(1020)\).  LHCb arXiv:2411.10219 uses the
+Muheim--Xie--Zwicky, arXiv:0802.0876, set the pre-LHC formalism by showing how
+the \(B_s\) width difference exposes the time-dependent
+\(\sinh(\Delta\Gamma_s t/2)\) coefficient and therefore the right-handed photon
+amplitude.  Belle measured \(B_s^0\to\phi\gamma\) at the \(\Upsilon(5S)\) in
+arXiv:1411.7771, contributing one input to the modern PDG/HFLAV
+branching-fraction average.  LHCb's arXiv:1905.06284 analysis is the current
+time-dependent CP reference: it gives the first \(S_{\phi\gamma}\) and
+\(C_{\phi\gamma}\) measurements in a radiative \(B_s\) decay and updates the
+earlier untagged \(A^\Delta_{\phi\gamma}\) result.  LHCb arXiv:2406.00235 added
+a Run-1/Run-2 amplitude analysis of \(B_s^0\to K^+K^-\gamma\), clarifying the
+resonant composition around the \(\phi(1020)\), while arXiv:2411.10219 uses the
 very-low-\(q^2\) \(B_s^0\to\phi e^+e^-\) angular distribution as a virtual
 photon-polarization cross-check.
 
@@ -90,9 +89,12 @@ pipeline exists.
 \(B_s^0\to\phi\gamma\), \(S_{\phi\gamma}\), \(A^\Delta_{\phi\gamma}\), or a
 quark-sector \(b\to s\gamma\) dipole likelihood.  The existing modern quark
 surface enumerates only \(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\)
-neutral-meson mixing at \texttt{quarkConstraints/modern/phenomenology.py:23}.
-The dipole hit at \texttt{flavorConstraints/muToEGamma.py:75} is the unrelated
-charged-lepton \(\mu\to e\gamma\) check.
+neutral-meson mixing at \texttt{quarkConstraints/modern/phenomenology.py:23};
+the \(\Delta F=2\) beauty entry points at
+\texttt{quarkConstraints/deltaf2.py:903} and
+\texttt{quarkConstraints/deltaf2.py:922} are mixing observables, not radiative
+decays.  The dipole hit at \texttt{flavorConstraints/muToEGamma.py:75} is the
+unrelated charged-lepton \(\mu\to e\gamma\) check.
 
 \subsection*{Implementation difficulty}
 \textbf{HIGH.}  Production use needs new \(b\to s\gamma\) dipole matching,

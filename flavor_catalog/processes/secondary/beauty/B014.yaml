@@ -2,14 +2,14 @@ schema: flavor_catalog.process.v1
 process_id: B014
 family: beauty
 priority_tier: SECONDARY
-priority_rationale: "Deferred by DA-4 (round_004_addendum_deferred_scope.md); b -> d gamma exclusive tail; CKM-suppressed by |V_td/V_ts|^2 vs B011/B012. Promoted in Wave-8 because: Top-tier; provides down-sector dipole chirality probe distinct from b -> s gamma. Lower implementation priority than Waves 1-7 PRIMARY entries."
+priority_rationale: "Deferred by DA-4 (round_004_addendum_deferred_scope.md); b -> d gamma exclusive tail, CKM-suppressed relative to B011/B012. Promoted in Wave-8 because: Top-tier; provides down-sector dipole chirality probe distinct from b -> s gamma. Lower implementation priority than Waves 1-7 PRIMARY entries."
 promoted_in_wave: 8
 standard_notation: "B\\to \\rho\\gamma, B\\to \\omega\\gamma"
 process_name: "Exclusive radiative b -> d gamma decays"
 owner: "PKA"
 owner_agent_id: "PKA-B014"
-writer_agent_id: null
-checker_agent_id: "CA"
+writer_agent_id: "WA"
+checker_agent_id: null
 opus_signoff_id: null
 status_history:
   - state: "DRAFT"
@@ -26,7 +26,15 @@ status_history:
     at: "2026-05-17T02:14:54-04:00"
     agent_id: "PKA-B014"
     reason: "Initial PKA draft and source deposit for Wave-8 SECONDARY entry."
-last_updated_at: "2026-05-17T02:14:54-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T02:36:17-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T02:36:17-04:00"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA Wave-8 B-radiative polish for B013/B014 cycle 1."
+last_updated_at: "2026-05-17T02:36:17-04:00"
 version: "0.1.0"
 source_shas:
   arxiv_0804_1954_cfw_rs_flavor.txt: "sha256:4c73c6f885ba4114d65192ba4faafcb36b7f815340c7f87db485716dda39a616"
@@ -266,6 +274,8 @@ pdg_or_equivalent:
 recent_experimental_inputs:
   belle_belleii_2024:
     source: "arXiv:2407.08984"
+    source_url: "https://arxiv.org/abs/2407.08984"
+    access_date: "2026-05-17"
     role: "Post-2008 Belle/Belle II B -> rho gamma branching-fraction, CP-asymmetry, and isospin-asymmetry update."
     supporting_measurements:
       - "772 x 10^6 Belle B Bbar pairs at the Upsilon(4S)."
@@ -280,6 +290,8 @@ recent_experimental_inputs:
     sha256: "sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7"
   lhcb_2025:
     source: "arXiv:2507.14401"
+    source_url: "https://arxiv.org/abs/2507.14401"
+    access_date: "2026-05-17"
     role: "Most precise single B0 -> rho0 gamma measurement available in the source set and ratio to B0 -> K*0 gamma."
     supporting_measurements:
       - "9 fb^-1 of pp collision data at sqrt(s) = 7, 8, and 13 TeV."
@@ -291,6 +303,8 @@ recent_experimental_inputs:
     sha256: "sha256:e0201f9d11ed7de7513534d310b727cb85f72bf0cdb5741cffff0156616c879b"
   babar_2010_xdgamma:
     source: "arXiv:1005.4087"
+    source_url: "https://arxiv.org/abs/1005.4087"
+    access_date: "2026-05-17"
     role: "Semi-inclusive B -> X_{s,d} gamma and |Vtd/Vts| comparison source."
     supporting_measurements:
       - "471 million BaBar B Bbar events."
@@ -300,12 +314,16 @@ recent_experimental_inputs:
 supporting_measurements:
   babar_2008_exclusive_inputs:
     source: "arXiv:0808.1379"
+    source_url: "https://arxiv.org/abs/0808.1379"
+    access_date: "2026-05-17"
     role: "BaBar 2008 exclusive B+ -> rho+ gamma, B0 -> rho0 gamma, and B0 -> omega gamma input to PDG/HFLAV."
     dataset_metadata: "465 million B Bbar events at PEP-II."
     snapshot_path: "flavor_catalog/references/B014/arxiv_0808_1379_babar_rho_omega_gamma.txt"
     sha256: "sha256:9d3949dbce81982995ba5d58a8d9d3802fbb4d1dd0ff0a19cc8bf6c9d8da7f4a"
   belle_2008_exclusive_inputs:
     source: "arXiv:0804.4770"
+    source_url: "https://arxiv.org/abs/0804.4770"
+    access_date: "2026-05-17"
     role: "Belle 2008 exclusive b -> d gamma input to PDG/HFLAV and source of the early direct-CP measurement."
     dataset_metadata: "657 x 10^6 B meson pairs at KEKB."
     snapshot_path: "flavor_catalog/references/B014/arxiv_0804_4770_belle_bd_gamma.txt"

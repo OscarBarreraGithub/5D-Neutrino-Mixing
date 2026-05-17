@@ -8,7 +8,7 @@ standard_notation: "B_s^0\\to\\phi(1020)\\gamma"
 process_name: "Exclusive radiative B_s decay via b -> s gamma"
 owner: "PKA"
 owner_agent_id: "PKA-B013"
-writer_agent_id: null
+writer_agent_id: "WA"
 checker_agent_id: null
 opus_signoff_id: null
 status_history:
@@ -26,7 +26,15 @@ status_history:
     at: "2026-05-17T02:09:17-04:00"
     agent_id: "PKA-B013"
     reason: "Initial PKA draft, source snapshots, and code-coverage grep completed."
-last_updated_at: "2026-05-17T02:09:17-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T02:36:17-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T02:36:17-04:00"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA Wave-8 B-radiative polish for B013/B014 cycle 1."
+last_updated_at: "2026-05-17T02:36:17-04:00"
 version: "0.1.0"
 source_shas:
   belle_2014_bsphigamma_arxiv.txt: "sha256:7e36d4d73efac319cbcf4b1711efa18aa872f7e786652c230acabeeb411688a3"
@@ -64,11 +72,25 @@ pdg_or_equivalent:
     sha256: "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f"
     average_inputs:
       - label: "LHCb AAIJ 13"
+        year: 2024
         value: 0.0000337
         uncertainties: ["0.0000017", "0.0000030"]
+        units: "branching fraction"
+        source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+        access_date: "2026-05-17"
+        snapshot_path: "flavor_catalog/references/B013/hflav_rare_decays_dec2024_bs_phi_gamma.txt"
+        sha256: "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f"
+        note: "HFLAV average-table input; source year is the HFLAV Dec. 2024 compilation."
       - label: "Belle Dutta 2014/2015"
+        year: 2024
         value: 0.0000360
         uncertainties: ["0.0000050", "0.0000070"]
+        units: "branching fraction"
+        source_url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+        access_date: "2026-05-17"
+        snapshot_path: "flavor_catalog/references/B013/hflav_rare_decays_dec2024_bs_phi_gamma.txt"
+        sha256: "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f"
+        note: "HFLAV average-table input; the Belle standalone value is separately recorded below with the Belle source snapshot."
   s_phigamma_lhcb_2019:
     source: "LHCb arXiv:1905.06284; also listed in PDG 2025"
     year: 2019
@@ -220,21 +242,32 @@ supporting_measurements:
       integrated_luminosity: "3 fb^-1"
       center_of_mass_energies: ["7 TeV", "8 TeV"]
       role: "Dataset metadata only; not promoted as an independent pdg_or_equivalent observable."
+      source_url: "https://arxiv.org/abs/1905.06284"
+      access_date: "2026-05-17"
       snapshot_path: "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt"
       sha256: "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba"
     - label: "Belle 2014 B_s0 -> phi gamma"
       integrated_luminosity: "121.4 fb^-1"
       center_of_mass_energy_context: "Upsilon(5S)"
       role: "Dataset metadata only; Belle measured observable is in pdg_or_equivalent."
+      source_url: "https://arxiv.org/abs/1411.7771"
+      access_date: "2026-05-17"
       snapshot_path: "flavor_catalog/references/B013/belle_2014_bsphigamma_arxiv.txt"
       sha256: "sha256:7e36d4d73efac319cbcf4b1711efa18aa872f7e786652c230acabeeb411688a3"
     - label: "LHCb 2024 B_s0 -> K+K- gamma and B_s0 -> phi e+e-"
       integrated_luminosity: "9 fb^-1"
       center_of_mass_energies: ["7 TeV", "8 TeV", "13 TeV"]
       role: "Dataset metadata only; associated measured observables are in pdg_or_equivalent."
+      source_urls:
+        - "https://arxiv.org/abs/2406.00235"
+        - "https://arxiv.org/abs/2411.10219"
+      access_date: "2026-05-17"
       snapshot_paths:
         - "flavor_catalog/references/B013/lhcb_2024_bskkgamma_arxiv.txt"
         - "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt"
+      sha256s:
+        - "sha256:7cbfba098c45a5d672a3eae00ea4f912302fc62f10ee3d8d59b583d0c96d3f96"
+        - "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738"
 code_coverage:
   status: "NO"
   grep_commands:
@@ -245,6 +278,7 @@ code_coverage:
   evidence:
     - "Focused B013 grep for B_s -> phi gamma, S_phi, A_Delta, b->s gamma dipoles, C7/C7', and photon-polarization terms returned exit=1 with no implementation hits."
     - "quarkConstraints/modern/phenomenology.py:23 enumerates the modern quark surface as epsilon_K, K, B_d, B_s, and D0 neutral-meson mixing systems."
+    - "quarkConstraints/deltaf2.py:903 and quarkConstraints/deltaf2.py:922 implement B_d and B_s mixing evaluators, not radiative b -> s gamma decays."
     - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an unrelated lepton-sector dipole check."
 implementation_difficulty: "HIGH"
 implementation_difficulty_if_missing: "HIGH"
