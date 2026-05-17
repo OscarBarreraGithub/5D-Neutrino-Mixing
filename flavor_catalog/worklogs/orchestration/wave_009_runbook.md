@@ -124,20 +124,26 @@ Cycle caps unchanged. L001 arbitration precedent available if needed.
 
 | Stage | Agent ID | Background ID | Output path | Status |
 |-------|----------|---------------|-------------|--------|
-| 1.a | PKA-CR001 | (pending) | `processes/collider_rs/CR001.{tex,yaml}` | PENDING |
-| 1.b | PKA-CR002 | (pending) | `processes/collider_rs/CR002.{tex,yaml}` | PENDING |
-| 1.c | PKA-CR003 | (pending) | `processes/collider_rs/CR003.{tex,yaml}` | PENDING |
-| 1.d | PKA-CR004 | (pending) | `processes/collider_rs/CR004.{tex,yaml}` | PENDING |
-| 1.e | PKA-CR005 | (pending) | `processes/collider_rs/CR005.{tex,yaml}` | PENDING |
-| 1.f | PKA-CR006 | (pending) | `processes/collider_rs/CR006.{tex,yaml}` | PENDING |
-| 1.g | PKA-CR007 | (pending) | `processes/collider_rs/CR007.{tex,yaml}` | PENDING |
-| 1.h | PKA-CR008 | (pending) | `processes/collider_rs/CR008.{tex,yaml}` | PENDING |
-| 1.i | PKA-CR009 | (pending) | `processes/collider_rs/CR009.{tex,yaml}` | PENDING |
-| 1.j | PKA-CR010 | (pending) | `processes/collider_rs/CR010.{tex,yaml}` | PENDING |
-| 1.k | PKA-CR011 | (pending) | `processes/collider_rs/CR011.{tex,yaml}` | PENDING |
-| 1.l | PKA-CR012 | (pending) | `processes/collider_rs/CR012.{tex,yaml}` | PENDING |
-| 1.m | PKA-CR013 | (pending) | `processes/collider_rs/CR013.{tex,yaml}` | PENDING |
-| 1.n | PKA-CR014 | (pending) | `processes/collider_rs/CR014.{tex,yaml}` | PENDING |
+All 14 dispatched 2026-05-17 16:23 EDT. Prompts in
+`/tmp/wave9_prompts/pka_<ID>.prompt` (224 lines each, ~10KB, all clean).
+Logs in `/tmp/wave9_logs/pka_<ID>.log`.
+
+| Stage | Agent ID | Background ID | Output path | Status |
+|-------|----------|---------------|-------------|--------|
+| 1.a | PKA-CR001 (KK-gluon→tt) | `bp0jq3v1d` | `processes/collider_rs/CR001.{tex,yaml}` | DISPATCHED |
+| 1.b | PKA-CR002 (T_{5/3}) | `b1ritjrsi` | `processes/collider_rs/CR002.{tex,yaml}` | DISPATCHED |
+| 1.c | PKA-CR003 (T') | `bv9nlgn4u` | `processes/collider_rs/CR003.{tex,yaml}` | DISPATCHED |
+| 1.d | PKA-CR004 (custodial B) | `brlh8bfrs` | `processes/collider_rs/CR004.{tex,yaml}` | DISPATCHED |
+| 1.e | PKA-CR005 (KK-Z/γ dilepton) | `buociv7yd` | `processes/collider_rs/CR005.{tex,yaml}` | DISPATCHED |
+| 1.f | PKA-CR006 (KK-W) | `byr3qw7c9` | `processes/collider_rs/CR006.{tex,yaml}` | DISPATCHED |
+| 1.g | PKA-CR007 (KK-graviton) | `bd4ci8dli` | `processes/collider_rs/CR007.{tex,yaml}` | DISPATCHED |
+| 1.h | PKA-CR008 (VLQ singlet) | `b6j346syj` | `processes/collider_rs/CR008.{tex,yaml}` | DISPATCHED |
+| 1.i | PKA-CR009 (DY EFT) | `bs7u1j9kj` | `processes/collider_rs/CR009.{tex,yaml}` | DISPATCHED |
+| 1.j | PKA-CR010 (VLQ doublet) | `ba4svf6b6` | `processes/collider_rs/CR010.{tex,yaml}` | DISPATCHED |
+| 1.k | PKA-CR011 (W_L W_L scattering) | `baw22rett` | `processes/collider_rs/CR011.{tex,yaml}` | DISPATCHED |
+| 1.l | PKA-CR012 (Diboson resonance) | `br6g1g507` | `processes/collider_rs/CR012.{tex,yaml}` | DISPATCHED |
+| 1.m | PKA-CR013 (Diphoton resonance) | `b2s3e8ll0` | `processes/collider_rs/CR013.{tex,yaml}` | DISPATCHED |
+| 1.n | PKA-CR014 (4-top production) | `b8xk0ehvo` | `processes/collider_rs/CR014.{tex,yaml}` | DISPATCHED |
 
 ### Stage 2-7: TBD (will update as we go)
 
