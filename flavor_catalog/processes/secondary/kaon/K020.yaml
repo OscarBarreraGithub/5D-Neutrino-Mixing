@@ -86,11 +86,20 @@ status_history:
     agent_id: "WA-v3"
     cycle: 3
     reason: "Cycle-3 metadata cleanup: align NA62 2021 first-author string with PDG convention (R. Aliberti et al., matching K021). Clears the cycle-1 fact-check PARTIAL finding; no value/year/DOI/URL change."
+  - state: "FACT-CHECKED"
+    from: "WRITER-DONE"
+    to: "FACT-CHECKED"
+    at: "2026-05-17T15:58:30-04:00"
+    agent_id: "factcheck-codex-kaon-w8-recheck"
+    agent: "factcheck-codex-kaon-w8-recheck"
+    verdict: "VERIFIED"
+    findings_count: 0
+    reason: "Re-fact-check after WA-v3 cycle-3 author-string cleanup. All values + metadata now match live arXiv/PDG/journal. Clears the cycle-1 PARTIAL."
 checker_passed_at: "2026-05-17T12:04:08-04:00"
 opus_approved_at: "2026-05-17T14:31:04-04:00"
-fact_checked_at: "2026-05-17T14:31:05-04:00"
-fact_check_verdict: "PARTIAL"
-last_updated_at: "2026-05-17T15:47:36-04:00"
+fact_checked_at: "2026-05-17T15:58:30-04:00"
+fact_check_verdict: "VERIFIED"
+last_updated_at: "2026-05-17T15:58:30-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_kplus_lfv_semileptonic_api.txt: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"

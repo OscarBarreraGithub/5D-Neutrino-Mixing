@@ -262,7 +262,7 @@ Scope: K019, K020, K021 (SECONDARY tier, processes/secondary/kaon/)
 | Process | Verdict | Mismatches | Note |
 |---|---:|---:|---|
 | K019 | VERIFIED | 0 | PDG 2025 K_L listing and BNL E871 limit verified; context-reference metadata checked. |
-| K020 | PARTIAL | 1 | All numerical limits verified; NA62 2021 author metadata in the K020 manifest uses a non-leading named author. |
+| K020 | VERIFIED | 0 | All numerical limits verified; NA62 2021 author metadata aligned with PDG convention after WA-v3 cycle-3 cleanup (commit 6a2506c). |
 | K021 | VERIFIED | 0 | PDG/KTeV neutral-mode limit and NA62 companion limits verified; RS reference scales are policy N/A. |
 
 ### Fetch exceptions
@@ -282,7 +282,7 @@ Key references checked: PDG 2025 K_L listing; arXiv `hep-ex/9811038`, `0804.1954
 | BNL E871 observed no signal-consistent events | https://arxiv.org/abs/hep-ex/9811038 | N/A | Dataset/event-yield context for the branching-fraction limit; present in the live abstract/local snapshot and carved out by L001 policy. |
 | Manifest metadata for non-numerical context references | https://arxiv.org/abs/0804.1954; https://arxiv.org/abs/0805.4652; https://arxiv.org/abs/1006.5356; https://arxiv.org/abs/1508.01705; https://arxiv.org/abs/1712.08122; https://arxiv.org/abs/1801.07256; https://arxiv.org/abs/1808.03477; https://pdg.lbl.gov/2025/reviews/rpp2025-rev-conservation-laws.pdf | Y | Live URLs fetched successfully; title/author/year metadata matches the manifest; no additional measured numerical K019 claim was asserted from these references. |
 
-### K020 - PARTIAL
+### K020 - VERIFIED
 
 Key references checked: PDG API `S010`, `S010.29`, `S010.25`; PDG Live charged-kaon branching-ratio pages; arXiv `hep-ex/0502020`, `2105.06759`, `0804.1954`, `1508.01705`, `2002.05684`.
 
@@ -293,8 +293,10 @@ Key references checked: PDG API `S010`, `S010.29`, `S010.25`; PDG Live charged-k
 | PDG/API `BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11` at `90% CL` for `S010.25` | https://pdgapi.lbl.gov/listings/S010.25 | Y | Live API and local snapshot contain `value: 6.6E-11`; title/year/DOI metadata match the NA62 2021 paper. |
 | Prior APPEL/BNL E865 `K+ -> pi+ mu- e+` limit `< 5.2 x 10^-10` cited as superseded context | https://pdgapi.lbl.gov/listings/S010.25 | Y | Live API and local snapshot contain APPEL 2000B with `<5.2 E-10`; this supports the sidecar note about the earlier bound. |
 | NA62 2021 `K+ -> pi+ mu- e+` limit `< 6.6 x 10^-11` and one-order improvement statement | https://arxiv.org/abs/2105.06759 | Y | Live arXiv abstract and local snapshot contain the limit and improvement statement. |
-| NA62 2021 author metadata in K020 manifest/sidecar | https://arxiv.org/abs/2105.06759 | N | Numerical value, title, DOI, and year are correct, but the K020 manifest names `E. Cortina Gil et al.` while the live arXiv page lists `NA62 Collaboration` and PDG/journal metadata identify the paper as `R. Aliberti et al. (NA62 Collaboration)`. |
+| NA62 2021 author metadata in K020 manifest/sidecar | https://arxiv.org/abs/2105.06759 | Y | WA-v3 cycle-3 cleanup (commit 6a2506c) updated the K020 manifest to `R. Aliberti et al. (NA62 Collaboration)`; live arXiv lists `NA62 Collaboration`, and PDG `S010.25` identifies `ALIBERTI 2021`/NA62 with unchanged title, year, DOI, and value metadata. |
 | Manifest metadata for non-numerical RS/EFT context references | https://arxiv.org/abs/0804.1954; https://arxiv.org/abs/1508.01705; https://arxiv.org/abs/2002.05684 | Y | Live arXiv metadata matches the manifest; no additional measured numerical K020 claim was asserted from these references. |
+
+Cycle-3 re-fact-check on 2026-05-17 confirmed the manifest author string now matches the PDG `R. Aliberti et al. (NA62 Collaboration)` convention. No other K020 fact-check findings.
 
 ### K021 - VERIFIED
 
