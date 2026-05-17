@@ -1,0 +1,123 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR005
+sources:
+  - key: CMS2021_HighMassDilepton
+    arxiv_id: "2103.02708"
+    DOI: "10.1007/JHEP07(2021)208"
+    title: "Search for resonant and nonresonant new phenomena in high-mass dilepton final states at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2103.02708"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:c33742062e29e14425bfc2de696d926ac1dbf6d49304a59f696a56a7f9dbb311"
+    snapshot_path: "flavor_catalog/references/CR005/cms_2021_arxiv2103_02708.txt"
+  - key: ATLAS2019_HighMassDilepton
+    arxiv_id: "1903.06248"
+    DOI: "10.1016/j.physletb.2019.07.016"
+    title: "Search for high-mass dilepton resonances using 139 fb^{-1} of pp collision data collected at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1903.06248"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:eacbb1bc7c23e6ea5540919272807af5ebe50bacd9d5712b76c7c53acdd65f0b"
+    snapshot_path: "flavor_catalog/references/CR005/atlas_2019_arxiv1903_06248.txt"
+  - key: PDG2024_ZPrimeSearches
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Z'-Boson Searches"
+    authors: "Particle Data Group"
+    year: 2024
+    url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-zprime-searches.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:f12a1d992f09ebdd5b97dbbe2a8b446593824efa4ca82da65b92107bb7c1bc5a"
+    snapshot_path: "flavor_catalog/references/CR005/pdg2024_zprime_searches.txt"
+  - key: HEPDataCMS2021_HighMassDilepton
+    arxiv_id: null
+    DOI: "10.17182/hepdata.101186.v2"
+    title: "HEPData record for CMS high-mass dilepton final states at sqrt(s)=13 TeV"
+    authors: "CMS Collaboration / HEPData"
+    year: 2021
+    url: "https://www.hepdata.net/record/ins1849964?version=2"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:f8270fe24bc4886f9c556e8e8d021ab464687ad19b305bad0b37ac874eb6313e"
+    snapshot_path: "flavor_catalog/references/CR005/hepdata_cms_2021_record.txt"
+  - key: HEPDataATLAS2019_HighMassDilepton
+    arxiv_id: null
+    DOI: "10.17182/hepdata.88425.v3"
+    title: "HEPData record for ATLAS high-mass dilepton resonances"
+    authors: "ATLAS Collaboration / HEPData"
+    year: 2019
+    url: "https://www.hepdata.net/record/ins1725190?version=3"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:1804165bb1309a320c983fe928890adb117b58c67ff73b77268af28b941edf36"
+    snapshot_path: "flavor_catalog/references/CR005/hepdata_atlas_2019_record.txt"
+  - key: DavoudiaslHewettRizzo1999_BulkGauge
+    arxiv_id: "hep-ph/9911262"
+    DOI: "10.1016/S0370-2693(99)01430-6"
+    title: "Bulk Gauge Fields in the Randall-Sundrum Model"
+    authors: "H. Davoudiasl, J. L. Hewett, and T. G. Rizzo"
+    year: 2000
+    url: "https://arxiv.org/abs/hep-ph/9911262"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:2369093b8055b590980c1b5365a327eaf5547c3493ecc28a568efc3d6066b735"
+    snapshot_path: "flavor_catalog/references/CR005/davoudiasl_hewett_rizzo_1999_arxiv_hepph9911262.txt"
+  - key: AgasheDelgadoMaySundrum2003_CustodialRS
+    arxiv_id: "hep-ph/0308036"
+    DOI: "10.1088/1126-6708/2003/08/050"
+    title: "RS1, Custodial Isospin and Precision Tests"
+    authors: "Kaustubh Agashe, Antonio Delgado, Michael J. May, and Raman Sundrum"
+    year: 2003
+    url: "https://arxiv.org/abs/hep-ph/0308036"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:51f947b231fd9f95451201022f6209d91b66c3cf05185ac2929e89aa331da739"
+    snapshot_path: "flavor_catalog/references/CR005/agashe_delgado_may_sundrum_2003_arxiv_hepph0308036.txt"
+  - key: AgasheServant2004_WarpedGUT
+    arxiv_id: "hep-ph/0411254"
+    DOI: "10.1088/1475-7516/2005/02/002"
+    title: "Baryon Number in Warped GUTs: Model Building and (Dark Matter Related) Phenomenology"
+    authors: "Kaustubh Agashe and Geraldine Servant"
+    year: 2005
+    url: "https://arxiv.org/abs/hep-ph/0411254"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:5a4360d45f413e0475298aea6bf7144d7c9b0b7757e3c77174f5c29b2ab33a1f"
+    snapshot_path: "flavor_catalog/references/CR005/agashe_servant_2004_arxiv_hepph0411254.txt"
+  - key: BellaEtAl2010_KKEWGauge
+    arxiv_id: "1004.2432"
+    DOI: "10.1007/JHEP09(2010)025"
+    title: "A search for heavy Kaluza-Klein electroweak gauge bosons at the LHC"
+    authors: "Gideon Bella, Erez Etzion, Noam Hod, Yaron Oz, Yiftah Silver, and Mark Sutton"
+    year: 2010
+    url: "https://arxiv.org/abs/1004.2432"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:6bc2a8b125810364002bceefe3783a2e5fd1c8e1a709a0b2fc4516342b2ae7f4"
+    snapshot_path: "flavor_catalog/references/CR005/bella_2010_arxiv1004_2432.txt"
+  - key: ATLAS2012_Run1Dilepton
+    arxiv_id: "1209.2535"
+    DOI: "10.1007/JHEP11(2012)138"
+    title: "Search for high-mass resonances decaying to dilepton final states in pp collisions at a center-of-mass energy of 7 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2012
+    url: "https://arxiv.org/abs/1209.2535"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4229000fcc60b43be442151269dab5ef088aee242d29d5a4e1f7ba7e9bfc2eef"
+    snapshot_path: "flavor_catalog/references/CR005/atlas_2012_arxiv1209_2535.txt"
+  - key: ATLAS2017_Run2Dilepton36fb
+    arxiv_id: "1707.02424"
+    DOI: "10.1007/JHEP10(2017)182"
+    title: "Search for new high-mass phenomena in the dilepton final state using 36 fb^{-1} of proton-proton collision data at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1707.02424"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:ad345d9a899542872cfb3a04ead3952dd1dcb7c41a2f3fd3ac64479d7f611451"
+    snapshot_path: "flavor_catalog/references/CR005/atlas_2017_arxiv1707_02424.txt"
+  - key: CMS2018_Run2Dilepton36fb
+    arxiv_id: "1803.06292"
+    DOI: "10.1007/JHEP06(2018)120"
+    title: "Search for high-mass resonances in dilepton final states in proton-proton collisions at sqrt(s)=13 TeV"
+    authors: "CMS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1803.06292"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:19188cb98397523d8771c807648d4270e2a63b9c7be029036de45297a2b76f6a"
+    snapshot_path: "flavor_catalog/references/CR005/cms_2018_arxiv1803_06292.txt"

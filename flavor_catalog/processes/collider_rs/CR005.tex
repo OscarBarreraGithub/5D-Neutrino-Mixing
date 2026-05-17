@@ -1,0 +1,134 @@
+% Flavor catalog per-process entry.
+% process_id: CR005
+% family: collider_rs
+% owner_agent_id: PKA-CR005
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR005.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{CR005: \(pp \to (\gamma^{(1)},Z^{(1)})_{\rm KK}\to \ell^+\ell^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:}
+\[
+  pp \to (\gamma^{(1)},Z^{(1)})_{\rm KK}\to \ell^+\ell^-,
+  \qquad \ell=e,\mu .
+\]
+This entry covers prompt high-mass dielectron and dimuon resonance searches
+used as proxies for neutral electroweak KK gauge excitations.  The
+experimental papers usually phrase the search in terms of spin-1 \(Z'\)
+benchmarks such as \(Z'_{\rm SSM}\), not as a complete custodial-RS model.
+
+\subsection*{Current best limit(s)}
+The canonical current benchmark is the CMS full-Run-2 high-mass dilepton
+search, which excludes a sequential-standard-model spin-1 \(Z'_{\rm SSM}\)
+below
+\[
+  m_{Z'_{\rm SSM}} = 5.15~{\rm TeV}
+  \quad (95\%~{\rm CL},~ee+\mu\mu).
+\]
+CMS also reports \(m_{Z'_\psi}>4.56~{\rm TeV}\) for the corresponding
+superstring-inspired narrow benchmark.  The closest ATLAS full-Run-2 result
+sets \(m_{Z'_{\rm SSM}}>5.1~{\rm TeV}\) in the combined dilepton channel.
+ATLAS further gives model-independent fiducial
+\(\sigma_{\rm fid}\times{\cal B}\) upper limits that reach about
+\(0.014~{\rm fb}\) at a 6 TeV pole mass for a zero-width signal.  The PDG
+\(Z'\)-searches review summarizes the ATLAS/CMS prompt dilepton searches as
+setting 95\% CL upper cross-section limits as low as \(0.02~{\rm fb}\).
+
+These limits are sidecar-measured observables, not theory predictions; see
+\texttt{flavor\_catalog/references/CR005/cms\_2021\_arxiv2103\_02708.txt},
+\texttt{atlas\_2019\_arxiv1903\_06248.txt}, and
+\texttt{pdg2024\_zprime\_searches.txt}.
+
+\subsection*{Relevance to RS / anarchic-flavor pipeline}
+For an RS model with bulk electroweak gauge fields, this search constrains
+the first neutral electroweak KK tower, schematically
+\((\gamma^{(1)},Z^{(1)},Z'_{\rm custodial})\), only after specifying the
+light-quark production coupling, the lepton coupling, the total width, and
+the branching fraction to \(e^+e^-\) and \(\mu^+\mu^-\).  A sequential
+\(Z'\) limit is therefore a useful collider benchmark, but it is not a
+model-independent lower bound on the RS \(M_{\rm KK}\).
+
+The distinction matters for the anarchic-flavor scan.  The current quark
+scan methodology note quotes the low-energy \(\Delta F=2\) headline crossing
+\(M_{\rm KK}^{\min}=47.26~{\rm TeV}\) at \(g_*=3\) and 50\% acceptance.
+The direct dilepton reach is an order of magnitude lower in the SSM-like
+benchmark and can weaken further in custodial RS if the neutral KK bosons
+couple weakly to light quarks or leptons, are broad, or preferentially decay
+to \(t\bar t\), \(b\bar b\), \(W_LW_L\), \(Zh\), Higgs-sector states, or
+fermion partners.  CR005 is therefore a PRIMARY collider cross-check and a
+handle on non-anarchic or nonstandard coupling patterns, not the leading
+constraint for the anarchic-flavor RS baseline.
+
+\subsection*{Post-2010 developments}
+The post-2010 search history is a steady luminosity and energy progression.
+ATLAS \texttt{arXiv:1209.2535} is the Run-1 reference most directly naming
+Kaluza--Klein \(Z/\gamma\) bosons among the interpreted high-mass dilepton
+signals.  ATLAS \texttt{arXiv:1707.02424} and CMS
+\texttt{arXiv:1803.06292} moved the same prompt \(ee/\mu\mu\) strategy to
+the early 13 TeV Run-2 dataset and set the predecessor high-mass resonance
+limits.  ATLAS \texttt{arXiv:1903.06248} then used the full Run-2 ATLAS
+sample and provided generic width-dependent fiducial cross-section limits
+plus \(Z'_{\rm SSM}\), \(Z'_\chi\), \(Z'_\psi\), and HVT interpretations.
+CMS \texttt{arXiv:2103.02708} used the full Run-2 CMS electron and muon
+datasets, supplied the sharpest combined \(Z'_{\rm SSM}\) mass benchmark for
+this entry, and also published recast-friendly coupling-plane information in
+HEPData.
+
+\subsection*{Constraint validity / model dependence}
+The measured collider objects are cross-section upper limits and benchmark
+mass exclusions.  Translating them into custodial-RS parameters requires
+model input: production is usually \(q\bar q\)-initiated, the \(Z'\) or KK
+state is treated as a narrow or moderately broad spin-1 resonance, and the
+quoted SSM benchmark assumes SM-like fermion couplings.  In realistic
+custodial RS, the first neutral electroweak resonances can have suppressed
+light-fermion couplings and enhanced couplings to IR-localized third
+generation fermions and longitudinal electroweak bosons.  The dilepton
+branching fraction may therefore be much smaller than in \(Z'_{\rm SSM}\).
+Conversely, a non-anarchic flavor structure or a model with deliberately
+large lepton couplings can make this channel more competitive than the
+minimal custodial-RS expectation.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Required greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no direct LHC dilepton-resonance likelihood, no
+ATLAS/CMS/HEPData collider-limit ingestion, and no neutral electroweak KK
+filter.  The adjacent code is low-energy or spectrum bookkeeping:
+\texttt{quarkConstraints/deltaf2.py:1--10} describes a tree-level
+KK-gluon-inspired \(\Delta F=2\) benchmark, and
+\texttt{quarkConstraints/deltaf2.py:320--324} matches a compact meson-mixing
+operator basis at \(M_{\rm KK}\).  \texttt{quarkConstraints/couplings.py:96--124}
+builds quark mass-basis KK-gluon couplings, not electroweak dilepton
+production.  The only collider-looking grep hit was
+\texttt{tests/test\_alpha\_s.py:88--90}, a CMS/RunDec \(\alpha_s\) example,
+not an LHC search constraint.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A faithful implementation is not a one-line mass cut.  It
+needs a signal model for the neutral electroweak KK spectrum and couplings,
+parton luminosities or event generation, widths and branching fractions, and
+a likelihood or external reinterpretation of the ATLAS/CMS dilepton spectra
+and limits.  A practical implementation would likely use exported HEPData
+tables plus a recasting tool or a validated internal likelihood, and would
+need separate branches for narrow \(Z'\)-like, broad, and third-generation
+dominated custodial-RS scenarios.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{CMS2021\_HighMassDilepton},
+\texttt{ATLAS2019\_HighMassDilepton},
+\texttt{PDG2024\_ZPrimeSearches},
+\texttt{HEPDataCMS2021\_HighMassDilepton},
+\texttt{HEPDataATLAS2019\_HighMassDilepton},
+\texttt{DavoudiaslHewettRizzo1999\_BulkGauge},
+\texttt{AgasheDelgadoMaySundrum2003\_CustodialRS},
+\texttt{AgasheServant2004\_WarpedGUT},
+\texttt{BellaEtAl2010\_KKEWGauge},
+\texttt{ATLAS2012\_Run1Dilepton},
+\texttt{ATLAS2017\_Run2Dilepton36fb}, and
+\texttt{CMS2018\_Run2Dilepton36fb}.
