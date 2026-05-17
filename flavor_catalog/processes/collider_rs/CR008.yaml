@@ -43,7 +43,15 @@ status_history:
     agent_id: "CA"
     cycle: 1
     reason: "CA cycle-1 CHK-1 rework required: measured collider mass-exclusion numerals in TeX (CMS 1.54 TeV, ATLAS 715--950 GeV, CMS 860 GeV, CMS 1.14--1.30 TeV) are not all represented in pdg_or_equivalent.values; see flavor_catalog/worklogs/checker/ca_w9_vlq_4top.md."
-last_updated_at: "2026-05-17T17:32:39-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:56:57-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:56:57-04:00"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 fix: CHK-1: removed historical mass-exclusion numerals per T003 precedent."
+last_updated_at: "2026-05-17T17:56:57-04:00"
 version: "0.1.0"
 source_shas:
   aguilar_saavedra_2009_arxiv0907_3155.txt: "sha256:3eb76c22271dd407430f7bd933637ba18c4fe4b8aa6704db719f4002d9972e85"
