@@ -36,11 +36,20 @@ status_history:
     agent_id: "WA"
     cycle: 1
     reason: "Writer polish for WA-w9-ew-tail batch; TeX, CHK-1 placement, and code-evidence claims normalized."
-checker_passed_at: null
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-17T18:05:00-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-17T18:05:00-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    cycle: 1
+    reason: "CA-w9-ew-tail cycle 1 verified CHK-1 through CHK-8; see flavor_catalog/worklogs/checker/ca_w9_ew_tail.md."
+checker_passed_at: "2026-05-17T18:05:00-04:00"
 opus_approved_at: null
 fact_checked_at: null
 fact_check_verdict: null
-last_updated_at: "2026-05-17T17:45:00-04:00"
+last_updated_at: "2026-05-17T18:05:00-04:00"
 version: "0.1.0"
 source_shas:
   atlas2013_arxiv1210_8389_abstract.xml: "sha256:b2b12a7d2e94f4e4f800ddc9bfa2b3fc3a6848cb4f548ffdacbeddf9742d9b37"

@@ -30,7 +30,16 @@ status_history:
     agent_id: "WA"
     cycle: 1
     reason: "Writer polish for WA-w9-ew-tail batch; TeX, CHK-1 placement, and code-evidence claims normalized."
-last_updated_at: "2026-05-17T17:45:00-04:00"
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-17T18:05:00-04:00"
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-17T18:05:00-04:00"
+    agent: "CA"
+    agent_id: "CA"
+    cycle: 1
+    reason: "CA-w9-ew-tail cycle 1 found CHK-2 key-reference tokens that do not resolve to source_manifest keys; see flavor_catalog/worklogs/checker/ca_w9_ew_tail.md."
+last_updated_at: "2026-05-17T18:05:00-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2017_arxiv1611_02428.txt: "sha256:6621ca6fbd62fd964001e67855bbd567238f593f0bf114d4e55854fb325922e8"
