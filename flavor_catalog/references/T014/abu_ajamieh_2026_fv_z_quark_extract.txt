@@ -1,0 +1,55 @@
+Source: Fayez Abu-Ajamieh, Amine Ahriche, Suman Kumbhakar, and Nobuchika Okada,
+"Novel and Updated Bounds on Flavor-Violating Z Interactions in the Quark Sector"
+arXiv:2507.10525v2
+URL: https://arxiv.org/abs/2507.10525
+PDF used only to produce this text extract: https://arxiv.org/pdf/2507.10525
+Access date: 2026-05-17
+
+Minimal local text extract for T014.
+
+Abstract extract:
+The authors derive bounds on flavor-violating couplings of the Z boson to
+quarks and present future sensitivity projections. The abstract states that
+current bounds on FV couplings are O(10^-9) for Z couplings to cu and sd,
+O(10^-7) for bd, O(10^-6) for bs, and O(10^-3) for tu and tc. It also states
+that low-energy flavor experiments provide significantly stronger constraints
+than current collider searches.
+
+Direct-search section extract:
+The simplest bounds can be extracted from direct searches of hadronic
+Z -> q_i qbar_j decays with i != j. At tree level,
+
+  Gamma(Z -> q_i qbar_j) = M_Z/(12 pi) (|g_L^ij|^2 + |g_R^ij|^2),
+
+neglecting final-state quark masses. Bounds on non-standard hadronic Z decays
+are obtained from the disagreement between SM predictions and the Z hadronic
+decay width. These bounds are given as
+
+  Br(Z -> q_i qbar_j) < 2.9 x 10^-3
+
+which translates to
+
+  sqrt(|g_L^ij|^2 + |g_R^ij|^2) < 4.96 x 10^-2,
+
+where {i,j} includes cu, bs, bd, cu conjugate, bs conjugate, bd conjugate,
+and sd. The text notes that the top quark is not included because the Z does
+not decay to an on-shell top quark.
+
+Table I / meson-oscillation extract:
+
+Direct Searches, bs: sqrt(|g_L^bs|^2 + |g_R^bs|^2) < 4.96 x 10^-2
+Direct Searches, bd: sqrt(|g_L^bd|^2 + |g_R^bd|^2) < 4.96 x 10^-2
+Direct Searches, sd: sqrt(|g_L^sd|^2 + |g_R^sd|^2) < 4.96 x 10^-2
+
+B^0 - Bbar^0 oscillation:
+  sqrt(|g_L^bd|^2 + |g_R^bd|^2) < 1.11 x 10^-7
+
+B_s - Bbar_s oscillation:
+  sqrt(|g_L^bs|^2 + |g_R^bs|^2) < 5.32 x 10^-6
+
+K^0 - Kbar^0 oscillation:
+  sqrt(|g_L^sd|^2 + |g_R^sd|^2) in [-4.64, 4.64] x 10^-9
+
+The authors state that they shift bounds to 90% CL for consistency in their
+coupling-bound table; the underlying branching-ratio direct-search bound above
+is quoted as the 2.9 x 10^-3 non-standard hadronic-Z limit.

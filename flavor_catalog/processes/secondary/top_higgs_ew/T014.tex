@@ -1,0 +1,111 @@
+% Flavor catalog per-process draft.
+% process_id: T014
+% family: top_higgs_ew
+% owner_agent_id: PKA-T014
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: T014.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(Z\to bs,\,bd,\,sd\)}{Z -> bs, bd, sd} Down-Sector FCNC Decays}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(Z\to b\bar s+\bar b s\),
+\(Z\to b\bar d+\bar b d\), and \(Z\to s\bar d+\bar s d\).
+This entry covers on-shell flavor-changing neutral-current \(Z\)-boson decays
+to unequal down-type quark flavors.  It is a Wave-8 \textbf{SECONDARY} entry
+under the policy described in \texttt{flavor\_catalog/PRIORITY\_TIERS.md}:
+it is useful as the catalog's standalone FCNC-\(Z\) row, but it is lower
+priority than the Wave 1--7 PRIMARY constraints.
+
+\subsection*{PDG / equivalent value(s)}
+The PDG 2025 \(Z\)-boson listing does not provide a dedicated row for
+\(Z\to bs\), \(Z\to bd\), or \(Z\to sd\).  The current experiment-equivalent
+direct bound used by recent FCNC-\(Z\) summaries is instead the inclusive
+non-standard hadronic-width constraint,
+\[
+  {\cal B}(Z\to q_i\bar q_j+\bar q_i q_j) < 2.9\times10^{-3}
+  \qquad (95\%~{\rm CL},\ i\ne j),
+\]
+from the agreement of the measured \(Z\) hadronic width with the SM
+prediction.  For this entry the sidecar records the same direct bound for
+\(bs\), \(bd\), and \(sd\), with the \(bs\) and \(bd\) provenance anchored in
+the ECFA 2025 and Kamenik et al. 2024 extracts and the explicit \(sd\)
+application anchored in Abu-Ajamieh et al. 2026.  The supporting PDG snapshot
+records the underlying hadronic \(Z\) branching fraction
+\({\cal B}(Z\to{\rm hadrons})=(69.911\pm0.056)\%\), but that inclusive
+branching fraction is not itself the FCNC observable.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Anarchic warped models naturally generate flavor-nonuniversal neutral-gauge
+couplings after rotating the localized fermion zero modes to the mass basis.
+For down-type quarks this creates off-diagonal \(Z d_i d_j\) vertices through
+zero-mode coupling nonuniversality, mixing with KK gauge bosons, and mixing
+with KK fermions.  The custodial construction that protects \(Zb_L\bar b_L\)
+also matters for off-diagonal left-handed \(Z d_L^i\bar d_L^j\) couplings;
+in custodial RS, rare \(K\) and \(B\) amplitudes can instead be dominated by
+right-handed tree-level \(Z\) exchange.  The direct on-shell \(Z\to q_iq_j\)
+bound is therefore a weak but conceptually clean collider diagnostic for the
+same effective vertices that enter \(K\), \(B_d\), and \(B_s\) rare decays and
+mixing.
+
+\subsection*{Post-2008 developments}
+Blanke, Buras, Duling, Gemmler, and Gori 2009 is the key RS-specific update
+relative to the CFW era: it studies rare \(K\) and \(B\) decays in a custodial
+warped model and shows how tree-level \(Z\) exchange with flavor-changing
+down-quark couplings can dominate selected \(\Delta F=1\) amplitudes.  Kamenik
+et al. 2024 updated the SM predictions and future-collider reach, quoting
+\({\cal B}(Z\to bs)=(4.2\pm0.7)\times10^{-8}\) and
+\({\cal B}(Z\to bd)=(1.8\pm0.3)\times10^{-9}\), plus the common
+\(2.9\times10^{-3}\) current direct bound.  The ECFA 2025 report folds these
+results into the Higgs/electroweak/top factory program and gives FCC-ee
+projection benchmarks such as \(7.33\times10^{-6}\) for \(Z\to bs\) with
+0.1\% systematics.  Abu-Ajamieh et al. 2026 gives a dedicated quark-sector
+survey of flavor-violating \(Z\) couplings: direct searches are only at the
+\(\sqrt{|g_L|^2+|g_R|^2}\sim5\times10^{-2}\) level, while meson oscillations
+push the effective \(bd\), \(bs\), and \(sd\) coupling bounds many orders of
+magnitude lower.
+
+\subsection*{Constraint validity and model dependence}
+The direct \(2.9\times10^{-3}\) limit is flavor-inclusive and not a dedicated
+\(bs\), \(bd\), or \(sd\) analysis; it should not be treated as a powerful
+standalone RS exclusion.  Low-energy constraints from \(K\), \(B_d\), and
+\(B_s\) mixing or rare decays are much stronger, but they test model-dependent
+linear combinations of left- and right-handed \(Z\) couplings and can be
+affected by correlations or cancellations with KK-gauge and other
+\(\Delta F=1,2\) contributions.  A live implementation therefore needs an
+explicit convention for off-diagonal \(Z d_i d_j\) couplings and a decision on
+whether to impose only the weak direct width bound or the stronger
+low-energy-derived coupling bounds.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  A targeted grep for \(Z\to bs\), \(Z\to bd\), \(Z\to sd\),
+\texttt{Zbs}/\texttt{Zbd}/\texttt{Zsd}, and flavor-violating \(Z\)-coupling
+strings across \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} returned no hits.  Broader searches find only existing
+\(\Delta F=2\) neutral-meson machinery
+(\texttt{quarkConstraints/modern/phenomenology.py:23}) and generic
+\(M_Z\)/\(\alpha_s(M_Z)\) support such as
+\texttt{qcd/constants.py:11} and \texttt{quarkConstraints/qcd\_running.py:100}.
+There is no on-shell FCNC-\(Z\) branching-ratio likelihood or \(Z d_i d_j\)
+operator interface.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Recording the external direct limit is straightforward, but a
+production RS constraint requires new electroweak \(\Delta F=1\) matching for
+off-diagonal \(Z\) couplings, custodial-embedding bookkeeping, and a policy for
+correlating direct \(Z\)-width information with already-implemented
+\(\Delta F=2\) and future rare-decay constraints.  The current code only
+covers neutral-meson mixing and unrelated charged-lepton dipoles.
+
+\subsection*{Key references}
+\texttt{PDG2025\_Z\_hadronic\_width};
+\texttt{ECFA2025\_FV\_Z\_decays};
+\texttt{Kamenik2024\_FV\_Higgs\_Z\_FCCee};
+\texttt{AbuAjamieh2026\_FV\_Z\_quark\_bounds};
+\texttt{Eilam2002\_Rare\_Z\_decays};
+\texttt{CsakiFalkowskiWeiler2008\_WarpedFlavor};
+\texttt{BlankeBurasDulingGemmlerGori2009\_RareKBWarped}.

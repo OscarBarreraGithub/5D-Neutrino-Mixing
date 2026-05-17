@@ -1,0 +1,53 @@
+Source: ECFA Higgs, electroweak, and top Factory Study
+arXiv:2506.15390v2
+URL: https://arxiv.org/abs/2506.15390
+PDF used only to produce this text extract: https://arxiv.org/pdf/2506.15390
+Access date: 2026-05-17
+
+Minimal local text extract for T014.
+
+Section 5.4.2, "Flavour changing Z-boson decays":
+
+The SM predicts the branching ratio of Z -> bs, bd, cu to be strongly
+suppressed by the GIM mechanism, while the lepton flavour violating processes,
+Z -> e mu, e tau, mu tau, are forbidden. Precise measurements of these decay
+channels are then highly sensitive to possible New Physics contributions. The
+report parametrises the latter in terms of effective FCNC couplings to the Z
+boson,
+
+  L contains g_L^ij (q_i,L gamma_mu q_j,L) Z^mu
+             + g_R^ij (q_i,R gamma_mu q_j,R) Z^mu,
+
+where ij = bs, bd, cu.
+
+Updated computations yield:
+
+  B(Z -> bs) = (4.2 +/- 0.7) x 10^-8
+  B(Z -> bd) = (1.8 +/- 0.3) x 10^-9
+  B(Z -> cu) = (1.4 +/- 0.2) x 10^-18
+
+with B(Z -> q_i q_j) defined as the sum of particle and antiparticle final
+states. The reported uncertainties contain both numerical-input theory
+uncertainties and leading two-loop corrections to the amplitudes.
+
+Existing direct limits on non-standard hadronic decays of the Z follow from
+the agreement of the measurement and the SM prediction for the Z hadronic
+width, giving:
+
+  B(Z -> qq') < 2.9 x 10^-3 at 95% CL.
+
+The report states that low-energy constraints are much more powerful. For
+Z -> bd and Z -> bs, flavour-changing processes essentially constrain the
+new-physics effect below the SM value, so the direct-observation target is
+effectively the SM value within uncertainties. For Z -> uc the report quotes
+B(Z -> uc) < 4 x 10^-7 from a flavour global fit.
+
+FCC-ee projection excerpt:
+For 0.1% systematic uncertainties the expected reaches are
+
+  B(Z -> bs) < 7.33 x 10^-6
+  B(Z -> cu) < 4.06 x 10^-4
+
+and using only a b-tagger gives the weaker projected constraint
+
+  B(Z -> bd) < 2.45 x 10^-4.

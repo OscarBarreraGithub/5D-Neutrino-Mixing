@@ -1,0 +1,66 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T014
+sources:
+  - key: PDG2025_Z_hadronic_width
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group Z boson listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    sha256_of_local_snapshot: "sha256:dbce22031a976a0f508e0e38037206fc33b0c3dfb333ae4c8bb34ff4cf3730e5"
+    snapshot_path: "flavor_catalog/references/T014/pdg2025_z_hadronic_listing.txt"
+  - key: ECFA2025_FV_Z_decays
+    arxiv_id: "2506.15390"
+    DOI: null
+    title: "ECFA Higgs, electroweak, and top Factory Study"
+    authors: "H. Abidi et al."
+    year: 2025
+    url: "https://arxiv.org/abs/2506.15390"
+    sha256_of_local_snapshot: "sha256:13d5927991d179d1713ae501d825459371a385f52918f1b4d09e60f9a3a57173"
+    snapshot_path: "flavor_catalog/references/T014/ecfa2025_fv_z_decays_extract.txt"
+  - key: Kamenik2024_FV_Higgs_Z_FCCee
+    arxiv_id: "2306.17520"
+    DOI: "10.1103/PhysRevD.109.L011301"
+    title: "Flavor violating Higgs and Z decays at FCC-ee"
+    authors: "Jernej F. Kamenik, Arman Korajac, Manuel Szewc, Michele Tammaro, and Jure Zupan"
+    year: 2024
+    url: "https://arxiv.org/abs/2306.17520"
+    sha256_of_local_snapshot: "sha256:90f90d1895d4f1062601ca4f44d2aeeb88965f42655cc6f285452a0bef6e826f"
+    snapshot_path: "flavor_catalog/references/T014/kamenik_2024_fv_higgs_z_extract.txt"
+  - key: AbuAjamieh2026_FV_Z_quark_bounds
+    arxiv_id: "2507.10525"
+    DOI: null
+    title: "Novel and Updated Bounds on Flavor-Violating Z Interactions in the Quark Sector"
+    authors: "Fayez Abu-Ajamieh, Amine Ahriche, Suman Kumbhakar, and Nobuchika Okada"
+    year: 2026
+    url: "https://arxiv.org/abs/2507.10525"
+    sha256_of_local_snapshot: "sha256:53ee0fc6e7ab683793338fafbfdcf2075c81608b4acf74678c22f00e340b902b"
+    snapshot_path: "flavor_catalog/references/T014/abu_ajamieh_2026_fv_z_quark_extract.txt"
+  - key: Eilam2002_Rare_Z_decays
+    arxiv_id: "hep-ph/0211458"
+    DOI: "10.1016/S0920-5632(03)80189-5"
+    title: "Rare Z Decays"
+    authors: "Gad Eilam"
+    year: 2002
+    url: "https://arxiv.org/abs/hep-ph/0211458"
+    sha256_of_local_snapshot: "sha256:11b974b6f5830dce5774d5ccee276e0b74b47fc7eda6824821275b16241b7af0"
+    snapshot_path: "flavor_catalog/references/T014/eilam_2002_rare_z_decays_extract.txt"
+  - key: CsakiFalkowskiWeiler2008_WarpedFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    sha256_of_local_snapshot: "sha256:a5a1239197dec4bfdb1f4c738f3f52483086497720dbdb53b499c8be1b200ff3"
+    snapshot_path: "flavor_catalog/references/T014/cfw_2008_warped_flavor_arxiv_abs.txt"
+  - key: BlankeBurasDulingGemmlerGori2009_RareKBWarped
+    arxiv_id: "0812.3803"
+    DOI: "10.1088/1126-6708/2009/03/108"
+    title: "Rare K and B Decays in a Warped Extra Dimension with Custodial Protection"
+    authors: "Monika Blanke, Andrzej J. Buras, Bjoern Duling, Katrin Gemmler, and Stefania Gori"
+    year: 2009
+    url: "https://arxiv.org/abs/0812.3803"
+    sha256_of_local_snapshot: "sha256:ab0b4bcb386dcf5eea6e9544ae650c9fe9f1f803c4841332bedfeb5782434ea6"
+    snapshot_path: "flavor_catalog/references/T014/blanke_buras_2009_rare_kb_warped_arxiv_abs.txt"
