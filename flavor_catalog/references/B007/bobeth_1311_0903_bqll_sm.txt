@@ -1,0 +1,39 @@
+Source: arXiv abstract page and local pdftotext extract
+Access date: 2026-05-17
+URL: https://arxiv.org/abs/1311.0903
+arXiv: 1311.0903
+DOI: 10.1103/PhysRevLett.112.101801
+Title: B_{s,d} -> l+ l- in the Standard Model with Reduced Theoretical Uncertainty
+Authors: Christoph Bobeth, Martin Gorbahn, Thomas Hermann, Mikolaj Misiak,
+Emmanuel Stamou, Matthias Steinhauser
+
+Minimal extract for B007.
+
+Abstract:
+  The paper combines O(alpha_em) and O(alpha_s^2) corrections to
+  Bs,d -> l+ l- and presents updated Standard Model branching-ratio
+  predictions.  The inclusion of these corrections removes major
+  theoretical uncertainties of perturbative origin.
+
+Relevant theory statements:
+  These flavor-changing neutral-current decays are generated first at
+  one-loop level through W-box and Z-penguin diagrams.  Their branching
+  ratios undergo additional helicity suppression by m_l^2 / M_Bq^2.
+  The branching-ratio formula depends on the lepton mass, the Bq-meson
+  mass, and the decay constant f_Bq.  Operators neglected in the SM may
+  matter in beyond-SM theories.
+
+Electron-mode numerical predictions from Eq. (7):
+  B_se x 10^14 = 8.54 +- 0.55.
+  B_de x 10^15 = 2.48 +- 0.21.
+
+Muon/tau companion predictions from the same equation:
+  B_smu x 10^9 = 3.65 +- 0.23.
+  B_stau x 10^7 = 7.73 +- 0.49.
+  B_dmu x 10^10 = 1.06 +- 0.09.
+  B_dtau x 10^8 = 2.22 +- 0.19.
+
+Error-budget context:
+  The main parametric uncertainties come from f_Bq and CKM angles.
+  Non-parametric uncertainties are estimated at about 1.5% of the
+  branching ratios, compared to about 8% before these calculations.

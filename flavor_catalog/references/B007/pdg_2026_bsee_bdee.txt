@@ -1,0 +1,70 @@
+Source: Particle Data Group pdgLive/API decay listings
+Access date: 2026-05-17
+URLs:
+  - https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.20
+  - https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.6
+
+Minimal extract for B007.
+
+PDG API listing S086.20
+Edition: 2026
+Description: B_s()0 --> e+ e-
+Related data: S086R18, G(B_s0 --> e+ e-)/G(total)
+Note: Test for DeltaB = 1 weak neutral current.
+
+Canonical measurement:
+  document_id: AAIJ 2020W
+  publication_name: PRL 124 211802
+  publication_year: 2020
+  doi: 10.1103/PhysRevLett.124.211802
+  inspire_id: 1784438
+  title: Search for the Rare Decays B^0_s to e+e- and B^0 to e+e-
+  confidence_level: 90.0
+  technique: LHCB
+  comment: p p at 7, 8, 13 TeV
+  VALUE: <9.4 E-9
+  numeric value: 9.4E-9
+  limit_type: U
+  used_in_average: true
+  used_in_fit: true
+  footnote: Assumes no contribution from B0 --> e+ e- decays.
+
+Prior PDG-listed measurements:
+  AALTONEN 2009P, PRL 102 201801, CDF, 90.0 CL, VALUE <2.8 E-7,
+  p pbar at 1.96 TeV.
+  ACCIARRI 1997B, PL B391 474, L3, 90.0 CL, VALUE <5.4 E-5,
+  e+ e- --> Z.
+
+PDG API listing S042.6
+Edition: 2026
+Description: B0 --> e+ e-
+Related data: S042R6, G(B0 --> e+ e-)/G(total)
+Note: Test for DeltaB=1 weak neutral current. Allowed by higher-order
+electroweak interactions.
+
+Canonical measurement:
+  document_id: AAIJ 2020W
+  publication_name: PRL 124 211802
+  publication_year: 2020
+  doi: 10.1103/PhysRevLett.124.211802
+  inspire_id: 1784438
+  title: Search for the Rare Decays B^0_s to e+e- and B^0 to e+e-
+  confidence_level: 90.0
+  technique: LHCB
+  comment: p p at 7, 8, 13 TeV
+  VALUE: <2.5 E-9
+  numeric value: 2.5E-9
+  limit_type: U
+  used_in_average: true
+  used_in_fit: true
+  footnote: Assumes no contribution from B_s()0 --> e+ e- decays.
+
+Prior PDG-listed measurements:
+  AALTONEN 2009P, PRL 102 201801, CDF, 90.0 CL, VALUE <8.3 E-8,
+  p pbar at 1.96 TeV.
+  AUBERT 2008P, PR D77 032007, BABR, 90.0 CL, VALUE <11.3 E-8,
+  e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.
+  AUBERT 2005W, PRL 94 221803, BABR, 90.0 CL, VALUE <6.1 E-8,
+  replaced by AUBERT 2008P.
+  CHANG 2003, PR D68 111101, BELLE, 90.0 CL, VALUE <1.9 E-7,
+  e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.

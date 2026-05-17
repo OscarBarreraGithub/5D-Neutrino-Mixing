@@ -1,0 +1,73 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B007
+sources:
+  - key: PDG2026_BsBdEe
+    arxiv_id: null
+    DOI: null
+    title: "Particle Data Group pdgLive/API B_s0 -> e+e- and B0 -> e+e- listings"
+    authors: "Particle Data Group"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.20; https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.6"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:bec216f3aa33f76e4aa76582c9716b123f3c0a08902c7824b1d098e29da716bb"
+    snapshot_path: "flavor_catalog/references/B007/pdg_2026_bsee_bdee.txt"
+  - key: LHCb2020_BsBdEe
+    arxiv_id: "2003.03999"
+    DOI: "10.1103/PhysRevLett.124.211802"
+    title: "Search for the rare decays B^0_s -> e+e- and B^0 -> e+e-"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2020
+    url: "https://arxiv.org/abs/2003.03999"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:dd07d58ad222492da67a92a2cc39d907cc09f47842745556546493817a5c781f"
+    snapshot_path: "flavor_catalog/references/B007/lhcb_2003_03999_bsee_bdee.txt"
+  - key: BobethEtAl2013_BqllSM
+    arxiv_id: "1311.0903"
+    DOI: "10.1103/PhysRevLett.112.101801"
+    title: "B_{s,d} -> l+ l- in the Standard Model with Reduced Theoretical Uncertainty"
+    authors: "Christoph Bobeth, Martin Gorbahn, Thomas Hermann, Mikolaj Misiak, Emmanuel Stamou, and Matthias Steinhauser"
+    year: 2014
+    url: "https://arxiv.org/abs/1311.0903"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:d70267c9636ab74d909cfed2d6a1f10cf90dcb8baf65d9e4faf1dba38101e199"
+    snapshot_path: "flavor_catalog/references/B007/bobeth_1311_0903_bqll_sm.txt"
+  - key: CDF2009_BsBdEe
+    arxiv_id: "0901.3803"
+    DOI: "10.1103/PhysRevLett.102.201801"
+    title: "Search for the Decays B^0_(s) -> e+mu- and B^0_(s) -> e+e- in CDF Run II"
+    authors: "T. Aaltonen et al. (CDF Collaboration)"
+    year: 2009
+    url: "https://arxiv.org/abs/0901.3803"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:151fba3738b1a6798d0f8fa6656ce0298fcfe4162a8bf8c3d9dbe7dcc661d2e4"
+    snapshot_path: "flavor_catalog/references/B007/cdf_0901_3803_bsee_bdee.txt"
+  - key: FleischerJaarsmaTetlalmatziXolocotzi2017_BqllNP
+    arxiv_id: "1703.10160"
+    DOI: "10.1007/JHEP05(2017)156"
+    title: "In Pursuit of New Physics with B^0_{s,d}->l+l-"
+    authors: "Robert Fleischer, Ruben Jaarsma, and Gilberto Tetlalmatzi-Xolocotzi"
+    year: 2017
+    url: "https://arxiv.org/abs/1703.10160"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:ca9e87fa211c9b678bfa5f621abe5db086574e559d8685b5c214ea88dec8a8c8"
+    snapshot_path: "flavor_catalog/references/B007/fleischer_1703_10160_bqll_np.txt"
+  - key: BaBar2008_BdEe
+    arxiv_id: "0712.1516"
+    DOI: "10.1103/PhysRevD.77.032007"
+    title: "Study of B0 -> l+l'- decays (l,l' = e,mu)"
+    authors: "B. Aubert et al. (BABAR Collaboration)"
+    year: 2008
+    url: "https://arxiv.org/abs/0712.1516"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:dbaf894843895f496f8a88fd8391ede7b12d68891e9ad4ef2fd29ff83a8cb613"
+    snapshot_path: "flavor_catalog/references/B007/babar_0712_1516_bdee.txt"
+  - key: CsakiFalkowskiWeiler2008_RSFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4dce656efcce97da951efca913c5b277c03df30d4c30edc8c6a9c5d54efe3e35"
+    snapshot_path: "flavor_catalog/references/B007/cfw_0804_1954_rs_flavor.txt"

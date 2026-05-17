@@ -1,0 +1,110 @@
+% Flavor catalog per-process entry.
+% process_id: B007
+% family: beauty
+% owner_agent_id: PKA-B007
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B007.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B007: \(B_s^0\to e^+e^-\), \(B^0\to e^+e^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(B_s^0\to e^+e^-\) and \(B^0\to e^+e^-\).
+This entry covers rare electronic leptonic neutral-\(B\) decays,
+respectively the \(b\to s e^+e^-\) and \(b\to d e^+e^-\) flavor-changing
+neutral-current tails.  It is the electron-mode companion to the muonic
+entries \(B005\) and \(B006\), but is cataloged separately because scalar and
+pseudoscalar electron operators can remove the Standard Model helicity
+suppression in ways not captured by a direct muon-mode rescaling.
+
+\subsection*{PDG / equivalent value(s)}
+The current PDG live/API listings, edition 2026 and accessed on 2026-05-17,
+quote only upper limits:
+\[
+  {\cal B}(B_s^0\to e^+e^-) < 9.4\times 10^{-9}
+  \quad(90\%\ {\rm CL}),
+\]
+assuming no contribution from \(B^0\to e^+e^-\), and
+\[
+  {\cal B}(B^0\to e^+e^-) < 2.5\times 10^{-9}
+  \quad(90\%\ {\rm CL}),
+\]
+assuming no contribution from \(B_s^0\to e^+e^-\).  The source key is
+\texttt{PDG2026\_BsBdEe}, with local snapshot
+\texttt{flavor\_catalog/references/B007/pdg\_2026\_bsee\_bdee.txt}.  PDG uses
+the LHCb 2020 PRL result as the active input.  The LHCb paper also reports the
+corresponding \(95\%\)-CL limits \(11.2\times10^{-9}\) and \(3.0\times10^{-9}\),
+respectively, recorded under \texttt{LHCb2020\_BsBdEe}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\textbf{SECONDARY tier.}  Per \texttt{flavor\_catalog/PRIORITY\_TIERS.md},
+this process is a deferred Wave-8 promotion: it is less urgent than the
+Wave-1--7 PRIMARY set, but it probes an electron-specific direction absent
+from \(B005/B006\).  In anarchic RS models, non-universal fermion localization
+generates flavor-changing \(Z\), KK electroweak-gauge, Higgs, radion, or other
+scalar exchanges after rotating to the mass basis.  Axial-vector contributions
+remain helicity suppressed in the Standard Model pattern, while scalar and
+pseudoscalar operators can be chirality enhanced relative to the electronic SM
+amplitude.  The mode is therefore a useful handle on electron-sector
+misalignment and on any 5D-Yukawa or brane-Higgs structure that feeds
+\(C_S^{(\prime)}\) or \(C_P^{(\prime)}\) differently from \(C_{10}^{(\prime)}\).
+
+\subsection*{Post-2008 developments}
+The CFW RS-flavor baseline is arXiv:0804.1954
+(\texttt{CsakiFalkowskiWeiler2008\_RSFlavor}); its quoted KK reference scales
+are theory anchors and are kept out of \texttt{pdg\_or\_equivalent}.  The
+experimental landscape then moved through CDF's arXiv:0901.3803 search, which
+set the previous \(B_s^0\) and \(B^0\) electronic limits later superseded by
+LHCb.  BaBar's arXiv:0712.1516 and Belle's older \(B^0\to e^+e^-\) bound remain
+historical \(B_d\)-mode context in the PDG table.  Bobeth et al.,
+arXiv:1311.0903, supplied the reduced-uncertainty SM \(B_{s,d}\to\ell^+\ell^-\)
+predictions and made explicit that the electron modes are suppressed by the
+lepton mass in the SM.  Fleischer, Jaarsma, and Tetlalmatzi-Xolocotzi,
+arXiv:1703.10160, emphasized that new physics in the \(B_{s,d}\to e^+e^-\)
+channels can be much less suppressed than the SM electron amplitude in
+scalar/pseudoscalar scenarios.  LHCb's arXiv:2003.03999 search is the decisive
+post-2008 experimental update, improving the previous CDF limits by more than
+an order of magnitude.
+
+\subsection*{Constraint validity / model dependence}
+The canonical observables are robust experimental upper limits, but their model
+interpretation is not a direct neutral-meson-mixing constraint.  The LHCb limits
+are quoted one channel at a time, assuming no contribution from the other
+neutral-\(B\) electronic mode, and the \(B_s^0\) result assumes the mean
+\(B_s^0\) lifetime; the paper reports a \(2.4\%\) shift for SM-like CP-odd or
+CP-even alternatives.  A production RS implementation needs a consistent
+\(\Delta B=1\) Hamiltonian, the \(B_q\) decay constants and CKM inputs as
+theory inputs, a convention for electron bremsstrahlung/QED effects, and
+separate scalar and pseudoscalar Wilson coefficients.  The limits are strongest
+as exclusions on large electron-specific scalar/pseudoscalar amplitudes rather
+than as precision tests of the tiny SM prediction.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required greps over \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no \(B_s^0\to e^+e^-\),
+\(B^0\to e^+e^-\), \(b\to s e e\), or \(b\to d e e\) rare-decay
+implementation.  Nearby hits are neutral \(B_d/B_s\) mixing and unrelated
+charged-lepton dipole code, for example \texttt{quarkConstraints/deltaf2.py:239}
+and \texttt{quarkConstraints/deltaf2.py:922}, not this \(\Delta B=1\)
+electronic leptonic observable.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  The first useful implementation can share the pure-leptonic
+\(\Delta B=1\) machinery needed for \(B005/B006\): \(C_{10}^{(\prime)}\),
+\(C_S^{(\prime)}\), \(C_P^{(\prime)}\), \(f_{B_q}\), lifetimes, CKM inputs, and
+a branching-ratio formula.  The electron channel adds care around QED tails and
+the LHCb assumptions, but it does not require angular observables or exclusive
+form-factor likelihoods.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2026\_BsBdEe}, \texttt{LHCb2020\_BsBdEe},
+\texttt{BobethEtAl2013\_BqllSM},
+\texttt{CDF2009\_BsBdEe},
+\texttt{FleischerJaarsmaTetlalmatziXolocotzi2017\_BqllNP},
+\texttt{BaBar2008\_BdEe}, and
+\texttt{CsakiFalkowskiWeiler2008\_RSFlavor}.
