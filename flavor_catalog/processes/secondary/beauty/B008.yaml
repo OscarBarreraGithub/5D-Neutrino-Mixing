@@ -26,7 +26,15 @@ status_history:
     timestamp: "2026-05-17T02:14:12-04:00"
     agent_id: "PKA-B008"
     reason: "Initial PKA draft, source snapshots, coverage grep, and sidecar completed."
-last_updated_at: "2026-05-17T02:14:12-04:00"
+  - from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-17T02:37:14-04:00"
+    timestamp: "2026-05-17T02:37:14-04:00"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA Wave-8 B-rare-leptonic polish and sidecar normalization."
+last_updated_at: "2026-05-17T02:37:14-04:00"
 version: "0.1.0"
 source_shas:
   arxiv_0804_1954_cfw_rs_flavor.txt: "sha256:abf3f9a1725ce7359d5648b4281994fe65fd36082c120f10a38e52ca0c3c4342"
@@ -43,10 +51,12 @@ pdg_or_equivalent:
   access_date: "2026-05-17"
   year: 2026
   value_summary: "PDG live/API gives one-mode-at-a-time upper limits: BR(B_s0 -> tau+ tau-) < 6.8e-3 and BR(B0 -> tau+ tau-) < 2.1e-3, both at 95% CL."
-  canonical_limits:
-    - observable: "BR(B_s0 -> tau+ tau-)"
+  values:
+    - id: "pdg2026_bs_tautau_95cl"
+      observable: "BR(B_s0 -> tau+ tau-)"
       value: 0.0068
       upper_limit: 0.0068
+      uncertainty: null
       limit_type: "upper"
       cl: "95% CL"
       confidence_level: 0.95
@@ -60,12 +70,14 @@ pdg_or_equivalent:
       year: 2026
       source_measurement_year: 2017
       experiment: "LHCb"
-      conditions: "Assuming no contribution from B0 -> tau+ tau-; pp at 7 and 8 TeV."
+      conditions: "Assuming no contribution from B0 -> tau+ tau-."
       snapshot_path: "flavor_catalog/references/B008/pdg_2026_bs_tautau.txt"
-      sha256_of_text_snapshot: "sha256:ef1c4ed4f001bc4d55293dc64a6ef7782a6ca9ffdc4308bad922dc581ea942fc"
-    - observable: "BR(B0 -> tau+ tau-)"
+      sha256: "sha256:ef1c4ed4f001bc4d55293dc64a6ef7782a6ca9ffdc4308bad922dc581ea942fc"
+    - id: "pdg2026_bd_tautau_95cl"
+      observable: "BR(B0 -> tau+ tau-)"
       value: 0.0021
       upper_limit: 0.0021
+      uncertainty: null
       limit_type: "upper"
       cl: "95% CL"
       confidence_level: 0.95
@@ -79,13 +91,14 @@ pdg_or_equivalent:
       year: 2026
       source_measurement_year: 2017
       experiment: "LHCb"
-      conditions: "Assuming no contribution from B_s0 -> tau+ tau-; pp at 7 and 8 TeV."
+      conditions: "Assuming no contribution from B_s0 -> tau+ tau-."
       snapshot_path: "flavor_catalog/references/B008/pdg_2026_bd_tautau.txt"
-      sha256_of_text_snapshot: "sha256:4f20e368d9103d807807793e18b81335931ed1c92621635718062e93aa5aeeb0"
-  historical_inputs:
-    - observable: "BR(B0 -> tau+ tau-)"
+      sha256: "sha256:4f20e368d9103d807807793e18b81335931ed1c92621635718062e93aa5aeeb0"
+    - id: "babar2006_bd_tautau_90cl"
+      observable: "BR(B0 -> tau+ tau-)"
       value: 0.0041
       upper_limit: 0.0041
+      uncertainty: null
       limit_type: "upper"
       cl: "90% CL"
       confidence_level: 0.90
@@ -97,13 +110,19 @@ pdg_or_equivalent:
       access_date: "2026-05-17"
       year: 2006
       experiment: "BABAR"
-      conditions: "e+e- -> Upsilon(4S); assumes equal B+ and B0 production."
+      conditions: "Assumes equal B+ and B0 production; historical value superseded by LHCb."
       snapshot_path: "flavor_catalog/references/B008/arxiv_hep_ex_0511015_babar_bd_tautau.txt"
-      sha256_of_text_snapshot: "sha256:d0acf4944c8c9ce9ef62bde92a8bed25cdb8138d4ee4a94b302de84128d81645"
+      sha256: "sha256:d0acf4944c8c9ce9ef62bde92a8bed25cdb8138d4ee4a94b302de84128d81645"
+  historical_value_ids:
+    - "babar2006_bd_tautau_90cl"
 supporting_measurements:
   - observable: "LHCb B_s0/B0 -> tau+ tau- search dataset"
-    value: "3 fb^-1"
-    units: "integrated luminosity"
+    integrated_luminosity:
+      value: 3
+      units: "fb^-1"
+    center_of_mass_energies:
+      values: [7, 8]
+      units: "TeV"
     conditions: "2011 and 2012 pp collision data; tau^- -> pi^- pi^+ pi^- nu_tau reconstruction."
     source_key: "AaijEtAl2017_BqTauTau"
     source_url: "https://arxiv.org/abs/1703.02508"
@@ -111,13 +130,8 @@ supporting_measurements:
     snapshot_path: "flavor_catalog/references/B008/arxiv_1703_02508_lhcb_bq_tautau.txt"
     sha256_of_text_snapshot: "sha256:b2b79597fa8a10e2ee303038d47c18df439e4463c3b7ad3ebfb38a56883329c5"
 recent_experimental_inputs:
-  - observable: "BR(B+ -> K+ tau+ tau-)"
-    value: 1.31e-3
-    uncertainties: "+0.66/-0.61 stat, +0.35/-0.25 syst, in units of 10^-3"
-    upper_limit: 2.25e-3
-    limit_type: "upper"
-    cl: "90% CL"
-    context: "Related semileptonic b -> s tau+ tau- search; not the B008 neutral-leptonic observable."
+  - observable: "B+ -> K+ tau+ tau-"
+    context: "Related semileptonic b -> s tau+ tau- search; not the B008 neutral-leptonic observable, so its numerical result is not used as a B008 canonical value."
     source_key: "LeesEtAl2017_BKTauTauRelated"
     source_url: "https://arxiv.org/abs/1605.09637"
     access_date: "2026-05-17"
@@ -145,18 +159,14 @@ auxiliary_theory_inputs:
     snapshot_path: "flavor_catalog/references/B008/arxiv_1311_0903_bobeth_bqll_sm.txt"
     sha256_of_text_snapshot: "sha256:dda74abee3205ed4b624a5a80c1c5712088b7ef9cf1af1ef15ac7e6f4ea28920"
   - observable: "b -> s tau+ tau- new-physics sensitivity"
-    value: "possible O(10^3) enhancement in selected LFU-violating scenarios"
-    context: "Theory motivation for retaining tauonic b -> s modes as SECONDARY probes."
+    context: "Theory motivation for retaining tauonic b -> s modes as SECONDARY probes in lepton-flavor-nonuniversal scenarios."
     source_key: "CapdevilaEtAl2018_BSTauTauNP"
     source_url: "https://arxiv.org/abs/1712.01919"
     access_date: "2026-05-17"
     snapshot_path: "flavor_catalog/references/B008/arxiv_1712_01919_capdevila_bstautau_np.txt"
     sha256_of_text_snapshot: "sha256:add808af0a2046cde38fffd0390a2e3d9c819ddca7102f26c1203fe1208c1524"
   - observable: "Indirect lifetime-ratio context for B_s -> tau tau new physics"
-    upper_limit: 5.5e-2
-    limit_type: "upper"
-    cl: "95% CL"
-    context: "Bordone and Fernandez Navarro quote an indirect NP bound and note that the direct LHCb bound is stronger; scalar operators can be chirally enhanced."
+    context: "Bordone and Fernandez Navarro discuss indirect lifetime-ratio and DeltaGamma_s constraints and note that scalar operators can be chirally enhanced."
     source_key: "BordoneNavarro2023_BSTauTauNP"
     source_url: "https://arxiv.org/abs/2307.07013"
     access_date: "2026-05-17"
@@ -195,6 +205,4 @@ constraint_validity:
     - "A simultaneous B_s/B_d interpretation should account for the LHCb assumptions that the other neutral mode is absent when quoting each limit."
     - "Tau reconstruction uses modes with missing neutrinos; detector acceptance belongs in supporting context, not pdg_or_equivalent."
 open_issues:
-  - "WA/CA should decide whether the related BABAR B+ -> K+ tau+ tau- source remains in prose or only in the worklog."
-  - "A future implementation should decide whether to approximate the LHCb limits independently or obtain a two-dimensional likelihood for simultaneous B_s and B_d tauonic decays."
-  - "flavor_catalog/PRIORITY_TIERS.md was absent in the checkout during PKA reading, so the Wave-8 prompt policy was used directly."
+  - "Future implementation choice: approximate the LHCb limits independently or obtain a two-dimensional likelihood for simultaneous B_s and B_d tauonic decays."

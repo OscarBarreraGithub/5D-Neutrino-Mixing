@@ -20,7 +20,7 @@ pseudoscalar electron operators can remove the Standard Model helicity
 suppression in ways not captured by a direct muon-mode rescaling.
 
 \subsection*{PDG / equivalent value(s)}
-The current PDG live/API listings, edition 2026 and accessed on 2026-05-17,
+The current PDG live/API listings (2026 edition, accessed 2026-05-17)
 quote only upper limits:
 \[
   {\cal B}(B_s^0\to e^+e^-) < 9.4\times 10^{-9}
@@ -65,10 +65,9 @@ lepton mass in the SM.  Fleischer, Jaarsma, and Tetlalmatzi-Xolocotzi,
 arXiv:1703.10160, emphasized that new physics in the \(B_{s,d}\to e^+e^-\)
 channels can be much less suppressed than the SM electron amplitude in
 scalar/pseudoscalar scenarios.  LHCb's arXiv:2003.03999 search is the decisive
-post-2008 experimental update, improving the previous CDF limits by more than
-an order of magnitude.
+post-2008 experimental update and supersedes the previous CDF limits.
 
-\subsection*{Constraint validity / model dependence}
+\subsection*{Constraint validity and model dependence}
 The canonical observables are robust experimental upper limits, but their model
 interpretation is not a direct neutral-meson-mixing constraint.  The LHCb limits
 are quoted one channel at a time, assuming no contribution from the other
@@ -87,10 +86,12 @@ than as precision tests of the tiny SM prediction.
 \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
 \texttt{scanParams/}, and \texttt{tests/} found no \(B_s^0\to e^+e^-\),
 \(B^0\to e^+e^-\), \(b\to s e e\), or \(b\to d e e\) rare-decay
-implementation.  Nearby hits are neutral \(B_d/B_s\) mixing and unrelated
-charged-lepton dipole code, for example \texttt{quarkConstraints/deltaf2.py:239}
-and \texttt{quarkConstraints/deltaf2.py:922}, not this \(\Delta B=1\)
-electronic leptonic observable.
+implementation.  The exact nearby hits are neutral \(B_d/B_s\) mixing inputs at
+\texttt{quarkConstraints/deltaf2.py:225} and
+\texttt{quarkConstraints/deltaf2.py:239}, and the corresponding mixing
+evaluators at \texttt{quarkConstraints/deltaf2.py:903} and
+\texttt{quarkConstraints/deltaf2.py:922}; they are \(\Delta F=2\), not this
+\(\Delta B=1\) electronic leptonic observable.
 
 \subsection*{Implementation difficulty}
 \textbf{MEDIUM.}  The first useful implementation can share the pure-leptonic

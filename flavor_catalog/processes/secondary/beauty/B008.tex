@@ -61,17 +61,14 @@ arXiv:hep-ex/0511015, remains useful history but is superseded in PDG by LHCb.
 The BABAR arXiv:1605.09637 result is a related \(B^+\to K^+\tau^+\tau^-\)
 semileptonic input, not the B008 neutral-leptonic observable.
 
-On the theory side, Bobeth et al. arXiv:1311.0903 supplied reduced-uncertainty
-Standard Model predictions, including
-\({\cal B}(B_s\to\tau^+\tau^-)=(7.73\pm0.49)\times10^{-7}\) and
-\({\cal B}(B_d\to\tau^+\tau^-)=(2.22\pm0.19)\times10^{-8}\).  Capdevila et al.
-arXiv:1712.01919 showed why \(b\to s\tau^+\tau^-\) can be a high-leverage
-new-physics probe, with possible order-of-magnitude to three-order enhancements
-in lepton-flavor-nonuniversal scenarios.  Bordone and Fernandez Navarro
-arXiv:2307.07013 connected \(b\to s\tau\tau\) new physics to
-\(\tau_{B_s}/\tau_{B_d}\) and \(\Delta\Gamma_s\), emphasizing that scalar
-operators make \(B_s\to\tau^+\tau^-\) particularly sensitive through chiral
-enhancement.
+On the theory side, Bobeth et al. arXiv:1311.0903 supplied the
+reduced-uncertainty SM normalization for \(B_{s,d}\to\ell^+\ell^-\) modes.
+Capdevila et al. arXiv:1712.01919 showed why \(b\to s\tau^+\tau^-\) can remain
+a high-leverage new-physics probe in lepton-flavor-nonuniversal scenarios.
+Bordone and Fernandez Navarro arXiv:2307.07013 connected \(b\to s\tau\tau\)
+new physics to \(\tau_{B_s}/\tau_{B_d}\) and \(\Delta\Gamma_s\), emphasizing
+that scalar operators make \(B_s\to\tau^+\tau^-\) particularly sensitive
+through chiral enhancement.
 
 \subsection*{Constraint validity and model dependence}
 Class: upper-limit and model-dependent for new-physics interpretation.  The
@@ -85,16 +82,21 @@ branching fractions, tau-mass phase space, and \(C_{10}\), \(C_S\), and
 \(C_P\) Wilson coefficients.
 
 \subsection*{Code coverage in this repo}
-\textbf{NO.}  The PKA ran the required coverage greps across
+\textbf{NO.}  The required coverage greps across
 \texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
 \texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
-\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/}.  Existing hits
-cover \(B_d\) and \(B_s\) \(\Delta F=2\) mixing
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/} found no B008
+rare-leptonic implementation.  Existing hits cover \(B_d\) and \(B_s\)
+\(\Delta F=2\) mixing
 (\texttt{quarkConstraints/deltaf2.py:903} and
-\texttt{quarkConstraints/deltaf2.py:922}) and generic pseudoscalar-meson
-matrix-element infrastructure, but no \(B_{s,d}\to\tau^+\tau^-\) branching
-ratio, no \(b\to s,d\,\tau^+\tau^-\) Wilson-coefficient likelihood, and no
-\(C_{10}\), \(C_S\), or \(C_P\) tauonic rare-decay evaluator.
+\texttt{quarkConstraints/deltaf2.py:922}), bridge wrappers for the same mixing
+observables (\texttt{quarkConstraints/modern/phenomenology.py:646} and
+\texttt{quarkConstraints/modern/phenomenology.py:657}), an unrelated
+\(\mu\to e\gamma\) routine (\texttt{flavorConstraints/muToEGamma.py:75}), and
+a scan-parameter example involving \(y_\tau\) (\texttt{scanParams/README.md:161}).
+They do not implement a \(B_{s,d}\to\tau^+\tau^-\) branching ratio, a
+\(b\to s,d\,\tau^+\tau^-\) likelihood, or a tauonic \(C_{10}\), \(C_S\), or
+\(C_P\) rare-decay evaluator.
 
 \subsection*{Implementation difficulty}
 \textbf{MEDIUM.}  A catalog-level constraint can be built from the standard
