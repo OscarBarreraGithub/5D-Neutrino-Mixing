@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/hGZe1zlNTct+U6jDu6UIYml8vcQ</id>
+  <title>arXiv Query: search_query=&amp;id_list=1808.02380&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:16Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1808.02380" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1808.02380v2</id>
+    <title>Combination of searches for heavy resonances decaying into bosonic and leptonic final states using 36 fb$^{-1}$ of proton-proton collision data at $\sqrt{s} = 13$ TeV with the ATLAS detector</title>
+    <updated>2018-09-28T19:17:59Z</updated>
+    <link href="https://arxiv.org/abs/1808.02380v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1808.02380v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Searches for new heavy resonances decaying into different pairings of $W$, $Z$, or Higgs bosons, as well as directly into leptons, are presented using a data sample corresponding to 36.1fb$^{-1}$ of $pp$ collisions at $\sqrt{s}$ = 13 TeV collected during 2015 and 2016 with the ATLAS detector at the CERN Large Hadron Collider. Analyses selecting bosonic decay modes in the $qqqq$, $ννqq$, $\ellνqq$, $\ell\ell qq$, $\ellν\ellν$, $\ell\ellνν$, $\ellν\ell\ell$, $\ell\ell\ell\ell$, $qqbb$, $ννbb$, $\ellνbb$, and $\ell\ell bb$ final states are combined, searching for a narrow-width resonance. Likewise, analyses selecting the leptonic $\ellν$ and $\ell\ell$ final states are also combined. These two sets of analyses are then further combined. No significant deviation from the Standard Model predictions is observed. Three benchmark models are tested: a model predicting the existence of a new heavy scalar singlet, a simplified model predicting a heavy vector-boson triplet, and a bulk Randall-Sundrum model with a heavy spin-2 Kaluza-Klein excitation of the graviton. Cross-section limits are set at the 95% confidence level using an asymptotic approximation and are compared with predictions for the benchmark models. These limits are also expressed in terms of constraints on couplings of the heavy vector-boson triplet to quarks, leptons, and the Higgs boson. The data exclude a heavy vector-boson triplet with mass below 5.5 TeV in a weakly coupled scenario and 4.5 TeV in a strongly coupled scenario, as well as a Kaluza-Klein graviton with mass below 2.3 TeV.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-08-07T14:08:32Z</published>
+    <arxiv:comment>48 pages in total, author list starting at page 32, 11 figures, 10 tables, submitted to Phys. Rev. D. All figures and tables, including auxiliary figures and tables, are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2017-31/</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. D 98, 052008 (2018)</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.98.052008</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.98.052008" title="doi"/>
+  </entry>
+</feed>

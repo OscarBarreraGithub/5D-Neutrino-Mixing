@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/zOrpsfGWvd/Rhf6YV/xZFncCt8g</id>
+  <title>arXiv Query: search_query=&amp;id_list=2103.02708&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:15Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2103.02708" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2103.02708v2</id>
+    <title>Search for resonant and nonresonant new phenomena in high-mass dilepton final states at $\sqrt{s} = $ 13 TeV</title>
+    <updated>2021-08-03T21:13:06Z</updated>
+    <link href="https://arxiv.org/abs/2103.02708v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.02708v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search is presented for physics beyond the standard model (SM) using electron or muon pairs with high invariant mass. A data set of proton-proton collisions collected by the CMS experiment at the LHC at $\sqrt{s} =$ 13 TeV from 2016 to 2018 corresponding to a total integrated luminosity of up to 140 fb$^{-1}$ is analyzed. No significant deviation is observed with respect to the SM background expectations. Upper limits are presented on the ratio of the product of the production cross section and the branching fraction to dileptons of a new narrow resonance to that of the Z boson. These provide the most stringent lower limits to date on the masses for various spin-1 particles, spin-2 gravitons in the Randall--Sundrum model, as well as spin-1 mediators between the SM and dark matter particles. Lower limits on the ultraviolet cutoff parameter are set both for four-fermion contact interactions and for the Arkani-Hamed, Dimopoulos, and Dvali model with large extra dimensions. Lepton flavor universality is tested at the TeV scale for the first time by comparing the dimuon and dielectron mass spectra. No significant deviation from the SM expectation of unity is observed.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-03T21:53:34Z</published>
+    <arxiv:comment>Replaced with the published version. Added the journal reference and the DOI. All the figures and tables, including additional supplementary figures, can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-19-019 (CMS Public Pages)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>JHEP 07 (2021) 208</arxiv:journal_ref>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP07(2021)208</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP07(2021)208" title="doi"/>
+  </entry>
+</feed>

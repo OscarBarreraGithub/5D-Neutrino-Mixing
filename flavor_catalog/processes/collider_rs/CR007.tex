@@ -1,0 +1,140 @@
+% Flavor catalog per-process entry.
+% process_id: CR007
+% family: collider_rs
+% owner_agent_id: PKA-CR007
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR007.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{CR007: Spin-2 KK-Graviton Resonance in Bulk RS}
+
+\subsection*{Process}
+\textbf{Standard notation:}
+\[
+  pp \to G^{(1)}_{\rm KK} \to ZZ,\ WW,\ \gamma\gamma,\ \ell\ell,\ t\bar t .
+\]
+This entry covers direct LHC searches for a heavy spin-2 Kaluza--Klein
+graviton in Randall--Sundrum models, with emphasis on the bulk-RS benchmark in
+which Standard Model fields propagate in the warped extra dimension.  The
+experimentally quoted final states are narrow or moderately broad resonance
+searches in diboson, diphoton, dilepton, and top-pair spectra; the RS
+interpretation maps the null result onto a lower limit on the first graviton
+mode mass for a specified curvature coupling \(k/\overline{M}_{\rm Pl}\).
+
+\subsection*{Current best limit(s)}
+The PDG 2025 Extra Dimensions listing is the canonical one-place summary in
+\texttt{flavor\_catalog/references/CR007/pdg2025\_extra\_dimensions\_rsg\_extract.txt}.
+For the generic RS-graviton benchmark at \(k/\overline{M}_{\rm Pl}=0.1\), PDG
+lists the strongest current mass lower limit as
+\[
+  m(G^{(1)}_{\rm KK}) > 4.8~{\rm TeV}\quad(95\%~{\rm CL}),
+\]
+from the CMS high-mass diphoton search, with the CMS high-mass dilepton result
+giving the adjacent \(m(G^{(1)}_{\rm KK})>4.78~{\rm TeV}\) entry.  These
+headline limits are powerful generic spin-2 resonance bounds, but they are not
+the most faithful bulk-RS interpretation when light-fermion and photon
+couplings are suppressed.
+
+For the bulk-RS diboson benchmark, the current PDG-listed full Run-2 CMS
+all-jets search gives
+\[
+  m(G_{\rm bulk}) > 1.4~{\rm TeV}\quad(95\%~{\rm CL})
+\]
+for \(k/\overline{M}_{\rm Pl}=0.5\) in \(WW/ZZ\) final states.  The earlier
+ATLAS combined bosonic-plus-leptonic search at \(36.1~{\rm fb}^{-1}\) excluded
+a bulk-RS KK graviton below \(2.3~{\rm TeV}\) for its \(k/\overline{M}_{\rm Pl}=1\)
+benchmark.  These mass numbers sit in the sidecar
+\texttt{pdg\_or\_equivalent.values} block; luminosities, production-mode
+assumptions, and benchmark-coupling choices are recorded as supporting or
+auxiliary inputs rather than promoted measured observables.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Bulk RS graviton searches constrain a direct collider resonance mass, not the
+\(\Delta F=2\) Wilson coefficients that dominate the existing quark-flavor
+pipeline.  They are nevertheless useful because custodial bulk-RS spectra often
+contain correlated KK gauge bosons, KK gravitons, vectorlike fermions, and
+radion-like states at nearby TeV scales.  The spin-2 channel is therefore an
+RS-distinguishing cross-check of any parameter point that places the first
+graviton in the LHC range.
+
+The current low-energy quark scan gives
+\(M_{\rm KK}^{\min}(p50,\ g_\ast=3)=47.26~{\rm TeV}\) in
+\texttt{docs/quark\_scan\_methodology\_note.tex}.  Compared with that
+anarchic-flavor bound, the LHC graviton limits above are far weaker as mass
+setters.  Their value is instead diagnostic: they can veto or reinterpret
+non-anarchic, flavor-protected, or custodial RS scenarios whose flavor
+constraints have been deliberately weakened, and they provide an external check
+on whether the scan has wandered into spectra that would already have produced
+a high-mass diboson, diphoton, dilepton, or \(t\bar t\) excess.
+
+\subsection*{Post-2010 developments}
+The original bulk-RS graviton collider expectation in
+\texttt{AgasheDavoudiaslPerezSoni2007\_WarpedGravitons} emphasized suppressed
+light-fermion and photon channels but enhanced sensitivity in longitudinal
+\(W/Z\) modes.  LHC searches after 2010 tested that pattern in stages.  Early
+Run-1 searches established the first ATLAS/CMS mass and cross-section limits in
+\(ZZ\), \(WW\), and combined \(\gamma\gamma/\ell\ell\) channels, replacing the
+Tevatron reach.  The ATLAS \(36.1~{\rm fb}^{-1}\) combination
+(\texttt{arXiv:1808.02380}) mattered because it combined bosonic and leptonic
+Run-2 final states into a single bulk-RS spin-2 interpretation.
+
+The full Run-2 ATLAS diboson searches (\texttt{arXiv:1906.08589} and
+\texttt{arXiv:2004.14636}) moved the diboson program into all-hadronic and
+semileptonic boosted topologies with \(139~{\rm fb}^{-1}\).  CMS then provided
+the strongest generic RS spin-2 dilepton benchmark
+(\texttt{arXiv:2103.02708}), the current bulk-graviton all-jets diboson
+benchmark used here (\texttt{arXiv:2210.00043}), and the current PDG-leading
+diphoton benchmark (\texttt{arXiv:2405.09320}).  The progression is mainly
+in luminosity, boosted-boson tagging, and channel coverage; it is not a move to
+a model-independent RS likelihood.
+
+\subsection*{Constraint validity and model dependence}
+The exclusion limits are conditional.  They assume a production mechanism,
+resonance width, \(k/\overline{M}_{\rm Pl}\), acceptance, and decay-branching
+pattern.  A headline \(G\to\gamma\gamma\) or \(G\to\ell\ell\) limit is not
+automatically applicable to bulk RS models where light-fermion and photon
+couplings are suppressed.  Conversely, a \(G_{\rm bulk}\to WW/ZZ\) limit does
+not directly constrain the KK gluon mass or a custodial fermion mass without a
+specified spectrum and branching matrix.
+
+For the anarchic-flavor catalog, the honest use is therefore as a direct-search
+side condition: compare the predicted \(G^{(1)}_{\rm KK}\) mass, width, and
+branching fractions against the relevant ATLAS/CMS limit curve.  A single
+mass-threshold cut is only defensible for the exact experimental benchmark
+quoted in the sidecar.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no direct ATLAS/CMS, diboson, diphoton, dilepton,
+graviton-resonance, or collider-reinterpretation implementation.  The only
+``CMS'' hit in the collider grep is an unrelated RunDec calibration comment in
+\texttt{tests/test\_alpha\_s.py:89}.  Adjacent code does carry the scan's
+flavor KK scale: \texttt{quarkConstraints/modern/scan.py:1229--1255}
+enumerates \(M_{\rm KK}\) for flavor scan points, and
+\texttt{quarkConstraints/modern/evaluation.py:643--666} evaluates the
+\(\Delta F=2\) flavor matching at that scale.  No separate collider-direct
+filter is applied.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A faithful implementation needs more than a scalar mass cut:
+it needs the model point's spin-2 graviton mass, width, production cross
+section, branching ratios into \(WW\), \(ZZ\), \(\gamma\gamma\), \(\ell\ell\),
+and \(t\bar t\), plus acceptance or a recast of the experimental analysis.
+That is naturally an external reinterpretation workflow using tools such as
+MadGraph/Pythia/Delphes with CheckMATE, MadAnalysis5, Rivet, or a HEPData-based
+likelihood approximation.  The repo currently has neither collider event
+simulation nor an RS-resonance likelihood interface.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2025\_ExtraDimensions\_RSG}, \texttt{CMS2024\_Diphoton},
+\texttt{CMS2023\_AllJetsBosonPairs}, \texttt{CMS2021\_Dilepton},
+\texttt{ATLAS2020\_SemileptonicDiboson},
+\texttt{ATLAS2019\_HadronicDiboson}, \texttt{ATLAS2018\_Combination},
+\texttt{AgasheDavoudiaslPerezSoni2007\_WarpedGravitons},
+\texttt{AgasheEtAl2007\_WarpedGaugeBosons}, and
+\texttt{RandallSundrum1999\_Hierarchy}.

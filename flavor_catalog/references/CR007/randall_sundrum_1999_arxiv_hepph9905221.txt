@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/sNIFGac9p6VTWfoJycMQmNZ+LOo</id>
+  <title>arXiv Query: search_query=&amp;id_list=hep-ph/9905221&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=hep-ph/9905221" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/hep-ph/9905221v1</id>
+    <title>A Large Mass Hierarchy from a Small Extra Dimension</title>
+    <updated>1999-05-04T01:43:58Z</updated>
+    <link href="https://arxiv.org/abs/hep-ph/9905221v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-ph/9905221v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We propose a new higher-dimensional mechanism for solving the Hierarchy Problem. The Weak scale is generated from a large scale of order the Planck scale through an exponential hierarchy. However, this exponential arises not from gauge interactions but from the background metric (which is a slice of AdS_5 spacetime). This mechanism relies on the existence of only a single additional dimension. We demonstrate a simple explicit example of this mechanism with two three-branes, one of which contains the Standard Model fields. The experimental consequences of this scenario are new and dramatic. There are fundamental spin-2 excitations with mass of weak scale order, which are coupled with weak scale as opposed to gravitational strength to the standard model particles. The phenomenology of these models is quite distinct from that of large extra dimension scenarios; none of the current constraints on theories with very large extra dimensions apply.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>1999-05-04T01:43:58Z</published>
+    <arxiv:comment>9 pages, LaTex</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys.Rev.Lett.83:3370-3373,1999</arxiv:journal_ref>
+    <author>
+      <name>Lisa Randall</name>
+    </author>
+    <author>
+      <name>Raman Sundrum</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.83.3370</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.83.3370" title="doi"/>
+  </entry>
+</feed>

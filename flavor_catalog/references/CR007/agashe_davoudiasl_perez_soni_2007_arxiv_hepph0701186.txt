@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/s9wyuQ9ynzI/qla0SqxZSKhT4sM</id>
+  <title>arXiv Query: search_query=&amp;id_list=hep-ph/0701186&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:58Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=hep-ph/0701186" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/hep-ph/0701186v3</id>
+    <title>Warped Gravitons at the LHC and Beyond</title>
+    <updated>2007-07-11T21:59:30Z</updated>
+    <link href="https://arxiv.org/abs/hep-ph/0701186v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/hep-ph/0701186v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We study the production and decay of Kaluza-Klein (KK) gravitons at the Large Hadron Collider (LHC), in the framework of a warped extra dimension in which the Standard Model (SM) fields propagate. Such a scenario can provide solutions to both the Planck-weak hierarchy problem and the flavor puzzle of the SM. In this scenario, the production via $q \bar{q}$ annihilation and decays to the conventional photon and lepton channels are highly suppressed. However, we show that graviton production via gluon fusion followed by decay to longitudinal $Z/W$ can be significant; vector boson fusion is found to be a sub-dominant production mode. In particular, the ``golden'' $ZZ$ decay mode offers a distinctive 4-lepton signal that could lead to the observation at the LHC with 300 fb$^{-1}$ (SLHC with 3 ab$^{-1}$) of a KK graviton with a mass up to $\sim 2$ ($\sim 3$) TeV for the ratio of the AdS$_5$ curvature to the Planck scale modestly above unity. We argue that (contrary to the lore) such a size of the curvature scale can still be within the regime of validity of the framework. Upgrades beyond the SLHC luminosity are required to discover gravitons heavier than $\sim 4$ TeV, as favored by the electroweak and flavor precision tests in the simplest such models.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2007-01-22T20:47:28Z</published>
+    <arxiv:comment>9 pages, 5 figures. Minor modifications, reference added</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>Phys.Rev.D76:036006,2007</arxiv:journal_ref>
+    <author>
+      <name>Kaustubh Agashe</name>
+    </author>
+    <author>
+      <name>Hooman Davoudiasl</name>
+    </author>
+    <author>
+      <name>Gilad Perez</name>
+    </author>
+    <author>
+      <name>Amarjit Soni</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.76.036006</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.76.036006" title="doi"/>
+  </entry>
+</feed>

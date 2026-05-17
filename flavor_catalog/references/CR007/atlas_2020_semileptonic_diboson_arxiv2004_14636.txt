@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/JBhSPcH0GU9fURQI8XC8bbM3qto</id>
+  <title>arXiv Query: search_query=&amp;id_list=2004.14636&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:58Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2004.14636" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2004.14636v2</id>
+    <title>Search for heavy diboson resonances in semileptonic final states in $pp$ collisions at $\sqrt{s}=13$ TeV with the ATLAS detector</title>
+    <updated>2021-04-29T09:39:41Z</updated>
+    <link href="https://arxiv.org/abs/2004.14636v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.14636v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper reports on a search for heavy resonances decaying into $WW$, $ZZ$ or $WZ$ using proton-proton collision data at a centre-of-mass energy of $\sqrt{s}=13$ TeV. The data, corresponding to an integrated luminosity of 139 $\mathrm{fb^{-1}}$, were recorded with the ATLAS detector from 2015 to 2018 at the Large Hadron Collider. The search is performed for final states in which one $W$ or $Z$ boson decays leptonically, and the other $W$ boson or $Z$ boson decays hadronically. The data are found to be described well by expected backgrounds. Upper bounds on the production cross sections of heavy scalar, vector or tensor resonances are derived in the mass range 300-5000 GeV within the context of Standard Model extensions with warped extra dimensions or including a heavy vector triplet. Production through gluon-gluon fusion, Drell-Yan or vector-boson fusion are considered, depending on the assumed model.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-30T08:41:25Z</published>
+    <arxiv:comment>50 pages in total, author list starting page 41, 15 figures, 5 tables, submitted to EPJC. All figures including auxiliary figures are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/HDBS-2018-10/</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Eur. Phys. J. C 80 (2020) 1165</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-020-08554-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-020-08554-y" title="doi"/>
+  </entry>
+</feed>

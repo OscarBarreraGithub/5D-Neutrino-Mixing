@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/NW4JTSXn6SKw36ZzAcXhudFQBkY</id>
+  <title>arXiv Query: search_query=&amp;id_list=2210.00043&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:32:16Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2210.00043" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2210.00043v2</id>
+    <title>Search for new heavy resonances decaying to WW, WZ, ZZ, WH, or ZH boson pairs in the all-jets final state in proton-proton collisions at $\sqrt{s}$ = 13 TeV</title>
+    <updated>2023-07-25T13:35:27Z</updated>
+    <link href="https://arxiv.org/abs/2210.00043v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.00043v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for new heavy resonances decaying to WW, WZ, ZZ, WH, or ZH boson pairs in the all-jets final state is presented. The analysis is based on proton-proton collision data recorded by the CMS detector in 2016-2018 at a centre-of-mass energy of 13 TeV at the CERN LHC, corresponding to an integrated luminosity of 138 fb$^{-1}$. The search is sensitive to resonances with masses between 1.3 and 6 TeV, decaying to bosons that are highly Lorentz-boosted such that each of the bosons forms a single large-radius jet. Machine learning techniques are employed to identify such jets. No significant excess over the estimated standard model background is observed. A maximum local significance of 3.6 standard deviations, corresponding to a global significance of 2.3 standard deviations, is observed at masses of 2.1 and 2.9 TeV. In a heavy vector triplet model, spin-1 Z' and W' resonances with masses below 4.8 TeV are excluded at the 95% confidence level (CL). These limits are the most stringent to date. In a bulk graviton model, spin-2 gravitons and spin-0 radions with masses below 1.4 and 2.7 TeV, respectively, are excluded at 95% CL. Production of heavy resonances through vector boson fusion is constrained with upper cross section limits at 95% CL as low as 0.1 fb.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-30T18:58:10Z</published>
+    <arxiv:comment>Replaced with the published version. Added the journal reference and the DOI. All the figures and tables, including additional supplementary figures, can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-20-009 (CMS Public Pages)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Lett. B 844 (2023) 137813</arxiv:journal_ref>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1016/j.physletb.2023.137813</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.physletb.2023.137813" title="doi"/>
+  </entry>
+</feed>

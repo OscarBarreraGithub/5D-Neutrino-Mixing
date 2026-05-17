@@ -1,0 +1,103 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR007
+sources:
+  - key: PDG2025_ExtraDimensions_RSG
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group Extra Dimensions listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602"
+    snapshot_path: "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt"
+  - key: CMS2024_Diphoton
+    arxiv_id: "2405.09320"
+    DOI: "10.1007/JHEP08(2024)215"
+    title: "Search for new physics in high-mass diphoton events from proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2405.09320"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:71c6b5d57aabacc09819c7ee7b34b714e8767301841e1435945de44874003a85"
+    snapshot_path: "flavor_catalog/references/CR007/cms_2024_diphoton_arxiv2405_09320.txt"
+  - key: CMS2023_AllJetsBosonPairs
+    arxiv_id: "2210.00043"
+    DOI: "10.1016/j.physletb.2023.137813"
+    title: "Search for new heavy resonances decaying to WW, WZ, ZZ, WH, or ZH boson pairs in the all-jets final state in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2210.00043"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:fc618c5119bdf8a877494f4b6a25532dcb67b3e31b15ea02e9e7fd8fa8977554"
+    snapshot_path: "flavor_catalog/references/CR007/cms_2023_alljets_boson_pairs_arxiv2210_00043.txt"
+  - key: CMS2021_Dilepton
+    arxiv_id: "2103.02708"
+    DOI: "10.1007/JHEP07(2021)208"
+    title: "Search for resonant and nonresonant new phenomena in high-mass dilepton final states at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2103.02708"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:6cf44a050db10cc0352d27d91c533eb8f4392c857baba8d09375e371a3778532"
+    snapshot_path: "flavor_catalog/references/CR007/cms_2021_dilepton_arxiv2103_02708.txt"
+  - key: ATLAS2020_SemileptonicDiboson
+    arxiv_id: "2004.14636"
+    DOI: "10.1140/epjc/s10052-020-08554-y"
+    title: "Search for heavy diboson resonances in semileptonic final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2020
+    url: "https://arxiv.org/abs/2004.14636"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:86a82377ead0123df6883069d4b2743abf5de627c85d07e08b8c9c817057b252"
+    snapshot_path: "flavor_catalog/references/CR007/atlas_2020_semileptonic_diboson_arxiv2004_14636.txt"
+  - key: ATLAS2019_HadronicDiboson
+    arxiv_id: "1906.08589"
+    DOI: "10.1007/JHEP09(2019)091"
+    title: "Search for diboson resonances in hadronic final states in 139 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1906.08589"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:cccbc85bd9dc7eb139edaf8ac1802b6de91fe7044906aa3c5b9a011717ff0df9"
+    snapshot_path: "flavor_catalog/references/CR007/atlas_2019_hadronic_diboson_arxiv1906_08589.txt"
+  - key: ATLAS2018_Combination
+    arxiv_id: "1808.02380"
+    DOI: "10.1103/PhysRevD.98.052008"
+    title: "Combination of searches for heavy resonances decaying into bosonic and leptonic final states using 36 fb^-1 of proton-proton collision data at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1808.02380"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:1ae94abf3957a5f0fa94fd963e3972da7c22cdd0e0760a54332e4f2745c4cca4"
+    snapshot_path: "flavor_catalog/references/CR007/atlas_2018_combination_arxiv1808_02380.txt"
+  - key: AgasheDavoudiaslPerezSoni2007_WarpedGravitons
+    arxiv_id: "hep-ph/0701186"
+    DOI: "10.1103/PhysRevD.76.036006"
+    title: "Warped Gravitons at the LHC and Beyond"
+    authors: "Kaustubh Agashe, Hooman Davoudiasl, Gilad Perez, and Amarjit Soni"
+    year: 2007
+    url: "https://arxiv.org/abs/hep-ph/0701186"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:01f8d6556c134a92f6e96265e9cc8924f7ab50283f15357d69bd935239cac187"
+    snapshot_path: "flavor_catalog/references/CR007/agashe_davoudiasl_perez_soni_2007_arxiv_hepph0701186.txt"
+  - key: AgasheEtAl2007_WarpedGaugeBosons
+    arxiv_id: "0709.0007"
+    DOI: "10.1103/PhysRevD.76.115015"
+    title: "LHC Signals for Warped Electroweak Neutral Gauge Bosons"
+    authors: "Kaustubh Agashe, Hooman Davoudiasl, Shrihari Gopalakrishna, Tao Han, Gui-Yu Huang, Gilad Perez, Zong-Guo Si, and Amarjit Soni"
+    year: 2007
+    url: "https://arxiv.org/abs/0709.0007"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:ef778e5463381cb7ad19c3bd81afb93d75ec2f12faaf59b11e2a48434113c1ec"
+    snapshot_path: "flavor_catalog/references/CR007/agashe_et_al_2007_warped_gauge_arxiv0709_0007.txt"
+  - key: RandallSundrum1999_Hierarchy
+    arxiv_id: "hep-ph/9905221"
+    DOI: "10.1103/PhysRevLett.83.3370"
+    title: "A Large Mass Hierarchy from a Small Extra Dimension"
+    authors: "Lisa Randall and Raman Sundrum"
+    year: 1999
+    url: "https://arxiv.org/abs/hep-ph/9905221"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:cba0ff32c08a873d5e89c8c59d8a5bd2c051faac3ed86107dd9ff66cac7a1cf5"
+    snapshot_path: "flavor_catalog/references/CR007/randall_sundrum_1999_arxiv_hepph9905221.txt"
