@@ -37,11 +37,13 @@ Process drafts belong under `processes/<family>/`. Raw source snapshots and mani
 
 ## Build
 
-`catalog_master.pdf` is built from 75 OPUS-APPROVED processes across 6 families.
+`catalog_master.pdf` is built from 80 OPUS-APPROVED processes across 6 families.
 
-- 4 discovery rounds converged.
-- 2 Opus sign-off rounds: round 1 had 50 APPROVE; round 2 had 21 APPROVE.
+- 4 discovery rounds converged, plus Wave-7 follow-up: 5 new processes, subtlety pass, and DA-4 addendum.
+- 3 Opus sign-off rounds: round 1 had 50 APPROVE; round 2 had 21 APPROVE; round 3 had 5 process APPROVE plus subtleties APPROVE and addendum APPROVE.
 - 5 individual arbitrations completed: L001, B021, B023, B001, B003.
+- Fact-check status: 79 VERIFIED, 1 PARTIAL (E009 INSPIRE JS-only; APS journal cross-check confirms content), 0 MISMATCH, 0 FAILED.
+- Current master build: 133 pages.
 - Last update timestamp: 2026-05-16.
 
 ## Status
