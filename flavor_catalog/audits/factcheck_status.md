@@ -104,14 +104,28 @@ the rows below.
 | E007 | edm_neutrino | VERIFIED | 2026-05-16 | factcheck-codex-edm_neutrino | Ra-225 and Xe-129 EDM limits plus Argonne/DFG/KU Leuven projection context match. |
 | E008 | edm_neutrino | VERIFIED | 2026-05-16 | factcheck-codex-edm_neutrino | qCEDM neutron/Hg anchors, derived bounds, and quoted response formulae match. |
 | E009 | edm_neutrino | PARTIAL | 2026-05-16 | factcheck-codex-edm_neutrino | All value-bearing neutron EDM and Weinberg-operator claims verified; INSPIRE Weinberg 1989 key-reference URL rendered JS-only, cross-checked via APS and local snapshot. |
+| CR001 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | CMS 2026 KK-gluon to ttbar 5.5 TeV exclusion, CMS 2019, PDG Live, and ATLAS historical limits match; scan/theory context skipped by policy. |
+| CR002 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG/ATLAS/CMS T5/3 pair-production mass limits match; projection and scan-context items skipped by policy. |
+| CR003 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG Live and ATLAS/CMS charge-2/3 top-partner mass-limit rows match. |
+| CR004 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG 2025 bottom-partner bH, bZ, and tW mass limits match. |
+| CR005 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | CMS/ATLAS/PDG high-mass dilepton mass and fiducial cross-section limits match. |
+| CR006 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG/CMS charged-resonance lnu and tb mass limits match. |
+| CR007 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG RS/bulk-graviton and ATLAS bulk-graviton limits match. |
+| CR008 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | ATLAS singlet-T and CMS all-branching-envelope mass limits match. |
+| CR009 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG ATLAS/CMS compositeness-scale endpoints match; EFT translation skipped by policy. |
+| CR010 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG VLQ doublet and simplified T/B endpoint limits match. |
+| CR011 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | ATLAS/CMS longitudinal same-sign WW fiducial cross-section limits match; aQGC/EFT context skipped by policy. |
+| CR012 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG/CMS HVT diboson mass limits and CMS Table 2 intervals match. |
+| CR013 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG/CMS/ATLAS diphoton RS-graviton mass limits match. |
+| CR014 | collider_rs | VERIFIED | 2026-05-17 | factcheck-codex-collider_rs-w9 | PDG four-top cross sections, CMS top-philic vector limit, and ATLAS cross-section-limit range match. |
 
 ## Summary
 
-Status totals across 75 process entries:
+Status totals across 89 process entries:
 
 | status | count |
 |---|---:|
-| VERIFIED | 74 |
+| VERIFIED | 88 |
 | PARTIAL | 1 |
 | MISMATCH | 0 |
 | FAILED | 0 |
@@ -126,6 +140,7 @@ Family totals:
 | top_higgs_ew | 15 | 0 | 0 | 0 | 15 |
 | charged_lepton | 11 | 0 | 0 | 0 | 11 |
 | edm_neutrino | 6 | 1 | 0 | 0 | 7 |
+| collider_rs | 14 | 0 | 0 | 0 | 14 |
 
 T020 was originally reported as `MISMATCH` in
 `factcheck_top_higgs_ew.md`: the family audit found the ATLAS `h -> e mu`
