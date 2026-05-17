@@ -248,3 +248,64 @@ Verdict: VERIFIED
 Mismatch: none.
 
 Unresolvable: none.
+
+---
+
+## Wave-8 addendum (SECONDARY)
+
+Date: 2026-05-17T12:14:43-04:00
+Agent: factcheck-codex-kaon-w8
+Scope: K019, K020, K021 (SECONDARY tier, processes/secondary/kaon/)
+
+### Summary
+
+| Process | Verdict | Mismatches | Note |
+|---|---:|---:|---|
+| K019 | VERIFIED | 0 | PDG 2025 K_L listing and BNL E871 limit verified; context-reference metadata checked. |
+| K020 | PARTIAL | 1 | All numerical limits verified; NA62 2021 author metadata in the K020 manifest uses a non-leading named author. |
+| K021 | VERIFIED | 0 | PDG/KTeV neutral-mode limit and NA62 companion limits verified; RS reference scales are policy N/A. |
+
+### Fetch exceptions
+
+| URL | Status | Impact |
+|---|---:|---|
+| None | N/A | All cited manifest/source URLs fetched with HTTP 200; local snapshots were used only for exact-value corroboration. |
+
+### K019 - VERIFIED
+
+Key references checked: PDG 2025 K_L listing; arXiv `hep-ex/9811038`, `0804.1954`, `0805.4652`, `1006.5356`, `1508.01705`, `1712.08122`, `1801.07256`, `1808.03477`; PDG 2025 conservation-laws review.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| `BR(K_L -> e^+/- mu^-/+) < 4.7 x 10^-12` at `90% CL` in the PDG 2025 K_L listing | https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf | Y | Live PDF lists `Gamma35 e +/- mu -/+` with `< 4.7 x 10^-12`, `CL=90%`; local `pdg2025_kl_emu.txt` matches. |
+| BNL E871/Ambrose final `BR(K_L -> mu^+/- e^-/+) < 4.7 x 10^-12` at `90% CL` | https://arxiv.org/abs/hep-ex/9811038 | Y | Live arXiv title/authors/year match the manifest and the abstract contains the limit; local snapshot matches. |
+| BNL E871 observed no signal-consistent events | https://arxiv.org/abs/hep-ex/9811038 | N/A | Dataset/event-yield context for the branching-fraction limit; present in the live abstract/local snapshot and carved out by L001 policy. |
+| Manifest metadata for non-numerical context references | https://arxiv.org/abs/0804.1954; https://arxiv.org/abs/0805.4652; https://arxiv.org/abs/1006.5356; https://arxiv.org/abs/1508.01705; https://arxiv.org/abs/1712.08122; https://arxiv.org/abs/1801.07256; https://arxiv.org/abs/1808.03477; https://pdg.lbl.gov/2025/reviews/rpp2025-rev-conservation-laws.pdf | Y | Live URLs fetched successfully; title/author/year metadata matches the manifest; no additional measured numerical K019 claim was asserted from these references. |
+
+### K020 - PARTIAL
+
+Key references checked: PDG API `S010`, `S010.29`, `S010.25`; PDG Live charged-kaon branching-ratio pages; arXiv `hep-ex/0502020`, `2105.06759`, `0804.1954`, `1508.01705`, `2002.05684`.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG/API `BR(K+ -> pi+ mu+ e-) < 1.3 x 10^-11` at `90% CL` for `S010.29` | https://pdgapi.lbl.gov/listings/S010.29 | Y | Live API and local `pdg2025_kplus_lfv_semileptonic_api.txt` contain `value: 1.3E-11`; title/year/DOI metadata match Sher 2005. |
+| Sher/BNL E865-only `BR(K+ -> pi+ mu+ e-) < 2.1 x 10^-11` at `90% CL` and combined `1.3 x 10^-11` limit | https://arxiv.org/abs/hep-ex/0502020 | Y | Live arXiv metadata matches the manifest and the abstract contains both `2.1 x 10^-11` and `1.3 x 10^-11`; local snapshot matches. |
+| PDG/API `BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11` at `90% CL` for `S010.25` | https://pdgapi.lbl.gov/listings/S010.25 | Y | Live API and local snapshot contain `value: 6.6E-11`; title/year/DOI metadata match the NA62 2021 paper. |
+| Prior APPEL/BNL E865 `K+ -> pi+ mu- e+` limit `< 5.2 x 10^-10` cited as superseded context | https://pdgapi.lbl.gov/listings/S010.25 | Y | Live API and local snapshot contain APPEL 2000B with `<5.2 E-10`; this supports the sidecar note about the earlier bound. |
+| NA62 2021 `K+ -> pi+ mu- e+` limit `< 6.6 x 10^-11` and one-order improvement statement | https://arxiv.org/abs/2105.06759 | Y | Live arXiv abstract and local snapshot contain the limit and improvement statement. |
+| NA62 2021 author metadata in K020 manifest/sidecar | https://arxiv.org/abs/2105.06759 | N | Numerical value, title, DOI, and year are correct, but the K020 manifest names `E. Cortina Gil et al.` while the live arXiv page lists `NA62 Collaboration` and PDG/journal metadata identify the paper as `R. Aliberti et al. (NA62 Collaboration)`. |
+| Manifest metadata for non-numerical RS/EFT context references | https://arxiv.org/abs/0804.1954; https://arxiv.org/abs/1508.01705; https://arxiv.org/abs/2002.05684 | Y | Live arXiv metadata matches the manifest; no additional measured numerical K020 claim was asserted from these references. |
+
+### K021 - VERIFIED
+
+Key references checked: PDG 2025 K_L listing; arXiv `0711.3472`, `2105.06759`, `0804.1954`, `0805.4652`, `1601.00970`, `2002.05684`, `2410.05859`, `2411.13497`.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG 2025 `BR(K_L -> pi0 e^+/- mu^-/+) < 7.6 x 10^-11` at `90% CL`, summed charge states | https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf | Y | Live PDF lists `Gamma37 pi0 mu+- e-+` with `< 7.6 x 10^-11`, `CL=90%`, and the summed-state footnote; local `pdg2025_kl_pi0emu.txt` matches. |
+| KTeV exact `BR(K_L -> pi0 mu e) < 7.56 x 10^-11` at `90% CL` | https://arxiv.org/abs/0711.3472 | Y | Live arXiv title/authors/year match the KTeV source up to the collaboration author-line convention; abstract and local snapshot contain the exact limit. |
+| KTeV observed no signal-region events | https://arxiv.org/abs/0711.3472 | N/A | Dataset/event-yield context for the KTeV limit; present in live abstract/local snapshot and carved out by L001 policy. |
+| NA62 2021 companion limits: `< 6.6 x 10^-11` for `K+ -> pi+ mu- e+`, `< 4.2 x 10^-11` for `K+ -> pi- mu+ e+`, `< 3.2 x 10^-10` for `pi0 -> mu- e+`; one-order improvement | https://arxiv.org/abs/2105.06759 | Y | Live arXiv abstract and local `na62_aliberti_2021_arxiv2105_06759.txt` contain all three limits and the improvement statement; title/year/DOI match. |
+| CFW RS reference scales: KK-gluon masses about `21 TeV` and `33 TeV` | https://arxiv.org/abs/0804.1954 | N/A | Live arXiv abstract/local snapshot contain the values; these are theoretical RS reference-scale statements, not measured-observable claims. |
+| Perez-Randall warped-neutrino reference scales: `10 TeV` cutoff and `3 TeV` KK masses | https://arxiv.org/abs/0805.4652 | N/A | Live arXiv abstract/local snapshot contain the values; these are theoretical normalization/context scales under the L001 carve-out. |
+| Manifest metadata for non-numerical rare-kaon/SMEFT context references | https://arxiv.org/abs/1601.00970; https://arxiv.org/abs/2002.05684; https://arxiv.org/abs/2410.05859; https://arxiv.org/abs/2411.13497 | Y | Live arXiv metadata matches the manifest; no additional measured numerical K021 claim was asserted from these references. |
