@@ -16,9 +16,10 @@ This entry covers direct LHC searches for QCD pair production of a charge
 \[
   pp\to T\bar T,\qquad T\to bW,\ tZ,\ tH .
 \]
-It is the non-custodial singlet counterpart of heavier-partner searches in the
-custodial-RS collider family.  The experimentally standard singlet benchmark
-uses \({\cal B}(T\to Wb:Ht:Zt)=1/2:1/4:1/4\) at high mass.
+This is a Collider RS partner-search entry: it tests the light singlet
+top-partner corner of a warped or composite top sector, not a universal
+\(M_{\rm KK}\) bound.  The experimentally standard singlet benchmark uses
+\({\cal B}(T\to Wb:Ht:Zt)=1/2:1/4:1/4\) at high mass.
 
 \subsection*{Current best limit(s)}
 The process-specific PDG/ATLAS benchmark limit is
@@ -35,9 +36,9 @@ PDG 2025 \(t'\) searches listing
 The strongest broad-envelope Run-2 statement is the CMS leptonic-channel
 combination: \(T\bar T\) production is excluded for \(T\) masses up to
 1.54 TeV depending on branching fractions, and masses below 1.48 TeV are
-excluded for all decays to third-generation quarks.  This is not a single
-singlet branching-ratio point, but it is useful as a model-independent
-cross-check over the \(bW/tZ/tH\) branching triangle
+excluded throughout the third-generation \(bW/tZ/tH\) branching triangle.
+This is not a single singlet branching-ratio point, but it is useful as a
+branching-fraction cross-check
 (\texttt{cms\_2023\_arxiv2209\_07327.txt}).
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
@@ -89,7 +90,7 @@ spectrum would need a dedicated reinterpretation.
 implementation.  Adjacent evidence confirms the existing pipeline computes
 \(M_{KK}\) and low-energy filters only: \texttt{scanParams/scan.py:399}
 constructs \(M_{KK}=\xi_{KK}\Lambda_{\rm IR}\),
-\texttt{scanParams/scan.py:523}--\texttt{scanParams/scan.py:535} applies the
+\texttt{scanParams/scan.py:523} through \texttt{scanParams/scan.py:535} applies the
 \(\mu\to e\gamma\) filter, and \texttt{quarkConstraints/scan.py:377}--
 \texttt{quarkConstraints/scan.py:380} evaluates the quark \(\Delta F=2\)
 constraints.  There is no collider likelihood, cross-section limit, or

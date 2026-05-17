@@ -21,7 +21,8 @@ with \(T\) carrying charge \(+2/3\) and \(B\) carrying charge \(-1/3\).
 The experimental analyses are usually reported as pair production of
 \(T\bar T\) and \(B\bar B\), with limits then interpreted in singlet or
 doublet branching-fraction scenarios.  The CR010 scope is the weak-isospin
-\((T,B)\) doublet and its mixed third-generation final states.
+\((T,B)\) doublet and its mixed third-generation final states; it is a
+Collider RS partner-search entry, not a standalone gauge-KK mass constraint.
 
 \subsection*{Current best limit(s)}
 The canonical doublet-specific bound is the ATLAS Run-2 combination recorded
@@ -111,10 +112,12 @@ implementation in \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{tests/test\_alpha\_s.py:89}, a CMS/RunDec \(\alpha_s\) example, not a
 collider constraint.
 
-Adjacent evidence confirms the gap.  \texttt{quarkConstraints/scan.py:359--441}
+Adjacent evidence confirms the gap.  \texttt{quarkConstraints/scan.py:359} through
+\texttt{quarkConstraints/scan.py:441}
 computes \(\Mkk\), evaluates \(\Delta F=2\) constraints, and records
 \(\epsilon_K\), \(B_d\), \(B_s\), and \(D\)-mixing pass/fail ratios, with no
-ATLAS/CMS mass-exclusion gate.  \texttt{quarkConstraints/validation.py:108--145}
+ATLAS/CMS mass-exclusion gate.  \texttt{quarkConstraints/validation.py:108}
+through \texttt{quarkConstraints/validation.py:145}
 uses the same \(\Delta F=2\) summary for benchmark validation.
 
 \subsection*{Implementation difficulty}

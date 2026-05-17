@@ -23,7 +23,16 @@ status_history:
     at: "2026-05-17T16:37:50-04:00"
     agent_id: "PKA-CR014"
     reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
-last_updated_at: "2026-05-17T16:37:50-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:08:10-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:08:10-04:00"
+    agent: "WA-WA-w9-vlq-4top"
+    agent_id: "WA"
+    cycle: 1
+    reason: "Wave-9 WA polish for VLQ/4-top collider_rs batch; prose and CHK-1 metadata placement normalized."
+last_updated_at: "2026-05-17T17:08:10-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2019_arxiv1811_02305.txt: "sha256:de68d1fef9289ac10d340c8a006d8018fa600dba94e6aa61589f8979c4c2f854"
@@ -152,6 +161,12 @@ supporting_measurements:
       - observable: "Run-3 integrated luminosity"
         value: 35
         units: "fb^-1"
+      - observable: "Run-2 collision energy"
+        value: 13
+        units: "TeV"
+      - observable: "Run-3 collision energy"
+        value: 13.6
+        units: "TeV"
       - observable: "resonance mass range scanned"
         value_min: 500
         value_max: 4000

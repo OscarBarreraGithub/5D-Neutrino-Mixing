@@ -24,7 +24,16 @@ status_history:
     at: "2026-05-17T16:37:25-04:00"
     agent_id: "PKA-CR010"
     reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
-last_updated_at: "2026-05-17T16:37:25-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:08:10-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:08:10-04:00"
+    agent: "WA-WA-w9-vlq-4top"
+    agent_id: "WA"
+    cycle: 1
+    reason: "Wave-9 WA polish for VLQ/4-top collider_rs batch; prose and CHK-1 metadata placement normalized."
+last_updated_at: "2026-05-17T17:08:10-04:00"
 version: "0.1.0"
 source_shas:
   aguilar_saavedra_2009_arxiv0907_3155.txt: "sha256:a39adb142dbaf68819d9fb367f991fc85ca103b7cf48118621fe33104c935f18"
