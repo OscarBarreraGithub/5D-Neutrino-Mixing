@@ -1,0 +1,115 @@
+% Flavor catalog per-process entry.
+% process_id: B008
+% family: beauty
+% owner_agent_id: PKA-B008
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B008.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B008: \(B_s^0\to\tau^+\tau^-\), \(B^0\to\tau^+\tau^-\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(B_s^0 \to \tau^+\tau^-\) and
+\(B^0 \to \tau^+\tau^-\).  This entry covers the rare tauonic leptonic
+neutral-\(B\) decays, i.e. the \(b\to s\tau^+\tau^-\) and
+\(b\to d\tau^+\tau^-\) purely leptonic tails.  Experimentally these modes are
+hard because both taus decay with missing neutrinos; the current direct limits
+come from tau reconstruction in the \(3\pi\nu_\tau\) channel.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical PDG live/API values, accessed 2026-05-17, are upper limits:
+\[
+  {\cal B}(B_s^0\to\tau^+\tau^-) < 6.8\times10^{-3}\quad(95\%\ {\rm CL}),
+\]
+assuming no contribution from \(B^0\to\tau^+\tau^-\), and
+\[
+  {\cal B}(B^0\to\tau^+\tau^-) < 2.1\times10^{-3}\quad(95\%\ {\rm CL}),
+\]
+assuming no contribution from \(B_s^0\to\tau^+\tau^-\).  Both entries trace to
+the LHCb 2017 PRL search, using \(pp\) data at 7 and 8 TeV.  The sidecar stores
+these upper limits in \texttt{pdg\_or\_equivalent}; dataset metadata and
+theory predictions are intentionally kept in auxiliary fields following the
+CHK-1 carve-out precedent.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This Wave-8 entry is tagged \textbf{SECONDARY}; see
+\texttt{flavor\_catalog/PRIORITY\_TIERS.md} for the tier policy.  The mode is
+secondary because the direct limits are still far above the Standard Model
+expectation and are experimentally difficult, but it is a useful tau-specific
+handle on scalar and pseudoscalar structures.  In warped/anarchic-flavor
+models, fermion localization and Yukawa misalignment can induce flavor-changing
+\(Z\), Higgs, or heavy-electroweak/Kaluza--Klein exchange contributions to the
+\(\Delta B=1\) Wilson coefficients \(C_{10}\), \(C_S\), and \(C_P\).  The tau
+mass weakens the helicity suppression relative to electron and muon final
+states, and scalar/pseudoscalar operators can produce especially large effects.
+KK-gluon exchange is more directly constrained by \(B_{s,d}\) mixing, but the
+same flavor rotations and localization choices feed the rare leptonic channel.
+Dipole operators are not the leading pure-leptonic contribution, yet they are
+part of the same RS flavor-misalignment diagnostic suite.
+
+\subsection*{Post-2008 developments}
+Relative to the Csaki--Falkowski--Weiler/Perez--Randall-era flavor literature,
+the decisive experimental update is the LHCb search
+arXiv:1703.02508, published as PRL 118, 251802.  It used \(3\,{\rm fb}^{-1}\)
+of 2011--2012 data and tau reconstruction through
+\(\tau^-\to\pi^-\pi^+\pi^-\nu_\tau\), setting the first direct
+\(B_s^0\to\tau^+\tau^-\) limit and the strongest \(B^0\to\tau^+\tau^-\)
+limit at publication.  The older BABAR direct \(B^0\) result,
+arXiv:hep-ex/0511015, remains useful history but is superseded in PDG by LHCb.
+The BABAR arXiv:1605.09637 result is a related \(B^+\to K^+\tau^+\tau^-\)
+semileptonic input, not the B008 neutral-leptonic observable.
+
+On the theory side, Bobeth et al. arXiv:1311.0903 supplied reduced-uncertainty
+Standard Model predictions, including
+\({\cal B}(B_s\to\tau^+\tau^-)=(7.73\pm0.49)\times10^{-7}\) and
+\({\cal B}(B_d\to\tau^+\tau^-)=(2.22\pm0.19)\times10^{-8}\).  Capdevila et al.
+arXiv:1712.01919 showed why \(b\to s\tau^+\tau^-\) can be a high-leverage
+new-physics probe, with possible order-of-magnitude to three-order enhancements
+in lepton-flavor-nonuniversal scenarios.  Bordone and Fernandez Navarro
+arXiv:2307.07013 connected \(b\to s\tau\tau\) new physics to
+\(\tau_{B_s}/\tau_{B_d}\) and \(\Delta\Gamma_s\), emphasizing that scalar
+operators make \(B_s\to\tau^+\tau^-\) particularly sensitive through chiral
+enhancement.
+
+\subsection*{Constraint validity and model dependence}
+Class: upper-limit and model-dependent for new-physics interpretation.  The
+experimental limits are robust as one-mode-at-a-time upper limits, but they are
+not measurements of a branching fraction and should not be treated as Gaussian
+averages.  A simultaneous RS scan with both \(B_s^0\) and \(B^0\) tauonic
+decays would ideally use a two-dimensional likelihood or reproduce the LHCb
+assumptions, because each quoted limit assumes the other neutral mode is absent.
+Theory translation requires a consistent normalization for time-integrated
+branching fractions, tau-mass phase space, and \(C_{10}\), \(C_S\), and
+\(C_P\) Wilson coefficients.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The PKA ran the required coverage greps across
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, and \texttt{tests/}.  Existing hits
+cover \(B_d\) and \(B_s\) \(\Delta F=2\) mixing
+(\texttt{quarkConstraints/deltaf2.py:903} and
+\texttt{quarkConstraints/deltaf2.py:922}) and generic pseudoscalar-meson
+matrix-element infrastructure, but no \(B_{s,d}\to\tau^+\tau^-\) branching
+ratio, no \(b\to s,d\,\tau^+\tau^-\) Wilson-coefficient likelihood, and no
+\(C_{10}\), \(C_S\), or \(C_P\) tauonic rare-decay evaluator.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  A catalog-level constraint can be built from the standard
+pure-leptonic \(B_q\to\ell^+\ell^-\) formula with tau-mass phase space,
+time-integration conventions, and scalar/pseudoscalar Wilson coefficients.
+This is more work than wiring a published average, but it avoids the exclusive
+form-factor and angular-analysis machinery needed for semileptonic
+\(b\to s\tau^+\tau^-\) modes.  A faithful reproduction of the experimental
+two-mode likelihood would raise the difficulty.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2026\_BsTauTau}, \texttt{PDG2026\_BdTauTau},
+\texttt{AaijEtAl2017\_BqTauTau}, \texttt{AubertEtAl2006\_BdTauTau},
+\texttt{LeesEtAl2017\_BKTauTauRelated}, \texttt{BobethEtAl2014\_BqTauTauSM},
+\texttt{CapdevilaEtAl2018\_BSTauTauNP},
+\texttt{BordoneNavarro2023\_BSTauTauNP}, and
+\texttt{CsakiFalkowskiWeiler2008\_RSFlavor}.

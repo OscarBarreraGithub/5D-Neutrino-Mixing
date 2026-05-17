@@ -1,0 +1,95 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B008
+generated_at: "2026-05-17T02:14:12-04:00"
+license_policy: "Minimal text snapshots only; no publisher PDFs tracked."
+sources:
+  - key: PDG2026_BsTauTau
+    arxiv_id: null
+    DOI: "10.1103/PhysRevLett.118.251802"
+    title: "PDG live/API B_s0 -> tau+ tau- listing"
+    authors: "Particle Data Group; measurement by R. Aaij et al. (LHCb Collaboration)"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.130"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:ef1c4ed4f001bc4d55293dc64a6ef7782a6ca9ffdc4308bad922dc581ea942fc"
+    snapshot_path: "flavor_catalog/references/B008/pdg_2026_bs_tautau.txt"
+  - key: PDG2026_BdTauTau
+    arxiv_id: null
+    DOI: "10.1103/PhysRevLett.118.251802"
+    title: "PDG live/API B0 -> tau+ tau- listing"
+    authors: "Particle Data Group; measurement by R. Aaij et al. (LHCb Collaboration)"
+    year: 2026
+    url: "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.336"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4f20e368d9103d807807793e18b81335931ed1c92621635718062e93aa5aeeb0"
+    snapshot_path: "flavor_catalog/references/B008/pdg_2026_bd_tautau.txt"
+  - key: AaijEtAl2017_BqTauTau
+    arxiv_id: "1703.02508"
+    DOI: "10.1103/PhysRevLett.118.251802"
+    title: "Search for the decays B_s^0 -> tau+ tau- and B^0 -> tau+ tau-"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2017
+    url: "https://arxiv.org/abs/1703.02508"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b2b79597fa8a10e2ee303038d47c18df439e4463c3b7ad3ebfb38a56883329c5"
+    snapshot_path: "flavor_catalog/references/B008/arxiv_1703_02508_lhcb_bq_tautau.txt"
+  - key: AubertEtAl2006_BdTauTau
+    arxiv_id: "hep-ex/0511015"
+    DOI: "10.1103/PhysRevLett.96.241802"
+    title: "A Search for the rare decay B0 --> tau+ tau- at BABAR"
+    authors: "B. Aubert et al. (BABAR Collaboration)"
+    year: 2006
+    url: "https://arxiv.org/abs/hep-ex/0511015"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:d0acf4944c8c9ce9ef62bde92a8bed25cdb8138d4ee4a94b302de84128d81645"
+    snapshot_path: "flavor_catalog/references/B008/arxiv_hep_ex_0511015_babar_bd_tautau.txt"
+  - key: LeesEtAl2017_BKTauTauRelated
+    arxiv_id: "1605.09637"
+    DOI: "10.1103/PhysRevLett.118.031802"
+    title: "Search for B+ -> K+ tau+ tau- at the BaBar experiment"
+    authors: "J. P. Lees et al. (BABAR Collaboration)"
+    year: 2017
+    url: "https://arxiv.org/abs/1605.09637"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:864522f71bd7f3c3bb9878be932c1c36ac7c47878c8bc8521887e9647a9cf74f"
+    snapshot_path: "flavor_catalog/references/B008/arxiv_1605_09637_babar_bktautau_related.txt"
+  - key: BobethEtAl2014_BqTauTauSM
+    arxiv_id: "1311.0903"
+    DOI: "10.1103/PhysRevLett.112.101801"
+    title: "B_{s,d} -> l+ l- in the Standard Model with Reduced Theoretical Uncertainty"
+    authors: "Christoph Bobeth, Martin Gorbahn, Thomas Hermann, Mikolaj Misiak, Emmanuel Stamou, Matthias Steinhauser"
+    year: 2014
+    url: "https://arxiv.org/abs/1311.0903"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:dda74abee3205ed4b624a5a80c1c5712088b7ef9cf1af1ef15ac7e6f4ea28920"
+    snapshot_path: "flavor_catalog/references/B008/arxiv_1311_0903_bobeth_bqll_sm.txt"
+  - key: CapdevilaEtAl2018_BSTauTauNP
+    arxiv_id: "1712.01919"
+    DOI: "10.1103/PhysRevLett.120.181802"
+    title: "Searching for New Physics with b -> s tau+ tau- processes"
+    authors: "Bernat Capdevila, Andreas Crivellin, Sebastien Descotes-Genon, Lars Hofer, Joaquim Matias"
+    year: 2018
+    url: "https://arxiv.org/abs/1712.01919"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:add808af0a2046cde38fffd0390a2e3d9c819ddca7102f26c1203fe1208c1524"
+    snapshot_path: "flavor_catalog/references/B008/arxiv_1712_01919_capdevila_bstautau_np.txt"
+  - key: BordoneNavarro2023_BSTauTauNP
+    arxiv_id: "2307.07013"
+    DOI: "10.1140/epjc/s10052-023-12013-9"
+    title: "tau_Bs/tau_Bd and DeltaGamma_s confront new physics in b -> s tau tau"
+    authors: "Marzia Bordone and Mario Fernandez Navarro"
+    year: 2023
+    url: "https://arxiv.org/abs/2307.07013"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:edfa45ee11d486e2aaee9d880186625f60866488cdb7318c6041a9d993b64bab"
+    snapshot_path: "flavor_catalog/references/B008/arxiv_2307_07013_bordone_bstautau_np.txt"
+  - key: CsakiFalkowskiWeiler2008_RSFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:abf3f9a1725ce7359d5648b4281994fe65fd36082c120f10a38e52ca0c3c4342"
+    snapshot_path: "flavor_catalog/references/B008/arxiv_0804_1954_cfw_rs_flavor.txt"

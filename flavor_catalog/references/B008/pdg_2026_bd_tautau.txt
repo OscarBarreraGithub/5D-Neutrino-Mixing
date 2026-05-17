@@ -1,0 +1,45 @@
+Source key: PDG2026:BdTauTau
+Snapshot type: minimal text extract from PDG live/API JSON
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.336
+Access date: 2026-05-17
+
+PDG edition: 2026
+PDG listing: S042.336
+Description: B0 --> tau+ tau-
+Related data: S042T05, G(B0 --> tau+ tau-)/G(total)
+Note: Test for DeltaB=1 weak neutral current. Allowed by higher-order electroweak interactions.
+
+Current measurement:
+  document_id: AAIJ 2017AJ
+  publication_name: PRL 118 251802
+  publication_year: 2017
+  doi: 10.1103/PhysRevLett.118.251802
+  inspire_id: 1516410
+  title: Search for the Decays B_s()0 --> tau+ tau- and B0 --> tau+ tau-
+  confidence_level: 95.0
+  technique: LHCB
+  comment: p p at 7, 8 TeV
+  value_text: <2.1 E-3
+  numeric value: 0.0021
+  limit_type: U
+  used_in_average: true
+  used_in_fit: true
+  display_value_text: <2.1 E-3
+  footnote: Assuming no contribution from B_s()0 --> tau+ tau-.
+
+Superseded/historical measurement in same listing:
+  document_id: AUBERT 2006S
+  publication_name: PRL 96 241802
+  publication_year: 2006
+  doi: 10.1103/PhysRevLett.96.241802
+  inspire_id: 697070
+  title: Search for the Rare Decay B0 --> tau+ tau- at BABAR
+  confidence_level: 90.0
+  technique: BABR
+  comment: e+ e- --> Upsilon(4S)
+  value_text: <4.1 E-3
+  numeric value: 0.0041
+  limit_type: U
+  used_in_average: false
+  used_in_fit: false
+  footnote: Assumes equal production of B+ and B0 at the Upsilon(4S).

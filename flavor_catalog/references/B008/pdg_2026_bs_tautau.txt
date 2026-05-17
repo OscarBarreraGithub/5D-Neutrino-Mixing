@@ -1,0 +1,27 @@
+Source key: PDG2026:BsTauTau
+Snapshot type: minimal text extract from PDG live/API JSON
+URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.130
+Access date: 2026-05-17
+
+PDG edition: 2026
+PDG listing: S086.130
+Description: B_s()0 --> tau+ tau-
+Related data: S086P27, G(B_s0 --> tau+ tau-)/G(total)
+
+Measurement:
+  document_id: AAIJ 2017AJ
+  publication_name: PRL 118 251802
+  publication_year: 2017
+  doi: 10.1103/PhysRevLett.118.251802
+  inspire_id: 1516410
+  title: Search for the Decays B_s()0 --> tau+ tau- and B0 --> tau+ tau-
+  confidence_level: 95.0
+  technique: LHCB
+  comment: p p at 7, 8 TeV
+  value_text: <6.8 E-3
+  numeric value: 0.0068
+  limit_type: U
+  used_in_average: true
+  used_in_fit: true
+  display_value_text: <6.8 E-3
+  footnote: Assuming no contribution from B0 --> tau+ tau-.
