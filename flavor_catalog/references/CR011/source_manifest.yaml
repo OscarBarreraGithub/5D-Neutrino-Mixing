@@ -1,0 +1,83 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR011
+sources:
+  - key: ATLAS2025_LongitudinalWW
+    arxiv_id: "2503.11317"
+    DOI: "10.1103/bpln-ccql"
+    title: "Evidence for longitudinally polarized W bosons in the electroweak production of same-sign W boson pairs in association with two jets in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "The ATLAS Collaboration"
+    year: 2025
+    url: "https://arxiv.org/abs/2503.11317"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:449b1c2c9f28bfd3200e3fd3c7d8247bbe5495cc8fee79c9ae51141c086f258e"
+    snapshot_path: "flavor_catalog/references/CR011/atlas_2025_arxiv2503_11317.txt"
+  - key: CMS2020_PolarizedSameSignWW
+    arxiv_id: "2009.09429"
+    DOI: "10.1016/j.physletb.2020.136018"
+    title: "Measurements of production cross sections of polarized same-sign W boson pairs in association with two jets in proton-proton collisions at sqrt(s)=13 TeV"
+    authors: "CMS Collaboration"
+    year: 2020
+    url: "https://arxiv.org/abs/2009.09429"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:6ceb6660bd956773fe7809a07ff296cad8e183bb0c16ea35813a39fc5ed724fd"
+    snapshot_path: "flavor_catalog/references/CR011/cms_2020_arxiv2009_09429.txt"
+  - key: ATLAS2024_SameSignWWjj
+    arxiv_id: "2312.00420"
+    DOI: "10.1007/JHEP04(2024)026"
+    title: "Measurement and interpretation of same-sign W boson pair production in association with two jets in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "The ATLAS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2312.00420"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:88c6ac8a9de939c9bee7273743cfcaa7f1a068fc35d8bfa09b7bfcff0ed24744"
+    snapshot_path: "flavor_catalog/references/CR011/atlas_2024_arxiv2312_00420.txt"
+  - key: ATLAS2020_ZZjj
+    arxiv_id: "2004.10612"
+    DOI: "10.1038/s41567-022-01757-y"
+    title: "Observation of electroweak production of two jets and a Z-boson pair"
+    authors: "ATLAS Collaboration"
+    year: 2020
+    url: "https://arxiv.org/abs/2004.10612"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:aaf1506bbc0dc1d3416bc523699f208709eaccfdf0fa4ced39867ad255977646"
+    snapshot_path: "flavor_catalog/references/CR011/atlas_2020_arxiv2004_10612.txt"
+  - key: ATLAS2017_WWjjAQGC
+    arxiv_id: "1611.02428"
+    DOI: "10.1103/PhysRevD.96.012007"
+    title: "Measurement of W+/-W+/- vector-boson scattering and limits on anomalous quartic gauge couplings with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1611.02428"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:6621ca6fbd62fd964001e67855bbd567238f593f0bf114d4e55854fb325922e8"
+    snapshot_path: "flavor_catalog/references/CR011/atlas_2017_arxiv1611_02428.txt"
+  - key: ATLAS2026_AQGCCombination
+    arxiv_id: "2603.18630"
+    DOI: null
+    title: "Combined effective field theory interpretation of measurements sensitive to quartic gauge boson couplings in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2026
+    url: "https://arxiv.org/abs/2603.18630"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:573b644fe6a8b077950de75ab698b9e4218a80788455fbbf0a534eb43dfc9707"
+    snapshot_path: "flavor_catalog/references/CR011/atlas_2026_arxiv2603_18630.txt"
+  - key: Contino2011_CompositeHiggsResonances
+    arxiv_id: "1109.1570"
+    DOI: "10.1007/JHEP10(2011)081"
+    title: "On the effect of resonances in composite Higgs phenomenology"
+    authors: "Roberto Contino, David Marzocca, Duccio Pappadopulo, and Riccardo Rattazzi"
+    year: 2011
+    url: "https://arxiv.org/abs/1109.1570"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:e74dfe11a04d26ba28462d1a755612e95ceef5d517a647f5d75f2524cbd20e71"
+    snapshot_path: "flavor_catalog/references/CR011/contino_2011_arxiv1109_1570.txt"
+  - key: PDG2025_WZQuarticCouplings
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Anomalous W/Z Quartic Couplings (QGCs)"
+    authors: "S. Navas et al. (Particle Data Group); review by M.W. Gruenewald and A. Gurtu"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-wz-quartic-couplings.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:a77a9cb13d7bd8330448250e65706ae13a92375c029c6b89b5817d062e378c5b"
+    snapshot_path: "flavor_catalog/references/CR011/pdg2025_wz_quartic_couplings.txt"

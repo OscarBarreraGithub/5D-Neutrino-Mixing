@@ -1,0 +1,133 @@
+% Flavor catalog per-process template.
+% process_id: CR011
+% family: collider_rs
+% owner_agent_id: PKA-CR011
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR011.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{Longitudinal Vector-Boson Scattering}{Longitudinal Vector-Boson Scattering}}
+
+\subsection*{Process}
+CR011 covers the strong-electroweak-symmetry-breaking collider tail probed by
+longitudinal vector-boson scattering.  The assignment shorthand is
+\(pp\to W_L W_L W_L W_L\); experimentally, the cleanest current promoted
+observable is same-sign \(W_L^\pm W_L^\pm\) scattering in association with two
+forward jets, \(pp\to jj\,W_L^\pm W_L^\pm\), with leptonic \(W\) decays used
+to select the final state.  The process is an EW-precision-tail entry for the
+custodial/composite electroweak sector, not a quark-flavor amplitude.
+
+\subsection*{Current best limit(s)}
+The canonical current limit promoted in the sidecar is the ATLAS Run-2
+longitudinal same-sign \(WW\) result in
+\texttt{atlas\_2025\_arxiv2503\_11317.txt}.  ATLAS reports the most stringent
+constraint to date on fully longitudinal same-sign \(WW\) production:
+\[
+  \sigma_{\rm fid}\!\left(pp\to jj\,W_L^\pm W_L^\pm\right)
+  < 0.45~\mathrm{fb}\quad(95\%~\mathrm{CL}),
+\]
+with an expected limit of \(0.70~\mathrm{fb}\).  The same analysis reports
+evidence for production with at least one longitudinally polarized \(W\) boson
+at \(3.3\sigma\), using \(140~\mathrm{fb}^{-1}\) of \(13~\mathrm{TeV}\) data.
+For historical comparison, CMS set
+\(\sigma(pp\to jj\,W_L^\pm W_L^\pm)<1.17~\mathrm{fb}\) at \(95\%~\mathrm{CL}\)
+in \texttt{cms\_2020\_arxiv2009\_09429.txt}.
+
+The PDG QGC review snapshot
+\texttt{pdg2025\_wz\_quartic\_couplings.txt} is used as framework context for
+anomalous-quartic-gauge-coupling conventions.  It does not provide a single
+combined longitudinal-\(WW\) fiducial limit or RS mass exclusion, so no value
+from that PDG review is promoted as the CR011 numerical observable.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In custodial RS and composite-Higgs-like completions, longitudinal VBS tests
+the sector that unitarizes electroweak symmetry breaking: electroweak KK
+vectors, scalar resonances, and the pattern of couplings to \(W_L\) and \(Z_L\).
+This is complementary to colored KK-gluon and vectorlike-partner searches.  A
+VBS excess or exclusion constrains the electroweak/composite resonance sector
+only after specifying the custodial gauge group, the resonance spectrum, the
+branching fractions into vector bosons versus tops or composite fermions, and
+the production mechanism.
+
+For the anarchic-flavor pipeline in this repository, CR011 is not expected to
+be the leading constraint.  The quark-scan methodology note quotes
+\(\Mkk^{\min}(p50,\gs=3)=47.26~\mathrm{TeV}\) from the low-energy
+\(\Delta F=2\) scan, while direct electroweak VBS reach remains a few-TeV
+collider cross-check unless a non-anarchic or protected flavor structure
+weakens the flavor bound.  CR011 is therefore useful as a diagnostic of the
+strong-EWSB sector and as leverage for non-anarchic RS variants, not as a
+replacement for the active low-energy flavor constraints.
+
+\subsection*{Post-2010 developments}
+\texttt{atlas\_2017\_arxiv1611\_02428.txt} established the LHC same-sign
+\(WWjj\) VBS/aQGC program at \(8~\mathrm{TeV}\), separating electroweak and
+strong production regions and introducing VBS-sensitive anomalous-coupling
+fiducial selections.  \texttt{atlas\_2020\_arxiv2004\_10612.txt} extended the
+VBS program to rare \(ZZjj\) electroweak production, important because neutral
+diboson scattering tests a different electroweak channel and different
+background systematics.
+
+\texttt{cms\_2020\_arxiv2009\_09429.txt} was the first CMS polarization
+measurement in same-sign \(WWjj\), setting the \(1.17~\mathrm{fb}\) longitudinal
+\(WW\) upper limit used above as the historical comparator.
+\texttt{atlas\_2024\_arxiv2312\_00420.txt} then provided a full Run-2 ATLAS
+same-sign \(WWjj\) measurement and aQGC interpretation, including differential
+information and a same-sign \(H^{\pm\pm}\) VBF search.  The current
+polarization-specific improvement is the ATLAS 2025 result promoted here.
+
+For EFT/aQGC context, \texttt{atlas\_2026\_arxiv2603\_18630.txt} is the current
+ATLAS combined interpretation of measurements sensitive to quartic electroweak
+gauge couplings.  Its coefficient intervals are not quoted in this draft
+because CR011's promoted observable is the direct longitudinal \(WW\) fiducial
+cross-section limit; adding coefficient-level values would require a separate
+table extraction and a choice of unitarity/positivity convention.
+
+\subsection*{Constraint validity and model dependence}
+The ATLAS/CMS limits are fiducial and polarization-template dependent.  They
+assume the Standard Model electroweak VBS topology, leptonic \(W\)-decay event
+selection, and fitted longitudinal/transverse polarization templates.  They do
+not directly exclude a universal RS \(M_{KK}\) value.  A reinterpretation must
+simulate the chosen custodial-RS spectrum and account for interference with the
+SM VBS amplitude, resonance widths, acceptance, and decay branching fractions.
+
+For aQGC/EFT statements, the interpretation depends on the operator basis,
+whether one or several Wilson coefficients are profiled, and whether unitarity
+constraints are imposed.  For explicit RS resonances, the assumptions differ
+again: a narrow electroweak vector resonance decaying visibly to \(VV\) is much
+more constrained by VBS-like searches than a broad resonance with dominant
+decays to top partners, heavy fermions, or other composite-sector states.  This
+entry should therefore be treated as collider-sector cross-check information
+until a dedicated RS likelihood or recast is attached.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO}.  A targeted grep for VBS, longitudinal-polarization, diboson, and
+aQGC terms across \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} returned no matches.  Adjacent code evidence shows KK-scale
+bookkeeping and low-energy flavor evaluation, not collider direct-search
+filtering: \texttt{quarkConstraints/scan.py:359} maps
+\(\Lambda_{\rm IR}\) to \(M_{KK}\), \texttt{quarkConstraints/scan.py:377}
+evaluates \(\Delta F=2\) constraints, and \texttt{scanParams/scan.py:528}
+passes \(M_{KK}\) into the lepton-flavor-violation check.  No ATLAS/CMS,
+VBS, \(WWjj\), \(ZZjj\), polarization, or collider-likelihood module is
+present in the searched paths.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A live CR011 constraint needs more than a scalar threshold.  It
+requires a collider reinterpretation stack: event generation for the chosen
+custodial-RS resonance spectrum, showering and detector/selection acceptance,
+polarization-sensitive templates or an external recast tool such as CheckMATE,
+MadAnalysis5, or SModelS where applicable, and a likelihood interface for the
+ATLAS/CMS fiducial regions.  EFT/aQGC coefficient comparisons are simpler to
+record, but mapping them into a concrete RS mass bound is model dependent and
+not implemented in this repository.
+
+\subsection*{Key references}
+\texttt{atlas\_2025\_arxiv2503\_11317}; \texttt{cms\_2020\_arxiv2009\_09429};
+\texttt{atlas\_2024\_arxiv2312\_00420}; \texttt{atlas\_2020\_arxiv2004\_10612};
+\texttt{atlas\_2017\_arxiv1611\_02428}; \texttt{atlas\_2026\_arxiv2603\_18630};
+\texttt{pdg2025\_wz\_quartic\_couplings};
+\texttt{contino\_2011\_arxiv1109\_1570}.
