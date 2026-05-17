@@ -39,7 +39,15 @@ status_history:
     agent_id: "CA"
     cycle: 1
     reason: "CA-w9-ew-tail cycle 1 found CHK-2 key-reference tokens that do not resolve to source_manifest keys; see flavor_catalog/worklogs/checker/ca_w9_ew_tail.md."
-last_updated_at: "2026-05-17T18:05:00-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T18:06:00-04:00"
+    from: "WRITER-REWORK"
+    to: "WRITER-DONE"
+    at: "2026-05-17T18:06:00-04:00"
+    agent_id: "WA-v2"
+    cycle: 2
+    reason: "Cycle-2 fix: CHK-2: renamed TeX Key references to canonical manifest keys per B023 precedent."
+last_updated_at: "2026-05-17T18:06:00-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2017_arxiv1611_02428.txt: "sha256:6621ca6fbd62fd964001e67855bbd567238f593f0bf114d4e55854fb325922e8"
