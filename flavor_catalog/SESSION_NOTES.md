@@ -257,10 +257,41 @@ In priority order:
    1–2 page summary with the top-tier observables grouped by RS
    sensitivity would be valuable for collaborators.
 
-3. **Optionally**: dispatch a Wave-8 if the PI asks to add specific
-   processes from the DEFERRED-SCOPE list (e.g. lepton-bulk RS would
-   want K019/K020/K021 LFV kaon modes promoted). Pattern is unchanged
-   from Wave-7: 5–8 PKAs + WA + CA + fact-check + Opus + tag v0.3.
+3. **Optionally**: dispatch a Wave-8. The full deferred-scope list with
+   rationale is in
+   `flavor_catalog/worklogs/discovery/round_004_addendum_deferred_scope.md`
+   (51 plan-v1 Section C rows). Orchestrator-side leverage tiering for
+   selecting Wave-8 candidates:
+
+   **Top tier (high-leverage; ~8–10 candidates)** — these are the
+   defensible adds if Wave-8 happens at all:
+   - **K019 / K020 / K021** — LFV kaon trio (`K_L→μe`, `K⁺→π⁺μe`,
+     `K_L→π⁰eμ`). Promotion trigger: scope extends to lepton-bulk RS.
+   - **B007 / B008** — `B_{s,d} → e⁺e⁻, τ⁺τ⁻` rare leptonic tails;
+     companions to drafted B005 / B006.
+   - **B013 / B014** — exclusive `b → sγ` (`B_s → φγ`) and `b → dγ`
+     (`B → ργ, ωγ`); helicity companions to B011 / B012.
+   - **T014** — flavor-changing Z decays (`Z → bs, Z → bd, Z → sd`);
+     distinct from drafted Z-pole / Z-LFV entries.
+
+   **Middle tier (defensible; ~5–8 candidates)** — Wave-9 material
+   unless explicitly asked:
+   - B020 (`B_s → φℓ⁺ℓ⁻`), B024 (`B → πνν̄`), B027 (`R_{J/ψ}`),
+     B028 (`B_c → τν`).
+   - L011–L013 hadronic tau LFV anchors.
+   - C009 (`D⁰ → γγ`), C010 (`D → ργ / φγ`).
+   - E003 tau EDM, E005 proton / deuteron EDM prospects.
+
+   **Tail tier (~30+ rows)** — DA-4 judged "diminishing returns";
+   long-distance dominated, redundant with existing entries, or
+   future-projection-only. Do not promote unless the PI specifically
+   wants literal plan-v1 Section C completion (which DA-4 explicitly
+   recommended against).
+
+   Sensible Wave-8 size: **8–10 PKAs** (top tier). Pattern unchanged
+   from Wave-7: PKAs in parallel → WA batches → CA → fact-check via
+   WebFetch → Opus round-4 sign-off → master rebuild → tag v0.3.
+   Half-day of orchestration.
 
 4. **Optionally**: build the first MEDIUM-difficulty constraint into
    the code (e.g. b → sγ via `quarkConstraints/modern/`) as a
