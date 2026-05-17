@@ -2,21 +2,26 @@
 % process_id: CR004
 % family: collider_rs
 % owner_agent_id: PKA-CR004
-% writer_agent_id: null
+% writer_agent_id: WA
 % checker_agent_id: null
 % opus_signoff_id: null
 % Canonical metadata sidecar: CR004.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{CR004: \(pp \to B\bar B \to tW/bZ/bH + X\)}
+\section{\texorpdfstring{\(B\bar B\) Pair Production}{B Bbar Pair Production}}
 
 \subsection*{Process}
-\textbf{Standard notation:} \(pp \to B\bar B \to tW/bZ/bH + X\).
-This entry covers LHC direct searches for pair production of a charge
-\(-1/3\) vector-like bottom partner \(B\), a custodial fermion partner
-that can decay through \(B\to tW\), \(B\to bZ\), and \(B\to bH\).
-The production mode is QCD pair production; the interpretation depends on
-the assumed branching-fraction point in the \(tW\), \(bZ\), \(bH\) simplex.
+Collider RS resonance / partner search framing: CR004 is the direct LHC
+search for the custodial charge-\(-1/3\) bottom partner produced in pairs.
+The standard topology is
+\[
+  pp \to B\bar B \to tW/bZ/bH + X .
+\]
+This entry covers searches for pair production of a charge \(-1/3\)
+vector-like bottom partner \(B\), a custodial fermion partner that can decay
+through \(B\to tW\), \(B\to bZ\), and \(B\to bH\).  The production mode is
+QCD pair production; the interpretation depends on the assumed
+branching-fraction point in the \(tW\), \(bZ\), \(bH\) simplex.
 
 \subsection*{Current best limit(s)}
 The canonical PDG 2025 \(b'(-1/3)\) listing gives three directly relevant
@@ -29,16 +34,15 @@ pair-production lower mass limits at \(95\%~\mathrm{CL}\):
   \qquad
   m_B > 1.56~\mathrm{TeV}\quad [\mathcal{B}(B\to Wt)=1].
 \]
-The \(Hb\) and \(Zb\) values are the CMS Run-2 bottom-type VLQ search
-\texttt{arXiv:2402.13808}; the \(Wt\)-saturated value is the CMS Run-2
-leptonic VLQ search \texttt{arXiv:2209.07327}.  See
-\texttt{flavor\_catalog/references/CR004/pdg2025\_bprime\_listing.txt},
-\texttt{arxiv\_2402\_13808.txt}, \texttt{arxiv\_2209\_07327.txt}, and the
-HEPData record \texttt{hepdata\_2024\_bvlq\_record.txt}.  PDG also lists
-single-production bounds under additional coupling assumptions; those are
-not promoted here because CR004 is the pair-production process.
+The \(Hb\) and \(Zb\) values are from the CMS Run-2 bottom-type VLQ search
+arXiv:2402.13808; the \(Wt\)-saturated value is from the CMS Run-2 leptonic
+VLQ search arXiv:2209.07327.  The sidecar records these mass-exclusion
+values in \texttt{pdg\_or\_equivalent.values}; dataset metadata and HEPData
+contour context stay in supporting blocks.  PDG also lists single-production
+bounds under additional coupling assumptions, which are not promoted here
+because CR004 is the pair-production process.
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS}
 In custodial RS and composite-Higgs language, the \(B\) state is a physical
 fermion resonance, not the KK gluon itself.  A direct \(B\bar B\) search
 therefore constrains \(m_B\) under a specified custodial multiplet and decay
@@ -59,23 +63,22 @@ gauge KK scale, or benchmark points tuned to evade the low-energy flavor
 envelope.
 
 \subsection*{Post-2010 developments}
-The pre-LHC RS-motivated baseline is Contino--Servant
-\texttt{arXiv:0801.1679}, which emphasized same-sign dileptons from
-\(B,T_{5/3}\to Wt\) in custodial top-partner spectra.  Post-2010 LHC work
-turned that benchmark strategy into broad branching-fraction searches:
-\texttt{arXiv:1808.02343} combined ATLAS \(13~\mathrm{TeV}\) searches across
-the \(T\) and \(B\) decay simplex; \texttt{arXiv:2008.09835} made CMS
+The pre-LHC RS-motivated baseline is Contino--Servant arXiv:0801.1679, which
+emphasized same-sign dileptons from \(B,T_{5/3}\to Wt\) in custodial
+top-partner spectra.  Post-2010 LHC work turned that benchmark strategy into
+broad branching-fraction searches: ATLAS arXiv:1808.02343 combined 13 TeV
+searches across the \(T\) and \(B\) decay simplex; CMS arXiv:2008.09835 made
 fully hadronic \(bH/bZ\) final states competitive with leptonic channels;
-\texttt{arXiv:2209.07327} used CMS single-lepton, same-sign dilepton, and
-multilepton categories and drives the PDG \(B\to Wt\) corner; and
-\texttt{arXiv:2210.15413} plus \texttt{arXiv:2212.05263} are the full
-Run-2 ATLAS \(Z+\)third-generation and high-\(E_T^{\rm miss}\) cross-checks.
-The current CMS \texttt{arXiv:2402.13808} result added a \(0\ell/2\ell\)
-combination with HEPData exclusion contours over the \(bH\), \(bZ\), and
-\(tW\) branching simplex.  The CMS \texttt{arXiv:2405.17605} review is used
-as a synthesis of the Run-2 VLQ program, not as a new measured limit.
+CMS arXiv:2209.07327 used single-lepton, same-sign dilepton, and multilepton
+categories and drives the PDG \(B\to Wt\) corner; and ATLAS arXiv:2210.15413
+plus arXiv:2212.05263 are full-Run-2 \(Z+\)third-generation and
+high-\(E_T^{\rm miss}\) cross-checks.  The current CMS arXiv:2402.13808
+result added a \(0\ell/2\ell\) combination with HEPData exclusion contours
+over the \(bH\), \(bZ\), and \(tW\) branching simplex.  The CMS
+arXiv:2405.17605 review is used as Run-2 synthesis, not as a new measured
+limit.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Validity / model dependence}
 The quoted limits are valid as direct LHC mass-exclusion statements for
 prompt, narrow enough, pair-produced \(B\) quarks with the stated branching
 assumptions.  They are not inclusive limits on every custodial-RS bottom
@@ -86,25 +89,20 @@ production bound can reach higher masses, but it is controlled by
 electroweak mixing/coupling choices and is therefore not the canonical CR004
 pair-production observable.
 
-\subsection*{Code coverage in this repo}
+\subsection*{Code coverage}
 \textbf{NO.}  The required code-coverage grep over \texttt{quarkConstraints/},
 \texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
 \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
 \texttt{scanParams/}, and \texttt{tests/} found no direct collider
-constraint, VLQ object, branching-simplex filter, or ATLAS/CMS/HEPData
-limit ingestion.  The collider/VLQ query returned only
-\texttt{tests/test\_alpha\_s.py:88--89}, a \(\alpha_s\) CMS/RunDec example,
-not an LHC search.  Nearby evidence is flavor-only:
-\texttt{scanParams/scan.py:399--429} computes \(M_{\mathrm{KK}}\) for a
-scan row and \texttt{scanParams/scan.py:523--535} applies the
-\(\mu\to e\gamma\) check, while
-\texttt{quarkConstraints/scan.py:359--380} maps \(\Lambda_{\rm IR}\) to
-\(M_{\mathrm{KK}}\) and evaluates \(\Delta F=2\) constraints.
-
-Exact queries recorded in the worklog include:
-\texttt{rg -n -i "vector[-\_]?...|CMS" ...},
-\texttt{rg -n "collider|LHC|ATLAS|CMS|HEPData|mass.?limit|..." ...}, and
-\texttt{rg -n "M\_KK|MKK|KK|Mmin|M\_min|Mkk|mKK" ...}.
+constraint, VLQ object, branching-simplex filter, or ATLAS/CMS/HEPData limit
+ingestion.  The collider/VLQ query returned only
+\texttt{tests/test\_alpha\_s.py:88} and \texttt{tests/test\_alpha\_s.py:89},
+a \(\alpha_s\) CMS/RunDec example, not an LHC search.  Nearby evidence is
+flavor-only: \texttt{scanParams/scan.py:399} computes \(M_{\mathrm{KK}}\) for
+a scan row and \texttt{scanParams/scan.py:523} applies the \(\mu\to e\gamma\)
+check, while \texttt{quarkConstraints/scan.py:359} maps
+\(\Lambda_{\rm IR}\) to \(M_{\mathrm{KK}}\) and
+\texttt{quarkConstraints/scan.py:377} evaluates \(\Delta F=2\) constraints.
 
 \subsection*{Implementation difficulty}
 \textbf{HIGH.}  A faithful implementation needs external LHC likelihoods or
@@ -116,14 +114,13 @@ because \(m_B/M_{\mathrm{KK}}\), widths, and \(B\to tW,bZ,bH\) fractions are
 model dependent.
 
 \subsection*{Key references}
-Process-local source keys before bibliography consolidation:
-\texttt{PDG2025\_BPrimeListing},
-\texttt{ContinoServant2008\_TopPartners},
-\texttt{ATLAS2018\_VLQCombination},
-\texttt{CMS2020\_BVLQFullyHadronic},
-\texttt{CMS2023\_VLQLeptonic},
-\texttt{ATLAS2023\_ZThirdGen},
-\texttt{ATLAS2023\_METPartners},
-\texttt{CMS2024\_BVLQDilepHad},
-\texttt{HEPData2024\_BVLQContours}, and
+\texttt{PDG2025\_BPrimeListing};
+\texttt{ContinoServant2008\_TopPartners};
+\texttt{ATLAS2018\_VLQCombination};
+\texttt{CMS2020\_BVLQFullyHadronic};
+\texttt{CMS2023\_VLQLeptonic};
+\texttt{ATLAS2023\_ZThirdGen};
+\texttt{ATLAS2023\_METPartners};
+\texttt{CMS2024\_BVLQDilepHad};
+\texttt{HEPData2024\_BVLQContours};
 \texttt{CMS2025\_VLQReview}.

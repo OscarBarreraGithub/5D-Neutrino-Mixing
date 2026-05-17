@@ -6,7 +6,7 @@ process_name: "Pair production of custodial charge -1/3 bottom partner B"
 sub_class: "Custodial fermion partner; charge -1/3"
 owner: "PKA"
 owner_agent_id: "PKA-CR004"
-writer_agent_id: null
+writer_agent_id: "WA"
 checker_agent_id: null
 opus_signoff_id: null
 status_history:
@@ -24,7 +24,16 @@ status_history:
     at: "2026-05-17T16:35:12-04:00"
     agent_id: "PKA-CR004"
     reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
-last_updated_at: "2026-05-17T16:35:12-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:10:13-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:10:13-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA-w9-custodial cycle-1 polish for PRIMARY collider_rs batch; CHK-1 collider limit placement verified."
+last_updated_at: "2026-05-17T17:10:13-04:00"
 version: "0.1.0"
 source_shas:
   arxiv_0801_1679.txt: "sha256:160e5a3ab6476742af50245af8c57c634671b36f5bc1b9971ad0e5972f47e494"
@@ -190,7 +199,14 @@ auxiliary_theory_inputs:
         value: 127.13
         units: "TeV"
     source_path: "docs/quark_scan_methodology_note.tex"
+    source_url: "repo-local:docs/quark_scan_methodology_note.tex"
+    access_date: "2026-05-17"
     source_lines: "587-589"
+    line_evidence:
+      - "docs/quark_scan_methodology_note.tex:587"
+      - "docs/quark_scan_methodology_note.tex:588"
+      - "docs/quark_scan_methodology_note.tex:931"
+      - "docs/quark_scan_methodology_note.tex:933"
     sha256: "sha256:334d639d4167b4c721e700fbb0047cd26cd7a8fab9453a321e6afb6cbe6a6c75"
 code_coverage:
   status: "NO"

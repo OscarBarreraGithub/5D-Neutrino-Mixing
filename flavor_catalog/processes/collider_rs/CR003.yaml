@@ -6,7 +6,7 @@ process_name: "Pair production of custodial charge-2/3 top partner T (T')"
 subclass: "Custodial fermion partner; charge 2/3"
 owner: "PKA"
 owner_agent_id: "PKA-CR003"
-writer_agent_id: null
+writer_agent_id: "WA"
 checker_agent_id: null
 opus_signoff_id: null
 related_process_ids: []
@@ -25,7 +25,16 @@ status_history:
     at: "2026-05-17T16:44:01-04:00"
     agent_id: "PKA-CR003"
     reason: "Initial PKA draft, sidecar, source snapshots, source manifest, and worklog deposited."
-last_updated_at: "2026-05-17T16:44:01-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:10:13-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:10:13-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA-w9-custodial cycle-1 polish for PRIMARY collider_rs batch; CHK-1 collider limit placement verified."
+last_updated_at: "2026-05-17T17:10:13-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2017_arxiv1707_03347.txt: "sha256:9817e786cbc89f8f6258591fa8950f9182ad056eead4e755a403ea82aca85253"

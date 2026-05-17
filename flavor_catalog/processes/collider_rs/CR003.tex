@@ -1,21 +1,25 @@
-% Flavor catalog per-process draft.
+% Flavor catalog per-process entry.
 % process_id: CR003
 % family: collider_rs
 % owner_agent_id: PKA-CR003
-% writer_agent_id: null
+% writer_agent_id: WA
 % checker_agent_id: null
 % opus_signoff_id: null
 % Canonical metadata sidecar: CR003.yaml
 % Status is controlled by the YAML sidecar status_history, not this comment.
 
-\section{\texorpdfstring{\(pp\to T\bar T\to tZ/tH/bW+X\)}{pp -> T Tbar -> tZ/tH/bW + X} Pair Production}
+\section{\texorpdfstring{\(T\bar T\) Pair Production}{T Tbar Pair Production}}
 
 \subsection*{Process}
-\textbf{Standard notation:} \(pp\to T\bar T\to tZ/tH/bW+X\).
-This entry covers LHC searches for pair production of a custodial
-charge-\(2/3\) vector-like top partner \(T\) (often denoted \(t'\) in PDG
-listings), with decays to third-generation quarks and electroweak or Higgs
-bosons.
+Collider RS resonance / partner search framing: CR003 is the direct LHC
+search for a custodial charge-\(2/3\) top partner produced in pairs.  The
+standard topology is
+\[
+  pp\to T\bar T\to tZ/tH/bW+X .
+\]
+This entry covers searches for pair production of a charge-\(2/3\)
+vector-like top partner \(T\), often denoted \(t'\) in PDG listings, with
+decays to third-generation quarks and electroweak or Higgs bosons.
 
 \subsection*{Current best limit(s)}
 The current PDG Live \(Q009TPP\) listing records the relevant pair-production
@@ -43,7 +47,7 @@ The strict metadata for these mass-exclusion values is in
 \(\sqrt{s}\), and channel details are kept as supporting inputs rather than
 promoted observables.
 
-\subsection*{Relevance to RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS}
 CR003 constrains the physical mass of a charge-\(2/3\) custodial fermion
 partner, not the KK-gluon mass or the flavor-anarchy matching scale by itself.
 For QCD pair production the production rate is comparatively model-independent,
@@ -63,19 +67,19 @@ where collider partners are not tied tightly to the flavor-setting KK scale.
 
 \subsection*{Post-2010 developments}
 The Contino--Servant top-partner paper set the custodial-partner collider
-motivation before LHC data.  The LHC search history then moved from
-early same-sign and lepton+jets top-partner searches to full-Run-2
-branching-fraction scans.  ATLAS \(1707.03347\) established a 13 TeV
+motivation before LHC data.  The LHC search history then moved from early
+same-sign and lepton+jets top-partner searches to full-Run-2
+branching-fraction scans.  ATLAS arXiv:1707.03347 established a 13 TeV
 lepton+jets \(Wb\)-targeted search with boosted \(W\) reconstruction.  ATLAS
-\(1803.09678\) and \(1808.01771\) broadened the coverage to \(Ht\), \(Zt\),
-multi-\(b\), and all-hadronic final states.  ATLAS \(2210.15413\) used the
-full Run-2 \(Z\)-lepton channel and gives the strongest pure-\(Zt\) row in
-the PDG table.  CMS \(2209.07327\) combined single-lepton, same-sign
-dilepton, and multilepton channels and gives the robust all-decay-mixture
-exclusion.  ATLAS \(2401.17165\) is the current PDG-leading pure-\(Wb\) and
-singlet \(Wb:Ht:Zt\) source.
+arXiv:1803.09678 and arXiv:1808.01771 broadened the coverage to \(Ht\),
+\(Zt\), multi-\(b\), and all-hadronic final states.  ATLAS arXiv:2210.15413
+used the full Run-2 \(Z\)-lepton channel and gives the strongest pure-\(Zt\)
+row in the PDG table.  CMS arXiv:2209.07327 combined single-lepton,
+same-sign dilepton, and multilepton channels and gives the robust
+all-decay-mixture exclusion.  ATLAS arXiv:2401.17165 is the current
+PDG-leading pure-\(Wb\) and singlet \(Wb:Ht:Zt\) source.
 
-\subsection*{Constraint validity / model dependence}
+\subsection*{Validity / model dependence}
 These limits assume prompt pair production of narrow vector-like quarks and
 specific decay-mode hypotheses.  The common simplified-model assumption is
 that \({\cal B}(T\to Wb)+{\cal B}(T\to Zt)+{\cal B}(T\to Ht)=1\).  Exotic
@@ -85,19 +89,23 @@ Single-production searches can reach higher masses for chosen couplings, but
 they are not the CR003 observable because the assigned process is pair
 production.
 
-\subsection*{Code coverage in this repo}
+\subsection*{Code coverage}
 \textbf{NO.}  Targeted greps across \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/} found no implementation of VLQ \(T\)-pair collider limits,
-ATLAS/CMS direct-search likelihoods, HEPData exclusion contours, or a top-partner
-mass filter.  Adjacent evidence is limited to KK-scale and flavor-filter
-plumbing: \texttt{quarkConstraints/modern/scan.py:1230} constructs
-\texttt{M\_KK} for scan points, \texttt{quarkConstraints/modern/scan.py:1492}
-builds failing-system lists only for \(\epsilon_K,K,B_d,B_s,D^0\), and
-\texttt{quarkConstraints/README.md:32}--\texttt{38} describes the current
-quark scope as MFV fitting, KK-gluon couplings, and a \(\Delta F=2\)
-exclusion slice.
+ATLAS/CMS direct-search likelihoods, HEPData exclusion contours, or a
+top-partner mass filter.  Adjacent evidence is limited to KK-scale and
+flavor-filter plumbing: \texttt{quarkConstraints/modern/scan.py:1230}
+constructs \texttt{M\_KK} for scan points, \texttt{quarkConstraints/modern/scan.py:1492}
+builds failing-system lists from flavor ratios, \texttt{quarkConstraints/modern/scan.py:1503}
+restricts those systems to \(\epsilon_K,K,B_d,B_s,D^0\), and
+\texttt{quarkConstraints/modern/evaluation.py:643} starts the \(M_{KK}\)
+resolution used for KK-gluon matching.  The current quark scope is summarized
+as MFV fitting at \texttt{quarkConstraints/README.md:34}, KK-scale conventions
+at \texttt{quarkConstraints/README.md:36}, and a \(\Delta F=2\) exclusion
+slice at \texttt{quarkConstraints/README.md:38}; none of those lines is a
+collider top-partner filter.
 
 \subsection*{Implementation difficulty}
 \textbf{HIGH.}  A faithful live constraint needs either a simplified

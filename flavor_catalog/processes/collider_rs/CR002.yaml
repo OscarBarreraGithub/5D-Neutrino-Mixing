@@ -6,7 +6,7 @@ process_name: "Pair production of exotic-charge T_{5/3} custodial top partner"
 sub_class: "Custodial fermion partner; charge 5/3"
 owner: "PKA"
 owner_agent_id: "PKA-CR002"
-writer_agent_id: null
+writer_agent_id: "WA"
 checker_agent_id: null
 opus_signoff_id: null
 related_process_ids: []
@@ -25,7 +25,16 @@ status_history:
     at: "2026-05-17T16:41:01-04:00"
     agent_id: "PKA-CR002"
     reason: "Initial PKA draft, sidecar, reference snapshots, and worklog deposited for CR002."
-last_updated_at: "2026-05-17T16:41:01-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:10:13-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:10:13-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA-w9-custodial cycle-1 polish for PRIMARY collider_rs batch; CHK-1 collider limit placement verified."
+last_updated_at: "2026-05-17T17:10:13-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2018_arxiv1807_11883.txt: "sha256:700e58bb4698af6061919efed538b33f2bb93a66aff99aa98eaa119df6f8bf11"
