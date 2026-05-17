@@ -45,11 +45,27 @@ status_history:
     agent_id: "CA"
     cycle: 1
     reason: "CA-w9-ew-tail cycle 1 verified CHK-1 through CHK-8; see flavor_catalog/worklogs/checker/ca_w9_ew_tail.md."
+  - state: "OPUS-APPROVED"
+    from: "CHECKER-DONE"
+    to: "OPUS-APPROVED"
+    at: "2026-05-17T19:30:00-04:00"
+    agent_id: "Opus-round-5"
+    round_id: "opus_round_005"
+    reason: "Opus round 5 per-process sign-off for Wave-9 collider_rs PRIMARY entries; CA-verified PASS retained; see flavor_catalog/signoff/round_005_index.md."
+  - state: "FACT-CHECKED"
+    from: "OPUS-APPROVED"
+    to: "FACT-CHECKED"
+    at: "2026-05-17T19:30:01-04:00"
+    agent_id: "factcheck-codex-collider_rs-w9"
+    agent: "factcheck-codex-collider_rs-w9"
+    verdict: "VERIFIED"
+    findings_count: 0
+    reason: "Wave-9 collider_rs family fact-check (factcheck_collider_rs.md)."
 checker_passed_at: "2026-05-17T18:05:00-04:00"
-opus_approved_at: null
-fact_checked_at: null
-fact_check_verdict: null
-last_updated_at: "2026-05-17T18:05:00-04:00"
+opus_approved_at: "2026-05-17T19:30:00-04:00"
+fact_checked_at: "2026-05-17T19:30:01-04:00"
+fact_check_verdict: "VERIFIED"
+last_updated_at: "2026-05-17T19:30:01-04:00"
 version: "0.1.0"
 source_shas:
   atlas2013_arxiv1210_8389_abstract.xml: "sha256:b2b12a7d2e94f4e4f800ddc9bfa2b3fc3a6848cb4f548ffdacbeddf9742d9b37"
