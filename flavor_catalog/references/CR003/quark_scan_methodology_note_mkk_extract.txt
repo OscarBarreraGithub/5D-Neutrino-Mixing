@@ -1,0 +1,24 @@
+Source snapshot for CR003
+Source: local methodology note
+Path: docs/quark_scan_methodology_note.tex
+Access date: 2026-05-17
+
+Relevant local extract:
+
+The g_s*=3 headline crossings are M_KK = 47.26 TeV at 50% acceptance and
+127.13 TeV at 95% acceptance. The corresponding perturbative code-default
+crossings are 16.54 TeV and 44.50 TeV. These are quoted from the post-audit
+8M-draw RUNA reference scan under the input and scope conventions summarized
+in the methodology-note appendices.
+
+Later in the note, the baseline RS-anarchy scan is summarized as:
+
+M_KK^min at 50% acceptance = 16.54 TeV (perturbative convention) and
+47.26 TeV (g_s*=3).
+
+M_KK^min at 95% acceptance = 44.50 TeV (perturbative convention) and
+127.13 TeV (g_s*=3).
+
+The corresponding finite-Monte-Carlo Wilson-score 95% intervals include
+47.19--47.32 TeV at 50% acceptance and 126.88--127.38 TeV at 95%
+acceptance for g_s*=3.

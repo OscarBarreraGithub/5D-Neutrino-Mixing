@@ -1,0 +1,120 @@
+% Flavor catalog per-process draft.
+% process_id: CR003
+% family: collider_rs
+% owner_agent_id: PKA-CR003
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR003.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(pp\to T\bar T\to tZ/tH/bW+X\)}{pp -> T Tbar -> tZ/tH/bW + X} Pair Production}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(pp\to T\bar T\to tZ/tH/bW+X\).
+This entry covers LHC searches for pair production of a custodial
+charge-\(2/3\) vector-like top partner \(T\) (often denoted \(t'\) in PDG
+listings), with decays to third-generation quarks and electroweak or Higgs
+bosons.
+
+\subsection*{Current best limit(s)}
+The current PDG Live \(Q009TPP\) listing records the relevant pair-production
+mass exclusions.  The canonical 95\% CL entries for CR003 are:
+\[
+\begin{array}{lll}
+\hline
+\hbox{Assumption} & \hbox{Observed lower limit} & \hbox{Primary source} \\
+\hline
+{\cal B}(T\to Wb)=1 & m_T>1.70~\mathrm{TeV} &
+\hbox{ATLAS 2024, PDG AAD 24N} \\
+{\cal B}(T\to Wb:Ht:Zt)=1/2:1/4:1/4 & m_T>1.36~\mathrm{TeV} &
+\hbox{ATLAS 2024, PDG AAD 24N} \\
+{\cal B}(T\to Zt)=1 & m_T>1.60~\mathrm{TeV} &
+\hbox{ATLAS 2023, PDG AAD 23AV} \\
+{\cal B}(T\to Ht)=1 & m_T>1.50~\mathrm{TeV} &
+\hbox{CMS 2023, PDG TUMASYAN 23V} \\
+\hbox{all third-generation decay mixtures} & m_T>1.48~\mathrm{TeV} &
+\hbox{CMS 2023} \\
+\hline
+\end{array}
+\]
+The strict metadata for these mass-exclusion values is in
+\texttt{CR003.yaml} under \texttt{pdg\_or\_equivalent}; luminosity,
+\(\sqrt{s}\), and channel details are kept as supporting inputs rather than
+promoted observables.
+
+\subsection*{Relevance to RS / anarchic-flavor pipeline}
+CR003 constrains the physical mass of a charge-\(2/3\) custodial fermion
+partner, not the KK-gluon mass or the flavor-anarchy matching scale by itself.
+For QCD pair production the production rate is comparatively model-independent,
+but the acceptance and mass limit depend on the assumed branching fractions
+among \(Wb\), \(Zt\), and \(Ht\).  A custodial-RS model can map the lightest
+top-partner mass and branching ratios to the 5D fermion representation, IR
+localization, and electroweak embedding; absent that map, the LHC number is a
+direct-search cross-check rather than a universal RS-flavor bound.
+
+The current low-energy quark-flavor scan already quotes
+\(M_{KK}^{\min}(p50,g_\ast=3)=47.26~\mathrm{TeV}\) in
+\texttt{docs/quark\_scan\_methodology\_note.tex}.  The \(T\)-partner direct
+limits above sit in the \(1.36\)--\(1.70~\mathrm{TeV}\) range, so they do not
+compete with the anarchic-flavor \(M_{KK}\) envelope.  Their value is instead
+to test non-anarchic corners, spectra with light custodial fermions, or models
+where collider partners are not tied tightly to the flavor-setting KK scale.
+
+\subsection*{Post-2010 developments}
+The Contino--Servant top-partner paper set the custodial-partner collider
+motivation before LHC data.  The LHC search history then moved from
+early same-sign and lepton+jets top-partner searches to full-Run-2
+branching-fraction scans.  ATLAS \(1707.03347\) established a 13 TeV
+lepton+jets \(Wb\)-targeted search with boosted \(W\) reconstruction.  ATLAS
+\(1803.09678\) and \(1808.01771\) broadened the coverage to \(Ht\), \(Zt\),
+multi-\(b\), and all-hadronic final states.  ATLAS \(2210.15413\) used the
+full Run-2 \(Z\)-lepton channel and gives the strongest pure-\(Zt\) row in
+the PDG table.  CMS \(2209.07327\) combined single-lepton, same-sign
+dilepton, and multilepton channels and gives the robust all-decay-mixture
+exclusion.  ATLAS \(2401.17165\) is the current PDG-leading pure-\(Wb\) and
+singlet \(Wb:Ht:Zt\) source.
+
+\subsection*{Constraint validity / model dependence}
+These limits assume prompt pair production of narrow vector-like quarks and
+specific decay-mode hypotheses.  The common simplified-model assumption is
+that \({\cal B}(T\to Wb)+{\cal B}(T\to Zt)+{\cal B}(T\to Ht)=1\).  Exotic
+decays, sizable widths, altered electroweak couplings, long-lived partners, or
+compressed spectra can invalidate a direct reading of the quoted mass limits.
+Single-production searches can reach higher masses for chosen couplings, but
+they are not the CR003 observable because the assigned process is pair
+production.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Targeted greps across \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no implementation of VLQ \(T\)-pair collider limits,
+ATLAS/CMS direct-search likelihoods, HEPData exclusion contours, or a top-partner
+mass filter.  Adjacent evidence is limited to KK-scale and flavor-filter
+plumbing: \texttt{quarkConstraints/modern/scan.py:1230} constructs
+\texttt{M\_KK} for scan points, \texttt{quarkConstraints/modern/scan.py:1492}
+builds failing-system lists only for \(\epsilon_K,K,B_d,B_s,D^0\), and
+\texttt{quarkConstraints/README.md:32}--\texttt{38} describes the current
+quark scope as MFV fitting, KK-gluon couplings, and a \(\Delta F=2\)
+exclusion slice.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A faithful live constraint needs either a simplified
+acceptance map over \({\cal B}(Wb),{\cal B}(Zt),{\cal B}(Ht)\) or an external
+reinterpretation workflow such as CheckMATE, MadAnalysis5, SModelS, or a
+collaboration likelihood/HEPData grid.  It also needs an RS spectrum model
+that predicts the lightest custodial \(T\) mass, width, and branching
+fractions.  The current code has neither collider-event machinery nor a
+top-partner spectrum/decay module.
+
+\subsection*{Key references}
+\texttt{PDGLive2026\_Q009TPP\_TprimePair};
+\texttt{ATLAS2024\_VLQPairWb\_Run2};
+\texttt{ATLAS2023\_VLQPairZt\_Run2};
+\texttt{CMS2023\_VLQPairLeptonic\_Run2};
+\texttt{ATLAS2017\_VLQPairWb\_13TeV};
+\texttt{ATLAS2018\_VLQPairMultiB};
+\texttt{ATLAS2018\_VLQPairHadronic};
+\texttt{ContinoServant2008\_TopPartners};
+\texttt{QuarkScanMethodology2026\_MKKEnvelope}.
