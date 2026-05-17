@@ -385,3 +385,43 @@ Titles and authors match the manifest records.
 | alcaraz_2021_z_lineshape_fcc metadata | https://arxiv.org/abs/2107.00616 | N/A | Projection/context reference checked; no current measured T012 value is taken from this paper. |
 
 No mismatches or unresolvable URLs were found for the wave-7 follow-up batch.
+
+---
+
+## Wave-8 addendum (SECONDARY)
+
+Date: 2026-05-17T12:12:35-04:00
+Agent: factcheck-codex-top_higgs_ew-w8
+Scope: T014 (SECONDARY tier, processes/secondary/top_higgs_ew/)
+
+### Summary
+
+| Process | Verdict | Mismatches | Note |
+|---|---:|---:|---|
+| T014 | VERIFIED | 0 | Canonical `Z -> bs`, `Z -> bd`, and `Z -> sd` direct hadronic-width limits match ECFA/Kamenik/Abu-Ajamieh snapshots; theory/projection/coupling rows are context only under L001. |
+
+### Fetch exceptions
+
+| URL | Status | Impact |
+|---|---:|---|
+| None | N/A | All cited URLs fetched; exact table/formula numerals were cross-checked against local text snapshots where arXiv HTML omitted math. |
+
+### T014 - VERIFIED
+
+Key references checked: PDG 2025 Z-boson listing; arXiv:2506.15390; arXiv:2306.17520; arXiv:2507.10525; arXiv:hep-ph/0211458; arXiv:0804.1954; arXiv:0812.3803. Live author/title/year metadata matched the manifest records.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG2025_Z_hadronic_width metadata; no dedicated PDG rows for `Z -> bs`, `Z -> bd`, or `Z -> sd` | https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf | Y | PDG Z listing metadata matches `S. Navas et al. (Particle Data Group)` and the local snapshot records no dedicated FCNC down-sector Z rows. |
+| PDG2025_Z_hadronic_width context: `B(Z -> hadrons) = (69.911 +/- 0.056)%` | https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf | Y | PDG listing and local snapshot contain the inclusive hadronic branching fraction; this is context for the width-derived FCNC bound, not a T014 observable. |
+| ECFA2025:T014:zbs_direct_hadronic_width_limit = `< 2.9e-3` at `95% CL` | https://arxiv.org/abs/2506.15390 | Y | ECFA extract gives the generic non-standard hadronic `B(Z -> qq') < 2.9 x 10^-3` direct bound; Kamenik Table I cross-checks the `bs` entry. |
+| ECFA2025:T014:zbd_direct_hadronic_width_limit = `< 2.9e-3` at `95% CL` | https://arxiv.org/abs/2506.15390 | Y | ECFA extract gives the same generic direct bound; Kamenik Table I cross-checks the `bd` entry. |
+| AbuAjamieh2026:T014:zsd_direct_hadronic_width_limit = `< 2.9e-3` at `95% CL` | https://arxiv.org/abs/2507.10525 | Y | Abu-Ajamieh extract quotes `Br(Z -> q_i qbar_j) < 2.9 x 10^-3` and explicitly includes `sd` in the covered flavor set. |
+| Kamenik2024 cross-check: `B(Z -> bs)` and `B(Z -> bd)` direct experimental bound `2.9 x 10^-3` | https://arxiv.org/abs/2306.17520 | Y | Local Kamenik extract lists `2.9 x 10^-3` as the current experimental bound for both rows and attributes it to the hadronic-width comparison. |
+| Eilam2002 historical preliminary DELPHI limit `sum_{q=d,s} BR(Z -> b qbar) <= 1.8 x 10^-3` at `90% CL` | https://arxiv.org/abs/hep-ph/0211458 | Y | Historical context value appears in the local snapshot; it is not used as the canonical current T014 limit. |
+| Kamenik/ECFA SM predictions: `B(Z -> bs) = (4.2 +/- 0.7) x 10^-8`, `B(Z -> bd) = (1.8 +/- 0.3) x 10^-9` | https://arxiv.org/abs/2306.17520 | N/A | Values appear in the Kamenik and ECFA snapshots, but they are SM theory predictions rather than measured observables. |
+| ECFA FCC-ee projections: `B(Z -> bs) < 7.33 x 10^-6` and `B(Z -> bd) < 2.45 x 10^-4` | https://arxiv.org/abs/2506.15390 | N/A | Values appear in the ECFA snapshot, but they are future-reach projections, not current limits. |
+| AbuAjamieh coupling translation from direct searches: `sqrt(|g_L^ij|^2 + |g_R^ij|^2) < 4.96 x 10^-2` | https://arxiv.org/abs/2507.10525 | N/A | Value appears in the local snapshot, but it is a convention-dependent translation of the branching-fraction input, not a measured T014 branching observable. |
+| AbuAjamieh low-energy coupling bounds: `bd < 1.11 x 10^-7`, `bs < 5.32 x 10^-6`, `sd = O(10^-9)` | https://arxiv.org/abs/2507.10525 | N/A | Values appear in the local snapshot; they are low-energy effective-coupling constraints, stronger but model/convention dependent. |
+| CsakiFalkowskiWeiler2008 warped-flavor context: KK-gluon scales about `21 TeV` and `33 TeV` | https://arxiv.org/abs/0804.1954 | N/A | Live arXiv abstract and local snapshot contain the scales; they are theory reference-scale context under the L001 carve-out. |
+| BlankeBurasDulingGemmlerGori2009 rare-`K/B` warped context metadata | https://arxiv.org/abs/0812.3803 | N/A | Metadata checked; no current T014 direct-branching numerical value is taken from this RS context source. |
