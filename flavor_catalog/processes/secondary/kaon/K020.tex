@@ -1,0 +1,113 @@
+% Flavor catalog per-process entry.
+% process_id: K020
+% family: kaon
+% owner_agent_id: PKA-K020
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K020.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{K020: \(K^+ \to \pi^+ e^{\pm}\mu^{\mp}\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(K^+ \to \pi^+ e^{\pm}\mu^{\mp}\).  This entry
+covers the charged-kaon lepton-flavor-violating semileptonic modes
+\(K^+\to\pi^+\mu^+ e^-\) and \(K^+\to\pi^+\mu^- e^+\), process \(K020\) in
+the kaon family.  It does not include the distinct lepton-number-violating
+\(K^+\to\pi^-\mu^+e^+\) mode.
+
+This Wave-8 entry is policy-tagged \textbf{SECONDARY}; see
+\texttt{flavor\_catalog/PRIORITY\_TIERS.md} when present, with the Wave-8
+prompt policy binding this draft.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical current limits are the PDG Live / PDG API 2025 charged-kaon
+listing values, accessed 2026-05-17:
+\[
+  {\cal B}(K^+\to\pi^+\mu^+e^-) < 1.3\times10^{-11}\quad(90\%\ {\rm CL}),
+\]
+and
+\[
+  {\cal B}(K^+\to\pi^+\mu^-e^+) < 6.6\times10^{-11}\quad(90\%\ {\rm CL}).
+\]
+The local PDG snapshot is
+\texttt{flavor\_catalog/references/K020/pdg2025\_kplus\_lfv\_semileptonic\_api.txt}.
+PDG identifier \(\texttt{S010.29}\) is the \(\mu^+e^-\) charge assignment and
+is based on the Sher et al. BNL E865 result combined with earlier E865 and
+E777 data.  PDG identifier \(\texttt{S010.25}\) is the \(\mu^-e^+\) charge
+assignment and uses the NA62 2021 result.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+K020 is a charged-kaon LFV companion to the neutral-kaon LFV channel K019.  At
+the quark level it probes \(\Delta S=1\) semileptonic LFV transitions
+\(s\to d\,e\mu\), not the already implemented \(\Delta F=2\) meson-mixing
+lane.  In a quark-only anarchic RS scan it is outside the minimal implemented
+surface, but in lepton-bulk or seesaw-extended RS models nonuniversal fermion
+localization can generate off-diagonal quark and lepton couplings to KK gauge
+bosons, shifted \(Z\) bosons, or Higgs/scalar states.  Those effects match onto
+vector, scalar, or tensor four-fermion operators of the form
+\((\bar s\Gamma d)(\bar e\Gamma'\mu)\).  Dipole LFV constraints such as
+\(\mu\to e\gamma\) are correlated through the same lepton-sector spurions but
+do not by themselves implement the \(K\to\pi e\mu\) rate.
+
+\subsection*{Post-2008 developments}
+The BNL E865 Sher et al. 2005 paper remains the canonical source for
+\(K^+\to\pi^+\mu^+e^-\), with a \(2.1\times10^{-11}\) E865-only limit and
+\(1.3\times10^{-11}\) after combination with earlier E865 and E777 data.
+The key post-2008 experimental update is NA62 2021, arXiv:2105.06759, which
+sets \({\cal B}(K^+\to\pi^+\mu^-e^+)<6.6\times10^{-11}\) and improves the
+previous limit by about one order of magnitude for that charge assignment.
+
+For post-CFW theory context, Beneke, Moch, and Rohrwild 2015
+(arXiv:1508.01705) provide a full 5D RS treatment of charged-lepton flavor
+violation, including dipole, \(\mu\to3e\), conversion, and custodial-model
+effects.  Angelescu, Faroughy, and Sumensari 2020 (arXiv:2002.05684) give a
+modern EFT treatment of quark-lepton LFV operators and explicitly list
+low-energy semileptonic modes such as
+\(K\to\pi \ell_k^\pm\ell_l^\mp\).  These sources matter because K020 cannot be
+obtained by reusing a pure kaon-mixing Wilson coefficient or the existing
+\(\mu\to e\gamma\) dipole check.
+
+\subsection*{Constraint validity and model dependence}
+Experimentally, these are clean upper limits on forbidden SM processes, so the
+observable entry is an upper-limit constraint rather than an averaged
+nonzero measurement.  The mapping to RS parameters is model dependent.  A
+usable constraint needs a convention for the lepton bulk profiles or seesaw
+spurions, the quark-lepton operator basis, and the \(K\to\pi\) hadronic form
+factors for vector/scalar/tensor structures.  The two charge assignments should
+be kept separate because models with chiral lepton couplings can populate them
+differently.  Existing \(\mu\to e\gamma\), \(\mu\to3e\), and conversion limits
+can dominate in many lepton-sector choices, but they do not eliminate the need
+for a semileptonic kaon rate when quark-flavor violation is present.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The PKA searched \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/}.  The K020-specific grep found only generic LFV metadata and
+the existing \(\mu\to e\gamma\) dipole module, e.g.
+\texttt{flavorConstraints/muToEGamma.py:75} and
+\texttt{scanParams/scan.py:524}.  Broader greps find the implemented
+\(\Delta F=2\) surfaces such as \texttt{quarkConstraints/deltaf2.py:755} for
+\(\Delta m_K\), and the modern policy system list at
+\texttt{quarkConstraints/modern/phenomenology.py:23} contains only
+\(\varepsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D0\).  There is no
+\(K^+\to\pi^+e\mu\) observable, likelihood, operator basis, or test.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A production implementation would need a new
+\(\Delta S=1\) semileptonic LFV operator basis, RS matching for simultaneous
+quark and lepton flavor violation, and a \(K\to\pi e\mu\) rate calculation with
+the relevant hadronic form factors.  The existing \(\Delta F=2\) and
+\(\mu\to e\gamma\) code paths cannot be adapted by a threshold change or a
+simple constant replacement.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2025\_Kplus\_LFV\_semileptonic},
+\texttt{Sher2005\_Kplus\_piplus\_mup\_em},
+\texttt{NA622021\_Kplus\_piplus\_mum\_ep},
+\texttt{CFW2008\_RS\_flavor},
+\texttt{BenekeMochRohrwild2015\_RS\_LFV}, and
+\texttt{AngelescuFaroughySumensari2020\_semileptonic\_LFV}.

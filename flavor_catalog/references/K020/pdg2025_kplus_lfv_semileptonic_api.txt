@@ -1,0 +1,233 @@
+PDG Live / PDG API snapshot for K020 charged-kaon LFV semileptonic modes
+Access date: 2026-05-17
+Summary URL: https://pdgapi.lbl.gov/summaries/S010
+Listing URLs: https://pdgapi.lbl.gov/listings/S010.29 and https://pdgapi.lbl.gov/listings/S010.25
+
+--- Selected summary rows from S010 branching_fractions ---
+S010.29	K+ --> pi+ mu+ e-	<1.3 E-11	90.0	OUR AVERAGE
+S010.25	K+ --> pi+ mu- e+	<6.6 E-11	90.0	OUR AVERAGE
+
+--- Listing S010.29: K+ --> pi+ mu+ e- ---
+{
+  "request_url": "https://pdglive.lbl.gov//api/listings/S010.29",
+  "edition": "2025",
+  "pdgid": "S010.29",
+  "description": "K+ --> pi+ mu+ e-",
+  "related_data": [
+    {
+      "pdgid": "S010R49",
+      "description": "G(K+ --> pi+ mu+ e-)/G(total)",
+      "note": "Test of lepton family number conservation.",
+      "measurements": [
+        {
+          "document_id": "SHER 2005 ",
+          "publication_name": "PR D72 012005",
+          "publication_year": 2005,
+          "doi": "10.1103/PhysRevD.72.012005",
+          "inspire_id": "676480",
+          "title": "An Improved Upper Limit on the Decay K+ --> pi+ mu+ e-",
+          "confidence_level": "90.0",
+          "charge": "+",
+          "technique": "RVUE",
+          "is_changed": false,
+          "measurement_values": [
+            {
+              "column_name": "VALUE",
+              "value": 1.3E-11,
+              "value_text": "< 0.13E-10",
+              "limit_type": "U",
+              "used_in_average": true,
+              "used_in_fit": true,
+              "display_value_text": "<0.13",
+              "display_power_of_ten": -10,
+              "display_in_percent": false
+            }
+          ],
+          "footnotes": [
+            {
+              "index": 1,
+              "text": "This result combines SHER 2005 1998 data, APPEL 2000 1996 data, and data from BERGMAN 1997 and PISLAK 1997 theses, all from BNL-E865, with LEE 1990 BNL-E777 data.",
+              "is_changed": false
+            }
+          ]
+        },
+        {
+          "document_id": "SHER 2005 ",
+          "publication_name": "PR D72 012005",
+          "publication_year": 2005,
+          "doi": "10.1103/PhysRevD.72.012005",
+          "inspire_id": "676480",
+          "title": "An Improved Upper Limit on the Decay K+ --> pi+ mu+ e-",
+          "confidence_level": "90.0",
+          "charge": "+",
+          "technique": "B865",
+          "is_changed": false,
+          "measurement_values": [
+            {
+              "column_name": "VALUE",
+              "value": 2.1E-11,
+              "value_text": "< 0.21E-10",
+              "limit_type": "U",
+              "used_in_average": false,
+              "used_in_fit": false,
+              "display_value_text": "<0.21",
+              "display_power_of_ten": -10,
+              "display_in_percent": false
+            }
+          ]
+        },
+        {
+          "document_id": "APPEL 2000 ",
+          "publication_name": "PRL 85 2450",
+          "publication_year": 2000,
+          "doi": "10.1103/PhysRevLett.85.2450",
+          "inspire_id": "527046",
+          "title": "An Improved Limit on the Rate of Decay K+ --> pi+ mu+ e-",
+          "confidence_level": "90.0",
+          "charge": "+",
+          "technique": "B865",
+          "is_changed": false,
+          "measurement_values": [
+            {
+              "column_name": "VALUE",
+              "value": 3.9E-11,
+              "value_text": "<0.39E-10",
+              "limit_type": "U",
+              "used_in_average": false,
+              "used_in_fit": false,
+              "display_value_text": "<0.39",
+              "display_power_of_ten": -10,
+              "display_in_percent": false
+            }
+          ]
+        },
+        {
+          "document_id": "LEE 1990 ",
+          "publication_name": "PRL 64 165",
+          "publication_year": 1990,
+          "doi": "10.1103/PhysRevLett.64.165",
+          "inspire_id": "295738",
+          "title": "Improved Limit on the Branching Ratio of K+ --> pi+ mu+ e-",
+          "confidence_level": "90.0",
+          "charge": "+",
+          "technique": "SPEC",
+          "is_changed": false,
+          "measurement_values": [
+            {
+              "column_name": "VALUE",
+              "value": 2.1E-10,
+              "value_text": "<2.1E-10",
+              "limit_type": "U",
+              "used_in_average": false,
+              "used_in_fit": false,
+              "display_value_text": "<2.1",
+              "display_power_of_ten": -10,
+              "display_in_percent": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footnotes": null
+}
+
+--- Listing S010.25: K+ --> pi+ mu- e+ ---
+{
+  "request_url": "https://pdglive.lbl.gov//api/listings/S010.25",
+  "edition": "2025",
+  "pdgid": "S010.25",
+  "description": "K+ --> pi+ mu- e+",
+  "related_data": [
+    {
+      "pdgid": "S010R39",
+      "description": "G(K+ --> pi+ mu- e+)/G(total)",
+      "note": "Test of lepton family number conservation.",
+      "measurements": [
+        {
+          "document_id": "ALIBERTI 2021 ",
+          "publication_name": "PRL 127 131802",
+          "publication_year": 2021,
+          "doi": "10.1103/PhysRevLett.127.131802",
+          "inspire_id": "1863318",
+          "title": "Search for Lepton Number and Flavor Violation in $K^+$ and $pi^0$ Decays",
+          "confidence_level": "90.0",
+          "charge": "+",
+          "technique": "NA62",
+          "is_changed": false,
+          "measurement_values": [
+            {
+              "column_name": "VALUE",
+              "value": 6.6E-11,
+              "value_text": "<6.6 E-11",
+              "limit_type": "U",
+              "used_in_average": true,
+              "used_in_fit": true,
+              "display_value_text": "<6.6 E-11",
+              "display_power_of_ten": 0,
+              "display_in_percent": false
+            }
+          ]
+        },
+        {
+          "document_id": "APPEL 2000B",
+          "publication_name": "PRL 85 2877",
+          "publication_year": 2000,
+          "doi": "10.1103/PhysRevLett.85.2877",
+          "inspire_id": "528177",
+          "title": "Search for Lepton Flavor Violation in K+ Decays",
+          "confidence_level": "90.0",
+          "charge": "+",
+          "technique": "B865",
+          "is_changed": false,
+          "measurement_values": [
+            {
+              "column_name": "VALUE",
+              "value": 5.2E-10,
+              "value_text": "<5.2 E-10",
+              "limit_type": "U",
+              "used_in_average": false,
+              "used_in_fit": false,
+              "display_value_text": "<5.2 E-10",
+              "display_power_of_ten": 0,
+              "display_in_percent": false
+            }
+          ]
+        },
+        {
+          "document_id": "DIAMANT-BERGER 1976 ",
+          "publication_name": "PL 62B 485",
+          "publication_year": 1976,
+          "doi": "10.1016/0370-2693(76)90690-0",
+          "inspire_id": "114350",
+          "title": "Study of Some Rare Decays of the K+ Meson",
+          "confidence_level": "90.0",
+          "charge": "+",
+          "technique": "SPEC",
+          "is_changed": false,
+          "measurement_values": [
+            {
+              "column_name": "VALUE",
+              "value": 7.0E-9,
+              "value_text": "<70 E-10",
+              "limit_type": "U",
+              "used_in_average": false,
+              "used_in_fit": false,
+              "display_value_text": "<70 E-10",
+              "display_power_of_ten": 0,
+              "display_in_percent": false
+            }
+          ],
+          "footnotes": [
+            {
+              "index": 1,
+              "text": "Measurement actually applies to the sum of the pi+ mu- e+ and pi- mu+ e+ modes.",
+              "is_changed": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footnotes": null
+}

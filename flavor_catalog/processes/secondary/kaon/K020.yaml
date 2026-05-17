@@ -1,0 +1,156 @@
+schema: flavor_catalog.process.v1
+process_id: K020
+family: kaon
+priority_tier: SECONDARY
+priority_rationale: "Deferred by DA-4 (round_004_addendum_deferred_scope.md); LFV-kaon trio deferred as lepton-bulk RS scope extension. Promoted in Wave-8 because: Top-tier; charged-current LFV companion to K019. Lower implementation priority than Waves 1-7 PRIMARY entries."
+promoted_in_wave: 8
+standard_notation: "K^+ \\to \\pi^+ e^{\\pm}\\mu^{\\mp}"
+process_name: "LFV charged-kaon semileptonic decay"
+owner: "PKA"
+owner_agent_id: "PKA-K020"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "DRAFT"
+    timestamp: "2026-05-17T02:12:51-04:00"
+    from: null
+    to: "DRAFT"
+    at: "2026-05-17T02:12:51-04:00"
+    agent_id: "PKA-K020"
+    reason: "Draft sidecar initialized for Wave-8 SECONDARY K020."
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-17T02:12:51-04:00"
+    from: "DRAFT"
+    to: "WRITER-INITIATED"
+    at: "2026-05-17T02:12:51-04:00"
+    agent_id: "PKA-K020"
+    reason: "Initial PKA source extraction and draft deposit."
+last_updated_at: "2026-05-17T02:12:51-04:00"
+version: "0.1.0"
+source_shas:
+  pdg2025_kplus_lfv_semileptonic_api.txt: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
+  sher_2005_arxiv_hep_ex_0502020.txt: "sha256:0ae93baf10b71d30e476330661aee67a6a3c9786fa6436d5caa015446f5ad551"
+  na62_2021_arxiv2105_06759.txt: "sha256:b1bae8275544c31e7105bb4a32bdc074d7c278842b6e17bc9d7905a1e3974255"
+  cfw_2008_arxiv0804_1954.txt: "sha256:76275c9144316dcff77ee64455dbcddcdfbb9bb6afcffb1648d19c889024155b"
+  beneke_moch_rohrwild_2015_arxiv1508_01705.txt: "sha256:fd547b564d6ba884d75c689dff572e09373e374193cdc42799521cc1349c8ce9"
+  angelescu_faroughy_sumensari_2020_arxiv2002_05684.txt: "sha256:dd0030d4d045b8393db00a82d59f3b6871b80db5a4c2195872863854336f93ee"
+pdg_or_equivalent:
+  source: "PDG Live / PDG API K+ branching-fraction listing"
+  edition: "2025"
+  year: 2025
+  citation: "S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update"
+  access_date: "2026-05-17"
+  snapshot_path: "flavor_catalog/references/K020/pdg2025_kplus_lfv_semileptonic_api.txt"
+  sha256_of_local_snapshot: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
+  limits:
+    - observable: "BR(K+ -> pi+ mu+ e-)"
+      pdg_identifier: "S010.29"
+      related_data_identifier: "S010R49"
+      value: 1.3e-11
+      uncertainty: null
+      units: "dimensionless branching fraction"
+      limit_type: "upper_limit"
+      cl: "90% CL"
+      year: 2025
+      display: "BR(K+ -> pi+ mu+ e-) < 1.3 x 10^-11 (90% CL)"
+      source: "PDG Live / PDG API listing S010.29, 2025 edition"
+      source_url: "https://pdgapi.lbl.gov/listings/S010.29"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/K020/pdg2025_kplus_lfv_semileptonic_api.txt"
+      sha256: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
+      experimental_reference: "A. Sher et al. (BNL E865), Phys. Rev. D 72, 012005 (2005)"
+      doi: "10.1103/PhysRevD.72.012005"
+      arxiv_id: "hep-ex/0502020"
+      note: "PDG reports this as a combined BNL E865/E777 upper limit; the E865-only Sher 2005 limit is 2.1 x 10^-11 at 90% CL."
+    - observable: "BR(K+ -> pi+ mu- e+)"
+      pdg_identifier: "S010.25"
+      related_data_identifier: "S010R39"
+      value: 6.6e-11
+      uncertainty: null
+      units: "dimensionless branching fraction"
+      limit_type: "upper_limit"
+      cl: "90% CL"
+      year: 2025
+      display: "BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11 (90% CL)"
+      source: "PDG Live / PDG API listing S010.25, 2025 edition"
+      source_url: "https://pdgapi.lbl.gov/listings/S010.25"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/K020/pdg2025_kplus_lfv_semileptonic_api.txt"
+      sha256: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
+      experimental_reference: "E. Cortina Gil et al. (NA62), Phys. Rev. Lett. 127, 131802 (2021)"
+      doi: "10.1103/PhysRevLett.127.131802"
+      arxiv_id: "2105.06759"
+      note: "PDG 2025 supersedes the BNL E865 APPEL 2000B limit of 5.2 x 10^-10 for this charge assignment."
+paper_era_reference:
+  cfw_2008_rs_flavor:
+    source: "Csaki, Falkowski, and Weiler, JHEP 0809, 008 (2008)"
+    arxiv_id: "0804.1954"
+    year: 2008
+    context: "Paper-era RS flavor reference; the quoted KK-gluon scale discussion is theory context, not the K020 measured observable."
+    source_url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/K020/cfw_2008_arxiv0804_1954.txt"
+    sha256_of_local_snapshot: "sha256:76275c9144316dcff77ee64455dbcddcdfbb9bb6afcffb1648d19c889024155b"
+post_2008_developments:
+  experimental:
+    - source: "NA62 Collaboration, Phys. Rev. Lett. 127, 131802 (2021)"
+      arxiv_id: "2105.06759"
+      year: 2021
+      relevance: "Post-2008 direct search setting the current K+ -> pi+ mu- e+ upper limit and improving the previous bound by about one order of magnitude."
+      source_url: "https://arxiv.org/abs/2105.06759"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/K020/na62_2021_arxiv2105_06759.txt"
+      sha256_of_local_snapshot: "sha256:b1bae8275544c31e7105bb4a32bdc074d7c278842b6e17bc9d7905a1e3974255"
+  theory:
+    - source: "Beneke, Moch, and Rohrwild, Nucl. Phys. B 906, 561 (2016)"
+      arxiv_id: "1508.01705"
+      year: 2015
+      relevance: "Post-CFW 5D RS charged-lepton flavor-violation calculation; relevant for the lepton-bulk and dipole-sector correlations that K020 would share."
+      source_url: "https://arxiv.org/abs/1508.01705"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/K020/beneke_moch_rohrwild_2015_arxiv1508_01705.txt"
+      sha256_of_local_snapshot: "sha256:fd547b564d6ba884d75c689dff572e09373e374193cdc42799521cc1349c8ce9"
+    - source: "Angelescu, Faroughy, and Sumensari, Eur. Phys. J. C 80, 641 (2020)"
+      arxiv_id: "2002.05684"
+      year: 2020
+      relevance: "Modern LFV quark-lepton EFT treatment including low-energy K -> pi l_k l_l semileptonic modes; useful for operator normalization and comparison with dilepton-tail constraints."
+      source_url: "https://arxiv.org/abs/2002.05684"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/K020/angelescu_faroughy_sumensari_2020_arxiv2002_05684.txt"
+      sha256_of_local_snapshot: "sha256:dd0030d4d045b8393db00a82d59f3b6871b80db5a4c2195872863854336f93ee"
+constraint_classification:
+  experimental_class: "upper_limit"
+  model_dependence: "HIGH"
+  sm_background: "forbidden/negligible in the SM with charged-lepton flavor conservation"
+  operator_requirements:
+    - "Delta S = 1 semileptonic LFV four-fermion operators"
+    - "Separate chiral structures for K+ -> pi+ mu+ e- and K+ -> pi+ mu- e+"
+    - "K -> pi form-factor treatment for vector/scalar/tensor operators"
+    - "Lepton-sector RS matching for bulk profiles, seesaw spurions, or shifted Z/Higgs couplings"
+code_coverage:
+  status: "NO"
+  evidence:
+    - "No K020, S010.29, S010.25, or K+ -> pi+ e mu implementation was found in the requested directories."
+    - "K020-specific grep finds only generic LFV scan metadata and the existing mu->e gamma dipole module, not a semileptonic kaon rate."
+    - "Broader greps find implemented Delta F = 2 kaon/B/D surfaces and mu->e gamma only."
+  required_grep_commands:
+    - command: "rg -n \"K020|S010\\.29|S010\\.25|K\\+.*pi\\+.*(mu|e)|pi\\+.*(mu|e).*(e|mu)|K.*pi.*e.*mu|K.*pi.*mu.*e|mu\\+ e-|mu- e\\+|LFV|lepton.?flavo(u)?r\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "Only generic LFV metadata in scanParams, flavorConstraints/muToEGamma.py, flavorConstraints/README.md, and tests; no K020-specific implementation."
+    - command: "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "Finds the existing Delta F = 2 meson-mixing lane and mu->e gamma dipole lane only."
+    - command: "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|e.?mu|mu.?e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+      result_summary: "Large broad search returns QCD, Delta F = 2, dipole, and documentation hits; no K+ -> pi+ e mu observable."
+    - command: "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma|muToEGamma|deltaf2\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+      result_summary: "Confirms current code surfaces are epsilon_K/K/B_d/B_s/D0 Delta F = 2 systems and mu->e gamma."
+  near_miss_evidence:
+    - "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma(), a dipole LFV check rather than a semileptonic kaon observable."
+    - "scanParams/scan.py:524 calls check_mu_to_e_gamma() in scans; no analogous K020 call is present."
+    - "quarkConstraints/deltaf2.py:755 defines evaluate_delta_mk(), a neutral-kaon mixing observable, not Delta S = 1 K+ -> pi+ e mu."
+    - "quarkConstraints/modern/phenomenology.py:23 lists MODERN_PHENOMENOLOGY_SYSTEM_IDS = (\"epsilon_K\", \"K\", \"B_d\", \"B_s\", \"D0\")."
+implementation_difficulty: "HIGH"
+implementation_difficulty_if_missing: "HIGH"
+implementation_difficulty_rationale: "Requires a new Delta S = 1 semileptonic LFV operator basis, K -> pi form-factor/rate calculation, and lepton-sector RS matching; existing Delta F = 2 and mu->e gamma machinery cannot provide this observable."
+open_issues:
+  - "WA/CA should decide whether the final prose should call this the charged-kaon companion to K019 rather than the prompt's charged-current phrasing, since the quark-level transition is neutral-current-like s -> d e mu."
+  - "If promoted to live code, PI should specify whether to support a general LFV EFT basis first or a narrower RS KK-gauge/Z/Higgs matching convention."

@@ -1,0 +1,68 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: K020
+sources:
+  - key: PDG2025_Kplus_LFV_semileptonic
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group K+ listing, 2025 update: K+ -> pi+ mu+ e- and K+ -> pi+ mu- e+"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdgapi.lbl.gov/summaries/S010"
+    additional_urls:
+      - "https://pdgapi.lbl.gov/listings/S010.29"
+      - "https://pdgapi.lbl.gov/listings/S010.25"
+      - "https://pdglive.lbl.gov/BranchingRatio.action?desig=29&parCode=S010&home=MXXX020"
+      - "https://pdglive.lbl.gov/BranchingRatio.action?desig=25&parCode=S010&home=MXXX020"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
+    snapshot_path: "flavor_catalog/references/K020/pdg2025_kplus_lfv_semileptonic_api.txt"
+  - key: Sher2005_Kplus_piplus_mup_em
+    arxiv_id: "hep-ex/0502020"
+    DOI: "10.1103/PhysRevD.72.012005"
+    title: "An Improved upper limit on the decay K^+ -> pi^+ mu^+ e^-"
+    authors: "A. Sher et al. (BNL E865 Collaboration)"
+    year: 2005
+    url: "https://arxiv.org/abs/hep-ex/0502020"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0ae93baf10b71d30e476330661aee67a6a3c9786fa6436d5caa015446f5ad551"
+    snapshot_path: "flavor_catalog/references/K020/sher_2005_arxiv_hep_ex_0502020.txt"
+  - key: NA622021_Kplus_piplus_mum_ep
+    arxiv_id: "2105.06759"
+    DOI: "10.1103/PhysRevLett.127.131802"
+    title: "Search for lepton number and flavour violation in K+ and pi0 decays"
+    authors: "E. Cortina Gil et al. (NA62 Collaboration)"
+    year: 2021
+    url: "https://arxiv.org/abs/2105.06759"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b1bae8275544c31e7105bb4a32bdc074d7c278842b6e17bc9d7905a1e3974255"
+    snapshot_path: "flavor_catalog/references/K020/na62_2021_arxiv2105_06759.txt"
+  - key: CFW2008_RS_flavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "C. Csaki, A. Falkowski, and A. Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:76275c9144316dcff77ee64455dbcddcdfbb9bb6afcffb1648d19c889024155b"
+    snapshot_path: "flavor_catalog/references/K020/cfw_2008_arxiv0804_1954.txt"
+  - key: BenekeMochRohrwild2015_RS_LFV
+    arxiv_id: "1508.01705"
+    DOI: "10.1016/j.nuclphysb.2016.02.037"
+    title: "Lepton flavour violation in RS models with a brane- or nearly brane-localized Higgs"
+    authors: "M. Beneke, P. Moch, and J. Rohrwild"
+    year: 2015
+    url: "https://arxiv.org/abs/1508.01705"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:fd547b564d6ba884d75c689dff572e09373e374193cdc42799521cc1349c8ce9"
+    snapshot_path: "flavor_catalog/references/K020/beneke_moch_rohrwild_2015_arxiv1508_01705.txt"
+  - key: AngelescuFaroughySumensari2020_semileptonic_LFV
+    arxiv_id: "2002.05684"
+    DOI: "10.1140/epjc/s10052-020-8210-5"
+    title: "Lepton Flavor Violation and Dilepton Tails at the LHC"
+    authors: "A. Angelescu, D. A. Faroughy, and O. Sumensari"
+    year: 2020
+    url: "https://arxiv.org/abs/2002.05684"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:dd0030d4d045b8393db00a82d59f3b6871b80db5a4c2195872863854336f93ee"
+    snapshot_path: "flavor_catalog/references/K020/angelescu_faroughy_sumensari_2020_arxiv2002_05684.txt"
