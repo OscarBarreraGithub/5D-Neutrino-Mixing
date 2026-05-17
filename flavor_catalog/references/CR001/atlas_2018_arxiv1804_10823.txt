@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/mxlbngpZ+i0tHxDBE6eiF+Vrva4</id>
+  <title>arXiv Query: search_query=&amp;id_list=1804.10823&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:35:12Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1804.10823" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1804.10823v2</id>
+    <title>Search for heavy particles decaying into top-quark pairs using lepton-plus-jets events in proton-proton collisions at $\sqrt{s} = 13$ TeV with the ATLAS detector</title>
+    <updated>2018-09-24T14:48:06Z</updated>
+    <link href="https://arxiv.org/abs/1804.10823v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.10823v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for new heavy particles that decay into top-quark pairs is performed using data collected from proton-proton collisions at a centre-of-mass energy of 13 TeV by the ATLAS detector at the Large Hadron Collider. The integrated luminosity of the data sample is 36.1 fb$^{-1}$. Events consistent with top-quark pair production are selected by requiring a single isolated charged lepton, missing transverse momentum and jet activity compatible with a hadronic top-quark decay. Jets identified as likely to contain $b$-hadrons are required to reduce the background from other Standard Model processes. The invariant mass spectrum of the candidate top-quark pairs is examined for excesses above the background expectation. No significant deviations from the Standard Model predictions are found. Exclusion limits are set on the production cross-section times branching ratio for hypothetical $Z'$ bosons, Kaluza-Kein gluons and Kaluza-Klein gravitons that decay into top-quark pairs.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-28T15:38:50Z</published>
+    <arxiv:comment>56 pages in total, author list starting page 40, 18 figures, 3 tables, submitted to Eur. Phys. J. C. All figures including auxiliary figures are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2015-04</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Eur. Phys. J. C 78 (2018) 565</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-018-5995-6</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-018-5995-6" title="doi"/>
+  </entry>
+</feed>

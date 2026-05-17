@@ -1,0 +1,123 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR001
+sources:
+  - key: CMS2026_TTbarResonance
+    arxiv_id: "2603.23454"
+    DOI: "10.48550/arXiv.2603.23454"
+    title: "Search for new particles decaying into top quark-antiquark pairs in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2026
+    url: "https://arxiv.org/abs/2603.23454"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:c8991eda19167e18c3e31b54027eebc86fc7466b4159781e95dddd50e09b613c"
+    snapshot_path: "flavor_catalog/references/CR001/cms_2026_arxiv2603_23454.txt"
+  - key: HEPData2026_CMSB2G25009
+    arxiv_id: "2603.23454"
+    DOI: "10.17182/hepdata.168403.v1"
+    title: "HEPData record for CMS-B2G-25-009 ttbar resonance search"
+    authors: "CMS Collaboration / HEPData"
+    year: 2026
+    url: "https://www.hepdata.net/record/ins3134005"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:d93d5f27a9d9bdd00ef91cb27b3c925edf4a4a9aa352e9efd48aa589f67f459a"
+    snapshot_path: "flavor_catalog/references/CR001/hepdata_2026_ins3134005_record_extract.json"
+  - key: PDGLive2026_S071KKG
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "PDG Live S071KKG: Limits on Kaluza-Klein Gluons in Warped Extra Dimensions"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2026
+    url: "https://pdglive.lbl.gov/DataBlock.action?node=S071KKG"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b0d08fb66567cc22c0020d6dee55761ff2c733458e80c2da689a272c62704490"
+    snapshot_path: "flavor_catalog/references/CR001/pdg_live_2026_s071kkg.txt"
+  - key: ATLAS2025_TTbarResonance
+    arxiv_id: "2512.17856"
+    DOI: "10.48550/arXiv.2512.17856"
+    title: "Search for ttbar resonances in final states with exactly one or two leptons using 140 fb^-1 of pp collision data at sqrt(s)=13 TeV with the ATLAS experiment"
+    authors: "ATLAS Collaboration"
+    year: 2025
+    url: "https://arxiv.org/abs/2512.17856"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:42a7a121cfa19e0eef64909c5ef68f9697b6adfbbb2484a3713afe0310ab4d5a"
+    snapshot_path: "flavor_catalog/references/CR001/atlas_2025_arxiv2512_17856.txt"
+  - key: ATLAS2020_HadronicTTbar
+    arxiv_id: "2005.05138"
+    DOI: "10.1007/JHEP10(2020)061"
+    title: "Search for t tbar resonances in fully hadronic final states in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2020
+    url: "https://arxiv.org/abs/2005.05138"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:45373c5fb42054c2b6231c7a67b9ede00be32141a602020e7213c56584d15c22"
+    snapshot_path: "flavor_catalog/references/CR001/atlas_2020_arxiv2005_05138.txt"
+  - key: CMS2019_TTbarResonance
+    arxiv_id: "1810.05905"
+    DOI: "10.1007/JHEP04(2019)031"
+    title: "Search for resonant t tbar production in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1810.05905"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:93a713d209e4b05fd9ea8e0d921a880709278a0cce4ff23c1950eff10dcfd42b"
+    snapshot_path: "flavor_catalog/references/CR001/cms_2019_arxiv1810_05905.txt"
+  - key: ATLAS2018_LeptonJetsTTbar
+    arxiv_id: "1804.10823"
+    DOI: "10.1140/epjc/s10052-018-5995-6"
+    title: "Search for heavy particles decaying into top-quark pairs using lepton-plus-jets events in proton-proton collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1804.10823"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:33690b9dca47ea2d4e9776e24a9b0d2af11f4831b2e8646d8ab021f20a84f1b5"
+    snapshot_path: "flavor_catalog/references/CR001/atlas_2018_arxiv1804_10823.txt"
+  - key: CMS2017_BoostedTTbar
+    arxiv_id: "1704.03366"
+    DOI: "10.1007/JHEP07(2017)001"
+    title: "Search for t t-bar resonances in highly boosted lepton+jets and fully hadronic final states in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1704.03366"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:e2db7db3408a434393f1b0a743ef792a1c2dfad6503fd849ad683af069a92465"
+    snapshot_path: "flavor_catalog/references/CR001/cms_2017_arxiv1704_03366.txt"
+  - key: ATLAS2013_LeptonJetsTTbar
+    arxiv_id: "1305.2756"
+    DOI: "10.1103/PhysRevD.88.012004"
+    title: "A search for ttbar resonances in the lepton plus jets final state with ATLAS using 4.7 fb^-1 of pp collisions at sqrt(s) = 7 TeV"
+    authors: "ATLAS Collaboration"
+    year: 2013
+    url: "https://arxiv.org/abs/1305.2756"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0f2049c8120ce935f7f7a9a0464f23f2006ec1927c8a00fcceaed7513019e817"
+    snapshot_path: "flavor_catalog/references/CR001/atlas_2013_arxiv1305_2756.txt"
+  - key: ATLAS2012_BoostedTTbar
+    arxiv_id: "1207.2409"
+    DOI: "10.1007/JHEP09(2012)041"
+    title: "A search for ttbar resonances in lepton+jets events with highly boosted top quarks collected in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2012
+    url: "https://arxiv.org/abs/1207.2409"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:79a0e8ade861cbba8ee8775df6cee090170ac89b6d4bef6360bb396eead71234"
+    snapshot_path: "flavor_catalog/references/CR001/atlas_2012_arxiv1207_2409.txt"
+  - key: LillieRandallWang2007_BulkRSKKGluon
+    arxiv_id: "hep-ph/0701166"
+    DOI: "10.1088/1126-6708/2007/09/074"
+    title: "The Bulk RS KK-gluon at the LHC"
+    authors: "Ben Lillie, Lisa Randall, and Lian-Tao Wang"
+    year: 2007
+    url: "https://arxiv.org/abs/hep-ph/0701166"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:1fc300c3daf8352f1550334b1f8ab090ccd4530ea08c4214ce1143016db918da"
+    snapshot_path: "flavor_catalog/references/CR001/lillie_randall_wang_2007_arxiv_hepph0701166.txt"
+  - key: QuarkScanMethodology2026_MKK
+    arxiv_id: null
+    DOI: null
+    title: "Quark scan methodology note M_KK minimum excerpt"
+    authors: "5D-Neutrino-Mixing collaboration"
+    year: 2026
+    url: "docs/quark_scan_methodology_note.tex"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:61b363781fba58ab7069d9f234029f09524a3ecfdebbf7ec08a4414de082a975"
+    snapshot_path: "flavor_catalog/references/CR001/quark_scan_methodology_note_mkk_extract.txt"

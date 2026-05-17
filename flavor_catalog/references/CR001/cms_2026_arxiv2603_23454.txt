@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/YEqw+KUqbZXiS0Jt2HNkspa2p3c</id>
+  <title>arXiv Query: search_query=&amp;id_list=2603.23454&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:35:10Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2603.23454" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2603.23454v1</id>
+    <title>Search for new particles decaying into top quark-antiquark pairs in proton-proton collisions at $\sqrt{s}$ = 13 TeV</title>
+    <updated>2026-03-24T17:26:37Z</updated>
+    <link href="https://arxiv.org/abs/2603.23454v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.23454v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for new particles decaying to top quark-antiquark pairs is performed using proton-proton collision data at a centre-of-mass energy of 13 TeV. The data set recorded with the CMS detector between 2016 and 2018 is used, corresponding to an integrated luminosity of 138 fb$^{-1}$. Final states with 0, 1, and 2 leptons are analyzed, covering all decay modes of the top quark-antiquark pairs. Heavy Z' bosons with relative widths of 1, 10, and 30% are excluded for masses in the ranges 0.4$-$4.8, 0.4$-$6.2, and 0.4$-$7.4 TeV, respectively. A Kaluza$-$Klein gluon in the Randall$-$Sundrum model and a dark-matter mediator are excluded for masses between 0.5$-$5.5 and 1.0$-$4.2 TeV, respectively. These results set the most stringent limits to date for the considered models in the $\mathrm{t\bar{t}}$ final state. In addition, in the two-Higgs-doublet models, upper limits are set on the coupling strength modifier for scalar and pseudoscalar Higgs bosons with relative widths of 2.5, 10, and 25% in the mass range of 0.5$-$1.0 TeV.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-24T17:26:37Z</published>
+    <arxiv:comment>Submitted to the Journal of High Energy Physics. All figures and tables can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-25-009 (CMS Public Pages)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+  </entry>
+</feed>

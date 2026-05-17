@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/sqTJzAyorJXi6Jbp5fwKdbBBkz4</id>
+  <title>arXiv Query: search_query=&amp;id_list=2512.17856&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:35:11Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2512.17856" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2512.17856v1</id>
+    <title>Search for ttbar resonances in final states with exactly one or two leptons using 140 fb$^{-1}$ of pp collision data at $\sqrt{s}=13$ TeV with the ATLAS experiment</title>
+    <updated>2025-12-19T17:58:42Z</updated>
+    <link href="https://arxiv.org/abs/2512.17856v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.17856v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for heavy spin-1 and spin-2 resonances decaying into a top-antitop-quark pair has been performed with 140 fb$^{-1}$ of proton-proton collision data collected by the ATLAS experiment at the Large Hadron Collider at a centre-of-mass energy of $\sqrt{s}=13$ TeV. Final states with either exactly one electron or muon, or exactly two leptons ($ee$, $μμ$ or $eμ$), large missing transverse momentum, and two jets, at least one of which must be identified as likely containing a b-hadron decay, are considered. The search targets resonances with both narrow and broad widths relative to the detector resolution, and with masses in the range of 0.4-5.0 TeV. No significant deviation from the Standard Model prediction is observed. Exclusion limits are set on the production cross-section times branching ratio for hypothetical $Z'$ bosons, Kaluza-Klein gravitons, and Kaluza-Klein gluons that decay into top-quark pairs.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-19T17:58:42Z</published>
+    <arxiv:comment>61 pages in total, author list starting page 46, 10 figures, 6 tables, submitted to JHEP</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+  </entry>
+</feed>

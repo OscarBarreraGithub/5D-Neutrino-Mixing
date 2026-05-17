@@ -1,0 +1,129 @@
+% Flavor catalog per-process template.
+% process_id: CR001
+% family: collider_rs
+% owner_agent_id: PKA-CR001
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR001.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(pp \to g^{(1)}_{\rm KK}\to t\bar t\)}{pp to KK gluon to ttbar}}
+
+\subsection*{Process}
+This entry covers direct LHC resonance searches for the first color-octet
+Kaluza--Klein gluon in warped extra dimensions, in the standard topology
+\(pp\to g^{(1)}_{\rm KK}\to t\bar t\).  It is a high-mass tail search for a
+spin-1 KK gauge resonance, not a low-energy flavor observable and not a
+separate vector-like-partner search.
+
+\subsection*{Current best limit(s)}
+The current best direct \(t\bar t\) benchmark bound is the CMS Run-2
+all-topology search CMS-B2G-25-009, \texttt{arXiv:2603.23454}.  Using
+\(138\,{\rm fb}^{-1}\) of \(13\) TeV data and the 0-, 1-, and 2-lepton
+\(t\bar t\) final states, CMS finds no significant excess and excludes the
+Randall--Sundrum KK-gluon benchmark over \(0.5<m_{g_{\rm KK}}<5.5\) TeV at
+95\% CL.  The sidecar records this as the canonical current lower edge,
+\(m_{g_{\rm KK}}>5.5\) TeV for this benchmark, with the interval wording kept
+explicit in \texttt{pdg\_or\_equivalent.values}.
+
+PDG Live entry \texttt{S071KKG} is still useful as a review-table snapshot but
+is not the latest LHC result for this topology.  It lists the older
+ATLAS lepton-plus-jets benchmark value \(m_{g_{\rm KK}}>3.8\) TeV at 95\% CL
+for a \(\Gamma/m=15.3\%\) warped-extra-dimension benchmark.  CMS
+\texttt{arXiv:1810.05905} superseded that scale in a 2016-data combination
+with \(0.50<m_{g_{\rm KK}}<4.55\) TeV excluded, and CMS-B2G-25-009 is the
+current best result.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+The search constrains the physical first KK-gluon resonance mass in a specified
+RS collider benchmark: production through the color-octet vector state,
+template assumptions for its width and couplings, and a large branching
+fraction to \(t\bar t\).  This is the canonical collider signature of bulk RS
+because the IR-localized top quark couples strongly to the KK gluon.
+
+For the anarchic-flavor scan in this repository, the direct reach is not the
+leading mass constraint.  The methodology note's RUNA reference scan gives
+\(\MKKmin(p50,\gsstar=3)=47.26\) TeV and
+\(\MKKmin(p95,\gsstar=3)=127.13\) TeV from low-energy \(\Delta F=2\) flavor
+constraints.  A \(5.5\) TeV direct \(g_{\rm KK}\to t\bar t\) exclusion is
+therefore mainly a cross-check for the anarchic pipeline and a useful handle on
+non-anarchic, aligned, or otherwise collider-visible RS variants where the
+flavor bound is weakened.
+
+\subsection*{Post-2010 developments}
+The collider history starts from the Lillie--Randall--Wang boosted-top
+proposal, \texttt{hep-ph/0701166}, which identified \(g_{\rm KK}\to t\bar t\)
+as the characteristic bulk-RS LHC signal.  Post-2010 searches improved by
+raising the collision energy, adding luminosity, and extending top-tagging
+across boosted decay topologies.
+
+ATLAS \texttt{arXiv:1207.2409} used \(2.05\,{\rm fb}^{-1}\) at 7 TeV and
+excluded \(m_{g_{\rm KK}}<1.5\) TeV, establishing the boosted lepton-plus-jets
+strategy.  ATLAS \texttt{arXiv:1305.2756} used the full 2011
+\(4.7\,{\rm fb}^{-1}\) 7 TeV sample and pushed the broad RS KK-gluon exclusion
+to \(m_{g_{\rm KK}}<2.07\) TeV.  Early 13 TeV CMS work,
+\texttt{arXiv:1704.03366}, combined boosted lepton-plus-jets and fully
+hadronic channels and improved sensitivity above 2 TeV.
+
+ATLAS \texttt{arXiv:1804.10823} used \(36.1\,{\rm fb}^{-1}\) at 13 TeV in the
+lepton-plus-jets channel; this is the ATLAS result behind the PDG Live
+\(3.8\) TeV benchmark row.  CMS \texttt{arXiv:1810.05905} then combined the
+dilepton, single-lepton, and all-hadronic \(t\bar t\) topologies in
+\(35.9\,{\rm fb}^{-1}\), excluding \(0.50<m_{g_{\rm KK}}<4.55\) TeV.  ATLAS
+\texttt{arXiv:2005.05138} brought the all-hadronic channel to the
+\(139\,{\rm fb}^{-1}\) Run-2 scale, while ATLAS \texttt{arXiv:2512.17856}
+updated one- and two-lepton final states with \(140\,{\rm fb}^{-1}\) and
+explicit KK-gluon templates over a \(0.4\)--\(5.0\) TeV search range.  CMS
+\texttt{arXiv:2603.23454} is the current full-Run-2 all-topology update and
+sets the \(5.5\) TeV limit used here.
+
+\subsection*{Constraint validity and model dependence}
+The limit is not a model-independent lower bound on every RS \(M_{\rm KK}\).
+It assumes the signal model used by the experimental template: the KK-gluon
+production rate, width, chiral couplings, and \(t\bar t\) branching fraction.
+If the KK gluon has sizable decays to vector-like quarks, other BSM states, or
+light-flavor channels, the \(t\bar t\) branching fraction and line shape change.
+Very broad resonances, interference with SM \(t\bar t\), or altered light-quark
+couplings also require reinterpretation rather than direct use of the quoted
+mass edge.
+
+For custodial RS, this entry constrains the KK gauge resonance sector.  It does
+not by itself constrain custodial fermion partners such as \(T_{5/3}\); those
+require separate heavy-partner searches and branching assumptions.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO} for a direct-collider \(g_{\rm KK}\to t\bar t\) constraint.  The
+direct-search grep over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \texttt{ttbar}, top-pair-resonance, LHC, CheckMATE,
+MadAnalysis5, or SModelS implementation.
+
+There is adjacent low-energy KK-gluon infrastructure only:
+\texttt{quarkConstraints/couplings.py:1} defines mass-basis KK-gluon couplings,
+\texttt{quarkConstraints/deltaf2.py:1} describes a tree-level KK-gluon-inspired
+\(\Delta F=2\) matching layer, and \texttt{quarkConstraints/scan.py:359-380}
+computes \(M_{\rm KK}\) and evaluates flavor diagnostics.  The modern matching
+wrapper also states that it is not a full operator-complete EFT/RG package
+(\texttt{quarkConstraints/modern/matching.py:241-243}).  None of these files
+implements a collider likelihood or filters scan points on direct LHC
+resonance exclusions.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A live constraint would need either the experimental likelihood
+or an external reinterpretation chain such as CheckMATE, MadAnalysis5, SModelS,
+or a dedicated recast using generated \(pp\to g_{\rm KK}\to t\bar t\) samples,
+top-tagging efficiencies, mass-resolution effects, and width/interference
+systematics.  A simple mass cut would be acceptable only as a documented
+benchmark overlay, not as a robust constraint on the general RS parameter
+space.
+
+\subsection*{Key references}
+\texttt{CMS2026\_TTbarResonance}; \texttt{HEPData2026\_CMSB2G25009};
+\texttt{PDGLive2026\_S071KKG}; \texttt{CMS2019\_TTbarResonance};
+\texttt{ATLAS2025\_TTbarResonance}; \texttt{ATLAS2020\_HadronicTTbar};
+\texttt{ATLAS2018\_LeptonJetsTTbar}; \texttt{ATLAS2013\_LeptonJetsTTbar};
+\texttt{ATLAS2012\_BoostedTTbar}; \texttt{CMS2017\_BoostedTTbar};
+\texttt{LillieRandallWang2007\_BulkRSKKGluon};
+\texttt{QuarkScanMethodology2026\_MKK}.

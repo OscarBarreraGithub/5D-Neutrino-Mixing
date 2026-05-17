@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Hye0bkPI7peOmGN6yr3D8odVCYo</id>
+  <title>arXiv Query: search_query=&amp;id_list=2005.05138&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:35:11Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2005.05138" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2005.05138v2</id>
+    <title>Search for $t\bar{t}$ resonances in fully hadronic final states in $pp$ collisions at $\sqrt{s}=13$ TeV with the ATLAS detector</title>
+    <updated>2021-01-14T13:31:45Z</updated>
+    <link href="https://arxiv.org/abs/2005.05138v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.05138v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a search for new heavy particles decaying into a pair of top quarks using 139 fb$^{-1}$ of proton--proton collision data recorded at a centre-of-mass energy of $\sqrt{s}=13$ TeV with the ATLAS detector at the Large Hadron Collider. The search is performed using events consistent with pair production of high-transverse-momentum top quarks and their subsequent decays into the fully hadronic final states. The analysis is optimized for resonances decaying into a $t\bar{t}$ pair with mass above 1.4 TeV, exploiting a dedicated multivariate technique with jet substructure to identify hadronically decaying top quarks using large-radius jets and evaluating the background expectation from data. No significant deviation from the background prediction is observed. Limits are set on the production cross-section times branching fraction for the new $Z'$ boson in a topcolor-assisted-technicolor model. The $Z'$ boson masses below 3.9 and 4.7 TeV are excluded at 95% confidence level for the decay widths of 1% and 3%, respectively.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-11T14:28:40Z</published>
+    <arxiv:comment>40 pages in total, author list starting page 24, 4 figures, 2 tables, submitted to JHEP. All figures including auxiliary figures are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2018-48/</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>JHEP 10 (2020) 61</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP10(2020)061</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP10(2020)061" title="doi"/>
+  </entry>
+</feed>
