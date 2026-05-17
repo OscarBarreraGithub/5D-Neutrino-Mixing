@@ -26,7 +26,15 @@ status_history:
     timestamp: "2026-05-17T02:15:12-04:00"
     agent_id: "PKA-T014"
     reason: "Initial PKA draft, source snapshots, code-coverage grep, and sidecar metadata."
-last_updated_at: "2026-05-17T02:15:12-04:00"
+  - from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    state: "WRITER-DONE"
+    at: "2026-05-17T02:36:28-04:00"
+    timestamp: "2026-05-17T02:36:28-04:00"
+    agent_id: "WA"
+    cycle: 1
+    reason: "WA-w8-T014 cycle-1 polish for Wave-8 SECONDARY FCNC-Z batch."
+last_updated_at: "2026-05-17T02:36:28-04:00"
 version: "0.1.0"
 source_shas:
   abu_ajamieh_2026_fv_z_quark_extract.txt: "sha256:53ee0fc6e7ab683793338fafbfdcf2075c81608b4acf74678c22f00e340b902b"
