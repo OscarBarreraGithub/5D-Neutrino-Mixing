@@ -237,3 +237,90 @@ None.
 ## Unresolvable Sources
 
 None. UTfit required a TLS/certificate workaround (`curl -k`) but the page content was fetched and the quoted value was visible. The PDG `s086.pdf` value for B034 was verified against the local PDG snapshot and the CDS record carrying the same LHCb combined values.
+
+---
+
+## Wave-8 addendum (SECONDARY)
+
+Date: 2026-05-17T12:13:38-04:00
+Agent: factcheck-codex-beauty-w8
+Scope: B007, B008, B013, B014 (SECONDARY tier, processes/secondary/beauty/)
+
+### Summary
+
+| Process | Verdict | Mismatches | Note |
+|---|---:|---:|---|
+| B007 | VERIFIED | 0 | Electronic neutral-B limits verified; sidecar transition deferred because no OPUS-APPROVED history entry exists yet. |
+| B008 | VERIFIED | 0 | Tauonic neutral-B limits verified; sidecar transition deferred because no OPUS-APPROVED history entry exists yet. |
+| B013 | VERIFIED | 0 | B_s -> phi gamma branching, CP/helicity, and proxy observables verified; sidecar transition deferred because no OPUS-APPROVED history entry exists yet. |
+| B014 | VERIFIED | 0 | B -> rho/omega gamma PDG/HFLAV and recent measurement values verified; sidecar transition deferred because no OPUS-APPROVED history entry exists yet. |
+
+### Fetch exceptions
+
+| URL | Status | Impact |
+|---|---:|---|
+| None | N/A | All cited URLs in scope fetched with HTTP 200; PDG/HFLAV PDFs were text-extracted successfully. |
+
+### B007 - VERIFIED
+
+Key references checked: PDG live/API S086.20 and S042.6; arXiv:2003.03999, arXiv:0901.3803, arXiv:0712.1516, arXiv:1311.0903, arXiv:1703.10160, arXiv:0804.1954.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG2026_BsBdEe: `BR(B_s0 -> e+e-) < 9.4e-9` and `BR(B0 -> e+e-) < 2.5e-9` at 90% CL, one mode at a time | https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.20 ; https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.6 | Y | Live PDG API returns the two limits, 2026 edition metadata, LHCb 2020 source, and assumptions. |
+| LHCb2020_BsBdEe: 95% CL limits `11.2e-9` and `3.0e-9`; 90% CL limits agree with PDG | https://arxiv.org/abs/2003.03999 | Y | Live arXiv abstract contains `9.4 (11.2) x 10^-9` and `2.5 (3.0) x 10^-9`; authors/title/year match the manifest. |
+| LHCb2020 dataset metadata: 7, 8, and 13 TeV with 1, 2, and 2 fb^-1 | https://arxiv.org/abs/2003.03999 | N/A | Dataset metadata contextualizes the measurement; verified in live abstract but treated under the L001 carve-out. |
+| CDF2009 historical limits: `BR(B_s0 -> e+e-) < 2.8e-7`, `BR(B0 -> e+e-) < 8.3e-8` at 90% CL | https://arxiv.org/abs/0901.3803 | Y | Authors/title/year match arXiv; exact e+e- limits verified in the local CDF snapshot and PDG/LHCb cross-check text because the live arXiv abstract repeats the e+mu limit text. |
+| BaBar2008 historical `BR(B0 -> e+e-) < 1.13e-7` at 90% CL | https://arxiv.org/abs/0712.1516 | Y | Live arXiv abstract gives `11.3 x 10^-8`; authors/title/year match the manifest. |
+| Belle2003 historical `BR(B0 -> e+e-) < 1.9e-7` at 90% CL | https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.6 | Y | Live PDG API and local PDG snapshot retain the Belle row with `<1.9 E-7`. |
+| Bobeth et al. SM electron-mode values `8.54 +/- 0.55 x 10^-14` and `2.48 +/- 0.21 x 10^-15`; LHCb SM context `8.60 +/- 0.36 x 10^-14` and `2.41 +/- 0.13 x 10^-15` | https://arxiv.org/abs/1311.0903 ; https://arxiv.org/abs/2003.03999 | Y | Authors/title/year match arXiv; numerical values appear in the local snapshots. |
+| CFW RS reference scales `21 TeV` and `33 TeV` | https://arxiv.org/abs/0804.1954 | N/A | Theory normalization/reference-scale context only; arXiv metadata matched and the values are not treated as measured observables. |
+
+### B008 - VERIFIED
+
+Key references checked: PDG live/API S086.130 and S042.336; arXiv:1703.02508, arXiv:hep-ex/0511015, arXiv:1605.09637, arXiv:1311.0903, arXiv:1712.01919, arXiv:2307.07013, arXiv:0804.1954.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG2026_BsTauTau: `BR(B_s0 -> tau+ tau-) < 6.8e-3` at 95% CL | https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.130 | Y | Live PDG API returns `<6.8 E-3`, PRL 118 251802, year 2017, and the LHCb title. |
+| PDG2026_BdTauTau: `BR(B0 -> tau+ tau-) < 2.1e-3` at 95% CL | https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.336 | Y | Live PDG API returns `<2.1 E-3`, PRL 118 251802, year 2017, and the LHCb title. |
+| LHCb 2017 direct search: the two 95% CL limits and one-mode-at-a-time assumptions | https://arxiv.org/abs/1703.02508 | Y | Live arXiv abstract contains both limits and assumptions; authors/title/year match the manifest. |
+| LHCb 2017 dataset metadata: `3 fb^-1`, 2011-2012, `7` and `8 TeV`, tau reconstruction through `3 pi nu_tau` | https://arxiv.org/abs/1703.02508 | N/A | Dataset/reconstruction metadata verified in live abstract but treated as contextual metadata under the L001 carve-out. |
+| BABAR 2006 historical `BR(B0 -> tau+ tau-) < 4.1e-3` at 90% CL | https://arxiv.org/abs/hep-ex/0511015 | Y | Live arXiv abstract contains `<4.1 x 10^-3`; authors/title/year match the manifest. |
+| Bobeth et al. SM tau-mode values `7.73 +/- 0.49 x 10^-7` and `2.22 +/- 0.19 x 10^-8` | https://arxiv.org/abs/1311.0903 | Y | Authors/title/year match arXiv; numerical values appear in the local snapshot. |
+| Capdevila et al. and Bordone/Navarro tauonic NP context | https://arxiv.org/abs/1712.01919 ; https://arxiv.org/abs/2307.07013 | Y | Authors/title/year match the manifest; B008 uses these as theory-motivation sources, not PDG values. |
+| CFW RS-flavor baseline | https://arxiv.org/abs/0804.1954 | N/A | Theory baseline only; arXiv metadata matched and no measured B008 observable is claimed from this source. |
+
+### B013 - VERIFIED
+
+Key references checked: PDG 2025 B_s listing PDF; HFLAV Dec. 2024 rare-decays PDF; arXiv:1905.06284, arXiv:1411.7771, arXiv:2406.00235, arXiv:2411.10219, arXiv:0802.0876, arXiv:0804.1954.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG 2025 `BR(B_s0 -> phi gamma) = (3.4 +/- 0.4) x 10^-5` | https://pdg.lbl.gov/2025/listings/rpp2025-list-Bs-zero.pdf | Y | Live PDG PDF text and local snapshot contain the quoted value; PDG metadata/source match the manifest. |
+| HFLAV 2024 `BR(B_s0 -> phi gamma) = (34.0 +/- 3.2) x 10^-6` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Live HFLAV PDF fetched and extracted; local snapshot contains the exact average. |
+| HFLAV average inputs `LHCb 33.7 +/- 1.7 +/- 3.0` and `Belle 36.0 +/- 5.0 +/- 7.0` in units of `10^-6` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Input values appear in the local HFLAV snapshot extracted from the cited PDF. |
+| LHCb2019 CP/helicity observables: `S = 0.43 +/- 0.30 +/- 0.11`, `C = 0.11 +/- 0.29 +/- 0.11`, `A_Delta = -0.67 +0.37 -0.41 +/- 0.17` | https://arxiv.org/abs/1905.06284 | Y | Live arXiv abstract contains all three values; authors/title/year match the manifest. |
+| Belle2014 `BR(B_s0 -> phi gamma) = (3.6 +/- 0.5 +/- 0.3 +/- 0.6(f_s)) x 10^-5` | https://arxiv.org/abs/1411.7771 | Y | Authors/title/year match arXiv; value appears in the local Belle snapshot. |
+| LHCb2024 `B_s0 -> K+K- gamma`: tensor fraction `16.8 +/- 0.5 +/- 0.7%` and `f2'(1525)/phi` ratio `19.4 +0.9 -0.8 +1.4 -0.5 +/- 0.5%` | https://arxiv.org/abs/2406.00235 | Y | Authors/title/year match arXiv; numerical values appear in the local LHCb snapshot. |
+| LHCb2024 `B_s0 -> phi e+e-` photon-polarisation proxies: `A_T^(2) = -0.045 +/- 0.235 +/- 0.014`, `A_T^ImCP = 0.002 +/- 0.247 +/- 0.016`, `F_L < 11.5%` at 90% CL | https://arxiv.org/abs/2411.10219 | Y | Authors/title/year match arXiv; values appear in the local LHCb snapshot and live arXiv metadata. |
+| Supporting dataset metadata: LHCb `3 fb^-1`, Belle `121.4 fb^-1`, LHCb Run-1/2 `9 fb^-1` with 7/8/13 TeV context | https://arxiv.org/abs/1905.06284 ; https://arxiv.org/abs/1411.7771 ; https://arxiv.org/abs/2406.00235 ; https://arxiv.org/abs/2411.10219 | N/A | Dataset metadata contextualizes measurements; verified where cited but not counted as measured observable claims. |
+| Muheim-Xie-Zwicky and CFW theory references | https://arxiv.org/abs/0802.0876 ; https://arxiv.org/abs/0804.1954 | N/A | Theory formalism/reference-scale context only; arXiv metadata matched. |
+
+### B014 - VERIFIED
+
+Key references checked: PDG 2025 B+/- and B0 listing PDFs; HFLAV Dec. 2024 rare-decays PDF; arXiv:0808.1379, arXiv:0804.4770, arXiv:1005.4087, arXiv:1005.1224, arXiv:1104.3342, arXiv:1503.05534, arXiv:2407.08984, arXiv:2507.14401, arXiv:0804.1954.
+
+| Claim | source_url | Verified? | Note |
+|---|---|---:|---|
+| PDG 2025 `BR(B+ -> rho+ gamma) = (9.8 +/- 2.5) x 10^-7` | https://pdg.lbl.gov/2025/listings/rpp2025-list-B-plus-minus.pdf | Y | Live PDG PDF text and local snapshot contain the quoted value. |
+| PDG 2025 `BR(B0 -> rho0 gamma) = (8.6 +/- 1.5) x 10^-7` and `BR(B0 -> omega gamma) = (4.4 +1.8 -1.6) x 10^-7` | https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf | Y | Live PDG PDF text and local snapshot contain both quoted values. |
+| HFLAV 2024 `BR(B -> rho gamma) = (1.40 +/- 0.22) x 10^-6` and `BR(B -> rho/omega gamma) = (1.30 +/- 0.18) x 10^-6` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Live HFLAV PDF fetched and extracted; local snapshot contains both exact averages. |
+| HFLAV 2024 naive isospin average `Gamma(B+ -> rho+ gamma)/(2 Gamma(B0 -> rho0 gamma)) - 1 = -0.46 +/- 0.17` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Local HFLAV snapshot contains the quoted value and the caution that isospin averages are naive. |
+| HFLAV semi-inclusive context `BR(B -> Xd gamma) = (9.2 +/- 3.0) x 10^-6` | https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf | Y | Local HFLAV snapshot contains the average; treated as related normalization context, not the exclusive headline. |
+| PDG CP rows: `A_CP(B+ -> rho+ gamma) = -0.11 +/- 0.32 +/- 0.09`, `C(B0 -> rho0 gamma) = 0.44 +/- 0.49 +/- 0.14`, `S(B0 -> rho0 gamma) = -0.83 +/- 0.65 +/- 0.18` | https://pdg.lbl.gov/2025/listings/rpp2025-list-B-plus-minus.pdf ; https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf | Y | Local PDG snapshots contain the CP rows; live PDFs fetched successfully. |
+| Belle/Belle II 2024: `BR(B+ -> rho+ gamma) = (13.1 +2.0 +1.3 -1.9 -1.2) x 10^-7`, `BR(B0 -> rho0 gamma) = (7.5 +/- 1.3 +1.0 -0.8) x 10^-7`, `A_I = (10.9 +11.2 +7.8 -11.7 -7.3)%`, `A_CP = (-8.2 +/- 15.2 +1.6 -1.2)%` | https://arxiv.org/abs/2407.08984 | Y | Authors/title/year match arXiv; values appear in the local snapshot. |
+| LHCb 2025: ratio `BR(B0 -> rho0 gamma)/BR(B0 -> K*0 gamma) = 0.0189 +/- 0.0007 +/- 0.0005` and `BR(B0 -> rho0 gamma) = (7.9 +/- 0.3 +/- 0.2 +/- 0.2) x 10^-7` | https://arxiv.org/abs/2507.14401 | Y | Live arXiv abstract contains both values and the saturation assumption; authors/title/year match the manifest. |
+| BaBar/Belle/BaBar supporting source values and metadata: 2008 exclusive inputs, 2010 `B -> X_{s,d} gamma`, `465 million`, `657 x 10^6`, and `471 million` event samples | https://arxiv.org/abs/0808.1379 ; https://arxiv.org/abs/0804.4770 ; https://arxiv.org/abs/1005.4087 | N/A | Values/metadata were checked in local snapshots; event counts and dataset descriptors are contextual metadata under the L001 carve-out. |
+| LHCb 2025 dataset `9 fb^-1` at 7/8/13 TeV and rho/K* saturation assumption | https://arxiv.org/abs/2507.14401 | N/A | Verified in live arXiv abstract; dataset and analysis-assumption metadata are contextual, not standalone observable mismatches. |
+| Hurth-Nakao, Descotes-Genon et al., Bharucha-Straub-Zwicky, and CFW theory references | https://arxiv.org/abs/1005.1224 ; https://arxiv.org/abs/1104.3342 ; https://arxiv.org/abs/1503.05534 ; https://arxiv.org/abs/0804.1954 | N/A | Authors/title/year match arXiv; theory/form-factor/Wilson-coefficient context only. |
