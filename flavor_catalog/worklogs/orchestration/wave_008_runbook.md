@@ -169,13 +169,24 @@ fix per L001 / T003 precedent: promoted measured observable to
 
 **End-of-stage-4 state**: all 8 SECONDARY entries CHECKER-DONE.
 
-### Stage 5: fact-check (3 family agents)
+### Stage 5: fact-check — DONE
 
-| Stage | Agent ID | Started | Background ID | Output path | Status |
-|-------|----------|---------|---------------|-------------|--------|
-| 5.a | factcheck-codex-kaon-w8 | 12:05 EDT | `bvw124s2n` (log `/tmp/wave8_logs/factcheck_kaon.log`) | `audits/factcheck_kaon.md` w8 addendum | DISPATCHED |
-| 5.b | factcheck-codex-beauty-w8 | 12:05 EDT | `bj00yv7cx` (log `/tmp/wave8_logs/factcheck_beauty.log`) | `audits/factcheck_beauty.md` w8 addendum | DISPATCHED |
-| 5.c | factcheck-codex-tophiggsew-w8 | 12:05 EDT | `b23y427q9` (log `/tmp/wave8_logs/factcheck_top.log`) | `audits/factcheck_top_higgs_ew.md` w8 addendum | DISPATCHED |
+| Stage | Agent ID | Background ID | Result |
+|-------|----------|---------------|--------|
+| 5.a | factcheck-codex-kaon-w8 | `bvw124s2n` | K019 VERIFIED, **K020 PARTIAL** (NA62 author convention only — values/year/DOI correct; same class as v0.2 E009), K021 VERIFIED — commit `7e121c3` |
+| 5.b | factcheck-codex-beauty-w8 | `bj00yv7cx` | B007/B008/B013/B014 all VERIFIED, 0 mismatches — commit `37514e9` |
+| 5.c | factcheck-codex-tophiggsew-w8 | `b23y427q9` | T014 VERIFIED, 0 mismatches — commit `118de1c` |
+
+**Stage-5 totals**: 7 VERIFIED / 1 PARTIAL / 0 MISMATCH / 0 FAILED.
+PARTIAL accepted per v0.2 E009 precedent.
+
+### Stage 6: Opus round-4 sign-off — DONE
+
+| Stage | Agent | Result |
+|-------|-------|--------|
+| 6.a | Opus-round-4 (via Agent tool, `model: opus`, `subagent_type: general-purpose`) | **8/8 APPROVE**, 0 RETURN-TO-WA, 0 ESCALATE-TO-PI. L001 / B001_B003 carve-out applied uniformly. K020 PARTIAL accepted via E009 precedent. All 8 sidecars now FACT-CHECKED. Commit `df7af95`. |
+
+**End-of-stage-6 state**: 80 PRIMARY (v0.2) + 8 SECONDARY (Wave-8) = 88 total OPUS-APPROVED.
 
 ### Stage 6: Opus sign-off
 
@@ -187,7 +198,7 @@ fix per L001 / T003 precedent: promoted measured observable to
 
 | Stage | Agent ID | Started | Background ID | Output path | Status |
 |-------|----------|---------|---------------|-------------|--------|
-| 7.a | master-compile-v03 | (pending) | — | `catalog_master.pdf` + `master_compile_v03_report.md` | PENDING |
+| 7.a | master-compile-v03 | 12:46 EDT | `b547ueyu1` (log `/tmp/wave8_logs/master_compile_v03.log`) | `catalog_master.pdf` + `master_compile_v03_report.md` | DISPATCHED |
 | 7.b | tag-v0.3 | (pending) | — | git tag `flavor-catalog-v0.3` | PENDING |
 
 ---
