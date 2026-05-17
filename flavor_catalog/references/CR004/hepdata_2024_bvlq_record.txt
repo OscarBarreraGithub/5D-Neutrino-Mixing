@@ -1,0 +1,114 @@
+{"@context":"http://schema.org","@id":"https://doi.org/10.17182/hepdata.145997.v1","@reverse":{"isBasedOn":[{"@type":"ScholarlyArticle","identifier":{"@type":"PropertyValue","propertyID":"URL","value":"https://inspirehep.net/literature/2760468"}},{"@id":"https://doi.org/10.1103/PhysRevD.110.052004","@type":"JournalArticle"}]},"@type":"Dataset","additionalType":"Collection","author":{"@type":"Organization","name":"CMS
+Collaboration"},"creator":{"@type":"Organization","name":"CMS
+Collaboration"},"datePublished":"2024","description":"A search is
+described for the production of a pair of bottom-type vector-like quarks
+(B VLQs) with mass greater than 1000 GeV. Each B VLQ decays into a b
+quark and a Higgs boson, a b quark and a Z boson, or a t quark and a W
+boson. This analysis considers both fully hadronic final states and
+those containing a charged lepton pair from a Z boson decay. The
+products of the H $\\to$ bb boson decay and of the hadronic Z or W boson
+decays can be resolved as two distinct jets or merged into a single jet,
+so the final states are classified by the number of reconstructed jets.
+The analysis uses data corresponding to an integrated luminosity of 138
+fb$^{-1}$ collected in proton-proton collisions at $\\sqrt{s}$ = 13 TeV
+with the CMS detector at the LHC from 2016 to 2018. No excess over the
+expected background is observed. Lower limits are set on the B VLQ mass
+at 95% confidence level. These depend on the B VLQ branching fractions
+and are 1570 and 1540 GeV for 100% B $\\to$ bH and 100% B $\\to$ bZ,
+respectively. In most cases, the mass limits obtained exceed previous
+limits by at least 100
+GeV.","hasPart":[{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t1","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 14 Hadronic 4-Jet
+bHbH"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t2","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 14 Hadronic 4-Jet
+bHbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t3","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 14 Hadronic 4-Jet
+bZbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t4","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 15 Hadronic 5-Jet
+bHbH"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t5","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 15 Hadronic 5-Jet
+bHbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t6","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 15 Hadronic 5-Jet
+bZbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t7","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 15 Hadronic 5-Jet
+bHtW"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t8","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 15 Hadronic 5-Jet
+bZtW"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t9","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 16 Hadronic 6-Jet
+bHbH"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t10","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 16 Hadronic 6-Jet
+bHbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t11","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 16 Hadronic 6-Jet
+bZbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t12","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 16 Hadronic 6-Jet
+bHtW"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t13","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 16 Hadronic 6-Jet
+bZtW"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t14","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 17 Semileptonic 3-Jet
+bHbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t15","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 17 Semileptonic 3-Jet
+bZbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t16","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 17 Semileptonic 4-Jet
+bHbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t17","@type":"Dataset","description":"Distributions
+of reconstructed VLQ mass for expected postfit background (blue
+histogram), signal plus background (colored lines), and observed data
+(black...","name":"Figure 17 Semileptonic 4-Jet
+bZbZ"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t18","@type":"Dataset","description":"The
+limit at 95% CL on the cross section for VLQ pair production for the
+branching fraction hypothesis 0% $\\mathcal{B}(B...","name":"Figure 18
+0% B$(B \\to bH)$, 100% B$(B \\to
+bZ)$"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t19","@type":"Dataset","description":"The
+limit at 95% CL on the cross section for VLQ pair production for the
+branching fraction hypothesis 25% $\\mathcal{B}(B...","name":"Figure 18
+25% B$(B \\to bH)$, 25% B$(B \\to
+bZ)$"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t20","@type":"Dataset","description":"The
+limit at 95% CL on the cross section for VLQ pair production for the
+branching fraction hypothesis 50% $\\mathcal{B}(B...","name":"Figure 18
+50% B$(B \\to bH)$, 50% B$(B \\to
+bZ)$"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t21","@type":"Dataset","description":"The
+limit at 95% CL on the cross section for VLQ pair production for the
+branching fraction hypothesis 100% $\\mathcal{B}(B...","name":"Figure 18
+100% B$(B \\to bH)$, 0% B$(B \\to
+bZ)$"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t22","@type":"Dataset","description":"Median
+expected exclusion limits on the VLQ mass at 95% CL as a function of the
+branching fractions $\\mathcal{B}(B \\to...","name":"Figure
+19"},{"@id":"https://doi.org/10.17182/hepdata.145997.v1/t23","@type":"Dataset","description":"Median
+observed exclusion limits on the VLQ mass at 95% CL as a function of the
+branching fractions $\\mathcal{B}(B \\to...","name":"Figure
+20"}],"identifier":[{"@type":"PropertyValue","propertyID":"HEPDataRecord","value":"https://www.hepdata.net/record/ins2760468?version=1"},{"@type":"PropertyValue","propertyID":"HEPDataRecordAlt","value":"https://www.hepdata.net/record/145997"}],"inLanguage":"en","name":"A
+search for bottom-type vector-like quark pair production in dileptonic
+and fully hadronic final states in proton-proton collisions at
+$\\sqrt{s}$ = 13
+TeV","provider":{"@type":"Organization","name":"HEPData"},"publisher":{"@type":"Organization","name":"HEPData"},"url":"https://www.hepdata.net/record/ins2760468?version=1","version":1}

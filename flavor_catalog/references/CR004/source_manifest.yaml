@@ -1,0 +1,123 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR004
+sources:
+  - key: PDG2025_BPrimeListing
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group b'(-1/3) quark searches listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:bca9c8ebe5571b26e1fae21b3de442a5653b662bbd720721fe34f2a52371f86d"
+    snapshot_path: "flavor_catalog/references/CR004/pdg2025_bprime_listing.txt"
+  - key: ContinoServant2008_TopPartners
+    arxiv_id: "0801.1679"
+    DOI: "10.1088/1126-6708/2008/06/026"
+    title: "Discovering the top partners at the LHC using same-sign dilepton final states"
+    authors: "Roberto Contino and Geraldine Servant"
+    year: 2008
+    url: "https://arxiv.org/abs/0801.1679"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:160e5a3ab6476742af50245af8c57c634671b36f5bc1b9971ad0e5972f47e494"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_0801_1679.txt"
+  - key: ATLAS2018_VLQCombination
+    arxiv_id: "1808.02343"
+    DOI: "10.1103/PhysRevLett.121.211801"
+    title: "Combination of the searches for pair-produced vector-like partners of the third-generation quarks at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1808.02343"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:77b80f64a0fc6f2f7460e18181ff9861110295eae561be4d8035f43842276bcb"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_1808_02343.txt"
+  - key: CMS2020_BVLQFullyHadronic
+    arxiv_id: "2008.09835"
+    DOI: "10.1103/PhysRevD.102.112004"
+    title: "A search for bottom-type, vector-like quark pair production in a fully hadronic final state in proton-proton collisions at sqrt(s)=13 TeV"
+    authors: "CMS Collaboration"
+    year: 2020
+    url: "https://arxiv.org/abs/2008.09835"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:2fefb4a537e91f0a7d7670063fa550eda0609dec040d4af66225787f04d921e9"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2008_09835.txt"
+  - key: CMS2023_VLQLeptonic
+    arxiv_id: "2209.07327"
+    DOI: "10.1007/JHEP07(2023)020"
+    title: "Search for pair production of vector-like quarks in leptonic final states in proton-proton collisions at sqrt(s)=13 TeV"
+    authors: "CMS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2209.07327"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:dc1d382e0787168d0bae13071c5da97cbcec149cb36413ce498aaf4e7c8fe405"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2209_07327.txt"
+  - key: ATLAS2023_ZThirdGen
+    arxiv_id: "2210.15413"
+    DOI: "10.1016/j.physletb.2023.138019"
+    title: "Search for pair-production of vector-like quarks in pp collision events at sqrt(s)=13 TeV with at least one leptonically decaying Z boson and a third-generation quark with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2210.15413"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:3d9cf38704e7cfc31fb9a6cbfa8dd805aeb685be745591ba2dae015af7842fb5"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2210_15413.txt"
+  - key: ATLAS2023_METPartners
+    arxiv_id: "2212.05263"
+    DOI: "10.1140/epjc/s10052-023-11790-7"
+    title: "Search for pair-produced vector-like top and bottom partners in events with large missing transverse momentum in pp collisions with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2212.05263"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:83f48bc081f07a82faa7bf9886e89cd2cf1ec9ecd918360306465166beff8fec"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2212_05263.txt"
+  - key: CMS2024_BVLQDilepHad
+    arxiv_id: "2402.13808"
+    DOI: "10.1103/PhysRevD.110.052004"
+    title: "A search for bottom-type vector-like quark pair production in dileptonic and fully hadronic final states in proton-proton collisions at sqrt(s)=13 TeV"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2402.13808"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:1de55b3d867bdf5704875a498877b3c9db42b0ad7ba29fb08de643cf196ea18f"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2402_13808.txt"
+  - key: CMS2024_BVLQDilepHad_PublicPage
+    arxiv_id: "2402.13808"
+    DOI: "10.1103/PhysRevD.110.052004"
+    title: "CMS public result page for CMS-B2G-20-014"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-20-014/index.html"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4435a9a3daaefe5310d8513644365a9df3553137995aa9cf9e9b85c9a24b1bae"
+    snapshot_path: "flavor_catalog/references/CR004/cms_b2g_20_014_public.txt"
+  - key: HEPData2024_BVLQContours
+    arxiv_id: null
+    DOI: "10.17182/hepdata.145997.v1"
+    title: "HEPData record for CMS-B2G-20-014 bottom-type VLQ pair production"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://www.hepdata.net/record/ins2760468"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9b7a7d25bc9469cc820627da17b35291c5c6b3742b31397c2a3dbf4846afa13c"
+    snapshot_path: "flavor_catalog/references/CR004/hepdata_2024_bvlq_record.txt"
+  - key: CMS2025_VLQReview
+    arxiv_id: "2405.17605"
+    DOI: "10.1016/j.physrep.2024.09.012"
+    title: "Review of searches for vector-like quarks, vector-like leptons, and heavy neutral leptons in proton-proton collisions at sqrt(s)=13 TeV at the CMS experiment"
+    authors: "CMS Collaboration"
+    year: 2025
+    url: "https://arxiv.org/abs/2405.17605"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0bbac9ddc59d1fdadc57506b78841a114b0a6a6740d81cc600c908b3231b3be0"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2405_17605.txt"
+  - key: CMS2025_VLQReview_PublicPage
+    arxiv_id: "2405.17605"
+    DOI: "10.1016/j.physrep.2024.09.012"
+    title: "CMS public result page for CMS-EXO-23-006 VLQ/VLL/HNL review"
+    authors: "CMS Collaboration"
+    year: 2025
+    url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-23-006/index.html"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:2b1ab15df65c5b68751d51b3721bf7e3ff7e6df25b5ce6bc635eb392b66014df"
+    snapshot_path: "flavor_catalog/references/CR004/cms_exo_23_006_review_public.txt"

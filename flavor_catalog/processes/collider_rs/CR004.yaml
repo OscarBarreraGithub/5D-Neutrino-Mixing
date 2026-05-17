@@ -1,0 +1,219 @@
+schema: flavor_catalog.process.v1
+process_id: CR004
+family: collider_rs
+standard_notation: "pp -> B Bbar -> tW/bZ/bH + X"
+process_name: "Pair production of custodial charge -1/3 bottom partner B"
+sub_class: "Custodial fermion partner; charge -1/3"
+owner: "PKA"
+owner_agent_id: "PKA-CR004"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "DRAFT"
+    timestamp: "2026-05-17T16:35:12-04:00"
+    from: null
+    to: "DRAFT"
+    at: "2026-05-17T16:35:12-04:00"
+    agent_id: "PKA-CR004"
+    reason: "Initial CR004 PRIMARY draft skeleton and source research started."
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-17T16:35:12-04:00"
+    from: "DRAFT"
+    to: "WRITER-INITIATED"
+    at: "2026-05-17T16:35:12-04:00"
+    agent_id: "PKA-CR004"
+    reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+last_updated_at: "2026-05-17T16:35:12-04:00"
+version: "0.1.0"
+source_shas:
+  arxiv_0801_1679.txt: "sha256:160e5a3ab6476742af50245af8c57c634671b36f5bc1b9971ad0e5972f47e494"
+  arxiv_1808_02343.txt: "sha256:77b80f64a0fc6f2f7460e18181ff9861110295eae561be4d8035f43842276bcb"
+  arxiv_2008_09835.txt: "sha256:2fefb4a537e91f0a7d7670063fa550eda0609dec040d4af66225787f04d921e9"
+  arxiv_2209_07327.txt: "sha256:dc1d382e0787168d0bae13071c5da97cbcec149cb36413ce498aaf4e7c8fe405"
+  arxiv_2210_15413.txt: "sha256:3d9cf38704e7cfc31fb9a6cbfa8dd805aeb685be745591ba2dae015af7842fb5"
+  arxiv_2212_05263.txt: "sha256:83f48bc081f07a82faa7bf9886e89cd2cf1ec9ecd918360306465166beff8fec"
+  arxiv_2402_13808.txt: "sha256:1de55b3d867bdf5704875a498877b3c9db42b0ad7ba29fb08de643cf196ea18f"
+  arxiv_2405_17605.txt: "sha256:0bbac9ddc59d1fdadc57506b78841a114b0a6a6740d81cc600c908b3231b3be0"
+  cms_b2g_20_014_public.txt: "sha256:4435a9a3daaefe5310d8513644365a9df3553137995aa9cf9e9b85c9a24b1bae"
+  cms_exo_23_006_review_public.txt: "sha256:2b1ab15df65c5b68751d51b3721bf7e3ff7e6df25b5ce6bc635eb392b66014df"
+  hepdata_2024_bvlq_record.txt: "sha256:9b7a7d25bc9469cc820627da17b35291c5c6b3742b31397c2a3dbf4846afa13c"
+  pdg2025_bprime_listing.txt: "sha256:bca9c8ebe5571b26e1fae21b3de442a5653b662bbd720721fe34f2a52371f86d"
+pdg_or_equivalent:
+  canonical_source: "PDG 2025 b'(-1/3) quark searches listing"
+  note: "Measured mass-exclusion lower limits for pair production are promoted here. Theoretical cross sections, luminosity, sqrt(s), and branching-model context stay in supporting blocks."
+  values:
+    - value_id: "PDG2025:CR004:B_bH_pair_mass_limit"
+      observable: "m_B lower limit from pp -> B Bbar, B(B -> H b)=1"
+      value: 1570
+      uncertainty: null
+      units: "GeV"
+      display: "m_B > 1570 GeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2025
+      experiment: "CMS"
+      source: "PDG 2025 b'(-1/3) listing, underlying CMS Hayrapetyan et al. Phys. Rev. D 110 (2024) 052004"
+      source_key: "PDG2025_BPrimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR004/pdg2025_bprime_listing.txt"
+      sha256: "sha256:bca9c8ebe5571b26e1fae21b3de442a5653b662bbd720721fe34f2a52371f86d"
+      underlying_source_key: "CMS2024_BVLQDilepHad"
+      assumptions:
+        production: "QCD pair production, pp -> B Bbar"
+        branching_fraction: "B(B -> H b)=1"
+    - value_id: "PDG2025:CR004:B_bZ_pair_mass_limit"
+      observable: "m_B lower limit from pp -> B Bbar, B(B -> Z b)=1"
+      value: 1540
+      uncertainty: null
+      units: "GeV"
+      display: "m_B > 1540 GeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2025
+      experiment: "CMS"
+      source: "PDG 2025 b'(-1/3) listing, underlying CMS Hayrapetyan et al. Phys. Rev. D 110 (2024) 052004"
+      source_key: "PDG2025_BPrimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR004/pdg2025_bprime_listing.txt"
+      sha256: "sha256:bca9c8ebe5571b26e1fae21b3de442a5653b662bbd720721fe34f2a52371f86d"
+      underlying_source_key: "CMS2024_BVLQDilepHad"
+      assumptions:
+        production: "QCD pair production, pp -> B Bbar"
+        branching_fraction: "B(B -> Z b)=1"
+    - value_id: "PDG2025:CR004:B_tW_pair_mass_limit"
+      observable: "m_B lower limit from pp -> B Bbar, B(B -> W t)=1"
+      value: 1560
+      uncertainty: null
+      units: "GeV"
+      display: "m_B > 1560 GeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2025
+      experiment: "CMS"
+      source: "PDG 2025 b'(-1/3) listing, underlying CMS Tumasyan et al. JHEP 07 (2023) 020"
+      source_key: "PDG2025_BPrimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR004/pdg2025_bprime_listing.txt"
+      sha256: "sha256:bca9c8ebe5571b26e1fae21b3de442a5653b662bbd720721fe34f2a52371f86d"
+      underlying_source_key: "CMS2023_VLQLeptonic"
+      assumptions:
+        production: "QCD pair production, pp -> B Bbar"
+        branching_fraction: "B(B -> W t)=1"
+supporting_measurements:
+  - label: "CMS-B2G-20-014 dataset context"
+    source_key: "CMS2024_BVLQDilepHad"
+    experiment: "CMS"
+    sqrt_s: 13
+    sqrt_s_units: "TeV"
+    integrated_luminosity: 138
+    integrated_luminosity_units: "fb^-1"
+    year: 2024
+    context: "Dataset and run metadata for the bH/bZ mass limits; not promoted to pdg_or_equivalent per the CHK-1 carve-out."
+    source_url: "https://arxiv.org/abs/2402.13808"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2402_13808.txt"
+    sha256: "sha256:1de55b3d867bdf5704875a498877b3c9db42b0ad7ba29fb08de643cf196ea18f"
+  - label: "HEPData exclusion contour record"
+    source_key: "HEPData2024_BVLQContours"
+    content: "Tables for cross-section limits and observed/expected mass-exclusion contours over the B -> bH, bZ, tW branching simplex."
+    year: 2024
+    source_url: "https://www.hepdata.net/record/ins2760468"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR004/hepdata_2024_bvlq_record.txt"
+    sha256: "sha256:9b7a7d25bc9469cc820627da17b35291c5c6b3742b31397c2a3dbf4846afa13c"
+recent_experimental_inputs:
+  - key: "ATLAS2018_VLQCombination"
+    type: "experimental_search"
+    arxiv_id: "1808.02343"
+    why_matters: "Established a Run-2 ATLAS combination over T and B third-generation decay modes and a branching-fraction simplex presentation."
+    source_url: "https://arxiv.org/abs/1808.02343"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_1808_02343.txt"
+    sha256: "sha256:77b80f64a0fc6f2f7460e18181ff9861110295eae561be4d8035f43842276bcb"
+  - key: "CMS2020_BVLQFullyHadronic"
+    type: "experimental_search"
+    arxiv_id: "2008.09835"
+    why_matters: "Made fully hadronic bH/bZ final states a high-sensitivity probe for bottom-type VLQ pair production."
+    source_url: "https://arxiv.org/abs/2008.09835"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2008_09835.txt"
+    sha256: "sha256:2fefb4a537e91f0a7d7670063fa550eda0609dec040d4af66225787f04d921e9"
+  - key: "CMS2023_VLQLeptonic"
+    type: "experimental_search"
+    arxiv_id: "2209.07327"
+    why_matters: "Combined single-lepton, same-sign dilepton, and multilepton final states; this is the PDG source for the current B -> Wt pair-production corner."
+    source_url: "https://arxiv.org/abs/2209.07327"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2209_07327.txt"
+    sha256: "sha256:dc1d382e0787168d0bae13071c5da97cbcec149cb36413ce498aaf4e7c8fe405"
+  - key: "ATLAS2023_ZThirdGen"
+    type: "experimental_search"
+    arxiv_id: "2210.15413"
+    why_matters: "Full Run-2 ATLAS search optimized for VLQ decays with a leptonically decaying Z boson and a third-generation quark."
+    source_url: "https://arxiv.org/abs/2210.15413"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2210_15413.txt"
+    sha256: "sha256:3d9cf38704e7cfc31fb9a6cbfa8dd805aeb685be745591ba2dae015af7842fb5"
+  - key: "ATLAS2023_METPartners"
+    type: "experimental_search"
+    arxiv_id: "2212.05263"
+    why_matters: "Full Run-2 ATLAS search with one lepton, b-tags, and large missing transverse momentum; important cross-check for Wt-rich bottom-partner decays."
+    source_url: "https://arxiv.org/abs/2212.05263"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2212_05263.txt"
+    sha256: "sha256:83f48bc081f07a82faa7bf9886e89cd2cf1ec9ecd918360306465166beff8fec"
+  - key: "CMS2024_BVLQDilepHad"
+    type: "experimental_search"
+    arxiv_id: "2402.13808"
+    why_matters: "Current CMS bH/bZ canonical input with fully hadronic and dileptonic categories and HEPData branching-simplex contours."
+    source_url: "https://arxiv.org/abs/2402.13808"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_2402_13808.txt"
+    sha256: "sha256:1de55b3d867bdf5704875a498877b3c9db42b0ad7ba29fb08de643cf196ea18f"
+paper_era_reference:
+  contino_servant_2008:
+    source_key: "ContinoServant2008_TopPartners"
+    arxiv_id: "0801.1679"
+    source_type: "RS/composite-Higgs top-partner collider baseline; not a measured observable"
+    relevance: "Motivates charge -1/3 B custodians and same-sign dilepton Wt signatures used by later LHC searches."
+    source_url: "https://arxiv.org/abs/0801.1679"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR004/arxiv_0801_1679.txt"
+    sha256: "sha256:160e5a3ab6476742af50245af8c57c634671b36f5bc1b9971ad0e5972f47e494"
+auxiliary_theory_inputs:
+  rs_flavor_reach_context:
+    source: "docs/quark_scan_methodology_note.tex"
+    source_type: "internal low-energy flavor scan context; not a measured observable"
+    values:
+      - label: "M_KK^min p50 at g_*=3"
+        value: 47.26
+        units: "TeV"
+      - label: "M_KK^min p95 at g_*=3"
+        value: 127.13
+        units: "TeV"
+    source_path: "docs/quark_scan_methodology_note.tex"
+    source_lines: "587-589"
+    sha256: "sha256:334d639d4167b4c721e700fbb0047cd26cd7a8fab9453a321e6afb6cbe6a6c75"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n -i \"vector[-_ ]?like|\\bVLQ\\b|b[-_ ]?prime|b'\\(|bottom[-_ ]?partner|custodial[-_ ]?fermion|T_?5/3|X_?5/3|pair[-_ ]?production|direct[-_ ]?search|LHC direct|ATLAS|HEPData|CMS\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"collider|LHC|ATLAS|CMS|HEPData|mass.?limit|exclusion|pair.?production|single.?production|direct.?search|Run ?2\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"M_KK|MKK|KK|Mmin|M_min|Mkk|mKK\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  findings:
+    - "No vector-like B, b-prime, custodial fermion, ATLAS/CMS/HEPData, direct-search, or branching-simplex implementation was found."
+    - "The precise collider/VLQ query only returned tests/test_alpha_s.py:88-89, a CMS/RunDec alpha_s example unrelated to collider searches."
+    - "Nearby M_KK code is flavor-only: scanParams/scan.py:399-429 computes scan-row M_KK; scanParams/scan.py:523-535 checks mu -> e gamma; quarkConstraints/scan.py:359-380 evaluates Delta F=2 constraints."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "A faithful constraint needs LHC likelihoods or reinterpretation tooling, signal generation for RS custodial spectra, widths, branching fractions, detector acceptances, and correlated final-state combinations. A hard mass cut would be model-dependent and misleading."
+open_issues:
+  - "WA/CA should decide whether to add a separate CR sidecar for coupling-dependent single-production B limits; PDG lists stronger single-production mass reaches, but they are outside the pair-production CR004 process definition."
+  - "If later code integration is requested, choose a reinterpretation framework and a minimal VLQ signal model before adding any scan filter."
