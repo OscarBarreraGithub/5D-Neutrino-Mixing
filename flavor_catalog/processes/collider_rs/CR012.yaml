@@ -6,7 +6,7 @@ process_name: "Diboson high-mass resonance (generic spin-1)"
 subclass: "EW-precision-tail; model-independent diboson"
 owner: "PKA"
 owner_agent_id: "PKA-CR012"
-writer_agent_id: null
+writer_agent_id: "WA-WA-w9-ew-tail"
 checker_agent_id: null
 opus_signoff_id: null
 related_process_ids: []
@@ -25,7 +25,16 @@ status_history:
     at: "2026-05-17T16:33:00-04:00"
     agent_id: "PKA-CR012"
     reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
-last_updated_at: "2026-05-17T16:33:00-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:45:00-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:45:00-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "Writer polish for WA-w9-ew-tail batch; TeX, CHK-1 placement, and code-evidence claims normalized."
+last_updated_at: "2026-05-17T17:45:00-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2015_arxiv1506_00962.txt: "sha256:4c4497f2a285fcb43f6c74f83cf24e002188f28fac0407d4a44417feb6051724"
@@ -285,11 +294,11 @@ code_coverage:
   findings:
     - "No CR012, collider_rs, diboson, HVT, ATLAS/CMS, HEPData, or reinterpretation-tool implementation was found."
     - "The only CMS match in the collider-search grep was tests/test_alpha_s.py:89, a CMS/RunDec QCD-running example rather than an LHC search."
-    - "Adjacent KK-scale code exists: quarkConstraints/scan.py:359 computes M_KK from Lambda_IR; quarkConstraints/scan.py:377-380 evaluates Delta F=2 constraints with KK-gluon couplings."
-    - "quarkConstraints/deltaf2.py:320-324 documents tree-level KK-gluon-inspired Delta F=2 Wilsons, not collider direct searches."
-    - "scanParams/scan.py:523-535 applies only the mu -> e gamma LFV filter in that scan path."
+    - "Adjacent KK-scale code exists: quarkConstraints/scan.py:359 computes M_KK from Lambda_IR; quarkConstraints/scan.py:377 calls the Delta F=2 evaluator; quarkConstraints/scan.py:379 passes KK-gluon couplings into it."
+    - "quarkConstraints/deltaf2.py:320 documents tree-level KK-gluon-inspired Delta F=2 Wilsons, not collider direct searches."
+    - "scanParams/scan.py:523 starts only the mu -> e gamma LFV filter in that scan path."
 implementation_difficulty: "HIGH"
 implementation_difficulty_reason: "A live CR012 constraint needs collider likelihoods or recast tools plus an RS spectrum, widths, production cross sections, and branching fractions; a scalar mass-threshold filter would not preserve the model assumptions behind the published limits."
 open_issues:
-  - "WA/CA should decide whether the 4.8 TeV VV+VH degenerate-HVT result belongs in headline prose or only as a caveat beside the pure VV 4.5 TeV row."
+  - "WA kept the 4.8 TeV degenerate-HVT result as a VV+VH caveat, not as the pure-diboson headline; use the 4.4 TeV W'->WZ and 4.5 TeV V'->VV rows for diboson-only statements."
   - "A future implementation should choose a recast backend before adding any code-level collider_rs filters."

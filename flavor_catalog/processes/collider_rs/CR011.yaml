@@ -8,7 +8,7 @@ sub_class:
   - strong-EW-symmetry-breaking
 owner: "PKA"
 owner_agent_id: "PKA-CR011"
-writer_agent_id: null
+writer_agent_id: "WA-WA-w9-ew-tail"
 checker_agent_id: null
 opus_signoff_id: null
 related_process_ids: []
@@ -21,7 +21,16 @@ status_history:
     agent: "PKA"
     agent_id: "PKA-CR011"
     reason: "Initial Wave-9 PKA draft for collider_rs PRIMARY CR011."
-last_updated_at: "2026-05-17T17:25:00-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:45:00-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:45:00-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "Writer polish for WA-w9-ew-tail batch; TeX, CHK-1 placement, and code-evidence claims normalized."
+last_updated_at: "2026-05-17T17:45:00-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2017_arxiv1611_02428.txt: "sha256:6621ca6fbd62fd964001e67855bbd567238f593f0bf114d4e55854fb325922e8"
@@ -114,7 +123,7 @@ paper_era_reference:
         line_evidence:
           - "docs/quark_scan_methodology_note.tex:587"
           - "docs/quark_scan_methodology_note.tex:654"
-recent_experimental_inputs:
+supporting_measurements:
   atlas_2025_longitudinal_same_sign_ww:
     experiment: "ATLAS"
     arxiv_id: "2503.11317"
@@ -234,5 +243,5 @@ code_coverage:
 implementation_difficulty: "HIGH"
 implementation_difficulty_reason: "A live collider-RS constraint needs a full collider likelihood or recast workflow, including signal generation, detector/selection acceptance, polarization templates, model-dependent branching ratios, and external tools such as CheckMATE, MadAnalysis5, or SModelS where applicable."
 open_issues:
-  - "WA/CA should decide whether CR011 should also promote specific ATLAS 2026 aQGC coefficient intervals. This draft cites the combination but does not quote coefficient bounds because they require basis and unitarity-convention choices."
-  - "No HEPData table was used in this initial draft; if WA adds coefficient tables or numerical differential bins, add HEPData text extracts and promote measured limits according to CHK-1."
+  - "Future coefficient-level CR011 work should extract ATLAS 2026 aQGC intervals into pdg_or_equivalent.values only after choosing the basis and unitarity convention."
+  - "No HEPData table was used in this draft; if coefficient tables or numerical differential bins are added later, add HEPData text extracts and promote measured limits according to CHK-1."

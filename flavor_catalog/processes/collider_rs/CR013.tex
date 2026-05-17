@@ -17,7 +17,9 @@ Randall--Sundrum graviton benchmark or as a generic spin-0 heavy scalar
 benchmark.  The RS-sensitive channel is the spin-2 interpretation, where the
 observed diphoton mass spectrum is translated into limits on the first KK
 graviton mass \(m_{G^*}\) for fixed values of the dimensionless curvature
-coupling \(k/\bar M_{\rm Pl}\).
+coupling \(k/\bar M_{\rm Pl}\).  In the collider-RS catalog this is the
+direct neutral-resonance search for spin-2 KK gravitons and nearby scalar
+partners in the high-mass \(\gamma\gamma\) spectrum.
 
 \subsection*{Current best limit(s)}
 The current channel-specific PDG listing for warped-extra-dimension KK
@@ -39,7 +41,7 @@ upper-limit tables for the spin-2 benchmark
 (\texttt{cms2024\_exo\_22\_024\_public\_page.html},
 \texttt{hepdata2024\_cms\_diphoton\_record.json}).
 
-\subsection*{Relevance to RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS}
 This is a direct collider constraint on a neutral spin-2 resonance with
 diphoton branching fraction, not a low-energy flavor observable.  In a minimal
 RS1-style benchmark, the quoted bound constrains the lightest graviton
@@ -74,7 +76,7 @@ background treatments, spin-0 and spin-2 resonance interpretations, and the
 strongest reported RS-graviton diphoton limits for \(k/\bar M_{\rm Pl}\ge
 0.1\).
 
-\subsection*{Constraint validity / model dependence}
+\subsection*{Validity / model dependence}
 The quoted mass exclusions are benchmark exclusions.  They assume a production
 mechanism, a resonance line shape, a width tied to the chosen
 \(k/\bar M_{\rm Pl}\), and the branching pattern of the RS graviton model used
@@ -88,18 +90,19 @@ are similarly useful only after specifying whether the scalar is a radion,
 singlet, heavy Higgs-like state, or another resonance with a definite
 production and branching model.
 
-\subsection*{Code coverage in this repo}
+\subsection*{Code coverage}
 \textbf{NO}.  Greps over \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/} found no diphoton, RS-graviton, LHC-resonance, or collider
 direct-search likelihood implementation.  Adjacent evidence is generic only:
-\texttt{solvers/bessel.py:5}--\texttt{6} solves KK masses for gauge bosons
-and fermions in RS backgrounds, \texttt{scanParams/scan.py:399} and
-\texttt{scanParams/scan.py:429} compute and record \(M_{\rm KK}\), and
-\texttt{quarkConstraints/deltaf2.py:1}--\texttt{10} plus
-\texttt{quarkConstraints/deltaf2.py:452}--\texttt{563} implement the
-low-energy \(\Delta F=2\) KK-gluon-inspired exclusion slice.  None of those
+\texttt{solvers/bessel.py:5} and \texttt{solvers/bessel.py:6} solve KK masses
+for gauge bosons and fermions in RS backgrounds,
+\texttt{scanParams/scan.py:399} and \texttt{scanParams/scan.py:429} compute
+and record \(M_{\rm KK}\), and \texttt{quarkConstraints/deltaf2.py:1},
+\texttt{quarkConstraints/deltaf2.py:459}, and
+\texttt{quarkConstraints/deltaf2.py:557} implement the low-energy
+\(\Delta F=2\) KK-gluon-inspired exclusion slice.  None of those
 paths evaluates \(pp\to G^*\to\gamma\gamma\), cross-section upper limits, or
 mass-exclusion curves.
 

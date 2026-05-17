@@ -15,7 +15,9 @@ This entry covers the neutral-current Drell--Yan high-mass tail,
 \(pp\to \ell^+\ell^-+X\) with \(\ell=e,\mu\), interpreted as a
 model-independent four-fermion contact interaction between light quarks and
 charged leptons.  The collider signature is a smooth excess or deficit in the
-dilepton invariant-mass distribution rather than a narrow resonance.
+dilepton invariant-mass distribution rather than a narrow resonance.  In the
+collider-RS catalog this is the nonresonant neutral-vector tail that
+complements explicit KK-vector resonance and partner searches.
 
 \subsection*{Current best limit(s)}
 The current PDG summary of quark and lepton compositeness quotes the
@@ -37,7 +39,7 @@ sign (\texttt{cms\_2021\_arxiv2103\_02708.txt}).  The HEPData record supplies
 the structured limit tables and the binned inputs needed for any serious
 reinterpretation (\texttt{cms\_hepdata\_2021\_ci\_limits\_extract.txt}).
 
-\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS}
 In a 5D RS interpretation, this is primarily a constraint on neutral heavy
 vector exchange that induces semileptonic operators of the form
 \((\bar q\gamma_\mu q)(\bar\ell\gamma^\mu\ell)\).  It is not a direct
@@ -87,7 +89,7 @@ arXiv:1706.03783, while later high-energy Drell--Yan SMEFT work treats the
 tails as energy-growing probes of semileptonic dimension-six operators
 (\texttt{smeft\_theory\_arxiv\_extracts.txt}).
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Validity / model dependence}
 The quoted \(\Lambda\) limits are measured exclusions, but the map to RS is
 not model-independent.  The experimental interpretation assumes a particular
 helicity current, an interference sign, and the conventional
@@ -104,7 +106,7 @@ more relevant.  EFT validity also requires the mediator to be heavier than the
 dilepton masses driving the fit; otherwise the correct object is a resonance
 or broad-resonance likelihood, not the contact-limit number alone.
 
-\subsection*{Code coverage in this repo}
+\subsection*{Code coverage}
 \textbf{NO}.  The required grep over \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
@@ -116,9 +118,9 @@ unrelated RunDec alpha-s test at \texttt{tests/test\_alpha\_s.py:88}.
 Adjacent evidence shows that the scan computes \(M_{KK}\) and low-energy
 \(\Delta F=2\) ratios, not collider direct-search filters:
 \texttt{quarkConstraints/scan.py:359} maps \(\Lambda_{\rm IR}\) to \(M_{KK}\),
-\texttt{quarkConstraints/scan.py:376--380} evaluates flavor diagnostics and
-KK-gluon \(\Delta F=2\) constraints, and
-\texttt{quarkConstraints/deltaf2.py:320--324} states that the implemented
+\texttt{quarkConstraints/scan.py:376} evaluates flavor diagnostics,
+\texttt{quarkConstraints/scan.py:377} calls the \(\Delta F=2\) evaluator, and
+\texttt{quarkConstraints/deltaf2.py:320} states that the implemented
 Wilsons are tree-level KK-gluon-inspired \(\Delta F=2\) coefficients matched
 at \(M_{KK}\).
 

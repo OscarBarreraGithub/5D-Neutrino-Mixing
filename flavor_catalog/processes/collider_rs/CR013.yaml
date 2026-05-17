@@ -5,7 +5,7 @@ standard_notation: "pp -> X -> gamma gamma; high-mass spin-0/spin-2 resonance"
 process_name: "Diphoton high-mass resonance (spin-0/2)"
 owner: "PKA"
 owner_agent_id: "PKA-CR013"
-writer_agent_id: null
+writer_agent_id: "WA-WA-w9-ew-tail"
 checker_agent_id: null
 opus_signoff_id: null
 related_process_ids:
@@ -27,11 +27,20 @@ status_history:
     at: "2026-05-17T16:34:35-04:00"
     agent_id: "PKA-CR013"
     reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:45:00-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:45:00-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "Writer polish for WA-w9-ew-tail batch; TeX, CHK-1 placement, and code-evidence claims normalized."
 checker_passed_at: null
 opus_approved_at: null
 fact_checked_at: null
 fact_check_verdict: null
-last_updated_at: "2026-05-17T16:34:35-04:00"
+last_updated_at: "2026-05-17T17:45:00-04:00"
 version: "0.1.0"
 source_shas:
   atlas2013_arxiv1210_8389_abstract.xml: "sha256:b2b12a7d2e94f4e4f800ddc9bfa2b3fc3a6848cb4f548ffdacbeddf9742d9b37"
@@ -51,25 +60,12 @@ source_shas:
   pdg2025_extra_dimensions_review.txt: "sha256:0dad46ccc4e1fea553c028014d06731a5524ec6769a2b23a7ac3940b8e117755"
   randall_sundrum_1999_arxiv_hepph9905221_abstract.xml: "sha256:cba0ff32c08a873d5e89c8c59d8a5bd2c051faac3ed86107dd9ff66cac7a1cf5"
 pdg_or_equivalent:
-  canonical_experimental_value:
-    value_id: "PDG2025:CR013:CMS2024_RSG_diphoton_kMPl_0p1"
-    observable: "Lower limit on lightest RS KK graviton mass in pp -> G* -> gamma gamma"
-    year: 2025
-    value: 4.8
-    uncertainty: null
-    units: "TeV"
-    display: "m_G* > 4.8 TeV"
-    limit_type: "lower_limit"
-    cl: "95% CL"
-    experiment: "CMS"
-    analysis_year: 2024
-    model: "Randall-Sundrum warped extra dimension, k/M_P = 0.1"
-    source: "PDG 2025 Extra Dimensions listing, Limits on Kaluza-Klein Gravitons in Warped Extra Dimensions"
-    source_key: "PDG2025_ExtraDimensionsListing"
-    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf"
-    access_date: "2026-05-17"
-    snapshot_path: "flavor_catalog/references/CR013/pdg2025_extra_dimensions_listing.txt"
-    sha256: "sha256:ce4823040682bbcba4893b693dbe6e9c135a2d1e5678d55c5ca1a08fd5553f8d"
+  canonical_source: "PDG 2025 Extra Dimensions listing, cross-checked against CMS EXO-22-024 and ATLAS/CMS full-Run-2 diphoton searches"
+  source_key: "PDG2025_ExtraDimensionsListing"
+  source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf"
+  access_date: "2026-05-17"
+  snapshot_path: "flavor_catalog/references/CR013/pdg2025_extra_dimensions_listing.txt"
+  sha256: "sha256:ce4823040682bbcba4893b693dbe6e9c135a2d1e5678d55c5ca1a08fd5553f8d"
   values:
     - value_id: "PDG2025:CR013:CMS2024_RSG_diphoton_kMPl_0p1"
       observable: "Lower limit on lightest RS KK graviton mass in pp -> G* -> gamma gamma"
@@ -335,8 +331,8 @@ code_coverage:
     - "rg -n \"LHC|collider|resonance|graviton|diphoton|photon|gamma|KK.?gluon|KK.?g\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
   findings:
     - "No pp -> gamma gamma, RS graviton, diphoton resonance, cross-section-limit, or LHC direct-search likelihood implementation was found."
-    - "Adjacent generic RS evidence: solvers/bessel.py:5-6 solves KK masses for RS gauge bosons and fermions, not collider limits."
-    - "Adjacent scan evidence: scanParams/scan.py:399 and scanParams/scan.py:429 compute and record M_KK; quarkConstraints/deltaf2.py:1-10 and 452-563 evaluate low-energy Delta F=2 ratios."
+    - "Adjacent generic RS evidence: solvers/bessel.py:5 and solvers/bessel.py:6 solve KK masses for RS gauge bosons and fermions, not collider limits."
+    - "Adjacent scan evidence: scanParams/scan.py:399 and scanParams/scan.py:429 compute and record M_KK; quarkConstraints/deltaf2.py:1, quarkConstraints/deltaf2.py:459, and quarkConstraints/deltaf2.py:557 evaluate low-energy Delta F=2 ratios."
 implementation_difficulty: "HIGH"
 implementation_difficulty_reason: "A live CR013 constraint needs a spectrum/branching model plus collider reinterpretation of cross-section upper limits or a full recast/likelihood workflow; the repo currently has no collider direct-search machinery."
 open_issues:

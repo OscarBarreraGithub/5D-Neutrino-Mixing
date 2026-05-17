@@ -6,7 +6,7 @@ process_name: "Drell-Yan high-mass tail as EFT contact-operator bound"
 subclass: "EW-precision-tail; model-independent"
 owner: "PKA"
 owner_agent_id: "PKA-CR009"
-writer_agent_id: null
+writer_agent_id: "WA-WA-w9-ew-tail"
 checker_agent_id: null
 opus_signoff_id: null
 related_process_ids: []
@@ -25,7 +25,16 @@ status_history:
     at: "2026-05-17T16:33:27-04:00"
     agent_id: "PKA-CR009"
     reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
-last_updated_at: "2026-05-17T16:33:27-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T17:45:00-04:00"
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T17:45:00-04:00"
+    agent: "WA"
+    agent_id: "WA"
+    cycle: 1
+    reason: "Writer polish for WA-w9-ew-tail batch; TeX, CHK-1 placement, and code-evidence claims normalized."
+last_updated_at: "2026-05-17T17:45:00-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2020_arxiv2006_12946.txt: "sha256:cd56f8c2c1c155051723b91995c317eb127efc3fbe78ae806a9ddb7677522c46"
@@ -35,16 +44,7 @@ source_shas:
   pdg2025_compositeness_extract.txt: "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37"
   smeft_theory_arxiv_extracts.txt: "sha256:4b987de74219295241b15648cbc37909da8ee02809a78109a4861d96b3a45d31"
 pdg_or_equivalent:
-  year: 2025
-  observable: "95% CL lower limit on llqq contact-interaction scale Lambda, ATLAS combined ee+mumu LL constructive"
-  value: 35.8
-  uncertainty: null
-  units: "TeV"
-  display: "Lambda_LL^+ > 35.8 TeV"
-  limit_type: "lower_limit"
-  cl: "95% CL"
-  experiment: "ATLAS"
-  source: "PDG 2025 Searches for Quark and Lepton Compositeness review, quoting ATLAS full-Run-2 non-resonant dilepton search"
+  canonical_source: "PDG 2025 compositeness review, quoting ATLAS/CMS full-Run-2 high-mass dilepton contact-interaction searches"
   source_key: "PDG2025_QuarkLeptonCompositeness"
   source_url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf"
   access_date: "2026-05-17"
@@ -362,7 +362,7 @@ code_coverage:
     - "No Drell-Yan, dilepton-tail, contact-interaction, llqq, four-fermion collider, or dy-tail implementation was found."
     - "No collider reinterpretation tools or hooks (CheckMATE, MadAnalysis, SModelS, Delphes, Pythia, MadGraph) were found."
     - "The only ATLAS/CMS-oriented grep hit in the second query was unrelated: tests/test_alpha_s.py:88-89 names a CMS/RunDec alpha_s example."
-    - "Adjacent code computes M_KK and low-energy Delta F=2 constraints: quarkConstraints/scan.py:359, quarkConstraints/scan.py:376-380, quarkConstraints/deltaf2.py:320-324."
+    - "Adjacent code computes M_KK and low-energy Delta F=2 constraints: quarkConstraints/scan.py:359, quarkConstraints/scan.py:376, quarkConstraints/scan.py:377, quarkConstraints/scan.py:379, quarkConstraints/deltaf2.py:320."
 implementation_difficulty: "HIGH"
 implementation_difficulty_reason: "Requires a binned high-mass dilepton likelihood or external reinterpretation, RS neutral-vector matching to semileptonic SMEFT operators, PDF/electroweak systematics, and EFT-validity/resonance-region logic."
 constraint_validity:
@@ -371,5 +371,5 @@ constraint_validity:
   rs_mapping: "The contact scale maps schematically as 4*pi/Lambda^2 ~ |g_q g_l|/M_V^2; Lambda is not itself an RS vector mass."
   leading_constraint_status: "Not leading for anarchic-flavor RS relative to the local low-energy M_KK^{min,p50}=47.26 TeV at g_s*=3; useful for cross-checks and non-anarchic/custodial variants."
 open_issues:
-  - "WA/CA should decide whether to preserve both ATLAS and CMS endpoints in pdg_or_equivalent.values or collapse to only the strongest single observed benchmark."
+  - "WA kept both the full ATLAS helicity/sign set and the CMS range endpoints because they are measured 95% CL exclusion limits under distinct benchmark assumptions."
   - "A live implementation needs a policy decision on using public HEPData binned inputs versus a full collaboration likelihood when no official likelihood is provided."

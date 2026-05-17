@@ -19,9 +19,11 @@ diboson final states,
 with the phenomenological interpretation usually expressed in the heavy-vector
 triplet (HVT) language.  The \(G'_{\rm vector}\) label is treated here as a
 generic heavy gauge-resonance placeholder; the CMS bulk-graviton rows are useful
-adjacent RS context but are spin-2 and are not the canonical CR012 spin-1 value.
+adjacent RS context but are spin-2 and are not the canonical CR012 spin-1
+value.  In the collider-RS catalog this is the direct diboson resonance entry
+for electroweak KK vectors and generic heavy vector partners.
 
-\subsection*{Current best limits}
+\subsection*{Current best limit(s)}
 The canonical current spin-1 diboson number is the CMS full-Run-2 all-jets
 analysis \texttt{CMS-B2G-20-009} / arXiv:2210.00043, cross-checked against the
 PDG 2025 heavy-boson listing.  For HVT model B with \(g_V=3\), CMS excludes an
@@ -35,7 +37,7 @@ disjoint observed \(Z'\to WW\) exclusion in the intervals
 \(4.8~\mathrm{TeV}\) number should therefore be quoted as a degenerate-HVT
 \(VV+VH\) result, not as a pure-diboson-only bound.
 
-\subsection*{Relevance to RS / anarchic-flavor pipeline}
+\subsection*{Relevance to RS}
 Custodial and composite RS models generically contain electroweak KK vectors
 whose longitudinal \(W/Z\) branching fractions can be large.  The HVT model-B
 benchmark is not an RS spectrum calculation, but it is a standard simplified
@@ -70,7 +72,7 @@ the full Run-2 data set, machine-learning boson taggers, and simultaneous
 \(VV/VH\) categories to give the strongest public HVT spin-1 statement used
 above.
 
-\subsection*{Constraint validity and model dependence}
+\subsection*{Validity / model dependence}
 These are direct-search limits, not model-independent limits on the RS
 Kaluza--Klein scale.  The HVT interpretation assumes a narrow resonance, a
 specific relation between fermion and boson couplings, and production through
@@ -85,7 +87,7 @@ CR012.  A model with a large \(VH\) branching fraction can use the combined CMS
 the \(W'\to WZ\), \(Z'\to WW\), or \(V'\to VV\) rows and their corresponding
 assumptions.
 
-\subsection*{Code coverage in this repo}
+\subsection*{Code coverage}
 \textbf{NO}.  Greps over \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
@@ -95,7 +97,7 @@ bookkeeping and low-energy flavor machinery: \texttt{quarkConstraints/scan.py:35
 maps \(\Lambda_{\rm IR}\) to \(M_{KK}\), \texttt{quarkConstraints/scan.py:377}
 calls \(\Delta F=2\) constraints, \texttt{quarkConstraints/deltaf2.py:320}
 documents tree-level KK-gluon-inspired \(\Delta F=2\) Wilsons, and
-\texttt{scanParams/scan.py:523} runs the unrelated \(\mu\to e\gamma\) LFV
+\texttt{scanParams/scan.py:523} starts the unrelated \(\mu\to e\gamma\) LFV
 filter.  The only ``CMS'' grep hit is \texttt{tests/test\_alpha\_s.py:89}, a
 RunDec QCD-running example, not a collider search.
 
