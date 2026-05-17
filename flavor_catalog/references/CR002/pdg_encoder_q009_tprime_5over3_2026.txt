@@ -1,0 +1,56 @@
+Source snapshot for CR002
+Source: PDG current encoder listing q009, t'(5/3)-quark/hadron mass limits
+URL: https://pdg.lbl.gov/encoder_listings/q009.pdf
+Access date: 2026-05-17
+Extraction command:
+  curl -Ls 'https://pdg.lbl.gov/encoder_listings/q009.pdf' | pdftotext -layout - - | sed -n '230,365p'
+
+Relevant extract:
+
+t' (5/3)-quark/hadron mass limits in p p and p p collisions
+VALUE (GeV)               CL%           DOCUMENT ID         TECN     COMMENT
+>1460                     95          1 AAD           23AG ATLS      t' (5/3) -> t W+
+>1330                     95          2 SIRUNYAN      19T CMS        t'_R (5/3) -> t W+
+>1300                     95          2 SIRUNYAN      19T CMS        t'_L (5/3) -> t W+
+>1190                     95          3 AABOUD        18CE ATLS      >= 2l + MET + >= 1 b-jet
+>1020                     95          4 SIRUNYAN      17J CMS        t'_R (5/3) -> t W+
+> 990                     95          4 SIRUNYAN      17J CMS        t'_L (5/3) -> t W+
+> 750                     95          5 AAD           15BY ATLS      t' (5/3) -> t W+
+> 840                     95          6 AAD           15Z ATLS       t' (5/3) -> t W+
+> 800                     95          7 CHATRCHYAN    14T CMS        t' (5/3) -> t W+
+
+PDG notes:
+
+1 AAD 23AG based on 139 fb^-1 of p p data at sqrt(s) = 13 TeV. Pair
+production of vector-like top or b' is searched for in the mode
+1 lepton + >= 4 jets (>= 1 b-tagged) + MET. The data are consistent with
+the SM background predictions and limits are obtained for different branching
+ratios.
+
+2 SIRUNYAN 19T based on 35.9 fb^-1 of p p data at sqrt(s) = 13 TeV. Signals
+are searched in the final states of t' pair production, with same-sign leptons
+(which come from a t' decay) or a single lepton (which comes from a W out of
+4 Ws), along with jets, and no excess over the SM expectation is found.
+
+3 AABOUD 18CE based on 36.1 fb^-1 of proton-proton data taken at sqrt(s) =
+13 TeV. Events including a same-sign lepton pair are used. The limit is for
+the pair-produced vector-like t'. With single t' production included,
+assuming t' t W coupling of one, the limit is m_t' > 1.6 TeV.
+
+4 SIRUNYAN 17J based on 2.3 fb^-1 of p p data at sqrt(s) = 13 TeV. Signals
+are searched in the final states of t' pair production, with same-sign leptons
+(which come from a t' decay) or a single lepton (which comes from a W out of
+4 Ws), along with jets, and no excess over the SM expectation is found.
+
+7 CHATRCHYAN 14T based on 19.5 fb^-1 of p p data at sqrt(s) = 8 TeV.
+Non-observation of anomaly in HT distribution in the same-sign dilepton events
+leads to the limit when pair-produced t'(5/3) quark decays exclusively into
+t and W+, resulting in the final state with b b W+ W- W+ W-.
+
+Non-averaged PDG entry:
+
+>1350 95 8 AABOUD 18AW ATLS t'(5/3) -> t W+
+8 AABOUD 18AW based on 36.1 fb^-1 of p p data at sqrt(s) = 13 TeV. Limit on
+t'(5/3) in pair production assuming its coupling to W t is equal to one.
+Lepton-plus-jets final state is used, characterized by lepton + MET + jets
+(>= 1 b-tagged).

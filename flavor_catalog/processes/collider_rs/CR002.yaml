@@ -1,0 +1,410 @@
+schema: flavor_catalog.process.v1
+process_id: CR002
+family: collider_rs
+standard_notation: "pp -> T_{5/3} Tbar_{5/3} -> W+ t W- tbar"
+process_name: "Pair production of exotic-charge T_{5/3} custodial top partner"
+sub_class: "Custodial fermion partner; charge 5/3"
+owner: "PKA"
+owner_agent_id: "PKA-CR002"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+related_process_ids: []
+status_history:
+  - state: "DRAFT"
+    timestamp: "2026-05-17T16:41:01-04:00"
+    from: null
+    to: "DRAFT"
+    at: "2026-05-17T16:41:01-04:00"
+    agent_id: "PKA-CR002"
+    reason: "Initial Wave-9 collider_rs PRIMARY draft skeleton and source research started."
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-17T16:41:01-04:00"
+    from: "DRAFT"
+    to: "WRITER-INITIATED"
+    at: "2026-05-17T16:41:01-04:00"
+    agent_id: "PKA-CR002"
+    reason: "Initial PKA draft, sidecar, reference snapshots, and worklog deposited for CR002."
+last_updated_at: "2026-05-17T16:41:01-04:00"
+version: "0.1.0"
+source_shas:
+  atlas_2018_arxiv1807_11883.txt: "sha256:700e58bb4698af6061919efed538b33f2bb93a66aff99aa98eaa119df6f8bf11"
+  atlas_2023_arxiv2212_05263.txt: "sha256:fb8975d1d1812ef13c156631a193818fb03f89e82602d814c2b91a2776d48b32"
+  cms_2014_arxiv1312_2391.txt: "sha256:ffdb33839c2be98c2657c4cb909dad243db6581daa036ecaf265720739dc3a2c"
+  cms_2017_arxiv1705_10967.txt: "sha256:1757a76e808d68648038a6e6a5b7fb26d1028f0f47169ce4ec19b325938df968"
+  cms_2019_arxiv1810_03188.txt: "sha256:e14cb8f94181a3357d43fe1c41be0726e0c5e01a8af028835b62b19dc71e26da"
+  contino_servant_2008_arxiv0801_1679.txt: "sha256:6307edc6448f22b34aede63b56d1bab8ff855c794081a3339c674be699c3f529"
+  mrazek_wulzer_2009_arxiv0909_3977.txt: "sha256:c562c8e898d1536dc088eb4c15a459706529c7129b4a9a4aefeafdcc82cbf12f"
+  pdg_encoder_q009_tprime_5over3_2026.txt: "sha256:093c2771ed7389edcdcbd4f8b3c5ecfe78d418b19a2b6e8a09e49e924935e363"
+  sha256sums.txt: "sha256:bf718987065929c5be6948948c279f10b805f0cf8ddf7138a07dcd1f259107ad"
+pdg_or_equivalent:
+  year: 2026
+  source: "Particle Data Group current encoder listing q009, t'(5/3)-quark/hadron mass limits"
+  source_key: "PDGEncoderQ009_TPrime5Over3"
+  source_url: "https://pdg.lbl.gov/encoder_listings/q009.pdf"
+  access_date: "2026-05-17"
+  snapshot_path: "flavor_catalog/references/CR002/pdg_encoder_q009_tprime_5over3_2026.txt"
+  sha256: "sha256:093c2771ed7389edcdcbd4f8b3c5ecfe78d418b19a2b6e8a09e49e924935e363"
+  values:
+    - value_id: "PDG2026:CR002:ATLAS2023:X53_pair_Wt"
+      observable: "m(t'(5/3)) lower limit for pair-produced vector-like X/B -> Wt"
+      value: 1460
+      display: "> 1460"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2023
+      experiment: "ATLAS"
+      source: "PDG current encoder q009, documenting AAD 23AG / ATLAS arXiv:2212.05263"
+      source_key: "PDGEncoderQ009_TPrime5Over3"
+      source_url: "https://pdg.lbl.gov/encoder_listings/q009.pdf"
+      supporting_source_key: "ATLAS2023_VLQ_MET"
+      supporting_source_url: "https://arxiv.org/abs/2212.05263"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/pdg_encoder_q009_tprime_5over3_2026.txt"
+      sha256: "sha256:093c2771ed7389edcdcbd4f8b3c5ecfe78d418b19a2b6e8a09e49e924935e363"
+      model_assumptions:
+        - "Pair production of vector-like top or b' partners."
+        - "Exclusive B/X -> Wt decay scenario; X has charge +5/3."
+        - "ATLAS one-lepton plus jets plus missing-transverse-momentum Run-2 selection."
+    - value_id: "ATLAS2023:CR002:mass_degenerate_doublet"
+      observable: "strongest mass lower limit for mass-degenerate vector-like doublet benchmark"
+      value: 1590
+      display: "> 1590"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2023
+      experiment: "ATLAS"
+      source: "ATLAS arXiv:2212.05263 abstract"
+      source_key: "ATLAS2023_VLQ_MET"
+      source_url: "https://arxiv.org/abs/2212.05263"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/atlas_2023_arxiv2212_05263.txt"
+      sha256: "sha256:fb8975d1d1812ef13c156631a193818fb03f89e82602d814c2b91a2776d48b32"
+      model_assumptions:
+        - "Mass-degenerate vector-like quarks with branching ratios corresponding to the weak-isospin doublet model."
+    - value_id: "CMS2019:CR002:X53_RH"
+      observable: "m(X_5/3) lower limit, right-handed coupling"
+      value: 1330
+      display: "> 1330"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2019
+      experiment: "CMS"
+      source: "PDG current encoder q009 and CMS arXiv:1810.03188"
+      source_key: "CMS2019_X53_Run2"
+      source_url: "https://arxiv.org/abs/1810.03188"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/cms_2019_arxiv1810_03188.txt"
+      sha256: "sha256:e14cb8f94181a3357d43fe1c41be0726e0c5e01a8af028835b62b19dc71e26da"
+      model_assumptions:
+        - "Pair-produced X_5/3 with decay X_5/3 -> t W."
+        - "Right-handed X_5/3 coupling to W bosons."
+    - value_id: "CMS2019:CR002:X53_LH"
+      observable: "m(X_5/3) lower limit, left-handed coupling"
+      value: 1300
+      display: "> 1300"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2019
+      experiment: "CMS"
+      source: "PDG current encoder q009 and CMS arXiv:1810.03188"
+      source_key: "CMS2019_X53_Run2"
+      source_url: "https://arxiv.org/abs/1810.03188"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/cms_2019_arxiv1810_03188.txt"
+      sha256: "sha256:e14cb8f94181a3357d43fe1c41be0726e0c5e01a8af028835b62b19dc71e26da"
+      model_assumptions:
+        - "Pair-produced X_5/3 with decay X_5/3 -> t W."
+        - "Left-handed X_5/3 coupling to W bosons."
+    - value_id: "ATLAS2018:CR002:T53_pair_only"
+      observable: "m(T_5/3) lower limit from pair production"
+      value: 1190
+      display: "> 1190"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2018
+      experiment: "ATLAS"
+      source: "ATLAS arXiv:1807.11883 same-charge lepton search"
+      source_key: "ATLAS2018_SameCharge_BJets"
+      source_url: "https://arxiv.org/abs/1807.11883"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/atlas_2018_arxiv1807_11883.txt"
+      sha256: "sha256:700e58bb4698af6061919efed538b33f2bb93a66aff99aa98eaa119df6f8bf11"
+      model_assumptions:
+        - "Pair-produced vector-like T_5/3 in same-charge lepton topology."
+    - value_id: "ATLAS2018:CR002:T53_pair_plus_single_unit_coupling"
+      observable: "m(T_5/3) lower limit when single production is included"
+      value: 1600
+      display: "> 1600"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2018
+      experiment: "ATLAS"
+      source: "PDG current encoder q009 note on AABOUD 18CE / ATLAS arXiv:1807.11883"
+      source_key: "PDGEncoderQ009_TPrime5Over3"
+      source_url: "https://pdg.lbl.gov/encoder_listings/q009.pdf"
+      supporting_source_key: "ATLAS2018_SameCharge_BJets"
+      supporting_source_url: "https://arxiv.org/abs/1807.11883"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/pdg_encoder_q009_tprime_5over3_2026.txt"
+      sha256: "sha256:093c2771ed7389edcdcbd4f8b3c5ecfe78d418b19a2b6e8a09e49e924935e363"
+      model_assumptions:
+        - "Includes single T_5/3 production with t' t W coupling set to one."
+    - value_id: "CMS2017:CR002:X53_RH"
+      observable: "m(X_5/3) lower limit, right-handed coupling"
+      value: 1020
+      display: "> 1020"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2017
+      experiment: "CMS"
+      source: "CMS arXiv:1705.10967"
+      source_key: "CMS2017_X53_13TeV"
+      source_url: "https://arxiv.org/abs/1705.10967"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/cms_2017_arxiv1705_10967.txt"
+      sha256: "sha256:1757a76e808d68648038a6e6a5b7fb26d1028f0f47169ce4ec19b325938df968"
+      model_assumptions:
+        - "Pair-produced X_5/3 with X_5/3 -> t W and right-handed coupling."
+    - value_id: "CMS2017:CR002:X53_LH"
+      observable: "m(X_5/3) lower limit, left-handed coupling"
+      value: 990
+      display: "> 990"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2017
+      experiment: "CMS"
+      source: "CMS arXiv:1705.10967"
+      source_key: "CMS2017_X53_13TeV"
+      source_url: "https://arxiv.org/abs/1705.10967"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/cms_2017_arxiv1705_10967.txt"
+      sha256: "sha256:1757a76e808d68648038a6e6a5b7fb26d1028f0f47169ce4ec19b325938df968"
+      model_assumptions:
+        - "Pair-produced X_5/3 with X_5/3 -> t W and left-handed coupling."
+    - value_id: "CMS2014:CR002:X53_same_sign"
+      observable: "m(X_5/3) lower limit from same-sign dilepton search"
+      value: 800
+      display: "> 800"
+      uncertainty: null
+      units: "GeV"
+      limit_type: "lower_limit"
+      confidence_level: "95%"
+      cl: "95% CL"
+      year: 2014
+      experiment: "CMS"
+      source: "CMS arXiv:1312.2391"
+      source_key: "CMS2014_X53_8TeV"
+      source_url: "https://arxiv.org/abs/1312.2391"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR002/cms_2014_arxiv1312_2391.txt"
+      sha256: "sha256:ffdb33839c2be98c2657c4cb909dad243db6581daa036ecaf265720739dc3a2c"
+      model_assumptions:
+        - "Pair-produced charge-5/3 top partner decays exclusively to tW."
+supporting_measurements:
+  - label: "ATLAS Run-2 dataset for AAD 23AG"
+    source_key: "ATLAS2023_VLQ_MET"
+    integrated_luminosity: 139
+    integrated_luminosity_units: "fb^-1"
+    sqrt_s: 13
+    sqrt_s_units: "TeV"
+    experiment: "ATLAS"
+    year: 2023
+    context: "Dataset metadata for the canonical mass limit; not promoted to pdg_or_equivalent per CHK-1 carve-out."
+    source_url: "https://arxiv.org/abs/2212.05263"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR002/atlas_2023_arxiv2212_05263.txt"
+    sha256: "sha256:fb8975d1d1812ef13c156631a193818fb03f89e82602d814c2b91a2776d48b32"
+  - label: "CMS Run-2 dataset for SIRUNYAN 19T"
+    source_key: "CMS2019_X53_Run2"
+    integrated_luminosity: 35.9
+    integrated_luminosity_units: "fb^-1"
+    sqrt_s: 13
+    sqrt_s_units: "TeV"
+    experiment: "CMS"
+    year: 2019
+    context: "Dataset metadata for the CMS same-sign plus single-lepton search."
+    source_url: "https://arxiv.org/abs/1810.03188"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR002/cms_2019_arxiv1810_03188.txt"
+    sha256: "sha256:e14cb8f94181a3357d43fe1c41be0726e0c5e01a8af028835b62b19dc71e26da"
+  - label: "ATLAS same-charge lepton dataset for AABOUD 18CE"
+    source_key: "ATLAS2018_SameCharge_BJets"
+    integrated_luminosity: 36.1
+    integrated_luminosity_units: "fb^-1"
+    sqrt_s: 13
+    sqrt_s_units: "TeV"
+    experiment: "ATLAS"
+    year: 2018
+    context: "Dataset metadata for pair and single-production T_5/3 interpretations."
+    source_url: "https://arxiv.org/abs/1807.11883"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR002/atlas_2018_arxiv1807_11883.txt"
+    sha256: "sha256:700e58bb4698af6061919efed538b33f2bb93a66aff99aa98eaa119df6f8bf11"
+  - label: "CMS early Run-2 dataset for SIRUNYAN 17J"
+    source_key: "CMS2017_X53_13TeV"
+    integrated_luminosity: 2.3
+    integrated_luminosity_units: "fb^-1"
+    sqrt_s: 13
+    sqrt_s_units: "TeV"
+    experiment: "CMS"
+    year: 2017
+    context: "Dataset metadata for the first CMS 13 TeV combined same-sign and single-lepton X_5/3 search."
+    source_url: "https://arxiv.org/abs/1705.10967"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR002/cms_2017_arxiv1705_10967.txt"
+    sha256: "sha256:1757a76e808d68648038a6e6a5b7fb26d1028f0f47169ce4ec19b325938df968"
+  - label: "CMS 8 TeV dataset for CHATRCHYAN 14T"
+    source_key: "CMS2014_X53_8TeV"
+    integrated_luminosity: 19.5
+    integrated_luminosity_units: "fb^-1"
+    sqrt_s: 8
+    sqrt_s_units: "TeV"
+    experiment: "CMS"
+    year: 2014
+    context: "Dataset metadata for the first LHC same-sign dilepton X_5/3 limit."
+    source_url: "https://arxiv.org/abs/1312.2391"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR002/cms_2014_arxiv1312_2391.txt"
+    sha256: "sha256:ffdb33839c2be98c2657c4cb909dad243db6581daa036ecaf265720739dc3a2c"
+auxiliary_theory_inputs:
+  rc11_quark_scan_context:
+    source: "docs/quark_scan_methodology_note.tex"
+    source_type: "repo-local scan-methodology context; not a measured observable"
+    value_id: "RC1.1:quark_scan:MKK_p50_gstar3"
+    observable: "M_KK^{min,p50} at g_* = 3 for the live RUNA quark scan"
+    value: 47.26
+    uncertainty: null
+    units: "TeV"
+    coupling_label: "g_*"
+    coupling_value: 3
+    line_evidence:
+      - "docs/quark_scan_methodology_note.tex:587"
+      - "docs/quark_scan_methodology_note.tex:931"
+    source_url: "repo-local:docs/quark_scan_methodology_note.tex"
+    access_date: "2026-05-17"
+    sha256: "sha256:334d639d4167b4c721e700fbb0047cd26cd7a8fab9453a321e6afb6cbe6a6c75"
+  atlas2018_single_production_coupling:
+    source: "PDG q009 note for AABOUD 18CE"
+    source_type: "model-assumption input for a single-production interpretation; not a measured observable"
+    coupling: "t' t W"
+    value: 1.0
+    units: "dimensionless coupling normalization"
+    relevance: "The stronger ATLAS same-charge-lepton interpretation including single production is quoted only for this coupling assumption."
+    source_url: "https://pdg.lbl.gov/encoder_listings/q009.pdf"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR002/pdg_encoder_q009_tprime_5over3_2026.txt"
+    sha256: "sha256:093c2771ed7389edcdcbd4f8b3c5ecfe78d418b19a2b6e8a09e49e924935e363"
+paper_era_reference:
+  contino_servant_2008:
+    source: "Contino and Servant 2008"
+    arxiv_id: "0801.1679"
+    source_type: "theory baseline for custodial T_5/3 same-sign dilepton searches; not a pdg_or_equivalent measured observable"
+    relevance: "Identifies the charge-5/3 top partner as a custodial-parity signature and motivates the same-sign-dilepton Wt Wt topology."
+    source_url: "https://arxiv.org/abs/0801.1679"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR002/contino_servant_2008_arxiv0801_1679.txt"
+    sha256: "sha256:6307edc6448f22b34aede63b56d1bab8ff855c794081a3339c674be699c3f529"
+  mrazek_wulzer_2009:
+    source: "Mrazek and Wulzer 2009"
+    arxiv_id: "0909.3977"
+    source_type: "theory baseline for same-sign-dilepton top-partner reach; not a pdg_or_equivalent measured observable"
+    relevance: "Emphasizes single production and same-sign dileptons in strong-sector top-partner searches."
+    reference_reach_value: 1.5
+    reference_reach_units: "TeV"
+    source_url: "https://arxiv.org/abs/0909.3977"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR002/mrazek_wulzer_2009_arxiv0909_3977.txt"
+    sha256: "sha256:c562c8e898d1536dc088eb4c15a459706529c7129b4a9a4aefeafdcc82cbf12f"
+post_2010_developments:
+  - key: "CMS2014_X53_8TeV"
+    type: "experimental_limit"
+    arxiv_id: "1312.2391"
+    why_matters: "First LHC same-sign-dilepton charge-5/3 top-partner limit, assuming exclusive tW decay."
+    source_url: "https://arxiv.org/abs/1312.2391"
+    snapshot_path: "flavor_catalog/references/CR002/cms_2014_arxiv1312_2391.txt"
+    sha256: "sha256:ffdb33839c2be98c2657c4cb909dad243db6581daa036ecaf265720739dc3a2c"
+  - key: "CMS2017_X53_13TeV"
+    type: "experimental_limit"
+    arxiv_id: "1705.10967"
+    why_matters: "First CMS 13 TeV combination of same-sign dilepton and single-lepton final states for X_5/3."
+    source_url: "https://arxiv.org/abs/1705.10967"
+    snapshot_path: "flavor_catalog/references/CR002/cms_2017_arxiv1705_10967.txt"
+    sha256: "sha256:1757a76e808d68648038a6e6a5b7fb26d1028f0f47169ce4ec19b325938df968"
+  - key: "ATLAS2018_SameCharge_BJets"
+    type: "experimental_limit"
+    arxiv_id: "1807.11883"
+    why_matters: "ATLAS same-charge lepton search gave a pair-production T_5/3 interpretation and a separate coupling-dependent pair-plus-single interpretation."
+    source_url: "https://arxiv.org/abs/1807.11883"
+    snapshot_path: "flavor_catalog/references/CR002/atlas_2018_arxiv1807_11883.txt"
+    sha256: "sha256:700e58bb4698af6061919efed538b33f2bb93a66aff99aa98eaa119df6f8bf11"
+  - key: "CMS2019_X53_Run2"
+    type: "experimental_limit"
+    arxiv_id: "1810.03188"
+    why_matters: "CMS increased luminosity and combined same-sign dilepton with single-lepton channels, producing the strongest CMS pair-production limits in the PDG table."
+    source_url: "https://arxiv.org/abs/1810.03188"
+    snapshot_path: "flavor_catalog/references/CR002/cms_2019_arxiv1810_03188.txt"
+    sha256: "sha256:e14cb8f94181a3357d43fe1c41be0726e0c5e01a8af028835b62b19dc71e26da"
+  - key: "ATLAS2023_VLQ_MET"
+    type: "experimental_limit"
+    arxiv_id: "2212.05263"
+    why_matters: "Full Run-2 one-lepton plus MET search superseded the earlier pair-only T_5/3 mass reach for the exclusive B/X -> Wt interpretation."
+    source_url: "https://arxiv.org/abs/2212.05263"
+    snapshot_path: "flavor_catalog/references/CR002/atlas_2023_arxiv2212_05263.txt"
+    sha256: "sha256:fb8975d1d1812ef13c156631a193818fb03f89e82602d814c2b91a2776d48b32"
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n -e 'T5/3' -e 'T_\\{5/3\\}' -e 'X5/3' -e 'X_\\{5/3\\}' -e 'vector[-_ ]like' -e 'VLQ' -e 'top partner' -e 'same-sign' -e 'same charge' -e 'same-charge' -e 'collider' -e 'LHC' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n -e 'M_KK' -e 'MKK' -e 'Mkk' -e 'KK.*mass' -e 'mass.*KK' -e 'gstar' -e 'g_\\*' -e 'g\\*' -e 'Mmin' -e 'M_min' -e 'mKK' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n -e 'T53' -e 'Tprime' -e 'tprime' -e 't.?prime' -e 'Bprime' -e 'b.?prime' -e 'custodial' -e 'KK gluon' -e 'KK-gluon' -e 'resonance' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  findings:
+    - "The collider-specific query returned no matches for T5/3, X5/3, VLQ, top-partner, collider, or LHC terms."
+    - "A broader query only found low-energy Delta F = 2 exclusion machinery and KK-gluon coupling/matching helpers."
+    - "Adjacent M_KK evidence: quarkConstraints/modern/scan.py:1230 maps Lambda_IR to M_KK for scan points; quarkConstraints/couplings.py:103-124 defines mass-basis KK-gluon couplings; quarkConstraints/modern/matching.py:240-243 states the matching bridge is not a full operator-complete EFT/RG package; quarkConstraints/deltaf2.py:1-10 describes the repo-owned Delta F = 2 exclusion slice."
+  evidence:
+    - "quarkConstraints/modern/scan.py:1230"
+    - "quarkConstraints/modern/scan.py:1254"
+    - "quarkConstraints/couplings.py:103"
+    - "quarkConstraints/couplings.py:116"
+    - "quarkConstraints/modern/matching.py:240"
+    - "quarkConstraints/deltaf2.py:1"
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "A faithful LHC direct-search constraint needs event generation, detector-level efficiencies or recast likelihoods, branching-ratio scans, and/or external reinterpretation tools such as CheckMATE, MadAnalysis5, SModelS, or collaboration likelihood material."
+open_issues:
+  - "HEPData was considered for structured tables but not used because the site returned a Cloudflare challenge from the batch environment; PDG and arXiv snapshots carry the numerical values used here."
+  - "WA/CA should decide whether to add a separate CR entry for single-production T_5/3 interpretations, since those are more coupling-dependent than the CR002 pair-production process."
