@@ -1,0 +1,103 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: K019
+sources:
+  - key: PDG2025_KL_emu
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group K_L0 listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b5797d539dbe6bc7e0ee3146b40dc297d3d73f8eb6c622fdd4bd77d882cf4a2a"
+    snapshot_path: "flavor_catalog/references/K019/pdg2025_kl_emu.txt"
+  - key: Ambrose1998_KL_emu
+    arxiv_id: "hep-ex/9811038"
+    DOI: "10.1103/PhysRevLett.81.5734"
+    title: "New Limit on Muon and Electron Lepton Number Violation from K^0_L -> mu^+/- e^-/+ Decay"
+    authors: "D. Ambrose et al. (BNL E871 Collaboration)"
+    year: 1998
+    url: "https://arxiv.org/abs/hep-ex/9811038"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283"
+    snapshot_path: "flavor_catalog/references/K019/ambrose_1998_arxiv_hepex9811038.txt"
+  - key: PDG2025_ConservationLaws_CLFV
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Tests of Conservation Laws"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-conservation-laws.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:39cbab502c19ba91de7d151e7d68900c9b4f01f4eb58cc3feffbfb1b3f705688"
+    snapshot_path: "flavor_catalog/references/K019/pdg2025_conservation_laws_clfv.txt"
+  - key: CsakiFalkowskiWeiler2008_RsFlavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4e6358f91f72b248c7b332a9480be1231ff015bd74193d216524a1f967038dbc"
+    snapshot_path: "flavor_catalog/references/K019/csaki_falkowski_weiler_2008_arxiv0804_1954.txt"
+  - key: PerezRandall2008_WarpedNeutrino
+    arxiv_id: "0805.4652"
+    DOI: "10.1088/1126-6708/2009/01/077"
+    title: "Natural Neutrino Masses and Mixings from Warped Geometry"
+    authors: "Gilad Perez and Lisa Randall"
+    year: 2008
+    url: "https://arxiv.org/abs/0805.4652"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:ea025c2fbef93e3a52bf69d41544f39cf3166d6f8d494f0e8b73d81b042020d8"
+    snapshot_path: "flavor_catalog/references/K019/perez_randall_2008_arxiv0805_4652.txt"
+  - key: BurasDulingEtAl2010_LFVFourthGeneration
+    arxiv_id: "1006.5356"
+    DOI: "10.1007/JHEP09(2010)104"
+    title: "Lepton Flavour Violation in the Presence of a Fourth Generation of Quarks and Leptons"
+    authors: "Andrzej J. Buras, Bjorn Duling, Thorsten Feldmann, Tillmann Heidsieck, and Christoph Promberger"
+    year: 2010
+    url: "https://arxiv.org/abs/1006.5356"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:f30a558221bc3e8269e7810b4ebd5712e6408fd6f5191dcaf3b68c4c8fb08877"
+    snapshot_path: "flavor_catalog/references/K019/buras_duling_2010_arxiv1006_5356.txt"
+  - key: BenekeMochRohrwild2015_RsLeptonLFV
+    arxiv_id: "1508.01705"
+    DOI: "10.1016/j.nuclphysb.2016.02.037"
+    title: "Lepton flavour violation in RS models with a brane- or nearly brane-localized Higgs"
+    authors: "M. Beneke, P. Moch, and J. Rohrwild"
+    year: 2015
+    url: "https://arxiv.org/abs/1508.01705"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:74068448f8223384adcb0d20b5a6ec043a07980222776cb9ffffb4b3934e71f6"
+    snapshot_path: "flavor_catalog/references/K019/beneke_moch_rohrwild_2015_arxiv1508_01705.txt"
+  - key: DAmbrosioIyer2018_WarpedRareK
+    arxiv_id: "1712.08122"
+    DOI: "10.1140/epjc/s10052-018-5915-9"
+    title: "Flavour issues in warped custodial models: B anomalies and rare K decays"
+    authors: "Giancarlo D'Ambrosio and Abhishek M. Iyer"
+    year: 2018
+    url: "https://arxiv.org/abs/1712.08122"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:7cb269f5930ae7743fc20e636c82b95d6ad2ecb0f9a997d2a2885571a76de2dd"
+    snapshot_path: "flavor_catalog/references/K019/dambrosio_iyer_2018_arxiv1712_08122.txt"
+  - key: BlankeCrivellin2018_PatiSalamRS
+    arxiv_id: "1801.07256"
+    DOI: "10.1103/PhysRevLett.121.011801"
+    title: "B Meson Anomalies in a Pati-Salam Model within the Randall-Sundrum Background"
+    authors: "Monika Blanke and Andreas Crivellin"
+    year: 2018
+    url: "https://arxiv.org/abs/1801.07256"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9bc2f51090b69102468c0c1e5037b88a4d4b354be4af9c301cd5d70b240a3017"
+    snapshot_path: "flavor_catalog/references/K019/blanke_crivellin_2018_arxiv1801_07256.txt"
+  - key: LHCbStrange2018_Prospects
+    arxiv_id: "1808.03477"
+    DOI: "10.1007/JHEP05(2019)048"
+    title: "Prospects for Measurements with Strange Hadrons at LHCb"
+    authors: "A. A. Alves Junior et al."
+    year: 2018
+    url: "https://arxiv.org/abs/1808.03477"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0a3b43251bfa6433884813036c15b2e9afda50184a50bf4c7ed8925580d499f9"
+    snapshot_path: "flavor_catalog/references/K019/lhcb_strange_2018_arxiv1808_03477.txt"

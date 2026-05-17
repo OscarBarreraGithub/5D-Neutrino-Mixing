@@ -1,0 +1,108 @@
+% Flavor catalog per-process entry.
+% process_id: K019
+% family: kaon
+% owner_agent_id: PKA-K019
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K019.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{K019: \(K_L \to e^{\pm}\mu^{\mp}\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(K_L \to e^{\pm}\mu^{\mp}\).  This entry covers
+the charged-lepton-flavor-violating two-body decay of the long-lived neutral
+kaon, summed over the two charge assignments.  It is a null-search channel:
+the Standard Model with only neutrino mixing gives no observable charged-LFV
+kaon rate, so any signal would point to new flavor structure.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical sidecar value is the PDG 2025 \(K_L^0\) listing limit
+\[
+  {\cal B}(K_L\to e^{\pm}\mu^{\mp}) < 4.7\times 10^{-12}
+  \quad (90\%~{\rm CL}).
+\]
+The value is listed by PDG as \(\Gamma(e^{\pm}\mu^{\mp})/\Gamma_{\rm total}\)
+and is the BNL E871 final result of Ambrose et al.; see
+\texttt{flavor\_catalog/references/K019/pdg2025\_kl\_emu.txt} and
+\texttt{flavor\_catalog/references/K019/ambrose\_1998\_arxiv\_hepex9811038.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This is a \textbf{SECONDARY} Wave-8 entry; see
+\texttt{flavor\_catalog/PRIORITY\_TIERS.md} for the tier policy.  The process
+was deferred because the quark-only RS flavor pipeline does not naturally
+produce an \(s\to d e\mu\) amplitude.  It becomes relevant once bulk leptons,
+lepton-flavor-nonuniversal gauge couplings, Pati--Salam leptoquark gauge
+bosons, or other lepton-sector flavor spurions are included.
+
+In such extensions, \(K_L\to e\mu\) constrains products of \(s\)-\(d\) and
+\(e\)-\(\mu\) flavor-violating couplings.  Neutral KK gauge exchange or a
+flavor-changing \(Z\) can generate vector/axial semileptonic operators, while
+scalar or Higgs-mediated structures probe chirality-enhanced pseudoscalar
+matrix elements proportional to the kaon decay constant and quark masses.
+Dipole effects are less direct for this two-body mode but become part of the
+same lepton-bulk RS flavor story when the charged-lepton misalignment is not
+minimal-flavor-violating.
+
+\subsection*{Post-2008 developments}
+The PKA found no newer direct \(K_L\to e\mu\) branching-fraction limit in the
+PDG 2025 \(K_L^0\) listing; the BNL E871 result remains the canonical bound.
+Post-2008 work matters instead through model interpretation.  Buras et al.
+(\texttt{arXiv:1006.5356}) included \(K_L\to\mu e\) and
+\(K_L\to\pi^0\mu e\) in a broad charged-LFV pattern study, providing a useful
+template for comparing kaon LFV with charged-lepton and \(B\)-meson LFV
+channels.  Beneke, Moch, and Rohrwild (\texttt{arXiv:1508.01705}) updated the
+RS charged-lepton LFV calculation in a full 5D framework, emphasizing dipoles,
+\(\mu\to 3e\), and muon conversion rather than kaon modes, but fixing the
+lepton-bulk flavor ingredients needed before K019 can be predicted.
+
+D'Ambrosio and Iyer (\texttt{arXiv:1712.08122}) studied warped custodial
+models with partially composite leptons, rare \(K\) decays, and lepton-sector
+flavor violation.  Blanke and Crivellin (\texttt{arXiv:1801.07256}) are the
+most explicit RS-adjacent post-2008 handle for this entry: their
+Pati--Salam-in-RS setup notes that conventional vector-leptoquark scenarios
+are stringently constrained by \(K_L\to\mu e\) and \(K\to\pi\mu e\).  The LHCb
+strange-hadron prospects report (\texttt{arXiv:1808.03477}) is included only
+as experimental/prospective context, not as a replacement for the \(K_L\)
+limit.
+
+\subsection*{Constraint validity and model dependence}
+The experimental limit is robust and clean as a bound on the physical
+branching fraction.  Its use as an RS constraint is model-dependent.  A
+minimal quark-only RS implementation should not impose this as a primary
+constraint, because the \(e\)-\(\mu\) flavor transition is absent.  A
+lepton-bulk or leptoquark-extended implementation can use it as a strong
+constraint after specifying the charged-lepton flavor basis, the relevant
+semileptonic Wilson coefficients, and whether vector, axial, scalar,
+pseudoscalar, or Higgs-mediated operators dominate.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Exact K019 searches over \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no
+\(K_L\to e^{\pm}\mu^{\mp}\), \(s\to d e\mu\), or kaon semileptonic LFV
+implementation.  The adjacent code surfaces are a \(\mu\to e\gamma\) LFV
+dipole check and quark-only \(\Delta F=2\) kaon mixing, which are not this
+observable.
+
+\subsection*{Implementation difficulty}
+\textbf{MEDIUM.}  The observable itself is experimentally clean, but the repo
+would need a new \(\Delta S=1\) charged-LFV semileptonic operator interface,
+matching from the chosen lepton-bulk or leptoquark RS extension, and a kaon
+decay-rate evaluator with vector/axial and scalar/pseudoscalar matrix
+elements.  No new long-distance SM subtraction is the main simplifying
+feature, but the necessary operator basis is not currently present.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2025\_KL\_emu}, \texttt{Ambrose1998\_KL\_emu},
+\texttt{PDG2025\_ConservationLaws\_CLFV},
+\texttt{CsakiFalkowskiWeiler2008\_RsFlavor},
+\texttt{PerezRandall2008\_WarpedNeutrino},
+\texttt{BurasDulingEtAl2010\_LFVFourthGeneration},
+\texttt{BenekeMochRohrwild2015\_RsLeptonLFV},
+\texttt{DAmbrosioIyer2018\_WarpedRareK},
+\texttt{BlankeCrivellin2018\_PatiSalamRS}, and
+\texttt{LHCbStrange2018\_Prospects}.

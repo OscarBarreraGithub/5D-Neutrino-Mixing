@@ -1,0 +1,36 @@
+Source snapshot for K019
+Source: Particle Data Group, K_L0 listing, 2025 update
+URL: https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf
+Access date: 2026-05-17
+Local extraction method: PDF downloaded to /tmp and converted with pdftotext -layout; publisher PDF is not tracked.
+
+Citation line in source:
+S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.
+Created: 12/2/2025 14:24.
+
+Relevant summary-table extract, "K_L0 DECAY MODES":
+
+Charge conjugation x Parity (CP) or Lepton Family number (LF) violating modes,
+or Delta S = 1 weak neutral current (S1) modes
+
+Mode                      Fraction (Gamma_i/Gamma)        Scale factor/Confidence level
+Gamma35  e +/- mu -/+     LF [a]  < 4.7 x 10^-12          CL=90%
+
+[a] The value is for the sum of the charge states or particle/antiparticle
+states indicated.
+
+Relevant particle-listing extract:
+
+Gamma(e +/- mu -/+)/Gamma_total    Gamma35/Gamma
+Test of lepton family number conservation.
+
+VALUE (units 10^-11)    CL%    EVTS    DOCUMENT ID      TECN
+<0.47                   90             AMBROSE 98B      B871
+
+Older values marked by PDG as not used for averages, fits, limits, etc.:
+<9.4                    90      0      AKAGI 95        SPEC
+<3.9                    90      0      ARISAKA 93      B791
+<3.3                    90      0      ARISAKA 93      B791
+
+Reference line in source:
+AMBROSE 98B   PRL 81 5734   D. Ambrose et al. (BNL E871 Collaboration)
