@@ -1,0 +1,295 @@
+schema: flavor_catalog.process.v1
+process_id: CR012
+family: collider_rs
+standard_notation: "pp -> (W'/Z'/G' spin-1) -> WW, WZ, ZZ"
+process_name: "Diboson high-mass resonance (generic spin-1)"
+subclass: "EW-precision-tail; model-independent diboson"
+owner: "PKA"
+owner_agent_id: "PKA-CR012"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+related_process_ids: []
+status_history:
+  - state: "DRAFT"
+    timestamp: "2026-05-17T16:33:00-04:00"
+    from: null
+    to: "DRAFT"
+    at: "2026-05-17T16:33:00-04:00"
+    agent_id: "PKA-CR012"
+    reason: "Initial Wave-9 PRIMARY collider_rs draft skeleton and source research started."
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-17T16:33:00-04:00"
+    from: "DRAFT"
+    to: "WRITER-INITIATED"
+    at: "2026-05-17T16:33:00-04:00"
+    agent_id: "PKA-CR012"
+    reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+last_updated_at: "2026-05-17T16:33:00-04:00"
+version: "0.1.0"
+source_shas:
+  atlas_2015_arxiv1506_00962.txt: "sha256:4c4497f2a285fcb43f6c74f83cf24e002188f28fac0407d4a44417feb6051724"
+  atlas_2017_arxiv1708_04445.txt: "sha256:e925407866485df77045ebea43fcad8f3f999f5b30c22dea27e455a561e14ddc"
+  atlas_2019_arxiv1906_08589.txt: "sha256:9676bb0786a9f3a9dec90825b23190de97b68922c9659347dbadce390eea0964"
+  cms_2017_combination_arxiv1705_09171.txt: "sha256:76223f071bbd77b45e5ef386bfaeb445b828f2020c332117c1a9ab51d7d884b4"
+  cms_2018_dijet_arxiv1708_05379.txt: "sha256:92c6557adf2d122f955633de271e2085f6a376256a6a85c864a3bb8ba48a06cc"
+  cms_2019_arxiv1906_05977.txt: "sha256:57f51748dcbadd94507e9ff9b2044fff13919f3f164428593e227d38d15419d5"
+  cms_2022_semileptonic_arxiv2109_06055.txt: "sha256:e0701ccf87a9c302bc8ad0b9ad298201e0b70249ecac69ff0e2bd209a726ff0f"
+  cms_2023_b2g_20_009_arxiv2210_00043.txt: "sha256:5560f5834e4b10abf813fe7300b24e36a6bf37f2ccc3a7b8e3eceed4e594ee53"
+  hepdata_cms_2023_b2g_20_009_record.txt: "sha256:4ddaa313fdf170c46243c8810c8d1f1deaeb6238aa9e791801207fbc2b663fad"
+  internal_quark_scan_methodology_extract.txt: "sha256:4542d08c187d994eb6fb9ec171eae2e3d7019e4c3358b64257e7de91e81a8da9"
+  pappadopulo_2014_hvt_arxiv1402_4431.txt: "sha256:264a32c4056afaf3225106bd6210940e320fe8760f7367ea78206f3bc4d4c567"
+  pdg2025_heavy_bosons_wprime_wz.txt: "sha256:987f6211a9b510e3bd896e9a9de9b94fc1280db3b3663a654f7e17876cd54968"
+pdg_or_equivalent:
+  canonical_source: "CMS-B2G-20-009 Table 2, cross-checked with PDG 2025 heavy-boson W' listing"
+  source_key: "CMS2023_B2G_20_009"
+  source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-20-009/"
+  access_date: "2026-05-17"
+  values:
+    - value_id: "PDG2025:CR012:HVTB_Wprime_WZ_mass_lower"
+      observable: "HVT model B W' -> WZ observed resonance-mass lower limit"
+      value: 4.4
+      uncertainty: null
+      units: "TeV"
+      display: "m(W') > 4.4 TeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      confidence_level: 0.95
+      year: 2023
+      experiment: "CMS"
+      model: "HVT model B, g_V = 3"
+      production_mode: "mostly Drell-Yan"
+      decay_mode: "W' -> WZ"
+      source: "PDG 2025 heavy-boson listing, document TUMASYAN 23AP; CMS-B2G-20-009 Table 2"
+      source_key: "PDG2025_HeavyBosons_Wprime_WZ"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-heavy-bosons.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR012/pdg2025_heavy_bosons_wprime_wz.txt"
+      sha256: "sha256:987f6211a9b510e3bd896e9a9de9b94fc1280db3b3663a654f7e17876cd54968"
+    - value_id: "CMS2023:CR012:HVTB_Vprime_VV_mass_lower"
+      observable: "HVT model B mass-degenerate V' -> VV observed resonance-mass lower limit"
+      value: 4.5
+      uncertainty: null
+      units: "TeV"
+      display: "m(V') > 4.5 TeV for the mass-degenerate VV category"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      confidence_level: 0.95
+      year: 2023
+      experiment: "CMS"
+      model: "HVT model B, mass-degenerate V'"
+      production_mode: "Drell-Yan categories in the CMS all-jets template"
+      decay_mode: "V' -> VV"
+      source: "CMS-B2G-20-009 Table 2"
+      source_key: "CMS2023_B2G_20_009"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-20-009/CMS-B2G-20-009_Table_002.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR012/cms_2023_b2g_20_009_arxiv2210_00043.txt"
+      sha256: "sha256:5560f5834e4b10abf813fe7300b24e36a6bf37f2ccc3a7b8e3eceed4e594ee53"
+    - value_id: "CMS2023:CR012:HVTB_Vprime_VV_VH_mass_lower"
+      observable: "HVT model B mass-degenerate V' -> VV+VH observed resonance-mass lower limit"
+      value: 4.8
+      uncertainty: null
+      units: "TeV"
+      display: "m(V') > 4.8 TeV when VV and VH channels are combined"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      confidence_level: 0.95
+      year: 2023
+      experiment: "CMS"
+      model: "HVT model B, mass-degenerate V'; includes VV and VH channels"
+      production_mode: "Drell-Yan categories in the CMS all-jets template"
+      decay_mode: "V' -> VV+VH"
+      source: "CMS-B2G-20-009 Table 2; PDG 2025 comment for TUMASYAN 23AP"
+      source_key: "CMS2023_B2G_20_009"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-20-009/CMS-B2G-20-009_Table_002.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR012/cms_2023_b2g_20_009_arxiv2210_00043.txt"
+      sha256: "sha256:5560f5834e4b10abf813fe7300b24e36a6bf37f2ccc3a7b8e3eceed4e594ee53"
+    - value_id: "CMS2023:CR012:HVTB_Zprime_WW_excluded_intervals"
+      observable: "HVT model B Z' -> WW observed excluded resonance-mass intervals"
+      value: "1.3-3.1, 3.3-3.5"
+      uncertainty: null
+      units: "TeV"
+      display: "m(Z') excluded in 1.3-3.1 TeV and 3.3-3.5 TeV"
+      value_type: "excluded_ranges"
+      excluded_ranges_TeV:
+        - [1.3, 3.1]
+        - [3.3, 3.5]
+      expected_limit: 3.8
+      expected_limit_units: "TeV"
+      limit_type: "mass_exclusion_intervals"
+      cl: "95% CL"
+      confidence_level: 0.95
+      year: 2023
+      experiment: "CMS"
+      model: "HVT model B"
+      production_mode: "Drell-Yan categories in the CMS all-jets template"
+      decay_mode: "Z' -> WW"
+      source: "CMS-B2G-20-009 Table 2"
+      source_key: "CMS2023_B2G_20_009"
+      source_url: "https://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-20-009/CMS-B2G-20-009_Table_002.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR012/cms_2023_b2g_20_009_arxiv2210_00043.txt"
+      sha256: "sha256:5560f5834e4b10abf813fe7300b24e36a6bf37f2ccc3a7b8e3eceed4e594ee53"
+supporting_measurements:
+  - label: "CMS-B2G-20-009 data set"
+    observable: "integrated luminosity and center-of-mass energy"
+    year: 2023
+    integrated_luminosity:
+      value: 138
+      units: "fb^-1"
+    sqrt_s:
+      value: 13
+      units: "TeV"
+    resonance_mass_range:
+      value: "1.3-6"
+      units: "TeV"
+    context: "Dataset and search-range metadata for the canonical mass limits; not promoted to pdg_or_equivalent per CHK-1 carve-out."
+    source: "CMS-B2G-20-009 arXiv abstract"
+    source_key: "CMS2023_B2G_20_009"
+    source_url: "https://arxiv.org/abs/2210.00043"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2023_b2g_20_009_arxiv2210_00043.txt"
+    sha256: "sha256:5560f5834e4b10abf813fe7300b24e36a6bf37f2ccc3a7b8e3eceed4e594ee53"
+  - label: "HEPData structured upper-limit tables"
+    observable: "sigma times branching-fraction upper-limit table availability"
+    year: 2022
+    context: "HEPData provides the Figure 7 cross-section upper-limit tables for CMS-B2G-20-009; no individual cross-section point is promoted in this PKA draft."
+    source: "HEPData record 10.17182/hepdata.132485.v1"
+    source_key: "HEPData2022_CMS_B2G_20_009"
+    source_url: "https://www.hepdata.net/record/ins2159368"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR012/hepdata_cms_2023_b2g_20_009_record.txt"
+    sha256: "sha256:4ddaa313fdf170c46243c8810c8d1f1deaeb6238aa9e791801207fbc2b663fad"
+paper_era_reference:
+  hvt_framework:
+    source: "Pappadopulo, Thamm, Torre, and Wulzer 2014"
+    arxiv_id: "1402.4431"
+    source_type: "theory framework; not a pdg_or_equivalent measured observable"
+    relevance: "Defines the HVT simplified vector-triplet language used by ATLAS/CMS to report W'/Z' diboson and VH limits."
+    source_url: "https://arxiv.org/abs/1402.4431"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR012/pappadopulo_2014_hvt_arxiv1402_4431.txt"
+    sha256: "sha256:264a32c4056afaf3225106bd6210940e320fe8760f7367ea78206f3bc4d4c567"
+  internal_low_energy_reach_context:
+    source: "docs/quark_scan_methodology_note.tex"
+    source_type: "internal scan-reach context; not a collider measured observable"
+    relevance: "Records the low-energy anarchic-flavor reach used to compare collider direct limits with the existing catalog."
+    M_KK_min_p50_gsstar3:
+      value: 47.26
+      units: "TeV"
+    M_KK_min_p95_gsstar3:
+      value: 127.13
+      units: "TeV"
+    source_url: "docs/quark_scan_methodology_note.tex"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR012/internal_quark_scan_methodology_extract.txt"
+    sha256: "sha256:4542d08c187d994eb6fb9ec171eae2e3d7019e4c3358b64257e7de91e81a8da9"
+auxiliary_theory_inputs:
+  hvt_model_b_assumptions:
+    source: "CMS-B2G-20-009 and Pappadopulo et al. HVT framework"
+    context: "The CMS mass exclusions are interpreted in HVT model B with g_V = 3; mapping to an RS spectrum requires model-specific widths, couplings, branching fractions, and production modes."
+    source_keys:
+      - "CMS2023_B2G_20_009"
+      - "Pappadopulo2014_HVT"
+    access_date: "2026-05-17"
+post_2010_developments:
+  - key: "Pappadopulo2014_HVT"
+    type: "theory_framework"
+    arxiv_id: "1402.4431"
+    why_matters: "Introduced the HVT parameterization that makes later diboson limits comparable across experiments and model assumptions."
+    source_url: "https://arxiv.org/abs/1402.4431"
+    snapshot_path: "flavor_catalog/references/CR012/pappadopulo_2014_hvt_arxiv1402_4431.txt"
+    sha256: "sha256:264a32c4056afaf3225106bd6210940e320fe8760f7367ea78206f3bc4d4c567"
+  - key: "ATLAS2015_8TeVDiboson"
+    type: "experimental_history"
+    arxiv_id: "1506.00962"
+    why_matters: "Established boosted all-hadronic WW/WZ/ZZ tagging as a central high-mass diboson channel at 8 TeV and motivated subsequent Run-2 scrutiny."
+    source_url: "https://arxiv.org/abs/1506.00962"
+    snapshot_path: "flavor_catalog/references/CR012/atlas_2015_arxiv1506_00962.txt"
+    sha256: "sha256:4c4497f2a285fcb43f6c74f83cf24e002188f28fac0407d4a44417feb6051724"
+  - key: "CMS2017_BosonCombination"
+    type: "experimental_history"
+    arxiv_id: "1705.09171"
+    why_matters: "First CMS combination of VV and VH resonance searches, making HVT singlet/triplet interpretations explicit across multiple channels."
+    source_url: "https://arxiv.org/abs/1705.09171"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2017_combination_arxiv1705_09171.txt"
+    sha256: "sha256:76223f071bbd77b45e5ef386bfaeb445b828f2020c332117c1a9ab51d7d884b4"
+  - key: "ATLAS2017_Diboson36fb"
+    type: "experimental_history"
+    arxiv_id: "1708.04445"
+    why_matters: "Early 13 TeV ATLAS all-hadronic diboson analysis with boosted W/Z jet tags and extended high-mass reach."
+    source_url: "https://arxiv.org/abs/1708.04445"
+    snapshot_path: "flavor_catalog/references/CR012/atlas_2017_arxiv1708_04445.txt"
+    sha256: "sha256:e925407866485df77045ebea43fcad8f3f999f5b30c22dea27e455a561e14ddc"
+  - key: "CMS2018_Dijet_B2G_17_001"
+    type: "experimental_history"
+    arxiv_id: "1708.05379"
+    why_matters: "CMS 13 TeV dijet search covering WW/WZ/ZZ and qV categories, improving HVT interpretations with a larger early Run-2 sample."
+    source_url: "https://arxiv.org/abs/1708.05379"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2018_dijet_arxiv1708_05379.txt"
+    sha256: "sha256:92c6557adf2d122f955633de271e2085f6a376256a6a85c864a3bb8ba48a06cc"
+  - key: "ATLAS2019_Diboson139fb"
+    type: "experimental_history"
+    arxiv_id: "1906.08589"
+    why_matters: "ATLAS full-Run-2 all-hadronic WW/WZ/ZZ search; important independent full-luminosity comparison to the CMS all-jets program."
+    source_url: "https://arxiv.org/abs/1906.08589"
+    snapshot_path: "flavor_catalog/references/CR012/atlas_2019_arxiv1906_08589.txt"
+    sha256: "sha256:9676bb0786a9f3a9dec90825b23190de97b68922c9659347dbadce390eea0964"
+  - key: "CMS2019_B2G_18_002"
+    type: "experimental_history"
+    arxiv_id: "1906.05977"
+    why_matters: "CMS partial-Run-2 all-jets update using a three-dimensional jet-mass and dijet-mass likelihood; direct predecessor of the current CMS all-jets result."
+    source_url: "https://arxiv.org/abs/1906.05977"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2019_arxiv1906_05977.txt"
+    sha256: "sha256:57f51748dcbadd94507e9ff9b2044fff13919f3f164428593e227d38d15419d5"
+  - key: "CMS2022_Semileptonic_B2G_19_002"
+    type: "experimental_history"
+    arxiv_id: "2109.06055"
+    why_matters: "Run-2 semileptonic WW/WZ/WH search, important because it tests different backgrounds and systematics from the all-hadronic channel."
+    source_url: "https://arxiv.org/abs/2109.06055"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2022_semileptonic_arxiv2109_06055.txt"
+    sha256: "sha256:e0701ccf87a9c302bc8ad0b9ad298201e0b70249ecac69ff0e2bd209a726ff0f"
+  - key: "CMS2023_B2G_20_009"
+    type: "current_experimental_input"
+    arxiv_id: "2210.00043"
+    why_matters: "Full-Run-2 all-jets CMS search with machine-learning boson taggers and simultaneous VV/VH categories; canonical current CR012 limit source."
+    source_url: "https://arxiv.org/abs/2210.00043"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2023_b2g_20_009_arxiv2210_00043.txt"
+    sha256: "sha256:5560f5834e4b10abf813fe7300b24e36a6bf37f2ccc3a7b8e3eceed4e594ee53"
+constraint_validity:
+  experimental_status: "No significant excess; current observed 95% CL lower mass limits are benchmark-model exclusions."
+  model_dependence: "HVT benchmark, resonance width, light-quark couplings, VBF/DY production mix, and VV/VH branching fractions control the mapping to any concrete RS spectrum."
+  rs_mapping_notes:
+    - "Constrains electroweak KK-vector or custodial-vector masses only after specifying the gauge extension, fermion embeddings, and branching fractions."
+    - "Does not directly constrain the color-octet KK gluon unless a model supplies appreciable diboson decays."
+    - "The 4.8 TeV number combines VV and VH and should not be used as a pure-diboson-only threshold."
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  commands:
+    - "rg -n \"CR012|collider_rs|diboson|di[- ]?boson|WW|WZ|ZZ|Wprime|W\\\\'|W'|Zprime|Z\\\\'|Z'|Vprime|V\\\\'|HVT|heavy vector|resonance\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"ATLAS|CMS|LHC|Run.?2|13 TeV|95% CL|cross.?section|mass exclusion|limit.*TeV|CheckMATE|MadAnalysis|SModelS|HEPData\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"M_KK|MKK|Mkk|KK|Kaluza|gluon|g\\*|gsstar|gstar|mass_scale|mKK\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"diboson|di[- ]?boson|HVT|heavy vector|Wprime|Zprime|Vprime|CheckMATE|MadAnalysis|SModelS|HEPData|ATLAS|CMS|13 TeV|95% CL|mass exclusion\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  findings:
+    - "No CR012, collider_rs, diboson, HVT, ATLAS/CMS, HEPData, or reinterpretation-tool implementation was found."
+    - "The only CMS match in the collider-search grep was tests/test_alpha_s.py:89, a CMS/RunDec QCD-running example rather than an LHC search."
+    - "Adjacent KK-scale code exists: quarkConstraints/scan.py:359 computes M_KK from Lambda_IR; quarkConstraints/scan.py:377-380 evaluates Delta F=2 constraints with KK-gluon couplings."
+    - "quarkConstraints/deltaf2.py:320-324 documents tree-level KK-gluon-inspired Delta F=2 Wilsons, not collider direct searches."
+    - "scanParams/scan.py:523-535 applies only the mu -> e gamma LFV filter in that scan path."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "A live CR012 constraint needs collider likelihoods or recast tools plus an RS spectrum, widths, production cross sections, and branching fractions; a scalar mass-threshold filter would not preserve the model assumptions behind the published limits."
+open_issues:
+  - "WA/CA should decide whether the 4.8 TeV VV+VH degenerate-HVT result belongs in headline prose or only as a caveat beside the pure VV 4.5 TeV row."
+  - "A future implementation should choose a recast backend before adding any code-level collider_rs filters."

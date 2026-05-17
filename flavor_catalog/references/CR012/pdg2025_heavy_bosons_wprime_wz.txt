@@ -1,0 +1,28 @@
+Source snapshot for CR012
+Key: PDG2025_HeavyBosons_Wprime_WZ
+Source type: PDG 2025 heavy-boson listing text extract
+URL: https://pdg.lbl.gov/2025/listings/rpp2025-list-heavy-bosons.pdf
+Access date: 2026-05-17
+Normalization note: Unicode primes/dashes normalized to ASCII in this local text snapshot.
+
+Bibliographic metadata:
+Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update
+Listing: New Heavy Bosons (W', Z', leptoquarks, etc.), Searches for
+Relevant table: Mass limits for W' (Heavy Charged Vector Boson Other Than W) in Hadron Collider Experiments
+
+PDG table text extract:
+VALUE (GeV)     CL%     DOCUMENT ID       TECN     COMMENT
+>4400           95      TUMASYAN 23AP     CMS      W' -> W Z
+>4000           95      TUMASYAN 23AP     CMS      W' -> W H
+>3900           95      TUMASYAN 22D      CMS      W' -> W Z
+>4000           95      TUMASYAN 22D      CMS      W' -> W H
+>4300           95      AAD 20AT          ATLS     W' -> W Z
+none 1200-3800  95      SIRUNYAN 20Q      CMS      W' -> W Z
+none 1300-3600  95      AAD 19D           ATLS     W' -> W Z
+
+PDG comment text extract:
+TUMASYAN 23AP search for resonances decaying to W Z in p p collisions at sqrt(s) = 13 TeV. The limit quoted above is for heavy-vector-triplet W' with gV = 3. The limit becomes MW' > 4.8 TeV assuming MW' = MZ' and combining W' -> W Z, W' -> W H, Z' -> W W, Z' -> Z H channels.
+
+TUMASYAN 22D search for resonances produced through Drell-Yan and vector-boson-fusion processes in p p collisions at sqrt(s) = 13 TeV. See their figure for limits on sigma times branching ratio. The quoted limit is for heavy-vector-triplet W' with gV = 3 produced mainly via Drell-Yan.
+
+AAD 20AT search for resonances decaying to W Z in p p collisions at sqrt(s) = 13 TeV. The quoted limit is for heavy-vector-triplet W' with gV = 3. The limit becomes MW' > 3900 GeV for gV = 1.

@@ -1,0 +1,34 @@
+Source snapshot for CR012
+Key: CMS2023_B2G_20_009
+Source type: arXiv abstract plus CMS public-result Table 2 text extract
+URL: https://arxiv.org/abs/2210.00043
+CMS public page: https://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-20-009/
+Access date: 2026-05-17
+Normalization note: Unicode primes/dashes normalized to ASCII in this local text snapshot.
+
+Bibliographic metadata:
+arXiv:2210.00043 [hep-ex]
+Title: Search for new heavy resonances decaying to WW, WZ, ZZ, WH, or ZH boson pairs in the all-jets final state in proton-proton collisions at sqrt(s) = 13 TeV
+Authors: CMS Collaboration
+Report number: CMS-B2G-20-009, CERN-EP-2022-152
+Journal reference: Phys. Lett. B 844 (2023) 137813
+DOI: 10.1016/j.physletb.2023.137813
+
+ArXiv abstract:
+A search for new heavy resonances decaying to WW, WZ, ZZ, WH, or ZH boson pairs in the all-jets final state is presented. The analysis is based on proton-proton collision data recorded by the CMS detector in 2016-2018 at a centre-of-mass energy of 13 TeV at the CERN LHC, corresponding to an integrated luminosity of 138 fb^-1. The search is sensitive to resonances with masses between 1.3 and 6 TeV, decaying to bosons that are highly Lorentz-boosted such that each of the bosons forms a single large-radius jet. Machine learning techniques are employed to identify such jets. No significant excess over the estimated standard model background is observed. A maximum local significance of 3.6 standard deviations, corresponding to a global significance of 2.3 standard deviations, is observed at masses of 2.1 and 2.9 TeV. In a heavy vector triplet model, spin-1 Z' and W' resonances with masses below 4.8 TeV are excluded at the 95% confidence level (CL). These limits are the most stringent to date. In a bulk graviton model, spin-2 gravitons and spin-0 radions with masses below 1.4 and 2.7 TeV, respectively, are excluded at 95% CL. Production of heavy resonances through vector boson fusion is constrained with upper cross section limits at 95% CL as low as 0.1 fb.
+
+CMS public-result Table 2 extract:
+Summary of the exclusion limits on the resonance masses for the considered models.
+The numbers show the lower limit at 95% CL, with the exception of the ones
+given in parentheses quoting the ranges of exclusion.
+
+Model                         Decay channel       Observed limit (TeV)        Expected limit (TeV)
+Radion                        ggF VV              2.7                         3.4
+Gbulk (ktilde = 0.5)          ggF VV              1.4                         1.5
+HVT (B) W'                    WZ                  4.4                         4.3
+HVT (B) W'                    WH                  4.0                         4.3
+HVT (B) Z'                    WW                  (1.3-3.1, 3.3-3.5)          3.8
+HVT (B) Z'                    ZH                  3.9                         3.8
+HVT (B) V'                    VV                  4.5                         4.5
+HVT (B) V'                    VH                  4.2                         4.5
+HVT (B) V'                    VV+VH               4.8                         4.8

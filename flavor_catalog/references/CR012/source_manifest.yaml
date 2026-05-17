@@ -1,0 +1,123 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR012
+sources:
+  - key: CMS2023_B2G_20_009
+    arxiv_id: "2210.00043"
+    DOI: "10.1016/j.physletb.2023.137813"
+    title: "Search for new heavy resonances decaying to WW, WZ, ZZ, WH, or ZH boson pairs in the all-jets final state in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2210.00043"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:5560f5834e4b10abf813fe7300b24e36a6bf37f2ccc3a7b8e3eceed4e594ee53"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2023_b2g_20_009_arxiv2210_00043.txt"
+  - key: PDG2025_HeavyBosons_Wprime_WZ
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group 2025 heavy-boson listing: W' hadron-collider mass limits"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-heavy-bosons.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:987f6211a9b510e3bd896e9a9de9b94fc1280db3b3663a654f7e17876cd54968"
+    snapshot_path: "flavor_catalog/references/CR012/pdg2025_heavy_bosons_wprime_wz.txt"
+  - key: HEPData2022_CMS_B2G_20_009
+    arxiv_id: null
+    DOI: "10.17182/hepdata.132485.v1"
+    title: "HEPData record for CMS-B2G-20-009 Figure 7 upper-limit tables"
+    authors: "CMS Collaboration"
+    year: 2022
+    url: "https://www.hepdata.net/record/ins2159368"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4ddaa313fdf170c46243c8810c8d1f1deaeb6238aa9e791801207fbc2b663fad"
+    snapshot_path: "flavor_catalog/references/CR012/hepdata_cms_2023_b2g_20_009_record.txt"
+  - key: ATLAS2019_Diboson139fb
+    arxiv_id: "1906.08589"
+    DOI: "10.1007/JHEP09(2019)091"
+    title: "Search for diboson resonances in hadronic final states in 139 fb^-1 of pp collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1906.08589"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9676bb0786a9f3a9dec90825b23190de97b68922c9659347dbadce390eea0964"
+    snapshot_path: "flavor_catalog/references/CR012/atlas_2019_arxiv1906_08589.txt"
+  - key: CMS2019_B2G_18_002
+    arxiv_id: "1906.05977"
+    DOI: "10.1140/epjc/s10052-020-7773-5"
+    title: "A multi-dimensional search for new heavy resonances decaying to boosted WW, WZ, or ZZ boson pairs in the dijet final state at 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2020
+    url: "https://arxiv.org/abs/1906.05977"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:57f51748dcbadd94507e9ff9b2044fff13919f3f164428593e227d38d15419d5"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2019_arxiv1906_05977.txt"
+  - key: CMS2018_Dijet_B2G_17_001
+    arxiv_id: "1708.05379"
+    DOI: "10.1103/PhysRevD.97.072006"
+    title: "Search for massive resonances decaying into WW, WZ, ZZ, qW, and qZ with dijet final states at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1708.05379"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:92c6557adf2d122f955633de271e2085f6a376256a6a85c864a3bb8ba48a06cc"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2018_dijet_arxiv1708_05379.txt"
+  - key: ATLAS2017_Diboson36fb
+    arxiv_id: "1708.04445"
+    DOI: "10.1016/j.physletb.2017.12.011"
+    title: "Search for diboson resonances with boson-tagged jets in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1708.04445"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:e925407866485df77045ebea43fcad8f3f999f5b30c22dea27e455a561e14ddc"
+    snapshot_path: "flavor_catalog/references/CR012/atlas_2017_arxiv1708_04445.txt"
+  - key: CMS2017_BosonCombination
+    arxiv_id: "1705.09171"
+    DOI: "10.1016/j.physletb.2017.09.083"
+    title: "Combination of searches for heavy resonances decaying to WW, WZ, ZZ, WH, and ZH boson pairs in proton-proton collisions at sqrt(s) = 8 and 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1705.09171"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:76223f071bbd77b45e5ef386bfaeb445b828f2020c332117c1a9ab51d7d884b4"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2017_combination_arxiv1705_09171.txt"
+  - key: ATLAS2015_8TeVDiboson
+    arxiv_id: "1506.00962"
+    DOI: "10.1007/JHEP12(2015)055"
+    title: "Search for high-mass diboson resonances with boson-tagged jets in proton-proton collisions at sqrt(s) = 8 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2015
+    url: "https://arxiv.org/abs/1506.00962"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4c4497f2a285fcb43f6c74f83cf24e002188f28fac0407d4a44417feb6051724"
+    snapshot_path: "flavor_catalog/references/CR012/atlas_2015_arxiv1506_00962.txt"
+  - key: CMS2022_Semileptonic_B2G_19_002
+    arxiv_id: "2109.06055"
+    DOI: "10.1103/PhysRevD.105.032008"
+    title: "Search for heavy resonances decaying to WW, WZ, or WH boson pairs in a final state consisting of a lepton and a large-radius jet in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2022
+    url: "https://arxiv.org/abs/2109.06055"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:e0701ccf87a9c302bc8ad0b9ad298201e0b70249ecac69ff0e2bd209a726ff0f"
+    snapshot_path: "flavor_catalog/references/CR012/cms_2022_semileptonic_arxiv2109_06055.txt"
+  - key: Pappadopulo2014_HVT
+    arxiv_id: "1402.4431"
+    DOI: "10.1007/JHEP09(2014)060"
+    title: "Heavy Vector Triplets: Bridging Theory and Data"
+    authors: "Duccio Pappadopulo, Andrea Thamm, Riccardo Torre, and Andrea Wulzer"
+    year: 2014
+    url: "https://arxiv.org/abs/1402.4431"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:264a32c4056afaf3225106bd6210940e320fe8760f7367ea78206f3bc4d4c567"
+    snapshot_path: "flavor_catalog/references/CR012/pappadopulo_2014_hvt_arxiv1402_4431.txt"
+  - key: InternalQuarkScanMethodology_RUNA_47TeV
+    arxiv_id: null
+    DOI: null
+    title: "Internal quark-scan methodology note, RUNA M_KK crossing extract"
+    authors: "5D-Neutrino-Mixing authors"
+    year: 2026
+    url: "docs/quark_scan_methodology_note.tex"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4542d08c187d994eb6fb9ec171eae2e3d7019e4c3358b64257e7de91e81a8da9"
+    snapshot_path: "flavor_catalog/references/CR012/internal_quark_scan_methodology_extract.txt"

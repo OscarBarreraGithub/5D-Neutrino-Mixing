@@ -1,0 +1,21 @@
+Source snapshot for CR012
+Key: InternalQuarkScanMethodology_RUNA_47TeV
+Source type: internal repository text extract
+Local source: docs/quark_scan_methodology_note.tex
+Access date: 2026-05-17
+
+Extracted internal methodology text:
+The gs=3 headline crossings are M_KK = 47.26 TeV at 50% acceptance and
+127.13 TeV at 95% acceptance. The corresponding perturbative code-default
+crossings are 16.54 TeV and 44.50 TeV. These are quoted from the post-audit
+8M-draw RUNA reference scan under the input and scope conventions summarized
+in that note.
+
+High-statistics validation extract:
+The baseline RS-anarchy scan used 8 x 10^6 draws, yielding 1,532,640
+PDG-passing draws. The 50%-acceptance crossings are
+M_KK|min_50% = 16.54 TeV in the perturbative convention and 47.26 TeV in the
+gs = 3 convention. The 95%-acceptance crossings are 44.50 TeV and 127.13 TeV.
+The finite-Monte-Carlo Wilson-score intervals quoted in the note are
+47.19-47.32 TeV at 50% acceptance and 126.88-127.38 TeV at 95% acceptance
+for gs = 3.
