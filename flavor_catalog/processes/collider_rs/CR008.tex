@@ -1,0 +1,112 @@
+% Flavor catalog per-process template.
+% process_id: CR008
+% family: collider_rs
+% owner_agent_id: PKA-CR008
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR008.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(pp\to T\bar T\) Singlet VLQ \(T\to bW,tZ,tH\)}{pp to T Tbar singlet VLQ T to bW, tZ, tH}}
+
+\subsection*{Process}
+This entry covers direct LHC searches for QCD pair production of a charge
+\(+2/3\) vector-like top partner \(T\), treated as an electroweak singlet,
+\[
+  pp\to T\bar T,\qquad T\to bW,\ tZ,\ tH .
+\]
+It is the non-custodial singlet counterpart of heavier-partner searches in the
+custodial-RS collider family.  The experimentally standard singlet benchmark
+uses \({\cal B}(T\to Wb:Ht:Zt)=1/2:1/4:1/4\) at high mass.
+
+\subsection*{Current best limit(s)}
+The process-specific PDG/ATLAS benchmark limit is
+\[
+  m_T > 1.36~{\rm TeV}\quad (95\%~{\rm CL})
+\]
+for pair-produced isospin-singlet \(T\) quarks with
+\({\cal B}(T\to Wb:Ht:Zt)=1/2:1/4:1/4\).  The source is the ATLAS Run-2
+lepton+jets search using 140 fb\(^{-1}\) at \(\sqrt{s}=13\) TeV, recorded
+locally in \texttt{atlas\_2024\_arxiv2401\_17165.txt} and summarized in the
+PDG 2025 \(t'\) searches listing
+\texttt{pdg2025\_tprime\_vlq\_limits.txt}.
+
+The strongest broad-envelope Run-2 statement is the CMS leptonic-channel
+combination: \(T\bar T\) production is excluded for \(T\) masses up to
+1.54 TeV depending on branching fractions, and masses below 1.48 TeV are
+excluded for all decays to third-generation quarks.  This is not a single
+singlet branching-ratio point, but it is useful as a model-independent
+cross-check over the \(bW/tZ/tH\) branching triangle
+(\texttt{cms\_2023\_arxiv2209\_07327.txt}).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In warped models, a charge-\(2/3\) top partner is a direct handle on the
+fermionic top-sector resonance spectrum.  A singlet \(T\) search constrains a
+specific light-partner limit: QCD pair production is essentially set by
+\(m_T\), while the search interpretation depends on the assumed standard
+decays \(T\to bW,tZ,tH\) and on whether exotic or cascade decays are absent.
+For a non-custodial singlet top partner, the ATLAS benchmark maps to
+\(m_T>1.36\) TeV at 95\% CL under the standard singlet branching ratios.
+
+This is not competitive with the anarchic-flavor mass reach already implied by
+the low-energy catalog.  The quark-scan methodology note quotes the rc1.1
+headline crossing \(M_{KK}^{\mathrm{min},p50}=47.26\) TeV at \(g_*=3\).  A direct
+singlet-top-partner bound near 1.4--1.5 TeV therefore works mainly as a
+collider cross-check, as leverage for non-anarchic or alignment-tuned RS
+variants, or as a constraint on scenarios where the lightest fermion partner
+is parametrically lighter than the gauge KK scale.
+
+\subsection*{Post-2010 developments}
+The post-2010 history is driven by the LHC moving from Run-1 branching-fraction
+triangles to full Run-2 multichannel combinations.  The ATLAS 8 TeV
+lepton+jets search set \(T\)-mass lower limits over the \(bW/tZ/tH\) plane in
+the 715--950 GeV range.  CMS then used the first 13 TeV data with boosted
+jet-substructure techniques and obtained a singlet \(T\) limit of 860 GeV.
+With 35.9 fb\(^{-1}\), CMS combined single-lepton, same-sign dilepton, and
+multilepton channels and pushed \(T\) limits to 1.14--1.30 TeV depending on
+branching fractions.  ATLAS full Run-2 searches added complementary
+lepton+jets and large-\(E_T^{\rm miss}\) selections; the current singlet
+\(bW/tH/tZ=1/2:1/4:1/4\) point is 1.36 TeV from the 2024 lepton+jets search,
+while the CMS full Run-2 leptonic search gives the stronger 1.48 TeV
+all-branching-envelope statement.
+
+\subsection*{Constraint validity and model dependence}
+The mass limits are collider exclusions, not generic RS bounds.  They assume
+prompt pair-produced narrow vector-like quarks, standard decays to
+third-generation quarks plus \(W/Z/H\), and no sizable exotic modes such as
+cascade decays through additional composite-sector states.  Pair production is
+less coupling-dependent than single production, but the final-state acceptance
+is still branching-ratio dependent.  A model with displaced decays, large
+widths, light neutral states, non-third-generation couplings, or a compressed
+spectrum would need a dedicated reinterpretation.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO}.  Required greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no VLQ, top-partner, ATLAS/CMS direct-search, or recast
+implementation.  Adjacent evidence confirms the existing pipeline computes
+\(M_{KK}\) and low-energy filters only: \texttt{scanParams/scan.py:399}
+constructs \(M_{KK}=\xi_{KK}\Lambda_{\rm IR}\),
+\texttt{scanParams/scan.py:523}--\texttt{scanParams/scan.py:535} applies the
+\(\mu\to e\gamma\) filter, and \texttt{quarkConstraints/scan.py:377}--
+\texttt{quarkConstraints/scan.py:380} evaluates the quark \(\Delta F=2\)
+constraints.  There is no collider likelihood, cross-section limit, or
+branching-fraction-triangle filter.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A live constraint would require an external collider-recast
+layer: signal generation or tabulated cross sections, branching-ratio
+bookkeeping, acceptance and efficiency maps or full likelihoods, and validation
+against ATLAS/CMS exclusions.  Practical implementation would likely use or
+interface to CheckMATE, MadAnalysis5, SModelS, Rivet/Contur, or collaboration
+HEPData likelihood material rather than a lightweight in-repo formula.
+
+\subsection*{Key references}
+\texttt{PDG2025\_TprimeVLQ}; \texttt{ATLAS2024\_TsingletPair};
+\texttt{CMS2023\_VLQPairLeptonic}; \texttt{ATLAS2015\_VLQPair8TeV};
+\texttt{CMS2017\_VLQPairSingleLepton}; \texttt{CMS2018\_VLQPairLeptonic};
+\texttt{ATLAS2023\_VLQPairMET}; \texttt{AguilarSaavedra2009\_TopPartners};
+\texttt{AguilarSaavedraEtAl2013\_VLQHandbook};
+\texttt{LariEtAl2008\_ColliderFlavourHighQ}.

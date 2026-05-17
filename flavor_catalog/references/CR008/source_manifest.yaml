@@ -1,0 +1,113 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR008
+sources:
+  - key: PDG2025_TprimeVLQ
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group t' (4th Generation) Quark, Searches for, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-t-prime-quark.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:2fb885c6e9afe0493fcb192945ff15c4c26324a1ebe419826d6d2d445a7ef5e9"
+    snapshot_path: "flavor_catalog/references/CR008/pdg2025_tprime_vlq_limits.txt"
+  - key: ATLAS2024_TsingletPair
+    arxiv_id: "2401.17165"
+    DOI: "10.1016/j.physletb.2024.138743"
+    title: "Search for pair-production of vector-like quarks in lepton+jets final states containing at least one b-tagged jet using the Run 2 data from the ATLAS experiment"
+    authors: "ATLAS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2401.17165"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:6857ab7bf208d81f16852be25fc07d04a762789505084bc3a09aefb26b01b9b7"
+    snapshot_path: "flavor_catalog/references/CR008/atlas_2024_arxiv2401_17165.txt"
+  - key: CMS2023_VLQPairLeptonic
+    arxiv_id: "2209.07327"
+    DOI: "10.1007/JHEP07(2023)020"
+    title: "Search for pair production of vector-like quarks in leptonic final states in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2209.07327"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:54758c30e017fa03b4712d04ce2e6eb53e95ad1b10a5a50ef82308746c573701"
+    snapshot_path: "flavor_catalog/references/CR008/cms_2023_arxiv2209_07327.txt"
+  - key: ATLAS2023_VLQPairMET
+    arxiv_id: "2212.05263"
+    DOI: "10.1140/epjc/s10052-023-11790-7"
+    title: "Search for pair-produced vector-like top and bottom partners in events with large missing transverse momentum in pp collisions with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2212.05263"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0dfc139df5a8468162243915172d9af10e7e6541812b3870efe60ddee8c5a552"
+    snapshot_path: "flavor_catalog/references/CR008/atlas_2023_arxiv2212_05263.txt"
+  - key: CMS2018_VLQPairLeptonic
+    arxiv_id: "1805.04758"
+    DOI: "10.1007/JHEP08(2018)177"
+    title: "Search for vector-like T and B quark pairs in final states with leptons at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1805.04758"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:8faff1fbcef0e9ac5db296592ed05583b95553d1dbd6176f8f1ee7846400b0b7"
+    snapshot_path: "flavor_catalog/references/CR008/cms_2018_arxiv1805_04758.txt"
+  - key: CMS2018_TtoBW
+    arxiv_id: "1710.01539"
+    DOI: "10.1016/j.physletb.2018.01.077"
+    title: "Search for pair production of vector-like quarks in the bW bbar W channel from proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1710.01539"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:006a072cc944f5a5218e7f5159b22cb683a52b68ca78278833ac89b38a6190af"
+    snapshot_path: "flavor_catalog/references/CR008/cms_2018_arxiv1710_01539.txt"
+  - key: CMS2017_VLQPairSingleLepton
+    arxiv_id: "1706.03408"
+    DOI: "10.1007/JHEP11(2017)085"
+    title: "Search for pair production of vector-like T and B quarks in single-lepton final states using boosted jet substructure in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1706.03408"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:560a803264549954ff81e55f0147f1ac92da7041a257c46be64401c318c12a56"
+    snapshot_path: "flavor_catalog/references/CR008/cms_2017_arxiv1706_03408.txt"
+  - key: ATLAS2015_VLQPair8TeV
+    arxiv_id: "1505.04306"
+    DOI: "10.1007/JHEP08(2015)105"
+    title: "Search for production of vector-like quark pairs and of four top quarks in the lepton-plus-jets final state in pp collisions at sqrt(s)=8 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2015
+    url: "https://arxiv.org/abs/1505.04306"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9c84ca8782aab357d5ec8db09388999aa1563c7a2d08d93ada44d49cbbe7e507"
+    snapshot_path: "flavor_catalog/references/CR008/atlas_2015_arxiv1505_04306.txt"
+  - key: AguilarSaavedra2009_TopPartners
+    arxiv_id: "0907.3155"
+    DOI: "10.1088/1126-6708/2009/11/030"
+    title: "Identifying top partners at LHC"
+    authors: "J. A. Aguilar-Saavedra"
+    year: 2009
+    url: "https://arxiv.org/abs/0907.3155"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:3eb76c22271dd407430f7bd933637ba18c4fe4b8aa6704db719f4002d9972e85"
+    snapshot_path: "flavor_catalog/references/CR008/aguilar_saavedra_2009_arxiv0907_3155.txt"
+  - key: AguilarSaavedraEtAl2013_VLQHandbook
+    arxiv_id: "1306.0572"
+    DOI: "10.1103/PhysRevD.88.094010"
+    title: "A handbook of vector-like quarks: mixing and single production"
+    authors: "J. A. Aguilar-Saavedra, R. Benbrik, S. Heinemeyer, and M. Perez-Victoria"
+    year: 2013
+    url: "https://arxiv.org/abs/1306.0572"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:d2d04ee00c823c30f84d4176174681cd6f2f8a8affd4e6c7edfe2f3731ffc9f4"
+    snapshot_path: "flavor_catalog/references/CR008/aguilar_saavedra_et_al_2013_arxiv1306_0572.txt"
+  - key: LariEtAl2008_ColliderFlavourHighQ
+    arxiv_id: "0801.1800"
+    DOI: "10.1140/epjc/s10052-008-0713-4"
+    title: "Collider aspects of flavour physics at high Q"
+    authors: "T. Lari et al."
+    year: 2008
+    url: "https://arxiv.org/abs/0801.1800"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:d4f25fae5b175336d60f4b90d8c2aa1e4471fb7987475feebe62f0738f1e9d3b"
+    snapshot_path: "flavor_catalog/references/CR008/lari_et_al_2008_arxiv0801_1800.txt"
