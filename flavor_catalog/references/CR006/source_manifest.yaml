@@ -1,0 +1,93 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR006
+sources:
+  - key: PDG2025_WprimeSearches
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "W' Boson Searches"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-wprime-searches.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:78c2ad8e5581ed73dbcf298bfe192c719b6e47284504bb2b679854f22361d935"
+    snapshot_path: "flavor_catalog/references/CR006/pdg2025_wprime_searches.txt"
+  - key: ATLAS2019_WprimeLnu
+    arxiv_id: "1906.05609"
+    DOI: "10.1103/PhysRevD.100.052013"
+    title: "Search for a heavy charged boson in events with a charged lepton and missing transverse momentum from pp collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1906.05609"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:65499cf293766497eadebba122e19fc4b491f00c9044049bcc378b487db5a5a0"
+    snapshot_path: "flavor_catalog/references/CR006/atlas_2019_wprime_lnu_arxiv1906_05609.txt"
+  - key: CMS2022_WprimeLnu
+    arxiv_id: "2202.06075"
+    DOI: "10.1007/JHEP07(2022)067"
+    title: "Search for new physics in the lepton plus missing transverse momentum final state in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2022
+    url: "https://arxiv.org/abs/2202.06075"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:7f341586575cf112765fbd6e82f1e859dd3c77745073de261bc7880ba71523ee"
+    snapshot_path: "flavor_catalog/references/CR006/cms_2022_lnu_arxiv2202_06075.txt"
+  - key: CMS2024_WprimeTbLeptonic
+    arxiv_id: "2310.19893"
+    DOI: "10.1007/JHEP05(2024)046"
+    title: "Search for W' bosons decaying to a top and a bottom quark in leptonic final states in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2310.19893"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b699d14ea827d459b061673559e3569f0db83d749311d0143066a2bc7463a7dc"
+    snapshot_path: "flavor_catalog/references/CR006/cms_2024_wprime_tb_leptonic_arxiv2310_19893.txt"
+  - key: CMS2021_WprimeTbHadronic
+    arxiv_id: "2104.04831"
+    DOI: "10.1016/j.physletb.2021.136535"
+    title: "Search for W' bosons decaying to a top and a bottom quark at sqrt(s) = 13 TeV in the hadronic final state"
+    authors: "CMS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2104.04831"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:47ef5914da078d538a0f72f258cc2c8ab52213b88381450464ab96699f2556aa"
+    snapshot_path: "flavor_catalog/references/CR006/cms_2021_wprime_tb_hadronic_arxiv2104_04831.txt"
+  - key: ATLAS2018_WprimeTbLeptonJets
+    arxiv_id: "1807.10473"
+    DOI: "10.1016/j.physletb.2018.11.032"
+    title: "Search for vector-boson resonances decaying to a top quark and bottom quark in the lepton plus jets final state in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1807.10473"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:028e5b39c19057cdf987896db1282a36eda91bac31092ea40cfe42a54e2732de"
+    snapshot_path: "flavor_catalog/references/CR006/atlas_2018_wprime_tb_leptonjets_arxiv1807_10473.txt"
+  - key: ATLAS2018_WprimeTbHadronic
+    arxiv_id: "1801.07893"
+    DOI: "10.1016/j.physletb.2018.03.036"
+    title: "Search for W' -> tb decays in the hadronic final state using pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1801.07893"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:7b6c51a0dd9bbf7666bb7b8ce0afa296ce661f287678f4ed03170d778a99b5da"
+    snapshot_path: "flavor_catalog/references/CR006/atlas_2018_wprime_tb_hadronic_arxiv1801_07893.txt"
+  - key: Agashe2008_WarpedChargedGauge
+    arxiv_id: "0810.1497"
+    DOI: "10.1103/PhysRevD.80.075007"
+    title: "LHC Signals for Warped Electroweak Charged Gauge Bosons"
+    authors: "Kaustubh Agashe, Shrihari Gopalakrishna, Tao Han, Gui-Yu Huang, Amarjit Soni"
+    year: 2008
+    url: "https://arxiv.org/abs/0810.1497"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:cc330a863b8d72da41472d2e74b0a7a879521aadf683a02dd0dcd9dd1051b4f0"
+    snapshot_path: "flavor_catalog/references/CR006/agashe_2008_warped_charged_gauge_arxiv0810_1497.txt"
+  - key: AgasheServant2004_WarpedUnification
+    arxiv_id: "hep-ph/0403143"
+    DOI: "10.1103/PhysRevLett.93.231805"
+    title: "Warped Unification, Proton Stability and Dark Matter"
+    authors: "Kaustubh Agashe and Geraldine Servant"
+    year: 2004
+    url: "https://arxiv.org/abs/hep-ph/0403143"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:a7bfafaf4ba7198f93610c425c960ec653b56645e3ba9cd2165f1eec6e6764c9"
+    snapshot_path: "flavor_catalog/references/CR006/agashe_servant_2004_arxiv_hepph0403143.txt"

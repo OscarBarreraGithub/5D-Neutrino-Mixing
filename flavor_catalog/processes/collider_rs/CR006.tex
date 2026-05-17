@@ -1,0 +1,155 @@
+% Flavor catalog per-process entry.
+% process_id: CR006
+% family: collider_rs
+% owner_agent_id: PKA-CR006
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR006.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{CR006: Charged-current high-mass resonance (KK \(W\))}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(pp \to W^{(1)}_{\rm KK} \to \ell\nu,\,tb\).
+This entry covers direct LHC searches for a heavy charged vector resonance,
+using sequential-Standard-Model \(W'\) limits as the experimental proxy and
+interpreting them cautiously for custodial-RS charged electroweak KK gauge
+bosons.  The clean leptonic channel is \(\ell\nu\), usually \(e\nu\) or
+\(\mu\nu\).  The third-generation channel is \(tb\), which is especially close
+to warped charged-gauge phenomenology because the charged KK vectors couple
+most strongly to IR-localized top and bottom fields.
+
+\subsection*{Current best limit(s)}
+The PDG 2025 \(W'\) searches review gives the canonical leptonic Run-2
+summary.  In the sequential Standard Model (SSM) benchmark, the strongest
+electron-channel lower limit is
+\[
+  M_{W'_{\rm SSM}} > 6.0~{\rm TeV}
+  \qquad (95\%~{\rm CL}),
+\]
+from the ATLAS \(pp\to W'\to e\nu\) search with the full 13 TeV Run-2 data
+set.  The strongest \(\mu\nu\) lower limit quoted by PDG is
+\[
+  M_{W'_{\rm SSM}} > 5.6~{\rm TeV}
+  \qquad (95\%~{\rm CL}),
+\]
+from the CMS 138 fb\(^{-1}\) \(e/\mu+\not{p}_T\) search.  The CMS primary
+paper also quotes a combined \(e+\mu\) SSM exclusion below \(5.7\) TeV; the
+sidecar keeps the PDG channel-specific \(6.0\) and \(5.6\) TeV numbers as the
+canonical values.
+
+For the \(tb\) decay channel, the latest full-Run-2 CMS leptonic search sets
+95\% CL lower bounds
+\[
+  M_{W'_R} > 4.3~{\rm TeV}, \qquad
+  M_{W'_L} > 3.9~{\rm TeV},
+\]
+under the narrow-width benchmark assumptions used in that analysis.  These
+are direct mass-exclusion values, not theory cross sections.  Local snapshots
+are in \texttt{flavor\_catalog/references/CR006/}, especially
+\texttt{pdg2025\_wprime\_searches.txt},
+\texttt{atlas\_2019\_wprime\_lnu\_arxiv1906\_05609.txt},
+\texttt{cms\_2022\_lnu\_arxiv2202\_06075.txt}, and
+\texttt{cms\_2024\_wprime\_tb\_leptonic\_arxiv2310\_19893.txt}.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This is a Wave-9 \textbf{PRIMARY} collider-RS entry, not a Wave-8 SECONDARY
+entry.  Its role is different from the low-energy flavor constraints already
+in the catalog.  The current quark-scan methodology note quotes the
+anarchic-flavor benchmark crossing
+\[
+  M_{\rm KK}^{\min}(p50,\; g_s^\star=3) = 47.26~{\rm TeV},
+\]
+with a 95\% acceptance crossing at \(127.13\) TeV.  Direct LHC searches for
+charged high-mass resonances therefore do not lead the constraint hierarchy
+in anarchic quark-flavor RS.  Instead, CR006 is a cross-check and a handle on
+non-anarchic or deliberately lighter custodial-RS spectra where the flavor
+bound is weakened, aligned, or not imposed.
+
+The mapping to an RS charged KK gauge boson is model-dependent.  The
+\(\ell\nu\) limits assume sizable couplings to light quarks and leptons, a
+light invisible neutrino final state, and the SSM-like production rate and
+branching ratio.  A realistic custodial \(W^{(1)}_{\rm KK}\) can have
+suppressed light-fermion couplings and enhanced \(tb\), \(WZ\), or \(Wh\)
+decays, so the SSM \(\ell\nu\) limit is usually an aggressive proxy rather
+than a literal \(M_{\rm KK}\) bound.  The \(tb\) searches are closer to the
+Agashe-style warped charged-gauge signal, but still require assumptions about
+the chiral coupling, total width, production coupling to initial-state light
+quarks, and whether the \(tb\) branching fraction is saturated.
+
+\subsection*{Post-2010 developments}
+The post-2010 LHC history is a progression from earlier and partial-Run-2
+searches to full-Run-2 leptonic and \(tb\) limits.
+
+ATLAS \(\ell\nu\), \texttt{arXiv:1906.05609}, is the key leptonic milestone:
+with 139 fb\(^{-1}\) at 13 TeV it pushed the SSM \(e\nu\) mass exclusion to
+6.0 TeV and provided the companion ATLAS \(\mu\nu\) channel bound.  CMS \(\ell\nu\),
+\texttt{arXiv:2202.06075}, used 138 fb\(^{-1}\) at 13 TeV and excluded a
+combined SSM \(W'\) below 5.7 TeV, while PDG records CMS as setting the
+strongest \(\mu\nu\)-specific 5.6 TeV limit.
+
+For \(W'\to tb\), ATLAS \texttt{arXiv:1801.07893} established a boosted
+all-hadronic Run-2 analysis with top-jet substructure.  ATLAS
+\texttt{arXiv:1807.10473} covered the lepton-plus-jets topology and combined
+it with the all-hadronic result, improving the right-handed benchmark reach.
+CMS \texttt{arXiv:2104.04831} updated the all-hadronic channel with full-Run-2
+data and deep-learning top/bottom tagging.  CMS
+\texttt{arXiv:2310.19893} is the current \(tb\) anchor for this entry: with
+138 fb\(^{-1}\), it excludes narrow left- and right-handed \(W'\) bosons below
+3.9 and 4.3 TeV, respectively, and also publishes width-dependent limits.
+
+\subsection*{Constraint validity / model dependence}
+The experimental exclusions are robust statements about their stated signal
+models.  Their RS reinterpretation is not automatic.  The leptonic SSM limits
+assume SM-like \(W'\) couplings to light quarks and charged leptons, an
+ordinary neutrino final state, and a line shape close to the benchmark used in
+the transverse-mass search.  They lose force in leptophobic or
+third-generation-philic RS variants, and they can shift if \(W'\)-SM \(W\)
+interference, heavy-neutrino decays, or large total widths are important.
+
+The \(tb\) limits are closer to custodial-RS charged-vector phenomenology, but
+they still assume a simplified chiral \(W'\) benchmark and a specified width.
+An RS implementation must compute the production coupling to the incoming
+partons, the \(tb\), \(WZ\), \(Wh\), and exotic-fermion branching fractions,
+and the detector-level acceptance before using these as hard scan cuts.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  Greps over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no \(W'\), \(W_{\rm KK}\), collider resonance,
+\(\ell\nu\), or \(tb\) direct-search implementation.  The only ATLAS/CMS-like
+hit in those paths is \texttt{tests/test\_alpha\_s.py:88--89}, a
+CMS/RunDec running-coupling example unrelated to collider limits.
+
+Adjacent evidence confirms that the scan stores \(M_{\rm KK}\) and evaluates
+low-energy constraints, not direct LHC searches:
+\texttt{quarkConstraints/scan.py:418--439} writes \(M_{\rm KK}\) and
+\(\Delta F=2\) ratios, \texttt{scanParams/scan.py:524--535} applies only the
+\(\mu\to e\gamma\) LFV check, and
+\texttt{quarkConstraints/deltaf2.py:316--560} matches and evaluates
+\(\Delta F=2\) Wilson coefficients at \(M_{\rm KK}\).
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A faithful CR006 implementation requires a collider
+reinterpretation layer rather than a new scalar observable formula: signal
+generation or tabulated production cross sections for the chosen custodial-RS
+charged vector, branching-ratio calculation including heavy fermion partners,
+finite-width and interference handling, detector acceptance, and a likelihood
+or limit recast.  A practical implementation would probably call an external
+recasting tool such as CheckMATE, MadAnalysis5, SModelS, or collaboration
+simplified-likelihood material rather than trying to reproduce the ATLAS/CMS
+selection internally.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2025\_WprimeSearches},
+\texttt{ATLAS2019\_WprimeLnu},
+\texttt{CMS2022\_WprimeLnu},
+\texttt{CMS2024\_WprimeTbLeptonic},
+\texttt{CMS2021\_WprimeTbHadronic},
+\texttt{ATLAS2018\_WprimeTbLeptonJets},
+\texttt{ATLAS2018\_WprimeTbHadronic},
+\texttt{Agashe2008\_WarpedChargedGauge}, and
+\texttt{AgasheServant2004\_WarpedUnification}.
