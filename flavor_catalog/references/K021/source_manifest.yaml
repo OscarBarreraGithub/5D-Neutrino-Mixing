@@ -1,0 +1,93 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: K021
+sources:
+  - key: PDG2025_KL_pi0emu
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group K_L0 listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:a6e37f9494c96044d4e84e41a1fe331d6cfd14208ac2b9d98ee1b0e9894e019a"
+    snapshot_path: "flavor_catalog/references/K021/pdg2025_kl_pi0emu.txt"
+  - key: KTeV2008_KL_pi0emu
+    arxiv_id: "0711.3472"
+    DOI: "10.1103/PhysRevLett.100.131803"
+    title: "Search for Lepton Flavor Violating Decays of the Neutral Kaon"
+    authors: "E. Abouzaid et al. (KTeV Collaboration)"
+    year: 2008
+    url: "https://arxiv.org/abs/0711.3472"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:e17b4f9fced043e63de388e8499dbe1a4d0ff779b4926d8727122ff26cada763"
+    snapshot_path: "flavor_catalog/references/K021/ktev_abouzaid_2008_arxiv0711_3472.txt"
+  - key: CFW2008_composite_pgh_flavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:8d37c01f459bb46451648ae219c59b9ff65ae1b821e3e3bdf37c27f18058cac0"
+    snapshot_path: "flavor_catalog/references/K021/csaki_falkowski_weiler_2008_arxiv0804_1954.txt"
+  - key: PerezRandall2008_warped_neutrinos
+    arxiv_id: "0805.4652"
+    DOI: "10.1088/1126-6708/2009/01/077"
+    title: "Natural Neutrino Masses and Mixings from Warped Geometry"
+    authors: "Gilad Perez and Lisa Randall"
+    year: 2008
+    url: "https://arxiv.org/abs/0805.4652"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:dff329928a373aa49189ff749a591bb5cb7f72cc5ea0df136fbae1a050439364"
+    snapshot_path: "flavor_catalog/references/K021/perez_randall_2008_arxiv0805_4652.txt"
+  - key: CrivellinDAmbrosioHoferichterTunstall2016_rare_kaon_lfv
+    arxiv_id: "1601.00970"
+    DOI: "10.1103/PhysRevD.93.074038"
+    title: "Lepton flavor (universality) violation in rare kaon decays"
+    authors: "Andreas Crivellin, Giancarlo D'Ambrosio, Martin Hoferichter, and Lewis C. Tunstall"
+    year: 2016
+    url: "https://arxiv.org/abs/1601.00970"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:c66a8119f1ee586a5ade26389d7b701881f8a74c769ef995410a709eecd7c9fd"
+    snapshot_path: "flavor_catalog/references/K021/crivellin_2016_arxiv1601_00970.txt"
+  - key: NA622021_Kplus_pi_mu_e
+    arxiv_id: "2105.06759"
+    DOI: "10.1103/PhysRevLett.127.131802"
+    title: "Search for lepton number and flavour violation in K+ and pi0 decays"
+    authors: "R. Aliberti et al. (NA62 Collaboration)"
+    year: 2021
+    url: "https://arxiv.org/abs/2105.06759"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd"
+    snapshot_path: "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt"
+  - key: AngelescuFaroughySumensari2020_lfv_dilepton_tails
+    arxiv_id: "2002.05684"
+    DOI: "10.1140/epjc/s10052-020-8210-5"
+    title: "Lepton Flavor Violation and Dilepton Tails at the LHC"
+    authors: "Andrei Angelescu, Darius A. Faroughy, and Olcyr Sumensari"
+    year: 2020
+    url: "https://arxiv.org/abs/2002.05684"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:87dc9aa92bbf30fdfd6073769ae106c329dc60e7aaad750abe9764a30c515246"
+    snapshot_path: "flavor_catalog/references/K021/angelescu_2020_arxiv2002_05684.txt"
+  - key: RoyValencia2024_highpt_rare_kaon_smeft
+    arxiv_id: "2410.05859"
+    DOI: null
+    title: "High-pT LHC constraints on SMEFT operators affecting rare kaon and hyperon decays"
+    authors: "Arnab Roy and German Valencia"
+    year: 2024
+    url: "https://arxiv.org/abs/2410.05859"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:66777472e7cbbc7c7a51980684fb0755fa156911b1b12d1fa23c34353c81ff0f"
+    snapshot_path: "flavor_catalog/references/K021/roy_valencia_2024_arxiv2410_05859.txt"
+  - key: DelzannoFuyutoGonzalezSolisMereghetti2024_mue_smeft
+    arxiv_id: "2411.13497"
+    DOI: null
+    title: "Global analysis of mu -> e interactions in the SMEFT"
+    authors: "Filippo Delzanno, Kaori Fuyuto, Sergi Gonzalez-Solis, and Emanuele Mereghetti"
+    year: 2024
+    url: "https://arxiv.org/abs/2411.13497"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:24e1a2bff1d0f37b71c4b27fd86fab83ba9c1f6e191c0bf30c405b6e3b20b4d1"
+    snapshot_path: "flavor_catalog/references/K021/delzanno_2024_arxiv2411_13497.txt"

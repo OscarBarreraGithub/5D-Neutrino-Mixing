@@ -1,0 +1,114 @@
+% Flavor catalog per-process entry.
+% process_id: K021
+% family: kaon
+% owner_agent_id: PKA-K021
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: K021.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{K021: \(K_L \to \pi^0 e^{\pm}\mu^{\mp}\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(K_L \to \pi^0 e^{\pm}\mu^{\mp}\).  This
+entry covers the lepton-family-number-violating neutral-kaon semileptonic
+decay, equivalently the summed charge-state mode
+\(\Gamma(\pi^0\mu^\pm e^\mp)/\Gamma_{\rm total}\) in the PDG \(K_L^0\)
+listing.
+
+\subsection*{PDG / equivalent value(s)}
+The canonical current limit is
+\[
+  {\cal B}(K_L\to\pi^0 e^{\pm}\mu^{\mp}) < 7.6\times10^{-11}
+  \qquad (90\%~{\rm CL}),
+\]
+from the PDG \(K_L^0\) listing, 2025 update, accessed 2026-05-17; see
+\texttt{flavor\_catalog/references/K021/pdg2025\_kl\_pi0emu.txt}.  PDG labels
+the entry \(LF\), gives the value for the sum of the indicated charge states,
+and lists the underlying input as the KTeV Abouzaid 2008 result.  The KTeV
+abstract reports the exact experiment limit
+\({\cal B}(K_L\to\pi^0\mu e)<7.56\times10^{-11}\) at \(90\%\) CL with no
+events in the signal region; PDG rounds this to \(7.6\times10^{-11}\).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+This is a \(\Delta S=1\), neutral-current LFV channel.  In an RS/anarchic
+flavor pipeline it is sensitive to products of flavor off-diagonal quark and
+lepton couplings, for example tree-level exchange of KK gauge bosons or
+flavor-violating \(Z\)-like states generating
+\((\bar s\gamma_\alpha d)(\bar e\gamma^\alpha\mu)\)-type operators.  The same
+fermion-localization profiles that set quark FCNCs also set the charged-lepton
+overlaps; in lepton-bulk variants the Perez--Randall seesaw/neutrino-Yukawa
+spurions control charged-LFV misalignment.  Dipole constraints such as
+\(\mu\to e\gamma\) probe a different operator class but constrain the same
+leptonic flavor sector, while scalar or Higgs-flavor contributions would need
+separate chirality and hadronic form-factor treatment.
+
+This Wave-8 entry is policy-tagged \textbf{SECONDARY}: it is a deferred
+lepton-bulk RS scope extension with lower implementation priority than the
+Wave-1--7 primary catalog, per the Wave-8 policy in
+\texttt{flavor\_catalog/PRIORITY\_TIERS.md} when present and the orchestrator
+runbook otherwise.
+
+\subsection*{Post-2008 developments}
+The direct neutral-mode experimental situation has not moved beyond KTeV in
+the PDG 2025 listing: the K021 limit remains the 2008 KTeV result.  The main
+post-2008 experimental development is adjacent rather than superseding: NA62
+reported 2017--2018 searches for \(K^+\to\pi^+\mu^-e^+\),
+\(K^+\to\pi^-\mu^+e^+\), and \(\pi^0\to\mu^-e^+\), setting
+\(90\%\)-CL limits at the \(10^{-11}\)--\(10^{-10}\) level and improving the
+charged-kaon and pion LFV reach by about one order of magnitude.
+
+The theory context changed more substantially.  Crivellin, D'Ambrosio,
+Hoferichter, and Tunstall (arXiv:1601.00970) formulated rare kaon LFV/LFU
+tests in terms of four-fermion operators for \(K\to\pi\ell\ell'\) and
+\(K\to\ell\ell'\).  Angelescu, Faroughy, and Sumensari (arXiv:2002.05684)
+gave numerical low-energy formulae for semileptonic LFV meson decays and
+showed how LHC dilepton tails complement flavor limits.  Roy and Valencia
+(arXiv:2410.05859) and Delzanno et al. (arXiv:2411.13497) updated the SMEFT
+perspective by matching rare-kaon/CLFV operators to high-\(p_T\), electroweak,
+and low-energy probes with RG running and operator correlations.
+
+\subsection*{Constraint validity and model dependence}
+The experimental upper limit is cleanly usable as a branching-ratio cap, but
+the RS interpretation is model-dependent.  A catalog implementation must choose
+an effective-operator basis, charge-state convention, \(K\to\pi\) vector and
+scalar form factors, and the mapping from 5D fermion localization to
+off-diagonal quark and lepton couplings.  There is no Standard Model
+long-distance amplitude to subtract at an observable level for LFV, but there
+is also no current repo machinery for the required \(\Delta S=1\) semileptonic
+LFV matching.  Correlations with \(K_L\to e^\pm\mu^\mp\),
+\(K^+\to\pi^+e^\pm\mu^\mp\), \(\mu\to e\gamma\), and \(\mu\to e\) conversion
+should be kept explicit.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required grep sweep across \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no K021 implementation and no
+generic \(s\to d e\mu\) semileptonic LFV surface.  Existing nearby code covers
+kaon \(\Delta F=2\) mixing, for example
+\texttt{quarkConstraints/deltaf2.py:1} and
+\texttt{quarkConstraints/deltaf2.py:615}, plus a separate \(\mu\to e\gamma\)
+NDA dipole check in \texttt{flavorConstraints/muToEGamma.py:1}; neither
+computes \(K_L\to\pi^0 e^\pm\mu^\mp\).
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  A pure EFT rate is standard once semileptonic LFV Wilson
+coefficients are supplied, but this repository does not yet have the needed
+\(\Delta S=1\) semileptonic operator basis, \(K\to\pi\) form-factor interface,
+or RS matching for simultaneous quark and lepton flavor violation.  Integrating
+K021 consistently with the existing RS scan would therefore require new
+cross-sector matching rather than only adding a numerical limit.
+
+\subsection*{Key references}
+Process-local source keys before bibliography consolidation:
+\texttt{PDG2025\_KL\_pi0emu},
+\texttt{KTeV2008\_KL\_pi0emu},
+\texttt{CFW2008\_composite\_pgh\_flavor},
+\texttt{PerezRandall2008\_warped\_neutrinos},
+\texttt{CrivellinDAmbrosioHoferichterTunstall2016\_rare\_kaon\_lfv},
+\texttt{NA622021\_Kplus\_pi\_mu\_e},
+\texttt{AngelescuFaroughySumensari2020\_lfv\_dilepton\_tails},
+\texttt{RoyValencia2024\_highpt\_rare\_kaon\_smeft}, and
+\texttt{DelzannoFuyutoGonzalezSolisMereghetti2024\_mue\_smeft}.
