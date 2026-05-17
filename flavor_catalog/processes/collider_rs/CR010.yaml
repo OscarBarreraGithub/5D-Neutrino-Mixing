@@ -1,0 +1,289 @@
+schema: flavor_catalog.process.v1
+process_id: CR010
+family: collider_rs
+standard_notation: "pp -> (T,B) (Tbar,Bbar) doublet -> mixed final states"
+process_name: "Pair production of VLQ doublet (T,B)"
+sub_class: "VLQ doublet"
+owner: "PKA"
+owner_agent_id: "PKA-CR010"
+writer_agent_id: null
+checker_agent_id: null
+opus_signoff_id: null
+status_history:
+  - state: "DRAFT"
+    timestamp: "2026-05-17T16:37:25-04:00"
+    from: null
+    to: "DRAFT"
+    at: "2026-05-17T16:37:25-04:00"
+    agent_id: "PKA-CR010"
+    reason: "Initial CR010 collider_rs PRIMARY source research and draft skeleton started."
+  - state: "WRITER-INITIATED"
+    timestamp: "2026-05-17T16:37:25-04:00"
+    from: "DRAFT"
+    to: "WRITER-INITIATED"
+    at: "2026-05-17T16:37:25-04:00"
+    agent_id: "PKA-CR010"
+    reason: "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+last_updated_at: "2026-05-17T16:37:25-04:00"
+version: "0.1.0"
+source_shas:
+  aguilar_saavedra_2009_arxiv0907_3155.txt: "sha256:a39adb142dbaf68819d9fb367f991fc85ca103b7cf48118621fe33104c935f18"
+  atlas_2018_arxiv1808_02343.txt: "sha256:c6885adeffea8c7f1248b4552bb2b700b055d7b62d0a98613d209c9cd2e31615"
+  atlas_2024_arxiv2401_17165.txt: "sha256:abbdc53ec6411254b6b7e1a8f8a79d4b7a0bb2d9657a1362515a20fcacb2dda3"
+  cms_2017_arxiv1706_03408.txt: "sha256:8c4d2cb370b23451502087668a90a7bb9787d1ae4ed440880b43cc35faf8c00f"
+  cms_2023_arxiv2209_07327.txt: "sha256:b6b6c2050657ed4e51731c19654ae120e702dbcb4dc2fbee3dd86e163283b0f1"
+  cms_review_2025_arxiv2405_17605.txt: "sha256:8646efa34fb54c2bace404311de4d741a70531916b6e3ccc81eed4fb8ddf6b36"
+  garberson_golling_2013_arxiv1301_4454.txt: "sha256:c1fc211e10e783c54c44b2a59c4cf39dc9345f258a464e96de256fdba4cddf29"
+  pdg2025_tprime_bprime_vlq_limits.txt: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+pdg_or_equivalent:
+  values:
+    - value_id: "PDG2025:CR010:TB_doublet_T_mass_lower_limit"
+      observable: "m_T lower limit for weak-isospin (T,B) doublet"
+      value: 1.37
+      uncertainty: null
+      units: "TeV"
+      display: "m_T > 1.37 TeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2018
+      source: "ATLAS Run-2 VLQ combination as listed in PDG 2025 t' searches"
+      source_key: "PDG2025_TprimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-t-prime-quark.pdf"
+      original_result_url: "https://arxiv.org/abs/1808.02343"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt"
+      sha256: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+      experiment: "ATLAS"
+      collider: "LHC"
+      model_assumption: "Weak-isospin (T,B) doublet with |V_Tb| << |V_tB|."
+    - value_id: "PDG2025:CR010:TB_doublet_B_mass_lower_limit"
+      observable: "m_B lower limit for weak-isospin (T,B) doublet"
+      value: 1.37
+      uncertainty: null
+      units: "TeV"
+      display: "m_B > 1.37 TeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2018
+      source: "ATLAS Run-2 VLQ combination as listed in PDG 2025 b' searches"
+      source_key: "PDG2025_BprimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+      original_result_url: "https://arxiv.org/abs/1808.02343"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt"
+      sha256: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+      experiment: "ATLAS"
+      collider: "LHC"
+      model_assumption: "Weak-isospin (T,B) doublet with |V_Tb| << |V_tB|."
+    - value_id: "PDG2025:CR010:T_to_Wb_100pct_mass_lower_limit"
+      observable: "m_T lower limit for B(T -> W b) = 1"
+      value: 1.70
+      uncertainty: null
+      units: "TeV"
+      display: "m_T > 1.70 TeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2024
+      source: "ATLAS lepton+jets Run-2 VLQ search as listed in PDG 2025 t' searches"
+      source_key: "PDG2025_TprimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-t-prime-quark.pdf"
+      original_result_url: "https://arxiv.org/abs/2401.17165"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt"
+      sha256: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+      experiment: "ATLAS"
+      collider: "LHC"
+      model_assumption: "Simplified individual T scenario with B(T -> W b) = 1; not a simultaneous (T,B)-doublet exclusion."
+    - value_id: "PDG2025:CR010:B_to_Hb_100pct_mass_lower_limit"
+      observable: "m_B lower limit for B(B -> H b) = 1"
+      value: 1.57
+      uncertainty: null
+      units: "TeV"
+      display: "m_B > 1.57 TeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2024
+      source: "CMS fully hadronic and Z->ll Run-2 VLQ search as listed in PDG 2025 b' searches"
+      source_key: "PDG2025_BprimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt"
+      sha256: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+      experiment: "CMS"
+      collider: "LHC"
+      model_assumption: "Simplified individual B scenario with B(B -> H b) = 1; not a simultaneous (T,B)-doublet exclusion."
+    - value_id: "PDG2025:CR010:B_to_Wt_100pct_mass_lower_limit"
+      observable: "m_B lower limit for B(B -> W t) = 1"
+      value: 1.56
+      uncertainty: null
+      units: "TeV"
+      display: "m_B > 1.56 TeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2023
+      source: "CMS leptonic Run-2 VLQ search as listed in PDG 2025 b' searches"
+      source_key: "PDG2025_BprimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+      original_result_url: "https://arxiv.org/abs/2209.07327"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt"
+      sha256: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+      experiment: "CMS"
+      collider: "LHC"
+      model_assumption: "Simplified individual B scenario with B(B -> W t) = 1; not a simultaneous (T,B)-doublet exclusion."
+    - value_id: "PDG2025:CR010:B_to_Zb_100pct_mass_lower_limit"
+      observable: "m_B lower limit for B(B -> Z b) = 1"
+      value: 1.54
+      uncertainty: null
+      units: "TeV"
+      display: "m_B > 1.54 TeV"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2024
+      source: "CMS fully hadronic and Z->ll Run-2 VLQ search as listed in PDG 2025 b' searches"
+      source_key: "PDG2025_BprimeListing"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt"
+      sha256: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+      experiment: "CMS"
+      collider: "LHC"
+      model_assumption: "Simplified individual B scenario with B(B -> Z b) = 1; not a simultaneous (T,B)-doublet exclusion."
+    - value_id: "CMS2023:CR010:T_all_third_generation_decays_uniform_lower_limit"
+      observable: "m_T lower limit valid for all T decays to third-generation quarks in the CMS leptonic VLQ scan"
+      value: 1.48
+      uncertainty: null
+      units: "TeV"
+      display: "m_T > 1.48 TeV for all decays to third-generation quarks"
+      limit_type: "lower_limit"
+      cl: "95% CL"
+      year: 2023
+      source: "CMS search for pair production of vector-like quarks in leptonic final states"
+      source_key: "CMS2023_VLQLeptonic"
+      source_url: "https://arxiv.org/abs/2209.07327"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/CR010/cms_2023_arxiv2209_07327.txt"
+      sha256: "sha256:b6b6c2050657ed4e51731c19654ae120e702dbcb4dc2fbee3dd86e163283b0f1"
+      experiment: "CMS"
+      collider: "LHC"
+      model_assumption: "Uniform lower edge over third-generation T branching-fraction plane; not a simultaneous (T,B)-doublet exclusion."
+supporting_measurements:
+  - label: "ATLAS 2018 combination dataset"
+    observable: "integrated luminosity"
+    value: 36.1
+    units: "fb^-1"
+    year: 2018
+    context: "Dataset descriptor for the canonical ATLAS (T,B)-doublet combination; not promoted to pdg_or_equivalent per CHK-1 carve-out."
+    source_key: "ATLAS2018_TBCombination"
+    source_url: "https://arxiv.org/abs/1808.02343"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR010/atlas_2018_arxiv1808_02343.txt"
+    sha256: "sha256:c6885adeffea8c7f1248b4552bb2b700b055d7b62d0a98613d209c9cd2e31615"
+  - label: "ATLAS 2018 combination collision energy"
+    observable: "sqrt(s)"
+    value: 13
+    units: "TeV"
+    year: 2018
+    context: "Dataset descriptor for the canonical ATLAS (T,B)-doublet combination; not promoted to pdg_or_equivalent per CHK-1 carve-out."
+    source_key: "ATLAS2018_TBCombination"
+    source_url: "https://arxiv.org/abs/1808.02343"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR010/atlas_2018_arxiv1808_02343.txt"
+    sha256: "sha256:c6885adeffea8c7f1248b4552bb2b700b055d7b62d0a98613d209c9cd2e31615"
+recent_experimental_inputs:
+  - key: "CMS2017_TBBoosted"
+    type: "experiment"
+    arxiv_id: "1706.03408"
+    why_matters: "First 13 TeV CMS boosted-object search in single-lepton final states; moved the doublet T reach to 830 GeV with 2015 data."
+    source_url: "https://arxiv.org/abs/1706.03408"
+    snapshot_path: "flavor_catalog/references/CR010/cms_2017_arxiv1706_03408.txt"
+    sha256: "sha256:8c4d2cb370b23451502087668a90a7bb9787d1ae4ed440880b43cc35faf8c00f"
+  - key: "ATLAS2018_TBCombination"
+    type: "experiment"
+    arxiv_id: "1808.02343"
+    why_matters: "Canonical current simultaneous weak-isospin (T,B)-doublet mass exclusion, m_T,m_B > 1.37 TeV at 95% CL."
+    source_url: "https://arxiv.org/abs/1808.02343"
+    snapshot_path: "flavor_catalog/references/CR010/atlas_2018_arxiv1808_02343.txt"
+    sha256: "sha256:c6885adeffea8c7f1248b4552bb2b700b055d7b62d0a98613d209c9cd2e31615"
+  - key: "CMS2023_VLQLeptonic"
+    type: "experiment"
+    arxiv_id: "2209.07327"
+    why_matters: "Full Run-2 CMS leptonic search; gives strong T/B simplified-branching limits and a uniform T lower edge over third-generation decays."
+    source_url: "https://arxiv.org/abs/2209.07327"
+    snapshot_path: "flavor_catalog/references/CR010/cms_2023_arxiv2209_07327.txt"
+    sha256: "sha256:b6b6c2050657ed4e51731c19654ae120e702dbcb4dc2fbee3dd86e163283b0f1"
+  - key: "ATLAS2024_VLQLeptonJets"
+    type: "experiment"
+    arxiv_id: "2401.17165"
+    why_matters: "Full Run-2 ATLAS lepton+jets search; gives the current PDG T->Wb simplified endpoint m_T > 1.70 TeV."
+    source_url: "https://arxiv.org/abs/2401.17165"
+    snapshot_path: "flavor_catalog/references/CR010/atlas_2024_arxiv2401_17165.txt"
+    sha256: "sha256:abbdc53ec6411254b6b7e1a8f8a79d4b7a0bb2d9657a1362515a20fcacb2dda3"
+paper_era_reference:
+  aguilar_saavedra_2009_lhc_top_partners:
+    source: "Aguilar-Saavedra 2009"
+    arxiv_id: "0907.3155"
+    source_type: "theoretical/search-taxonomy reference; not a pdg_or_equivalent measured observable"
+    relevance: "Defines LHC signals for vector-like T, B, X, Y quarks in singlet and doublet representations, including the (T,B) doublet."
+    source_url: "https://arxiv.org/abs/0907.3155"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR010/aguilar_saavedra_2009_arxiv0907_3155.txt"
+    sha256: "sha256:a39adb142dbaf68819d9fb367f991fc85ca103b7cf48118621fe33104c935f18"
+  garberson_golling_2013_branching_generalization:
+    source: "Garberson and Golling 2013"
+    arxiv_id: "1301.4454"
+    source_type: "post-2010 reinterpretation baseline; not the current measured observable"
+    relevance: "Early branching-fraction-plane reinterpretation including (T,B) doublets; useful for understanding model dependence of the limits."
+    source_url: "https://arxiv.org/abs/1301.4454"
+    access_date: "2026-05-17"
+    snapshot_path: "flavor_catalog/references/CR010/garberson_golling_2013_arxiv1301_4454.txt"
+    sha256: "sha256:c1fc211e10e783c54c44b2a59c4cf39dc9345f258a464e96de256fdba4cddf29"
+projection_inputs:
+  - key: "CMSReview2025_VLQ"
+    type: "review_and_projection_context"
+    arxiv_id: "2405.17605"
+    why_matters: "Current CMS Run-2 VLQ search review and HL-LHC discussion; included for context, not as a current measured limit."
+    source_url: "https://arxiv.org/abs/2405.17605"
+    snapshot_path: "flavor_catalog/references/CR010/cms_review_2025_arxiv2405_17605.txt"
+    sha256: "sha256:8646efa34fb54c2bace404311de4d741a70531916b6e3ccc81eed4fb8ddf6b36"
+source_notes:
+  rejected_prompt_arxiv_0708_0937: "The prompt-suggested del Aguila/Aguilar-Saavedra arXiv:0708.0937 was checked; the arXiv record resolves to an unrelated U-boson/HyperCP paper, so it was not cited."
+rs_context:
+  low_energy_mkk_reference:
+    source: "docs/quark_scan_methodology_note.tex"
+    evidence: "Lines 587-590 quote M_KK = 47.26 TeV at 50% acceptance and 127.13 TeV at 95% acceptance for g_s* = 3."
+    value: 47.26
+    units: "TeV"
+    context: "Internal low-energy flavor-envelope reference for comparing direct-collider reach; not a measured collider observable."
+code_coverage:
+  status: "NO"
+  searched_paths:
+    - quarkConstraints
+    - qcd
+    - flavorConstraints
+    - neutrinos
+    - yukawa
+    - warpConfig
+    - solvers
+    - scanParams
+    - tests
+  grep_commands:
+    - "rg -n \"vector[- ]?like|VLQ|Tbar|Bbar|t.?prime|b.?prime|top partner|bottom partner|custodial partner|heavy partner|collider_rs|CheckMATE|MadAnalysis|SModelS\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    - "rg -n \"ATLAS|CMS|LHC|collider|mass exclusion|95% CL|cross.?section upper|excluded at 95|pair.?produ\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+  findings:
+    - "No CR010/VLQ/vector-like/top-partner/bottom-partner/collider_rs implementation was found."
+    - "The ATLAS/CMS/LHC grep returned only tests/test_alpha_s.py:89, a CMS/RunDec alpha_s example unrelated to collider mass exclusions."
+    - "Adjacent scan code computes M_KK and Delta F=2 ratios but no collider filter: quarkConstraints/scan.py:359-441 records M_KK, deltaf2_passes, epsilon_k_ratio, b_d_mix_ratio, b_s_mix_ratio, d_mix_ratio, and passes_all."
+    - "Validation uses the same Delta F=2 summary without collider inputs: quarkConstraints/validation.py:108-145."
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: "A live CR010 constraint requires spectrum and branching-fraction matching plus a recast or simplified-likelihood layer; direct hard-coded mass cuts would miss the strong branching, width, mass-splitting, and cascade-dependence of LHC VLQ searches."
+constraint_validity:
+  experimental_status: "Observed LHC mass-exclusion limits; no significant excess in the cited searches."
+  model_dependence: "QCD pair production is robust, but acceptance and the mass limit depend on prompt decays, widths, branching fractions, mass degeneracy, and the absence of nonstandard RS cascades."
+  relevant_rs_parameters:
+    - "custodial-partner masses m_T and m_B"
+    - "branching fractions into Wb, Zt, Ht, Wt, Zb, Hb"
+    - "mapping between custodial fermion spectrum and gauge KK scale M_KK"
+open_issues:
+  - "WA/CA should decide whether to keep the simplified individual T/B endpoints in the CR010 prose or leave only the canonical 1.37 TeV doublet value."
+  - "A future implementation would need a shared collider_rs recast interface rather than per-process hard-coded mass thresholds."

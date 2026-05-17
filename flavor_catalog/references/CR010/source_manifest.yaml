@@ -1,0 +1,93 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR010
+sources:
+  - key: PDG2025_TprimeListing
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group t' (4th Generation) Quark, Searches for listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-t-prime-quark.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+    snapshot_path: "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt"
+  - key: PDG2025_BprimeListing
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group b' (4th Generation) Quark, Searches for listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680"
+    snapshot_path: "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt"
+  - key: ATLAS2018_TBCombination
+    arxiv_id: "1808.02343"
+    DOI: "10.1103/PhysRevLett.121.211801"
+    title: "Combination of the searches for pair-produced vector-like partners of the third-generation quarks at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1808.02343"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:c6885adeffea8c7f1248b4552bb2b700b055d7b62d0a98613d209c9cd2e31615"
+    snapshot_path: "flavor_catalog/references/CR010/atlas_2018_arxiv1808_02343.txt"
+  - key: ATLAS2024_VLQLeptonJets
+    arxiv_id: "2401.17165"
+    DOI: "10.1016/j.physletb.2024.138743"
+    title: "Search for pair-production of vector-like quarks in lepton+jets final states containing at least one b-tagged jet using the Run 2 data from the ATLAS experiment"
+    authors: "ATLAS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2401.17165"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:abbdc53ec6411254b6b7e1a8f8a79d4b7a0bb2d9657a1362515a20fcacb2dda3"
+    snapshot_path: "flavor_catalog/references/CR010/atlas_2024_arxiv2401_17165.txt"
+  - key: CMS2023_VLQLeptonic
+    arxiv_id: "2209.07327"
+    DOI: "10.1007/JHEP07(2023)020"
+    title: "Search for pair production of vector-like quarks in leptonic final states in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2209.07327"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b6b6c2050657ed4e51731c19654ae120e702dbcb4dc2fbee3dd86e163283b0f1"
+    snapshot_path: "flavor_catalog/references/CR010/cms_2023_arxiv2209_07327.txt"
+  - key: CMSReview2025_VLQ
+    arxiv_id: "2405.17605"
+    DOI: "10.1016/j.physrep.2024.09.012"
+    title: "Review of searches for vector-like quarks, vector-like leptons, and heavy neutral leptons in proton-proton collisions at sqrt(s) = 13 TeV at the CMS experiment"
+    authors: "CMS Collaboration"
+    year: 2025
+    url: "https://arxiv.org/abs/2405.17605"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:8646efa34fb54c2bace404311de4d741a70531916b6e3ccc81eed4fb8ddf6b36"
+    snapshot_path: "flavor_catalog/references/CR010/cms_review_2025_arxiv2405_17605.txt"
+  - key: CMS2017_TBBoosted
+    arxiv_id: "1706.03408"
+    DOI: "10.1007/JHEP11(2017)085"
+    title: "Search for pair production of vector-like T and B quarks in single-lepton final states using boosted jet substructure in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1706.03408"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:8c4d2cb370b23451502087668a90a7bb9787d1ae4ed440880b43cc35faf8c00f"
+    snapshot_path: "flavor_catalog/references/CR010/cms_2017_arxiv1706_03408.txt"
+  - key: GarbersonGolling2013_ExoticQuarks
+    arxiv_id: "1301.4454"
+    DOI: null
+    title: "Generalization of exotic quark searches"
+    authors: "F. Garberson and T. Golling"
+    year: 2013
+    url: "https://arxiv.org/abs/1301.4454"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:c1fc211e10e783c54c44b2a59c4cf39dc9345f258a464e96de256fdba4cddf29"
+    snapshot_path: "flavor_catalog/references/CR010/garberson_golling_2013_arxiv1301_4454.txt"
+  - key: AguilarSaavedra2009_TopPartners
+    arxiv_id: "0907.3155"
+    DOI: "10.1088/1126-6708/2009/11/030"
+    title: "Identifying top partners at LHC"
+    authors: "J. A. Aguilar-Saavedra"
+    year: 2009
+    url: "https://arxiv.org/abs/0907.3155"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:a39adb142dbaf68819d9fb367f991fc85ca103b7cf48118621fe33104c935f18"
+    snapshot_path: "flavor_catalog/references/CR010/aguilar_saavedra_2009_arxiv0907_3155.txt"

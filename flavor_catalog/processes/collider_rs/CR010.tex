@@ -1,0 +1,136 @@
+% Flavor catalog per-process template.
+% process_id: CR010
+% family: collider_rs
+% owner_agent_id: PKA-CR010
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR010.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{Pair Production of a Vector-Like \((T,B)\) Doublet}{Pair Production of a Vector-Like (T,B) Doublet}}
+
+\subsection*{Process}
+This entry covers direct LHC searches for QCD pair production of a
+vector-like quark doublet,
+\[
+  pp \to (T,B)(\bar T,\bar B) \to
+  (Wb,Zt,Ht)(Wt,Zb,Hb),
+\]
+with \(T\) carrying charge \(+2/3\) and \(B\) carrying charge \(-1/3\).
+The experimental analyses are usually reported as pair production of
+\(T\bar T\) and \(B\bar B\), with limits then interpreted in singlet or
+doublet branching-fraction scenarios.  The CR010 scope is the weak-isospin
+\((T,B)\) doublet and its mixed third-generation final states.
+
+\subsection*{Current best limit(s)}
+The canonical doublet-specific bound is the ATLAS Run-2 combination recorded
+in the PDG 2025 \(t'\) and \(b'\) listings:
+\[
+  m_T > 1.37~\mathrm{TeV}, \qquad
+  m_B > 1.37~\mathrm{TeV}
+  \quad (95\%~\mathrm{CL})
+\]
+for a weak-isospin \((T,B)\) doublet with \(|V_{Tb}|\ll |V_{tB}|\).  The
+same local PDG extract is stored as
+\texttt{flavor\_catalog/references/CR010/pdg2025\_tprime\_bprime\_vlq\_limits.txt}
+and the strict metadata live in \texttt{CR010.yaml}.
+
+Newer full-Run-2 searches set stronger bounds in simplified single-branching
+scenarios, but those are not simultaneous \((T,B)\)-doublet exclusions.  The
+PDG 2025 \(t'\) listing quotes \(m_T>1.70~\mathrm{TeV}\) for
+\(\mathcal B(T\to Wb)=1\) from ATLAS, while the \(b'\) listing quotes CMS
+limits \(m_B>1.57~\mathrm{TeV}\), \(1.56~\mathrm{TeV}\), and
+\(1.54~\mathrm{TeV}\) for \(\mathcal B(B\to Hb)=1\),
+\(\mathcal B(B\to Wt)=1\), and \(\mathcal B(B\to Zb)=1\), respectively.
+These simplified endpoints are useful reach markers; the \(1.37~\mathrm{TeV}\)
+ATLAS combination remains the cleanest current number for the explicit
+\((T,B)\) doublet assignment.
+
+\subsection*{Relevance to RS / anarchic-flavor pipeline}
+Custodial Randall--Sundrum models contain heavy vector-like fermion partners
+of the third generation, and the direct searches constrain those partner
+masses whenever the spectrum, charges, and prompt decays resemble the LHC
+simplified models.  The most robust piece is the QCD pair-production rate;
+the interpretation still depends on whether the first custodial partners are
+identified with the searched \(T\) and \(B\), whether they are approximately
+mass degenerate, and which of \(Wb,Zt,Ht,Wt,Zb,Hb\) saturate the branching
+fractions.
+
+For the anarchic-flavor scan in this repo, CR010 is a cross-check rather than
+the leading mass setter.  The quark-scan methodology note reports
+\(\Mkk^{\min}(p50,\gs=3)=47.26~\mathrm{TeV}\) for the low-energy
+\(\Delta F=2\) envelope, far above the \(1\)--\(2~\mathrm{TeV}\) direct VLQ
+partner reach.  Collider VLQ searches therefore matter most for non-anarchic
+or custodial spectra in which the low-energy flavor pressure is softened, or
+for diagnosing whether a nominally allowed point predicts third-generation
+partners that should already have been seen.
+
+\subsection*{Post-2010 developments}
+Early reinterpretation work after the theoretical VLQ search taxonomy showed
+how limits depend on branching fractions rather than only on a single decay
+mode.  Garberson--Golling used CMS multilepton data to quote a
+\((T,B)\)-doublet exclusion around \(640~\mathrm{GeV}\), establishing the
+branching-fraction-plane logic used by later searches.  CMS then moved to
+13 TeV boosted-object searches; the 2017 single-lepton analysis excluded
+doublet-scenario \(T\) masses below \(830~\mathrm{GeV}\).
+
+The major Run-2 consolidation was the ATLAS 2018 combination
+\texttt{arXiv:1808.02343}, which combined \(T\bar T\) and \(B\bar B\) channels
+and set the current doublet-specific \(1.37~\mathrm{TeV}\) mass limit.  Full
+Run-2 analyses then improved simplified-mode reach: CMS
+\texttt{arXiv:2209.07327} used single-lepton, same-sign dilepton, and
+multilepton final states with \(138~\mathrm{fb}^{-1}\), and ATLAS
+\texttt{arXiv:2401.17165} pushed the pure \(T\to Wb\) endpoint to
+\(1.70~\mathrm{TeV}\).  The CMS 2025 review \texttt{arXiv:2405.17605}
+summarizes the Run-2 VLQ search program and records the move toward combined
+and projection studies.
+
+\subsection*{Constraint validity / model dependence}
+The published pair-production limits assume prompt decays, narrow or
+analysis-compatible resonance widths, and decay topologies dominated by
+third-generation Standard Model bosons plus quarks.  The doublet limit also
+assumes the weak-isospin \((T,B)\) pattern and \(|V_{Tb}|\ll |V_{tB}|\); it is
+not a model-independent lower bound on every custodial-RS fermion.  Cascades
+through other KK states, compressed spectra, nonstandard decays, or large
+single-production contributions require a dedicated reinterpretation.
+
+For RS use, the collider observable is therefore best treated as a mass-limit
+surface conditional on spectrum and branching-fraction inputs, not as a
+single universal \(M_{KK}\) cut.  It constrains partner masses directly; only
+a model-specific spectrum calculation can translate that into a bound on the
+gauge KK scale or the flavor scan's \(\Mkk\).
+
+\subsection*{Code coverage in this repo}
+\textbf{NO}.  A refined grep for VLQ, vector-like, top-partner, bottom-partner,
+ATLAS/CMS collider-limit, and reinterpretation-tool keywords found no CR010
+implementation in \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, or
+\texttt{tests/}.  The only ATLAS/CMS-adjacent grep hit was
+\texttt{tests/test\_alpha\_s.py:89}, a CMS/RunDec \(\alpha_s\) example, not a
+collider constraint.
+
+Adjacent evidence confirms the gap.  \texttt{quarkConstraints/scan.py:359--441}
+computes \(\Mkk\), evaluates \(\Delta F=2\) constraints, and records
+\(\epsilon_K\), \(B_d\), \(B_s\), and \(D\)-mixing pass/fail ratios, with no
+ATLAS/CMS mass-exclusion gate.  \texttt{quarkConstraints/validation.py:108--145}
+uses the same \(\Delta F=2\) summary for benchmark validation.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A useful live CR010 constraint would need a spectrum-to-final-
+state map, branching fractions, efficiencies or simplified-likelihood inputs,
+and a recast layer such as CheckMATE, MadAnalysis5, or SModelS.  A hard-coded
+mass threshold would be misleading because the published exclusion changes
+substantially across branching fractions, mass splittings, widths, and
+nonstandard RS decay chains.
+
+\subsection*{Key references}
+\texttt{pdg2025\_tprime\_bprime\_vlq\_limits};
+\texttt{aguilar\_saavedra\_2009\_arxiv0907\_3155};
+\texttt{garberson\_golling\_2013\_arxiv1301\_4454};
+\texttt{cms\_2017\_arxiv1706\_03408};
+\texttt{atlas\_2018\_arxiv1808\_02343};
+\texttt{cms\_2023\_arxiv2209\_07327};
+\texttt{atlas\_2024\_arxiv2401\_17165};
+\texttt{cms\_review\_2025\_arxiv2405\_17605}.
