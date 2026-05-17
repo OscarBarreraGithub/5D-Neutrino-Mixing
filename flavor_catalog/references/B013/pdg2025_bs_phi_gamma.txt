@@ -1,0 +1,50 @@
+Source: Particle Data Group, B_s0 listing, 2025 update
+URL: https://pdg.lbl.gov/2025/listings/rpp2025-list-Bs-zero.pdf
+Access date: 2026-05-17
+Local extraction method: pdftotext minimal table extract
+
+Relevant extracted values:
+
+Summary-table line:
+  Gamma_159 phi gamma, Delta B = 1 weak neutral-current mode:
+  (3.4 +/- 0.4) x 10^-5
+
+Detailed listing:
+  Gamma(phi gamma) / Gamma_total
+  VALUE (units 10^-6)
+  Gamma_159 / Gamma
+  34 +/- 4 OUR AVERAGE
+  DUTTA 15, Belle e+e- -> Upsilon(5S): 36 +/- 5 +/- 7
+  AAIJ 13, LHCb pp at 7 TeV: 33.8 +/- 3.4 +/- 2.0
+
+  DUTTA 15 note:
+  Assumes the fraction of B_s(*) B_s(*) in bbar b events is
+  f_s = (17.2 +/- 3.0)%; the systematic uncertainty from f_s is
+  0.6 x 10^-5.
+
+  AAIJ 13 note:
+  Reports [Gamma(B_s0 -> phi gamma)/Gamma_total] /
+  [B(B0 -> K*(892)0 gamma)] = 0.81 +/- 0.04 +/- 0.07,
+  multiplied by B(B0 -> K*(892)0 gamma) = (4.18 +/- 0.25) x 10^-5.
+
+Time-dependent radiative entries:
+  S(B_s0 -> phi gamma) = 0.43 +/- 0.30 +/- 0.11
+  AAIJ 19AE, LHCb pp at 7, 8 TeV
+  Comment: measured in flavor-tagged time-dependent analysis.
+
+  C(B_s0 -> phi gamma) = 0.11 +/- 0.29 +/- 0.11
+  AAIJ 19AE, LHCb pp at 7, 8 TeV
+  Comment: measured in flavor-tagged time-dependent analysis.
+
+  A_Delta(B_s0 -> phi gamma) is the multiplicative coefficient of
+  the sinh(DeltaGamma t / 2) term in the B_s -> phi gamma decay-rate
+  time dependence.
+  A_Delta(B_s0 -> phi gamma) = -0.67 +0.37 -0.41 +/- 0.17
+  AAIJ 19AE, LHCb pp at 7, 8 TeV
+  Comment: measured in flavor-tagged time-dependent analysis, using
+  tagged and untagged events. This result updates AAIJ 17B with better
+  selection efficiency and other analysis improvements.
+
+Citation line in PDG PDF:
+  S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001
+  (2024) and 2025 update.

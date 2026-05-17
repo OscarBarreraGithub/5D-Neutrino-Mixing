@@ -1,0 +1,113 @@
+% Flavor catalog per-process draft.
+% process_id: B013
+% family: beauty
+% owner_agent_id: PKA-B013
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: B013.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{B013: \(B_s \to \phi\gamma\)}
+
+\subsection*{Process}
+\textbf{Standard notation:} \(B_s^0\to\phi(1020)\gamma\).
+This entry covers the exclusive radiative \(b\to s\gamma\) decay of the
+neutral \(B_s\) meson, including the branching fraction and the
+time-dependent photon-helicity observables \(S_{\phi\gamma}\),
+\(C_{\phi\gamma}\), and \(A^\Delta_{\phi\gamma}\).
+
+\subsection*{PDG / equivalent value(s)}
+The PDG 2025 \(B_s^0\) listing gives
+\[
+  {\cal B}(B_s^0\to\phi\gamma)=(3.4\pm0.4)\times10^{-5},
+\]
+with local snapshot
+\texttt{flavor\_catalog/references/B013/pdg2025\_bs\_phi\_gamma.txt}.
+The HFLAV end-of-year 2024 rare-decay table gives the compatible average
+\[
+  {\cal B}(B_s^0\to\phi\gamma)=(34.0\pm3.2)\times10^{-6},
+\]
+from the LHCb and Belle inputs, with local snapshot
+\texttt{flavor\_catalog/references/B013/hflav\_rare\_decays\_dec2024\_bs\_phi\_gamma.txt}.
+The current time-dependent \(B_s^0\to\phi\gamma\) observables are from the
+LHCb 2019 flavor-tagged analysis,
+\[
+  S_{\phi\gamma}=0.43\pm0.30\pm0.11,\qquad
+  C_{\phi\gamma}=0.11\pm0.29\pm0.11,
+\]
+\[
+  A^\Delta_{\phi\gamma}=-0.67^{+0.37}_{-0.41}\pm0.17,
+\]
+where the first uncertainty is statistical and the second is systematic; see
+\texttt{flavor\_catalog/references/B013/lhcb\_2019\_bsphigamma\_cp\_arxiv.txt}
+and the PDG snapshot.
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+Wave-8 policy tags this entry as \textbf{SECONDARY}; see
+\texttt{flavor\_catalog/PRIORITY\_TIERS.md} for the intended priority-tier
+contract.  The physics motivation is direct: \(B_s^0\to\phi\gamma\) probes the
+electromagnetic dipole transition \(b\to s\gamma\), but with a helicity handle
+that the inclusive \(B\to X_s\gamma\) rate does not provide.  In anarchic RS
+or composite-Higgs variants, KK fermions, KK gauge bosons, and the Higgs
+sector can generate chirality-flipped dipole coefficients \(C_7'\) and
+\(C_8'\).  Those contributions may leave the inclusive rate close to the SM
+while shifting \(A^\Delta_{\phi\gamma}\) or \(S_{\phi\gamma}\), so this mode is
+a useful companion to B011 and B012.
+
+\subsection*{Post-2008 developments}
+The pre-LHC formalism source is Muheim--Xie--Zwicky, arXiv:0802.0876, which
+identified the \(B_s\) width difference as a way to measure the
+\(\sinh(\Delta\Gamma_s t/2)\) coefficient in \(B_s\to\phi\gamma\) and thereby
+probe right-handed photon amplitudes.  Belle measured
+\(B_s^0\to\phi\gamma\) at the \(\Upsilon(5S)\) in arXiv:1411.7771; this is one
+of the inputs to the modern PDG/HFLAV branching-fraction average.  LHCb's
+arXiv:1905.06284 measurement is the current time-dependent CP reference,
+giving the first \(S_{\phi\gamma}\) and \(C_{\phi\gamma}\) measurements in a
+radiative \(B_s\) decay and updating the earlier untagged
+\(A^\Delta_{\phi\gamma}\) result.  LHCb arXiv:2406.00235 added a Run-1/Run-2
+amplitude analysis of \(B_s^0\to K^+K^-\gamma\), clarifying resonant
+composition around the \(\phi(1020)\).  LHCb arXiv:2411.10219 uses the
+very-low-\(q^2\) \(B_s^0\to\phi e^+e^-\) angular distribution as a virtual
+photon-polarization cross-check.
+
+\subsection*{Constraint validity and model dependence}
+The branching fraction is experimentally established, but an exclusive
+constraint needs form-factor and spectator-amplitude conventions rather than
+only the inclusive \(C_7\) rate machinery.  The time-dependent observables are
+cleaner chirality probes, yet their use in a scan still requires a consistent
+mapping from RS dipole coefficients to \(C_7,C_7'\) and \(C_8,C_8'\), the
+\(B_s\)-mixing phase and width-difference conventions, and an exclusive
+\(B_s\to\phi\) amplitude model.  A catalog entry is therefore robust, while a
+hard likelihood is model-dependent until the dipole and exclusive-amplitude
+pipeline exists.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO.}  The required greps over \texttt{quarkConstraints/},
+\texttt{qcd/}, \texttt{flavorConstraints/}, \texttt{neutrinos/},
+\texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
+\texttt{scanParams/}, and \texttt{tests/} found no implementation of
+\(B_s^0\to\phi\gamma\), \(S_{\phi\gamma}\), \(A^\Delta_{\phi\gamma}\), or a
+quark-sector \(b\to s\gamma\) dipole likelihood.  The existing modern quark
+surface enumerates only \(\epsilon_K\), \(K\), \(B_d\), \(B_s\), and \(D^0\)
+neutral-meson mixing at \texttt{quarkConstraints/modern/phenomenology.py:23}.
+The dipole hit at \texttt{flavorConstraints/muToEGamma.py:75} is the unrelated
+charged-lepton \(\mu\to e\gamma\) check.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH.}  Production use needs new \(b\to s\gamma\) dipole matching,
+QCD running for \(C_7,C_7'\) and \(C_8,C_8'\), exclusive \(B_s\to\phi\)
+form-factor and resonance inputs, and a time-dependent \(B_s\) likelihood.
+The current \(\Delta F=2\) code does not supply that operator basis or
+observable layer.
+
+\subsection*{Key references}
+Process-local keys before bibliography consolidation:
+\texttt{PDG2025\_Bs\_phi\_gamma},
+\texttt{HFLAV2024\_rare\_decays\_Bs\_phi\_gamma},
+\texttt{LHCb2019\_Bs\_phi\_gamma\_CP},
+\texttt{Belle2014\_Bs\_phi\_gamma},
+\texttt{LHCb2024\_Bs\_KK\_gamma},
+\texttt{LHCb2024\_Bs\_phi\_ee\_photon\_polarisation},
+\texttt{MuheimXieZwicky2008\_Bs\_phi\_gamma}, and
+\texttt{CFW2008\_RS\_flavor}.

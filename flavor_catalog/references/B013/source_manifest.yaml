@@ -1,0 +1,83 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: B013
+sources:
+  - key: PDG2025_Bs_phi_gamma
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group B_s0 listing, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-Bs-zero.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:59578d3322132cba6e5047f85ec967b78bc4fbc5fa77bfe3124e1eede9269576"
+    snapshot_path: "flavor_catalog/references/B013/pdg2025_bs_phi_gamma.txt"
+  - key: HFLAV2024_rare_decays_Bs_phi_gamma
+    arxiv_id: null
+    DOI: null
+    title: "HFLAV rare decays, end of year 2024"
+    authors: "HFLAV Collaboration"
+    year: 2024
+    url: "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f"
+    snapshot_path: "flavor_catalog/references/B013/hflav_rare_decays_dec2024_bs_phi_gamma.txt"
+  - key: LHCb2019_Bs_phi_gamma_CP
+    arxiv_id: "1905.06284"
+    DOI: "10.1103/PhysRevLett.123.081802"
+    title: "Measurement of CP-violating and mixing-induced observables in B_s^0 -> phi gamma decays"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2019
+    url: "https://arxiv.org/abs/1905.06284"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba"
+    snapshot_path: "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt"
+  - key: Belle2014_Bs_phi_gamma
+    arxiv_id: "1411.7771"
+    DOI: "10.1103/PhysRevD.91.011101"
+    title: "Search for B_s^0 -> gamma gamma and a measurement of the branching fraction for B_s^0 -> phi gamma"
+    authors: "D. Dutta et al. (Belle Collaboration)"
+    year: 2014
+    url: "https://arxiv.org/abs/1411.7771"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:7e36d4d73efac319cbcf4b1711efa18aa872f7e786652c230acabeeb411688a3"
+    snapshot_path: "flavor_catalog/references/B013/belle_2014_bsphigamma_arxiv.txt"
+  - key: LHCb2024_Bs_KK_gamma
+    arxiv_id: "2406.00235"
+    DOI: "10.1007/JHEP08(2024)093"
+    title: "Amplitude analysis of the radiative decay B_s^0 -> K+ K- gamma"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2024
+    url: "https://arxiv.org/abs/2406.00235"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:7cbfba098c45a5d672a3eae00ea4f912302fc62f10ee3d8d59b583d0c96d3f96"
+    snapshot_path: "flavor_catalog/references/B013/lhcb_2024_bskkgamma_arxiv.txt"
+  - key: LHCb2024_Bs_phi_ee_photon_polarisation
+    arxiv_id: "2411.10219"
+    DOI: "10.1007/JHEP03(2025)047"
+    title: "Constraints on the photon polarisation in b -> s gamma transitions using B_s^0 -> phi e+e- decays"
+    authors: "R. Aaij et al. (LHCb Collaboration)"
+    year: 2024
+    url: "https://arxiv.org/abs/2411.10219"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738"
+    snapshot_path: "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt"
+  - key: MuheimXieZwicky2008_Bs_phi_gamma
+    arxiv_id: "0802.0876"
+    DOI: "10.1016/j.physletb.2008.05.032"
+    title: "Exploiting the width difference in B_s -> phi gamma"
+    authors: "Franz Muheim, Yuehong Xie, and Roman Zwicky"
+    year: 2008
+    url: "https://arxiv.org/abs/0802.0876"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9a71f9ac5206af44d09cc6084656020b0ae03ebd3334a038d721b0dfee2db729"
+    snapshot_path: "flavor_catalog/references/B013/muheim_xie_zwicky_2008_arxiv.txt"
+  - key: CFW2008_RS_flavor
+    arxiv_id: "0804.1954"
+    DOI: "10.1088/1126-6708/2008/09/008"
+    title: "The Flavor of the Composite Pseudo-Goldstone Higgs"
+    authors: "Csaba Csaki, Adam Falkowski, and Andreas Weiler"
+    year: 2008
+    url: "https://arxiv.org/abs/0804.1954"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:dccac5b39aa21a124a0ab5ccd30b9833ecbda5e8ca252ccd381ac2a25dfca083"
+    snapshot_path: "flavor_catalog/references/B013/cfw_2008_arxiv.txt"
