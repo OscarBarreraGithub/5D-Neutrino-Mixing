@@ -144,26 +144,38 @@ All 4 batches committed WRITER-DONE on first cycle (8/8 entries: 2x WRITER-DONE 
 | 3.c | WA-w8-B-radiative | 02:30 EDT | `bp11p6e5r` | B013/B014 | DONE (commit `2b23464`, WRITER-DONE) |
 | 3.d | WA-w8-T014 | 02:30 EDT | `bj3bejnp7` | T014 | DONE (commit `d198787`, WRITER-DONE) |
 
-### Stage 4: CA (4 batches, disjoint from WAs)
+### Stage 4: CA — DONE
 
-Each CA is a fresh codex session, ensuring writer/checker separation per
-AGENTIC_WORKFLOW §2. WA commits: `f9c7ff4` (kaon-LFV), `88f2cde`
-(B-rare-leptonic), `2b23464` (B-radiative), `d198787` (T014).
+Each CA is a fresh codex session (writer/checker separation per
+AGENTIC_WORKFLOW §2).
 
-| Stage | Agent ID | Started | Background ID | Output path | Status |
-|-------|----------|---------|---------------|-------------|--------|
-| 4.a | CA-w8-kaon-LFV | 02:47 EDT | `b64c0s7gq` (log `/tmp/wave8_logs/ca_kaon_LFV.log`) | K019/K020/K021 + `worklogs/checker/ca_w8_kaon_LFV.md` | DISPATCHED |
-| 4.b | CA-w8-B-rare-leptonic | 02:47 EDT | `by14g940i` (log `/tmp/wave8_logs/ca_B_rare_leptonic.log`) | B007/B008 + `worklogs/checker/ca_w8_B_rare_leptonic.md` | DISPATCHED |
-| 4.c | CA-w8-B-radiative | 02:47 EDT | `bq9ndu8bo` (log `/tmp/wave8_logs/ca_B_radiative.log`) | B013/B014 + `worklogs/checker/ca_w8_B_radiative.md` | DISPATCHED |
-| 4.d | CA-w8-T014 | 02:47 EDT | `by475c2ef` (log `/tmp/wave8_logs/ca_T014.log`) | T014 + `worklogs/checker/ca_w8_T014.md` | DISPATCHED |
+| Stage | Agent ID | Background ID | Cycle-1 result |
+|-------|----------|---------------|----------------|
+| 4.a | CA-w8-kaon-LFV | `b64c0s7gq` | K019 PASS, K020 **WRITER-REWORK** (CHK-1: Sher/E865 limit not in pdg_or_equivalent), K021 PASS — commit `41069e7` |
+| 4.b | CA-w8-B-rare-leptonic | `by14g940i` | B007/B008 PASS, all 9 checks — commit `e9fcdf3` |
+| 4.c | CA-w8-B-radiative | `bq9ndu8bo` | B013/B014 PASS, all 9 checks — commit `b3c35d7` |
+| 4.d | CA-w8-T014 | `by475c2ef` | T014 PASS, all 9 checks — commit `749d789` |
+
+### Stage 4b: Cycle-2 rework for K020 (only) — DONE
+
+Triggered by 4.a CHK-1 fail (legitimate, not L001 carve-out). Surgical
+fix per L001 / T003 precedent: promoted measured observable to
+`pdg_or_equivalent.values`.
+
+| Stage | Agent ID | Background ID | Result |
+|-------|----------|---------------|--------|
+| 4.e | WA-v2-K020 | `bwkk2ggxn` | DONE; added `Sher2005:K020:Kplus_piplus_mup_em_e865_only_limit` to pdg_or_equivalent.values, WRITER-DONE cycle 2 — commit `5c14d2f` |
+| 4.f | CA-v2-K020 | `bkdvi62ng` | PASS on all 9 checks; CHECKER-DONE cycle 2; `checker_passed_at: 2026-05-17T12:04:08-04:00` — commit `a20d75a` |
+
+**End-of-stage-4 state**: all 8 SECONDARY entries CHECKER-DONE.
 
 ### Stage 5: fact-check (3 family agents)
 
 | Stage | Agent ID | Started | Background ID | Output path | Status |
 |-------|----------|---------|---------------|-------------|--------|
-| 5.a | factcheck-codex-kaon-w8 | (pending) | — | `audits/factcheck_kaon.md` w8 addendum | PENDING |
-| 5.b | factcheck-codex-beauty-w8 | (pending) | — | `audits/factcheck_beauty.md` w8 addendum | PENDING |
-| 5.c | factcheck-codex-tophiggsew-w8 | (pending) | — | `audits/factcheck_top_higgs_ew.md` w8 addendum | PENDING |
+| 5.a | factcheck-codex-kaon-w8 | 12:05 EDT | `bvw124s2n` (log `/tmp/wave8_logs/factcheck_kaon.log`) | `audits/factcheck_kaon.md` w8 addendum | DISPATCHED |
+| 5.b | factcheck-codex-beauty-w8 | 12:05 EDT | `bj00yv7cx` (log `/tmp/wave8_logs/factcheck_beauty.log`) | `audits/factcheck_beauty.md` w8 addendum | DISPATCHED |
+| 5.c | factcheck-codex-tophiggsew-w8 | 12:05 EDT | `b23y427q9` (log `/tmp/wave8_logs/factcheck_top.log`) | `audits/factcheck_top_higgs_ew.md` w8 addendum | DISPATCHED |
 
 ### Stage 6: Opus sign-off
 
