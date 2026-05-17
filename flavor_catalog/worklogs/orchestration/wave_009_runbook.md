@@ -145,7 +145,42 @@ Logs in `/tmp/wave9_logs/pka_<ID>.log`.
 | 1.m | PKA-CR013 (Diphoton resonance) | `b2s3e8ll0` | `processes/collider_rs/CR013.{tex,yaml}` | DISPATCHED |
 | 1.n | PKA-CR014 (4-top production) | `b8xk0ehvo` | `processes/collider_rs/CR014.{tex,yaml}` | DISPATCHED |
 
-### Stage 2-7: TBD (will update as we go)
+### Stage 2-7: ALL DONE (see commit chain below)
+
+| Stage | Result |
+|---|---|
+| 2.a | scaffold2-w9 — `catalog_master.tex` + `collider_rs/index.tex` wired (commit `b96036b`) |
+| 3.a..d | 4 WA batches → 14/14 WRITER-DONE (commits `cd8a3fe`, `2286a39`, `c6d55b0`, `1eac13e`) |
+| 4.cycle-1 | 4 CA batches: 10 PASS (CR001-CR007, CR012-CR014); 4 WRITER-REWORK (CR008 CHK-1, CR009 CHK-1, CR010 CHK-1+CHK-2, CR011 CHK-2) — commits `e8daa00`, `7a6fa3d`, `bc35a06`, `e846f14` |
+| 4.cycle-2 | WA-v2 vlq_4top (CR008+CR010) commit `a8758ac`; WA-v2 ew_tail (CR009+CR011) commit `e1aec33`. CA-v2 vlq_4top commit `950ca36`; CA-v2 ew_tail commit `82daa9b`. T003 + B023 precedents applied — 14/14 CHECKER-DONE. |
+| 5.a | Fact-check collider_rs: 14/14 VERIFIED, 0 mismatches, 0 fetch exceptions (commit `0c5dacc`) |
+| 6.a | Opus round-5 (via Agent tool, `model: opus`): 14/14 APPROVE (commit `cdd0238`) |
+| 7.a | Master compile v0.4: 179 pages, 913 KB PDF (commit `2ad34b1`) |
+| 7.b | Tag `flavor-catalog-v0.4` annotated + pushed to origin |
+
+---
+
+## 6. Wave-9 close-out
+
+**Wave status: COMPLETE.** 14 new PRIMARY collider_rs entries drafted,
+polished, verified, fact-checked, signed off, compiled, tagged. New
+family `collider_rs/` is a new scope class opened by PI directive,
+complementary to (not replacing) the low-energy flavor entries.
+
+Catalog state at v0.4:
+- 94 PRIMARY (80 flavor Waves 1-7 + 14 collider_rs Wave-9) + 8 SECONDARY (Wave-8) = 102 total OPUS-APPROVED
+- 100 VERIFIED + 2 PARTIAL (E009 v0.2 + K020 v0.3 — both metadata-only, both accepted per E009 precedent; K020 was actually cleared in the v0.3 cleanup commits but v0.3 tag pins the original PARTIAL state)
+- Master PDF: 179 pages
+- Tag: `flavor-catalog-v0.4` on commit `2ad34b1`
+
+This runbook is now closed. A future Wave-10 should start a new runbook
+at `flavor_catalog/worklogs/orchestration/wave_010_runbook.md` using
+this one + the Wave-8 runbook as templates.
+
+Useful Wave-9 takeaways for future orchestrators:
+- 4-of-14 cycle-1 CA rework rate (~29%) is in line with Wave-8 (1-of-8 = ~13%) and Wave-1..6 historical rates. Collider entries have a slightly higher base rate of CHK-1 historical-numeral and CHK-2 citation-key issues than low-energy entries; both are cycle-2-fixable via T003 + B023 precedents.
+- The new family directory + new master TeX section pattern (Wave-9) is identical to the Wave-8 `processes/secondary/` pattern in structural mechanics, differing only in tier label and rationale. A future Wave-10 opening another scope class would use the same recipe.
+- Fact-check pass rate at 14/14 VERIFIED, 0 fetch exceptions is the cleanest of any wave to date. Likely because collider entries cite ATLAS / CMS arXiv abstracts and PDG live pages with WebFetch-friendly URLs (no JS-only INSPIRE renders or paywalled-only journals).
 
 ---
 

@@ -18,18 +18,18 @@ The structure below is **what to do if you have to pick this up tomorrow**.
 
 ---
 
-## 1. Final state at handoff (updated 2026-05-17 after Wave-8)
+## 1. Final state at handoff (updated 2026-05-17 after Wave-9)
 
 | Artifact | State |
 |---|---|
 | Branch | `flavor-catalog/2026q2` cut from `paper/quark-scan-2026q2` at rc1.1 |
-| Active processes | **88 total** — 80 PRIMARY (Waves 1–7) + 8 SECONDARY (Wave-8), all OPUS-APPROVED |
-| Deferred-scope | 51 plan-v1 Section C rows explicitly DEFERRED-SCOPE (minus the 8 promoted in Wave-8 = 43 still deferred) |
-| Out-of-scope | Direct collider tails (KK-gluon, VLQ, custodial-partner searches, high-p_T) |
-| Master PDF | `flavor_catalog/catalog_master.pdf`, **148 pages** (v0.3) |
-| Tags | `flavor-catalog-v0` (75) → `v0.1` (fact-checked) → `v0.2` (80, +Wave-7) → **`v0.3` (88, +Wave-8 SECONDARY)** |
+| Active processes | **102 total** — 94 PRIMARY (80 Waves 1–7 flavor + 14 Wave-9 collider_rs) + 8 SECONDARY (Wave-8), all OPUS-APPROVED |
+| Deferred-scope | 43 plan-v1 Section C rows still DEFERRED-SCOPE (51 original − 8 promoted in Wave-8) |
+| Out-of-scope (was) | Direct collider tails — **now IN-SCOPE via Wave-9** (custodial top partners, KK gauge resonances, VLQ, KK-graviton, EW-precision-tail) |
+| Master PDF | `flavor_catalog/catalog_master.pdf`, **179 pages** (v0.4) |
+| Tags | `flavor-catalog-v0` (75) → `v0.1` (fact-checked) → `v0.2` (80, +Wave-7) → `v0.3` (88, +Wave-8 SECONDARY) → **`v0.4` (102, +Wave-9 collider_rs PRIMARY)** |
 | Companion paper | `quarkscan-paper-rc1.1` on `paper/quark-scan-2026q2` (frozen) |
-| Priority policy | `flavor_catalog/PRIORITY_TIERS.md` (added in Wave-8). PRIMARY = `processes/<family>/`; SECONDARY = `processes/secondary/<family>/`. |
+| Priority policy | `flavor_catalog/PRIORITY_TIERS.md`. PRIMARY = `processes/<family>/`; SECONDARY = `processes/secondary/<family>/`. Wave-9 collider_rs is PRIMARY but in a new family — a new scope class opened by PI directive, not DA-deferred. |
 
 Most recent Opus round-4 sign-off: 8/8 SECONDARY APPROVE (K019, K020, K021,
 B007, B008, B013, B014, T014). See
@@ -64,7 +64,39 @@ SECONDARY entries are repo-structurally separated under
 `processes/secondary/<family>/` (PI request: easy to see + easy to
 separate later). The `priority_tier` YAML field plus the dedicated master
 PDF section give three independent ways to filter PRIMARY vs SECONDARY.
-Future Wave-9 follows the same recipe with `promoted_in_wave: 9`.
+
+## 1b. Wave-9 summary (2026-05-17)
+
+PI directive: "I think we should definitely have the custodial
+constraints. What are the other constraints which are just as valid as
+custodial? … lets get as many constraints as we can." Opened a new
+scope class: direct-collider RS-resonance / heavy-partner searches.
+
+| Stage | Result |
+|---|---|
+| Stage 0 | New family `processes/collider_rs/` + wave_009_runbook (commits `108cae4`, etc.). |
+| Stage 1 | 14 PKAs landed (CR001–CR014) covering KK-gluon→tt, custodial T_{5/3}/T'/B, KK-EW dilepton + KK-W + KK-graviton spin-2, VLQ singlet + doublet, DY EFT, longitudinal VBS, diboson + diphoton resonance, 4-top. |
+| Stage 2 | `catalog_master.tex` wired with new `\section{Collider RS Resonances}` (commit `b96036b`). |
+| Stage 3 | 4 WA batches polished cycle-1 (commits `cd8a3fe`, `2286a39`, `c6d55b0`, `1eac13e`). |
+| Stage 4 | 4 CA batches: 10/14 PASS cycle-1; 4 returned WRITER-REWORK (CR008/CR009 CHK-1 historical-numeral context; CR010 CHK-1 + CHK-2; CR011 CHK-2 citation-key mismatch). Two cycle-2 WA-v2 + CA-v2 batches (commits `a8758ac`+`950ca36`, `e1aec33`+`82daa9b`) cleared per T003 (remove historical numerals) + B023 (rename keys to manifest) precedents. End state: 14/14 CHECKER-DONE. |
+| Stage 5 | Fact-check: **14/14 VERIFIED, 0 mismatches, 0 fetch exceptions** (commit `0c5dacc`, `audits/factcheck_collider_rs.md`). |
+| Stage 6 | Opus round-5 sign-off: **14/14 APPROVE** (commit `cdd0238`, `signoff/round_005_index.md`). |
+| Stage 7 | Master compile v0.4: 179 pages, 913,614 bytes PDF (commit `2ad34b1`). Tag `flavor-catalog-v0.4` pushed. |
+
+Live wave state and decisions D-1..D-8:
+`flavor_catalog/worklogs/orchestration/wave_009_runbook.md`.
+
+Wave-9 sub-classes added:
+- **Custodial fermion partners** (CR002 T_{5/3}, CR003 T_{2/3}=T', CR004 B): iconic RS-distinguishing custodial signatures.
+- **KK gauge resonances** (CR001 KK-gluon→tt, CR005 KK-Z/γ dilepton, CR006 KK-W, CR007 KK-graviton spin-2): canonical LHC RS searches.
+- **VLQ + 4-top** (CR008 singlet T, CR010 doublet (T,B), CR014 4-top): non-custodial collider partners.
+- **EW-precision-tail** (CR009 DY high-mass EFT, CR011 W_LW_L scattering, CR012 diboson resonance, CR013 diphoton resonance): model-independent collider constraints with RS interpretation.
+
+Cumulative fact-check across all 102 entries:
+**100 VERIFIED / 2 PARTIAL / 0 MISMATCH / 0 FAILED.**
+The two PARTIALs are both metadata-only (E009 INSPIRE JS-only at v0.2,
+K020 NA62 author convention — cleared at v0.3 cleanup; v0.3 tag still
+pins the original PARTIAL state for historical accuracy).
 
 ---
 
