@@ -17,10 +17,6 @@ covers the charged-kaon lepton-flavor-violating semileptonic modes
 the kaon family.  It does not include the distinct lepton-number-violating
 \(K^+\to\pi^-\mu^+e^+\) mode.
 
-This Wave-8 entry is policy-tagged \textbf{SECONDARY}; see
-\texttt{flavor\_catalog/PRIORITY\_TIERS.md} when present, with the Wave-8
-prompt policy binding this draft.
-
 \subsection*{PDG / equivalent value(s)}
 The canonical current limits are the PDG Live / PDG API 2025 charged-kaon
 listing values, accessed 2026-05-17:
@@ -39,7 +35,9 @@ E777 data.  PDG identifier \(\texttt{S010.25}\) is the \(\mu^-e^+\) charge
 assignment and uses the NA62 2021 result.
 
 \subsection*{Relevance to the RS / anarchic-flavor pipeline}
-K020 is a charged-kaon LFV companion to the neutral-kaon LFV channel K019.  At
+This is a \textbf{SECONDARY} Wave-8 entry; see
+\texttt{flavor\_catalog/PRIORITY\_TIERS.md} for the tier policy.  K020 is a
+charged-kaon LFV companion to the neutral-kaon LFV channel K019.  At
 the quark level it probes \(\Delta S=1\) semileptonic LFV transitions
 \(s\to d\,e\mu\), not the already implemented \(\Delta F=2\) meson-mixing
 lane.  In a quark-only anarchic RS scan it is outside the minimal implemented
@@ -82,7 +80,7 @@ can dominate in many lepton-sector choices, but they do not eliminate the need
 for a semileptonic kaon rate when quark-flavor violation is present.
 
 \subsection*{Code coverage in this repo}
-\textbf{NO.}  The PKA searched \texttt{quarkConstraints/}, \texttt{qcd/},
+\textbf{NO.}  A repository search over \texttt{quarkConstraints/}, \texttt{qcd/},
 \texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
 \texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
 \texttt{tests/}.  The K020-specific grep found only generic LFV metadata and

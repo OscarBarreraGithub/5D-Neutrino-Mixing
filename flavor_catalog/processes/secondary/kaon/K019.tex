@@ -46,9 +46,9 @@ same lepton-bulk RS flavor story when the charged-lepton misalignment is not
 minimal-flavor-violating.
 
 \subsection*{Post-2008 developments}
-The PKA found no newer direct \(K_L\to e\mu\) branching-fraction limit in the
+No newer direct \(K_L\to e\mu\) branching-fraction limit appears in the
 PDG 2025 \(K_L^0\) listing; the BNL E871 result remains the canonical bound.
-Post-2008 work matters instead through model interpretation.  Buras et al.
+Post-2008 work matters mainly through model interpretation.  Buras et al.
 (\texttt{arXiv:1006.5356}) included \(K_L\to\mu e\) and
 \(K_L\to\pi^0\mu e\) in a broad charged-LFV pattern study, providing a useful
 template for comparing kaon LFV with charged-lepton and \(B\)-meson LFV
@@ -83,9 +83,13 @@ pseudoscalar, or Higgs-mediated operators dominate.
 \texttt{yukawa/}, \texttt{warpConfig/}, \texttt{solvers/},
 \texttt{scanParams/}, and \texttt{tests/} found no
 \(K_L\to e^{\pm}\mu^{\mp}\), \(s\to d e\mu\), or kaon semileptonic LFV
-implementation.  The adjacent code surfaces are a \(\mu\to e\gamma\) LFV
-dipole check and quark-only \(\Delta F=2\) kaon mixing, which are not this
-observable.
+implementation.  The nearby code surfaces are different observables:
+\texttt{flavorConstraints/muToEGamma.py:1} and
+\texttt{flavorConstraints/muToEGamma.py:15--21} document a
+\(\mu\to e\gamma\) dipole constraint,
+\texttt{scanParams/scan.py:523--535} consumes only that LFV check, and
+\texttt{quarkConstraints/deltaf2.py:610--624} defines neutral-kaon
+\(\Delta F=2\) inputs rather than a charged-LFV kaon decay.
 
 \subsection*{Implementation difficulty}
 \textbf{MEDIUM.}  The observable itself is experimentally clean, but the repo

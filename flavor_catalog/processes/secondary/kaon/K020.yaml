@@ -26,7 +26,16 @@ status_history:
     at: "2026-05-17T02:12:51-04:00"
     agent_id: "PKA-K020"
     reason: "Initial PKA source extraction and draft deposit."
-last_updated_at: "2026-05-17T02:12:51-04:00"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T02:36:02-04:00"
+    agent: "WA"
+    cycle: 1
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T02:36:02-04:00"
+    agent_id: "WA"
+    reason: "WA-w8-kaon-LFV cycle-1 polish for Wave-8 SECONDARY kaon LFV batch."
+last_updated_at: "2026-05-17T02:36:02-04:00"
 version: "0.1.0"
 source_shas:
   pdg2025_kplus_lfv_semileptonic_api.txt: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
@@ -43,8 +52,10 @@ pdg_or_equivalent:
   access_date: "2026-05-17"
   snapshot_path: "flavor_catalog/references/K020/pdg2025_kplus_lfv_semileptonic_api.txt"
   sha256_of_local_snapshot: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
-  limits:
-    - observable: "BR(K+ -> pi+ mu+ e-)"
+  sha256: "sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787"
+  values:
+    - value_id: "PDG2025:K020:Kplus_piplus_mup_em_limit"
+      observable: "BR(K+ -> pi+ mu+ e-)"
       pdg_identifier: "S010.29"
       related_data_identifier: "S010R49"
       value: 1.3e-11
@@ -63,7 +74,8 @@ pdg_or_equivalent:
       doi: "10.1103/PhysRevD.72.012005"
       arxiv_id: "hep-ex/0502020"
       note: "PDG reports this as a combined BNL E865/E777 upper limit; the E865-only Sher 2005 limit is 2.1 x 10^-11 at 90% CL."
-    - observable: "BR(K+ -> pi+ mu- e+)"
+    - value_id: "PDG2025:K020:Kplus_piplus_mum_ep_limit"
+      observable: "BR(K+ -> pi+ mu- e+)"
       pdg_identifier: "S010.25"
       related_data_identifier: "S010R39"
       value: 6.6e-11

@@ -26,8 +26,17 @@ status_history:
     at: "2026-05-17T02:14:00-04:00"
     agent_id: "PKA-K019"
     reason: "initial PKA draft, sidecar, source snapshots, and worklog deposited"
+  - state: "WRITER-DONE"
+    timestamp: "2026-05-17T02:36:02-04:00"
+    agent: "WA"
+    cycle: 1
+    from: "WRITER-INITIATED"
+    to: "WRITER-DONE"
+    at: "2026-05-17T02:36:02-04:00"
+    agent_id: "WA"
+    reason: "WA-w8-kaon-LFV cycle-1 polish for Wave-8 SECONDARY kaon LFV batch."
 
-last_updated_at: "2026-05-17T02:14:00-04:00"
+last_updated_at: "2026-05-17T02:36:02-04:00"
 version: "0.1.0"
 source_shas:
   ambrose_1998_arxiv_hepex9811038.txt: "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283"
@@ -54,6 +63,37 @@ pdg_or_equivalent:
   access_date: "2026-05-17"
   snapshot_path: "flavor_catalog/references/K019/pdg2025_kl_emu.txt"
   sha256: "sha256:b5797d539dbe6bc7e0ee3146b40dc297d3d73f8eb6c622fdd4bd77d882cf4a2a"
+  values:
+    - value_id: "PDG2025:K019:KL_emu_limit"
+      observable: "BR(K_L -> e^+/- mu^-/+)"
+      value: 4.7e-12
+      uncertainty: null
+      units: "dimensionless branching fraction"
+      display: "< 4.7 x 10^-12"
+      limit_type: "upper_limit"
+      cl: "90% CL"
+      year: 2025
+      source: "PDG Review of Particle Physics, K_L0 listing, 2025 update"
+      source_key: "PDG2025_KL_emu"
+      source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/K019/pdg2025_kl_emu.txt"
+      sha256: "sha256:b5797d539dbe6bc7e0ee3146b40dc297d3d73f8eb6c622fdd4bd77d882cf4a2a"
+    - value_id: "Ambrose1998:K019:KL_emu_limit"
+      observable: "BR(K_L -> e^+/- mu^-/+)"
+      value: 4.7e-12
+      uncertainty: null
+      units: "dimensionless branching fraction"
+      display: "< 4.7 x 10^-12"
+      limit_type: "upper_limit"
+      cl: "90% CL"
+      year: 1998
+      source: "Ambrose et al. (BNL E871), Phys. Rev. Lett. 81, 5734 (1998)"
+      source_key: "Ambrose1998_KL_emu"
+      source_url: "https://arxiv.org/abs/hep-ex/9811038"
+      access_date: "2026-05-17"
+      snapshot_path: "flavor_catalog/references/K019/ambrose_1998_arxiv_hepex9811038.txt"
+      sha256: "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283"
   experiment_input:
     label: "BNL E871 final limit"
     experiment: "BNL E871"
@@ -62,14 +102,18 @@ pdg_or_equivalent:
     arxiv_id: "hep-ex/9811038"
     doi: "10.1103/PhysRevLett.81.5734"
     value: 4.7e-12
+    uncertainty: null
     limit_type: "upper_limit"
     cl: "90% CL"
+    year: 1998
     units: "dimensionless branching fraction"
+    access_date: "2026-05-17"
     snapshot_path: "flavor_catalog/references/K019/ambrose_1998_arxiv_hepex9811038.txt"
     sha256: "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283"
 supporting_measurements:
   - label: "BNL E871 event-count context"
     observable: "signal-like K_L -> mu e candidates"
+    year: 1998
     value: 0
     units: "events"
     context: "Experiment-analysis context for the limit; not promoted to pdg_or_equivalent per CHK-1 carve-out."
