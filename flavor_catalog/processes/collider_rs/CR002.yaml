@@ -34,7 +34,16 @@ status_history:
     agent_id: "WA"
     cycle: 1
     reason: "WA-w9-custodial cycle-1 polish for PRIMARY collider_rs batch; CHK-1 collider limit placement verified."
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-17T17:35:23-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-17T17:35:23-04:00"
+    agent_id: "CA"
+    cycle: 1
+    reason: "CA-w9-custodial cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w9_custodial.md."
 last_updated_at: "2026-05-17T17:10:13-04:00"
+checker_passed_at: "2026-05-17T17:35:23-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2018_arxiv1807_11883.txt: "sha256:700e58bb4698af6061919efed538b33f2bb93a66aff99aa98eaa119df6f8bf11"
