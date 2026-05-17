@@ -110,20 +110,28 @@ dispatched 2026-05-17 02:04 EDT.
 
 | Stage | Agent ID | Started | Background ID | Output path | Status |
 |-------|----------|---------|---------------|-------------|--------|
-| 1.a | PKA-K019 | 02:04 EDT | `bi755ba90` | `processes/secondary/kaon/K019.{tex,yaml}` | DISPATCHED |
-| 1.b | PKA-K020 | 02:04 EDT | `bzu9mclku` | `processes/secondary/kaon/K020.{tex,yaml}` | DISPATCHED |
-| 1.c | PKA-K021 | 02:04 EDT | `bjh9hox5j` | `processes/secondary/kaon/K021.{tex,yaml}` | DISPATCHED |
-| 1.d | PKA-B007 | 02:04 EDT | `b5fffrzza` | `processes/secondary/beauty/B007.{tex,yaml}` | DISPATCHED |
-| 1.e | PKA-B008 | 02:04 EDT | `bgmmjm93i` | `processes/secondary/beauty/B008.{tex,yaml}` | DISPATCHED |
-| 1.f | PKA-B013 | 02:04 EDT | `bjqgpgtf9` | `processes/secondary/beauty/B013.{tex,yaml}` | DISPATCHED |
-| 1.g | PKA-B014 | 02:04 EDT | `bomkm2ot3` | `processes/secondary/beauty/B014.{tex,yaml}` | DISPATCHED |
-| 1.h | PKA-T014 | 02:04 EDT | `bs3v54b0w` | `processes/secondary/top_higgs_ew/T014.{tex,yaml}` | DISPATCHED |
+| 1.a | PKA-K019 | 02:04 EDT | `bi755ba90` | `processes/secondary/kaon/K019.{tex,yaml}` | DONE (origin commit `e348a35`; tex 108L / yaml 169L / 12 refs) |
+| 1.b | PKA-K020 | 02:04 EDT | `bzu9mclku` | `processes/secondary/kaon/K020.{tex,yaml}` | DONE (origin commit `bab5bd0`; tex 113L / yaml 156L / 8 refs) |
+| 1.c | PKA-K021 | 02:04 EDT | `bjh9hox5j` | `processes/secondary/kaon/K021.{tex,yaml}` | DONE (origin commit `5b68b43`; tex 114L / yaml 180L / 11 refs) |
+| 1.d | PKA-B007 | 02:04 EDT | `b5fffrzza` | `processes/secondary/beauty/B007.{tex,yaml}` | DONE (origin commit `e6e1cc3`; tex 110L / yaml 220L / 9 refs) |
+| 1.e | PKA-B008 | 02:04 EDT | `bgmmjm93i` | `processes/secondary/beauty/B008.{tex,yaml}` | DONE (origin commit `2630168`; B_s 6.8e-3 / B_d 2.1e-3; tex 115L / yaml 200L / 11 refs) |
+| 1.f | PKA-B013 | 02:04 EDT | `bjqgpgtf9` | `processes/secondary/beauty/B013.{tex,yaml}` | DONE (origin commit `ebd066c`; tex 113L / yaml 253L / 10 refs) |
+| 1.g | PKA-B014 | 02:04 EDT | `bomkm2ot3` | `processes/secondary/beauty/B014.{tex,yaml}` | DONE (origin commit `17599d5`; tex 139L / yaml 383L / 14 refs) |
+| 1.h | PKA-T014 | 02:04 EDT | `bs3v54b0w` | `processes/secondary/top_higgs_ew/T014.{tex,yaml}` | DONE (origin commit `6b64a18`; tex 111L / yaml 218L / 9 refs) |
+
+**Stage-1 audit**: all 8 SECONDARY entries verified on origin. Every YAML
+carries `priority_tier: SECONDARY` and `promoted_in_wave: 8`. Cosmetic
+artefact: commit `37beabb` carries the K020 commit message but B013
+content (concurrent-commit race; content-correct, just mislabelled).
+Harmless — content is anchored by both `bab5bd0` (real K020) and `ebd066c`
+(real B013); the noisy commit is a no-op duplicate of B013 with a wrong
+message. Not worth a history rewrite.
 
 ### Stage 2: scaffold-2 (after PKAs)
 
 | Stage | Agent ID | Started | Background ID | Output path | Status |
 |-------|----------|---------|---------------|-------------|--------|
-| 2.a | master-tex-wire | (pending) | — | `catalog_master.tex` + 3 index.tex | PENDING |
+| 2.a | scaffold2-master-wire | (pending) | — | `catalog_master.tex` + 3 `processes/secondary/<family>/index.tex` | PENDING |
 
 ### Stage 3: WA (4 batches)
 
