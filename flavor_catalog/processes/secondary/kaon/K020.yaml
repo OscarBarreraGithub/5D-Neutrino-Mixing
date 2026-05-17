@@ -35,6 +35,15 @@ status_history:
     at: "2026-05-17T02:36:02-04:00"
     agent_id: "WA"
     reason: "WA-w8-kaon-LFV cycle-1 polish for Wave-8 SECONDARY kaon LFV batch."
+  - state: "WRITER-REWORK"
+    timestamp: "2026-05-17T02:51:59-04:00"
+    agent: "CA"
+    cycle: 1
+    from: "WRITER-DONE"
+    to: "WRITER-REWORK"
+    at: "2026-05-17T02:51:59-04:00"
+    agent_id: "CA"
+    reason: "CA-w8-kaon-LFV cycle-1 CHK-1 fail: K020.tex quotes Sher/E865-only BR(K+ -> pi+ mu+ e-) < 2.1 x 10^-11, but no dedicated pdg_or_equivalent.values entry carries value/year/units/source_url/access_date/sha256. See flavor_catalog/worklogs/checker/ca_w8_kaon_LFV.md."
 last_updated_at: "2026-05-17T02:36:02-04:00"
 version: "0.1.0"
 source_shas:

@@ -35,7 +35,17 @@ status_history:
     at: "2026-05-17T02:36:02-04:00"
     agent_id: "WA"
     reason: "WA-w8-kaon-LFV cycle-1 polish for Wave-8 SECONDARY kaon LFV batch."
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-17T02:51:59-04:00"
+    agent: "CA"
+    cycle: 1
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-17T02:51:59-04:00"
+    agent_id: "CA"
+    reason: "CA-w8-kaon-LFV cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w8_kaon_LFV.md."
 
+checker_passed_at: "2026-05-17T02:51:59-04:00"
 last_updated_at: "2026-05-17T02:36:02-04:00"
 version: "0.1.0"
 source_shas:
