@@ -1,0 +1,105 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!60!black}
+
+\setlength{\parskip}{2.5pt plus 0.5pt}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\begin{document}
+
+{\centering\Large\bfseries A Verification Pipeline for the 5D Flavor
+Constraint Catalog\par}
+{\centering\small 5D-Neutrino-Mixing catalog \texttt{v0.4} (2026-05-17)\par}
+\vspace{4pt}
+
+\textbf{What the catalog is.}
+A structured inventory of \textbf{102 flavor-physics constraints} on warped
+extra-dimensional (RS) parameter space: 80 low-energy entries (kaon, charm,
+beauty, top/Higgs/EW, charged-lepton LFV, EDM/neutrino), 14 direct-collider
+RS resonance entries (KK-gluon, KK gauge, KK-graviton, custodial top
+partners, VLQ, EW-precision tail), and 8 deferred-scope re-promotions.
+Each entry records the measured experimental value or limit with year,
+uncertainty, source URL, access date, and \texttt{sha256} of a tracked
+local text snapshot. Tags \verb|v0|, \verb|v0.1|, \verb|v0.2|, \verb|v0.3|,
+\verb|v0.4| pin reproducible states.
+
+\textbf{How processes were found.}
+Five independent mechanisms, layered.
+(i)~An overcomplete 128-entry seed list assembled from PDG, HFLAV/FLAG, and
+the core RS-flavor literature (Agashe--Contino--Pomarol,
+Csaki--Falkowski--Weiler, Perez--Randall).
+(ii)~10 PI-seed processes (Wave-1, physics judgment).
+(iii)~Four non-overlapping Discovery Agent rounds (DA-1..DA-4), each
+surveying a distinct slice of the literature against the running inventory.
+(iv)~An \emph{independent external reconciliation}: GPT Deep Research was
+handed the v0.1 catalog and the broader literature and surfaced 5 entries
+DA-4 had ambiguously closed (Wave-7: T003, T004, T008, T012, B012).
+(v)~Scope extensions: Wave-8 promoted 8 SECONDARY entries from the
+DA-deferred tail; Wave-9 opened a new \texttt{collider\_rs} family of 14
+PRIMARY entries under explicit PI directive.
+The convergence rule (two consecutive DA rounds finding $\le 1$ entry each)
+was met; 43 remaining plan rows carry \texttt{DEFERRED-SCOPE} tags with
+named promotion triggers---no silent drops.
+
+\textbf{How each entry is verified.}
+Every numerical claim survives a five-stage chain before approval.
+\textbf{(1)~Process Knowledge Agent} retrieves the canonical PDG / HFLAV /
+collaboration value and writes a local text snapshot with \texttt{sha256}.
+\textbf{(2)~Writer Agent} polishes prose and structured metadata.
+\textbf{(3)~Checker Agent}---in an \emph{independent} session, never the WA
+on the same batch---runs an 8-item checklist: every numerical claim traces
+to a structured \texttt{pdg\_or\_equivalent} block with year, uncertainty,
+URL, access date, \texttt{sha256}; every reference key resolves to a
+manifest entry; \texttt{status\_history} transitions legal; in-code coverage
+claims \texttt{grep}-match cited evidence; \LaTeX{} hygiene clean.
+\textbf{(4)~Fact-Check Agent}, also independent and equipped with WebFetch,
+\emph{re-fetches every cited URL}, verifies authors/title/year against the
+manifest, and verifies the specific numerical value appears in both the
+fetched page and the local snapshot.
+\textbf{(5)~Opus sign-off} reviews the chain and emits APPROVE /
+RETURN-TO-WA / ESCALATE-TO-PI, with a per-round verdict index committed to
+git. Writer/checker separation is non-negotiable; in a sister artifact two
+BLOCKER-class physics errors were caught only because the CA was genuinely
+independent.
+
+\textbf{Two concrete catches.}
+\emph{T020 ($h\to e\mu$).} The catalog recorded
+$\mathcal{B}(h\to e\mu) < 6.1\times 10^{-5}$. The fact-check WebFetch hit
+the live \href{https://arxiv.org/abs/1909.10235}{ATLAS source} and saw
+$<6.2\times 10^{-5}$ observed ($<5.9\times 10^{-5}$ expected). A
+one-digit slip, fixed and re-fact-checked. It is the \textbf{only}
+numerical mismatch caught across all 102 entries---exactly the class of
+error single-agent self-review cannot find.
+\emph{K020 ($K^+\to\pi^+ e^\pm\mu^\mp$).} The Checker Agent flagged that a
+measured upper limit ($<2.1\times 10^{-11}$ at 90\% CL, Sher / BNL E865)
+appeared in prose but was missing from the structured
+\texttt{pdg\_or\_equivalent.values} block. The Writer promoted it; the
+Checker re-verified on cycle-2. Without the writer/checker split, the
+number would have been citable but not structured-provenanced.
+
+\textbf{What you get.}
+\textbf{102 entries}: 94 PRIMARY (80 flavor + 14 collider RS) + 8
+SECONDARY. \textbf{5 Opus sign-off rounds, 102/102 APPROVE,
+0 RETURN-TO-WA, 0 ESCALATE-TO-PI.} \textbf{Fact-check: 100 VERIFIED /
+2 PARTIAL (both metadata-only, documented) / 0 MISMATCH / 0 FAILED.}
+Three arbitrations (L001; B001+B003; B021+B023) codified a CHK-1
+carve-out separating measured observables from theory-normalization
+scales and dataset descriptors; downstream batches applied it uniformly
+without re-litigation. Every source snapshot is tracked in git with
+\texttt{sha256}; \verb|git checkout <tag>| rebuilds the catalog from
+scratch with full provenance.
+
+{\sloppy\textbf{Pointers.} Playbook
+\texttt{flavor\_catalog/AGENTIC\_WORKFLOW.md};
+catalog PDF (v0.4, 179 pp.) \texttt{flavor\_catalog/catalog\_master.pdf};
+per-round verdicts \texttt{signoff/round\_NNN\_index.md};
+fact-check tables \texttt{audits/factcheck\_*.md}.\par}
+
+\end{document}
