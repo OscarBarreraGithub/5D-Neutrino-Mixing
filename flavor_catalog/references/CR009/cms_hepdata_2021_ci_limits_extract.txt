@@ -1,0 +1,29 @@
+Process: CR009
+Snapshot type: HEPData text extract
+Source URL: https://www.hepdata.net/record/ins1849964
+Access date: 2026-05-17
+HEPData DOI: 10.17182/hepdata.101186.v2
+
+Record:
+CMS, 2021, "Search for resonant and nonresonant new phenomena in high-mass
+dilepton final states at sqrt(s) = 13 TeV", JHEP 07 (2021) 208.
+
+HEPData abstract extract:
+The record states that the analysis uses 13 TeV pp collisions recorded in
+2016-2018 with up to 140 fb^-1, observes no significant deviation from the
+SM background expectation, and sets lower limits on the four-fermion
+contact-interaction ultraviolet cutoff parameter Lambda. The HEPData record
+summarizes the CI lower-limit range as 23.6--36.6 TeV; the CMS paper text
+and CMS public page give the rounded published range 23.8/23.9--36.4 TeV.
+
+Relevant HEPData tables:
+- Table 30: Limits on the CI scale Lambda in the dielectron channel.
+- Table 31: Limits on the CI scale Lambda in the dimuon channel.
+- Table 32: Limits on the CI scale Lambda for the combined channels.
+- Table 37: Data and background estimate for the CI limit calculation.
+- Table 39: Bin-by-bin correlation for the CI limit calculation.
+
+CR009 use:
+HEPData is used as structured support for the CMS CI-limit measurement and
+for the statement that a full reinterpretation would need binned
+likelihood-style information rather than only the headline Lambda bounds.

@@ -1,0 +1,141 @@
+% Flavor catalog per-process template.
+% process_id: CR009
+% family: collider_rs
+% owner_agent_id: PKA-CR009
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR009.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(pp\to \ell^+\ell^-\) High-Mass Tail Contact-Operator Bound}{pp to l+l- High-Mass Tail Contact-Operator Bound}}
+
+\subsection*{Process}
+This entry covers the neutral-current Drell--Yan high-mass tail,
+\(pp\to \ell^+\ell^-+X\) with \(\ell=e,\mu\), interpreted as a
+model-independent four-fermion contact interaction between light quarks and
+charged leptons.  The collider signature is a smooth excess or deficit in the
+dilepton invariant-mass distribution rather than a narrow resonance.
+
+\subsection*{Current best limit(s)}
+The current PDG summary of quark and lepton compositeness quotes the
+full-Run-2 ATLAS dielectron+dimuon contact-interaction limits as the highest
+single-experiment reach in the conventional \(g_{\rm contact}^2=4\pi\)
+normalization.  For the left-left model, ATLAS obtains
+\(\Lambda_{\rm LL}^{+}>35.8~\mathrm{TeV}\) for constructive interference and
+\(\Lambda_{\rm LL}^{-}>26.0~\mathrm{TeV}\) for destructive interference at
+95\% CL.  The same PDG paragraph gives \(\Lambda_{\rm RR}^{+}>35.5~\mathrm{TeV}\),
+\(\Lambda_{\rm RR}^{-}>26.5~\mathrm{TeV}\), \(\Lambda_{\rm LR}^{+}>32.5~\mathrm{TeV}\),
+and \(\Lambda_{\rm LR}^{-}>28.8~\mathrm{TeV}\)
+(\texttt{pdg2025\_compositeness\_extract.txt}).
+
+CMS provides the independent full-Run-2 cross-check using up to
+140~\(\mathrm{fb}^{-1}\) at 13 TeV.  Its published contact-interaction
+limits range from about \(23.8\)--\(23.9~\mathrm{TeV}\) to
+\(36.4~\mathrm{TeV}\), depending on the helicity current and interference
+sign (\texttt{cms\_2021\_arxiv2103\_02708.txt}).  The HEPData record supplies
+the structured limit tables and the binned inputs needed for any serious
+reinterpretation (\texttt{cms\_hepdata\_2021\_ci\_limits\_extract.txt}).
+
+\subsection*{Relevance to the RS / anarchic-flavor pipeline}
+In a 5D RS interpretation, this is primarily a constraint on neutral heavy
+vector exchange that induces semileptonic operators of the form
+\((\bar q\gamma_\mu q)(\bar\ell\gamma^\mu\ell)\).  It is not a direct
+KK-gluon mass limit, since a color-octet KK gluon does not mediate
+\(\ell^+\ell^-\) at tree level.  It constrains the electroweak KK tower, a
+\(Z^\prime\)-like custodial vector, or a more generic compositeness sector
+only after specifying the light-quark and lepton couplings.
+
+With the usual contact-interaction convention,
+\(4\pi/\Lambda^2 \sim |g_q g_\ell|/M_V^2\).  Therefore the ATLAS
+\(\Lambda_{\rm LL}^{+}>35.8~\mathrm{TeV}\) limit corresponds only
+schematically to
+\[
+  M_V \gtrsim \sqrt{|g_q g_\ell|/(4\pi)}\,35.8~\mathrm{TeV},
+\]
+not to a universal \(35.8~\mathrm{TeV}\) resonance mass bound.  For
+\(|g_q g_\ell|\sim 1\), this is an \(O(10~\mathrm{TeV})\) neutral-vector
+scale; for strongly coupled light fermions it can be higher, while for
+UV-localized light fermions it is weaker.  The quark-scan methodology note
+already finds the low-energy anarchic-flavor median scale
+\(\Mkk^{\min,p50}=47.26~\mathrm{TeV}\) at \(\gs=3\), with a
+95\%-acceptance crossing at \(127.13~\mathrm{TeV}\).  CR009 is therefore a
+cross-check and a handle on non-anarchic or non-universal RS variants, not the
+leading anarchic-flavor constraint.
+
+\subsection*{Post-2010 developments}
+The LHC history is a steady increase in energy, luminosity, and analysis
+sophistication.  ATLAS started with 7 TeV dielectron and dimuon data in
+arXiv:1112.4462, reaching \(O(10~\mathrm{TeV})\) in the LL isoscalar
+benchmark.  ATLAS then used the 8 TeV dilepton spectrum and
+forward-backward asymmetry in arXiv:1407.2410, raising the contact-scale
+range to \(15.4\)--\(26.3~\mathrm{TeV}\).  CMS's 8 TeV spectrum analysis
+in arXiv:1412.6302 provided comparable same-flavor contact limits and
+model-independent resonance information.
+
+Run 2 changed the reach.  ATLAS's first 13 TeV result with 3.2
+\(\mathrm{fb}^{-1}\), arXiv:1607.03669, already reached
+\(16.7\)--\(25.2~\mathrm{TeV}\).  The 36.1 \(\mathrm{fb}^{-1}\) ATLAS
+search, arXiv:1707.02424, pushed the model-dependent range to
+\(24\)--\(40~\mathrm{TeV}\).  CMS's 36 \(\mathrm{fb}^{-1}\) result,
+arXiv:1812.10443, reached \(20\)--\(32~\mathrm{TeV}\).  The current
+full-Run-2 anchors are ATLAS arXiv:2006.12946 and CMS arXiv:2103.02708.
+
+The SMEFT literature clarified how to use these tails.  Falkowski,
+Gonzalez-Alonso, and Mimouni compiled low-energy four-fermion constraints in
+arXiv:1706.03783, while later high-energy Drell--Yan SMEFT work treats the
+tails as energy-growing probes of semileptonic dimension-six operators
+(\texttt{smeft\_theory\_arxiv\_extracts.txt}).
+
+\subsection*{Constraint validity and model dependence}
+The quoted \(\Lambda\) limits are measured exclusions, but the map to RS is
+not model-independent.  The experimental interpretation assumes a particular
+helicity current, an interference sign, and the conventional
+\(g_{\rm contact}^2=4\pi\) normalization.  The CMS combination assumes a
+universal contact interaction for electrons and muons.  ATLAS and CMS also
+use different background strategies, and the high-mass tail is sensitive to
+PDF and electroweak corrections.
+
+For RS, the largest ambiguity is the light-fermion coupling pattern.  A
+minimal light-fermion UV localization suppresses the contact operator, while
+non-anarchic lepton localization, partial compositeness of light quarks, or an
+extra neutral vector with sizable dilepton branching can make the bound much
+more relevant.  EFT validity also requires the mediator to be heavier than the
+dilepton masses driving the fit; otherwise the correct object is a resonance
+or broad-resonance likelihood, not the contact-limit number alone.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO}.  The required grep over \texttt{quarkConstraints/}, \texttt{qcd/},
+\texttt{flavorConstraints/}, \texttt{neutrinos/}, \texttt{yukawa/},
+\texttt{warpConfig/}, \texttt{solvers/}, \texttt{scanParams/}, and
+\texttt{tests/} found no Drell--Yan, dilepton-tail, contact-interaction,
+collider-reinterpretation, CheckMATE, MadAnalysis5, SModelS, Delphes,
+Pythia, or MadGraph implementation.  The only \texttt{CMS} match was the
+unrelated RunDec alpha-s test at \texttt{tests/test\_alpha\_s.py:88}.
+
+Adjacent evidence shows that the scan computes \(M_{KK}\) and low-energy
+\(\Delta F=2\) ratios, not collider direct-search filters:
+\texttt{quarkConstraints/scan.py:359} maps \(\Lambda_{\rm IR}\) to \(M_{KK}\),
+\texttt{quarkConstraints/scan.py:376--380} evaluates flavor diagnostics and
+KK-gluon \(\Delta F=2\) constraints, and
+\texttt{quarkConstraints/deltaf2.py:320--324} states that the implemented
+Wilsons are tree-level KK-gluon-inspired \(\Delta F=2\) coefficients matched
+at \(M_{KK}\).
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  Recording the bound is easy; using it as a live scan
+constraint is not.  A faithful implementation would need either a public
+likelihood or a recreated binned dilepton-tail likelihood with correlations,
+PDF and electroweak systematics, an RS-to-SMEFT matching layer for the
+neutral electroweak KK vectors, and validity logic deciding when a point
+should be treated as a contact interaction rather than a resolved resonance.
+External reinterpretation infrastructure such as MadAnalysis5, CheckMATE, or
+a dedicated high-\(p_T\) SMEFT tool would be the pragmatic route.
+
+\subsection*{Key references}
+\texttt{PDG2025\_QuarkLeptonCompositeness};
+\texttt{ATLAS2020\_NonResonantDilepton};
+\texttt{CMS2021\_HighMassDilepton};
+\texttt{CMS2021\_HEPData\_CILimits};
+\texttt{FalkowskiGonzalezAlonsoMimouni2017\_SMEFT4F};
+\texttt{DawsonGiardinoIsmail2018\_DYSMEFT}.

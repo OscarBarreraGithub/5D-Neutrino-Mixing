@@ -1,0 +1,133 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR009
+sources:
+  - key: PDG2025_QuarkLeptonCompositeness
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Searches for Quark and Lepton Compositeness"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37"
+    snapshot_path: "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt"
+  - key: ATLAS2020_NonResonantDilepton
+    arxiv_id: "2006.12946"
+    DOI: "10.1007/JHEP11(2020)005"
+    title: "Search for new non-resonant phenomena in high-mass dilepton final states with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2020
+    url: "https://arxiv.org/abs/2006.12946"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:cd56f8c2c1c155051723b91995c317eb127efc3fbe78ae806a9ddb7677522c46"
+    snapshot_path: "flavor_catalog/references/CR009/atlas_2020_arxiv2006_12946.txt"
+  - key: CMS2021_HighMassDilepton
+    arxiv_id: "2103.02708"
+    DOI: "10.1007/JHEP07(2021)208"
+    title: "Search for resonant and nonresonant new phenomena in high-mass dilepton final states at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2103.02708"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:86d64fe46b86d3db0883b2bdcdb4cfec71c0908ae07165b5022b8c2c255dfd28"
+    snapshot_path: "flavor_catalog/references/CR009/cms_2021_arxiv2103_02708.txt"
+  - key: CMS2021_HEPData_CILimits
+    arxiv_id: "2103.02708"
+    DOI: "10.17182/hepdata.101186.v2"
+    title: "HEPData record for CMS high-mass dilepton search, CI limit tables"
+    authors: "CMS Collaboration"
+    year: 2021
+    url: "https://www.hepdata.net/record/ins1849964"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:280013778ae9413022a5d0cbc5dcbb5fb362bd531081d64c243faeea365e0590"
+    snapshot_path: "flavor_catalog/references/CR009/cms_hepdata_2021_ci_limits_extract.txt"
+  - key: ATLAS2012_7TeV_CI
+    arxiv_id: "1112.4462"
+    DOI: "10.1016/j.physletb.2012.04.026"
+    title: "Search for contact interactions in dilepton events from pp collisions at sqrt(s) = 7 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2012
+    url: "https://arxiv.org/abs/1112.4462"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0e6adb017fd4a65b07998d5c321c7c525de7c8b8d4ec50dc56b20e66de6b624c"
+    snapshot_path: "flavor_catalog/references/CR009/lhc_search_history_arxiv_abstracts.txt"
+  - key: ATLAS2014_8TeV_CI_ADD
+    arxiv_id: "1407.2410"
+    DOI: "10.1140/epjc/s10052-014-3134-6"
+    title: "Search for contact interactions and large extra dimensions in the dilepton channel using proton-proton collisions at sqrt(s) = 8 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2014
+    url: "https://arxiv.org/abs/1407.2410"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0e6adb017fd4a65b07998d5c321c7c525de7c8b8d4ec50dc56b20e66de6b624c"
+    snapshot_path: "flavor_catalog/references/CR009/lhc_search_history_arxiv_abstracts.txt"
+  - key: CMS2015_8TeV_Dilepton
+    arxiv_id: "1412.6302"
+    DOI: "10.1007/JHEP04(2015)025"
+    title: "Search for physics beyond the standard model in dilepton mass spectra in proton-proton collisions at sqrt(s) = 8 TeV"
+    authors: "CMS Collaboration"
+    year: 2015
+    url: "https://arxiv.org/abs/1412.6302"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0e6adb017fd4a65b07998d5c321c7c525de7c8b8d4ec50dc56b20e66de6b624c"
+    snapshot_path: "flavor_catalog/references/CR009/lhc_search_history_arxiv_abstracts.txt"
+  - key: ATLAS2016_13TeV_3fb
+    arxiv_id: "1607.03669"
+    DOI: "10.1016/j.physletb.2016.08.055"
+    title: "Search for high-mass new phenomena in the dilepton final state using proton-proton collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2016
+    url: "https://arxiv.org/abs/1607.03669"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0e6adb017fd4a65b07998d5c321c7c525de7c8b8d4ec50dc56b20e66de6b624c"
+    snapshot_path: "flavor_catalog/references/CR009/lhc_search_history_arxiv_abstracts.txt"
+  - key: ATLAS2017_13TeV_36fb
+    arxiv_id: "1707.02424"
+    DOI: "10.1007/JHEP10(2017)182"
+    title: "Search for new high-mass phenomena in the dilepton final state using 36 fb^-1 of proton-proton collision data at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1707.02424"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0e6adb017fd4a65b07998d5c321c7c525de7c8b8d4ec50dc56b20e66de6b624c"
+    snapshot_path: "flavor_catalog/references/CR009/lhc_search_history_arxiv_abstracts.txt"
+  - key: CMS2019_13TeV_36fb
+    arxiv_id: "1812.10443"
+    DOI: "10.1007/JHEP04(2019)114"
+    title: "Search for contact interactions and large extra dimensions in the dilepton mass spectra from proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1812.10443"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0e6adb017fd4a65b07998d5c321c7c525de7c8b8d4ec50dc56b20e66de6b624c"
+    snapshot_path: "flavor_catalog/references/CR009/lhc_search_history_arxiv_abstracts.txt"
+  - key: FalkowskiGonzalezAlonsoMimouni2017_SMEFT4F
+    arxiv_id: "1706.03783"
+    DOI: "10.1007/JHEP08(2017)123"
+    title: "Compilation of low-energy constraints on 4-fermion operators in the SMEFT"
+    authors: "Adam Falkowski, Martin Gonzalez-Alonso, Kin Mimouni"
+    year: 2017
+    url: "https://arxiv.org/abs/1706.03783"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4b987de74219295241b15648cbc37909da8ee02809a78109a4861d96b3a45d31"
+    snapshot_path: "flavor_catalog/references/CR009/smeft_theory_arxiv_extracts.txt"
+  - key: DawsonGiardinoIsmail2018_DYSMEFT
+    arxiv_id: "1811.12260"
+    DOI: null
+    title: "SMEFT and the Drell-Yan Process at High Energy"
+    authors: "S. Dawson, P. P. Giardino, A. Ismail"
+    year: 2018
+    url: "https://arxiv.org/abs/1811.12260"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4b987de74219295241b15648cbc37909da8ee02809a78109a4861d96b3a45d31"
+    snapshot_path: "flavor_catalog/references/CR009/smeft_theory_arxiv_extracts.txt"
+  - key: FarinaPanicoEtAl2016_EnergyHelpsAccuracy
+    arxiv_id: "1609.08157"
+    DOI: "10.1016/j.physletb.2017.01.014"
+    title: "Energy helps accuracy: electroweak precision tests at hadron colliders"
+    authors: "Marco Farina, Giuliano Panico, Duccio Pappadopulo, Joshua T. Ruderman, Riccardo Torre, Andrea Wulzer"
+    year: 2016
+    url: "https://arxiv.org/abs/1609.08157"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4b987de74219295241b15648cbc37909da8ee02809a78109a4861d96b3a45d31"
+    snapshot_path: "flavor_catalog/references/CR009/smeft_theory_arxiv_extracts.txt"

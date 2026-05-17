@@ -1,0 +1,31 @@
+Process: CR009
+Snapshot type: PDG text extract
+Source: Particle Data Group, "Searches for Quark and Lepton Compositeness"
+Source URL: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf
+Access date: 2026-05-17
+
+Relevant PDG 2025 extract, section on contact-interaction limits:
+
+The PDG review summarizes LHC limits on llqq contact-interaction scales
+from high-mass dielectron and dimuon data. It states that ATLAS, using a
+data-driven background estimate, obtains combined dielectron+dimuon 95% CL
+lower limits on Lambda of:
+
+- right-right model: 35.5 TeV for constructive interference, 26.5 TeV for
+  destructive interference;
+- left-left model: 35.8 TeV for constructive interference, 26.0 TeV for
+  destructive interference;
+- left-right model: 32.5 TeV for constructive interference, 28.8 TeV for
+  destructive interference.
+
+The same paragraph states that CMS, using a 140 fb^-1 13 TeV dataset, sets
+95% CL exclusion limits on llqq contact-interaction scales ranging from
+Lambda_LL > 23.9 TeV for destructive interference to Lambda_RR > 36.4 TeV
+for constructive interference.
+
+Interpretation note for CR009:
+These are measured exclusion limits. The contact-interaction normalization,
+helicity structure, and interference sign are model assumptions attached to
+the measurement and are recorded in the sidecar. Dataset luminosities and
+other run metadata are kept in supporting_measurements rather than promoted
+as separate pdg_or_equivalent observables.
