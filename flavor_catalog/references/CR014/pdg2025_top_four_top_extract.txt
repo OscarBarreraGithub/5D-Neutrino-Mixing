@@ -1,0 +1,266 @@
+61.2.2.6 Four top quarks
+BSM effects that modify top-quark couplings are particularly relevant in rare processes with
+small SM cross sections, such as tt̄tt̄ production, where they can notably enhance the rate or
+distort kinematic distributions. Because of its tiny SM cross section, this process is highly sensitive
+to such effects and is widely used in EFT fits to constrain four-fermion operators, especially the
+four-top-quark operator. While tt̄tt̄ production offers the cleanest and most sensitive probe due to
+its low SM background, other processes—such as high-energy tails of tt̄ production and other rare
+top-quark final states—also exhibit sensitivity to the same operators. Owing to this, the study of
+tt̄tt̄ production has attracted substantial theoretical and experimental interest in recent years.
+Given its heavy final state and extremely low production rate, the first searches for tt̄tt̄ production were conducted at a center-of-mass energy of 13 TeV. Similar to tt̄V analyses, these studies
+target multilepton channels to improve signal purity and rely extensively on multivariate techniques
+to separate signal from background. The large number of b-jets in the final state makes efficient and
+well-calibrated b-tagging crucial, together with high reconstruction efficiency and small systematic
+uncertainties for all final-state objects.
+Table 61.10 summarizes recent measurements. Throughout this review, quoted signal significances are taken directly from the corresponding publications; however, it should be noted that
+these are sometimes evaluated relative to different theoretical hypotheses. While this caveat applies broadly, it is particularly relevant for tt̄tt̄ production, where variations in the assumed signal
+theoretical cross section can lead to notably different significance estimates.
+CMS initiated the effort with a search in the one-lepton and two-lepton opposite-sign channels [219]. This was followed by the first measurement using events with two same-sign leptons
+or at least three leptons, which benefit from relatively low backgrounds but cover only a small
+fraction of the total branching ratio [220], achieving an observed (expected) significance of 2.6σ
+(2.7σ), approaching the threshold for evidence.
+ATLAS measured tt̄tt̄ production in the same-sign dilepton and trilepton channels [221]. The
+analysis was extended to include the one-lepton and opposite-sign dilepton channels, which are
+dominated by tt̄ + heavy-flavor backgrounds [222]. The combination of these channels yielded an
+observed (expected) significance of 4.7σ (2.6σ), providing the first evidence for the tt̄tt̄ production.
+CMS later reported evidence for tt̄tt̄ production using a complementary approach targeting the
+traditional tt̄ channels: DL, LJ, and AH final states [223]. Combining this result with the previous
+multilepton measurements further increased the overall significance to 4.0σ (expected 3.2σ).
+The first observations of tt̄tt̄ production were made following improvements in object reconstruction and analysis techniques. ATLAS reported the observation in events with two same-sign
+leptons or at least three leptons [224]. A graph neural network was employed to enhance signal-tobackground discrimination, and dedicated control regions were used to constrain dominant backgrounds. The observed (expected) significance reached 6.1σ (4.3σ). In addition, the measurement
+was interpreted to constrain the top-Higgs Yukawa coupling and EFT operator coefficients.
+CMS reported the observation of the tt̄tt̄ production process using events with two same-sign,
+three, or four charged leptons and multiple jets [225]. The analysis featured improved lepton and
+b-jet identification, as well as a multivariate classification based on a multi-class boosted decision
+tree, and achieved an observed (expected) significance of 5.6σ (4.9σ).
+The cross-sections measured by ATLAS and CMS are almost twice the SM prediction and
+1st December, 2025
+
+61. Top Quark
+
+30
+
+Table 61.9: Summary of tt̄γ cross-section measurements from Tevatron and LHC (see text for
+photon selection criteria).
+Experiment
+[Ref.]
+CDF [207]
+
+√
+
+s (TeV)
+
+1.96 (pp̄)
+
+Measurement
+
+Evidence for tt̄γ production
+σtt̄γ = 0.18 ± 0.08 pb
+σtt̄γ /σtt̄ = 0.024 ± 0.009
+
+ATLAS [208]
+
+7
+
+Observation of tt̄γ production with 5.3σ significance
+σ fid. (tt̄γ) × BR = 63+19
+−15 pb per lepton flavor
+
+ATLAS [209]
+
+8
+
+Fiducial cross section: σtt̄γ = 139 ± 18 fb
+
+CMS [211]
+
+8
+
+Normalized cross sections:
+Re+jets = (5.7 ± 1.8) × 10−4
+Rµ+jets = (4.7 ± 1.3) × 10−4
+Fiducial cross section: σtt̄γ = 244.9+9.1
+−8.6 pb
+
+ATLAS [212]
+
+13
+
+Fiducial cross section:
+σtt̄γ = 521 ± 42 fb LJ channel
+σtt̄γ = 69 ± 5 fb DL channel
+
+ATLAS [213]
+
+13
+
+Fiducial cross section:
+σtt̄γ = 39.6+2.7
+−2.3 fb DL eµ + γ channel
+
+ATLAS [214]
+
+13
+
+Fiducial cross section (LJ+DL):
+σtt̄γ = 319+16
+−15 fb – γ only radiated in production
+σtt̄γ = 788+38
+−37 fb
+ctZ , ctB and ctγ limits
+
+CMS [215]
+
+13
+
+Fiducial cross section:
+σtt̄γ = 798 ± 49 fb LJ channel
+ctZ and cItZ limits
+
+CMS [216]
+
+13
+
+Fiducial cross section:
+σtt̄γ = 174.4 ± 6.6 fb DL channel
+ctZ and cItZ limits
+
+CMS [217]
+
+13
+
+Fiducial cross section:
+σtt̄γ = 54 ± 5 fb DL channel
+R(tt̄γ/tt̄) = 0.0125 ± 0.0005
+AC = (−0.012 ± 0.042)%
+
+1st December, 2025
+
+61. Top Quark
+
+31
+
+compatible with it within 2 standard deviations.
+Table 61.10: Chronological summary of tt̄tt̄ production measurements at LHC at
+
+√
+
+s = 13 TeV.
+
+Experiment
+[Ref.]
+
+Lumi.
+(fb−1 )
+
+Topology
+
+Measurement
+(fb)
+
+Significance
+(obs/exp)
+
+CMS [219]
+
+35.8
+
+LJ, DL
+
+Search only
+
+—
+
+CMS [220]
+
+137
+
+Same-sign DL, ≥ 3 leptons
+
+σ = 12.6+5.8
+−5.2
+
+2.6σ / 2.7σ
+
+24+7
+−6
++17
+26−15
+24+7
+−6
+36+12
+−11
+
+ATLAS [221]
+
+139
+
+Same-sign DL, ≥ 3 leptons
+
+σ=
+
+ATLAS [222]
+
+139
+
+LJ, DL
+
+σ=
+
+ATLAS [222]
+
+139
+
+Combined channels
+
+σ=
+
+CMS [223]
+
+137
+
+LJ, DL, AH
+
+σ=
+
+CMS [223]
+
+137
+
+Combined channels
+
+σ = 17 ± 5
+
+4.0σ / 3.2σ
+
+ATLAS [224]
+
+140
+
+Same-sign DL, ≥ 3 leptons
+
+σ = 22.5+6.6
+−5.5
+
+6.1σ / 4.3σ
+
+Same-sign DL, 3 and 4
+leptons
+
+17.7+4.4
+−4.0
+
+5.6σ / 4.9σ
+
+CMS [225]
+
+137
+
+σ=
+
+4.3σ / 2.4σ
+1.9σ / 1.0σ
+4.7σ / 2.6σ
+3.9σ / 1.5σ
+
+61.2.3 Cross-section measurements of single production

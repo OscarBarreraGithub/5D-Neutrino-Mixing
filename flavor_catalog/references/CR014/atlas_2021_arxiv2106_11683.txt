@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/ulNr16Q7OfuHSW/2OzgXgW0gElk</id>
+  <title>arXiv Query: search_query=&amp;id_list=2106.11683&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2106.11683" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2106.11683v2</id>
+    <title>Measurement of the $t\bar{t}t\bar{t}$ production cross section in $pp$ collisions at $\sqrt{s}$=13 TeV with the ATLAS detector</title>
+    <updated>2022-10-24T07:46:29Z</updated>
+    <link href="https://arxiv.org/abs/2106.11683v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.11683v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A measurement of four-top-quark production using proton-proton collision data at a centre-of-mass energy of 13 TeV collected by the ATLAS detector at the Large Hadron Collider corresponding to an integrated luminosity of 139 fb$^{-1}$ is presented. Events are selected if they contain a single lepton (electron or muon) or an opposite-sign lepton pair, in association with multiple jets. The events are categorised according to the number of jets and how likely these are to contain $b$-hadrons. A multivariate technique is then used to discriminate between signal and background events. The measured four-top-quark production cross section is found to be 26$^{+17}_{-15}$ fb, with a corresponding observed (expected) significance of 1.9 (1.0) standard deviations over the background-only hypothesis. The result is combined with the previous measurement performed by the ATLAS Collaboration in the multilepton final state. The combined four-top-quark production cross section is measured to be 24$^{+7}_{-6}$ fb, with a corresponding observed (expected) signal significance of 4.7 (2.6) standard deviations over the background-only predictions. It is consistent within 2.0 standard deviations with the Standard Model expectation of 12.0$\pm$2.4 fb.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-22T11:38:16Z</published>
+    <arxiv:comment>52 pages total, author list starting page 36, 12 figures, 3 tables, Published in JHEP. All figures including auxiliary figures are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/TOPQ-2020-10/</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>JHEP 11 (2021) 118</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP11(2021)118</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP11(2021)118" title="doi"/>
+  </entry>
+</feed>

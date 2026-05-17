@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/AnKs3xqwQICKl0qY+9JVsAaFnMc</id>
+  <title>arXiv Query: search_query=&amp;id_list=1811.02305&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1811.02305" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1811.02305v2</id>
+    <title>Search for four-top-quark production in the single-lepton and opposite-sign dilepton final states in pp collisions at $\sqrt{s}$ = 13 TeV with the ATLAS detector</title>
+    <updated>2019-04-05T14:31:34Z</updated>
+    <link href="https://arxiv.org/abs/1811.02305v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.02305v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for four-top-quark production, $t\bar{t}t\bar{t}$, is presented. It is based on proton-proton collision data with a center-of-mass energy $\sqrt{s}$ = 13 TeV collected by the ATLAS detector at the Large Hadron Collider during the year 2015 and 2016, corresponding to an integrated luminosity of $36.1$ fb$^{-1}$. Data are analyzed in both the single-lepton and opposite-sign dilepton channels, characterized by the presence of one or two isolated electrons or muons with high-transverse momentum and multiple jets. A data-driven method is used to estimate the dominant background from top-quark pair production in association with jets. No significant excess above the Standard Model expectation is observed. The result is combined with the previous same-sign dilepton and multilepton searches carried out by ATLAS and an observed (expected) upper limit of 5.3 (2.1) times the four-top-quark Standard Model cross section is obtained at 95% confidence level. Additionally, upper limit on anomalous four-top-quark production cross section is set in the context of an effective field theory model.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-06T11:55:16Z</published>
+    <arxiv:comment>54 pages in total, author list starting page 38, 11 figures, 2 tables, submitted to Phys. Rev. D. All figures including auxiliary figures are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2017-11</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Rev. D 99, 052009 (2019)</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevD.99.052009</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevD.99.052009" title="doi"/>
+  </entry>
+</feed>

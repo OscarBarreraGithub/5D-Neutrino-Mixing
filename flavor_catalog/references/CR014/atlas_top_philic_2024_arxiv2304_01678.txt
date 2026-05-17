@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/AuLv0QNhl6vZcDowNwAc7DWpXQA</id>
+  <title>arXiv Query: search_query=&amp;id_list=2304.01678&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:23Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2304.01678" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2304.01678v2</id>
+    <title>Search for top-philic heavy resonances in $pp$ collisions at $\sqrt{s}=13$ TeV with the ATLAS detector</title>
+    <updated>2024-04-16T09:58:42Z</updated>
+    <link href="https://arxiv.org/abs/2304.01678v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.01678v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for the associated production of a heavy resonance with a top-quark or a top-antitop-quark pair, and decaying into a $t\bar{t}$ pair is presented. The search uses the data recorded by the ATLAS detector in $pp$ collisions at $\sqrt{s}= 13$ TeV at the Large Hadron Collider during the years 2015-2018, corresponding to an integrated luminosity of 139 fb$^{-1}$. Events containing exactly one electron or muon are selected. The two hadronically decaying top quarks from the resonance decay are reconstructed using jets clustered with a large radius parameter of $R=1$. The invariant mass spectrum of the two top quark candidates is used to search for a resonance signal in the range of 1.0 TeV to 3.2 TeV. The presence of a signal is examined using an approach with minimal model dependence followed by a model-dependent interpretation. No significant excess is observed over the background expectation. Upper limits on the production cross section times branching ratio at 95% confidence level are provided for a heavy $Z^\prime$ boson based on a simplified model, for $Z^\prime$ mass between 1.0 TeV and 3.0 TeV. The observed (expected) limits range from 21 (14) fb to 119 (86) fb depending on the choice of model parameters.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-04T10:07:13Z</published>
+    <arxiv:comment>47 pages in total, author list starting page 30, 9 figures, 1 table. All figures including auxiliary figures will be available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2022-14/</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Eur. Phys. J. C 84 (2024) 157</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-023-12318-9</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-023-12318-9" title="doi"/>
+  </entry>
+</feed>

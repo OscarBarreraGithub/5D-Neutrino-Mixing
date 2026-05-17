@@ -1,0 +1,193 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: CR014
+sources:
+  - key: PDG2025_TopFourTop
+    arxiv_id: null
+    DOI: "10.1103/PhysRevD.110.030001"
+    title: "Particle Data Group Top Quark review, four top quarks section, 2025 update"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-top-quark.pdf"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:6320d3d26384909b9e549fcd6be668086f5a8831d3c1c9f4bbe016597cf17e39"
+    snapshot_path: "flavor_catalog/references/CR014/pdg2025_top_four_top_extract.txt"
+  - key: ATLAS2023_FourTopObservation
+    arxiv_id: "2303.15061"
+    DOI: "10.1140/epjc/s10052-023-11573-0"
+    title: "Observation of four-top-quark production in the multilepton final state with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2303.15061"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:f03fe718ca1ff81f420b54ae94b474bf63a2bc529c611c55c568c75b63056bea"
+    snapshot_path: "flavor_catalog/references/CR014/atlas_2023_arxiv2303_15061.txt"
+  - key: CMS2023_FourTopObservation
+    arxiv_id: "2305.13439"
+    DOI: "10.1016/j.physletb.2023.138290"
+    title: "Observation of four top quark production in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2305.13439"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b9e989ecbe5f6398fc77863373e91c8e2c7ac18afc70f3f864cc6090a61e2bef"
+    snapshot_path: "flavor_catalog/references/CR014/cms_2023_arxiv2305_13439.txt"
+  - key: CMSB2G25005_PublicResult
+    arxiv_id: "2604.14058"
+    DOI: null
+    title: "Search for resonances in events with four top quarks decaying to two leptons and jets with the CMS experiment"
+    authors: "CMS Collaboration"
+    year: 2026
+    url: "https://cms-results.web.cern.ch/cms-results/public-results/preliminary-results/B2G-25-005/index.html"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:a747064ac47671770e48737335f9a25f718e0ab024bc7ea0bde73e48bf1beb34"
+    snapshot_path: "flavor_catalog/references/CR014/cms_b2g_25_005_public_result.txt"
+  - key: CMS2026_FourTopResonance
+    arxiv_id: "2604.14058"
+    DOI: "10.48550/arXiv.2604.14058"
+    title: "Search for resonances in four top quark events in the 2 lepton final state"
+    authors: "Dominic Stafford for the CMS Collaboration"
+    year: 2026
+    url: "https://arxiv.org/abs/2604.14058"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:12befc33c55808ec0d1b203966181c7ce69261d4434e02ce09b27cbc46116193"
+    snapshot_path: "flavor_catalog/references/CR014/cms_2026_arxiv2604_14058.txt"
+  - key: ATLASTopPhilic2024
+    arxiv_id: "2304.01678"
+    DOI: "10.1140/epjc/s10052-023-12318-9"
+    title: "Search for top-philic heavy resonances in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2024
+    url: "https://arxiv.org/abs/2304.01678"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:cb4204207db4772695722191e970027394899cde25cd6a1034c6a91617428c53"
+    snapshot_path: "flavor_catalog/references/CR014/atlas_top_philic_2024_arxiv2304_01678.txt"
+  - key: CMS2014_FourTop8TeV
+    arxiv_id: "1409.7339"
+    DOI: "10.1007/JHEP11(2014)154"
+    title: "Search for standard model production of four top quarks in the lepton + jets channel in pp collisions at sqrt(s) = 8 TeV"
+    authors: "CMS Collaboration"
+    year: 2014
+    url: "https://arxiv.org/abs/1409.7339"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:0bb939614dbdcffd5df0dbe48df9371223a8ccf00279847ff9ee9f65a607d921"
+    snapshot_path: "flavor_catalog/references/CR014/cms_2014_arxiv1409_7339.txt"
+  - key: CMS2017_FourTop13TeV
+    arxiv_id: "1702.06164"
+    DOI: "10.1016/j.physletb.2017.06.064"
+    title: "Search for standard model production of four top quarks in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2017
+    url: "https://arxiv.org/abs/1702.06164"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:99909bc9b7ccd4244c93e45414b5788d59b54d28e8dcb94fc9a1e902f4f9fde3"
+    snapshot_path: "flavor_catalog/references/CR014/cms_2017_arxiv1702_06164.txt"
+  - key: CMS2018_FourTopMultilepton
+    arxiv_id: "1710.10614"
+    DOI: "10.1140/epjc/s10052-018-5607-5"
+    title: "Search for standard model production of four top quarks with same-sign and multilepton final states in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2018
+    url: "https://arxiv.org/abs/1710.10614"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:518d31e7e0dcc35fa07fc20c3225d7b34bf0358bbfe0a1d8859d6279ed1a55fe"
+    snapshot_path: "flavor_catalog/references/CR014/cms_2018_arxiv1710_10614.txt"
+  - key: ATLAS2019_FourTopLJDL
+    arxiv_id: "1811.02305"
+    DOI: "10.1103/PhysRevD.99.052009"
+    title: "Search for four-top-quark production in the single-lepton and opposite-sign dilepton final states in pp collisions at sqrt(s) = 13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2019
+    url: "https://arxiv.org/abs/1811.02305"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:de68d1fef9289ac10d340c8a006d8018fa600dba94e6aa61589f8979c4c2f854"
+    snapshot_path: "flavor_catalog/references/CR014/atlas_2019_arxiv1811_02305.txt"
+  - key: CMS2020_FourTopFullRun2Multilepton
+    arxiv_id: "1908.06463"
+    DOI: "10.1140/epjc/s10052-019-7593-7"
+    title: "Search for production of four top quarks in final states with same-sign or multiple leptons in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2020
+    url: "https://arxiv.org/abs/1908.06463"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4b6e01c12061b965d67e62d8495bd3b6e354be67a7c20687b7bbba372eb8978a"
+    snapshot_path: "flavor_catalog/references/CR014/cms_2020_arxiv1908_06463.txt"
+  - key: ATLAS2021_FourTopCrossSection
+    arxiv_id: "2106.11683"
+    DOI: "10.1007/JHEP11(2021)118"
+    title: "Measurement of the ttbar ttbar production cross section in pp collisions at sqrt(s)=13 TeV with the ATLAS detector"
+    authors: "ATLAS Collaboration"
+    year: 2021
+    url: "https://arxiv.org/abs/2106.11683"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:9fe5b167754b06afc2ad88f64e0a25f542d528fd1a407b06e14b9275b90a66c2"
+    snapshot_path: "flavor_catalog/references/CR014/atlas_2021_arxiv2106_11683.txt"
+  - key: CMS2023_FourTopEvidence
+    arxiv_id: "2303.03864"
+    DOI: "10.1016/j.physletb.2023.138076"
+    title: "Evidence for four-top quark production in proton-proton collisions at sqrt(s) = 13 TeV"
+    authors: "CMS Collaboration"
+    year: 2023
+    url: "https://arxiv.org/abs/2303.03864"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:4f264e6c5f275fd1a74fa496f3e98c8799ceaea39cd7390993681ba01d472939"
+    snapshot_path: "flavor_catalog/references/CR014/cms_2023_evidence_arxiv2303_03864.txt"
+  - key: CaoChenLiu2016
+    arxiv_id: "1602.01934"
+    DOI: "10.1103/PhysRevD.95.053004"
+    title: "Probing Higgs Width and Top Quark Yukawa Coupling from ttbarH and ttbar ttbar Productions"
+    authors: "Qing-Hong Cao, Shao-Long Chen, and Yandong Liu"
+    year: 2016
+    url: "https://arxiv.org/abs/1602.01934"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:29a330229bc6edb8d7180c042f80a5918362155a119b7696dde5f96deca4a08c"
+    snapshot_path: "flavor_catalog/references/CR014/cao_chen_liu_2016_arxiv1602_01934.txt"
+  - key: DeBlasEberhardtKrause2018
+    arxiv_id: "1803.00939"
+    DOI: "10.1007/JHEP07(2018)048"
+    title: "Current and future constraints on Higgs couplings in the nonlinear Effective Theory"
+    authors: "Jorge de Blas, Otto Eberhardt, and Claudius Krause"
+    year: 2018
+    url: "https://arxiv.org/abs/1803.00939"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:1508e575ad89281a8443ffc8f14dfe3f6b9b3b90758583e05d2fa4fc8b7e95d5"
+    snapshot_path: "flavor_catalog/references/CR014/de_blas_eberhardt_krause_2018_arxiv1803_00939.txt"
+  - key: BanelliEtAl2021_FourTopOperators
+    arxiv_id: "2010.05915"
+    DOI: "10.1007/JHEP02(2021)043"
+    title: "The Present and Future of Four Top Operators"
+    authors: "Giovanni Banelli, Ennio Salvioni, Javi Serra, Tobias Theil, and Andreas Weiler"
+    year: 2021
+    url: "https://arxiv.org/abs/2010.05915"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:1a71eda41e7b78b08f77810375fe66e6da00400f6fcda1be486e842da615f6cd"
+    snapshot_path: "flavor_catalog/references/CR014/banelli_salvioni_serra_theil_weiler_2021_arxiv2010_05915.txt"
+  - key: DarmeFuksMaltoni2021_TopPhilic
+    arxiv_id: "2104.09512"
+    DOI: "10.1007/JHEP09(2021)143"
+    title: "Top-philic heavy resonances in four-top final states and their EFT interpretation"
+    authors: "Luc Darme, Benjamin Fuks, and Fabio Maltoni"
+    year: 2021
+    url: "https://arxiv.org/abs/2104.09512"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:cf251bda322f1ad4387102d6137afc3ef063d7fc13e2c933692907f0f779c78e"
+    snapshot_path: "flavor_catalog/references/CR014/darme_fuks_maltoni_2021_arxiv2104_09512.txt"
+  - key: DarmeEtAl2025_BoostedTopPhilic
+    arxiv_id: "2507.05334"
+    DOI: "10.1007/JHEP11(2025)091"
+    title: "Searching for top-philic heavy resonances in boosted four-top final states"
+    authors: "Luc Darme, Benjamin Fuks, Hao-Lin Li, Matteo Maltoni, and Julien Toucheque"
+    year: 2025
+    url: "https://arxiv.org/abs/2507.05334"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:bc2b8c208c0c075f65400fa45bfedc464410a67df92d7267449d6d349daa3eb9"
+    snapshot_path: "flavor_catalog/references/CR014/darme_fuks_li_maltoni_toucheque_2025_arxiv2507_05334.txt"
+  - key: QuarkScanMethodology2026
+    arxiv_id: null
+    DOI: null
+    title: "Quark Scan: Fitting vs. Sampling, and Why the Envelope M_KK Bound Was So Low"
+    authors: "5D-Neutrino-Mixing project"
+    year: 2026
+    url: "local:docs/quark_scan_methodology_note.tex"
+    access_date: "2026-05-17"
+    sha256_of_local_snapshot: "sha256:b2dfbcccbdee4754d2ce451e309cb1abeba274d2c468fd5f68df070ceb5c5b96"
+    snapshot_path: "flavor_catalog/references/CR014/quark_scan_methodology_note_extract.txt"

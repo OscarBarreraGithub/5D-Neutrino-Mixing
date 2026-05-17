@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/rR26Rd2nw1MQQzEb1mZXFaMi4FY</id>
+  <title>arXiv Query: search_query=&amp;id_list=1803.00939&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:25Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1803.00939" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1803.00939v3</id>
+    <title>Current and future constraints on Higgs couplings in the nonlinear Effective Theory</title>
+    <updated>2018-07-16T16:29:27Z</updated>
+    <link href="https://arxiv.org/abs/1803.00939v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1803.00939v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We perform a Bayesian statistical analysis of the constraints on the nonlinear Effective Theory given by the Higgs electroweak chiral Lagrangian. We obtain bounds on the effective coefficients entering in Higgs observables at the leading order, using all available Higgs-boson signal strengths from the LHC runs 1 and 2. Using a prior dependence study of the solutions, we discuss the results within the context of natural-sized Wilson coefficients. We further study the expected sensitivities to the different Wilson coefficients at various possible future colliders. Finally, we interpret our results in terms of some minimal composite Higgs models.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-03-02T16:30:59Z</published>
+    <arxiv:comment>45 pages, 9 figures, 8 tables; v2: updated references, experimental input now includes data of Moriond 2018, extended discussion of projection to future colliders; v3: added Appendix, matches Journal version</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>JHEP 1807 (2018) 048</arxiv:journal_ref>
+    <author>
+      <name>Jorge de Blas</name>
+    </author>
+    <author>
+      <name>Otto Eberhardt</name>
+    </author>
+    <author>
+      <name>Claudius Krause</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP07(2018)048</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP07(2018)048" title="doi"/>
+  </entry>
+</feed>

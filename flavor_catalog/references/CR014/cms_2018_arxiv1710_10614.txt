@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/j5KRwK52Z9ZyrLVxB4mZ4elqY9Q</id>
+  <title>arXiv Query: search_query=&amp;id_list=1710.10614&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1710.10614" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1710.10614v2</id>
+    <title>Search for standard model production of four top quarks with same-sign and multilepton final states in proton-proton collisions at $\sqrt{s} =$ 13 TeV</title>
+    <updated>2018-02-20T14:28:51Z</updated>
+    <link href="https://arxiv.org/abs/1710.10614v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1710.10614v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for standard model production of four top quarks ($\mathrm{t}\overline{\mathrm{t}}\mathrm{t}\overline{\mathrm{t}})$ is reported using events containing at least three leptons (e, $μ$) or a same-sign lepton pair. The events are produced in proton-proton collisions at a center-of-mass energy of 13 TeV at the LHC, and the data sample, recorded in 2016, corresponds to an integrated luminosity of 35.9 fb$^{-1}$. Jet multiplicity and flavor are used to enhance signal sensitivity, and dedicated control regions are used to constrain the dominant backgrounds. The observed and expected signal significances are, respectively, 1.6 and 1.0 standard deviations, and the $\mathrm{t}\overline{\mathrm{t}}\mathrm{t}\overline{\mathrm{t}}$ cross section is measured to be 16.9 $^{+13.8}_{-11.4}$ fb, in agreement with next-to-leading-order standard model predictions. These results are also used to constrain the Yukawa coupling between the top quark and the Higgs boson to be less than 2.1 times its expected standard model value at 95% confidence level.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-10-29T13:43:49Z</published>
+    <arxiv:comment>Replaced with the published version. Added the journal reference and DOI. All the figures and tables, including additional supplementary figures and material, can be found at cms-results.web.cern.ch/cms-results/public-results/publications/TOP-17-009/ (CMS Public Pages)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Eur. Phys. J. C 78 (2018) 140</arxiv:journal_ref>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-018-5607-5</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-018-5607-5" title="doi"/>
+  </entry>
+</feed>

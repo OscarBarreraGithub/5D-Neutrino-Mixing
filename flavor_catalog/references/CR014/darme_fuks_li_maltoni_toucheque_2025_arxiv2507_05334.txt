@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/JL+YLdmjpAauL0WKf78QQld9YS4</id>
+  <title>arXiv Query: search_query=&amp;id_list=2507.05334&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:26Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2507.05334" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2507.05334v2</id>
+    <title>Searching for top-philic heavy resonances in boosted four-top final states</title>
+    <updated>2025-11-07T17:29:37Z</updated>
+    <link href="https://arxiv.org/abs/2507.05334v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.05334v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>New heavy resonances with sizeable couplings to top quarks can be probed through searches for beyond-the-Standard-Model effects in four-top production at the LHC. In this work, we present the first next-to-leading-order QCD predictions for the full on-shell and off-shell production of four-top events via new electroweak singlet states, along with dedicated analysis strategies based on the reconstruction and tagging of all final-state top quarks. We develop a detector-level simulation incorporating recent advances in top-tagging and boosted object reconstruction. Moreover, we demonstrate that searches at LHC Run 3 and high-luminosity phase in the zero-lepton, one-lepton and same-sign di-lepton channels can improve the sensitivity to the new physics cross sections by up to two orders of magnitude. In particular, colour-octet resonances with masses up to 2-2.5 TeV and colour-singlet states with masses up to 1-1.5 TeV are within reach for coupling values in the 0.1-1 range.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-07T18:00:00Z</published>
+    <arxiv:comment>38 pages, 12 figures, version accepted by JHEP</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>JHEP 11 (2025) 91</arxiv:journal_ref>
+    <author>
+      <name>Luc Darmé</name>
+    </author>
+    <author>
+      <name>Benjamin Fuks</name>
+    </author>
+    <author>
+      <name>Hao-Lin Li</name>
+    </author>
+    <author>
+      <name>Matteo Maltoni</name>
+    </author>
+    <author>
+      <name>Julien Touchèque</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP11(2025)091</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP11(2025)091" title="doi"/>
+  </entry>
+</feed>

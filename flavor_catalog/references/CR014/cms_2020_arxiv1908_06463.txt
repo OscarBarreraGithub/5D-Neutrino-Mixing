@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/TydmU/9PUVy/I+d6EhS4Bzz35yQ</id>
+  <title>arXiv Query: search_query=&amp;id_list=1908.06463&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1908.06463" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1908.06463v2</id>
+    <title>Search for production of four top quarks in final states with same-sign or multiple leptons in proton-proton collisions at $\sqrt{s} =$ 13 TeV</title>
+    <updated>2020-02-02T14:47:48Z</updated>
+    <link href="https://arxiv.org/abs/1908.06463v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1908.06463v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The standard model (SM) production of four top quarks ($\mathrm{t\bar{t}t\bar{t}}$) in proton-proton collision is studied by the CMS Collaboration. The data sample, collected during the 2016-2018 data taking of the LHC, corresponds to an integrated luminosity of 137 fb$^{-1}$ at a center-of-mass energy of 13 TeV. The events are required to contain two same-sign charged leptons (electrons or muons) or at least three leptons, and jets. The observed and expected significances for the $\mathrm{t\bar{t}t\bar{t}}$ signal are respectively 2.6 and 2.7 standard deviations, and the $\mathrm{t\bar{t}t\bar{t}}$ cross section is measured to be 12.6 $^{+5.8}_{-5.2}$ fb. The results are used to constrain the Yukawa coupling of the top quark to the Higgs boson, $y_{\mathrm{t}}$, yielding a limit of $|y_{\mathrm{t}}$ $/$ $y_{\mathrm{t}}^{\mathrm{SM}}|$ $&lt;$ 1.7 at 95% confidence level, where $y_{\mathrm{t}}^{\mathrm{SM}}$ is the SM value of $y_{\mathrm{t}}$. They are also used to constrain the oblique parameter of the Higgs boson in an effective field theory framework, $\hat{H}$ $&lt;$ 0.12. Limits are set on the production of a heavy scalar or pseudoscalar boson in Type-II two-Higgs-doublet and simplified dark matter models, with exclusion limits reaching 350-470 GeV and 350-550 GeV for scalar and pseudoscalar bosons, respectively. Upper bounds are also set on couplings of the top quark to new light particles.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-08-18T15:22:41Z</published>
+    <arxiv:comment>Replaced with the published version. Added the journal reference and the DOI. All the figures and tables can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-18-003 (CMS Public Pages)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Eur. Phys. J. C 80 (2020) 75</arxiv:journal_ref>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-019-7593-7</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-019-7593-7" title="doi"/>
+  </entry>
+</feed>

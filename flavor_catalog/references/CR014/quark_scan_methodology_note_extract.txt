@@ -1,0 +1,202 @@
+\section{Result: the per-draw \texorpdfstring{$\Mkk^{\min}$}{M\_KK\^min} histogram}
+\label{sec:result}
+
+The single most useful figure in this analysis is the per-draw histogram
+of $\Mkk^{\min}$ for the PDG-passing ensemble. For each draw, since every
+ratio scales as $1/\Mkk^2$ (with sub-percent corrections from the
+$\fIR$-factors' weak $\varepsilon$-dependence), one can rescale to find
+the $\Mkk$ at which that particular draw would just satisfy the FCNC
+bound:
+\begin{equation}
+  \Mkk^{\min} \;=\; \Mkk^{\mathrm{tile}}\,
+                    \sqrt{\max_X \mathrm{ratio}_X}.
+\end{equation}
+Pooling across all eight $\Mkk$ tiles and restricting to PDG-passing
+draws gives Fig.~\ref{fig:mkk-min-hist}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.95\linewidth]{rs_anarchy_mkk_min_hist_gsstar.pdf}
+  \caption{Per-draw $\Mkk^{\min}$ histogram for the RS-anarchy ensemble,
+  restricted to draws that pass the factor-of-three PDG mass and CKM
+  match ($1{,}532{,}640$ draws total from the 8M-draw RUNA reference
+  scan, pooled across all eight $\Mkk$ tiles). The x-axis is in the
+  $\gs = 3$ convention, the headline convention used throughout this
+  note. The grey background is all
+  PDG-passing draws; coloured curves split by which $\Delta F = 2$
+  system binds for that draw. The vast majority are $\eK$-bound; the
+  $\dmK,\dmBd,\dmBs,\dmD$ contributions live in the low-$\Mkk^{\min}$
+  tail. Vertical dashed lines mark the 50\%- and 95\%-acceptance
+  crossings.}
+  \label{fig:mkk-min-hist}
+\end{figure}
+
+The $\gs=3$ headline crossings are $\Mkk = 47.26$~TeV at $50\%$
+acceptance and $127.13$~TeV at $95\%$ acceptance.  The corresponding
+perturbative code-default crossings are $16.54$~TeV and $44.50$~TeV.
+These are quoted from the post-audit 8M-draw RUNA reference scan
+(\S\ref{sec:robustness}) under the input and scope conventions summarized
+in Appendix~\ref{app:input-audits}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.78\linewidth]{rs_anarchy_max_ratio_vs_mkk.pdf}
+  \caption{Same data as Fig.~\ref{fig:mkk-min-hist}, viewed differently:
+  percentiles of $\max\mathrm{ratio}$ as a function of the tile $\Mkk$.
+  Where each percentile crosses unity is the $\Mkk$ at which that
+  fraction of typical anarchic draws pass.}
+  \label{fig:max-ratio}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.78\linewidth]{rs_anarchy_per_system_pass_rate.pdf}
+  \caption{Per-system pass rate among PDG-passing draws.
+  $\eK$ is the only constraint that does any real work; the other four
+  observables are $\gtrsim 99\%$ acceptance throughout, by virtue of the
+  hierarchical $f$-factor suppression alone.}
+  \label{fig:per-system}
+\end{figure}
+
+\paragraph{Where the envelope's low tail came from.}
+The histogram in Fig.~\ref{fig:mkk-min-hist} explains why the envelope
+plot tolerated $\Mkk\sim 1$~TeV. The lower tail of the
+$\Mkk^{\min}$ distribution still extends below $1$~TeV, though only at
+the per-mille level; a few percent of anarchic draws sit below
+$3$~TeV. The Setup~A optimiser was, by
+construction, finding such tail points and going further --- using the
+basis alignment described in \S\ref{sec:envelope-yukawa} to push the
+off-diagonal Yukawas well below their prior typical values. The envelope's
+``allowed'' region is the lower tail of Fig.~\ref{fig:mkk-min-hist},
+augmented by the optimiser's freedom to tune off-diagonal Yukawas
+artificially small.
+
+%% =====================================================================
+\section{Sensitivity to the gate definition and the gauge convention}
+\label{sec:gate-sensitivity}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.95\linewidth]{rs_anarchy_gate_sensitivity.pdf}
+  \caption{Pass fraction vs.\ $\Mkk$ for three gate definitions
+  ($\max\mathrm{ratio} < 1, < 0.5, < 0.3$, the last two being
+  Buras/UTfit-style ``half'' and ``third'' of the SM--data budget for
+  $\eK$), in two gauge-coupling conventions: perturbative
+  $g_s\approx 1.05$ (left) and $\gs = 3$ (right). Under the corrected
+  $\Delta F=2$ constants, the $\gs=3$ crossings lie beyond the plotted
+  tile range and are quoted from the per-draw rescaling in
+  Table~\ref{tab:headline}.}
+  \label{fig:gate-sensitivity}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.20}
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{50\% acceptance} & \multicolumn{2}{c}{95\% acceptance} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+gate / convention      & pert.\ $g_s$ & $\gs=3$ & pert.\ $g_s$ & $\gs=3$ \\
+\midrule
+$\mathrm{ratio} < 1$   & $16.54$~TeV       & $47.26$~TeV       & $44.50$~TeV       & $127.13$~TeV    \\
+$\mathrm{ratio} < 0.5$ & $\sim\!23.39$~TeV & $\sim\!66.84$~TeV & $\sim\!62.93$~TeV & $\sim\!179.79$~TeV \\
+$\mathrm{ratio} < 0.3$ & $\sim\!30.20$~TeV & $\sim\!86.30$~TeV & $\sim\!81.24$~TeV & $\sim\!232.11$~TeV \\
+\bottomrule
+\end{tabular}
+\caption{The $\Mkk$ at which a given fraction of PDG-passing anarchic
+draws also satisfies all $\Delta F=2$ bounds. The $\mathrm{ratio} < 1$
+row is taken from the post-audit high-statistics 8M-draw RUNA reference
+scan (\S\ref{sec:robustness}); the tighter-gate rows rescale the same
+per-draw $\Mkk^{\min}$ distribution by $1/\sqrt{\mathrm{gate}}$.}
+\label{tab:headline}
+\end{table}
+
+For a band that covers the methodological choices, the defensible
+statement is
+
+\begin{quote}\itshape
+  Under an $\mathcal{O}(1)$ anarchic prior on the 5D Yukawa entries,
+  $\Mkk \gtrsim 44.5$~TeV (perturbative $g_s$) to $\gtrsim 127$~TeV
+  (headline $\gs = 3$) at $95\%$ acceptance, with a further factor
+  $\sim 1.5$ uplift if one demands that the new physics fit inside half
+  the SM--data budget rather than saturate it.
+\end{quote}
+
+\noindent The $\eK$ constraint alone sets every one of these numbers.
+
+%% =====================================================================
+\section{Robustness to statistics, $c$-pattern, $Y$-prior, and PDG-gate tightness}
+\label{sec:robustness}
+
+The headline RS-anarchy bound rests on three implicit choices: the
+$c$-pattern in eq.~(\ref{eq:cvals}), the Yukawa prior described in
+\S\ref{sec:setup-b}, and the factor-of-three PDG gate. We ran four
+follow-up campaigns to probe how each of those choices propagates into
+the $\Mkk^{\min}$ distribution, and to confront the result with the
+Csaki--Falkowski--Weiler (CFW) 0804.1954 numerical band. The canonical
+numbers from these runs are summarised in
+\texttt{scan\_outputs/followup\_crossings\_summary.json}; figures are
+under \texttt{results/figures/quark/}.
+
+\subsection{High-statistics validation (RUNA)}
+\label{sec:robust-runa}
+
+We re-ran the baseline RS-anarchy scan with $8\!\times\!10^{6}$ draws
+(8 $\Mkk$ tiles, 1M draws/tile), yielding $1{,}532{,}640$
+PDG-passing draws. The 50\%-acceptance crossings are
+\begin{equation}
+  \Mkk^{\min}\bigl|_{50\%} \;=\; 16.54~\mathrm{TeV~(pert.)},
+  \qquad
+  47.26~\mathrm{TeV}~(\gs = 3),
+\end{equation}
+and the 95\%-acceptance crossings are $44.50$~TeV / $127.13$~TeV.
+The corresponding finite-Monte-Carlo Wilson-score 95\% intervals are
+$16.52$--$16.56$~TeV at 50\% acceptance and $44.41$--$44.58$~TeV at
+95\% acceptance in the perturbative convention
+($47.19$--$47.32$~TeV and $126.88$--$127.38$~TeV for $\gs=3$).
+The lower-statistics post-audit Run~3 baseline reproduces these numbers
+Our post-audit pipeline produces an RS-anarchy $\Mkk^{\min}$ bound that
+is approximately a factor $2.2$ stronger than the CFW 2008 reference at
+matched conventions: at common $\gs=3$, we obtain $23.37$~TeV (50th
+percentile, CFW 30\%-relative gate, $n=217$ surviving draws) versus the
+CFW no-UV-boundary-term result of $10.5$~TeV, or equivalently
+$46.74$~TeV versus $21$~TeV at common $\gs\simeq6$.\footnote{The
+$46.74$~TeV value is the same CFW-matched projection rescaled by $6/3$.
+It is distinct from the live RUNA p50, $47.26$~TeV at $\gs=3$, which
+uses the unmatched post-audit factor-of-three gate ensemble.}  The
+factor-$2.2$ enhancement is
+attributable to (i) the BGS 2020 SM $\epsilon_K$ prediction giving a
+$6\times$ tighter NP budget than the UTfit-era values CFW used; (ii) the
+FLAG 2024 bag parameters; and (iii) our LO BMU-corrected sign
+convention.  The bound directions are consistent: both confirm an
+$\Mkk > \mathcal{O}(10\,\mathrm{TeV})$ lower bound under anarchic flavor,
+but the precise number reflects newer hadronic inputs and is not a direct
+reproduction of CFW's 2008 numerical result.  The matched-gate subset
+contains only $n=217$ PDG-passing draws; the 95\% binomial Wilson-score
+interval on the p50 is approximately $[21,26]$~TeV at $\gs=3$.  The
+factor-$2.2$ disagreement with CFW is robust to this finite-statistics
+uncertainty.
+
+The convention extraction is recorded in
+\texttt{docs/audits/cfw\_convention\_extract.md}, and the numerical
+reproduction arithmetic is in
+\texttt{docs/audits/cfw\_reproduction.md}.  The important points are:
+CFW use the same conventional scalar-LR $C_4/C_5$ sign pattern as our
+post-audit code; their paper does not publish explicit kaon bag constants,
+instead importing UTfit model-independent $\Delta F=2$ scale bounds; and
+their scan samples localisation parameters directly rather than fixing one
+$c$-pattern and forward-drawing only Yukawas.
+
+With our live BGS/FLAG inputs and factor-of-three gate, RUNA gives
+\[
+  \Mkk^{\min}(p50,\gs=3)=47.26~\mathrm{TeV},
+  \qquad
+  \Mkk^{\min}(p95,\gs=3)=127.13~\mathrm{TeV}.
+\]
+find gauge-KK lower bounds of about $2$--$3\,\mathrm{TeV}$ from global
+precision-electroweak fits, depending on the model configuration.  This
+repository does not compute the oblique parameters, the $Zb\bar b$
+corrections, or a global EWPO likelihood.  The quark-flavour bound quoted
+here, $\Mkk=47.26\,\mathrm{TeV}$ at $50\%$ acceptance for $\gs=3$, is an
+independent $\Delta F=2$ result and is substantially stronger than that
+external floor.

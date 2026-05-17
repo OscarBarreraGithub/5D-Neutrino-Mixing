@@ -1,0 +1,154 @@
+% Flavor catalog per-process template.
+% process_id: CR014
+% family: collider_rs
+% owner_agent_id: PKA-CR014
+% writer_agent_id: null
+% checker_agent_id: null
+% opus_signoff_id: null
+% Canonical metadata sidecar: CR014.yaml
+% Status is controlled by the YAML sidecar status_history, not this comment.
+
+\section{\texorpdfstring{\(pp \to t\bar t t\bar t\) Four-Top Production}{pp to t tbar t tbar Four-Top Production}}
+
+\subsection*{Process}
+This entry covers Standard-Model and beyond-the-Standard-Model production of
+four top quarks at the LHC, \(pp\to t\bar t t\bar t\).  In the
+\texttt{collider\_rs} scope it is a direct-collider handle on top-philic
+resonances, heavy top-partner sectors that feed multi-top final states, and
+four-top contact operators.  It is not a single inclusive \(M_{\rm KK}\)
+observable: a collider interpretation must specify the resonance spin, width,
+couplings, production mechanism, and branching fractions.
+
+\subsection*{Current best limit(s)}
+The PDG 2025 top-quark review records the Run-2 observation measurements as the
+canonical inclusive \(t\bar t t\bar t\) cross-section inputs.  ATLAS measures
+\(\sigma(pp\to t\bar t t\bar t)=22.5^{+6.6}_{-5.5}\,\mathrm{fb}\) in the
+multilepton observation analysis, while CMS measures
+\(\sigma(pp\to t\bar t t\bar t)=17.7^{+4.4}_{-4.0}\,\mathrm{fb}\) in the
+corresponding PDG summary.  The CMS paper gives the same central value with
+separate statistical and systematic uncertainties.  These measurements are
+higher than the Standard-Model reference rate but compatible within about two
+standard deviations, so the inclusive four-top result is currently a
+measurement and reinterpretation input rather than a standalone RS mass
+exclusion.
+
+For a direct four-top resonance interpretation, the most recent official CMS
+public result found in this pass is CMS-B2G-25-005, also summarized in
+arXiv:2604.14058.  It searches for resonances in four-top events with two
+leptons using \(13\) and \(13.6\) TeV data.  CMS sets upper limits over
+resonance masses from \(500\,\mathrm{GeV}\) to \(4\,\mathrm{TeV}\) and relative
+widths from \(4\%\) to \(50\%\); for a top-philic vector mediator with
+\(\Gamma/m=50\%\), masses are excluded at \(95\%\) CL up to
+\(850\,\mathrm{GeV}\) observed.  ATLAS provides a complementary top-philic
+\(Z'\) search in the single-lepton channel with observed \(95\%\) CL
+cross-section upper limits ranging from \(21\) to \(119\,\mathrm{fb}\) across
+its simplified-model parameter choices.
+
+\subsection*{Relevance to RS / anarchic-flavor pipeline}
+Four-top production is relevant to custodial or composite RS because the top
+quark is typically the most IR-localized Standard-Model fermion.  A KK gluon,
+composite vector, or heavy top partner can couple preferentially to tops and
+produce \(t\bar t t\bar t\) through associated production
+\(pp\to t\bar t X\), \(X\to t\bar t\), through off-shell exchange, or through
+the low-energy four-top contact operators used in EFT reinterpretations.  The
+observable therefore probes the same top-compositeness sector that direct
+\(t\bar t\) resonance and vector-like-quark searches probe, but it does so in a
+more model-dependent topology.
+
+The anarchic-flavor pipeline is already dominated by low-energy quark flavor.
+The methodology note reports the corrected RS-anarchy median bound
+\(M_{\rm KK}^{\min}(p50,g_s^\star=3)=47.26\,\mathrm{TeV}\).  That scale is far
+above the present four-top resonance reach, which is sub-TeV for the broad
+top-philic vector benchmark in CMS-B2G-25-005 and at the few-TeV level only as a
+model-dependent cross-section search.  Consequently CR014 is a PRIMARY
+collider-RS cross-check and a useful handle on aligned, custodial, or
+non-anarchic spectra, but it is not the leading bound for the anarchic
+low-energy flavor scan.
+
+\subsection*{Post-2010 developments}
+CMS opened the published LHC search history with the 8 TeV lepton-plus-jets
+analysis in arXiv:1409.7339.  The importance of that result is historical: it
+established the multivariate strategy for a final state with a very small SM
+rate and large \(t\bar t+\)jets backgrounds.
+
+The first 13 TeV CMS searches, arXiv:1702.06164 and arXiv:1710.10614, moved the
+program into Run 2 and separated the lepton-plus-jets/opposite-sign dilepton
+and same-sign/multilepton handles.  The multilepton analysis also began using
+four-top data to constrain the top-Higgs Yukawa coupling, making the connection
+to top compositeness explicit.
+
+ATLAS arXiv:1811.02305 added a 13 TeV single-lepton and opposite-sign dilepton
+search and combined it with earlier ATLAS multilepton inputs; CMS
+arXiv:1908.06463 then used the full 2016--2018 multilepton data set and added
+BSM scalar, pseudoscalar, and EFT interpretations.
+
+The Run-2 evidence and observation stage came from ATLAS arXiv:2106.11683,
+CMS arXiv:2303.03864, ATLAS arXiv:2303.15061, and CMS arXiv:2305.13439.
+The key changes were full Run-2 luminosity, improved heavy-flavor and lepton
+object identification, more powerful multivariate or graph-neural-network
+classifiers, and combinations across complementary final states.
+
+The direct resonance branch is now represented by ATLAS arXiv:2304.01678 and
+CMS-B2G-25-005/arXiv:2604.14058.  These move beyond an inclusive signal-strength
+measurement into explicit top-philic resonance searches, but the exclusions are
+still benchmark dependent.
+
+\subsection*{Constraint validity / model dependence}
+The inclusive \(t\bar t t\bar t\) cross section is a robust experimental
+observable, but it becomes an RS constraint only after specifying a BSM
+interpretation.  A broad vector mediator, a scalar or pseudoscalar, a KK gluon,
+and a fermionic top partner can produce similar event counts but different
+kinematics, interference patterns, and acceptances.  EFT translations are valid
+only when the mediator is sufficiently heavier than the resolved event scale;
+for lighter or broad resonances a simplified-model or full-model simulation is
+needed.
+
+The current top-philic resonance limits assume exclusive or dominant couplings
+to top quarks, specified widths, and specific production modes.  A custodial-RS
+spectrum with several nearby resonances, non-saturated branching ratio
+\(\mathrm{BR}(X\to t\bar t)\), additional decays to top partners, or altered
+top-tagging acceptance cannot be read off from the quoted mass number without a
+dedicated reinterpretation.
+
+\subsection*{Code coverage in this repo}
+\textbf{NO}.  The required CR014 grep found no implementation of four-top,
+top-philic-resonance, or direct collider-search constraints in
+\texttt{quarkConstraints/}, \texttt{qcd/}, \texttt{flavorConstraints/},
+\texttt{neutrinos/}, \texttt{yukawa/}, \texttt{warpConfig/},
+\texttt{solvers/}, \texttt{scanParams/}, or \texttt{tests/}.  The exact query
+\texttt{rg -n "CR014|four.?top|4.?top|tttt|top.?philic" ...} returned no
+matches.  A separate collider-term query found only an unrelated
+\texttt{CMS/RunDec} alpha-s test comment in \texttt{tests/test\_alpha\_s.py:89}.
+
+Adjacent evidence confirms that the scan computes low-energy KK-gluon flavor
+constraints, not collider limits.  \texttt{quarkConstraints/couplings.py:96}
+defines \texttt{compute\_quark\_kk\_gluon\_couplings};
+\texttt{quarkConstraints/deltaf2.py:449} defines
+\texttt{evaluate\_delta\_f2\_constraints}; and
+\texttt{quarkConstraints/scan.py:377}--\texttt{quarkConstraints/scan.py:441}
+threads those \(\Delta F=2\) ratios into the quark-scan pass/fail row.  No
+analogous module consumes LHC cross sections, resonance mass limits, or
+experimental likelihoods.
+
+\subsection*{Implementation difficulty}
+\textbf{HIGH}.  A faithful live constraint would require a model-to-collider
+chain: RS spectrum generation, production and decay simulation, detector-level
+acceptance, and a likelihood or recast for the ATLAS/CMS analyses.  A simple
+``\(M_{\rm KK}>850\,\mathrm{GeV}\)'' filter would be misleading because the CMS
+number is a broad top-philic vector benchmark, not a generic KK-gluon or
+custodial-partner exclusion.  Practical implementation should use an external
+reinterpretation tool such as CheckMATE, MadAnalysis5, SModelS where applicable,
+or a preserved HEPData/analysis likelihood.
+
+\subsection*{Key references}
+\texttt{PDG2025\_TopFourTop};
+\texttt{ATLAS2023\_FourTopObservation};
+\texttt{CMS2023\_FourTopObservation};
+\texttt{CMSB2G25005\_PublicResult};
+\texttt{CMS2026\_FourTopResonance};
+\texttt{ATLASTopPhilic2024};
+\texttt{CaoChenLiu2016};
+\texttt{DeBlasEberhardtKrause2018};
+\texttt{BanelliEtAl2021\_FourTopOperators};
+\texttt{DarmeFuksMaltoni2021\_TopPhilic};
+\texttt{QuarkScanMethodology2026}.

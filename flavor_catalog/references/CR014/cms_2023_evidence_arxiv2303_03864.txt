@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/ONx5lpArnLOMadq9jbdm9SsRlrI</id>
+  <title>arXiv Query: search_query=&amp;id_list=2303.03864&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:25Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2303.03864" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2303.03864v2</id>
+    <title>Evidence for four-top quark production in proton-proton collisions at $\sqrt{s}$ = 13 TeV</title>
+    <updated>2023-07-27T11:34:24Z</updated>
+    <link href="https://arxiv.org/abs/2303.03864v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.03864v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The production of four top quarks ($\mathrm{t\bar{t}t\bar{t}}$) is studied with LHC proton-proton collision data samples collected by the CMS experiment at a center-of-mass energy of 13 TeV, and corresponding to integrated luminosities of up to 138 fb$^{-1}$. Events that have no leptons (all-hadronic), one lepton, or two opposite-sign leptons (where lepton refers only to prompt electrons or prompt muons) are considered. This is the first $\mathrm{t\bar{t}t\bar{t}}$ measurement that includes the all-hadronic final state. The observed significance of the $\mathrm{t\bar{t}t\bar{t}}$ signal in these final states of 3.9 standard deviations (1.5 expected) provides evidence for $\mathrm{t\bar{t}t\bar{t}}$ production, with a measured cross section of 36 $^{+12}_{-11}$ fb. Combined with earlier CMS results in other final states, the signal significance is 4.0 standard deviations (3.2 expected). The combination returns an observed cross section of 17 $\pm$ 4 (stat) $\pm$ 3 (syst) fb, which is consistent with the standard model prediction.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-07T13:07:57Z</published>
+    <arxiv:comment>Replaced with the published version. Added the journal reference and the DOI. All the figures and tables, including additional supplementary figures and tables, can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-005 (CMS Public Pages)</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Lett. B 844 (2023) 138076</arxiv:journal_ref>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1016/j.physletb.2023.138076</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.physletb.2023.138076" title="doi"/>
+  </entry>
+</feed>

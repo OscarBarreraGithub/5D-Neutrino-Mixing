@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/2V7bwu7kD5cVgwQs3z8ec/tfWsU</id>
+  <title>arXiv Query: search_query=&amp;id_list=2010.05915&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:26Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2010.05915" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2010.05915v2</id>
+    <title>The Present and Future of Four Top Operators</title>
+    <updated>2021-02-13T10:14:54Z</updated>
+    <link href="https://arxiv.org/abs/2010.05915v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.05915v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the phenomenology of a strongly-interacting top quark at future hadron and lepton colliders, showing that the characteristic four-top contact operators give rise to the most significant effects. We demonstrate the extraordinary potential of a 100 TeV proton-proton collider to directly test such non-standard interactions in four-top production, a process that we thoroughly analyze in the same-sign dilepton and trilepton channels, and explore in the fully hadronic channel. Furthermore, high-energy electron-positron colliders, such as CLIC or the ILC, are shown to exhibit an indirect yet remarkable sensitivity to four-top operators, since these constitute, via renormalization group evolution, the leading new-physics deformations in top-quark pair production. We investigate the impact of our results on the parameter space of composite Higgs models with a strongly-coupled (right-handed) top quark, finding that four-top probes provide the best sensitivity on the compositeness scale at the future energy frontier. In addition, we investigate mild yet persisting LHC excesses in multilepton plus jets final states, showing that they can be consistently described in the effective field theory of such a new-physics scenario.</summary>
+    <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-12T18:00:01Z</published>
+    <arxiv:comment>27 pages + references, 11 figures, 5 tables. v2: slight modification of title, minor additions to discussion (including HL-LHC projection), references added, results unchanged; version published in JHEP</arxiv:comment>
+    <arxiv:primary_category term="hep-ph"/>
+    <arxiv:journal_ref>JHEP 02 (2021) 043</arxiv:journal_ref>
+    <author>
+      <name>Giovanni Banelli</name>
+    </author>
+    <author>
+      <name>Ennio Salvioni</name>
+    </author>
+    <author>
+      <name>Javi Serra</name>
+    </author>
+    <author>
+      <name>Tobias Theil</name>
+    </author>
+    <author>
+      <name>Andreas Weiler</name>
+    </author>
+    <arxiv:doi>10.1007/JHEP02(2021)043</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/JHEP02(2021)043" title="doi"/>
+  </entry>
+</feed>

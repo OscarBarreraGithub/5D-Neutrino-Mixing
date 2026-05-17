@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/b7iYyuFh46xWTkOTaDCiejR/WwY</id>
+  <title>arXiv Query: search_query=&amp;id_list=2303.15061&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:22Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2303.15061" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2303.15061v3</id>
+    <title>Observation of four-top-quark production in the multilepton final state with the ATLAS detector</title>
+    <updated>2024-03-12T14:50:43Z</updated>
+    <link href="https://arxiv.org/abs/2303.15061v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.15061v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents the observation of four-top-quark ($t\bar{t}t\bar{t}$) production in proton-proton collisions at the LHC. The analysis is performed using an integrated luminosity of 140 fb$^{-1}$ at a centre-of-mass energy of 13 TeV collected using the ATLAS detector. Events containing two leptons with the same electric charge or at least three leptons (electrons or muons) are selected. Event kinematics are used to separate signal from background through a multivariate discriminant, and dedicated control regions are used to constrain the dominant backgrounds. The observed (expected) significance of the measured $t\bar{t}t\bar{t}$ signal with respect to the standard model (SM) background-only hypothesis is 6.1 (4.3) standard deviations. The $t\bar{t}t\bar{t}$ production cross section is measured to be $22.5^{+6.6}_{-5.5}$ fb, consistent with the SM prediction of $12.0 \pm 2.4$ fb within 1.8 standard deviations. Data are also used to set limits on the three-top-quark production cross section, being an irreducible background not measured previously, and to constrain the top-Higgs Yukawa coupling and effective field theory operator coefficients that affect $t\bar{t}t\bar{t}$ production.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-27T10:09:02Z</published>
+    <arxiv:comment>52 pages in total, author list starting page 35, 9 figures, 8 tables, submitted to EPJC. All figures will be available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/TOPQ-2021-08/</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Eur. Phys. J. C 83 (2023) 496</arxiv:journal_ref>
+    <author>
+      <name> ATLAS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1140/epjc/s10052-023-11573-0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1140/epjc/s10052-023-11573-0" title="doi"/>
+  </entry>
+</feed>

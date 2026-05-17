@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/THi5KqRmdi0pMDTDQ6Q/63f5fMo</id>
+  <title>arXiv Query: search_query=&amp;id_list=1702.06164&amp;start=0&amp;max_results=10</title>
+  <updated>2026-05-17T20:34:23Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1702.06164" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1702.06164v2</id>
+    <title>Search for standard model production of four top quarks in proton-proton collisions at sqrt(s) = 13 TeV</title>
+    <updated>2017-07-11T19:14:11Z</updated>
+    <link href="https://arxiv.org/abs/1702.06164v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1702.06164v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A search for events containing four top quarks (ttbar-ttbar) is reported from proton-proton collisions recorded by the CMS experiment at sqrt(s) = 13 TeV and corresponding to an integrated luminosity of 2.6 inverse femtobarns. The analysis considers the single-lepton (e or mu)+jets and the opposite-sign dilepton (mu+mu-, mu+/- e-/+, or e+e-)+jets channels. It uses boosted decision trees to combine information on the global event and jet properties to distinguish between ttbar-ttbar and ttbar production. The number of events observed after all selection requirements is consistent with expectations from background and standard model signal predictions, and an upper limit is set on the cross section for ttbar-ttbar production in the standard model of 94 fb at 95% confidence level (10.2 times the prediction), with an expected limit of 118 fb. This is combined with the results from the published CMS search in the same-sign dilepton channel, resulting in an improved limit of 69 fb at 95% confidence level (7.4 times the prediction), with an expected limit of 71 fb. These are the strongest constraints on the rate of ttbar-ttbar production to date.</summary>
+    <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-02-20T20:25:08Z</published>
+    <arxiv:comment>Replaced with the published version. Added the journal reference and DOI. All the figures and tables, including additional supplemental figures and tables, can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-16-016</arxiv:comment>
+    <arxiv:primary_category term="hep-ex"/>
+    <arxiv:journal_ref>Phys. Lett. B 772 (2017) 336</arxiv:journal_ref>
+    <author>
+      <name> CMS Collaboration</name>
+    </author>
+    <arxiv:doi>10.1016/j.physletb.2017.06.064</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.physletb.2017.06.064" title="doi"/>
+  </entry>
+</feed>
