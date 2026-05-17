@@ -32,7 +32,17 @@ status_history:
     agent_id: "WA"
     cycle: 1
     reason: "Wave-9 WA polish for VLQ/4-top collider_rs batch; prose and CHK-1 metadata placement normalized."
-last_updated_at: "2026-05-17T17:08:10-04:00"
+  - state: "CHECKER-DONE"
+    timestamp: "2026-05-17T17:32:39-04:00"
+    from: "WRITER-DONE"
+    to: "CHECKER-DONE"
+    at: "2026-05-17T17:32:39-04:00"
+    agent: "CA-CA-w9-vlq-4top"
+    agent_id: "CA"
+    cycle: 1
+    reason: "CA cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w9_vlq_4top.md."
+last_updated_at: "2026-05-17T17:32:39-04:00"
+checker_passed_at: "2026-05-17T17:32:39-04:00"
 version: "0.1.0"
 source_shas:
   atlas_2019_arxiv1811_02305.txt: "sha256:de68d1fef9289ac10d340c8a006d8018fa600dba94e6aa61589f8979c4c2f854"
