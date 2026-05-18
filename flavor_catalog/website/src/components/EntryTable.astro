@@ -1,5 +1,6 @@
 ---
 import Badges from './Badges.astro';
+import { notationToMath } from '../lib/notation';
 
 interface IndexRow {
   process_id: string;
@@ -20,16 +21,6 @@ interface Props {
 }
 
 const { rows, showFamily = false, showOriginalFamily = false } = Astro.props as Props;
-
-// Render notation as inline math when it carries any LaTeX command/sub-script.
-function inlineMath(s?: string | null): string {
-  if (!s) return '';
-  const trimmed = s.trim();
-  if (!trimmed) return '';
-  if (trimmed.startsWith('$') || trimmed.startsWith('\\(')) return trimmed;
-  const looksMath = /\\[A-Za-z]+|[\^_]\{|\^\\|\^[A-Za-z0-9]/.test(trimmed);
-  return looksMath ? `$${trimmed}$` : trimmed;
-}
 
 const FAMILY_LABELS: Record<string, string> = {
   kaon: 'Kaon',
@@ -73,7 +64,7 @@ const FAMILY_LABELS: Record<string, string> = {
         </td>
         <td class="row-notation">
           <a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
-            <span set:html={inlineMath(r.standard_notation)}></span>
+            <span set:html={r.standard_notation ? notationToMath(r.standard_notation) : ''}></span>
           </a>
           {r.process_name && <div class="row-process-name">{r.process_name}</div>}
         </td>
