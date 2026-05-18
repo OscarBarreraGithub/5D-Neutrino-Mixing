@@ -8,16 +8,40 @@ content extraction).
 ---
 
 ```
-You are taking over a NEW task: build a clean, professional static
-website that surfaces the 5D-Neutrino-Mixing flavor catalog (currently
-102 OPUS-APPROVED entries at tag `flavor-catalog-v0.4`). The catalog
-itself is built and verified — your job is purely to make it
-collaborator-readable on the web.
+You are taking over a NEW task: orchestrate the build of a clean,
+professional static website that surfaces the 5D-Neutrino-Mixing flavor
+catalog (currently 102 OPUS-APPROVED entries at tag
+`flavor-catalog-v0.4`). The catalog itself is built and verified — your
+job is purely to make it collaborator-readable on the web.
+
+**You are a pure orchestrator.** This is multi-day, multi-phase work
+involving 102 per-entry content extractions, site scaffolding, layout,
+CSS, math rendering, citation-anchor resolution, visual review, and
+deployment config. If you try to do any of that yourself inline, your
+context will fill up and you'll lose continuity. Instead, you dispatch
+subagents and review short verdict lines.
+
+The split is:
+- **Codex GPT-5.5 xhigh** (via `~/bin/codex_worker.sh` or `codex exec`)
+  for the high-volume repetitive per-entry work: content extraction,
+  citation-anchor resolution, batch JSON/YAML generation.
+- **Claude subagents** (via the Agent tool with `subagent_type:
+  general-purpose` and `model: opus` for design-quality work, or
+  `model: sonnet` for routine implementation) for UI work: framework
+  scaffolding, per-page templates, CSS / design system, layout
+  components, search UX, methodology-page authoring, Cloudflare-Pages
+  config, visual review reports.
+- **You (orchestrator)** dispatch, read short verdicts, sample-audit
+  outputs, and decide next dispatch. You write no code, no CSS, and
+  no per-entry content yourself. The only things you author directly
+  are orchestration meta-docs: a `WEBSITE_RUNBOOK.md` (mirrors the
+  catalog's wave runbooks) and short commit messages.
 
 This will be hosted on Cloudflare Pages via the standard "Cloudflare
 Pages connects to a GitHub repo and rebuilds on push" workflow. For
-now you only need to run it locally (localhost dev server); deployment
-config is the final-step deliverable, not the immediate goal.
+now you only need to confirm it runs locally (localhost dev server);
+deployment config is the final-step deliverable, not the immediate
+goal.
 
 # Working environment
 
@@ -58,53 +82,73 @@ config is the final-step deliverable, not the immediate goal.
 The catalog is structured data + LaTeX prose. Your job is to render
 it on the web with these properties:
 
-## 1. Clean, minimalist, professional UI
-- Collaborator audience (physicists). Looks credible without being
-  flashy.
-- Typography-driven. Generous whitespace. No marketing graphics.
-- Dark / light mode toggle, system-preference default.
-- Mobile responsive (collaborators read on phones).
-- Math rendering via KaTeX or MathJax (KaTeX preferred — faster, no
-  network dependency once bundled).
+## 1. Quality bar (you decide HOW; this is just the bar)
 
-## 2. Catalog index with tiered organization
+- Audience: physicists who will read this on a real screen and form
+  an opinion about whether the underlying catalog is credible. The
+  website is part of that credibility argument.
+- Pick whatever stack, framework, design system, typography, color
+  palette, density, layout, and theming approach you think serves
+  the audience best. You're better positioned than this prompt to
+  judge what looks credible to a 2026 physics collaborator. Make
+  the call.
+- Hard quality requirements (HOW is up to you):
+  - Math rendering must work cleanly for LaTeX physics notation
+    (entries are full of $\varepsilon_K$, $\mathcal{B}(\cdot)$,
+    $M_{KK}$, integrals, etc.).
+  - Both desktop and mobile must be usable. Collaborators will
+    open this on phones.
+  - Reading long-form prose must be comfortable (the per-entry
+    Relevance + Post-2008 / Validity sections are several
+    paragraphs).
+  - The site must build to static files for Cloudflare Pages.
+- Soft quality signals (do at least one well; doing all is great
+  but not required):
+  - Dark / light mode (if you ship it, do it well in both — partial
+    dark mode is worse than no dark mode).
+  - Accessibility / screen-reader basics (semantic HTML, alt text,
+    contrast).
+  - Loading performance (static = fast by default).
+  - Search and / or faceted filtering across the 102 entries.
 
-Surface the priority tiering visibly. Suggested layout (you decide
-the best UX):
+## 2. Catalog index — content requirements (design is up to you)
 
-- **Landing page**: brief catalog overview (count, tag, fact-check
-  status); 6 family cards for PRIMARY low-energy; 1 family card for
-  PRIMARY new-family `collider_rs`; 1 muted card for SECONDARY
-  re-promotions. Each card lists its entries with a one-line process
-  description.
-- **Family page**: lists all entries in that family sorted by
-  process ID; each entry shows ID, standard notation, brief
-  description, status badges (OPUS-APPROVED, fact-check verdict,
-  cycle count if >1, implementation difficulty).
-- **Filtering / search**: at minimum, a search box that matches on
-  process ID, standard notation, plain-name, and key references.
-  Optionally faceted filters: family, tier, implementation
-  difficulty, code coverage status, fact-check verdict.
-- **Tier visualization**: SECONDARY entries should be visually
-  distinct (e.g., muted color or a "SECONDARY" badge) but NOT hidden.
-  The point is collaborators can see the full set and immediately
-  know which tier each entry is in.
+What the collaborator must be able to do, somehow:
 
-You decide the precise visual hierarchy (highest-impact → lower-impact)
-based on the data available. Reasonable defaults that should inform
-your layout:
-- PRIMARY > SECONDARY (tier).
-- Within PRIMARY: low-energy flavor (Waves 1-7) is the
-  highest-leverage tier (~47 TeV M_KK reach); `collider_rs` Wave-9 is
-  PRIMARY but lower-reach (~few TeV). The website should reflect
-  this honestly — don't oversell the collider tier.
-- Within a family: implementation difficulty LOW > MEDIUM > HIGH > BLOCKED
-  is a reasonable impact proxy.
-- Within a family: existing in-code coverage (YES > PARTIAL > NO) is
-  another impact proxy.
-- Family ordering on the landing page can follow physics tradition:
-  kaon, charm, beauty, top/Higgs/EW, charged_lepton, edm_neutrino,
-  collider_rs.
+- Land on the home page and, within ~10 seconds, understand:
+  - how many entries there are (102) and what tag pins them (v0.4),
+  - the fact-check status (100 VERIFIED / 2 PARTIAL / 0 MISMATCH),
+  - which families exist and how many entries each has,
+  - that there are two tiers (PRIMARY + SECONDARY) and roughly what
+    each means,
+  - how to drill down to a family or a specific entry.
+- Navigate by family. Each family view shows its entries with the
+  per-entry signals (status, tier, difficulty) at a glance.
+- Find entries by search and/or filter (search box minimum; faceted
+  filters are a nice-to-have).
+- See SECONDARY entries — they must be visible but visually
+  distinguishable from PRIMARY. They are NOT hidden; the point is
+  the collaborator can see the full set and instantly know which
+  tier each entry is in.
+
+Honest framing the design must respect:
+- PRIMARY > SECONDARY (the tier matters; collaborators may want to
+  filter SECONDARY out before reading).
+- Within PRIMARY, the low-energy flavor families (Waves 1–7) imply
+  $M_{KK}^{\min,p50}\sim 47$ TeV at $g_*=3$. The `collider_rs`
+  Wave-9 family is also PRIMARY but its LHC direct-search reach is
+  $\sim$ few TeV. The site should reflect this honestly — don't
+  oversell the collider tier as equally constraining.
+- Implementation difficulty (LOW / MEDIUM / HIGH / BLOCKED) and
+  existing in-code coverage (YES / PARTIAL / NO) are reasonable
+  proxies for "where to start when implementing" — surface these
+  somewhere so a collaborator scanning for a starting point can
+  find them.
+
+Family ordering on the landing page is your call; physics tradition
+is kaon / charm / beauty / top–Higgs–EW / charged-lepton / EDM /
+neutrino / collider, but feel free to deviate if you find a better
+organization (e.g., grouping by sensitivity class).
 
 ## 3. Per-entry detail pages
 
@@ -193,66 +237,104 @@ A "How the catalog was built" page that:
 - Cites the 3 arbitration precedents (L001, B001+B003, B021+B023).
 - Includes the fact-check summary table (per-family VERIFIED counts).
 
-## 6. Static site, regeneratable, deployable to Cloudflare Pages
+## 6. Static + Cloudflare-Pages-compatible (the only stack constraint)
 
-- Pure static site (no backend, no database).
-- Build command produces a `dist/` or `build/` or `out/` directory
-  that Cloudflare Pages can serve.
-- Source files in a top-level `website/` or `flavor_catalog/website/`
-  subdirectory.
-- README in that directory documenting:
-  - Local dev: `npm run dev` (or equivalent) starts on localhost.
-  - Production build: `npm run build`.
+- The site must build to static files. No backend, no runtime
+  database.
+- The build pipeline must read from the catalog (`processes/`,
+  `references/`, the data files codex produces) and produce a static
+  output directory Cloudflare Pages can serve.
+- Picking a SSG framework, a custom build script, or anything else
+  that meets the static-output bar is fine. Pick whatever ships best
+  given the local toolchain you find on the machine.
+- A README in the website source directory must document:
+  - Local dev (whatever command starts the dev server).
+  - Production build (whatever command produces the static output).
   - Cloudflare Pages config: build command, output directory, env
     vars if any.
-- The build script must read the catalog's YAML sidecars + .tex
-  prose + citation_anchors data and render the site. If a new
-  entry lands on the catalog branch, the website rebuilds
-  automatically on next deploy.
+- The build must be re-runnable: if a new entry lands on the catalog
+  branch, a re-build of the website should pick it up without manual
+  intervention.
 
-# Tool split: Claude UI / codex content
+# Tool split: orchestrator → codex (content) + Claude subagents (UI)
 
-Use Codex GPT-5.5 xhigh (NOT fast) for repetitive per-entry work.
-Use Claude (you) for UI/design/framework/integration. Specifically:
+You (orchestrator Claude) write zero code and zero CSS. You dispatch.
 
-## Claude (you) owns
-- Framework selection (recommend: Astro for static site with
-  content-heavy pages; alternative: Next.js with `output: 'export'`;
-  alternative: Hugo if you want zero-JS-framework simplicity).
-- Site scaffolding, layout, CSS / Tailwind / vanilla styling.
-- Light/dark mode, mobile responsive design, navigation.
-- Search / filter UX.
-- Methodology page authoring.
-- Per-entry detail page TEMPLATE (one Astro/Next component, used 102
-  times).
-- Citation-anchor RENDERING (read the JSON codex produces, render the
-  snapshot-view component).
-- Code-review of the codex outputs before integration.
-- Cloudflare Pages config.
+## Codex GPT-5.5 xhigh (NOT fast) — high-volume repetitive work
 
-## Codex (delegated) owns
-- For each of 102 entries: parse the YAML sidecar + .tex, extract
-  structured content (prose sections, value blocks, references), and
-  output a normalized JSON/YAML file the website can consume.
-- Citation-anchor resolution: for each value claim, find exact line
-  numbers + ±3-line context in the local snapshot.
-- Per-reference snapshot indexing: produce a list of all references
-  + their snapshot paths + their live URLs + sha256s.
+Owns:
+- For each of 102 entries: parse the YAML sidecar + `.tex`, extract
+  structured content (prose sections, value blocks, references),
+  output a normalized JSON/YAML file the website consumes.
+- Citation-anchor resolution: for each value claim in
+  `pdg_or_equivalent.values`, find exact line numbers + ±3-line
+  context in the local snapshot at `references/<id>/`.
+- Per-reference snapshot indexing: list all references + their
+  snapshot paths + their live URLs + sha256s, per entry.
 
-Dispatch pattern (matches the catalog's existing AGENTIC_WORKFLOW):
-- Batch the entries by family (kaon: ~16 batched; beauty: ~26; etc.).
+Dispatch pattern (matches the catalog's AGENTIC_WORKFLOW):
+- Batch by family (kaon: ~16; beauty: ~26; collider_rs: ~14; etc.).
 - One codex worker per batch, in parallel (max ~6 concurrent).
-- Codex writes its output files into `flavor_catalog/website/_data/`.
-- After codex batches land, Claude reads the data, fixes
-  obvious errors, re-dispatches codex for outliers.
-- Final Opus or Claude sample-audit on 5-10 random entries to confirm
-  citation anchors point at the right lines.
+- Codex writes output into `flavor_catalog/website/_data/`.
+- After a batch lands, you sample-audit (read 1-2 of the produced
+  JSON files); if obvious errors, dispatch a corrective codex pass;
+  do NOT fix inline.
 
-If `~/bin/codex_worker.sh` exists (cluster setup), use it. If not
-(local machine without the wrapper), invoke `codex exec
---dangerously-bypass-approvals-and-sandbox` directly. Always pipe
-`< /dev/null`. Always run `~/bin/codex_check_usage.sh` (if it exists)
-or otherwise eyeball the codex quota before each dispatch batch.
+Invocation:
+- If `~/bin/codex_worker.sh` exists (cluster setup), use it.
+- If not (local machine without wrapper), invoke `codex exec
+  --dangerously-bypass-approvals-and-sandbox` directly.
+- Always pipe `< /dev/null`.
+- Run `~/bin/codex_check_usage.sh` if it exists, else eyeball the
+  codex quota before each dispatch batch.
+
+## Claude subagents (via Agent tool) — UI / design / authoring
+
+Owns everything the website looks like, including framework choice,
+scaffolding, components, CSS, math rendering, search UX, layout,
+responsive behavior, dark mode, methodology page, Cloudflare config.
+
+Use the Agent tool: `subagent_type: general-purpose`, with explicit
+`model:` choice per task complexity:
+- `opus` for high-design-judgment tasks: framework decision +
+  scaffold, the per-entry detail template, the index/landing layout,
+  the citation-anchor snapshot-view component, the methodology page,
+  the final visual-polish pass.
+- `sonnet` for routine implementation: adding a CSS rule, wiring
+  one more page, adopting an existing pattern to a new component,
+  fixing a specific layout issue called out in a screenshot audit.
+
+Phase a Claude-subagent dispatch by deliverable, not by file. Each
+subagent dispatch should produce a coherent, testable artifact
+(e.g., "scaffold the site + landing page using catalog index
+data," or "build the per-entry detail page template using one
+example entry as a fixture").
+
+Anti-patterns to avoid:
+- Dispatching a subagent with a 50-line bullet list of CSS tweaks —
+  too granular; the subagent loses the design vision. Group into a
+  coherent "polish landing page" task instead.
+- Dispatching a single subagent for "build the whole site" — too
+  broad; that's what phases are for.
+- Doing the work yourself "just this one small thing" — drift starts
+  here; resist.
+
+## What you (orchestrator) actually do
+
+- Read the required-reading files (once, at start).
+- Dispatch subagents per the phase plan below.
+- After each subagent returns: read its short summary, sample-audit
+  1-2 specific files it produced, verify on disk, commit + push.
+- Maintain `flavor_catalog/website/WEBSITE_RUNBOOK.md` as the live
+  dispatch ledger (mirror of the catalog's
+  `wave_NNN_runbook.md` pattern): list each dispatch with
+  agent type, model, deliverable, background ID, output paths,
+  status. Survives compaction.
+- Decide when to escalate to PI (see STOP-and-ping section).
+- Visual verification: open localhost via screenshot tools (see
+  Visual verification section). This IS orchestrator work because
+  it's an integration judgment call, not authoring. Brief: take a
+  screenshot, look at it, dispatch a subagent to fix what's wrong.
 
 # Visual verification — Claude must actually LOOK at the rendered UI
 
@@ -262,7 +344,8 @@ and inspect the rendered output, not just the source.
 
 Concrete loop, on every meaningful UI change:
 
-1. Run the dev server (`npm run dev` or equivalent). Note the port.
+1. Start the dev server (whichever command the chosen stack uses).
+   Note the port.
 2. Use whatever browser-automation / screenshot tool your local
    Claude Code session has available. Common options, in order of
    preference:
@@ -278,21 +361,19 @@ Concrete loop, on every meaningful UI change:
      raw HTML — useful for sanity but doesn't catch visual issues.
 3. Take screenshots of at minimum: landing page, one family page,
    one PRIMARY entry detail, one SECONDARY entry detail, the
-   methodology page. Both light mode and dark mode.
-4. Actually look at the screenshots. Check for:
-   - Alignment: nothing visually drifting (e.g., headers
-     not flush, columns misaligned, badges overlapping prose).
-   - Typography: line lengths comfortable (45-75ch for body text);
-     hierarchy clear (H1 > H2 > H3 visually distinct);
-     monospace where appropriate (file paths, sha256, IDs).
+   methodology page. If you shipped dark mode, include both modes.
+4. Actually look at the screenshots. Things to check:
+   - Alignment: nothing visually drifting (headers not flush,
+     columns misaligned, badges overlapping prose).
+   - Typography: long-form content reads comfortably; hierarchy
+     is clear.
    - Whitespace: not cramped, not vast.
-   - Color contrast: WCAG AA at minimum in both modes (light AND
-     dark — dark mode often fails this).
-   - Math rendering: KaTeX expressions actually render, no raw
-     `\\varepsilon_K` showing through.
+   - Color contrast: usable for someone with imperfect vision.
+   - Math rendering: LaTeX expressions actually render — no raw
+     `\\varepsilon_K` or `$M_{KK}$` source showing through.
    - Citation-anchor view: when you click a reference, the snapshot
      view actually highlights the right line.
-   - Mobile: nothing overflows; tap targets are ≥ 44px;
+   - Mobile: nothing overflows; tap targets are reasonable;
      navigation collapses sensibly.
 5. If something looks off, iterate. CSS / layout adjustments should
    loop through the visual check, not skip it.
@@ -300,16 +381,16 @@ Concrete loop, on every meaningful UI change:
    sweep at desktop + mobile + dark + light. If any look broken,
    fix before push.
 
-Specific anti-patterns to catch by looking:
-- Cards with mismatched heights breaking the grid.
+Specific anti-patterns to catch by looking (regardless of stack):
+- Cards or list items with mismatched heights breaking visual rhythm.
 - Status badges wrapping awkwardly because content is too long.
 - Math expressions overflowing horizontally on mobile.
 - Code blocks (snapshot views) overflowing without horizontal scroll
   affordance.
-- Insufficient contrast on muted SECONDARY-tier styling (the muting
-  shouldn't make text unreadable, just visually deprioritized).
-- Dark mode forgetting any element — common: dropdowns, modals,
-  code-block backgrounds, hover states.
+- Insufficient contrast on muted SECONDARY-tier styling — muting
+  shouldn't make text unreadable, just visually deprioritized.
+- Theming gaps (if you ship dark mode): commonly forgotten elements
+  include dropdowns, modals, code-block backgrounds, hover states.
 
 You are the design quality bar. Codex extracts content; you make sure
 the rendered result is professional. If you can't make it look good,
@@ -367,32 +448,70 @@ git checkout -b flavor-catalog-website/2026q2
 # Verify codex available (if on cluster):
 ~/bin/codex_check_usage.sh 2>/dev/null && echo "codex OK" || echo "no codex wrapper (use codex exec directly)"
 
-# Confirm node/npm if you plan to use Astro/Next:
-node --version
-npm --version
+# Optional: check available toolchains (you decide what to use)
+node --version 2>/dev/null || echo "no node"
+python3 --version 2>/dev/null || echo "no python3"
+which hugo 2>/dev/null || echo "no hugo"
 ```
 
-# Iteration
+# Iteration (each phase = one or more delegated dispatches)
 
-This is multi-session work, not one-shot. Reasonable phasing:
+This is multi-day, multi-phase work. The orchestrator dispatches and
+reviews; the orchestrator does not author. Each phase below names
+WHO is dispatched and what they produce — your role is to set up
+each dispatch, wait for the notification, sample-audit the output,
+commit + push, then move on.
 
-1. **Phase 1 (Claude, ~1-2 hours)**: framework decision, scaffold,
-   one example entry hand-coded to design the per-entry template.
-2. **Phase 2 (codex, ~3-6 hours)**: dispatch codex batches to extract
-   structured content + citation anchors for all 102 entries. Run
-   in parallel by family.
-3. **Phase 3 (Claude, ~2-3 hours)**: data-driven rendering of the
-   full site from codex output. Search, filters, dark mode,
-   responsive design.
-4. **Phase 4 (Opus / Claude, ~30 min)**: sample audit of 5-10
-   citation anchors. Fix any false positives.
-5. **Phase 5 (Claude, ~1 hour)**: methodology page, Cloudflare Pages
-   config, README.
-6. **Phase 6 (PI)**: visual review at localhost, then push and
-   approve Cloudflare deployment.
+1. **Phase 1 — Scaffold (Claude subagent, opus, ~1-2 hr wall)**:
+   one Claude subagent picks the stack (their call — any static-site
+   approach is fine), scaffolds the site, hand-builds ONE example
+   entry's detail page to define the per-entry template, and
+   produces the landing layout. Returns a working dev-server
+   localhost. Orchestrator action: dispatch subagent → review
+   screenshot → commit + push.
 
-After each phase, commit + push to `flavor-catalog-website/2026q2`.
-Do NOT push to `flavor-catalog/2026q2` or any frozen branch.
+2. **Phase 2 — Codex extraction (codex, ~3-6 hr wall, parallel)**:
+   dispatch ~6 codex agents in parallel (one per family + the
+   secondary tree). Each produces normalized JSON/YAML per entry
+   plus citation-anchor data files. Total: 102 entries' content
+   + ~600 citation anchors resolved.
+   Orchestrator action: dispatch codex batches → wait for
+   notifications → sample-audit 2 entries per family → commit.
+
+3. **Phase 3 — Data-driven rendering (Claude subagent, opus,
+   ~2-3 hr)**: one Claude subagent reads the codex data and wires
+   it into the template from Phase 1. Implements family pages,
+   search, filters, status badges, citation-anchor view, dark
+   mode, mobile responsive layout. Returns a complete 102-page
+   localhost site.
+   Orchestrator action: dispatch → screenshot multi-page audit
+   → if issues, dispatch a `sonnet` subagent to fix specific
+   issues → commit.
+
+4. **Phase 4 — Citation audit (orchestrator, direct, ~30 min)**:
+   orchestrator does this directly because it's pure judgment
+   work, no authoring. Pick 5-10 random entries; for each,
+   click through to the cited reference; confirm the highlighted
+   line in the local snapshot actually contains the value.
+   If false positives found: dispatch codex to re-resolve anchors
+   for that family.
+   Orchestrator action: small bounded review.
+
+5. **Phase 5 — Methodology page + deployment config (Claude
+   subagent, opus, ~1 hr)**: one Claude subagent authors the
+   methodology page (from `CATALOG_METHODOLOGY.tex` + the relevant
+   sections of `AGENTIC_WORKFLOW.md`), writes the website README,
+   and adds the Cloudflare Pages configuration (build command,
+   output dir, env vars if any).
+   Orchestrator action: dispatch → review → commit + push.
+
+6. **Phase 6 — PI review**: PI visually reviews at localhost,
+   approves the Cloudflare deployment.
+
+After each phase, orchestrator commits + pushes to
+`flavor-catalog-website/2026q2`. Update `WEBSITE_RUNBOOK.md` with
+the dispatch row + outcome. Do NOT push to `flavor-catalog/2026q2`
+or any frozen branch.
 
 # When to STOP and ping the PI
 
@@ -425,54 +544,83 @@ Then wait for the PI's go-ahead before scaffolding.
 
 ## What I added beyond the PI's brief
 
-A few things the PI didn't specify that I baked in because they materially
-affect the deliverable:
+A few things the PI didn't explicitly specify but that materially affect
+the deliverable:
 
-1. **Dedicated branch `flavor-catalog-website/2026q2`** off the catalog
-   branch — keeps website code from polluting the (frozen-at-v0.4) catalog
-   content branch.
-2. **Framework recommendation** (Astro primary, Next.js export or Hugo as
-   fallbacks). Astro is the right pick for content-heavy static sites and
-   has first-class Cloudflare Pages support.
+1. **Pure-orchestrator role** for the new Claude. They dispatch codex
+   (for repetitive per-entry work) and Claude subagents via the Agent
+   tool (for UI / design / authoring) but write no code, CSS, or
+   per-entry content themselves. Context-window preservation across
+   the multi-day, multi-phase build.
+2. **Dedicated branch `flavor-catalog-website/2026q2`** off the catalog
+   branch — keeps website code from polluting the (frozen-at-v0.4)
+   catalog content branch.
 3. **Citation-anchor data format** — codex writes
-   `_data/citation_anchors/<id>.yaml` files Claude renders. Separates the
-   "find exact line" work (codex) from the "render it nicely" work (Claude).
-4. **UNRESOLVED handling** — codex must NOT silently link to a wrong line
-   if it can't find the value unambiguously. Mark as unresolved + manual
-   review instead. False-positive citations would destroy the whole
-   credibility argument.
-5. **Status badges + fact-check verdicts** — surface OPUS-APPROVED, fact-
-   check verdict, cycle count, code coverage, implementation difficulty per
-   entry. These signals already exist in the YAML; collaborators should see
-   them at a glance.
-6. **Tier visualization rule** — SECONDARY entries are muted but NOT hidden.
-   Honest framing per the PI's earlier directive on the catalog itself.
-7. **Methodology page** — surfaces `CATALOG_METHODOLOGY.tex` content as a
-   web page so collaborators can read the verification pitch without
-   downloading a PDF.
-8. **Provenance display** — sha256 and access date shown per cited source.
-   Visible provenance is part of the credibility argument.
-9. **Math rendering** — KaTeX recommended (faster than MathJax, no network
-   dep). Essential for the LaTeX physics notation throughout the catalog.
-10. **Code-coverage hyperlinks** — file:line evidence in entries should be
-    GitHub-blob-anchor URLs, so a collaborator can verify the coverage claim
-    by clicking through.
-11. **Random-sample citation audit** — a final Opus/Claude pass on 5-10
-    entries to confirm anchors land correctly. Sampling is cheap, false
-    positives are expensive.
-12. **6-phase iteration plan** with rough time estimates and an explicit
+   `_data/citation_anchors/<id>.yaml` files; UI subagents render. Clean
+   split between "find exact line" (codex) and "show it nicely"
+   (UI subagent).
+4. **UNRESOLVED handling** — codex must NOT silently link to a wrong
+   line if it can't find the value unambiguously. Mark as unresolved
+   with manual-review flag. False-positive citations would destroy the
+   whole credibility argument.
+5. **Status badges + fact-check verdicts** — surface OPUS-APPROVED,
+   fact-check verdict, cycle count, code coverage, implementation
+   difficulty per entry. These signals already exist in the YAML;
+   collaborators should see them at a glance.
+6. **Tier visualization requirement** — SECONDARY entries visible but
+   visually distinct. Honest framing per the PI's directive on the
+   catalog itself.
+7. **Methodology page** — surfaces `CATALOG_METHODOLOGY.tex` content
+   as a web page so collaborators can read the verification pitch
+   without downloading a PDF.
+8. **Provenance display** — sha256 and access date shown per cited
+   source. Visible provenance is part of the credibility argument.
+9. **Code-coverage hyperlinks** — file:line evidence in entries should
+   be GitHub-blob-anchor URLs, so a collaborator can verify the
+   coverage claim by clicking through.
+10. **Random-sample citation audit** — a final orchestrator pass on
+    5–10 entries to confirm anchors land correctly. Sampling is cheap;
+    false positives are expensive.
+11. **6-phase iteration plan** with rough time estimates and an explicit
     "PI visual review at localhost before pushing" gate.
-13. **STOP-and-ping conditions** — when to escalate vs proceed, mirroring
-    the catalog's existing orchestration protocol.
-14. **Mobile + a11y requirements** — collaborators read on phones and
-    accessibility matters for screen readers.
-15. **Light/dark mode** — small UX win that signals professionalism.
-16. **Pre-flight checklist** — confirms environment before scaffolding
-    starts. Matches the catalog's existing handoff pattern.
-17. **Visual-verification loop** (added per PI follow-up) — Claude must
+12. **STOP-and-ping conditions** — when to escalate vs proceed,
+    mirroring the catalog's existing orchestration protocol.
+13. **Pre-flight checklist** — confirms environment before scaffolding
+    starts.
+14. **Visual-verification loop** (per PI follow-up): orchestrator must
     actually open `http://localhost:<port>` via browser-automation /
-    screenshot tools, view the rendered output at multiple viewports
-    in both light + dark mode, and iterate based on what it sees. CSS
-    that compiles ≠ CSS that looks good. Anti-patterns to look for
-    (mismatched card heights, badge wrapping, math overflow on mobile,
-    dark-mode contrast failures, etc.) are listed explicitly.
+    screenshot tools, view the rendered output at multiple viewports,
+    and iterate based on what it sees. CSS that compiles ≠ CSS that
+    looks good. Specific anti-patterns listed.
+
+## What I deliberately did NOT specify
+
+The PI explicitly asked me to leave design and stack choices to the
+new Claude. The following are NOT specified in the prompt:
+
+- **Framework / stack**. Astro, Next.js, Hugo, Eleventy, plain Vite,
+  custom Python+Jinja, anything else — the new Claude picks. The only
+  hard constraint is static output for Cloudflare Pages.
+- **Math rendering library**. KaTeX, MathJax, or something else — pick
+  what fits the chosen stack.
+- **CSS approach**. Tailwind, vanilla CSS, CSS modules, a UI kit,
+  anything — the new Claude decides.
+- **Color palette, typography, density**. All design choices.
+- **Dark mode**. Encouraged but optional; if it ships, must be done
+  well in both modes.
+- **Search vs facets**. Search box is the minimum; faceted filters
+  are an option.
+- **Navigation structure**. Family-based, sensitivity-based,
+  hybrid — the new Claude picks.
+- **Landing-page layout**. Cards, list, table, mixed — design call.
+
+What IS specified is content + structure + quality bar:
+- Which fields per entry must surface (process ID, notation, status
+  badges, value blocks, RS-relevance prose, post-2008 dev,
+  validity / model dependence, code coverage, key references,
+  provenance footer).
+- Citation-exact reference linking with UNRESOLVED handling.
+- PRIMARY vs SECONDARY tier visible.
+- Methodology page reproducing `CATALOG_METHODOLOGY.tex`.
+- Static build deployable to Cloudflare Pages.
+- Visual verification loop (orchestrator screenshots + iterates).
