@@ -54,46 +54,81 @@ const FAMILY_LABELS: Record<string, string> = {
       <th data-sort="fact_check_verdict">Verdict</th>
       <th data-sort="implementation_difficulty">Difficulty</th>
       <th data-sort="code_coverage_status">Code</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     {rows.map((r) => (
-      <tr class={r.tier === 'SECONDARY' ? 'row-secondary' : ''}
+      <tr class={r.tier === 'SECONDARY' ? 'row-secondary row-link' : 'row-link'}
           data-process-id={r.process_id}
           data-family={r.family}
           data-tier={r.tier}
           data-verdict={(r.fact_check_verdict || '').toUpperCase()}
           data-difficulty={(r.implementation_difficulty || '').toUpperCase()}
-          data-coverage={(r.code_coverage_status || '').toUpperCase()}>
+          data-coverage={(r.code_coverage_status || '').toUpperCase()}
+          data-href={`/entries/${r.process_id}/`}>
         <td>
-          <a class="row-id-link" href={`/entries/${r.process_id}/`}>
+          <a class="row-cell-link row-id-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
             <code>{r.process_id}</code>
           </a>
         </td>
         <td class="row-notation">
-          <a href={`/entries/${r.process_id}/`}>
+          <a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
             <span set:html={inlineMath(r.standard_notation)}></span>
           </a>
           {r.process_name && <div class="row-process-name">{r.process_name}</div>}
         </td>
         {showFamily && (
-          <td><span class="family-chip">{FAMILY_LABELS[r.family] ?? r.family}</span></td>
+          <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><span class="family-chip">{FAMILY_LABELS[r.family] ?? r.family}</span></a></td>
         )}
         {showOriginalFamily && (
           <td>
-            {r.family_original
-              ? <span class="family-chip">{FAMILY_LABELS[r.family_original] ?? r.family_original}</span>
-              : <span class="row-muted">-</span>}
+            <a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
+              {r.family_original
+                ? <span class="family-chip">{FAMILY_LABELS[r.family_original] ?? r.family_original}</span>
+                : <span class="row-muted">-</span>}
+            </a>
           </td>
         )}
-        <td><Badges kind="tier" value={r.tier} /></td>
-        <td><Badges kind="verdict" value={r.fact_check_verdict} /></td>
-        <td><Badges kind="difficulty" value={r.implementation_difficulty} /></td>
-        <td><Badges kind="coverage" value={r.code_coverage_status} /></td>
-        <td class="row-go"><a href={`/entries/${r.process_id}/`} class="row-go-link" aria-label={`Open ${r.process_id}`}>open &rarr;</a></td>
+        <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="tier" value={r.tier} /></a></td>
+        <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="verdict" value={r.fact_check_verdict} /></a></td>
+        <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="difficulty" value={r.implementation_difficulty} /></a></td>
+        <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="coverage" value={r.code_coverage_status} /></a></td>
       </tr>
     ))}
   </tbody>
 </table>
 </div>
+
+<script is:inline>
+  // Make every .row-link <tr> keyboard-navigable and click-navigable.
+  // The <a> tags inside each cell handle the actual navigation;
+  // this script adds a single focusable row-level link for keyboard users
+  // and routes plain row clicks (not on child links) to the row's URL.
+  (function () {
+    function initRowLinks() {
+      document.querySelectorAll('table[data-entry-table] tbody tr.row-link').forEach(function (tr) {
+        var href = tr.getAttribute('data-href');
+        if (!href) return;
+        tr.setAttribute('tabindex', '0');
+        tr.setAttribute('role', 'link');
+        tr.setAttribute('aria-label', 'Open entry ' + (tr.getAttribute('data-process-id') || ''));
+        tr.addEventListener('click', function (e) {
+          // Don't double-navigate if a real <a> child was clicked.
+          if (e.target && e.target.closest('a')) return;
+          location.assign(href);
+        });
+        tr.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            location.assign(href);
+          }
+        });
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRowLinks);
+    } else {
+      initRowLinks();
+    }
+  })();
+</script>

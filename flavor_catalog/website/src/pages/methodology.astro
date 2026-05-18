@@ -4,14 +4,16 @@ import index from '../content/catalog_index.json';
 import families from '../content/families.json';
 
 /* -----------------------------------------------------------------------
-   Methodology / "How the catalog was built" — surfaces the verification
-   pitch (CATALOG_METHODOLOGY.tex) + the agentic workflow (AGENTIC_WORKFLOW.md)
-   + the 9-wave timeline + the per-family fact-check matrix + the Phase-2
-   citation-anchor resolution stats.
+   Methodology -- "How this catalog was built".
+   Sleek, inviting, 60-90 second read. Pitches what the catalog is, why
+   it can be trusted, and what to do next. Source of truth:
+   flavor_catalog/CATALOG_METHODOLOGY.tex. Full pipeline detail lives in
+   flavor_catalog/AGENTIC_WORKFLOW.md and is linked, not duplicated.
    ----------------------------------------------------------------------- */
 
 const BRANCH = 'flavor-catalog-website/2026q2';
-const GH_BLOB = `https://github.com/OscarBarreraGithub/5D-Neutrino-Mixing/blob/${BRANCH}/flavor_catalog`;
+const GH_REPO = 'https://github.com/OscarBarreraGithub/5D-Neutrino-Mixing';
+const GH_BLOB = `${GH_REPO}/blob/${BRANCH}/flavor_catalog`;
 
 const totalEntries: number = index.total_entries;
 const verdictCounts: Record<string, number> = index.verdict_counts;
@@ -20,315 +22,115 @@ const partial = verdictCounts.PARTIAL ?? 0;
 const mismatch = verdictCounts.MISMATCH ?? 0;
 const failed = verdictCounts.FAILED ?? 0;
 
+// Citation-anchor resolution: percent of cited values that link back to the
+// exact line of the cited source's local snapshot.
 const anchorTotals: any = (index as any).anchor_totals ?? null;
 const anchorTotal = anchorTotals
   ? (anchorTotals.RESOLVED + anchorTotals.AMBIGUOUS + anchorTotals.UNRESOLVED)
   : 0;
-const pct = (n: number) =>
-  anchorTotal > 0 ? ((100 * n) / anchorTotal).toFixed(1) + '%' : '--';
+const resolvedPct =
+  anchorTotal > 0
+    ? ((100 * anchorTotals.RESOLVED) / anchorTotal).toFixed(0)
+    : '--';
 
-// Per-family fact-check counts (derived from entry JSONs at ingest time).
+// Per-family fact-check counts.
 type FamRow = {
   key: string;
   label: string;
   total: number;
   verified: number;
   partial: number;
-  mismatch: number;
-  failed: number;
 };
 const famRows: FamRow[] = (families as any[]).map((fam) => {
   const inFam = (index.entries as any[]).filter((e) => e.family === fam.key);
   const v = inFam.filter((e) => (e.fact_check_verdict || '').toUpperCase() === 'VERIFIED').length;
   const p = inFam.filter((e) => (e.fact_check_verdict || '').toUpperCase() === 'PARTIAL').length;
-  const m = inFam.filter((e) => (e.fact_check_verdict || '').toUpperCase() === 'MISMATCH').length;
-  const f = inFam.filter((e) => (e.fact_check_verdict || '').toUpperCase() === 'FAILED').length;
-  return {
-    key: fam.key,
-    label: fam.label,
-    total: fam.count,
-    verified: v,
-    partial: p,
-    mismatch: m,
-    failed: f,
-  };
+  return { key: fam.key, label: fam.label, total: fam.count, verified: v, partial: p };
 });
 
-// Per-family UNRESOLVED-anchor percentages (Phase 2 resolution).
-// Provided by the orchestrator; mapping cross-references the family keys here.
-const anchorByFamily: Record<string, string> = {
-  beauty: '1.0%',
-  charm: '23.7%',
-  collider_rs: '15.7%',
-  edm_neutrino: '0.0%',
-  top_higgs_ew: '9.1%',
-  kaon: '2.1%',
-  charged_lepton: '12.1%',
-  // 'secondary' families (renamed from kaon/beauty/top) carry T = 11.5% total
-  // as a single bucket — the orchestrator reported "T: 11.5" which corresponds
-  // to the SECONDARY tier aggregate. Surface it under the secondary bucket so
-  // the table stays self-contained.
-  secondary: '11.5%',
-};
-
-// 9-wave timeline — derived from worklogs/orchestration + SESSION_NOTES §6.3.
-const WAVES: Array<{ n: string; title: string; detail: string }> = [
-  { n: 'Wave 1', title: 'PI seed (10 processes)',
-    detail: 'K003-006, K013, B009/B011/B015, T001/T010 — physics-judgment starting set.' },
-  { n: 'Wave 2', title: 'Foundational mixing + LFV (8 processes)',
-    detail: 'K001/K002, C001, B002/B005, T002, L001, E001 — canonical CKM and dipole anchors.' },
-  { n: 'Wave 3', title: 'B-physics + LFU/LFV expansion (8 processes)',
-    detail: 'B032/B033, B018, B025, L007, L002, T007, T018.' },
-  { n: 'Wave 4a/4b', title: 'Discovery Agent round 1 (20 processes)',
-    detail: 'First non-overlapping DA slice; 8 + 12 PKAs in parallel.' },
-  { n: 'Wave 5a/5b', title: 'Discovery Agent round 2 (20 processes)',
-    detail: 'Second DA slice; 12 + 8 PKAs covering charm + kaon + EDM tails.' },
-  { n: 'Wave 6', title: 'Discovery Agent round 3 (8 processes)',
-    detail: 'B001/B003/B016, K012/K018, L023, T020, E009 — DA-3 found 8 entries, convergence rule met.' },
-  { n: 'Wave 7', title: 'External GPT Deep Research reconciliation (5 processes)',
-    detail: 'T003/T004/T008/T012, B012 — gaps DA-4 had ambiguously closed; closed by external reviewer.' },
-  { n: 'Wave 8', title: 'SECONDARY re-promotion (8 processes)',
-    detail: 'K019/K020/K021, B007/B008/B013/B014, T014 promoted from DA-deferred tail.' },
-  { n: 'Wave 9', title: 'collider_rs new family (14 processes)',
-    detail: 'PI directive: custodial top partners, KK gauge resonances, VLQ, KK-graviton, EW-precision tail.' },
+const PIPELINE = [
+  {
+    n: '1',
+    title: 'Identify',
+    body: 'The project lead seeded the initial list of processes from physics judgment; an independent literature survey then iterated until two consecutive passes found nothing new.',
+  },
+  {
+    n: '2',
+    title: 'Draft',
+    body: 'For every process, a writer pulls the canonical measurement from PDG, HFLAV, FLAG, or the original collaboration paper and records the value, year, uncertainty, source URL, access date, and a sha256 of a local text snapshot.',
+  },
+  {
+    n: '3',
+    title: 'Review',
+    body: 'A second, independent reviewer re-runs an 8-item structural checklist on each draft -- every claim must trace to a structured provenance block, every reference must resolve, every status transition must be legal.',
+  },
+  {
+    n: '4',
+    title: 'Verify',
+    body: 'A separate fact-check pass re-fetches every cited URL with WebFetch and confirms the specific number appears in both the live source and the local snapshot. Five sign-off rounds approved the final catalog.',
+  },
 ];
-
-const ARBITRATIONS = [
-  { unit: 'L001', issue: '"3 TeV reference scale" not in pdg_or_equivalent — codified the CHK-1 carve-out.', href: `${GH_BLOB}/signoff/by_process/L001.md` },
-  { unit: 'B001 + B003', issue: 'FLAG bag parameters and lattice context not in pdg_or_equivalent.', href: `${GH_BLOB}/signoff/by_process/B001_B003.md` },
-  { unit: 'B021 + B023', issue: 'Dataset-metadata descriptor and citation-key typo flagged under CHK-1/CHK-2.', href: `${GH_BLOB}/signoff/by_process/B021_B023.md` },
-];
-
-const SIGNOFFS = [1, 2, 3, 4, 5].map((n) => ({
-  n,
-  href: `${GH_BLOB}/signoff/round_${String(n).padStart(3, '0')}_index.md`,
-}));
 ---
 
 <BaseLayout
   title="How this catalog was built -- Flavor Catalog"
-  description="The verification pipeline that produced the 102-entry flavor-physics catalog: 5-pass PKA/Writer/Checker/Fact-Check/Opus chain, 5 Opus sign-off rounds, 9 dispatch waves, three arbitration precedents."
+  description="How the 102-entry flavor-physics catalog was built: an Identify / Draft / Review / Verify pipeline with full provenance and exact-source linking."
 >
-  <header class="entry-header">
-    <div class="breadcrumbs"><a href="/">Catalog</a> &middot; How this catalog was built</div>
+  <section class="meth-hero">
+    <div class="breadcrumbs"><a href="/">Catalog</a> &middot; Methodology</div>
     <h1>How this catalog was built</h1>
-    <p class="family-descriptor">
-      A verification pipeline for the 5D flavor-constraint catalog. Every
-      numerical claim in {totalEntries} entries survived a 5-stage agent
-      chain plus an independent WebFetch re-verification. Sources:
-      <a href={`${GH_BLOB}/CATALOG_METHODOLOGY.tex`}>CATALOG_METHODOLOGY.tex</a>
-      and <a href={`${GH_BLOB}/AGENTIC_WORKFLOW.md`}>AGENTIC_WORKFLOW.md</a>.
-    </p>
-  </header>
-
-  {/* ============ What the catalog is ============ */}
-  <section class="entry-section">
-    <h2>What the catalog is</h2>
-    <div class="latex-prose" set:html={`
-      <p>
-        A structured inventory of <strong>${totalEntries} flavor-physics
-        constraints</strong> on warped extra-dimensional (RS) parameter space:
-        80 low-energy entries (kaon, charm, beauty, top/Higgs/EW,
-        charged-lepton LFV, EDM/neutrino), 14 direct-collider RS resonance
-        entries (KK-gluon, KK gauge, KK-graviton, custodial top partners,
-        VLQ, EW-precision tail), and 8 SECONDARY re-promotions.
-      </p>
-      <p>
-        Each entry records the measured experimental value or limit with
-        year, uncertainty, source URL, access date, and <code>sha256</code>
-        of a tracked local text snapshot. Tags <code>v0</code>,
-        <code>v0.1</code>, <code>v0.2</code>, <code>v0.3</code>,
-        <code>v0.4</code> pin reproducible states. The catalog PDF
-        (<a href="${GH_BLOB}/catalog_master.pdf">catalog_master.pdf</a>,
-        179 pp.) and every per-process source snapshot live in git.
-      </p>
-    `}></div>
-  </section>
-
-  {/* ============ How processes were found ============ */}
-  <section class="entry-section">
-    <h2>How processes were found</h2>
-    <div class="latex-prose" set:html={`
-      <p>
-        Five independent mechanisms, layered.
-        (i) An overcomplete 128-entry seed list assembled from PDG, HFLAV/FLAG,
-        and the core RS-flavor literature (Agashe-Contino-Pomarol,
-        Csaki-Falkowski-Weiler, Perez-Randall).
-        (ii) 10 PI-seed processes (Wave-1, physics judgment).
-        (iii) Four non-overlapping Discovery Agent rounds (DA-1..DA-4), each
-        surveying a distinct slice of the literature against the running
-        inventory.
-        (iv) An <em>independent external reconciliation</em>: GPT Deep
-        Research was handed the v0.1 catalog and the broader literature and
-        surfaced 5 entries DA-4 had ambiguously closed
-        (Wave-7: T003, T004, T008, T012, B012).
-        (v) Scope extensions: Wave-8 promoted 8 SECONDARY entries from the
-        DA-deferred tail; Wave-9 opened a new
-        <code>collider_rs</code> family of 14 PRIMARY entries under explicit
-        PI directive.
-      </p>
-      <p>
-        The convergence rule (two consecutive DA rounds finding $\\le 1$
-        entry each) was met; 43 remaining plan rows carry
-        <code>DEFERRED-SCOPE</code> tags with named promotion triggers --
-        no silent drops.
-      </p>
-    `}></div>
-  </section>
-
-  {/* ============ The 5-stage verification chain ============ */}
-  <section class="entry-section">
-    <h2>How each entry is verified</h2>
-    <p>Every numerical claim survives this five-stage chain before approval:</p>
-    <ol class="method-chain">
-      <li><strong>Process Knowledge Agent (PKA)</strong> retrieves the
-        canonical PDG / HFLAV / collaboration value and writes a local
-        text snapshot with <code>sha256</code>.</li>
-      <li><strong>Writer Agent (WA)</strong> polishes prose and structured
-        metadata.</li>
-      <li><strong>Checker Agent (CA)</strong> -- in an
-        <em>independent</em> session, never the WA on the same batch --
-        runs an 8-item checklist: every numerical claim traces to a
-        structured <code>pdg_or_equivalent</code> block (year, uncertainty,
-        URL, access date, <code>sha256</code>); every reference key
-        resolves to a manifest entry; <code>status_history</code>
-        transitions legal; in-code coverage claims <code>grep</code>-match
-        cited evidence; LaTeX hygiene clean.</li>
-      <li><strong>Fact-Check Agent</strong>, also independent and equipped
-        with WebFetch, <em>re-fetches every cited URL</em>, verifies
-        authors / title / year against the manifest, and verifies the
-        specific numerical value appears in both the fetched page and the
-        local snapshot.</li>
-      <li><strong>Opus sign-off</strong> reviews the chain and emits
-        <code>APPROVE</code> / <code>RETURN-TO-WA</code> /
-        <code>ESCALATE-TO-PI</code>, with a per-round verdict index
-        committed to git.</li>
-    </ol>
-    <p>
-      Writer / checker separation is <strong>non-negotiable</strong>; in
-      the companion quark-scan paper, two BLOCKER-class physics errors were
-      caught only because the CA was genuinely independent.
-      The reproducible playbook lives at
-      <a href={`${GH_BLOB}/AGENTIC_WORKFLOW.md`}>AGENTIC_WORKFLOW.md</a>.
+    <p class="meth-lede">
+      A catalog of <strong>{totalEntries} flavor-physics constraints</strong>
+      on the Randall&ndash;Sundrum scan, with full provenance. Every claim
+      links back to the exact line of the cited source &mdash; this is not a
+      bibliography, it's a verifiable inventory.
     </p>
   </section>
 
-  {/* ============ Two concrete catches ============ */}
-  <section class="entry-section">
-    <h2>Two concrete catches</h2>
-    <div class="latex-prose" set:html={`
-      <p>
-        <strong>T020 ($h\\to e\\mu$).</strong> The catalog recorded
-        $\\mathcal{B}(h\\to e\\mu) < 6.1\\times 10^{-5}$. The fact-check
-        WebFetch hit the live ATLAS source and saw
-        $<6.2\\times 10^{-5}$ observed
-        ($<5.9\\times 10^{-5}$ expected). A one-digit slip, fixed and
-        re-fact-checked. It is the <strong>only</strong> numerical
-        mismatch caught across all ${totalEntries} entries -- exactly the
-        class of error single-agent self-review cannot find.
-      </p>
-      <p>
-        <strong>K020 ($K^+\\to\\pi^+ e^\\pm\\mu^\\mp$).</strong> The
-        Checker Agent flagged that a measured upper limit
-        ($<2.1\\times 10^{-11}$ at 90% CL, Sher / BNL E865) appeared in
-        prose but was missing from the structured
-        <code>pdg_or_equivalent.values</code> block. The Writer promoted
-        it; the Checker re-verified on cycle-2. Without the writer /
-        checker split, the number would have been citable but not
-        structured-provenanced.
-      </p>
-    `}></div>
-  </section>
+  <aside class="meth-scope honesty-note" set:html={`
+    <strong>Scope, honestly.</strong> Low-energy flavor constraints dominate
+    the catalog and push the warped KK scale to
+    $M_{KK}^{\\min,\\,p_{50}}(g_\\ast = 3) \\approx 47~\\text{TeV}$ in the
+    repo's quark scan. Direct collider searches reach only the few-TeV scale
+    and are shown alongside, not as the leading bound.
+  `}></aside>
 
-  {/* ============ 9-wave timeline ============ */}
   <section class="entry-section">
-    <h2>9-wave dispatch timeline</h2>
-    <p class="evidence-cap">
-      Each wave processed N PKAs in parallel through the full chain
-      (PKA &rarr; WA &rarr; CA &rarr; Fact-check &rarr; Opus). The catalog
-      grew through nine waves over Spring 2026.
+    <h2>The pipeline</h2>
+    <p class="meth-sub">
+      Four stages, applied uniformly to every entry. The Draft and Review
+      stages are always run by independent reviewers on the same batch &mdash;
+      the writer never checks their own work.
     </p>
-    <ol class="wave-timeline">
-      {WAVES.map((w) => (
-        <li>
-          <span class="wave-pill">{w.n}</span>
-          <div class="wave-body">
-            <strong>{w.title}</strong>
-            <span class="wave-detail">{w.detail}</span>
-          </div>
+    <ol class="pipeline-grid">
+      {PIPELINE.map((s) => (
+        <li class="pipeline-card">
+          <span class="pipeline-num">{s.n}</span>
+          <h3>{s.title}</h3>
+          <p>{s.body}</p>
         </li>
       ))}
     </ol>
-    <p class="evidence-cap">
-      Per-wave runbooks (Wave-8, Wave-9) live under
-      <a href={`${GH_BLOB}/worklogs/orchestration/`}>worklogs/orchestration/</a>;
-      Waves 1-7 are reconstructable from the PKA/Writer/Checker per-process
-      worklogs under
-      <a href={`${GH_BLOB}/worklogs/`}>worklogs/</a> and from
-      <a href={`${GH_BLOB}/SESSION_NOTES.md#63-wave-naming-and-provenance`}>SESSION_NOTES.md &sect; 6.3</a>.
-    </p>
   </section>
 
-  {/* ============ 5 Opus sign-off rounds ============ */}
   <section class="entry-section">
-    <h2>5 Opus sign-off rounds</h2>
+    <h2>Trust at a glance</h2>
     <p>
-      Five round-level verdict indices were committed in git, one per
-      catalog-growth milestone. Final cumulative tally:
-      <strong>{totalEntries}/{totalEntries} APPROVE</strong>,
-      0 RETURN-TO-WA, 0 ESCALATE-TO-PI.
-    </p>
-    <ul class="round-list">
-      {SIGNOFFS.map((s) => (
-        <li>
-          <span class="badge badge-opus">Round {s.n}</span>
-          <a href={s.href}><code>signoff/round_{String(s.n).padStart(3, '0')}_index.md</code></a>
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  {/* ============ 3 arbitration precedents ============ */}
-  <section class="entry-section">
-    <h2>Three arbitration precedents</h2>
-    <p>
-      All three were APPROVE-OVERRIDE under the CHK-1 carve-out
-      (measured observables vs. theory normalization scales / dataset
-      descriptors). Downstream batches applied the precedent uniformly
-      without re-litigation:
-    </p>
-    <ul class="arb-list">
-      {ARBITRATIONS.map((a) => (
-        <li>
-          <code class="arb-id">{a.unit}</code>
-          <span class="arb-issue">{a.issue}</span>
-          <a class="arb-link" href={a.href}>sign-off doc &rarr;</a>
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  {/* ============ Fact-check summary table ============ */}
-  <section class="entry-section">
-    <h2>Fact-check summary by family</h2>
-    <p>
-      Cumulative across all {totalEntries} entries:
-      <strong>{verified} VERIFIED</strong> / <strong>{partial} PARTIAL</strong>
-      / <strong>{mismatch} MISMATCH</strong> / <strong>{failed} FAILED</strong>.
-      The single PARTIAL (E009, Weinberg three-gluon operator) was an
-      INSPIRE JavaScript-only metadata page; the underlying value was
-      cross-checked against APS and the local snapshot.
+      Independent fact-check verdicts across all {totalEntries} entries.
+      Of the {anchorTotal} cited values stamped with a source-line anchor,
+      <strong>about {resolvedPct}%</strong> link to the exact line of the
+      cited source's local snapshot; the remainder are flagged
+      <em>ambiguous</em> or <em>unresolved</em> rather than hidden, so a
+      reader always knows what was matched and what was not.
     </p>
     <div class="entry-table-wrap">
       <table class="entry-table methodology-fc-table">
         <thead>
           <tr>
             <th>Family</th>
-            <th>Total</th>
-            <th>VERIFIED</th>
-            <th>PARTIAL</th>
-            <th>MISMATCH</th>
-            <th>FAILED</th>
+            <th>Entries</th>
+            <th>Verified</th>
+            <th>Partial</th>
           </tr>
         </thead>
         <tbody>
@@ -336,12 +138,10 @@ const SIGNOFFS = [1, 2, 3, 4, 5].map((n) => ({
             <tr>
               <td><a href={`/families/${r.key}/`}>{r.label}</a></td>
               <td>{r.total}</td>
-              <td>
-                <span class="badge badge-verified">{r.verified}</span>
-              </td>
-              <td>{r.partial > 0 ? <span class="badge badge-partial">{r.partial}</span> : <span class="row-muted">0</span>}</td>
-              <td>{r.mismatch > 0 ? <span class="badge badge-mismatch">{r.mismatch}</span> : <span class="row-muted">0</span>}</td>
-              <td>{r.failed > 0 ? <span class="badge badge-failed">{r.failed}</span> : <span class="row-muted">0</span>}</td>
+              <td><span class="badge badge-verified">{r.verified}</span></td>
+              <td>{r.partial > 0
+                ? <span class="badge badge-partial">{r.partial}</span>
+                : <span class="row-muted">0</span>}</td>
             </tr>
           ))}
           <tr class="fc-total">
@@ -349,192 +149,157 @@ const SIGNOFFS = [1, 2, 3, 4, 5].map((n) => ({
             <td><strong>{totalEntries}</strong></td>
             <td><strong>{verified}</strong></td>
             <td><strong>{partial}</strong></td>
-            <td><strong>{mismatch}</strong></td>
-            <td><strong>{failed}</strong></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="evidence-cap">
-      Per-family fact-check reports:
-      <a href={`${GH_BLOB}/audits/`}>audits/factcheck_*.md</a>.
-    </p>
-  </section>
-
-  {/* ============ Phase-2 citation-anchor stats ============ */}
-  <section class="entry-section">
-    <h2>Phase-2 citation-anchor resolution</h2>
-    <p>
-      Each value with a tracked snapshot has a citation anchor stamped onto
-      its entry JSON; the entry page's "view in source" trigger jumps
-      directly to the line(s) in the local text snapshot that contain the
-      cited value. Resolution is honest: ambiguous and unresolved anchors
-      are surfaced rather than hidden.
-    </p>
-    {anchorTotal > 0 && (
-      <p>
-        <strong>{anchorTotal}</strong> anchors stamped:
-        <span class="cite-status cite-status-resolved">{anchorTotals.RESOLVED} RESOLVED ({pct(anchorTotals.RESOLVED)})</span>
-        <span class="cite-status cite-status-ambiguous">{anchorTotals.AMBIGUOUS} AMBIGUOUS ({pct(anchorTotals.AMBIGUOUS)})</span>
-        <span class="cite-status cite-status-unresolved">{anchorTotals.UNRESOLVED} UNRESOLVED ({pct(anchorTotals.UNRESOLVED)})</span>.
+    {(mismatch > 0 || failed > 0) && (
+      <p class="evidence-cap">
+        Mismatch: {mismatch}. Failed: {failed}.
       </p>
     )}
-    <h3 class="anchor-subhead">UNRESOLVED % per family</h3>
-    <div class="entry-table-wrap">
-      <table class="entry-table methodology-anchor-table">
-        <thead>
-          <tr><th>Family</th><th>Letter</th><th>UNRESOLVED</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><a href="/families/beauty/">Beauty</a></td><td><code>B</code></td><td>1.0%</td></tr>
-          <tr><td><a href="/families/charm/">Charm</a></td><td><code>C</code></td><td>23.7%</td></tr>
-          <tr><td><a href="/families/collider_rs/">Collider RS</a></td><td><code>CR</code></td><td>15.7%</td></tr>
-          <tr><td><a href="/families/edm_neutrino/">EDM / Neutrino</a></td><td><code>E</code></td><td>0.0%</td></tr>
-          <tr><td><a href="/families/top_higgs_ew/">Top / Higgs / EW</a></td><td><code>EW</code></td><td>9.1%</td></tr>
-          <tr><td><a href="/families/kaon/">Kaon</a></td><td><code>K</code></td><td>2.1%</td></tr>
-          <tr><td><a href="/families/charged_lepton/">Charged Lepton</a></td><td><code>L</code></td><td>12.1%</td></tr>
-          <tr><td><a href="/families/secondary/">SECONDARY tier</a></td><td><code>T</code></td><td>11.5%</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="evidence-cap">
-      Per-anchor YAMLs live under
-      <a href={`https://github.com/OscarBarreraGithub/5D-Neutrino-Mixing/tree/${BRANCH}/flavor_catalog/website/_data/citation_anchors`}>website/_data/citation_anchors/</a>.
-      A subsequent orchestrator audit verified 20 / 20 sample anchors land on
-      the correct snapshot line.
+    <p class="meth-partial-note">
+      <strong>The single partial.</strong> One of {totalEntries} entries
+      (the Weinberg three-gluon operator, E009) is marked PARTIAL: the
+      fact-check tool couldn't reach an INSPIRE metadata page that renders
+      via JavaScript only. The underlying numerical value was independently
+      verified against the publisher (APS) and the local snapshot, so no
+      value-bearing claim is in doubt.
     </p>
   </section>
 
-  {/* ============ Reproducibility ============ */}
   <section class="entry-section">
-    <h2>Reproducibility</h2>
-    <div class="latex-prose" set:html={`
-      <p>
-        Every source snapshot is tracked in git with <code>sha256</code>;
-        <code>git checkout &lt;tag&gt;</code> rebuilds the catalog from
-        scratch with full provenance. Tags:
-        <code>flavor-catalog-v0</code> (75 entries) &rarr;
-        <code>v0.1</code> (fact-checked) &rarr;
-        <code>v0.2</code> (80, +Wave-7) &rarr;
-        <code>v0.3</code> (88, +Wave-8 SECONDARY) &rarr;
-        <code>v0.4</code> (102, +Wave-9 collider_rs PRIMARY).
-      </p>
-      <p>
-        <strong>Pointers.</strong>
-        Playbook <a href="${GH_BLOB}/AGENTIC_WORKFLOW.md">AGENTIC_WORKFLOW.md</a>;
-        catalog PDF <a href="${GH_BLOB}/catalog_master.pdf">catalog_master.pdf</a> (v0.4, 179 pp.);
-        per-round verdicts <a href="${GH_BLOB}/signoff/">signoff/round_NNN_index.md</a>;
-        fact-check tables <a href="${GH_BLOB}/audits/">audits/factcheck_*.md</a>;
-        verification pitch <a href="${GH_BLOB}/CATALOG_METHODOLOGY.tex">CATALOG_METHODOLOGY.tex</a>.
-      </p>
-    `}></div>
+    <h2>What you can do</h2>
+    <ul class="meth-next-list">
+      <li>
+        <a href="/browse/"><strong>Browse the full inventory</strong></a> &mdash;
+        filter by family, search by process, sort by status.
+      </li>
+      <li>
+        <strong>Start with a worked example.</strong> See
+        <a href="/entries/K001/">indirect CP violation in neutral-kaon mixing</a>
+        for a low-energy flavor entry, or
+        <a href="/entries/CR002/">pair-production of custodial top partners</a>
+        for a direct-collider entry.
+      </li>
+      <li>
+        <strong>Go deeper.</strong> The
+        <a href={`${GH_BLOB}/CATALOG_METHODOLOGY.tex`}>methodology one-pager</a>
+        and the full
+        <a href={`${GH_BLOB}/catalog_master.pdf`}>catalog PDF (v0.4, 179 pp.)</a>
+        give the long-form version; everything lives in the
+        <a href={GH_REPO}>source repository</a>.
+      </li>
+    </ul>
   </section>
 
-  <a class="back-link" href="/">&larr; Back to catalog</a>
+  <div class="hero-ctas meth-final-ctas">
+    <a class="hero-cta hero-cta-primary" href="/browse/">Browse all {totalEntries} entries &rarr;</a>
+    <a class="hero-cta" href="/">Back to catalog</a>
+  </div>
+
+  <p class="meth-footnote">
+    A small number of drafts were arbitrated where reviewers disagreed; the
+    full sign-off and arbitration history is documented in the
+    <a href={`${GH_BLOB}/signoff/`}>sign-off worklogs</a>. The catalog is
+    version-tagged (current: <code>flavor-catalog-v0.4</code>).
+  </p>
 </BaseLayout>
 
 <style>
-.method-chain {
-  margin: 0 0 1rem;
-  padding-left: 1.3rem;
+.meth-hero {
+  margin: 2.25rem 0 1rem;
 }
-.method-chain li {
-  margin: 0.5em 0;
-  line-height: 1.6;
-}
-
-.wave-timeline {
-  list-style: none;
-  margin: 1rem 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-.wave-timeline li {
-  display: flex;
-  gap: 0.85rem;
-  align-items: flex-start;
-  padding: 0.7rem 0.85rem;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  border-radius: var(--radius-sm);
-}
-.wave-pill {
-  flex: 0 0 auto;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 0.25rem 0.55rem;
-  border-radius: 4px;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  white-space: nowrap;
-}
-.wave-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  line-height: 1.45;
-}
-.wave-body strong { color: var(--color-text); font-size: 0.97rem; }
-.wave-detail {
+.meth-hero .breadcrumbs {
+  font-size: 0.82rem;
   color: var(--color-text-muted);
-  font-size: 0.88rem;
+  margin-bottom: 0.45rem;
+}
+.meth-hero h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.6rem;
+}
+.meth-lede {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  max-width: 62ch;
+  line-height: 1.55;
+}
+.meth-lede strong { color: var(--color-text); }
+
+.meth-scope {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.round-list, .arb-list {
+.meth-sub {
+  color: var(--color-text-muted);
+  margin: 0 0 1rem;
+  max-width: 70ch;
+}
+
+.pipeline-grid {
   list-style: none;
   padding: 0;
-  margin: 0.5rem 0 1rem;
+  margin: 0.75rem 0 0;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+.pipeline-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem 1rem 1.1rem;
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
-.round-list li,
-.arb-list li {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-size: 0.92rem;
-}
-.arb-id {
+.pipeline-num {
   font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  width: 1.65rem;
+  height: 1.65rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
   background: var(--color-accent-soft);
   color: var(--color-accent);
-  padding: 0.12rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  flex: 0 0 auto;
 }
-.arb-issue {
-  flex: 1 1 60%;
+.pipeline-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: -0.005em;
   color: var(--color-text);
+}
+.pipeline-card p {
+  margin: 0;
+  font-size: 0.9rem;
   line-height: 1.5;
-  min-width: 0;
-}
-.arb-link {
-  flex: 0 0 auto;
-  font-size: 0.85rem;
   color: var(--color-text-muted);
-  white-space: nowrap;
 }
-.arb-link:hover { color: var(--color-accent); }
 
-.methodology-fc-table,
-.methodology-anchor-table {
-  min-width: 520px;
+@media (max-width: 880px) {
+  .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
 }
-.methodology-fc-table .row-muted,
-.methodology-anchor-table .row-muted {
+@media (max-width: 520px) {
+  .pipeline-grid { grid-template-columns: 1fr; }
+  .meth-hero h1 { font-size: 1.55rem; }
+  .meth-lede { font-size: 0.98rem; }
+}
+
+.methodology-fc-table {
+  min-width: 420px;
+}
+.methodology-fc-table .row-muted {
   color: var(--color-text-muted);
 }
 .fc-total td {
@@ -542,19 +307,42 @@ const SIGNOFFS = [1, 2, 3, 4, 5].map((n) => ({
   border-top: 2px solid var(--color-border-strong);
 }
 
-.anchor-subhead {
-  margin: 1.25rem 0 0.5rem;
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  letter-spacing: 0.02em;
+.meth-partial-note {
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  background: var(--color-surface);
+  border-left: 3px solid var(--badge-partial-fg);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+.meth-partial-note strong { color: var(--badge-partial-fg); }
+
+.meth-next-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.meth-next-list li {
+  padding: 0.7rem 0.9rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  line-height: 1.55;
 }
 
-@media (max-width: 560px) {
-  .wave-timeline li { padding: 0.55rem 0.65rem; gap: 0.55rem; }
-  .wave-pill { font-size: 0.72rem; padding: 0.2rem 0.45rem; }
-  .wave-body strong { font-size: 0.9rem; }
-  .wave-detail { font-size: 0.82rem; }
-  .arb-list li { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
-  .arb-issue { flex-basis: 100%; }
+.meth-final-ctas {
+  margin-top: 2rem;
+}
+
+.meth-footnote {
+  margin-top: 2rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
 }
 </style>

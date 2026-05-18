@@ -328,8 +328,10 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
             if (!d) return;
             if (typeof d.showModal === 'function') { d.showModal(); } else { d.setAttribute('open', ''); }
             // Re-render any KaTeX inside the modal in case auto-render missed it.
-            if (typeof window.renderMathInElement === 'function') {
-              try { window.renderMathInElement(d); } catch (e) {}
+            if (typeof window.fcatRenderMath === 'function') {
+              try { window.fcatRenderMath(d); } catch (e) {}
+            } else if (typeof window.renderMathInElement === 'function') {
+              try { window.renderMathInElement(d, window.fcatKatexOptions || {}); } catch (e) {}
             }
           });
         });

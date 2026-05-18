@@ -111,21 +111,30 @@ const partialCount = verdictCounts.PARTIAL ?? 0;
           });
         }
 
+        window.fcatKatexOptions = {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true },
+            { left: '$', right: '$', display: false }
+          ],
+          throwOnError: false,
+          strict: 'ignore',
+          ignoredTags: ['script', 'noscript', 'style', 'textarea'],
+          ignoredClasses: ['katex']
+        };
+        window.fcatRenderMath = function (root) {
+          if (typeof window.renderMathInElement !== 'function') return false;
+          window.renderMathInElement(root || document.body, window.fcatKatexOptions);
+          return true;
+        };
+
         function runKatex() {
           if (typeof window.renderMathInElement !== 'function') {
             setTimeout(runKatex, 80);
             return;
           }
-          window.renderMathInElement(document.body, {
-            delimiters: [
-              { left: '$$', right: '$$', display: true },
-              { left: '\\[', right: '\\]', display: true },
-              { left: '$', right: '$', display: false },
-              { left: '\\(', right: '\\)', display: false }
-            ],
-            throwOnError: false,
-            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-          });
+          window.fcatRenderMath(document.body);
         }
         runKatex();
       });

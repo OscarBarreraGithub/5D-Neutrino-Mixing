@@ -7,6 +7,12 @@ const totalEntries: number = index.total_entries;
 const verdictCounts: Record<string, number> = index.verdict_counts;
 const verified = verdictCounts.VERIFIED ?? 0;
 const partial = verdictCounts.PARTIAL ?? 0;
+const mismatch = verdictCounts.MISMATCH ?? 0;
+
+// Compute primary/secondary from family_counts: secondary family is the only SECONDARY tier family
+const familyCounts: Record<string, number> = (index as any).family_counts ?? {};
+const secondaryCount: number = familyCounts.secondary ?? 8;
+const primaryCount: number = totalEntries - secondaryCount;
 
 const anchorTotals: any = (index as any).anchor_totals ?? null;
 const anchorTotal = anchorTotals
@@ -18,43 +24,33 @@ const anchorTotal = anchorTotals
   description="Static catalog of 102 flavor-physics process entries supporting the 5D / RS warped-extra-dimension scan."
 >
   <section class="hero">
-    <h1>Flavor catalog for the 5D / RS scan</h1>
+    <h1>Flavor catalog for the 5D&hairsp;/&hairsp;RS scan</h1>
     <p>
-      A snapshot of {totalEntries} flavor-physics process entries
-      (94 PRIMARY + 8 SECONDARY) used as constraints and cross-checks for the
-      anarchic-flavor Randall-Sundrum scan in this repository.
-      Fact-check verdicts: <strong>{verified} VERIFIED</strong> /
-      <strong>{partial} PARTIAL</strong> / 0 MISMATCH.
+      A snapshot of {totalEntries} flavor-physics processes that constrain &mdash; or could constrain &mdash;
+      the anarchic-flavor Randall&ndash;Sundrum scan in this repository.
     </p>
-    {anchorTotal > 0 && (
-      <p class="hero-anchor-summary">
-        <strong>{anchorTotal}</strong> citation anchors stamped across the
-        catalog: <span class="cite-status cite-status-resolved">{anchorTotals.RESOLVED} RESOLVED</span>
-        <span class="cite-status cite-status-ambiguous">{anchorTotals.AMBIGUOUS} AMBIGUOUS</span>
-        <span class="cite-status cite-status-unresolved">{anchorTotals.UNRESOLVED} UNRESOLVED</span>.
-        Every value with a snapshot has a "view in source" trigger on its entry page.
-      </p>
-    )}
   </section>
 
   <div class="hero-ctas">
-    <a class="hero-cta hero-cta-primary" href="/browse/">Browse &amp; filter all {totalEntries} entries &rarr;</a>
-    <a class="hero-cta" href="/methodology/">How this catalog was built</a>
-    <a class="hero-cta" href="/families/secondary/">SECONDARY entries</a>
+    <a class="hero-cta hero-cta-primary" href="/browse/">Browse all {totalEntries} entries &rarr;</a>
+    <a class="hero-cta" href="/methodology/">How this catalog was built &rarr;</a>
   </div>
 
-  <aside class="honesty-note" set:html={`
-    <strong>Honest framing.</strong> Low-energy flavor families (kaon, beauty,
-    charm, EDM/neutrino) imply
-    $M_{KK}^{\\min,\\,p_{50}}(g_\\ast = 3) \\approx 47.26~\\text{TeV}$
-    in the repo-local rc1.1 quark scan, while the
-    <code>collider_rs</code> Wave-9 direct-search reach for custodial
-    top-partners and KK gauge resonances sits near the few-TeV scale.
-    Direct LHC limits and indirect flavor bounds therefore probe qualitatively
-    different mass scales and should not be mapped onto a single
-    $M_{KK}$ axis without explicit model assumptions.
-    Source: <code>flavor_catalog/processes/collider_rs/CR002.tex</code>.
-  `}></aside>
+  <div class="catalog-stats-strip">
+    <span>{primaryCount} primary</span>
+    <span class="stats-sep">&middot;</span>
+    <span>{secondaryCount} secondary</span>
+    <span class="stats-sep">&middot;</span>
+    <span>{verified} verified</span>
+    {partial > 0 && <><span class="stats-sep">&middot;</span><span>{partial} partial</span></>}
+    {mismatch > 0 && <><span class="stats-sep">&middot;</span><span>{mismatch} mismatch</span></>}
+    {anchorTotal > 0 && (
+      <>
+        <span class="stats-sep">&middot;</span>
+        <span>{anchorTotal} citation anchors</span>
+      </>
+    )}
+  </div>
 
   <h2 class="section-eyebrow">Families</h2>
   <div class="family-grid">
@@ -68,4 +64,17 @@ const anchorTotal = anchorTotals
       </a>
     ))}
   </div>
+
+  <aside class="honesty-note" set:html={`
+    <strong>Scope note.</strong> Low-energy flavor families (kaon, beauty,
+    charm, EDM/neutrino) imply
+    $M_{KK}^{\\min,\\,p_{50}}(g_\\ast = 3) \\approx 47.26~\\text{TeV}$
+    in the repo-local rc1.1 quark scan, while the
+    <code>collider_rs</code> Wave-9 direct-search reach for custodial
+    top-partners and KK gauge resonances sits near the few-TeV scale.
+    Direct LHC limits and indirect flavor bounds therefore probe qualitatively
+    different mass scales and should not be mapped onto a single
+    $M_{KK}$ axis without explicit model assumptions.
+    See the <a href="/methodology/">methodology page</a> for details.
+  `}></aside>
 </BaseLayout>

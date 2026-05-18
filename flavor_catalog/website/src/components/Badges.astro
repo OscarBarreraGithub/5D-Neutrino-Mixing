@@ -35,7 +35,7 @@ switch (kind) {
       HIGH: 'badge-high',
     };
     cls = map[v] ?? 'badge-unknown';
-    text = label ?? (v ? `Diff: ${v}` : 'Diff: ?');
+    text = label ?? (v ? `${v.charAt(0) + v.slice(1).toLowerCase()}` : '?');
     break;
   }
   case 'tier': {
