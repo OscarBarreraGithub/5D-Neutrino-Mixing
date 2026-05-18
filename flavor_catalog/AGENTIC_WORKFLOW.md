@@ -444,10 +444,19 @@ For the artifact to be re-buildable from the source tree, you need:
       target-list rationale.
 - [ ] Orchestrator decisions document recording every adjudication made on
       the human's behalf.
-- [ ] This workflow document (`AGENTIC_WORKFLOW.md`) or equivalent so a new
-      orchestrator can resume.
-- [ ] Tag at every major convergence point so external readers can pin to
-      a specific state.
+- [ ] Tier policy document (this project: `PRIORITY_TIERS.md`) defining
+      PRIMARY vs SECONDARY layout + the two extension patterns
+      (SECONDARY re-promotion, PRIMARY new family).
+- [ ] Per-wave runbook (`worklogs/orchestration/wave_NNN_runbook.md`)
+      recording the wave's binding decisions, dispatch ledger, and
+      recovery instructions. Critical for compaction-survival.
+- [ ] Collaborator-facing one-page methodology pitch (this project:
+      `CATALOG_METHODOLOGY.tex`) so external readers can understand the
+      verification chain without reading the full playbook.
+- [ ] This workflow document (`AGENTIC_WORKFLOW.md`) or equivalent so a
+      new orchestrator can resume.
+- [ ] Tag at every major convergence point so external readers can pin
+      to a specific state.
 
 If all of those exist, anyone can `git checkout <tag>` and re-build the
 catalog from scratch with full provenance.
@@ -499,6 +508,41 @@ To illustrate, here are real chains:
   T012, B012. Adding them was ~half a day's work and meaningfully
   improved coverage. Lesson: budget for at least one external-review
   round before declaring the catalog done.
+
+- **K020 cycle-2 promotion (Wave-8)**: PKA → WA → CA cycle-1 FAIL on
+  CHK-1 — the entry's prose quoted the Sher / BNL E865 measured upper
+  limit `B(K^+ \to \pi^+ \mu^+ e^-) < 2.1 \times 10^{-11}` at 90% CL,
+  but the structured `pdg_or_equivalent.values` block was missing that
+  specific row. Unlike the L001 / T003 cases, this *is* a measured
+  observable, not a theory normalization scale; the right cycle-2 fix
+  was to **promote**, not delete. WA-v2 added the row; CA-v2 PASS.
+  Lesson: the L001 / T003 carve-out is asymmetric — measured
+  observables should be promoted into the structured block, theoretical
+  normalizations should not be. Decide which by reading the source.
+  Don't blanket-apply T003 to every CHK-1 fail.
+
+- **Wave-9 collider_rs cycle-2 batch (4-of-14)**: CR008 and CR010
+  failed CHK-1 because their prose quoted historical mass-exclusion
+  numerals from earlier LHC searches that were superseded by the
+  canonical current limit already in `pdg_or_equivalent.values`. CR010
+  and CR011 also failed CHK-2 because their TeX `Key references`
+  sections cited snapshot-filename stems (e.g.
+  `atlas_2018_arxiv1808_02343`) instead of the manifest's canonical
+  keys (e.g. `ATLAS2018_TBCombination`). Two surgical WA-v2 batches
+  applied T003 (remove historical numerals from prose; keep qualitative
+  language) and B023 (rename TeX keys to manifest canonical) precedents
+  in parallel. CA-v2 PASS for all 4. Lesson: cycle-2 fixes can mix
+  precedents — apply the appropriate one per finding, not the same
+  one to all.
+
+- **Two extension patterns (Wave-8 vs Wave-9)**: the catalog now has
+  two codified ways to add entries. SECONDARY re-promotion (Wave-8)
+  pulls from the DA-deferred list and lands under
+  `processes/secondary/<family>/`. PRIMARY new family (Wave-9) opens
+  a new scope class at PI directive and lands under
+  `processes/<new-family>/` with no `priority_tier` field. Same
+  pipeline, same arbitration precedents. Convention is documented in
+  `flavor_catalog/PRIORITY_TIERS.md §7`.
 
 ---
 
