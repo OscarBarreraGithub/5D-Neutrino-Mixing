@@ -260,5 +260,55 @@
   },
   "source_yaml": "flavor_catalog/processes/collider_rs/CR008.yaml",
   "source_tex": "flavor_catalog/processes/collider_rs/CR008.tex",
-  "worklog_path": "flavor_catalog/worklogs/CR008/"
+  "worklog_path": "flavor_catalog/worklogs/CR008/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "ATLAS2024:CR008:T_singlet_pair_mass_limit",
+        "source_url": "https://arxiv.org/abs/2401.17165",
+        "snapshot_path": "flavor_catalog/references/CR008/atlas_2024_arxiv2401_17165.txt",
+        "sha256": "sha256:6857ab7bf208d81f16852be25fc07d04a762789505084bc3a09aefb26b01b9b7",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_converted_fallback",
+            "anchor_string": "> 1360 GeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: like $T$-quarks with 100% branching ratio to $Wb$ are excluded at 95% CL for masses\nL24: below 1700 GeV. These limits are also applied to vector-like $Y$-quarks, which decay\nL25: exclusively into a $W$ boson and a $b$-quark. Isospin singlets with $ {\\cal B}(T \\to\nL26: Wb:Ht:Zt)={1/2}:{1/4}:{1/4}$ are excluded for masses below 1360 GeV."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2023:CR008:T_pair_all_third_generation_decays_envelope",
+        "source_url": "https://arxiv.org/abs/2209.07327",
+        "snapshot_path": "flavor_catalog/references/CR008/cms_2023_arxiv2209_07327.txt",
+        "sha256": "sha256:54758c30e017fa03b4712d04ce2e6eb53e95ad1b10a5a50ef82308746c573701",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "> 1.48 TeV for all bW/tZ/tH third-generation decay branching patterns",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 28,
+                "context": "L25: TeV, depending on the branching fractions assumed, with maximal sensitivity to decay\nL26: modes that include multiple top quarks. The limits obtained in this search are the\nL27: strongest limits to date for $\\mathrm{T\\overline{T}}$ production, excluding masses below\nL28: 1.48 TeV for all decays to third generation quarks, and are the strongest limits to date\nL29: for $\\mathrm{B\\overline{B}}$ production with B quark decays to tW."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badges from '../../components/Badges.astro';
+import CitationModal from '../../components/CitationModal.astro';
 import { getCollection } from 'astro:content';
 
 // Static-routing: generate one page per ingested entry JSON.  We key on the
@@ -21,7 +22,6 @@ const d: any = entryData;
 const REPO = 'OscarBarreraGithub/5D-Neutrino-Mixing';
 const BRANCH = 'flavor-catalog-website/2026q2';
 function blobUrl(evidence: string): string {
-  // "path/to/file.py:42 some description." -> path + line
   const m = evidence.match(/^([^\s:]+):(\d+)/);
   if (!m) return `https://github.com/${REPO}/tree/${BRANCH}/`;
   const file = m[1];
@@ -31,27 +31,82 @@ function blobUrl(evidence: string): string {
 
 const sections = d.sections ?? {};
 const cov = d.code_coverage ?? null;
-const evidence: string[] = Array.isArray(cov?.evidence) ? cov.evidence : [];
+const evidence: string[] = Array.isArray(cov?.evidence) ? cov.evidence.filter((e: any) => typeof e === 'string') : [];
 
-// Render a LaTeX fragment inline as $...$ if it looks like math.
-// Plain prose strings (e.g. "BR(K_L -> e mu)") are returned verbatim so
-// KaTeX auto-render doesn't mangle them.
 function inlineMath(s?: string | null): string {
   if (!s) return '';
   const trimmed = s.trim();
   if (!trimmed) return '';
-  // If author already wrapped in $...$ or \(...\), emit as-is.
   if (trimmed.startsWith('$') || trimmed.startsWith('\\(')) return trimmed;
-  // Heuristic: wrap if the string contains LaTeX-command escapes (\foo)
-  // or curly-brace-style sub/superscripts (^{...} or _{...}).
   const looksMath = /\\[A-Za-z]+|[\^_]\{|\^\\|\^[A-Za-z0-9]/.test(trimmed);
   return looksMath ? `$${trimmed}$` : trimmed;
 }
 
 const title = `${d.process_id} -- ${d.process_name ?? d.standard_notation ?? ''}`;
-const familyLabel = d.family;
+const FAMILY_LABELS: Record<string, string> = {
+  kaon: 'Kaon',
+  charm: 'Charm',
+  beauty: 'Beauty',
+  top_higgs_ew: 'Top / Higgs / EW',
+  charged_lepton: 'Charged lepton',
+  edm_neutrino: 'EDM / neutrino',
+  collider_rs: 'Collider RS',
+  secondary: 'Secondary',
+};
+const familyLabel = FAMILY_LABELS[d.family] ?? d.family;
+const originalFamilyLabel = d.family_original && FAMILY_LABELS[d.family_original]
+  ? FAMILY_LABELS[d.family_original]
+  : d.family_original;
+
+// ---------------------------------------------------------------------------
+// Citation-anchor wiring
+// ---------------------------------------------------------------------------
+// Build two maps:
+//   - sourcesByUrl[url]        -> first matching Source (so a pdg_values row
+//     with the same source_url can attach to the right modal)
+//   - sourcesByPath[snapshot]  -> same, keyed by snapshot path as a fallback
+const citationAnchors = d.citation_anchors ?? null;
+const sources: any[] = Array.isArray(citationAnchors?.sources) ? citationAnchors.sources : [];
+function slugify(s: string): string {
+  return (s || '').replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 120);
+}
+const sourcesByUrl: Record<string, any> = {};
+const sourcesByPath: Record<string, any> = {};
+const sourcesByLabel: Record<string, any> = {};
+for (const src of sources) {
+  if (src.source_url && !sourcesByUrl[src.source_url]) sourcesByUrl[src.source_url] = src;
+  if (src.snapshot_path && !sourcesByPath[src.snapshot_path]) sourcesByPath[src.snapshot_path] = src;
+  // Some 'label' fields in pdg_values mirror the block_key; index those too.
+  if (src.block_key) sourcesByLabel[src.block_key] = src;
+}
+
+// Worst-status pill helper for the inline trigger button.
+function worstStatus(src: any): string {
+  const anchors = src?.anchors ?? [];
+  if (anchors.some((a: any) => (a.status || '').toUpperCase() === 'UNRESOLVED')) return 'UNRESOLVED';
+  if (anchors.some((a: any) => (a.status || '').toUpperCase() === 'AMBIGUOUS')) return 'AMBIGUOUS';
+  if (anchors.some((a: any) => (a.status || '').toUpperCase() === 'RESOLVED')) return 'RESOLVED';
+  return 'UNKNOWN';
+}
+
+function attachSource(v: any): any | null {
+  if (v?.source_url && sourcesByUrl[v.source_url]) return sourcesByUrl[v.source_url];
+  if (v?.snapshot_path && sourcesByPath[v.snapshot_path]) return sourcesByPath[v.snapshot_path];
+  if (v?.label && sourcesByLabel[v.label]) return sourcesByLabel[v.label];
+  return null;
+}
+
+const pdgRows: any[] = Array.isArray(d.pdg_values) ? d.pdg_values : [];
+const rowsWithSources = pdgRows.map((v) => ({ v, src: attachSource(v) }));
+
+// Anchor-status totals (already counted by ingest, but recompute for safety).
+const aTotals = (citationAnchors && citationAnchors.counts) || { RESOLVED: 0, AMBIGUOUS: 0, UNRESOLVED: 0 };
+const aTotalSum = (aTotals.RESOLVED || 0) + (aTotals.AMBIGUOUS || 0) + (aTotals.UNRESOLVED || 0);
+
+const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
 ---
 <BaseLayout title={title}>
+<div data-pagefind-body data-pagefind-meta={`process_id:${d.process_id}, family:${d.family}, tier:${d.tier}`}>
 
   <header class="entry-header">
     <div class="breadcrumbs">
@@ -61,11 +116,26 @@ const familyLabel = d.family;
     </div>
     <h1>
       <span class="process-id">{d.process_id}</span>
-      <span set:html={`<span>${inlineMath(d.standard_notation)}</span>`}></span>
+      <span class="entry-h1-notation" set:html={`<span>${inlineMath(d.standard_notation)}</span>`}></span>
       <Badges kind="tier" value={d.tier} />
     </h1>
     {d.process_name && <span class="process-name">{d.process_name}</span>}
   </header>
+
+  {isSecondary && (
+    <aside class="secondary-banner" role="note">
+      <strong>SECONDARY tier{d.promoted_in_wave ? ` -- deferred-then-promoted in Wave-${d.promoted_in_wave}` : ''}.</strong>
+      {d.priority_rationale && (
+        <p class="secondary-rationale">{d.priority_rationale}</p>
+      )}
+      {d.family_original && (
+        <p class="secondary-origin">
+          Origin family: <a href={`/families/${d.family_original}/`}>{originalFamilyLabel}</a>.
+          Listed on the <a href="/families/secondary/">Secondary index</a>.
+        </p>
+      )}
+    </aside>
+  )}
 
   <div class="status-row">
     <span class="status-label">Status</span>
@@ -87,12 +157,21 @@ const familyLabel = d.family;
         <span class="badge badge-unknown">{d.owner}</span>
       </span>
     )}
+    {aTotalSum > 0 && (
+      <span class="status-group anchor-summary" title="Citation-anchor resolution counts">
+        <span class="status-label">Anchors</span>
+        <span class="cite-status cite-status-resolved">{aTotals.RESOLVED || 0} R</span>
+        {(aTotals.AMBIGUOUS || 0) > 0 && <span class="cite-status cite-status-ambiguous">{aTotals.AMBIGUOUS} A</span>}
+        {(aTotals.UNRESOLVED || 0) > 0 && <span class="cite-status cite-status-unresolved">{aTotals.UNRESOLVED} U</span>}
+      </span>
+    )}
   </div>
 
-  {/* ----------------- PDG values ----------------- */}
-  {d.pdg_values && d.pdg_values.length > 0 && (
+  {/* ----------------- PDG / equivalent values ----------------- */}
+  {rowsWithSources.length > 0 && (
     <section class="entry-section">
       <h2>PDG / equivalent values</h2>
+      <div class="entry-table-wrap">
       <table class="pdg-table">
         <thead>
           <tr>
@@ -104,27 +183,39 @@ const familyLabel = d.family;
           </tr>
         </thead>
         <tbody>
-          {d.pdg_values.map((v: any) => (
-            <tr>
-              <td><span set:html={inlineMath(v.observable ?? v.label ?? '')}></span></td>
-              <td>
-                <span class="value-display">{v.display ?? (v.value !== undefined && v.value !== null ? String(v.value) : '?')}</span>
-                {v.units && <span style="color:var(--color-text-muted); font-size:0.85em;"> {v.units}</span>}
-              </td>
-              <td>{v.year ?? '-'}</td>
-              <td>{v.experiment ?? v.label ?? '-'}</td>
-              <td>
-                {v.source_url && (
-                  <a href={v.source_url} target="_blank" rel="noopener noreferrer">
-                    source
-                  </a>
-                )}
-                <span class="anchor-stub" title="Citation-anchor modal lands in Phase 3">view in source</span>
-              </td>
-            </tr>
-          ))}
+          {rowsWithSources.map(({ v, src }) => {
+            const status = src ? worstStatus(src) : null;
+            const modalId = src ? `cm-${d.process_id}-${slugify(src.block_key || '')}` : null;
+            const valueText = v.display ?? (v.value !== undefined && v.value !== null ? String(v.value) : '?');
+            return (
+              <tr>
+                <td><span set:html={inlineMath(v.observable ?? v.label ?? '')}></span></td>
+                <td>
+                  <span class="value-display">{valueText}</span>
+                  {v.units && <span class="value-units"> {v.units}</span>}
+                  {v.cl && <div class="value-cl">{v.cl}{v.limit_type ? ` (${v.limit_type})` : ''}</div>}
+                </td>
+                <td>{v.year ?? '-'}</td>
+                <td>{v.experiment ?? v.label ?? '-'}</td>
+                <td class="provenance-cell">
+                  {v.source_url && (
+                    <a href={v.source_url} target="_blank" rel="noopener noreferrer" class="prov-link">source &uarr;</a>
+                  )}
+                  {modalId && status && (
+                    <button type="button" class={`anchor-btn anchor-btn-${status.toLowerCase()}`} data-cite-open={modalId}
+                            data-cite-anchor-field={v.label || ''} aria-haspopup="dialog">
+                      <span class="anchor-btn-icon" aria-hidden="true">&#x1F50D;</span>
+                      view in source
+                      <span class={`cite-status-inline cite-status-${status.toLowerCase()}`}>{status[0]}</span>
+                    </button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
+      </div>
     </section>
   )}
 
@@ -159,7 +250,7 @@ const familyLabel = d.family;
       )}
       {evidence.length > 0 && (
         <>
-          <p style="color:var(--color-text-muted); font-size:0.88rem; margin-bottom:0.4rem;">
+          <p class="evidence-cap">
             Linked evidence (opens GitHub blob at <code>{BRANCH}</code>):
           </p>
           <ul class="evidence-list">
@@ -179,8 +270,8 @@ const familyLabel = d.family;
       <h2>Implementation difficulty</h2>
       <div class="latex-prose" set:html={sections.implementation_difficulty_prose}></div>
       {d.implementation_difficulty_reason && (
-        <p style="color:var(--color-text-muted); font-size:0.9rem; margin-top:0.5rem;">
-          <strong style="color:var(--color-text);">Reason:</strong> {d.implementation_difficulty_reason}
+        <p class="impl-reason">
+          <strong>Reason:</strong> {d.implementation_difficulty_reason}
         </p>
       )}
     </section>
@@ -208,7 +299,67 @@ const familyLabel = d.family;
           <dd><code>{d.source_tex}</code></dd>
         </>
       )}
+      {citationAnchors?.generated_at && (
+        <>
+          <dt>Anchors generated</dt>
+          <dd>{citationAnchors.generated_at}</dd>
+        </>
+      )}
     </dl>
   </footer>
+
+  </div>
+
+  {/* ----------------- Modal dialogs (one per source) ----------------- */}
+  {sources.map((src: any) => <CitationModal processId={d.process_id} source={src} />)}
+
+  {/* Modal open/close wiring -- vanilla JS, <dialog> for free a11y. */}
+  <script is:inline>
+    (function () {
+      function init() {
+        var dialogs = document.querySelectorAll('dialog.cite-modal');
+        if (!dialogs.length) return;
+        function close(d) { try { d.close(); } catch (e) {} }
+        document.querySelectorAll('[data-cite-open]').forEach(function (btn) {
+          btn.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            var id = btn.getAttribute('data-cite-open');
+            var d = document.getElementById(id);
+            if (!d) return;
+            if (typeof d.showModal === 'function') { d.showModal(); } else { d.setAttribute('open', ''); }
+            // Re-render any KaTeX inside the modal in case auto-render missed it.
+            if (typeof window.renderMathInElement === 'function') {
+              try { window.renderMathInElement(d); } catch (e) {}
+            }
+          });
+        });
+        dialogs.forEach(function (d) {
+          // backdrop click -> close
+          d.addEventListener('click', function (ev) {
+            if (ev.target === d) close(d);
+          });
+          d.querySelectorAll('[data-cite-close]').forEach(function (b) {
+            b.addEventListener('click', function () { close(d); });
+          });
+        });
+        // ?openAnchor=<block_key> auto-opens the matching modal for screenshots.
+        try {
+          var qs = new URLSearchParams(window.location.search);
+          var want = qs.get('openAnchor');
+          if (want) {
+            var found = null;
+            document.querySelectorAll('[data-cite-open]').forEach(function (btn) {
+              var id = btn.getAttribute('data-cite-open') || '';
+              if (!found && id.indexOf(want) !== -1) found = btn;
+            });
+            if (found) setTimeout(function () { found.click(); }, 60);
+          }
+        } catch (e) {}
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else { init(); }
+    })();
+  </script>
 
 </BaseLayout>

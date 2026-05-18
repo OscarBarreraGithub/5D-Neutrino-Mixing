@@ -213,5 +213,75 @@
   },
   "source_yaml": "flavor_catalog/processes/secondary/top_higgs_ew/T014.yaml",
   "source_tex": "flavor_catalog/processes/secondary/top_higgs_ew/T014.tex",
-  "worklog_path": "flavor_catalog/worklogs/T014/"
+  "worklog_path": "flavor_catalog/worklogs/T014/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "ECFA2025:T014:zbs_direct_hadronic_width_limit",
+        "source_url": "https://arxiv.org/abs/2506.15390",
+        "snapshot_path": "flavor_catalog/references/T014/ecfa2025_fv_z_decays_extract.txt",
+        "sha256": "sha256:13d5927991d179d1713ae501d825459371a385f52918f1b4d09e60f9a3a57173",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 2.9e-3",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 37,
+                "context": "L34: the agreement of the measurement and the SM prediction for the Z hadronic\nL35: width, giving:\nL36:\nL37:   B(Z -> qq') < 2.9 x 10^-3 at 95% CL.\nL38:\nL39: The report states that low-energy constraints are much more powerful. For\nL40: Z -> bd and Z -> bs, flavour-changing processes essentially constrain the\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ECFA2025:T014:zbd_direct_hadronic_width_limit",
+        "source_url": "https://arxiv.org/abs/2506.15390",
+        "snapshot_path": "flavor_catalog/references/T014/ecfa2025_fv_z_decays_extract.txt",
+        "sha256": "sha256:13d5927991d179d1713ae501d825459371a385f52918f1b4d09e60f9a3a57173",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 2.9e-3",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 37,
+                "context": "L34: the agreement of the measurement and the SM prediction for the Z hadronic\nL35: width, giving:\nL36:\nL37:   B(Z -> qq') < 2.9 x 10^-3 at 95% CL.\nL38:\nL39: The report states that low-energy constraints are much more powerful. For\nL40: Z -> bd and Z -> bs, flavour-changing processes essentially constrain the\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "AbuAjamieh2026:T014:zsd_direct_hadronic_width_limit",
+        "source_url": "https://arxiv.org/abs/2507.10525",
+        "snapshot_path": "flavor_catalog/references/T014/abu_ajamieh_2026_fv_z_quark_extract.txt",
+        "sha256": "sha256:53ee0fc6e7ab683793338fafbfdcf2075c81608b4acf74678c22f00e340b902b",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 2.9e-3",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 28,
+                "context": "L25: are obtained from the disagreement between SM predictions and the Z hadronic\nL26: decay width. These bounds are given as\nL27:\nL28:   Br(Z -> q_i qbar_j) < 2.9 x 10^-3\nL29:\nL30: which translates to\nL31:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

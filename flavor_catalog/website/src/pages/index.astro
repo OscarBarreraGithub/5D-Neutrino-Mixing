@@ -7,6 +7,11 @@ const totalEntries: number = index.total_entries;
 const verdictCounts: Record<string, number> = index.verdict_counts;
 const verified = verdictCounts.VERIFIED ?? 0;
 const partial = verdictCounts.PARTIAL ?? 0;
+
+const anchorTotals: any = (index as any).anchor_totals ?? null;
+const anchorTotal = anchorTotals
+  ? (anchorTotals.RESOLVED + anchorTotals.AMBIGUOUS + anchorTotals.UNRESOLVED)
+  : 0;
 ---
 <BaseLayout
   title="Flavor Catalog -- 5D Neutrino Mixing"
@@ -21,16 +26,20 @@ const partial = verdictCounts.PARTIAL ?? 0;
       Fact-check verdicts: <strong>{verified} VERIFIED</strong> /
       <strong>{partial} PARTIAL</strong> / 0 MISMATCH.
     </p>
+    {anchorTotal > 0 && (
+      <p class="hero-anchor-summary">
+        <strong>{anchorTotal}</strong> citation anchors stamped across the
+        catalog: <span class="cite-status cite-status-resolved">{anchorTotals.RESOLVED} RESOLVED</span>
+        <span class="cite-status cite-status-ambiguous">{anchorTotals.AMBIGUOUS} AMBIGUOUS</span>
+        <span class="cite-status cite-status-unresolved">{anchorTotals.UNRESOLVED} UNRESOLVED</span>.
+        Every value with a snapshot has a "view in source" trigger on its entry page.
+      </p>
+    )}
   </section>
 
-  <div class="search-bar">
-    <input
-      type="search"
-      placeholder="Search entries (Pagefind wiring lands in Phase 3)..."
-      aria-label="Search catalog entries"
-      disabled
-    />
-    <span class="stub-note">stub</span>
+  <div class="hero-ctas">
+    <a class="hero-cta hero-cta-primary" href="/browse/">Browse &amp; filter all {totalEntries} entries &rarr;</a>
+    <a class="hero-cta" href="/families/secondary/">SECONDARY entries</a>
   </div>
 
   <aside class="honesty-note" set:html={`
@@ -46,7 +55,7 @@ const partial = verdictCounts.PARTIAL ?? 0;
     Source: <code>flavor_catalog/processes/collider_rs/CR002.tex</code>.
   `}></aside>
 
-  <h2 style="font-size:1.1rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--color-text-muted); margin:2rem 0 0.5rem;">Families</h2>
+  <h2 class="section-eyebrow">Families</h2>
   <div class="family-grid">
     {families.map((fam) => (
       <a class="family-card" href={`/families/${fam.key}/`}>
@@ -58,17 +67,4 @@ const partial = verdictCounts.PARTIAL ?? 0;
       </a>
     ))}
   </div>
-
-  <h2 style="font-size:1.1rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--color-text-muted); margin:2rem 0 0.5rem;">Entries</h2>
-  <div class="family-grid">
-    {index.entries.slice(0, 24).map((e: any) => (
-      <a class="family-card" href={`/entries/${e.process_id}/`}>
-        <h2>
-          <span><code style="background:transparent;padding:0;color:var(--color-accent);">{e.process_id}</code> &middot; {e.standard_notation ? `$${e.standard_notation}$` : (e.process_name ?? '')}</span>
-        </h2>
-        <p>{e.family} &middot; {e.tier} &middot; {e.fact_check_verdict} &middot; diff {e.implementation_difficulty} &middot; code {e.code_coverage_status}</p>
-      </a>
-    ))}
-  </div>
-  <p style="color:var(--color-text-muted); font-size:0.85rem;">Showing first 24 entries; full per-family browsing lands in Phase 3.</p>
 </BaseLayout>

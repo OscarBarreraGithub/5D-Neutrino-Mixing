@@ -154,5 +154,35 @@
   },
   "source_yaml": "flavor_catalog/processes/kaon/K005.yaml",
   "source_tex": "flavor_catalog/processes/kaon/K005.tex",
-  "worklog_path": "flavor_catalog/worklogs/K005/"
+  "worklog_path": "flavor_catalog/worklogs/K005/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "pdg_or_equivalent[0]",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S013R40",
+        "snapshot_path": "flavor_catalog/references/K005/pdg2026_pdgLive_S013R40.txt",
+        "sha256": "sha256:9772703902465867a6be4f8abb2b3893f4aed60e43ade76cf191384ba66f2dfb",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<2.2e-9",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: Decay at the J-PARC KOTO Experiment\"\nL19:\nL20: Converted branching-fraction limit used by catalog:\nL21: B(K_L^0 -> pi^0 nu nubar) < 2.2e-9 at 90% CL."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -126,5 +126,35 @@
   },
   "source_yaml": "flavor_catalog/processes/kaon/K006.yaml",
   "source_tex": "flavor_catalog/processes/kaon/K006.tex",
-  "worklog_path": "flavor_catalog/worklogs/K006/"
+  "worklog_path": "flavor_catalog/worklogs/K006/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "pdg_or_equivalent",
+        "source_url": "https://pdg.lbl.gov/2024/listings/rpp2024-list-K-zero-L.pdf",
+        "snapshot_path": "flavor_catalog/references/K006/pdg2024_kl_decay_modes.txt",
+        "sha256": "7b8d82405b9c4bf76bf9efb6c3db59a5bd21ae2d77339e6ef0dce389ef50c585",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "6.84e-9 0.11e-9",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9:\nL10: Charge conjugation x Parity (CP) or Lepton Family number (LF) violating modes,\nL11: or Delta S = 1 weak neutral current (S1) modes:\nL12: Gamma_24  mu+ mu-  S1  (6.84 +/- 0.11) x 10^-9\nL13: Gamma_25  e+ e-    S1  (9 +6 -4) x 10^-12\nL14:\nL15: PDG listing page created: 2024-07-25 17:21."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -314,5 +314,211 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B003.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B003.tex",
-  "worklog_path": "flavor_catalog/worklogs/B003/"
+  "worklog_path": "flavor_catalog/worklogs/B003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 6,
+      "AMBIGUOUS": 3,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_hflav_recommended",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/",
+        "snapshot_path": "flavor_catalog/references/B003/hflav_2024_dms.txt",
+        "sha256": "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Delta m_s = 17.766 +- 0.006 ps^-1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: on B_s^0 mixing is obtained from time-dependent measurements of the oscillation\nL19: frequency Delta m_s at high-energy hadron colliders:\nL20:\nL21:   Delta m_s = 17.766 +/- 0.006 ps^-1  CDF, LHCb, CMS\nL22:\nL23: The same section states that, with 1/Gamma_s = 1.516 +/- 0.006 ps,\nL24: DeltaGamma_s = +0.0781 +/- 0.0035 ps^-1, and the assumption of no CP violation\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "companion_x_s",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/",
+        "snapshot_path": "flavor_catalog/references/B003/hflav_2024_dms.txt",
+        "sha256": "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "x_s = 26.94 +- 0.1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: DeltaGamma_s = +0.0781 +/- 0.0035 ps^-1, and the assumption of no CP violation\nL25: in B_s^0 mixing, this leads to:\nL26:\nL27:   x_s = 26.94 +/- 0.10\nL28:   chi_s = 0.499314 +/- 0.000005\nL29:\nL30: Notes for catalog use:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "companion_chi_s",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/",
+        "snapshot_path": "flavor_catalog/references/B003/hflav_2024_dms.txt",
+        "sha256": "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "chi_s = 0.499314 +- 5e-06",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 28,
+                "context": "L25: in B_s^0 mixing, this leads to:\nL26:\nL27:   x_s = 26.94 +/- 0.10\nL28:   chi_s = 0.499314 +/- 0.000005\nL29:\nL30: Notes for catalog use:\nL31: - The measured observable for pdg_or_equivalent is Delta m_s.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "companion_inverse_gamma_s",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/",
+        "snapshot_path": "flavor_catalog/references/B003/hflav_2024_dms.txt",
+        "sha256": "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "1/Gamma_s = 1.516 +- 0.006 ps",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:\nL21:   Delta m_s = 17.766 +/- 0.006 ps^-1  CDF, LHCb, CMS\nL22:\nL23: The same section states that, with 1/Gamma_s = 1.516 +/- 0.006 ps,\nL24: DeltaGamma_s = +0.0781 +/- 0.0035 ps^-1, and the assumption of no CP violation\nL25: in B_s^0 mixing, this leads to:\nL26:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "companion_delta_gamma_s",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/HFLAV_2024/",
+        "snapshot_path": "flavor_catalog/references/B003/hflav_2024_dms.txt",
+        "sha256": "sha256:21d1748c46c35a52d65046bf293136879837abfe97a8712c802a59e5c37e327a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "DeltaGamma_s = 0.0781 +- 0.0035 ps^-1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21:   Delta m_s = 17.766 +/- 0.006 ps^-1  CDF, LHCb, CMS\nL22:\nL23: The same section states that, with 1/Gamma_s = 1.516 +/- 0.006 ps,\nL24: DeltaGamma_s = +0.0781 +/- 0.0035 ps^-1, and the assumption of no CP violation\nL25: in B_s^0 mixing, this leads to:\nL26:\nL27:   x_s = 26.94 +/- 0.10\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "pdg2025_published_only_crosscheck",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+        "snapshot_path": "flavor_catalog/references/B003/hflav_pdg2025_dms.txt",
+        "sha256": "sha256:7b6e88fed6d4dee57e266f79a28c4edb073d668ba0fa2f90dad40cb9f051473c",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Delta m_s = 17.765 +- 0.006 ps^-1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: on B_s^0 mixing is obtained from time-dependent measurements of the oscillation\nL18: frequency Delta m_s at high-energy hadron colliders:\nL19:\nL20:   Delta m_s = 17.765 +/- 0.006 ps^-1  CDF, LHCb, CMS\nL21:\nL22: The same section states that, with 1/Gamma_s = 1.516 +/- 0.006 ps,\nL23: DeltaGamma_s = +0.082 +/- 0.005 ps^-1, and the assumption of no CP violation\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "dominant_lhcb_input",
+        "source_url": "https://arxiv.org/abs/2104.04421",
+        "snapshot_path": "flavor_catalog/references/B003/lhcb_2021_deltams_arxiv.txt",
+        "sha256": "sha256:2827716498d99b807d5c042b65a5a67d0898f53617b7889b74009b92433f3ef4",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Delta m_s from Bs -> Ds pi, Run 2 = 17.7683 +- +/- 0.0051(stat) +/- 0.0032(syst) ps^-1",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: Extracted result definitions from the arXiv source:\nL15:   combinationAll = 17.7656 +/- 0.0057\nL16:   combinationHadronic = 17.7666 +/- 0.0057\nL17:   resultstat = 17.7683 +/- 0.0051\nL18:   resultsyst = 0.0032\nL19:\nL20: Abstract/result excerpt, paraphrased from the arXiv source:\n"
+              },
+              {
+                "line_number": 26,
+                "context": "L23: corresponds to 6 fb^-1 collected in 2015-2018. The oscillation frequency is\nL24: found to be\nL25:\nL26:   Delta m_s = 17.7683 +/- 0.0051(stat) +/- 0.0032(syst) ps^-1.\nL27:\nL28: Combining this result with previous LHCb measurements gives\nL29:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "dominant_lhcb_input.integrated_luminosity",
+        "source_url": "https://arxiv.org/abs/2104.04421",
+        "snapshot_path": "flavor_catalog/references/B003/lhcb_2021_deltams_arxiv.txt",
+        "sha256": "sha256:2827716498d99b807d5c042b65a5a67d0898f53617b7889b74009b92433f3ef4",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 6 fb^-1",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: Extracted result definitions from the arXiv source:\nL15:   combinationAll = 17.7656 +/- 0.0057\nL16:   combinationHadronic = 17.7666 +/- 0.0057\nL17:   resultstat = 17.7683 +/- 0.0051\nL18:   resultsyst = 0.0032\nL19:\nL20: Abstract/result excerpt, paraphrased from the arXiv source:\n"
+              },
+              {
+                "line_number": 23,
+                "context": "L20: Abstract/result excerpt, paraphrased from the arXiv source:\nL21: The paper presents a measurement of Delta m_s using B_s -> D_s^- pi^+\nL22: decays in pp collisions collected with the LHCb detector. The Run-2 data set\nL23: corresponds to 6 fb^-1 collected in 2015-2018. The oscillation frequency is\nL24: found to be\nL25:\nL26:   Delta m_s = 17.7683 +/- 0.0051(stat) +/- 0.0032(syst) ps^-1.\n"
+              },
+              {
+                "line_number": 26,
+                "context": "L23: corresponds to 6 fb^-1 collected in 2015-2018. The oscillation frequency is\nL24: found to be\nL25:\nL26:   Delta m_s = 17.7683 +/- 0.0051(stat) +/- 0.0032(syst) ps^-1.\nL27:\nL28: Combining this result with previous LHCb measurements gives\nL29:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "dominant_lhcb_input.lhcb_combination",
+        "source_url": "https://arxiv.org/abs/2104.04421",
+        "snapshot_path": "flavor_catalog/references/B003/lhcb_2021_deltams_arxiv.txt",
+        "sha256": "sha256:2827716498d99b807d5c042b65a5a67d0898f53617b7889b74009b92433f3ef4",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 17.7656 +- 0.0057 ps^-1",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: Submitted 9 Apr 2021; last revised 20 Feb 2022.\nL13:\nL14: Extracted result definitions from the arXiv source:\nL15:   combinationAll = 17.7656 +/- 0.0057\nL16:   combinationHadronic = 17.7666 +/- 0.0057\nL17:   resultstat = 17.7683 +/- 0.0051\nL18:   resultsyst = 0.0032\n"
+              },
+              {
+                "line_number": 30,
+                "context": "L27:\nL28: Combining this result with previous LHCb measurements gives\nL29:\nL30:   Delta m_s = 17.7656 +/- 0.0057 ps^-1,\nL31:\nL32: described by the paper as the legacy measurement of the original LHCb detector.\nL33:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

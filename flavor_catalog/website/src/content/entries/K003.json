@@ -144,5 +144,35 @@
   },
   "source_yaml": "flavor_catalog/processes/kaon/K003.yaml",
   "source_tex": "flavor_catalog/processes/kaon/K003.tex",
-  "worklog_path": "flavor_catalog/worklogs/K003/"
+  "worklog_path": "flavor_catalog/worklogs/K003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "pdg_or_equivalent",
+        "source_url": "https://pdglive.lbl.gov/Particle.action?home=MXXX020&init=0&node=S013",
+        "snapshot_path": "flavor_catalog/references/K003/pdg_live_S013_20260516.txt",
+        "sha256": "230285c9b8cbc43b2cf24f502a757d4962d6a6c069bee84ff1a3885214eef954",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "display_value",
+            "anchor_string": "Re(epsilon'/epsilon) = 0.00166 +/- 0.00023 = (16.6 +/- 2.3) x 10^-4",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Relevant excerpt, manually transcribed from row S013EPS:\nL7:\nL8:   Re(epsilon'/epsilon) = (1 - |eta_00/eta_+-|)/3\nL9:   Value: 0.00166 +/- 0.00023 (S = 1.6)\nL10:\nL11: PDG note on the same listing:\nL12:"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

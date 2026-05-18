@@ -187,5 +187,75 @@
   },
   "source_yaml": "flavor_catalog/processes/charm/C005.yaml",
   "source_tex": "flavor_catalog/processes/charm/C005.tex",
-  "worklog_path": "flavor_catalog/worklogs/C005/"
+  "worklog_path": "flavor_catalog/worklogs/C005/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:05Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:D0Ee",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.39",
+        "snapshot_path": "flavor_catalog/references/C005/pdg2026_d0_ee_pdgLive.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7.9e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 66,
+                "context": "L63: \nL64: Extraction note:\nL65:   The current PDG/API headline value for C005 is the Belle 2010 upper limit\nL66:   B(D0 -> e+ e-) < 7.9e-8 at 90% CL. No LHCb D0 -> e+ e- measurement appears\nL67:   in this PDG API measurement list at the access date above.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Belle2010:D0Ee",
+        "source_url": "https://arxiv.org/abs/1003.2345",
+        "snapshot_path": "flavor_catalog/references/C005/belle2010_arxiv1003_2345.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7.9e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19:   D0 -> e+- mu-+ using 660 fb^-1 of data collected with the Belle detector at\nL20:   the KEKB asymmetric-energy e+e- collider. No evidence was found for any of\nL21:   these decays. Belle obtained upper limits on the branching fractions:\nL22:   B(D0 -> mu+mu-) < 1.4 x 10^-7, B(D0 -> e+e-) < 7.9 x 10^-8, and\nL23:   B(D0 -> e+mu-) + B(D0 -> mu+e-) < 2.6 x 10^-7 at 90% confidence level.\nL24: \nL25: Extraction note:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "BaBar2012:D0EeMuMuEMu",
+        "source_url": "https://arxiv.org/abs/1206.5419",
+        "snapshot_path": "flavor_catalog/references/C005/babar2012_arxiv1206_5419.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.7e-07",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19:   The observed event yields were consistent with expected backgrounds, except\nL20:   for a D0 -> mu+mu- upward background fluctuation at the 5% level. Using the\nL21:   Feldman-Cousins method, BABAR set 90% confidence-level intervals:\nL22:   B(D0 -> e+e-) < 1.7 x 10^-7, B(D0 -> mu+mu-) in [0.6, 8.1] x 10^-7, and\nL23:   B(D0 -> e mu) < 3.3 x 10^-7.\nL24: \nL25: Extraction note:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

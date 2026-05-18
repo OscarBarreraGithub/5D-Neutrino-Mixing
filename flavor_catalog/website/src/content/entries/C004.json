@@ -215,5 +215,105 @@
   },
   "source_yaml": "flavor_catalog/processes/charm/C004.yaml",
   "source_tex": "flavor_catalog/processes/charm/C004.tex",
-  "worklog_path": "flavor_catalog/worklogs/C004/"
+  "worklog_path": "flavor_catalog/worklogs/C004/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:05Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 2
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:D0MuMu",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.28",
+        "snapshot_path": "flavor_catalog/references/C004/pdg2026_d0_mumu_pdgLive.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2.1e-09",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18:   technique: CMS\nL19:   comment: p p at 13.6 TeV\nL20:   confidence_level: 90.0\nL21:   value_text: <2.1 E-9\nL22:   limit_type: U\nL23:   used_in_average: true\nL24:   used_in_fit: true\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2025:D0MuMu",
+        "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/BPH-23-008/",
+        "snapshot_path": "flavor_catalog/references/C004/cms2025_d0_mumu_public.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2.4e-09",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   Integrated luminosity: 64.5 fb^-1.\nL18:   Production/selection: D0 mesons from D*+ -> D0 pi+ decays.\nL19:   Result: no significant excess is observed.\nL20:   Limit: B(D0 -> mu+ mu-) < 2.4 x 10^-9 at 95% confidence level.\nL21:   CMS summary states this was the most sensitive search to date and improved\nL22:   on the previous best result.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2023:D0MuMu",
+        "source_url": "https://arxiv.org/abs/2212.11203",
+        "snapshot_path": "flavor_catalog/references/C004/lhcb2023_arxiv2212_11203.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.1e-09",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18:   Search strategy: optimized for D0 mesons from D*+ -> D0 pi+ decays, also\nL19:   sensitive to D0 mesons from other sources.\nL20:   Result: no evidence for an excess above expected background.\nL21:   Limit: B(D0 -> mu+ mu-) < 3.1 x 10^-9 at 90% CL.\nL22:   The arXiv abstract describes this as the world's most stringent limit at\nL23:   the time of the LHCb publication.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "BurdmanGolowichHewettPakvasa2002:RareCharm",
+        "source_url": "https://arxiv.org/abs/hep-ph/0112235",
+        "snapshot_path": "flavor_catalog/references/C004/burdman2002_arxiv_hepph0112235.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "GisbertHillerSuelmann2024:RareCharmEFT",
+        "source_url": "https://link.springer.com/article/10.1007/JHEP12(2024)102",
+        "snapshot_path": "flavor_catalog/references/C004/gisbert_hiller_suelmann2024_rare_charm_eft.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      }
+    ]
+  }
 }

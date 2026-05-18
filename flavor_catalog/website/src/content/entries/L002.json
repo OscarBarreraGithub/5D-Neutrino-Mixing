@@ -183,5 +183,55 @@
   },
   "source_yaml": "flavor_catalog/processes/charged_lepton/L002.yaml",
   "source_tex": "flavor_catalog/processes/charged_lepton/L002.tex",
-  "worklog_path": "flavor_catalog/worklogs/L002/"
+  "worklog_path": "flavor_catalog/worklogs/L002/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "Branching fraction upper limit for mu+ -> e+ e- e+",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004R4",
+        "snapshot_path": "flavor_catalog/references/L002/pdg2026_muon_listing_s004r4.txt",
+        "sha256": "72b7c9181196e76762dccaa10eaf850e48af827fff86c77c1bc53bd6aa459b1b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1e-12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: Node: S004R4.\nL14: Mode in PDF text extraction: Gamma(e- e+ e-) / Gamma_total, Gamma6 / Gamma.\nL15: PDG note: forbidden by lepton family number conservation.\nL16: Value units in the datablock: 10^-12.\nL17: \nL18: Current PDG limit row from pdgLive S004R4:\nL19: VALUE: <1.0\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Gamma(mu -> 3e) / Gamma(mu -> e 2nu)",
+        "source_url": "https://inspirehep.net/api/literature/251865",
+        "snapshot_path": "flavor_catalog/references/L002/sindrum1988_inspire_abstract.txt",
+        "sha256": "87086d504690190dce79af233ebe80a2087a08ec55a68f699d48520ccb0645dc",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1e-12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20: Minimal abstract/value excerpt from INSPIRE metadata:\nL21: The search for the decay mu+ -> e+ e+ e- with the SINDRUM spectrometer was continued.\nL22: The result is an upper limit on the normalized branching ratio\nL23: Gamma(mu -> 3e) / Gamma(mu -> e 2nu) < 1.0e-12 at 90% CL.\nL24: \nL25: Use in L002:\nL26: This is the original experiment behind the current PDG S004R4 limit.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

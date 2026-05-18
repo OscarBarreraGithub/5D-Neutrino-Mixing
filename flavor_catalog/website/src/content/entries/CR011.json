@@ -336,5 +336,55 @@
   },
   "source_yaml": "flavor_catalog/processes/collider_rs/CR011.yaml",
   "source_tex": "flavor_catalog/processes/collider_rs/CR011.tex",
-  "worklog_path": "flavor_catalog/worklogs/CR011/"
+  "worklog_path": "flavor_catalog/worklogs/CR011/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "ATLAS2025:CR011:fiducial_sigma_WLWL_same_sign_upper_limit",
+        "source_url": "https://arxiv.org/abs/2503.11317",
+        "snapshot_path": "flavor_catalog/references/CR011/atlas_2025_arxiv2503_11317.txt",
+        "sha256": "sha256:449b1c2c9f28bfd3200e3fd3c7d8247bbe5495cc8fee79c9ae51141c086f258e",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "sigma_fid(pp -> jj W_L^+/- W_L^+/-) < 0.45 fb (95% CL)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: (expected) significance of the production with at least one longitudinally\nL25: polarized W boson is 3.3 (4.0) standard deviations.\nL26:\nL27: An observed (expected) 95% confidence level upper limit of 0.45 (0.70) fb is\nL28: reported on the fiducial production cross section of two longitudinally\nL29: polarized same-sign W bosons."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2020:CR011:fiducial_sigma_WLWL_same_sign_upper_limit",
+        "source_url": "https://arxiv.org/abs/2009.09429",
+        "snapshot_path": "flavor_catalog/references/CR011/cms_2020_arxiv2009_09429.txt",
+        "sha256": "sha256:6ceb6660bd956773fe7809a07ff296cad8e183bb0c16ea35813a39fc5ed724fd",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "sigma(pp -> jj W_L^+/- W_L^+/-) < 1.17 fb (95% CL)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22: muons, moderate missing transverse momentum, and two jets with a large rapidity\nL23: separation and a large dijet mass to enhance the contribution of same-sign\nL24: W^+/- W^+/- scattering events. An observed (expected) 95% confidence level\nL25: upper limit of 1.17 (0.88) fb is set on the production cross section for\nL26: longitudinally polarized same-sign W^+/- W^+/- boson pairs.\nL27:\nL28: The electroweak production of same-sign W^+/- W^+/- boson pairs with at least"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

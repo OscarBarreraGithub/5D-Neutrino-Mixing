@@ -215,5 +215,139 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B002.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B002.tex",
-  "worklog_path": "flavor_catalog/worklogs/B002/"
+  "worklog_path": "flavor_catalog/worklogs/B002/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 5,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_experimental_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/",
+        "snapshot_path": "flavor_catalog/references/B002/hflav_triangle_summer2025_sin2beta.txt",
+        "sha256": "sha256:ea3e6af5b240bd78cf81404140586a8fd7b9d77f644aa9cac33010770bbca6bf",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "sin(2 beta) == sin(2 phi_1), all charmonium including earlier measurements = 0.71 +- 0.011",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9:\nL10: Canonical extracted average:\nL11: All charmonium, including earlier sin(2 beta) measurements:\nL12:   sin(2 beta) == sin(2 phi_1) = 0.710 +/- 0.011\nL13:   stat-only uncertainty = 0.010\nL14:   CL = 0.34\nL15:\n"
+              },
+              {
+                "line_number": 21,
+                "context": "L18:   or beta == phi_1 = 67.37^{+0.44}_{-0.45} degrees\nL19:\nL20: Mode-specific line relevant to the assigned process:\nL21:   B_d -> J/psi K_S: average S = 0.712 +/- 0.011\nL22:   stat-only uncertainty = 0.011\nL23:\nL24: Inputs named by HFLAV in this block:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "mode_specific_jpsi_ks",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/",
+        "snapshot_path": "flavor_catalog/references/B002/hflav_triangle_summer2025_sin2beta.txt",
+        "sha256": "sha256:ea3e6af5b240bd78cf81404140586a8fd7b9d77f644aa9cac33010770bbca6bf",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "S coefficient in B_d -> J/psi K_S = 0.712 +- 0.011",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18:   or beta == phi_1 = 67.37^{+0.44}_{-0.45} degrees\nL19:\nL20: Mode-specific line relevant to the assigned process:\nL21:   B_d -> J/psi K_S: average S = 0.712 +/- 0.011\nL22:   stat-only uncertainty = 0.011\nL23:\nL24: Inputs named by HFLAV in this block:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "beta_physical_solution",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/",
+        "snapshot_path": "flavor_catalog/references/B002/hflav_triangle_summer2025_sin2beta.txt",
+        "sha256": "sha256:ea3e6af5b240bd78cf81404140586a8fd7b9d77f644aa9cac33010770bbca6bf",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "beta == phi_1 from sin(2 beta), physical CKM solution = 22.63 +- 0.45",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14:   CL = 0.34\nL15:\nL16: Corresponding beta solutions reported by HFLAV:\nL17:   beta == phi_1 = 22.63^{+0.45}_{-0.44} degrees\nL18:   or beta == phi_1 = 67.37^{+0.44}_{-0.45} degrees\nL19:\nL20: Mode-specific line relevant to the assigned process:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "lhcb_2024_primary_input",
+        "source_url": "https://arxiv.org/abs/2309.09728",
+        "snapshot_path": "flavor_catalog/references/B002/lhcb_2024_spsiks_arxiv.txt",
+        "sha256": "sha256:6833aa00aa16c108bdb71df19b820c905e30a154375491ad547d5bfab534842f",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "S_{psi K0_S} = 0.717 +- 0.013",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12:   and J/psi(e+e-) K0_S, with K0_S -> pi+ pi-.\nL13:\nL14: Reported CP-violation parameters:\nL15:   S_{psi K0_S} = 0.717 +/- 0.013(stat) +/- 0.008(syst)\nL16:   C_{psi K0_S} = 0.008 +/- 0.012(stat) +/- 0.003(syst)\nL17:\nL18: The abstract states that this S_{psi K0_S} result was the most precise\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "belleii_2024_primary_input",
+        "source_url": "https://arxiv.org/abs/2402.17260",
+        "snapshot_path": "flavor_catalog/references/B002/belleii_2024_sin2phi1_arxiv.txt",
+        "sha256": "sha256:6ca46cf84f709356303a05eae997e1dad6d854267c4118cbd66919f7950ddf48",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "S in B0 -> J/psi K0_S = 0.724 +- 0.035",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11:   a 362 fb^-1 sample collected at the Upsilon(4S) resonance.\nL12:\nL13: Reported B0 -> J/psi K0_S CP-violation parameters:\nL14:   S = 0.724 +/- 0.035(stat) +/- 0.009(syst)\nL15:   C = -0.035 +/- 0.026(stat) +/- 0.029(syst)\nL16:\nL17: Flavor-tagging performance quoted in the abstract:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "penguin_phase_bound",
+        "source_url": "https://arxiv.org/abs/1503.00859",
+        "snapshot_path": "flavor_catalog/references/B002/frings_nierste_wiebusch_2015_arxiv.txt",
+        "sha256": "sha256:dcd9b65df65af11b86ce1233c0bea55d56680d74b3428cd8d0f55cd3a7695178",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Long-distance penguin phase shift in B_d -> J/psi K_S = 0.68",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12:   unknown long-distance penguin contribution involving up quarks.\nL13:\nL14: Numerical bound quoted in the abstract:\nL15:   |Delta phi_d| <= 0.68 degrees\nL16:\nL17: The paper also reports polarization-dependent bounds for |Delta phi_s| in\nL18: B_s -> J/psi phi and bounds for related B_d -> psi(2S) K_S and B_d -> J/psi K*\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

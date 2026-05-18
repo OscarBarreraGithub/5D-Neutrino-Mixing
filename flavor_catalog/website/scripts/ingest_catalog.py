@@ -37,6 +37,10 @@ PROCESSES_DIR = REPO_ROOT / "flavor_catalog" / "processes"
 OUT_DIR = SITE_ROOT / "src" / "content" / "entries"
 INDEX_PATH = SITE_ROOT / "src" / "content" / "catalog_index.json"
 FAMILIES_PATH = SITE_ROOT / "src" / "content" / "families.json"
+# Phase 3: citation-anchor YAMLs produced by Phase 2 codex agents.  Read-only;
+# this script just attaches the contents to each entry JSON so the detail page
+# can render the "view in source" modal without an additional client fetch.
+ANCHORS_DIR = SITE_ROOT / "_data" / "citation_anchors"
 
 # ---------------------------------------------------------------------------
 # YAML loader: prefer PyYAML, fall back to a minimal hand-rolled parser.
@@ -407,6 +411,81 @@ def latest_status_state(sidecar: dict) -> str | None:
     return None
 
 
+def load_citation_anchors(process_id: str) -> dict | None:
+    """Read the Phase 2 anchors YAML for ``process_id`` and return a JSON-safe dict.
+
+    The returned shape mirrors the YAML one-to-one (sources[] each with
+    block_key, source_url, snapshot_path, sha256, access_date, anchors[] where
+    each anchor has anchor_field, anchor_string, status, matches[]).  Missing
+    files return None so the template can hide the modal trigger.
+    """
+    yp = ANCHORS_DIR / f"{process_id}.yaml"
+    if not yp.is_file():
+        return None
+    try:
+        doc = load_yaml(yp.read_text())
+    except Exception as exc:  # noqa: BLE001
+        print(f"  ! anchors parse failed for {process_id}: {exc}", file=sys.stderr)
+        return None
+    if not isinstance(doc, dict):
+        return None
+    sources = doc.get("sources")
+    if not isinstance(sources, list):
+        return None
+
+    counts = {"RESOLVED": 0, "AMBIGUOUS": 0, "UNRESOLVED": 0}
+    clean_sources: list[dict] = []
+    for src in sources:
+        if not isinstance(src, dict):
+            continue
+        anchors = src.get("anchors") or []
+        clean_anchors: list[dict] = []
+        if isinstance(anchors, list):
+            for a in anchors:
+                if not isinstance(a, dict):
+                    continue
+                status = (a.get("status") or "").upper()
+                if status not in counts:
+                    status = "UNRESOLVED"
+                counts[status] = counts.get(status, 0) + 1
+                matches_raw = a.get("matches") or []
+                matches: list[dict] = []
+                if isinstance(matches_raw, list):
+                    for m in matches_raw:
+                        if not isinstance(m, dict):
+                            continue
+                        matches.append(
+                            {
+                                "line_number": m.get("line_number"),
+                                "context": m.get("context") or "",
+                            }
+                        )
+                clean_anchors.append(
+                    {
+                        "anchor_field": a.get("anchor_field"),
+                        "anchor_string": a.get("anchor_string") or "",
+                        "status": status,
+                        "matches": matches,
+                    }
+                )
+        clean_sources.append(
+            {
+                "block_key": src.get("block_key") or "",
+                "source_url": src.get("source_url") or "",
+                "snapshot_path": src.get("snapshot_path") or "",
+                "sha256": src.get("sha256") or "",
+                "access_date": src.get("access_date") or "",
+                "anchors": clean_anchors,
+            }
+        )
+
+    return {
+        "generated_at": doc.get("generated_at"),
+        "counts": counts,
+        "sources": clean_sources,
+    }
+
+
 def collect_access_dates(sidecar: dict) -> list[str]:
     """Walk the sidecar looking for access_date strings; dedupe + sort."""
     dates: set[str] = set()
@@ -446,6 +525,7 @@ def main() -> int:
     index_rows: list[dict] = []
     family_counts: dict[str, int] = {fam: 0 for fam in FAMILY_ORDER}
     verdict_counts: dict[str, int] = {}
+    anchor_totals = {"RESOLVED": 0, "AMBIGUOUS": 0, "UNRESOLVED": 0, "entries_with_anchors": 0}
 
     for yp in yaml_paths:
         try:
@@ -472,6 +552,11 @@ def main() -> int:
         cov = sidecar.get("code_coverage") or {}
         cov_status = (cov.get("status") if isinstance(cov, dict) else None) or "UNKNOWN"
         pdg_values = normalize_pdg_values(sidecar)
+        anchors = load_citation_anchors(process_id)
+        if anchors:
+            anchor_totals["entries_with_anchors"] += 1
+            for k in ("RESOLVED", "AMBIGUOUS", "UNRESOLVED"):
+                anchor_totals[k] += anchors["counts"].get(k, 0)
 
         rel_yaml = yp.relative_to(REPO_ROOT).as_posix()
         rel_tex = tex_path.relative_to(REPO_ROOT).as_posix() if tex_path.is_file() else None
@@ -523,6 +608,7 @@ def main() -> int:
             "source_yaml": rel_yaml,
             "source_tex": rel_tex,
             "worklog_path": worklog_path,
+            "citation_anchors": anchors,
         }
 
         out_path = OUT_DIR / f"{process_id}.json"
@@ -533,12 +619,14 @@ def main() -> int:
         index_rows.append({
             "process_id": process_id,
             "family": family,
+            "family_original": sidecar.get("family"),
             "tier": tier,
             "fact_check_verdict": verdict,
             "standard_notation": sidecar.get("standard_notation"),
             "process_name": sidecar.get("process_name"),
             "implementation_difficulty": difficulty,
             "code_coverage_status": cov_status,
+            "anchor_counts": (anchors["counts"] if anchors else None),
         })
 
     index_rows.sort(key=lambda r: (FAMILY_ORDER.index(r["family"]) if r["family"] in FAMILY_ORDER else 99, r["process_id"]))
@@ -547,6 +635,7 @@ def main() -> int:
         "total_entries": len(index_rows),
         "verdict_counts": verdict_counts,
         "family_counts": family_counts,
+        "anchor_totals": anchor_totals,
         "entries": index_rows,
     }, indent=2, ensure_ascii=False))
 
@@ -566,6 +655,7 @@ def main() -> int:
     print(f"  -> families.json:      {FAMILIES_PATH.relative_to(SITE_ROOT)}")
     print(f"  -> family counts:      {family_counts}")
     print(f"  -> verdict counts:     {verdict_counts}")
+    print(f"  -> anchor totals:      {anchor_totals}")
     return 0
 
 

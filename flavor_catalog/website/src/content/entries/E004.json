@@ -189,5 +189,75 @@
   },
   "source_yaml": "flavor_catalog/processes/edm_neutrino/E004.yaml",
   "source_tex": "flavor_catalog/processes/edm_neutrino/E004.tex",
-  "worklog_path": "flavor_catalog/worklogs/E004/"
+  "worklog_path": "flavor_catalog/worklogs/E004/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_limit",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM",
+        "snapshot_path": "flavor_catalog/references/E004/pdg2026_neutron_edm_datablock.txt",
+        "sha256": "211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_n| < 1.8 x 10^-26 e cm at 90% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: Canonical direct result:\nL18:   <0.18, CL = 90%, ABEL 2020, method MRS UCN.\nL19: Converted value:\nL20:   |d_n| < 1.8 x 10^-26 e cm at 90% CL.\nL21:\nL22: PDG measurement note for ABEL 2020:\nL23:   d = (0.0 +/- 1.1 +/- 0.2) x 10^-26 e cm, corresponding to the listed limit."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "primary_measurement",
+        "source_url": "https://arxiv.org/abs/2001.11966",
+        "snapshot_path": "flavor_catalog/references/E004/abel2020_arxiv2001_11966.txt",
+        "sha256": "b413e25a28afaf7c70ccf642a74d5b1f00e4dad2357732eb0a82899b9546e43b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "measurement_summary",
+            "anchor_string": "d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm; |d_n| < 1.8 x 10^-26 e cm at 90% CL in PDG",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:   improved magnetic-field systematic control.\nL21:\nL22: Numerical result:\nL23:   d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm.\nL24:\nL25: This source is the primary experimental input for the PDG 2026 direct neutron\nL26: EDM bound |d_n| < 1.8 x 10^-26 e cm at 90% CL."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "superseded_direct_limit",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM",
+        "snapshot_path": "flavor_catalog/references/E004/pdg2026_neutron_edm_datablock.txt",
+        "sha256": "211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_n| < 3.0 x 10^-26 e cm at 90% CL, superseded by Abel 2020",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 28,
+                "context": "L25: Superseded direct result used for post-2008 context:\nL26:   <0.30, CL = 90%, PENDLEBURY 2015, method MRS, supersedes BAKER 2006.\nL27: Converted value:\nL28:   |d_n| < 3.0 x 10^-26 e cm at 90% CL.\nL29: PDG measurement note for PENDLEBURY 2015:\nL30:   d = (-0.21 +/- 1.82) x 10^-26 e cm, corresponding to the listed limit.\nL31:"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

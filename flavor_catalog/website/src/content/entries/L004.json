@@ -149,5 +149,35 @@
   },
   "source_yaml": "flavor_catalog/processes/charged_lepton/L004.yaml",
   "source_tex": "flavor_catalog/processes/charged_lepton/L004.tex",
-  "worklog_path": "flavor_catalog/worklogs/L004/"
+  "worklog_path": "flavor_catalog/worklogs/L004/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "sigma(mu- Au -> e- Au) / sigma(mu- Au -> capture)",
+        "source_url": "https://pdg.lbl.gov/encoder_listings/s004.pdf",
+        "snapshot_path": "flavor_catalog/references/L004/pdg2026_muon_listing_s004_au_conversion.txt",
+        "sha256": "f62fe92474a72005f15a29ee456110afe5014e88a79848ae3cd50bd35b4d0a01",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7e-13",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: sigma(mu- Au -> e- Au) / sigma(mu- Au -> capture)\nL19: \nL20: VALUE        CL%   DOCUMENT ID   TECN   CHG   COMMENT\nL21: <7 x 10^-13  90   BERTL 06      SPEC   -     SINDRUM II\nL22: \nL23: Use in L004:\nL24: Canonical PDG/equivalent current gold-target limit for coherent neutrinoless\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

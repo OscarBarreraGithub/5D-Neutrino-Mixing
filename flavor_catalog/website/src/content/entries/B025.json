@@ -163,5 +163,219 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B025.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B025.tex",
-  "worklog_path": "flavor_catalog/worklogs/B025/"
+  "worklog_path": "flavor_catalog/worklogs/B025/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 9,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html",
+        "snapshot_path": "flavor_catalog/references/B025/hflav_ckm2025_rdrds.txt",
+        "sha256": "sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "R(D) = B(B -> D tau nu_tau) / B(B -> D l nu_l), l=e,mu = 0.358 +- 0.024 dimensionless ratio",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 175,
+                "context": "L172:          <a href=\"../../r_dtaunu/logfile_ckm25_new.txt\">logfile.txt</a>&nbsp;\nL173:         </td>\nL174:       <td bgcolor=\"#ccccc0\"><b><!--val-->0.281 &plusmn;  0.011 </b> </td>\nL175:       <td bgcolor=\"#ccccc0\"><b><!--xval-->0.358 &plusmn;  0.024 </b> </td>\nL176:       <td bgcolor=\"#ccccc0\"><b><!--corr-->-0.374 </b> </td>\nL177:       <td bgcolor=\"#ccccc0\"><b><!--chi2-->chi2/dof = 16.683/14 (CL = 0.27) </b> </td>\nL178:       <td bgcolor=\"#ccccc0\">\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "joint_fit_context",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html",
+        "snapshot_path": "flavor_catalog/references/B025/hflav_ckm2025_rdrds.txt",
+        "sha256": "sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 0.281 +- 0.011",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 174,
+                "context": "L171:       <td bgcolor=\"#ccccc0\"><b><!--ana-->Average</b>\nL172:          <a href=\"../../r_dtaunu/logfile_ckm25_new.txt\">logfile.txt</a>&nbsp;\nL173:         </td>\nL174:       <td bgcolor=\"#ccccc0\"><b><!--val-->0.281 &plusmn;  0.011 </b> </td>\nL175:       <td bgcolor=\"#ccccc0\"><b><!--xval-->0.358 &plusmn;  0.024 </b> </td>\nL176:       <td bgcolor=\"#ccccc0\"><b><!--corr-->-0.374 </b> </td>\nL177:       <td bgcolor=\"#ccccc0\"><b><!--chi2-->chi2/dof = 16.683/14 (CL = 0.27) </b> </td>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "sm_reference_used_by_hflav",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html",
+        "snapshot_path": "flavor_catalog/references/B025/hflav_ckm2025_rdrds.txt",
+        "sha256": "sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 0.296 +- 0.004",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 324,
+                "context": "L321:\nL322:     <tr valign=top>\nL323:       <td> G. Martinelli, S. Simula, L. Vittorio, Phys.RevD 105 (2022) 3, 034503 [<a href=\"https://arxiv.org/abs/2105.08674\">arXiv:2105.08674 [hep-ph]</a>] </td>\nL324:       <td>0.296 &plusmn;  0.008 </td>\nL325:       <td></td>\nL326:     </tr>\nL327:\n"
+              },
+              {
+                "line_number": 474,
+                "context": "L471:\nL472:     <tr>\nL473:       <td bgcolor=\"#ccccc0\"><b>Arithmetic average</b> </td>\nL474:       <td bgcolor=\"#ccccc0\"><b>0.296 &plusmn;  0.004 </b> </td>\nL475:       <td bgcolor=\"#ccccc0\"><b>0.254 &plusmn;  0.005 </b> </td>\nL476:       <td bgcolor=\"#ccccc0\"><b>3.79 </b> </td>\nL477:     </tr>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "selected_experimental_inputs[0]",
+        "source_url": "",
+        "snapshot_path": "flavor_catalog/references/B025/babar2012_arxiv1205_5442.txt",
+        "sha256": "sha256:fea3c845ab93b1b869f90807bf47708131e9431bb99b91e9c0455ef4f3a712ef",
+        "access_date": "",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "babar2012_arxiv1205_5442 = 0.44 +- 0.058",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2012-09-20T19:54:26Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/1205.5442v2\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/1205.5442v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>Based on the full BaBar data sample, we report improved measurements of the ratios R(D(*)) = B(B -&gt; D(*) Tau Nu)/B(B -&gt; D(*) l Nu), where l is either e or mu. These ratios are sensitive to new physics contributions in the form of a charged Higgs boson. We measure R(D) = 0.440 +- 0.058 +- 0.042 and R(D*) = 0.332 +- 0.024 +- 0.018, which exceed the Standard Model expectations by 2.0 sigma and 2.7 sigma, respectively. Taken together, our results disagree with these expectations at the 3.4 sigma level. This excess cannot be explained by a charged Higgs boson in the type II two-Higgs-doublet model. We also report the observation of the decay B -&gt; D Tau Nu, with a significance of 6.8 sigma.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2012-05-24T13:43:06Z</published>\nL19:     <arxiv:comment>Expanded section on systematics, text corrections, improved the format of Figure 2 and included the effect of the change of the Tau polarization due to the charged Higgs</arxiv:comment>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "selected_experimental_inputs[1]",
+        "source_url": "",
+        "snapshot_path": "flavor_catalog/references/B025/babar2013_arxiv1303_0571.txt",
+        "sha256": "sha256:2b92b30aa5e85dd7611daab5896497fe343129e15a007c48f1508875960c8a68",
+        "access_date": "",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "babar2013_arxiv1303_0571 = 0.44 +- 0.058",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2013-03-03T21:25:32Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/1303.0571v1\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/1303.0571v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>Based on the full BaBar data sample, we report improved measurements of the ratios R(D(*)) = B(B -&gt; D(*) Tau Nu)/B(B -&gt; D(*) l Nu), where l is either e or mu. These ratios are sensitive to new physics contributions in the form of a charged Higgs boson. We measure R(D) = 0.440 +- 0.058 +- 0.042 and R(D*) = 0.332 +- 0.024 +- 0.018, which exceed the Standard Model expectations by 2.0 sigma and 2.7 sigma, respectively. Taken together, our results disagree with these expectations at the 3.4 sigma level. This excess cannot be explained by a charged Higgs boson in the type II two-Higgs-doublet model. Kinematic distributions presented here exclude large portions of the more general type III two-Higgs-doublet model, but there are solutions within this model compatible with the results.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2013-03-03T21:25:32Z</published>\nL19:     <arxiv:comment>32 pages, 30 postscript figures, submitted to Phys. Rev. D</arxiv:comment>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "selected_experimental_inputs[2]",
+        "source_url": "",
+        "snapshot_path": "flavor_catalog/references/B025/belle2015_arxiv1507_03233.txt",
+        "sha256": "sha256:304f8206278dfba0298af3939e79e5e9a70028f9cf27e17a8abc225dd59cdde1",
+        "access_date": "",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belle2015_arxiv1507_03233 = 0.375 +- 0.064",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2015-10-10T21:01:28Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/1507.03233v3\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/1507.03233v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>We report a measurement of the branching fraction ratios R(D(*)) of Bbar -&gt; D(*) tau- nubar_tau relative to Bbar -&gt; D()* l- nubar_l (where l = e or mu) using the full Belle data sample of 772 x 10^6 BBbar pairs collected at the Y(4S) resonance with the Belle detector at the KEKB asymmetric-energy e+e- collider. The measured values are R(D)= 0.375 +- 0.064(stat.) +- 0.026(syst.) and R(D*) = 0.293 +- 0.038(stat.) +- 0.015(syst.). The analysis uses hadronic reconstruction of the tag-side B meson and purely leptonic tau decays. The results are consistent with earlier measurements and do not show a significant deviation from the standard model prediction.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2015-07-12T13:34:21Z</published>\nL19:     <arxiv:comment>Accepted for publication in Phys.Rev.D</arxiv:comment>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "selected_experimental_inputs[3]",
+        "source_url": "",
+        "snapshot_path": "flavor_catalog/references/B025/belle2019_arxiv1910_05864.txt",
+        "sha256": "sha256:a228175d16e08c7964819773f77bdd1f627480ec990934d3386ea4ab9113a6d7",
+        "access_date": "",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belle2019_arxiv1910_05864 = 0.307 +- 0.037",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2019-10-16T23:13:56Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/1910.05864v2\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/1910.05864v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>The experimental results on the ratios of branching fractions $\\mathcal{R}(D) = {\\cal B}(\\bar{B} \\to D τ^- \\barν_τ)/{\\cal B}(\\bar{B} \\to D \\ell^- \\barν_{\\ell})$ and $\\mathcal{R}(D^*) = {\\cal B}(\\bar{B} \\to D^* τ^- \\barν_τ)/{\\cal B}(\\bar{B} \\to D^* \\ell^- \\barν_{\\ell})$, where $\\ell$ denotes an electron or a muon, show a long-standing discrepancy with the Standard Model predictions, and might hint to a violation of lepton flavor universality. We report a new simultaneous measurement of $\\mathcal{R}(D)$ and $\\mathcal{R}(D^*)$, based on a data sample containing $772 \\times 10^6$ $B\\bar{B}$ events recorded at the $Υ(4S)$ resonance with the Belle detector at the KEKB $e^+ e^-$ collider. In this analysis the tag-side $B$ meson is reconstructed in a semileptonic decay mode and the signal-side $τ$ is reconstructed in a purely leptonic decay. The measured values are $\\mathcal{R}(D)= 0.307 \\pm 0.037 \\pm 0.016$ and $\\mathcal{R}(D^*) = 0.283 \\pm 0.018 \\pm 0.014$, where the first uncertainties are statistical and the second are systematic. These results are in agreement with the Standard Model predictions within $0.2$, $1.1$ and $0.8$ standard deviations for $\\mathcal{R}(D)$, $\\mathcal{R}(D^*)$ and their combination, respectively. This work constitutes the most precise measurements of $\\mathcal{R}(D)$ and $\\mathcal{R}(D^*)$ performed to date as well as the first result for $\\mathcal{R}(D)$ based on a semileptonic tagging method.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2019-10-13T23:32:28Z</published>\nL19:     <arxiv:comment>8 pages, 1 figure, submitted to Physical Review Letters</arxiv:comment>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "selected_experimental_inputs[4]",
+        "source_url": "",
+        "snapshot_path": "flavor_catalog/references/B025/lhcb2023_arxiv2302_02886.txt",
+        "sha256": "sha256:04ff0a6c66b812d9486853cff71b286450d7662d1f56f738e154fb382a6aa71c",
+        "access_date": "",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "lhcb2023_arxiv2302_02886 = 0.441 +- 0.06",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2024-04-22T17:17:50Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/2302.02886v3\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/2302.02886v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>The ratios of branching fractions $\\mathcal{R}(D^{*})\\equiv\\mathcal{B}(\\bar{B}\\to D^{*}τ^{-}\\barν_τ)/\\mathcal{B}(\\bar{B}\\to D^{*}μ^{-}\\barν_μ)$ and $\\mathcal{R}(D^{0})\\equiv\\mathcal{B}(B^{-}\\to D^{0}τ^{-}\\barν_τ)/\\mathcal{B}(B^{-}\\to D^{0}μ^{-}\\barν_μ)$ are measured, assuming isospin symmetry, using a sample of proton-proton collision data corresponding to 3.0 fb${ }^{-1}$ of integrated luminosity recorded by the LHCb experiment during 2011 and 2012. The tau lepton is identified in the decay mode $τ^{-}\\toμ^{-}ν_τ\\barν_μ$. The measured values are $\\mathcal{R}(D^{*})=0.281\\pm0.018\\pm0.024$ and $\\mathcal{R}(D^{0})=0.441\\pm0.060\\pm0.066$, where the first uncertainty is statistical and the second is systematic. The correlation between these measurements is $ρ=-0.43$. Results are consistent with the current average of these quantities and are at a combined 1.9 standard deviations from the predictions based on lepton flavor universality in the Standard Model.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2023-02-06T15:53:08Z</published>\nL19:     <arxiv:comment>All figures and tables, along with any supplementary material and additional information, are available at https://cern.ch/lhcbproject/Publications/p/LHCb-PAPER-2022-039.html (LHCb public pages)</arxiv:comment>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "selected_experimental_inputs[5]",
+        "source_url": "",
+        "snapshot_path": "flavor_catalog/references/B025/lhcb2025_arxiv2406_03387.txt",
+        "sha256": "sha256:5c33b29d3a60831f210a292a22b21bf590f5345b2655cee68dd062c5df7fa30b",
+        "access_date": "",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "lhcb2025_arxiv2406_03387 = 0.249 +- 0.043",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:     <link href=\"https://arxiv.org/pdf/2406.03387v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>The branching fraction ratios of $\\overline{B}^0\\to D^+τ^-\\overlineν_τ$ and $\\overline{B}^0\\to D^{*+}τ^-\\overlineν_τ$ decays are measured with respect to their muonic counterparts, using a data sample corresponding to an integrated luminosity of 2.0 fb$^{-1}$ collected by the LHCb experiment in proton-proton collisions at $\\sqrt{s} = 13$ TeV. The reconstructed final states are formed by combining $D^+$ mesons with $τ^-\\toμ^-\\overlineν_μν_τ$ candidates, where the $D^+$ is reconstructed via the $D^+\\to K^-π^+π^+$ decay. The results are\nL17:   \\begin{align*}\nL18:   R(D^{+}) &amp;= 0.249 \\pm 0.043 \\pm 0.047,\nL19:   R(D^{*+}) &amp;= 0.402 \\pm 0.081\\pm 0.085,\nL20:   \\end{align*} where the first uncertainties are statistical and the second systematic. The two measurements have a correlation coefficient of $-0.39$ and are compatible with the Standard Model.</summary>\nL21:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "selected_experimental_inputs[6]",
+        "source_url": "",
+        "snapshot_path": "flavor_catalog/references/B025/belleii2025_arxiv2504_11220.txt",
+        "sha256": "sha256:d1bbba7696d41ba70e631c4fddaaab41f5cc1e29e2d366ee939ea4b0acf80869",
+        "access_date": "",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belleii2025_arxiv2504_11220 = 0.418 +- 0.074",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2026-03-19T13:30:49Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/2504.11220v3\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/2504.11220v3\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>We report measurements of the ratios of branching fractions ${\\cal R}(D^{(*)+}) = \\frac{{\\cal B}(\\overline{B}{}^0 \\to D^{(*)+} \\,τ^- \\, \\overlineν_τ)}{{\\cal B}(\\overline{B}{}^0 \\to D^{(*)+} \\, \\ell^- \\, \\overlineν_\\ell)}$, where $\\ell$ denotes either an electron or a muon. These ratios test the universality of the charged-current weak interaction. The results are based on a $365\\, \\mathrm{fb}^{-1}$ data sample collected with the Belle II detector at the SuperKEKB $e^+e^-$ collider, which operates at a center-of-mass energy corresponding to the $Υ(4S)$ resonance, just above the threshold for $B\\overline{B}{}$ production. Signal candidates are reconstructed by selecting events in which the companion $B$ meson from the $Υ(4S) \\to B\\overline{B}{}$ decay is identified in semileptonic modes. The $τ$ lepton is reconstructed via its leptonic decays. We obtain ${\\cal R}(D^+) = 0.418 \\pm 0.074 ~({\\mathrm{stat}}) \\pm 0.051 ~({\\mathrm{syst}})$ and ${\\cal R}(D^{*+}) = 0.306 \\pm 0.034 ~({\\mathrm{stat}}) \\pm 0.018 ~({\\mathrm{syst}})$, which are consistent with world average values. Accounting for the correlation between them, these values differ from the Standard Model expectation by a collective significance of $1.7$ standard deviations.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2025-04-15T14:22:58Z</published>\nL19:     <arxiv:primary_category term=\"hep-ex\"/>\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

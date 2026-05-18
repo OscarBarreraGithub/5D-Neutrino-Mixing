@@ -51,6 +51,44 @@ const codeCoverageSchema = z
   })
   .passthrough();
 
+// Phase 3: citation-anchor payload attached by the ingest script from the
+// Phase 2 YAML files under _data/citation_anchors/.  Everything is loose so we
+// don't break ingest if a single anchors file is malformed.
+const anchorMatchSchema = z
+  .object({
+    line_number: z.union([z.number(), z.string()]).nullish(),
+    context: z.string().nullish(),
+  })
+  .passthrough();
+
+const anchorSchema = z
+  .object({
+    anchor_field: z.string().nullish(),
+    anchor_string: z.string().nullish(),
+    status: z.enum(['RESOLVED', 'AMBIGUOUS', 'UNRESOLVED']).or(z.string()).nullish(),
+    matches: z.array(anchorMatchSchema).default([]),
+  })
+  .passthrough();
+
+const anchorSourceSchema = z
+  .object({
+    block_key: z.string().nullish(),
+    source_url: z.string().nullish(),
+    snapshot_path: z.string().nullish(),
+    sha256: z.string().nullish(),
+    access_date: z.string().nullish(),
+    anchors: z.array(anchorSchema).default([]),
+  })
+  .passthrough();
+
+const citationAnchorsSchema = z
+  .object({
+    generated_at: z.string().nullish(),
+    counts: z.record(z.number()).nullish(),
+    sources: z.array(anchorSourceSchema).default([]),
+  })
+  .passthrough();
+
 const entrySchema = z
   .object({
     process_id: z.string(),
@@ -86,6 +124,7 @@ const entrySchema = z
     source_yaml: z.string().nullish(),
     source_tex: z.string().nullish(),
     worklog_path: z.string().nullish(),
+    citation_anchors: citationAnchorsSchema.nullish(),
   })
   .passthrough();
 

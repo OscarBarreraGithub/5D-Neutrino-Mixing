@@ -230,5 +230,100 @@
   },
   "source_yaml": "flavor_catalog/processes/charm/C002.yaml",
   "source_tex": "flavor_catalog/processes/charm/C002.tex",
-  "worklog_path": "flavor_catalog/worklogs/C002/"
+  "worklog_path": "flavor_catalog/worklogs/C002/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:05Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 3
+    },
+    "sources": [
+      {
+        "block_key": "|q/p| in D0-D0bar mixing",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html",
+        "snapshot_path": "flavor_catalog/references/C002/hflav_ckm25_dmixing_cpv_fit.txt",
+        "sha256": "sha256:5908d28e0388a717ba62bc4b73e74494cc0ec39404ee14834a7a4a084723977e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.983",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20: Selected table_results.pdf text, extracted only for the C002 observables:\nL21: \nL22: Parameter                           No indirect CPV     No subleading amplitudes     All CPV       95% C.L. interval in All CPV\nL23: |q/p|                               1                   1.002 +/- 0.005              0.983 +0.015/-0.014 [0.955, 1.012]\nL24: phi (degrees)                       0                   -0.08 +/- 0.19               -1.51 +1.03/-1.06 [-3.63, 0.51]\nL25: phiM (degrees)                      0                   -0.78 +1.60/-1.63            -0.03 +0.70/-0.71 [-1.48, 1.35]\nL26: phiGamma (degrees)                  0                   0                            2.03 +1.54/-1.52 [-0.94, 5.08]\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "phi_D = Arg(q/p) in D0-D0bar mixing",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html",
+        "snapshot_path": "flavor_catalog/references/C002/hflav_ckm25_dmixing_cpv_fit.txt",
+        "sha256": "sha256:5908d28e0388a717ba62bc4b73e74494cc0ec39404ee14834a7a4a084723977e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "-1.51",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: \nL22: Parameter                           No indirect CPV     No subleading amplitudes     All CPV       95% C.L. interval in All CPV\nL23: |q/p|                               1                   1.002 +/- 0.005              0.983 +0.015/-0.014 [0.955, 1.012]\nL24: phi (degrees)                       0                   -0.08 +/- 0.19               -1.51 +1.03/-1.06 [-3.63, 0.51]\nL25: phiM (degrees)                      0                   -0.78 +1.60/-1.63            -0.03 +0.70/-0.71 [-1.48, 1.35]\nL26: phiGamma (degrees)                  0                   0                            2.03 +1.54/-1.52 [-0.94, 5.08]\nL27: chi2/d.o.f.                         72.817/(63-7)       72.797/(63-8)                70.711/(63-10)\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "No indirect CP violation point (|q/p|, phi) = (1,0)",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html",
+        "snapshot_path": "flavor_catalog/references/C002/hflav_ckm25_dmixing_cpv_fit.txt",
+        "sha256": "sha256:5908d28e0388a717ba62bc4b73e74494cc0ec39404ee14834a7a4a084723977e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG cross-check of HFLAV |q/p| and phi_D",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-d-dbar-mixing.pdf",
+        "snapshot_path": "flavor_catalog/references/C002/pdg2025_dmixing_review_cpv.txt",
+        "sha256": "sha256:4ffedbd5dcda34e993c18a92430b94ef00c51f43f75cc860812f711a4caefaa2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "Contextual RS-flavor baseline for post-2008 comparison",
+        "source_url": "https://arxiv.org/abs/0804.1954",
+        "snapshot_path": "flavor_catalog/references/C002/cfw2008_arxiv0804_1954.txt",
+        "sha256": "sha256:93a902b9d5c7c00b5f8bcbcd8dca1a94f502b4db2f99d602b835d9df18fc8771",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      }
+    ]
+  }
 }

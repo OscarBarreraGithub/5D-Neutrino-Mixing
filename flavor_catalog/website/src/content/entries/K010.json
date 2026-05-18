@@ -227,5 +227,239 @@
   },
   "source_yaml": "flavor_catalog/processes/kaon/K010.yaml",
   "source_tex": "flavor_catalog/processes/kaon/K010.tex",
-  "worklog_path": "flavor_catalog/worklogs/K010/"
+  "worklog_path": "flavor_catalog/worklogs/K010/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 4,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:K010",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+        "sha256": "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.0e-9 +1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 33,
+                "context": "L30:   event_count: 7\nL31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9"
+              },
+              {
+                "line_number": 34,
+                "context": "L31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9"
+              },
+              {
+                "line_number": 35,
+                "context": "L32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9"
+              },
+              {
+                "line_number": 36,
+                "context": "L33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10"
+              },
+              {
+                "line_number": 37,
+                "context": "L34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10\nL40:   syst_error_negative: 2.0000000000000003E-10"
+              },
+              {
+                "line_number": 38,
+                "context": "L35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10\nL40:   syst_error_negative: 2.0000000000000003E-10\nL41:   used_in_average: true"
+              },
+              {
+                "line_number": 45,
+                "context": "L42:   used_in_fit: true\nL43:\nL44: PDG footnote:\nL45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48."
+              },
+              {
+                "line_number": 48,
+                "context": "L45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:"
+              },
+              {
+                "line_number": 49,
+                "context": "L46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              },
+              {
+                "line_number": 50,
+                "context": "L47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2026:K010",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+        "sha256": "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "5.8e-9 +2.9e-9 -2.4e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 33,
+                "context": "L30:   event_count: 7\nL31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9"
+              },
+              {
+                "line_number": 34,
+                "context": "L31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9"
+              },
+              {
+                "line_number": 35,
+                "context": "L32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9"
+              },
+              {
+                "line_number": 36,
+                "context": "L33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10"
+              },
+              {
+                "line_number": 37,
+                "context": "L34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10\nL40:   syst_error_negative: 2.0000000000000003E-10"
+              },
+              {
+                "line_number": 38,
+                "context": "L35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10\nL40:   syst_error_negative: 2.0000000000000003E-10\nL41:   used_in_average: true"
+              },
+              {
+                "line_number": 45,
+                "context": "L42:   used_in_fit: true\nL43:\nL44: PDG footnote:\nL45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48."
+              },
+              {
+                "line_number": 48,
+                "context": "L45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:"
+              },
+              {
+                "line_number": 49,
+                "context": "L46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              },
+              {
+                "line_number": 50,
+                "context": "L47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482003:KSPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309075",
+        "snapshot_path": "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt",
+        "sha256": "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 3,
+                "context": "L1: Source key: NA482003:KSPi0EE\nL2: Source: arXiv abstract page\nL3: URL: https://arxiv.org/abs/hep-ex/0309075\nL4: Access date: 2026-05-16\nL5: arXiv: hep-ex/0309075\nL6: DOI: 10.1016/j.physletb.2003.10.001"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: Source: arXiv abstract page\nL3: URL: https://arxiv.org/abs/hep-ex/0309075\nL4: Access date: 2026-05-16\nL5: arXiv: hep-ex/0309075\nL6: DOI: 10.1016/j.physletb.2003.10.001\nL7: Journal reference: Phys. Lett. B576, 43 (2003)\nL8: Title: Observation of the rare decay Ks->pi0e+e-"
+              },
+              {
+                "line_number": 7,
+                "context": "L4: Access date: 2026-05-16\nL5: arXiv: hep-ex/0309075\nL6: DOI: 10.1016/j.physletb.2003.10.001\nL7: Journal reference: Phys. Lett. B576, 43 (2003)\nL8: Title: Observation of the rare decay Ks->pi0e+e-\nL9: Authors: NA48/1 Collaboration\nL10: Submitted: 2003-09-26"
+              },
+              {
+                "line_number": 16,
+                "context": "L13:\nL14: A search for the decay Ks->pi0e+e- has been made by the NA48/1 experiment at\nL15: the CERN SPS accelerator. Using data collected during 89 days in 2002 with a\nL16: high-intensity Ks beam, 7 events were found with a background of 0.15 events.\nL17: The branching fraction BR(Ks->pi0e+e-, m(ee) > 0.165 GeV/c^2) =\nL18: (3.0^{+1.5}_{-1.2}(stat) +/-0.2 (syst)) x 10^{-9} has been measured. Using a\nL19: vector matrix element and a form factor equal to one, the measurement gives"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482003:KSPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309075",
+        "snapshot_path": "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt",
+        "sha256": "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.15",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:\nL14: A search for the decay Ks->pi0e+e- has been made by the NA48/1 experiment at\nL15: the CERN SPS accelerator. Using data collected during 89 days in 2002 with a\nL16: high-intensity Ks beam, 7 events were found with a background of 0.15 events.\nL17: The branching fraction BR(Ks->pi0e+e-, m(ee) > 0.165 GeV/c^2) =\nL18: (3.0^{+1.5}_{-1.2}(stat) +/-0.2 (syst)) x 10^{-9} has been measured. Using a\nL19: vector matrix element and a form factor equal to one, the measurement gives"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "canonical_measurement",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+        "sha256": "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3e-09 +1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 33,
+                "context": "L30:   event_count: 7\nL31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9"
+              },
+              {
+                "line_number": 34,
+                "context": "L31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9"
+              },
+              {
+                "line_number": 35,
+                "context": "L32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9"
+              },
+              {
+                "line_number": 45,
+                "context": "L42:   used_in_fit: true\nL43:\nL44: PDG footnote:\nL45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48."
+              },
+              {
+                "line_number": 49,
+                "context": "L46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              },
+              {
+                "line_number": 50,
+                "context": "L47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "extrapolated_total_rate",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+        "sha256": "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "5.8e-09 +2.9e-9 -2.4e-9",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 45,
+                "context": "L42:   used_in_fit: true\nL43:\nL44: PDG footnote:\nL45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

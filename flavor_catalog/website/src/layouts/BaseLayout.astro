@@ -53,6 +53,10 @@ const partialCount = verdictCounts.PARTIAL ?? 0;
       <div class="container site-header-inner">
         <span class="site-title"><a href="/">Flavor Catalog</a></span>
         <span class="site-version">v0.4</span>
+        <nav class="site-nav">
+          <a href="/browse/">Browse</a>
+          <a href="/families/secondary/">Secondary</a>
+        </nav>
         <div class="site-stats">
           <span><strong>{totalEntries}</strong> entries</span>
           <span class="badge badge-verified">{verifiedCount} V</span>
@@ -71,7 +75,12 @@ const partialCount = verdictCounts.PARTIAL ?? 0;
 
     <footer class="site-footer">
       <div class="container">
-        <p>Phase 1 scaffold &middot; 102-entry catalog snapshot at tag <code>flavor-catalog-v0.4</code> &middot; Branch <code>flavor-catalog-website/2026q2</code>.</p>
+        <p>
+          102-entry catalog snapshot at tag <code>flavor-catalog-v0.4</code>
+          &middot; Branch <code>flavor-catalog-website/2026q2</code>
+          &middot; <a href="/">All families</a>
+          &middot; <a href="/browse/">Browse / filter</a>.
+        </p>
       </div>
     </footer>
 

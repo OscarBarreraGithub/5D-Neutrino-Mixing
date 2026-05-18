@@ -314,5 +314,135 @@
   },
   "source_yaml": "flavor_catalog/processes/collider_rs/CR010.yaml",
   "source_tex": "flavor_catalog/processes/collider_rs/CR010.tex",
-  "worklog_path": "flavor_catalog/worklogs/CR010/"
+  "worklog_path": "flavor_catalog/worklogs/CR010/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 4
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:CR010:TB_doublet_T_mass_lower_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-t-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt",
+        "sha256": "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_T > 1.37 TeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR010:TB_doublet_B_mass_lower_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt",
+        "sha256": "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_B > 1.37 TeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR010:T_to_Wb_100pct_mass_lower_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-t-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt",
+        "sha256": "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_converted_fallback",
+            "anchor_string": "> 1700 GeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:   t' (2/3)-quark/hadron mass limits in pp and p pbar collisions\nL14:   VALUE (GeV)  CL%  DOCUMENT ID    TECN  COMMENT\nL15:   >1530        95   AAD 24BP       ATLS  B(t' -> W q) = 1 (q=d,s)\nL16:   >1700        95   AAD 24N        ATLS  B(t' -> W b) = 1\nL17:   >1360        95   AAD 24N        ATLS  B(t' -> W b : H t : Z t) = 1/2 : 1/4 : 1/4\nL18:   >1600        95   AAD 23AV       ATLS  B(t' -> Z t) = 1\nL19:   >1500        95   TUMASYAN 23V   CMS   B(t' -> h t) = 1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR010:B_to_Hb_100pct_mass_lower_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt",
+        "sha256": "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_B > 1.57 TeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR010:B_to_Wt_100pct_mass_lower_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt",
+        "sha256": "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_B > 1.56 TeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR010:B_to_Zb_100pct_mass_lower_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR010/pdg2025_tprime_bprime_vlq_limits.txt",
+        "sha256": "sha256:0b85eb01d887ece3a3e2f1cc2ecc249e4f1c8468077a7f75514f06b6915c5680",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_converted_fallback",
+            "anchor_string": "> 1540 GeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 43,
+                "context": "L40:   b' (-1/3)-quark/hadron mass limits in pp and p pbar collisions\nL41:   VALUE (GeV)  CL%  DOCUMENT ID       TECN  COMMENT\nL42:   >1530        95   AAD 24BP          ATLS  B(b' -> W u) = 1\nL43:   >1540        95   HAYRAPETYAN 24AQ  CMS   B(b' -> Z b) = 1\nL44:   >1570        95   HAYRAPETYAN 24AQ  CMS   B(b' -> H b) = 1\nL45:   >1560        95   TUMASYAN 23V      CMS   B(b' -> W t) = 1\nL46:   >1220        95   AABOUD 18CR       ATLS  singlet b'. ATLAS combination."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2023:CR010:T_all_third_generation_decays_uniform_lower_limit",
+        "source_url": "https://arxiv.org/abs/2209.07327",
+        "snapshot_path": "flavor_catalog/references/CR010/cms_2023_arxiv2209_07327.txt",
+        "sha256": "sha256:b6b6c2050657ed4e51731c19654ae120e702dbcb4dc2fbee3dd86e163283b0f1",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_T > 1.48 TeV for all decays to third-generation quarks",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: quark masses up to 1.56 TeV, depending on the branching fractions\nL24: assumed, with maximal sensitivity to decay modes that include multiple\nL25: top quarks. The limits obtained in this search are the strongest limits\nL26: to date for T Tbar production, excluding masses below 1.48 TeV for all\nL27: decays to third generation quarks, and are the strongest limits to date\nL28: for B Bbar production with B quark decays to tW."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

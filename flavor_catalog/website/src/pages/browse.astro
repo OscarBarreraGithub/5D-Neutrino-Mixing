@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryTable from '../components/EntryTable.astro';
+import index from '../content/catalog_index.json';
+import families from '../content/families.json';
+
+// Render all 102 rows server-side; let JS filter rows in place.  Pagefind is
+// build-time-static and is wired up via the runtime <script> below.
+const rows = (index.entries as any[]).slice().sort((a, b) =>
+  (a.family || '').localeCompare(b.family || '') || (a.process_id || '').localeCompare(b.process_id || '')
+);
+
+const families_list = families.filter((f: any) => f.count > 0);
+---
+<BaseLayout title="Browse / filter -- Flavor Catalog"
+            description="Filter and search the 102-entry catalog by family, tier, fact-check verdict, implementation difficulty, and code coverage.">
+  <header class="entry-header">
+    <div class="breadcrumbs"><a href="/">Catalog</a> &middot; Browse / filter</div>
+    <h1>Browse / filter</h1>
+    <p class="family-descriptor">
+      Live, in-page filtering across all {rows.length} entries.
+      Full-text search is powered by Pagefind (build-time static index).
+    </p>
+  </header>
+
+  <div class="browse-layout">
+    <aside class="browse-filters" id="browse-filters">
+      <div class="filter-block">
+        <label class="filter-label" for="search-input">Search</label>
+        <input id="search-input" type="search" placeholder="e.g. epsilon_K or B_s mu mu" aria-label="Search catalog text" />
+        <div class="search-help">Live text search across IDs, notation, family, and prose. Powered by Pagefind once the build emits its index.</div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-label">Family</div>
+        <div class="filter-chips" data-filter-group="family">
+          {families_list.map((f: any) => (
+            <label class="filter-chip">
+              <input type="checkbox" value={f.key} />
+              <span class="filter-chip-label">{f.label} <span class="filter-chip-count">{f.count}</span></span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-label">Tier</div>
+        <div class="filter-chips" data-filter-group="tier">
+          <label class="filter-chip"><input type="checkbox" value="PRIMARY" /><span class="filter-chip-label">PRIMARY</span></label>
+          <label class="filter-chip"><input type="checkbox" value="SECONDARY" /><span class="filter-chip-label">SECONDARY</span></label>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-label">Fact-check verdict</div>
+        <div class="filter-chips" data-filter-group="verdict">
+          <label class="filter-chip"><input type="checkbox" value="VERIFIED" /><span class="filter-chip-label">VERIFIED</span></label>
+          <label class="filter-chip"><input type="checkbox" value="PARTIAL" /><span class="filter-chip-label">PARTIAL</span></label>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-label">Implementation difficulty</div>
+        <div class="filter-chips" data-filter-group="difficulty">
+          <label class="filter-chip"><input type="checkbox" value="LOW" /><span class="filter-chip-label">LOW</span></label>
+          <label class="filter-chip"><input type="checkbox" value="MEDIUM" /><span class="filter-chip-label">MEDIUM</span></label>
+          <label class="filter-chip"><input type="checkbox" value="HIGH" /><span class="filter-chip-label">HIGH</span></label>
+        </div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-label">Code coverage</div>
+        <div class="filter-chips" data-filter-group="coverage">
+          <label class="filter-chip"><input type="checkbox" value="YES" /><span class="filter-chip-label">YES</span></label>
+          <label class="filter-chip"><input type="checkbox" value="PARTIAL" /><span class="filter-chip-label">PARTIAL</span></label>
+          <label class="filter-chip"><input type="checkbox" value="NO" /><span class="filter-chip-label">NO</span></label>
+        </div>
+      </div>
+
+      <button type="button" id="filter-clear" class="filter-clear">Clear all filters</button>
+    </aside>
+
+    <section class="browse-results">
+      <div class="results-summary" id="results-summary"><span id="results-count">{rows.length}</span> of {rows.length} entries</div>
+      <EntryTable rows={rows} showFamily={true} />
+      <p id="results-empty" class="results-empty" hidden>No entries match the current filters.</p>
+    </section>
+  </div>
+
+  <script is:inline>
+    (function () {
+      function init() {
+        var tableRows = document.querySelectorAll('table[data-entry-table] tbody tr');
+        var summaryCount = document.getElementById('results-count');
+        var emptyMsg = document.getElementById('results-empty');
+        var searchInput = document.getElementById('search-input');
+        var totalRows = tableRows.length;
+
+        // Build a list of grouped checkbox queries.
+        var GROUPS = ['family', 'tier', 'verdict', 'difficulty', 'coverage'];
+        function selectedFor(group) {
+          var boxes = document.querySelectorAll('[data-filter-group="' + group + '"] input[type="checkbox"]:checked');
+          var out = [];
+          boxes.forEach(function (b) { out.push(b.value.toUpperCase()); });
+          return out;
+        }
+        // Make outer label active when checkbox toggles, for the colored chip state.
+        document.querySelectorAll('.filter-chip input[type="checkbox"]').forEach(function (cb) {
+          var chip = cb.closest('.filter-chip');
+          function paint() { if (chip) chip.classList.toggle('filter-chip-on', cb.checked); }
+          cb.addEventListener('change', function () { paint(); apply(); });
+          paint();
+        });
+
+        // Pagefind search hook (loaded async if available).  Falls back to a
+        // dumb in-page text match if Pagefind isn't built.
+        var pagefind = null;
+        var pagefindReady = false;
+        (async function loadPagefind() {
+          try {
+            // Pagefind is emitted under /pagefind/pagefind.js by the post-build step.
+            var mod = await import('/pagefind/pagefind.js');
+            pagefind = mod;
+            if (pagefind && pagefind.options) {
+              await pagefind.options({ excerptLength: 24 });
+            }
+            pagefindReady = true;
+          } catch (e) {
+            // No index yet (e.g. dev server, or build skipped).  Use fallback.
+            pagefindReady = false;
+          }
+        })();
+
+        var searchMatchIds = null; // Set<string> of process_ids matching search, or null = no search.
+        var debouncer = null;
+        function runSearch() {
+          var q = (searchInput.value || '').trim();
+          if (!q) { searchMatchIds = null; apply(); return; }
+          if (pagefindReady && pagefind) {
+            pagefind.search(q).then(function (res) {
+              if (!res || !res.results) { searchMatchIds = new Set(); apply(); return; }
+              Promise.all(res.results.slice(0, 200).map(function (r) { return r.data(); })).then(function (datas) {
+                var ids = new Set();
+                datas.forEach(function (d) {
+                  // Each entry page emits a process_id in the URL like /entries/K001/.
+                  var m = (d.url || '').match(/\/entries\/([^\/]+)\//);
+                  if (m) ids.add(m[1]);
+                });
+                searchMatchIds = ids;
+                apply();
+              });
+            });
+          } else {
+            // Fallback: substring match against all visible row text.
+            var needle = q.toLowerCase();
+            var ids = new Set();
+            tableRows.forEach(function (tr) {
+              if ((tr.textContent || '').toLowerCase().indexOf(needle) !== -1) {
+                ids.add(tr.getAttribute('data-process-id'));
+              }
+            });
+            searchMatchIds = ids;
+            apply();
+          }
+        }
+        if (searchInput) {
+          searchInput.addEventListener('input', function () {
+            clearTimeout(debouncer);
+            debouncer = setTimeout(runSearch, 120);
+          });
+        }
+
+        function apply() {
+          var sel = {};
+          GROUPS.forEach(function (g) { sel[g] = selectedFor(g); });
+          var shown = 0;
+          tableRows.forEach(function (tr) {
+            var fam  = (tr.getAttribute('data-family') || '').toUpperCase();
+            var tier = (tr.getAttribute('data-tier') || '').toUpperCase();
+            var ver  = (tr.getAttribute('data-verdict') || '').toUpperCase();
+            var dif  = (tr.getAttribute('data-difficulty') || '').toUpperCase();
+            var cov  = (tr.getAttribute('data-coverage') || '').toUpperCase();
+            var pid  = tr.getAttribute('data-process-id') || '';
+            function pass(group, val) {
+              return sel[group].length === 0 || sel[group].indexOf(val) !== -1;
+            }
+            var ok = pass('family', fam) && pass('tier', tier) && pass('verdict', ver)
+                  && pass('difficulty', dif) && pass('coverage', cov);
+            if (ok && searchMatchIds) ok = searchMatchIds.has(pid);
+            tr.style.display = ok ? '' : 'none';
+            if (ok) shown++;
+          });
+          if (summaryCount) summaryCount.textContent = shown;
+          if (emptyMsg) emptyMsg.hidden = shown > 0;
+        }
+        document.getElementById('filter-clear').addEventListener('click', function () {
+          document.querySelectorAll('.filter-chip input[type="checkbox"]').forEach(function (cb) {
+            if (cb.checked) { cb.checked = false; cb.dispatchEvent(new Event('change')); }
+          });
+          if (searchInput) searchInput.value = '';
+          searchMatchIds = null;
+          apply();
+        });
+        apply();
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    })();
+  </script>
+</BaseLayout>

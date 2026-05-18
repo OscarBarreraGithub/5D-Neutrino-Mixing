@@ -35,6 +35,13 @@ Catalog facts: 102 entries (94 PRIMARY + 8 SECONDARY) across 8 families. 100 VER
 | 2d | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | charged_lepton (11) + charm (8) = 19 entries | wrapper a70c8ceabba7c4244 | DONE | `_data/citation_anchors/L*.yaml`, `C*.yaml` |
 | 2e | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | edm_neutrino (7) + collider_rs (14) = 21 entries | wrapper a940497068cec94e1 | DONE | `_data/citation_anchors/E*.yaml`, `CR*.yaml` |
 | 2f | Codex backfill | codex via codex-delegate | gpt-5.5 xhigh | K017 + K018 (missed in 2a) | aec3284bcf3f2b973 | DONE | `_data/citation_anchors/K017.yaml`, `K018.yaml` |
+| 3 | Data-driven rendering | subagent | opus | generalize K001 template → all 102; citation modal (RES/AMB/UNR); family pages; `/browse/` with Pagefind + 5 filters; dark-mode + 375px polish | a58db0da4350eb940 | DONE | new: `src/components/CitationModal.astro`,`EntryTable.astro`,`src/pages/browse.astro`,`scripts/screenshot_cdp.mjs`; modified: ingest, [id].astro, [family].astro, index.astro, global.css. Build: 112 pages, Pagefind index 102 entries/6907 words. |
+
+## Operational notes
+
+- **Dev server**: `npm run dev -- --host 127.0.0.1 --port 4321`. Stays alive between phase commits.
+- **Pagefind**: `public/pagefind/` is gitignored (build artifact). Production path = `astro build && pagefind --site dist`. For local dev on a fresh clone, run `npm run build` once to populate `public/pagefind/`; otherwise search falls back to substring match.
+- **Screenshot helper** at `scripts/screenshot_cdp.mjs` (Node 22+ built-in WebSocket) for true-375px mobile captures bypassing Chrome headless's 500px-default viewport.
 
 **Phase 2 totals**: 102/102 entries · 644 anchors · 476 RESOLVED (73.9%) · 121 AMBIGUOUS (18.8%) · 47 UNRESOLVED (7.3%).
 - Per-family UNRESOLVED %: B 1.0, C 23.7 (**>20% soft trigger**), CR 15.7, E 0.0, EW 9.1, K 2.1, L 12.1, T 11.5.

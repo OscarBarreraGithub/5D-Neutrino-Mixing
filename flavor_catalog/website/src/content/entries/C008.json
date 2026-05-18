@@ -160,5 +160,63 @@
   },
   "source_yaml": "flavor_catalog/processes/charm/C008.yaml",
   "source_tex": "flavor_catalog/processes/charm/C008.tex",
-  "worklog_path": "flavor_catalog/worklogs/C008/"
+  "worklog_path": "flavor_catalog/worklogs/C008/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:05Z",
+    "counts": {
+      "RESOLVED": 0,
+      "AMBIGUOUS": 2,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:DPlusPiEMuPlus",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.110",
+        "snapshot_path": "flavor_catalog/references/C008/pdg2026_dplus_piplus_ep_mum_pdgLive.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2.1e-07",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22:   Technique: LHCB\nL23:   Comment: 1.6 fb**-1 p p\nL24:   Confidence level: 90.0\nL25:   Value: <2.1 E-7\nL26:   Numeric value: 2.1e-7\nL27:   Limit type: upper\nL28:   Used in average: true\n"
+              },
+              {
+                "line_number": 26,
+                "context": "L23:   Comment: 1.6 fb**-1 p p\nL24:   Confidence level: 90.0\nL25:   Value: <2.1 E-7\nL26:   Numeric value: 2.1e-7\nL27:   Limit type: upper\nL28:   Used in average: true\nL29:   Used in fit: true\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2026:DPlusPiEMuMinus",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.111",
+        "snapshot_path": "flavor_catalog/references/C008/pdg2026_dplus_piplus_em_mup_pdgLive.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2.2e-07",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22:   Technique: LHCB\nL23:   Comment: 1.6 fb**-1 p p\nL24:   Confidence level: 90.0\nL25:   Value: <2.2 E-7\nL26:   Numeric value: 2.2e-7\nL27:   Limit type: upper\nL28:   Used in average: true\n"
+              },
+              {
+                "line_number": 26,
+                "context": "L23:   Comment: 1.6 fb**-1 p p\nL24:   Confidence level: 90.0\nL25:   Value: <2.2 E-7\nL26:   Numeric value: 2.2e-7\nL27:   Limit type: upper\nL28:   Used in average: true\nL29:   Used in fit: true\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

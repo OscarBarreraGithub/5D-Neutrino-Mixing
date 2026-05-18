@@ -319,5 +319,195 @@
   },
   "source_yaml": "flavor_catalog/processes/top_higgs_ew/T006.yaml",
   "source_tex": "flavor_catalog/processes/top_higgs_ew/T006.tex",
-  "worklog_path": "flavor_catalog/worklogs/T006/"
+  "worklog_path": "flavor_catalog/worklogs/T006/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 9,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:T006:ATLAS2022:dataset",
+        "source_url": "https://pdglive.lbl.gov/view/Q007TUG",
+        "snapshot_path": "flavor_catalog/references/T006/pdg_2025_top_tug.txt",
+        "sha256": "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "139 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: and kappa^{ctg}/Lambda\" and lists values in TeV^{-1} with 95% CL.\nL17:\nL18: PDG footnote 1, AAD 2022T / ATLAS:\nL19: - Based on 139 fb^{-1} of pp data at sqrt(s) = 13 TeV.\nL20: - Single top-quark production limits:\nL21:   sigma(u g -> t) * B(t -> b W) * B(W -> l nu) < 3.0 pb.\nL22:   sigma(c g -> t) * B(t -> b W) * B(W -> l nu) < 4.7 pb.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:T006:ATLAS2022:ug_to_t_cross_section",
+        "source_url": "https://pdglive.lbl.gov/view/Q007TUG",
+        "snapshot_path": "flavor_catalog/references/T006/pdg_2025_top_tug.txt",
+        "sha256": "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 3.0",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: PDG footnote 1, AAD 2022T / ATLAS:\nL19: - Based on 139 fb^{-1} of pp data at sqrt(s) = 13 TeV.\nL20: - Single top-quark production limits:\nL21:   sigma(u g -> t) * B(t -> b W) * B(W -> l nu) < 3.0 pb.\nL22:   sigma(c g -> t) * B(t -> b W) * B(W -> l nu) < 4.7 pb.\nL23: - EFT coupling limits:\nL24:   |C_uG^{ut}| / Lambda^2 < 0.057 TeV^{-2}.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:T006:ATLAS2022:w_leptonic_sum",
+        "source_url": "https://arxiv.org/abs/2112.01302",
+        "snapshot_path": "flavor_catalog/references/T006/atlas_2112_01302_arxiv_abs.txt",
+        "sha256": "sha256:ed435aaa49e3ffce3491b530be480a57eafe85aff8852ffa6d739c12324fee76",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.325",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 28,
+                "context": "L25:   sigma(u+g -> t) * B(t -> Wb) * B(W -> l nu) < 3.0 pb.\nL26:   sigma(c+g -> t) * B(t -> Wb) * B(W -> l nu) < 4.7 pb.\nL27: - The W leptonic branching fraction used for the sum over e, mu, tau modes is\nL28:   B(W -> l nu) = 0.325.\nL29: - EFT interpretation:\nL30:   |C_uG^{ut}| / Lambda^2 < 0.057 TeV^{-2}.\nL31:   |C_uG^{ct}| / Lambda^2 < 0.14 TeV^{-2}.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:T006:ATLAS2022:CuGut",
+        "source_url": "https://pdglive.lbl.gov/view/Q007TUG",
+        "snapshot_path": "flavor_catalog/references/T006/pdg_2025_top_tug.txt",
+        "sha256": "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 0.057",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21:   sigma(u g -> t) * B(t -> b W) * B(W -> l nu) < 3.0 pb.\nL22:   sigma(c g -> t) * B(t -> b W) * B(W -> l nu) < 4.7 pb.\nL23: - EFT coupling limits:\nL24:   |C_uG^{ut}| / Lambda^2 < 0.057 TeV^{-2}.\nL25:   |C_uG^{ct}| / Lambda^2 < 0.14 TeV^{-2}.\nL26: - Equivalent FCNC top-decay branching-fraction limits:\nL27:   B(t -> u g) < 6.1e-5.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:T006:ATLAS2022:t_ug",
+        "source_url": "https://pdglive.lbl.gov/view/Q007TUG",
+        "snapshot_path": "flavor_catalog/references/T006/pdg_2025_top_tug.txt",
+        "sha256": "sha256:13735042232545c4202a81348f885c83969bfcb8d1d13f1d3ae26a8b3b97dd61",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 6.1e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24:   |C_uG^{ut}| / Lambda^2 < 0.057 TeV^{-2}.\nL25:   |C_uG^{ct}| / Lambda^2 < 0.14 TeV^{-2}.\nL26: - Equivalent FCNC top-decay branching-fraction limits:\nL27:   B(t -> u g) < 6.1e-5.\nL28:   B(t -> c g) < 3.7e-4.\nL29:\nL30: PDG footnote 2, KHACHATRYAN 2017G / CMS:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2017:T006:dataset",
+        "source_url": "https://arxiv.org/abs/1610.03545",
+        "snapshot_path": "flavor_catalog/references/T006/cms_1610_03545_arxiv_abs.txt",
+        "sha256": "sha256:ce1b340512944a2bc29fb5c30702d58f0baa32202f50129c5cd31f45bbf6caf0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "5.0 fb^-1 at sqrt(s) = 7 TeV and 19.7 fb^-1 at sqrt(s) = 8 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: - CMS used t-channel single top-quark events to search for FCNC top-gluon\nL19:   interactions.\nL20: - Dataset: pp collisions at sqrt(s)=7 TeV with 5.0 fb^{-1} and sqrt(s)=8 TeV\nL21:   with 19.7 fb^{-1}.\nL22: - Event topology: one muon and two or three jets.\nL23: - Observed event distributions are consistent with the Standard Model\nL24:   prediction.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2017:T006:kappa_tug",
+        "source_url": "https://arxiv.org/abs/1610.03545",
+        "snapshot_path": "flavor_catalog/references/T006/cms_1610_03545_arxiv_abs.txt",
+        "sha256": "sha256:ce1b340512944a2bc29fb5c30702d58f0baa32202f50129c5cd31f45bbf6caf0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 4.1e-3",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: - Observed event distributions are consistent with the Standard Model\nL24:   prediction.\nL25: - 95% CL top-gluon FCNC coupling limits:\nL26:   |kappa_tug| / Lambda < 4.1e-3 TeV^{-1}.\nL27:   |kappa_tcg| / Lambda < 1.8e-2 TeV^{-1}.\nL28: - Equivalent branching-fraction limits:\nL29:   B(t -> u g) < 2.0e-5.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2017:T006:t_ug",
+        "source_url": "https://arxiv.org/abs/1610.03545",
+        "snapshot_path": "flavor_catalog/references/T006/cms_1610_03545_arxiv_abs.txt",
+        "sha256": "sha256:ce1b340512944a2bc29fb5c30702d58f0baa32202f50129c5cd31f45bbf6caf0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 2.0e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26:   |kappa_tug| / Lambda < 4.1e-3 TeV^{-1}.\nL27:   |kappa_tcg| / Lambda < 1.8e-2 TeV^{-1}.\nL28: - Equivalent branching-fraction limits:\nL29:   B(t -> u g) < 2.0e-5.\nL30:   B(t -> c g) < 4.1e-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "AguilarSaavedra2004:T006:t_ug_SM",
+        "source_url": "https://arxiv.org/abs/hep-ph/0409342",
+        "snapshot_path": "flavor_catalog/references/T006/aguilar_saavedra_hepph0409342_tug_sm.txt",
+        "sha256": "sha256:ed810970e049bd20488740565ba46036ab0c29892a9991db7819a6c3805f2098",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "approximately 3.6e-14",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22: |V_ub / V_cb|^2 approximately 0.0079.\nL23:\nL24: Using the review's stated scaling, the corresponding Standard Model estimate\nL25: for t -> u g is approximately 3.6e-14. The source emphasizes that top FCNC\nL26: interactions are negligible in the Standard Model but can be enhanced in\nL27: extensions, so an observed t -> u g signal would indicate new physics.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

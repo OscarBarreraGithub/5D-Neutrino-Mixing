@@ -249,5 +249,75 @@
   },
   "source_yaml": "flavor_catalog/processes/secondary/kaon/K019.yaml",
   "source_tex": "flavor_catalog/processes/secondary/kaon/K019.tex",
-  "worklog_path": "flavor_catalog/worklogs/K019/"
+  "worklog_path": "flavor_catalog/worklogs/K019/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:K019:KL_emu_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf",
+        "snapshot_path": "flavor_catalog/references/K019/pdg2025_kl_emu.txt",
+        "sha256": "sha256:b5797d539dbe6bc7e0ee3146b40dc297d3d73f8eb6c622fdd4bd77d882cf4a2a",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "< 4.7 x 10^-12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: or Delta S = 1 weak neutral current (S1) modes\nL15:\nL16: Mode                      Fraction (Gamma_i/Gamma)        Scale factor/Confidence level\nL17: Gamma35  e +/- mu -/+     LF [a]  < 4.7 x 10^-12          CL=90%\nL18:\nL19: [a] The value is for the sum of the charge states or particle/antiparticle\nL20: states indicated."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Ambrose1998:K019:KL_emu_limit",
+        "source_url": "https://arxiv.org/abs/hep-ex/9811038",
+        "snapshot_path": "flavor_catalog/references/K019/ambrose_1998_arxiv_hepex9811038.txt",
+        "sha256": "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "< 4.7 x 10^-12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: lepton number violating decay K^0_L -> mu^+/- e^-/+ has detected no events\nL19: consistent with this process. Based on this result, the 90% confidence level\nL20: upper limit on the branching fraction is\nL21: B(K^0_L -> mu^+/- e^-/+) < 4.7 x 10^-12."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experiment_input",
+        "source_url": "https://arxiv.org/abs/hep-ex/9811038",
+        "snapshot_path": "flavor_catalog/references/K019/ambrose_1998_arxiv_hepex9811038.txt",
+        "sha256": "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "4.7e-12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: lepton number violating decay K^0_L -> mu^+/- e^-/+ has detected no events\nL19: consistent with this process. Based on this result, the 90% confidence level\nL20: upper limit on the branching fraction is\nL21: B(K^0_L -> mu^+/- e^-/+) < 4.7 x 10^-12."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

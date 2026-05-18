@@ -460,5 +460,635 @@
   },
   "source_yaml": "flavor_catalog/processes/kaon/K008.yaml",
   "source_tex": "flavor_catalog/processes/kaon/K008.tex",
-  "worklog_path": "flavor_catalog/worklogs/K008/"
+  "worklog_path": "flavor_catalog/worklogs/K008/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 8,
+      "AMBIGUOUS": 11,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:K008",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S013.20",
+        "snapshot_path": "flavor_catalog/references/K008/pdg2026_kl_pi0ee_pdgLive.txt",
+        "sha256": "6578aa4b77ae9958c4fd532c29d09a04ea455a2426983a59df2f47f8f7b03202",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<2.8e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10: Mode number: 32\nL11: Section: Linear parametrization assuming mu-e universality K_L decay form\nL12: factors; CP- or LF-violating modes, or DeltaS = 1 weak neutral current modes.\nL13: PDG value: <2.8 E-10\nL14: Confidence level: 90%\nL15: Type: OUR AVERAGE\nL16:"
+              },
+              {
+                "line_number": 36,
+                "context": "L33: Technique: KTEV\nL34: Comment: combined result\nL35: Confidence level: 90%\nL36: Value: <2.8E-10\nL37: Used in average: true\nL38: Footnote: Combined result of ALAVI-HARATI 2004A 1999-2000 data set and\nL39: ALAVI-HARATI 2001 1997 data set."
+              },
+              {
+                "line_number": 42,
+                "context": "L39: ALAVI-HARATI 2001 1997 data set.\nL40:\nL41: Other listed measurements/provenance:\nL42: ALAVI-HARATI 2004A standalone KTEV 1999-2000 value: <3.5E-10 at 90% CL.\nL43: LAI 2002B, PL B536 229, NA48, CP-conserving part: (0.0047 +0.0022 -0.0018) E-10.\nL44: Footnote: LAI 2002B uses the absence of a signal in K0L --> pi0 gamma gamma\nL45: with m(gamma gamma) < m(pi0) and their a(V) value to predict this value."
+              },
+              {
+                "line_number": 43,
+                "context": "L40:\nL41: Other listed measurements/provenance:\nL42: ALAVI-HARATI 2004A standalone KTEV 1999-2000 value: <3.5E-10 at 90% CL.\nL43: LAI 2002B, PL B536 229, NA48, CP-conserving part: (0.0047 +0.0022 -0.0018) E-10.\nL44: Footnote: LAI 2002B uses the absence of a signal in K0L --> pi0 gamma gamma\nL45: with m(gamma gamma) < m(pi0) and their a(V) value to predict this value.\nL46: ALAVI-HARATI 2001, PRL 86 397, KTEV 1997 value: <5.1E-10 at 90% CL."
+              },
+              {
+                "line_number": 46,
+                "context": "L43: LAI 2002B, PL B536 229, NA48, CP-conserving part: (0.0047 +0.0022 -0.0018) E-10.\nL44: Footnote: LAI 2002B uses the absence of a signal in K0L --> pi0 gamma gamma\nL45: with m(gamma gamma) < m(pi0) and their a(V) value to predict this value.\nL46: ALAVI-HARATI 2001, PRL 86 397, KTEV 1997 value: <5.1E-10 at 90% CL."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2004:KLPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309072",
+        "snapshot_path": "flavor_catalog/references/K008/ktev2004_kl_pi0ee_arxiv.txt",
+        "sha256": "4133e47fd48218c6e13da41a52935e9c2debc0068608b33e6f10a4a99f5c9201",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<3.5e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: The KTeV/E799 experiment at Fermilab searched for KL -> pi0 e+ e-. This mode\nL13: is expected to have a significant CP-violating component. For the 1999-2000\nL14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:\nL17: BR(KL -> pi0 e+ e-) < 2.8 x 10^-10 at 90% CL.\nL18:"
+              },
+              {
+                "line_number": 17,
+                "context": "L14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:\nL17: BR(KL -> pi0 e+ e-) < 2.8 x 10^-10 at 90% CL.\nL18:\nL19: The paper states that in the Standard Model there are direct and indirect CPV\nL20: contributions to the amplitude plus an interference term. The indirect"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2004:KLPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309072",
+        "snapshot_path": "flavor_catalog/references/K008/ktev2004_kl_pi0ee_arxiv.txt",
+        "sha256": "4133e47fd48218c6e13da41a52935e9c2debc0068608b33e6f10a4a99f5c9201",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 4,
+                "context": "L1: Source: arXiv text extraction from KTeV paper\nL2: URL: https://arxiv.org/abs/hep-ex/0309072\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ex/0309072\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ex/0309072\nL6: Published as: Phys. Rev. Lett. 93, 021805 (2004)\nL7: DOI: 10.1103/PhysRevLett.93.021805"
+              },
+              {
+                "line_number": 6,
+                "context": "L3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ex/0309072\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ex/0309072\nL6: Published as: Phys. Rev. Lett. 93, 021805 (2004)\nL7: DOI: 10.1103/PhysRevLett.93.021805\nL8: Title: Search for the Rare Decay KL -> pi0 e+ e-\nL9: Collaboration: KTeV"
+              },
+              {
+                "line_number": 7,
+                "context": "L4: Accessed: 2026-05-16\nL5: arXiv: hep-ex/0309072\nL6: Published as: Phys. Rev. Lett. 93, 021805 (2004)\nL7: DOI: 10.1103/PhysRevLett.93.021805\nL8: Title: Search for the Rare Decay KL -> pi0 e+ e-\nL9: Collaboration: KTeV\nL10:"
+              },
+              {
+                "line_number": 13,
+                "context": "L10:\nL11: Relevant abstract and introduction extraction:\nL12: The KTeV/E799 experiment at Fermilab searched for KL -> pi0 e+ e-. This mode\nL13: is expected to have a significant CP-violating component. For the 1999-2000\nL14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:"
+              },
+              {
+                "line_number": 15,
+                "context": "L12: The KTeV/E799 experiment at Fermilab searched for KL -> pi0 e+ e-. This mode\nL13: is expected to have a significant CP-violating component. For the 1999-2000\nL14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:\nL17: BR(KL -> pi0 e+ e-) < 2.8 x 10^-10 at 90% CL.\nL18:"
+              },
+              {
+                "line_number": 16,
+                "context": "L13: is expected to have a significant CP-violating component. For the 1999-2000\nL14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:\nL17: BR(KL -> pi0 e+ e-) < 2.8 x 10^-10 at 90% CL.\nL18:\nL19: The paper states that in the Standard Model there are direct and indirect CPV"
+              },
+              {
+                "line_number": 17,
+                "context": "L14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:\nL17: BR(KL -> pi0 e+ e-) < 2.8 x 10^-10 at 90% CL.\nL18:\nL19: The paper states that in the Standard Model there are direct and indirect CPV\nL20: contributions to the amplitude plus an interference term. The indirect"
+              },
+              {
+                "line_number": 22,
+                "context": "L19: The paper states that in the Standard Model there are direct and indirect CPV\nL20: contributions to the amplitude plus an interference term. The indirect\nL21: component is known from KS -> pi0 e+ e- and appears to dominate. The direct\nL22: component was estimated to be about 3 to 6 x 10^-12, and the two CPV\nL23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma."
+              },
+              {
+                "line_number": 24,
+                "context": "L21: component is known from KS -> pi0 e+ e- and appears to dominate. The direct\nL22: component was estimated to be about 3 to 6 x 10^-12, and the two CPV\nL23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma.\nL26: The paper quotes a Standard-Model branching ratio around 3 x 10^-11, dominated\nL27: by CPV, with a 40% contribution from direct CPV through the interference term."
+              },
+              {
+                "line_number": 26,
+                "context": "L23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma.\nL26: The paper quotes a Standard-Model branching ratio around 3 x 10^-11, dominated\nL27: by CPV, with a 40% contribution from direct CPV through the interference term."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2004:KLPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309072",
+        "snapshot_path": "flavor_catalog/references/K008/ktev2004_kl_pi0ee_arxiv.txt",
+        "sha256": "4133e47fd48218c6e13da41a52935e9c2debc0068608b33e6f10a4a99f5c9201",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.99 0.35",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: Relevant abstract and introduction extraction:\nL12: The KTeV/E799 experiment at Fermilab searched for KL -> pi0 e+ e-. This mode\nL13: is expected to have a significant CP-violating component. For the 1999-2000\nL14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:\nL17: BR(KL -> pi0 e+ e-) < 2.8 x 10^-10 at 90% CL."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2026:K008",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S013.20",
+        "snapshot_path": "flavor_catalog/references/K008/pdg2026_kl_pi0ee_pdgLive.txt",
+        "sha256": "6578aa4b77ae9958c4fd532c29d09a04ea455a2426983a59df2f47f8f7b03202",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.0047e-10 +0.0022e-10 -0.0018e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10: Mode number: 32\nL11: Section: Linear parametrization assuming mu-e universality K_L decay form\nL12: factors; CP- or LF-violating modes, or DeltaS = 1 weak neutral current modes.\nL13: PDG value: <2.8 E-10\nL14: Confidence level: 90%\nL15: Type: OUR AVERAGE\nL16:"
+              },
+              {
+                "line_number": 36,
+                "context": "L33: Technique: KTEV\nL34: Comment: combined result\nL35: Confidence level: 90%\nL36: Value: <2.8E-10\nL37: Used in average: true\nL38: Footnote: Combined result of ALAVI-HARATI 2004A 1999-2000 data set and\nL39: ALAVI-HARATI 2001 1997 data set."
+              },
+              {
+                "line_number": 42,
+                "context": "L39: ALAVI-HARATI 2001 1997 data set.\nL40:\nL41: Other listed measurements/provenance:\nL42: ALAVI-HARATI 2004A standalone KTEV 1999-2000 value: <3.5E-10 at 90% CL.\nL43: LAI 2002B, PL B536 229, NA48, CP-conserving part: (0.0047 +0.0022 -0.0018) E-10.\nL44: Footnote: LAI 2002B uses the absence of a signal in K0L --> pi0 gamma gamma\nL45: with m(gamma gamma) < m(pi0) and their a(V) value to predict this value."
+              },
+              {
+                "line_number": 43,
+                "context": "L40:\nL41: Other listed measurements/provenance:\nL42: ALAVI-HARATI 2004A standalone KTEV 1999-2000 value: <3.5E-10 at 90% CL.\nL43: LAI 2002B, PL B536 229, NA48, CP-conserving part: (0.0047 +0.0022 -0.0018) E-10.\nL44: Footnote: LAI 2002B uses the absence of a signal in K0L --> pi0 gamma gamma\nL45: with m(gamma gamma) < m(pi0) and their a(V) value to predict this value.\nL46: ALAVI-HARATI 2001, PRL 86 397, KTEV 1997 value: <5.1E-10 at 90% CL."
+              },
+              {
+                "line_number": 46,
+                "context": "L43: LAI 2002B, PL B536 229, NA48, CP-conserving part: (0.0047 +0.0022 -0.0018) E-10.\nL44: Footnote: LAI 2002B uses the absence of a signal in K0L --> pi0 gamma gamma\nL45: with m(gamma gamma) < m(pi0) and their a(V) value to predict this value.\nL46: ALAVI-HARATI 2001, PRL 86 397, KTEV 1997 value: <5.1E-10 at 90% CL."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482003:KSPi0EE",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K008/na48_ks_pi0ee_pdgLive.txt",
+        "sha256": "27b6bbf006fcfcdf91246c01464b5913441721d717d895ecedd40ef130a88ad4",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.0e-9 +1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7: PDG identifier and summary:\nL8: PDGID: S012.10\nL9: Description: K0S --> pi0 e+ e-\nL10: PDG value: (3.0 +1.5 -1.2) E-9\nL11:\nL12: Listing block:\nL13: Related PDGID: S012R10"
+              },
+              {
+                "line_number": 28,
+                "context": "L25: Technique: NA48\nL26: Event count: 7\nL27: Comment: m(ee)>0.165 GeV\nL28: Value: (3.0 +1.5 -1.2 +-0.2) E-9\nL29: Statistical error: +1.5E-9 / -1.2E-9\nL30: Systematic error: +-0.2E-9\nL31: Used in average: true"
+              },
+              {
+                "line_number": 29,
+                "context": "L26: Event count: 7\nL27: Comment: m(ee)>0.165 GeV\nL28: Value: (3.0 +1.5 -1.2 +-0.2) E-9\nL29: Statistical error: +1.5E-9 / -1.2E-9\nL30: Systematic error: +-0.2E-9\nL31: Used in average: true\nL32: Footnote: BATLEY 2003 extrapolate also to the full kinematical region using"
+              },
+              {
+                "line_number": 30,
+                "context": "L27: Comment: m(ee)>0.165 GeV\nL28: Value: (3.0 +1.5 -1.2 +-0.2) E-9\nL29: Statistical error: +1.5E-9 / -1.2E-9\nL30: Systematic error: +-0.2E-9\nL31: Used in average: true\nL32: Footnote: BATLEY 2003 extrapolate also to the full kinematical region using\nL33: a constant form factor and a vector matrix element. The resulting branching"
+              },
+              {
+                "line_number": 34,
+                "context": "L31: Used in average: true\nL32: Footnote: BATLEY 2003 extrapolate also to the full kinematical region using\nL33: a constant form factor and a vector matrix element. The resulting branching\nL34: ratio is 5.8 +2.9 -2.4 E-9."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482003:KSPi0EE",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K008/na48_ks_pi0ee_pdgLive.txt",
+        "sha256": "27b6bbf006fcfcdf91246c01464b5913441721d717d895ecedd40ef130a88ad4",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.165",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: Title: Observation of the Rare Decay K0S --> pi0 e+ e-\nL25: Technique: NA48\nL26: Event count: 7\nL27: Comment: m(ee)>0.165 GeV\nL28: Value: (3.0 +1.5 -1.2 +-0.2) E-9\nL29: Statistical error: +1.5E-9 / -1.2E-9\nL30: Systematic error: +-0.2E-9"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482003:KSPi0EE",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K008/na48_ks_pi0ee_pdgLive.txt",
+        "sha256": "27b6bbf006fcfcdf91246c01464b5913441721d717d895ecedd40ef130a88ad4",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "5.8e-9 +2.9e-9 -2.4e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7: PDG identifier and summary:\nL8: PDGID: S012.10\nL9: Description: K0S --> pi0 e+ e-\nL10: PDG value: (3.0 +1.5 -1.2) E-9\nL11:\nL12: Listing block:\nL13: Related PDGID: S012R10"
+              },
+              {
+                "line_number": 28,
+                "context": "L25: Technique: NA48\nL26: Event count: 7\nL27: Comment: m(ee)>0.165 GeV\nL28: Value: (3.0 +1.5 -1.2 +-0.2) E-9\nL29: Statistical error: +1.5E-9 / -1.2E-9\nL30: Systematic error: +-0.2E-9\nL31: Used in average: true"
+              },
+              {
+                "line_number": 29,
+                "context": "L26: Event count: 7\nL27: Comment: m(ee)>0.165 GeV\nL28: Value: (3.0 +1.5 -1.2 +-0.2) E-9\nL29: Statistical error: +1.5E-9 / -1.2E-9\nL30: Systematic error: +-0.2E-9\nL31: Used in average: true\nL32: Footnote: BATLEY 2003 extrapolate also to the full kinematical region using"
+              },
+              {
+                "line_number": 30,
+                "context": "L27: Comment: m(ee)>0.165 GeV\nL28: Value: (3.0 +1.5 -1.2 +-0.2) E-9\nL29: Statistical error: +1.5E-9 / -1.2E-9\nL30: Systematic error: +-0.2E-9\nL31: Used in average: true\nL32: Footnote: BATLEY 2003 extrapolate also to the full kinematical region using\nL33: a constant form factor and a vector matrix element. The resulting branching"
+              },
+              {
+                "line_number": 34,
+                "context": "L31: Used in average: true\nL32: Footnote: BATLEY 2003 extrapolate also to the full kinematical region using\nL33: a constant form factor and a vector matrix element. The resulting branching\nL34: ratio is 5.8 +2.9 -2.4 E-9."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2004:KLPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309072",
+        "snapshot_path": "flavor_catalog/references/K008/ktev2004_kl_pi0ee_arxiv.txt",
+        "sha256": "4133e47fd48218c6e13da41a52935e9c2debc0068608b33e6f10a4a99f5c9201",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3e-11",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 2,
+                "context": "L1: Source: arXiv text extraction from KTeV paper\nL2: URL: https://arxiv.org/abs/hep-ex/0309072\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ex/0309072\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ex/0309072"
+              },
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv text extraction from KTeV paper\nL2: URL: https://arxiv.org/abs/hep-ex/0309072\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ex/0309072\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ex/0309072\nL6: Published as: Phys. Rev. Lett. 93, 021805 (2004)"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: URL: https://arxiv.org/abs/hep-ex/0309072\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ex/0309072\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ex/0309072\nL6: Published as: Phys. Rev. Lett. 93, 021805 (2004)\nL7: DOI: 10.1103/PhysRevLett.93.021805\nL8: Title: Search for the Rare Decay KL -> pi0 e+ e-"
+              },
+              {
+                "line_number": 6,
+                "context": "L3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ex/0309072\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ex/0309072\nL6: Published as: Phys. Rev. Lett. 93, 021805 (2004)\nL7: DOI: 10.1103/PhysRevLett.93.021805\nL8: Title: Search for the Rare Decay KL -> pi0 e+ e-\nL9: Collaboration: KTeV"
+              },
+              {
+                "line_number": 7,
+                "context": "L4: Accessed: 2026-05-16\nL5: arXiv: hep-ex/0309072\nL6: Published as: Phys. Rev. Lett. 93, 021805 (2004)\nL7: DOI: 10.1103/PhysRevLett.93.021805\nL8: Title: Search for the Rare Decay KL -> pi0 e+ e-\nL9: Collaboration: KTeV\nL10:"
+              },
+              {
+                "line_number": 14,
+                "context": "L11: Relevant abstract and introduction extraction:\nL12: The KTeV/E799 experiment at Fermilab searched for KL -> pi0 e+ e-. This mode\nL13: is expected to have a significant CP-violating component. For the 1999-2000\nL14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:\nL17: BR(KL -> pi0 e+ e-) < 2.8 x 10^-10 at 90% CL."
+              },
+              {
+                "line_number": 15,
+                "context": "L12: The KTeV/E799 experiment at Fermilab searched for KL -> pi0 e+ e-. This mode\nL13: is expected to have a significant CP-violating component. For the 1999-2000\nL14: data set, one event was observed with an expected background of 0.99 +/- 0.35\nL15: events. KTeV set a 90% CL limit BR(KL -> pi0 e+ e-) < 3.5 x 10^-10. Combining\nL16: with the 1997 KTeV result yielded the final KTeV limit:\nL17: BR(KL -> pi0 e+ e-) < 2.8 x 10^-10 at 90% CL.\nL18:"
+              },
+              {
+                "line_number": 22,
+                "context": "L19: The paper states that in the Standard Model there are direct and indirect CPV\nL20: contributions to the amplitude plus an interference term. The indirect\nL21: component is known from KS -> pi0 e+ e- and appears to dominate. The direct\nL22: component was estimated to be about 3 to 6 x 10^-12, and the two CPV\nL23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma."
+              },
+              {
+                "line_number": 26,
+                "context": "L23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma.\nL26: The paper quotes a Standard-Model branching ratio around 3 x 10^-11, dominated\nL27: by CPV, with a 40% contribution from direct CPV through the interference term."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2004:KLPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309072",
+        "snapshot_path": "flavor_catalog/references/K008/ktev2004_kl_pi0ee_arxiv.txt",
+        "sha256": "4133e47fd48218c6e13da41a52935e9c2debc0068608b33e6f10a4a99f5c9201",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "8e-12 to 45e-12",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19: The paper states that in the Standard Model there are direct and indirect CPV\nL20: contributions to the amplitude plus an interference term. The indirect\nL21: component is known from KS -> pi0 e+ e- and appears to dominate. The direct\nL22: component was estimated to be about 3 to 6 x 10^-12, and the two CPV\nL23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma."
+              },
+              {
+                "line_number": 24,
+                "context": "L21: component is known from KS -> pi0 e+ e- and appears to dominate. The direct\nL22: component was estimated to be about 3 to 6 x 10^-12, and the two CPV\nL23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma.\nL26: The paper quotes a Standard-Model branching ratio around 3 x 10^-11, dominated\nL27: by CPV, with a 40% contribution from direct CPV through the interference term."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2004:KLPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309072",
+        "snapshot_path": "flavor_catalog/references/K008/ktev2004_kl_pi0ee_arxiv.txt",
+        "sha256": "4133e47fd48218c6e13da41a52935e9c2debc0068608b33e6f10a4a99f5c9201",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3e-12 to 6e-12",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19: The paper states that in the Standard Model there are direct and indirect CPV\nL20: contributions to the amplitude plus an interference term. The indirect\nL21: component is known from KS -> pi0 e+ e- and appears to dominate. The direct\nL22: component was estimated to be about 3 to 6 x 10^-12, and the two CPV\nL23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma."
+              },
+              {
+                "line_number": 24,
+                "context": "L21: component is known from KS -> pi0 e+ e- and appears to dominate. The direct\nL22: component was estimated to be about 3 to 6 x 10^-12, and the two CPV\nL23: contributions together give BR(KL -> pi0 e+ e-)_CPV in the range\nL24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma.\nL26: The paper quotes a Standard-Model branching ratio around 3 x 10^-11, dominated\nL27: by CPV, with a 40% contribution from direct CPV through the interference term."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2004:KLPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309072",
+        "snapshot_path": "flavor_catalog/references/K008/ktev2004_kl_pi0ee_arxiv.txt",
+        "sha256": "4133e47fd48218c6e13da41a52935e9c2debc0068608b33e6f10a4a99f5c9201",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "40",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: 8 to 45 x 10^-12. The CP-conserving amplitude proceeds through\nL25: pi0 gamma* gamma* states and can be determined from KL -> pi0 gamma gamma.\nL26: The paper quotes a Standard-Model branching ratio around 3 x 10^-11, dominated\nL27: by CPV, with a 40% contribution from direct CPV through the interference term."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0LL",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K008/isidori_smith_unterdorfer2004_kl_pi0ll_arxiv.txt",
+        "sha256": "4cf0225eda40d1b4e9bbecf3f3099c930713441cbc62a20c3965d1002f14bece",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1e-12",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 2,
+                "context": "L1: Source: arXiv text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127"
+              },
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)"
+              },
+              {
+                "line_number": 4,
+                "context": "L1: Source: arXiv text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL7: DOI: 10.1140/epjc/s2004-01879-0"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL7: DOI: 10.1140/epjc/s2004-01879-0\nL8: Title: The rare decay KL -> pi0 mu+ mu- within the SM"
+              },
+              {
+                "line_number": 7,
+                "context": "L4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL7: DOI: 10.1140/epjc/s2004-01879-0\nL8: Title: The rare decay KL -> pi0 mu+ mu- within the SM\nL9: Authors: Gino Isidori, Christopher Smith, Rene Unterdorfer\nL10:"
+              },
+              {
+                "line_number": 15,
+                "context": "L12: The paper writes the neutral-kaon dilepton rate in terms of mixing, direct,\nL13: interference, and CP-conserving pieces:\nL14: B(KL -> pi0 l+ l-) =\nL15: [C_mix^l +/- C_int^l (Im lambda_t / 10^-4)\nL16:  + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL17:\nL18: For the electron mode, the coefficients quoted are:"
+              },
+              {
+                "line_number": 16,
+                "context": "L13: interference, and CP-conserving pieces:\nL14: B(KL -> pi0 l+ l-) =\nL15: [C_mix^l +/- C_int^l (Im lambda_t / 10^-4)\nL16:  + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL17:\nL18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:  + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL17:\nL18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2\nL20: C_int^e = (6.2 +/- 0.3) |a_S|\nL21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0"
+              },
+              {
+                "line_number": 24,
+                "context": "L21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and\nL25: (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12. The paper reports both signs of the\nL26: interference because the sign of a_S was not fixed model-independently, while\nL27: noting that theoretical arguments point toward constructive interference. For"
+              },
+              {
+                "line_number": 25,
+                "context": "L22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and\nL25: (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12. The paper reports both signs of the\nL26: interference because the sign of a_S was not fixed model-independently, while\nL27: noting that theoretical arguments point toward constructive interference. For\nL28: the electron mode it states that the decay is completely dominated by the CPV"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0LL",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K008/isidori_smith_unterdorfer2004_kl_pi0ll_arxiv.txt",
+        "sha256": "4cf0225eda40d1b4e9bbecf3f3099c930713441cbc62a20c3965d1002f14bece",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "15.7 0.3",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16:  + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL17:\nL18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2\nL20: C_int^e = (6.2 +/- 0.3) |a_S|\nL21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0LL",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K008/isidori_smith_unterdorfer2004_kl_pi0ll_arxiv.txt",
+        "sha256": "4cf0225eda40d1b4e9bbecf3f3099c930713441cbc62a20c3965d1002f14bece",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "6.2 0.3",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:\nL18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2\nL20: C_int^e = (6.2 +/- 0.3) |a_S|\nL21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0\nL23:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0LL",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K008/isidori_smith_unterdorfer2004_kl_pi0ll_arxiv.txt",
+        "sha256": "4cf0225eda40d1b4e9bbecf3f3099c930713441cbc62a20c3965d1002f14bece",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2.4 0.2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2\nL20: C_int^e = (6.2 +/- 0.3) |a_S|\nL21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0LL",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K008/isidori_smith_unterdorfer2004_kl_pi0ll_arxiv.txt",
+        "sha256": "4cf0225eda40d1b4e9bbecf3f3099c930713441cbc62a20c3965d1002f14bece",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 2,
+                "context": "L1: Source: arXiv text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127"
+              },
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)"
+              },
+              {
+                "line_number": 4,
+                "context": "L1: Source: arXiv text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL7: DOI: 10.1140/epjc/s2004-01879-0"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL7: DOI: 10.1140/epjc/s2004-01879-0\nL8: Title: The rare decay KL -> pi0 mu+ mu- within the SM"
+              },
+              {
+                "line_number": 6,
+                "context": "L3: PDF used transiently through stdout only: https://arxiv.org/pdf/hep-ph/0404127\nL4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL7: DOI: 10.1140/epjc/s2004-01879-0\nL8: Title: The rare decay KL -> pi0 mu+ mu- within the SM\nL9: Authors: Gino Isidori, Christopher Smith, Rene Unterdorfer"
+              },
+              {
+                "line_number": 7,
+                "context": "L4: Accessed: 2026-05-16\nL5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL7: DOI: 10.1140/epjc/s2004-01879-0\nL8: Title: The rare decay KL -> pi0 mu+ mu- within the SM\nL9: Authors: Gino Isidori, Christopher Smith, Rene Unterdorfer\nL10:"
+              },
+              {
+                "line_number": 8,
+                "context": "L5: arXiv: hep-ph/0404127\nL6: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL7: DOI: 10.1140/epjc/s2004-01879-0\nL8: Title: The rare decay KL -> pi0 mu+ mu- within the SM\nL9: Authors: Gino Isidori, Christopher Smith, Rene Unterdorfer\nL10:\nL11: Relevant extraction:"
+              },
+              {
+                "line_number": 14,
+                "context": "L11: Relevant extraction:\nL12: The paper writes the neutral-kaon dilepton rate in terms of mixing, direct,\nL13: interference, and CP-conserving pieces:\nL14: B(KL -> pi0 l+ l-) =\nL15: [C_mix^l +/- C_int^l (Im lambda_t / 10^-4)\nL16:  + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL17:"
+              },
+              {
+                "line_number": 15,
+                "context": "L12: The paper writes the neutral-kaon dilepton rate in terms of mixing, direct,\nL13: interference, and CP-conserving pieces:\nL14: B(KL -> pi0 l+ l-) =\nL15: [C_mix^l +/- C_int^l (Im lambda_t / 10^-4)\nL16:  + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL17:\nL18: For the electron mode, the coefficients quoted are:"
+              },
+              {
+                "line_number": 16,
+                "context": "L13: interference, and CP-conserving pieces:\nL14: B(KL -> pi0 l+ l-) =\nL15: [C_mix^l +/- C_int^l (Im lambda_t / 10^-4)\nL16:  + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL17:\nL18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:  + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL17:\nL18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2\nL20: C_int^e = (6.2 +/- 0.3) |a_S|\nL21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0"
+              },
+              {
+                "line_number": 20,
+                "context": "L17:\nL18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2\nL20: C_int^e = (6.2 +/- 0.3) |a_S|\nL21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0\nL23:"
+              },
+              {
+                "line_number": 21,
+                "context": "L18: For the electron mode, the coefficients quoted are:\nL19: C_mix^e = (15.7 +/- 0.3) |a_S|^2\nL20: C_int^e = (6.2 +/- 0.3) |a_S|\nL21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and"
+              },
+              {
+                "line_number": 22,
+                "context": "L19: C_mix^e = (15.7 +/- 0.3) |a_S|^2\nL20: C_int^e = (6.2 +/- 0.3) |a_S|\nL21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and\nL25: (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12. The paper reports both signs of the"
+              },
+              {
+                "line_number": 24,
+                "context": "L21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and\nL25: (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12. The paper reports both signs of the\nL26: interference because the sign of a_S was not fixed model-independently, while\nL27: noting that theoretical arguments point toward constructive interference. For"
+              },
+              {
+                "line_number": 25,
+                "context": "L22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and\nL25: (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12. The paper reports both signs of the\nL26: interference because the sign of a_S was not fixed model-independently, while\nL27: noting that theoretical arguments point toward constructive interference. For\nL28: the electron mode it states that the decay is completely dominated by the CPV"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0LL",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K008/isidori_smith_unterdorfer2004_kl_pi0ll_arxiv.txt",
+        "sha256": "4cf0225eda40d1b4e9bbecf3f3099c930713441cbc62a20c3965d1002f14bece",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.2 0.2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: C_dir^e = 2.4 +/- 0.2\nL22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and\nL25: (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12. The paper reports both signs of the\nL26: interference because the sign of a_S was not fixed model-independently, while\nL27: noting that theoretical arguments point toward constructive interference. For"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0LL",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K008/isidori_smith_unterdorfer2004_kl_pi0ll_arxiv.txt",
+        "sha256": "4cf0225eda40d1b4e9bbecf3f3099c930713441cbc62a20c3965d1002f14bece",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.36 0.12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22: C_CPC^e approx 0\nL23:\nL24: The same paragraph gives |a_S| = 1.2 +/- 0.2 and\nL25: (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12. The paper reports both signs of the\nL26: interference because the sign of a_S was not fixed model-independently, while\nL27: noting that theoretical arguments point toward constructive interference. For\nL28: the electron mode it states that the decay is completely dominated by the CPV"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -228,5 +228,95 @@
   },
   "source_yaml": "flavor_catalog/processes/edm_neutrino/E006.yaml",
   "source_tex": "flavor_catalog/processes/edm_neutrino/E006.tex",
-  "worklog_path": "flavor_catalog/worklogs/E006/"
+  "worklog_path": "flavor_catalog/worklogs/E006/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 4,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_direct_limit",
+        "source_url": "https://arxiv.org/abs/1601.04339",
+        "snapshot_path": "flavor_catalog/references/E006/graner2016_arxiv1601_04339.txt",
+        "sha256": "44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_Hg| < 7.4 x 10^-30 e cm at 95% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:   d_Hg = (2.20 +/- 2.75_stat +/- 1.48_syst) x 10^-30 e cm.\nL21:\nL22: Canonical limit:\nL23:   |d_Hg| < 7.4 x 10^-30 e cm at 95% C.L.\nL24:\nL25: Notes:\nL26:   The abstract states that this improves the previous limit by a factor of 4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "post_2008_improvement_factor",
+        "source_url": "https://arxiv.org/abs/1601.04339",
+        "snapshot_path": "flavor_catalog/references/E006/graner2016_arxiv1601_04339.txt",
+        "sha256": "44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_units_fallback",
+            "anchor_string": "4 dimensionless improvement factor",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23:   |d_Hg| < 7.4 x 10^-30 e cm at 95% C.L.\nL24:\nL25: Notes:\nL26:   The abstract states that this improves the previous limit by a factor of 4\nL27:   and discusses implications for CP-violating observables beyond the Standard\nL28:   Model.\nL29:   PDG Live S017EDM cites the published PRL and its PRL 119, 119901 (2017)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "pdg_cross_reference_neutron",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM",
+        "snapshot_path": "flavor_catalog/references/E006/pdg2026_neutron_edm_hg_crossref.txt",
+        "sha256": "15f7baddbe7725b217f0243c0f408556824ddd7404590c89ded1e50b8227317a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "Graner 2016 row <0.16 and Sahoo 2017 row <0.22 in units of 10^-25 e cm, both at 95% CL; these are not direct Hg atom EDM values.",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:\nL16: Relevant PDG rows:\nL17:   S017EDM neutron EDM table units: 10^-25 e cm.\nL18:   Sahoo 2017 row: <0.22 at 95% CL, comment \"199Hg atom EDM + theory\".\nL19:   Graner 2016 row: <0.16 at 95% CL, comment \"MRS 199Hg atom EDM + theory\".\nL20:\nL21: Relevant PDG note:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "theory_translation_context",
+        "source_url": "https://arxiv.org/abs/1612.09371",
+        "snapshot_path": "flavor_catalog/references/E006/sahoo2017_arxiv1612_09371.txt",
+        "sha256": "88e10fc1c214f7aa0ccb3c0fabfb1db7442af7d77075fa5d4a4ba3f19ed694d0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "d_n < 2.2 x 10^-26 |e| cm, d_p < 2.1 x 10^-25 |e| cm, |theta_bar| < 1.1 x 10^-10, |tilde d_u - tilde d_d| < 5.5 x 10^-27 |e| cm.",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   coupling and nuclear Schiff-moment interactions.\nL18:\nL19: Selected numerical limits from the arXiv abstract:\nL20:   d_n < 2.2 x 10^-26 |e| cm.\nL21:   d_p < 2.1 x 10^-25 |e| cm.\nL22:   |theta_bar| < 1.1 x 10^-10.\nL23:   |tilde{d}_u - tilde{d}_d| < 5.5 x 10^-27 |e| cm."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

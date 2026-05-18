@@ -249,5 +249,65 @@
   },
   "source_yaml": "flavor_catalog/processes/collider_rs/CR004.yaml",
   "source_tex": "flavor_catalog/processes/collider_rs/CR004.tex",
-  "worklog_path": "flavor_catalog/worklogs/CR004/"
+  "worklog_path": "flavor_catalog/worklogs/CR004/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 2
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:CR004:B_bH_pair_mass_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR004/pdg2025_bprime_listing.txt",
+        "sha256": "sha256:bca9c8ebe5571b26e1fae21b3de442a5653b662bbd720721fe34f2a52371f86d",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_B > 1570 GeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR004:B_bZ_pair_mass_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR004/pdg2025_bprime_listing.txt",
+        "sha256": "sha256:bca9c8ebe5571b26e1fae21b3de442a5653b662bbd720721fe34f2a52371f86d",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_B > 1540 GeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8: b′ (−1/3)-quark/hadron mass limits in p p and p p collisions\nL9: VALUE (GeV)               CL%           DOCUMENT ID               TECN     COMMENT\nL10: >1530                     95        1 AAD         24BP ATLS                B(b ′ → W u) = 1\nL11: >1540                     95        2 HAYRAPETY...24AQ CMS                 B(b ′ → Z b) = 1\nL12: >1570                     95        2 HAYRAPETY...24AQ CMS                 B(b ′ → H b) = 1\nL13: >1560                     95        3 TUMASYAN 23V CMS                     B(b ′ → W t) = 1\nL14: >1570                     95        4 SIRUNYAN    20BI CMS                 B(b ′ → H b) = 1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR004:B_tW_pair_mass_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-b-prime-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR004/pdg2025_bprime_listing.txt",
+        "sha256": "sha256:bca9c8ebe5571b26e1fae21b3de442a5653b662bbd720721fe34f2a52371f86d",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_B > 1560 GeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      }
+    ]
+  }
 }

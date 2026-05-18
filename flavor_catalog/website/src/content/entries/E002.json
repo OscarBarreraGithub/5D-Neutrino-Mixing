@@ -274,5 +274,215 @@
   },
   "source_yaml": "flavor_catalog/processes/edm_neutrino/E002.yaml",
   "source_tex": "flavor_catalog/processes/edm_neutrino/E002.tex",
-  "worklog_path": "flavor_catalog/worklogs/E002/"
+  "worklog_path": "flavor_catalog/worklogs/E002/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 10,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_direct_limit",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?cl=T&desig=&init=0&node=S004EDM&parCode=S004EDM",
+        "snapshot_path": "flavor_catalog/references/E002/pdg2026_muon_edm_datablock.txt",
+        "sha256": "2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_mu| < 1.8 x 10^-19 e cm at 95% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: Canonical direct experimental result:\nL17:   <1.8, CL = 95%, Bennett 2009, method MUG2 +/- storage ring.\nL18: Converted value:\nL19:   |d_mu| < 1.8 x 10^-19 e cm at 95% CL.\nL20:\nL21: PDG notes on the Bennett 2009 entries:\nL22:   The canonical limit is the combination of the mu+ and mu- Bennett 2009 measurements."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "pdg_combined_measurement",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?cl=T&desig=&init=0&node=S004EDM&parCode=S004EDM",
+        "snapshot_path": "flavor_catalog/references/E002/pdg2026_muon_edm_datablock.txt",
+        "sha256": "2918e0eb78197361ba039efd061cde1c119e70626d691b5bdaa50b625b2e08c1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "d_mu = (0.0 +/- 0.9) x 10^-19 e cm",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:\nL21: PDG notes on the Bennett 2009 entries:\nL22:   The canonical limit is the combination of the mu+ and mu- Bennett 2009 measurements.\nL23:   The combined result is also presented as a measurement of (0.0 +/- 0.9) x 10^-19 e cm.\nL24:   The mu+ entry is -0.1 +/- 1.0 in units of 10^-19 e cm, also reported as |d(mu+)| < 2.1 x 10^-19 e cm at 95% CL.\nL25:   The mu- entry is -0.1 +/- 0.7 in units of 10^-19 e cm, also reported as |d(mu-)| < 1.5 x 10^-19 e cm at 95% CL.\nL26:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "primary_bnl_measurement",
+        "source_url": "https://arxiv.org/abs/0811.1207",
+        "snapshot_path": "flavor_catalog/references/E002/bennett2009_arxiv0811_1207.txt",
+        "sha256": "16ce7a84e7baff9e76d9a96ded01ddfc590057ab8f22f51b9dfd8afc5b878362",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty_fallback",
+            "anchor_string": "-0.1 +/- 0.9 10^-19 e cm",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16:   from the Brookhaven National Laboratory E821 muon g-2 storage ring.\nL17:\nL18: Numerical results from the arXiv abstract:\nL19:   Combined measurement: d = -0.1(0.9) x 10^-19 e cm.\nL20:   Published direct limit: |d| < 1.9 x 10^-19 e cm at 95% CL.\nL21:   The abstract states that this is a factor-5 improvement over the previous best muon-EDM limit.\nL22:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Adelmann2021:E002:muon_momentum",
+        "source_url": "https://arxiv.org/abs/2102.08838",
+        "snapshot_path": "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt",
+        "sha256": "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_units_fallback",
+            "anchor_string": "125 MeV/c",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14:   committee in January 2021. It proposes a frozen-spin muon-EDM search at PSI.\nL15:\nL16: Numerical proposal values from the arXiv abstract:\nL17:   Muon momentum: p = 125 MeV/c.\nL18:   Magnetic field magnitude: |B| = 3 T.\nL19:   Rest-frame electric field: E = 1 GV/m.\nL20:   Expected sensitivity at the PSI muE1 beam line: sigma(d_mu) <= 6 x 10^-23 e cm."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Adelmann2021:E002:magnetic_field",
+        "source_url": "https://arxiv.org/abs/2102.08838",
+        "snapshot_path": "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt",
+        "sha256": "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_units_fallback",
+            "anchor_string": "3 T",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:\nL16: Numerical proposal values from the arXiv abstract:\nL17:   Muon momentum: p = 125 MeV/c.\nL18:   Magnetic field magnitude: |B| = 3 T.\nL19:   Rest-frame electric field: E = 1 GV/m.\nL20:   Expected sensitivity at the PSI muE1 beam line: sigma(d_mu) <= 6 x 10^-23 e cm.\nL21:   Current direct limit quoted in the abstract: |d_mu| <= 1.8 x 10^-19 e cm at 95% CL."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Adelmann2021:E002:rest_frame_electric_field",
+        "source_url": "https://arxiv.org/abs/2102.08838",
+        "snapshot_path": "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt",
+        "sha256": "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_units_fallback",
+            "anchor_string": "1 GV/m",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: Numerical proposal values from the arXiv abstract:\nL17:   Muon momentum: p = 125 MeV/c.\nL18:   Magnetic field magnitude: |B| = 3 T.\nL19:   Rest-frame electric field: E = 1 GV/m.\nL20:   Expected sensitivity at the PSI muE1 beam line: sigma(d_mu) <= 6 x 10^-23 e cm.\nL21:   Current direct limit quoted in the abstract: |d_mu| <= 1.8 x 10^-19 e cm at 95% CL.\nL22:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Adelmann2021:E002:sensitivity",
+        "source_url": "https://arxiv.org/abs/2102.08838",
+        "snapshot_path": "flavor_catalog/references/E002/adelmann2021_arxiv2102_08838.txt",
+        "sha256": "bc86e027b5ee19d67663739ef540fe8f3420045c57cbbbf416caa465fec529c5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_fallback",
+            "anchor_string": "<= 6e-23 e cm",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   Muon momentum: p = 125 MeV/c.\nL18:   Magnetic field magnitude: |B| = 3 T.\nL19:   Rest-frame electric field: E = 1 GV/m.\nL20:   Expected sensitivity at the PSI muE1 beam line: sigma(d_mu) <= 6 x 10^-23 e cm.\nL21:   Current direct limit quoted in the abstract: |d_mu| <= 1.8 x 10^-19 e cm at 95% CL.\nL22:\nL23: Use in E002:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Renga2024:E002:first_phase_target_year",
+        "source_url": "https://arxiv.org/abs/2409.20050",
+        "snapshot_path": "flavor_catalog/references/E002/renga2024_arxiv2409_20050.txt",
+        "sha256": "c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "observable_value_fallback",
+            "anchor_string": "PSI muEDM status first-phase feasibility target 2026 calendar year",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   would indicate a nonzero EDM.\nL18:\nL19: Numerical/prospect statements from the arXiv abstract:\nL20:   The first phase is intended to demonstrate feasibility by 2026 while reaching\nL21:   sensitivity competitive with parasitic measurements in muon g-2 experiments.\nL22:   The ultimate goal is to improve that sensitivity by a factor of 100 by the early 2030s.\nL23:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Renga2024:E002:ultimate_improvement_factor",
+        "source_url": "https://arxiv.org/abs/2409.20050",
+        "snapshot_path": "flavor_catalog/references/E002/renga2024_arxiv2409_20050.txt",
+        "sha256": "c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_units_fallback",
+            "anchor_string": "100 improvement factor",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19: Numerical/prospect statements from the arXiv abstract:\nL20:   The first phase is intended to demonstrate feasibility by 2026 while reaching\nL21:   sensitivity competitive with parasitic measurements in muon g-2 experiments.\nL22:   The ultimate goal is to improve that sensitivity by a factor of 100 by the early 2030s.\nL23:\nL24: Use in E002:\nL25:   This is a status/prospect source for the post-2008 subsection, not a measured"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Renga2024:E002:ultimate_goal_period",
+        "source_url": "https://arxiv.org/abs/2409.20050",
+        "snapshot_path": "flavor_catalog/references/E002/renga2024_arxiv2409_20050.txt",
+        "sha256": "c9c8a8cb2c324a8e46aa106aeacbe3cdb01e4c33cefb7ce8ebcdf339844d4728",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_units_fallback",
+            "anchor_string": "early 2030s time period",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19: Numerical/prospect statements from the arXiv abstract:\nL20:   The first phase is intended to demonstrate feasibility by 2026 while reaching\nL21:   sensitivity competitive with parasitic measurements in muon g-2 experiments.\nL22:   The ultimate goal is to improve that sensitivity by a factor of 100 by the early 2030s.\nL23:\nL24: Use in E002:\nL25:   This is a status/prospect source for the post-2008 subsection, not a measured"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

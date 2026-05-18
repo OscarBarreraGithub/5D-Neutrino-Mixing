@@ -229,5 +229,83 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B001.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B001.tex",
-  "worklog_path": "flavor_catalog/worklogs/B001/"
+  "worklog_path": "flavor_catalog/worklogs/B001/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_experimental_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+        "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+        "sha256": "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Delta m_d in B0-B0bar mixing = 0.5069 +- 0.0019 ps^-1",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10:\nL11: Extracted value block: B0 mixing: oscillations and mass difference.\nL12: - Combined time-dependent oscillation-frequency result:\nL13:   Delta m_d = 0.5069 +- 0.0019 ps^-1\nL14:   Inputs listed by HFLAV: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb.\nL15: - Time-integrated mixing probability input:\nL16:   chi_d = 0.182 +- 0.015\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:   chi_d = 0.182 +- 0.015\nL17:   Inputs listed by HFLAV: ARGUS and CLEO.\nL18: - World averages after assuming no CP violation in mixing, no width difference in the B0 system, and using tau(B0) = 1.517 +- 0.004 ps:\nL19:   Delta m_d = 0.5069 +- 0.0019 ps^-1\nL20:   x_d = 0.7697 +- 0.0035\nL21:   chi_d = 0.1860 +- 0.0011\nL22:   Inputs listed by HFLAV for chi_d world average: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb, ARGUS, CLEO.\n"
+              },
+              {
+                "line_number": 25,
+                "context": "L22:   Inputs listed by HFLAV for chi_d world average: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb, ARGUS, CLEO.\nL23:\nL24: Use in B001:\nL25: - Canonical measured experimental observable for B001 is Delta m_d = 0.5069 +- 0.0019 ps^-1.\nL26: - x_d and chi_d are companion quantities, not separate B001 headline observables.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "companion_dimensionless_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+        "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+        "sha256": "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "x_d = 0.7697 +- 0.0035",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   Inputs listed by HFLAV: ARGUS and CLEO.\nL18: - World averages after assuming no CP violation in mixing, no width difference in the B0 system, and using tau(B0) = 1.517 +- 0.004 ps:\nL19:   Delta m_d = 0.5069 +- 0.0019 ps^-1\nL20:   x_d = 0.7697 +- 0.0035\nL21:   chi_d = 0.1860 +- 0.0011\nL22:   Inputs listed by HFLAV for chi_d world average: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb, ARGUS, CLEO.\nL23:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "companion_mixing_probability",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+        "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+        "sha256": "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "chi_d = 0.186 +- 0.0011",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: - World averages after assuming no CP violation in mixing, no width difference in the B0 system, and using tau(B0) = 1.517 +- 0.004 ps:\nL19:   Delta m_d = 0.5069 +- 0.0019 ps^-1\nL20:   x_d = 0.7697 +- 0.0035\nL21:   chi_d = 0.1860 +- 0.0011\nL22:   Inputs listed by HFLAV for chi_d world average: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb, ARGUS, CLEO.\nL23:\nL24: Use in B001:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

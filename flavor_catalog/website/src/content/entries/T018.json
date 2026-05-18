@@ -347,5 +347,260 @@
   },
   "source_yaml": "flavor_catalog/processes/top_higgs_ew/T018.yaml",
   "source_tex": "flavor_catalog/processes/top_higgs_ew/T018.tex",
-  "worklog_path": "flavor_catalog/worklogs/T018/"
+  "worklog_path": "flavor_catalog/worklogs/T018/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 10,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 3
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:T018:cms_run2",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T018/pdg2025_higgs_lfv_review.txt",
+        "sha256": "sha256:789633a52f0530528f01797e960cd3aac017792fc3481e41c59c5171a4c2eda1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 0.15%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: limits on LFV Higgs branching ratios. For h -> mu tau, the observed\nL19: (expected) limits are:\nL20:   B(h -> mu tau) < 0.18% (0.09%) from ATLAS [439].\nL21:   B(h -> mu tau) < 0.15% (0.15%) from CMS [440].\nL22:\nL23: The same paragraph states that direct ATLAS/CMS limits on Br(h -> mu tau) and\nL24: Br(h -> e tau) are more than an order of magnitude stronger than limits\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:T018:atlas_run2",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T018/pdg2025_higgs_lfv_review.txt",
+        "sha256": "sha256:789633a52f0530528f01797e960cd3aac017792fc3481e41c59c5171a4c2eda1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 0.18%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: The full 13 TeV Run-2 datasets collected by ATLAS and CMS set 95% CL upper\nL18: limits on LFV Higgs branching ratios. For h -> mu tau, the observed\nL19: (expected) limits are:\nL20:   B(h -> mu tau) < 0.18% (0.09%) from ATLAS [439].\nL21:   B(h -> mu tau) < 0.15% (0.15%) from CMS [440].\nL22:\nL23: The same paragraph states that direct ATLAS/CMS limits on Br(h -> mu tau) and\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2021:T018:mutau_limit",
+        "source_url": "https://arxiv.org/abs/2105.03007",
+        "snapshot_path": "flavor_catalog/references/T018/cms2021_hig20009_arxiv_abs.txt",
+        "sha256": "sha256:1f45cde9d68ae24f26af3c8377258f067539a7619c18387113e78ded1964efc3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 0.15%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: violating branching fractions of the Higgs boson.\nL24:\nL25: The observed (expected) upper limits on the branching fractions are:\nL26:   B(H -> mu tau) < 0.15% (0.15%) at 95% confidence level.\nL27:   B(H -> e tau) < 0.22% (0.16%) at 95% confidence level.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2021:T018:dataset",
+        "source_url": "https://arxiv.org/abs/2105.03007",
+        "snapshot_path": "flavor_catalog/references/T018/cms2021_hig20009_arxiv_abs.txt",
+        "sha256": "sha256:1f45cde9d68ae24f26af3c8377258f067539a7619c18387113e78ded1964efc3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "137 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:\nL18: A search is presented for lepton-flavor violating decays of the Higgs boson\nL19: to mu tau and e tau. The data set corresponds to an integrated luminosity of\nL20: 137 fb^-1 collected at the LHC in proton-proton collisions at a\nL21: center-of-mass energy of 13 TeV. No significant excess has been found, and\nL22: the results are interpreted in terms of upper limits on lepton-flavor\nL23: violating branching fractions of the Higgs boson.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T018:mutau_limit",
+        "source_url": "https://arxiv.org/abs/2302.05225",
+        "snapshot_path": "flavor_catalog/references/T018/atlas2023_higg201911_arxiv_abs.txt",
+        "sha256": "sha256:9e03404c2aa3f3ecfcbbf336964c5dda06560b6350c30964db4821b486d0c33b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 0.18%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: The observed (expected) 95% CL upper limits obtained with the MC-template\nL25: method from a simultaneous measurement are:\nL26:   B(H -> e tau) < 0.20% (0.12%).\nL27:   B(H -> mu tau) < 0.18% (0.09%).\nL28:\nL29: The best-fit branching-ratio difference measured with the Symmetry method in\nL30: the channel where the tau lepton decays to leptons is:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T018:dataset",
+        "source_url": "https://arxiv.org/abs/2302.05225",
+        "snapshot_path": "flavor_catalog/references/T018/atlas2023_higg201911_arxiv_abs.txt",
+        "sha256": "sha256:9e03404c2aa3f3ecfcbbf336964c5dda06560b6350c30964db4821b486d0c33b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "138 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:\nL18: The searches use proton-proton collision data collected with the ATLAS\nL19: detector at sqrt(s) = 13 TeV, corresponding to an integrated luminosity of\nL20: 138 fb^-1. Leptonic and hadronic tau decays are considered. No significant\nL21: excess of events is observed, and the results are interpreted as upper limits\nL22: on lepton-flavour-violating branching ratios of the Higgs boson.\nL23:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T018:symmetry_difference",
+        "source_url": "https://arxiv.org/abs/2302.05225",
+        "snapshot_path": "flavor_catalog/references/T018/atlas2023_higg201911_arxiv_abs.txt",
+        "sha256": "sha256:9e03404c2aa3f3ecfcbbf336964c5dda06560b6350c30964db4821b486d0c33b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.25% +/- 0.10%",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2015:T018:hint",
+        "source_url": "https://arxiv.org/abs/1502.07400",
+        "snapshot_path": "flavor_catalog/references/T018/cms2015_hig14005_arxiv_abs.txt",
+        "sha256": "sha256:3e0638a894a0a957b023b6436d734c780f8c3cdba86d7765d500093925d03314",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2.4 sigma",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2015:T018:limit",
+        "source_url": "https://arxiv.org/abs/1502.07400",
+        "snapshot_path": "flavor_catalog/references/T018/cms2015_hig14005_arxiv_abs.txt",
+        "sha256": "sha256:3e0638a894a0a957b023b6436d734c780f8c3cdba86d7765d500093925d03314",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 1.51%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26:   B(H -> mu tau) = (0.84 +0.39 -0.37)%.\nL27:\nL28: The 95% confidence-level upper limit is:\nL29:   B(H -> mu tau) < 1.51%.\nL30:\nL31: The same result constrains the mu-tau Yukawa couplings to be less than\nL32: 3.6e-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2015:T018:dataset",
+        "source_url": "https://arxiv.org/abs/1502.07400",
+        "snapshot_path": "flavor_catalog/references/T018/cms2015_hig14005_arxiv_abs.txt",
+        "sha256": "sha256:3e0638a894a0a957b023b6436d734c780f8c3cdba86d7765d500093925d03314",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "19.7 fb^-1 at sqrt(s) = 8 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: The first direct search for lepton-flavour-violating decays of the recently\nL18: discovered Higgs boson is performed in the H -> mu tau_e and H -> mu tau_h\nL19: channels. The data sample was collected in pp collisions at sqrt(s) = 8 TeV\nL20: with CMS and corresponds to 19.7 fb^-1.\nL21:\nL22: The sensitivity of the search is an order of magnitude better than the\nL23: existing indirect limits. A slight excess of signal events with a significance\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2015:T018:yukawa_limit",
+        "source_url": "https://arxiv.org/abs/1502.07400",
+        "snapshot_path": "flavor_catalog/references/T018/cms2015_hig14005_arxiv_abs.txt",
+        "sha256": "sha256:3e0638a894a0a957b023b6436d734c780f8c3cdba86d7765d500093925d03314",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 3.6e-3",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "HarnikKoppZupan2012:order10",
+        "source_url": "https://arxiv.org/abs/1209.1397",
+        "snapshot_path": "flavor_catalog/references/T018/harnik_kopp_zupan2012_arxiv_abs.txt",
+        "sha256": "sha256:3cdc2b58e96d7c31af28f9d45289f04bae07474783633dccccea471ef5dedb95",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "order 10%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: The authors rederive constraints from rare decays, electric and magnetic\nL19: dipole moments, and meson oscillations. They find that flavor-violating Higgs\nL20: decays to leptons can be sizeable; h -> tau mu and h -> tau e branching\nL21: ratios of order 10% can be allowed by low-energy constraints. They also find\nL22: that LHC limits from tau-tau recasts were already stronger than rare-tau\nL23: decay bounds and motivate dedicated h -> tau mu and h -> tau e searches.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CsakiFalkowskiWeiler2008:kk_gluon_rs",
+        "source_url": "https://arxiv.org/abs/0804.1954",
+        "snapshot_path": "flavor_catalog/references/T018/csaki_falkowski_weiler2008_arxiv_abs.txt",
+        "sha256": "sha256:0616eb2ecb691c056bbd3f392c49f1a15b39667d67c37396a0f7a62cf8dc0d44",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "about 21 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: dual description of a composite pseudo-Goldstone Higgs. They re-examine\nL17: flavor constraints on the mass scale of new physics in standard\nL18: Randall-Sundrum-type scenarios and find that the KK gluon mass should\nL19: generically be heavier than about 21 TeV. In the composite-Higgs models\nL20: considered, new flavor-violation contributions and gauge-sized Yukawa\nL21: couplings imply a KK gluon mass of at least about 33 TeV, with the conclusion\nL22: that fully anarchic warped flavor is implausible without additional flavor\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

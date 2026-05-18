@@ -1,0 +1,211 @@
+---
+// Citation-anchor "view in source" modal.
+//
+// One <dialog> is emitted per (process_id, block_key) pair so each <button>
+// can target a stable, addressable id.  The page-level wiring (open/close)
+// lives in the inline <script> at the bottom of [id].astro.
+
+interface AnchorMatch {
+  line_number?: number | string | null;
+  context?: string | null;
+}
+interface Anchor {
+  anchor_field?: string | null;
+  anchor_string?: string | null;
+  status?: string | null;
+  matches?: AnchorMatch[];
+}
+interface Source {
+  block_key?: string | null;
+  source_url?: string | null;
+  snapshot_path?: string | null;
+  sha256?: string | null;
+  access_date?: string | null;
+  anchors?: Anchor[];
+}
+
+interface Props {
+  processId: string;
+  source: Source;
+}
+
+const { processId, source } = Astro.props as Props;
+const blockKey = source.block_key ?? '';
+
+function slugify(s: string): string {
+  return (s || '').replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 120);
+}
+const modalId = `cm-${processId}-${slugify(blockKey)}`;
+
+const anchors: Anchor[] = Array.isArray(source.anchors) ? source.anchors : [];
+
+function shortSha(s?: string | null): string {
+  if (!s) return '';
+  const cleaned = s.replace(/^sha256:/i, '').trim();
+  return cleaned.length > 16 ? cleaned.slice(0, 12) + '...' : cleaned;
+}
+
+const overallStatus = (() => {
+  if (anchors.some((a) => (a.status || '').toUpperCase() === 'UNRESOLVED')) return 'UNRESOLVED';
+  if (anchors.some((a) => (a.status || '').toUpperCase() === 'AMBIGUOUS')) return 'AMBIGUOUS';
+  if (anchors.some((a) => (a.status || '').toUpperCase() === 'RESOLVED')) return 'RESOLVED';
+  return 'UNKNOWN';
+})();
+
+interface PreparedLine { lineLabel: string; body: string; isMatch: boolean; }
+interface PreparedMatch {
+  matchNumberLabel: string;
+  lineNumber: number | string | null;
+  hasLineNumber: boolean;
+  lines: PreparedLine[];
+}
+interface PreparedAnchor {
+  status: string;
+  field: string;
+  anchorString: string;
+  matches: PreparedMatch[];
+  hasMatches: boolean;
+}
+
+function prepareAnchor(anchor: Anchor): PreparedAnchor {
+  const status = (anchor.status || '').toUpperCase();
+  const needle = (anchor.anchor_string || '').trim();
+  const rawMatches: AnchorMatch[] = Array.isArray(anchor.matches) ? anchor.matches : [];
+  const prepared: PreparedMatch[] = rawMatches.map((m, i) => {
+    const ctx = (m.context || '').replace(/\r\n/g, '\n');
+    const lines: PreparedLine[] = ctx.split('\n').map((raw) => {
+      const lm = raw.match(/^(L\d+:)\s?(.*)$/);
+      const lineLabel = lm ? lm[1] : '';
+      const body = lm ? lm[2] : raw;
+      const isMatch = needle.length > 0 && body.includes(needle);
+      return { lineLabel, body, isMatch };
+    });
+    const matchNumberLabel = status === 'AMBIGUOUS'
+      ? `Match ${i + 1} of ${rawMatches.length}`
+      : 'Match';
+    const ln = (m.line_number === undefined || m.line_number === null) ? null : m.line_number;
+    return {
+      matchNumberLabel,
+      lineNumber: ln,
+      hasLineNumber: ln !== null,
+      lines,
+    };
+  });
+  return {
+    status: status || 'UNKNOWN',
+    field: anchor.anchor_field || 'value',
+    anchorString: anchor.anchor_string || '',
+    matches: prepared,
+    hasMatches: prepared.length > 0,
+  };
+}
+
+const preparedAnchors: PreparedAnchor[] = anchors.map(prepareAnchor);
+const NL = '\n';
+
+const accessDateLabel = source.access_date || '';
+const shaShort = shortSha(source.sha256);
+const snapshotShort = source.snapshot_path
+  ? source.snapshot_path.replace(/^flavor_catalog\/references\//, '')
+  : '';
+---
+<dialog class="cite-modal" id={modalId} aria-labelledby={`${modalId}-title`}>
+  <article class="cite-modal-inner">
+    <header class="cite-modal-header">
+      <div class="cite-modal-title-row">
+        <h2 id={`${modalId}-title`} class="cite-modal-title">
+          <span class="cite-modal-block">{blockKey || 'Source'}</span>
+        </h2>
+        <button type="button" class="cite-modal-close" data-cite-close aria-label="Close">x</button>
+      </div>
+      <div class="cite-modal-meta">
+        {source.source_url ? (
+          <a href={source.source_url} target="_blank" rel="noopener noreferrer" class="cite-modal-url">
+            {source.source_url}
+          </a>
+        ) : null}
+        <div class="cite-modal-chips">
+          {accessDateLabel ? (
+            <span class="cite-chip"><span class="cite-chip-k">accessed</span> {accessDateLabel}</span>
+          ) : null}
+          {shaShort ? (
+            <span class="cite-chip cite-chip-mono" title={source.sha256 ?? ''}>
+              <span class="cite-chip-k">sha</span> {shaShort}
+            </span>
+          ) : null}
+          {snapshotShort ? (
+            <span class="cite-chip cite-chip-mono" title={source.snapshot_path ?? ''}>
+              <span class="cite-chip-k">snapshot</span> {snapshotShort}
+            </span>
+          ) : null}
+          <span class={`cite-status cite-status-${overallStatus.toLowerCase()}`}>{overallStatus}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="cite-modal-body">
+      {preparedAnchors.length === 0 ? (
+        <p class="cite-empty">No anchor metadata for this source.</p>
+      ) : null}
+
+      {preparedAnchors.map((a) => (
+        <section class="cite-anchor">
+          <div class="cite-anchor-head">
+            <div class="cite-anchor-id">
+              <span class="cite-anchor-field">{a.field}</span>
+              {a.anchorString ? (
+                <code class="cite-anchor-string">{a.anchorString}</code>
+              ) : null}
+            </div>
+            <span class={`cite-status cite-status-${a.status.toLowerCase()}`}>{a.status}</span>
+          </div>
+
+          {a.status === 'UNRESOLVED' ? (
+            <div class="cite-unresolved">
+              <p>
+                Automated anchoring could not pinpoint this value inside the snapshot.
+                Manual verification is needed: open the live source and confirm against the
+                context surrounding the value claim.
+              </p>
+              {source.source_url ? (
+                <a class="cite-cta" href={source.source_url} target="_blank" rel="noopener noreferrer">
+                  Open source manually
+                </a>
+              ) : null}
+            </div>
+          ) : null}
+
+          {a.status !== 'UNRESOLVED' && !a.hasMatches ? (
+            <p class="cite-empty">Status reports {a.status}, but no match payload is attached.</p>
+          ) : null}
+
+          {a.status !== 'UNRESOLVED' && a.hasMatches ? (
+            <div class="cite-matches">
+              {a.matches.map((m) => (
+                <div class="cite-match">
+                  <header class="cite-match-head">
+                    <span class="cite-match-n">{m.matchNumberLabel}</span>
+                    {m.hasLineNumber ? (
+                      <span class="cite-match-line">snapshot line {m.lineNumber}</span>
+                    ) : null}
+                  </header>
+                  <pre class="cite-snippet"><code>{m.lines.map((row) => (
+                    <span class={`cite-line${row.isMatch ? ' cite-line-hit' : ''}`}>{row.lineLabel ? row.lineLabel + ' ' : ''}{row.body}{NL}</span>
+                  ))}</code></pre>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </section>
+      ))}
+    </div>
+
+    <footer class="cite-modal-foot">
+      <span class="cite-modal-foot-note">
+        Snapshots live under <code>flavor_catalog/references/&lt;process_id&gt;/</code>.
+        Anchoring was performed by Phase 2 codex agents; status reflects automated match confidence only.
+      </span>
+      <button type="button" class="cite-modal-close-btn" data-cite-close>Close</button>
+    </footer>
+  </article>
+</dialog>

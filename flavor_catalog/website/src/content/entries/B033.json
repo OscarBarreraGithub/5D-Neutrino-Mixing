@@ -117,5 +117,153 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B033.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B033.tex",
-  "worklog_path": "flavor_catalog/worklogs/B033/"
+  "worklog_path": "flavor_catalog/worklogs/B033/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 7,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 1
+    },
+    "sources": [
+      {
+        "block_key": "canonical_hflav_phiK0",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/",
+        "snapshot_path": "flavor_catalog/references/B033/hflav_triangle_summer2025_phiK0.txt",
+        "sha256": "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "observables[0].fallback_value_uncertainty",
+            "anchor_string": "sin(2 beta_eff)(phi K0) = 0.74 +- 0.12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 36,
+                "context": "L33:     S-C statistical correlation = 0.01\nL34:\nL35: HFLAV averages:\nL36:   sin(2 beta_eff)(phi K0) = 0.74 +/- 0.12\nL37:     chi2 = 1.5 / 2 dof, CL = 0.46, equivalent pull = 0.7 sigma\nL38:   C_CP(phi K0) = -0.09 +/- 0.12\nL39:     chi2 = 1.7 / 2 dof, CL = 0.42, equivalent pull = 0.8 sigma\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[1].fallback_value_uncertainty",
+            "anchor_string": "C_CP(phi K0) = -0.09 +- 0.12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 38,
+                "context": "L35: HFLAV averages:\nL36:   sin(2 beta_eff)(phi K0) = 0.74 +/- 0.12\nL37:     chi2 = 1.5 / 2 dof, CL = 0.46, equivalent pull = 0.7 sigma\nL38:   C_CP(phi K0) = -0.09 +/- 0.12\nL39:     chi2 = 1.7 / 2 dof, CL = 0.42, equivalent pull = 0.8 sigma\nL40:\nL41: Comparison benchmark on the same HFLAV Summer 2025 page:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "hflav_comparison_sin2beta",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/",
+        "snapshot_path": "flavor_catalog/references/B033/hflav_triangle_summer2025_phiK0.txt",
+        "sha256": "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "observables[0].fallback_value_uncertainty",
+            "anchor_string": "sin(2 beta), all charmonium = 0.71 +- 0.011",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 42,
+                "context": "L39:     chi2 = 1.7 / 2 dof, CL = 0.42, equivalent pull = 0.8 sigma\nL40:\nL41: Comparison benchmark on the same HFLAV Summer 2025 page:\nL42:   All-charmonium average sin(2 beta) = sin(2 phi_1) = 0.710 +/- 0.011\nL43:     stat-only uncertainty = 0.010, CL = 0.34\nL44:   J/psi K0 average sin(2 beta) = 0.710 +/- 0.011\nL45:   J/psi K_S mode average = 0.712 +/- 0.011\n"
+              },
+              {
+                "line_number": 44,
+                "context": "L41: Comparison benchmark on the same HFLAV Summer 2025 page:\nL42:   All-charmonium average sin(2 beta) = sin(2 phi_1) = 0.710 +/- 0.011\nL43:     stat-only uncertainty = 0.010, CL = 0.34\nL44:   J/psi K0 average sin(2 beta) = 0.710 +/- 0.011\nL45:   J/psi K_S mode average = 0.712 +/- 0.011\nL46:\nL47: Reference labels appearing in the HFLAV table:\n"
+              },
+              {
+                "line_number": 45,
+                "context": "L42:   All-charmonium average sin(2 beta) = sin(2 phi_1) = 0.710 +/- 0.011\nL43:     stat-only uncertainty = 0.010, CL = 0.34\nL44:   J/psi K0 average sin(2 beta) = 0.710 +/- 0.011\nL45:   J/psi K_S mode average = 0.712 +/- 0.011\nL46:\nL47: Reference labels appearing in the HFLAV table:\nL48:   BaBar: PRD 85 (2012) 112010\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[1].fallback_value_uncertainty",
+            "anchor_string": "sin(2 beta), J/psi K_S mode = 0.712 +- 0.011",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 45,
+                "context": "L42:   All-charmonium average sin(2 beta) = sin(2 phi_1) = 0.710 +/- 0.011\nL43:     stat-only uncertainty = 0.010, CL = 0.34\nL44:   J/psi K0 average sin(2 beta) = 0.710 +/- 0.011\nL45:   J/psi K_S mode average = 0.712 +/- 0.011\nL46:\nL47: Reference labels appearing in the HFLAV table:\nL48:   BaBar: PRD 85 (2012) 112010\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[2].fallback_value_uncertainty",
+            "anchor_string": "difference sin(2 beta_eff)(phi K0) - sin(2 beta all charmonium) = 0.03",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "hflav_inputs",
+        "source_url": "",
+        "snapshot_path": "flavor_catalog/references/B033/hflav_triangle_summer2025_phiK0.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "inputs[0].fallback_value_uncertainty",
+            "anchor_string": "= 0.05 +- 0.17",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: Experiment/input:\nL24:   BaBar, PRD 85 (2012) 112010, N(BB)=470M:\nL25:     sin(2 beta_eff) = 0.66 +/- 0.17 +/- 0.07\nL26:     C_CP = 0.05 +/- 0.18 +/- 0.05\nL27:   Belle, PRD 82 (2010) 073011, N(BB)=657M:\nL28:     sin(2 beta_eff) = 0.90 +0.09 -0.19\nL29:     C_CP = -0.04 +/- 0.20 +/- 0.10 +/- 0.02\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "inputs[1].fallback_value_uncertainty",
+            "anchor_string": "= -0.04 +- 0.09",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26:     C_CP = 0.05 +/- 0.18 +/- 0.05\nL27:   Belle, PRD 82 (2010) 073011, N(BB)=657M:\nL28:     sin(2 beta_eff) = 0.90 +0.09 -0.19\nL29:     C_CP = -0.04 +/- 0.20 +/- 0.10 +/- 0.02\nL30:   Belle II, PRD 108 (2023) 072012, N(BB)=387M:\nL31:     sin(2 beta_eff) = 0.54 +/- 0.26 +0.06 -0.08\nL32:     C_CP = -0.31 +/- 0.20 +/- 0.05\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "inputs[2].fallback_value_uncertainty",
+            "anchor_string": "= -0.31 +- 0.26",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 32,
+                "context": "L29:     C_CP = -0.04 +/- 0.20 +/- 0.10 +/- 0.02\nL30:   Belle II, PRD 108 (2023) 072012, N(BB)=387M:\nL31:     sin(2 beta_eff) = 0.54 +/- 0.26 +0.06 -0.08\nL32:     C_CP = -0.31 +/- 0.20 +/- 0.05\nL33:     S-C statistical correlation = 0.01\nL34:\nL35: HFLAV averages:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "belleii_2023_primary_input",
+        "source_url": "https://arxiv.org/abs/2307.02802",
+        "snapshot_path": "flavor_catalog/references/B033/belleii_2023_phik0_arxiv.txt",
+        "sha256": "sha256:46d751b86a3d999c9787c0fa0e7c2e8ed99413180c72bd2252d2d85113396639",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 0.54 +- 17",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: mesons from Upsilon(4S) decays.  Belle II reconstructs 162 +/- 17 signal\nL24: events.  The measured CP asymmetries are\nL25: A = 0.31 +/- 0.20 +/- 0.05 and\nL26: S = 0.54 +/- 0.26 +0.06 -0.08.\nL27:\nL28: Use in B033:\nL29: This is the Belle II post-2008 input included in the HFLAV Summer 2025\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

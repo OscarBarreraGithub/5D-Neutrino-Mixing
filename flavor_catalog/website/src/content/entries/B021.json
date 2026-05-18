@@ -252,5 +252,195 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B021.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B021.tex",
-  "worklog_path": "flavor_catalog/worklogs/B021/"
+  "worklog_path": "flavor_catalog/worklogs/B021/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 9,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "observables[0]",
+        "source_url": "https://pdgapi.lbl.gov/listings/S040.26",
+        "snapshot_path": "flavor_catalog/references/B021/pdg2025_lambdab_lambdamumu.txt",
+        "sha256": "sha256:73959783ca3c1de31cd9479c24825c19140d59641809cfe9a2cc3c9a528fddcd",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(Lambda_b0 -> Lambda mu+ mu-) = 1.08 +- +/- 0.28 10^-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: PDGID S040.26: Lambda_b()0 --> Lambda mu+ mu-\nL10: Edition: 2025\nL11: PDG summary value from Lambda_b^0 decay-mode table:\nL12:   B(Lambda_b^0 --> Lambda mu+ mu-) = (1.08 +- 0.28) x 10^-6\nL13:   daughter momentum p = 2695 MeV/c\nL14:\nL15: PDG API related data for S040.26:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[1]",
+        "source_url": "https://arxiv.org/abs/1503.07138",
+        "snapshot_path": "flavor_catalog/references/B021/lhcb_1503_07138_lambdab_lambdamumu.txt",
+        "sha256": "sha256:2feb8efe212b8784a57af13f821aa9f3accadec8513d8d78474b3497fb37d1db",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "dBR/dq2(Lambda_b0 -> Lambda mu+ mu-) = 1.18 +- +0.09/-0.08 stat, +/-0.03 syst, +/-0.27 normalization 10^-7 (GeV^2/c^4)^-1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:   Evidence of signal was observed below the square of the J/psi mass.\nL16:   For 15 < q^2 < 20 GeV^2/c^4:\nL17:     dB(Lambda_b^0 -> Lambda mu+ mu-) / dq^2\nL18:       = (1.18 +0.09 -0.08 +-0.03 +-0.27) x 10^-7 (GeV^2/c^4)^-1\nL19:     uncertainties are statistical, systematic, and due to the normalization\nL20:     mode Lambda_b^0 -> J/psi Lambda.\nL21:   Angular observables for 15 < q^2 < 20 GeV^2/c^4:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[2]",
+        "source_url": "https://arxiv.org/abs/1503.07138",
+        "snapshot_path": "flavor_catalog/references/B021/lhcb_1503_07138_lambdab_lambdamumu.txt",
+        "sha256": "sha256:2feb8efe212b8784a57af13f821aa9f3accadec8513d8d78474b3497fb37d1db",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "A_FB^l(Lambda_b0 -> Lambda mu+ mu-) = -0.05 +- +/-0.09 stat, +/-0.03 syst",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19:     uncertainties are statistical, systematic, and due to the normalization\nL20:     mode Lambda_b^0 -> J/psi Lambda.\nL21:   Angular observables for 15 < q^2 < 20 GeV^2/c^4:\nL22:     A_FB^l = -0.05 +- 0.09(stat) +- 0.03(syst)\nL23:     A_FB^h = -0.29 +- 0.07(stat) +- 0.03(syst)\nL24:\nL25: Catalog note:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[3]",
+        "source_url": "https://arxiv.org/abs/1503.07138",
+        "snapshot_path": "flavor_catalog/references/B021/lhcb_1503_07138_lambdab_lambdamumu.txt",
+        "sha256": "sha256:2feb8efe212b8784a57af13f821aa9f3accadec8513d8d78474b3497fb37d1db",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "A_FB^h(Lambda_b0 -> Lambda mu+ mu-) = -0.29 +- +/-0.07 stat, +/-0.03 syst",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:     mode Lambda_b^0 -> J/psi Lambda.\nL21:   Angular observables for 15 < q^2 < 20 GeV^2/c^4:\nL22:     A_FB^l = -0.05 +- 0.09(stat) +- 0.03(syst)\nL23:     A_FB^h = -0.29 +- 0.07(stat) +- 0.03(syst)\nL24:\nL25: Catalog note:\nL26:   This is the primary modern LHCb source for the q^2-binned differential\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[0]:CDF2011:B021:signal_events",
+        "source_url": "https://arxiv.org/abs/1107.3753",
+        "snapshot_path": "flavor_catalog/references/B021/cdf_1107_3753_lambdab_observation.txt",
+        "sha256": "sha256:83084eabd1d4cabbe58651be94c1e657df390d539624ecb32ca63b7292a90d2b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "CDF observed Lambda_b -> Lambda mu+ mu- signal yield = 24 signal events",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11:\nL12: Key extracted values from the arXiv abstract:\nL13:   First observation of Lambda_b -> Lambda mu+ mu-.\nL14:   Signal yield: 24 signal events.\nL15:   Statistical significance: 5.8 Gaussian standard deviations.\nL16:   Dataset: 6.8 fb^-1 of ppbar collisions at sqrt(s) = 1.96 TeV collected by CDF II.\nL17:   Branching fraction:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[1]:CDF2011:B021:significance",
+        "source_url": "https://arxiv.org/abs/1107.3753",
+        "snapshot_path": "flavor_catalog/references/B021/cdf_1107_3753_lambdab_observation.txt",
+        "sha256": "sha256:83084eabd1d4cabbe58651be94c1e657df390d539624ecb32ca63b7292a90d2b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "CDF Lambda_b -> Lambda mu+ mu- observation significance = 5.8 Gaussian standard deviations",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: Key extracted values from the arXiv abstract:\nL13:   First observation of Lambda_b -> Lambda mu+ mu-.\nL14:   Signal yield: 24 signal events.\nL15:   Statistical significance: 5.8 Gaussian standard deviations.\nL16:   Dataset: 6.8 fb^-1 of ppbar collisions at sqrt(s) = 1.96 TeV collected by CDF II.\nL17:   Branching fraction:\nL18:     B(Lambda_b -> Lambda mu+ mu-) = (1.73 +-0.42(stat) +-0.55(syst)) x 10^-6\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[2]:CDF2011:B021:integrated_luminosity",
+        "source_url": "https://arxiv.org/abs/1107.3753",
+        "snapshot_path": "flavor_catalog/references/B021/cdf_1107_3753_lambdab_observation.txt",
+        "sha256": "sha256:83084eabd1d4cabbe58651be94c1e657df390d539624ecb32ca63b7292a90d2b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "CDF Lambda_b -> Lambda mu+ mu- dataset integrated luminosity = 6.8 fb^-1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:   First observation of Lambda_b -> Lambda mu+ mu-.\nL14:   Signal yield: 24 signal events.\nL15:   Statistical significance: 5.8 Gaussian standard deviations.\nL16:   Dataset: 6.8 fb^-1 of ppbar collisions at sqrt(s) = 1.96 TeV collected by CDF II.\nL17:   Branching fraction:\nL18:     B(Lambda_b -> Lambda mu+ mu-) = (1.73 +-0.42(stat) +-0.55(syst)) x 10^-6\nL19:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[3]:CDF2011:B021:center_of_mass_energy",
+        "source_url": "https://arxiv.org/abs/1107.3753",
+        "snapshot_path": "flavor_catalog/references/B021/cdf_1107_3753_lambdab_observation.txt",
+        "sha256": "sha256:83084eabd1d4cabbe58651be94c1e657df390d539624ecb32ca63b7292a90d2b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "CDF Lambda_b -> Lambda mu+ mu- dataset center-of-mass energy = 1.96 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:   First observation of Lambda_b -> Lambda mu+ mu-.\nL14:   Signal yield: 24 signal events.\nL15:   Statistical significance: 5.8 Gaussian standard deviations.\nL16:   Dataset: 6.8 fb^-1 of ppbar collisions at sqrt(s) = 1.96 TeV collected by CDF II.\nL17:   Branching fraction:\nL18:     B(Lambda_b -> Lambda mu+ mu-) = (1.73 +-0.42(stat) +-0.55(syst)) x 10^-6\nL19:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[4]:CDF2011:B021:branching_fraction",
+        "source_url": "https://arxiv.org/abs/1107.3753",
+        "snapshot_path": "flavor_catalog/references/B021/cdf_1107_3753_lambdab_observation.txt",
+        "sha256": "sha256:83084eabd1d4cabbe58651be94c1e657df390d539624ecb32ca63b7292a90d2b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "B(Lambda_b -> Lambda mu+ mu-), CDF observation = (1.73 +- 0.42)e-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:   Statistical significance: 5.8 Gaussian standard deviations.\nL16:   Dataset: 6.8 fb^-1 of ppbar collisions at sqrt(s) = 1.96 TeV collected by CDF II.\nL17:   Branching fraction:\nL18:     B(Lambda_b -> Lambda mu+ mu-) = (1.73 +-0.42(stat) +-0.55(syst)) x 10^-6\nL19:\nL20: Catalog note:\nL21:   This source establishes that the process was unobserved in the arXiv:0804.1954\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

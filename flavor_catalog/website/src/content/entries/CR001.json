@@ -317,5 +317,131 @@
   },
   "source_yaml": "flavor_catalog/processes/collider_rs/CR001.yaml",
   "source_tex": "flavor_catalog/processes/collider_rs/CR001.tex",
-  "worklog_path": "flavor_catalog/worklogs/CR001/"
+  "worklog_path": "flavor_catalog/worklogs/CR001/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 2,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "CMS2026:CR001:gkk_ttbar_mass_exclusion",
+        "source_url": "https://arxiv.org/abs/2603.23454",
+        "snapshot_path": "flavor_catalog/references/CR001/cms_2026_arxiv2603_23454.txt",
+        "sha256": "sha256:c8991eda19167e18c3e31b54027eebc86fc7466b4159781e95dddd50e09b613c",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "0.5 < m(g_KK) < 5.5 TeV excluded",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2026-03-24T17:26:37Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/2603.23454v1\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/2603.23454v1\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>A search for new particles decaying to top quark-antiquark pairs is performed using proton-proton collision data at a centre-of-mass energy of 13 TeV. The data set recorded with the CMS detector between 2016 and 2018 is used, corresponding to an integrated luminosity of 138 fb$^{-1}$. Final states with 0, 1, and 2 leptons are analyzed, covering all decay modes of the top quark-antiquark pairs. Heavy Z' bosons with relative widths of 1, 10, and 30% are excluded for masses in the ranges 0.4$-$4.8, 0.4$-$6.2, and 0.4$-$7.4 TeV, respectively. A Kaluza$-$Klein gluon in the Randall$-$Sundrum model and a dark-matter mediator are excluded for masses between 0.5$-$5.5 and 1.0$-$4.2 TeV, respectively. These results set the most stringent limits to date for the considered models in the $\\mathrm{t\\bar{t}}$ final state. In addition, in the two-Higgs-doublet models, upper limits are set on the coupling strength modifier for scalar and pseudoscalar Higgs bosons with relative widths of 2.5, 10, and 25% in the mass range of 0.5$-$1.0 TeV.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2026-03-24T17:26:37Z</published>\nL19:     <arxiv:comment>Submitted to the Journal of High Energy Physics. All figures and tables can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-25-009 (CMS Public Pages)</arxiv:comment>"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2019:CR001:gkk_ttbar_mass_exclusion",
+        "source_url": "https://arxiv.org/abs/1810.05905",
+        "snapshot_path": "flavor_catalog/references/CR001/cms_2019_arxiv1810_05905.txt",
+        "sha256": "sha256:93a713d209e4b05fd9ea8e0d921a880709278a0cce4ff23c1950eff10dcfd42b",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_fallback",
+            "anchor_string": "< 4.55 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2019-04-06T23:14:42Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/1810.05905v2\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/1810.05905v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>A search for a heavy resonance decaying into a top quark and antiquark ($\\mathrm{t\\bar{t}}$) pair is performed using proton-proton collisions at $\\sqrt{s} =$ 13 TeV. The search uses the data set collected with the CMS detector in 2016, which corresponds to an integrated luminosity of 35.9 fb$^{-1}$. The analysis considers three exclusive final states and uses reconstruction techniques that are optimized for top quarks with high Lorentz boosts, which requires the use of nonisolated leptons and jet substructure techniques. No significant excess of events relative to the expected yield from standard model processes is observed. Upper limits on the production cross section of heavy resonances decaying to a $\\mathrm{t\\bar{t}}$ pair are calculated. Limits are derived for a leptophobic topcolor Z' resonance with widths of 1, 10, and 30%, relative to the mass of the resonance, and exclude masses up to 3.80, 5.25, and 6.65 TeV, respectively. Kaluza-Klein excitations of the gluon in the Randall-Sundrum model are excluded up to 4.55 TeV. To date, these are the most stringent limits on $\\mathrm{t\\bar{t}}$ resonances.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2018-10-13T17:59:16Z</published>\nL19:     <arxiv:comment>Replaced with the published version. Added the journal reference and the DOI. All the figures and tables can be found at http://cms-results.web.cern.ch/cms-results/public-results/publications/B2G-17-017 (CMS Public Pages)</arxiv:comment>"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDGLive2026:CR001:s071kkg_aaboud2018bi",
+        "source_url": "https://pdglive.lbl.gov/DataBlock.action?node=S071KKG",
+        "snapshot_path": "flavor_catalog/references/CR001/pdg_live_2026_s071kkg.txt",
+        "sha256": "sha256:b0d08fb66567cc22c0020d6dee55761ff2c733458e80c2da689a272c62704490",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(g_KK) > 3.8 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 4,
+                "context": "L1: Limits on Kaluza-Klein Gluons in Warped Extra Dimensions Limits on Kaluza-Klein Gluons in Warped Extra Dimensions INSPIRE JSON (beta)\nL2: PDGID: S071KKG This section places limits on the mass of the first Kaluza-Klein (KK) excitation of the gluon in warped extra dimension models with Standard Model fields propagating in the bulk. Bounds are given for a specific benchmark model with $\\Gamma /\\mathit m$ = 15.3$\\%$ where $\\Gamma $ is the width and $\\mathit m$ the mass of the KK gluon. See the``Extra Dimensions&rdquo; review for more discussion. VALUE (TeV) CL%\nL3:\nL4: DOCUMENT ID TECN COMMENT $\\bf{> 3.8}$ 95 1\nL5: AABOUD 2018 BI ATLS ${{\\mathit g}_{{{KK}}}}$ $\\rightarrow$ ${{\\mathit t}}{{\\overline{\\mathit t}}}$ $\\rightarrow$ ${{\\mathit \\ell}}{{\\mathit j}}$\nL6: BULLET\nL7: BULLET We do not use the following data for averages, fits, limits, etc."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2013:CR001:gkk_ttbar_mass_exclusion",
+        "source_url": "https://arxiv.org/abs/1305.2756",
+        "snapshot_path": "flavor_catalog/references/CR001/atlas_2013_arxiv1305_2756.txt",
+        "sha256": "sha256:0f2049c8120ce935f7f7a9a0464f23f2006ec1927c8a00fcceaed7513019e817",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(g_KK) < 2.07 TeV excluded",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26: <meta property=\"og:image:width\" content=\"1200\" />\nL27: <meta property=\"og:image:height\" content=\"700\" />\nL28: <meta property=\"og:image:alt\" content=\"arXiv logo\"/>\nL29: <meta property=\"og:description\" content=\"A search for new particles that decay into top quark pairs (ttbar) is performed with the ATLAS experiment at the LHC using an integrated luminosity of 4.7 fb^-1 of proton-proton (pp) collision data collected at a center-of-mass energy sqrt(s)=7 TeV. In the ttbar --&gt; WbWb decay, the lepton plus jets final state is used, where one W boson decays leptonically and the other hadronically. The ttbar system is reconstructed using both small-radius and large-radius jets, the latter being supplemented by a jet substructure analysis. A search for local excesses in the number of data events compared to the Standard Model expectation in the ttbar invariant mass spectrum is performed. No evidence for a ttbar resonance is found and 95% credibility-level limits on the production rate are determined for massive states predicted in two benchmark models. The upper limits on the cross section times branching ratio of a narrow Z&#39; resonance range from 5.1 pb for a boson mass of 0.5 TeV to 0.03 pb for a mass of 3 TeV. A narrow leptophobic topcolor Z&#39; resonance with a mass below 1.74 TeV is excluded. Limits are also derived for a broad color-octet resonance with Gamma/m = 15.3%. A Kaluza-Klein excitation of the gluon in a Randall-Sundrum model is excluded for masses below 2.07 TeV.\"/>\nL30: <meta name=\"twitter:site\" content=\"@arxiv\"/>\nL31: <meta name=\"twitter:card\" content=\"summary\"/>\nL32: <meta name=\"twitter:title\" content=\"A search for ttbar resonances in the lepton plus jets final state...\"/>"
+              },
+              {
+                "line_number": 40,
+                "context": "L37:   <script src=\"//cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js\" type=\"text/javascript\"></script>\nL38:   <script src=\"//cdn.jsdelivr.net/npm/dompurify@2.3.5/dist/purify.min.js\"></script>\nL39:   <script src=\"/static/browse/0.3.4/js/toggle-labs.js?20241022\" type=\"text/javascript\"></script>\nL40:   <script src=\"/static/browse/0.3.4/js/cite.js\" type=\"text/javascript\"></script><meta name=\"citation_title\" content=\"A search for ttbar resonances in the lepton plus jets final state with ATLAS using 4.7 fb^-1 of pp collisions at sqrt(s) = 7 TeV\" /><meta name=\"citation_author\" content=\"ATLAS Collaboration\" /><meta name=\"citation_doi\" content=\"10.1103/PhysRevD.88.012004\" /><meta name=\"citation_date\" content=\"2013/05/13\" /><meta name=\"citation_online_date\" content=\"2013/06/18\" /><meta name=\"citation_pdf_url\" content=\"https://arxiv.org/pdf/1305.2756\" /><meta name=\"citation_arxiv_id\" content=\"1305.2756\" /><meta name=\"citation_abstract\" content=\"A search for new particles that decay into top quark pairs (ttbar) is performed with the ATLAS experiment at the LHC using an integrated luminosity of 4.7 fb^-1 of proton-proton (pp) collision data collected at a center-of-mass energy sqrt(s)=7 TeV. In the ttbar --&gt; WbWb decay, the lepton plus jets final state is used, where one W boson decays leptonically and the other hadronically. The ttbar system is reconstructed using both small-radius and large-radius jets, the latter being supplemented by a jet substructure analysis. A search for local excesses in the number of data events compared to the Standard Model expectation in the ttbar invariant mass spectrum is performed. No evidence for a ttbar resonance is found and 95% credibility-level limits on the production rate are determined for massive states predicted in two benchmark models. The upper limits on the cross section times branching ratio of a narrow Z&#39; resonance range from 5.1 pb for a boson mass of 0.5 TeV to 0.03 pb for a mass of 3 TeV. A narrow leptophobic topcolor Z&#39; resonance with a mass below 1.74 TeV is excluded. Limits are also derived for a broad color-octet resonance with Gamma/m = 15.3%. A Kaluza-Klein excitation of the gluon in a Randall-Sundrum model is excluded for masses below 2.07 TeV.\" />\nL41: </head>\nL42:\nL43: <body  class=\"with-cu-identity\">"
+              },
+              {
+                "line_number": 180,
+                "context": "L177:\nL178:\nL179:     <blockquote class=\"abstract mathjax\">\nL180:             <span class=\"descriptor\">Abstract:</span>A search for new particles that decay into top quark pairs (ttbar) is performed with the ATLAS experiment at the LHC using an integrated luminosity of 4.7 fb^-1 of proton-proton (pp) collision data collected at a center-of-mass energy sqrt(s)=7 TeV. In the ttbar --&gt; WbWb decay, the lepton plus jets final state is used, where one W boson decays leptonically and the other hadronically. The ttbar system is reconstructed using both small-radius and large-radius jets, the latter being supplemented by a jet substructure analysis. A search for local excesses in the number of data events compared to the Standard Model expectation in the ttbar invariant mass spectrum is performed. No evidence for a ttbar resonance is found and 95% credibility-level limits on the production rate are determined for massive states predicted in two benchmark models. The upper limits on the cross section times branching ratio of a narrow Z&#39; resonance range from 5.1 pb for a boson mass of 0.5 TeV to 0.03 pb for a mass of 3 TeV. A narrow leptophobic topcolor Z&#39; resonance with a mass below 1.74 TeV is excluded. Limits are also derived for a broad color-octet resonance with Gamma/m = 15.3%. A Kaluza-Klein excitation of the gluon in a Randall-Sundrum model is excluded for masses below 2.07 TeV.\nL181:     </blockquote>\nL182:\nL183:     <!--CONTEXT-->"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2012:CR001:gkk_ttbar_mass_exclusion",
+        "source_url": "https://arxiv.org/abs/1207.2409",
+        "snapshot_path": "flavor_catalog/references/CR001/atlas_2012_arxiv1207_2409.txt",
+        "sha256": "sha256:79a0e8ade861cbba8ee8775df6cee090170ac89b6d4bef6360bb396eead71234",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(g_KK) < 1.5 TeV excluded",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26: <meta property=\"og:image:width\" content=\"1200\" />\nL27: <meta property=\"og:image:height\" content=\"700\" />\nL28: <meta property=\"og:image:alt\" content=\"arXiv logo\"/>\nL29: <meta property=\"og:description\" content=\"A search for resonant production of high-mass top-quark pairs is performed on 2.05 fb^-1 of proton-proton collisions at sqrt(s) = 7 TeV collected in 2011 with the ATLAS experiment at the Large Hadron Collider. This analysis of the lepton+jets final state is specifically designed for the particular topology that arises from the decay of highly boosted top quarks. The observed ttbar invariant mass spectrum is found to be compatible with the Standard Model prediction and 95% credibility level upper limits are derived on the ttbar production rate through new massive states. An upper limit of 0.7 pb is set on the production cross section times branching fraction of a narrow 1 TeV resonance. A Kaluza-Klein gluon with a mass smaller than 1.5 TeV is excluded.\"/>\nL30: <meta name=\"twitter:site\" content=\"@arxiv\"/>\nL31: <meta name=\"twitter:card\" content=\"summary\"/>\nL32: <meta name=\"twitter:title\" content=\"A search for ttbar resonances in lepton+jets events with highly...\"/>"
+              },
+              {
+                "line_number": 40,
+                "context": "L37:   <script src=\"//cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js\" type=\"text/javascript\"></script>\nL38:   <script src=\"//cdn.jsdelivr.net/npm/dompurify@2.3.5/dist/purify.min.js\"></script>\nL39:   <script src=\"/static/browse/0.3.4/js/toggle-labs.js?20241022\" type=\"text/javascript\"></script>\nL40:   <script src=\"/static/browse/0.3.4/js/cite.js\" type=\"text/javascript\"></script><meta name=\"citation_title\" content=\"A search for ttbar resonances in lepton+jets events with highly boosted top quarks collected in pp collisions at sqrt(s) = 7 TeV with the ATLAS detector\" /><meta name=\"citation_author\" content=\"ATLAS Collaboration\" /><meta name=\"citation_doi\" content=\"10.1007/JHEP09(2012)041\" /><meta name=\"citation_date\" content=\"2012/07/10\" /><meta name=\"citation_online_date\" content=\"2012/09/21\" /><meta name=\"citation_pdf_url\" content=\"https://arxiv.org/pdf/1207.2409\" /><meta name=\"citation_arxiv_id\" content=\"1207.2409\" /><meta name=\"citation_abstract\" content=\"A search for resonant production of high-mass top-quark pairs is performed on 2.05 fb^-1 of proton-proton collisions at sqrt(s) = 7 TeV collected in 2011 with the ATLAS experiment at the Large Hadron Collider. This analysis of the lepton+jets final state is specifically designed for the particular topology that arises from the decay of highly boosted top quarks. The observed ttbar invariant mass spectrum is found to be compatible with the Standard Model prediction and 95% credibility level upper limits are derived on the ttbar production rate through new massive states. An upper limit of 0.7 pb is set on the production cross section times branching fraction of a narrow 1 TeV resonance. A Kaluza-Klein gluon with a mass smaller than 1.5 TeV is excluded.\" />\nL41: </head>\nL42:\nL43: <body  class=\"with-cu-identity\">"
+              },
+              {
+                "line_number": 180,
+                "context": "L177:\nL178:\nL179:     <blockquote class=\"abstract mathjax\">\nL180:             <span class=\"descriptor\">Abstract:</span>A search for resonant production of high-mass top-quark pairs is performed on 2.05 fb^-1 of proton-proton collisions at sqrt(s) = 7 TeV collected in 2011 with the ATLAS experiment at the Large Hadron Collider. This analysis of the lepton+jets final state is specifically designed for the particular topology that arises from the decay of highly boosted top quarks. The observed ttbar invariant mass spectrum is found to be compatible with the Standard Model prediction and 95% credibility level upper limits are derived on the ttbar production rate through new massive states. An upper limit of 0.7 pb is set on the production cross section times branching fraction of a narrow 1 TeV resonance. A Kaluza-Klein gluon with a mass smaller than 1.5 TeV is excluded.\nL181:     </blockquote>\nL182:\nL183:     <!--CONTEXT-->"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

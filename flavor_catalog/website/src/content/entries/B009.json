@@ -211,5 +211,183 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B009.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B009.tex",
-  "worklog_path": "flavor_catalog/worklogs/B009/"
+  "worklog_path": "flavor_catalog/worklogs/B009/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 6,
+      "AMBIGUOUS": 2,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Leptonic/BR_B+_tau+_nutau.html",
+        "snapshot_path": "flavor_catalog/references/B009/hflav_dec2025_btaunu.txt",
+        "sha256": "sha256:7a4e4079a8223ced909c49a8bfffb849edc7b3bbb19d258a9e03ec4d8c37a970",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 1.12 +- 0.19 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7: Observable: ${\\cal B}(B^+ \\to \\tau^+ \\nu_{\\tau})$.\nL8:\nL9: Experiment | Measurement [10^-4] | Delta chi^2 | Reference | Comments\nL10: Average | $1.12 \\pm0.19$ | 4.25 | $p=0.37$ (ndf=4) | The PDG uncertainty includes a scale factor.\nL11: PDG | $1.09\\,^{+0.25}_{-0.24}$ | | pdgLive |\nL12: Belle | $0.72\\,^{+0.27}_{-0.25} \\pm0.11$ | 1.88 | Phys.Rev.Lett. 110, 131801 (2013) | Hadronic tagging method.\nL13: Belle | $1.25 \\pm0.28 \\pm0.27$ | 0.11 | Phys.Rev.D 92, 051102 (2015) | Semileptonic tagging method.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "pdg_2025_average",
+        "source_url": "https://pdgapi.lbl.gov/summaries/S041.184",
+        "snapshot_path": "flavor_catalog/references/B009/pdg2025_btaunu_api.txt",
+        "sha256": "sha256:7e0c8745233bb0ac010ee8d85386ba9b6311015e32968d69dba51f0641e05939",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 1.09 +- +0.25/-0.24 10^-4 branching fraction",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: description: B+ --> tau+ nu_tau\nL10: section: Semileptonic and leptonic modes\nL11: pdg_values:\nL12:   value: 1.09376418135583E-4\nL13:   error_positive: 2.46801309137533E-5\nL14:   error_negative: 2.36425623126656E-5\nL15:   value_text: \"(1.09+-0.24)E-4\"\n"
+              },
+              {
+                "line_number": 15,
+                "context": "L12:   value: 1.09376418135583E-4\nL13:   error_positive: 2.46801309137533E-5\nL14:   error_negative: 2.36425623126656E-5\nL15:   value_text: \"(1.09+-0.24)E-4\"\nL16:   scale_factor: 1.178431\nL17:   type: OUR AVERAGE\nL18:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "sm_prediction",
+        "source_url": "https://www.utfit.org/foswiki/bin/view/UTfit/ResultsSummer2024SM",
+        "snapshot_path": "flavor_catalog/references/B009/utfit_summer2024_btaunu.txt",
+        "sha256": "sha256:c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 0.865 +- 0.041 10^-4 branching fraction",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: Parameter: B(B\\rightarrow\\tau\\nu) \\cdot 10^{4}\nL12: Input value: 1.06 \\pm 0.19\nL13: Full fit: 0.872 \\pm 0.041\nL14: SM Prediction: 0.865 \\pm 0.041\nL15: Pull: 1.0\nL16:\nL17: Interpretation for this catalog entry:\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15: Pull: 1.0\nL16:\nL17: Interpretation for this catalog entry:\nL18: UTfit quotes the B -> tau nu branching fraction in units of 10^-4. The SM prediction used here is therefore (0.865 +- 0.041) x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[0]",
+        "source_url": "https://arxiv.org/abs/1208.4678",
+        "snapshot_path": "flavor_catalog/references/B009/belle2013_arxiv1208_4678.txt",
+        "sha256": "sha256:34fba2f4ff096b66dbb6bcb182d154df731b46b2c0ace0d269f30d30e83f1a69",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belle2013_arxiv1208_4678 = 0.72 +- +0.27/-0.25 stat, 0.11 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The Belle analysis uses the full Upsilon(4S) data sample containing 772 x 10^6 BBbar pairs. Events are tagged by reconstructing one B meson in hadronic final states, and B- -> tau- nu_tau-bar candidates are detected in the recoil.\nL12:\nL13: The abstract reports evidence with a significance of 3.0 standard deviations including systematic errors and measures\nL14: B(B- -> tau- nu_tau-bar) = [0.72^{+0.27}_{-0.25}(stat) +/- 0.11(syst)] x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[1]",
+        "source_url": "https://arxiv.org/abs/1503.05613",
+        "snapshot_path": "flavor_catalog/references/B009/belle2015_arxiv1503_05613.txt",
+        "sha256": "sha256:aa5550faa3fc2752f0ae6ce0d3a0fe0ba154a4d4bd05bcec6f8754c02297281e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belle2015_arxiv1503_05613 = 1.25 +- 0.28 stat, 0.27 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The Belle analysis uses a data sample of 772 x 10^6 BBbar pairs collected at the Y(4S) resonance. The accompanying B meson is reconstructed in a semileptonic decay and the recoiling B candidate is detected in B^+ -> tau^+ nu_tau.\nL12:\nL13: The abstract reports\nL14: BR(B^+ -> tau^+ nu_tau) = [1.25 +- 0.28 (stat.) +- 0.27 (syst.)] x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[2]",
+        "source_url": "https://arxiv.org/abs/2502.04885",
+        "snapshot_path": "flavor_catalog/references/B009/belleii2025_arxiv2502_04885.txt",
+        "sha256": "sha256:8aed992571791c691faeb3ee65798c7bde8794603b683f2d3d38418b3aa264e6",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belleii2025_arxiv2502_04885 = 1.24 +- 0.41 stat, 0.19 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: The Belle II analysis uses (387 +- 6) x 10^6 Upsilon(4S) events collected between 2019 and 2022. It reconstructs the accompanying B- meson with hadronic tagging and identifies B^+ -> tau^+ nu_tau candidates in the recoil.\nL13:\nL14: The abstract reports evidence at 3.0 standard deviations, including systematic uncertainties, and measures\nL15: B(B^+ -> tau^+ nu_tau) = [1.24 +- 0.41 (stat.) +- 0.19 (syst.)] x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[3]",
+        "source_url": "https://arxiv.org/abs/1207.0698",
+        "snapshot_path": "flavor_catalog/references/B009/babar2013_arxiv1207_0698.txt",
+        "sha256": "sha256:eb7d51abe66f1efb067f8d38563d34d3e78f649ed79c3b7dc9cf4ea8f2ce323b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "babar2013_arxiv1207_0698 = 1.83 +- +0.53/-0.49 stat, 0.24 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The BaBar analysis searches for B+ -> tau+ nu using 467.8 x 10^6 BB pairs collected at the Y(4S), with one B- completely reconstructed in hadronic decay modes. Tau+ modes include e+ nu nu, mu+ nu nu, pi+ nu, and rho+ nu.\nL12:\nL13: The abstract reports a 3.8 sigma excess including systematic uncertainties and a branching-fraction central value\nL14: B(B+ -> tau+ nu) = (1.83^{+0.53}_{-0.49}(stat.) +/- 0.24(syst.)) x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[4]",
+        "source_url": "https://arxiv.org/abs/0912.2453",
+        "snapshot_path": "flavor_catalog/references/B009/babar2010_arxiv0912_2453.txt",
+        "sha256": "sha256:0e3378f2fc0ef5c4640d50c3a8faeef92bc14ea6c4f22eb082fa15bf94db86be",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "babar2010_arxiv0912_2453 = 1.7 +- 0.80 stat, 0.20 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The BaBar analysis searches for B+ -> l+ nu_l in (458.9 +- 5.1) x 10^6 BBbar pairs, using B+B- events where one B meson is reconstructed as B- -> D0 l- nu X.\nL12:\nL13: The abstract reports, using the Feldman-Cousins method,\nL14: B(B+ -> tau+ nu) = (1.7 +- 0.8 +- 0.2) x 10^-4,\nL15: excluding zero at 2.3 sigma.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

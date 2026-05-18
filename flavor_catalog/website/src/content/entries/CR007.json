@@ -288,5 +288,90 @@
   },
   "source_yaml": "flavor_catalog/processes/collider_rs/CR007.yaml",
   "source_tex": "flavor_catalog/processes/collider_rs/CR007.tex",
-  "worklog_path": "flavor_catalog/worklogs/CR007/"
+  "worklog_path": "flavor_catalog/worklogs/CR007/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 1
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:CR007:RS_graviton_diphoton_mass_kMpl_0p1",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+        "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+        "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(G_KK^(1)) > 4.8 TeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR007:RS_graviton_dilepton_mass_kMpl_0p1",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+        "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+        "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(G_KK^(1)) > 4.78 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8:       Here we list limits for the value of the warp parameter k/M P = 0.1.\nL9:\nL10: VALUE (TeV)            CL%          DOCUMENT ID               TECN      COMMENT\nL11: >4.78             95              1 SIRUNYAN   21N CMS p p                   → G → e + e − , µ+ µ−\nL12: • • • We do not use the following data for averages, ﬁts, limits,            etc. • • •\nL13:                              2 HAYRAPETY...24AE CMS p p                      →   G → HH\nL14: >4.8              95         3 HAYRAPETY...24AJ CMS p p                      →   G → γγ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR007:bulk_graviton_diboson_mass_kMpl_0p5",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+        "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+        "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_converted_fallback",
+            "anchor_string": "> 1400 GeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 86,
+                "context": "L83:  5 TUMASYAN 23AP use 138 fb−1 of data from p p collisions at √s = 13 TeV to search\nL84:    for W W , Z Z diboson resonances in q q q q ﬁnal states. See their Figure 7 for the limit\nL85:    on the cross section times branching fraction as a function of the KK graviton mass.\nL86:    Assuming k/M P = 0.5, a graviton mass is excluded below 1400 GeV. This updates the\nL87:    result of SIRUNYAN 20Q.\nL88:  6 AAD 22F use 126–139 fb−1 of data from p p collisions at √s = 13 TeV to search for\nL89:    Higgs boson pair production in the b b b b ﬁnal state. See their Figure 14 for limits on the"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2018:CR007:bulk_graviton_combined_mass_kMpl_1",
+        "source_url": "https://arxiv.org/abs/1808.02380",
+        "snapshot_path": "flavor_catalog/references/CR007/atlas_2018_combination_arxiv1808_02380.txt",
+        "sha256": "sha256:1ae94abf3957a5f0fa94fd963e3972da7c22cdd0e0760a54332e4f2745c4cca4",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(G_KK) > 2.3 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2018-09-28T19:17:59Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/1808.02380v2\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/1808.02380v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>Searches for new heavy resonances decaying into different pairings of $W$, $Z$, or Higgs bosons, as well as directly into leptons, are presented using a data sample corresponding to 36.1fb$^{-1}$ of $pp$ collisions at $\\sqrt{s}$ = 13 TeV collected during 2015 and 2016 with the ATLAS detector at the CERN Large Hadron Collider. Analyses selecting bosonic decay modes in the $qqqq$, $ννqq$, $\\ellνqq$, $\\ell\\ell qq$, $\\ellν\\ellν$, $\\ell\\ellνν$, $\\ellν\\ell\\ell$, $\\ell\\ell\\ell\\ell$, $qqbb$, $ννbb$, $\\ellνbb$, and $\\ell\\ell bb$ final states are combined, searching for a narrow-width resonance. Likewise, analyses selecting the leptonic $\\ellν$ and $\\ell\\ell$ final states are also combined. These two sets of analyses are then further combined. No significant deviation from the Standard Model predictions is observed. Three benchmark models are tested: a model predicting the existence of a new heavy scalar singlet, a simplified model predicting a heavy vector-boson triplet, and a bulk Randall-Sundrum model with a heavy spin-2 Kaluza-Klein excitation of the graviton. Cross-section limits are set at the 95% confidence level using an asymptotic approximation and are compared with predictions for the benchmark models. These limits are also expressed in terms of constraints on couplings of the heavy vector-boson triplet to quarks, leptons, and the Higgs boson. The data exclude a heavy vector-boson triplet with mass below 5.5 TeV in a weakly coupled scenario and 4.5 TeV in a strongly coupled scenario, as well as a Kaluza-Klein graviton with mass below 2.3 TeV.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2018-08-07T14:08:32Z</published>\nL19:     <arxiv:comment>48 pages in total, author list starting at page 32, 11 figures, 10 tables, submitted to Phys. Rev. D. All figures and tables, including auxiliary figures and tables, are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2017-31/</arxiv:comment>"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

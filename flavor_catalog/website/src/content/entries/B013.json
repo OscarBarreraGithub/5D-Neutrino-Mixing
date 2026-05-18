@@ -365,5 +365,291 @@
   },
   "source_yaml": "flavor_catalog/processes/secondary/beauty/B013.yaml",
   "source_tex": "flavor_catalog/processes/secondary/beauty/B013.tex",
-  "worklog_path": "flavor_catalog/worklogs/B013/"
+  "worklog_path": "flavor_catalog/worklogs/B013/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 10,
+      "AMBIGUOUS": 3,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "branching_fraction_pdg_2025",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-Bs-zero.pdf",
+        "snapshot_path": "flavor_catalog/references/B013/pdg2025_bs_phi_gamma.txt",
+        "sha256": "sha256:59578d3322132cba6e5047f85ec967b78bc4fbc5fa77bfe3124e1eede9269576",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "(3.4 +/- 0.4) x 10^-5",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: Summary-table line:\nL9:   Gamma_159 phi gamma, Delta B = 1 weak neutral-current mode:\nL10:   (3.4 +/- 0.4) x 10^-5\nL11:\nL12: Detailed listing:\nL13:   Gamma(phi gamma) / Gamma_total\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15:   Gamma_159 / Gamma\nL16:   34 +/- 4 OUR AVERAGE\nL17:   DUTTA 15, Belle e+e- -> Upsilon(5S): 36 +/- 5 +/- 7\nL18:   AAIJ 13, LHCb pp at 7 TeV: 33.8 +/- 3.4 +/- 2.0\nL19:\nL20:   DUTTA 15 note:\nL21:   Assumes the fraction of B_s(*) B_s(*) in bbar b events is\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "branching_fraction_hflav_2024",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+        "snapshot_path": "flavor_catalog/references/B013/hflav_rare_decays_dec2024_bs_phi_gamma.txt",
+        "sha256": "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "(34.0 +/- 3.2) x 10^-6",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11:   B(B_s0 -> phi(1020) gamma)\nL12:     LHCb [206]: 33.7 +/- 1.7 +/- 3.0\nL13:     Belle [205]: 36.0 +/- 5.0 +/- 7.0\nL14:     HFLAV average: 34.0 +/- 3.2\nL15:     PDG column: 34.2 +/- 3.6\nL16:\nL17: Footnotes:\n"
+              },
+              {
+                "line_number": 15,
+                "context": "L12:     LHCb [206]: 33.7 +/- 1.7 +/- 3.0\nL13:     Belle [205]: 36.0 +/- 5.0 +/- 7.0\nL14:     HFLAV average: 34.0 +/- 3.2\nL15:     PDG column: 34.2 +/- 3.6\nL16:\nL17: Footnotes:\nL18:   LHCb [206] uses B(B0 -> K*(892)0 gamma).\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "branching_fraction_hflav_2024.average_inputs[0]",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+        "snapshot_path": "flavor_catalog/references/B013/hflav_rare_decays_dec2024_bs_phi_gamma.txt",
+        "sha256": "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "LHCb AAIJ 13 = (3.37 +- 0.17)e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Parameter [10^-6], Measurements, Average HFLAV, PDG.\nL10:\nL11:   B(B_s0 -> phi(1020) gamma)\nL12:     LHCb [206]: 33.7 +/- 1.7 +/- 3.0\nL13:     Belle [205]: 36.0 +/- 5.0 +/- 7.0\nL14:     HFLAV average: 34.0 +/- 3.2\nL15:     PDG column: 34.2 +/- 3.6\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "branching_fraction_hflav_2024.average_inputs[1]",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+        "snapshot_path": "flavor_catalog/references/B013/hflav_rare_decays_dec2024_bs_phi_gamma.txt",
+        "sha256": "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Belle Dutta 2014/2015 = (3.6 +- 0.5)e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10:\nL11:   B(B_s0 -> phi(1020) gamma)\nL12:     LHCb [206]: 33.7 +/- 1.7 +/- 3.0\nL13:     Belle [205]: 36.0 +/- 5.0 +/- 7.0\nL14:     HFLAV average: 34.0 +/- 3.2\nL15:     PDG column: 34.2 +/- 3.6\nL16:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "s_phigamma_lhcb_2019",
+        "source_url": "https://arxiv.org/abs/1905.06284",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt",
+        "sha256": "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "0.43 +/- 0.30(stat) +/- 0.11(syst)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18:   LHCb at center-of-mass energies of 7 and 8 TeV.\nL19:\nL20:   Measured values:\nL21:     S_phi gamma = 0.43 +/- 0.30 +/- 0.11\nL22:     C_phi gamma = 0.11 +/- 0.29 +/- 0.11\nL23:     A^Delta_phi gamma = -0.67 +0.37 -0.41 +/- 0.17\nL24:   The first uncertainty is statistical and the second systematic. This\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "c_phigamma_lhcb_2019",
+        "source_url": "https://arxiv.org/abs/1905.06284",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt",
+        "sha256": "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "0.11 +/- 0.29(stat) +/- 0.11(syst)",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8: Authors: LHCb Collaboration, R. Aaij et al.\nL9: Report number: LHCb-PAPER-2019-015, CERN-EP-2019-077\nL10: Journal reference: Phys. Rev. Lett. 123, 081802 (2019)\nL11: DOI: 10.1103/PhysRevLett.123.081802\nL12:\nL13: Relevant abstract extract:\nL14:   A time-dependent analysis of the B_s^0 -> phi gamma decay rate is\n"
+              },
+              {
+                "line_number": 21,
+                "context": "L18:   LHCb at center-of-mass energies of 7 and 8 TeV.\nL19:\nL20:   Measured values:\nL21:     S_phi gamma = 0.43 +/- 0.30 +/- 0.11\nL22:     C_phi gamma = 0.11 +/- 0.29 +/- 0.11\nL23:     A^Delta_phi gamma = -0.67 +0.37 -0.41 +/- 0.17\nL24:   The first uncertainty is statistical and the second systematic. This\n"
+              },
+              {
+                "line_number": 22,
+                "context": "L19:\nL20:   Measured values:\nL21:     S_phi gamma = 0.43 +/- 0.30 +/- 0.11\nL22:     C_phi gamma = 0.11 +/- 0.29 +/- 0.11\nL23:     A^Delta_phi gamma = -0.67 +0.37 -0.41 +/- 0.17\nL24:   The first uncertainty is statistical and the second systematic. This\nL25:   is the first measurement of S and C in radiative B_s^0 decays, and\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "a_delta_phigamma_lhcb_2019",
+        "source_url": "https://arxiv.org/abs/1905.06284",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt",
+        "sha256": "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "-0.67 +0.37 -0.41(stat) +/- 0.17(syst)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:   Measured values:\nL21:     S_phi gamma = 0.43 +/- 0.30 +/- 0.11\nL22:     C_phi gamma = 0.11 +/- 0.29 +/- 0.11\nL23:     A^Delta_phi gamma = -0.67 +0.37 -0.41 +/- 0.17\nL24:   The first uncertainty is statistical and the second systematic. This\nL25:   is the first measurement of S and C in radiative B_s^0 decays, and\nL26:   the results are consistent with Standard Model predictions.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "belle_2014_branching_fraction_input",
+        "source_url": "https://arxiv.org/abs/1411.7771",
+        "snapshot_path": "flavor_catalog/references/B013/belle_2014_bsphigamma_arxiv.txt",
+        "sha256": "sha256:7e36d4d73efac319cbcf4b1711efa18aa872f7e786652c230acabeeb411688a3",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "(3.6 +/- 0.5(stat) +/- 0.3(syst) +/- 0.6(f_s)) x 10^-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:   B_s^0 -> phi gamma using 121.4 fb^-1 collected at the Upsilon(5S).\nL16:\nL17:   B(B_s^0 -> phi gamma) =\nL18:     (3.6 +/- 0.5(stat.) +/- 0.3(syst.) +/- 0.6(f_s)) x 10^-5,\nL19:   where f_s is the fraction of B_s(*) B_s(*) in bbar b events.\nL20:\nL21:   Belle observes no statistically significant B_s^0 -> gamma gamma\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "lhcb_2024_tensor_fraction",
+        "source_url": "https://arxiv.org/abs/2406.00235",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bskkgamma_arxiv.txt",
+        "sha256": "sha256:7cbfba098c45a5d672a3eae00ea4f912302fc62f10ee3d8d59b583d0c96d3f96",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "16.8 +/- 0.5(stat) +/- 0.7(syst)%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16:   accounts for almost 70% of the decay rate.\nL17:\nL18:   The overall tensor contribution is measured as\nL19:     F_{f2} = 16.8 +/- 0.5(stat.) +/- 0.7(syst.)%.\nL20:\nL21:   For the preferred solution,\nL22:     B(B_s^0 -> f2'(1525) gamma) / B(B_s^0 -> phi gamma)\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "lhcb_2024_f2prime_ratio",
+        "source_url": "https://arxiv.org/abs/2406.00235",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bskkgamma_arxiv.txt",
+        "sha256": "sha256:7cbfba098c45a5d672a3eae00ea4f912302fc62f10ee3d8d59b583d0c96d3f96",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "19.4 +0.9 -0.8(stat) +1.4 -0.5(syst) +/- 0.5(B)%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:\nL21:   For the preferred solution,\nL22:     B(B_s^0 -> f2'(1525) gamma) / B(B_s^0 -> phi gamma)\nL23:     = 19.4 +0.9 -0.8(stat.) +1.4 -0.5(syst.) +/- 0.5(B)%.\nL24:   This is the first observation of B_s^0 -> f2'(1525) gamma.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "lhcb_2024_phi_ee_at2",
+        "source_url": "https://arxiv.org/abs/2411.10219",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt",
+        "sha256": "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "-0.045 +/- 0.235(stat) +/- 0.014(syst)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:   to be less than 11.5% at 90% confidence level.\nL21:\nL22:   A_T^{Re CP} = 0.116 +/- 0.155 +/- 0.006.\nL23:   A_T^{(2)} = -0.045 +/- 0.235 +/- 0.014.\nL24:   A_T^{Im CP} = 0.002 +/- 0.247 +/- 0.016.\nL25:   The transverse asymmetries are sensitive to virtual-photon\nL26:   polarisation and are consistent with Standard Model predictions.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "lhcb_2024_phi_ee_atimcp",
+        "source_url": "https://arxiv.org/abs/2411.10219",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt",
+        "sha256": "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "0.002 +/- 0.247(stat) +/- 0.016(syst)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21:\nL22:   A_T^{Re CP} = 0.116 +/- 0.155 +/- 0.006.\nL23:   A_T^{(2)} = -0.045 +/- 0.235 +/- 0.014.\nL24:   A_T^{Im CP} = 0.002 +/- 0.247 +/- 0.016.\nL25:   The transverse asymmetries are sensitive to virtual-photon\nL26:   polarisation and are consistent with Standard Model predictions.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "lhcb_2024_phi_ee_fl_limit",
+        "source_url": "https://arxiv.org/abs/2411.10219",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt",
+        "sha256": "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "< 11.5% at 90% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   0.0009 to 0.2615 GeV^2/c^4.\nL18:\nL19:   The longitudinal polarisation fraction of the phi meson is measured\nL20:   to be less than 11.5% at 90% confidence level.\nL21:\nL22:   A_T^{Re CP} = 0.116 +/- 0.155 +/- 0.006.\nL23:   A_T^{(2)} = -0.045 +/- 0.235 +/- 0.014.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -132,5 +132,228 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B034.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B034.tex",
-  "worklog_path": "flavor_catalog/worklogs/B034/"
+  "worklog_path": "flavor_catalog/worklogs/B034/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 9,
+      "AMBIGUOUS": 3,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "pdg_beta_s_b_to_ssbars",
+        "source_url": "https://pdg.lbl.gov/encoder_listings/s086.pdf",
+        "snapshot_path": "flavor_catalog/references/B034/pdg2025_bs_phiphi_cp.txt",
+        "sha256": "sha256:4c88ea2de1ba29c5435a80bae06cea3f6c2c07bd3e882b18664fb05f25a027ee",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "observables[0].fallback_value_uncertainty",
+            "anchor_string": "beta_s(b -> s sbar s) = 3.7 +- 3.5 10^-2 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: Relevant extracted values:\nL9: - PDG table \"CP Violation phase beta_s (b -> s sbar s)\" reports\nL10:   beta_s = (3.7 +/- 3.5) x 10^-2 rad, document AAIJ 23AT, LHCb,\nL11:   pp at 7, 8, 13 TeV.\nL12: - PDG note for AAIJ 23AT reports phi_s^{s sbar s} = -0.074 +/- 0.069 rad\nL13:   and |lambda| = 1.009 +/- 0.030.\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[1].fallback_value_uncertainty",
+            "anchor_string": "phi_s^{s sbar s}, LHCb combined note = -0.074 +- 0.069 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - PDG table \"CP Violation phase beta_s (b -> s sbar s)\" reports\nL10:   beta_s = (3.7 +/- 3.5) x 10^-2 rad, document AAIJ 23AT, LHCb,\nL11:   pp at 7, 8, 13 TeV.\nL12: - PDG note for AAIJ 23AT reports phi_s^{s sbar s} = -0.074 +/- 0.069 rad\nL13:   and |lambda| = 1.009 +/- 0.030.\nL14: - Measurement note: time-dependent fit to B_s^0 -> phi phi decays, assuming\nL15:   independence of the helicity of the phi phi decay.\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[2].fallback_value_uncertainty",
+            "anchor_string": "|lambda|, LHCb combined note = 1.009 +- 0.03",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10:   beta_s = (3.7 +/- 3.5) x 10^-2 rad, document AAIJ 23AT, LHCb,\nL11:   pp at 7, 8, 13 TeV.\nL12: - PDG note for AAIJ 23AT reports phi_s^{s sbar s} = -0.074 +/- 0.069 rad\nL13:   and |lambda| = 1.009 +/- 0.030.\nL14: - Measurement note: time-dependent fit to B_s^0 -> phi phi decays, assuming\nL15:   independence of the helicity of the phi phi decay.\nL16:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "lhcb2023_precision_and_combination",
+        "source_url": "https://cds.cern.ch/record/2857424",
+        "snapshot_path": "flavor_catalog/references/B034/lhcb2023_bs_phiphi_cp_cds.txt",
+        "sha256": "sha256:b003cf5fbbdaef3497b6a8c1d84e0deabd619ee23da70a219fd4558c5ce13e5f",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "observables[0].fallback_value_uncertainty",
+            "anchor_string": "phi_s^{s sbar s}, helicity-independent 2023 fit = -0.042 +- 0.075 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: - Flavor-tagged time-dependent angular analysis of B_s^0 -> phi phi using\nL17:   pp collision data at sqrt(s) = 13 TeV, integrated luminosity 6 fb^-1.\nL18: - Helicity-independent fit:\nL19:   phi_s^{s sbar s} = -0.042 +/- 0.075(stat) +/- 0.009(syst) rad.\nL20:   |lambda| = 1.004 +/- 0.030(stat) +/- 0.009(syst).\nL21: - Polarization-dependent determinations showed no evidence for polarization\nL22:   dependence.\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[1].fallback_value_uncertainty",
+            "anchor_string": "|lambda|, helicity-independent 2023 fit = 1.004 +- 0.03",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   pp collision data at sqrt(s) = 13 TeV, integrated luminosity 6 fb^-1.\nL18: - Helicity-independent fit:\nL19:   phi_s^{s sbar s} = -0.042 +/- 0.075(stat) +/- 0.009(syst) rad.\nL20:   |lambda| = 1.004 +/- 0.030(stat) +/- 0.009(syst).\nL21: - Polarization-dependent determinations showed no evidence for polarization\nL22:   dependence.\nL23: - Combination with previous LHCb 7 and 8 TeV measurements:\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[2].fallback_value_uncertainty",
+            "anchor_string": "phi_s^{s sbar s}, LHCb Run 1 + Run 2 combination = -0.074 +- 0.069 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: - Polarization-dependent determinations showed no evidence for polarization\nL22:   dependence.\nL23: - Combination with previous LHCb 7 and 8 TeV measurements:\nL24:   phi_s^{s sbar s} = -0.074 +/- 0.069 rad.\nL25:   |lambda| = 1.009 +/- 0.030.\nL26: - CDS records this as the most precise study of time-dependent CP violation\nL27:   in a penguin-dominated B meson decay, consistent with CP symmetry and SM\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[3].fallback_value_uncertainty",
+            "anchor_string": "|lambda|, LHCb Run 1 + Run 2 combination = 1.009 +- 0.03",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22:   dependence.\nL23: - Combination with previous LHCb 7 and 8 TeV measurements:\nL24:   phi_s^{s sbar s} = -0.074 +/- 0.069 rad.\nL25:   |lambda| = 1.009 +/- 0.030.\nL26: - CDS records this as the most precise study of time-dependent CP violation\nL27:   in a penguin-dominated B meson decay, consistent with CP symmetry and SM\nL28:   predictions.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "hflav2024_branching_fraction",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/May2024/html/Bs/BR_Bs0_phi_phi.html",
+        "snapshot_path": "flavor_catalog/references/B034/hflav2024_bs_phiphi_branching.txt",
+        "sha256": "sha256:0109068c253de87b8482a37a48ae8910de98957e4b3067c4dae21704f92f5b55",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "observables[0].fallback_value_uncertainty",
+            "anchor_string": "B(B_s^0 -> phi(1020) phi(1020)) = 1.85 +- 0.14 10^-5",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Snapshot type: Minimal HFLAV HTML table extract.\nL7:\nL8: Relevant extracted values:\nL9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\n"
+              },
+              {
+                "line_number": 11,
+                "context": "L8: Relevant extracted values:\nL9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\n"
+              },
+              {
+                "line_number": 12,
+                "context": "L9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\nL15:   B(B_s^0 -> J/psi phi(1020)), Phys. Rev. Lett. 107,261802 (2011).\n"
+              },
+              {
+                "line_number": 14,
+                "context": "L11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\nL15:   B(B_s^0 -> J/psi phi(1020)), Phys. Rev. Lett. 107,261802 (2011).\nL16:\nL17: Licensing note:\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[1].fallback_value_uncertainty",
+            "anchor_string": "LHCb input B(B_s^0 -> phi phi) = 1.85 +- 0.05 10^-5",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Snapshot type: Minimal HFLAV HTML table extract.\nL7:\nL8: Relevant extracted values:\nL9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\n"
+              },
+              {
+                "line_number": 11,
+                "context": "L8: Relevant extracted values:\nL9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\n"
+              },
+              {
+                "line_number": 12,
+                "context": "L9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\nL15:   B(B_s^0 -> J/psi phi(1020)), Phys. Rev. Lett. 107,261802 (2011).\n"
+              },
+              {
+                "line_number": 14,
+                "context": "L11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\nL15:   B(B_s^0 -> J/psi phi(1020)), Phys. Rev. Lett. 107,261802 (2011).\nL16:\nL17: Licensing note:\n"
+              }
+            ]
+          },
+          {
+            "anchor_field": "observables[2].fallback_value_uncertainty",
+            "anchor_string": "CDF input B(B_s^0 -> phi phi) = 1.85 +- 0.15 10^-5",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Snapshot type: Minimal HFLAV HTML table extract.\nL7:\nL8: Relevant extracted values:\nL9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\n"
+              },
+              {
+                "line_number": 11,
+                "context": "L8: Relevant extracted values:\nL9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\n"
+              },
+              {
+                "line_number": 12,
+                "context": "L9: - Average B(B_s^0 -> phi(1020) phi(1020)) = (1.85 +/- 0.14) x 10^-5.\nL10: - HFLAV page gives Delta chi^2 = 8.10 and p = 0.52 with ndf = 9.\nL11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\nL15:   B(B_s^0 -> J/psi phi(1020)), Phys. Rev. Lett. 107,261802 (2011).\n"
+              },
+              {
+                "line_number": 14,
+                "context": "L11: - PDG row on the same HFLAV page: (1.85 +/- 0.14) x 10^-5.\nL12: - LHCb input: (1.85 +/- 0.05 +/- 0.16) x 10^-5 using\nL13:   B(B^0 -> phi(1020) K*(892)^0), JHEP 10,053 (2015).\nL14: - CDF input: (1.85 +/- 0.15 +/- 0.22) x 10^-5 using\nL15:   B(B_s^0 -> J/psi phi(1020)), Phys. Rev. Lett. 107,261802 (2011).\nL16:\nL17: Licensing note:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "previous_lhcb_inputs.values[0]",
+        "source_url": "https://arxiv.org/abs/1407.2222",
+        "snapshot_path": "flavor_catalog/references/B034/lhcb2014_bs_phiphi_cp_arxiv.txt",
+        "sha256": "sha256:21b1b1b7fa258e6648702118626d488c61bea102e3a423fb237194d4321a8b94",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= -0.17 +- 0.15 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: - Data sample: 3.0 fb^-1 collected with LHCb.\nL17: - Signal yield: approximately 4000 B_s^0 -> phi phi decays.\nL18: - CP-violating phase:\nL19:   phi_s = -0.17 +/- 0.15(stat) +/- 0.03(syst) rad.\nL20: - Triple-product asymmetries:\nL21:   A_U = -0.003 +/- 0.017(stat) +/- 0.006(syst).\nL22:   A_V = -0.017 +/- 0.017(stat) +/- 0.006(syst).\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "previous_lhcb_inputs.values[1]",
+        "source_url": "https://cds.cern.ch/record/2684085",
+        "snapshot_path": "flavor_catalog/references/B034/lhcb2019_bs_phiphi_cp_cds.txt",
+        "sha256": "sha256:37b596af8f6720a84acb6f7730c8e361cd6175795bb71690a8376bdb21b5c6b3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= -0.073 +- 0.115 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   8 TeV in 2012, and 13 TeV in 2015 and 2016.\nL18: - Signal yield: around 9000 B_s^0 -> phi phi decays.\nL19: - Helicity-independent phase:\nL20:   phi_s^{s sbar s} = -0.073 +/- 0.115(stat) +/- 0.027(syst) rad.\nL21: - Helicity-independent direct-CP parameter:\nL22:   |lambda| = 0.99 +/- 0.05(stat) +/- 0.01(syst).\nL23: - B^0 -> phi phi limit:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

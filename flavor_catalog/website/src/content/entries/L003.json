@@ -150,5 +150,35 @@
   },
   "source_yaml": "flavor_catalog/processes/charged_lepton/L003.yaml",
   "source_tex": "flavor_catalog/processes/charged_lepton/L003.tex",
-  "worklog_path": "flavor_catalog/worklogs/L003/"
+  "worklog_path": "flavor_catalog/worklogs/L003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "Gamma(mu- Au -> e- Au(g.s.)) / Gamma_capture(mu- Au)",
+        "source_url": "https://juser.fz-juelich.de/record/55087",
+        "snapshot_path": "flavor_catalog/references/L003/sindrumii_2006_gold_juser.txt",
+        "sha256": "9362b4a879d3d50d6f686901b4816e0e390b7076534e24d119c23340196b68a5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7e-13",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: \nL16: Minimal extracted value:\nL17: The record abstract reports a search for mu-e conversion in muonic gold with\nL18: Gamma(mu- Au -> e- Au(g.s.)) / Gamma_capture(mu- Au) < 7 x 10^-13 at 90% C.L.\nL19: \nL20: Use in L003:\nL21: This is the current published all-target benchmark limit cited by Mu2e and\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

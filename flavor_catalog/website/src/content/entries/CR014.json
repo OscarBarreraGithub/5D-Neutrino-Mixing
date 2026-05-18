@@ -451,5 +451,89 @@
   },
   "source_yaml": "flavor_catalog/processes/collider_rs/CR014.yaml",
   "source_tex": "flavor_catalog/processes/collider_rs/CR014.tex",
-  "worklog_path": "flavor_catalog/worklogs/CR014/"
+  "worklog_path": "flavor_catalog/worklogs/CR014/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 2
+    },
+    "sources": [
+      {
+        "block_key": "CMSB2G25005:CR014:top_philic_vector_50pct_width_excluded_up_to",
+        "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/preliminary-results/B2G-25-005/index.html",
+        "snapshot_path": "flavor_catalog/references/CR014/cms_b2g_25_005_public_result.txt",
+        "sha256": "sha256:a747064ac47671770e48737335f9a25f718e0ab024bc7ea0bde73e48bf1beb34",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(Zprime) excluded up to 850 GeV (observed)",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 82,
+                "context": "L79:\nL80:\nL81:  Abstract:\nL82:  A search for a heavy resonance in four top quark events is presented, and interpreted in models featuring a new vector, scalar, or pseudoscalar boson which interacts exclusively with top quarks. Proton-proton collision data at centre-of-mass energies of 13.0 TeV and 13.6 TeV are analysed, corresponding to integrated luminosities of 138 fb$ ^{-1} $ and 35 fb$ ^{-1} $, respectively. Events with two leptons (electrons or muons) and jets are selected. The mass of the heavy resonance is reconstructed from a pair of jets that are formed using a variable-radius jet clustering algorithm. A machine learning approach is used to identify if these jets originate from top quarks that decay fully hadronically. The dominant background from misidentified jets is estimated from data as a function of the invariant dijet mass. Upper limits are set on the resonance production cross section for resonance masses between 500 GeV and 4 TeV and relative widths ranging from 4 to 50%. Resonances with 50% relative width are excluded at 95% confidence level up to masses of 850 GeV, with an expected exclusion limit of 1000 GeV.\nL83:\nL84:\nL85:"
+              },
+              {
+                "line_number": 726,
+                "context": "L723:\nL724:\nL725:\nL726:  A search for a heavy resonance is presented, examining models where a new boson interacts exclusively with top quarks, resulting in events comprising four top quarks. Two proton-proton collision data sets are analysed corresponding to 138 fb$ ^{-1} $ and 35 fb$ ^{-1} $ for centre-of-mass energies of 13 and 13.6 TeV, respectively. The mass of the new boson is reconstructed from a pair of variable-radius jets with a boosted decision tree used for identification of hadronically decaying top quarks. The additional top quarks are assumed to decay each into a b quark, a lepton (electron or muon), and a neutrino, resulting in a signature with two leptons, two b quark jets, and two large-radius jets. Contributions from background processes are estimated using a data-driven approach. Exclusion limits on the production cross section are determined for boson masses between 500 GeV and 4 TeV and relative decay widths ranging between 4 and 50% of the mediator mass. The analysis is sensitive to scalar, pseudoscalar, or vector bosons decaying to $ \\mathrm{t} \\overline{\\mathrm{t}} $, and further interpretations are provided in the context of extended Higgs sectors and models with axion-like particles. For the 50% width hypothesis, vector mediators with masses up to 850 GeV are excluded (1000 GeV expected). The largest deviation from the background hypothesis for the vector scenario has a local significance of 2.2 standard deviations, with similar results for the scalar and pseudoscalar mediators. The obtained upper limits are the first results from the CMS collaboration for this signature that incorporates a proton-proton collision data set at 13.6 TeV and the first dedicated search of this type in the two-lepton channel.\nL727:\nL728:\nL729:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR014:ATLAS_4top_cross_section",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-top-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR014/pdg2025_top_four_top_extract.txt",
+        "sha256": "sha256:6320d3d26384909b9e549fcd6be668086f5a8831d3c1c9f4bbe016597cf17e39",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "22.5^{+6.6}_{-5.5} fb",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR014:CMS_4top_cross_section",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-top-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/CR014/pdg2025_top_four_top_extract.txt",
+        "sha256": "sha256:6320d3d26384909b9e549fcd6be668086f5a8831d3c1c9f4bbe016597cf17e39",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "17.7^{+4.4}_{-4.0} fb",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2024:CR014:top_philic_Zprime_cross_section_limit_range",
+        "source_url": "https://arxiv.org/abs/2304.01678",
+        "snapshot_path": "flavor_catalog/references/CR014/atlas_top_philic_2024_arxiv2304_01678.txt",
+        "sha256": "sha256:cb4204207db4772695722191e970027394899cde25cd6a1034c6a91617428c53",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "observed 95% CL upper-limit range 21-119 fb",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2024-04-16T09:58:42Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/2304.01678v2\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/2304.01678v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>A search for the associated production of a heavy resonance with a top-quark or a top-antitop-quark pair, and decaying into a $t\\bar{t}$ pair is presented. The search uses the data recorded by the ATLAS detector in $pp$ collisions at $\\sqrt{s}= 13$ TeV at the Large Hadron Collider during the years 2015-2018, corresponding to an integrated luminosity of 139 fb$^{-1}$. Events containing exactly one electron or muon are selected. The two hadronically decaying top quarks from the resonance decay are reconstructed using jets clustered with a large radius parameter of $R=1$. The invariant mass spectrum of the two top quark candidates is used to search for a resonance signal in the range of 1.0 TeV to 3.2 TeV. The presence of a signal is examined using an approach with minimal model dependence followed by a model-dependent interpretation. No significant excess is observed over the background expectation. Upper limits on the production cross section times branching ratio at 95% confidence level are provided for a heavy $Z^\\prime$ boson based on a simplified model, for $Z^\\prime$ mass between 1.0 TeV and 3.0 TeV. The observed (expected) limits range from 21 (14) fb to 119 (86) fb depending on the choice of model parameters.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2023-04-04T10:07:13Z</published>\nL19:     <arxiv:comment>47 pages in total, author list starting page 30, 9 figures, 1 table. All figures including auxiliary figures will be available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2022-14/</arxiv:comment>"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

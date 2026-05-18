@@ -148,5 +148,255 @@
   },
   "source_yaml": "flavor_catalog/processes/top_higgs_ew/EW003.yaml",
   "source_tex": "flavor_catalog/processes/top_higgs_ew/EW003.tex",
-  "worklog_path": "flavor_catalog/worklogs/EW003/"
+  "worklog_path": "flavor_catalog/worklogs/EW003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 12,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG 2024 |V_cb| inclusive",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "42.2 +/- 0.5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Local snapshot policy: minimal text extract only; no publisher PDF tracked.\nL7:\nL8: Extracted numerical values:\nL9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_cb| exclusive",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "39.8 +/- 0.6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: Extracted numerical values:\nL9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_cb| scaled average",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "41.1 +/- 1.2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8: Extracted numerical values:\nL9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_ub| inclusive",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "4.13",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\nL15: - PDG also quotes |Vub|/|Vcb| = 0.098 +/- 0.006 inclusive and 0.093 +/- 0.004 exclusive.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_ub| exclusive",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.7",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\nL15: - PDG also quotes |Vub|/|Vcb| = 0.098 +/- 0.006 inclusive and 0.093 +/- 0.004 exclusive.\nL16:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_ub| scaled average",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "3.82 +/- 0.2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\nL15: - PDG also quotes |Vub|/|Vcb| = 0.098 +/- 0.006 inclusive and 0.093 +/- 0.004 exclusive.\nL16:\nL17: Relevance note:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HFLAV 2023 preferred inclusive |V_cb|",
+        "source_url": "https://arxiv.org/abs/2411.18639",
+        "snapshot_path": "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt",
+        "sha256": "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "41.97 +/- 0.48",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: Extracted numerical values for semileptonic |Vxb|:\nL9: - HFLAV semileptonic chapter uses experimental results generally available through autumn 2023.\nL10: - Inclusive |Vcb| central value chosen by HFLAV from Finauri-Gambino q2-moment analysis: |Vcb| = (41.97 +/- 0.48) x 10^-3.\nL11: - Alternative inclusive |Vcb| q2 analysis: |Vcb| = (41.69 +/- 0.63) x 10^-3.\nL12: - Exclusive combined fit using Vub/Vcb constraints, B->pi l nu, B->D l nu, B->D* l nu, and Bs->Ds(*) mu nu: |Vub| = (3.43 +/- 0.12) x 10^-3 and |Vcb| = (39.77 +/- 0.46) x 10^-3, with rho(Vub,Vcb)=0.239.\nL13: - The combined exclusive fit has chi2=3.9 for 1 degree of freedom, p(chi2)=4.8%.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HFLAV 2023 combined exclusive |V_cb|",
+        "source_url": "https://arxiv.org/abs/2411.18639",
+        "snapshot_path": "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt",
+        "sha256": "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "39.77 +/- 0.46",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - HFLAV semileptonic chapter uses experimental results generally available through autumn 2023.\nL10: - Inclusive |Vcb| central value chosen by HFLAV from Finauri-Gambino q2-moment analysis: |Vcb| = (41.97 +/- 0.48) x 10^-3.\nL11: - Alternative inclusive |Vcb| q2 analysis: |Vcb| = (41.69 +/- 0.63) x 10^-3.\nL12: - Exclusive combined fit using Vub/Vcb constraints, B->pi l nu, B->D l nu, B->D* l nu, and Bs->Ds(*) mu nu: |Vub| = (3.43 +/- 0.12) x 10^-3 and |Vcb| = (39.77 +/- 0.46) x 10^-3, with rho(Vub,Vcb)=0.239.\nL13: - The combined exclusive fit has chi2=3.9 for 1 degree of freedom, p(chi2)=4.8%.\nL14: - HFLAV states that the exclusive combined |Vub| differs from inclusive GGOU |Vub| = (4.06 +/- 0.12 +/- 0.11) x 10^-3 by about 3 sigma, and exclusive combined |Vcb| differs from inclusive |Vcb| = (41.97 +/- 0.48) x 10^-3 by more than 3 sigma.\nL15: - Inclusive |Vub| framework comparison: BLNP = 4.25 +/- 0.13 +0.19/-0.19, DGE = 3.87 +/- 0.10 +0.09/-0.10, GGOU = 4.06 +/- 0.12 +0.11/-0.11, all in units of 10^-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HFLAV 2023 combined exclusive |V_ub|",
+        "source_url": "https://arxiv.org/abs/2411.18639",
+        "snapshot_path": "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt",
+        "sha256": "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "3.43 +/- 0.12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - HFLAV semileptonic chapter uses experimental results generally available through autumn 2023.\nL10: - Inclusive |Vcb| central value chosen by HFLAV from Finauri-Gambino q2-moment analysis: |Vcb| = (41.97 +/- 0.48) x 10^-3.\nL11: - Alternative inclusive |Vcb| q2 analysis: |Vcb| = (41.69 +/- 0.63) x 10^-3.\nL12: - Exclusive combined fit using Vub/Vcb constraints, B->pi l nu, B->D l nu, B->D* l nu, and Bs->Ds(*) mu nu: |Vub| = (3.43 +/- 0.12) x 10^-3 and |Vcb| = (39.77 +/- 0.46) x 10^-3, with rho(Vub,Vcb)=0.239.\nL13: - The combined exclusive fit has chi2=3.9 for 1 degree of freedom, p(chi2)=4.8%.\nL14: - HFLAV states that the exclusive combined |Vub| differs from inclusive GGOU |Vub| = (4.06 +/- 0.12 +/- 0.11) x 10^-3 by about 3 sigma, and exclusive combined |Vcb| differs from inclusive |Vcb| = (41.97 +/- 0.48) x 10^-3 by more than 3 sigma.\nL15: - Inclusive |Vub| framework comparison: BLNP = 4.25 +/- 0.13 +0.19/-0.19, DGE = 3.87 +/- 0.10 +0.09/-0.10, GGOU = 4.06 +/- 0.12 +0.11/-0.11, all in units of 10^-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "FLAG 2024 B -> D* l nu |V_cb|, Nf=2+1",
+        "source_url": "https://arxiv.org/abs/2411.04268",
+        "snapshot_path": "flavor_catalog/references/EW003/flag_2024_b_semileptonic_lattice.txt",
+        "sha256": "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "39.23(65)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - FLAG 2024 B->pi l nu exclusive average: |Vub| = (3.61 +/- 0.16) x 10^-3 for Nf=2+1.\nL10: - FLAG 2024 B->(pi l nu, tau nu) exclusive average: |Vub| = (3.63 +/- 0.16) x 10^-3 for Nf=2+1.\nL11: - FLAG 2024 B->D l nu exclusive average: |Vcb| = 40.0(1.0) x 10^-3 for Nf=2+1.\nL12: - FLAG 2024 B->D* l nu exclusive averages: |Vcb| = 39.23(65) x 10^-3 for Nf=2+1 and |Vcb| = 39.44(89) x 10^-3 for Nf=2+1+1.\nL13: - FLAG 2024 exclusive global fit shown in the |Vub|-|Vcb| plane: (|Vcb|, |Vub|) = (39.46 +/- 0.53, 3.60 +/- 0.14) x 10^-3 with p-value 0.66.\nL14: - FLAG 2024 comparison inclusive point: (|Vcb|, |Vub|)_incl = (42.16 +/- 0.51, 4.13 +/- 0.26) x 10^-3.\nL15:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "FLAG 2024 B -> pi l nu |V_ub|, Nf=2+1",
+        "source_url": "https://arxiv.org/abs/2411.04268",
+        "snapshot_path": "flavor_catalog/references/EW003/flag_2024_b_semileptonic_lattice.txt",
+        "sha256": "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "3.61 +/- 0.16",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Local snapshot policy: minimal text extract from arXiv source; no publisher PDF tracked.\nL7:\nL8: Extracted numerical values:\nL9: - FLAG 2024 B->pi l nu exclusive average: |Vub| = (3.61 +/- 0.16) x 10^-3 for Nf=2+1.\nL10: - FLAG 2024 B->(pi l nu, tau nu) exclusive average: |Vub| = (3.63 +/- 0.16) x 10^-3 for Nf=2+1.\nL11: - FLAG 2024 B->D l nu exclusive average: |Vcb| = 40.0(1.0) x 10^-3 for Nf=2+1.\nL12: - FLAG 2024 B->D* l nu exclusive averages: |Vcb| = 39.23(65) x 10^-3 for Nf=2+1 and |Vcb| = 39.44(89) x 10^-3 for Nf=2+1+1.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_cb| inclusive-exclusive marginal consistency",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.0",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8: Extracted numerical values:\nL9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

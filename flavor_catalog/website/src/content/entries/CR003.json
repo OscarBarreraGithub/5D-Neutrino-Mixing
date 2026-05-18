@@ -365,5 +365,105 @@
   },
   "source_yaml": "flavor_catalog/processes/collider_rs/CR003.yaml",
   "source_tex": "flavor_catalog/processes/collider_rs/CR003.tex",
-  "worklog_path": "flavor_catalog/worklogs/CR003/"
+  "worklog_path": "flavor_catalog/worklogs/CR003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 2
+    },
+    "sources": [
+      {
+        "block_key": "PDGLive2026:CR003:T_Wb_pair_ATLAS2024",
+        "source_url": "https://pdg.lbl.gov/encoder_listings/q009.pdf",
+        "snapshot_path": "flavor_catalog/references/CR003/pdg_live_q009_tprime_pair_limits.txt",
+        "sha256": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_converted_fallback",
+            "anchor_string": "> 1700 GeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: AAD 24N is based on 140 fb^-1 of pp data at sqrt(s) = 13 TeV. Pair\nL22: production of vector-like t' is searched for in the lepton+jets mode. The\nL23: data are consistent with the SM background predictions and limits are\nL24: obtained for different branching ratios. The >1700 GeV limit is for t' in a\nL25: weak-isospin doublet; the same limits also apply to t' of charge -4/3. The\nL26: >1360 GeV limit is for a singlet model.\nL27:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDGLive2026:CR003:T_singlet_pair_ATLAS2024",
+        "source_url": "https://pdg.lbl.gov/encoder_listings/q009.pdf",
+        "snapshot_path": "flavor_catalog/references/CR003/pdg_live_q009_tprime_pair_limits.txt",
+        "sha256": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_converted_fallback",
+            "anchor_string": "> 1360 GeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: data are consistent with the SM background predictions and limits are\nL24: obtained for different branching ratios. The >1700 GeV limit is for t' in a\nL25: weak-isospin doublet; the same limits also apply to t' of charge -4/3. The\nL26: >1360 GeV limit is for a singlet model.\nL27:\nL28: AAD 23AV is based on 139 fb^-1 of pp data at sqrt(s) = 13 TeV. Pair\nL29: production of vector-like t' is searched for in the dilepton-Z plus jets or"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDGLive2026:CR003:T_Zt_pair_ATLAS2023",
+        "source_url": "https://pdg.lbl.gov/encoder_listings/q009.pdf",
+        "snapshot_path": "flavor_catalog/references/CR003/pdg_live_q009_tprime_pair_limits.txt",
+        "sha256": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_T > 1.60 TeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDGLive2026:CR003:T_Ht_pair_CMS2023",
+        "source_url": "https://pdg.lbl.gov/encoder_listings/q009.pdf",
+        "snapshot_path": "flavor_catalog/references/CR003/pdg_live_q009_tprime_pair_limits.txt",
+        "sha256": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_T > 1.50 TeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2023:CR003:T_all_third_generation_decay_mixtures",
+        "source_url": "https://arxiv.org/abs/2209.07327",
+        "snapshot_path": "flavor_catalog/references/CR003/cms_2023_arxiv2209_07327.txt",
+        "sha256": "sha256:8e2d5e1a579b828f9460574678ab4e32401d9b5cd575e0ca5968c8c6e94c7bb6",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m_T > 1.48 TeV for all decays to third-generation quarks",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 31,
+                "context": "L28: include multiple top quarks.\nL29:\nL30: The limits obtained in this search are the strongest limits to date for\nL31: T Tbar production, excluding masses below 1.48 TeV for all decays to\nL32: third-generation quarks, and are the strongest limits to date for B Bbar\nL33: production with B quark decays to tW."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

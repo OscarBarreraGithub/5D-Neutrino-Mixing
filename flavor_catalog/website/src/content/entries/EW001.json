@@ -143,5 +143,382 @@
   },
   "source_yaml": "flavor_catalog/processes/top_higgs_ew/EW001.yaml",
   "source_tex": "flavor_catalog/processes/top_higgs_ew/EW001.tex",
-  "worklog_path": "flavor_catalog/worklogs/EW001/"
+  "worklog_path": "flavor_catalog/worklogs/EW001/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 14,
+      "AMBIGUOUS": 2,
+      "UNRESOLVED": 1
+    },
+    "sources": [
+      {
+        "block_key": "PDG 2025 global oblique fit, S with U fixed to zero",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.026 +/- 0.075",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: Global fit of oblique parameters to electroweak precision observables.\nL16:\nL17: Fit with U fixed to zero:\nL18: S = 0.026 +/- 0.075\nL19: T = 0.047 +/- 0.066\nL20: U = 0\nL21: Correlation rho(S,T) = 0.90\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 global oblique fit, T with U fixed to zero",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.047 +/- 0.066",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16:\nL17: Fit with U fixed to zero:\nL18: S = 0.026 +/- 0.075\nL19: T = 0.047 +/- 0.066\nL20: U = 0\nL21: Correlation rho(S,T) = 0.90\nL22:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 global oblique fit, U fixed value",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.0",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: Global fit of oblique parameters to electroweak precision observables.\nL16:\nL17: Fit with U fixed to zero:\nL18: S = 0.026 +/- 0.075\nL19: T = 0.047 +/- 0.066\nL20: U = 0\nL21: Correlation rho(S,T) = 0.90\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:\nL17: Fit with U fixed to zero:\nL18: S = 0.026 +/- 0.075\nL19: T = 0.047 +/- 0.066\nL20: U = 0\nL21: Correlation rho(S,T) = 0.90\nL22:\n"
+              },
+              {
+                "line_number": 24,
+                "context": "L21: Correlation rho(S,T) = 0.90\nL22:\nL23: Fit with S, T, and U floating:\nL24: S = 0.021 +/- 0.096\nL25: T = 0.04 +/- 0.12\nL26: U = 0.008 +/- 0.092\nL27: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.62, rho(T,U) = -0.83.\n"
+              },
+              {
+                "line_number": 25,
+                "context": "L22:\nL23: Fit with S, T, and U floating:\nL24: S = 0.021 +/- 0.096\nL25: T = 0.04 +/- 0.12\nL26: U = 0.008 +/- 0.092\nL27: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.62, rho(T,U) = -0.83.\nL28:\n"
+              },
+              {
+                "line_number": 26,
+                "context": "L23: Fit with S, T, and U floating:\nL24: S = 0.021 +/- 0.096\nL25: T = 0.04 +/- 0.12\nL26: U = 0.008 +/- 0.092\nL27: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.62, rho(T,U) = -0.83.\nL28:\nL29: Relevant extracted one-parameter 95% probability bounds:\n"
+              },
+              {
+                "line_number": 30,
+                "context": "L27: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.62, rho(T,U) = -0.83.\nL28:\nL29: Relevant extracted one-parameter 95% probability bounds:\nL30: T = U = 0: -0.088 <= S <= 0.045; if S >= 0, S <= 0.054.\nL31: S = U = 0: -0.032 <= T <= 0.084; if T >= 0, T <= 0.078.\nL32: S = T = 0: -0.047 <= U <= 0.120; if U >= 0, U <= 0.110.\nL33:\n"
+              },
+              {
+                "line_number": 31,
+                "context": "L28:\nL29: Relevant extracted one-parameter 95% probability bounds:\nL30: T = U = 0: -0.088 <= S <= 0.045; if S >= 0, S <= 0.054.\nL31: S = U = 0: -0.032 <= T <= 0.084; if T >= 0, T <= 0.078.\nL32: S = T = 0: -0.047 <= U <= 0.120; if U >= 0, U <= 0.110.\nL33:\nL34: Relevant RS/composite context from the same review:\n"
+              },
+              {
+                "line_number": 32,
+                "context": "L29: Relevant extracted one-parameter 95% probability bounds:\nL30: T = U = 0: -0.088 <= S <= 0.045; if S >= 0, S <= 0.054.\nL31: S = U = 0: -0.032 <= T <= 0.084; if T >= 0, T <= 0.078.\nL32: S = T = 0: -0.047 <= U <= 0.120; if U >= 0, U <= 0.110.\nL33:\nL34: Relevant RS/composite context from the same review:\nL35: For warped extra dimensions, sizeable corrections to S are generated by mixing\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 correlation rho(S,T), U fixed to zero",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: S = 0.026 +/- 0.075\nL19: T = 0.047 +/- 0.066\nL20: U = 0\nL21: Correlation rho(S,T) = 0.90\nL22:\nL23: Fit with S, T, and U floating:\nL24: S = 0.021 +/- 0.096\n"
+              },
+              {
+                "line_number": 27,
+                "context": "L24: S = 0.021 +/- 0.096\nL25: T = 0.04 +/- 0.12\nL26: U = 0.008 +/- 0.092\nL27: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.62, rho(T,U) = -0.83.\nL28:\nL29: Relevant extracted one-parameter 95% probability bounds:\nL30: T = U = 0: -0.088 <= S <= 0.045; if S >= 0, S <= 0.054.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 global oblique fit, S with S/T/U floating",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.021 +/- 0.096",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: Correlation rho(S,T) = 0.90\nL22:\nL23: Fit with S, T, and U floating:\nL24: S = 0.021 +/- 0.096\nL25: T = 0.04 +/- 0.12\nL26: U = 0.008 +/- 0.092\nL27: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.62, rho(T,U) = -0.83.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 global oblique fit, T with S/T/U floating",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.04 +/- 0.12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22:\nL23: Fit with S, T, and U floating:\nL24: S = 0.021 +/- 0.096\nL25: T = 0.04 +/- 0.12\nL26: U = 0.008 +/- 0.092\nL27: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.62, rho(T,U) = -0.83.\nL28:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 global oblique fit, U with S/T/U floating",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.008 +/- 0.092",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: Fit with S, T, and U floating:\nL24: S = 0.021 +/- 0.096\nL25: T = 0.04 +/- 0.12\nL26: U = 0.008 +/- 0.092\nL27: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.62, rho(T,U) = -0.83.\nL28:\nL29: Relevant extracted one-parameter 95% probability bounds:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 warped-extra-dimension S coefficient",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "30.0",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 one-sided S upper value used for warped M_KK context",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.18",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 37,
+                "context": "L34: Relevant RS/composite context from the same review:\nL35: For warped extra dimensions, sizeable corrections to S are generated by mixing\nL36: between Standard Model gauge bosons and KK excitations, with\nL37: S approximately 30 v^2 / M_KK^2. From Table 10.8 the review quotes S <= 0.18\nL38: at 95% probability, corresponding to M_KK greater than about 3.2 TeV for the\nL39: KK gauge-boson mass scale.\nL40:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2025 warped M_KK lower-bound context",
+        "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-standard-model.pdf",
+        "snapshot_path": "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt",
+        "sha256": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 38,
+                "context": "L35: For warped extra dimensions, sizeable corrections to S are generated by mixing\nL36: between Standard Model gauge bosons and KK excitations, with\nL37: S approximately 30 v^2 / M_KK^2. From Table 10.8 the review quotes S <= 0.18\nL38: at 95% probability, corresponding to M_KK greater than about 3.2 TeV for the\nL39: KK gauge-boson mass scale.\nL40:\nL41: Relevant CDF note:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Gfitter public oblique fit, S",
+        "source_url": "https://project-gfitter.web.cern.ch/Oblique_Parameters/",
+        "snapshot_path": "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt",
+        "sha256": "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.05 +/- 0.11",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10: m_t,ref = 173 GeV and M_H,ref = 125 GeV.\nL11:\nL12: Extracted oblique-parameter fit values:\nL13: S = 0.05 +/- 0.11\nL14: T = 0.09 +/- 0.13\nL15: U = 0.01 +/- 0.11\nL16:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Gfitter public oblique fit, T",
+        "source_url": "https://project-gfitter.web.cern.ch/Oblique_Parameters/",
+        "snapshot_path": "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt",
+        "sha256": "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.09 +/- 0.13",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11:\nL12: Extracted oblique-parameter fit values:\nL13: S = 0.05 +/- 0.11\nL14: T = 0.09 +/- 0.13\nL15: U = 0.01 +/- 0.11\nL16:\nL17: Extracted correlation coefficients:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Gfitter public oblique fit, U",
+        "source_url": "https://project-gfitter.web.cern.ch/Oblique_Parameters/",
+        "snapshot_path": "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt",
+        "sha256": "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.01 +/- 0.11",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: Extracted oblique-parameter fit values:\nL13: S = 0.05 +/- 0.11\nL14: T = 0.09 +/- 0.13\nL15: U = 0.01 +/- 0.11\nL16:\nL17: Extracted correlation coefficients:\nL18: rho(S,T) = 0.90\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HEPfit/de Blas 2022 CDF W mass",
+        "source_url": "https://arxiv.org/abs/2204.04204",
+        "snapshot_path": "flavor_catalog/references/EW001/hepfit_deblas_2022_cdf_stu.txt",
+        "sha256": "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "80.4335 +/- 0.0094",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: electroweak precision data in the SM, oblique new-physics models, and SMEFT.\nL14:\nL15: Extracted CDF W mass value quoted in Eq. (1):\nL16: M_W = 80.4335 +/- 0.0094 GeV.\nL17:\nL18: Extracted standard-average oblique-parameter fit, Table STU:\nL19: U = 0 fit:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HEPfit/de Blas 2022 standard-average ST fit, S with U fixed to zero",
+        "source_url": "https://arxiv.org/abs/2204.04204",
+        "snapshot_path": "flavor_catalog/references/EW001/hepfit_deblas_2022_cdf_stu.txt",
+        "sha256": "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 6,
+                "context": "L3: electroweak precision fits\".\nL4: URL: https://arxiv.org/abs/2204.04204\nL5: arXiv: 2204.04204\nL6: DOI: 10.1103/PhysRevLett.129.271801\nL7: Access date: 2026-05-16\nL8: Local note: minimal text snapshot from the arXiv source; no PDF is stored.\nL9:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HEPfit/de Blas 2022 standard-average ST fit, T with U fixed to zero",
+        "source_url": "https://arxiv.org/abs/2204.04204",
+        "snapshot_path": "flavor_catalog/references/EW001/hepfit_deblas_2022_cdf_stu.txt",
+        "sha256": "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.202 +/- 0.056",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: Extracted standard-average oblique-parameter fit, Table STU:\nL19: U = 0 fit:\nL20: S = 0.100 +/- 0.073\nL21: T = 0.202 +/- 0.056\nL22: rho(S,T) = 0.93\nL23:\nL24: S, T, U floating fit:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HEPfit/de Blas 2022 standard-average STU fit, U",
+        "source_url": "https://arxiv.org/abs/2204.04204",
+        "snapshot_path": "flavor_catalog/references/EW001/hepfit_deblas_2022_cdf_stu.txt",
+        "sha256": "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.134 +/- 0.087",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: S, T, U floating fit:\nL25: S = 0.005 +/- 0.096\nL26: T = 0.040 +/- 0.120\nL27: U = 0.134 +/- 0.087\nL28: Correlations: rho(S,T) = 0.91, rho(S,U) = -0.65, rho(T,U) = -0.88.\nL29:\nL30: Extracted conservative-average oblique-parameter fit, Appendix table:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

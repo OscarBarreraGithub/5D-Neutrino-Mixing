@@ -202,5 +202,90 @@
   },
   "source_yaml": "flavor_catalog/processes/charged_lepton/L008.yaml",
   "source_tex": "flavor_catalog/processes/charged_lepton/L008.tex",
-  "worklog_path": "flavor_catalog/worklogs/L008/"
+  "worklog_path": "flavor_catalog/worklogs/L008/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 1
+    },
+    "sources": [
+      {
+        "block_key": "Branching fraction upper limit for tau- -> e- gamma",
+        "source_url": "https://pdglive.lbl.gov/view/S035.32",
+        "snapshot_path": "flavor_catalog/references/L008/pdg2025_tau_e_gamma_pdglive.txt",
+        "sha256": "c529b7a831823ca0e2a5d46a9b2bacd1d88be995f87024f9451740cad5b3d604",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.3e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: PDGID: S035.32\nL15: Decay mode summary: tau- -> e- gamma\nL16: Gamma_186 / Gamma_total:\nL17:   tau- -> e- gamma  < 3.3 x 10^-8\nL18:   confidence level: 90%\nL19: \nL20: PDG API related-data entry:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Branching fraction upper limit for tau -> e gamma",
+        "source_url": "https://arxiv.org/abs/0908.2381",
+        "snapshot_path": "flavor_catalog/references/L008/babar2010_tau_lgamma_arxiv0908_2381.txt",
+        "sha256": "a5acbe43ca0f328761fe37e586320eee3cfd2d397c0df6f7e966b4c75526b4ca",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.3e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20: Upsilon(3S), and Upsilon(2S) resonances. No evidence of signals was found.\nL21: The 90% confidence-level upper limits were:\nL22: \nL23:   BR(tau -> e gamma)  < 3.3 x 10^-8\nL24:   BR(tau -> mu gamma) < 4.4 x 10^-8\nL25: \nL26: Extraction note:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Branching fraction upper limit for tau+- -> e+- gamma",
+        "source_url": "https://arxiv.org/abs/2103.12994",
+        "snapshot_path": "flavor_catalog/references/L008/belle2021_tau_lgamma_arxiv2103_12994.txt",
+        "sha256": "4a79ee0135bca0e407963f706982d15779d33d6befb7cd5541523bdf635d53aa",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "5.6e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20: the branching fractions are set at 90% confidence level:\nL21: \nL22:   B(tau+- -> mu+- gamma) <= 4.2 x 10^-8\nL23:   B(tau+- -> e+- gamma)  <= 5.6 x 10^-8\nL24: \nL25: Extraction note:\nL26: This is the main post-2008 Belle full-data update for tau -> l gamma. For\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Projected branching-fraction sensitivity for tau -> e gamma",
+        "source_url": "https://arxiv.org/abs/1808.10567",
+        "snapshot_path": "flavor_catalog/references/L008/belleii_physics_book_1808_10567_tau_lfv.txt",
+        "sha256": "ed834e84963c7b4cf4cc53213fe7ffca267d446ea9775bcde55efde02d9df87f",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -224,5 +224,95 @@
   },
   "source_yaml": "flavor_catalog/processes/kaon/K002.yaml",
   "source_tex": "flavor_catalog/processes/kaon/K002.tex",
-  "worklog_path": "flavor_catalog/worklogs/K002/"
+  "worklog_path": "flavor_catalog/worklogs/K002/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 4,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "pdg_fit_assuming_cpt",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?home=sumtabM&node=S013D",
+        "snapshot_path": "flavor_catalog/references/K002/pdg_live_S013D_20260516.txt",
+        "sha256": "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "display_value",
+            "anchor_string": "Delta m_K = (0.5293 +/- 0.0009) x 10^10 hbar s^-1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10:   S013D\nL11:   VALUE (10^10 hbar s^-1) DOCUMENT ID  TECN  COMMENT\nL12:   0.5289 +/- 0.0010  OUR FIT  Not assuming CPT\nL13:   0.5293 +/- 0.0009  OUR FIT  Error includes scale factor of 1.3. Assuming CPT\nL14:   0.52797 +/- 0.00195  ABOUZAID 2011  KTEV  Not assuming CPT\nL15:   0.52699 +/- 0.00123  ABOUZAID 2011  KTEV  Assuming CPT\nL16:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "pdg_fit_not_assuming_cpt",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?home=sumtabM&node=S013D",
+        "snapshot_path": "flavor_catalog/references/K002/pdg_live_S013D_20260516.txt",
+        "sha256": "b19ce40faf7d00db649fffefadf2ba9160c7a02697faf6e7d8d998b4b458c57b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "display_value",
+            "anchor_string": "OUR FIT not assuming CPT: 0.5289 +/- 0.0010",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9:\nL10:   S013D\nL11:   VALUE (10^10 hbar s^-1) DOCUMENT ID  TECN  COMMENT\nL12:   0.5289 +/- 0.0010  OUR FIT  Not assuming CPT\nL13:   0.5293 +/- 0.0009  OUR FIT  Error includes scale factor of 1.3. Assuming CPT\nL14:   0.52797 +/- 0.00195  ABOUZAID 2011  KTEV  Not assuming CPT\nL15:   0.52699 +/- 0.00123  ABOUZAID 2011  KTEV  Assuming CPT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "bai_2014_lattice_delta_mk",
+        "source_url": "https://arxiv.org/abs/1406.0916",
+        "snapshot_path": "flavor_catalog/references/K002/arxiv_1406.0916_bai_2014_delta_mk.txt",
+        "sha256": "94522a76f8bfa763c4b6bbf66fbed2d0b14c5679e65d8a5f50783dd199a7dfe5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "display_value",
+            "anchor_string": "Delta M_K = 3.19(41)(96) x 10^-12 MeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:   domain-wall fermions, a 330 MeV pion mass, a 575 MeV kaon mass, and a\nL16:   quenched charm quark of 949 MeV to implement GIM cancellation.  For those\nL17:   heavier-than-physical masses, the result is Delta M_K =\nL18:   3.19(41)(96) x 10^-12 MeV, where the first error is statistical and the\nL19:   second estimates systematic discretization error.  The abstract emphasizes\nL20:   that disconnected diagrams are important.\nL21:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "wang_2023_statistical_error",
+        "source_url": "https://arxiv.org/abs/2301.01387",
+        "snapshot_path": "flavor_catalog/references/K002/arxiv_2301.01387_wang_2023_delta_mk.txt",
+        "sha256": "26d8bab47c57de8cc8b749f1964f38e2d429005760ac4048f209377da66f0505",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "display_value",
+            "anchor_string": "statistical error approaches 9%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14:   The work reports completion of a lattice-QCD calculation of Delta m_K on a\nL15:   64^3 x 128 lattice using 152 configurations with physical quark masses and\nL16:   inverse lattice spacing 1/a = 2.36 GeV.  The abstract states that the\nL17:   statistical error approaches 9%, while several sources of systematic error\nL18:   may have more significant effects.\nL19:"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

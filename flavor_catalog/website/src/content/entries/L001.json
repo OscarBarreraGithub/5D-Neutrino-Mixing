@@ -260,5 +260,74 @@
   },
   "source_yaml": "flavor_catalog/processes/charged_lepton/L001.yaml",
   "source_tex": "flavor_catalog/processes/charged_lepton/L001.tex",
-  "worklog_path": "flavor_catalog/worklogs/L001/"
+  "worklog_path": "flavor_catalog/worklogs/L001/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 1
+    },
+    "sources": [
+      {
+        "block_key": "Branching fraction upper limit for mu+ -> e+ gamma",
+        "source_url": "https://arxiv.org/abs/2504.15711",
+        "snapshot_path": "flavor_catalog/references/L001/megii2025_arxiv2504_15711.txt",
+        "sha256": "3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.5e-13",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: \nL24: Relevant published-article conclusion excerpt:\nL25: The MEG II collaboration reports the same 2021-2022 result, with\nL26: S_90 = 2.2 x 10^-13 and B(mu+ -> e+ gamma) < 1.5 x 10^-13 at 90% C.L.\nL27: The article states that data from 2023-2024 are expected to add a 1.5-fold\nL28: larger statistic and that planned 2025-2026 data should add another 2.6-fold,\nL29: with a target sensitivity near 6 x 10^-14.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Branching fraction upper limit for mu+ -> e+ gamma",
+        "source_url": "https://pdg.lbl.gov/encoder_listings/s004.pdf",
+        "snapshot_path": "flavor_catalog/references/L001/pdg2025_muon_listing_s004.txt",
+        "sha256": "4baeea03e1eac3a90ee1d972f9b405e77d58872ad1260227b09475285269ae04",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.1e-13",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: \nL13: Relevant listing excerpt for mu+ -> e+ gamma, NODE=S004R3:\nL14: \nL15:   [<3.1 x 10^-13 (CL = 90%) OUR 2025 BEST LIMIT]\nL16:   AFANACIEV 25A SPEC +, MEG II at PSI\nL17: \nL18: The same listing marks older entries as not used for averages/fits/limits:\n"
+              },
+              {
+                "line_number": 20,
+                "context": "L17: \nL18: The same listing marks older entries as not used for averages/fits/limits:\nL19: \nL20:   AFANACIEV 24 SPEC +, MEG II at PSI: <3.1 x 10^-13 at 90% CL\nL21:   BALDINI 16 SPEC +, MEG at PSI: <4.2 x 10^-13 at 90% CL\nL22:   ADAM 13B SPEC +, MEG at PSI: <5.7 x 10^-13 at 90% CL\nL23:   ADAM 11 SPEC +, MEG at PSI: <2.4 x 10^-12 at 90% CL\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "RS lepton dipole NDA estimate and paper-era mu -> e gamma bound",
+        "source_url": "https://arxiv.org/abs/0805.4652",
+        "snapshot_path": "flavor_catalog/references/L001/perez_randall_2008_arxiv0805_4652.txt",
+        "sha256": "850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      }
+    ]
+  }
 }

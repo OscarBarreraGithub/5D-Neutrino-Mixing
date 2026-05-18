@@ -311,5 +311,155 @@
   },
   "source_yaml": "flavor_catalog/processes/top_higgs_ew/T003.yaml",
   "source_tex": "flavor_catalog/processes/top_higgs_ew/T003.tex",
-  "worklog_path": "flavor_catalog/worklogs/T003/"
+  "worklog_path": "flavor_catalog/worklogs/T003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 7,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "CMS2024:T003:dataset",
+        "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+        "snapshot_path": "flavor_catalog/references/T003/cms_2024_top21013_tqgamma.txt",
+        "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "138 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: Relevant source excerpt, normalized:\nL19:\nL20: The analysis uses pp collision data at sqrt(s) = 13 TeV corresponding to\nL21: 138 fb^-1. It searches for single top plus photon production and top-pair\nL22: events in which one top decays through a tqgamma FCNC vertex, with q = u or c.\nL23: No significant excess over the Standard Model prediction is observed.\nL24:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2024:T003:tcgamma",
+        "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+        "snapshot_path": "flavor_catalog/references/T003/cms_2024_top21013_tqgamma.txt",
+        "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 1.51e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24:\nL25: Observed (expected) 95% CL upper limits on branching fractions:\nL26:   B(t -> u gamma) < 0.95 x 10^-5 (1.20 x 10^-5 expected)\nL27:   B(t -> c gamma) < 1.51 x 10^-5 (1.54 x 10^-5 expected)\nL28:\nL29: CMS also quotes the corresponding anomalous coupling limits:\nL30:   kappa_tugamma < 6.2 x 10^-3\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2024:T003:tugamma",
+        "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+        "snapshot_path": "flavor_catalog/references/T003/cms_2024_top21013_tqgamma.txt",
+        "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 0.95e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: No significant excess over the Standard Model prediction is observed.\nL24:\nL25: Observed (expected) 95% CL upper limits on branching fractions:\nL26:   B(t -> u gamma) < 0.95 x 10^-5 (1.20 x 10^-5 expected)\nL27:   B(t -> c gamma) < 1.51 x 10^-5 (1.54 x 10^-5 expected)\nL28:\nL29: CMS also quotes the corresponding anomalous coupling limits:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T003:dataset",
+        "source_url": "https://arxiv.org/abs/2205.02537",
+        "snapshot_path": "flavor_catalog/references/T003/atlas_2023_2205_02537_tqgamma.txt",
+        "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "139 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: Relevant source excerpt, normalized:\nL19:\nL20: The analysis uses pp collision data at sqrt(s) = 13 TeV collected during\nL21: LHC Run 2, corresponding to 139 fb^-1. Both FCNC top-quark production and\nL22: top-quark decay are considered. Events contain a charged lepton, missing\nL23: transverse momentum, a b-tagged jet, one high-momentum photon, and possibly\nL24: additional jets. No significant excess is observed.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T003:tcgamma_left",
+        "source_url": "https://arxiv.org/abs/2205.02537",
+        "snapshot_path": "flavor_catalog/references/T003/atlas_2023_2205_02537_tqgamma.txt",
+        "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 4.2e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 28,
+                "context": "L25:\nL26: Observed 95% CL upper limits on branching fractions for left-handed tqgamma:\nL27:   B(t -> u gamma) < 0.85 x 10^-5\nL28:   B(t -> c gamma) < 4.2 x 10^-5\nL29:\nL30: Observed 95% CL upper limits on branching fractions for right-handed tqgamma:\nL31:   B(t -> u gamma) < 1.2 x 10^-5\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T003:tcgamma_right",
+        "source_url": "https://arxiv.org/abs/2205.02537",
+        "snapshot_path": "flavor_catalog/references/T003/atlas_2023_2205_02537_tqgamma.txt",
+        "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 4.5e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 32,
+                "context": "L29:\nL30: Observed 95% CL upper limits on branching fractions for right-handed tqgamma:\nL31:   B(t -> u gamma) < 1.2 x 10^-5\nL32:   B(t -> c gamma) < 4.5 x 10^-5\nL33:\nL34: This is the ATLAS number often quoted before the later CMS-TOP-21-013\nL35: charm-specific improvement.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2026:T003:gammaq_summary",
+        "source_url": "https://pdglive.lbl.gov/Particle.action?node=Q007",
+        "snapshot_path": "flavor_catalog/references/T003/pdg_2026_top_gammaq_summary.txt",
+        "sha256": "sha256:e05906a43ebc0bd14877ff94418896f229fcd38334aa69203e646c1d5b2129ae",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 9.5e-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: Relevant pdgLive / summary-table content, normalized:\nL12:\nL13: The t-quark decay-mode summary includes\nL14:   Gamma_7: gamma q (q = u, c) < 9.5 x 10^-6 at 95% CL.\nL15:\nL16: The associated note says:\nL17:   This limit is for Gamma(t -> gamma q) / Gamma(t -> W b).\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

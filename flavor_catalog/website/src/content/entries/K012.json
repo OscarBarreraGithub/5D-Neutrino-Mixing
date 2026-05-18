@@ -138,5 +138,175 @@
   },
   "source_yaml": "flavor_catalog/processes/kaon/K012.yaml",
   "source_tex": "flavor_catalog/processes/kaon/K012.tex",
-  "worklog_path": "flavor_catalog/worklogs/K012/"
+  "worklog_path": "flavor_catalog/worklogs/K012/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 4,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:K012:headline_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-S.pdf",
+        "snapshot_path": "flavor_catalog/references/K012/pdg2025_ks_decay_modes.txt",
+        "sha256": "sha256:5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<2.1e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: and 2025 update.\nL10:\nL11: K0S decay modes, CP violating and Delta S = 1 weak neutral current modes:\nL12: Gamma_12: mu+ mu-    S1    < 2.1 x 10^-10    CL=90%\nL13:\nL14: Detailed listing:\nL15: Gamma(mu+ mu-) / Gamma(total), Gamma_12 / Gamma."
+              },
+              {
+                "line_number": 20,
+                "context": "L17: combined with electromagnetic interaction.\nL18:\nL19: VALUE                 CL%      DOCUMENT ID       TECN\nL20: <2.1 x 10^-10          90      1 AAIJ 20AE       LHCB\nL21:\nL22: Data not used for current averages, fits, limits:\nL23: <8 x 10^-10            90      2 AAIJ 17BQ       LHCB"
+              },
+              {
+                "line_number": 23,
+                "context": "L20: <2.1 x 10^-10          90      1 AAIJ 20AE       LHCB\nL21:\nL22: Data not used for current averages, fits, limits:\nL23: <8 x 10^-10            90      2 AAIJ 17BQ       LHCB\nL24: <9 x 10^-9             90      3 AAIJ 13G        LHCB\nL25:\nL26: PDG note 1:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2020:K012:standalone_2016_2018_limit",
+        "source_url": "https://arxiv.org/abs/2001.10354",
+        "snapshot_path": "flavor_catalog/references/K012/lhcb_2020_ksmumu_arxiv.txt",
+        "sha256": "sha256:d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<2.2e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: corresponding to an integrated luminosity of 5.6 fb^-1, collected with the LHCb\nL16: experiment during 2016, 2017 and 2018 at a center-of-mass energy of 13 TeV.\nL17: The observed signal yield is consistent with zero, yielding\nL18: B(K0_S -> mu+ mu-) < 2.2 x 10^-10 at 90% CL.\nL19: The limit reduces to B(K0_S -> mu+ mu-) < 2.1 x 10^-10 at 90% CL once combined\nL20: with the result from data taken in 2011 and 2012."
+              },
+              {
+                "line_number": 19,
+                "context": "L16: experiment during 2016, 2017 and 2018 at a center-of-mass energy of 13 TeV.\nL17: The observed signal yield is consistent with zero, yielding\nL18: B(K0_S -> mu+ mu-) < 2.2 x 10^-10 at 90% CL.\nL19: The limit reduces to B(K0_S -> mu+ mu-) < 2.1 x 10^-10 at 90% CL once combined\nL20: with the result from data taken in 2011 and 2012."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2020:K012:combined_limit",
+        "source_url": "https://arxiv.org/abs/2001.10354",
+        "snapshot_path": "flavor_catalog/references/K012/lhcb_2020_ksmumu_arxiv.txt",
+        "sha256": "sha256:d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<2.1e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: corresponding to an integrated luminosity of 5.6 fb^-1, collected with the LHCb\nL16: experiment during 2016, 2017 and 2018 at a center-of-mass energy of 13 TeV.\nL17: The observed signal yield is consistent with zero, yielding\nL18: B(K0_S -> mu+ mu-) < 2.2 x 10^-10 at 90% CL.\nL19: The limit reduces to B(K0_S -> mu+ mu-) < 2.1 x 10^-10 at 90% CL once combined\nL20: with the result from data taken in 2011 and 2012."
+              },
+              {
+                "line_number": 19,
+                "context": "L16: experiment during 2016, 2017 and 2018 at a center-of-mass energy of 13 TeV.\nL17: The observed signal yield is consistent with zero, yielding\nL18: B(K0_S -> mu+ mu-) < 2.2 x 10^-10 at 90% CL.\nL19: The limit reduces to B(K0_S -> mu+ mu-) < 2.1 x 10^-10 at 90% CL once combined\nL20: with the result from data taken in 2011 and 2012."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2017:K012:run1_limit",
+        "source_url": "https://arxiv.org/abs/1706.00758",
+        "snapshot_path": "flavor_catalog/references/K012/lhcb_2017_ksmumu_arxiv.txt",
+        "sha256": "sha256:a35a20eef31d2eb0d3d2b85cc496f4e61846e54d137b79107f941ef7525d406e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<0.8e-9 at 90%; <1.0e-9 at 95%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: collisions corresponding to an integrated luminosity of 3 fb^-1, collected by\nL16: LHCb at center-of-mass energies of 7 and 8 TeV. The observed yield is consistent\nL17: with the background-only hypothesis, yielding\nL18: B(K0_S -> mu+ mu-) < 0.8 (1.0) x 10^-9 at 90% (95%) confidence level.\nL19: This result improves the previous upper limit on the branching fraction by an\nL20: order of magnitude."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Chobanova2018:K012:sm_estimate",
+        "source_url": "https://arxiv.org/abs/1711.11030",
+        "snapshot_path": "flavor_catalog/references/K012/chobanova_2018_ksmumu_susy_arxiv.txt",
+        "sha256": "sha256:7b25e1bf225ff51a308f24c5f6c50d55b9b8ad934aaf4d931415b975df09db0d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "approximately 5e-12",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv abstract page\nL2: URL: https://arxiv.org/abs/1711.11030\nL3: Accessed: 2026-05-16\nL4:\nL5: arXiv:1711.11030 [hep-ph]\nL6: Title: Probing SUSY effects in K_S^0 -> mu+ mu-"
+              },
+              {
+                "line_number": 10,
+                "context": "L7: Authors: Veronika Chobanova, Giancarlo D'Ambrosio, Teppei Kitahara,\nL8: Miriam Lucio Martinez, Diego Martinez Santos, Isabel Suarez Fernandez,\nL9: Kei Yamamoto\nL10: Submitted: 2017-11-29; revised version v2: 2018-05-28\nL11: Journal reference: JHEP 05 (2018) 024\nL12: DOI: 10.1007/JHEP05(2018)024\nL13:"
+              },
+              {
+                "line_number": 11,
+                "context": "L8: Miriam Lucio Martinez, Diego Martinez Santos, Isabel Suarez Fernandez,\nL9: Kei Yamamoto\nL10: Submitted: 2017-11-29; revised version v2: 2018-05-28\nL11: Journal reference: JHEP 05 (2018) 024\nL12: DOI: 10.1007/JHEP05(2018)024\nL13:\nL14: Minimal abstract excerpt:"
+              },
+              {
+                "line_number": 12,
+                "context": "L9: Kei Yamamoto\nL10: Submitted: 2017-11-29; revised version v2: 2018-05-28\nL11: Journal reference: JHEP 05 (2018) 024\nL12: DOI: 10.1007/JHEP05(2018)024\nL13:\nL14: Minimal abstract excerpt:\nL15: The Standard Model predicts B(K_S^0 -> mu+ mu-) approximately 5 x 10^-12."
+              },
+              {
+                "line_number": 15,
+                "context": "L12: DOI: 10.1007/JHEP05(2018)024\nL13:\nL14: Minimal abstract excerpt:\nL15: The Standard Model predicts B(K_S^0 -> mu+ mu-) approximately 5 x 10^-12.\nL16: Flavour-violating Higgs-penguin contributions in MSSM scenarios can enhance the\nL17: branching fraction up to approximately 35 x 10^-12 or suppress it to\nL18: approximately 0.78 x 10^-12. Fine-tuned regions can bring the branching"
+              },
+              {
+                "line_number": 17,
+                "context": "L14: Minimal abstract excerpt:\nL15: The Standard Model predicts B(K_S^0 -> mu+ mu-) approximately 5 x 10^-12.\nL16: Flavour-violating Higgs-penguin contributions in MSSM scenarios can enhance the\nL17: branching fraction up to approximately 35 x 10^-12 or suppress it to\nL18: approximately 0.78 x 10^-12. Fine-tuned regions can bring the branching\nL19: fraction up to the then-current experimental upper bound, 8 x 10^-10.\nL20: The paper also discusses correlations with B(K_L^0 -> mu+ mu-) and CP-asymmetry"
+              },
+              {
+                "line_number": 18,
+                "context": "L15: The Standard Model predicts B(K_S^0 -> mu+ mu-) approximately 5 x 10^-12.\nL16: Flavour-violating Higgs-penguin contributions in MSSM scenarios can enhance the\nL17: branching fraction up to approximately 35 x 10^-12 or suppress it to\nL18: approximately 0.78 x 10^-12. Fine-tuned regions can bring the branching\nL19: fraction up to the then-current experimental upper bound, 8 x 10^-10.\nL20: The paper also discusses correlations with B(K_L^0 -> mu+ mu-) and CP-asymmetry\nL21: predictions in K0 -> mu+ mu- decays."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "DeryGhoshGrossmanSchacht2021:K012:ell0_hadronic_uncertainty",
+        "source_url": "https://arxiv.org/abs/2104.06427",
+        "snapshot_path": "flavor_catalog/references/K012/dery_ghosh_grossman_schacht_2021_kmumu_arxiv.txt",
+        "sha256": "sha256:ecf9094e578273fa701698ea835e5342f5ce0fecd8f8147d35b9d70b9bb4557a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<1%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: states. This quantity is theoretically clean and can be used to test the\nL18: Standard Model. It can extract the CKM combination\nL19: |V_ts V_td sin(beta + beta_s)| approximately |A^2 lambda^5 eta_bar| with\nL20: hadronic uncertainties below 1%."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

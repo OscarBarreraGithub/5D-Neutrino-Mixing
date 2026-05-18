@@ -279,5 +279,155 @@
   },
   "source_yaml": "flavor_catalog/processes/charm/C001.yaml",
   "source_tex": "flavor_catalog/processes/charm/C001.tex",
-  "worklog_path": "flavor_catalog/worklogs/C001/"
+  "worklog_path": "flavor_catalog/worklogs/C001/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:05Z",
+    "counts": {
+      "RESOLVED": 7,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "x_D = Delta m_D / Gamma_D",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html",
+        "snapshot_path": "flavor_catalog/references/C001/hflav_ckm25_dmixing_global_fit.txt",
+        "sha256": "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.405 +/- 0.043",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: Selected table_results.pdf text, extracted only for the C001 observables:\nL14: \nL15: Parameter                           No indirect CPV     No subleading amplitudes     All CPV       95% C.L. interval in All CPV\nL16: x (%)                               0.398 +/- 0.043     0.405 +/- 0.043              0.405 +/- 0.043 [0.320, 0.489]\nL17: y (%)                               0.636 +/- 0.023     0.638 +/- 0.023              0.636 +/- 0.024 [0.590, 0.682]\nL18: |q/p|                               1                   1.002 +/- 0.005              0.983 +0.015/-0.014 [0.955, 1.012]\nL19: phi (degrees)                       0                   -0.08 +/- 0.19               -1.51 +1.03/-1.06 [-3.63, 0.51]\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "y_D = Delta Gamma_D / (2 Gamma_D)",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html",
+        "snapshot_path": "flavor_catalog/references/C001/hflav_ckm25_dmixing_global_fit.txt",
+        "sha256": "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.636 +/- 0.024",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: \nL15: Parameter                           No indirect CPV     No subleading amplitudes     All CPV       95% C.L. interval in All CPV\nL16: x (%)                               0.398 +/- 0.043     0.405 +/- 0.043              0.405 +/- 0.043 [0.320, 0.489]\nL17: y (%)                               0.636 +/- 0.023     0.638 +/- 0.023              0.636 +/- 0.024 [0.590, 0.682]\nL18: |q/p|                               1                   1.002 +/- 0.005              0.983 +0.015/-0.014 [0.955, 1.012]\nL19: phi (degrees)                       0                   -0.08 +/- 0.19               -1.51 +1.03/-1.06 [-3.63, 0.51]\nL20: x12 (%)                             0.398 +/- 0.043     0.409 +/- 0.044              0.406 +/- 0.043 [0.321, 0.490]\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "|m(D1^0) - m(D2^0)| = x Gamma",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/DataBlock.action?node=S032D",
+        "snapshot_path": "flavor_catalog/references/C001/pdg2025_deltam_d_pdgLive.txt",
+        "sha256": "sha256:398d3420f232e48d561ec00486761e12426ee9d99a62074f0ba069421634efcd",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.997 +/- 0.116",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: \nL14: Value table excerpt:\nL15: VALUE (10^10 hbar s^-1)\nL16: 0.997 +/- 0.116  OUR EVALUATION (Produced by HFLAV)\nL17: 0.98 +/- 0.11    OUR AVERAGE\nL18: \nL19: Catalog conversion using hbar = 6.582119569e-25 GeV s:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Delta y in the LHCb D0 -> K0_S pi+ pi- CPV-allowed input",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html",
+        "snapshot_path": "flavor_catalog/references/C001/hflav_ckm25_delta_y_input.txt",
+        "sha256": "sha256:024569bebcc21564ca10be45fe7c9cf5c8b6a3e7b519e7cee739336610db638a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.031",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: x_CP         (0.400 +/- 0.045 +/- 0.020)%\nL15: y_CP         (0.551 +/- 0.116 +/- 0.059)%\nL16: Delta x      (-0.029 +/- 0.018 +/- 0.001)%\nL17: Delta y      (0.031 +/- 0.035 +/- 0.013)%\nL18: \nL19: Source line in HFLAV table:\nL20: LHCb, D0 -> K0_S pi+ pi- results using 5.4 fb^-1 at sqrt(s)=13 TeV,\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Delta Gamma_D / Gamma_D = 2 y_D",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html",
+        "snapshot_path": "flavor_catalog/references/C001/hflav_ckm25_dmixing_global_fit.txt",
+        "sha256": "sha256:85254267f434cdef6c59a362677d620263e7b8b348f7c78d7f90795d9cfa7e91",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "1.272 +/- 0.048",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: chi2/d.o.f.                         72.817/(63-7)       72.797/(63-8)                70.711/(63-10)\nL25: \nL26: Derived for catalog convenience from the all-CPV y value:\nL27: DeltaGamma_D/Gamma_D = 2 y = (1.272 +/- 0.048)%.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "contextual generic RS KK-gluon mass scale",
+        "source_url": "https://arxiv.org/abs/0804.1954",
+        "snapshot_path": "flavor_catalog/references/C001/cfw2008_arxiv0804_1954.txt",
+        "sha256": "224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "display_value",
+            "anchor_string": "generic RS KK-gluon mass bounds around 21 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: - Studies flavor constraints in 5D warped models and composite pseudo-Goldstone\nL12:   Higgs scenarios.\nL13: - Re-examines flavor constraints in standard Randall-Sundrum-type scenarios.\nL14: - Reports generic KK-gluon mass bounds around 21 TeV in standard RS scenarios.\nL15: - Reports stronger bounds around 33 TeV in the composite pseudo-Goldstone case.\nL16: - Concludes that fully anarchic warped flavor is strongly constrained and may\nL17:   require partial flavor symmetries.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "contextual composite pseudo-Goldstone KK-gluon mass scale",
+        "source_url": "https://arxiv.org/abs/0804.1954",
+        "snapshot_path": "flavor_catalog/references/C001/cfw2008_arxiv0804_1954.txt",
+        "sha256": "224e28f7009118eb9a5ed9710b28665b61bbf41c519f4501d54f1e3a7225edce",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "display_value",
+            "anchor_string": "stronger composite pseudo-Goldstone bounds around 33 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12:   Higgs scenarios.\nL13: - Re-examines flavor constraints in standard Randall-Sundrum-type scenarios.\nL14: - Reports generic KK-gluon mass bounds around 21 TeV in standard RS scenarios.\nL15: - Reports stronger bounds around 33 TeV in the composite pseudo-Goldstone case.\nL16: - Concludes that fully anarchic warped flavor is strongly constrained and may\nL17:   require partial flavor symmetries.\nL18: \n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

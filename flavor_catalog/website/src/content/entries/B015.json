@@ -141,5 +141,207 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B015.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B015.tex",
-  "worklog_path": "flavor_catalog/worklogs/B015/"
+  "worklog_path": "flavor_catalog/worklogs/B015/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 6,
+      "AMBIGUOUS": 3,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "observables[0]",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/html/radll/Badmix/BR_Badmix_Xs_l+_l-.html",
+        "snapshot_path": "flavor_catalog/references/B015/hflav_dec2024_B_to_Xsll.txt",
+        "sha256": "sha256:94a3f65a624045d8e83f48bf2f4f1f0384f5488eb33752416243a9807aeeaa00",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B -> X_s ell+ ell-) = 5.84 +- +/- 0.69 10^-6",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Relevant HFLAV Dec. 2024 table excerpt, units 10^-6:\nL10:\nL11: Experiment | Measurement | Delta chi^2 | Reference | Comments\nL12: Average | 5.84 +/- 0.69 | 3.22 | p=0.073 (ndf=1) |\nL13:   Belle uses m_ll > 0.2 GeV/c^2, BABAR uses m_ll > 0.1 GeV/c^2.\nL14:   The PDG uncertainty includes a scale factor. Treatment of charmonium\nL15:   intermediate components differs between the results.\n"
+              },
+              {
+                "line_number": 16,
+                "context": "L13:   Belle uses m_ll > 0.2 GeV/c^2, BABAR uses m_ll > 0.1 GeV/c^2.\nL14:   The PDG uncertainty includes a scale factor. Treatment of charmonium\nL15:   intermediate components differs between the results.\nL16: PDG | 5.84 +1.31 -1.23 | | pdgLive |\nL17: BaBar | 6.73 +0.70 -0.64 +0.60 -0.56 | 1.09 |\nL18:   Phys. Rev. Lett. 112, 211802 (2014). Multiple systematic uncertainties\nL19:   are added in quadrature.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[1]",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/html/radll/Badmix/BR_Badmix_Xs_l+_l-.html",
+        "snapshot_path": "flavor_catalog/references/B015/hflav_dec2024_B_to_Xsll.txt",
+        "sha256": "sha256:94a3f65a624045d8e83f48bf2f4f1f0384f5488eb33752416243a9807aeeaa00",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "PDG-listed BR(B -> X_s ell+ ell-) = 5.84 +- +1.31/-1.23 10^-6",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Relevant HFLAV Dec. 2024 table excerpt, units 10^-6:\nL10:\nL11: Experiment | Measurement | Delta chi^2 | Reference | Comments\nL12: Average | 5.84 +/- 0.69 | 3.22 | p=0.073 (ndf=1) |\nL13:   Belle uses m_ll > 0.2 GeV/c^2, BABAR uses m_ll > 0.1 GeV/c^2.\nL14:   The PDG uncertainty includes a scale factor. Treatment of charmonium\nL15:   intermediate components differs between the results.\n"
+              },
+              {
+                "line_number": 16,
+                "context": "L13:   Belle uses m_ll > 0.2 GeV/c^2, BABAR uses m_ll > 0.1 GeV/c^2.\nL14:   The PDG uncertainty includes a scale factor. Treatment of charmonium\nL15:   intermediate components differs between the results.\nL16: PDG | 5.84 +1.31 -1.23 | | pdgLive |\nL17: BaBar | 6.73 +0.70 -0.64 +0.60 -0.56 | 1.09 |\nL18:   Phys. Rev. Lett. 112, 211802 (2014). Multiple systematic uncertainties\nL19:   are added in quadrature.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[2]",
+        "source_url": "https://arxiv.org/abs/1312.5364",
+        "snapshot_path": "flavor_catalog/references/B015/babar_1312_5364_arxiv.txt",
+        "sha256": "sha256:fcaba867afcd945d15f231279f3463665cfb09e619906bd1d454544869d6daa2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BaBar input BR(B -> X_s ell+ ell-) = 6.73 +- +0.70/-0.64 stat, +0.60/-0.56 total systematic per HFLAV quadrature 10^-6",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: two or fewer charged pions, and at most one pi0.\nL15: Lepton-flavor-averaged inclusive branching fraction:\nL16:   BF(B -> X_s l+ l-) =\nL17:   (6.73 +0.70 -0.64 [stat] +0.34 -0.25 [exp syst] +/- 0.50 [model syst])\nL18:   x 10^-6 for m(l+l-)^2 > 0.1 GeV^2/c^4.\nL19: Direct CP asymmetry over the full dilepton mass range:\nL20:   A_CP = 0.04 +/- 0.11 +/- 0.01.\n"
+              },
+              {
+                "line_number": 23,
+                "context": "L20:   A_CP = 0.04 +/- 0.11 +/- 0.01.\nL21:\nL22: Note: HFLAV combines the systematic uncertainties in quadrature and lists\nL23: the BABAR input as 6.73 +0.70 -0.64 +0.60 -0.56 in units of 10^-6.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[3]",
+        "source_url": "https://arxiv.org/abs/hep-ex/0503044",
+        "snapshot_path": "flavor_catalog/references/B015/belle_hepex_0503044_arxiv.txt",
+        "sha256": "sha256:1f51dd799054c6b51ff7485346a900a4fddb426f8a30d2f72dd8a0a9be632eb2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Belle input BR(B -> X_s ell+ ell-) = 4.11 +- +/-0.83 stat, +0.85/-0.81 syst 10^-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: Reconstruction: X_s hadronic system from one charged kaon or K_S^0 and up\nL14: to four pions, with at most one neutral pion.\nL15: Lepton-flavor averaged inclusive branching fraction:\nL16:   Br(B -> X_s l+ l-) = (4.11 +/- 0.83 [stat] +0.85 -0.81 [syst]) x 10^-6\nL17:   for M_ll > 0.2 GeV/c^2.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[4]",
+        "source_url": "https://arxiv.org/abs/1503.04849",
+        "snapshot_path": "flavor_catalog/references/B015/huber_hurth_lunghi_1503_04849_arxiv.txt",
+        "sha256": "sha256:735177a8007fb4fd8bcbeb55de106423c53e1bf68154f4a132b79ea6a041d5b1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Experimental low-q2 weighted average = 1.58 +- +/-0.37 10^-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18:   expected theory precision in these windows: order 10 percent\nL19:\nL20: Experimental weighted averages quoted in the paper:\nL21:   B(Bbar -> X_s l+ l-)_low^exp = (1.58 +/- 0.37) x 10^-6\nL22:   B(Bbar -> X_s l+ l-)_high^exp = (0.48 +/- 0.10) x 10^-6\nL23:\nL24: SM branching-ratio predictions quoted in the paper:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[5]",
+        "source_url": "https://arxiv.org/abs/1503.04849",
+        "snapshot_path": "flavor_catalog/references/B015/huber_hurth_lunghi_1503_04849_arxiv.txt",
+        "sha256": "sha256:735177a8007fb4fd8bcbeb55de106423c53e1bf68154f4a132b79ea6a041d5b1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Experimental high-q2 weighted average = 0.48 +- +/-0.10 10^-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19:\nL20: Experimental weighted averages quoted in the paper:\nL21:   B(Bbar -> X_s l+ l-)_low^exp = (1.58 +/- 0.37) x 10^-6\nL22:   B(Bbar -> X_s l+ l-)_high^exp = (0.48 +/- 0.10) x 10^-6\nL23:\nL24: SM branching-ratio predictions quoted in the paper:\nL25:   B[1,6]_ee = (1.67 +/- 0.10) x 10^-6\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[6]",
+        "source_url": "https://arxiv.org/abs/1503.04849",
+        "snapshot_path": "flavor_catalog/references/B015/huber_hurth_lunghi_1503_04849_arxiv.txt",
+        "sha256": "sha256:735177a8007fb4fd8bcbeb55de106423c53e1bf68154f4a132b79ea6a041d5b1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Belle II projection luminosity = 50 ab^-1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 31,
+                "context": "L28:   B[>14.4]_mumu = (2.53 +/- 0.70) x 10^-7\nL29:\nL30: Belle II assumptions/prospects:\nL31:   Expected final integrated luminosity: 50 ab^-1.\nL32:   The paper rescales from BABAR's 0.4242 ab^-1 and studies 95 percent CL\nL33:   constraints in the R9-R10 plane from future Belle II measurements.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[7]",
+        "source_url": "https://arxiv.org/abs/1503.04849",
+        "snapshot_path": "flavor_catalog/references/B015/huber_hurth_lunghi_1503_04849_arxiv.txt",
+        "sha256": "sha256:735177a8007fb4fd8bcbeb55de106423c53e1bf68154f4a132b79ea6a041d5b1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "SM BR[1,6]_ee = 1.67 +- +/-0.10 10^-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22:   B(Bbar -> X_s l+ l-)_high^exp = (0.48 +/- 0.10) x 10^-6\nL23:\nL24: SM branching-ratio predictions quoted in the paper:\nL25:   B[1,6]_ee = (1.67 +/- 0.10) x 10^-6\nL26:   B[1,6]_mumu = (1.62 +/- 0.09) x 10^-6\nL27:   B[>14.4]_ee = (2.20 +/- 0.70) x 10^-7\nL28:   B[>14.4]_mumu = (2.53 +/- 0.70) x 10^-7\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[8]",
+        "source_url": "https://arxiv.org/abs/1503.04849",
+        "snapshot_path": "flavor_catalog/references/B015/huber_hurth_lunghi_1503_04849_arxiv.txt",
+        "sha256": "sha256:735177a8007fb4fd8bcbeb55de106423c53e1bf68154f4a132b79ea6a041d5b1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "SM BR[1,6]_mumu = 1.62 +- +/-0.09 10^-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23:\nL24: SM branching-ratio predictions quoted in the paper:\nL25:   B[1,6]_ee = (1.67 +/- 0.10) x 10^-6\nL26:   B[1,6]_mumu = (1.62 +/- 0.09) x 10^-6\nL27:   B[>14.4]_ee = (2.20 +/- 0.70) x 10^-7\nL28:   B[>14.4]_mumu = (2.53 +/- 0.70) x 10^-7\nL29:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

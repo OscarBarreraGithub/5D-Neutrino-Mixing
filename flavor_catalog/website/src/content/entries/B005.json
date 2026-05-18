@@ -159,5 +159,203 @@
   },
   "source_yaml": "flavor_catalog/processes/beauty/B005.yaml",
   "source_tex": "flavor_catalog/processes/beauty/B005.tex",
-  "worklog_path": "flavor_catalog/worklogs/B005/"
+  "worklog_path": "flavor_catalog/worklogs/B005/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 5,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_experimental_average",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086",
+        "snapshot_path": "flavor_catalog/references/B005/pdg_2026_bsmumu.txt",
+        "sha256": "sha256:c42edfb94b6a989935deb4f9a6c69762a49c063ce46d2e34466c3fbbbead8016",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-) = (3.34 +- 0.27)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 2,
+                "context": "L1: Source key: PDG2026:BsMuMu\nL2: URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086\nL3: API URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.15\nL4: Access date: 2026-05-16\nL5: Local snapshot purpose: current canonical PDG value and input trace for B_s0 -> mu+ mu-.\n"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086\nL3: API URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.15\nL4: Access date: 2026-05-16\nL5: Local snapshot purpose: current canonical PDG value and input trace for B_s0 -> mu+ mu-.\nL6:\nL7: PDG citation shown on page:\nL8: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.\n"
+              },
+              {
+                "line_number": 12,
+                "context": "L9:\nL10: PDG live page extract:\nL11: PDGID: S086.15\nL12: Mode: B_s0 -> mu+ mu-\nL13: Fraction (Gamma_i / Gamma): (3.34 +/- 0.27) x 10^-9\nL14:\nL15: PDG API extract:\n"
+              },
+              {
+                "line_number": 13,
+                "context": "L10: PDG live page extract:\nL11: PDGID: S086.15\nL12: Mode: B_s0 -> mu+ mu-\nL13: Fraction (Gamma_i / Gamma): (3.34 +/- 0.27) x 10^-9\nL14:\nL15: PDG API extract:\nL16: request_timestamp: 2026-05-16 08:33:24 PST\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16: request_timestamp: 2026-05-16 08:33:24 PST\nL17: edition: 2026\nL18: pdgid: S086.15\nL19: description: B_s()0 --> mu+ mu-\nL20: related_data pdgid: S086R14\nL21: related_data description: G(B_s0 --> mu+ mu-)/G(total)\nL22: note: Test for DeltaB = 1 weak neutral current.\n"
+              },
+              {
+                "line_number": 21,
+                "context": "L18: pdgid: S086.15\nL19: description: B_s()0 --> mu+ mu-\nL20: related_data pdgid: S086R14\nL21: related_data description: G(B_s0 --> mu+ mu-)/G(total)\nL22: note: Test for DeltaB = 1 weak neutral current.\nL23:\nL24: Selected API measurement inputs used in average:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "hflav_historical_average",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086",
+        "snapshot_path": "flavor_catalog/references/B005/hflav_2023_bsmumu.txt",
+        "sha256": "sha256:cb9109a94b5b51fda6057ec5250b4b2bede182e09c2d70418e6edc953178dafe",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-) = (3.45 +- 0.29)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 2,
+                "context": "L1: Source key: HFLAV2023:BsMuMu\nL2: URL: https://hflav-eos.web.cern.ch/hflav-eos/rare/Apr2023/html/Bs/BR_Bs0_mu%2B_mu-.html\nL3: Access date: 2026-05-16\nL4: Local snapshot purpose: HFLAV rare-decay average and experiment input table.\nL5:\n"
+              },
+              {
+                "line_number": 7,
+                "context": "L4: Local snapshot purpose: HFLAV rare-decay average and experiment input table.\nL5:\nL6: Page title:\nL7: cal B(B_s^0 -> mu+ mu-)\nL8:\nL9: Relevant table extract, units 10^-9:\nL10: Average: 3.45 +/- 0.29, Delta chi^2 = 3.94, p = 0.27 (ndf=3).\n"
+              },
+              {
+                "line_number": 10,
+                "context": "L7: cal B(B_s^0 -> mu+ mu-)\nL8:\nL9: Relevant table extract, units 10^-9:\nL10: Average: 3.45 +/- 0.29, Delta chi^2 = 3.94, p = 0.27 (ndf=3).\nL11: Comment: The ATLAS measurement is correlated with B(B^0 -> mu+ mu-). This correlation is not taken into account in the HFLAV average.\nL12: PDG: 3.01 +0.36 -0.33, with link to pdgLive.\nL13: CMS: 3.83 +0.38 -0.36 +0.24 -0.21, reference arXiv:2212.10311.\n"
+              },
+              {
+                "line_number": 11,
+                "context": "L8:\nL9: Relevant table extract, units 10^-9:\nL10: Average: 3.45 +/- 0.29, Delta chi^2 = 3.94, p = 0.27 (ndf=3).\nL11: Comment: The ATLAS measurement is correlated with B(B^0 -> mu+ mu-). This correlation is not taken into account in the HFLAV average.\nL12: PDG: 3.01 +0.36 -0.33, with link to pdgLive.\nL13: CMS: 3.83 +0.38 -0.36 +0.24 -0.21, reference arXiv:2212.10311.\nL14: LHCb: 3.09 +0.46 -0.43 +0.15 -0.11, reference Phys. Rev. D 105, 012010 (2022).\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "standard_model_prediction",
+        "source_url": "https://arxiv.org/abs/2407.03810",
+        "snapshot_path": "flavor_catalog/references/B005/czaja_misiak_2407_03810_bsmumu_sm.txt",
+        "sha256": "sha256:ab871a13e9b00043a36f8876b094588c03ab84673f26445c62a637f22349fdd6",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "SM BR(B_s -> mu+ mu-) = (3.64 +- 0.12)e-9",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: Abstract excerpt:\nL14: The rare decay B_s -> mu+ mu- provides an important constraint on possible deviations from the Standard Model in b-s-l-l interactions.\nL15: The present weighted average of its branching ratio measurements amounts to (3.34 +/- 0.27) x 10^-9.\nL16: The theoretical prediction is (3.64 +/- 0.12) x 10^-9 within the Standard Model.\nL17: The paper reviews calculations that have contributed to this prediction and discusses the associated uncertainties.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "input_measurements[0]",
+        "source_url": "https://arxiv.org/abs/2212.10311",
+        "snapshot_path": "flavor_catalog/references/B005/cms_2212_10311_bsmumu.txt",
+        "sha256": "sha256:b821377272dc3d3dd8f6d129de050940ba9f4cce40271c905bdaa90c22dc6095",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-) = (3.83 +- 380000000)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: Data set: CMS 2016-2018 pp collisions at sqrt(s)=13 TeV, integrated luminosity 140 fb^-1.\nL14:\nL15: Extract from arXiv TeX source BPH-21-006_temp.tex:\nL16: The B_s0 -> mu+mu- branching fraction is\nL17: [3.83 +0.38 -0.36 (stat) +0.19 -0.16 (syst) +0.14 -0.13 (f_s/f_u)] x 10^-9.\nL18: The B^0 -> mu+mu- branching fraction central fit is\nL19: [0.37 +0.75 -0.67 (stat) +0.08 -0.09 (syst)] x 10^-10.\n"
+              },
+              {
+                "line_number": 17,
+                "context": "L14:\nL15: Extract from arXiv TeX source BPH-21-006_temp.tex:\nL16: The B_s0 -> mu+mu- branching fraction is\nL17: [3.83 +0.38 -0.36 (stat) +0.19 -0.16 (syst) +0.14 -0.13 (f_s/f_u)] x 10^-9.\nL18: The B^0 -> mu+mu- branching fraction central fit is\nL19: [0.37 +0.75 -0.67 (stat) +0.08 -0.09 (syst)] x 10^-10.\nL20:\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15: Extract from arXiv TeX source BPH-21-006_temp.tex:\nL16: The B_s0 -> mu+mu- branching fraction is\nL17: [3.83 +0.38 -0.36 (stat) +0.19 -0.16 (syst) +0.14 -0.13 (f_s/f_u)] x 10^-9.\nL18: The B^0 -> mu+mu- branching fraction central fit is\nL19: [0.37 +0.75 -0.67 (stat) +0.08 -0.09 (syst)] x 10^-10.\nL20:\nL21: Abstract excerpt:\n"
+              },
+              {
+                "line_number": 22,
+                "context": "L19: [0.37 +0.75 -0.67 (stat) +0.08 -0.09 (syst)] x 10^-10.\nL20:\nL21: Abstract excerpt:\nL22: The branching fraction of the B_s0 -> mu+mu- decay and the effective B_s0 meson lifetime are the most precise single measurements to date. No evidence for the B^0 -> mu+mu- decay has been found.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "input_measurements[1]",
+        "source_url": "https://arxiv.org/abs/2108.09283",
+        "snapshot_path": "flavor_catalog/references/B005/lhcb_2108_09283_bsmumu.txt",
+        "sha256": "sha256:fc1427e831e02c11fe09c6fcdd6c1c26893f0b54024f69bc0a1f2bb04afbc5fe",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-) = (3.09 +- 460000000)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: Data set: pp collisions at sqrt(s)=7, 8, and 13 TeV, corresponding to 1, 2, and 6 fb^-1.\nL15:\nL16: Extract from arXiv TeX source:\nL17: B_s0 -> mu+mu- branching fraction:\nL18: (3.09 +0.46 +0.15 -0.43 -0.11) x 10^-9.\nL19: B_s0 -> mu+mu- effective lifetime:\nL20: (2.07 +/- 0.29 +/- 0.03) ps.\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15:\nL16: Extract from arXiv TeX source:\nL17: B_s0 -> mu+mu- branching fraction:\nL18: (3.09 +0.46 +0.15 -0.43 -0.11) x 10^-9.\nL19: B_s0 -> mu+mu- effective lifetime:\nL20: (2.07 +/- 0.29 +/- 0.03) ps.\nL21: Ratio between B0 -> mu+mu- and B_s0 -> mu+mu- branching fractions:\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16: Extract from arXiv TeX source:\nL17: B_s0 -> mu+mu- branching fraction:\nL18: (3.09 +0.46 +0.15 -0.43 -0.11) x 10^-9.\nL19: B_s0 -> mu+mu- effective lifetime:\nL20: (2.07 +/- 0.29 +/- 0.03) ps.\nL21: Ratio between B0 -> mu+mu- and B_s0 -> mu+mu- branching fractions:\nL22: R_{mu+mu-} < 0.095 at 95% confidence level.\n"
+              },
+              {
+                "line_number": 21,
+                "context": "L18: (3.09 +0.46 +0.15 -0.43 -0.11) x 10^-9.\nL19: B_s0 -> mu+mu- effective lifetime:\nL20: (2.07 +/- 0.29 +/- 0.03) ps.\nL21: Ratio between B0 -> mu+mu- and B_s0 -> mu+mu- branching fractions:\nL22: R_{mu+mu-} < 0.095 at 95% confidence level.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "input_measurements[2]",
+        "source_url": "https://arxiv.org/abs/1812.03017",
+        "snapshot_path": "flavor_catalog/references/B005/atlas_1812_03017_bsmumu.txt",
+        "sha256": "sha256:9724967bfdd6abd69f3f7be384911b5288fdf372735c159c9dae402dbccbca2e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-), ATLAS Run 1 + 2015-2016 combination = (2.8 +- 800000000)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Local snapshot purpose: ATLAS primary input listed in HFLAV/PDG averages.\nL10:\nL11: ArXiv abstract excerpt:\nL12: A study of the decays B_s0 -> mu+mu- and B0 -> mu+mu- has been performed using 26.3 fb^-1 of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016.\nL13: The 2015-2016 data alone give B(B_s0 -> mu+mu-) = (3.2 +1.1 -1.0) x 10^-9 and B(B0 -> mu+mu-) < 4.3 x 10^-10 at 95% confidence level.\nL14: The result combined with the Run 1 ATLAS result gives B(B_s0 -> mu+mu-) = (2.8 +0.8 -0.7) x 10^-9 and B(B0 -> mu+mu-) < 2.1 x 10^-10 at 95% confidence level.\nL15: The combined result is consistent with the Standard Model prediction within 2.4 standard deviations in the B(B0 -> mu+mu-) - B(B_s0 -> mu+mu-) plane.\n"
+              },
+              {
+                "line_number": 13,
+                "context": "L10:\nL11: ArXiv abstract excerpt:\nL12: A study of the decays B_s0 -> mu+mu- and B0 -> mu+mu- has been performed using 26.3 fb^-1 of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016.\nL13: The 2015-2016 data alone give B(B_s0 -> mu+mu-) = (3.2 +1.1 -1.0) x 10^-9 and B(B0 -> mu+mu-) < 4.3 x 10^-10 at 95% confidence level.\nL14: The result combined with the Run 1 ATLAS result gives B(B_s0 -> mu+mu-) = (2.8 +0.8 -0.7) x 10^-9 and B(B0 -> mu+mu-) < 2.1 x 10^-10 at 95% confidence level.\nL15: The combined result is consistent with the Standard Model prediction within 2.4 standard deviations in the B(B0 -> mu+mu-) - B(B_s0 -> mu+mu-) plane.\n"
+              },
+              {
+                "line_number": 14,
+                "context": "L11: ArXiv abstract excerpt:\nL12: A study of the decays B_s0 -> mu+mu- and B0 -> mu+mu- has been performed using 26.3 fb^-1 of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016.\nL13: The 2015-2016 data alone give B(B_s0 -> mu+mu-) = (3.2 +1.1 -1.0) x 10^-9 and B(B0 -> mu+mu-) < 4.3 x 10^-10 at 95% confidence level.\nL14: The result combined with the Run 1 ATLAS result gives B(B_s0 -> mu+mu-) = (2.8 +0.8 -0.7) x 10^-9 and B(B0 -> mu+mu-) < 2.1 x 10^-10 at 95% confidence level.\nL15: The combined result is consistent with the Standard Model prediction within 2.4 standard deviations in the B(B0 -> mu+mu-) - B(B_s0 -> mu+mu-) plane.\n"
+              },
+              {
+                "line_number": 15,
+                "context": "L12: A study of the decays B_s0 -> mu+mu- and B0 -> mu+mu- has been performed using 26.3 fb^-1 of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016.\nL13: The 2015-2016 data alone give B(B_s0 -> mu+mu-) = (3.2 +1.1 -1.0) x 10^-9 and B(B0 -> mu+mu-) < 4.3 x 10^-10 at 95% confidence level.\nL14: The result combined with the Run 1 ATLAS result gives B(B_s0 -> mu+mu-) = (2.8 +0.8 -0.7) x 10^-9 and B(B0 -> mu+mu-) < 2.1 x 10^-10 at 95% confidence level.\nL15: The combined result is consistent with the Standard Model prediction within 2.4 standard deviations in the B(B0 -> mu+mu-) - B(B_s0 -> mu+mu-) plane.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

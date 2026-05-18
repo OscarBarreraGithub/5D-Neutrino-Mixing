@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryTable from '../../components/EntryTable.astro';
 import families from '../../content/families.json';
 import index from '../../content/catalog_index.json';
 
@@ -9,34 +10,95 @@ export async function getStaticPaths() {
 
 const { family } = Astro.params;
 const meta = families.find((f: any) => f.key === family);
-const entries = (index.entries as any[]).filter((e) => e.family === family);
+const isSecondaryFamily = family === 'secondary';
+
+// Build the row list.  For regular families, include both:
+//   * entries primarily filed under this family
+//   * SECONDARY entries whose original family is this one (deferred-then-promoted)
+// For the 'secondary' pseudo-family, show every SECONDARY entry.
+const allRows = (index.entries as any[]).filter((e) => {
+  if (isSecondaryFamily) return e.tier === 'SECONDARY';
+  if (e.family === family) return true;
+  if (e.tier === 'SECONDARY' && e.family_original === family) return true;
+  return false;
+});
+
+// Sort: PRIMARY first, then SECONDARY, then by process_id.
+allRows.sort((a, b) => {
+  const tA = a.tier === 'SECONDARY' ? 1 : 0;
+  const tB = b.tier === 'SECONDARY' ? 1 : 0;
+  if (tA !== tB) return tA - tB;
+  return (a.process_id || '').localeCompare(b.process_id || '');
+});
+
+const primaryCount = allRows.filter((r) => r.tier !== 'SECONDARY').length;
+const secondaryCount = allRows.filter((r) => r.tier === 'SECONDARY').length;
 ---
 <BaseLayout title={`${meta?.label ?? family} -- Flavor Catalog`}>
   <header class="entry-header">
     <div class="breadcrumbs"><a href="/">Catalog</a> &middot; {meta?.label ?? family}</div>
-    <h1>{meta?.label ?? family} <span class="process-id">{entries.length} entries</span></h1>
-    {meta?.descriptor && <p style="color:var(--color-text-muted); margin:0.4rem 0 1rem;">{meta.descriptor}</p>}
+    <h1>
+      <span>{meta?.label ?? family}</span>
+      <span class="entry-count-pill">{allRows.length} entries</span>
+    </h1>
+    {meta?.descriptor && <p class="family-descriptor">{meta.descriptor}</p>}
+    <div class="family-meta-chips">
+      {primaryCount > 0 && <span class="family-meta-chip">{primaryCount} PRIMARY</span>}
+      {secondaryCount > 0 && <span class="family-meta-chip family-meta-chip-secondary">{secondaryCount} SECONDARY</span>}
+    </div>
   </header>
 
-  <p style="color:var(--color-text-muted); font-size:0.9rem; margin:0 0 1rem;">
-    Full per-family browsing (sortable table, filters, citation modal) lands in
-    Phase 3. For now this page lists the entries with links to per-entry detail pages.
+  {allRows.length === 0 ? (
+    <p class="empty-family">No entries in this family.</p>
+  ) : (
+    <EntryTable rows={allRows} showFamily={isSecondaryFamily} showOriginalFamily={isSecondaryFamily} />
+  )}
+
+  <p class="back-link">
+    <a href="/">&larr; All families</a>
+    &middot;
+    <a href="/browse/">Browse / filter all entries</a>
   </p>
 
-  <div class="family-grid">
-    {entries.map((e: any) => (
-      <a class="family-card" href={`/entries/${e.process_id}/`}>
-        <h2>
-          <span><code style="background:transparent;padding:0;color:var(--color-accent);">{e.process_id}</code></span>
-          <span class="count">{e.tier}</span>
-        </h2>
-        <p>
-          {e.standard_notation ? `$${e.standard_notation}$` : (e.process_name ?? '')}
-        </p>
-        <p style="font-size:0.78rem; color:var(--color-text-muted);">
-          {e.fact_check_verdict} &middot; diff {e.implementation_difficulty} &middot; code {e.code_coverage_status}
-        </p>
-      </a>
-    ))}
-  </div>
+  <script is:inline>
+    (function () {
+      // Click-to-sort on table headers.  Simple ascending/descending toggle,
+      // case-insensitive string compare, numeric for plain numbers.
+      function init() {
+        var tbl = document.querySelector('table[data-entry-table]');
+        if (!tbl) return;
+        var ths = tbl.querySelectorAll('th[data-sort]');
+        var dir = 1;
+        var lastKey = null;
+        ths.forEach(function (th) {
+          th.style.cursor = 'pointer';
+          th.addEventListener('click', function () {
+            var key = th.getAttribute('data-sort');
+            if (!key) return;
+            if (key === lastKey) { dir = -dir; } else { dir = 1; lastKey = key; }
+            var tbody = tbl.querySelector('tbody');
+            if (!tbody) return;
+            var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            rows.sort(function (a, b) {
+              var av = a.getAttribute('data-' + key.replace('process_id','process-id').replace('fact_check_verdict','verdict').replace('implementation_difficulty','difficulty').replace('code_coverage_status','coverage')) || '';
+              var bv = b.getAttribute('data-' + key.replace('process_id','process-id').replace('fact_check_verdict','verdict').replace('implementation_difficulty','difficulty').replace('code_coverage_status','coverage')) || '';
+              // Fallback: read first cell text content for fields not encoded as data-attrs.
+              if (!av && !bv) {
+                var idx = Array.prototype.indexOf.call(th.parentNode.children, th);
+                av = (a.children[idx]?.textContent || '').trim().toLowerCase();
+                bv = (b.children[idx]?.textContent || '').trim().toLowerCase();
+              }
+              if (av === bv) return 0;
+              return av > bv ? dir : -dir;
+            });
+            rows.forEach(function (r) { tbody.appendChild(r); });
+            // mark active header
+            ths.forEach(function (x) { x.classList.remove('th-sorted-asc','th-sorted-desc'); });
+            th.classList.add(dir > 0 ? 'th-sorted-asc' : 'th-sorted-desc');
+          });
+        });
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    })();
+  </script>
 </BaseLayout>

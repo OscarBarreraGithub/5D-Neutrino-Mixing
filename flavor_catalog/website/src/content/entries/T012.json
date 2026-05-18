@@ -154,5 +154,75 @@
   },
   "source_yaml": "flavor_catalog/processes/top_higgs_ew/T012.yaml",
   "source_tex": "flavor_catalog/processes/top_higgs_ew/T012.tex",
-  "worklog_path": "flavor_catalog/worklogs/T012/"
+  "worklog_path": "flavor_catalog/worklogs/T012/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "R_c^0",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt",
+        "sha256": "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.1721 +/- 0.003",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: R_c = Gamma(cc)/Gamma(hadrons)\nL9: OUR FIT is obtained by a simultaneous fit to several c- and b-quark measurements.\nL10: Value: 0.1721 +/- 0.0030 OUR FIT.\nL11:\nL12: A_c\nL13: This quantity is directly extracted from a measurement of the left-right\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "A_FB^{0,c}",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt",
+        "sha256": "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.0707 +/- 0.0035",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: A_FB^(0,c) charge asymmetry in e+ e- -> c c\nL18: OUR FIT refers to the Z pole asymmetry.\nL19: Asymmetry (%): 7.07 +/- 0.35 OUR FIT.\nL20: Converted dimensionless value used in the process note: 0.0707 +/- 0.0035.\nL21:\nL22: Citation line in listing:\nL23: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "A_c",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt",
+        "sha256": "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.67",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: A_c\nL13: This quantity is directly extracted from a measurement of the left-right\nL14: forward-backward asymmetry in c c production at SLC using a polarized electron beam.\nL15: Value: 0.670 +/- 0.027 OUR FIT.\nL16:\nL17: A_FB^(0,c) charge asymmetry in e+ e- -> c c\nL18: OUR FIT refers to the Z pole asymmetry.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
