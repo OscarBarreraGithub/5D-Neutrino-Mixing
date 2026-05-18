@@ -55,13 +55,10 @@ const partialCount = verdictCounts.PARTIAL ?? 0;
         <span class="site-version">v0.4</span>
         <nav class="site-nav">
           <a href="/browse/">Browse</a>
-          <a href="/families/secondary/">Secondary</a>
           <a href="/methodology/">Methodology</a>
         </nav>
         <div class="site-stats">
           <span><strong>{totalEntries}</strong> entries</span>
-          <span class="badge badge-verified">{verifiedCount} V</span>
-          {partialCount > 0 && <span class="badge badge-partial">{partialCount} P</span>}
           <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
             <span id="theme-toggle-icon">o</span>
             <span id="theme-toggle-label">Theme</span>
