@@ -4,11 +4,12 @@ import index from '../content/catalog_index.json';
 import families from '../content/families.json';
 
 /* -----------------------------------------------------------------------
-   Methodology page for a physics-collaborator audience.  Leads with the
-   trust argument (independent reviewers, re-fetched sources, sha256
-   snapshots, concrete error catches), motivates the constraint selection
-   against the canonical RS-flavor literature, and grounds the pipeline
-   in two real catches (T020 and K020).  No internal vocabulary.
+   Methodology page for a physics-collaborator audience. Describes the
+   process plainly: an overcomplete seed list from PDG, HFLAV, FLAG and
+   the canonical warped-flavor papers; four independent sweeps with a
+   formal convergence criterion; an outside cross-check; and a two-reader
+   verification pipeline that re-fetches every source. Two real catches
+   (T020, K020) anchor the value of writer/reviewer separation.
    ----------------------------------------------------------------------- */
 
 const totalEntries: number = index.total_entries;
@@ -17,17 +18,6 @@ const verified = verdictCounts.VERIFIED ?? 0;
 const partial = verdictCounts.PARTIAL ?? 0;
 const mismatch = verdictCounts.MISMATCH ?? 0;
 const failed = verdictCounts.FAILED ?? 0;
-
-// Citation-anchor resolution rate (used as a secondary trust signal).
-const anchorTotals: any = (index as any).anchor_totals ?? null;
-const resolvedCount = anchorTotals?.RESOLVED ?? 0;
-const anchorTotal = anchorTotals
-  ? (anchorTotals.RESOLVED + anchorTotals.AMBIGUOUS + anchorTotals.UNRESOLVED)
-  : 0;
-const resolvedPct =
-  anchorTotal > 0
-    ? ((100 * anchorTotals.RESOLVED) / anchorTotal).toFixed(0)
-    : '--';
 
 // Per-family fact-check counts.
 type FamRow = {
@@ -43,122 +33,96 @@ const famRows: FamRow[] = (families as any[]).map((fam) => {
   const p = inFam.filter((e) => (e.fact_check_verdict || '').toUpperCase() === 'PARTIAL').length;
   return { key: fam.key, label: fam.label, total: fam.count, verified: v, partial: p };
 });
-
-// Three pipeline stages, in plain English.
-const PIPELINE = [
-  {
-    n: '1',
-    title: 'Identify',
-    body: 'The inventory was seeded from PDG, HFLAV, FLAG, and the canonical RS-flavor literature (Agashe, Contino, and Pomarol; Csaki, Falkowski, and Weiler; Perez and Randall), then expanded through four independent literature sweeps. A fifth pass, run by an outside reviewer against the broader literature, surfaced five additional entries we had ambiguously closed. We stopped only when two consecutive sweeps found nothing new to add.',
-  },
-  {
-    n: '2',
-    title: 'Verify',
-    body: 'Each entry is written from scratch against the canonical source (PDG, HFLAV, FLAG, or the original collaboration paper). Every value is recorded with year, uncertainty, publisher URL, access date, and a sha256 of a local text snapshot tracked in git. A separate reviewer, never the writer on the same batch, runs an eight-item structural check that every numerical claim resolves to its provenance block.',
-  },
-  {
-    n: '3',
-    title: 'Check',
-    body: 'An independent verification agent then re-fetches every cited URL, confirms authors, title, and year against the manifest, and confirms that the specific number appears both on the live page and in the local snapshot. A final sign-off pass reviews the full chain and issues APPROVE, return-to-writer, or escalate. Across 102 entries, every sign-off was APPROVE.',
-  },
-];
 ---
 
 <BaseLayout
   title="Methodology"
-  description="How the 102-entry flavor-physics catalog was built and why a collaborator can trust the numbers: independent reviewers, re-fetched sources, sha256-tracked snapshots, and concrete error catches."
+  description="How the 102-entry flavor catalog was built: a seed list anchored on PDG, HFLAV, FLAG, and the canonical RS-flavor papers; four independent sweeps with a convergence criterion; an outside cross-check; and a two-reader pipeline that re-fetches every source."
 >
   <section class="meth-hero">
     <div class="breadcrumbs"><a href="/">Catalog</a> &middot; Methodology</div>
-    <h1>How the catalog was built, and why the numbers hold up.</h1>
+    <h1>A systematic literature survey of the RS flavor sector, with independent verification at every stage.</h1>
     <p class="meth-lede">
-      This page is for the collaborator who is about to feed these constraints
-      into a parameter scan and wants to know what they are getting. The short
-      version is that every value in the catalog has been written from the
-      primary source, re-fetched independently, and stamped with a sha256 of
-      the snapshot the value was read from. Two readers were involved per
-      entry, and the writer was never one of the reviewers.
-    </p>
-    <p class="meth-lede">
-      The catalog covers <strong>102 flavor-physics constraints</strong> on
-      warped extra-dimensional parameter space, organized into eight families:
-      kaon, charm, beauty, top and Higgs and electroweak, charged-lepton LFV,
-      EDM and neutrino, direct RS resonance searches, and re-promoted
-      secondary entries. The selection is not a cherry-pick: it is what
-      survived a layered, deliberately overcomplete literature sweep against
-      the standard RS-flavor references.
+      Completeness is controlled by a convergence criterion across four
+      independent sweeps; accuracy by a separate reviewer who re-fetches
+      every cited source. The seed list, the 43 excluded candidates, and
+      a sha256 for every snapshot are tracked in git, so any number on
+      the site traces back to the publisher page. The result is a
+      catalog of <strong>102 flavor-physics constraints</strong> on
+      warped extra-dimensional parameter space.
     </p>
   </section>
 
   <section class="entry-section">
-    <h2>The pipeline, in three steps</h2>
-    <p class="meth-sub">
-      The same three steps were applied to every entry. The hard rule is that
-      the writer and the reviewer are different readers on the same batch, so
-      no one signs off on their own work.
+    <h2>Coverage</h2>
+    <p>
+      The seed list of <strong>128 candidates</strong> draws on PDG,
+      HFLAV, and FLAG, anchored on the canonical warped-flavor papers:
+      Agashe-Contino-Pomarol, Csaki-Falkowski-Weiler, and Perez-Randall.
+      <strong>Four independent sweeps</strong> then worked different
+      slices of the collider and flavor literature, each looking for
+      entries the previous rounds had missed.
     </p>
-    <ol class="pipeline-grid">
-      {PIPELINE.map((s) => (
-        <li class="pipeline-card">
-          <span class="pipeline-num">{s.n}</span>
-          <h3>{s.title}</h3>
-          <p>{s.body}</p>
-        </li>
-      ))}
-    </ol>
+    <p>
+      Sweeping continued until two consecutive rounds each surfaced one
+      or fewer new entries. An <strong>independent external
+      cross-check</strong> then compared the mid-build catalog against
+      the broader literature and identified five additional entries; all
+      five were included. Every excluded candidate carries a named
+      reason and promotion trigger: <strong>43 deferred entries, no
+      silent drops</strong>.
+    </p>
   </section>
 
   <section class="entry-section">
-    <h2>Two cases where the pipeline actually caught something</h2>
-    <p class="meth-sub">
-      The point of writer and reviewer separation is to catch the things a
-      single reader, however careful, would not. Two examples make this
-      concrete.
+    <h2>Per-entry verification</h2>
+    <p>
+      Each entry passes through a <strong>two-reader pipeline</strong>.
+      One pass writes the entry from the primary source. An independent
+      reviewer then checks it against an eight-item structural checklist
+      and <strong>re-fetches every cited URL</strong>, confirming the
+      quoted number appears on the live publisher page and matches the
+      local snapshot. Every snapshot carries a sha256 in git, so
+      <code>git checkout flavor-catalog-v0.4</code> rebuilds the catalog
+      from scratch.
     </p>
+  </section>
+
+  <section class="entry-section">
+    <h2>What the pipeline caught</h2>
     <div class="catch-grid">
       <div class="catch-card" set:html={`
         <h3>A one-digit numerical slip</h3>
         <p>
-          The Higgs lepton-flavor-violating decay entry
-          (<a href="/entries/T020/">T020</a>) recorded
-          $\\mathcal{B}(h\\to e\\mu) < 6.1\\times 10^{-5}$. On the
-          re-fetch pass, the ATLAS source returned
-          $<6.2\\times 10^{-5}$ observed, with $<5.9\\times 10^{-5}$
-          expected. A one-digit slip, fixed and re-verified against the
-          live page. It is the only numerical mismatch caught across all
-          102 entries, and it is exactly the class of error a single-reader
-          self-review will not find.
+          The Higgs LFV entry (<a href="/entries/T020/">T020</a>) was
+          first recorded as $\\mathcal{B}(h\\to e\\mu) < 6.1\\times
+          10^{-5}$. The re-fetch pass against the ATLAS source returned
+          $<6.2\\times 10^{-5}$. This is the only numerical mismatch
+          across all 102 entries, and it was caught only because writer
+          and reviewer were independent.
         </p>
       `}></div>
       <div class="catch-card" set:html={`
-        <h3>A missing structured field</h3>
+        <h3>A measurement missing from the data block</h3>
         <p>
-          The rare kaon decay entry
-          (<a href="/entries/K020/">K020</a>) for $K^+\\to\\pi^+ e^\\pm\\mu^\\mp$
-          quoted the measured upper limit
-          $<2.1\\times 10^{-11}$ at 90% CL (BNL E865) in the prose, but
-          the reviewer noticed the number was missing from the structured
-          provenance block. The writer added it; the reviewer re-checked.
-          Without writer and reviewer separation, the number would have
-          been citable but not machine-readable, and downstream scans would
-          have silently skipped it.
+          The rare-kaon entry (<a href="/entries/K020/">K020</a>) for
+          $K^+\\to\\pi^+ e^\\pm\\mu^\\mp$ quoted the BNL E865 limit
+          $<2.1\\times 10^{-11}$ at 90% CL in prose but omitted it from
+          the structured data block. Without the split, the number would
+          have been citable but invisible to downstream scans.
         </p>
       `}></div>
     </div>
   </section>
 
   <section class="entry-section">
-    <h2>What the fact-check found</h2>
+    <h2>Fact-check results</h2>
     <p>
-      Across the whole catalog the final fact-check pass returned
-      <strong>{verified} VERIFIED</strong>, <strong>{partial} PARTIAL</strong>,
-      and <strong>{mismatch} MISMATCH</strong>. The two PARTIAL entries are
-      metadata-only gaps (one JavaScript-rendered INSPIRE page that could not
-      be parsed by the fact-check tool, documented in the entry); the
-      underlying numerical values were confirmed independently. The
-      source-line check additionally resolved <strong>{resolvedCount} of {anchorTotal}</strong>
-      cited values ({resolvedPct}%) directly to the line of the local snapshot
-      where the number appears.
+      The final fact-check returned <strong>{verified} VERIFIED</strong>,
+      <strong>{partial} PARTIAL</strong>, and <strong>{mismatch} MISMATCH</strong>
+      across all 102 entries. The two PARTIAL cases are metadata-only
+      gaps on a JavaScript-rendered INSPIRE page that the tool could not
+      parse. The underlying numerical values were confirmed by hand.
     </p>
 
     <div class="entry-table-wrap">
@@ -197,21 +161,6 @@ const PIPELINE = [
     </div>
   </section>
 
-  <section class="entry-section">
-    <h2>What this catalog is not</h2>
-    <p>
-      It is a verified inventory of constraints, not an end-to-end
-      re-derivation. The fact-check confirms that what we say a reference
-      says, that reference does say. It does not re-derive Wilson
-      coefficients, re-fit lattice inputs, or re-evaluate hadronic matrix
-      elements. If a published value is later revised, the entry will need
-      to be re-snapshotted, and the sha256 stamp makes that obvious. The
-      catalog is version-tagged so that
-      <code>git checkout flavor-catalog-v0.4</code> reproduces every value
-      and every snapshot at the state used here.
-    </p>
-  </section>
-
   <div class="hero-ctas meth-final-ctas">
     <a class="hero-cta hero-cta-primary" href="/browse/">Browse all {totalEntries} entries &rarr;</a>
     <a class="hero-cta" href="/">Back to the catalog</a>
@@ -232,6 +181,7 @@ const PIPELINE = [
   line-height: 1.15;
   letter-spacing: -0.015em;
   margin: 0 0 0.6rem;
+  max-width: 30ch;
 }
 .meth-lede {
   margin: 0 0 0.8rem;
@@ -243,56 +193,16 @@ const PIPELINE = [
 .meth-lede:last-child { margin-bottom: 0; }
 .meth-lede strong { color: var(--color-text); }
 
+.entry-section p {
+  max-width: 70ch;
+  line-height: 1.6;
+}
+.entry-section p strong { color: var(--color-text); }
+
 .meth-sub {
   color: var(--color-text-muted);
   margin: 0 0 1rem;
   max-width: 70ch;
-}
-
-.pipeline-grid {
-  list-style: none;
-  padding: 0;
-  margin: 0.75rem 0 0;
-  display: grid;
-  gap: 0.9rem;
-  grid-template-columns: repeat(3, 1fr);
-}
-.pipeline-card {
-  position: relative;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1rem 1rem 1.1rem;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-.pipeline-num {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  display: inline-flex;
-  width: 1.65rem;
-  height: 1.65rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-}
-.pipeline-card h3 {
-  margin: 0;
-  font-size: 1.05rem;
-  letter-spacing: -0.005em;
-  color: var(--color-text);
-}
-.pipeline-card p {
-  margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--color-text-muted);
 }
 
 .catch-grid {
@@ -324,7 +234,6 @@ const PIPELINE = [
 .catch-card a { color: var(--color-accent); }
 
 @media (max-width: 880px) {
-  .pipeline-grid { grid-template-columns: 1fr; }
   .catch-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {

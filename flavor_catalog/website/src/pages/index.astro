@@ -28,41 +28,18 @@ const highPriorityCount: number = priorityCounts ? (priorityCounts.HIGH ?? 0) : 
   <section class="hero">
     <h1>Flavor catalog for the 5D&hairsp;/&hairsp;RS scan</h1>
     <p>
-      A snapshot of {totalEntries} flavor-physics processes that constrain, or could constrain,
-      the Randall&ndash;Sundrum model parameter scan in this repository.
+      102 flavor-physics constraints on the Randall&ndash;Sundrum model parameter space.
     </p>
   </section>
 
   <div class="hero-ctas">
     <a class="hero-cta hero-cta-primary" href="/browse/">Browse all {totalEntries} entries &rarr;</a>
-    <a class="hero-cta" href="/methodology/">How this catalog was built &rarr;</a>
   </div>
 
-  <div class="catalog-stats-strip">
-    <span>{primaryCount} primary</span>
-    <span class="stats-sep">&middot;</span>
-    <span>{secondaryCount} secondary</span>
-    <span class="stats-sep">&middot;</span>
-    <span>{verified} verified</span>
-    {partial > 0 && <><span class="stats-sep">&middot;</span><span>{partial} partial</span></>}
-    {mismatch > 0 && <><span class="stats-sep">&middot;</span><span>{mismatch} mismatch</span></>}
-    {highPriorityCount > 0 && (
-      <>
-        <span class="stats-sep">&middot;</span>
-        <span>{highPriorityCount} leading constraints</span>
-      </>
-    )}
-    {anchorTotal > 0 && (
-      <>
-        <span class="stats-sep">&middot;</span>
-        <span>{anchorTotal} citation anchors</span>
-      </>
-    )}
-  </div>
 
   <h2 class="section-eyebrow">Families</h2>
   <div class="family-grid">
-    {families.map((fam) => (
+    {families.filter((fam) => fam.key !== 'secondary').map((fam) => (
       <a class="family-card" href={`/families/${fam.key}/`}>
         <h2>
           <span>{fam.label}</span>

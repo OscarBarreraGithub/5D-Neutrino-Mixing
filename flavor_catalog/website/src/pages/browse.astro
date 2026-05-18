@@ -12,7 +12,7 @@ const rows = (index.entries as any[]).slice().sort((a, b) =>
   (a.process_id || '').localeCompare(b.process_id || '')
 );
 
-const families_list = families.filter((f: any) => f.count > 0);
+const families_list = families.filter((f: any) => f.count > 0 && f.key !== 'secondary');
 ---
 <BaseLayout title="Browse / filter -- Flavor Catalog"
             description="Filter and search the 102-entry catalog by family, priority, implementation difficulty, and code coverage.">
