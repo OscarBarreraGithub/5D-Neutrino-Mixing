@@ -440,10 +440,13 @@ function isParticleToken(tok: string): boolean {
 }
 
 function normalizeShorthandToken(tok: string): string {
-  return tok
+  let out = tok
     .replace(/(?<!\\)\bnubar\b/g, '\\bar{\\nu}')
     .replace(/(?<!\\)\bbbar\b/g, '\\bar{b}')
     .replace(/(?<!\\)\bcbar\b/g, '\\bar{c}')
+    .replace(/(?<!\\)\btbar\b/g, '\\bar{t}')
+    .replace(/(?<!\\)\bsbar\b/g, '\\bar{s}')
+    .replace(/(?<!\\)\bdbar\b/g, '\\bar{d}')
     // Charged-pi style: pi+, pi-, pi0 -> \pi^+, \pi^-, \pi^0.
     .replace(/(?<!\\)\bpi([+\-])/g, '\\pi^$1')
     .replace(/(?<!\\)\bpi0\b/g, '\\pi^0')
@@ -452,13 +455,33 @@ function normalizeShorthandToken(tok: string): string {
     .replace(/(?<!\\)\btau([+\-])/g, '\\tau^$1')
     .replace(/(?<!\\)\bell([+\-])/g, '\\ell^$1')
     .replace(/(?<!\\)\be([+\-])(?=\W|$)/g, 'e^$1')
-    .replace(/(?<!\\)\bnu\b/g, '\\nu')
-    .replace(/(?<!\\)\bmu\b/g, '\\mu')
-    .replace(/(?<!\\)\btau\b/g, '\\tau')
-    .replace(/(?<!\\)\bgamma\b/g, '\\gamma')
-    .replace(/(?<!\\)\bpi\b/g, '\\pi')
-    .replace(/(?<!\\)\bphi\b/g, '\\phi')
-    .replace(/(?<!\\)\bell\b/g, '\\ell');
+    // Lowercase Greek: allow trailing "_" as boundary (e.g. "nu_e", "mu_nu").
+    .replace(/(?<![\\A-Za-z])nu(?=\b|_)/g, '\\nu')
+    .replace(/(?<![\\A-Za-z])mu(?=\b|_)/g, '\\mu')
+    .replace(/(?<![\\A-Za-z])tau(?=\b|_)/g, '\\tau')
+    .replace(/(?<![\\A-Za-z])gamma(?=\b|_)/g, '\\gamma')
+    .replace(/(?<![\\A-Za-z])pi(?=\b|_)/g, '\\pi')
+    .replace(/(?<![\\A-Za-z])phi(?=\b|_)/g, '\\phi')
+    .replace(/(?<![\\A-Za-z])psi(?=\b|_)/g, '\\psi')
+    .replace(/(?<![\\A-Za-z])ell(?=\b|_)/g, '\\ell')
+    .replace(/(?<![\\A-Za-z])rho(?=\b|_)/g, '\\rho')
+    .replace(/(?<![\\A-Za-z])omega(?=\b|_)/g, '\\omega')
+    .replace(/(?<![\\A-Za-z])eta(?=\b|_)/g, '\\eta')
+    // Capital Greek used in baryons and FCNC observables.
+    .replace(/(?<![\\A-Za-z])Lambda(?=\b|_)/g, '\\Lambda')
+    .replace(/(?<![\\A-Za-z])Sigma(?=\b|_)/g, '\\Sigma')
+    .replace(/(?<![\\A-Za-z])Delta(?=\b|_)/g, '\\Delta')
+    .replace(/(?<![\\A-Za-z])Gamma(?=\b|_)/g, '\\Gamma')
+    .replace(/(?<![\\A-Za-z])Omega(?=\b|_)/g, '\\Omega')
+    .replace(/(?<![\\A-Za-z])Xi(?=\b|_)/g, '\\Xi')
+    .replace(/(?<![\\A-Za-z])Upsilon(?=\b|_)/g, '\\Upsilon')
+    .replace(/(?<![\\A-Za-z])Phi(?=\b|_)/g, '\\Phi')
+    .replace(/(?<![\\A-Za-z])Psi(?=\b|_)/g, '\\Psi');
+  // Wrap multi-letter subscripts/superscripts in braces so KaTeX doesn't
+  // truncate (matches the same fixup applied in lib/notation.ts).
+  out = out.replace(/([_^])\(([^()]*)\)/g, (_m, op, body) => `${op}{(${body})}`);
+  out = out.replace(/([_^])([A-Za-z][A-Za-z]+)(?![A-Za-z{}])/g, (_m, op, idx) => `${op}{${idx}}`);
+  return out;
 }
 
 function wrapPhysicsShorthand(text: string): string {
