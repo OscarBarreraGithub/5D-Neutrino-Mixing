@@ -1,0 +1,149 @@
+---
+process_id: K021
+generated_at: '2026-05-18T01:54:04Z'
+sources:
+- block_key: PDG2025:K021:KL_pi0emu_limit
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf
+  snapshot_path: flavor_catalog/references/K021/pdg2025_kl_pi0emu.txt
+  sha256: sha256:a6e37f9494c96044d4e84e41a1fe331d6cfd14208ac2b9d98ee1b0e9894e019a
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: < 7.6 x 10^-11 (90% CL)
+    status: AMBIGUOUS
+    matches:
+    - line_number: 14
+      context: |-
+        L11:   Charge conjugation x parity (CP) or Lepton Family number (LF)
+        L12:   violating modes, or Delta S = 1 weak neutral current (S1) modes.
+        L13:
+        L14:   Gamma_37  pi0 mu+- e-+    LF [a]   < 7.6 x 10^-11   CL=90%
+        L15:
+        L16:   [a] The value is for the sum of the charge states or particle/antiparticle
+        L17:       states indicated.
+    - line_number: 32
+      context: |-
+        L29:
+        L30: Interpretation for K021:
+        L31:   PDG's current canonical upper limit is
+        L32:   BR(K_L -> pi0 mu+- e-+) < 7.6 x 10^-11 at 90% CL,
+        L33:   for the summed charge states.
+- block_key: KTeV2008:K021:KL_pi0mue_limit
+  source_url: https://arxiv.org/abs/0711.3472
+  snapshot_path: flavor_catalog/references/K021/ktev_abouzaid_2008_arxiv0711_3472.txt
+  sha256: sha256:e17b4f9fced043e63de388e8499dbe1a4d0ff779b4926d8727122ff26cada763
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: < 7.56 x 10^-11 (90% CL)
+    status: RESOLVED
+    matches:
+    - line_number: 17
+      context: |-
+        L14: the K_L meson in three decay modes. It observed no events in the signal region
+        L15: for any of the modes studied and set 90% CL upper limits:
+        L16:
+        L17:   BR(K_L -> pi0 mu e) < 7.56 x 10^-11
+        L18:   BR(K_L -> pi0 pi0 mu e) < 1.64 x 10^-10
+        L19:   BR(pi0 -> mu e) < 3.59 x 10^-10
+        L20:
+- block_key: NA622021:K021:Kplus_piplus_mum_ep_limit
+  source_url: https://arxiv.org/abs/2105.06759
+  snapshot_path: flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt
+  sha256: sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value
+    anchor_string: '6.6e-11'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 16
+      context: |-
+        L13: NA62 searched for K+ -> pi- mu+ e+, K+ -> pi+ mu- e+, and pi0 -> mu- e+
+        L14: using 2017-2018 CERN data. No evidence was found. The 90% CL limits were:
+        L15:
+        L16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11
+        L17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11
+        L18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10
+        L19:
+    - line_number: 17
+      context: |-
+        L14: using 2017-2018 CERN data. No evidence was found. The 90% CL limits were:
+        L15:
+        L16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11
+        L17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11
+        L18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10
+        L19:
+        L20: The abstract states these results improve previous results for these decay
+- block_key: NA622021:K021:Kplus_piminus_mup_ep_limit
+  source_url: https://arxiv.org/abs/2105.06759
+  snapshot_path: flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt
+  sha256: sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value
+    anchor_string: '4.2e-11'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 16
+      context: |-
+        L13: NA62 searched for K+ -> pi- mu+ e+, K+ -> pi+ mu- e+, and pi0 -> mu- e+
+        L14: using 2017-2018 CERN data. No evidence was found. The 90% CL limits were:
+        L15:
+        L16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11
+        L17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11
+        L18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10
+        L19:
+    - line_number: 17
+      context: |-
+        L14: using 2017-2018 CERN data. No evidence was found. The 90% CL limits were:
+        L15:
+        L16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11
+        L17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11
+        L18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10
+        L19:
+        L20: The abstract states these results improve previous results for these decay
+- block_key: NA622021:K021:pi0_mum_ep_limit
+  source_url: https://arxiv.org/abs/2105.06759
+  snapshot_path: flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt
+  sha256: sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value
+    anchor_string: '3.2e-10'
+    status: RESOLVED
+    matches:
+    - line_number: 18
+      context: |-
+        L15:
+        L16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11
+        L17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11
+        L18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10
+        L19:
+        L20: The abstract states these results improve previous results for these decay
+        L21: modes by one order of magnitude.
+- block_key: experiment_input
+  source_url: https://arxiv.org/abs/0711.3472
+  snapshot_path: flavor_catalog/references/K021/ktev_abouzaid_2008_arxiv0711_3472.txt
+  sha256: sha256:e17b4f9fced043e63de388e8499dbe1a4d0ff779b4926d8727122ff26cada763
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value
+    anchor_string: '7.56e-11'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 17
+      context: |-
+        L14: the K_L meson in three decay modes. It observed no events in the signal region
+        L15: for any of the modes studied and set 90% CL upper limits:
+        L16:
+        L17:   BR(K_L -> pi0 mu e) < 7.56 x 10^-11
+        L18:   BR(K_L -> pi0 pi0 mu e) < 1.64 x 10^-10
+        L19:   BR(pi0 -> mu e) < 3.59 x 10^-10
+        L20:
+    - line_number: 23
+      context: |-
+        L20:
+        L21: Role in K021:
+        L22:   This is the experiment input behind the current PDG K_L -> pi0 mu+- e-+
+        L23:   limit. PDG rounds the K021 limit to < 7.6 x 10^-11.

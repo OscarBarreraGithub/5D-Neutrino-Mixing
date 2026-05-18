@@ -1,0 +1,61 @@
+---
+process_id: B011
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: canonical_experimental_average
+  source_url: https://hflav.web.cern.ch/results
+  snapshot_path: flavor_catalog/references/B011/hflav_results_2026-05-16.txt
+  sha256: sha256:81dde0df2037a0ef6bfc4f03571bf53c3aa99415291afbf97b51f18cd5670c88
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: CP- and isospin-averaged branching fraction B(B -> X_s gamma) = (3.49 +- 0.19)e-4
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16:
+        L17: b-hadron decays to charmless final states
+        L18:
+        L19: B(B -> X_s gamma) (E_gamma > 1.6 GeV)  (3.49 +/- 0.19) x 10^-4
+        L20:
+        L21: Extraction note:
+        L22: This is the canonical HFLAV average used here as the experimental value for
+- block_key: sm_prediction_current
+  source_url: https://arxiv.org/abs/2002.01548
+  snapshot_path: flavor_catalog/references/B011/misiak_rehman_steinhauser_2020_arxiv.txt
+  sha256: sha256:8a3ec66a22c38965404f46c2a688b822e403ac138dc4c6e30162baa60a5b9c17
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: SM prediction for B_s gamma = (3.4 +- 0.17)e-4
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: |
+        L24: Taking into account the recently improved estimates of non-perturbative
+        L25: contributions, we find
+        L26:
+        L27: B_s gamma = (3.40 +/- 0.17) x 10^-4
+        L28:
+        L29: and
+        L30:
+- block_key: sm_prediction_pdg_review_quote
+  source_url: https://arxiv.org/abs/1503.01789
+  snapshot_path: flavor_catalog/references/B011/misiak_et_al_2015_arxiv.txt
+  sha256: sha256:c252dbcd2b423992516bc095e15b0756848e2d859641357166d85823309609f5
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: NNLO SM prediction for b -> s gamma = (3.36 +- 0.23)e-4
+    status: RESOLVED
+    matches:
+    - line_number: 31
+      context: |
+        L28:
+        L29: For the CP- and isospin-averaged branching ratios, we find
+        L30:
+        L31: B_s gamma = (3.36 +/- 0.23) x 10^-4
+        L32:
+        L33: and
+        L34:

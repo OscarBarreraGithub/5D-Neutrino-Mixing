@@ -1,0 +1,42 @@
+---
+process_id: B016
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: observables[0]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_l+_l-.html
+  snapshot_path: flavor_catalog/references/B016/hflav_dec2025_Bplus_to_Kplus_ll.txt
+  sha256: sha256:d57204eb4634e0ad43be577e1efc1ed874cdd586452f7b0b796c210191c6da25
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B+ -> K+ ell+ ell-) = 5.76 +- +/- 0.40 10^-7
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |
+        L9: Relevant table excerpt:
+        L10:
+        L11: Experiment | Measurement [10^-7] | Delta chi^2 | Reference | Comments
+        L12: Average | 5.76 +/- 0.40 | 1.37 | p=0.24 (ndf=1) |
+        L13:   Treatment of charmonium intermediate components differs between the results.
+        L14: PDG | 4.71 +/- 0.46 | | pdgLive |
+        L15: BELLE | 5.99^{+0.45}_{-0.43} +/- 0.14 |
+- block_key: observables[1]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bd/BR_B0_K0_l+_l-.html
+  snapshot_path: flavor_catalog/references/B016/hflav_dec2025_B0_to_K0_ll.txt
+  sha256: sha256:44551ba39055e7a12e74a5c97de51e8ef651139a515a17bf4becbc6b45c41281
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B0 -> K0 ell+ ell-) = 3.28 +- +/- 0.32 10^-7
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |
+        L9: Relevant table excerpt:
+        L10:
+        L11: Experiment | Measurement [10^-7] | Delta chi^2 | Reference | Comments
+        L12: Average | 3.28 +/- 0.32 | 0.76 | p=0.68 (ndf=2) |
+        L13:   Treatment of charmonium intermediate components differs between the results.
+        L14: PDG | 3.29^{+0.63}_{-0.55} | | pdgLive |
+        L15: LHCb | 3.27 +/- 0.34 +/- 0.17 | 0.00 |

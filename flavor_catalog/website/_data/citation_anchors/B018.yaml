@@ -1,0 +1,98 @@
+---
+process_id: B018
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: observables[0]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B%2B_K%2B_mu%2B_mu-..B%2B_K%2B_e%2B_e-__bin1.html
+  snapshot_path: flavor_catalog/references/B018/hflav_dec2025_rk_lowq2.txt
+  sha256: sha256:bcca89f01ff617b34d23e3c6268b6308752588d0f57338f89e4784e45a140c7f
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: R_K low-q2 = 0.994 +- +/- 0.090
+    status: AMBIGUOUS
+    matches:
+    - line_number: 15
+      context: |
+        L12: <h1>$\frac{ {\cal{B}}(B^+ \to K^+ \mu^+ \mu^-) }{ {\cal{B}}(B^+ \to K^+ e^+ e^-) },~0.1 < m^2_{\ell^+\ell^-} < 1.1~\rm{GeV^2/c^4}$</h1>
+        L13: <p><img src="BR_B+_K+_mu+_mu-..B+_K+_e+_e-__bin1.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$0.994 \pm0.090$</b></td><td></td><td></td><td></td></tr>
+        L16: <tr><td>LHCb</td><td>$0.994\,^{+0.090}_{-0.082}\,^{+0.029}_{-0.027}$</td><td>0.00</td>
+        L17: <td><a href="https://inspirehep.net/literature/2684465">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>
+        L18: </table>
+    - line_number: 16
+      context: |
+        L13: <p><img src="BR_B+_K+_mu+_mu-..B+_K+_e+_e-__bin1.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$0.994 \pm0.090$</b></td><td></td><td></td><td></td></tr>
+        L16: <tr><td>LHCb</td><td>$0.994\,^{+0.090}_{-0.082}\,^{+0.029}_{-0.027}$</td><td>0.00</td>
+        L17: <td><a href="https://inspirehep.net/literature/2684465">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>
+        L18: </table>
+        L19: </p>
+- block_key: observables[1]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B%2B_K%2B_mu%2B_mu-..B%2B_K%2B_e%2B_e-__bin2b.html
+  snapshot_path: flavor_catalog/references/B018/hflav_dec2025_rk_centralq2.txt
+  sha256: sha256:43fd3133f5ac4945d1513ced3cbce5512faf7981db950b0a85cacbf68ec3bf72
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: R_K central-q2 = 0.947 +- +/- 0.047
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12: <h1>$\frac{ {\cal{B}}(B^+ \to K^+ \mu^+ \mu^-) }{ {\cal{B}}(B^+ \to K^+ e^+ e^-) },~1.1 < m^2_{\ell^+\ell^-} < 6.0~\rm{GeV^2/c^4}$</h1>
+        L13: <p><img src="BR_B+_K+_mu+_mu-..B+_K+_e+_e-__bin2b.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$0.947 \pm0.047$</b></td><td>0.19</td><td>$p=0.66$ (ndf=1)</td><td></td></tr>
+        L16: <tr><td>LHCb</td><td>$0.949\,^{+0.042}_{-0.041} \pm0.022$</td><td>0.00</td>
+        L17: <td><a href="https://inspirehep.net/literature/2684465">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>
+        L18: <tr><td>CMS</td><td>$0.78\,^{+0.46}_{-0.23}\,^{+0.09}_{-0.05}$</td><td>0.19</td>
+- block_key: observables[2]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B%2B_K%2B_mu%2B_mu-..BR_B%2B_K%2B_e%2B_e-.html
+  snapshot_path: flavor_catalog/references/B018/hflav_dec2025_rk_fullq2_belle.txt
+  sha256: sha256:f33098cc54f38393e335c696005843911aa086f1e0455da98e4f02b15fbbeb65
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: R_K full-q2 Belle-only = 1.08 +- +/- 0.16
+    status: AMBIGUOUS
+    matches:
+    - line_number: 15
+      context: |
+        L12: <h1>$\frac{ {\cal{B}}(B^+ \to K^+ \mu^+ \mu^-) }{ {\cal{B}}(B^+ \to K^+ e^+ e^-) },~\rm{Full}~m^2_{\ell^+\ell^-}~\rm{range}$</h1>
+        L13: <p><img src="BR_B+_K+_mu+_mu-..BR_B+_K+_e+_e-.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$1.08 \pm0.16$</b></td><td></td><td></td><td></td></tr>
+        L16: <tr><td>BELLE</td><td>$1.08\,^{+0.16}_{-0.15} \pm0.02$</td><td>0.00</td>
+        L17: <td><a href="https://inspirehep.net/literature/1748231">JHEP <b>03</b>,105 (2021)</a></td><td></td></tr>
+        L18: </table>
+    - line_number: 16
+      context: |
+        L13: <p><img src="BR_B+_K+_mu+_mu-..BR_B+_K+_e+_e-.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$1.08 \pm0.16$</b></td><td></td><td></td><td></td></tr>
+        L16: <tr><td>BELLE</td><td>$1.08\,^{+0.16}_{-0.15} \pm0.02$</td><td>0.00</td>
+        L17: <td><a href="https://inspirehep.net/literature/1748231">JHEP <b>03</b>,105 (2021)</a></td><td></td></tr>
+        L18: </table>
+        L19: </p>
+- block_key: observables[3]
+  source_url: https://arxiv.org/abs/2105.10303
+  snapshot_path: flavor_catalog/references/B018/lhcb_2021_rk_arxiv2105_10303.txt
+  sha256: sha256:6f0e92c95b3b7139bf70009c3b72babcca37938969eb573723382d53fd1d3671
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: superseded LHCb 2021 central-q2 R_K = 0.846 +- +0.042/-0.039 stat, +0.013/-0.012 syst
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |
+        L13:     <updated>2021-05-21T12:10:06Z</updated>
+        L14:     <link href="https://arxiv.org/abs/2105.10303v1" rel="alternate" type="text/html"/>
+        L15:     <link href="https://arxiv.org/pdf/2105.10303v1" rel="related" type="application/pdf" title="pdf"/>
+        L16:     <summary>In the Standard Model of particle physics, charged leptons of different flavour couple to the electroweak force carriers with the same interaction strength. This property, known as lepton flavour universality, was found to be consistent with experimental evidence in a wide range of particle decays. Lepton flavour universality can be tested by comparing branching fractions in ratios such as $R_K = \mathcal{B}(B^+ \rightarrow K^+ μ^+ μ^-)/\mathcal{B}(B^+ \rightarrow K^+ e^+ e^-)$. This observable is measured using proton-proton collision data recorded with the LHCb detector at CERN's Large Hadron Collider corresponding to an integrated luminosity of $9 \rm{~fb}^{-1}$. For a dilepton invariant mass range of $q^{2} \in [1.1,6.0]~\rm{Ge}\kern -0.1em \rm{V}^{2}$, the measured value of $R_{K}=0.846\,^{+\,0.042}_{-\,0.039}\,^{+\,0.013}_{-\,0.012}$, where the first uncertainty is statistic and the second systematic, is in tension with the Standard Model predicted value at the $3.1σ$ level raising evidence for lepton flavour universality violation in $B^+ \rightarrow K^+ \ell^+ \ell^-$ decays.</summary>
+        L17:     <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+        L18:     <category term="hep-ph" scheme="http://arxiv.org/schemas/atom"/>
+        L19:     <published>2021-05-21T12:10:06Z</published>

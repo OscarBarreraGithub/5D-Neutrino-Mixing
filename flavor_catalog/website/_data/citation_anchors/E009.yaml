@@ -1,0 +1,97 @@
+---
+process_id: E009
+generated_at: '2026-05-17T21:55:00-04:00'
+sources:
+- block_key: measured_experimental_anchor.neutron_edm
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM
+  snapshot_path: flavor_catalog/references/E009/pdg2026_neutron_edm_datablock.txt
+  sha256: ea22e4f3da86358b3e4fb51bb7774b24fe1d475824e706a120e739e110757881
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: '|d_n| < 1.8 x 10^-26 e cm at 90% CL'
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: |-
+        L17: Canonical direct result:
+        L18:   <0.18, CL = 90%, ABEL 2020, method MRS UCN.
+        L19: Converted value:
+        L20:   |d_n| < 1.8 x 10^-26 e cm at 90% CL.
+        L21:
+        L22: PDG measurement note for ABEL 2020:
+        L23:   d = (0.0 +/- 1.1 +/- 0.2) x 10^-26 e cm, corresponding to the listed
+- block_key: measured_experimental_anchor.primary_experiment
+  source_url: https://arxiv.org/abs/2001.11966
+  snapshot_path: flavor_catalog/references/E009/abel2020_neutron_edm_arxiv2001_11966.txt
+  sha256: a78b99dfd3961fb8fc756238e7c51f425725bd7590b49e49842e48134559f4fa
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm; |d_n| < 1.8 x 10^-26 e cm at 90% CL
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |-
+        L12:
+        L13: Relevant experimental statement:
+        L14:   The measured value of the neutron EDM is
+        L15:   d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm.
+        L16:
+        L17: Canonical limit as used by PDG:
+        L18:   |d_n| < 1.8 x 10^-26 e cm at 90% CL.
+- block_key: PospelovRitz2005:E009:weinberg_normalization
+  source_url: https://arxiv.org/abs/hep-ph/0504231
+  snapshot_path: flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt
+  sha256: sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: '|d_n(w)| approximately e * 22 MeV * w(1 GeV)'
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |-
+        L19: Weinberg-operator neutron EDM estimate:
+        L20:   |d_n(w)| approximately equals |mu_n| [3 g_s m_0^2 /(32 pi^2)]
+        L21:   w ln(M^2/mu_IR^2), and for M/mu_IR = 2 with g_s = 2.1 the review quotes
+        L22:   |d_n(w)| about e * 22 MeV * w(1 GeV).
+        L23:
+        L24: Use in E009:
+        L25:   Paper-era normalization and benchmark translation from the Weinberg
+- block_key: PospelovRitz2005:E009:weinberg_scale
+  source_url: https://arxiv.org/abs/hep-ph/0504231
+  snapshot_path: flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt
+  sha256: sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: The Pospelov-Ritz benchmark writes the coefficient as w(1 GeV).
+    status: RESOLVED
+    matches:
+    - line_number: 26
+      context: |-
+        L23:
+        L24: Use in E009:
+        L25:   Paper-era normalization and benchmark translation from the Weinberg
+        L26:   coefficient w(1 GeV) to the neutron EDM. This is a theory normalization, not
+        L27:   a measured PDG value.
+- block_key: HaischHala2019:E009:o6_normalization
+  source_url: https://arxiv.org/abs/1909.08955
+  snapshot_path: flavor_catalog/references/E009/haisch_hala2019_weinberg_sum_rules_arxiv1909_08955.txt
+  sha256: sha256:ae1c67f2535e7c0340236485a32f25e8c3cf87d8ecf068c02321c84464f07ee7
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: (d_n/e)_O6 = 74(1 +/- 0.5) MeV
+    status: RESOLVED
+    matches:
+    - line_number: 24
+      context: |-
+        L21:   from f^{ABC}, the dual gluon field strength, and two gluon field strengths.
+        L22:
+        L23: Numerical result in the Haisch-Hala O6 normalization:
+        L24:   (d_n / e)_O6 = 74 (1 +/- 0.5) MeV.
+        L25:
+        L26: Uncertainty statement:
+        L27:   The final relative error is 50%; the dominant source is the scale-ratio

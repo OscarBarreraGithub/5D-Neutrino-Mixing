@@ -1,0 +1,42 @@
+---
+process_id: L009
+generated_at: '2026-05-18T01:53:04Z'
+sources:
+- block_key: Branching fraction upper limit for tau^- -> mu^- mu+ mu^-
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-tau.pdf
+  snapshot_path: flavor_catalog/references/L009/pdg_2025_tau_listing.txt
+  sha256: ad13c510e28abf9791e8457bb28fa4b28cc9d4c7b0904b8b7eb247c769d356e2
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '1.9e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: "L17: Test of lepton family number conservation.\nL18: \nL19: PDG best listed limit:\nL20: BR(tau^- -> mu^-\
+        \ mu+ mu-) < 1.9 x 10^-8, CL = 90%.\nL21: Document ID: ADACHI 24R, Belle II, 424 fb^-1, e+e- at sqrt(s) = 10.6 GeV.\n\
+        L22: \nL23: Other listed measurements in the same PDG block:\n"
+- block_key: Branching fraction upper limit for tau^- -> mu^- mu+ mu^-
+  source_url: https://arxiv.org/abs/2405.07386
+  snapshot_path: flavor_catalog/references/L009/belleii_2024_arxiv_2405_07386.txt
+  sha256: 190f6aa5e4a0f421fc2cb9a5b1dea0b7fcd09c185981c7d476df6ad61e3d4b0d
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '1.9e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: "L24: candidate is observed, compatible with the expected background.\nL25: \nL26: Canonical result:\nL27:\
+        \ BR(tau^- -> mu^- mu+ mu-) < 1.9 x 10^-8 at 90% confidence level.\nL28: The arXiv abstract states this was the most\
+        \ stringent bound to date at\nL29: the time of the paper.\n"
+- block_key: Branching fraction upper limit for tau^- -> mu^- mu+ mu^-
+  source_url: https://arxiv.org/abs/2601.20785
+  snapshot_path: flavor_catalog/references/L009/lhcb_2026_arxiv_2601_20785.txt
+  sha256: 5dbcfd57d132fd93adba7800e9df25e2548f99012b0078cbdd06dd2744d5d777
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: ''
+    status: UNRESOLVED
+    matches: []

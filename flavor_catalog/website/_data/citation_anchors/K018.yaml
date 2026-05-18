@@ -1,0 +1,259 @@
+---
+process_id: K018
+generated_at: '2026-05-18T02:01:25Z'
+sources:
+- block_key: PDG2025:K018:average_fplus_vus
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt
+  sha256: sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: '|V_us| f_+(0) = 0.21656(35), average including correlation effects'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 30
+      context: |-
+        L27: K_L mu3           0.2165(6)
+        L28: K_S e3            0.2169(8)
+        L29: K_S mu3           0.2125(47)
+        L30: Average           0.21656(35)
+        L31:
+        L32: Equation (67.11): f_+(0) |Vus| = 0.21656(35), labeled FLAVIANET.
+        L33:
+    - line_number: 32
+      context: |-
+        L29: K_S mu3           0.2125(47)
+        L30: Average           0.21656(35)
+        L31:
+        L32: Equation (67.11): f_+(0) |Vus| = 0.21656(35), labeled FLAVIANET.
+        L33:
+        L34: The same passage states that the result leads to
+        L35: |Vus| = 0.22330(35)_exp (39)_LAT (8)_RC+IB (53)_TOT.
+- block_key: PDG2025:K018:Kpm_e3
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt
+  sha256: sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.2169(6)
+    status: RESOLVED
+    matches:
+    - line_number: 24
+      context: |-
+        L21: Table 67.1: |Vus| f_+(0) from K_l3, based on Refs. [25,56]
+        L22:
+        L23: Decay mode        |Vus| f_+(0)
+        L24: K+- e3            0.2169(6)
+        L25: K+- mu3           0.2168(10)
+        L26: K_L e3            0.2162(5)
+        L27: K_L mu3           0.2165(6)
+- block_key: PDG2025:K018:Kpm_mu3
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt
+  sha256: sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.2168(10)
+    status: RESOLVED
+    matches:
+    - line_number: 25
+      context: |-
+        L22:
+        L23: Decay mode        |Vus| f_+(0)
+        L24: K+- e3            0.2169(6)
+        L25: K+- mu3           0.2168(10)
+        L26: K_L e3            0.2162(5)
+        L27: K_L mu3           0.2165(6)
+        L28: K_S e3            0.2169(8)
+- block_key: PDG2025:K018:KL_e3
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt
+  sha256: sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.2162(5)
+    status: RESOLVED
+    matches:
+    - line_number: 26
+      context: |-
+        L23: Decay mode        |Vus| f_+(0)
+        L24: K+- e3            0.2169(6)
+        L25: K+- mu3           0.2168(10)
+        L26: K_L e3            0.2162(5)
+        L27: K_L mu3           0.2165(6)
+        L28: K_S e3            0.2169(8)
+        L29: K_S mu3           0.2125(47)
+- block_key: PDG2025:K018:KL_mu3
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt
+  sha256: sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.2165(6)
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: |-
+        L24: K+- e3            0.2169(6)
+        L25: K+- mu3           0.2168(10)
+        L26: K_L e3            0.2162(5)
+        L27: K_L mu3           0.2165(6)
+        L28: K_S e3            0.2169(8)
+        L29: K_S mu3           0.2125(47)
+        L30: Average           0.21656(35)
+- block_key: PDG2025:K018:KS_e3
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt
+  sha256: sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.2169(8)
+    status: RESOLVED
+    matches:
+    - line_number: 28
+      context: |-
+        L25: K+- mu3           0.2168(10)
+        L26: K_L e3            0.2162(5)
+        L27: K_L mu3           0.2165(6)
+        L28: K_S e3            0.2169(8)
+        L29: K_S mu3           0.2125(47)
+        L30: Average           0.21656(35)
+        L31:
+- block_key: PDG2025:K018:KS_mu3
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt
+  sha256: sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.2125(47)
+    status: RESOLVED
+    matches:
+    - line_number: 29
+      context: |-
+        L26: K_L e3            0.2162(5)
+        L27: K_L mu3           0.2165(6)
+        L28: K_S e3            0.2169(8)
+        L29: K_S mu3           0.2125(47)
+        L30: Average           0.21656(35)
+        L31:
+        L32: Equation (67.11): f_+(0) |Vus| = 0.21656(35), labeled FLAVIANET.
+- block_key: FlaviaNet2010:K018:average_fplus_vus
+  source_url: https://arxiv.org/abs/1005.2323
+  snapshot_path: flavor_catalog/references/K018/flavianet2010_kl3.txt
+  sha256: sha256:c8855c1e4539b66e5595b6ccb71122f80ce8084944c4fdd83a5a7089d520464f
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.2163(5)
+    status: AMBIGUOUS
+    matches:
+    - line_number: 24
+      context: |-
+        L21: dispersive fits, long-distance radiative corrections, and SU(2)
+        L22: breaking corrections. The principal experimental result is:
+        L23:
+        L24: |Vus| f_+(0) = 0.2163(5)
+        L25:
+        L26: It reports chi2/ndf = 0.77/4, P = 94%.
+        L27:
+    - line_number: 36
+      context: |-
+        L33: K_S -> pi e nu    0.2155(13)
+        L34: K+- -> pi e nu    0.2160(11)
+        L35: K+- -> pi mu nu   0.2158(14)
+        L36: Average           0.2163(5)
+        L37:
+        L38: Section 4.3 compares Ke3 and Kmu3 values as a lepton-universality
+        L39: test and gives:
+    - line_number: 43
+      context: |-
+        L40:
+        L41: r_mu e = 1.002(5)
+        L42:
+        L43: Section 4.5 uses |Vus| f_+(0) = 0.2163(5) with f_+(0) = 0.959(5)
+        L44: and K_l2 information for a then-current CKM unitarity test; it finds:
+        L45:
+        L46: Delta_CKM = -0.0001(6)
+- block_key: FlaviaNet2010:K018:r_mue
+  source_url: https://arxiv.org/abs/1005.2323
+  snapshot_path: flavor_catalog/references/K018/flavianet2010_kl3.txt
+  sha256: sha256:c8855c1e4539b66e5595b6ccb71122f80ce8084944c4fdd83a5a7089d520464f
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 1.002(5)
+    status: RESOLVED
+    matches:
+    - line_number: 41
+      context: |-
+        L38: Section 4.3 compares Ke3 and Kmu3 values as a lepton-universality
+        L39: test and gives:
+        L40:
+        L41: r_mu e = 1.002(5)
+        L42:
+        L43: Section 4.5 uses |Vus| f_+(0) = 0.2163(5) with f_+(0) = 0.959(5)
+        L44: and K_l2 information for a then-current CKM unitarity test; it finds:
+- block_key: PDG2025:K018:Vus_from_Kl3
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/K018/pdg2025_vud_vus_kl3.txt
+  sha256: sha256:e900e36b74e3999a7dd559bfdd0e5ca262f5b56fc599f9e21446239b6218ac66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.22330(53)
+    status: RESOLVED
+    matches:
+    - line_number: 35
+      context: |-
+        L32: Equation (67.11): f_+(0) |Vus| = 0.21656(35), labeled FLAVIANET.
+        L33:
+        L34: The same passage states that the result leads to
+        L35: |Vus| = 0.22330(35)_exp (39)_LAT (8)_RC+IB (53)_TOT.
+        L36:
+        L37: FLAG lattice inputs quoted by PDG in Eq. (67.12):
+        L38: f_+(0) = 0.9677(27), Nf = 2 + 1
+- block_key: FLAG2024:K018:fplus_Nf211
+  source_url: https://arxiv.org/abs/2411.04268
+  snapshot_path: flavor_catalog/references/K018/flag2024_kaon_semileptonic.txt
+  sha256: sha256:7a1062d3a82bfd02a302caca71990d4af246ca570dca4e84d2eae66d367284f9
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.9698(17)
+    status: RESOLVED
+    matches:
+    - line_number: 25
+      context: |-
+        L22: is based on FNAL/MILC 18 and ETM 16, while the Nf = 2 + 1 average is
+        L23: based on FNAL/MILC 12I and RBC/UKQCD 15A:
+        L24:
+        L25: direct, Nf = 2 + 1 + 1: f_+(0) = 0.9698(17)
+        L26: direct, Nf = 2 + 1:     f_+(0) = 0.9677(27)
+        L27:
+        L28: FLAG Section 5.3.3 converts these averages into CKM elements. For
+- block_key: FLAG2024:K018:Vus_from_fplus_Nf211
+  source_url: https://arxiv.org/abs/2411.04268
+  snapshot_path: flavor_catalog/references/K018/flag2024_kaon_semileptonic.txt
+  sha256: sha256:7a1062d3a82bfd02a302caca71990d4af246ca570dca4e84d2eae66d367284f9
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.22328(58)
+    status: RESOLVED
+    matches:
+    - line_number: 31
+      context: |-
+        L28: FLAG Section 5.3.3 converts these averages into CKM elements. For
+        L29: Nf = 2 + 1 + 1, Eq. (72) maps into:
+        L30:
+        L31: |Vus| = 0.22328(58)
+        L32:
+        L33: FLAG Section 5.4 tests first-row CKM unitarity. Combining f_+(0) for
+        L34: Nf = 2 + 1 + 1 with the PDG estimate of |Vud| gives:

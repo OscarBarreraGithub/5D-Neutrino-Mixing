@@ -1,0 +1,175 @@
+---
+process_id: CR002
+generated_at: '2026-05-17T21:55:00-04:00'
+sources:
+- block_key: PDG2026:CR002:ATLAS2023:X53_pair_Wt
+  source_url: https://pdg.lbl.gov/encoder_listings/q009.pdf
+  snapshot_path: flavor_catalog/references/CR002/pdg_encoder_q009_tprime_5over3_2026.txt
+  sha256: sha256:093c2771ed7389edcdcbd4f8b3c5ecfe78d418b19a2b6e8a09e49e924935e363
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: '> 1460'
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |-
+        L9:
+        L10: t' (5/3)-quark/hadron mass limits in p p and p p collisions
+        L11: VALUE (GeV)               CL%           DOCUMENT ID         TECN     COMMENT
+        L12: >1460                     95          1 AAD           23AG ATLS      t' (5/3) -> t W+
+        L13: >1330                     95          2 SIRUNYAN      19T CMS        t'_R (5/3) -> t W+
+        L14: >1300                     95          2 SIRUNYAN      19T CMS        t'_L (5/3) -> t W+
+        L15: >1190                     95          3 AABOUD        18CE ATLS      >= 2l + MET + >= 1 b-jet
+- block_key: ATLAS2023:CR002:mass_degenerate_doublet
+  source_url: https://arxiv.org/abs/2212.05263
+  snapshot_path: flavor_catalog/references/CR002/atlas_2023_arxiv2212_05263.txt
+  sha256: sha256:fb8975d1d1812ef13c156631a193818fb03f89e82602d814c2b91a2776d48b32
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value_limit_converted_fallback
+    anchor_string: '> 1.59 TeV'
+    status: RESOLVED
+    matches:
+    - line_number: 29
+      context: |-
+        L26: No significant deviations from the Standard Model expectation are observed.
+        L27: Upper limits on the production cross-section of T and B quark pairs as a
+        L28: function of their mass are derived for various decay branching ratio scenarios.
+        L29: The strongest lower limits on the masses are 1.59 TeV assuming mass-degenerate
+        L30: VLQs and branching ratios corresponding to the weak-isospin doublet model, and
+        L31: 1.47 TeV (1.46 TeV) for exclusive T -> Zt (B/X -> Wt) decays. In addition,
+        L32: lower limits on the T and B quark masses are derived for all possible branching
+- block_key: CMS2019:CR002:X53_RH
+  source_url: https://arxiv.org/abs/1810.03188
+  snapshot_path: flavor_catalog/references/CR002/cms_2019_arxiv1810_03188.txt
+  sha256: sha256:e14cb8f94181a3357d43fe1c41be0726e0c5e01a8af028835b62b19dc71e26da
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value_limit_converted_fallback
+    anchor_string: '> 1.33 TeV'
+    status: RESOLVED
+    matches:
+    - line_number: 28
+      context: |-
+        L25: considered. Final states with either a pair of same-sign leptons or a single
+        L26: lepton are studied. No significant excess of events is observed above the
+        L27: expected standard model background. Lower limits at 95% confidence level on
+        L28: the X_5/3 quark mass are set at 1.33 and 1.30 TeV respectively for the case of
+        L29: right-handed and left-handed couplings to W bosons in a combination of the
+        L30: same-sign dilepton and single-lepton final states.
+        L31:
+- block_key: CMS2019:CR002:X53_LH
+  source_url: https://arxiv.org/abs/1810.03188
+  snapshot_path: flavor_catalog/references/CR002/cms_2019_arxiv1810_03188.txt
+  sha256: sha256:e14cb8f94181a3357d43fe1c41be0726e0c5e01a8af028835b62b19dc71e26da
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value_limit_converted_fallback
+    anchor_string: '> 1.3 TeV'
+    status: RESOLVED
+    matches:
+    - line_number: 28
+      context: |-
+        L25: considered. Final states with either a pair of same-sign leptons or a single
+        L26: lepton are studied. No significant excess of events is observed above the
+        L27: expected standard model background. Lower limits at 95% confidence level on
+        L28: the X_5/3 quark mass are set at 1.33 and 1.30 TeV respectively for the case of
+        L29: right-handed and left-handed couplings to W bosons in a combination of the
+        L30: same-sign dilepton and single-lepton final states.
+        L31:
+- block_key: ATLAS2018:CR002:T53_pair_only
+  source_url: https://arxiv.org/abs/1807.11883
+  snapshot_path: flavor_catalog/references/CR002/atlas_2018_arxiv1807_11883.txt
+  sha256: sha256:700e58bb4698af6061919efed538b33f2bb93a66aff99aa98eaa119df6f8bf11
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value_limit_converted_fallback
+    anchor_string: '> 1.19 TeV'
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: |-
+        L24: T- and B-quark singlet are m_T > 0.98 (0.99) TeV and m_B > 1.00 (1.01) TeV
+        L25: respectively. Limits on the production of the vector-like T_5/3-quark are also
+        L26: derived considering both pair and single production; in the former case the
+        L27: lower limit on the mass of the T_5/3-quark is (expected to be) 1.19 (1.21)
+        L28: TeV. The Standard Model four-top-quark production cross-section upper limit is
+        L29: (expected to be) 69 (29) fb. Constraints are also set on exotic four-top-quark
+        L30: production models. Finally, limits are set on same-sign top-quark pair
+- block_key: ATLAS2018:CR002:T53_pair_plus_single_unit_coupling
+  source_url: https://pdg.lbl.gov/encoder_listings/q009.pdf
+  snapshot_path: flavor_catalog/references/CR002/pdg_encoder_q009_tprime_5over3_2026.txt
+  sha256: sha256:093c2771ed7389edcdcbd4f8b3c5ecfe78d418b19a2b6e8a09e49e924935e363
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value_limit_converted_fallback
+    anchor_string: '> 1.6 TeV'
+    status: RESOLVED
+    matches:
+    - line_number: 38
+      context: |-
+        L35: 3 AABOUD 18CE based on 36.1 fb^-1 of proton-proton data taken at sqrt(s) =
+        L36: 13 TeV. Events including a same-sign lepton pair are used. The limit is for
+        L37: the pair-produced vector-like t'. With single t' production included,
+        L38: assuming t' t W coupling of one, the limit is m_t' > 1.6 TeV.
+        L39:
+        L40: 4 SIRUNYAN 17J based on 2.3 fb^-1 of p p data at sqrt(s) = 13 TeV. Signals
+        L41: are searched in the final states of t' pair production, with same-sign leptons
+- block_key: CMS2017:CR002:X53_RH
+  source_url: https://arxiv.org/abs/1705.10967
+  snapshot_path: flavor_catalog/references/CR002/cms_2017_arxiv1705_10967.txt
+  sha256: sha256:1757a76e808d68648038a6e6a5b7fb26d1028f0f47169ce4ec19b325938df968
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: '> 1020'
+    status: RESOLVED
+    matches:
+    - line_number: 26
+      context: |-
+        L23: same-sign leptons or a single lepton, along with jets, are considered. No
+        L24: significant excess is observed in the data above the expected standard model
+        L25: background contribution and an X_5/3 quark with right-handed (left-handed)
+        L26: couplings is excluded at 95% confidence level for masses below 1020 (990) GeV.
+        L27: These are the first limits based on a combination of the same-sign dilepton and
+        L28: the single-lepton final states, as well as the most stringent limits on the
+        L29: X_5/3 mass to date.
+- block_key: CMS2017:CR002:X53_LH
+  source_url: https://arxiv.org/abs/1705.10967
+  snapshot_path: flavor_catalog/references/CR002/cms_2017_arxiv1705_10967.txt
+  sha256: sha256:1757a76e808d68648038a6e6a5b7fb26d1028f0f47169ce4ec19b325938df968
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: '> 990'
+    status: RESOLVED
+    matches:
+    - line_number: 26
+      context: |-
+        L23: same-sign leptons or a single lepton, along with jets, are considered. No
+        L24: significant excess is observed in the data above the expected standard model
+        L25: background contribution and an X_5/3 quark with right-handed (left-handed)
+        L26: couplings is excluded at 95% confidence level for masses below 1020 (990) GeV.
+        L27: These are the first limits based on a combination of the same-sign dilepton and
+        L28: the single-lepton final states, as well as the most stringent limits on the
+        L29: X_5/3 mass to date.
+- block_key: CMS2014:CR002:X53_same_sign
+  source_url: https://arxiv.org/abs/1312.2391
+  snapshot_path: flavor_catalog/references/CR002/cms_2014_arxiv1312_2391.txt
+  sha256: sha256:ffdb33839c2be98c2657c4cb909dad243db6581daa036ecaf265720739dc3a2c
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: '> 800'
+    status: RESOLVED
+    matches:
+    - line_number: 23
+      context: |-
+        L20: corresponds to an integrated luminosity of 19.5 inverse femtobarns and was
+        L21: collected at sqrt(s) = 8 TeV by the CMS experiment. No significant excess is
+        L22: observed in the data above the expected background and the existence of
+        L23: top-quark partners with masses below 800 GeV is excluded at a 95% confidence
+        L24: level, assuming they decay exclusively to tW. This is the first limit on these
+        L25: particles from the LHC, and it is significantly more restrictive than previous
+        L26: limits.

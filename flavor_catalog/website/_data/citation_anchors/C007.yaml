@@ -1,0 +1,102 @@
+---
+process_id: C007
+generated_at: '2026-05-18T01:53:05Z'
+sources:
+- block_key: PDG2026:DPlusPiMuMu
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.42
+  snapshot_path: flavor_catalog/references/C007/pdg2026_dplus_piplus_mumu_pdgLive.txt
+  sha256: null
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '6.7e-08'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 28
+      context: |
+        L25:   confidence_level: 90.0
+        L26:   measurement:
+        L27:     column_name: VALUE
+        L28:     value: 6.7E-8
+        L29:     value_text: <6.7 E-8
+        L30:     limit_type: U
+        L31:     used_in_average: true
+    - line_number: 29
+      context: |
+        L26:   measurement:
+        L27:     column_name: VALUE
+        L28:     value: 6.7E-8
+        L29:     value_text: <6.7 E-8
+        L30:     limit_type: U
+        L31:     used_in_average: true
+        L32:     used_in_fit: true
+    - line_number: 33
+      context: "L30:     limit_type: U\nL31:     used_in_average: true\nL32:     used_in_fit: true\nL33:     display_value_text:\
+        \ <6.7 E-8\nL34: \nL35: AAIJ 2013AF\nL36:   publication: PL B724 203\n"
+- block_key: LHCb2021:DPlusPiMuMu
+  source_url: https://arxiv.org/abs/2011.00217
+  snapshot_path: flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt
+  sha256: null
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '6.7e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 44
+      context: "L41: D+ -> pi+ mu+ mu-    0.6        67          74          2.4        180          210\nL42: \nL43: Interpretation\
+        \ for C007:\nL44:   B(D+ -> pi+ mu+ mu-) < 67 x 10^-9 = 6.7 x 10^-8 at 90% CL.\nL45:   Companion 95% CL limit: <74\
+        \ x 10^-9 = 7.4 x 10^-8.\n"
+- block_key: LHCb2021:DPlusPiMuMu
+  source_url: https://arxiv.org/abs/2011.00217
+  snapshot_path: flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt
+  sha256: sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '25'
+    status: RESOLVED
+    matches:
+    - line_number: 9
+      context: "L6: DOI: 10.1007/JHEP06(2021)044\nL7: Journal: JHEP 06 (2021) 044\nL8: Report number: LHCb-PAPER-2020-007;\
+        \ CERN-EP-2020-140\nL9: Title: Searches for 25 rare and forbidden decays of D+ and Ds+ mesons\nL10: Authors: LHCb\
+        \ Collaboration\nL11: \nL12: Abstract-page metadata extract:\n"
+- block_key: LHCb2021:DPlusPiMuMu
+  source_url: https://arxiv.org/abs/2011.00217
+  snapshot_path: flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt
+  sha256: sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 1e-12
+    status: RESOLVED
+    matches:
+    - line_number: 29
+      context: |
+        L26: transitions. These processes are rare in the Standard Model because only
+        L27: weak-annihilation processes can occur at tree level. At the loop level,
+        L28: FCNC transitions are GIM suppressed. The source states that short-distance
+        L29: SM branching fractions are of order 10^-12, while significant long-distance
+        L30: contributions from dilepton resonances are expected to dominate across the
+        L31: dilepton invariant-mass-squared distribution. The analysis uses 1.6 fb^-1
+        L32: of 2016 LHCb data. Four resonant D_(s)+ -> pi+ phi(->ll) decays are used
+- block_key: LHCb2013:DPlusPiMuMu
+  source_url: https://arxiv.org/abs/1304.6365
+  snapshot_path: flavor_catalog/references/C007/lhcb2013_arxiv1304_6365.txt
+  sha256: null
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '7.3e-08'
+    status: UNRESOLVED
+    matches: []
+- block_key: DeBoerHiller2015:RareCharmLeptons
+  source_url: https://arxiv.org/abs/1510.00311
+  snapshot_path: flavor_catalog/references/C007/deboer_hiller2015_arxiv1510_00311.txt
+  sha256: null
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: ''
+    status: UNRESOLVED
+    matches: []

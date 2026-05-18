@@ -1,0 +1,338 @@
+---
+process_id: B014
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: pdg2025_bp_to_rhop_gamma
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-B-plus-minus.pdf
+  snapshot_path: flavor_catalog/references/B014/pdg2025_bplus_rhop_gamma.txt
+  sha256: sha256:8041b539fb0bb25ef691bfe69bc5ce2acc2f6819700acb0d04d8f5d3e50a9e5b
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (9.8 +/- 2.5) x 10^-7
+    status: RESOLVED
+    matches:
+    - line_number: 10
+      context: |
+        L7:   S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.
+        L8:
+        L9: Summary table extract, light unflavored meson modes:
+        L10:   Gamma 518 rho+ gamma  (9.8 +/- 2.5) x 10^-7.
+        L11:
+        L12: Detailed entry extract:
+        L13:   Gamma rho+ gamma / Gamma_total, Gamma 518 / Gamma.
+- block_key: pdg2025_b0_to_rho0_gamma
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf
+  snapshot_path: flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt
+  sha256: sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (8.6 +/- 1.5) x 10^-7
+    status: RESOLVED
+    matches:
+    - line_number: 10
+      context: |
+        L7:   S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.
+        L8:
+        L9: Summary table extract, light unflavored meson modes:
+        L10:   Gamma 417 rho0 gamma   (8.6 +/- 1.5) x 10^-7.
+        L11:   Gamma 419 omega gamma  (4.4 +1.8 -1.6) x 10^-7.
+        L12:
+        L13: Detailed entry extract:
+- block_key: pdg2025_b0_to_omega_gamma
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf
+  snapshot_path: flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt
+  sha256: sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (4.4 +1.8 -1.6) x 10^-7
+    status: RESOLVED
+    matches:
+    - line_number: 11
+      context: |
+        L8:
+        L9: Summary table extract, light unflavored meson modes:
+        L10:   Gamma 417 rho0 gamma   (8.6 +/- 1.5) x 10^-7.
+        L11:   Gamma 419 omega gamma  (4.4 +1.8 -1.6) x 10^-7.
+        L12:
+        L13: Detailed entry extract:
+        L14:   Gamma rho0 gamma / Gamma_total, Gamma 417 / Gamma.
+- block_key: hflav2024_b_to_rho_gamma
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+  snapshot_path: flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt
+  sha256: sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (1.40 +/- 0.22) x 10^-6
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |
+        L9: B(B -> Xd gamma)  BaBar [297]  9.2 +/- 2.0 +/- 2.3; average 9.2 +/- 3.0.
+        L10:
+        L11: B(B -> rho gamma)^7:
+        L12:   Belle [279]  1.21 +0.24 -0.22 +/- 0.12; HFLAV average 1.40 +/- 0.22.
+        L13:   BaBar [257]  1.73 +0.34 -0.32 +/- 0.17; PDG average 1.39 +0.25 -0.24.
+        L14:
+        L15: B(B -> rho/omega gamma)^7:
+- block_key: hflav2024_b_to_rho_omega_gamma
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+  snapshot_path: flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt
+  sha256: sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (1.30 +/- 0.18) x 10^-6
+    status: AMBIGUOUS
+    matches:
+    - line_number: 13
+      context: |
+        L10:
+        L11: B(B -> rho gamma)^7:
+        L12:   Belle [279]  1.21 +0.24 -0.22 +/- 0.12; HFLAV average 1.40 +/- 0.22.
+        L13:   BaBar [257]  1.73 +0.34 -0.32 +/- 0.17; PDG average 1.39 +0.25 -0.24.
+        L14:
+        L15: B(B -> rho/omega gamma)^7:
+        L16:   Belle [279]  1.14 +/- 0.20 +0.10 -0.12; HFLAV average 1.30 +/- 0.18.
+    - line_number: 16
+      context: |
+        L13:   BaBar [257]  1.73 +0.34 -0.32 +/- 0.17; PDG average 1.39 +0.25 -0.24.
+        L14:
+        L15: B(B -> rho/omega gamma)^7:
+        L16:   Belle [279]  1.14 +/- 0.20 +0.10 -0.12; HFLAV average 1.30 +/- 0.18.
+        L17:   BaBar [257]  1.63 +0.30 -0.28 +/- 0.16; PDG average 1.30 +0.23 -0.24.
+        L18:
+        L19: Footnote 7: "The PDG uncertainty includes a scale factor."
+    - line_number: 17
+      context: |
+        L14:
+        L15: B(B -> rho/omega gamma)^7:
+        L16:   Belle [279]  1.14 +/- 0.20 +0.10 -0.12; HFLAV average 1.30 +/- 0.18.
+        L17:   BaBar [257]  1.63 +0.30 -0.28 +/- 0.16; PDG average 1.30 +0.23 -0.24.
+        L18:
+        L19: Footnote 7: "The PDG uncertainty includes a scale factor."
+        L20:
+- block_key: hflav2024_isospin_rho_gamma
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+  snapshot_path: flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt
+  sha256: sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: Gamma(B+ -> rho+ gamma) / [2 Gamma(B0 -> rho0 gamma)] - 1 = -0.46 +- 0.17
+    status: RESOLVED
+    matches:
+    - line_number: 30
+      context: |
+        L27:   Belle [279]  -0.48 +0.21 -0.19 +0.08 -0.09
+        L28:   BaBar [257]  -0.43 +0.25 -0.22 +/- 0.10
+        L29: Average:
+        L30:   HFLAV -0.46 +/- 0.17; PDG -0.46 +0.17 -0.16.
+        L31:
+        L32: Relevant HFLAV bibliography entries:
+        L33:   [256] Belle II/Belle Collaboration, I. Adachi et al., "Measurement of branching fractions, CP asymmetry, and isospin asymmetry for B -> rho gamma decays using Belle and Belle II data", arXiv:2407.08984.
+- block_key: hflav2024_b_to_xd_gamma
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+  snapshot_path: flavor_catalog/references/B014/hflav_rare_decays_dec2024_bd_gamma.txt
+  sha256: sha256:e3d3927439240c9ad57cda11b2df770a8458280c71a10c34ce8a6619348f25a1
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (9.2 +/- 3.0) x 10^-6
+    status: RESOLVED
+    matches:
+    - line_number: 9
+      context: |
+        L6: Relevant extract from Table 67, "Branching fractions of radiative, FCNC decays..."
+        L7: Units in the table header: [10^-6].
+        L8:
+        L9: B(B -> Xd gamma)  BaBar [297]  9.2 +/- 2.0 +/- 2.3; average 9.2 +/- 3.0.
+        L10:
+        L11: B(B -> rho gamma)^7:
+        L12:   Belle [279]  1.21 +0.24 -0.22 +/- 0.12; HFLAV average 1.40 +/- 0.22.
+- block_key: pdg2025_acp_bp_to_rhop_gamma
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-B-plus-minus.pdf
+  snapshot_path: flavor_catalog/references/B014/pdg2025_bplus_rhop_gamma.txt
+  sha256: sha256:8041b539fb0bb25ef691bfe69bc5ce2acc2f6819700acb0d04d8f5d3e50a9e5b
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: 'A_CP(B+ -> rho+ gamma) = -0.11 +- {''statistical'': 0.32, ''systematic'': 0.09}'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 17
+      context: |
+        L14:   VALUE (units 10^-6):
+        L15:     0.98 +/- 0.25  OUR AVERAGE
+        L16:     1.20 +0.42 -0.37 +/- 0.20  AUBERT 08BH BABR
+        L17:     0.87 +0.29 -0.27 +0.09 -0.11  TANIGUCHI 08 BELL
+        L18:
+        L19: Direct CP entry extract:
+        L20:   ACP(B+ -> rho+ gamma):
+    - line_number: 21
+      context: |
+        L18:
+        L19: Direct CP entry extract:
+        L20:   ACP(B+ -> rho+ gamma):
+        L21:     -0.11 +/- 0.32 +/- 0.09  TANIGUCHI 08 BELL.
+- block_key: pdg2025_c_b0_to_rho0_gamma
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf
+  snapshot_path: flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt
+  sha256: sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: 'C(B0 -> rho0 gamma) = 0.44 +- {''statistical'': 0.49, ''systematic'': 0.14}'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 23
+      context: |
+        L20:
+        L21:   Gamma omega gamma / Gamma_total, Gamma 419 / Gamma.
+        L22:   VALUE (units 10^-6):
+        L23:     0.44 +0.18 -0.16  OUR AVERAGE
+        L24:     0.50 +0.27 -0.23 +/- 0.09  AUBERT 08BH BABR
+        L25:     0.40 +0.19 -0.17 +/- 0.13  TANIGUCHI 08 BELL
+        L26:
+    - line_number: 29
+      context: |
+        L26:
+        L27: Time-dependent CP entries:
+        L28:   C(B0 -> rho0 gamma):
+        L29:     0.44 +/- 0.49 +/- 0.14  USHIRODA 08 BELL.
+        L30:     PDG note: reports value of A which is equal to -C.
+        L31:   S(B0 -> rho0 gamma):
+        L32:     -0.83 +/- 0.65 +/- 0.18  USHIRODA 08 BELL.
+- block_key: pdg2025_s_b0_to_rho0_gamma
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-B-zero.pdf
+  snapshot_path: flavor_catalog/references/B014/pdg2025_bzero_rho_omega_gamma.txt
+  sha256: sha256:9a004583a3002f97bb6b83328a408ffaefff674259467f3d9aea51391ba2acf5
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: 'S(B0 -> rho0 gamma) = -0.83 +- {''statistical'': 0.65, ''systematic'': 0.18}'
+    status: RESOLVED
+    matches:
+    - line_number: 32
+      context: |
+        L29:     0.44 +/- 0.49 +/- 0.14  USHIRODA 08 BELL.
+        L30:     PDG note: reports value of A which is equal to -C.
+        L31:   S(B0 -> rho0 gamma):
+        L32:     -0.83 +/- 0.65 +/- 0.18  USHIRODA 08 BELL.
+- block_key: belle_belleii2024_bp_to_rhop_gamma
+  source_url: https://arxiv.org/abs/2407.08984
+  snapshot_path: flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt
+  sha256: sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (13.1 +2.0 +1.3 -1.9 -1.2) x 10^-7
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |
+        L9: Abstract-page value extract:
+        L10:   Data samples: 772 x 10^6 B Bbar pairs from Belle and 387 x 10^6 B Bbar pairs from Belle II at the Upsilon(4S).
+        L11:   Fitted yields: 114 +/- 12 B+ -> rho+ gamma decays and 99 +/- 12 B0 -> rho0 gamma decays.
+        L12:   B(B+ -> rho+ gamma) = (13.1 +2.0 +1.3 -1.9 -1.2) x 10^-7.
+        L13:   B(B0 -> rho0 gamma) = (7.5 +/- 1.3 +1.0 -0.8) x 10^-7.
+        L14:   First uncertainty is statistical and second is systematic.
+        L15:   A_I(B -> rho gamma) = (10.9 +11.2 +7.8 -11.7 -7.3)%.
+- block_key: belle_belleii2024_b0_to_rho0_gamma
+  source_url: https://arxiv.org/abs/2407.08984
+  snapshot_path: flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt
+  sha256: sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (7.5 +/- 1.3 +1.0 -0.8) x 10^-7
+    status: RESOLVED
+    matches:
+    - line_number: 13
+      context: |
+        L10:   Data samples: 772 x 10^6 B Bbar pairs from Belle and 387 x 10^6 B Bbar pairs from Belle II at the Upsilon(4S).
+        L11:   Fitted yields: 114 +/- 12 B+ -> rho+ gamma decays and 99 +/- 12 B0 -> rho0 gamma decays.
+        L12:   B(B+ -> rho+ gamma) = (13.1 +2.0 +1.3 -1.9 -1.2) x 10^-7.
+        L13:   B(B0 -> rho0 gamma) = (7.5 +/- 1.3 +1.0 -0.8) x 10^-7.
+        L14:   First uncertainty is statistical and second is systematic.
+        L15:   A_I(B -> rho gamma) = (10.9 +11.2 +7.8 -11.7 -7.3)%.
+        L16:   A_CP(B+ -> rho+ gamma) = (-8.2 +/- 15.2 +1.6 -1.2)%.
+- block_key: belle_belleii2024_ai_rho_gamma
+  source_url: https://arxiv.org/abs/2407.08984
+  snapshot_path: flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt
+  sha256: sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (10.9 +11.2 +7.8 -11.7 -7.3)%
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12:   B(B+ -> rho+ gamma) = (13.1 +2.0 +1.3 -1.9 -1.2) x 10^-7.
+        L13:   B(B0 -> rho0 gamma) = (7.5 +/- 1.3 +1.0 -0.8) x 10^-7.
+        L14:   First uncertainty is statistical and second is systematic.
+        L15:   A_I(B -> rho gamma) = (10.9 +11.2 +7.8 -11.7 -7.3)%.
+        L16:   A_CP(B+ -> rho+ gamma) = (-8.2 +/- 15.2 +1.6 -1.2)%.
+        L17:
+        L18: Role for B014: post-2008 Belle/Belle II update; HFLAV Dec. 2024 cites it, but the Table 67 averages quoted for B014 still use the older Belle/BaBar rows.
+- block_key: belle_belleii2024_acp_bp_to_rhop_gamma
+  source_url: https://arxiv.org/abs/2407.08984
+  snapshot_path: flavor_catalog/references/B014/arxiv_2407_08984_belle_belleii_rhogamma.txt
+  sha256: sha256:adf0717e2b3631171d5d8e5a55dae17ed8d7fd9ff5134251e9d00c2705b8b1d7
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (-8.2 +/- 15.2 +1.6 -1.2)%
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |
+        L13:   B(B0 -> rho0 gamma) = (7.5 +/- 1.3 +1.0 -0.8) x 10^-7.
+        L14:   First uncertainty is statistical and second is systematic.
+        L15:   A_I(B -> rho gamma) = (10.9 +11.2 +7.8 -11.7 -7.3)%.
+        L16:   A_CP(B+ -> rho+ gamma) = (-8.2 +/- 15.2 +1.6 -1.2)%.
+        L17:
+        L18: Role for B014: post-2008 Belle/Belle II update; HFLAV Dec. 2024 cites it, but the Table 67 averages quoted for B014 still use the older Belle/BaBar rows.
+- block_key: lhcb2025_ratio_b0rho0_to_b0kstar0_gamma
+  source_url: https://arxiv.org/abs/2507.14401
+  snapshot_path: flavor_catalog/references/B014/arxiv_2507_14401_lhcb_b0rho0gamma.txt
+  sha256: sha256:e0201f9d11ed7de7513534d310b727cb85f72bf0cdb5741cffff0156616c879b
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: 'B(B0 -> rho(770)0 gamma) / B(B0 -> K*(892)0 gamma) = 0.0189 +- {''statistical'': 0.0007, ''systematic'':
+      0.0005}'
+    status: RESOLVED
+    matches:
+    - line_number: 14
+      context: |
+        L11:   Data sample: proton-proton collision data at 7, 8, and 13 TeV, integrated luminosity 9 fb^-1.
+        L12:   Ratio:
+        L13:     B(B0 -> rho(770)0 gamma) / B(B0 -> K*(892)0 gamma)
+        L14:       = 0.0189 +/- 0.0007 +/- 0.0005.
+        L15:   Branching fraction:
+        L16:     B(B0 -> rho(770)0 gamma) = (7.9 +/- 0.3 +/- 0.2 +/- 0.2) x 10^-7.
+        L17:   First uncertainty is statistical, second systematic, and last from the normalisation mode.
+- block_key: lhcb2025_b0_to_rho0_gamma
+  source_url: https://arxiv.org/abs/2507.14401
+  snapshot_path: flavor_catalog/references/B014/arxiv_2507_14401_lhcb_b0rho0gamma.txt
+  sha256: sha256:e0201f9d11ed7de7513534d310b727cb85f72bf0cdb5741cffff0156616c879b
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: (7.9 +/- 0.3 +/- 0.2 +/- 0.2) x 10^-7
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |
+        L13:     B(B0 -> rho(770)0 gamma) / B(B0 -> K*(892)0 gamma)
+        L14:       = 0.0189 +/- 0.0007 +/- 0.0005.
+        L15:   Branching fraction:
+        L16:     B(B0 -> rho(770)0 gamma) = (7.9 +/- 0.3 +/- 0.2 +/- 0.2) x 10^-7.
+        L17:   First uncertainty is statistical, second systematic, and last from the normalisation mode.
+        L18:   The result assumes that rho(770)0 and K*(892)0 decays saturate the dihadron mass spectra considered in the analysis.
+        L19:   The abstract describes the result as consistent with the current world average and by far the most precise measurement to date.

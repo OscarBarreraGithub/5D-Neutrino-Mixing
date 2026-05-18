@@ -1,0 +1,97 @@
+---
+process_id: CR005
+generated_at: '2026-05-17T21:55:00-04:00'
+sources:
+- block_key: CMS2021:CR005:ZSSM_ll_mass_lower_limit
+  source_url: https://arxiv.org/abs/2103.02708
+  snapshot_path: flavor_catalog/references/CR005/cms_2021_arxiv2103_02708.txt
+  sha256: sha256:c33742062e29e14425bfc2de696d926ac1dbf6d49304a59f696a56a7f9dbb311
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m(Z'_SSM) > 5.15 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 28
+      context: |-
+        L25: spin-1 resonances. Table 5 reports observed and expected 95% CL lower limits
+        L26: on the masses of Z'_SSM and Z'_psi. For the combined ee + mumu channel:
+        L27:
+        L28:   Z'_SSM observed 5.15 TeV, expected 5.14 TeV.
+        L29:   Z'_psi observed 4.56 TeV, expected 4.55 TeV.
+        L30:
+        L31: The table assumes signal widths of 3.0% of the resonance mass for Z'_SSM and
+- block_key: CMS2021:CR005:Zpsi_ll_mass_lower_limit
+  source_url: https://arxiv.org/abs/2103.02708
+  snapshot_path: flavor_catalog/references/CR005/cms_2021_arxiv2103_02708.txt
+  sha256: sha256:c33742062e29e14425bfc2de696d926ac1dbf6d49304a59f696a56a7f9dbb311
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m(Z'_psi) > 4.56 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 29
+      context: |-
+        L26: on the masses of Z'_SSM and Z'_psi. For the combined ee + mumu channel:
+        L27:
+        L28:   Z'_SSM observed 5.15 TeV, expected 5.14 TeV.
+        L29:   Z'_psi observed 4.56 TeV, expected 4.55 TeV.
+        L30:
+        L31: The table assumes signal widths of 3.0% of the resonance mass for Z'_SSM and
+        L32: 0.6% for Z'_psi. This CR005 draft uses the Z'_SSM combined result as the
+- block_key: ATLAS2019:CR005:ZSSM_ll_mass_lower_limit
+  source_url: https://arxiv.org/abs/1903.06248
+  snapshot_path: flavor_catalog/references/CR005/atlas_2019_arxiv1903_06248.txt
+  sha256: sha256:eacbb1bc7c23e6ea5540919272807af5ebe50bacd9d5712b76c7c53acdd65f0b
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m(Z'_SSM) > 5.1 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 29
+      context: |-
+        L26:
+        L27:   Z'_psi observed 4.5 TeV, expected 4.5 TeV.
+        L28:   Z'_chi observed 4.8 TeV, expected 4.8 TeV.
+        L29:   Z'_SSM observed 5.1 TeV, expected 5.1 TeV.
+        L30:
+        L31: The paper also states that the observed fiducial cross-section times
+        L32: branching-ratio limit in the combined dilepton channel ranges from 3.6 fb at
+- block_key: ATLAS2019:CR005:fiducial_xsec_limit_6tev_zero_width
+  source_url: https://arxiv.org/abs/1903.06248
+  snapshot_path: flavor_catalog/references/CR005/atlas_2019_arxiv1903_06248.txt
+  sha256: sha256:eacbb1bc7c23e6ea5540919272807af5ebe50bacd9d5712b76c7c53acdd65f0b
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: sigma_fid x B < about 0.014 fb at m_X = 6 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 33
+      context: |-
+        L30:
+        L31: The paper also states that the observed fiducial cross-section times
+        L32: branching-ratio limit in the combined dilepton channel ranges from 3.6 fb at
+        L33: 250 GeV to about 0.014 fb at 6 TeV for the zero-width signal, and from 13.1 fb
+        L34: at 250 GeV to about 0.018 fb at 6 TeV for the 10% relative-width signal.
+- block_key: PDG2024:CR005:dilepton_zprime_xsec_summary_limit
+  source_url: https://pdg.lbl.gov/2024/reviews/rpp2024-rev-zprime-searches.pdf
+  snapshot_path: flavor_catalog/references/CR005/pdg2024_zprime_searches.txt
+  sha256: sha256:f12a1d992f09ebdd5b97dbbe2a8b446593824efa4ca82da65b92107bb7c1bc5a
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: cross-section upper limits as low as 0.02 fb
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: |-
+        L17:   [23] CMS, JHEP 07, 208 (2021), arXiv:2103.02708.
+        L18:
+        L19: The review states that ATLAS and CMS searches for Z' -> e+e- and Z' -> mu+mu-
+        L20: have set 95% CL upper cross-section limits as low as 0.02 fb, with model
+        L21: mass lower limits as high as 4.9 TeV in a single channel. It also emphasizes
+        L22: that dilepton resonances determine the Z' mass and width at discovery and
+        L23: that angular and rapidity distributions can help distinguish couplings to

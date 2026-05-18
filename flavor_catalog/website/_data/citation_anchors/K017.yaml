@@ -1,0 +1,80 @@
+---
+process_id: K017
+generated_at: '2026-05-18T02:01:25Z'
+sources:
+- block_key: canonical_ratio
+  source_url: https://pdgapi.lbl.gov/summaries/S010R28
+  snapshot_path: flavor_catalog/references/K017/pdg2025_rk_api_20260516.txt
+  sha256: sha256:c00ed1ff90dd3cb58e44db0acfa9bdefd07fef7ee6dea6ff0812f416fcd62686
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: R_K = Gamma(K+ -> e+ nu_e)/Gamma(K+ -> mu+ nu_mu) = (2.488 +/- 0.009) x 10^{-5}
+    status: RESOLVED
+    matches:
+    - line_number: 17
+      context: |-
+        L14:   value: 2.488452029520296E-5
+        L15:   error_positive: 9.441409926605985E-8
+        L16:   error_negative: 9.441409926605985E-8
+        L17:   value_text: "(2.488+-0.009)E-5"
+        L18:   type: "OUR AVERAGE"
+        L19:
+        L20: Related listing anchor from S010.11:
+- block_key: dominant_experimental_input
+  source_url: https://arxiv.org/abs/1212.4012
+  snapshot_path: flavor_catalog/references/K017/na62_2013_arxiv1212_4012.txt
+  sha256: sha256:b6389e67165375f69c6fdfeb59c5b893cba3698addd7799e9fa0afdc562d1d70
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: R_K = (2.488 +/- 0.007_stat +/- 0.007_syst) x 10^{-5}
+    status: RESOLVED
+    matches:
+    - line_number: 14
+      context: |-
+        L11: The NA62 experiment at CERN collected a dedicated charged-kaon sample during
+        L12: 2007-2008 and measured the ratio R_K = Gamma(K+- -> e+- nu) /
+        L13: Gamma(K+- -> mu+- nu).  The paper reports
+        L14: R_K = (2.488 +- 0.007_stat +- 0.007_syst) x 10^{-5}.
+        L15:
+        L16: Catalog extraction notes:
+        L17: This is the dominant modern measurement used in the PDG S010R28 average.  The
+- block_key: supporting_experimental_input_kloe
+  source_url: https://arxiv.org/abs/0907.3594
+  snapshot_path: flavor_catalog/references/K017/kloe_2009_arxiv0907_3594.txt
+  sha256: sha256:c473017a6d6ddef9fd82af1f6d0333bf038d3d277cf753269c041a6cb2da4560
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: R_K = (2.493 +/- 0.025_stat +/- 0.019_syst) x 10^{-5}
+    status: RESOLVED
+    matches:
+    - line_number: 13
+      context: |-
+        L10: Value excerpt for kaon LFU:
+        L11: KLOE measured R_K = Gamma(K -> e nu(gamma))/Gamma(K -> mu nu(gamma)).
+        L12: The PDG S010R28 listing records the KLOE input as
+        L13: R_K = (2.493 +- 0.025_stat +- 0.019_syst) x 10^{-5}.
+        L14:
+        L15: Catalog extraction notes:
+        L16: The PDG listing footnote states that this ratio includes internal
+- block_key: sm_prediction
+  source_url: https://arxiv.org/abs/0707.4464
+  snapshot_path: flavor_catalog/references/K017/cirigliano_rosell_2007_arxiv0707_4464.txt
+  sha256: sha256:9178029253ec1db10f368940480a7b0d44db98d10184ef47631efec3a9dbf50c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: R_K^SM = (2.477 +/- 0.001) x 10^{-5}
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |-
+        L9:
+        L10: Value excerpt for kaon LFU:
+        L11: The Standard Model prediction used by the kaon LFU literature is
+        L12: R_K^SM = (2.477 +- 0.001) x 10^{-5}.
+        L13:
+        L14: Catalog extraction notes:
+        L15: The calculation includes radiative corrections through O(e^2 p^4) in chiral

@@ -1,0 +1,310 @@
+---
+process_id: B026
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: canonical_average
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html
+  snapshot_path: flavor_catalog/references/B026/hflav_ckm2025_rdrds.txt
+  sha256: sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: R(D*) = B(B -> D* tau nu_tau) / B(B -> D* l nu_l), l=e,mu = 0.281 +- 0.011 dimensionless ratio
+    status: RESOLVED
+    matches:
+    - line_number: 174
+      context: |
+        L171:       <td bgcolor="#ccccc0"><b><!--ana-->Average</b>
+        L172:          <a href="../../r_dtaunu/logfile_ckm25_new.txt">logfile.txt</a>&nbsp;
+        L173:         </td>
+        L174:       <td bgcolor="#ccccc0"><b><!--val-->0.281 &plusmn;  0.011 </b> </td>
+        L175:       <td bgcolor="#ccccc0"><b><!--xval-->0.358 &plusmn;  0.024 </b> </td>
+        L176:       <td bgcolor="#ccccc0"><b><!--corr-->-0.374 </b> </td>
+        L177:       <td bgcolor="#ccccc0"><b><!--chi2-->chi2/dof = 16.683/14 (CL = 0.27) </b> </td>
+- block_key: joint_fit_context
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html
+  snapshot_path: flavor_catalog/references/B026/hflav_ckm2025_rdrds.txt
+  sha256: sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: = 0.358 +- 0.024
+    status: RESOLVED
+    matches:
+    - line_number: 175
+      context: |
+        L172:          <a href="../../r_dtaunu/logfile_ckm25_new.txt">logfile.txt</a>&nbsp;
+        L173:         </td>
+        L174:       <td bgcolor="#ccccc0"><b><!--val-->0.281 &plusmn;  0.011 </b> </td>
+        L175:       <td bgcolor="#ccccc0"><b><!--xval-->0.358 &plusmn;  0.024 </b> </td>
+        L176:       <td bgcolor="#ccccc0"><b><!--corr-->-0.374 </b> </td>
+        L177:       <td bgcolor="#ccccc0"><b><!--chi2-->chi2/dof = 16.683/14 (CL = 0.27) </b> </td>
+        L178:       <td bgcolor="#ccccc0">
+- block_key: sm_reference_used_by_hflav
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html
+  snapshot_path: flavor_catalog/references/B026/hflav_ckm2025_rdrds.txt
+  sha256: sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: = 0.296 +- 0.004
+    status: AMBIGUOUS
+    matches:
+    - line_number: 324
+      context: |
+        L321:
+        L322:     <tr valign=top>
+        L323:       <td> G. Martinelli, S. Simula, L. Vittorio, Phys.RevD 105 (2022) 3, 034503 [<a href="https://arxiv.org/abs/2105.08674">arXiv:2105.08674 [hep-ph]</a>] </td>
+        L324:       <td>0.296 &plusmn;  0.008 </td>
+        L325:       <td></td>
+        L326:     </tr>
+        L327:
+    - line_number: 474
+      context: |
+        L471:
+        L472:     <tr>
+        L473:       <td bgcolor="#ccccc0"><b>Arithmetic average</b> </td>
+        L474:       <td bgcolor="#ccccc0"><b>0.296 &plusmn;  0.004 </b> </td>
+        L475:       <td bgcolor="#ccccc0"><b>0.254 &plusmn;  0.005 </b> </td>
+        L476:       <td bgcolor="#ccccc0"><b>3.79 </b> </td>
+        L477:     </tr>
+- block_key: selected_experimental_inputs[0]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/babar2012_arxiv1205_5442.txt
+  sha256: sha256:93de45aad78fd4a9a4f4add72f26fc30be0c8df67b584889cc2ee99397ced424
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: babar2012_arxiv1205_5442 = 0.332 +- 0.024
+    status: AMBIGUOUS
+    matches:
+    - line_number: 6
+      context: |
+        L3: html_title: [1205.5442] Evidence for an excess of B -&gt; D(*) Tau Nu decays
+        L4: og:title: Evidence for an excess of B -&gt; D(*) Tau Nu decays
+        L5: og:url: https://arxiv.org/abs/1205.5442v2
+        L6: og:description: Based on the full BaBar data sample, we report improved measurements of the ratios R(D(*)) = B(B -&gt; D(*) Tau Nu)/B(B -&gt; D(*) l Nu), where l is either e or mu. These ratios are sensitive to new physics contributions in the form of a charged Higgs boson. We measure R(D) = 0.440 +- 0.058 +- 0.042 and R(D*) = 0.332 +- 0.024 +- 0.018, which exceed the Standard Model expectations by 2.0 sigma and 2.7 sigma, respectively. Taken together, our results disagree with these expectations at the 3.4 sigma level. This excess cannot be explained by a charged Higgs boson in the type II two-Higgs-doublet model. We also report the observation of the decay B -&gt; D Tau Nu, with a significance of 6.8 sigma.
+        L7: citation_title: Evidence for an excess of B -&gt; D(*) Tau Nu decays
+        L8: citation_doi: 10.1103/PhysRevLett.109.101802
+        L9: citation_date: 2012/05/24
+    - line_number: 12
+      context: |
+        L9: citation_date: 2012/05/24
+        L10: citation_online_date: 2012/09/20
+        L11: citation_arxiv_id: 1205.5442
+        L12: citation_abstract: Based on the full BaBar data sample, we report improved measurements of the ratios R(D(*)) = B(B -&gt; D(*) Tau Nu)/B(B -&gt; D(*) l Nu), where l is either e or mu. These ratios are sensitive to new physics contributions in the form of a charged Higgs boson. We measure R(D) = 0.440 +- 0.058 +- 0.042 and R(D*) = 0.332 +- 0.024 +- 0.018, which exceed the Standard Model expectations by 2.0 sigma and 2.7 sigma, respectively. Taken together, our results disagree with these expectations at the 3.4 sigma level. This excess cannot be explained by a charged Higgs boson in the type II two-Higgs-doublet model. We also report the observation of the decay B -&gt; D Tau Nu, with a significance of 6.8 sigma.
+        L13: abstract_block: Abstract:Based on the full BaBar data sample, we report improved measurements of the ratios R(D(*)) = B(B -&gt; D(*) Tau Nu)/B(B -&gt; D(*) l Nu), where l is either e or mu. These ratios are sensitive to new physics contributions in the form of a charged Higgs boson. We measure R(D) = 0.440 +- 0.058 +- 0.042 and R(D*) = 0.332 +- 0.024 +- 0.018, which exceed the Standard Model expectations by 2.0 sigma and 2.7 sigma, respectively. Taken together, our results disagree with these expectations at the 3.4 sigma level. This excess cannot be explained by a charged Higgs boson in the type II two-Higgs-doublet model. We also report the observation of the decay B -&gt; D Tau Nu, with a significance of 6.8 sigma.
+    - line_number: 13
+      context: |
+        L10: citation_online_date: 2012/09/20
+        L11: citation_arxiv_id: 1205.5442
+        L12: citation_abstract: Based on the full BaBar data sample, we report improved measurements of the ratios R(D(*)) = B(B -&gt; D(*) Tau Nu)/B(B -&gt; D(*) l Nu), where l is either e or mu. These ratios are sensitive to new physics contributions in the form of a charged Higgs boson. We measure R(D) = 0.440 +- 0.058 +- 0.042 and R(D*) = 0.332 +- 0.024 +- 0.018, which exceed the Standard Model expectations by 2.0 sigma and 2.7 sigma, respectively. Taken together, our results disagree with these expectations at the 3.4 sigma level. This excess cannot be explained by a charged Higgs boson in the type II two-Higgs-doublet model. We also report the observation of the decay B -&gt; D Tau Nu, with a significance of 6.8 sigma.
+        L13: abstract_block: Abstract:Based on the full BaBar data sample, we report improved measurements of the ratios R(D(*)) = B(B -&gt; D(*) Tau Nu)/B(B -&gt; D(*) l Nu), where l is either e or mu. These ratios are sensitive to new physics contributions in the form of a charged Higgs boson. We measure R(D) = 0.440 +- 0.058 +- 0.042 and R(D*) = 0.332 +- 0.024 +- 0.018, which exceed the Standard Model expectations by 2.0 sigma and 2.7 sigma, respectively. Taken together, our results disagree with these expectations at the 3.4 sigma level. This excess cannot be explained by a charged Higgs boson in the type II two-Higgs-doublet model. We also report the observation of the decay B -&gt; D Tau Nu, with a significance of 6.8 sigma.
+- block_key: selected_experimental_inputs[1]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/belle2015_arxiv1507_03233.txt
+  sha256: sha256:9699240efd24c3b240148567b65bb8eacbb1d6053124909d4638bed57b6a4cc0
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: belle2015_arxiv1507_03233 = 0.293 +- 0.038
+    status: AMBIGUOUS
+    matches:
+    - line_number: 6
+      context: |
+        L3: html_title: [1507.03233] Measurement of the branching ratio of $\bar{B} \to D^{(\ast)} τ^- \barν_τ$ relative to $\bar{B} \to D^{(\ast)} \ell^- \barν_\ell$ decays with hadronic tagging at Belle
+        L4: og:title: Measurement of the branching ratio of $\bar{B} \to D^{(\ast)} τ^- \barν_τ$ relative to $\bar{B} \to D^{(\ast)} \ell^- \barν_\ell$ decays with hadronic tagging at Belle
+        L5: og:url: https://arxiv.org/abs/1507.03233v3
+        L6: og:description: We report a measurement of the branching fraction ratios R(D(*)) of Bbar -&gt; D(*) tau- nubar_tau relative to Bbar -&gt; D()* l- nubar_l (where l = e or mu) using the full Belle data sample of 772 x 10^6 BBbar pairs collected at the Y(4S) resonance with the Belle detector at the KEKB asymmetric-energy e+e- collider. The measured values are R(D)= 0.375 +- 0.064(stat.) +- 0.026(syst.) and R(D*) = 0.293 +- 0.038(stat.) +- 0.015(syst.). The analysis uses hadronic reconstruction of the tag-side B meson and purely leptonic tau decays. The results are consistent with earlier measurements and do not show a significant deviation from the standard model prediction.
+        L7: citation_title: Measurement of the branching ratio of $\bar{B} \to D^{(\ast)} \tau^- \bar{\nu}_\tau$ relative to $\bar{B} \to D^{(\ast)} \ell^- \bar{\nu}_\ell$ decays with hadronic tagging at Belle
+        L8: citation_doi: 10.1103/PhysRevD.92.072014
+        L9: citation_date: 2015/07/12
+    - line_number: 12
+      context: |
+        L9: citation_date: 2015/07/12
+        L10: citation_online_date: 2015/10/10
+        L11: citation_arxiv_id: 1507.03233
+        L12: citation_abstract: We report a measurement of the branching fraction ratios R(D(*)) of Bbar -&gt; D(*) tau- nubar_tau relative to Bbar -&gt; D()* l- nubar_l (where l = e or mu) using the full Belle data sample of 772 x 10^6 BBbar pairs collected at the Y(4S) resonance with the Belle detector at the KEKB asymmetric-energy e+e- collider. The measured values are R(D)= 0.375 +- 0.064(stat.) +- 0.026(syst.) and R(D*) = 0.293 +- 0.038(stat.) +- 0.015(syst.). The analysis uses hadronic reconstruction of the tag-side B meson and purely leptonic tau decays. The results are consistent with earlier measurements and do not show a significant deviation from the standard model prediction.
+        L13: abstract_block: Abstract:We report a measurement of the branching fraction ratios R(D(*)) of Bbar -&gt; D(*) tau- nubar_tau relative to Bbar -&gt; D()* l- nubar_l (where l = e or mu) using the full Belle data sample of 772 x 10^6 BBbar pairs collected at the Y(4S) resonance with the Belle detector at the KEKB asymmetric-energy e+e- collider. The measured values are R(D)= 0.375 +- 0.064(stat.) +- 0.026(syst.) and R(D*) = 0.293 +- 0.038(stat.) +- 0.015(syst.). The analysis uses hadronic reconstruction of the tag-side B meson and purely leptonic tau decays. The results are consistent with earlier measurements and do not show a significant deviation from the standard model prediction.
+    - line_number: 13
+      context: |
+        L10: citation_online_date: 2015/10/10
+        L11: citation_arxiv_id: 1507.03233
+        L12: citation_abstract: We report a measurement of the branching fraction ratios R(D(*)) of Bbar -&gt; D(*) tau- nubar_tau relative to Bbar -&gt; D()* l- nubar_l (where l = e or mu) using the full Belle data sample of 772 x 10^6 BBbar pairs collected at the Y(4S) resonance with the Belle detector at the KEKB asymmetric-energy e+e- collider. The measured values are R(D)= 0.375 +- 0.064(stat.) +- 0.026(syst.) and R(D*) = 0.293 +- 0.038(stat.) +- 0.015(syst.). The analysis uses hadronic reconstruction of the tag-side B meson and purely leptonic tau decays. The results are consistent with earlier measurements and do not show a significant deviation from the standard model prediction.
+        L13: abstract_block: Abstract:We report a measurement of the branching fraction ratios R(D(*)) of Bbar -&gt; D(*) tau- nubar_tau relative to Bbar -&gt; D()* l- nubar_l (where l = e or mu) using the full Belle data sample of 772 x 10^6 BBbar pairs collected at the Y(4S) resonance with the Belle detector at the KEKB asymmetric-energy e+e- collider. The measured values are R(D)= 0.375 +- 0.064(stat.) +- 0.026(syst.) and R(D*) = 0.293 +- 0.038(stat.) +- 0.015(syst.). The analysis uses hadronic reconstruction of the tag-side B meson and purely leptonic tau decays. The results are consistent with earlier measurements and do not show a significant deviation from the standard model prediction.
+- block_key: selected_experimental_inputs[2]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/belle2017_arxiv1612_00529.txt
+  sha256: sha256:51a51077004480ab347c63f8a44c504c7ca491d5ea6bdb9e20d80dbf762d5a11
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: belle2017_arxiv1612_00529 = 0.27 +- 0.035
+    status: AMBIGUOUS
+    matches:
+    - line_number: 6
+      context: |
+        L3: html_title: [1612.00529] Measurement of the $τ$ lepton polarization and $R(D^*)$ in the decay $\bar{B} \to D^* τ^- \barν_τ$
+        L4: og:title: Measurement of the $τ$ lepton polarization and $R(D^*)$ in the decay $\bar{B} \to D^* τ^- \barν_τ$
+        L5: og:url: https://arxiv.org/abs/1612.00529v2
+        L6: og:description: We report the first measurement of the $τ$ lepton polarization $P_τ(D^*)$ in the decay $\bar{B} \rightarrow D^* τ^- \barν_τ$ as well as a new measurement of the ratio of the branching fractions $R(D^{*}) = \mathcal{B}(\bar {B} \rightarrow D^* τ^- \barν_τ) / \mathcal{B}(\bar{B} \rightarrow D^* \ell^- \barν_\ell)$, where $\ell^-$ denotes an electron or a muon, and the $τ$ is reconstructed in the modes $τ^- \rightarrow π^- ν_τ$ and $τ^- \rightarrow ρ^- ν_τ$. We use the full data sample of $772 \times 10^6$ $B{\bar B}$ pairs recorded with the Belle detector at the KEKB electron-positron collider. Our results, $P_τ(D^*) = -0.38 \pm 0.51 {\rm (stat.)} ^{+0.21}_{-0.16} {\rm (syst.)}$ and $R(D^*) = 0.270 \pm 0.035{\rm (stat.)} ^{+0.028}_{-0.025}{\rm (syst.)}$, are consistent with the theoretical predictions of the Standard Model.
+        L7: citation_title: Measurement of the $\tau$ lepton polarization and $R(D^*)$ in the decay $\bar{B} \to D^* \tau^- \bar{\nu}_\tau$
+        L8: citation_doi: 10.1103/PhysRevLett.118.211801
+        L9: citation_date: 2016/12/02
+    - line_number: 12
+      context: |
+        L9: citation_date: 2016/12/02
+        L10: citation_online_date: 2017/05/03
+        L11: citation_arxiv_id: 1612.00529
+        L12: citation_abstract: We report the first measurement of the $\tau$ lepton polarization $P_\tau(D^*)$ in the decay $\bar{B} \rightarrow D^* \tau^- \bar{\nu}_\tau$ as well as a new measurement of the ratio of the branching fractions $R(D^{*}) = \mathcal{B}(\bar {B} \rightarrow D^* \tau^- \bar{\nu}_\tau) / \mathcal{B}(\bar{B} \rightarrow D^* \ell^- \bar{\nu}_\ell)$, where $\ell^-$ denotes an electron or a muon, and the $\tau$ is reconstructed in the modes $\tau^- \rightarrow \pi^- \nu_\tau$ and $\tau^- \rightarrow \rho^- \nu_\tau$. We use the full data sample of $772 \times 10^6$ $B{\bar B}$ pairs recorded with the Belle detector at the KEKB electron-positron collider. Our results, $P_\tau(D^*) = -0.38 \pm 0.51 {\rm (stat.)} ^{+0.21}_{-0.16} {\rm (syst.)}$ and $R(D^*) = 0.270 \pm 0.035{\rm (stat.)} ^{+0.028}_{-0.025}{\rm (syst.)}$, are consistent with the theoretical predictions of the Standard Model.
+        L13: abstract_block: Abstract:We report the first measurement of the $\tau$ lepton polarization $P_\tau(D^*)$ in the decay $\bar{B} \rightarrow D^* \tau^- \bar{\nu}_\tau$ as well as a new measurement of the ratio of the branching fractions $R(D^{*}) = \mathcal{B}(\bar {B} \rightarrow D^* \tau^- \bar{\nu}_\tau) / \mathcal{B}(\bar{B} \rightarrow D^* \ell^- \bar{\nu}_\ell)$, where $\ell^-$ denotes an electron or a muon, and the $\tau$ is reconstructed in the modes $\tau^- \rightarrow \pi^- \nu_\tau$ and $\tau^- \rightarrow \rho^- \nu_\tau$. We use the full data sample of $772 \times 10^6$ $B{\bar B}$ pairs recorded with the Belle detector at the KEKB electron-positron collider. Our results, $P_\tau(D^*) = -0.38 \pm 0.51 {\rm (stat.)} ^{+0.21}_{-0.16} {\rm (syst.)}$ and $R(D^*) = 0.270 \pm 0.035{\rm (stat.)} ^{+0.028}_{-0.025}{\rm (syst.)}$, are consistent with the theoretical predictions of the Standard Model.
+    - line_number: 13
+      context: |
+        L10: citation_online_date: 2017/05/03
+        L11: citation_arxiv_id: 1612.00529
+        L12: citation_abstract: We report the first measurement of the $\tau$ lepton polarization $P_\tau(D^*)$ in the decay $\bar{B} \rightarrow D^* \tau^- \bar{\nu}_\tau$ as well as a new measurement of the ratio of the branching fractions $R(D^{*}) = \mathcal{B}(\bar {B} \rightarrow D^* \tau^- \bar{\nu}_\tau) / \mathcal{B}(\bar{B} \rightarrow D^* \ell^- \bar{\nu}_\ell)$, where $\ell^-$ denotes an electron or a muon, and the $\tau$ is reconstructed in the modes $\tau^- \rightarrow \pi^- \nu_\tau$ and $\tau^- \rightarrow \rho^- \nu_\tau$. We use the full data sample of $772 \times 10^6$ $B{\bar B}$ pairs recorded with the Belle detector at the KEKB electron-positron collider. Our results, $P_\tau(D^*) = -0.38 \pm 0.51 {\rm (stat.)} ^{+0.21}_{-0.16} {\rm (syst.)}$ and $R(D^*) = 0.270 \pm 0.035{\rm (stat.)} ^{+0.028}_{-0.025}{\rm (syst.)}$, are consistent with the theoretical predictions of the Standard Model.
+        L13: abstract_block: Abstract:We report the first measurement of the $\tau$ lepton polarization $P_\tau(D^*)$ in the decay $\bar{B} \rightarrow D^* \tau^- \bar{\nu}_\tau$ as well as a new measurement of the ratio of the branching fractions $R(D^{*}) = \mathcal{B}(\bar {B} \rightarrow D^* \tau^- \bar{\nu}_\tau) / \mathcal{B}(\bar{B} \rightarrow D^* \ell^- \bar{\nu}_\ell)$, where $\ell^-$ denotes an electron or a muon, and the $\tau$ is reconstructed in the modes $\tau^- \rightarrow \pi^- \nu_\tau$ and $\tau^- \rightarrow \rho^- \nu_\tau$. We use the full data sample of $772 \times 10^6$ $B{\bar B}$ pairs recorded with the Belle detector at the KEKB electron-positron collider. Our results, $P_\tau(D^*) = -0.38 \pm 0.51 {\rm (stat.)} ^{+0.21}_{-0.16} {\rm (syst.)}$ and $R(D^*) = 0.270 \pm 0.035{\rm (stat.)} ^{+0.028}_{-0.025}{\rm (syst.)}$, are consistent with the theoretical predictions of the Standard Model.
+- block_key: selected_experimental_inputs[3]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/belle2019_arxiv1910_05864.txt
+  sha256: sha256:3515901f77138305102bdd8ee0ce7d634be8306f86a4279c127aaa848cf4d821
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: belle2019_arxiv1910_05864 = 0.283 +- 0.018
+    status: AMBIGUOUS
+    matches:
+    - line_number: 6
+      context: |
+        L3: html_title: [1910.05864] Measurement of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$ with a semileptonic tagging method
+        L4: og:title: Measurement of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$ with a semileptonic tagging method
+        L5: og:url: https://arxiv.org/abs/1910.05864v2
+        L6: og:description: The experimental results on the ratios of branching fractions $\mathcal{R}(D) = {\cal B}(\bar{B} \to D τ^- \barν_τ)/{\cal B}(\bar{B} \to D \ell^- \barν_{\ell})$ and $\mathcal{R}(D^*) = {\cal B}(\bar{B} \to D^* τ^- \barν_τ)/{\cal B}(\bar{B} \to D^* \ell^- \barν_{\ell})$, where $\ell$ denotes an electron or a muon, show a long-standing discrepancy with the Standard Model predictions, and might hint to a violation of lepton flavor universality. We report a new simultaneous measurement of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$, based on a data sample containing $772 \times 10^6$ $B\bar{B}$ events recorded at the $Υ(4S)$ resonance with the Belle detector at the KEKB $e^+ e^-$ collider. In this analysis the tag-side $B$ meson is reconstructed in a semileptonic decay mode and the signal-side $τ$ is reconstructed in a purely leptonic decay. The measured values are $\mathcal{R}(D)= 0.307 \pm 0.037 \pm 0.016$ and $\mathcal{R}(D^*) = 0.283 \pm 0.018 \pm 0.014$, where the first uncertainties are statistical and the second are systematic. These results are in agreement with the Standard Model predictions within $0.2$, $1.1$ and $0.8$ standard deviations for $\mathcal{R}(D)$, $\mathcal{R}(D^*)$ and their combination, respectively. This work constitutes the most precise measurements of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$ performed to date as well as the first result for $\mathcal{R}(D)$ based on a semileptonic tagging method.
+        L7: citation_title: Measurement of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$ with a semileptonic tagging method
+        L8: citation_doi: 10.1103/PhysRevLett.124.161803
+        L9: citation_date: 2019/10/13
+    - line_number: 12
+      context: |
+        L9: citation_date: 2019/10/13
+        L10: citation_online_date: 2019/10/16
+        L11: citation_arxiv_id: 1910.05864
+        L12: citation_abstract: The experimental results on the ratios of branching fractions $\mathcal{R}(D) = {\cal B}(\bar{B} \to D \tau^- \bar{\nu}_{\tau})/{\cal B}(\bar{B} \to D \ell^- \bar{\nu}_{\ell})$ and $\mathcal{R}(D^*) = {\cal B}(\bar{B} \to D^* \tau^- \bar{\nu}_{\tau})/{\cal B}(\bar{B} \to D^* \ell^- \bar{\nu}_{\ell})$, where $\ell$ denotes an electron or a muon, show a long-standing discrepancy with the Standard Model predictions, and might hint to a violation of lepton flavor universality. We report a new simultaneous measurement of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$, based on a data sample containing $772 \times 10^6$ $B\bar{B}$ events recorded at the $\Upsilon(4S)$ resonance with the Belle detector at the KEKB $e^+ e^-$ collider. In this analysis the tag-side $B$ meson is reconstructed in a semileptonic decay mode and the signal-side $\tau$ is reconstructed in a purely leptonic decay. The measured values are $\mathcal{R}(D)= 0.307 \pm 0.037 \pm 0.016$ and $\mathcal{R}(D^*) = 0.283 \pm 0.018 \pm 0.014$, where the first uncertainties are statistical and the second are systematic. These results are in agreement with the Standard Model predictions within $0.2$, $1.1$ and $0.8$ standard deviations for $\mathcal{R}(D)$, $\mathcal{R}(D^*)$ and their combination, respectively. This work constitutes the most precise measurements of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$ performed to date as well as the first result for $\mathcal{R}(D)$ based on a semileptonic tagging method.
+        L13: abstract_block: Abstract:The experimental results on the ratios of branching fractions $\mathcal{R}(D) = {\cal B}(\bar{B} \to D \tau^- \bar{\nu}_{\tau})/{\cal B}(\bar{B} \to D \ell^- \bar{\nu}_{\ell})$ and $\mathcal{R}(D^*) = {\cal B}(\bar{B} \to D^* \tau^- \bar{\nu}_{\tau})/{\cal B}(\bar{B} \to D^* \ell^- \bar{\nu}_{\ell})$, where $\ell$ denotes an electron or a muon, show a long-standing discrepancy with the Standard Model predictions, and might hint to a violation of lepton flavor universality. We report a new simultaneous measurement of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$, based on a data sample containing $772 \times 10^6$ $B\bar{B}$ events recorded at the $\Upsilon(4S)$ resonance with the Belle detector at the KEKB $e^+ e^-$ collider. In this analysis the tag-side $B$ meson is reconstructed in a semileptonic decay mode and the signal-side $\tau$ is reconstructed in a purely leptonic decay. The measured values are $\mathcal{R}(D)= 0.307 \pm 0.037 \pm 0.016$ and $\mathcal{R}(D^*) = 0.283 \pm 0.018 \pm 0.014$, where the first uncertainties are statistical and the second are systematic. These results are in agreement with the Standard Model predictions within $0.2$, $1.1$ and $0.8$ standard deviations for $\mathcal{R}(D)$, $\mathcal{R}(D^*)$ and their combination, respectively. This work constitutes the most precise measurements of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$ performed to date as well as the first result for $\mathcal{R}(D)$ based on a semileptonic tagging method.
+    - line_number: 13
+      context: |
+        L10: citation_online_date: 2019/10/16
+        L11: citation_arxiv_id: 1910.05864
+        L12: citation_abstract: The experimental results on the ratios of branching fractions $\mathcal{R}(D) = {\cal B}(\bar{B} \to D \tau^- \bar{\nu}_{\tau})/{\cal B}(\bar{B} \to D \ell^- \bar{\nu}_{\ell})$ and $\mathcal{R}(D^*) = {\cal B}(\bar{B} \to D^* \tau^- \bar{\nu}_{\tau})/{\cal B}(\bar{B} \to D^* \ell^- \bar{\nu}_{\ell})$, where $\ell$ denotes an electron or a muon, show a long-standing discrepancy with the Standard Model predictions, and might hint to a violation of lepton flavor universality. We report a new simultaneous measurement of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$, based on a data sample containing $772 \times 10^6$ $B\bar{B}$ events recorded at the $\Upsilon(4S)$ resonance with the Belle detector at the KEKB $e^+ e^-$ collider. In this analysis the tag-side $B$ meson is reconstructed in a semileptonic decay mode and the signal-side $\tau$ is reconstructed in a purely leptonic decay. The measured values are $\mathcal{R}(D)= 0.307 \pm 0.037 \pm 0.016$ and $\mathcal{R}(D^*) = 0.283 \pm 0.018 \pm 0.014$, where the first uncertainties are statistical and the second are systematic. These results are in agreement with the Standard Model predictions within $0.2$, $1.1$ and $0.8$ standard deviations for $\mathcal{R}(D)$, $\mathcal{R}(D^*)$ and their combination, respectively. This work constitutes the most precise measurements of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$ performed to date as well as the first result for $\mathcal{R}(D)$ based on a semileptonic tagging method.
+        L13: abstract_block: Abstract:The experimental results on the ratios of branching fractions $\mathcal{R}(D) = {\cal B}(\bar{B} \to D \tau^- \bar{\nu}_{\tau})/{\cal B}(\bar{B} \to D \ell^- \bar{\nu}_{\ell})$ and $\mathcal{R}(D^*) = {\cal B}(\bar{B} \to D^* \tau^- \bar{\nu}_{\tau})/{\cal B}(\bar{B} \to D^* \ell^- \bar{\nu}_{\ell})$, where $\ell$ denotes an electron or a muon, show a long-standing discrepancy with the Standard Model predictions, and might hint to a violation of lepton flavor universality. We report a new simultaneous measurement of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$, based on a data sample containing $772 \times 10^6$ $B\bar{B}$ events recorded at the $\Upsilon(4S)$ resonance with the Belle detector at the KEKB $e^+ e^-$ collider. In this analysis the tag-side $B$ meson is reconstructed in a semileptonic decay mode and the signal-side $\tau$ is reconstructed in a purely leptonic decay. The measured values are $\mathcal{R}(D)= 0.307 \pm 0.037 \pm 0.016$ and $\mathcal{R}(D^*) = 0.283 \pm 0.018 \pm 0.014$, where the first uncertainties are statistical and the second are systematic. These results are in agreement with the Standard Model predictions within $0.2$, $1.1$ and $0.8$ standard deviations for $\mathcal{R}(D)$, $\mathcal{R}(D^*)$ and their combination, respectively. This work constitutes the most precise measurements of $\mathcal{R}(D)$ and $\mathcal{R}(D^*)$ performed to date as well as the first result for $\mathcal{R}(D)$ based on a semileptonic tagging method.
+- block_key: selected_experimental_inputs[4]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/lhcb2023_arxiv2302_02886.txt
+  sha256: sha256:04ff0a6c66b812d9486853cff71b286450d7662d1f56f738e154fb382a6aa71c
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: lhcb2023_arxiv2302_02886 = 0.281 +- 0.018
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |
+        L13:     <updated>2024-04-22T17:17:50Z</updated>
+        L14:     <link href="https://arxiv.org/abs/2302.02886v3" rel="alternate" type="text/html"/>
+        L15:     <link href="https://arxiv.org/pdf/2302.02886v3" rel="related" type="application/pdf" title="pdf"/>
+        L16:     <summary>The ratios of branching fractions $\mathcal{R}(D^{*})\equiv\mathcal{B}(\bar{B}\to D^{*}τ^{-}\barν_τ)/\mathcal{B}(\bar{B}\to D^{*}μ^{-}\barν_μ)$ and $\mathcal{R}(D^{0})\equiv\mathcal{B}(B^{-}\to D^{0}τ^{-}\barν_τ)/\mathcal{B}(B^{-}\to D^{0}μ^{-}\barν_μ)$ are measured, assuming isospin symmetry, using a sample of proton-proton collision data corresponding to 3.0 fb${ }^{-1}$ of integrated luminosity recorded by the LHCb experiment during 2011 and 2012. The tau lepton is identified in the decay mode $τ^{-}\toμ^{-}ν_τ\barν_μ$. The measured values are $\mathcal{R}(D^{*})=0.281\pm0.018\pm0.024$ and $\mathcal{R}(D^{0})=0.441\pm0.060\pm0.066$, where the first uncertainty is statistical and the second is systematic. The correlation between these measurements is $ρ=-0.43$. Results are consistent with the current average of these quantities and are at a combined 1.9 standard deviations from the predictions based on lepton flavor universality in the Standard Model.</summary>
+        L17:     <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
+        L18:     <published>2023-02-06T15:53:08Z</published>
+        L19:     <arxiv:comment>All figures and tables, along with any supplementary material and additional information, are available at https://cern.ch/lhcbproject/Publications/p/LHCb-PAPER-2022-039.html (LHCb public pages)</arxiv:comment>
+- block_key: selected_experimental_inputs[5]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/lhcb2023_arxiv2305_01463.txt
+  sha256: sha256:30e82b86bc6ccfdaff175315909741045128c6355802f0682c9c5fcbbae6fb10
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: lhcb2023_arxiv2305_01463 = 0.267 +- 0.012
+    status: UNRESOLVED
+    matches: []
+- block_key: selected_experimental_inputs[6]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/lhcb2025_arxiv2406_03387.txt
+  sha256: sha256:cf8199e9d4230262942409252d35a5ccb6a27643149936acd62d3000bda1219a
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: lhcb2025_arxiv2406_03387 = 0.402 +- 0.081
+    status: AMBIGUOUS
+    matches:
+    - line_number: 6
+      context: |
+        L3: html_title: [2406.03387] Measurement of the branching fraction ratios $R(D^{+})$ and $R(D^{*+})$ using muonic $τ$ decays
+        L4: og:title: Measurement of the branching fraction ratios $R(D^{+})$ and $R(D^{*+})$ using muonic $τ$ decays
+        L5: og:url: https://arxiv.org/abs/2406.03387v2
+        L6: og:description: The branching fraction ratios of $\overline{B}^0\to D^+τ^-\overlineν_τ$ and $\overline{B}^0\to D^{*+}τ^-\overlineν_τ$ decays are measured with respect to their muonic counterparts, using a data sample corresponding to an integrated luminosity of 2.0 fb$^{-1}$ collected by the LHCb experiment in proton-proton collisions at $\sqrt{s} = 13$ TeV. The reconstructed final states are formed by combining $D^+$ mesons with $τ^-\toμ^-\overlineν_μν_τ$ candidates, where the $D^+$ is reconstructed via the $D^+\to K^-π^+π^+$ decay. The results are \begin{align*} R(D^{+}) &amp;= 0.249 \pm 0.043 \pm 0.047, R(D^{*+}) &amp;= 0.402 \pm 0.081\pm 0.085, \end{align*} where the first uncertainties are statistical and the second systematic. The two measurements have a correlation coefficient of $-0.39$ and are compatible with the Standard Model.
+        L7: citation_title: Measurement of the branching fraction ratios $R(D^{+})$ and $R(D^{*+})$ using muonic $\tau$ decays
+        L8: citation_doi: 10.1103/PhysRevLett.134.061801
+        L9: citation_date: 2024/06/05
+    - line_number: 12
+      context: |
+        L9: citation_date: 2024/06/05
+        L10: citation_online_date: 2025/02/16
+        L11: citation_arxiv_id: 2406.03387
+        L12: citation_abstract: The branching fraction ratios of $\overline{B}^0\to D^+\tau^-\overline{\nu}_{\tau}$ and $\overline{B}^0\to D^{*+}\tau^-\overline{\nu}_{\tau}$ decays are measured with respect to their muonic counterparts, using a data sample corresponding to an integrated luminosity of 2.0 fb$^{-1}$ collected by the LHCb experiment in proton-proton collisions at $\sqrt{s} = 13$ TeV. The reconstructed final states are formed by combining $D^+$ mesons with $\tau^-\to\mu^-\overline{\nu}_{\mu}\nu_{\tau}$ candidates, where the $D^+$ is reconstructed via the $D^+\to K^-\pi^+\pi^+$ decay. The results are \begin{align*} R(D^{+}) &amp;= 0.249 \pm 0.043 \pm 0.047, R(D^{*+}) &amp;= 0.402 \pm 0.081\pm 0.085, \end{align*} where the first uncertainties are statistical and the second systematic. The two measurements have a correlation coefficient of $-0.39$ and are compatible with the Standard Model.
+        L13: abstract_block: Abstract:The branching fraction ratios of $\overline{B}^0\to D^+\tau^-\overline{\nu}_{\tau}$ and $\overline{B}^0\to D^{*+}\tau^-\overline{\nu}_{\tau}$ decays are measured with respect to their muonic counterparts, using a data sample corresponding to an integrated luminosity of 2.0 fb$^{-1}$ collected by the LHCb experiment in proton-proton collisions at $\sqrt{s} = 13$ TeV. The reconstructed final states are formed by combining $D^+$ mesons with $\tau^-\to\mu^-\overline{\nu}_{\mu}\nu_{\tau}$ candidates, where the $D^+$ is reconstructed via the $D^+\to K^-\pi^+\pi^+$ decay. The results are \begin{align*} R(D^{+}) &amp;= 0.249 \pm 0.043 \pm 0.047, R(D^{*+}) &amp;= 0.402 \pm 0.081\pm 0.085, \end{align*} where the first uncertainties are statistical and the second systematic. The two measurements have a correlation coefficient of $-0.39$ and are compatible with the Standard Model.
+    - line_number: 13
+      context: |
+        L10: citation_online_date: 2025/02/16
+        L11: citation_arxiv_id: 2406.03387
+        L12: citation_abstract: The branching fraction ratios of $\overline{B}^0\to D^+\tau^-\overline{\nu}_{\tau}$ and $\overline{B}^0\to D^{*+}\tau^-\overline{\nu}_{\tau}$ decays are measured with respect to their muonic counterparts, using a data sample corresponding to an integrated luminosity of 2.0 fb$^{-1}$ collected by the LHCb experiment in proton-proton collisions at $\sqrt{s} = 13$ TeV. The reconstructed final states are formed by combining $D^+$ mesons with $\tau^-\to\mu^-\overline{\nu}_{\mu}\nu_{\tau}$ candidates, where the $D^+$ is reconstructed via the $D^+\to K^-\pi^+\pi^+$ decay. The results are \begin{align*} R(D^{+}) &amp;= 0.249 \pm 0.043 \pm 0.047, R(D^{*+}) &amp;= 0.402 \pm 0.081\pm 0.085, \end{align*} where the first uncertainties are statistical and the second systematic. The two measurements have a correlation coefficient of $-0.39$ and are compatible with the Standard Model.
+        L13: abstract_block: Abstract:The branching fraction ratios of $\overline{B}^0\to D^+\tau^-\overline{\nu}_{\tau}$ and $\overline{B}^0\to D^{*+}\tau^-\overline{\nu}_{\tau}$ decays are measured with respect to their muonic counterparts, using a data sample corresponding to an integrated luminosity of 2.0 fb$^{-1}$ collected by the LHCb experiment in proton-proton collisions at $\sqrt{s} = 13$ TeV. The reconstructed final states are formed by combining $D^+$ mesons with $\tau^-\to\mu^-\overline{\nu}_{\mu}\nu_{\tau}$ candidates, where the $D^+$ is reconstructed via the $D^+\to K^-\pi^+\pi^+$ decay. The results are \begin{align*} R(D^{+}) &amp;= 0.249 \pm 0.043 \pm 0.047, R(D^{*+}) &amp;= 0.402 \pm 0.081\pm 0.085, \end{align*} where the first uncertainties are statistical and the second systematic. The two measurements have a correlation coefficient of $-0.39$ and are compatible with the Standard Model.
+- block_key: selected_experimental_inputs[7]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/belleii2025_arxiv2504_11220.txt
+  sha256: sha256:8048cbbc38593d691d9e456abf43cdbeb43747af57f60d530ca3cd1b371eeeda
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: belleii2025_arxiv2504_11220 = 0.306 +- 0.034
+    status: AMBIGUOUS
+    matches:
+    - line_number: 6
+      context: |
+        L3: html_title: [2504.11220] Test of lepton flavor universality with measurements of $R(D^{+})$ and $R(D^{*+})$ using semileptonic $B$ tagging at the Belle II experiment
+        L4: og:title: Test of lepton flavor universality with measurements of $R(D^{+})$ and $R(D^{*+})$ using semileptonic $B$ tagging at the Belle II experiment
+        L5: og:url: https://arxiv.org/abs/2504.11220v3
+        L6: og:description: We report measurements of the ratios of branching fractions ${\cal R}(D^{(*)+}) = \frac{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \,τ^- \, \overlineν_τ)}{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \, \ell^- \, \overlineν_\ell)}$, where $\ell$ denotes either an electron or a muon. These ratios test the universality of the charged-current weak interaction. The results are based on a $365\, \mathrm{fb}^{-1}$ data sample collected with the Belle II detector at the SuperKEKB $e^+e^-$ collider, which operates at a center-of-mass energy corresponding to the $Υ(4S)$ resonance, just above the threshold for $B\overline{B}{}$ production. Signal candidates are reconstructed by selecting events in which the companion $B$ meson from the $Υ(4S) \to B\overline{B}{}$ decay is identified in semileptonic modes. The $τ$ lepton is reconstructed via its leptonic decays. We obtain ${\cal R}(D^+) = 0.418 \pm 0.074 ~({\mathrm{stat}}) \pm 0.051 ~({\mathrm{syst}})$ and ${\cal R}(D^{*+}) = 0.306 \pm 0.034 ~({\mathrm{stat}}) \pm 0.018 ~({\mathrm{syst}})$, which are consistent with world average values. Accounting for the correlation between them, these values differ from the Standard Model expectation by a collective significance of $1.7$ standard deviations.
+        L7: citation_title: Test of lepton flavor universality with measurements of $R(D^{+})$ and $R(D^{*+})$ using semileptonic $B$ tagging at the Belle II experiment
+        L8: citation_doi: 10.1103/fmn3-h8fy
+        L9: citation_date: 2025/04/15
+    - line_number: 12
+      context: |
+        L9: citation_date: 2025/04/15
+        L10: citation_online_date: 2026/03/19
+        L11: citation_arxiv_id: 2504.11220
+        L12: citation_abstract: We report measurements of the ratios of branching fractions ${\cal R}(D^{(*)+}) = \frac{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \,\tau^- \, \overline{\nu}_\tau)}{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \, \ell^- \, \overline{\nu}_\ell)}$, where $\ell$ denotes either an electron or a muon. These ratios test the universality of the charged-current weak interaction. The results are based on a $365\, \mathrm{fb}^{-1}$ data sample collected with the Belle II detector at the SuperKEKB $e^+e^-$ collider, which operates at a center-of-mass energy corresponding to the $\Upsilon(4S)$ resonance, just above the threshold for $B\overline{B}{}$ production. Signal candidates are reconstructed by selecting events in which the companion $B$ meson from the $\Upsilon(4S) \to B\overline{B}{}$ decay is identified in semileptonic modes. The $\tau$ lepton is reconstructed via its leptonic decays. We obtain ${\cal R}(D^+) = 0.418 \pm 0.074 ~({\mathrm{stat}}) \pm 0.051 ~({\mathrm{syst}})$ and ${\cal R}(D^{*+}) = 0.306 \pm 0.034 ~({\mathrm{stat}}) \pm 0.018 ~({\mathrm{syst}})$, which are consistent with world average values. Accounting for the correlation between them, these values differ from the Standard Model expectation by a collective significance of $1.7$ standard deviations.
+        L13: abstract_block: Abstract:We report measurements of the ratios of branching fractions ${\cal R}(D^{(*)+}) = \frac{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \,\tau^- \, \overline{\nu}_\tau)}{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \, \ell^- \, \overline{\nu}_\ell)}$, where $\ell$ denotes either an electron or a muon. These ratios test the universality of the charged-current weak interaction. The results are based on a $365\, \mathrm{fb}^{-1}$ data sample collected with the Belle II detector at the SuperKEKB $e^+e^-$ collider, which operates at a center-of-mass energy corresponding to the $\Upsilon(4S)$ resonance, just above the threshold for $B\overline{B}{}$ production. Signal candidates are reconstructed by selecting events in which the companion $B$ meson from the $\Upsilon(4S) \to B\overline{B}{}$ decay is identified in semileptonic modes. The $\tau$ lepton is reconstructed via its leptonic decays. We obtain ${\cal R}(D^+) = 0.418 \pm 0.074 ~({\mathrm{stat}}) \pm 0.051 ~({\mathrm{syst}})$ and ${\cal R}(D^{*+}) = 0.306 \pm 0.034 ~({\mathrm{stat}}) \pm 0.018 ~({\mathrm{syst}})$, which are consistent with world average values. Accounting for the correlation between them, these values differ from the Standard Model expectation by a collective significance of $1.7$ standard deviations.
+    - line_number: 13
+      context: |
+        L10: citation_online_date: 2026/03/19
+        L11: citation_arxiv_id: 2504.11220
+        L12: citation_abstract: We report measurements of the ratios of branching fractions ${\cal R}(D^{(*)+}) = \frac{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \,\tau^- \, \overline{\nu}_\tau)}{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \, \ell^- \, \overline{\nu}_\ell)}$, where $\ell$ denotes either an electron or a muon. These ratios test the universality of the charged-current weak interaction. The results are based on a $365\, \mathrm{fb}^{-1}$ data sample collected with the Belle II detector at the SuperKEKB $e^+e^-$ collider, which operates at a center-of-mass energy corresponding to the $\Upsilon(4S)$ resonance, just above the threshold for $B\overline{B}{}$ production. Signal candidates are reconstructed by selecting events in which the companion $B$ meson from the $\Upsilon(4S) \to B\overline{B}{}$ decay is identified in semileptonic modes. The $\tau$ lepton is reconstructed via its leptonic decays. We obtain ${\cal R}(D^+) = 0.418 \pm 0.074 ~({\mathrm{stat}}) \pm 0.051 ~({\mathrm{syst}})$ and ${\cal R}(D^{*+}) = 0.306 \pm 0.034 ~({\mathrm{stat}}) \pm 0.018 ~({\mathrm{syst}})$, which are consistent with world average values. Accounting for the correlation between them, these values differ from the Standard Model expectation by a collective significance of $1.7$ standard deviations.
+        L13: abstract_block: Abstract:We report measurements of the ratios of branching fractions ${\cal R}(D^{(*)+}) = \frac{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \,\tau^- \, \overline{\nu}_\tau)}{{\cal B}(\overline{B}{}^0 \to D^{(*)+} \, \ell^- \, \overline{\nu}_\ell)}$, where $\ell$ denotes either an electron or a muon. These ratios test the universality of the charged-current weak interaction. The results are based on a $365\, \mathrm{fb}^{-1}$ data sample collected with the Belle II detector at the SuperKEKB $e^+e^-$ collider, which operates at a center-of-mass energy corresponding to the $\Upsilon(4S)$ resonance, just above the threshold for $B\overline{B}{}$ production. Signal candidates are reconstructed by selecting events in which the companion $B$ meson from the $\Upsilon(4S) \to B\overline{B}{}$ decay is identified in semileptonic modes. The $\tau$ lepton is reconstructed via its leptonic decays. We obtain ${\cal R}(D^+) = 0.418 \pm 0.074 ~({\mathrm{stat}}) \pm 0.051 ~({\mathrm{syst}})$ and ${\cal R}(D^{*+}) = 0.306 \pm 0.034 ~({\mathrm{stat}}) \pm 0.018 ~({\mathrm{syst}})$, which are consistent with world average values. Accounting for the correlation between them, these values differ from the Standard Model expectation by a collective significance of $1.7$ standard deviations.
+- block_key: selected_experimental_inputs[8]
+  source_url: null
+  snapshot_path: flavor_catalog/references/B026/hflav_ckm2025_rdrds.txt
+  sha256: sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8
+  access_date: null
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: hflav_ckm2025_rdrds = 0.242 +- 0.019
+    status: RESOLVED
+    matches:
+    - line_number: 163
+      context: |
+        L160:
+        L161:   <tr valign=top>
+        L162:       <td><!--ana-->Belle II<sup>a</sup> </td>
+        L163:       <td><!--val-->0.242 &plusmn;  0.019 &plusmn;  0.016 </td>
+        L164:       <td><!--xval-->  0.439  &plusmn; 0.055 &plusmn; 0.046  </td>
+        L165:       <td><!--corr--> -0.40/-0.20  </td>
+        L166:       <td><a href="../../r_dtaunu/belleII_had_input_new.json">input</a></td>

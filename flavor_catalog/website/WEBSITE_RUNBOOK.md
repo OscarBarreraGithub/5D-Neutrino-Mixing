@@ -28,7 +28,18 @@ Catalog facts: 102 entries (94 PRIMARY + 8 SECONDARY) across 8 families. 100 VER
 |---|---|---|---|---|---|---|---|
 | 0 | Pre-flight | direct | — | branch cut + runbook | — | DONE | `flavor_catalog/website/WEBSITE_RUNBOOK.md` |
 | 0a | Required reading | Explore | sonnet | structured catalog summary | — | DONE | (consumed inline) |
-| 1 | Scaffold | subagent | opus | Astro 5.x + KaTeX scaffold, ingest pipeline, K001 template, working localhost | — | DONE | `flavor_catalog/website/{package.json,astro.config.mjs,scripts/ingest_catalog.py,src/**}` |
+| 1 | Scaffold | subagent | opus | Astro 5.x + KaTeX scaffold, ingest pipeline, K001 template, working localhost | — | DONE (commit 460ece9) | `flavor_catalog/website/{package.json,astro.config.mjs,scripts/ingest_catalog.py,src/**}`; dev `http://localhost:4321/` |
+| 2a | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | kaon (11) + secondary/kaon (3) = 14 entries citation anchors (K007/K011 didn't exist; K017/K018 backfilled) | wrapper a32bcb9d4d8d4ba64 | DONE (commit pending) | `_data/citation_anchors/K*.yaml` |
+| 2b | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | beauty (22) + secondary/beauty (4) = 26 entries | wrapper a5e3a526fbe422358 | DONE | `_data/citation_anchors/B*.yaml` |
+| 2c | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | top_higgs_ew (19) + secondary/top_higgs_ew (1) = 20 entries | wrapper adfffbb9315974f8e | DONE | `_data/citation_anchors/T*.yaml`,`EW*.yaml` |
+| 2d | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | charged_lepton (11) + charm (8) = 19 entries | wrapper a70c8ceabba7c4244 | DONE | `_data/citation_anchors/L*.yaml`, `C*.yaml` |
+| 2e | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | edm_neutrino (7) + collider_rs (14) = 21 entries | wrapper a940497068cec94e1 | DONE | `_data/citation_anchors/E*.yaml`, `CR*.yaml` |
+| 2f | Codex backfill | codex via codex-delegate | gpt-5.5 xhigh | K017 + K018 (missed in 2a) | aec3284bcf3f2b973 | DONE | `_data/citation_anchors/K017.yaml`, `K018.yaml` |
+
+**Phase 2 totals**: 102/102 entries · 644 anchors · 476 RESOLVED (73.9%) · 121 AMBIGUOUS (18.8%) · 47 UNRESOLVED (7.3%).
+- Per-family UNRESOLVED %: B 1.0, C 23.7 (**>20% soft trigger**), CR 15.7, E 0.0, EW 9.1, K 2.1, L 12.1, T 11.5.
+- 3 entries with >50% UNRESOLVED: C002 (3/5), CR004 (2/3), CR010 (4/7). UI marks UNRESOLVED clearly.
+- Charm exceeds the brief's 20% soft-STOP trigger by 3.7 pp. Per PI directive "do not stop", continuing; surfaced for end-of-build decision on targeted re-resolve.
 
 ---
 

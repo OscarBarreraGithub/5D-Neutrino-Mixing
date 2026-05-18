@@ -1,0 +1,154 @@
+---
+process_id: CR013
+generated_at: '2026-05-17T21:55:00-04:00'
+sources:
+- block_key: PDG2025:CR013:CMS2024_RSG_diphoton_kMPl_0p1
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf
+  snapshot_path: flavor_catalog/references/CR013/pdg2025_extra_dimensions_listing.txt
+  sha256: sha256:ce4823040682bbcba4893b693dbe6e9c135a2d1e5678d55c5ca1a08fd5553f8d
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m_G* > 4.8 TeV
+    status: AMBIGUOUS
+    matches:
+    - line_number: 218
+      context: "L215:    limits on MD for two to six extra dimensions (see their Fig. 18).\nL216:  9 AAD 13C search for p\
+        \ p \u2192 \u03B3 G , using 4.6 fb\u22121 of data at \u221As = 7 TeV to place bounds\nL217:    on MD for two to six\
+        \ extra dimensions, from which this bound on R is derived.\nL218: 10 AAD 13D search for the dijet decay of quantum\
+        \ black holes in 4.8 fb\u22121 of data produced\nL219:                        \u221A\nL220:    in p p collisions at\
+        \ s = 7 TeV to place bounds on MD for two to seven extra dimensions,\nL221:    from which these bounds on R are derived.\
+        \ Limits on MD for all \u03B4 \u2264 7 are given in"
+    - line_number: 566
+      context: "L563:      Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update\n\
+        L564:\nL565:\nL566:  12 AAD 12CP use diphoton events with large missing transverse momentum in 4.8 fb\u22121\nL567:\
+        \                                                 \u221A\nL568:     of data produced from p p collisions at s = 7\
+        \ TeV to place a lower bound on the\nL569:     compacti\uFB01cation scale in a universal extra dimension model with\
+        \ gravitational decays."
+- block_key: CMS2024:CR013:RSG_diphoton_exclusion_range_ktilde_0p01_0p2
+  source_url: https://cms-results.web.cern.ch/cms-results/public-results/publications/EXO-22-024/
+  snapshot_path: flavor_catalog/references/CR013/cms2024_exo_22_024_public_page.html
+  sha256: sha256:f3ee8d2e3e100f2d6f61d6a9dfb2f7a08d7fe12652d10d31b74384f6874ad0dc
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m_G* below 2.2-5.6 TeV excluded for 0.01 < ktilde < 0.2
+    status: RESOLVED
+    matches:
+    - line_number: 595
+      context: "L592: \t</tr>\nL593:\nL594: \t<tr><td colspan=1 class=\"textline\">\nL595: <!-- _SUMMARY_ -->A search has\
+        \ been performed for new physics in high-mass diphoton events from proton-proton collisions at a center-of-mass energy\
+        \ of 13 TeV. The data used correspond to an integrated luminosity of 138 fb$ ^{-1} $ collected with the CMS detector\
+        \ in 2016-2018. No statistically significant excess, either resonant or nonresonant, is observed in the spectra. Masses\
+        \ below 2.2 to 5.6 TeV are excluded at the 95% confidence level for the excited state of the Randall-Sundrum (RS)\
+        \ graviton, for coupling parameters between 0.01 $ < \\tilde{k} < $ 0.2. Limits are also set on the production of\
+        \ scalar Higgs boson like resonances. In the model with large extra spatial dimensions by Arkani-Hamed, Dimopoulos,\
+        \ and Dvali (ADD), exclusion limits on the mass scale $ M_{\\mathrm{S}} $ range between 7.1 to 11.1 TeV, depending\
+        \ on the specific convention. Additionally, exclusion limits are set in the two-dimensional space of the continuum\
+        \ clockwork model, with the fundamental scale $ M_{5} $ excluded at the 95% confidence level below 8.0 TeV for $ k\
+        \ $ values between 0.2 GeV and 2.0 TeV. The present results are the strongest limits to date on ADD extra dimensions\
+        \ and RS gravitons with $ \\tilde{k} \\ge $ 0.1.\nL596: \t</td></tr>\nL597:\nL598:       </table>"
+- block_key: ATLAS2021:CR013:RSG_diphoton_kMPl_0p1
+  source_url: https://arxiv.org/abs/2102.13405
+  snapshot_path: flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt
+  sha256: sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m_G* > 4.5 TeV for k/M_Pl = 0.1
+    status: RESOLVED
+    matches:
+    - line_number: 478
+      context: "L475:\nL476:\nL477: to Ref. [11] comes from the increased integrated luminosity. The RS1 model is excluded\
+        \ for \U0001D45A \U0001D43A \u2217 below\nL478: 2.2, 3.9 and 4.5 TeV for \U0001D458/\U0001D440 Pl values of 0.01,\
+        \ 0.05 and 0.1, respectively.\nL479:\nL480:\nL481:"
+- block_key: ATLAS2021:CR013:RSG_diphoton_kMPl_0p05
+  source_url: https://arxiv.org/abs/2102.13405
+  snapshot_path: flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt
+  sha256: sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m_G* > 3.9 TeV for k/M_Pl = 0.05
+    status: RESOLVED
+    matches:
+    - line_number: 478
+      context: "L475:\nL476:\nL477: to Ref. [11] comes from the increased integrated luminosity. The RS1 model is excluded\
+        \ for \U0001D45A \U0001D43A \u2217 below\nL478: 2.2, 3.9 and 4.5 TeV for \U0001D458/\U0001D440 Pl values of 0.01,\
+        \ 0.05 and 0.1, respectively.\nL479:\nL480:\nL481:"
+- block_key: ATLAS2021:CR013:RSG_diphoton_kMPl_0p01
+  source_url: https://arxiv.org/abs/2102.13405
+  snapshot_path: flavor_catalog/references/CR013/atlas2021_arxiv2102_13405_fulltext.txt
+  sha256: sha256:eb98469106b11a5742a3a6de5687dd86a4616788ab5e1b26e79db48455f07a95
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: value_limit_fallback
+    anchor_string: '> 2.2 TeV'
+    status: RESOLVED
+    matches:
+    - line_number: 478
+      context: "L475:\nL476:\nL477: to Ref. [11] comes from the increased integrated luminosity. The RS1 model is excluded\
+        \ for \U0001D45A \U0001D43A \u2217 below\nL478: 2.2, 3.9 and 4.5 TeV for \U0001D458/\U0001D440 Pl values of 0.01,\
+        \ 0.05 and 0.1, respectively.\nL479:\nL480:\nL481:"
+- block_key: CMS2018:CR013:RSG_diphoton_exclusion_range_ktilde_0p01_0p2
+  source_url: https://arxiv.org/abs/1809.00327
+  snapshot_path: flavor_catalog/references/CR013/cms2018_arxiv1809_00327_fulltext.txt
+  sha256: sha256:6cbc675c212d641f7eec15966c640a1a6521c60a53be17ff1b4b5a9f6b798bfe
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m_G* below 2.3-4.6 TeV excluded for ktilde = 0.01-0.2
+    status: AMBIGUOUS
+    matches:
+    - line_number: 36
+      context: "L33:                                              to an integrated luminosity of 35.9 fb\u22121 . The search\
+        \ is performed for both resonant\nL34:                                              and nonresonant new physics signatures.\
+        \ At 95% confidence level, lower limits on\nL35:                                              the mass of the first\
+        \ Kaluza\u2013Klein excitation of the graviton in the Randall\u2013Sundrum\nL36:                                 \
+        \             warped extra-dimensional model are determined to be in the range of 2.3 to 4.6 TeV,\nL37:          \
+        \                                    for values of the associated coupling parameter between 0.01 and 0.2. Lower limits\n\
+        L38:                                              on the production of scalar resonances and model-independent cross\
+        \ section upper\nL39:                                              limits are also provided. For the large extra-dimensional\
+        \ model of Arkani-Hamed,"
+    - line_number: 653
+      context: "L650: Asymptotic formulas [55] are used in the calculations of limits.\nL651: Expected and observed upper\
+        \ limits at 95% confidence level (CL) on the production of scalar\nL652: and RS graviton resonances are shown in Fig.\
+        \ 3. Using leading order cross sections from\nL653: PYTHIA , RS gravitons with masses mX below 2.3, 4.1, and 4.6 TeV\
+        \ can be excluded for k\u0303 = 0.01,\nL654: 0.1, and 0.2, respectively, corresponding to \u0393X /mX = 1.4 \xD7 10\u2212\
+        4 , 1.4 \xD7 10\u22122 , and 5.6 \xD7 10\u22122 ,\nL655: respectively.\nL656: Limits can also be set, in a model independent\
+        \ fashion, on the cross sections for events in"
+    - line_number: 1109
+      context: "L1106: signature of large extra dimensions, in the scenario by Arkani-Hamed, Dimopoulos, and Dvali,\nL1107:\
+        \ or a continuum clockwork model.\nL1108: The data are found to be in agreement with the predicted background from\
+        \ standard model\nL1109: sources, and no evidence for new physics is seen. Masses below 2.3\u20134.6 TeV are excluded\
+        \ at\nL1110: 95% confidence level for the excited state of the Randall\u2013Sundrum graviton, for a coupling pa-\n\
+        L1111: rameter in the range 0.01 < k\u0303 < 0.2. Limits are also set on the production of scalar resonances,\nL1112:\
+        \ and model-independent cross section limits have been extracted as a function of diphoton in-"
+- block_key: ATLAS2015:CR013:RSG_diphoton_kMPl_0p1
+  source_url: https://arxiv.org/abs/1504.05511
+  snapshot_path: flavor_catalog/references/CR013/atlas2015_arxiv1504_05511_fulltext.txt
+  sha256: sha256:fa8a6d18d5636f4b60e307c81d4403c5e6b553578f1582ee23671eff250faf7f
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: m_G* > 2.66 TeV for k/M_Pl = 0.1
+    status: AMBIGUOUS
+    matches:
+    - line_number: 28
+      context: |-
+        L25:                                                  the Large Hadron Collider. The data are found to be in agreement with the Standard Model
+        L26:                                                  prediction, and limits are reported in the framework of the Randall-Sundrum model. This
+        L27:                                                  theory leads to the prediction of graviton states, the lightest of which could be observed at
+        L28:                                                  the Large Hadron Collider. A lower limit of 2.66 (1.41) TeV at 95% confidence level is set
+        L29:                                                  on the mass of the lightest graviton for couplings of k/M Pl = 0.1 (0.01).
+        L30:
+        L31:
+    - line_number: 682
+      context: "L679: are derived from the limits on \u03C3 \xD7 BR(G\u2217 \u2192 \u03B3\u03B3). The only free parameters\
+        \ of this model are the mass\nL680: of the lightest graviton (mG\u2217 ) and the coupling to the SM fields (k/M Pl\
+        \ ), i.e. \u03C3 \xD7 BR(G\u2217 \u2192 \u03B3\u03B3) can be\nL681: calculated once the values of these two parameters\
+        \ are specified. The limits can therefore be expressed\nL682: in terms of mG\u2217 for a given value of k/M Pl . A\
+        \ lower limit of 2.66 (1.41) TeV at 95% confidence level is\nL683: obtained on the mass of the lightest graviton for\
+        \ a coupling k/M Pl = 0.1 (0.01). The results reported in\nL684:                                                 \
+        \                                          \u221A\nL685: this article constitute a significant improvement over the\
+        \ results in Ref. [5] obtained at s = 7 TeV. The"

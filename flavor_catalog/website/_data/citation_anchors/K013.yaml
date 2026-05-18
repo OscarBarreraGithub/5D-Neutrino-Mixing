@@ -1,0 +1,23 @@
+---
+process_id: K013
+generated_at: '2026-05-18T01:54:04Z'
+sources:
+- block_key: pdg_or_equivalent
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf
+  snapshot_path: flavor_catalog/references/K013/pdg2025_kl_pi0gammagamma.txt
+  sha256: sha256:48bdda1e34bb6a347c3fc489d272d5b20c0d15c05f005f032f749229c381339b
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: display
+    anchor_string: (1.273 +/- 0.033) x 10^-6
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |-
+        L9: Gamma(pi0 2 gamma) / Gamma_total, PDG item Gamma_15/Gamma
+        L10: VALUE (units 10^-6)
+        L11:
+        L12:   1.273 +/- 0.033 OUR AVERAGE
+        L13:   1.28 +/- 0.06 +/- 0.01     1.4k events   ABOUZAID 08   KTEV
+        L14:   1.27 +/- 0.04 +/- 0.01     2.5k events   LAI 02B       NA48
+        L15:

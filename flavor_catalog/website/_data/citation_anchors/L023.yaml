@@ -1,0 +1,142 @@
+---
+process_id: L023
+generated_at: '2026-05-18T01:53:04Z'
+sources:
+- block_key: Altmannshofer2014:L023:ccfr_exclusion_cl
+  source_url: https://arxiv.org/abs/1406.2332
+  snapshot_path: flavor_catalog/references/L023/altmannshofer2014_trident_arxiv.txt
+  sha256: sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '95'
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: "L17:   differences in background treatment between the initial report and later\nL18:   publication.\nL19:\
+        \ - The captioned constraint plot states that CCFR excludes parameter space at\nL20:   95% confidence level for the\
+        \ L_mu - L_tau style Z' interpretation.\nL21: - The paper finds that a gauged-muon-force explanation of the muon g-2\
+        \ anomaly\nL22:   is disfavored for m_Z' greater than about 400 MeV.\nL23: \n"
+- block_key: Kaneta2017:L023:belleii_sqrt_s
+  source_url: https://arxiv.org/abs/1701.00156
+  snapshot_path: flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt
+  sha256: sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '10.58'
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16:   0.82 +/- 0.28 and states that CCFR gives the most stringent bound among the
+        L17:   reported CCFR and CHARM-II searches.
+        L18: - It states that Belle-II is an e+e- collider at center-of-mass energy
+        L19:   sqrt(s) = 10.58 GeV with a goal of 50 ab^-1 integrated luminosity.
+        L20: - It emphasizes complementarity: Belle-II photon plus missing-energy searches
+        L21:   probe kinetic-mixing-driven production, while neutrino-beam trident
+        L22:   production probes muon-neutrino/muon contact or gauge interactions and can
+- block_key: Kaneta2017:L023:belleii_luminosity_goal
+  source_url: https://arxiv.org/abs/1701.00156
+  snapshot_path: flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt
+  sha256: sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '50'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 5
+      context: |
+        L2: Access date: 2026-05-16
+        L3: Primary URL: https://arxiv.org/abs/1701.00156
+        L4: arXiv: 1701.00156
+        L5: DOI: 10.1093/ptep/ptx050
+        L6: Title: On the possibility of search for L_mu - L_tau gauge boson at Belle-II
+        L7:   and neutrino beam experiments
+        L8: Authors: Yuya Kaneta and Takashi Shimomura
+    - line_number: 19
+      context: |
+        L16:   0.82 +/- 0.28 and states that CCFR gives the most stringent bound among the
+        L17:   reported CCFR and CHARM-II searches.
+        L18: - It states that Belle-II is an e+e- collider at center-of-mass energy
+        L19:   sqrt(s) = 10.58 GeV with a goal of 50 ab^-1 integrated luminosity.
+        L20: - It emphasizes complementarity: Belle-II photon plus missing-energy searches
+        L21:   probe kinetic-mixing-driven production, while neutrino-beam trident
+        L22:   production probes muon-neutrino/muon contact or gauge interactions and can
+- block_key: DUNE2019:L023:abstract_accuracy_projection
+  source_url: https://arxiv.org/abs/1902.06765
+  snapshot_path: flavor_catalog/references/L023/dune2019_tridents_arxiv.txt
+  sha256: sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '25'
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16: - The text says CHARM-II and CCFR found rates compatible with Standard Model
+        L17:   expectations, while no signal could be established at NuTeV.
+        L18: - The DUNE arXiv abstract says the near detector could measure
+        L19:   nu_mu -> nu_mu mu+ mu- with about 25% accuracy after about 3 years each in
+        L20:   neutrino and antineutrino modes.
+        L21: - The v2 TeX body/conclusion uses a 40% baseline accuracy and discusses a
+        L22:   25% contour as an improved scenario.
+- block_key: DUNE2019:L023:beam_mode_exposure_projection
+  source_url: https://arxiv.org/abs/1902.06765
+  snapshot_path: flavor_catalog/references/L023/dune2019_tridents_arxiv.txt
+  sha256: sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: about 3
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16: - The text says CHARM-II and CCFR found rates compatible with Standard Model
+        L17:   expectations, while no signal could be established at NuTeV.
+        L18: - The DUNE arXiv abstract says the near detector could measure
+        L19:   nu_mu -> nu_mu mu+ mu- with about 25% accuracy after about 3 years each in
+        L20:   neutrino and antineutrino modes.
+        L21: - The v2 TeX body/conclusion uses a 40% baseline accuracy and discusses a
+        L22:   25% contour as an improved scenario.
+- block_key: DUNE2019:L023:body_baseline_accuracy
+  source_url: https://arxiv.org/abs/1902.06765
+  snapshot_path: flavor_catalog/references/L023/dune2019_tridents_arxiv.txt
+  sha256: sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '40'
+    status: RESOLVED
+    matches:
+    - line_number: 21
+      context: |
+        L18: - The DUNE arXiv abstract says the near detector could measure
+        L19:   nu_mu -> nu_mu mu+ mu- with about 25% accuracy after about 3 years each in
+        L20:   neutrino and antineutrino modes.
+        L21: - The v2 TeX body/conclusion uses a 40% baseline accuracy and discusses a
+        L22:   25% contour as an improved scenario.
+        L23: - The paper quotes roughly 240 nu_mu -> nu_mu mu+ mu- trident events per year
+        L24:   at the DUNE near detector before analysis cuts, and O(10) signal events/year
+- block_key: DUNE2019:L023:improved_contour_accuracy
+  source_url: https://arxiv.org/abs/1902.06765
+  snapshot_path: flavor_catalog/references/L023/dune2019_tridents_arxiv.txt
+  sha256: sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '25'
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |
+        L19:   nu_mu -> nu_mu mu+ mu- with about 25% accuracy after about 3 years each in
+        L20:   neutrino and antineutrino modes.
+        L21: - The v2 TeX body/conclusion uses a 40% baseline accuracy and discusses a
+        L22:   25% contour as an improved scenario.
+        L23: - The paper quotes roughly 240 nu_mu -> nu_mu mu+ mu- trident events per year
+        L24:   at the DUNE near detector before analysis cuts, and O(10) signal events/year
+        L25:   after the detailed selection.

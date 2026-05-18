@@ -1,0 +1,154 @@
+---
+process_id: B012
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: branching_fraction_b0_to_kstar0_gamma
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+  snapshot_path: flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt
+  sha256: sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: B(B0 -> K*(892)0 gamma) = (4.163 +- 0.092)e-5
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: |
+        L24:   CLEO [242]      45.5 +7.2 -6.8 +/- 3.4
+        L25:   LHCb [206], [184] ratios used in HFLAV fit
+        L26: Average columns:
+        L27:   HFLAV: 41.63 +/- 0.92
+        L28:   PDG:   41.77 +/- 2.48
+        L29:
+        L30: Table 76: Isospin asymmetry in B radiative and FCNC decays.
+- block_key: branching_fraction_bp_to_kstarp_gamma
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+  snapshot_path: flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt
+  sha256: sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: B(B+ -> K*(892)+ gamma) = (3.95 +- 0.1)e-5
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12:   BaBar [241]     42.2 +/- 1.4 +/- 1.6
+        L13:   CLEO [242]      37.6 +8.9 -8.3 +/- 2.8
+        L14: Average columns:
+        L15:   HFLAV: 39.5 +/- 1.0
+        L16:   PDG:   39.2 +/- 2.2
+        L17:
+        L18: Table 62: Branching fractions of B0 radiative and FCNC decays with leptons, units 10^-6.
+- block_key: isospin_asymmetry_delta0plus
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+  snapshot_path: flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt
+  sha256: sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: Delta_0+(B -> K* gamma) = 0.059 +- 0.014
+    status: RESOLVED
+    matches:
+    - line_number: 37
+      context: |
+        L34:   Belle II [240]  0.050 +/- 0.020 +/- 0.015
+        L35:   BaBar [241]     0.066 +/- 0.021 +/- 0.022
+        L36: Average columns:
+        L37:   HFLAV: 0.059 +/- 0.014
+        L38:   PDG:   0.063 +/- 0.017
+        L39: HFLAV caution: these averages are computed naively and should be treated with caution.
+        L40:
+- block_key: direct_cp_asymmetry_b_to_kstar_gamma
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf
+  snapshot_path: flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt
+  sha256: sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: A_CP(B -> K* gamma) = -0.004 +- 0.011
+    status: AMBIGUOUS
+    matches:
+    - line_number: 44
+      context: |
+        L41: Table 96: CP asymmetries of charmless hadronic B+ / B0 admixture.
+        L42: Parameter: A_CP(B -> K* gamma)
+        L43: Measurements:
+        L44:   Belle [239]     -0.004 +/- 0.014 +/- 0.003
+        L45:   BaBar [241]     -0.003 +/- 0.017 +/- 0.007
+        L46: Average:
+        L47:   -0.004 +/- 0.011
+    - line_number: 47
+      context: |
+        L44:   Belle [239]     -0.004 +/- 0.014 +/- 0.003
+        L45:   BaBar [241]     -0.003 +/- 0.017 +/- 0.007
+        L46: Average:
+        L47:   -0.004 +/- 0.011
+        L48:
+        L49: Reference lines relevant to these rows:
+        L50: [239] Belle collaboration, T. Horiguchi et al., Evidence for Isospin Violation and Measurement of CP Asymmetries in B -> K*(892) gamma, Phys. Rev. Lett. 119 (2017) 191802, arXiv:1707.00394.
+- block_key: time_dependent_s_kstargamma
+  source_url: https://pdglive.lbl.gov/DataBlock.action?node=S042SX4
+  snapshot_path: flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt
+  sha256: sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = -0.08 +- 0.17
+    status: AMBIGUOUS
+    matches:
+    - line_number: 12
+      context: |
+        L9: Collapsed B0 listing entries:
+        L10:   A_CP(B0 -> K*(892)0 gamma) = -0.006 +/- 0.011
+        L11:   C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = 0.03 +/- 0.10
+        L12:   S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = -0.08 +/- 0.17
+        L13:
+        L14: S042SX4 data block:
+        L15: Observable: S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)
+    - line_number: 16
+      context: |
+        L13:
+        L14: S042SX4 data block:
+        L15: Observable: S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)
+        L16:   OUR AVERAGE: -0.08 +/- 0.17
+        L17: Inputs used by PDG:
+        L18:   ADACHI 2025, Belle:      0.00 +0.27 -0.26 +/- 0.03
+        L19:   AUBERT 2008BA, BaBar:   -0.03 +/- 0.29 +/- 0.03
+- block_key: time_dependent_c_kstargamma
+  source_url: https://pdglive.lbl.gov/Particle.action?node=S042
+  snapshot_path: flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt
+  sha256: sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = 0.03 +- 0.1
+    status: AMBIGUOUS
+    matches:
+    - line_number: 11
+      context: |
+        L8:
+        L9: Collapsed B0 listing entries:
+        L10:   A_CP(B0 -> K*(892)0 gamma) = -0.006 +/- 0.011
+        L11:   C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = 0.03 +/- 0.10
+        L12:   S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = -0.08 +/- 0.17
+        L13:
+        L14: S042SX4 data block:
+    - line_number: 18
+      context: |
+        L15: Observable: S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)
+        L16:   OUR AVERAGE: -0.08 +/- 0.17
+        L17: Inputs used by PDG:
+        L18:   ADACHI 2025, Belle:      0.00 +0.27 -0.26 +/- 0.03
+        L19:   AUBERT 2008BA, BaBar:   -0.03 +/- 0.29 +/- 0.03
+        L20:   USHIRODA 2006, Belle:   -0.32 +0.36 -0.33 +/- 0.05
+        L21: Older inputs listed but not used:
+    - line_number: 19
+      context: |
+        L16:   OUR AVERAGE: -0.08 +/- 0.17
+        L17: Inputs used by PDG:
+        L18:   ADACHI 2025, Belle:      0.00 +0.27 -0.26 +/- 0.03
+        L19:   AUBERT 2008BA, BaBar:   -0.03 +/- 0.29 +/- 0.03
+        L20:   USHIRODA 2006, Belle:   -0.32 +0.36 -0.33 +/- 0.05
+        L21: Older inputs listed but not used:
+        L22:   AUBERT,B 2005P, BaBar:  -0.21 +/- 0.40 +/- 0.05; replaced by AUBERT 2008BA

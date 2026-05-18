@@ -1,0 +1,168 @@
+---
+process_id: T019
+generated_at: '2026-05-18T01:54:07Z'
+sources:
+- block_key: PDG2025:T019:atlas_run2
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf
+  snapshot_path: flavor_catalog/references/T019/pdg2025_higgs_lfv_review.txt
+  sha256: sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.20%
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |
+        L19: The full 13 TeV Run-2 ATLAS and CMS datasets set 95% CL upper limits on LFV
+        L20: Higgs branching ratios. For h -> e tau, the corresponding observed (expected)
+        L21: limits are:
+        L22:   B(h -> e tau) < 0.20% (0.12%) from ATLAS [439].
+        L23:   B(h -> e tau) < 0.22% (0.16%) from CMS [440].
+        L24:
+        L25: The same paragraph gives h -> mu tau limits and notes that direct ATLAS/CMS
+- block_key: PDG2025:T019:cms_run2
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-higgs-boson.pdf
+  snapshot_path: flavor_catalog/references/T019/pdg2025_higgs_lfv_review.txt
+  sha256: sha256:67ea71f88aaac8c78d7b89eba057c270eddb20f692800e116f744e17aa30172e
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.22%
+    status: RESOLVED
+    matches:
+    - line_number: 23
+      context: |
+        L20: Higgs branching ratios. For h -> e tau, the corresponding observed (expected)
+        L21: limits are:
+        L22:   B(h -> e tau) < 0.20% (0.12%) from ATLAS [439].
+        L23:   B(h -> e tau) < 0.22% (0.16%) from CMS [440].
+        L24:
+        L25: The same paragraph gives h -> mu tau limits and notes that direct ATLAS/CMS
+        L26: limits on Br(h -> mu tau) and Br(h -> e tau) are more than an order of
+- block_key: ATLAS2023:T019:etau_limit
+  source_url: https://arxiv.org/abs/2302.05225
+  snapshot_path: flavor_catalog/references/T019/atlas2023_higg201911_arxiv_abs.txt
+  sha256: sha256:a430814893db67e975a7485028243375c488bc9d249638fb8c535186376ebfab
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.20%
+    status: RESOLVED
+    matches:
+    - line_number: 26
+      context: |
+        L23:
+        L24: The observed (expected) 95% CL upper limits obtained with the MC-template
+        L25: method from a simultaneous measurement are:
+        L26:   B(H -> e tau) < 0.20% (0.12%).
+        L27:   B(H -> mu tau) < 0.18% (0.09%).
+        L28:
+        L29: The best-fit branching-ratio difference measured with the Symmetry method in
+- block_key: ATLAS2023:T019:dataset
+  source_url: https://arxiv.org/abs/2302.05225
+  snapshot_path: flavor_catalog/references/T019/atlas2023_higg201911_arxiv_abs.txt
+  sha256: sha256:a430814893db67e975a7485028243375c488bc9d249638fb8c535186376ebfab
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 138 fb^-1 at sqrt(s) = 13 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16: Relevant abstract extract:
+        L17:
+        L18: The searches use pp collision data collected by ATLAS at sqrt(s) = 13 TeV,
+        L19: corresponding to an integrated luminosity of 138 fb^-1. Leptonic and hadronic
+        L20: tau decays are considered. No significant excess of events is observed, and
+        L21: the results are interpreted as upper limits on lepton-flavour-violating Higgs
+        L22: branching ratios.
+- block_key: CMS2021:T019:etau_limit
+  source_url: https://arxiv.org/abs/2105.03007
+  snapshot_path: flavor_catalog/references/T019/cms2021_hig20009_arxiv_abs.txt
+  sha256: sha256:6b4f4c02719f17e8117135c0ed9c1aea3ac7ede4feb3af85c7f10acc7ec94d3a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.22%
+    status: RESOLVED
+    matches:
+    - line_number: 25
+      context: |
+        L22:
+        L23: The observed (expected) upper limits on the branching fractions at 95% CL are:
+        L24:   B(H -> mu tau) < 0.15% (0.15%).
+        L25:   B(H -> e tau) < 0.22% (0.16%).
+- block_key: CMS2021:T019:dataset
+  source_url: https://arxiv.org/abs/2105.03007
+  snapshot_path: flavor_catalog/references/T019/cms2021_hig20009_arxiv_abs.txt
+  sha256: sha256:6b4f4c02719f17e8117135c0ed9c1aea3ac7ede4feb3af85c7f10acc7ec94d3a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 137 fb^-1 at sqrt(s) = 13 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16: Relevant abstract extract:
+        L17:
+        L18: The CMS search considers LFV Higgs decays to mu tau and e tau using
+        L19: 137 fb^-1 of pp collisions at sqrt(s) = 13 TeV. No significant excess is
+        L20: found, and results are interpreted as upper limits on LFV Higgs branching
+        L21: fractions.
+        L22:
+- block_key: ATLAS2019:T019:etau_limit
+  source_url: https://arxiv.org/abs/1907.06131
+  snapshot_path: flavor_catalog/references/T019/atlas2019_higg201906_arxiv_abs.txt
+  sha256: sha256:726a7510795cbca7ef90dfb9f3c52e942afbff1434086a037496e8e84b755fdf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.47%
+    status: RESOLVED
+    matches:
+    - line_number: 24
+      context: |
+        L21:
+        L22: The observed (median expected) 95% CL upper limits on the LFV branching ratios
+        L23: are:
+        L24:   B(H -> e tau) < 0.47% with median expected 0.34% (+0.13%, -0.10%).
+        L25:   B(H -> mu tau) < 0.28% with median expected 0.37% (+0.14%, -0.10%).
+- block_key: ATLAS2019:T019:dataset
+  source_url: https://arxiv.org/abs/1907.06131
+  snapshot_path: flavor_catalog/references/T019/atlas2019_higg201906_arxiv_abs.txt
+  sha256: sha256:726a7510795cbca7ef90dfb9f3c52e942afbff1434086a037496e8e84b755fdf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 36.1 fb^-1 at sqrt(s) = 13 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16: Relevant abstract extract:
+        L17:
+        L18: The ATLAS Letter searches for H -> e tau and H -> mu tau using
+        L19: 36.1 fb^-1 at sqrt(s) = 13 TeV. No significant excess over Standard Model
+        L20: background is observed.
+        L21:
+        L22: The observed (median expected) 95% CL upper limits on the LFV branching ratios
+- block_key: HarnikKoppZupan2012:T019:LFV_Higgs_EFT_allowance
+  source_url: https://arxiv.org/abs/1209.1397
+  snapshot_path: flavor_catalog/references/T019/harnik_kopp_zupan2012_arxiv_abs.txt
+  sha256: sha256:50662238edb6f9459f172f2c9129dafcc4accea50fcfa33adfedbf71f63b3740
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: order 10%
+    status: RESOLVED
+    matches:
+    - line_number: 18
+      context: |
+        L15: new-physics frameworks including two-Higgs-doublet models, extra dimensions,
+        L16: and compositeness. It rederives rare-decay, dipole-moment, and meson-oscillation
+        L17: constraints and argues that h -> tau mu and h -> tau e branching ratios of
+        L18: order 10% can be allowed by low-energy constraints. It also motivates
+        L19: dedicated h -> tau mu and h -> tau e searches.

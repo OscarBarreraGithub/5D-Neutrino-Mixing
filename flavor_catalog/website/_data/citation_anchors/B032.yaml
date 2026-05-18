@@ -1,0 +1,445 @@
+---
+process_id: B032
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: branching_fractions[0]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bu/BR_B%2B_K0_pi%2B.html
+  snapshot_path: flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt
+  sha256: sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B+ -> K0 pi+) = (2.392 +- 0.062)e-5
+    status: RESOLVED
+    matches:
+    - line_number: 23
+      context: |
+        L20:
+        L21: Branching-fraction averages from the individual HFLAV HTML pages.
+        L22: Units are 10^-5:
+        L23: - B(B+ -> K0 pi+) = 2.392 +/- 0.062. HFLAV table p=0.70, ndf=5.
+        L24:   The same row lists the PDG value 2.389 +/- 0.063.
+        L25: - B(B+ -> K+ pi0) = 1.322 +/- 0.043. HFLAV table p=0.62, ndf=3.
+        L26:   The same row lists the PDG value 1.323 +/- 0.043.
+- block_key: branching_fractions[1]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bu/BR_B%2B_K%2B_pi0.html
+  snapshot_path: flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt
+  sha256: sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B+ -> K+ pi0) = (1.322 +- 0.043)e-5
+    status: RESOLVED
+    matches:
+    - line_number: 25
+      context: |
+        L22: Units are 10^-5:
+        L23: - B(B+ -> K0 pi+) = 2.392 +/- 0.062. HFLAV table p=0.70, ndf=5.
+        L24:   The same row lists the PDG value 2.389 +/- 0.063.
+        L25: - B(B+ -> K+ pi0) = 1.322 +/- 0.043. HFLAV table p=0.62, ndf=3.
+        L26:   The same row lists the PDG value 1.323 +/- 0.043.
+        L27: - B(B0 -> K+ pi-) = 2.007 +/- 0.040. HFLAV table p=0.80, ndf=17.
+        L28:   The same row lists the PDG value 2.003 +/- 0.041.
+- block_key: branching_fractions[2]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bd/BR_B0_K%2B_pi-.html
+  snapshot_path: flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt
+  sha256: sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B0 -> K+ pi-) = (2.007 +- 0.04)e-5
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: |
+        L24:   The same row lists the PDG value 2.389 +/- 0.063.
+        L25: - B(B+ -> K+ pi0) = 1.322 +/- 0.043. HFLAV table p=0.62, ndf=3.
+        L26:   The same row lists the PDG value 1.323 +/- 0.043.
+        L27: - B(B0 -> K+ pi-) = 2.007 +/- 0.040. HFLAV table p=0.80, ndf=17.
+        L28:   The same row lists the PDG value 2.003 +/- 0.041.
+        L29: - B(B0 -> K0 pi0) = 1.012 +/- 0.043. HFLAV table p=0.70, ndf=3.
+        L30:   The same row lists the PDG value 1.012 +/- 0.043.
+- block_key: branching_fractions[3]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/charmless/Bd/BR_B0_K0_pi0.html
+  snapshot_path: flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt
+  sha256: sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B0 -> K0 pi0) = (1.012 +- 0.043)e-5
+    status: AMBIGUOUS
+    matches:
+    - line_number: 29
+      context: |
+        L26:   The same row lists the PDG value 1.323 +/- 0.043.
+        L27: - B(B0 -> K+ pi-) = 2.007 +/- 0.040. HFLAV table p=0.80, ndf=17.
+        L28:   The same row lists the PDG value 2.003 +/- 0.041.
+        L29: - B(B0 -> K0 pi0) = 1.012 +/- 0.043. HFLAV table p=0.70, ndf=3.
+        L30:   The same row lists the PDG value 1.012 +/- 0.043.
+        L31:
+        L32: Direct CP-asymmetry averages from the individual HFLAV HTML pages.
+    - line_number: 30
+      context: |
+        L27: - B(B0 -> K+ pi-) = 2.007 +/- 0.040. HFLAV table p=0.80, ndf=17.
+        L28:   The same row lists the PDG value 2.003 +/- 0.041.
+        L29: - B(B0 -> K0 pi0) = 1.012 +/- 0.043. HFLAV table p=0.70, ndf=3.
+        L30:   The same row lists the PDG value 1.012 +/- 0.043.
+        L31:
+        L32: Direct CP-asymmetry averages from the individual HFLAV HTML pages.
+        L33: Units are 10^-2:
+- block_key: direct_cp_asymmetries[0]
+  source_url: https://hflav.web.cern.ch/content/rare-b-decays
+  snapshot_path: flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt
+  sha256: sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: A_CP(B+ -> K0_S pi+) = -2.67 +- 0.87 percent
+    status: RESOLVED
+    matches:
+    - line_number: 34
+      context: |
+        L31:
+        L32: Direct CP-asymmetry averages from the individual HFLAV HTML pages.
+        L33: Units are 10^-2:
+        L34: - A_CP(B+ -> K0_S pi+) = -2.67 +/- 0.87. HFLAV table p=0.77, ndf=4.
+        L35:   The update includes an unpublished LHCb input shown in blue: -2.8 +/- 0.5 +/- 0.9.
+        L36: - A_CP(B+ -> K+ pi0) = +2.7 +/- 1.2. HFLAV table p=0.62, ndf=4.
+        L37:   The LHCb input is +2.5 +/- 1.5 +/- 0.7.
+- block_key: direct_cp_asymmetries[1]
+  source_url: https://hflav.web.cern.ch/content/rare-b-decays
+  snapshot_path: flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt
+  sha256: sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: A_CP(B+ -> K+ pi0) = 2.7 +- 1.2 percent
+    status: RESOLVED
+    matches:
+    - line_number: 36
+      context: |
+        L33: Units are 10^-2:
+        L34: - A_CP(B+ -> K0_S pi+) = -2.67 +/- 0.87. HFLAV table p=0.77, ndf=4.
+        L35:   The update includes an unpublished LHCb input shown in blue: -2.8 +/- 0.5 +/- 0.9.
+        L36: - A_CP(B+ -> K+ pi0) = +2.7 +/- 1.2. HFLAV table p=0.62, ndf=4.
+        L37:   The LHCb input is +2.5 +/- 1.5 +/- 0.7.
+        L38: - A_CP(B0 -> K+ pi-) = -8.31 +/- 0.31. HFLAV table p=0.54, ndf=4.
+        L39:   The LHCb input is -8.31 +/- 0.34 and combines Run 2 with Run 1.
+- block_key: direct_cp_asymmetries[2]
+  source_url: https://hflav.web.cern.ch/content/rare-b-decays
+  snapshot_path: flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt
+  sha256: sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: A_CP(B0 -> K+ pi-) = -8.31 +- 0.31 percent
+    status: AMBIGUOUS
+    matches:
+    - line_number: 38
+      context: |
+        L35:   The update includes an unpublished LHCb input shown in blue: -2.8 +/- 0.5 +/- 0.9.
+        L36: - A_CP(B+ -> K+ pi0) = +2.7 +/- 1.2. HFLAV table p=0.62, ndf=4.
+        L37:   The LHCb input is +2.5 +/- 1.5 +/- 0.7.
+        L38: - A_CP(B0 -> K+ pi-) = -8.31 +/- 0.31. HFLAV table p=0.54, ndf=4.
+        L39:   The LHCb input is -8.31 +/- 0.34 and combines Run 2 with Run 1.
+        L40: - A_CP(B0 -> K0 pi0) = -1 +/- 13. HFLAV table includes the Belle II input
+        L41:   -1 +/- 12 +/- 4, described as a combination of time-integrated and
+    - line_number: 39
+      context: |
+        L36: - A_CP(B+ -> K+ pi0) = +2.7 +/- 1.2. HFLAV table p=0.62, ndf=4.
+        L37:   The LHCb input is +2.5 +/- 1.5 +/- 0.7.
+        L38: - A_CP(B0 -> K+ pi-) = -8.31 +/- 0.31. HFLAV table p=0.54, ndf=4.
+        L39:   The LHCb input is -8.31 +/- 0.34 and combines Run 2 with Run 1.
+        L40: - A_CP(B0 -> K0 pi0) = -1 +/- 13. HFLAV table includes the Belle II input
+        L41:   -1 +/- 12 +/- 4, described as a combination of time-integrated and
+        L42:   time-dependent analyses using BLUE.
+- block_key: direct_cp_asymmetries[3]
+  source_url: https://hflav.web.cern.ch/content/rare-b-decays
+  snapshot_path: flavor_catalog/references/B032/hflav_dec2025_btopik_values.txt
+  sha256: sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: A_CP(B0 -> K0 pi0) = -1.0 +- 13.0 percent
+    status: AMBIGUOUS
+    matches:
+    - line_number: 40
+      context: |
+        L37:   The LHCb input is +2.5 +/- 1.5 +/- 0.7.
+        L38: - A_CP(B0 -> K+ pi-) = -8.31 +/- 0.31. HFLAV table p=0.54, ndf=4.
+        L39:   The LHCb input is -8.31 +/- 0.34 and combines Run 2 with Run 1.
+        L40: - A_CP(B0 -> K0 pi0) = -1 +/- 13. HFLAV table includes the Belle II input
+        L41:   -1 +/- 12 +/- 4, described as a combination of time-integrated and
+        L42:   time-dependent analyses using BLUE.
+    - line_number: 41
+      context: |
+        L38: - A_CP(B0 -> K+ pi-) = -8.31 +/- 0.31. HFLAV table p=0.54, ndf=4.
+        L39:   The LHCb input is -8.31 +/- 0.34 and combines Run 2 with Run 1.
+        L40: - A_CP(B0 -> K0 pi0) = -1 +/- 13. HFLAV table includes the Belle II input
+        L41:   -1 +/- 12 +/- 4, described as a combination of time-integrated and
+        L42:   time-dependent analyses using BLUE.
+- block_key: time_dependent_cp[0]
+  source_url: https://pdgapi.lbl.gov/summaries/S042CKP
+  snapshot_path: flavor_catalog/references/B032/pdg2025_k0pi0_time_dependent_cp_api.txt
+  sha256: sha256:dcd2aea4b34a67bc0d72350d098a885e99364d0a040439016807e4837a67f008
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: C(K0 pi0) in B0 -> K0 pi0 = 0.0 +- 0.08
+    status: AMBIGUOUS
+    matches:
+    - line_number: 8
+      context: |
+        L5: - https://pdgapi.lbl.gov/summaries/S042CKP
+        L6: - https://pdgapi.lbl.gov/listings/S042CKP
+        L7: - https://pdgapi.lbl.gov/summaries/S042SKP
+        L8: - https://pdgapi.lbl.gov/listings/S042SKP
+        L9:
+        L10: Summary excerpt:
+        L11: - edition: 2025
+    - line_number: 11
+      context: |
+        L8: - https://pdgapi.lbl.gov/listings/S042SKP
+        L9:
+        L10: Summary excerpt:
+        L11: - edition: 2025
+        L12: - pdgid: S042CKP
+        L13: - description: C(K0 pi0) (B0 --> K0 pi0)
+        L14: - pdg_values: OUR AVERAGE value_text "0.00+-0.08";
+    - line_number: 12
+      context: |
+        L9:
+        L10: Summary excerpt:
+        L11: - edition: 2025
+        L12: - pdgid: S042CKP
+        L13: - description: C(K0 pi0) (B0 --> K0 pi0)
+        L14: - pdg_values: OUR AVERAGE value_text "0.00+-0.08";
+        L15:   numeric value -9.010944052367896E-4; symmetric error 0.07727590775925162.
+    - line_number: 13
+      context: |
+        L10: Summary excerpt:
+        L11: - edition: 2025
+        L12: - pdgid: S042CKP
+        L13: - description: C(K0 pi0) (B0 --> K0 pi0)
+        L14: - pdg_values: OUR AVERAGE value_text "0.00+-0.08";
+        L15:   numeric value -9.010944052367896E-4; symmetric error 0.07727590775925162.
+        L16:
+    - line_number: 14
+      context: |
+        L11: - edition: 2025
+        L12: - pdgid: S042CKP
+        L13: - description: C(K0 pi0) (B0 --> K0 pi0)
+        L14: - pdg_values: OUR AVERAGE value_text "0.00+-0.08";
+        L15:   numeric value -9.010944052367896E-4; symmetric error 0.07727590775925162.
+        L16:
+        L17: - edition: 2025
+    - line_number: 15
+      context: |
+        L12: - pdgid: S042CKP
+        L13: - description: C(K0 pi0) (B0 --> K0 pi0)
+        L14: - pdg_values: OUR AVERAGE value_text "0.00+-0.08";
+        L15:   numeric value -9.010944052367896E-4; symmetric error 0.07727590775925162.
+        L16:
+        L17: - edition: 2025
+        L18: - pdgid: S042SKP
+    - line_number: 17
+      context: |
+        L14: - pdg_values: OUR AVERAGE value_text "0.00+-0.08";
+        L15:   numeric value -9.010944052367896E-4; symmetric error 0.07727590775925162.
+        L16:
+        L17: - edition: 2025
+        L18: - pdgid: S042SKP
+        L19: - description: S(K0 pi0) (B0 --> K0 pi0)
+        L20: - pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+    - line_number: 18
+      context: |
+        L15:   numeric value -9.010944052367896E-4; symmetric error 0.07727590775925162.
+        L16:
+        L17: - edition: 2025
+        L18: - pdgid: S042SKP
+        L19: - description: S(K0 pi0) (B0 --> K0 pi0)
+        L20: - pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+        L21:   numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+    - line_number: 19
+      context: |
+        L16:
+        L17: - edition: 2025
+        L18: - pdgid: S042SKP
+        L19: - description: S(K0 pi0) (B0 --> K0 pi0)
+        L20: - pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+        L21:   numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+        L22:
+    - line_number: 20
+      context: |
+        L17: - edition: 2025
+        L18: - pdgid: S042SKP
+        L19: - description: S(K0 pi0) (B0 --> K0 pi0)
+        L20: - pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+        L21:   numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+        L22:
+        L23: Listing excerpt for S(K0 pi0), inputs marked used in the average:
+    - line_number: 21
+      context: |
+        L18: - pdgid: S042SKP
+        L19: - description: S(K0 pi0) (B0 --> K0 pi0)
+        L20: - pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+        L21:   numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+        L22:
+        L23: Listing excerpt for S(K0 pi0), inputs marked used in the average:
+        L24: - ADACHI 2023E, PRL 131 111803, DOI 10.1103/PhysRevLett.131.111803:
+    - line_number: 23
+      context: |
+        L20: - pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+        L21:   numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+        L22:
+        L23: Listing excerpt for S(K0 pi0), inputs marked used in the average:
+        L24: - ADACHI 2023E, PRL 131 111803, DOI 10.1103/PhysRevLett.131.111803:
+        L25:   S = 0.75 +0.20 -0.23 +/- 0.04, used_in_average true.
+        L26: - FUJIKAWA 2010A, PR D81 011101, DOI 10.1103/PhysRevD.81.011101:
+    - line_number: 24
+      context: |
+        L21:   numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+        L22:
+        L23: Listing excerpt for S(K0 pi0), inputs marked used in the average:
+        L24: - ADACHI 2023E, PRL 131 111803, DOI 10.1103/PhysRevLett.131.111803:
+        L25:   S = 0.75 +0.20 -0.23 +/- 0.04, used_in_average true.
+        L26: - FUJIKAWA 2010A, PR D81 011101, DOI 10.1103/PhysRevD.81.011101:
+        L27:   S = 0.67 +/- 0.31 +/- 0.08, used_in_average true.
+    - line_number: 25
+      context: |
+        L22:
+        L23: Listing excerpt for S(K0 pi0), inputs marked used in the average:
+        L24: - ADACHI 2023E, PRL 131 111803, DOI 10.1103/PhysRevLett.131.111803:
+        L25:   S = 0.75 +0.20 -0.23 +/- 0.04, used_in_average true.
+        L26: - FUJIKAWA 2010A, PR D81 011101, DOI 10.1103/PhysRevD.81.011101:
+        L27:   S = 0.67 +/- 0.31 +/- 0.08, used_in_average true.
+        L28: - AUBERT 2009I, PR D79 052003, DOI 10.1103/PhysRevD.79.052003:
+    - line_number: 26
+      context: |
+        L23: Listing excerpt for S(K0 pi0), inputs marked used in the average:
+        L24: - ADACHI 2023E, PRL 131 111803, DOI 10.1103/PhysRevLett.131.111803:
+        L25:   S = 0.75 +0.20 -0.23 +/- 0.04, used_in_average true.
+        L26: - FUJIKAWA 2010A, PR D81 011101, DOI 10.1103/PhysRevD.81.011101:
+        L27:   S = 0.67 +/- 0.31 +/- 0.08, used_in_average true.
+        L28: - AUBERT 2009I, PR D79 052003, DOI 10.1103/PhysRevD.79.052003:
+        L29:   S = 0.55 +/- 0.20 +/- 0.03, used_in_average true.
+    - line_number: 27
+      context: |
+        L24: - ADACHI 2023E, PRL 131 111803, DOI 10.1103/PhysRevLett.131.111803:
+        L25:   S = 0.75 +0.20 -0.23 +/- 0.04, used_in_average true.
+        L26: - FUJIKAWA 2010A, PR D81 011101, DOI 10.1103/PhysRevD.81.011101:
+        L27:   S = 0.67 +/- 0.31 +/- 0.08, used_in_average true.
+        L28: - AUBERT 2009I, PR D79 052003, DOI 10.1103/PhysRevD.79.052003:
+        L29:   S = 0.55 +/- 0.20 +/- 0.03, used_in_average true.
+        L30:
+    - line_number: 28
+      context: |
+        L25:   S = 0.75 +0.20 -0.23 +/- 0.04, used_in_average true.
+        L26: - FUJIKAWA 2010A, PR D81 011101, DOI 10.1103/PhysRevD.81.011101:
+        L27:   S = 0.67 +/- 0.31 +/- 0.08, used_in_average true.
+        L28: - AUBERT 2009I, PR D79 052003, DOI 10.1103/PhysRevD.79.052003:
+        L29:   S = 0.55 +/- 0.20 +/- 0.03, used_in_average true.
+        L30:
+        L31: Listing excerpt for C(K0 pi0), representative inputs marked used in the fit:
+    - line_number: 29
+      context: |
+        L26: - FUJIKAWA 2010A, PR D81 011101, DOI 10.1103/PhysRevD.81.011101:
+        L27:   S = 0.67 +/- 0.31 +/- 0.08, used_in_average true.
+        L28: - AUBERT 2009I, PR D79 052003, DOI 10.1103/PhysRevD.79.052003:
+        L29:   S = 0.55 +/- 0.20 +/- 0.03, used_in_average true.
+        L30:
+        L31: Listing excerpt for C(K0 pi0), representative inputs marked used in the fit:
+        L32: - ADACHI 2024, PR D109 012001, DOI 10.1103/PhysRevD.109.012001:
+    - line_number: 31
+      context: |
+        L28: - AUBERT 2009I, PR D79 052003, DOI 10.1103/PhysRevD.79.052003:
+        L29:   S = 0.55 +/- 0.20 +/- 0.03, used_in_average true.
+        L30:
+        L31: Listing excerpt for C(K0 pi0), representative inputs marked used in the fit:
+        L32: - ADACHI 2024, PR D109 012001, DOI 10.1103/PhysRevD.109.012001:
+        L33:   C = -0.01 +/- 0.12 +/- 0.04, used_in_average true.
+        L34: - FUJIKAWA 2010A, PR D81 011101: C = -0.14 +/- 0.13 +/- 0.06,
+    - line_number: 32
+      context: |
+        L29:   S = 0.55 +/- 0.20 +/- 0.03, used_in_average true.
+        L30:
+        L31: Listing excerpt for C(K0 pi0), representative inputs marked used in the fit:
+        L32: - ADACHI 2024, PR D109 012001, DOI 10.1103/PhysRevD.109.012001:
+        L33:   C = -0.01 +/- 0.12 +/- 0.04, used_in_average true.
+        L34: - FUJIKAWA 2010A, PR D81 011101: C = -0.14 +/- 0.13 +/- 0.06,
+        L35:   with footnote that the paper reports A = -C.
+    - line_number: 33
+      context: |
+        L30:
+        L31: Listing excerpt for C(K0 pi0), representative inputs marked used in the fit:
+        L32: - ADACHI 2024, PR D109 012001, DOI 10.1103/PhysRevD.109.012001:
+        L33:   C = -0.01 +/- 0.12 +/- 0.04, used_in_average true.
+        L34: - FUJIKAWA 2010A, PR D81 011101: C = -0.14 +/- 0.13 +/- 0.06,
+        L35:   with footnote that the paper reports A = -C.
+        L36: - AUBERT 2009I, PR D79 052003: C = 0.13 +/- 0.13 +/- 0.03.
+- block_key: time_dependent_cp[1]
+  source_url: https://pdgapi.lbl.gov/summaries/S042SKP
+  snapshot_path: flavor_catalog/references/B032/pdg2025_k0pi0_time_dependent_cp_api.txt
+  sha256: sha256:dcd2aea4b34a67bc0d72350d098a885e99364d0a040439016807e4837a67f008
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: S(K0 pi0) in B0 -> K0 pi0 = 0.64 +- 0.13
+    status: AMBIGUOUS
+    matches:
+    - line_number: 20
+      context: |
+        L17: - edition: 2025
+        L18: - pdgid: S042SKP
+        L19: - description: S(K0 pi0) (B0 --> K0 pi0)
+        L20: - pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+        L21:   numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+        L22:
+        L23: Listing excerpt for S(K0 pi0), inputs marked used in the average:
+    - line_number: 21
+      context: |
+        L18: - pdgid: S042SKP
+        L19: - description: S(K0 pi0) (B0 --> K0 pi0)
+        L20: - pdg_values: OUR AVERAGE value_text "0.64+-0.13";
+        L21:   numeric value 0.6449839379030179; error +0.1310306135865286 -0.1379414020760354.
+        L22:
+        L23: Listing excerpt for S(K0 pi0), inputs marked used in the average:
+        L24: - ADACHI 2023E, PRL 131 111803, DOI 10.1103/PhysRevLett.131.111803:
+- block_key: post_2008_measurements[0]
+  source_url: https://arxiv.org/abs/2012.12789
+  snapshot_path: flavor_catalog/references/B032/lhcb2021_bplus_kplus_pi0_acp_arxiv.txt
+  sha256: sha256:3cf10c6a54476f953f6949837b5b100353945cc11fbac2ff27d979e0ae49b54d
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: A_CP(B+ -> K+ pi0) = 0.025 +- +/- 0.015 stat +/- 0.006 syst +/- 0.003 external
+    status: RESOLVED
+    matches:
+    - line_number: 13
+      context: |
+        L10: Relevant arXiv abstract excerpt:
+        L11: LHCb reports direct CP violation in B+ -> K+ pi0 using 5.4 fb^-1 at
+        L12: sqrt(s) = 13 TeV.  The measured CP asymmetry is
+        L13: 0.025 +/- 0.015 +/- 0.006 +/- 0.003.  The abstract identifies this observable
+        L14: as a key input to the long-standing K pi puzzle and states that it enhances
+        L15: the anomalous difference between the direct CP asymmetries of B0 -> K+ pi-
+        L16: and B+ -> K+ pi0.
+- block_key: post_2008_measurements[1]
+  source_url: https://arxiv.org/abs/2310.06381
+  snapshot_path: flavor_catalog/references/B032/belleii2024_btokpi_arxiv.txt
+  sha256: sha256:921fc4417a5fcf5e3c4865260dad6ea0d4b8f3605c7c1e51b6b7ab83e348d399
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: Belle II Kpi sum-rule test = -0.03 +- +/- 0.13 stat +/- 0.04 syst
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12: B0 -> K+ pi-, B+ -> K+ pi0, B+ -> K0 pi+, and B0 -> K0 pi0, using
+        L13: 387 x 10^6 bottom-antibottom meson pairs at the Upsilon(4S).  The analysis
+        L14: also tests the Standard Model isospin-based sum rule and obtains
+        L15: -0.03 +/- 0.13 +/- 0.04 for that sum-rule quantity.
+        L16:
+        L17: Catalog use:
+        L18: Post-2008 Belle II input to HFLAV B -> K pi branching fractions and direct

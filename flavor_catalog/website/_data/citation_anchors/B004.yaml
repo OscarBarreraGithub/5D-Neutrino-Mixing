@@ -1,0 +1,80 @@
+---
+process_id: B004
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: canonical_hflav_average
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/HFLAV_phis_inputs/HFLAV_phis_inputs.pdf
+  snapshot_path: flavor_catalog/references/B004/hflav_pdg2025_phis_inputs.txt
+  sha256: sha256:ae8171d0b32e36087e25893f033989fdde4dd7a4179100746ca18eaec7a79cc0
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: phi_s^ccs, all combined b -> c cbar s Bs0 decays = -0.041 +- 0.016 rad
+    status: RESOLVED
+    matches:
+    - line_number: 26
+      context: |
+        L23:   phi_s^ccs = -0.050 +/- 0.017 rad;
+        L24:   DeltaGamma_s = +0.077 +/- 0.006 ps^-1.
+        L25: - All combined:
+        L26:   phi_s^ccs = -0.041 +/- 0.016 rad;
+        L27:   DeltaGamma_s = +0.079 +/- 0.006 ps^-1.
+        L28:
+        L29: Reference identities in the HFLAV table for the key post-2008 inputs:
+- block_key: mode_specific_jpsi_kk_average
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/HFLAV_phis_inputs/HFLAV_phis_inputs.pdf
+  snapshot_path: flavor_catalog/references/B004/hflav_pdg2025_phis_inputs.txt
+  sha256: sha256:ae8171d0b32e36087e25893f033989fdde4dd7a4179100746ca18eaec7a79cc0
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: phi_s^ccs, Bs0 -> J/psi K+ K- combined = -0.05 +- 0.017 rad
+    status: RESOLVED
+    matches:
+    - line_number: 23
+      context: |
+        L20:   phi_s^ccs = -0.033 +/- 0.018 rad;
+        L21:   DeltaGamma_s = +0.085 +/- 0.004 ps^-1.
+        L22: - Bs0 -> J/psi K+K- combined:
+        L23:   phi_s^ccs = -0.050 +/- 0.017 rad;
+        L24:   DeltaGamma_s = +0.077 +/- 0.006 ps^-1.
+        L25: - All combined:
+        L26:   phi_s^ccs = -0.041 +/- 0.016 rad;
+- block_key: latest_lhcb_jpsi_kk_input
+  source_url: https://arxiv.org/abs/2308.01468
+  snapshot_path: flavor_catalog/references/B004/lhcb_2024_jpsikk_phis_arxiv.txt
+  sha256: sha256:d94a1b07a02beb47108ac6a5f7a3cc8c143655023c50e78513025e5b5d70a84e
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: phi_s in Bs0 -> J/psi(mu+mu-) K+ K- near phi(1020) = -0.039 +- 0.022 rad
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |
+        L19: the phi(1020) resonance.
+        L20:
+        L21: The values obtained are:
+        L22:   phi_s = -0.039 +/- 0.022 +/- 0.006 rad,
+        L23:   DeltaGamma_s = 0.0845 +/- 0.0044 +/- 0.0024 ps^-1,
+        L24:   Gamma_s - Gamma_d = -0.0056^{+0.0013}_{-0.0015} +/- 0.0014 ps^-1,
+        L25: where the first uncertainty is statistical and the second systematic.
+- block_key: standard_model_reference
+  source_url: https://arxiv.org/abs/2308.01468
+  snapshot_path: flavor_catalog/references/B004/lhcb_2024_jpsikk_phis_arxiv.txt
+  sha256: sha256:d94a1b07a02beb47108ac6a5f7a3cc8c143655023c50e78513025e5b5d70a84e
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: -2 beta_s = -0.0368 +- 0.0009 rad
+    status: RESOLVED
+    matches:
+    - line_number: 33
+      context: |
+        L30: Neglecting subleading loop contributions in b -> c cbar s transitions,
+        L31: phi_s is predicted in the Standard Model to equal -2 beta_s. Global CKM fits
+        L32: quoted by the paper give
+        L33:   -2 beta_s = -0.0368^{+0.0009}_{-0.0006} rad.
+        L34: At the time of the paper, the world average quoted in the introduction was
+        L35:   phi_s^ccs = -0.049 +/- 0.019 rad.
+        L36:

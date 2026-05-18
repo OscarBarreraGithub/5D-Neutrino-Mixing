@@ -1,0 +1,262 @@
+---
+process_id: EW002
+generated_at: '2026-05-18T01:54:07Z'
+sources:
+- block_key: PDG2025:EW002:Vud_superallowed
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt
+  sha256: sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '0.97367'
+    status: RESOLVED
+    matches:
+    - line_number: 11
+      context: |
+        L8: Values used in EW002:
+        L9: - First-row test: |Vud|^2 + |Vus|^2 + |Vub|^2 = 1.
+        L10: - PDG says |Vub|^2 is about 1.7e-5 and is negligible for the Vud/Vus discussion.
+        L11: - Superallowed nuclear beta decays: Vud = 0.97367 with component errors
+        L12:   0.00011_exp, 0.00013_DeltaR^V, 0.00027_NS, total 0.00032.
+        L13: - Kaon semileptonic product: f_+(0)|Vus| = 0.21656(35).
+        L14: - FLAG-style lattice inputs quoted by PDG: f_+(0) = 0.9677(27) for
+- block_key: PDG2025:EW002:Vus_fplus_product
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt
+  sha256: sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.21656(35)
+    status: RESOLVED
+    matches:
+    - line_number: 13
+      context: |
+        L10: - PDG says |Vub|^2 is about 1.7e-5 and is negligible for the Vud/Vus discussion.
+        L11: - Superallowed nuclear beta decays: Vud = 0.97367 with component errors
+        L12:   0.00011_exp, 0.00013_DeltaR^V, 0.00027_NS, total 0.00032.
+        L13: - Kaon semileptonic product: f_+(0)|Vus| = 0.21656(35).
+        L14: - FLAG-style lattice inputs quoted by PDG: f_+(0) = 0.9677(27) for
+        L15:   Nf = 2+1 and f_+(0) = 0.9698(17) for Nf = 2+1+1.
+        L16: - K_l3 extraction: |Vus| = 0.22330 with errors 0.00004_exp+RC and
+- block_key: PDG2025:EW002:Vus_Kl3
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt
+  sha256: sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '0.2233'
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |
+        L13: - Kaon semileptonic product: f_+(0)|Vus| = 0.21656(35).
+        L14: - FLAG-style lattice inputs quoted by PDG: f_+(0) = 0.9677(27) for
+        L15:   Nf = 2+1 and f_+(0) = 0.9698(17) for Nf = 2+1+1.
+        L16: - K_l3 extraction: |Vus| = 0.22330 with errors 0.00004_exp+RC and
+        L17:   0.00004_lattice in the compact PDG line; the preceding sentence gives the
+        L18:   total 0.00053 breakdown as 0.00035_exp, 0.00039_LAT, 0.00008_RC+IB.
+        L19: - Kaon-sector average used by PDG for the first-row test: Vus = 0.22431(85)
+- block_key: PDG2025:EW002:Vus_kaon_average
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt
+  sha256: sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.22431(85)
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16: - K_l3 extraction: |Vus| = 0.22330 with errors 0.00004_exp+RC and
+        L17:   0.00004_lattice in the compact PDG line; the preceding sentence gives the
+        L18:   total 0.00053 breakdown as 0.00035_exp, 0.00039_LAT, 0.00008_RC+IB.
+        L19: - Kaon-sector average used by PDG for the first-row test: Vus = 0.22431(85)
+        L20:   with scale factor S = 2.5.
+        L21: - PDG unitarity consistency check: |Vud|^2 + |Vus|^2 + |Vub|^2 =
+        L22:   0.9983(6)(4), about an overall 2 sigma deviation; PDG notes it increases
+- block_key: PDG2025:EW002:first_row_sum
+  source_url: https://pdg.lbl.gov/2025/reviews/rpp2025-rev-vud-vus.pdf
+  snapshot_path: flavor_catalog/references/EW002/pdg_2025_vud_vus_ckm_unitarity.txt
+  sha256: sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '0.9983'
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |
+        L19: - Kaon-sector average used by PDG for the first-row test: Vus = 0.22431(85)
+        L20:   with scale factor S = 2.5.
+        L21: - PDG unitarity consistency check: |Vud|^2 + |Vus|^2 + |Vub|^2 =
+        L22:   0.9983(6)(4), about an overall 2 sigma deviation; PDG notes it increases
+        L23:   to about 3 sigma if nuclear-structure uncertainties are ignored.
+        L24:
+        L25: Relevance notes:
+- block_key: FLAG2024:EW002:Vus_fplus_product
+  source_url: https://arxiv.org/abs/2411.04268
+  snapshot_path: flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt
+  sha256: sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.21654(41)
+    status: RESOLVED
+    matches:
+    - line_number: 10
+      context: |
+        L7:
+        L8: Values used in EW002:
+        L9: - Experimental kaon inputs in Sec. 5.1:
+        L10:   |Vus| f_+(0) = 0.21654(41).
+        L11:   |Vus/Vud| f_K+-/f_pi+- = 0.27599(41).
+        L12: - Direct lattice average for semileptonic form factor:
+        L13:   f_+(0) = 0.9698(17) for Nf = 2+1+1.
+- block_key: FLAG2024:EW002:fplus_Nf211
+  source_url: https://arxiv.org/abs/2411.04268
+  snapshot_path: flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt
+  sha256: sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.9698(17)
+    status: RESOLVED
+    matches:
+    - line_number: 13
+      context: |
+        L10:   |Vus| f_+(0) = 0.21654(41).
+        L11:   |Vus/Vud| f_K+-/f_pi+- = 0.27599(41).
+        L12: - Direct lattice average for semileptonic form factor:
+        L13:   f_+(0) = 0.9698(17) for Nf = 2+1+1.
+        L14:   f_+(0) = 0.9677(27) for Nf = 2+1.
+        L15: - Direct lattice average for charged decay-constant ratio:
+        L16:   f_K+-/f_pi+- = 1.1934(19) for Nf = 2+1+1.
+- block_key: FLAG2024:EW002:Vus_from_fplus_Nf211
+  source_url: https://arxiv.org/abs/2411.04268
+  snapshot_path: flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt
+  sha256: sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.22328(58)
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16:   f_K+-/f_pi+- = 1.1934(19) for Nf = 2+1+1.
+        L17:   f_K+-/f_pi+- = 1.1916(34) for Nf = 2+1.
+        L18: - Extraction from f_+(0), Nf = 2+1+1:
+        L19:   |Vus| = 0.22328(58).
+        L20: - Conversion from f_K+-/f_pi+-, Nf = 2+1+1:
+        L21:   |Vus|/|Vud| = 0.23126(50).
+        L22: - |Vub| input for the first-row test:
+- block_key: FLAG2024:EW002:first_row_sum_fplus
+  source_url: https://arxiv.org/abs/2411.04268
+  snapshot_path: flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt
+  sha256: sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.99802(66)
+    status: RESOLVED
+    matches:
+    - line_number: 25
+      context: |
+        L22: - |Vub| input for the first-row test:
+        L23:   |Vub| = 3.82(24)e-3.
+        L24: - First-row sum using Nf = 2+1+1 f_+(0) and the PDG beta-decay Vud:
+        L25:   |Vu|^2 = 0.99802(66), about a 3.0 sigma deviation from unity.
+        L26: - First-row sum using Nf = 2+1+1 f_K+-/f_pi+- and the same Vud:
+        L27:   |Vu|^2 = 0.99888(67), about a 1.7 sigma deviation from unity.
+        L28: - Nf = 2+1 comparison:
+- block_key: FLAG2024:EW002:first_row_sum_fkfpi
+  source_url: https://arxiv.org/abs/2411.04268
+  snapshot_path: flavor_catalog/references/EW002/flag_2024_vus_ckm_unitarity.txt
+  sha256: sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.99888(67)
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: |
+        L24: - First-row sum using Nf = 2+1+1 f_+(0) and the PDG beta-decay Vud:
+        L25:   |Vu|^2 = 0.99802(66), about a 3.0 sigma deviation from unity.
+        L26: - First-row sum using Nf = 2+1+1 f_K+-/f_pi+- and the same Vud:
+        L27:   |Vu|^2 = 0.99888(67), about a 1.7 sigma deviation from unity.
+        L28: - Nf = 2+1 comparison:
+        L29:   f_+(0) plus beta-decay Vud gives |Vu|^2 = 0.99824(69), about 2.5 sigma;
+        L30:   f_K+-/f_pi+- gives |Vu|^2 = 0.99903(72), about 1.4 sigma.
+- block_key: HardyTowner2020:EW002:Vud
+  source_url: https://www.osti.gov/pages/biblio/1780888
+  snapshot_path: flavor_catalog/references/EW002/hardy_towner_2020_superallowed_vud.txt
+  sha256: sha256:913ac2c95b8296f78dab3323d0909ed714dbb571a30ac92bb1633715ae853196
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.97373 +/- 0.00031
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12:   measurements from 174 references.
+        L13: - Fifteen corrected Ft values reach precision of 0.3% or better.
+        L14: - The averaged Ft value combined with the muon lifetime gives
+        L15:   Vud = 0.97373 +/- 0.00031.
+        L16: - The result is lower than the 2015 survey by about one standard deviation and
+        L17:   has a 50% larger uncertainty because of updated radiative-correction theory.
+        L18: - The lower Vud increases the tension in the top-row CKM unitarity test.
+- block_key: BCBCI2022:EW002:Delta_CKM_global
+  source_url: https://arxiv.org/abs/2111.05338
+  snapshot_path: flavor_catalog/references/EW002/bryman_cirigliano_crivellin_inguglia_2022_lfu_ckm.txt
+  sha256: sha256:d3c41387de757db6c5f7f82d0e29eab69851bbe09f02a5b153cb7e3d0f7ad2b8
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: -0.00195 +/- 0.00053
+    status: UNRESOLVED
+    matches: []
+- block_key: CKKM2022:EW002:Caa_significance_context
+  source_url: https://arxiv.org/abs/2212.06862
+  snapshot_path: flavor_catalog/references/EW002/crivellin_kirk_kitahara_mescia_2022_vlq_caa.txt
+  sha256: sha256:ee55b56572cf5d12fff63519cae204b22ef86c24d337657c1abc3e99da5c3f2b
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: about 3 sigma
+    status: RESOLVED
+    matches:
+    - line_number: 13
+      context: |
+        L10:
+        L11: Values used in EW002:
+        L12: - The abstract states two Cabibbo-angle tensions: Vus determinations from
+        L13:   K_mu2, K_l3, and tau decays disagree at about 3 sigma, and beta-decay plus
+        L14:   averaged Vus inputs imply a first-row unitarity deficit also at about
+        L15:   3 sigma.
+        L16: - Their input table includes:
+- block_key: CFW2008:EW002:rs_kk_gluon_bound
+  source_url: https://arxiv.org/abs/0804.1954
+  snapshot_path: flavor_catalog/references/EW002/cfw_2008_rs_flavor.txt
+  sha256: sha256:d22463e7e9e006a15a880b12181a6cb1311e713084fc13fff901ac5fe0430b9a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '21.0'
+    status: UNRESOLVED
+    matches: []
+- block_key: CFW2008:EW002:composite_higgs_kk_bound
+  source_url: https://arxiv.org/abs/0804.1954
+  snapshot_path: flavor_catalog/references/EW002/cfw_2008_rs_flavor.txt
+  sha256: sha256:d22463e7e9e006a15a880b12181a6cb1311e713084fc13fff901ac5fe0430b9a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '33.0'
+    status: UNRESOLVED
+    matches: []

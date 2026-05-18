@@ -1,0 +1,91 @@
+---
+process_id: K004
+generated_at: '2026-05-18T01:54:04Z'
+sources:
+- block_key: latest_experimental_value
+  source_url: https://arxiv.org/abs/2604.12649
+  snapshot_path: flavor_catalog/references/K004/na62_2026_arxiv2604_12649.txt
+  sha256: sha256:db5484ce8b53f8211c1504373be79c3f0fcc8a7a70b590960ec2667724ada029
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: B(K+ -> pi+ nu nubar) = (9.6^{+1.9}_{-1.8}) x 10^{-11}
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: |-
+        L17:   with the new data while reducing the background in proportion.
+        L18: - Branching-ratio result used as the current experimental-equivalent value in
+        L19:   this K004 draft:
+        L20:   B(K+ -> pi+ nu nubar) = (9.6^{+1.9}_{-1.8}) x 10^{-11}.
+        L21: - The abstract describes the result as compatible with the Standard Model
+        L22:   prediction and with precision better than 20%.
+        L23:
+- block_key: published_observation_anchor
+  source_url: https://arxiv.org/abs/2412.12015
+  snapshot_path: flavor_catalog/references/K004/na62_2025_arxiv2412_12015.txt
+  sha256: sha256:4bdb16bba0eddd0c907d9739299df9d4b8b4be208be4937e9123ac5a48e22674
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: B(K+ -> pi+ nu nubar) = (13.0^{+3.3}_{-3.0}) x 10^{-11}
+    status: RESOLVED
+    matches:
+    - line_number: 17
+      context: |-
+        L14: Relevant extracted facts:
+        L15: - Data sample: NA62 2021--2022 data are combined with 2016--2018 data.
+        L16: - Published combined branching-ratio result:
+        L17:   B(K+ -> pi+ nu nubar) = (13.0^{+3.3}_{-3.0}) x 10^{-11}.
+        L18: - Event-count context: 51 signal candidates were observed; the expected
+        L19:   background was 18^{+3}_{-2} events.
+        L20: - The arXiv abstract identifies this as an observation with signal
+- block_key: sm_prediction_buras_venturini_2022
+  source_url: https://arxiv.org/abs/2203.10099
+  snapshot_path: flavor_catalog/references/K004/buras_venturini_2022_arxiv2203_10099.txt
+  sha256: sha256:a50d05504c227424b5ee33bc5be01241376d02f2c02e77b43334449d78185ad0
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: B(K+ -> pi+ nu nubar)_SM = (8.60 +/- 0.42) x 10^{-11}
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |-
+        L12: - The paper constructs rare-decay Standard Model predictions designed to avoid
+        L13:   direct dependence on the inclusive/exclusive |V_cb| and |V_ub| tensions.
+        L14: - The charged-kaon Standard Model benchmark used in this K004 draft is:
+        L15:   B(K+ -> pi+ nu nubar)_SM = (8.60 +/- 0.42) x 10^{-11}.
+        L16: - The same abstract quotes:
+        L17:   B(K_L -> pi0 nu nubar)_SM = (2.94 +/- 0.15) x 10^{-11}.
+        L18: - The authors describe these as determinations obtained under the assumption
+- block_key: sm_prediction_brod_gorbahn_stamou_2021
+  source_url: https://arxiv.org/abs/2105.02868
+  snapshot_path: flavor_catalog/references/K004/brod_gorbahn_stamou_2021_arxiv2105_02868.txt
+  sha256: sha256:128d738454823c50bbd056152b556c1dfa996c0cac8928ef911c16a3bcf97015
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: BR(K+ -> pi+ nu nubar) = 7.73(61) x 10^{-11}
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |-
+        L12: - The paper provides an updated Standard Model prediction for the rare
+        L13:   K -> pi nu nubar decay modes and summarizes the SM status of epsilon_K.
+        L14: - Charged-mode result:
+        L15:   BR(K+ -> pi+ nu nubar) = 7.73(61) x 10^{-11}.
+        L16: - Neutral-mode result:
+        L17:   BR(K_L -> pi0 nu nubar) = 2.59(29) x 10^{-11}.
+        L18: - The abstract states that the uncertainties are dominated by parametric input.
+- block_key: cfw_2008_context
+  source_url: https://arxiv.org/abs/0804.1954
+  snapshot_path: flavor_catalog/references/K004/cfw_2008_arxiv0804_1954.txt
+  sha256: sha256:88e65fabef3b99bf46ad714ee0532d2447bc7e90ab7920a8d73833c404a9a821
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: CFW abstract quotes a generic RS KK-gluon mass bound of about 21 TeV and about 33 TeV for the composite
+      pseudo-Goldstone scenario
+    status: UNRESOLVED
+    matches: []

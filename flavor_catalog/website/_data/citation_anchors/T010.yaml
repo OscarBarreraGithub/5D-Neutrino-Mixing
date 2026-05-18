@@ -1,0 +1,90 @@
+---
+process_id: T010
+generated_at: '2026-05-18T01:54:07Z'
+sources:
+- block_key: R_b^0
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf
+  snapshot_path: flavor_catalog/references/T010/pdg_2025_z_boson.txt
+  sha256: sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.21629 +/- 0.00066
+    status: RESOLVED
+    matches:
+    - line_number: 10
+      context: |
+        L7:
+        L8: R_b = Gamma(bb)/Gamma(hadrons)
+        L9: OUR FIT is obtained by a simultaneous fit to several c- and b-quark measurements.
+        L10: Value: 0.21629 +/- 0.00066 OUR FIT.
+        L11:
+        L12: A_b
+        L13: This quantity is directly extracted from a measurement of the left-right
+- block_key: A_FB^{0,b}
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf
+  snapshot_path: flavor_catalog/references/T010/pdg_2025_z_boson.txt
+  sha256: sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.0992 +/- 0.0016
+    status: UNRESOLVED
+    matches: []
+- block_key: A_b
+  source_url: https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf
+  snapshot_path: flavor_catalog/references/T010/pdg_2025_z_boson.txt
+  sha256: sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.923 +/- 0.02
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12: A_b
+        L13: This quantity is directly extracted from a measurement of the left-right
+        L14: forward-backward asymmetry in b b production at SLC using polarized electron beam.
+        L15: Value: 0.923 +/- 0.020 OUR FIT.
+        L16:
+        L17: A_FB^(0,b) charge asymmetry in e+ e- -> b b
+        L18: OUR FIT refers to the Z pole asymmetry.
+- block_key: LEP/SLC final-combination pull for A_FB^{0,b}
+  source_url: https://arxiv.org/abs/hep-ex/0509008
+  snapshot_path: flavor_catalog/references/T010/lepslc_2006_z_resonance.txt
+  sha256: sha256:fe6c50814880adb49b850fdec012aeaaf77b8e4df3cad1b1c85321003592da66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '2.8'
+    status: RESOLVED
+    matches:
+    - line_number: 13
+      context: |
+        L10:
+        L11: R_b^0 = 0.21629 +/- 0.00066; SM fit value shown there: 0.21562 +/- 0.00013; pull 1.0.
+        L12:
+        L13: A_FB^(0,b) = 0.0992 +/- 0.0016; SM fit value shown there: 0.1037 +/- 0.0008; pull 2.8.
+        L14:
+        L15: A_b = 0.923 +/- 0.020; SM fit value shown there: 0.9346 +/- 0.0001; pull 0.6.
+        L16:
+- block_key: FCC-ee projected relative uncertainty for R_b and A_FB^b
+  source_url: https://arxiv.org/abs/2502.17281
+  snapshot_path: flavor_catalog/references/T010/fcc_ee_2025_zbb_projection.txt
+  sha256: sha256:035f06739e5f73ce6ba13b35d515dd9fcc5470a17b8b6ad2dc9baf2f4bf6d902
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '0.01'
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |
+        L9: Relevant abstract excerpt, normalized:
+        L10: The paper proposes an exclusive b-hadron tagging technique for measuring R_b and A_FB^b
+        L11: at FCC-ee using O(10^12) Z-boson decays. It states that the approach can reduce leading
+        L12: systematic uncertainties and obtain total relative uncertainties of order 0.01 percent for
+        L13: both observables.
+        L14:
+        L15: Use in this process note:

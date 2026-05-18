@@ -1,0 +1,80 @@
+---
+process_id: T004
+generated_at: '2026-05-18T01:54:07Z'
+sources:
+- block_key: PDG2026:T004:tgammaq_combined
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLive/Particle.action?home=&node=Q007
+  snapshot_path: flavor_catalog/references/T004/pdg_2026_top_t_gammaq.txt
+  sha256: sha256:5e72da33cd1bb62fedd59c34d917217a2e12866d742bcb24e9e4e76f36581033
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 9.5e-6
+    status: RESOLVED
+    matches:
+    - line_number: 9
+      context: |
+        L6:
+        L7: Relevant catalog value:
+        L8: - t-quark decay modes include Gamma_7: t -> gamma q (q = u,c).
+        L9: - Listed fraction Gamma_7/Gamma: < 9.5 x 10^-6, CL = 95%.
+        L10:
+        L11: Notes for T004:
+        L12: - PDG presents this row as the combined photon-plus-light-quark mode q = u,c,
+- block_key: ATLAS2023:T004:tugamma_left
+  source_url: https://arxiv.org/abs/2205.02537
+  snapshot_path: flavor_catalog/references/T004/atlas_2205_02537_arxiv_abs.txt
+  sha256: sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.85e-5
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |
+        L13:   FCNC top decay are considered.
+        L14: - No significant excess over the background prediction was observed.
+        L15: - 95% CL observed bound, left-handed tqgamma coupling:
+        L16:   B(t -> u gamma) < 0.85 x 10^-5.
+        L17: - 95% CL observed bound, right-handed tqgamma coupling:
+        L18:   B(t -> u gamma) < 1.2 x 10^-5.
+        L19:
+- block_key: ATLAS2023:T004:tugamma_right
+  source_url: https://arxiv.org/abs/2205.02537
+  snapshot_path: flavor_catalog/references/T004/atlas_2205_02537_arxiv_abs.txt
+  sha256: sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 1.2e-5
+    status: RESOLVED
+    matches:
+    - line_number: 18
+      context: |
+        L15: - 95% CL observed bound, left-handed tqgamma coupling:
+        L16:   B(t -> u gamma) < 0.85 x 10^-5.
+        L17: - 95% CL observed bound, right-handed tqgamma coupling:
+        L18:   B(t -> u gamma) < 1.2 x 10^-5.
+        L19:
+        L20: Notes for T004:
+        L21: - This is the tightest flavor-separated t -> u gamma limit found for this PKA
+- block_key: CMS2024:T004:tugamma_observed
+  source_url: https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/
+  snapshot_path: flavor_catalog/references/T004/cms_2312_08229_public_page.txt
+  sha256: sha256:1c729a489ac55ce3f5b7be57e7efc62bdc2bf1cf0d43e16f0577b807edcd0cc5
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.95e-5
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12: - Search mode: single top plus photon and ttbar events with one FCNC top decay.
+        L13: - No significant deviation from the standard-model background prediction was observed.
+        L14: - 95% CL observed expected upper limits:
+        L15:   B(t -> u gamma) < 0.95 x 10^-5 observed, 1.20 x 10^-5 expected.
+        L16: - CMS notes that the t -> u gamma bound is similar to the current best limit.
+        L17:
+        L18: Notes for T004:

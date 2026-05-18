@@ -1,0 +1,144 @@
+---
+process_id: T015
+generated_at: '2026-05-18T01:54:07Z'
+sources:
+- block_key: CMS2025:T015:zemu_limit
+  source_url: https://arxiv.org/abs/2508.07512
+  snapshot_path: flavor_catalog/references/T015/cms2025_smp23003_arxiv_abs.txt
+  sha256: sha256:48418c00b8153623befb6ea026821262bc4c66631f999f77a1c18ff8244aa942
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 1.9e-7
+    status: UNRESOLVED
+    matches: []
+- block_key: CMS2025:T015:dataset
+  source_url: https://arxiv.org/abs/2508.07512
+  snapshot_path: flavor_catalog/references/T015/cms2025_smp23003_arxiv_abs.txt
+  sha256: sha256:48418c00b8153623befb6ea026821262bc4c66631f999f77a1c18ff8244aa942
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 138 fb^-1 at sqrt(s) = 13 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 18
+      context: |
+        L15: A search for flavor violating decays of the Z boson to charged leptons is
+        L16: performed using data from proton-proton collisions at sqrt(s) = 13 TeV
+        L17: collected with the CMS detector at the LHC, corresponding to an integrated
+        L18: luminosity of 138 fb^-1. Each of the decays Z -> e mu, Z -> e tau, and
+        L19: Z -> mu tau is considered. The data are consistent with the backgrounds
+        L20: expected from standard model processes. For the Z -> e mu channel the observed
+        L21: (expected) 95% confidence level upper limit on the branching fraction is
+- block_key: PDG2025:T015:zemu_limit
+  source_url: https://pdgweb.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf
+  snapshot_path: flavor_catalog/references/T015/pdg2025_z_lfv_listing.txt
+  sha256: sha256:ac32ce7dd18ef7ee5372a89b177c41d8e7bc5cea7d65c91289573d39a635fb3e
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 2.62e-7
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12:
+        L13: Relevant extracted listing text:
+        L14:
+        L15: Gamma66  e+- mu-+    LF    [c] < 2.62 x 10^-7    CL=95%
+        L16: Gamma67  e+- tau-+   LF    [c] < 5.0  x 10^-6    CL=95%
+        L17: Gamma68  mu+- tau-+  LF    [c] < 6.5  x 10^-6    CL=95%
+        L18:
+- block_key: ATLAS2023:T015:zemu_limit
+  source_url: https://arxiv.org/abs/2204.10783
+  snapshot_path: flavor_catalog/references/T015/atlas2023_exot201835_arxiv_abs.txt
+  sha256: sha256:df940028eec55cc21675e5609ffaca34bf0dc8778cc2ad3ed9d27f7053005b3f
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 2.62e-7
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16: presented, using 139 fb^-1 of sqrt(s) = 13 TeV pp collision data collected by
+        L17: the ATLAS experiment at the LHC. An excess in the e mu invariant mass spectrum
+        L18: near the Z boson mass would be a striking signature of new physics. No excess
+        L19: is observed, and an upper limit B(Z -> e mu) < 2.62 x 10^-7 is placed on the
+        L20: branching fraction at 95% confidence level, which is the most stringent limit
+        L21: to date.
+- block_key: ATLAS2023:T015:dataset
+  source_url: https://arxiv.org/abs/2204.10783
+  snapshot_path: flavor_catalog/references/T015/atlas2023_exot201835_arxiv_abs.txt
+  sha256: sha256:df940028eec55cc21675e5609ffaca34bf0dc8778cc2ad3ed9d27f7053005b3f
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 139 fb^-1 at sqrt(s) = 13 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |
+        L13:
+        L14: Relevant abstract text:
+        L15: A search for the charged-lepton-flavor-violating process Z -> e mu is
+        L16: presented, using 139 fb^-1 of sqrt(s) = 13 TeV pp collision data collected by
+        L17: the ATLAS experiment at the LHC. An excess in the e mu invariant mass spectrum
+        L18: near the Z boson mass would be a striking signature of new physics. No excess
+        L19: is observed, and an upper limit B(Z -> e mu) < 2.62 x 10^-7 is placed on the
+- block_key: ATLAS2014:T015:zemu_limit
+  source_url: https://arxiv.org/abs/1408.5774
+  snapshot_path: flavor_catalog/references/T015/atlas2014_exot201302_arxiv_abs.txt
+  sha256: sha256:62c1fd32c929ba66df6cf977a7fc60d996bb8498e2faa1e2ad323c93ad75436c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 7.5e-7
+    status: RESOLVED
+    matches:
+    - line_number: 21
+      context: |
+        L18: in the data sample is estimated using events of similar topology, Z -> ee and
+        L19: mu mu, significantly reducing the systematic uncertainty in the measurement.
+        L20: There is no evidence of an enhancement at the Z boson mass, resulting in an
+        L21: upper limit on the branching fraction, B(Z -> e mu) < 7.5 x 10^-7 at the 95%
+        L22: confidence level.
+- block_key: ATLAS2014:T015:dataset
+  source_url: https://arxiv.org/abs/1408.5774
+  snapshot_path: flavor_catalog/references/T015/atlas2014_exot201302_arxiv_abs.txt
+  sha256: sha256:62c1fd32c929ba66df6cf977a7fc60d996bb8498e2faa1e2ad323c93ad75436c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 20.3 fb^-1 at sqrt(s) = 8 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12:
+        L13: Relevant abstract text:
+        L14: The ATLAS detector at the Large Hadron Collider is used to search for the
+        L15: lepton flavor violating process Z -> e mu in pp collisions using 20.3 fb^-1 of
+        L16: data collected at sqrt(s) = 8 TeV. An enhancement in the e mu invariant mass
+        L17: spectrum is searched for at the Z boson mass. The number of Z bosons produced
+        L18: in the data sample is estimated using events of similar topology, Z -> ee and
+- block_key: CalibbiMarcanoRoy2021:T015:teraZ
+  source_url: https://arxiv.org/abs/2107.10273
+  snapshot_path: flavor_catalog/references/T015/calibbi_marcano_roy2021_arxiv_abs.txt
+  sha256: sha256:e422d713e6939dcec3ce6999d1b28f1c2ca68eeed2db03347eabcf88c205c3bb
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: O(1e12) Z decays
+    status: RESOLVED
+    matches:
+    - line_number: 17
+      context: |
+        L14: In this work we assess the potential of discovering new physics by searching
+        L15: for lepton-flavour-violating decays of the Z boson, Z -> l_i l_j, at the
+        L16: proposed circular e+e- colliders CEPC and FCC-ee. Both projects plan to run at
+        L17: the Z-pole as a Tera Z factory, i.e., collecting O(10^12) Z decays. In order
+        L18: to discuss the discovery potential in a model-independent way, we revisit the
+        L19: LFV Z decays in the context of the Standard Model effective field theory and
+        L20: study the indirect constraints from LFV mu and tau decays on the operators that

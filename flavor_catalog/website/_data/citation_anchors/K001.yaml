@@ -1,0 +1,145 @@
+---
+process_id: K001
+generated_at: '2026-05-18T01:54:04Z'
+sources:
+- block_key: canonical_experimental_value
+  source_url: https://pdg.lbl.gov/2026/reviews/rpp2026-rev-cp-viol-kl-decays.pdf
+  snapshot_path: flavor_catalog/references/K001/pdg2026_epsilon_k.txt
+  sha256: sha256:9ada2a952ab9f8b69d7a29ec6b7ffa12571fa9140ca281c9ceee8a66b1dc7770
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: display_value
+    anchor_string: '|epsilon| = (2.228 +/- 0.011) x 10^-3'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 9
+      context: |-
+        L6:
+        L7: Relevant extracted values:
+        L8: - The review states that CP violation was observed in K0 decays at a level given by epsilon approximately 2.3e-3.
+        L9: - Equation 68.8a gives |epsilon| = (2.228 +/- 0.011) x 10^-3.
+        L10: - Equation 68.8b gives phi_epsilon = (43.5 +/- 0.5) degrees.
+        L11: - Equation 68.8f gives A_L = (3.32 +/- 0.06) x 10^-3.
+        L12:
+    - line_number: 14
+      context: |-
+        L11: - Equation 68.8f gives A_L = (3.32 +/- 0.06) x 10^-3.
+        L12:
+        L13: Notes for K001:
+        L14: Use |epsilon| = (2.228 +/- 0.011) x 10^-3 as the canonical experimental
+        L15: epsilon_K magnitude unless the checker selects a PDG data-block value with
+        L16: newer metadata. The phase and semileptonic asymmetry are context values, not
+        L17: the headline K001 constraint.
+  - anchor_field: related_phase
+    anchor_string: phi_epsilon = (43.5 +/- 0.5) degrees
+    status: RESOLVED
+    matches:
+    - line_number: 10
+      context: |-
+        L7: Relevant extracted values:
+        L8: - The review states that CP violation was observed in K0 decays at a level given by epsilon approximately 2.3e-3.
+        L9: - Equation 68.8a gives |epsilon| = (2.228 +/- 0.011) x 10^-3.
+        L10: - Equation 68.8b gives phi_epsilon = (43.5 +/- 0.5) degrees.
+        L11: - Equation 68.8f gives A_L = (3.32 +/- 0.06) x 10^-3.
+        L12:
+        L13: Notes for K001:
+  - anchor_field: related_semileptonic_asymmetry
+    anchor_string: A_L = (3.32 +/- 0.06) x 10^-3
+    status: RESOLVED
+    matches:
+    - line_number: 11
+      context: |-
+        L8: - The review states that CP violation was observed in K0 decays at a level given by epsilon approximately 2.3e-3.
+        L9: - Equation 68.8a gives |epsilon| = (2.228 +/- 0.011) x 10^-3.
+        L10: - Equation 68.8b gives phi_epsilon = (43.5 +/- 0.5) degrees.
+        L11: - Equation 68.8f gives A_L = (3.32 +/- 0.06) x 10^-3.
+        L12:
+        L13: Notes for K001:
+        L14: Use |epsilon| = (2.228 +/- 0.011) x 10^-3 as the canonical experimental
+- block_key: standard_model_reference
+  source_url: https://arxiv.org/abs/1911.06822
+  snapshot_path: flavor_catalog/references/K001/bgs2020_epsilon_k_arxiv1911_06822.txt
+  sha256: sha256:56faa9c2fed84b9740b0b858c8f1e10a408d030a627bfee18e57af1c72ab0984
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: total_display_value
+    anchor_string: 2.16(18) x 10^-3
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |-
+        L9: Relevant extracted values:
+        L10: - Abstract: epsilon_K = 2.16(6)(8)(15) x 10^-3. The three uncertainties are QCD short-distance, long-distance, and parametric.
+        L11: - TeX-source equation gives |epsilon_K| = (2.161 +/- 0.153_param. +/- 0.064_eta_tt +/- 0.008_eta_ut +/- 0.027_Bhat_K +/- 0.052_xi_s +/- 0.046_kappa_epsilon) x 10^-3.
+        L12: - The same equation groups this as (2.161 +/- 0.153_param. +/- 0.076_non-pert. +/- 0.065_pert.) x 10^-3 = 2.16(18) x 10^-3.
+        L13: - The phenomenological formula uses kappa_epsilon = 0.94(2) and, in the original 2020 input set, Bhat_K = 0.7625(97).
+        L14:
+        L15: Notes for K001:
+- block_key: flag_bag_parameters
+  source_url: https://arxiv.org/abs/2411.04268
+  snapshot_path: flavor_catalog/references/K001/flag2024_bk_arxiv2411_04268.txt
+  sha256: sha256:513caa2edf3dc444b0c588d4a7aa2e85862b6712acf157160f68789688344608
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: hat_B_K_Nf21
+    anchor_string: 0.7533(91)
+    status: RESOLVED
+    matches:
+    - line_number: 10
+      context: |-
+        L7:
+        L8: Relevant extracted values from BK/BK.tex in arXiv source v3:
+        L9: - The review states that the expression of epsilon_K in terms of B_K is derived in the three-flavour theory.
+        L10: - For N_f = 2+1, the FLAG average is Bhat_K = 0.7533(91).
+        L11: - For N_f = 2+1, the converted values are B_K^MSbar(2 GeV) = 0.5503(66) and B_K^MSbar(3 GeV) = 0.5324(64).
+        L12: - For N_f = 2+1+1, the FLAG entry quotes Bhat_K = 0.717(18)(16), B_K^MSbar(2 GeV) = 0.524(13)(12), and B_K^MSbar(3 GeV) = 0.507(13)(11).
+        L13:
+  - anchor_field: B_K_MSbar_2GeV_Nf21
+    anchor_string: 0.5503(66)
+    status: RESOLVED
+    matches:
+    - line_number: 11
+      context: |-
+        L8: Relevant extracted values from BK/BK.tex in arXiv source v3:
+        L9: - The review states that the expression of epsilon_K in terms of B_K is derived in the three-flavour theory.
+        L10: - For N_f = 2+1, the FLAG average is Bhat_K = 0.7533(91).
+        L11: - For N_f = 2+1, the converted values are B_K^MSbar(2 GeV) = 0.5503(66) and B_K^MSbar(3 GeV) = 0.5324(64).
+        L12: - For N_f = 2+1+1, the FLAG entry quotes Bhat_K = 0.717(18)(16), B_K^MSbar(2 GeV) = 0.524(13)(12), and B_K^MSbar(3 GeV) = 0.507(13)(11).
+        L13:
+        L14: Notes for K001:
+  - anchor_field: B_K_MSbar_3GeV_Nf21
+    anchor_string: 0.5324(64)
+    status: RESOLVED
+    matches:
+    - line_number: 11
+      context: |-
+        L8: Relevant extracted values from BK/BK.tex in arXiv source v3:
+        L9: - The review states that the expression of epsilon_K in terms of B_K is derived in the three-flavour theory.
+        L10: - For N_f = 2+1, the FLAG average is Bhat_K = 0.7533(91).
+        L11: - For N_f = 2+1, the converted values are B_K^MSbar(2 GeV) = 0.5503(66) and B_K^MSbar(3 GeV) = 0.5324(64).
+        L12: - For N_f = 2+1+1, the FLAG entry quotes Bhat_K = 0.717(18)(16), B_K^MSbar(2 GeV) = 0.524(13)(12), and B_K^MSbar(3 GeV) = 0.507(13)(11).
+        L13:
+        L14: Notes for K001:
+  - anchor_field: hat_B_K_Nf211
+    anchor_string: 0.717(18)(16)
+    status: RESOLVED
+    matches:
+    - line_number: 12
+      context: |-
+        L9: - The review states that the expression of epsilon_K in terms of B_K is derived in the three-flavour theory.
+        L10: - For N_f = 2+1, the FLAG average is Bhat_K = 0.7533(91).
+        L11: - For N_f = 2+1, the converted values are B_K^MSbar(2 GeV) = 0.5503(66) and B_K^MSbar(3 GeV) = 0.5324(64).
+        L12: - For N_f = 2+1+1, the FLAG entry quotes Bhat_K = 0.717(18)(16), B_K^MSbar(2 GeV) = 0.524(13)(12), and B_K^MSbar(3 GeV) = 0.507(13)(11).
+        L13:
+        L14: Notes for K001:
+        L15: The live legacy code uses B_1_K = 0.5503, matching the N_f = 2+1
+- block_key: rs_2008_context
+  source_url: https://arxiv.org/abs/0804.1954
+  snapshot_path: flavor_catalog/references/K001/cfw2008_rs_flavor_arxiv0804_1954.txt
+  sha256: sha256:e6330846f14867e4f9534d83813719e893b16ac3c48ce58202cfe4209a55fac1
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: Generic RS flavor constraints imply KK-gluon mass about 21 TeV; pseudo-Goldstone scenario about 33 TeV.
+    status: UNRESOLVED
+    matches: []

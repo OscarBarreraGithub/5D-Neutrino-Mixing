@@ -1,0 +1,163 @@
+---
+process_id: B019
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: observables[0]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin1b.html
+  snapshot_path: flavor_catalog/references/B019/hflav_dec2025_rkstar_lowq2_lhcb.txt
+  sha256: sha256:7fbe070228eb26c62cc06f03dcc305d4bd4015b8f2859955af8c1deed2fd7b1e
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: R_K* low-q2 = 0.927 +- +/- 0.097
+    status: AMBIGUOUS
+    matches:
+    - line_number: 15
+      context: |
+        L12: <h1>$\frac{ {\cal{B}}(B^0 \to K^*(892)^0 \mu^+ \mu^-) }{ {\cal{B}}(B^0 \to K^*(892)^0 e^+ e^-) },~0.1 < m^2_{\ell^+\ell^-} < 1.1~\rm{GeV^2/c^4}$</h1>
+        L13: <p><img src="BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin1b.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$0.927 \pm0.097$</b></td><td></td><td></td><td></td></tr>
+        L16: <tr><td>LHCb</td><td>$0.927\,^{+0.093}_{-0.087}\,^{+0.036}_{-0.035}$</td><td>0.00</td>
+        L17: <td><a href="https://inspirehep.net/literature/2684465">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>
+        L18: </table>
+    - line_number: 16
+      context: |
+        L13: <p><img src="BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin1b.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$0.927 \pm0.097$</b></td><td></td><td></td><td></td></tr>
+        L16: <tr><td>LHCb</td><td>$0.927\,^{+0.093}_{-0.087}\,^{+0.036}_{-0.035}$</td><td>0.00</td>
+        L17: <td><a href="https://inspirehep.net/literature/2684465">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>
+        L18: </table>
+        L19: </p>
+- block_key: observables[1]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin2.html
+  snapshot_path: flavor_catalog/references/B019/hflav_dec2025_rkstar_centralq2.txt
+  sha256: sha256:585fdc5f096d46eab0e22db55ae4704254fa4695b0e7aad5bdb372dd6699f792
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: R_K* central-q2 = 1.028 +- +/- 0.074
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12: <h1>$\frac{ {\cal{B}}(B^0 \to K^*(892)^0 \mu^+ \mu^-) }{ {\cal{B}}(B^0 \to K^*(892)^0 e^+ e^-) },~1.1 < m^2_{\ell^+\ell^-} < 6.0~\rm{GeV^2/c^4}$</h1>
+        L13: <p><img src="BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin2.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$1.028 \pm0.074$</b></td><td>0.00</td><td>$p=0.95$ (ndf=1)</td><td></td></tr>
+        L16: <tr><td>LHCb</td><td>$1.027\,^{+0.072}_{-0.068}\,^{+0.027}_{-0.026}$</td><td>0.00</td>
+        L17: <td><a href="https://inspirehep.net/literature/2684465">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>
+        L18: <tr><td>Belle</td><td>$1.06\,^{+0.63}_{-0.38} \pm0.14$</td><td>0.00</td>
+- block_key: observables[2]
+  source_url: https://arxiv.org/abs/1705.05802
+  snapshot_path: flavor_catalog/references/B019/lhcb_2017_rkstar_arxiv1705_05802.txt
+  sha256: sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: LHCb 2017 low-q2 R_K* = 0.66 +- +0.11/-0.07 stat, +/-0.03 syst
+    status: RESOLVED
+    matches:
+    - line_number: 13
+      context: |
+        L10:
+        L11: Relevant arXiv-source excerpt from title/results/conclusion:
+        L12: The measured ratios were
+        L13:   R_K* = 0.66^{+0.11}_{-0.07} (stat) +/- 0.03 (syst)
+        L14:     for 0.045 < q^2 < 1.1 GeV^2/c^4,
+        L15:   R_K* = 0.69^{+0.11}_{-0.07} (stat) +/- 0.05 (syst)
+        L16:     for 1.1 < q^2 < 6.0 GeV^2/c^4.
+- block_key: observables[3]
+  source_url: https://arxiv.org/abs/1705.05802
+  snapshot_path: flavor_catalog/references/B019/lhcb_2017_rkstar_arxiv1705_05802.txt
+  sha256: sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: LHCb 2017 central-q2 R_K* = 0.69 +- +0.11/-0.07 stat, +/-0.05 syst
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12: The measured ratios were
+        L13:   R_K* = 0.66^{+0.11}_{-0.07} (stat) +/- 0.03 (syst)
+        L14:     for 0.045 < q^2 < 1.1 GeV^2/c^4,
+        L15:   R_K* = 0.69^{+0.11}_{-0.07} (stat) +/- 0.05 (syst)
+        L16:     for 1.1 < q^2 < 6.0 GeV^2/c^4.
+        L17:
+        L18: The publication reported compatibility with SM expectations at approximately
+- block_key: observables[4]
+  source_url: https://arxiv.org/abs/2212.09153
+  snapshot_path: flavor_catalog/references/B019/lhcb_2023_rk_rkstar_arxiv2212_09153.txt
+  sha256: sha256:c8bba3b0498fd3b2d1236a85534d8b1a438f240aa7d56a53a94fdf24ed28bf7d
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: LHCb 2023 SM compatibility = 0.2 standard deviations
+    status: RESOLVED
+    matches:
+    - line_number: 30
+      context: |
+        L27:
+        L28: Conclusion excerpt:
+        L29: The four measured relative decay rates are compatible with the SM, with the
+        L30: combined result agreeing with the SM prediction at 0.2 standard deviations.
+        L31: The results supersede previous LHCb measurements of R_K and R_K*; both R_K*
+        L32: central values move upward relative to the previous R_K* publication.
+- block_key: theory_inputs[0]
+  source_url: https://hflav.web.cern.ch/content/rare-b-decays
+  snapshot_path: flavor_catalog/references/B019/bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt
+  sha256: sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BIP 2016 central-q2 SM R_K* = 1.00 +- +/- 0.01_QED
+    status: AMBIGUOUS
+    matches:
+    - line_number: 17
+      context: |
+        L14: physics beyond the SM with small theoretical uncertainties.
+        L15:
+        L16: For central q^2, the authors quote
+        L17:   R_{K*}[1.1, 6.0]^{SM} = 1.00 +/- 0.01_QED.
+        L18:
+        L19: For low q^2, their added note gives
+        L20:   R_{K*}[0.045, 1.1]^{SM} = 0.906 +/- 0.028_th,
+    - line_number: 20
+      context: |
+        L17:   R_{K*}[1.1, 6.0]^{SM} = 1.00 +/- 0.01_QED.
+        L18:
+        L19: For low q^2, their added note gives
+        L20:   R_{K*}[0.045, 1.1]^{SM} = 0.906 +/- 0.028_th,
+        L21:   R_{K*}[0.1, 1.1]^{SM} = 0.983 +/- 0.014_th.
+        L22:
+        L23: They state that a deviation of R_K or R_K* from unity exceeding the percent
+    - line_number: 21
+      context: |
+        L18:
+        L19: For low q^2, their added note gives
+        L20:   R_{K*}[0.045, 1.1]^{SM} = 0.906 +/- 0.028_th,
+        L21:   R_{K*}[0.1, 1.1]^{SM} = 0.983 +/- 0.014_th.
+        L22:
+        L23: They state that a deviation of R_K or R_K* from unity exceeding the percent
+        L24: level, with consistent experimental cuts and radiative treatment, is a clean
+- block_key: theory_inputs[1]
+  source_url: https://hflav.web.cern.ch/content/rare-b-decays
+  snapshot_path: flavor_catalog/references/B019/bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt
+  sha256: sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BIP 2016 low-q2 SM R_K* for LHCb 2023 bin = 0.983 +- +/- 0.014_th
+    status: RESOLVED
+    matches:
+    - line_number: 21
+      context: |
+        L18:
+        L19: For low q^2, their added note gives
+        L20:   R_{K*}[0.045, 1.1]^{SM} = 0.906 +/- 0.028_th,
+        L21:   R_{K*}[0.1, 1.1]^{SM} = 0.983 +/- 0.014_th.
+        L22:
+        L23: They state that a deviation of R_K or R_K* from unity exceeding the percent
+        L24: level, with consistent experimental cuts and radiative treatment, is a clean

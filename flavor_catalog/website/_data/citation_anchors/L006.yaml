@@ -1,0 +1,66 @@
+---
+process_id: L006
+generated_at: '2026-05-18T01:53:04Z'
+sources:
+- block_key: Bai2022:L006:mace_sensitivity_improvement
+  source_url: https://arxiv.org/abs/2203.11406
+  snapshot_path: flavor_catalog/references/L006/bai2022_snowmass_mace_arxiv2203_11406.txt
+  sha256: 04c55fc736d4de4e510187d160fe1f91bf9c324195a2c6c38db4d04179eba016
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '2'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 1
+      context: |
+        L1: Source snapshot: Snowmass2021 whitepaper on muonium to antimuonium conversion
+        L2: Process: L006, muonium-antimuonium conversion
+        L3: Access date: 2026-05-16
+        L4: URL: https://arxiv.org/abs/2203.11406
+    - line_number: 3
+      context: |
+        L1: Source snapshot: Snowmass2021 whitepaper on muonium to antimuonium conversion
+        L2: Process: L006, muonium-antimuonium conversion
+        L3: Access date: 2026-05-16
+        L4: URL: https://arxiv.org/abs/2203.11406
+        L5: arXiv id: 2203.11406
+        L6: DOI: 10.48550/arXiv.2203.11406
+    - line_number: 4
+      context: "L1: Source snapshot: Snowmass2021 whitepaper on muonium to antimuonium conversion\nL2: Process: L006, muonium-antimuonium\
+        \ conversion\nL3: Access date: 2026-05-16\nL4: URL: https://arxiv.org/abs/2203.11406\nL5: arXiv id: 2203.11406\nL6:\
+        \ DOI: 10.48550/arXiv.2203.11406\nL7: \n"
+    - line_number: 5
+      context: "L2: Process: L006, muonium-antimuonium conversion\nL3: Access date: 2026-05-16\nL4: URL: https://arxiv.org/abs/2203.11406\n\
+        L5: arXiv id: 2203.11406\nL6: DOI: 10.48550/arXiv.2203.11406\nL7: \nL8: Title:\n"
+    - line_number: 6
+      context: "L3: Access date: 2026-05-16\nL4: URL: https://arxiv.org/abs/2203.11406\nL5: arXiv id: 2203.11406\nL6: DOI:\
+        \ 10.48550/arXiv.2203.11406\nL7: \nL8: Title:\nL9: Snowmass2021 Whitepaper: Muonium to antimuonium conversion\n"
+    - line_number: 9
+      context: "L6: DOI: 10.48550/arXiv.2203.11406\nL7: \nL8: Title:\nL9: Snowmass2021 Whitepaper: Muonium to antimuonium\
+        \ conversion\nL10: \nL11: Authors:\nL12: Ai-Yu Bai, Yu Chen, Yukai Chen, Rui-Rui Fan, Zhilong Hou, Han-Tao Jing,\n"
+    - line_number: 19
+      context: "L16: and Luping Zhou.\nL17: \nL18: Date:\nL19: Submitted 2022-03-22.\nL20: \nL21: Minimal extracted use note:\n\
+        L22: The whitepaper identifies spontaneous muonium-to-antimuonium conversion as a\n"
+    - line_number: 23
+      context: "L20: \nL21: Minimal extracted use note:\nL22: The whitepaper identifies spontaneous muonium-to-antimuonium\
+        \ conversion as a\nL23: charged-lepton-flavor-violation process and summarizes post-2008 theoretical\nL24: and experimental\
+        \ developments. It states that MACE is proposed to improve the\nL25: sensitivity to the conversion probability by\
+        \ more than two orders of magnitude\nL26: relative to the current PSI/MACS upper constraint.\n"
+    - line_number: 29
+      context: "L26: relative to the current PSI/MACS upper constraint.\nL27: \nL28: Catalog use:\nL29: Post-2008 developments\
+        \ and prospects only. This is not the source for the\nL30: current experimental limit.\n"
+- block_key: Bai2024:L006:mace_probability_reach
+  source_url: https://arxiv.org/abs/2410.18817
+  snapshot_path: flavor_catalog/references/L006/bai2024_mace_cdr_arxiv2410_18817.txt
+  sha256: 6acea5b25a8a05a9cc2527d59a3aafca9099e861aaa5fa3adc4ac06d0e413632
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 1e-13
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: "L24: \nL25: Minimal extracted value:\nL26: The abstract states that MACE aims to discover or constrain the\
+        \ rare process at\nL27: conversion probability beyond the level of 10^-13.\nL28: \nL29: Catalog use:\nL30: Post-2008\
+        \ experimental development and future sensitivity context only. This is\n"

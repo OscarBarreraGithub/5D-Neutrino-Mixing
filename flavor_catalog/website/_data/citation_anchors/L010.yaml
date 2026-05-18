@@ -1,0 +1,51 @@
+---
+process_id: L010
+generated_at: '2026-05-18T01:53:04Z'
+sources:
+- block_key: Branching fraction upper limit for tau^- -> e^- e+ e^-
+  source_url: https://pdglive.lbl.gov/BranchingRatio.action?desig=38&parCode=S035&home=
+  snapshot_path: flavor_catalog/references/L010/pdg2025_tau3e_pdglive_s035r58.txt
+  sha256: 7b5e0e7346d47cfaf87b63f80ae8b81e1afa05769c5343e9efd4d22a09ce3fb6
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '2.7e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 23
+      context: "L20: violating modes.\nL21: \nL22: PDG selected limit:\nL23: BR(tau- -> e- e+ e-) < 2.7 x 10^-8, CL = 90%.\n\
+        L24: Selected data entry: HAYASAKA 2010, Belle, 782 fb^-1 at e+e- center-of-mass\nL25: energy 10.6 GeV.\nL26: \n"
+- block_key: Branching fraction upper limit for tau^- -> e^- e+ e^-
+  source_url: https://arxiv.org/abs/1001.3221
+  snapshot_path: flavor_catalog/references/L010/belle2010_tau3leptons_arxiv1001_3221.txt
+  sha256: 073a16f37d0c1f91ed80253da220cf6b48adb4766abc9b60d132118b289cc9e9
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '2.7e-08'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 29
+      context: "L26: For tau- -> e- e+ e-, the nominal-selection efficiency is 6.0%, the expected\nL27: background is 0.21\
+        \ +/- 0.15 events, the systematic uncertainty is 9.8%, no\nL28: events are observed in the signal region, and\nL29:\
+        \ BR(tau- -> e- e+ e-) < 2.7 x 10^-8 at 90% confidence level.\nL30: \nL31: Summary extract:\nL32: The paper reports\
+        \ BR(tau- -> e- e+ e-) < 2.7 x 10^-8 at 90% CL and says the\n"
+    - line_number: 32
+      context: "L29: BR(tau- -> e- e+ e-) < 2.7 x 10^-8 at 90% confidence level.\nL30: \nL31: Summary extract:\nL32: The paper\
+        \ reports BR(tau- -> e- e+ e-) < 2.7 x 10^-8 at 90% CL and says the\nL33: six limits improve previous published limits\
+        \ by factors from 1.3 to 1.6.\nL34: \nL35: Use in L010:\n"
+- block_key: Branching fraction upper limit for tau^- -> e^- e+ e^-
+  source_url: https://arxiv.org/abs/1002.4550
+  snapshot_path: flavor_catalog/references/L010/babar2010_tau3leptons_arxiv1002_4550.txt
+  sha256: 1e8f127cfa3ed821cfdcdf015d7a3dd7faf93ebd5dcc622cb4065ffb40075d91
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '2.9e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 29
+      context: "L26: For tau- -> e- e+ e-, the efficiency is 8.6 +/- 0.2%, the expected background\nL27: is 0.12 +/- 0.02\
+        \ events, the expected 90% CL branching-fraction upper limit is\nL28: 3.4 x 10^-8, zero events are observed, and the\
+        \ observed 90% CL upper limit is\nL29: 2.9 x 10^-8.\nL30: \nL31: Use in L010:\nL32: Independent BaBar cross-check\
+        \ of the B-factory-era tau -> 3e limit; PDG lists\n"
