@@ -1,0 +1,219 @@
+{
+  "process_id": "B002",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "S_{\\psi K_S},\\ \\sin 2\\beta",
+  "process_name": "CP phase in B_d -> J/psi K_S",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "LOW",
+  "implementation_difficulty_reason": "No new operator basis is needed: a B_d mixing phase constraint would reuse the existing Delta F=2 Wilson, QCD-running, and hadronic machinery. The missing work is observable plumbing for arg(M12_d), a CKM/SM phase convention, penguin-systematics treatment, and a likelihood or tolerance policy.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "PARTIAL",
+    "grep_commands": [
+      "rg -n \"S_psi|psiK|J/psi|Jpsi|sin.?2.?beta|sin2beta|phi_1|beta|CP.?phase|S\\\\s*=|C\\\\s*=|lambda\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"B_d|b_d|bd|Delta.*B|evaluate_bd|DEFAULT_DELTA_F2_INPUTS|M12|Wilson|SLL|SLR|VLL|VRR|LR1|LR2\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused grep for S_psiK_S, J/psi K_S, sin2beta, phi_1, and CP-phase names found no implemented observable in the requested implementation/test directories.",
+      "quarkConstraints/deltaf2.py:225 defines the existing B_d mixing input key b_d.",
+      "quarkConstraints/deltaf2.py:631 defines B_d hadronic inputs, and quarkConstraints/deltaf2.py:638 defines DELTA_M_BD_EXP for the current magnitude constraint.",
+      "quarkConstraints/deltaf2.py:903 evaluates the NP contribution to B_d mixing, but quarkConstraints/deltaf2.py:910 takes abs(m12), so the phase information is not exposed as an S_psiK_S constraint.",
+      "quarkConstraints/qcd_running.py:7 documents the Delta F=2 VLL/VRR/LR operator basis used for Wilson evolution.",
+      "quarkConstraints/modern/evaluation.py:48 lists B_d in the modern point-evaluation systems, but no sin(2 beta) observable ID appears there."
+    ]
+  },
+  "code_coverage_status": "PARTIAL",
+  "pdg_values": [
+    {
+      "label": "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025",
+      "observable": "sin(2 beta) == sin(2 phi_1), all charmonium including earlier measurements",
+      "value": 0.71,
+      "uncertainty": 0.011,
+      "units": "dimensionless",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/",
+      "snapshot_path": "flavor_catalog/references/B002/hflav_triangle_summer2025_sin2beta.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025",
+      "observable": "S coefficient in B_d -> J/psi K_S",
+      "value": 0.712,
+      "uncertainty": 0.011,
+      "units": "dimensionless",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/",
+      "snapshot_path": "flavor_catalog/references/B002/hflav_triangle_summer2025_sin2beta.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025",
+      "observable": "beta == phi_1 from sin(2 beta), physical CKM solution",
+      "value": null,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV CPV & Unitarity Triangle Parameters, Summer 2025",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/triangle/summer2025/",
+      "snapshot_path": "flavor_catalog/references/B002/hflav_triangle_summer2025_sin2beta.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb Collaboration 2024",
+      "observable": "S_{psi K0_S}",
+      "value": 0.717,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2024,
+      "experiment": "LHCb Collaboration 2024",
+      "source_url": "https://arxiv.org/abs/2309.09728",
+      "snapshot_path": "flavor_catalog/references/B002/lhcb_2024_spsiks_arxiv.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Belle II Collaboration 2024",
+      "observable": "S in B0 -> J/psi K0_S",
+      "value": 0.724,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2024,
+      "experiment": "Belle II Collaboration 2024",
+      "source_url": "https://arxiv.org/abs/2402.17260",
+      "snapshot_path": "flavor_catalog/references/B002/belleii_2024_sin2phi1_arxiv.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Frings, Nierste, and Wiebusch 2015",
+      "observable": "Long-distance penguin phase shift in B_d -> J/psi K_S",
+      "value": null,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2015,
+      "experiment": "Frings, Nierste, and Wiebusch 2015",
+      "source_url": "https://arxiv.org/abs/1503.00859",
+      "snapshot_path": "flavor_catalog/references/B002/frings_nierste_wiebusch_2015_arxiv.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "hflav_triangle_summer2025_sin2beta.txt": "sha256:ea3e6af5b240bd78cf81404140586a8fd7b9d77f644aa9cac33010770bbca6bf",
+    "lhcb_2024_spsiks_arxiv.txt": "sha256:6833aa00aa16c108bdb71df19b820c905e30a154375491ad547d5bfab534842f",
+    "belleii_2024_sin2phi1_arxiv.txt": "sha256:6ca46cf84f709356303a05eae997e1dad6d854267c4118cbd66919f7950ddf48",
+    "frings_nierste_wiebusch_2015_arxiv.txt": "sha256:dcd9b65df65af11b86ce1233c0bea55d56680d74b3428cd8d0f55cd3a7695178",
+    "faller_fleischer_jung_mannel_2008_arxiv.txt": "sha256:2e542901b83959ad3ec0848cf9daeb88e8af57781432e2e1bb55d7006ff3a8e8",
+    "csaki_falkowski_weiler_2008_arxiv.txt": "sha256:a2d9be2799dde999266cc3c1aa5dee3c2e1696dfed22a00ad718fdc1cee96c16"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:34:25-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:34:25-04:00",
+      "agent_id": "PKA-B002",
+      "reason": "Initial PKA sidecar for S_psiK_S / sin(2 beta)."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T11:35:56-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T11:35:56-04:00",
+      "agent_id": "PKA-B002",
+      "reason": "PKA draft, source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:15:35-04:00",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:15:35-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "WA polish for batch wa_w23_beauty completed."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:34:18-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:34:18-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_w23_beauty verified CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(S_{\\psi K_S}\\), equivalently\n\\(\\sin 2\\beta\\) or \\(\\sin 2\\phi_1\\).\nThis entry covers the mixing-induced CP asymmetry in\n\\(B_d^0\\to J/\\psi K_S^0\\), conventionally reported as\n\\(S_{\\psi K_S}\\simeq \\sin 2\\beta\\).  It is the beauty-sector benchmark CP\nphase of the unitarity triangle and is dominated by interference between\n\\(B_d-\\bar B_d\\) mixing and the \\(b\\to c\\bar c s\\) tree amplitude.",
+    "pdg_prose": "The canonical values are the \\texttt{pdg\\_or\\_equivalent} entries in\n\\texttt{B002.yaml}.  HFLAV Summer 2025\n(\\texttt{hflav\\_triangle\\_summer2025\\_sin2beta}) gives\nthe current all-charmonium average\n\\[\n  \\sin(2\\beta)=\\sin(2\\phi_1)=0.710\\pm0.011,\n\\]\nwith a stat-only uncertainty of \\(0.010\\) and fit CL \\(0.34\\), accessed on\n2026-05-16 in\n\\texttt{references/B002/hflav\\_triangle\\_summer2025\\_sin2beta.txt}.  The\nsame HFLAV block gives the direct \\(J/\\psi K_S\\) mode average\n\\[\n  S_{\\psi K_S}=0.712\\pm0.011.\n\\]\nThe corresponding physical CKM-angle solution is\n\\(\\beta=(22.63^{+0.45}_{-0.44})^\\circ\\), with the trigonometric alternate\nsolution also stored in the sidecar.",
+    "relevance": "In anarchic warped models, tree-level KK-gluon and electroweak exchange can\ngenerate a new complex contribution to \\(M_{12}^d\\).  \\(S_{\\psi K_S}\\) is\ntherefore the phase counterpart of the existing \\(B_d\\) mass-difference\nconstraint: a scan point can satisfy \\(\\Delta m_d\\) while still shifting\n\\(\\arg(M_{12}^d)\\).  This observable is especially useful because the decay\namplitude is CKM-favored and theoretically clean compared with many hadronic\nbeauty modes.",
+    "post_2008": "Since the arXiv:0804.1954 RS-flavor baseline, the central experimental story\nis precision rather than discovery.  Belle and BaBar final samples established\nthe B-factory anchor, and the post-2023 update added two important inputs:\nLHCb measured\n\\[\n  S_{\\psi K_S}=0.717\\pm0.013_{\\rm stat}\\pm0.008_{\\rm syst}\n\\]\nusing \\(6\\,{\\rm fb}^{-1}\\)\n(\\texttt{lhcb\\_2024\\_spsiks}), and Belle II measured\n\\[\n  S=0.724\\pm0.035_{\\rm stat}\\pm0.009_{\\rm syst}\n\\]\nwith \\(362\\,{\\rm fb}^{-1}\\)\n(\\texttt{belleii\\_2024\\_sin2phi1}).  These inputs moved the HFLAV average to\nthe percent-level regime.  On the theory side, the main development is sharper\naccounting of doubly Cabibbo-suppressed penguin pollution; the\n\\texttt{frings\\_nierste\\_wiebusch\\_2015} snapshot quotes\n\\(|\\Delta\\phi_d|\\le 0.68^\\circ\\).",
+    "validity": "This is a robust neutral-meson-mixing phase constraint, but a catalog number\nis not a standalone exclusion without a CKM convention.  A live implementation\nmust decide whether the SM \\(\\beta\\) input is fixed from a global fit or fitted\nsimultaneously, and how to budget the small penguin phase.  New physics in the\ndecay amplitude would make the usual \\(S_{\\psi K_S}\\simeq \\sin 2\\beta\\)\nidentification model-dependent, but for RS quark-flavor scans the dominant\ntarget is the new phase in \\(B_d\\) mixing.",
+    "code_coverage_prose": "\\textbf{PARTIAL.}  No implementation named \\texttt{S\\_psi}, \\texttt{J/psi K\\_S},\n\\texttt{sin2beta}, or equivalent was found in the required greps.  However,\n\\texttt{quarkConstraints/deltaf2.py:225} defines the existing \\(B_d\\) mixing\ninput, \\texttt{quarkConstraints/deltaf2.py:631} and\n\\texttt{quarkConstraints/deltaf2.py:638} define its hadronic and\n\\(\\Delta m_d\\) inputs, and\n\\texttt{quarkConstraints/deltaf2.py:903} evaluates \\(M_{12}^{d,\\rm NP}\\).\nThat evaluator reduces the result to \\(\\lvert M_{12}^{d,\\rm NP}\\rvert\\) at\n\\texttt{quarkConstraints/deltaf2.py:910}, so the phase needed for\n\\(S_{\\psi K_S}\\) is not exposed.  The shared \\(\\Delta F=2\\) running basis is\ndocumented at \\texttt{quarkConstraints/qcd\\_running.py:7}.",
+    "implementation_difficulty_prose": "\\textbf{LOW.}  The existing \\(\\Delta F=2\\) Wilson and hadronic machinery covers the\nneeded operator basis.  The missing work is to retain the complex \\(B_d\\)\nmixing amplitude, define the SM phase convention and allowed penguin\nuncertainty, and add an observable policy for the measured \\(S_{\\psi K_S}\\).",
+    "key_references": "Process-local raw reference keys before bibliography consolidation:\n\\texttt{hflav\\_triangle\\_summer2025\\_sin2beta},\n\\texttt{lhcb\\_2024\\_spsiks},\n\\texttt{belleii\\_2024\\_sin2phi1},\n\\texttt{frings\\_nierste\\_wiebusch\\_2015},\n\\texttt{faller\\_fleischer\\_jung\\_mannel\\_2008}, and\n\\texttt{csaki\\_falkowski\\_weiler\\_2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B002.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B002.tex",
+  "worklog_path": "flavor_catalog/worklogs/B002/"
+}

@@ -1,0 +1,162 @@
+{
+  "process_id": "B032",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\bar{B}\\to \\pi\\bar{K}",
+  "process_name": "Bbar -> pi Kbar nonleptonic charmless",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a new nonleptonic b -> s qbar q amplitude/likelihood layer with electroweak-penguin matching, hadronic strong phases, and correlated four-mode treatment; the existing Delta F = 2 basis does not cover B -> pi K.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n \"B032|B.?->.?K.?pi|B.?to.?K.?pi|B.?->.?pi.?K|B.?to.?pi.?K|BtoKpi|Kpi_puzzle|Kpi|K_pi|pi_K|charmless|nonleptonic|electroweak.?penguin\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|b.?to.?s|B_s|B_d|epsilon_K|epsilon_k|Delta m_K|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS_V1|evaluate_bd_mixing|evaluate_bs_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused B032/B->Kpi/charmless/nonleptonic/electroweak-penguin grep across implementation and test directories returned exit=1.",
+      "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 in the modern policy surface.",
+      "quarkConstraints/modern/phenomenology.py:165 says the modern surface is policy-only and has no numeric EFT backend.",
+      "quarkConstraints/deltaf2.py:209 begins the default Delta F = 2 input tuple for epsilon_K, B_d, B_s, and D mixing only.",
+      "flavorConstraints/muToEGamma.py:75 implements the lepton mu->e gamma dipole check, not a quark nonleptonic penguin observable."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "belleii2023_b0_ks_pi0_cp_arxiv.txt": "sha256:9b49da234cc9d67d4784725150115865333f5ae7c0590267c2bdecf07a2cbbfa",
+    "belleii2024_btokpi_arxiv.txt": "sha256:921fc4417a5fcf5e3c4865260dad6ea0d4b8f3605c7c1e51b6b7ab83e348d399",
+    "cfw2008_rs_flavor_arxiv.txt": "sha256:5220458be12445340f3099ecdbd4e7d98cec9c5dc93e246b28d34c96c634214e",
+    "hflav_dec2025_btopik_values.txt": "sha256:522cee5fd679181d2253cb2651bbe6b0f9f1a5a4d02dbfe00b9eefce7de57faf",
+    "lhcb2021_bplus_kplus_pi0_acp_arxiv.txt": "sha256:3cf10c6a54476f953f6949837b5b100353945cc11fbac2ff27d979e0ae49b54d",
+    "pdg2025_k0pi0_time_dependent_cp_api.txt": "sha256:dcd2aea4b34a67bc0d72350d098a885e99364d0a040439016807e4837a67f008"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:58:56-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:58:56-04:00",
+      "agent_id": "PKA-B032",
+      "reason": "Initial PKA draft deposit for Bbar -> pi Kbar."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:15:35-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:15:35-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "WA polish for batch wa_w23_beauty completed."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T12:34:18-04:00",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T12:34:18-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "issues": [
+        "CHK-1: TeX post-2008 numeric claims for LHCb A_CP(B+ -> K+ pi0)=0.025 +/- 0.015 +/- 0.006 +/- 0.003 and the Belle II Kpi sum-rule value -0.03 +/- 0.13 +/- 0.04 lack corresponding pdg_or_equivalent value blocks."
+      ],
+      "reason": "CA batch ca_w23_beauty found required rework."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:44:13-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:44:13-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "WA v2 added CA-requested LHCb and Belle II value blocks for batch wa_w23_beauty_v2."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T12:56:12-04:00",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T12:56:12-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "issues": [
+        "CHK-1: Main HFLAV/PDG pdg_or_equivalent value blocks do not all include required per-value year, access_date, source_url, and sha256 metadata; branching-fraction blocks lack year/access_date, HFLAV direct-CP blocks lack year/access_date/source_url, and PDG time-dependent-CP blocks lack year/access_date."
+      ],
+      "reason": "CA batch ca_w23_beauty_v2 found remaining metadata rework."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:11:30-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:11:30-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "WA v2 added CA-requested per-value metadata fields for batch wa_w23_beauty_v3."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T13:32:05-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T13:32:05-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "cycle": 3,
+      "reason": "CA batch ca_w23_beauty_v3 verified WA-v3 metadata completeness and all required checks."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\bar B\\to \\pi\\bar K\\), equivalently the four\ntwo-body charmless \\(B\\to K\\pi\\) modes with charge conjugates implied.  This\nentry covers branching fractions, direct CP asymmetries, and the\ntime-dependent \\(C_{K^0\\pi^0}\\) and \\(S_{K^0\\pi^0}\\) coefficients.",
+    "pdg_prose": "The canonical branching-fraction source is the HFLAV End-of-December 2025\nrare/charmless update, locally snapshot in\n\\texttt{references/B032/hflav\\_dec2025\\_btopik\\_values.txt} under source key\n\\texttt{hflav\\_dec2025\\_btopik}.  In HFLAV units of \\(10^{-5}\\),\n\\[\n\\begin{array}{c|c}\n{\\rm mode} & {\\cal B} \\\\\n\\hline\nB^+\\to K^0\\pi^+ & 2.392\\pm0.062 \\\\\nB^+\\to K^+\\pi^0 & 1.322\\pm0.043 \\\\\nB^0\\to K^+\\pi^- & 2.007\\pm0.040 \\\\\nB^0\\to K^0\\pi^0 & 1.012\\pm0.043\n\\end{array}\n\\]\nThe same HFLAV snapshot gives direct asymmetries in \\%:\n\\[\nA_{CP}(K^0_S\\pi^+)=(-2.67\\pm0.87)\\%,\\quad\nA_{CP}(K^+\\pi^0)=(+2.7\\pm1.2)\\%,\n\\]\n\\[\nA_{CP}(K^+\\pi^-)=(-8.31\\pm0.31)\\%,\\quad\nA_{CP}(K^0\\pi^0)=(-1\\pm13)\\% .\n\\]\nFor the neutral time-dependent mode, the PDG 2025 API snapshot\n\\texttt{references/B032/pdg2025\\_k0pi0\\_time\\_dependent\\_cp\\_api.txt} gives\n\\[\n  C_{K^0\\pi^0}=0.00\\pm0.08,\\qquad S_{K^0\\pi^0}=0.64\\pm0.13 .\n\\]\nThe sign convention should be checked before combining with Belle-style\n\\(A=-C\\) inputs.",
+    "relevance": "\\(\\bar B\\to\\pi\\bar K\\) is a \\(b\\to s\\) charmless penguin system with tree,\nQCD-penguin, and electroweak-penguin amplitudes.  Anarchic RS models can\ninduce nonstandard \\(b\\to s\\) flavor-changing \\(Z\\), dipole, or four-quark\noperators after KK matching.  This process is therefore a diagnostic of\npenguin flavor structure that is complementary to the existing neutral-meson\n\\(\\Delta F=2\\) constraints, but it is not a clean tree-level bound by itself.",
+    "post_2008": "Since the arXiv:0804.1954 RS-flavor benchmark era, the main changes are\nexperimental.  Belle and BaBar final samples were folded into HFLAV, LHCb\nmeasured \\(A_{CP}(B^+\\to K^+\\pi^0)=0.025\\pm0.015\\pm0.006\\pm0.003\\) and\nexplicitly sharpened the charged--neutral \\(K\\pi\\) direct-asymmetry puzzle,\nunder source key \\texttt{lhcb2021\\_bplus\\_kplus\\_pi0\\_acp}, and Belle II\nadded 2024 measurements of all four \\(K\\pi\\) branching fractions and direct\nasymmetries under \\texttt{belleii2024\\_btokpi}.  Belle II also measured\n\\(B^0\\to K_S^0\\pi^0\\)\ntime-dependent CP in 2023, providing the largest modern input to the\nPDG/HFLAV \\(S_{K^0\\pi^0}\\) average.  The Belle II \\(K\\pi\\) sum-rule test,\n\\(-0.03\\pm0.13\\pm0.04\\), is currently consistent with the SM expectation\n(\\texttt{belleii2024\\_btokpi}).",
+    "validity": "This is an experimentally mature but SM-theory-limited nonleptonic constraint.\nBranching fractions and CP asymmetries are easy to catalog, while interpreting\nthem as RS exclusions requires a hadronic amplitude framework, electroweak\npenguin conventions, strong phases, and correlated treatment of the four\nisospin-related modes.  It should be treated as a model-dependent penguin\ndiagnostic until a dedicated likelihood or conservative amplitude scan exists.",
+    "code_coverage_prose": "\\textbf{NO.}  A focused grep for \\(B\\to K\\pi\\), charmless, nonleptonic, and\nelectroweak-penguin strings across \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no implementation.  The modern policy surface lists only\n\\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\) at\n\\texttt{quarkConstraints/modern/phenomenology.py:23}; its notes say this is a\npolicy-only fence with no numeric EFT backend at\n\\texttt{quarkConstraints/modern/phenomenology.py:165}.  The implemented\ndefault inputs in \\texttt{quarkConstraints/deltaf2.py:209} are neutral-meson\n\\(\\Delta F=2\\) systems only, and the dipole code found at\n\\texttt{flavorConstraints/muToEGamma.py:75} is the lepton \\(\\mu\\to e\\gamma\\)\nconstraint.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production constraint would need a new nonleptonic\n\\(b\\to s\\bar q q\\) operator/amplitude layer, electroweak-penguin matching,\nhadronic strong-phase treatment, and a correlated four-mode likelihood or\nconservative theory envelope.  The existing \\(\\Delta F=2\\) SLL/SLR/VLL/VRR\nbasis does not cover this calculation.",
+    "key_references": "Process-local raw reference keys before bibliography consolidation:\n\\texttt{hflav\\_dec2025\\_btopik},\n\\texttt{pdg2025\\_k0pi0\\_time\\_dependent\\_cp\\_api},\n\\texttt{belleii2024\\_btokpi},\n\\texttt{lhcb2021\\_bplus\\_kplus\\_pi0\\_acp},\n\\texttt{belleii2023\\_b0\\_ks\\_pi0\\_cp}, and\n\\texttt{cfw2008\\_rs\\_flavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B032.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B032.tex",
+  "worklog_path": "flavor_catalog/worklogs/B032/"
+}

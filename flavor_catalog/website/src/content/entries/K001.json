@@ -1,0 +1,171 @@
+{
+  "process_id": "K001",
+  "family": "kaon",
+  "family_original": "kaon",
+  "tier": "PRIMARY",
+  "standard_notation": "\\epsilon_K",
+  "process_name": "Indirect CP violation in K0-K0bar mixing",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "LOW",
+  "implementation_difficulty_reason": "Existing Delta F = 2 SLL/SLR/VLL/VRR/LR1/LR2-style kaon-mixing machinery already covers epsilon_K; catalog promotion mainly needs input/provenance reconciliation.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "YES",
+    "coverage_alias": "YES-D2-KCP",
+    "searched_directories": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_epsilon_k|evaluate_delta_mk|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "quarkConstraints/deltaf2.py:209 defines DEFAULT_DELTA_F2_INPUTS_V1.",
+      "quarkConstraints/deltaf2.py:211 selects key='epsilon_k' and line 212 display_name='epsilon_K'.",
+      "quarkConstraints/deltaf2.py:622 stores EPSILON_K_EXP = 2.228e-3.",
+      "quarkConstraints/deltaf2.py:623 stores EPSILON_K_SM = 2.161e-3.",
+      "quarkConstraints/deltaf2.py:729 defines evaluate_epsilon_k.",
+      "quarkConstraints/deltaf2.py:735 documents epsilon_K^NP = kappa_epsilon Im(M12^NP)/(sqrt(2) Delta_m_K).",
+      "quarkConstraints/deltaf2.py:775 defines evaluate_epsilon_k_with_running.",
+      "quarkConstraints/modern/phenomenology.py:23 enumerates epsilon_K in MODERN_PHENOMENOLOGY_SYSTEM_IDS.",
+      "quarkConstraints/modern/phenomenology.py:426 stores the modern bridge kaon B_1 constant.",
+      "quarkConstraints/modern/phenomenology.py:431 stores the modern bridge SM epsilon_K constant.",
+      "quarkConstraints/modern/phenomenology.py:458 defines _evaluate_epsilon_k_from_bridge.",
+      "quarkConstraints/modern/phenomenology.py:1320 routes the epsilon_K system to the bridge evaluator.",
+      "tests/test_epsilon_k_physics.py:166 exercises evaluate_epsilon_k.",
+      "tests/test_epsilon_k_physics.py:421 checks finite epsilon_K result fields."
+    ]
+  },
+  "code_coverage_status": "YES",
+  "pdg_values": [
+    {
+      "label": "Particle Data Group, 2026 Review of Particle Physics, CP Violation in K0_L Decays",
+      "observable": "|epsilon|",
+      "value": 0.002228,
+      "uncertainty": 1.1e-05,
+      "units": "dimensionless",
+      "display": "|epsilon| = (2.228 +/- 0.011) x 10^-3",
+      "year": 2026,
+      "experiment": "Particle Data Group, 2026 Review of Particle Physics, CP Violation in K0_L Decays",
+      "source_url": "https://pdg.lbl.gov/2026/reviews/rpp2026-rev-cp-viol-kl-decays.pdf",
+      "snapshot_path": "flavor_catalog/references/K001/pdg2026_epsilon_k.txt",
+      "sha256": "sha256:9ada2a952ab9f8b69d7a29ec6b7ffa12571fa9140ca281c9ceee8a66b1dc7770",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Brod, Gorbahn, and Stamou, Phys. Rev. Lett. 125, 171803 (2020)",
+      "observable": "|epsilon_K|_SM",
+      "value": 0.002161,
+      "uncertainty": null,
+      "units": "dimensionless",
+      "display": "2.16(18) x 10^-3",
+      "year": 2020,
+      "experiment": "Brod, Gorbahn, and Stamou, Phys. Rev. Lett. 125, 171803 (2020)",
+      "source_url": "https://arxiv.org/abs/1911.06822",
+      "snapshot_path": "flavor_catalog/references/K001/bgs2020_epsilon_k_arxiv1911_06822.txt",
+      "sha256": "sha256:56faa9c2fed84b9740b0b858c8f1e10a408d030a627bfee18e57af1c72ab0984",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2026_epsilon_k.txt": "sha256:9ada2a952ab9f8b69d7a29ec6b7ffa12571fa9140ca281c9ceee8a66b1dc7770",
+    "bgs2020_epsilon_k_arxiv1911_06822.txt": "sha256:56faa9c2fed84b9740b0b858c8f1e10a408d030a627bfee18e57af1c72ab0984",
+    "flag2024_bk_arxiv2411_04268.txt": "sha256:513caa2edf3dc444b0c588d4a7aa2e85862b6712acf157160f68789688344608",
+    "cfw2008_rs_flavor_arxiv0804_1954.txt": "sha256:e6330846f14867e4f9534d83813719e893b16ac3c48ce58202cfe4209a55fac1"
+  },
+  "source_shas_count": 4,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:38:00-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:38:00-04:00",
+      "agent_id": "PKA-K001",
+      "reason": "Initial PKA source extraction and draft deposit for epsilon_K."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:14:32-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:14:32-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for batch wa_w23_kaon_charm_edm."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:33:01-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:33:01-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w23_kaon_charm_edm",
+      "reason": "Checker ca_w23_kaon_charm_edm passed CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-kaon",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent_id": "factcheck-codex-kaon",
+      "reason": "Independent live-source fact-check completed for kaon family.",
+      "notes": "Live source fetch and local snapshot checks verified all value claims for this process."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\varepsilon_K\\).  This entry covers indirect CP\nviolation in neutral-kaon mixing, namely the CP-violating part of the\n\\(K^0\\)-\\(\\bar K^0\\) \\(\\Delta F=2\\) amplitude.  It is the headline kaon CP\nconstraint for anarchic warped flavor because generic new phases in\n\\(s\\)-\\(d\\) mixing are tightly limited by the observed value.",
+    "pdg_prose": "The canonical experimental value is the PDG kaon CP-violation magnitude\n(\\texttt{PDG2026:EpsilonK}),\n\\[\n  |\\varepsilon| = (2.228 \\pm 0.011)\\times 10^{-3},\n\\]\nwith the related phase \\(\\phi_\\varepsilon=(43.5\\pm0.5)^\\circ\\).  The local text\nsnapshot is\n\\url{flavor_catalog/references/K001/pdg2026_epsilon_k.txt}.  For the SM\ncomparison used by the legacy code, Brod--Gorbahn--Stamou\n(\\texttt{BrodGorbahnStamou:EpsilonK2020}) quote\n\\[\n  |\\varepsilon_K|_{\\rm SM}\n  = (2.161 \\pm 0.153_{\\rm param.}\\pm0.076_{\\rm non\\mbox{-}pert.}\n     \\pm0.065_{\\rm pert.})\\times10^{-3}\n  = 2.16(18)\\times10^{-3}.\n\\]\nThe relevant FLAG kaon-bag input (\\texttt{FLAG2024:BK}) is the \\(N_f=2+1\\)\naverage \\(\\hat B_K=0.7533(91)\\), with\n\\(B_K^{\\overline{\\rm MS}}(2\\,{\\rm GeV})=0.5503(66)\\).",
+    "relevance": "In anarchic RS models, KK-gluon and electroweak gauge exchange generate\nmisaligned four-quark operators for \\(K^0\\)-\\(\\bar K^0\\) mixing.  The\nleft-right matrix elements are chirally enhanced, and generic complex phases\nmake \\(\\varepsilon_K\\) one of the strongest constraints on the KK scale.  The\nCFW baseline (\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}) quotes KK-gluon\nmasses of about \\(21\\) TeV in standard RS and about \\(33\\) TeV in the composite\npseudo-Goldstone variant.",
+    "post_2008": "Since the 2008 CFW baseline, the experimental central value has remained\nprecise.  The main updates are theory and lattice inputs.  BGS\n(\\texttt{BrodGorbahnStamou:EpsilonK2020}) reformulated the SM prediction with\nmanifest CKM unitarity and reduced the charm short-distance uncertainty,\ngiving the \\(2.161\\times10^{-3}\\) central value used in the repository's\nlegacy \\(\\Delta F=2\\) path.  FLAG 2024 (\\texttt{FLAG2024:BK}) updates the\nkaon bag averages.  The catalog should therefore keep the experimental number,\nthe SM theory budget, and the lattice inputs separate.",
+    "validity": "As an RS constraint this is robust for generic tree-level \\(\\Delta F=2\\)\nnew physics with arbitrary CP phases.  Model dependence enters through\nthe matching convention, QCD running, hadronic matrix elements, and the choice\nof how much of \\(|\\varepsilon_K^{\\rm exp}-\\varepsilon_K^{\\rm SM}|\\) is assigned as\nthe allowed NP budget.  It is not a standalone measurement of one Wilson\ncoefficient; it constrains the imaginary part of the full \\(K\\)-mixing\namplitude.",
+    "code_coverage_prose": "Coverage status: YES.  The legacy implementation registers\n\\texttt{epsilon\\_k} in\n\\texttt{quarkConstraints/deltaf2.py:209}--\\texttt{212}, stores the PDG and\nBGS constants at \\texttt{quarkConstraints/deltaf2.py:622}--\\texttt{623}, and\nevaluates the observable in \\texttt{quarkConstraints/deltaf2.py:729}.  The\nQCD-running wrapper is at \\texttt{quarkConstraints/deltaf2.py:775}.  The\nmodern policy surface also enumerates \\texttt{epsilon\\_K} at\n\\texttt{quarkConstraints/modern/phenomenology.py:23} and routes it through\nthe bridge evaluator at \\texttt{quarkConstraints/modern/phenomenology.py:458}\nand \\texttt{quarkConstraints/modern/phenomenology.py:1320}.  Tests exercise\nthe evaluator at \\texttt{tests/test\\_epsilon\\_k\\_physics.py:166} and\n\\texttt{tests/test\\_epsilon\\_k\\_physics.py:421}.",
+    "implementation_difficulty_prose": "Implementation difficulty: LOW.  The needed \\(\\Delta F=2\\) operator basis,\nhadronic contraction, QCD-running wrapper, and pass/fail budget already exist.\nA future production cleanup should reconcile the legacy and modern frozen\ninput constants, but no new operator, lattice machinery, or exclusive-mode\ncalculation is needed for catalog-level coverage.",
+    "key_references": "Process-local source keys before bibliography consolidation:\nPDG2026:EpsilonK, BrodGorbahnStamou:EpsilonK2020, FLAG2024:BK, and\nCsakiFalkowskiWeiler:RSFlavor2008."
+  },
+  "source_yaml": "flavor_catalog/processes/kaon/K001.yaml",
+  "source_tex": "flavor_catalog/processes/kaon/K001.tex",
+  "worklog_path": "flavor_catalog/worklogs/K001/"
+}

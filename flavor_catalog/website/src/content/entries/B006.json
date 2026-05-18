@@ -1,0 +1,187 @@
+{
+  "process_id": "B006",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(B^0\\to\\mu^+\\mu^-)",
+  "process_name": "Rare leptonic decay B0 -> mu+ mu-",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Focused grep for B_d.*mu, B0.*mu, b -> d, C10, pseudoscalar, rare_decay, rare decay, rare leptonic, and dimuon in required implementation/test directories found no B0 -> mu+ mu- observable implementation.",
+      "quarkConstraints/deltaf2.py:225 defines the existing b_d input as B_d mixing, not B0 -> mu+ mu-.",
+      "quarkConstraints/deltaf2.py:903 defines evaluate_bd_mixing for Delta F = 2 B_d mixing.",
+      "quarkConstraints/modern/phenomenology.py:646 evaluates B_d mixing from the bridge match; no Delta B = 1 rare leptonic branch is present."
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"B_d.*mu|B0d.*mu|B\\\\^0_d.*mu|B\\\\^0.*mu|B0.*mu|b[[:space:]-]*->[[:space:]-]*d|b[[:space:]]+to[[:space:]]+d|C_10|C10|pseudoscalar|rare_decay|rare decay|rare leptonic|dimuon\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:BdMuMu",
+      "observable": "BR(B0 -> mu+ mu-)",
+      "value": null,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": null,
+      "experiment": null,
+      "source_url": null,
+      "snapshot_path": "flavor_catalog/references/B006/pdg_2026_bdmumu.txt",
+      "sha256": null,
+      "access_date": null,
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV2023:BdOverBsMuMu",
+      "observable": "BR(B0 -> mu+ mu-) / BR(B_s0 -> mu+ mu-)",
+      "value": null,
+      "uncertainty": null,
+      "units": "dimensionless ratio",
+      "display": null,
+      "year": null,
+      "experiment": null,
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Apr2023/html/radll/RBR/BR_B0_mu%2B_mu-..BR_Bs0_mu%2B_mu-.html",
+      "snapshot_path": "flavor_catalog/references/B006/hflav_2023_bd_over_bs_mumu.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "BobethEtAl2013:BdMuMuSM",
+      "observable": "SM BR(B_d -> mu+ mu-)",
+      "value": 1.06e-10,
+      "uncertainty": 9e-12,
+      "units": "branching fraction",
+      "display": null,
+      "year": null,
+      "experiment": "Bobeth et al. 2013",
+      "source_url": "https://arxiv.org/abs/1311.0903",
+      "snapshot_path": "flavor_catalog/references/B006/bobeth_1311_0903_bsdll_sm.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "atlas_1812_03017_bdmumu.txt": "sha256:4df38ad179850b11fd9e592e9d836dcbb1f2d64c752537788e7da4ca7760fe32",
+    "bobeth_1311_0903_bsdll_sm.txt": "sha256:77747a86972077ee17f4bc54096046a8b618c29bb35efd361500dab3fd529e67",
+    "cfw_0804_1954_rs_flavor.txt": "sha256:46ac91ccc015bc54c549ba200301335af87276db9c9941d429c99824f854a11f",
+    "cms_2212_10311_bdmumu.txt": "sha256:3c83d78acb15dcceb314ee34df60b1918724a32adbc91e7bad87e458e8157626",
+    "hflav_2023_bd_over_bs_mumu.txt": "sha256:6f4876eae175c6848ef876cde4db82fc186e17244e7178c9418994267ebc190b",
+    "lhcb_2108_09283_bdmumu.txt": "sha256:7b5442cafe6e6a6a1a8de6788f4af0ba352c2f284bde14c17bf46cf50a425fc7",
+    "pdg_2026_bdmumu.txt": "sha256:45ef5f9721c6e423e632bde6d0631368d35a4ff2fb0f89eb52c43c436d62cfd1"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T13:15:49-04:00",
+      "timestamp": "2026-05-16T13:15:49-04:00",
+      "agent_id": "PKA-B006",
+      "reason": "Initial PKA draft deposit for B0 -> mu+ mu-."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:34:09-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:34:09-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for WA batch wa_w4_beauty."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T13:48:28-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T13:48:28-04:00",
+      "agent_id": "CA",
+      "issues": [
+        "CHK-1: TeX post-2008 prose states CMS Run 2 used 140 fb^-1 at sqrt(s)=13 TeV, but those dataset numerical claims are not represented in the YAML pdg_or_equivalent block with source URL, access date, and sha256 provenance."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:56:22-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:56:22-04:00",
+      "agent_id": "WA-v2",
+      "reason": "Cycle-2 writer rework added CMS Run 2 dataset provenance for the TeX numerical dataset claim."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:16:37-04:00",
+      "agent": "CA",
+      "cycle": 2,
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:16:37-04:00",
+      "agent_id": "CA",
+      "reason": "Cycle-2 checker re-check passed all CHK-1..CHK-8 items for CA batch ca_w4_beauty_v2."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(B^0\\to\\mu^+\\mu^-)\\).\nThis entry covers the rare leptonic \\(b\\to d\\mu^+\\mu^-\\) flavor-changing\nneutral-current decay of the neutral \\(B_d\\) meson.  It is the \\(b\\to d\\)\nanalogue of \\(B_s^0\\to\\mu^+\\mu^-\\), but is CKM-suppressed and currently enters\nthe catalog as an upper limit rather than an observed branching fraction.",
+    "pdg_prose": "The current PDG live/API listing \\texttt{S042.7}, accessed on 2026-05-16 and\nstored under source key \\texttt{PDG2026:BdMuMu}, gives\n\\[\n  \\mathcal{B}(B^0\\to\\mu^+\\mu^-) < 1.5\\times10^{-10}\\quad(90\\%\\ {\\rm CL}).\n\\]\nThe PDG input used for this limit is the CMS Run 2 result\n(\\texttt{CMS2023:BdMuMu}), which also reports\n\\(<1.9\\times10^{-10}\\) at \\(95\\%\\) CL.  The local canonical snapshot is\n\\texttt{flavor\\_catalog/references/B006/pdg\\_2026\\_bdmumu.txt}.  As an\nequivalent HFLAV rare-decay ratio constraint, the April 2023 table gives\n\\[\n  \\mathcal{B}(B^0\\to\\mu^+\\mu^-)/\\mathcal{B}(B_s^0\\to\\mu^+\\mu^-) < 8.1\\times10^{-2}\n  \\quad(90\\%\\ {\\rm CL}),\n\\]\nusing the LHCb input (\\texttt{HFLAV2023:BdOverBsMuMu}).  For scale, the\nreduced-uncertainty Standard Model prediction recorded in\n\\texttt{BobethEtAl2013:BdMuMuSM} is\n\\[\n  \\mathcal{B}(B_d\\to\\mu^+\\mu^-)_{\\rm SM}=(1.06\\pm0.09)\\times10^{-10}.\n\\]",
+    "relevance": "This mode is a clean \\(\\Delta B=1\\) leptonic rare decay.  In warped/anarchic\nflavor models, flavor-changing \\(Z\\), KK electroweak gauge, Higgs, radion, or\nother scalar exchanges can contribute to axial-vector, scalar, and pseudoscalar\n\\(b\\to d\\mu\\mu\\) Wilson coefficients.  Scalar and pseudoscalar terms are\nespecially diagnostic because they can compete with the helicity-suppressed\nStandard Model amplitude.",
+    "post_2008": "Since the arXiv:0804.1954 RS-flavor baseline\n(\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}), this channel moved from\npre-LHC upper limits to a mature LHC rare-decay search.  ATLAS combined Run 1\nand 2015--2016 data to set \\(2.1\\times10^{-10}\\) at \\(95\\%\\) CL\n(\\texttt{ATLAS2019:BdMuMu}).  LHCb later set \\(2.6\\times10^{-10}\\) at\n\\(95\\%\\) CL and constrained the \\(B^0/B_s^0\\) dimuon branching-ratio ratio\n(\\texttt{LHCb2022:BdMuMu}).  CMS Run 2, with \\(140\\,{\\rm fb}^{-1}\\) at\n\\(\\sqrt{s}=13~{\\rm TeV}\\), now supplies the PDG canonical \\(90\\%\\)-CL limit\n(\\texttt{CMS2023:BdMuMu}; \\texttt{PDG2026:BdMuMu}).  On the theory side,\n\\(B_{s,d}\\to\\ell^+\\ell^-\\) Standard Model predictions now include reduced\nperturbative electroweak and QCD uncertainties\n(\\texttt{BobethEtAl2013:BdMuMuSM}).",
+    "validity": "The experimental object is robust as an upper limit on a short-distance\nbranching fraction, but the catalog interpretation is model-dependent.  A live\nconstraint needs a consistent \\(\\Delta B=1\\) Hamiltonian, CKM convention,\nnormalization to \\(f_{B_d}\\), and treatment of scalar/pseudoscalar operators.\nUnlike angular \\(b\\to d\\ell\\ell\\) modes it does not require a multi-bin\nform-factor likelihood.",
+    "code_coverage_prose": "\\textbf{NO.}  The required catalog greps over \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no \\(B^0\\to\\mu^+\\mu^-\\) or\n\\(b\\to d\\mu\\mu\\) observable implementation.  Nearby hits such as\n\\texttt{quarkConstraints/deltaf2.py:225} and\n\\texttt{quarkConstraints/deltaf2.py:903} are \\(B_d\\) \\(\\Delta F=2\\) mixing\nentries, not this rare leptonic \\(\\Delta B=1\\) decay.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  This requires a new \\(\\Delta B=1\\) leptonic rare-decay\nobservable and Wilson normalization for \\(C_{10}^{(\\prime)}\\),\n\\(C_S^{(\\prime)}\\), and \\(C_P^{(\\prime)}\\).  It should not need new lattice\nmatrix-element machinery beyond decay-constant inputs, RG for a full angular\nanalysis, or exclusive semileptonic form factors.",
+    "key_references": "Process-local raw reference keys before bibliography consolidation:\n\\texttt{PDG2026:BdMuMu}, \\texttt{HFLAV2023:BdOverBsMuMu},\n\\texttt{CMS2023:BdMuMu}, \\texttt{LHCb2022:BdMuMu},\n\\texttt{ATLAS2019:BdMuMu}, \\texttt{BobethEtAl2013:BdMuMuSM}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B006.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B006.tex",
+  "worklog_path": "flavor_catalog/worklogs/B006/"
+}

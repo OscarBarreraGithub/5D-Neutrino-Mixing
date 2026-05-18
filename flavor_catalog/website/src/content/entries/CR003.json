@@ -1,0 +1,369 @@
+{
+  "process_id": "CR003",
+  "family": "collider_rs",
+  "family_original": "collider_rs",
+  "tier": "PRIMARY",
+  "standard_notation": "pp -> T Tbar -> tZ/tH/bW + X",
+  "process_name": "Pair production of custodial charge-2/3 top partner T (T')",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A faithful CR003 implementation needs collider reinterpretation data or an external tool chain plus an RS top-partner spectrum, width, and branching-ratio calculation. The repo currently has low-energy flavor filters and KK-gluon matching, not event-level acceptance or VLQ exclusion contours.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"CR003|vector.?like|vectorlike|VLQ|Tprime|T.?prime|tprime|top.?partner|top partner|custodial.*partner|pair.?production|collider.?search|direct.?search\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"T_\\{?5/3\\}?|T5/3|X_\\{?5/3\\}?|charge.?2/3|charge.?5/3|KK.?gluon|Kaluza|resonance|heavy.?partner|partner.?mass\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"M_KK|MKK|Mkk|KK|mass_bound|bound|constraint|check_\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"collider|LHC|ATLAS|CMS|HEPData|cross.?section|luminosity|exclusion|CLs|95.?CL\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "No direct match for CR003, VLQ, vector-like top partner, pair-production, collider-search, or direct-search strings in the required code paths.",
+      "Only adjacent KK/gluon strings appeared; for example quarkConstraints/couplings.py:1 and quarkConstraints/deltaf2.py:1 are KK-gluon flavor-coupling / Delta F=2 modules, not collider top-partner filters.",
+      "quarkConstraints/modern/scan.py:1230-1255 constructs M_KK for scan points, and quarkConstraints/modern/scan.py:1492-1569 derives pass/fail lists only for epsilon_K, K, B_d, B_s, and D0 systems.",
+      "quarkConstraints/modern/evaluation.py:643-666 builds M_KK-dependent KK-gluon matching and Delta F=2 summaries; no ATLAS/CMS/HEPData likelihood or top-partner mass observable is called.",
+      "scanParams/scan.py:399-429 records M_KK and scan metadata, while scanParams/scan.py:523-533 applies only the mu -> e gamma LFV filter in that legacy scan path."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDGLive2026:CR003:T_Wb_pair_ATLAS2024",
+      "observable": "Pair-produced vector-like charge-2/3 T mass lower limit, B(T -> Wb) = 1",
+      "value": 1.7,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m_T > 1.70 TeV",
+      "year": 2024,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/encoder_listings/q009.pdf",
+      "snapshot_path": "flavor_catalog/references/CR003/pdg_live_q009_tprime_pair_limits.txt",
+      "sha256": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_mass_exclusion"
+    },
+    {
+      "label": "PDGLive2026:CR003:T_singlet_pair_ATLAS2024",
+      "observable": "Pair-produced vector-like charge-2/3 T mass lower limit, isospin-singlet branching pattern",
+      "value": 1.36,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m_T > 1.36 TeV for B(T -> Wb:Ht:Zt) = 1/2:1/4:1/4",
+      "year": 2024,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/encoder_listings/q009.pdf",
+      "snapshot_path": "flavor_catalog/references/CR003/pdg_live_q009_tprime_pair_limits.txt",
+      "sha256": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_mass_exclusion"
+    },
+    {
+      "label": "PDGLive2026:CR003:T_Zt_pair_ATLAS2023",
+      "observable": "Pair-produced vector-like charge-2/3 T mass lower limit, B(T -> Zt) = 1",
+      "value": 1.6,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m_T > 1.60 TeV",
+      "year": 2023,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/encoder_listings/q009.pdf",
+      "snapshot_path": "flavor_catalog/references/CR003/pdg_live_q009_tprime_pair_limits.txt",
+      "sha256": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_mass_exclusion"
+    },
+    {
+      "label": "PDGLive2026:CR003:T_Ht_pair_CMS2023",
+      "observable": "Pair-produced vector-like charge-2/3 T mass lower limit, B(T -> Ht) = 1",
+      "value": 1.5,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m_T > 1.50 TeV",
+      "year": 2023,
+      "experiment": "CMS",
+      "source_url": "https://pdg.lbl.gov/encoder_listings/q009.pdf",
+      "snapshot_path": "flavor_catalog/references/CR003/pdg_live_q009_tprime_pair_limits.txt",
+      "sha256": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_mass_exclusion"
+    },
+    {
+      "label": "CMS2023:CR003:T_all_third_generation_decay_mixtures",
+      "observable": "Pair-produced vector-like charge-2/3 T mass lower limit for all Wb/Zt/Ht decay mixtures to third-generation quarks",
+      "value": 1.48,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m_T > 1.48 TeV for all decays to third-generation quarks",
+      "year": 2023,
+      "experiment": "CMS",
+      "source_url": "https://arxiv.org/abs/2209.07327",
+      "snapshot_path": "flavor_catalog/references/CR003/cms_2023_arxiv2209_07327.txt",
+      "sha256": "sha256:8e2d5e1a579b828f9460574678ab4e32401d9b5cd575e0ca5968c8c6e94c7bb6",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_mass_exclusion"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "label": "ATLAS 2024 lepton+jets Run-2 data set",
+      "observable": "integrated luminosity and center-of-mass energy",
+      "year": 2024,
+      "integrated_luminosity": {
+        "value": 140,
+        "units": "fb^-1"
+      },
+      "sqrt_s": {
+        "value": 13,
+        "units": "TeV"
+      },
+      "context": "Dataset metadata for the canonical ATLAS Wb and singlet mass limits; not promoted to pdg_or_equivalent.",
+      "source": "ATLAS arXiv:2401.17165 abstract",
+      "source_key": "ATLAS2024_VLQPairWb_Run2",
+      "source_url": "https://arxiv.org/abs/2401.17165",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR003/atlas_2024_arxiv2401_17165.txt",
+      "sha256": "sha256:0108d8fa55562d2165366e3cd1acb22250b0c58d3a41ec2b3b94ce1a123f5fdc"
+    },
+    {
+      "label": "ATLAS 2023 Z-lepton Run-2 data set",
+      "observable": "integrated luminosity and center-of-mass energy",
+      "year": 2023,
+      "integrated_luminosity": {
+        "value": 139,
+        "units": "fb^-1"
+      },
+      "sqrt_s": {
+        "value": 13,
+        "units": "TeV"
+      },
+      "context": "Dataset metadata for the ATLAS Zt-optimized mass limits; not promoted to pdg_or_equivalent.",
+      "source": "ATLAS arXiv:2210.15413 abstract",
+      "source_key": "ATLAS2023_VLQPairZt_Run2",
+      "source_url": "https://arxiv.org/abs/2210.15413",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR003/atlas_2022_arxiv2210_15413.txt",
+      "sha256": "sha256:fb7d3c87ad47ffca6a6ce3e5b812805a3e07d764c67b49b2d6315aa85171efa9"
+    },
+    {
+      "label": "CMS 2023 leptonic Run-2 data set",
+      "observable": "integrated luminosity and center-of-mass energy",
+      "year": 2023,
+      "integrated_luminosity": {
+        "value": 138,
+        "units": "fb^-1"
+      },
+      "sqrt_s": {
+        "value": 13,
+        "units": "TeV"
+      },
+      "context": "Dataset metadata for the CMS all-branching-mixture mass limit; not promoted to pdg_or_equivalent.",
+      "source": "CMS-B2G-20-011 / arXiv:2209.07327 abstract",
+      "source_key": "CMS2023_VLQPairLeptonic_Run2",
+      "source_url": "https://arxiv.org/abs/2209.07327",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR003/cms_2023_arxiv2209_07327.txt",
+      "sha256": "sha256:8e2d5e1a579b828f9460574678ab4e32401d9b5cd575e0ca5968c8c6e94c7bb6"
+    }
+  ],
+  "paper_era_reference": {
+    "top_partner_theory_baseline": {
+      "source": "Contino and Servant 2008",
+      "arxiv_id": "0801.1679",
+      "source_type": "theory collider-baseline; not a pdg_or_equivalent measured observable",
+      "relevance": "Custodial top-partner LHC search motivation and same-sign/multiple-top strategy adjacent to charge-2/3 T searches.",
+      "source_url": "https://arxiv.org/abs/0801.1679",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR003/contino_servant_2008_arxiv0801_1679.txt",
+      "sha256": "sha256:6955cd11af5efed8d6f67c0bde2dbb07e86f55d32a0315dd62186cf1769c8f45"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": {
+    "low_energy_anarchic_rs_reach_context": {
+      "source": "docs/quark_scan_methodology_note.tex",
+      "source_type": "internal low-energy flavor reach context; not a collider measured observable",
+      "relevance": "Records the low-energy anarchic-flavor M_KK reach used to compare CR003 with the existing primary catalog.",
+      "values": [
+        {
+          "observable": "M_KK^min p50 crossing for g_* = 3",
+          "value": 47.26,
+          "units": "TeV"
+        },
+        {
+          "observable": "M_KK^min p95 crossing for g_* = 3",
+          "value": 127.13,
+          "units": "TeV"
+        }
+      ],
+      "source_url": "docs/quark_scan_methodology_note.tex",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR003/quark_scan_methodology_note_mkk_extract.txt",
+      "sha256": "sha256:36da0a9c3d455b36dd63d50dda4a981b318be249d04134af89c185ebf87b30ac"
+    }
+  },
+  "post_2010_developments": [
+    {
+      "key": "ATLAS2017_VLQPairWb_13TeV",
+      "type": "experimental_history",
+      "arxiv_id": "1707.03347",
+      "why_it_matters": "Early 13 TeV Run-2 Wb-targeted pair-production search with boosted W reconstruction; established the lepton+jets topology later used by the current ATLAS Wb result.",
+      "source_url": "https://arxiv.org/abs/1707.03347",
+      "snapshot_path": "flavor_catalog/references/CR003/atlas_2017_arxiv1707_03347.txt",
+      "sha256": "sha256:9817e786cbc89f8f6258591fa8950f9182ad056eead4e755a403ea82aca85253"
+    },
+    {
+      "key": "ATLAS2018_VLQPairMultiB",
+      "type": "experimental_history",
+      "arxiv_id": "1803.09678",
+      "why_it_matters": "Extended coverage to Ht/Zt-rich final states with multiple b jets and boosted top/Higgs tags, broadening the branching-ratio coverage beyond Wb-targeted searches.",
+      "source_url": "https://arxiv.org/abs/1803.09678",
+      "snapshot_path": "flavor_catalog/references/CR003/atlas_2018_multib_arxiv1803_09678.txt",
+      "sha256": "sha256:4bccaf3076e82da84ece9dde540201692d59fd953c8418df9dc18100044d0d3b"
+    },
+    {
+      "key": "ATLAS2018_VLQPairHadronic",
+      "type": "experimental_history",
+      "arxiv_id": "1808.01771",
+      "why_it_matters": "All-hadronic Run-2 search with neural-network W/Z/H/top jet classification; supplied an independent Ht-sensitive topology.",
+      "source_url": "https://arxiv.org/abs/1808.01771",
+      "snapshot_path": "flavor_catalog/references/CR003/atlas_2018_hadronic_arxiv1808_01771.txt",
+      "sha256": "sha256:2241b58922e56e780a15618e7e7c75431161f4b26337927155d0cdfb696d54cb"
+    },
+    {
+      "key": "ATLAS2023_VLQPairZt_Run2",
+      "type": "current_experimental_input",
+      "arxiv_id": "2210.15413",
+      "why_it_matters": "Full Run-2 Z-lepton search optimized for T -> Zt; PDG source for m_T > 1.60 TeV under B(T -> Zt)=1.",
+      "source_url": "https://arxiv.org/abs/2210.15413",
+      "snapshot_path": "flavor_catalog/references/CR003/atlas_2022_arxiv2210_15413.txt",
+      "sha256": "sha256:fb7d3c87ad47ffca6a6ce3e5b812805a3e07d764c67b49b2d6315aa85171efa9"
+    },
+    {
+      "key": "CMS2023_VLQPairLeptonic_Run2",
+      "type": "current_experimental_input",
+      "arxiv_id": "2209.07327",
+      "why_it_matters": "Full Run-2 CMS combination of single-lepton, same-sign dilepton, and multilepton channels; robust all-branching-mixture lower limit m_T > 1.48 TeV.",
+      "source_url": "https://arxiv.org/abs/2209.07327",
+      "snapshot_path": "flavor_catalog/references/CR003/cms_2023_arxiv2209_07327.txt",
+      "sha256": "sha256:8e2d5e1a579b828f9460574678ab4e32401d9b5cd575e0ca5968c8c6e94c7bb6"
+    },
+    {
+      "key": "ATLAS2024_VLQPairWb_Run2",
+      "type": "current_experimental_input",
+      "arxiv_id": "2401.17165",
+      "why_it_matters": "Current PDG-leading pure-Wb and isospin-singlet pair-production result: m_T > 1.70 TeV for B(T -> Wb)=1 and m_T > 1.36 TeV for the singlet branching pattern.",
+      "source_url": "https://arxiv.org/abs/2401.17165",
+      "snapshot_path": "flavor_catalog/references/CR003/atlas_2024_arxiv2401_17165.txt",
+      "sha256": "sha256:0108d8fa55562d2165366e3cd1acb22250b0c58d3a41ec2b3b94ce1a123f5fdc"
+    }
+  ],
+  "source_shas": {
+    "atlas_2017_arxiv1707_03347.txt": "sha256:9817e786cbc89f8f6258591fa8950f9182ad056eead4e755a403ea82aca85253",
+    "atlas_2018_hadronic_arxiv1808_01771.txt": "sha256:2241b58922e56e780a15618e7e7c75431161f4b26337927155d0cdfb696d54cb",
+    "atlas_2018_multib_arxiv1803_09678.txt": "sha256:4bccaf3076e82da84ece9dde540201692d59fd953c8418df9dc18100044d0d3b",
+    "atlas_2022_arxiv2210_15413.txt": "sha256:fb7d3c87ad47ffca6a6ce3e5b812805a3e07d764c67b49b2d6315aa85171efa9",
+    "atlas_2024_arxiv2401_17165.txt": "sha256:0108d8fa55562d2165366e3cd1acb22250b0c58d3a41ec2b3b94ce1a123f5fdc",
+    "cms_2023_arxiv2209_07327.txt": "sha256:8e2d5e1a579b828f9460574678ab4e32401d9b5cd575e0ca5968c8c6e94c7bb6",
+    "contino_servant_2008_arxiv0801_1679.txt": "sha256:6955cd11af5efed8d6f67c0bde2dbb07e86f55d32a0315dd62186cf1769c8f45",
+    "pdg_live_q009_tprime_pair_limits.txt": "sha256:6cc3eac0c3ce064dbd29356e2a31bda62664898a6884b3ec84244e90312312b8",
+    "quark_scan_methodology_note_mkk_extract.txt": "sha256:36da0a9c3d455b36dd63d50dda4a981b318be249d04134af89c185ebf87b30ac"
+  },
+  "source_shas_count": 9,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T16:44:00-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T16:44:00-04:00",
+      "agent_id": "PKA-CR003",
+      "reason": "Initialized Wave-9 PRIMARY collider_rs CR003 draft under prompted policy."
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T16:44:01-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T16:44:01-04:00",
+      "agent_id": "PKA-CR003",
+      "reason": "Initial PKA draft, sidecar, source snapshots, source manifest, and worklog deposited."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T17:10:13-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T17:10:13-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "WA-w9-custodial cycle-1 polish for PRIMARY collider_rs batch; CHK-1 collider limit placement verified."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-17T17:35:23-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T17:35:23-04:00",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA-w9-custodial cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w9_custodial.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T19:30:00-04:00",
+      "agent_id": "Opus-round-5",
+      "round_id": "opus_round_005",
+      "reason": "Opus round 5 per-process sign-off for Wave-9 collider_rs PRIMARY entries; CA-verified PASS retained; see flavor_catalog/signoff/round_005_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T19:30:01-04:00",
+      "agent_id": "factcheck-codex-collider_rs-w9",
+      "agent": "factcheck-codex-collider_rs-w9",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-9 collider_rs family fact-check (factcheck_collider_rs.md)."
+    }
+  ],
+  "sections": {
+    "process": "Collider RS resonance / partner search framing: CR003 is the direct LHC\nsearch for a custodial charge-\\(2/3\\) top partner produced in pairs.  The\nstandard topology is\n\\[\n  pp\\to T\\bar T\\to tZ/tH/bW+X .\n\\]\nThis entry covers searches for pair production of a charge-\\(2/3\\)\nvector-like top partner \\(T\\), often denoted \\(t'\\) in PDG listings, with\ndecays to third-generation quarks and electroweak or Higgs bosons.",
+    "pdg_prose": "The current PDG Live \\(Q009TPP\\) listing records the relevant pair-production\nmass exclusions.  The canonical 95\\% CL entries for CR003 are:\n\\[\n\\begin{array}{lll}\n\\hline\n\\hbox{Assumption} & \\hbox{Observed lower limit} & \\hbox{Primary source} \\\\\n\\hline\n{\\cal B}(T\\to Wb)=1 & m_T>1.70~\\mathrm{TeV} &\n\\hbox{ATLAS 2024, PDG AAD 24N} \\\\\n{\\cal B}(T\\to Wb:Ht:Zt)=1/2:1/4:1/4 & m_T>1.36~\\mathrm{TeV} &\n\\hbox{ATLAS 2024, PDG AAD 24N} \\\\\n{\\cal B}(T\\to Zt)=1 & m_T>1.60~\\mathrm{TeV} &\n\\hbox{ATLAS 2023, PDG AAD 23AV} \\\\\n{\\cal B}(T\\to Ht)=1 & m_T>1.50~\\mathrm{TeV} &\n\\hbox{CMS 2023, PDG TUMASYAN 23V} \\\\\n\\hbox{all third-generation decay mixtures} & m_T>1.48~\\mathrm{TeV} &\n\\hbox{CMS 2023} \\\\\n\\hline\n\\end{array}\n\\]\nThe strict metadata for these mass-exclusion values is in\n\\texttt{CR003.yaml} under \\texttt{pdg\\_or\\_equivalent}; luminosity,\n\\(\\sqrt{s}\\), and channel details are kept as supporting inputs rather than\npromoted observables.",
+    "relevance": "CR003 constrains the physical mass of a charge-\\(2/3\\) custodial fermion\npartner, not the KK-gluon mass or the flavor-anarchy matching scale by itself.\nFor QCD pair production the production rate is comparatively model-independent,\nbut the acceptance and mass limit depend on the assumed branching fractions\namong \\(Wb\\), \\(Zt\\), and \\(Ht\\).  A custodial-RS model can map the lightest\ntop-partner mass and branching ratios to the 5D fermion representation, IR\nlocalization, and electroweak embedding; absent that map, the LHC number is a\ndirect-search cross-check rather than a universal RS-flavor bound.\n\nThe current low-energy quark-flavor scan already quotes\n\\(M_{KK}^{\\min}(p50,g_\\ast=3)=47.26~\\mathrm{TeV}\\) in\n\\texttt{docs/quark\\_scan\\_methodology\\_note.tex}.  The \\(T\\)-partner direct\nlimits above sit in the \\(1.36\\)--\\(1.70~\\mathrm{TeV}\\) range, so they do not\ncompete with the anarchic-flavor \\(M_{KK}\\) envelope.  Their value is instead\nto test non-anarchic corners, spectra with light custodial fermions, or models\nwhere collider partners are not tied tightly to the flavor-setting KK scale.",
+    "post_2008": "The Contino--Servant top-partner paper set the custodial-partner collider\nmotivation before LHC data.  The LHC search history then moved from early\nsame-sign and lepton+jets top-partner searches to full-Run-2\nbranching-fraction scans.  ATLAS arXiv:1707.03347 established a 13 TeV\nlepton+jets \\(Wb\\)-targeted search with boosted \\(W\\) reconstruction.  ATLAS\narXiv:1803.09678 and arXiv:1808.01771 broadened the coverage to \\(Ht\\),\n\\(Zt\\), multi-\\(b\\), and all-hadronic final states.  ATLAS arXiv:2210.15413\nused the full Run-2 \\(Z\\)-lepton channel and gives the strongest pure-\\(Zt\\)\nrow in the PDG table.  CMS arXiv:2209.07327 combined single-lepton,\nsame-sign dilepton, and multilepton channels and gives the robust\nall-decay-mixture exclusion.  ATLAS arXiv:2401.17165 is the current\nPDG-leading pure-\\(Wb\\) and singlet \\(Wb:Ht:Zt\\) source.",
+    "validity": "These limits assume prompt pair production of narrow vector-like quarks and\nspecific decay-mode hypotheses.  The common simplified-model assumption is\nthat \\({\\cal B}(T\\to Wb)+{\\cal B}(T\\to Zt)+{\\cal B}(T\\to Ht)=1\\).  Exotic\ndecays, sizable widths, altered electroweak couplings, long-lived partners, or\ncompressed spectra can invalidate a direct reading of the quoted mass limits.\nSingle-production searches can reach higher masses for chosen couplings, but\nthey are not the CR003 observable because the assigned process is pair\nproduction.",
+    "code_coverage_prose": "\\textbf{NO.}  Targeted greps across \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no implementation of VLQ \\(T\\)-pair collider limits,\nATLAS/CMS direct-search likelihoods, HEPData exclusion contours, or a\ntop-partner mass filter.  Adjacent evidence is limited to KK-scale and\nflavor-filter plumbing: \\texttt{quarkConstraints/modern/scan.py:1230}\nconstructs \\texttt{M\\_KK} for scan points, \\texttt{quarkConstraints/modern/scan.py:1492}\nbuilds failing-system lists from flavor ratios, \\texttt{quarkConstraints/modern/scan.py:1503}\nrestricts those systems to \\(\\epsilon_K,K,B_d,B_s,D^0\\), and\n\\texttt{quarkConstraints/modern/evaluation.py:643} starts the \\(M_{KK}\\)\nresolution used for KK-gluon matching.  The current quark scope is summarized\nas MFV fitting at \\texttt{quarkConstraints/README.md:34}, KK-scale conventions\nat \\texttt{quarkConstraints/README.md:36}, and a \\(\\Delta F=2\\) exclusion\nslice at \\texttt{quarkConstraints/README.md:38}; none of those lines is a\ncollider top-partner filter.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A faithful live constraint needs either a simplified\nacceptance map over \\({\\cal B}(Wb),{\\cal B}(Zt),{\\cal B}(Ht)\\) or an external\nreinterpretation workflow such as CheckMATE, MadAnalysis5, SModelS, or a\ncollaboration likelihood/HEPData grid.  It also needs an RS spectrum model\nthat predicts the lightest custodial \\(T\\) mass, width, and branching\nfractions.  The current code has neither collider-event machinery nor a\ntop-partner spectrum/decay module.",
+    "key_references": "\\texttt{PDGLive2026\\_Q009TPP\\_TprimePair};\n\\texttt{ATLAS2024\\_VLQPairWb\\_Run2};\n\\texttt{ATLAS2023\\_VLQPairZt\\_Run2};\n\\texttt{CMS2023\\_VLQPairLeptonic\\_Run2};\n\\texttt{ATLAS2017\\_VLQPairWb\\_13TeV};\n\\texttt{ATLAS2018\\_VLQPairMultiB};\n\\texttt{ATLAS2018\\_VLQPairHadronic};\n\\texttt{ContinoServant2008\\_TopPartners};\n\\texttt{QuarkScanMethodology2026\\_MKKEnvelope}."
+  },
+  "source_yaml": "flavor_catalog/processes/collider_rs/CR003.yaml",
+  "source_tex": "flavor_catalog/processes/collider_rs/CR003.tex",
+  "worklog_path": "flavor_catalog/worklogs/CR003/"
+}

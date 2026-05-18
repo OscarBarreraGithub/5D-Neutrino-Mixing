@@ -1,0 +1,264 @@
+{
+  "process_id": "CR008",
+  "family": "collider_rs",
+  "family_original": "collider_rs",
+  "tier": "PRIMARY",
+  "standard_notation": "pp -> T Tbar (singlet) -> tZ/tH/bW",
+  "process_name": "Pair production of singlet VLQ T (non-custodial)",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live LHC-search constraint needs cross-section inputs, branching-fraction scans, detector acceptances or likelihoods, and external reinterpretation machinery such as CheckMATE, MadAnalysis5, SModelS, Rivet/Contur, or collaboration HEPData likelihood material.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "grep_commands": [
+      "rg -n \"VLQ|vector[- ]?like|vectorlike|top[- ]?partner|heavy[- ]?partner|Tprime|T_prime|tprime|t_prime|T5/3|T_\\\\{5/3\\\\}|T\\\\\\\\bar\\\\{T\\\\}|Tbar|CheckMATE|MadAnalysis|SModelS\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"ATLAS|CMS|LHC|collider|direct search|mass exclusion|95% CL|fb\\\\^-1|fb\\\\{\\\\^-1\\\\}|luminosity\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"T.?->.?Wb|T.?->.?tZ|T.?->.?tH|bW|tZ|tH|Wb|Ht|Zt|branching|BR\\\\(|mass.?excl|95.?CL|cross.?section|sigma\\\\(\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "No exact VLQ, vector-like top partner, ATLAS/CMS direct-search, CheckMATE, MadAnalysis5, or SModelS implementation was found. The only ATLAS/CMS-adjacent grep hit was tests/test_alpha_s.py:89, a CMS/RunDec alpha_s example unrelated to collider searches.",
+      "Adjacent lepton scan evidence: scanParams/scan.py:399 computes M_KK = xi_KK * Lambda_IR and scanParams/scan.py:523-535 applies mu->e gamma only.",
+      "Adjacent quark scan evidence: quarkConstraints/scan.py:359 computes M_KK and quarkConstraints/scan.py:377-380 evaluates Delta F=2 constraints, not direct LHC mass exclusions."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "ATLAS2024:CR008:T_singlet_pair_mass_limit",
+      "observable": "m_T lower limit for pair-produced isospin-singlet vector-like T quark",
+      "value": 1.36,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "> 1.36 TeV",
+      "year": 2024,
+      "experiment": "ATLAS",
+      "source_url": "https://arxiv.org/abs/2401.17165",
+      "snapshot_path": "flavor_catalog/references/CR008/atlas_2024_arxiv2401_17165.txt",
+      "sha256": "sha256:6857ab7bf208d81f16852be25fc07d04a762789505084bc3a09aefb26b01b9b7",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "CMS2023:CR008:T_pair_all_third_generation_decays_envelope",
+      "observable": "m_T lower limit envelope for T Tbar decays to third-generation quarks",
+      "value": 1.48,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "> 1.48 TeV for all bW/tZ/tH third-generation decay branching patterns",
+      "year": 2023,
+      "experiment": "CMS",
+      "source_url": "https://arxiv.org/abs/2209.07327",
+      "snapshot_path": "flavor_catalog/references/CR008/cms_2023_arxiv2209_07327.txt",
+      "sha256": "sha256:54758c30e017fa03b4712d04ce2e6eb53e95ad1b10a5a50ef82308746c573701",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "label": "ATLAS Run-2 dataset for singlet benchmark",
+      "observable": "integrated luminosity",
+      "value": 140,
+      "units": "fb^-1",
+      "year": 2024,
+      "context": "Dataset metadata for the ATLAS singlet mass exclusion; not promoted to pdg_or_equivalent per CHK-1 carve-out.",
+      "source": "ATLAS arXiv:2401.17165 abstract",
+      "source_key": "ATLAS2024_TsingletPair",
+      "source_url": "https://arxiv.org/abs/2401.17165",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR008/atlas_2024_arxiv2401_17165.txt",
+      "sha256": "sha256:6857ab7bf208d81f16852be25fc07d04a762789505084bc3a09aefb26b01b9b7"
+    },
+    {
+      "label": "CMS full Run-2 dataset for leptonic-envelope benchmark",
+      "observable": "integrated luminosity",
+      "value": 138,
+      "units": "fb^-1",
+      "year": 2023,
+      "context": "Dataset metadata for the CMS full Run-2 mass exclusion; not promoted to pdg_or_equivalent per CHK-1 carve-out.",
+      "source": "CMS arXiv:2209.07327 abstract",
+      "source_key": "CMS2023_VLQPairLeptonic",
+      "source_url": "https://arxiv.org/abs/2209.07327",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR008/cms_2023_arxiv2209_07327.txt",
+      "sha256": "sha256:54758c30e017fa03b4712d04ce2e6eb53e95ad1b10a5a50ef82308746c573701"
+    }
+  ],
+  "paper_era_reference": {
+    "aguilar_saavedra_2009_top_partners": {
+      "source": "Aguilar-Saavedra, Identifying top partners at LHC",
+      "arxiv_id": "0907.3155",
+      "source_type": "theory baseline and LHC phenomenology; not a pdg_or_equivalent measured observable",
+      "relevance": "Defines T/B/X/Y top-partner search channels and branching-pattern logic used by later VLQ searches.",
+      "source_url": "https://arxiv.org/abs/0907.3155",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR008/aguilar_saavedra_2009_arxiv0907_3155.txt",
+      "sha256": "sha256:3eb76c22271dd407430f7bd933637ba18c4fe4b8aa6704db719f4002d9972e85"
+    },
+    "lari_et_al_2008_collider_flavour": {
+      "source": "Lari et al., Collider aspects of flavour physics at high Q",
+      "arxiv_id": "0801.1800",
+      "source_type": "collider/flavor review with del Aguila and Aguilar-Saavedra authorship; not a pdg_or_equivalent measured observable",
+      "relevance": "Paper-era collider-flavor context for heavy states at the LHC and computational tools.",
+      "source_url": "https://arxiv.org/abs/0801.1800",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR008/lari_et_al_2008_arxiv0801_1800.txt",
+      "sha256": "sha256:d4f25fae5b175336d60f4b90d8c2aa1e4471fb7987475feebe62f0738f1e9d3b"
+    },
+    "aguilar_saavedra_et_al_2013_vlq_handbook": {
+      "source": "Aguilar-Saavedra, Benbrik, Heinemeyer, and Perez-Victoria, A handbook of vector-like quarks",
+      "arxiv_id": "1306.0572",
+      "source_type": "VLQ mixing and single-production theory context; not a pdg_or_equivalent measured observable",
+      "relevance": "Summarizes VLQ multiplets, mixing constraints, and LHC decay/production phenomenology used to define benchmark assumptions.",
+      "source_url": "https://arxiv.org/abs/1306.0572",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR008/aguilar_saavedra_et_al_2013_arxiv1306_0572.txt",
+      "sha256": "sha256:d2d04ee00c823c30f84d4176174681cd6f2f8a8affd4e6c7edfe2f3731ffc9f4"
+    },
+    "rc11_quark_scan_reach": {
+      "source": "Local quark scan methodology note",
+      "source_type": "local upstream methodology context; not a pdg_or_equivalent measured observable",
+      "relevance": "Provides the low-energy anarchic-flavor reach comparison used in CR008 prose.",
+      "value": 47.26,
+      "units": "TeV",
+      "qualifier": "M_KK^{min,p50} at g_*=3",
+      "source_path": "docs/quark_scan_methodology_note.tex",
+      "source_line": 587,
+      "sha256": "sha256:334d639d4167b4c721e700fbb0047cd26cd7a8fab9453a321e6afb6cbe6a6c75"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "aguilar_saavedra_2009_arxiv0907_3155.txt": "sha256:3eb76c22271dd407430f7bd933637ba18c4fe4b8aa6704db719f4002d9972e85",
+    "aguilar_saavedra_et_al_2013_arxiv1306_0572.txt": "sha256:d2d04ee00c823c30f84d4176174681cd6f2f8a8affd4e6c7edfe2f3731ffc9f4",
+    "atlas_2015_arxiv1505_04306.txt": "sha256:9c84ca8782aab357d5ec8db09388999aa1563c7a2d08d93ada44d49cbbe7e507",
+    "atlas_2023_arxiv2212_05263.txt": "sha256:0dfc139df5a8468162243915172d9af10e7e6541812b3870efe60ddee8c5a552",
+    "atlas_2024_arxiv2401_17165.txt": "sha256:6857ab7bf208d81f16852be25fc07d04a762789505084bc3a09aefb26b01b9b7",
+    "cms_2017_arxiv1706_03408.txt": "sha256:560a803264549954ff81e55f0147f1ac92da7041a257c46be64401c318c12a56",
+    "cms_2018_arxiv1710_01539.txt": "sha256:006a072cc944f5a5218e7f5159b22cb683a52b68ca78278833ac89b38a6190af",
+    "cms_2018_arxiv1805_04758.txt": "sha256:8faff1fbcef0e9ac5db296592ed05583b95553d1dbd6176f8f1ee7846400b0b7",
+    "cms_2023_arxiv2209_07327.txt": "sha256:54758c30e017fa03b4712d04ce2e6eb53e95ad1b10a5a50ef82308746c573701",
+    "lari_et_al_2008_arxiv0801_1800.txt": "sha256:d4f25fae5b175336d60f4b90d8c2aa1e4471fb7987475feebe62f0738f1e9d3b",
+    "pdg2025_tprime_vlq_limits.txt": "sha256:2fb885c6e9afe0493fcb192945ff15c4c26324a1ebe419826d6d2d445a7ef5e9"
+  },
+  "source_shas_count": 11,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T16:33:00-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T16:33:00-04:00",
+      "agent_id": "PKA-CR008",
+      "reason": "initial CR008 PRIMARY draft skeleton and source research started"
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T16:33:00-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T16:33:00-04:00",
+      "agent_id": "PKA-CR008",
+      "reason": "initial PKA draft, sidecar, source snapshots, and worklog deposited"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T17:08:10-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T17:08:10-04:00",
+      "agent": "WA-WA-w9-vlq-4top",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "Wave-9 WA polish for VLQ/4-top collider_rs batch; prose and CHK-1 metadata placement normalized."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-17T17:32:39-04:00",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-17T17:32:39-04:00",
+      "agent": "CA-CA-w9-vlq-4top",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA cycle-1 CHK-1 rework required: measured collider mass-exclusion numerals in TeX (CMS 1.54 TeV, ATLAS 715--950 GeV, CMS 860 GeV, CMS 1.14--1.30 TeV) are not all represented in pdg_or_equivalent.values; see flavor_catalog/worklogs/checker/ca_w9_vlq_4top.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T17:56:57-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T17:56:57-04:00",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 fix: CHK-1: removed historical mass-exclusion numerals per T003 precedent."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-17T18:19:26-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T18:19:26-04:00",
+      "agent": "CA-v2",
+      "agent_id": "CA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 PASS after WA-v2 fix per cycle-1 issues; see flavor_catalog/worklogs/checker/ca_w9_vlq_4top_v2.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T19:30:00-04:00",
+      "agent_id": "Opus-round-5",
+      "round_id": "opus_round_005",
+      "reason": "Opus round 5 per-process sign-off for Wave-9 collider_rs PRIMARY entries; CA-verified PASS retained; see flavor_catalog/signoff/round_005_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T19:30:01-04:00",
+      "agent_id": "factcheck-codex-collider_rs-w9",
+      "agent": "factcheck-codex-collider_rs-w9",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-9 collider_rs family fact-check (factcheck_collider_rs.md)."
+    }
+  ],
+  "sections": {
+    "process": "This entry covers direct LHC searches for QCD pair production of a charge\n\\(+2/3\\) vector-like top partner \\(T\\), treated as an electroweak singlet,\n\\[\n  pp\\to T\\bar T,\\qquad T\\to bW,\\ tZ,\\ tH .\n\\]\nThis is a Collider RS partner-search entry: it tests the light singlet\ntop-partner corner of a warped or composite top sector, not a universal\n\\(M_{\\rm KK}\\) bound.  The experimentally standard singlet benchmark uses\n\\({\\cal B}(T\\to Wb:Ht:Zt)=1/2:1/4:1/4\\) at high mass.",
+    "pdg_prose": "The process-specific PDG/ATLAS benchmark limit is\n\\[\n  m_T > 1.36~{\\rm TeV}\\quad (95\\%~{\\rm CL})\n\\]\nfor pair-produced isospin-singlet \\(T\\) quarks with\n\\({\\cal B}(T\\to Wb:Ht:Zt)=1/2:1/4:1/4\\).  The source is the ATLAS Run-2\nlepton+jets search using 140 fb\\(^{-1}\\) at \\(\\sqrt{s}=13\\) TeV, recorded\nlocally in \\texttt{atlas\\_2024\\_arxiv2401\\_17165.txt} and summarized in the\nPDG 2025 \\(t'\\) searches listing\n\\texttt{pdg2025\\_tprime\\_vlq\\_limits.txt}.\n\nThe strongest broad-envelope Run-2 statement is the CMS leptonic-channel\ncombination: \\(T\\bar T\\) production is excluded throughout the\nthird-generation \\(bW/tZ/tH\\) branching triangle at the canonical envelope\nrecorded in \\texttt{CR008.yaml}, with stronger branching-dependent reach at\nspecific points.\nThis is not a single singlet branching-ratio point, but it is useful as a\nbranching-fraction cross-check\n(\\texttt{cms\\_2023\\_arxiv2209\\_07327.txt}).",
+    "relevance": "In warped models, a charge-\\(2/3\\) top partner is a direct handle on the\nfermionic top-sector resonance spectrum.  A singlet \\(T\\) search constrains a\nspecific light-partner limit: QCD pair production is essentially set by\n\\(m_T\\), while the search interpretation depends on the assumed standard\ndecays \\(T\\to bW,tZ,tH\\) and on whether exotic or cascade decays are absent.\nFor a non-custodial singlet top partner, the ATLAS benchmark maps to\n\\(m_T>1.36\\) TeV at 95\\% CL under the standard singlet branching ratios.\n\nThis is not competitive with the anarchic-flavor mass reach already implied by\nthe low-energy catalog.  The quark-scan methodology note quotes the rc1.1\nheadline crossing \\(M_{KK}^{\\mathrm{min},p50}=47.26\\) TeV at \\(g_*=3\\).  A direct\nsinglet-top-partner bound near 1.4--1.5 TeV therefore works mainly as a\ncollider cross-check, as leverage for non-anarchic or alignment-tuned RS\nvariants, or as a constraint on scenarios where the lightest fermion partner\nis parametrically lighter than the gauge KK scale.",
+    "post_2008": "The post-2010 history is driven by the LHC moving from Run-1 branching-fraction\ntriangles to full Run-2 multichannel combinations.  The ATLAS 8 TeV\nlepton+jets search set \\(T\\)-mass lower limits over the \\(bW/tZ/tH\\) plane at\nweaker Run-1 mass scales.  CMS then used the first 13 TeV data with boosted\njet-substructure techniques, and later combined single-lepton, same-sign\ndilepton, and multilepton channels to extend the reach across branching\nfractions.  ATLAS full Run-2 searches added complementary lepton+jets and\nlarge-\\(E_T^{\\rm miss}\\) selections; the current singlet\n\\(bW/tH/tZ=1/2:1/4:1/4\\) point is 1.36 TeV from the 2024 lepton+jets search,\nwhile the CMS full Run-2 leptonic search gives the stronger 1.48 TeV\nall-branching-envelope statement.",
+    "validity": "The mass limits are collider exclusions, not generic RS bounds.  They assume\nprompt pair-produced narrow vector-like quarks, standard decays to\nthird-generation quarks plus \\(W/Z/H\\), and no sizable exotic modes such as\ncascade decays through additional composite-sector states.  Pair production is\nless coupling-dependent than single production, but the final-state acceptance\nis still branching-ratio dependent.  A model with displaced decays, large\nwidths, light neutral states, non-third-generation couplings, or a compressed\nspectrum would need a dedicated reinterpretation.",
+    "code_coverage_prose": "\\textbf{NO}.  Required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no VLQ, top-partner, ATLAS/CMS direct-search, or recast\nimplementation.  Adjacent evidence confirms the existing pipeline computes\n\\(M_{KK}\\) and low-energy filters only: \\texttt{scanParams/scan.py:399}\nconstructs \\(M_{KK}=\\xi_{KK}\\Lambda_{\\rm IR}\\),\n\\texttt{scanParams/scan.py:523} through \\texttt{scanParams/scan.py:535} applies the\n\\(\\mu\\to e\\gamma\\) filter, and \\texttt{quarkConstraints/scan.py:377}--\n\\texttt{quarkConstraints/scan.py:380} evaluates the quark \\(\\Delta F=2\\)\nconstraints.  There is no collider likelihood, cross-section limit, or\nbranching-fraction-triangle filter.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A live constraint would require an external collider-recast\nlayer: signal generation or tabulated cross sections, branching-ratio\nbookkeeping, acceptance and efficiency maps or full likelihoods, and validation\nagainst ATLAS/CMS exclusions.  Practical implementation would likely use or\ninterface to CheckMATE, MadAnalysis5, SModelS, Rivet/Contur, or collaboration\nHEPData likelihood material rather than a lightweight in-repo formula.",
+    "key_references": "\\texttt{PDG2025\\_TprimeVLQ}; \\texttt{ATLAS2024\\_TsingletPair};\n\\texttt{CMS2023\\_VLQPairLeptonic}; \\texttt{ATLAS2015\\_VLQPair8TeV};\n\\texttt{CMS2017\\_VLQPairSingleLepton}; \\texttt{CMS2018\\_VLQPairLeptonic};\n\\texttt{ATLAS2023\\_VLQPairMET}; \\texttt{AguilarSaavedra2009\\_TopPartners};\n\\texttt{AguilarSaavedraEtAl2013\\_VLQHandbook};\n\\texttt{LariEtAl2008\\_ColliderFlavourHighQ}."
+  },
+  "source_yaml": "flavor_catalog/processes/collider_rs/CR008.yaml",
+  "source_tex": "flavor_catalog/processes/collider_rs/CR008.tex",
+  "worklog_path": "flavor_catalog/worklogs/CR008/"
+}

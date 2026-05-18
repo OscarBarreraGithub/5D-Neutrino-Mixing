@@ -1,0 +1,145 @@
+{
+  "process_id": "B015",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "B -> X_s ell+ ell-",
+  "process_name": "Inclusive b -> s ell+ ell- rare B decay",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems.",
+      "quarkConstraints/modern/phenomenology.py:166 notes that the modern phenomenology fence is policy-only and not a numeric backend.",
+      "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no b -> s ell ell observable is present in flavorConstraints.",
+      "Fixed-string targeted searches for b->s, b -> s, X_s, ell+ ell-, l+ l-, C_9, C_10 returned no matches in the required code directories."
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n -F -e 'b->s' -e 'b -> s' -e 'X_s' -e 'ell+ ell-' -e 'l+ l-' -e 'C_9' -e 'C_10' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "babar_1312_5364_arxiv.txt": "sha256:fcaba867afcd945d15f231279f3463665cfb09e619906bd1d454544869d6daa2",
+    "belle_hepex_0503044_arxiv.txt": "sha256:1f51dd799054c6b51ff7485346a900a4fddb426f8a30d2f72dd8a0a9be632eb2",
+    "cfw_0804_1954_arxiv.txt": "sha256:3083cfa5f4d74bd36b120690ad7386f73e5114e934afffd9d62035620f5b2c0e",
+    "hflav_dec2024_B_to_Xsll.txt": "sha256:94a3f65a624045d8e83f48bf2f4f1f0384f5488eb33752416243a9807aeeaa00",
+    "huber_hurth_lunghi_1503_04849_arxiv.txt": "sha256:735177a8007fb4fd8bcbeb55de106423c53e1bf68154f4a132b79ea6a041d5b1",
+    "miscited_prompt_arxiv_ids.txt": "sha256:6ad6093d3ee9ee1b9a806a83db28d6c192ada6c91e6c97db1b5c9d1c32dc590b"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T11:23:03-04:00",
+      "timestamp": "2026-05-16T11:23:03-04:00",
+      "agent_id": "PKA-B015",
+      "reason": "initial PKA draft deposit for assigned B015 inclusive b -> s ell ell process"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:32:49-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:32:49-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for wa_wave1_beauty; numerical claims checked against sidecar sources."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T11:45:36-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T11:45:36-04:00",
+      "agent_id": "CA",
+      "issues": [
+        "CHK-1: TeX branching-fraction and q2-bin numerical claims map to pdg_or_equivalent observables that lack per-observable year/source_url/access_date metadata.",
+        "CHK-1: TeX quotes the Belle II 50 ab^-1 projection, but no pdg_or_equivalent observable records that projection or luminosity."
+      ],
+      "reason": "Checker ca_wave1_beauty found CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_wave1_beauty.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:54:24-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:54:24-04:00",
+      "agent_id": "WA-v2",
+      "reason": "WA v2 added missing per-observable metadata and recorded the Belle II 50 ab^-1 projection flagged by CA."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:03:51-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:03:51-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_wave1_beauty_v2",
+      "reason": "Checker ca_wave1_beauty_v2 passed CHK-1 through CHK-8 after WA-v2 rework."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "A: custodial-protection dependence of EW + rare-b constraints"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(B\\to X_s\\ell^+\\ell^-)\\).\nThis entry covers the inclusive rare electroweak-penguin process\n\\(B\\to X_s\\ell^+\\ell^-\\), equivalently inclusive \\(b\\to s\\ell^+\\ell^-\\),\nwith \\(\\ell=e,\\mu\\).  It excludes the exclusive modes \\(B\\to K\\ell\\ell\\) and\n\\(B\\to K^*\\ell\\ell\\), and the LFU ratios \\(R_K\\) and \\(R_{K^*}\\), which are\nseparate catalog entries B016--B019.",
+    "pdg_prose": "The canonical sidecar value is the HFLAV December 2024 inclusive average,\n\\[\n  \\mathcal B(B\\to X_s\\ell^+\\ell^-)=(5.84\\pm0.69)\\times10^{-6},\n\\]\nwith the same table listing the PDG value\n\\((5.84^{+1.31}_{-1.23})\\times10^{-6}\\).  HFLAV combines the BaBar input\n\\((6.73^{+0.70}_{-0.64}{}^{+0.60}_{-0.56})\\times10^{-6}\\) and the Belle input\n\\((4.11\\pm0.83^{+0.85}_{-0.81})\\times10^{-6}\\); the source notes different\nlow-dilepton-mass thresholds and different charmonium treatments in\n\\texttt{references/B015/hflav\\_dec2024\\_B\\_to\\_Xsll.txt}.  For the standard\nperturbative bins, Huber--Hurth--Lunghi quote weighted experimental averages\nof \\((1.58\\pm0.37)\\times10^{-6}\\) for \\(1<q^2<6\\,\\mathrm{GeV}^2\\) and\n\\((0.48\\pm0.10)\\times10^{-6}\\) at high \\(q^2\\), as recorded in\n\\texttt{references/B015/huber\\_hurth\\_lunghi\\_1503\\_04849\\_arxiv.txt}.",
+    "relevance": "This is a \\(\\Delta B=1\\) semileptonic FCNC channel.  It probes flavor-changing\n\\(Z\\) couplings, electroweak-penguin matching, and dipole correlations with\n\\(b\\to s\\gamma\\), rather than the \\(\\Delta F=2\\) four-quark operators already\nused by the repo's neutral-meson constraints.  In RS/anarchic flavor it is most\nuseful as a diagnostic of semileptonic Wilson coefficients such as \\(C_7\\),\n\\(C_9\\), \\(C_{10}\\) and their chirality-flipped partners.",
+    "post_2008": "Since the CFW 2008 RS-flavor baseline, the inclusive channel has gained a\nBaBar measurement and a modern HFLAV average, but it remains statistics-limited\nand experimentally based on sum-of-exclusive reconstruction.  Theory has also\nmatured: the 2015 Huber--Hurth--Lunghi analysis includes NNLO QCD, NLO QED,\npower corrections, collinear-photon effects, and Belle II projections with\n\\(50\\,\\mathrm{ab}^{-1}\\).  Current inclusive branching fractions are\ncompatible with the SM within uncertainties; the sharper exclusive and LFU\nanomaly discussions belong in B016--B019.",
+    "validity": "The inclusive perturbative windows are cleaner than exclusive form-factor\nobservables, but a catalog single number is not a plug-in hard bound.  The\ninterpretation depends on \\(q^2\\) binning, charm-resonance vetoes, photon\ntreatment, and the mapping from RS flavor parameters to the \\(\\Delta B=1\\)\nweak Hamiltonian.  It is best classified as a theory-controlled but\nmode-calculation-limited rare-decay constraint.\n\nIn custodial RS, reduced \\(Z b_L b_L\\) pressure can make this observable\nrelatively more discriminating; quote RS bounds only after specifying\ncustodial protection, fermion embeddings, and brane kinetic terms.",
+    "code_coverage_prose": "\\textbf{NO.}  The modern phenomenology policy enumerates only\n\\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\) at\n\\texttt{quarkConstraints/modern/phenomenology.py:23}, and states that this is\npolicy-only rather than a numeric backend at\n\\texttt{quarkConstraints/modern/phenomenology.py:166}.  The only live lepton\nflavor routine found is \\(\\mu\\to e\\gamma\\) at\n\\texttt{flavorConstraints/muToEGamma.py:75}.  Required greps over\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no \\(b\\to s\\ell\\ell\\),\n\\(X_s\\ell\\ell\\), \\(C_9\\), or \\(C_{10}\\) implementation.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Production use would require a new \\(\\Delta B=1\\) semileptonic\noperator basis, matching and running for \\(C_7,C_9,C_{10}\\) plus primed\noperators, bin-aware SM predictions, charm/QED treatment, and an experimental\nlikelihood or covariance model.",
+    "key_references": "Process-local snapshots: HFLAV2024Dec:BtoXsll, BaBar2014:BtoXsll,\nBelle2005:BtoXsll, HuberHurthLunghi2015:BtoXsll, and\nCsakiFalkowskiWeiler2008:CompositeFlavor."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B015.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B015.tex",
+  "worklog_path": "flavor_catalog/worklogs/B015/"
+}

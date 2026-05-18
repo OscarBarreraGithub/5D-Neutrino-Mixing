@@ -1,0 +1,158 @@
+{
+  "process_id": "K005",
+  "family": "kaon",
+  "family_original": "kaon",
+  "tier": "PRIMARY",
+  "standard_notation": "K_L \\to \\pi^0 \\nu\\bar\\nu",
+  "process_name": "CP-violating rare neutral-kaon decay to pi0 plus neutrinos",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": "Requires a new Delta S = 1 semileptonic s->d nu nubar observable path and CP-odd K_L projection, but uses standard clean hadronic inputs and no new lattice, RG, or long-distance calculation has been identified.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "inspected_paths": [
+      "quarkConstraints/",
+      "qcd/",
+      "flavorConstraints/",
+      "neutrinos/",
+      "yukawa/",
+      "warpConfig/",
+      "solvers/",
+      "scanParams/",
+      "tests/"
+    ],
+    "grep_commands": [
+      "rg -n --glob '!*.ipynb' \"K_L\\s*->\\s*pi|K_L|KL|pi0\\s*nu|pi\\^0\\s*nu|nu\\s*nubar|nunu|KOTO|NA62|rare kaon\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests",
+      "rg -n --glob '!*.ipynb' \"s->d|s to d|sd|FCNC|Z penguin|penguin|semileptonic\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests"
+    ],
+    "evidence": [
+      "No implementation hit for K_L -> pi^0 nu nubar, KOTO, NA62, or s->d nu nubar rare-decay strings.",
+      "The only relevant K_L string hit was quarkConstraints/deltaf2.py:615, DELTA_M_K = 3.484e-15 GeV, a K_L-K_S mass-difference input, not this decay.",
+      "Related kaon Delta F=2 coverage exists in quarkConstraints/deltaf2.py and quarkConstraints/modern/phenomenology.py, but it is mixing-only."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2026_pdgLive_S013R40.txt": "sha256:9772703902465867a6be4f8abb2b3893f4aed60e43ade76cf191384ba66f2dfb",
+    "koto2025_prl134081802_arxiv2411_11237.txt": "sha256:97178b5f26d18e7dfd8986a665b4e6196ebd951d27582806d74e61dd877dcf7d",
+    "brod_gorbahn_stamou2021_arxiv2105_02868.txt": "sha256:864ac68f32c5fc9d1df086930b385481a32d2c37937b5d185341767e296c3dfb",
+    "buras_venturini2022_arxiv2203_10099.txt": "sha256:088ac9757e7a5aec4317393328329b29ede68d2f83868b8669f0de392e675dd1",
+    "na62_2026_arxiv2604_12649.txt": "sha256:a9c940a6313f26e602e8c863f1b143500fd16ba0c712e842ad1ed8716f34a17e",
+    "buchalla_buras1996_arxiv_hep-ph_9607447.txt": "sha256:1231c0cd072a1398ec4374f8a420e759f843943869073ccd01452547cf042a2c"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T11:04:18-04:00",
+      "timestamp": "2026-05-16T11:04:18-04:00",
+      "agent_id": "PKA-K005",
+      "reason": "initial K005 source extraction and raw process draft"
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "state": "PKA-DONE",
+      "at": "2026-05-16T11:05:58-04:00",
+      "timestamp": "2026-05-16T11:05:58-04:00",
+      "agent_id": "PKA-K005",
+      "reason": "raw PKA deposit complete"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:34:00-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:34:00-04:00",
+      "agent_id": "WA",
+      "reason": "Polished PKA draft for WA batch wa_wave1_kaon."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T11:46:24-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T11:46:24-04:00",
+      "agent_id": "CA",
+      "issues": [
+        "CHK-6: Implementation difficulty should be MEDIUM under the rubric. K005 needs a new s->d nu nubar semileptonic operator path and standard hadronic inputs, matching K004; no new lattice/RG/long-distance mode calculation is identified."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:54:07-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:54:07-04:00",
+      "agent_id": "WA-v2",
+      "reason": "Addressed CA CHK-6 by rerating K005 implementation difficulty from HIGH to MEDIUM."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:03:14-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:03:14-04:00",
+      "agent_id": "CA",
+      "reason": "CA batch ca_wave1_kaon_v2 verified WA-v2 rework for K005."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-kaon",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent_id": "factcheck-codex-kaon",
+      "reason": "Independent live-source fact-check completed for kaon family.",
+      "notes": "Live source fetch and local snapshot checks verified all value claims for this process."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(K_L \\to \\pi^0\\nu\\bar\\nu\\).  This entry covers the\nCP-violating neutral-kaon golden mode, a \\(\\Delta S=1\\) flavor-changing\nneutral-current decay with an invisible neutrino pair.  The process id is\n\\(K005\\).",
+    "pdg_prose": "The sidecar value is\n\\[\n  {\\cal B}(K_L^0 \\to \\pi^0\\nu\\bar\\nu) < 2.2\\times 10^{-9}\n  \\quad (90\\%~{\\rm CL}),\n\\]\nfrom the 2026 PDG pdgLive S013R40 table, traced to\n\\texttt{flavor\\_catalog/references/K005/pdg2026\\_pdgLive\\_S013R40.txt}.\nThe same sidecar records the direct KOTO 2025 input behind the PDG value:\nthe 2021 KOTO data set had expected background\n\\(0.252\\pm0.055_{\\rm stat}{}^{+0.052}_{-0.067}{}_{\\rm syst}\\), single-event\nsensitivity \\((9.33\\pm0.06_{\\rm stat}\\pm0.84_{\\rm syst})\\times10^{-10}\\),\nand zero signal-region events, yielding the same \\(2.2\\times10^{-9}\\) limit.\n\nFor SM comparison the sidecar gives two current theory benchmarks:\nBrod--Gorbahn--Stamou quote\n\\({\\cal B}_{\\rm SM}=2.59(29)\\times10^{-11}\\), while the\nBuras--Venturini \\(|V_{cb}|\\)- and \\(|V_{ub}|\\)-independent determination\nquotes \\((2.94\\pm0.15)\\times10^{-11}\\) under its no-new-physics assumptions\nin \\(|\\varepsilon_K|\\) and \\(S_{\\psi K_S}\\).  The related charged golden mode\nhas the 2026 NA62 value\n\\({\\cal B}(K^+\\to\\pi^+\\nu\\bar\\nu)=(9.6^{+1.9}_{-1.8})\\times10^{-11}\\),\nincluded only as program context and not as a direct K005 measurement.",
+    "relevance": "This mode is one of the cleanest probes of short-distance flavor violation:\nthe hadronic matrix element is tied to semileptonic kaon data, and the neutral\nmode isolates the imaginary part of the \\(s\\to d\\nu\\bar\\nu\\) amplitude.  In\nRS/anarchic-flavor language it tests flavor-changing \\(Z\\), \\(Z'\\), or other\nneutral-current couplings induced by fermion localization and KK mixing, plus\nloop-level contributions if the ultraviolet completion generates them.  It is\ntherefore complementary to \\(\\varepsilon_K\\): both are CP-sensitive kaon\nobservables, but K005 is a \\(\\Delta S=1\\) rare decay rather than a\n\\(\\Delta F=2\\) mixing constraint.",
+    "post_2008": "Since the Csaki--Falkowski--Weiler era, the experimental frontier moved from\nolder E391a/KOTO pilot limits to the KOTO direct search now mirrored by PDG.\nKOTO's 2025 PRL result improves the previous KOTO direct bound and reports a\nbackground expectation below one event for the 2021 analysis.  On the charged\nside, NA62 has moved \\(K^+\\to\\pi^+\\nu\\bar\\nu\\) from evidence/observation to a\ncombined 2016--2024 value with better-than-\\(20\\%\\) precision, sharpening the\ncross-check between the charged and neutral golden modes.  Theory updates also\nmatter: Brod--Gorbahn--Stamou updated the SM \\(K\\to\\pi\\nu\\bar\\nu\\) prediction,\nand Buras--Venturini recast the prediction in ratios designed to reduce\n\\(|V_{cb}|\\) and \\(|V_{ub}|\\) dependence.",
+    "validity": "The SM channel is short-distance dominated and unusually clean, but the\npresent catalog value is still an upper limit.  The interpretation is robust\nfor high-scale new physics that modifies semileptonic \\(s\\to d\\nu\\bar\\nu\\)\noperators.  It becomes model-dependent if the missing energy is a light\nnon-neutrino particle, if neutrino flavor structure is non-universal, or if a\nglobal kaon fit is used to correlate K005 with the charged mode.",
+    "code_coverage_prose": "\\textbf{NO.}  The PKA searched the requested code areas, excluding\nnotebooks, for \\(K_L\\to\\pi^0\\nu\\bar\\nu\\), KOTO, NA62, \\(s\\to d\\), penguin,\nand generic rare-kaon strings.  No rare-decay implementation was found.  The\nonly relevant \\(K_L\\) hit was the mixing input\n\\texttt{quarkConstraints/deltaf2.py:615} for \\(\\Delta m_K\\), and the broader\nkaon code is \\(\\Delta F=2\\) mixing machinery rather than a \\(\\Delta S=1\\)\nsemileptonic decay calculation.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  A production implementation would need a new\n\\(s\\to d\\nu\\bar\\nu\\) Wilson/operator path and the CP-odd \\(K_L\\) projection,\nbut the observable uses standard clean hadronic inputs.  No new lattice, RG, or\nlong-distance calculation has been identified; the existing audited code can\nsupply kaon-mixing context, but not the rare-decay observable itself.",
+    "key_references": "Process-local keys deposited in \\texttt{flavor\\_catalog/references/K005/}:\n\\texttt{PDG2026:K005}, \\texttt{KOTO2025:KLPi0NuNu},\n\\texttt{BrodGorbahnStamou2021:KPiNuNu},\n\\texttt{BurasVenturini2022:RareK}, \\texttt{NA622026:KPlusPiNuNu}, and\n\\texttt{BuchallaBuras1996:KPiNuNu}."
+  },
+  "source_yaml": "flavor_catalog/processes/kaon/K005.yaml",
+  "source_tex": "flavor_catalog/processes/kaon/K005.tex",
+  "worklog_path": "flavor_catalog/worklogs/K005/"
+}

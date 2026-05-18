@@ -1,0 +1,163 @@
+{
+  "process_id": "B005",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)",
+  "process_name": "Rare leptonic decay B_s0 -> mu+ mu-",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Focused grep for B_s.*mu, Bs.*mu, B0_s.*mu, mu+mu, mumu, C10, scalar/pseudoscalar, rare decay, and rare_decay in required implementation/test directories found no B_s0 -> mu+ mu- observable implementation.",
+      "quarkConstraints/deltaf2.py:239 defines the existing b_s input as B_s mixing, not B_s -> mu+ mu-.",
+      "quarkConstraints/deltaf2.py:922 defines evaluate_bs_mixing for Delta F = 2 B_s mixing.",
+      "quarkConstraints/modern/phenomenology.py:657 evaluates B_s mixing from the bridge match; no Delta B = 1 rare leptonic branch is present."
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"B_s.*mu|Bs.*mu|B0_s.*mu|mu\\\\+.*mu|mumu|muon.*muon|C_10|C10|scalar.*operator|pseudoscalar|rare decay|rare_decay\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:BsMuMu",
+      "observable": "BR(B_s0 -> mu+ mu-)",
+      "value": 3.34e-09,
+      "uncertainty": 2.7e-10,
+      "units": "branching fraction",
+      "display": null,
+      "year": null,
+      "experiment": null,
+      "source_url": null,
+      "snapshot_path": "flavor_catalog/references/B005/pdg_2026_bsmumu.txt",
+      "sha256": null,
+      "access_date": null,
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV2023:BsMuMu",
+      "observable": "BR(B_s0 -> mu+ mu-)",
+      "value": 3.45e-09,
+      "uncertainty": 2.9e-10,
+      "units": "branching fraction",
+      "display": null,
+      "year": null,
+      "experiment": null,
+      "source_url": null,
+      "snapshot_path": "flavor_catalog/references/B005/hflav_2023_bsmumu.txt",
+      "sha256": null,
+      "access_date": null,
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CzajaMisiak2024:BsMuMuSM",
+      "observable": "SM BR(B_s -> mu+ mu-)",
+      "value": 3.64e-09,
+      "uncertainty": 1.2e-10,
+      "units": "branching fraction",
+      "display": null,
+      "year": null,
+      "experiment": "Czaja and Misiak 2024",
+      "source_url": "https://arxiv.org/abs/2407.03810",
+      "snapshot_path": "flavor_catalog/references/B005/czaja_misiak_2407_03810_bsmumu_sm.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "atlas_1812_03017_bsmumu.txt": "sha256:9724967bfdd6abd69f3f7be384911b5288fdf372735c159c9dae402dbccbca2e",
+    "cfw_0804_1954_rs_flavor.txt": "sha256:c77d1c4b7347579c78d7f196bca9e2c09d6b70a9a88b1721c5a63db3ee176008",
+    "cms_2212_10311_bsmumu.txt": "sha256:b821377272dc3d3dd8f6d129de050940ba9f4cce40271c905bdaa90c22dc6095",
+    "czaja_misiak_2407_03810_bsmumu_sm.txt": "sha256:ab871a13e9b00043a36f8876b094588c03ab84673f26445c62a637f22349fdd6",
+    "hflav_2023_bsmumu.txt": "sha256:cb9109a94b5b51fda6057ec5250b4b2bede182e09c2d70418e6edc953178dafe",
+    "lhcb_2108_09283_bsmumu.txt": "sha256:fc1427e831e02c11fe09c6fcdd6c1c26893f0b54024f69bc0a1f2bb04afbc5fe",
+    "pdg_2026_bsmumu.txt": "sha256:c42edfb94b6a989935deb4f9a6c69762a49c063ce46d2e34466c3fbbbead8016"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T11:37:28-04:00",
+      "timestamp": "2026-05-16T11:37:28-04:00",
+      "agent_id": "PKA-B005",
+      "reason": "Initial PKA draft deposit for B_s0 -> mu+ mu-."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:15:35-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:15:35-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "WA polish for batch wa_w23_beauty completed."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:34:18-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:34:18-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_w23_beauty verified CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)\\).\nThis entry covers the time-integrated rare leptonic decay \\(B_s^0\\to\\mu^+\\mu^-\\),\na helicity-suppressed \\(b\\to s\\ell^+\\ell^-\\) flavor-changing neutral-current\nchannel.  It is distinct from the inclusive and exclusive semileptonic\n\\(b\\to s\\ell^+\\ell^-\\) entries because the final state is purely leptonic and\nthe leading hadronic input is the \\(B_s\\) decay constant.",
+    "pdg_prose": "The current PDG live/API value, accessed on 2026-05-16, is\n\\[\n  \\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)_{\\rm exp}\n  = (3.34\\pm0.27)\\times10^{-9}.\n\\]\nThe source key is \\texttt{PDG2026:BsMuMu}, with local snapshot\n\\texttt{flavor\\_catalog/references/B005/pdg\\_2026\\_bsmumu.txt}.  The 2024\nCzaja--Misiak SM-status review quotes the same weighted experimental average\nand gives the Standard Model prediction\n\\[\n  \\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)_{\\rm SM}\n  = (3.64\\pm0.12)\\times10^{-9}.\n\\]\nIts source key is \\texttt{CzajaMisiak2024:BsMuMuSM}.  The sidecar retains the\nolder HFLAV rare-decay average \\((3.45\\pm0.29)\\times10^{-9}\\) as auxiliary\nprovenance, together with CMS\n\\((3.83^{+0.38}_{-0.36}\\,{}^{+0.19}_{-0.16}\\,{}^{+0.14}_{-0.13})\\times10^{-9}\\),\nLHCb \\((3.09^{+0.46+0.15}_{-0.43-0.11})\\times10^{-9}\\), and ATLAS\n\\((2.8^{+0.8}_{-0.7})\\times10^{-9}\\) inputs under the\n\\texttt{HFLAV2023:BsMuMu}, \\texttt{CMS2023:BsMuMu},\n\\texttt{LHCb2022:BsMuMu}, and \\texttt{ATLAS2019:BsMuMu} source keys.",
+    "relevance": "This mode probes the short-distance \\(b\\to s\\mu^+\\mu^-\\) Hamiltonian in a clean\nsingle-number observable.  In anarchic RS scenarios, flavor-changing neutral\ngauge couplings, KK electroweak exchange, Higgs/radion scalar exchange, or\nleptoquark-like completions can shift axial-vector, scalar, and pseudoscalar\nWilson coefficients.  The scalar and pseudoscalar terms are especially\nimportant because they can remove the Standard Model helicity suppression and\nare prominent in large-\\(\\tan\\beta\\) supersymmetric or extended-Higgs\ninterpretations.",
+    "post_2008": "Since the arXiv:0804.1954 RS-flavor baseline, this channel changed from an\nupper-limit target into a precision observable.  LHCb and CMS first established\nthe decay, and the present average combines modern LHCb, CMS, and ATLAS inputs.\nCMS now reports the most precise single-experiment branching-fraction\nmeasurement, while LHCb provides a simultaneous branching-fraction and\neffective-lifetime analysis.  Theory has also improved: modern SM predictions\ninclude precise lattice \\(f_{B_s}\\), CKM inputs, electroweak and QCD\ncorrections, and the time-integration correction associated with the\n\\(B_s\\) width difference.",
+    "validity": "This is a robust short-distance rare-decay constraint, but it is not covered by\nthe repo's neutral-meson-mixing machinery.  The SM comparison is clean relative\nto angular \\(b\\to s\\ell\\ell\\) observables, yet it still depends on the\ndefinition of the time-integrated branching fraction, \\(f_{B_s}\\), CKM inputs,\nand the treatment of scalar and pseudoscalar operators.  It is directly useful\nfor models that predict \\(C_{10}^{(\\prime)}\\), \\(C_S^{(\\prime)}\\), or\n\\(C_P^{(\\prime)}\\), including scalar leptoquarks, \\(Z'\\) models, and\ntan-beta-enhanced Higgs sectors.",
+    "code_coverage_prose": "\\textbf{NO.}  The required catalog greps and a focused search for\n\\texttt{B\\_s.*mu}, \\texttt{mumu}, \\texttt{C10}, scalar/pseudoscalar rare-decay\nterms, and \\(b\\to s\\mu\\mu\\) found no live \\(B_s^0\\to\\mu^+\\mu^-\\) implementation\nin \\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, or \\texttt{tests/}.  The nearest\nrelated code is \\(B_s\\) mixing, e.g. \\texttt{quarkConstraints/deltaf2.py:239}\nand \\texttt{quarkConstraints/deltaf2.py:922}, which is a \\(\\Delta F=2\\)\nobservable rather than this \\(\\Delta B=1\\) decay.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  A catalog-to-code implementation needs a new \\(\\Delta B=1\\)\nleptonic rare-decay observable, Wilson conventions for\n\\(C_{10}^{(\\prime)}, C_S^{(\\prime)}, C_P^{(\\prime)}\\), and a branching-ratio\nformula with the \\(B_s\\) lifetime and width-difference convention.  It does not\nneed an angular likelihood or exclusive form factors, but a production-grade\nRS matching path would need carefully documented scalar and electroweak\noperator normalization.",
+    "key_references": "Process-local raw reference keys before bibliography consolidation:\n\\texttt{PDG2026:BsMuMu}, \\texttt{HFLAV2023:BsMuMu},\n\\texttt{CMS2023:BsMuMu}, \\texttt{LHCb2022:BsMuMu},\n\\texttt{ATLAS2019:BsMuMu}, \\texttt{CzajaMisiak2024:BsMuMuSM}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B005.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B005.tex",
+  "worklog_path": "flavor_catalog/worklogs/B005/"
+}

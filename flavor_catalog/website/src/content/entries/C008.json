@@ -1,0 +1,164 @@
+{
+  "process_id": "C008",
+  "family": "charm",
+  "family_original": "charm",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(D^+\\to\\pi^+e^\\pm\\mu^\\mp)",
+  "process_name": "LFV semileptonic charm decay D+ -> pi+ e mu",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Needs a new Delta C = 1 charged-LFV semileptonic operator basis plus a D+ -> pi+ e mu mode calculation with form factors, phase-space acceptance, and chirality conventions.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"D\\\\+.*pi\\\\+.*e.*mu|D\\\\^\\\\+.*pi\\\\^\\\\+.*e.*mu|D\\\\+.*pi\\\\+.*mu.*e|D\\\\^\\\\+.*pi\\\\^\\\\+.*mu.*e|pi\\\\+.*e\\\\+.*mu|pi\\\\+.*e-.*mu|semileptonic.*charm|rare.?charm|c.?->.?u.*e.*mu\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused implementation-dir search for D+ -> pi+ e mu and rare semileptonic charm patterns returned no matches.",
+      "quarkConstraints/deltaf2.py:252 and quarkConstraints/deltaf2.py:941 are D0 mixing hits, not D+ -> pi+ e mu.",
+      "quarkConstraints/modern/phenomenology.py:23 and quarkConstraints/modern/phenomenology.py:668 are D0 mixing policy/evaluator hits, not rare semileptonic charm.",
+      "flavorConstraints/muToEGamma.py:75 is the separate mu -> e gamma LFV dipole check."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:DPlusPiEMuPlus",
+      "observable": "BR(D+ -> pi+ e+ mu-)",
+      "value": 2.1e-07,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "PDG Live/API S031.110",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.110",
+      "snapshot_path": "flavor_catalog/references/C008/pdg2026_dplus_piplus_ep_mum_pdgLive.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "PDG2026:DPlusPiEMuMinus",
+      "observable": "BR(D+ -> pi+ e- mu+)",
+      "value": 2.2e-07,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "PDG Live/API S031.111",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.111",
+      "snapshot_path": "flavor_catalog/references/C008/pdg2026_dplus_piplus_em_mup_pdgLive.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "rs_baseline": {
+      "source": "Csaki, Falkowski, Weiler 2008",
+      "source_key": "CsakiFalkowskiWeiler2008:CompositeFlavor",
+      "year": 2008,
+      "use": "Historical RS/anarchic-flavor baseline for the post-2008 comparison; no measured C008 observable is taken from this source.",
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-16",
+      "snapshot_path": "flavor_catalog/references/C008/cfw2008_arxiv0804_1954.txt",
+      "sha256_of_text_snapshot": "sha256:431898148b09ea89c76d7ad41f12c704c19506d27050bde89dab46ef8b8d301d"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "babar2011_arxiv1107_4465.txt": "sha256:7615bb1fbf36b13a100c993532099e1400fbd2bf6234a0d1d4d0023b53813744",
+    "cfw2008_arxiv0804_1954.txt": "sha256:431898148b09ea89c76d7ad41f12c704c19506d27050bde89dab46ef8b8d301d",
+    "lhcb2021_arxiv2011_00217.txt": "sha256:ccf385471c7021b92ad44ecde8192170c02bc47bca342a2694da682b18d65358",
+    "pdg2026_dplus_piplus_em_mup_pdgLive.txt": "sha256:118afebb925f0dffab91a16185429fa0acd099f15b002345f3b985acabfa5e82",
+    "pdg2026_dplus_piplus_ep_mum_pdgLive.txt": "sha256:fda49cf83fefdbc7ff66fdd3b71f55865baf41a3dc2262ed3e723e0b083f40a1",
+    "sha256sums.txt": "sha256:c7f4279e862e0eba5a0a0ece793ff9a1572ec80f8f8b103747a98e0a6a36434f",
+    "source_manifest.yaml": "sha256:fc3fdb6fc7703d1c7e1dd088a9d7d9e81c357572c5c4b066b9d2f318997fb352"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:24:55-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:24:55-04:00",
+      "agent_id": "PKA-C008",
+      "reason": "Initial PKA source extraction and C008 draft deposit."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:46:21-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:46:21-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w5b_charm_edm",
+      "reason": "Writer polish completed for wa_w5b_charm_edm; numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T15:17:35-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T15:17:35-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_charm_edm",
+      "reason": "Checker verified CHK-1 through CHK-8 for ca_w5b_charm_edm."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charm",
+      "agent_id": "factcheck-codex-charm",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "PDG, LHCb 2021, and BABAR predecessor D+ -> pi+ e mu limits verified."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:}\n\\(\\mathcal{B}(D^+\\to\\pi^+e^+\\mu^-)\\) and\n\\(\\mathcal{B}(D^+\\to\\pi^+e^-\\mu^+)\\).  This entry covers the two\nopposite-sign charged-lepton-flavor-violating semileptonic charm decays\nusually summarized as \\(D^+\\to\\pi^+e^\\pm\\mu^\\mp\\).  Charge-conjugate\ndecays are implied by the experimental sources.",
+    "pdg_prose": "The sidecar sources \\texttt{PDG2026:DPlusPiEMuPlus} and\n\\texttt{PDG2026:DPlusPiEMuMinus}, PDG Live/API entries S031.110 and\nS031.111 accessed on 2026-05-16, list separate 90\\% C.L. upper limits:\n\\[\n  \\mathcal{B}(D^+\\to\\pi^+e^+\\mu^-) < 2.1\\times10^{-7},\n  \\qquad\n  \\mathcal{B}(D^+\\to\\pi^+e^-\\mu^+) < 2.2\\times10^{-7}.\n\\]\nBoth current limits come from \\texttt{LHCb2021:DPlusPiEMu}, a search in\n\\(1.6\\,{\\rm fb}^{-1}\\) of 2016 \\(pp\\) data.  The LHCb table gives companion\n95\\% C.L. limits of \\(2.3\\times10^{-7}\\) and \\(2.2\\times10^{-7}\\),\nrespectively.  The predecessor search \\texttt{BaBar2011:RareForbiddenCharm},\nusing \\(384\\,{\\rm fb}^{-1}\\), reported 90\\% C.L. limits of\n\\(2.9\\times10^{-6}\\) and \\(3.6\\times10^{-6}\\).  These values are traced to\n\\texttt{flavor\\_catalog/references/C008/pdg2026\\_dplus\\_piplus\\_ep\\_mum\\_pdgLive.txt},\n\\texttt{pdg2026\\_dplus\\_piplus\\_em\\_mup\\_pdgLive.txt},\n\\texttt{lhcb2021\\_arxiv2011\\_00217.txt}, and\n\\texttt{babar2011\\_arxiv1107\\_4465.txt}.",
+    "relevance": "This process tests a product of up-sector flavor violation and charged-lepton\nflavor violation: schematically, short-distance operators such as\n\\((\\bar u\\,\\Gamma c)(\\bar e\\,\\Gamma'\\mu)\\).  Minimal quark-only RS scans do\nnot generate a live constraint for this mode, but lepton-sector extensions\nwith nonuniversal KK gauge couplings, scalar exchange, or flavor-violating\nbrane terms can generate it.  It is therefore a useful catalog marker for a\nfuture combined quark-plus-lepton flavor backend rather than a current veto.",
+    "post_2008": "The arXiv:0804.1954 RS-flavor baseline\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor} predates the modern\nrare/forbidden semileptonic charm searches.  BaBar\n\\texttt{BaBar2011:RareForbiddenCharm} subsequently set or improved limits for\ncharged-charm LFV modes in \\(384\\,{\\rm fb}^{-1}\\).  LHCb\n\\texttt{LHCb2021:DPlusPiEMu} searched for 25 rare and forbidden \\(D^+\\) and\n\\(D_s^+\\) modes in 2016 data, found no significant deviation from background,\nand tightened the two C008 charge channels to the present\n\\(2\\times10^{-7}\\)-level limits.",
+    "validity": "The experimental limits are robust upper bounds on the listed exclusive\nbranching fractions.  Their interpretation as RS constraints is model\ndependent because the mapping requires a \\(\\Delta C=1\\), LFV semileptonic\noperator basis, \\(D\\to\\pi\\) form factors, lepton-chirality assumptions, and a\nphase-space treatment matching the LHCb analysis.  The Standard Model\nbackground for charged-LFV final states is negligible for catalog purposes.",
+    "code_coverage_prose": "\\textbf{NO.}  The sidecar \\texttt{code\\_coverage} block records the required\ncoverage greps over \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/}, plus a focused search for\n\\texttt{D+.*pi+.*e.*mu}, \\texttt{pi+.*e.*mu}, rare-charm, and\n\\texttt{c->u} LFV patterns, found no \\(D^+\\to\\pi^+e^\\pm\\mu^\\mp\\)\nimplementation.  Nearby hits are unrelated: \\(D^0\\) mixing appears at\n\\texttt{quarkConstraints/deltaf2.py:252} and\n\\texttt{quarkConstraints/deltaf2.py:941}, the modern policy lists only\n\\(D^0\\) mixing at \\texttt{quarkConstraints/modern/phenomenology.py:23} and\n\\texttt{quarkConstraints/modern/phenomenology.py:668}, and the implemented\nLFV observable is \\(\\mu\\to e\\gamma\\) at\n\\texttt{flavorConstraints/muToEGamma.py:75}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production implementation needs a new \\(\\Delta C=1\\)\nLFV semileptonic operator basis and a \\(D^+\\to\\pi^+e\\mu\\) branching-fraction\ncalculation with form factors, phase-space acceptance, and chirality\nconventions.  This is beyond adding an input to the existing \\(\\Delta F=2\\)\nor \\(\\mu\\to e\\gamma\\) paths.",
+    "key_references": "Process-local keys before bibliography consolidation:\n\\texttt{PDG2026:DPlusPiEMuPlus}, \\texttt{PDG2026:DPlusPiEMuMinus},\n\\texttt{LHCb2021:DPlusPiEMu}, \\texttt{BaBar2011:RareForbiddenCharm}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/charm/C008.yaml",
+  "source_tex": "flavor_catalog/processes/charm/C008.tex",
+  "worklog_path": "flavor_catalog/worklogs/C008/"
+}

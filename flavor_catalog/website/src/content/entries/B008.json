@@ -1,0 +1,250 @@
+{
+  "process_id": "B008",
+  "family": "secondary",
+  "family_original": "beauty",
+  "tier": "SECONDARY",
+  "standard_notation": "B_s \\to \\tau^+\\tau^-, B_d \\to \\tau^+\\tau^-",
+  "process_name": "Rare tauonic leptonic neutral-B decays",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": "Deferred by DA-4 (round_004_addendum_deferred_scope.md); Rare leptonic tau-mode tails; experimentally hard at LHCb due to neutrinos. Promoted in Wave-8 because: Top-tier; tau-specific scalar/pseudoscalar handle, sensitive to enhanced helicity in RS Yukawa structures. Lower implementation priority than Waves 1-7 PRIMARY entries.",
+  "promoted_in_wave": 8,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Focused B008 grep found no B_s/B_d -> tau+ tau- or b -> s,d tau+ tau- rare-leptonic observable implementation.",
+      "quarkConstraints/deltaf2.py:903 defines evaluate_bd_mixing, a Delta F = 2 B_d-mixing observable, not B_d -> tau+ tau-.",
+      "quarkConstraints/deltaf2.py:922 defines evaluate_bs_mixing, a Delta F = 2 B_s-mixing observable, not B_s -> tau+ tau-.",
+      "quarkConstraints/modern/phenomenology.py:646 and quarkConstraints/modern/phenomenology.py:657 evaluate B_d/B_s mixing from the bridge; no Delta B = 1 rare leptonic branch is present.",
+      "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an unrelated charged-lepton dipole constraint.",
+      "scanParams/README.md:161 mentions y_tau as a scan parameter, not a B -> tau tau observable."
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"B_s.*tau|Bs.*tau|B0_s.*tau|B_d.*tau|B0.*tau|B\\\\^0.*tau|tau\\\\+.*tau|tau.*tau|tautau|b[[:space:]-]*->[[:space:]-]*s.*tau|b[[:space:]-]*->[[:space:]-]*d.*tau|C_10|C10|C_S|C_P|pseudoscalar|scalar.*operator|rare_decay|rare decay|rare leptonic|dilepton|ditau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026_BsTauTau",
+      "observable": "BR(B_s0 -> tau+ tau-)",
+      "value": 0.0068,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": "<6.8e-3",
+      "year": 2026,
+      "experiment": "LHCb",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.130",
+      "snapshot_path": "flavor_catalog/references/B008/pdg_2026_bs_tautau.txt",
+      "sha256": "sha256:ef1c4ed4f001bc4d55293dc64a6ef7782a6ca9ffdc4308bad922dc581ea942fc",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "PDG2026_BdTauTau",
+      "observable": "BR(B0 -> tau+ tau-)",
+      "value": 0.0021,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": "<2.1e-3",
+      "year": 2026,
+      "experiment": "LHCb",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.336",
+      "snapshot_path": "flavor_catalog/references/B008/pdg_2026_bd_tautau.txt",
+      "sha256": "sha256:4f20e368d9103d807807793e18b81335931ed1c92621635718062e93aa5aeeb0",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "AubertEtAl2006_BdTauTau",
+      "observable": "BR(B0 -> tau+ tau-)",
+      "value": 0.0041,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": "<4.1e-3",
+      "year": 2006,
+      "experiment": "BABAR",
+      "source_url": "https://arxiv.org/abs/hep-ex/0511015",
+      "snapshot_path": "flavor_catalog/references/B008/arxiv_hep_ex_0511015_babar_bd_tautau.txt",
+      "sha256": "sha256:d0acf4944c8c9ce9ef62bde92a8bed25cdb8138d4ee4a94b302de84128d81645",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "observable": "LHCb B_s0/B0 -> tau+ tau- search dataset",
+      "integrated_luminosity": {
+        "value": 3,
+        "units": "fb^-1"
+      },
+      "center_of_mass_energies": {
+        "values": [
+          7,
+          8
+        ],
+        "units": "TeV"
+      },
+      "conditions": "2011 and 2012 pp collision data; tau^- -> pi^- pi^+ pi^- nu_tau reconstruction.",
+      "source_key": "AaijEtAl2017_BqTauTau",
+      "source_url": "https://arxiv.org/abs/1703.02508",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/B008/arxiv_1703_02508_lhcb_bq_tautau.txt",
+      "sha256_of_text_snapshot": "sha256:b2b79597fa8a10e2ee303038d47c18df439e4463c3b7ad3ebfb38a56883329c5"
+    }
+  ],
+  "paper_era_reference": {
+    "source": "Csaki, Falkowski, and Weiler 2008",
+    "source_key": "CsakiFalkowskiWeiler2008_RSFlavor",
+    "arxiv_id": "0804.1954",
+    "source_url": "https://arxiv.org/abs/0804.1954",
+    "access_date": "2026-05-17",
+    "context": "Perez-Randall/CFW-era warped-flavor baseline and RS-GIM flavor-constraint reference; theory context only, not an experimental observable.",
+    "snapshot_path": "flavor_catalog/references/B008/arxiv_0804_1954_cfw_rs_flavor.txt",
+    "sha256_of_text_snapshot": "sha256:abf3f9a1725ce7359d5648b4281994fe65fd36082c120f10a38e52ca0c3c4342"
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": [
+    {
+      "observable": "SM BR(B_s -> tau+ tau-)",
+      "value": 7.73e-07,
+      "uncertainty": 4.9e-08,
+      "units": "branching fraction",
+      "context": "Standard Model prediction from reduced-uncertainty B_s,d -> l+l- calculation.",
+      "source_key": "BobethEtAl2014_BqTauTauSM",
+      "source_url": "https://arxiv.org/abs/1311.0903",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/B008/arxiv_1311_0903_bobeth_bqll_sm.txt",
+      "sha256_of_text_snapshot": "sha256:dda74abee3205ed4b624a5a80c1c5712088b7ef9cf1af1ef15ac7e6f4ea28920"
+    },
+    {
+      "observable": "SM BR(B_d -> tau+ tau-)",
+      "value": 2.22e-08,
+      "uncertainty": 1.9e-09,
+      "units": "branching fraction",
+      "context": "Standard Model prediction from reduced-uncertainty B_s,d -> l+l- calculation.",
+      "source_key": "BobethEtAl2014_BqTauTauSM",
+      "source_url": "https://arxiv.org/abs/1311.0903",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/B008/arxiv_1311_0903_bobeth_bqll_sm.txt",
+      "sha256_of_text_snapshot": "sha256:dda74abee3205ed4b624a5a80c1c5712088b7ef9cf1af1ef15ac7e6f4ea28920"
+    },
+    {
+      "observable": "b -> s tau+ tau- new-physics sensitivity",
+      "context": "Theory motivation for retaining tauonic b -> s modes as SECONDARY probes in lepton-flavor-nonuniversal scenarios.",
+      "source_key": "CapdevilaEtAl2018_BSTauTauNP",
+      "source_url": "https://arxiv.org/abs/1712.01919",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/B008/arxiv_1712_01919_capdevila_bstautau_np.txt",
+      "sha256_of_text_snapshot": "sha256:add808af0a2046cde38fffd0390a2e3d9c819ddca7102f26c1203fe1208c1524"
+    },
+    {
+      "observable": "Indirect lifetime-ratio context for B_s -> tau tau new physics",
+      "context": "Bordone and Fernandez Navarro discuss indirect lifetime-ratio and DeltaGamma_s constraints and note that scalar operators can be chirally enhanced.",
+      "source_key": "BordoneNavarro2023_BSTauTauNP",
+      "source_url": "https://arxiv.org/abs/2307.07013",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/B008/arxiv_2307_07013_bordone_bstautau_np.txt",
+      "sha256_of_text_snapshot": "sha256:edfa45ee11d486e2aaee9d880186625f60866488cdb7318c6041a9d993b64bab"
+    }
+  ],
+  "post_2010_developments": null,
+  "source_shas": {
+    "arxiv_0804_1954_cfw_rs_flavor.txt": "sha256:abf3f9a1725ce7359d5648b4281994fe65fd36082c120f10a38e52ca0c3c4342",
+    "arxiv_1311_0903_bobeth_bqll_sm.txt": "sha256:dda74abee3205ed4b624a5a80c1c5712088b7ef9cf1af1ef15ac7e6f4ea28920",
+    "arxiv_1605_09637_babar_bktautau_related.txt": "sha256:864522f71bd7f3c3bb9878be932c1c36ac7c47878c8bc8521887e9647a9cf74f",
+    "arxiv_1703_02508_lhcb_bq_tautau.txt": "sha256:b2b79597fa8a10e2ee303038d47c18df439e4463c3b7ad3ebfb38a56883329c5",
+    "arxiv_1712_01919_capdevila_bstautau_np.txt": "sha256:add808af0a2046cde38fffd0390a2e3d9c819ddca7102f26c1203fe1208c1524",
+    "arxiv_2307_07013_bordone_bstautau_np.txt": "sha256:edfa45ee11d486e2aaee9d880186625f60866488cdb7318c6041a9d993b64bab",
+    "arxiv_hep_ex_0511015_babar_bd_tautau.txt": "sha256:d0acf4944c8c9ce9ef62bde92a8bed25cdb8138d4ee4a94b302de84128d81645",
+    "pdg_2026_bd_tautau.txt": "sha256:4f20e368d9103d807807793e18b81335931ed1c92621635718062e93aa5aeeb0",
+    "pdg_2026_bs_tautau.txt": "sha256:ef1c4ed4f001bc4d55293dc64a6ef7782a6ca9ffdc4308bad922dc581ea942fc"
+  },
+  "source_shas_count": 9,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "DRAFT",
+      "state": "DRAFT",
+      "at": "2026-05-17T02:14:12-04:00",
+      "timestamp": "2026-05-17T02:14:12-04:00",
+      "agent_id": "PKA-B008",
+      "reason": "Wave-8 SECONDARY B008 draft shell opened with source and coverage collection."
+    },
+    {
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-17T02:14:12-04:00",
+      "timestamp": "2026-05-17T02:14:12-04:00",
+      "agent_id": "PKA-B008",
+      "reason": "Initial PKA draft, source snapshots, coverage grep, and sidecar completed."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-17T02:37:14-04:00",
+      "timestamp": "2026-05-17T02:37:14-04:00",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "WA Wave-8 B-rare-leptonic polish and sidecar normalization."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-17T02:51:07-04:00",
+      "timestamp": "2026-05-17T02:51:07-04:00",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA Wave-8 B-rare-leptonic cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w8_B_rare_leptonic.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T14:31:04-04:00",
+      "agent_id": "Opus-round-4",
+      "round_id": "opus_round_004",
+      "reason": "Opus round 4 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_004_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T14:31:05-04:00",
+      "agent_id": "factcheck-codex-beauty-w8",
+      "agent": "factcheck-codex-beauty-w8",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-8 SECONDARY fact-check addendum (factcheck_beauty.md)."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(B_s^0 \\to \\tau^+\\tau^-\\) and\n\\(B^0 \\to \\tau^+\\tau^-\\).  This entry covers the rare tauonic leptonic\nneutral-\\(B\\) decays, i.e. the \\(b\\to s\\tau^+\\tau^-\\) and\n\\(b\\to d\\tau^+\\tau^-\\) purely leptonic tails.  Experimentally these modes are\nhard because both taus decay with missing neutrinos; the current direct limits\ncome from tau reconstruction in the \\(3\\pi\\nu_\\tau\\) channel.",
+    "pdg_prose": "The canonical PDG live/API values, accessed 2026-05-17, are upper limits:\n\\[\n  {\\cal B}(B_s^0\\to\\tau^+\\tau^-) < 6.8\\times10^{-3}\\quad(95\\%\\ {\\rm CL}),\n\\]\nassuming no contribution from \\(B^0\\to\\tau^+\\tau^-\\), and\n\\[\n  {\\cal B}(B^0\\to\\tau^+\\tau^-) < 2.1\\times10^{-3}\\quad(95\\%\\ {\\rm CL}),\n\\]\nassuming no contribution from \\(B_s^0\\to\\tau^+\\tau^-\\).  Both entries trace to\nthe LHCb 2017 PRL search, using \\(pp\\) data at 7 and 8 TeV.  The sidecar stores\nthese upper limits in \\texttt{pdg\\_or\\_equivalent}; dataset metadata and\ntheory predictions are intentionally kept in auxiliary fields following the\nCHK-1 carve-out precedent.",
+    "relevance": "This Wave-8 entry is tagged \\textbf{SECONDARY}; see\n\\texttt{flavor\\_catalog/PRIORITY\\_TIERS.md} for the tier policy.  The mode is\nsecondary because the direct limits are still far above the Standard Model\nexpectation and are experimentally difficult, but it is a useful tau-specific\nhandle on scalar and pseudoscalar structures.  In warped/anarchic-flavor\nmodels, fermion localization and Yukawa misalignment can induce flavor-changing\n\\(Z\\), Higgs, or heavy-electroweak/Kaluza--Klein exchange contributions to the\n\\(\\Delta B=1\\) Wilson coefficients \\(C_{10}\\), \\(C_S\\), and \\(C_P\\).  The tau\nmass weakens the helicity suppression relative to electron and muon final\nstates, and scalar/pseudoscalar operators can produce especially large effects.\nKK-gluon exchange is more directly constrained by \\(B_{s,d}\\) mixing, but the\nsame flavor rotations and localization choices feed the rare leptonic channel.\nDipole operators are not the leading pure-leptonic contribution, yet they are\npart of the same RS flavor-misalignment diagnostic suite.",
+    "post_2008": "Relative to the Csaki--Falkowski--Weiler/Perez--Randall-era flavor literature,\nthe decisive experimental update is the LHCb search\narXiv:1703.02508, published as PRL 118, 251802.  It used \\(3\\,{\\rm fb}^{-1}\\)\nof 2011--2012 data and tau reconstruction through\n\\(\\tau^-\\to\\pi^-\\pi^+\\pi^-\\nu_\\tau\\), setting the first direct\n\\(B_s^0\\to\\tau^+\\tau^-\\) limit and the strongest \\(B^0\\to\\tau^+\\tau^-\\)\nlimit at publication.  The older BABAR direct \\(B^0\\) result,\narXiv:hep-ex/0511015, remains useful history but is superseded in PDG by LHCb.\nThe BABAR arXiv:1605.09637 result is a related \\(B^+\\to K^+\\tau^+\\tau^-\\)\nsemileptonic input, not the B008 neutral-leptonic observable.\n\nOn the theory side, Bobeth et al. arXiv:1311.0903 supplied the\nreduced-uncertainty SM normalization for \\(B_{s,d}\\to\\ell^+\\ell^-\\) modes.\nCapdevila et al. arXiv:1712.01919 showed why \\(b\\to s\\tau^+\\tau^-\\) can remain\na high-leverage new-physics probe in lepton-flavor-nonuniversal scenarios.\nBordone and Fernandez Navarro arXiv:2307.07013 connected \\(b\\to s\\tau\\tau\\)\nnew physics to \\(\\tau_{B_s}/\\tau_{B_d}\\) and \\(\\Delta\\Gamma_s\\), emphasizing\nthat scalar operators make \\(B_s\\to\\tau^+\\tau^-\\) particularly sensitive\nthrough chiral enhancement.",
+    "validity": "Class: upper-limit and model-dependent for new-physics interpretation.  The\nexperimental limits are robust as one-mode-at-a-time upper limits, but they are\nnot measurements of a branching fraction and should not be treated as Gaussian\naverages.  A simultaneous RS scan with both \\(B_s^0\\) and \\(B^0\\) tauonic\ndecays would ideally use a two-dimensional likelihood or reproduce the LHCb\nassumptions, because each quoted limit assumes the other neutral mode is absent.\nTheory translation requires a consistent normalization for time-integrated\nbranching fractions, tau-mass phase space, and \\(C_{10}\\), \\(C_S\\), and\n\\(C_P\\) Wilson coefficients.",
+    "code_coverage_prose": "\\textbf{NO.}  The required coverage greps across\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, and \\texttt{tests/} found no B008\nrare-leptonic implementation.  Existing hits cover \\(B_d\\) and \\(B_s\\)\n\\(\\Delta F=2\\) mixing\n(\\texttt{quarkConstraints/deltaf2.py:903} and\n\\texttt{quarkConstraints/deltaf2.py:922}), bridge wrappers for the same mixing\nobservables (\\texttt{quarkConstraints/modern/phenomenology.py:646} and\n\\texttt{quarkConstraints/modern/phenomenology.py:657}), an unrelated\n\\(\\mu\\to e\\gamma\\) routine (\\texttt{flavorConstraints/muToEGamma.py:75}), and\na scan-parameter example involving \\(y_\\tau\\) (\\texttt{scanParams/README.md:161}).\nThey do not implement a \\(B_{s,d}\\to\\tau^+\\tau^-\\) branching ratio, a\n\\(b\\to s,d\\,\\tau^+\\tau^-\\) likelihood, or a tauonic \\(C_{10}\\), \\(C_S\\), or\n\\(C_P\\) rare-decay evaluator.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  A catalog-level constraint can be built from the standard\npure-leptonic \\(B_q\\to\\ell^+\\ell^-\\) formula with tau-mass phase space,\ntime-integration conventions, and scalar/pseudoscalar Wilson coefficients.\nThis is more work than wiring a published average, but it avoids the exclusive\nform-factor and angular-analysis machinery needed for semileptonic\n\\(b\\to s\\tau^+\\tau^-\\) modes.  A faithful reproduction of the experimental\ntwo-mode likelihood would raise the difficulty.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026\\_BsTauTau}, \\texttt{PDG2026\\_BdTauTau},\n\\texttt{AaijEtAl2017\\_BqTauTau}, \\texttt{AubertEtAl2006\\_BdTauTau},\n\\texttt{LeesEtAl2017\\_BKTauTauRelated}, \\texttt{BobethEtAl2014\\_BqTauTauSM},\n\\texttt{CapdevilaEtAl2018\\_BSTauTauNP},\n\\texttt{BordoneNavarro2023\\_BSTauTauNP}, and\n\\texttt{CsakiFalkowskiWeiler2008\\_RSFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/secondary/beauty/B008.yaml",
+  "source_tex": "flavor_catalog/processes/secondary/beauty/B008.tex",
+  "worklog_path": "flavor_catalog/worklogs/B008/"
+}

@@ -1,0 +1,321 @@
+{
+  "process_id": "CR001",
+  "family": "collider_rs",
+  "family_original": "collider_rs",
+  "tier": "PRIMARY",
+  "standard_notation": "pp -> g_KK^(1) -> t tbar",
+  "process_name": "KK-gluon resonance in t-tbar",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires external collider-recast machinery or collaboration likelihoods, including signal generation, top-tagging efficiencies, acceptance, resolution, width and interference dependence, and benchmark-specific branching assumptions.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "grep_commands": [
+      "rg -n \"KK.?gluon|g_?KK|Kaluza.?Klein.*gluon|Randall.?Sundrum|bulk RS|warped extra|extra dimension|RS resonance|custodial.?RS|custodial RS\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"ttbar|t\\\\bar\\{t\\}|tbar|top.?anti|top.?quark.?pair|top.?pair|resonance|heavy.?gluon|vector.?like|T_?5/?3|T5/3|CheckMATE|MadAnalysis|SModelS|LHC\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"M_?KK|MKK|Mkk|KK|mKK|M_KK|min|p50|ratio|bound\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "Direct collider-search query returned no matches for ttbar/top-pair resonance/LHC/recast tooling terms.",
+      "Adjacent low-energy KK-gluon code exists: quarkConstraints/couplings.py:1 and quarkConstraints/deltaf2.py:1 define KK-gluon flavor couplings and Delta F=2 matching.",
+      "The quark scan computes M_KK and evaluates Delta F=2 ratios at quarkConstraints/scan.py:359-380, but it does not apply an LHC direct-search filter.",
+      "quarkConstraints/modern/matching.py:241-243 explicitly describes the modern bridge as a wrapper over compact KK-gluon formulas, not a full operator-complete EFT/RG package."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "CMS2026:CR001:gkk_ttbar_mass_exclusion",
+      "observable": "Excluded RS KK-gluon mass interval in pp -> g_KK -> t tbar",
+      "value": 5.5,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "0.5 < m(g_KK) < 5.5 TeV excluded",
+      "year": 2026,
+      "experiment": "CMS",
+      "source_url": "https://arxiv.org/abs/2603.23454",
+      "snapshot_path": "flavor_catalog/references/CR001/cms_2026_arxiv2603_23454.txt",
+      "sha256": "sha256:c8991eda19167e18c3e31b54027eebc86fc7466b4159781e95dddd50e09b613c",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "95% CL mass exclusion interval upper edge; interpreted as lower bound above the excluded interval for this benchmark"
+    },
+    {
+      "label": "CMS2019:CR001:gkk_ttbar_mass_exclusion",
+      "observable": "Excluded RS KK-gluon mass interval in pp -> g_KK -> t tbar",
+      "value": 4.55,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "0.50 < m(g_KK) < 4.55 TeV excluded",
+      "year": 2019,
+      "experiment": "CMS",
+      "source_url": "https://arxiv.org/abs/1810.05905",
+      "snapshot_path": "flavor_catalog/references/CR001/cms_2019_arxiv1810_05905.txt",
+      "sha256": "sha256:93a713d209e4b05fd9ea8e0d921a880709278a0cce4ff23c1950eff10dcfd42b",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "historical 95% CL mass exclusion interval upper edge"
+    },
+    {
+      "label": "PDGLive2026:CR001:s071kkg_aaboud2018bi",
+      "observable": "PDG Live S071KKG RS KK-gluon mass lower bound",
+      "value": 3.8,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m(g_KK) > 3.8 TeV",
+      "year": 2026,
+      "experiment": "ATLAS",
+      "source_url": "https://pdglive.lbl.gov/DataBlock.action?node=S071KKG",
+      "snapshot_path": "flavor_catalog/references/CR001/pdg_live_2026_s071kkg.txt",
+      "sha256": "sha256:b0d08fb66567cc22c0020d6dee55761ff2c733458e80c2da689a272c62704490",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "review-table lower limit"
+    },
+    {
+      "label": "ATLAS2013:CR001:gkk_ttbar_mass_exclusion",
+      "observable": "Excluded RS KK-gluon masses in ATLAS 7 TeV lepton+jets search",
+      "value": 2.07,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m(g_KK) < 2.07 TeV excluded",
+      "year": 2013,
+      "experiment": "ATLAS",
+      "source_url": "https://arxiv.org/abs/1305.2756",
+      "snapshot_path": "flavor_catalog/references/CR001/atlas_2013_arxiv1305_2756.txt",
+      "sha256": "sha256:0f2049c8120ce935f7f7a9a0464f23f2006ec1927c8a00fcceaed7513019e817",
+      "access_date": "2026-05-17",
+      "cl": "95% credibility level",
+      "limit_type": "historical 95% credibility-level mass exclusion"
+    },
+    {
+      "label": "ATLAS2012:CR001:gkk_ttbar_mass_exclusion",
+      "observable": "Excluded RS KK-gluon masses in ATLAS boosted 7 TeV lepton+jets search",
+      "value": 1.5,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m(g_KK) < 1.5 TeV excluded",
+      "year": 2012,
+      "experiment": "ATLAS",
+      "source_url": "https://arxiv.org/abs/1207.2409",
+      "snapshot_path": "flavor_catalog/references/CR001/atlas_2012_arxiv1207_2409.txt",
+      "sha256": "sha256:79a0e8ade861cbba8ee8775df6cee090170ac89b6d4bef6360bb396eead71234",
+      "access_date": "2026-05-17",
+      "cl": "95% credibility level",
+      "limit_type": "historical 95% credibility-level mass exclusion"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "label": "CMS-B2G-25-009 dataset and topology metadata",
+      "experiment": "CMS",
+      "year": 2026,
+      "integrated_luminosity": 138,
+      "integrated_luminosity_units": "fb^-1",
+      "sqrt_s": 13,
+      "sqrt_s_units": "TeV",
+      "final_states": "0-, 1-, and 2-lepton ttbar channels",
+      "source_key": "CMS2026_TTbarResonance",
+      "source_url": "https://arxiv.org/abs/2603.23454",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR001/cms_2026_arxiv2603_23454.txt",
+      "sha256": "sha256:c8991eda19167e18c3e31b54027eebc86fc7466b4159781e95dddd50e09b613c"
+    },
+    {
+      "label": "ATLAS 2025 one- and two-lepton Run-2 search metadata",
+      "experiment": "ATLAS",
+      "year": 2025,
+      "integrated_luminosity": 140,
+      "integrated_luminosity_units": "fb^-1",
+      "sqrt_s": 13,
+      "sqrt_s_units": "TeV",
+      "search_mass_range": "0.4-5.0 TeV",
+      "source_key": "ATLAS2025_TTbarResonance",
+      "source_url": "https://arxiv.org/abs/2512.17856",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR001/atlas_2025_arxiv2512_17856.txt",
+      "sha256": "sha256:42a7a121cfa19e0eef64909c5ef68f9697b6adfbbb2484a3713afe0310ab4d5a"
+    },
+    {
+      "label": "ATLAS 2020 fully hadronic Run-2 search metadata",
+      "experiment": "ATLAS",
+      "year": 2020,
+      "integrated_luminosity": 139,
+      "integrated_luminosity_units": "fb^-1",
+      "sqrt_s": 13,
+      "sqrt_s_units": "TeV",
+      "optimized_mass_threshold": "above 1.4 TeV",
+      "source_key": "ATLAS2020_HadronicTTbar",
+      "source_url": "https://arxiv.org/abs/2005.05138",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR001/atlas_2020_arxiv2005_05138.txt",
+      "sha256": "sha256:45373c5fb42054c2b6231c7a67b9ede00be32141a602020e7213c56584d15c22"
+    },
+    {
+      "label": "ATLAS 2018 lepton-plus-jets search metadata",
+      "experiment": "ATLAS",
+      "year": 2018,
+      "integrated_luminosity": 36.1,
+      "integrated_luminosity_units": "fb^-1",
+      "sqrt_s": 13,
+      "sqrt_s_units": "TeV",
+      "source_key": "ATLAS2018_LeptonJetsTTbar",
+      "source_url": "https://arxiv.org/abs/1804.10823",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR001/atlas_2018_arxiv1804_10823.txt",
+      "sha256": "sha256:33690b9dca47ea2d4e9776e24a9b0d2af11f4831b2e8646d8ab021f20a84f1b5"
+    }
+  ],
+  "paper_era_reference": {
+    "lillie_randall_wang_2007": {
+      "source": "Lillie, Randall, and Wang, The Bulk RS KK-gluon at the LHC",
+      "arxiv_id": "hep-ph/0701166",
+      "doi": "10.1088/1126-6708/2007/09/074",
+      "source_type": "theory baseline and discovery-reach estimate; not a measured observable",
+      "relevance": "Identifies the KK gluon as primarily decaying to top quarks and motivates boosted-top reconstruction for heavy RS resonances.",
+      "discovery_reach_context": {
+        "value": 5,
+        "units": "TeV",
+        "qualifier": "conservative discovery reach estimate under assumed top-tagging background rejection",
+        "not_promoted_reason": "theory/projection input, not a measured limit"
+      },
+      "source_url": "https://arxiv.org/abs/hep-ph/0701166",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR001/lillie_randall_wang_2007_arxiv_hepph0701166.txt",
+      "sha256": "sha256:1fc300c3daf8352f1550334b1f8ab090ccd4530ea08c4214ce1143016db918da"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": {
+    "quark_scan_methodology_mkk": {
+      "source": "docs/quark_scan_methodology_note.tex",
+      "source_type": "local methodology note / upstream scan result; not a measured observable",
+      "relevance": "Low-energy anarchic-RS comparison scale for why direct collider searches are cross-checks rather than leading constraints.",
+      "values": [
+        {
+          "label": "RUNA p50 M_KK^min at g_s*=3",
+          "value": 47.26,
+          "units": "TeV"
+        },
+        {
+          "label": "RUNA p95 M_KK^min at g_s*=3",
+          "value": 127.13,
+          "units": "TeV"
+        }
+      ],
+      "source_url": "docs/quark_scan_methodology_note.tex",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR001/quark_scan_methodology_note_mkk_extract.txt",
+      "sha256": "sha256:61b363781fba58ab7069d9f234029f09524a3ecfdebbf7ec08a4414de082a975"
+    }
+  },
+  "post_2010_developments": null,
+  "source_shas": {
+    "atlas_2012_arxiv1207_2409.txt": "sha256:79a0e8ade861cbba8ee8775df6cee090170ac89b6d4bef6360bb396eead71234",
+    "atlas_2013_arxiv1305_2756.txt": "sha256:0f2049c8120ce935f7f7a9a0464f23f2006ec1927c8a00fcceaed7513019e817",
+    "atlas_2018_arxiv1804_10823.txt": "sha256:33690b9dca47ea2d4e9776e24a9b0d2af11f4831b2e8646d8ab021f20a84f1b5",
+    "atlas_2020_arxiv2005_05138.txt": "sha256:45373c5fb42054c2b6231c7a67b9ede00be32141a602020e7213c56584d15c22",
+    "atlas_2025_arxiv2512_17856.txt": "sha256:42a7a121cfa19e0eef64909c5ef68f9697b6adfbbb2484a3713afe0310ab4d5a",
+    "cms_2017_arxiv1704_03366.txt": "sha256:e2db7db3408a434393f1b0a743ef792a1c2dfad6503fd849ad683af069a92465",
+    "cms_2019_arxiv1810_05905.txt": "sha256:93a713d209e4b05fd9ea8e0d921a880709278a0cce4ff23c1950eff10dcfd42b",
+    "cms_2026_arxiv2603_23454.txt": "sha256:c8991eda19167e18c3e31b54027eebc86fc7466b4159781e95dddd50e09b613c",
+    "hepdata_2026_ins3134005_record_extract.json": "sha256:d93d5f27a9d9bdd00ef91cb27b3c925edf4a4a9aa352e9efd48aa589f67f459a",
+    "lillie_randall_wang_2007_arxiv_hepph0701166.txt": "sha256:1fc300c3daf8352f1550334b1f8ab090ccd4530ea08c4214ce1143016db918da",
+    "pdg_live_2026_s071kkg.txt": "sha256:b0d08fb66567cc22c0020d6dee55761ff2c733458e80c2da689a272c62704490",
+    "quark_scan_methodology_note_mkk_extract.txt": "sha256:61b363781fba58ab7069d9f234029f09524a3ecfdebbf7ec08a4414de082a975"
+  },
+  "source_shas_count": 12,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T16:37:14-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T16:37:14-04:00",
+      "agent_id": "PKA-CR001",
+      "reason": "Initial Wave-9 collider_rs PRIMARY draft skeleton and source research started."
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T16:37:14-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T16:37:14-04:00",
+      "agent_id": "PKA-CR001",
+      "reason": "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T17:08:57-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T17:08:57-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "WA-w9-kk-gauge cycle-1 writer polish for Wave-9 collider_rs PRIMARY batch."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-17T17:33:37-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T17:33:37-04:00",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA-w9-kk-gauge cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w9_kk_gauge.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T19:30:00-04:00",
+      "agent_id": "Opus-round-5",
+      "round_id": "opus_round_005",
+      "reason": "Opus round 5 per-process sign-off for Wave-9 collider_rs PRIMARY entries; CA-verified PASS retained; see flavor_catalog/signoff/round_005_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T19:30:01-04:00",
+      "agent_id": "factcheck-codex-collider_rs-w9",
+      "agent": "factcheck-codex-collider_rs-w9",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-9 collider_rs family fact-check (factcheck_collider_rs.md)."
+    }
+  ],
+  "sections": {
+    "process": "This entry covers direct LHC resonance searches for the first color-octet\nKaluza--Klein gluon in warped extra dimensions, in the standard topology\n\\(pp\\to g^{(1)}_{\\rm KK}\\to t\\bar t\\).  It is a high-mass tail search for a\nspin-1 KK gauge resonance, not a low-energy flavor observable and not a\nseparate vector-like-partner search.",
+    "pdg_prose": "The current best direct \\(t\\bar t\\) benchmark bound is the CMS Run-2\nall-topology search CMS-B2G-25-009, \\texttt{arXiv:2603.23454}.  Using\n\\(138\\,{\\rm fb}^{-1}\\) of \\(13\\) TeV data and the 0-, 1-, and 2-lepton\n\\(t\\bar t\\) final states, CMS finds no significant excess and excludes the\nRandall--Sundrum KK-gluon benchmark over \\(0.5<m_{g_{\\rm KK}}<5.5\\) TeV at\n95\\% CL.  The sidecar records this as the canonical current lower edge,\n\\(m_{g_{\\rm KK}}>5.5\\) TeV for this benchmark, with the interval wording kept\nexplicit in \\texttt{pdg\\_or\\_equivalent.values}.\n\nPDG Live entry \\texttt{S071KKG} is still useful as a review-table snapshot but\nis not the latest LHC result for this topology.  It lists the older\nATLAS lepton-plus-jets benchmark value \\(m_{g_{\\rm KK}}>3.8\\) TeV at 95\\% CL\nfor a \\(\\Gamma/m=15.3\\%\\) warped-extra-dimension benchmark.  CMS\n\\texttt{arXiv:1810.05905} superseded that scale in a 2016-data combination\nwith \\(0.50<m_{g_{\\rm KK}}<4.55\\) TeV excluded, and CMS-B2G-25-009 is the\ncurrent best result.",
+    "relevance": "The search constrains the physical first KK-gluon resonance mass in a specified\nRS collider benchmark: production through the color-octet vector state,\ntemplate assumptions for its width and couplings, and a large branching\nfraction to \\(t\\bar t\\).  This is the canonical collider signature of bulk RS\nbecause the IR-localized top quark couples strongly to the KK gluon.\n\nFor the anarchic-flavor scan in this repository, the direct reach is not the\nleading mass constraint.  The methodology note's RUNA reference scan gives\n\\(\\MKKmin(p50,\\gsstar=3)=47.26\\) TeV and\n\\(\\MKKmin(p95,\\gsstar=3)=127.13\\) TeV from low-energy \\(\\Delta F=2\\) flavor\nconstraints.  A \\(5.5\\) TeV direct \\(g_{\\rm KK}\\to t\\bar t\\) exclusion is\ntherefore mainly a cross-check for the anarchic pipeline and a useful handle on\nnon-anarchic, aligned, or otherwise collider-visible RS variants where the\nflavor bound is weakened.",
+    "post_2008": "The collider history starts from the Lillie--Randall--Wang boosted-top\nproposal, \\texttt{hep-ph/0701166}, which identified \\(g_{\\rm KK}\\to t\\bar t\\)\nas the characteristic bulk-RS LHC signal.  Post-2010 searches improved by\nraising the collision energy, adding luminosity, and extending top-tagging\nacross boosted decay topologies.\n\nATLAS \\texttt{arXiv:1207.2409} used \\(2.05\\,{\\rm fb}^{-1}\\) at 7 TeV and\nexcluded \\(m_{g_{\\rm KK}}<1.5\\) TeV, establishing the boosted lepton-plus-jets\nstrategy.  ATLAS \\texttt{arXiv:1305.2756} used the full 2011\n\\(4.7\\,{\\rm fb}^{-1}\\) 7 TeV sample and pushed the broad RS KK-gluon exclusion\nto \\(m_{g_{\\rm KK}}<2.07\\) TeV.  Early 13 TeV CMS work,\n\\texttt{arXiv:1704.03366}, combined boosted lepton-plus-jets and fully\nhadronic channels and improved sensitivity above 2 TeV.\n\nATLAS \\texttt{arXiv:1804.10823} used \\(36.1\\,{\\rm fb}^{-1}\\) at 13 TeV in the\nlepton-plus-jets channel; this is the ATLAS result behind the PDG Live\n\\(3.8\\) TeV benchmark row.  CMS \\texttt{arXiv:1810.05905} then combined the\ndilepton, single-lepton, and all-hadronic \\(t\\bar t\\) topologies in\n\\(35.9\\,{\\rm fb}^{-1}\\), excluding \\(0.50<m_{g_{\\rm KK}}<4.55\\) TeV.  ATLAS\n\\texttt{arXiv:2005.05138} brought the all-hadronic channel to the\n\\(139\\,{\\rm fb}^{-1}\\) Run-2 scale, while ATLAS \\texttt{arXiv:2512.17856}\nupdated one- and two-lepton final states with \\(140\\,{\\rm fb}^{-1}\\) and\nexplicit KK-gluon templates over a \\(0.4\\)--\\(5.0\\) TeV search range.  CMS\n\\texttt{arXiv:2603.23454} is the current full-Run-2 all-topology update and\nsets the \\(5.5\\) TeV limit used here.",
+    "validity": "The limit is not a model-independent lower bound on every RS \\(M_{\\rm KK}\\).\nIt assumes the signal model used by the experimental template: the KK-gluon\nproduction rate, width, chiral couplings, and \\(t\\bar t\\) branching fraction.\nIf the KK gluon has sizable decays to vector-like quarks, other BSM states, or\nlight-flavor channels, the \\(t\\bar t\\) branching fraction and line shape change.\nVery broad resonances, interference with SM \\(t\\bar t\\), or altered light-quark\ncouplings also require reinterpretation rather than direct use of the quoted\nmass edge.\n\nFor custodial RS, this entry constrains the KK gauge resonance sector.  It does\nnot by itself constrain custodial fermion partners such as \\(T_{5/3}\\); those\nrequire separate heavy-partner searches and branching assumptions.",
+    "code_coverage_prose": "\\textbf{NO} for a direct-collider \\(g_{\\rm KK}\\to t\\bar t\\) constraint.  The\ndirect-search grep over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\texttt{ttbar}, top-pair-resonance, LHC, CheckMATE,\nMadAnalysis5, or SModelS implementation.\n\nThere is adjacent low-energy KK-gluon infrastructure only:\n\\texttt{quarkConstraints/couplings.py:1} defines mass-basis KK-gluon couplings,\n\\texttt{quarkConstraints/deltaf2.py:1} describes a tree-level KK-gluon-inspired\n\\(\\Delta F=2\\) matching layer, and \\texttt{quarkConstraints/scan.py:359-380}\ncomputes \\(M_{\\rm KK}\\) and evaluates flavor diagnostics.  The modern matching\nwrapper also states that it is not a full operator-complete EFT/RG package\n(\\texttt{quarkConstraints/modern/matching.py:241-243}).  None of these files\nimplements a collider likelihood or filters scan points on direct LHC\nresonance exclusions.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A live constraint would need either the experimental likelihood\nor an external reinterpretation chain such as CheckMATE, MadAnalysis5, SModelS,\nor a dedicated recast using generated \\(pp\\to g_{\\rm KK}\\to t\\bar t\\) samples,\ntop-tagging efficiencies, mass-resolution effects, and width/interference\nsystematics.  A simple mass cut would be acceptable only as a documented\nbenchmark overlay, not as a robust constraint on the general RS parameter\nspace.",
+    "key_references": "\\texttt{CMS2026\\_TTbarResonance}; \\texttt{HEPData2026\\_CMSB2G25009};\n\\texttt{PDGLive2026\\_S071KKG}; \\texttt{CMS2019\\_TTbarResonance};\n\\texttt{ATLAS2025\\_TTbarResonance}; \\texttt{ATLAS2020\\_HadronicTTbar};\n\\texttt{ATLAS2018\\_LeptonJetsTTbar}; \\texttt{ATLAS2013\\_LeptonJetsTTbar};\n\\texttt{ATLAS2012\\_BoostedTTbar}; \\texttt{CMS2017\\_BoostedTTbar};\n\\texttt{LillieRandallWang2007\\_BulkRSKKGluon};\n\\texttt{QuarkScanMethodology2026\\_MKK}."
+  },
+  "source_yaml": "flavor_catalog/processes/collider_rs/CR001.yaml",
+  "source_tex": "flavor_catalog/processes/collider_rs/CR001.tex",
+  "worklog_path": "flavor_catalog/worklogs/CR001/"
+}

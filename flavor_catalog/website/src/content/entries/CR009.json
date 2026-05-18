@@ -1,0 +1,363 @@
+{
+  "process_id": "CR009",
+  "family": "collider_rs",
+  "family_original": "collider_rs",
+  "tier": "PRIMARY",
+  "standard_notation": "pp -> l+ l- (high-mass tail, EFT contact-operator)",
+  "process_name": "Drell-Yan high-mass tail as EFT contact-operator bound",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a binned high-mass dilepton likelihood or external reinterpretation, RS neutral-vector matching to semileptonic SMEFT operators, PDF/electroweak systematics, and EFT-validity/resonance-region logic.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n -i \"drell|dilepton|high[- ]mass|contact interaction|compositeness|llqq|four[- ]fermion|dy tail\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -i \"ATLAS|CMS|HEPData|CheckMATE|MadAnalysis|SModelS|Delphes|Pythia|MadGraph|collider\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -i \"M_KK|MKK|Mkk|min.*KK|KK.*min|mkk_min|MKKmin|scan.*mass|constraint.*scale|bound\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "No Drell-Yan, dilepton-tail, contact-interaction, llqq, four-fermion collider, or dy-tail implementation was found.",
+      "No collider reinterpretation tools or hooks (CheckMATE, MadAnalysis, SModelS, Delphes, Pythia, MadGraph) were found.",
+      "The only ATLAS/CMS-oriented grep hit in the second query was unrelated: tests/test_alpha_s.py:88-89 names a CMS/RunDec alpha_s example.",
+      "Adjacent code computes M_KK and low-energy Delta F=2 constraints: quarkConstraints/scan.py:359, quarkConstraints/scan.py:376, quarkConstraints/scan.py:377, quarkConstraints/scan.py:379, quarkConstraints/deltaf2.py:320."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2025:CR009:ATLAS_LL_constructive",
+      "observable": "llqq contact-interaction scale Lambda, combined dielectron+dimuon LL constructive",
+      "value": 35.8,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "Lambda_LL^+ > 35.8 TeV",
+      "year": 2025,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf",
+      "snapshot_path": "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt",
+      "sha256": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR009:ATLAS_LL_destructive",
+      "observable": "llqq contact-interaction scale Lambda, combined dielectron+dimuon LL destructive",
+      "value": 26.0,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "Lambda_LL^- > 26.0 TeV",
+      "year": 2025,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf",
+      "snapshot_path": "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt",
+      "sha256": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR009:ATLAS_RR_constructive",
+      "observable": "llqq contact-interaction scale Lambda, combined dielectron+dimuon RR constructive",
+      "value": 35.5,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "Lambda_RR^+ > 35.5 TeV",
+      "year": 2025,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf",
+      "snapshot_path": "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt",
+      "sha256": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR009:ATLAS_RR_destructive",
+      "observable": "llqq contact-interaction scale Lambda, combined dielectron+dimuon RR destructive",
+      "value": 26.5,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "Lambda_RR^- > 26.5 TeV",
+      "year": 2025,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf",
+      "snapshot_path": "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt",
+      "sha256": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR009:ATLAS_LR_constructive",
+      "observable": "llqq contact-interaction scale Lambda, combined dielectron+dimuon LR constructive",
+      "value": 32.5,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "Lambda_LR^+ > 32.5 TeV",
+      "year": 2025,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf",
+      "snapshot_path": "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt",
+      "sha256": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR009:ATLAS_LR_destructive",
+      "observable": "llqq contact-interaction scale Lambda, combined dielectron+dimuon LR destructive",
+      "value": 28.8,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "Lambda_LR^- > 28.8 TeV",
+      "year": 2025,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf",
+      "snapshot_path": "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt",
+      "sha256": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR009:CMS_LL_destructive_range_endpoint",
+      "observable": "llqq contact-interaction scale Lambda, CMS lower endpoint, LL destructive",
+      "value": 23.9,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "Lambda_LL > 23.9 TeV",
+      "year": 2025,
+      "experiment": "CMS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf",
+      "snapshot_path": "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt",
+      "sha256": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR009:CMS_RR_constructive_range_endpoint",
+      "observable": "llqq contact-interaction scale Lambda, CMS upper endpoint, RR constructive",
+      "value": 36.4,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "Lambda_RR > 36.4 TeV",
+      "year": 2025,
+      "experiment": "CMS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-searches-quark-lep-compositeness.pdf",
+      "snapshot_path": "flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt",
+      "sha256": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "label": "ATLAS full-Run-2 dataset for non-resonant dilepton search",
+      "observable": "integrated luminosity",
+      "value": 139,
+      "uncertainty": null,
+      "units": "fb^-1",
+      "sqrt_s": "13 TeV",
+      "year": 2020,
+      "experiment": "ATLAS",
+      "context": "Dataset metadata for the ATLAS contact-interaction limit; not a measured exclusion value by itself.",
+      "source_key": "ATLAS2020_NonResonantDilepton",
+      "source_url": "https://arxiv.org/abs/2006.12946",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR009/atlas_2020_arxiv2006_12946.txt",
+      "sha256": "sha256:cd56f8c2c1c155051723b91995c317eb127efc3fbe78ae806a9ddb7677522c46"
+    },
+    {
+      "label": "CMS full-Run-2 dataset for high-mass dilepton search",
+      "observable": "integrated luminosity",
+      "value": 140,
+      "uncertainty": null,
+      "units": "fb^-1",
+      "sqrt_s": "13 TeV",
+      "year": 2021,
+      "experiment": "CMS",
+      "context": "Dataset metadata for the CMS contact-interaction limit; not a measured exclusion value by itself.",
+      "source_key": "CMS2021_HighMassDilepton",
+      "source_url": "https://arxiv.org/abs/2103.02708",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR009/cms_2021_arxiv2103_02708.txt",
+      "sha256": "sha256:86d64fe46b86d3db0883b2bdcdb4cfec71c0908ae07165b5022b8c2c255dfd28"
+    }
+  ],
+  "paper_era_reference": {
+    "rs_low_energy_reach_context": {
+      "source": "docs/quark_scan_methodology_note.tex",
+      "source_type": "local methodology note; scan-result context, not a measured collider observable",
+      "relevance": "Provides the low-energy anarchic-flavor reach used for CR009 comparison.",
+      "values": [
+        {
+          "observable": "M_KK^{min,p50} at g_s*=3",
+          "value": 47.26,
+          "units": "TeV"
+        },
+        {
+          "observable": "M_KK^{min,p95} at g_s*=3",
+          "value": 127.13,
+          "units": "TeV"
+        }
+      ],
+      "local_source_path": "docs/quark_scan_methodology_note.tex",
+      "local_source_lines": "587-590, 701-704",
+      "sha256": "sha256:334d639d4167b4c721e700fbb0047cd26cd7a8fab9453a321e6afb6cbe6a6c75"
+    },
+    "contact_scale_to_rs_vector_matching": {
+      "source": "CR009 PKA matching note",
+      "source_type": "theory interpretation; not a measured observable",
+      "relation": "4*pi/Lambda^2 ~ |g_q g_l|/M_V^2",
+      "relevance": "Explains why the contact scale is not directly an RS vector mass limit."
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": {
+    "falkowski_gonzalez_alonso_mimouni_2017": {
+      "source": "Falkowski, Gonzalez-Alonso, and Mimouni, arXiv:1706.03783",
+      "source_type": "SMEFT four-fermion low-energy constraints reference; not a measured collider limit",
+      "relevance": "Historical and operator-basis context for four-fermion SMEFT constraints.",
+      "source_url": "https://arxiv.org/abs/1706.03783",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR009/smeft_theory_arxiv_extracts.txt",
+      "sha256": "sha256:4b987de74219295241b15648cbc37909da8ee02809a78109a4861d96b3a45d31"
+    },
+    "dawson_giardino_ismail_2018": {
+      "source": "Dawson, Giardino, and Ismail, arXiv:1811.12260",
+      "source_type": "high-energy Drell-Yan SMEFT interpretation; not a measured collider limit",
+      "relevance": "Explains dominance of tree-level four-fermion operators in high-energy Drell-Yan SMEFT sensitivity.",
+      "source_url": "https://arxiv.org/abs/1811.12260",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR009/smeft_theory_arxiv_extracts.txt",
+      "sha256": "sha256:4b987de74219295241b15648cbc37909da8ee02809a78109a4861d96b3a45d31"
+    }
+  },
+  "post_2010_developments": null,
+  "source_shas": {
+    "atlas_2020_arxiv2006_12946.txt": "sha256:cd56f8c2c1c155051723b91995c317eb127efc3fbe78ae806a9ddb7677522c46",
+    "cms_2021_arxiv2103_02708.txt": "sha256:86d64fe46b86d3db0883b2bdcdb4cfec71c0908ae07165b5022b8c2c255dfd28",
+    "cms_hepdata_2021_ci_limits_extract.txt": "sha256:280013778ae9413022a5d0cbc5dcbb5fb362bd531081d64c243faeea365e0590",
+    "lhc_search_history_arxiv_abstracts.txt": "sha256:0e6adb017fd4a65b07998d5c321c7c525de7c8b8d4ec50dc56b20e66de6b624c",
+    "pdg2025_compositeness_extract.txt": "sha256:4bed92264b2c443f758c60b368f854341d3183ca53329f09fd0ff3157f591f37",
+    "smeft_theory_arxiv_extracts.txt": "sha256:4b987de74219295241b15648cbc37909da8ee02809a78109a4861d96b3a45d31"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T16:33:27-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T16:33:27-04:00",
+      "agent_id": "PKA-CR009",
+      "reason": "Initial CR009 Wave-9 PRIMARY collider_rs source research and draft started."
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T16:33:27-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T16:33:27-04:00",
+      "agent_id": "PKA-CR009",
+      "reason": "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T17:45:00-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T17:45:00-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "Writer polish for WA-w9-ew-tail batch; TeX, CHK-1 placement, and code-evidence claims normalized."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-17T18:05:00-04:00",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-17T18:05:00-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA-w9-ew-tail cycle 1 found CHK-1 measured historical contact-limit ranges outside pdg_or_equivalent.values; see flavor_catalog/worklogs/checker/ca_w9_ew_tail.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T18:06:00-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T18:06:00-04:00",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 fix: CHK-1: removed historical contact-interaction range numerals per T003 precedent."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T18:19:04-04:00",
+      "agent": "CA-v2",
+      "agent_id": "CA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 PASS after WA-v2 fix; see flavor_catalog/worklogs/checker/ca_w9_ew_tail_v2.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T19:30:00-04:00",
+      "agent_id": "Opus-round-5",
+      "round_id": "opus_round_005",
+      "reason": "Opus round 5 per-process sign-off for Wave-9 collider_rs PRIMARY entries; CA-verified PASS retained; see flavor_catalog/signoff/round_005_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T19:30:01-04:00",
+      "agent_id": "factcheck-codex-collider_rs-w9",
+      "agent": "factcheck-codex-collider_rs-w9",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-9 collider_rs family fact-check (factcheck_collider_rs.md)."
+    }
+  ],
+  "sections": {
+    "process": "This entry covers the neutral-current Drell--Yan high-mass tail,\n\\(pp\\to \\ell^+\\ell^-+X\\) with \\(\\ell=e,\\mu\\), interpreted as a\nmodel-independent four-fermion contact interaction between light quarks and\ncharged leptons.  The collider signature is a smooth excess or deficit in the\ndilepton invariant-mass distribution rather than a narrow resonance.  In the\ncollider-RS catalog this is the nonresonant neutral-vector tail that\ncomplements explicit KK-vector resonance and partner searches.",
+    "pdg_prose": "The current PDG summary of quark and lepton compositeness quotes the\nfull-Run-2 ATLAS dielectron+dimuon contact-interaction limits as the highest\nsingle-experiment reach in the conventional \\(g_{\\rm contact}^2=4\\pi\\)\nnormalization.  For the left-left model, ATLAS obtains\n\\(\\Lambda_{\\rm LL}^{+}>35.8~\\mathrm{TeV}\\) for constructive interference and\n\\(\\Lambda_{\\rm LL}^{-}>26.0~\\mathrm{TeV}\\) for destructive interference at\n95\\% CL.  The same PDG paragraph gives \\(\\Lambda_{\\rm RR}^{+}>35.5~\\mathrm{TeV}\\),\n\\(\\Lambda_{\\rm RR}^{-}>26.5~\\mathrm{TeV}\\), \\(\\Lambda_{\\rm LR}^{+}>32.5~\\mathrm{TeV}\\),\nand \\(\\Lambda_{\\rm LR}^{-}>28.8~\\mathrm{TeV}\\)\n(\\texttt{pdg2025\\_compositeness\\_extract.txt}).\n\nCMS provides the independent full-Run-2 cross-check using up to\n140~\\(\\mathrm{fb}^{-1}\\) at 13 TeV.  Its published contact-interaction\nlimits range from about \\(23.8\\)--\\(23.9~\\mathrm{TeV}\\) to\n\\(36.4~\\mathrm{TeV}\\), depending on the helicity current and interference\nsign (\\texttt{cms\\_2021\\_arxiv2103\\_02708.txt}).  The HEPData record supplies\nthe structured limit tables and the binned inputs needed for any serious\nreinterpretation (\\texttt{cms\\_hepdata\\_2021\\_ci\\_limits\\_extract.txt}).",
+    "relevance": "In a 5D RS interpretation, this is primarily a constraint on neutral heavy\nvector exchange that induces semileptonic operators of the form\n\\((\\bar q\\gamma_\\mu q)(\\bar\\ell\\gamma^\\mu\\ell)\\).  It is not a direct\nKK-gluon mass limit, since a color-octet KK gluon does not mediate\n\\(\\ell^+\\ell^-\\) at tree level.  It constrains the electroweak KK tower, a\n\\(Z^\\prime\\)-like custodial vector, or a more generic compositeness sector\nonly after specifying the light-quark and lepton couplings.\n\nWith the usual contact-interaction convention,\n\\(4\\pi/\\Lambda^2 \\sim |g_q g_\\ell|/M_V^2\\).  Therefore the ATLAS\n\\(\\Lambda_{\\rm LL}^{+}>35.8~\\mathrm{TeV}\\) limit corresponds only\nschematically to\n\\[\n  M_V \\gtrsim \\sqrt{|g_q g_\\ell|/(4\\pi)}\\,35.8~\\mathrm{TeV},\n\\]\nnot to a universal \\(35.8~\\mathrm{TeV}\\) resonance mass bound.  For\n\\(|g_q g_\\ell|\\sim 1\\), this is an \\(O(10~\\mathrm{TeV})\\) neutral-vector\nscale; for strongly coupled light fermions it can be higher, while for\nUV-localized light fermions it is weaker.  The quark-scan methodology note\nalready finds the low-energy anarchic-flavor median scale\n\\(\\Mkk^{\\min,p50}=47.26~\\mathrm{TeV}\\) at \\(\\gs=3\\), with a\n95\\%-acceptance crossing at \\(127.13~\\mathrm{TeV}\\).  CR009 is therefore a\ncross-check and a handle on non-anarchic or non-universal RS variants, not the\nleading anarchic-flavor constraint.",
+    "post_2008": "The LHC history is a steady increase in energy, luminosity, and analysis\nsophistication.  ATLAS started with 7 TeV dielectron and dimuon data in\narXiv:1112.4462, establishing early LL isoscalar contact-scale sensitivity.\nATLAS then used the 8 TeV dilepton spectrum and forward-backward asymmetry in\narXiv:1407.2410, improving the same contact-interaction program.  CMS's 8 TeV\nspectrum analysis in arXiv:1412.6302 provided comparable same-flavor contact\nlimits and model-independent resonance information.\n\nRun 2 changed the reach.  ATLAS's first 13 TeV result with 3.2\n\\(\\mathrm{fb}^{-1}\\), arXiv:1607.03669, extended the early Run-2\nsensitivity.  The 36.1 \\(\\mathrm{fb}^{-1}\\) ATLAS search,\narXiv:1707.02424, and CMS's 36 \\(\\mathrm{fb}^{-1}\\) result,\narXiv:1812.10443, pushed the model-dependent reach into higher\ntens-of-TeV \\(\\Lambda\\) scales in comparable patterns.  The current\nfull-Run-2 anchors are ATLAS arXiv:2006.12946 and CMS arXiv:2103.02708.\n\nThe SMEFT literature clarified how to use these tails.  Falkowski,\nGonzalez-Alonso, and Mimouni compiled low-energy four-fermion constraints in\narXiv:1706.03783, while later high-energy Drell--Yan SMEFT work treats the\ntails as energy-growing probes of semileptonic dimension-six operators\n(\\texttt{smeft\\_theory\\_arxiv\\_extracts.txt}).",
+    "validity": "The quoted \\(\\Lambda\\) limits are measured exclusions, but the map to RS is\nnot model-independent.  The experimental interpretation assumes a particular\nhelicity current, an interference sign, and the conventional\n\\(g_{\\rm contact}^2=4\\pi\\) normalization.  The CMS combination assumes a\nuniversal contact interaction for electrons and muons.  ATLAS and CMS also\nuse different background strategies, and the high-mass tail is sensitive to\nPDF and electroweak corrections.\n\nFor RS, the largest ambiguity is the light-fermion coupling pattern.  A\nminimal light-fermion UV localization suppresses the contact operator, while\nnon-anarchic lepton localization, partial compositeness of light quarks, or an\nextra neutral vector with sizable dilepton branching can make the bound much\nmore relevant.  EFT validity also requires the mediator to be heavier than the\ndilepton masses driving the fit; otherwise the correct object is a resonance\nor broad-resonance likelihood, not the contact-limit number alone.",
+    "code_coverage_prose": "\\textbf{NO}.  The required grep over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no Drell--Yan, dilepton-tail, contact-interaction,\ncollider-reinterpretation, CheckMATE, MadAnalysis5, SModelS, Delphes,\nPythia, or MadGraph implementation.  The only \\texttt{CMS} match was the\nunrelated RunDec alpha-s test at \\texttt{tests/test\\_alpha\\_s.py:88}.\n\nAdjacent evidence shows that the scan computes \\(M_{KK}\\) and low-energy\n\\(\\Delta F=2\\) ratios, not collider direct-search filters:\n\\texttt{quarkConstraints/scan.py:359} maps \\(\\Lambda_{\\rm IR}\\) to \\(M_{KK}\\),\n\\texttt{quarkConstraints/scan.py:376} evaluates flavor diagnostics,\n\\texttt{quarkConstraints/scan.py:377} calls the \\(\\Delta F=2\\) evaluator, and\n\\texttt{quarkConstraints/deltaf2.py:320} states that the implemented\nWilsons are tree-level KK-gluon-inspired \\(\\Delta F=2\\) coefficients matched\nat \\(M_{KK}\\).",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  Recording the bound is easy; using it as a live scan\nconstraint is not.  A faithful implementation would need either a public\nlikelihood or a recreated binned dilepton-tail likelihood with correlations,\nPDF and electroweak systematics, an RS-to-SMEFT matching layer for the\nneutral electroweak KK vectors, and validity logic deciding when a point\nshould be treated as a contact interaction rather than a resolved resonance.\nExternal reinterpretation infrastructure such as MadAnalysis5, CheckMATE, or\na dedicated high-\\(p_T\\) SMEFT tool would be the pragmatic route.",
+    "key_references": "\\texttt{PDG2025\\_QuarkLeptonCompositeness};\n\\texttt{ATLAS2020\\_NonResonantDilepton};\n\\texttt{CMS2021\\_HighMassDilepton};\n\\texttt{CMS2021\\_HEPData\\_CILimits};\n\\texttt{FalkowskiGonzalezAlonsoMimouni2017\\_SMEFT4F};\n\\texttt{DawsonGiardinoIsmail2018\\_DYSMEFT}."
+  },
+  "source_yaml": "flavor_catalog/processes/collider_rs/CR009.yaml",
+  "source_tex": "flavor_catalog/processes/collider_rs/CR009.tex",
+  "worklog_path": "flavor_catalog/worklogs/CR009/"
+}

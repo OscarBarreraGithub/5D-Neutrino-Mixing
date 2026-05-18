@@ -1,0 +1,124 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props as Props;
+
+// Pull catalog summary once for header chips.
+import index from '../content/catalog_index.json';
+const totalEntries: number = index.total_entries;
+const verdictCounts: Record<string, number> = index.verdict_counts;
+const verifiedCount = verdictCounts.VERIFIED ?? 0;
+const partialCount = verdictCounts.PARTIAL ?? 0;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+
+    <!-- KaTeX (CDN to avoid bundling fonts during scaffold) -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+          integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+          crossorigin="anonymous" />
+
+    <!-- Apply persisted theme before paint to avoid flash. -->
+    <script is:inline>
+      (function () {
+        try {
+          // ?theme=light|dark wins (useful for screenshot/share links)
+          var qp = new URLSearchParams(window.location.search).get('theme');
+          if (qp === 'light' || qp === 'dark') {
+            document.documentElement.dataset.theme = qp;
+            return;
+          }
+          var saved = localStorage.getItem('fcat-theme');
+          var sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.dataset.theme = saved || sys;
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <span class="site-title"><a href="/">Flavor Catalog</a></span>
+        <span class="site-version">v0.4</span>
+        <div class="site-stats">
+          <span><strong>{totalEntries}</strong> entries</span>
+          <span class="badge badge-verified">{verifiedCount} V</span>
+          {partialCount > 0 && <span class="badge badge-partial">{partialCount} P</span>}
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            <span id="theme-toggle-icon">o</span>
+            <span id="theme-toggle-label">Theme</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Phase 1 scaffold &middot; 102-entry catalog snapshot at tag <code>flavor-catalog-v0.4</code> &middot; Branch <code>flavor-catalog-website/2026q2</code>.</p>
+      </div>
+    </footer>
+
+    <!-- KaTeX auto-render at runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+            integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+            crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+            integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+            crossorigin="anonymous" defer></script>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        function applyTheme(t) {
+          document.documentElement.dataset.theme = t;
+          try { localStorage.setItem('fcat-theme', t); } catch (e) {}
+          var icon = document.getElementById('theme-toggle-icon');
+          var label = document.getElementById('theme-toggle-label');
+          if (icon)  icon.textContent  = (t === 'dark') ? '*' : 'o';
+          if (label) label.textContent = (t === 'dark') ? 'Dark' : 'Light';
+        }
+        var btn = document.getElementById('theme-toggle');
+        if (btn) {
+          applyTheme(document.documentElement.dataset.theme || 'light');
+          btn.addEventListener('click', function () {
+            var cur = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+            applyTheme(cur === 'dark' ? 'light' : 'dark');
+          });
+        }
+
+        function runKatex() {
+          if (typeof window.renderMathInElement !== 'function') {
+            setTimeout(runKatex, 80);
+            return;
+          }
+          window.renderMathInElement(document.body, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '\\[', right: '\\]', display: true },
+              { left: '$', right: '$', display: false },
+              { left: '\\(', right: '\\)', display: false }
+            ],
+            throwOnError: false,
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          });
+        }
+        runKatex();
+      });
+    </script>
+  </body>
+</html>

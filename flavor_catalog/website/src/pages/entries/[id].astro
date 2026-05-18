@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badges from '../../components/Badges.astro';
+import { getCollection } from 'astro:content';
+
+// Static-routing: generate one page per ingested entry JSON.  We key on the
+// canonical process_id (e.g. "K001") from the YAML payload rather than on the
+// loader-derived id, because the JSON-glob loader lowercases filenames.
+export async function getStaticPaths() {
+  const all = await getCollection('entries');
+  return all.map((e) => ({
+    params: { id: e.data.process_id },
+    props: { entryData: e.data },
+  }));
+}
+
+const { entryData } = Astro.props as { entryData: any };
+const d: any = entryData;
+
+// Repo blob URL helper for code-coverage evidence ("path/to/file.py:42").
+const REPO = 'OscarBarreraGithub/5D-Neutrino-Mixing';
+const BRANCH = 'flavor-catalog-website/2026q2';
+function blobUrl(evidence: string): string {
+  // "path/to/file.py:42 some description." -> path + line
+  const m = evidence.match(/^([^\s:]+):(\d+)/);
+  if (!m) return `https://github.com/${REPO}/tree/${BRANCH}/`;
+  const file = m[1];
+  const line = m[2];
+  return `https://github.com/${REPO}/blob/${BRANCH}/${file}#L${line}`;
+}
+
+const sections = d.sections ?? {};
+const cov = d.code_coverage ?? null;
+const evidence: string[] = Array.isArray(cov?.evidence) ? cov.evidence : [];
+
+// Render a LaTeX fragment inline as $...$ if it looks like math.
+// Plain prose strings (e.g. "BR(K_L -> e mu)") are returned verbatim so
+// KaTeX auto-render doesn't mangle them.
+function inlineMath(s?: string | null): string {
+  if (!s) return '';
+  const trimmed = s.trim();
+  if (!trimmed) return '';
+  // If author already wrapped in $...$ or \(...\), emit as-is.
+  if (trimmed.startsWith('$') || trimmed.startsWith('\\(')) return trimmed;
+  // Heuristic: wrap if the string contains LaTeX-command escapes (\foo)
+  // or curly-brace-style sub/superscripts (^{...} or _{...}).
+  const looksMath = /\\[A-Za-z]+|[\^_]\{|\^\\|\^[A-Za-z0-9]/.test(trimmed);
+  return looksMath ? `$${trimmed}$` : trimmed;
+}
+
+const title = `${d.process_id} -- ${d.process_name ?? d.standard_notation ?? ''}`;
+const familyLabel = d.family;
+---
+<BaseLayout title={title}>
+
+  <header class="entry-header">
+    <div class="breadcrumbs">
+      <a href="/">Catalog</a> &middot;
+      <a href={`/families/${d.family}/`}>{familyLabel}</a> &middot;
+      <code>{d.process_id}</code>
+    </div>
+    <h1>
+      <span class="process-id">{d.process_id}</span>
+      <span set:html={`<span>${inlineMath(d.standard_notation)}</span>`}></span>
+      <Badges kind="tier" value={d.tier} />
+    </h1>
+    {d.process_name && <span class="process-name">{d.process_name}</span>}
+  </header>
+
+  <div class="status-row">
+    <span class="status-label">Status</span>
+    {d.latest_status === 'OPUS-APPROVED' || d.latest_status === 'FACT-CHECKED'
+      ? <Badges kind="opus" />
+      : <span class="badge badge-unknown">{d.latest_status ?? 'UNKNOWN'}</span>}
+    <Badges kind="verdict" value={d.fact_check_verdict} />
+    <Badges kind="difficulty" value={d.implementation_difficulty} />
+    <Badges kind="coverage" value={d.code_coverage_status} />
+    {typeof d.cycle_count === 'number' && (
+      <span class="status-group">
+        <span class="status-label">Cycle</span>
+        <span class="badge badge-unknown">{d.cycle_count}</span>
+      </span>
+    )}
+    {d.owner && (
+      <span class="status-group">
+        <span class="status-label">Owner</span>
+        <span class="badge badge-unknown">{d.owner}</span>
+      </span>
+    )}
+  </div>
+
+  {/* ----------------- PDG values ----------------- */}
+  {d.pdg_values && d.pdg_values.length > 0 && (
+    <section class="entry-section">
+      <h2>PDG / equivalent values</h2>
+      <table class="pdg-table">
+        <thead>
+          <tr>
+            <th>Observable</th>
+            <th>Value</th>
+            <th>Year</th>
+            <th>Experiment / source</th>
+            <th>Provenance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {d.pdg_values.map((v: any) => (
+            <tr>
+              <td><span set:html={inlineMath(v.observable ?? v.label ?? '')}></span></td>
+              <td>
+                <span class="value-display">{v.display ?? (v.value !== undefined && v.value !== null ? String(v.value) : '?')}</span>
+                {v.units && <span style="color:var(--color-text-muted); font-size:0.85em;"> {v.units}</span>}
+              </td>
+              <td>{v.year ?? '-'}</td>
+              <td>{v.experiment ?? v.label ?? '-'}</td>
+              <td>
+                {v.source_url && (
+                  <a href={v.source_url} target="_blank" rel="noopener noreferrer">
+                    source
+                  </a>
+                )}
+                <span class="anchor-stub" title="Citation-anchor modal lands in Phase 3">view in source</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )}
+
+  {/* ----------------- Prose sections (LaTeX) ----------------- */}
+  {sections.relevance && (
+    <section class="entry-section">
+      <h2>Relevance to the RS / anarchic-flavor pipeline</h2>
+      <div class="latex-prose" set:html={sections.relevance}></div>
+    </section>
+  )}
+
+  {sections.post_2008 && (
+    <section class="entry-section">
+      <h2>Post-2008 / post-2010 developments</h2>
+      <div class="latex-prose" set:html={sections.post_2008}></div>
+    </section>
+  )}
+
+  {sections.validity && (
+    <section class="entry-section">
+      <h2>Constraint validity / model dependence</h2>
+      <div class="latex-prose" set:html={sections.validity}></div>
+    </section>
+  )}
+
+  {/* ----------------- Code coverage prose + evidence list ----------------- */}
+  {(sections.code_coverage_prose || evidence.length > 0) && (
+    <section class="entry-section">
+      <h2>Code coverage in this repo</h2>
+      {sections.code_coverage_prose && (
+        <div class="latex-prose" set:html={sections.code_coverage_prose}></div>
+      )}
+      {evidence.length > 0 && (
+        <>
+          <p style="color:var(--color-text-muted); font-size:0.88rem; margin-bottom:0.4rem;">
+            Linked evidence (opens GitHub blob at <code>{BRANCH}</code>):
+          </p>
+          <ul class="evidence-list">
+            {evidence.map((ev: string) => (
+              <li>
+                <a href={blobUrl(ev)} target="_blank" rel="noopener noreferrer">{ev}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </section>
+  )}
+
+  {sections.implementation_difficulty_prose && (
+    <section class="entry-section">
+      <h2>Implementation difficulty</h2>
+      <div class="latex-prose" set:html={sections.implementation_difficulty_prose}></div>
+      {d.implementation_difficulty_reason && (
+        <p style="color:var(--color-text-muted); font-size:0.9rem; margin-top:0.5rem;">
+          <strong style="color:var(--color-text);">Reason:</strong> {d.implementation_difficulty_reason}
+        </p>
+      )}
+    </section>
+  )}
+
+  {sections.key_references && (
+    <section class="entry-section">
+      <h2>Key references</h2>
+      <div class="latex-prose" set:html={sections.key_references}></div>
+    </section>
+  )}
+
+  {/* ----------------- Provenance footer ----------------- */}
+  <footer class="provenance-footer">
+    <dl>
+      <dt>Source SHAs</dt>
+      <dd>{d.source_shas_count} snapshot(s) tracked in <code>{d.source_yaml}</code></dd>
+      <dt>Access dates</dt>
+      <dd>{(d.access_dates && d.access_dates.length > 0) ? d.access_dates.join(', ') : '-'}</dd>
+      <dt>Worklog</dt>
+      <dd><code>{d.worklog_path}</code></dd>
+      {d.source_tex && (
+        <>
+          <dt>LaTeX source</dt>
+          <dd><code>{d.source_tex}</code></dd>
+        </>
+      )}
+    </dl>
+  </footer>
+
+</BaseLayout>

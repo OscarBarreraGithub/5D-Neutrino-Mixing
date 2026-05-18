@@ -1,0 +1,144 @@
+{
+  "process_id": "E008",
+  "family": "edm_neutrino",
+  "family_original": "edm_neutrino",
+  "tier": "PRIMARY",
+  "standard_notation": "\\tilde d_q",
+  "process_name": "Quark chromo-EDM bounds from neutron and mercury EDMs",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires new CP-odd quark EDM/qCEDM operators, RS loop matching, QCD running and threshold mixing, and hadronic/nuclear matrix-element choices. Existing Delta F=2 and mu->e gamma code paths do not provide this observable.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"quark.?chromo|chromo.?EDM|CEDM|cEDM|chromoelectric|Weinberg|neutron.?EDM|mercury.?EDM|Hg.?EDM|199Hg|electric dipole moment\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "Focused qCEDM/neutron-EDM/mercury-EDM/Weinberg grep over the required implementation/test directories returned exit=1, no matches.",
+      "Generic EDM/dipole grep found only the off-diagonal mu->e gamma dipole helper and unrelated QCD/Delta F=2 running vocabulary.",
+      "flavorConstraints/muToEGamma.py:3 describes an off-diagonal LFV dipole operator.",
+      "flavorConstraints/muToEGamma.py:21 cites the Perez-Randall mu->e gamma dipole operator.",
+      "flavorConstraints/muToEGamma.py:81 implements check_mu_to_e_gamma, not qCEDM or hadronic EDMs."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2026_neutron_edm_datablock.txt": "sha256:2478ea90f896fdb38329e53466629812b28d03da57655b7ac07228007dad90ca",
+    "graner2016_hg199_arxiv1601_04339.txt": "sha256:8c99b7a6bd9c3da640c504273d4d878e267a4df0ec0433cd9481efed400589c5",
+    "pospelov_ritz2000_qcedm_neutron_arxiv_hepph0010037.txt": "sha256:9ca4f0955eb509d9e3810119e25cf1d87260c37c55349d2c3305408f6dc82bcb",
+    "olive_pospelov_ritz_santoso2005_hg_qcedm_arxiv_hepph0506106.txt": "sha256:6acee076efaef5749898c01fb0bbf64d36c76699c9bc8c6404c0cddc7239550c",
+    "cfw2008_arxiv0804_1954.txt": "sha256:e95bdb2ea3b1e6fbd066c12a07fd278e9b09da8e0d8892112bb8d3f1911c9dd2",
+    "koenig_neubert_straub2014_composite_dipoles_arxiv1403_2756.txt": "sha256:5f37e64fd698c59f2d1f88764cb7dbaf531ed52f4fc5a196c83470c231b4c3fb",
+    "bhattacharya2024_isovector_qcedm_lattice_arxiv2404_13516.txt": "sha256:4ca90ef93b5e3af37da5a2eaca214f3381dd756a7452494b8acdd8a833f92cc4"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T13:17:38-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T13:17:38-04:00",
+      "agent_id": "PKA-E008",
+      "reason": "Initial PKA source extraction and E008 draft started."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T13:17:38-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T13:17:38-04:00",
+      "agent_id": "PKA-E008",
+      "reason": "PKA draft, qCEDM source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:40:00-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:40:00-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for wa_w4_kaon_edm."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T13:47:19-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T13:47:19-04:00",
+      "agent_id": "CA",
+      "reason": "Checker verification passed for ca_w4_kaon_edm."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-edm_neutrino",
+      "agent_id": "factcheck-codex-edm_neutrino",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Neutron/Hg experimental anchors and qCEDM translation formulae/derived bounds verified."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "E: EDMs belong inside the flavor fit"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\tilde d_q\\), the flavor-diagonal quark\nchromo-electric dipole moment in the CP-odd operator\n\\(\\bar q T^a \\sigma^{\\mu\\nu}\\gamma_5 q\\,G^a_{\\mu\\nu}\\).  This entry covers\nEFT-level benchmark bounds on light-quark qCEDMs inferred from neutron and\n\\(^{199}\\mathrm{Hg}\\) EDM searches.  These are interpretation-level\ntranslations, not directly measured particle properties.",
+    "pdg_prose": "The experimental anchors are the PDG Live 2026 neutron limit\n\\[\n  |d_n| < 1.8\\times10^{-26}\\ e\\,\\mathrm{cm}\\quad(90\\%~\\mathrm{CL})\n\\]\nfrom Abel 2020 (\\texttt{PDG2026:NeutronEDM}), and the Graner et al. 2016\nmercury result\n\\[\n  d_{\\rm Hg}=(2.20\\pm2.75_{\\rm stat}\\pm1.48_{\\rm syst})\\times10^{-30}\n  \\ e\\,\\mathrm{cm},\\qquad\n  |d_{\\rm Hg}|<7.4\\times10^{-30}\\ e\\,\\mathrm{cm}\\quad(95\\%~\\mathrm{CL}).\n\\]\nThe mercury anchor is \\texttt{Graner:HgEDM2016}.  Using the Pospelov--Ritz\nQCD-sum-rule relation with the quark EDMs set to zero gives the central\nneutron translation\n\\[\n  |\\tilde d_d+0.5\\,\\tilde d_u| < 1.6\\times10^{-26}\\ \\mathrm{cm},\n\\]\nwith the quoted \\((1\\pm0.5)\\) hadronic normalization uncertainty\n(\\texttt{PospelovRitz:NeutronCEDM2000}).  Using the standard mercury estimate\n\\[\n  d_{\\rm Hg}=7\\times10^{-3}e(\\tilde d_u-\\tilde d_d)+10^{-2}d_e+\\cdots\n\\]\nand setting non-qCEDM sources to zero gives the central equivalent bound\n\\[\n  |\\tilde d_u-\\tilde d_d| < 1.1\\times10^{-27}\\ \\mathrm{cm}.\n\\]\nThis mercury translation uses\n\\texttt{OlivePospelovRitzSantoso:HgCEDM2005}.  Both qCEDM numbers are\none-source-at-a-time benchmarks, not correlated global EDM-fit limits.\nThe local snapshots are\n\\texttt{flavor\\_catalog/references/E008/pdg2026\\_neutron\\_edm\\_datablock.txt}\nand \\texttt{flavor\\_catalog/references/E008/graner2016\\_hg199\\_arxiv1601\\_04339.txt};\nthe translation formulae are in the Pospelov--Ritz and\nOlive--Pospelov--Ritz--Santoso snapshots.",
+    "relevance": "Anarchic warped models contain new CP phases and chirality flips in KK-fermion,\nHiggs, and gauge loops.  Even when tree-level \\(\\Delta F=2\\) mixing is under\ncontrol, these loops can generate flavor-diagonal quark EDMs and qCEDMs.  The\nqCEDM lane is therefore a direct probe of RS KK-loop CP violation and\nwrong-chirality Yukawa structures.",
+    "post_2008": "Relative to the CFW 2008 RS-flavor baseline, the experimental inputs tightened:\nthe direct neutron anchor is now the 2020 PDG limit above, and the 2016\n\\(^{199}\\mathrm{Hg}\\) result improved the prior mercury limit by a factor of\n4 (\\texttt{PDG2026:NeutronEDM}; \\texttt{Graner:HgEDM2016};\n\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}).  Koenig, Neubert, and Straub\n2014 recast electromagnetic and chromomagnetic quark dipoles in\npartial-compositeness and warped-language Wilson coefficients, finding strong\nneutron-EDM pressure when wrong-chirality Yukawas are present\n(\\texttt{KoenigNeubertStraub:DipoleComposite2014}).  On the theory side,\nBhattacharya et al. 2024 target the isovector qCEDM neutron matrix element with\nlattice QCD and explicit control of power-divergent operator mixing\n(\\texttt{Bhattacharya:IsoVectorQCEDM2024}).",
+    "validity": "The direct neutron and mercury limits are robust null measurements.  The qCEDM\nbounds are not standalone PDG averages: they assume a low-energy CP-odd basis,\nneglect cancellations with quark EDMs, semileptonic sources, four-quark\noperators, \\(\\bar\\theta\\), and the Weinberg operator, and inherit QCD, nuclear,\nand atomic matrix-element uncertainties.  Mercury is especially powerful for\nthe isovector combination but is also more nuclear-model dependent.\n\nFor anarchic CP phases, EDM constraints should be reviewed jointly with the\nflavor branching rows that share the same Wilson coefficients (relevant\ncross-refs: K001, K003, B011, B033, B034), not as an isolated appendix.",
+    "code_coverage_prose": "\\textbf{NO.}  Required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no qCEDM, neutron EDM, mercury EDM, or Weinberg-operator\nconstraint.  The only nearby dipole implementation is the unrelated\n\\(\\mu\\to e\\gamma\\) helper in \\texttt{flavorConstraints/muToEGamma.py:3},\n\\texttt{:21}, and \\texttt{:81}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A live E008 constraint would need new CP-odd quark EDM/qCEDM\noperators, loop matching from the RS spectrum, QCD running and threshold\nmixing, plus hadronic and nuclear matrix-element choices.  The existing\n\\(\\Delta F=2\\) SLL/SLR/VLL/VRR/LR basis does not cover this observable.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026:NeutronEDM}, \\texttt{Graner:HgEDM2016},\n\\texttt{PospelovRitz:NeutronCEDM2000},\n\\texttt{OlivePospelovRitzSantoso:HgCEDM2005},\n\\texttt{CsakiFalkowskiWeiler:RSFlavor2008},\n\\texttt{KoenigNeubertStraub:DipoleComposite2014}, and\n\\texttt{Bhattacharya:IsoVectorQCEDM2024}."
+  },
+  "source_yaml": "flavor_catalog/processes/edm_neutrino/E008.yaml",
+  "source_tex": "flavor_catalog/processes/edm_neutrino/E008.tex",
+  "worklog_path": "flavor_catalog/worklogs/E008/"
+}

@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import families from '../content/families.json';
+import index from '../content/catalog_index.json';
+
+const totalEntries: number = index.total_entries;
+const verdictCounts: Record<string, number> = index.verdict_counts;
+const verified = verdictCounts.VERIFIED ?? 0;
+const partial = verdictCounts.PARTIAL ?? 0;
+---
+<BaseLayout
+  title="Flavor Catalog -- 5D Neutrino Mixing"
+  description="Static catalog of 102 flavor-physics process entries supporting the 5D / RS warped-extra-dimension scan."
+>
+  <section class="hero">
+    <h1>Flavor catalog for the 5D / RS scan</h1>
+    <p>
+      A snapshot of {totalEntries} flavor-physics process entries
+      (94 PRIMARY + 8 SECONDARY) used as constraints and cross-checks for the
+      anarchic-flavor Randall-Sundrum scan in this repository.
+      Fact-check verdicts: <strong>{verified} VERIFIED</strong> /
+      <strong>{partial} PARTIAL</strong> / 0 MISMATCH.
+    </p>
+  </section>
+
+  <div class="search-bar">
+    <input
+      type="search"
+      placeholder="Search entries (Pagefind wiring lands in Phase 3)..."
+      aria-label="Search catalog entries"
+      disabled
+    />
+    <span class="stub-note">stub</span>
+  </div>
+
+  <aside class="honesty-note" set:html={`
+    <strong>Honest framing.</strong> Low-energy flavor families (kaon, beauty,
+    charm, EDM/neutrino) imply
+    $M_{KK}^{\\min,\\,p_{50}}(g_\\ast = 3) \\approx 47.26~\\text{TeV}$
+    in the repo-local rc1.1 quark scan, while the
+    <code>collider_rs</code> Wave-9 direct-search reach for custodial
+    top-partners and KK gauge resonances sits near the few-TeV scale.
+    Direct LHC limits and indirect flavor bounds therefore probe qualitatively
+    different mass scales and should not be mapped onto a single
+    $M_{KK}$ axis without explicit model assumptions.
+    Source: <code>flavor_catalog/processes/collider_rs/CR002.tex</code>.
+  `}></aside>
+
+  <h2 style="font-size:1.1rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--color-text-muted); margin:2rem 0 0.5rem;">Families</h2>
+  <div class="family-grid">
+    {families.map((fam) => (
+      <a class="family-card" href={`/families/${fam.key}/`}>
+        <h2>
+          <span>{fam.label}</span>
+          <span class="count">{fam.count}</span>
+        </h2>
+        <p>{fam.descriptor}</p>
+      </a>
+    ))}
+  </div>
+
+  <h2 style="font-size:1.1rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--color-text-muted); margin:2rem 0 0.5rem;">Entries</h2>
+  <div class="family-grid">
+    {index.entries.slice(0, 24).map((e: any) => (
+      <a class="family-card" href={`/entries/${e.process_id}/`}>
+        <h2>
+          <span><code style="background:transparent;padding:0;color:var(--color-accent);">{e.process_id}</code> &middot; {e.standard_notation ? `$${e.standard_notation}$` : (e.process_name ?? '')}</span>
+        </h2>
+        <p>{e.family} &middot; {e.tier} &middot; {e.fact_check_verdict} &middot; diff {e.implementation_difficulty} &middot; code {e.code_coverage_status}</p>
+      </a>
+    ))}
+  </div>
+  <p style="color:var(--color-text-muted); font-size:0.85rem;">Showing first 24 entries; full per-family browsing lands in Phase 3.</p>
+</BaseLayout>

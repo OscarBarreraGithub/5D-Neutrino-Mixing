@@ -1,0 +1,232 @@
+{
+  "process_id": "T004",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(t\\to u\\gamma)",
+  "process_name": "Flavor-changing neutral-current top decay t -> u gamma",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Cataloging the limit is straightforward, but production integration needs a new electroweak dipole/top-FCNC operator convention, RS-to-top-flavor matching for t-u rotations, and a t -> u gamma decay-width or production/decay recast path not present in the current Delta F = 2 and mu -> e gamma code.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Required plan greps rerun on 2026-05-16 across quarkConstraints/, qcd/, flavorConstraints/, neutrinos/, yukawa/, warpConfig/, solvers/, scanParams/, and tests/.",
+      "The implemented hits are the existing neutral-meson Delta F = 2 and mu -> e gamma paths; no top FCNC photon observable, tqgamma Wilson coefficient, or t -> u gamma branching-ratio check was found.",
+      "Targeted grep for t -> u gamma / tu gamma / tq gamma / top-photon FCNC returned no matches in the inspected code paths."
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g \"!*.ipynb\"",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g \"!*.ipynb\"",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g \"!*.ipynb\"",
+      "rg -n \"t.?->.?u.?gamma|t.?->.?gamma.?u|tu.?gamma|tq.?gamma|FCNC.*gamma|top.*photon|photon.*top|B\\\\(t.*u.*gamma\\\\)|BR\\\\(t.*u.*gamma\\\\)\" quarkConstraints/ qcd/ flavorConstraints/ neutrinos/ yukawa/ warpConfig/ solvers/ scanParams/ tests/ -g \"!*.ipynb\""
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:T004:tgammaq_combined",
+      "observable": "B(t -> gamma q), q = u,c",
+      "value": "< 9.5e-6",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2026,
+      "experiment": "Particle Data Group pdgLive t-quark listing",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/Particle.action?home=&node=Q007",
+      "snapshot_path": "flavor_catalog/references/T004/pdg_2026_top_t_gammaq.txt",
+      "sha256": "sha256:5e72da33cd1bb62fedd59c34d917217a2e12866d742bcb24e9e4e76f36581033",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2023:T004:tugamma_left",
+      "observable": "B(t -> u gamma), left-handed tqgamma benchmark",
+      "value": "< 0.85e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2023,
+      "experiment": "ATLAS arXiv:2205.02537v3",
+      "source_url": "https://arxiv.org/abs/2205.02537",
+      "snapshot_path": "flavor_catalog/references/T004/atlas_2205_02537_arxiv_abs.txt",
+      "sha256": "sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2023:T004:tugamma_right",
+      "observable": "B(t -> u gamma), right-handed tqgamma benchmark",
+      "value": "< 1.2e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2023,
+      "experiment": "ATLAS arXiv:2205.02537v3",
+      "source_url": "https://arxiv.org/abs/2205.02537",
+      "snapshot_path": "flavor_catalog/references/T004/atlas_2205_02537_arxiv_abs.txt",
+      "sha256": "sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2024:T004:tugamma_observed",
+      "observable": "B(t -> u gamma), single nonzero coupling at a time",
+      "value": "< 0.95e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2024,
+      "experiment": "CMS-TOP-21-013 public result page",
+      "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/",
+      "snapshot_path": "flavor_catalog/references/T004/cms_2312_08229_public_page.txt",
+      "sha256": "sha256:1c729a489ac55ce3f5b7be57e7efc62bdc2bf1cf0d43e16f0577b807edcd0cc5",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": [
+    {
+      "value_id": "CFW2008:T004:rs_flavor_context",
+      "year": 2008,
+      "source": "Csaki, Falkowski, Weiler, arXiv:0804.1954",
+      "role": "Warped-flavor reference epoch for post-2008 comparison.",
+      "snapshot_path": "flavor_catalog/references/T004/csaki_falkowski_weiler_0804_1954_arxiv_abs.txt",
+      "sha256": "sha256:14befbbf44bedde27f2a783d8489df937ce3b44ffe755cbd4033fbf9b593bada"
+    },
+    {
+      "value_id": "AguilarSaavedra2017:T004:SM_and_projection_context",
+      "year": 2017,
+      "source": "Aguilar-Saavedra, arXiv:1709.03975",
+      "role": "Theory/projection context only, not a measured observable.",
+      "values": [
+        "SM B(t -> c gamma) is order 1e-14; up-quark modes are about one order lower.",
+        "HL-LHC t -> uZ / u gamma sensitivity from Zt/gamma t production: 1e-5 level.",
+        "FCC-hh t -> uZ / u gamma sensitivity: 1e-6 level."
+      ],
+      "snapshot_path": "flavor_catalog/references/T004/aguilar_saavedra_1709_03975_arxiv_abs.txt",
+      "sha256": "sha256:21341a8358a91169c62f6074d29ec073769a246263f2d89c17e38963c9be9242"
+    }
+  ],
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg_2026_top_t_gammaq.txt": "sha256:5e72da33cd1bb62fedd59c34d917217a2e12866d742bcb24e9e4e76f36581033",
+    "atlas_2205_02537_arxiv_abs.txt": "sha256:1b92967f8b521fedcfa13cfe8914ce0209506b1fb940b4376786d08b14e317a5",
+    "cms_2312_08229_public_page.txt": "sha256:1c729a489ac55ce3f5b7be57e7efc62bdc2bf1cf0d43e16f0577b807edcd0cc5",
+    "csaki_falkowski_weiler_0804_1954_arxiv_abs.txt": "sha256:14befbbf44bedde27f2a783d8489df937ce3b44ffe755cbd4033fbf9b593bada",
+    "aguilar_saavedra_1709_03975_arxiv_abs.txt": "sha256:21341a8358a91169c62f6074d29ec073769a246263f2d89c17e38963c9be9242"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "OPUS-APPROVED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T18:26:35-04:00",
+      "timestamp": "2026-05-16T18:26:35-04:00",
+      "agent_id": "PKA-T004",
+      "reason": "Initial PKA draft and minimal source snapshot deposit."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T18:39:34-04:00",
+      "timestamp": "2026-05-16T18:39:34-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "batch_id": "wa_w7_new_processes",
+      "reason": "Writer polish for wa_w7_new_processes; template sections normalized and numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "state": "WRITER-REWORK",
+      "at": "2026-05-16T18:55:13-04:00",
+      "timestamp": "2026-05-16T18:55:13-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w7_new_processes",
+      "reason": "CHK-1 failed in checker pass.",
+      "issues": [
+        "TeX dataset claims 139 fb^-1 and 138 fb^-1 are stored in auxiliary_experimental_context, not pdg_or_equivalent.",
+        "TeX future-sensitivity claims at 1e-5 and 1e-6 level are stored only under paper_era_reference, not pdg_or_equivalent."
+      ]
+    },
+    {
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T19:01:15-04:00",
+      "timestamp": "2026-05-16T19:01:15-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w7_new_v2",
+      "cycle": 2,
+      "reason": "Addressed CA CHK-1 by removing the flagged luminosity and projection-reach numbers from TeX."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-16T19:10:09-04:00",
+      "timestamp": "2026-05-16T19:10:09-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w7_new_v2",
+      "cycle": 2,
+      "reason": "Cycle-2 checker pass completed; CHK-1 through CHK-8 passed."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T19:27:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "CHECKER-DONE",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T19:27:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/ATLAS/CMS/arXiv sources; tugamma value claims match."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T20:30:00-04:00",
+      "from": "FACT-CHECKED",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T20:30:00-04:00",
+      "agent": "Opus-round-3",
+      "agent_id": "Opus-round-3",
+      "round_id": "opus_round_003",
+      "reason": "Opus round 3 sign-off; full PKA -> WA -> CA cycle-2 -> fact-check VERIFIED; see flavor_catalog/signoff/round_003_index.md."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(t\\to u\\gamma)\\).\nThis entry catalogs the flavor-changing neutral-current top decay\n\\(t\\to u\\gamma\\), process id T004 in the top/Higgs/electroweak family.  It\ncovers direct searches for an anomalous photon coupling between a top quark and\nan up quark, including FCNC single-top-plus-photon production and \\(t\\bar t\\)\nevents with one FCNC top decay.",
+    "pdg_prose": "The \\texttt{pdg\\_or\\_equivalent} block in \\texttt{T004.yaml} records both the\nPDG combined row and flavor-separated primary limits.  The PDG 2026 top-quark\nlisting gives a combined\n\\(t\\to\\gamma q\\), \\(q=u,c\\), branching-fraction limit\n\\[\n  \\mathcal{B}(t\\to\\gamma q) < 9.5\\times 10^{-6}\n\\]\nat 95\\% CL (\\texttt{PDG2026:T004:tgammaq\\_combined}).  For the\nflavor-separated \\(t\\to u\\gamma\\) mode, the tightest primary limit found is the\nATLAS result:\n\\[\n  \\mathcal{B}(t\\to u\\gamma) < 0.85\\times 10^{-5}\n\\]\nfor the left-handed \\(tq\\gamma\\) benchmark and\n\\(\\mathcal{B}(t\\to u\\gamma)<1.2\\times10^{-5}\\) for the right-handed benchmark,\nboth at 95\\% CL (\\texttt{ATLAS2023:T004:tugamma\\_left},\n\\texttt{ATLAS2023:T004:tugamma\\_right}).  CMS later reported\n\\(\\mathcal{B}(t\\to u\\gamma)<0.95\\times10^{-5}\\), with\n\\(1.20\\times10^{-5}\\) expected, at 95\\% CL\n(\\texttt{CMS2024:T004:tugamma\\_observed}).  Local snapshots are under\n\\texttt{flavor\\_catalog/references/T004/}.",
+    "relevance": "In warped or partially composite flavor models, non-universal fermion profiles\nand mass-basis rotations can induce top FCNC couplings.  The photon channel is\na dipole-like probe, complementary to \\(t\\to uZ\\), \\(t\\to ug\\), and \\(t\\to uh\\).\nCompared with charm final states, T004 isolates the top-up flavor rotation and\ntherefore probes a different corner of the anarchic up-sector structure.",
+    "post_2008": "The comparison baseline is arXiv:0804.1954\n(\\texttt{CFW2008:T004:rs\\_flavor\\_context}).  Since that reference epoch,\nthe important change is experimental: ATLAS and CMS set direct mode-resolved\nlimits (\\texttt{ATLAS2023:T004:dataset}; \\texttt{CMS2024:T004:dataset}).  The\nhigh-energy single-production strategy also became a standard way to discuss\nfuture sensitivity for \\(t\\to uZ/u\\gamma\\)-equivalent interactions.",
+    "validity": "Experimentally this is a clean null-search upper limit; the SM rate is far\nbelow current reach and is lower than the corresponding \\(t\\to c\\gamma\\) rate\nbecause of CKM suppression\n(\\texttt{AguilarSaavedra2017:T004:SM\\_and\\_projection\\_context}).  The\ninterpretation is not model-independent: ATLAS quotes separate chiral\n\\(tq\\gamma\\) tensor benchmarks, and an RS backend must choose an operator\nnormalization before comparing scan points to the branching-fraction limit.",
+    "code_coverage_prose": "Coverage is \\textbf{NO}.  The PKA reran the required catalog greps across\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/}.  The targeted \\(t\\to u\\gamma\\),\n\\(tu\\gamma\\), \\(tq\\gamma\\), and top-photon FCNC search returned no observable,\nWilson coefficient, or branching-ratio implementation.",
+    "implementation_difficulty_prose": "Implementation difficulty is \\textbf{HIGH}.  The repo has no top-FCNC photon\ndipole basis, no RS-to-\\(tu\\gamma\\) matching convention, and no top radiative\ndecay-width or production-recast module.  A production backend would need those\ningredients before this limit could become a scan cut.",
+    "key_references": "\\texttt{PDG2026TopTGammaQ}; \\texttt{ATLAS2023TopFCNCTQGamma};\n\\texttt{CMS2024TopFCNCTQGamma}; \\texttt{CsakiFalkowskiWeiler2008WarpedFlavor};\n\\texttt{AguilarSaavedra2017UltraBoostedTopFCN}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/T004.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/T004.tex",
+  "worklog_path": "flavor_catalog/worklogs/T004/"
+}

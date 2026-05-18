@@ -1,0 +1,264 @@
+{
+  "process_id": "L001",
+  "family": "charged_lepton",
+  "family_original": "charged_lepton",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(\\mu^+\\to e^+\\gamma)",
+  "process_name": "Muon to electron gamma charged-lepton-flavor-violating dipole decay",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "LOW",
+  "implementation_difficulty_reason": "The process already has a live LFV dipole/NDA implementation and scan default. Cataloging only requires source tracking and documenting the difference between the paper-era coefficient and the MEG II 2025 scan default.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "YES",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "auxiliary_search_paths": [
+      "docs",
+      "scripts"
+    ],
+    "required_grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    ],
+    "targeted_grep_commands": [
+      "rg -n \"mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG|check_mu_to_e_gamma|PREFAC_BR|BR_LIMIT_MEGII_2025|br_limit\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "flavorConstraints/muToEGamma.py:1 documents the mu->e gamma lepton-flavor-violation constraint.",
+      "flavorConstraints/muToEGamma.py:20 records the Perez-Randall paper-era coefficient C = 0.02.",
+      "flavorConstraints/muToEGamma.py:31 defines PREFAC_BR = 4.0e-8.",
+      "flavorConstraints/muToEGamma.py:61 defines coefficient_from_br_limit(br_limit, prefactor=PREFAC_BR).",
+      "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma.",
+      "flavorConstraints/muToEGamma.py:136 applies the C x (M_KK / reference_scale)^2 RHS scaling in the live code.",
+      "scanParams/scan.py:32 records the published MEG II 2025 bound BR(mu -> e gamma) < 1.5e-13.",
+      "scanParams/scan.py:33 defines BR_LIMIT_MEGII_2025 = 1.5e-13.",
+      "scanParams/scan.py:264 makes BR_LIMIT_MEGII_2025 the default ScanConfig.br_limit.",
+      "tests/test_mu_to_e_gamma.py:40 tests that the MEG II 2025 limit tightens C relative to C_PAPER.",
+      "tests/test_scan.py:50 tests that default scan LFV settings match the documented MEG II 2025 limit."
+    ]
+  },
+  "code_coverage_status": "YES",
+  "pdg_values": [
+    {
+      "label": "MEG II Collaboration",
+      "observable": "Branching fraction upper limit for mu+ -> e+ gamma",
+      "value": 1.5e-13,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2025,
+      "experiment": "MEG II Collaboration",
+      "source_url": "https://arxiv.org/abs/2504.15711",
+      "snapshot_path": "flavor_catalog/references/L001/megii2025_arxiv2504_15711.txt",
+      "sha256": "3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Particle Data Group 2025 muon listing, NODE=S004R3",
+      "observable": "Branching fraction upper limit for mu+ -> e+ gamma",
+      "value": 3.1e-13,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2025,
+      "experiment": "Particle Data Group 2025 muon listing, NODE=S004R3",
+      "source_url": "https://pdg.lbl.gov/encoder_listings/s004.pdf",
+      "snapshot_path": "flavor_catalog/references/L001/pdg2025_muon_listing_s004.txt",
+      "sha256": "4baeea03e1eac3a90ee1d972f9b405e77d58872ad1260227b09475285269ae04",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Perez and Randall 2008 / JHEP 2009",
+      "observable": "RS lepton dipole NDA estimate and paper-era mu -> e gamma bound",
+      "value": null,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": null,
+      "experiment": "Perez and Randall 2008 / JHEP 2009",
+      "source_url": "https://arxiv.org/abs/0805.4652",
+      "snapshot_path": "flavor_catalog/references/L001/perez_randall_2008_arxiv0805_4652.txt",
+      "sha256": "850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "megii2025_arxiv2504_15711.txt": "sha256:3560d6556552ce564ad52effc6a7fff4ca78cd8fded4e15f4a6c1884d661fce7",
+    "megii2024_arxiv2310_12614.txt": "sha256:bf3dddb7b5fd8a5b55a9829f0118db4b27992f4f603c1e792ecf8fcb67255ef0",
+    "meg2016_arxiv1605_05081.txt": "sha256:883288d06a72c35f56718b53fd0c05e030834cd8f6193708234ab3413ce6e00a",
+    "perez_randall_2008_arxiv0805_4652.txt": "sha256:850dccbe553238cb13d7543d4b3416475373cb7919446cfb53343a75cc86f6f9",
+    "pdg2025_muon_listing_s004.txt": "sha256:4baeea03e1eac3a90ee1d972f9b405e77d58872ad1260227b09475285269ae04"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:36:52-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:36:52-04:00",
+      "agent_id": "PKA-L001",
+      "reason": "Initial L001 PKA source extraction and draft sidecar."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T11:36:52-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T11:36:52-04:00",
+      "agent_id": "PKA-L001",
+      "reason": "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:15:26-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:15:26-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for wa_w23_charged_lepton; numerical claims checked against sidecar sources."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T12:32:07-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T12:32:07-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w23_charged_lepton",
+      "issues": [
+        "CHK-1: TeX cites prior MEG/MEG II numerical limits whose pdg_or_equivalent.prior_experimental_limits entries lack per-entry source_url/access_date metadata.",
+        "CHK-1: TeX cites the live repo default C ~= 1.936e-3 and related code-derived numerical values, but pdg_or_equivalent.repo_default lacks year/source_url/access_date/sha256 provenance fields under the strict checker rule."
+      ],
+      "reason": "Checker ca_w23_charged_lepton found CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w23_charged_lepton.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:44:38-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:44:38-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w23_charged_lepton_v2",
+      "reason": "Cycle-2 writer rework addressed CA CHK-1 metadata completeness findings only."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T12:56:00-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T12:56:00-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w23_charged_lepton_v2",
+      "issues": [
+        "CHK-2: L001.tex cites arXiv:0804.1954 as the RS-flavor baseline, but flavor_catalog/references/L001/source_manifest.yaml has no matching source_manifest entry or snapshot_path."
+      ],
+      "reason": "Checker ca_w23_charged_lepton_v2 found an unresolved TeX citation; see flavor_catalog/worklogs/checker/ca_w23_charged_lepton_v2.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:11:19-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:11:19-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w23_charged_lepton_v3",
+      "reason": "Cycle-2 writer rework addressed CA CHK-2 unresolved arXiv:0804.1954 citation only."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T13:33:13-04:00",
+      "agent": "CA",
+      "cycle": 3,
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T13:33:13-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w23_charged_lepton_v3",
+      "issues": [
+        "CHK-1: L001.tex includes the Perez-Randall NDA formula with a 3 TeV reference scale, but pdg_or_equivalent does not explicitly encode that reference-scale numerical claim with year/value/uncertainty/source_url/access_date/sha256 provenance."
+      ],
+      "reason": "Checker ca_w23_charged_lepton_v3 found a strict CHK-1 sidecar provenance gap; see flavor_catalog/worklogs/checker/ca_w23_charged_lepton_v3.md."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T13:46:00-04:00",
+      "agent": "Opus-arbitration",
+      "cycle": 3,
+      "from": "WRITER-REWORK",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T13:46:00-04:00",
+      "agent_id": "Opus-arbitration",
+      "batch_id": "opus_arbitration_L001",
+      "reason": "APPROVE-OVERRIDE per plan v1 :622 single corrective loop. CA-v3 CHK-1 reading is too strict for this case: the Perez-Randall NDA-formula 3 TeV is a theoretical reference-scale convention, not a measured observable, so it does not belong in pdg_or_equivalent. Its source (Perez-Randall 2008) is already provenance-anchored via pdg_or_equivalent.paper_era_reference. See flavor_catalog/signoff/by_process/L001.md for the full rationale and the policy guidance for future CAs."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charged_lepton",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Measured limits and prospect values matched fetched sources or local snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(\\mu^+\\to e^+\\gamma)\\).\nThis entry covers the charged-lepton-flavor-violating radiative muon decay and\nthe dipole-style bound on the off-diagonal \\(e\\mu\\) lepton-flavor spurion used\nby the current RS lepton-sector scan.  It is a charged-lepton process, not part\nof the quark \\(\\Delta F=2\\) lane.",
+    "pdg_prose": "The current primary-experiment limit is the MEG II 2025 result recorded in\n\\texttt{L001.yaml:primary\\_current\\_limit},\n\\[\n  \\mathcal{B}(\\mu^+\\to e^+\\gamma) < 1.5\\times 10^{-13}\\quad (90\\%\\ {\\rm C.L.}),\n\\]\nfrom the 2021--2022 MEG II data set, with quoted search sensitivity\n\\(2.2\\times10^{-13}\\).  The local snapshot is\n\\texttt{flavor\\_catalog/references/L001/megii2025\\_arxiv2504\\_15711.txt}.\nFor audit context, \\texttt{L001.yaml:pdg\\_2025\\_listing} records the PDG 2025\nmuon-listing value\n\\[\n  \\mathcal{B}(\\mu^+\\to e^+\\gamma) < 3.1\\times10^{-13}\\quad (90\\%\\ {\\rm C.L.}),\n\\]\nwhich is the MEG+MEG II 2021 combined limit and appears to lag the later MEG II\n2025 publication.",
+    "relevance": "In the lepton extension of the warped model, \\(\\mu\\to e\\gamma\\) probes\nbrane-localized or loop-induced dipoles controlled by the off-diagonal\ncombination \\((\\bar Y_N\\bar Y_N^\\dagger)_{12}\\).  The repo implements the\nPerez--Randall NDA form\n\\(\\mathcal{B}\\simeq 4\\times10^{-8}\\,|(\\bar Y_N\\bar Y_N^\\dagger)_{12}|^2\n(3\\,{\\rm TeV}/M_{\\rm KK})^4\\), converts an experimental branching-ratio limit\nto \\(C=\\sqrt{\\mathcal{B}_{\\rm lim}/(4\\times10^{-8})}\\), and uses the updated\nMEG II limit in the scan default.  Those numerical inputs are the\n\\texttt{L001.yaml:paper\\_era\\_reference} and \\texttt{L001.yaml:repo\\_default}\nentries: the live default gives \\(C\\simeq1.936\\times10^{-3}\\), compared with\nthe paper-era \\(C=0.02\\).",
+    "post_2008": "Relative to the contemporaneous Perez--Randall lepton paper, the experimental\nstory changed substantially.\nPerez--Randall used the MEGA-era\n\\(\\mathcal{B}(\\mu\\to e\\gamma)<1.2\\times10^{-11}\\) input\n(\\texttt{L001.yaml:paper\\_era\\_reference}).  The full MEG 2009--2013 data set\nthen gave \\(4.2\\times10^{-13}\\), MEG II's 2021-only result gave\n\\(7.5\\times10^{-13}\\), and the MEG+MEG II combination gave\n\\(3.1\\times10^{-13}\\) (\\texttt{L001.yaml:prior\\_experimental\\_limits}).  The\nMEG II 2021--2022 analysis now sets the \\(1.5\\times10^{-13}\\) primary value.",
+    "validity": "The experimental bound is clean: a signal would be charged-lepton flavor\nviolation with negligible Standard Model background.  Its translation into this\nrepo is model-dependent, because it relies on the chosen RS lepton spurion, NDA\nprefactor, and \\(M_{\\rm KK}\\) convention rather than a full loop calculation.\nThe catalog should therefore classify it as a robust experimental limit but a\nlepton-extension-only, dipole/NDA model interpretation.",
+    "code_coverage_prose": "\\textbf{YES.}  The sidecar \\texttt{code\\_coverage.evidence} block lists the\nimplementation in \\texttt{flavorConstraints/muToEGamma.py}: the module\ndocuments the \\(\\mu\\to e\\gamma\\) dipole constraint, records the paper-era\n\\(C=0.02\\) coefficient, defines\n\\(\\texttt{PREFAC\\_BR}=4.0\\times10^{-8}\\), converts branching-ratio limits to\n\\(C\\), and exposes \\(\\texttt{check\\_mu\\_to\\_e\\_gamma}\\).  The scan default is the\nMEG II 2025 value:\n\\texttt{scanParams/scan.py}:32--33 sets\n\\(\\texttt{BR\\_LIMIT\\_MEGII\\_2025}=1.5\\times10^{-13}\\), and line 264 makes it the\ndefault \\(\\texttt{ScanConfig.br\\_limit}\\).  Tests at\n\\texttt{tests/test\\_mu\\_to\\_e\\_gamma.py}:40 and\n\\texttt{tests/test\\_scan.py}:50 exercise the updated limit.",
+    "implementation_difficulty_prose": "\\textbf{LOW} for cataloging and present code coverage, because the observable\nis already implemented and the scan default matches the primary 2025 result.  A\nfuture production refresh is \\textbf{MEDIUM}: the code should audit the\npaper-era NDA normalization, \\(M_{\\rm KK}\\) convention, and whether the final\ncatalog should expose both paper-reproduction and MEG II 2025 modes.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{MEGII2025\\_MuEGamma}, \\texttt{MEGII2024\\_MuEGammaFirst},\n\\texttt{MEG2016\\_MuEGammaFull}, \\texttt{PDG2025\\_MuonListing}, and\n\\texttt{PerezRandall2008\\_WarpedNeutrinos}."
+  },
+  "source_yaml": "flavor_catalog/processes/charged_lepton/L001.yaml",
+  "source_tex": "flavor_catalog/processes/charged_lepton/L001.tex",
+  "worklog_path": "flavor_catalog/worklogs/L001/"
+}

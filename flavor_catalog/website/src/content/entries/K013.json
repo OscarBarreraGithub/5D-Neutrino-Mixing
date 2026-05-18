@@ -1,0 +1,133 @@
+{
+  "process_id": "K013",
+  "family": "kaon",
+  "family_original": "kaon",
+  "tier": "PRIMARY",
+  "standard_notation": "K_L \\to \\pi^0\\gamma\\gamma",
+  "process_name": "Radiative long-lived neutral-kaon decay to pi0 gamma gamma",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a Delta S = 1 radiative/chiral amplitude and long-distance treatment; existing Delta F=2 Wilson running and mu->e gamma dipole checks do not provide the observable.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "No exact K013 / K_L -> pi0 gamma gamma implementation found in quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, or tests.",
+      "Broader required greps find only existing Delta F=2 kaon-mixing and mu->e gamma surfaces; those are different processes."
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'",
+      "rg -n \"pi0.*gamma.*gamma|pi\\\\^0.*gamma.*gamma|pi.?0.*gamma|K013|\\\\ba_V\\\\b|\\\\baV\\\\b|pigg|gammagamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG Review of Particle Physics, K_L0 listing, 2025 update",
+      "observable": "BR(K_L -> pi0 gamma gamma)",
+      "value": 1.273e-06,
+      "uncertainty": 3.3e-08,
+      "units": "dimensionless branching fraction",
+      "display": "(1.273 +/- 0.033) x 10^-6",
+      "year": 2025,
+      "experiment": "PDG Review of Particle Physics, K_L0 listing, 2025 update",
+      "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf",
+      "snapshot_path": "flavor_catalog/references/K013/pdg2025_kl_pi0gammagamma.txt",
+      "sha256": "sha256:48bdda1e34bb6a347c3fc489d272d5b20c0d15c05f005f032f749229c381339b",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2025_kl_pi0gammagamma.txt": "sha256:48bdda1e34bb6a347c3fc489d272d5b20c0d15c05f005f032f749229c381339b",
+    "ktev_abouzaid_2008_arxiv.txt": "sha256:5f872c5a8480eccb5f325225479cb3e1e58bcbfba42a6ead2d9b1d8ea2dee289",
+    "na48_lai_2002_repo.txt": "sha256:b8d0f2ce120f87f6f47ab69786557fafeb339390063e1419450b9b57eac0f90a",
+    "na48_2_batley_2014_arxiv.txt": "sha256:5727e0ee905224f20ea9581049a1b91ab4facfb2006bdc5740dbf6af0ad6b8ca",
+    "cappiello_cata_dambrosio_2018_springer.txt": "sha256:7bac918f24574a9d7ce12dced1ea50b90faedc2060a7a9f303ba2d50f5011340",
+    "gabbiani_valencia_2001_arxiv.txt": "sha256:a883962e12958d8d9eb543e3bb118d08e5b8eccaabf248cd976f387feeeefe67"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:08:33-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:08:33-04:00",
+      "agent_id": "PKA-K013",
+      "reason": "initial PKA draft and source deposit"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:34:00-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:34:00-04:00",
+      "agent_id": "WA",
+      "reason": "Polished PKA draft for WA batch wa_wave1_kaon."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T11:46:24-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T11:46:24-04:00",
+      "agent_id": "CA",
+      "reason": "CA batch ca_wave1_kaon passed CHK-1..CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-kaon",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent_id": "factcheck-codex-kaon",
+      "reason": "Independent live-source fact-check completed for kaon family.",
+      "notes": "Live source fetch and local snapshot checks verified all value claims for this process."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(K_L \\to \\pi^0\\gamma\\gamma\\).  This entry covers\nthe long-lived neutral-kaon radiative decay listed by PDG as\n\\(\\Gamma(\\pi^0 2\\gamma)/\\Gamma_{\\rm total}\\), process \\(K013\\) in the kaon\nfamily.  The orchestrator decision maps the PI's ambiguous\n\\(K1\\to\\pi\\gamma\\) seed to this channel; the neighboring\n\\(K_S\\to\\pi^0\\gamma\\gamma\\) entry remains separate.",
+    "pdg_prose": "The canonical sidecar value is\n\\[\n  {\\cal B}(K_L\\to\\pi^0\\gamma\\gamma)=(1.273\\pm0.033)\\times10^{-6},\n\\]\nfrom the PDG \\(K_L^0\\) listing, 2025 update, accessed 2026-05-16; see\n\\texttt{flavor\\_catalog/references/K013/pdg2025\\_kl\\_pi0gammagamma.txt}.\nPDG forms this average from the KTeV final result and the NA48 measurement\nafter rescaling both to the current \\(K_L\\to\\pi^0\\pi^0\\) normalization.  The\nsidecar records the PDG-rescaled inputs, \\(1.28\\pm0.06\\pm0.01\\) from KTeV and\n\\(1.27\\pm0.04\\pm0.01\\) from NA48, both in units of \\(10^{-6}\\), plus the\noriginally reported branching fractions and vector-exchange parameters \\(a_V\\).",
+    "relevance": "This is not a clean tree-level KK-gluon constraint like \\(\\varepsilon_K\\) or\n\\(\\Delta m_K\\).  It is a \\(\\Delta S=1\\) radiative rare decay dominated by\nlong-distance chiral dynamics and vector-meson-exchange effects.  Its practical\ncatalog role is diagnostic: it fixes the size and shape of the two-photon\namplitude that feeds the CP-conserving part of\n\\(K_L\\to\\pi^0\\ell^+\\ell^-\\), and it checks whether an RS extension with\nenhanced \\(s\\to d\\gamma\\gamma\\), dipole, or electroweak-penguin structure is\nalready in tension with radiative kaon data.",
+    "post_2008": "Relative to the Csaki--Falkowski--Weiler era, the KTeV full-sample analysis is\nthe decisive update: it superseded the earlier KTeV value and is one of the two\ninputs in the current PDG average.  The PKA did not find a newer neutral-mode\nbranching-ratio measurement in the PDG 2025 listing.  The main later\nexperimental development is adjacent rather than identical: NA48/2 measured the\ncharged analogue \\(K^\\pm\\to\\pi^\\pm\\gamma\\gamma\\), with the sidecar recording\nthe model-independent \\(z>0.2\\) and ChPT-extrapolated branching fractions.\nCappiello, Cata, and D'Ambrosio 2018 show that radiative-kaon data constrain\nweak chiral counterterms, which is the right language for this mode rather than\na short-distance Wilson-only bound.",
+    "validity": "Class: long-distance-limited and model-dependent.  The measured branching\nfraction should not be imposed as a hard RS exclusion without a dedicated\n\\(\\Delta S=1\\) radiative calculation and a prescription for the SM\nlong-distance amplitude.  It is safer as a consistency target and as an\nauxiliary input to \\(K_L\\to\\pi^0\\ell^+\\ell^-\\) estimates.  A new-physics\ninterpretation must avoid double counting two-photon contributions already\nabsorbed into chiral counterterms.",
+    "code_coverage_prose": "\\textbf{NO.}  The PKA reran the plan-required greps and a K013-specific search\nacross \\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, and \\texttt{tests/}.  The repository\ncontains kaon \\(\\Delta F=2\\) machinery and unrelated generic \\(\\gamma\\)-symbol\noccurrences, but no implementation of \\(K_L\\to\\pi^0\\gamma\\gamma\\), no \\(a_V\\)\nparameter, and no radiative-kaon likelihood.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production constraint would need new \\(\\Delta S=1\\)\nradiative matching, chiral-amplitude inputs, long-distance SM treatment, and\npossibly differential-shape information.  The existing \\(\\Delta F=2\\) operator\nbasis and running code are not enough.",
+    "key_references": "Process-local source keys before bibliography consolidation: \\texttt{PDG2025\\_KL\\_pi0gammagamma}, \\texttt{KTeV2008\\_KL\\_pi0gammagamma}, \\texttt{NA482002\\_KL\\_pi0gammagamma}, \\texttt{NA482014\\_Kpm\\_pigammagamma}, \\texttt{CappielloCataDAmbrosio2018\\_radiative\\_chiral}, and \\texttt{GabbianiValencia2001\\_KL\\_pi0gammagamma}."
+  },
+  "source_yaml": "flavor_catalog/processes/kaon/K013.yaml",
+  "source_tex": "flavor_catalog/processes/kaon/K013.tex",
+  "worklog_path": "flavor_catalog/worklogs/K013/"
+}

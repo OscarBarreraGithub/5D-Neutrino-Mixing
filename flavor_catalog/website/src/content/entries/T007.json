@@ -1,0 +1,239 @@
+{
+  "process_id": "T007",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(t\\to Hc)",
+  "process_name": "Flavor-changing neutral-current top decay t -> H c",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Limit cataloging is MEDIUM, but production integration is HIGH because the repo has no top-Higgs FCNC operator basis, no RS-to-SMEFT Htc matching, and no tH/tbar t reinterpretation machinery.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Required plan greps rerun on 2026-05-16; no source-code implementation of t -> H c, tHc, tcH, Htc, or tqH found.",
+      "Targeted grep across quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, and tests found only generic FCNC prose/comments in quarkConstraints/PAPER_0710_1869.md:35 and tests/test_paper_couplings.py:258."
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g \"!*.ipynb\"",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g \"!*.ipynb\"",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g \"!*.ipynb\"",
+      "rg -n \"t.?->.?c.?H|t.?->.?H.?c|tHc|tcH|Htc|tqH|t.?->.?q.?H|FCNC|flavou?r-changing|flavor changing\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\""
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:T007:tHc_combined",
+      "observable": "B(t -> H c), PDG headline limit from ATLAS five-Higgs-mode combination",
+      "value": "< 3.4e-4",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2026,
+      "experiment": null,
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=Q007R01&_eventName=showBR",
+      "snapshot_path": null,
+      "sha256": "sha256:6b6d2c99c13e85b27ae9aa2c156ec13e91f088dd3cf3660a1ab9f8e9e1806845",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2024:T007:dataset",
+      "observable": "ATLAS dataset for tHq/t -> Hq multilepton analysis",
+      "value": "140 fb^-1 at sqrt(s) = 13 TeV",
+      "uncertainty": null,
+      "units": "integrated luminosity and collision energy",
+      "display": null,
+      "year": 2024,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2404.02123",
+      "snapshot_path": null,
+      "sha256": "sha256:b0373e82980abe8dddbece94bc188c3db1f0d3b1f77279730a18f63f1b946735",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2024:T007:tHc_multilepton",
+      "observable": "B(t -> H c), ATLAS multilepton-only result",
+      "value": "< 3.3e-4",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2024,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2404.02123",
+      "snapshot_path": null,
+      "sha256": "sha256:b0373e82980abe8dddbece94bc188c3db1f0d3b1f77279730a18f63f1b946735",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2024:T007:tHc_combined",
+      "observable": "B(t -> H c), ATLAS combination with H -> bb, gamma gamma, and tau tau searches",
+      "value": "< 3.4e-4",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2024,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2404.02123",
+      "snapshot_path": null,
+      "sha256": "sha256:b0373e82980abe8dddbece94bc188c3db1f0d3b1f77279730a18f63f1b946735",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2025:T007:dataset",
+      "observable": "CMS dataset for Higgs-mediated top FCNC search",
+      "value": "138 fb^-1 at sqrt(s) = 13 TeV, collected in 2016-2018",
+      "uncertainty": null,
+      "units": "integrated luminosity, collision energy, data-taking years",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2407.15172",
+      "snapshot_path": null,
+      "sha256": "sha256:4d2d78674a2eb7b866836a895fd744c095db912a1b071d395b25376a6bd5b282",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2025:T007:tHc_samesign",
+      "observable": "B(t -> H c), CMS same-sign dilepton search",
+      "value": "< 0.043%",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2407.15172",
+      "snapshot_path": null,
+      "sha256": "sha256:4d2d78674a2eb7b866836a895fd744c095db912a1b071d395b25376a6bd5b282",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2025:T007:tHc_combined",
+      "observable": "B(t -> H c), CMS combination with H -> gamma gamma and H -> bb searches",
+      "value": "< 0.037%",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2407.15172",
+      "snapshot_path": null,
+      "sha256": "sha256:4d2d78674a2eb7b866836a895fd744c095db912a1b071d395b25376a6bd5b282",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2026_top_hc_datablock.txt": "sha256:6b6d2c99c13e85b27ae9aa2c156ec13e91f088dd3cf3660a1ab9f8e9e1806845",
+    "atlas_2404_02123_arxiv_abs.txt": "sha256:b0373e82980abe8dddbece94bc188c3db1f0d3b1f77279730a18f63f1b946735",
+    "cms_2407_15172_arxiv_abs.txt": "sha256:4d2d78674a2eb7b866836a895fd744c095db912a1b071d395b25376a6bd5b282",
+    "aguilar_saavedra_hepph0409342_arxiv_abs.txt": "sha256:39763f3da07153ab8d593fb0a7d028d2e859c28115451eaa25ebd50c10075e4e",
+    "cfw_0804_1954_arxiv_abs.txt": "sha256:36995d34785982d95b1ec328c42a33c40614df00d95ccd516699470c0c85a40a"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-FIXED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T11:57:36-04:00",
+      "timestamp": "2026-05-16T11:57:36-04:00",
+      "agent_id": "PKA-T007",
+      "reason": "Initial PKA draft and source snapshot deposit."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T12:15:15-04:00",
+      "timestamp": "2026-05-16T12:15:15-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "Writer polish for wa_w23_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-16T12:31:56-04:00",
+      "timestamp": "2026-05-16T12:31:56-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_w23_top_higgs_ew verified CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/arXiv/collaboration sources; measured value claims match."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "B+F: down-sector alignment promotes top FCNCs; h -> tc kinematics nit"
+    },
+    {
+      "state": "SUBTLETY-FIXED",
+      "timestamp": "2026-05-16T18:41:48-04:00",
+      "agent": "subtlety-microfix",
+      "note": "T007 h->tc kinematic note: 125 GeV -> observed"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(t\\to Hc)\\).\nThis entry catalogs the flavor-changing neutral-current top-Higgs decay\n\\(t\\to Hc\\) in the top/Higgs/electroweak family.  It covers direct LHC\nsearches for anomalous top--charm--Higgs interactions in both \\(t\\bar t\\)\nevents with an FCNC top decay and associated single-top plus Higgs production.",
+    "pdg_prose": "The source-of-truth numerical entries are the \\texttt{pdg\\_or\\_equivalent}\nblock in \\texttt{T007.yaml}.  The PDG 2026 \\texttt{pdgLive} top-quark\ndatablock quotes the ATLAS-combination headline\n\\[\n  \\mathcal{B}(t\\to Hc) < 3.4\\times 10^{-4}\n\\]\nat 95\\% CL (\\texttt{PDG2026:T007:tHc\\_combined}), based on the ATLAS 2024\ncombined Higgs-decay search.  The local PDG snapshot is\n\\texttt{flavor\\_catalog/references/T007/pdg2026\\_top\\_hc\\_datablock.txt}.\nThe ATLAS primary arXiv record gives \\(140~\\mathrm{fb}^{-1}\\) at\n\\(\\sqrt{s}=13~\\mathrm{TeV}\\) (\\texttt{ATLAS2024:T007:dataset}), a\nmultilepton-only limit \\(\\mathcal{B}(t\\to Hc)<3.3\\times10^{-4}\\)\nwith expected \\(3.8\\times10^{-4}\\)\n(\\texttt{ATLAS2024:T007:tHc\\_multilepton}), and the combined limit\n\\(\\mathcal{B}(t\\to Hc)<3.4\\times10^{-4}\\) with expected\n\\(2.3\\times10^{-4}\\) (\\texttt{ATLAS2024:T007:tHc\\_combined}).  The CMS 2025\nrecord uses \\(138~\\mathrm{fb}^{-1}\\) at \\(\\sqrt{s}=13~\\mathrm{TeV}\\) collected\nin 2016--2018 (\\texttt{CMS2025:T007:dataset}); its combined limit is\n\\(\\mathcal{B}(t\\to Hc)<0.037\\%\\), expected \\(0.035\\%\\)\n(\\texttt{CMS2025:T007:tHc\\_combined}).",
+    "relevance": "Anarchic warped models and composite-Higgs variants can generate off-diagonal\nscalar Yukawa couplings after rotating to the quark mass basis.  The \\(t\\to Hc\\)\nmode probes the same top-sector localization and mixing structure that also\ncontrols the large top Yukawa, so it is complementary to light-meson\n\\(\\Delta F=2\\) constraints.  For this repo it is best treated as a direct\ntop-sector diagnostic, not as a replacement for the existing kaon, \\(B\\), and\n\\(D\\)-mixing gates.",
+    "post_2008": "The requested baseline is arXiv:0804.1954\n(\\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}), which predates direct LHC\ntop-Higgs FCNC bounds.  Since then, ATLAS and CMS moved the search from\nindirect model estimates to direct limits using many Higgs final states.  ATLAS\nnow combines \\(H\\to WW\\), \\(H\\to ZZ\\), \\(H\\to\\tau\\tau\\),\n\\(H\\to\\gamma\\gamma\\), and \\(H\\to b\\bar b\\) channels in the PDG headline\n(\\texttt{PDG2026:T007:tHc\\_combined};\n\\texttt{ATLAS2024:T007:tHc\\_combined}).  CMS has an independent 2025\ncombination with \\(H\\to\\gamma\\gamma\\) and \\(H\\to b\\bar b\\) inputs in addition\nto the same-sign lepton analysis (\\texttt{CMS2025:T007:tHc\\_combined}).  The\nclassic top-FCNC review arXiv:hep-ph/0409342 remains useful context for why SM\ntop FCNC Higgs amplitudes are negligible while BSM scalar flavor can be visible\n(\\texttt{AguilarSaavedra2004TopFCNC}).",
+    "validity": "The experimental statement is a 95\\% CL upper limit on an assumed single\nanomalous top-Higgs flavor coupling.  The model interpretation is\noperator-convention dependent: an RS implementation must choose whether the\nscan outputs scalar \\(Htc\\), \\(Hct\\), or SMEFT Wilson coefficients, and whether\nassociated \\(tH\\) production is included together with \\(t\\bar t\\) FCNC decays.\nCorrelations with \\(t\\to Hu\\) are analysis-dependent, so this entry keeps only\nthe charm-channel bound as the T007 catalog value.\n\nIn down-aligned or kaon-protected RS variants, top FCNCs become leading rather\nthan secondary diagnostics.  Note: for the observed Higgs, on-shell \\(h\\to tc\\)\nis kinematically forbidden; \\(Htc\\) coupling constraints enter through\n\\(t\\to Hc\\) decay and associated single-top + \\(H\\) production.",
+    "code_coverage_prose": "Coverage is \\textbf{NO}.  The PKA reran the required plan greps and a\ntargeted search for \\(t\\to Hc\\), \\(tHc\\), \\(tcH\\), \\(Htc\\), and \\(tqH\\) across\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, and \\texttt{tests/}.  The only\ntargeted non-doc hits were generic FCNC prose/comments in\n\\texttt{quarkConstraints/PAPER\\_0710\\_1869.md:35} and\n\\texttt{tests/test\\_paper\\_couplings.py:258}; there is no \\(t\\to Hc\\)\nobservable, likelihood, or limit check.",
+    "implementation_difficulty_prose": "Production integration is \\textbf{HIGH}.  Recording the external upper limit is\nstraightforward, but using it in scans needs a new top-Higgs FCNC matching layer,\na scalar-coupling convention, and a decision about combining \\(tH\\) production\nwith \\(t\\bar t\\) FCNC-decay interpretations.",
+    "key_references": "\\texttt{PDG2026TopHc}; \\texttt{ATLAS2024TopHcMultilepton};\n\\texttt{CMS2025TopHcHiggsMediated}; \\texttt{AguilarSaavedra2004TopFCNC};\n\\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/T007.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/T007.tex",
+  "worklog_path": "flavor_catalog/worklogs/T007/"
+}

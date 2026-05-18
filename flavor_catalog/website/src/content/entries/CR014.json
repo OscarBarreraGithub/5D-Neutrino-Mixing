@@ -1,0 +1,455 @@
+{
+  "process_id": "CR014",
+  "family": "collider_rs",
+  "family_original": "collider_rs",
+  "tier": "PRIMARY",
+  "standard_notation": "pp -> t tbar t tbar",
+  "process_name": "Standard-Model and BSM four-top-quark production",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires collider reinterpretation, event simulation, detector acceptance, and likelihood/recast infrastructure; a direct use of the CMS 850 GeV benchmark as a generic RS M_KK bound would be incorrect.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"CR014|four.?top|4.?top|tttt|t\\\\s*\\\\bar\\\\{?t\\\\}?\\\\s*t\\\\s*\\\\bar\\\\{?t\\\\}?|top.?philic|four top|4 top\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"ATLAS|CMS|LHC|collider\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"KK.?gluon|Kaluza|M_KK|MKK|mkk|kk.*mass|mass.*kk|T_?5/3|vector.?like|top.?partner|custodial\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"compute_quark_kk_gluon_couplings|evaluate_delta_f2_constraints|deltaf2_passes|passes_all|M_KK\" quarkConstraints/scan.py quarkConstraints/deltaf2.py quarkConstraints/couplings.py scanParams/scan.py -g '!*.ipynb'"
+    ],
+    "findings": [
+      "No exact CR014, four-top, tttt, or top-philic search implementation was found.",
+      "The only ATLAS/CMS/LHC/collider query hit was tests/test_alpha_s.py:89, an unrelated CMS/RunDec alpha_s example.",
+      "Adjacent code computes KK-gluon low-energy flavor constraints: quarkConstraints/couplings.py:96, quarkConstraints/deltaf2.py:449, and quarkConstraints/scan.py:377-441."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "CMSB2G25005:CR014:top_philic_vector_50pct_width_excluded_up_to",
+      "observable": "Top-philic vector mediator mass excluded in pp -> ttbar Zprime, Zprime -> ttbar, four-top two-lepton search, Gamma/m = 50%",
+      "value": 850.0,
+      "uncertainty": null,
+      "units": "GeV",
+      "display": "m(Zprime) excluded up to 850 GeV (observed)",
+      "year": 2026,
+      "experiment": "CMS",
+      "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/preliminary-results/B2G-25-005/index.html",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_b2g_25_005_public_result.txt",
+      "sha256": "sha256:a747064ac47671770e48737335f9a25f718e0ab024bc7ea0bde73e48bf1beb34",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "mass_excluded_up_to"
+    },
+    {
+      "label": "PDG2025:CR014:ATLAS_4top_cross_section",
+      "observable": "sigma(pp -> t tbar t tbar), ATLAS multilepton observation, sqrt(s)=13 TeV",
+      "value": 22.5,
+      "uncertainty": null,
+      "units": "fb",
+      "display": "22.5^{+6.6}_{-5.5} fb",
+      "year": 2023,
+      "experiment": "ATLAS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-top-quark.pdf",
+      "snapshot_path": "flavor_catalog/references/CR014/pdg2025_top_four_top_extract.txt",
+      "sha256": "sha256:6320d3d26384909b9e549fcd6be668086f5a8831d3c1c9f4bbe016597cf17e39",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": "measurement"
+    },
+    {
+      "label": "PDG2025:CR014:CMS_4top_cross_section",
+      "observable": "sigma(pp -> t tbar t tbar), CMS same-sign/multilepton observation, sqrt(s)=13 TeV",
+      "value": 17.7,
+      "uncertainty": null,
+      "units": "fb",
+      "display": "17.7^{+4.4}_{-4.0} fb",
+      "year": 2023,
+      "experiment": "CMS",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-top-quark.pdf",
+      "snapshot_path": "flavor_catalog/references/CR014/pdg2025_top_four_top_extract.txt",
+      "sha256": "sha256:6320d3d26384909b9e549fcd6be668086f5a8831d3c1c9f4bbe016597cf17e39",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": "measurement"
+    },
+    {
+      "label": "ATLAS2024:CR014:top_philic_Zprime_cross_section_limit_range",
+      "observable": "sigma(pp -> ttbar Zprime or t Zprime associated production, Zprime -> ttbar) times branching ratio in ATLAS top-philic simplified models",
+      "value": null,
+      "uncertainty": null,
+      "units": "fb",
+      "display": "observed 95% CL upper-limit range 21-119 fb",
+      "year": 2024,
+      "experiment": "ATLAS",
+      "source_url": "https://arxiv.org/abs/2304.01678",
+      "snapshot_path": "flavor_catalog/references/CR014/atlas_top_philic_2024_arxiv2304_01678.txt",
+      "sha256": "sha256:cb4204207db4772695722191e970027394899cde25cd6a1034c6a91617428c53",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "upper_limit_range"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "label": "CMS-B2G-25-005 data and scan context",
+      "source_key": "CMSB2G25005_PublicResult",
+      "values": [
+        {
+          "observable": "Run-2 integrated luminosity",
+          "value": 138,
+          "units": "fb^-1"
+        },
+        {
+          "observable": "Run-3 integrated luminosity",
+          "value": 35,
+          "units": "fb^-1"
+        },
+        {
+          "observable": "Run-2 collision energy",
+          "value": 13,
+          "units": "TeV"
+        },
+        {
+          "observable": "Run-3 collision energy",
+          "value": 13.6,
+          "units": "TeV"
+        },
+        {
+          "observable": "resonance mass range scanned",
+          "value_min": 500,
+          "value_max": 4000,
+          "units": "GeV"
+        },
+        {
+          "observable": "relative width range scanned",
+          "value_min": 4,
+          "value_max": 50,
+          "units": "percent"
+        },
+        {
+          "observable": "expected excluded mass for 50% width vector mediator",
+          "value": 1000,
+          "units": "GeV",
+          "context": "Expected limit, not promoted as the observed exclusion."
+        }
+      ],
+      "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/preliminary-results/B2G-25-005/index.html",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_b2g_25_005_public_result.txt",
+      "sha256": "sha256:a747064ac47671770e48737335f9a25f718e0ab024bc7ea0bde73e48bf1beb34"
+    },
+    {
+      "label": "Observation significances summarized by PDG",
+      "source_key": "PDG2025_TopFourTop",
+      "values": [
+        {
+          "experiment": "ATLAS",
+          "arxiv_id": "2303.15061",
+          "observed_significance": 6.1,
+          "expected_significance": 4.3,
+          "units": "standard deviations"
+        },
+        {
+          "experiment": "CMS",
+          "arxiv_id": "2305.13439",
+          "observed_significance": 5.6,
+          "expected_significance": 4.9,
+          "units": "standard deviations"
+        }
+      ],
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-top-quark.pdf",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR014/pdg2025_top_four_top_extract.txt",
+      "sha256": "sha256:6320d3d26384909b9e549fcd6be668086f5a8831d3c1c9f4bbe016597cf17e39"
+    }
+  ],
+  "paper_era_reference": {
+    "quark_scan_methodology_2026": {
+      "source": "Local quark-scan methodology note",
+      "source_type": "upstream project methodology; not a measured collider observable",
+      "relevance": "Records the corrected RS-anarchy p50 lower-bound context used to compare collider reach with low-energy flavor reach.",
+      "values": [
+        {
+          "observable": "M_KK^min(p50, g_s^star=3)",
+          "value": 47.26,
+          "units": "TeV",
+          "context": "Median RS-anarchy bound from low-energy quark flavor scan."
+        }
+      ],
+      "source_url": "local:docs/quark_scan_methodology_note.tex",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR014/quark_scan_methodology_note_extract.txt",
+      "sha256": "sha256:b2dfbcccbdee4754d2ce451e309cb1abeba274d2c468fd5f68df070ceb5c5b96"
+    },
+    "cao_chen_liu_2016": {
+      "source": "Cao, Chen, and Liu, Phys. Rev. D 95, 053004 (2017)",
+      "arxiv_id": "1602.01934",
+      "source_type": "paper-era top-Higgs/four-top phenomenology; not a measured observable",
+      "relevance": "Shows why four-top production is a top-Yukawa and top-compositeness diagnostic.",
+      "source_url": "https://arxiv.org/abs/1602.01934",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR014/cao_chen_liu_2016_arxiv1602_01934.txt",
+      "sha256": "sha256:29a330229bc6edb8d7180c042f80a5918362155a119b7696dde5f96deca4a08c"
+    },
+    "de_blas_eberhardt_krause_2018": {
+      "source": "de Blas, Eberhardt, and Krause, JHEP 07 (2018) 048",
+      "arxiv_id": "1803.00939",
+      "source_type": "nonlinear Higgs EFT/composite-Higgs context; not a measured observable",
+      "relevance": "Composite-Higgs EFT context for top/Higgs coupling interpretations adjacent to four-top constraints.",
+      "source_url": "https://arxiv.org/abs/1803.00939",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR014/de_blas_eberhardt_krause_2018_arxiv1803_00939.txt",
+      "sha256": "sha256:1508e575ad89281a8443ffc8f14dfe3f6b9b3b90758583e05d2fa4fc8b7e95d5"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": [
+    {
+      "key": "BanelliEtAl2021_FourTopOperators",
+      "arxiv_id": "2010.05915",
+      "source_type": "four-top contact-operator theory; not a measured observable",
+      "relevance": "Explains why strongly interacting top sectors generate leading effects in four-top contact operators.",
+      "source_url": "https://arxiv.org/abs/2010.05915",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR014/banelli_salvioni_serra_theil_weiler_2021_arxiv2010_05915.txt",
+      "sha256": "sha256:1a71eda41e7b78b08f77810375fe66e6da00400f6fcda1be486e842da615f6cd"
+    },
+    {
+      "key": "DarmeFuksMaltoni2021_TopPhilic",
+      "arxiv_id": "2104.09512",
+      "source_type": "top-philic resonance/EFT interpretation; not a measured observable",
+      "relevance": "Connects simplified top-philic resonances in four-top final states to EFT validity.",
+      "source_url": "https://arxiv.org/abs/2104.09512",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR014/darme_fuks_maltoni_2021_arxiv2104_09512.txt",
+      "sha256": "sha256:cf251bda322f1ad4387102d6137afc3ef063d7fc13e2c933692907f0f779c78e"
+    },
+    {
+      "key": "DarmeEtAl2025_BoostedTopPhilic",
+      "arxiv_id": "2507.05334",
+      "source_type": "projection/analysis-strategy theory; not a current measured observable",
+      "relevance": "Provides boosted four-top resonance-reach context for future searches.",
+      "source_url": "https://arxiv.org/abs/2507.05334",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR014/darme_fuks_li_maltoni_toucheque_2025_arxiv2507_05334.txt",
+      "sha256": "sha256:bc2b8c208c0c075f65400fa45bfedc464410a67df92d7267449d6d349daa3eb9"
+    }
+  ],
+  "post_2010_developments": [
+    {
+      "key": "CMS2014_FourTop8TeV",
+      "type": "experimental_search",
+      "arxiv_id": "1409.7339",
+      "why_matters": "First published CMS four-top search at 8 TeV; established lepton-plus-jets multivariate strategy against large ttbar+jets backgrounds.",
+      "source_url": "https://arxiv.org/abs/1409.7339",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_2014_arxiv1409_7339.txt",
+      "sha256": "sha256:0bb939614dbdcffd5df0dbe48df9371223a8ccf00279847ff9ee9f65a607d921"
+    },
+    {
+      "key": "CMS2017_FourTop13TeV",
+      "type": "experimental_search",
+      "arxiv_id": "1702.06164",
+      "why_matters": "First 13 TeV CMS Run-2 search in lepton-plus-jets and opposite-sign dilepton channels.",
+      "source_url": "https://arxiv.org/abs/1702.06164",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_2017_arxiv1702_06164.txt",
+      "sha256": "sha256:99909bc9b7ccd4244c93e45414b5788d59b54d28e8dcb94fc9a1e902f4f9fde3"
+    },
+    {
+      "key": "CMS2018_FourTopMultilepton",
+      "type": "experimental_search",
+      "arxiv_id": "1710.10614",
+      "why_matters": "Run-2 same-sign and multilepton search; first strong top-Higgs Yukawa interpretation in this channel.",
+      "source_url": "https://arxiv.org/abs/1710.10614",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_2018_arxiv1710_10614.txt",
+      "sha256": "sha256:518d31e7e0dcc35fa07fc20c3225d7b34bf0358bbfe0a1d8859d6279ed1a55fe"
+    },
+    {
+      "key": "ATLAS2019_FourTopLJDL",
+      "type": "experimental_search",
+      "arxiv_id": "1811.02305",
+      "why_matters": "ATLAS single-lepton and opposite-sign dilepton search, combined with prior multilepton ATLAS inputs and EFT interpretation.",
+      "source_url": "https://arxiv.org/abs/1811.02305",
+      "snapshot_path": "flavor_catalog/references/CR014/atlas_2019_arxiv1811_02305.txt",
+      "sha256": "sha256:de68d1fef9289ac10d340c8a006d8018fa600dba94e6aa61589f8979c4c2f854"
+    },
+    {
+      "key": "CMS2020_FourTopFullRun2Multilepton",
+      "type": "experimental_measurement",
+      "arxiv_id": "1908.06463",
+      "why_matters": "Full 2016-2018 same-sign and multilepton data set; added scalar, pseudoscalar, top-Yukawa, and EFT interpretations.",
+      "source_url": "https://arxiv.org/abs/1908.06463",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_2020_arxiv1908_06463.txt",
+      "sha256": "sha256:4b6e01c12061b965d67e62d8495bd3b6e354be67a7c20687b7bbba372eb8978a"
+    },
+    {
+      "key": "ATLAS2021_FourTopCrossSection",
+      "type": "experimental_measurement",
+      "arxiv_id": "2106.11683",
+      "why_matters": "ATLAS full Run-2 lepton-plus-jets and opposite-sign dilepton measurement combined with multilepton evidence.",
+      "source_url": "https://arxiv.org/abs/2106.11683",
+      "snapshot_path": "flavor_catalog/references/CR014/atlas_2021_arxiv2106_11683.txt",
+      "sha256": "sha256:9fe5b167754b06afc2ad88f64e0a25f542d528fd1a407b06e14b9275b90a66c2"
+    },
+    {
+      "key": "CMS2023_FourTopEvidence",
+      "type": "experimental_measurement",
+      "arxiv_id": "2303.03864",
+      "why_matters": "CMS evidence using all-hadronic, one-lepton, and opposite-sign dilepton channels, combined with previous multilepton inputs.",
+      "source_url": "https://arxiv.org/abs/2303.03864",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_2023_evidence_arxiv2303_03864.txt",
+      "sha256": "sha256:4f264e6c5f275fd1a74fa496f3e98c8799ceaea39cd7390993681ba01d472939"
+    },
+    {
+      "key": "ATLAS2023_FourTopObservation",
+      "type": "experimental_observation",
+      "arxiv_id": "2303.15061",
+      "why_matters": "ATLAS first-observation analysis using graph-neural-network discrimination in multilepton final states.",
+      "source_url": "https://arxiv.org/abs/2303.15061",
+      "snapshot_path": "flavor_catalog/references/CR014/atlas_2023_arxiv2303_15061.txt",
+      "sha256": "sha256:f03fe718ca1ff81f420b54ae94b474bf63a2bc529c611c55c568c75b63056bea"
+    },
+    {
+      "key": "CMS2023_FourTopObservation",
+      "type": "experimental_observation",
+      "arxiv_id": "2305.13439",
+      "why_matters": "CMS first-observation analysis with improved lepton, b-tagging, and multivariate classification.",
+      "source_url": "https://arxiv.org/abs/2305.13439",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_2023_arxiv2305_13439.txt",
+      "sha256": "sha256:b9e989ecbe5f6398fc77863373e91c8e2c7ac18afc70f3f864cc6090a61e2bef"
+    },
+    {
+      "key": "ATLASTopPhilic2024",
+      "type": "experimental_resonance_search",
+      "arxiv_id": "2304.01678",
+      "why_matters": "ATLAS direct top-philic heavy-resonance search in a four-top-like topology with boosted hadronic top reconstruction.",
+      "source_url": "https://arxiv.org/abs/2304.01678",
+      "snapshot_path": "flavor_catalog/references/CR014/atlas_top_philic_2024_arxiv2304_01678.txt",
+      "sha256": "sha256:cb4204207db4772695722191e970027394899cde25cd6a1034c6a91617428c53"
+    },
+    {
+      "key": "CMSB2G25005_PublicResult",
+      "type": "experimental_resonance_search",
+      "arxiv_id": "2604.14058",
+      "why_matters": "Most recent official CMS four-top resonance result found in this pass; adds 13.6 TeV data and a dedicated two-lepton topology.",
+      "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/preliminary-results/B2G-25-005/index.html",
+      "snapshot_path": "flavor_catalog/references/CR014/cms_b2g_25_005_public_result.txt",
+      "sha256": "sha256:a747064ac47671770e48737335f9a25f718e0ab024bc7ea0bde73e48bf1beb34"
+    }
+  ],
+  "source_shas": {
+    "atlas_2019_arxiv1811_02305.txt": "sha256:de68d1fef9289ac10d340c8a006d8018fa600dba94e6aa61589f8979c4c2f854",
+    "atlas_2021_arxiv2106_11683.txt": "sha256:9fe5b167754b06afc2ad88f64e0a25f542d528fd1a407b06e14b9275b90a66c2",
+    "atlas_2023_arxiv2303_15061.txt": "sha256:f03fe718ca1ff81f420b54ae94b474bf63a2bc529c611c55c568c75b63056bea",
+    "atlas_top_philic_2024_arxiv2304_01678.txt": "sha256:cb4204207db4772695722191e970027394899cde25cd6a1034c6a91617428c53",
+    "banelli_salvioni_serra_theil_weiler_2021_arxiv2010_05915.txt": "sha256:1a71eda41e7b78b08f77810375fe66e6da00400f6fcda1be486e842da615f6cd",
+    "cao_chen_liu_2016_arxiv1602_01934.txt": "sha256:29a330229bc6edb8d7180c042f80a5918362155a119b7696dde5f96deca4a08c",
+    "cms_2014_arxiv1409_7339.txt": "sha256:0bb939614dbdcffd5df0dbe48df9371223a8ccf00279847ff9ee9f65a607d921",
+    "cms_2017_arxiv1702_06164.txt": "sha256:99909bc9b7ccd4244c93e45414b5788d59b54d28e8dcb94fc9a1e902f4f9fde3",
+    "cms_2018_arxiv1710_10614.txt": "sha256:518d31e7e0dcc35fa07fc20c3225d7b34bf0358bbfe0a1d8859d6279ed1a55fe",
+    "cms_2020_arxiv1908_06463.txt": "sha256:4b6e01c12061b965d67e62d8495bd3b6e354be67a7c20687b7bbba372eb8978a",
+    "cms_2023_arxiv2305_13439.txt": "sha256:b9e989ecbe5f6398fc77863373e91c8e2c7ac18afc70f3f864cc6090a61e2bef",
+    "cms_2023_evidence_arxiv2303_03864.txt": "sha256:4f264e6c5f275fd1a74fa496f3e98c8799ceaea39cd7390993681ba01d472939",
+    "cms_2026_arxiv2604_14058.txt": "sha256:12befc33c55808ec0d1b203966181c7ce69261d4434e02ce09b27cbc46116193",
+    "cms_b2g_25_005_public_result.txt": "sha256:a747064ac47671770e48737335f9a25f718e0ab024bc7ea0bde73e48bf1beb34",
+    "darme_fuks_li_maltoni_toucheque_2025_arxiv2507_05334.txt": "sha256:bc2b8c208c0c075f65400fa45bfedc464410a67df92d7267449d6d349daa3eb9",
+    "de_blas_eberhardt_krause_2018_arxiv1803_00939.txt": "sha256:1508e575ad89281a8443ffc8f14dfe3f6b9b3b90758583e05d2fa4fc8b7e95d5",
+    "darme_fuks_maltoni_2021_arxiv2104_09512.txt": "sha256:cf251bda322f1ad4387102d6137afc3ef063d7fc13e2c933692907f0f779c78e",
+    "pdg2025_top_four_top_extract.txt": "sha256:6320d3d26384909b9e549fcd6be668086f5a8831d3c1c9f4bbe016597cf17e39",
+    "quark_scan_methodology_note_extract.txt": "sha256:b2dfbcccbdee4754d2ce451e309cb1abeba274d2c468fd5f68df070ceb5c5b96"
+  },
+  "source_shas_count": 19,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T16:37:50-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T16:37:50-04:00",
+      "agent_id": "PKA-CR014",
+      "reason": "Initial CR014 collider_rs PRIMARY draft skeleton and source research started."
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T16:37:50-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T16:37:50-04:00",
+      "agent_id": "PKA-CR014",
+      "reason": "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T17:08:10-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T17:08:10-04:00",
+      "agent": "WA-WA-w9-vlq-4top",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "Wave-9 WA polish for VLQ/4-top collider_rs batch; prose and CHK-1 metadata placement normalized."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-17T17:32:39-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T17:32:39-04:00",
+      "agent": "CA-CA-w9-vlq-4top",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w9_vlq_4top.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T19:30:00-04:00",
+      "agent_id": "Opus-round-5",
+      "round_id": "opus_round_005",
+      "reason": "Opus round 5 per-process sign-off for Wave-9 collider_rs PRIMARY entries; CA-verified PASS retained; see flavor_catalog/signoff/round_005_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T19:30:01-04:00",
+      "agent_id": "factcheck-codex-collider_rs-w9",
+      "agent": "factcheck-codex-collider_rs-w9",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-9 collider_rs family fact-check (factcheck_collider_rs.md)."
+    }
+  ],
+  "sections": {
+    "process": "This entry covers Standard-Model and beyond-the-Standard-Model production of\nfour top quarks at the LHC, \\(pp\\to t\\bar t t\\bar t\\).  In the\n\\texttt{collider\\_rs} scope it is a direct-collider handle on top-philic\nresonances, heavy top-partner sectors that feed multi-top final states, and\nfour-top contact operators.  It is not a single inclusive \\(M_{\\rm KK}\\)\nobservable: a collider interpretation must specify the resonance spin, width,\ncouplings, production mechanism, and branching fractions.",
+    "pdg_prose": "The PDG 2025 top-quark review records the Run-2 observation measurements as the\ncanonical inclusive \\(t\\bar t t\\bar t\\) cross-section inputs.  ATLAS measures\n\\(\\sigma(pp\\to t\\bar t t\\bar t)=22.5^{+6.6}_{-5.5}\\,\\mathrm{fb}\\) in the\nmultilepton observation analysis, while CMS measures\n\\(\\sigma(pp\\to t\\bar t t\\bar t)=17.7^{+4.4}_{-4.0}\\,\\mathrm{fb}\\) in the\ncorresponding PDG summary.  The CMS paper gives the same central value with\nseparate statistical and systematic uncertainties.  These measurements are\nhigher than the Standard-Model reference rate but compatible within current\nuncertainties, so the inclusive four-top result is currently a\nmeasurement and reinterpretation input rather than a standalone RS mass\nexclusion.\n\nFor a direct four-top resonance interpretation, the most recent official CMS\npublic result found in this pass is CMS-B2G-25-005, also summarized in\narXiv:2604.14058.  It searches for resonances in four-top events with two\nleptons using \\(13\\) and \\(13.6\\) TeV data.  CMS sets upper limits over\nresonance masses from \\(500\\,\\mathrm{GeV}\\) to \\(4\\,\\mathrm{TeV}\\) and relative\nwidths from \\(4\\%\\) to \\(50\\%\\); for a top-philic vector mediator with\n\\(\\Gamma/m=50\\%\\), masses are excluded at \\(95\\%\\) CL up to\n\\(850\\,\\mathrm{GeV}\\) observed.  ATLAS provides a complementary top-philic\n\\(Z'\\) search in the single-lepton channel with observed \\(95\\%\\) CL\ncross-section upper limits ranging from \\(21\\) to \\(119\\,\\mathrm{fb}\\) across\nits simplified-model parameter choices.",
+    "relevance": "Four-top production is relevant to custodial or composite RS because the top\nquark is typically the most IR-localized Standard-Model fermion.  A KK gluon,\ncomposite vector, or heavy top partner can couple preferentially to tops and\nproduce \\(t\\bar t t\\bar t\\) through associated production\n\\(pp\\to t\\bar t X\\), \\(X\\to t\\bar t\\), through off-shell exchange, or through\nthe low-energy four-top contact operators used in EFT reinterpretations.  The\nobservable therefore probes the same top-compositeness sector that direct\n\\(t\\bar t\\) resonance and vector-like-quark searches probe, but it does so in a\nmore model-dependent topology.\n\nThe anarchic-flavor pipeline is already dominated by low-energy quark flavor.\nThe methodology note reports the corrected RS-anarchy median bound\n\\(M_{\\rm KK}^{\\min}(p50,g_s^\\star=3)=47.26\\,\\mathrm{TeV}\\).  That scale is far\nabove the present four-top resonance reach, which is sub-TeV for the broad\ntop-philic vector benchmark in CMS-B2G-25-005 and at the few-TeV level only as a\nmodel-dependent cross-section search.  Consequently CR014 is a PRIMARY\ncollider-RS cross-check and a useful handle on aligned, custodial, or\nnon-anarchic spectra, but it is not the leading bound for the anarchic\nlow-energy flavor scan.",
+    "post_2008": "CMS opened the published LHC search history with the 8 TeV lepton-plus-jets\nanalysis in arXiv:1409.7339.  The importance of that result is historical: it\nestablished the multivariate strategy for a final state with a very small SM\nrate and large \\(t\\bar t+\\)jets backgrounds.\n\nThe first 13 TeV CMS searches, arXiv:1702.06164 and arXiv:1710.10614, moved the\nprogram into Run 2 and separated the lepton-plus-jets/opposite-sign dilepton\nand same-sign/multilepton handles.  The multilepton analysis also began using\nfour-top data to constrain the top-Higgs Yukawa coupling, making the connection\nto top compositeness explicit.\n\nATLAS arXiv:1811.02305 added a 13 TeV single-lepton and opposite-sign dilepton\nsearch and combined it with earlier ATLAS multilepton inputs; CMS\narXiv:1908.06463 then used the full 2016--2018 multilepton data set and added\nBSM scalar, pseudoscalar, and EFT interpretations.\n\nThe Run-2 evidence and observation stage came from ATLAS arXiv:2106.11683,\nCMS arXiv:2303.03864, ATLAS arXiv:2303.15061, and CMS arXiv:2305.13439.\nThe key changes were full Run-2 luminosity, improved heavy-flavor and lepton\nobject identification, more powerful multivariate or graph-neural-network\nclassifiers, and combinations across complementary final states.\n\nThe direct resonance branch is now represented by ATLAS arXiv:2304.01678 and\nCMS-B2G-25-005/arXiv:2604.14058.  These move beyond an inclusive signal-strength\nmeasurement into explicit top-philic resonance searches, but the exclusions are\nstill benchmark dependent.",
+    "validity": "The inclusive \\(t\\bar t t\\bar t\\) cross section is a robust experimental\nobservable, but it becomes an RS constraint only after specifying a BSM\ninterpretation.  A broad vector mediator, a scalar or pseudoscalar, a KK gluon,\nand a fermionic top partner can produce similar event counts but different\nkinematics, interference patterns, and acceptances.  EFT translations are valid\nonly when the mediator is sufficiently heavier than the resolved event scale;\nfor lighter or broad resonances a simplified-model or full-model simulation is\nneeded.\n\nThe current top-philic resonance limits assume exclusive or dominant couplings\nto top quarks, specified widths, and specific production modes.  A custodial-RS\nspectrum with several nearby resonances, non-saturated branching ratio\n\\(\\mathrm{BR}(X\\to t\\bar t)\\), additional decays to top partners, or altered\ntop-tagging acceptance cannot be read off from the quoted mass number without a\ndedicated reinterpretation.",
+    "code_coverage_prose": "\\textbf{NO}.  The required CR014 grep found no implementation of four-top,\ntop-philic-resonance, or direct collider-search constraints in\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, or \\texttt{tests/}.  The exact query\n\\texttt{rg -n \"CR014|four.?top|4.?top|tttt|top.?philic\" ...} returned no\nmatches.  A separate collider-term query found only an unrelated\n\\texttt{CMS/RunDec} alpha-s test comment in \\texttt{tests/test\\_alpha\\_s.py:89}.\n\nAdjacent evidence confirms that the scan computes low-energy KK-gluon flavor\nconstraints, not collider limits.  \\texttt{quarkConstraints/couplings.py:96}\ndefines \\texttt{compute\\_quark\\_kk\\_gluon\\_couplings};\n\\texttt{quarkConstraints/deltaf2.py:449} defines\n\\texttt{evaluate\\_delta\\_f2\\_constraints}; and\n\\texttt{quarkConstraints/scan.py:377} through \\texttt{quarkConstraints/scan.py:441}\nthreads those \\(\\Delta F=2\\) ratios into the quark-scan pass/fail row.  No\nanalogous module consumes LHC cross sections, resonance mass limits, or\nexperimental likelihoods.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A faithful live constraint would require a model-to-collider\nchain: RS spectrum generation, production and decay simulation, detector-level\nacceptance, and a likelihood or recast for the ATLAS/CMS analyses.  A simple\n``\\(M_{\\rm KK}>850\\,\\mathrm{GeV}\\)'' filter would be misleading because the CMS\nnumber is a broad top-philic vector benchmark, not a generic KK-gluon or\ncustodial-partner exclusion.  Practical implementation should use an external\nreinterpretation tool such as CheckMATE, MadAnalysis5, SModelS where applicable,\nor a preserved HEPData/analysis likelihood.",
+    "key_references": "\\texttt{PDG2025\\_TopFourTop};\n\\texttt{ATLAS2023\\_FourTopObservation};\n\\texttt{CMS2023\\_FourTopObservation};\n\\texttt{CMSB2G25005\\_PublicResult};\n\\texttt{CMS2026\\_FourTopResonance};\n\\texttt{ATLASTopPhilic2024};\n\\texttt{CaoChenLiu2016};\n\\texttt{DeBlasEberhardtKrause2018};\n\\texttt{BanelliEtAl2021\\_FourTopOperators};\n\\texttt{DarmeFuksMaltoni2021\\_TopPhilic};\n\\texttt{QuarkScanMethodology2026}."
+  },
+  "source_yaml": "flavor_catalog/processes/collider_rs/CR014.yaml",
+  "source_tex": "flavor_catalog/processes/collider_rs/CR014.tex",
+  "worklog_path": "flavor_catalog/worklogs/CR014/"
+}

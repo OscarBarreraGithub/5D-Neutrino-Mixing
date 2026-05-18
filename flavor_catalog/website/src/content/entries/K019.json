@@ -1,0 +1,253 @@
+{
+  "process_id": "K019",
+  "family": "secondary",
+  "family_original": "kaon",
+  "tier": "SECONDARY",
+  "standard_notation": "K_L \\to e^{\\pm}\\mu^{\\mp}",
+  "process_name": "Lepton-flavor-violating long-lived neutral-kaon decay",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": "Requires new Delta S = 1 charged-LFV semileptonic Wilson coefficients and matching from a lepton-bulk or leptoquark RS extension, but the physical observable is a clean two-body upper limit with standard kaon decay-constant and quark-mass inputs and no long-distance SM subtraction.",
+  "cycle_count": null,
+  "priority_rationale": "Deferred by DA-4 (round_004_addendum_deferred_scope.md); LFV-kaon trio deferred as a lepton-bulk RS scope extension; quark-only RS does not naturally generate s->d e mu. Promoted in Wave-8 because: Top-tier per SESSION_NOTES.md sec 7; one of three explicit lepton-bulk-RS handles in the kaon sector. Lower implementation priority than Waves 1-7 PRIMARY entries.",
+  "promoted_in_wave": 8,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "No exact K019 / K_L -> e mu / s->d e mu implementation found in quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, or tests.",
+      "Adjacent lepton LFV code is mu->e gamma only: flavorConstraints/muToEGamma.py:1 documents a mu->e gamma constraint, and lines 15-21 tie the rate to the (Ybar_N Ybar_N^dagger)12 dipole spurion.",
+      "The scanner consumes only the mu->e gamma LFV check: scanParams/scan.py:523-535 calls check_mu_to_e_gamma and records the reason string mu_to_e_gamma.",
+      "Adjacent kaon code is quark Delta F=2: quarkConstraints/deltaf2.py:610-624 defines kaon hadronic parameters for epsilon_K and Delta m_K, not semileptonic LFV K_L decay."
+    ],
+    "grep_commands": [
+      "rg -n \"K019|K_L|KL|K0_L|K\\\\^0_L|kaon.*LFV|LFV.*kaon|lepton.?flavo[u]?r.*kaon\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"e\\\\s*mu|mu\\\\s*e|electron.*muon|muon.*electron\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"Delta.?S.?=.?(1|one)|s.?->.?d|sd.*(electron|muon|lepton)|d.*s.*e.*mu|s.*d.*e.*mu|Wilson.*lepton|semileptonic.*kaon\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"mu.?->.?e|muToE|mu_to_e|mu.*e.*conversion|charged.?lepton|LFV|lepton.?flavo[u]?r\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"K_L\\\\s*->\\\\s*(e|mu)|KL\\\\s*->\\\\s*(e|mu)|K0_L\\\\s*->\\\\s*(e|mu)|K\\\\^0_L\\\\s*->\\\\s*(e|mu)|e\\\\^\\\\{?\\\\\\\\pm\\\\}?\\\\s*mu|mu\\\\^\\\\{?\\\\\\\\pm\\\\}?\\\\s*e|muon.*electron.*kaon|electron.*muon.*kaon\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2025:K019:KL_emu_limit",
+      "observable": "BR(K_L -> e^+/- mu^-/+)",
+      "value": 4.7e-12,
+      "uncertainty": null,
+      "units": "dimensionless branching fraction",
+      "display": "< 4.7 x 10^-12",
+      "year": 2025,
+      "experiment": "PDG Review of Particle Physics, K_L0 listing, 2025 update",
+      "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf",
+      "snapshot_path": "flavor_catalog/references/K019/pdg2025_kl_emu.txt",
+      "sha256": "sha256:b5797d539dbe6bc7e0ee3146b40dc297d3d73f8eb6c622fdd4bd77d882cf4a2a",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper_limit"
+    },
+    {
+      "label": "Ambrose1998:K019:KL_emu_limit",
+      "observable": "BR(K_L -> e^+/- mu^-/+)",
+      "value": 4.7e-12,
+      "uncertainty": null,
+      "units": "dimensionless branching fraction",
+      "display": "< 4.7 x 10^-12",
+      "year": 1998,
+      "experiment": "Ambrose et al. (BNL E871), Phys. Rev. Lett. 81, 5734 (1998)",
+      "source_url": "https://arxiv.org/abs/hep-ex/9811038",
+      "snapshot_path": "flavor_catalog/references/K019/ambrose_1998_arxiv_hepex9811038.txt",
+      "sha256": "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper_limit"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "label": "BNL E871 event-count context",
+      "observable": "signal-like K_L -> mu e candidates",
+      "year": 1998,
+      "value": 0,
+      "units": "events",
+      "context": "Experiment-analysis context for the limit; not promoted to pdg_or_equivalent per CHK-1 carve-out.",
+      "source": "Ambrose et al. arXiv:hep-ex/9811038 abstract",
+      "source_url": "https://arxiv.org/abs/hep-ex/9811038",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K019/ambrose_1998_arxiv_hepex9811038.txt",
+      "sha256": "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283"
+    }
+  ],
+  "paper_era_reference": {
+    "cfw_quark_flavor_context": {
+      "source": "Csaki, Falkowski, and Weiler 2008",
+      "arxiv_id": "0804.1954",
+      "source_type": "paper-era RS quark-flavor reference; not a pdg_or_equivalent measured observable",
+      "relevance": "Paper-era quark-flavor RS context; explains why quark-only RS constraints do not by themselves generate the lepton-flavor-violating K019 final state.",
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K019/csaki_falkowski_weiler_2008_arxiv0804_1954.txt",
+      "sha256": "sha256:4e6358f91f72b248c7b332a9480be1231ff015bd74193d216524a1f967038dbc"
+    },
+    "perez_randall_lepton_bulk_context": {
+      "source": "Perez and Randall 2008",
+      "arxiv_id": "0805.4652",
+      "source_type": "paper-era lepton-bulk RS reference; not a pdg_or_equivalent measured observable",
+      "relevance": "Lepton-bulk RS / lepton-MFV context for charged-lepton flavor violation and why K019 is a scope extension beyond quark-only RS.",
+      "source_url": "https://arxiv.org/abs/0805.4652",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K019/perez_randall_2008_arxiv0805_4652.txt",
+      "sha256": "sha256:ea025c2fbef93e3a52bf69d41544f39cf3166d6f8d494f0e8b73d81b042020d8"
+    }
+  },
+  "theory_context": {
+    "charged_lfv_review": {
+      "source": "PDG 2025 Tests of Conservation Laws review",
+      "relevance": "Qualitative CLFV context: charged-lepton flavor mixing has not been observed; neutrino-mass-only effects are unobservably small, so accessible charged LFV implies BSM flavor sources.",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-conservation-laws.pdf",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K019/pdg2025_conservation_laws_clfv.txt",
+      "sha256": "sha256:39cbab502c19ba91de7d151e7d68900c9b4f01f4eb58cc3feffbfb1b3f705688"
+    }
+  },
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": [
+    {
+      "key": "BurasDulingEtAl2010_LFVFourthGeneration",
+      "type": "theory",
+      "arxiv_id": "1006.5356",
+      "why_matters": "Includes K_L -> mu e and K_L -> pi0 mu e in a broader charged-LFV pattern study, useful for relating kaon LFV to charged-lepton and B-meson LFV observables.",
+      "source_url": "https://arxiv.org/abs/1006.5356",
+      "snapshot_path": "flavor_catalog/references/K019/buras_duling_2010_arxiv1006_5356.txt",
+      "sha256": "sha256:f30a558221bc3e8269e7810b4ebd5712e6408fd6f5191dcaf3b68c4c8fb08877"
+    },
+    {
+      "key": "BenekeMochRohrwild2015_RsLeptonLFV",
+      "type": "theory",
+      "arxiv_id": "1508.01705",
+      "why_matters": "Updates RS charged-lepton LFV calculations in a full 5D framework; does not compute K019 directly but fixes the lepton-sector misalignment ingredients needed for any lepton-bulk RS K019 implementation.",
+      "source_url": "https://arxiv.org/abs/1508.01705",
+      "snapshot_path": "flavor_catalog/references/K019/beneke_moch_rohrwild_2015_arxiv1508_01705.txt",
+      "sha256": "sha256:74068448f8223384adcb0d20b5a6ec043a07980222776cb9ffffb4b3934e71f6"
+    },
+    {
+      "key": "DAmbrosioIyer2018_WarpedRareK",
+      "type": "theory",
+      "arxiv_id": "1712.08122",
+      "why_matters": "Studies warped custodial models with partially composite leptons, rare K decays, and lepton-sector flavor violation; relevant to embedding K019 in non-universal lepton RS scenarios.",
+      "source_url": "https://arxiv.org/abs/1712.08122",
+      "snapshot_path": "flavor_catalog/references/K019/dambrosio_iyer_2018_arxiv1712_08122.txt",
+      "sha256": "sha256:7cb269f5930ae7743fc20e636c82b95d6ad2ecb0f9a997d2a2885571a76de2dd"
+    },
+    {
+      "key": "BlankeCrivellin2018_PatiSalamRS",
+      "type": "theory",
+      "arxiv_id": "1801.07256",
+      "why_matters": "Explicit RS-adjacent leptoquark example noting that K_L -> mu e and K -> pi mu e stringently constrain conventional Pati-Salam vector-leptoquark scales.",
+      "source_url": "https://arxiv.org/abs/1801.07256",
+      "snapshot_path": "flavor_catalog/references/K019/blanke_crivellin_2018_arxiv1801_07256.txt",
+      "sha256": "sha256:9bc2f51090b69102468c0c1e5037b88a4d4b354be4af9c301cd5d70b240a3017"
+    },
+    {
+      "key": "LHCbStrange2018_Prospects",
+      "type": "experimental_prospects",
+      "arxiv_id": "1808.03477",
+      "why_matters": "Post-2008 strange-hadron rare-decay prospects report; included as context for renewed rare-strange experimental activity, not as a direct update to the K_L -> e mu limit.",
+      "source_url": "https://arxiv.org/abs/1808.03477",
+      "snapshot_path": "flavor_catalog/references/K019/lhcb_strange_2018_arxiv1808_03477.txt",
+      "sha256": "sha256:0a3b43251bfa6433884813036c15b2e9afda50184a50bf4c7ed8925580d499f9"
+    }
+  ],
+  "source_shas": {
+    "ambrose_1998_arxiv_hepex9811038.txt": "sha256:98edf5c4d18cca860c89050175b71b70d9d3f171a45c0ee3dadf4ddfccda6283",
+    "beneke_moch_rohrwild_2015_arxiv1508_01705.txt": "sha256:74068448f8223384adcb0d20b5a6ec043a07980222776cb9ffffb4b3934e71f6",
+    "blanke_crivellin_2018_arxiv1801_07256.txt": "sha256:9bc2f51090b69102468c0c1e5037b88a4d4b354be4af9c301cd5d70b240a3017",
+    "buras_duling_2010_arxiv1006_5356.txt": "sha256:f30a558221bc3e8269e7810b4ebd5712e6408fd6f5191dcaf3b68c4c8fb08877",
+    "csaki_falkowski_weiler_2008_arxiv0804_1954.txt": "sha256:4e6358f91f72b248c7b332a9480be1231ff015bd74193d216524a1f967038dbc",
+    "dambrosio_iyer_2018_arxiv1712_08122.txt": "sha256:7cb269f5930ae7743fc20e636c82b95d6ad2ecb0f9a997d2a2885571a76de2dd",
+    "lhcb_strange_2018_arxiv1808_03477.txt": "sha256:0a3b43251bfa6433884813036c15b2e9afda50184a50bf4c7ed8925580d499f9",
+    "pdg2025_conservation_laws_clfv.txt": "sha256:39cbab502c19ba91de7d151e7d68900c9b4f01f4eb58cc3feffbfb1b3f705688",
+    "pdg2025_kl_emu.txt": "sha256:b5797d539dbe6bc7e0ee3146b40dc297d3d73f8eb6c622fdd4bd77d882cf4a2a",
+    "perez_randall_2008_arxiv0805_4652.txt": "sha256:ea025c2fbef93e3a52bf69d41544f39cf3166d6f8d494f0e8b73d81b042020d8"
+  },
+  "source_shas_count": 10,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T02:14:00-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T02:14:00-04:00",
+      "agent_id": "PKA-K019",
+      "reason": "initial K019 SECONDARY draft skeleton and source research started"
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T02:14:00-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T02:14:00-04:00",
+      "agent_id": "PKA-K019",
+      "reason": "initial PKA draft, sidecar, source snapshots, and worklog deposited"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T02:36:02-04:00",
+      "agent": "WA",
+      "cycle": 1,
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T02:36:02-04:00",
+      "agent_id": "WA",
+      "reason": "WA-w8-kaon-LFV cycle-1 polish for Wave-8 SECONDARY kaon LFV batch."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-17T02:51:59-04:00",
+      "agent": "CA",
+      "cycle": 1,
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T02:51:59-04:00",
+      "agent_id": "CA",
+      "reason": "CA-w8-kaon-LFV cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w8_kaon_LFV.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T14:31:04-04:00",
+      "agent_id": "Opus-round-4",
+      "round_id": "opus_round_004",
+      "reason": "Opus round 4 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_004_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T14:31:05-04:00",
+      "agent_id": "factcheck-codex-kaon-w8",
+      "agent": "factcheck-codex-kaon-w8",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-8 SECONDARY fact-check addendum (factcheck_kaon.md)."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(K_L \\to e^{\\pm}\\mu^{\\mp}\\).  This entry covers\nthe charged-lepton-flavor-violating two-body decay of the long-lived neutral\nkaon, summed over the two charge assignments.  It is a null-search channel:\nthe Standard Model with only neutrino mixing gives no observable charged-LFV\nkaon rate, so any signal would point to new flavor structure.",
+    "pdg_prose": "The canonical sidecar value is the PDG 2025 \\(K_L^0\\) listing limit\n\\[\n  {\\cal B}(K_L\\to e^{\\pm}\\mu^{\\mp}) < 4.7\\times 10^{-12}\n  \\quad (90\\%~{\\rm CL}).\n\\]\nThe value is listed by PDG as \\(\\Gamma(e^{\\pm}\\mu^{\\mp})/\\Gamma_{\\rm total}\\)\nand is the BNL E871 final result of Ambrose et al.; see\n\\texttt{flavor\\_catalog/references/K019/pdg2025\\_kl\\_emu.txt} and\n\\texttt{flavor\\_catalog/references/K019/ambrose\\_1998\\_arxiv\\_hepex9811038.txt}.",
+    "relevance": "This is a \\textbf{SECONDARY} Wave-8 entry; see\n\\texttt{flavor\\_catalog/PRIORITY\\_TIERS.md} for the tier policy.  The process\nwas deferred because the quark-only RS flavor pipeline does not naturally\nproduce an \\(s\\to d e\\mu\\) amplitude.  It becomes relevant once bulk leptons,\nlepton-flavor-nonuniversal gauge couplings, Pati--Salam leptoquark gauge\nbosons, or other lepton-sector flavor spurions are included.\n\nIn such extensions, \\(K_L\\to e\\mu\\) constrains products of \\(s\\)-\\(d\\) and\n\\(e\\)-\\(\\mu\\) flavor-violating couplings.  Neutral KK gauge exchange or a\nflavor-changing \\(Z\\) can generate vector/axial semileptonic operators, while\nscalar or Higgs-mediated structures probe chirality-enhanced pseudoscalar\nmatrix elements proportional to the kaon decay constant and quark masses.\nDipole effects are less direct for this two-body mode but become part of the\nsame lepton-bulk RS flavor story when the charged-lepton misalignment is not\nminimal-flavor-violating.",
+    "post_2008": "No newer direct \\(K_L\\to e\\mu\\) branching-fraction limit appears in the\nPDG 2025 \\(K_L^0\\) listing; the BNL E871 result remains the canonical bound.\nPost-2008 work matters mainly through model interpretation.  Buras et al.\n(\\texttt{arXiv:1006.5356}) included \\(K_L\\to\\mu e\\) and\n\\(K_L\\to\\pi^0\\mu e\\) in a broad charged-LFV pattern study, providing a useful\ntemplate for comparing kaon LFV with charged-lepton and \\(B\\)-meson LFV\nchannels.  Beneke, Moch, and Rohrwild (\\texttt{arXiv:1508.01705}) updated the\nRS charged-lepton LFV calculation in a full 5D framework, emphasizing dipoles,\n\\(\\mu\\to 3e\\), and muon conversion rather than kaon modes, but fixing the\nlepton-bulk flavor ingredients needed before K019 can be predicted.\n\nD'Ambrosio and Iyer (\\texttt{arXiv:1712.08122}) studied warped custodial\nmodels with partially composite leptons, rare \\(K\\) decays, and lepton-sector\nflavor violation.  Blanke and Crivellin (\\texttt{arXiv:1801.07256}) are the\nmost explicit RS-adjacent post-2008 handle for this entry: their\nPati--Salam-in-RS setup notes that conventional vector-leptoquark scenarios\nare stringently constrained by \\(K_L\\to\\mu e\\) and \\(K\\to\\pi\\mu e\\).  The LHCb\nstrange-hadron prospects report (\\texttt{arXiv:1808.03477}) is included only\nas experimental/prospective context, not as a replacement for the \\(K_L\\)\nlimit.",
+    "validity": "The experimental limit is robust and clean as a bound on the physical\nbranching fraction.  Its use as an RS constraint is model-dependent.  A\nminimal quark-only RS implementation should not impose this as a primary\nconstraint, because the \\(e\\)-\\(\\mu\\) flavor transition is absent.  A\nlepton-bulk or leptoquark-extended implementation can use it as a strong\nconstraint after specifying the charged-lepton flavor basis, the relevant\nsemileptonic Wilson coefficients, and whether vector, axial, scalar,\npseudoscalar, or Higgs-mediated operators dominate.",
+    "code_coverage_prose": "\\textbf{NO.}  Exact K019 searches over \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no\n\\(K_L\\to e^{\\pm}\\mu^{\\mp}\\), \\(s\\to d e\\mu\\), or kaon semileptonic LFV\nimplementation.  The nearby code surfaces are different observables:\n\\texttt{flavorConstraints/muToEGamma.py:1} and\n\\texttt{flavorConstraints/muToEGamma.py:15--21} document a\n\\(\\mu\\to e\\gamma\\) dipole constraint,\n\\texttt{scanParams/scan.py:523--535} consumes only that LFV check, and\n\\texttt{quarkConstraints/deltaf2.py:610--624} defines neutral-kaon\n\\(\\Delta F=2\\) inputs rather than a charged-LFV kaon decay.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  The observable itself is experimentally clean, but the repo\nwould need a new \\(\\Delta S=1\\) charged-LFV semileptonic operator interface,\nmatching from the chosen lepton-bulk or leptoquark RS extension, and a kaon\ndecay-rate evaluator with vector/axial and scalar/pseudoscalar matrix\nelements.  No new long-distance SM subtraction is the main simplifying\nfeature, but the necessary operator basis is not currently present.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2025\\_KL\\_emu}, \\texttt{Ambrose1998\\_KL\\_emu},\n\\texttt{PDG2025\\_ConservationLaws\\_CLFV},\n\\texttt{CsakiFalkowskiWeiler2008\\_RsFlavor},\n\\texttt{PerezRandall2008\\_WarpedNeutrino},\n\\texttt{BurasDulingEtAl2010\\_LFVFourthGeneration},\n\\texttt{BenekeMochRohrwild2015\\_RsLeptonLFV},\n\\texttt{DAmbrosioIyer2018\\_WarpedRareK},\n\\texttt{BlankeCrivellin2018\\_PatiSalamRS}, and\n\\texttt{LHCbStrange2018\\_Prospects}."
+  },
+  "source_yaml": "flavor_catalog/processes/secondary/kaon/K019.yaml",
+  "source_tex": "flavor_catalog/processes/secondary/kaon/K019.tex",
+  "worklog_path": "flavor_catalog/worklogs/K019/"
+}

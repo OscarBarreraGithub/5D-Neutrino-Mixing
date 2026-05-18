@@ -1,0 +1,219 @@
+{
+  "process_id": "C004",
+  "family": "charm",
+  "family_original": "charm",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(D^0\\to\\mu^+\\mu^-)",
+  "process_name": "Rare leptonic decay D0 -> mu+ mu-",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "D0 -> mu+ mu- is a new c -> u dilepton mode requiring a new Delta C = 1 Wilson coefficient normalization plus long-distance subtraction; it is not covered by the existing Delta F = 2 backend.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"D0.*mu|D\\\\^0.*mu|D0.*mumu|mu\\\\+.*mu|muon.*muon|c.?->.?u|Delta.?C|rare.?charm|rare_decay|C_10|C10|C_S|C_P|pseudoscalar|scalar.*operator\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused C004 searches found no D0 -> mu+ mu- or Delta C = 1 rare leptonic observable implementation in the required implementation/test directories.",
+      "quarkConstraints/deltaf2.py:256 and quarkConstraints/deltaf2.py:941 are D0 mixing hits, not D0 -> mu+ mu-.",
+      "flavorConstraints/muToEGamma.py:75 is the separate mu -> e gamma LFV dipole check, not a charm dimuon decay."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:D0MuMu",
+      "observable": "BR(D0 -> mu+ mu-)",
+      "value": 2.1e-09,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "PDG Live/API S032.28",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.28",
+      "snapshot_path": "flavor_catalog/references/C004/pdg2026_d0_mumu_pdgLive.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "CMS2025:D0MuMu",
+      "observable": "BR(D0 -> mu+ mu-)",
+      "value": 2.4e-09,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2025,
+      "experiment": "CMS public result page / PRL 135 (2025) 151803",
+      "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/BPH-23-008/",
+      "snapshot_path": "flavor_catalog/references/C004/cms2025_d0_mumu_public.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "LHCb2023:D0MuMu",
+      "observable": "BR(D0 -> mu+ mu-)",
+      "value": 3.1e-09,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2023,
+      "experiment": "LHCb PRL 131 (2023) 041804 / arXiv:2212.11203",
+      "source_url": "https://arxiv.org/abs/2212.11203",
+      "snapshot_path": "flavor_catalog/references/C004/lhcb2023_arxiv2212_11203.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "BurdmanGolowichHewettPakvasa2002:RareCharm",
+      "observable": "Long-distance two-photon contribution to D0 -> mu+ mu-",
+      "value": null,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2002,
+      "experiment": "Burdman, Golowich, Hewett, Pakvasa 2002",
+      "source_url": "https://arxiv.org/abs/hep-ph/0112235",
+      "snapshot_path": "flavor_catalog/references/C004/burdman2002_arxiv_hepph0112235.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "GisbertHillerSuelmann2024:RareCharmEFT",
+      "observable": "Rare |Delta c| = |Delta u| = 1 global EFT context",
+      "value": null,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2024,
+      "experiment": "Gisbert, Hiller, Suelmann 2024",
+      "source_url": "https://link.springer.com/article/10.1007/JHEP12(2024)102",
+      "snapshot_path": "flavor_catalog/references/C004/gisbert_hiller_suelmann2024_rare_charm_eft.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "burdman2002_arxiv_hepph0112235.txt": "sha256:ec7271413986bf79dd6ec0470f2d418b7ac5fb493adb16a77cf369fd1a44e19d",
+    "cfw2008_arxiv0804_1954.txt": "sha256:6cfcdc586775c968dee3a3d30c197cc7b2b2c1f8bff0890293164d7b87166e4e",
+    "cms2025_d0_mumu_public.txt": "sha256:46aaaf8dc7fbde4d049eeafe34f5b3424e6898d1fe23bf750980ef4b8808a878",
+    "gisbert_hiller_suelmann2024_rare_charm_eft.txt": "sha256:7432c6e611dbba7e22b6a313d7ed97d7439ff6232472ba5cc4acf18cbed5599b",
+    "lhcb2023_arxiv2212_11203.txt": "sha256:a94f1dbcfa8dfc63351ea9b4efe01c76050b0264afd4877dfe9b4c0b68420f92",
+    "pdg2026_d0_mumu_pdgLive.txt": "sha256:34cff61f22c2c5436c2504547a59e06a4ac59d7639113237705cdf1a02703a02",
+    "source_manifest.yaml": "sha256:1dee59ad6f71331771d987579c6fb150186cf4d732582ca6372a48eb91907010"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T13:00:00-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T13:00:00-04:00",
+      "agent_id": "PKA-C004",
+      "reason": "Initial PKA source extraction and C004 draft deposit."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T13:48:14-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T13:48:14-04:00",
+      "agent": "CA",
+      "agent_id": "CA-ca_w4_charm",
+      "issues": [
+        "CHK-4: Missing WRITER-DONE status from a WA; latest pre-checker status was WRITER-INITIATED, and no WA batch worklog for C004 was found.",
+        "CHK-6: implementation_difficulty is MEDIUM, but the rubric classifies this as HIGH because a live constraint needs a new Delta C = 1 rare-leptonic mode calculation and Wilson normalization."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:58:00-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:58:00-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 WA rework addressed CA CHK-4 and CHK-6."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:16:41-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:16:41-04:00",
+      "agent": "CA",
+      "agent_id": "CA-ca_w4_charm_v2",
+      "cycle": 2,
+      "reason": "Cycle-2 checker re-check passed CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charm",
+      "agent_id": "factcheck-codex-charm",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "PDG, CMS, LHCb, and quoted long-distance theory values verified."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "B: down-sector alignment promotes up-sector observables"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(D^0\\to\\mu^+\\mu^-)\\).\nThis entry covers the rare neutral-charm leptonic decay\n\\(D^0\\to\\mu^+\\mu^-\\), a \\(\\Delta C=1\\), \\(c\\to u\\ell^+\\ell^-\\)\nflavor-changing neutral-current test.  It is distinct from C001/C002\nneutral-charm mixing and from semileptonic rare-charm modes because the final\nstate is purely leptonic and directly probes axial-vector, scalar, and\npseudoscalar short-distance operators.",
+    "pdg_prose": "The current PDG Live/API entry S032.28, accessed on 2026-05-16, gives the\nheadline limit\n\\[\n  \\mathcal{B}(D^0\\to\\mu^+\\mu^-) < 2.1\\times10^{-9}\n  \\qquad (90\\%~{\\rm C.L.}).\n\\]\nThe same PDG entry notes that the underlying CMS 2025 analysis reports the\n95\\% C.L. limit\n\\[\n  \\mathcal{B}(D^0\\to\\mu^+\\mu^-) < 2.4\\times10^{-9}.\n\\]\nThese values are traced to\n\\texttt{flavor\\_catalog/references/C004/pdg2026\\_d0\\_mumu\\_pdgLive.txt}\nand \\texttt{cms2025\\_d0\\_mumu\\_public.txt}.  The requested LHCb predecessor\nused \\(9\\,{\\rm fb}^{-1}\\) at 7, 8, and 13 TeV and set\n\\(\\mathcal{B}(D^0\\to\\mu^+\\mu^-)<3.1\\times10^{-9}\\) at 90\\% C.L.,\nwith a 95\\% C.L. companion limit of \\(3.5\\times10^{-9}\\)\n(\\texttt{lhcb2023\\_arxiv2212\\_11203}).",
+    "relevance": "Anarchic warped models can generate flavor-changing \\(c\\to u\\) neutral-current\ncouplings through KK gauge exchange, electroweak \\(Z\\)-like effects, Higgs or\nradion scalar exchange, or lepton-sector extensions.  This channel is therefore\na useful up-sector \\(\\Delta C=1\\) complement to the implemented \\(\\Delta F=2\\)\nD-mixing constraint.  For the present quark-only scan it is best treated as a\ncatalog and roadmap entry; a live constraint would require lepton-current\nnormalization in addition to the quark flavor spurions.",
+    "post_2008": "Since the arXiv:0804.1954 warped-flavor baseline, the experimental bound has\nmoved by orders of magnitude.  LHCb's full Run 1+2 search improved the rare\ncharm dimuon limit to \\(3.1\\times10^{-9}\\) at 90\\% C.L.  CMS then used the\nRun 3 inclusive dimuon-trigger program, \\(64.5\\,{\\rm fb}^{-1}\\) from\n2022--2023, to set the stronger 95\\% C.L. limit of \\(2.4\\times10^{-9}\\).\nOn the theory side, the 2024 rare-charm EFT analysis incorporated recent\n\\(\\Delta C=1\\) data, including \\(D^0\\to\\mu^+\\mu^-\\), into constraints on\n\\(C_{7,9,10}^{(\\prime)}\\) while emphasizing that null-test observables still\nleave room for new physics.",
+    "validity": "The experimental limit is robust, but the Standard Model prediction is not a\nclean short-distance number.  The classic rare-charm calculation estimates the\nlong-distance two-photon contribution as\n\\(\\mathcal{B}(D^0\\to\\mu^+\\mu^-)_{\\gamma\\gamma}\n\\simeq 2.7\\times10^{-5}\\mathcal{B}(D^0\\to\\gamma\\gamma)\\), implying a\nlong-distance floor of at least \\(3\\times10^{-13}\\) for the assumptions quoted\nthere.  The safe catalog use is therefore an upper bound on extra\nshort-distance contributions, not a precision SM subtraction.\n\nIn down-aligned or kaon-protected RS variants, up-sector observables become\nleading rather than secondary diagnostics.",
+    "code_coverage_prose": "\\textbf{NO.}  The required catalog greps and a focused search for\n\\texttt{D0.*mu}, \\texttt{c.?->.?u}, \\texttt{rare.?charm},\n\\texttt{C10}, \\texttt{C\\_S}, \\texttt{C\\_P}, and scalar/pseudoscalar rare-decay\nterms found no live \\(D^0\\to\\mu^+\\mu^-\\) implementation in\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, or \\texttt{tests/}.  Nearby hits are\nunrelated: \\(D^0\\) mixing appears at \\texttt{quarkConstraints/deltaf2.py:256}\nand \\texttt{quarkConstraints/deltaf2.py:941}, while\n\\(\\mu\\to e\\gamma\\) is handled separately at\n\\texttt{flavorConstraints/muToEGamma.py:75}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  \\(D^0\\to\\mu^+\\mu^-\\) is a new \\(c\\to u\\) dilepton mode\nrequiring a new \\(\\Delta C=1\\) Wilson-coefficient normalization and a documented\nlong-distance subtraction; it is not covered by the existing \\(\\Delta F=2\\)\nbackend.",
+    "key_references": "Process-local keys before bibliography consolidation:\n\\texttt{PDG2026:D0MuMu}, \\texttt{CMS2025:D0MuMu},\n\\texttt{LHCb2023:D0MuMu},\n\\texttt{BurdmanGolowichHewettPakvasa2002:RareCharm},\n\\texttt{GisbertHillerSuelmann2024:RareCharmEFT}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/charm/C004.yaml",
+  "source_tex": "flavor_catalog/processes/charm/C004.tex",
+  "worklog_path": "flavor_catalog/worklogs/C004/"
+}

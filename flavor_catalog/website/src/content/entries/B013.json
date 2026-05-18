@@ -1,0 +1,369 @@
+{
+  "process_id": "B013",
+  "family": "secondary",
+  "family_original": "beauty",
+  "tier": "SECONDARY",
+  "standard_notation": "B_s^0\\to\\phi(1020)\\gamma",
+  "process_name": "Exclusive radiative B_s decay via b -> s gamma",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires new b -> s gamma dipole matching and RG, exclusive B_s -> phi form-factor/resonance inputs, and a B_s time-dependent CP/helicity likelihood; current Delta F=2 code and lepton-dipole code do not implement this observable.",
+  "cycle_count": null,
+  "priority_rationale": "Deferred by DA-4 (round_004_addendum_deferred_scope.md); Photon-helicity / time-dependent CP variant; companion to active B011 (inclusive B -> X_s gamma) and B012 (exclusive B -> K* gamma). Promoted in Wave-8 because: Top-tier; B_s system independently probes photon-helicity asymmetry A_Delta and time-dependent CP S_phi gamma. Lower implementation priority than Waves 1-7 PRIMARY entries.",
+  "promoted_in_wave": 8,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"B_s.*phi.*gamma|B0_s.*phi.*gamma|phi.*gamma|phigamma|phi_gamma|B_s0.*gamma|b.?->.?s.?gamma|b.?to.?s.?gamma|C7'?|C_7'?|O7'?|A_Delta|A.?Delta|S_phi|Sphigamma|photon.?polar|right.?handed.?dipole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused B013 grep for B_s -> phi gamma, S_phi, A_Delta, b->s gamma dipoles, C7/C7', and photon-polarization terms returned exit=1 with no implementation hits.",
+      "quarkConstraints/modern/phenomenology.py:23 enumerates the modern quark surface as epsilon_K, K, B_d, B_s, and D0 neutral-meson mixing systems.",
+      "quarkConstraints/deltaf2.py:903 and quarkConstraints/deltaf2.py:922 implement B_d and B_s mixing evaluators, not radiative b -> s gamma decays.",
+      "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an unrelated lepton-sector dipole check."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG B_s0 listing, 2025 update",
+      "observable": "B(B_s0 -> phi(1020) gamma)",
+      "value": 3.4e-05,
+      "uncertainty": 4e-06,
+      "units": "branching fraction",
+      "display": "(3.4 +/- 0.4) x 10^-5",
+      "year": 2025,
+      "experiment": "PDG B_s0 listing, 2025 update",
+      "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-Bs-zero.pdf",
+      "snapshot_path": "flavor_catalog/references/B013/pdg2025_bs_phi_gamma.txt",
+      "sha256": "sha256:59578d3322132cba6e5047f85ec967b78bc4fbc5fa77bfe3124e1eede9269576",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV rare decays, end-of-year 2024",
+      "observable": "B(B_s0 -> phi(1020) gamma)",
+      "value": 3.4e-05,
+      "uncertainty": 3.2e-06,
+      "units": "branching fraction",
+      "display": "(34.0 +/- 3.2) x 10^-6",
+      "year": 2024,
+      "experiment": "HFLAV rare decays, end-of-year 2024",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+      "snapshot_path": "flavor_catalog/references/B013/hflav_rare_decays_dec2024_bs_phi_gamma.txt",
+      "sha256": "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb arXiv:1905.06284; also listed in PDG 2025",
+      "observable": "S_phi gamma in B_s0 -> phi gamma",
+      "value": 0.43,
+      "uncertainty": null,
+      "units": "dimensionless",
+      "display": "0.43 +/- 0.30(stat) +/- 0.11(syst)",
+      "year": 2019,
+      "experiment": "LHCb arXiv:1905.06284; also listed in PDG 2025",
+      "source_url": "https://arxiv.org/abs/1905.06284",
+      "snapshot_path": "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt",
+      "sha256": "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb arXiv:1905.06284; also listed in PDG 2025",
+      "observable": "C_phi gamma in B_s0 -> phi gamma",
+      "value": 0.11,
+      "uncertainty": null,
+      "units": "dimensionless",
+      "display": "0.11 +/- 0.29(stat) +/- 0.11(syst)",
+      "year": 2019,
+      "experiment": "LHCb arXiv:1905.06284; also listed in PDG 2025",
+      "source_url": "https://arxiv.org/abs/1905.06284",
+      "snapshot_path": "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt",
+      "sha256": "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb arXiv:1905.06284; also listed in PDG 2025",
+      "observable": "A_Delta_phi gamma in B_s0 -> phi gamma",
+      "value": -0.67,
+      "uncertainty": null,
+      "units": "dimensionless",
+      "display": "-0.67 +0.37 -0.41(stat) +/- 0.17(syst)",
+      "year": 2019,
+      "experiment": "LHCb arXiv:1905.06284; also listed in PDG 2025",
+      "source_url": "https://arxiv.org/abs/1905.06284",
+      "snapshot_path": "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt",
+      "sha256": "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Belle arXiv:1411.7771",
+      "observable": "B(B_s0 -> phi gamma), Belle Upsilon(5S) input",
+      "value": 3.6e-05,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": "(3.6 +/- 0.5(stat) +/- 0.3(syst) +/- 0.6(f_s)) x 10^-5",
+      "year": 2014,
+      "experiment": "Belle arXiv:1411.7771",
+      "source_url": "https://arxiv.org/abs/1411.7771",
+      "snapshot_path": "flavor_catalog/references/B013/belle_2014_bsphigamma_arxiv.txt",
+      "sha256": "sha256:7e36d4d73efac319cbcf4b1711efa18aa872f7e786652c230acabeeb411688a3",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb arXiv:2406.00235",
+      "observable": "overall tensor contribution F_{f2} in B_s0 -> K+K- gamma",
+      "value": 0.168,
+      "uncertainty": null,
+      "units": "fraction",
+      "display": "16.8 +/- 0.5(stat) +/- 0.7(syst)%",
+      "year": 2024,
+      "experiment": "LHCb arXiv:2406.00235",
+      "source_url": "https://arxiv.org/abs/2406.00235",
+      "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bskkgamma_arxiv.txt",
+      "sha256": "sha256:7cbfba098c45a5d672a3eae00ea4f912302fc62f10ee3d8d59b583d0c96d3f96",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb arXiv:2406.00235",
+      "observable": "B(B_s0 -> f2'(1525) gamma) / B(B_s0 -> phi gamma), preferred solution",
+      "value": 0.194,
+      "uncertainty": null,
+      "units": "ratio",
+      "display": "19.4 +0.9 -0.8(stat) +1.4 -0.5(syst) +/- 0.5(B)%",
+      "year": 2024,
+      "experiment": "LHCb arXiv:2406.00235",
+      "source_url": "https://arxiv.org/abs/2406.00235",
+      "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bskkgamma_arxiv.txt",
+      "sha256": "sha256:7cbfba098c45a5d672a3eae00ea4f912302fc62f10ee3d8d59b583d0c96d3f96",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb arXiv:2411.10219",
+      "observable": "A_T^(2) in B_s0 -> phi e+e-, very-low-q2 photon-polarisation proxy",
+      "value": -0.045,
+      "uncertainty": null,
+      "units": "dimensionless",
+      "display": "-0.045 +/- 0.235(stat) +/- 0.014(syst)",
+      "year": 2024,
+      "experiment": "LHCb arXiv:2411.10219",
+      "source_url": "https://arxiv.org/abs/2411.10219",
+      "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt",
+      "sha256": "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb arXiv:2411.10219",
+      "observable": "A_T^ImCP in B_s0 -> phi e+e-, very-low-q2 photon-polarisation proxy",
+      "value": 0.002,
+      "uncertainty": null,
+      "units": "dimensionless",
+      "display": "0.002 +/- 0.247(stat) +/- 0.016(syst)",
+      "year": 2024,
+      "experiment": "LHCb arXiv:2411.10219",
+      "source_url": "https://arxiv.org/abs/2411.10219",
+      "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt",
+      "sha256": "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738",
+      "access_date": "2026-05-17",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb arXiv:2411.10219",
+      "observable": "longitudinal polarisation fraction F_L(phi) in B_s0 -> phi e+e-",
+      "value": 0.115,
+      "uncertainty": null,
+      "units": "fraction",
+      "display": "< 11.5% at 90% CL",
+      "year": 2024,
+      "experiment": "LHCb arXiv:2411.10219",
+      "source_url": "https://arxiv.org/abs/2411.10219",
+      "snapshot_path": "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt",
+      "sha256": "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper limit"
+    }
+  ],
+  "supporting_measurements": {
+    "dataset_metadata": [
+      {
+        "label": "LHCb 2019 time-dependent B_s0 -> phi gamma",
+        "integrated_luminosity": "3 fb^-1",
+        "center_of_mass_energies": [
+          "7 TeV",
+          "8 TeV"
+        ],
+        "role": "Dataset metadata only; not promoted as an independent pdg_or_equivalent observable.",
+        "source_url": "https://arxiv.org/abs/1905.06284",
+        "access_date": "2026-05-17",
+        "snapshot_path": "flavor_catalog/references/B013/lhcb_2019_bsphigamma_cp_arxiv.txt",
+        "sha256": "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba"
+      },
+      {
+        "label": "Belle 2014 B_s0 -> phi gamma",
+        "integrated_luminosity": "121.4 fb^-1",
+        "center_of_mass_energy_context": "Upsilon(5S)",
+        "role": "Dataset metadata only; Belle measured observable is in pdg_or_equivalent.",
+        "source_url": "https://arxiv.org/abs/1411.7771",
+        "access_date": "2026-05-17",
+        "snapshot_path": "flavor_catalog/references/B013/belle_2014_bsphigamma_arxiv.txt",
+        "sha256": "sha256:7e36d4d73efac319cbcf4b1711efa18aa872f7e786652c230acabeeb411688a3"
+      },
+      {
+        "label": "LHCb 2024 B_s0 -> K+K- gamma and B_s0 -> phi e+e-",
+        "integrated_luminosity": "9 fb^-1",
+        "center_of_mass_energies": [
+          "7 TeV",
+          "8 TeV",
+          "13 TeV"
+        ],
+        "role": "Dataset metadata only; associated measured observables are in pdg_or_equivalent.",
+        "source_urls": [
+          "https://arxiv.org/abs/2406.00235",
+          "https://arxiv.org/abs/2411.10219"
+        ],
+        "access_date": "2026-05-17",
+        "snapshot_paths": [
+          "flavor_catalog/references/B013/lhcb_2024_bskkgamma_arxiv.txt",
+          "flavor_catalog/references/B013/lhcb_2024_bsphiee_arxiv.txt"
+        ],
+        "sha256s": [
+          "sha256:7cbfba098c45a5d672a3eae00ea4f912302fc62f10ee3d8d59b583d0c96d3f96",
+          "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738"
+        ]
+      }
+    ]
+  },
+  "paper_era_reference": {
+    "cfw_2008_rs_flavor": {
+      "source": "arXiv:0804.1954",
+      "role": "Perez-Randall/CFW-era RS flavor baseline for post-2008 comparison; theory context, not a measured observable.",
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/B013/cfw_2008_arxiv.txt",
+      "sha256": "sha256:dccac5b39aa21a124a0ab5ccd30b9833ecbda5e8ca252ccd381ac2a25dfca083"
+    }
+  },
+  "theory_context": {
+    "muheim_xie_zwicky_2008": {
+      "source": "arXiv:0802.0876",
+      "role": "Defines the B_s -> phi gamma width-difference/helicity observables S and H/A_Delta; theory predictions and LHCb sensitivity context, not measured observables.",
+      "source_url": "https://arxiv.org/abs/0802.0876",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/B013/muheim_xie_zwicky_2008_arxiv.txt",
+      "sha256": "sha256:9a71f9ac5206af44d09cc6084656020b0ae03ebd3334a038d721b0dfee2db729"
+    }
+  },
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "belle_2014_bsphigamma_arxiv.txt": "sha256:7e36d4d73efac319cbcf4b1711efa18aa872f7e786652c230acabeeb411688a3",
+    "cfw_2008_arxiv.txt": "sha256:dccac5b39aa21a124a0ab5ccd30b9833ecbda5e8ca252ccd381ac2a25dfca083",
+    "hflav_rare_decays_dec2024_bs_phi_gamma.txt": "sha256:0572d6a8d33f6429066f9c46ebeb3e9836205f5510c2a52d4f4be5ad09896e4f",
+    "lhcb_2019_bsphigamma_cp_arxiv.txt": "sha256:a8f9cea7df5999d2d427f086d7d895709228a0161d85c10bdc9de50cc961fcba",
+    "lhcb_2024_bskkgamma_arxiv.txt": "sha256:7cbfba098c45a5d672a3eae00ea4f912302fc62f10ee3d8d59b583d0c96d3f96",
+    "lhcb_2024_bsphiee_arxiv.txt": "sha256:99613e7d4a48ab9ce37aa80890abf95a13c779db3da9c84045bb8ea18b8cf738",
+    "muheim_xie_zwicky_2008_arxiv.txt": "sha256:9a71f9ac5206af44d09cc6084656020b0ae03ebd3334a038d721b0dfee2db729",
+    "pdg2025_bs_phi_gamma.txt": "sha256:59578d3322132cba6e5047f85ec967b78bc4fbc5fa77bfe3124e1eede9269576"
+  },
+  "source_shas_count": 8,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T02:09:17-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T02:09:17-04:00",
+      "agent_id": "PKA-B013",
+      "reason": "Created Wave-8 SECONDARY sidecar skeleton for B013."
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T02:09:17-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T02:09:17-04:00",
+      "agent_id": "PKA-B013",
+      "reason": "Initial PKA draft, source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T02:36:17-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T02:36:17-04:00",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "WA Wave-8 B-radiative polish for B013/B014 cycle 1."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-17T02:51:39-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T02:51:39-04:00",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA Wave-8 B-radiative cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w8_B_radiative.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T14:31:04-04:00",
+      "agent_id": "Opus-round-4",
+      "round_id": "opus_round_004",
+      "reason": "Opus round 4 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_004_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T14:31:05-04:00",
+      "agent_id": "factcheck-codex-beauty-w8",
+      "agent": "factcheck-codex-beauty-w8",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-8 SECONDARY fact-check addendum (factcheck_beauty.md)."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(B_s^0\\to\\phi(1020)\\gamma\\).\nThis entry covers the exclusive radiative \\(b\\to s\\gamma\\) decay of the\nneutral \\(B_s\\) meson, with both the branching fraction and the\ntime-dependent photon-helicity observables \\(S_{\\phi\\gamma}\\),\n\\(C_{\\phi\\gamma}\\), and \\(A^\\Delta_{\\phi\\gamma}\\).",
+    "pdg_prose": "The PDG 2025 \\(B_s^0\\) listing gives\n\\[\n  {\\cal B}(B_s^0\\to\\phi\\gamma)=(3.4\\pm0.4)\\times10^{-5},\n\\]\nwith local snapshot\n\\texttt{flavor\\_catalog/references/B013/pdg2025\\_bs\\_phi\\_gamma.txt}.\nThe HFLAV end-of-year 2024 rare-decay table gives the compatible average\n\\[\n  {\\cal B}(B_s^0\\to\\phi\\gamma)=(34.0\\pm3.2)\\times10^{-6},\n\\]\nfrom the LHCb and Belle inputs, with local snapshot\n\\texttt{flavor\\_catalog/references/B013/hflav\\_rare\\_decays\\_dec2024\\_bs\\_phi\\_gamma.txt}.\nThe current time-dependent \\(B_s^0\\to\\phi\\gamma\\) observables are from the\nLHCb 2019 flavor-tagged analysis,\n\\[\n  S_{\\phi\\gamma}=0.43\\pm0.30\\pm0.11,\\qquad\n  C_{\\phi\\gamma}=0.11\\pm0.29\\pm0.11,\n\\]\n\\[\n  A^\\Delta_{\\phi\\gamma}=-0.67^{+0.37}_{-0.41}\\pm0.17,\n\\]\nwhere the first uncertainty is statistical and the second is systematic; see\n\\texttt{flavor\\_catalog/references/B013/lhcb\\_2019\\_bsphigamma\\_cp\\_arxiv.txt}\nand the PDG snapshot.",
+    "relevance": "This Wave-8 entry is \\textbf{SECONDARY} under\n\\texttt{flavor\\_catalog/PRIORITY\\_TIERS.md}.  The physics motivation is direct:\n\\(B_s^0\\to\\phi\\gamma\\) probes the electromagnetic dipole transition\n\\(b\\to s\\gamma\\), but with a helicity handle that the inclusive\n\\(B\\to X_s\\gamma\\) rate does not provide.  In anarchic RS or composite-Higgs\nvariants, KK fermions, KK gauge bosons, and the Higgs sector can generate\nchirality-flipped dipole coefficients \\(C_7'\\) and \\(C_8'\\).  Those\ncontributions may leave the inclusive rate close to the SM while shifting\n\\(A^\\Delta_{\\phi\\gamma}\\) or \\(S_{\\phi\\gamma}\\), so this mode is a useful\ncompanion to B011 and B012.",
+    "post_2008": "Muheim--Xie--Zwicky, arXiv:0802.0876, set the pre-LHC formalism by showing how\nthe \\(B_s\\) width difference exposes the time-dependent\n\\(\\sinh(\\Delta\\Gamma_s t/2)\\) coefficient and therefore the right-handed photon\namplitude.  Belle measured \\(B_s^0\\to\\phi\\gamma\\) at the \\(\\Upsilon(5S)\\) in\narXiv:1411.7771, contributing one input to the modern PDG/HFLAV\nbranching-fraction average.  LHCb's arXiv:1905.06284 analysis is the current\ntime-dependent CP reference: it gives the first \\(S_{\\phi\\gamma}\\) and\n\\(C_{\\phi\\gamma}\\) measurements in a radiative \\(B_s\\) decay and updates the\nearlier untagged \\(A^\\Delta_{\\phi\\gamma}\\) result.  LHCb arXiv:2406.00235 added\na Run-1/Run-2 amplitude analysis of \\(B_s^0\\to K^+K^-\\gamma\\), clarifying the\nresonant composition around the \\(\\phi(1020)\\), while arXiv:2411.10219 uses the\nvery-low-\\(q^2\\) \\(B_s^0\\to\\phi e^+e^-\\) angular distribution as a virtual\nphoton-polarization cross-check.",
+    "validity": "The branching fraction is experimentally established, but an exclusive\nconstraint needs form-factor and spectator-amplitude conventions rather than\nonly the inclusive \\(C_7\\) rate machinery.  The time-dependent observables are\ncleaner chirality probes, yet their use in a scan still requires a consistent\nmapping from RS dipole coefficients to \\(C_7,C_7'\\) and \\(C_8,C_8'\\), the\n\\(B_s\\)-mixing phase and width-difference conventions, and an exclusive\n\\(B_s\\to\\phi\\) amplitude model.  A catalog entry is therefore robust, while a\nhard likelihood is model-dependent until the dipole and exclusive-amplitude\npipeline exists.",
+    "code_coverage_prose": "\\textbf{NO.}  The required greps over \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no implementation of\n\\(B_s^0\\to\\phi\\gamma\\), \\(S_{\\phi\\gamma}\\), \\(A^\\Delta_{\\phi\\gamma}\\), or a\nquark-sector \\(b\\to s\\gamma\\) dipole likelihood.  The existing modern quark\nsurface enumerates only \\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\)\nneutral-meson mixing at \\texttt{quarkConstraints/modern/phenomenology.py:23};\nthe \\(\\Delta F=2\\) beauty entry points at\n\\texttt{quarkConstraints/deltaf2.py:903} and\n\\texttt{quarkConstraints/deltaf2.py:922} are mixing observables, not radiative\ndecays.  The dipole hit at \\texttt{flavorConstraints/muToEGamma.py:75} is the\nunrelated charged-lepton \\(\\mu\\to e\\gamma\\) check.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Production use needs new \\(b\\to s\\gamma\\) dipole matching,\nQCD running for \\(C_7,C_7'\\) and \\(C_8,C_8'\\), exclusive \\(B_s\\to\\phi\\)\nform-factor and resonance inputs, and a time-dependent \\(B_s\\) likelihood.\nThe current \\(\\Delta F=2\\) code does not supply that operator basis or\nobservable layer.",
+    "key_references": "Process-local keys before bibliography consolidation:\n\\texttt{PDG2025\\_Bs\\_phi\\_gamma},\n\\texttt{HFLAV2024\\_rare\\_decays\\_Bs\\_phi\\_gamma},\n\\texttt{LHCb2019\\_Bs\\_phi\\_gamma\\_CP},\n\\texttt{Belle2014\\_Bs\\_phi\\_gamma},\n\\texttt{LHCb2024\\_Bs\\_KK\\_gamma},\n\\texttt{LHCb2024\\_Bs\\_phi\\_ee\\_photon\\_polarisation},\n\\texttt{MuheimXieZwicky2008\\_Bs\\_phi\\_gamma}, and\n\\texttt{CFW2008\\_RS\\_flavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/secondary/beauty/B013.yaml",
+  "source_tex": "flavor_catalog/processes/secondary/beauty/B013.tex",
+  "worklog_path": "flavor_catalog/worklogs/B013/"
+}

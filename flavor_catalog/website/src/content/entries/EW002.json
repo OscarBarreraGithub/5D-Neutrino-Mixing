@@ -1,0 +1,156 @@
+{
+  "process_id": "EW002",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "\\Delta_{\\rm CKM}^{(1)} = |V_{ud}|^2 + |V_{us}|^2 + |V_{ub}|^2 - 1",
+  "process_name": "First-row CKM unitarity and the Cabibbo angle anomaly",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live EW002 constraint requires new charged-current SMEFT or direct RS W-quark matching, optional G_F-shift handling for lepton-sector variants, and a correlated beta/kaon/lattice/radiative-correction likelihood. The existing Delta F = 2 basis and CKM fit gate do not cover this observable.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "PARTIAL",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "evidence": [
+      "quarkConstraints/scan.py:42 documents PDG-derived per-element CKM tolerances.",
+      "quarkConstraints/scan.py:247 defines the reduced CKM scan labels as Vus, Vcb, Vub, and J.",
+      "quarkConstraints/fit.py:47 implements the reduced CKM observable set used for fits.",
+      "quarkConstraints/fit.py:267 computes CKM residuals against target observables.",
+      "quarkConstraints/modern/inputs.py:631 stores a frozen modern default CKM target.",
+      "tests/test_quark_fit.py:575 anchors the target CKM convention against PDG 2024."
+    ],
+    "missing": [
+      "No Vud, superallowed-beta, neutron/pion beta, K_l3/f_+(0), K_mu2/f_K/f_pi, or Delta_CKM likelihood/check was found.",
+      "Existing CKM code uses a unitary target as a fit/gating input; it does not implement first-row unitarity as an independent charged-current constraint."
+    ],
+    "grep_commands": [
+      "rg -n \"Vud|V_us|Vus|V_ub|Vub|CKM|Cabibbo|unitarity|Delta_CKM|DeltaCKM|Wolfenstein|lambda|K.?l3|superallowed|beta decay|Ft|f_\\\\+\\\\(0\\\\)|fK|f_pi\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|CKM|Cabibbo|Vus|Vud\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma|CKM|Cabibbo|Vus|Vud\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "PARTIAL",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "bryman_cirigliano_crivellin_inguglia_2022_lfu_ckm.txt": "sha256:d3c41387de757db6c5f7f82d0e29eab69851bbe09f02a5b153cb7e3d0f7ad2b8",
+    "cfw_2008_rs_flavor.txt": "sha256:d22463e7e9e006a15a880b12181a6cb1311e713084fc13fff901ac5fe0430b9a",
+    "crivellin_kirk_kitahara_mescia_2022_vlq_caa.txt": "sha256:ee55b56572cf5d12fff63519cae204b22ef86c24d337657c1abc3e99da5c3f2b",
+    "flag_2024_vus_ckm_unitarity.txt": "sha256:b9436b897ef871be8e6a6471117c8bbc1f056e14d4a315f2c39132576fcc499c",
+    "hardy_towner_2020_superallowed_vud.txt": "sha256:913ac2c95b8296f78dab3323d0909ed714dbb571a30ac92bb1633715ae853196",
+    "pdg_2025_vud_vus_ckm_unitarity.txt": "sha256:9ad37586334418cf54ac9bf8f69455a4e237106f89a22a62c5aa24f525ba4d4a"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T13:14:07-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T13:14:07-04:00",
+      "agent_id": "PKA-EW002",
+      "reason": "Initial PKA draft for NIT-1 pre-approved EW002 CKM-unitarity catalog addition."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T13:46:24-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T13:46:24-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w4_ew",
+      "issues": [
+        "CHK-4: status_history contains WRITER-INITIATED but no WRITER-DONE transition; the most recent pre-CA entry was WRITER-INITIATED, and no EW001/EW002/EW003 WA batch worklog was found."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:56:45-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:56:45-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "batch_id": "wa_w4_ew_v2",
+      "reason": "Addressed CA CHK-4 finding by appending WA-v2 completion transition and creating the WA-v2 batch worklog."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:16:36-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:16:36-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "cycle": 2,
+      "batch_id": "ca_w4_ew_v2",
+      "reason": "Cycle 2 checker re-check passed CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/arXiv/collaboration sources; measured value claims match."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "A: custodial-protection dependence of EW + rare-b constraints"
+    }
+  ],
+  "sections": {
+    "process": "This entry covers the first-row CKM test\n\\(\\Delta_{\\rm CKM}^{(1)}\\equiv |V_{ud}|^2+|V_{us}|^2+|V_{ub}|^2-1\\).\nIt combines superallowed nuclear beta-decay, neutron/pion beta-decay cross\nchecks, kaon \\(K_{\\ell3}\\) and \\(K_{\\mu2}/\\pi_{\\mu2}\\) inputs, and lattice\nnormalizations of \\(f_+(0)\\) and \\(f_K/f_\\pi\\).  The catalog scope is the\nCabibbo-angle anomaly as a precision charged-current constraint, not a single\nkaon branching fraction.",
+    "pdg_prose": "The source-of-truth numerical entries are in \\texttt{EW002.yaml}.  The current\nPDG \\(V_{ud},V_{us}\\) review, published with the 2024 Review of Particle\nPhysics and updated in 2025, uses the superallowed-beta value\n\\(|V_{ud}|=0.97367(32)\\) and a kaon-sector average\n\\(|V_{us}|=0.22431(85)\\), with scale factor \\(S=2.5\\).  Its quoted first-row\nsum is\n\\[\n|V_{ud}|^2+|V_{us}|^2+|V_{ub}|^2=0.9983(6)(4),\n\\]\nan overall \\(2\\sigma\\) deficit, rising to about \\(3\\sigma\\) if nuclear-structure\nuncertainties are not included.  FLAG 2024 gives the sharper semileptonic-kaon\ncomparison: \\(|V_{us}|f_+(0)=0.21654(41)\\), \\(f_+(0)=0.9698(17)\\) for\n\\(N_f=2+1+1\\), hence \\(|V_{us}|=0.22328(58)\\).  Combining this with the PDG\nbeta-decay \\(V_{ud}\\) gives \\(|V_u|^2=0.99802(66)\\), a roughly \\(3.0\\sigma\\)\ndeviation.  The same FLAG review notes that the \\(f_K/f_\\pi\\) route gives a\nweaker \\(|V_u|^2=0.99888(67)\\), about \\(1.7\\sigma\\).",
+    "relevance": "Warped and partially composite models can perturb the apparent CKM matrix\nthrough mixing with KK or vector-like quarks, non-universal \\(W\\)-quark\ncouplings, and correlated shifts in \\(Z\\)-quark couplings.  Thus EW002 probes a\ncharged-current direction complementary to the existing \\(\\Delta F=2\\) neutral\nmeson constraints.  In lepton-extended variants, a new contribution to muon\ndecay can also change the inferred \\(G_F\\), feeding directly into beta- and\nkaon-decay CKM extractions.",
+    "post_2008": "Relative to arXiv:0804.1954, which emphasized RS-GIM and neutral-current\nflavor bounds with quoted KK-gluon scales near \\(21\\) and \\(33\\,\\mathrm{TeV}\\),\nthe post-2008 story is a new charged-current precision problem.  Hardy--Towner\n2020 shifted the superallowed result to \\(|V_{ud}|=0.97373(31)\\) after updated\nradiative-correction theory.  PDG now quotes a closely related\n\\(|V_{ud}|=0.97367(32)\\) and explicitly frames the first-row test as a possible\n\\(2\\)--\\(3\\sigma\\) inconsistency.  FLAG 2024 supplies sub-percent lattice inputs\nfor \\(f_+(0)\\) and \\(f_K/f_\\pi\\), with QED and strong-isospin corrections now\ncentral to the comparison.  The modern SMEFT literature treats the anomaly as a\nmodified \\(W\\)-coupling problem correlated with electroweak precision and FCNC\nobservables.",
+    "validity": "The unitarity sum is experimentally clean but theory-limited.  The limiting\nissues are the inner electroweak radiative correction and nuclear-structure\nterms in \\(V_{ud}\\), lattice \\(f_+(0)\\) and \\(f_K/f_\\pi\\), kaon radiative and\nisospin-breaking corrections, and correlations between \\(K_{\\ell3}\\) and\n\\(K_{\\mu2}\\).  Its new-physics interpretation is global-fit-dependent: a shift\ncan live in semileptonic charged currents, \\(G_F\\), right-handed \\(W\\) couplings,\nor correlated \\(Z\\) and \\(\\Delta F=2\\) effects.\n\nIn custodial RS, reduced \\(Z b_L b_L\\) pressure can make this observable\nrelatively more or less discriminating inside a combined EW fit; quote RS\nbounds only after specifying custodial protection, fermion embeddings, and\nbrane kinetic terms.",
+    "code_coverage_prose": "\\textbf{PARTIAL}.  The repo fits and gates a unitary CKM target: PDG-derived\nper-element tolerances are documented at \\texttt{quarkConstraints/scan.py:42},\nthe reduced observable set \\((|V_{us}|,|V_{cb}|,|V_{ub}|,J)\\) is implemented at\n\\texttt{quarkConstraints/fit.py:47}, and the modern default CKM target is stored\nat \\texttt{quarkConstraints/modern/inputs.py:631}.  However, greps found no\n\\(V_{ud}\\), superallowed-beta, \\(K_{\\ell3}\\), \\(f_+(0)\\), or\n\\(\\Delta_{\\rm CKM}\\) likelihood implementing EW002 as a constraint.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A production constraint needs new charged-current SMEFT or\ndirect RS \\(W\\)-coupling matching, optional \\(G_F\\) shifts for lepton extensions,\nand a correlated low-energy likelihood using beta, kaon, radiative-correction,\nand lattice inputs.  This is outside the existing \\(\\Delta F=2\\)\nSLL/SLR/VLL/VRR/LR1/LR2 machinery.",
+    "key_references": "\\texttt{pdg\\_2025\\_vud\\_vus\\_ckm\\_unitarity};\n\\texttt{flag\\_2024\\_vus\\_ckm\\_unitarity};\n\\texttt{hardy\\_towner\\_2020\\_superallowed\\_vud};\n\\texttt{bryman\\_cirigliano\\_crivellin\\_inguglia\\_2022\\_lfu\\_ckm};\n\\texttt{crivellin\\_kirk\\_kitahara\\_mescia\\_2022\\_vlq\\_caa};\n\\texttt{cfw\\_2008\\_rs\\_flavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/EW002.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/EW002.tex",
+  "worklog_path": "flavor_catalog/worklogs/EW002/"
+}

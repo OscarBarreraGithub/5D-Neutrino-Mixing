@@ -1,0 +1,121 @@
+{
+  "process_id": "B033",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "S_{\\phi K_S},\\ C_{\\phi K_S}",
+  "process_name": "B -> phi K_S penguin CP asymmetry",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "B033 needs a Delta B=1 nonleptonic b -> s sbar s operator and amplitude treatment. The existing Delta F=2 SLL/SLR/VLL/VRR/LR1/LR2 neutral-meson machinery does not compute B -> phi K decay amplitudes, strong phases, or time-dependent penguin CP likelihoods.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n \"phi.?K|phiK|B.?->.?phi|B.*phi|beta_eff|sin2.?beta|S_CP|C_CP\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b\\s*->\\s*s|q\\s*(q-bar|qbar|\\\\bar\\{q\\})\\s*s|penguin|charmless|time-dependent CP|B0.*phi|phi.*K\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|MODERN_PHENOMENOLOGY_SYSTEM_IDS|B_d neutral|B_s neutral\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused B033 greps found no direct implementation of B -> phi K, beta_eff, sin2beta_eff, b -> s sbar s penguin CP asymmetries, or time-dependent charmless B CP observables in the requested implementation/test directories.",
+      "Nearest adjacent code only: quarkConstraints/deltaf2.py:209 defines the Delta F=2 input registry.",
+      "Nearest adjacent code only: quarkConstraints/deltaf2.py:903 evaluates B_d mixing.",
+      "Nearest adjacent code only: quarkConstraints/deltaf2.py:922 evaluates B_s mixing.",
+      "Nearest adjacent code only: quarkConstraints/modern/phenomenology.py:23 lists epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems; it does not include Delta B=1 penguin decays."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "hflav_triangle_summer2025_phiK0.txt": "sha256:f02d219f350852e71c34ebc298aa3e2981e3f50fbe67b91fb95875d263df0d9b",
+    "babar_2012_b0_kkks_arxiv.txt": "sha256:4e1b5caba5f089035ae28e27bb99a764bcddadf37708f84c1659e35865417aa8",
+    "belle_2010_b0_kkks_arxiv.txt": "sha256:0a4a899245d3e8880a8f64210bbfd981f2bb02ca884e60ceb3f8c1bd59562465",
+    "belleii_2023_phik0_arxiv.txt": "sha256:46d751b86a3d999c9787c0fa0e7c2e8ed99413180c72bd2252d2d85113396639",
+    "csaki_falkowski_weiler_2008_arxiv.txt": "sha256:a53534cc37da7f71bf04f1be4fd81ed3029a44aead112f0e32233ee1490176ef"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:59:37-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:59:37-04:00",
+      "agent_id": "PKA-B033",
+      "reason": "Initial PKA sidecar for B -> phi K_S penguin CP asymmetry."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T11:59:37-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T11:59:37-04:00",
+      "agent_id": "PKA-B033",
+      "reason": "PKA draft, source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:15:35-04:00",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:15:35-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "WA polish for batch wa_w23_beauty completed."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:34:18-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:34:18-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_w23_beauty verified CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(S_{\\phi K_S}\\) and \\(C_{\\phi K_S}\\), equivalently\n\\(\\sin(2\\beta_{\\rm eff})_{\\phi K^0}\\) and \\(C_{\\phi K^0}\\) in the HFLAV\nconvention.\nThis entry covers the time-dependent CP asymmetry in the penguin-dominated\nbeauty decay \\(B^0\\to\\phi K_S^0\\), usually reported through\n\\(\\sin(2\\beta_{\\rm eff})\\) and \\(C_{\\phi K^0}\\).  It probes the\n\\(b\\to s\\bar s s\\) loop amplitude and is interpreted by comparing its weak\nphase with the reference \\(b\\to c\\bar c s\\) value from\n\\(B^0\\to J/\\psi K_S^0\\).",
+    "pdg_prose": "The source-of-truth numerical block is \\texttt{pdg\\_or\\_equivalent} in\n\\texttt{B033.yaml}.  HFLAV Summer 2025\n(\\texttt{hflav\\_triangle\\_summer2025\\_phiK0}) gives, for the \\(\\phi K^0\\)\naverage,\n\\[\n  \\sin(2\\beta_{\\rm eff})_{\\phi K^0}=0.74\\pm0.12,\\qquad\n  C_{\\phi K^0}=-0.09\\pm0.12.\n\\]\nHFLAV uses \\(S=-\\eta_{CP}\\sin(2\\beta_{\\rm eff})\\) and quotes\n\\(\\eta_{CP}=-1\\) for \\(\\phi K_S\\), so this \\(\\sin(2\\beta_{\\rm eff})\\) is the\nusual \\(S_{\\phi K_S}\\) coefficient in this convention.  The comparison\nbenchmark on the same HFLAV page is the all-charmonium\n\\[\n  \\sin(2\\beta)=0.710\\pm0.011,\n\\]\nwith the strict \\(J/\\psi K_S\\) mode average \\(0.712\\pm0.011\\).  The local\nsnapshot is \\texttt{references/B033/hflav\\_triangle\\_summer2025\\_phiK0.txt},\naccessed on 2026-05-16.",
+    "relevance": "In anarchic warped models, KK gluons, electroweak KK modes, or flavor-changing\n\\(Z/H\\)-like effects can add new weak phases to \\(b\\to s\\bar s s\\)\n\\(\\Delta B=1\\) amplitudes.  \\(B^0\\to\\phi K_S^0\\) is therefore a diagnostic of\nnew penguin phases that would not be captured by a pure \\(\\Delta m_{B_s}\\) or\n\\(\\Delta m_{B_d}\\) magnitude constraint.  A large departure of\n\\(S_{\\phi K_S}\\) from \\(S_{\\psi K_S}\\) would point to decay-amplitude new\nphysics rather than just the CKM phase measured in the golden charmonium mode.",
+    "post_2008": "Since the arXiv:0804.1954 RS-flavor baseline, the old B-factory tension in\npenguin CP phases has been replaced by a stable world average compatible with\n\\(S_{\\psi K_S}\\).  HFLAV Summer 2025 combines BaBar's 2012 Dalitz analysis,\nBelle's 2010 time-dependent Dalitz analysis, and Belle II's 2023\ntime-dependent \\(B^0\\to\\phi K_S^0\\) measurement.  Belle II is the important\nnew post-B-factory input: the \\texttt{belleii\\_2023\\_phik0} snapshot records\n\\(S=0.54\\pm0.26^{+0.06}_{-0.08}\\) and, with HFLAV's \\(C=-A\\) convention,\n\\(C=-0.31\\pm0.20\\pm0.05\\).  The present HFLAV average differs from the\ncharmonium benchmark by only \\(0.03\\), far below the current \\(\\phi K^0\\)\nuncertainty; this difference is recorded explicitly in \\texttt{B033.yaml}.",
+    "validity": "This is a useful but theory-limited nonleptonic penguin observable.  It is\ncleaner as a null test than as a standalone hard bound: the SM prediction is\nclose to \\(\\sin(2\\beta)\\), but subleading amplitudes and hadronic strong\nphases are mode dependent.  A production implementation would need a\n\\(\\Delta B=1\\) operator basis, RG evolution, and a hadronic amplitude or\nphenomenological likelihood.  Treat it as charmless-penguin contextual input\nunless the PI chooses a specific hadronic framework.",
+    "code_coverage_prose": "\\textbf{NO.}  Focused greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no implementation of \\(B\\to\\phi K\\),\n\\(b\\to s\\bar s s\\) penguin CP asymmetries, \\(\\sin(2\\beta_{\\rm eff})\\), or\ntime-dependent charmless \\(B\\) CP observables.  The nearest adjacent code is\nneutral-meson mixing: \\texttt{quarkConstraints/deltaf2.py:209} defines the\n\\(\\Delta F=2\\) input registry, \\texttt{quarkConstraints/deltaf2.py:903}\nevaluates \\(B_d\\) mixing, and \\texttt{quarkConstraints/deltaf2.py:922}\nevaluates \\(B_s\\) mixing.  Those do not compute \\(\\Delta B=1\\) penguin decay\namplitudes.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  The existing \\(\\Delta F=2\\) SLL/SLR/VLL/VRR/LR1/LR2 machinery is not\nenough.  A live constraint would require \\(\\Delta B=1\\) four-quark penguin\noperators, matching from RS sources, QCD running to the \\(b\\) scale, and a\nhadronic treatment of the \\(B\\to\\phi K\\) amplitude and strong phases.",
+    "key_references": "Process-local raw reference keys before bibliography consolidation:\n\\texttt{hflav\\_triangle\\_summer2025\\_phiK0},\n\\texttt{babar\\_2012\\_b0\\_kkks},\n\\texttt{belle\\_2010\\_b0\\_kkks},\n\\texttt{belleii\\_2023\\_phik0}, and\n\\texttt{csaki\\_falkowski\\_weiler\\_2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B033.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B033.tex",
+  "worklog_path": "flavor_catalog/worklogs/B033/"
+}

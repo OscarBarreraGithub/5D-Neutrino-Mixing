@@ -1,0 +1,157 @@
+{
+  "process_id": "B022",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(B^+\\to K^+\\nu\\bar{\\nu})",
+  "process_name": "Invisible rare decay B+ -> K+ nu nubar",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live constraint needs a new Delta B = 1 b -> s nu nubar weak-Hamiltonian normalization, exclusive B -> K form-factor integration, neutrino/invisible final-state treatment, and likely Belle II likelihood or kinematic-reweighting support. The existing Delta F = 2 SLL/SLR/VLL/VRR/LR1/LR2 neutral-meson basis does not compute this mode.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Targeted grep for B+ -> K+ nu nubar, B -> K nu, b -> s nu nubar, invisible modes, rare_decay, and WET-like CVL/CVR labels found no observable implementation in the required code directories; incidental hits were generic Delta F = 2 C_VLL/C_VRR tests and scan parameter names.",
+      "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems.",
+      "quarkConstraints/modern/phenomenology.py:166 states that this surface is a policy-only fence and does not define a numeric EFT backend.",
+      "quarkConstraints/deltaf2.py:209 defines the legacy Delta F = 2 input tuple.",
+      "quarkConstraints/deltaf2.py:903 and quarkConstraints/deltaf2.py:922 implement B_d and B_s neutral-meson mixing, not Delta B = 1 rare invisible decays.",
+      "flavorConstraints/muToEGamma.py:75 implements the separate mu -> e gamma dipole check; no b -> s nu nubar routine is present."
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"B\\\\+.*K\\\\+.*nu|B.?->.?K.?nu|K\\\\+.*nu.*nubar|nu.*nubar|invisible|C_L|C_R|CVL|CVR|C_VL|C_VR|b.?->.?s.*nu|b.?to.?s.*nu|rare_decay|rare decay\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "HPQCD2023:B022:sm_prediction",
+      "observable": "SM BR(B+ -> K+ nu nubar)",
+      "value": "5.58e-6",
+      "uncertainty": "0.37e-6",
+      "units": "branching fraction",
+      "display": null,
+      "year": 2023,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2207.13371",
+      "snapshot_path": "flavor_catalog/references/B022/hpqcd2023_btoknunu_sm_arxiv.txt",
+      "sha256": "sha256:66d8ba9efc52bb64659d75613f8b6065421252f3af1f4c0331f4da09a3e29d4e",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "babar2013_btokstarnunu_arxiv.txt": "sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b",
+    "belleii2024_bplus_kplus_nunu_pubdb.txt": "sha256:5e8e54e24cbc3d59e277ca1e3c0e0647fbd2287785fa9118a9a6733992bc2412",
+    "belleii2025_likelihood_pubdb.txt": "sha256:8a0601cb9b3a44e8a4f376f9f039d22b387b6365781b00b6b3da257907954324",
+    "cfw2008_rs_flavor_arxiv.txt": "sha256:fc0dbdf5c402036324a5e72ea2fd59a57eb44a196fcf8ae7683c038adee6bd7d",
+    "hflav_dec2025_bplus_kplus_nunu.txt": "sha256:4c562ccd073f823063b1dd4960842bddc64c52bd91368c5c1f2d86e512145d49",
+    "hpqcd2023_btoknunu_sm_arxiv.txt": "sha256:66d8ba9efc52bb64659d75613f8b6065421252f3af1f4c0331f4da09a3e29d4e",
+    "pdg2026_bplus_kplus_nunu_api.txt": "sha256:af37fb3659510fda527bb190e325585eff507cf14abe2f5e628132ac293be2e1"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T14:09:07-04:00",
+      "timestamp": "2026-05-16T14:09:07-04:00",
+      "agent_id": "PKA-B022",
+      "reason": "initial PKA draft deposit for assigned B022 B -> K nu nubar process"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:24:00-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:24:00-04:00",
+      "agent_id": "WA",
+      "reason": "writer polish for batch wa_w5a_beauty"
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T14:45:00-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T14:45:00-04:00",
+      "agent_id": "CA",
+      "reason": "checker batch ca_w5a_beauty found traceability issue",
+      "issues": [
+        "CHK-1: TeX quotes the HPQCD SM prediction (5.58 +/-0.37)e-6, but that value is under theory_inputs rather than pdg_or_equivalent."
+      ]
+    },
+    {
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T15:14:20-04:00",
+      "timestamp": "2026-05-16T15:14:20-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 writer rework: added the CA-flagged HPQCD SM prediction under pdg_or_equivalent.values with complete metadata."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T15:31:00-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T15:31:00-04:00",
+      "agent_id": "CA",
+      "reason": "checker batch ca_w5a_beauty_v2 passed CHK-1 through CHK-8"
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(B^+\\to K^+\\nu\\bar{\\nu})\\).\nThis beauty-sector entry covers the leading exclusive invisible\n\\(b\\to s\\nu\\bar{\\nu}\\) mode, with emphasis on the charged channel now measured\nby Belle II.  The related vector mode \\(B\\to K^*\\nu\\bar{\\nu}\\) is B023.",
+    "pdg_prose": "The current HFLAV-equivalent Dec. 2025 table gives\n\\[\n  \\mathcal{B}(B^+\\to K^+\\nu\\bar{\\nu})=(1.38\\pm0.35)\\times10^{-5},\n\\]\nwith local snapshot\n\\texttt{flavor\\_catalog/references/B022/hflav\\_dec2025\\_bplus\\_kplus\\_nunu.txt}\naccessed 2026-05-16 (\\texttt{HFLAV2025Dec:BplusKplusNuNu}).  The same HFLAV\ntable displays the PDG value\n\\((2.30^{+0.71}_{-0.64})\\times10^{-5}\\), and the PDG live/API listing records\nthe Belle II evidence input\n\\((2.3\\pm0.5_{\\rm stat}{}^{+0.5}_{-0.4}{}_{\\rm syst})\\times10^{-5}\\)\n(\\texttt{PDG2026:BplusKplusNuNu}, \\texttt{BelleII2024:BplusKplusNuNu}).\nBelle II used \\(362~{\\rm fb}^{-1}\\) at the \\(\\Upsilon(4S)\\), reported\n\\(3.5\\sigma\\) evidence for the decay, and found the combined result\n\\(2.7\\sigma\\) above the Standard Model expectation\n(\\texttt{BelleII2024:BplusKplusNuNu}).  For theory orientation, the HPQCD 2023\nSM prediction is\n\\((5.58\\pm0.37)\\times10^{-6}\\), summed over neutrino flavours and including the\ncharged-mode long-distance term (\\texttt{HPQCD2023:BtoKNuNuSM}).",
+    "relevance": "This mode probes a \\(\\Delta B=1\\) neutral-current transition with missing\nenergy.  In RS/anarchic-flavor models it can receive contributions from\nflavor-changing \\(b\\)-\\(s\\) currents coupled to \\(Z\\), KK electroweak gauge\nbosons, or other neutral invisible states.  It is complementary to\n\\(\\Delta F=2\\) \\(B_s\\) mixing because it tests a semileptonic/invisible\noperator, not a neutral-meson mixing amplitude.",
+    "post_2008": "The CFW 2008 RS-flavor baseline predates the modern \\(B\\to K\\nu\\bar{\\nu}\\)\nprogram (\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}).  BaBar later set\nhadronic-tag limits, including\n\\(\\mathcal{B}(B^+\\to K^+\\nu\\bar{\\nu})<3.7\\times10^{-5}\\) at 90\\% CL\n(\\texttt{BaBar2013:BKstarNuNu}).  Belle II changed the status of the mode with\nthe 2024 evidence measurement quoted above\n(\\texttt{BelleII2024:BplusKplusNuNu}).  On the theory side, modern lattice form\nfactors support the SM prediction quoted above\n(\\texttt{HPQCD2023:BtoKNuNuSM}), and Belle II has released a 2025\nmodel-agnostic likelihood package to reinterpret the measurement under non-SM\ninvisible kinematics or WET coefficient choices\n(\\texttt{BelleII2025:BKnnLikelihood}).",
+    "validity": "The SM prediction is comparatively clean: there are no charmonium veto regions\nas in \\(b\\to s\\ell^+\\ell^-\\), and the dominant hadronic input is the\n\\(B\\to K\\) vector form factor.  The experimental extraction is less universal:\nBelle II's headline branching fraction assumes SM kinematics, while invisible\nnew particles can change the \\(q^2\\) spectrum and selection efficiency.  A live\nconstraint should therefore use either the published likelihood or a validated\nreweighting prescription rather than only a one-bin branching-fraction pull.",
+    "code_coverage_prose": "\\textbf{NO.}  Required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(B\\to K\\nu\\bar{\\nu}\\), \\(b\\to s\\nu\\bar{\\nu}\\), or\nrare invisible decay implementation.  The modern phenomenology surface lists\nonly \\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\) at\n\\texttt{quarkConstraints/modern/phenomenology.py:23}; its note says this is\npolicy-only at \\texttt{quarkConstraints/modern/phenomenology.py:166}.  The\nlegacy \\(\\Delta F=2\\) inputs are at \\texttt{quarkConstraints/deltaf2.py:209},\nwith \\(B_d\\) and \\(B_s\\) mixing evaluators at\n\\texttt{quarkConstraints/deltaf2.py:903} and\n\\texttt{quarkConstraints/deltaf2.py:922}.  The only live lepton-flavor routine\nseen is \\(\\mu\\to e\\gamma\\) at \\texttt{flavorConstraints/muToEGamma.py:75}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  This would require a new \\(\\Delta B=1\\) \\(b\\to s\\nu\\bar{\\nu}\\)\nHamiltonian, exclusive \\(B\\to K\\) form-factor integration, invisible-final-state\nacceptance treatment, and Belle II likelihood or kinematic-reweighting support.\nThe existing neutral-meson \\(\\Delta F=2\\) SLL/SLR/VLL/VRR/LR machinery does not\ncover this observable.",
+    "key_references": "\\texttt{HFLAV2025Dec:BplusKplusNuNu}, \\texttt{PDG2026:BplusKplusNuNu},\n\\texttt{BelleII2024:BplusKplusNuNu}, \\texttt{BelleII2025:BKnnLikelihood},\n\\texttt{BaBar2013:BKstarNuNu}, \\texttt{HPQCD2023:BtoKNuNuSM}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B022.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B022.tex",
+  "worklog_path": "flavor_catalog/worklogs/B022/"
+}

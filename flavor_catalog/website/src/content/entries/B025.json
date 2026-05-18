@@ -1,0 +1,167 @@
+{
+  "process_id": "B025",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "R_D",
+  "process_name": "LFU ratio in B -> D tau nu over B -> D light-lepton nu",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live R(D) constraint needs new charged-current semileptonic operators, B -> D form-factor or integrated-rate machinery, and a correlated R(D)-R(D*) likelihood; none of this is present in the current Delta F=2 or mu->e gamma surfaces.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "auxiliary_search_paths": [
+      "docs",
+      "scripts"
+    ],
+    "required_grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    ],
+    "targeted_grep_commands": [
+      "rg -n -F \"R(D)\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -F \"B -> D\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -F \"B->D\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -F \"D tau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -F \"b -> c\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -i -F \"charged Higgs\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -i -F \"leptoquark\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Required broad greps found the existing Delta F=2 and mu->e gamma surfaces, but no R(D) implementation.",
+      "Targeted fixed-string searches over the required implementation directories returned no B -> D tau nu, b -> c charged-current, charged-Higgs, or leptoquark observable hits.",
+      "R_D fixed-string hits were identifier substrings such as PAPER_*_ID in Delta F=2 infrastructure, not LFU-ratio code."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "HFLAV semileptonic B averages, CKM 2025",
+      "observable": "R(D) = B(B -> D tau nu_tau) / B(B -> D l nu_l), l=e,mu",
+      "value": 0.358,
+      "uncertainty": 0.024,
+      "units": "dimensionless ratio",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV semileptonic B averages, CKM 2025",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html",
+      "snapshot_path": "flavor_catalog/references/B025/hflav_ckm2025_rdrds.txt",
+      "sha256": "4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "hflav_ckm2025_rdrds.txt": "sha256:4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8",
+    "hflav_ckm2025_logfile.txt": "sha256:484f6ee19b8eaa50d6a304a3d5d211861dc28a94581dbb9d6656ad8a18a49422",
+    "babar2012_arxiv1205_5442.txt": "sha256:fea3c845ab93b1b869f90807bf47708131e9431bb99b91e9c0455ef4f3a712ef",
+    "babar2013_arxiv1303_0571.txt": "sha256:2b92b30aa5e85dd7611daab5896497fe343129e15a007c48f1508875960c8a68",
+    "belle2015_arxiv1507_03233.txt": "sha256:304f8206278dfba0298af3939e79e5e9a70028f9cf27e17a8abc225dd59cdde1",
+    "belle2019_arxiv1910_05864.txt": "sha256:a228175d16e08c7964819773f77bdd1f627480ec990934d3386ea4ab9113a6d7",
+    "lhcb2023_arxiv2302_02886.txt": "sha256:04ff0a6c66b812d9486853cff71b286450d7662d1f56f738e154fb382a6aa71c",
+    "lhcb2025_arxiv2406_03387.txt": "sha256:5c33b29d3a60831f210a292a22b21bf590f5345b2655cee68dd062c5df7fa30b",
+    "belleii2025_arxiv2504_11220.txt": "sha256:d1bbba7696d41ba70e631c4fddaaab41f5cc1e29e2d366ee939ea4b0acf80869",
+    "flag2024_arxiv2411_04268.txt": "sha256:22118f8842b4d27565e7bbf268d2291eb92bfdb7002bdb12e659c2cb0df3fe0d",
+    "cfw2008_arxiv0804_1954.txt": "sha256:e8dbfb3bef81771a038a1894ff8dbe7b4560839ef4d749d71783dac25983bb1b",
+    "sha256sums.txt": "sha256:48e929bc0df7f61a039ddaf54cb842d563d760cc0d09fb4ba936d6c5a659e25d"
+  },
+  "source_shas_count": 12,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:58:45-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:58:45-04:00",
+      "agent_id": "PKA-B025",
+      "reason": "Initial PKA source extraction and draft skeleton for B025."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T11:58:45-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T11:58:45-04:00",
+      "agent_id": "PKA-B025",
+      "reason": "PKA draft, source snapshots, code-coverage grep, and sidecar completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:15:35-04:00",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:15:35-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "WA polish for batch wa_w23_beauty completed."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:34:18-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:34:18-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_w23_beauty verified CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(R_D\\equiv\n\\mathcal{B}(B\\to D\\tau\\nu_\\tau)/\\mathcal{B}(B\\to D\\ell\\nu_\\ell)\\), with\n\\(\\ell=e,\\mu\\).  This beauty-family entry covers the tau-versus-light-lepton\ncharged-current LFU ratio in exclusive \\(b\\to c\\ell\\nu\\) semileptonic decays.",
+    "pdg_prose": "The canonical current equivalent value is the HFLAV CKM 2025 joint average,\nupdated on 2025-09-28 and snapshotted in\n\\texttt{flavor\\_catalog/references/B025/hflav\\_ckm2025\\_rdrds.txt}:\n\\[\n  R_D = 0.358 \\pm 0.024 .\n\\]\nThe source key is \\texttt{hflav\\_ckm2025\\_rdrds}.  The same fit gives\n\\(R_{D^*}=0.281\\pm0.011\\), correlation\n\\(\\rho(R_D,R_{D^*})=-0.374\\), and \\(\\chi^2/\\mathrm{dof}=16.683/14\\)\nwith confidence level \\(0.27\\).  For comparison, HFLAV quotes an arithmetic\nSM reference \\(R_D=0.296\\pm0.004\\), \\(R_{D^*}=0.254\\pm0.005\\).  Against that\nreference the combined \\(R_D\\)-\\(R_{D^*}\\) discrepancy is quoted as about\n\\(3.8\\sigma\\), with \\(p=1.48\\times10^{-4}\\).  The sidecar records the\nindividual \\(R_D\\) inputs from BaBar, Belle, LHCb, and Belle II.",
+    "relevance": "\\(R_D\\) probes \\(b\\to c\\tau\\nu\\) charged currents rather than neutral\n\\(\\Delta F=2\\) mixing.  It is therefore not a direct constraint on the current\nquark-scan lane, but it is important for any warped/anarchic extension with\nnon-universal charged currents, third-generation enhanced lepton couplings,\ncharged scalar exchange, \\(W'\\)-like vectors, or leptoquark-motivated matching.\nThe ratio cancels many normalization inputs, so a persistent excess is a clean\ndiagnostic of LFU violation once the model supplies the relevant semileptonic\nWilson coefficients and neutrino-flavor assumptions.",
+    "post_2008": "The Csaki--Falkowski--Weiler 2008 baseline predates the \\(R_D^{(*)}\\) anomaly\nprogram.  The key post-2008 shift was BaBar's 2012 and 2013 evidence for an\nexcess in \\(B\\to D^{(*)}\\tau\\nu\\), followed by Belle hadronic-tag and\nsemileptonic-tag measurements, LHCb measurements with muonic tau decays, and\nBelle II semileptonic-tag and CKM-2025 hadronic-tag inputs.  HFLAV now uses a\njoint correlated average rather than a single-experiment comparison.  On the\nSM side, lattice and form-factor work matured substantially: HFLAV references\nFNAL/MILC, HPQCD, JLQCD, FLAG 2024, and later phenomenological combinations,\nso the tension is now limited by correlated experimental averaging and form\nfactor conventions rather than by the absence of a basic SM prediction.",
+    "validity": "The experimental ratio is robust, but interpreting it as an RS bound is\nmodel-dependent.  A live constraint needs the operator basis for\n\\((\\bar c\\,\\Gamma b)(\\bar\\tau\\,\\Gamma\\nu)\\), the assumed neutrino species, and\nthe integrated \\(B\\to D\\) form-factor response to vector, scalar, and tensor\noperators.  Because HFLAV fits \\(R_D\\) together with \\(R_{D^*}\\), a serious\nimplementation should use the two-dimensional likelihood or covariance rather\nthan a standalone Gaussian for \\(R_D\\).",
+    "code_coverage_prose": "\\textbf{NO.}  The PKA reran the required coverage greps over\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, and \\texttt{tests/}.  The broad plan\ngreps recover the existing neutral-meson \\(\\Delta F=2\\) and\n\\(\\mu\\to e\\gamma\\) surfaces, but no \\(R_D\\), \\(B\\to D\\tau\\nu\\), \\(b\\to c\\)\ncharged-current, charged-Higgs, or leptoquark observable implementation.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Promotion to a live constraint requires a new semileptonic\ncharged-current observable, form-factor/mode integration for at least the\n\\(B\\to D\\) final state, and a correlated treatment with \\(R_{D^*}\\).  This\nbelongs in the modern constraint surface if it is later implemented.",
+    "key_references": "Process-local snapshots before bibliography consolidation:\n\\texttt{hflav\\_ckm2025\\_rdrds.txt},\n\\texttt{hflav\\_ckm2025\\_logfile.txt},\n\\texttt{babar2012\\_arxiv1205\\_5442.txt},\n\\texttt{babar2013\\_arxiv1303\\_0571.txt},\n\\texttt{belle2015\\_arxiv1507\\_03233.txt},\n\\texttt{belle2019\\_arxiv1910\\_05864.txt},\n\\texttt{lhcb2023\\_arxiv2302\\_02886.txt},\n\\texttt{lhcb2025\\_arxiv2406\\_03387.txt},\n\\texttt{belleii2025\\_arxiv2504\\_11220.txt},\n\\texttt{flag2024\\_arxiv2411\\_04268.txt}, and\n\\texttt{cfw2008\\_arxiv0804\\_1954.txt}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B025.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B025.tex",
+  "worklog_path": "flavor_catalog/worklogs/B025/"
+}

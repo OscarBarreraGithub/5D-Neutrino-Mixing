@@ -1,0 +1,147 @@
+{
+  "process_id": "EW001",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "S, T, U",
+  "process_name": "Peskin-Takeuchi oblique electroweak parameters",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live EW001 constraint needs a new electroweak precision likelihood plus RS matching from gauge/fermion KK spectra to vacuum-polarization self energies or SMEFT bosonic operators. This is outside the existing Delta F = 2 basis and requires new electroweak mode/matching calculations and correlated global-fit handling.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"oblique|Peskin|Takeuchi|S parameter|T parameter|U parameter|S,T,U|S\\\\s*=|T\\\\s*=|U\\\\s*=|delta.?rho|rho parameter|W mass|m_W|MW|electroweak|EWPO|HEPfit|GFitter\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"Z.?->|h.?->|t.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|epsilon.?prime|eps.?prime|R_K|R_D|B_s.*mu|nu.*nubar|oblique|electroweak|EWPO\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "No S/T/U, oblique-parameter, EWPO likelihood, or W-mass electroweak-fit implementation was found.",
+      "Generic electroweak/QCD constants and VEV comments surfaced but do not implement the constraint: qcd/constants.py:11, qcd/running.py:3, quarkConstraints/qcd_running.py:99, yukawa/neutrino.py:14, yukawa/charged_lepton.py:11."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "cfw_2008_rs_flavor.txt": "sha256:3233891e61f28ce2755a145f3a3fd48095b5244beff40e72debc41a7f4d029bc",
+    "gfitter_oblique_parameters.txt": "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f",
+    "hepfit_deblas_2022_cdf_stu.txt": "sha256:f5155be1508e061d460dc88069f925b430e01341bc68a79f0e4dec88e11de8d7",
+    "hepfit_precision_ew_page.txt": "sha256:b9dd49f6cdee7ca973a08afa577c41e7abc17547301690efd58240bce7f2eabd",
+    "pdg_2025_electroweak_stu.txt": "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d",
+    "peskin_takeuchi_1992_oblique.txt": "sha256:0a0453cd411843e9f77bb28bbe272d00a7919975c051e99fb2b8ad0c13c1a0c1"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T12:56:12-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T12:56:12-04:00",
+      "agent_id": "PKA-EW001",
+      "reason": "Initial PKA draft for NIT-1 pre-approved EW001 oblique-parameter catalog addition."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T13:46:24-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T13:46:24-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w4_ew",
+      "issues": [
+        "CHK-4: status_history contains WRITER-INITIATED but no WRITER-DONE transition; the most recent pre-CA entry was WRITER-INITIATED, and no EW001/EW002/EW003 WA batch worklog was found."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:56:45-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:56:45-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "batch_id": "wa_w4_ew_v2",
+      "reason": "Addressed CA CHK-4 finding by appending WA-v2 completion transition and creating the WA-v2 batch worklog."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:16:36-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:16:36-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "cycle": 2,
+      "batch_id": "ca_w4_ew_v2",
+      "reason": "Cycle 2 checker re-check passed CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/arXiv/collaboration sources; measured value claims match."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "A: custodial-protection dependence of EW + rare-b constraints"
+    }
+  ],
+  "sections": {
+    "process": "This entry covers the Peskin--Takeuchi oblique parameters \\(S\\), \\(T\\), and\n\\(U\\), treated as universal new-physics corrections to electroweak gauge-boson\nself energies.  The process is not flavor changing, but it is part of the\n\\texttt{top\\_higgs\\_ew} family because it is a leading precision bound on\nwarped, vector-like, composite, and custodial electroweak sectors.",
+    "pdg_prose": "The canonical values are the PDG 2025 electroweak-review fit in\n\\texttt{flavor\\_catalog/references/EW001/pdg\\_2025\\_electroweak\\_stu.txt},\naccessed on 2026-05-16.  With \\(U=0\\), PDG quotes\n\\(S=0.026\\pm0.075\\), \\(T=0.047\\pm0.066\\), and\n\\(\\rho(S,T)=0.90\\).  Letting all three float gives\n\\(S=0.021\\pm0.096\\), \\(T=0.04\\pm0.12\\), and\n\\(U=0.008\\pm0.092\\), with correlations recorded in the sidecar.\nFor comparison, the public Gfitter oblique page gives\n\\(S=0.05\\pm0.11\\), \\(T=0.09\\pm0.13\\), and \\(U=0.01\\pm0.11\\).\nThe CDF-aware HEPfit/de Blas 2022 study quotes\n\\(M_W=80.4335\\pm0.0094\\,\\mathrm{GeV}\\); in its standard-average\n\\(U=0\\) oblique fit, \\(S=0.100\\pm0.073\\) and \\(T=0.202\\pm0.056\\),\nwhile its floating-\\(U\\) fit has \\(U=0.134\\pm0.087\\).",
+    "relevance": "Bulk RS models generically shift \\(S\\) through mixing of the SM electroweak\nbosons with KK gauge modes, and shift \\(T\\) when custodial symmetry is broken\nby gauge, Higgs, or fermion embeddings.  PDG summarizes the warped contribution\nas \\(S\\simeq 30 v^2/M_{\\rm KK}^2\\) and quotes \\(S\\leq0.18\\) at 95\\%\nprobability as implying \\(M_{\\rm KK}\\gtrsim3.2\\,\\mathrm{TeV}\\).  These bounds\nare orthogonal to the catalog's \\(\\Delta F=2\\) constraints, but they test the\nsame KK spectrum and localization choices before flavor observables are even\nevaluated.",
+    "post_2008": "Relative to the CFW baseline, arXiv:0804.1954, the important change is not a\nnew LEP run but a much more mature global-fit environment: Higgs and top inputs\nare measured directly, full two-loop and selected higher-order SM calculations\nare included, and PDG now presents both \\(U=0\\) and floating-\\(U\\) oblique fits.\nThe 2022 CDF \\(W\\)-mass result created a distinct scenario in which \\(T\\) or\n\\(U\\) can be pulled positive; the 2025 PDG review treats that impact as a\nglobal-fit issue rather than replacing the main STU table with the CDF-only\npreference.",
+    "validity": "The STU language is cleanest for heavy, approximately universal new physics\nwhose leading effects are vacuum-polarization corrections.  It is less complete\nwhen vertex corrections, non-universal fermion couplings, light new states, or\nSMEFT flat directions are numerically important.  In RS applications, custodial\nprotection, brane kinetic terms, Higgs localization, and vector-like fermion\nembeddings can change the translation from a fitted \\(S,T,U\\) point to a KK\nmass bound.\n\nIn custodial RS, reduced \\(Z b_L b_L\\) pressure can reshuffle which EW\nobservable is most discriminating; quote RS bounds only after specifying\ncustodial protection, fermion embeddings, and brane kinetic terms.",
+    "code_coverage_prose": "\\textbf{NO}.  Greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no S/T/U, oblique, EWPO, or W-mass-fit implementation.\nOnly generic electroweak constants and VEV comments surfaced, for example\n\\texttt{qcd/constants.py:11}, \\texttt{qcd/running.py:3},\n\\texttt{quarkConstraints/qcd\\_running.py:99}, \\texttt{yukawa/neutrino.py:14},\nand \\texttt{yukawa/charged\\_lepton.py:11}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A production constraint would need a new electroweak precision\nlikelihood, correlation handling for the PDG/GFitter/HEPfit fit conventions,\nand RS matching from the gauge and fermion KK spectra to vacuum-polarization\nself energies or equivalent SMEFT operators.  This is a new electroweak\nmode/matching calculation, not a reuse of the existing \\(\\Delta F=2\\) basis.",
+    "key_references": "\\texttt{pdg\\_2025\\_electroweak\\_stu};\n\\texttt{gfitter\\_oblique\\_parameters};\n\\texttt{hepfit\\_deblas\\_2022\\_cdf\\_stu};\n\\texttt{hepfit\\_precision\\_ew\\_page};\n\\texttt{peskin\\_takeuchi\\_1992\\_oblique};\n\\texttt{cfw\\_2008\\_rs\\_flavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/EW001.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/EW001.tex",
+  "worklog_path": "flavor_catalog/worklogs/EW001/"
+}

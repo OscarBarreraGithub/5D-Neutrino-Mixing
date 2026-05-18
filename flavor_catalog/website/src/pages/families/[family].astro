@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import families from '../../content/families.json';
+import index from '../../content/catalog_index.json';
+
+export async function getStaticPaths() {
+  return families.map((f: any) => ({ params: { family: f.key } }));
+}
+
+const { family } = Astro.params;
+const meta = families.find((f: any) => f.key === family);
+const entries = (index.entries as any[]).filter((e) => e.family === family);
+---
+<BaseLayout title={`${meta?.label ?? family} -- Flavor Catalog`}>
+  <header class="entry-header">
+    <div class="breadcrumbs"><a href="/">Catalog</a> &middot; {meta?.label ?? family}</div>
+    <h1>{meta?.label ?? family} <span class="process-id">{entries.length} entries</span></h1>
+    {meta?.descriptor && <p style="color:var(--color-text-muted); margin:0.4rem 0 1rem;">{meta.descriptor}</p>}
+  </header>
+
+  <p style="color:var(--color-text-muted); font-size:0.9rem; margin:0 0 1rem;">
+    Full per-family browsing (sortable table, filters, citation modal) lands in
+    Phase 3. For now this page lists the entries with links to per-entry detail pages.
+  </p>
+
+  <div class="family-grid">
+    {entries.map((e: any) => (
+      <a class="family-card" href={`/entries/${e.process_id}/`}>
+        <h2>
+          <span><code style="background:transparent;padding:0;color:var(--color-accent);">{e.process_id}</code></span>
+          <span class="count">{e.tier}</span>
+        </h2>
+        <p>
+          {e.standard_notation ? `$${e.standard_notation}$` : (e.process_name ?? '')}
+        </p>
+        <p style="font-size:0.78rem; color:var(--color-text-muted);">
+          {e.fact_check_verdict} &middot; diff {e.implementation_difficulty} &middot; code {e.code_coverage_status}
+        </p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

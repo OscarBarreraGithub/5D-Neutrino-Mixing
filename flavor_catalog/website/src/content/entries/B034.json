@@ -1,0 +1,136 @@
+{
+  "process_id": "B034",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\phi_s^{s\\bar{s}s}, |\\lambda|(B_s^0\\to\\phi\\phi)",
+  "process_name": "B_s -> phi phi b->s sbar s penguin",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a new Delta B = 1 nonleptonic b -> s sbar s operator and amplitude/likelihood treatment. Existing Delta F = 2 SLL/SLR/VLL/VRR/LR1/LR2 neutral-meson machinery covers B_s mixing magnitudes but not B_s -> phi phi decay amplitudes, polarization-dependent angular observables, or strong-phase model dependence.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"B_s.*phi|Bs.*phi|phi.?phi|phi_s\\\\^|phis|sbar.?s|b.?->.?s.?s|penguin|time.?dependent CP|charmless|polarisation|polarization\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused B034 grep returned no direct B_s -> phi phi, b -> s sbar s penguin, time-dependent charmless CP, or angular-likelihood implementation in the required directories.",
+      "quarkConstraints/deltaf2.py:239 defines the existing b_s Delta F=2 input key for B_s mixing.",
+      "quarkConstraints/deltaf2.py:651 stores the experimental Delta m_Bs input used by the B_s mixing magnitude constraint.",
+      "quarkConstraints/deltaf2.py:922 defines evaluate_bs_mixing; line 929 reduces the computed M12 to abs(m12), so it does not expose the penguin phase observable.",
+      "quarkConstraints/modern/phenomenology.py:23 lists epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems.",
+      "quarkConstraints/modern/phenomenology.py:657 defines the modern B_s mixing bridge, also as a mixing-magnitude evaluator."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "cfw2008_rs_flavor": {
+      "source": "Csaki, Falkowski, and Weiler, JHEP 09 (2008) 008",
+      "year": 2008,
+      "arxiv_id": "0804.1954",
+      "doi": "10.1088/1126-6708/2008/09/008",
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-16",
+      "snapshot_path": "flavor_catalog/references/B034/cfw2008_arxiv0804_1954.txt",
+      "sha256_of_text_snapshot": "sha256:120dec32d04361d274e5d249d34f50ab32347701fefed20adbaae1d62ddad03c",
+      "note": "Theoretical RS/anarchic-flavor baseline only; any KK-scale numbers are not pdg_or_equivalent measured observables."
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "cfw2008_arxiv0804_1954.txt": "sha256:120dec32d04361d274e5d249d34f50ab32347701fefed20adbaae1d62ddad03c",
+    "hflav2024_bs_phiphi_branching.txt": "sha256:0109068c253de87b8482a37a48ae8910de98957e4b3067c4dae21704f92f5b55",
+    "lhcb2014_bs_phiphi_cp_arxiv.txt": "sha256:21b1b1b7fa258e6648702118626d488c61bea102e3a423fb237194d4321a8b94",
+    "lhcb2019_bs_phiphi_cp_cds.txt": "sha256:37b596af8f6720a84acb6f7730c8e361cd6175795bb71690a8376bdb21b5c6b3",
+    "lhcb2023_bs_phiphi_cp_cds.txt": "sha256:b003cf5fbbdaef3497b6a8c1d84e0deabd619ee23da70a219fd4558c5ce13e5f",
+    "pdg2025_bs_phiphi_cp.txt": "sha256:4c88ea2de1ba29c5435a80bae06cea3f6c2c07bd3e882b18664fb05f25a027ee"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:06:13-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:06:13-04:00",
+      "agent_id": "PKA-B034",
+      "reason": "Initial PKA draft for B_s -> phi phi penguin CP phase."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T14:16:21-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T14:16:21-04:00",
+      "agent_id": "PKA-B034",
+      "reason": "PKA draft, source snapshots, sha256 manifest, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:24:00-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:24:00-04:00",
+      "agent_id": "WA",
+      "reason": "writer polish for batch wa_w5a_beauty"
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:45:00-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:45:00-04:00",
+      "agent_id": "CA",
+      "reason": "checker batch ca_w5a_beauty passed CHK-1..CHK-8"
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\phi_s^{s\\bar{s}s}\\) and \\(|\\lambda|\\) in\n\\(B_s^0\\to\\phi(1020)\\phi(1020)\\).  This entry covers the flavour-tagged,\ntime-dependent angular CP analysis of the charmless penguin decay\n\\(B_s^0\\to\\phi\\phi\\), a \\(b\\to s\\bar{s}s\\) transition.  The process is a\ncounterpart to the cleaner \\(b\\to c\\bar c s\\) phase measurements, but with the\nweak phase attached to a loop-induced decay amplitude.",
+    "pdg_prose": "The current source-of-truth numerical block is \\texttt{B034.yaml}.  The PDG\n\\(B_s^0\\) listing records the \\(b\\to s\\bar{s}s\\) convention\n\\[\n  \\beta_s=(3.7\\pm3.5)\\times 10^{-2}\\ {\\rm rad},\n\\]\nand its AAIJ 23AT note gives the LHCb combined phase and direct-CP parameter\n\\[\n  \\phi_s^{s\\bar{s}s}=-0.074\\pm0.069\\ {\\rm rad},\\qquad\n  |\\lambda|=1.009\\pm0.030 .\n\\]\nThe PDG convention is recorded under \\texttt{pdg2025\\_bs\\_phiphi\\_cp}; the\nsame combined LHCb values appear in \\texttt{lhcb2023\\_bs\\_phiphi\\_cp\\_cds}.\nAs contextual rate information for the channel, HFLAV May 2024 quotes\n\\[\n  \\mathcal B(B_s^0\\to\\phi\\phi)=(1.85\\pm0.14)\\times 10^{-5}.\n\\]\nThis rate is tracked under \\texttt{hflav2024\\_bs\\_phiphi\\_branching}.  Local\nsnapshots are in \\texttt{flavor\\_catalog/references/B034/}, accessed on\n2026-05-16.",
+    "relevance": "In warped anarchic flavour models, flavour-changing KK gluon, electroweak-KK,\nor misaligned \\(Z/H\\)-like effects can induce new \\(\\Delta B=1\\) penguin\noperators with phases not fixed by the Standard Model CKM fit.  \\(B_s^0\\to\n\\phi\\phi\\) is therefore a useful null test for new weak phases in\n\\(b\\to s\\bar{s}s\\) amplitudes.  It is complementary to the existing repo's\n\\(B_s\\)-mixing magnitude lane: a new phase could appear in the decay amplitude\nor in mixing-decay interference even when a simple \\(\\Delta m_s\\) bound is\nsatisfied.",
+    "post_2008": "The process matured after the arXiv:0804.1954 era.  LHCb's 2014 analysis used\n\\(3.0\\,{\\rm fb}^{-1}\\), about 4000 signal decays, and found\n\\(\\phi_s=-0.17\\pm0.15\\pm0.03\\ {\\rm rad}\\)\n(\\texttt{lhcb2014\\_bs\\_phiphi\\_cp\\_arxiv}).  The 2019 update used\n\\(5.0\\,{\\rm fb}^{-1}\\), about 9000 signal decays, and reported\n\\(\\phi_s^{s\\bar{s}s}=-0.073\\pm0.115\\pm0.027\\ {\\rm rad}\\) with\n\\(|\\lambda|=0.99\\pm0.05\\pm0.01\\)\n(\\texttt{lhcb2019\\_bs\\_phiphi\\_cp\\_cds}).  The 2023 precision measurement used\n\\(6\\,{\\rm fb}^{-1}\\) at \\(13\\,{\\rm TeV}\\), giving\n\\(\\phi_s^{s\\bar{s}s}=-0.042\\pm0.075\\pm0.009\\ {\\rm rad}\\) and\n\\(|\\lambda|=1.004\\pm0.030\\pm0.009\\) before combination\n(\\texttt{lhcb2023\\_bs\\_phiphi\\_cp\\_cds}).  The combined LHCb result remains\nconsistent with CP conservation and Standard Model expectations.",
+    "validity": "This is a strong experimental null test but a model-dependent hard constraint.\nThe Standard Model expectation for the penguin phase is close to zero, while\n\\(|\\lambda|=1\\) corresponds to no direct CP violation, but a production bound\nrequires a \\(\\Delta B=1\\) operator normalization, QCD running, polarization\ntreatment, hadronic amplitudes, and strong-phase assumptions.  It should be\ncataloged as a high-value contextual penguin-phase observable until a specific\nnonleptonic framework is chosen.",
+    "code_coverage_prose": "\\textbf{NO.}  Required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(B_s^0\\to\\phi\\phi\\), \\(b\\to s\\bar{s}s\\) penguin,\ntime-dependent charmless CP, or angular-likelihood implementation.  Adjacent\ncode only covers neutral \\(B_s\\) mixing: \\texttt{quarkConstraints/deltaf2.py:239}\ndefines the \\(B_s\\) input, \\texttt{quarkConstraints/deltaf2.py:922} evaluates\n\\(B_s\\) mixing, and \\texttt{quarkConstraints/modern/phenomenology.py:657}\nbridges the modern \\(B_s\\)-mixing evaluator.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  The existing \\(\\Delta F=2\\) basis does not compute\n\\(\\Delta B=1\\) penguin amplitudes.  A live constraint needs new nonleptonic\noperators, matching, running, angular/polarization likelihood handling, and a\nhadronic-amplitude prescription.",
+    "key_references": "\\texttt{pdg2025\\_bs\\_phiphi\\_cp},\n\\texttt{lhcb2023\\_bs\\_phiphi\\_cp\\_cds},\n\\texttt{lhcb2019\\_bs\\_phiphi\\_cp\\_cds},\n\\texttt{lhcb2014\\_bs\\_phiphi\\_cp\\_arxiv},\n\\texttt{hflav2024\\_bs\\_phiphi\\_branching}, and\n\\texttt{cfw2008\\_arxiv0804\\_1954}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B034.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B034.tex",
+  "worklog_path": "flavor_catalog/worklogs/B034/"
+}

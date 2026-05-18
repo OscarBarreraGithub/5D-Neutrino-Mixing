@@ -1,0 +1,188 @@
+{
+  "process_id": "L010",
+  "family": "charged_lepton",
+  "family_original": "charged_lepton",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(\\tau^-\\to e^-e^+e^-)",
+  "process_name": "Tau to three electrons charged-lepton-flavor-violating four-lepton decay",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": "A new four-lepton/contact LFV observable and lepton-sector Wilson-coefficient convention are needed. No lattice inputs or hadronic long-distance calculations are required for a first bound.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "required_grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|tau.?to|3.?e|eee|four.?lepton|contact\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"tau.?->.?3e|tau.?to.?3e|tau.*e.?e.?e|three.?electron|e.?e.?e.*tau|tau.?->.?e.?e.?e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    ],
+    "negative_result": [
+      "No tau->3e, tau four-lepton, or charged-lepton contact LFV implementation found in required code paths.",
+      "The only charged-lepton LFV implementation surfaced by grep is the adjacent mu->e gamma dipole checker."
+    ],
+    "adjacent_noncoverage_evidence": [
+      "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma.",
+      "scanParams/scan.py:524 calls check_mu_to_e_gamma in the scan.",
+      "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 systems."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG live tau branching-ratio datablock S035R58, 2025 update",
+      "observable": "Branching fraction upper limit for tau^- -> e^- e+ e^-",
+      "value": 2.7e-08,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2025,
+      "experiment": "PDG live tau branching-ratio datablock S035R58, 2025 update",
+      "source_url": "https://pdglive.lbl.gov/BranchingRatio.action?desig=38&parCode=S035&home=",
+      "snapshot_path": "flavor_catalog/references/L010/pdg2025_tau3e_pdglive_s035r58.txt",
+      "sha256": "7b5e0e7346d47cfaf87b63f80ae8b81e1afa05769c5343e9efd4d22a09ce3fb6",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Belle Collaboration",
+      "observable": "Branching fraction upper limit for tau^- -> e^- e+ e^-",
+      "value": 2.7e-08,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2010,
+      "experiment": "Belle Collaboration",
+      "source_url": "https://arxiv.org/abs/1001.3221",
+      "snapshot_path": "flavor_catalog/references/L010/belle2010_tau3leptons_arxiv1001_3221.txt",
+      "sha256": "073a16f37d0c1f91ed80253da220cf6b48adb4766abc9b60d132118b289cc9e9",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "BaBar Collaboration",
+      "observable": "Branching fraction upper limit for tau^- -> e^- e+ e^-",
+      "value": 2.9e-08,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2010,
+      "experiment": "BaBar Collaboration",
+      "source_url": "https://arxiv.org/abs/1002.4550",
+      "snapshot_path": "flavor_catalog/references/L010/babar2010_tau3leptons_arxiv1002_4550.txt",
+      "sha256": "1e8f127cfa3ed821cfdcdf015d7a3dd7faf93ebd5dcc622cb4065ffb40075d91",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "agashe2006_rs_lfv_arxiv_hepph0606021.txt": "sha256:4b21c0ebcb02e09b66ed82daed4e626052b07b3d16ae2db4464ec579955d2bc4",
+    "babar2010_tau3leptons_arxiv1002_4550.txt": "sha256:1e8f127cfa3ed821cfdcdf015d7a3dd7faf93ebd5dcc622cb4065ffb40075d91",
+    "belle2010_tau3leptons_arxiv1001_3221.txt": "sha256:073a16f37d0c1f91ed80253da220cf6b48adb4766abc9b60d132118b289cc9e9",
+    "belleii_physics_book_1808_10567_tau_lfv.txt": "sha256:6220aa9ad8677c094ec957784a66d1396ac0afcab8f106df662da4c7bab90628",
+    "cfw2008_arxiv0804_1954.txt": "sha256:6ecc1801908254fc925a6c4b8190750d3d2546b077f29c7cf48899cc1b95a892",
+    "lhcb2026_tau3mu_context_arxiv2601_20785.txt": "sha256:47c77466983096f12464ae70f6b5f8f81002b06fcc54ac32c1e345002855dad0",
+    "pdg2025_tau3e_pdglive_s035r58.txt": "sha256:7b5e0e7346d47cfaf87b63f80ae8b81e1afa05769c5343e9efd4d22a09ce3fb6"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T13:14:43-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T13:14:43-04:00",
+      "agent_id": "PKA-L010",
+      "reason": "Initial L010 PKA source extraction and draft sidecar started."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T13:14:43-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T13:14:43-04:00",
+      "agent_id": "PKA-L010",
+      "reason": "PKA draft, source snapshots, code-coverage grep, and worklog deposited."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:31:05-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:31:05-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w4_charged_lepton",
+      "reason": "Writer polish completed for wa_w4_charged_lepton; numerical claims checked against sidecar sources."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T13:45:46-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T13:45:46-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w4_charged_lepton",
+      "reason": "Checker pass completed for ca_w4_charged_lepton; CHK-1 through CHK-8 passed."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charged_lepton",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Measured limits and prospect values matched fetched sources or local snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:}\n\\(\\mathcal{B}(\\tau^- \\to e^-e^+e^-)\\).\nThis entry covers the charged-lepton-flavor-violating four-lepton decay\n\\(\\tau^- \\to e^-e^+e^-\\), including charge-conjugate modes when experiments\nquote combined limits.  It is the electron-flavor counterpart of L009\n\\(\\tau\\to3\\mu\\) in the \\texttt{charged\\_lepton} family.",
+    "pdg_prose": "The current PDG live tau datablock S035R58 gives\n\\[\n  \\mathcal{B}(\\tau^- \\to e^-e^+e^-) < 2.7\\times 10^{-8}\n  \\quad (90\\%~{\\rm CL}).\n\\]\nPDG attributes the selected limit to the Belle 2010 analysis by Hayasaka\net al., based on \\(782~{\\rm fb}^{-1}\\) of \\(e^+e^-\\) data at\n\\(\\sqrt{s}=10.6~{\\rm GeV}\\)\n(\\texttt{L010.yaml:pdg\\_or\\_equivalent.primary\\_current\\_limit}).  The local\nPDG snapshot is\n\\texttt{flavor\\_catalog/references/L010/pdg2025\\_tau3e\\_pdglive\\_s035r58.txt}.\nThe Belle primary paper reports the same \\(2.7\\times10^{-8}\\) limit\n(\\texttt{L010.yaml:pdg\\_or\\_equivalent.primary\\_experiment}).  The BaBar 2010\nanalysis provides the principal independent cross-check,\n\\(\\mathcal{B}<2.9\\times10^{-8}\\) at \\(90\\%\\) CL with \\(468~{\\rm fb}^{-1}\\)\n(\\texttt{L010.yaml:pdg\\_or\\_equivalent.supporting\\_experiment}).",
+    "relevance": "This mode tests lepton-sector flavor violation that is not forced to be\ndipole dominated.  Warped lepton extensions can generate\n\\(\\tau eee\\) through flavor-nonuniversal lepton profiles, KK neutral-gauge\nexchange, flavor-changing \\(Z\\) couplings, or scalar exchange.  It is therefore\ncomplementary to \\(\\tau\\to e\\gamma\\) and \\(\\mu\\to e\\gamma\\): an off-shell\nphoton can contribute, but contact four-lepton operators can be the leading\neffect in models with tree-level lepton-current misalignment.",
+    "post_2008": "Relative to the arXiv:0804.1954 RS-flavor baseline, the direct experimental\nbound became a B-factory \\(10^{-8}\\)-level constraint in 2010\n(\\texttt{L010.yaml:pdg\\_or\\_equivalent.rs\\_context};\n\\texttt{L010.yaml:pdg\\_or\\_equivalent.primary\\_experiment}).  Belle set the\ncurrent PDG-selected limit \\(2.7\\times10^{-8}\\), and BaBar reached the\ncomparable \\(2.9\\times10^{-8}\\) limit\n(\\texttt{L010.yaml:pdg\\_or\\_equivalent.primary\\_current\\_limit};\n\\texttt{L010.yaml:pdg\\_or\\_equivalent.supporting\\_experiment}).  No newer LHCb\nelectron-mode value is used here: the snapshotted LHCb source is for the\nall-muon companion mode only\n(\\texttt{L010.yaml:pdg\\_or\\_equivalent.lhcb\\_context}).  For prospects, the\nBelle II Physics Book quotes \\(50~{\\rm ab}^{-1}\\) sensitivity at the\n\\(\\mathcal{O}(10^{-9})\\)--\\(\\mathcal{O}(10^{-10})\\) level for favorable\nlow-background tau LFV modes\n(\\texttt{L010.yaml:pdg\\_or\\_equivalent.prospects}).",
+    "validity": "Experimentally this is a clean upper limit on a forbidden charged-LFV decay.\nIts interpretation in the present quark-scan repository is lepton-extension\nonly: there is no tau-sector matching or four-lepton LFV observable in the\ncurrent scan.  As a future RS constraint it is model dependent because\ndipole-only, contact-operator, and full lepton-EFT assumptions give different\ncorrelations with \\(\\tau\\to e\\gamma\\), \\(\\tau\\to 3\\mu\\), \\(\\mu\\to e\\gamma\\),\nand \\(\\mu\\to 3e\\).",
+    "code_coverage_prose": "\\textbf{NO.}  Targeted greps over \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no implementation of\n\\(\\tau\\to3e\\), tau four-lepton LFV, or charged-lepton contact LFV.  The\nadjacent implemented LFV surface is only \\(\\mu\\to e\\gamma\\):\n\\texttt{flavorConstraints/muToEGamma.py:75} and\n\\texttt{scanParams/scan.py:524}.  The modern phenomenology registry is limited\nto neutral-meson systems at \\texttt{quarkConstraints/modern/phenomenology.py:23}.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  A first implementation needs a new four-lepton LFV observable\nand a convention for lepton-flavor Wilson coefficients or RS matching.  It\ndoes not require lattice inputs or hadronic long-distance calculations, but a\nproduction implementation should specify dipole/contact interference and\ncorrelations with the existing \\(\\mu\\to e\\gamma\\) lane.",
+    "key_references": "Process-local raw keys: \\texttt{PDG2025\\_Tau3E},\n\\texttt{Belle2010\\_Tau3Leptons}, \\texttt{BaBar2010\\_Tau3Leptons},\n\\texttt{BelleIIPhysicsBook2019\\_TauLFV},\n\\texttt{LHCb2026\\_Tau3MuContext},\n\\texttt{AgasheBlechmanPetriello2006\\_RSLFV}, and\n\\texttt{CFW2008\\_RSWarpedFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/charged_lepton/L010.yaml",
+  "source_tex": "flavor_catalog/processes/charged_lepton/L010.tex",
+  "worklog_path": "flavor_catalog/worklogs/L010/"
+}

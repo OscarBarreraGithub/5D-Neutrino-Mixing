@@ -1,0 +1,185 @@
+{
+  "process_id": "L006",
+  "family": "charged_lepton",
+  "family_original": "charged_lepton",
+  "tier": "PRIMARY",
+  "standard_notation": "P_{M\\bar M},\\;G_C/G_F",
+  "process_name": "Muonium-antimuonium conversion",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": "Missing implementation needs a new Delta L_mu = - Delta L_e = 2 four-lepton/contact operator convention and a bound-state conversion-probability observable wrapper. It does not require lattice or hadronic long-distance inputs for a first implementation.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "required_grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    ],
+    "targeted_grep_commands": [
+      "rg -n \"muonium|antimuonium|Muonium|Antimuonium|MACE|MACS\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"conversion|mu.?e.?conversion|mu.?->.?e|muToEGamma|check_mu_to_e_gamma|LFV|lepton.?flavor\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Targeted muonium/antimuonium/MACE/MACS grep returned no hits in the required implementation directories.",
+      "flavorConstraints/muToEGamma.py:75 defines the adjacent mu->e gamma dipole checker only.",
+      "scanParams/scan.py:524 calls check_mu_to_e_gamma in the scan; no muonium-conversion observable is evaluated."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Bai2022:L006:mace_sensitivity_improvement",
+      "observable": "MACE prospective probability-sensitivity improvement target",
+      "value": 2,
+      "uncertainty": null,
+      "units": "orders of magnitude improvement",
+      "display": null,
+      "year": 2022,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2203.11406",
+      "snapshot_path": "flavor_catalog/references/L006/bai2022_snowmass_mace_arxiv2203_11406.txt",
+      "sha256": "04c55fc736d4de4e510187d160fe1f91bf9c324195a2c6c38db4d04179eba016",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Bai2024:L006:mace_probability_reach",
+      "observable": "MACE target muonium-to-antimuonium conversion-probability reach",
+      "value": 1e-13,
+      "uncertainty": null,
+      "units": "conversion probability",
+      "display": null,
+      "year": 2024,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2410.18817",
+      "snapshot_path": "flavor_catalog/references/L006/bai2024_mace_cdr_arxiv2410_18817.txt",
+      "sha256": "6acea5b25a8a05a9cc2527d59a3aafca9099e861aaa5fa3adc4ac06d0e413632",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "agashe2006_rs_lfv_arxiv_hepph0606021.txt": "sha256:492db37edb6f351f66add5b8b6b826119f694c981bc6fb1b77fe31e3da7db00c",
+    "bai2022_snowmass_mace_arxiv2203_11406.txt": "sha256:04c55fc736d4de4e510187d160fe1f91bf9c324195a2c6c38db4d04179eba016",
+    "bai2024_mace_cdr_arxiv2410_18817.txt": "sha256:6acea5b25a8a05a9cc2527d59a3aafca9099e861aaa5fa3adc4ac06d0e413632",
+    "cfw2008_arxiv0804_1954.txt": "sha256:8d8080f5fba7d38fe6e4c3bbc9b64cf852bc0271e12f70638f384e9fdebb35b4",
+    "heeck2024_delta_l_two_arxiv2401_09580.txt": "sha256:05fb75e73e13dd60b144cbf08613cfd0bc631b547ab83032acf54e86af5ab6a1",
+    "pdg2026_muonium_antimuonium_s004mc.txt": "sha256:ba46a431af4e3530dbdac060d6cea20edf19d1fddaf913997283fb57d1c85a5a",
+    "willmann1999_macs_arxiv_hepex9807011.txt": "sha256:3e22390c63c86fed7723e8b38cb2ecb3bd2d486df610bafb40fffa5e167b76a4"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:05:10-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:05:10-04:00",
+      "agent_id": "PKA-L006",
+      "reason": "Initial L006 PKA source extraction and draft sidecar."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:23:54-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:23:54-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for batch wa_w5a_charged_lepton_edm; prior sidecar had no explicit PKA-DONE transition."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T14:44:30-04:00",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T14:44:30-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "Checker ca_w5a_charged_lepton_edm found a strict CHK-1 metadata-placement issue.",
+      "issues": [
+        "CHK-1: L006.tex quotes MACE/Snowmass prospective numerical claims, including more than two orders of magnitude and 10^-13 probability reach, but those values are in prospects rather than pdg_or_equivalent entries with the required per-claim metadata."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:15:17-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:15:17-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "WA cycle 2 addressed CA CHK-1 by adding pdg_or_equivalent.values metadata for the flagged MACE/Snowmass prospect numbers."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T15:30:46-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T15:30:46-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "cycle": 2,
+      "reason": "Checker cycle 2 ca_w5a_charged_lepton_edm_v2 verified WA-v2 traceability and checklist items CHK-1..CHK-8."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charged_lepton",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "PDG canonical muonium value matched; arXiv abstract rounding difference noted in report."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(P_{M\\bar M}\\) and \\(G_C/G_F\\), where\n\\(M=(\\mu^+ e^-)\\) and \\(\\bar M=(\\mu^- e^+)\\).  This charged-lepton entry covers\nspontaneous muonium-to-antimuonium conversion, a \\(\\Delta L_\\mu=-\\Delta L_e=2\\)\nlepton-flavor-violating oscillation process, not a dipole decay.",
+    "pdg_prose": "The sidecar block\n\\texttt{pdg\\_or\\_equivalent.pdg\\_effective\\_coupling\\_limit}, from the 2026\nPDG muon listing datablock S004MC, gives the canonical effective-coupling\nlimit\n\\[\n  G_C/G_F < 0.0030 \\qquad (90\\%\\ {\\rm C.L.})\n\\]\nfor the stated \\((V-A)\\times(V-A)\\) four-lepton effective Lagrangian.  The same\nPDG datablock, mirrored in\n\\texttt{pdg\\_or\\_equivalent.primary\\_current\\_probability\\_limit}, records the\nunderlying MACS/PSI probability limit from Willmann et al.,\n\\[\n  P_{M\\bar M} < 8.3\\times 10^{-11}\\qquad (90\\%\\ {\\rm C.L.})\n\\]\nin a \\(0.1~{\\rm T}\\) magnetic field.  The local canonical snapshot is\n\\texttt{flavor\\_catalog/references/L006/pdg2026\\_muonium\\_antimuonium\\_s004mc.txt};\nthe primary MACS article snapshot is\n\\texttt{flavor\\_catalog/references/L006/willmann1999\\_macs\\_arxiv\\_hepex9807011.txt}.\nThese are upper limits, not measurements of a nonzero conversion rate.",
+    "relevance": "Muonium conversion probes a four-lepton contact structure\n\\((\\bar\\mu\\Gamma e)(\\bar\\mu\\Gamma e)\\) that violates muon and electron family\nnumbers by two units.  In an RS lepton extension, such operators could arise\nfrom flavor-misaligned heavy neutral or doubly charged states, KK-sector\nlepton-current misalignment, or other non-dipole lepton interactions.  It is\ntherefore complementary to L001: the present repo checks only\n\\(\\mu\\to e\\gamma\\), while L006 would require a separate \\(\\Delta L=2\\)\nfour-lepton observable.",
+    "post_2008": "Relative to the \\texttt{CFW2008} era, the experimental bound itself has not\nchanged: PDG still uses the 1999 MACS/PSI result.  The main post-2008 movement\nis prospective.  The sidecar \\texttt{prospects} entries record the Snowmass\n2021 statement that MACE is intended to improve probability sensitivity by\nmore than two orders of magnitude and the 2024 MACE conceptual-design target\nbeyond the \\(10^{-13}\\) level.  On the theory side,\n\\texttt{post\\_2008\\_theory\\_context} records recent EFT work separating\n\\(\\Delta L_\\mu=-\\Delta L_e=2\\) operators from ordinary one-unit LFV and noting\nthat muonium conversion probes only part of that operator class.",
+    "validity": "The experimental signature is clean and lepton-sector-only: a confirmed signal\nwould be physics beyond the Standard Model.  The quoted \\(G_C/G_F\\) limit is\nnot operator-universal, however; it is tied to the PDG \\((V-A)\\times(V-A)\\)\nnormalization.  Any catalog-to-code translation must choose the Lorentz basis,\nmagnetic-field treatment, and spin-state normalization before comparing a model\nWilson coefficient to the MACS probability limit.",
+    "code_coverage_prose": "\\textbf{NO.}  A targeted grep for\n\\texttt{muonium|antimuonium|Muonium|Antimuonium|MACE|MACS} over\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} returned no hits.  The adjacent\ncharged-lepton LFV implementation is the \\(\\mu\\to e\\gamma\\) dipole checker at\n\\texttt{flavorConstraints/muToEGamma.py}:75, called from\n\\texttt{scanParams/scan.py}:524; it does not cover muonium conversion.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  L006 needs a new \\(\\Delta L_\\mu=-\\Delta L_e=2\\) four-lepton\noperator convention and a bound-state conversion-probability wrapper.  It does\nnot require lattice inputs or hadronic long-distance calculations for a first\ncatalog-to-code implementation, but a production version should handle\noperator-dependent magnetic-field and spin factors explicitly.",
+    "key_references": "Process-local keys before bibliography consolidation:\n\\texttt{PDG2026\\_MuoniumAntimuoniumS004MC}, \\texttt{Willmann1999\\_MACS},\n\\texttt{Bai2022\\_SnowmassMuonium}, \\texttt{Bai2024\\_MACECDR},\n\\texttt{HeeckSokhashvili2024\\_DeltaLTwo},\n\\texttt{AgasheBlechmanPetriello2006\\_RSLFV}, and \\texttt{CFW2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/charged_lepton/L006.yaml",
+  "source_tex": "flavor_catalog/processes/charged_lepton/L006.tex",
+  "worklog_path": "flavor_catalog/worklogs/L006/"
+}

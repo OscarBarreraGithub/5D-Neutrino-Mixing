@@ -1,0 +1,194 @@
+{
+  "process_id": "B011",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\bar{B}\\to X_s\\gamma",
+  "process_name": "Inclusive radiative B -> X_s gamma",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a new b -> s gamma dipole observable with C7/C8 matching, QCD running, inclusive-rate normalization, SM subtraction/uncertainty treatment, and photon-energy-cut conventions not present in the audited Delta F=2 code.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'",
+      "rg -n \"X_s|Xs|b.?->.?s.?gamma|b.?to.?s.?gamma|B.?->.?X_s.?gamma|C7|C_7|C8|C_8\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused implementation grep for X_s, b->s gamma, C7, and C8 in implementation/test directories returned exit=1.",
+      "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 in the modern quark policy surface.",
+      "quarkConstraints/modern/phenomenology.py:165 says that surface is policy-only and does not define a numeric EFT backend.",
+      "flavorConstraints/muToEGamma.py:1 is a lepton mu->e gamma dipole constraint, not a quark b->s gamma implementation."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "HFLAV",
+      "observable": "CP- and isospin-averaged branching fraction B(B -> X_s gamma)",
+      "value": 0.000349,
+      "uncertainty": 1.9e-05,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2024,
+      "experiment": "HFLAV",
+      "source_url": "https://hflav.web.cern.ch/results",
+      "snapshot_path": "flavor_catalog/references/B011/hflav_results_2026-05-16.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Misiak, Rehman, Steinhauser 2020",
+      "observable": "SM prediction for B_s gamma",
+      "value": 0.00034,
+      "uncertainty": 1.7e-05,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2020,
+      "experiment": "Misiak, Rehman, Steinhauser 2020",
+      "source_url": "https://arxiv.org/abs/2002.01548",
+      "snapshot_path": "flavor_catalog/references/B011/misiak_rehman_steinhauser_2020_arxiv.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Misiak et al. 2015 as quoted by PDG 2024 b-hadron review",
+      "observable": "NNLO SM prediction for b -> s gamma",
+      "value": 0.000336,
+      "uncertainty": 2.3e-05,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2015,
+      "experiment": "Misiak et al. 2015 as quoted by PDG 2024 b-hadron review",
+      "source_url": "https://arxiv.org/abs/1503.01789",
+      "snapshot_path": "flavor_catalog/references/B011/misiak_et_al_2015_arxiv.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Belle II Collaboration 2022",
+      "observable": "Photon-energy spectrum and partial branching fractions for B -> X_s gamma",
+      "value": null,
+      "uncertainty": null,
+      "units": "branching fraction spectrum",
+      "display": null,
+      "year": 2022,
+      "experiment": "Belle II Collaboration 2022",
+      "source_url": "https://arxiv.org/abs/2210.10220",
+      "snapshot_path": "flavor_catalog/references/B011/belleii_2022_arxiv.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "hflav_results_2026-05-16.txt": "sha256:81dde0df2037a0ef6bfc4f03571bf53c3aa99415291afbf97b51f18cd5670c88",
+    "hflav_rare_decays_dec2024_table67.txt": "sha256:43581f22065da1a01e7602183adf5109108e8f6c5f326cc36714eab796978698",
+    "pdg2024_b_meson_prod_decay_excerpt.txt": "sha256:6b39e38c96b2f26905d6ea8b8118297a95741f3869eecc6babb5a46c058264e6",
+    "misiak_rehman_steinhauser_2020_arxiv.txt": "sha256:8a3ec66a22c38965404f46c2a688b822e403ac138dc4c6e30162baa60a5b9c17",
+    "misiak_et_al_2015_arxiv.txt": "sha256:c252dbcd2b423992516bc095e15b0756848e2d859641357166d85823309609f5",
+    "belleii_2022_arxiv.txt": "sha256:6e54bacb4bc89a2a1438f67d7cf683bbac2c38754f5d37e29cef26e9a82d3ad1",
+    "belle_2016_arxiv.txt": "sha256:bed874fdad7ce4d2394128377a1c4deea57eb9bea5b5c8c11435a2cdf0864395"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:03:01-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:03:01-04:00",
+      "agent_id": "PKA-B011",
+      "reason": "Initial PKA sidecar for inclusive B -> X_s gamma."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T11:05:37-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T11:05:37-04:00",
+      "agent_id": "PKA-B011",
+      "reason": "PKA draft, source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:32:49-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:32:49-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for wa_wave1_beauty; numerical claims checked against sidecar sources."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T11:45:36-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T11:45:36-04:00",
+      "agent_id": "CA",
+      "reason": "Checker ca_wave1_beauty verified CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "D: photon polarization in radiative B"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(\\bar B\\to X_s\\gamma)\\).\nThis entry covers the CP- and isospin-averaged inclusive radiative decay\n\\(\\bar B\\to X_s\\gamma\\), equivalently the partonic FCNC transition\n\\(b\\to s\\gamma\\), at the canonical photon-energy threshold\n\\(E_\\gamma>1.6\\,\\mathrm{GeV}\\).  It is separated from the exclusive\n\\(B\\to K^*\\gamma\\) and \\(B_s\\to\\phi\\gamma\\) modes.",
+    "pdg_prose": "The canonical sidecar value is the HFLAV inclusive average\n\\[\n  {\\cal B}(\\bar B\\to X_s\\gamma)_{\\rm exp}\n  = (3.49\\pm0.19)\\times 10^{-4},\n  \\qquad E_\\gamma>1.6\\,\\mathrm{GeV},\n\\]\naccessed on 2026-05-16, with local snapshots\n\\texttt{references/B011/hflav\\_results\\_2026-05-16.txt} and\n\\texttt{references/B011/hflav\\_rare\\_decays\\_dec2024\\_table67.txt}.  The\nHFLAV table reports the same average as \\(349\\pm19\\) in units of \\(10^{-6}\\)\nafter extrapolating the Belle, Belle II, BaBar, and CLEO inputs to the common\nthreshold.  For theory comparison, the sidecar records the\nMisiak--Rehman--Steinhauser NNLO SM prediction\n\\[\n  {\\cal B}(\\bar B\\to X_s\\gamma)_{\\rm SM}\n  = (3.40\\pm0.17)\\times 10^{-4},\n  \\qquad E_\\gamma>1.6\\,\\mathrm{GeV},\n\\]\nfrom \\texttt{references/B011/misiak\\_rehman\\_steinhauser\\_2020\\_arxiv.txt}\n(arXiv:2002.01548).  It also records the PDG-reviewed Misiak et al. number\n\\((3.36\\pm0.23)\\times10^{-4}\\) from\n\\texttt{references/B011/misiak\\_et\\_al\\_2015\\_arxiv.txt}\n(arXiv:1503.01789).",
+    "relevance": "This observable tests the electromagnetic and chromomagnetic dipole sector,\nusually parameterized by \\(C_7\\) and \\(C_8\\).  In anarchic RS models,\nKK fermion, gauge, Higgs, or charged-scalar loops can generate flavor-changing\ndipoles even when the tree-level neutral-meson mixing constraints are passed.\nThe inclusive rate is therefore a sharp complement to the existing\n\\(\\Delta F=2\\) lane: it probes loop-level chirality-flipping flavor structure\nrather than the four-quark operators currently audited in the quark scan.",
+    "post_2008": "The main post-CFW updates are experimental averaging and NNLO theory.  Belle\npublished a full-data inclusive \\(B\\to X_{s+d}\\gamma\\) photon-spectrum\nanalysis, Belle II added a hadronic-tag photon-spectrum measurement, and HFLAV\nnow averages Belle, Belle II, BaBar, and CLEO inputs at the common\n\\(E_\\gamma>1.6\\,\\mathrm{GeV}\\) threshold.  On the SM side, Misiak et al.\nupdated the NNLO prediction after the original paper-era calculations, and\nMisiak, Rehman, and Steinhauser subsequently incorporated improved treatment\nof nonperturbative effects and progress toward removing the charm-mass\ninterpolation.",
+    "validity": "This is a robust loop/dipole constraint but not a plug-in likelihood without\nmodel work.  The inclusive observable is cleaner than exclusive radiative\nmodes, yet its comparison still depends on the photon-energy cut,\nextrapolation to the common threshold, perturbative matching, resolved-photon\nand other nonperturbative uncertainties, and the convention used for\n\\(C_7,C_8\\).  A catalog-level entry is unambiguous; using it as a hard RS\nconstraint requires a dedicated \\(b\\to s\\gamma\\) Wilson-coefficient pipeline.\n\nInclusive \\(B\\to X_s\\gamma\\) constrains \\(|C_7,C_8|\\) dipoles; the RS\nright-handed-dipole signature requires exclusive polarization and\ntime-dependent CP observables sensitive to \\(C_7'\\) (see B012 once available).",
+    "code_coverage_prose": "\\textbf{NO.}  The required catalog greps were rerun.  A focused implementation grep for\n\\texttt{X\\_s}, \\texttt{b->s gamma}, \\texttt{C7}, and \\texttt{C8} across\n\\texttt{quarkConstraints/}, \\texttt{flavorConstraints/}, \\texttt{scanParams/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{qcd/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, and \\texttt{tests/} returned no hits.  The modern quark\nsurface enumerates only \\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\)\nat \\texttt{quarkConstraints/modern/phenomenology.py:23}, and says it is\npolicy-only at \\texttt{quarkConstraints/modern/phenomenology.py:165}.  The\nonly dipole implementation found is the lepton-sector\n\\(\\mu\\to e\\gamma\\) module at \\texttt{flavorConstraints/muToEGamma.py:1}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Production use would need a new \\(b\\to s\\gamma\\) observable module,\nmatching onto \\(C_7\\) and \\(C_8\\), QCD running in the dipole basis,\nnormalization to the inclusive rate, and a documented treatment of the SM\nprediction and experimental photon-energy threshold.  None of that machinery\nis present in the audited \\(\\Delta F=2\\) code.",
+    "key_references": "Process-local raw reference keys before bibliography consolidation:\n\\texttt{hflav\\_rare\\_decays\\_dec2024},\n\\texttt{hflav\\_results\\_2026},\n\\texttt{pdg2024\\_b\\_meson\\_prod\\_decay},\n\\texttt{misiak\\_rehman\\_steinhauser\\_2020},\n\\texttt{misiak\\_et\\_al\\_2015},\n\\texttt{belleii\\_2022}, and \\texttt{belle\\_2016}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B011.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B011.tex",
+  "worklog_path": "flavor_catalog/worklogs/B011/"
+}

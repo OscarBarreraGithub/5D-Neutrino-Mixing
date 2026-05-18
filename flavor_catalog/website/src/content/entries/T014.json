@@ -1,0 +1,217 @@
+{
+  "process_id": "T014",
+  "family": "secondary",
+  "family_original": "top_higgs_ew",
+  "tier": "SECONDARY",
+  "standard_notation": "Z \\to b\\bar{s}+\\bar{b}s,\\ Z \\to b\\bar{d}+\\bar{b}d,\\ Z \\to s\\bar{d}+\\bar{s}d",
+  "process_name": "Flavor-changing Z decays (down-sector FCNC)",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "External-limit bookkeeping is low effort, but a production RS constraint needs new electroweak Delta F=1 matching for off-diagonal Z down-quark couplings, custodial-embedding conventions, and a policy for combining direct Z-width and low-energy flavor-derived coupling bounds.",
+  "cycle_count": null,
+  "priority_rationale": "Deferred by DA-4 (round_004_addendum_deferred_scope.md); Weak FCNC-Z tails; no dedicated experimental search at LEP era; LHC limits weak. Promoted in Wave-8 because: Top-tier per SESSION_NOTES.md sec 7; the only standalone FCNC-Z analysis row in the catalog (distinct from drafted Z-pole T010-T013 and LFV Z T015-T017). Lower implementation priority than Waves 1-7 PRIMARY entries.",
+  "promoted_in_wave": 8,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "evidence": [
+      "Targeted grep for Z -> bs/bd/sd, Zbs/Zbd/Zsd, FCNC-Z, and gL/gR down-sector Z-coupling strings returned no hits.",
+      "The implemented modern phenomenology surface is Delta F=2 neutral-meson mixing only: quarkConstraints/modern/phenomenology.py:23.",
+      "Generic Z references are alpha_s/M_Z support, not FCNC-Z observables: qcd/constants.py:11 and quarkConstraints/qcd_running.py:100.",
+      "Only unrelated charged-lepton dipole LFV appears in flavorConstraints/muToEGamma.py:75."
+    ],
+    "grep_commands": [
+      "rg -n \"Z.?->.?b.?s|Z.?->.?s.?b|Z.?->.?b.?d|Z.?->.?d.?b|Z.?->.?s.?d|Z.?->.?d.?s|Zbs|Zbd|Zsd|bsZ|bdZ|sdZ|flavou?r.?violat.*Z|FCNC.*Z|Z.*FCNC|gLbs|gRbs|gLbd|gRbd|gLsd|gRsd\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\"",
+      "rg -n \"b.?->.?s|b.?->.?d|s.?->.?d|Delta B|Delta S|K\\\\*|B_s.*mu|B_d.*mu|K.*nu|pi.*nu|Z.?penguin|penguin|dipole|epsilon.?K|Delta m_K|Delta m_B|B_s|B_d|D0|mu.?e.?gamma|Z.?->|h.?->\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\"",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_delta_mk|evaluate_d0_mixing|check_mu_to_e_gamma|Wilson|operator|likelihood\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\"",
+      "rg -n \"R_b|A_FB|Zbb|Z b|M_Z|mZ|Gamma_Z|GammaZ|Z pole|Z-pole|weak mixing|sin2\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\""
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": [
+    {
+      "observable": "B(Z -> hadrons)",
+      "year": 2025,
+      "value": 0.69911,
+      "uncertainty": 0.00056,
+      "display": "(69.911 +/- 0.056)%",
+      "units": "dimensionless branching fraction",
+      "role": "Inclusive PDG hadronic-Z width context used by later sources to derive the generic non-standard hadronic-Z bound; not a T014 FCNC observable.",
+      "source": "PDG 2025 Z-boson listing",
+      "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/T014/pdg2025_z_hadronic_listing.txt",
+      "sha256": "sha256:dbce22031a976a0f508e0e38037206fc33b0c3dfb333ae4c8bb34ff4cf3730e5"
+    }
+  ],
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": [
+    {
+      "key": "Kamenik2024_SM_FCNC_Z_predictions",
+      "role": "Updated SM branching-ratio expectations; theory inputs, not measured observables.",
+      "source_url": "https://arxiv.org/abs/2306.17520",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/T014/kamenik_2024_fv_higgs_z_extract.txt",
+      "sha256": "sha256:90f90d1895d4f1062601ca4f44d2aeeb88965f42655cc6f285452a0bef6e826f",
+      "values": [
+        {
+          "observable": "B(Z -> b sbar + bbar s)_SM",
+          "value": 4.2e-08,
+          "uncertainty": 7e-09,
+          "units": "dimensionless branching fraction"
+        },
+        {
+          "observable": "B(Z -> b dbar + bbar d)_SM",
+          "value": 1.8e-09,
+          "uncertainty": 3e-10,
+          "units": "dimensionless branching fraction"
+        }
+      ]
+    },
+    {
+      "key": "ECFA2025_FCCee_FV_Z_projections",
+      "role": "Future-collider reach projections; not current experimental limits.",
+      "source_url": "https://arxiv.org/abs/2506.15390",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/T014/ecfa2025_fv_z_decays_extract.txt",
+      "sha256": "sha256:13d5927991d179d1713ae501d825459371a385f52918f1b4d09e60f9a3a57173",
+      "values": [
+        {
+          "observable": "FCC-ee projected B(Z -> bs) reach with 0.1% systematics",
+          "value": "< 7.33e-6",
+          "assumed_systematic_uncertainty": "0.1%",
+          "confidence_level": "95% CL",
+          "units": "dimensionless branching fraction"
+        },
+        {
+          "observable": "FCC-ee projected B(Z -> bd) reach using only b-tagging",
+          "value": "< 2.45e-4",
+          "confidence_level": "95% CL",
+          "units": "dimensionless branching fraction"
+        }
+      ]
+    }
+  ],
+  "post_2010_developments": [
+    {
+      "key": "BlankeBurasDulingGemmlerGori2009_RareKBWarped",
+      "arxiv_id": "0812.3803",
+      "why_it_matters": "Directly analyzes tree-level flavor-changing Z exchange in custodial warped models for rare K and B decays."
+    },
+    {
+      "key": "Kamenik2024_FV_Higgs_Z_FCCee",
+      "arxiv_id": "2306.17520",
+      "why_it_matters": "Updates SM Z -> bs/bd expectations, current direct bound, indirect constraints, and FCC-ee reach."
+    },
+    {
+      "key": "ECFA2025_FV_Z_decays",
+      "arxiv_id": "2506.15390",
+      "why_it_matters": "Consolidates FV-Z direct bounds and future H/EW/top-factory projections."
+    },
+    {
+      "key": "AbuAjamieh2026_FV_Z_quark_bounds",
+      "arxiv_id": "2507.10525",
+      "why_it_matters": "Dedicated quark-sector FV-Z coupling-bound survey including bs, bd, and sd."
+    }
+  ],
+  "source_shas": {
+    "abu_ajamieh_2026_fv_z_quark_extract.txt": "sha256:53ee0fc6e7ab683793338fafbfdcf2075c81608b4acf74678c22f00e340b902b",
+    "blanke_buras_2009_rare_kb_warped_arxiv_abs.txt": "sha256:ab0b4bcb386dcf5eea6e9544ae650c9fe9f1f803c4841332bedfeb5782434ea6",
+    "cfw_2008_warped_flavor_arxiv_abs.txt": "sha256:a5a1239197dec4bfdb1f4c738f3f52483086497720dbdb53b499c8be1b200ff3",
+    "ecfa2025_fv_z_decays_extract.txt": "sha256:13d5927991d179d1713ae501d825459371a385f52918f1b4d09e60f9a3a57173",
+    "eilam_2002_rare_z_decays_extract.txt": "sha256:11b974b6f5830dce5774d5ccee276e0b74b47fc7eda6824821275b16241b7af0",
+    "kamenik_2024_fv_higgs_z_extract.txt": "sha256:90f90d1895d4f1062601ca4f44d2aeeb88965f42655cc6f285452a0bef6e826f",
+    "pdg2025_z_hadronic_listing.txt": "sha256:dbce22031a976a0f508e0e38037206fc33b0c3dfb333ae4c8bb34ff4cf3730e5"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "DRAFT",
+      "state": "DRAFT",
+      "at": "2026-05-17T02:15:11-04:00",
+      "timestamp": "2026-05-17T02:15:11-04:00",
+      "agent_id": "PKA-T014",
+      "reason": "Initialized Wave-8 SECONDARY T014 draft under prompted policy."
+    },
+    {
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-17T02:15:12-04:00",
+      "timestamp": "2026-05-17T02:15:12-04:00",
+      "agent_id": "PKA-T014",
+      "reason": "Initial PKA draft, source snapshots, code-coverage grep, and sidecar metadata."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-17T02:36:28-04:00",
+      "timestamp": "2026-05-17T02:36:28-04:00",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "WA-w8-T014 cycle-1 polish for Wave-8 SECONDARY FCNC-Z batch."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-17T02:50:46-04:00",
+      "timestamp": "2026-05-17T02:50:46-04:00",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA-w8-T014 cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w8_T014.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T14:31:04-04:00",
+      "agent_id": "Opus-round-4",
+      "round_id": "opus_round_004",
+      "reason": "Opus round 4 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_004_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T14:31:05-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew-w8",
+      "agent": "factcheck-codex-top_higgs_ew-w8",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-8 SECONDARY fact-check addendum (factcheck_top_higgs_ew.md)."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(Z\\to b\\bar s+\\bar b s\\),\n\\(Z\\to b\\bar d+\\bar b d\\), and \\(Z\\to s\\bar d+\\bar s d\\).\nThis entry covers on-shell flavor-changing neutral-current \\(Z\\)-boson decays\nto unequal down-type quark flavors.",
+    "pdg_prose": "The PDG 2025 \\(Z\\)-boson listing does not provide a dedicated row for\n\\(Z\\to bs\\), \\(Z\\to bd\\), or \\(Z\\to sd\\).  The current experiment-equivalent\ndirect bound used by recent FCNC-\\(Z\\) summaries is instead the inclusive\nnon-standard hadronic-width constraint,\n\\[\n  {\\cal B}(Z\\to q_i\\bar q_j+\\bar q_i q_j) < 2.9\\times10^{-3}\n  \\qquad (95\\%~{\\rm CL},\\ i\\ne j),\n\\]\nfrom the agreement of the measured \\(Z\\) hadronic width with the SM\nprediction.  For this entry the sidecar records the same direct bound for\n\\(bs\\), \\(bd\\), and \\(sd\\), with the \\(bs\\) and \\(bd\\) provenance anchored in\nthe ECFA 2025 and Kamenik et al. 2024 extracts and the explicit \\(sd\\)\napplication anchored in Abu-Ajamieh et al. 2026.  The supporting PDG snapshot\nrecords the inclusive hadronic \\(Z\\) branching fraction used as context for\nthe width comparison, but that inclusive quantity is not itself a T014 FCNC\nobservable.",
+    "relevance": "Anarchic warped models naturally generate flavor-nonuniversal neutral-gauge\ncouplings after rotating the localized fermion zero modes to the mass basis.\nFor down-type quarks this creates off-diagonal \\(Z d_i d_j\\) vertices through\nzero-mode coupling nonuniversality, mixing with KK gauge bosons, and mixing\nwith KK fermions.  The custodial construction that protects \\(Zb_L\\bar b_L\\)\nalso matters for off-diagonal left-handed \\(Z d_L^i\\bar d_L^j\\) couplings;\nin custodial RS, rare \\(K\\) and \\(B\\) amplitudes can instead be dominated by\nright-handed tree-level \\(Z\\) exchange.  The direct on-shell \\(Z\\to q_iq_j\\)\nbound is therefore a weak but conceptually clean collider diagnostic for the\nsame effective vertices that enter \\(K\\), \\(B_d\\), and \\(B_s\\) rare decays and\nmixing.  Per \\texttt{flavor\\_catalog/PRIORITY\\_TIERS.md}, T014 is a Wave-8\n\\textbf{SECONDARY} entry: it provides the catalog's standalone FCNC-\\(Z\\)\nrow, but has lower implementation priority than the Wave 1--7 PRIMARY\nconstraints.",
+    "post_2008": "Blanke, Buras, Duling, Gemmler, and Gori 2009 is the key RS-specific update\nrelative to the CFW era: it studies rare \\(K\\) and \\(B\\) decays in a custodial\nwarped model and shows how tree-level \\(Z\\) exchange with flavor-changing\ndown-quark couplings can dominate selected \\(\\Delta F=1\\) amplitudes.  Kamenik\net al. 2024 updated the SM predictions, current direct-width bound, and\nfuture-collider reach for the \\(bs\\) and \\(bd\\) modes; those theory and\nprojection numbers are retained in the sidecar rather than treated as T014\nmeasured observables.  The ECFA 2025 report folds this program into the\nHiggs/electroweak/top factory studies.  Abu-Ajamieh et al. 2026 gives a\ndedicated quark-sector survey of flavor-violating \\(Z\\) couplings, translating\nthe common direct width bound into effective-coupling conventions and comparing\nit with much stronger meson-oscillation constraints.",
+    "validity": "The direct \\(2.9\\times10^{-3}\\) limit is flavor-inclusive and not a dedicated\n\\(bs\\), \\(bd\\), or \\(sd\\) analysis; it should not be treated as a powerful\nstandalone RS exclusion.  Low-energy constraints from \\(K\\), \\(B_d\\), and\n\\(B_s\\) mixing or rare decays are much stronger, but they test model-dependent\nlinear combinations of left- and right-handed \\(Z\\) couplings and can be\naffected by correlations or cancellations with KK-gauge and other\n\\(\\Delta F=1,2\\) contributions.  A live implementation therefore needs an\nexplicit convention for off-diagonal \\(Z d_i d_j\\) couplings and a decision on\nwhether to impose only the weak direct width bound or the stronger\nlow-energy-derived coupling bounds.",
+    "code_coverage_prose": "\\textbf{NO.}  A targeted grep for \\(Z\\to bs\\), \\(Z\\to bd\\), \\(Z\\to sd\\),\n\\texttt{Zbs}/\\texttt{Zbd}/\\texttt{Zsd}, and flavor-violating \\(Z\\)-coupling\nstrings across \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} returned no hits.  Broader searches find only existing\n\\(\\Delta F=2\\) neutral-meson machinery\n(\\texttt{quarkConstraints/modern/phenomenology.py:23}) and generic\n\\(M_Z\\)/\\(\\alpha_s(M_Z)\\) support such as\n\\texttt{qcd/constants.py:11} and \\texttt{quarkConstraints/qcd\\_running.py:100}.\nThere is no on-shell FCNC-\\(Z\\) branching-ratio likelihood or \\(Z d_i d_j\\)\noperator interface.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Recording the external direct limit is straightforward, but a\nproduction RS constraint requires new electroweak \\(\\Delta F=1\\) matching for\noff-diagonal \\(Z\\) couplings, custodial-embedding bookkeeping, and a policy for\ncorrelating direct \\(Z\\)-width information with already-implemented\n\\(\\Delta F=2\\) and future rare-decay constraints.  The current code only\ncovers neutral-meson mixing and unrelated charged-lepton dipoles.",
+    "key_references": "\\texttt{PDG2025\\_Z\\_hadronic\\_width};\n\\texttt{ECFA2025\\_FV\\_Z\\_decays};\n\\texttt{Kamenik2024\\_FV\\_Higgs\\_Z\\_FCCee};\n\\texttt{AbuAjamieh2026\\_FV\\_Z\\_quark\\_bounds};\n\\texttt{Eilam2002\\_Rare\\_Z\\_decays};\n\\texttt{CsakiFalkowskiWeiler2008\\_WarpedFlavor};\n\\texttt{BlankeBurasDulingGemmlerGori2009\\_RareKBWarped}."
+  },
+  "source_yaml": "flavor_catalog/processes/secondary/top_higgs_ew/T014.yaml",
+  "source_tex": "flavor_catalog/processes/secondary/top_higgs_ew/T014.tex",
+  "worklog_path": "flavor_catalog/worklogs/T014/"
+}

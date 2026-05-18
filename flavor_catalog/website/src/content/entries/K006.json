@@ -1,0 +1,130 @@
+{
+  "process_id": "K006",
+  "family": "kaon",
+  "family_original": "kaon",
+  "tier": "PRIMARY",
+  "standard_notation": "K_L -> mu+ mu-",
+  "process_name": "Long-lived neutral-kaon dimuon decay",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a new s -> d mu+ mu- short-distance operator/matching path plus long-distance two-photon treatment or a documented SM subtraction; no current repo likelihood or hadronic input model exists for this rare decay.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n --glob '!*.ipynb' --glob '!*.png' --glob '!*.pdf' \"K_L|K0_L|KL|K\\\\s*->\\\\s*mu|mu\\\\+\\\\s*mu|mu\\\\^-|mumu|dimuon|s->d|s -> d|weak neutral current|Z penguin|box\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests"
+    ],
+    "result": "No K_L -> mu+ mu- or s -> d dilepton constraint implementation found; nearest hits are Delta F=2 kaon-mixing quantities, not this rare decay.",
+    "nearest_hits": [
+      "quarkConstraints/deltaf2.py:615: DELTA_M_K = 3.484e-15 # GeV, K_L - K_S mass difference (PDG)"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Particle Data Group 2024 Review of Particle Physics, K0_L listing, Gamma_24",
+      "observable": "BR(K_L -> mu+ mu-)",
+      "value": "6.84e-9",
+      "uncertainty": "0.11e-9",
+      "units": "branching fraction",
+      "display": null,
+      "year": 2024,
+      "experiment": "Particle Data Group 2024 Review of Particle Physics, K0_L listing, Gamma_24",
+      "source_url": "https://pdg.lbl.gov/2024/listings/rpp2024-list-K-zero-L.pdf",
+      "snapshot_path": "flavor_catalog/references/K006/pdg2024_kl_decay_modes.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2024_kl_decay_modes.txt": "sha256:7b8d82405b9c4bf76bf9efb6c3db59a5bd21ae2d77339e6ef0dce389ef50c585",
+    "ambrose_e871_2000_pubmed.txt": "sha256:d38cf3e1320ba09054b9dcea5926eb81def60bc838b3feefca6a3859e067c071",
+    "isidori_unterdorfer_2004_arxiv.txt": "sha256:20e19ea8bbf09e4f693cf253d3b3aa5a067af2af140a076e2b4ed96af7dbf08f",
+    "dambrosio_kitahara_2017_arxiv.txt": "sha256:36951fc2670a81fb327473faa963617565f86f0172ec993f207e381aeda8b073",
+    "dery_ghosh_grossman_schacht_2021_arxiv.txt": "sha256:b8fe01acff7a3a256be5caf59a35d41c719dad83b4eda1dbd9b7d286b323721b",
+    "chao_christ_2024_arxiv.txt": "sha256:0f6e418c75fae81da42f96222ef20a67e09130d44162978a503e74834dea4531"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:04:05-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:04:05-04:00",
+      "agent_id": "PKA-K006",
+      "reason": "initial PKA source extraction and draft"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:34:00-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:34:00-04:00",
+      "agent_id": "WA",
+      "reason": "Polished PKA draft for WA batch wa_wave1_kaon."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T11:46:24-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T11:46:24-04:00",
+      "agent_id": "CA",
+      "reason": "CA batch ca_wave1_kaon passed CHK-1..CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-kaon",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent_id": "factcheck-codex-kaon",
+      "reason": "Independent live-source fact-check completed for kaon family.",
+      "notes": "Live source fetch and local snapshot checks verified all value claims for this process."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(K_L\\to\\mu^+\\mu^-\\).  This entry covers the\nlong-lived neutral-kaon dimuon decay, catalog id \\(K006\\).  It is a\nstrangeness-changing weak-neutral-current mode.  The observed rate is dominated by\nthe two-photon long-distance amplitude, but the dispersive component leaves a\nshort-distance window for \\(s\\to d\\) \\(Z\\)-penguin and electroweak-box effects.",
+    "pdg_prose": "The YAML sidecar source of truth lists the current PDG value as\n\\[\n  \\mathcal{B}(K_L\\to\\mu^+\\mu^-)\n  = (6.84 \\pm 0.11)\\times 10^{-9},\n\\]\nfrom the PDG \\(K_L^0\\) listing, \\(\\Gamma_{24}\\), in the 2024 Review of\nParticle Physics.  The local snapshot is\n\\texttt{flavor\\_catalog/references/K006/pdg2024\\_kl\\_decay\\_modes.txt},\naccessed 2026-05-16.  The sidecar also records the primary E871 measurement,\n\\(\\mathcal{B}=(7.18\\pm0.17)\\times10^{-9}\\), as experimental provenance rather\nthan the catalog average.",
+    "relevance": "In warped or anarchic-flavor models this channel is relevant through the same\nflavor-changing \\(s\\to d\\) neutral-current structures that appear in rare kaon\nphenomenology: modified \\(Z\\) couplings, heavy gauge-boson penguins, and box\ntopologies.  It is less clean than \\(K\\to\\pi\\nu\\bar\\nu\\), because the measured\nbranching fraction is almost saturated by long-distance two-photon physics, but\nit is still a useful diagnostic for large semileptonic short-distance effects.\nThe Isidori-Unterdorfer dispersive analysis quoted in the sidecar gives a\nconservative bound\n\\(\\mathcal{B}(K_L\\to\\mu^+\\mu^-)_{\\rm short}<2.5\\times10^{-9}\\), which is the\nright order-of-magnitude target for any future catalog-to-code translation.",
+    "post_2008": "No newer high-precision \\(K_L\\to\\mu^+\\mu^-\\) branching-fraction measurement was\nfound beyond the PDG average used above.  The main post-2008 movement is\ntheoretical: D'Ambrosio-Kitahara identified direct-CP and \\(K_L\\)-\\(K_S\\)\ninterference handles for \\(K\\to\\mu^+\\mu^-\\); Dery-Ghosh-Grossman-Schacht\nshowed that time-dependent information can isolate a clean short-distance\n\\(K_S\\) observable with hadronic uncertainty below \\(1\\%\\); and Chao-Christ\ndeveloped a lattice-QCD framework for the long-distance two-photon amplitude,\nwith a quoted \\(10\\%\\) target accuracy.  These papers do not replace the PDG\nbranching fraction, but they sharpen how this family of modes could become a\ncleaner short-distance probe after the CFW-era treatment.",
+    "validity": "As a direct rate constraint this is long-distance-limited.  New physics with\nlarge scalar or pseudoscalar lepton operators would require separate treatment;\nthe short-distance interpretation above is aimed at vector/axial semileptonic\noperators generated by \\(Z\\)-penguins and electroweak boxes.  A production\nconstraint should therefore use either a conservative dispersive allowance or a\nfuture lattice-assisted SM subtraction, not the total PDG branching fraction as\na clean short-distance observable.",
+    "code_coverage_prose": "\\textbf{NO.}  A targeted grep across \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/}, excluding notebooks and binary-like assets, found no\n\\(K_L\\to\\mu^+\\mu^-\\), dimuon, or \\(s\\to d\\ell^+\\ell^-\\) implementation.  The\nnearest kaon hit is \\texttt{quarkConstraints/deltaf2.py:615}, which defines the\n\\(K_L-K_S\\) mass difference for \\(\\Delta F=2\\) mixing, not this decay.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Implementing K006 would need a new rare-kaon semileptonic observable,\nshort-distance \\(s\\to d\\mu^+\\mu^-\\) matching, and an explicit treatment of the\nlong-distance two-photon dispersive amplitude or a conservative external bound.\nThose ingredients are not present in the audited \\(\\Delta F=2\\) code path.",
+    "key_references": "\\begin{itemize}\n\\item \\texttt{PDG2024:K006}: PDG \\(K_L^0\\) listing, \\(\\Gamma_{24}\\).\n\\item \\texttt{Ambrose2000:E871KLMuMu}: primary branching-ratio measurement.\n\\item \\texttt{IsidoriUnterdorfer2004:KLMuMuSD}: short-distance bound.\n\\item \\texttt{DAmbrosioKitahara2017:KMuMuCP}: post-2008 interference/CP handle.\n\\item \\texttt{DeryGhoshGrossmanSchacht2021:KMuMuClean}: time-dependent clean probe proposal.\n\\item \\texttt{ChaoChrist2024:KLMuMuLattice}: lattice two-photon framework.\n\\end{itemize}"
+  },
+  "source_yaml": "flavor_catalog/processes/kaon/K006.yaml",
+  "source_tex": "flavor_catalog/processes/kaon/K006.tex",
+  "worklog_path": "flavor_catalog/worklogs/K006/"
+}
