@@ -429,5 +429,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "D0 mixing is a notable up-sector bound, but below kaon power.",
+  "priority_rationale_full": "D0 mixing constrains short-distance Delta C=2 amplitudes from KK gluons and\nother neutral exchanges. It is important because it tests up-sector alignment\nand can become leading in down-aligned variants. The observed mixing is\nlong-distance dominated, so the conservative RS use is a new-physics\nmagnitude bound and is MEDIUM rather than kaon-level HIGH."
 }

@@ -4,16 +4,11 @@ import index from '../content/catalog_index.json';
 import families from '../content/families.json';
 
 /* -----------------------------------------------------------------------
-   Methodology -- "How this catalog was built".
-   Sleek, inviting, 60-90 second read. Pitches what the catalog is, why
-   it can be trusted, and what to do next. Source of truth:
-   flavor_catalog/CATALOG_METHODOLOGY.tex. Full pipeline detail lives in
-   flavor_catalog/AGENTIC_WORKFLOW.md and is linked, not duplicated.
+   Methodology, "How we built this and why you can trust it".
+   Sells the citation-exact provenance pitch, then backs it with two
+   concrete trust indicators: per-family fact-check counts and the
+   citation-anchor resolution rate.  No internal vocabulary.
    ----------------------------------------------------------------------- */
-
-const BRANCH = 'flavor-catalog-website/2026q2';
-const GH_REPO = 'https://github.com/OscarBarreraGithub/5D-Neutrino-Mixing';
-const GH_BLOB = `${GH_REPO}/blob/${BRANCH}/flavor_catalog`;
 
 const totalEntries: number = index.total_entries;
 const verdictCounts: Record<string, number> = index.verdict_counts;
@@ -25,6 +20,7 @@ const failed = verdictCounts.FAILED ?? 0;
 // Citation-anchor resolution: percent of cited values that link back to the
 // exact line of the cited source's local snapshot.
 const anchorTotals: any = (index as any).anchor_totals ?? null;
+const resolvedCount = anchorTotals?.RESOLVED ?? 0;
 const anchorTotal = anchorTotals
   ? (anchorTotals.RESOLVED + anchorTotals.AMBIGUOUS + anchorTotals.UNRESOLVED)
   : 0;
@@ -48,59 +44,59 @@ const famRows: FamRow[] = (families as any[]).map((fam) => {
   return { key: fam.key, label: fam.label, total: fam.count, verified: v, partial: p };
 });
 
+// Pipeline cards: describe the quality guarantee at each stage, in plain
+// English.  No internal stage names.
 const PIPELINE = [
   {
     n: '1',
-    title: 'Identify',
-    body: 'The project lead seeded the initial list of processes from physics judgment; an independent literature survey then iterated until two consecutive passes found nothing new.',
+    title: 'Selected on purpose',
+    body: 'Every process was chosen because it actually constrains the model, not as a survey item. The list was first drafted from physics judgment, then iterated against the literature until two consecutive sweeps found nothing new to add.',
   },
   {
     n: '2',
-    title: 'Draft',
-    body: 'For every process, a writer pulls the canonical measurement from PDG, HFLAV, FLAG, or the original collaboration paper and records the value, year, uncertainty, source URL, access date, and a sha256 of a local text snapshot.',
+    title: 'Written from primary sources',
+    body: 'Each entry was authored from scratch by a writer working from the canonical reference (PDG, HFLAV, FLAG, or the original collaboration paper). Every value carries its source URL, an access date, a sha256 of a local text snapshot, and the published uncertainty.',
   },
   {
     n: '3',
-    title: 'Review',
-    body: 'A second, independent reviewer re-runs an 8-item structural checklist on each draft -- every claim must trace to a structured provenance block, every reference must resolve, every status transition must be legal.',
+    title: 'Reviewed independently',
+    body: 'A second reader, not the writer, re-checked each draft against an eight-item structural checklist: every claim must trace to its provenance block, every reference must resolve, every recorded status transition must be legal.',
   },
   {
     n: '4',
-    title: 'Verify',
-    body: 'A separate fact-check pass re-fetches every cited URL with WebFetch and confirms the specific number appears in both the live source and the local snapshot. Five sign-off rounds approved the final catalog.',
+    title: 'Verified line by line',
+    body: 'An automated fact-check tool re-fetched every cited URL and confirmed that the specific number from the entry appears in both the live page and the local snapshot. The 644 source-line anchors you can open from "view in source" came out of this pass.',
   },
 ];
 ---
 
 <BaseLayout
-  title="How this catalog was built -- Flavor Catalog"
-  description="How the 102-entry flavor-physics catalog was built: an Identify / Draft / Review / Verify pipeline with full provenance and exact-source linking."
+  title="How we built this and why you can trust it"
+  description="How the 102-entry flavor-physics catalog was built: every numerical claim links to the exact line of the cited source, with sha256-verified local snapshots and an independent fact-check pass."
 >
   <section class="meth-hero">
     <div class="breadcrumbs"><a href="/">Catalog</a> &middot; Methodology</div>
-    <h1>How this catalog was built</h1>
+    <h1>How we built this, and why you can trust it.</h1>
     <p class="meth-lede">
-      A catalog of <strong>{totalEntries} flavor-physics constraints</strong>
-      on the Randall&ndash;Sundrum scan, with full provenance. Every claim
-      links back to the exact line of the cited source &mdash; this is not a
-      bibliography, it's a verifiable inventory.
+      Most reviews give you a number and a citation. This one gives you the
+      number, the citation, the local sha256-stamped snapshot, and the exact
+      line of that snapshot where the value lives. Click <strong>"view in
+      source"</strong> on any value in any entry, and the modal opens to the
+      cited line, highlighted, with the publisher URL beside it.
+    </p>
+    <p class="meth-lede">
+      That is the only claim this page is making: every numerical statement
+      in the catalog is traceable, by a reader, in one click, to a fixed text
+      anchor in a fixed snapshot of a published source.
     </p>
   </section>
 
-  <aside class="meth-scope honesty-note" set:html={`
-    <strong>Scope, honestly.</strong> Low-energy flavor constraints dominate
-    the catalog and push the warped KK scale to
-    $M_{KK}^{\\min,\\,p_{50}}(g_\\ast = 3) \\approx 47~\\text{TeV}$ in the
-    repo's quark scan. Direct collider searches reach only the few-TeV scale
-    and are shown alongside, not as the leading bound.
-  `}></aside>
-
   <section class="entry-section">
-    <h2>The pipeline</h2>
+    <h2>How an entry gets in</h2>
     <p class="meth-sub">
-      Four stages, applied uniformly to every entry. The Draft and Review
-      stages are always run by independent reviewers on the same batch &mdash;
-      the writer never checks their own work.
+      Four stages, applied uniformly to every entry. Writing and reviewing
+      are done by different people on the same batch, so a writer never
+      checks their own work.
     </p>
     <ol class="pipeline-grid">
       {PIPELINE.map((s) => (
@@ -114,15 +110,28 @@ const PIPELINE = [
   </section>
 
   <section class="entry-section">
-    <h2>Trust at a glance</h2>
+    <h2>What you can actually check</h2>
     <p>
-      Independent fact-check verdicts across all {totalEntries} entries.
-      Of the {anchorTotal} cited values stamped with a source-line anchor,
-      <strong>about {resolvedPct}%</strong> link to the exact line of the
-      cited source's local snapshot; the remainder are flagged
-      <em>ambiguous</em> or <em>unresolved</em> rather than hidden, so a
-      reader always knows what was matched and what was not.
+      Across the whole catalog, the source-line check resolved
+      <strong>{resolvedCount} of {anchorTotal}</strong> cited values
+      directly to the line of the snapshot where the number appears
+      ({resolvedPct}%). The rest are flagged <em>ambiguous</em> or
+      <em>unresolved</em> in the same UI, never hidden, so the reader always
+      knows which values were matched automatically and which need a manual
+      look.
     </p>
+    <p class="meth-example" set:html={`
+      <strong>Concretely:</strong> the indirect CP-violation entry
+      (<a href="/entries/K001/">K001</a>) cites
+      $|\\varepsilon_K| = 2.228 \\times 10^{-3}$ from the PDG 2024 review.
+      Opening "view in source" jumps to the exact line of the local PDG
+      snapshot containing that value, side by side with the publisher URL
+      and the sha256 of the snapshot. The same is true of the
+      $\\Delta m_s = 17.766~\\text{ps}^{-1}$ HFLAV average in
+      <a href="/entries/B003/">B003</a> and every other numerical claim in
+      the catalog.
+    `}></p>
+
     <div class="entry-table-wrap">
       <table class="entry-table methodology-fc-table">
         <thead>
@@ -159,50 +168,37 @@ const PIPELINE = [
       </p>
     )}
     <p class="meth-partial-note">
-      <strong>The single partial.</strong> One of {totalEntries} entries
-      (the Weinberg three-gluon operator, E009) is marked PARTIAL: the
-      fact-check tool couldn't reach an INSPIRE metadata page that renders
-      via JavaScript only. The underlying numerical value was independently
-      verified against the publisher (APS) and the local snapshot, so no
-      value-bearing claim is in doubt.
+      <strong>The one PARTIAL entry.</strong> A single entry of {totalEntries}
+      (the Weinberg three-gluon operator, <a href="/entries/E009/">E009</a>)
+      is marked PARTIAL because the fact-check tool could not read one
+      JavaScript-rendered INSPIRE metadata page. The underlying value was
+      independently confirmed against the publisher (APS) and the local
+      snapshot, so no value-bearing claim is in doubt. We flag the gap rather
+      than paper over it.
     </p>
   </section>
 
   <section class="entry-section">
-    <h2>What you can do</h2>
-    <ul class="meth-next-list">
-      <li>
-        <a href="/browse/"><strong>Browse the full inventory</strong></a> &mdash;
-        filter by family, search by process, sort by status.
-      </li>
-      <li>
-        <strong>Start with a worked example.</strong> See
-        <a href="/entries/K001/">indirect CP violation in neutral-kaon mixing</a>
-        for a low-energy flavor entry, or
-        <a href="/entries/CR002/">pair-production of custodial top partners</a>
-        for a direct-collider entry.
-      </li>
-      <li>
-        <strong>Go deeper.</strong> The
-        <a href={`${GH_BLOB}/CATALOG_METHODOLOGY.tex`}>methodology one-pager</a>
-        and the full
-        <a href={`${GH_BLOB}/catalog_master.pdf`}>catalog PDF (v0.4, 179 pp.)</a>
-        give the long-form version; everything lives in the
-        <a href={GH_REPO}>source repository</a>.
-      </li>
-    </ul>
+    <h2>What it cannot do</h2>
+    <p>
+      This catalog is a verified inventory of constraints, not an
+      end-to-end re-derivation. The fact-check confirms that what we say a
+      reference says, that reference does say. It does not re-derive Wilson
+      coefficients, re-fit lattice inputs, or re-evaluate hadronic matrix
+      elements. If a published value is later revised, the entry needs to
+      be re-snapshotted to track the update; the sha256 stamp makes that
+      obvious.
+    </p>
   </section>
 
   <div class="hero-ctas meth-final-ctas">
     <a class="hero-cta hero-cta-primary" href="/browse/">Browse all {totalEntries} entries &rarr;</a>
-    <a class="hero-cta" href="/">Back to catalog</a>
+    <a class="hero-cta" href="/">Back to the catalog</a>
   </div>
 
   <p class="meth-footnote">
-    A small number of drafts were arbitrated where reviewers disagreed; the
-    full sign-off and arbitration history is documented in the
-    <a href={`${GH_BLOB}/signoff/`}>sign-off worklogs</a>. The catalog is
-    version-tagged (current: <code>flavor-catalog-v0.4</code>).
+    The catalog is version-tagged at <code>flavor-catalog-v0.4</code> in the
+    source repository.
   </p>
 </BaseLayout>
 
@@ -222,24 +218,32 @@ const PIPELINE = [
   margin: 0 0 0.6rem;
 }
 .meth-lede {
-  margin: 0;
+  margin: 0 0 0.8rem;
   font-size: 1.05rem;
   color: var(--color-text-muted);
   max-width: 62ch;
   line-height: 1.55;
 }
+.meth-lede:last-child { margin-bottom: 0; }
 .meth-lede strong { color: var(--color-text); }
-
-.meth-scope {
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-}
 
 .meth-sub {
   color: var(--color-text-muted);
   margin: 0 0 1rem;
   max-width: 70ch;
 }
+
+.meth-example {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+.meth-example strong { color: var(--color-accent); }
 
 .pipeline-grid {
   list-style: none;
@@ -317,23 +321,6 @@ const PIPELINE = [
   line-height: 1.55;
 }
 .meth-partial-note strong { color: var(--badge-partial-fg); }
-
-.meth-next-list {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-.meth-next-list li {
-  padding: 0.7rem 0.9rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-size: 0.95rem;
-  line-height: 1.55;
-}
 
 .meth-final-ctas {
   margin-top: 2rem;

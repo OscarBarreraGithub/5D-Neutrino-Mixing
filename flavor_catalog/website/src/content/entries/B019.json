@@ -279,5 +279,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Clean RK* LFU test with added helicity sensitivity",
+  "priority_rationale_full": "R_K* is another clean LFU null test of lepton-nonuniversal b-s semileptonic operators, with extra sensitivity to chirality and helicity structure through the vector final state. It is relevant to RS setups with nonuniversal lepton couplings or primed semileptonic coefficients. Present agreement with the SM and the need for bin, QED, and correlation treatment keep it at MEDIUM rather than HIGH."
 }

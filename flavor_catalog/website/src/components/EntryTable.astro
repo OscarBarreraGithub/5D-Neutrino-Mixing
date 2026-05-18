@@ -1,6 +1,6 @@
 ---
 import Badges from './Badges.astro';
-import { notationToMath } from '../lib/notation';
+import { notationToMath, processNameToHtml } from '../lib/notation';
 
 interface IndexRow {
   process_id: string;
@@ -12,6 +12,8 @@ interface IndexRow {
   process_name?: string | null;
   implementation_difficulty?: string | null;
   code_coverage_status?: string | null;
+  constraint_priority?: string | null;
+  priority_rationale_short?: string | null;
 }
 
 interface Props {
@@ -21,6 +23,20 @@ interface Props {
 }
 
 const { rows, showFamily = false, showOriginalFamily = false } = Astro.props as Props;
+
+// Phase 9: default sort = constraint_priority (HIGH > MEDIUM > LOW > UNRANKED),
+// then by process_id ascending.  The page-level sort script in family pages
+// and browse will re-sort on header click, but the initial render is this.
+const PRIORITY_ORDER: Record<string, number> = { HIGH: 0, MEDIUM: 1, LOW: 2 };
+function priorityRank(r: IndexRow): number {
+  const cp = (r.constraint_priority || '').toUpperCase();
+  return PRIORITY_ORDER[cp] ?? 99;
+}
+const sortedRows = rows.slice().sort((a, b) => {
+  const dp = priorityRank(a) - priorityRank(b);
+  if (dp !== 0) return dp;
+  return (a.process_id || '').localeCompare(b.process_id || '');
+});
 
 const FAMILY_LABELS: Record<string, string> = {
   kaon: 'Kaon',
@@ -37,6 +53,7 @@ const FAMILY_LABELS: Record<string, string> = {
 <table class="entry-table" data-entry-table>
   <thead>
     <tr>
+      <th data-sort="priority" class="th-sorted-asc">Priority</th>
       <th data-sort="process_id">ID</th>
       <th data-sort="standard_notation">Observable</th>
       {showFamily && <th data-sort="family">Family</th>}
@@ -47,7 +64,7 @@ const FAMILY_LABELS: Record<string, string> = {
     </tr>
   </thead>
   <tbody>
-    {rows.map((r) => (
+    {sortedRows.map((r) => (
       <tr class={r.tier === 'SECONDARY' ? 'row-secondary row-link' : 'row-link'}
           data-process-id={r.process_id}
           data-family={r.family}
@@ -55,7 +72,14 @@ const FAMILY_LABELS: Record<string, string> = {
           data-verdict={(r.fact_check_verdict || '').toUpperCase()}
           data-difficulty={(r.implementation_difficulty || '').toUpperCase()}
           data-coverage={(r.code_coverage_status || '').toUpperCase()}
+          data-priority={(r.constraint_priority || 'UNRANKED').toUpperCase()}
+          data-priority-rank={priorityRank(r)}
           data-href={`/entries/${r.process_id}/`}>
+        <td>
+          <a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
+            <Badges kind="priority" value={r.constraint_priority} tooltip={r.priority_rationale_short} />
+          </a>
+        </td>
         <td>
           <a class="row-cell-link row-id-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
             <code>{r.process_id}</code>
@@ -65,7 +89,7 @@ const FAMILY_LABELS: Record<string, string> = {
           <a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
             <span set:html={r.standard_notation ? notationToMath(r.standard_notation) : ''}></span>
           </a>
-          {r.process_name && <div class="row-process-name">{r.process_name}</div>}
+          {r.process_name && <div class="row-process-name" set:html={processNameToHtml(r.process_name)}></div>}
         </td>
         {showFamily && (
           <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><span class="family-chip">{FAMILY_LABELS[r.family] ?? r.family}</span></a></td>

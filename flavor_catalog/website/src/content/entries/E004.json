@@ -259,5 +259,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Neutron EDM anchors hadronic CP-dipole constraints.",
+  "priority_rationale_full": "The neutron EDM bound at 1.8e-26 e cm probes quark EDMs, qCEDMs,\ntheta-like sources, and Weinberg-operator contributions. New anarchic CP\nphases in warped or composite sectors feed these operators directly.\nAlthough translation to RS parameters has hadronic uncertainties, this is\na canonical dominant CP constraint."
 }

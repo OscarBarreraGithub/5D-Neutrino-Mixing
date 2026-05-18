@@ -373,5 +373,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Spin-2 limits are diagnostic, not flavor-dominant.",
+  "priority_rationale_full": "Generic RS graviton limits reach about 4.8 TeV, while bulk-RS diboson\nlimits can be much lower. The channel probes correlated warped spectra but\ndepends on curvature coupling, production mode, width, and branching\nassumptions. It is a useful direct-search side condition, below the flavor\nscale."
 }

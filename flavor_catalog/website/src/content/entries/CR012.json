@@ -451,5 +451,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Diboson HVT reach is useful but benchmark dependent.",
+  "priority_rationale_full": "Spin-1 diboson searches reach about 4.4-4.8 TeV in HVT-style benchmarks,\nrelevant to electroweak KK vectors. The mapping to RS depends on the\ncustodial spectrum, widths, and VV/VH/fermion branching fractions. It is a\nmeaningful collider cross-check but subleading to flavor."
 }

@@ -319,5 +319,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Very tight LFV kaon cap for lepton-extended RS models",
+  "priority_rationale_full": "K_L -> e mu has an extremely clean forbidden-SM signature and a very tight\nbranching-fraction upper limit. It can strongly constrain products of\ns-d and e-mu flavor-violating couplings in lepton-bulk, leptoquark, or\nnonuniversal gauge extensions of RS. It is not HIGH for the current catalog\nbecause the quark-only anarchic scan does not naturally generate the required\ncharged-lepton flavor transition."
 }

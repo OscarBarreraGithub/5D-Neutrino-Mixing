@@ -509,5 +509,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "tug single-top bound is direct but subleading",
+  "priority_rationale_full": "The t -> u g constraint directly probes first-third generation chromomagnetic flavor violation and benefits from the up-quark parton luminosity in single-top searches. It still depends on a specific anomalous-coupling normalization and one-operator-at-a-time reinterpretation. In an anarchic RS scan it is a diagnostic top-FCNC check rather than a leading mass-scale setter."
 }

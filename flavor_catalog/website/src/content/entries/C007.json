@@ -355,5 +355,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Best charm semileptonic FCNC probe, but recast is model-dependent.",
+  "priority_rationale_full": "D+->pi+mu+mu- probes c->u semileptonic FCNC operators that are complementary\nto Delta C=2 D mixing. The LHCb/PDG bound is useful, but long-distance\nresonances and the nonresonant phase-space definition prevent a clean\nuniversal veto. It is a MEDIUM roadmap constraint for broader RS flavor fits."
 }

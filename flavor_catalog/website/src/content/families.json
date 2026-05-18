@@ -2,25 +2,25 @@
   {
     "key": "kaon",
     "label": "Kaon",
-    "descriptor": "Neutral kaon mixing, rare K decays, CP violation in the strange sector.",
+    "descriptor": "Neutral kaon mixing, rare $K$ decays, CP violation in the strange sector.",
     "count": 13
   },
   {
     "key": "charm",
     "label": "Charm",
-    "descriptor": "D-meson mixing and rare charm decays (Delta C=2 and Delta C=1).",
+    "descriptor": "$D$-meson mixing and rare charm decays ($\\Delta C=2$ and $\\Delta C=1$).",
     "count": 8
   },
   {
     "key": "beauty",
     "label": "Beauty",
-    "descriptor": "B-meson mixing, b->s/d transitions, lepton-flavor-universality tests.",
+    "descriptor": "$B$-meson mixing, $b\\to s/d$ transitions, lepton-flavor-universality tests.",
     "count": 22
   },
   {
     "key": "top_higgs_ew",
     "label": "Top / Higgs / EW",
-    "descriptor": "Electroweak precision, top/Higgs couplings, custodial sector observables.",
+    "descriptor": "Electroweak precision, top and Higgs couplings, custodial-sector observables.",
     "count": 19
   },
   {
@@ -32,7 +32,7 @@
   {
     "key": "edm_neutrino",
     "label": "EDM / Neutrino",
-    "descriptor": "Electric dipole moments and neutrino oscillation constraints.",
+    "descriptor": "Electric dipole moments and neutrino-oscillation constraints.",
     "count": 7
   },
   {
@@ -43,8 +43,8 @@
   },
   {
     "key": "secondary",
-    "label": "Secondary (deferred)",
-    "descriptor": "Deferred SECONDARY scope -- LFV-kaon trio and lepton-bulk extensions promoted in Wave-8.",
+    "label": "Secondary",
+    "descriptor": "Lepton-flavor-violating kaon decays and lepton-bulk extensions held aside as a deferred scope.",
     "count": 8
   }
 ]

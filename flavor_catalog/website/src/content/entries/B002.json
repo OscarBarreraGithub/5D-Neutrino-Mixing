@@ -349,5 +349,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Clean Bd mixing phase probes complex RS Delta B=2",
+  "priority_rationale_full": "S_psi K_S is the phase counterpart to Delta m_d and can reject scan points whose magnitudes pass but whose new M12^d phase is too large. The decay amplitude is tree dominated and the measured sin2beta average is precise, so the observable is clean once a CKM convention and small penguin allowance are fixed. This is a leading CP constraint on the b-d mixing sector in anarchic RS."
 }

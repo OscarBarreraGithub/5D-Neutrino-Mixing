@@ -6,8 +6,10 @@ import families from '../content/families.json';
 
 // Render all 102 rows server-side; let JS filter rows in place.  Pagefind is
 // build-time-static and is wired up via the runtime <script> below.
+// EntryTable applies its own priority-first sort, so we pass an unsorted list
+// here (sorted by id only as a stable seed).
 const rows = (index.entries as any[]).slice().sort((a, b) =>
-  (a.family || '').localeCompare(b.family || '') || (a.process_id || '').localeCompare(b.process_id || '')
+  (a.process_id || '').localeCompare(b.process_id || '')
 );
 
 const families_list = families.filter((f: any) => f.count > 0);
@@ -29,6 +31,15 @@ const families_list = families.filter((f: any) => f.count > 0);
         <label class="filter-label" for="search-input">Search</label>
         <input id="search-input" type="search" placeholder="e.g. epsilon_K or B_s mu mu" aria-label="Search catalog text" />
         <div class="search-help">Live text search across IDs, notation, family, and prose. Powered by Pagefind once the build emits its index.</div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-label">Constraint priority</div>
+        <div class="filter-chips" data-filter-group="priority">
+          <label class="filter-chip"><input type="checkbox" value="HIGH" /><span class="filter-chip-label">High <span class="filter-chip-count">{(index as any).priority_counts?.HIGH ?? 0}</span></span></label>
+          <label class="filter-chip"><input type="checkbox" value="MEDIUM" /><span class="filter-chip-label">Medium <span class="filter-chip-count">{(index as any).priority_counts?.MEDIUM ?? 0}</span></span></label>
+          <label class="filter-chip"><input type="checkbox" value="LOW" /><span class="filter-chip-label">Low <span class="filter-chip-count">{(index as any).priority_counts?.LOW ?? 0}</span></span></label>
+        </div>
       </div>
 
       <div class="filter-block">
@@ -89,7 +100,7 @@ const families_list = families.filter((f: any) => f.count > 0);
         var totalRows = tableRows.length;
 
         // Build a list of grouped checkbox queries.
-        var GROUPS = ['family', 'tier', 'difficulty', 'coverage'];
+        var GROUPS = ['priority', 'family', 'tier', 'difficulty', 'coverage'];
         function selectedFor(group) {
           var boxes = document.querySelectorAll('[data-filter-group="' + group + '"] input[type="checkbox"]:checked');
           var out = [];
@@ -171,11 +182,12 @@ const families_list = families.filter((f: any) => f.count > 0);
             var tier = (tr.getAttribute('data-tier') || '').toUpperCase();
             var dif  = (tr.getAttribute('data-difficulty') || '').toUpperCase();
             var cov  = (tr.getAttribute('data-coverage') || '').toUpperCase();
+            var pri  = (tr.getAttribute('data-priority') || '').toUpperCase();
             var pid  = tr.getAttribute('data-process-id') || '';
             function pass(group, val) {
               return sel[group].length === 0 || sel[group].indexOf(val) !== -1;
             }
-            var ok = pass('family', fam) && pass('tier', tier)
+            var ok = pass('priority', pri) && pass('family', fam) && pass('tier', tier)
                   && pass('difficulty', dif) && pass('coverage', cov);
             if (ok && searchMatchIds) ok = searchMatchIds.has(pid);
             tr.style.display = ok ? '' : 'none';
@@ -193,6 +205,64 @@ const families_list = families.filter((f: any) => f.count > 0);
           apply();
         });
         apply();
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    })();
+  </script>
+
+  <script is:inline>
+    // Header-click sort identical to the per-family table (Priority column
+    // uses the numeric data-priority-rank attribute for HIGH-first ordering).
+    (function () {
+      function init() {
+        var tbl = document.querySelector('table[data-entry-table]');
+        if (!tbl) return;
+        var ths = tbl.querySelectorAll('th[data-sort]');
+        var lastKey = 'priority';
+        var dir = 1;
+        ths.forEach(function (th) {
+          th.style.cursor = 'pointer';
+          th.addEventListener('click', function () {
+            var key = th.getAttribute('data-sort');
+            if (!key) return;
+            if (key === lastKey) { dir = -dir; } else { dir = 1; lastKey = key; }
+            var tbody = tbl.querySelector('tbody');
+            if (!tbody) return;
+            var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var attr = 'data-' + key
+              .replace('process_id','process-id')
+              .replace('fact_check_verdict','verdict')
+              .replace('implementation_difficulty','difficulty')
+              .replace('code_coverage_status','coverage');
+            var numericAttr = (key === 'priority') ? 'data-priority-rank' : null;
+            rows.sort(function (a, b) {
+              if (numericAttr) {
+                var na = parseFloat(a.getAttribute(numericAttr));
+                var nb = parseFloat(b.getAttribute(numericAttr));
+                if (isNaN(na)) na = 99;
+                if (isNaN(nb)) nb = 99;
+                if (na === nb) {
+                  var pa = a.getAttribute('data-process-id') || '';
+                  var pb = b.getAttribute('data-process-id') || '';
+                  return pa < pb ? -1 : pa > pb ? 1 : 0;
+                }
+                return (na - nb) * dir;
+              }
+              var av = a.getAttribute(attr) || '';
+              var bv = b.getAttribute(attr) || '';
+              if (!av && !bv) {
+                var idx = Array.prototype.indexOf.call(th.parentNode.children, th);
+                av = (a.children[idx]?.textContent || '').trim().toLowerCase();
+                bv = (b.children[idx]?.textContent || '').trim().toLowerCase();
+              }
+              if (av === bv) return 0;
+              return av > bv ? dir : -dir;
+            });
+            rows.forEach(function (r) { tbody.appendChild(r); });
+            ths.forEach(function (x) { x.classList.remove('th-sorted-asc','th-sorted-desc'); });
+            th.classList.add(dir > 0 ? 'th-sorted-asc' : 'th-sorted-desc');
+          });
+        });
       }
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
     })();

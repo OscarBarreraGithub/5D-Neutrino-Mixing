@@ -20,6 +20,12 @@
     "UNRESOLVED": 47,
     "entries_with_anchors": 102
   },
+  "priority_counts": {
+    "HIGH": 14,
+    "MEDIUM": 41,
+    "LOW": 47,
+    "UNRANKED": 0
+  },
   "entries": [
     {
       "process_id": "K001",
@@ -35,7 +41,9 @@
         "RESOLVED": 7,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Leading anarchic-RS kaon bound from CP-violating K mixing"
     },
     {
       "process_id": "K002",
@@ -51,7 +59,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Real-part K mixing bound, but long-distance limited"
     },
     {
       "process_id": "K003",
@@ -67,7 +77,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Important direct-CP kaon test with theory-limited extraction"
     },
     {
       "process_id": "K004",
@@ -83,7 +95,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean K+ -> pi+ nu nubar constraint with 20% data"
     },
     {
       "process_id": "K005",
@@ -99,7 +113,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Clean CP rare mode, but current direct limit is still loose"
     },
     {
       "process_id": "K006",
@@ -115,7 +131,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Useful semileptonic bound, limited by long-distance K_L physics"
     },
     {
       "process_id": "K008",
@@ -131,7 +149,9 @@
         "RESOLVED": 8,
         "AMBIGUOUS": 11,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Near-interesting K_L -> pi0 e e limit with CP-decomposition cost"
     },
     {
       "process_id": "K009",
@@ -147,7 +167,9 @@
         "RESOLVED": 9,
         "AMBIGUOUS": 5,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Muon companion rare mode, weaker and long-distance limited"
     },
     {
       "process_id": "K010",
@@ -163,7 +185,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 4,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Auxiliary K_S input for K_L pi0 e e, not a standalone driver"
     },
     {
       "process_id": "K012",
@@ -179,7 +203,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 4,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "K_S dimuon upper limit, useful only for large NP enhancements"
     },
     {
       "process_id": "K013",
@@ -195,7 +221,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Radiative two-photon control mode, not a hard RS exclusion"
     },
     {
       "process_id": "K017",
@@ -211,7 +239,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Precise LFU ratio, but outside minimal quark FCNC scan"
     },
     {
       "process_id": "K018",
@@ -227,7 +257,9 @@
         "RESOLVED": 10,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "CKM-input diagnostic, not a standalone RS flavor bound"
     },
     {
       "process_id": "C001",
@@ -243,7 +275,9 @@
         "RESOLVED": 7,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "D0 mixing is a notable up-sector bound, but below kaon power."
     },
     {
       "process_id": "C002",
@@ -259,7 +293,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 3
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Phase-sensitive D mixing can strongly bound RH up-sector flavor."
     },
     {
       "process_id": "C003",
@@ -275,7 +311,9 @@
         "RESOLVED": 6,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Direct charm CPV is useful, but SM long-distance limits cleanliness."
     },
     {
       "process_id": "C004",
@@ -291,7 +329,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "D0->mumu is tight experimentally but not a dominant RS bound."
     },
     {
       "process_id": "C005",
@@ -307,7 +347,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "D0->ee is helicity-suppressed and far from leading RS reach."
     },
     {
       "process_id": "C006",
@@ -323,7 +365,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "D0->e mu is clean LFV, but product-flavor and dominated elsewhere."
     },
     {
       "process_id": "C007",
@@ -339,7 +383,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Best charm semileptonic FCNC probe, but recast is model-dependent."
     },
     {
       "process_id": "C008",
@@ -355,7 +401,9 @@
         "RESOLVED": 0,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "LFV semileptonic charm is clean but weaker and non-generic."
     },
     {
       "process_id": "B001",
@@ -371,7 +419,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Precision Bd mixing magnitude; direct Delta F=2 RS test"
     },
     {
       "process_id": "B002",
@@ -387,7 +437,9 @@
         "RESOLVED": 5,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Clean Bd mixing phase probes complex RS Delta B=2"
     },
     {
       "process_id": "B003",
@@ -403,7 +455,9 @@
         "RESOLVED": 6,
         "AMBIGUOUS": 3,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Precision Bs mixing magnitude tests b-s Delta B=2"
     },
     {
       "process_id": "B004",
@@ -419,7 +473,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Clean Bs mixing phase constrains new b-s CP violation"
     },
     {
       "process_id": "B005",
@@ -435,7 +491,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 5,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Clean rare leptonic FCNC with strong scalar and axial reach"
     },
     {
       "process_id": "B006",
@@ -451,7 +509,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 7,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean b-d dimuon limit, but subleading to Bs->mumu"
     },
     {
       "process_id": "B009",
@@ -467,7 +527,9 @@
         "RESOLVED": 6,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Charged-current tau mode is model-specific for RS scans"
     },
     {
       "process_id": "B011",
@@ -483,7 +545,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Inclusive b->s gamma is the key dipole-rate constraint"
     },
     {
       "process_id": "B012",
@@ -499,7 +563,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 3,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Right-handed b->s gamma helicity probe, exclusive-limited"
     },
     {
       "process_id": "B015",
@@ -515,7 +581,9 @@
         "RESOLVED": 6,
         "AMBIGUOUS": 3,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Inclusive b->s ll probes semileptonic FCNC Wilsons"
     },
     {
       "process_id": "B016",
@@ -531,7 +599,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Exclusive B->Kll rates are dominated by broader b->sll fits"
     },
     {
       "process_id": "B017",
@@ -547,7 +617,9 @@
         "RESOLVED": 5,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Broad b->sll/LFU suite gives semileptonic RS tests"
     },
     {
       "process_id": "B018",
@@ -563,7 +635,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean LFU null test for lepton-nonuniversal b->s effects"
     },
     {
       "process_id": "B019",
@@ -579,7 +653,9 @@
         "RESOLVED": 5,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean RK* LFU test with added helicity sensitivity"
     },
     {
       "process_id": "B021",
@@ -595,7 +671,9 @@
         "RESOLVED": 9,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Baryonic b->sll cross-check, form-factor limited"
     },
     {
       "process_id": "B022",
@@ -611,7 +689,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 3,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean b->s nu nu FCNC, but not yet dominant"
     },
     {
       "process_id": "B023",
@@ -627,7 +707,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "K* nu nu limits are useful but weaker and less direct"
     },
     {
       "process_id": "B025",
@@ -643,7 +725,9 @@
         "RESOLVED": 9,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Charged-current LFU anomaly is model-specific for RS"
     },
     {
       "process_id": "B026",
@@ -659,7 +743,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 7,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "R_D* is important context, not a generic RS bound"
     },
     {
       "process_id": "B032",
@@ -675,7 +761,9 @@
         "RESOLVED": 7,
         "AMBIGUOUS": 5,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Charmless pi K penguins are hadronic diagnostics"
     },
     {
       "process_id": "B033",
@@ -691,7 +779,9 @@
         "RESOLVED": 7,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Penguin CP phase null test, too hadronic for a main bound"
     },
     {
       "process_id": "B034",
@@ -707,7 +797,9 @@
         "RESOLVED": 9,
         "AMBIGUOUS": 3,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Bs phi phi phase is valuable but model-dependent"
     },
     {
       "process_id": "EW001",
@@ -723,7 +815,9 @@
         "RESOLVED": 14,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean EW KK-scale pressure, but not flavor-dominant"
     },
     {
       "process_id": "EW002",
@@ -739,7 +833,9 @@
         "RESOLVED": 12,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 3
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Precise charged-current test, but global-fit dependent"
     },
     {
       "process_id": "EW003",
@@ -755,7 +851,9 @@
         "RESOLVED": 12,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "CKM input diagnostic, not a standalone RS exclusion"
     },
     {
       "process_id": "T001",
@@ -771,7 +869,9 @@
         "RESOLVED": 10,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Clean tcZ limit, but LHC top-FCNC reach is subleading"
     },
     {
       "process_id": "T002",
@@ -787,7 +887,9 @@
         "RESOLVED": 9,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Clean tuZ bound, but far below low-energy flavor power"
     },
     {
       "process_id": "T003",
@@ -803,7 +905,9 @@
         "RESOLVED": 7,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Top-photon FCNC is direct but operator dependent"
     },
     {
       "process_id": "T004",
@@ -819,7 +923,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "tu-gamma bound is auxiliary to stronger flavor tests"
     },
     {
       "process_id": "T005",
@@ -835,7 +941,9 @@
         "RESOLVED": 11,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "tcg probes color FCNCs, but LHC BR reach is weak"
     },
     {
       "process_id": "T006",
@@ -851,7 +959,9 @@
         "RESOLVED": 9,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "tug single-top bound is direct but subleading"
     },
     {
       "process_id": "T007",
@@ -867,7 +977,9 @@
         "RESOLVED": 5,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Top-Higgs charm FCNC is clean but not dominant"
     },
     {
       "process_id": "T008",
@@ -883,7 +995,9 @@
         "RESOLVED": 7,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Top-Higgs up FCNC is useful but LHC-limited"
     },
     {
       "process_id": "T010",
@@ -899,7 +1013,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Zbb precision is the custodial-protection gate"
     },
     {
       "process_id": "T012",
@@ -915,7 +1031,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Zcc pole data checks up-sector profiles below Zbb"
     },
     {
       "process_id": "T015",
@@ -931,7 +1049,9 @@
         "RESOLVED": 7,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean Z e mu LFV limit, but muon LFV dominates"
     },
     {
       "process_id": "T016",
@@ -947,7 +1067,9 @@
         "RESOLVED": 6,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean Z e tau LFV handle, but subleading"
     },
     {
       "process_id": "T017",
@@ -963,7 +1085,9 @@
         "RESOLVED": 5,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean Z mu tau LFV handle, but not a full LFV bound"
     },
     {
       "process_id": "T018",
@@ -979,7 +1103,9 @@
         "RESOLVED": 10,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 3
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Direct h -> mu tau tests LFV Yukawa misalignment"
     },
     {
       "process_id": "T019",
@@ -995,7 +1121,9 @@
         "RESOLVED": 9,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Direct h -> e tau is meaningful but not dominant"
     },
     {
       "process_id": "T020",
@@ -1011,7 +1139,9 @@
         "RESOLVED": 6,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Direct h -> e mu is dominated by mu -> e gamma"
     },
     {
       "process_id": "L001",
@@ -1027,7 +1157,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Leading clean charged-LFV dipole bound in the lepton RS sector."
     },
     {
       "process_id": "L002",
@@ -1043,7 +1175,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean muon LFV, but current bound is behind mu->e gamma."
     },
     {
       "process_id": "L003",
@@ -1059,7 +1193,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Mu2e/COMET aluminum reach can become the leading contact LFV test."
     },
     {
       "process_id": "L004",
@@ -1075,7 +1211,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Best published conversion bound; strong but target/operator dependent."
     },
     {
       "process_id": "L005",
@@ -1091,7 +1229,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Published titanium conversion bound is weaker and dominated by Au/Al."
     },
     {
       "process_id": "L006",
@@ -1107,7 +1247,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Clean four-lepton test, but not a generic leading RS flavor veto."
     },
     {
       "process_id": "L007",
@@ -1123,7 +1265,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Tau-mu dipole LFV is clean but sub-leading to muon LFV."
     },
     {
       "process_id": "L008",
@@ -1139,7 +1283,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Tau-e dipole LFV is useful but behind muon LFV reach."
     },
     {
       "process_id": "L009",
@@ -1155,7 +1301,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Tau->3mu probes contact LFV, sub-leading but complementary."
     },
     {
       "process_id": "L010",
@@ -1171,7 +1319,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Tau->3e is a clean contact LFV probe, but sub-leading."
     },
     {
       "process_id": "L023",
@@ -1187,7 +1337,9 @@
         "RESOLVED": 6,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Trident constrains muon currents, not generic anarchic flavor."
     },
     {
       "process_id": "E001",
@@ -1203,7 +1355,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Tight electron EDM bound on unsuppressed CP lepton dipoles."
     },
     {
       "process_id": "E002",
@@ -1219,7 +1373,9 @@
         "RESOLVED": 10,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Current muon EDM limit is far weaker than electron/LFV dipoles."
     },
     {
       "process_id": "E004",
@@ -1235,7 +1391,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Neutron EDM anchors hadronic CP-dipole constraints."
     },
     {
       "process_id": "E006",
@@ -1251,7 +1409,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Hg EDM is powerful but nuclear-translation limited."
     },
     {
       "process_id": "E007",
@@ -1267,7 +1427,9 @@
         "RESOLVED": 0,
         "AMBIGUOUS": 4,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Ra/Xe EDMs are mainly auxiliary or projected cross-checks."
     },
     {
       "process_id": "E008",
@@ -1283,7 +1445,9 @@
         "RESOLVED": 7,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "qCEDMs directly test anarchic colored CP violation."
     },
     {
       "process_id": "E009",
@@ -1299,7 +1463,9 @@
         "RESOLVED": 5,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Weinberg operator is important but weaker than qCEDMs."
     },
     {
       "process_id": "CR001",
@@ -1315,7 +1481,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Strongest canonical collider RS bound, but below flavor scale."
     },
     {
       "process_id": "CR002",
@@ -1331,7 +1499,9 @@
         "RESOLVED": 9,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Meaningful T5/3 bound, but only around 1.5 TeV."
     },
     {
       "process_id": "CR003",
@@ -1347,7 +1517,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Top-partner T limits test light custodial spectra."
     },
     {
       "process_id": "CR004",
@@ -1363,7 +1535,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Bottom-partner limits are useful but flavor-subleading."
     },
     {
       "process_id": "CR005",
@@ -1379,7 +1553,9 @@
         "RESOLVED": 5,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Dilepton Z' reach is strong but coupling-model dependent."
     },
     {
       "process_id": "CR006",
@@ -1395,7 +1571,9 @@
         "RESOLVED": 5,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "W' reaches 6 TeV only in aggressive SSM-like proxies."
     },
     {
       "process_id": "CR007",
@@ -1411,7 +1589,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 1
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Spin-2 limits are diagnostic, not flavor-dominant."
     },
     {
       "process_id": "CR008",
@@ -1427,7 +1607,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Singlet T row is dominated by broader top-partner limits."
     },
     {
       "process_id": "CR009",
@@ -1443,7 +1625,9 @@
         "RESOLVED": 8,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "DY contact tails are sensitive but not a KK-gluon mass bound."
     },
     {
       "process_id": "CR010",
@@ -1459,7 +1643,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 4
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Doublet VLQ bound is lower and branching-assumption heavy."
     },
     {
       "process_id": "CR011",
@@ -1475,7 +1661,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "VBS is a strong-sector diagnostic, not a mass-setting bound."
     },
     {
       "process_id": "CR012",
@@ -1491,7 +1679,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Diboson HVT reach is useful but benchmark dependent."
     },
     {
       "process_id": "CR013",
@@ -1507,7 +1697,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 3,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Diphoton graviton row is often suppressed in bulk RS."
     },
     {
       "process_id": "CR014",
@@ -1523,7 +1715,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 2
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Four-top currently has weak and model-dependent RS reach."
     },
     {
       "process_id": "B007",
@@ -1539,7 +1733,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 7,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Electronic leptonic limits are far from RS precision drivers"
     },
     {
       "process_id": "B008",
@@ -1555,7 +1751,9 @@
         "RESOLVED": 1,
         "AMBIGUOUS": 2,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Tauonic leptonic limits are far above SM and secondary"
     },
     {
       "process_id": "B013",
@@ -1571,7 +1769,9 @@
         "RESOLVED": 10,
         "AMBIGUOUS": 3,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Secondary exclusive b->s gamma helicity cross-check"
     },
     {
       "process_id": "B014",
@@ -1587,7 +1787,9 @@
         "RESOLVED": 13,
         "AMBIGUOUS": 3,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Secondary b->d gamma check, CKM and form-factor limited"
     },
     {
       "process_id": "K019",
@@ -1603,7 +1805,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Very tight LFV kaon cap for lepton-extended RS models"
     },
     {
       "process_id": "K020",
@@ -1619,7 +1823,9 @@
         "RESOLVED": 4,
         "AMBIGUOUS": 1,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean charged-kaon LFV limits, model-dependent but nontrivial"
     },
     {
       "process_id": "K021",
@@ -1635,7 +1841,9 @@
         "RESOLVED": 2,
         "AMBIGUOUS": 4,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Secondary neutral LFV semileptonic cap, dominated by stronger LFV modes"
     },
     {
       "process_id": "T014",
@@ -1651,7 +1859,9 @@
         "RESOLVED": 3,
         "AMBIGUOUS": 0,
         "UNRESOLVED": 0
-      }
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Direct down-FCNC Z width bound is low-energy dominated"
     }
   ]
 }

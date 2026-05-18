@@ -435,5 +435,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Weinberg operator is important but weaker than qCEDMs.",
+  "priority_rationale_full": "The Weinberg three-gluon operator probes colored CP violation generated at\nheavy thresholds. It complements qCEDMs but has normalization, running,\nthreshold, hadronic matrix-element, and cancellation dependence. Because\nthe current bound is weaker than the qCEDM lane, it is meaningful but\nsubleading."
 }

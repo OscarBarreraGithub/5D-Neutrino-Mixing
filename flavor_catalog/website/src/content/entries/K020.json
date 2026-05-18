@@ -376,5 +376,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Clean charged-kaon LFV limits, model-dependent but nontrivial",
+  "priority_rationale_full": "K+ -> pi+ e mu modes are clean null tests of semileptonic lepton-flavor\nviolation at the 10^-11 level. In RS models with bulk leptons or related\nlepton-flavor spurions they constrain vector, scalar, or tensor\nquark-lepton operators that are not covered by the Delta F=2 kaon lane. They\nremain MEDIUM because the mapping is model-dependent and purely leptonic LFV\nobservables often dominate specific lepton-sector choices."
 }

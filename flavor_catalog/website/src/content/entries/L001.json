@@ -329,5 +329,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Leading clean charged-LFV dipole bound in the lepton RS sector.",
+  "priority_rationale_full": "This is the anchor charged-lepton LFV constraint: MEG II reaches 1.5e-13\nand the Standard Model background is negligible. In the RS lepton extension\nit directly bounds the e-mu dipole spurion used by the repo's scan defaults,\neven though the NDA translation is model-dependent. It is the leading LFV\nbound relative to mu->3e, conversion, and tau modes."
 }

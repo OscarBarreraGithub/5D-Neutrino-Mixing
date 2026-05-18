@@ -355,5 +355,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Bs phi phi phase is valuable but model-dependent",
+  "priority_rationale_full": "B_s -> phi phi is a strong experimental null test for new weak phases in b -> s sbar s penguin amplitudes. It is relevant to RS Delta B=1 operators and can complement B_s mixing phase information. Turning it into a hard anarchic RS bound requires a nonleptonic amplitude framework, polarization treatment, and strong-phase assumptions, so it is LOW for constraining power."
 }

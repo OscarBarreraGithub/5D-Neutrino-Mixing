@@ -432,5 +432,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Direct charm CPV is useful, but SM long-distance limits cleanliness.",
+  "priority_rationale_full": "Delta A_CP probes Delta C=1 CP phases and chromomagnetic or penguin-like\nstructures that a pure mixing scan can miss. The measurement is precise, but\nthe Standard Model long-distance charm amplitude is not clean enough for a\nsharp subtraction. It is meaningful RS pressure on CP phases, yet sub-leading\nand model-dependent."
 }

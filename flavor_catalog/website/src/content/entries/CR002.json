@@ -651,5 +651,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Meaningful T5/3 bound, but only around 1.5 TeV.",
+  "priority_rationale_full": "T5/3 pair production is a direct custodial-partner test with QCD-driven\nproduction and a current 1.46 TeV benchmark limit. It constrains light\npartner spectra, not M_KK universally, and is far below the 47.26 TeV\nflavor benchmark. It is therefore useful but subleading."
 }

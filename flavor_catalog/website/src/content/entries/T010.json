@@ -255,5 +255,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Zbb precision is the custodial-protection gate",
+  "priority_rationale_full": "The Z -> b bbar pole observables directly test the Z b_L b_L coupling that is stressed by the IR-localized third-generation doublet needed for the top mass. In RS model building this is not just a secondary EW check: it can force custodial protection and embedding choices before flavor limits are applied. The LEP/SLC pseudo-observables are precise and clean enough that this entry has HIGH constraining power, though in protected custodial setups it becomes more of an embedding diagnostic."
 }

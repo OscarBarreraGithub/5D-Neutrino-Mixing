@@ -41,6 +41,9 @@ FAMILIES_PATH = SITE_ROOT / "src" / "content" / "families.json"
 # this script just attaches the contents to each entry JSON so the detail page
 # can render the "view in source" modal without an additional client fetch.
 ANCHORS_DIR = SITE_ROOT / "_data" / "citation_anchors"
+# Phase 9: per-entry constraint-priority YAML produced by codex priority pass.
+# Same read-only convention as the anchors above.
+PRIORITY_DIR = SITE_ROOT / "_data" / "priority"
 
 # ---------------------------------------------------------------------------
 # YAML loader: prefer PyYAML, fall back to a minimal hand-rolled parser.
@@ -284,19 +287,19 @@ def split_sections(tex: str) -> dict[str, str]:
 FAMILY_META: dict[str, dict[str, str]] = {
     "kaon": {
         "label": "Kaon",
-        "descriptor": "Neutral kaon mixing, rare K decays, CP violation in the strange sector.",
+        "descriptor": "Neutral kaon mixing, rare $K$ decays, CP violation in the strange sector.",
     },
     "charm": {
         "label": "Charm",
-        "descriptor": "D-meson mixing and rare charm decays (Delta C=2 and Delta C=1).",
+        "descriptor": "$D$-meson mixing and rare charm decays ($\\Delta C=2$ and $\\Delta C=1$).",
     },
     "beauty": {
         "label": "Beauty",
-        "descriptor": "B-meson mixing, b->s/d transitions, lepton-flavor-universality tests.",
+        "descriptor": "$B$-meson mixing, $b\\to s/d$ transitions, lepton-flavor-universality tests.",
     },
     "top_higgs_ew": {
         "label": "Top / Higgs / EW",
-        "descriptor": "Electroweak precision, top/Higgs couplings, custodial sector observables.",
+        "descriptor": "Electroweak precision, top and Higgs couplings, custodial-sector observables.",
     },
     "charged_lepton": {
         "label": "Charged Lepton",
@@ -304,15 +307,15 @@ FAMILY_META: dict[str, dict[str, str]] = {
     },
     "edm_neutrino": {
         "label": "EDM / Neutrino",
-        "descriptor": "Electric dipole moments and neutrino oscillation constraints.",
+        "descriptor": "Electric dipole moments and neutrino-oscillation constraints.",
     },
     "collider_rs": {
         "label": "Collider RS",
         "descriptor": "Direct LHC searches for KK gauge resonances and custodial top partners.",
     },
     "secondary": {
-        "label": "Secondary (deferred)",
-        "descriptor": "Deferred SECONDARY scope -- LFV-kaon trio and lepton-bulk extensions promoted in Wave-8.",
+        "label": "Secondary",
+        "descriptor": "Lepton-flavor-violating kaon decays and lepton-bulk extensions held aside as a deferred scope.",
     },
 }
 
@@ -486,6 +489,37 @@ def load_citation_anchors(process_id: str) -> dict | None:
     }
 
 
+def load_priority(process_id: str) -> dict:
+    """Read the Phase 9 priority YAML for ``process_id`` and return a small dict.
+
+    Returns at most three keys (``constraint_priority``, ``priority_rationale_short``,
+    ``priority_rationale_full``); any missing field is left out so the schema's
+    ``.nullish()`` declarations stay honest.  An empty dict means no priority
+    file is present, which the UI renders as the gray "Unranked" badge.
+    """
+    yp = PRIORITY_DIR / f"{process_id}.yaml"
+    if not yp.is_file():
+        return {}
+    try:
+        doc = load_yaml(yp.read_text())
+    except Exception as exc:  # noqa: BLE001
+        print(f"  ! priority parse failed for {process_id}: {exc}", file=sys.stderr)
+        return {}
+    if not isinstance(doc, dict):
+        return {}
+    out: dict = {}
+    cp = doc.get("constraint_priority")
+    if isinstance(cp, str):
+        out["constraint_priority"] = cp.strip().upper()
+    short = doc.get("priority_rationale_short")
+    if isinstance(short, str) and short.strip():
+        out["priority_rationale_short"] = short.strip()
+    full = doc.get("priority_rationale_full")
+    if isinstance(full, str) and full.strip():
+        out["priority_rationale_full"] = full.strip()
+    return out
+
+
 def collect_access_dates(sidecar: dict) -> list[str]:
     """Walk the sidecar looking for access_date strings; dedupe + sort."""
     dates: set[str] = set()
@@ -526,6 +560,7 @@ def main() -> int:
     family_counts: dict[str, int] = {fam: 0 for fam in FAMILY_ORDER}
     verdict_counts: dict[str, int] = {}
     anchor_totals = {"RESOLVED": 0, "AMBIGUOUS": 0, "UNRESOLVED": 0, "entries_with_anchors": 0}
+    priority_counts: dict[str, int] = {"HIGH": 0, "MEDIUM": 0, "LOW": 0, "UNRANKED": 0}
 
     for yp in yaml_paths:
         try:
@@ -557,6 +592,11 @@ def main() -> int:
             anchor_totals["entries_with_anchors"] += 1
             for k in ("RESOLVED", "AMBIGUOUS", "UNRESOLVED"):
                 anchor_totals[k] += anchors["counts"].get(k, 0)
+        priority = load_priority(process_id)
+        cp_value = (priority.get("constraint_priority") or "UNRANKED").upper()
+        if cp_value not in priority_counts:
+            cp_value = "UNRANKED"
+        priority_counts[cp_value] = priority_counts.get(cp_value, 0) + 1
 
         rel_yaml = yp.relative_to(REPO_ROOT).as_posix()
         rel_tex = tex_path.relative_to(REPO_ROOT).as_posix() if tex_path.is_file() else None
@@ -609,6 +649,9 @@ def main() -> int:
             "source_tex": rel_tex,
             "worklog_path": worklog_path,
             "citation_anchors": anchors,
+            "constraint_priority": priority.get("constraint_priority"),
+            "priority_rationale_short": priority.get("priority_rationale_short"),
+            "priority_rationale_full": priority.get("priority_rationale_full"),
         }
 
         out_path = OUT_DIR / f"{process_id}.json"
@@ -627,6 +670,8 @@ def main() -> int:
             "implementation_difficulty": difficulty,
             "code_coverage_status": cov_status,
             "anchor_counts": (anchors["counts"] if anchors else None),
+            "constraint_priority": priority.get("constraint_priority"),
+            "priority_rationale_short": priority.get("priority_rationale_short"),
         })
 
     index_rows.sort(key=lambda r: (FAMILY_ORDER.index(r["family"]) if r["family"] in FAMILY_ORDER else 99, r["process_id"]))
@@ -636,6 +681,7 @@ def main() -> int:
         "verdict_counts": verdict_counts,
         "family_counts": family_counts,
         "anchor_totals": anchor_totals,
+        "priority_counts": priority_counts,
         "entries": index_rows,
     }, indent=2, ensure_ascii=False))
 
@@ -656,6 +702,7 @@ def main() -> int:
     print(f"  -> family counts:      {family_counts}")
     print(f"  -> verdict counts:     {verdict_counts}")
     print(f"  -> anchor totals:      {anchor_totals}")
+    print(f"  -> priority counts:    {priority_counts}")
     return 0
 
 

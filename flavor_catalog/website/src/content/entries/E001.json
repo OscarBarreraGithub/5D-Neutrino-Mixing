@@ -284,5 +284,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Tight electron EDM bound on unsuppressed CP lepton dipoles.",
+  "priority_rationale_full": "The electron EDM limit probes imaginary flavor-diagonal lepton dipoles\nwith a very small 4.1e-30 e cm bound. In anarchic warped lepton sectors,\nnew CP phases can feed this operator without PMNS suppression, making it\na high-value constraint despite not being in the quark Delta F=2 scan.\nIt is clean experimentally; model dependence enters in operator matching."
 }

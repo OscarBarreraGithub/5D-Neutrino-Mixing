@@ -218,5 +218,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "LFV semileptonic charm is clean but weaker and non-generic.",
+  "priority_rationale_full": "D+->pi+e mu has negligible Standard Model background as an LFV final state,\nbut the limits are weaker and the RS interpretation needs both up-sector and\ncharged-lepton flavor violation. It is not a generic quark-scan veto and is\ndominated by stronger muon LFV plus D-mixing constraints. Its role is mainly\nauxiliary for specialized combined flavor models."
 }

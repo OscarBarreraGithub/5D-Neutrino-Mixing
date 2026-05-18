@@ -18,6 +18,8 @@ const anchorTotals: any = (index as any).anchor_totals ?? null;
 const anchorTotal = anchorTotals
   ? (anchorTotals.RESOLVED + anchorTotals.AMBIGUOUS + anchorTotals.UNRESOLVED)
   : 0;
+const priorityCounts: any = (index as any).priority_counts ?? null;
+const highPriorityCount: number = priorityCounts ? (priorityCounts.HIGH ?? 0) : 0;
 ---
 <BaseLayout
   title="Flavor Catalog -- 5D Neutrino Mixing"
@@ -26,8 +28,8 @@ const anchorTotal = anchorTotals
   <section class="hero">
     <h1>Flavor catalog for the 5D&hairsp;/&hairsp;RS scan</h1>
     <p>
-      A snapshot of {totalEntries} flavor-physics processes that constrain &mdash; or could constrain &mdash;
-      the anarchic-flavor Randall&ndash;Sundrum scan in this repository.
+      A snapshot of {totalEntries} flavor-physics processes that constrain, or could constrain,
+      the Randall&ndash;Sundrum model parameter scan in this repository.
     </p>
   </section>
 
@@ -44,6 +46,12 @@ const anchorTotal = anchorTotals
     <span>{verified} verified</span>
     {partial > 0 && <><span class="stats-sep">&middot;</span><span>{partial} partial</span></>}
     {mismatch > 0 && <><span class="stats-sep">&middot;</span><span>{mismatch} mismatch</span></>}
+    {highPriorityCount > 0 && (
+      <>
+        <span class="stats-sep">&middot;</span>
+        <span>{highPriorityCount} leading constraints</span>
+      </>
+    )}
     {anchorTotal > 0 && (
       <>
         <span class="stats-sep">&middot;</span>

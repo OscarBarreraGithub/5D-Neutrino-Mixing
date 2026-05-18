@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badges from '../../components/Badges.astro';
 import CitationModal from '../../components/CitationModal.astro';
-import { notationToMath } from '../../lib/notation';
+import { notationToMath, processNameToHtml, processNameToPlain, normalizeNotation } from '../../lib/notation';
 import { texProseToHtml } from '../../lib/prose';
 import { getCollection } from 'astro:content';
 
@@ -41,10 +41,17 @@ function inlineMath(s?: string | null): string {
   if (!trimmed) return '';
   if (trimmed.startsWith('$') || trimmed.startsWith('\\(')) return trimmed;
   const looksMath = /\\[A-Za-z]+|[\^_]\{|\^\\|\^[A-Za-z0-9]/.test(trimmed);
-  return looksMath ? `$${trimmed}$` : trimmed;
+  // Shorthand: "Delta m_s", "epsilon_K", "Bbar", ... normalise to LaTeX first.
+  const hasShorthand =
+    /\b(?:Delta|Sigma|Omega|epsilon|nu|mu|pi|tau|phi|psi|gamma|ell)\b/.test(trimmed) ||
+    /->|<->|bar\b/.test(trimmed);
+  if (looksMath || hasShorthand) {
+    return `$${normalizeNotation(trimmed)}$`;
+  }
+  return trimmed;
 }
 
-const title = `${d.process_id} -- ${d.process_name ?? d.standard_notation ?? ''}`;
+const title = `${d.process_id} -- ${processNameToPlain(d.process_name ?? d.standard_notation ?? '')}`;
 const FAMILY_LABELS: Record<string, string> = {
   kaon: 'Kaon',
   charm: 'Charm',
@@ -121,15 +128,17 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
       <span class="entry-h1-notation" set:html={d.standard_notation ? notationToMath(d.standard_notation) : ''}></span>
       <Badges kind="tier" value={d.tier} />
     </h1>
-    {d.process_name && <span class="process-name">{d.process_name}</span>}
+    {d.process_name && (
+      <span class="process-name" set:html={processNameToHtml(d.process_name)}></span>
+    )}
   </header>
 
   {isSecondary && (
     <aside class="secondary-banner" role="note">
-      <strong>SECONDARY tier{d.promoted_in_wave ? ` -- deferred-then-promoted in Wave-${d.promoted_in_wave}` : ''}.</strong>
-      {d.priority_rationale && (
-        <p class="secondary-rationale">{d.priority_rationale}</p>
-      )}
+      <strong>SECONDARY scope.</strong>
+      This entry sits outside the current PRIMARY focus of the model parameter
+      scan but is included for completeness and as a hook for downstream
+      lepton-bulk and lepton-flavor-violating extensions.
       {d.family_original && (
         <p class="secondary-origin">
           Origin family: <a href={`/families/${d.family_original}/`}>{originalFamilyLabel}</a>.
@@ -147,16 +156,10 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
     <Badges kind="verdict" value={d.fact_check_verdict} />
     <Badges kind="difficulty" value={d.implementation_difficulty} />
     <Badges kind="coverage" value={d.code_coverage_status} />
-    {typeof d.cycle_count === 'number' && (
+    {d.constraint_priority && (
       <span class="status-group">
-        <span class="status-label">Cycle</span>
-        <span class="badge badge-unknown">{d.cycle_count}</span>
-      </span>
-    )}
-    {d.owner && (
-      <span class="status-group">
-        <span class="status-label">Owner</span>
-        <span class="badge badge-unknown">{d.owner}</span>
+        <span class="status-label">Priority</span>
+        <Badges kind="priority" value={d.constraint_priority} tooltip={d.priority_rationale_short} />
       </span>
     )}
     {aTotalSum > 0 && (
@@ -168,6 +171,16 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
       </span>
     )}
   </div>
+
+  {d.priority_rationale_full && (
+    <aside class="priority-callout" data-priority={(d.constraint_priority || 'UNRANKED').toUpperCase()}>
+      <div class="priority-callout-head">
+        <Badges kind="priority" value={d.constraint_priority} />
+        <span class="priority-callout-label">Why this matters for the scan</span>
+      </div>
+      <p set:html={texProseToHtml(d.priority_rationale_full)}></p>
+    </aside>
+  )}
 
   {/* ----------------- PDG / equivalent values ----------------- */}
   {rowsWithSources.length > 0 && (
@@ -193,8 +206,8 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
               <tr>
                 <td><span set:html={inlineMath(v.observable ?? v.label ?? '')}></span></td>
                 <td>
-                  <span class="value-display">{valueText}</span>
-                  {v.units && <span class="value-units"> {v.units}</span>}
+                  <span class="value-display" set:html={inlineMath(valueText)}></span>
+                  {v.units && <span class="value-units" set:html={` ${inlineMath(v.units)}`}></span>}
                   {v.cl && <div class="value-cl">{v.cl}{v.limit_type ? ` (${v.limit_type})` : ''}</div>}
                 </td>
                 <td>{v.year ?? '-'}</td>
@@ -224,21 +237,21 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
   {/* ----------------- Prose sections (LaTeX) ----------------- */}
   {sections.relevance && (
     <section class="entry-section">
-      <h2>Relevance to the RS / anarchic-flavor pipeline</h2>
+      <h2>Why this constrains the RS scan</h2>
       <div class="latex-prose" set:html={texProseToHtml(sections.relevance)}></div>
     </section>
   )}
 
   {sections.post_2008 && (
     <section class="entry-section">
-      <h2>Post-2008 / post-2010 developments</h2>
+      <h2>What's changed since the original paper</h2>
       <div class="latex-prose" set:html={texProseToHtml(sections.post_2008)}></div>
     </section>
   )}
 
   {sections.validity && (
     <section class="entry-section">
-      <h2>Constraint validity / model dependence</h2>
+      <h2>Validity and model dependence</h2>
       <div class="latex-prose" set:html={texProseToHtml(sections.validity)}></div>
     </section>
   )}
@@ -272,9 +285,7 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
       <h2>Implementation difficulty</h2>
       <div class="latex-prose" set:html={texProseToHtml(sections.implementation_difficulty_prose)}></div>
       {d.implementation_difficulty_reason && (
-        <p class="impl-reason">
-          <strong>Reason:</strong> {d.implementation_difficulty_reason}
-        </p>
+        <p class="impl-reason" set:html={`<strong>Reason:</strong> ${texProseToHtml(d.implementation_difficulty_reason)}`}></p>
       )}
     </section>
   )}

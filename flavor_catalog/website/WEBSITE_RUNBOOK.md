@@ -1,4 +1,4 @@
-# WEBSITE_RUNBOOK — Flavor Catalog Static Site Build
+# WEBSITE_RUNBOOK, Flavor Catalog Static Site Build
 
 **Mission**: collaborator-facing static site for 102-entry catalog at tag `flavor-catalog-v0.4`. Cloudflare Pages target. Cold-boot brief: [`../WEBSITE_BUILD_PROMPT.md`](../WEBSITE_BUILD_PROMPT.md).
 
@@ -18,7 +18,7 @@
 - `audits/factcheck_kaon.md`
 - Skim of `AGENTIC_WORKFLOW.md`
 
-Catalog facts: 102 entries (94 PRIMARY + 8 SECONDARY) across 8 families. 100 VERIFIED / 2 PARTIAL / 0 MISMATCH. Per-entry YAML schema documented in Explore agent report. M_KK^min,p50 = 47.26 TeV at g*=3 (rc1.1 quark scan) — load-bearing for honest collider-tier framing.
+Catalog facts: 102 entries (94 PRIMARY + 8 SECONDARY) across 8 families. 100 VERIFIED / 2 PARTIAL / 0 MISMATCH. Per-entry YAML schema documented in Explore agent report. M_KK^min,p50 = 47.26 TeV at g*=3 (rc1.1 quark scan), load-bearing for honest collider-tier framing.
 
 ---
 
@@ -26,9 +26,9 @@ Catalog facts: 102 entries (94 PRIMARY + 8 SECONDARY) across 8 families. 100 VER
 
 | # | Phase | Type | Model | Deliverable | Bg ID | Status | Output paths |
 |---|---|---|---|---|---|---|---|
-| 0 | Pre-flight | direct | — | branch cut + runbook | — | DONE | `flavor_catalog/website/WEBSITE_RUNBOOK.md` |
-| 0a | Required reading | Explore | sonnet | structured catalog summary | — | DONE | (consumed inline) |
-| 1 | Scaffold | subagent | opus | Astro 5.x + KaTeX scaffold, ingest pipeline, K001 template, working localhost | — | DONE (commit 460ece9) | `flavor_catalog/website/{package.json,astro.config.mjs,scripts/ingest_catalog.py,src/**}`; dev `http://localhost:4321/` |
+| 0 | Pre-flight | direct |, | branch cut + runbook |, | DONE | `flavor_catalog/website/WEBSITE_RUNBOOK.md` |
+| 0a | Required reading | Explore | sonnet | structured catalog summary |, | DONE | (consumed inline) |
+| 1 | Scaffold | subagent | opus | Astro 5.x + KaTeX scaffold, ingest pipeline, K001 template, working localhost |, | DONE (commit 460ece9) | `flavor_catalog/website/{package.json,astro.config.mjs,scripts/ingest_catalog.py,src/**}`; dev `http://localhost:4321/` |
 | 2a | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | kaon (11) + secondary/kaon (3) = 14 entries citation anchors (K007/K011 didn't exist; K017/K018 backfilled) | wrapper a32bcb9d4d8d4ba64 | DONE (commit pending) | `_data/citation_anchors/K*.yaml` |
 | 2b | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | beauty (22) + secondary/beauty (4) = 26 entries | wrapper a5e3a526fbe422358 | DONE | `_data/citation_anchors/B*.yaml` |
 | 2c | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | top_higgs_ew (19) + secondary/top_higgs_ew (1) = 20 entries | wrapper adfffbb9315974f8e | DONE | `_data/citation_anchors/T*.yaml`,`EW*.yaml` |
@@ -36,7 +36,7 @@ Catalog facts: 102 entries (94 PRIMARY + 8 SECONDARY) across 8 families. 100 VER
 | 2e | Codex anchor batch | codex via codex-delegate | gpt-5.5 xhigh | edm_neutrino (7) + collider_rs (14) = 21 entries | wrapper a940497068cec94e1 | DONE | `_data/citation_anchors/E*.yaml`, `CR*.yaml` |
 | 2f | Codex backfill | codex via codex-delegate | gpt-5.5 xhigh | K017 + K018 (missed in 2a) | aec3284bcf3f2b973 | DONE | `_data/citation_anchors/K017.yaml`, `K018.yaml` |
 | 3 | Data-driven rendering | subagent | opus | generalize K001 template → all 102; citation modal (RES/AMB/UNR); family pages; `/browse/` with Pagefind + 5 filters; dark-mode + 375px polish | a58db0da4350eb940 | DONE (commit pending) | new: `src/components/CitationModal.astro`,`EntryTable.astro`,`src/pages/browse.astro`,`scripts/screenshot_cdp.mjs`; modified: ingest, [id].astro, [family].astro, index.astro, global.css. Build: 112 pages, Pagefind index 102 entries/6907 words. |
-| 4 | Citation audit | direct | — | sample 10 entries × 2 anchors each, verify line N of snapshot contains anchor value | — | DONE | 20/20 sample anchors PASS (4 "FAILs" in script were normalization gap — manually eyeballed all 4, snapshots contain cited values). Zero false positives in sample. |
+| 4 | Citation audit | direct |, | sample 10 entries × 2 anchors each, verify line N of snapshot contains anchor value |, | DONE | 20/20 sample anchors PASS (4 "FAILs" in script were normalization gap, manually eyeballed all 4, snapshots contain cited values). Zero false positives in sample. |
 | 5 | Methodology page + CF Pages config + README | subagent | opus | `/methodology/` rendering CATALOG_METHODOLOGY.tex + AGENTIC_WORKFLOW + wave timeline + signoff rounds + fact-check table + Phase-2 anchor stats; CF Pages config (build cmd, output dir, Node, `_redirects`, `_headers`); website README | a5ee872c8783e7233 | DONE (commit 5f087fd) | new: `src/pages/methodology.astro`, `cloudflare-pages.config.md`, `README.md`, `.node-version`, `public/_redirects`, `public/_headers`; modified: BaseLayout (nav), index.astro (hero CTA). Build: 113 pages. |
 | 6a | LaTeX delimiter fix | codex via codex-delegate | gpt-5.5 xhigh | enable `$...$` (and keep `$$...$$`, `\(...\)`, `\[...\]`) as KaTeX auto-render delimiters site-wide; expose `window.fcatRenderMath()` helper for dynamic content | aabc0699b243dc0b9 | DONE (commit pending) | modified: `src/layouts/BaseLayout.astro`, `src/pages/entries/[id].astro`. |
 | 6b | UI polish | subagent | sonnet | row-clickable tables (no Open column); drop "DIFF:" prefix on difficulty badge; sleek landing hero (move 94/8 stats out of hero, scope-note below family cards) | a610a0e5d3afc1de6 | DONE (commit pending) | modified: `Badges.astro`, `EntryTable.astro`, `browse.astro`, `index.astro`, `global.css`. |

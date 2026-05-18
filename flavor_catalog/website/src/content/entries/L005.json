@@ -321,5 +321,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Published titanium conversion bound is weaker and dominated by Au/Al.",
+  "priority_rationale_full": "The titanium SINDRUM II limit is a real coherent-conversion bound, but it is\nweaker than the gold benchmark and far behind projected aluminum reach. Its\nRS interpretation needs the same target-specific operator and nuclear inputs.\nFor prioritizing anarchic RS scans it is mainly a historical cross-check, not\nan independent leading constraint."
 }

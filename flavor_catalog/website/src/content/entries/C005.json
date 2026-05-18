@@ -257,5 +257,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "D0->ee is helicity-suppressed and far from leading RS reach.",
+  "priority_rationale_full": "The D0->e+e- upper limit is experimentally valid, but the channel is\nhelicity-sensitive and not a clean dominant short-distance charm constraint.\nIts RS use would require a dedicated c->u e+e- operator basis and electron\nacceptance conventions. D mixing, D-mixing CPV, and muon LFV dominate the\ngeneric anarchic-flavor pressure."
 }

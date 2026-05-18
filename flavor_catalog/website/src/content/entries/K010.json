@@ -461,5 +461,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Auxiliary K_S input for K_L pi0 e e, not a standalone driver",
+  "priority_rationale_full": "K_S -> pi0 e+ e- is primarily an experimental normalization for the\nindirect-CP component of K_L -> pi0 e+ e-. The measured partial rate is useful,\nbut the extrapolated full-region number depends on form-factor assumptions and\nlong-distance chiral dynamics. It is an auxiliary rare-kaon input rather than\na standalone leading RS exclusion."
 }

@@ -125,6 +125,11 @@ const entrySchema = z
     source_tex: z.string().nullish(),
     worklog_path: z.string().nullish(),
     citation_anchors: citationAnchorsSchema.nullish(),
+    // Phase 9: constraint-priority ranking attached from _data/priority/<id>.yaml.
+    // Three-bucket scale (HIGH / MEDIUM / LOW); UNRANKED is the unset case.
+    constraint_priority: z.enum(['HIGH', 'MEDIUM', 'LOW']).or(z.string()).nullish(),
+    priority_rationale_short: z.string().nullish(),
+    priority_rationale_full: z.string().nullish(),
   })
   .passthrough();
 

@@ -507,5 +507,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Clean tuZ bound, but far below low-energy flavor power",
+  "priority_rationale_full": "The t -> u Z limit cleanly tests first-third generation up-sector neutral-current flavor violation. Its current reach is still an LHC top-FCNC branching-ratio limit, with a model-dependent translation from RS Ztu couplings or contact terms to the published tensor-SMEFT benchmarks. It is useful for diagnostics, especially in aligned variants, but not a leading anarchic-RS scan constraint."
 }

@@ -52,11 +52,10 @@ const isColliderRs = family === 'collider_rs';
   {isColliderRs && (
     <aside class="honesty-note" set:html={`
       <strong>Scope note.</strong> Low-energy flavor families (kaon, beauty,
-      charm, EDM/neutrino) imply
-      $M_{KK}^{\\min,\\,p_{50}}(g_\\ast = 3) \\approx 47.26~\\text{TeV}$
-      in the repo-local rc1.1 quark scan, while the direct-search reach for
-      custodial top-partners and KK gauge resonances catalogued here sits near
-      the few-TeV scale.
+      charm, EDM/neutrino) push the lower KK gauge-boson mass bound near
+      $\\sim 47~\\text{TeV}$ in this repository's quark-sector scan, while the
+      direct-search reach for custodial top partners and KK gauge resonances
+      catalogued here sits near the few-TeV scale.
       Direct LHC limits and indirect flavor bounds therefore probe qualitatively
       different mass scales and should not be mapped onto a single
       $M_{KK}$ axis without explicit model assumptions.
@@ -79,13 +78,17 @@ const isColliderRs = family === 'collider_rs';
   <script is:inline>
     (function () {
       // Click-to-sort on table headers.  Simple ascending/descending toggle,
-      // case-insensitive string compare, numeric for plain numbers.
+      // case-insensitive string compare, numeric for plain numbers.  The
+      // Priority column ranks via data-priority-rank (HIGH=0, MEDIUM=1, LOW=2,
+      // unranked=99) so ascending always shows the strongest constraints first.
       function init() {
         var tbl = document.querySelector('table[data-entry-table]');
         if (!tbl) return;
         var ths = tbl.querySelectorAll('th[data-sort]');
+        // The server-rendered table is already priority-sorted ascending; mark
+        // that header as the initial sort key so a click flips direction.
+        var lastKey = 'priority';
         var dir = 1;
-        var lastKey = null;
         ths.forEach(function (th) {
           th.style.cursor = 'pointer';
           th.addEventListener('click', function () {
@@ -95,10 +98,28 @@ const isColliderRs = family === 'collider_rs';
             var tbody = tbl.querySelector('tbody');
             if (!tbody) return;
             var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var attr = 'data-' + key
+              .replace('process_id','process-id')
+              .replace('fact_check_verdict','verdict')
+              .replace('implementation_difficulty','difficulty')
+              .replace('code_coverage_status','coverage');
+            var numericAttr = (key === 'priority') ? 'data-priority-rank' : null;
             rows.sort(function (a, b) {
-              var av = a.getAttribute('data-' + key.replace('process_id','process-id').replace('fact_check_verdict','verdict').replace('implementation_difficulty','difficulty').replace('code_coverage_status','coverage')) || '';
-              var bv = b.getAttribute('data-' + key.replace('process_id','process-id').replace('fact_check_verdict','verdict').replace('implementation_difficulty','difficulty').replace('code_coverage_status','coverage')) || '';
-              // Fallback: read first cell text content for fields not encoded as data-attrs.
+              if (numericAttr) {
+                var na = parseFloat(a.getAttribute(numericAttr));
+                var nb = parseFloat(b.getAttribute(numericAttr));
+                if (isNaN(na)) na = 99;
+                if (isNaN(nb)) nb = 99;
+                if (na === nb) {
+                  // Stable tiebreak by process_id ascending.
+                  var pa = a.getAttribute('data-process-id') || '';
+                  var pb = b.getAttribute('data-process-id') || '';
+                  return pa < pb ? -1 : pa > pb ? 1 : 0;
+                }
+                return (na - nb) * dir;
+              }
+              var av = a.getAttribute(attr) || '';
+              var bv = b.getAttribute(attr) || '';
               if (!av && !bv) {
                 var idx = Array.prototype.indexOf.call(th.parentNode.children, th);
                 av = (a.children[idx]?.textContent || '').trim().toLowerCase();
@@ -108,7 +129,6 @@ const isColliderRs = family === 'collider_rs';
               return av > bv ? dir : -dir;
             });
             rows.forEach(function (r) { tbody.appendChild(r); });
-            // mark active header
             ths.forEach(function (x) { x.classList.remove('th-sorted-asc','th-sorted-desc'); });
             th.classList.add(dir > 0 ? 'th-sorted-asc' : 'th-sorted-desc');
           });

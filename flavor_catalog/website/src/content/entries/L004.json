@@ -179,5 +179,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Best published conversion bound; strong but target/operator dependent.",
+  "priority_rationale_full": "The gold SINDRUM II limit is the strongest published coherent mu-e conversion\nbenchmark in this set and is clean experimentally. It probes lepton-quark\ncontact, scalar, vector, and dipole structures that are complementary to\nmu->e gamma. Its RS recast is target- and operator-dependent, and projected\naluminum conversion is the sharper future constraint, so this is MEDIUM."
 }

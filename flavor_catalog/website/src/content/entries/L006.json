@@ -263,5 +263,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Clean four-lepton test, but not a generic leading RS flavor veto.",
+  "priority_rationale_full": "Muonium-antimuonium conversion is experimentally clean and would be new\nphysics, but it constrains a Delta L=2 four-lepton structure rather than the\ngeneric quark or dipole LFV lanes. The quoted GC/GF limit is basis-dependent\nand does not map to a universal RS scan number. It is auxiliary unless a\nmodel has the required lepton-number-violating contact operators."
 }

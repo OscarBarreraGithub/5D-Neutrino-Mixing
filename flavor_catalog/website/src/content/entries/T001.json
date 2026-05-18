@@ -512,5 +512,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Clean tcZ limit, but LHC top-FCNC reach is subleading",
+  "priority_rationale_full": "The t -> c Z limit is experimentally clean and directly probes top-charm neutral-current flavor violation. Current limits are still at the 10^-4 branching-fraction level and require operator-convention choices to map RS parameters into the ATLAS/CMS benchmarks. For an anarchic-flavor RS scan this is complementary top-sector information, not a dominant bound."
 }

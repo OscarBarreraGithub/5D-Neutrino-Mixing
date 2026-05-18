@@ -655,5 +655,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Electronic leptonic limits are far from RS precision drivers",
+  "priority_rationale_full": "The B_q -> e+ e- limits are clean experimental upper bounds, but they are many orders above the tiny SM expectations. They are useful for electron-specific scalar or pseudoscalar scenarios, yet the secondary status and weak direct sensitivity make them auxiliary for the anarchic RS scan. B_s -> mu+ mu- and neutral-meson mixing carry the primary constraining power."
 }

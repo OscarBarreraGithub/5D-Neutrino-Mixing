@@ -377,5 +377,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Charged-current LFU anomaly is model-specific for RS",
+  "priority_rationale_full": "R_D is a clean charged-current LFU ratio and is important for models with charged scalars, W'-like vectors, or leptoquark-style matching. It does not directly test the neutral FCNC and Delta F=2 sources that dominate the anarchic RS quark scan. Without a specified charged-current extension and the R_D-R_D* covariance, it is contextual rather than a primary RS constraint."
 }

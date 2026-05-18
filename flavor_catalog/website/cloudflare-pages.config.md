@@ -45,16 +45,16 @@ API calls.
 
 After `npm run build`, the `dist/` directory contains:
 
-- `index.html` — landing page
-- `entries/<process_id>/index.html` — one page per entry (102 total)
-- `families/<family>/index.html` — per-family index pages
-- `browse/index.html` — filterable table with Pagefind search
-- `methodology/index.html` — "How this catalog was built"
-- `pagefind/` — Pagefind static search index (fragments, bundle, UI)
-- `_astro/` — hashed JS/CSS bundles
-- `_redirects` — Cloudflare Pages static-redirects file (copied from
+- `index.html`, landing page
+- `entries/<process_id>/index.html`, one page per entry (102 total)
+- `families/<family>/index.html`, per-family index pages
+- `browse/index.html`, filterable table with Pagefind search
+- `methodology/index.html`, "How this catalog was built"
+- `pagefind/`, Pagefind static search index (fragments, bundle, UI)
+- `_astro/`, hashed JS/CSS bundles
+- `_redirects`, Cloudflare Pages static-redirects file (copied from
   `website/_redirects` via Astro's `public/` semantics; see below)
-- `_headers` — Cloudflare Pages static-headers file
+- `_headers`, Cloudflare Pages static-headers file
 
 Total pages: **112+** (102 entries + 8 family indices + browse + methodology
 + landing).

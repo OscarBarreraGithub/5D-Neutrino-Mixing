@@ -314,5 +314,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Real-part K mixing bound, but long-distance limited",
+  "priority_rationale_full": "Delta m_K probes the real part of the same RS Delta S=2 operator set that\nmakes epsilon_K dangerous, including chirally enhanced left-right structures.\nIt is therefore a meaningful conservative magnitude bound on KK-gluon flavor\nviolation. Its constraining power is downgraded because the measured splitting\ncontains large long-distance Standard Model contributions and K001 dominates\nthe generic complex-phase scan."
 }

@@ -386,5 +386,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "VBS is a strong-sector diagnostic, not a mass-setting bound.",
+  "priority_rationale_full": "Longitudinal VBS constraints are fiducial or EFT/aQGC-style observables\nrather than direct RS mass exclusions. They test the strong electroweak\nsector only after a detailed resonance spectrum and interference model is\nsupplied. Current scan-level constraining power is therefore auxiliary."
 }

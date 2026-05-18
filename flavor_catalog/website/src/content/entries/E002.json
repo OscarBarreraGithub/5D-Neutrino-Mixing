@@ -484,5 +484,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Current muon EDM limit is far weaker than electron/LFV dipoles.",
+  "priority_rationale_full": "The muon EDM is the same broad operator class as the electron EDM, but\nthe current direct bound, 1.8e-19 e cm, is much weaker after mass scaling.\nIt is useful for muon-sector CP diagnostics and future PSI projections,\nbut it does not drive canonical anarchic-RS exclusions today."
 }

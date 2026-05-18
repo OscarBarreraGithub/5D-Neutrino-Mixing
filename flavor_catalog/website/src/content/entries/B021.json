@@ -442,5 +442,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Baryonic b->sll cross-check, form-factor limited",
+  "priority_rationale_full": "Lambda_b -> Lambda l+ l- probes the same semileptonic Wilson coefficients as mesonic b -> s l l modes with different spin and hadronic systematics. That makes it valuable as a chirality and form-factor cross-check. Its standalone constraining power is limited by baryonic form factors, q2 binning, and normalization uncertainties, so it is not a primary RS bound."
 }

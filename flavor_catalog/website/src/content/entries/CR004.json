@@ -309,5 +309,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Bottom-partner limits are useful but flavor-subleading.",
+  "priority_rationale_full": "B-partner pair limits around 1.54-1.57 TeV constrain light custodial\nbottom partners under standard prompt-decay assumptions. They are QCD\npair-production bounds but not universal M_KK cuts, and they sit far below\nthe anarchic flavor scale. This is a useful collider cross-check, not a\nleading anarchic-RS bound."
 }

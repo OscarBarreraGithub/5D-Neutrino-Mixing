@@ -791,5 +791,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Secondary b->d gamma check, CKM and form-factor limited",
+  "priority_rationale_full": "Exclusive b -> d gamma modes test dipole flavor structure in the b-d direction, which is relevant but not usually the leading RS pressure point. The bounds require CKM inputs, form factors, weak-annihilation treatment, and exclusive-amplitude assumptions. They are secondary diagnostics dominated by the cleaner mixing and inclusive radiative constraints."
 }

@@ -287,5 +287,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Tau-e dipole LFV is useful but behind muon LFV reach.",
+  "priority_rationale_full": "tau->e gamma is experimentally clean and constrains a tau-e dipole spurion in\nlepton-extended RS models. The 3.3e-8 bound is sub-leading compared with the\nmuon LFV frontier, but it tests flavor alignments that need not track the\ne-mu sector. That makes it a meaningful MEDIUM-priority complement."
 }

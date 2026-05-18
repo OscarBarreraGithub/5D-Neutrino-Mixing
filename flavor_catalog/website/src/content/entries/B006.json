@@ -468,5 +468,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Clean b-d dimuon limit, but subleading to Bs->mumu",
+  "priority_rationale_full": "B_d -> mu+ mu- tests the b-d version of the rare leptonic FCNC operators probed very cleanly by B_s -> mu+ mu-. The experimental result is still an upper limit near the SM scale rather than a precision measurement, so it is less constraining for generic anarchic RS scans. It is nevertheless a meaningful subleading check on b-d scalar, pseudoscalar, and axial-vector effects."
 }

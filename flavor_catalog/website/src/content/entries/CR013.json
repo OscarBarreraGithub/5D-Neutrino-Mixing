@@ -502,5 +502,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Diphoton graviton row is often suppressed in bulk RS.",
+  "priority_rationale_full": "Diphoton spin-2 limits can reach several TeV in RS1-style benchmarks, but\nbulk-RS photon and light-fermion couplings may be suppressed. The row\noverlaps with the broader graviton entry and is highly benchmark\ndependent. It is best treated as an auxiliary channel-specific check."
 }

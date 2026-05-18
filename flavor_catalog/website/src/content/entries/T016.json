@@ -444,5 +444,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Clean Z e tau LFV handle, but subleading",
+  "priority_rationale_full": "The Z -> e tau search is a clean forbidden-decay limit on an off-diagonal Z e tau coupling. It is meaningful for lepton-sector RS extensions, especially because tau-flavor direct Z searches probe a direction less crushed by muon-sector constraints. It remains model-dependent and correlated with tau LFV decays or dipoles, so it is sub-leading rather than dominant."
 }

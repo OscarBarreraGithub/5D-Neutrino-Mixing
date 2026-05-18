@@ -4,12 +4,13 @@
 // degrades to a neutral "Unknown" badge if we don't recognize the value.
 
 interface Props {
-  kind: 'verdict' | 'difficulty' | 'tier' | 'coverage' | 'opus';
+  kind: 'verdict' | 'difficulty' | 'tier' | 'coverage' | 'opus' | 'priority';
   value?: string | null;
   label?: string;
+  tooltip?: string | null;
 }
 
-const { kind, value, label } = Astro.props as Props;
+const { kind, value, label, tooltip } = Astro.props as Props;
 const v = (value ?? '').toString().toUpperCase();
 
 let cls = 'badge-unknown';
@@ -55,10 +56,20 @@ switch (kind) {
   }
   case 'opus':
     cls = 'badge-opus';
-    text = label ?? 'OPUS-APPROVED';
+    text = label ?? 'REVIEWED';
     break;
+  case 'priority': {
+    const map: Record<string, string> = {
+      HIGH: 'badge-priority-high',
+      MEDIUM: 'badge-priority-medium',
+      LOW: 'badge-priority-low',
+    };
+    cls = map[v] ?? 'badge-priority-unranked';
+    text = label ?? (v ? `${v.charAt(0) + v.slice(1).toLowerCase()}` : 'Unranked');
+    break;
+  }
   default:
     text = label ?? (v || 'Unknown');
 }
 ---
-<span class={`badge ${cls}`}>{text}</span>
+<span class={`badge ${cls}`} title={tooltip ?? undefined}>{text}</span>

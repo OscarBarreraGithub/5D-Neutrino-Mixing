@@ -189,5 +189,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Exclusive B->Kll rates are dominated by broader b->sll fits",
+  "priority_rationale_full": "B -> K l+ l- branching fractions probe semileptonic b-s FCNC operators, but the standalone rates carry form-factor, q2-bin, and nonlocal-charm dependence. They are best interpreted inside a global b -> s l l fit or alongside LFU ratios. As a separate catalog entry they are a useful seed and cross-check, not an independent leading RS constraint."
 }

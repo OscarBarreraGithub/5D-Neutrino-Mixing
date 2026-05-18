@@ -292,5 +292,8 @@
         ]
       }
     ]
-  }
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Tau-mu dipole LFV is clean but sub-leading to muon LFV.",
+  "priority_rationale_full": "tau->mu gamma constrains tau-mu dipole spurions and is a clean charged-LFV\nnull test. Its 4.2e-8 limit is many orders weaker than mu->e gamma in\nbranching-fraction reach and is model-dependent in the same RS lepton-sector\nway. It remains MEDIUM because tau alignment can differ from e-mu alignment."
 }
