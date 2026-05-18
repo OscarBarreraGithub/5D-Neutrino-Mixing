@@ -1,0 +1,12 @@
+process_id: K017
+constraint_priority: LOW
+priority_rationale_short: "Precise LFU ratio, but outside minimal quark FCNC scan"
+priority_rationale_full: |
+  R_K = Gamma(K -> e nu)/Gamma(K -> mu nu) is experimentally clean and sharply
+  tests charged-current lepton universality. In RS language it constrains
+  lepton-sector extensions, charged scalars, heavy neutral leptons, or
+  nonuniversal W couplings rather than the quark Delta F=2 flavor lane. It is
+  therefore a useful diagnostic but is not expected to set the leading KK scale
+  in the canonical anarchic quark scan.
+ranked_by: codex-gpt-5.5-xhigh-batch-P1
+ranked_at: 2026-05-18T01:35:41-04:00

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badges from '../../components/Badges.astro';
 import CitationModal from '../../components/CitationModal.astro';
 import { notationToMath } from '../../lib/notation';
+import { texProseToHtml } from '../../lib/prose';
 import { getCollection } from 'astro:content';
 
 // Static-routing: generate one page per ingested entry JSON.  We key on the
@@ -224,21 +225,21 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
   {sections.relevance && (
     <section class="entry-section">
       <h2>Relevance to the RS / anarchic-flavor pipeline</h2>
-      <div class="latex-prose" set:html={sections.relevance}></div>
+      <div class="latex-prose" set:html={texProseToHtml(sections.relevance)}></div>
     </section>
   )}
 
   {sections.post_2008 && (
     <section class="entry-section">
       <h2>Post-2008 / post-2010 developments</h2>
-      <div class="latex-prose" set:html={sections.post_2008}></div>
+      <div class="latex-prose" set:html={texProseToHtml(sections.post_2008)}></div>
     </section>
   )}
 
   {sections.validity && (
     <section class="entry-section">
       <h2>Constraint validity / model dependence</h2>
-      <div class="latex-prose" set:html={sections.validity}></div>
+      <div class="latex-prose" set:html={texProseToHtml(sections.validity)}></div>
     </section>
   )}
 
@@ -247,7 +248,7 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
     <section class="entry-section">
       <h2>Code coverage in this repo</h2>
       {sections.code_coverage_prose && (
-        <div class="latex-prose" set:html={sections.code_coverage_prose}></div>
+        <div class="latex-prose" set:html={texProseToHtml(sections.code_coverage_prose)}></div>
       )}
       {evidence.length > 0 && (
         <>
@@ -269,7 +270,7 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
   {sections.implementation_difficulty_prose && (
     <section class="entry-section">
       <h2>Implementation difficulty</h2>
-      <div class="latex-prose" set:html={sections.implementation_difficulty_prose}></div>
+      <div class="latex-prose" set:html={texProseToHtml(sections.implementation_difficulty_prose)}></div>
       {d.implementation_difficulty_reason && (
         <p class="impl-reason">
           <strong>Reason:</strong> {d.implementation_difficulty_reason}
@@ -281,7 +282,7 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
   {sections.key_references && (
     <section class="entry-section">
       <h2>Key references</h2>
-      <div class="latex-prose" set:html={sections.key_references}></div>
+      <div class="latex-prose" set:html={texProseToHtml(sections.key_references)}></div>
     </section>
   )}
 

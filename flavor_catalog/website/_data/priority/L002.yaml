@@ -1,0 +1,12 @@
+---
+process_id: L002
+constraint_priority: MEDIUM
+priority_rationale_short: "Clean muon LFV, but current bound is behind mu->e gamma."
+priority_rationale_full: |
+  mu->3e has negligible Standard Model background and probes contact
+  four-lepton operators that mu->e gamma may miss. The present 1.0e-12 limit is
+  strong but not the leading anarchic RS LFV constraint; Mu3e prospects make it
+  important. Treat it as meaningful sub-leading lepton-sector pressure rather
+  than a dominant veto.
+ranked_by: codex-gpt-5.5-xhigh-batch-P4
+ranked_at: 2026-05-18T01:37:16-04:00

@@ -33,6 +33,7 @@ allRows.sort((a, b) => {
 
 const primaryCount = allRows.filter((r) => r.tier !== 'SECONDARY').length;
 const secondaryCount = allRows.filter((r) => r.tier === 'SECONDARY').length;
+const isColliderRs = family === 'collider_rs';
 ---
 <BaseLayout title={`${meta?.label ?? family} -- Flavor Catalog`}>
   <header class="entry-header">
@@ -47,6 +48,21 @@ const secondaryCount = allRows.filter((r) => r.tier === 'SECONDARY').length;
       {secondaryCount > 0 && <span class="family-meta-chip family-meta-chip-secondary">{secondaryCount} SECONDARY</span>}
     </div>
   </header>
+
+  {isColliderRs && (
+    <aside class="honesty-note" set:html={`
+      <strong>Scope note.</strong> Low-energy flavor families (kaon, beauty,
+      charm, EDM/neutrino) imply
+      $M_{KK}^{\\min,\\,p_{50}}(g_\\ast = 3) \\approx 47.26~\\text{TeV}$
+      in the repo-local rc1.1 quark scan, while the direct-search reach for
+      custodial top-partners and KK gauge resonances catalogued here sits near
+      the few-TeV scale.
+      Direct LHC limits and indirect flavor bounds therefore probe qualitatively
+      different mass scales and should not be mapped onto a single
+      $M_{KK}$ axis without explicit model assumptions.
+      See the <a href="/methodology/">methodology page</a> for details.
+    `}></aside>
+  )}
 
   {allRows.length === 0 ? (
     <p class="empty-family">No entries in this family.</p>

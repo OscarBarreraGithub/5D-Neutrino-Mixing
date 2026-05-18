@@ -1,0 +1,12 @@
+process_id: K005
+constraint_priority: LOW
+priority_rationale_short: "Clean CP rare mode, but current direct limit is still loose"
+priority_rationale_full: |
+  K_L -> pi0 nu nubar is theoretically very clean and directly probes
+  CP-violating s -> d nu nubar neutral currents from shifted Z or heavy gauge
+  couplings. Its current catalog value is still an upper limit far above the
+  Standard Model branching fraction, so it mainly excludes very large rare-kaon
+  effects. For the present anarchic RS scan it is complementary and dominated by
+  K001 and the charged K -> pi nu nubar channel.
+ranked_by: codex-gpt-5.5-xhigh-batch-P1
+ranked_at: 2026-05-18T01:35:41-04:00

@@ -1,0 +1,11 @@
+---
+process_id: L007
+constraint_priority: MEDIUM
+priority_rationale_short: "Tau-mu dipole LFV is clean but sub-leading to muon LFV."
+priority_rationale_full: |
+  tau->mu gamma constrains tau-mu dipole spurions and is a clean charged-LFV
+  null test. Its 4.2e-8 limit is many orders weaker than mu->e gamma in
+  branching-fraction reach and is model-dependent in the same RS lepton-sector
+  way. It remains MEDIUM because tau alignment can differ from e-mu alignment.
+ranked_by: codex-gpt-5.5-xhigh-batch-P4
+ranked_at: 2026-05-18T01:37:16-04:00

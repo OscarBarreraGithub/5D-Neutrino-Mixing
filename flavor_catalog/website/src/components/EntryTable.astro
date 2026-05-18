@@ -42,7 +42,6 @@ const FAMILY_LABELS: Record<string, string> = {
       {showFamily && <th data-sort="family">Family</th>}
       {showOriginalFamily && <th data-sort="family_original">Origin family</th>}
       <th data-sort="tier">Tier</th>
-      <th data-sort="fact_check_verdict">Verdict</th>
       <th data-sort="implementation_difficulty">Difficulty</th>
       <th data-sort="code_coverage_status">Code</th>
     </tr>
@@ -81,7 +80,6 @@ const FAMILY_LABELS: Record<string, string> = {
           </td>
         )}
         <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="tier" value={r.tier} /></a></td>
-        <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="verdict" value={r.fact_check_verdict} /></a></td>
         <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="difficulty" value={r.implementation_difficulty} /></a></td>
         <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="coverage" value={r.code_coverage_status} /></a></td>
       </tr>

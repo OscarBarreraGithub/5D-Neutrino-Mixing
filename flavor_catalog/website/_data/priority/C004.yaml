@@ -1,0 +1,12 @@
+---
+process_id: C004
+constraint_priority: LOW
+priority_rationale_short: "D0->mumu is tight experimentally but not a dominant RS bound."
+priority_rationale_full: |
+  The D0->mu+mu- limit is robust and numerically small, but rare-charm
+  leptonic rates are helicity and long-distance sensitive. A scan recast would
+  require a specified c->u ll operator basis and lepton-current normalization.
+  It is dominated by D mixing and lepton-flavor observables for generic
+  anarchic RS constraints.
+ranked_by: codex-gpt-5.5-xhigh-batch-P4
+ranked_at: 2026-05-18T01:37:16-04:00

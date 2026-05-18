@@ -1,0 +1,12 @@
+process_id: K013
+constraint_priority: LOW
+priority_rationale_short: "Radiative two-photon control mode, not a hard RS exclusion"
+priority_rationale_full: |
+  K_L -> pi0 gamma gamma is dominated by long-distance chiral and
+  vector-meson-exchange physics. Its main RS-catalog value is controlling the
+  two-photon contribution that feeds K_L -> pi0 l+ l- estimates and checking for
+  exotic radiative Delta S=1 enhancements. Without a dedicated radiative
+  calculation it should be used as an auxiliary consistency target, not as a
+  hard scan driver.
+ranked_by: codex-gpt-5.5-xhigh-batch-P1
+ranked_at: 2026-05-18T01:35:41-04:00
