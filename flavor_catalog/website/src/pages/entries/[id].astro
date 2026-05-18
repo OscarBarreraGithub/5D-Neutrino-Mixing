@@ -126,27 +126,11 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
     <h1>
       <span class="process-id">{d.process_id}</span>
       <span class="entry-h1-notation" set:html={d.standard_notation ? notationToMath(d.standard_notation) : ''}></span>
-      <Badges kind="tier" value={d.tier} />
     </h1>
     {d.process_name && (
       <span class="process-name" set:html={processNameToHtml(d.process_name)}></span>
     )}
   </header>
-
-  {isSecondary && (
-    <aside class="secondary-banner" role="note">
-      <strong>SECONDARY scope.</strong>
-      This entry sits outside the current PRIMARY focus of the model parameter
-      scan but is included for completeness and as a hook for downstream
-      lepton-bulk and lepton-flavor-violating extensions.
-      {d.family_original && (
-        <p class="secondary-origin">
-          Origin family: <a href={`/families/${d.family_original}/`}>{originalFamilyLabel}</a>.
-          Listed on the <a href="/families/secondary/">Secondary index</a>.
-        </p>
-      )}
-    </aside>
-  )}
 
   <div class="status-row">
     <span class="status-label">Status</span>
@@ -160,14 +144,6 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
       <span class="status-group">
         <span class="status-label">Priority</span>
         <Badges kind="priority" value={d.constraint_priority} tooltip={d.priority_rationale_short} />
-      </span>
-    )}
-    {aTotalSum > 0 && (
-      <span class="status-group anchor-summary" title="Citation-anchor resolution counts">
-        <span class="status-label">Anchors</span>
-        <span class="cite-status cite-status-resolved">{aTotals.RESOLVED || 0} R</span>
-        {(aTotals.AMBIGUOUS || 0) > 0 && <span class="cite-status cite-status-ambiguous">{aTotals.AMBIGUOUS} A</span>}
-        {(aTotals.UNRESOLVED || 0) > 0 && <span class="cite-status cite-status-unresolved">{aTotals.UNRESOLVED} U</span>}
       </span>
     )}
   </div>
@@ -204,10 +180,10 @@ const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
             const valueText = v.display ?? (v.value !== undefined && v.value !== null ? String(v.value) : '?');
             return (
               <tr>
-                <td><span set:html={inlineMath(v.observable ?? v.label ?? '')}></span></td>
+                <td><span set:html={processNameToHtml(v.observable ?? v.label ?? '')}></span></td>
                 <td>
                   <span class="value-display" set:html={inlineMath(valueText)}></span>
-                  {v.units && <span class="value-units" set:html={` ${inlineMath(v.units)}`}></span>}
+                  {v.units && !v.display && <span class="value-units" set:html={` ${inlineMath(v.units)}`}></span>}
                   {v.cl && <div class="value-cl">{v.cl}{v.limit_type ? ` (${v.limit_type})` : ''}</div>}
                 </td>
                 <td>{v.year ?? '-'}</td>

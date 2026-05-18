@@ -1056,8 +1056,6 @@ dialog.cite-modal::backdrop {
   border: 1px solid var(--color-border);
   white-space: nowrap;
 }
-.row-secondary { background: var(--color-surface-2); }
-.row-secondary td:first-child { border-left: 3px solid var(--badge-tier-secondary-fg); }
 .row-muted { color: var(--color-text-muted); }
 .entry-count-pill { font-weight: 500; }
 

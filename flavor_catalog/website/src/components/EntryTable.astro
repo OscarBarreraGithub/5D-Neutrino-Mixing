@@ -58,14 +58,13 @@ const FAMILY_LABELS: Record<string, string> = {
       <th data-sort="standard_notation">Observable</th>
       {showFamily && <th data-sort="family">Family</th>}
       {showOriginalFamily && <th data-sort="family_original">Origin family</th>}
-      <th data-sort="tier">Tier</th>
       <th data-sort="implementation_difficulty">Difficulty</th>
       <th data-sort="code_coverage_status">Code</th>
     </tr>
   </thead>
   <tbody>
     {sortedRows.map((r) => (
-      <tr class={r.tier === 'SECONDARY' ? 'row-secondary row-link' : 'row-link'}
+      <tr class="row-link"
           data-process-id={r.process_id}
           data-family={r.family}
           data-tier={r.tier}
@@ -103,7 +102,6 @@ const FAMILY_LABELS: Record<string, string> = {
             </a>
           </td>
         )}
-        <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="tier" value={r.tier} /></a></td>
         <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="difficulty" value={r.implementation_difficulty} /></a></td>
         <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="coverage" value={r.code_coverage_status} /></a></td>
       </tr>

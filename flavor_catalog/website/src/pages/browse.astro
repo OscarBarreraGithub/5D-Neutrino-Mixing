@@ -15,7 +15,7 @@ const rows = (index.entries as any[]).slice().sort((a, b) =>
 const families_list = families.filter((f: any) => f.count > 0);
 ---
 <BaseLayout title="Browse / filter -- Flavor Catalog"
-            description="Filter and search the 102-entry catalog by family, tier, implementation difficulty, and code coverage.">
+            description="Filter and search the 102-entry catalog by family, priority, implementation difficulty, and code coverage.">
   <header class="entry-header">
     <div class="breadcrumbs"><a href="/">Catalog</a> &middot; Browse / filter</div>
     <h1>Browse / filter</h1>
@@ -54,13 +54,6 @@ const families_list = families.filter((f: any) => f.count > 0);
         </div>
       </div>
 
-      <div class="filter-block">
-        <div class="filter-label">Tier</div>
-        <div class="filter-chips" data-filter-group="tier">
-          <label class="filter-chip"><input type="checkbox" value="PRIMARY" /><span class="filter-chip-label">PRIMARY</span></label>
-          <label class="filter-chip"><input type="checkbox" value="SECONDARY" /><span class="filter-chip-label">SECONDARY</span></label>
-        </div>
-      </div>
 
       <div class="filter-block">
         <div class="filter-label">Implementation difficulty</div>
@@ -100,7 +93,7 @@ const families_list = families.filter((f: any) => f.count > 0);
         var totalRows = tableRows.length;
 
         // Build a list of grouped checkbox queries.
-        var GROUPS = ['priority', 'family', 'tier', 'difficulty', 'coverage'];
+        var GROUPS = ['priority', 'family', 'difficulty', 'coverage'];
         function selectedFor(group) {
           var boxes = document.querySelectorAll('[data-filter-group="' + group + '"] input[type="checkbox"]:checked');
           var out = [];
@@ -179,7 +172,6 @@ const families_list = families.filter((f: any) => f.count > 0);
           var shown = 0;
           tableRows.forEach(function (tr) {
             var fam  = (tr.getAttribute('data-family') || '').toUpperCase();
-            var tier = (tr.getAttribute('data-tier') || '').toUpperCase();
             var dif  = (tr.getAttribute('data-difficulty') || '').toUpperCase();
             var cov  = (tr.getAttribute('data-coverage') || '').toUpperCase();
             var pri  = (tr.getAttribute('data-priority') || '').toUpperCase();
@@ -187,7 +179,7 @@ const families_list = families.filter((f: any) => f.count > 0);
             function pass(group, val) {
               return sel[group].length === 0 || sel[group].indexOf(val) !== -1;
             }
-            var ok = pass('priority', pri) && pass('family', fam) && pass('tier', tier)
+            var ok = pass('priority', pri) && pass('family', fam)
                   && pass('difficulty', dif) && pass('coverage', cov);
             if (ok && searchMatchIds) ok = searchMatchIds.has(pid);
             tr.style.display = ok ? '' : 'none';
