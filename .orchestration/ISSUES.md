@@ -481,4 +481,4 @@ Format per issue:
 (none yet)
 
 ## Infra follow-ups
-- INFRA-1 severity:LOW tag:infra — Reconfigure Cloudflare to deploy from `main/flavor_catalog/website/` so the second branch can eventually be retired. (Deferred: out of scope for 2026q2 consolidation.)
+- INFRA-1 severity:LOW tag:infra — Reconfigure Cloudflare to deploy from `main/flavor_catalog/website/` so the second branch can eventually be retired. **CLOSED 2026-05-25**: website branch merged into main (commit `cb58a36`); Cloudflare Pages production branch set to `main` with root `flavor_catalog/website/`; verified green deploy on commit `a809cc3`; `flavor-catalog-website/2026q2` deleted local + origin.

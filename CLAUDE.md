@@ -9,12 +9,11 @@ Randall-Sundrum warped extra dimension. The goal is to find regions of parameter
 space that reproduce observed charged lepton masses and viable light neutrino
 masses using geometric localization rather than hierarchical Yukawa couplings.
 
-Active paper work lives on `main` (post-2026-05-25 consolidation; tagged
+All work lives on `main` (post-2026-05-25 consolidation; tagged
 `v2026q2-catalog-complete`). The canonical quark-sector methodology note is
 `docs/quark_scan_methodology_note.tex`/`.pdf`. This paper is quark-sector only;
 lepton-sector directories are follow-up scope. The Cloudflare-deployed catalog
-website lives on `flavor-catalog-website/2026q2`; merge `main` into it after
-trunk changes.
+website builds from `main` with root `flavor_catalog/website/`.
 
 ---
 
