@@ -1,0 +1,149 @@
+{
+  "all_candidate_count": 36,
+  "all_viable_count": 32,
+  "construction": {
+    "C_Q_formula": "alpha_Q I + beta_Q Y_d Y_d^dagger + gamma_Q Y_u Y_u^dagger",
+    "C_d_formula": "alpha_d I + beta_d Y_d^dagger Y_d",
+    "C_u_formula": "alpha_u I + beta_u Y_u^dagger Y_u",
+    "bulk_mass_derivation": "explicit_direct_affine_yukawa_spurion",
+    "constraint_propagator_mass": "physical m_gkk for each row",
+    "mass_target_scale_GeV": 163.5,
+    "uses_hidden_BulkMassMap": false,
+    "uses_nonlinear_eigenvalue_map": false,
+    "wilson_reference_scale_GeV": 3000.0,
+    "xi_kk": 2.448687135269161
+  },
+  "generated_at_utc": "2026-05-19T01:54:38.171298+00:00",
+  "git_commit": "6d99b17b8cac73f441559a9dac014e413e18c609",
+  "git_dirty_status": "?? artifacts/collaborator_5tev_points.csv\n?? artifacts/collaborator_5tev_points.provenance.json\n?? artifacts/collaborator_direct_affine_5_10tev_points.csv\n?? scripts/export_collaborator_5tev_points.py\n?? scripts/export_collaborator_direct_affine_points.py",
+  "output_csv": "artifacts/collaborator_direct_affine_5_10tev_points.csv",
+  "policies": [
+    {
+      "alpha_Q": 0.64,
+      "alpha_d": 0.64,
+      "alpha_u": 0.68,
+      "beta_Q": -0.1,
+      "beta_d": -0.04,
+      "beta_u": -0.12,
+      "gamma_Q": -0.003,
+      "name": "down_aligned_flat_d",
+      "note": "Small up-spurion admixture in C_Q; flatter down singlet sector.",
+      "r_gamma_over_beta": 0.03
+    },
+    {
+      "alpha_Q": 0.64,
+      "alpha_d": 0.64,
+      "alpha_u": 0.7,
+      "beta_Q": -0.1,
+      "beta_d": -0.04,
+      "beta_u": -0.09,
+      "gamma_Q": -0.003,
+      "name": "down_aligned_flatter_u",
+      "note": "Same C_Q policy with a milder direct up-singlet slope.",
+      "r_gamma_over_beta": 0.03
+    },
+    {
+      "alpha_Q": 0.66,
+      "alpha_d": 0.64,
+      "alpha_u": 0.7,
+      "beta_Q": -0.08,
+      "beta_d": -0.04,
+      "beta_u": -0.08,
+      "gamma_Q": -0.004,
+      "name": "balanced_flat",
+      "note": "Balanced direct-affine slopes with max |Y_bulk| close to 3.",
+      "r_gamma_over_beta": 0.05
+    },
+    {
+      "alpha_Q": 0.64,
+      "alpha_d": 0.65,
+      "alpha_u": 0.68,
+      "beta_Q": -0.2,
+      "beta_d": -0.1,
+      "beta_u": -0.12,
+      "gamma_Q": -0.006,
+      "name": "stronger_down_alignment",
+      "note": "Larger direct down-spurion coefficient with the same gamma/beta ratio.",
+      "r_gamma_over_beta": 0.03
+    },
+    {
+      "alpha_Q": 0.64,
+      "alpha_d": 0.65,
+      "alpha_u": 0.68,
+      "beta_Q": -0.1,
+      "beta_d": -0.1,
+      "beta_u": -0.12,
+      "gamma_Q": -0.01,
+      "name": "moderate_up_admixture",
+      "note": "Moderate C_Q up-spurion admixture; included only if flavor-safe.",
+      "r_gamma_over_beta": 0.09999999999999999
+    },
+    {
+      "alpha_Q": 0.66,
+      "alpha_d": 0.64,
+      "alpha_u": 0.7,
+      "beta_Q": -0.5,
+      "beta_d": -0.04,
+      "beta_u": -0.08,
+      "gamma_Q": -0.015,
+      "name": "larger_Q_slope_high_scale",
+      "note": "Larger Q-sector down slope; usually viable only at the high end of M_gkk.",
+      "r_gamma_over_beta": 0.03
+    }
+  ],
+  "selected": [
+    {
+      "coefficient_policy": "down_aligned_flat_d",
+      "dominant_constraint": "D0",
+      "fit_residual_norm": 1.2727116857177197e-10,
+      "m_gkk_GeV": 5000.0,
+      "max_abs_Y_bulk": 2.3456612598881614,
+      "max_ratio_to_bound": 0.08642324373495257
+    },
+    {
+      "coefficient_policy": "down_aligned_flatter_u",
+      "dominant_constraint": "epsilon_K",
+      "fit_residual_norm": 3.5233090135740524e-10,
+      "m_gkk_GeV": 6000.0,
+      "max_abs_Y_bulk": 2.5574255777974,
+      "max_ratio_to_bound": 0.06153130437327747
+    },
+    {
+      "coefficient_policy": "stronger_down_alignment",
+      "dominant_constraint": "epsilon_K",
+      "fit_residual_norm": 4.546353122522467e-11,
+      "m_gkk_GeV": 7000.0,
+      "max_abs_Y_bulk": 2.302375892013477,
+      "max_ratio_to_bound": 0.16374547200828707
+    },
+    {
+      "coefficient_policy": "balanced_flat",
+      "dominant_constraint": "epsilon_K",
+      "fit_residual_norm": 1.1739196082694873e-10,
+      "m_gkk_GeV": 8000.0,
+      "max_abs_Y_bulk": 2.9576306273983506,
+      "max_ratio_to_bound": 0.0933182231163338
+    },
+    {
+      "coefficient_policy": "larger_Q_slope_high_scale",
+      "dominant_constraint": "epsilon_K",
+      "fit_residual_norm": 8.459114043440827e-11,
+      "m_gkk_GeV": 10000.0,
+      "max_abs_Y_bulk": 1.7788061268003421,
+      "max_ratio_to_bound": 0.4985834302489717
+    }
+  ],
+  "selection": {
+    "mass_grid_GeV": [
+      5000.0,
+      6000.0,
+      7000.0,
+      8000.0,
+      9000.0,
+      10000.0
+    ],
+    "max_abs_Y_bulk": 3.0,
+    "max_fit_residual_norm": 1e-06,
+    "requested_count": 5
+  }
+}
