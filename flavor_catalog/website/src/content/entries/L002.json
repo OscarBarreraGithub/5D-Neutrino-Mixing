@@ -1,0 +1,240 @@
+{
+  "process_id": "L002",
+  "family": "charged_lepton",
+  "family_original": "charged_lepton",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(\\mu^+\\to e^+e^-e^+)",
+  "process_name": "Muon to three electrons charged-lepton-flavor-violating four-lepton decay",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": "Missing implementation needs a new four-lepton/contact LFV operator convention, branching-ratio formula, and RS lepton-sector matching hook. It does not require lattice inputs or hadronic long-distance calculations for a first implementation.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "required_grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    ],
+    "targeted_grep_commands": [
+      "rg -n \"mu.?->.?3e|mu.?to.?3e|mu3e|eee|three.?electron|four.?lepton|contact\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Targeted mu->3e/Mu3e/contact grep returned no hits in the required code directories.",
+      "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an adjacent dipole-only LFV checker.",
+      "scanParams/scan.py:524 calls check_mu_to_e_gamma in the scan; no mu->3e observable is evaluated."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Particle Data Group 2026 pdgLive muon listing, datablock S004R4",
+      "observable": "Branching fraction upper limit for mu+ -> e+ e- e+",
+      "value": 1e-12,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2026,
+      "experiment": "Particle Data Group 2026 pdgLive muon listing, datablock S004R4",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004R4",
+      "snapshot_path": "flavor_catalog/references/L002/pdg2026_muon_listing_s004r4.txt",
+      "sha256": "72b7c9181196e76762dccaa10eaf850e48af827fff86c77c1bc53bd6aa459b1b",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "SINDRUM Collaboration, U. Bellgardt et al.",
+      "observable": "Gamma(mu -> 3e) / Gamma(mu -> e 2nu)",
+      "value": 1e-12,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 1988,
+      "experiment": "SINDRUM Collaboration, U. Bellgardt et al.",
+      "source_url": "https://inspirehep.net/api/literature/251865",
+      "snapshot_path": "flavor_catalog/references/L002/sindrum1988_inspire_abstract.txt",
+      "sha256": "87086d504690190dce79af233ebe80a2087a08ec55a68f699d48520ccb0645dc",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "agashe2006_rs_lfv_arxiv_hepph_0606021.txt": "sha256:51a5f86a338eb56993ea4dd8112ee25b294ec4b9b31087e3d024261cb66e2f0c",
+    "cfw2008_arxiv0804_1954.txt": "sha256:f9f12e5b1a406cb547c991af56870464723da031d223212a223dde87e6a0234e",
+    "crivellin2017_mu_e_eft_arxiv1702_03020.txt": "sha256:9fb2b5c1a49cd3ad22e90bc461ed159fd45531c672c8e1785e0ef8761a06867b",
+    "mu3e_status_2025_arxiv2501_14667.txt": "sha256:7d4cc8303d28da15c89bd6ba70fb92643f5b88548b993d6cf70fdda28a6c0129",
+    "mu3e_tdr_arxiv2009_11690.txt": "sha256:4123a6876f35c6f320b58f807cdad932b2b5bc68e07826114745b512ebbf2c83",
+    "pdg2026_muon_listing_s004r4.txt": "sha256:72b7c9181196e76762dccaa10eaf850e48af827fff86c77c1bc53bd6aa459b1b",
+    "sindrum1988_inspire_abstract.txt": "sha256:87086d504690190dce79af233ebe80a2087a08ec55a68f699d48520ccb0645dc"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:59:12-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:59:12-04:00",
+      "agent_id": "PKA-L002",
+      "reason": "Initial L002 PKA source extraction and draft sidecar."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:15:26-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:15:26-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for wa_w23_charged_lepton; numerical claims checked against sidecar sources."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T12:32:07-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T12:32:07-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w23_charged_lepton",
+      "issues": [
+        "CHK-1: TeX cites Mu3e phase-I and upgrade sensitivity numbers whose pdg_or_equivalent.prospects entries lack per-entry source_url/access_date metadata.",
+        "CHK-1: TeX cites the SM-with-neutrino-masses O(10^-54) rate and 10^8 muon-decay-rate context from the prospects sources, but the corresponding prospects entries do not carry complete strict metadata fields."
+      ],
+      "reason": "Checker ca_w23_charged_lepton found CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w23_charged_lepton.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:44:38-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:44:38-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w23_charged_lepton_v2",
+      "reason": "Cycle-2 writer rework addressed CA CHK-1 metadata completeness findings only."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:56:00-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:56:00-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w23_charged_lepton_v2",
+      "reason": "Checker re-check passed CHK-1 through CHK-8 after WA-v2 metadata rework."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charged_lepton",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Measured limits and prospect values matched fetched sources or local snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(\\mu^+\\to e^+e^-e^+)\\).\nThis entry covers the neutrinoless charged-lepton-flavor-violating\nthree-electron muon decay, with emphasis on four-lepton/contact operators and\nthe off-shell dipole contribution.  It is a charged-lepton process and is\nseparate from the quark \\(\\Delta F=2\\) scan lane.",
+    "pdg_prose": "The current PDG 2026 muon listing, datablock S004R4, gives the sidecar\n\\texttt{L002.yaml:primary\\_current\\_limit} value\n\\[\n  \\mathcal{B}(\\mu^+\\to e^+e^-e^+) < 1.0\\times 10^{-12}\\quad (90\\%\\ {\\rm C.L.}).\n\\]\nPDG attributes the limit to the 1988 SINDRUM spectrometer result of Bellgardt\net al.; the same value is recorded in \\texttt{L002.yaml:original\\_experiment}.\nThe local PDG snapshot is\n\\texttt{flavor\\_catalog/references/L002/pdg2026\\_muon\\_listing\\_s004r4.txt};\nthe SINDRUM metadata snapshot is\n\\texttt{flavor\\_catalog/references/L002/sindrum1988\\_inspire\\_abstract.txt}.\nThis remains an upper limit, not a measurement.  The sidecar \\texttt{prospects}\nentries keep Mu3e separate from the present bound: the phase-I technical design\ntargets a single-event sensitivity of \\(2\\times10^{-15}\\), while the broader\nprogram aims at \\(\\mathcal{O}(10^{-16})\\) after future upgrades.",
+    "relevance": "In a warped lepton extension, \\(\\mu\\to 3e\\) probes flavor-violating neutral\ncurrents and four-lepton operators generated by KK gauge exchange, \\(Z\\)-like\nmixing, or other lepton-current misalignment.  It is complementary to L001:\n\\(\\mu\\to e\\gamma\\) is dominantly dipole-like in the current repo, while\n\\(\\mu\\to 3e\\) can be tree-level/contact dominated and therefore has different\ndependence on lepton localization and five-dimensional Yukawa assumptions.\nThe Agashe--Blechman--Petriello RS LFV analysis already treated rare muon decays\nas part of the lepton-sector flavor test set.",
+    "post_2008": "Relative to the arXiv:0804.1954 RS-flavor baseline, the experimental limit has\nnot yet been superseded in PDG; SINDRUM still sets the catalog value.  The main\npost-2008 change is the Mu3e program at PSI: the phase-I detector design,\npublished in 2021, is built for \\(10^8\\) muon decays per second and a\n\\(2\\times10^{-15}\\) single-event sensitivity\n(\\texttt{L002.yaml:prospects}).  The 2025 status note records a phase-I\nsensitivity scale of \\(\\mathcal{O}(10^{-15})\\) and an upgraded scale of\n\\(\\mathcal{O}(10^{-16})\\).  On the theory side, the sidecar source\n\\texttt{crivellin2017\\_mu\\_e\\_eft\\_arxiv1702\\_03020.txt} covers systematic\nEFT/RG analyses of \\(\\mu\\to e\\gamma\\), \\(\\mu\\to 3e\\), and coherent conversion\nbelow \\(m_W\\), including QED/QCD operator mixing.",
+    "validity": "The experimental interpretation is robust: the Standard-Model rate with massive\nneutrinos is negligible, quoted by Mu3e status material as\n\\(\\mathcal{O}(10^{-54})\\), so an observation would be new physics.  The mapping\nto this repo is model-dependent because a four-lepton Wilson basis, dipole\ninterference convention, and possible RG evolution must be chosen.  This entry\nshould be classified as lepton-extension-only and contact-operator sensitive,\nnot as a quark-scan constraint.",
+    "code_coverage_prose": "\\textbf{NO.}  The required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(\\mu\\to 3e\\), Mu3e, or four-lepton-contact\nimplementation.  The only adjacent charged-lepton LFV path is the dipole\n\\(\\mu\\to e\\gamma\\) checker at \\texttt{flavorConstraints/muToEGamma.py}:75 and\nits scan call at \\texttt{scanParams/scan.py}:524, which do not evaluate\n\\(\\mu\\to 3e\\).",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  A minimal implementation needs a new low-energy\n\\(\\mu\\to 3e\\) observable formula, a four-lepton Wilson/operator convention, and\na matching hook from the RS lepton-sector parameters.  It should not require\nlattice matrix elements or hadronic long-distance inputs.  A production EFT\ntreatment with QED/QCD RG mixing and correlated \\(\\mu\\to e\\gamma\\),\n\\(\\mu\\to 3e\\), and \\(\\mu\\)-to-\\(e\\) conversion fits would raise the integration\ndifficulty.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026\\_MuonS004R4}, \\texttt{SINDRUM1988\\_Mu3e},\n\\texttt{Mu3eTDR2021}, \\texttt{Mu3eStatus2025},\n\\texttt{CrivellinDavidsonPrunaSigner2017\\_MuEFT},\n\\texttt{AgasheBlechmanPetriello2006\\_RSLFV}, and \\texttt{CFW2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/charged_lepton/L002.yaml",
+  "source_tex": "flavor_catalog/processes/charged_lepton/L002.tex",
+  "worklog_path": "flavor_catalog/worklogs/L002/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "Branching fraction upper limit for mu+ -> e+ e- e+",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S004R4",
+        "snapshot_path": "flavor_catalog/references/L002/pdg2026_muon_listing_s004r4.txt",
+        "sha256": "72b7c9181196e76762dccaa10eaf850e48af827fff86c77c1bc53bd6aa459b1b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1e-12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: Node: S004R4.\nL14: Mode in PDF text extraction: Gamma(e- e+ e-) / Gamma_total, Gamma6 / Gamma.\nL15: PDG note: forbidden by lepton family number conservation.\nL16: Value units in the datablock: 10^-12.\nL17: \nL18: Current PDG limit row from pdgLive S004R4:\nL19: VALUE: <1.0\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Gamma(mu -> 3e) / Gamma(mu -> e 2nu)",
+        "source_url": "https://inspirehep.net/api/literature/251865",
+        "snapshot_path": "flavor_catalog/references/L002/sindrum1988_inspire_abstract.txt",
+        "sha256": "87086d504690190dce79af233ebe80a2087a08ec55a68f699d48520ccb0645dc",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1e-12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20: Minimal abstract/value excerpt from INSPIRE metadata:\nL21: The search for the decay mu+ -> e+ e+ e- with the SINDRUM spectrometer was continued.\nL22: The result is an upper limit on the normalized branching ratio\nL23: Gamma(mu -> 3e) / Gamma(mu -> e 2nu) < 1.0e-12 at 90% CL.\nL24: \nL25: Use in L002:\nL26: This is the original experiment behind the current PDG S004R4 limit.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Clean muon LFV, but current bound is behind mu->e gamma.",
+  "priority_rationale_full": "mu->3e has negligible Standard Model background and probes contact\nfour-lepton operators that mu->e gamma may miss. The present 1.0e-12 limit is\nstrong but not the leading anarchic RS LFV constraint; Mu3e prospects make it\nimportant. Treat it as meaningful sub-leading lepton-sector pressure rather\nthan a dominant veto."
+}

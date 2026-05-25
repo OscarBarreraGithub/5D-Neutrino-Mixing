@@ -1,0 +1,468 @@
+{
+  "process_id": "T003",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(t\\to c\\gamma)",
+  "process_name": "Flavor-changing neutral-current top decay t -> c gamma",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "MEDIUM to store the external upper limit, but HIGH for production-grade RS integration because the repo lacks a top electromagnetic FCNC operator basis, RS-to-dipole matching, a t -> c gamma width convention, and a validated production-plus-decay recast.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Required plan greps rerun on 2026-05-16 across quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, and tests; no source-code implementation of t -> c gamma, tcgamma, or tqgamma found.",
+      "Targeted grep for top-photon FCNC and photon dipole terms found only the lepton-sector mu -> e gamma dipole implementation at flavorConstraints/muToEGamma.py:75 and related prose, not a top observable.",
+      "Existing Delta F = 2 coverage starts at quarkConstraints/deltaf2.py:209.",
+      "Modern phenomenology policy enumerates only epsilon_K, K, B_d, B_s, and D0 at quarkConstraints/modern/phenomenology.py:23 and states it is policy-only at quarkConstraints/modern/phenomenology.py:165."
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g \"!*.ipynb\"",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g \"!*.ipynb\"",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g \"!*.ipynb\"",
+      "rg -n \"t.?->.?c.?gamma|t.?->.?gamma.?c|tcgamma|tcgamm|tqgamma|t.?c.?photon|c.?gamma|photon.*FCNC|FCNC.*photon|top.*photon|gamma.*top|dipole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\""
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "CMS2024:T003:dataset",
+      "observable": "CMS dataset for tqgamma FCNC search",
+      "value": "138 fb^-1 at sqrt(s) = 13 TeV",
+      "uncertainty": null,
+      "units": "integrated luminosity and collision energy",
+      "display": null,
+      "year": 2024,
+      "experiment": null,
+      "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+      "snapshot_path": null,
+      "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2024:T003:tcgamma",
+      "observable": "B(t -> c gamma), CMS single-nonzero-coupling interpretation",
+      "value": "< 1.51e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2024,
+      "experiment": null,
+      "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+      "snapshot_path": null,
+      "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2024:T003:tugamma",
+      "observable": "B(t -> u gamma), CMS single-nonzero-coupling interpretation",
+      "value": "< 0.95e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2024,
+      "experiment": null,
+      "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+      "snapshot_path": null,
+      "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2023:T003:dataset",
+      "observable": "ATLAS dataset for tqgamma FCNC search",
+      "value": "139 fb^-1 at sqrt(s) = 13 TeV",
+      "uncertainty": null,
+      "units": "integrated luminosity and collision energy",
+      "display": null,
+      "year": 2023,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2205.02537",
+      "snapshot_path": null,
+      "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2023:T003:tcgamma_left",
+      "observable": "B(t -> c gamma), left-handed tqgamma benchmark",
+      "value": "< 4.2e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2023,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2205.02537",
+      "snapshot_path": null,
+      "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2023:T003:tcgamma_right",
+      "observable": "B(t -> c gamma), right-handed tqgamma benchmark",
+      "value": "< 4.5e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2023,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2205.02537",
+      "snapshot_path": null,
+      "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG2026:T003:gammaq_summary",
+      "observable": "Gamma(t -> gamma q) / Gamma(t -> W b), q = u,c generic PDG row",
+      "value": "< 9.5e-6",
+      "uncertainty": null,
+      "units": "ratio, 95% CL upper limit",
+      "display": null,
+      "year": 2026,
+      "experiment": null,
+      "source_url": "https://pdglive.lbl.gov/Particle.action?node=Q007",
+      "snapshot_path": null,
+      "sha256": "sha256:e05906a43ebc0bd14877ff94418896f229fcd38334aa69203e646c1d5b2129ae",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "source": "Aguilar-Saavedra 2004 top-FCNC review",
+    "source_url": "https://arxiv.org/abs/hep-ph/0409342",
+    "access_date": "2026-05-16",
+    "snapshot_path": "flavor_catalog/references/T003/aguilar_saavedra_hepph0409342_tcgamma_sm.txt",
+    "sha256": "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b",
+    "values": [
+      {
+        "value_id": "AguilarSaavedra2004:T003:SM",
+        "observable": "Standard Model prediction for B(t -> c gamma)",
+        "year": 2004,
+        "value": "4.6e-14",
+        "uncertainty": "+1.2/-1.0, +/-0.2, +/-0.4, +1.6/-0.5 components times 1e-14 as quoted",
+        "units": "branching fraction",
+        "source_url": "https://arxiv.org/abs/hep-ph/0409342",
+        "access_date": "2026-05-16",
+        "sha256": "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b"
+      },
+      {
+        "value_id": "AguilarSaavedra2004:T003:dipole_normalization",
+        "observable": "Effective photon dipole normalization Br(t -> q gamma)",
+        "year": 2004,
+        "value": "0.428 * lambda_qt^2",
+        "uncertainty": null,
+        "units": "branching-fraction normalization in the source convention",
+        "source_url": "https://arxiv.org/abs/hep-ph/0409342",
+        "access_date": "2026-05-16",
+        "sha256": "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b"
+      }
+    ]
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "cms_2024_top21013_tqgamma.txt": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+    "atlas_2023_2205_02537_tqgamma.txt": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+    "pdg_2026_top_gammaq_summary.txt": "sha256:e05906a43ebc0bd14877ff94418896f229fcd38334aa69203e646c1d5b2129ae",
+    "aguilar_saavedra_hepph0409342_tcgamma_sm.txt": "sha256:01040933ce1891af596d4af462c6e8e1ca3503eb9e167e8f1d04ce7334f4422b",
+    "cfw_0804_1954_rs_flavor.txt": "sha256:405cb4b3d63c65177dbae90e5d9f23c098f29c37e0cdf910a02775ecb60069c0"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "OPUS-APPROVED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T18:27:46-04:00",
+      "timestamp": "2026-05-16T18:27:46-04:00",
+      "agent_id": "PKA-T003",
+      "reason": "Initial PKA draft and source snapshot deposit."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T18:39:34-04:00",
+      "timestamp": "2026-05-16T18:39:34-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "batch_id": "wa_w7_new_processes",
+      "reason": "Writer polish for wa_w7_new_processes; template sections normalized and numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "state": "WRITER-REWORK",
+      "at": "2026-05-16T18:55:13-04:00",
+      "timestamp": "2026-05-16T18:55:13-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w7_new_processes",
+      "reason": "CHK-1 failed in checker pass.",
+      "issues": [
+        "TeX numeric SM prediction B(t -> c gamma) = 4.6e-14 is stored only under paper_era_reference, not under pdg_or_equivalent as required by the CA checklist."
+      ]
+    },
+    {
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T19:01:15-04:00",
+      "timestamp": "2026-05-16T19:01:15-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w7_new_v2",
+      "cycle": 2,
+      "reason": "Addressed CA CHK-1 by removing the exact SM central value from TeX while retaining the order-of-magnitude statement."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "state": "WRITER-REWORK",
+      "at": "2026-05-16T19:10:09-04:00",
+      "timestamp": "2026-05-16T19:10:09-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w7_new_v2",
+      "cycle": 2,
+      "reason": "CHK-1 failed in cycle-2 checker pass.",
+      "issues": [
+        "T003.tex still states the Standard Model expectation remains at the 10^-14 level; that physics numerical claim is supported only under paper_era_reference, not pdg_or_equivalent as required by the checker checklist."
+      ]
+    },
+    {
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T19:14:44-04:00",
+      "timestamp": "2026-05-16T19:14:44-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w7_T003_v3",
+      "cycle": 3,
+      "reason": "Addressed CA CHK-1 cycle-3 finding by removing the explicit 10^-14 SM expectation phrase from TeX while retaining non-numerical wording."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-16T19:19:04-04:00",
+      "timestamp": "2026-05-16T19:19:04-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w7_T003_v3",
+      "cycle": 3,
+      "reason": "Cycle-3 checker re-check passed; explicit 10^-14 SM-expectation wording is absent from TeX and all CHK-1..8 checks pass."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T19:27:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "CHECKER-DONE",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T19:27:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited CMS/ATLAS/PDG/arXiv sources; tqgamma value claims match."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T20:30:00-04:00",
+      "from": "FACT-CHECKED",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T20:30:00-04:00",
+      "agent": "Opus-round-3",
+      "agent_id": "Opus-round-3",
+      "round_id": "opus_round_003",
+      "reason": "Opus round 3 sign-off; full PKA -> WA -> CA cycle-3 (post-L001 precedent) -> fact-check VERIFIED; see flavor_catalog/signoff/round_003_index.md."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(t\\to c\\gamma)\\).\nThis entry catalogs the flavor-changing neutral-current top decay\n\\(t\\to c\\gamma\\), process id T003 in the top/Higgs/electroweak family.  It\ncovers LHC searches for a top quark coupled to a charm quark and a photon,\nincluding single-top-plus-photon production and \\(t\\bar t\\) events with one\nFCNC top decay.",
+    "pdg_prose": "The sidecar headline uses the CMS-TOP-21-013 Run-2 charm-specific result,\nbased on \\(138~\\mathrm{fb}^{-1}\\) at \\(\\sqrt{s}=13~\\mathrm{TeV}\\)\n(\\texttt{CMS2024:T003:dataset}):\n\\[\n  \\mathcal{B}(t\\to c\\gamma)<1.51\\times10^{-5}\n\\]\nat 95\\% CL, with an expected limit of \\(1.54\\times10^{-5}\\)\n(\\texttt{CMS2024:T003:tcgamma}).  The ATLAS full-Run-2 comparison result used\n\\(139~\\mathrm{fb}^{-1}\\) at \\(\\sqrt{s}=13~\\mathrm{TeV}\\)\n(\\texttt{ATLAS2023:T003:dataset}) and gave\n\\[\n  \\mathcal{B}(t\\to c\\gamma)<4.2\\times10^{-5}\n\\]\nfor a left-handed \\(tq\\gamma\\) coupling and \\(<4.5\\times10^{-5}\\) for a\nright-handed coupling (\\texttt{ATLAS2023:T003:tcgamma\\_left},\n\\texttt{ATLAS2023:T003:tcgamma\\_right}).  The PDG live top summary separately\nlists a generic \\(t\\to\\gamma q\\), \\(q=u,c\\), row\n\\(<9.5\\times10^{-6}\\) at 95\\% CL, defined as\n\\(\\Gamma(t\\to\\gamma q)/\\Gamma(t\\to Wb)\\); that row is not charm separated\n(\\texttt{PDG2026:T003:gammaq\\_summary}).",
+    "relevance": "In anarchic warped flavor, the IR-localized top and non-universal fermion\nprofiles can generate mass-basis flavor violation in the up sector.  The\ntop-photon channel probes an electromagnetic dipole or heavy-vector matching\ndirection that is absent from the existing neutral-meson \\(\\Delta F=2\\) lane.\nIt is therefore complementary to T001 (\\(t\\to cZ\\)) and T005 (\\(t\\to cg\\)):\nthe same top-charm rotations can appear with different gauge quantum numbers.",
+    "post_2008": "Relative to the arXiv:0804.1954 RS-flavor baseline\n(\\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}), the main change is\nexperimental.  The LHC program moved this channel from indirect expectations to\ndirect full-Run-2 searches with separate \\(tu\\gamma\\) and \\(tc\\gamma\\)\nhypotheses.  ATLAS reached the \\(4.2\\times10^{-5}\\) left-handed charm benchmark\nin its 2023 result (\\texttt{ATLAS2023:T003:tcgamma\\_left}).  CMS then used\n\\(138~\\mathrm{fb}^{-1}\\) and improved the charm-specific observed limit to\n\\(1.51\\times10^{-5}\\) (\\texttt{CMS2024:T003:dataset};\n\\texttt{CMS2024:T003:tcgamma}).  The Standard Model expectation is below\ncurrent limits by many orders of magnitude, so present bounds are new-physics\nsearches rather than SM precision tests.",
+    "validity": "The upper limit is experimentally clean because the SM decay rate is\nnegligible.  Its interpretation is model dependent: CMS quotes a single\nnonzero anomalous coupling at a time, while ATLAS separates left- and\nright-handed \\(tq\\gamma\\) benchmarks.  A warped-model scan would need to map\nits top-sector rotations and electromagnetic dipoles into the same operator\nnormalization before using the number as a hard exclusion.",
+    "code_coverage_prose": "\\textbf{NO.}  The required greps across \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no \\(t\\to c\\gamma\\),\n\\(tc\\gamma\\), \\(tq\\gamma\\), or top-photon FCNC implementation.  Existing\ncoverage is limited to neutral-meson \\(\\Delta F=2\\) inputs at\n\\texttt{quarkConstraints/deltaf2.py:209}, the modern policy list\n\\(\\epsilon_K,K,B_d,B_s,D^0\\) at\n\\texttt{quarkConstraints/modern/phenomenology.py:23}, and a lepton-sector\n\\(\\mu\\to e\\gamma\\) dipole check at \\texttt{flavorConstraints/muToEGamma.py:75}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Cataloging the external upper limit is straightforward, but a\nlive RS constraint would require a top electromagnetic FCNC operator\nconvention, RS-to-SMEFT or direct dipole matching, a \\(t\\to c\\gamma\\) width\nnormalization, and a choice about how to reinterpret production-plus-decay LHC\nlimits when more than one chirality or flavor coupling is present.",
+    "key_references": "\\texttt{CMS2024TopFCNCTQGamma}; \\texttt{ATLAS2023TopFCNCTQGamma};\n\\texttt{PDG2026TopGammaQSummary}; \\texttt{AguilarSaavedra2004TopFCNC};\n\\texttt{CsakiFalkowskiWeiler2008WarpedFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/T003.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/T003.tex",
+  "worklog_path": "flavor_catalog/worklogs/T003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 7,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "CMS2024:T003:dataset",
+        "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+        "snapshot_path": "flavor_catalog/references/T003/cms_2024_top21013_tqgamma.txt",
+        "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "138 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: Relevant source excerpt, normalized:\nL19:\nL20: The analysis uses pp collision data at sqrt(s) = 13 TeV corresponding to\nL21: 138 fb^-1. It searches for single top plus photon production and top-pair\nL22: events in which one top decays through a tqgamma FCNC vertex, with q = u or c.\nL23: No significant excess over the Standard Model prediction is observed.\nL24:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2024:T003:tcgamma",
+        "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+        "snapshot_path": "flavor_catalog/references/T003/cms_2024_top21013_tqgamma.txt",
+        "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 1.51e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24:\nL25: Observed (expected) 95% CL upper limits on branching fractions:\nL26:   B(t -> u gamma) < 0.95 x 10^-5 (1.20 x 10^-5 expected)\nL27:   B(t -> c gamma) < 1.51 x 10^-5 (1.54 x 10^-5 expected)\nL28:\nL29: CMS also quotes the corresponding anomalous coupling limits:\nL30:   kappa_tugamma < 6.2 x 10^-3\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2024:T003:tugamma",
+        "source_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/TOP-21-013/index.html",
+        "snapshot_path": "flavor_catalog/references/T003/cms_2024_top21013_tqgamma.txt",
+        "sha256": "sha256:5f094c0620a2c12692052718e981f7edccecf943d245d173d4cfe5437991a987",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 0.95e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23: No significant excess over the Standard Model prediction is observed.\nL24:\nL25: Observed (expected) 95% CL upper limits on branching fractions:\nL26:   B(t -> u gamma) < 0.95 x 10^-5 (1.20 x 10^-5 expected)\nL27:   B(t -> c gamma) < 1.51 x 10^-5 (1.54 x 10^-5 expected)\nL28:\nL29: CMS also quotes the corresponding anomalous coupling limits:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T003:dataset",
+        "source_url": "https://arxiv.org/abs/2205.02537",
+        "snapshot_path": "flavor_catalog/references/T003/atlas_2023_2205_02537_tqgamma.txt",
+        "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "139 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: Relevant source excerpt, normalized:\nL19:\nL20: The analysis uses pp collision data at sqrt(s) = 13 TeV collected during\nL21: LHC Run 2, corresponding to 139 fb^-1. Both FCNC top-quark production and\nL22: top-quark decay are considered. Events contain a charged lepton, missing\nL23: transverse momentum, a b-tagged jet, one high-momentum photon, and possibly\nL24: additional jets. No significant excess is observed.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T003:tcgamma_left",
+        "source_url": "https://arxiv.org/abs/2205.02537",
+        "snapshot_path": "flavor_catalog/references/T003/atlas_2023_2205_02537_tqgamma.txt",
+        "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 4.2e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 28,
+                "context": "L25:\nL26: Observed 95% CL upper limits on branching fractions for left-handed tqgamma:\nL27:   B(t -> u gamma) < 0.85 x 10^-5\nL28:   B(t -> c gamma) < 4.2 x 10^-5\nL29:\nL30: Observed 95% CL upper limits on branching fractions for right-handed tqgamma:\nL31:   B(t -> u gamma) < 1.2 x 10^-5\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T003:tcgamma_right",
+        "source_url": "https://arxiv.org/abs/2205.02537",
+        "snapshot_path": "flavor_catalog/references/T003/atlas_2023_2205_02537_tqgamma.txt",
+        "sha256": "sha256:82494cd375fd48d5aa19c8f9e7d18bf85ad6397c76377fec184e9c723fcb625e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 4.5e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 32,
+                "context": "L29:\nL30: Observed 95% CL upper limits on branching fractions for right-handed tqgamma:\nL31:   B(t -> u gamma) < 1.2 x 10^-5\nL32:   B(t -> c gamma) < 4.5 x 10^-5\nL33:\nL34: This is the ATLAS number often quoted before the later CMS-TOP-21-013\nL35: charm-specific improvement.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2026:T003:gammaq_summary",
+        "source_url": "https://pdglive.lbl.gov/Particle.action?node=Q007",
+        "snapshot_path": "flavor_catalog/references/T003/pdg_2026_top_gammaq_summary.txt",
+        "sha256": "sha256:e05906a43ebc0bd14877ff94418896f229fcd38334aa69203e646c1d5b2129ae",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 9.5e-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: Relevant pdgLive / summary-table content, normalized:\nL12:\nL13: The t-quark decay-mode summary includes\nL14:   Gamma_7: gamma q (q = u, c) < 9.5 x 10^-6 at 95% CL.\nL15:\nL16: The associated note says:\nL17:   This limit is for Gamma(t -> gamma q) / Gamma(t -> W b).\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Top-photon FCNC is direct but operator dependent",
+  "priority_rationale_full": "The t -> c gamma limit is a clean null search for a negligible-SM top electromagnetic FCNC. In RS it probes dipole or heavy-vector matching directions that are complementary to t -> c Z and t -> c g. The published limits are single-coupling benchmark interpretations, so the constraint is auxiliary rather than scan-dominating."
+}

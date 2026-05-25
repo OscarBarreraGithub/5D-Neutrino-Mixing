@@ -1,0 +1,314 @@
+{
+  "process_id": "B001",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\Delta m_d",
+  "process_name": "Neutral B_d mixing mass difference",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "LOW",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "YES",
+    "alias": "YES-D2-BD",
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "quarkConstraints/deltaf2.py:225 defines the legacy B_d mixing input key b_d.",
+      "quarkConstraints/deltaf2.py:231 defines the legacy b_d bound used by the v1 input bundle.",
+      "quarkConstraints/deltaf2.py:236 notes B_d mixing with proper hadronic matrix elements.",
+      "quarkConstraints/deltaf2.py:631-638 stores the in-code B_d hadronic constants and experimental Delta m_Bd conversion.",
+      "quarkConstraints/deltaf2.py:383-391 dispatches b_d evaluation and per-operator size bookkeeping.",
+      "quarkConstraints/deltaf2.py:888-890 defines the B_d NP budget.",
+      "quarkConstraints/deltaf2.py:903-915 evaluates the B_d mixing NP contribution.",
+      "quarkConstraints/deltaf2.py:960-966 provides the QCD-running wrapper.",
+      "quarkConstraints/qcd_running.py:7 documents the Delta F=2 operator basis.",
+      "quarkConstraints/modern/phenomenology.py:23 includes B_d in the modern policy system IDs.",
+      "quarkConstraints/modern/phenomenology.py:646-654 defines the modern B_d bridge evaluator.",
+      "quarkConstraints/modern/inputs.py:967-976 mirrors the B_d default input in the modern metadata layer.",
+      "tests/test_quark_deltaf2.py:120-131 checks stable Delta F=2 outputs including b_d."
+    ]
+  },
+  "code_coverage_status": "YES",
+  "pdg_values": [
+    {
+      "label": "HFLAV PDG 2025 averages",
+      "observable": "Delta m_d in B0-B0bar mixing",
+      "value": 0.5069,
+      "uncertainty": 0.0019,
+      "units": "ps^-1",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV PDG 2025 averages",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+      "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV PDG 2025 averages",
+      "observable": "x_d",
+      "value": 0.7697,
+      "uncertainty": 0.0035,
+      "units": "dimensionless",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV PDG 2025 averages",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+      "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV PDG 2025 averages",
+      "observable": "chi_d",
+      "value": 0.186,
+      "uncertainty": 0.0011,
+      "units": "dimensionless",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV PDG 2025 averages",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+      "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "cfw_2008_rs_flavor": {
+      "source": "Csaki, Falkowski, and Weiler 2008",
+      "arxiv_id": "0804.1954",
+      "standard_rs_kk_gluon_bound": {
+        "year": 2008,
+        "value": 21,
+        "uncertainty": null,
+        "units": "TeV",
+        "source_url": "https://arxiv.org/abs/0804.1954",
+        "access_date": "2026-05-16",
+        "snapshot_path": "flavor_catalog/references/B001/cfw_2008_rs_flavor_arxiv.txt",
+        "sha256": "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c"
+      },
+      "pseudo_goldstone_scenario_bound": {
+        "year": 2008,
+        "value": 33,
+        "uncertainty": null,
+        "units": "TeV",
+        "source_url": "https://arxiv.org/abs/0804.1954",
+        "access_date": "2026-05-16",
+        "snapshot_path": "flavor_catalog/references/B001/cfw_2008_rs_flavor_arxiv.txt",
+        "sha256": "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c"
+      },
+      "use": "RS-flavor baseline for post-2008 comparison; not a measured experimental observable.",
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-16",
+      "snapshot_path": "flavor_catalog/references/B001/cfw_2008_rs_flavor_arxiv.txt",
+      "sha256": "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c",
+      "sha256_of_text_snapshot": "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "hflav_pdg2025_bd_mixing.txt": "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711",
+    "belleii_2023_bd_mixing_arxiv.txt": "sha256:10ad4816deaa89773086726d6b43bcc3c759a36ec49b5c451dbbc711df1d4da6",
+    "flag2024_b_mixing_arxiv.txt": "sha256:1dbc997120e7b91a5c9dc55f59c28c90a4ca6898960e0b9ec590d37092b90898",
+    "cfw_2008_rs_flavor_arxiv.txt": "sha256:cf93d80c47eb8c5fecb3af147068a493379c98e613355b855ff63bc82dc1423c"
+  },
+  "source_shas_count": 4,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T15:30:29-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T15:30:29-04:00",
+      "agent_id": "PKA-B001",
+      "reason": "Initial PKA draft deposit for Delta m_d / B_d mixing."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:54:12-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:54:12-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for WA batch wa_w6_beauty."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T16:07:43-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T16:07:43-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_beauty",
+      "issues": [
+        "CHK-1: TeX quotes CFW 21 TeV and 33 TeV RS-flavor context values, but these are not represented in pdg_or_equivalent value blocks with complete metadata.",
+        "CHK-1: TeX quotes the Belle II Delta m_d = 0.516 +/- 0.008(stat) +/- 0.005(syst) ps^-1 measurement and 190 fb^-1 dataset, but those numerical claims are under recent_experimental_inputs rather than pdg_or_equivalent."
+      ],
+      "reason": "Checker ca_w6_beauty found strict CHK-1 placement gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T16:17:46-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T16:17:46-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w6_beauty_v2",
+      "reason": "Cycle-2 writer rework addressed ca_w6_beauty CHK-1 metadata-completeness findings."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T16:27:35-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T16:27:35-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_beauty_v2",
+      "issues": [
+        "CHK-1: TeX still quotes CFW 21 TeV and 33 TeV context values outside pdg_or_equivalent; WA-v2 added complete metadata under paper_era_reference instead.",
+        "CHK-1: TeX still quotes Belle II Delta m_d = 0.516 +/- 0.008(stat) +/- 0.005(syst) ps^-1 and 190 fb^-1 outside pdg_or_equivalent; WA-v2 added complete metadata under recent_experimental_inputs instead."
+      ],
+      "reason": "Cycle-2 checker found strict CHK-1 pdg_or_equivalent placement gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty_v2.md."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T16:42:00-04:00",
+      "agent": "Opus-arbitration",
+      "cycle": 3,
+      "from": "WRITER-REWORK",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T16:42:00-04:00",
+      "agent_id": "Opus-arbitration",
+      "opus_approved_at": "2026-05-16T16:42:00-04:00",
+      "reason": "APPROVE-OVERRIDE per L001 / B021_B023 precedent: pdg_or_equivalent is for measured experimental observables. The CFW 21 TeV / 33 TeV RS-flavor reference scales are theoretical normalization values (belong in paper_era_reference), and the Belle II 2023 dataset metadata (190 fb^-1 luminosity and per-experiment Delta m_d) belongs in recent_experimental_inputs. The HFLAV/PDG 2025 canonical Delta m_d = 0.5069 +/- 0.0019 ps^-1 plus x_d, chi_d companions are already in pdg_or_equivalent with full strict metadata. See flavor_catalog/signoff/by_process/B001_B003.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\Delta m_d\\).\nThis entry covers the mass splitting of the neutral \\(B_d\\) eigenstates,\nequivalently the oscillation frequency in \\(B^0_d-\\bar B^0_d\\) mixing.  It is\nthe beauty-sector down-type \\(\\Delta F=2\\) magnitude constraint already used by\nthe quark-scan code.",
+    "pdg_prose": "The canonical measured value is the HFLAV/PDG 2025 average recorded in\n\\texttt{B001.yaml} under \\texttt{pdg\\_or\\_equivalent}, source key\n\\texttt{hflav\\_pdg2025\\_bd\\_mixing}.  HFLAV gives\n\\[\n  \\Delta m_d = 0.5069 \\pm 0.0019\\ {\\rm ps}^{-1},\n\\]\nusing time-dependent measurements from ALEPH, DELPHI, L3, OPAL, CDF, D0,\nBABAR, Belle, and LHCb.  With the HFLAV assumptions of no CP violation in\nmixing and no \\(B^0\\) width difference, the same snapshot records the companion\nworld averages \\(x_d=0.7697\\pm0.0035\\) and \\(\\chi_d=0.1860\\pm0.0011\\).  The\nlocal source snapshot is\n\\texttt{flavor\\_catalog/references/B001/hflav\\_pdg2025\\_bd\\_mixing.txt},\naccessed on 2026-05-16.",
+    "relevance": "Anarchic warped models generate tree-level flavor-changing neutral currents\nfrom KK gluon and electroweak exchange after rotating to the quark-mass basis.\n\\(B_d\\) mixing probes the \\(b\\leftrightarrow d\\) down-sector alignment and is a\ndirect test of the same Wilson-coefficient pipeline used for kaon and \\(B_s\\)\nmixing.  Compared with \\(\\varepsilon_K\\), it is less chirally enhanced but\nconstrains a different row-column structure of the anarchic profiles.",
+    "post_2008": "The arXiv:0804.1954 RS-flavor baseline, source key\n\\texttt{cfw\\_2008\\_rs\\_flavor}, highlighted KK-gluon flavor bounds near\n\\(21\\,{\\rm TeV}\\) in standard RS scenarios and \\(33\\,{\\rm TeV}\\) in the\npseudo-Goldstone setup, with boundary kinetic terms and flavor assumptions as\ncaveats.  Since then, \\(\\Delta m_d\\) has become a precision-average observable.\nBelle II has repeated the benchmark measurement with early SuperKEKB data,\nreporting\n\\[\n  \\Delta m_d = 0.516 \\pm 0.008_{\\rm stat}\\pm0.005_{\\rm syst}\\ {\\rm ps}^{-1}\n\\]\nfrom \\(190\\,{\\rm fb}^{-1}\\), with both numbers recorded under source key\n\\texttt{belleii\\_2023\\_bd\\_mixing}.  On the theory side, source key\n\\texttt{flag2024\\_b\\_mixing} documents the FLAG Review 2024 heavy-quark inputs\nrelevant for \\(B\\)-mixing matrix elements and global unitarity-triangle fits;\nthose inputs are theory normalization data, not the measured observable.",
+    "validity": "This is a robust neutral-meson-mixing magnitude constraint.  The experimental\naverage is precise, but turning it into a new-physics exclusion requires a\npolicy for the SM contribution and CKM inputs.  The current code uses an\nallowed NP budget rather than a full correlated CKM fit, so catalog users\nshould treat it as a conservative magnitude screen, not as a global-fit\nreplacement.",
+    "code_coverage_prose": "\\textbf{YES-D2-BD.}  The legacy \\(\\Delta F=2\\) backend defines the \\(B_d\\)\ninput at \\texttt{quarkConstraints/deltaf2.py:225} and notes the hadronic\nmatrix-element treatment at \\texttt{quarkConstraints/deltaf2.py:236}.\nThe in-code \\(B_d\\) hadronic and experimental constants are at\n\\texttt{quarkConstraints/deltaf2.py:631}--\\texttt{638}.  The scan dispatches\n\\texttt{b\\_d} through \\texttt{evaluate\\_bd\\_mixing} at\n\\texttt{quarkConstraints/deltaf2.py:383}--\\texttt{391}; the evaluator itself is\n\\texttt{quarkConstraints/deltaf2.py:903}--\\texttt{915}, with the running wrapper\nat \\texttt{quarkConstraints/deltaf2.py:960}--\\texttt{966}.  The modern metadata\nlayer also carries \\(B_d\\) as a policy system at\n\\texttt{quarkConstraints/modern/phenomenology.py:23} and mirrors the input at\n\\texttt{quarkConstraints/modern/inputs.py:967}--\\texttt{976}.",
+    "implementation_difficulty_prose": "\\textbf{LOW.}  The existing \\(\\Delta F=2\\) SLL/SLR/VLL/VRR/LR machinery and\nBMU-style running cover the \\(B_d\\) mixing magnitude observable.  A future\nproduction refresh would mainly improve provenance, unit conversion, and\nlikelihood policy rather than adding new operators or RG evolution.",
+    "key_references": "Process-local reference keys before bibliography consolidation:\n\\texttt{hflav\\_pdg2025\\_bd\\_mixing},\n\\texttt{belleii\\_2023\\_bd\\_mixing},\n\\texttt{flag2024\\_b\\_mixing}, and\n\\texttt{cfw\\_2008\\_rs\\_flavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B001.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B001.tex",
+  "worklog_path": "flavor_catalog/worklogs/B001/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_experimental_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+        "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+        "sha256": "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Delta m_d in B0-B0bar mixing = 0.5069 +- 0.0019 ps^-1",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10:\nL11: Extracted value block: B0 mixing: oscillations and mass difference.\nL12: - Combined time-dependent oscillation-frequency result:\nL13:   Delta m_d = 0.5069 +- 0.0019 ps^-1\nL14:   Inputs listed by HFLAV: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb.\nL15: - Time-integrated mixing probability input:\nL16:   chi_d = 0.182 +- 0.015\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:   chi_d = 0.182 +- 0.015\nL17:   Inputs listed by HFLAV: ARGUS and CLEO.\nL18: - World averages after assuming no CP violation in mixing, no width difference in the B0 system, and using tau(B0) = 1.517 +- 0.004 ps:\nL19:   Delta m_d = 0.5069 +- 0.0019 ps^-1\nL20:   x_d = 0.7697 +- 0.0035\nL21:   chi_d = 0.1860 +- 0.0011\nL22:   Inputs listed by HFLAV for chi_d world average: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb, ARGUS, CLEO.\n"
+              },
+              {
+                "line_number": 25,
+                "context": "L22:   Inputs listed by HFLAV for chi_d world average: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb, ARGUS, CLEO.\nL23:\nL24: Use in B001:\nL25: - Canonical measured experimental observable for B001 is Delta m_d = 0.5069 +- 0.0019 ps^-1.\nL26: - x_d and chi_d are companion quantities, not separate B001 headline observables.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "companion_dimensionless_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+        "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+        "sha256": "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "x_d = 0.7697 +- 0.0035",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   Inputs listed by HFLAV: ARGUS and CLEO.\nL18: - World averages after assuming no CP violation in mixing, no width difference in the B0 system, and using tau(B0) = 1.517 +- 0.004 ps:\nL19:   Delta m_d = 0.5069 +- 0.0019 ps^-1\nL20:   x_d = 0.7697 +- 0.0035\nL21:   chi_d = 0.1860 +- 0.0011\nL22:   Inputs listed by HFLAV for chi_d world average: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb, ARGUS, CLEO.\nL23:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "companion_mixing_probability",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/",
+        "snapshot_path": "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt",
+        "sha256": "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "chi_d = 0.186 +- 0.0011",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: - World averages after assuming no CP violation in mixing, no width difference in the B0 system, and using tau(B0) = 1.517 +- 0.004 ps:\nL19:   Delta m_d = 0.5069 +- 0.0019 ps^-1\nL20:   x_d = 0.7697 +- 0.0035\nL21:   chi_d = 0.1860 +- 0.0011\nL22:   Inputs listed by HFLAV for chi_d world average: ALEPH, DELPHI, L3, OPAL, CDF, D0, BABAR, BELLE, LHCb, ARGUS, CLEO.\nL23:\nL24: Use in B001:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Precision Bd mixing magnitude; direct Delta F=2 RS test",
+  "priority_rationale_full": "B_d mixing is a tree-level FCNC target in anarchic RS through KK-gluon and electroweak Delta B=2 operators. The experimental Delta m_d average is very precise, and the hadronic interpretation is controlled enough for a strong magnitude screen, even though CKM and SM-subtraction choices matter. It is weaker than epsilon_K but remains one of the core beauty constraints on the b-d flavor profile."
+}

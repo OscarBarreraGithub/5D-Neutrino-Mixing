@@ -1,0 +1,396 @@
+{
+  "process_id": "B009",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(B^+\\to\\tau^+\\nu_\\tau)",
+  "process_name": "Leptonic B+ -> tau+ nu_tau branching fraction",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": "A live constraint would need a new charged-current leptonic-B observable and model matching to W'/charged-scalar/leptoquark-like amplitudes, but the experimental average and SM inputs are standard and no new QCD RG machinery is expected for the catalog-level formula.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "auxiliary_search_paths": [
+      "docs",
+      "scripts"
+    ],
+    "required_grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    ],
+    "targeted_grep_commands": [
+      "rg -n -F \"B^+ -> tau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n -F \"B+ --> tau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"B\\\\+.*tau|B\\\\^\\\\+.*tau|tau.*nu|b.?->.?u|charged.?current|charged.?Higgs|leptoquark|W'|Wprime\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Required broad greps found the existing Delta F=2 and mu->e gamma surfaces, but no B+ -> tau+ nu observable implementation.",
+      "Targeted searches over quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, and tests returned no B+ -> tau+ nu, b->u tau nu, charged-Higgs, Wprime, or leptoquark implementation hits.",
+      "Auxiliary docs searches hit only the flavor-catalog planning rows: docs/phase_logs/flavor_catalog_plan_v1.md:271 and docs/phase_logs/flavor_catalog_plan_v0.md:241; those were not counted as code coverage."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "HFLAV Rare B decays, End of December 2025 update",
+      "observable": null,
+      "value": 1.12,
+      "uncertainty": 0.19,
+      "units": "10^-4 branching fraction",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV Rare B decays, End of December 2025 update",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Leptonic/BR_B+_tau+_nutau.html",
+      "snapshot_path": "flavor_catalog/references/B009/hflav_dec2025_btaunu.txt",
+      "sha256": "7a4e4079a8223ced909c49a8bfffb849edc7b3bbb19d258a9e03ec4d8c37a970",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG 2025 REST API, S041.184",
+      "observable": null,
+      "value": 1.09,
+      "uncertainty": "+0.25/-0.24",
+      "units": "10^-4 branching fraction",
+      "display": null,
+      "year": 2025,
+      "experiment": "PDG 2025 REST API, S041.184",
+      "source_url": "https://pdgapi.lbl.gov/summaries/S041.184",
+      "snapshot_path": "flavor_catalog/references/B009/pdg2025_btaunu_api.txt",
+      "sha256": "7e0c8745233bb0ac010ee8d85386ba9b6311015e32968d69dba51f0641e05939",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "UTfit Standard Model Fit results: Summer 2024",
+      "observable": null,
+      "value": 0.865,
+      "uncertainty": 0.041,
+      "units": "10^-4 branching fraction",
+      "display": null,
+      "year": 2024,
+      "experiment": "UTfit Standard Model Fit results: Summer 2024",
+      "source_url": "https://www.utfit.org/foswiki/bin/view/UTfit/ResultsSummer2024SM",
+      "snapshot_path": "flavor_catalog/references/B009/utfit_summer2024_btaunu.txt",
+      "sha256": "c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "hflav_dec2025_btaunu.txt": "sha256:7a4e4079a8223ced909c49a8bfffb849edc7b3bbb19d258a9e03ec4d8c37a970",
+    "pdg2025_btaunu_api.txt": "sha256:7e0c8745233bb0ac010ee8d85386ba9b6311015e32968d69dba51f0641e05939",
+    "utfit_summer2024_btaunu.txt": "sha256:c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3",
+    "belle2013_arxiv1208_4678.txt": "sha256:34fba2f4ff096b66dbb6bcb182d154df731b46b2c0ace0d269f30d30e83f1a69",
+    "belle2015_arxiv1503_05613.txt": "sha256:aa5550faa3fc2752f0ae6ce0d3a0fe0ba154a4d4bd05bcec6f8754c02297281e",
+    "belleii2025_arxiv2502_04885.txt": "sha256:8aed992571791c691faeb3ee65798c7bde8794603b683f2d3d38418b3aa264e6",
+    "babar2013_arxiv1207_0698.txt": "sha256:eb7d51abe66f1efb067f8d38563d34d3e78f649ed79c3b7dc9cf4ea8f2ce323b",
+    "babar2010_arxiv0912_2453.txt": "sha256:0e3378f2fc0ef5c4640d50c3a8faeef92bc14ea6c4f22eb082fa15bf94db86be",
+    "cfw2008_arxiv0804_1954.txt": "sha256:96029befd316c9a3c5ed9ee85a94a4efcbc72bd8dcb5a233bc2bd7b8133c6161"
+  },
+  "source_shas_count": 9,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:10:00-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:10:00-04:00",
+      "agent_id": "PKA-B009",
+      "reason": "Initial PKA source extraction and draft skeleton per dispatch prompt."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T11:10:00-04:00",
+      "agent_id": "PKA-B009",
+      "reason": "PKA draft, source snapshots, coverage grep, and sidecar completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:32:49-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:32:49-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for wa_wave1_beauty; numerical claims checked against sidecar sources."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T11:45:36-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T11:45:36-04:00",
+      "agent_id": "CA",
+      "issues": [
+        "CHK-1: TeX lists five post-2008 experimental-input branching-fraction values, but their pdg_or_equivalent.experimental_inputs YAML blocks lack source_url and access_date fields required for each numerical claim."
+      ],
+      "reason": "Checker ca_wave1_beauty found a CHK-1 metadata gap; see flavor_catalog/worklogs/checker/ca_wave1_beauty.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:54:24-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:54:24-04:00",
+      "agent_id": "WA-v2",
+      "reason": "WA v2 added source_url and access_date metadata to post-2008 experimental-input branching-fraction blocks flagged by CA."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:03:51-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:03:51-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_wave1_beauty_v2",
+      "reason": "Checker ca_wave1_beauty_v2 passed CHK-1 through CHK-8 after WA-v2 rework."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(B^+\\to\\tau^+\\nu_\\tau)\\).\nThis entry covers the purely leptonic charged-\\(B\\) branching fraction.  It is\na beauty-family charged-current observable, not a neutral-meson mixing\nconstraint.",
+    "pdg_prose": "The canonical sidecar value is the HFLAV End-of-December-2025 average\n\\[\n  \\mathcal{B}(B^+\\to\\tau^+\\nu_\\tau) = (1.12 \\pm 0.19)\\times 10^{-4},\n\\]\nfrom \\texttt{flavor\\_catalog/references/B009/hflav\\_dec2025\\_btaunu.txt}.\nThe PDG 2025 REST entry gives the compatible average\n\\((1.09^{+0.25}_{-0.24})\\times 10^{-4}\\), with the PDG uncertainty scaled by\nthe factor recorded in \\texttt{pdg2025\\_btaunu\\_api.txt}.  HFLAV lists the\npost-2008 inputs as Belle hadronic tag \\((0.72^{+0.27}_{-0.25}\\pm0.11)\\times\n10^{-4}\\), Belle semileptonic tag \\((1.25\\pm0.28\\pm0.27)\\times10^{-4}\\),\nBelle II hadronic tag \\((1.24\\pm0.41\\pm0.19)\\times10^{-4}\\), BaBar hadronic\ntag \\((1.83^{+0.53}_{-0.49}\\pm0.24)\\times10^{-4}\\), and BaBar semileptonic\ntag \\((1.70\\pm0.80\\pm0.20)\\times10^{-4}\\).  For comparison to the\n\\(|V_{ub}| f_B\\) Standard Model prediction, the sidecar records the UTfit\nSummer 2024 SM prediction \\((0.865\\pm0.041)\\times10^{-4}\\).",
+    "relevance": "This channel probes \\(b\\to u\\tau\\nu\\) charged currents.  In the SM it is fixed\nby \\(f_B |V_{ub}|\\), the charged-\\(B\\) lifetime, and the tau mass; therefore it\nis a clean place where a new charged current can interfere with the SM\namplitude.  It is directly relevant to charged-Higgs, \\(W'\\), and leptoquark\nbenchmarks.  For warped or anarchic-flavor extensions, it is not part of the\ncurrent quark \\(\\Delta F=2\\) lane, but it would test KK charged-gauge-boson or\nnon-minimal charged-scalar effects in the \\(b\\)-to-\\(u\\) current and in the\ntau-neutrino current.",
+    "post_2008": "Relative to the Csaki--Falkowski--Weiler 2008 flavor baseline\n(\\texttt{cfw2008\\_arxiv0804\\_1954.txt}), the measurement landscape changed\nsubstantially.  BaBar published semileptonic-tag and hadronic-tag results in\n2010 and 2013; Belle followed with hadronic-tag and semileptonic-tag\nmeasurements in 2013 and 2015.  Belle II added a hadronic-FEI measurement in\n2025, which HFLAV includes in the average while noting that the red Belle II\ninput is not part of the PDG average.  On the theory/global-fit side, the\nsidecar records the UTfit Summer 2024 SM prediction, so the comparison is now\ndriven mainly by \\(|V_{ub}|\\) and global-fit conventions rather than by an\nunavailable leptonic decay constant.",
+    "validity": "The experimental average is straightforward, but the constraint is\nmodel-dependent.  It is robust as a charged-current amplitude test; it is not a\ngeneric RS bound unless the model supplies a calculable \\(b\\to u\\tau\\nu\\)\nmatching contribution.  A charged scalar, \\(W'\\), or leptoquark can interfere\nconstructively or destructively with the SM, so a one-number exclusion requires\nthe operator normalization and neutrino-flavor assumptions.  The SM comparison\nis global-fit dependent through \\(|V_{ub}|\\), even though the leptonic decay\nconstant input itself is now standard.",
+    "code_coverage_prose": "\\textbf{NO.}  I reran the required coverage greps over\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, and \\texttt{tests/}.  The broad plan\ngreps find the existing neutral \\(\\Delta F=2\\) and \\(\\mu\\to e\\gamma\\) surfaces,\nbut no charged-current leptonic-\\(B\\) observable.  Targeted searches for\n\\texttt{B\\string^+ -> tau}, \\texttt{B+ --> tau}, \\texttt{tau.*nu},\n\\texttt{b.*->.*u}, \\texttt{charged Higgs}, \\texttt{leptoquark}, and \\(W'\\)\nreturned no code hits.  Docs-only catalog-planning rows were not counted as\nimplementation evidence.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  The catalog-level formula is simple and uses standard\nexperimental and lattice/CKM inputs, but production use would require a new\ncharged-current observable and model-specific matching for \\(W'\\),\ncharged-scalar, or leptoquark amplitudes.  It should not extend the legacy\n\\texttt{deltaf2.py} path; if promoted, it belongs in the modern constraint\nsurface.",
+    "key_references": "Process-local snapshots before bibliography consolidation:\n\\texttt{hflav\\_dec2025\\_btaunu.txt},\n\\texttt{pdg2025\\_btaunu\\_api.txt},\n\\texttt{utfit\\_summer2024\\_btaunu.txt},\n\\texttt{belle2013\\_arxiv1208\\_4678.txt},\n\\texttt{belle2015\\_arxiv1503\\_05613.txt},\n\\texttt{belleii2025\\_arxiv2502\\_04885.txt},\n\\texttt{babar2013\\_arxiv1207\\_0698.txt},\n\\texttt{babar2010\\_arxiv0912\\_2453.txt}, and\n\\texttt{cfw2008\\_arxiv0804\\_1954.txt}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B009.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B009.tex",
+  "worklog_path": "flavor_catalog/worklogs/B009/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 6,
+      "AMBIGUOUS": 2,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Leptonic/BR_B+_tau+_nutau.html",
+        "snapshot_path": "flavor_catalog/references/B009/hflav_dec2025_btaunu.txt",
+        "sha256": "sha256:7a4e4079a8223ced909c49a8bfffb849edc7b3bbb19d258a9e03ec4d8c37a970",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 1.12 +- 0.19 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7: Observable: ${\\cal B}(B^+ \\to \\tau^+ \\nu_{\\tau})$.\nL8:\nL9: Experiment | Measurement [10^-4] | Delta chi^2 | Reference | Comments\nL10: Average | $1.12 \\pm0.19$ | 4.25 | $p=0.37$ (ndf=4) | The PDG uncertainty includes a scale factor.\nL11: PDG | $1.09\\,^{+0.25}_{-0.24}$ | | pdgLive |\nL12: Belle | $0.72\\,^{+0.27}_{-0.25} \\pm0.11$ | 1.88 | Phys.Rev.Lett. 110, 131801 (2013) | Hadronic tagging method.\nL13: Belle | $1.25 \\pm0.28 \\pm0.27$ | 0.11 | Phys.Rev.D 92, 051102 (2015) | Semileptonic tagging method.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "pdg_2025_average",
+        "source_url": "https://pdgapi.lbl.gov/summaries/S041.184",
+        "snapshot_path": "flavor_catalog/references/B009/pdg2025_btaunu_api.txt",
+        "sha256": "sha256:7e0c8745233bb0ac010ee8d85386ba9b6311015e32968d69dba51f0641e05939",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 1.09 +- +0.25/-0.24 10^-4 branching fraction",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: description: B+ --> tau+ nu_tau\nL10: section: Semileptonic and leptonic modes\nL11: pdg_values:\nL12:   value: 1.09376418135583E-4\nL13:   error_positive: 2.46801309137533E-5\nL14:   error_negative: 2.36425623126656E-5\nL15:   value_text: \"(1.09+-0.24)E-4\"\n"
+              },
+              {
+                "line_number": 15,
+                "context": "L12:   value: 1.09376418135583E-4\nL13:   error_positive: 2.46801309137533E-5\nL14:   error_negative: 2.36425623126656E-5\nL15:   value_text: \"(1.09+-0.24)E-4\"\nL16:   scale_factor: 1.178431\nL17:   type: OUR AVERAGE\nL18:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "sm_prediction",
+        "source_url": "https://www.utfit.org/foswiki/bin/view/UTfit/ResultsSummer2024SM",
+        "snapshot_path": "flavor_catalog/references/B009/utfit_summer2024_btaunu.txt",
+        "sha256": "sha256:c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "= 0.865 +- 0.041 10^-4 branching fraction",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: Parameter: B(B\\rightarrow\\tau\\nu) \\cdot 10^{4}\nL12: Input value: 1.06 \\pm 0.19\nL13: Full fit: 0.872 \\pm 0.041\nL14: SM Prediction: 0.865 \\pm 0.041\nL15: Pull: 1.0\nL16:\nL17: Interpretation for this catalog entry:\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15: Pull: 1.0\nL16:\nL17: Interpretation for this catalog entry:\nL18: UTfit quotes the B -> tau nu branching fraction in units of 10^-4. The SM prediction used here is therefore (0.865 +- 0.041) x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[0]",
+        "source_url": "https://arxiv.org/abs/1208.4678",
+        "snapshot_path": "flavor_catalog/references/B009/belle2013_arxiv1208_4678.txt",
+        "sha256": "sha256:34fba2f4ff096b66dbb6bcb182d154df731b46b2c0ace0d269f30d30e83f1a69",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belle2013_arxiv1208_4678 = 0.72 +- +0.27/-0.25 stat, 0.11 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The Belle analysis uses the full Upsilon(4S) data sample containing 772 x 10^6 BBbar pairs. Events are tagged by reconstructing one B meson in hadronic final states, and B- -> tau- nu_tau-bar candidates are detected in the recoil.\nL12:\nL13: The abstract reports evidence with a significance of 3.0 standard deviations including systematic errors and measures\nL14: B(B- -> tau- nu_tau-bar) = [0.72^{+0.27}_{-0.25}(stat) +/- 0.11(syst)] x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[1]",
+        "source_url": "https://arxiv.org/abs/1503.05613",
+        "snapshot_path": "flavor_catalog/references/B009/belle2015_arxiv1503_05613.txt",
+        "sha256": "sha256:aa5550faa3fc2752f0ae6ce0d3a0fe0ba154a4d4bd05bcec6f8754c02297281e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belle2015_arxiv1503_05613 = 1.25 +- 0.28 stat, 0.27 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The Belle analysis uses a data sample of 772 x 10^6 BBbar pairs collected at the Y(4S) resonance. The accompanying B meson is reconstructed in a semileptonic decay and the recoiling B candidate is detected in B^+ -> tau^+ nu_tau.\nL12:\nL13: The abstract reports\nL14: BR(B^+ -> tau^+ nu_tau) = [1.25 +- 0.28 (stat.) +- 0.27 (syst.)] x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[2]",
+        "source_url": "https://arxiv.org/abs/2502.04885",
+        "snapshot_path": "flavor_catalog/references/B009/belleii2025_arxiv2502_04885.txt",
+        "sha256": "sha256:8aed992571791c691faeb3ee65798c7bde8794603b683f2d3d38418b3aa264e6",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "belleii2025_arxiv2502_04885 = 1.24 +- 0.41 stat, 0.19 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: The Belle II analysis uses (387 +- 6) x 10^6 Upsilon(4S) events collected between 2019 and 2022. It reconstructs the accompanying B- meson with hadronic tagging and identifies B^+ -> tau^+ nu_tau candidates in the recoil.\nL13:\nL14: The abstract reports evidence at 3.0 standard deviations, including systematic uncertainties, and measures\nL15: B(B^+ -> tau^+ nu_tau) = [1.24 +- 0.41 (stat.) +- 0.19 (syst.)] x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[3]",
+        "source_url": "https://arxiv.org/abs/1207.0698",
+        "snapshot_path": "flavor_catalog/references/B009/babar2013_arxiv1207_0698.txt",
+        "sha256": "sha256:eb7d51abe66f1efb067f8d38563d34d3e78f649ed79c3b7dc9cf4ea8f2ce323b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "babar2013_arxiv1207_0698 = 1.83 +- +0.53/-0.49 stat, 0.24 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The BaBar analysis searches for B+ -> tau+ nu using 467.8 x 10^6 BB pairs collected at the Y(4S), with one B- completely reconstructed in hadronic decay modes. Tau+ modes include e+ nu nu, mu+ nu nu, pi+ nu, and rho+ nu.\nL12:\nL13: The abstract reports a 3.8 sigma excess including systematic uncertainties and a branching-fraction central value\nL14: B(B+ -> tau+ nu) = (1.83^{+0.53}_{-0.49}(stat.) +/- 0.24(syst.)) x 10^-4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experimental_inputs[4]",
+        "source_url": "https://arxiv.org/abs/0912.2453",
+        "snapshot_path": "flavor_catalog/references/B009/babar2010_arxiv0912_2453.txt",
+        "sha256": "sha256:0e3378f2fc0ef5c4640d50c3a8faeef92bc14ea6c4f22eb082fa15bf94db86be",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "babar2010_arxiv0912_2453 = 1.7 +- 0.80 stat, 0.20 syst 10^-4 branching fraction",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The BaBar analysis searches for B+ -> l+ nu_l in (458.9 +- 5.1) x 10^6 BBbar pairs, using B+B- events where one B meson is reconstructed as B- -> D0 l- nu X.\nL12:\nL13: The abstract reports, using the Feldman-Cousins method,\nL14: B(B+ -> tau+ nu) = (1.7 +- 0.8 +- 0.2) x 10^-4,\nL15: excluding zero at 2.3 sigma.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Charged-current tau mode is model-specific for RS scans",
+  "priority_rationale_full": "B+ -> tau+ nu is a clean charged-current amplitude test, especially for charged scalars or W'-like interactions. It is not a leading constraint on the neutral FCNC structure that dominates anarchic RS flavor bounds, and its SM comparison depends on V_ub inputs. For this scan it is useful context rather than a primary driver."
+}

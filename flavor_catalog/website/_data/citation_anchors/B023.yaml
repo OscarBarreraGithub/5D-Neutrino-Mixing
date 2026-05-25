@@ -1,0 +1,176 @@
+---
+process_id: B023
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: observables[0]
+  source_url: https://pdgapi.lbl.gov/listings/S042.152
+  snapshot_path: flavor_catalog/references/B023/pdg2025_b0_kst0_nunu_api.txt
+  sha256: sha256:f8d7014f1e7f2fbffd464f3d1c47d4fd36ff559b74f3a2301ec8b966b756dffe
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: B0 -> K*(892)0 nu nubar = 1.8e-5 90%
+    status: AMBIGUOUS
+    matches:
+    - line_number: 145
+      context: |
+        L142:  },
+        L143:       {
+        L144:  "document_id": "CHEN 2007D"
+        L145: , "publication_name": "PRL 99 221802"
+        L146: , "publication_year": 2007
+        L147: , "doi": "10.1103/PhysRevLett.99.221802"
+        L148: , "inspire_id": "754596"
+    - line_number: 147
+      context: |
+        L144:  "document_id": "CHEN 2007D"
+        L145: , "publication_name": "PRL 99 221802"
+        L146: , "publication_year": 2007
+        L147: , "doi": "10.1103/PhysRevLett.99.221802"
+        L148: , "inspire_id": "754596"
+        L149: , "title": "Search for B --> h^(*) nu nubar Decays at Belle"
+        L150: , "confidence_level": "90.0"
+- block_key: observables[1]
+  source_url: https://pdgapi.lbl.gov/listings/S041.490
+  snapshot_path: flavor_catalog/references/B023/pdg2025_bp_kstp_nunu_api.txt
+  sha256: sha256:d9aa9db63226950572c8d450fd495b9b727f9ac270336e399d78686a1d41e07b
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: B+ -> K*(892)+ nu nubar = 4e-5 90%
+    status: AMBIGUOUS
+    matches:
+    - line_number: 5
+      context: |
+        L2:    "status_code":  200,
+        L3:    "status_message": "OK",
+        L4:    "request_timestamp":    "2026-05-16 11:06:25 PST",
+        L5:    "request_url":    "https://pdglive.lbl.gov//api/listings/S041.490",
+        L6:    "edition":     "2025",
+        L7:    "about":    "For further information see https://pdg.lbl.gov/api",
+        L8:    "pdgid":       "S041.490",
+    - line_number: 8
+      context: |
+        L5:    "request_url":    "https://pdglive.lbl.gov//api/listings/S041.490",
+        L6:    "edition":     "2025",
+        L7:    "about":    "For further information see https://pdg.lbl.gov/api",
+        L8:    "pdgid":       "S041.490",
+        L9:    "description":       "B+ --> K^*(892)+ nu nubar",
+        L10:    "parent_pdgid": "S041",
+        L11:    "parent_description": "B+-",
+    - line_number: 10
+      context: |
+        L7:    "about":    "For further information see https://pdg.lbl.gov/api",
+        L8:    "pdgid":       "S041.490",
+        L9:    "description":       "B+ --> K^*(892)+ nu nubar",
+        L10:    "parent_pdgid": "S041",
+        L11:    "parent_description": "B+-",
+        L12: "related_data": [{
+        L13:    "pdgid":       "S041T29",
+    - line_number: 13
+      context: |
+        L10:    "parent_pdgid": "S041",
+        L11:    "parent_description": "B+-",
+        L12: "related_data": [{
+        L13:    "pdgid":       "S041T29",
+        L14:    "description": "G(B+ --> K*(892)+ nu nubar)/G(total)",
+        L15:    "note": "Test for DeltaB = 1 weak neutral current. Allowed by higher-order electroweak interaction.",
+        L16:    "measurements":[
+    - line_number: 23
+      context: |
+        L20: , "publication_year": 2013
+        L21: , "doi": "10.1103/PhysRevD.87.111103"
+        L22: , "inspire_id": "1223991"
+        L23: , "title": "Search for B --> h^(*) nu nubar with the Full Belle Upsilon(4S) Data Sample"
+        L24: , "confidence_level": "90.0"
+        L25: , "technique": "BELL"
+        L26: , "comment": "e+ e- --> Upsilon(4S)"
+    - line_number: 26
+      context: |
+        L23: , "title": "Search for B --> h^(*) nu nubar with the Full Belle Upsilon(4S) Data Sample"
+        L24: , "confidence_level": "90.0"
+        L25: , "technique": "BELL"
+        L26: , "comment": "e+ e- --> Upsilon(4S)"
+        L27: , "is_changed": false
+        L28: ,   "measurement_values":[
+        L29:       {
+    - line_number: 58
+      context: |
+        L55: , "title": "Search for B --> h nu nubar Decays with Semileptonic Tagging at Belle"
+        L56: , "confidence_level": "90.0"
+        L57: , "technique": "BELL"
+        L58: , "comment": "e+ e- --> Upsilon(4S)"
+        L59: , "is_changed": false
+        L60: ,   "measurement_values":[
+        L61:       {
+    - line_number: 86
+      context: |
+        L83: , "publication_name": "PR D87 112005"
+        L84: , "publication_year": 2013
+        L85: , "doi": "10.1103/PhysRevD.87.112005"
+        L86: , "inspire_id": "1225884"
+        L87: , "title": "Search for B --> K^(*) nu nubar and Invisible Quarkonium Decays"
+        L88: , "confidence_level": "90.0"
+        L89: , "technique": "BABR"
+    - line_number: 90
+      context: |
+        L87: , "title": "Search for B --> K^(*) nu nubar and Invisible Quarkonium Decays"
+        L88: , "confidence_level": "90.0"
+        L89: , "technique": "BABR"
+        L90: , "comment": "e+ e- --> Upsilon(4S)"
+        L91: , "is_changed": false
+        L92: ,   "measurement_values":[
+        L93:       {
+    - line_number: 148
+      context: |
+        L145: , "publication_name": "PRL 99 221802"
+        L146: , "publication_year": 2007
+        L147: , "doi": "10.1103/PhysRevLett.99.221802"
+        L148: , "inspire_id": "754596"
+        L149: , "title": "Search for B --> h^(*) nu nubar Decays at Belle"
+        L150: , "confidence_level": "90.0"
+        L151: , "technique": "BELL"
+    - line_number: 152
+      context: |
+        L149: , "title": "Search for B --> h^(*) nu nubar Decays at Belle"
+        L150: , "confidence_level": "90.0"
+        L151: , "technique": "BELL"
+        L152: , "comment": "e+ e- --> Upsilon(4S)"
+        L153: , "is_changed": false
+        L154: ,   "measurement_values":[
+        L155:       {
+- block_key: values[0]:Belle2017:B023:combined_vector_limit
+  source_url: https://arxiv.org/abs/1702.03224
+  snapshot_path: flavor_catalog/references/B023/belle2017_arxiv1702_03224.txt
+  sha256: sha256:2a51560a45705af5d66a698c04c839d95773d3f56596ecc3a3a67385019c6c0c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: Combined BR(B -> K* nu nubar) = 2.7e-5 90% CL
+    status: RESOLVED
+    matches:
+    - line_number: 24
+      context: |
+        L21: Source-extracted combined-limit text from arXiv TeX source:
+        L22: The analysis combines charged and neutral modes by adding negative log
+        L23: likelihoods, scaling neutral modes by tau(B+)/tau(B0), and obtains
+        L24: B(B -> K* nu nubar) < 2.7 x 10^{-5} at 90% C.L.
+- block_key: values[1]:Buras2015:B023:sm_b0_kstar0_nunu
+  source_url: https://arxiv.org/abs/1409.4557
+  snapshot_path: flavor_catalog/references/B023/buras2015_arxiv1409_4557.txt
+  sha256: sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: SM BR(B0 -> K*(892)0 nu nubar) = (9.2 +- 1)e-6
+    status: RESOLVED
+    matches:
+    - line_number: 17
+      context: |
+        L14: The paper combines lattice-QCD and light-cone-sum-rule form factors with
+        L15: complete two-loop electroweak corrections to obtain
+        L16: BR(B+ -> K+ nu nubar) = (4.0 +/- 0.5) x 10^{-6} and
+        L17: BR(B0 -> K*0 nu nubar) = (9.2 +/- 1.0) x 10^{-6}.
+        L18:
+        L19: Source-extracted model-dependence note:
+        L20: The analysis relates new-physics effects in b -> s nu nubar to b -> s l+l-

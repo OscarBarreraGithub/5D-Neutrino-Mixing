@@ -1,0 +1,55 @@
+---
+process_id: L007
+generated_at: '2026-05-18T01:53:04Z'
+sources:
+- block_key: Branching fraction upper limit for tau- -> mu- gamma
+  source_url: https://pdglive.lbl.gov/view/S035.31
+  snapshot_path: flavor_catalog/references/L007/pdg2025_tau_mu_gamma_pdglive.txt
+  sha256: b94475dc141a9a16360a3216d7a5fe29fb05c710a3b133ae9c1c56571d66107f
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '4.2e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 17
+      context: "L14: PDGID: S035.31\nL15: Decay mode summary: tau- -> mu- gamma\nL16: Gamma_188 / Gamma_total:\nL17:   tau-\
+        \ -> mu- gamma  < 4.2 x 10^-8\nL18:   confidence level: 90%\nL19: \nL20: Category:\n"
+- block_key: Branching fraction upper limit for tau+- -> mu+- gamma
+  source_url: https://arxiv.org/abs/2103.12994
+  snapshot_path: flavor_catalog/references/L007/belle2021_tau_lgamma_arxiv2103_12994.txt
+  sha256: 99810fa89b36985e94775ac0c9173645a2d07519c8a7e3653dadc0ceb5de9f4f
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '4.2e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: "L19: background predictions from the Standard Model is observed. Upper limits on\nL20: the branching fractions\
+        \ are set at 90% confidence level:\nL21: \nL22:   B(tau+- -> mu+- gamma) <= 4.2 x 10^-8\nL23:   B(tau+- -> e+- gamma)\
+        \  <= 5.6 x 10^-8\nL24: \nL25: Extraction note:\n"
+- block_key: Branching fraction upper limit for tau -> mu gamma
+  source_url: https://arxiv.org/abs/0908.2381
+  snapshot_path: flavor_catalog/references/L007/babar2010_tau_lgamma_arxiv0908_2381.txt
+  sha256: 2528b26a9cbaa6cb58d5805613c9695b75a6d90f2775d797404e6b8d4afc57e2
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '4.4e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 24
+      context: "L21: The 90% confidence-level upper limits were:\nL22: \nL23:   BR(tau -> e gamma)  < 3.3 x 10^-8\nL24:  \
+        \ BR(tau -> mu gamma) < 4.4 x 10^-8\nL25: \nL26: Extraction note:\nL27: This is the main post-2008 BaBar predecessor\
+        \ to the Belle full-data result.\n"
+- block_key: Projected branching-fraction sensitivity for tau -> mu gamma
+  source_url: https://arxiv.org/abs/1808.10567
+  snapshot_path: flavor_catalog/references/L007/belleii_physics_book_1808_10567_tau_lfv.txt
+  sha256: d3789bb9ccd93bbdf3494283da82a40624dffec4012f323b914f8400d896c674
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: ''
+    status: UNRESOLVED
+    matches: []

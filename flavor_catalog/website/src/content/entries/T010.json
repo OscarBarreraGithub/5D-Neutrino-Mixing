@@ -1,0 +1,262 @@
+{
+  "process_id": "T010",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "Z -> b bbar pole observables: R_b, A_FB^{0,b}, A_b",
+  "process_name": "Z-pole bottom-quark partial-width ratio and asymmetries",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live constraint would require new electroweak-pole observable handling plus RS matching for shifts in Z b_L and Z b_R couplings, including custodial-protection model dependence and LEP/SLC correlations.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"Z.?->.?b|Zbb|Z b|A_FB|Afb|A_FB|R_b|Rb|A_b|Ab\\\\b|left-right forward|forward-backward|Z-pole|Z pole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "No R_b, A_FB^b, A_b, or Zbb observable implementation was found.",
+      "Only generic Z-mass support surfaced: qcd/running.py:3, qcd/constants.py:11, quarkConstraints/qcd_running.py:100."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg_2025_z_boson.txt": "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815",
+    "lepslc_2006_z_resonance.txt": "sha256:fe6c50814880adb49b850fdec012aeaaf77b8e4df3cad1b1c85321003592da66",
+    "cfw_2008_rs_flavor.txt": "sha256:842802b12f72f3637edf6820569d8cd2c513958f02aa4e05de95e3f63642286d",
+    "casagrande_2008_rs_ewpt.txt": "sha256:f4c7992652d22d9d1c17ba19f8e54104239ac9c94087a0f1fc94f9d9d8a4a20e",
+    "freitas_2014_z_widths.txt": "sha256:a7226056d8047b4c0b941ac6a871201a27921027d34259182f9afeb46c450e79",
+    "fcc_ee_2025_zbb_projection.txt": "sha256:035f06739e5f73ce6ba13b35d515dd9fcc5470a17b8b6ad2dc9baf2f4bf6d902"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:06:37-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:06:37-04:00",
+      "agent_id": "PKA-T010",
+      "reason": "Initial PKA draft; assignment combines plan rows T010 and T011."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T11:32:50-04:00",
+      "timestamp": "2026-05-16T11:32:50-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "Writer polish for wa_wave1_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "state": "WRITER-REWORK",
+      "at": "2026-05-16T11:47:15-04:00",
+      "timestamp": "2026-05-16T11:47:15-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_wave1_top_higgs_ew found CHK-1 numerical-metadata placement issues.",
+      "issues": [
+        "CHK-1: contextual numerical claims in the TeX are stored in additional_numerical_context rather than pdg_or_equivalent."
+      ]
+    },
+    {
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T11:54:13-04:00",
+      "timestamp": "2026-05-16T11:54:13-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 writer rework: promoted CA-flagged numerical context into pdg_or_equivalent."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-16T12:05:00-04:00",
+      "timestamp": "2026-05-16T12:05:00-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_wave1_top_higgs_ew_v2 verified WA-v2 numerical metadata rework and all checklist items."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/arXiv/collaboration sources; measured value claims match."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "A: custodial-protection dependence of EW + rare-b constraints"
+    }
+  ],
+  "sections": {
+    "process": "This entry covers the bottom-quark Z-pole observables \\(R_b^0\\),\n\\(A_{\\rm FB}^{0,b}\\), and \\(A_b\\).  Plan v1 lists \\(R_b\\) as T010 and the\nasymmetries as T011; this entry follows the batch assignment and treats them as\none \\(Z\\to b\\bar b\\) pole-observable package.",
+    "pdg_prose": "The canonical current values are taken from the PDG Z-boson listing snapshot in\n\\texttt{flavor\\_catalog/references/T010/pdg\\_2025\\_z\\_boson.txt}; the same\nsnapshot is recorded in the \\texttt{T010.yaml} \\texttt{pdg\\_or\\_equivalent}\nblock.  It gives \\(R_b^0=0.21629\\pm0.00066\\),\n\\(A_{\\rm FB}^{0,b}=0.0992\\pm0.0016\\) after converting the listed\n\\(9.92\\pm0.16\\%\\), and \\(A_b=0.923\\pm0.020\\)\n(\\texttt{pdg\\_2025\\_z\\_boson.txt}).  The original LEP/SLC final combination is\nalso snapshotted in \\texttt{lepslc\\_2006\\_z\\_resonance.txt}; it records the\nsame central values and identifies the \\(A_{\\rm FB}^{0,b}\\) comparison as the\nlargest Z-pole pull, \\(2.8\\sigma\\), relative to the Standard Model fit.",
+    "relevance": "In warped models with anarchic five-dimensional Yukawas, the third-generation\nleft-handed doublet is typically localized closer to the IR brane to account\nfor the top mass.  That same localization makes the \\(Z b_L\\bar b_L\\) coupling\nsensitive to gauge-boson and fermion mixing with Kaluza-Klein states.  \\(R_b\\)\nmostly constrains the total \\(Z\\to b\\bar b\\) partial width, while \\(A_b\\) and\n\\(A_{\\rm FB}^{0,b}\\) test the chiral balance of the bottom coupling.  Custodial\nextensions, especially protections of \\(Z b_L\\bar b_L\\), are therefore not a\nminor detail; they determine whether this observable is a leading bound or a\ndiagnostic cross-check.",
+    "post_2008": "There has not been a new LEP/SLC-style experimental average superseding the\nZ-pole combination, so the PDG value remains legacy-data dominated.  The\npost-CFW theory story did change: Casagrande et al. gave a detailed RS\nelectroweak-precision treatment including Zbb couplings, while later SM work\ncompleted the fermionic two-loop description of Z partial widths and branching\nratios (\\texttt{freitas\\_2014\\_z\\_widths}).  Future-collider studies now\nrevisit the experimental systematics of \\(R_b\\) and \\(A_{\\rm FB}^b\\); the\nFCC-ee projection quotes relative uncertainties of order \\(0.01\\%\\), but it is\na prospective reference rather than a current constraint\n(\\texttt{fcc\\_ee\\_2025\\_zbb\\_projection.txt}).",
+    "validity": "This is a precision electroweak coupling constraint, not a flavor-changing\namplitude by itself.  It is highly relevant for RS flavor because the same\nfermion localizations and custodial choices that control flavor violation also\nset the tree-level Z-bottom coupling shifts.  Its interpretation is therefore\nmodel-dependent: minimal bulk RS, custodial RS, brane kinetic terms, and\ndifferent embeddings of the bottom multiplet can move the constraint\nsubstantially.  \\(A_{\\rm FB}^{0,b}\\) also contains the initial-state leptonic\nasymmetry input, so \\(A_b\\) is the cleaner bottom-coupling handle.\n\nIn custodial RS, reduced \\(Z b_L b_L\\) pressure can make this observable\nrelatively less direct as a mass setter or more diagnostic of embeddings;\nquote RS bounds only after specifying custodial protection, fermion embeddings,\nand brane kinetic terms.",
+    "code_coverage_prose": "\\textbf{NO}.  The required greps found no implementation of \\(R_b\\), \\(A_b\\),\n\\(A_{\\rm FB}^{0,b}\\), or a Zbb electroweak-pole likelihood in\n\\texttt{quarkConstraints/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{qcd/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, or \\texttt{tests/}.  The only Z-related matches were\ngeneric \\(M_Z\\) support in \\texttt{qcd/running.py:3},\n\\texttt{qcd/constants.py:11}, and \\texttt{quarkConstraints/qcd\\_running.py:100}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A catalog-only record is straightforward, but a live constraint would\nneed a new electroweak-pole observable module, a correlated treatment of the\nLEP/SLC pseudo-observables, and model-specific matching from the 5D spectrum to\n\\(\\delta g_{Lb}\\) and \\(\\delta g_{Rb}\\).  The largest blocker is not lattice\ninput or QCD running; it is the RS electroweak matching and custodial-symmetry\nbookkeeping.",
+    "key_references": "\\texttt{pdg\\_2025\\_z\\_boson}; \\texttt{lepslc\\_2006\\_z\\_resonance};\n\\texttt{cfw\\_2008\\_rs\\_flavor}; \\texttt{casagrande\\_2008\\_rs\\_ewpt};\n\\texttt{freitas\\_2014\\_z\\_widths}; \\texttt{fcc\\_ee\\_2025\\_zbb\\_projection}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/T010.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/T010.tex",
+  "worklog_path": "flavor_catalog/worklogs/T010/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 4,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 1
+    },
+    "sources": [
+      {
+        "block_key": "R_b^0",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T010/pdg_2025_z_boson.txt",
+        "sha256": "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.21629 +/- 0.00066",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: R_b = Gamma(bb)/Gamma(hadrons)\nL9: OUR FIT is obtained by a simultaneous fit to several c- and b-quark measurements.\nL10: Value: 0.21629 +/- 0.00066 OUR FIT.\nL11:\nL12: A_b\nL13: This quantity is directly extracted from a measurement of the left-right\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "A_FB^{0,b}",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T010/pdg_2025_z_boson.txt",
+        "sha256": "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.0992 +/- 0.0016",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "A_b",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T010/pdg_2025_z_boson.txt",
+        "sha256": "sha256:0d0b9e2377ceaa5f9bc42f2fae8116d91d8142e2239b70746be454fe3f637815",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.923 +/- 0.02",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: A_b\nL13: This quantity is directly extracted from a measurement of the left-right\nL14: forward-backward asymmetry in b b production at SLC using polarized electron beam.\nL15: Value: 0.923 +/- 0.020 OUR FIT.\nL16:\nL17: A_FB^(0,b) charge asymmetry in e+ e- -> b b\nL18: OUR FIT refers to the Z pole asymmetry.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LEP/SLC final-combination pull for A_FB^{0,b}",
+        "source_url": "https://arxiv.org/abs/hep-ex/0509008",
+        "snapshot_path": "flavor_catalog/references/T010/lepslc_2006_z_resonance.txt",
+        "sha256": "sha256:fe6c50814880adb49b850fdec012aeaaf77b8e4df3cad1b1c85321003592da66",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2.8",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10:\nL11: R_b^0 = 0.21629 +/- 0.00066; SM fit value shown there: 0.21562 +/- 0.00013; pull 1.0.\nL12:\nL13: A_FB^(0,b) = 0.0992 +/- 0.0016; SM fit value shown there: 0.1037 +/- 0.0008; pull 2.8.\nL14:\nL15: A_b = 0.923 +/- 0.020; SM fit value shown there: 0.9346 +/- 0.0001; pull 0.6.\nL16:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "FCC-ee projected relative uncertainty for R_b and A_FB^b",
+        "source_url": "https://arxiv.org/abs/2502.17281",
+        "snapshot_path": "flavor_catalog/references/T010/fcc_ee_2025_zbb_projection.txt",
+        "sha256": "sha256:035f06739e5f73ce6ba13b35d515dd9fcc5470a17b8b6ad2dc9baf2f4bf6d902",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.01",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Relevant abstract excerpt, normalized:\nL10: The paper proposes an exclusive b-hadron tagging technique for measuring R_b and A_FB^b\nL11: at FCC-ee using O(10^12) Z-boson decays. It states that the approach can reduce leading\nL12: systematic uncertainties and obtain total relative uncertainties of order 0.01 percent for\nL13: both observables.\nL14:\nL15: Use in this process note:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Zbb precision is the custodial-protection gate",
+  "priority_rationale_full": "The Z -> b bbar pole observables directly test the Z b_L b_L coupling that is stressed by the IR-localized third-generation doublet needed for the top mass. In RS model building this is not just a secondary EW check: it can force custodial protection and embedding choices before flavor limits are applied. The LEP/SLC pseudo-observables are precise and clean enough that this entry has HIGH constraining power, though in protected custodial setups it becomes more of an embedding diagnostic."
+}

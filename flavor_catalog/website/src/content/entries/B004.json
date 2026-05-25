@@ -1,0 +1,270 @@
+{
+  "process_id": "B004",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\phi_s^{c\\bar c s}",
+  "process_name": "CP phase phi_s in Bs0 -> J/psi phi",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "LOW",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "PARTIAL",
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"phi_s|phis|J/psi|Jpsi|psi.*phi|B_s.*phi|Bs.*phi|beta_s\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused grep for phi_s/phis/Jpsi/J/psi/psi phi/B_s phi/beta_s returned no direct observable implementation in the required implementation/test directories.",
+      "quarkConstraints/deltaf2.py:239 defines the existing b_s input key for B_s mixing.",
+      "quarkConstraints/deltaf2.py:651 stores the experimental Delta m_Bs input used by the magnitude constraint.",
+      "quarkConstraints/deltaf2.py:922 defines evaluate_bs_mixing; quarkConstraints/deltaf2.py:929 reduces computed M12 to abs(m12), so the phase is not exposed.",
+      "quarkConstraints/modern/phenomenology.py:657 defines the modern bridge B_s mixing evaluator, also for a magnitude-style contribution.",
+      "quarkConstraints/qcd_running.py:7 documents the Delta F=2 VLL/VRR/LR operator basis relevant for a future phase observable."
+    ]
+  },
+  "code_coverage_status": "PARTIAL",
+  "pdg_values": [
+    {
+      "label": "HFLAV PDG 2025 phi_s inputs",
+      "observable": "phi_s^ccs, all combined b -> c cbar s Bs0 decays",
+      "value": -0.041,
+      "uncertainty": 0.016,
+      "units": "rad",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV PDG 2025 phi_s inputs",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/HFLAV_phis_inputs/HFLAV_phis_inputs.pdf",
+      "snapshot_path": "flavor_catalog/references/B004/hflav_pdg2025_phis_inputs.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV PDG 2025 phi_s inputs",
+      "observable": "phi_s^ccs, Bs0 -> J/psi K+ K- combined",
+      "value": -0.05,
+      "uncertainty": 0.017,
+      "units": "rad",
+      "display": null,
+      "year": 2025,
+      "experiment": "HFLAV PDG 2025 phi_s inputs",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/HFLAV_phis_inputs/HFLAV_phis_inputs.pdf",
+      "snapshot_path": "flavor_catalog/references/B004/hflav_pdg2025_phis_inputs.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb Collaboration, Phys. Rev. Lett. 132 (2024) 051802",
+      "observable": "phi_s in Bs0 -> J/psi(mu+mu-) K+ K- near phi(1020)",
+      "value": -0.039,
+      "uncertainty": null,
+      "units": "rad",
+      "display": null,
+      "year": 2024,
+      "experiment": "LHCb Collaboration, Phys. Rev. Lett. 132 (2024) 051802",
+      "source_url": "https://arxiv.org/abs/2308.01468",
+      "snapshot_path": "flavor_catalog/references/B004/lhcb_2024_jpsikk_phis_arxiv.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb Collaboration, quoting global CKM fits",
+      "observable": "-2 beta_s",
+      "value": -0.0368,
+      "uncertainty": null,
+      "units": "rad",
+      "display": null,
+      "year": null,
+      "experiment": "LHCb Collaboration, quoting global CKM fits",
+      "source_url": "https://arxiv.org/abs/2308.01468",
+      "snapshot_path": "flavor_catalog/references/B004/lhcb_2024_jpsikk_phis_arxiv.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "cfw_2008_rs_flavor.txt": "sha256:c15fcb365487c5f464aa94d27d6204c870985326f5cfef70832aa200bac265a0",
+    "hflav_pdg2025_phis_inputs.txt": "sha256:ae8171d0b32e36087e25893f033989fdde4dd7a4179100746ca18eaec7a79cc0",
+    "lhcb_2024_jpsikk_phis_arxiv.txt": "sha256:d94a1b07a02beb47108ac6a5f7a3cc8c143655023c50e78513025e5b5d70a84e"
+  },
+  "source_shas_count": 3,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T12:57:27-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T12:57:27-04:00",
+      "agent_id": "PKA-B004",
+      "reason": "Initial PKA draft deposit for phi_s in Bs0 -> J/psi phi."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:34:09-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:34:09-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for WA batch wa_w4_beauty."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T13:48:28-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T13:48:28-04:00",
+      "agent_id": "CA",
+      "reason": "Checker verification passed for CA batch ca_w4_beauty."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\phi_s^{c\\bar c s}\\), often shortened to\n\\(\\phi_s\\).  This entry covers the mixing-induced CP phase extracted from\ntime-dependent angular analyses of \\(B_s^0\\to J/\\psi K^+K^-\\) near the\n\\(\\phi\\) resonance, conventionally reported as \\(B_s^0\\to J/\\psi\\phi\\).\nThe vector--vector final state requires the experimental fit to separate\nCP-even and CP-odd angular components.",
+    "pdg_prose": "The canonical equivalent source is the HFLAV PDG 2025 \\(\\phi_s\\) input table,\nsnapshotted as \\texttt{references/B004/hflav\\_pdg2025\\_phis\\_inputs.txt} with\nsource key \\texttt{hflav\\_pdg2025\\_phis\\_inputs}.  HFLAV gives the\nall-combined average\n\\[\n  \\phi_s^{c\\bar c s}=-0.041\\pm0.016~{\\rm rad},\n  \\qquad\n  \\Delta\\Gamma_s=+0.079\\pm0.006~{\\rm ps}^{-1}.\n\\]\nFor the strict \\(B_s^0\\to J/\\psi K^+K^-\\) channel combination, HFLAV gives\n\\[\n  \\phi_s^{c\\bar c s}=-0.050\\pm0.017~{\\rm rad},\n  \\qquad\n  \\Delta\\Gamma_s=+0.077\\pm0.006~{\\rm ps}^{-1}.\n\\]\nThe dominant recent LHCb Run-2 input, snapshotted as\n\\texttt{references/B004/lhcb\\_2024\\_jpsikk\\_phis\\_arxiv.txt} with source key\n\\texttt{lhcb\\_2024\\_jpsikk\\_phis\\_arxiv}, reports\n\\[\n  \\phi_s=-0.039\\pm0.022_{\\rm stat}\\pm0.006_{\\rm syst}~{\\rm rad}\n\\]\nfrom \\(6~{\\rm fb}^{-1}\\) and approximately \\(349000\\) signal decays.  The same\nsource quotes the CKM-fit Standard Model expectation\n\\(-2\\beta_s=-0.0368^{+0.0009}_{-0.0006}~{\\rm rad}\\).",
+    "relevance": "In anarchic warped models, tree-level KK-gluon and electroweak exchange can\ngenerate a complex new contribution to \\(B_s-\\bar B_s\\) mixing.  \\(\\phi_s\\) is\ntherefore the phase complement to the \\(\\Delta m_s\\) magnitude constraint: a\npoint can satisfy the mass splitting while still shifting \\(\\arg M_{12}^s\\).\nThe process is especially clean for RS quark scans because the dominant decay\namplitude is the CKM-favored \\(b\\to c\\bar c s\\) transition, while new physics\nmainly enters through \\(\\Delta B=2\\) mixing.",
+    "post_2008": "The 2008 RS-flavor baseline in \\texttt{cfw\\_2008\\_rs\\_flavor} predates the\nLHCb era and treats neutral-meson mixing as a generic \\(\\Delta F=2\\) stress\ntest rather than as a precision \\(\\phi_s\\) input.  Since then, Tevatron, ATLAS,\nCMS, and especially LHCb measurements have turned \\(\\phi_s\\) into a\nprecision phase test.  The 2024 LHCb Run-2 analysis superseded the earlier\nRun-2 result in the same channel, added improved flavor tagging and decay-time\ncalibration, and found no evidence for polarization dependence\n(\\texttt{lhcb\\_2024\\_jpsikk\\_phis\\_arxiv}).  HFLAV's PDG 2025 combination now\nreaches \\(0.016~{\\rm rad}\\) precision and is consistent with the small SM phase\n(\\texttt{hflav\\_pdg2025\\_phis\\_inputs}).",
+    "validity": "This is a robust neutral-meson-mixing phase constraint, but it is not identical\nto a pure \\(\\arg M_{12}^s\\) observable without assumptions.  The interpretation\nuses a CKM phase convention, assumes no large new physics in the tree-dominated\ndecay amplitude, and must budget subleading penguin effects.  The vector--vector\nfinal state also requires an angular analysis and experimental correlations\nwith \\(\\Delta\\Gamma_s\\).  For the present catalog, it should be classified as a\nrobust \\(\\Delta F=2\\) phase observable with small decay-amplitude systematics.",
+    "code_coverage_prose": "\\textbf{PARTIAL.}  A focused grep for \\texttt{phi\\_s}, \\texttt{phis},\n\\texttt{J/psi}, \\texttt{Jpsi}, \\texttt{psi.*phi}, \\texttt{B\\_s.*phi}, and\n\\texttt{beta\\_s} found no direct observable implementation in the required\nimplementation and test directories.  The underlying \\(B_s\\) mixing lane exists:\n\\texttt{quarkConstraints/deltaf2.py:239} defines the \\texttt{b\\_s} input,\n\\texttt{quarkConstraints/deltaf2.py:651} stores \\(\\Delta m_s\\),\nand \\texttt{quarkConstraints/deltaf2.py:922} evaluates the \\(B_s\\) mixing\ncontribution.  However, \\texttt{quarkConstraints/deltaf2.py:929} reduces the\ncomputed complex amplitude to \\(\\lvert M_{12}^{s,\\rm NP}\\rvert\\), so the phase\nneeded for \\(\\phi_s\\) is not exposed.  The modern bridge also evaluates only\nthe magnitude-style \\(B_s\\) mixing contribution at\n\\texttt{quarkConstraints/modern/phenomenology.py:657}; the shared\n\\(\\Delta F=2\\) operator basis is documented at\n\\texttt{quarkConstraints/qcd\\_running.py:7}.",
+    "implementation_difficulty_prose": "\\textbf{LOW.}  No new operator basis is required: the existing\nSLL/SLR/VLL/VRR/LR \\(\\Delta F=2\\) machinery covers the \\(B_s\\) mixing\namplitude.  The missing work is to retain the complex \\(M_{12}^s\\), combine it\nwith the SM \\(-2\\beta_s\\) convention, and add a likelihood or tolerance policy\nincluding the HFLAV uncertainty and small penguin-systematic allowance.",
+    "key_references": "Process-local reference keys before bibliography consolidation:\n\\texttt{hflav\\_pdg2025\\_phis\\_inputs},\n\\texttt{lhcb\\_2024\\_jpsikk\\_phis\\_arxiv}, and\n\\texttt{cfw\\_2008\\_rs\\_flavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B004.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B004.tex",
+  "worklog_path": "flavor_catalog/worklogs/B004/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 4,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_hflav_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/HFLAV_phis_inputs/HFLAV_phis_inputs.pdf",
+        "snapshot_path": "flavor_catalog/references/B004/hflav_pdg2025_phis_inputs.txt",
+        "sha256": "sha256:ae8171d0b32e36087e25893f033989fdde4dd7a4179100746ca18eaec7a79cc0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "phi_s^ccs, all combined b -> c cbar s Bs0 decays = -0.041 +- 0.016 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23:   phi_s^ccs = -0.050 +/- 0.017 rad;\nL24:   DeltaGamma_s = +0.077 +/- 0.006 ps^-1.\nL25: - All combined:\nL26:   phi_s^ccs = -0.041 +/- 0.016 rad;\nL27:   DeltaGamma_s = +0.079 +/- 0.006 ps^-1.\nL28:\nL29: Reference identities in the HFLAV table for the key post-2008 inputs:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "mode_specific_jpsi_kk_average",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/osc/PDG_2025/HFLAV_phis_inputs/HFLAV_phis_inputs.pdf",
+        "snapshot_path": "flavor_catalog/references/B004/hflav_pdg2025_phis_inputs.txt",
+        "sha256": "sha256:ae8171d0b32e36087e25893f033989fdde4dd7a4179100746ca18eaec7a79cc0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "phi_s^ccs, Bs0 -> J/psi K+ K- combined = -0.05 +- 0.017 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:   phi_s^ccs = -0.033 +/- 0.018 rad;\nL21:   DeltaGamma_s = +0.085 +/- 0.004 ps^-1.\nL22: - Bs0 -> J/psi K+K- combined:\nL23:   phi_s^ccs = -0.050 +/- 0.017 rad;\nL24:   DeltaGamma_s = +0.077 +/- 0.006 ps^-1.\nL25: - All combined:\nL26:   phi_s^ccs = -0.041 +/- 0.016 rad;\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "latest_lhcb_jpsi_kk_input",
+        "source_url": "https://arxiv.org/abs/2308.01468",
+        "snapshot_path": "flavor_catalog/references/B004/lhcb_2024_jpsikk_phis_arxiv.txt",
+        "sha256": "sha256:d94a1b07a02beb47108ac6a5f7a3cc8c143655023c50e78513025e5b5d70a84e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "phi_s in Bs0 -> J/psi(mu+mu-) K+ K- near phi(1020) = -0.039 +- 0.022 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19: the phi(1020) resonance.\nL20:\nL21: The values obtained are:\nL22:   phi_s = -0.039 +/- 0.022 +/- 0.006 rad,\nL23:   DeltaGamma_s = 0.0845 +/- 0.0044 +/- 0.0024 ps^-1,\nL24:   Gamma_s - Gamma_d = -0.0056^{+0.0013}_{-0.0015} +/- 0.0014 ps^-1,\nL25: where the first uncertainty is statistical and the second systematic.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "standard_model_reference",
+        "source_url": "https://arxiv.org/abs/2308.01468",
+        "snapshot_path": "flavor_catalog/references/B004/lhcb_2024_jpsikk_phis_arxiv.txt",
+        "sha256": "sha256:d94a1b07a02beb47108ac6a5f7a3cc8c143655023c50e78513025e5b5d70a84e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "-2 beta_s = -0.0368 +- 0.0009 rad",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 33,
+                "context": "L30: Neglecting subleading loop contributions in b -> c cbar s transitions,\nL31: phi_s is predicted in the Standard Model to equal -2 beta_s. Global CKM fits\nL32: quoted by the paper give\nL33:   -2 beta_s = -0.0368^{+0.0009}_{-0.0006} rad.\nL34: At the time of the paper, the world average quoted in the introduction was\nL35:   phi_s^ccs = -0.049 +/- 0.019 rad.\nL36:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Clean Bs mixing phase constrains new b-s CP violation",
+  "priority_rationale_full": "The B_s mixing phase is a clean probe of complex RS contributions to M12^s that may evade the Delta m_s magnitude cut. The dominant decay amplitude is tree controlled, the SM phase is small, and the measured phase uncertainty is tight enough to strongly restrict new b-s CP phases. It is a leading neutral-B CP constraint, subject mainly to the CKM convention and small penguin allowances."
+}

@@ -1,0 +1,662 @@
+{
+  "process_id": "B007",
+  "family": "secondary",
+  "family_original": "beauty",
+  "tier": "SECONDARY",
+  "standard_notation": "B_s^0 \\to e^+ e^-, B^0 \\to e^+ e^-",
+  "process_name": "Rare electronic leptonic neutral-B decays",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": "Deferred by DA-4 (round_004_addendum_deferred_scope.md); Rare leptonic e-mode tails; lepton-mass suppressed vs mu-mode (B005/B006). Promoted in Wave-8 because: Top-tier; electron-specific scalar/pseudoscalar operator handle distinct from drafted B005/B006. Lower implementation priority than Waves 1-7 PRIMARY entries.",
+  "promoted_in_wave": 8,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "No B_s0 -> e+e-, B0 -> e+e-, b -> s e e, or b -> d e e rare-leptonic observable implementation was found in the required implementation/test directories.",
+      "quarkConstraints/deltaf2.py:239 defines the existing b_s input as B_s mixing, not B_s0 -> e+e-.",
+      "quarkConstraints/deltaf2.py:922 defines evaluate_bs_mixing for Delta F = 2 B_s mixing.",
+      "quarkConstraints/deltaf2.py:225 defines the existing b_d input as B_d mixing, not B0 -> e+e-.",
+      "quarkConstraints/deltaf2.py:903 defines evaluate_bd_mixing for Delta F = 2 B_d mixing."
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|b.?->.?d|X_s|K\\\\*|R_K|R_D|B_s.*e|B_s.*mu|B_d.*e|B_d.*mu|B0.*e|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"B_s.*e|Bs.*e|B0_s.*e|B\\\\^0_s.*e|B_d.*e|B0d.*e|B\\\\^0_d.*e|B\\\\^0.*e|B0.*e|e\\\\+.*e|electron.*electron|dielectron|C_10|C10|scalar.*operator|pseudoscalar|rare_decay|rare decay|rare leptonic|b[[:space:]-]*->[[:space:]-]*[sd].*e|b[[:space:]]+to[[:space:]]+[sd].*e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026_BsBdEe",
+      "observable": "BR(B_s0 -> e+e-)",
+      "value": 9.4e-09,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": null,
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.20",
+      "snapshot_path": "flavor_catalog/references/B007/pdg_2026_bsee_bdee.txt",
+      "sha256": "sha256:bec216f3aa33f76e4aa76582c9716b123f3c0a08902c7824b1d098e29da716bb",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "PDG2026_BsBdEe",
+      "observable": "BR(B0 -> e+e-)",
+      "value": 2.5e-09,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": null,
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.6",
+      "snapshot_path": "flavor_catalog/references/B007/pdg_2026_bsee_bdee.txt",
+      "sha256": "sha256:bec216f3aa33f76e4aa76582c9716b123f3c0a08902c7824b1d098e29da716bb",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "LHCb2020_BsBdEe",
+      "observable": "BR(B_s0 -> e+e-)",
+      "value": 1.12e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2020,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2003.03999",
+      "snapshot_path": "flavor_catalog/references/B007/lhcb_2003_03999_bsee_bdee.txt",
+      "sha256": "sha256:dd07d58ad222492da67a92a2cc39d907cc09f47842745556546493817a5c781f",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "LHCb2020_BsBdEe",
+      "observable": "BR(B0 -> e+e-)",
+      "value": 3e-09,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2020,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2003.03999",
+      "snapshot_path": "flavor_catalog/references/B007/lhcb_2003_03999_bsee_bdee.txt",
+      "sha256": "sha256:dd07d58ad222492da67a92a2cc39d907cc09f47842745556546493817a5c781f",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "CDF2009_BsBdEe",
+      "observable": "BR(B_s0 -> e+e-)",
+      "value": 2.8e-07,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2009,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/0901.3803",
+      "snapshot_path": "flavor_catalog/references/B007/cdf_0901_3803_bsee_bdee.txt",
+      "sha256": "sha256:151fba3738b1a6798d0f8fa6656ce0298fcfe4162a8bf8c3d9dbe7dcc661d2e4",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "CDF2009_BsBdEe",
+      "observable": "BR(B0 -> e+e-)",
+      "value": 8.3e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2009,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/0901.3803",
+      "snapshot_path": "flavor_catalog/references/B007/cdf_0901_3803_bsee_bdee.txt",
+      "sha256": "sha256:151fba3738b1a6798d0f8fa6656ce0298fcfe4162a8bf8c3d9dbe7dcc661d2e4",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "BaBar2008_BdEe",
+      "observable": "BR(B0 -> e+e-)",
+      "value": 1.13e-07,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2008,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/0712.1516",
+      "snapshot_path": "flavor_catalog/references/B007/babar_0712_1516_bdee.txt",
+      "sha256": "sha256:dbaf894843895f496f8a88fd8391ede7b12d68891e9ad4ef2fd29ff83a8cb613",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper"
+    },
+    {
+      "label": "PDG2026_BsBdEe",
+      "observable": "BR(B0 -> e+e-)",
+      "value": 1.9e-07,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2003,
+      "experiment": null,
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.6",
+      "snapshot_path": "flavor_catalog/references/B007/pdg_2026_bsee_bdee.txt",
+      "sha256": "sha256:bec216f3aa33f76e4aa76582c9716b123f3c0a08902c7824b1d098e29da716bb",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper"
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "cfw_2008_rs_flavor": {
+      "source_key": "CsakiFalkowskiWeiler2008_RSFlavor",
+      "arxiv_id": "0804.1954",
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/B007/cfw_0804_1954_rs_flavor.txt",
+      "sha256": "sha256:4dce656efcce97da951efca913c5b277c03df30d4c30edc8c6a9c5d54efe3e35",
+      "reference_scales": [
+        {
+          "label": "standard RS-type KK-gluon mass scale quoted in abstract",
+          "value": 21,
+          "units": "TeV",
+          "kind": "theory reference scale"
+        },
+        {
+          "label": "pseudo-Goldstone scenario KK-gluon mass scale quoted in abstract",
+          "value": 33,
+          "units": "TeV",
+          "kind": "theory reference scale"
+        }
+      ]
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": {
+    "standard_model_predictions": [
+      {
+        "source_key": "LHCb2020_BsBdEe",
+        "context": "LHCb SM context, calculated from Bobeth et al. and neglecting percent-level QED corrections.",
+        "snapshot_path": "flavor_catalog/references/B007/lhcb_2003_03999_bsee_bdee.txt",
+        "sha256": "sha256:dd07d58ad222492da67a92a2cc39d907cc09f47842745556546493817a5c781f",
+        "predictions": [
+          {
+            "observable": "SM BR(B_s0 -> e+e-)",
+            "value": 8.6e-14,
+            "uncertainty": 3.6e-15,
+            "units": "branching fraction"
+          },
+          {
+            "observable": "SM BR(B0 -> e+e-)",
+            "value": 2.41e-15,
+            "uncertainty": 1.3e-16,
+            "units": "branching fraction"
+          }
+        ]
+      },
+      {
+        "source_key": "BobethEtAl2013_BqllSM",
+        "arxiv_id": "1311.0903",
+        "source_url": "https://arxiv.org/abs/1311.0903",
+        "access_date": "2026-05-17",
+        "snapshot_path": "flavor_catalog/references/B007/bobeth_1311_0903_bqll_sm.txt",
+        "sha256": "sha256:d70267c9636ab74d909cfed2d6a1f10cf90dcb8baf65d9e4faf1dba38101e199",
+        "predictions": [
+          {
+            "observable": "SM BR(B_s -> e+e-)",
+            "value": 8.54e-14,
+            "uncertainty": 5.5e-15,
+            "units": "branching fraction"
+          },
+          {
+            "observable": "SM BR(B_d -> e+e-)",
+            "value": 2.48e-15,
+            "uncertainty": 2.1e-16,
+            "units": "branching fraction"
+          }
+        ]
+      }
+    ],
+    "new_physics_interpretation": [
+      {
+        "source_key": "FleischerJaarsmaTetlalmatziXolocotzi2017_BqllNP",
+        "arxiv_id": "1703.10160",
+        "source_url": "https://arxiv.org/abs/1703.10160",
+        "access_date": "2026-05-17",
+        "snapshot_path": "flavor_catalog/references/B007/fleischer_1703_10160_bqll_np.txt",
+        "sha256": "sha256:ca9e87fa211c9b678bfa5f621abe5db086574e559d8685b5c214ea88dec8a8c8",
+        "relevance": "Motivates B_s,d -> e+e- as electron-specific probes of scalar/pseudoscalar four-fermion operators."
+      }
+    ]
+  },
+  "post_2010_developments": null,
+  "source_shas": {
+    "babar_0712_1516_bdee.txt": "sha256:dbaf894843895f496f8a88fd8391ede7b12d68891e9ad4ef2fd29ff83a8cb613",
+    "bobeth_1311_0903_bqll_sm.txt": "sha256:d70267c9636ab74d909cfed2d6a1f10cf90dcb8baf65d9e4faf1dba38101e199",
+    "cdf_0901_3803_bsee_bdee.txt": "sha256:151fba3738b1a6798d0f8fa6656ce0298fcfe4162a8bf8c3d9dbe7dcc661d2e4",
+    "cfw_0804_1954_rs_flavor.txt": "sha256:4dce656efcce97da951efca913c5b277c03df30d4c30edc8c6a9c5d54efe3e35",
+    "fleischer_1703_10160_bqll_np.txt": "sha256:ca9e87fa211c9b678bfa5f621abe5db086574e559d8685b5c214ea88dec8a8c8",
+    "lhcb_2003_03999_bsee_bdee.txt": "sha256:dd07d58ad222492da67a92a2cc39d907cc09f47842745556546493817a5c781f",
+    "pdg_2026_bsee_bdee.txt": "sha256:bec216f3aa33f76e4aa76582c9716b123f3c0a08902c7824b1d098e29da716bb"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "DRAFT",
+      "state": "DRAFT",
+      "at": "2026-05-17T02:09:36-04:00",
+      "timestamp": "2026-05-17T02:09:36-04:00",
+      "agent_id": "PKA-B007",
+      "reason": "Initial Wave-8 SECONDARY draft state created for B007."
+    },
+    {
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-17T02:09:36-04:00",
+      "timestamp": "2026-05-17T02:09:36-04:00",
+      "agent_id": "PKA-B007",
+      "reason": "Initial PKA draft and source snapshot deposit for B_s0/B0 -> e+e-."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-17T02:37:14-04:00",
+      "timestamp": "2026-05-17T02:37:14-04:00",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "WA Wave-8 B-rare-leptonic polish and sidecar normalization."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-17T02:51:07-04:00",
+      "timestamp": "2026-05-17T02:51:07-04:00",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA Wave-8 B-rare-leptonic cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w8_B_rare_leptonic.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T14:31:04-04:00",
+      "agent_id": "Opus-round-4",
+      "round_id": "opus_round_004",
+      "reason": "Opus round 4 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_004_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T14:31:05-04:00",
+      "agent_id": "factcheck-codex-beauty-w8",
+      "agent": "factcheck-codex-beauty-w8",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-8 SECONDARY fact-check addendum (factcheck_beauty.md)."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(B_s^0\\to e^+e^-\\) and \\(B^0\\to e^+e^-\\).\nThis entry covers rare electronic leptonic neutral-\\(B\\) decays,\nrespectively the \\(b\\to s e^+e^-\\) and \\(b\\to d e^+e^-\\) flavor-changing\nneutral-current tails.  It is the electron-mode companion to the muonic\nentries \\(B005\\) and \\(B006\\), but is cataloged separately because scalar and\npseudoscalar electron operators can remove the Standard Model helicity\nsuppression in ways not captured by a direct muon-mode rescaling.",
+    "pdg_prose": "The current PDG live/API listings (2026 edition, accessed 2026-05-17)\nquote only upper limits:\n\\[\n  {\\cal B}(B_s^0\\to e^+e^-) < 9.4\\times 10^{-9}\n  \\quad(90\\%\\ {\\rm CL}),\n\\]\nassuming no contribution from \\(B^0\\to e^+e^-\\), and\n\\[\n  {\\cal B}(B^0\\to e^+e^-) < 2.5\\times 10^{-9}\n  \\quad(90\\%\\ {\\rm CL}),\n\\]\nassuming no contribution from \\(B_s^0\\to e^+e^-\\).  The source key is\n\\texttt{PDG2026\\_BsBdEe}, with local snapshot\n\\texttt{flavor\\_catalog/references/B007/pdg\\_2026\\_bsee\\_bdee.txt}.  PDG uses\nthe LHCb 2020 PRL result as the active input.  The LHCb paper also reports the\ncorresponding \\(95\\%\\)-CL limits \\(11.2\\times10^{-9}\\) and \\(3.0\\times10^{-9}\\),\nrespectively, recorded under \\texttt{LHCb2020\\_BsBdEe}.",
+    "relevance": "\\textbf{SECONDARY tier.}  Per \\texttt{flavor\\_catalog/PRIORITY\\_TIERS.md},\nthis process is a deferred Wave-8 promotion: it is less urgent than the\nWave-1--7 PRIMARY set, but it probes an electron-specific direction absent\nfrom \\(B005/B006\\).  In anarchic RS models, non-universal fermion localization\ngenerates flavor-changing \\(Z\\), KK electroweak-gauge, Higgs, radion, or other\nscalar exchanges after rotating to the mass basis.  Axial-vector contributions\nremain helicity suppressed in the Standard Model pattern, while scalar and\npseudoscalar operators can be chirality enhanced relative to the electronic SM\namplitude.  The mode is therefore a useful handle on electron-sector\nmisalignment and on any 5D-Yukawa or brane-Higgs structure that feeds\n\\(C_S^{(\\prime)}\\) or \\(C_P^{(\\prime)}\\) differently from \\(C_{10}^{(\\prime)}\\).",
+    "post_2008": "The CFW RS-flavor baseline is arXiv:0804.1954\n(\\texttt{CsakiFalkowskiWeiler2008\\_RSFlavor}); its quoted KK reference scales\nare theory anchors and are kept out of \\texttt{pdg\\_or\\_equivalent}.  The\nexperimental landscape then moved through CDF's arXiv:0901.3803 search, which\nset the previous \\(B_s^0\\) and \\(B^0\\) electronic limits later superseded by\nLHCb.  BaBar's arXiv:0712.1516 and Belle's older \\(B^0\\to e^+e^-\\) bound remain\nhistorical \\(B_d\\)-mode context in the PDG table.  Bobeth et al.,\narXiv:1311.0903, supplied the reduced-uncertainty SM \\(B_{s,d}\\to\\ell^+\\ell^-\\)\npredictions and made explicit that the electron modes are suppressed by the\nlepton mass in the SM.  Fleischer, Jaarsma, and Tetlalmatzi-Xolocotzi,\narXiv:1703.10160, emphasized that new physics in the \\(B_{s,d}\\to e^+e^-\\)\nchannels can be much less suppressed than the SM electron amplitude in\nscalar/pseudoscalar scenarios.  LHCb's arXiv:2003.03999 search is the decisive\npost-2008 experimental update and supersedes the previous CDF limits.",
+    "validity": "The canonical observables are robust experimental upper limits, but their model\ninterpretation is not a direct neutral-meson-mixing constraint.  The LHCb limits\nare quoted one channel at a time, assuming no contribution from the other\nneutral-\\(B\\) electronic mode, and the \\(B_s^0\\) result assumes the mean\n\\(B_s^0\\) lifetime; the paper reports a \\(2.4\\%\\) shift for SM-like CP-odd or\nCP-even alternatives.  A production RS implementation needs a consistent\n\\(\\Delta B=1\\) Hamiltonian, the \\(B_q\\) decay constants and CKM inputs as\ntheory inputs, a convention for electron bremsstrahlung/QED effects, and\nseparate scalar and pseudoscalar Wilson coefficients.  The limits are strongest\nas exclusions on large electron-specific scalar/pseudoscalar amplitudes rather\nthan as precision tests of the tiny SM prediction.",
+    "code_coverage_prose": "\\textbf{NO.}  The required greps over \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no \\(B_s^0\\to e^+e^-\\),\n\\(B^0\\to e^+e^-\\), \\(b\\to s e e\\), or \\(b\\to d e e\\) rare-decay\nimplementation.  The exact nearby hits are neutral \\(B_d/B_s\\) mixing inputs at\n\\texttt{quarkConstraints/deltaf2.py:225} and\n\\texttt{quarkConstraints/deltaf2.py:239}, and the corresponding mixing\nevaluators at \\texttt{quarkConstraints/deltaf2.py:903} and\n\\texttt{quarkConstraints/deltaf2.py:922}; they are \\(\\Delta F=2\\), not this\n\\(\\Delta B=1\\) electronic leptonic observable.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  The first useful implementation can share the pure-leptonic\n\\(\\Delta B=1\\) machinery needed for \\(B005/B006\\): \\(C_{10}^{(\\prime)}\\),\n\\(C_S^{(\\prime)}\\), \\(C_P^{(\\prime)}\\), \\(f_{B_q}\\), lifetimes, CKM inputs, and\na branching-ratio formula.  The electron channel adds care around QED tails and\nthe LHCb assumptions, but it does not require angular observables or exclusive\nform-factor likelihoods.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026\\_BsBdEe}, \\texttt{LHCb2020\\_BsBdEe},\n\\texttt{BobethEtAl2013\\_BqllSM},\n\\texttt{CDF2009\\_BsBdEe},\n\\texttt{FleischerJaarsmaTetlalmatziXolocotzi2017\\_BqllNP},\n\\texttt{BaBar2008\\_BdEe}, and\n\\texttt{CsakiFalkowskiWeiler2008\\_RSFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/secondary/beauty/B007.yaml",
+  "source_tex": "flavor_catalog/processes/secondary/beauty/B007.tex",
+  "worklog_path": "flavor_catalog/worklogs/B007/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 7,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "values[0]:pdg2026_bs_ee_90cl",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.20",
+        "snapshot_path": "flavor_catalog/references/B007/pdg_2026_bsee_bdee.txt",
+        "sha256": "sha256:bec216f3aa33f76e4aa76582c9716b123f3c0a08902c7824b1d098e29da716bb",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> e+e-) < 9.4e-9 90% CL",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8:\nL9: PDG API listing S086.20\nL10: Edition: 2026\nL11: Description: B_s()0 --> e+ e-\nL12: Related data: S086R18, G(B_s0 --> e+ e-)/G(total)\nL13: Note: Test for DeltaB = 1 weak neutral current.\nL14:\n"
+              },
+              {
+                "line_number": 12,
+                "context": "L9: PDG API listing S086.20\nL10: Edition: 2026\nL11: Description: B_s()0 --> e+ e-\nL12: Related data: S086R18, G(B_s0 --> e+ e-)/G(total)\nL13: Note: Test for DeltaB = 1 weak neutral current.\nL14:\nL15: Canonical measurement:\n"
+              },
+              {
+                "line_number": 25,
+                "context": "L22:   confidence_level: 90.0\nL23:   technique: LHCB\nL24:   comment: p p at 7, 8, 13 TeV\nL25:   VALUE: <9.4 E-9\nL26:   numeric value: 9.4E-9\nL27:   limit_type: U\nL28:   used_in_average: true\n"
+              },
+              {
+                "line_number": 67,
+                "context": "L64:   p pbar at 1.96 TeV.\nL65:   AUBERT 2008P, PR D77 032007, BABR, 90.0 CL, VALUE <11.3 E-8,\nL66:   e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.\nL67:   AUBERT 2005W, PRL 94 221803, BABR, 90.0 CL, VALUE <6.1 E-8,\nL68:   replaced by AUBERT 2008P.\nL69:   CHANG 2003, PR D68 111101, BELLE, 90.0 CL, VALUE <1.9 E-7,\nL70:   e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[1]:pdg2026_bd_ee_90cl",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.6",
+        "snapshot_path": "flavor_catalog/references/B007/pdg_2026_bsee_bdee.txt",
+        "sha256": "sha256:bec216f3aa33f76e4aa76582c9716b123f3c0a08902c7824b1d098e29da716bb",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B0 -> e+e-) < 2.5e-9 90% CL",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18:   publication_year: 2020\nL19:   doi: 10.1103/PhysRevLett.124.211802\nL20:   inspire_id: 1784438\nL21:   title: Search for the Rare Decays B^0_s to e+e- and B^0 to e+e-\nL22:   confidence_level: 90.0\nL23:   technique: LHCB\nL24:   comment: p p at 7, 8, 13 TeV\n"
+              },
+              {
+                "line_number": 26,
+                "context": "L23:   technique: LHCB\nL24:   comment: p p at 7, 8, 13 TeV\nL25:   VALUE: <9.4 E-9\nL26:   numeric value: 9.4E-9\nL27:   limit_type: U\nL28:   used_in_average: true\nL29:   used_in_fit: true\n"
+              },
+              {
+                "line_number": 40,
+                "context": "L37:\nL38: PDG API listing S042.6\nL39: Edition: 2026\nL40: Description: B0 --> e+ e-\nL41: Related data: S042R6, G(B0 --> e+ e-)/G(total)\nL42: Note: Test for DeltaB=1 weak neutral current. Allowed by higher-order\nL43: electroweak interactions.\n"
+              },
+              {
+                "line_number": 41,
+                "context": "L38: PDG API listing S042.6\nL39: Edition: 2026\nL40: Description: B0 --> e+ e-\nL41: Related data: S042R6, G(B0 --> e+ e-)/G(total)\nL42: Note: Test for DeltaB=1 weak neutral current. Allowed by higher-order\nL43: electroweak interactions.\nL44:\n"
+              },
+              {
+                "line_number": 51,
+                "context": "L48:   publication_year: 2020\nL49:   doi: 10.1103/PhysRevLett.124.211802\nL50:   inspire_id: 1784438\nL51:   title: Search for the Rare Decays B^0_s to e+e- and B^0 to e+e-\nL52:   confidence_level: 90.0\nL53:   technique: LHCB\nL54:   comment: p p at 7, 8, 13 TeV\n"
+              },
+              {
+                "line_number": 55,
+                "context": "L52:   confidence_level: 90.0\nL53:   technique: LHCB\nL54:   comment: p p at 7, 8, 13 TeV\nL55:   VALUE: <2.5 E-9\nL56:   numeric value: 2.5E-9\nL57:   limit_type: U\nL58:   used_in_average: true\n"
+              },
+              {
+                "line_number": 56,
+                "context": "L53:   technique: LHCB\nL54:   comment: p p at 7, 8, 13 TeV\nL55:   VALUE: <2.5 E-9\nL56:   numeric value: 2.5E-9\nL57:   limit_type: U\nL58:   used_in_average: true\nL59:   used_in_fit: true\n"
+              },
+              {
+                "line_number": 60,
+                "context": "L57:   limit_type: U\nL58:   used_in_average: true\nL59:   used_in_fit: true\nL60:   footnote: Assumes no contribution from B_s()0 --> e+ e- decays.\nL61:\nL62: Prior PDG-listed measurements:\nL63:   AALTONEN 2009P, PRL 102 201801, CDF, 90.0 CL, VALUE <8.3 E-8,\n"
+              },
+              {
+                "line_number": 66,
+                "context": "L63:   AALTONEN 2009P, PRL 102 201801, CDF, 90.0 CL, VALUE <8.3 E-8,\nL64:   p pbar at 1.96 TeV.\nL65:   AUBERT 2008P, PR D77 032007, BABR, 90.0 CL, VALUE <11.3 E-8,\nL66:   e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.\nL67:   AUBERT 2005W, PRL 94 221803, BABR, 90.0 CL, VALUE <6.1 E-8,\nL68:   replaced by AUBERT 2008P.\nL69:   CHANG 2003, PR D68 111101, BELLE, 90.0 CL, VALUE <1.9 E-7,\n"
+              },
+              {
+                "line_number": 70,
+                "context": "L67:   AUBERT 2005W, PRL 94 221803, BABR, 90.0 CL, VALUE <6.1 E-8,\nL68:   replaced by AUBERT 2008P.\nL69:   CHANG 2003, PR D68 111101, BELLE, 90.0 CL, VALUE <1.9 E-7,\nL70:   e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[2]:lhcb2020_bs_ee_95cl",
+        "source_url": "https://arxiv.org/abs/2003.03999",
+        "snapshot_path": "flavor_catalog/references/B007/lhcb_2003_03999_bsee_bdee.txt",
+        "sha256": "sha256:dd07d58ad222492da67a92a2cc39d907cc09f47842745556546493817a5c781f",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> e+e-) < 1.12e-8 95% CL",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16:   No signal is observed.\nL17:\nL18:   Assuming no contribution from B0 -> e+e- decays:\nL19:     B(Bs0 -> e+e-) < 9.4 (11.2) x 10^-9 at 90 (95)% CL.\nL20:\nL21:   Assuming no contribution from Bs0 -> e+e- decays:\nL22:     B(B0 -> e+e-) < 2.5 (3.0) x 10^-9 at 90 (95)% CL.\n"
+              },
+              {
+                "line_number": 22,
+                "context": "L19:     B(Bs0 -> e+e-) < 9.4 (11.2) x 10^-9 at 90 (95)% CL.\nL20:\nL21:   Assuming no contribution from Bs0 -> e+e- decays:\nL22:     B(B0 -> e+e-) < 2.5 (3.0) x 10^-9 at 90 (95)% CL.\nL23:\nL24: Context from the paper introduction:\nL25:   Standard Model predictions quoted by LHCb, calculated from Ref. [9]\n"
+              },
+              {
+                "line_number": 33,
+                "context": "L30:   With contributions beyond the SM, these branching fractions could be\nL31:   significantly larger and close to then-current experimental bounds.\nL32:   The previous CDF bounds quoted by LHCb were:\nL33:     B(Bs0 -> e+e-) < 2.8 x 10^-7 at 90% CL.\nL34:     B(B0 -> e+e-) < 8.3 x 10^-8 at 90% CL.\nL35:\nL36: Conclusion/context:\n"
+              },
+              {
+                "line_number": 34,
+                "context": "L31:   significantly larger and close to then-current experimental bounds.\nL32:   The previous CDF bounds quoted by LHCb were:\nL33:     B(Bs0 -> e+e-) < 2.8 x 10^-7 at 90% CL.\nL34:     B(B0 -> e+e-) < 8.3 x 10^-8 at 90% CL.\nL35:\nL36: Conclusion/context:\nL37:   The search uses a total integrated luminosity of 5 fb^-1.  Assuming\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[3]:lhcb2020_bd_ee_95cl",
+        "source_url": "https://arxiv.org/abs/2003.03999",
+        "snapshot_path": "flavor_catalog/references/B007/lhcb_2003_03999_bsee_bdee.txt",
+        "sha256": "sha256:dd07d58ad222492da67a92a2cc39d907cc09f47842745556546493817a5c781f",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B0 -> e+e-) < 3e-9 95% CL",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv abstract page and local pdftotext extract\nL2: Access date: 2026-05-17\nL3: URL: https://arxiv.org/abs/2003.03999\nL4: arXiv: 2003.03999\nL5: DOI: 10.1103/PhysRevLett.124.211802\nL6: Title: Search for the rare decays B^0_s -> e+e- and B^0 -> e+e-\n"
+              },
+              {
+                "line_number": 4,
+                "context": "L1: Source: arXiv abstract page and local pdftotext extract\nL2: Access date: 2026-05-17\nL3: URL: https://arxiv.org/abs/2003.03999\nL4: arXiv: 2003.03999\nL5: DOI: 10.1103/PhysRevLett.124.211802\nL6: Title: Search for the rare decays B^0_s -> e+e- and B^0 -> e+e-\nL7: Authors: LHCb Collaboration, R. Aaij et al.\n"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: Access date: 2026-05-17\nL3: URL: https://arxiv.org/abs/2003.03999\nL4: arXiv: 2003.03999\nL5: DOI: 10.1103/PhysRevLett.124.211802\nL6: Title: Search for the rare decays B^0_s -> e+e- and B^0 -> e+e-\nL7: Authors: LHCb Collaboration, R. Aaij et al.\nL8: Publication: Phys. Rev. Lett. 124 (2020) 211802\n"
+              },
+              {
+                "line_number": 6,
+                "context": "L3: URL: https://arxiv.org/abs/2003.03999\nL4: arXiv: 2003.03999\nL5: DOI: 10.1103/PhysRevLett.124.211802\nL6: Title: Search for the rare decays B^0_s -> e+e- and B^0 -> e+e-\nL7: Authors: LHCb Collaboration, R. Aaij et al.\nL8: Publication: Phys. Rev. Lett. 124 (2020) 211802\nL9:\n"
+              },
+              {
+                "line_number": 13,
+                "context": "L10: Minimal extract for B007.\nL11:\nL12: Abstract/result:\nL13:   A search for Bs0 -> e+ e- and B0 -> e+ e- is performed using LHCb\nL14:   proton-proton data at center-of-mass energies of 7, 8, and 13 TeV,\nL15:   corresponding to integrated luminosities of 1, 2, and 2 fb^-1.\nL16:   No signal is observed.\n"
+              },
+              {
+                "line_number": 14,
+                "context": "L11:\nL12: Abstract/result:\nL13:   A search for Bs0 -> e+ e- and B0 -> e+ e- is performed using LHCb\nL14:   proton-proton data at center-of-mass energies of 7, 8, and 13 TeV,\nL15:   corresponding to integrated luminosities of 1, 2, and 2 fb^-1.\nL16:   No signal is observed.\nL17:\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15:   corresponding to integrated luminosities of 1, 2, and 2 fb^-1.\nL16:   No signal is observed.\nL17:\nL18:   Assuming no contribution from B0 -> e+e- decays:\nL19:     B(Bs0 -> e+e-) < 9.4 (11.2) x 10^-9 at 90 (95)% CL.\nL20:\nL21:   Assuming no contribution from Bs0 -> e+e- decays:\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:   No signal is observed.\nL17:\nL18:   Assuming no contribution from B0 -> e+e- decays:\nL19:     B(Bs0 -> e+e-) < 9.4 (11.2) x 10^-9 at 90 (95)% CL.\nL20:\nL21:   Assuming no contribution from Bs0 -> e+e- decays:\nL22:     B(B0 -> e+e-) < 2.5 (3.0) x 10^-9 at 90 (95)% CL.\n"
+              },
+              {
+                "line_number": 21,
+                "context": "L18:   Assuming no contribution from B0 -> e+e- decays:\nL19:     B(Bs0 -> e+e-) < 9.4 (11.2) x 10^-9 at 90 (95)% CL.\nL20:\nL21:   Assuming no contribution from Bs0 -> e+e- decays:\nL22:     B(B0 -> e+e-) < 2.5 (3.0) x 10^-9 at 90 (95)% CL.\nL23:\nL24: Context from the paper introduction:\n"
+              },
+              {
+                "line_number": 22,
+                "context": "L19:     B(Bs0 -> e+e-) < 9.4 (11.2) x 10^-9 at 90 (95)% CL.\nL20:\nL21:   Assuming no contribution from Bs0 -> e+e- decays:\nL22:     B(B0 -> e+e-) < 2.5 (3.0) x 10^-9 at 90 (95)% CL.\nL23:\nL24: Context from the paper introduction:\nL25:   Standard Model predictions quoted by LHCb, calculated from Ref. [9]\n"
+              },
+              {
+                "line_number": 27,
+                "context": "L24: Context from the paper introduction:\nL25:   Standard Model predictions quoted by LHCb, calculated from Ref. [9]\nL26:   and neglecting QED corrections expected at the percent level:\nL27:     B(Bs0 -> e+e-) = (8.60 +- 0.36) x 10^-14.\nL28:     B(B0 -> e+e-) = (2.41 +- 0.13) x 10^-15.\nL29:\nL30:   With contributions beyond the SM, these branching fractions could be\n"
+              },
+              {
+                "line_number": 28,
+                "context": "L25:   Standard Model predictions quoted by LHCb, calculated from Ref. [9]\nL26:   and neglecting QED corrections expected at the percent level:\nL27:     B(Bs0 -> e+e-) = (8.60 +- 0.36) x 10^-14.\nL28:     B(B0 -> e+e-) = (2.41 +- 0.13) x 10^-15.\nL29:\nL30:   With contributions beyond the SM, these branching fractions could be\nL31:   significantly larger and close to then-current experimental bounds.\n"
+              },
+              {
+                "line_number": 33,
+                "context": "L30:   With contributions beyond the SM, these branching fractions could be\nL31:   significantly larger and close to then-current experimental bounds.\nL32:   The previous CDF bounds quoted by LHCb were:\nL33:     B(Bs0 -> e+e-) < 2.8 x 10^-7 at 90% CL.\nL34:     B(B0 -> e+e-) < 8.3 x 10^-8 at 90% CL.\nL35:\nL36: Conclusion/context:\n"
+              },
+              {
+                "line_number": 34,
+                "context": "L31:   significantly larger and close to then-current experimental bounds.\nL32:   The previous CDF bounds quoted by LHCb were:\nL33:     B(Bs0 -> e+e-) < 2.8 x 10^-7 at 90% CL.\nL34:     B(B0 -> e+e-) < 8.3 x 10^-8 at 90% CL.\nL35:\nL36: Conclusion/context:\nL37:   The search uses a total integrated luminosity of 5 fb^-1.  Assuming\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[4]:cdf2009_bs_ee_90cl",
+        "source_url": "https://arxiv.org/abs/0901.3803",
+        "snapshot_path": "flavor_catalog/references/B007/cdf_0901_3803_bsee_bdee.txt",
+        "sha256": "sha256:151fba3738b1a6798d0f8fa6656ce0298fcfe4162a8bf8c3d9dbe7dcc661d2e4",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> e+e-) < 2.8e-7 90% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19:   limits should appear.  The exact B^0_(s) -> e+e- numerical values are\nL20:   taken from the PDG API extract and from the LHCb 2020 paper's reference\nL21:   to this CDF result:\nL22:     B(Bs0 -> e+e-) < 2.8 x 10^-7 at 90% CL.\nL23:     B(B0 -> e+e-) < 8.3 x 10^-8 at 90% CL.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[5]:cdf2009_bd_ee_90cl",
+        "source_url": "https://arxiv.org/abs/0901.3803",
+        "snapshot_path": "flavor_catalog/references/B007/cdf_0901_3803_bsee_bdee.txt",
+        "sha256": "sha256:151fba3738b1a6798d0f8fa6656ce0298fcfe4162a8bf8c3d9dbe7dcc661d2e4",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B0 -> e+e-) < 8.3e-8 90% CL",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 6,
+                "context": "L3: URL: https://arxiv.org/abs/0901.3803\nL4: arXiv: 0901.3803\nL5: DOI: 10.1103/PhysRevLett.102.201801\nL6: Title: Search for the Decays B^0_(s) -> e+mu- and B^0_(s) -> e+e- in CDF Run II\nL7: Authors: CDF Collaboration, T. Aaltonen et al.\nL8:\nL9: Minimal extract for B007.\n"
+              },
+              {
+                "line_number": 12,
+                "context": "L9: Minimal extract for B007.\nL10:\nL11: Abstract/context:\nL12:   The CDF Run II search covers lepton-flavor-violating B^0_(s) -> e+mu-\nL13:   and flavor-changing neutral-current B^0_(s) -> e+e- decays.  It used\nL14:   2 fb^-1 of p pbar collisions at sqrt(s) = 1.96 TeV collected with CDF II.\nL15:   The observed number of B^0_(s) candidates was consistent with background.\n"
+              },
+              {
+                "line_number": 13,
+                "context": "L10:\nL11: Abstract/context:\nL12:   The CDF Run II search covers lepton-flavor-violating B^0_(s) -> e+mu-\nL13:   and flavor-changing neutral-current B^0_(s) -> e+e- decays.  It used\nL14:   2 fb^-1 of p pbar collisions at sqrt(s) = 1.96 TeV collected with CDF II.\nL15:   The observed number of B^0_(s) candidates was consistent with background.\nL16:\n"
+              },
+              {
+                "line_number": 15,
+                "context": "L12:   The CDF Run II search covers lepton-flavor-violating B^0_(s) -> e+mu-\nL13:   and flavor-changing neutral-current B^0_(s) -> e+e- decays.  It used\nL14:   2 fb^-1 of p pbar collisions at sqrt(s) = 1.96 TeV collected with CDF II.\nL15:   The observed number of B^0_(s) candidates was consistent with background.\nL16:\nL17: Exact electronic limits used for B007:\nL18:   The arXiv abstract metadata repeats the e+mu limit text where the e+e-\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:\nL17: Exact electronic limits used for B007:\nL18:   The arXiv abstract metadata repeats the e+mu limit text where the e+e-\nL19:   limits should appear.  The exact B^0_(s) -> e+e- numerical values are\nL20:   taken from the PDG API extract and from the LHCb 2020 paper's reference\nL21:   to this CDF result:\nL22:     B(Bs0 -> e+e-) < 2.8 x 10^-7 at 90% CL.\n"
+              },
+              {
+                "line_number": 22,
+                "context": "L19:   limits should appear.  The exact B^0_(s) -> e+e- numerical values are\nL20:   taken from the PDG API extract and from the LHCb 2020 paper's reference\nL21:   to this CDF result:\nL22:     B(Bs0 -> e+e-) < 2.8 x 10^-7 at 90% CL.\nL23:     B(B0 -> e+e-) < 8.3 x 10^-8 at 90% CL.\n"
+              },
+              {
+                "line_number": 23,
+                "context": "L20:   taken from the PDG API extract and from the LHCb 2020 paper's reference\nL21:   to this CDF result:\nL22:     B(Bs0 -> e+e-) < 2.8 x 10^-7 at 90% CL.\nL23:     B(B0 -> e+e-) < 8.3 x 10^-8 at 90% CL.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[6]:babar2008_bd_ee_90cl",
+        "source_url": "https://arxiv.org/abs/0712.1516",
+        "snapshot_path": "flavor_catalog/references/B007/babar_0712_1516_bdee.txt",
+        "sha256": "sha256:dbaf894843895f496f8a88fd8391ede7b12d68891e9ad4ef2fd29ff83a8cb613",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B0 -> e+e-) < 1.13e-7 90% CL",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12:   BABAR searched for B0 -> e+e-, B0 -> mu+mu-, and B0 -> e mu using\nL13:   data corresponding to 384 x 10^6 BBbar pairs.  No evidence was found.\nL14:   The 90% CL upper limits included:\nL15:     B(B0 -> e+e-) < 11.3 x 10^-8.\nL16:     B(B0 -> mu+mu-) < 5.2 x 10^-8.\nL17:     B(B0 -> e mu) < 9.2 x 10^-8.\n"
+              },
+              {
+                "line_number": 16,
+                "context": "L13:   data corresponding to 384 x 10^6 BBbar pairs.  No evidence was found.\nL14:   The 90% CL upper limits included:\nL15:     B(B0 -> e+e-) < 11.3 x 10^-8.\nL16:     B(B0 -> mu+mu-) < 5.2 x 10^-8.\nL17:     B(B0 -> e mu) < 9.2 x 10^-8.\n"
+              },
+              {
+                "line_number": 17,
+                "context": "L14:   The 90% CL upper limits included:\nL15:     B(B0 -> e+e-) < 11.3 x 10^-8.\nL16:     B(B0 -> mu+mu-) < 5.2 x 10^-8.\nL17:     B(B0 -> e mu) < 9.2 x 10^-8.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[7]:belle2003_bd_ee_90cl",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.6",
+        "snapshot_path": "flavor_catalog/references/B007/pdg_2026_bsee_bdee.txt",
+        "sha256": "sha256:bec216f3aa33f76e4aa76582c9716b123f3c0a08902c7824b1d098e29da716bb",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B0 -> e+e-) < 1.9e-7 90% CL",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 34,
+                "context": "L31:\nL32: Prior PDG-listed measurements:\nL33:   AALTONEN 2009P, PRL 102 201801, CDF, 90.0 CL, VALUE <2.8 E-7,\nL34:   p pbar at 1.96 TeV.\nL35:   ACCIARRI 1997B, PL B391 474, L3, 90.0 CL, VALUE <5.4 E-5,\nL36:   e+ e- --> Z.\nL37:\n"
+              },
+              {
+                "line_number": 35,
+                "context": "L32: Prior PDG-listed measurements:\nL33:   AALTONEN 2009P, PRL 102 201801, CDF, 90.0 CL, VALUE <2.8 E-7,\nL34:   p pbar at 1.96 TeV.\nL35:   ACCIARRI 1997B, PL B391 474, L3, 90.0 CL, VALUE <5.4 E-5,\nL36:   e+ e- --> Z.\nL37:\nL38: PDG API listing S042.6\n"
+              },
+              {
+                "line_number": 64,
+                "context": "L61:\nL62: Prior PDG-listed measurements:\nL63:   AALTONEN 2009P, PRL 102 201801, CDF, 90.0 CL, VALUE <8.3 E-8,\nL64:   p pbar at 1.96 TeV.\nL65:   AUBERT 2008P, PR D77 032007, BABR, 90.0 CL, VALUE <11.3 E-8,\nL66:   e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.\nL67:   AUBERT 2005W, PRL 94 221803, BABR, 90.0 CL, VALUE <6.1 E-8,\n"
+              },
+              {
+                "line_number": 69,
+                "context": "L66:   e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.\nL67:   AUBERT 2005W, PRL 94 221803, BABR, 90.0 CL, VALUE <6.1 E-8,\nL68:   replaced by AUBERT 2008P.\nL69:   CHANG 2003, PR D68 111101, BELLE, 90.0 CL, VALUE <1.9 E-7,\nL70:   e+ e- --> Upsilon(4S), assumes equal production of B+ and B0.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Electronic leptonic limits are far from RS precision drivers",
+  "priority_rationale_full": "The B_q -> e+ e- limits are clean experimental upper bounds, but they are many orders above the tiny SM expectations. They are useful for electron-specific scalar or pseudoscalar scenarios, yet the secondary status and weak direct sensitivity make them auxiliary for the anarchic RS scan. B_s -> mu+ mu- and neutral-meson mixing carry the primary constraining power."
+}

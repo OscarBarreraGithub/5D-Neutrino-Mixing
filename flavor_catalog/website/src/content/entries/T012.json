@@ -1,0 +1,231 @@
+{
+  "process_id": "T012",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "Z -> c cbar pole observables: R_c, A_FB^{0,c}, A_c",
+  "process_name": "Z-pole charm-quark partial-width ratio and asymmetries",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live constraint would require new electroweak-pole observable handling, LEP/SLC heavy-flavour covariance data, and model-specific matching to Z c_L and Z c_R coupling shifts; the existing Delta F=2 and lepton-dipole paths do not cover it.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"Z.?->.?c|Zcc|Z c|A_FB|Afb|R_c|Rc|A_c|Ac\\\\b|forward-backward|Z-pole|Z pole|delta_g.*c|gLc|gRc|cbar|c cbar\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"R_c|A_FB\\\\^\\\\{0,c\\\\}|A_FB.*c|A_c|Zcc|Z c c|Z.?->.?c|delta_g.*c|gL.?c|gR.?c\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"M_Z|m_Z|Z_MASS|mass.*Z|Z boson|Z-boson\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "qcd/running.py:3",
+      "qcd/constants.py:11",
+      "quarkConstraints/qcd_running.py:100"
+    ],
+    "findings": [
+      "No R_c, A_FB^c, A_c, Zcc coupling-shift, or electroweak-pole likelihood implementation was found.",
+      "Process-specific searches returned unrelated R_chi hadronic helpers and bridge-matching class names, not charm Z-pole code.",
+      "Only generic Z-mass/QCD-reference support surfaced at the evidence lines above."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": [
+    {
+      "key": "cfw_2008_rs_flavor",
+      "role": "Baseline arXiv:0804.1954 RS-flavor reference requested by the catalog instructions.",
+      "snapshot_path": "flavor_catalog/references/T012/cfw_2008_rs_flavor.txt",
+      "sha256": "sha256:67d6fdafc6cbda9476f70ed1d7f81ea305965abfc4621a4c51704c9e3477af1f"
+    },
+    {
+      "key": "casagrande_2008_rs_ewpt",
+      "role": "Post-CFW RS electroweak-precision and Z-fermion-coupling interpretation.",
+      "snapshot_path": "flavor_catalog/references/T012/casagrande_2008_rs_ewpt.txt",
+      "sha256": "sha256:34fe76fda2d48bd48fcfff239aab61fadf4fb929b96f5868c25981e570839c2a"
+    },
+    {
+      "key": "freitas_2014_z_widths",
+      "role": "Post-2008 SM theory update for Z partial widths and branching ratios.",
+      "snapshot_path": "flavor_catalog/references/T012/freitas_2014_z_widths.txt",
+      "sha256": "sha256:1aa075ebd110e54a1cd5040a0117c3afffe47bf2375e86ba8630a8398f53057a"
+    },
+    {
+      "key": "alcaraz_2021_z_lineshape_fcc",
+      "role": "Prospective future-collider context for improved heavy-quark Z-pole measurements.",
+      "snapshot_path": "flavor_catalog/references/T012/alcaraz_2021_z_lineshape_fcc.txt",
+      "sha256": "sha256:1f50633a53829d3e3616277a3912fa54eded8476cce8f8170f521b7d117b6166"
+    }
+  ],
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg_2025_z_boson_charm.txt": "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2",
+    "lepslc_2006_z_resonance_charm.txt": "sha256:6f373a37f4ccb2cd55e7660c60bf7988b5145e742f09a2dfc67b76df1583bb0a",
+    "cfw_2008_rs_flavor.txt": "sha256:67d6fdafc6cbda9476f70ed1d7f81ea305965abfc4621a4c51704c9e3477af1f",
+    "casagrande_2008_rs_ewpt.txt": "sha256:34fe76fda2d48bd48fcfff239aab61fadf4fb929b96f5868c25981e570839c2a",
+    "freitas_2014_z_widths.txt": "sha256:1aa075ebd110e54a1cd5040a0117c3afffe47bf2375e86ba8630a8398f53057a",
+    "alcaraz_2021_z_lineshape_fcc.txt": "sha256:1f50633a53829d3e3616277a3912fa54eded8476cce8f8170f521b7d117b6166"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "OPUS-APPROVED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T18:26:49-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T18:26:49-04:00",
+      "agent_id": "PKA-T012",
+      "reason": "Initial PKA draft for combined Z -> c cbar pole observables assigned to process id T012."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T18:39:34-04:00",
+      "timestamp": "2026-05-16T18:39:34-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "batch_id": "wa_w7_new_processes",
+      "reason": "Writer polish for wa_w7_new_processes; template sections normalized and numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-16T18:55:13-04:00",
+      "timestamp": "2026-05-16T18:55:13-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w7_new_processes",
+      "reason": "CA verified CHK-1 through CHK-8 for ca_w7_new_processes."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T19:27:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "CHECKER-DONE",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T19:27:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/LEP-SLC/arXiv sources; Zcc pole-observable value claims match."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T20:30:00-04:00",
+      "from": "FACT-CHECKED",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T20:30:00-04:00",
+      "agent": "Opus-round-3",
+      "agent_id": "Opus-round-3",
+      "round_id": "opus_round_003",
+      "reason": "Opus round 3 sign-off; full PKA -> WA -> CA cycle-1 (clean first pass) -> fact-check VERIFIED; T013 charm-asymmetry context covered under this T012 entry per DA-4 addendum disposition; see flavor_catalog/signoff/round_003_index.md."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(R_c^0\\), \\(A_{\\rm FB}^{0,c}\\), and \\(A_c\\).\nThis entry covers the charm-quark Z-pole partial-width ratio and asymmetry\nobservables under process id T012.  Plan v1 lists \\(R_c\\) as T012 and the charm\nasymmetries as T013; the dispatch instruction asks for the combined\n\\(Z\\to c\\bar c\\) pole-observable package under T012.",
+    "pdg_prose": "The canonical current values are taken from the PDG 2025 Z-boson listing\nsnapshot in\n\\texttt{flavor\\_catalog/references/T012/pdg\\_2025\\_z\\_boson\\_charm.txt},\naccessed on 2026-05-16 (\\texttt{pdg\\_2025\\_z\\_boson\\_charm}).  The measured\nvalues are\n\\[\nR_c^0 = 0.1721\\pm0.0030,\\qquad\nA_{\\rm FB}^{0,c}=0.0707\\pm0.0035,\\qquad\nA_c=0.670\\pm0.027 .\n\\]\nFor \\(A_{\\rm FB}^{0,c}\\), the PDG listing gives the Z-pole charge asymmetry\nas \\(7.07\\pm0.35\\%\\); the dimensionless value above is the direct percent\nconversion (\\texttt{pdg\\_2025\\_z\\_boson\\_charm}).  The LEP/SLC\nfinal-combination snapshot in\n\\texttt{flavor\\_catalog/references/T012/lepslc\\_2006\\_z\\_resonance\\_charm.txt}\nrecords the same three charm-observable central values and uncertainties\n(\\texttt{lepslc\\_2006\\_z\\_resonance\\_charm}).",
+    "relevance": "These observables constrain flavor-diagonal shifts in the left- and\nright-handed \\(Zc\\bar c\\) couplings.  In anarchic warped models, the charm\ncoupling shifts are usually less severe than the \\(Zb\\bar b\\) constraint\nbecause the charm is not tied to the same custodial-protection problem as the\nthird-generation bottom doublet.  They are still useful as a consistency check\non up-sector fermion localizations, bulk multiplet assignments, and the same\ngauge-boson mixing effects that generate flavor-changing \\(Z\\) couplings.  A\nlarge shift in \\(Zc\\bar c\\) would also feed the global Z-pole heavy-flavour fit\nthat correlates charm and bottom pseudo-observables.",
+    "post_2008": "No new LEP/SLC-style experimental average supersedes the legacy Z-pole charm\ncombination, so the PDG value remains data-dominated by the final LEP/SLC\nheavy-flavour fit.  Since arXiv:0804.1954 (\\texttt{cfw\\_2008\\_rs\\_flavor}),\nthe RS literature has made the model dependence of ordinary \\(Zf\\bar f\\)\ncouplings more explicit; the Casagrande--Goertz--Haisch--Neubert--Pfoh setup\ntreats the standard \\(Z\\) couplings, flavor-changing \\(Z\\) effects, and\nelectroweak precision constraints in a unified warped-flavor framework\n(\\texttt{casagrande\\_2008\\_rs\\_ewpt}).  On the Standard-Model side, the\nfermionic electroweak two-loop calculation of Z partial widths and branching\nratios was completed in arXiv:1401.2447\n(\\texttt{freitas\\_2014\\_z\\_widths}).  Prospective FCC-ee work, including\narXiv:2107.00616 (\\texttt{alcaraz\\_2021\\_z\\_lineshape\\_fcc}), revisits how\n\\(R_c\\) and \\(A_{\\rm FB}^{c}\\) could be improved with modern heavy-flavour\ntagging, but those studies are not current experimental inputs.",
+    "validity": "This is a precision electroweak coupling constraint, not a flavor-changing\ndecay or a stand-alone RS flavor bound.  It is robust as a measured Z-pole\npseudo-observable, but the translation into a bound on a 5D model is\nembedding-dependent: custodial symmetry, the representation of the up-sector\nquarks, brane kinetic terms, and fermion localization choices all affect the\npredicted \\(\\delta g_{Lc}\\) and \\(\\delta g_{Rc}\\).  \\(R_c^0\\) is mostly a width\nconstraint, while \\(A_c\\) and \\(A_{\\rm FB}^{0,c}\\) carry chiral information and\ndepend on the electroweak-pole fit conventions.",
+    "code_coverage_prose": "\\textbf{NO}.  The required greps found no implementation of \\(R_c\\), \\(A_c\\),\n\\(A_{\\rm FB}^{0,c}\\), a Zcc coupling-shift calculation, or a correlated\nelectroweak-pole likelihood in \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, or\n\\texttt{tests/}.  The only Z-related matches were generic \\(M_Z\\) support in\n\\texttt{qcd/running.py:3}, \\texttt{qcd/constants.py:11}, and\n\\texttt{quarkConstraints/qcd\\_running.py:100}; process-specific searches also\nreturned unrelated \\(R_\\chi\\) hadronic helpers.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A live constraint would need a new electroweak-pole observable\nmodule, LEP/SLC covariance handling for heavy-flavour pseudo-observables, and\nmodel-specific matching from the warped spectrum to \\(\\delta g_{Lc}\\) and\n\\(\\delta g_{Rc}\\).  This is not covered by the existing \\(\\Delta F=2\\) operator\nbasis or the lepton-dipole path.",
+    "key_references": "\\texttt{pdg\\_2025\\_z\\_boson\\_charm}; \\texttt{lepslc\\_2006\\_z\\_resonance\\_charm};\n\\texttt{cfw\\_2008\\_rs\\_flavor}; \\texttt{casagrande\\_2008\\_rs\\_ewpt};\n\\texttt{freitas\\_2014\\_z\\_widths}; \\texttt{alcaraz\\_2021\\_z\\_lineshape\\_fcc}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/T012.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/T012.tex",
+  "worklog_path": "flavor_catalog/worklogs/T012/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "R_c^0",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt",
+        "sha256": "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.1721 +/- 0.003",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: R_c = Gamma(cc)/Gamma(hadrons)\nL9: OUR FIT is obtained by a simultaneous fit to several c- and b-quark measurements.\nL10: Value: 0.1721 +/- 0.0030 OUR FIT.\nL11:\nL12: A_c\nL13: This quantity is directly extracted from a measurement of the left-right\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "A_FB^{0,c}",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt",
+        "sha256": "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "0.0707 +/- 0.0035",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: A_FB^(0,c) charge asymmetry in e+ e- -> c c\nL18: OUR FIT refers to the Z pole asymmetry.\nL19: Asymmetry (%): 7.07 +/- 0.35 OUR FIT.\nL20: Converted dimensionless value used in the process note: 0.0707 +/- 0.0035.\nL21:\nL22: Citation line in listing:\nL23: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "A_c",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T012/pdg_2025_z_boson_charm.txt",
+        "sha256": "sha256:4394ce4d5f6fdeaf64c3f86a2b191bedead9a2cb397aa23f015a26a20c5de9b2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.67",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: A_c\nL13: This quantity is directly extracted from a measurement of the left-right\nL14: forward-backward asymmetry in c c production at SLC using a polarized electron beam.\nL15: Value: 0.670 +/- 0.027 OUR FIT.\nL16:\nL17: A_FB^(0,c) charge asymmetry in e+ e- -> c c\nL18: OUR FIT refers to the Z pole asymmetry.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Zcc pole data checks up-sector profiles below Zbb",
+  "priority_rationale_full": "The Z -> c cbar pole observables constrain flavor-diagonal charm coupling shifts and help test up-sector localizations, representations, and gauge mixing. They are clean precision pseudo-observables, but the charm couplings are usually less stressed than Z b bbar in anarchic RS. This makes T012 a meaningful Z-pole consistency constraint, not a dominant mass-scale driver."
+}

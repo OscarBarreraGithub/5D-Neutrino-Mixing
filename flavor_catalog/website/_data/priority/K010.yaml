@@ -1,0 +1,11 @@
+process_id: K010
+constraint_priority: LOW
+priority_rationale_short: "Auxiliary K_S input for K_L pi0 e e, not a standalone driver"
+priority_rationale_full: |
+  K_S -> pi0 e+ e- is primarily an experimental normalization for the
+  indirect-CP component of K_L -> pi0 e+ e-. The measured partial rate is useful,
+  but the extrapolated full-region number depends on form-factor assumptions and
+  long-distance chiral dynamics. It is an auxiliary rare-kaon input rather than
+  a standalone leading RS exclusion.
+ranked_by: codex-gpt-5.5-xhigh-batch-P1
+ranked_at: 2026-05-18T01:35:41-04:00

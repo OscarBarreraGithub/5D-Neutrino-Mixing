@@ -1,0 +1,412 @@
+---
+process_id: B006
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: canonical_experimental_limit
+  source_url: https://pdglive.lbl.gov/view/S042.7
+  snapshot_path: flavor_catalog/references/B006/pdg_2026_bdmumu.txt
+  sha256: sha256:45ef5f9721c6e423e632bde6d0631368d35a4ff2fb0f89eb52c43c436d62cfd1
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B0 -> mu+ mu-) < 1.5e-10 90% CL
+    status: AMBIGUOUS
+    matches:
+    - line_number: 7
+      context: |
+        L4: HTML summary URL: https://pdglive.lbl.gov/view/S042.7
+        L5: Access date: 2026-05-16
+        L6: Edition: 2026
+        L7: Local snapshot purpose: canonical current PDG value for B0 -> mu+ mu-.
+        L8:
+        L9: Relevant PDG API metadata:
+        L10: request_timestamp: 2026-05-16 10:12:21 PST
+    - line_number: 12
+      context: |
+        L9: Relevant PDG API metadata:
+        L10: request_timestamp: 2026-05-16 10:12:21 PST
+        L11: pdgid: S042.7
+        L12: description: B0 --> mu+ mu-
+        L13: parent_pdgid: S042
+        L14: parent_description: B0
+        L15: related_data pdgid: S042R7
+    - line_number: 14
+      context: |
+        L11: pdgid: S042.7
+        L12: description: B0 --> mu+ mu-
+        L13: parent_pdgid: S042
+        L14: parent_description: B0
+        L15: related_data pdgid: S042R7
+        L16: related_data description: G(B0 --> mu+ mu-)/G(total)
+        L17: note: Test for DeltaB=1 weak neutral current. Allowed by higher-order electroweak interactions.
+    - line_number: 16
+      context: |
+        L13: parent_pdgid: S042
+        L14: parent_description: B0
+        L15: related_data pdgid: S042R7
+        L16: related_data description: G(B0 --> mu+ mu-)/G(total)
+        L17: note: Test for DeltaB=1 weak neutral current. Allowed by higher-order electroweak interactions.
+        L18:
+        L19: Canonical summary row:
+    - line_number: 20
+      context: |
+        L17: note: Test for DeltaB=1 weak neutral current. Allowed by higher-order electroweak interactions.
+        L18:
+        L19: Canonical summary row:
+        L20: Mode: B0 -> mu+ mu-
+        L21: Fraction Gamma_i/Gamma: < 1.5 E-10
+        L22: Confidence level: 90%
+        L23: PDG summary display value: <1.5 x 10^-10
+    - line_number: 21
+      context: |
+        L18:
+        L19: Canonical summary row:
+        L20: Mode: B0 -> mu+ mu-
+        L21: Fraction Gamma_i/Gamma: < 1.5 E-10
+        L22: Confidence level: 90%
+        L23: PDG summary display value: <1.5 x 10^-10
+        L24:
+    - line_number: 23
+      context: |
+        L20: Mode: B0 -> mu+ mu-
+        L21: Fraction Gamma_i/Gamma: < 1.5 E-10
+        L22: Confidence level: 90%
+        L23: PDG summary display value: <1.5 x 10^-10
+        L24:
+        L25: Input measurement used in PDG average/fit:
+        L26: document_id: TUMASYAN 2023A
+    - line_number: 32
+      context: |
+        L29: doi: 10.1016/j.physletb.2023.137955
+        L30: inspire_id: 2616304
+        L31: technique: CMS
+        L32: title: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+        L33: measurement value: < 1.5 E-10
+        L34: confidence_level: 90.0
+        L35: footnote: Corresponds to a 95% CL upper limit of <1.9E-10.
+    - line_number: 33
+      context: |
+        L30: inspire_id: 2616304
+        L31: technique: CMS
+        L32: title: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+        L33: measurement value: < 1.5 E-10
+        L34: confidence_level: 90.0
+        L35: footnote: Corresponds to a 95% CL upper limit of <1.9E-10.
+        L36:
+    - line_number: 35
+      context: |
+        L32: title: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+        L33: measurement value: < 1.5 E-10
+        L34: confidence_level: 90.0
+        L35: footnote: Corresponds to a 95% CL upper limit of <1.9E-10.
+        L36:
+        L37: Other recent input rows retained for provenance:
+        L38: AAIJ 2022, Phys. Rev. Lett. 128 041801, LHCb: (1.2 +0.8 -0.7 +-0.1) E-10; corresponds to a 95% CL upper limit of <2.6E-10.
+    - line_number: 38
+      context: |
+        L35: footnote: Corresponds to a 95% CL upper limit of <1.9E-10.
+        L36:
+        L37: Other recent input rows retained for provenance:
+        L38: AAIJ 2022, Phys. Rev. Lett. 128 041801, LHCb: (1.2 +0.8 -0.7 +-0.1) E-10; corresponds to a 95% CL upper limit of <2.6E-10.
+        L39: AABOUD 2019L, JHEP 1904 098, ATLAS: (-1.9 +-1.6) E-10; corresponds to a 95% CL upper limit of <2.1E-10.
+    - line_number: 39
+      context: |
+        L36:
+        L37: Other recent input rows retained for provenance:
+        L38: AAIJ 2022, Phys. Rev. Lett. 128 041801, LHCb: (1.2 +0.8 -0.7 +-0.1) E-10; corresponds to a 95% CL upper limit of <2.6E-10.
+        L39: AABOUD 2019L, JHEP 1904 098, ATLAS: (-1.9 +-1.6) E-10; corresponds to a 95% CL upper limit of <2.1E-10.
+- block_key: hflav_equivalent_ratio
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Apr2023/html/radll/RBR/BR_B0_mu%2B_mu-..BR_Bs0_mu%2B_mu-.html
+  snapshot_path: flavor_catalog/references/B006/hflav_2023_bd_over_bs_mumu.txt
+  sha256: sha256:6f4876eae175c6848ef876cde4db82fc186e17244e7178c9418994267ebc190b
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B0 -> mu+ mu-) / BR(B_s0 -> mu+ mu-) < 0.081 dimensionless ratio 90% CL
+    status: AMBIGUOUS
+    matches:
+    - line_number: 13
+      context: |
+        L10: Relevant table extract:
+        L11: Experiment: Average
+        L12: Measurement units: 10^-2
+        L13: Average: < 8.1
+        L14:
+        L15: Experiment: LHCb
+        L16: Measurement units: 10^-2
+    - line_number: 17
+      context: |
+        L14:
+        L15: Experiment: LHCb
+        L16: Measurement units: 10^-2
+        L17: Measurement: < 8.1
+        L18: Reference: Phys. Rev. D 105, 012010 (2022)
+        L19:
+        L20: Table note:
+- block_key: standard_model_prediction
+  source_url: https://arxiv.org/abs/1311.0903
+  snapshot_path: flavor_catalog/references/B006/bobeth_1311_0903_bsdll_sm.txt
+  sha256: sha256:77747a86972077ee17f4bc54096046a8b618c29bb35efd361500dab3fd529e67
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: SM BR(B_d -> mu+ mu-) = (1.06 +- 0.09)e-10
+    status: AMBIGUOUS
+    matches:
+    - line_number: 15
+      context: |
+        L12: Relevant extracted result:
+        L13: The paper gives updated Standard Model predictions for B_q -> l+ l- branching ratios.
+        L14: For the muonic B_d mode:
+        L15: B_d,mu x 10^10 = (1.06 +- 0.02) R_talpha R_d = 1.06 +- 0.09.
+        L16:
+        L17: Interpreted value for this catalog:
+        L18: B(B_d -> mu+ mu-)_SM = (1.06 +- 0.09) x 10^-10.
+    - line_number: 18
+      context: |
+        L15: B_d,mu x 10^10 = (1.06 +- 0.02) R_talpha R_d = 1.06 +- 0.09.
+        L16:
+        L17: Interpreted value for this catalog:
+        L18: B(B_d -> mu+ mu-)_SM = (1.06 +- 0.09) x 10^-10.
+- block_key: input_measurements[0]
+  source_url: https://arxiv.org/abs/2212.10311
+  snapshot_path: flavor_catalog/references/B006/cms_2212_10311_bdmumu.txt
+  sha256: sha256:3c83d78acb15dcceb314ee34df60b1918724a32adbc91e7bad87e458e8157626
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B0 -> mu+ mu-) < 1.5e-10
+    status: AMBIGUOUS
+    matches:
+    - line_number: 8
+      context: |
+        L5: Access date: 2026-05-16
+        L6: Journal: Phys. Lett. B 842 (2023) 137955
+        L7: DOI: 10.1016/j.physletb.2023.137955
+        L8: Local snapshot purpose: primary CMS result used by PDG for B0 -> mu+ mu-.
+        L9:
+        L10: Title:
+        L11: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+    - line_number: 11
+      context: |
+        L8: Local snapshot purpose: primary CMS result used by PDG for B0 -> mu+ mu-.
+        L9:
+        L10: Title:
+        L11: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+        L12:
+        L13: Dataset:
+        L14: CMS pp collisions at sqrt(s) = 13 TeV, 2016-2018, integrated luminosity 140 fb^-1.
+    - line_number: 17
+      context: |
+        L14: CMS pp collisions at sqrt(s) = 13 TeV, 2016-2018, integrated luminosity 140 fb^-1.
+        L15:
+        L16: Relevant extracted result:
+        L17: No evidence for the B0 -> mu+ mu- decay was found.
+        L18: The 90% and 95% confidence-level upper limits from the CLs criterion are:
+        L19: B(B0 -> mu+ mu-) < 1.5 x 10^-10 at 90% CL.
+        L20: B(B0 -> mu+ mu-) < 1.9 x 10^-10 at 95% CL.
+    - line_number: 19
+      context: |
+        L16: Relevant extracted result:
+        L17: No evidence for the B0 -> mu+ mu- decay was found.
+        L18: The 90% and 95% confidence-level upper limits from the CLs criterion are:
+        L19: B(B0 -> mu+ mu-) < 1.5 x 10^-10 at 90% CL.
+        L20: B(B0 -> mu+ mu-) < 1.9 x 10^-10 at 95% CL.
+        L21:
+        L22: PDG linkage:
+    - line_number: 20
+      context: |
+        L17: No evidence for the B0 -> mu+ mu- decay was found.
+        L18: The 90% and 95% confidence-level upper limits from the CLs criterion are:
+        L19: B(B0 -> mu+ mu-) < 1.5 x 10^-10 at 90% CL.
+        L20: B(B0 -> mu+ mu-) < 1.9 x 10^-10 at 95% CL.
+        L21:
+        L22: PDG linkage:
+        L23: PDG live/API listing S042.7 marks TUMASYAN 2023A (CMS) as used in the average/fit for the canonical <1.5E-10 90% CL limit.
+    - line_number: 23
+      context: |
+        L20: B(B0 -> mu+ mu-) < 1.9 x 10^-10 at 95% CL.
+        L21:
+        L22: PDG linkage:
+        L23: PDG live/API listing S042.7 marks TUMASYAN 2023A (CMS) as used in the average/fit for the canonical <1.5E-10 90% CL limit.
+- block_key: input_measurements[1]
+  source_url: https://arxiv.org/abs/2108.09283
+  snapshot_path: flavor_catalog/references/B006/lhcb_2108_09283_bdmumu.txt
+  sha256: sha256:7b5442cafe6e6a6a1a8de6788f4af0ba352c2f284bde14c17bf46cf50a425fc7
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B0 -> mu+ mu-) < 2.3e-10
+    status: AMBIGUOUS
+    matches:
+    - line_number: 7
+      context: |
+        L4: PDF inspected transiently from: https://arxiv.org/pdf/2108.09283
+        L5: Access date: 2026-05-16
+        L6: Journal: Phys. Rev. Lett. 128 (2022) 041801 / Phys. Rev. D 105 (2022) 012010 listing context
+        L7: Local snapshot purpose: primary LHCb B0 -> mu+ mu- input and HFLAV ratio input.
+        L8:
+        L9: Title:
+        L10: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- and B0_s -> mu+ mu- gamma decays
+    - line_number: 10
+      context: |
+        L7: Local snapshot purpose: primary LHCb B0 -> mu+ mu- input and HFLAV ratio input.
+        L8:
+        L9: Title:
+        L10: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- and B0_s -> mu+ mu- gamma decays
+        L11:
+        L12: Dataset:
+        L13: LHCb pp collisions at sqrt(s) = 7, 8, and 13 TeV, integrated luminosities 1, 2, and 6 fb^-1.
+    - line_number: 16
+      context: |
+        L13: LHCb pp collisions at sqrt(s) = 7, 8, and 13 TeV, integrated luminosities 1, 2, and 6 fb^-1.
+        L14:
+        L15: Relevant extracted results:
+        L16: No significant signal for B0 -> mu+ mu- was found.
+        L17: B(B0 -> mu+ mu-) < 2.3 x 10^-10 at 90% CL.
+        L18: B(B0 -> mu+ mu-) < 2.6 x 10^-10 at 95% CL.
+        L19: Ratio R_{mu+mu-} = B(B0 -> mu+ mu-) / B(B_s0 -> mu+ mu-) < 0.081 at 90% CL and <0.095 at 95% CL.
+    - line_number: 17
+      context: |
+        L14:
+        L15: Relevant extracted results:
+        L16: No significant signal for B0 -> mu+ mu- was found.
+        L17: B(B0 -> mu+ mu-) < 2.3 x 10^-10 at 90% CL.
+        L18: B(B0 -> mu+ mu-) < 2.6 x 10^-10 at 95% CL.
+        L19: Ratio R_{mu+mu-} = B(B0 -> mu+ mu-) / B(B_s0 -> mu+ mu-) < 0.081 at 90% CL and <0.095 at 95% CL.
+        L20:
+    - line_number: 18
+      context: |
+        L15: Relevant extracted results:
+        L16: No significant signal for B0 -> mu+ mu- was found.
+        L17: B(B0 -> mu+ mu-) < 2.3 x 10^-10 at 90% CL.
+        L18: B(B0 -> mu+ mu-) < 2.6 x 10^-10 at 95% CL.
+        L19: Ratio R_{mu+mu-} = B(B0 -> mu+ mu-) / B(B_s0 -> mu+ mu-) < 0.081 at 90% CL and <0.095 at 95% CL.
+        L20:
+        L21: PDG linkage:
+    - line_number: 19
+      context: |
+        L16: No significant signal for B0 -> mu+ mu- was found.
+        L17: B(B0 -> mu+ mu-) < 2.3 x 10^-10 at 90% CL.
+        L18: B(B0 -> mu+ mu-) < 2.6 x 10^-10 at 95% CL.
+        L19: Ratio R_{mu+mu-} = B(B0 -> mu+ mu-) / B(B_s0 -> mu+ mu-) < 0.081 at 90% CL and <0.095 at 95% CL.
+        L20:
+        L21: PDG linkage:
+        L22: PDG live/API listing S042.7 includes AAIJ 2022 with value (1.2 +0.8 -0.7 +-0.1) E-10 and notes the 95% CL upper limit <2.6E-10.
+    - line_number: 22
+      context: |
+        L19: Ratio R_{mu+mu-} = B(B0 -> mu+ mu-) / B(B_s0 -> mu+ mu-) < 0.081 at 90% CL and <0.095 at 95% CL.
+        L20:
+        L21: PDG linkage:
+        L22: PDG live/API listing S042.7 includes AAIJ 2022 with value (1.2 +0.8 -0.7 +-0.1) E-10 and notes the 95% CL upper limit <2.6E-10.
+- block_key: input_measurements[2]
+  source_url: https://arxiv.org/abs/1812.03017
+  snapshot_path: flavor_catalog/references/B006/atlas_1812_03017_bdmumu.txt
+  sha256: sha256:4df38ad179850b11fd9e592e9d836dcbb1f2d64c752537788e7da4ca7760fe32
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B0 -> mu+ mu-) < 4.3e-10
+    status: AMBIGUOUS
+    matches:
+    - line_number: 8
+      context: |
+        L5: Access date: 2026-05-16
+        L6: Journal: JHEP 04 (2019) 098
+        L7: DOI: 10.1007/JHEP04(2019)098
+        L8: Local snapshot purpose: primary ATLAS post-2008 input for B0 -> mu+ mu-.
+        L9:
+        L10: Title:
+        L11: Study of the rare decays of B0_s and B0 mesons into muon pairs using data collected during 2015 and 2016 with the ATLAS detector
+    - line_number: 11
+      context: |
+        L8: Local snapshot purpose: primary ATLAS post-2008 input for B0 -> mu+ mu-.
+        L9:
+        L10: Title:
+        L11: Study of the rare decays of B0_s and B0 mesons into muon pairs using data collected during 2015 and 2016 with the ATLAS detector
+        L12:
+        L13: Relevant extracted results:
+        L14: Using 26.3 fb^-1 of 13 TeV pp data, ATLAS obtains:
+    - line_number: 15
+      context: |
+        L12:
+        L13: Relevant extracted results:
+        L14: Using 26.3 fb^-1 of 13 TeV pp data, ATLAS obtains:
+        L15: B(B0 -> mu+ mu-) < 4.3 x 10^-10 at 95% CL.
+        L16:
+        L17: Combined with the Run 1 ATLAS result:
+        L18: B(B0 -> mu+ mu-) < 2.1 x 10^-10 at 95% CL.
+    - line_number: 18
+      context: |
+        L15: B(B0 -> mu+ mu-) < 4.3 x 10^-10 at 95% CL.
+        L16:
+        L17: Combined with the Run 1 ATLAS result:
+        L18: B(B0 -> mu+ mu-) < 2.1 x 10^-10 at 95% CL.
+        L19:
+        L20: PDG linkage:
+        L21: PDG live/API listing S042.7 includes AABOUD 2019L with value (-1.9 +-1.6) E-10 and notes the 95% CL upper limit <2.1E-10.
+    - line_number: 21
+      context: |
+        L18: B(B0 -> mu+ mu-) < 2.1 x 10^-10 at 95% CL.
+        L19:
+        L20: PDG linkage:
+        L21: PDG live/API listing S042.7 includes AABOUD 2019L with value (-1.9 +-1.6) E-10 and notes the 95% CL upper limit <2.1E-10.
+- block_key: cms_run2_dataset
+  source_url: https://arxiv.org/abs/2212.10311
+  snapshot_path: flavor_catalog/references/B006/cms_2212_10311_bdmumu.txt
+  sha256: sha256:3c83d78acb15dcceb314ee34df60b1918724a32adbc91e7bad87e458e8157626
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: dataset_numerical_claims[0].fallback_value_uncertainty
+    anchor_string: CMS Run 2 integrated luminosity for the B_s0/B0 -> mu+ mu- analysis = 140 fb^-1
+    status: RESOLVED
+    matches:
+    - line_number: 14
+      context: |
+        L11: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+        L12:
+        L13: Dataset:
+        L14: CMS pp collisions at sqrt(s) = 13 TeV, 2016-2018, integrated luminosity 140 fb^-1.
+        L15:
+        L16: Relevant extracted result:
+        L17: No evidence for the B0 -> mu+ mu- decay was found.
+  - anchor_field: dataset_numerical_claims[1].fallback_value_uncertainty
+    anchor_string: proton-proton center-of-mass energy for the CMS Run 2 B_s0/B0 -> mu+ mu- analysis = 13 TeV
+    status: AMBIGUOUS
+    matches:
+    - line_number: 6
+      context: |
+        L3: URL: https://arxiv.org/abs/2212.10311
+        L4: PDF inspected transiently from: https://arxiv.org/pdf/2212.10311
+        L5: Access date: 2026-05-16
+        L6: Journal: Phys. Lett. B 842 (2023) 137955
+        L7: DOI: 10.1016/j.physletb.2023.137955
+        L8: Local snapshot purpose: primary CMS result used by PDG for B0 -> mu+ mu-.
+        L9:
+    - line_number: 7
+      context: |
+        L4: PDF inspected transiently from: https://arxiv.org/pdf/2212.10311
+        L5: Access date: 2026-05-16
+        L6: Journal: Phys. Lett. B 842 (2023) 137955
+        L7: DOI: 10.1016/j.physletb.2023.137955
+        L8: Local snapshot purpose: primary CMS result used by PDG for B0 -> mu+ mu-.
+        L9:
+        L10: Title:
+    - line_number: 11
+      context: |
+        L8: Local snapshot purpose: primary CMS result used by PDG for B0 -> mu+ mu-.
+        L9:
+        L10: Title:
+        L11: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+        L12:
+        L13: Dataset:
+        L14: CMS pp collisions at sqrt(s) = 13 TeV, 2016-2018, integrated luminosity 140 fb^-1.
+    - line_number: 14
+      context: |
+        L11: Measurement of the B0_s -> mu+ mu- decay properties and search for the B0 -> mu+ mu- decay in proton-proton collisions at sqrt(s) = 13 TeV
+        L12:
+        L13: Dataset:
+        L14: CMS pp collisions at sqrt(s) = 13 TeV, 2016-2018, integrated luminosity 140 fb^-1.
+        L15:
+        L16: Relevant extracted result:
+        L17: No evidence for the B0 -> mu+ mu- decay was found.

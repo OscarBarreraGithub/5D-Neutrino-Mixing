@@ -1,0 +1,36 @@
+---
+process_id: C006
+generated_at: '2026-05-18T01:53:05Z'
+sources:
+- block_key: PDG2026:D0EMu
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.40
+  snapshot_path: flavor_catalog/references/C006/pdg2026_d0_emu_pdgLive.txt
+  sha256: null
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '1.3e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 50
+      context: "L47: \nL48: Extraction note:\nL49:   The current PDG/API headline value for C006 is the LHCb 2016 upper limit\n\
+        L50:   B(D0 -> mu+- e-+) < 1.3e-8 at 90% CL.\n"
+- block_key: LHCb2016:D0EMu
+  source_url: https://arxiv.org/abs/1512.00322
+  snapshot_path: flavor_catalog/references/C006/lhcb2016_arxiv1512_00322.txt
+  sha256: null
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '1.3e-08'
+    status: RESOLVED
+    matches:
+    - line_number: 21
+      context: |
+        L18:   fraction was measured using D0 -> K- pi+ as a normalisation channel.
+        L19:   No significant excess over expected background was seen.
+        L20:   The reported limit is
+        L21:     B(D0 -> e^\pm mu^\mp) < 1.3 x 10^-8 at 90% confidence level.
+        L22:   The abstract states this is an order of magnitude lower than the previous
+        L23:   limit and constrains some leptoquark and R-parity-violating supersymmetry
+        L24:   parameter space.

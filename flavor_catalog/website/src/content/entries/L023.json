@@ -1,0 +1,425 @@
+{
+  "process_id": "L023",
+  "family": "charged_lepton",
+  "family_original": "charged_lepton",
+  "tier": "PRIMARY",
+  "standard_notation": "\\nu_\\mu N\\to\\nu_\\mu N\\mu^+\\mu^-",
+  "process_name": "Muon-neutrino trident production",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Missing implementation requires a new neutrino-trident mode calculation: lepton-current operator conventions, mediator matching, nuclear form factors/target handling, neutrino flux integration, and experiment-specific rate or likelihood treatment.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [],
+    "grep_commands": [
+      "rg -n \"neutrino.?trident|trident|nu_mu.*mu|muon.?pair|CCFR|NuTeV|CHARM-II|CHARM II|L_mu.?-.?L_tau\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"trident|Trident|L_mu|Ltau|L_tau|CCFR|NuTeV|CHARM|Belle.?II|DUNE\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "Plan-v1 broad grep commands were also rerun over quarkConstraints, flavorConstraints, scanParams, neutrinos, yukawa, qcd, scripts, tests, and docs."
+    ],
+    "false_positive_notes": [
+      "The broad CHARM grep only found qcd charm-quark mass constants and tests, not CHARM-II trident code."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Altmannshofer2014:L023:ccfr_exclusion_cl",
+      "observable": "CCFR-based BSM exclusion contours in Altmannshofer et al. 2014 trident reinterpretation",
+      "value": 95,
+      "uncertainty": null,
+      "units": "percent confidence level",
+      "display": null,
+      "year": 2014,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1406.2332",
+      "snapshot_path": "flavor_catalog/references/L023/altmannshofer2014_trident_arxiv.txt",
+      "sha256": "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Kaneta2017:L023:belleii_sqrt_s",
+      "observable": "Belle-II center-of-mass energy for auxiliary L_mu - L_tau reach",
+      "value": 10.58,
+      "uncertainty": null,
+      "units": "GeV",
+      "display": null,
+      "year": 2017,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1701.00156",
+      "snapshot_path": "flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt",
+      "sha256": "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Kaneta2017:L023:belleii_luminosity_goal",
+      "observable": "Belle-II integrated-luminosity goal for auxiliary L_mu - L_tau reach",
+      "value": 50,
+      "uncertainty": null,
+      "units": "ab^-1",
+      "display": null,
+      "year": 2017,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1701.00156",
+      "snapshot_path": "flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt",
+      "sha256": "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "DUNE2019:L023:abstract_accuracy_projection",
+      "observable": "DUNE near-detector trident abstract accuracy projection",
+      "value": 25,
+      "uncertainty": null,
+      "units": "percent accuracy",
+      "display": null,
+      "year": 2019,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1902.06765",
+      "snapshot_path": "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt",
+      "sha256": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "DUNE2019:L023:beam_mode_exposure_projection",
+      "observable": "DUNE near-detector trident projected running time per beam mode",
+      "value": "about 3",
+      "uncertainty": null,
+      "units": "years per neutrino and antineutrino beam mode",
+      "display": null,
+      "year": 2019,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1902.06765",
+      "snapshot_path": "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt",
+      "sha256": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "DUNE2019:L023:body_baseline_accuracy",
+      "observable": "DUNE near-detector trident body baseline contour accuracy",
+      "value": 40,
+      "uncertainty": null,
+      "units": "percent accuracy",
+      "display": null,
+      "year": 2019,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1902.06765",
+      "snapshot_path": "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt",
+      "sha256": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "DUNE2019:L023:improved_contour_accuracy",
+      "observable": "DUNE near-detector trident improved contour accuracy",
+      "value": 25,
+      "uncertainty": null,
+      "units": "percent accuracy",
+      "display": null,
+      "year": 2019,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1902.06765",
+      "snapshot_path": "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt",
+      "sha256": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "source": "Csaki, Falkowski, and Weiler 2008",
+    "arxiv_id": "0804.1954",
+    "role": "2008 RS/composite-flavor baseline for the requested post-2008 comparison; no trident numerical observable extracted.",
+    "source_url": "https://arxiv.org/abs/0804.1954",
+    "access_date": "2026-05-16",
+    "snapshot_path": "flavor_catalog/references/L023/cfw2008_arxiv0804_1954.txt",
+    "sha256": "d14c34e9fe34549695c8e17a0417ce63be255fd6b4b7bfec77921f63760b242a"
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "altmannshofer2014_trident_arxiv.txt": "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8",
+    "ccfr1991_prl_snapshot.txt": "sha256:903c8a531035948c89a55a1a2ba6582664ad73fc0dbc3761d017de9b7c1abafa",
+    "cfw2008_arxiv0804_1954.txt": "sha256:d14c34e9fe34549695c8e17a0417ce63be255fd6b4b7bfec77921f63760b242a",
+    "charmii1990_cds_snapshot.txt": "sha256:cb4aac26fd26f6937cabbb53f0eb973700192460b8b44b0b1b977113e31d44a2",
+    "dune2019_tridents_arxiv.txt": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+    "kaneta2017_belleii_arxiv.txt": "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5",
+    "nutev1998_arxiv_snapshot.txt": "sha256:b0153f6d1c7c404c2e0833d3beffe404955e208cf871a1d23585eac9502b8634"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T15:34:00-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T15:34:00-04:00",
+      "agent_id": "PKA-L023",
+      "reason": "Initial L023 PKA source extraction and draft sidecar."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T15:34:00-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T15:34:00-04:00",
+      "agent_id": "PKA-L023",
+      "reason": "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:53:39-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:53:39-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w6_charged_lepton_top",
+      "reason": "Writer polish completed for mixed charged-lepton/top-Higgs batch; numerical claims checked against YAML source keys."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T16:07:43-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T16:07:43-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_charged_lepton_top",
+      "issues": [
+        "CHK-1: L023.tex includes auxiliary/context numerical claims outside YAML pdg_or_equivalent entries with full provenance: 95% CL Altmannshofer 2014 contours, Belle-II sqrt(s)=10.58 GeV and 50 ab^-1, and DUNE 25%/40%/25% projection wording."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T16:18:12-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T16:18:12-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w6_charged_lepton_top_v2",
+      "reason": "Cycle-2 writer rework duplicated CA-listed auxiliary numerical claims into pdg_or_equivalent.values with full metadata."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T16:28:44-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T16:28:44-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_charged_lepton_top_v2",
+      "reason": "Cycle-2 checker re-check passed CHK-1 through CHK-8 after WA-v2 metadata fixes."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charged_lepton",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Experimental trident ratios and DUNE/Belle II prospect values matched fetched sources or local snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\nu_\\mu N\\to\\nu_\\mu N\\mu^+\\mu^-\\).\nThis charged-lepton-sector entry covers muon-neutrino trident production on a\nnuclear target.  It is flavor-sensitive but not charged-lepton-flavor\nviolation: the relevant handle is the muon-neutrino/muon current, usually\nphrased as a contact interaction or a gauged \\(L_\\mu-L_\\tau\\) mediator.",
+    "pdg_prose": "There is no PDG or HFLAV-style average.  The catalog input is the set of\nhistorical measured ratios to the Standard Model prediction recorded in\n\\texttt{L023.yaml:pdg\\_or\\_equivalent.measured\\_observables}:\n\\[\n  \\sigma_{\\rm CHARM-II}/\\sigma_{\\rm SM}=1.58\\pm0.64,\\qquad\n  \\sigma_{\\rm CCFR}/\\sigma_{\\rm SM}=0.82\\pm0.28,\\qquad\n  \\sigma_{\\rm NuTeV}/\\sigma_{\\rm SM}=0.72^{+1.73}_{-0.72}.\n\\]\nThese values trace to the DUNE trident compilation\n(\\texttt{Altmannshofer2019DUNETridents}); the CCFR input is also anchored by\nthe primary snapshot \\texttt{CCFR1991TridentsWZ}, which records\n\\(37.0\\pm12.4\\) corrected trident events against \\(45.3\\pm2.3\\) Standard\nModel events.  The CCFR ratio is the strongest practical historical bound;\nCHARM-II is the CERN-SPS observation input, and NuTeV is a weak preliminary\ninput.",
+    "relevance": "Trident production constrains second-generation lepton currents rather than the\nquark \\(\\Delta F=2\\) system.  In an RS lepton extension, KK electroweak bosons,\nbrane kinetic mixing, or a light \\(L_\\mu-L_\\tau\\)-like gauge state can shift the\neffective \\((\\bar\\nu_\\mu\\gamma^\\alpha P_L\\nu_\\mu)(\\bar\\mu\\gamma_\\alpha\\mu)\\)\nand axial analogues.  The constraint is therefore a distinct muon contact/gauge\nconstraint, complementary to dipole LFV such as \\(\\mu\\to e\\gamma\\).",
+    "post_2008": "Relative to the arXiv:0804.1954-era RS flavor baseline\n(\\texttt{CsakiFalkowskiWeiler2008Flavor}), the important updates are\nreinterpretations and future-experiment studies.  Altmannshofer--Gori--\nPospelov--Yavin made the CCFR measurement a standard \\(L_\\mu-L_\\tau\\)\nconstraint, using \\(0.82\\pm0.28\\) and presenting \\(95\\%\\) CL exclusion contours\n(\\texttt{Altmannshofer2014TridentProbe}).  Belle-II studies connected the same\ngauge-current parameter space to \\(e^+e^-\\to\\gamma+\\) missing energy at\n\\(\\sqrt{s}=10.58~\\mathrm{GeV}\\) with a \\(50~\\mathrm{ab}^{-1}\\) luminosity goal,\nwhich is auxiliary collider reach rather than a trident measurement\n(\\texttt{KanetaShimomura2017BelleIITrident}).  The DUNE study repeats the\nhistorical CHARM-II/CCFR/NuTeV ratios and projects a near-detector trident\nmeasurement: its abstract gives about \\(25\\%\\) accuracy after roughly three\nyears in each beam mode, while the body uses a \\(40\\%\\) baseline and a\n\\(25\\%\\) improved contour (\\texttt{Altmannshofer2019DUNETridents}).",
+    "validity": "The experimental observable is cleanly electroweak, but the bound is not a\nsingle universal number: it depends on the target material, neutrino spectrum,\nselection cuts, nuclear form factors, and the assumed mediator mass relative to\nthe momentum transfer.  CCFR is robust as a measured rate ratio; translating it\nto a new RS mediator requires a dedicated trident cross-section calculation and\ncannot be borrowed from the meson-mixing or dipole backends.",
+    "code_coverage_prose": "\\textbf{NO.}  Greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no trident, CCFR, NuTeV, CHARM-II, DUNE, or\n\\(L_\\mu-L_\\tau\\) implementation.  The only ``CHARM'' hits are QCD charm-mass\nthreshold constants, not this process (\\texttt{L023.yaml:code\\_coverage}).",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production constraint would need a new lepton-current\noperator convention, mediator matching, nuclear/target treatment, neutrino-flux\nintegration, and an experiment-specific rate or likelihood.  This is a new mode\ncalculation, not a parameter update to the existing \\(\\Delta F=2\\) or\n\\(\\mu\\to e\\gamma\\) paths\n(\\texttt{L023.yaml:implementation\\_difficulty\\_reason}).",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{CCFR1991TridentsWZ}; \\texttt{CHARMII1990FirstObservation};\n\\texttt{NuTeV1998Trident}; \\texttt{Altmannshofer2014TridentProbe};\n\\texttt{Altmannshofer2019DUNETridents};\n\\texttt{KanetaShimomura2017BelleIITrident};\n\\texttt{CsakiFalkowskiWeiler2008Flavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/charged_lepton/L023.yaml",
+  "source_tex": "flavor_catalog/processes/charged_lepton/L023.tex",
+  "worklog_path": "flavor_catalog/worklogs/L023/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 6,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "Altmannshofer2014:L023:ccfr_exclusion_cl",
+        "source_url": "https://arxiv.org/abs/1406.2332",
+        "snapshot_path": "flavor_catalog/references/L023/altmannshofer2014_trident_arxiv.txt",
+        "sha256": "sha256:b360bc6bd857918ece3060c5e9ecc24dc03096d896c4c368c6606d909fadc2f8",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "95",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   differences in background treatment between the initial report and later\nL18:   publication.\nL19: - The captioned constraint plot states that CCFR excludes parameter space at\nL20:   95% confidence level for the L_mu - L_tau style Z' interpretation.\nL21: - The paper finds that a gauged-muon-force explanation of the muon g-2 anomaly\nL22:   is disfavored for m_Z' greater than about 400 MeV.\nL23: \n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Kaneta2017:L023:belleii_sqrt_s",
+        "source_url": "https://arxiv.org/abs/1701.00156",
+        "snapshot_path": "flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt",
+        "sha256": "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "10.58",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16:   0.82 +/- 0.28 and states that CCFR gives the most stringent bound among the\nL17:   reported CCFR and CHARM-II searches.\nL18: - It states that Belle-II is an e+e- collider at center-of-mass energy\nL19:   sqrt(s) = 10.58 GeV with a goal of 50 ab^-1 integrated luminosity.\nL20: - It emphasizes complementarity: Belle-II photon plus missing-energy searches\nL21:   probe kinetic-mixing-driven production, while neutrino-beam trident\nL22:   production probes muon-neutrino/muon contact or gauge interactions and can\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Kaneta2017:L023:belleii_luminosity_goal",
+        "source_url": "https://arxiv.org/abs/1701.00156",
+        "snapshot_path": "flavor_catalog/references/L023/kaneta2017_belleii_arxiv.txt",
+        "sha256": "sha256:9f1614fe9aa08cf526c862d98043a0e8919ee7f671ba9fe90b7bf514d5a2afc5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "50",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 5,
+                "context": "L2: Access date: 2026-05-16\nL3: Primary URL: https://arxiv.org/abs/1701.00156\nL4: arXiv: 1701.00156\nL5: DOI: 10.1093/ptep/ptx050\nL6: Title: On the possibility of search for L_mu - L_tau gauge boson at Belle-II\nL7:   and neutrino beam experiments\nL8: Authors: Yuya Kaneta and Takashi Shimomura\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:   0.82 +/- 0.28 and states that CCFR gives the most stringent bound among the\nL17:   reported CCFR and CHARM-II searches.\nL18: - It states that Belle-II is an e+e- collider at center-of-mass energy\nL19:   sqrt(s) = 10.58 GeV with a goal of 50 ab^-1 integrated luminosity.\nL20: - It emphasizes complementarity: Belle-II photon plus missing-energy searches\nL21:   probe kinetic-mixing-driven production, while neutrino-beam trident\nL22:   production probes muon-neutrino/muon contact or gauge interactions and can\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "DUNE2019:L023:abstract_accuracy_projection",
+        "source_url": "https://arxiv.org/abs/1902.06765",
+        "snapshot_path": "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt",
+        "sha256": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "25",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: - The text says CHARM-II and CCFR found rates compatible with Standard Model\nL17:   expectations, while no signal could be established at NuTeV.\nL18: - The DUNE arXiv abstract says the near detector could measure\nL19:   nu_mu -> nu_mu mu+ mu- with about 25% accuracy after about 3 years each in\nL20:   neutrino and antineutrino modes.\nL21: - The v2 TeX body/conclusion uses a 40% baseline accuracy and discusses a\nL22:   25% contour as an improved scenario.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "DUNE2019:L023:beam_mode_exposure_projection",
+        "source_url": "https://arxiv.org/abs/1902.06765",
+        "snapshot_path": "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt",
+        "sha256": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "about 3",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: - The text says CHARM-II and CCFR found rates compatible with Standard Model\nL17:   expectations, while no signal could be established at NuTeV.\nL18: - The DUNE arXiv abstract says the near detector could measure\nL19:   nu_mu -> nu_mu mu+ mu- with about 25% accuracy after about 3 years each in\nL20:   neutrino and antineutrino modes.\nL21: - The v2 TeX body/conclusion uses a 40% baseline accuracy and discusses a\nL22:   25% contour as an improved scenario.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "DUNE2019:L023:body_baseline_accuracy",
+        "source_url": "https://arxiv.org/abs/1902.06765",
+        "snapshot_path": "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt",
+        "sha256": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "40",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: - The DUNE arXiv abstract says the near detector could measure\nL19:   nu_mu -> nu_mu mu+ mu- with about 25% accuracy after about 3 years each in\nL20:   neutrino and antineutrino modes.\nL21: - The v2 TeX body/conclusion uses a 40% baseline accuracy and discusses a\nL22:   25% contour as an improved scenario.\nL23: - The paper quotes roughly 240 nu_mu -> nu_mu mu+ mu- trident events per year\nL24:   at the DUNE near detector before analysis cuts, and O(10) signal events/year\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "DUNE2019:L023:improved_contour_accuracy",
+        "source_url": "https://arxiv.org/abs/1902.06765",
+        "snapshot_path": "flavor_catalog/references/L023/dune2019_tridents_arxiv.txt",
+        "sha256": "sha256:19acfb9bc4c3b137a844d9a2b637d752625a74b49ff9fe73aeb415a94690c052",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "25",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19:   nu_mu -> nu_mu mu+ mu- with about 25% accuracy after about 3 years each in\nL20:   neutrino and antineutrino modes.\nL21: - The v2 TeX body/conclusion uses a 40% baseline accuracy and discusses a\nL22:   25% contour as an improved scenario.\nL23: - The paper quotes roughly 240 nu_mu -> nu_mu mu+ mu- trident events per year\nL24:   at the DUNE near detector before analysis cuts, and O(10) signal events/year\nL25:   after the detailed selection.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Trident constrains muon currents, not generic anarchic flavor.",
+  "priority_rationale_full": "Neutrino trident data constrain second-generation lepton gauge/contact\ncurrents and are useful for specific mediator scenarios. The historical\nratios are not a single clean RS flavor veto and require a dedicated\ncross-section recast. For anarchic-flavor RS scan ranking it is auxiliary\ncompared with LFV and meson-mixing observables."
+}

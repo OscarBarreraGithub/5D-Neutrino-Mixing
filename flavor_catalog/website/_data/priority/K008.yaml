@@ -1,0 +1,12 @@
+process_id: K008
+constraint_priority: MEDIUM
+priority_rationale_short: "Near-interesting K_L -> pi0 e e limit with CP-decomposition cost"
+priority_rationale_full: |
+  K_L -> pi0 e+ e- probes semileptonic electroweak-penguin, photon-penguin, and
+  flavor-changing neutral-current structures rather than the implemented
+  Delta F=2 lane. The present limit is above but near the scale where
+  short-distance effects become interesting. It is kept at MEDIUM because the
+  extraction requires indirect-CP, direct-CP, interference, and long-distance
+  components to be separated.
+ranked_by: codex-gpt-5.5-xhigh-batch-P1
+ranked_at: 2026-05-18T01:35:41-04:00

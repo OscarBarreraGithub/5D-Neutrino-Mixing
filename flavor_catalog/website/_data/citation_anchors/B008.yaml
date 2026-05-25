@@ -1,0 +1,93 @@
+---
+process_id: B008
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: values[0]:pdg2026_bs_tautau_95cl
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.130
+  snapshot_path: flavor_catalog/references/B008/pdg_2026_bs_tautau.txt
+  sha256: sha256:ef1c4ed4f001bc4d55293dc64a6ef7782a6ca9ffdc4308bad922dc581ea942fc
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: <6.8e-3
+    status: AMBIGUOUS
+    matches:
+    - line_number: 21
+      context: |
+        L18:   confidence_level: 95.0
+        L19:   technique: LHCB
+        L20:   comment: p p at 7, 8 TeV
+        L21:   value_text: <6.8 E-3
+        L22:   numeric value: 0.0068
+        L23:   limit_type: U
+        L24:   used_in_average: true
+    - line_number: 22
+      context: |
+        L19:   technique: LHCB
+        L20:   comment: p p at 7, 8 TeV
+        L21:   value_text: <6.8 E-3
+        L22:   numeric value: 0.0068
+        L23:   limit_type: U
+        L24:   used_in_average: true
+        L25:   used_in_fit: true
+    - line_number: 26
+      context: |
+        L23:   limit_type: U
+        L24:   used_in_average: true
+        L25:   used_in_fit: true
+        L26:   display_value_text: <6.8 E-3
+        L27:   footnote: Assuming no contribution from B0 --> tau+ tau-.
+- block_key: values[1]:pdg2026_bd_tautau_95cl
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S042.336
+  snapshot_path: flavor_catalog/references/B008/pdg_2026_bd_tautau.txt
+  sha256: sha256:4f20e368d9103d807807793e18b81335931ed1c92621635718062e93aa5aeeb0
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: <2.1e-3
+    status: AMBIGUOUS
+    matches:
+    - line_number: 22
+      context: |
+        L19:   confidence_level: 95.0
+        L20:   technique: LHCB
+        L21:   comment: p p at 7, 8 TeV
+        L22:   value_text: <2.1 E-3
+        L23:   numeric value: 0.0021
+        L24:   limit_type: U
+        L25:   used_in_average: true
+    - line_number: 23
+      context: |
+        L20:   technique: LHCB
+        L21:   comment: p p at 7, 8 TeV
+        L22:   value_text: <2.1 E-3
+        L23:   numeric value: 0.0021
+        L24:   limit_type: U
+        L25:   used_in_average: true
+        L26:   used_in_fit: true
+    - line_number: 27
+      context: |
+        L24:   limit_type: U
+        L25:   used_in_average: true
+        L26:   used_in_fit: true
+        L27:   display_value_text: <2.1 E-3
+        L28:   footnote: Assuming no contribution from B_s()0 --> tau+ tau-.
+        L29:
+        L30: Superseded/historical measurement in same listing:
+- block_key: values[2]:babar2006_bd_tautau_90cl
+  source_url: https://arxiv.org/abs/hep-ex/0511015
+  snapshot_path: flavor_catalog/references/B008/arxiv_hep_ex_0511015_babar_bd_tautau.txt
+  sha256: sha256:d0acf4944c8c9ce9ef62bde92a8bed25cdb8138d4ee4a94b302de84128d81645
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: <4.1e-3
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12: Relevant abstract-page facts:
+        L13:   The search used (232 +/- 3) x 10^6 Upsilon(4S) --> B Bbar decays.
+        L14:   No evidence for B0 --> tau+ tau- was found.
+        L15:   The reported upper limit is B(B0 --> tau+ tau-) < 4.1 x 10^-3
+        L16:   at the 90% confidence level.

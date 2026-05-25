@@ -1,0 +1,96 @@
+---
+process_id: K020
+generated_at: '2026-05-18T01:54:04Z'
+sources:
+- block_key: PDG2025:K020:Kplus_piplus_mup_em_limit
+  source_url: https://pdgapi.lbl.gov/listings/S010.29
+  snapshot_path: flavor_catalog/references/K020/pdg2025_kplus_lfv_semileptonic_api.txt
+  sha256: sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: related_data_identifier
+    anchor_string: S010R49
+    status: RESOLVED
+    matches:
+    - line_number: 18
+      context: |-
+        L15:   "description": "K+ --> pi+ mu+ e-",
+        L16:   "related_data": [
+        L17:     {
+        L18:       "pdgid": "S010R49",
+        L19:       "description": "G(K+ --> pi+ mu+ e-)/G(total)",
+        L20:       "note": "Test of lepton family number conservation.",
+        L21:       "measurements": [
+  - anchor_field: display
+    anchor_string: BR(K+ -> pi+ mu+ e-) < 1.3 x 10^-11 (90% CL)
+    status: RESOLVED
+    matches:
+    - line_number: 7
+      context: "L4: Listing URLs: https://pdgapi.lbl.gov/listings/S010.29 and https://pdgapi.lbl.gov/listings/S010.25\nL5:\n\
+        L6: --- Selected summary rows from S010 branching_fractions ---\nL7: S010.29\tK+ --> pi+ mu+ e-\t<1.3 E-11\t90.0\t\
+        OUR AVERAGE\nL8: S010.25\tK+ --> pi+ mu- e+\t<6.6 E-11\t90.0\tOUR AVERAGE\nL9:\nL10: --- Listing S010.29: K+ --> pi+\
+        \ mu+ e- ---"
+- block_key: Sher2005:K020:Kplus_piplus_mup_em_e865_only_limit
+  source_url: https://arxiv.org/abs/hep-ex/0502020
+  snapshot_path: flavor_catalog/references/K020/sher_2005_arxiv_hep_ex_0502020.txt
+  sha256: sha256:0ae93baf10b71d30e476330661aee67a6a3c9786fa6436d5caa015446f5ad551
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: display
+    anchor_string: BR(K+ -> pi+ mu+ e-) < 2.1 x 10^-11 (90% CL, BNL E865 only)
+    status: AMBIGUOUS
+    matches:
+    - line_number: 29
+      context: |-
+        L26: <meta property="og:image:width" content="1200" />
+        L27: <meta property="og:image:height" content="700" />
+        L28: <meta property="og:image:alt" content="arXiv logo"/>
+        L29: <meta property="og:description" content="Based on results of a search for the lepton-family-number-violating decay $K^+ \to π^+μ^+ e^-$ with data collected by experiment E865 at the Alternating Gradient Synchrotron of Brookhaven National Laboratory, we place an upper limit on the branching ratio at $2.1 \times 10^{-11}$ (90% C.L.). Combining the results with earlier E865 data and those of a previous experiment, E777, an upper limit on the branching ratio of $1.3 \times 10^{-11}$ (90% C.L.) is obtained."/>
+        L30: <meta name="twitter:site" content="@arxiv"/>
+        L31: <meta name="twitter:card" content="summary"/>
+        L32: <meta name="twitter:title" content="An Improved upper limit on the decay K^+ -&gt; pi^+ mu^+ e^-"/>
+    - line_number: 40
+      context: |-
+        L37:   <script src="//cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js" type="text/javascript"></script>
+        L38:   <script src="//cdn.jsdelivr.net/npm/dompurify@2.3.5/dist/purify.min.js"></script>
+        L39:   <script src="/static/browse/0.3.4/js/toggle-labs.js?20241022" type="text/javascript"></script>
+        L40:   <script src="/static/browse/0.3.4/js/cite.js" type="text/javascript"></script><meta name="citation_title" content="An Improved upper limit on the decay K^+ -&gt; pi^+ mu^+ e^-" /><meta name="citation_author" content="Sher, Aleksey" /><meta name="citation_author" content="Appel, R." /><meta name="citation_author" content="Atoyan, G. S." /><meta name="citation_author" content="Bassalleck, B." /><meta name="citation_author" content="Bergman, D. R." /><meta name="citation_author" content="Cheung, N." /><meta name="citation_author" content="Dhawan, S." /><meta name="citation_author" content="Do, H." /><meta name="citation_author" content="Egger, J." /><meta name="citation_author" content="Eilerts, S." /><meta name="citation_author" content="Harold, W." /><meta name="citation_author" content="Issakov, V. V." /><meta name="citation_author" content="Kaspar, H." /><meta name="citation_author" content="Kraus, D. E." /><meta name="citation_author" content="Lazarus, D. M." /><meta name="citation_author" content="Lichard, P." /><meta name="citation_author" content="Lowe, J." /><meta name="citation_author" content="Lozano, J." /><meta name="citation_author" content="Ma, H." /><meta name="citation_author" content="Majid, W." /><meta name="citation_author" content="Pislak, S." /><meta name="citation_author" content="Poblaguev, A. A." /><meta name="citation_author" content="Rehak, P." /><meta name="citation_author" content="Sher, A." /><meta name="citation_author" content="Thompson, J. A." /><meta name="citation_author" content="Truoel, P." /><meta name="citation_author" content="Zeller, M. E." /><meta name="citation_doi" content="10.1103/PhysRevD.72.012005" /><meta name="citation_date" content="2005/02/09" /><meta name="citation_online_date" content="2005/07/11" /><meta name="citation_pdf_url" content="https://arxiv.org/pdf/hep-ex/0502020" /><meta name="citation_arxiv_id" content="hep-ex/0502020" /><meta name="citation_abstract" content=" Based on results of a search for the lepton-family-number-violating decay $K^+ \to \pi^+\mu^+ e^-$ with data collected by experiment E865 at the Alternating Gradient Synchrotron of Brookhaven National Laboratory, we place an upper limit on the branching ratio at $2.1 \times 10^{-11}$ (90% C.L.). Combining the results with earlier E865 data and those of a previous experiment, E777, an upper limit on the branching ratio of $1.3 \times 10^{-11}$ (90% C.L.) is obtained." />
+        L41: </head>
+        L42:
+        L43: <body  class="with-cu-identity">
+    - line_number: 180
+      context: |-
+        L177:
+        L178:
+        L179:     <blockquote class="abstract mathjax">
+        L180:             <span class="descriptor">Abstract:</span>  Based on results of a search for the lepton-family-number-violating decay $K^+ \to \pi^+\mu^+ e^-$ with data collected by experiment E865 at the Alternating Gradient Synchrotron of Brookhaven National Laboratory, we place an upper limit on the branching ratio at $2.1 \times 10^{-11}$ (90% C.L.). Combining the results with earlier E865 data and those of a previous experiment, E777, an upper limit on the branching ratio of $1.3 \times 10^{-11}$ (90% C.L.) is obtained.
+        L181:     </blockquote>
+        L182:
+        L183:     <!--CONTEXT-->
+- block_key: PDG2025:K020:Kplus_piplus_mum_ep_limit
+  source_url: https://pdgapi.lbl.gov/listings/S010.25
+  snapshot_path: flavor_catalog/references/K020/pdg2025_kplus_lfv_semileptonic_api.txt
+  sha256: sha256:8ddac950390a81da3d3d689a3d7888d5e985abad1bf4f05607e8e3fe3de92787
+  access_date: '2026-05-17'
+  anchors:
+  - anchor_field: related_data_identifier
+    anchor_string: S010R39
+    status: RESOLVED
+    matches:
+    - line_number: 143
+      context: |-
+        L140:   "description": "K+ --> pi+ mu- e+",
+        L141:   "related_data": [
+        L142:     {
+        L143:       "pdgid": "S010R39",
+        L144:       "description": "G(K+ --> pi+ mu- e+)/G(total)",
+        L145:       "note": "Test of lepton family number conservation.",
+        L146:       "measurements": [
+  - anchor_field: display
+    anchor_string: BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11 (90% CL)
+    status: RESOLVED
+    matches:
+    - line_number: 8
+      context: "L5:\nL6: --- Selected summary rows from S010 branching_fractions ---\nL7: S010.29\tK+ --> pi+ mu+ e-\t<1.3\
+        \ E-11\t90.0\tOUR AVERAGE\nL8: S010.25\tK+ --> pi+ mu- e+\t<6.6 E-11\t90.0\tOUR AVERAGE\nL9:\nL10: --- Listing S010.29:\
+        \ K+ --> pi+ mu+ e- ---\nL11: {"

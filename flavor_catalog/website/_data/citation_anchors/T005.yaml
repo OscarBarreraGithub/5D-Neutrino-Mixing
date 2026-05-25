@@ -1,0 +1,210 @@
+---
+process_id: T005
+generated_at: '2026-05-18T01:54:07Z'
+sources:
+- block_key: PDG2025:T005:ATLAS2022:dataset
+  source_url: https://pdglive.lbl.gov/view/Q007TUG
+  snapshot_path: flavor_catalog/references/T005/pdg_2025_top_tug_tcg.txt
+  sha256: sha256:b58775f55944dad73ff185214195fd4d245431cb400e9f63bf6fcf35b490446a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 139 fb^-1 at sqrt(s) = 13 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |
+        L16: and kappa^{ctg}/Lambda" and lists values in TeV^{-1} with 95% CL.
+        L17:
+        L18: PDG footnote 1, AAD 2022T / ATLAS:
+        L19: - Based on 139 fb^{-1} of pp data at sqrt(s) = 13 TeV.
+        L20: - Single top-quark production limits:
+        L21:   sigma(u g -> t) * B(t -> b W) * B(W -> l nu) < 3.0 pb.
+        L22:   sigma(c g -> t) * B(t -> b W) * B(W -> l nu) < 4.7 pb.
+- block_key: PDG2025:T005:ATLAS2022:cg_to_t_cross_section
+  source_url: https://pdglive.lbl.gov/view/Q007TUG
+  snapshot_path: flavor_catalog/references/T005/pdg_2025_top_tug_tcg.txt
+  sha256: sha256:b58775f55944dad73ff185214195fd4d245431cb400e9f63bf6fcf35b490446a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 4.7
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |
+        L19: - Based on 139 fb^{-1} of pp data at sqrt(s) = 13 TeV.
+        L20: - Single top-quark production limits:
+        L21:   sigma(u g -> t) * B(t -> b W) * B(W -> l nu) < 3.0 pb.
+        L22:   sigma(c g -> t) * B(t -> b W) * B(W -> l nu) < 4.7 pb.
+        L23: - EFT coupling limits:
+        L24:   |C_uG^{ut}| / Lambda^2 < 0.057 TeV^{-2}.
+        L25:   |C_uG^{ct}| / Lambda^2 < 0.14 TeV^{-2}.
+- block_key: PDG2025:T005:ATLAS2022:w_leptonic_sum
+  source_url: https://arxiv.org/abs/2112.01302
+  snapshot_path: flavor_catalog/references/T005/atlas_2112_01302_arxiv_abs.txt
+  sha256: sha256:7ef80205fa97d9acc9810399b22b002847059f7c3750a89ba1dc38655d772dd4
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '0.325'
+    status: RESOLVED
+    matches:
+    - line_number: 32
+      context: |
+        L29: - sigma(u+g -> t) * B(t -> Wb) * B(W -> l nu) < 3.0 pb.
+        L30: - sigma(c+g -> t) * B(t -> Wb) * B(W -> l nu) < 4.7 pb.
+        L31:
+        L32: The arXiv abstract states that B(W -> l nu)=0.325 is the sum over the three
+        L33: leptonic W modes used in the interpretation.
+        L34:
+        L35: EFT interpretation:
+- block_key: PDG2025:T005:ATLAS2022:CuGct
+  source_url: https://pdglive.lbl.gov/view/Q007TUG
+  snapshot_path: flavor_catalog/references/T005/pdg_2025_top_tug_tcg.txt
+  sha256: sha256:b58775f55944dad73ff185214195fd4d245431cb400e9f63bf6fcf35b490446a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.14
+    status: RESOLVED
+    matches:
+    - line_number: 25
+      context: |
+        L22:   sigma(c g -> t) * B(t -> b W) * B(W -> l nu) < 4.7 pb.
+        L23: - EFT coupling limits:
+        L24:   |C_uG^{ut}| / Lambda^2 < 0.057 TeV^{-2}.
+        L25:   |C_uG^{ct}| / Lambda^2 < 0.14 TeV^{-2}.
+        L26: - Equivalent FCNC top-decay branching-fraction limits:
+        L27:   B(t -> u g) < 6.1e-5.
+        L28:   B(t -> c g) < 3.7e-4.
+- block_key: PDG2025:T005:ATLAS2022:t_cg
+  source_url: https://pdglive.lbl.gov/view/Q007TUG
+  snapshot_path: flavor_catalog/references/T005/pdg_2025_top_tug_tcg.txt
+  sha256: sha256:b58775f55944dad73ff185214195fd4d245431cb400e9f63bf6fcf35b490446a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 3.7e-4
+    status: RESOLVED
+    matches:
+    - line_number: 28
+      context: |
+        L25:   |C_uG^{ct}| / Lambda^2 < 0.14 TeV^{-2}.
+        L26: - Equivalent FCNC top-decay branching-fraction limits:
+        L27:   B(t -> u g) < 6.1e-5.
+        L28:   B(t -> c g) < 3.7e-4.
+        L29:
+        L30: PDG footnote 2, KHACHATRYAN 2017G / CMS:
+        L31: - Based on 5.0 and 19.7 fb^{-1} of pp data at sqrt(s) = 7 and 8 TeV.
+- block_key: CMS2017:T005:dataset
+  source_url: https://arxiv.org/abs/1610.03545
+  snapshot_path: flavor_catalog/references/T005/cms_1610_03545_arxiv_abs.txt
+  sha256: sha256:75352c02b40e4f89fe4d6ba987d417f9c9b5e036b504c8bf0cc65fb180fb0470
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 5.0 fb^-1 at sqrt(s) = 7 TeV and 19.7 fb^-1 at sqrt(s) = 8 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |
+        L19:
+        L20: The CMS analysis uses t-channel single top-quark events in pp collisions at
+        L21: sqrt(s) = 7 and 8 TeV, corresponding to integrated luminosities of
+        L22: 5.0 fb^{-1} and 19.7 fb^{-1}, respectively. Events with one muon and two or
+        L23: three jets are analyzed with a Bayesian neural-network discriminant.
+        L24:
+        L25: For the FCNC couplings kappa_tug and kappa_tcg, the observed 95% CL upper
+- block_key: CMS2017:T005:kappa_tcg
+  source_url: https://arxiv.org/abs/1610.03545
+  snapshot_path: flavor_catalog/references/T005/cms_1610_03545_arxiv_abs.txt
+  sha256: sha256:75352c02b40e4f89fe4d6ba987d417f9c9b5e036b504c8bf0cc65fb180fb0470
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 1.8e-2
+    status: RESOLVED
+    matches:
+    - line_number: 28
+      context: |
+        L25: For the FCNC couplings kappa_tug and kappa_tcg, the observed 95% CL upper
+        L26: limits are:
+        L27: - |kappa_tug| / Lambda < 4.1e-3 TeV^{-1}.
+        L28: - |kappa_tcg| / Lambda < 1.8e-2 TeV^{-1}.
+        L29:
+        L30: The corresponding FCNC top-decay branching-fraction limits are:
+        L31: - B(t -> u g) < 2.0e-5.
+- block_key: CMS2017:T005:t_cg
+  source_url: https://arxiv.org/abs/1610.03545
+  snapshot_path: flavor_catalog/references/T005/cms_1610_03545_arxiv_abs.txt
+  sha256: sha256:75352c02b40e4f89fe4d6ba987d417f9c9b5e036b504c8bf0cc65fb180fb0470
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 4.1e-4
+    status: RESOLVED
+    matches:
+    - line_number: 32
+      context: |
+        L29:
+        L30: The corresponding FCNC top-decay branching-fraction limits are:
+        L31: - B(t -> u g) < 2.0e-5.
+        L32: - B(t -> c g) < 4.1e-4.
+- block_key: AguilarSaavedra2004:T005:SM
+  source_url: https://arxiv.org/abs/hep-ph/0409342
+  snapshot_path: flavor_catalog/references/T005/aguilar_saavedra_hepph0409342_tcg_sm.txt
+  sha256: sha256:098fd502e902dff4a5607dd161b294970d04dae132e0485006c7167be089e782
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '4.6e-12'
+    status: RESOLVED
+    matches:
+    - line_number: 23
+      context: |
+        L20: ^{+2.1}_{-0.7}) x 10^{-12}.
+        L21:
+        L22: Table 1 collects branching ratios for top FCN decays. The Standard Model
+        L23: entry for t -> c g is 4.6 x 10^{-12}. The table also lists representative
+        L24: extended-model scales, including t -> c g values of about 1.5e-7 for
+        L25: up-type quark singlets, about 1e-4 for a general 2HDM, about 1e-8 for a
+        L26: flavour-conserving 2HDM, about 8e-5 in the MSSM, and about 2e-4 with
+- block_key: CFW2008:T005:ordinary_RS_KK_gluon_context
+  source_url: https://arxiv.org/abs/0804.1954
+  snapshot_path: flavor_catalog/references/T005/cfw_0804_1954_rs_flavor.txt
+  sha256: sha256:1ecc5891da03b3e2d7433922f51b60fa29ff0bc93a317aee557439c5c4aeb439
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: about 21 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: |
+        L17:
+        L18: The abstract says the authors re-examine flavor constraints in standard
+        L19: Randall-Sundrum-type scenarios and find that the KK gluon mass should
+        L20: generically be heavier than about 21 TeV. In their composite
+        L21: pseudo-Goldstone Higgs setup they find flavor-violating effects that make
+        L22: the corresponding KK-gluon scale about 33 TeV.
+        L23:
+- block_key: CFW2008:T005:pNGB_Higgs_KK_gluon_context
+  source_url: https://arxiv.org/abs/0804.1954
+  snapshot_path: flavor_catalog/references/T005/cfw_0804_1954_rs_flavor.txt
+  sha256: sha256:1ecc5891da03b3e2d7433922f51b60fa29ff0bc93a317aee557439c5c4aeb439
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: about 33 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |
+        L19: Randall-Sundrum-type scenarios and find that the KK gluon mass should
+        L20: generically be heavier than about 21 TeV. In their composite
+        L21: pseudo-Goldstone Higgs setup they find flavor-violating effects that make
+        L22: the corresponding KK-gluon scale about 33 TeV.
+        L23:
+        L24: The paper explains that the largest FCNC contribution in the standard RS
+        L25: setup is generated by exchange of heavy gauge bosons, especially the lightest

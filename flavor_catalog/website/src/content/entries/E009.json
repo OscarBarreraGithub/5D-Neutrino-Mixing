@@ -1,0 +1,442 @@
+{
+  "process_id": "E009",
+  "family": "edm_neutrino",
+  "family_original": "edm_neutrino",
+  "tier": "PRIMARY",
+  "standard_notation": "w, C_{\\tilde G}",
+  "process_name": "Weinberg three-gluon operator",
+  "owner": "PKA",
+  "fact_check_verdict": "PARTIAL",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires new CP-odd colored-sector operators, RS loop or heavy-threshold matching, QCD running and operator mixing, and a hadronic matrix-element convention. Existing Delta F=2 and mu->e gamma code paths do not provide this observable.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"Weinberg|three.?gluon|gluon.?CEDM|gCEDM|chromo.?electric.*gluon|CP.?odd.*gluon|neutron.?EDM|electric dipole moment|EDM\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "Focused Weinberg/neutron-EDM/CP-odd-gluon grep over the required implementation/test directories returned exit=1, no matches.",
+      "Generic EDM/dipole grep found only the unrelated off-diagonal mu->e gamma dipole helper and Delta F=2/QCD-running vocabulary.",
+      "flavorConstraints/muToEGamma.py:3 describes an off-diagonal LFV dipole operator.",
+      "flavorConstraints/muToEGamma.py:21 cites the Perez-Randall mu->e gamma dipole operator.",
+      "flavorConstraints/muToEGamma.py:81 implements check_mu_to_e_gamma, not a hadronic EDM or Weinberg-operator constraint."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PospelovRitz2005:E009:weinberg_normalization",
+      "observable": "Pospelov-Ritz neutron EDM response to the Weinberg operator",
+      "value": 22,
+      "uncertainty": null,
+      "units": "MeV",
+      "display": null,
+      "year": 2005,
+      "experiment": "Pospelov and Ritz, Annals Phys. 318, 119-169 (2005); arXiv:hep-ph/0504231",
+      "source_url": "https://arxiv.org/abs/hep-ph/0504231",
+      "snapshot_path": "flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt",
+      "sha256": "sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PospelovRitz2005:E009:weinberg_scale",
+      "observable": "Reference scale for the Pospelov-Ritz Weinberg coefficient",
+      "value": 1,
+      "uncertainty": null,
+      "units": "GeV",
+      "display": null,
+      "year": 2005,
+      "experiment": "Pospelov and Ritz, Annals Phys. 318, 119-169 (2005); arXiv:hep-ph/0504231",
+      "source_url": "https://arxiv.org/abs/hep-ph/0504231",
+      "snapshot_path": "flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt",
+      "sha256": "sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG2026-PospelovRitz2005:E009:w_bound",
+      "observable": "Single-source benchmark bound on abs(w(1 GeV))",
+      "value": 4.1e-11,
+      "uncertainty": null,
+      "units": "GeV^-2",
+      "display": null,
+      "year": 2026,
+      "experiment": "Derived from PDG Live 2026 S017EDM neutron EDM datablock plus Pospelov and Ritz 2005",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM; https://arxiv.org/abs/hep-ph/0504231",
+      "snapshot_path": null,
+      "sha256": "sha256:ea22e4f3da86358b3e4fb51bb7774b24fe1d475824e706a120e739e110757881; sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HaischHala2019:E009:o6_normalization",
+      "observable": "Haisch-Hala O6 neutron EDM response",
+      "value": 74,
+      "uncertainty": 0.5,
+      "units": "MeV",
+      "display": null,
+      "year": 2019,
+      "experiment": "Haisch and Hala, JHEP 11, 154 (2019); arXiv:1909.08955",
+      "source_url": "https://arxiv.org/abs/1909.08955",
+      "snapshot_path": "flavor_catalog/references/E009/haisch_hala2019_weinberg_sum_rules_arxiv1909_08955.txt",
+      "sha256": "sha256:ae1c67f2535e7c0340236485a32f25e8c3cf87d8ecf068c02321c84464f07ee7",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG2026-HaischHala2019:E009:c6_bound",
+      "observable": "Single-source benchmark bound on abs(C_6) in the Haisch-Hala O6 convention",
+      "value": 1.2e-11,
+      "uncertainty": null,
+      "units": "GeV^-2",
+      "display": null,
+      "year": 2026,
+      "experiment": "Derived from PDG Live 2026 S017EDM neutron EDM datablock plus Haisch and Hala 2019",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM; https://arxiv.org/abs/1909.08955",
+      "snapshot_path": null,
+      "sha256": "sha256:ea22e4f3da86358b3e4fb51bb7774b24fe1d475824e706a120e739e110757881; sha256:ae1c67f2535e7c0340236485a32f25e8c3cf87d8ecf068c02321c84464f07ee7",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "cfw_baseline": {
+      "source": "Csaki, Falkowski, and Weiler, JHEP 09 (2008) 008; arXiv:0804.1954",
+      "year": 2008,
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-16",
+      "value_summary": "Required RS-flavor baseline for post-2008 comparison; no measured EDM value is taken from this source for E009.",
+      "snapshot_path": "flavor_catalog/references/E009/cfw2008_arxiv0804_1954.txt",
+      "sha256": "b735d184f50a2a5e9b5291bd040e4c79534b43e280bf6aef4e19d91409c48c98"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": {
+    "original_operator": {
+      "source": "Weinberg, Phys. Rev. Lett. 63, 2333 (1989)",
+      "year": 1989,
+      "source_url": "https://inspirehep.net/literature/26600",
+      "access_date": "2026-05-16",
+      "value_summary": "Original three-gluon-operator reference; INSPIRE abstract says the dominant neutron-EDM contribution arises from a three-gluon operator produced by integrating out top quarks and neutral Higgs bosons.",
+      "snapshot_path": "flavor_catalog/references/E009/weinberg1989_inspire_metadata.txt",
+      "sha256": "d50b6648cc0077f8ffb802a917a1247a4fb8f17174afa2f94cf9edd7f486b150"
+    },
+    "current_neutron_limit_conversion": {
+      "source": "Derived from PDG2026:NeutronEDM and standard hbar-c unit conversion",
+      "neutron_limit_e_cm": 1.8e-26,
+      "neutron_limit_gev_inverse": 9.12e-13,
+      "conversion_summary": "1.8e-26 cm divided by 1.97327e-14 cm/GeV^-1 gives 9.12e-13 GeV^-1 for d_n/e."
+    },
+    "global_analysis_context": {
+      "source": "Chupp and Ramsey-Musolf et al., Phys. Rev. C 91, 035502 (2015); arXiv:1407.1064",
+      "year": 2014,
+      "source_url": "https://arxiv.org/abs/1407.1064",
+      "access_date": "2026-05-16",
+      "value_summary": "Lists O_Ge as the CP-violating Weinberg three-gluon operator and emphasizes that EDM data contain more CPV sources than independent low-energy observables.",
+      "snapshot_path": "flavor_catalog/references/E009/ramsey_musolf2014_edm_global_analysis_arxiv1407_1064.txt",
+      "sha256": "15f3be5c669986434d3a2208c299d1bdd11ff449ba908a714ba08ab8dccaf9fb"
+    },
+    "composite_warped_context": {
+      "source": "Koenig, Neubert, and Straub, Eur. Phys. J. C 74, 2945 (2014); arXiv:1403.2756",
+      "year": 2014,
+      "source_url": "https://arxiv.org/abs/1403.2756",
+      "access_date": "2026-05-16",
+      "value_summary": "Partial-compositeness scenarios are low-energy limits of composite Higgs or warped extra-dimensional models; heavy-quark CEDM thresholds generate finite Weinberg-operator corrections to the neutron EDM.",
+      "values": [
+        {
+          "observable": "neutron EDM limit used in the 2014 analysis",
+          "value": 2.9e-26,
+          "units": "e cm",
+          "confidence_level": "90%"
+        },
+        {
+          "observable": "order-one average fermion-resonance mass scale indicated by anarchic neutron-EDM bound",
+          "value": 4,
+          "units": "TeV"
+        }
+      ],
+      "snapshot_path": "flavor_catalog/references/E009/koenig_neubert_straub2014_composite_dipoles_arxiv1403_2756.txt",
+      "sha256": "95cf9d168c450b3f1b68aa74aef16fc8368ed1ed77a43e15500b5bb865ea1684"
+    },
+    "lattice_gradient_flow_context": {
+      "source": "Bhattacharya et al., arXiv:2203.03746",
+      "year": 2022,
+      "source_url": "https://arxiv.org/abs/2203.03746",
+      "access_date": "2026-05-16",
+      "value_summary": "Lattice study of neutron EDM from dimension-4 and dimension-6 gluonic CP violation using clover-on-HISQ ensembles and gradient flow; emphasizes Weinberg-operator mixing with same- and lower-dimension operators.",
+      "values": [
+        {
+          "observable": "gluon CPV operator dimension studied",
+          "value": 6,
+          "units": "operator dimension"
+        }
+      ],
+      "snapshot_path": "flavor_catalog/references/E009/bhattacharya2022_weinberg_lattice_arxiv2203_03746.txt",
+      "sha256": "14c197dcd964e5b98a22cd060a6544c0820a10834a1740979b6dd397792f92d4"
+    }
+  },
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2026_neutron_edm_datablock.txt": "sha256:ea22e4f3da86358b3e4fb51bb7774b24fe1d475824e706a120e739e110757881",
+    "abel2020_neutron_edm_arxiv2001_11966.txt": "sha256:a78b99dfd3961fb8fc756238e7c51f425725bd7590b49e49842e48134559f4fa",
+    "weinberg1989_inspire_metadata.txt": "sha256:d50b6648cc0077f8ffb802a917a1247a4fb8f17174afa2f94cf9edd7f486b150",
+    "pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt": "sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23",
+    "ramsey_musolf2014_edm_global_analysis_arxiv1407_1064.txt": "sha256:15f3be5c669986434d3a2208c299d1bdd11ff449ba908a714ba08ab8dccaf9fb",
+    "koenig_neubert_straub2014_composite_dipoles_arxiv1403_2756.txt": "sha256:95cf9d168c450b3f1b68aa74aef16fc8368ed1ed77a43e15500b5bb865ea1684",
+    "haisch_hala2019_weinberg_sum_rules_arxiv1909_08955.txt": "sha256:ae1c67f2535e7c0340236485a32f25e8c3cf87d8ecf068c02321c84464f07ee7",
+    "bhattacharya2022_weinberg_lattice_arxiv2203_03746.txt": "sha256:14c197dcd964e5b98a22cd060a6544c0820a10834a1740979b6dd397792f92d4",
+    "cfw2008_arxiv0804_1954.txt": "sha256:b735d184f50a2a5e9b5291bd040e4c79534b43e280bf6aef4e19d91409c48c98"
+  },
+  "source_shas_count": 9,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T15:32:55-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T15:32:55-04:00",
+      "agent_id": "PKA-E009",
+      "reason": "Initial PKA source extraction and E009 draft started."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T15:32:55-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T15:32:55-04:00",
+      "agent_id": "PKA-E009",
+      "reason": "PKA draft, minimal source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:53:32-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:53:32-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w6_edm",
+      "reason": "Writer polish completed for wa_w6_edm; numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T16:06:54-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T16:06:54-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_edm",
+      "issues": [
+        "CHK-1: E009.tex lines 53-60 quote Pospelov-Ritz and Haisch-Hala benchmark numerical claims (22 MeV, 1 GeV, 4.1e-11 GeV^-2, 74(1 +/- 0.5) MeV, and 1.2e-11 GeV^-2) that trace to paper_era_reference or auxiliary_theory_inputs blocks rather than pdg_or_equivalent entries with the required strict metadata."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T16:17:41-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T16:17:41-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w6_edm_v2",
+      "reason": "Promoted CA-listed benchmark numerical claims to pdg_or_equivalent.values with full metadata."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T16:27:21-04:00",
+      "agent": "CA",
+      "cycle": 2,
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T16:27:21-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_edm_v2",
+      "reason": "Cycle-2 checker re-check passed after WA-v2 sidecar metadata update."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-edm_neutrino",
+      "agent_id": "factcheck-codex-edm_neutrino",
+      "verdict": "PARTIAL",
+      "findings_count": 0,
+      "notes": "Neutron anchor and Weinberg-operator benchmark values verified; INSPIRE Weinberg 1989 URL rendered JS-only, with metadata cross-checked via APS/local snapshot."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "E: EDMs belong inside the flavor fit"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(w\\) or \\(C_{\\tilde G}\\), multiplying the\nCP-odd gluonic operator schematically\n\\(f^{abc}\\tilde G^a_{\\mu\\nu}G^{b\\,\\nu\\rho}G^c_{\\rho}{}^{\\mu}\\).  This entry\ncovers EDM constraints on the flavor-diagonal Weinberg three-gluon operator,\nnot the lepton-number Weinberg operator for neutrino masses.",
+    "pdg_prose": "There is no directly measured PDG value for \\(w\\).  The experimental anchor is\nthe PDG Live 2026 neutron EDM limit (\\texttt{PDG2026:NeutronEDM})\n\\[\n  |d_n| < 1.8\\times 10^{-26}\\ e\\,\\mathrm{cm}\\quad(90\\%~\\mathrm{CL}),\n\\]\nbased on Abel et al. 2020 (\\texttt{Abel:NeutronEDM2020}), with\n\\[\n  d_n=(0.0\\pm1.1_{\\rm stat}\\pm0.2_{\\rm sys})\\times10^{-26}\\ e\\,\\mathrm{cm}.\n\\]\nThe local snapshots are\n\\texttt{flavor\\_catalog/references/E009/pdg2026\\_neutron\\_edm\\_datablock.txt}\nand\n\\texttt{flavor\\_catalog/references/E009/abel2020\\_neutron\\_edm\\_arxiv2001\\_11966.txt}.\nThe sidecar records the convention-dependent Wilson-coefficient translations\nas auxiliary theory inputs rather than as PDG observables.",
+    "relevance": "Anarchic warped or partial-compositeness models carry new CP phases in the\ncolored sector.  Integrating out KK fermions, heavy quarks, Higgs-sector states,\nor colored resonances can generate quark chromo-EDMs and finite heavy-threshold\ncontributions to the Weinberg operator.  The operator is therefore a compact\nEDM-adjacent diagnostic of colored CP violation that complements E008.",
+    "post_2008": "Relative to the CFW 2008 RS-flavor baseline\n(\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}), the neutron anchor is now the\nAbel 2020 result adopted by PDG Live 2026\n(\\texttt{Abel:NeutronEDM2020}; \\texttt{PDG2026:NeutronEDM}).  Composite and\nwarped dipole analyses after 2008 emphasized that heavy-quark CEDM running\ngenerates a finite threshold correction to the three-gluon Weinberg operator\n(\\texttt{KoenigNeubertStraub:CompositeDipoles2014}).  In the Pospelov--Ritz\nnormalization,\n\\(|d_n(w)|\\simeq e\\,22~\\mathrm{MeV}\\,w(1~\\mathrm{GeV})\\), which gives the\ncentral one-source benchmark\n\\(|w(1~\\mathrm{GeV})|<4.1\\times10^{-11}\\ \\mathrm{GeV}^{-2}\\) from the current\nneutron limit when other CP-odd sources are set to zero\n(\\texttt{PospelovRitz:EDMReview2005}; \\texttt{PDG2026:NeutronEDM}).  Haisch\nand Hala 2019 quote, in their \\(O_6\\) convention,\n\\((d_n/e)_{O_6}=74(1\\pm0.5)~\\mathrm{MeV}\\), corresponding to the central\nbenchmark \\(|C_6|<1.2\\times10^{-11}\\ \\mathrm{GeV}^{-2}\\)\n(\\texttt{HaischHala:WeinbergSumRules2019}; \\texttt{PDG2026:NeutronEDM}).\nLattice work using gradient flow now studies the dimension-six gluonic\nCP-violating matrix element and its operator mixing\n(\\texttt{Bhattacharya:WeinbergLattice2022}).",
+    "validity": "The neutron EDM limit is robust.  The Weinberg-operator bound is not: it\ndepends on operator normalization, RG running, heavy-quark thresholds,\nhadronic matrix elements, and assumptions about cancellations with\n\\(\\bar\\theta\\), quark EDMs, qCEDMs, semileptonic terms, and four-quark\noperators.  In global EDM language, the same neutron and diamagnetic data\nprobe more CP-odd sources than there are independent low-energy observables.\n\nFor anarchic CP phases, EDM constraints should be reviewed jointly with the\nflavor branching rows that share the same Wilson coefficients (relevant\ncross-refs: K001, K003, B011, B033, B034), not as an isolated appendix.",
+    "code_coverage_prose": "\\textbf{NO.}  Required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no Weinberg, neutron-EDM, or CP-odd gluonic operator\nconstraint.  As recorded in the sidecar code-coverage block, the only nearby\ndipole implementation is the unrelated\n\\(\\mu\\to e\\gamma\\) code in \\texttt{flavorConstraints/muToEGamma.py:3},\n\\texttt{:21}, and \\texttt{:81}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A live E009 constraint needs new CP-odd colored operators,\nRS loop or threshold matching, QCD running and mixing into other EDM sources,\nand a chosen hadronic matrix-element convention.  The existing \\(\\Delta F=2\\)\nbasis and muon LFV dipole path do not cover this observable.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026:NeutronEDM}, \\texttt{Abel:NeutronEDM2020},\n\\texttt{Weinberg:ThreeGluon1989}, \\texttt{PospelovRitz:EDMReview2005},\n\\texttt{ChuppRamseyMusolf:EDMGlobal2014},\n\\texttt{KoenigNeubertStraub:CompositeDipoles2014},\n\\texttt{HaischHala:WeinbergSumRules2019},\n\\texttt{Bhattacharya:WeinbergLattice2022}, and\n\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/edm_neutrino/E009.yaml",
+  "source_tex": "flavor_catalog/processes/edm_neutrino/E009.tex",
+  "worklog_path": "flavor_catalog/worklogs/E009/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 5,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "measured_experimental_anchor.neutron_edm",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM",
+        "snapshot_path": "flavor_catalog/references/E009/pdg2026_neutron_edm_datablock.txt",
+        "sha256": "ea22e4f3da86358b3e4fb51bb7774b24fe1d475824e706a120e739e110757881",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_n| < 1.8 x 10^-26 e cm at 90% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: Canonical direct result:\nL18:   <0.18, CL = 90%, ABEL 2020, method MRS UCN.\nL19: Converted value:\nL20:   |d_n| < 1.8 x 10^-26 e cm at 90% CL.\nL21:\nL22: PDG measurement note for ABEL 2020:\nL23:   d = (0.0 +/- 1.1 +/- 0.2) x 10^-26 e cm, corresponding to the listed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "measured_experimental_anchor.primary_experiment",
+        "source_url": "https://arxiv.org/abs/2001.11966",
+        "snapshot_path": "flavor_catalog/references/E009/abel2020_neutron_edm_arxiv2001_11966.txt",
+        "sha256": "a78b99dfd3961fb8fc756238e7c51f425725bd7590b49e49842e48134559f4fa",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm; |d_n| < 1.8 x 10^-26 e cm at 90% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12:\nL13: Relevant experimental statement:\nL14:   The measured value of the neutron EDM is\nL15:   d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm.\nL16:\nL17: Canonical limit as used by PDG:\nL18:   |d_n| < 1.8 x 10^-26 e cm at 90% CL."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PospelovRitz2005:E009:weinberg_normalization",
+        "source_url": "https://arxiv.org/abs/hep-ph/0504231",
+        "snapshot_path": "flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt",
+        "sha256": "sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_n(w)| approximately e * 22 MeV * w(1 GeV)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19: Weinberg-operator neutron EDM estimate:\nL20:   |d_n(w)| approximately equals |mu_n| [3 g_s m_0^2 /(32 pi^2)]\nL21:   w ln(M^2/mu_IR^2), and for M/mu_IR = 2 with g_s = 2.1 the review quotes\nL22:   |d_n(w)| about e * 22 MeV * w(1 GeV).\nL23:\nL24: Use in E009:\nL25:   Paper-era normalization and benchmark translation from the Weinberg"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PospelovRitz2005:E009:weinberg_scale",
+        "source_url": "https://arxiv.org/abs/hep-ph/0504231",
+        "snapshot_path": "flavor_catalog/references/E009/pospelov_ritz2005_edm_review_arxiv_hepph0504231.txt",
+        "sha256": "sha256:e07e62e5a797203c8109f7f9c362f47ed23b1a4d443a46fe8e702fe96c039b23",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "The Pospelov-Ritz benchmark writes the coefficient as w(1 GeV).",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23:\nL24: Use in E009:\nL25:   Paper-era normalization and benchmark translation from the Weinberg\nL26:   coefficient w(1 GeV) to the neutron EDM. This is a theory normalization, not\nL27:   a measured PDG value."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HaischHala2019:E009:o6_normalization",
+        "source_url": "https://arxiv.org/abs/1909.08955",
+        "snapshot_path": "flavor_catalog/references/E009/haisch_hala2019_weinberg_sum_rules_arxiv1909_08955.txt",
+        "sha256": "sha256:ae1c67f2535e7c0340236485a32f25e8c3cf87d8ecf068c02321c84464f07ee7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "(d_n/e)_O6 = 74(1 +/- 0.5) MeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21:   from f^{ABC}, the dual gluon field strength, and two gluon field strengths.\nL22:\nL23: Numerical result in the Haisch-Hala O6 normalization:\nL24:   (d_n / e)_O6 = 74 (1 +/- 0.5) MeV.\nL25:\nL26: Uncertainty statement:\nL27:   The final relative error is 50%; the dominant source is the scale-ratio"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Weinberg operator is important but weaker than qCEDMs.",
+  "priority_rationale_full": "The Weinberg three-gluon operator probes colored CP violation generated at\nheavy thresholds. It complements qCEDMs but has normalization, running,\nthreshold, hadronic matrix-element, and cancellation dependence. Because\nthe current bound is weaker than the qCEDM lane, it is meaningful but\nsubleading."
+}

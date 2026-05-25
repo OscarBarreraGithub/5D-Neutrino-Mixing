@@ -1,0 +1,12 @@
+---
+process_id: C006
+constraint_priority: LOW
+priority_rationale_short: "D0->e mu is clean LFV, but product-flavor and dominated elsewhere."
+priority_rationale_full: |
+  This LFV charm decay has negligible Standard Model background, so the
+  experimental upper limit is clean. In RS it requires both c-u and e-mu
+  misalignment and a Delta C=1 charged-LFV operator basis, not just the usual
+  quark flavor scan. Pure muon LFV and D mixing generally provide stronger,
+  cleaner pressure, so it is LOW for generic anarchic scans.
+ranked_by: codex-gpt-5.5-xhigh-batch-P4
+ranked_at: 2026-05-18T01:37:16-04:00

@@ -1,0 +1,1867 @@
+{
+  "total_entries": 102,
+  "verdict_counts": {
+    "VERIFIED": 101,
+    "PARTIAL": 1
+  },
+  "family_counts": {
+    "kaon": 13,
+    "charm": 8,
+    "beauty": 22,
+    "top_higgs_ew": 19,
+    "charged_lepton": 11,
+    "edm_neutrino": 7,
+    "collider_rs": 14,
+    "secondary": 8
+  },
+  "anchor_totals": {
+    "RESOLVED": 476,
+    "AMBIGUOUS": 121,
+    "UNRESOLVED": 47,
+    "entries_with_anchors": 102
+  },
+  "priority_counts": {
+    "HIGH": 14,
+    "MEDIUM": 41,
+    "LOW": 47,
+    "UNRANKED": 0
+  },
+  "entries": [
+    {
+      "process_id": "K001",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\epsilon_K",
+      "process_name": "Indirect CP violation in K0-K0bar mixing",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "YES",
+      "anchor_counts": {
+        "RESOLVED": 7,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Leading anarchic-RS kaon bound from CP-violating K mixing"
+    },
+    {
+      "process_id": "K002",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\Delta m_K",
+      "process_name": "K_L-K_S mass difference",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "PARTIAL",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Real-part K mixing bound, but long-distance limited"
+    },
+    {
+      "process_id": "K003",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathrm{Re}(\\varepsilon'/\\varepsilon)",
+      "process_name": "Direct CP violation in K -> pi pi",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Important direct-CP kaon test with theory-limited extraction"
+    },
+    {
+      "process_id": "K004",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K^+ \\to \\pi^+ \\nu\\bar{\\nu}",
+      "process_name": "Charged rare kaon decay K+ -> pi+ nu nubar",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean K+ -> pi+ nu nubar constraint with 20% data"
+    },
+    {
+      "process_id": "K005",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_L \\to \\pi^0 \\nu\\bar\\nu",
+      "process_name": "CP-violating rare neutral-kaon decay to pi0 plus neutrinos",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Clean CP rare mode, but current direct limit is still loose"
+    },
+    {
+      "process_id": "K006",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_L -> mu+ mu-",
+      "process_name": "Long-lived neutral-kaon dimuon decay",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Useful semileptonic bound, limited by long-distance K_L physics"
+    },
+    {
+      "process_id": "K008",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_L -> pi0 e+ e-",
+      "process_name": "Long-lived neutral-kaon rare semileptonic electron mode",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 8,
+        "AMBIGUOUS": 11,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Near-interesting K_L -> pi0 e e limit with CP-decomposition cost"
+    },
+    {
+      "process_id": "K009",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_L -> pi0 mu+ mu-",
+      "process_name": "Long-lived neutral-kaon rare semileptonic muon mode",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 9,
+        "AMBIGUOUS": 5,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Muon companion rare mode, weaker and long-distance limited"
+    },
+    {
+      "process_id": "K010",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(K_S\\to\\pi^0 e^+e^-)",
+      "process_name": "Short-lived neutral-kaon rare semileptonic electron mode",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 4,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Auxiliary K_S input for K_L pi0 e e, not a standalone driver"
+    },
+    {
+      "process_id": "K012",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_S^0 -> mu+ mu-",
+      "process_name": "Short-lived neutral-kaon dimuon decay",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 4,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "K_S dimuon upper limit, useful only for large NP enhancements"
+    },
+    {
+      "process_id": "K013",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_L \\to \\pi^0\\gamma\\gamma",
+      "process_name": "Radiative long-lived neutral-kaon decay to pi0 gamma gamma",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Radiative two-photon control mode, not a hard RS exclusion"
+    },
+    {
+      "process_id": "K017",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "R_K = Gamma(K^+ -> e^+ nu_e(gamma)) / Gamma(K^+ -> mu^+ nu_mu(gamma))",
+      "process_name": "Charged-kaon leptonic lepton-universality ratio",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Precise LFU ratio, but outside minimal quark FCNC scan"
+    },
+    {
+      "process_id": "K018",
+      "family": "kaon",
+      "family_original": "kaon",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_{l3}: K -> pi e nu and K -> pi mu nu; |V_us| f_+(0)",
+      "process_name": "Kaon semileptonic decays and source-level V_us input",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "PARTIAL",
+      "anchor_counts": {
+        "RESOLVED": 10,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "CKM-input diagnostic, not a standalone RS flavor bound"
+    },
+    {
+      "process_id": "C001",
+      "family": "charm",
+      "family_original": "charm",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "D^0-\\bar{D}^0 mixing: x_D, y_D, \\Delta m_D",
+      "process_name": "Neutral charm mixing",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "YES",
+      "anchor_counts": {
+        "RESOLVED": 7,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "D0 mixing is a notable up-sector bound, but below kaon power."
+    },
+    {
+      "process_id": "C002",
+      "family": "charm",
+      "family_original": "charm",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "|q/p|, \\phi_D in D^0-\\bar{D}^0 mixing",
+      "process_name": "CP violation in neutral-charm mixing",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "PARTIAL",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 3
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Phase-sensitive D mixing can strongly bound RH up-sector flavor."
+    },
+    {
+      "process_id": "C003",
+      "family": "charm",
+      "family_original": "charm",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\Delta A_{CP}(D^0\\to K^+K^-,\\pi^+\\pi^-)",
+      "process_name": "Direct CP violation in D0 -> K+K- and D0 -> pi+pi-",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 6,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Direct charm CPV is useful, but SM long-distance limits cleanliness."
+    },
+    {
+      "process_id": "C004",
+      "family": "charm",
+      "family_original": "charm",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(D^0\\to\\mu^+\\mu^-)",
+      "process_name": "Rare leptonic decay D0 -> mu+ mu-",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "D0->mumu is tight experimentally but not a dominant RS bound."
+    },
+    {
+      "process_id": "C005",
+      "family": "charm",
+      "family_original": "charm",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(D^0\\to e^+e^-)",
+      "process_name": "Rare leptonic decay D0 -> e+ e-",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "D0->ee is helicity-suppressed and far from leading RS reach."
+    },
+    {
+      "process_id": "C006",
+      "family": "charm",
+      "family_original": "charm",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(D^0\\to e^\\pm\\mu^\\mp)",
+      "process_name": "Lepton-flavor-violating neutral-charm decay D0 -> e mu",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "D0->e mu is clean LFV, but product-flavor and dominated elsewhere."
+    },
+    {
+      "process_id": "C007",
+      "family": "charm",
+      "family_original": "charm",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(D^+\\to\\pi^+\\mu^+\\mu^-)",
+      "process_name": "Rare semileptonic decay D+ -> pi+ mu+ mu-",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Best charm semileptonic FCNC probe, but recast is model-dependent."
+    },
+    {
+      "process_id": "C008",
+      "family": "charm",
+      "family_original": "charm",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(D^+\\to\\pi^+e^\\pm\\mu^\\mp)",
+      "process_name": "LFV semileptonic charm decay D+ -> pi+ e mu",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 0,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "LFV semileptonic charm is clean but weaker and non-generic."
+    },
+    {
+      "process_id": "B001",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\Delta m_d",
+      "process_name": "Neutral B_d mixing mass difference",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "YES",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Precision Bd mixing magnitude; direct Delta F=2 RS test"
+    },
+    {
+      "process_id": "B002",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "S_{\\psi K_S},\\ \\sin 2\\beta",
+      "process_name": "CP phase in B_d -> J/psi K_S",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "PARTIAL",
+      "anchor_counts": {
+        "RESOLVED": 5,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Clean Bd mixing phase probes complex RS Delta B=2"
+    },
+    {
+      "process_id": "B003",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\Delta m_s",
+      "process_name": "B_s^0-B_sbar^0 oscillation frequency / mass splitting",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "YES",
+      "anchor_counts": {
+        "RESOLVED": 6,
+        "AMBIGUOUS": 3,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Precision Bs mixing magnitude tests b-s Delta B=2"
+    },
+    {
+      "process_id": "B004",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\phi_s^{c\\bar c s}",
+      "process_name": "CP phase phi_s in Bs0 -> J/psi phi",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "PARTIAL",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Clean Bs mixing phase constrains new b-s CP violation"
+    },
+    {
+      "process_id": "B005",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)",
+      "process_name": "Rare leptonic decay B_s0 -> mu+ mu-",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 5,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Clean rare leptonic FCNC with strong scalar and axial reach"
+    },
+    {
+      "process_id": "B006",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(B^0\\to\\mu^+\\mu^-)",
+      "process_name": "Rare leptonic decay B0 -> mu+ mu-",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 7,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean b-d dimuon limit, but subleading to Bs->mumu"
+    },
+    {
+      "process_id": "B009",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(B^+\\to\\tau^+\\nu_\\tau)",
+      "process_name": "Leptonic B+ -> tau+ nu_tau branching fraction",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 6,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Charged-current tau mode is model-specific for RS scans"
+    },
+    {
+      "process_id": "B011",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\bar{B}\\to X_s\\gamma",
+      "process_name": "Inclusive radiative B -> X_s gamma",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Inclusive b->s gamma is the key dipole-rate constraint"
+    },
+    {
+      "process_id": "B012",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "B\\to K^*(892)\\gamma",
+      "process_name": "Exclusive radiative B -> K* gamma",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 3,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Right-handed b->s gamma helicity probe, exclusive-limited"
+    },
+    {
+      "process_id": "B015",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "B -> X_s ell+ ell-",
+      "process_name": "Inclusive b -> s ell+ ell- rare B decay",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 6,
+        "AMBIGUOUS": 3,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Inclusive b->s ll probes semileptonic FCNC Wilsons"
+    },
+    {
+      "process_id": "B016",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "B -> K ell+ ell-",
+      "process_name": "Exclusive B -> K ell+ ell- branching fractions",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Exclusive B->Kll rates are dominated by broader b->sll fits"
+    },
+    {
+      "process_id": "B017",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "B -> X_s ell+ ell-, B -> K(*) ell+ ell-, R_K, R_K*",
+      "process_name": "Inclusive and exclusive b -> s ell+ ell- rare B decays",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 5,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Broad b->sll/LFU suite gives semileptonic RS tests"
+    },
+    {
+      "process_id": "B018",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "R_K",
+      "process_name": "Lepton-flavor universality ratio in B+ -> K+ ell+ ell-",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean LFU null test for lepton-nonuniversal b->s effects"
+    },
+    {
+      "process_id": "B019",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "R_{K^*}",
+      "process_name": "Lepton-flavor universality ratio in B0 -> K*0 ell+ ell-",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 5,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean RK* LFU test with added helicity sensitivity"
+    },
+    {
+      "process_id": "B021",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\Lambda_b^0 \\to \\Lambda \\ell^+\\ell^-",
+      "process_name": "Baryonic b -> s l+l- decay Lambda_b0 -> Lambda l+l-",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 9,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Baryonic b->sll cross-check, form-factor limited"
+    },
+    {
+      "process_id": "B022",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(B^+\\to K^+\\nu\\bar{\\nu})",
+      "process_name": "Invisible rare decay B+ -> K+ nu nubar",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 3,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean b->s nu nu FCNC, but not yet dominant"
+    },
+    {
+      "process_id": "B023",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(B\\to K^*\\nu\\bar{\\nu})",
+      "process_name": "Invisible rare B -> K*(892) nu nubar decays",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "K* nu nu limits are useful but weaker and less direct"
+    },
+    {
+      "process_id": "B025",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "R_D",
+      "process_name": "LFU ratio in B -> D tau nu over B -> D light-lepton nu",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 9,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Charged-current LFU anomaly is model-specific for RS"
+    },
+    {
+      "process_id": "B026",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "R_{D^*}",
+      "process_name": "LFU ratio in B -> D* tau nu over B -> D* light-lepton nu",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 7,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "R_D* is important context, not a generic RS bound"
+    },
+    {
+      "process_id": "B032",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\bar{B}\\to \\pi\\bar{K}",
+      "process_name": "Bbar -> pi Kbar nonleptonic charmless",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 7,
+        "AMBIGUOUS": 5,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Charmless pi K penguins are hadronic diagnostics"
+    },
+    {
+      "process_id": "B033",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "S_{\\phi K_S},\\ C_{\\phi K_S}",
+      "process_name": "B -> phi K_S penguin CP asymmetry",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 7,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Penguin CP phase null test, too hadronic for a main bound"
+    },
+    {
+      "process_id": "B034",
+      "family": "beauty",
+      "family_original": "beauty",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\phi_s^{s\\bar{s}s}, |\\lambda|(B_s^0\\to\\phi\\phi)",
+      "process_name": "B_s -> phi phi b->s sbar s penguin",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 9,
+        "AMBIGUOUS": 3,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Bs phi phi phase is valuable but model-dependent"
+    },
+    {
+      "process_id": "EW001",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "S, T, U",
+      "process_name": "Peskin-Takeuchi oblique electroweak parameters",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 14,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean EW KK-scale pressure, but not flavor-dominant"
+    },
+    {
+      "process_id": "EW002",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\Delta_{\\rm CKM}^{(1)} = |V_{ud}|^2 + |V_{us}|^2 + |V_{ub}|^2 - 1",
+      "process_name": "First-row CKM unitarity and the Cabibbo angle anomaly",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "PARTIAL",
+      "anchor_counts": {
+        "RESOLVED": 12,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 3
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Precise charged-current test, but global-fit dependent"
+    },
+    {
+      "process_id": "EW003",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "|V_cb|_inclusive vs |V_cb|_exclusive; |V_ub|_inclusive vs |V_ub|_exclusive",
+      "process_name": "|V_cb| and |V_ub| inclusive-exclusive semileptonic tensions",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "PARTIAL",
+      "anchor_counts": {
+        "RESOLVED": 12,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "CKM input diagnostic, not a standalone RS exclusion"
+    },
+    {
+      "process_id": "T001",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(t\\to cZ)",
+      "process_name": "Flavor-changing neutral-current top decay t -> c Z",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 10,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Clean tcZ limit, but LHC top-FCNC reach is subleading"
+    },
+    {
+      "process_id": "T002",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(t\\to uZ)",
+      "process_name": "Flavor-changing neutral-current top decay t -> u Z",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 9,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Clean tuZ bound, but far below low-energy flavor power"
+    },
+    {
+      "process_id": "T003",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(t\\to c\\gamma)",
+      "process_name": "Flavor-changing neutral-current top decay t -> c gamma",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 7,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Top-photon FCNC is direct but operator dependent"
+    },
+    {
+      "process_id": "T004",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(t\\to u\\gamma)",
+      "process_name": "Flavor-changing neutral-current top decay t -> u gamma",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "tu-gamma bound is auxiliary to stronger flavor tests"
+    },
+    {
+      "process_id": "T005",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(t\\to c g)",
+      "process_name": "Flavor-changing neutral-current top decay t -> c g",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 11,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "tcg probes color FCNCs, but LHC BR reach is weak"
+    },
+    {
+      "process_id": "T006",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(t\\to u g)",
+      "process_name": "Flavor-changing neutral-current top decay t -> u g",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 9,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "tug single-top bound is direct but subleading"
+    },
+    {
+      "process_id": "T007",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(t\\to Hc)",
+      "process_name": "Flavor-changing neutral-current top decay t -> H c",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 5,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Top-Higgs charm FCNC is clean but not dominant"
+    },
+    {
+      "process_id": "T008",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(t\\to H u)",
+      "process_name": "Flavor-changing neutral-current top decay t -> H u",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 7,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Top-Higgs up FCNC is useful but LHC-limited"
+    },
+    {
+      "process_id": "T010",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "Z -> b bbar pole observables: R_b, A_FB^{0,b}, A_b",
+      "process_name": "Z-pole bottom-quark partial-width ratio and asymmetries",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Zbb precision is the custodial-protection gate"
+    },
+    {
+      "process_id": "T012",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "Z -> c cbar pole observables: R_c, A_FB^{0,c}, A_c",
+      "process_name": "Z-pole charm-quark partial-width ratio and asymmetries",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Zcc pole data checks up-sector profiles below Zbb"
+    },
+    {
+      "process_id": "T015",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(Z\\to e^\\pm\\mu^\\mp)",
+      "process_name": "Lepton-flavor-violating Z decay Z -> e mu",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 7,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean Z e mu LFV limit, but muon LFV dominates"
+    },
+    {
+      "process_id": "T016",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(Z\\to e^\\pm\\tau^\\mp)",
+      "process_name": "Lepton-flavor-violating Z decay Z -> e tau",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 6,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean Z e tau LFV handle, but subleading"
+    },
+    {
+      "process_id": "T017",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(Z\\to\\mu^\\pm\\tau^\\mp)",
+      "process_name": "Lepton-flavor-violating Z decay Z -> mu tau",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 5,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean Z mu tau LFV handle, but not a full LFV bound"
+    },
+    {
+      "process_id": "T018",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(h\\to\\mu\\tau)",
+      "process_name": "Lepton-flavor-violating Higgs decay h -> mu tau",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 10,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 3
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Direct h -> mu tau tests LFV Yukawa misalignment"
+    },
+    {
+      "process_id": "T019",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(h\\to e\\tau)",
+      "process_name": "Lepton-flavor-violating Higgs decay h -> e tau",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 9,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Direct h -> e tau is meaningful but not dominant"
+    },
+    {
+      "process_id": "T020",
+      "family": "top_higgs_ew",
+      "family_original": "top_higgs_ew",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(h\\to e\\mu)",
+      "process_name": "Lepton-flavor-violating Higgs decay h -> e mu",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 6,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Direct h -> e mu is dominated by mu -> e gamma"
+    },
+    {
+      "process_id": "L001",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(\\mu^+\\to e^+\\gamma)",
+      "process_name": "Muon to electron gamma charged-lepton-flavor-violating dipole decay",
+      "implementation_difficulty": "LOW",
+      "code_coverage_status": "YES",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Leading clean charged-LFV dipole bound in the lepton RS sector."
+    },
+    {
+      "process_id": "L002",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(\\mu^+\\to e^+e^-e^+)",
+      "process_name": "Muon to three electrons charged-lepton-flavor-violating four-lepton decay",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean muon LFV, but current bound is behind mu->e gamma."
+    },
+    {
+      "process_id": "L003",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "R_{\\mu e}^{\\rm Al}",
+      "process_name": "Coherent muon-to-electron conversion in aluminum",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Mu2e/COMET aluminum reach can become the leading contact LFV test."
+    },
+    {
+      "process_id": "L004",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "R_{\\mu e}^{\\rm Au}",
+      "process_name": "Coherent muon-to-electron conversion in gold",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Best published conversion bound; strong but target/operator dependent."
+    },
+    {
+      "process_id": "L005",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "R_{\\mu e}^{\\rm Ti}",
+      "process_name": "Coherent muon-to-electron conversion in titanium",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Published titanium conversion bound is weaker and dominated by Au/Al."
+    },
+    {
+      "process_id": "L006",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "P_{M\\bar M},\\;G_C/G_F",
+      "process_name": "Muonium-antimuonium conversion",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Clean four-lepton test, but not a generic leading RS flavor veto."
+    },
+    {
+      "process_id": "L007",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(\\tau^-\\to\\mu^-\\gamma)",
+      "process_name": "Tau to mu gamma charged-lepton-flavor-violating dipole decay",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Tau-mu dipole LFV is clean but sub-leading to muon LFV."
+    },
+    {
+      "process_id": "L008",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(\\tau^-\\to e^-\\gamma)",
+      "process_name": "Tau to e gamma charged-lepton-flavor-violating dipole decay",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Tau-e dipole LFV is useful but behind muon LFV reach."
+    },
+    {
+      "process_id": "L009",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(\\tau^-\\to\\mu^-\\mu^+\\mu^-)",
+      "process_name": "Tau to three muons charged-lepton-flavor-violating four-lepton decay",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Tau->3mu probes contact LFV, sub-leading but complementary."
+    },
+    {
+      "process_id": "L010",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\mathcal{B}(\\tau^-\\to e^-e^+e^-)",
+      "process_name": "Tau to three electrons charged-lepton-flavor-violating four-lepton decay",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Tau->3e is a clean contact LFV probe, but sub-leading."
+    },
+    {
+      "process_id": "L023",
+      "family": "charged_lepton",
+      "family_original": "charged_lepton",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\nu_\\mu N\\to\\nu_\\mu N\\mu^+\\mu^-",
+      "process_name": "Muon-neutrino trident production",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 6,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Trident constrains muon currents, not generic anarchic flavor."
+    },
+    {
+      "process_id": "E001",
+      "family": "edm_neutrino",
+      "family_original": "edm_neutrino",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "d_e",
+      "process_name": "Electron electric dipole moment",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Tight electron EDM bound on unsuppressed CP lepton dipoles."
+    },
+    {
+      "process_id": "E002",
+      "family": "edm_neutrino",
+      "family_original": "edm_neutrino",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "d_mu",
+      "process_name": "Muon electric dipole moment",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 10,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Current muon EDM limit is far weaker than electron/LFV dipoles."
+    },
+    {
+      "process_id": "E004",
+      "family": "edm_neutrino",
+      "family_original": "edm_neutrino",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "d_n",
+      "process_name": "Neutron electric dipole moment",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Neutron EDM anchors hadronic CP-dipole constraints."
+    },
+    {
+      "process_id": "E006",
+      "family": "edm_neutrino",
+      "family_original": "edm_neutrino",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "d_Hg",
+      "process_name": "Mercury-199 electric dipole moment",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Hg EDM is powerful but nuclear-translation limited."
+    },
+    {
+      "process_id": "E007",
+      "family": "edm_neutrino",
+      "family_original": "edm_neutrino",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "d_Ra, d_Xe",
+      "process_name": "Radium-225 and xenon-129 electric dipole moments",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 0,
+        "AMBIGUOUS": 4,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Ra/Xe EDMs are mainly auxiliary or projected cross-checks."
+    },
+    {
+      "process_id": "E008",
+      "family": "edm_neutrino",
+      "family_original": "edm_neutrino",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "\\tilde d_q",
+      "process_name": "Quark chromo-EDM bounds from neutron and mercury EDMs",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 7,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "qCEDMs directly test anarchic colored CP violation."
+    },
+    {
+      "process_id": "E009",
+      "family": "edm_neutrino",
+      "family_original": "edm_neutrino",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "PARTIAL",
+      "standard_notation": "w, C_{\\tilde G}",
+      "process_name": "Weinberg three-gluon operator",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 5,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Weinberg operator is important but weaker than qCEDMs."
+    },
+    {
+      "process_id": "CR001",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> g_KK^(1) -> t tbar",
+      "process_name": "KK-gluon resonance in t-tbar",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "HIGH",
+      "priority_rationale_short": "Strongest canonical collider RS bound, but below flavor scale."
+    },
+    {
+      "process_id": "CR002",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> T_{5/3} Tbar_{5/3} -> W+ t W- tbar",
+      "process_name": "Pair production of exotic-charge T_{5/3} custodial top partner",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 9,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Meaningful T5/3 bound, but only around 1.5 TeV."
+    },
+    {
+      "process_id": "CR003",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> T Tbar -> tZ/tH/bW + X",
+      "process_name": "Pair production of custodial charge-2/3 top partner T (T')",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Top-partner T limits test light custodial spectra."
+    },
+    {
+      "process_id": "CR004",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> B Bbar -> tW/bZ/bH + X",
+      "process_name": "Pair production of custodial charge -1/3 bottom partner B",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Bottom-partner limits are useful but flavor-subleading."
+    },
+    {
+      "process_id": "CR005",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> (gamma^(1), Z^(1))_KK -> l+ l-",
+      "process_name": "Dilepton high-mass resonance (KK electroweak)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 5,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Dilepton Z' reach is strong but coupling-model dependent."
+    },
+    {
+      "process_id": "CR006",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> W_KK^(1) -> ell nu, tb",
+      "process_name": "Charged-current high-mass resonance (KK W)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 5,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "W' reaches 6 TeV only in aggressive SSM-like proxies."
+    },
+    {
+      "process_id": "CR007",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> G_KK^(1) -> ZZ, WW, gamma gamma, ell ell, t tbar",
+      "process_name": "Spin-2 KK-graviton resonance (Bulk Randall-Sundrum)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 1
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Spin-2 limits are diagnostic, not flavor-dominant."
+    },
+    {
+      "process_id": "CR008",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> T Tbar (singlet) -> tZ/tH/bW",
+      "process_name": "Pair production of singlet VLQ T (non-custodial)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Singlet T row is dominated by broader top-partner limits."
+    },
+    {
+      "process_id": "CR009",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> l+ l- (high-mass tail, EFT contact-operator)",
+      "process_name": "Drell-Yan high-mass tail as EFT contact-operator bound",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 8,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "DY contact tails are sensitive but not a KK-gluon mass bound."
+    },
+    {
+      "process_id": "CR010",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> (T,B) (Tbar,Bbar) doublet -> mixed final states",
+      "process_name": "Pair production of VLQ doublet (T,B)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 4
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Doublet VLQ bound is lower and branching-assumption heavy."
+    },
+    {
+      "process_id": "CR011",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> W_L W_L W_L W_L; experimentally pp -> jj W_L^+/- W_L^+/-",
+      "process_name": "Longitudinal vector-boson scattering (strong-EWSB sector probe)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "VBS is a strong-sector diagnostic, not a mass-setting bound."
+    },
+    {
+      "process_id": "CR012",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> (W'/Z'/G' spin-1) -> WW, WZ, ZZ",
+      "process_name": "Diboson high-mass resonance (generic spin-1)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Diboson HVT reach is useful but benchmark dependent."
+    },
+    {
+      "process_id": "CR013",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> X -> gamma gamma; high-mass spin-0/spin-2 resonance",
+      "process_name": "Diphoton high-mass resonance (spin-0/2)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 3,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Diphoton graviton row is often suppressed in bulk RS."
+    },
+    {
+      "process_id": "CR014",
+      "family": "collider_rs",
+      "family_original": "collider_rs",
+      "tier": "PRIMARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "pp -> t tbar t tbar",
+      "process_name": "Standard-Model and BSM four-top-quark production",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 2
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Four-top currently has weak and model-dependent RS reach."
+    },
+    {
+      "process_id": "B007",
+      "family": "secondary",
+      "family_original": "beauty",
+      "tier": "SECONDARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "B_s^0 \\to e^+ e^-, B^0 \\to e^+ e^-",
+      "process_name": "Rare electronic leptonic neutral-B decays",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 7,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Electronic leptonic limits are far from RS precision drivers"
+    },
+    {
+      "process_id": "B008",
+      "family": "secondary",
+      "family_original": "beauty",
+      "tier": "SECONDARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "B_s \\to \\tau^+\\tau^-, B_d \\to \\tau^+\\tau^-",
+      "process_name": "Rare tauonic leptonic neutral-B decays",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 1,
+        "AMBIGUOUS": 2,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Tauonic leptonic limits are far above SM and secondary"
+    },
+    {
+      "process_id": "B013",
+      "family": "secondary",
+      "family_original": "beauty",
+      "tier": "SECONDARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "B_s^0\\to\\phi(1020)\\gamma",
+      "process_name": "Exclusive radiative B_s decay via b -> s gamma",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 10,
+        "AMBIGUOUS": 3,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Secondary exclusive b->s gamma helicity cross-check"
+    },
+    {
+      "process_id": "B014",
+      "family": "secondary",
+      "family_original": "beauty",
+      "tier": "SECONDARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "B\\to \\rho\\gamma, B\\to \\omega\\gamma",
+      "process_name": "Exclusive radiative b -> d gamma decays",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 13,
+        "AMBIGUOUS": 3,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Secondary b->d gamma check, CKM and form-factor limited"
+    },
+    {
+      "process_id": "K019",
+      "family": "secondary",
+      "family_original": "kaon",
+      "tier": "SECONDARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_L \\to e^{\\pm}\\mu^{\\mp}",
+      "process_name": "Lepton-flavor-violating long-lived neutral-kaon decay",
+      "implementation_difficulty": "MEDIUM",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Very tight LFV kaon cap for lepton-extended RS models"
+    },
+    {
+      "process_id": "K020",
+      "family": "secondary",
+      "family_original": "kaon",
+      "tier": "SECONDARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K^+ \\to \\pi^+ e^{\\pm}\\mu^{\\mp}",
+      "process_name": "LFV charged-kaon semileptonic decay",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 4,
+        "AMBIGUOUS": 1,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "MEDIUM",
+      "priority_rationale_short": "Clean charged-kaon LFV limits, model-dependent but nontrivial"
+    },
+    {
+      "process_id": "K021",
+      "family": "secondary",
+      "family_original": "kaon",
+      "tier": "SECONDARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "K_L \\to \\pi^0 e^{\\pm}\\mu^{\\mp}",
+      "process_name": "LFV neutral-kaon semileptonic decay",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 2,
+        "AMBIGUOUS": 4,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Secondary neutral LFV semileptonic cap, dominated by stronger LFV modes"
+    },
+    {
+      "process_id": "T014",
+      "family": "secondary",
+      "family_original": "top_higgs_ew",
+      "tier": "SECONDARY",
+      "fact_check_verdict": "VERIFIED",
+      "standard_notation": "Z \\to b\\bar{s}+\\bar{b}s,\\ Z \\to b\\bar{d}+\\bar{b}d,\\ Z \\to s\\bar{d}+\\bar{s}d",
+      "process_name": "Flavor-changing Z decays (down-sector FCNC)",
+      "implementation_difficulty": "HIGH",
+      "code_coverage_status": "NO",
+      "anchor_counts": {
+        "RESOLVED": 3,
+        "AMBIGUOUS": 0,
+        "UNRESOLVED": 0
+      },
+      "constraint_priority": "LOW",
+      "priority_rationale_short": "Direct down-FCNC Z width bound is low-energy dominated"
+    }
+  ]
+}

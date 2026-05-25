@@ -1,0 +1,12 @@
+---
+process_id: CR001
+constraint_priority: HIGH
+priority_rationale_short: "Strongest canonical collider RS bound, but below flavor scale."
+priority_rationale_full: |
+  KK gluon to ttbar is the canonical bulk-RS collider signature and reaches
+  about 5.5 TeV in the quoted benchmark. That is still far below the 47.26
+  TeV low-energy anarchic-flavor benchmark, so it is not dominant globally,
+  but within collider_rs it is the strongest and cleanest single cross-check.
+  HIGH is reserved here for the top collider row.
+ranked_by: codex-gpt-5.5-xhigh-batch-P5
+ranked_at: 2026-05-18T01:37:22-04:00

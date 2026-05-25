@@ -1,0 +1,61 @@
+---
+process_id: E004
+generated_at: '2026-05-17T21:55:00-04:00'
+sources:
+- block_key: canonical_limit
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM
+  snapshot_path: flavor_catalog/references/E004/pdg2026_neutron_edm_datablock.txt
+  sha256: 211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: '|d_n| < 1.8 x 10^-26 e cm at 90% CL'
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: |-
+        L17: Canonical direct result:
+        L18:   <0.18, CL = 90%, ABEL 2020, method MRS UCN.
+        L19: Converted value:
+        L20:   |d_n| < 1.8 x 10^-26 e cm at 90% CL.
+        L21:
+        L22: PDG measurement note for ABEL 2020:
+        L23:   d = (0.0 +/- 1.1 +/- 0.2) x 10^-26 e cm, corresponding to the listed limit.
+- block_key: primary_measurement
+  source_url: https://arxiv.org/abs/2001.11966
+  snapshot_path: flavor_catalog/references/E004/abel2020_arxiv2001_11966.txt
+  sha256: b413e25a28afaf7c70ccf642a74d5b1f00e4dad2357732eb0a82899b9546e43b
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: measurement_summary
+    anchor_string: d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm; |d_n| < 1.8 x 10^-26 e cm at 90% CL in PDG
+    status: RESOLVED
+    matches:
+    - line_number: 23
+      context: |-
+        L20:   improved magnetic-field systematic control.
+        L21:
+        L22: Numerical result:
+        L23:   d_n = (0.0 +/- 1.1_stat +/- 0.2_sys) x 10^-26 e cm.
+        L24:
+        L25: This source is the primary experimental input for the PDG 2026 direct neutron
+        L26: EDM bound |d_n| < 1.8 x 10^-26 e cm at 90% CL.
+- block_key: superseded_direct_limit
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM
+  snapshot_path: flavor_catalog/references/E004/pdg2026_neutron_edm_datablock.txt
+  sha256: 211affe27bf5f26aaa45bc2baa8325b51ca4b23264fb3a3a17d8c2e6ddfd67aa
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: '|d_n| < 3.0 x 10^-26 e cm at 90% CL, superseded by Abel 2020'
+    status: RESOLVED
+    matches:
+    - line_number: 28
+      context: |-
+        L25: Superseded direct result used for post-2008 context:
+        L26:   <0.30, CL = 90%, PENDLEBURY 2015, method MRS, supersedes BAKER 2006.
+        L27: Converted value:
+        L28:   |d_n| < 3.0 x 10^-26 e cm at 90% CL.
+        L29: PDG measurement note for PENDLEBURY 2015:
+        L30:   d = (-0.21 +/- 1.82) x 10^-26 e cm, corresponding to the listed limit.
+        L31:

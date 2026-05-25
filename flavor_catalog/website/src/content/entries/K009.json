@@ -1,0 +1,757 @@
+{
+  "process_id": "K009",
+  "family": "kaon",
+  "family_original": "kaon",
+  "tier": "PRIMARY",
+  "standard_notation": "K_L -> pi0 mu+ mu-",
+  "process_name": "Long-lived neutral-kaon rare semileptonic muon mode",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a new Delta S = 1 semileptonic rare-kaon observable, short-distance s -> d mu+mu- matching, indirect/direct CP separation with interference, and long-distance two-photon/CPC inputs. Existing Delta F=2 SLL/SLR/VLL/VRR/LR machinery does not cover this mode.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n -F -e 'K0L --> pi0 mu+ mu-' -e 'K_L -> pi0 mu' -e 'K_L \\\\to \\\\pi^0\\\\mu' -e 'pi0 mu+ mu-' -e 'S013R30' -e 'S013.16' -e 'S012R16' -e 'a_S' -e 'C_mix' -e 's -> d mu' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    ],
+    "result": "No K_L -> pi0 mu+ mu-, K_S -> pi0 mu+ mu-, a_S, or s -> d mu+mu- implementation found in the requested code directories.",
+    "nearest_existing_coverage": [
+      "quarkConstraints/deltaf2.py:209: DEFAULT_DELTA_F2_INPUTS_V1 starts the existing Delta F=2 observable list.",
+      "quarkConstraints/modern/phenomenology.py:23: MODERN_PHENOMENOLOGY_SYSTEM_IDS = (\"epsilon_K\", \"K\", \"B_d\", \"B_s\", \"D0\")"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:K009",
+      "observable": "PDG/API BR(K_L -> pi0 mu+ mu-) canonical limit",
+      "value": "<3.8e-10",
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "Particle Data Group 2026 pdgLive listing S013.16 / S013R30",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S013.16",
+      "snapshot_path": "flavor_catalog/references/K009/pdg2026_kl_pi0mumu_pdgLive.txt",
+      "sha256": "c4ebbf6334bac98ec7396446dcec9e020c25cdcd5f17b7b7f09f446f5d3b47e1",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "KTeV2000:KLPi0MuMu",
+      "observable": "KTeV 1997-data BR(K_L -> pi0 mu+ mu-) limit",
+      "value": "<3.8e-10",
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2000,
+      "experiment": "KTeV 2000 arXiv hep-ex/0001006",
+      "source_url": "https://arxiv.org/abs/hep-ex/0001006",
+      "snapshot_path": "flavor_catalog/references/K009/ktev2000_kl_pi0mumu_arxiv.txt",
+      "sha256": "0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "KTeV2000:KLPi0MuMu",
+      "observable": "KTeV 1997-data observed candidates for K_L -> pi0 mu+ mu-",
+      "value": "2",
+      "uncertainty": null,
+      "units": "events",
+      "display": null,
+      "year": 2000,
+      "experiment": "KTeV 2000 arXiv hep-ex/0001006",
+      "source_url": "https://arxiv.org/abs/hep-ex/0001006",
+      "snapshot_path": "flavor_catalog/references/K009/ktev2000_kl_pi0mumu_arxiv.txt",
+      "sha256": "0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "KTeV2000:KLPi0MuMu",
+      "observable": "KTeV 1997-data expected background for K_L -> pi0 mu+ mu-",
+      "value": "0.87",
+      "uncertainty": "0.15",
+      "units": "events",
+      "display": null,
+      "year": 2000,
+      "experiment": "KTeV 2000 arXiv hep-ex/0001006",
+      "source_url": "https://arxiv.org/abs/hep-ex/0001006",
+      "snapshot_path": "flavor_catalog/references/K009/ktev2000_kl_pi0mumu_arxiv.txt",
+      "sha256": "0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "NA482004:KSPi0MuMuPDG",
+      "observable": "BR(K_S -> pi0 mu+ mu-) supporting indirect-CP input",
+      "value": "2.9e-9",
+      "uncertainty": "+1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst",
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "Particle Data Group 2026 pdgLive listing S012.15 / NA48",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.15",
+      "snapshot_path": "flavor_catalog/references/K009/na48_ks_pi0mumu_pdgLive.txt",
+      "sha256": "21f62a4394611f7c8fc16d03f30112fce98f9ca790469b3298473af92919ff6f",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "NA482004:KSPi0MuMu",
+      "observable": "NA48 observed K_S -> pi0 mu+ mu- candidates",
+      "value": "6",
+      "uncertainty": null,
+      "units": "events",
+      "display": null,
+      "year": 2004,
+      "experiment": "NA48 2004 arXiv hep-ex/0409011",
+      "source_url": "https://arxiv.org/abs/hep-ex/0409011",
+      "snapshot_path": "flavor_catalog/references/K009/na48_ks_pi0mumu_arxiv.txt",
+      "sha256": "0cee82c75bacb10391d8212179c9622b1e89f66735889b8cc5b1ba0773d137e6",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "NA482004:KSPi0MuMu",
+      "observable": "NA48 expected background for K_S -> pi0 mu+ mu-",
+      "value": "0.22",
+      "uncertainty": "+0.18 -0.11",
+      "units": "events",
+      "display": null,
+      "year": 2004,
+      "experiment": "NA48 2004 arXiv hep-ex/0409011",
+      "source_url": "https://arxiv.org/abs/hep-ex/0409011",
+      "snapshot_path": "flavor_catalog/references/K009/na48_ks_pi0mumu_arxiv.txt",
+      "sha256": "0cee82c75bacb10391d8212179c9622b1e89f66735889b8cc5b1ba0773d137e6",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+      "observable": "Isidori-Smith-Unterdorfer rate decomposition normalization for K_L -> pi0 mu+ mu-",
+      "value": "1e-12",
+      "uncertainty": null,
+      "units": "branching fraction normalization",
+      "display": null,
+      "year": 2004,
+      "experiment": "Isidori, Smith, Unterdorfer, Eur. Phys. J. C 36 (2004) 57",
+      "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+      "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+      "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+      "observable": "C_mix^mu coefficient in K_L -> pi0 mu+ mu- decomposition",
+      "value": "3.7 |a_S|^2",
+      "uncertainty": "0.1 |a_S|^2",
+      "units": "coefficient multiplying 1e-12 branching fraction",
+      "display": null,
+      "year": 2004,
+      "experiment": "Isidori, Smith, Unterdorfer, Eur. Phys. J. C 36 (2004) 57",
+      "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+      "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+      "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+      "observable": "C_int^mu coefficient in K_L -> pi0 mu+ mu- decomposition",
+      "value": "1.6 |a_S|",
+      "uncertainty": "0.1 |a_S|",
+      "units": "coefficient multiplying 1e-12 branching fraction",
+      "display": null,
+      "year": 2004,
+      "experiment": "Isidori, Smith, Unterdorfer, Eur. Phys. J. C 36 (2004) 57",
+      "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+      "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+      "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+      "observable": "C_dir^mu coefficient in K_L -> pi0 mu+ mu- decomposition",
+      "value": "1.0",
+      "uncertainty": "0.1",
+      "units": "coefficient multiplying 1e-12 branching fraction",
+      "display": null,
+      "year": 2004,
+      "experiment": "Isidori, Smith, Unterdorfer, Eur. Phys. J. C 36 (2004) 57",
+      "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+      "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+      "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+      "observable": "C_CPC^mu coefficient in K_L -> pi0 mu+ mu- decomposition",
+      "value": "5.2",
+      "uncertainty": "1.6",
+      "units": "coefficient multiplying 1e-12 branching fraction",
+      "display": null,
+      "year": 2004,
+      "experiment": "Isidori, Smith, Unterdorfer, Eur. Phys. J. C 36 (2004) 57",
+      "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+      "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+      "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+      "observable": "|a_S| input for K_L -> pi0 mu+ mu- decomposition",
+      "value": "1.2",
+      "uncertainty": "0.2",
+      "units": "dimensionless",
+      "display": null,
+      "year": 2004,
+      "experiment": "Isidori, Smith, Unterdorfer, Eur. Phys. J. C 36 (2004) 57",
+      "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+      "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+      "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+      "observable": "Constructive-interference SM expectation for BR(K_L -> pi0 mu+ mu-)",
+      "value": "1.5e-11",
+      "uncertainty": "0.3e-11",
+      "units": "branching fraction",
+      "display": null,
+      "year": 2004,
+      "experiment": "Isidori, Smith, Unterdorfer, Eur. Phys. J. C 36 (2004) 57",
+      "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+      "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+      "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": [
+    {
+      "key": "ChristEtAl2016:KPiLLLattice",
+      "relation": "Exploratory lattice-QCD method for long-distance K -> pi l+ l- amplitudes.",
+      "source_url": "https://arxiv.org/abs/1608.07585",
+      "snapshot_path": "flavor_catalog/references/K009/christ_feng_juettner_lawson_portelli_sachrajda2016_lattice_arxiv.txt",
+      "sha256_of_text_snapshot": "a67f81a2a05b123e7a15cf4d56a165f7f6814a00f798e5c5ad242396b86dc6c7"
+    },
+    {
+      "key": "AebischerBurasKumar2022:RareKaons",
+      "relation": "Snowmass rare-kaon white paper emphasizing K_{L,S} -> pi0 l+ l- branching ratios and spectra.",
+      "source_url": "https://arxiv.org/abs/2203.09524",
+      "snapshot_path": "flavor_catalog/references/K009/aebischer_buras_kumar2022_rare_kaon_arxiv.txt",
+      "sha256_of_text_snapshot": "20ea8da2e2566502928b32d9fd928f4b33601c9252f14b880332239b88744387"
+    }
+  ],
+  "source_shas": {
+    "pdg2026_kl_pi0mumu_pdgLive.txt": "sha256:c4ebbf6334bac98ec7396446dcec9e020c25cdcd5f17b7b7f09f446f5d3b47e1",
+    "ktev2000_kl_pi0mumu_arxiv.txt": "sha256:0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589",
+    "na48_ks_pi0mumu_pdgLive.txt": "sha256:21f62a4394611f7c8fc16d03f30112fce98f9ca790469b3298473af92919ff6f",
+    "na48_ks_pi0mumu_arxiv.txt": "sha256:0cee82c75bacb10391d8212179c9622b1e89f66735889b8cc5b1ba0773d137e6",
+    "isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt": "sha256:9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+    "cfw2008_rs_flavor_arxiv.txt": "sha256:006d54877ceb8bf7eb6092dc6abdf5a5624060b4db7125f01b58f0d4b04d6ab2",
+    "christ_feng_juettner_lawson_portelli_sachrajda2016_lattice_arxiv.txt": "sha256:a67f81a2a05b123e7a15cf4d56a165f7f6814a00f798e5c5ad242396b86dc6c7",
+    "aebischer_buras_kumar2022_rare_kaon_arxiv.txt": "sha256:20ea8da2e2566502928b32d9fd928f4b33601c9252f14b880332239b88744387"
+  },
+  "source_shas_count": 8,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:29:14-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:29:14-04:00",
+      "agent_id": "PKA-K009",
+      "reason": "initial PKA source extraction and draft"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:44:59-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:44:59-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish complete for batch wa_w5b_kaon."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T15:16:18-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T15:16:18-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_kaon",
+      "issues": [
+        "CHK-1: Several numerical claims in K009.tex are source-backed in supporting_experimental_values or theory_decomposition, but not represented as YAML pdg_or_equivalent entries with full year/value/uncertainty/source_url/access_date/sha256 metadata. Examples include the KTeV two-candidate and 0.87 +/- 0.15 background claim, the supporting K_S -> pi0 mu+ mu- 2.9e-9 value and 0.22 +0.18 -0.11 background claim, and the Isidori-Smith-Unterdorfer coefficient and SM-expectation block."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:28:45-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:28:45-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w5b_kaon_v2",
+      "reason": "Cycle 2 metadata rework: promoted CA-listed numerical claims into pdg_or_equivalent values."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T15:55:40-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T15:55:40-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_kaon_v2",
+      "reason": "Cycle 3 checker re-check passed CHK-1 through CHK-8 after WA-v2 metadata rework."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-kaon",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent_id": "factcheck-codex-kaon",
+      "reason": "Independent live-source fact-check completed for kaon family.",
+      "notes": "Live source fetch and local snapshot checks verified all value claims for this process."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(K_L \\to \\pi^0\\mu^+\\mu^-\\).  This entry covers the\nlong-lived neutral-kaon rare semileptonic muon channel, a \\(\\Delta S=1\\)\nweak-neutral-current process receiving indirect-CP, direct-CP, interference,\nand CP-conserving two-photon contributions.",
+    "pdg_prose": "The canonical measured limit is\n\\[\n  {\\cal B}(K_L \\to \\pi^0\\mu^+\\mu^-) < 3.8\\times10^{-10}\n  \\quad(90\\%\\ {\\rm CL}),\n\\]\nfrom the 2026 PDG pdgLive entry \\(S013.16/S013R30\\), accessed 2026-05-16\n(\\texttt{pdg2026\\_kl\\_pi0mumu\\_pdgLive.txt}).  PDG traces the active limit to\nthe KTeV search in PRL 84, 5279.  The KTeV snapshot records two observed\nevents, \\(0.87\\pm0.15\\) expected background events, and the same\n\\(3.8\\times10^{-10}\\) upper limit\n(\\texttt{ktev2000\\_kl\\_pi0mumu\\_arxiv.txt}).",
+    "relevance": "This mode probes \\(s\\to d\\mu^+\\mu^-\\) semileptonic and electroweak-penguin\nstructures, not the \\(\\Delta F=2\\) KK-gluon mixing lane currently implemented.\nIn RS or anarchic-flavor variants it is sensitive to flavor-changing \\(Z\\)\ncouplings, heavy neutral gauge exchange, and short-distance vector/axial\noperators.  The muon mode's CP-conserving two-photon contribution is\nnumerically important in the PKA theory decomposition, so a future signal would\nrequire separating CPV short-distance information from long-distance hadronic\ninput.",
+    "post_2008": "No post-2008 experimental result was found that supersedes the KTeV/PDG\n\\(K_L\\to\\pi^0\\mu^+\\mu^-\\) limit.  The supporting short-lived mode remains the\nNA48/PDG \\(K_S\\to\\pi^0\\mu^+\\mu^-\\) value\n\\((2.9^{+1.5}_{-1.2}\\pm0.2)\\times10^{-9}\\), based on six observed events and\n\\(0.22^{+0.18}_{-0.11}\\) expected background events\n(\\texttt{na48\\_ks\\_pi0mumu\\_pdgLive.txt},\n\\texttt{na48\\_ks\\_pi0mumu\\_arxiv.txt}).  Since arXiv:0804.1954, the main\ndevelopments are interpretive: exploratory lattice work has started on\nlong-distance \\(K\\to\\pi\\ell^+\\ell^-\\) amplitudes\n(\\texttt{christ\\_feng\\_juettner\\_lawson\\_portelli\\_sachrajda2016\\_lattice\\_arxiv.txt}),\nand the Snowmass rare-kaon white paper keeps\n\\(K_{L,S}\\to\\pi^0\\ell^+\\ell^-\\) branching ratios and spectra in the\nshort-distance rare-kaon program\n(\\texttt{aebischer\\_buras\\_kumar2022\\_rare\\_kaon\\_arxiv.txt}).",
+    "validity": "Class: long-distance-limited and CP-decomposition-dependent.  The\nIsidori--Smith--Unterdorfer decomposition writes the rate as mixing,\ninterference, direct, and CP-conserving pieces multiplying \\(10^{-12}\\).  For\nthe muon mode the coefficients are\n\\[\n C_{\\rm mix}^{\\mu}=(3.7\\pm0.1)|a_S|^2,\\quad\n C_{\\rm int}^{\\mu}=(1.6\\pm0.1)|a_S|,\\quad\n C_{\\rm dir}^{\\mu}=1.0\\pm0.1,\\quad\n C_{\\rm CPC}^{\\mu}=5.2\\pm1.6,\n\\]\nwith \\(|a_S|=1.2\\pm0.2\\).  The same paper quotes the constructive-interference\nSM expectation as \\((1.5\\pm0.3)\\times10^{-11}\\), well below the current\nexperimental limit.  These numerical theory inputs are recorded in the YAML\n\\texttt{theory\\_decomposition} block and trace to\n\\texttt{isidori\\_smith\\_unterdorfer2004\\_kl\\_pi0mumu\\_arxiv.txt}.",
+    "code_coverage_prose": "\\textbf{NO.}  Targeted greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(K_L\\to\\pi^0\\mu^+\\mu^-\\), \\(K_S\\to\\pi^0\\mu^+\\mu^-\\),\n\\(a_S\\), or \\(s\\to d\\mu^+\\mu^-\\) implementation.  Existing nearby kaon coverage\nis \\(\\Delta F=2\\), e.g. \\texttt{quarkConstraints/deltaf2.py:209} and the modern\npolicy list at \\texttt{quarkConstraints/modern/phenomenology.py:23}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production constraint needs a new \\(\\Delta S=1\\) semileptonic\nobservable, short-distance \\(s\\to d\\mu^+\\mu^-\\) matching, CPV/interference\nbookkeeping tied to \\(K_S\\to\\pi^0\\mu^+\\mu^-\\), and a long-distance\ntwo-photon/CPC treatment.  The existing \\(\\Delta F=2\\) SLL/SLR/VLL/VRR/LR\nbasis is not sufficient.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026:K009}, \\texttt{KTeV2000:KLPi0MuMu},\n\\texttt{NA482004:KSPi0MuMu},\n\\texttt{IsidoriSmithUnterdorfer2004:KLPi0MuMu},\n\\texttt{CFW2008:RSFlavor}, \\texttt{ChristEtAl2016:KPiLLLattice}, and\n\\texttt{AebischerBurasKumar2022:RareKaons}."
+  },
+  "source_yaml": "flavor_catalog/processes/kaon/K009.yaml",
+  "source_tex": "flavor_catalog/processes/kaon/K009.tex",
+  "worklog_path": "flavor_catalog/worklogs/K009/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 9,
+      "AMBIGUOUS": 5,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:K009",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S013.16",
+        "snapshot_path": "flavor_catalog/references/K009/pdg2026_kl_pi0mumu_pdgLive.txt",
+        "sha256": "c4ebbf6334bac98ec7396446dcec9e020c25cdcd5f17b7b7f09f446f5d3b47e1",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<3.8e-10",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: The 2026 pdgLive listing gives an upper limit\nL12:   B(K0L --> pi0 mu+ mu-) < 0.38 x 10^-9\nL13: at 90% confidence level, i.e.\nL14:   B(K_L -> pi0 mu+ mu-) < 3.8 x 10^-10 (90% CL).\nL15:\nL16: The used measurement is:\nL17:   ALAVI-HARATI 2000D, KTeV, PRL 84 5279,"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2000:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ex/0001006",
+        "snapshot_path": "flavor_catalog/references/K009/ktev2000_kl_pi0mumu_arxiv.txt",
+        "sha256": "0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<3.8e-10",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10: Relevant extraction:\nL11: The KTeV search used 1997 data and reported two observed candidates with an\nL12: expected background of 0.87 +/- 0.15 events.  The resulting upper limit was\nL13:   B(K_L -> pi0 mu+ mu-) < 3.8 x 10^-10\nL14: at 90% confidence level.\nL15:\nL16: Physics context extracted from the abstract:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2000:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ex/0001006",
+        "snapshot_path": "flavor_catalog/references/K009/ktev2000_kl_pi0mumu_arxiv.txt",
+        "sha256": "0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv abstract-page minimal text snapshot\nL2: URL: https://arxiv.org/abs/hep-ex/0001006\nL3: Accessed: 2026-05-16\nL4: arXiv: hep-ex/0001006\nL5: Published as: Phys. Rev. Lett. 84, 5279 (2000)\nL6: DOI: 10.1103/PhysRevLett.84.5279"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: URL: https://arxiv.org/abs/hep-ex/0001006\nL3: Accessed: 2026-05-16\nL4: arXiv: hep-ex/0001006\nL5: Published as: Phys. Rev. Lett. 84, 5279 (2000)\nL6: DOI: 10.1103/PhysRevLett.84.5279\nL7: Title: Search for the Decay K_L -> pi0 mu+ mu-\nL8: Authors: A. Alavi-Harati et al. (KTeV Collaboration)"
+              },
+              {
+                "line_number": 6,
+                "context": "L3: Accessed: 2026-05-16\nL4: arXiv: hep-ex/0001006\nL5: Published as: Phys. Rev. Lett. 84, 5279 (2000)\nL6: DOI: 10.1103/PhysRevLett.84.5279\nL7: Title: Search for the Decay K_L -> pi0 mu+ mu-\nL8: Authors: A. Alavi-Harati et al. (KTeV Collaboration)\nL9:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2000:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ex/0001006",
+        "snapshot_path": "flavor_catalog/references/K009/ktev2000_kl_pi0mumu_arxiv.txt",
+        "sha256": "0a16b654a73f6aeceea572b5ffe6e982af2267f9c2ca4627f521237fb924e589",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.87 0.15",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9:\nL10: Relevant extraction:\nL11: The KTeV search used 1997 data and reported two observed candidates with an\nL12: expected background of 0.87 +/- 0.15 events.  The resulting upper limit was\nL13:   B(K_L -> pi0 mu+ mu-) < 3.8 x 10^-10\nL14: at 90% confidence level.\nL15:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482004:KSPi0MuMuPDG",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.15",
+        "snapshot_path": "flavor_catalog/references/K009/na48_ks_pi0mumu_pdgLive.txt",
+        "sha256": "21f62a4394611f7c8fc16d03f30112fce98f9ca790469b3298473af92919ff6f",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "2.9e-9 +1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10: Relevant PDG extraction:\nL11: The 2026 pdgLive listing gives\nL12:   B(K0S --> pi0 mu+ mu-) =\nL13:   (2.9 +1.5 -1.2 stat +/- 0.2 syst) x 10^-9.\nL14:\nL15: The used measurement is:\nL16:   BATLEY 2004A, NA48/1, PL B599 197,"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482004:KSPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ex/0409011",
+        "snapshot_path": "flavor_catalog/references/K009/na48_ks_pi0mumu_arxiv.txt",
+        "sha256": "0cee82c75bacb10391d8212179c9622b1e89f66735889b8cc5b1ba0773d137e6",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "6",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv abstract-page minimal text snapshot\nL2: URL: https://arxiv.org/abs/hep-ex/0409011\nL3: Accessed: 2026-05-16\nL4: arXiv: hep-ex/0409011\nL5: Published as: Phys. Lett. B 599, 197 (2004)\nL6: DOI: 10.1016/j.physletb.2004.08.058"
+              },
+              {
+                "line_number": 6,
+                "context": "L3: Accessed: 2026-05-16\nL4: arXiv: hep-ex/0409011\nL5: Published as: Phys. Lett. B 599, 197 (2004)\nL6: DOI: 10.1016/j.physletb.2004.08.058\nL7: Title: Observation of the rare decay K_S -> pi0 mu+ mu-\nL8: Authors: J. R. Batley et al. (NA48/1 Collaboration)\nL9:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482004:KSPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ex/0409011",
+        "snapshot_path": "flavor_catalog/references/K009/na48_ks_pi0mumu_arxiv.txt",
+        "sha256": "0cee82c75bacb10391d8212179c9622b1e89f66735889b8cc5b1ba0773d137e6",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.22 +0.18 -0.11",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9:\nL10: Relevant extraction:\nL11: NA48/1 collected a high-intensity K_S beam data set in 2002.  Six events were\nL12: found with background expectation 0.22 +0.18 -0.11 events.  Using a vector\nL13: matrix element and unit form factor, the measured branching ratio was\nL14:   B(K_S -> pi0 mu+ mu-) =\nL15:   (2.9 +1.5 -1.2 stat +/- 0.2 syst) x 10^-9."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+        "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1e-12",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 2,
+                "context": "L1: Source: arXiv source-text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: Accessed: 2026-05-16\nL4: arXiv: hep-ph/0404127\nL5: Published as: Eur. Phys. J. C 36, 57-66 (2004)"
+              },
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv source-text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: Accessed: 2026-05-16\nL4: arXiv: hep-ph/0404127\nL5: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL6: DOI: 10.1140/epjc/s2004-01879-0"
+              },
+              {
+                "line_number": 4,
+                "context": "L1: Source: arXiv source-text extraction\nL2: URL: https://arxiv.org/abs/hep-ph/0404127\nL3: Accessed: 2026-05-16\nL4: arXiv: hep-ph/0404127\nL5: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL6: DOI: 10.1140/epjc/s2004-01879-0\nL7: Title: The rare decay KL -> pi0 mu+ mu- within the SM"
+              },
+              {
+                "line_number": 6,
+                "context": "L3: Accessed: 2026-05-16\nL4: arXiv: hep-ph/0404127\nL5: Published as: Eur. Phys. J. C 36, 57-66 (2004)\nL6: DOI: 10.1140/epjc/s2004-01879-0\nL7: Title: The rare decay KL -> pi0 mu+ mu- within the SM\nL8: Authors: Gino Isidori, Christopher Smith, Rene Unterdorfer\nL9:"
+              },
+              {
+                "line_number": 13,
+                "context": "L10: Relevant extraction:\nL11: The paper writes\nL12:   B(K_L -> pi0 l+ l-) =\nL13:   [C_mix^l +/- C_int^l (Im lambda_t / 10^-4)\nL14:    + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL15:\nL16: For the muon mode, the quoted coefficients are:"
+              },
+              {
+                "line_number": 14,
+                "context": "L11: The paper writes\nL12:   B(K_L -> pi0 l+ l-) =\nL13:   [C_mix^l +/- C_int^l (Im lambda_t / 10^-4)\nL14:    + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL15:\nL16: For the muon mode, the quoted coefficients are:\nL17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2"
+              },
+              {
+                "line_number": 17,
+                "context": "L14:    + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL15:\nL16: For the muon mode, the quoted coefficients are:\nL17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2\nL18:   C_int^mu = (1.6 +/- 0.1) |a_S|\nL19:   C_dir^mu = 1.0 +/- 0.1\nL20:   C_CPC^mu = 5.2 +/- 1.6"
+              },
+              {
+                "line_number": 18,
+                "context": "L15:\nL16: For the muon mode, the quoted coefficients are:\nL17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2\nL18:   C_int^mu = (1.6 +/- 0.1) |a_S|\nL19:   C_dir^mu = 1.0 +/- 0.1\nL20:   C_CPC^mu = 5.2 +/- 1.6\nL21:"
+              },
+              {
+                "line_number": 19,
+                "context": "L16: For the muon mode, the quoted coefficients are:\nL17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2\nL18:   C_int^mu = (1.6 +/- 0.1) |a_S|\nL19:   C_dir^mu = 1.0 +/- 0.1\nL20:   C_CPC^mu = 5.2 +/- 1.6\nL21:\nL22: The same section gives:"
+              },
+              {
+                "line_number": 20,
+                "context": "L17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2\nL18:   C_int^mu = (1.6 +/- 0.1) |a_S|\nL19:   C_dir^mu = 1.0 +/- 0.1\nL20:   C_CPC^mu = 5.2 +/- 1.6\nL21:\nL22: The same section gives:\nL23:   |a_S| = 1.2 +/- 0.2"
+              },
+              {
+                "line_number": 23,
+                "context": "L20:   C_CPC^mu = 5.2 +/- 1.6\nL21:\nL22: The same section gives:\nL23:   |a_S| = 1.2 +/- 0.2\nL24:   (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12.\nL25:\nL26: For positive interference the SM prediction is"
+              },
+              {
+                "line_number": 24,
+                "context": "L21:\nL22: The same section gives:\nL23:   |a_S| = 1.2 +/- 0.2\nL24:   (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12.\nL25:\nL26: For positive interference the SM prediction is\nL27:   B(K_L -> pi0 mu+ mu-)_SM = (1.5 +/- 0.3) x 10^-11."
+              },
+              {
+                "line_number": 27,
+                "context": "L24:   (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12.\nL25:\nL26: For positive interference the SM prediction is\nL27:   B(K_L -> pi0 mu+ mu-)_SM = (1.5 +/- 0.3) x 10^-11.\nL28: The negative-interference solution is listed as about\nL29:   (1.0 +/- 0.2) x 10^-11.\nL30:"
+              },
+              {
+                "line_number": 29,
+                "context": "L26: For positive interference the SM prediction is\nL27:   B(K_L -> pi0 mu+ mu-)_SM = (1.5 +/- 0.3) x 10^-11.\nL28: The negative-interference solution is listed as about\nL29:   (1.0 +/- 0.2) x 10^-11.\nL30:\nL31: The CP-conserving two-photon estimate uses\nL32:   R_gammagamma(l = mu) = (3.7 +/- 1.7) x 10^-6"
+              },
+              {
+                "line_number": 32,
+                "context": "L29:   (1.0 +/- 0.2) x 10^-11.\nL30:\nL31: The CP-conserving two-photon estimate uses\nL32:   R_gammagamma(l = mu) = (3.7 +/- 1.7) x 10^-6\nL33: and gives\nL34:   B(K_L -> pi0 mu+ mu-)_CPC^{0++} = (5.2 +/- 1.6) x 10^-12.\nL35:"
+              },
+              {
+                "line_number": 34,
+                "context": "L31: The CP-conserving two-photon estimate uses\nL32:   R_gammagamma(l = mu) = (3.7 +/- 1.7) x 10^-6\nL33: and gives\nL34:   B(K_L -> pi0 mu+ mu-)_CPC^{0++} = (5.2 +/- 1.6) x 10^-12.\nL35:\nL36: Use in K009 catalog:\nL37: These are theory-decomposition and paper-era reference values, not"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+        "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.7 |a_S|^2 0.1 |a_S|^2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14:    + C_dir^l (Im lambda_t / 10^-4)^2 + C_CPC^l] x 10^-12.\nL15:\nL16: For the muon mode, the quoted coefficients are:\nL17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2\nL18:   C_int^mu = (1.6 +/- 0.1) |a_S|\nL19:   C_dir^mu = 1.0 +/- 0.1\nL20:   C_CPC^mu = 5.2 +/- 1.6"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+        "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.6 |a_S| 0.1 |a_S|",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:\nL16: For the muon mode, the quoted coefficients are:\nL17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2\nL18:   C_int^mu = (1.6 +/- 0.1) |a_S|\nL19:   C_dir^mu = 1.0 +/- 0.1\nL20:   C_CPC^mu = 5.2 +/- 1.6\nL21:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+        "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.0 0.1",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 19,
+                "context": "L16: For the muon mode, the quoted coefficients are:\nL17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2\nL18:   C_int^mu = (1.6 +/- 0.1) |a_S|\nL19:   C_dir^mu = 1.0 +/- 0.1\nL20:   C_CPC^mu = 5.2 +/- 1.6\nL21:\nL22: The same section gives:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+        "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "5.2 1.6",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   C_mix^mu = (3.7 +/- 0.1) |a_S|^2\nL18:   C_int^mu = (1.6 +/- 0.1) |a_S|\nL19:   C_dir^mu = 1.0 +/- 0.1\nL20:   C_CPC^mu = 5.2 +/- 1.6\nL21:\nL22: The same section gives:\nL23:   |a_S| = 1.2 +/- 0.2"
+              },
+              {
+                "line_number": 34,
+                "context": "L31: The CP-conserving two-photon estimate uses\nL32:   R_gammagamma(l = mu) = (3.7 +/- 1.7) x 10^-6\nL33: and gives\nL34:   B(K_L -> pi0 mu+ mu-)_CPC^{0++} = (5.2 +/- 1.6) x 10^-12.\nL35:\nL36: Use in K009 catalog:\nL37: These are theory-decomposition and paper-era reference values, not"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+        "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.2 0.2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:   C_CPC^mu = 5.2 +/- 1.6\nL21:\nL22: The same section gives:\nL23:   |a_S| = 1.2 +/- 0.2\nL24:   (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12.\nL25:\nL26: For positive interference the SM prediction is"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "IsidoriSmithUnterdorfer2004:KLPi0MuMu",
+        "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+        "snapshot_path": "flavor_catalog/references/K009/isidori_smith_unterdorfer2004_kl_pi0mumu_arxiv.txt",
+        "sha256": "9634d1af1d93d790c344dc3df8714f914500311a30805959d624577818d6c3c3",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.5e-11 0.3e-11",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24:   (Im lambda_t / 10^-4)_SM = 1.36 +/- 0.12.\nL25:\nL26: For positive interference the SM prediction is\nL27:   B(K_L -> pi0 mu+ mu-)_SM = (1.5 +/- 0.3) x 10^-11.\nL28: The negative-interference solution is listed as about\nL29:   (1.0 +/- 0.2) x 10^-11.\nL30:"
+              },
+              {
+                "line_number": 29,
+                "context": "L26: For positive interference the SM prediction is\nL27:   B(K_L -> pi0 mu+ mu-)_SM = (1.5 +/- 0.3) x 10^-11.\nL28: The negative-interference solution is listed as about\nL29:   (1.0 +/- 0.2) x 10^-11.\nL30:\nL31: The CP-conserving two-photon estimate uses\nL32:   R_gammagamma(l = mu) = (3.7 +/- 1.7) x 10^-6"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Muon companion rare mode, weaker and long-distance limited",
+  "priority_rationale_full": "K_L -> pi0 mu+ mu- tests the same broad s -> d neutral-current sector as the\nelectron mode, with sensitivity to flavor-changing Z and heavy neutral-gauge\nexchange. Its current upper limit is weaker relative to the expected\nshort-distance scale, and the CP-conserving two-photon piece is numerically\nimportant. It is therefore a useful companion observable but not a major\ndriver of the anarchic RS scan."
+}

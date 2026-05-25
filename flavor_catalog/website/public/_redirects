@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects.  Astro builds with trailing-slash URLs, but
+# Cloudflare Pages does not auto-add the trailing slash.  Redirect bare
+# /entries/<id> -> /entries/<id>/ so deep links from external citations
+# don't 404.
+#
+# Format reference: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Status 301 is permanent; safe because the canonical URL has the trailing slash.
+
+/entries/:id   /entries/:id/   301
+/families/:f   /families/:f/   301

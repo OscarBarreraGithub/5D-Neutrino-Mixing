@@ -1,0 +1,145 @@
+---
+import Badges from './Badges.astro';
+import { notationToMath, processNameToHtml } from '../lib/notation';
+
+interface IndexRow {
+  process_id: string;
+  family: string;
+  family_original?: string | null;
+  tier: string;
+  fact_check_verdict?: string | null;
+  standard_notation?: string | null;
+  process_name?: string | null;
+  implementation_difficulty?: string | null;
+  code_coverage_status?: string | null;
+  constraint_priority?: string | null;
+  priority_rationale_short?: string | null;
+}
+
+interface Props {
+  rows: IndexRow[];
+  showFamily?: boolean;
+  showOriginalFamily?: boolean;
+}
+
+const { rows, showFamily = false, showOriginalFamily = false } = Astro.props as Props;
+
+// Phase 9: default sort = constraint_priority (HIGH > MEDIUM > LOW > UNRANKED),
+// then by process_id ascending.  The page-level sort script in family pages
+// and browse will re-sort on header click, but the initial render is this.
+const PRIORITY_ORDER: Record<string, number> = { HIGH: 0, MEDIUM: 1, LOW: 2 };
+function priorityRank(r: IndexRow): number {
+  const cp = (r.constraint_priority || '').toUpperCase();
+  return PRIORITY_ORDER[cp] ?? 99;
+}
+const sortedRows = rows.slice().sort((a, b) => {
+  const dp = priorityRank(a) - priorityRank(b);
+  if (dp !== 0) return dp;
+  return (a.process_id || '').localeCompare(b.process_id || '');
+});
+
+const FAMILY_LABELS: Record<string, string> = {
+  kaon: 'Kaon',
+  charm: 'Charm',
+  beauty: 'Beauty',
+  top_higgs_ew: 'Top/Higgs/EW',
+  charged_lepton: 'Charged lepton',
+  edm_neutrino: 'EDM/neutrino',
+  collider_rs: 'Collider RS',
+  secondary: 'Secondary',
+};
+---
+<div class="entry-table-wrap">
+<table class="entry-table" data-entry-table>
+  <thead>
+    <tr>
+      <th data-sort="priority" class="th-sorted-asc">Priority</th>
+      <th data-sort="process_id">ID</th>
+      <th data-sort="standard_notation">Observable</th>
+      {showFamily && <th data-sort="family">Family</th>}
+      {showOriginalFamily && <th data-sort="family_original">Origin family</th>}
+      <th data-sort="implementation_difficulty">Difficulty</th>
+      <th data-sort="code_coverage_status">Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    {sortedRows.map((r) => (
+      <tr class="row-link"
+          data-process-id={r.process_id}
+          data-family={r.family}
+          data-tier={r.tier}
+          data-verdict={(r.fact_check_verdict || '').toUpperCase()}
+          data-difficulty={(r.implementation_difficulty || '').toUpperCase()}
+          data-coverage={(r.code_coverage_status || '').toUpperCase()}
+          data-priority={(r.constraint_priority || 'UNRANKED').toUpperCase()}
+          data-priority-rank={priorityRank(r)}
+          data-href={`/entries/${r.process_id}/`}>
+        <td>
+          <a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
+            <Badges kind="priority" value={r.constraint_priority} tooltip={r.priority_rationale_short} />
+          </a>
+        </td>
+        <td>
+          <a class="row-cell-link row-id-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
+            <code>{r.process_id}</code>
+          </a>
+        </td>
+        <td class="row-notation">
+          <a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
+            <span set:html={r.standard_notation ? notationToMath(r.standard_notation) : ''}></span>
+          </a>
+          {r.process_name && <div class="row-process-name" set:html={processNameToHtml(r.process_name)}></div>}
+        </td>
+        {showFamily && (
+          <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><span class="family-chip">{FAMILY_LABELS[r.family] ?? r.family}</span></a></td>
+        )}
+        {showOriginalFamily && (
+          <td>
+            <a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true">
+              {r.family_original
+                ? <span class="family-chip">{FAMILY_LABELS[r.family_original] ?? r.family_original}</span>
+                : <span class="row-muted">-</span>}
+            </a>
+          </td>
+        )}
+        <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="difficulty" value={r.implementation_difficulty} /></a></td>
+        <td><a class="row-cell-link" href={`/entries/${r.process_id}/`} tabindex="-1" aria-hidden="true"><Badges kind="coverage" value={r.code_coverage_status} /></a></td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+</div>
+
+<script is:inline>
+  // Make every .row-link <tr> keyboard-navigable and click-navigable.
+  // The <a> tags inside each cell handle the actual navigation;
+  // this script adds a single focusable row-level link for keyboard users
+  // and routes plain row clicks (not on child links) to the row's URL.
+  (function () {
+    function initRowLinks() {
+      document.querySelectorAll('table[data-entry-table] tbody tr.row-link').forEach(function (tr) {
+        var href = tr.getAttribute('data-href');
+        if (!href) return;
+        tr.setAttribute('tabindex', '0');
+        tr.setAttribute('role', 'link');
+        tr.setAttribute('aria-label', 'Open entry ' + (tr.getAttribute('data-process-id') || ''));
+        tr.addEventListener('click', function (e) {
+          // Don't double-navigate if a real <a> child was clicked.
+          if (e.target && e.target.closest('a')) return;
+          location.assign(href);
+        });
+        tr.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            location.assign(href);
+          }
+        });
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRowLinks);
+    } else {
+      initRowLinks();
+    }
+  })();
+</script>

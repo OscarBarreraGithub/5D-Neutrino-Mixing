@@ -1,0 +1,119 @@
+---
+process_id: C003
+generated_at: '2026-05-18T01:53:05Z'
+sources:
+- block_key: Delta a_CP^dir
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM23/DCPV/direct_indirect_cpv.html
+  snapshot_path: flavor_catalog/references/C003/hflav2025_direct_indirect_cpv.txt
+  sha256: sha256:50781ba7963bece8557bde594e6b8b71b7c31d3f5d3c1216028fd163550495cb
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: -0.159 +/- 0.029
+    status: RESOLVED
+    matches:
+    - line_number: 36
+      context: "L33: \nL34: Central values and one-standard-deviation errors:\nL35: a_CP^ind = (-0.010 +/- 0.012)%\nL36: Delta\
+        \ a_CP^dir = (-0.159 +/- 0.029)%\n"
+- block_key: a_CP^ind
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM23/DCPV/direct_indirect_cpv.html
+  snapshot_path: flavor_catalog/references/C003/hflav2025_direct_indirect_cpv.txt
+  sha256: sha256:50781ba7963bece8557bde594e6b8b71b7c31d3f5d3c1216028fd163550495cb
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '-0.01'
+    status: RESOLVED
+    matches:
+    - line_number: 35
+      context: "L32: or 5.3 standard deviations.\nL33: \nL34: Central values and one-standard-deviation errors:\nL35: a_CP^ind\
+        \ = (-0.010 +/- 0.012)%\nL36: Delta a_CP^dir = (-0.159 +/- 0.029)%\n"
+- block_key: No-CPV point in the Delta a_CP^dir vs a_CP^ind fit
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM23/DCPV/direct_indirect_cpv.html
+  snapshot_path: flavor_catalog/references/C003/hflav2025_direct_indirect_cpv.txt
+  sha256: sha256:50781ba7963bece8557bde594e6b8b71b7c31d3f5d3c1216028fd163550495cb
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: ''
+    status: UNRESOLVED
+    matches: []
+- block_key: Delta A_CP = A_CP(D0 -> K-K+) - A_CP(D0 -> pi-pi+)
+  source_url: https://arxiv.org/abs/1903.08726
+  snapshot_path: flavor_catalog/references/C003/lhcb2019_arxiv1903_08726.txt
+  sha256: sha256:c0d7f9a85048f58c5e51fdc28c9b6035658a2898b940742a6bbd237eff5d9b64
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: -15.4 +/- 2.9
+    status: RESOLVED
+    matches:
+    - line_number: 26
+      context: "L23: for muon-tagged D0 mesons.\nL24: \nL25: Combining these with previous LHCb results leads to\nL26: Delta\
+        \ A_CP = (-15.4 +/- 2.9) x 10^-4,\nL27: where the uncertainty includes both statistical and systematic contributions.\n\
+        L28: The measured value differs from zero by more than five standard deviations.\nL29: This is the first observation\
+        \ of CP violation in the decay of charm hadrons.\n"
+- block_key: A_CP^K - A_CP^pi
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/results_mix_cpv.html
+  snapshot_path: flavor_catalog/references/C003/hflav_ckm25_dcpv_inputs.txt
+  sha256: sha256:ca6fa2bc4a1cf6cec7988acd6dd5208785446a214241b6dc8cb78ca433721c12
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: -0.154 +/- 0.029
+    status: RESOLVED
+    matches:
+    - line_number: 18
+      context: |
+        L15: Selected measured-observable input:
+        L16: Index 60:
+        L17: Observable: A_CP^K - A_CP^pi
+        L18: Value: (-0.154 +/- 0.029)%
+        L19: Source: LHCb, 8.9 fb^-1 pp collisions at sqrt(s) = 7, 8, 13 TeV.
+        L20: Flavor tags: D*+ -> D0 pi+ and B -> D0 mu- X.
+        L21: Mean time inputs: (<t>_K - <t>_pi) / tau_D = 0.115 +/- 0.002;
+- block_key: 'A_pi in all-CPV-allowed fit #3'
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/figures/table_results.pdf
+  snapshot_path: flavor_catalog/references/C003/hflav_ckm25_dcpv_inputs.txt
+  sha256: sha256:ca6fa2bc4a1cf6cec7988acd6dd5208785446a214241b6dc8cb78ca433721c12
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.225 +/- 0.057
+    status: RESOLVED
+    matches:
+    - line_number: 35
+      context: |
+        L32: Final HFLAV CKM25 table_results.pdf extract from pdftotext:
+        L33: All-CPV-allowed fit #3:
+        L34: A_D (%) = -0.81 +/- 0.88, 95% C.L. interval [-2.54, 0.92].
+        L35: A_pi (%) = 0.225 +/- 0.057, 95% C.L. interval [0.11, 0.34].
+        L36: A_K (%) = 0.068 +/- 0.051, 95% C.L. interval [-0.03, 0.17].
+        L37: chi^2/d.o.f. = 70.711/(63 - 10) = 1.33.
+- block_key: 'A_K in all-CPV-allowed fit #3'
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/charm/CKM25/figures/table_results.pdf
+  snapshot_path: flavor_catalog/references/C003/hflav_ckm25_dcpv_inputs.txt
+  sha256: sha256:ca6fa2bc4a1cf6cec7988acd6dd5208785446a214241b6dc8cb78ca433721c12
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_uncertainty
+    anchor_string: 0.068 +/- 0.051
+    status: RESOLVED
+    matches:
+    - line_number: 36
+      context: |
+        L33: All-CPV-allowed fit #3:
+        L34: A_D (%) = -0.81 +/- 0.88, 95% C.L. interval [-2.54, 0.92].
+        L35: A_pi (%) = 0.225 +/- 0.057, 95% C.L. interval [0.11, 0.34].
+        L36: A_K (%) = 0.068 +/- 0.051, 95% C.L. interval [-0.03, 0.17].
+        L37: chi^2/d.o.f. = 70.711/(63 - 10) = 1.33.
+- block_key: Contextual RS-flavor baseline for post-2008 comparison
+  source_url: https://arxiv.org/abs/0804.1954
+  snapshot_path: flavor_catalog/references/C003/cfw2008_arxiv0804_1954.txt
+  sha256: sha256:1b19e96d30f72bd6d162019be90e6779adf242a429f50685fb8757335e1cc299
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: ''
+    status: UNRESOLVED
+    matches: []

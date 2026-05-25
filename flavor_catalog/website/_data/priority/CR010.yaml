@@ -1,0 +1,12 @@
+---
+process_id: CR010
+constraint_priority: LOW
+priority_rationale_short: "Doublet VLQ bound is lower and branching-assumption heavy."
+priority_rationale_full: |
+  The explicit (T,B) doublet limit is about 1.37 TeV, with stronger
+  single-branching endpoints covered by other VLQ rows. It is spectrum and
+  branching dependent and dominated, as an anarchic-flavor constraint, by
+  low-energy flavor and by more direct partner rows. This makes it an
+  auxiliary collider check.
+ranked_by: codex-gpt-5.5-xhigh-batch-P5
+ranked_at: 2026-05-18T01:37:22-04:00

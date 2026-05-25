@@ -1,0 +1,325 @@
+{
+  "process_id": "E006",
+  "family": "edm_neutrino",
+  "family_original": "edm_neutrino",
+  "tier": "PRIMARY",
+  "standard_notation": "d_Hg",
+  "process_name": "Mercury-199 electric dipole moment",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires new CP-odd quark/gluon and semileptonic operator matching, QCD running and thresholds, and atomic/nuclear translation for the 199Hg Schiff-moment dominated response. Existing Delta F=2 and mu->e gamma code paths do not provide this observable.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'",
+      "rg -n \"Hg|mercury|199Hg|d_Hg|dHg|Schiff|atomic EDM|diamagnetic|chromo[- ]?EDM|CEDM|Weinberg|CP[- ]odd|electric dipole|EDM|dipole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "Focused Hg/mercury/Schiff/diamagnetic EDM grep over the required implementation/test directories found no 199Hg EDM implementation.",
+      "Generic EDM/dipole grep found only the off-diagonal mu->e gamma dipole helper, not a diamagnetic atom or hadronic EDM calculation.",
+      "flavorConstraints/muToEGamma.py:3 describes an off-diagonal LFV dipole constraint.",
+      "flavorConstraints/muToEGamma.py:21 cites the Perez-Randall mu->e gamma dipole operator.",
+      "flavorConstraints/muToEGamma.py:81 implements check_mu_to_e_gamma, not d_Hg."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Graner et al., Phys. Rev. Lett. 116, 161601 (2016); arXiv:1601.04339",
+      "observable": "Mercury-199 atomic electric dipole moment",
+      "value": 7.4e-30,
+      "uncertainty": null,
+      "units": "e cm",
+      "display": null,
+      "year": 2016,
+      "experiment": "Graner et al., Phys. Rev. Lett. 116, 161601 (2016); arXiv:1601.04339",
+      "source_url": "https://arxiv.org/abs/1601.04339",
+      "snapshot_path": "flavor_catalog/references/E006/graner2016_arxiv1601_04339.txt",
+      "sha256": "44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Graner et al., Phys. Rev. Lett. 116, 161601 (2016); arXiv:1601.04339",
+      "observable": "Improvement of the 199Hg EDM bound relative to the previous limit",
+      "value": 4,
+      "uncertainty": null,
+      "units": "dimensionless improvement factor",
+      "display": null,
+      "year": 2016,
+      "experiment": "Graner et al., Phys. Rev. Lett. 116, 161601 (2016); arXiv:1601.04339",
+      "source_url": "https://arxiv.org/abs/1601.04339",
+      "snapshot_path": "flavor_catalog/references/E006/graner2016_arxiv1601_04339.txt",
+      "sha256": "44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG Live 2026 S017EDM neutron electric dipole moment datablock",
+      "observable": "Theory-derived neutron EDM rows using 199Hg atom EDM",
+      "value": null,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2026,
+      "experiment": "PDG Live 2026 S017EDM neutron electric dipole moment datablock",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM",
+      "snapshot_path": "flavor_catalog/references/E006/pdg2026_neutron_edm_hg_crossref.txt",
+      "sha256": "15f7baddbe7725b217f0243c0f408556824ddd7404590c89ded1e50b8227317a",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Sahoo, Phys. Rev. D 95, 013002 (2017); arXiv:1612.09371",
+      "observable": "Selected interpretation-level limits derived from 199Hg",
+      "value": null,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2017,
+      "experiment": "Sahoo, Phys. Rev. D 95, 013002 (2017); arXiv:1612.09371",
+      "source_url": "https://arxiv.org/abs/1612.09371",
+      "snapshot_path": "flavor_catalog/references/E006/sahoo2017_arxiv1612_09371.txt",
+      "sha256": "88e10fc1c214f7aa0ccb3c0fabfb1db7442af7d77075fa5d4a4ba3f19ed694d0",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "graner2016_arxiv1601_04339.txt": "sha256:44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86",
+    "pdg2026_neutron_edm_hg_crossref.txt": "sha256:15f7baddbe7725b217f0243c0f408556824ddd7404590c89ded1e50b8227317a",
+    "sahoo2017_arxiv1612_09371.txt": "sha256:88e10fc1c214f7aa0ccb3c0fabfb1db7442af7d77075fa5d4a4ba3f19ed694d0",
+    "cfw2008_arxiv0804_1954.txt": "sha256:7b6bedd895a42b51a2f725b271d860785acde6e5cb2cd1456882b7678d79fd5d"
+  },
+  "source_shas_count": 4,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T13:13:13-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T13:13:13-04:00",
+      "agent_id": "PKA-E006",
+      "reason": "Initial PKA source extraction and draft started."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T13:13:13-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T13:13:13-04:00",
+      "agent_id": "PKA-E006",
+      "reason": "PKA draft, minimal source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:40:00-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:40:00-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for wa_w4_kaon_edm."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T13:47:19-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T13:47:19-04:00",
+      "agent_id": "CA",
+      "reason": "Checker found CHK-1 strict provenance issue; see flavor_catalog/worklogs/checker/ca_w4_kaon_edm.md.",
+      "issues": [
+        "CHK-1: TeX quotes the factor-4 Hg-bound improvement, but no value-bearing pdg_or_equivalent entry records that numerical claim with complete strict metadata."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:56:26-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:56:26-04:00",
+      "agent_id": "WA-v2",
+      "reason": "Cycle-2 writer rework added strict metadata for the Graner 2016 factor-4 improvement claim."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:16:00-04:00",
+      "agent": "CA",
+      "cycle": 2,
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:16:00-04:00",
+      "agent_id": "CA",
+      "reason": "Cycle-2 checker re-check passed CHK-1 through CHK-8; see flavor_catalog/worklogs/checker/ca_w4_kaon_edm_v2.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-edm_neutrino",
+      "agent_id": "factcheck-codex-edm_neutrino",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Hg-199 direct limit, improvement factor, PDG Hg-theory cross-reference, and Sahoo translations verified."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "E: EDMs belong inside the flavor fit"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(d_{\\mathrm{Hg}}\\), for neutral\n\\(^{199}\\mathrm{Hg}\\).  This entry covers the permanent EDM of the\ndiamagnetic \\(^{199}\\mathrm{Hg}\\) atom, cataloged in the\n\\texttt{edm\\_neutrino} family as a hadronic/nuclear CP probe.  It is a\nflavor-diagonal observable, but its interpretation constrains CP-odd quark,\ngluon, semileptonic, and nuclear Schiff-moment sources.",
+    "pdg_prose": "The canonical direct experimental limit is the Graner et al. 2016\n\\(^{199}\\mathrm{Hg}\\) result (\\texttt{Graner:HgEDM2016}):\n\\[\n  |d_{\\mathrm{Hg}}| < 7.4\\times 10^{-30}\\ e\\,\\mathrm{cm}\n  \\qquad (95\\%~\\mathrm{C.L.}).\n\\]\nThe local snapshot\n\\texttt{flavor\\_catalog/references/E006/graner2016\\_arxiv1601\\_04339.txt}\nalso records the arXiv-v4 central measurement and uncertainties; because the\nPKA flagged the erratum cross-check for the signed central value, the direct\nlimit is the catalog value.  PDG Live 2026 does not expose a standalone\nHg-atom datablock here, but the neutron and proton EDM datablocks cite the\nsame Hg measurement for theory-derived nucleon limits.  In the neutron\ndatablock, PDG lists Graner 2016 as a \\(^{199}\\mathrm{Hg}\\)-plus-theory row,\n\\(<0.16\\) in units of \\(10^{-25}\\ e\\,\\mathrm{cm}\\) at \\(95\\%\\) CL, and\nSahoo 2017 as \\(<0.22\\) in the same units and confidence level\n(\\texttt{PDG2026:NeutronEDMHgCrossref}); see\n\\texttt{flavor\\_catalog/references/E006/pdg2026\\_neutron\\_edm\\_hg\\_crossref.txt}.",
+    "relevance": "Warped or composite anarchic flavor models generically contain new CP phases.\nLoop matching can generate quark EDMs, quark chromo-EDMs, the Weinberg\nthree-gluon operator, and semileptonic CP-odd operators.  In a diamagnetic\nclosed-shell atom such as \\(^{199}\\mathrm{Hg}\\), the dominant hadronic\nsensitivity is usually phrased through the nuclear Schiff moment and\nCP-odd pion-nucleon interactions, rather than through a simple elementary\nfermion EDM.  The observable is therefore complementary to the neutron EDM:\nit probes a different linear combination of CP-odd low-energy operators and\nnuclear matrix elements.",
+    "post_2008": "Relative to the 2008 CFW warped-flavor baseline\n(\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}), the main experimental update is\nthe 2016 Washington \\(^{199}\\mathrm{Hg}\\) measurement\n(\\texttt{Graner:HgEDM2016}), which improved the previous Hg bound by a factor\nof \\(4\\) and remains the standard diamagnetic-atom benchmark.  The post-2008\ntheory update represented here by Sahoo 2017\n(\\texttt{Sahoo:HgEDMTheory2017}) combines the Hg atom limit with relativistic\natomic calculations and quotes derived limits including\n\\(d_n<2.2\\times10^{-26}\\ |e|\\,\\mathrm{cm}\\),\n\\(d_p<2.1\\times10^{-25}\\ |e|\\,\\mathrm{cm}\\),\n\\(|\\bar\\theta|<1.1\\times10^{-10}\\), and\n\\(|\\tilde d_u-\\tilde d_d|<5.5\\times10^{-27}\\ |e|\\,\\mathrm{cm}\\)\n(\\texttt{Sahoo:HgEDMTheory2017}).",
+    "validity": "The experimental atom-EDM bound is robust as a null search for a\n\\(P\\)- and \\(T\\)-violating energy shift.  Translating it into RS parameters is\nmodel-dependent: the result depends on the chosen CP-odd operator basis,\nQCD running and thresholds, atomic many-body coefficients, nuclear Schiff\nmoments, hadronic matrix elements, and possible cancellations among sources.\nIt should be treated as an EDM-adjacent loop/nuclear-translation constraint,\nnot as a direct \\(\\Delta F=2\\) bound in the current quark scan.\n\nFor anarchic CP phases, EDM constraints should be reviewed jointly with the\nflavor branching rows that share the same Wilson coefficients (relevant\ncross-refs: K001, K003, B011, B033, B034), not as an isolated appendix.",
+    "code_coverage_prose": "\\textbf{NO.}  The required catalog greps and a focused search for\n\\texttt{Hg}, \\texttt{mercury}, \\texttt{199Hg}, \\texttt{d\\_Hg},\n\\texttt{Schiff}, \\texttt{diamagnetic}, \\texttt{chromo-EDM},\n\\texttt{Weinberg}, and generic \\texttt{EDM}/\\texttt{dipole} terms over\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, and \\texttt{tests/} found no\n\\(^{199}\\mathrm{Hg}\\) EDM implementation.  The only nearby dipole code is the\noff-diagonal \\(\\mu\\to e\\gamma\\) helper in\n\\texttt{flavorConstraints/muToEGamma.py:3}, \\texttt{:21}, and \\texttt{:81}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A live constraint would require new CP-odd quark/gluon and\nsemileptonic operator matching, RG running to hadronic scales, and an\natomic/nuclear translation layer for \\(^{199}\\mathrm{Hg}\\).  The existing\nSLL/SLR/VLL/VRR/LR \\(\\Delta F=2\\) basis and the \\(\\mu\\to e\\gamma\\) NDA helper\ndo not cover this observable.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{Graner:HgEDM2016}, \\texttt{PDG2026:NeutronEDMHgCrossref},\n\\texttt{Sahoo:HgEDMTheory2017}, and\n\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/edm_neutrino/E006.yaml",
+  "source_tex": "flavor_catalog/processes/edm_neutrino/E006.tex",
+  "worklog_path": "flavor_catalog/worklogs/E006/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 4,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_direct_limit",
+        "source_url": "https://arxiv.org/abs/1601.04339",
+        "snapshot_path": "flavor_catalog/references/E006/graner2016_arxiv1601_04339.txt",
+        "sha256": "44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_Hg| < 7.4 x 10^-30 e cm at 95% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20:   d_Hg = (2.20 +/- 2.75_stat +/- 1.48_syst) x 10^-30 e cm.\nL21:\nL22: Canonical limit:\nL23:   |d_Hg| < 7.4 x 10^-30 e cm at 95% C.L.\nL24:\nL25: Notes:\nL26:   The abstract states that this improves the previous limit by a factor of 4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "post_2008_improvement_factor",
+        "source_url": "https://arxiv.org/abs/1601.04339",
+        "snapshot_path": "flavor_catalog/references/E006/graner2016_arxiv1601_04339.txt",
+        "sha256": "44522bf9473b1ca7970c1b0c4a7343cacc09df2efd9405b4a569b9f52012dd86",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_units_fallback",
+            "anchor_string": "4 dimensionless improvement factor",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 26,
+                "context": "L23:   |d_Hg| < 7.4 x 10^-30 e cm at 95% C.L.\nL24:\nL25: Notes:\nL26:   The abstract states that this improves the previous limit by a factor of 4\nL27:   and discusses implications for CP-violating observables beyond the Standard\nL28:   Model.\nL29:   PDG Live S017EDM cites the published PRL and its PRL 119, 119901 (2017)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "pdg_cross_reference_neutron",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM",
+        "snapshot_path": "flavor_catalog/references/E006/pdg2026_neutron_edm_hg_crossref.txt",
+        "sha256": "15f7baddbe7725b217f0243c0f408556824ddd7404590c89ded1e50b8227317a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "Graner 2016 row <0.16 and Sahoo 2017 row <0.22 in units of 10^-25 e cm, both at 95% CL; these are not direct Hg atom EDM values.",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:\nL16: Relevant PDG rows:\nL17:   S017EDM neutron EDM table units: 10^-25 e cm.\nL18:   Sahoo 2017 row: <0.22 at 95% CL, comment \"199Hg atom EDM + theory\".\nL19:   Graner 2016 row: <0.16 at 95% CL, comment \"MRS 199Hg atom EDM + theory\".\nL20:\nL21: Relevant PDG note:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "theory_translation_context",
+        "source_url": "https://arxiv.org/abs/1612.09371",
+        "snapshot_path": "flavor_catalog/references/E006/sahoo2017_arxiv1612_09371.txt",
+        "sha256": "88e10fc1c214f7aa0ccb3c0fabfb1db7442af7d77075fa5d4a4ba3f19ed694d0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "d_n < 2.2 x 10^-26 |e| cm, d_p < 2.1 x 10^-25 |e| cm, |theta_bar| < 1.1 x 10^-10, |tilde d_u - tilde d_d| < 5.5 x 10^-27 |e| cm.",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17:   coupling and nuclear Schiff-moment interactions.\nL18:\nL19: Selected numerical limits from the arXiv abstract:\nL20:   d_n < 2.2 x 10^-26 |e| cm.\nL21:   d_p < 2.1 x 10^-25 |e| cm.\nL22:   |theta_bar| < 1.1 x 10^-10.\nL23:   |tilde{d}_u - tilde{d}_d| < 5.5 x 10^-27 |e| cm."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Hg EDM is powerful but nuclear-translation limited.",
+  "priority_rationale_full": "The mercury atom EDM gives a stringent null test of CP-odd hadronic and\nsemileptonic sources, especially isovector combinations. It is\ncomplementary to neutron EDM and qCEDM constraints, but translating it to\nRS parameters depends on Schiff moments, nuclear and atomic matrix\nelements, and possible cancellations. That makes it meaningful but\nsubleading to the cleanest EDM anchors."
+}

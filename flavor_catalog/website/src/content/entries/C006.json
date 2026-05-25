@@ -1,0 +1,217 @@
+{
+  "process_id": "C006",
+  "family": "charm",
+  "family_original": "charm",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(D^0\\to e^\\pm\\mu^\\mp)",
+  "process_name": "Lepton-flavor-violating neutral-charm decay D0 -> e mu",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": "Missing implementation needs a new Delta C = 1 charged-LFV four-fermion operator convention and D0 -> e mu branching-ratio normalization; the existing Delta F = 2 meson-mixing basis and mu->e gamma dipole checker do not cover it.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"D0.*e.?mu|D\\\\^0.*e.?mu|D0.*mu.?e|D\\\\^0.*mu.?e|c.?->.?u.*e.*mu|c.?->.?u.*mu.*e|D0.?->.?e|D0.?->.?mu\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused C006 search returned no D0 -> e mu or c -> u e mu implementation in the required implementation/test directories; exact hits were D0-mixing mu_had_GeV false positives.",
+      "quarkConstraints/deltaf2.py:252 and quarkConstraints/deltaf2.py:941 are D0 mixing, not D0 -> e mu.",
+      "quarkConstraints/modern/phenomenology.py:23 and quarkConstraints/modern/phenomenology.py:668 are the neutral-meson D0 mixing policy/evaluator, not rare LFV charm.",
+      "flavorConstraints/muToEGamma.py:75 and scanParams/scan.py:524 implement/call the separate mu -> e gamma dipole constraint."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:D0EMu",
+      "observable": "BR(D0 -> mu+- e-+)",
+      "value": 1.3e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "PDG Live/API S032.40",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.40",
+      "snapshot_path": "flavor_catalog/references/C006/pdg2026_d0_emu_pdgLive.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "LHCb2016:D0EMu",
+      "observable": "BR(D0 -> e^+- mu^-+)",
+      "value": 1.3e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2016,
+      "experiment": "LHCb Phys. Lett. B754 (2016) 167 / arXiv:1512.00322",
+      "source_url": "https://arxiv.org/abs/1512.00322",
+      "snapshot_path": "flavor_catalog/references/C006/lhcb2016_arxiv1512_00322.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "rs_baseline": {
+      "source": "Csaki, Falkowski, Weiler 2008",
+      "source_key": "CsakiFalkowskiWeiler2008:CompositeFlavor",
+      "year": 2008,
+      "generic_rs_kk_gluon_scale_TeV": 21,
+      "composite_pseudo_goldstone_kk_gluon_scale_TeV": 33,
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-16",
+      "snapshot_path": "flavor_catalog/references/C006/cfw2008_arxiv0804_1954.txt",
+      "sha256_of_text_snapshot": "sha256:28b42057f0ce1199e7d86b3f5d8d3748566ccace05289d05ae59f622c5790246"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "babar2012_arxiv1206_5419.txt": "sha256:e5042790a01b509fbcc0b9faa9f286e8ed5b9901aa5e1433d829bd6e68870372",
+    "belle2010_arxiv1003_2345.txt": "sha256:da7d0fe5b963156bbb0afb7272bb823259dae8becb18cc3afac5d1f109a312cd",
+    "cfw2008_arxiv0804_1954.txt": "sha256:28b42057f0ce1199e7d86b3f5d8d3748566ccace05289d05ae59f622c5790246",
+    "lhcb2016_arxiv1512_00322.txt": "sha256:caf3d6e3bae80b55d3658da07260696e635347219881f2abb3949b27bfa2140c",
+    "pdg2026_d0_emu_pdgLive.txt": "sha256:87cbe3dec3cf90c4fbfd989cbf320dd6e16eb2c9d749b3843434289e978f572c",
+    "source_manifest.yaml": "sha256:efd40e71261062116dc5b5b40ad1b79891046993506d78e5d245719b65080190"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:24:29-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:24:29-04:00",
+      "agent_id": "PKA-C006",
+      "reason": "Initial PKA source extraction and C006 draft deposit."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:46:21-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:46:21-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w5b_charm_edm",
+      "reason": "Writer polish completed for wa_w5b_charm_edm; numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T15:17:35-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T15:17:35-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_charm_edm",
+      "reason": "Checker verified CHK-1 through CHK-8 for ca_w5b_charm_edm."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charm",
+      "agent_id": "factcheck-codex-charm",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "PDG, LHCb, Belle, and BABAR D0 -> e mu limits verified."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:}\n\\(\\mathcal{B}(D^0\\to e^\\pm\\mu^\\mp)\\).\nThis entry covers the charged-lepton-flavor-violating neutral-charm decay\n\\(D^0\\to e^\\pm\\mu^\\mp\\).  It is a \\(\\Delta C=1\\), \\(c\\to u e\\mu\\)\nnull test with charge-conjugate final states included in the experimental\nlimit.  In flavor structure it is an up-sector analogue of semileptonic LFV\nprobes such as \\(B^+\\to K^+ e^\\pm\\mu^\\mp\\), but with a purely leptonic\ntwo-body \\(D^0\\) final state.",
+    "pdg_prose": "The sidecar source \\texttt{PDG2026:D0EMu}, PDG Live/API listing S032.40\naccessed on 2026-05-16, gives\n\\[\n  \\mathcal{B}(D^0\\to e^\\pm\\mu^\\mp) < 1.3\\times 10^{-8}\n  \\qquad (90\\%~{\\rm C.L.}).\n\\]\nThe PDG-used input is the 2016 LHCb search\n\\texttt{LHCb2016:D0EMu}, based on \\(3.0\\,{\\rm fb}^{-1}\\) of \\(pp\\) data\nat \\(\\sqrt{s}=7\\) and \\(8\\,{\\rm TeV}\\) and normalized with\n\\(D^0\\to K^-\\pi^+\\).  The same LHCb source reports no significant excess.\nEarlier post-2008 B-factory limits were weaker:\n\\texttt{Belle2010:D0EMu} reported\n\\(\\mathcal{B}(D^0\\to e^+\\mu^-)+\\mathcal{B}(D^0\\to\\mu^+e^-)<2.6\\times10^{-7}\\),\nand \\texttt{BaBar2012:D0EeMuMuEMu} reported\n\\(\\mathcal{B}(D^0\\to e\\mu)<3.3\\times10^{-7}\\), both at 90\\% C.L.  The\nlocal snapshots are\n\\texttt{flavor\\_catalog/references/C006/pdg2026\\_d0\\_emu\\_pdgLive.txt},\n\\texttt{lhcb2016\\_arxiv1512\\_00322.txt},\n\\texttt{belle2010\\_arxiv1003\\_2345.txt}, and\n\\texttt{babar2012\\_arxiv1206\\_5419.txt}.",
+    "relevance": "Anarchic warped flavor already generates nonuniversal \\(c\\)- and \\(u\\)-quark\ncouplings through localization and KK exchange.  C006 additionally requires\nlepton-flavor violation, so it is not a quark-only \\(\\Delta F=2\\) constraint.\nIn a lepton-extended RS pipeline it would constrain four-fermion\n\\((\\bar u\\Gamma c)(\\bar e\\Gamma\\mu)\\) structures, flavor-changing \\(Z\\)-like\ncouplings combined with lepton flavor violation, scalar exchange, or explicit\nleptoquark/R-parity-violating UV completions.  It is therefore a roadmap\nprocess for joint up-sector and charged-lepton flavor alignment.",
+    "post_2008": "The arXiv:0804.1954 RS-flavor baseline\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor} predates the modern\n\\(D^0\\to e\\mu\\) search sequence.  Belle's 2010 result\n\\texttt{Belle2010:D0EMu} set the combined charge-mode limit at\n\\(2.6\\times10^{-7}\\), BaBar's 2012 continuum-charm search\n\\texttt{BaBar2012:D0EeMuMuEMu} gave \\(3.3\\times10^{-7}\\), and LHCb's 2016\nhadron-collider analysis \\texttt{LHCb2016:D0EMu} became the current\nPDG-used input at \\(1.3\\times10^{-8}\\).  The LHCb source describes this as\nan order-of-magnitude improvement over the previous limit and notes\nsensitivity to leptoquark and R-parity-violating SUSY parameter space.",
+    "validity": "The experimental upper limit is a clean LFV null result.  The RS interpretation\nis model dependent: the quark-only scan has no charged-LFV \\(c\\to u e\\mu\\)\noperator, and different chiral structures map differently onto the two-body\n\\(D^0\\) rate.  A conservative future use should compare the limit to a defined\n\\(\\Delta C=1\\) LFV Wilson basis, with the \\(D^0\\) decay constant and lepton\nmass effects stated explicitly, rather than reusing the neutral-meson mixing\nbasis.",
+    "code_coverage_prose": "\\textbf{NO.}  The sidecar \\texttt{code\\_coverage} block records the required\ngreps across \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no\n\\(D^0\\to e^\\pm\\mu^\\mp\\), \\(c\\to u e\\mu\\), or rare-charm LFV implementation.\nNearby hits are different observables: \\(D^0\\) mixing is configured at\n\\texttt{quarkConstraints/deltaf2.py}:252 and evaluated at\n\\texttt{quarkConstraints/deltaf2.py}:941; the modern policy surface lists\nonly neutral \\(D^0\\) mixing at\n\\texttt{quarkConstraints/modern/phenomenology.py}:23 and evaluates that\nbridge at \\texttt{quarkConstraints/modern/phenomenology.py}:668.  The\n\\(\\mu\\to e\\gamma\\) dipole checker at\n\\texttt{flavorConstraints/muToEGamma.py}:75, called from\n\\texttt{scanParams/scan.py}:524, is a separate charged-LFV observable.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  A first live constraint would need a new \\(\\Delta C=1\\)\nLFV operator normalization and a \\(D^0\\to e\\mu\\) branching-ratio wrapper.  It\nshould not require a global fit or the existing \\(\\Delta F=2\\) RG machinery,\nbut the current neutral-meson SLL/SLR/VLL/VRR/LR basis is not sufficient.",
+    "key_references": "Process-local keys before bibliography consolidation:\n\\texttt{PDG2026:D0EMu}, \\texttt{LHCb2016:D0EMu},\n\\texttt{Belle2010:D0EMu}, \\texttt{BaBar2012:D0EeMuMuEMu}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/charm/C006.yaml",
+  "source_tex": "flavor_catalog/processes/charm/C006.tex",
+  "worklog_path": "flavor_catalog/worklogs/C006/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:05Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:D0EMu",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.40",
+        "snapshot_path": "flavor_catalog/references/C006/pdg2026_d0_emu_pdgLive.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.3e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 50,
+                "context": "L47: \nL48: Extraction note:\nL49:   The current PDG/API headline value for C006 is the LHCb 2016 upper limit\nL50:   B(D0 -> mu+- e-+) < 1.3e-8 at 90% CL.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2016:D0EMu",
+        "source_url": "https://arxiv.org/abs/1512.00322",
+        "snapshot_path": "flavor_catalog/references/C006/lhcb2016_arxiv1512_00322.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.3e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18:   fraction was measured using D0 -> K- pi+ as a normalisation channel.\nL19:   No significant excess over expected background was seen.\nL20:   The reported limit is\nL21:     B(D0 -> e^\\pm mu^\\mp) < 1.3 x 10^-8 at 90% confidence level.\nL22:   The abstract states this is an order of magnitude lower than the previous\nL23:   limit and constrains some leptoquark and R-parity-violating supersymmetry\nL24:   parameter space.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "D0->e mu is clean LFV, but product-flavor and dominated elsewhere.",
+  "priority_rationale_full": "This LFV charm decay has negligible Standard Model background, so the\nexperimental upper limit is clean. In RS it requires both c-u and e-mu\nmisalignment and a Delta C=1 charged-LFV operator basis, not just the usual\nquark flavor scan. Pure muon LFV and D mixing generally provide stronger,\ncleaner pressure, so it is LOW for generic anarchic scans."
+}

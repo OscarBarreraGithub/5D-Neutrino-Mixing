@@ -1,0 +1,142 @@
+---
+process_id: E008
+generated_at: '2026-05-17T21:55:00-04:00'
+sources:
+- block_key: experimental_anchors.neutron_edm
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S017EDM
+  snapshot_path: flavor_catalog/references/E008/pdg2026_neutron_edm_datablock.txt
+  sha256: 2478ea90f896fdb38329e53466629812b28d03da57655b7ac07228007dad90ca
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: '|d_n| < 1.8 x 10^-26 e cm at 90% CL'
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: |-
+        L17: Canonical direct result:
+        L18:   <0.18, CL = 90%, ABEL 2020, method MRS UCN.
+        L19: Converted value:
+        L20:   |d_n| < 1.8 x 10^-26 e cm at 90% CL.
+        L21:
+        L22: PDG measurement note for ABEL 2020:
+        L23:   d = (0.0 +/- 1.1 +/- 0.2) x 10^-26 e cm, corresponding to the listed
+- block_key: experimental_anchors.mercury_199_edm
+  source_url: https://arxiv.org/abs/1601.04339
+  snapshot_path: flavor_catalog/references/E008/graner2016_hg199_arxiv1601_04339.txt
+  sha256: 8c99b7a6bd9c3da640c504273d4d878e267a4df0ec0433cd9481efed400589c5
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: d_Hg = (2.20 +/- 2.75_stat +/- 1.48_syst) x 10^-30 e cm; |d_Hg| < 7.4 x 10^-30 e cm at 95% CL
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |-
+        L13: Relevant arXiv abstract extract:
+        L14:   The experiment measures the permanent electric dipole moment of neutral
+        L15:   199Hg atoms. The reported EDM is
+        L16:     d_Hg = (2.20 +/- 2.75_stat +/- 1.48_syst) x 10^-30 e cm.
+        L17:   The result is used to place the limit
+        L18:     |d_Hg| < 7.4 x 10^-30 e cm at 95% C.L.
+        L19:   The arXiv abstract states that this improved the previous limit by a factor
+- block_key: qcedm_translations.neutron_combination
+  source_url: https://arxiv.org/abs/hep-ph/0010037
+  snapshot_path: flavor_catalog/references/E008/pospelov_ritz2000_qcedm_neutron_arxiv_hepph0010037.txt
+  sha256: 9ca4f0955eb509d9e3810119e25cf1d87260c37c55349d2c3305408f6dc82bcb
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: formula
+    anchor_string: d_n = (1 +/- 0.5)[1.1 e(tilde d_d + 0.5 tilde d_u) + 1.4(d_d - 0.25 d_u)] under the Peccei-Quinn convention
+      quoted in the source
+    status: RESOLVED
+    matches:
+    - line_number: 19
+      context: |-
+        L16:   including strange-quark tilde d_s, provide significant contributions
+        L17:   comparable to quark EDM contributions.
+        L18:   With the theta term removed by Peccei-Quinn symmetry, the abstract gives
+        L19:     d_n = (1 +/- 0.5) [ 1.1 e (tilde d_d + 0.5 tilde d_u)
+        L20:                         + 1.4 (d_d - 0.25 d_u) ].
+        L21:
+        L22: Catalog use:
+- block_key: qcedm_translations.mercury_isovector_combination
+  source_url: https://arxiv.org/abs/hep-ph/0506106
+  snapshot_path: flavor_catalog/references/E008/olive_pospelov_ritz_santoso2005_hg_qcedm_arxiv_hepph0506106.txt
+  sha256: 6acee076efaef5749898c01fb0bbf64d36c76699c9bc8c6404c0cddc7239550c
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: formula
+    anchor_string: d_Hg = 7 x 10^-3 e(tilde d_u - tilde d_d) + 10^-2 d_e + additional four-fermion and semileptonic terms
+    status: RESOLVED
+    matches:
+    - line_number: 26
+      context: |-
+        L23:     gbar_piNN^(1)(tilde d_q) ~ 4^{+8}_{-2} (tilde d_u - tilde d_d) GeV^{-1},
+        L24:   with large uncertainty from cancellations between leading contributions.
+        L25:   Combining atomic, nuclear, and QCD ingredients, the paper gives
+        L26:     d_Hg = 7 x 10^-3 e (tilde d_u - tilde d_d) + 10^-2 d_e
+        L27:            + additional four-fermion and semileptonic terms.
+        L28:   It states that d_Hg is especially sensitive to the triplet/isovector CEDM
+        L29:   combination tilde d_u - tilde d_d, with the overall coefficient known only
+- block_key: post_2008_context.cfw_baseline
+  source_url: https://arxiv.org/abs/0804.1954
+  snapshot_path: flavor_catalog/references/E008/cfw2008_arxiv0804_1954.txt
+  sha256: e95bdb2ea3b1e6fbd066c12a07fd278e9b09da8e0d8892112bb8d3f1911c9dd2
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: RS-flavor baseline quotes generic KK-gluon mass bounds near 21 TeV and pseudo-Goldstone scenario bounds
+      near 33 TeV.
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |-
+        L12: Relevant arXiv abstract extract:
+        L13:   The paper studies flavor in 5D warped models and composite pseudo-Goldstone
+        L14:   Higgs models. It reports that in standard Randall-Sundrum-type scenarios
+        L15:   the KK gluon mass should generically be heavier than about 21 TeV.
+        L16:   In the pseudo-Goldstone scenario, with Yukawa couplings set by a gauge
+        L17:   coupling, the KK gluon mass should be at least about 33 TeV.
+        L18:   The abstract states that these strong bounds make a fully anarchic approach
+- block_key: post_2008_context.composite_dipoles
+  source_url: https://arxiv.org/abs/1403.2756
+  snapshot_path: flavor_catalog/references/E008/koenig_neubert_straub2014_composite_dipoles_arxiv1403_2756.txt
+  sha256: 5f37e64fd698c59f2d1f88764cb7dbaf531ed52f4fc5a196c83470c231b4c3fb
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: Composite/warped dipole analysis using the older neutron limit |d_n| < 2.9 x 10^-26 e cm at 90% CL; one-at-a-time
+      imaginary Wilson-coefficient scale bounds include Q_uug 1.45 TeV and Q_ddg 3.79 TeV.
+    status: RESOLVED
+    matches:
+    - line_number: 33
+      context: |-
+        L30:   The paper's then-current neutron limit was
+        L31:     |d_n| < 2.9 x 10^-26 e cm at 90% C.L.
+        L32:   Its model-independent table gives one-at-a-time imaginary-coefficient
+        L33:   scale bounds at 1 TeV, including Q_uug: 1.45 TeV and Q_ddg: 3.79 TeV,
+        L34:   using that older neutron limit.
+        L35:
+        L36: Catalog use:
+- block_key: post_2008_context.lattice_qcedm
+  source_url: https://arxiv.org/abs/2404.13516
+  snapshot_path: flavor_catalog/references/E008/bhattacharya2024_isovector_qcedm_lattice_arxiv2404_13516.txt
+  sha256: 4ca90ef93b5e3af37da5a2eaca214f3381dd756a7452494b8acdd8a833f92cc4
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: Lattice-QCD calculation of the isovector qCEDM contribution to the neutron EDM using four 2+1+1 flavor
+      HISQ ensembles and Wilson-clover quarks; controls power-divergent pseudoscalar mixing with the nonsinglet axial Ward
+      identity and converts to MS at leading-log order.
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |-
+        L12:
+        L13: Relevant arXiv abstract extract:
+        L14:   The paper presents lattice-QCD results for the contribution of the isovector
+        L15:   quark cEDM operator to the neutron EDM. The calculation uses four 2+1+1
+        L16:   flavor highly improved staggered quark ensembles from MILC and Wilson-clover
+        L17:   quarks for correlation functions. It uses the nonsinglet axial Ward identity,
+        L18:   with corrections up to O(a), to control power-divergent mixing of the

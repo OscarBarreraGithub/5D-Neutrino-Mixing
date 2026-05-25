@@ -1,0 +1,468 @@
+{
+  "process_id": "K010",
+  "family": "kaon",
+  "family_original": "kaon",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(K_S\\to\\pi^0 e^+e^-)",
+  "process_name": "Short-lived neutral-kaon rare semileptonic electron mode",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n \"K0S|K_S|KS|K\\(S\\)|pi0 e|pi\\^0 e|pi0e|S012\\.10|a_S|a_\\{S\\}|s\\s*->\\s*d.*e|DeltaS = 1|weak neutral current|rare kaon|semileptonic\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\*|R_K|R_D|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|K_L|K0L|K\\+.*pi\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma|evaluate_delta_mk\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    ],
+    "result": "No K_S -> pi0 e+ e-, S012.10, a_S, or s -> d e+ e- implementation found in the requested directories. Hits for K_S are Delta F = 2 kaon mass-difference text or unrelated CKS matching.",
+    "nearest_existing_coverage": [
+      "quarkConstraints/deltaf2.py:209: DEFAULT_DELTA_F2_INPUTS_V1 starts the existing Delta F=2 observable list.",
+      "quarkConstraints/deltaf2.py:755: evaluate_delta_mk implements K_L-K_S mass-difference NP evaluation.",
+      "quarkConstraints/modern/phenomenology.py:23: MODERN_PHENOMENOLOGY_SYSTEM_IDS = (\"epsilon_K\", \"K\", \"B_d\", \"B_s\", \"D0\")"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:K010",
+      "observable": "BR(K_S -> pi0 e+ e-, m_ee > 0.165 GeV)",
+      "value": "3.0e-9",
+      "uncertainty": "+1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst",
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "Particle Data Group 2026 pdgLive listing S012.10 / NA48",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+      "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+      "sha256": "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG2026:K010",
+      "observable": "BR(K_S -> pi0 e+ e-), full kinematic region",
+      "value": "5.8e-9",
+      "uncertainty": "+2.9e-9 -2.4e-9",
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "Particle Data Group 2026 pdgLive listing S012.10 / NA48",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+      "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+      "sha256": "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "NA482003:KSPi0EE",
+      "observable": "NA48/1 observed signal candidates",
+      "value": "7",
+      "uncertainty": null,
+      "units": "events",
+      "display": null,
+      "year": 2003,
+      "experiment": "NA48/1 2003 arXiv hep-ex/0309075",
+      "source_url": "https://arxiv.org/abs/hep-ex/0309075",
+      "snapshot_path": "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt",
+      "sha256": "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "NA482003:KSPi0EE",
+      "observable": "NA48/1 expected background",
+      "value": "0.15",
+      "uncertainty": null,
+      "units": "events",
+      "display": null,
+      "year": 2003,
+      "experiment": "NA48/1 2003 arXiv hep-ex/0309075",
+      "source_url": "https://arxiv.org/abs/hep-ex/0309075",
+      "snapshot_path": "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt",
+      "sha256": "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": [
+    {
+      "key": "CFW2008:RSFlavor",
+      "relation": "RS/anarchic-flavor baseline for post-2008 comparison; not a K010 measured observable.",
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "snapshot_path": "flavor_catalog/references/K010/cfw2008_rs_flavor_arxiv.txt",
+      "sha256_of_text_snapshot": "sha256:7b5ea823d3e19e41401892e8051fc6b1f3c0557dded5e21ee8087f82c0008e8f"
+    },
+    {
+      "key": "IsidoriSmithUnterdorfer2004:KPi0LL",
+      "relation": "Theory context explaining why improved K_S -> pi0 l+ l- data reduces parametric uncertainty in K_L -> pi0 l+ l- predictions; not the K010 measured observable.",
+      "source_url": "https://arxiv.org/abs/hep-ph/0404127",
+      "snapshot_path": "flavor_catalog/references/K010/isidori_smith_unterdorfer_2004_arxiv.txt",
+      "sha256_of_text_snapshot": "sha256:32066a94f013a4fc70cd7d7ecb583a4083944a7ab6754b8a3ae2e67f130fab7d"
+    }
+  ],
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": [
+    {
+      "key": "AebischerBurasKumar2022:RareKaons",
+      "relation": "Post-2008 rare-kaon review emphasizing K_{L,S} -> pi0 l+ l- branching ratios and q^2 spectra as new-physics probes.",
+      "source_url": "https://arxiv.org/abs/2203.09524",
+      "snapshot_path": "flavor_catalog/references/K010/aebischer_buras_kumar_2022_arxiv.txt",
+      "sha256_of_text_snapshot": "sha256:6c5ca61b13d7793bbcb53802130c9f324dd7902dc83163673d0055a20e15835e"
+    }
+  ],
+  "source_shas": {
+    "pdg2026_ks_pi0ee_pdgLive.txt": "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+    "na48_2003_ks_pi0ee_arxiv.txt": "sha256:406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b",
+    "isidori_smith_unterdorfer_2004_arxiv.txt": "sha256:32066a94f013a4fc70cd7d7ecb583a4083944a7ab6754b8a3ae2e67f130fab7d",
+    "aebischer_buras_kumar_2022_arxiv.txt": "sha256:6c5ca61b13d7793bbcb53802130c9f324dd7902dc83163673d0055a20e15835e",
+    "cfw2008_rs_flavor_arxiv.txt": "sha256:7b5ea823d3e19e41401892e8051fc6b1f3c0557dded5e21ee8087f82c0008e8f"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:22:29-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:22:29-04:00",
+      "agent_id": "PKA-K010",
+      "reason": "Initial PKA source extraction and draft for K_S -> pi0 e+ e-."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:44:59-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:44:59-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish complete for batch wa_w5b_kaon."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T15:16:18-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T15:16:18-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_kaon",
+      "issues": [
+        "CHK-1: The PDG partial-rate and extrapolated-total numerical claims in K010.tex are represented in pdg_or_equivalent, but the NA48/1 seven-observed-events and 0.15-background claims are only in supporting_experimental_values, not YAML pdg_or_equivalent entries with full year/value/uncertainty/source_url/access_date/sha256 metadata."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:28:45-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:28:45-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w5b_kaon_v2",
+      "reason": "Cycle 2 metadata rework: promoted CA-listed numerical claims into pdg_or_equivalent values."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T15:55:40-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T15:55:40-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_kaon_v2",
+      "reason": "Cycle 3 checker re-check passed CHK-1 through CHK-8 after WA-v2 metadata rework."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-kaon",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent_id": "factcheck-codex-kaon",
+      "reason": "Independent live-source fact-check completed for kaon family.",
+      "notes": "Live source fetch and local snapshot checks verified all value claims for this process."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(K_S\\to\\pi^0 e^+e^-)\\).\nThis entry covers the short-lived neutral-kaon rare semileptonic mode\n\\(K_S\\to\\pi^0 e^+e^-\\), a \\(\\Delta S=1\\) weak-neutral-current decay.  It is\nthe electron-mode \\(K_S\\) companion to\n\\(K008\\) because it fixes the indirect-CP input used in \\(K_L\\to\\pi^0 e^+e^-\\)\nphenomenology.",
+    "pdg_prose": "The canonical PDG 2026 pdgLive listing \\(S012.10\\), accessed 2026-05-16, gives\nthe NA48/1 measurement\n\\[\n  \\mathcal{B}(K_S\\to\\pi^0 e^+e^-;\\,m_{ee}>0.165~{\\rm GeV})\n  = \\left(3.0^{+1.5}_{-1.2}\\,{\\rm stat}\\pm0.2\\,{\\rm syst}\\right)\n    \\times10^{-9}.\n\\]\nThe same listing records the NA48/1 full-kinematic extrapolation, using a\nconstant form factor and vector matrix element,\n\\[\n  \\mathcal{B}(K_S\\to\\pi^0 e^+e^-)\n  = \\left(5.8^{+2.9}_{-2.4}\\right)\\times10^{-9}.\n\\]\nBoth values trace to \\texttt{pdg2026\\_ks\\_pi0ee\\_pdgLive.txt} in the YAML\n\\texttt{pdg\\_or\\_equivalent} block.  The NA48/1 arXiv snapshot reports seven\nobserved events with an expected background of \\(0.15\\) events\n(\\texttt{na48\\_2003\\_ks\\_pi0ee\\_arxiv.txt}).",
+    "relevance": "This mode probes \\(s\\to d e^+e^-\\) semileptonic neutral-current structure,\nnot the \\(\\Delta F=2\\) kaon-mixing lane already implemented in the repository.\nIn warped or anarchic-flavor models it is sensitive, through a hadronic\nlong-distance amplitude, to flavor-changing \\(Z\\), photon-penguin, and heavy\nneutral-gauge effects.  Its most immediate catalog role is as an experimental\nnormalization for the indirect-CP part of \\(K_L\\to\\pi^0 e^+e^-\\), so it should\nbe kept distinct from short-distance theory prefactors or NDA normalizations.",
+    "post_2008": "No post-2008 measurement was found that supersedes the NA48/1 value used by\nPDG.  The important developments are interpretive: the rare-kaon Snowmass\nwhite paper emphasizes \\(K_{L,S}\\to\\pi^0\\ell^+\\ell^-\\) branching ratios and\n\\(q^2\\) distributions as new-physics probes, with correlations to\n\\(\\varepsilon'/\\varepsilon\\), \\(\\varepsilon_K\\), and \\(\\Delta M_K\\).  The\nmodern literature also treats this \\(K_S\\) input as part of the indirect-CP\nnormalization for the \\(K_L\\) modes rather than as a standalone clean Wilson\ncoefficient bound (\\texttt{aebischer\\_buras\\_kumar\\_2022\\_arxiv.txt},\n\\texttt{isidori\\_smith\\_unterdorfer\\_2004\\_arxiv.txt}).",
+    "validity": "Class: long-distance-limited rare kaon decay.  The measured partial branching\nfraction is robust, but the full-kinematic number is model-dependent because\nit assumes a vector matrix element and a unit form factor.  A model constraint\nmust specify whether it uses the directly measured \\(m_{ee}>0.165\\) GeV region\nor the extrapolated total rate, and whether it predicts the chiral\nlong-distance amplitude or only a short-distance \\(s\\to d e^+e^-\\) Wilson\ncoefficient.",
+    "code_coverage_prose": "\\textbf{NO.}  Focused greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(K_S\\to\\pi^0 e^+e^-\\), \\(S012.10\\),\n\\(a_S\\), or \\(s\\to d e^+e^-\\) implementation.  The nearest kaon coverage is\n\\(\\Delta F=2\\): \\texttt{quarkConstraints/deltaf2.py:209} starts the default\nneutral-meson-mixing inputs, \\texttt{quarkConstraints/deltaf2.py:755}\nevaluates \\(\\Delta m_K\\), and\n\\texttt{quarkConstraints/modern/phenomenology.py:23} lists only\n\\(\\varepsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D0\\) policy systems.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Production integration would need a new \\(\\Delta S=1\\)\nsemileptonic rare-kaon observable, Wilson normalization for \\(s\\to d e^+e^-\\),\nand a documented treatment of the \\(K_S\\) form factor or a conservative\nexperimental-input-only interpretation.  The existing SLL/SLR/VLL/VRR/LR\n\\(\\Delta F=2\\) basis does not cover this decay.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026:K010}, \\texttt{NA482003:KSPi0EE},\n\\texttt{IsidoriSmithUnterdorfer2004:KPi0LL},\n\\texttt{AebischerBurasKumar2022:RareKaons}, and\n\\texttt{CFW2008:RSFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/kaon/K010.yaml",
+  "source_tex": "flavor_catalog/processes/kaon/K010.tex",
+  "worklog_path": "flavor_catalog/worklogs/K010/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 4,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:K010",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+        "sha256": "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.0e-9 +1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 33,
+                "context": "L30:   event_count: 7\nL31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9"
+              },
+              {
+                "line_number": 34,
+                "context": "L31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9"
+              },
+              {
+                "line_number": 35,
+                "context": "L32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9"
+              },
+              {
+                "line_number": 36,
+                "context": "L33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10"
+              },
+              {
+                "line_number": 37,
+                "context": "L34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10\nL40:   syst_error_negative: 2.0000000000000003E-10"
+              },
+              {
+                "line_number": 38,
+                "context": "L35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10\nL40:   syst_error_negative: 2.0000000000000003E-10\nL41:   used_in_average: true"
+              },
+              {
+                "line_number": 45,
+                "context": "L42:   used_in_fit: true\nL43:\nL44: PDG footnote:\nL45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48."
+              },
+              {
+                "line_number": 48,
+                "context": "L45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:"
+              },
+              {
+                "line_number": 49,
+                "context": "L46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              },
+              {
+                "line_number": 50,
+                "context": "L47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2026:K010",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+        "sha256": "87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "5.8e-9 +2.9e-9 -2.4e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 33,
+                "context": "L30:   event_count: 7\nL31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9"
+              },
+              {
+                "line_number": 34,
+                "context": "L31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9"
+              },
+              {
+                "line_number": 35,
+                "context": "L32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9"
+              },
+              {
+                "line_number": 36,
+                "context": "L33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10"
+              },
+              {
+                "line_number": 37,
+                "context": "L34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10\nL40:   syst_error_negative: 2.0000000000000003E-10"
+              },
+              {
+                "line_number": 38,
+                "context": "L35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9\nL39:   syst_error_positive: 2.0000000000000003E-10\nL40:   syst_error_negative: 2.0000000000000003E-10\nL41:   used_in_average: true"
+              },
+              {
+                "line_number": 45,
+                "context": "L42:   used_in_fit: true\nL43:\nL44: PDG footnote:\nL45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48."
+              },
+              {
+                "line_number": 48,
+                "context": "L45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:"
+              },
+              {
+                "line_number": 49,
+                "context": "L46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              },
+              {
+                "line_number": 50,
+                "context": "L47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482003:KSPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309075",
+        "snapshot_path": "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt",
+        "sha256": "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 3,
+                "context": "L1: Source key: NA482003:KSPi0EE\nL2: Source: arXiv abstract page\nL3: URL: https://arxiv.org/abs/hep-ex/0309075\nL4: Access date: 2026-05-16\nL5: arXiv: hep-ex/0309075\nL6: DOI: 10.1016/j.physletb.2003.10.001"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: Source: arXiv abstract page\nL3: URL: https://arxiv.org/abs/hep-ex/0309075\nL4: Access date: 2026-05-16\nL5: arXiv: hep-ex/0309075\nL6: DOI: 10.1016/j.physletb.2003.10.001\nL7: Journal reference: Phys. Lett. B576, 43 (2003)\nL8: Title: Observation of the rare decay Ks->pi0e+e-"
+              },
+              {
+                "line_number": 7,
+                "context": "L4: Access date: 2026-05-16\nL5: arXiv: hep-ex/0309075\nL6: DOI: 10.1016/j.physletb.2003.10.001\nL7: Journal reference: Phys. Lett. B576, 43 (2003)\nL8: Title: Observation of the rare decay Ks->pi0e+e-\nL9: Authors: NA48/1 Collaboration\nL10: Submitted: 2003-09-26"
+              },
+              {
+                "line_number": 16,
+                "context": "L13:\nL14: A search for the decay Ks->pi0e+e- has been made by the NA48/1 experiment at\nL15: the CERN SPS accelerator. Using data collected during 89 days in 2002 with a\nL16: high-intensity Ks beam, 7 events were found with a background of 0.15 events.\nL17: The branching fraction BR(Ks->pi0e+e-, m(ee) > 0.165 GeV/c^2) =\nL18: (3.0^{+1.5}_{-1.2}(stat) +/-0.2 (syst)) x 10^{-9} has been measured. Using a\nL19: vector matrix element and a form factor equal to one, the measurement gives"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA482003:KSPi0EE",
+        "source_url": "https://arxiv.org/abs/hep-ex/0309075",
+        "snapshot_path": "flavor_catalog/references/K010/na48_2003_ks_pi0ee_arxiv.txt",
+        "sha256": "406786ac199a7e9ff903a23157820f31d2668d7c155b8d38182daa022040cf8b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "0.15",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:\nL14: A search for the decay Ks->pi0e+e- has been made by the NA48/1 experiment at\nL15: the CERN SPS accelerator. Using data collected during 89 days in 2002 with a\nL16: high-intensity Ks beam, 7 events were found with a background of 0.15 events.\nL17: The branching fraction BR(Ks->pi0e+e-, m(ee) > 0.165 GeV/c^2) =\nL18: (3.0^{+1.5}_{-1.2}(stat) +/-0.2 (syst)) x 10^{-9} has been measured. Using a\nL19: vector matrix element and a form factor equal to one, the measurement gives"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "canonical_measurement",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+        "sha256": "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3e-09 +1.5e-9 -1.2e-9 stat; +/-0.2e-9 syst",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 33,
+                "context": "L30:   event_count: 7\nL31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9"
+              },
+              {
+                "line_number": 34,
+                "context": "L31:   technique: NA48\nL32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9"
+              },
+              {
+                "line_number": 35,
+                "context": "L32:   comment: m(ee)>0.165 GeV\nL33:   value_text: (3.0+1.5-1.2+-0.2) E-9\nL34:   value: 3.0000000000000004E-9\nL35:   error_positive: 1.5132745950421556E-9\nL36:   error_negative: 1.216552506059644E-9\nL37:   stat_error_positive: 1.5000000000000002E-9\nL38:   stat_error_negative: 1.2E-9"
+              },
+              {
+                "line_number": 45,
+                "context": "L42:   used_in_fit: true\nL43:\nL44: PDG footnote:\nL45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48."
+              },
+              {
+                "line_number": 49,
+                "context": "L46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              },
+              {
+                "line_number": 50,
+                "context": "L47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48.\nL49:   BARR 1993B: <1100E-9 at 90% CL, NA31.\nL50:   GIBBONS 1988: <45000E-9 at 90% CL, E731.\nL51:\nL52: License note: minimal text snapshot only; no PDG PDF tracked."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "extrapolated_total_rate",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S012.10",
+        "snapshot_path": "flavor_catalog/references/K010/pdg2026_ks_pi0ee_pdgLive.txt",
+        "sha256": "sha256:87a298fc5bb6032e35c98bbb9db4f0dc8ddc20ec12a3752430d2afb14e95cbff",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "5.8e-09 +2.9e-9 -2.4e-9",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 45,
+                "context": "L42:   used_in_fit: true\nL43:\nL44: PDG footnote:\nL45:   BATLEY 2003 extrapolate also to the full kinematical region using a constant form factor and a vector matrix element. The resulting branching ratio is 5.8+2.9-2.4E-9.\nL46:\nL47: Older limits listed by PDG, not used in the average:\nL48:   LAI 2001: <140E-9 at 90% CL, NA48."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Auxiliary K_S input for K_L pi0 e e, not a standalone driver",
+  "priority_rationale_full": "K_S -> pi0 e+ e- is primarily an experimental normalization for the\nindirect-CP component of K_L -> pi0 e+ e-. The measured partial rate is useful,\nbut the extrapolated full-region number depends on form-factor assumptions and\nlong-distance chiral dynamics. It is an auxiliary rare-kaon input rather than\na standalone leading RS exclusion."
+}

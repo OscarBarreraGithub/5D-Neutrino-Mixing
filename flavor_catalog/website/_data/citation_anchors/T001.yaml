@@ -1,0 +1,190 @@
+---
+process_id: T001
+generated_at: '2026-05-18T01:54:07Z'
+sources:
+- block_key: PDG2025:T001:tZc_left
+  source_url: https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf
+  snapshot_path: flavor_catalog/references/T001/pdg_2025_top_fcnc_tzq.txt
+  sha256: sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: pdg_units
+    anchor_string: '0.13'
+    status: RESOLVED
+    matches:
+    - line_number: 16
+      context: |
+        L13: VALUE (units 10^-3), CL%, DOCUMENT ID, TECHNIQUE, COMMENT
+        L14:
+        L15: < 0.062, 95, AAD 23AS, ATLAS, B(t -> Z u), left-handed t u Z coupling
+        L16: < 0.13, 95, AAD 23AS, ATLAS, B(t -> Z c), left-handed t c Z coupling
+        L17: < 0.066, 95, AAD 23AS, ATLAS, B(t -> Z u), right-handed t u Z coupling
+        L18: < 0.12, 95, AAD 23AS, ATLAS, B(t -> Z c), right-handed t c Z coupling
+        L19: < 0.22, 95, SIRUNYAN 17E, CMS, t -> Z u
+- block_key: PDG2025:T001:tZc_right
+  source_url: https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf
+  snapshot_path: flavor_catalog/references/T001/pdg_2025_top_fcnc_tzq.txt
+  sha256: sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: pdg_units
+    anchor_string: '0.12'
+    status: RESOLVED
+    matches:
+    - line_number: 18
+      context: |
+        L15: < 0.062, 95, AAD 23AS, ATLAS, B(t -> Z u), left-handed t u Z coupling
+        L16: < 0.13, 95, AAD 23AS, ATLAS, B(t -> Z c), left-handed t c Z coupling
+        L17: < 0.066, 95, AAD 23AS, ATLAS, B(t -> Z u), right-handed t u Z coupling
+        L18: < 0.12, 95, AAD 23AS, ATLAS, B(t -> Z c), right-handed t c Z coupling
+        L19: < 0.22, 95, SIRUNYAN 17E, CMS, t -> Z u
+        L20: < 0.49, 95, SIRUNYAN 17E, CMS, t -> Z c
+        L21: < 0.7, 95, AAD 16D, ATLAS, t -> Z q (q = u,c)
+- block_key: ATLAS2023:T001:dataset
+  source_url: https://arxiv.org/abs/2301.11605
+  snapshot_path: flavor_catalog/references/T001/atlas_2301_11605_arxiv_abs.txt
+  sha256: sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 139 fb^-1 at sqrt(s) = 13 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 24
+      context: |
+        L21: an up or charm quark and a Z boson is presented, using proton-proton collision
+        L22: data at sqrt(s) = 13 TeV collected by the ATLAS detector at the Large Hadron
+        L23: Collider. The analyzed dataset corresponds to an integrated luminosity of
+        L24: 139 fb^-1.
+        L25:
+        L26: The search targets both single-top-quark events produced as gq -> tZ
+        L27: (q = u,c) and top-quark-pair events, with one top quark decaying through
+- block_key: ATLAS2023:T001:tZc_left
+  source_url: https://arxiv.org/abs/2301.11605
+  snapshot_path: flavor_catalog/references/T001/atlas_2301_11605_arxiv_abs.txt
+  sha256: sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 13e-5
+    status: RESOLVED
+    matches:
+    - line_number: 34
+      context: |
+        L31: The data are consistent with the background-only hypothesis. At 95% CL,
+        L32: the t -> Zq branching-ratio upper limits, assuming only tensor SMEFT
+        L33: operators contribute to the tZq vertices, are:
+        L34:   B(t -> Zu) < 6.2 x 10^-5 and B(t -> Zc) < 13 x 10^-5
+        L35:   for a left-handed tZq coupling;
+        L36:   B(t -> Zu) < 6.6 x 10^-5 and B(t -> Zc) < 12 x 10^-5
+        L37:   for a right-handed coupling.
+- block_key: ATLAS2023:T001:tZc_right
+  source_url: https://arxiv.org/abs/2301.11605
+  snapshot_path: flavor_catalog/references/T001/atlas_2301_11605_arxiv_abs.txt
+  sha256: sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 12e-5
+    status: RESOLVED
+    matches:
+    - line_number: 36
+      context: |
+        L33: operators contribute to the tZq vertices, are:
+        L34:   B(t -> Zu) < 6.2 x 10^-5 and B(t -> Zc) < 13 x 10^-5
+        L35:   for a left-handed tZq coupling;
+        L36:   B(t -> Zu) < 6.6 x 10^-5 and B(t -> Zc) < 12 x 10^-5
+        L37:   for a right-handed coupling.
+        L38:
+        L39: The same abstract reports corresponding 95% CL Wilson-coefficient limits
+- block_key: CMS2017:T001:dataset
+  source_url: https://arxiv.org/abs/1702.01404
+  snapshot_path: flavor_catalog/references/T001/cms_1702_01404_arxiv_abs.txt
+  sha256: sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 19.7 fb^-1 at sqrt(s) = 8 TeV
+    status: RESOLVED
+    matches:
+    - line_number: 22
+      context: |
+        L19: A search for the production of a single top quark in association with a Z
+        L20: boson is presented, both to identify the expected standard model process and
+        L21: to search for flavour-changing neutral current interactions. The data sample
+        L22: corresponds to an integrated luminosity of 19.7 inverse femtobarns recorded
+        L23: by the CMS experiment at the LHC in proton-proton collisions at sqrt(s) =
+        L24: 8 TeV. Final states with three leptons and at least one jet are investigated.
+        L25:
+- block_key: CMS2017:T001:tZc
+  source_url: https://arxiv.org/abs/1702.01404
+  snapshot_path: flavor_catalog/references/T001/cms_1702_01404_arxiv_abs.txt
+  sha256: sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: < 0.049%
+    status: RESOLVED
+    matches:
+    - line_number: 34
+      context: |
+        L31:
+        L32: Exclusion limits at 95% confidence level on the branching fractions of a top
+        L33: quark decaying to a Z boson and an up or a charm quark are found to be
+        L34: B(t -> Z u) < 0.022% and B(t -> Z c) < 0.049%.
+- block_key: AguilarSaavedra2004:T001:SM
+  source_url: https://arxiv.org/abs/hep-ph/0409342
+  snapshot_path: flavor_catalog/references/T001/aguilar_saavedra_hepph0409342.txt
+  sha256: sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: 1e-14
+    status: RESOLVED
+    matches:
+    - line_number: 25
+      context: |
+        L22: In the source file rev.tex, Table 1 gives branching ratios for top FCN decays
+        L23: in the SM and in several SM extensions. The table entries include:
+        L24:   t -> u Z: SM 8 x 10^-17
+        L25:   t -> c Z: SM 1 x 10^-14
+        L26:   t -> c Z: quark-singlet model 1.1 x 10^-4
+        L27:   t -> c Z: 2HDM approximately 10^-7
+        L28:   t -> c Z: FC 2HDM approximately 10^-10
+- block_key: PDG2025:T001:SM
+  source_url: https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf
+  snapshot_path: flavor_catalog/references/T001/pdg_2025_top_fcnc_tzq.txt
+  sha256: sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: order 1e-14
+    status: RESOLVED
+    matches:
+    - line_number: 29
+      context: |
+        L26: production in association with a Z boson and in the decay of a top quark in
+        L27: ttbar production. Events with three leptons plus at least one jet, one b-tag,
+        L28: and missing transverse momentum are used. The SM predictions of the
+        L29: corresponding branching ratios are of the order of 10^-14.
+        L30:
+        L31: PDG note 2:
+        L32: SIRUNYAN 17E is based on 19.7 fb^-1 of pp data at sqrt(s) = 8 TeV. The final
+- block_key: AirenFranceschini2026:T001:HL_LHC_projection
+  source_url: https://arxiv.org/abs/2601.14966
+  snapshot_path: flavor_catalog/references/T001/airen_franceschini_2601_14966_arxiv_abs.txt
+  sha256: sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: approximately 1e-6
+    status: RESOLVED
+    matches:
+    - line_number: 27
+      context: |
+        L24: The abstract reports that LHC currently improves on the limit set by previous
+        L25: machines, including LEP indirect sensitivity to heavy vectors. Future direct
+        L26: searches at HL-LHC may reach a level equivalent to
+        L27: BR(t -> c Z) approximately 10^-6. It also studies sensitivity at a Higgs
+        L28: factory with E_cm in [200,240] GeV and at a high-energy muon collider with
+        L29: E_cm = 10 TeV.

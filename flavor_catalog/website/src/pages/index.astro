@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import families from '../content/families.json';
+import index from '../content/catalog_index.json';
+
+const totalEntries: number = index.total_entries;
+const verdictCounts: Record<string, number> = index.verdict_counts;
+const verified = verdictCounts.VERIFIED ?? 0;
+const partial = verdictCounts.PARTIAL ?? 0;
+const mismatch = verdictCounts.MISMATCH ?? 0;
+
+// Compute primary/secondary from family_counts: secondary family is the only SECONDARY tier family
+const familyCounts: Record<string, number> = (index as any).family_counts ?? {};
+const secondaryCount: number = familyCounts.secondary ?? 8;
+const primaryCount: number = totalEntries - secondaryCount;
+
+const anchorTotals: any = (index as any).anchor_totals ?? null;
+const anchorTotal = anchorTotals
+  ? (anchorTotals.RESOLVED + anchorTotals.AMBIGUOUS + anchorTotals.UNRESOLVED)
+  : 0;
+const priorityCounts: any = (index as any).priority_counts ?? null;
+const highPriorityCount: number = priorityCounts ? (priorityCounts.HIGH ?? 0) : 0;
+---
+<BaseLayout
+  title="Flavor Catalog -- 5D Neutrino Mixing"
+  description="Static catalog of 102 flavor-physics process entries supporting the 5D / RS warped-extra-dimension scan."
+>
+  <section class="hero">
+    <h1>Flavor catalog for the 5D&hairsp;/&hairsp;RS scan</h1>
+    <p>
+      102 flavor-physics constraints on the Randall&ndash;Sundrum model parameter space.
+    </p>
+  </section>
+
+  <div class="hero-ctas">
+    <a class="hero-cta hero-cta-primary" href="/browse/">Browse all {totalEntries} entries &rarr;</a>
+  </div>
+
+
+  <h2 class="section-eyebrow">Families</h2>
+  <div class="family-grid">
+    {families.filter((fam) => fam.key !== 'secondary').map((fam) => (
+      <a class="family-card" href={`/families/${fam.key}/`}>
+        <h2>
+          <span>{fam.label}</span>
+          <span class="count">{fam.count}</span>
+        </h2>
+        <p>{fam.descriptor}</p>
+      </a>
+    ))}
+  </div>
+
+</BaseLayout>

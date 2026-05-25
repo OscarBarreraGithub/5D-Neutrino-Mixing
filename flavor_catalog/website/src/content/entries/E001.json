@@ -1,0 +1,291 @@
+{
+  "process_id": "E001",
+  "family": "edm_neutrino",
+  "family_original": "edm_neutrino",
+  "tier": "PRIMARY",
+  "standard_notation": "d_e",
+  "process_name": "Electron electric dipole moment",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a new flavor-diagonal CP-odd lepton dipole observable, model-to-Wilson matching in the lepton/KK sector, and likely SMEFT/LEFT running. Existing Delta F=2 and mu->e gamma utilities do not provide d_e.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"electron.?EDM|eEDM|electric dipole|EDM|electron.*dipole|d_e\\b|\\bde\\s*=|C_e[[:alnum:]_]*EDM\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g '!*.ipynb'"
+    ],
+    "findings": [
+      "Focused electron-EDM implementation grep over the required implementation/test directories returned exit=1, no matches.",
+      "flavorConstraints/muToEGamma.py:1 and flavorConstraints/muToEGamma.py:81 implement mu->e gamma, not flavor-diagonal electron EDM.",
+      "flavorConstraints/muToEGamma.py:3 and flavorConstraints/muToEGamma.py:20 describe an off-diagonal LFV dipole operator bound.",
+      "scanParams/scan.py:32 records a MEG II mu->e gamma branching-fraction bound, not an electron EDM constraint."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG Live 2026 S003EDM electron electric dipole moment datablock",
+      "observable": "Electron electric dipole moment",
+      "value": 4.1e-30,
+      "uncertainty": null,
+      "units": "e cm",
+      "display": null,
+      "year": 2026,
+      "experiment": "PDG Live 2026 S003EDM electron electric dipole moment datablock",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S003EDM",
+      "snapshot_path": "flavor_catalog/references/E001/pdg2026_electron_edm_datablock.txt",
+      "sha256": "aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Roussy et al., Science 381, 46 (2023); arXiv:2212.11841",
+      "observable": "Electron electric dipole moment, HfF+ molecular ions",
+      "value": -1.3,
+      "uncertainty": null,
+      "units": "10^-30 e cm",
+      "display": null,
+      "year": 2023,
+      "experiment": "Roussy et al., Science 381, 46 (2023); arXiv:2212.11841",
+      "source_url": "https://arxiv.org/abs/2212.11841",
+      "snapshot_path": "flavor_catalog/references/E001/roussy2023_arxiv2212_11841.txt",
+      "sha256": "85dfc60b010ccba486ecccfcfacc5a1e89652239d5554e2c97111dcca5d2c0f7",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ACME Collaboration, Andreev et al., Nature 562, 355 (2018)",
+      "observable": "Electron electric dipole moment, ThO benchmark",
+      "value": 1.1e-29,
+      "uncertainty": null,
+      "units": "e cm",
+      "display": null,
+      "year": 2018,
+      "experiment": "ACME Collaboration, Andreev et al., Nature 562, 355 (2018)",
+      "source_url": "https://authors.library.caltech.edu/records/6swh6-6ya42",
+      "snapshot_path": "flavor_catalog/references/E001/andreev2018_caltechauthors.txt",
+      "sha256": "c81e0a1936ec81eeb04a4064f09f3e5554037aa456436c972118ab3deda1d19a",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2026_electron_edm_datablock.txt": "sha256:aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20",
+    "roussy2023_arxiv2212_11841.txt": "sha256:85dfc60b010ccba486ecccfcfacc5a1e89652239d5554e2c97111dcca5d2c0f7",
+    "andreev2018_caltechauthors.txt": "sha256:c81e0a1936ec81eeb04a4064f09f3e5554037aa456436c972118ab3deda1d19a",
+    "cfw2008_arxiv0804_1954.txt": "sha256:be9fdb898c2630f4e7965d278ff8bdb29bc2cb5dd172353d8559d0b411e743be",
+    "panico2019_arxiv1810_09413.txt": "sha256:c10253ebacc5bb5e929da5be1a353188cf5277ea8d304fe5094115823d0498d8"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:36:52-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:36:52-04:00",
+      "agent_id": "PKA-E001",
+      "reason": "Initial PKA source extraction and draft started."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T11:36:52-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T11:36:52-04:00",
+      "agent_id": "PKA-E001",
+      "reason": "PKA draft, minimal source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:14:32-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:14:32-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for batch wa_w23_kaon_charm_edm."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T12:33:01-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T12:33:01-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w23_kaon_charm_edm",
+      "reason": "Checker ca_w23_kaon_charm_edm found CHK-1 structured-metadata gaps.",
+      "issues": [
+        "CHK-1: E001.tex numerical claims are in pdg_or_equivalent blocks, but the canonical, Roussy 2023, and ACME 2018 blocks lack explicit year fields; the Roussy and ACME values/uncertainties are stored only in summary strings rather than structured value, uncertainty/statistical/systematic, and CL fields."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:43:45-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:43:45-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w23_kaon_charm_edm_v2",
+      "reason": "WA v2 addressed the CA CHK-1 structured-metadata findings only."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:56:21-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:56:21-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w23_kaon_charm_edm_v2",
+      "reason": "Checker re-check completed for E001 after WA-v2 metadata rework."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-edm_neutrino",
+      "agent_id": "factcheck-codex-edm_neutrino",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Electron EDM PDG, Roussy 2023, and ACME 2018 numerical claims verified against fetched sources and local snapshots."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "E: EDMs belong inside the flavor fit"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(d_e\\).  This entry covers the flavor-diagonal\nCP-odd electron dipole moment, cataloged in the \\texttt{edm\\_neutrino} family\nas an EDM-adjacent lepton-sector probe.  It is not a quark \\(\\Delta F=2\\)\nobservable; its RS relevance comes from CP-violating lepton dipoles generated\nby heavy lepton, neutrino, Higgs, or gauge-sector dynamics.",
+    "pdg_prose": "PDG Live 2026 (\\texttt{PDG2026:ElectronEDM}) lists the current bound as\n\\[\n  |d_e| < 4.1\\times 10^{-30}\\ e\\,\\mathrm{cm}\n  \\qquad (90\\%~\\mathrm{CL}),\n\\]\nfrom the Roussy et al. 2023 HfF\\({}^+\\) molecular-ion measurement; see\n\\texttt{flavor\\_catalog/references/E001/pdg2026\\_electron\\_edm\\_datablock.txt}.\nThe PDG datablock reports the table value as \\(<0.041\\) in units of\n\\(10^{-28}\\ e\\,\\mathrm{cm}\\), and records the corresponding measurement as\n\\((-1.3\\pm2.0_{\\rm stat}\\pm0.6_{\\rm syst})\\times10^{-30}\\ e\\,\\mathrm{cm}\\)\n(\\texttt{Roussy:ElectronEDM2023}).\nThe superseded ACME/Andreev 2018 ThO benchmark is\n\\(|d_e|<1.1\\times10^{-29}\\ e\\,\\mathrm{cm}\\) at \\(90\\%\\) CL, with the PDG\nmeasurement note \\((4.3\\pm3.1\\pm2.6)\\times10^{-30}\\ e\\,\\mathrm{cm}\\)\n(\\texttt{ACME:ElectronEDM2018}).",
+    "relevance": "The electron EDM constrains the imaginary part of a CP-odd lepton dipole,\nschematically \\(\\mathcal{L}\\supset -i d_e\\,\\bar e\\sigma_{\\mu\\nu}\\gamma_5 e\nF^{\\mu\\nu}/2\\).  In warped lepton extensions, anarchic Yukawas and new CP\nphases can feed this operator through loop matching.  The constraint is\ntherefore a direct diagnostic of CP alignment in the charged-lepton sector,\nand it is especially relevant when the neutrino sector or bulk Higgs dynamics\nintroduce additional complex spurions.  It does not directly constrain the\ncurrent quark-only \\(\\Delta F=2\\) scan.",
+    "post_2008": "Relative to the 2008 CFW RS-flavor reference point\n(\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}), the experimental EDM frontier\nchanged qualitatively.  ACME 2018 (\\texttt{ACME:ElectronEDM2018}) set the\nprevious molecular ThO\nlimit at \\(1.1\\times10^{-29}\\ e\\,\\mathrm{cm}\\), already strong enough to\nmotivate EFT treatments of CP-violating electron dipoles.  Roussy et al. 2023\n(\\texttt{Roussy:ElectronEDM2023}) then improved the previous best upper\nbound by about \\(2.4\\) using trapped HfF\\({}^+\\) molecular ions, yielding the\ncurrent PDG value above.  The post-ACME EFT literature, represented here by\nPanico, Pomarol, and Riembau 2019\n(\\texttt{PanicoPomarolRiembau:ElectronEDM2019}), treats electron EDMs as\nconstraints on CP-violating dipole operators and their two-loop anomalous\ndimensions, the natural language for a future Wilson-coefficient\nimplementation.",
+    "validity": "The experimental null limit is robust as a bound on the effective electron EDM\nextracted from paramagnetic molecular spectroscopy.  Model interpretation is\nless automatic: paramagnetic systems can also be sensitive to semileptonic\nCP-odd electron-nucleon interactions, and an RS implementation must specify\nwhich SMEFT or low-energy CP-odd operator basis is being matched.  As a\ncatalog constraint this is a lepton-extension and EDM-adjacent loop bound, not\na standalone exclusion in the existing quark pipeline.\n\nFor anarchic CP phases, EDM constraints should be reviewed jointly with the\nflavor branching rows that share the same Wilson coefficients (relevant\ncross-refs: K001, K003, B011, B033, B034), not as an isolated appendix.",
+    "code_coverage_prose": "\\textbf{NO.}  The required catalog greps and a focused implementation grep for\n\\texttt{electron.?EDM}, \\texttt{eEDM}, \\texttt{electric dipole}, and\n\\texttt{d\\_e} over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no electron-EDM implementation.  The only adjacent\ndipole code is the off-diagonal \\(\\mu\\to e\\gamma\\) bound in\n\\texttt{flavorConstraints/muToEGamma.py:1}, \\texttt{:3},\n\\texttt{:20--21}, and \\texttt{:81}; \\texttt{scanParams/scan.py:32--33}\nsets a MEG II branching-fraction limit for that different process.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A live implementation needs a new flavor-diagonal CP-odd\nlepton dipole observable, matching from the model's lepton/KK sector to the\ndipole Wilson coefficient, and likely SMEFT-to-low-energy running.  The\nexisting \\(\\Delta F=2\\) operator basis and the \\(\\mu\\to e\\gamma\\) NDA helper\ndo not provide the needed CP-odd \\(d_e\\) calculation.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026:ElectronEDM}, \\texttt{Roussy:ElectronEDM2023},\n\\texttt{ACME:ElectronEDM2018},\n\\texttt{PanicoPomarolRiembau:ElectronEDM2019}, and\n\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/edm_neutrino/E001.yaml",
+  "source_tex": "flavor_catalog/processes/edm_neutrino/E001.tex",
+  "worklog_path": "flavor_catalog/worklogs/E001/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_limit",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S003EDM",
+        "snapshot_path": "flavor_catalog/references/E001/pdg2026_electron_edm_datablock.txt",
+        "sha256": "aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_e| < 4.1 x 10^-30 e cm at 90% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: Current PDG-used limit:\nL18: ROUSSY 2023, technique ESR, electrons in intramolecular electric field:\nL19: VALUE <0.041, CL 90%.\nL20: Equivalent value: |d_e| < 4.1e-30 e cm at 90% CL.\nL21: PDG footnote: ROUSSY 2023 gives the measurement\nL22: (-1.3 +/- 2.0 +/- 0.6) x 10^-30 e cm corresponding to this limit.\nL23:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "primary_measurement",
+        "source_url": "https://arxiv.org/abs/2212.11841",
+        "snapshot_path": "flavor_catalog/references/E001/roussy2023_arxiv2212_11841.txt",
+        "sha256": "85dfc60b010ccba486ecccfcfacc5a1e89652239d5554e2c97111dcca5d2c0f7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "measurement_summary",
+            "anchor_string": "d_e = (-1.3 +/- 2.0_stat +/- 0.6_syst) x 10^-30 e cm; |d_e| < 4.1 x 10^-30 e cm at 90% confidence",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20: constraints on broad classes of new physics above 10^13 eV.\nL21:\nL22: Extract from pdftotext of arXiv PDF:\nL23: de = (-1.3 +/- 2.0_stat +/- 0.6_syst) x 10^-30 e cm.\nL24: The corresponding upper bound is |de| < 4.1 x 10^-30 e cm at 90% confidence.\nL25:\nL26: Notes:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "superseded_acme_2018",
+        "source_url": "https://authors.library.caltech.edu/records/6swh6-6ya42",
+        "snapshot_path": "flavor_catalog/references/E001/andreev2018_caltechauthors.txt",
+        "sha256": "c81e0a1936ec81eeb04a4064f09f3e5554037aa456436c972118ab3deda1d19a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d_e| < 1.1 x 10^-29 e cm at 90% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: measurements.\nL22:\nL23: Numerical value as recorded by the PDG S003EDM datablock:\nL24: ACME/Andreev 2018 gives |d_e| < 1.1e-29 e cm at 90% CL, corresponding to\nL25: (4.3 +/- 3.1 +/- 2.6) x 10^-30 e cm."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Tight electron EDM bound on unsuppressed CP lepton dipoles.",
+  "priority_rationale_full": "The electron EDM limit probes imaginary flavor-diagonal lepton dipoles\nwith a very small 4.1e-30 e cm bound. In anarchic warped lepton sectors,\nnew CP phases can feed this operator without PMNS suppression, making it\na high-value constraint despite not being in the quark Delta F=2 scan.\nIt is clean experimentally; model dependence enters in operator matching."
+}

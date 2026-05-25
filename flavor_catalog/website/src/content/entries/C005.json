@@ -1,0 +1,264 @@
+{
+  "process_id": "C005",
+  "family": "charm",
+  "family_original": "charm",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(D^0\\to e^+e^-)",
+  "process_name": "Rare leptonic decay D0 -> e+ e-",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "D0 -> e+ e- needs a new Delta C = 1 rare leptonic observable with lepton-current normalization, electron-mode acceptance conventions, and long-distance treatment; the existing Delta F = 2 basis does not cover it.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"D0.*e\\\\+e-|D0.*ee|D\\\\^0.*e\\\\+e-|D0.?->.?e|rare.?charm|c.?->.?u.*e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused exact C005 search returned no matches in the required implementation/test directories.",
+      "quarkConstraints/deltaf2.py:252 and quarkConstraints/deltaf2.py:941 are D0 mixing hits, not D0 -> e+ e-.",
+      "quarkConstraints/modern/phenomenology.py:23 and quarkConstraints/modern/phenomenology.py:668 are D0 mixing policy/evaluator hits, not rare leptonic charm.",
+      "flavorConstraints/muToEGamma.py:75 is the separate mu -> e gamma LFV dipole check."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:D0Ee",
+      "observable": "BR(D0 -> e+ e-)",
+      "value": 7.9e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "PDG Live/API S032.39",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.39",
+      "snapshot_path": "flavor_catalog/references/C005/pdg2026_d0_ee_pdgLive.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "Belle2010:D0Ee",
+      "observable": "BR(D0 -> e+ e-)",
+      "value": 7.9e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2010,
+      "experiment": "Belle Phys. Rev. D 81 (2010) 091102 / arXiv:1003.2345",
+      "source_url": "https://arxiv.org/abs/1003.2345",
+      "snapshot_path": "flavor_catalog/references/C005/belle2010_arxiv1003_2345.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "BaBar2012:D0EeMuMuEMu",
+      "observable": "BR(D0 -> e+ e-)",
+      "value": 1.7e-07,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2012,
+      "experiment": "BABAR Phys. Rev. D 86 (2012) 032001 / arXiv:1206.5419",
+      "source_url": "https://arxiv.org/abs/1206.5419",
+      "snapshot_path": "flavor_catalog/references/C005/babar2012_arxiv1206_5419.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "rs_baseline": {
+      "source": "Csaki, Falkowski, Weiler 2008",
+      "source_key": "CsakiFalkowskiWeiler2008:CompositeFlavor",
+      "year": 2008,
+      "generic_rs_kk_gluon_scale_TeV": 21,
+      "composite_pseudo_goldstone_kk_gluon_scale_TeV": 33,
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-16",
+      "snapshot_path": "flavor_catalog/references/C005/cfw2008_arxiv0804_1954.txt",
+      "sha256_of_text_snapshot": "sha256:91056272adfbc8775ad7260735074975b6ace586470eea3af391dd3992ffe68f"
+    }
+  },
+  "theory_context": {
+    "rare_charm_model_dependence": {
+      "source": "Burdman, Golowich, Hewett, Pakvasa 2002",
+      "source_key": "BurdmanGolowichHewettPakvasa2002:RareCharm",
+      "year": 2002,
+      "topic": "Rare charm c -> u l+ l- short-distance and long-distance context",
+      "source_url": "https://arxiv.org/abs/hep-ph/0112235",
+      "access_date": "2026-05-16",
+      "snapshot_path": "flavor_catalog/references/C005/burdman2002_arxiv_hepph0112235.txt",
+      "sha256_of_text_snapshot": "sha256:25f176716b7e85dc563e5cbee9943494bd883b2103c625c00f6165b98ff8168e"
+    }
+  },
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "babar2012_arxiv1206_5419.txt": "sha256:baa27432071416ee0f5f0582df4c770a7d5e8f7b449351d64da28ff3dcd623b3",
+    "belle2010_arxiv1003_2345.txt": "sha256:cb1da7b14457481e7a26dce21877fef4a35ee61df4e187dc19447cbf5e2eefaf",
+    "burdman2002_arxiv_hepph0112235.txt": "sha256:25f176716b7e85dc563e5cbee9943494bd883b2103c625c00f6165b98ff8168e",
+    "cfw2008_arxiv0804_1954.txt": "sha256:91056272adfbc8775ad7260735074975b6ace586470eea3af391dd3992ffe68f",
+    "pdg2026_d0_ee_pdgLive.txt": "sha256:11656d94c38f54a6f06734b55b13adf5517bd43558778c0cf92f3e449f67384c",
+    "source_manifest.yaml": "sha256:935f056ed557a9cd06d8468f00180366e9625fd5f68f38cfefca3ec549a7c3f3"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:08:00-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:08:00-04:00",
+      "agent_id": "PKA-C005",
+      "reason": "Initial PKA source extraction and C005 draft deposit."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:25:39-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:25:39-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w5a_kaon_charm",
+      "reason": "Writer polish completed for C005 in mixed kaon/charm batch."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:42:33-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:42:33-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5a_kaon_charm",
+      "reason": "All CA checks CHK-1 through CHK-8 passed for C005."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charm",
+      "agent_id": "factcheck-codex-charm",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "PDG, Belle, and BABAR D0 -> e+ e- limits verified."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(D^0\\to e^+e^-)\\).  This entry\ncovers the rare neutral-charm leptonic decay \\(D^0\\to e^+e^-\\), a\n\\(\\Delta C=1\\), \\(c\\to u e^+e^-\\) flavor-changing neutral-current probe.\nCharge-conjugate modes are implicit in the experimental listings.  It is the\nelectron-mode counterpart to C004, \\(D^0\\to\\mu^+\\mu^-\\), but has a separate\nexperimental record.",
+    "pdg_prose": "The current PDG Live/API entry \\(S032.39\\), accessed on 2026-05-16, gives\n\\[\n  \\mathcal{B}(D^0\\to e^+e^-) < 7.9\\times10^{-8}\n  \\qquad (90\\%~{\\rm C.L.}).\n\\]\nThe sidecar source key is \\texttt{PDG2026:D0Ee}, with local snapshot\n\\texttt{pdg2026\\_d0\\_ee\\_pdgLive.txt}.  The PDG-used input is the Belle 2010\nsearch with \\(660\\,{\\rm fb}^{-1}\\) at KEKB.  Belle reports the same\n\\(7.9\\times10^{-8}\\) upper limit and no signal evidence\n(\\texttt{Belle2010:D0Ee};\n\\texttt{belle2010\\_arxiv1003\\_2345.txt}).  The independent BaBar 2012 search\nused \\(468\\,{\\rm fb}^{-1}\\) and set the weaker \\(1.7\\times10^{-7}\\) upper\nlimit at 90\\% CL\n(\\texttt{BaBar2012:D0EeMuMuEMu};\n\\texttt{babar2012\\_arxiv1206\\_5419.txt}).  The dispatch note called this an\nLHCb upper limit, but the accessed PDG/API measurement list contains no LHCb\n\\(D^0\\to e^+e^-\\) entry\n(\\texttt{pdg2026\\_d0\\_ee\\_pdgLive.txt}).",
+    "relevance": "Anarchic warped models can induce up-sector flavor-changing neutral currents\nthrough nonuniversal KK gauge couplings, flavor-violating \\(Z\\)-like effects,\nHiggs/radion scalar exchange, or lepton-sector extensions\n(\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}).  C005 therefore tests a\npure \\(c\\to u\\) dilepton amplitude rather than the four-quark \\(\\Delta F=2\\)\noperator basis used for neutral \\(D\\)-mixing.  For the current quark-only scan\nit is a catalog and roadmap process; a live veto would need both the\n\\(c\\to u\\) current and electron-current normalization.",
+    "post_2008": "The 2008 RS-flavor baseline predates the Belle and BaBar leptonic \\(D^0\\)\nsearches (\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}).  The main\npost-2008 experimental development is Belle's 2010 improvement to the current\nPDG limit, followed by BaBar's 2012 cross-check in a separate\n\\(e^+e^-\\to c\\bar c\\) sample\n(\\texttt{Belle2010:D0Ee}, \\texttt{BaBar2012:D0EeMuMuEMu}).  Unlike C004,\nwhich has newer hadron-collider dimuon searches, the accessed C005 PDG record\nstill uses the Belle result as the headline input.  Rare-charm theory work\nemphasizes that purely leptonic \\(D^0\\) limits are clean null tests\nexperimentally but require care when separating short-distance new physics from\nlong-distance charm dynamics\n(\\texttt{BurdmanGolowichHewettPakvasa2002:RareCharm}).",
+    "validity": "The upper limit itself is experimentally robust.  Its interpretation as an RS\nconstraint is model dependent because the electron mode is helicity sensitive,\nbremsstrahlung and electron identification enter the experimental acceptance,\nand the Standard Model rare-charm amplitude is not a precision short-distance\nprediction.  A conservative use is an upper bound on additional short-distance\n\\(c\\to u e^+e^-\\) amplitudes in a specified operator basis, not a direct\nsubtraction against a sharply predicted Standard Model rate\n(\\texttt{BurdmanGolowichHewettPakvasa2002:RareCharm}).",
+    "code_coverage_prose": "\\textbf{NO.}  The PKA greps and a focused search for\n\\texttt{D0.*e+e-}, \\texttt{D0.*ee}, \\texttt{c.?->.?u.*e}, and\n\\texttt{rare.?charm} found no \\(D^0\\to e^+e^-\\) implementation in\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, or \\texttt{tests/}.  Nearby hits are\nnot C005: \\(D^0\\) mixing is configured at\n\\texttt{quarkConstraints/deltaf2.py:252} and evaluated at\n\\texttt{quarkConstraints/deltaf2.py:941}; the modern policy likewise lists\nonly \\(D^0\\) mixing at \\texttt{quarkConstraints/modern/phenomenology.py:23}\nand \\texttt{quarkConstraints/modern/phenomenology.py:668}.  The\n\\(\\mu\\to e\\gamma\\) dipole check at\n\\texttt{flavorConstraints/muToEGamma.py:75} is a separate LFV observable.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Production use would require a new \\(\\Delta C=1\\) rare\nleptonic module with vector, axial-vector, scalar, and pseudoscalar\nnormalizations, electron-mode acceptance conventions, and a documented\nlong-distance treatment.  The existing \\(\\Delta F=2\\) SLL/SLR/VLL/VRR/LR\nbasis is not enough.",
+    "key_references": "Process-local keys before bibliography consolidation:\n\\texttt{PDG2026:D0Ee}, \\texttt{Belle2010:D0Ee},\n\\texttt{BaBar2012:D0EeMuMuEMu},\n\\texttt{BurdmanGolowichHewettPakvasa2002:RareCharm}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}.  Numeric claims above are\ntied to these sidecar source keys and local snapshots."
+  },
+  "source_yaml": "flavor_catalog/processes/charm/C005.yaml",
+  "source_tex": "flavor_catalog/processes/charm/C005.tex",
+  "worklog_path": "flavor_catalog/worklogs/C005/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:05Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:D0Ee",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S032.39",
+        "snapshot_path": "flavor_catalog/references/C005/pdg2026_d0_ee_pdgLive.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7.9e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 66,
+                "context": "L63: \nL64: Extraction note:\nL65:   The current PDG/API headline value for C005 is the Belle 2010 upper limit\nL66:   B(D0 -> e+ e-) < 7.9e-8 at 90% CL. No LHCb D0 -> e+ e- measurement appears\nL67:   in this PDG API measurement list at the access date above.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Belle2010:D0Ee",
+        "source_url": "https://arxiv.org/abs/1003.2345",
+        "snapshot_path": "flavor_catalog/references/C005/belle2010_arxiv1003_2345.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7.9e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19:   D0 -> e+- mu-+ using 660 fb^-1 of data collected with the Belle detector at\nL20:   the KEKB asymmetric-energy e+e- collider. No evidence was found for any of\nL21:   these decays. Belle obtained upper limits on the branching fractions:\nL22:   B(D0 -> mu+mu-) < 1.4 x 10^-7, B(D0 -> e+e-) < 7.9 x 10^-8, and\nL23:   B(D0 -> e+mu-) + B(D0 -> mu+e-) < 2.6 x 10^-7 at 90% confidence level.\nL24: \nL25: Extraction note:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "BaBar2012:D0EeMuMuEMu",
+        "source_url": "https://arxiv.org/abs/1206.5419",
+        "snapshot_path": "flavor_catalog/references/C005/babar2012_arxiv1206_5419.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1.7e-07",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19:   The observed event yields were consistent with expected backgrounds, except\nL20:   for a D0 -> mu+mu- upward background fluctuation at the 5% level. Using the\nL21:   Feldman-Cousins method, BABAR set 90% confidence-level intervals:\nL22:   B(D0 -> e+e-) < 1.7 x 10^-7, B(D0 -> mu+mu-) in [0.6, 8.1] x 10^-7, and\nL23:   B(D0 -> e mu) < 3.3 x 10^-7.\nL24: \nL25: Extraction note:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "D0->ee is helicity-suppressed and far from leading RS reach.",
+  "priority_rationale_full": "The D0->e+e- upper limit is experimentally valid, but the channel is\nhelicity-sensitive and not a clean dominant short-distance charm constraint.\nIts RS use would require a dedicated c->u e+e- operator basis and electron\nacceptance conventions. D mixing, D-mixing CPV, and muon LFV dominate the\ngeneric anarchic-flavor pressure."
+}

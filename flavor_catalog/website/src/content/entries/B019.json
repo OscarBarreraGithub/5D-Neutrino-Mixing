@@ -1,0 +1,286 @@
+{
+  "process_id": "B019",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "R_{K^*}",
+  "process_name": "Lepton-flavor universality ratio in B0 -> K*0 ell+ ell-",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Targeted regex search for R_K*, K*0 ee/mumu, C_9, C_10, LFU, lepton universality, and b -> s ell ell returned no matches in the required code directories.",
+      "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems.",
+      "quarkConstraints/modern/phenomenology.py:166 states that the modern phenomenology fence is policy-only.",
+      "quarkConstraints/deltaf2.py:209 defines the legacy Delta F = 2 input set.",
+      "quarkConstraints/deltaf2.py:903 and quarkConstraints/deltaf2.py:922 implement B_d and B_s mixing, not Delta B = 1 semileptonic observables.",
+      "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no b -> s ell ell routine is present."
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e|K\\\\^\\\\*|Kstar|K\\\\*0|C_9|C_10|lepton universality|LFU|RKstar|R_Kstar|R_\\\\{K\\\\^\\\\*\\\\}\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"R_?K\\\\*|R_?Kstar|R_\\\\{K\\\\^\\\\*\\\\}|B0[_ ]K\\\\*0|K\\\\*0[_ ]e|K\\\\*0[_ ]mu|B\\\\^0.*K\\\\^\\\\*|C_9|C_10|lepton universality|LFU|b\\\\s*->\\\\s*s\\\\s*(ell|l|mu|e)|b\\\\s*to\\\\s*s\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt": "sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261",
+    "cfw_0804_1954_rs_flavor.txt": "sha256:afcd5f8838e5505e87ab3300823eb88991e1bed3fe20972dcbd4c8b09ae93d46",
+    "hflav_dec2025_rkstar_centralq2.txt": "sha256:585fdc5f096d46eab0e22db55ae4704254fa4695b0e7aad5bdb372dd6699f792",
+    "hflav_dec2025_rkstar_lowq2_lhcb.txt": "sha256:7fbe070228eb26c62cc06f03dcc305d4bd4015b8f2859955af8c1deed2fd7b1e",
+    "lhcb_2017_rkstar_arxiv1705_05802.txt": "sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced",
+    "lhcb_2023_rk_rkstar_arxiv2212_09153.txt": "sha256:c8bba3b0498fd3b2d1236a85534d8b1a438f240aa7d56a53a94fdf24ed28bf7d"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T13:15:31-04:00",
+      "timestamp": "2026-05-16T13:15:31-04:00",
+      "agent_id": "PKA-B019",
+      "reason": "initial PKA draft deposit for assigned B019 R_K* process"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:34:09-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:34:09-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for WA batch wa_w4_beauty."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T13:48:28-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T13:48:28-04:00",
+      "agent_id": "CA",
+      "reason": "Checker verification passed for CA batch ca_w4_beauty."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "A+C: custodial-protection dependence; RK/RK* precision LFU null-test framing"
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(R_{K^*}\\equiv\n\\mathcal{B}(B^0\\to K^{*0}\\mu^+\\mu^-)/\\mathcal{B}(B^0\\to\nK^{*0}e^+e^-)\\), with \\(K^{*0}\\) the neutral vector kaon.  This beauty-sector\nentry covers the neutral exclusive lepton-universality ratio; \\(R_K\\) is B018\nand absolute \\(B\\to K^*\\ell\\ell\\) rates and angular observables are B017.",
+    "pdg_prose": "The current HFLAV-equivalent Dec. 2025 neutral-\\(K^{*0}\\) entries give\n\\[\n  R_{K^*}=0.927\\pm0.097,\\qquad 0.1<q^2<1.1~{\\rm GeV}^2/c^4,\n\\]\nfrom the LHCb-only Run-1+Run-2 input\n\\(0.927^{+0.093}_{-0.087}{}^{+0.036}_{-0.035}\\)\n(\\texttt{HFLAV2025Dec:RKstarLowQ2LHCb},\n\\texttt{LHCb2023:RKRKstarDetailed}).  In the central bin,\n\\[\n  R_{K^*}=1.028\\pm0.074,\\qquad 1.1<q^2<6.0~{\\rm GeV}^2/c^4,\n\\]\nHFLAV combines the LHCb value\n\\(1.027^{+0.072}_{-0.068}{}^{+0.027}_{-0.026}\\) with Belle\n\\(1.06^{+0.63}_{-0.38}\\pm0.14\\)\n(\\texttt{HFLAV2025Dec:RKstarCentralQ2}).  Local snapshots are\n\\texttt{references/B019/hflav\\_dec2025\\_rkstar\\_lowq2\\_lhcb.txt} and\n\\texttt{references/B019/hflav\\_dec2025\\_rkstar\\_centralq2.txt}, accessed\n2026-05-16.",
+    "relevance": "\\(R_{K^*}\\) probes \\(\\Delta B=1\\) semileptonic FCNC amplitudes in\n\\(b\\to s\\ell^+\\ell^-\\).  In RS/anarchic-flavor language it is sensitive to\nnonuniversal lepton couplings and flavor-changing \\(b\\)-\\(s\\) currents from\nKK gauge, \\(Z\\), or other semileptonic effects.  It is therefore\ncomplementary to the repo's existing neutral-meson \\(\\Delta F=2\\) constraints\nand to B018's pseudoscalar \\(R_K\\) ratio.",
+    "post_2008": "The CFW 2008 baseline (\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor})\npredates the \\(R_{K^*}\\) anomaly program.  The key post-2008 milestone was the\nLHCb 2017 measurement (\\texttt{LHCb2017:RKstar}):\n\\(R_{K^*}=0.66^{+0.11}_{-0.07}\\pm0.03\\) for\n\\(0.045<q^2<1.1~{\\rm GeV}^2/c^4\\) and\n\\(0.69^{+0.11}_{-0.07}\\pm0.05\\) for\n\\(1.1<q^2<6.0~{\\rm GeV}^2/c^4\\), corresponding to roughly\n\\(2.1\\)--\\(2.5\\sigma\\) tensions depending on bin and SM prediction.  The\nLHCb 2023 simultaneous \\(R_K/R_{K^*}\\) analysis superseded that result; its\n\\(R_{K^*}\\) central values moved upward and the four LFU measurements have\ncombined SM compatibility of \\(0.2\\sigma\\)\n(\\texttt{LHCb2023:RKRKstarDetailed}).  Theory work by\nBordone--Isidori--Pattori clarified that the central bin is SM-unity to about a\n\\(0.01\\) QED uncertainty, while low-\\(q^2\\) \\(R_{K^*}\\) needs explicit\nphoton-pole and radiative treatment\n(\\texttt{BordoneIsidoriPattori2016:RKRKstarSM}).",
+    "validity": "This is a clean LFU null test, but it is not a drop-in bound for the current\nquark scan.  The ratio cancels many hadronic uncertainties, yet a usable\nconstraint still depends on bin definitions, electron bremsstrahlung,\nradiative corrections, correlations, and a model prediction for lepton-specific\n\\(C_9^{\\ell}\\), \\(C_{10}^{\\ell}\\), and primed semileptonic coefficients.\n\nIn custodial RS, reduced \\(Z b_L b_L\\) pressure can make \\(R_{K^*}\\)\nrelatively more discriminating as an LFU cross-check; quote RS bounds only\nafter specifying custodial protection, fermion embeddings, and brane kinetic\nterms.  Use \\(R_K/R_{K^*}\\) as precision LFU null tests; do not impose the\npre-2023 anomaly narrative as a prior.",
+    "code_coverage_prose": "\\textbf{NO.}  Required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(R_{K^*}\\), \\(K^{*0}e e\\), \\(K^{*0}\\mu\\mu\\),\n\\(C_9\\), \\(C_{10}\\), LFU, or \\(b\\to s\\ell\\ell\\) implementation.  The modern\nphenomenology surface enumerates only \\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\),\nand \\(D^0\\) at \\texttt{quarkConstraints/modern/phenomenology.py:23}, and it\nis policy-only at \\texttt{quarkConstraints/modern/phenomenology.py:166}.  The\nlegacy inputs are \\(\\Delta F=2\\) at\n\\texttt{quarkConstraints/deltaf2.py:209}, with \\(B_d\\) and \\(B_s\\) mixing\nevaluators at \\texttt{quarkConstraints/deltaf2.py:903} and\n\\texttt{quarkConstraints/deltaf2.py:922}.  The only live lepton-flavor routine\nfound is \\(\\mu\\to e\\gamma\\) at \\texttt{flavorConstraints/muToEGamma.py:75}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Integration requires a new \\(\\Delta B=1\\) semileptonic\nHamiltonian, lepton-specific \\(C_9/C_{10}\\) and primed coefficients,\nbin-aware SM/QED predictions, and HFLAV/LHCb likelihood or covariance handling.",
+    "key_references": "Process-local reference keys before bibliography consolidation:\n\\texttt{HFLAV2025Dec:RKstarLowQ2LHCb},\n\\texttt{HFLAV2025Dec:RKstarCentralQ2},\n\\texttt{LHCb2023:RKRKstarDetailed},\n\\texttt{LHCb2017:RKstar},\n\\texttt{BordoneIsidoriPattori2016:RKRKstarSM}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B019.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B019.tex",
+  "worklog_path": "flavor_catalog/worklogs/B019/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 5,
+      "AMBIGUOUS": 2,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "observables[0]",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin1b.html",
+        "snapshot_path": "flavor_catalog/references/B019/hflav_dec2025_rkstar_lowq2_lhcb.txt",
+        "sha256": "sha256:7fbe070228eb26c62cc06f03dcc305d4bd4015b8f2859955af8c1deed2fd7b1e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "R_K* low-q2 = 0.927 +- +/- 0.097",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: <h1>$\\frac{ {\\cal{B}}(B^0 \\to K^*(892)^0 \\mu^+ \\mu^-) }{ {\\cal{B}}(B^0 \\to K^*(892)^0 e^+ e^-) },~0.1 < m^2_{\\ell^+\\ell^-} < 1.1~\\rm{GeV^2/c^4}$</h1>\nL13: <p><img src=\"BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin1b.png\"></p>\nL14: <p><table border=\"1\"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\\Delta\\chi^2$</th><th>Reference</th><th>Comments</th></tr>\nL15: <tr><td><b>Average</b></td><td><b>$0.927 \\pm0.097$</b></td><td></td><td></td><td></td></tr>\nL16: <tr><td>LHCb</td><td>$0.927\\,^{+0.093}_{-0.087}\\,^{+0.036}_{-0.035}$</td><td>0.00</td>\nL17: <td><a href=\"https://inspirehep.net/literature/2684465\">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>\nL18: </table>\n"
+              },
+              {
+                "line_number": 16,
+                "context": "L13: <p><img src=\"BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin1b.png\"></p>\nL14: <p><table border=\"1\"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\\Delta\\chi^2$</th><th>Reference</th><th>Comments</th></tr>\nL15: <tr><td><b>Average</b></td><td><b>$0.927 \\pm0.097$</b></td><td></td><td></td><td></td></tr>\nL16: <tr><td>LHCb</td><td>$0.927\\,^{+0.093}_{-0.087}\\,^{+0.036}_{-0.035}$</td><td>0.00</td>\nL17: <td><a href=\"https://inspirehep.net/literature/2684465\">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>\nL18: </table>\nL19: </p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[1]",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/RBR/BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin2.html",
+        "snapshot_path": "flavor_catalog/references/B019/hflav_dec2025_rkstar_centralq2.txt",
+        "sha256": "sha256:585fdc5f096d46eab0e22db55ae4704254fa4695b0e7aad5bdb372dd6699f792",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "R_K* central-q2 = 1.028 +- +/- 0.074",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: <h1>$\\frac{ {\\cal{B}}(B^0 \\to K^*(892)^0 \\mu^+ \\mu^-) }{ {\\cal{B}}(B^0 \\to K^*(892)^0 e^+ e^-) },~1.1 < m^2_{\\ell^+\\ell^-} < 6.0~\\rm{GeV^2/c^4}$</h1>\nL13: <p><img src=\"BR_B0_K*0_mu+_mu-..BR_B0_K*0_e+_e-__bin2.png\"></p>\nL14: <p><table border=\"1\"><tr><th>Experiment</th><th>Measurement [10<sup>0</sup>]</th><th>$\\Delta\\chi^2$</th><th>Reference</th><th>Comments</th></tr>\nL15: <tr><td><b>Average</b></td><td><b>$1.028 \\pm0.074$</b></td><td>0.00</td><td>$p=0.95$ (ndf=1)</td><td></td></tr>\nL16: <tr><td>LHCb</td><td>$1.027\\,^{+0.072}_{-0.068}\\,^{+0.027}_{-0.026}$</td><td>0.00</td>\nL17: <td><a href=\"https://inspirehep.net/literature/2684465\">Phys.Rev.D <b>108</b>,032002 (2023)</a></td><td></td></tr>\nL18: <tr><td>Belle</td><td>$1.06\\,^{+0.63}_{-0.38} \\pm0.14$</td><td>0.00</td>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[2]",
+        "source_url": "https://arxiv.org/abs/1705.05802",
+        "snapshot_path": "flavor_catalog/references/B019/lhcb_2017_rkstar_arxiv1705_05802.txt",
+        "sha256": "sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "LHCb 2017 low-q2 R_K* = 0.66 +- +0.11/-0.07 stat, +/-0.03 syst",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10:\nL11: Relevant arXiv-source excerpt from title/results/conclusion:\nL12: The measured ratios were\nL13:   R_K* = 0.66^{+0.11}_{-0.07} (stat) +/- 0.03 (syst)\nL14:     for 0.045 < q^2 < 1.1 GeV^2/c^4,\nL15:   R_K* = 0.69^{+0.11}_{-0.07} (stat) +/- 0.05 (syst)\nL16:     for 1.1 < q^2 < 6.0 GeV^2/c^4.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[3]",
+        "source_url": "https://arxiv.org/abs/1705.05802",
+        "snapshot_path": "flavor_catalog/references/B019/lhcb_2017_rkstar_arxiv1705_05802.txt",
+        "sha256": "sha256:0a77136a5169c267b8d07231c72d031d14ead0dbcecbccbe97aa9706501beced",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "LHCb 2017 central-q2 R_K* = 0.69 +- +0.11/-0.07 stat, +/-0.05 syst",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12: The measured ratios were\nL13:   R_K* = 0.66^{+0.11}_{-0.07} (stat) +/- 0.03 (syst)\nL14:     for 0.045 < q^2 < 1.1 GeV^2/c^4,\nL15:   R_K* = 0.69^{+0.11}_{-0.07} (stat) +/- 0.05 (syst)\nL16:     for 1.1 < q^2 < 6.0 GeV^2/c^4.\nL17:\nL18: The publication reported compatibility with SM expectations at approximately\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[4]",
+        "source_url": "https://arxiv.org/abs/2212.09153",
+        "snapshot_path": "flavor_catalog/references/B019/lhcb_2023_rk_rkstar_arxiv2212_09153.txt",
+        "sha256": "sha256:c8bba3b0498fd3b2d1236a85534d8b1a438f240aa7d56a53a94fdf24ed28bf7d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "LHCb 2023 SM compatibility = 0.2 standard deviations",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 30,
+                "context": "L27:\nL28: Conclusion excerpt:\nL29: The four measured relative decay rates are compatible with the SM, with the\nL30: combined result agreeing with the SM prediction at 0.2 standard deviations.\nL31: The results supersede previous LHCb measurements of R_K and R_K*; both R_K*\nL32: central values move upward relative to the previous R_K* publication.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "theory_inputs[0]",
+        "source_url": "https://hflav.web.cern.ch/content/rare-b-decays",
+        "snapshot_path": "flavor_catalog/references/B019/bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt",
+        "sha256": "sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BIP 2016 central-q2 SM R_K* = 1.00 +- +/- 0.01_QED",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: physics beyond the SM with small theoretical uncertainties.\nL15:\nL16: For central q^2, the authors quote\nL17:   R_{K*}[1.1, 6.0]^{SM} = 1.00 +/- 0.01_QED.\nL18:\nL19: For low q^2, their added note gives\nL20:   R_{K*}[0.045, 1.1]^{SM} = 0.906 +/- 0.028_th,\n"
+              },
+              {
+                "line_number": 20,
+                "context": "L17:   R_{K*}[1.1, 6.0]^{SM} = 1.00 +/- 0.01_QED.\nL18:\nL19: For low q^2, their added note gives\nL20:   R_{K*}[0.045, 1.1]^{SM} = 0.906 +/- 0.028_th,\nL21:   R_{K*}[0.1, 1.1]^{SM} = 0.983 +/- 0.014_th.\nL22:\nL23: They state that a deviation of R_K or R_K* from unity exceeding the percent\n"
+              },
+              {
+                "line_number": 21,
+                "context": "L18:\nL19: For low q^2, their added note gives\nL20:   R_{K*}[0.045, 1.1]^{SM} = 0.906 +/- 0.028_th,\nL21:   R_{K*}[0.1, 1.1]^{SM} = 0.983 +/- 0.014_th.\nL22:\nL23: They state that a deviation of R_K or R_K* from unity exceeding the percent\nL24: level, with consistent experimental cuts and radiative treatment, is a clean\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "theory_inputs[1]",
+        "source_url": "https://hflav.web.cern.ch/content/rare-b-decays",
+        "snapshot_path": "flavor_catalog/references/B019/bordone_isidori_pattori_2016_rkstar_sm_arxiv1605_07633.txt",
+        "sha256": "sha256:9cbbd94af6b263f1830ecfceb93f09fa6ae3dcffcfa40d758f0443eac6891261",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BIP 2016 low-q2 SM R_K* for LHCb 2023 bin = 0.983 +- +/- 0.014_th",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18:\nL19: For low q^2, their added note gives\nL20:   R_{K*}[0.045, 1.1]^{SM} = 0.906 +/- 0.028_th,\nL21:   R_{K*}[0.1, 1.1]^{SM} = 0.983 +/- 0.014_th.\nL22:\nL23: They state that a deviation of R_K or R_K* from unity exceeding the percent\nL24: level, with consistent experimental cuts and radiative treatment, is a clean\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Clean RK* LFU test with added helicity sensitivity",
+  "priority_rationale_full": "R_K* is another clean LFU null test of lepton-nonuniversal b-s semileptonic operators, with extra sensitivity to chirality and helicity structure through the vector final state. It is relevant to RS setups with nonuniversal lepton couplings or primed semileptonic coefficients. Present agreement with the SM and the need for bin, QED, and correlation treatment keep it at MEDIUM rather than HIGH."
+}

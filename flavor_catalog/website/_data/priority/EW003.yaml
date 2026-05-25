@@ -1,0 +1,8 @@
+---
+process_id: EW003
+constraint_priority: LOW
+priority_rationale_short: "CKM input diagnostic, not a standalone RS exclusion"
+priority_rationale_full: |
+  The inclusive-exclusive V_cb and V_ub tensions are important inputs for choosing CKM targets and normalizations in flavor fits. They are not clean standalone BSM exclusions for anarchic RS, since they depend on heavy-quark expansion schemes, lattice form factors, parameterization choices, and experimental correlations. They should influence fit bookkeeping more than drive a scan cut.
+ranked_by: codex-gpt-5.5-xhigh-batch-P3
+ranked_at: 2026-05-18T01:37:04-04:00

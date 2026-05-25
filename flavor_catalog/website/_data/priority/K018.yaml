@@ -1,0 +1,11 @@
+process_id: K018
+constraint_priority: LOW
+priority_rationale_short: "CKM-input diagnostic, not a standalone RS flavor bound"
+priority_rationale_full: |
+  K_l3 determines |V_us| f_+(0) and supplies precision charged-current input for
+  CKM and first-row unitarity tests. A warped model with modified W couplings,
+  vector-like fermion mixing, right-handed currents, or lepton nonuniversality
+  could shift the extraction. In the default anarchic flavor scan it is an input
+  and diagnostic, not a standalone FCNC constraint.
+ranked_by: codex-gpt-5.5-xhigh-batch-P1
+ranked_at: 2026-05-18T01:35:41-04:00

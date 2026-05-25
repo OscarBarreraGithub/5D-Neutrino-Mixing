@@ -1,0 +1,19 @@
+# Cloudflare Pages headers.
+# Format reference: https://developers.cloudflare.com/pages/configuration/headers/
+
+# Astro hashes JS/CSS bundles under /_astro/ -- safe to cache forever.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Pagefind ships a content-addressed bundle; long-cache it.
+/pagefind/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML should always revalidate so catalog updates land quickly.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Default for non-hashed assets (favicons, JSON shells, etc.) -- short cache.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

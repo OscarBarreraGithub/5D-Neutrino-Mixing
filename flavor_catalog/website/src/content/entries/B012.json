@@ -1,0 +1,407 @@
+{
+  "process_id": "B012",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "B\\to K^*(892)\\gamma",
+  "process_name": "Exclusive radiative B -> K* gamma",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires new b -> s gamma dipole matching and RG for C7/C7' and C8/C8', exclusive B -> K* form-factor treatment, and a time-dependent CP/helicity observable likelihood absent from the Delta F=2 code.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"K\\*.*gamma|Kst.*gamma|Kstar.*gamma|K\\^\\*.*gamma|B.?->.?K\\*.?gamma|C7'?|C_7'?|O7'?|photon.?polar|right.?handed.?dipole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused implementation grep for B -> K* gamma, C7/C7', O7/O7', photon polarization, and right-handed dipole returned exit=1.",
+      "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 in the modern quark policy surface.",
+      "flavorConstraints/muToEGamma.py:75 is a lepton-sector mu->e gamma dipole check, not a b->s gamma implementation."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "HFLAV rare decays, end-of-year 2024",
+      "observable": "B(B0 -> K*(892)0 gamma)",
+      "value": 4.163e-05,
+      "uncertainty": 9.2e-07,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2024,
+      "experiment": "HFLAV rare decays, end-of-year 2024",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+      "snapshot_path": "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt",
+      "sha256": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV rare decays, end-of-year 2024",
+      "observable": "B(B+ -> K*(892)+ gamma)",
+      "value": 3.95e-05,
+      "uncertainty": 1e-06,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2024,
+      "experiment": "HFLAV rare decays, end-of-year 2024",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+      "snapshot_path": "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt",
+      "sha256": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV rare decays, end-of-year 2024",
+      "observable": "Delta_0+(B -> K* gamma)",
+      "value": 0.059,
+      "uncertainty": 0.014,
+      "units": "dimensionless",
+      "display": null,
+      "year": 2024,
+      "experiment": "HFLAV rare decays, end-of-year 2024",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+      "snapshot_path": "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt",
+      "sha256": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV rare decays, end-of-year 2024",
+      "observable": "A_CP(B -> K* gamma)",
+      "value": -0.004,
+      "uncertainty": 0.011,
+      "units": "dimensionless",
+      "display": null,
+      "year": 2024,
+      "experiment": "HFLAV rare decays, end-of-year 2024",
+      "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+      "snapshot_path": "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt",
+      "sha256": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG pdgLive 2025",
+      "observable": "S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)",
+      "value": -0.08,
+      "uncertainty": 0.17,
+      "units": "dimensionless",
+      "display": null,
+      "year": 2025,
+      "experiment": "PDG pdgLive 2025",
+      "source_url": "https://pdglive.lbl.gov/DataBlock.action?node=S042SX4",
+      "snapshot_path": "flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt",
+      "sha256": "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG pdgLive 2025",
+      "observable": "C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)",
+      "value": 0.03,
+      "uncertainty": 0.1,
+      "units": "dimensionless",
+      "display": null,
+      "year": 2025,
+      "experiment": "PDG pdgLive 2025",
+      "source_url": "https://pdglive.lbl.gov/Particle.action?node=S042",
+      "snapshot_path": "flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt",
+      "sha256": "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "source": "arXiv:0804.1954",
+    "role": "2008 RS/composite-Higgs flavor baseline for post-2008 comparison, not a measured observable.",
+    "snapshot_path": "flavor_catalog/references/B012/arxiv_0804_1954_cfw_rs_flavor.txt",
+    "sha256": "sha256:6ef3289a51f25e27b67d8c319311780ccbf0a3cdbc8b8c4d3756088ce6956a57"
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "hflav_rare_decays_dec2024_btokstargamma.txt": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+    "pdglive_2025_kstargamma_cp.txt": "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b",
+    "arxiv_2411_10127_belleii_btokstargamma.txt": "sha256:e5a40247dd2208524ce0c0fd962ed878939c0a931ce1d921930d6367af77eab1",
+    "arxiv_1707_00394_belle_isospin_cp.txt": "sha256:826984017c419bd667b63e5f7e63e8130a41c962cf9c1098ad9e00ed3cd5c232",
+    "arxiv_0906_2177_babar_btokstargamma.txt": "sha256:77204e193561c9a16c9f80bdf605d871285b9951b4992c5f603978d9e402dc95",
+    "arxiv_1402_6852_lhcb_photon_polarization.txt": "sha256:664bac221a554987f3675e65cc03089b3ce2c184a680f084c3ade1e37d68b951",
+    "arxiv_0804_1954_cfw_rs_flavor.txt": "sha256:6ef3289a51f25e27b67d8c319311780ccbf0a3cdbc8b8c4d3756088ce6956a57"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "OPUS-APPROVED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T18:30:24-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T18:30:24-04:00",
+      "agent_id": "PKA-B012",
+      "reason": "Initial PKA sidecar for exclusive B -> K* gamma."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T18:30:24-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T18:30:24-04:00",
+      "agent_id": "PKA-B012",
+      "reason": "PKA draft, source snapshots, and code-coverage grep completed."
+    },
+    {
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T18:39:34-04:00",
+      "timestamp": "2026-05-16T18:39:34-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "batch_id": "wa_w7_new_processes",
+      "reason": "Writer polish for wa_w7_new_processes; template sections normalized and numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "state": "WRITER-REWORK",
+      "at": "2026-05-16T18:55:13-04:00",
+      "timestamp": "2026-05-16T18:55:13-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w7_new_processes",
+      "reason": "CHK-1 failed in checker pass.",
+      "issues": [
+        "pdg_or_equivalent observable blocks for the HFLAV and PDG values lack explicit year keys and use sha256_of_text_snapshot instead of sha256.",
+        "TeX post-2008 numerical claims 3.1 sigma, 5.2 sigma, and 2019--2022 are stored only under post_2008_sources, not pdg_or_equivalent."
+      ]
+    },
+    {
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T19:01:15-04:00",
+      "timestamp": "2026-05-16T19:01:15-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w7_new_v2",
+      "cycle": 2,
+      "reason": "Addressed CA CHK-1 by normalizing pdg_or_equivalent metadata and removing flagged post-2008 numerical claims from TeX."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-16T19:10:09-04:00",
+      "timestamp": "2026-05-16T19:10:09-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w7_new_v2",
+      "cycle": 2,
+      "reason": "Cycle-2 checker pass completed; CHK-1 through CHK-8 passed."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T19:25:00-04:00",
+      "from": "CHECKER-DONE",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T19:25:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "agent_id": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "HFLAV, PDG pdgLive, Belle II, Belle, BaBar, LHCb, and CFW sources match all B012 value-bearing claims."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T20:30:00-04:00",
+      "from": "FACT-CHECKED",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T20:30:00-04:00",
+      "agent": "Opus-round-3",
+      "agent_id": "Opus-round-3",
+      "round_id": "opus_round_003",
+      "reason": "Opus round 3 sign-off; full PKA -> WA -> CA cycle-2 -> fact-check VERIFIED; representative exclusive radiative b->s gamma row beyond B011 per Wave-7 promotion; see flavor_catalog/signoff/round_003_index.md."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(B\\to K^*(892)\\gamma\\).\nThis entry covers the exclusive radiative \\(b\\to s\\gamma\\) channels\n\\(B^0\\to K^{*0}\\gamma\\) and \\(B^+\\to K^{*+}\\gamma\\), with emphasis on the\ntime-dependent \\(S_{K^*\\gamma}\\) photon-helicity observable.",
+    "pdg_prose": "The HFLAV Dec.~2024 averages give\n\\[\n{\\cal B}(B^0\\to K^{*0}\\gamma)=(41.63\\pm0.92)\\times10^{-6},\n\\qquad\n{\\cal B}(B^+\\to K^{*+}\\gamma)=(39.5\\pm1.0)\\times10^{-6},\n\\]\nfrom \\texttt{references/B012/hflav\\_rare\\_decays\\_dec2024\\_btokstargamma.txt}\n(\\texttt{hflav\\_rare\\_decays\\_dec2024\\_btokstargamma}).  The same HFLAV\nsnapshot gives\n\\(\\Delta_{0+}(B\\to K^*\\gamma)=0.059\\pm0.014\\) and\n\\(A_{CP}(B\\to K^*\\gamma)=-0.004\\pm0.011\\)\n(\\texttt{hflav\\_rare\\_decays\\_dec2024\\_btokstargamma}); the HFLAV note marks\nthe isospin averages as naive and to be treated with caution.  The PDG 2025\npdgLive time-dependent average is\n\\[\nS_{K^{*0}\\gamma}(B^0\\to K^{*0}\\gamma)=-0.08\\pm0.17,\n\\qquad\nC_{K^{*0}\\gamma}=0.03\\pm0.10,\n\\]\nfrom \\texttt{references/B012/pdglive\\_2025\\_kstargamma\\_cp.txt}\n(\\texttt{pdglive\\_2025\\_kstargamma\\_cp}).",
+    "relevance": "This is the exclusive radiative complement to the inclusive \\(B\\to X_s\\gamma\\)\nentry.  The inclusive rate mostly constrains the size of the electromagnetic\ndipole combination, while \\(S_{K^*\\gamma}\\) is a chirality test: a large\nright-handed dipole coefficient \\(C_7'\\) can enhance the mixing-induced\nasymmetry even when the total rate remains near the SM value.  Anarchic RS\nmodels can generate chirality-flipped dipoles through KK-fermion, KK-gauge,\nor Higgs-sector loops, so this process directly probes a direction not covered\nby the present \\(\\Delta F=2\\) scan.",
+    "post_2008": "Since the arXiv:0804.1954 flavor-baseline era\n(\\texttt{cfw\\_2008\\_rs\\_flavor}), BaBar produced a high-statistics\nbranching-fraction, direct-CP, and isospin-asymmetry measurement in 2009\n(\\texttt{babar\\_2009\\_btokstargamma}); Belle reported evidence for isospin\nviolation in 2017 (\\texttt{belle\\_2017\\_isospin\\_cp}); LHCb observed photon\npolarization in \\(b\\to s\\gamma\\) using\n\\(B^\\pm\\to K^\\pm\\pi^\\mp\\pi^\\pm\\gamma\\)\n(\\texttt{lhcb\\_2014\\_photon\\_polarization}); and Belle II added\n\\(B\\to K^*\\gamma\\) measurements now entering HFLAV\n(\\texttt{belleii\\_2024\\_btokstargamma}).  PDG 2025 also includes a new\nBelle/Belle II input in the \\(S_{K^*\\gamma}\\) average\n(\\texttt{pdglive\\_2025\\_kstargamma\\_cp}).",
+    "validity": "The branching fractions are measured cleanly but are less theory-clean than the\ninclusive rate because exclusive form factors and spectator effects enter the\nSM comparison.  The time-dependent asymmetry is a sharper null-test of photon\nhelicity, but its present uncertainty is still statistics-limited.  Translating\nthe entry into an RS bound requires a convention-matched \\(C_7,C_7'\\) and\n\\(C_8,C_8'\\) pipeline plus exclusive-amplitude inputs; the measured averages\nalone should not be treated as a standalone likelihood.",
+    "code_coverage_prose": "\\textbf{NO.}  The required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(B\\to K^*\\gamma\\), \\(C_7'\\), photon-polarization, or\nright-handed \\(b\\to s\\gamma\\) implementation.  The modern quark surface is\nlimited to neutral-meson mixing systems at\n\\texttt{quarkConstraints/modern/phenomenology.py:23}; the only dipole code\nfound is the unrelated lepton-sector \\(\\mu\\to e\\gamma\\) check at\n\\texttt{flavorConstraints/muToEGamma.py:75}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Production use needs new dipole matching, RG evolution for\n\\(C_7,C_7'\\) and \\(C_8,C_8'\\), exclusive \\(B\\to K^*\\) form-factor handling,\nand a time-dependent CP/helicity observable.  None of that is supplied by the\ncurrent \\(\\Delta F=2\\) operator basis.",
+    "key_references": "Process-local keys before bibliography consolidation:\n\\texttt{hflav\\_rare\\_decays\\_dec2024\\_btokstargamma},\n\\texttt{pdglive\\_2025\\_kstargamma\\_cp},\n\\texttt{belleii\\_2024\\_btokstargamma},\n\\texttt{belle\\_2017\\_isospin\\_cp},\n\\texttt{babar\\_2009\\_btokstargamma},\n\\texttt{lhcb\\_2014\\_photon\\_polarization}, and\n\\texttt{cfw\\_2008\\_rs\\_flavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B012.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B012.tex",
+  "worklog_path": "flavor_catalog/worklogs/B012/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 3,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "branching_fraction_b0_to_kstar0_gamma",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+        "snapshot_path": "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt",
+        "sha256": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "B(B0 -> K*(892)0 gamma) = (4.163 +- 0.092)e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24:   CLEO [242]      45.5 +7.2 -6.8 +/- 3.4\nL25:   LHCb [206], [184] ratios used in HFLAV fit\nL26: Average columns:\nL27:   HFLAV: 41.63 +/- 0.92\nL28:   PDG:   41.77 +/- 2.48\nL29:\nL30: Table 76: Isospin asymmetry in B radiative and FCNC decays.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "branching_fraction_bp_to_kstarp_gamma",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+        "snapshot_path": "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt",
+        "sha256": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "B(B+ -> K*(892)+ gamma) = (3.95 +- 0.1)e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 15,
+                "context": "L12:   BaBar [241]     42.2 +/- 1.4 +/- 1.6\nL13:   CLEO [242]      37.6 +8.9 -8.3 +/- 2.8\nL14: Average columns:\nL15:   HFLAV: 39.5 +/- 1.0\nL16:   PDG:   39.2 +/- 2.2\nL17:\nL18: Table 62: Branching fractions of B0 radiative and FCNC decays with leptons, units 10^-6.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "isospin_asymmetry_delta0plus",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+        "snapshot_path": "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt",
+        "sha256": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Delta_0+(B -> K* gamma) = 0.059 +- 0.014",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 37,
+                "context": "L34:   Belle II [240]  0.050 +/- 0.020 +/- 0.015\nL35:   BaBar [241]     0.066 +/- 0.021 +/- 0.022\nL36: Average columns:\nL37:   HFLAV: 0.059 +/- 0.014\nL38:   PDG:   0.063 +/- 0.017\nL39: HFLAV caution: these averages are computed naively and should be treated with caution.\nL40:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "direct_cp_asymmetry_b_to_kstar_gamma",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2024/hflav_rare_decays_Dec24.pdf",
+        "snapshot_path": "flavor_catalog/references/B012/hflav_rare_decays_dec2024_btokstargamma.txt",
+        "sha256": "sha256:dc826a3f6d2484d31f1c6f51e348be70826e26dd4be4cfbaf5bd45a050616b6d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "A_CP(B -> K* gamma) = -0.004 +- 0.011",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 44,
+                "context": "L41: Table 96: CP asymmetries of charmless hadronic B+ / B0 admixture.\nL42: Parameter: A_CP(B -> K* gamma)\nL43: Measurements:\nL44:   Belle [239]     -0.004 +/- 0.014 +/- 0.003\nL45:   BaBar [241]     -0.003 +/- 0.017 +/- 0.007\nL46: Average:\nL47:   -0.004 +/- 0.011\n"
+              },
+              {
+                "line_number": 47,
+                "context": "L44:   Belle [239]     -0.004 +/- 0.014 +/- 0.003\nL45:   BaBar [241]     -0.003 +/- 0.017 +/- 0.007\nL46: Average:\nL47:   -0.004 +/- 0.011\nL48:\nL49: Reference lines relevant to these rows:\nL50: [239] Belle collaboration, T. Horiguchi et al., Evidence for Isospin Violation and Measurement of CP Asymmetries in B -> K*(892) gamma, Phys. Rev. Lett. 119 (2017) 191802, arXiv:1707.00394.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "time_dependent_s_kstargamma",
+        "source_url": "https://pdglive.lbl.gov/DataBlock.action?node=S042SX4",
+        "snapshot_path": "flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt",
+        "sha256": "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = -0.08 +- 0.17",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Collapsed B0 listing entries:\nL10:   A_CP(B0 -> K*(892)0 gamma) = -0.006 +/- 0.011\nL11:   C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = 0.03 +/- 0.10\nL12:   S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = -0.08 +/- 0.17\nL13:\nL14: S042SX4 data block:\nL15: Observable: S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)\n"
+              },
+              {
+                "line_number": 16,
+                "context": "L13:\nL14: S042SX4 data block:\nL15: Observable: S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)\nL16:   OUR AVERAGE: -0.08 +/- 0.17\nL17: Inputs used by PDG:\nL18:   ADACHI 2025, Belle:      0.00 +0.27 -0.26 +/- 0.03\nL19:   AUBERT 2008BA, BaBar:   -0.03 +/- 0.29 +/- 0.03\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "time_dependent_c_kstargamma",
+        "source_url": "https://pdglive.lbl.gov/Particle.action?node=S042",
+        "snapshot_path": "flavor_catalog/references/B012/pdglive_2025_kstargamma_cp.txt",
+        "sha256": "sha256:3ba65881b19ea4bec5e554a9e5eefce94d66dceb5b2f42b91e202a5b76cb6c3b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = 0.03 +- 0.1",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8:\nL9: Collapsed B0 listing entries:\nL10:   A_CP(B0 -> K*(892)0 gamma) = -0.006 +/- 0.011\nL11:   C_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = 0.03 +/- 0.10\nL12:   S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma) = -0.08 +/- 0.17\nL13:\nL14: S042SX4 data block:\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15: Observable: S_{K*(892)0 gamma}(B0 -> K*(892)0 gamma)\nL16:   OUR AVERAGE: -0.08 +/- 0.17\nL17: Inputs used by PDG:\nL18:   ADACHI 2025, Belle:      0.00 +0.27 -0.26 +/- 0.03\nL19:   AUBERT 2008BA, BaBar:   -0.03 +/- 0.29 +/- 0.03\nL20:   USHIRODA 2006, Belle:   -0.32 +0.36 -0.33 +/- 0.05\nL21: Older inputs listed but not used:\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16:   OUR AVERAGE: -0.08 +/- 0.17\nL17: Inputs used by PDG:\nL18:   ADACHI 2025, Belle:      0.00 +0.27 -0.26 +/- 0.03\nL19:   AUBERT 2008BA, BaBar:   -0.03 +/- 0.29 +/- 0.03\nL20:   USHIRODA 2006, Belle:   -0.32 +0.36 -0.33 +/- 0.05\nL21: Older inputs listed but not used:\nL22:   AUBERT,B 2005P, BaBar:  -0.21 +/- 0.40 +/- 0.05; replaced by AUBERT 2008BA\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Right-handed b->s gamma helicity probe, exclusive-limited",
+  "priority_rationale_full": "B -> K* gamma adds sensitivity to chirality-flipped dipoles, especially C7', which are a characteristic loop-level RS direction. The helicity and CP observables can reveal right-handed photons even if the inclusive rate is SM-like. The price is exclusive form-factor and spectator-amplitude dependence, so it is a meaningful companion to B011 rather than a dominant bound."
+}

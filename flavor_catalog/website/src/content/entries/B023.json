@@ -1,0 +1,322 @@
+{
+  "process_id": "B023",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(B\\to K^*\\nu\\bar{\\nu})",
+  "process_name": "Invisible rare B -> K*(892) nu nubar decays",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Targeted regex search for B -> K* nu nubar, b -> s nu nubar, Kstar nu, nu_nubar, nunu, and invisible B returned no matches in the required code directories.",
+      "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems.",
+      "quarkConstraints/deltaf2.py:209 defines the legacy Delta F = 2 input set.",
+      "quarkConstraints/deltaf2.py:903 and quarkConstraints/deltaf2.py:922 implement B_d and B_s mixing, not Delta B = 1 invisible decays.",
+      "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no b -> s nu nubar routine is present."
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|Kstar|K\\\\^\\\\*|nu.*nubar|nunu|invisible|B_s.*mu|pi.*nu|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"B\\\\s*(->|to).*K\\\\*.*nu|B0.*K\\\\*|B\\\\+.*K\\\\*|Kstar.*nu|K\\\\*.*nu|K\\\\^\\\\*.*nu|b\\\\s*(->|to)\\\\s*s\\\\s*nu|nubar|nu_nubar|nunu|invisible\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Belle2017:B023:combined_vector_limit",
+      "observable": "Combined BR(B -> K* nu nubar)",
+      "value": "<2.7e-5",
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2017,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1702.03224",
+      "snapshot_path": "flavor_catalog/references/B023/belle2017_arxiv1702_03224.txt",
+      "sha256": "sha256:2a51560a45705af5d66a698c04c839d95773d3f56596ecc3a3a67385019c6c0c",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Buras2015:B023:sm_b0_kstar0_nunu",
+      "observable": "SM BR(B0 -> K*(892)0 nu nubar)",
+      "value": "9.2e-6",
+      "uncertainty": "1.0e-6",
+      "units": "branching fraction",
+      "display": null,
+      "year": 2015,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1409.4557",
+      "snapshot_path": "flavor_catalog/references/B023/buras2015_arxiv1409_4557.txt",
+      "sha256": "sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": [
+    {
+      "key": "BurasGirrbachNoeNiehoffStraub2015:BKstarNunu",
+      "role": "post-2008 SM and EFT reference; not a PDG/equivalent measurement",
+      "value_summary": "SM prediction B(B0 -> K*(892)0 nu nubar) = (9.2 +/- 1.0)e-6",
+      "snapshot_path": "flavor_catalog/references/B023/buras2015_arxiv1409_4557.txt",
+      "sha256": "sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34"
+    }
+  ],
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "babar2013_arxiv1303_7465.txt": "sha256:ef2fed81d50b6278026ebbe1d663a3b022de6639801ad938e1399f0e5f5d043b",
+    "belle2013_arxiv1303_3719.txt": "sha256:a1177ae028b8856df736308effb4bab36ab6e025eb37a34de21de432d98afbda",
+    "belle2017_arxiv1702_03224.txt": "sha256:2a51560a45705af5d66a698c04c839d95773d3f56596ecc3a3a67385019c6c0c",
+    "buras2015_arxiv1409_4557.txt": "sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34",
+    "cfw2008_arxiv0804_1954.txt": "sha256:67dbd797dd149c1f39d2d172e303d6b69abc3a083069497b0d6c8749e6b9f136",
+    "hflav_dec2025_b0_kst0_nunu.txt": "sha256:58e5e6b1dac6c511d0ff051f976b6cebb485832a6ac8fb832204897a21c21b3b",
+    "hflav_dec2025_bp_kstp_nunu.txt": "sha256:f0fa6dd78534c4f40f3b97e837c12dd4bb8f535517af7d27aecbcf31f0300c5a",
+    "pdg2025_b0_kst0_nunu_api.txt": "sha256:f8d7014f1e7f2fbffd464f3d1c47d4fd36ff559b74f3a2301ec8b966b756dffe",
+    "pdg2025_bp_kstp_nunu_api.txt": "sha256:d9aa9db63226950572c8d450fd495b9b727f9ac270336e399d78686a1d41e07b"
+  },
+  "source_shas_count": 9,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T14:07:02-04:00",
+      "timestamp": "2026-05-16T14:07:02-04:00",
+      "agent_id": "PKA-B023",
+      "reason": "initial PKA draft deposit for assigned B023 B -> K* nu nubar process"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:24:00-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:24:00-04:00",
+      "agent_id": "WA",
+      "reason": "writer polish for batch wa_w5a_beauty"
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T14:45:00-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T14:45:00-04:00",
+      "agent_id": "CA",
+      "reason": "checker batch ca_w5a_beauty found traceability issue",
+      "issues": [
+        "CHK-1: TeX quotes Belle 2017 combined B -> K* nu nubar <2.7e-5 and Buras 2015 SM BR(B0 -> K*0 nu nubar) = (9.2 +/-1.0)e-6, but those values are outside pdg_or_equivalent."
+      ]
+    },
+    {
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T15:14:20-04:00",
+      "timestamp": "2026-05-16T15:14:20-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 writer rework: added the CA-flagged Belle 2017 combined limit and Buras 2015 SM prediction under pdg_or_equivalent.values."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T15:31:00-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T15:31:00-04:00",
+      "agent_id": "CA",
+      "reason": "checker batch ca_w5a_beauty_v2 found remaining source-manifest issue",
+      "issues": [
+        "CHK-2: TeX cites BaBar2013:BKstarNuNu, but source_manifest.yaml contains BaBar2013:BKstarNunu; the cited reference key does not resolve."
+      ]
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T16:05:00-04:00",
+      "agent": "Opus-arbitration",
+      "agent_id": "Opus-arbitration",
+      "from": "WRITER-REWORK",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T16:05:00-04:00",
+      "cycle": 3,
+      "reason": "Opus arbitration APPROVE-WITH-PATCH per plan v1 :620-622: WA/CA cycle-3 cap reached. CHK-2 is a real but trivial citation-key typo (TeX BaBar2013:BKstarNuNu vs. canonical BaBar2013:BKstarNunu used by B023.yaml experiment_inputs and references/B023/source_manifest.yaml; line 98 of the TeX key-references list already used the canonical lowercase form). Patch applied: B023.tex lines 36 and 55 changed from BaBar2013:BKstarNuNu to BaBar2013:BKstarNunu. All three occurrences now resolve to the manifest key. See flavor_catalog/signoff/by_process/B021_B023.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(B\\to K^*\\nu\\bar{\\nu})\\).\nThis beauty-sector entry covers the invisible vector-kaon modes\n\\(B^0\\to K^{*0}(892)\\nu\\bar{\\nu}\\) and\n\\(B^+\\to K^{*+}(892)\\nu\\bar{\\nu}\\).  The pseudoscalar companion\n\\(B\\to K\\nu\\bar{\\nu}\\) is B022.",
+    "pdg_prose": "The canonical current PDG/HFLAV values are upper limits.  HFLAV Dec. 2025,\ncross-linked to PDG Live 2025, lists\n\\[\n  \\mathcal{B}(B^0\\to K^{*0}(892)\\nu\\bar{\\nu}) < 1.8\\times 10^{-5},\n  \\qquad 90\\%~{\\rm CL},\n\\]\nand\n\\[\n  \\mathcal{B}(B^+\\to K^{*+}(892)\\nu\\bar{\\nu}) < 4.0\\times 10^{-5},\n  \\qquad 90\\%~{\\rm CL}.\n\\]\nThe neutral limit is from Belle's semileptonic-tag search\n(\\texttt{Belle2017:BHnunuSemileptonic}); the charged limit is from Belle's\nfull-sample hadronic-tag search (\\texttt{Belle2013:BHnunuHadronic}).  BaBar's\n2013 hadronic-tag result is superseded but remains part of the HFLAV input\nhistory (\\texttt{BaBar2013:BKstarNunu}).  Local snapshots are under\n\\texttt{references/B023/}, accessed 2026-05-16.",
+    "relevance": "These modes probe the \\(\\Delta B=1\\) FCNC transition \\(b\\to s\\nu\\bar{\\nu}\\).\nIn RS/anarchic-flavor models they are sensitive to flavor-changing \\(Z\\),\nheavy electroweak-gauge, or other neutral-current couplings generated after\nfermion localization and mass-basis rotation.  They are complementary to\n\\(B_s\\) mixing because the final state tests a semileptonic neutral current,\nnot a \\(\\Delta F=2\\) four-quark amplitude, and the \\(K^*\\) final state can also\nseparate left- and right-handed short-distance structures through polarization.",
+    "post_2008": "The CFW 2008 baseline predates all current \\(B\\to K^*\\nu\\bar{\\nu}\\) limits.\n(\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}).  Belle's 2013\nfull-\\(\\Upsilon(4S)\\) hadronic-tag analysis set the charged-mode limit\n\\(B^+\\to K^{*+}\\nu\\bar{\\nu} <4.0\\times10^{-5}\\)\n(\\texttt{Belle2013:BHnunuHadronic}).  BaBar's 2013 hadronic-tag result found\nno significant excess and remains useful as superseded input history\n(\\texttt{BaBar2013:BKstarNunu}).  Belle's 2017 semileptonic-tag search improved\nthe neutral mode to \\(<1.8\\times10^{-5}\\) and quoted a combined vector limit of\n\\(<2.7\\times10^{-5}\\) (\\texttt{Belle2017:BHnunuSemileptonic}).\nBuras--Girrbach-Noe--Niehoff--Straub 2015 updated the SM treatment using form\nfactors and electroweak corrections, quoting\n\\(\\mathcal{B}(B^0\\to K^{*0}\\nu\\bar{\\nu})=(9.2\\pm1.0)\\times10^{-6}\\), and framed\nthe right-handed-current observables used in later new-physics studies\n(\\texttt{BurasGirrbachNoeNiehoffStraub2015:BKstarNunu}).",
+    "validity": "Experimentally this is a clean missing-energy upper limit, but it is not a\ndrop-in bound for the present quark scan.  A production constraint needs the\n\\(b\\to s\\nu\\bar{\\nu}\\) weak Hamiltonian, \\(B\\to K^*\\) form factors, treatment of\nright-handed currents and polarization, and either an experimental likelihood\nor a conservative reinterpretation of the published upper limits.",
+    "code_coverage_prose": "\\textbf{NO.}  Targeted greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(B\\to K^*\\nu\\bar{\\nu}\\), \\(b\\to s\\nu\\bar{\\nu}\\), or\ninvisible-\\(B\\) implementation.  The modern phenomenology surface is limited\nto \\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\) at\n\\texttt{quarkConstraints/modern/phenomenology.py:23}.  The legacy default\ninputs are \\(\\Delta F=2\\) at \\texttt{quarkConstraints/deltaf2.py:209}, with\n\\(B_d\\) and \\(B_s\\) mixing evaluators at\n\\texttt{quarkConstraints/deltaf2.py:903} and\n\\texttt{quarkConstraints/deltaf2.py:922}.  The only live lepton-flavor routine\nfound is \\(\\mu\\to e\\gamma\\) at \\texttt{flavorConstraints/muToEGamma.py:75}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Implementing B023 requires a new \\(\\Delta B=1\\)\n\\(b\\to s\\nu\\bar{\\nu}\\) operator basis, RS matching for neutral-current\nleft- and right-handed coefficients, \\(B\\to K^*\\) form-factor and polarization\ntreatment, and an upper-limit likelihood or validated CL reinterpretation.",
+    "key_references": "\\texttt{PDG2025:B0KstarNunu},\n\\texttt{PDG2025:BpKstarNunu},\n\\texttt{HFLAV2025Dec:B0KstarNunu},\n\\texttt{HFLAV2025Dec:BpKstarNunu},\n\\texttt{Belle2017:BHnunuSemileptonic},\n\\texttt{Belle2013:BHnunuHadronic},\n\\texttt{BaBar2013:BKstarNunu},\n\\texttt{BurasGirrbachNoeNiehoffStraub2015:BKstarNunu}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B023.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B023.tex",
+  "worklog_path": "flavor_catalog/worklogs/B023/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 2,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "observables[0]",
+        "source_url": "https://pdgapi.lbl.gov/listings/S042.152",
+        "snapshot_path": "flavor_catalog/references/B023/pdg2025_b0_kst0_nunu_api.txt",
+        "sha256": "sha256:f8d7014f1e7f2fbffd464f3d1c47d4fd36ff559b74f3a2301ec8b966b756dffe",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "B0 -> K*(892)0 nu nubar = 1.8e-5 90%",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 145,
+                "context": "L142:  },\nL143:       {\nL144:  \"document_id\": \"CHEN 2007D\"\nL145: , \"publication_name\": \"PRL 99 221802\"\nL146: , \"publication_year\": 2007\nL147: , \"doi\": \"10.1103/PhysRevLett.99.221802\"\nL148: , \"inspire_id\": \"754596\"\n"
+              },
+              {
+                "line_number": 147,
+                "context": "L144:  \"document_id\": \"CHEN 2007D\"\nL145: , \"publication_name\": \"PRL 99 221802\"\nL146: , \"publication_year\": 2007\nL147: , \"doi\": \"10.1103/PhysRevLett.99.221802\"\nL148: , \"inspire_id\": \"754596\"\nL149: , \"title\": \"Search for B --> h^(*) nu nubar Decays at Belle\"\nL150: , \"confidence_level\": \"90.0\"\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[1]",
+        "source_url": "https://pdgapi.lbl.gov/listings/S041.490",
+        "snapshot_path": "flavor_catalog/references/B023/pdg2025_bp_kstp_nunu_api.txt",
+        "sha256": "sha256:d9aa9db63226950572c8d450fd495b9b727f9ac270336e399d78686a1d41e07b",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "B+ -> K*(892)+ nu nubar = 4e-5 90%",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 5,
+                "context": "L2:    \"status_code\":  200,\nL3:    \"status_message\": \"OK\",\nL4:    \"request_timestamp\":    \"2026-05-16 11:06:25 PST\",\nL5:    \"request_url\":    \"https://pdglive.lbl.gov//api/listings/S041.490\",\nL6:    \"edition\":     \"2025\",\nL7:    \"about\":    \"For further information see https://pdg.lbl.gov/api\",\nL8:    \"pdgid\":       \"S041.490\",\n"
+              },
+              {
+                "line_number": 8,
+                "context": "L5:    \"request_url\":    \"https://pdglive.lbl.gov//api/listings/S041.490\",\nL6:    \"edition\":     \"2025\",\nL7:    \"about\":    \"For further information see https://pdg.lbl.gov/api\",\nL8:    \"pdgid\":       \"S041.490\",\nL9:    \"description\":       \"B+ --> K^*(892)+ nu nubar\",\nL10:    \"parent_pdgid\": \"S041\",\nL11:    \"parent_description\": \"B+-\",\n"
+              },
+              {
+                "line_number": 10,
+                "context": "L7:    \"about\":    \"For further information see https://pdg.lbl.gov/api\",\nL8:    \"pdgid\":       \"S041.490\",\nL9:    \"description\":       \"B+ --> K^*(892)+ nu nubar\",\nL10:    \"parent_pdgid\": \"S041\",\nL11:    \"parent_description\": \"B+-\",\nL12: \"related_data\": [{\nL13:    \"pdgid\":       \"S041T29\",\n"
+              },
+              {
+                "line_number": 13,
+                "context": "L10:    \"parent_pdgid\": \"S041\",\nL11:    \"parent_description\": \"B+-\",\nL12: \"related_data\": [{\nL13:    \"pdgid\":       \"S041T29\",\nL14:    \"description\": \"G(B+ --> K*(892)+ nu nubar)/G(total)\",\nL15:    \"note\": \"Test for DeltaB = 1 weak neutral current. Allowed by higher-order electroweak interaction.\",\nL16:    \"measurements\":[\n"
+              },
+              {
+                "line_number": 23,
+                "context": "L20: , \"publication_year\": 2013\nL21: , \"doi\": \"10.1103/PhysRevD.87.111103\"\nL22: , \"inspire_id\": \"1223991\"\nL23: , \"title\": \"Search for B --> h^(*) nu nubar with the Full Belle Upsilon(4S) Data Sample\"\nL24: , \"confidence_level\": \"90.0\"\nL25: , \"technique\": \"BELL\"\nL26: , \"comment\": \"e+ e- --> Upsilon(4S)\"\n"
+              },
+              {
+                "line_number": 26,
+                "context": "L23: , \"title\": \"Search for B --> h^(*) nu nubar with the Full Belle Upsilon(4S) Data Sample\"\nL24: , \"confidence_level\": \"90.0\"\nL25: , \"technique\": \"BELL\"\nL26: , \"comment\": \"e+ e- --> Upsilon(4S)\"\nL27: , \"is_changed\": false\nL28: ,   \"measurement_values\":[\nL29:       {\n"
+              },
+              {
+                "line_number": 58,
+                "context": "L55: , \"title\": \"Search for B --> h nu nubar Decays with Semileptonic Tagging at Belle\"\nL56: , \"confidence_level\": \"90.0\"\nL57: , \"technique\": \"BELL\"\nL58: , \"comment\": \"e+ e- --> Upsilon(4S)\"\nL59: , \"is_changed\": false\nL60: ,   \"measurement_values\":[\nL61:       {\n"
+              },
+              {
+                "line_number": 86,
+                "context": "L83: , \"publication_name\": \"PR D87 112005\"\nL84: , \"publication_year\": 2013\nL85: , \"doi\": \"10.1103/PhysRevD.87.112005\"\nL86: , \"inspire_id\": \"1225884\"\nL87: , \"title\": \"Search for B --> K^(*) nu nubar and Invisible Quarkonium Decays\"\nL88: , \"confidence_level\": \"90.0\"\nL89: , \"technique\": \"BABR\"\n"
+              },
+              {
+                "line_number": 90,
+                "context": "L87: , \"title\": \"Search for B --> K^(*) nu nubar and Invisible Quarkonium Decays\"\nL88: , \"confidence_level\": \"90.0\"\nL89: , \"technique\": \"BABR\"\nL90: , \"comment\": \"e+ e- --> Upsilon(4S)\"\nL91: , \"is_changed\": false\nL92: ,   \"measurement_values\":[\nL93:       {\n"
+              },
+              {
+                "line_number": 148,
+                "context": "L145: , \"publication_name\": \"PRL 99 221802\"\nL146: , \"publication_year\": 2007\nL147: , \"doi\": \"10.1103/PhysRevLett.99.221802\"\nL148: , \"inspire_id\": \"754596\"\nL149: , \"title\": \"Search for B --> h^(*) nu nubar Decays at Belle\"\nL150: , \"confidence_level\": \"90.0\"\nL151: , \"technique\": \"BELL\"\n"
+              },
+              {
+                "line_number": 152,
+                "context": "L149: , \"title\": \"Search for B --> h^(*) nu nubar Decays at Belle\"\nL150: , \"confidence_level\": \"90.0\"\nL151: , \"technique\": \"BELL\"\nL152: , \"comment\": \"e+ e- --> Upsilon(4S)\"\nL153: , \"is_changed\": false\nL154: ,   \"measurement_values\":[\nL155:       {\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[0]:Belle2017:B023:combined_vector_limit",
+        "source_url": "https://arxiv.org/abs/1702.03224",
+        "snapshot_path": "flavor_catalog/references/B023/belle2017_arxiv1702_03224.txt",
+        "sha256": "sha256:2a51560a45705af5d66a698c04c839d95773d3f56596ecc3a3a67385019c6c0c",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "Combined BR(B -> K* nu nubar) = 2.7e-5 90% CL",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: Source-extracted combined-limit text from arXiv TeX source:\nL22: The analysis combines charged and neutral modes by adding negative log\nL23: likelihoods, scaling neutral modes by tau(B+)/tau(B0), and obtains\nL24: B(B -> K* nu nubar) < 2.7 x 10^{-5} at 90% C.L.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "values[1]:Buras2015:B023:sm_b0_kstar0_nunu",
+        "source_url": "https://arxiv.org/abs/1409.4557",
+        "snapshot_path": "flavor_catalog/references/B023/buras2015_arxiv1409_4557.txt",
+        "sha256": "sha256:20932455faf2fcc2dec1e574d082d25babba98bbbf0c7bed6bb50d88cd832c34",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "SM BR(B0 -> K*(892)0 nu nubar) = (9.2 +- 1)e-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: The paper combines lattice-QCD and light-cone-sum-rule form factors with\nL15: complete two-loop electroweak corrections to obtain\nL16: BR(B+ -> K+ nu nubar) = (4.0 +/- 0.5) x 10^{-6} and\nL17: BR(B0 -> K*0 nu nubar) = (9.2 +/- 1.0) x 10^{-6}.\nL18:\nL19: Source-extracted model-dependence note:\nL20: The analysis relates new-physics effects in b -> s nu nubar to b -> s l+l-\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "K* nu nu limits are useful but weaker and less direct",
+  "priority_rationale_full": "B -> K* nu nubar tests b-s neutral-current operators and can in principle separate left- and right-handed structures through polarization. The current inputs are upper limits rather than precision measurements, with additional form-factor and reinterpretation dependence. It is a useful companion to B022 but not a leading constraint on the anarchic RS scan."
+}

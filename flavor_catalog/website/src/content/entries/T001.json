@@ -1,0 +1,519 @@
+{
+  "process_id": "T001",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(t\\to cZ)",
+  "process_name": "Flavor-changing neutral-current top decay t -> c Z",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "MEDIUM to store the external upper limit, but HIGH for production-grade RS integration because the repo lacks electroweak top-FCNC matching, a tcZ decay-width/production interpretation, and top-sector flavor-rotation plumbing.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Required plan greps rerun on 2026-05-16; no source-code implementation of t -> c Z or tcZ found.",
+      "Targeted grep across quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, tests found only generic FCNC prose/comments, not an observable implementation."
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g \"!*.ipynb\"",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd scripts tests docs -g \"!*.ipynb\"",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs -g \"!*.ipynb\"",
+      "rg -n \"t.?->.?c.?Z|t.?->.?Z.?c|tcZ|tZc|FCNC|flavou?r-changing|flavor changing|Z.?c\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\""
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2025:T001:tZc_left",
+      "observable": "B(t -> Z c), left-handed t-c-Z benchmark",
+      "value": "< 1.3e-4",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf",
+      "snapshot_path": null,
+      "sha256": "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG2025:T001:tZc_right",
+      "observable": "B(t -> Z c), right-handed t-c-Z benchmark",
+      "value": "< 1.2e-4",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf",
+      "snapshot_path": null,
+      "sha256": "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2023:T001:dataset",
+      "observable": null,
+      "value": "139 fb^-1 at sqrt(s) = 13 TeV",
+      "uncertainty": null,
+      "units": "integrated luminosity and collision energy",
+      "display": null,
+      "year": 2023,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2301.11605",
+      "snapshot_path": null,
+      "sha256": "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2023:T001:tZc_left",
+      "observable": null,
+      "value": "< 13e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2023,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2301.11605",
+      "snapshot_path": null,
+      "sha256": "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2023:T001:tZc_right",
+      "observable": null,
+      "value": "< 12e-5",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2023,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2301.11605",
+      "snapshot_path": null,
+      "sha256": "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2017:T001:dataset",
+      "observable": null,
+      "value": "19.7 fb^-1 at sqrt(s) = 8 TeV",
+      "uncertainty": null,
+      "units": "integrated luminosity and collision energy",
+      "display": null,
+      "year": 2017,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1702.01404",
+      "snapshot_path": null,
+      "sha256": "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2017:T001:tZc",
+      "observable": null,
+      "value": "< 0.049%",
+      "uncertainty": null,
+      "units": "branching fraction, 95% CL upper limit",
+      "display": null,
+      "year": 2017,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1702.01404",
+      "snapshot_path": null,
+      "sha256": "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "AguilarSaavedra2004:T001:SM",
+      "observable": null,
+      "value": "1e-14",
+      "uncertainty": null,
+      "units": "Standard Model branching-fraction estimate",
+      "display": null,
+      "year": 2004,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/hep-ph/0409342",
+      "snapshot_path": null,
+      "sha256": "sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "PDG2025:T001:SM",
+      "observable": null,
+      "value": "order 1e-14",
+      "uncertainty": null,
+      "units": "Standard Model branching-fraction estimate",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf",
+      "snapshot_path": null,
+      "sha256": "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "AirenFranceschini2026:T001:HL_LHC_projection",
+      "observable": null,
+      "value": "approximately 1e-6",
+      "uncertainty": null,
+      "units": "projected equivalent BR(t -> c Z) reach",
+      "display": null,
+      "year": 2026,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2601.14966",
+      "snapshot_path": null,
+      "sha256": "sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg_2025_top_fcnc_tzq.txt": "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44",
+    "atlas_2301_11605_arxiv_abs.txt": "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2",
+    "cms_1702_01404_arxiv_abs.txt": "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2",
+    "aguilar_saavedra_hepph0409342.txt": "sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66",
+    "csaki_falkowski_weiler_0804_1954_arxiv_abs.txt": "sha256:574e67f28640855d367026f9741c74733b869b753b6ce5598ce7eb1f7d062706",
+    "airen_franceschini_2601_14966_arxiv_abs.txt": "sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "SUBTLETY-ADDED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T11:03:23-04:00",
+      "timestamp": "2026-05-16T11:03:23-04:00",
+      "agent_id": "PKA-T001",
+      "reason": "Initial PKA draft and source snapshot deposit."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T11:32:50-04:00",
+      "timestamp": "2026-05-16T11:32:50-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "Writer polish for wa_wave1_top_higgs_ew; numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "state": "WRITER-REWORK",
+      "at": "2026-05-16T11:47:15-04:00",
+      "timestamp": "2026-05-16T11:47:15-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_wave1_top_higgs_ew found CHK-1 numerical-metadata placement issues.",
+      "issues": [
+        "CHK-1: contextual numerical claims in the TeX are stored only in auxiliary_values, not pdg_or_equivalent, and the auxiliary_values entries lack explicit year fields."
+      ]
+    },
+    {
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T11:54:13-04:00",
+      "timestamp": "2026-05-16T11:54:13-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 writer rework: promoted CA-flagged numerical context into pdg_or_equivalent with complete metadata."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-16T12:05:00-04:00",
+      "timestamp": "2026-05-16T12:05:00-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_wave1_top_higgs_ew_v2 verified WA-v2 numerical metadata rework and all checklist items."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/arXiv/collaboration sources; measured value claims match."
+    },
+    {
+      "state": "SUBTLETY-ADDED",
+      "timestamp": "2026-05-16T18:26:12-04:00",
+      "agent": "subtlety-writer-wave7",
+      "note": "B: down-sector alignment promotes up-sector observables"
+    }
+  ],
+  "sections": {
+    "process": "The observable is the flavor-changing neutral-current branching fraction\n\\(\\mathcal{B}(t\\to cZ)\\), catalog id T001 in the top/Higgs/electroweak\nfamily.  It covers direct LHC searches for a top quark coupled to a charm\nquark and a \\(Z\\) boson, including analyses that combine \\(t\\bar t\\) events\nwith one FCNC top decay and single-top production in association with a\n\\(Z\\) boson.",
+    "pdg_prose": "The source-of-truth numerical entries are the \\texttt{pdg\\_or\\_equivalent}\nblock in \\texttt{T001.yaml}.  The PDG 2025 top-quark listing quotes the ATLAS\nRun-2 limits in units of \\(10^{-3}\\) (\\texttt{PDG2025TopFCNCTZQ}):\n\\[\n  \\mathcal{B}(t\\to Zc) < 1.3\\times 10^{-4}\n\\]\nfor the left-handed \\(tcZ\\) benchmark\n(\\texttt{PDG2025:T001:tZc\\_left}) and\n\\[\n  \\mathcal{B}(t\\to Zc) < 1.2\\times 10^{-4}\n\\]\nfor the right-handed benchmark (\\texttt{PDG2025:T001:tZc\\_right}), both at\n95\\% CL.  The same PDG table records the CMS comparison limit\n\\(\\mathcal{B}(t\\to Zc)<0.049\\%\\), also at 95\\% CL\n(\\texttt{CMS2017:T001:tZc}).  The local PDG snapshot is\n\\texttt{flavor\\_catalog/references/T001/pdg\\_2025\\_top\\_fcnc\\_tzq.txt}.",
+    "relevance": "In warped or partially composite flavor models, non-universal fermion profiles\nand mass-basis rotations can produce flavor off-diagonal neutral-current\ncouplings.  The \\(t\\to cZ\\) channel is especially diagnostic of the top sector:\nit probes the \\(t\\)-\\(c\\) rotation and the degree of right-handed top\ncompositeness more directly than light-meson \\(\\Delta F=2\\) observables.  A\ndirect top FCNC limit is therefore complementary to the existing kaon, \\(B\\),\nand \\(D\\)-mixing lane rather than a substitute for it.",
+    "post_2008": "The CFW-era reference point is arXiv:0804.1954, which framed warped flavor\nconstraints before the full LHC top-FCNC program.  Since then, the key\nexperimental change is the move from Tevatron and early-LHC inclusive \\(t\\to\nZq\\) limits to flavor-separated LHC constraints.  CMS used\n\\(19.7~\\mathrm{fb}^{-1}\\) at \\(\\sqrt{s}=8~\\mathrm{TeV}\\)\n(\\texttt{CMS2017:T001:dataset}) and found\n\\(\\mathcal{B}(t\\to Zc)<0.049\\%\\) (\\texttt{CMS2017:T001:tZc}).  ATLAS later used\n\\(139~\\mathrm{fb}^{-1}\\) at \\(\\sqrt{s}=13~\\mathrm{TeV}\\)\n(\\texttt{ATLAS2023:T001:dataset}), combining single-top \\(tZ\\) production and\n\\(t\\bar t\\) FCNC-decay topologies, and improved the \\(t\\to Zc\\) reach to the\n\\(10^{-4}\\) level (\\texttt{ATLAS2023:T001:tZc\\_left},\n\\texttt{ATLAS2023:T001:tZc\\_right}).  A 2026 RS-specific study,\narXiv:2601.14966, recasts post-LHC constraints on \\(Ztc\\) and notes that\nHL-LHC direct searches may reach an equivalent \\(\\mathcal{B}(t\\to cZ)\\) level\nof about \\(10^{-6}\\) (\\texttt{AirenFranceschini2026:T001:HL\\_LHC\\_projection}).",
+    "validity": "Experimentally this is a clean upper limit; there is no SM-sized background\nfrom true \\(t\\to cZ\\) decays.  The SM branching estimate is about \\(10^{-14}\\),\nso any observed signal would be unambiguous new physics\n(\\texttt{AguilarSaavedra2004:T001:SM}; \\texttt{PDG2025:T001:SM}).  The\ninterpretation is not fully model independent: ATLAS quotes separate left- and\nright-handed tensor-SMEFT benchmarks, while an RS model may generate vector-like\n\\(Ztc\\) couplings, heavy-vector exchange, or correlated contact interactions.\nA scan backend would need to map the RS parameters into a chosen operator\nconvention before applying the PDG-number as a hard cut.\n\nIn down-aligned or kaon-protected RS variants, top FCNCs become leading rather\nthan secondary diagnostics.",
+    "code_coverage_prose": "Coverage is \\textbf{NO}.  The PKA reran the required plan greps and a targeted\nsearch for \\(t\\to cZ\\), \\(tZc\\), \\(tcZ\\), and generic FCNC text across\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/}.  The only non-doc hits were generic\nFCNC prose/comments, not an observable, likelihood, or branching-ratio check.",
+    "implementation_difficulty_prose": "The cataloging difficulty is medium, but production integration is \\textbf{HIGH}.\nThe repo has no electroweak top-FCNC operator basis, no \\(tcZ\\) width or\nsingle-production reinterpretation, and no top-sector flavor-rotation interface.\nImplementing it honestly would require a new RS-to-SMEFT or direct \\(Ztc\\)\nmatching convention before this limit can be compared to scan points.",
+    "key_references": "\\texttt{PDG2025TopFCNCTZQ}; \\texttt{ATLAS2023TopFCNCTZQ};\n\\texttt{CMS2017TZQFCNC}; \\texttt{AguilarSaavedra2004TopFCNC};\n\\texttt{CsakiFalkowskiWeiler2008WarpedFlavor};\n\\texttt{AirenFranceschini2026RSTopFCNC}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/T001.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/T001.tex",
+  "worklog_path": "flavor_catalog/worklogs/T001/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 10,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:T001:tZc_left",
+        "source_url": "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/T001/pdg_2025_top_fcnc_tzq.txt",
+        "sha256": "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "pdg_units",
+            "anchor_string": "0.13",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: VALUE (units 10^-3), CL%, DOCUMENT ID, TECHNIQUE, COMMENT\nL14:\nL15: < 0.062, 95, AAD 23AS, ATLAS, B(t -> Z u), left-handed t u Z coupling\nL16: < 0.13, 95, AAD 23AS, ATLAS, B(t -> Z c), left-handed t c Z coupling\nL17: < 0.066, 95, AAD 23AS, ATLAS, B(t -> Z u), right-handed t u Z coupling\nL18: < 0.12, 95, AAD 23AS, ATLAS, B(t -> Z c), right-handed t c Z coupling\nL19: < 0.22, 95, SIRUNYAN 17E, CMS, t -> Z u\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:T001:tZc_right",
+        "source_url": "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/T001/pdg_2025_top_fcnc_tzq.txt",
+        "sha256": "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "pdg_units",
+            "anchor_string": "0.12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: < 0.062, 95, AAD 23AS, ATLAS, B(t -> Z u), left-handed t u Z coupling\nL16: < 0.13, 95, AAD 23AS, ATLAS, B(t -> Z c), left-handed t c Z coupling\nL17: < 0.066, 95, AAD 23AS, ATLAS, B(t -> Z u), right-handed t u Z coupling\nL18: < 0.12, 95, AAD 23AS, ATLAS, B(t -> Z c), right-handed t c Z coupling\nL19: < 0.22, 95, SIRUNYAN 17E, CMS, t -> Z u\nL20: < 0.49, 95, SIRUNYAN 17E, CMS, t -> Z c\nL21: < 0.7, 95, AAD 16D, ATLAS, t -> Z q (q = u,c)\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T001:dataset",
+        "source_url": "https://arxiv.org/abs/2301.11605",
+        "snapshot_path": "flavor_catalog/references/T001/atlas_2301_11605_arxiv_abs.txt",
+        "sha256": "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "139 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: an up or charm quark and a Z boson is presented, using proton-proton collision\nL22: data at sqrt(s) = 13 TeV collected by the ATLAS detector at the Large Hadron\nL23: Collider. The analyzed dataset corresponds to an integrated luminosity of\nL24: 139 fb^-1.\nL25:\nL26: The search targets both single-top-quark events produced as gq -> tZ\nL27: (q = u,c) and top-quark-pair events, with one top quark decaying through\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T001:tZc_left",
+        "source_url": "https://arxiv.org/abs/2301.11605",
+        "snapshot_path": "flavor_catalog/references/T001/atlas_2301_11605_arxiv_abs.txt",
+        "sha256": "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 13e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 34,
+                "context": "L31: The data are consistent with the background-only hypothesis. At 95% CL,\nL32: the t -> Zq branching-ratio upper limits, assuming only tensor SMEFT\nL33: operators contribute to the tZq vertices, are:\nL34:   B(t -> Zu) < 6.2 x 10^-5 and B(t -> Zc) < 13 x 10^-5\nL35:   for a left-handed tZq coupling;\nL36:   B(t -> Zu) < 6.6 x 10^-5 and B(t -> Zc) < 12 x 10^-5\nL37:   for a right-handed coupling.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2023:T001:tZc_right",
+        "source_url": "https://arxiv.org/abs/2301.11605",
+        "snapshot_path": "flavor_catalog/references/T001/atlas_2301_11605_arxiv_abs.txt",
+        "sha256": "sha256:f7c27db54a6e06053376d3c6990b37d8704b859e9930ab5df5eb009af3d084d2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 12e-5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 36,
+                "context": "L33: operators contribute to the tZq vertices, are:\nL34:   B(t -> Zu) < 6.2 x 10^-5 and B(t -> Zc) < 13 x 10^-5\nL35:   for a left-handed tZq coupling;\nL36:   B(t -> Zu) < 6.6 x 10^-5 and B(t -> Zc) < 12 x 10^-5\nL37:   for a right-handed coupling.\nL38:\nL39: The same abstract reports corresponding 95% CL Wilson-coefficient limits\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2017:T001:dataset",
+        "source_url": "https://arxiv.org/abs/1702.01404",
+        "snapshot_path": "flavor_catalog/references/T001/cms_1702_01404_arxiv_abs.txt",
+        "sha256": "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "19.7 fb^-1 at sqrt(s) = 8 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 22,
+                "context": "L19: A search for the production of a single top quark in association with a Z\nL20: boson is presented, both to identify the expected standard model process and\nL21: to search for flavour-changing neutral current interactions. The data sample\nL22: corresponds to an integrated luminosity of 19.7 inverse femtobarns recorded\nL23: by the CMS experiment at the LHC in proton-proton collisions at sqrt(s) =\nL24: 8 TeV. Final states with three leptons and at least one jet are investigated.\nL25:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2017:T001:tZc",
+        "source_url": "https://arxiv.org/abs/1702.01404",
+        "snapshot_path": "flavor_catalog/references/T001/cms_1702_01404_arxiv_abs.txt",
+        "sha256": "sha256:4457f9b0ce55df3d6120bdcbbb61debd03bb4a741f1bc1409c25fa6c94632ea2",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 0.049%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 34,
+                "context": "L31:\nL32: Exclusion limits at 95% confidence level on the branching fractions of a top\nL33: quark decaying to a Z boson and an up or a charm quark are found to be\nL34: B(t -> Z u) < 0.022% and B(t -> Z c) < 0.049%.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "AguilarSaavedra2004:T001:SM",
+        "source_url": "https://arxiv.org/abs/hep-ph/0409342",
+        "snapshot_path": "flavor_catalog/references/T001/aguilar_saavedra_hepph0409342.txt",
+        "sha256": "sha256:104a32f81cfd1d227402d3b88c1f3a7cd5216cdae9f4b806f98c7bc8e683cc66",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1e-14",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22: In the source file rev.tex, Table 1 gives branching ratios for top FCN decays\nL23: in the SM and in several SM extensions. The table entries include:\nL24:   t -> u Z: SM 8 x 10^-17\nL25:   t -> c Z: SM 1 x 10^-14\nL26:   t -> c Z: quark-singlet model 1.1 x 10^-4\nL27:   t -> c Z: 2HDM approximately 10^-7\nL28:   t -> c Z: FC 2HDM approximately 10^-10\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:T001:SM",
+        "source_url": "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-t-quark.pdf",
+        "snapshot_path": "flavor_catalog/references/T001/pdg_2025_top_fcnc_tzq.txt",
+        "sha256": "sha256:a9f404618edcbafdbf52301d929e5a9aca24481833e0cab46ca6c3c1a409cd44",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "order 1e-14",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26: production in association with a Z boson and in the decay of a top quark in\nL27: ttbar production. Events with three leptons plus at least one jet, one b-tag,\nL28: and missing transverse momentum are used. The SM predictions of the\nL29: corresponding branching ratios are of the order of 10^-14.\nL30:\nL31: PDG note 2:\nL32: SIRUNYAN 17E is based on 19.7 fb^-1 of pp data at sqrt(s) = 8 TeV. The final\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "AirenFranceschini2026:T001:HL_LHC_projection",
+        "source_url": "https://arxiv.org/abs/2601.14966",
+        "snapshot_path": "flavor_catalog/references/T001/airen_franceschini_2601_14966_arxiv_abs.txt",
+        "sha256": "sha256:e17cbee2269be8941c00e0a705a160d18038cc61f1295f99ac46cfb9dfaa1e45",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "approximately 1e-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: The abstract reports that LHC currently improves on the limit set by previous\nL25: machines, including LEP indirect sensitivity to heavy vectors. Future direct\nL26: searches at HL-LHC may reach a level equivalent to\nL27: BR(t -> c Z) approximately 10^-6. It also studies sensitivity at a Higgs\nL28: factory with E_cm in [200,240] GeV and at a high-energy muon collider with\nL29: E_cm = 10 TeV.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Clean tcZ limit, but LHC top-FCNC reach is subleading",
+  "priority_rationale_full": "The t -> c Z limit is experimentally clean and directly probes top-charm neutral-current flavor violation. Current limits are still at the 10^-4 branching-fraction level and require operator-convention choices to map RS parameters into the ATLAS/CMS benchmarks. For an anarchic-flavor RS scan this is complementary top-sector information, not a dominant bound."
+}

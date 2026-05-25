@@ -1,0 +1,181 @@
+{
+  "process_id": "K003",
+  "family": "kaon",
+  "family_original": "kaon",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathrm{Re}(\\varepsilon'/\\varepsilon)",
+  "process_name": "Direct CP violation in K -> pi pi",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires new Delta S = 1 WET/SMEFT matching, RG evolution, K -> pi pi matrix elements, and treatment of electroweak/QCD penguin plus chromomagnetic operators; the repo's Delta F = 2 machinery is not a direct evaluator.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_directories": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"epsilon_prime|eps_prime|epsilon.?/epsilon|varepsilon.?/varepsilon|K.?->.?pi.?pi|KtoPiPi|Delta S.?=.?1|DeltaS1|chromomagnetic|O_8g|Q_6|Q_8\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"epsilon.?prime|eps.?prime|epsilon'|varepsilon.?prime|epsilon\\s*/\\s*epsilon|eps\\s*/\\s*eps|K.*pi.*pi|pi.*pi.*K|chromomagnetic|penguin|Q_6|Q_8|Delta I|DeltaI|A0|A2|Re A0|Re A2\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "No direct K003 matches from the focused grep command; exit status 1.",
+      "quarkConstraints/deltaf2.py:1 implements a Delta F = 2 benchmark observable layer, not Delta S = 1 K -> pi pi amplitudes.",
+      "quarkConstraints/deltaf2.py:209 lists epsilon_K, B_d, B_s, and D mixing inputs.",
+      "quarkConstraints/deltaf2.py:729 defines evaluate_epsilon_k, not epsilon'/epsilon.",
+      "quarkConstraints/modern/phenomenology.py:23 enumerates only epsilon_K, K, B_d, B_s, and D0 policy systems."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Particle Data Group pdgLive K0 listing, row S013EPS",
+      "observable": "Re(epsilon'/epsilon)",
+      "value": 0.00166,
+      "uncertainty": 0.00023,
+      "units": "dimensionless",
+      "display": "Re(epsilon'/epsilon) = 0.00166 +/- 0.00023 = (16.6 +/- 2.3) x 10^-4",
+      "year": 2025,
+      "experiment": "Particle Data Group pdgLive K0 listing, row S013EPS",
+      "source_url": "https://pdglive.lbl.gov/Particle.action?home=MXXX020&init=0&node=S013",
+      "snapshot_path": "flavor_catalog/references/K003/pdg_live_S013_20260516.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg_live_S013_20260516.txt": "sha256:230285c9b8cbc43b2cf24f502a757d4962d6a6c069bee84ff1a3885214eef954",
+    "pdg_live_S013EPS_datablock_20260516.txt": "sha256:283335664646847da421f3a291c3ba0f872a876bb366e6d1443f2ad8853a0d2b",
+    "arxiv_1011.0127_ktev_2011.txt": "sha256:8257d37c79b0d6ad9aabec44bf349de4179b2963b0281ddc5668d4cb319cb67b",
+    "arxiv_hep-ex_0208009_na48_2002.txt": "sha256:72baed88144b5602618bcdbdf30be48da6485fbf9a4ecda1fc65e3549208fe67",
+    "arxiv_2004.09440_rbcukqcd_2020.txt": "sha256:ed6a62e309e14474e096d064f03080077c920674e772c4b1eede57530b5180d4",
+    "arxiv_2005.05978_aebischer_buras_2020.txt": "sha256:c133e14c8a137a53a819a925d64cb85821349fd2770963226233880117afebe4",
+    "arxiv_1807.02520_bsm_master_formula_2019.txt": "sha256:7b7d7a235bd1662a684fa8da2000035359fae194f347faebf68de100cbc96835",
+    "arxiv_1808.00466_bsm_anatomy_2019.txt": "sha256:9ae9683bb35a5d025f07b33d9d1993af425365ae505ea919734566a32bab9dae",
+    "arxiv_0804.1954_cfw_2008.txt": "sha256:e2e0ad246258366c6b5d232cc0b20f8d1d4fb9382b2d209862ec225351220c85"
+  },
+  "source_shas_count": 9,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T11:07:50-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T11:07:50-04:00",
+      "agent_id": "PKA-K003",
+      "reason": "Initial PKA draft and source deposit."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T11:34:00-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T11:34:00-04:00",
+      "agent_id": "WA",
+      "reason": "Polished PKA draft for WA batch wa_wave1_kaon."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T11:46:24-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T11:46:24-04:00",
+      "agent_id": "CA",
+      "reason": "CA batch ca_wave1_kaon passed CHK-1..CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-kaon",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent_id": "factcheck-codex-kaon",
+      "reason": "Independent live-source fact-check completed for kaon family.",
+      "notes": "Live source fetch and local snapshot checks verified all value claims for this process."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathrm{Re}(\\varepsilon'/\\varepsilon)\\).\nThis entry covers direct CP violation in the two-pion decay amplitudes of\nneutral kaons, commonly written through\n\\(\\mathrm{Re}(\\varepsilon'/\\varepsilon)=(1-|\\eta_{00}/\\eta_{+-}|)/3\\).\nThe process id is \\(K003\\).",
+    "pdg_prose": "The canonical PDG-sidecar value is\n\\[\n  \\mathrm{Re}(\\varepsilon'/\\varepsilon)=0.00166\\pm0.00023\n  = (16.6\\pm2.3)\\times 10^{-4}.\n\\]\nThis number is recorded in the YAML \\texttt{pdg\\_or\\_equivalent} block and\ntraces to\n\\texttt{flavor\\_catalog/references/K003/pdg\\_live\\_S013\\_20260516.txt}.\nThe companion PDG DataBlock snapshot records \\(\\texttt{OUR FIT}=1.67\\pm0.23\\)\nand \\(\\texttt{OUR AVERAGE}=1.68\\pm0.20\\), both in units of \\(10^{-3}\\).  The\nsame sidecar lists the two dominant experimental inputs: KTeV\n\\((19.2\\pm2.1)\\times10^{-4}\\) and NA48\n\\((14.7\\pm2.2)\\times10^{-4}\\).",
+    "relevance": "Unlike \\(\\varepsilon_K\\), this is a \\(\\Delta S=1\\) nonleptonic observable.\nIt tests CP-odd short-distance contributions to the \\(K\\to\\pi\\pi\\) amplitudes\nafter they are filtered through long-distance QCD.  In warped or composite\nflavor models with anarchic Yukawas, the dangerous effects are not the\nrepo's current neutral-meson-mixing operators but new penguin, scalar/tensor,\nand dipole structures.  BSM master-formula work identifies strong sensitivity\nto electroweak left-right penguin \\(Q_8\\), QCD penguin \\(Q_6\\), and\nchromo-magnetic \\(O_{8g}\\)-type operators, making the channel a natural\nstress test for UV completions with non-minimal chirality structure.",
+    "post_2008": "The experimental average has not been replaced by a newer kaon experiment, but\nKTeV's final \\(K\\to\\pi\\pi\\) result was published after the CFW-era baseline.\nThe main post-2008 changes are theoretical.  RBC/UKQCD produced a\nphysical-kinematics lattice calculation of \\(A_0\\) and \\(\\varepsilon'\\), with\n\\(\\mathrm{Re}(\\varepsilon'/\\varepsilon)=\n21.7(2.6)(6.2)(5.0)\\times10^{-4}\\).  Aebischer, Bobeth, and Buras then\nreanalysed the ratio with NNLO electroweak-penguin corrections and ChPT\nisospin-breaking inputs, obtaining\n\\((17.4\\pm6.1)\\times10^{-4}\\) in the octet treatment and\n\\((13.9\\pm5.2)\\times10^{-4}\\) in the nonet treatment.  In parallel, 2019\nBSM master-formula papers organized the \\(\\Delta S=1\\) operator dependence\nin WET/SMEFT language rather than treating \\(\\varepsilon'/\\varepsilon\\) as a\nsingle phenomenological number.",
+    "validity": "As a catalog constraint, \\(K003\\) is highly informative but not plug-and-play.\nThe experimental number is cleanly established, while the SM subtraction and\nBSM interpretation depend on hadronic matrix elements, isospin breaking,\noperator matching, and RG evolution.  It should be classified as a\ntheory-limited, model-dependent \\(\\Delta S=1\\) amplitude constraint rather\nthan a robust tree-level exclusion like the current \\(\\Delta F=2\\) kaon lane.",
+    "code_coverage_prose": "\\textbf{NO.}  Greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no direct implementation of\n\\(\\varepsilon'/\\varepsilon\\), \\(K\\to\\pi\\pi\\), \\(\\Delta S=1\\), \\(Q_6\\),\n\\(Q_8\\), or \\(O_{8g}\\).  The nearby kaon code is explicitly a\n\\(\\Delta F=2\\) benchmark slice in \\texttt{quarkConstraints/deltaf2.py:1},\nwith default inputs for \\(\\varepsilon_K\\) at\n\\texttt{quarkConstraints/deltaf2.py:209} and an\n\\(\\varepsilon_K\\) evaluator at \\texttt{quarkConstraints/deltaf2.py:729}.\nThe modern policy surface likewise enumerates only\n\\(\\varepsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\) systems at\n\\texttt{quarkConstraints/modern/phenomenology.py:23}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production constraint would require a new \\(\\Delta S=1\\)\noperator basis, matching from the warped/composite UV model to WET/SMEFT\ncoefficients, RG running to hadronic scales, and lattice/ChPT inputs for\n\\(K\\to\\pi\\pi\\) matrix elements.  The current \\(\\Delta F=2\\) VLL/VRR/LR\nmachinery cannot be reused as a direct evaluator.",
+    "key_references": "Local source keys: \\texttt{pdg\\_live\\_S013\\_20260516},\n\\texttt{pdg\\_live\\_S013EPS\\_datablock\\_20260516}, \\texttt{ktev\\_2011},\n\\texttt{na48\\_2002}, \\texttt{rbc\\_ukqcd\\_2020},\n\\texttt{aebischer\\_buras\\_2020}, \\texttt{bsm\\_master\\_2019},\n\\texttt{bsm\\_anatomy\\_2019}, and \\texttt{cfw\\_2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/kaon/K003.yaml",
+  "source_tex": "flavor_catalog/processes/kaon/K003.tex",
+  "worklog_path": "flavor_catalog/worklogs/K003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "pdg_or_equivalent",
+        "source_url": "https://pdglive.lbl.gov/Particle.action?home=MXXX020&init=0&node=S013",
+        "snapshot_path": "flavor_catalog/references/K003/pdg_live_S013_20260516.txt",
+        "sha256": "230285c9b8cbc43b2cf24f502a757d4962d6a6c069bee84ff1a3885214eef954",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "display_value",
+            "anchor_string": "Re(epsilon'/epsilon) = 0.00166 +/- 0.00023 = (16.6 +/- 2.3) x 10^-4",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Relevant excerpt, manually transcribed from row S013EPS:\nL7:\nL8:   Re(epsilon'/epsilon) = (1 - |eta_00/eta_+-|)/3\nL9:   Value: 0.00166 +/- 0.00023 (S = 1.6)\nL10:\nL11: PDG note on the same listing:\nL12:"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Important direct-CP kaon test with theory-limited extraction",
+  "priority_rationale_full": "Re(epsilon'/epsilon) is a sensitive direct-CP Delta S=1 test of nonstandard\npenguin, scalar, tensor, and chromomagnetic structures that can appear in\nwarped flavor completions. It is physics-important for RS variants with\nnonminimal chirality or electroweak-penguin effects. It is not ranked HIGH\nbecause the SM subtraction and BSM interpretation remain hadronic- and\noperator-basis dependent rather than a clean tree-level exclusion."
+}

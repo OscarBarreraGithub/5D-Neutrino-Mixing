@@ -1,0 +1,75 @@
+---
+// Tiny single-file collection of badge helpers used across the catalog UI.
+// All inputs are tolerated as nullable / unknown strings -- everything
+// degrades to a neutral "Unknown" badge if we don't recognize the value.
+
+interface Props {
+  kind: 'verdict' | 'difficulty' | 'tier' | 'coverage' | 'opus' | 'priority';
+  value?: string | null;
+  label?: string;
+  tooltip?: string | null;
+}
+
+const { kind, value, label, tooltip } = Astro.props as Props;
+const v = (value ?? '').toString().toUpperCase();
+
+let cls = 'badge-unknown';
+let text: string;
+
+switch (kind) {
+  case 'verdict': {
+    const map: Record<string, string> = {
+      VERIFIED: 'badge-verified',
+      PARTIAL: 'badge-partial',
+      MISMATCH: 'badge-mismatch',
+      FAILED: 'badge-failed',
+    };
+    cls = map[v] ?? 'badge-unknown';
+    text = label ?? (v || 'Unknown');
+    break;
+  }
+  case 'difficulty': {
+    const map: Record<string, string> = {
+      LOW: 'badge-low',
+      MEDIUM: 'badge-medium',
+      MED: 'badge-medium',
+      HIGH: 'badge-high',
+    };
+    cls = map[v] ?? 'badge-unknown';
+    text = label ?? (v ? `${v.charAt(0) + v.slice(1).toLowerCase()}` : '?');
+    break;
+  }
+  case 'tier': {
+    cls = v === 'SECONDARY' ? 'badge-tier-secondary' : 'badge-tier-primary';
+    text = label ?? (v || 'PRIMARY');
+    break;
+  }
+  case 'coverage': {
+    const map: Record<string, string> = {
+      YES: 'badge-cov-yes',
+      PARTIAL: 'badge-cov-partial',
+      NO: 'badge-cov-no',
+    };
+    cls = map[v] ?? 'badge-unknown';
+    text = label ?? `Code: ${v || '?'}`;
+    break;
+  }
+  case 'opus':
+    cls = 'badge-opus';
+    text = label ?? 'REVIEWED';
+    break;
+  case 'priority': {
+    const map: Record<string, string> = {
+      HIGH: 'badge-priority-high',
+      MEDIUM: 'badge-priority-medium',
+      LOW: 'badge-priority-low',
+    };
+    cls = map[v] ?? 'badge-priority-unranked';
+    text = label ?? (v ? `${v.charAt(0) + v.slice(1).toLowerCase()}` : 'Unranked');
+    break;
+  }
+  default:
+    text = label ?? (v || 'Unknown');
+}
+---
+<span class={`badge ${cls}`} title={tooltip ?? undefined}>{text}</span>

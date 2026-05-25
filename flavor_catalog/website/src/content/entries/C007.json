@@ -1,0 +1,362 @@
+{
+  "process_id": "C007",
+  "family": "charm",
+  "family_original": "charm",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(D^+\\to\\pi^+\\mu^+\\mu^-)",
+  "process_name": "Rare semileptonic decay D+ -> pi+ mu+ mu-",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Needs a new Delta C = 1 semileptonic operator/matching layer plus a D -> pi mu+ mu- branching-fraction calculation with form factors, phase-space/resonance treatment, and recast conventions.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests docs scripts -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests docs scripts -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests docs scripts -g '!*.ipynb'",
+      "rg -n \"D\\\\+.*pi\\\\+.*mu|D\\\\^\\\\+.*pi\\\\^\\\\+.*mu|D\\\\+.*pimumu|DTopimumu|pi\\\\+.*mu\\\\+.*mu|c.?->.?u|Delta.?C.?=.?1|rare.?charm|semileptonic.*charm|C_9|C9|C_10|C10|Wilson.*charm\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Focused implementation-dir searches found no D+ -> pi+ mu+ mu- or Delta C = 1 rare semileptonic charm observable implementation.",
+      "quarkConstraints/deltaf2.py:252 and quarkConstraints/deltaf2.py:941 are D0 mixing hits, not D+ -> pi+ mu+ mu-.",
+      "quarkConstraints/modern/phenomenology.py:23 and quarkConstraints/modern/phenomenology.py:668 are D0 mixing policy/evaluator hits, not rare semileptonic charm.",
+      "flavorConstraints/muToEGamma.py:75 is the separate mu -> e gamma LFV dipole check."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:DPlusPiMuMu",
+      "observable": "BR(D+ -> pi+ mu+ mu-)",
+      "value": 6.7e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2026,
+      "experiment": "PDG Live/API S031.42",
+      "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.42",
+      "snapshot_path": "flavor_catalog/references/C007/pdg2026_dplus_piplus_mumu_pdgLive.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "LHCb2021:DPlusPiMuMu",
+      "observable": "BR(D+ -> pi+ mu+ mu-)",
+      "value": 6.7e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2021,
+      "experiment": "LHCb JHEP 06 (2021) 044 / arXiv:2011.00217",
+      "source_url": "https://arxiv.org/abs/2011.00217",
+      "snapshot_path": "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "LHCb2021:DPlusPiMuMu",
+      "observable": "Number of rare or forbidden D+ and Ds+ decay modes investigated",
+      "value": 25,
+      "uncertainty": null,
+      "units": "decay modes",
+      "display": null,
+      "year": 2021,
+      "experiment": "LHCb JHEP 06 (2021) 044 / arXiv:2011.00217",
+      "source_url": "https://arxiv.org/abs/2011.00217",
+      "snapshot_path": "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt",
+      "sha256": "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb2021:DPlusPiMuMu",
+      "observable": "Short-distance Standard Model branching-fraction scale for FCNC D+ and Ds+ modes",
+      "value": 1e-12,
+      "uncertainty": null,
+      "units": "branching fraction, order of magnitude",
+      "display": null,
+      "year": 2021,
+      "experiment": "LHCb JHEP 06 (2021) 044 / arXiv:2011.00217",
+      "source_url": "https://arxiv.org/abs/2011.00217",
+      "snapshot_path": "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt",
+      "sha256": "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "LHCb2013:DPlusPiMuMu",
+      "observable": "BR(D+ -> pi+ mu+ mu-), nonresonant",
+      "value": 7.3e-08,
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2013,
+      "experiment": "LHCb Phys. Lett. B 724 (2013) 203 / arXiv:1304.6365",
+      "source_url": "https://arxiv.org/abs/1304.6365",
+      "snapshot_path": "flavor_catalog/references/C007/lhcb2013_arxiv1304_6365.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": "upper"
+    },
+    {
+      "label": "DeBoerHiller2015:RareCharmLeptons",
+      "observable": "D_(s) -> P l+ l- rare-charm EFT context",
+      "value": null,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2015,
+      "experiment": "de Boer and Hiller 2015",
+      "source_url": "https://arxiv.org/abs/1510.00311",
+      "snapshot_path": "flavor_catalog/references/C007/deboer_hiller2015_arxiv1510_00311.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "cfw2008_arxiv0804_1954.txt": "sha256:4703263c1d560f5af74636df56cd97f76edc56b1d0fb7f65443b2a07eaea6885",
+    "deboer_hiller2015_arxiv1510_00311.txt": "sha256:52cda0c2388f717bd54329d6c7dc2251b637ac56ae115712b0a8f1764a457792",
+    "lhcb2013_arxiv1304_6365.txt": "sha256:64daf4ae376043bdac07a5dd86a090c00f9d74464c1e209569075b90c581deee",
+    "lhcb2021_arxiv2011_00217.txt": "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac",
+    "pdg2026_dplus_piplus_mumu_pdgLive.txt": "sha256:1bfa609f88a7b60809d98a416abd581d00872547ea851e6eabb4f61c51d94adc",
+    "sha256sums.txt": "sha256:9e541dc9d7bdfc6bd4d6b84ac28c5d4cfa2d15632dac9ef01b62b7b9270ebc4a",
+    "source_manifest.yaml": "sha256:ffd18526848d65276620ab63706549207d82fec8c97a3659280c3a8e4824a817"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T13:13:46-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T13:13:46-04:00",
+      "agent_id": "PKA-C007",
+      "reason": "Initial PKA source extraction and C007 draft deposit."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T13:48:14-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T13:48:14-04:00",
+      "agent": "CA",
+      "agent_id": "CA-ca_w4_charm",
+      "issues": [
+        "CHK-1: TeX claims the 2021 LHCb search covered 25 rare/forbidden modes, but no pdg_or_equivalent entry records that numerical claim.",
+        "CHK-1: TeX quotes short-distance SM branching fractions of order 10^-12, but no pdg_or_equivalent entry records that numerical claim.",
+        "CHK-4: Missing WRITER-DONE status from a WA; latest pre-checker status was WRITER-INITIATED, and no WA batch worklog for C007 was found."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:58:00-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:58:00-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 WA rework addressed CA CHK-1 and CHK-4."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:16:41-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:16:41-04:00",
+      "agent": "CA",
+      "agent_id": "CA-ca_w4_charm_v2",
+      "cycle": 2,
+      "reason": "Cycle-2 checker re-check passed CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charm",
+      "agent_id": "factcheck-codex-charm",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "PDG, LHCb 2021/2013 limits, search scope, and quoted SM scale verified."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:}\n\\(\\mathcal{B}(D^+\\to\\pi^+\\mu^+\\mu^-)\\).\nThis entry covers the rare charged-charm semileptonic decay\n\\(D^+\\to\\pi^+\\mu^+\\mu^-\\), a \\(\\Delta C=1\\), \\(c\\to u\\mu^+\\mu^-\\)\nflavor-changing neutral-current probe.  Charge-conjugate modes are implied by\nthe experimental sources.",
+    "pdg_prose": "The current PDG Live/API entry S031.42, accessed on 2026-05-16, lists\n\\[\n  \\mathcal{B}(D^+\\to\\pi^+\\mu^+\\mu^-) < 6.7\\times 10^{-8}\n  \\qquad (90\\%~{\\rm C.L.})\n\\]\nfrom the LHCb 2021 search in \\(1.6\\,{\\rm fb}^{-1}\\) of 2016 \\(pp\\) data.\nThe LHCb source table gives the companion 95\\% C.L. limit\n\\(7.4\\times10^{-8}\\).  The predecessor LHCb 2013 nonresonant search, using\n\\(1.0\\,{\\rm fb}^{-1}\\) at \\(\\sqrt{s}=7\\,{\\rm TeV}\\), reported\n\\(7.3(8.3)\\times10^{-8}\\) at 90\\% (95\\%) C.L.  These numbers are traced to\n\\texttt{flavor\\_catalog/references/C007/pdg2026\\_dplus\\_piplus\\_mumu\\_pdgLive.txt},\n\\texttt{lhcb2021\\_arxiv2011\\_00217.txt}, and\n\\texttt{lhcb2013\\_arxiv1304\\_6365.txt}.",
+    "relevance": "Anarchic warped models can induce up-sector flavor-changing neutral currents\nthrough nonuniversal KK gauge couplings, \\(Z\\)-like flavor violation, Higgs or\nradion scalar effects, and lepton-current extensions.  This process is the\ncharged semileptonic \\(\\Delta C=1\\) analogue of the implemented neutral\n\\(D^0\\)-mixing lane: it probes \\(c\\to u\\) vector, axial-vector, and possible\nscalar semileptonic operators rather than four-quark \\(\\Delta F=2\\) operators.\nIt is therefore a roadmap constraint for a broader flavor backend, not a\nconstraint currently applied by the quark scan.",
+    "post_2008": "The arXiv:0804.1954 RS-flavor baseline predates the modern LHCb rare-charm\nprogram.  Since then, LHCb first set nonresonant \\(D^+\\to\\pi^+\\mu^+\\mu^-\\)\nlimits at the \\(10^{-8}\\) level in 2013 and then folded the channel into a\n2021 search for 25 rare or forbidden \\(D^+\\) and \\(D_s^+\\) decays.  The 2021\nanalysis found no evidence in any of the investigated modes and tightened the\nPDG-listed C007 limit to \\(6.7\\times10^{-8}\\) at 90\\% C.L.  On the theory side,\npost-2008 rare-charm EFT work, especially de Boer and Hiller 2015, clarified\nthat \\(D_{(s)}\\to P\\ell^+\\ell^-\\) branching-ratio recasts must separate\nshort-distance Wilson coefficients from resonance-dominated long-distance\nphysics; the LHCb 2021 introduction quotes short-distance SM branching\nfractions of order \\(10^{-12}\\), with dilepton resonances dominating the\nphysical spectrum.",
+    "validity": "The experimental upper limit is robust as a counting result, but its use as an\nRS short-distance bound is model dependent.  Long-distance hadronic resonances,\nweak-annihilation effects, and the exact phase-space definition of the\n``nonresonant'' signal matter.  A conservative catalog use is an upper bound on\nadditional short-distance \\(c\\to u\\mu^+\\mu^-\\) contributions in the same\nexperimental region, with an explicit recast needed before treating it as a\nhard scan veto.",
+    "code_coverage_prose": "\\textbf{NO.}  The required catalog greps and a focused search for\n\\texttt{D+.*pi+.*mu}, \\texttt{c.?->.?u}, \\texttt{rare.?charm},\n\\texttt{semileptonic.*charm}, \\texttt{C9}, and \\texttt{C10} found no\n\\(D^+\\to\\pi^+\\mu^+\\mu^-\\) implementation in \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, or \\texttt{tests/}.  Nearby hits are unrelated:\n\\(D^0\\) mixing appears at \\texttt{quarkConstraints/deltaf2.py:252} and\n\\texttt{quarkConstraints/deltaf2.py:941}, the modern policy lists only\n\\(D^0\\) mixing at \\texttt{quarkConstraints/modern/phenomenology.py:23} and\n\\texttt{quarkConstraints/modern/phenomenology.py:668}, and\n\\(\\mu\\to e\\gamma\\) is separate at\n\\texttt{flavorConstraints/muToEGamma.py:75}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production implementation needs a new \\(\\Delta C=1\\)\nsemileptonic operator basis and matching for \\(C_{9,10}^{(\\prime)}\\) and\npossible scalar/tensor terms, plus a \\(D\\to\\pi\\mu^+\\mu^-\\) mode calculation\nwith form factors, phase-space cuts, and a documented treatment of resonant\nlong-distance contributions.",
+    "key_references": "Process-local keys before bibliography consolidation:\n\\texttt{PDG2026:DPlusPiMuMu}, \\texttt{LHCb2021:DPlusPiMuMu},\n\\texttt{LHCb2013:DPlusPiMuMu},\n\\texttt{DeBoerHiller2015:RareCharmLeptons}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/charm/C007.yaml",
+  "source_tex": "flavor_catalog/processes/charm/C007.tex",
+  "worklog_path": "flavor_catalog/worklogs/C007/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:05Z",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 2
+    },
+    "sources": [
+      {
+        "block_key": "PDG2026:DPlusPiMuMu",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.42",
+        "snapshot_path": "flavor_catalog/references/C007/pdg2026_dplus_piplus_mumu_pdgLive.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "6.7e-08",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 28,
+                "context": "L25:   confidence_level: 90.0\nL26:   measurement:\nL27:     column_name: VALUE\nL28:     value: 6.7E-8\nL29:     value_text: <6.7 E-8\nL30:     limit_type: U\nL31:     used_in_average: true\n"
+              },
+              {
+                "line_number": 29,
+                "context": "L26:   measurement:\nL27:     column_name: VALUE\nL28:     value: 6.7E-8\nL29:     value_text: <6.7 E-8\nL30:     limit_type: U\nL31:     used_in_average: true\nL32:     used_in_fit: true\n"
+              },
+              {
+                "line_number": 33,
+                "context": "L30:     limit_type: U\nL31:     used_in_average: true\nL32:     used_in_fit: true\nL33:     display_value_text: <6.7 E-8\nL34: \nL35: AAIJ 2013AF\nL36:   publication: PL B724 203\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2021:DPlusPiMuMu",
+        "source_url": "https://arxiv.org/abs/2011.00217",
+        "snapshot_path": "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "6.7e-08",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 44,
+                "context": "L41: D+ -> pi+ mu+ mu-    0.6        67          74          2.4        180          210\nL42: \nL43: Interpretation for C007:\nL44:   B(D+ -> pi+ mu+ mu-) < 67 x 10^-9 = 6.7 x 10^-8 at 90% CL.\nL45:   Companion 95% CL limit: <74 x 10^-9 = 7.4 x 10^-8.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2021:DPlusPiMuMu",
+        "source_url": "https://arxiv.org/abs/2011.00217",
+        "snapshot_path": "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt",
+        "sha256": "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "25",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: DOI: 10.1007/JHEP06(2021)044\nL7: Journal: JHEP 06 (2021) 044\nL8: Report number: LHCb-PAPER-2020-007; CERN-EP-2020-140\nL9: Title: Searches for 25 rare and forbidden decays of D+ and Ds+ mesons\nL10: Authors: LHCb Collaboration\nL11: \nL12: Abstract-page metadata extract:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2021:DPlusPiMuMu",
+        "source_url": "https://arxiv.org/abs/2011.00217",
+        "snapshot_path": "flavor_catalog/references/C007/lhcb2021_arxiv2011_00217.txt",
+        "sha256": "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "1e-12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26: transitions. These processes are rare in the Standard Model because only\nL27: weak-annihilation processes can occur at tree level. At the loop level,\nL28: FCNC transitions are GIM suppressed. The source states that short-distance\nL29: SM branching fractions are of order 10^-12, while significant long-distance\nL30: contributions from dilepton resonances are expected to dominate across the\nL31: dilepton invariant-mass-squared distribution. The analysis uses 1.6 fb^-1\nL32: of 2016 LHCb data. Four resonant D_(s)+ -> pi+ phi(->ll) decays are used\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2013:DPlusPiMuMu",
+        "source_url": "https://arxiv.org/abs/1304.6365",
+        "snapshot_path": "flavor_catalog/references/C007/lhcb2013_arxiv1304_6365.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7.3e-08",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "DeBoerHiller2015:RareCharmLeptons",
+        "source_url": "https://arxiv.org/abs/1510.00311",
+        "snapshot_path": "flavor_catalog/references/C007/deboer_hiller2015_arxiv1510_00311.txt",
+        "sha256": "",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Best charm semileptonic FCNC probe, but recast is model-dependent.",
+  "priority_rationale_full": "D+->pi+mu+mu- probes c->u semileptonic FCNC operators that are complementary\nto Delta C=2 D mixing. The LHCb/PDG bound is useful, but long-distance\nresonances and the nonresonant phase-space definition prevent a clean\nuniversal veto. It is a MEDIUM roadmap constraint for broader RS flavor fits."
+}

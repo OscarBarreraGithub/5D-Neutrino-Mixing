@@ -1,0 +1,405 @@
+{
+  "process_id": "EW003",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "|V_cb|_inclusive vs |V_cb|_exclusive; |V_ub|_inclusive vs |V_ub|_exclusive",
+  "process_name": "|V_cb| and |V_ub| inclusive-exclusive semileptonic tensions",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live EW003 constraint needs a new charged-current semileptonic likelihood, inclusive-scheme handling, exclusive lattice form-factor inputs, and optional b->c/u tau nu WET operator matching. This is not covered by the existing Delta F = 2 SLL/SLR/VLL/VRR/LR1/LR2 machinery.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "PARTIAL",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"Vcb|V_cb|v_cb|Vub|V_ub|v_ub|CKM|semileptonic|B.?->.?D|B.?->.?pi|B.?to.?D|B.?to.?pi|b.?->.?c|b.?->.?u|R\\\\(D|R_D|tau.?nu|taunu|charged.?current\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints flavorConstraints scanParams neutrinos yukawa qcd warpConfig solvers tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests warpConfig solvers -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "quarkConstraints/scan.py:42",
+      "quarkConstraints/scan.py:46",
+      "quarkConstraints/scan.py:47",
+      "quarkConstraints/scan.py:52",
+      "quarkConstraints/scan.py:247",
+      "tests/test_quark_fit.py:575",
+      "tests/test_quark_fit.py:587"
+    ],
+    "findings": [
+      "The repo partially covers EW003 through CKM target/tolerance metadata for |V_cb| and |V_ub|.",
+      "No implementation was found for inclusive or exclusive semileptonic B decay rates, HFLAV/FLAG split likelihoods, B->D(*)l nu, B->pi l nu, or b->c/u tau nu charged-current WET operators."
+    ]
+  },
+  "code_coverage_status": "PARTIAL",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "bhatta_2021_bu_tau_np.txt": "sha256:9953db6ff1d8f0293b21f2223d5d5e0e3a52710f4b1dad373a82c3b28eb46655",
+    "cfw_2008_rs_flavor_baseline.txt": "sha256:ab2b7d9d8a9b6a2d4614e5e7985671c80af7d034940e88de3251637012c76073",
+    "flag_2024_b_semileptonic_lattice.txt": "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528",
+    "hflav_2023_semileptonic_report.txt": "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229",
+    "iguro_2024_bc_tau_global_fit.txt": "sha256:7f194a3e3e6b700210338d28eacfb6c9cf65ef1e921cc7599785fdec4981bcd9",
+    "pdg_2024_vcb_vub.txt": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T13:16:19-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T13:16:19-04:00",
+      "agent_id": "PKA-EW003",
+      "reason": "Initial PKA draft for NIT-1 pre-approved EW003 CKM semileptonic-tension catalog addition."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T13:46:24-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T13:46:24-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w4_ew",
+      "issues": [
+        "CHK-1: EW003 pdg_or_equivalent value blocks do not carry a year field, and the 3.0 sigma marginal-consistency claim is recorded only under additional_numerical_context rather than as a pdg_or_equivalent entry with full metadata.",
+        "CHK-4: status_history contains WRITER-INITIATED but no WRITER-DONE transition; the most recent pre-CA entry was WRITER-INITIATED, and no EW001/EW002/EW003 WA batch worklog was found."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:56:45-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:56:45-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "batch_id": "wa_w4_ew_v2",
+      "reason": "Addressed CA CHK-1 and CHK-4 findings for EW003 metadata and WA-v2 completion."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T14:16:36-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T14:16:36-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "cycle": 2,
+      "batch_id": "ca_w4_ew_v2",
+      "reason": "Cycle 2 checker re-check passed CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/arXiv/collaboration sources; measured value claims match."
+    }
+  ],
+  "sections": {
+    "process": "This entry covers the inclusive versus exclusive determinations of\n\\(|V_{cb}|\\) and \\(|V_{ub}|\\) from semileptonic \\(b\\)-hadron decays.\nAlthough the underlying modes are beauty charged currents, the NIT-1 process\nid places the entry in \\texttt{top\\_higgs\\_ew}; it is an electroweak CKM-input\ndiagnostic with direct ties to \\(b\\to c\\tau\\nu\\) and \\(b\\to u\\tau\\nu\\) BSM\nfits.",
+    "pdg_prose": "The canonical PDG 2024 snapshot is\n\\texttt{flavor\\_catalog/references/EW003/pdg\\_2024\\_vcb\\_vub.txt}.  PDG quotes\n\\(|V_{cb}|_{\\rm incl}=(42.2\\pm0.5)\\times10^{-3}\\) and\n\\(|V_{cb}|_{\\rm excl}=(39.8\\pm0.6)\\times10^{-3}\\), with the scaled average\n\\((41.1\\pm1.2)\\times10^{-3}\\) to be treated with caution because the two inputs\nare only marginally consistent, about \\(3.0\\sigma\\).  For \\(|V_{ub}|\\), PDG\nquotes \\((4.13\\pm0.12_{\\rm exp}{}^{+0.13}_{-0.14}{}_{\\rm theo}\n\\pm0.18_{\\Delta{\\rm model}})\\times10^{-3}\\) inclusive and\n\\((3.70\\pm0.10\\pm0.12)\\times10^{-3}\\) exclusive, giving\n\\((3.82\\pm0.20)\\times10^{-3}\\) after error scaling.  HFLAV's 2023\nsemileptonic report refines the split: the preferred inclusive\n\\(|V_{cb}|\\) input is \\((41.97\\pm0.48)\\times10^{-3}\\), while the combined\nexclusive fit gives \\((|V_{ub}|,|V_{cb}|)=\n(3.43\\pm0.12,39.77\\pm0.46)\\times10^{-3}\\).  FLAG 2024 gives lattice-anchored\nexclusive values \\(|V_{cb}|=39.23(65)\\times10^{-3}\\) for\n\\(B\\to D^*\\ell\\nu\\) with \\(N_f=2+1\\), and\n\\(|V_{ub}|=(3.61\\pm0.16)\\times10^{-3}\\) for \\(B\\to\\pi\\ell\\nu\\).",
+    "relevance": "The present scan fits CKM observables as output of anarchic quark masses, so\nthe inclusive--exclusive split is a diagnostic for how much CKM target choice\ncan move flavor predictions.  In an RS extension with non-SM charged-current\noperators, the same observables also set the normalization for \\(b\\to c\\) and\n\\(b\\to u\\) semitauonic Wilson-coefficient fits.",
+    "post_2008": "Relative to arXiv:0804.1954, the main change is not a new RS formula but a\nnew input ecosystem.  Belle, Belle II, BaBar, and LHCb now feed HFLAV averages;\ninclusive \\(|V_{cb}|\\) uses mature kinetic and \\(q^2\\)-moment heavy-quark\nexpansion fits; and FLAG 2024 provides full-recoil lattice-plus-experiment\nfits for \\(B\\to D^{(*)}\\ell\\nu\\) and \\(B\\to\\pi\\ell\\nu\\).  The same period also\nturned \\(R(D^{(*)})\\), \\(B_c\\to\\tau\\nu\\), and \\(B\\to(\\pi,\\rho,\\omega)\\tau\\nu\\)\ninto standard charged-current EFT interpretation channels.",
+    "validity": "For \\(e,\\mu\\) final states these are CKM extraction inputs, not clean\nstandalone BSM exclusions.  Inclusive values depend on heavy-quark expansion\nschemes and shape-function/model choices, while exclusive values depend on\nlattice form factors, parameterization choices, and experimental correlations.\nTau-mode translations are more model dependent because vector, scalar, and\ntensor operators can change both rates and templates.",
+    "code_coverage_prose": "\\textbf{PARTIAL}.  CKM target handling exists, including \\(|V_{cb}|\\) and\n\\(|V_{ub}|\\) tolerances at \\texttt{quarkConstraints/scan.py:42},\n\\texttt{quarkConstraints/scan.py:46}, \\texttt{quarkConstraints/scan.py:47},\n\\texttt{quarkConstraints/scan.py:52}, and the regression check at\n\\texttt{tests/test\\_quark\\_fit.py:575}.  No grep hit implements inclusive or\nexclusive semileptonic \\(B\\) rates, \\(B\\to D^{(*)}\\ell\\nu\\),\n\\(B\\to\\pi\\ell\\nu\\), or \\(b\\to c/u\\,\\tau\\nu\\) WET operators in\n\\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, or \\texttt{tests/}.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A production constraint would need a new charged-current\nsemileptonic likelihood, scheme handling for inclusive extractions, lattice\nform-factor inputs for exclusive modes, and optional \\(b\\to c/u\\,\\tau\\nu\\)\nWilson operators.  This is outside the existing \\(\\Delta F=2\\) basis.",
+    "key_references": "\\texttt{pdg\\_2024\\_vcb\\_vub};\n\\texttt{hflav\\_2023\\_semileptonic\\_report};\n\\texttt{flag\\_2024\\_b\\_semileptonic\\_lattice};\n\\texttt{iguro\\_2024\\_bc\\_tau\\_global\\_fit};\n\\texttt{bhatta\\_2021\\_bu\\_tau\\_np};\n\\texttt{cfw\\_2008\\_rs\\_flavor\\_baseline}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/EW003.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/EW003.tex",
+  "worklog_path": "flavor_catalog/worklogs/EW003/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 12,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG 2024 |V_cb| inclusive",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "42.2 +/- 0.5",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Local snapshot policy: minimal text extract only; no publisher PDF tracked.\nL7:\nL8: Extracted numerical values:\nL9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_cb| exclusive",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "39.8 +/- 0.6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: Extracted numerical values:\nL9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_cb| scaled average",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "41.1 +/- 1.2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8: Extracted numerical values:\nL9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_ub| inclusive",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "4.13",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\nL15: - PDG also quotes |Vub|/|Vcb| = 0.098 +/- 0.006 inclusive and 0.093 +/- 0.004 exclusive.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_ub| exclusive",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.7",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 13,
+                "context": "L10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\nL15: - PDG also quotes |Vub|/|Vcb| = 0.098 +/- 0.006 inclusive and 0.093 +/- 0.004 exclusive.\nL16:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_ub| scaled average",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "3.82 +/- 0.2",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\nL15: - PDG also quotes |Vub|/|Vcb| = 0.098 +/- 0.006 inclusive and 0.093 +/- 0.004 exclusive.\nL16:\nL17: Relevance note:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HFLAV 2023 preferred inclusive |V_cb|",
+        "source_url": "https://arxiv.org/abs/2411.18639",
+        "snapshot_path": "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt",
+        "sha256": "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "41.97 +/- 0.48",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 10,
+                "context": "L7:\nL8: Extracted numerical values for semileptonic |Vxb|:\nL9: - HFLAV semileptonic chapter uses experimental results generally available through autumn 2023.\nL10: - Inclusive |Vcb| central value chosen by HFLAV from Finauri-Gambino q2-moment analysis: |Vcb| = (41.97 +/- 0.48) x 10^-3.\nL11: - Alternative inclusive |Vcb| q2 analysis: |Vcb| = (41.69 +/- 0.63) x 10^-3.\nL12: - Exclusive combined fit using Vub/Vcb constraints, B->pi l nu, B->D l nu, B->D* l nu, and Bs->Ds(*) mu nu: |Vub| = (3.43 +/- 0.12) x 10^-3 and |Vcb| = (39.77 +/- 0.46) x 10^-3, with rho(Vub,Vcb)=0.239.\nL13: - The combined exclusive fit has chi2=3.9 for 1 degree of freedom, p(chi2)=4.8%.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HFLAV 2023 combined exclusive |V_cb|",
+        "source_url": "https://arxiv.org/abs/2411.18639",
+        "snapshot_path": "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt",
+        "sha256": "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "39.77 +/- 0.46",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - HFLAV semileptonic chapter uses experimental results generally available through autumn 2023.\nL10: - Inclusive |Vcb| central value chosen by HFLAV from Finauri-Gambino q2-moment analysis: |Vcb| = (41.97 +/- 0.48) x 10^-3.\nL11: - Alternative inclusive |Vcb| q2 analysis: |Vcb| = (41.69 +/- 0.63) x 10^-3.\nL12: - Exclusive combined fit using Vub/Vcb constraints, B->pi l nu, B->D l nu, B->D* l nu, and Bs->Ds(*) mu nu: |Vub| = (3.43 +/- 0.12) x 10^-3 and |Vcb| = (39.77 +/- 0.46) x 10^-3, with rho(Vub,Vcb)=0.239.\nL13: - The combined exclusive fit has chi2=3.9 for 1 degree of freedom, p(chi2)=4.8%.\nL14: - HFLAV states that the exclusive combined |Vub| differs from inclusive GGOU |Vub| = (4.06 +/- 0.12 +/- 0.11) x 10^-3 by about 3 sigma, and exclusive combined |Vcb| differs from inclusive |Vcb| = (41.97 +/- 0.48) x 10^-3 by more than 3 sigma.\nL15: - Inclusive |Vub| framework comparison: BLNP = 4.25 +/- 0.13 +0.19/-0.19, DGE = 3.87 +/- 0.10 +0.09/-0.10, GGOU = 4.06 +/- 0.12 +0.11/-0.11, all in units of 10^-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "HFLAV 2023 combined exclusive |V_ub|",
+        "source_url": "https://arxiv.org/abs/2411.18639",
+        "snapshot_path": "flavor_catalog/references/EW003/hflav_2023_semileptonic_report.txt",
+        "sha256": "sha256:e063d36ade2f5ca99200d203d1601540ad6bc2200863f343f9ce092cbd7d8229",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "3.43 +/- 0.12",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - HFLAV semileptonic chapter uses experimental results generally available through autumn 2023.\nL10: - Inclusive |Vcb| central value chosen by HFLAV from Finauri-Gambino q2-moment analysis: |Vcb| = (41.97 +/- 0.48) x 10^-3.\nL11: - Alternative inclusive |Vcb| q2 analysis: |Vcb| = (41.69 +/- 0.63) x 10^-3.\nL12: - Exclusive combined fit using Vub/Vcb constraints, B->pi l nu, B->D l nu, B->D* l nu, and Bs->Ds(*) mu nu: |Vub| = (3.43 +/- 0.12) x 10^-3 and |Vcb| = (39.77 +/- 0.46) x 10^-3, with rho(Vub,Vcb)=0.239.\nL13: - The combined exclusive fit has chi2=3.9 for 1 degree of freedom, p(chi2)=4.8%.\nL14: - HFLAV states that the exclusive combined |Vub| differs from inclusive GGOU |Vub| = (4.06 +/- 0.12 +/- 0.11) x 10^-3 by about 3 sigma, and exclusive combined |Vcb| differs from inclusive |Vcb| = (41.97 +/- 0.48) x 10^-3 by more than 3 sigma.\nL15: - Inclusive |Vub| framework comparison: BLNP = 4.25 +/- 0.13 +0.19/-0.19, DGE = 3.87 +/- 0.10 +0.09/-0.10, GGOU = 4.06 +/- 0.12 +0.11/-0.11, all in units of 10^-3.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "FLAG 2024 B -> D* l nu |V_cb|, Nf=2+1",
+        "source_url": "https://arxiv.org/abs/2411.04268",
+        "snapshot_path": "flavor_catalog/references/EW003/flag_2024_b_semileptonic_lattice.txt",
+        "sha256": "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "39.23(65)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: - FLAG 2024 B->pi l nu exclusive average: |Vub| = (3.61 +/- 0.16) x 10^-3 for Nf=2+1.\nL10: - FLAG 2024 B->(pi l nu, tau nu) exclusive average: |Vub| = (3.63 +/- 0.16) x 10^-3 for Nf=2+1.\nL11: - FLAG 2024 B->D l nu exclusive average: |Vcb| = 40.0(1.0) x 10^-3 for Nf=2+1.\nL12: - FLAG 2024 B->D* l nu exclusive averages: |Vcb| = 39.23(65) x 10^-3 for Nf=2+1 and |Vcb| = 39.44(89) x 10^-3 for Nf=2+1+1.\nL13: - FLAG 2024 exclusive global fit shown in the |Vub|-|Vcb| plane: (|Vcb|, |Vub|) = (39.46 +/- 0.53, 3.60 +/- 0.14) x 10^-3 with p-value 0.66.\nL14: - FLAG 2024 comparison inclusive point: (|Vcb|, |Vub|)_incl = (42.16 +/- 0.51, 4.13 +/- 0.26) x 10^-3.\nL15:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "FLAG 2024 B -> pi l nu |V_ub|, Nf=2+1",
+        "source_url": "https://arxiv.org/abs/2411.04268",
+        "snapshot_path": "flavor_catalog/references/EW003/flag_2024_b_semileptonic_lattice.txt",
+        "sha256": "sha256:6f400dee4a10a9065004a6b3e04c3818ab2a3d1d7d78bf52713fa16e1d01e528",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_uncertainty",
+            "anchor_string": "3.61 +/- 0.16",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 9,
+                "context": "L6: Local snapshot policy: minimal text extract from arXiv source; no publisher PDF tracked.\nL7:\nL8: Extracted numerical values:\nL9: - FLAG 2024 B->pi l nu exclusive average: |Vub| = (3.61 +/- 0.16) x 10^-3 for Nf=2+1.\nL10: - FLAG 2024 B->(pi l nu, tau nu) exclusive average: |Vub| = (3.63 +/- 0.16) x 10^-3 for Nf=2+1.\nL11: - FLAG 2024 B->D l nu exclusive average: |Vcb| = 40.0(1.0) x 10^-3 for Nf=2+1.\nL12: - FLAG 2024 B->D* l nu exclusive averages: |Vcb| = 39.23(65) x 10^-3 for Nf=2+1 and |Vcb| = 39.44(89) x 10^-3 for Nf=2+1+1.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG 2024 |V_cb| inclusive-exclusive marginal consistency",
+        "source_url": "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf",
+        "snapshot_path": "flavor_catalog/references/EW003/pdg_2024_vcb_vub.txt",
+        "sha256": "sha256:095c00ac371159828f3d491a441f54ceb55fec9e410d44f21ec36076e7dab67d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.0",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8: Extracted numerical values:\nL9: - |Vcb| inclusive = (42.2 +/- 0.5) x 10^-3.\nL10: - |Vcb| exclusive = (39.8 +/- 0.6) x 10^-3.\nL11: - PDG average |Vcb| = (41.1 +/- 1.2) x 10^-3 after scale factor sqrt(chi2/1)=3.0; PDG cautions that the inclusive and exclusive determinations are marginally consistent, about 3.0 sigma.\nL12: - |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo +/- 0.18_model) x 10^-3.\nL13: - |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.\nL14: - PDG average |Vub| = (3.82 +/- 0.20) x 10^-3 after scale factor sqrt(chi2/1)=1.4; p(chi2)=15%.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "CKM input diagnostic, not a standalone RS exclusion",
+  "priority_rationale_full": "The inclusive-exclusive V_cb and V_ub tensions are important inputs for choosing CKM targets and normalizations in flavor fits. They are not clean standalone BSM exclusions for anarchic RS, since they depend on heavy-quark expansion schemes, lattice form factors, parameterization choices, and experimental correlations. They should influence fit bookkeeping more than drive a scan cut."
+}

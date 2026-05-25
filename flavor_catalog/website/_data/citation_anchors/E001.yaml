@@ -1,0 +1,59 @@
+---
+process_id: E001
+generated_at: '2026-05-17T21:55:00-04:00'
+sources:
+- block_key: canonical_limit
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLive/DataBlock.action?node=S003EDM
+  snapshot_path: flavor_catalog/references/E001/pdg2026_electron_edm_datablock.txt
+  sha256: aab24570becf217c873d10cafdc991e53ddd704a287563db2dd52fbb46367d20
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: '|d_e| < 4.1 x 10^-30 e cm at 90% CL'
+    status: RESOLVED
+    matches:
+    - line_number: 20
+      context: |-
+        L17: Current PDG-used limit:
+        L18: ROUSSY 2023, technique ESR, electrons in intramolecular electric field:
+        L19: VALUE <0.041, CL 90%.
+        L20: Equivalent value: |d_e| < 4.1e-30 e cm at 90% CL.
+        L21: PDG footnote: ROUSSY 2023 gives the measurement
+        L22: (-1.3 +/- 2.0 +/- 0.6) x 10^-30 e cm corresponding to this limit.
+        L23:
+- block_key: primary_measurement
+  source_url: https://arxiv.org/abs/2212.11841
+  snapshot_path: flavor_catalog/references/E001/roussy2023_arxiv2212_11841.txt
+  sha256: 85dfc60b010ccba486ecccfcfacc5a1e89652239d5554e2c97111dcca5d2c0f7
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: measurement_summary
+    anchor_string: d_e = (-1.3 +/- 2.0_stat +/- 0.6_syst) x 10^-30 e cm; |d_e| < 4.1 x 10^-30 e cm at 90% confidence
+    status: RESOLVED
+    matches:
+    - line_number: 23
+      context: |-
+        L20: constraints on broad classes of new physics above 10^13 eV.
+        L21:
+        L22: Extract from pdftotext of arXiv PDF:
+        L23: de = (-1.3 +/- 2.0_stat +/- 0.6_syst) x 10^-30 e cm.
+        L24: The corresponding upper bound is |de| < 4.1 x 10^-30 e cm at 90% confidence.
+        L25:
+        L26: Notes:
+- block_key: superseded_acme_2018
+  source_url: https://authors.library.caltech.edu/records/6swh6-6ya42
+  snapshot_path: flavor_catalog/references/E001/andreev2018_caltechauthors.txt
+  sha256: c81e0a1936ec81eeb04a4064f09f3e5554037aa456436c972118ab3deda1d19a
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value_summary
+    anchor_string: '|d_e| < 1.1 x 10^-29 e cm at 90% CL'
+    status: RESOLVED
+    matches:
+    - line_number: 24
+      context: |-
+        L21: measurements.
+        L22:
+        L23: Numerical value as recorded by the PDG S003EDM datablock:
+        L24: ACME/Andreev 2018 gives |d_e| < 1.1e-29 e cm at 90% CL, corresponding to
+        L25: (4.3 +/- 3.1 +/- 2.6) x 10^-30 e cm.

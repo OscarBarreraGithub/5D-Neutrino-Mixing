@@ -1,0 +1,364 @@
+{
+  "process_id": "B005",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)",
+  "process_name": "Rare leptonic decay B_s0 -> mu+ mu-",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "MEDIUM",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Focused grep for B_s.*mu, Bs.*mu, B0_s.*mu, mu+mu, mumu, C10, scalar/pseudoscalar, rare decay, and rare_decay in required implementation/test directories found no B_s0 -> mu+ mu- observable implementation.",
+      "quarkConstraints/deltaf2.py:239 defines the existing b_s input as B_s mixing, not B_s -> mu+ mu-.",
+      "quarkConstraints/deltaf2.py:922 defines evaluate_bs_mixing for Delta F = 2 B_s mixing.",
+      "quarkConstraints/modern/phenomenology.py:657 evaluates B_s mixing from the bridge match; no Delta B = 1 rare leptonic branch is present."
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"B_s.*mu|Bs.*mu|B0_s.*mu|mu\\\\+.*mu|mumu|muon.*muon|C_10|C10|scalar.*operator|pseudoscalar|rare decay|rare_decay\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2026:BsMuMu",
+      "observable": "BR(B_s0 -> mu+ mu-)",
+      "value": 3.34e-09,
+      "uncertainty": 2.7e-10,
+      "units": "branching fraction",
+      "display": null,
+      "year": null,
+      "experiment": null,
+      "source_url": null,
+      "snapshot_path": "flavor_catalog/references/B005/pdg_2026_bsmumu.txt",
+      "sha256": null,
+      "access_date": null,
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "HFLAV2023:BsMuMu",
+      "observable": "BR(B_s0 -> mu+ mu-)",
+      "value": 3.45e-09,
+      "uncertainty": 2.9e-10,
+      "units": "branching fraction",
+      "display": null,
+      "year": null,
+      "experiment": null,
+      "source_url": null,
+      "snapshot_path": "flavor_catalog/references/B005/hflav_2023_bsmumu.txt",
+      "sha256": null,
+      "access_date": null,
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CzajaMisiak2024:BsMuMuSM",
+      "observable": "SM BR(B_s -> mu+ mu-)",
+      "value": 3.64e-09,
+      "uncertainty": 1.2e-10,
+      "units": "branching fraction",
+      "display": null,
+      "year": null,
+      "experiment": "Czaja and Misiak 2024",
+      "source_url": "https://arxiv.org/abs/2407.03810",
+      "snapshot_path": "flavor_catalog/references/B005/czaja_misiak_2407_03810_bsmumu_sm.txt",
+      "sha256": null,
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "atlas_1812_03017_bsmumu.txt": "sha256:9724967bfdd6abd69f3f7be384911b5288fdf372735c159c9dae402dbccbca2e",
+    "cfw_0804_1954_rs_flavor.txt": "sha256:c77d1c4b7347579c78d7f196bca9e2c09d6b70a9a88b1721c5a63db3ee176008",
+    "cms_2212_10311_bsmumu.txt": "sha256:b821377272dc3d3dd8f6d129de050940ba9f4cce40271c905bdaa90c22dc6095",
+    "czaja_misiak_2407_03810_bsmumu_sm.txt": "sha256:ab871a13e9b00043a36f8876b094588c03ab84673f26445c62a637f22349fdd6",
+    "hflav_2023_bsmumu.txt": "sha256:cb9109a94b5b51fda6057ec5250b4b2bede182e09c2d70418e6edc953178dafe",
+    "lhcb_2108_09283_bsmumu.txt": "sha256:fc1427e831e02c11fe09c6fcdd6c1c26893f0b54024f69bc0a1f2bb04afbc5fe",
+    "pdg_2026_bsmumu.txt": "sha256:c42edfb94b6a989935deb4f9a6c69762a49c063ce46d2e34466c3fbbbead8016"
+  },
+  "source_shas_count": 7,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T11:37:28-04:00",
+      "timestamp": "2026-05-16T11:37:28-04:00",
+      "agent_id": "PKA-B005",
+      "reason": "Initial PKA draft deposit for B_s0 -> mu+ mu-."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T12:15:35-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T12:15:35-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "WA polish for batch wa_w23_beauty completed."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T12:34:18-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T12:34:18-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "CA batch ca_w23_beauty verified CHK-1 through CHK-8."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)\\).\nThis entry covers the time-integrated rare leptonic decay \\(B_s^0\\to\\mu^+\\mu^-\\),\na helicity-suppressed \\(b\\to s\\ell^+\\ell^-\\) flavor-changing neutral-current\nchannel.  It is distinct from the inclusive and exclusive semileptonic\n\\(b\\to s\\ell^+\\ell^-\\) entries because the final state is purely leptonic and\nthe leading hadronic input is the \\(B_s\\) decay constant.",
+    "pdg_prose": "The current PDG live/API value, accessed on 2026-05-16, is\n\\[\n  \\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)_{\\rm exp}\n  = (3.34\\pm0.27)\\times10^{-9}.\n\\]\nThe source key is \\texttt{PDG2026:BsMuMu}, with local snapshot\n\\texttt{flavor\\_catalog/references/B005/pdg\\_2026\\_bsmumu.txt}.  The 2024\nCzaja--Misiak SM-status review quotes the same weighted experimental average\nand gives the Standard Model prediction\n\\[\n  \\mathcal{B}(B_s^0\\to\\mu^+\\mu^-)_{\\rm SM}\n  = (3.64\\pm0.12)\\times10^{-9}.\n\\]\nIts source key is \\texttt{CzajaMisiak2024:BsMuMuSM}.  The sidecar retains the\nolder HFLAV rare-decay average \\((3.45\\pm0.29)\\times10^{-9}\\) as auxiliary\nprovenance, together with CMS\n\\((3.83^{+0.38}_{-0.36}\\,{}^{+0.19}_{-0.16}\\,{}^{+0.14}_{-0.13})\\times10^{-9}\\),\nLHCb \\((3.09^{+0.46+0.15}_{-0.43-0.11})\\times10^{-9}\\), and ATLAS\n\\((2.8^{+0.8}_{-0.7})\\times10^{-9}\\) inputs under the\n\\texttt{HFLAV2023:BsMuMu}, \\texttt{CMS2023:BsMuMu},\n\\texttt{LHCb2022:BsMuMu}, and \\texttt{ATLAS2019:BsMuMu} source keys.",
+    "relevance": "This mode probes the short-distance \\(b\\to s\\mu^+\\mu^-\\) Hamiltonian in a clean\nsingle-number observable.  In anarchic RS scenarios, flavor-changing neutral\ngauge couplings, KK electroweak exchange, Higgs/radion scalar exchange, or\nleptoquark-like completions can shift axial-vector, scalar, and pseudoscalar\nWilson coefficients.  The scalar and pseudoscalar terms are especially\nimportant because they can remove the Standard Model helicity suppression and\nare prominent in large-\\(\\tan\\beta\\) supersymmetric or extended-Higgs\ninterpretations.",
+    "post_2008": "Since the arXiv:0804.1954 RS-flavor baseline, this channel changed from an\nupper-limit target into a precision observable.  LHCb and CMS first established\nthe decay, and the present average combines modern LHCb, CMS, and ATLAS inputs.\nCMS now reports the most precise single-experiment branching-fraction\nmeasurement, while LHCb provides a simultaneous branching-fraction and\neffective-lifetime analysis.  Theory has also improved: modern SM predictions\ninclude precise lattice \\(f_{B_s}\\), CKM inputs, electroweak and QCD\ncorrections, and the time-integration correction associated with the\n\\(B_s\\) width difference.",
+    "validity": "This is a robust short-distance rare-decay constraint, but it is not covered by\nthe repo's neutral-meson-mixing machinery.  The SM comparison is clean relative\nto angular \\(b\\to s\\ell\\ell\\) observables, yet it still depends on the\ndefinition of the time-integrated branching fraction, \\(f_{B_s}\\), CKM inputs,\nand the treatment of scalar and pseudoscalar operators.  It is directly useful\nfor models that predict \\(C_{10}^{(\\prime)}\\), \\(C_S^{(\\prime)}\\), or\n\\(C_P^{(\\prime)}\\), including scalar leptoquarks, \\(Z'\\) models, and\ntan-beta-enhanced Higgs sectors.",
+    "code_coverage_prose": "\\textbf{NO.}  The required catalog greps and a focused search for\n\\texttt{B\\_s.*mu}, \\texttt{mumu}, \\texttt{C10}, scalar/pseudoscalar rare-decay\nterms, and \\(b\\to s\\mu\\mu\\) found no live \\(B_s^0\\to\\mu^+\\mu^-\\) implementation\nin \\texttt{quarkConstraints/}, \\texttt{qcd/}, \\texttt{flavorConstraints/},\n\\texttt{neutrinos/}, \\texttt{yukawa/}, \\texttt{warpConfig/},\n\\texttt{solvers/}, \\texttt{scanParams/}, or \\texttt{tests/}.  The nearest\nrelated code is \\(B_s\\) mixing, e.g. \\texttt{quarkConstraints/deltaf2.py:239}\nand \\texttt{quarkConstraints/deltaf2.py:922}, which is a \\(\\Delta F=2\\)\nobservable rather than this \\(\\Delta B=1\\) decay.",
+    "implementation_difficulty_prose": "\\textbf{MEDIUM.}  A catalog-to-code implementation needs a new \\(\\Delta B=1\\)\nleptonic rare-decay observable, Wilson conventions for\n\\(C_{10}^{(\\prime)}, C_S^{(\\prime)}, C_P^{(\\prime)}\\), and a branching-ratio\nformula with the \\(B_s\\) lifetime and width-difference convention.  It does not\nneed an angular likelihood or exclusive form factors, but a production-grade\nRS matching path would need carefully documented scalar and electroweak\noperator normalization.",
+    "key_references": "Process-local raw reference keys before bibliography consolidation:\n\\texttt{PDG2026:BsMuMu}, \\texttt{HFLAV2023:BsMuMu},\n\\texttt{CMS2023:BsMuMu}, \\texttt{LHCb2022:BsMuMu},\n\\texttt{ATLAS2019:BsMuMu}, \\texttt{CzajaMisiak2024:BsMuMuSM}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B005.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B005.tex",
+  "worklog_path": "flavor_catalog/worklogs/B005/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 5,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "canonical_experimental_average",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086",
+        "snapshot_path": "flavor_catalog/references/B005/pdg_2026_bsmumu.txt",
+        "sha256": "sha256:c42edfb94b6a989935deb4f9a6c69762a49c063ce46d2e34466c3fbbbead8016",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-) = (3.34 +- 0.27)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 2,
+                "context": "L1: Source key: PDG2026:BsMuMu\nL2: URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086\nL3: API URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.15\nL4: Access date: 2026-05-16\nL5: Local snapshot purpose: current canonical PDG value and input trace for B_s0 -> mu+ mu-.\n"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086\nL3: API URL: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S086.15\nL4: Access date: 2026-05-16\nL5: Local snapshot purpose: current canonical PDG value and input trace for B_s0 -> mu+ mu-.\nL6:\nL7: PDG citation shown on page:\nL8: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001 (2024) and 2025 update.\n"
+              },
+              {
+                "line_number": 12,
+                "context": "L9:\nL10: PDG live page extract:\nL11: PDGID: S086.15\nL12: Mode: B_s0 -> mu+ mu-\nL13: Fraction (Gamma_i / Gamma): (3.34 +/- 0.27) x 10^-9\nL14:\nL15: PDG API extract:\n"
+              },
+              {
+                "line_number": 13,
+                "context": "L10: PDG live page extract:\nL11: PDGID: S086.15\nL12: Mode: B_s0 -> mu+ mu-\nL13: Fraction (Gamma_i / Gamma): (3.34 +/- 0.27) x 10^-9\nL14:\nL15: PDG API extract:\nL16: request_timestamp: 2026-05-16 08:33:24 PST\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16: request_timestamp: 2026-05-16 08:33:24 PST\nL17: edition: 2026\nL18: pdgid: S086.15\nL19: description: B_s()0 --> mu+ mu-\nL20: related_data pdgid: S086R14\nL21: related_data description: G(B_s0 --> mu+ mu-)/G(total)\nL22: note: Test for DeltaB = 1 weak neutral current.\n"
+              },
+              {
+                "line_number": 21,
+                "context": "L18: pdgid: S086.15\nL19: description: B_s()0 --> mu+ mu-\nL20: related_data pdgid: S086R14\nL21: related_data description: G(B_s0 --> mu+ mu-)/G(total)\nL22: note: Test for DeltaB = 1 weak neutral current.\nL23:\nL24: Selected API measurement inputs used in average:\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "hflav_historical_average",
+        "source_url": "https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/BranchingRatio.action?cl=B1&desig=15&init=0&node=S086&parCode=S086",
+        "snapshot_path": "flavor_catalog/references/B005/hflav_2023_bsmumu.txt",
+        "sha256": "sha256:cb9109a94b5b51fda6057ec5250b4b2bede182e09c2d70418e6edc953178dafe",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-) = (3.45 +- 0.29)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 2,
+                "context": "L1: Source key: HFLAV2023:BsMuMu\nL2: URL: https://hflav-eos.web.cern.ch/hflav-eos/rare/Apr2023/html/Bs/BR_Bs0_mu%2B_mu-.html\nL3: Access date: 2026-05-16\nL4: Local snapshot purpose: HFLAV rare-decay average and experiment input table.\nL5:\n"
+              },
+              {
+                "line_number": 7,
+                "context": "L4: Local snapshot purpose: HFLAV rare-decay average and experiment input table.\nL5:\nL6: Page title:\nL7: cal B(B_s^0 -> mu+ mu-)\nL8:\nL9: Relevant table extract, units 10^-9:\nL10: Average: 3.45 +/- 0.29, Delta chi^2 = 3.94, p = 0.27 (ndf=3).\n"
+              },
+              {
+                "line_number": 10,
+                "context": "L7: cal B(B_s^0 -> mu+ mu-)\nL8:\nL9: Relevant table extract, units 10^-9:\nL10: Average: 3.45 +/- 0.29, Delta chi^2 = 3.94, p = 0.27 (ndf=3).\nL11: Comment: The ATLAS measurement is correlated with B(B^0 -> mu+ mu-). This correlation is not taken into account in the HFLAV average.\nL12: PDG: 3.01 +0.36 -0.33, with link to pdgLive.\nL13: CMS: 3.83 +0.38 -0.36 +0.24 -0.21, reference arXiv:2212.10311.\n"
+              },
+              {
+                "line_number": 11,
+                "context": "L8:\nL9: Relevant table extract, units 10^-9:\nL10: Average: 3.45 +/- 0.29, Delta chi^2 = 3.94, p = 0.27 (ndf=3).\nL11: Comment: The ATLAS measurement is correlated with B(B^0 -> mu+ mu-). This correlation is not taken into account in the HFLAV average.\nL12: PDG: 3.01 +0.36 -0.33, with link to pdgLive.\nL13: CMS: 3.83 +0.38 -0.36 +0.24 -0.21, reference arXiv:2212.10311.\nL14: LHCb: 3.09 +0.46 -0.43 +0.15 -0.11, reference Phys. Rev. D 105, 012010 (2022).\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "standard_model_prediction",
+        "source_url": "https://arxiv.org/abs/2407.03810",
+        "snapshot_path": "flavor_catalog/references/B005/czaja_misiak_2407_03810_bsmumu_sm.txt",
+        "sha256": "sha256:ab871a13e9b00043a36f8876b094588c03ab84673f26445c62a637f22349fdd6",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "SM BR(B_s -> mu+ mu-) = (3.64 +- 0.12)e-9",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: Abstract excerpt:\nL14: The rare decay B_s -> mu+ mu- provides an important constraint on possible deviations from the Standard Model in b-s-l-l interactions.\nL15: The present weighted average of its branching ratio measurements amounts to (3.34 +/- 0.27) x 10^-9.\nL16: The theoretical prediction is (3.64 +/- 0.12) x 10^-9 within the Standard Model.\nL17: The paper reviews calculations that have contributed to this prediction and discusses the associated uncertainties.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "input_measurements[0]",
+        "source_url": "https://arxiv.org/abs/2212.10311",
+        "snapshot_path": "flavor_catalog/references/B005/cms_2212_10311_bsmumu.txt",
+        "sha256": "sha256:b821377272dc3d3dd8f6d129de050940ba9f4cce40271c905bdaa90c22dc6095",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-) = (3.83 +- 380000000)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: Data set: CMS 2016-2018 pp collisions at sqrt(s)=13 TeV, integrated luminosity 140 fb^-1.\nL14:\nL15: Extract from arXiv TeX source BPH-21-006_temp.tex:\nL16: The B_s0 -> mu+mu- branching fraction is\nL17: [3.83 +0.38 -0.36 (stat) +0.19 -0.16 (syst) +0.14 -0.13 (f_s/f_u)] x 10^-9.\nL18: The B^0 -> mu+mu- branching fraction central fit is\nL19: [0.37 +0.75 -0.67 (stat) +0.08 -0.09 (syst)] x 10^-10.\n"
+              },
+              {
+                "line_number": 17,
+                "context": "L14:\nL15: Extract from arXiv TeX source BPH-21-006_temp.tex:\nL16: The B_s0 -> mu+mu- branching fraction is\nL17: [3.83 +0.38 -0.36 (stat) +0.19 -0.16 (syst) +0.14 -0.13 (f_s/f_u)] x 10^-9.\nL18: The B^0 -> mu+mu- branching fraction central fit is\nL19: [0.37 +0.75 -0.67 (stat) +0.08 -0.09 (syst)] x 10^-10.\nL20:\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15: Extract from arXiv TeX source BPH-21-006_temp.tex:\nL16: The B_s0 -> mu+mu- branching fraction is\nL17: [3.83 +0.38 -0.36 (stat) +0.19 -0.16 (syst) +0.14 -0.13 (f_s/f_u)] x 10^-9.\nL18: The B^0 -> mu+mu- branching fraction central fit is\nL19: [0.37 +0.75 -0.67 (stat) +0.08 -0.09 (syst)] x 10^-10.\nL20:\nL21: Abstract excerpt:\n"
+              },
+              {
+                "line_number": 22,
+                "context": "L19: [0.37 +0.75 -0.67 (stat) +0.08 -0.09 (syst)] x 10^-10.\nL20:\nL21: Abstract excerpt:\nL22: The branching fraction of the B_s0 -> mu+mu- decay and the effective B_s0 meson lifetime are the most precise single measurements to date. No evidence for the B^0 -> mu+mu- decay has been found.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "input_measurements[1]",
+        "source_url": "https://arxiv.org/abs/2108.09283",
+        "snapshot_path": "flavor_catalog/references/B005/lhcb_2108_09283_bsmumu.txt",
+        "sha256": "sha256:fc1427e831e02c11fe09c6fcdd6c1c26893f0b54024f69bc0a1f2bb04afbc5fe",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-) = (3.09 +- 460000000)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: Data set: pp collisions at sqrt(s)=7, 8, and 13 TeV, corresponding to 1, 2, and 6 fb^-1.\nL15:\nL16: Extract from arXiv TeX source:\nL17: B_s0 -> mu+mu- branching fraction:\nL18: (3.09 +0.46 +0.15 -0.43 -0.11) x 10^-9.\nL19: B_s0 -> mu+mu- effective lifetime:\nL20: (2.07 +/- 0.29 +/- 0.03) ps.\n"
+              },
+              {
+                "line_number": 18,
+                "context": "L15:\nL16: Extract from arXiv TeX source:\nL17: B_s0 -> mu+mu- branching fraction:\nL18: (3.09 +0.46 +0.15 -0.43 -0.11) x 10^-9.\nL19: B_s0 -> mu+mu- effective lifetime:\nL20: (2.07 +/- 0.29 +/- 0.03) ps.\nL21: Ratio between B0 -> mu+mu- and B_s0 -> mu+mu- branching fractions:\n"
+              },
+              {
+                "line_number": 19,
+                "context": "L16: Extract from arXiv TeX source:\nL17: B_s0 -> mu+mu- branching fraction:\nL18: (3.09 +0.46 +0.15 -0.43 -0.11) x 10^-9.\nL19: B_s0 -> mu+mu- effective lifetime:\nL20: (2.07 +/- 0.29 +/- 0.03) ps.\nL21: Ratio between B0 -> mu+mu- and B_s0 -> mu+mu- branching fractions:\nL22: R_{mu+mu-} < 0.095 at 95% confidence level.\n"
+              },
+              {
+                "line_number": 21,
+                "context": "L18: (3.09 +0.46 +0.15 -0.43 -0.11) x 10^-9.\nL19: B_s0 -> mu+mu- effective lifetime:\nL20: (2.07 +/- 0.29 +/- 0.03) ps.\nL21: Ratio between B0 -> mu+mu- and B_s0 -> mu+mu- branching fractions:\nL22: R_{mu+mu-} < 0.095 at 95% confidence level.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "input_measurements[2]",
+        "source_url": "https://arxiv.org/abs/1812.03017",
+        "snapshot_path": "flavor_catalog/references/B005/atlas_1812_03017_bsmumu.txt",
+        "sha256": "sha256:9724967bfdd6abd69f3f7be384911b5288fdf372735c159c9dae402dbccbca2e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B_s0 -> mu+ mu-), ATLAS Run 1 + 2015-2016 combination = (2.8 +- 800000000)e-9",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Local snapshot purpose: ATLAS primary input listed in HFLAV/PDG averages.\nL10:\nL11: ArXiv abstract excerpt:\nL12: A study of the decays B_s0 -> mu+mu- and B0 -> mu+mu- has been performed using 26.3 fb^-1 of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016.\nL13: The 2015-2016 data alone give B(B_s0 -> mu+mu-) = (3.2 +1.1 -1.0) x 10^-9 and B(B0 -> mu+mu-) < 4.3 x 10^-10 at 95% confidence level.\nL14: The result combined with the Run 1 ATLAS result gives B(B_s0 -> mu+mu-) = (2.8 +0.8 -0.7) x 10^-9 and B(B0 -> mu+mu-) < 2.1 x 10^-10 at 95% confidence level.\nL15: The combined result is consistent with the Standard Model prediction within 2.4 standard deviations in the B(B0 -> mu+mu-) - B(B_s0 -> mu+mu-) plane.\n"
+              },
+              {
+                "line_number": 13,
+                "context": "L10:\nL11: ArXiv abstract excerpt:\nL12: A study of the decays B_s0 -> mu+mu- and B0 -> mu+mu- has been performed using 26.3 fb^-1 of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016.\nL13: The 2015-2016 data alone give B(B_s0 -> mu+mu-) = (3.2 +1.1 -1.0) x 10^-9 and B(B0 -> mu+mu-) < 4.3 x 10^-10 at 95% confidence level.\nL14: The result combined with the Run 1 ATLAS result gives B(B_s0 -> mu+mu-) = (2.8 +0.8 -0.7) x 10^-9 and B(B0 -> mu+mu-) < 2.1 x 10^-10 at 95% confidence level.\nL15: The combined result is consistent with the Standard Model prediction within 2.4 standard deviations in the B(B0 -> mu+mu-) - B(B_s0 -> mu+mu-) plane.\n"
+              },
+              {
+                "line_number": 14,
+                "context": "L11: ArXiv abstract excerpt:\nL12: A study of the decays B_s0 -> mu+mu- and B0 -> mu+mu- has been performed using 26.3 fb^-1 of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016.\nL13: The 2015-2016 data alone give B(B_s0 -> mu+mu-) = (3.2 +1.1 -1.0) x 10^-9 and B(B0 -> mu+mu-) < 4.3 x 10^-10 at 95% confidence level.\nL14: The result combined with the Run 1 ATLAS result gives B(B_s0 -> mu+mu-) = (2.8 +0.8 -0.7) x 10^-9 and B(B0 -> mu+mu-) < 2.1 x 10^-10 at 95% confidence level.\nL15: The combined result is consistent with the Standard Model prediction within 2.4 standard deviations in the B(B0 -> mu+mu-) - B(B_s0 -> mu+mu-) plane.\n"
+              },
+              {
+                "line_number": 15,
+                "context": "L12: A study of the decays B_s0 -> mu+mu- and B0 -> mu+mu- has been performed using 26.3 fb^-1 of 13 TeV LHC proton-proton collision data collected with the ATLAS detector in 2015 and 2016.\nL13: The 2015-2016 data alone give B(B_s0 -> mu+mu-) = (3.2 +1.1 -1.0) x 10^-9 and B(B0 -> mu+mu-) < 4.3 x 10^-10 at 95% confidence level.\nL14: The result combined with the Run 1 ATLAS result gives B(B_s0 -> mu+mu-) = (2.8 +0.8 -0.7) x 10^-9 and B(B0 -> mu+mu-) < 2.1 x 10^-10 at 95% confidence level.\nL15: The combined result is consistent with the Standard Model prediction within 2.4 standard deviations in the B(B0 -> mu+mu-) - B(B_s0 -> mu+mu-) plane.\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "HIGH",
+  "priority_rationale_short": "Clean rare leptonic FCNC with strong scalar and axial reach",
+  "priority_rationale_full": "B_s -> mu+ mu- is a precision rare leptonic FCNC with a clean SM prediction and direct sensitivity to axial, scalar, and pseudoscalar b-s operators. In anarchic RS, flavor-changing electroweak, Z-like, Higgs/radion, or extended scalar effects can shift the rate, and scalar terms are especially powerful because they can bypass SM helicity suppression. This is one of the few beauty rare decays with HIGH-level constraining power comparable to the standard low-energy flavor anchors."
+}

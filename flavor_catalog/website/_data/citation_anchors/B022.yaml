@@ -1,0 +1,180 @@
+---
+process_id: B022
+generated_at: '2026-05-18T01:56:20Z'
+sources:
+- block_key: observables[0]
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_nu_nubar.html
+  snapshot_path: flavor_catalog/references/B022/hflav_dec2025_bplus_kplus_nunu.txt
+  sha256: sha256:4c562ccd073f823063b1dd4960842bddc64c52bd91368c5c1f2d86e512145d49
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B+ -> K+ nu nubar) = (1.38 +- 0.35)e-5
+    status: RESOLVED
+    matches:
+    - line_number: 15
+      context: |
+        L12: <h1>${\cal B}(B^+ \to K^+ \nu \bar{\nu})$</h1>
+        L13: <p><img src="BR_B+_K+_nu_nubar.png"></p>
+        L14: <p><table border="1"><tr><th>Experiment</th><th>Measurement [10<sup>-5</sup>]</th><th>$\Delta\chi^2$</th><th>Reference</th><th>Comments</th></tr>
+        L15: <tr><td><b>Average</b></td><td><b>$1.38 \pm0.35$</b></td><td>5.55</td><td>$p=0.23$ (ndf=4)</td><td></td></tr>
+        L16: <tr><td><i>PDG</i></td><td><i>$2.30\,^{+0.71}_{-0.64}$</i></td><td></td><td><a href="https://pdglive.lbl.gov/BranchingRatio.action?desig=273&parCode=S041">pdgLive</a></td><td></td></tr>
+        L17: <tr><td>Belle</td><td>$1.00 \pm0.60$</td><td>0.41</td>
+        L18: <td><a href="https://inspirehep.net/literature/1512929">Phys.Rev.D <b>96</b>,091101 (2017)</a></td><td>Semileptonic tag. Paper only reports UL. The value reported here is calculated in Ref.~\cite{Belle-II:2023esi}. </td></tr>
+- block_key: observables[1]
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S041.273
+  snapshot_path: flavor_catalog/references/B022/pdg2026_bplus_kplus_nunu_api.txt
+  sha256: sha256:af37fb3659510fda527bb190e325585eff507cf14abe2f5e628132ac293be2e1
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B+ -> K+ nu nubar) = (2.3 +- 0.71)e-5
+    status: AMBIGUOUS
+    matches:
+    - line_number: 30
+      context: |
+        L27: ,   "measurement_values":[
+        L28:       {
+        L29:    "column_name": "VALUE"
+        L30: ,   "value": 2.3E-5
+        L31: ,   "error_positive": 7.071067811865476E-6
+        L32: ,   "error_negative": 6.403124237432849E-6
+        L33: ,   "stat_error_positive": 5.0E-6
+    - line_number: 32
+      context: |
+        L29:    "column_name": "VALUE"
+        L30: ,   "value": 2.3E-5
+        L31: ,   "error_positive": 7.071067811865476E-6
+        L32: ,   "error_negative": 6.403124237432849E-6
+        L33: ,   "stat_error_positive": 5.0E-6
+        L34: ,   "stat_error_negative": 5.0E-6
+        L35: ,   "syst_error_positive": 5.0E-6
+    - line_number: 37
+      context: |
+        L34: ,   "stat_error_negative": 5.0E-6
+        L35: ,   "syst_error_positive": 5.0E-6
+        L36: ,   "syst_error_negative": 4.000000000000001E-6
+        L37: ,   "value_text": "(2.3 +-0.5+0.5-0.4) E-5"
+        L38: ,   "used_in_average": true
+        L39: ,   "used_in_fit": true
+        L40: ,   "display_value_text": "2.3 +-0.5 +0.5-0.4"
+    - line_number: 164
+      context: |
+        L161: , "publication_name": "PR D87 111103"
+        L162: , "publication_year": 2013
+        L163: , "doi": "10.1103/PhysRevD.87.111103"
+        L164: , "inspire_id": "1223991"
+        L165: , "title": "Search for B --> h^(*) nu nubar with the Full Belle Upsilon(4S) Data Sample"
+        L166: , "confidence_level": "90.0"
+        L167: , "technique": "BELL"
+- block_key: observables[2]
+  source_url: https://docs.belle2.org/pub_data/documents/4404/
+  snapshot_path: flavor_catalog/references/B022/belleii2024_bplus_kplus_nunu_pubdb.txt
+  sha256: sha256:5e8e54e24cbc3d59e277ca1e3c0e0647fbd2287785fa9118a9a6733992bc2412
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B+ -> K+ nu nubar) = (2.3 +- 0.5)e-5
+    status: AMBIGUOUS
+    matches:
+    - line_number: 153
+      context: |
+        L150:
+        L151:   <tr class="d-flex">
+        L152:     <th class="col-2">Abstract</th>
+        L153:     <td class="col-10">We search for the rare decay $B^{+}\rightarrow K^{+}\nu\bar{\nu}$ in a $362\ \rm{fb}^{-1}$ sample of electron-positron collisions at the $\Upsilon(4S)$ resonance collected with the Belle II detector at the SuperKEKB collider. We use the inclusive properties of the accompanying $B$ meson in $\Upsilon(4S) \to B\kern 0.18em\overline{\kern -0.18em B}{}$ events to suppress background from other decays of the signal $B$ candidate and light-quark pair production. We validate the measurement with an auxiliary analysis based on a conventional hadronic reconstruction of the accompanying $B$ meson. For background suppression, we exploit distinct signal features using machine learning methods tuned with simulated data. The signal-reconstruction efficiency and background suppression are validated through various control channels. The branching fraction is extracted in a maximum likelihood fit. Our inclusive and hadronic analyses yield consistent results for the $B^{+}\rightarrow K^{+}\nu\bar{\nu}$ branching fraction of $\left[2.7\pm 0.5(\mathrm{stat})\pm 0.5(\mathrm{syst})\right] \times 10^{-5}$ and $\left[1.1^{+0.9}_{-0.8}(\mathrm{stat}){}^{+0.8}_{-0.5}(\mathrm{syst})\right] \times 10^{-5}$, respectively. Combining the results, we determine the branching fraction of the decay $B^{+}\rightarrow K^{+}\nu\bar{\nu}$ to be $\left[2.3 \pm 0.5(\mathrm{stat})^{+0.5}_{-0.4}(\mathrm{syst})\right]\times 10^{-5}$, providing the first evidence for this decay at $3.5$ standard deviations. The combined result is $2.7$ standard deviations above the standard model expectation.</td>
+        L154:   </tr>
+        L155:
+        L156:
+    - line_number: 198
+      context: |
+        L195:     author = &quot;Adachi, I. and others&quot;,
+        L196:     collaboration = &quot;Belle-II&quot;,
+        L197:     title = &quot;{Evidence for B+{\textrightarrow}K+{\ensuremath{\nu}}{\ensuremath{\nu}}{\textasciimacron} decays}&quot;,
+        L198:     eprint = &quot;2311.14647&quot;,
+        L199:     archivePrefix = &quot;arXiv&quot;,
+        L200:     primaryClass = &quot;hep-ex&quot;,
+        L201:     reportNumber = &quot;Belle II Preprint 2023-017, KEK Preprint 2023-35&quot;,
+    - line_number: 201
+      context: |
+        L198:     eprint = &quot;2311.14647&quot;,
+        L199:     archivePrefix = &quot;arXiv&quot;,
+        L200:     primaryClass = &quot;hep-ex&quot;,
+        L201:     reportNumber = &quot;Belle II Preprint 2023-017, KEK Preprint 2023-35&quot;,
+        L202:     doi = &quot;10.1103/PhysRevD.109.112006&quot;,
+        L203:     journal = &quot;Phys. Rev. D&quot;,
+        L204:     volume = &quot;109&quot;,
+    - line_number: 235
+      context: |
+        L232:     author = "Adachi, I. and others",
+        L233:     collaboration = "Belle-II",
+        L234:     title = "{Evidence for B+{\textrightarrow}K+{\ensuremath{\nu}}{\ensuremath{\nu}}{\textasciimacron} decays}",
+        L235:     eprint = "2311.14647",
+        L236:     archivePrefix = "arXiv",
+        L237:     primaryClass = "hep-ex",
+        L238:     reportNumber = "Belle II Preprint 2023-017, KEK Preprint 2023-35",
+    - line_number: 238
+      context: |
+        L235:     eprint = "2311.14647",
+        L236:     archivePrefix = "arXiv",
+        L237:     primaryClass = "hep-ex",
+        L238:     reportNumber = "Belle II Preprint 2023-017, KEK Preprint 2023-35",
+        L239:     doi = "10.1103/PhysRevD.109.112006",
+        L240:     journal = "Phys. Rev. D",
+        L241:     volume = "109",
+    - line_number: 261
+      context: |
+        L258:   <li class="mb-2">
+        L259:     <i class="bi bi-download"></i>
+        L260:     <span>
+        L261:       <a href="/files/4404/BELLE2-PUB-PH-2023-028/1/BELLE2-PUB-PH-2023-028.pdf">BELLE2-PUB-PH-2023-028.pdf</a> (versions: <a href="/files/4404/BELLE2-PUB-PH-2023-028/1/BELLE2-PUB-PH-2023-028.pdf">1</a>)
+        L262:       <br>
+        L263:       <span class="text-muted text-sm">latest upload: 2025-03-10</span>
+        L264:     </span>
+- block_key: observables[3]
+  source_url: https://export.arxiv.org/api/query?id_list=1303.7465
+  snapshot_path: flavor_catalog/references/B022/babar2013_btokstarnunu_arxiv.txt
+  sha256: sha256:8366c09006d7bebe7e1a315b15de4b15eab30496705a0c9c76552ed1da872b5b
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: BR(B+ -> K+ nu nubar) < 3.7e-5 90%
+    status: AMBIGUOUS
+    matches:
+    - line_number: 4
+      context: |
+        L1: <?xml version='1.0' encoding='UTF-8'?>
+        L2: <feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+        L3:   <id>https://arxiv.org/api/IIBvcrmkcpLvSxFa+aSvY138FOY</id>
+        L4:   <title>arXiv Query: search_query=&amp;id_list=1303.7465&amp;start=0&amp;max_results=10</title>
+        L5:   <updated>2026-05-16T18:08:34Z</updated>
+        L6:   <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1303.7465" type="application/atom+xml"/>
+        L7:   <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+    - line_number: 11
+      context: |
+        L8:   <opensearch:totalResults>1</opensearch:totalResults>
+        L9:   <opensearch:startIndex>0</opensearch:startIndex>
+        L10:   <entry>
+        L11:     <id>http://arxiv.org/abs/1303.7465v2</id>
+        L12:     <title>Search for B --&gt; K(*) nu nubar and invisible quarkonium decays</title>
+        L13:     <updated>2013-06-11T18:41:41Z</updated>
+        L14:     <link href="https://arxiv.org/abs/1303.7465v2" rel="alternate" type="text/html"/>
+- block_key: values[0]:HPQCD2023:B022:sm_prediction
+  source_url: https://arxiv.org/abs/2207.13371
+  snapshot_path: flavor_catalog/references/B022/hpqcd2023_btoknunu_sm_arxiv.txt
+  sha256: sha256:66d8ba9efc52bb64659d75613f8b6065421252f3af1f4c0331f4da09a3e29d4e
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: fallback_value_uncertainty
+    anchor_string: SM BR(B+ -> K+ nu nubar) = (5.58 +- 0.37)e-6
+    status: RESOLVED
+    matches:
+    - line_number: 67
+      context: |
+        L64:                         & 4.94(52) & \cite{Du:2015tda}\\
+        L65:                         & 4.53(64) &\cite{Buras:2021nns}\\
+        L66:                         & 4.65(62) &\cite{Buras:2022wpw}\\
+        L67:                         & 5.58(37) & HPQCD '22\\
+        L68:       \hline
+        L69:       \hline
+        L70:     \end{tabular}\caption{Summary of experimental and theoretical results for the branching fraction $\mathcal{B}(B\to K\nu\bar{\nu})$, summed over neutrino flavours. Our results are denoted by `HPQCD '22' and include the long-distance contribution of Eq.~\eqref{eq:nuLD} in the charged $B$ case. Experimental results are given as 90\% confidence limit and marked `Exp.'. In the case of~\cite{Buras:2021nns}, we use $|V_{tb}V_{ts}^*|$ (Table~\ref{tab-SMparams}) to obtain the result.}

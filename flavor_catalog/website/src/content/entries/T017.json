@@ -1,0 +1,343 @@
+{
+  "process_id": "T017",
+  "family": "top_higgs_ew",
+  "family_original": "top_higgs_ew",
+  "tier": "PRIMARY",
+  "standard_notation": "\\mathcal{B}(Z\\to\\mu^\\pm\\tau^\\mp)",
+  "process_name": "Lepton-flavor-violating Z decay Z -> mu tau",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "The repo lacks LFV Z operators and lepton-sector electroweak matching; production use would need a new Z_mu_tau coupling convention, left/right operator mapping, RS gauge/mass mixing inputs, and a combination policy with tau LFV and Higgs LFV constraints.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Targeted grep for Z -> mu tau / Z -> tau mu / Zmutau / ZMuTau / LFV Z strings across required code directories returned no hits.",
+      "The only charged-lepton LFV implementation found is mu -> e gamma: flavorConstraints/muToEGamma.py:75.",
+      "The scan calls the mu -> e gamma LFV filter at scanParams/scan.py:524.",
+      "The modern phenomenology policy surface is limited to epsilon_K, K, B_d, B_s, and D0: quarkConstraints/modern/phenomenology.py:23."
+    ],
+    "grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\"",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\"",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\"",
+      "rg -n \"Z.?->.?mu.?tau|Z.?->.?tau.?mu|Z.?to.?mu.?tau|Z.?to.?tau.?mu|Zmutau|ZMuTau|mu.?tau.*Z|tau.?mu.*Z|lepton.?flavou?r.*Z|LFV.*Z\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g \"!*.ipynb\""
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2025:T017:zmutau_limit",
+      "observable": "B(Z -> mu+- tau-+), charge-summed PDG listing",
+      "value": "< 6.5e-6",
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+      "snapshot_path": "flavor_catalog/references/T017/pdg2025_z_lfv_listing.txt",
+      "sha256": "sha256:38a914a87c02df8e1e29bc6c744ca6923b9690fa9624cf0ee7feec58c9e154c5",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2021:T017:zmutau_combined_limit",
+      "observable": "B(Z -> mu tau), ATLAS combination with previous hadronic-tau analyses",
+      "value": "< 6.5e-6",
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2021,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2105.12491",
+      "snapshot_path": "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt",
+      "sha256": "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2021:T017:zmutau_leptonic_tau_limit",
+      "observable": "B(Z -> mu tau), ATLAS leptonically decaying tau analysis only",
+      "value": "< 7.2e-6",
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2021,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2105.12491",
+      "snapshot_path": "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt",
+      "sha256": "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "ATLAS2021:T017:dataset",
+      "observable": "ATLAS dataset for leptonically decaying tau Z LFV search",
+      "value": "139 fb^-1 at sqrt(s) = 13 TeV",
+      "uncertainty": null,
+      "units": "integrated luminosity and collision energy",
+      "display": null,
+      "year": 2021,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2105.12491",
+      "snapshot_path": "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt",
+      "sha256": "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2025:T017:zmutau_limit",
+      "observable": "B(Z -> mu tau), CMS direct search",
+      "value": "< 12.0e-6",
+      "uncertainty": null,
+      "units": "branching fraction",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2508.07512",
+      "snapshot_path": "flavor_catalog/references/T017/cms2025_smp23003_arxiv_abs.txt",
+      "sha256": "sha256:0dee8d38e4f27ce15e49f5c91fb2f9cdc873aa0047d9c4f3404a800b5119b217",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "CMS2025:T017:dataset",
+      "observable": "CMS dataset for Z LFV direct search",
+      "value": "138 fb^-1 at sqrt(s) = 13 TeV",
+      "uncertainty": null,
+      "units": "integrated luminosity and collision energy",
+      "display": null,
+      "year": 2025,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/2508.07512",
+      "snapshot_path": "flavor_catalog/references/T017/cms2025_smp23003_arxiv_abs.txt",
+      "sha256": "sha256:0dee8d38e4f27ce15e49f5c91fb2f9cdc873aa0047d9c4f3404a800b5119b217",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2025_z_lfv_listing.txt": "sha256:38a914a87c02df8e1e29bc6c744ca6923b9690fa9624cf0ee7feec58c9e154c5",
+    "atlas2021_z_lfv_tau_arxiv_abs.txt": "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0",
+    "cms2025_smp23003_arxiv_abs.txt": "sha256:0dee8d38e4f27ce15e49f5c91fb2f9cdc873aa0047d9c4f3404a800b5119b217",
+    "calibbi_marcano_roy2021_arxiv_abs.txt": "sha256:d9a926db4f51080feef71e839f88aabff89b347dcfd156437b086c584add35a6",
+    "csaki_falkowski_weiler2008_arxiv_abs.txt": "sha256:5c5c51789ec1d4c15414a7d81d23245cd7bd079812c792d4d1abf7c31b811cb2",
+    "perez_randall2008_arxiv_abs.txt": "sha256:ee704b97ddbb31a451549afa1e129e93be1b77034f4e3f8b35ab66dcb2175485"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "state": "WRITER-INITIATED",
+      "at": "2026-05-16T14:27:26-04:00",
+      "timestamp": "2026-05-16T14:27:26-04:00",
+      "agent_id": "PKA-T017",
+      "reason": "Initial PKA draft and source snapshot deposit."
+    },
+    {
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "state": "WRITER-DONE",
+      "at": "2026-05-16T14:44:48-04:00",
+      "timestamp": "2026-05-16T14:44:48-04:00",
+      "agent_id": "WA",
+      "agent": "WA",
+      "reason": "Writer polish completed for wa_w5b_top_higgs_ew."
+    },
+    {
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "state": "CHECKER-DONE",
+      "at": "2026-05-16T15:17:15-04:00",
+      "timestamp": "2026-05-16T15:17:15-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_top_higgs_ew",
+      "reason": "CA batch ca_w5b_top_higgs_ew verified CHK-1 through CHK-8."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-top_higgs_ew",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent_id": "factcheck-codex-top_higgs_ew",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Fetched cited PDG/arXiv/collaboration sources; measured value claims match."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(\\mathcal{B}(Z\\to\\mu^\\pm\\tau^\\mp)\\).\nThis entry covers the charged-lepton-flavor-violating on-shell \\(Z\\)-boson\ndecay into one muon and one tau lepton, summed over charge-conjugate final\nstates, in the top/Higgs/electroweak family.",
+    "pdg_prose": "The PDG 2025 \\(Z\\)-boson listing quotes the charge-summed upper limit\n\\[\n  \\mathcal{B}(Z\\to\\mu^\\pm\\tau^\\mp) < 6.5\\times 10^{-6}\n\\]\nat 95\\% CL (\\texttt{PDG2025:T017:zmutau\\_limit}).  This matches the strongest\nATLAS combination, which combined a \\(139~\\mathrm{fb}^{-1}\\),\n\\(\\sqrt{s}=13~\\mathrm{TeV}\\) leptonically decaying \\(\\tau\\) search with\nprevious hadronic-\\(\\tau\\) analyses\n(\\texttt{ATLAS2021:T017:dataset};\n\\texttt{ATLAS2021:T017:zmutau\\_combined\\_limit}).  The same ATLAS leptonic\n\\(\\tau\\) analysis alone set\n\\(\\mathcal{B}(Z\\to\\mu\\tau)<7.2\\times10^{-6}\\) at 95\\% CL\n(\\texttt{ATLAS2021:T017:zmutau\\_leptonic\\_tau\\_limit}).  CMS 2025 is the\nlatest direct LHC search including this channel; using\n\\(138~\\mathrm{fb}^{-1}\\) at \\(\\sqrt{s}=13~\\mathrm{TeV}\\), it reports an\nobserved (expected) 95\\% CL limit of\n\\(12.0\\,(5.3)\\times10^{-6}\\)\n(\\texttt{CMS2025:T017:dataset}; \\texttt{CMS2025:T017:zmutau\\_limit}).",
+    "relevance": "Warped or partially composite lepton sectors can generate non-diagonal\nneutral currents after the charged-lepton mass matrix is diagonalized.\n\\(Z\\to\\mu\\tau\\) is therefore a direct probe of effective off-diagonal\n\\(Z_{\\mu\\tau}\\) couplings from lepton localization, gauge-boson mixing, or\nflavor-symmetry breaking.  It is relevant to a lepton/electroweak extension of\nthe pipeline, not to the present quark \\(\\Delta F=2\\) implementation.",
+    "post_2008": "The arXiv:0804.1954 warped-flavor baseline predates the LHC \\(Z\\)-LFV\nprogram.  The main post-2008 experimental development is the ATLAS\n\\(\\tau\\)-channel search and combination, which established the current\nstrongest observed \\(\\mu\\tau\\) limit at the \\(10^{-6}\\) branching-fraction\nlevel (\\texttt{ATLAS2021:T017:zmutau\\_combined\\_limit}).  CMS later performed\na Run-2 search covering all three charged-lepton flavor pairs in one analysis,\nproviding an independent 2025 check of the \\(\\mu\\tau\\) channel.  Future-factory\nstudies also changed the context:\nTera-\\(Z\\) proposals with \\(\\mathcal{O}(10^{12})\\) produced \\(Z\\) bosons are\nespecially promising for \\(Z\\to\\tau\\ell\\) modes, whereas \\(Z\\to\\mu e\\) remains\nmore tightly constrained by low-energy observables\n(\\texttt{CalibbiMarcanoRoy2021:T017:teraZ}).",
+    "validity": "Experimentally this is a clean direct upper limit on a forbidden Standard\nModel decay.  Applying it as a scan cut assumes the usual inclusive \\(Z\\)\nproduction and total-width normalization used by the collaborations.  As an\nRS constraint it is model-dependent: the same flavor spurions may also induce\n\\(\\tau\\to\\mu\\gamma\\), \\(\\tau\\to\\mu\\mu\\mu\\), or Higgs LFV, so this entry should\nbe treated as a direct collider constraint on \\(Z_{\\mu\\tau}\\), not a complete\nLFV likelihood.",
+    "code_coverage_prose": "Coverage is \\textbf{NO}.  The required broad greps and a targeted search for\n\\texttt{Z -> mu tau}, \\texttt{Z -> tau mu}, \\texttt{Zmutau}, and related LFV\n\\(Z\\) strings across \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(Z\\to\\mu\\tau\\) observable implementation.  The only\ncharged-lepton LFV backend seen is \\(\\mu\\to e\\gamma\\)\n(\\texttt{flavorConstraints/muToEGamma.py:75}), called by the scan at\n\\texttt{scanParams/scan.py:524}; the modern quark phenomenology policy is\nlimited to \\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\)\n(\\texttt{quarkConstraints/modern/phenomenology.py:23}).",
+    "implementation_difficulty_prose": "Production integration is \\textbf{HIGH}.  The external limit is easy to store,\nbut a faithful RS constraint needs a new LFV \\(Z\\)-coupling convention, left-\nand right-handed lepton operator matching, model-dependent gauge/mass mixing\ninputs, and a policy for combining direct \\(Z\\)-pole searches with tau LFV and\nHiggs LFV constraints.",
+    "key_references": "\\texttt{PDG2025ZLFVListing}; \\texttt{ATLAS2021ZLFVTau};\n\\texttt{CMS2025ZLFV}; \\texttt{CalibbiMarcanoRoy2021ZLFV};\n\\texttt{CsakiFalkowskiWeiler2008WarpedFlavor};\n\\texttt{PerezRandall2008WarpedLeptonFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/top_higgs_ew/T017.yaml",
+  "source_tex": "flavor_catalog/processes/top_higgs_ew/T017.tex",
+  "worklog_path": "flavor_catalog/worklogs/T017/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:07Z",
+    "counts": {
+      "RESOLVED": 5,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 1
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:T017:zmutau_limit",
+        "source_url": "https://pdgweb.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf",
+        "snapshot_path": "flavor_catalog/references/T017/pdg2025_z_lfv_listing.txt",
+        "sha256": "sha256:38a914a87c02df8e1e29bc6c744ca6923b9690fa9624cf0ee7feec58c9e154c5",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 6.5e-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14:\nL15: Gamma66  e+- mu-+    LF    [c] < 2.62 x 10^-7    CL=95%\nL16: Gamma67  e+- tau-+   LF    [c] < 5.0  x 10^-6    CL=95%\nL17: Gamma68  mu+- tau-+  LF    [c] < 6.5  x 10^-6    CL=95%\nL18:\nL19: Footnote [c]:\nL20: The value is for the sum of the charge states or particle/antiparticle states\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2021:T017:zmutau_combined_limit",
+        "source_url": "https://arxiv.org/abs/2105.12491",
+        "snapshot_path": "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt",
+        "sha256": "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 6.5e-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 30,
+                "context": "L27: analysis to B(Z -> e tau) < 7.0 x 10^-6 and B(Z -> mu tau) < 7.2 x 10^-6 at\nL28: 95% confidence level. The combination with the previously published analyses\nL29: sets the strongest constraints to date: B(Z -> e tau) < 5.0 x 10^-6 and\nL30: B(Z -> mu tau) < 6.5 x 10^-6 at 95% confidence level.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2021:T017:zmutau_leptonic_tau_limit",
+        "source_url": "https://arxiv.org/abs/2105.12491",
+        "snapshot_path": "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt",
+        "sha256": "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 7.2e-6",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: combined with the results of a similar ATLAS search in the final state in\nL25: which the tau-lepton decays hadronically, using the same data set as well as\nL26: Run 1 data. The Z -> l tau branching fractions are constrained in this\nL27: analysis to B(Z -> e tau) < 7.0 x 10^-6 and B(Z -> mu tau) < 7.2 x 10^-6 at\nL28: 95% confidence level. The combination with the previously published analyses\nL29: sets the strongest constraints to date: B(Z -> e tau) < 5.0 x 10^-6 and\nL30: B(Z -> mu tau) < 6.5 x 10^-6 at 95% confidence level.\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2021:T017:dataset",
+        "source_url": "https://arxiv.org/abs/2105.12491",
+        "snapshot_path": "flavor_catalog/references/T017/atlas2021_z_lfv_tau_arxiv_abs.txt",
+        "sha256": "sha256:cd52f80f1ce58a51e63919f12434f49c7ff62133dcda0c5de520602de82b95a0",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "139 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 23,
+                "context": "L20: Relevant abstract extract:\nL21: A search for lepton-flavor-violating Z -> e tau and Z -> mu tau decays with\nL22: pp collision data recorded by the ATLAS detector at the LHC is presented. This\nL23: analysis uses 139 fb^-1 of Run 2 pp collisions at sqrt(s)=13 TeV and is\nL24: combined with the results of a similar ATLAS search in the final state in\nL25: which the tau-lepton decays hadronically, using the same data set as well as\nL26: Run 1 data. The Z -> l tau branching fractions are constrained in this\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2025:T017:zmutau_limit",
+        "source_url": "https://arxiv.org/abs/2508.07512",
+        "snapshot_path": "flavor_catalog/references/T017/cms2025_smp23003_arxiv_abs.txt",
+        "sha256": "sha256:0dee8d38e4f27ce15e49f5c91fb2f9cdc873aa0047d9c4f3404a800b5119b217",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "< 12.0e-6",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2025:T017:dataset",
+        "source_url": "https://arxiv.org/abs/2508.07512",
+        "snapshot_path": "flavor_catalog/references/T017/cms2025_smp23003_arxiv_abs.txt",
+        "sha256": "sha256:0dee8d38e4f27ce15e49f5c91fb2f9cdc873aa0047d9c4f3404a800b5119b217",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "138 fb^-1 at sqrt(s) = 13 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 24,
+                "context": "L21: A search for flavor violating decays of the Z boson to charged leptons is\nL22: performed using data from proton-proton collisions at sqrt(s) = 13 TeV\nL23: collected with the CMS detector at the LHC, corresponding to an integrated\nL24: luminosity of 138 fb^-1. Each of the decays Z -> e mu, Z -> e tau, and\nL25: Z -> mu tau is considered. The data are consistent with the backgrounds\nL26: expected from standard model processes. For the Z -> e mu channel the observed\nL27: (expected) 95% confidence level upper limit on the branching fraction is\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Clean Z mu tau LFV handle, but not a full LFV bound",
+  "priority_rationale_full": "The Z -> mu tau limit is a clean direct test of an off-diagonal Z_mu_tau coupling in lepton-sector warped models. It is more useful than a generic projection because it targets a concrete electroweak LFV vertex at the 10^-6 branching-fraction level. Correlations with tau -> mu gamma, tau -> 3 mu, and Higgs LFV keep it below the dominant LFV constraints."
+}

@@ -1,0 +1,60 @@
+---
+process_id: C008
+generated_at: '2026-05-18T01:53:05Z'
+sources:
+- block_key: PDG2026:DPlusPiEMuPlus
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.110
+  snapshot_path: flavor_catalog/references/C008/pdg2026_dplus_piplus_ep_mum_pdgLive.txt
+  sha256: null
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '2.1e-07'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 25
+      context: |
+        L22:   Technique: LHCB
+        L23:   Comment: 1.6 fb**-1 p p
+        L24:   Confidence level: 90.0
+        L25:   Value: <2.1 E-7
+        L26:   Numeric value: 2.1e-7
+        L27:   Limit type: upper
+        L28:   Used in average: true
+    - line_number: 26
+      context: |
+        L23:   Comment: 1.6 fb**-1 p p
+        L24:   Confidence level: 90.0
+        L25:   Value: <2.1 E-7
+        L26:   Numeric value: 2.1e-7
+        L27:   Limit type: upper
+        L28:   Used in average: true
+        L29:   Used in fit: true
+- block_key: PDG2026:DPlusPiEMuMinus
+  source_url: https://pdgprod.lbl.gov/pdgprod/pdgLiveJson/api/listings/S031.111
+  snapshot_path: flavor_catalog/references/C008/pdg2026_dplus_piplus_em_mup_pdgLive.txt
+  sha256: null
+  access_date: '2026-05-16'
+  anchors:
+  - anchor_field: value
+    anchor_string: '2.2e-07'
+    status: AMBIGUOUS
+    matches:
+    - line_number: 25
+      context: |
+        L22:   Technique: LHCB
+        L23:   Comment: 1.6 fb**-1 p p
+        L24:   Confidence level: 90.0
+        L25:   Value: <2.2 E-7
+        L26:   Numeric value: 2.2e-7
+        L27:   Limit type: upper
+        L28:   Used in average: true
+    - line_number: 26
+      context: |
+        L23:   Comment: 1.6 fb**-1 p p
+        L24:   Confidence level: 90.0
+        L25:   Value: <2.2 E-7
+        L26:   Numeric value: 2.2e-7
+        L27:   Limit type: upper
+        L28:   Used in average: true
+        L29:   Used in fit: true

@@ -1,0 +1,380 @@
+{
+  "process_id": "CR007",
+  "family": "collider_rs",
+  "family_original": "collider_rs",
+  "tier": "PRIMARY",
+  "standard_notation": "pp -> G_KK^(1) -> ZZ, WW, gamma gamma, ell ell, t tbar",
+  "process_name": "Spin-2 KK-graviton resonance (Bulk Randall-Sundrum)",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Needs a new collider-reinterpretation layer: RS spin-2 spectrum prediction, widths, branching fractions, production cross sections, and ATLAS/CMS acceptance or likelihood recasts, likely via MadGraph/Pythia/Delphes plus CheckMATE, MadAnalysis5, Rivet, SModelS, or HEPData-derived limit curves.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"bulk[- ]?RS|RS[- ]?graviton|KK[- ]?graviton|G_KK|ATLAS|CMS|diboson|diphoton|dilepton|collider|CheckMATE|MadAnalysis|SModelS|Delphes|MadGraph|Pythia|FastJet|Rivet\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"graviton|Randall|Sundrum|bulk RS|RS graviton|G_KK|G\\^\\{\\(1\\)\\}|KK.?graviton|Kaluza.?Klein.*graviton|collider|LHC|diboson|diphoton|dilepton|ttbar|t\\\\bar\\{t\\}|resonance\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"M_KK|min.*M|MKK|KK.?scale|KK scale|47|g_\\*|gstar|g\\*\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "No direct CR007 collider-resonance likelihood, ATLAS/CMS limit table, diboson/diphoton/dilepton filter, or external recast tool integration was found.",
+      "Only irrelevant collider-grep hit: tests/test_alpha_s.py:89 is a CMS/RunDec alpha_s calibration comment.",
+      "Adjacent flavor scale support exists: quarkConstraints/modern/scan.py:1229-1255 enumerates M_KK scan points, and quarkConstraints/modern/evaluation.py:643-666 performs flavor matching at the resolved M_KK."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2025:CR007:RS_graviton_diphoton_mass_kMpl_0p1",
+      "observable": "Lower limit on first RS KK-graviton mass in pp -> G -> gamma gamma",
+      "value": 4.8,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m(G_KK^(1)) > 4.8 TeV",
+      "year": 2025,
+      "experiment": "CMS",
+      "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+      "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+      "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR007:RS_graviton_dilepton_mass_kMpl_0p1",
+      "observable": "Lower limit on first RS KK-graviton mass in pp -> G -> e+e-, mu+mu-",
+      "value": 4.78,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m(G_KK^(1)) > 4.78 TeV",
+      "year": 2025,
+      "experiment": "CMS",
+      "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+      "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+      "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "PDG2025:CR007:bulk_graviton_diboson_mass_kMpl_0p5",
+      "observable": "Lower limit on bulk-RS spin-2 graviton mass in pp -> G -> WW, ZZ -> qqqq",
+      "value": 1.4,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m(G_bulk) > 1.4 TeV",
+      "year": 2025,
+      "experiment": "CMS",
+      "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+      "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+      "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    },
+    {
+      "label": "ATLAS2018:CR007:bulk_graviton_combined_mass_kMpl_1",
+      "observable": "Lower limit on bulk-RS KK-graviton mass in ATLAS combined bosonic and leptonic final states",
+      "value": 2.3,
+      "uncertainty": null,
+      "units": "TeV",
+      "display": "m(G_KK) > 2.3 TeV",
+      "year": 2018,
+      "experiment": "ATLAS",
+      "source_url": "https://arxiv.org/abs/1808.02380",
+      "snapshot_path": "flavor_catalog/references/CR007/atlas_2018_combination_arxiv1808_02380.txt",
+      "sha256": "sha256:1ae94abf3957a5f0fa94fd963e3972da7c22cdd0e0760a54332e4f2745c4cca4",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "lower_limit"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "label": "CMS 2024 diphoton dataset",
+      "source_key": "CMS2024_Diphoton",
+      "experiment": "CMS",
+      "year": 2024,
+      "sqrt_s": 13,
+      "sqrt_s_units": "TeV",
+      "integrated_luminosity": 138,
+      "integrated_luminosity_units": "fb^-1",
+      "context": "Dataset and selection metadata for the current PDG-leading generic RS-graviton diphoton limit; not a measured observable promoted to pdg_or_equivalent.",
+      "source_url": "https://arxiv.org/abs/2405.09320",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR007/cms_2024_diphoton_arxiv2405_09320.txt",
+      "sha256": "sha256:71c6b5d57aabacc09819c7ee7b34b714e8767301841e1435945de44874003a85"
+    },
+    {
+      "label": "CMS 2023 all-jets diboson dataset",
+      "source_key": "CMS2023_AllJetsBosonPairs",
+      "experiment": "CMS",
+      "year": 2023,
+      "sqrt_s": 13,
+      "sqrt_s_units": "TeV",
+      "integrated_luminosity": 138,
+      "integrated_luminosity_units": "fb^-1",
+      "resonance_mass_range": {
+        "min": 1.3,
+        "max": 6.0,
+        "units": "TeV"
+      },
+      "context": "Dataset and mass-range metadata for the bulk-graviton WW/ZZ all-jets benchmark; not a measured observable promoted to pdg_or_equivalent.",
+      "source_url": "https://arxiv.org/abs/2210.00043",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR007/cms_2023_alljets_boson_pairs_arxiv2210_00043.txt",
+      "sha256": "sha256:fc618c5119bdf8a877494f4b6a25532dcb67b3e31b15ea02e9e7fd8fa8977554"
+    },
+    {
+      "label": "ATLAS 2018 combined Run-2 dataset",
+      "source_key": "ATLAS2018_Combination",
+      "experiment": "ATLAS",
+      "year": 2018,
+      "sqrt_s": 13,
+      "sqrt_s_units": "TeV",
+      "integrated_luminosity": 36.1,
+      "integrated_luminosity_units": "fb^-1",
+      "context": "Dataset metadata for the ATLAS combined bosonic/leptonic bulk-RS spin-2 result; not a measured observable promoted to pdg_or_equivalent.",
+      "source_url": "https://arxiv.org/abs/1808.02380",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR007/atlas_2018_combination_arxiv1808_02380.txt",
+      "sha256": "sha256:1ae94abf3957a5f0fa94fd963e3972da7c22cdd0e0760a54332e4f2745c4cca4"
+    }
+  ],
+  "paper_era_reference": {
+    "randall_sundrum_1999": {
+      "source_key": "RandallSundrum1999_Hierarchy",
+      "source_type": "theoretical baseline; not a measured observable",
+      "relevance": "Introduces the warped hierarchy setup and weak-scale spin-2 excitations.",
+      "source_url": "https://arxiv.org/abs/hep-ph/9905221",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR007/randall_sundrum_1999_arxiv_hepph9905221.txt",
+      "sha256": "sha256:cba0ff32c08a873d5e89c8c59d8a5bd2c051faac3ed86107dd9ff66cac7a1cf5"
+    },
+    "agashe_davoudiasl_perez_soni_2007": {
+      "source_key": "AgasheDavoudiaslPerezSoni2007_WarpedGravitons",
+      "source_type": "bulk-RS spin-2 collider theory baseline; not a measured observable",
+      "relevance": "Explains suppressed photon/lepton channels and enhanced longitudinal W/Z sensitivity for warped gravitons with bulk SM fields.",
+      "source_url": "https://arxiv.org/abs/hep-ph/0701186",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR007/agashe_davoudiasl_perez_soni_2007_arxiv_hepph0701186.txt",
+      "sha256": "sha256:01f8d6556c134a92f6e96265e9cc8924f7ab50283f15357d69bd935239cac187"
+    },
+    "agashe_et_al_2007_warped_gauge": {
+      "source_key": "AgasheEtAl2007_WarpedGaugeBosons",
+      "source_type": "bulk-RS gauge-resonance context; not a measured observable",
+      "relevance": "Provides the related custodial bulk gauge-boson collider context named in the assignment; spin-2-specific baseline is hep-ph/0701186.",
+      "source_url": "https://arxiv.org/abs/0709.0007",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR007/agashe_et_al_2007_warped_gauge_arxiv0709_0007.txt",
+      "sha256": "sha256:ef778e5463381cb7ad19c3bd81afb93d75ec2f12faaf59b11e2a48434113c1ec"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": {
+    "quark_scan_rc1_1_low_energy_reach": {
+      "source_type": "repo methodology note; not a measured observable",
+      "source_path": "docs/quark_scan_methodology_note.tex",
+      "line_reference": "docs/quark_scan_methodology_note.tex:587",
+      "observable": "M_KK^min p50 low-energy flavor reach at g_* = 3",
+      "value": 47.26,
+      "units": "TeV",
+      "sha256": "sha256:334d639d4167b4c721e700fbb0047cd26cd7a8fab9453a321e6afb6cbe6a6c75",
+      "relevance": "Reference scale for comparing direct collider reach against the existing anarchic-flavor RS pipeline."
+    }
+  },
+  "post_2010_developments": null,
+  "source_shas": {
+    "agashe_davoudiasl_perez_soni_2007_arxiv_hepph0701186.txt": "sha256:01f8d6556c134a92f6e96265e9cc8924f7ab50283f15357d69bd935239cac187",
+    "agashe_et_al_2007_warped_gauge_arxiv0709_0007.txt": "sha256:ef778e5463381cb7ad19c3bd81afb93d75ec2f12faaf59b11e2a48434113c1ec",
+    "atlas_2018_combination_arxiv1808_02380.txt": "sha256:1ae94abf3957a5f0fa94fd963e3972da7c22cdd0e0760a54332e4f2745c4cca4",
+    "atlas_2019_hadronic_diboson_arxiv1906_08589.txt": "sha256:cccbc85bd9dc7eb139edaf8ac1802b6de91fe7044906aa3c5b9a011717ff0df9",
+    "atlas_2020_semileptonic_diboson_arxiv2004_14636.txt": "sha256:86a82377ead0123df6883069d4b2743abf5de627c85d07e08b8c9c817057b252",
+    "cms_2021_dilepton_arxiv2103_02708.txt": "sha256:6cf44a050db10cc0352d27d91c533eb8f4392c857baba8d09375e371a3778532",
+    "cms_2023_alljets_boson_pairs_arxiv2210_00043.txt": "sha256:fc618c5119bdf8a877494f4b6a25532dcb67b3e31b15ea02e9e7fd8fa8977554",
+    "cms_2024_diphoton_arxiv2405_09320.txt": "sha256:71c6b5d57aabacc09819c7ee7b34b714e8767301841e1435945de44874003a85",
+    "pdg2025_extra_dimensions_rsg_extract.txt": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+    "randall_sundrum_1999_arxiv_hepph9905221.txt": "sha256:cba0ff32c08a873d5e89c8c59d8a5bd2c051faac3ed86107dd9ff66cac7a1cf5"
+  },
+  "source_shas_count": 10,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T16:36:55-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T16:36:55-04:00",
+      "agent_id": "PKA-CR007",
+      "reason": "Initial CR007 Wave-9 PRIMARY draft skeleton and source research started."
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T16:36:55-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T16:36:55-04:00",
+      "agent_id": "PKA-CR007",
+      "reason": "Initial PKA draft, sidecar, source snapshots, and worklog deposited."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T17:08:57-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T17:08:57-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "WA-w9-kk-gauge cycle-1 writer polish for Wave-9 collider_rs PRIMARY batch."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-17T17:33:37-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T17:33:37-04:00",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA-w9-kk-gauge cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w9_kk_gauge.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T19:30:00-04:00",
+      "agent_id": "Opus-round-5",
+      "round_id": "opus_round_005",
+      "reason": "Opus round 5 per-process sign-off for Wave-9 collider_rs PRIMARY entries; CA-verified PASS retained; see flavor_catalog/signoff/round_005_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T19:30:01-04:00",
+      "agent_id": "factcheck-codex-collider_rs-w9",
+      "agent": "factcheck-codex-collider_rs-w9",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-9 collider_rs family fact-check (factcheck_collider_rs.md)."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:}\n\\[\n  pp \\to G^{(1)}_{\\rm KK} \\to ZZ,\\ WW,\\ \\gamma\\gamma,\\ \\ell\\ell,\\ t\\bar t .\n\\]\nThis entry covers direct LHC searches for a heavy spin-2 Kaluza--Klein\ngraviton in Randall--Sundrum models, with emphasis on the bulk-RS benchmark in\nwhich Standard Model fields propagate in the warped extra dimension.  The\nexperimentally quoted final states are narrow or moderately broad resonance\nsearches in diboson, diphoton, dilepton, and top-pair spectra; the RS\ninterpretation maps the null result onto a lower limit on the first graviton\nmode mass for a specified curvature coupling \\(k/\\overline{M}_{\\rm Pl}\\).",
+    "pdg_prose": "The PDG 2025 Extra Dimensions listing is the canonical one-place summary in\n\\texttt{flavor\\_catalog/references/CR007/pdg2025\\_extra\\_dimensions\\_rsg\\_extract.txt}.\nFor the generic RS-graviton benchmark at \\(k/\\overline{M}_{\\rm Pl}=0.1\\), PDG\nlists the strongest current mass lower limit as\n\\[\n  m(G^{(1)}_{\\rm KK}) > 4.8~{\\rm TeV}\\quad(95\\%~{\\rm CL}),\n\\]\nfrom the CMS high-mass diphoton search, with the CMS high-mass dilepton result\ngiving the adjacent \\(m(G^{(1)}_{\\rm KK})>4.78~{\\rm TeV}\\) entry.  These\nheadline limits are powerful generic spin-2 resonance bounds, but they are not\nthe most faithful bulk-RS interpretation when light-fermion and photon\ncouplings are suppressed.\n\nFor the bulk-RS diboson benchmark, the current PDG-listed full Run-2 CMS\nall-jets search gives\n\\[\n  m(G_{\\rm bulk}) > 1.4~{\\rm TeV}\\quad(95\\%~{\\rm CL})\n\\]\nfor \\(k/\\overline{M}_{\\rm Pl}=0.5\\) in \\(WW/ZZ\\) final states.  The earlier\nATLAS combined bosonic-plus-leptonic search at \\(36.1~{\\rm fb}^{-1}\\) excluded\na bulk-RS KK graviton below \\(2.3~{\\rm TeV}\\) for its \\(k/\\overline{M}_{\\rm Pl}=1\\)\nbenchmark.  These mass numbers sit in the sidecar\n\\texttt{pdg\\_or\\_equivalent.values} block; luminosities, production-mode\nassumptions, and benchmark-coupling choices are recorded as supporting or\nauxiliary inputs rather than promoted measured observables.",
+    "relevance": "Bulk RS graviton searches constrain a direct collider resonance mass, not the\n\\(\\Delta F=2\\) Wilson coefficients that dominate the existing quark-flavor\npipeline.  They are nevertheless useful because custodial bulk-RS spectra often\ncontain correlated KK gauge bosons, KK gravitons, vectorlike fermions, and\nradion-like states at nearby TeV scales.  The spin-2 channel is therefore an\nRS-distinguishing cross-check of any parameter point that places the first\ngraviton in the LHC range.\n\nThe current low-energy quark scan gives\n\\(M_{\\rm KK}^{\\min}(p50,\\ g_\\ast=3)=47.26~{\\rm TeV}\\) in\n\\texttt{docs/quark\\_scan\\_methodology\\_note.tex}.  Compared with that\nanarchic-flavor bound, the LHC graviton limits above are far weaker as mass\nsetters.  Their value is instead diagnostic: they can veto or reinterpret\nnon-anarchic, flavor-protected, or custodial RS scenarios whose flavor\nconstraints have been deliberately weakened, and they provide an external check\non whether the scan has wandered into spectra that would already have produced\na high-mass diboson, diphoton, dilepton, or \\(t\\bar t\\) excess.",
+    "post_2008": "The original bulk-RS graviton collider expectation in\n\\texttt{AgasheDavoudiaslPerezSoni2007\\_WarpedGravitons} emphasized suppressed\nlight-fermion and photon channels but enhanced sensitivity in longitudinal\n\\(W/Z\\) modes.  LHC searches after 2010 tested that pattern in stages.  Early\nRun-1 searches established the first ATLAS/CMS mass and cross-section limits in\n\\(ZZ\\), \\(WW\\), and combined \\(\\gamma\\gamma/\\ell\\ell\\) channels, replacing the\nTevatron reach.  The ATLAS \\(36.1~{\\rm fb}^{-1}\\) combination\n(\\texttt{arXiv:1808.02380}) mattered because it combined bosonic and leptonic\nRun-2 final states into a single bulk-RS spin-2 interpretation.\n\nThe full Run-2 ATLAS diboson searches (\\texttt{arXiv:1906.08589} and\n\\texttt{arXiv:2004.14636}) moved the diboson program into all-hadronic and\nsemileptonic boosted topologies with \\(139~{\\rm fb}^{-1}\\).  CMS then provided\nthe strongest generic RS spin-2 dilepton benchmark\n(\\texttt{arXiv:2103.02708}), the current bulk-graviton all-jets diboson\nbenchmark used here (\\texttt{arXiv:2210.00043}), and the current PDG-leading\ndiphoton benchmark (\\texttt{arXiv:2405.09320}).  The progression is mainly\nin luminosity, boosted-boson tagging, and channel coverage; it is not a move to\na model-independent RS likelihood.",
+    "validity": "The exclusion limits are conditional.  They assume a production mechanism,\nresonance width, \\(k/\\overline{M}_{\\rm Pl}\\), acceptance, and decay-branching\npattern.  A headline \\(G\\to\\gamma\\gamma\\) or \\(G\\to\\ell\\ell\\) limit is not\nautomatically applicable to bulk RS models where light-fermion and photon\ncouplings are suppressed.  Conversely, a \\(G_{\\rm bulk}\\to WW/ZZ\\) limit does\nnot directly constrain the KK gluon mass or a custodial fermion mass without a\nspecified spectrum and branching matrix.\n\nFor the anarchic-flavor catalog, the honest use is therefore as a direct-search\nside condition: compare the predicted \\(G^{(1)}_{\\rm KK}\\) mass, width, and\nbranching fractions against the relevant ATLAS/CMS limit curve.  A single\nmass-threshold cut is only defensible for the exact experimental benchmark\nquoted in the sidecar.",
+    "code_coverage_prose": "\\textbf{NO.}  Greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no direct ATLAS/CMS, diboson, diphoton, dilepton,\ngraviton-resonance, or collider-reinterpretation implementation.  The only\n``CMS'' hit in the collider grep is an unrelated RunDec calibration comment in\n\\texttt{tests/test\\_alpha\\_s.py:89}.  Adjacent code does carry the scan's\nflavor KK scale: \\texttt{quarkConstraints/modern/scan.py:1229--1255}\nenumerates \\(M_{\\rm KK}\\) for flavor scan points, and\n\\texttt{quarkConstraints/modern/evaluation.py:643--666} evaluates the\n\\(\\Delta F=2\\) flavor matching at that scale.  No separate collider-direct\nfilter is applied.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A faithful implementation needs more than a scalar mass cut:\nit needs the model point's spin-2 graviton mass, width, production cross\nsection, branching ratios into \\(WW\\), \\(ZZ\\), \\(\\gamma\\gamma\\), \\(\\ell\\ell\\),\nand \\(t\\bar t\\), plus acceptance or a recast of the experimental analysis.\nThat is naturally an external reinterpretation workflow using tools such as\nMadGraph/Pythia/Delphes with CheckMATE, MadAnalysis5, Rivet, or a HEPData-based\nlikelihood approximation.  The repo currently has neither collider event\nsimulation nor an RS-resonance likelihood interface.",
+    "key_references": "Process-local source keys before bibliography consolidation are\n\\texttt{PDG2025\\_ExtraDimensions\\_RSG}, \\texttt{CMS2024\\_Diphoton},\n\\texttt{CMS2023\\_AllJetsBosonPairs}, \\texttt{CMS2021\\_Dilepton},\n\\texttt{ATLAS2020\\_SemileptonicDiboson},\n\\texttt{ATLAS2019\\_HadronicDiboson}, \\texttt{ATLAS2018\\_Combination},\n\\texttt{AgasheDavoudiaslPerezSoni2007\\_WarpedGravitons},\n\\texttt{AgasheEtAl2007\\_WarpedGaugeBosons}, and\n\\texttt{RandallSundrum1999\\_Hierarchy}."
+  },
+  "source_yaml": "flavor_catalog/processes/collider_rs/CR007.yaml",
+  "source_tex": "flavor_catalog/processes/collider_rs/CR007.tex",
+  "worklog_path": "flavor_catalog/worklogs/CR007/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 3,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 1
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:CR007:RS_graviton_diphoton_mass_kMpl_0p1",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+        "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+        "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(G_KK^(1)) > 4.8 TeV",
+            "status": "UNRESOLVED",
+            "matches": []
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR007:RS_graviton_dilepton_mass_kMpl_0p1",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+        "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+        "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(G_KK^(1)) > 4.78 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 11,
+                "context": "L8:       Here we list limits for the value of the warp parameter k/M P = 0.1.\nL9:\nL10: VALUE (TeV)            CL%          DOCUMENT ID               TECN      COMMENT\nL11: >4.78             95              1 SIRUNYAN   21N CMS p p                   → G → e + e − , µ+ µ−\nL12: • • • We do not use the following data for averages, ﬁts, limits,            etc. • • •\nL13:                              2 HAYRAPETY...24AE CMS p p                      →   G → HH\nL14: >4.8              95         3 HAYRAPETY...24AJ CMS p p                      →   G → γγ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "PDG2025:CR007:bulk_graviton_diboson_mass_kMpl_0p5",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-extra-dimensions.pdf",
+        "snapshot_path": "flavor_catalog/references/CR007/pdg2025_extra_dimensions_rsg_extract.txt",
+        "sha256": "sha256:9d9619662dbd81025c0e09e037dc52de6cdeaf689d1ad8a991f5e310a42c2602",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value_limit_converted_fallback",
+            "anchor_string": "> 1400 GeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 86,
+                "context": "L83:  5 TUMASYAN 23AP use 138 fb−1 of data from p p collisions at √s = 13 TeV to search\nL84:    for W W , Z Z diboson resonances in q q q q ﬁnal states. See their Figure 7 for the limit\nL85:    on the cross section times branching fraction as a function of the KK graviton mass.\nL86:    Assuming k/M P = 0.5, a graviton mass is excluded below 1400 GeV. This updates the\nL87:    result of SIRUNYAN 20Q.\nL88:  6 AAD 22F use 126–139 fb−1 of data from p p collisions at √s = 13 TeV to search for\nL89:    Higgs boson pair production in the b b b b ﬁnal state. See their Figure 14 for limits on the"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ATLAS2018:CR007:bulk_graviton_combined_mass_kMpl_1",
+        "source_url": "https://arxiv.org/abs/1808.02380",
+        "snapshot_path": "flavor_catalog/references/CR007/atlas_2018_combination_arxiv1808_02380.txt",
+        "sha256": "sha256:1ae94abf3957a5f0fa94fd963e3972da7c22cdd0e0760a54332e4f2745c4cca4",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "m(G_KK) > 2.3 TeV",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13:     <updated>2018-09-28T19:17:59Z</updated>\nL14:     <link href=\"https://arxiv.org/abs/1808.02380v2\" rel=\"alternate\" type=\"text/html\"/>\nL15:     <link href=\"https://arxiv.org/pdf/1808.02380v2\" rel=\"related\" type=\"application/pdf\" title=\"pdf\"/>\nL16:     <summary>Searches for new heavy resonances decaying into different pairings of $W$, $Z$, or Higgs bosons, as well as directly into leptons, are presented using a data sample corresponding to 36.1fb$^{-1}$ of $pp$ collisions at $\\sqrt{s}$ = 13 TeV collected during 2015 and 2016 with the ATLAS detector at the CERN Large Hadron Collider. Analyses selecting bosonic decay modes in the $qqqq$, $ννqq$, $\\ellνqq$, $\\ell\\ell qq$, $\\ellν\\ellν$, $\\ell\\ellνν$, $\\ellν\\ell\\ell$, $\\ell\\ell\\ell\\ell$, $qqbb$, $ννbb$, $\\ellνbb$, and $\\ell\\ell bb$ final states are combined, searching for a narrow-width resonance. Likewise, analyses selecting the leptonic $\\ellν$ and $\\ell\\ell$ final states are also combined. These two sets of analyses are then further combined. No significant deviation from the Standard Model predictions is observed. Three benchmark models are tested: a model predicting the existence of a new heavy scalar singlet, a simplified model predicting a heavy vector-boson triplet, and a bulk Randall-Sundrum model with a heavy spin-2 Kaluza-Klein excitation of the graviton. Cross-section limits are set at the 95% confidence level using an asymptotic approximation and are compared with predictions for the benchmark models. These limits are also expressed in terms of constraints on couplings of the heavy vector-boson triplet to quarks, leptons, and the Higgs boson. The data exclude a heavy vector-boson triplet with mass below 5.5 TeV in a weakly coupled scenario and 4.5 TeV in a strongly coupled scenario, as well as a Kaluza-Klein graviton with mass below 2.3 TeV.</summary>\nL17:     <category term=\"hep-ex\" scheme=\"http://arxiv.org/schemas/atom\"/>\nL18:     <published>2018-08-07T14:08:32Z</published>\nL19:     <arxiv:comment>48 pages in total, author list starting at page 32, 11 figures, 10 tables, submitted to Phys. Rev. D. All figures and tables, including auxiliary figures and tables, are available at https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/EXOT-2017-31/</arxiv:comment>"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Spin-2 limits are diagnostic, not flavor-dominant.",
+  "priority_rationale_full": "Generic RS graviton limits reach about 4.8 TeV, while bulk-RS diboson\nlimits can be much lower. The channel probes correlated warped spectra but\ndepends on curvature coupling, production mode, width, and branching\nassumptions. It is a useful direct-search side condition, below the flavor\nscale."
+}

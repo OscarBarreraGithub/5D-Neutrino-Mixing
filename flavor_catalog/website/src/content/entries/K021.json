@@ -1,0 +1,441 @@
+{
+  "process_id": "K021",
+  "family": "secondary",
+  "family_original": "kaon",
+  "tier": "SECONDARY",
+  "standard_notation": "K_L \\to \\pi^0 e^{\\pm}\\mu^{\\mp}",
+  "process_name": "LFV neutral-kaon semileptonic decay",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires new Delta S = 1 semileptonic LFV operators, K->pi form-factor plumbing, and RS matching for simultaneous quark and lepton off-diagonal couplings; existing Delta F=2 and mu->e gamma code is not sufficient.",
+  "cycle_count": null,
+  "priority_rationale": "Deferred by DA-4 (round_004_addendum_deferred_scope.md); LFV-kaon trio deferred as lepton-bulk RS scope extension. Promoted in Wave-8 because: Top-tier; neutral-current LFV companion to K019/K020. Lower implementation priority than Waves 1-7 PRIMARY entries.",
+  "promoted_in_wave": 8,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "Exact K021 / pi0 mu e searches across the required code directories produced no matches.",
+      "Generic semileptonic LFV kaon searches produced no K->pi e mu or s->d e mu implementation hits.",
+      "Existing nearby code is limited to Delta F=2 kaon mixing and mu->e gamma LFV: quarkConstraints/deltaf2.py:1, quarkConstraints/deltaf2.py:615, flavorConstraints/muToEGamma.py:1."
+    ],
+    "grep_commands": [
+      "rg -n \"K021|pi0.*mu.*e|pi0.*e.*mu|pi\\\\^0.*mu.*e|pi\\\\^0.*e.*mu|K_L.*pi0.*mu.*e|K_L.*pi0.*e.*mu|K0L.*pi0.*mu.*e|KL.*pi0.*mu.*e|mu.*e.*pi0|e.*mu.*pi0\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb' || true",
+      "rg -n \"K.*LFV|LFV.*K|kaon.*LFV|s.?->.?d.*mu.*e|s.?->.?d.*e.*mu|Delta.?S.*mu.*e|Delta.?S.*e.*mu|semileptonic.*LFV|four.?fermion.*LFV\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb' || true",
+      "rg -n \"mu.?to.?e.?gamma|muToEGamma|BR\\\\(mu|br_limit|PREFAC_BR|Y_N|seesaw|LFV\" flavorConstraints scanParams yukawa neutrinos tests -g '!*.ipynb'",
+      "rg -n \"epsilon_K|Delta_m_K|DELTA_M_K|M12_K|DeltaF2|deltaf2|neutral-kaon mixing|KK-gluon\" quarkConstraints tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "PDG2025:K021:KL_pi0emu_limit",
+      "observable": "BR(K_L -> pi0 e^+- mu^-+), summed charge states",
+      "value": 7.6e-11,
+      "uncertainty": null,
+      "units": "dimensionless branching fraction",
+      "display": "< 7.6 x 10^-11 (90% CL)",
+      "year": 2025,
+      "experiment": "PDG Review of Particle Physics, K_L0 listing, 2025 update",
+      "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf",
+      "snapshot_path": "flavor_catalog/references/K021/pdg2025_kl_pi0emu.txt",
+      "sha256": "sha256:a6e37f9494c96044d4e84e41a1fe331d6cfd14208ac2b9d98ee1b0e9894e019a",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper_limit"
+    },
+    {
+      "label": "KTeV2008:K021:KL_pi0mue_limit",
+      "observable": "BR(K_L -> pi0 mu e)",
+      "value": 7.56e-11,
+      "uncertainty": null,
+      "units": "dimensionless branching fraction",
+      "display": "< 7.56 x 10^-11 (90% CL)",
+      "year": 2008,
+      "experiment": "E. Abouzaid et al. (KTeV Collaboration), Phys. Rev. Lett. 100, 131803 (2008)",
+      "source_url": "https://arxiv.org/abs/0711.3472",
+      "snapshot_path": "flavor_catalog/references/K021/ktev_abouzaid_2008_arxiv0711_3472.txt",
+      "sha256": "sha256:e17b4f9fced043e63de388e8499dbe1a4d0ff779b4926d8727122ff26cada763",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper_limit"
+    },
+    {
+      "label": "NA622021:K021:Kplus_piplus_mum_ep_limit",
+      "observable": "BR(K+ -> pi+ mu- e+)",
+      "value": 6.6e-11,
+      "uncertainty": null,
+      "units": "dimensionless branching fraction",
+      "display": null,
+      "year": 2021,
+      "experiment": "R. Aliberti et al. (NA62 Collaboration), Phys. Rev. Lett. 127, 131802 (2021)",
+      "source_url": "https://arxiv.org/abs/2105.06759",
+      "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+      "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper_limit"
+    },
+    {
+      "label": "NA622021:K021:Kplus_piminus_mup_ep_limit",
+      "observable": "BR(K+ -> pi- mu+ e+)",
+      "value": 4.2e-11,
+      "uncertainty": null,
+      "units": "dimensionless branching fraction",
+      "display": null,
+      "year": 2021,
+      "experiment": "R. Aliberti et al. (NA62 Collaboration), Phys. Rev. Lett. 127, 131802 (2021)",
+      "source_url": "https://arxiv.org/abs/2105.06759",
+      "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+      "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper_limit"
+    },
+    {
+      "label": "NA622021:K021:pi0_mum_ep_limit",
+      "observable": "BR(pi0 -> mu- e+)",
+      "value": 3.2e-10,
+      "uncertainty": null,
+      "units": "dimensionless branching fraction",
+      "display": null,
+      "year": 2021,
+      "experiment": "R. Aliberti et al. (NA62 Collaboration), Phys. Rev. Lett. 127, 131802 (2021)",
+      "source_url": "https://arxiv.org/abs/2105.06759",
+      "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+      "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd",
+      "access_date": "2026-05-17",
+      "cl": "90% CL",
+      "limit_type": "upper_limit"
+    }
+  ],
+  "supporting_measurements": [
+    {
+      "label": "KTeV signal-region event-count context",
+      "observable": "signal-region events in KTeV K_L -> pi0 mu e search",
+      "year": 2008,
+      "value": 0,
+      "units": "events",
+      "context": "Dataset/event-yield context for the KTeV limit; not promoted to pdg_or_equivalent per CHK-1 carve-out.",
+      "source": "E. Abouzaid et al. (KTeV Collaboration), Phys. Rev. Lett. 100, 131803 (2008)",
+      "source_url": "https://arxiv.org/abs/0711.3472",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K021/ktev_abouzaid_2008_arxiv0711_3472.txt",
+      "sha256": "sha256:e17b4f9fced043e63de388e8499dbe1a4d0ff779b4926d8727122ff26cada763"
+    },
+    {
+      "observable": "BR(K+ -> pi+ mu- e+)",
+      "limit_type": "upper_limit",
+      "year": 2021,
+      "value": 6.6e-11,
+      "operator": "<",
+      "cl": "90% CL",
+      "units": "dimensionless branching fraction",
+      "context": "Post-2008 charged-kaon LFV companion; not the K021 canonical neutral-mode value.",
+      "source": "R. Aliberti et al. (NA62 Collaboration), Phys. Rev. Lett. 127, 131802 (2021)",
+      "source_url": "https://arxiv.org/abs/2105.06759",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+      "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd"
+    },
+    {
+      "observable": "BR(K+ -> pi- mu+ e+)",
+      "limit_type": "upper_limit",
+      "year": 2021,
+      "value": 4.2e-11,
+      "operator": "<",
+      "cl": "90% CL",
+      "units": "dimensionless branching fraction",
+      "context": "Post-2008 charged-kaon lepton-number-violating companion; not the K021 canonical neutral-mode value.",
+      "source": "R. Aliberti et al. (NA62 Collaboration), Phys. Rev. Lett. 127, 131802 (2021)",
+      "source_url": "https://arxiv.org/abs/2105.06759",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+      "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd"
+    },
+    {
+      "observable": "BR(pi0 -> mu- e+)",
+      "limit_type": "upper_limit",
+      "year": 2021,
+      "value": 3.2e-10,
+      "operator": "<",
+      "cl": "90% CL",
+      "units": "dimensionless branching fraction",
+      "context": "Post-2008 pion LFV input in the NA62 companion analysis; not the K021 canonical neutral-mode value.",
+      "source": "R. Aliberti et al. (NA62 Collaboration), Phys. Rev. Lett. 127, 131802 (2021)",
+      "source_url": "https://arxiv.org/abs/2105.06759",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+      "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd"
+    }
+  ],
+  "paper_era_reference": {
+    "cfw_2008_rs_flavor": {
+      "role": "Paper-era RS flavor benchmark; theory reference scales only.",
+      "arxiv_id": "0804.1954",
+      "reference_scale_statements": [
+        "Standard RS-type scenarios: KK gluon mass generically heavier than about 21 TeV.",
+        "Pseudo-Goldstone scenario: KK gluon mass at least about 33 TeV."
+      ],
+      "source_url": "https://arxiv.org/abs/0804.1954",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K021/csaki_falkowski_weiler_2008_arxiv0804_1954.txt",
+      "sha256": "sha256:8d37c01f459bb46451648ae219c59b9ff65ae1b821e3e3bdf37c27f18058cac0"
+    },
+    "perez_randall_2008_warped_neutrinos": {
+      "role": "Paper-era lepton-bulk RS / lepton-MFV benchmark; theory reference scales only.",
+      "arxiv_id": "0805.4652",
+      "reference_scale_statements": [
+        "Warped-neutrino model can be consistent with a cutoff of 10 TeV.",
+        "The same abstract states consistency with 3 TeV Kaluza-Klein masses under its LMFV assumptions."
+      ],
+      "source_url": "https://arxiv.org/abs/0805.4652",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/K021/perez_randall_2008_arxiv0805_4652.txt",
+      "sha256": "sha256:dff329928a373aa49189ff749a591bb5cb7f72cc5ea0df136fbae1a050439364"
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "angelescu_2020_arxiv2002_05684.txt": "sha256:87dc9aa92bbf30fdfd6073769ae106c329dc60e7aaad750abe9764a30c515246",
+    "csaki_falkowski_weiler_2008_arxiv0804_1954.txt": "sha256:8d37c01f459bb46451648ae219c59b9ff65ae1b821e3e3bdf37c27f18058cac0",
+    "crivellin_2016_arxiv1601_00970.txt": "sha256:c66a8119f1ee586a5ade26389d7b701881f8a74c769ef995410a709eecd7c9fd",
+    "delzanno_2024_arxiv2411_13497.txt": "sha256:24e1a2bff1d0f37b71c4b27fd86fab83ba9c1f6e191c0bf30c405b6e3b20b4d1",
+    "ktev_abouzaid_2008_arxiv0711_3472.txt": "sha256:e17b4f9fced043e63de388e8499dbe1a4d0ff779b4926d8727122ff26cada763",
+    "na62_aliberti_2021_arxiv2105_06759.txt": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd",
+    "perez_randall_2008_arxiv0805_4652.txt": "sha256:dff329928a373aa49189ff749a591bb5cb7f72cc5ea0df136fbae1a050439364",
+    "pdg2025_kl_pi0emu.txt": "sha256:a6e37f9494c96044d4e84e41a1fe331d6cfd14208ac2b9d98ee1b0e9894e019a",
+    "roy_valencia_2024_arxiv2410_05859.txt": "sha256:66777472e7cbbc7c7a51980684fb0755fa156911b1b12d1fa23c34353c81ff0f"
+  },
+  "source_shas_count": 9,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "DRAFT",
+      "timestamp": "2026-05-17T02:09:50-04:00",
+      "from": null,
+      "to": "DRAFT",
+      "at": "2026-05-17T02:09:50-04:00",
+      "agent_id": "PKA-K021",
+      "reason": "created initial K021 SECONDARY draft shell and source deposit"
+    },
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T02:09:50-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T02:09:50-04:00",
+      "agent_id": "PKA-K021",
+      "reason": "initial PKA draft and source deposit"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T02:36:02-04:00",
+      "agent": "WA",
+      "cycle": 1,
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T02:36:02-04:00",
+      "agent_id": "WA",
+      "reason": "WA-w8-kaon-LFV cycle-1 polish for Wave-8 SECONDARY kaon LFV batch."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-17T02:51:59-04:00",
+      "agent": "CA",
+      "cycle": 1,
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T02:51:59-04:00",
+      "agent_id": "CA",
+      "reason": "CA-w8-kaon-LFV cycle-1 PASS; see flavor_catalog/worklogs/checker/ca_w8_kaon_LFV.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T14:31:04-04:00",
+      "agent_id": "Opus-round-4",
+      "round_id": "opus_round_004",
+      "reason": "Opus round 4 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_004_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T14:31:05-04:00",
+      "agent_id": "factcheck-codex-kaon-w8",
+      "agent": "factcheck-codex-kaon-w8",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-8 SECONDARY fact-check addendum (factcheck_kaon.md)."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(K_L \\to \\pi^0 e^{\\pm}\\mu^{\\mp}\\).  This\nentry covers the lepton-family-number-violating neutral-kaon semileptonic\ndecay, equivalently the summed charge-state mode\n\\(\\Gamma(\\pi^0\\mu^\\pm e^\\mp)/\\Gamma_{\\rm total}\\) in the PDG \\(K_L^0\\)\nlisting.",
+    "pdg_prose": "The canonical current limit is\n\\[\n  {\\cal B}(K_L\\to\\pi^0 e^{\\pm}\\mu^{\\mp}) < 7.6\\times10^{-11}\n  \\qquad (90\\%~{\\rm CL}),\n\\]\nfrom the PDG \\(K_L^0\\) listing, 2025 update, accessed 2026-05-17; see\n\\texttt{flavor\\_catalog/references/K021/pdg2025\\_kl\\_pi0emu.txt}.  PDG labels\nthe entry \\(LF\\), gives the value for the sum of the indicated charge states,\nand lists the underlying input as the KTeV Abouzaid 2008 result.  The KTeV\nabstract reports the exact experiment limit\n\\({\\cal B}(K_L\\to\\pi^0\\mu e)<7.56\\times10^{-11}\\) at \\(90\\%\\) CL with no\nevents in the signal region; PDG rounds this to \\(7.6\\times10^{-11}\\).",
+    "relevance": "This is a \\textbf{SECONDARY} Wave-8 entry; see\n\\texttt{flavor\\_catalog/PRIORITY\\_TIERS.md} for the tier policy.  It is a\n\\(\\Delta S=1\\), neutral-current LFV channel.  In an RS/anarchic\nflavor pipeline it is sensitive to products of flavor off-diagonal quark and\nlepton couplings, for example tree-level exchange of KK gauge bosons or\nflavor-violating \\(Z\\)-like states generating\n\\((\\bar s\\gamma_\\alpha d)(\\bar e\\gamma^\\alpha\\mu)\\)-type operators.  The same\nfermion-localization profiles that set quark FCNCs also set the charged-lepton\noverlaps; in lepton-bulk variants the Perez--Randall seesaw/neutrino-Yukawa\nspurions control charged-LFV misalignment.  Dipole constraints such as\n\\(\\mu\\to e\\gamma\\) probe a different operator class but constrain the same\nleptonic flavor sector, while scalar or Higgs-flavor contributions would need\nseparate chirality and hadronic form-factor treatment.",
+    "post_2008": "The direct neutral-mode experimental situation has not moved beyond KTeV in\nthe PDG 2025 listing: the K021 limit remains the 2008 KTeV result.  The main\npost-2008 experimental development is adjacent rather than superseding: NA62\nreported 2017--2018 searches for \\(K^+\\to\\pi^+\\mu^-e^+\\),\n\\(K^+\\to\\pi^-\\mu^+e^+\\), and \\(\\pi^0\\to\\mu^-e^+\\), setting\n\\(90\\%\\)-CL limits at the \\(10^{-11}\\)--\\(10^{-10}\\) level and improving the\ncharged-kaon and pion LFV reach by about one order of magnitude.\n\nThe theory context changed more substantially.  Crivellin, D'Ambrosio,\nHoferichter, and Tunstall (arXiv:1601.00970) formulated rare kaon LFV/LFU\ntests in terms of four-fermion operators for \\(K\\to\\pi\\ell\\ell'\\) and\n\\(K\\to\\ell\\ell'\\).  Angelescu, Faroughy, and Sumensari (arXiv:2002.05684)\ngave numerical low-energy formulae for semileptonic LFV meson decays and\nshowed how LHC dilepton tails complement flavor limits.  Roy and Valencia\n(arXiv:2410.05859) and Delzanno et al. (arXiv:2411.13497) updated the SMEFT\nperspective by matching rare-kaon/CLFV operators to high-\\(p_T\\), electroweak,\nand low-energy probes with RG running and operator correlations.",
+    "validity": "The experimental upper limit is cleanly usable as a branching-ratio cap, but\nthe RS interpretation is model-dependent.  A catalog implementation must choose\nan effective-operator basis, charge-state convention, \\(K\\to\\pi\\) vector and\nscalar form factors, and the mapping from 5D fermion localization to\noff-diagonal quark and lepton couplings.  There is no Standard Model\nlong-distance amplitude to subtract at an observable level for LFV, but there\nis also no current repo machinery for the required \\(\\Delta S=1\\) semileptonic\nLFV matching.  Correlations with \\(K_L\\to e^\\pm\\mu^\\mp\\),\n\\(K^+\\to\\pi^+e^\\pm\\mu^\\mp\\), \\(\\mu\\to e\\gamma\\), and \\(\\mu\\to e\\) conversion\nshould be kept explicit.",
+    "code_coverage_prose": "\\textbf{NO.}  The required grep sweep across \\texttt{quarkConstraints/},\n\\texttt{qcd/}, \\texttt{flavorConstraints/}, \\texttt{neutrinos/},\n\\texttt{yukawa/}, \\texttt{warpConfig/}, \\texttt{solvers/},\n\\texttt{scanParams/}, and \\texttt{tests/} found no K021 implementation and no\ngeneric \\(s\\to d e\\mu\\) semileptonic LFV surface.  Existing nearby code covers\nkaon \\(\\Delta F=2\\) mixing, for example\n\\texttt{quarkConstraints/deltaf2.py:1} and\n\\texttt{quarkConstraints/deltaf2.py:615}, plus a separate \\(\\mu\\to e\\gamma\\)\nNDA dipole check in \\texttt{flavorConstraints/muToEGamma.py:1}; neither\ncomputes \\(K_L\\to\\pi^0 e^\\pm\\mu^\\mp\\).",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A pure EFT rate is standard once semileptonic LFV Wilson\ncoefficients are supplied, but this repository does not yet have the needed\n\\(\\Delta S=1\\) semileptonic operator basis, \\(K\\to\\pi\\) form-factor interface,\nor RS matching for simultaneous quark and lepton flavor violation.  Integrating\nK021 consistently with the existing RS scan would therefore require new\ncross-sector matching rather than only adding a numerical limit.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2025\\_KL\\_pi0emu},\n\\texttt{KTeV2008\\_KL\\_pi0emu},\n\\texttt{CFW2008\\_composite\\_pgh\\_flavor},\n\\texttt{PerezRandall2008\\_warped\\_neutrinos},\n\\texttt{CrivellinDAmbrosioHoferichterTunstall2016\\_rare\\_kaon\\_lfv},\n\\texttt{NA622021\\_Kplus\\_pi\\_mu\\_e},\n\\texttt{AngelescuFaroughySumensari2020\\_lfv\\_dilepton\\_tails},\n\\texttt{RoyValencia2024\\_highpt\\_rare\\_kaon\\_smeft}, and\n\\texttt{DelzannoFuyutoGonzalezSolisMereghetti2024\\_mue\\_smeft}."
+  },
+  "source_yaml": "flavor_catalog/processes/secondary/kaon/K021.yaml",
+  "source_tex": "flavor_catalog/processes/secondary/kaon/K021.tex",
+  "worklog_path": "flavor_catalog/worklogs/K021/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 4,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:K021:KL_pi0emu_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-L.pdf",
+        "snapshot_path": "flavor_catalog/references/K021/pdg2025_kl_pi0emu.txt",
+        "sha256": "sha256:a6e37f9494c96044d4e84e41a1fe331d6cfd14208ac2b9d98ee1b0e9894e019a",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "< 7.6 x 10^-11 (90% CL)",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 14,
+                "context": "L11:   Charge conjugation x parity (CP) or Lepton Family number (LF)\nL12:   violating modes, or Delta S = 1 weak neutral current (S1) modes.\nL13:\nL14:   Gamma_37  pi0 mu+- e-+    LF [a]   < 7.6 x 10^-11   CL=90%\nL15:\nL16:   [a] The value is for the sum of the charge states or particle/antiparticle\nL17:       states indicated."
+              },
+              {
+                "line_number": 32,
+                "context": "L29:\nL30: Interpretation for K021:\nL31:   PDG's current canonical upper limit is\nL32:   BR(K_L -> pi0 mu+- e-+) < 7.6 x 10^-11 at 90% CL,\nL33:   for the summed charge states."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "KTeV2008:K021:KL_pi0mue_limit",
+        "source_url": "https://arxiv.org/abs/0711.3472",
+        "snapshot_path": "flavor_catalog/references/K021/ktev_abouzaid_2008_arxiv0711_3472.txt",
+        "sha256": "sha256:e17b4f9fced043e63de388e8499dbe1a4d0ff779b4926d8727122ff26cada763",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "< 7.56 x 10^-11 (90% CL)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: the K_L meson in three decay modes. It observed no events in the signal region\nL15: for any of the modes studied and set 90% CL upper limits:\nL16:\nL17:   BR(K_L -> pi0 mu e) < 7.56 x 10^-11\nL18:   BR(K_L -> pi0 pi0 mu e) < 1.64 x 10^-10\nL19:   BR(pi0 -> mu e) < 3.59 x 10^-10\nL20:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA622021:K021:Kplus_piplus_mum_ep_limit",
+        "source_url": "https://arxiv.org/abs/2105.06759",
+        "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+        "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "6.6e-11",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: NA62 searched for K+ -> pi- mu+ e+, K+ -> pi+ mu- e+, and pi0 -> mu- e+\nL14: using 2017-2018 CERN data. No evidence was found. The 90% CL limits were:\nL15:\nL16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11\nL17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11\nL18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10\nL19:"
+              },
+              {
+                "line_number": 17,
+                "context": "L14: using 2017-2018 CERN data. No evidence was found. The 90% CL limits were:\nL15:\nL16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11\nL17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11\nL18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10\nL19:\nL20: The abstract states these results improve previous results for these decay"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA622021:K021:Kplus_piminus_mup_ep_limit",
+        "source_url": "https://arxiv.org/abs/2105.06759",
+        "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+        "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "4.2e-11",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 16,
+                "context": "L13: NA62 searched for K+ -> pi- mu+ e+, K+ -> pi+ mu- e+, and pi0 -> mu- e+\nL14: using 2017-2018 CERN data. No evidence was found. The 90% CL limits were:\nL15:\nL16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11\nL17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11\nL18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10\nL19:"
+              },
+              {
+                "line_number": 17,
+                "context": "L14: using 2017-2018 CERN data. No evidence was found. The 90% CL limits were:\nL15:\nL16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11\nL17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11\nL18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10\nL19:\nL20: The abstract states these results improve previous results for these decay"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "NA622021:K021:pi0_mum_ep_limit",
+        "source_url": "https://arxiv.org/abs/2105.06759",
+        "snapshot_path": "flavor_catalog/references/K021/na62_aliberti_2021_arxiv2105_06759.txt",
+        "sha256": "sha256:14998087e135d8199bf384aa6a6e487a6d20332a8fcde2fe470e3a2a3d67fcdd",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.2e-10",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15:\nL16:   BR(K+ -> pi- mu+ e+) < 4.2 x 10^-11\nL17:   BR(K+ -> pi+ mu- e+) < 6.6 x 10^-11\nL18:   BR(pi0 -> mu- e+) < 3.2 x 10^-10\nL19:\nL20: The abstract states these results improve previous results for these decay\nL21: modes by one order of magnitude."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "experiment_input",
+        "source_url": "https://arxiv.org/abs/0711.3472",
+        "snapshot_path": "flavor_catalog/references/K021/ktev_abouzaid_2008_arxiv0711_3472.txt",
+        "sha256": "sha256:e17b4f9fced043e63de388e8499dbe1a4d0ff779b4926d8727122ff26cada763",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7.56e-11",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 17,
+                "context": "L14: the K_L meson in three decay modes. It observed no events in the signal region\nL15: for any of the modes studied and set 90% CL upper limits:\nL16:\nL17:   BR(K_L -> pi0 mu e) < 7.56 x 10^-11\nL18:   BR(K_L -> pi0 pi0 mu e) < 1.64 x 10^-10\nL19:   BR(pi0 -> mu e) < 3.59 x 10^-10\nL20:"
+              },
+              {
+                "line_number": 23,
+                "context": "L20:\nL21: Role in K021:\nL22:   This is the experiment input behind the current PDG K_L -> pi0 mu+- e-+\nL23:   limit. PDG rounds the K021 limit to < 7.6 x 10^-11."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Secondary neutral LFV semileptonic cap, dominated by stronger LFV modes",
+  "priority_rationale_full": "K_L -> pi0 e mu is a clean semileptonic LFV upper limit and probes products of\noff-diagonal quark and lepton couplings in lepton-extended RS models. Its\nbound is weaker and more auxiliary than K_L -> e mu and the charged-kaon LFV\ncompanion modes. It is best treated as a correlation and consistency check\nonce a semileptonic LFV operator basis is present."
+}

@@ -1,0 +1,186 @@
+{
+  "process_id": "L004",
+  "family": "charged_lepton",
+  "family_original": "charged_lepton",
+  "tier": "PRIMARY",
+  "standard_notation": "R_{\\mu e}^{\\rm Au}",
+  "process_name": "Coherent muon-to-electron conversion in gold",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Missing implementation needs a new coherent mu-e conversion observable, lepton-quark Wilson/operator convention, gold target nuclear overlap and capture inputs, and likely EFT matching/running shared with mu->e gamma and mu->3e.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "required_grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "targeted_grep_commands": [
+      "rg -n \"mu.?-?e.?conversion|mu.?to.?e.?conversion|muon.?to.?electron|Mu2e|mu2e|COMET|comet|SINDRUM|R_mu.?e|Rmu.?e|conversion.*gold|muonic gold|Au.*conversion\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Targeted L004 grep returned no hits in the required code directories.",
+      "Generic conversion hits in quarkConstraints are unrelated bag-parameter/unit-conversion internals, not mu-e conversion observables.",
+      "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an adjacent dipole-only LFV checker.",
+      "scanParams/scan.py:524 calls check_mu_to_e_gamma in scans; no conversion observable is evaluated."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Particle Data Group live muon listing, NODE=S004",
+      "observable": "sigma(mu- Au -> e- Au) / sigma(mu- Au -> capture)",
+      "value": 7e-13,
+      "uncertainty": null,
+      "units": null,
+      "display": null,
+      "year": 2026,
+      "experiment": "SINDRUM II",
+      "source_url": "https://pdg.lbl.gov/encoder_listings/s004.pdf",
+      "snapshot_path": "flavor_catalog/references/L004/pdg2026_muon_listing_s004_au_conversion.txt",
+      "sha256": "f62fe92474a72005f15a29ee456110afe5014e88a79848ae3cd50bd35b4d0a01",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "cfw2008_arxiv0804_1954.txt": "sha256:c8d15a5e367bed99d14a581d29563eb43706fcbedf13ef4ca62500028d885222",
+    "comet_phase_i_tdr_arxiv1812_09018.txt": "sha256:4b482f0e016575089598cb6a97d1e48832c93065c4def51ef1687dd7ba8bbe8d",
+    "mu2e_tdr_arxiv1501_05241.txt": "sha256:63749e4f29bac16ffde2990da7002e66e4c2a4ae741cb7bb7a6ef7c3e0e8b425",
+    "pdg2026_muon_listing_s004_au_conversion.txt": "sha256:f62fe92474a72005f15a29ee456110afe5014e88a79848ae3cd50bd35b4d0a01",
+    "sindrumii_2006_gold_crossref.txt": "sha256:d9fb8f22357abdcef206d4a72dcc1f638d42ebcb950998321ad93ed7a8d7b7ad"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T13:16:42-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T13:16:42-04:00",
+      "agent_id": "PKA-L004",
+      "reason": "Initial L004 PKA source extraction and draft sidecar."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T13:16:42-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T13:16:42-04:00",
+      "agent_id": "PKA-L004",
+      "reason": "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T13:31:05-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T13:31:05-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w4_charged_lepton",
+      "reason": "Writer polish completed for wa_w4_charged_lepton; numerical claims checked against sidecar sources."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T13:45:46-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T13:45:46-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w4_charged_lepton",
+      "reason": "Checker pass completed for ca_w4_charged_lepton; CHK-1 through CHK-8 passed."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "timestamp": "2026-05-16T14:55:00-04:00",
+      "agent": "Opus-round-1",
+      "round_id": "opus_round_001",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-16T14:55:00-04:00",
+      "agent_id": "Opus-round-1",
+      "reason": "Opus round 1 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_001_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charged_lepton",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Measured limits and prospect values matched fetched sources or local snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(R_{\\mu e}^{\\rm Au} =\n\\Gamma(\\mu^-{\\rm Au}\\to e^-{\\rm Au})/\n\\Gamma_{\\rm capture}(\\mu^-{\\rm Au})\\).\nThis entry covers coherent neutrinoless muon-to-electron conversion in a\ngold target, the strongest published SINDRUM II conversion bound and the\ndirect companion to the aluminum and titanium conversion entries.",
+    "pdg_prose": "The streamed PDG live muon listing, generated on 2026-05-14 and accessed on\n2026-05-16, gives\n\\[\n  R_{\\mu e}^{\\rm Au} < 7\\times 10^{-13}\\qquad (90\\%\\ {\\rm C.L.}) .\n\\]\nThese dates, the \\(7\\times10^{-13}\\) value, and the \\(90\\%\\) C.L. qualifier are\nrecorded in\n\\texttt{L004.yaml:pdg\\_or\\_equivalent.primary\\_current\\_limit}.  The PDG line\nidentifies the document as BERTL 06, technique SPEC, comment SINDRUM II.  The\nlocal minimal text snapshot is\n\\texttt{flavor\\_catalog/references/L004/pdg2026\\_muon\\_listing\\_s004\\_au\\_conversion.txt}.\nThe SINDRUM II article metadata is separately snapshotted from Crossref for\n\\textit{Eur. Phys. J. C} \\textbf{47}, 337--346 (2006), DOI\n\\texttt{10.1140/epjc/s2006-02582-x}\n(\\texttt{L004.yaml:pdg\\_or\\_equivalent.experimental\\_publication}).",
+    "relevance": "In a warped lepton-flavor extension, \\(\\mu-e\\) conversion probes more than the\ndipole structure tested by \\(\\mu\\to e\\gamma\\).  Tree-level or loop-induced\nlepton-quark vector and scalar operators, flavor-changing \\(Z\\)-like\ncouplings, Higgs-mediated scalar currents, and dipoles can all contribute to\nthe same coherent nuclear final state.  A heavy target such as gold is useful\nas an existing benchmark, but its interpretation is target and operator\ndependent.",
+    "post_2008": "Since the arXiv:0804.1954 RS-flavor baseline, no newer gold-target result has\nreplaced the SINDRUM II bound in the PDG listing\n(\\texttt{L004.yaml:pdg\\_or\\_equivalent.primary\\_current\\_limit};\n\\texttt{L004.yaml:pdg\\_or\\_equivalent.post\\_2008\\_baseline}).  The major\nchange is the experimental program around lighter targets: the Mu2e Technical\nDesign Report\nstates an aluminum conversion search aiming for sensitivity approximately four\norders of magnitude beyond the previous world-best conversion limits\n(\\texttt{L004.yaml:pdg\\_or\\_equivalent.post\\_2008\\_developments[0]}), and the\nCOMET Phase-I TDR quotes an aluminum sensitivity goal \\(3.1\\times10^{-15}\\)\nwith an expected \\(90\\%\\) upper limit \\(7.0\\times10^{-15}\\)\n(\\texttt{L004.yaml:pdg\\_or\\_equivalent.post\\_2008\\_developments[1]}).  Thus the\ngold limit remains the published benchmark, while future comparisons will need\ntarget-by-target translations.",
+    "validity": "The experimental statement is robust: it is a null search normalized to the\nordinary muon-capture rate on gold.  The mapping to RS parameters is not a\nsingle-number rescaling.  It requires a lepton-quark effective operator basis,\ngold nuclear overlap integrals and capture normalization, and a convention for\ncombining dipole, scalar, and vector amplitudes.  Comparisons with aluminum or\ntitanium limits are therefore model- and operator-dependent.",
+    "code_coverage_prose": "\\textbf{NO.}  The required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no SINDRUM, Mu2e, COMET, \\(R_{\\mu e}\\), gold conversion,\nor muon-to-electron conversion implementation.  The only adjacent charged-LFV\ncode is the dipole-only \\(\\mu\\to e\\gamma\\) checker at\n\\texttt{flavorConstraints/muToEGamma.py}:75, called by the scan at\n\\texttt{scanParams/scan.py}:524.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production constraint needs a new \\(\\mu-e\\) conversion\nobservable, lepton-quark Wilson coefficients, target-specific gold nuclear\ninputs, capture-rate normalization, and likely shared EFT matching/running\nwith \\(\\mu\\to e\\gamma\\) and \\(\\mu\\to3e\\).  This is a new mode calculation, not\nan input-value update to the existing dipole checker.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026\\_MuonAuConversion}, \\texttt{SINDRUMII2006\\_GoldMuE},\n\\texttt{Mu2eTDR2015}, \\texttt{COMETPhaseITDR2020}, and \\texttt{CFW2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/charged_lepton/L004.yaml",
+  "source_tex": "flavor_catalog/processes/charged_lepton/L004.tex",
+  "worklog_path": "flavor_catalog/worklogs/L004/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 1,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "sigma(mu- Au -> e- Au) / sigma(mu- Au -> capture)",
+        "source_url": "https://pdg.lbl.gov/encoder_listings/s004.pdf",
+        "snapshot_path": "flavor_catalog/references/L004/pdg2026_muon_listing_s004_au_conversion.txt",
+        "sha256": "f62fe92474a72005f15a29ee456110afe5014e88a79848ae3cd50bd35b4d0a01",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7e-13",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: sigma(mu- Au -> e- Au) / sigma(mu- Au -> capture)\nL19: \nL20: VALUE        CL%   DOCUMENT ID   TECN   CHG   COMMENT\nL21: <7 x 10^-13  90   BERTL 06      SPEC   -     SINDRUM II\nL22: \nL23: Use in L004:\nL24: Canonical PDG/equivalent current gold-target limit for coherent neutrinoless\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "MEDIUM",
+  "priority_rationale_short": "Best published conversion bound; strong but target/operator dependent.",
+  "priority_rationale_full": "The gold SINDRUM II limit is the strongest published coherent mu-e conversion\nbenchmark in this set and is clean experimentally. It probes lepton-quark\ncontact, scalar, vector, and dipole structures that are complementary to\nmu->e gamma. Its RS recast is target- and operator-dependent, and projected\naluminum conversion is the sharper future constraint, so this is MEDIUM."
+}

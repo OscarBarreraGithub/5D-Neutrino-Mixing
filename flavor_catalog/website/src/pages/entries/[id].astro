@@ -1,0 +1,356 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badges from '../../components/Badges.astro';
+import CitationModal from '../../components/CitationModal.astro';
+import { notationToMath, processNameToHtml, processNameToPlain, normalizeNotation } from '../../lib/notation';
+import { texProseToHtml } from '../../lib/prose';
+import { getCollection } from 'astro:content';
+
+// Static-routing: generate one page per ingested entry JSON.  We key on the
+// canonical process_id (e.g. "K001") from the YAML payload rather than on the
+// loader-derived id, because the JSON-glob loader lowercases filenames.
+export async function getStaticPaths() {
+  const all = await getCollection('entries');
+  return all.map((e) => ({
+    params: { id: e.data.process_id },
+    props: { entryData: e.data },
+  }));
+}
+
+const { entryData } = Astro.props as { entryData: any };
+const d: any = entryData;
+
+// Repo blob URL helper for code-coverage evidence ("path/to/file.py:42").
+const REPO = 'OscarBarreraGithub/5D-Neutrino-Mixing';
+const BRANCH = 'flavor-catalog-website/2026q2';
+function blobUrl(evidence: string): string {
+  const m = evidence.match(/^([^\s:]+):(\d+)/);
+  if (!m) return `https://github.com/${REPO}/tree/${BRANCH}/`;
+  const file = m[1];
+  const line = m[2];
+  return `https://github.com/${REPO}/blob/${BRANCH}/${file}#L${line}`;
+}
+
+const sections = d.sections ?? {};
+const cov = d.code_coverage ?? null;
+const evidence: string[] = Array.isArray(cov?.evidence) ? cov.evidence.filter((e: any) => typeof e === 'string') : [];
+
+function inlineMath(s?: string | null): string {
+  if (!s) return '';
+  const trimmed = s.trim();
+  if (!trimmed) return '';
+  if (trimmed.startsWith('$') || trimmed.startsWith('\\(')) return trimmed;
+  const looksMath = /\\[A-Za-z]+|[\^_]\{|\^\\|\^[A-Za-z0-9]/.test(trimmed);
+  // Shorthand: "Delta m_s", "epsilon_K", "Bbar", ... normalise to LaTeX first.
+  const hasShorthand =
+    /\b(?:Delta|Sigma|Omega|epsilon|nu|mu|pi|tau|phi|psi|gamma|ell)\b/.test(trimmed) ||
+    /->|<->|bar\b/.test(trimmed);
+  if (looksMath || hasShorthand) {
+    return `$${normalizeNotation(trimmed)}$`;
+  }
+  return trimmed;
+}
+
+const title = `${d.process_id} -- ${processNameToPlain(d.process_name ?? d.standard_notation ?? '')}`;
+const FAMILY_LABELS: Record<string, string> = {
+  kaon: 'Kaon',
+  charm: 'Charm',
+  beauty: 'Beauty',
+  top_higgs_ew: 'Top / Higgs / EW',
+  charged_lepton: 'Charged lepton',
+  edm_neutrino: 'EDM / neutrino',
+  collider_rs: 'Collider RS',
+  secondary: 'Secondary',
+};
+const familyLabel = FAMILY_LABELS[d.family] ?? d.family;
+const originalFamilyLabel = d.family_original && FAMILY_LABELS[d.family_original]
+  ? FAMILY_LABELS[d.family_original]
+  : d.family_original;
+
+// ---------------------------------------------------------------------------
+// Citation-anchor wiring
+// ---------------------------------------------------------------------------
+// Build two maps:
+//   - sourcesByUrl[url]        -> first matching Source (so a pdg_values row
+//     with the same source_url can attach to the right modal)
+//   - sourcesByPath[snapshot]  -> same, keyed by snapshot path as a fallback
+const citationAnchors = d.citation_anchors ?? null;
+const sources: any[] = Array.isArray(citationAnchors?.sources) ? citationAnchors.sources : [];
+function slugify(s: string): string {
+  return (s || '').replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 120);
+}
+const sourcesByUrl: Record<string, any> = {};
+const sourcesByPath: Record<string, any> = {};
+const sourcesByLabel: Record<string, any> = {};
+for (const src of sources) {
+  if (src.source_url && !sourcesByUrl[src.source_url]) sourcesByUrl[src.source_url] = src;
+  if (src.snapshot_path && !sourcesByPath[src.snapshot_path]) sourcesByPath[src.snapshot_path] = src;
+  // Some 'label' fields in pdg_values mirror the block_key; index those too.
+  if (src.block_key) sourcesByLabel[src.block_key] = src;
+}
+
+// Worst-status pill helper for the inline trigger button.
+function worstStatus(src: any): string {
+  const anchors = src?.anchors ?? [];
+  if (anchors.some((a: any) => (a.status || '').toUpperCase() === 'UNRESOLVED')) return 'UNRESOLVED';
+  if (anchors.some((a: any) => (a.status || '').toUpperCase() === 'AMBIGUOUS')) return 'AMBIGUOUS';
+  if (anchors.some((a: any) => (a.status || '').toUpperCase() === 'RESOLVED')) return 'RESOLVED';
+  return 'UNKNOWN';
+}
+
+function attachSource(v: any): any | null {
+  if (v?.source_url && sourcesByUrl[v.source_url]) return sourcesByUrl[v.source_url];
+  if (v?.snapshot_path && sourcesByPath[v.snapshot_path]) return sourcesByPath[v.snapshot_path];
+  if (v?.label && sourcesByLabel[v.label]) return sourcesByLabel[v.label];
+  return null;
+}
+
+const pdgRows: any[] = Array.isArray(d.pdg_values) ? d.pdg_values : [];
+const rowsWithSources = pdgRows.map((v) => ({ v, src: attachSource(v) }));
+
+// Anchor-status totals (already counted by ingest, but recompute for safety).
+const aTotals = (citationAnchors && citationAnchors.counts) || { RESOLVED: 0, AMBIGUOUS: 0, UNRESOLVED: 0 };
+const aTotalSum = (aTotals.RESOLVED || 0) + (aTotals.AMBIGUOUS || 0) + (aTotals.UNRESOLVED || 0);
+
+const isSecondary = (d.tier || '').toUpperCase() === 'SECONDARY';
+---
+<BaseLayout title={title}>
+<div data-pagefind-body data-pagefind-meta={`process_id:${d.process_id}, family:${d.family}, tier:${d.tier}`}>
+
+  <header class="entry-header">
+    <div class="breadcrumbs">
+      <a href="/">Catalog</a> &middot;
+      <a href={`/families/${d.family}/`}>{familyLabel}</a> &middot;
+      <code>{d.process_id}</code>
+    </div>
+    <h1>
+      <span class="process-id">{d.process_id}</span>
+      <span class="entry-h1-notation" set:html={d.standard_notation ? notationToMath(d.standard_notation) : ''}></span>
+    </h1>
+    {d.process_name && (
+      <span class="process-name" set:html={processNameToHtml(d.process_name)}></span>
+    )}
+  </header>
+
+  <div class="status-row">
+    <span class="status-label">Status</span>
+    {d.latest_status === 'OPUS-APPROVED' || d.latest_status === 'FACT-CHECKED'
+      ? <Badges kind="opus" />
+      : <span class="badge badge-unknown">{d.latest_status ?? 'UNKNOWN'}</span>}
+    <Badges kind="verdict" value={d.fact_check_verdict} />
+    <Badges kind="difficulty" value={d.implementation_difficulty} />
+    <Badges kind="coverage" value={d.code_coverage_status} />
+    {d.constraint_priority && (
+      <span class="status-group">
+        <span class="status-label">Priority</span>
+        <Badges kind="priority" value={d.constraint_priority} tooltip={d.priority_rationale_short} />
+      </span>
+    )}
+  </div>
+
+  {d.priority_rationale_full && (
+    <aside class="priority-callout" data-priority={(d.constraint_priority || 'UNRANKED').toUpperCase()}>
+      <div class="priority-callout-head">
+        <Badges kind="priority" value={d.constraint_priority} />
+        <span class="priority-callout-label">Why this matters for the scan</span>
+      </div>
+      <p set:html={texProseToHtml(d.priority_rationale_full)}></p>
+    </aside>
+  )}
+
+  {/* ----------------- PDG / equivalent values ----------------- */}
+  {rowsWithSources.length > 0 && (
+    <section class="entry-section">
+      <h2>PDG / equivalent values</h2>
+      <div class="entry-table-wrap">
+      <table class="pdg-table">
+        <thead>
+          <tr>
+            <th>Observable</th>
+            <th>Value</th>
+            <th>Year</th>
+            <th>Experiment / source</th>
+            <th>Provenance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rowsWithSources.map(({ v, src }) => {
+            const status = src ? worstStatus(src) : null;
+            const modalId = src ? `cm-${d.process_id}-${slugify(src.block_key || '')}` : null;
+            const valueText = v.display ?? (v.value !== undefined && v.value !== null ? String(v.value) : '?');
+            return (
+              <tr>
+                <td><span set:html={processNameToHtml(v.observable ?? v.label ?? '')}></span></td>
+                <td>
+                  <span class="value-display" set:html={inlineMath(valueText)}></span>
+                  {v.units && !v.display && <span class="value-units" set:html={` ${inlineMath(v.units)}`}></span>}
+                  {v.cl && <div class="value-cl">{v.cl}{v.limit_type ? ` (${v.limit_type})` : ''}</div>}
+                </td>
+                <td>{v.year ?? '-'}</td>
+                <td>{v.experiment ?? v.label ?? '-'}</td>
+                <td class="provenance-cell">
+                  {v.source_url && (
+                    <a href={v.source_url} target="_blank" rel="noopener noreferrer" class="prov-link">source &uarr;</a>
+                  )}
+                  {modalId && status && (
+                    <button type="button" class={`anchor-btn anchor-btn-${status.toLowerCase()}`} data-cite-open={modalId}
+                            data-cite-anchor-field={v.label || ''} aria-haspopup="dialog">
+                      <span class="anchor-btn-icon" aria-hidden="true">&#x1F50D;</span>
+                      view in source
+                      <span class={`cite-status-inline cite-status-${status.toLowerCase()}`}>{status[0]}</span>
+                    </button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      </div>
+    </section>
+  )}
+
+  {/* ----------------- Prose sections (LaTeX) ----------------- */}
+  {sections.relevance && (
+    <section class="entry-section">
+      <h2>Why this constrains the RS scan</h2>
+      <div class="latex-prose" set:html={texProseToHtml(sections.relevance)}></div>
+    </section>
+  )}
+
+  {sections.post_2008 && (
+    <section class="entry-section">
+      <h2>What's changed since the original paper</h2>
+      <div class="latex-prose" set:html={texProseToHtml(sections.post_2008)}></div>
+    </section>
+  )}
+
+  {sections.validity && (
+    <section class="entry-section">
+      <h2>Validity and model dependence</h2>
+      <div class="latex-prose" set:html={texProseToHtml(sections.validity)}></div>
+    </section>
+  )}
+
+  {/* ----------------- Code coverage prose + evidence list ----------------- */}
+  {(sections.code_coverage_prose || evidence.length > 0) && (
+    <section class="entry-section">
+      <h2>Code coverage in this repo</h2>
+      {sections.code_coverage_prose && (
+        <div class="latex-prose" set:html={texProseToHtml(sections.code_coverage_prose)}></div>
+      )}
+      {evidence.length > 0 && (
+        <>
+          <p class="evidence-cap">
+            Linked evidence (opens GitHub blob at <code>{BRANCH}</code>):
+          </p>
+          <ul class="evidence-list">
+            {evidence.map((ev: string) => (
+              <li>
+                <a href={blobUrl(ev)} target="_blank" rel="noopener noreferrer">{ev}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </section>
+  )}
+
+  {sections.implementation_difficulty_prose && (
+    <section class="entry-section">
+      <h2>Implementation difficulty</h2>
+      <div class="latex-prose" set:html={texProseToHtml(sections.implementation_difficulty_prose)}></div>
+      {d.implementation_difficulty_reason && (
+        <p class="impl-reason" set:html={`<strong>Reason:</strong> ${texProseToHtml(d.implementation_difficulty_reason)}`}></p>
+      )}
+    </section>
+  )}
+
+  {sections.key_references && (
+    <section class="entry-section">
+      <h2>Key references</h2>
+      <div class="latex-prose" set:html={texProseToHtml(sections.key_references)}></div>
+    </section>
+  )}
+
+  {/* ----------------- Provenance footer ----------------- */}
+  <footer class="provenance-footer">
+    <dl>
+      <dt>Source SHAs</dt>
+      <dd>{d.source_shas_count} snapshot(s) tracked in <code>{d.source_yaml}</code></dd>
+      <dt>Access dates</dt>
+      <dd>{(d.access_dates && d.access_dates.length > 0) ? d.access_dates.join(', ') : '-'}</dd>
+      <dt>Worklog</dt>
+      <dd><code>{d.worklog_path}</code></dd>
+      {d.source_tex && (
+        <>
+          <dt>LaTeX source</dt>
+          <dd><code>{d.source_tex}</code></dd>
+        </>
+      )}
+      {citationAnchors?.generated_at && (
+        <>
+          <dt>Anchors generated</dt>
+          <dd>{citationAnchors.generated_at}</dd>
+        </>
+      )}
+    </dl>
+  </footer>
+
+  </div>
+
+  {/* ----------------- Modal dialogs (one per source) ----------------- */}
+  {sources.map((src: any) => <CitationModal processId={d.process_id} source={src} />)}
+
+  {/* Modal open/close wiring -- vanilla JS, <dialog> for free a11y. */}
+  <script is:inline>
+    (function () {
+      function init() {
+        var dialogs = document.querySelectorAll('dialog.cite-modal');
+        if (!dialogs.length) return;
+        function close(d) { try { d.close(); } catch (e) {} }
+        document.querySelectorAll('[data-cite-open]').forEach(function (btn) {
+          btn.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            var id = btn.getAttribute('data-cite-open');
+            var d = document.getElementById(id);
+            if (!d) return;
+            if (typeof d.showModal === 'function') { d.showModal(); } else { d.setAttribute('open', ''); }
+            // Re-render any KaTeX inside the modal in case auto-render missed it.
+            if (typeof window.fcatRenderMath === 'function') {
+              try { window.fcatRenderMath(d); } catch (e) {}
+            } else if (typeof window.renderMathInElement === 'function') {
+              try { window.renderMathInElement(d, window.fcatKatexOptions || {}); } catch (e) {}
+            }
+          });
+        });
+        dialogs.forEach(function (d) {
+          // backdrop click -> close
+          d.addEventListener('click', function (ev) {
+            if (ev.target === d) close(d);
+          });
+          d.querySelectorAll('[data-cite-close]').forEach(function (b) {
+            b.addEventListener('click', function () { close(d); });
+          });
+        });
+        // ?openAnchor=<block_key> auto-opens the matching modal for screenshots.
+        try {
+          var qs = new URLSearchParams(window.location.search);
+          var want = qs.get('openAnchor');
+          if (want) {
+            var found = null;
+            document.querySelectorAll('[data-cite-open]').forEach(function (btn) {
+              var id = btn.getAttribute('data-cite-open') || '';
+              if (!found && id.indexOf(want) !== -1) found = btn;
+            });
+            if (found) setTimeout(function () { found.click(); }, 60);
+          }
+        } catch (e) {}
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else { init(); }
+    })();
+  </script>
+
+</BaseLayout>

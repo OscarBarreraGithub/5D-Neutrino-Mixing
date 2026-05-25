@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryTable from '../../components/EntryTable.astro';
+import families from '../../content/families.json';
+import index from '../../content/catalog_index.json';
+
+export async function getStaticPaths() {
+  return families.map((f: any) => ({ params: { family: f.key } }));
+}
+
+const { family } = Astro.params;
+const meta = families.find((f: any) => f.key === family);
+const isSecondaryFamily = family === 'secondary';
+
+// Build the row list.  For regular families, include both:
+//   * entries primarily filed under this family
+//   * SECONDARY entries whose original family is this one (deferred-then-promoted)
+// For the 'secondary' pseudo-family, show every SECONDARY entry.
+const allRows = (index.entries as any[]).filter((e) => {
+  if (isSecondaryFamily) return e.tier === 'SECONDARY';
+  if (e.family === family) return true;
+  if (e.tier === 'SECONDARY' && e.family_original === family) return true;
+  return false;
+});
+
+// Sort: PRIMARY first, then SECONDARY, then by process_id.
+allRows.sort((a, b) => {
+  const tA = a.tier === 'SECONDARY' ? 1 : 0;
+  const tB = b.tier === 'SECONDARY' ? 1 : 0;
+  if (tA !== tB) return tA - tB;
+  return (a.process_id || '').localeCompare(b.process_id || '');
+});
+
+const primaryCount = allRows.filter((r) => r.tier !== 'SECONDARY').length;
+const secondaryCount = allRows.filter((r) => r.tier === 'SECONDARY').length;
+const isColliderRs = family === 'collider_rs';
+---
+<BaseLayout title={`${meta?.label ?? family} -- Flavor Catalog`}>
+  <header class="entry-header">
+    <div class="breadcrumbs"><a href="/">Catalog</a> &middot; {meta?.label ?? family}</div>
+    <h1>
+      <span>{meta?.label ?? family}</span>
+      <span class="entry-count-pill">{allRows.length} entries</span>
+    </h1>
+    {meta?.descriptor && <p class="family-descriptor">{meta.descriptor}</p>}
+    <div class="family-meta-chips">
+      {primaryCount > 0 && <span class="family-meta-chip">{primaryCount} PRIMARY</span>}
+      {secondaryCount > 0 && <span class="family-meta-chip family-meta-chip-secondary">{secondaryCount} SECONDARY</span>}
+    </div>
+  </header>
+
+  {isColliderRs && (
+    <aside class="honesty-note" set:html={`
+      <strong>Scope note.</strong> Low-energy flavor families (kaon, beauty,
+      charm, EDM/neutrino) push the lower KK gauge-boson mass bound near
+      $\\sim 47~\\text{TeV}$ in this repository's quark-sector scan, while the
+      direct-search reach for custodial top partners and KK gauge resonances
+      catalogued here sits near the few-TeV scale.
+      Direct LHC limits and indirect flavor bounds therefore probe qualitatively
+      different mass scales and should not be mapped onto a single
+      $M_{KK}$ axis without explicit model assumptions.
+      See the <a href="/methodology/">methodology page</a> for details.
+    `}></aside>
+  )}
+
+  {allRows.length === 0 ? (
+    <p class="empty-family">No entries in this family.</p>
+  ) : (
+    <EntryTable rows={allRows} showFamily={isSecondaryFamily} showOriginalFamily={isSecondaryFamily} />
+  )}
+
+  <p class="back-link">
+    <a href="/">&larr; All families</a>
+    &middot;
+    <a href="/browse/">Browse / filter all entries</a>
+  </p>
+
+  <script is:inline>
+    (function () {
+      // Click-to-sort on table headers.  Simple ascending/descending toggle,
+      // case-insensitive string compare, numeric for plain numbers.  The
+      // Priority column ranks via data-priority-rank (HIGH=0, MEDIUM=1, LOW=2,
+      // unranked=99) so ascending always shows the strongest constraints first.
+      function init() {
+        var tbl = document.querySelector('table[data-entry-table]');
+        if (!tbl) return;
+        var ths = tbl.querySelectorAll('th[data-sort]');
+        // The server-rendered table is already priority-sorted ascending; mark
+        // that header as the initial sort key so a click flips direction.
+        var lastKey = 'priority';
+        var dir = 1;
+        ths.forEach(function (th) {
+          th.style.cursor = 'pointer';
+          th.addEventListener('click', function () {
+            var key = th.getAttribute('data-sort');
+            if (!key) return;
+            if (key === lastKey) { dir = -dir; } else { dir = 1; lastKey = key; }
+            var tbody = tbl.querySelector('tbody');
+            if (!tbody) return;
+            var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var attr = 'data-' + key
+              .replace('process_id','process-id')
+              .replace('fact_check_verdict','verdict')
+              .replace('implementation_difficulty','difficulty')
+              .replace('code_coverage_status','coverage');
+            var numericAttr = (key === 'priority') ? 'data-priority-rank' : null;
+            rows.sort(function (a, b) {
+              if (numericAttr) {
+                var na = parseFloat(a.getAttribute(numericAttr));
+                var nb = parseFloat(b.getAttribute(numericAttr));
+                if (isNaN(na)) na = 99;
+                if (isNaN(nb)) nb = 99;
+                if (na === nb) {
+                  // Stable tiebreak by process_id ascending.
+                  var pa = a.getAttribute('data-process-id') || '';
+                  var pb = b.getAttribute('data-process-id') || '';
+                  return pa < pb ? -1 : pa > pb ? 1 : 0;
+                }
+                return (na - nb) * dir;
+              }
+              var av = a.getAttribute(attr) || '';
+              var bv = b.getAttribute(attr) || '';
+              if (!av && !bv) {
+                var idx = Array.prototype.indexOf.call(th.parentNode.children, th);
+                av = (a.children[idx]?.textContent || '').trim().toLowerCase();
+                bv = (b.children[idx]?.textContent || '').trim().toLowerCase();
+              }
+              if (av === bv) return 0;
+              return av > bv ? dir : -dir;
+            });
+            rows.forEach(function (r) { tbody.appendChild(r); });
+            ths.forEach(function (x) { x.classList.remove('th-sorted-asc','th-sorted-desc'); });
+            th.classList.add(dir > 0 ? 'th-sorted-asc' : 'th-sorted-desc');
+          });
+        });
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    })();
+  </script>
+</BaseLayout>

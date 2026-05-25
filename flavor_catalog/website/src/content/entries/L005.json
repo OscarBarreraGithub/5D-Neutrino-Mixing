@@ -1,0 +1,328 @@
+{
+  "process_id": "L005",
+  "family": "charged_lepton",
+  "family_original": "charged_lepton",
+  "tier": "PRIMARY",
+  "standard_notation": "R_{\\mu e}^{\\rm Ti}",
+  "process_name": "Coherent muon-to-electron conversion in titanium",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Missing implementation needs a new coherent mu-e conversion observable, lepton-quark Wilson/operator convention, titanium target nuclear overlap and capture inputs, and likely EFT matching/running shared with mu->e gamma and mu->3e.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "required_grep_commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "targeted_grep_commands": [
+      "rg -n \"mu.?-?e.?conversion|mu.?to.?e.?conversion|muon.?to.?electron|Mu2e|mu2e|COMET|comet|SINDRUM|R_mu.?e|Rmu.?e|conversion.*titanium|titanium.*conversion|Ti.*conversion\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "evidence": [
+      "Targeted L005 grep returned no hits in the required code directories.",
+      "Generic conversion hits are unit-conversion or bag-parameter-conversion internals, not mu-e conversion observables.",
+      "flavorConstraints/muToEGamma.py:75 defines check_mu_to_e_gamma, an adjacent dipole-only LFV checker.",
+      "scanParams/scan.py:524 calls check_mu_to_e_gamma in scans; no conversion observable is evaluated."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Mu2eTDR2015:L005:program_improvement_context",
+      "observable": "Mu2e coherent mu- N -> e- N program improvement context",
+      "value": 4,
+      "uncertainty": null,
+      "units": "orders of magnitude improvement beyond previous published conversion limits",
+      "display": null,
+      "year": 2015,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1501.05241",
+      "snapshot_path": "flavor_catalog/references/L005/mu2e_tdr_arxiv1501_05241.txt",
+      "sha256": "da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "COMETPhaseITDR2020:L005:single_event_sensitivity",
+      "observable": "COMET Phase-I Al coherent mu- N -> e- N single-event sensitivity",
+      "value": 3.1e-15,
+      "uncertainty": null,
+      "units": "conversion ratio single-event sensitivity",
+      "display": null,
+      "year": 2020,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1812.09018",
+      "snapshot_path": "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt",
+      "sha256": "f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "COMETPhaseITDR2020:L005:expected_upper_limit_90cl",
+      "observable": "COMET Phase-I Al coherent mu- N -> e- N expected upper limit",
+      "value": 7e-15,
+      "uncertainty": null,
+      "units": "conversion ratio upper limit",
+      "display": null,
+      "year": 2020,
+      "experiment": null,
+      "source_url": "https://arxiv.org/abs/1812.09018",
+      "snapshot_path": "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt",
+      "sha256": "f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "source": "Csaki-Falkowski-Weiler 2008 RS flavor baseline",
+    "arxiv_id": "0804.1954",
+    "year": 2008,
+    "source_url": "https://arxiv.org/abs/0804.1954",
+    "access_date": "2026-05-16",
+    "snapshot_path": "flavor_catalog/references/L005/cfw2008_arxiv0804_1954.txt",
+    "sha256": "4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba",
+    "note": "Theory baseline/provenance only; not a measured observable and not a pdg_or_equivalent value."
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": [
+    {
+      "source": "Mu2e Technical Design Report",
+      "arxiv_id": "1501.05241",
+      "year": 2015,
+      "target_material": "Al",
+      "observable": "coherent mu- N -> e- N conversion",
+      "quoted_improvement": "approximately four orders of magnitude better than the current world's best limits",
+      "source_url": "https://arxiv.org/abs/1501.05241",
+      "access_date": "2026-05-16",
+      "snapshot_path": "flavor_catalog/references/L005/mu2e_tdr_arxiv1501_05241.txt",
+      "sha256": "da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831",
+      "note": "Program context only; not a titanium measurement."
+    },
+    {
+      "source": "COMET Phase-I Technical Design Report",
+      "arxiv_id": "1812.09018",
+      "year": 2020,
+      "target_material": "Al",
+      "observable": "coherent mu- N -> e- N conversion",
+      "sensitivity_goal": 3.1e-15,
+      "expected_upper_limit_90cl": 7e-15,
+      "improvement_factor": 100,
+      "expected_background_events": 0.032,
+      "source_url": "https://arxiv.org/abs/1812.09018",
+      "access_date": "2026-05-16",
+      "snapshot_path": "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt",
+      "sha256": "f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450",
+      "note": "Program context only; not a titanium measurement."
+    }
+  ],
+  "source_shas": {
+    "cfw2008_arxiv0804_1954.txt": "sha256:4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba",
+    "comet_phase_i_tdr_arxiv1812_09018.txt": "sha256:f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450",
+    "mu2e_tdr_arxiv1501_05241.txt": "sha256:da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831",
+    "pdg2026_muon_listing_s004_ti_conversion.txt": "sha256:41061ed0e0e6c3a8e54ff2985d48347e0c7128f82e87a69e8831842e53f5aa52",
+    "sindrumii_1993_titanium_crossref.txt": "sha256:fc1354e78154dc9a8abb2b85631428f5d20c1c4fb1822037444b15fd249146f8"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:04:48-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:04:48-04:00",
+      "agent_id": "PKA-L005",
+      "reason": "Initial L005 PKA source extraction and draft sidecar."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T14:04:48-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T14:04:48-04:00",
+      "agent_id": "PKA-L005",
+      "reason": "PKA draft, source snapshots, code-coverage grep, and worklog completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:23:54-04:00",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:23:54-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for batch wa_w5a_charged_lepton_edm."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T14:44:30-04:00",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T14:44:30-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "reason": "Checker ca_w5a_charged_lepton_edm found a strict CHK-1 metadata-placement issue.",
+      "issues": [
+        "CHK-1: L005.tex quotes Mu2e four-orders context and COMET Phase-I 3.1e-15 / 7.0e-15 / 90% numerical prospect claims, but those values are in post_2008_developments rather than pdg_or_equivalent entries with the required per-claim metadata."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:15:17-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:15:17-04:00",
+      "agent": "WA-v2",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "WA cycle 2 addressed CA CHK-1 by adding pdg_or_equivalent.values metadata for the flagged Mu2e and COMET projection/context numbers."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T15:30:46-04:00",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T15:30:46-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "cycle": 2,
+      "reason": "Checker cycle 2 ca_w5a_charged_lepton_edm_v2 verified WA-v2 traceability and checklist items CHK-1..CHK-8."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-charged_lepton",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Measured limits and prospect values matched fetched sources or local snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(R_{\\mu e}^{\\rm Ti} =\n\\Gamma(\\mu^-{\\rm Ti}\\to e^-{\\rm Ti})/\\Gamma_{\\rm capture}(\\mu^-{\\rm Ti})\\).\nThis entry covers coherent neutrinoless muon-to-electron conversion in a\ntitanium target.  The SINDRUM II titanium result should be kept separate from\naluminum and gold conversion limits because nuclear overlap and capture inputs\nare target-dependent.",
+    "pdg_prose": "The sidecar block \\texttt{pdg\\_or\\_equivalent.primary\\_current\\_limit}, from\nthe PDG live muon listing generated on 2026-05-14 and accessed on 2026-05-16,\ngives\n\\[\n  R_{\\mu e}^{\\rm Ti}<4.3\\times10^{-12}\\qquad (90\\%\\ {\\rm C.L.}) .\n\\]\nThe PDG line identifies the source as DOHMEN 93, technique SPEC, comment\nSINDRUM II, and notes that the quoted limit assumes conversion to the nuclear\nground state.  The local minimal snapshot is\n\\texttt{flavor\\_catalog/references/L005/pdg2026\\_muon\\_listing\\_s004\\_ti\\_conversion.txt};\nthe SINDRUM II publication metadata is snapshotted separately in\n\\texttt{flavor\\_catalog/references/L005/sindrumii\\_1993\\_titanium\\_crossref.txt}.",
+    "relevance": "In a warped lepton-flavor extension, \\(\\mu-e\\) conversion probes lepton-quark\ncontact operators, flavor-changing \\(Z\\)-like couplings, scalar currents, and\ndipoles.  It is therefore complementary to \\(\\mu\\to e\\gamma\\), which tests only\nthe dipole lane in the current repository.  Titanium is useful historically\nbecause it is a real published conversion target, but its interpretation is\nnot target-universal.",
+    "post_2008": "No newer titanium-target measurement was found in the PDG stream used here\nafter the \\texttt{CFW2008} RS-flavor baseline.  The main developments are\nprospective aluminum programs: the sidecar \\texttt{post\\_2008\\_developments}\nentry for the Mu2e TDR records a coherent \\(\\mu^-N\\to e^-N\\) program aiming\nroughly four orders of magnitude beyond previous published conversion limits,\nand the COMET Phase-I entry records an aluminum sensitivity goal\n\\(3.1\\times10^{-15}\\) with an expected \\(90\\%\\) upper limit\n\\(7.0\\times10^{-15}\\).  These are not titanium measurements; they explain why\nthe Ti number is now primarily a legacy benchmark and target-comparison input.",
+    "validity": "The experimental statement is robust as a null search normalized to the\nordinary muon-capture rate in titanium.  The mapping to RS parameters is\nmodel-dependent: dipole, vector, and scalar amplitudes can interfere, and the\nnuclear overlap integrals and capture normalization are target-specific.\nDirect comparison with gold or aluminum therefore requires an operator basis\nand nuclear-convention choice.",
+    "code_coverage_prose": "\\textbf{NO.}  The required greps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no SINDRUM, Mu2e, COMET, \\(R_{\\mu e}\\), titanium\nconversion, or general \\(\\mu-e\\)-conversion implementation.  The only adjacent\ncharged-LFV code is the dipole-only \\(\\mu\\to e\\gamma\\) checker at\n\\texttt{flavorConstraints/muToEGamma.py}:75, called by the scan at\n\\texttt{scanParams/scan.py}:524.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A production constraint needs a new coherent conversion\nobservable, lepton-quark Wilson coefficients, titanium nuclear overlap and\ncapture inputs, and likely EFT matching/running shared with \\(\\mu\\to e\\gamma\\)\nand \\(\\mu\\to3e\\).  This is a new target-dependent mode calculation, not a new\nlimit for the existing dipole checker.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{PDG2026\\_MuonTiConversion}, \\texttt{SINDRUMII1993\\_TitaniumMuE},\n\\texttt{Mu2eTDR2015}, \\texttt{COMETPhaseITDR2020}, and \\texttt{CFW2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/charged_lepton/L005.yaml",
+  "source_tex": "flavor_catalog/processes/charged_lepton/L005.tex",
+  "worklog_path": "flavor_catalog/worklogs/L005/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:53:04Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 1,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "Mu2eTDR2015:L005:program_improvement_context",
+        "source_url": "https://arxiv.org/abs/1501.05241",
+        "snapshot_path": "flavor_catalog/references/L005/mu2e_tdr_arxiv1501_05241.txt",
+        "sha256": "da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "4",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 4,
+                "context": "L1: Source snapshot: arXiv metadata and abstract for the Mu2e Technical Design Report\nL2: Process: L005, mu-e conversion in titanium\nL3: Access date: 2026-05-16\nL4: URL: https://arxiv.org/abs/1501.05241\nL5: arXiv id: 1501.05241\nL6: arXiv DOI: 10.48550/arXiv.1501.05241\nL7: \n"
+              },
+              {
+                "line_number": 5,
+                "context": "L2: Process: L005, mu-e conversion in titanium\nL3: Access date: 2026-05-16\nL4: URL: https://arxiv.org/abs/1501.05241\nL5: arXiv id: 1501.05241\nL6: arXiv DOI: 10.48550/arXiv.1501.05241\nL7: \nL8: Title:\n"
+              },
+              {
+                "line_number": 6,
+                "context": "L3: Access date: 2026-05-16\nL4: URL: https://arxiv.org/abs/1501.05241\nL5: arXiv id: 1501.05241\nL6: arXiv DOI: 10.48550/arXiv.1501.05241\nL7: \nL8: Title:\nL9: Mu2e Technical Design Report\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "COMETPhaseITDR2020:L005:single_event_sensitivity",
+        "source_url": "https://arxiv.org/abs/1812.09018",
+        "snapshot_path": "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt",
+        "sha256": "f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "3.1e-15",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: Minimal extracted values from the arXiv abstract:\nL18: COMET Phase-I searches for neutrinoless conversion of muons into electrons in\nL19: the field of an aluminium nucleus, mu- N -> e- N. The experimental sensitivity\nL20: goal is 3.1 x 10^-15, with a 90% upper limit on the branching ratio of\nL21: 7 x 10^-15. The abstract describes this as a factor of 100 improvement over\nL22: the existing limit and quotes an expected background of 0.032 events.\nL23: \n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "COMETPhaseITDR2020:L005:expected_upper_limit_90cl",
+        "source_url": "https://arxiv.org/abs/1812.09018",
+        "snapshot_path": "flavor_catalog/references/L005/comet_phase_i_tdr_arxiv1812_09018.txt",
+        "sha256": "f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "7e-15",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 21,
+                "context": "L18: COMET Phase-I searches for neutrinoless conversion of muons into electrons in\nL19: the field of an aluminium nucleus, mu- N -> e- N. The experimental sensitivity\nL20: goal is 3.1 x 10^-15, with a 90% upper limit on the branching ratio of\nL21: 7 x 10^-15. The abstract describes this as a factor of 100 improvement over\nL22: the existing limit and quotes an expected background of 0.032 events.\nL23: \nL24: Use in L005:\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Published titanium conversion bound is weaker and dominated by Au/Al.",
+  "priority_rationale_full": "The titanium SINDRUM II limit is a real coherent-conversion bound, but it is\nweaker than the gold benchmark and far behind projected aluminum reach. Its\nRS interpretation needs the same target-specific operator and nuclear inputs.\nFor prioritizing anarchic RS scans it is mainly a historical cross-check, not\nan independent leading constraint."
+}

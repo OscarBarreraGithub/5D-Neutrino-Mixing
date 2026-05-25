@@ -1,0 +1,196 @@
+{
+  "process_id": "B016",
+  "family": "beauty",
+  "family_original": "beauty",
+  "tier": "PRIMARY",
+  "standard_notation": "B -> K ell+ ell-",
+  "process_name": "Exclusive B -> K ell+ ell- branching fractions",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": null,
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "evidence": [
+      "quarkConstraints/modern/phenomenology.py:23 lists only epsilon_K, K, B_d, B_s, and D0 as modern phenomenology systems.",
+      "flavorConstraints/muToEGamma.py:75 implements check_mu_to_e_gamma; no rare B semileptonic backend is present in flavorConstraints.",
+      "Required greps over quarkConstraints, qcd, flavorConstraints, neutrinos, yukawa, warpConfig, solvers, scanParams, and tests found Delta F = 2 and mu -> e gamma support, but no B -> K ell ell, b -> s ell ell, C9, C10, or R_K implementation."
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n -e 'B_to_K' -e 'BtoK' -e 'B -> K' -e 'B\\\\s*to\\\\s*K' -e 'b.?->.?s.?ell' -e 'C9' -e 'C10' -e 'R_K' -e 'Bplus' -e 'Kplus' quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": {
+    "key": "CsakiFalkowskiWeiler2008:CompositeFlavor",
+    "arxiv_id": "0804.1954",
+    "snapshot_path": "flavor_catalog/references/B016/cfw_0804_1954_rs_flavor.txt"
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "babar_0807_4119_BtoKll.txt": "sha256:9befb573f3193d7cb5f584c576f0d3a7da3691d65f59b5ff1316ff6cd126dc8e",
+    "belle_1908_01848_BtoKll.txt": "sha256:608ac260e3a8236c33bd0a84a8454cefcede514cf5e383d6b9cbdf8f9ec9b430",
+    "cfw_0804_1954_rs_flavor.txt": "sha256:1f8556acd6364a95e74cc559b1f18cba952982a50d9366d22f6d7f23714fa8a9",
+    "hflav_dec2025_B0_to_K0_ll.txt": "sha256:44551ba39055e7a12e74a5c97de51e8ef651139a515a17bf4becbc6b45c41281",
+    "hflav_dec2025_Bplus_to_Kplus_ll.txt": "sha256:d57204eb4634e0ad43be577e1efc1ed874cdd586452f7b0b796c210191c6da25",
+    "lhcb_1403_8044_BtoKmumu.txt": "sha256:9edc39b83c07966d83264dfec5866a8e68856a6dafd943747352ed84013e7611"
+  },
+  "source_shas_count": 6,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T15:30:06-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T15:30:06-04:00",
+      "agent_id": "PKA-B016",
+      "reason": "initial PKA draft deposit for B016 exclusive B -> K ell ell"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:54:12-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:54:12-04:00",
+      "agent_id": "WA",
+      "reason": "Writer polish completed for WA batch wa_w6_beauty."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T16:07:43-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T16:07:43-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_beauty",
+      "issues": [
+        "CHK-1: TeX quotes the two HFLAV branching-fraction values, and the corresponding pdg_or_equivalent.observables entries carry value, uncertainty, source URL, access date, snapshot path, and sha256, but each per-observable value block lacks an explicit year field."
+      ],
+      "reason": "Checker ca_w6_beauty found strict CHK-1 metadata gaps; see flavor_catalog/worklogs/checker/ca_w6_beauty.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T16:17:46-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T16:17:46-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w6_beauty_v2",
+      "reason": "Cycle-2 writer rework addressed ca_w6_beauty CHK-1 metadata-completeness findings."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T16:27:35-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T16:27:35-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_beauty_v2",
+      "reason": "Cycle-2 checker verified CHK-1 through CHK-8 for B016."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:52:00-04:00",
+      "agent": "factcheck-codex-beauty",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "All measured and quoted prediction value claims verified against fetched source pages or local source snapshots."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(B\\to K\\ell^+\\ell^-\\), with \\(\\ell=e,\\mu\\).\nThis entry covers the exclusive pseudoscalar-kaon \\(b\\to s\\ell^+\\ell^-\\)\nbranching fractions, centered on \\(B^+\\to K^+\\ell^+\\ell^-\\) and\n\\(B^0\\to K^0\\ell^+\\ell^-\\).  Lepton-universality ratios are cataloged in\nthe companion \\(B018\\) entry, and vector-kaon angular observables in \\(B017\\).",
+    "pdg_prose": "The canonical measured values are the HFLAV rare-\\(B\\) averages from the end\nof December 2025, accessed on 2026-05-16 and snapshotted locally under\n\\texttt{flavor\\_catalog/references/B016/}.  For source key\n\\texttt{HFLAV2025Dec:BplusToKplusll}, HFLAV quotes\n\\[\n  {\\cal B}(B^+\\to K^+\\ell^+\\ell^-)\n  =(5.76\\pm0.40)\\times10^{-7},\n\\]\nand for source key \\texttt{HFLAV2025Dec:B0ToK0ll},\n\\[\n  {\\cal B}(B^0\\to K^0\\ell^+\\ell^-)\n  =(3.28\\pm0.32)\\times10^{-7}.\n\\]\nBoth values are recorded in \\texttt{B016.yaml} under\n\\texttt{pdg\\_or\\_equivalent}.  HFLAV notes that treatments of charmonium\nintermediate components differ among inputs.",
+    "relevance": "This is a \\(\\Delta B=1\\) flavor-changing neutral-current probe of the same\ndown-sector flavor structure that appears in \\(B_s\\) mixing, but it tests\nsemileptonic and dipole operators rather than four-quark \\(\\Delta F=2\\)\noperators.  In warped or anarchic-flavor models, flavor-changing \\(Z\\) or KK\nelectroweak-gauge couplings and loop dipoles can feed \\(C_7\\), \\(C_9\\),\n\\(C_{10}\\), and primed semileptonic coefficients.  The branching fractions are\ntherefore useful diagnostics of \\(b\\to s\\ell\\ell\\) structure, while the LFU\nratios and \\(K^*\\) angular program carry related but distinct information.",
+    "post_2008": "Since the arXiv:0804.1954 RS-flavor baseline, source key\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}, this channel moved from\nsparse \\(B\\)-factory evidence into precision rare-\\(B\\) phenomenology.  BaBar\nprovided early post-baseline \\(B\\to K^{(*)}\\ell^+\\ell^-\\) asymmetry inputs\n(\\texttt{BaBar2009:BtoKllAsymmetries}).  LHCb measured differential\n\\(B\\to K^{(*)}\\mu^+\\mu^-\\) branching fractions and isospin asymmetries with\nhadron-collider data (\\texttt{LHCb2014:BtoKmumuDifferential}), and Belle\nmeasured both electron and muon \\(B\\to K\\ell\\ell\\) modes together with \\(R_K\\)\n(\\texttt{Belle2021:BtoKllLFU}).  HFLAV now provides current charged and\nneutral exclusive-\\(K\\) branching-fraction averages, while the separate \\(R_K\\)\nupdates shifted the clean LFU-anomaly interpretation toward correlated\nsemileptonic-Wilson-coefficient and hadronic-systematics questions.",
+    "validity": "The HFLAV branching fractions are measured observables and are appropriate for\ncataloging, but using them as hard RS cuts is model-dependent.  A faithful\nconstraint must specify the dilepton \\(q^2\\) regions, charmonium vetoes,\nform-factor inputs, nonlocal charm treatment, correlations with \\(C_7\\) from\n\\(b\\to s\\gamma\\), and correlations with \\(R_K\\) and \\(B\\to K^*\\ell\\ell\\).\nThe entry is therefore a semileptonic \\(\\Delta B=1\\) constraint seed, not a\ndrop-in replacement for a global \\(b\\to s\\ell\\ell\\) fit.",
+    "code_coverage_prose": "\\textbf{NO.}  The modern phenomenology surface lists only\n\\(\\epsilon_K\\), \\(K\\), \\(B_d\\), \\(B_s\\), and \\(D^0\\) systems at\n\\texttt{quarkConstraints/modern/phenomenology.py:23}.  The only live\nlepton-flavor module is \\(\\mu\\to e\\gamma\\), implemented at\n\\texttt{flavorConstraints/muToEGamma.py:75}.  Required greps over the\nimplementation directories found no \\(B\\to K\\ell\\ell\\), \\(b\\to s\\ell\\ell\\),\n\\(C_9\\), \\(C_{10}\\), or \\(R_K\\) backend.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  Integration would require a new \\(\\Delta B=1\\) semileptonic\nHamiltonian, matching to \\(C_7\\), \\(C_9\\), \\(C_{10}\\), and primed operators,\n\\(q^2\\)-bin\nhandling, form factors, nonlocal-charm uncertainties, and experimental\ncovariance support.  The existing \\(\\Delta F=2\\) basis is not enough.",
+    "key_references": "Process-local snapshots: \\texttt{HFLAV2025Dec:BplusToKplusll},\n\\texttt{HFLAV2025Dec:B0ToK0ll}, \\texttt{Belle2021:BtoKllLFU},\n\\texttt{LHCb2014:BtoKmumuDifferential},\n\\texttt{BaBar2009:BtoKllAsymmetries}, and\n\\texttt{CsakiFalkowskiWeiler2008:CompositeFlavor}."
+  },
+  "source_yaml": "flavor_catalog/processes/beauty/B016.yaml",
+  "source_tex": "flavor_catalog/processes/beauty/B016.tex",
+  "worklog_path": "flavor_catalog/worklogs/B016/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:56:20Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "observables[0]",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bu/BR_B+_K+_l+_l-.html",
+        "snapshot_path": "flavor_catalog/references/B016/hflav_dec2025_Bplus_to_Kplus_ll.txt",
+        "sha256": "sha256:d57204eb4634e0ad43be577e1efc1ed874cdd586452f7b0b796c210191c6da25",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B+ -> K+ ell+ ell-) = 5.76 +- +/- 0.40 10^-7",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Relevant table excerpt:\nL10:\nL11: Experiment | Measurement [10^-7] | Delta chi^2 | Reference | Comments\nL12: Average | 5.76 +/- 0.40 | 1.37 | p=0.24 (ndf=1) |\nL13:   Treatment of charmonium intermediate components differs between the results.\nL14: PDG | 4.71 +/- 0.46 | | pdgLive |\nL15: BELLE | 5.99^{+0.45}_{-0.43} +/- 0.14 |\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "observables[1]",
+        "source_url": "https://hflav-eos.web.cern.ch/hflav-eos/rare/Dec2025/html/radll/Bd/BR_B0_K0_l+_l-.html",
+        "snapshot_path": "flavor_catalog/references/B016/hflav_dec2025_B0_to_K0_ll.txt",
+        "sha256": "sha256:44551ba39055e7a12e74a5c97de51e8ef651139a515a17bf4becbc6b45c41281",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "fallback_value_uncertainty",
+            "anchor_string": "BR(B0 -> K0 ell+ ell-) = 3.28 +- +/- 0.32 10^-7",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: Relevant table excerpt:\nL10:\nL11: Experiment | Measurement [10^-7] | Delta chi^2 | Reference | Comments\nL12: Average | 3.28 +/- 0.32 | 0.76 | p=0.68 (ndf=2) |\nL13:   Treatment of charmonium intermediate components differs between the results.\nL14: PDG | 3.29^{+0.63}_{-0.55} | | pdgLive |\nL15: LHCb | 3.27 +/- 0.34 +/- 0.17 | 0.00 |\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Exclusive B->Kll rates are dominated by broader b->sll fits",
+  "priority_rationale_full": "B -> K l+ l- branching fractions probe semileptonic b-s FCNC operators, but the standalone rates carry form-factor, q2-bin, and nonlocal-charm dependence. They are best interpreted inside a global b -> s l l fit or alongside LFU ratios. As a separate catalog entry they are a useful seed and cross-check, not an independent leading RS constraint."
+}

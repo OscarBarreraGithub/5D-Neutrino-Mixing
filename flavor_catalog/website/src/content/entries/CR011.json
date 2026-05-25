@@ -1,0 +1,393 @@
+{
+  "process_id": "CR011",
+  "family": "collider_rs",
+  "family_original": "collider_rs",
+  "tier": "PRIMARY",
+  "standard_notation": "pp -> W_L W_L W_L W_L; experimentally pp -> jj W_L^+/- W_L^+/-",
+  "process_name": "Longitudinal vector-boson scattering (strong-EWSB sector probe)",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "A live collider-RS constraint needs a full collider likelihood or recast workflow, including signal generation, detector/selection acceptance, polarization templates, model-dependent branching ratios, and external tools such as CheckMATE, MadAnalysis5, or SModelS where applicable.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"VBS|vector[- ]boson scattering|longitudinal|polariz|quartic|aQGC|WWjj|WZjj|ZZjj|same-sign|diboson|collider\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"M_KK|m_kk|Lambda_IR|deltaf2_max_ratio|evaluate_delta_f2_constraints|default_quark_m_kk_from_lambda_ir\" quarkConstraints/scan.py quarkConstraints/validation.py quarkConstraints/modern/evaluation.py quarkConstraints/scales.py scanParams/scan.py"
+    ],
+    "findings": [
+      "The VBS/longitudinal/aQGC/collider grep returned no matches in the searched implementation paths.",
+      "Adjacent evidence shows M_KK bookkeeping and low-energy flavor evaluation only: quarkConstraints/scan.py:359 maps Lambda_IR to M_KK; quarkConstraints/scan.py:377 evaluates Delta F=2 constraints; quarkConstraints/scan.py:379 passes KK-gluon couplings into the Delta F=2 evaluator; scanParams/scan.py:528 passes M_KK into the mu -> e gamma LFV check."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "ATLAS2025:CR011:fiducial_sigma_WLWL_same_sign_upper_limit",
+      "observable": "Fiducial cross-section upper limit for pp -> jj W_L^+/- W_L^+/-",
+      "value": 0.45,
+      "uncertainty": null,
+      "units": "fb",
+      "display": "sigma_fid(pp -> jj W_L^+/- W_L^+/-) < 0.45 fb (95% CL)",
+      "year": 2025,
+      "experiment": "ATLAS",
+      "source_url": "https://arxiv.org/abs/2503.11317",
+      "snapshot_path": "flavor_catalog/references/CR011/atlas_2025_arxiv2503_11317.txt",
+      "sha256": "sha256:449b1c2c9f28bfd3200e3fd3c7d8247bbe5495cc8fee79c9ae51141c086f258e",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "upper_limit"
+    },
+    {
+      "label": "CMS2020:CR011:fiducial_sigma_WLWL_same_sign_upper_limit",
+      "observable": "Production cross-section upper limit for longitudinally polarized same-sign W^+/- W^+/- pairs",
+      "value": 1.17,
+      "uncertainty": null,
+      "units": "fb",
+      "display": "sigma(pp -> jj W_L^+/- W_L^+/-) < 1.17 fb (95% CL)",
+      "year": 2020,
+      "experiment": "CMS",
+      "source_url": "https://arxiv.org/abs/2009.09429",
+      "snapshot_path": "flavor_catalog/references/CR011/cms_2020_arxiv2009_09429.txt",
+      "sha256": "sha256:6ceb6660bd956773fe7809a07ff296cad8e183bb0c16ea35813a39fc5ed724fd",
+      "access_date": "2026-05-17",
+      "cl": "95% CL",
+      "limit_type": "upper_limit"
+    }
+  ],
+  "supporting_measurements": {
+    "atlas_2025_longitudinal_same_sign_ww": {
+      "experiment": "ATLAS",
+      "arxiv_id": "2503.11317",
+      "year": 2025,
+      "role": "Current promoted direct longitudinal same-sign WW VBS fiducial upper limit.",
+      "dataset_metadata": {
+        "integrated_luminosity": {
+          "value": 140,
+          "units": "fb^-1"
+        },
+        "sqrt_s": {
+          "value": 13,
+          "units": "TeV"
+        },
+        "run": "LHC Run 2"
+      },
+      "supporting_results": {
+        "at_least_one_longitudinal_W_significance": {
+          "observed": 3.3,
+          "expected": 4.0,
+          "units": "standard deviations"
+        }
+      },
+      "source_url": "https://arxiv.org/abs/2503.11317",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR011/atlas_2025_arxiv2503_11317.txt",
+      "sha256_of_local_snapshot": "sha256:449b1c2c9f28bfd3200e3fd3c7d8247bbe5495cc8fee79c9ae51141c086f258e"
+    },
+    "cms_2020_polarized_same_sign_ww": {
+      "experiment": "CMS",
+      "arxiv_id": "2009.09429",
+      "year": 2020,
+      "role": "First CMS polarized same-sign WW cross-section measurement and historical longitudinal-WW limit comparator.",
+      "dataset_metadata": {
+        "integrated_luminosity": {
+          "value": 137,
+          "units": "fb^-1"
+        },
+        "sqrt_s": {
+          "value": 13,
+          "units": "TeV"
+        }
+      },
+      "supporting_results": {
+        "at_least_one_longitudinal_W_significance": {
+          "observed": 2.3,
+          "expected": 3.1,
+          "units": "standard deviations"
+        }
+      },
+      "source_url": "https://arxiv.org/abs/2009.09429",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR011/cms_2020_arxiv2009_09429.txt",
+      "sha256_of_local_snapshot": "sha256:6ceb6660bd956773fe7809a07ff296cad8e183bb0c16ea35813a39fc5ed724fd"
+    },
+    "atlas_2026_aqgc_combination": {
+      "experiment": "ATLAS",
+      "arxiv_id": "2603.18630",
+      "year": 2026,
+      "role": "Current coefficient-level aQGC/EFT combination across VBS and triboson measurements; not promoted to pdg_or_equivalent.values because this draft does not quote individual coefficient intervals.",
+      "source_url": "https://arxiv.org/abs/2603.18630",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR011/atlas_2026_arxiv2603_18630.txt",
+      "sha256_of_local_snapshot": "sha256:573b644fe6a8b077950de75ab698b9e4218a80788455fbbf0a534eb43dfc9707"
+    }
+  },
+  "paper_era_reference": {
+    "contino_2011_composite_higgs_resonances": {
+      "source": "Contino, Marzocca, Pappadopulo, and Rattazzi, JHEP 10 (2011) 081",
+      "arxiv_id": "1109.1570",
+      "year": 2011,
+      "context": "Composite-Higgs/RS-adjacent theory reference for resonance effects in high-energy vector-boson scattering; not a measured observable.",
+      "source_url": "https://arxiv.org/abs/1109.1570",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR011/contino_2011_arxiv1109_1570.txt",
+      "sha256_of_local_snapshot": "sha256:e74dfe11a04d26ba28462d1a755612e95ceef5d517a647f5d75f2524cbd20e71"
+    },
+    "quark_scan_methodology_rc1_1": {
+      "source": "docs/quark_scan_methodology_note.tex",
+      "year": 2026,
+      "context": "Repo-local low-energy flavor-scan reference for the M_KK lower-bound comparison.",
+      "values": [
+        {
+          "observable": "M_KK^min p50 at g_s*=3",
+          "value": 47.26,
+          "units": "TeV",
+          "line_evidence": [
+            "docs/quark_scan_methodology_note.tex:587",
+            "docs/quark_scan_methodology_note.tex:931"
+          ]
+        },
+        {
+          "observable": "M_KK^min 95% acceptance at g_s*=3",
+          "value": 127.13,
+          "units": "TeV",
+          "line_evidence": [
+            "docs/quark_scan_methodology_note.tex:587",
+            "docs/quark_scan_methodology_note.tex:654"
+          ]
+        }
+      ]
+    }
+  },
+  "theory_context": null,
+  "auxiliary_theory_inputs": {
+    "pdg_2025_qgc_review": {
+      "source": "PDG Review of Particle Physics 2025, Anomalous W/Z Quartic Couplings",
+      "year": 2025,
+      "context": "Framework reference for aQGC conventions and EFT-basis model dependence; not a single CR011 measured observable.",
+      "source_url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-wz-quartic-couplings.pdf",
+      "access_date": "2026-05-17",
+      "snapshot_path": "flavor_catalog/references/CR011/pdg2025_wz_quartic_couplings.txt",
+      "sha256_of_local_snapshot": "sha256:a77a9cb13d7bd8330448250e65706ae13a92375c029c6b89b5817d062e378c5b"
+    }
+  },
+  "post_2010_developments": [
+    {
+      "key": "ATLAS2017_WWjj_aQGC",
+      "arxiv_id": "1611.02428",
+      "year": 2017,
+      "why_it_matters": "Established the same-sign WWjj VBS/aQGC Run-1/early LHC analysis path and separated electroweak from strong production regions.",
+      "snapshot_path": "flavor_catalog/references/CR011/atlas_2017_arxiv1611_02428.txt",
+      "sha256": "sha256:6621ca6fbd62fd964001e67855bbd567238f593f0bf114d4e55854fb325922e8"
+    },
+    {
+      "key": "ATLAS2020_ZZjj_observation",
+      "arxiv_id": "2004.10612",
+      "year": 2020,
+      "why_it_matters": "Extended the VBS program to rare ZZjj electroweak production, probing a neutral diboson channel with different backgrounds.",
+      "snapshot_path": "flavor_catalog/references/CR011/atlas_2020_arxiv2004_10612.txt",
+      "sha256": "sha256:aaf1506bbc0dc1d3416bc523699f208709eaccfdf0fa4ced39867ad255977646"
+    },
+    {
+      "key": "CMS2020_polarized_WWjj",
+      "arxiv_id": "2009.09429",
+      "year": 2020,
+      "why_it_matters": "First CMS polarized same-sign WWjj measurement; supplied the historical 1.17 fb longitudinal-WW upper limit.",
+      "snapshot_path": "flavor_catalog/references/CR011/cms_2020_arxiv2009_09429.txt",
+      "sha256": "sha256:6ceb6660bd956773fe7809a07ff296cad8e183bb0c16ea35813a39fc5ed724fd"
+    },
+    {
+      "key": "ATLAS2024_Run2_WWjj_aQGC",
+      "arxiv_id": "2312.00420",
+      "year": 2024,
+      "why_it_matters": "Full Run-2 same-sign WWjj fiducial/differential measurement with aQGC and same-sign H++ VBF interpretations.",
+      "snapshot_path": "flavor_catalog/references/CR011/atlas_2024_arxiv2312_00420.txt",
+      "sha256": "sha256:88c6ac8a9de939c9bee7273743cfcaa7f1a068fc35d8bfa09b7bfcff0ed24744"
+    },
+    {
+      "key": "ATLAS2025_longitudinal_WW",
+      "arxiv_id": "2503.11317",
+      "year": 2025,
+      "why_it_matters": "Current strongest direct longitudinal same-sign WW fiducial cross-section upper limit and first evidence for at least one longitudinal W in same-sign WW VBS.",
+      "snapshot_path": "flavor_catalog/references/CR011/atlas_2025_arxiv2503_11317.txt",
+      "sha256": "sha256:449b1c2c9f28bfd3200e3fd3c7d8247bbe5495cc8fee79c9ae51141c086f258e"
+    },
+    {
+      "key": "ATLAS2026_aQGC_combination",
+      "arxiv_id": "2603.18630",
+      "year": 2026,
+      "why_it_matters": "Current ATLAS combined EFT interpretation of quartic-gauge-coupling-sensitive measurements; coefficient intervals need separate extraction if CR011 is expanded beyond fiducial longitudinal WW limits.",
+      "snapshot_path": "flavor_catalog/references/CR011/atlas_2026_arxiv2603_18630.txt",
+      "sha256": "sha256:573b644fe6a8b077950de75ab698b9e4218a80788455fbbf0a534eb43dfc9707"
+    }
+  ],
+  "source_shas": {
+    "atlas_2017_arxiv1611_02428.txt": "sha256:6621ca6fbd62fd964001e67855bbd567238f593f0bf114d4e55854fb325922e8",
+    "atlas_2020_arxiv2004_10612.txt": "sha256:aaf1506bbc0dc1d3416bc523699f208709eaccfdf0fa4ced39867ad255977646",
+    "atlas_2024_arxiv2312_00420.txt": "sha256:88c6ac8a9de939c9bee7273743cfcaa7f1a068fc35d8bfa09b7bfcff0ed24744",
+    "atlas_2025_arxiv2503_11317.txt": "sha256:449b1c2c9f28bfd3200e3fd3c7d8247bbe5495cc8fee79c9ae51141c086f258e",
+    "atlas_2026_arxiv2603_18630.txt": "sha256:573b644fe6a8b077950de75ab698b9e4218a80788455fbbf0a534eb43dfc9707",
+    "cms_2020_arxiv2009_09429.txt": "sha256:6ceb6660bd956773fe7809a07ff296cad8e183bb0c16ea35813a39fc5ed724fd",
+    "contino_2011_arxiv1109_1570.txt": "sha256:e74dfe11a04d26ba28462d1a755612e95ceef5d517a647f5d75f2524cbd20e71",
+    "pdg2025_wz_quartic_couplings.txt": "sha256:a77a9cb13d7bd8330448250e65706ae13a92375c029c6b89b5817d062e378c5b"
+  },
+  "source_shas_count": 8,
+  "access_dates": [
+    "2026-05-17"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-17T17:25:00-04:00",
+      "from": "DRAFT",
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-17T17:25:00-04:00",
+      "agent": "PKA",
+      "agent_id": "PKA-CR011",
+      "reason": "Initial Wave-9 PKA draft for collider_rs PRIMARY CR011."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T17:45:00-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T17:45:00-04:00",
+      "agent": "WA",
+      "agent_id": "WA",
+      "cycle": 1,
+      "reason": "Writer polish for WA-w9-ew-tail batch; TeX, CHK-1 placement, and code-evidence claims normalized."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-17T18:05:00-04:00",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-17T18:05:00-04:00",
+      "agent": "CA",
+      "agent_id": "CA",
+      "cycle": 1,
+      "reason": "CA-w9-ew-tail cycle 1 found CHK-2 key-reference tokens that do not resolve to source_manifest keys; see flavor_catalog/worklogs/checker/ca_w9_ew_tail.md."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-17T18:06:00-04:00",
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-17T18:06:00-04:00",
+      "agent_id": "WA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 fix: CHK-2: renamed TeX Key references to canonical manifest keys per B023 precedent."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-17T18:19:04-04:00",
+      "agent": "CA-v2",
+      "agent_id": "CA-v2",
+      "cycle": 2,
+      "reason": "Cycle-2 PASS after WA-v2 fix; see flavor_catalog/worklogs/checker/ca_w9_ew_tail_v2.md."
+    },
+    {
+      "state": "OPUS-APPROVED",
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "at": "2026-05-17T19:30:00-04:00",
+      "agent_id": "Opus-round-5",
+      "round_id": "opus_round_005",
+      "reason": "Opus round 5 per-process sign-off for Wave-9 collider_rs PRIMARY entries; CA-verified PASS retained; see flavor_catalog/signoff/round_005_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-17T19:30:01-04:00",
+      "agent_id": "factcheck-codex-collider_rs-w9",
+      "agent": "factcheck-codex-collider_rs-w9",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "reason": "Wave-9 collider_rs family fact-check (factcheck_collider_rs.md)."
+    }
+  ],
+  "sections": {
+    "process": "CR011 covers the strong-electroweak-symmetry-breaking collider tail probed by\nlongitudinal vector-boson scattering.  The assignment shorthand is\n\\(pp\\to W_L W_L W_L W_L\\); experimentally, the cleanest current promoted\nobservable is same-sign \\(W_L^\\pm W_L^\\pm\\) scattering in association with two\nforward jets, \\(pp\\to jj\\,W_L^\\pm W_L^\\pm\\), with leptonic \\(W\\) decays used\nto select the final state.  The process is an EW-precision-tail entry for the\ncustodial/composite electroweak sector, not a quark-flavor amplitude.  In the\ncollider-RS catalog it is the longitudinal-boson scattering counterpart to\nexplicit electroweak KK-resonance searches.",
+    "pdg_prose": "The canonical current limit promoted in the sidecar is the ATLAS Run-2\nlongitudinal same-sign \\(WW\\) result in\n\\texttt{atlas\\_2025\\_arxiv2503\\_11317.txt}.  ATLAS reports the most stringent\nconstraint to date on fully longitudinal same-sign \\(WW\\) production:\n\\[\n  \\sigma_{\\rm fid}\\!\\left(pp\\to jj\\,W_L^\\pm W_L^\\pm\\right)\n  < 0.45~\\mathrm{fb}\\quad(95\\%~\\mathrm{CL}),\n\\]\nwith an expected limit of \\(0.70~\\mathrm{fb}\\).  The same analysis reports\nevidence for production with at least one longitudinally polarized \\(W\\) boson\nat \\(3.3\\sigma\\), using \\(140~\\mathrm{fb}^{-1}\\) of \\(13~\\mathrm{TeV}\\) data.\nFor historical comparison, CMS set\n\\(\\sigma(pp\\to jj\\,W_L^\\pm W_L^\\pm)<1.17~\\mathrm{fb}\\) at \\(95\\%~\\mathrm{CL}\\)\nin \\texttt{cms\\_2020\\_arxiv2009\\_09429.txt}.\n\nThe PDG QGC review snapshot\n\\texttt{pdg2025\\_wz\\_quartic\\_couplings.txt} is used as framework context for\nanomalous-quartic-gauge-coupling conventions.  It does not provide a single\ncombined longitudinal-\\(WW\\) fiducial limit or RS mass exclusion, so no value\nfrom that PDG review is promoted as the CR011 numerical observable.",
+    "relevance": "In custodial RS and composite-Higgs-like completions, longitudinal VBS tests\nthe sector that unitarizes electroweak symmetry breaking: electroweak KK\nvectors, scalar resonances, and the pattern of couplings to \\(W_L\\) and \\(Z_L\\).\nThis is complementary to colored KK-gluon and vectorlike-partner searches.  A\nVBS excess or exclusion constrains the electroweak/composite resonance sector\nonly after specifying the custodial gauge group, the resonance spectrum, the\nbranching fractions into vector bosons versus tops or composite fermions, and\nthe production mechanism.\n\nFor the anarchic-flavor pipeline in this repository, CR011 is not expected to\nbe the leading constraint.  The quark-scan methodology note quotes\n\\(\\Mkk^{\\min}(p50,\\gs=3)=47.26~\\mathrm{TeV}\\) from the low-energy\n\\(\\Delta F=2\\) scan, while direct electroweak VBS reach remains a few-TeV\ncollider cross-check unless a non-anarchic or protected flavor structure\nweakens the flavor bound.  CR011 is therefore useful as a diagnostic of the\nstrong-EWSB sector and as leverage for non-anarchic RS variants, not as a\nreplacement for the active low-energy flavor constraints.",
+    "post_2008": "\\texttt{atlas\\_2017\\_arxiv1611\\_02428.txt} established the LHC same-sign\n\\(WWjj\\) VBS/aQGC program at \\(8~\\mathrm{TeV}\\), separating electroweak and\nstrong production regions and introducing VBS-sensitive anomalous-coupling\nfiducial selections.  \\texttt{atlas\\_2020\\_arxiv2004\\_10612.txt} extended the\nVBS program to rare \\(ZZjj\\) electroweak production, important because neutral\ndiboson scattering tests a different electroweak channel and different\nbackground systematics.\n\n\\texttt{cms\\_2020\\_arxiv2009\\_09429.txt} was the first CMS polarization\nmeasurement in same-sign \\(WWjj\\), setting the \\(1.17~\\mathrm{fb}\\) longitudinal\n\\(WW\\) upper limit used above as the historical comparator.\n\\texttt{atlas\\_2024\\_arxiv2312\\_00420.txt} then provided a full Run-2 ATLAS\nsame-sign \\(WWjj\\) measurement and aQGC interpretation, including differential\ninformation and a same-sign \\(H^{\\pm\\pm}\\) VBF search.  The current\npolarization-specific improvement is the ATLAS 2025 result promoted here.\n\nFor EFT/aQGC context, \\texttt{atlas\\_2026\\_arxiv2603\\_18630.txt} is the current\nATLAS combined interpretation of measurements sensitive to quartic electroweak\ngauge couplings.  Its coefficient intervals are not quoted in this draft\nbecause CR011's promoted observable is the direct longitudinal \\(WW\\) fiducial\ncross-section limit; adding coefficient-level values would require a separate\ntable extraction and a choice of unitarity/positivity convention.",
+    "validity": "The ATLAS/CMS limits are fiducial and polarization-template dependent.  They\nassume the Standard Model electroweak VBS topology, leptonic \\(W\\)-decay event\nselection, and fitted longitudinal/transverse polarization templates.  They do\nnot directly exclude a universal RS \\(M_{KK}\\) value.  A reinterpretation must\nsimulate the chosen custodial-RS spectrum and account for interference with the\nSM VBS amplitude, resonance widths, acceptance, and decay branching fractions.\n\nFor aQGC/EFT statements, the interpretation depends on the operator basis,\nwhether one or several Wilson coefficients are profiled, and whether unitarity\nconstraints are imposed.  For explicit RS resonances, the assumptions differ\nagain: a narrow electroweak vector resonance decaying visibly to \\(VV\\) is much\nmore constrained by VBS-like searches than a broad resonance with dominant\ndecays to top partners, heavy fermions, or other composite-sector states.  This\nentry should therefore be treated as collider-sector cross-check information\nuntil a dedicated RS likelihood or recast is attached.",
+    "code_coverage_prose": "\\textbf{NO}.  A targeted grep for VBS, longitudinal-polarization, diboson, and\naQGC terms across \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} returned no matches.  Adjacent code evidence shows KK-scale\nbookkeeping and low-energy flavor evaluation, not collider direct-search\nfiltering: \\texttt{quarkConstraints/scan.py:359} maps\n\\(\\Lambda_{\\rm IR}\\) to \\(M_{KK}\\), \\texttt{quarkConstraints/scan.py:377}\nevaluates \\(\\Delta F=2\\) constraints, and \\texttt{scanParams/scan.py:528}\npasses \\(M_{KK}\\) into the lepton-flavor-violation check.  No ATLAS/CMS,\nVBS, \\(WWjj\\), \\(ZZjj\\), polarization, or collider-likelihood module is\npresent in the searched paths.",
+    "implementation_difficulty_prose": "\\textbf{HIGH}.  A live CR011 constraint needs more than a scalar threshold.  It\nrequires a collider reinterpretation stack: event generation for the chosen\ncustodial-RS resonance spectrum, showering and detector/selection acceptance,\npolarization-sensitive templates or an external recast tool such as CheckMATE,\nMadAnalysis5, or SModelS where applicable, and a likelihood interface for the\nATLAS/CMS fiducial regions.  EFT/aQGC coefficient comparisons are simpler to\nrecord, but mapping them into a concrete RS mass bound is model dependent and\nnot implemented in this repository.",
+    "key_references": "\\texttt{ATLAS2025\\_LongitudinalWW}; \\texttt{CMS2020\\_PolarizedSameSignWW};\n\\texttt{ATLAS2024\\_SameSignWWjj}; \\texttt{ATLAS2020\\_ZZjj};\n\\texttt{ATLAS2017\\_WWjjAQGC}; \\texttt{ATLAS2026\\_AQGCCombination};\n\\texttt{PDG2025\\_WZQuarticCouplings};\n\\texttt{Contino2011\\_CompositeHiggsResonances}."
+  },
+  "source_yaml": "flavor_catalog/processes/collider_rs/CR011.yaml",
+  "source_tex": "flavor_catalog/processes/collider_rs/CR011.tex",
+  "worklog_path": "flavor_catalog/worklogs/CR011/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 0,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "ATLAS2025:CR011:fiducial_sigma_WLWL_same_sign_upper_limit",
+        "source_url": "https://arxiv.org/abs/2503.11317",
+        "snapshot_path": "flavor_catalog/references/CR011/atlas_2025_arxiv2503_11317.txt",
+        "sha256": "sha256:449b1c2c9f28bfd3200e3fd3c7d8247bbe5495cc8fee79c9ae51141c086f258e",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "sigma_fid(pp -> jj W_L^+/- W_L^+/-) < 0.45 fb (95% CL)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 27,
+                "context": "L24: (expected) significance of the production with at least one longitudinally\nL25: polarized W boson is 3.3 (4.0) standard deviations.\nL26:\nL27: An observed (expected) 95% confidence level upper limit of 0.45 (0.70) fb is\nL28: reported on the fiducial production cross section of two longitudinally\nL29: polarized same-sign W bosons."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "CMS2020:CR011:fiducial_sigma_WLWL_same_sign_upper_limit",
+        "source_url": "https://arxiv.org/abs/2009.09429",
+        "snapshot_path": "flavor_catalog/references/CR011/cms_2020_arxiv2009_09429.txt",
+        "sha256": "sha256:6ceb6660bd956773fe7809a07ff296cad8e183bb0c16ea35813a39fc5ed724fd",
+        "access_date": "2026-05-17",
+        "anchors": [
+          {
+            "anchor_field": "display",
+            "anchor_string": "sigma(pp -> jj W_L^+/- W_L^+/-) < 1.17 fb (95% CL)",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 25,
+                "context": "L22: muons, moderate missing transverse momentum, and two jets with a large rapidity\nL23: separation and a large dijet mass to enhance the contribution of same-sign\nL24: W^+/- W^+/- scattering events. An observed (expected) 95% confidence level\nL25: upper limit of 1.17 (0.88) fb is set on the production cross section for\nL26: longitudinally polarized same-sign W^+/- W^+/- boson pairs.\nL27:\nL28: The electroweak production of same-sign W^+/- W^+/- boson pairs with at least"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "VBS is a strong-sector diagnostic, not a mass-setting bound.",
+  "priority_rationale_full": "Longitudinal VBS constraints are fiducial or EFT/aQGC-style observables\nrather than direct RS mass exclusions. They test the strong electroweak\nsector only after a detailed resonance spectrum and interference model is\nsupplied. Current scan-level constraining power is therefore auxiliary."
+}

@@ -1,0 +1,11 @@
+---
+process_id: CR013
+constraint_priority: LOW
+priority_rationale_short: "Diphoton graviton row is often suppressed in bulk RS."
+priority_rationale_full: |
+  Diphoton spin-2 limits can reach several TeV in RS1-style benchmarks, but
+  bulk-RS photon and light-fermion couplings may be suppressed. The row
+  overlaps with the broader graviton entry and is highly benchmark
+  dependent. It is best treated as an auxiliary channel-specific check.
+ranked_by: codex-gpt-5.5-xhigh-batch-P5
+ranked_at: 2026-05-18T01:37:22-04:00

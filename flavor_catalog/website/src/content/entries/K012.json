@@ -1,0 +1,315 @@
+{
+  "process_id": "K012",
+  "family": "kaon",
+  "family_original": "kaon",
+  "tier": "PRIMARY",
+  "standard_notation": "K_S^0 -> mu+ mu-",
+  "process_name": "Short-lived neutral-kaon dimuon decay",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires a new Delta S=1 rare-kaon semileptonic/dilepton observable, Wilson/operator mapping for s -> d mu+ mu-, and a treatment of long-distance and K_S/K_L interference effects; the existing Delta F=2 SLL/SLR/VLL/VRR/LR basis does not cover this decay.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "grep_commands": [
+      "rg -n --glob \"!*.ipynb\" \"K_S|K0S|K_S0|K0_S|K\\^0_?S|K_L|K0_L|mu\\+\\s*mu|mu\\+.*mu\\-|mumu|dimuon|s\\s*->\\s*d|s->d|sd.*mu\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests",
+      "rg -n --glob \"!*.ipynb\" \"rare kaon|K.*mu|mu.*mu.*K|branching|BR_LIMIT|Delta F|epsilon_K|Delta m_K\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests",
+      "rg -n --glob \"!*.ipynb\" \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_delta_mk|DELTA_M_K|epsilon_k|kaon\" quarkConstraints flavorConstraints scanParams tests"
+    ],
+    "result": "No K_S -> mu+ mu-, rare-kaon dimuon, or s -> d dilepton constraint implementation found. Existing kaon hits are Delta F=2 mixing infrastructure only.",
+    "nearest_hits": [
+      "quarkConstraints/deltaf2.py:615: DELTA_M_K = 3.484e-15 # GeV, K_L - K_S mass difference (PDG)",
+      "quarkConstraints/deltaf2.py:623: EPSILON_K_SM = 2.161e-3 # SM epsilon_K, Brod-Gorbahn-Stamou 2020",
+      "quarkConstraints/modern/phenomenology.py:23: MODERN_PHENOMENOLOGY_SYSTEM_IDS = (\"epsilon_K\", \"K\", \"B_d\", \"B_s\", \"D0\")"
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "pdg2025_ks_decay_modes.txt": "sha256:5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882",
+    "lhcb_2020_ksmumu_arxiv.txt": "sha256:d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7",
+    "lhcb_2017_ksmumu_arxiv.txt": "sha256:a35a20eef31d2eb0d3d2b85cc496f4e61846e54d137b79107f941ef7525d406e",
+    "chobanova_2018_ksmumu_susy_arxiv.txt": "sha256:7b25e1bf225ff51a308f24c5f6c50d55b9b8ad934aaf4d931415b975df09db0d",
+    "dery_ghosh_grossman_schacht_2021_kmumu_arxiv.txt": "sha256:ecf9094e578273fa701698ea835e5342f5ce0fecd8f8147d35b9d70b9bb4557a"
+  },
+  "source_shas_count": 5,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T15:30:48-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T15:30:48-04:00",
+      "agent_id": "PKA-K012",
+      "reason": "initial PKA source extraction and draft"
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:54:11-04:00",
+      "agent": "WA",
+      "from": "WRITER-INITIATED",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:54:11-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w6_kaon",
+      "reason": "Writer polish complete for batch wa_w6_kaon."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T16:07:12-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T16:07:12-04:00",
+      "batch_id": "ca_w6_kaon",
+      "issues": [
+        "CHK-1: TeX displays supporting numerical values (<2.2e-10, <0.8(1.0)e-9, approximately 5e-12, and <1% hadronic uncertainty) that trace to supporting_numeric_values, not to pdg_or_equivalent entries as required by this CA batch prompt."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T16:17:02-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T16:17:02-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w6_kaon_v2",
+      "reason": "Cycle-2 writer rework addressed CA CHK-1 by promoting displayed supporting numerical values into pdg_or_equivalent with complete metadata."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T16:27:52-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T16:27:52-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w6_kaon_v2",
+      "reason": "Cycle-2 checker re-check passed CHK-1 through CHK-8."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:58:00-04:00",
+      "agent": "factcheck-codex-kaon",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:58:00-04:00",
+      "agent_id": "factcheck-codex-kaon",
+      "reason": "Independent live-source fact-check completed for kaon family.",
+      "notes": "Live source fetch and local snapshot checks verified all value claims for this process."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(K_S^0\\to\\mu^+\\mu^-\\).  This kaon entry covers the\nshort-lived neutral-kaon dimuon decay, the \\(K_S\\) companion of\n\\(K_L\\to\\mu^+\\mu^-\\).  It is a rare \\(\\Delta S=1\\)\nweak-neutral-current mode, not a neutral-kaon mixing observable.",
+    "pdg_prose": "The sidecar \\texttt{pdg\\_or\\_equivalent} block, backed by the local\n\\texttt{pdg2025\\_ks\\_decay\\_modes.txt} snapshot, records the 2025 PDG limit\n\\[\n  \\mathcal{B}(K_S^0\\to\\mu^+\\mu^-) < 2.1\\times 10^{-10}\n  \\quad (90\\%~{\\rm CL}),\n\\]\nfrom the \\(K_S^0\\) particle listing, accessed 2026-05-16.  Additional\nsidecar \\texttt{pdg\\_or\\_equivalent} entries from\n\\texttt{lhcb\\_2020\\_ksmumu\\_arxiv.txt} show the LHCb\nstandalone 2016--2018 bound,\n\\(\\mathcal{B}<2.2\\times10^{-10}\\) at \\(90\\%\\) CL, and the combined\n\\(\\mathcal{B}<2.1\\times10^{-10}\\) at \\(90\\%\\) CL.  The Run-1 predecessor,\nstored in \\texttt{lhcb\\_2017\\_ksmumu\\_arxiv.txt}, was\n\\(\\mathcal{B}<0.8~(1.0)\\times10^{-9}\\) at \\(90\\%~(95\\%)\\) CL.",
+    "relevance": "In warped or anarchic-flavor scenarios this mode probes \\(s\\to d\\mu^+\\mu^-\\)\nneutral currents rather than the \\(\\Delta F=2\\) kaon-mixing surface already\nimplemented in the repo.  Modified \\(Z\\) couplings, heavy neutral-gauge\nexchange, electroweak penguins, and scalar or pseudoscalar lepton operators can\nfeed the dimuon final state.  The sidecar \\texttt{pdg\\_or\\_equivalent} entry\nfrom \\texttt{chobanova\\_2018\\_ksmumu\\_susy\\_arxiv.txt} gives the Standard\nModel scale as approximately \\(5\\times10^{-12}\\), so the present limit mainly\nbounds large new-physics enhancements rather than precision SM-sized effects.",
+    "post_2008": "The post-2008 change is mostly experimental: LHCb moved the bound from the\nRun-1 \\(0.8\\times10^{-9}\\) result to the combined \\(2.1\\times10^{-10}\\)\nlimit, with both values recorded in the sidecar.  On the theory side,\nChobanova et al. supplied the SM-scale and Higgs-penguin context, while Dery,\nGhosh, Grossman, and Schacht showed that time-dependent\n\\(K\\to\\mu^+\\mu^-\\) interference can isolate the \\(\\ell=0\\) \\(K_S\\) component\nwith hadronic uncertainty below \\(1\\%\\); the latter number is stored in the\nsidecar entry for \\texttt{dery\\_ghosh\\_grossman\\_schacht\\_2021\\_kmumu\\_arxiv.txt}.",
+    "validity": "The experimental upper limit is robust, but a model interpretation is\noperator-dependent.  The total \\(K_S\\to\\mu^+\\mu^-\\) branching fraction includes\nlong-distance physics and is not the same object as a clean short-distance\n\\(\\ell=0\\) extraction.  A catalog-to-code constraint should therefore distinguish\nvector/axial \\(s\\to d\\mu\\mu\\) contributions from scalar or pseudoscalar\noperators and should not treat the PDG limit as a pure \\(\\Delta F=2\\) bound.",
+    "code_coverage_prose": "\\textbf{NO.}  Targeted greps across \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no \\(K_S\\to\\mu^+\\mu^-\\), dimuon rare-kaon, or\n\\(s\\to d\\ell^+\\ell^-\\) implementation.  The nearest kaon hit is\n\\texttt{quarkConstraints/deltaf2.py:615}, the \\(K_L-K_S\\) mass difference used\nfor \\(\\Delta F=2\\) mixing, not this decay.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  K012 needs a new rare-kaon \\(\\Delta S=1\\) semileptonic\ncalculation, Wilson/operator mapping for \\(s\\to d\\mu^+\\mu^-\\), and a documented\ntreatment of long-distance and \\(K_S/K_L\\) interference effects.  The existing\nSLL/SLR/VLL/VRR/LR \\(\\Delta F=2\\) basis is not sufficient for this observable.",
+    "key_references": "\\begin{itemize}\n\\item \\texttt{PDG2025:K012}: PDG \\(K_S^0\\) particle listing, \\(\\Gamma_{12}\\), and headline limit.\n\\item \\texttt{LHCb2020:KSmumu}: standalone and combined LHCb upper limits.\n\\item \\texttt{LHCb2017:KSmumu}: Run-1 predecessor limit.\n\\item \\texttt{Chobanova2018:KSmumuSUSY}: SM scale and BSM Higgs-penguin context.\n\\item \\texttt{DeryGhoshGrossmanSchacht2021:KMuMuClean}: time-dependent clean-probe proposal.\n\\end{itemize}"
+  },
+  "source_yaml": "flavor_catalog/processes/kaon/K012.yaml",
+  "source_tex": "flavor_catalog/processes/kaon/K012.tex",
+  "worklog_path": "flavor_catalog/worklogs/K012/",
+  "citation_anchors": {
+    "generated_at": "2026-05-18T01:54:04Z",
+    "counts": {
+      "RESOLVED": 2,
+      "AMBIGUOUS": 4,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "PDG2025:K012:headline_limit",
+        "source_url": "https://pdg.lbl.gov/2025/listings/rpp2025-list-K-zero-S.pdf",
+        "snapshot_path": "flavor_catalog/references/K012/pdg2025_ks_decay_modes.txt",
+        "sha256": "sha256:5bed3ef38dfd48c9f4049791f6cbd1557e2faf3575eec1fcfdd82a69ec78d882",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<2.1e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 12,
+                "context": "L9: and 2025 update.\nL10:\nL11: K0S decay modes, CP violating and Delta S = 1 weak neutral current modes:\nL12: Gamma_12: mu+ mu-    S1    < 2.1 x 10^-10    CL=90%\nL13:\nL14: Detailed listing:\nL15: Gamma(mu+ mu-) / Gamma(total), Gamma_12 / Gamma."
+              },
+              {
+                "line_number": 20,
+                "context": "L17: combined with electromagnetic interaction.\nL18:\nL19: VALUE                 CL%      DOCUMENT ID       TECN\nL20: <2.1 x 10^-10          90      1 AAIJ 20AE       LHCB\nL21:\nL22: Data not used for current averages, fits, limits:\nL23: <8 x 10^-10            90      2 AAIJ 17BQ       LHCB"
+              },
+              {
+                "line_number": 23,
+                "context": "L20: <2.1 x 10^-10          90      1 AAIJ 20AE       LHCB\nL21:\nL22: Data not used for current averages, fits, limits:\nL23: <8 x 10^-10            90      2 AAIJ 17BQ       LHCB\nL24: <9 x 10^-9             90      3 AAIJ 13G        LHCB\nL25:\nL26: PDG note 1:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2020:K012:standalone_2016_2018_limit",
+        "source_url": "https://arxiv.org/abs/2001.10354",
+        "snapshot_path": "flavor_catalog/references/K012/lhcb_2020_ksmumu_arxiv.txt",
+        "sha256": "sha256:d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<2.2e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: corresponding to an integrated luminosity of 5.6 fb^-1, collected with the LHCb\nL16: experiment during 2016, 2017 and 2018 at a center-of-mass energy of 13 TeV.\nL17: The observed signal yield is consistent with zero, yielding\nL18: B(K0_S -> mu+ mu-) < 2.2 x 10^-10 at 90% CL.\nL19: The limit reduces to B(K0_S -> mu+ mu-) < 2.1 x 10^-10 at 90% CL once combined\nL20: with the result from data taken in 2011 and 2012."
+              },
+              {
+                "line_number": 19,
+                "context": "L16: experiment during 2016, 2017 and 2018 at a center-of-mass energy of 13 TeV.\nL17: The observed signal yield is consistent with zero, yielding\nL18: B(K0_S -> mu+ mu-) < 2.2 x 10^-10 at 90% CL.\nL19: The limit reduces to B(K0_S -> mu+ mu-) < 2.1 x 10^-10 at 90% CL once combined\nL20: with the result from data taken in 2011 and 2012."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2020:K012:combined_limit",
+        "source_url": "https://arxiv.org/abs/2001.10354",
+        "snapshot_path": "flavor_catalog/references/K012/lhcb_2020_ksmumu_arxiv.txt",
+        "sha256": "sha256:d5a95b6ce20eb9f260af48c6fd08ddbcdcc4d8c56c9679b4261c8a704435fbd7",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<2.1e-10",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: corresponding to an integrated luminosity of 5.6 fb^-1, collected with the LHCb\nL16: experiment during 2016, 2017 and 2018 at a center-of-mass energy of 13 TeV.\nL17: The observed signal yield is consistent with zero, yielding\nL18: B(K0_S -> mu+ mu-) < 2.2 x 10^-10 at 90% CL.\nL19: The limit reduces to B(K0_S -> mu+ mu-) < 2.1 x 10^-10 at 90% CL once combined\nL20: with the result from data taken in 2011 and 2012."
+              },
+              {
+                "line_number": 19,
+                "context": "L16: experiment during 2016, 2017 and 2018 at a center-of-mass energy of 13 TeV.\nL17: The observed signal yield is consistent with zero, yielding\nL18: B(K0_S -> mu+ mu-) < 2.2 x 10^-10 at 90% CL.\nL19: The limit reduces to B(K0_S -> mu+ mu-) < 2.1 x 10^-10 at 90% CL once combined\nL20: with the result from data taken in 2011 and 2012."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "LHCb2017:K012:run1_limit",
+        "source_url": "https://arxiv.org/abs/1706.00758",
+        "snapshot_path": "flavor_catalog/references/K012/lhcb_2017_ksmumu_arxiv.txt",
+        "sha256": "sha256:a35a20eef31d2eb0d3d2b85cc496f4e61846e54d137b79107f941ef7525d406e",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<0.8e-9 at 90%; <1.0e-9 at 95%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 18,
+                "context": "L15: collisions corresponding to an integrated luminosity of 3 fb^-1, collected by\nL16: LHCb at center-of-mass energies of 7 and 8 TeV. The observed yield is consistent\nL17: with the background-only hypothesis, yielding\nL18: B(K0_S -> mu+ mu-) < 0.8 (1.0) x 10^-9 at 90% (95%) confidence level.\nL19: This result improves the previous upper limit on the branching fraction by an\nL20: order of magnitude."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "Chobanova2018:K012:sm_estimate",
+        "source_url": "https://arxiv.org/abs/1711.11030",
+        "snapshot_path": "flavor_catalog/references/K012/chobanova_2018_ksmumu_susy_arxiv.txt",
+        "sha256": "sha256:7b25e1bf225ff51a308f24c5f6c50d55b9b8ad934aaf4d931415b975df09db0d",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "approximately 5e-12",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 3,
+                "context": "L1: Source: arXiv abstract page\nL2: URL: https://arxiv.org/abs/1711.11030\nL3: Accessed: 2026-05-16\nL4:\nL5: arXiv:1711.11030 [hep-ph]\nL6: Title: Probing SUSY effects in K_S^0 -> mu+ mu-"
+              },
+              {
+                "line_number": 10,
+                "context": "L7: Authors: Veronika Chobanova, Giancarlo D'Ambrosio, Teppei Kitahara,\nL8: Miriam Lucio Martinez, Diego Martinez Santos, Isabel Suarez Fernandez,\nL9: Kei Yamamoto\nL10: Submitted: 2017-11-29; revised version v2: 2018-05-28\nL11: Journal reference: JHEP 05 (2018) 024\nL12: DOI: 10.1007/JHEP05(2018)024\nL13:"
+              },
+              {
+                "line_number": 11,
+                "context": "L8: Miriam Lucio Martinez, Diego Martinez Santos, Isabel Suarez Fernandez,\nL9: Kei Yamamoto\nL10: Submitted: 2017-11-29; revised version v2: 2018-05-28\nL11: Journal reference: JHEP 05 (2018) 024\nL12: DOI: 10.1007/JHEP05(2018)024\nL13:\nL14: Minimal abstract excerpt:"
+              },
+              {
+                "line_number": 12,
+                "context": "L9: Kei Yamamoto\nL10: Submitted: 2017-11-29; revised version v2: 2018-05-28\nL11: Journal reference: JHEP 05 (2018) 024\nL12: DOI: 10.1007/JHEP05(2018)024\nL13:\nL14: Minimal abstract excerpt:\nL15: The Standard Model predicts B(K_S^0 -> mu+ mu-) approximately 5 x 10^-12."
+              },
+              {
+                "line_number": 15,
+                "context": "L12: DOI: 10.1007/JHEP05(2018)024\nL13:\nL14: Minimal abstract excerpt:\nL15: The Standard Model predicts B(K_S^0 -> mu+ mu-) approximately 5 x 10^-12.\nL16: Flavour-violating Higgs-penguin contributions in MSSM scenarios can enhance the\nL17: branching fraction up to approximately 35 x 10^-12 or suppress it to\nL18: approximately 0.78 x 10^-12. Fine-tuned regions can bring the branching"
+              },
+              {
+                "line_number": 17,
+                "context": "L14: Minimal abstract excerpt:\nL15: The Standard Model predicts B(K_S^0 -> mu+ mu-) approximately 5 x 10^-12.\nL16: Flavour-violating Higgs-penguin contributions in MSSM scenarios can enhance the\nL17: branching fraction up to approximately 35 x 10^-12 or suppress it to\nL18: approximately 0.78 x 10^-12. Fine-tuned regions can bring the branching\nL19: fraction up to the then-current experimental upper bound, 8 x 10^-10.\nL20: The paper also discusses correlations with B(K_L^0 -> mu+ mu-) and CP-asymmetry"
+              },
+              {
+                "line_number": 18,
+                "context": "L15: The Standard Model predicts B(K_S^0 -> mu+ mu-) approximately 5 x 10^-12.\nL16: Flavour-violating Higgs-penguin contributions in MSSM scenarios can enhance the\nL17: branching fraction up to approximately 35 x 10^-12 or suppress it to\nL18: approximately 0.78 x 10^-12. Fine-tuned regions can bring the branching\nL19: fraction up to the then-current experimental upper bound, 8 x 10^-10.\nL20: The paper also discusses correlations with B(K_L^0 -> mu+ mu-) and CP-asymmetry\nL21: predictions in K0 -> mu+ mu- decays."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "DeryGhoshGrossmanSchacht2021:K012:ell0_hadronic_uncertainty",
+        "source_url": "https://arxiv.org/abs/2104.06427",
+        "snapshot_path": "flavor_catalog/references/K012/dery_ghosh_grossman_schacht_2021_kmumu_arxiv.txt",
+        "sha256": "sha256:ecf9094e578273fa701698ea835e5342f5ce0fecd8f8147d35b9d70b9bb4557a",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value",
+            "anchor_string": "<1%",
+            "status": "RESOLVED",
+            "matches": [
+              {
+                "line_number": 20,
+                "context": "L17: states. This quantity is theoretically clean and can be used to test the\nL18: Standard Model. It can extract the CKM combination\nL19: |V_ts V_td sin(beta + beta_s)| approximately |A^2 lambda^5 eta_bar| with\nL20: hadronic uncertainties below 1%."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "K_S dimuon upper limit, useful only for large NP enhancements",
+  "priority_rationale_full": "K_S -> mu+ mu- can test s -> d mu mu neutral currents and scalar or\npseudoscalar lepton operators in nonminimal warped models. The current limit\nis still well above the Standard Model scale and the interpretation is\noperator-dependent because long-distance and short-distance pieces are not a\nsingle clean object. It is a complementary cap on large enhancements, not a\nleading canonical anarchic-RS constraint."
+}

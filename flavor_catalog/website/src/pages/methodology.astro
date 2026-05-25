@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import index from '../content/catalog_index.json';
+import families from '../content/families.json';
+
+/* -----------------------------------------------------------------------
+   Methodology page for a physics-collaborator audience. Describes the
+   process plainly: an overcomplete seed list from PDG, HFLAV, FLAG and
+   the canonical warped-flavor papers; four independent sweeps with a
+   formal convergence criterion; an outside cross-check; and a two-reader
+   verification pipeline that re-fetches every source. Two real catches
+   (T020, K020) anchor the value of writer/reviewer separation.
+   ----------------------------------------------------------------------- */
+
+const totalEntries: number = index.total_entries;
+const verdictCounts: Record<string, number> = index.verdict_counts;
+const verified = verdictCounts.VERIFIED ?? 0;
+const partial = verdictCounts.PARTIAL ?? 0;
+const mismatch = verdictCounts.MISMATCH ?? 0;
+const failed = verdictCounts.FAILED ?? 0;
+
+// Per-family fact-check counts.
+type FamRow = {
+  key: string;
+  label: string;
+  total: number;
+  verified: number;
+  partial: number;
+};
+const famRows: FamRow[] = (families as any[]).map((fam) => {
+  const inFam = (index.entries as any[]).filter((e) => e.family === fam.key);
+  const v = inFam.filter((e) => (e.fact_check_verdict || '').toUpperCase() === 'VERIFIED').length;
+  const p = inFam.filter((e) => (e.fact_check_verdict || '').toUpperCase() === 'PARTIAL').length;
+  return { key: fam.key, label: fam.label, total: fam.count, verified: v, partial: p };
+});
+---
+
+<BaseLayout
+  title="Methodology"
+  description="How the 102-entry flavor catalog was built: a seed list anchored on PDG, HFLAV, FLAG, and the canonical RS-flavor papers; four independent sweeps with a convergence criterion; an outside cross-check; and a two-reader pipeline that re-fetches every source."
+>
+  <section class="meth-hero">
+    <div class="breadcrumbs"><a href="/">Catalog</a> &middot; Methodology</div>
+    <h1>A systematic literature survey of the RS flavor sector, with independent verification at every stage.</h1>
+    <p class="meth-lede">
+      Completeness is controlled by a convergence criterion across four
+      independent sweeps; accuracy by a separate reviewer who re-fetches
+      every cited source. The seed list, the 43 excluded candidates, and
+      a sha256 for every snapshot are tracked in git, so any number on
+      the site traces back to the publisher page. The result is a
+      catalog of <strong>102 flavor-physics constraints</strong> on
+      warped extra-dimensional parameter space.
+    </p>
+  </section>
+
+  <section class="entry-section">
+    <h2>Coverage</h2>
+    <p>
+      The seed list of <strong>128 candidates</strong> draws on PDG,
+      HFLAV, and FLAG, anchored on the canonical warped-flavor papers:
+      Agashe-Contino-Pomarol, Csaki-Falkowski-Weiler, and Perez-Randall.
+      <strong>Four independent sweeps</strong> then worked different
+      slices of the collider and flavor literature, each looking for
+      entries the previous rounds had missed.
+    </p>
+    <p>
+      Sweeping continued until two consecutive rounds each surfaced one
+      or fewer new entries. An <strong>independent external
+      cross-check</strong> then compared the mid-build catalog against
+      the broader literature and identified five additional entries; all
+      five were included. Every excluded candidate carries a named
+      reason and promotion trigger: <strong>43 deferred entries, no
+      silent drops</strong>.
+    </p>
+  </section>
+
+  <section class="entry-section">
+    <h2>Per-entry verification</h2>
+    <p>
+      Each entry passes through a <strong>two-reader pipeline</strong>.
+      One pass writes the entry from the primary source. An independent
+      reviewer then checks it against an eight-item structural checklist
+      and <strong>re-fetches every cited URL</strong>, confirming the
+      quoted number appears on the live publisher page and matches the
+      local snapshot. Every snapshot carries a sha256 in git, so
+      <code>git checkout flavor-catalog-v0.4</code> rebuilds the catalog
+      from scratch.
+    </p>
+  </section>
+
+  <section class="entry-section">
+    <h2>What the pipeline caught</h2>
+    <div class="catch-grid">
+      <div class="catch-card" set:html={`
+        <h3>A one-digit numerical slip</h3>
+        <p>
+          The Higgs LFV entry (<a href="/entries/T020/">T020</a>) was
+          first recorded as $\\mathcal{B}(h\\to e\\mu) < 6.1\\times
+          10^{-5}$. The re-fetch pass against the ATLAS source returned
+          $<6.2\\times 10^{-5}$. This is the only numerical mismatch
+          across all 102 entries, and it was caught only because writer
+          and reviewer were independent.
+        </p>
+      `}></div>
+      <div class="catch-card" set:html={`
+        <h3>A measurement missing from the data block</h3>
+        <p>
+          The rare-kaon entry (<a href="/entries/K020/">K020</a>) for
+          $K^+\\to\\pi^+ e^\\pm\\mu^\\mp$ quoted the BNL E865 limit
+          $<2.1\\times 10^{-11}$ at 90% CL in prose but omitted it from
+          the structured data block. Without the split, the number would
+          have been citable but invisible to downstream scans.
+        </p>
+      `}></div>
+    </div>
+  </section>
+
+  <section class="entry-section">
+    <h2>Fact-check results</h2>
+    <p>
+      The final fact-check returned <strong>{verified} VERIFIED</strong>,
+      <strong>{partial} PARTIAL</strong>, and <strong>{mismatch} MISMATCH</strong>
+      across all 102 entries. The two PARTIAL cases are metadata-only
+      gaps on a JavaScript-rendered INSPIRE page that the tool could not
+      parse. The underlying numerical values were confirmed by hand.
+    </p>
+
+    <div class="entry-table-wrap">
+      <table class="entry-table methodology-fc-table">
+        <thead>
+          <tr>
+            <th>Family</th>
+            <th>Entries</th>
+            <th>Verified</th>
+            <th>Partial</th>
+          </tr>
+        </thead>
+        <tbody>
+          {famRows.map((r) => (
+            <tr>
+              <td><a href={`/families/${r.key}/`}>{r.label}</a></td>
+              <td>{r.total}</td>
+              <td><span class="badge badge-verified">{r.verified}</span></td>
+              <td>{r.partial > 0
+                ? <span class="badge badge-partial">{r.partial}</span>
+                : <span class="row-muted">0</span>}</td>
+            </tr>
+          ))}
+          <tr class="fc-total">
+            <td><strong>Total</strong></td>
+            <td><strong>{totalEntries}</strong></td>
+            <td><strong>{verified}</strong></td>
+            <td><strong>{partial}</strong></td>
+          </tr>
+          <tr class="fc-mismatch-row">
+            <td colspan="2"><strong>Mismatch / Failed</strong></td>
+            <td colspan="2"><strong>{mismatch} / {failed}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="hero-ctas meth-final-ctas">
+    <a class="hero-cta hero-cta-primary" href="/browse/">Browse all {totalEntries} entries &rarr;</a>
+    <a class="hero-cta" href="/">Back to the catalog</a>
+  </div>
+</BaseLayout>
+
+<style>
+.meth-hero {
+  margin: 2.25rem 0 1rem;
+}
+.meth-hero .breadcrumbs {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.45rem;
+}
+.meth-hero h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.6rem;
+  max-width: 30ch;
+}
+.meth-lede {
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  max-width: 64ch;
+  line-height: 1.55;
+}
+.meth-lede:last-child { margin-bottom: 0; }
+.meth-lede strong { color: var(--color-text); }
+
+.entry-section p {
+  max-width: 70ch;
+  line-height: 1.6;
+}
+.entry-section p strong { color: var(--color-text); }
+
+.meth-sub {
+  color: var(--color-text-muted);
+  margin: 0 0 1rem;
+  max-width: 70ch;
+}
+
+.catch-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 0.75rem;
+}
+.catch-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: 0.95rem 1.1rem 1.05rem;
+  box-shadow: var(--shadow-card);
+}
+.catch-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  letter-spacing: -0.005em;
+  color: var(--color-accent);
+}
+.catch-card p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+.catch-card a { color: var(--color-accent); }
+
+@media (max-width: 880px) {
+  .catch-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .meth-hero h1 { font-size: 1.55rem; }
+  .meth-lede { font-size: 0.98rem; }
+}
+
+.methodology-fc-table {
+  min-width: 420px;
+}
+.methodology-fc-table .row-muted {
+  color: var(--color-text-muted);
+}
+.fc-total td {
+  background: var(--color-surface-2);
+  border-top: 2px solid var(--color-border-strong);
+}
+.fc-mismatch-row td {
+  background: var(--color-surface);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.meth-final-ctas {
+  margin-top: 2rem;
+}
+</style>

@@ -1,0 +1,357 @@
+{
+  "process_id": "E007",
+  "family": "edm_neutrino",
+  "family_original": "edm_neutrino",
+  "tier": "PRIMARY",
+  "standard_notation": "d_Ra, d_Xe",
+  "process_name": "Radium-225 and xenon-129 electric dipole moments",
+  "owner": "PKA",
+  "fact_check_verdict": "VERIFIED",
+  "implementation_difficulty": "HIGH",
+  "implementation_difficulty_reason": "Requires new CP-odd quark/gluon and semileptonic operator matching, RG evolution through QCD thresholds, and separate nuclear/atomic response models for Ra and Xe Schiff-moment dominated observables. Existing Delta F=2 and mu->e gamma code paths do not provide this observable.",
+  "cycle_count": null,
+  "priority_rationale": null,
+  "promoted_in_wave": null,
+  "code_coverage": {
+    "status": "NO",
+    "searched_paths": [
+      "quarkConstraints",
+      "qcd",
+      "flavorConstraints",
+      "neutrinos",
+      "yukawa",
+      "warpConfig",
+      "solvers",
+      "scanParams",
+      "tests"
+    ],
+    "commands": [
+      "rg -n \"epsilon_K|epsilon_k|Delta m_K|DELTA_M_K|evaluate_delta_mk|B_d|b_d|B_s|b_s|D0|d_mix|mu.?e.?gamma|muToEGamma|BR_LIMIT|MEG\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"b.?->.?s|X_s|K\\\\*|R_K|R_D|B_s.*mu|pi.*nu|nu.*nubar|epsilon.?prime|eps.?prime|t.?->|Z.?->|h.?->|EDM|dipole|conversion|tau.?->|mu.?->.?3e\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'",
+      "rg -n \"MODERN_PHENOMENOLOGY_SYSTEM_IDS|DEFAULT_DELTA_F2_INPUTS|evaluate_bd_mixing|evaluate_bs_mixing|evaluate_d0_mixing|check_mu_to_e_gamma\" quarkConstraints flavorConstraints scanParams tests -g '!*.ipynb'",
+      "rg -n \"Ra|radium|225Ra|d_Ra|dRa|Xe|xenon|129Xe|d_Xe|dXe|Schiff|octupole|diamagnetic|atomic EDM|chromo[- ]?EDM|CEDM|Weinberg|CP[- ]odd|electric dipole|EDM|dipole\" quarkConstraints qcd flavorConstraints neutrinos yukawa warpConfig solvers scanParams tests -g '!*.ipynb'"
+    ],
+    "findings": [
+      "Focused Ra/Xe/radium/xenon/Schiff/diamagnetic EDM grep over required implementation and test directories found no 225Ra or 129Xe EDM implementation.",
+      "Generic EDM/dipole grep found only the off-diagonal mu->e gamma dipole helper, not an atomic or hadronic EDM calculation.",
+      "flavorConstraints/muToEGamma.py:3 describes an off-diagonal LFV dipole constraint.",
+      "flavorConstraints/muToEGamma.py:21 cites the Perez-Randall mu->e gamma dipole operator.",
+      "flavorConstraints/muToEGamma.py:81 implements check_mu_to_e_gamma, not d_Ra or d_Xe."
+    ]
+  },
+  "code_coverage_status": "NO",
+  "pdg_values": [
+    {
+      "label": "Bishof et al., Phys. Rev. C 94, 025501 (2016); arXiv:1606.04931",
+      "observable": "Radium-225 atomic electric dipole moment",
+      "value": 1.4e-23,
+      "uncertainty": null,
+      "units": "e cm",
+      "display": null,
+      "year": 2016,
+      "experiment": "Bishof et al., Phys. Rev. C 94, 025501 (2016); arXiv:1606.04931",
+      "source_url": "https://arxiv.org/abs/1606.04931",
+      "snapshot_path": "flavor_catalog/references/E007/bishof2016_arxiv1606_04931.txt",
+      "sha256": "sha256:a9042e38b7b39cebf7ceeb3e42126f2541557d4b6bfbe36c2847f7efe8d46d57",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Parker et al., Phys. Rev. Lett. 114, 233002 (2015); arXiv:1504.07477",
+      "observable": "First Radium-225 atomic electric dipole moment measurement",
+      "value": 5e-22,
+      "uncertainty": null,
+      "units": "e cm",
+      "display": null,
+      "year": 2015,
+      "experiment": "Parker et al., Phys. Rev. Lett. 114, 233002 (2015); arXiv:1504.07477",
+      "source_url": "https://arxiv.org/abs/1504.07477",
+      "snapshot_path": "flavor_catalog/references/E007/parker2015_arxiv1504_07477.txt",
+      "sha256": "sha256:ff5adb5cdce9deb89ae97616f345881398a04fa0b83d26c15b3ae3036355b269",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Sachdeva et al., Phys. Rev. Lett. 123, 143003 (2019); arXiv:1909.12800",
+      "observable": "Xenon-129 atomic electric dipole moment",
+      "value": null,
+      "uncertainty": null,
+      "units": "e cm",
+      "display": null,
+      "year": 2019,
+      "experiment": "Sachdeva et al., Phys. Rev. Lett. 123, 143003 (2019); arXiv:1909.12800",
+      "source_url": "https://arxiv.org/abs/1909.12800",
+      "snapshot_path": "flavor_catalog/references/E007/sachdeva2019_arxiv1909_12800.txt",
+      "sha256": "sha256:abce59966ada768fec68b0e9bd9bc68eb89955b8f69bf258a19e41d79183f175",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    },
+    {
+      "label": "Allmendinger et al., Phys. Rev. A 100, 022505 (2019); arXiv:1904.12295",
+      "observable": "Independent Xenon-129 atomic electric dipole moment measurement",
+      "value": null,
+      "uncertainty": null,
+      "units": "e cm",
+      "display": null,
+      "year": 2019,
+      "experiment": "Allmendinger et al., Phys. Rev. A 100, 022505 (2019); arXiv:1904.12295",
+      "source_url": "https://arxiv.org/abs/1904.12295",
+      "snapshot_path": "flavor_catalog/references/E007/allmendinger2019_arxiv1904_12295.txt",
+      "sha256": "sha256:94e4abc0ed9f32df163e52ae44b20d2a1cb6b4ec5bd27ce458bf01c3251cad28",
+      "access_date": "2026-05-16",
+      "cl": null,
+      "limit_type": null
+    }
+  ],
+  "supporting_measurements": null,
+  "paper_era_reference": null,
+  "theory_context": null,
+  "auxiliary_theory_inputs": null,
+  "post_2010_developments": null,
+  "source_shas": {
+    "bishof2016_arxiv1606_04931.txt": "sha256:a9042e38b7b39cebf7ceeb3e42126f2541557d4b6bfbe36c2847f7efe8d46d57",
+    "parker2015_arxiv1504_07477.txt": "sha256:ff5adb5cdce9deb89ae97616f345881398a04fa0b83d26c15b3ae3036355b269",
+    "sachdeva2019_arxiv1909_12800.txt": "sha256:abce59966ada768fec68b0e9bd9bc68eb89955b8f69bf258a19e41d79183f175",
+    "allmendinger2019_arxiv1904_12295.txt": "sha256:94e4abc0ed9f32df163e52ae44b20d2a1cb6b4ec5bd27ce458bf01c3251cad28",
+    "argonne_ra225_edm_page.txt": "sha256:25c46e30859af0b3e040aa247e5815c440c90fbd2f4768b54f2a20eb4669f83e",
+    "dfg_heil_schmidt_129xe_upgrade.txt": "sha256:b4163f93306438aade52d99a36561430771cf0808ccea8fca73319a74ab1a608",
+    "kuleuven_raf_acf_project.txt": "sha256:af8f9a8fa4f9c17a2031be0b4135fa638007d34a077e37846c7789355c6ffe3e",
+    "cfw2008_arxiv0804_1954.txt": "sha256:2142e4b2c2a261917d12e7446f05bf9c89ae3528d587c1c9d54102b7f3c5b30c"
+  },
+  "source_shas_count": 8,
+  "access_dates": [
+    "2026-05-16"
+  ],
+  "latest_status": "FACT-CHECKED",
+  "status_history": [
+    {
+      "state": "WRITER-INITIATED",
+      "timestamp": "2026-05-16T14:23:46-04:00",
+      "from": null,
+      "to": "WRITER-INITIATED",
+      "at": "2026-05-16T14:23:46-04:00",
+      "agent_id": "PKA-E007",
+      "reason": "Initial PKA source extraction and draft started."
+    },
+    {
+      "state": "PKA-DONE",
+      "timestamp": "2026-05-16T14:23:46-04:00",
+      "from": "WRITER-INITIATED",
+      "to": "PKA-DONE",
+      "at": "2026-05-16T14:23:46-04:00",
+      "agent_id": "PKA-E007",
+      "reason": "PKA draft, minimal source snapshots, and code-coverage grep completed."
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T14:46:21-04:00",
+      "agent": "WA",
+      "from": "PKA-DONE",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T14:46:21-04:00",
+      "agent_id": "WA",
+      "batch_id": "wa_w5b_charm_edm",
+      "reason": "Writer polish completed for wa_w5b_charm_edm; numerical claims checked against sidecar/source snapshots."
+    },
+    {
+      "state": "WRITER-REWORK",
+      "timestamp": "2026-05-16T15:17:35-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "WRITER-REWORK",
+      "at": "2026-05-16T15:17:35-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_charm_edm",
+      "issues": [
+        "CHK-1: TeX lines 70-84 include projected/context numerical claims (1e-28 e cm, 4e-29 e cm, 15 day half-life, spin 1/2, 2--3 orders, 2021--2026, more than 2 orders, 2023--2027, several orders) that trace to YAML post_2008_context entries rather than pdg_or_equivalent blocks as required by the checker checklist."
+      ]
+    },
+    {
+      "state": "WRITER-DONE",
+      "timestamp": "2026-05-16T15:27:52-04:00",
+      "agent": "WA-v2",
+      "cycle": 2,
+      "from": "WRITER-REWORK",
+      "to": "WRITER-DONE",
+      "at": "2026-05-16T15:27:52-04:00",
+      "agent_id": "WA-v2",
+      "batch_id": "wa_w5b_charm_edm_v2",
+      "reason": "Cycle-2 rework softened the CA-flagged future/context numerical TeX claims instead of promoting them to pdg_or_equivalent."
+    },
+    {
+      "state": "CHECKER-DONE",
+      "timestamp": "2026-05-16T15:56:18-04:00",
+      "agent": "CA",
+      "from": "WRITER-DONE",
+      "to": "CHECKER-DONE",
+      "at": "2026-05-16T15:56:18-04:00",
+      "agent_id": "CA",
+      "batch_id": "ca_w5b_charm_edm_v2",
+      "reason": "Cycle-3 checker re-check passed CHK-1 through CHK-8 after WA-v2 polish."
+    },
+    {
+      "from": "CHECKER-DONE",
+      "to": "OPUS-APPROVED",
+      "state": "OPUS-APPROVED",
+      "at": "2026-05-16T17:30:00-04:00",
+      "timestamp": "2026-05-16T17:30:00-04:00",
+      "agent": "Opus-round-2",
+      "agent_id": "Opus-round-2",
+      "round_id": "opus_round_002",
+      "reason": "Opus round 2 per-process sign-off; CA-verified PASS retained; see flavor_catalog/signoff/round_002_index.md."
+    },
+    {
+      "state": "FACT-CHECKED",
+      "timestamp": "2026-05-16T17:45:00-04:00",
+      "from": "OPUS-APPROVED",
+      "to": "FACT-CHECKED",
+      "at": "2026-05-16T17:45:00-04:00",
+      "agent": "factcheck-codex-edm_neutrino",
+      "agent_id": "factcheck-codex-edm_neutrino",
+      "verdict": "VERIFIED",
+      "findings_count": 0,
+      "notes": "Ra-225, Xe-129, and supporting Argonne/DFG/KU Leuven context claims verified against fetched sources."
+    }
+  ],
+  "sections": {
+    "process": "\\textbf{Standard notation:} \\(d_{\\mathrm{Ra}}\\) for\n\\(^{225}\\mathrm{Ra}\\) and \\(d_{\\mathrm{Xe}}\\) for\n\\(^{129}\\mathrm{Xe}\\).  This entry covers atomic EDM searches in radium and\nxenon, cataloged in the \\texttt{edm\\_neutrino} family as complementary\ndiamagnetic-atom and nuclear CP probes beyond the neutron and\n\\(^{199}\\mathrm{Hg}\\) benchmark constraints.",
+    "pdg_prose": "No standalone PDG Live Ra/Xe atom-EDM datablock was located for this PKA\ndeposit, so the direct experiment papers are used as PDG-equivalent sources.\nFor \\(^{225}\\mathrm{Ra}\\), the canonical Argonne direct limit is in the\nsidecar snapshot \\texttt{bishof2016\\_arxiv1606\\_04931.txt},\n\\[\n  |d(^{225}\\mathrm{Ra})| < 1.4\\times10^{-23}\\ e\\,\\mathrm{cm}\n  \\qquad (95\\%~\\mathrm{C.L.}),\n\\]\nfrom \\texttt{flavor\\_catalog/references/E007/bishof2016\\_arxiv1606\\_04931.txt}.\nThe earlier proof-of-principle Ra measurement in\n\\texttt{parker2015\\_arxiv1504\\_07477.txt} gave\n\\(|d(^{225}\\mathrm{Ra})|<5.0\\times10^{-22}\\ e\\,\\mathrm{cm}\\) at\n\\(95\\%\\) confidence and is kept as a superseded post-2008 milestone.\n\nFor \\(^{129}\\mathrm{Xe}\\), the strongest direct limit in the deposited\nsources is \\texttt{sachdeva2019\\_arxiv1909\\_12800.txt},\n\\[\n  d_A(^{129}\\mathrm{Xe}) =\n  (1.4 \\pm 6.6_{\\rm stat} \\pm 2.0_{\\rm syst})\\times10^{-28}\\ e\\,\\mathrm{cm},\n  \\qquad\n  |d_A(^{129}\\mathrm{Xe})| < 1.4\\times10^{-27}\\ e\\,\\mathrm{cm}\n  \\quad (95\\%~\\mathrm{C.L.}).\n\\]\nAn independent Heidelberg-centered \\(^{129}\\mathrm{Xe}\\) measurement in\n\\texttt{allmendinger2019\\_arxiv1904\\_12295.txt} gives\n\\((-4.7\\pm6.4)\\times10^{-28}\\ e\\,\\mathrm{cm}\\) and\n\\(|d_{\\mathrm{Xe}}|<1.5\\times10^{-27}\\ e\\,\\mathrm{cm}\\) at\n\\(95\\%\\) C.L.",
+    "relevance": "Warped anarchic flavor models generically contain new CP phases.  Loop\nmatching can generate quark EDMs, chromo-EDMs, the Weinberg three-gluon\noperator, and semileptonic CP-odd operators.  Diamagnetic atoms do not map\ndirectly onto one elementary dipole; their dominant hadronic response is\nusually expressed through nuclear Schiff moments and CP-odd hadronic\ninteractions.  \\(^{225}\\mathrm{Ra}\\) is especially useful because octupole\ndeformation enhances Schiff-moment sensitivity, while \\(^{129}\\mathrm{Xe}\\)\noffers a mature noble-gas co-magnetometer platform with different nuclear and\natomic systematics.",
+    "post_2008": "Relative to the 2008 warped-flavor baseline of\n\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}, Ra and Xe EDMs moved from mostly\nfuture context into direct experimental inputs.  Argonne reported the first\n\\(^{225}\\mathrm{Ra}\\) EDM measurement in 2015\n\\texttt{parker2015\\_arxiv1504\\_07477.txt} and improved it in 2016 by a\nfactor of \\(36\\) \\texttt{bishof2016\\_arxiv1606\\_04931.txt}.  The 2016 Ra\npaper also records planned upgrades aimed at substantially better statistical\nreach with controlled systematics \\texttt{bishof2016\\_arxiv1606\\_04931.txt}.\nThe deposited Argonne program page \\texttt{Argonne:Ra225EDMPage} states the\nphysical motivation: \\(^{225}\\mathrm{Ra}\\) has experimentally useful nuclear\nproperties and enhanced sensitivity to T-odd, P-odd effects relative to\n\\(^{199}\\mathrm{Hg}\\).\n\nFor Xe, the 2019 comagnetometer measurements\n\\texttt{sachdeva2019\\_arxiv1909\\_12800.txt} and\n\\texttt{allmendinger2019\\_arxiv1904\\_12295.txt} established\n\\(10^{-27}\\ e\\,\\mathrm{cm}\\)-level direct limits.  The DFG\nHeidelberg upgrade proposal \\texttt{DFG:Xe129Upgrade2026} aims to improve\nthe \\(^{129}\\mathrm{Xe}\\) EDM reach.  KU Leuven's RaF/AcF\nmolecular project \\texttt{KULeuven:RaFMoleculeProject2023} is not a direct\nRa-atom limit, but it is relevant future context because embedding\noctupole-enhanced Ra or Ac nuclei in dipolar molecules can enhance\nSchiff-moment sensitivity.",
+    "validity": "The direct atom-EDM limits are robust null searches for P- and T-violating\nenergy shifts.  Their interpretation in an RS pipeline is highly\nmodel-dependent: one must choose a CP-odd low-energy operator basis, run and\nmatch through QCD thresholds, and adopt hadronic, nuclear, and atomic\ncoefficients.  These entries should therefore be treated as EDM-adjacent\nloop/nuclear-translation probes, not as direct \\(\\Delta F=2\\) quark-scan\nconstraints.",
+    "code_coverage_prose": "\\textbf{NO.}  The sidecar \\texttt{code\\_coverage} block records the required\ngreps over \\texttt{quarkConstraints/}, \\texttt{qcd/},\n\\texttt{flavorConstraints/}, \\texttt{neutrinos/}, \\texttt{yukawa/},\n\\texttt{warpConfig/}, \\texttt{solvers/}, \\texttt{scanParams/}, and\n\\texttt{tests/} found no Ra, Xe, Schiff-moment, diamagnetic-atom, chromo-EDM,\nor Weinberg-operator implementation.  The only nearby dipole code is the\noff-diagonal \\(\\mu\\to e\\gamma\\) helper at\n\\texttt{flavorConstraints/muToEGamma.py:3},\n\\texttt{flavorConstraints/muToEGamma.py:21}, and\n\\texttt{flavorConstraints/muToEGamma.py:81}; that code is not an atomic or\nhadronic EDM calculation.",
+    "implementation_difficulty_prose": "\\textbf{HIGH.}  A live E007 constraint needs new CP-odd quark/gluon and\nsemileptonic matching, RG evolution to hadronic scales, and separate\nnuclear/atomic response layers for Ra and Xe.  The existing\nSLL/SLR/VLL/VRR/LR \\(\\Delta F=2\\) basis and the \\(\\mu\\to e\\gamma\\) dipole\nhelper do not cover this observable.",
+    "key_references": "Process-local source keys before bibliography consolidation:\n\\texttt{Bishof:Ra225EDM2016}, \\texttt{Parker:Ra225EDM2015},\n\\texttt{Sachdeva:Xe129EDM2019}, \\texttt{Allmendinger:Xe129EDM2019},\n\\texttt{Argonne:Ra225EDMPage}, \\texttt{DFG:Xe129Upgrade2026},\n\\texttt{KULeuven:RaFMoleculeProject2023}, and\n\\texttt{CsakiFalkowskiWeiler:RSFlavor2008}."
+  },
+  "source_yaml": "flavor_catalog/processes/edm_neutrino/E007.yaml",
+  "source_tex": "flavor_catalog/processes/edm_neutrino/E007.tex",
+  "worklog_path": "flavor_catalog/worklogs/E007/",
+  "citation_anchors": {
+    "generated_at": "2026-05-17T21:55:00-04:00",
+    "counts": {
+      "RESOLVED": 0,
+      "AMBIGUOUS": 4,
+      "UNRESOLVED": 0
+    },
+    "sources": [
+      {
+        "block_key": "ra225_current_direct_limit",
+        "source_url": "https://arxiv.org/abs/1606.04931",
+        "snapshot_path": "flavor_catalog/references/E007/bishof2016_arxiv1606_04931.txt",
+        "sha256": "sha256:a9042e38b7b39cebf7ceeb3e42126f2541557d4b6bfbe36c2847f7efe8d46d57",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d(225Ra)| < 1.4 x 10^-23 e cm at 95% confidence upper limit; factor 36 improvement over the previous result.",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26: <meta property=\"og:image:width\" content=\"1200\" />\nL27: <meta property=\"og:image:height\" content=\"700\" />\nL28: <meta property=\"og:image:alt\" content=\"arXiv logo\"/>\nL29: <meta property=\"og:description\" content=\"Background: Octupole-deformed nuclei, such as that of $^{225}$Ra, are expected to amplify observable atomic electric dipole moments (EDMs) that arise from time-reversal and parity-violating interactions in the nuclear medium. In 2015, we reported the first &#34;proof-of-principle&#34; measurement of the $^{225}$Ra atomic EDM. Purpose: This work reports on the first of several experimental upgrades to improve the statistical sensitivity of our $^{225}$Ra EDM measurements by orders of magnitude and evaluates systematic effects that contribute to current and future levels of experimental sensitivity. Method: Laser-cooled and trapped $^{225}$Ra atoms are held between two high voltage electrodes in an ultra high vacuum chamber at the center of a magnetically shielded environment. We observe Larmor precession in a uniform magnetic field using nuclear-spin-dependent laser light scattering and look for a phase shift proportional to the applied electric field, which indicates the existence of an EDM. The main improvement to our measurement technique is an order of magnitude increase in spin precession time, which is enabled by an improved vacuum system and a reduction in trap-induced heating. Results: We have measured the $^{225}$Ra atomic EDM to be less than $1.4\\times10^{-23}$ $e$ cm (95% confidence upper limit), which is a factor of 36 improvement over our previous result. Conclusions: Our evaluation of systematic effects shows that this measurement is completely limited by statistical uncertainty. Combining this measurement technique with planned experimental upgrades we project a statistical sensitivity at the $1\\times10^{-28}$ $e$ cm level and a total systematic uncertainty at the $4\\times10^{-29}$ $e$ cm level.\"/>\nL30: <meta name=\"twitter:site\" content=\"@arxiv\"/>\nL31: <meta name=\"twitter:card\" content=\"summary\"/>\nL32: <meta name=\"twitter:title\" content=\"Improved limit on the $^{225}$Ra electric dipole moment\"/>"
+              },
+              {
+                "line_number": 40,
+                "context": "L37:   <script src=\"//cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js\" type=\"text/javascript\"></script>\nL38:   <script src=\"//cdn.jsdelivr.net/npm/dompurify@2.3.5/dist/purify.min.js\"></script>\nL39:   <script src=\"/static/browse/0.3.4/js/toggle-labs.js?20241022\" type=\"text/javascript\"></script>\nL40:   <script src=\"/static/browse/0.3.4/js/cite.js\" type=\"text/javascript\"></script><meta name=\"citation_title\" content=\"Improved limit on the $^{225}$Ra electric dipole moment\" /><meta name=\"citation_author\" content=\"Bishof, Michael\" /><meta name=\"citation_author\" content=\"Parker, Richard H.\" /><meta name=\"citation_author\" content=\"Bailey, Kevin G.\" /><meta name=\"citation_author\" content=\"Greene, John P.\" /><meta name=\"citation_author\" content=\"Holt, Roy J.\" /><meta name=\"citation_author\" content=\"Kalita, Mukut R.\" /><meta name=\"citation_author\" content=\"Korsch, Wolfgang\" /><meta name=\"citation_author\" content=\"Lemke, Nathan D.\" /><meta name=\"citation_author\" content=\"Lu, Zheng-Tian\" /><meta name=\"citation_author\" content=\"Mueller, Peter\" /><meta name=\"citation_author\" content=\"O&#39;Connor, Thomas P.\" /><meta name=\"citation_author\" content=\"Singh, Jaideep T.\" /><meta name=\"citation_author\" content=\"Dietrich, Matthew R.\" /><meta name=\"citation_doi\" content=\"10.1103/PhysRevC.94.025501\" /><meta name=\"citation_date\" content=\"2016/06/15\" /><meta name=\"citation_online_date\" content=\"2016/06/15\" /><meta name=\"citation_pdf_url\" content=\"https://arxiv.org/pdf/1606.04931\" /><meta name=\"citation_arxiv_id\" content=\"1606.04931\" /><meta name=\"citation_abstract\" content=\"Background: Octupole-deformed nuclei, such as that of $^{225}$Ra, are expected to amplify observable atomic electric dipole moments (EDMs) that arise from time-reversal and parity-violating interactions in the nuclear medium. In 2015, we reported the first &#34;proof-of-principle&#34; measurement of the $^{225}$Ra atomic EDM. Purpose: This work reports on the first of several experimental upgrades to improve the statistical sensitivity of our $^{225}$Ra EDM measurements by orders of magnitude and evaluates systematic effects that contribute to current and future levels of experimental sensitivity. Method: Laser-cooled and trapped $^{225}$Ra atoms are held between two high voltage electrodes in an ultra high vacuum chamber at the center of a magnetically shielded environment. We observe Larmor precession in a uniform magnetic field using nuclear-spin-dependent laser light scattering and look for a phase shift proportional to the applied electric field, which indicates the existence of an EDM. The main improvement to our measurement technique is an order of magnitude increase in spin precession time, which is enabled by an improved vacuum system and a reduction in trap-induced heating. Results: We have measured the $^{225}$Ra atomic EDM to be less than $1.4\\times10^{-23}$ $e$ cm (95% confidence upper limit), which is a factor of 36 improvement over our previous result. Conclusions: Our evaluation of systematic effects shows that this measurement is completely limited by statistical uncertainty. Combining this measurement technique with planned experimental upgrades we project a statistical sensitivity at the $1\\times10^{-28}$ $e$ cm level and a total systematic uncertainty at the $4\\times10^{-29}$ $e$ cm level.\" />\nL41: </head>\nL42:\nL43: <body  class=\"with-cu-identity\">"
+              },
+              {
+                "line_number": 180,
+                "context": "L177:\nL178:\nL179:     <blockquote class=\"abstract mathjax\">\nL180:             <span class=\"descriptor\">Abstract:</span>Background: Octupole-deformed nuclei, such as that of $^{225}$Ra, are expected to amplify observable atomic electric dipole moments (EDMs) that arise from time-reversal and parity-violating interactions in the nuclear medium. In 2015, we reported the first &#34;proof-of-principle&#34; measurement of the $^{225}$Ra atomic EDM. Purpose: This work reports on the first of several experimental upgrades to improve the statistical sensitivity of our $^{225}$Ra EDM measurements by orders of magnitude and evaluates systematic effects that contribute to current and future levels of experimental sensitivity. Method: Laser-cooled and trapped $^{225}$Ra atoms are held between two high voltage electrodes in an ultra high vacuum chamber at the center of a magnetically shielded environment. We observe Larmor precession in a uniform magnetic field using nuclear-spin-dependent laser light scattering and look for a phase shift proportional to the applied electric field, which indicates the existence of an EDM. The main improvement to our measurement technique is an order of magnitude increase in spin precession time, which is enabled by an improved vacuum system and a reduction in trap-induced heating. Results: We have measured the $^{225}$Ra atomic EDM to be less than $1.4\\times10^{-23}$ $e$ cm (95% confidence upper limit), which is a factor of 36 improvement over our previous result. Conclusions: Our evaluation of systematic effects shows that this measurement is completely limited by statistical uncertainty. Combining this measurement technique with planned experimental upgrades we project a statistical sensitivity at the $1\\times10^{-28}$ $e$ cm level and a total systematic uncertainty at the $4\\times10^{-29}$ $e$ cm level.\nL181:     </blockquote>\nL182:\nL183:     <!--CONTEXT-->"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "ra225_first_measurement",
+        "source_url": "https://arxiv.org/abs/1504.07477",
+        "snapshot_path": "flavor_catalog/references/E007/parker2015_arxiv1504_07477.txt",
+        "sha256": "sha256:ff5adb5cdce9deb89ae97616f345881398a04fa0b83d26c15b3ae3036355b269",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "|d(225Ra)| < 5.0 x 10^-22 e cm at 95% confidence.",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26: <meta property=\"og:image:width\" content=\"1200\" />\nL27: <meta property=\"og:image:height\" content=\"700\" />\nL28: <meta property=\"og:image:alt\" content=\"arXiv logo\"/>\nL29: <meta property=\"og:description\" content=\"The radioactive radium-225 ($^{225}$Ra) atom is a favorable case to search for a permanent electric dipole moment (EDM). Due to its strong nuclear octupole deformation and large atomic mass, $^{225}$Ra is particularly sensitive to interactions in the nuclear medium that violate both time-reversal symmetry and parity. We have developed a cold-atom technique to study the spin precession of $^{225}$Ra atoms held in an optical dipole trap, and demonstrated the principle of this method by completing the first measurement of its atomic EDM, reaching an upper limit of $|$$d$($^{225}$Ra)$|$ $&lt;$ $5.0\\!\\times\\!10^{-22}$ $e \\cdot$cm (95$\\%$ confidence).\"/>\nL30: <meta name=\"twitter:site\" content=\"@arxiv\"/>\nL31: <meta name=\"twitter:card\" content=\"summary\"/>\nL32: <meta name=\"twitter:title\" content=\"First Measurement of the Atomic Electric Dipole Moment of $^{225}$Ra\"/>"
+              },
+              {
+                "line_number": 40,
+                "context": "L37:   <script src=\"//cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js\" type=\"text/javascript\"></script>\nL38:   <script src=\"//cdn.jsdelivr.net/npm/dompurify@2.3.5/dist/purify.min.js\"></script>\nL39:   <script src=\"/static/browse/0.3.4/js/toggle-labs.js?20241022\" type=\"text/javascript\"></script>\nL40:   <script src=\"/static/browse/0.3.4/js/cite.js\" type=\"text/javascript\"></script><meta name=\"citation_title\" content=\"First Measurement of the Atomic Electric Dipole Moment of $^{225}$Ra\" /><meta name=\"citation_author\" content=\"Parker, R. H.\" /><meta name=\"citation_author\" content=\"Dietrich, M. R.\" /><meta name=\"citation_author\" content=\"Kalita, M. R.\" /><meta name=\"citation_author\" content=\"Lemke, N. D.\" /><meta name=\"citation_author\" content=\"Bailey, K. G.\" /><meta name=\"citation_author\" content=\"Bishof, M. N.\" /><meta name=\"citation_author\" content=\"Greene, J. P.\" /><meta name=\"citation_author\" content=\"Holt, R. J.\" /><meta name=\"citation_author\" content=\"Korsch, W.\" /><meta name=\"citation_author\" content=\"Lu, Z. -T.\" /><meta name=\"citation_author\" content=\"Mueller, P.\" /><meta name=\"citation_author\" content=\"O&#39;Connor, T. P.\" /><meta name=\"citation_author\" content=\"Singh, J. T.\" /><meta name=\"citation_date\" content=\"2015/04/28\" /><meta name=\"citation_online_date\" content=\"2015/04/29\" /><meta name=\"citation_pdf_url\" content=\"https://arxiv.org/pdf/1504.07477\" /><meta name=\"citation_arxiv_id\" content=\"1504.07477\" /><meta name=\"citation_abstract\" content=\"The radioactive radium-225 ($^{225}$Ra) atom is a favorable case to search for a permanent electric dipole moment (EDM). Due to its strong nuclear octupole deformation and large atomic mass, $^{225}$Ra is particularly sensitive to interactions in the nuclear medium that violate both time-reversal symmetry and parity. We have developed a cold-atom technique to study the spin precession of $^{225}$Ra atoms held in an optical dipole trap, and demonstrated the principle of this method by completing the first measurement of its atomic EDM, reaching an upper limit of $|$$d$($^{225}$Ra)$|$ $&lt;$ $5.0\\!\\times\\!10^{-22}$ $e \\cdot$cm (95$\\%$ confidence).\" />\nL41: </head>\nL42:\nL43: <body  class=\"with-cu-identity\">"
+              },
+              {
+                "line_number": 180,
+                "context": "L177:\nL178:\nL179:     <blockquote class=\"abstract mathjax\">\nL180:             <span class=\"descriptor\">Abstract:</span>The radioactive radium-225 ($^{225}$Ra) atom is a favorable case to search for a permanent electric dipole moment (EDM). Due to its strong nuclear octupole deformation and large atomic mass, $^{225}$Ra is particularly sensitive to interactions in the nuclear medium that violate both time-reversal symmetry and parity. We have developed a cold-atom technique to study the spin precession of $^{225}$Ra atoms held in an optical dipole trap, and demonstrated the principle of this method by completing the first measurement of its atomic EDM, reaching an upper limit of $|$$d$($^{225}$Ra)$|$ $&lt;$ $5.0\\!\\times\\!10^{-22}$ $e \\cdot$cm (95$\\%$ confidence).\nL181:     </blockquote>\nL182:\nL183:     <!--CONTEXT-->"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "xe129_best_direct_limit",
+        "source_url": "https://arxiv.org/abs/1909.12800",
+        "snapshot_path": "flavor_catalog/references/E007/sachdeva2019_arxiv1909_12800.txt",
+        "sha256": "sha256:abce59966ada768fec68b0e9bd9bc68eb89955b8f69bf258a19e41d79183f175",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "d_A(129Xe) = (1.4 +/- 6.6_stat +/- 2.0_syst) x 10^-28 e cm; |d_A(129Xe)| < 1.4 x 10^-27 e cm at 95% CL; factor five more sensitive than 2001.",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26: <meta property=\"og:image:width\" content=\"1200\" />\nL27: <meta property=\"og:image:height\" content=\"700\" />\nL28: <meta property=\"og:image:alt\" content=\"arXiv logo\"/>\nL29: <meta property=\"og:description\" content=\"We report results of a new technique to measure the electric dipole moment of $^{129}$Xe with $^3$He comagnetometry. Both species are polarized using spin-exchange optical pumping, transferred to a measurement cell, and transported into a magnetically shielded room, where SQUID magnetometers detect free precession in applied electric and magnetic fields. The result from a one week measurement campaign in 2017 and a 2.5 week campaign in 2018, combined with detailed study of systematic effects, is $d_A(^{129}\\mathrm{Xe}) = (1.4 \\pm 6.6_\\mathrm{stat} \\pm 2.0_\\mathrm{syst})\\times10^{-28}~e\\,\\mathrm{cm}$. This corresponds to an upper limit of $|d_A(^{129}\\mathrm{Xe})| &lt; 1.4 \\times 10^{-27} ~e\\,\\mathrm{cm}~(95\\%~\\mathrm{CL})$, a factor of five more sensitive than the limit set in 2001.\"/>\nL30: <meta name=\"twitter:site\" content=\"@arxiv\"/>\nL31: <meta name=\"twitter:card\" content=\"summary\"/>\nL32: <meta name=\"twitter:title\" content=\"New Limit on the Permanent Electric Dipole Moment of $^{129}$Xe...\"/>"
+              },
+              {
+                "line_number": 40,
+                "context": "L37:   <script src=\"//cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js\" type=\"text/javascript\"></script>\nL38:   <script src=\"//cdn.jsdelivr.net/npm/dompurify@2.3.5/dist/purify.min.js\"></script>\nL39:   <script src=\"/static/browse/0.3.4/js/toggle-labs.js?20241022\" type=\"text/javascript\"></script>\nL40:   <script src=\"/static/browse/0.3.4/js/cite.js\" type=\"text/javascript\"></script><meta name=\"citation_title\" content=\"New Limit on the Permanent Electric Dipole Moment of $^{129}$Xe using $^{3}$He Comagnetometry and SQUID Detection\" /><meta name=\"citation_author\" content=\"Sachdeva, N.\" /><meta name=\"citation_author\" content=\"Fan, I.\" /><meta name=\"citation_author\" content=\"Babcock, E.\" /><meta name=\"citation_author\" content=\"Burghoff, M.\" /><meta name=\"citation_author\" content=\"Chupp, T. E.\" /><meta name=\"citation_author\" content=\"Degenkolb, S.\" /><meta name=\"citation_author\" content=\"Fierlinger, P.\" /><meta name=\"citation_author\" content=\"Haude, S.\" /><meta name=\"citation_author\" content=\"Kraegeloh, E.\" /><meta name=\"citation_author\" content=\"Kilian, W.\" /><meta name=\"citation_author\" content=\"Knappe-Grüneberg, S.\" /><meta name=\"citation_author\" content=\"Kuchler, F.\" /><meta name=\"citation_author\" content=\"Liu, T.\" /><meta name=\"citation_author\" content=\"Marino, M.\" /><meta name=\"citation_author\" content=\"Meinel, J.\" /><meta name=\"citation_author\" content=\"Rolfs, K.\" /><meta name=\"citation_author\" content=\"Salhi, Z.\" /><meta name=\"citation_author\" content=\"Schnabel, A.\" /><meta name=\"citation_author\" content=\"Singh, J. T.\" /><meta name=\"citation_author\" content=\"Stuiber, S.\" /><meta name=\"citation_author\" content=\"Terrano, W. A.\" /><meta name=\"citation_author\" content=\"Trahms, L.\" /><meta name=\"citation_author\" content=\"Voigt, J.\" /><meta name=\"citation_doi\" content=\"10.1103/PhysRevLett.123.143003\" /><meta name=\"citation_date\" content=\"2019/09/26\" /><meta name=\"citation_online_date\" content=\"2019/09/26\" /><meta name=\"citation_pdf_url\" content=\"https://arxiv.org/pdf/1909.12800\" /><meta name=\"citation_arxiv_id\" content=\"1909.12800\" /><meta name=\"citation_abstract\" content=\"We report results of a new technique to measure the electric dipole moment of $^{129}$Xe with $^3$He comagnetometry. Both species are polarized using spin-exchange optical pumping, transferred to a measurement cell, and transported into a magnetically shielded room, where SQUID magnetometers detect free precession in applied electric and magnetic fields. The result from a one week measurement campaign in 2017 and a 2.5 week campaign in 2018, combined with detailed study of systematic effects, is $d_A(^{129}\\mathrm{Xe}) = (1.4 \\pm 6.6_\\mathrm{stat} \\pm 2.0_\\mathrm{syst})\\times10^{-28}~e\\,\\mathrm{cm}$. This corresponds to an upper limit of $|d_A(^{129}\\mathrm{Xe})| &lt; 1.4 \\times 10^{-27} ~e\\,\\mathrm{cm}~(95\\%~\\mathrm{CL})$, a factor of five more sensitive than the limit set in 2001.\" />\nL41: </head>\nL42:\nL43: <body  class=\"with-cu-identity\">"
+              },
+              {
+                "line_number": 180,
+                "context": "L177:\nL178:\nL179:     <blockquote class=\"abstract mathjax\">\nL180:             <span class=\"descriptor\">Abstract:</span>We report results of a new technique to measure the electric dipole moment of $^{129}$Xe with $^3$He comagnetometry. Both species are polarized using spin-exchange optical pumping, transferred to a measurement cell, and transported into a magnetically shielded room, where SQUID magnetometers detect free precession in applied electric and magnetic fields. The result from a one week measurement campaign in 2017 and a 2.5 week campaign in 2018, combined with detailed study of systematic effects, is $d_A(^{129}\\mathrm{Xe}) = (1.4 \\pm 6.6_\\mathrm{stat} \\pm 2.0_\\mathrm{syst})\\times10^{-28}~e\\,\\mathrm{cm}$. This corresponds to an upper limit of $|d_A(^{129}\\mathrm{Xe})| &lt; 1.4 \\times 10^{-27} ~e\\,\\mathrm{cm}~(95\\%~\\mathrm{CL})$, a factor of five more sensitive than the limit set in 2001.\nL181:     </blockquote>\nL182:\nL183:     <!--CONTEXT-->"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "block_key": "xe129_independent_heidelberg_limit",
+        "source_url": "https://arxiv.org/abs/1904.12295",
+        "snapshot_path": "flavor_catalog/references/E007/allmendinger2019_arxiv1904_12295.txt",
+        "sha256": "sha256:94e4abc0ed9f32df163e52ae44b20d2a1cb6b4ec5bd27ce458bf01c3251cad28",
+        "access_date": "2026-05-16",
+        "anchors": [
+          {
+            "anchor_field": "value_summary",
+            "anchor_string": "d_Xe = (-4.7 +/- 6.4) x 10^-28 e cm; |d_Xe| < 1.5 x 10^-27 e cm at 95% C.L.",
+            "status": "AMBIGUOUS",
+            "matches": [
+              {
+                "line_number": 29,
+                "context": "L26: <meta property=\"og:image:width\" content=\"1200\" />\nL27: <meta property=\"og:image:height\" content=\"700\" />\nL28: <meta property=\"og:image:alt\" content=\"arXiv logo\"/>\nL29: <meta property=\"og:description\" content=\"We report on a new measurement of the CP-violating permanent Electric Dipole Moment (EDM) of the neutral $^{129}$Xe atom. Our experimental approach is based on the detection of the free precession of co-located nuclear spin-polarized $^3$He and $^{129}$Xe samples. The EDM measurement sensitivity benefits strongly from long spin coherence times of several hours achieved in diluted gases and homogeneous weak magnetic fields of about 400~nT. A finite EDM is indicated by a change in the precession frequency, as an electric field is periodically reversed with respect to the magnetic guiding field. Our result, $\\left(-4.7\\pm6.4\\right)\\cdot 10^{-28}$ ecm, is consistent with zero and is used to place a new upper limit on the $^{129}$Xe EDM: $|d_\\text{Xe}|&lt;1.5 \\cdot 10^{-27}$ ecm (95% C.L.). We also discuss the implications of this result for various CP-violating observables as they relate to theories of physics beyond the standard model.\"/>\nL30: <meta name=\"twitter:site\" content=\"@arxiv\"/>\nL31: <meta name=\"twitter:card\" content=\"summary\"/>\nL32: <meta name=\"twitter:title\" content=\"Measurement of the Permanent Electric Dipole Moment of the $^{129}$Xe Atom\"/>"
+              },
+              {
+                "line_number": 40,
+                "context": "L37:   <script src=\"//cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js\" type=\"text/javascript\"></script>\nL38:   <script src=\"//cdn.jsdelivr.net/npm/dompurify@2.3.5/dist/purify.min.js\"></script>\nL39:   <script src=\"/static/browse/0.3.4/js/toggle-labs.js?20241022\" type=\"text/javascript\"></script>\nL40:   <script src=\"/static/browse/0.3.4/js/cite.js\" type=\"text/javascript\"></script><meta name=\"citation_title\" content=\"Measurement of the Permanent Electric Dipole Moment of the $^{129}$Xe Atom\" /><meta name=\"citation_author\" content=\"Allmendinger, F.\" /><meta name=\"citation_author\" content=\"Engin, I.\" /><meta name=\"citation_author\" content=\"Heil, W.\" /><meta name=\"citation_author\" content=\"Karpuk, S.\" /><meta name=\"citation_author\" content=\"Krause, H. -J.\" /><meta name=\"citation_author\" content=\"Niederländer, B.\" /><meta name=\"citation_author\" content=\"Offenhäusser, A.\" /><meta name=\"citation_author\" content=\"Repetto, M.\" /><meta name=\"citation_author\" content=\"Schmidt, U.\" /><meta name=\"citation_author\" content=\"Zimmer, S.\" /><meta name=\"citation_doi\" content=\"10.1103/PhysRevA.100.022505\" /><meta name=\"citation_date\" content=\"2019/04/28\" /><meta name=\"citation_online_date\" content=\"2019/08/12\" /><meta name=\"citation_pdf_url\" content=\"https://arxiv.org/pdf/1904.12295\" /><meta name=\"citation_arxiv_id\" content=\"1904.12295\" /><meta name=\"citation_abstract\" content=\"We report on a new measurement of the CP-violating permanent Electric Dipole Moment (EDM) of the neutral $^{129}$Xe atom. Our experimental approach is based on the detection of the free precession of co-located nuclear spin-polarized $^3$He and $^{129}$Xe samples. The EDM measurement sensitivity benefits strongly from long spin coherence times of several hours achieved in diluted gases and homogeneous weak magnetic fields of about 400~nT. A finite EDM is indicated by a change in the precession frequency, as an electric field is periodically reversed with respect to the magnetic guiding field. Our result, $\\left(-4.7\\pm6.4\\right)\\cdot 10^{-28}$ ecm, is consistent with zero and is used to place a new upper limit on the $^{129}$Xe EDM: $|d_\\text{Xe}|&lt;1.5 \\cdot 10^{-27}$ ecm (95% C.L.). We also discuss the implications of this result for various CP-violating observables as they relate to theories of physics beyond the standard model.\" />\nL41: </head>\nL42:\nL43: <body  class=\"with-cu-identity\">"
+              },
+              {
+                "line_number": 180,
+                "context": "L177:\nL178:\nL179:     <blockquote class=\"abstract mathjax\">\nL180:             <span class=\"descriptor\">Abstract:</span>We report on a new measurement of the CP-violating permanent Electric Dipole Moment (EDM) of the neutral $^{129}$Xe atom. Our experimental approach is based on the detection of the free precession of co-located nuclear spin-polarized $^3$He and $^{129}$Xe samples. The EDM measurement sensitivity benefits strongly from long spin coherence times of several hours achieved in diluted gases and homogeneous weak magnetic fields of about 400~nT. A finite EDM is indicated by a change in the precession frequency, as an electric field is periodically reversed with respect to the magnetic guiding field. Our result, $\\left(-4.7\\pm6.4\\right)\\cdot 10^{-28}$ ecm, is consistent with zero and is used to place a new upper limit on the $^{129}$Xe EDM: $|d_\\text{Xe}|&lt;1.5 \\cdot 10^{-27}$ ecm (95% C.L.). We also discuss the implications of this result for various CP-violating observables as they relate to theories of physics beyond the standard model.\nL181:     </blockquote>\nL182:\nL183:     <!--CONTEXT-->"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "constraint_priority": "LOW",
+  "priority_rationale_short": "Ra/Xe EDMs are mainly auxiliary or projected cross-checks.",
+  "priority_rationale_full": "Current radium and xenon bounds are robust null measurements but much less\nconstraining than the electron, neutron, mercury, and qCEDM lanes. Their\nmain value is complementary nuclear response and future enhanced\nSchiff-moment reach. For the current anarchic-RS scan, model dependence\nand weaker limits make them auxiliary."
+}
