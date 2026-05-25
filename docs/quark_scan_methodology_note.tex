@@ -728,6 +728,70 @@ $16.54^{+24.28}_{-8.74}$~TeV in the perturbative convention. This is a
 BGS-budget band; the Wilson-RG and KK-tower systematics are summarized
 in Appendix~\ref{app:input-audits}.
 
+%% =====================================================================
+%% Symbolic 1/sqrt(|Delta epsilon_K|) band -- cleanup unit C02a-code.
+%% Band derived from the symbolic 1/sqrt(|Delta epsilon_K|) scaling of
+%% M_KK^min documented in docs/phase_logs/phase2_h5_signoff.md:90-101 and
+%% the C02a cleanup plan in .orchestration/CLEANUP_PLAN.md (sec. C02a-code).
+%% Exact band edges from direct three-edge RUNA reruns (central 6.7e-5,
+%% low 1e-5, high 3e-4) are deferred to cleanup unit C02c (paper
+%% finalization). The CLI seam for those reruns is the
+%% ``--epsilon-k-budget {central,low,high}`` flag introduced on
+%% ``scripts/run_rs_anarchy.py`` in this same commit.
+\paragraph{Symbolic NP-budget band on $\Mkk^{\min}$.}
+\label{para:eps-k-budget-band}
+The dominant systematic on $\Mkk^{\min}$ is the residual room
+$|\eK^{\mathrm{exp}}-\eK^{\mathrm{SM}}|\simeq 6.7\times10^{-5}$
+between the PDG 2024 experimental value
+$\eK^{\mathrm{exp}}=2.228\times10^{-3}$ and the
+Brod--Gorbahn--Stamou 2020 SM prediction
+$\eK^{\mathrm{SM}}=2.161\times10^{-3}$
+(\href{https://arxiv.org/abs/1911.06822}{arXiv:1911.06822};
+FLAG 2024 \href{https://arxiv.org/abs/2411.04268}{arXiv:2411.04268}
+hadronic inputs; full audit trail in
+\path{docs/audits/epsilon_k_sm_decision.md} and
+Appendix~\ref{app:input-audits}). Because the BGS total uncertainty on
+that residual is much larger than the central budget itself, a one-sigma
+Gaussian band on $\Mkk^{\min}$ is ill-defined; instead we bracket the
+bound by recomputing $\Mkk^{\min}$ at the budget edges, using the
+symbolic
+\[
+  \frac{\Mkk^{\min}(\Delta\eK)}{\Mkk^{\min}(\Delta\eK^{\mathrm{central}})}
+  \;=\;
+  \sqrt{\frac{\Delta\eK^{\mathrm{central}}}{\Delta\eK}}
+  \;=\;
+  \sqrt{\frac{6.7\times10^{-5}}{\Delta\eK}}
+\]
+scaling that follows from the tree-level KK-gluon Wilson-coefficient
+prefactor $\propto 1/\Mkk^2$ at fixed flavor structure (proof sketch in
+\path{docs/phase_logs/phase2_h5_signoff.md:90-101}). Two physically
+motivated edges bracket the BGS total uncertainty: a tight edge at
+$\Delta\eK=1.0\times10^{-5}$ giving
+$\Mkk^{\min}(1\!\times\!10^{-5})/\Mkk^{\min}(6.7\!\times\!10^{-5})
+\simeq 2.59$, and a loose edge at
+$\Delta\eK=3.0\times10^{-4}$ giving the ratio $\simeq 0.47$. At the
+RUNA $p50$, $\gs=3$ central value of $47.26$~TeV this yields the band
+\[
+  \Mkk^{\min}\bigl|_{50\%,\,\gs=3}^{\Delta\eK\text{ band}}
+  \;\simeq\; 47.26^{+75.10}_{-25.05}\ \mathrm{TeV}
+  \;\equiv\;
+  \bigl[22.21,\,122.36\bigr]\ \mathrm{TeV},
+\]
+i.e.\ the headline bound is a factor $\sim 0.47$--$2.59$ of the central
+value across the BGS-budget edges. The band quoted above is an
+\emph{approximate, symbolic-scaling} derivation: it propagates only the
+$\Delta\eK$ rescaling, holds the rest of the Wilson coefficient and
+PDG-gate machinery fixed, and does not re-thread the running or
+hadronic-matrix-element evaluation at each edge. The corresponding
+direct verification --- three RUNA reruns at $\Delta\eK\in
+\{1\!\times\!10^{-5},\,6.7\!\times\!10^{-5},\,3\!\times\!10^{-4}\}$
+exposed via the new
+\verb|--epsilon-k-budget {central,low,high}| flag on
+\path{scripts/run_rs_anarchy.py} --- is tracked as the deferred cleanup
+unit C02c in \path{.orchestration/CLEANUP_PLAN.md} and will replace this
+paragraph's symbolic edges with measured band ends in the paper
+finalization pass.
+
 \paragraph{Conclusion.} The headline numbers of \S\ref{sec:result} are
 not a Monte-Carlo fluctuation. They are the converged value of the
 underlying $\Mkk^{\min}$ percentiles of the anarchic ensemble, to within

@@ -350,15 +350,23 @@ def compute_delta_f2_wilsons(
 def _hadronic_eval_for_system(
     key: str,
     wilsons: DeltaF2WilsonCoefficients,
+    *,
+    epsilon_k_np_budget_override: float | None = None,
 ) -> tuple[float, float, float, dict[str, float], str, float] | None:
     """Attempt proper hadronic evaluation for a known meson system.
 
     Returns (ratio_to_bound, effective_amplitude, coherent_amplitude,
              operator_sizes, dominant_operator, dominant_size) or None if
     the system key is not recognized for hadronic evaluation.
+
+    ``epsilon_k_np_budget_override`` is forwarded to :func:`evaluate_epsilon_k`
+    only when ``key == "epsilon_k"``; it is silently ignored otherwise.
     """
     if key == "epsilon_k":
-        eps_result = evaluate_epsilon_k(wilsons)
+        eps_result = evaluate_epsilon_k(
+            wilsons,
+            epsilon_k_np_budget_override=epsilon_k_np_budget_override,
+        )
         # Build per-operator breakdown for epsilon_K (imaginary parts)
         import math
         me = _kaon_matrix_elements()
@@ -455,6 +463,7 @@ def evaluate_delta_f2_constraints(
     apply_qcd_running: bool = True,
     mu_had: float = 2.0,
     use_hadronic: bool = True,
+    epsilon_k_np_budget_override: float | None = None,
 ) -> DeltaF2ConstraintSummary:
     """Evaluate the repo-owned ``Delta F = 2`` benchmark bundle.
 
@@ -489,6 +498,13 @@ def evaluate_delta_f2_constraints(
         Hadronic scale for RG evolution in GeV (default 2.0).
     use_hadronic : bool
         If True (default), use proper hadronic matrix elements for all systems.
+    epsilon_k_np_budget_override : float, optional
+        Override the default ε_K NP budget |EPSILON_K_EXP - EPSILON_K_SM|
+        (~6.7e-5) with an explicit numerical value. Used by the
+        ``--epsilon-k-budget`` CLI sweep across central / low / high edges
+        for the band-quote sensitivity study (see cleanup unit
+        C02a-code and ``docs/phase_logs/phase2_h5_signoff.md``).
+        Has no effect on B_d, B_s, or D systems.
     """
     couplings = _coerce_couplings(source, M_KK=M_KK, xi_KK=xi_KK)
     coefficients = compute_delta_f2_wilsons(
@@ -509,7 +525,11 @@ def evaluate_delta_f2_constraints(
         # Try proper hadronic evaluation
         hadronic_result = None
         if use_hadronic:
-            hadronic_result = _hadronic_eval_for_system(item.key, evolved_coeffs)
+            hadronic_result = _hadronic_eval_for_system(
+                item.key,
+                evolved_coeffs,
+                epsilon_k_np_budget_override=epsilon_k_np_budget_override,
+            )
 
         if hadronic_result is not None:
             (
@@ -728,19 +748,38 @@ class DeltaMKResult:
 
 def evaluate_epsilon_k(
     wilsons: DeltaF2WilsonCoefficients,
+    *,
+    epsilon_k_np_budget_override: float | None = None,
 ) -> EpsilonKResult:
     """Evaluate the NP contribution to epsilon_K using proper hadronic matrix elements.
 
     This uses the physical formula:
         epsilon_K^NP = (kappa_epsilon / (sqrt(2) * Delta_m_K)) * Im(M_12^NP)
     and compares to the experimental budget |epsilon_K^exp - epsilon_K^SM|.
+
+    Parameters
+    ----------
+    wilsons : DeltaF2WilsonCoefficients
+        Wilson coefficients (typically RG-evolved to mu_had).
+    epsilon_k_np_budget_override : float, optional
+        Replace the default budget |EPSILON_K_EXP - EPSILON_K_SM| (~6.7e-5)
+        with an explicit numerical value. Used by the
+        ``--epsilon-k-budget`` CLI sweep across central / low / high edges
+        for the band-quote sensitivity study (cleanup unit C02a-code).
     """
     import math
 
     m12_np = _compute_m12_np(wilsons)
     im_m12_np = float(m12_np.imag)
     epsilon_k_np = abs(KAPPA_EPSILON / (math.sqrt(2.0) * DELTA_M_K) * im_m12_np)
-    budget = abs(EPSILON_K_EXP - EPSILON_K_SM)
+    if epsilon_k_np_budget_override is None:
+        budget = abs(EPSILON_K_EXP - EPSILON_K_SM)
+    else:
+        if epsilon_k_np_budget_override <= 0.0:
+            raise ValueError(
+                "epsilon_k_np_budget_override must be positive"
+            )
+        budget = float(epsilon_k_np_budget_override)
     ratio = epsilon_k_np / budget if budget > 0.0 else float("inf")
 
     return EpsilonKResult(
@@ -775,6 +814,8 @@ def evaluate_delta_mk(
 def evaluate_epsilon_k_with_running(
     wilsons: DeltaF2WilsonCoefficients,
     mu_had: float = 2.0,
+    *,
+    epsilon_k_np_budget_override: float | None = None,
 ) -> EpsilonKResult:
     """Like ``evaluate_epsilon_k`` but with QCD RG evolution from M_KK to mu_had.
 
@@ -789,6 +830,8 @@ def evaluate_epsilon_k_with_running(
         Wilson coefficients at the matching scale.
     mu_had : float
         Hadronic scale in GeV (default 2.0).
+    epsilon_k_np_budget_override : float, optional
+        Override for the NP budget; see :func:`evaluate_epsilon_k`.
 
     Returns
     -------
@@ -796,7 +839,10 @@ def evaluate_epsilon_k_with_running(
         The epsilon_K evaluation with RG-evolved Wilson coefficients.
     """
     evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
-    return evaluate_epsilon_k(evolved)
+    return evaluate_epsilon_k(
+        evolved,
+        epsilon_k_np_budget_override=epsilon_k_np_budget_override,
+    )
 
 
 def evaluate_delta_mk_with_running(

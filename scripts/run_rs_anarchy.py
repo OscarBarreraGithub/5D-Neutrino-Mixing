@@ -105,6 +105,28 @@ DEFAULT_Y_TRUNC_SIGMA: float = 3.0
 
 
 # ---------------------------------------------------------------------------
+# epsilon_K NP-budget edges for the M_KK^min band sensitivity study
+# ---------------------------------------------------------------------------
+#
+# The current code default is ``budget = |EPSILON_K_EXP - EPSILON_K_SM|``
+# ~ 6.7e-5, i.e. the post-audit BGS 2020 + PDG 2024 central value. The two
+# bracket edges below come from the BGS 2020 total-uncertainty discussion
+# in docs/phase_logs/phase2_h5_signoff.md:90-101 and the C02a cleanup plan
+# (low ~1e-5, high ~3e-4); under the symbolic 1/sqrt(|Delta epsilon_K|)
+# scaling of M_KK^min they correspond to factor 2.59x (tight) and 0.47x
+# (loose) excursions on the central headline value.
+#
+# Passing ``--epsilon-k-budget central`` is bit-for-bit identical to the
+# pre-flag code path (None override -> code default is used).
+EPSILON_K_BUDGET_EDGES: dict = {
+    "central": None,    # use deltaf2 code default (~6.7e-5)
+    "low": 1.0e-5,      # tight NP budget (raises M_KK^min ~2.59x)
+    "high": 3.0e-4,     # loose NP budget (lowers M_KK^min ~0.47x)
+}
+DEFAULT_EPSILON_K_BUDGET: str = "central"
+
+
+# ---------------------------------------------------------------------------
 # PDG targets at mu = m_t(m_t) = 163.5 GeV (matches repo convention)
 # ---------------------------------------------------------------------------
 
@@ -239,6 +261,12 @@ class EnsembleConfig:
     pdg_ckm_factor: float = PDG_CKM_FACTOR_TOL
     pdg_j_factor: float = PDG_J_FACTOR_TOL
     base_seed: int = 20260506
+    # epsilon_K NP-budget edge label and the resolved numerical override.
+    # ``epsilon_k_budget_edge`` is "central"/"low"/"high"; the resolved
+    # numerical value is None for "central" (use deltaf2 code default) and
+    # an explicit budget value for "low"/"high". See EPSILON_K_BUDGET_EDGES.
+    epsilon_k_budget_edge: str = DEFAULT_EPSILON_K_BUDGET
+    epsilon_k_np_budget_override: Optional[float] = None
 
 
 # ---------------------------------------------------------------------------
@@ -439,7 +467,10 @@ def _evaluate_one_draw(
             U_R_d=U_R_d,
         )
         df2 = evaluate_delta_f2_constraints(
-            couplings, M_KK=M_KK_GeV, xi_KK=cfg.xi_KK
+            couplings,
+            M_KK=M_KK_GeV,
+            xi_KK=cfg.xi_KK,
+            epsilon_k_np_budget_override=cfg.epsilon_k_np_budget_override,
         )
         # Delta_m_K from the *unevolved* kaon Wilsons run down to mu_had.
         unevolved_wilsons = compute_delta_f2_wilsons(
@@ -603,6 +634,14 @@ def _worker_init(cfg_dict: dict) -> None:
         pdg_ckm_factor=float(cfg_dict.get("pdg_ckm_factor", PDG_CKM_FACTOR_TOL)),
         pdg_j_factor=float(cfg_dict.get("pdg_j_factor", PDG_J_FACTOR_TOL)),
         base_seed=int(cfg_dict["base_seed"]),
+        epsilon_k_budget_edge=str(
+            cfg_dict.get("epsilon_k_budget_edge", DEFAULT_EPSILON_K_BUDGET)
+        ),
+        epsilon_k_np_budget_override=(
+            None
+            if cfg_dict.get("epsilon_k_np_budget_override") is None
+            else float(cfg_dict["epsilon_k_np_budget_override"])
+        ),
     )
     _GLOBAL_CFG = cfg
     _GLOBAL_TARGETS = _load_pdg_targets()
@@ -665,6 +704,25 @@ def _build_argparser() -> argparse.ArgumentParser:
                    help="Allowed multiplicative deviation in |V_us|, |V_cb|, |V_ub|.")
     p.add_argument("--pdg-j-factor", type=float, default=PDG_J_FACTOR_TOL,
                    help="Allowed multiplicative deviation in the Jarlskog invariant J.")
+    # epsilon_K NP-budget sensitivity sweep (cleanup unit C02a-code).
+    # 'central' (default) reproduces the pre-flag code path bit-for-bit and
+    # uses the deltaf2 default ~6.7e-5. 'low' and 'high' replace the budget
+    # with 1e-5 and 3e-4 respectively to bracket the BGS total uncertainty
+    # (see docs/phase_logs/phase2_h5_signoff.md:90-101 and the band-quote
+    # paragraph in docs/quark_scan_methodology_note.tex).
+    p.add_argument(
+        "--epsilon-k-budget",
+        type=str,
+        default=DEFAULT_EPSILON_K_BUDGET,
+        choices=tuple(EPSILON_K_BUDGET_EDGES.keys()),
+        help="epsilon_K NP-budget edge: 'central' uses the deltaf2 default "
+             "(~6.7e-5, BGS 2020 + PDG 2024); 'low' (1e-5) gives the tight "
+             "edge that raises M_KK^min by ~2.59x; 'high' (3e-4) gives the "
+             "loose edge that lowers M_KK^min by ~0.47x. The actual RUNA "
+             "reruns across the three edges are tracked as cleanup unit "
+             "C02c; this flag exposes the seam without committing to a "
+             "scan in this commit.",
+    )
     return p
 
 
@@ -674,6 +732,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     mkk_values_GeV = tuple(t * 1000.0 for t in _parse_csv_floats(args.m_kk_tev))
+    eps_k_edge = args.epsilon_k_budget
+    if eps_k_edge not in EPSILON_K_BUDGET_EDGES:
+        raise SystemExit(
+            f"unknown --epsilon-k-budget edge {eps_k_edge!r}; "
+            f"choices: {sorted(EPSILON_K_BUDGET_EDGES.keys())}"
+        )
+    eps_k_override = EPSILON_K_BUDGET_EDGES[eps_k_edge]
     cfg = EnsembleConfig(
         mkk_values_GeV=mkk_values_GeV,
         n_draws_per_tile=int(args.n_draws),
@@ -692,6 +757,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         pdg_ckm_factor=args.pdg_ckm_factor,
         pdg_j_factor=args.pdg_j_factor,
         base_seed=args.base_seed,
+        epsilon_k_budget_edge=eps_k_edge,
+        epsilon_k_np_budget_override=eps_k_override,
     )
 
     print(f"[rs_anarchy] output_dir = {output_dir}")
@@ -712,6 +779,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         f"[rs_anarchy] PDG gates: mass<x{cfg.pdg_mass_factor}, "
         f"CKM<x{cfg.pdg_ckm_factor}, J<x{cfg.pdg_j_factor}"
     )
+    if cfg.epsilon_k_np_budget_override is None:
+        print(
+            f"[rs_anarchy] eps_K budget = {cfg.epsilon_k_budget_edge} "
+            "(deltaf2 default ~6.7e-5; bit-for-bit reproduces pre-flag runs)"
+        )
+    else:
+        print(
+            f"[rs_anarchy] eps_K budget = {cfg.epsilon_k_budget_edge} "
+            f"(override = {cfg.epsilon_k_np_budget_override:.3e})"
+        )
     print(f"[rs_anarchy] n_workers   = {args.n_workers}")
 
     # Build tile payloads.
@@ -749,6 +826,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "pdg_ckm_factor": cfg.pdg_ckm_factor,
         "pdg_j_factor": cfg.pdg_j_factor,
         "base_seed": cfg.base_seed,
+        "epsilon_k_budget_edge": cfg.epsilon_k_budget_edge,
+        "epsilon_k_np_budget_override": cfg.epsilon_k_np_budget_override,
     }
 
     summaries: List[dict] = []
@@ -815,6 +894,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 "ckm_factor": cfg.pdg_ckm_factor,
                 "j_factor": cfg.pdg_j_factor,
             },
+            "epsilon_k_budget_edge": cfg.epsilon_k_budget_edge,
+            "epsilon_k_np_budget_override": cfg.epsilon_k_np_budget_override,
         },
     }
     with summary_path.open("w") as fh:
