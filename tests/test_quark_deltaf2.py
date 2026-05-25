@@ -117,6 +117,44 @@ def test_audited_deltaf2_hadronic_constants_match_selected_sources():
     assert np.isclose(deltaf2.EPSILON_K_SM, 2.161e-3, rtol=1e-3)
 
 
+def test_modern_phenomenology_kaon_constants_match_deltaf2_canonical():
+    """
+    R03-I2: pin the modern-lane vendored kaon constants to the canonical
+    deltaf2.py values. The modern lane is intentionally firewalled from
+    importing deltaf2 (see tests/test_modern_phenomenology.py), so the
+    constants are duplicated; this test enforces they stay in sync.
+
+    The firewall guards against the modern *module* importing deltaf2 at
+    source / sys.modules level. Test-side imports of both modules are
+    fine because tests are not the firewall surface.
+    """
+    import quarkConstraints.modern.phenomenology as modern_phen
+
+    # Use np.isclose (not ==) so float literals can differ in trailing digits
+    # if a future update introduces more precision on one side.
+    pairs = [
+        ("_KAON_B_1", "B_1_K"),
+        ("_KAON_B_4", "B_4_K"),
+        ("_KAON_B_5", "B_5_K"),
+        ("_KAON_EPSILON_K_SM", "EPSILON_K_SM"),
+        ("_KAON_EPSILON_K_EXP", "EPSILON_K_EXP"),
+        ("_KAON_F_K", "F_K"),
+        ("_KAON_M_K", "M_K"),
+        ("_KAON_DELTA_M_K", "DELTA_M_K"),
+        ("_KAON_M_S_2GEV", "M_S_2GEV"),
+        ("_KAON_M_D_2GEV", "M_D_2GEV"),
+        ("_KAON_KAPPA_EPSILON", "KAPPA_EPSILON"),
+    ]
+    for modern_name, canonical_name in pairs:
+        modern_val = getattr(modern_phen, modern_name)
+        canonical_val = getattr(deltaf2, canonical_name)
+        assert np.isclose(modern_val, canonical_val), (
+            f"{modern_name}={modern_val} (vendored in modern/phenomenology.py) "
+            f"out of sync with {canonical_name}={canonical_val} (canonical in deltaf2.py). "
+            "Update both literals together."
+        )
+
+
 def test_default_benchmark_point_has_stable_deltaf2_outputs():
     summary = evaluate_delta_f2_constraints(_fit_result(0.25), M_KK=3000.0)
 

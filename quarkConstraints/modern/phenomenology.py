@@ -415,7 +415,13 @@ def _operator_sizes_from_bridge_match(
 
 
 # --------------------------------------------------------------------------
-# Kaon hadronic parameters (inline, no deltaf2 import)
+# Kaon hadronic constants -- VENDORED COPY of canonical values in
+# quarkConstraints/deltaf2.py:618-623 (intentionally not imported; the
+# modern lane is architecturally firewalled from quarkConstraints.deltaf2
+# per tests/test_modern_phenomenology.py and modern/verifier.py).
+# A cross-module pin test in tests/test_quark_deltaf2.py
+# (test_modern_phenomenology_kaon_constants_match_deltaf2_canonical)
+# asserts these match the canonical values; update both copies together.
 # --------------------------------------------------------------------------
 
 _KAON_F_K = 0.1557
@@ -423,12 +429,12 @@ _KAON_M_K = 0.49761
 _KAON_DELTA_M_K = 3.484e-15
 _KAON_M_S_2GEV = 0.0934
 _KAON_M_D_2GEV = 0.00467
-_KAON_B_1 = 0.717
-_KAON_B_4 = 0.78
-_KAON_B_5 = 0.57
+_KAON_B_1 = 0.5503
+_KAON_B_4 = 0.903
+_KAON_B_5 = 0.691
 _KAON_KAPPA_EPSILON = 0.94
 _KAON_EPSILON_K_EXP = 2.228e-3
-_KAON_EPSILON_K_SM = 1.81e-3
+_KAON_EPSILON_K_SM = 2.161e-3
 
 
 def _kaon_m12_np_from_bridge_match(
