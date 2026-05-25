@@ -1,6 +1,6 @@
 {
   "all_candidate_count": 36,
-  "all_viable_count": 32,
+  "all_viable_count": 19,
   "construction": {
     "C_Q_formula": "alpha_Q I + beta_Q Y_d Y_d^dagger + gamma_Q Y_u Y_u^dagger",
     "C_d_formula": "alpha_d I + beta_d Y_d^dagger Y_d",
@@ -13,9 +13,9 @@
     "wilson_reference_scale_GeV": 3000.0,
     "xi_kk": 2.448687135269161
   },
-  "generated_at_utc": "2026-05-19T01:54:38.171298+00:00",
-  "git_commit": "6d99b17b8cac73f441559a9dac014e413e18c609",
-  "git_dirty_status": "?? artifacts/collaborator_5tev_points.csv\n?? artifacts/collaborator_5tev_points.provenance.json\n?? artifacts/collaborator_direct_affine_5_10tev_points.csv\n?? scripts/export_collaborator_5tev_points.py\n?? scripts/export_collaborator_direct_affine_points.py",
+  "generated_at_utc": "2026-05-25T22:53:33.600632+00:00",
+  "git_commit": "3ab1f8f7ed338be9e35158f13c671b200f6c121d",
+  "git_dirty_status": "M artifacts/collaborator_5tev_points.csv\n M artifacts/collaborator_5tev_points.provenance.json\n M artifacts/collaborator_direct_affine_5_10tev_points.csv\n?? .orchestration/CLEANUP_CHANGES_R2.md\n?? .orchestration/CLEANUP_PLAN.md\n?? .orchestration/CLEANUP_QUEUE.md\n?? .orchestration/CLEANUP_REVIEW_R1.md\n?? .orchestration/CLEANUP_REVIEW_R2.md\n?? .orchestration/cleanup_progress.json\n?? .orchestration/cleanup_reports/",
   "output_csv": "artifacts/collaborator_direct_affine_5_10tev_points.csv",
   "policies": [
     {
@@ -94,11 +94,11 @@
   "selected": [
     {
       "coefficient_policy": "down_aligned_flat_d",
-      "dominant_constraint": "D0",
+      "dominant_constraint": "epsilon_K",
       "fit_residual_norm": 1.2727116857177197e-10,
       "m_gkk_GeV": 5000.0,
       "max_abs_Y_bulk": 2.3456612598881614,
-      "max_ratio_to_bound": 0.08642324373495257
+      "max_ratio_to_bound": 0.34245049798648936
     },
     {
       "coefficient_policy": "down_aligned_flatter_u",
@@ -106,15 +106,7 @@
       "fit_residual_norm": 3.5233090135740524e-10,
       "m_gkk_GeV": 6000.0,
       "max_abs_Y_bulk": 2.5574255777974,
-      "max_ratio_to_bound": 0.06153130437327747
-    },
-    {
-      "coefficient_policy": "stronger_down_alignment",
-      "dominant_constraint": "epsilon_K",
-      "fit_residual_norm": 4.546353122522467e-11,
-      "m_gkk_GeV": 7000.0,
-      "max_abs_Y_bulk": 2.302375892013477,
-      "max_ratio_to_bound": 0.16374547200828707
+      "max_ratio_to_bound": 0.42605168562196233
     },
     {
       "coefficient_policy": "balanced_flat",
@@ -122,15 +114,23 @@
       "fit_residual_norm": 1.1739196082694873e-10,
       "m_gkk_GeV": 8000.0,
       "max_abs_Y_bulk": 2.9576306273983506,
-      "max_ratio_to_bound": 0.0933182231163338
+      "max_ratio_to_bound": 0.6616726646659096
     },
     {
-      "coefficient_policy": "larger_Q_slope_high_scale",
+      "coefficient_policy": "down_aligned_flat_d",
       "dominant_constraint": "epsilon_K",
-      "fit_residual_norm": 8.459114043440827e-11,
+      "fit_residual_norm": 9.599357309301156e-11,
       "m_gkk_GeV": 10000.0,
-      "max_abs_Y_bulk": 1.7788061268003421,
-      "max_ratio_to_bound": 0.4985834302489717
+      "max_abs_Y_bulk": 2.3625646098383597,
+      "max_ratio_to_bound": 0.09660100782608183
+    },
+    {
+      "coefficient_policy": "down_aligned_flat_d",
+      "dominant_constraint": "epsilon_K",
+      "fit_residual_norm": 1.3910710834851335e-10,
+      "m_gkk_GeV": 9000.0,
+      "max_abs_Y_bulk": 2.3599097001415426,
+      "max_ratio_to_bound": 0.11711835325424177
     }
   ],
   "selection": {
