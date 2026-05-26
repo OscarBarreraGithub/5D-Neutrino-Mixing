@@ -168,3 +168,49 @@ Recommendation: ready to tag `flavor-catalog-v0.1`. There are no remaining
 value-bearing mismatches or failed rows. The only open status is the E009
 metadata-access caveat, which is documented, cross-checked through an alternate
 source, and non-blocking for the numerical catalog.
+
+---
+
+## Tag annotation provenance (added by C12 cleanup, 2026-05-26)
+
+Reconciles the V/P counts written into the `flavor-catalog-v0.{2,3,4}` git
+tag annotations against the canonical post-consolidation totals documented
+in each `master_compile_v0X_report.md` (and the C07 "Consolidation status"
+addenda landed at those reports). Tags are not rewritten; the annotations
+remain as historical records. This block is the single authoritative cross-
+reference for downstream consumers and resolves R18-I1, R19-I3, R21-I1.
+
+| Tag | Annotation V/P (as written) | Canonical V/P (post-consolidation) | Total entries | Drift origin |
+|---|---|---|---|---|
+| `flavor-catalog-v0.2` | 79 VERIFIED + 1 PARTIAL | 79 VERIFIED + 1 PARTIAL | 80 | (no drift) |
+| `flavor-catalog-v0.3` | 87 VERIFIED + 1 PARTIAL | 86 VERIFIED + 2 PARTIAL | 88 | Tag projects the post-tag K020 re-fact-check state (`b5c2375` flipped K020 PARTIAL → VERIFIED); at the v0.3-tag boundary E009 + K020 were both PARTIAL |
+| `flavor-catalog-v0.4` | 100 VERIFIED + 2 PARTIAL | 101 VERIFIED + 1 PARTIAL | 102 | Tag projects the v0.3-tagged historical K020 PARTIAL state; at the v0.4-tag boundary K020 was already VERIFIED and only E009 remained PARTIAL |
+
+**Canonical sources of truth** for the V/P totals at each tag:
+
+- v0.2: `flavor_catalog/master_compile_v02_report.md` §"Consolidation
+  status (added by C07 cleanup, 2026-05-25)" — 75 consolidated-table rows
+  + 4 Wave-7 PRIMARY top/Higgs/EW addenda + 1 Wave-7 PRIMARY beauty
+  addendum = 80 (79V + 1P).
+- v0.3: `flavor_catalog/master_compile_v03_report.md` §"Consolidation
+  status" — 75 + 5 Wave-7 PRIMARY + 8 Wave-8 SECONDARY = 88 (86V + 2P at
+  tag boundary; K020 then cleared post-tag).
+- v0.4: `flavor_catalog/master_compile_v04_report.md` §"Consolidation
+  status" — 89 (75 DA-4 base + 14 Wave-9 collider_rs folded in by commit
+  `0c5dacc`) + 5 Wave-7 + 8 Wave-8 = 102 (101V + 1P).
+
+`tools/aggregate_factchecks.py` (C07 deliverable) is the forward-looking
+helper: running it at any HEAD ≥ `b5c2375` reports the canonical V/P
+breakdown over the in-tree fact-check files and should be cross-referenced
+before placing a new master-compile tag.
+
+**Forward-looking convention** (binding for v0.5+ tags): the V/P count in
+a master-compile tag annotation MUST be sourced from the at-tag-time
+compile report only; do not project post-tag corrections backward into the
+tag message. If a fact-check verdict changes after a tag is placed, the
+catalog state is updated by a normal commit and the next tag picks up the
+new total — the prior tag's annotation stays as a frozen historical record.
+
+Closes R18-I1 LOW, R19-I3 LOW, R21-I1 LOW (website-runbook headline aligned
+in the same C12 commit) and supersedes the "Optional" recommended-fix
+language for those three issues. See `.orchestration/cleanup_reports/C12.md`.

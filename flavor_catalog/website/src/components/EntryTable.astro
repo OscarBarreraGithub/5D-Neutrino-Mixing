@@ -67,7 +67,6 @@ const FAMILY_LABELS: Record<string, string> = {
       <tr class="row-link"
           data-process-id={r.process_id}
           data-family={r.family}
-          data-tier={r.tier}
           data-verdict={(r.fact_check_verdict || '').toUpperCase()}
           data-difficulty={(r.implementation_difficulty || '').toUpperCase()}
           data-coverage={(r.code_coverage_status || '').toUpperCase()}

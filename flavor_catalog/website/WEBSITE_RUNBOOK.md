@@ -18,7 +18,7 @@
 - `audits/factcheck_kaon.md`
 - Skim of `AGENTIC_WORKFLOW.md`
 
-Catalog facts: 102 entries (94 PRIMARY + 8 SECONDARY) across 8 families. 100 VERIFIED / 2 PARTIAL / 0 MISMATCH. Per-entry YAML schema documented in Explore agent report. M_KK^min,p50 = 47.26 TeV at g*=3 (rc1.1 quark scan), load-bearing for honest collider-tier framing.
+Catalog facts: 102 entries (94 PRIMARY + 8 SECONDARY) across 8 families. 101 VERIFIED / 1 PARTIAL / 0 MISMATCH (post-v0.4-tag canonical; K020 cleared by `b5c2375` before the v0.4 tag — matches `master_compile_v04_report.md` §"Consolidation status" and the website's `catalog_index.json` `verdict_counts`). Per-entry YAML schema documented in Explore agent report. M_KK^min,p50 = 47.26 TeV at g*=3 (rc1.1 quark scan), load-bearing for honest collider-tier framing.
 
 ---
 
