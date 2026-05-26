@@ -9,185 +9,10 @@ Format per issue:
 
 ## Open
 
-- [R01-I1] severity:LOW tag:code
-  Title: Dual source-of-truth for heavy-quark mass constants
-  Description: `qcd/constants.py` defines `M_CHARM=1.27, M_BOTTOM=4.18, M_TOP_MS=163.5` (used as threshold positions in `qcd/mass_running.py:106-108`), while `quarkConstraints/pdg_quark_masses.py:96-117` uses PDG-2024 inputs `m_c=1.273, m_b=4.183, m_t=162.5`. The methodology note acknowledges the top per-mille drift (`docs/quark_scan_methodology_note.tex:53-54`). Drift is per-mille so not load-bearing, but the dual source-of-truth pattern is fragile.
-  Evidence: `qcd/constants.py:17-19`; `quarkConstraints/pdg_quark_masses.py:96-117`; `docs/quark_scan_methodology_note.tex:53-54`; review `.orchestration/reviews/R01.md` Check 3.
-  Recommended fix: Make `qcd/constants` re-export `M_CHARM = PDG_2024_QUARK_MASSES['c'].central_GeV` etc., or have `mass_running._ordered_thresholds_between` consult the PDG dict directly.
-
-- [R01-I2] severity:INFO tag:code
-  Title: `MASS_TOLERANCE_FLOOR` is a placeholder pending Phase-0 calibration
-  Description: `quarkConstraints/scan.py:40` sets `MASS_TOLERANCE_FLOOR = 0.003` with a TODO at lines 37-39 stating the floor should be replaced by per-flavor 95th-percentile log-residuals from `scripts/calibrate_phase0.py`. R05 (post-audit rerun) should confirm whether calibration was executed or whether this remains a documented limitation.
-  Evidence: `quarkConstraints/scan.py:30-40`; review `.orchestration/reviews/R01.md` Check 3.
-  Recommended fix: Either run `scripts/calibrate_phase0.py` and replace the constant, or record an `ACCEPTED-RISK` note in this file.
-
-- [R02-I1] severity:INFO tag:docs
-  Title: MERGE_PLAN row for R02 names `pytest.ini` but the strict-xfail block landed in `pyproject.toml`
-  Description: `.orchestration/MERGE_PLAN.md:293` lists `pytest.ini` as one of the R02 file scopes, but the repo has no `pytest.ini` and the `xfail_strict = true` setting was added to `pyproject.toml` under `[tool.pytest.ini_options]`. Functionally equivalent for pytest, but the plan inventory is mismatched.
-  Evidence: `pyproject.toml:70-71`; `.orchestration/MERGE_PLAN.md:293`; commit `559b851`.
-  Recommended fix: Update the MERGE_PLAN row to read `pyproject.toml [tool.pytest.ini_options]` instead of `pytest.ini`, or accept as an inventory nit and close.
-
-- [R03-I4] severity:INFO tag:docs
-  Title: No top-level REFERENCES.md to cross-reference audit citations against
-  Description: The R03 review prompt expects audit cross-refs to resolve into a `REFERENCES.md` (or similar) at the repo root. None exists. The closest analogue is `flavor_catalog/references/` (a different sub-system index). Provenance is instead encoded as inline arXiv citations in `docs/audits/bag_param_inventory.md` and the methodology-note appendix. All five primary eprints (2411.04268, 1911.06822, 1907.01025, 1505.06639, 1002.3612) and the PDG 2024 review (Phys. Rev. D 110, 030001) are real and externally resolvable, so this is presentational rather than substantive.
-  Evidence: `docs/audits/bag_param_inventory.md:16-53`; `docs/quark_scan_methodology_note.tex` appendix `app:hadronic-input-provenance`; absence of `REFERENCES.md` at repo root.
-  Recommended fix: Either create a top-level `REFERENCES.md` aggregating all citations referenced by `docs/audits/*.md`, or accept the inline-citation convention as the canonical pattern (and document it in `CLAUDE.md` so future audits follow suit).
-
-- [R05-I1] severity:INFO tag:docs
-  Title: Rerun commit subject says "8 RS-anarchy scans" but 9 dated directories exist
-  Description: `db02223` subject reads "regenerate 8 RS-anarchy scans" and the MERGE_PLAN R05 row §B.1 echoes the same count. The actual rerun set per `docs/phase_logs/invalidation_gate_rerun.md:14-22` is 9 SLURM jobs (RUNA, Run-3 baseline/qtop/moreUV/moreIR, Run-B narrow/wide/gaussian, Run-C). The two zero-PDG-passing variants (Run-3 moreUV/moreIR) are arguably "no-data" reruns, which may explain the "8" count, but the bookkeeping does not match the artifacts on disk. Purely cosmetic.
-  Evidence: commit `db02223` subject; `docs/phase_logs/invalidation_gate_rerun.md:14-22`; `ls scan_outputs/ | grep 20260515 | wc -l` -> 9; `.orchestration/MERGE_PLAN.md:296`; review `.orchestration/reviews/R05.md` Issues.
-  Recommended fix: Either accept as cosmetic, or update the MERGE_PLAN R05 description to "9 (7 productive + 2 zero-pass)".
-
-- [R05-I3] severity:INFO tag:docs
-  Title: Possible reader confusion between benchmark 22.49x cumulative factor and the empirical ~4.47x headline scale shift
-  Description: The new methodology-note prose features the cumulative invalidation factor 22.49 = 6.2388 * 3.6052 prominently. The actual headline-number rescaling is 4.467x (p50 pert: 3.70 -> 16.54; p50 g_s*=3: 10.58 -> 47.26 etc.), which corresponds to a per-draw median max-ratio shift of 18.11x (sqrt = 4.256), not 22.49 (sqrt = 4.74). `docs/phase_logs/invalidation_gate_rerun.md:46-51` correctly explains the distinction, but a casual reader of the methodology note may conflate the two. Cosmetic.
-  Evidence: `scan_outputs/followup_crossings_summary.json` (cumulative_benchmark_factor = 22.4922); `docs/phase_logs/invalidation_gate_rerun.md:46-51`; review `.orchestration/reviews/R05.md` Check 2 / Check 3.
-  Recommended fix: Optional — add a one-line forward reference in the methodology-note 22.49 paragraph to the `invalidation_gate_rerun.md` distinction, or accept as adequate.
-
-- [R06-I1] severity:LOW tag:code
-  Title: CFW convention constants live as private module constants of the audit driver
-  Description: `CFW_RS_GS3_TEV=10.5`, `CFW_RS_GS6_TEV=21.0`, `CFW_PGB_GS3_TEV=17.0`, `CFW_PGB_GS6_TEV=33.0`, `EPSILON_K_BUDGET_DEFAULT`, and `G_S_PERT` are defined inside `scripts/rs_anarchy_cfw_comparison.py:41-78` rather than in a shared module. The regression test reaches into the script via `from scripts import rs_anarchy_cfw_comparison as cfw_script` (`tests/test_cfw_comparison.py:15`). Acceptable for a one-off audit driver; if future units add Csaki--Pomarol or other 5D-RS literature comparisons, factor these into a shared `quarkConstraints/audits/conventions.py` (or `docs/audits/conventions.yaml`) with a single source-of-truth for the CFW marker values.
-  Evidence: `scripts/rs_anarchy_cfw_comparison.py:41-78`; `tests/test_cfw_comparison.py:15,127-129`; review `.orchestration/reviews/R06.md` Code section.
-  Recommended fix: Optional refactor — extract `audits/conventions.py` if/when a second-paper comparison driver is added. Accept-as-is otherwise.
-
-- [R06-I2] severity:INFO tag:docs
-  Title: CFW comparison PNG no longer ships at the publication path
-  Description: `results/figures/quark/rs_anarchy_cfw_comparison.png` was committed by `11e0d58` but is now located at `results/figures/quark/exploratory/rs_anarchy_cfw_comparison.png`. The PDF (`rs_anarchy_cfw_comparison.pdf`) remains at the publication path. The relocation was not done by an R06 commit; it appears to be downstream housekeeping (R08 figure prune). The methodology note (`docs/quark_scan_methodology_note.tex:882`) `\includegraphics` references the `.pdf` only, so the LaTeX build is unaffected. Cosmetic discrepancy between phase-log narrative ("regenerated PDF/PNG") and final-tree state.
-  Evidence: `results/figures/quark/rs_anarchy_cfw_comparison.pdf` exists (33,436 bytes); `find results/figures/quark -name "*cfw*"` returns the moved PNG path; `git log --diff-filter=AM results/figures/quark/rs_anarchy_cfw_comparison.png` shows `11e0d58` as last creating commit; review `.orchestration/reviews/R06.md` Numerics section.
-  Recommended fix: No action required for R06. Track under R08 (figure prune unit) if it merits a note.
-
-- [R06-I3] severity:INFO tag:docs
-  Title: Headline number rounding mismatch between `cfw_vs_ours.md` and methodology note
-  Description: `docs/audits/cfw_vs_ours.md:12` quotes the post-audit default headline as `47.26^{+69.37}_{-24.98} TeV` (precise percentile spread), while `docs/quark_scan_methodology_note.tex:898-903` rounds to `~47 TeV`. The underlying numbers are consistent; the methodology note is a rounded summary and the audit doc is the precise source. The 23.37 / 46.74 matched-projection values are identical across both files.
-  Evidence: `docs/audits/cfw_vs_ours.md:12`; `docs/quark_scan_methodology_note.tex:898-903`; review `.orchestration/reviews/R06.md` Issues section.
-  Recommended fix: Accept as adequate. Optionally, the methodology-note paragraph could explicitly cite the audit doc as the precise-percentile source.
-
-- [R07-I1] severity:LOW tag:physics
-  Title: Wilson-score z=1.92 default is non-standard; matches CP two-sided 95% at large n, not standard Wilson 95% CI
-  Description: `quarkConstraints/finite_stats.py:8` sets the default `z=1.92` for `wilson_upper_limit`. This is documented in the helper docstring (lines 9-13) and in `docs/audits/zero_pass_inventory.md:13-14` as the "audit convention", and was deliberately chosen because z²=3.6864 ≈ −ln(0.025)=3.6889, which makes the large-n Wilson UL coincide with the two-sided Clopper-Pearson 95% upper endpoint (3.685e-4 vs 3.688e-4 for n=10000). However, a reader who runs `scipy.stats.binomtest(0, 10000).proportion_ci(method='wilson')` will get 3.84e-4 with the standard z=1.96, not the 3.69e-4 quoted in the paper. The convention difference is presentational, not a numerical bug; the underlying bound is correct. Recommend adding a one-sentence footnote in the methodology note (around line 748) explaining the z=1.92 choice, OR augmenting the `finite_stats.py` docstring to state the convention is chosen for CP-two-sided large-n agreement (not standard Wilson z=1.96).
-  Evidence: `quarkConstraints/finite_stats.py:8-13`; `docs/quark_scan_methodology_note.tex:706-709, 748-750, 766-771, 866`; `docs/audits/zero_pass_inventory.md:13-14`; review `.orchestration/reviews/R07.md` Check 1.
-  Recommended fix: Add a one-line explanatory footnote in the methodology note or expand the helper docstring. Numerical values are correct; only the convention choice deserves explicit disclosure.
-
-- [R07-I4] severity:INFO tag:docs
-  Title: `CLAUDE.md:12-15` paper-branch pointer to `paper/quark-scan-2026q2` will be invalidated by Phase 10
-  Description: Commit `1a107c8` added a "Paper branch note" block to `CLAUDE.md:12-15` pointing at `paper/quark-scan-2026q2`. MERGE_PLAN Phase 10 (§E step 39) plans to update this line to "main" after consolidation. Self-resolving; recorded here for tracking only.
-  Evidence: `CLAUDE.md:12-15`; commit `1a107c8`; `.orchestration/MERGE_PLAN.md:244-251`; review `.orchestration/reviews/R07.md` Check 3.
-  Recommended fix: No R07 action required. Confirm closure during Phase 10 execution.
-
-- [R08-I1] severity:INFO tag:docs
-  Title: `bf6186c` "final PDF rebuild after figure prune" committed a byte-identical PDF (no-op)
-  Description: Commit `bf6186c` records `docs/quark_scan_methodology_note.pdf` as `596242 -> 596242 bytes` (no change). This is correct behavior — the figure prune (`e7d824d`) only relocated unreferenced files, so no `\includegraphics` target moved and pdflatex genuinely produces a byte-identical PDF. The commit is documentary, not load-bearing. The meaningful post-prune rebuild that actually ships at rc1.1 is `e0b24e8` (620832 bytes, SHA-256 `5f544e5d...898883`, recorded in `artifacts/checksums.sha256` by `8deb291`).
-  Evidence: `git show --stat bf6186c`; `git show --stat e0b24e8`; `artifacts/checksums.sha256:21`; review `.orchestration/reviews/R08.md` Check 5.
-  Recommended fix: None. Accept as harmless commit-log noise.
-
-- [R08-I2] severity:INFO tag:numerics
-  Title: rc1.1 WARNING-3 fix shifts `f_{u,2}` from `0.117` to `0.16` (37% upward); the associated up-quark-mass expectation was simultaneously relaxed from explicit values to `\mathcal{O}(...)` form
-  Description: `e0b24e8` modifies `docs/quark_scan_methodology_note.tex:522` to change `f_u \approx (0.0011, 0.117, 1.00)` to `f_u \approx (0.0011, 0.16, 1.00)`, and lines 527-532 to relax `(m_u, m_c, m_t) \sim (1 MeV, 500 MeV, 200 GeV)` to `(\mathcal{O}(1 MeV), \mathcal{O}(1 GeV), \mathcal{O}(100 GeV))`. The two changes are consistent (the new `f_{u,2}=0.16` pushes the schematic `m_c` estimate up, motivating the order-of-magnitude rewrite). R08 is a cleanup unit so no re-derivation was performed; the catalog reviewer (R09+) or whoever next touches f-factor evaluation should spot-check that the documented `c_Q` / `c_u` pattern (eq.~3 of the note) actually reproduces `f_{u,2}=0.16` at the canonical `\varepsilon = M_{KK}/M_{Pl}`.
-  Evidence: `docs/quark_scan_methodology_note.tex:522, 527-532`; commit `e0b24e8`; review `.orchestration/reviews/R08.md` Issues row I2.
-  Recommended fix: Spot-check `f_{u,2}` at published c-pattern in the next physics-touching unit; or accept since the surrounding numerical content was relaxed to `\mathcal{O}(...)` to match.
-
-- [R09-I1] severity:INFO tag:docs
-  Title: Scaffold collapsed plan-v1 separate `edm/` + `neutrino_universality/` families into single `edm_neutrino/` dir
-  Description: `docs/phase_logs/flavor_catalog_plan_v1.md:30-55` listed 7 PRIMARY family directories including separate `edm/` and `neutrino_universality/`. The scaffold (`83c0178`) created only 6 PRIMARY dirs, merging the two into `edm_neutrino/` (visible in `flavor_catalog/catalog_master.tex:48-49` and `flavor_catalog/README.md:38`). The collapse is reasonable (both are diagonal-dipole / lepton-universality probes that share the same EFT operator class), is recorded in `docs/phase_logs/flavor_catalog_scaffold_impl.md`, and was consumed without contradiction by Waves 1–9. However, the plan-v1 document itself was not amended to reflect the rename, so a reader cross-referencing the plan against the tree will see a stale 7-family listing.
-  Evidence: `docs/phase_logs/flavor_catalog_plan_v1.md:30-55`; `flavor_catalog/catalog_master.tex:48-49`; `flavor_catalog/README.md:38`; `docs/phase_logs/flavor_catalog_scaffold_impl.md`; review `.orchestration/reviews/R09.md` Code section.
-  Recommended fix: Either accept (the scaffold-impl report already captures the divergence), or add a one-line note at the top of plan v1 pointing to the merger. Optional.
-
-- [R10a-I1] severity:INFO tag:docs
-  Title: K001 sidecar `checker_agent_id: "CA"` points to a stale wave label
-  Description: `flavor_catalog/processes/kaon/K001.yaml:9` declares `checker_agent_id: "CA"`, and the `status_history` records the actual CA cycle as `batch_id: "ca_w23_kaon_charm_edm"` at line 34. The Wave-1 kaon batch is `wa_wave1_kaon` / `ca_wave1_kaon` for K003-K006 and K013, while K001 (and K002) were drafted later under the sibling `w23_kaon_charm_edm` batch. Cosmetic — the batch_id in status_history is correct; the top-level `checker_agent_id` field is just unscoped.
-  Evidence: `flavor_catalog/processes/kaon/K001.yaml:9, 34`; `flavor_catalog/worklogs/checker/ca_w23_kaon_charm_edm.md`; review `.orchestration/reviews/R10a.md` Issues row I1.
-  Recommended fix: Optional — either populate `checker_agent_id` with the actual CA batch ID (`"ca_w23_kaon_charm_edm"`) on a future polish pass, or accept as a known convention.
-
-- [R11-I1] severity:LOW tag:code
-  Title: B017 introduced as new yaml+tex pair inside a WA-polish commit rather than as a standalone PKA-draft commit
-  Description: `flavor_catalog/processes/beauty/B017.{yaml,tex}` first appear in commit `5031e06` ("flavor-catalog(beauty): WA batch wa_w23_beauty — polish PKA drafts for B002 B005 B017 B018 B025 B032 B033"). All other Wave-2/3 new processes (T007, T018, B025, B032, B033, B018, L002, L007) land as dedicated PKA-draft commits before any WA batch; B017 skips the PKA-draft step. The file pair is otherwise complete (yaml parses against `flavor_catalog.process.v1`, tex renders) and DA-1 inventory at `flavor_catalog/worklogs/discovery/round_001_full_scope.md:11` counts B017 inside the beauty=10 tally, so this is a workflow-seam irregularity rather than a missing-process defect.
-  Evidence: `git log --diff-filter=A --name-only -- flavor_catalog/processes/beauty/B017.yaml` returns `5031e06`; compare with `git log --diff-filter=A --name-only -- flavor_catalog/processes/beauty/B025.yaml` returning `93c5a85` (a dedicated PKA-draft commit); review `.orchestration/reviews/R11.md` Check 3.
-  Recommended fix: Optional — backfill a worklog note in `flavor_catalog/worklogs/pka/B017.md` (if not already present) documenting that B017 was drafted-and-polished in one step. No code or physics impact.
-
-- [R13-I2] severity:LOW tag:docs
-  Title: `signoff/round_002_index.md` description column has wrong process names for K009 and K010
-  Description: `flavor_catalog/signoff/round_002_index.md` row for K009 reads "`K^+ → π^+ ℓ⁺ℓ⁻` form-factor (e+e- + mu+mu- branches)" — that description matches K017 (R12 scope, Wave-4 process drafted in commit `fd49402`), not K009 (which is `K_L → π⁰ μ⁺μ⁻`, see `flavor_catalog/processes/kaon/K009.yaml:4-5`). The K010 row reads "`K^+ → π^+ π⁰ γ / π⁰ e+e- γ` radiative" — that does not match K010 (`K_S → π⁰ e⁺e⁻`, see `flavor_catalog/processes/kaon/K010.yaml:4-5`). The verdicts themselves (APPROVE) remain valid because the round-2 cycle-2 CA worklogs (`flavor_catalog/worklogs/checker/ca_w5b_kaon_v2.md`) correctly verify the actual YAML content of K009/K010; only the human-readable description column of the signoff index is wrong.
-  Evidence: `flavor_catalog/signoff/round_002_index.md` K009/K010 rows vs. `flavor_catalog/processes/kaon/{K009,K010}.yaml:4-5`; cross-check with `flavor_catalog/worklogs/checker/ca_w5b_kaon_v2.md` (which correctly lists `K009 | BR(K_L → pi0 mu+ mu-)` and `K010 | BR(K_S → pi0 e+e-)`); review `.orchestration/reviews/R13.md` Check 3.
-  Recommended fix: Optional — correct the round_002_index.md K009/K010 description text to match `K009.yaml:4-5` (K_L → π⁰ μ⁺μ⁻) and `K010.yaml:4-5` (K_S → π⁰ e⁺e⁻). No retroactive verdict-table change needed since the APPROVE verdicts trace through CA worklogs that have the correct process IDs.
-
-- [R13-I3] severity:INFO tag:docs
-  Title: DA-3 worklog `round_003_final_sweep.md` does not separate Wave-4 vs Wave-5a pipeline lineage for charm family
-  Description: `flavor_catalog/worklogs/discovery/round_003_final_sweep.md:8` lists charm-family count as "8 drafted, OPUS-APPROVED: C001, C002, C003, C004, C005, C007". The 8 drafted count is correct (6 OPUS-APPROVED + C006 + C008 in cycle = 8). However, the wording does not separate that C002/C003/C004/C007 reached OPUS-APPROVED via the Wave-4 (R12 scope) PKA → WA → CA pipeline, while C005 reached it via the Wave-5a (R13 scope) pipeline. This is cosmetic only; the family inventory total is consistent with the catalog state.
-  Evidence: `flavor_catalog/worklogs/discovery/round_003_final_sweep.md:8-13` (family-by-family breakdown); cross-check with `flavor_catalog/signoff/round_001_index.md:48-53` (which approves C001-C005 + C007 in round-1, C005 specifically via Wave-5a `ca_w5a_kaon_charm.md`).
-  Recommended fix: Optional — add a one-line annotation in DA-3 worklog distinguishing Wave-4 (C002-C004, C007) from Wave-5a (C005) provenance. No urgency; future DA worklogs can incorporate this.
-
-- [R14-I2] severity:INFO tag:docs
-  Title: B001 yaml carries an unresolved `open_issue` about x_d / chi_d prose treatment
-  Description: `flavor_catalog/processes/beauty/B001.yaml:226` records "WA/CA should verify whether to retain only Delta m_d as the headline B001 observable or also list x_d and chi_d as companion values in prose." This open_issue was deposited at R14 commit `64b5043` (B001 PKA) and remains open at R14 tip (R14 commit `b709912` has B001 still in WRITER-INITIATED). The follow-up resolution is delivered downstream in R15 via the Wave-6 WA → CA → Opus arbitration chain (Opus arbitration document `flavor_catalog/signoff/by_process/B001_B003.md`). At R14 tip the open_issue is documented but unresolved; this is a workflow-seam expectation, not a defect — closed automatically once R15 review confirms the arbitration ruled `x_d` and `chi_d` stay in `pdg_or_equivalent.companion_*` blocks but the headline observable in prose is `Delta m_d` only.
-  Evidence: `flavor_catalog/processes/beauty/B001.yaml:226` (open_issues block at R14 tip); resolution at `flavor_catalog/signoff/by_process/B001_B003.md` (deposited in R15 commit set per MERGE_PLAN.md:308); review `.orchestration/reviews/R14.md` Check 2.
-  Recommended fix: Close automatically once R15 is reviewed; no R14-side change required.
-
-- [R15-I2] severity:INFO tag:docs
-  Title: E009 carries `fact_check_verdict: PARTIAL` due to JS-only INSPIRE Weinberg-1989 URL render
-  Description: `flavor_catalog/processes/edm_neutrino/E009.yaml:81-83` records the fact-check verdict as `PARTIAL` with note "Neutron anchor and Weinberg-operator benchmark values verified; INSPIRE Weinberg 1989 URL rendered JS-only, with metadata cross-checked via APS/local snapshot." This is an artifact of the INSPIRE web app rendering metadata via JavaScript, not a numerical-correctness issue. The local snapshot `flavor_catalog/references/E009/weinberg1989_inspire_metadata.txt` (sha256 `d50b6648...`) is the source of record; all PDG / Abel 2020 / Pospelov-Ritz / Haisch-Hala / Bhattacharya numerics are fully VERIFIED. Cosmetic verdict-label artifact; should not be conflated with a genuine PARTIAL physics finding.
-  Evidence: `flavor_catalog/processes/edm_neutrino/E009.yaml:81-83`; review `.orchestration/reviews/R15.md` Check 2.
-  Recommended fix: Optional — update the fact-check verdict to `VERIFIED-WITH-NOTE` or `VERIFIED` once a non-JS INSPIRE metadata source is captured. No urgency; the snapshot is canonical.
-
-- [R15-I3] severity:INFO tag:docs
-  Title: L023 (neutrino trident) filed under `family: charged_lepton` though it is technically a neutrino process
-  Description: `flavor_catalog/processes/charged_lepton/L023.yaml:3` declares `family: charged_lepton`, but the process `nu_mu N -> nu_mu N mu+ mu-` is a neutrino-scattering trident. The classification is defensible because the muon current and the (nu_mu gamma^a P_L nu_mu)(mu gamma_a mu) contact interaction are the load-bearing degrees of freedom, and `L023.tex:14-18` explicitly disclaims this. A future catalog refactor may want a `lepton_universal` or `neutrino` family for contact-interaction probes; not a defect at present scale (L023 is the only entry that would qualify).
-  Evidence: `flavor_catalog/processes/charged_lepton/L023.yaml:3`; `flavor_catalog/processes/charged_lepton/L023.tex:14-18`; review `.orchestration/reviews/R15.md` Check 1.
-  Recommended fix: None — current classification is documented and consistent. Reconsider if more than 2-3 neutrino-process entries are ever added.
-
-- [R16-I1] severity:INFO tag:docs
-  Title: T012 single-entry consolidates three Z-pole charm observables and absorbs T013 (charm asymmetry)
-  Description: `flavor_catalog/processes/top_higgs_ew/T012.yaml:3-11` declares one process entry for `R_c^0`, `A_FB^{0,c}`, and `A_c`, and the DA-4 addendum (`round_004_addendum_deferred_scope.md:26`) explicitly folds T013 (charm asymmetry standalone) into T012 with the trigger "promote if charm asymmetries need an independent LEP/SLC likelihood." The combined entry is defensible because R_c / A_FB^{0,c} / A_c are jointly determined from the same LEP-SLC Z-pole fit, but a future PI scope decision to commission an independent charm-asymmetry likelihood would need to split T012 / promote T013.
-  Evidence: `flavor_catalog/processes/top_higgs_ew/T012.yaml:3-11`; `flavor_catalog/worklogs/discovery/round_004_addendum_deferred_scope.md:26`; review `.orchestration/reviews/R16.md` Check 1.
-  Recommended fix: None at present scale. Track for the next discovery wave if PI asks for an independent LEP-SLC charm likelihood.
-
-- [R16-I2] severity:INFO tag:docs
-  Title: R16 task-prompt anchor "BR(t->c gamma) < ~1.8e-4 ATLAS" is the older Run-1 / pre-2020 limit; catalog correctly carries 1.51e-5 CMS Run-2
-  Description: The R16 dispatch prompt suggested an expected anchor of "BR(t->c gamma) < ~1.8e-4 ATLAS or similar." The catalog's headline at `T003.yaml:119` is the current CMS-TOP-21-013 Run-2 result `< 1.51e-5 @ 95% CL (expected 1.54e-5)` at 138 fb^-1, with ATLAS Run-2 LH/RH benchmarks `< 4.2e-5 / < 4.5e-5` at 139 fb^-1 and PDG live generic `Gamma(t -> gamma q)/Gamma(t -> Wb) < 9.5e-6` (q = u, c combined) properly recorded. The catalog is current and correct; the prompt expectation was a stale limit. Worth flagging so future reviewers do not re-litigate.
-  Evidence: `flavor_catalog/processes/top_higgs_ew/T003.yaml:112-185`; review `.orchestration/reviews/R16.md` Check 1.
-  Recommended fix: None — catalog is current. If a future reviewer prompt is generated automatically, source the expected anchor from `pdg_or_equivalent.value_summary` rather than from external recall.
-
-- [R16-I4] severity:INFO tag:docs
-  Title: B001/B003 arbitration commit `7e1b80b` chronologically predates the Wave-7 PKA cycle (2026-05-16T16:35 vs 18:27+)
-  Description: `git log -1 --format="%ci" 7e1b80b` returns `2026-05-16 16:35:01`, while the earliest Wave-7 PKA commit (`e3ecf8b` T012) is `2026-05-16T18:26:49`. The MERGE_PLAN groups the arbitration under R16 (§B.1 row for Wave-7) by topical scope, but a strict-temporal reading would attach it to R15 (Wave-6 close). R15 review already cross-references the arbitration via `signoff/by_process/B001_B003.md`, so no information is lost; this is a bookkeeping seam only.
-  Evidence: `.orchestration/MERGE_PLAN.md:309`; `git log -1 --format="%ci" 7e1b80b`; review `.orchestration/reviews/R16.md` Issues table and Check 3.
-  Recommended fix: None — the topical grouping is correct. Future MERGE_PLAN revisions could add a `chronology_note` column when an arbitration commit's topic crosses wave boundaries.
-
-- [R17-I3] severity:INFO tag:docs
-  Title: Catalog "v0.2" snapshot not pinned by a git tag — current `catalog_master.{tex,pdf}` is the post-R19 re-compile
-  Description: The branch carries `master_compile_v02_report.md`, `master_compile_v03_report.md`, and `master_compile_v04_report.md` documenting three successive master-compile cycles. At the R17 endpoint commit `835cf48`, `catalog_master.tex` had 6 sections (kaon, charm, beauty, top/Higgs/EW, charged_lepton, EDM/neutrino). The current working-tree `catalog_master.tex` has 8 sections (adds collider_rs and a SECONDARY block) from R18/R19. A strict reader who wants to inspect the v0.2 state must use `git show 835cf48:flavor_catalog/catalog_master.tex` rather than the working-tree file. Cosmetic only; the per-cycle reports are self-contained.
-  Evidence: `git show 835cf48:flavor_catalog/catalog_master.tex` (6 sections); current `flavor_catalog/catalog_master.tex:33-78` (8 sections); `flavor_catalog/master_compile_v0{2,3,4}_report.md`.
-  Recommended fix: None at present. Future master-compile cycles could add annotated git tags (`v0.2-catalog`, `v0.3-catalog`, `v0.4-catalog`) so each milestone has a stable refname for downstream consumers.
-
-- [R18-I2] severity:LOW tag:provenance
-  Title: Commit `37beabb` message reads "PKA-K020 initial draft" but the diff contains the B013 family files
-  Description: `git show --stat 37beabb` shows the commit message `flavor-catalog(wave8): PKA-K020 initial draft (SECONDARY)` but the actual content is `processes/secondary/beauty/B013.{tex,yaml}` + `references/B013/*` (12 files, 780 insertions). The K020 content actually landed in the next commit `bab5bd0` (correctly labeled `PKA-K020`), and a second B013-related commit `ebd066c` (correctly labeled `PKA-B013`) at 02:18:44 added 8 more `references/B013/*` snapshots. The mis-labeling is a commit-message typo only; no content is missing, and the eventual file tree contains all expected K020 and B013 files (verified at `flavor_catalog/processes/secondary/{beauty/B013,kaon/K020}.{tex,yaml}`). The MERGE_PLAN.md:311 commit list at R18 is therefore correct: both `37beabb` (B013 first deposit) and `bab5bd0` (K020) belong to R18.
-  Evidence: `git show --stat 37beabb` (filenames are B013); `git show --stat bab5bd0` (filenames are K020); commit timestamps `37beabb` 02:18:05, `bab5bd0` 02:20:06; review `.orchestration/reviews/R18.md` Check 2.
-  Recommended fix: None at present (history is immutable). For future PKA dispatch waves: cross-check the commit message ID matches the `git diff --stat` filenames before pushing.
-
-- [R18-I4] severity:INFO tag:docs
-  Title: SECONDARY tier rationale is documented in TWO places (per-YAML `priority_rationale` AND `PRIORITY_TIERS.md` §4 table) — desirable redundancy, but a future edit could drift one source
-  Description: The PI's "SECONDARY tier classification reasoning is documented" requirement from the R18 prompt is satisfied at TWO independent surfaces: (a) each YAML's one-line `priority_rationale` field (e.g. `K020.yaml:5` — "Deferred by DA-4...; Top-tier; charged-current LFV companion to K019. Lower implementation priority than Waves 1-7 PRIMARY entries"), and (b) the `PRIORITY_TIERS.md:90-99` Wave-8 §4 rationale table (per-entry "originally deferred" + "promoted in Wave-8" columns). The two sources agree pairwise for all 8 entries. The redundancy is desirable (the YAML is the per-process source of truth; the table is the wave-level overview), but a future re-promotion or de-promotion edit could drift one without the other. Documentation-only seam; not a defect.
-  Evidence: `flavor_catalog/processes/secondary/kaon/K020.yaml:4-6` and `K019.yaml:4-5`; `flavor_catalog/PRIORITY_TIERS.md:90-99`; cross-confirmed for the 6 other SECONDARY entries (B007/B008/B013/B014/K021/T014); review `.orchestration/reviews/R18.md` Check 3.
-  Recommended fix: None at present. Future SECONDARY waves: the wave runbook §6 reproducibility-note pattern (Wave-8 runbook does this correctly) ensures the new entries' YAML rationale and the PRIORITY_TIERS.md table row are landed in the same wave, minimizing drift risk.
-
-- [R21-I2] severity:INFO tag:infra
-  Title: `cloudflare-pages.config.md` is a markdown doc, not a `wrangler.toml` — Cloudflare Pages dashboard config must be entered manually
-  Description: The R21 prompt asks "Cloudflare config (wrangler.toml or similar)". The deployment config in this unit is a markdown _document_ at `flavor_catalog/website/cloudflare-pages.config.md` (111 lines) capturing the dashboard values rather than a machine-readable `wrangler.toml`. Cloudflare Pages git-driven deployments do not require `wrangler.toml` (unlike Cloudflare Workers); build command + output dir are entered in the Pages dashboard. The website pairs the doc with `.node-version`, `public/_redirects`, and `public/_headers` (the machine-readable Pages config files). Pattern is correct for Pages but a fresh operator must manually replicate dashboard fields from the `.md`. Not a defect; awareness flag.
-  Evidence: `flavor_catalog/website/cloudflare-pages.config.md:14-25`; `flavor_catalog/website/.node-version`; `flavor_catalog/website/public/_redirects:11-12`; `flavor_catalog/website/public/_headers:1-20`; `git ls-tree origin/flavor-catalog-website/2026q2 flavor_catalog/website/ | grep -i wrangler` returns nothing; review `.orchestration/reviews/R21.md` Check Code.
-  Recommended fix: Optional — add a `wrangler.toml` for Pages (supported but not required) if/when the team wants the deployment fully reproducible from VCS without dashboard touchpoints. Out of scope for R21.
-
-- [R21-I3] severity:LOW tag:docs
-  Title: `WEBSITE_RUNBOOK.md` STOP-and-ping trigger "Codex citation-anchor failure > 20% on any family" was tripped (charm 23.7% UNRESOLVED) but handled as soft-trigger per PI directive
-  Description: `flavor_catalog/website/WEBSITE_RUNBOOK.md:35` lists "Codex citation-anchor failure > 20% on any family" as a STOP-and-ping trigger. Phase-2 phase totals at `:53-55` record charm 23.7% UNRESOLVED (over by 3.7pp). The phase-2 commit message (`6ffbb33`) and runbook entry document "Per PI directive 'do not stop', continuing; surfaced for end-of-build decision on targeted re-resolve". Procedurally fine (orchestrator surfaced the trip; UNRESOLVED anchors are explicitly labelled in the citation modal so no false anchors shipped), but there's a wording seam between the strict ">20%" policy at `:35` and the "soft-STOP trigger" handling at `:55`. Cosmetic.
-  Evidence: `flavor_catalog/website/WEBSITE_RUNBOOK.md:35` (STOP-and-ping triggers); `:53-55` (per-family UNRESOLVED %, charm 23.7%, soft-STOP-trigger note); commit `6ffbb33` body; review `.orchestration/reviews/R21.md` Check Code.
-  Recommended fix: Optional — edit policy at `:35` to read "> 20% (soft trigger; PI to confirm continue-vs-re-resolve)", or document the PI's "do not stop" directive at the policy block rather than only in the phase-2 ledger entry. Not blocking.
-
-- [R22-I2] severity:LOW tag:docs
-  Title: methodology page remains at `/methodology/` after `5f31f2d` removes the nav link
-  Description: `5f31f2d` removes the `<a href="/methodology/">Methodology</a>` nav from `BaseLayout.astro` but the page itself is still produced (`src/pages/methodology.astro`, 233 lines, reachable via direct URL + family-page internal links). The redirect file `public/_redirects` does not redirect `/methodology/`. Intentional per commit body ("Remove Methodology from nav and home CTA") and link-reachable, but a fresh operator may be surprised that an unlinked-from-nav page still ships.
-  Evidence: `flavor_catalog/website/src/pages/methodology.astro` exists in the `5f31f2d` tree (233 lines); `BaseLayout.astro` nav contains only Browse after `5f31f2d`; commit `5f31f2d` body "Remove Methodology from nav and home CTA"; review `.orchestration/reviews/R22.md` Check Code.
-  Recommended fix: Optional — add a one-line frontmatter comment stating "Page intentionally kept at /methodology/ for deep links; not in main nav", or, if the intent was retirement, delete the page and add a `/methodology -> /` redirect in `public/_redirects`. Not blocking.
+(none — all open issues have been routed to Closed / Accepted-risk subsections
+below; Tier-6 deferred work tracked in `CLEANUP_QUEUE.md` rows C02b
+(sensitivity-band figure) and C02c (SLURM RUNA reruns at 3 budget edges),
+both deferred to paper-finalization phase.)
 
 ## Closed / Accepted-risk
 
@@ -425,11 +250,167 @@ Format per issue:
   Title: Historical-snapshot figure dirs (`quark_pre_audit_constants/`, `quark_baseline_800k/`) deliberately left in tree
   Description: Closed via accept-as-paper-archive-companion disposition recorded in `docs/audits/figure_prune_inventory.md` (new "Status as of 2026-05-26 post-cleanup (C19)" block). `quark_baseline_800k/` is already absent from the tree; `quark_pre_audit_constants/` is retained (58 files / ~5 MB) on `\includegraphics`-irrelevance and provenance grounds. No tracked code, no test code, no current TeX source references these dirs. Methodology PDF rebuilt (20 pp, 627505 bytes) with the C03→C19 substantive forwarding cross-reference sentence added (one line at `docs/quark_scan_methodology_note.tex`).
 
+### Closed by C20 (auto-resolved / accepted-risk)
+
+Sweep of all remaining `## Open` INFO/LOW issues that are non-actionable
+(documentation cosmetic seams, workflow-seam observations, or items whose
+original `Recommended fix` explicitly says "None", "Optional", "Accept as
+adequate", or "Accept-as-is otherwise"). Two entries are AUTO-RESOLVED (the
+upstream artifact those issues tracked has since been corrected). The rest
+are ACCEPTED-RISK. Full C20 disposition table at
+`.orchestration/cleanup_reports/C20.md`; per-issue original text preserved
+below verbatim for audit trail.
+
+- [R01-I1] severity:LOW tag:code  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: Dual source-of-truth for heavy-quark mass constants
+  Description: Per-mille drift between `qcd/constants.py` (`M_CHARM=1.27, M_BOTTOM=4.18, M_TOP_MS=163.5`, used as threshold positions in `qcd/mass_running.py:106-108`) and `quarkConstraints/pdg_quark_masses.py:96-117` (PDG-2024 `m_c=1.273, m_b=4.183, m_t=162.5`) is acknowledged in `docs/quark_scan_methodology_note.tex:53-54`. Drift is per-mille so not load-bearing; dual-SSOT pattern accepted-as-is for the quark-scan paper. Future refactor option (re-export pattern) recorded but not gated on paper finalization.
+  Evidence: `qcd/constants.py:17-19`; `quarkConstraints/pdg_quark_masses.py:96-117`; `docs/quark_scan_methodology_note.tex:53-54`; review `.orchestration/reviews/R01.md` Check 3.
+
+- [R01-I2] severity:INFO tag:code  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: `MASS_TOLERANCE_FLOOR` is a placeholder pending Phase-0 calibration
+  Description: `quarkConstraints/scan.py:40` sets `MASS_TOLERANCE_FLOOR = 0.003` with a TODO at lines 37-39 pointing at `scripts/calibrate_phase0.py`. The calibration script exists in-tree but has not been re-run since the kaon-constants audit (C01); Phase-0 floor calibration is deferred to the paper-finalization phase (Tier-6 deferred work). ACCEPTED-RISK rationale: the current 0.003 floor is conservative; any future re-calibration would tighten not loosen the floor, and the headline numerics in the methodology note are tested against the per-flavor log-residual structure independently.
+  Evidence: `quarkConstraints/scan.py:30-40`; `scripts/calibrate_phase0.py` (in-tree); review `.orchestration/reviews/R01.md` Check 3.
+
+- [R02-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: MERGE_PLAN row for R02 names `pytest.ini` but the strict-xfail block landed in `pyproject.toml`
+  Description: `.orchestration/MERGE_PLAN.md:293` lists `pytest.ini` as an R02 file scope, but the `xfail_strict = true` setting was added to `pyproject.toml` under `[tool.pytest.ini_options]`. Functionally equivalent for pytest; MERGE_PLAN inventory nit only. ACCEPTED-RISK.
+  Evidence: `pyproject.toml:70-71`; `.orchestration/MERGE_PLAN.md:293`; commit `559b851`.
+
+- [R03-I4] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: No top-level REFERENCES.md to cross-reference audit citations against
+  Description: Provenance is encoded as inline arXiv citations in `docs/audits/bag_param_inventory.md` and the methodology-note appendix. All five primary eprints (2411.04268, 1911.06822, 1907.01025, 1505.06639, 1002.3612) and PDG 2024 review (Phys. Rev. D 110, 030001) are real and externally resolvable. ACCEPTED-RISK: inline-citation convention accepted as canonical for the quark-scan paper.
+  Evidence: `docs/audits/bag_param_inventory.md:16-53`; `docs/quark_scan_methodology_note.tex` appendix `app:hadronic-input-provenance`.
+
+- [R05-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: Rerun commit subject says "8 RS-anarchy scans" but 9 dated directories exist
+  Description: `db02223` subject says "regenerate 8 RS-anarchy scans"; actual rerun set is 9 SLURM jobs (RUNA, Run-3 baseline/qtop/moreUV/moreIR, Run-B narrow/wide/gaussian, Run-C). Two Run-3 variants (moreUV/moreIR) had zero PDG-passing draws, justifying the "8" count. Purely cosmetic. ACCEPTED-RISK.
+  Evidence: commit `db02223` subject; `docs/phase_logs/invalidation_gate_rerun.md:14-22`; `.orchestration/MERGE_PLAN.md:296`.
+
+- [R05-I3] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: Possible reader confusion between benchmark 22.49x cumulative factor and the empirical ~4.47x headline scale shift
+  Description: Methodology-note 22.49 = 6.2388 * 3.6052 cumulative invalidation-factor and the empirical 4.467x headline rescaling are already distinguished in `docs/phase_logs/invalidation_gate_rerun.md:46-51`. ACCEPTED-RISK: distinction is documented at the canonical phase-log source; methodology-note prose reads adequately for the paper audience.
+  Evidence: `scan_outputs/followup_crossings_summary.json`; `docs/phase_logs/invalidation_gate_rerun.md:46-51`.
+
+- [R06-I1] severity:LOW tag:code  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: CFW convention constants live as private module constants of the audit driver
+  Description: `CFW_RS_GS3_TEV=10.5`, `CFW_RS_GS6_TEV=21.0`, `CFW_PGB_GS3_TEV=17.0`, `CFW_PGB_GS6_TEV=33.0`, `EPSILON_K_BUDGET_DEFAULT`, `G_S_PERT` live in `scripts/rs_anarchy_cfw_comparison.py:41-78`; regression test reaches into the script via `from scripts import rs_anarchy_cfw_comparison as cfw_script`. ACCEPTED-RISK per the issue's own recommended fix ("Accept-as-is otherwise"): acceptable for a one-off audit driver. Refactor option reserved for the day a second-paper comparison driver is added.
+  Evidence: `scripts/rs_anarchy_cfw_comparison.py:41-78`; `tests/test_cfw_comparison.py:15,127-129`.
+
+- [R06-I2] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: CFW comparison PNG no longer ships at the publication path
+  Description: PNG relocated to `results/figures/quark/exploratory/`; PDF stays at the publication path. Methodology note `\includegraphics` references the PDF only, so LaTeX build is unaffected. ACCEPTED-RISK: cosmetic discrepancy between phase-log narrative and final-tree state; no consumer is broken.
+  Evidence: `results/figures/quark/rs_anarchy_cfw_comparison.pdf`; relocated PNG at `exploratory/` subdir; `docs/quark_scan_methodology_note.tex:882`.
+
+- [R06-I3] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: Headline number rounding mismatch between `cfw_vs_ours.md` and methodology note
+  Description: `docs/audits/cfw_vs_ours.md:12` quotes precise percentile spread `47.26^{+69.37}_{-24.98} TeV`; `docs/quark_scan_methodology_note.tex:898-903` rounds to `~47 TeV`. Numbers are consistent (precise-source vs rounded-summary). ACCEPTED-RISK per issue's own recommended fix ("Accept as adequate").
+  Evidence: `docs/audits/cfw_vs_ours.md:12`; `docs/quark_scan_methodology_note.tex:898-903`.
+
+- [R07-I1] severity:LOW tag:physics  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: Wilson-score z=1.92 default is non-standard; matches CP two-sided 95% at large n
+  Description: `quarkConstraints/finite_stats.py:8` default `z=1.92` is documented in the helper docstring (lines 9-13) and in `docs/audits/zero_pass_inventory.md:13-14` as the "audit convention". Numerical values are correct; only the convention choice (z=1.92 vs standard Wilson z=1.96) is presentational. ACCEPTED-RISK: the docstring + audit-doc disclosure is judged sufficient for the paper audience; an explanatory methodology-note footnote remains an Optional follow-up (not gating).
+  Evidence: `quarkConstraints/finite_stats.py:8-13`; `docs/quark_scan_methodology_note.tex:706-709, 748-750, 766-771, 866`; `docs/audits/zero_pass_inventory.md:13-14`.
+
+- [R07-I4] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (AUTO-RESOLVED).
+  Title: `CLAUDE.md:12-15` paper-branch pointer to `paper/quark-scan-2026q2` will be invalidated by Phase 10
+  Description: AUTO-RESOLVED. The `CLAUDE.md:12-15` paper-branch pointer was updated during Phase-1 (post-consolidation) editing; the current `CLAUDE.md:12-16` block reads "All work lives on `main` (post-2026-05-25 consolidation; tagged `v2026q2-catalog-complete`). The canonical quark-sector methodology note is `docs/quark_scan_methodology_note.tex`/`.pdf`. This paper is quark-sector only; lepton-sector directories are follow-up scope. The Cloudflare-deployed catalog website builds from `main` with root `flavor_catalog/website/`." The planned MERGE_PLAN Phase-10 update landed; the original R07-I4 tracking entry is now self-resolved.
+  Evidence: `CLAUDE.md:12-16` (current state, post-Phase-1); commit `1a107c8` (original pointer); review `.orchestration/reviews/R07.md` Check 3.
+
+- [R08-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: `bf6186c` "final PDF rebuild after figure prune" committed a byte-identical PDF (no-op)
+  Description: `bf6186c` records `docs/quark_scan_methodology_note.pdf` as `596242 -> 596242 bytes` (no change). Correct behavior — the figure prune (`e7d824d`) only relocated unreferenced files. ACCEPTED-RISK: harmless commit-log noise; meaningful post-prune rebuild ships at `e0b24e8` (620832 bytes).
+  Evidence: `git show --stat bf6186c`; `git show --stat e0b24e8`; `artifacts/checksums.sha256:21`.
+
+- [R08-I2] severity:INFO tag:numerics  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: rc1.1 WARNING-3 fix shifts `f_{u,2}` from `0.117` to `0.16` (37% upward)
+  Description: `e0b24e8` shifts `f_{u,2}` in `docs/quark_scan_methodology_note.tex:522` from 0.117 to 0.16, simultaneously relaxing surrounding `(m_u, m_c, m_t)` estimates from explicit values to `\mathcal{O}(...)` order-of-magnitude form. The two changes are consistent. ACCEPTED-RISK per issue's own recommended fix ("accept since the surrounding numerical content was relaxed to `\mathcal{O}(...)` to match"). Spot-check at canonical c-pattern remains an Optional follow-up.
+  Evidence: `docs/quark_scan_methodology_note.tex:522, 527-532`; commit `e0b24e8`.
+
+- [R09-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: Scaffold collapsed plan-v1 separate `edm/` + `neutrino_universality/` families into single `edm_neutrino/` dir
+  Description: Plan-v1 listed 7 PRIMARY family directories; scaffold (`83c0178`) created 6, merging `edm/` + `neutrino_universality/` into `edm_neutrino/`. Collapse is recorded in `docs/phase_logs/flavor_catalog_scaffold_impl.md`; consumed without contradiction by Waves 1-9. ACCEPTED-RISK: stale 7-family listing in plan-v1 is a superseded planning artifact; current catalog tree is the canonical source.
+  Evidence: `docs/phase_logs/flavor_catalog_plan_v1.md:30-55`; `flavor_catalog/catalog_master.tex:48-49`; `flavor_catalog/README.md:38`; `docs/phase_logs/flavor_catalog_scaffold_impl.md`.
+
+- [R10a-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: K001 sidecar `checker_agent_id: "CA"` points to a stale wave label
+  Description: `flavor_catalog/processes/kaon/K001.yaml:9` declares `checker_agent_id: "CA"`; the actual CA cycle batch_id is in `status_history` at line 34. ACCEPTED-RISK: the `status_history.batch_id` field is the actual provenance source; top-level `checker_agent_id` is just unscoped; future polish-pass remains Optional.
+  Evidence: `flavor_catalog/processes/kaon/K001.yaml:9, 34`; `flavor_catalog/worklogs/checker/ca_w23_kaon_charm_edm.md`.
+
+- [R11-I1] severity:LOW tag:code  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: B017 introduced as new yaml+tex pair inside a WA-polish commit
+  Description: B017 first appears in WA-polish commit `5031e06`, not in a dedicated PKA-draft commit (all other Wave-2/3 new processes land as dedicated PKA-draft first). File pair is complete; yaml parses against `flavor_catalog.process.v1`; DA-1 inventory counts B017 in the beauty=10 tally. ACCEPTED-RISK: workflow-seam irregularity, not a missing-process defect; no code or physics impact.
+  Evidence: `git log --diff-filter=A --name-only -- flavor_catalog/processes/beauty/B017.yaml` = `5031e06`; `flavor_catalog/worklogs/discovery/round_001_full_scope.md:11`.
+
+- [R13-I2] severity:LOW tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: `signoff/round_002_index.md` description column has wrong process names for K009 and K010
+  Description: K009 row reads "`K^+ → π^+ ℓ⁺ℓ⁻` form-factor" (matches K017, not K009) and K010 row reads "`K^+ → π^+ π⁰ γ / π⁰ e+e- γ` radiative" (does not match K010). APPROVE verdicts trace through CA worklog `ca_w5b_kaon_v2.md` which correctly identifies the actual process IDs. ACCEPTED-RISK: human-readable description column in signoff-index is wrong but verdict integrity is preserved via the CA worklog cross-trace; corrective edit remains Optional per issue's own recommended fix.
+  Evidence: `flavor_catalog/signoff/round_002_index.md` vs `flavor_catalog/processes/kaon/{K009,K010}.yaml:4-5`; `flavor_catalog/worklogs/checker/ca_w5b_kaon_v2.md`.
+
+- [R13-I3] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: DA-3 worklog does not separate Wave-4 vs Wave-5a pipeline lineage for charm family
+  Description: `round_003_final_sweep.md:8` reports the 8-drafted charm-family count correctly; family-by-family Wave-4 vs Wave-5a pipeline distinction is not surfaced in the wording. ACCEPTED-RISK: cosmetic only; family inventory total is consistent with the catalog state; Wave-5a (`C005`) pipeline lineage is correctly captured in `signoff/round_001_index.md:48-53` via the `ca_w5a_kaon_charm.md` cross-link.
+  Evidence: `flavor_catalog/worklogs/discovery/round_003_final_sweep.md:8-13`; `flavor_catalog/signoff/round_001_index.md:48-53`.
+
+- [R14-I2] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (AUTO-RESOLVED).
+  Title: B001 yaml carries an unresolved `open_issue` about x_d / chi_d prose treatment
+  Description: AUTO-RESOLVED per the issue's own recommended fix ("Close automatically once R15 is reviewed; no R14-side change required"). The B001 open_issue ("WA/CA should verify whether to retain only Delta m_d as the headline B001 observable or also list x_d and chi_d as companion values in prose") was resolved downstream in R15 via the Wave-6 WA → CA → Opus arbitration chain at `flavor_catalog/signoff/by_process/B001_B003.md`: the arbitration ruled `Delta m_d` is the headline prose observable; `x_d` and `chi_d` stay in `pdg_or_equivalent.companion_*` blocks. R15 was reviewed and merged.
+  Evidence: `flavor_catalog/processes/beauty/B001.yaml:226` (original open_issue); `flavor_catalog/signoff/by_process/B001_B003.md` (resolution); MERGE_PLAN.md:308.
+
+- [R15-I2] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: E009 carries `fact_check_verdict: PARTIAL` due to JS-only INSPIRE Weinberg-1989 URL render
+  Description: E009 PARTIAL verdict is an artifact of the INSPIRE web app rendering metadata via JavaScript; local snapshot at `flavor_catalog/references/E009/weinberg1989_inspire_metadata.txt` (sha256 `d50b6648...`) is the canonical source of record; all numerics fully VERIFIED. ACCEPTED-RISK: cosmetic verdict-label artifact; updating to `VERIFIED-WITH-NOTE` remains Optional per issue's own recommended fix.
+  Evidence: `flavor_catalog/processes/edm_neutrino/E009.yaml:81-83`; `flavor_catalog/references/E009/weinberg1989_inspire_metadata.txt`.
+
+- [R15-I3] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: L023 (neutrino trident) filed under `family: charged_lepton` though it is technically a neutrino process
+  Description: L023 classification under `family: charged_lepton` is defensible (muon current and the contact interaction are the load-bearing degrees of freedom); `L023.tex:14-18` explicitly disclaims this. ACCEPTED-RISK per issue's own recommended fix ("None — current classification is documented and consistent"). Reconsider only if >2-3 neutrino-process entries are ever added.
+  Evidence: `flavor_catalog/processes/charged_lepton/L023.yaml:3`; `flavor_catalog/processes/charged_lepton/L023.tex:14-18`.
+
+- [R16-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: T012 single-entry consolidates three Z-pole charm observables and absorbs T013 (charm asymmetry)
+  Description: T012 single-entry for `R_c^0` + `A_FB^{0,c}` + `A_c` is defensible (jointly determined from the same LEP-SLC Z-pole fit). DA-4 addendum `round_004_addendum_deferred_scope.md:26` explicitly folds T013 into T012. ACCEPTED-RISK per issue's own recommended fix ("None at present scale"). Future PI scope decision to commission an independent charm-asymmetry likelihood would re-open via a fresh DA wave.
+  Evidence: `flavor_catalog/processes/top_higgs_ew/T012.yaml:3-11`; `flavor_catalog/worklogs/discovery/round_004_addendum_deferred_scope.md:26`.
+
+- [R16-I2] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: R16 task-prompt anchor "BR(t->c gamma) < ~1.8e-4 ATLAS" is stale; catalog correctly carries 1.51e-5 CMS Run-2
+  Description: Catalog headline at `T003.yaml:119` is the current CMS-TOP-21-013 Run-2 result `< 1.51e-5 @ 95% CL`. The R16 dispatch prompt's expected anchor was a stale Run-1 / pre-2020 limit. ACCEPTED-RISK per issue's own recommended fix ("None — catalog is current"). Future automated-prompt generation should source anchors from `pdg_or_equivalent.value_summary` rather than external recall.
+  Evidence: `flavor_catalog/processes/top_higgs_ew/T003.yaml:112-185`.
+
+- [R16-I4] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: B001/B003 arbitration commit `7e1b80b` chronologically predates the Wave-7 PKA cycle
+  Description: Arbitration commit `7e1b80b` timestamps `2026-05-16 16:35:01`; earliest Wave-7 PKA commit is `2026-05-16T18:26:49`. MERGE_PLAN topical grouping under R16 is correct; strict-temporal reading would attach to R15. ACCEPTED-RISK per issue's own recommended fix ("None — the topical grouping is correct"). R15 already cross-references the arbitration via `signoff/by_process/B001_B003.md`; no information is lost.
+  Evidence: `.orchestration/MERGE_PLAN.md:309`; `git log -1 --format="%ci" 7e1b80b`.
+
+- [R18-I2] severity:LOW tag:provenance  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: Commit `37beabb` message reads "PKA-K020 initial draft" but the diff contains the B013 family files
+  Description: `37beabb` is mis-labeled (commit subject says K020 but files are B013). K020 content actually landed in `bab5bd0` and a second B013 commit `ebd066c` added more references. File tree contains all expected K020 and B013 files. ACCEPTED-RISK per issue's own recommended fix ("None at present (history is immutable)"). MERGE_PLAN R18 commit list correctly attributes both commits.
+  Evidence: `git show --stat 37beabb`, `git show --stat bab5bd0`; `flavor_catalog/processes/secondary/{beauty/B013,kaon/K020}.{yaml,tex}` all present.
+
+- [R18-I4] severity:INFO tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: SECONDARY tier rationale is documented in TWO places (per-YAML `priority_rationale` AND `PRIORITY_TIERS.md` §4 table)
+  Description: Per-process `priority_rationale` field + wave-level `PRIORITY_TIERS.md:90-99` table both encode the SECONDARY tier reasoning; the two sources agree pairwise for all 8 SECONDARY entries. ACCEPTED-RISK per issue's own recommended fix ("None at present"): redundancy is desirable (per-process SoT + wave-level overview); drift mitigated by the wave-runbook §6 reproducibility-note pattern.
+  Evidence: `flavor_catalog/processes/secondary/kaon/K020.yaml:4-6`, `K019.yaml:4-5`; `flavor_catalog/PRIORITY_TIERS.md:90-99`.
+
+- [R21-I2] severity:INFO tag:infra  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: `cloudflare-pages.config.md` is a markdown doc, not a `wrangler.toml`
+  Description: Cloudflare Pages git-driven deployments do not require `wrangler.toml` (unlike Cloudflare Workers); build command + output dir are entered in the dashboard. The website pairs the doc with `.node-version`, `public/_redirects`, `public/_headers` (the machine-readable Pages config files). ACCEPTED-RISK per issue's own recommended fix ("Optional ... Out of scope for R21"). Pattern is correct for Pages.
+  Evidence: `flavor_catalog/website/cloudflare-pages.config.md:14-25`; `.node-version`, `public/_redirects:11-12`, `public/_headers:1-20`.
+
+- [R21-I3] severity:LOW tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: `WEBSITE_RUNBOOK.md` STOP-and-ping trigger was tripped (charm 23.7% UNRESOLVED) but handled as soft-trigger
+  Description: `WEBSITE_RUNBOOK.md:35` STOP-and-ping policy vs `:53-55` soft-trigger handling under PI's "do not stop" directive is a wording seam. UNRESOLVED anchors are explicitly labelled in the citation modal so no false anchors shipped. ACCEPTED-RISK per issue's own recommended fix ("Not blocking"); the PI directive is captured in the phase-2 ledger entry and commit `6ffbb33` body.
+  Evidence: `flavor_catalog/website/WEBSITE_RUNBOOK.md:35, 53-55`; commit `6ffbb33`.
+
+- [R22-I2] severity:LOW tag:docs  **CLOSED 2026-05-26** by C20 (ACCEPTED-RISK).
+  Title: methodology page remains at `/methodology/` after `5f31f2d` removes the nav link
+  Description: Methodology page (`src/pages/methodology.astro`, 233 lines) is unlinked-from-nav but reachable via direct URL + family-page internal links. Intentional per commit `5f31f2d` body ("Remove Methodology from nav and home CTA"). ACCEPTED-RISK per issue's own recommended fix ("Not blocking").
+  Evidence: `flavor_catalog/website/src/pages/methodology.astro`; `flavor_catalog/website/src/layouts/BaseLayout.astro` (nav after `5f31f2d`); commit `5f31f2d` body.
+
 ### Auto-resolved / no-op
 
-- [R17-I3] severity:INFO tag:docs  **CLOSED 2026-05-26** by C16 (PRE-EXISTING-TAG-VERIFIED, no action).
+- [R17-I3] severity:INFO tag:docs  **CLOSED 2026-05-26** by C16 (PRE-EXISTING-TAG-VERIFIED, no action); confirmed by C20 as the canonical location.
   Title: Catalog "v0.2" snapshot — produce or annotate
-  Description: Per CR-1 in the cleanup-plan r2 revision, the original C16 v0.2 tag-creation task is DROPPED: the `flavor-catalog-v0.2` annotated tag already exists at commit `835cf48` (verified by `git show-ref --tags flavor-catalog-v0.2`). C16 took no tag action. Final bookkeeping (move R17-I3 into a dedicated `### Auto-resolved / no-op` subsection per the cleanup-plan H. organization scheme) is reserved for C21 per the plan's CLEANUP_PLAN.md §H. instructions; the closure marker here is provisional and C21 may relocate the entry without re-opening. Evidence: `.orchestration/cleanup_reports/C16.md` §"Note on R17-I3".
+  Description: Per CR-1 in the cleanup-plan r2 revision, the original C16 v0.2 tag-creation task is DROPPED: the `flavor-catalog-v0.2` annotated tag already exists at commit `835cf48` (verified by `git show-ref --tags flavor-catalog-v0.2`). C16 took no tag action. C20 confirms this `### Auto-resolved / no-op` subsection as the canonical home for R17-I3 (the Open-section duplicate entry was removed by C20); the C16 closure marker is now final, not provisional. Evidence: `.orchestration/cleanup_reports/C16.md` §"Note on R17-I3"; `.orchestration/cleanup_reports/C20.md`.
 
 ## Infra follow-ups
 - INFRA-1 severity:LOW tag:infra — Reconfigure Cloudflare to deploy from `main/flavor_catalog/website/` so the second branch can eventually be retired. **CLOSED 2026-05-25**: website branch merged into main (commit `cb58a36`); Cloudflare Pages production branch set to `main` with root `flavor_catalog/website/`; verified green deploy on commit `a809cc3`; `flavor-catalog-website/2026q2` deleted local + origin.
