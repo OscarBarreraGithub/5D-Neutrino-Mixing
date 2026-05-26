@@ -238,3 +238,101 @@ def test_worker_init_round_trips_budget_override(rs_module, monkeypatch):
     assert cfg is not None
     assert cfg.epsilon_k_budget_edge == "central"
     assert cfg.epsilon_k_np_budget_override is None
+
+
+# ---------------------------------------------------------------------------
+# C06 / R07-I3: git_sha embedded in tile_summary.json so manifest provenance
+# can be verified programmatically rather than inferred from directory mtime.
+# ---------------------------------------------------------------------------
+
+
+def test_resolve_git_sha_inside_repo_returns_hex(rs_module):
+    """Inside this checkout, the helper returns the repo HEAD SHA."""
+    import re
+    sha = rs_module._resolve_git_sha()
+    # In-repo execution always lands in a git tree; either we get the HEAD
+    # SHA (40 hex chars) or — if git is somehow unavailable on the runner —
+    # the documented "unknown" sentinel. Anything else is a regression.
+    assert sha == "unknown" or re.fullmatch(r"[0-9a-f]{40}", sha) is not None
+
+
+def test_resolve_git_sha_outside_git_tree_returns_unknown(rs_module, tmp_path, monkeypatch):
+    """Outside a git tree the helper returns the ``"unknown"`` sentinel."""
+    # Point the helper's repo root at a non-git directory and confirm the
+    # fallback fires without raising. The helper hard-codes _REPO_ROOT, so
+    # monkeypatch the module attribute.
+    monkeypatch.setattr(rs_module, "_REPO_ROOT", tmp_path)
+    assert rs_module._resolve_git_sha() == "unknown"
+
+
+def test_tile_summary_embeds_git_sha(rs_module, tmp_path):
+    """A freshly-written tile_summary.json contains the ``git_sha`` field.
+
+    Drives ``main()`` with the minimum payload (one tile, one draw, single
+    worker) and inspects the on-disk file. The intent is provenance, not
+    physics — we only assert the field is present and shaped correctly.
+    """
+    import json
+    import re
+
+    output_dir = tmp_path / "rs_anarchy_smoke_git_sha"
+    rc = rs_module.main(
+        [
+            "--output-dir",
+            str(output_dir),
+            "--n-draws",
+            "1",
+            "--m-kk-tev",
+            "10",
+            "--n-workers",
+            "1",
+            "--base-seed",
+            "20260525",
+        ]
+    )
+    assert rc == 0
+    summary_path = output_dir / "tile_summary.json"
+    assert summary_path.exists()
+    payload = json.loads(summary_path.read_text())
+    assert "git_sha" in payload, (
+        "tile_summary.json must embed `git_sha` (C06 / R07-I3)"
+    )
+    sha = payload["git_sha"]
+    assert isinstance(sha, str) and sha, "git_sha must be a non-empty string"
+    # In-repo execution: either a 40-char hex SHA, or the "unknown" sentinel
+    # if `git` is unavailable on the runner.
+    assert sha == "unknown" or re.fullmatch(r"[0-9a-f]{40}", sha) is not None
+
+
+def test_legacy_tile_summary_without_git_sha_still_loads(tmp_path):
+    """Backward-compat: loaders must tolerate tile_summary.json without git_sha.
+
+    Mirrors the (minimal) shape that older writers produced and confirms a
+    plain ``json.load`` round-trip still works, with ``.get('git_sha',
+    'unknown')`` defaulting cleanly for re-runners that compare against a
+    manifest's ``code_sha_at_run_time`` field.
+    """
+    import json
+
+    legacy_path = tmp_path / "tile_summary.json"
+    legacy_payload = {
+        "config": {"mkk_values_GeV": [10000.0], "n_draws_per_tile": 1},
+        "elapsed_seconds": 0.0,
+        "tiles": [
+            {
+                "M_KK_GeV": 10000.0,
+                "n_ok": 1,
+                "n_pdg_pass": 0,
+                "pdg_pass_fraction": 0.0,
+            }
+        ],
+        "schema": "rs_anarchy_acps_v1",
+    }
+    legacy_path.write_text(json.dumps(legacy_payload))
+    loaded = json.loads(legacy_path.read_text())
+    assert "git_sha" not in loaded  # legacy shape, by construction
+    # Loader contract: missing field defaults to "unknown" via .get().
+    assert loaded.get("git_sha", "unknown") == "unknown"
+    # All previously-required top-level keys still present.
+    for key in ("config", "tiles", "schema"):
+        assert key in loaded

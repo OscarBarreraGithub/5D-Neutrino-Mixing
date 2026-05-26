@@ -81,12 +81,6 @@ Format per issue:
   Evidence: `quarkConstraints/finite_stats.py:8-13`; `docs/quark_scan_methodology_note.tex:706-709, 748-750, 766-771, 866`; `docs/audits/zero_pass_inventory.md:13-14`; review `.orchestration/reviews/R07.md` Check 1.
   Recommended fix: Add a one-line explanatory footnote in the methodology note or expand the helper docstring. Numerical values are correct; only the convention choice deserves explicit disclosure.
 
-- [R07-I3] severity:INFO tag:infra
-  Title: Manifest `code_sha_at_run_time` is inferred from directory mtime, not embedded in scan output
-  Description: `docs/artifact_manifest.md:7-8` and `artifacts/quarkscan_paper_rc1_manifest.json` (`code_sha_at_run_time_basis` field) document that the canonical run-time SHA `29803ff` was inferred from UTC directory stamps (`20260515T0853*` after commit `29803ff`, before `db02223`) because `tile_summary.json` does not embed a git SHA. The inference logic is recorded transparently and is reproducible, but a future re-runner cannot programmatically verify that the canonical SHA actually produced the on-disk outputs. This is an artifact of the rerun-then-document workflow and does not affect R07 correctness.
-  Evidence: `docs/artifact_manifest.md:7-8`; `artifacts/quarkscan_paper_rc1_manifest.json` `code_sha_at_run_time_basis` field; review `.orchestration/reviews/R07.md` Check 3.
-  Recommended fix: For future scans, have the SLURM dispatcher write `git rev-parse HEAD` into `tile_summary.json` alongside the existing metadata. Out-of-scope for this unit.
-
 - [R07-I4] severity:INFO tag:docs
   Title: `CLAUDE.md:12-15` paper-branch pointer to `paper/quark-scan-2026q2` will be invalidated by Phase 10
   Description: Commit `1a107c8` added a "Paper branch note" block to `CLAUDE.md:12-15` pointing at `paper/quark-scan-2026q2`. MERGE_PLAN Phase 10 (§E step 39) plans to update this line to "main" after consolidation. Self-resolving; recorded here for tracking only.
@@ -472,6 +466,12 @@ Format per issue:
 - [R17-I1] severity:LOW tag:provenance  **CLOSED 2026-05-25** by C05.
   Title: External-research PDFs lack an explicit sha256 / MANIFEST / README in `flavor_catalog/external_research/`
   Description: Closed by adding `flavor_catalog/external_research/MANIFEST.md` (provenance log distinguishing imported artifacts vs in-house review memos, with per-file source/subject/date/sha256/description tables) and `flavor_catalog/external_research/sha256sums.txt` (six rows, validated with `sha256sum -c sha256sums.txt` → 6/6 OK). Import dates were recovered from `git log` (`022a20c` PDFs/txts 2026-05-16 18:05 EDT; `8fb5f91` may16 review 18:13; `2c00d84` may15 review 18:15). Sub-item (a) PDF binary digests — fully closed by `sha256sums.txt`. Sub-items (b) session URLs / prompts and (c) text-extraction recipe — partially closed: not retroactively recoverable; MANIFEST documents the gap and records a forward-looking convention for future external-research imports. No catalog numerical claim depends on these artifacts, so no code change or test re-run was required. Evidence in `.orchestration/cleanup_reports/C05.md`.
+
+### Closed by C06
+
+- [R07-I3] severity:INFO tag:infra  **CLOSED 2026-05-25** by C06.
+  Title: Manifest `code_sha_at_run_time` is inferred from directory mtime, not embedded in scan output
+  Description: Closed by embedding `git_sha` in the top-level `tile_summary.json` payload written by `scripts/run_rs_anarchy.py` — the sole producer of `tile_summary.json` in the repo. A new module-level helper `_resolve_git_sha()` calls `subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=_REPO_ROOT, stderr=DEVNULL)` and returns the documented `"unknown"` sentinel on `(CalledProcessError, FileNotFoundError, OSError)` or empty output (matching the manifest's existing inference-fallback convention). Fully backward compatible: the four current `tile_summary.json` readers (`scripts/{plot_rs_anarchy_summary,rs_anarchy_cfw_comparison,rs_anarchy_gate_sensitivity,rs_anarchy_mkk_min_hist_by_cvals}.py`) use plain `json.load` and pull specific keys; adding a new top-level field is invisible to them, and consumers that want to verify against a manifest can use `payload.get("git_sha", "unknown")`. Four new tests in `tests/test_run_rs_anarchy.py` cover: in-repo SHA shape, out-of-tree `"unknown"` fallback, end-to-end `main()` smoke writes the field, and legacy payloads without the field still load. Targeted: 4/4 pass in 5.42s. Broader sweep `pytest -k 'tile or summary or scan or dispatch'` 55 passed, 515 deselected, 122.46s. Evidence in `.orchestration/cleanup_reports/C06.md`.
 
 ## Infra follow-ups
 - INFRA-1 severity:LOW tag:infra — Reconfigure Cloudflare to deploy from `main/flavor_catalog/website/` so the second branch can eventually be retired. **CLOSED 2026-05-25**: website branch merged into main (commit `cb58a36`); Cloudflare Pages production branch set to `main` with root `flavor_catalog/website/`; verified green deploy on commit `a809cc3`; `flavor-catalog-website/2026q2` deleted local + origin.

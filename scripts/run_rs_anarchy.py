@@ -45,6 +45,7 @@ import json
 import math
 import multiprocessing as mp
 import os
+import subprocess
 import sys
 import time
 from dataclasses import dataclass, field, asdict
@@ -153,6 +154,33 @@ def _load_pdg_targets() -> dict:
         "abs_V_ub": abs_V_ub,
         "J": J,
     }
+
+
+# ---------------------------------------------------------------------------
+# Git provenance helper (C06 / R07-I3)
+# ---------------------------------------------------------------------------
+
+def _resolve_git_sha() -> str:
+    """Return ``git rev-parse HEAD`` for the repo containing this script.
+
+    Embedded in ``tile_summary.json`` so that downstream manifests
+    (e.g. ``artifacts/quarkscan_paper_rc1_manifest.json``'s
+    ``code_sha_at_run_time`` field) can be verified programmatically
+    rather than inferred from directory mtime (closes R07-I3).
+
+    Returns ``"unknown"`` if ``git`` is unavailable, the script is run
+    outside a git tree, or the call fails for any other reason — the
+    field is informational, never load-bearing.
+    """
+    try:
+        out = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=str(_REPO_ROOT),
+            stderr=subprocess.DEVNULL,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return "unknown"
+    return out.decode().strip() or "unknown"
 
 
 # ---------------------------------------------------------------------------
@@ -877,6 +905,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     summary_payload = {
         "config": cfg_dict,
         "elapsed_seconds": elapsed,
+        "git_sha": _resolve_git_sha(),
         "tiles": sorted(summaries, key=lambda s: s["M_KK_GeV"]),
         "schema": "rs_anarchy_acps_v1",
         "convention": {
