@@ -111,30 +111,6 @@ Format per issue:
   Evidence: `git log --diff-filter=A --name-only -- flavor_catalog/processes/beauty/B017.yaml` returns `5031e06`; compare with `git log --diff-filter=A --name-only -- flavor_catalog/processes/beauty/B025.yaml` returning `93c5a85` (a dedicated PKA-draft commit); review `.orchestration/reviews/R11.md` Check 3.
   Recommended fix: Optional — backfill a worklog note in `flavor_catalog/worklogs/pka/B017.md` (if not already present) documenting that B017 was drafted-and-polished in one step. No code or physics impact.
 
-- [R12-I1] severity:INFO tag:docs
-  Title: R12 dispatch prompt mis-identifies SINDRUM-II Au target as L008, undercounts W4 scope
-  Description: The R12 dispatch prompt described "L008 (mu->e conversion: SINDRUM-II Au target Br < 7e-13 90% CL)" — but `flavor_catalog/processes/charged_lepton/L008.yaml:3-5` shows L008 is actually `tau- -> e- gamma` (PDG 2025 BaBar 3.3e-8 90% CL). The SINDRUM-II Au limit < 7e-13 lives at L004 (`flavor_catalog/processes/charged_lepton/L004.yaml:3-5,71-100`, drafted in commit `519aec5`). The prompt also describes W4 as "12+ new procs" and enumerates 13 of 20; actual W4 PKA surface is 20 processes (adds B004, B006, EW003, C003, C004, C007, E004). Reviewer re-routed the spot-check from L008 to L004 and verified the SINDRUM-II value there. The catalog itself is consistent — this is a one-time dispatch-prompt error, not a catalog defect.
-  Evidence: dispatch prompt vs. `flavor_catalog/processes/charged_lepton/L008.yaml:3-5` (tau-eγ) vs. `flavor_catalog/processes/charged_lepton/L004.yaml:3-5` (mu-e Au); review `.orchestration/reviews/R12.md` Sample selection.
-  Recommended fix: When dispatching future review prompts that name catalog process IDs, cross-check the ID against `flavor_catalog/processes/<family>/<ID>.yaml:process_name` before sending. No code/catalog change needed.
-
-- [R12-I2] severity:LOW tag:code
-  Title: PKA commit `7d3da08` bundles two independent PKA drafts (EW001 + E004)
-  Description: Commit `7d3da08` has subject `flavor-catalog(top_higgs_ew): PKA draft for EW001 oblique parameters`, but its diff also introduces the full E004 (mercury / neutron EDM) PKA: `flavor_catalog/processes/edm_neutrino/E004.{yaml,tex}` (236 lines), 5 reference snapshots, source_manifest.yaml, and `flavor_catalog/worklogs/pka/E004.md`. PKA-draft commits should normally introduce exactly one process; this matches the workflow-seam irregularity pattern of R11-I1 (B017 hidden inside a WA-polish commit). Both file pairs are otherwise complete and pass all downstream WA/CA/Opus/FactCheck gates.
-  Evidence: `git show --stat 7d3da08` lists 19 files spanning two process IDs; compare with `741f7c0` (E006 PKA, single-process commit, 8 files) and `0c395f2` (B026 PKA, single-process, 17 files all under B026/); review `.orchestration/reviews/R12.md` Check 3.
-  Recommended fix: Optional — no fix is required. Future PKA dispatches should remain one-process-per-commit; the W4 EW001/E004 bundle is preserved as-is.
-
-- [R12-I3] severity:INFO tag:code
-  Title: Commit `bcd8907` triple-bundles unrelated workstreams (L001 arbitration + kaon_edm CHECKER-DONE transitions + ca_w4_kaon_edm worklog)
-  Description: Commit `bcd8907` has subject `flavor-catalog(arbitration): Opus signoff on L001 -- APPROVE-OVERRIDE`, but its diff covers three independent things: (a) the actual L001 Opus arbitration sign-off, adding `flavor_catalog/signoff/by_process/L001.md` and a status-history entry to `L001.yaml`; (b) appending `CHECKER-DONE` status_history transitions and `batch_id: ca_w4_kaon_edm` markers to E004/E006/E008/K017 yamls — i.e., the cycle-1 CA verdict for the kaon_edm batch; (c) creating the cycle-1 `flavor_catalog/worklogs/checker/ca_w4_kaon_edm.md` worklog itself. Each piece is functionally correct, but they should have been three commits for clean git archaeology. No physics or data defect.
-  Evidence: `git show --stat bcd8907` lists 7 files (1 L001.yaml + 4 kaon_edm yamls + ca_w4_kaon_edm.md + signoff/by_process/L001.md); review `.orchestration/reviews/R12.md` Check 3.
-  Recommended fix: Optional. Future Opus-arbitration commits should be one-arbitration-per-commit; future CA-cycle commits should land their batch worklog + per-process status updates as one focused commit. No retroactive fix needed.
-
-- [R13-I1] severity:INFO tag:docs
-  Title: R13 dispatch prompt mis-identifies all three suggested spot-check process IDs (K010, B023, E007)
-  Description: The R13 dispatch prompt named (a) "K010 (KL→μμ, BR ~ 6.84(11)e-9 PDG)" — but `flavor_catalog/processes/kaon/K010.yaml:4-5` shows K010 is actually `K_S → π⁰ e⁺e⁻`; the KL→μμ short-distance fraction is K006 (R10a scope). (b) "B023 (Bd→μμ, BR < ~1e-10 LHCb / SM ≈ 1e-10)" — but `flavor_catalog/processes/beauty/B023.yaml:4-5` shows B023 is `B → K*(892) ν ν̄`; Bd→μμ is B004 (R12 scope). (c) "E007 (neutron EDM: |d_n| < 1.8e-26 e·cm [nEDM PSI 2020])" — but `flavor_catalog/processes/edm_neutrino/E007.yaml:4-5` shows E007 is `²²⁵Ra and ¹²⁹Xe atomic EDMs`; the neutron EDM is E004 (R12 scope). Reviewer re-routed to the actual referents (K009 K_L→π⁰μμ for the long-lived kaon dilepton spot-check, B023 as itself for B→K*νν̄, E007 as itself for atomic Ra/Xe EDMs) and verified all three against arXiv source snapshots. This is a one-time dispatch-prompt error following the R12-I1 pattern; the catalog itself is consistent.
-  Evidence: dispatch prompt vs. `flavor_catalog/processes/kaon/K010.yaml:4-5` (K_S→π⁰ee, not KL→μμ) vs. `flavor_catalog/processes/beauty/B023.yaml:4-5` (B→K*νν, not Bd→μμ) vs. `flavor_catalog/processes/edm_neutrino/E007.yaml:4-5` (²²⁵Ra/¹²⁹Xe EDMs, not neutron EDM); review `.orchestration/reviews/R13.md` Sample selection.
-  Recommended fix: When dispatching future review prompts that name catalog process IDs, cross-check the ID against `flavor_catalog/processes/<family>/<ID>.yaml:process_name` before sending. No code/catalog change needed.
-
 - [R13-I2] severity:LOW tag:docs
   Title: `signoff/round_002_index.md` description column has wrong process names for K009 and K010
   Description: `flavor_catalog/signoff/round_002_index.md` row for K009 reads "`K^+ → π^+ ℓ⁺ℓ⁻` form-factor (e+e- + mu+mu- branches)" — that description matches K017 (R12 scope, Wave-4 process drafted in commit `fd49402`), not K009 (which is `K_L → π⁰ μ⁺μ⁻`, see `flavor_catalog/processes/kaon/K009.yaml:4-5`). The K010 row reads "`K^+ → π^+ π⁰ γ / π⁰ e+e- γ` radiative" — that does not match K010 (`K_S → π⁰ e⁺e⁻`, see `flavor_catalog/processes/kaon/K010.yaml:4-5`). The verdicts themselves (APPROVE) remain valid because the round-2 cycle-2 CA worklogs (`flavor_catalog/worklogs/checker/ca_w5b_kaon_v2.md`) correctly verify the actual YAML content of K009/K010; only the human-readable description column of the signoff index is wrong.
@@ -147,23 +123,11 @@ Format per issue:
   Evidence: `flavor_catalog/worklogs/discovery/round_003_final_sweep.md:8-13` (family-by-family breakdown); cross-check with `flavor_catalog/signoff/round_001_index.md:48-53` (which approves C001-C005 + C007 in round-1, C005 specifically via Wave-5a `ca_w5a_kaon_charm.md`).
   Recommended fix: Optional — add a one-line annotation in DA-3 worklog distinguishing Wave-4 (C002-C004, C007) from Wave-5a (C005) provenance. No urgency; future DA worklogs can incorporate this.
 
-- [R14-I1] severity:INFO tag:docs
-  Title: MERGE_PLAN.md R14 row mis-attributes K012/K018 across the R14/R15 seam
-  Description: `.orchestration/MERGE_PLAN.md:307` R14 description column reads "T006 v2, B001, B016, K012, K018; codex quota pause + resumption plan." But K012 and K018 PKAs do not appear in any of the 17 R14 commits listed in that same row. K012 PKA is commit `6a16bf4` and K018 PKA is `98b203a`, both of which MERGE_PLAN.md:308 already correctly attributes to R15 (Wave-6). The R14 commit set actually covers: 3 Wave-5b WA-cycle-1 batches (kaon, top_higgs_ew, charm_edm), 3 Wave-5b WA-v2 reworks, 4 Wave-5a CA-cycle-2 closures, 3 Wave-5b CA-cycle-2 closures, 2 new Wave-6 PKA deposits (B001, B016), 1 Opus arbitration cap (B021+B023), and 1 codex-quota pause note. No catalog content is affected; only the plan's inventory description row is mis-worded.
-  Evidence: `.orchestration/MERGE_PLAN.md:307` description column vs. R14 commit set; cross-reference `.orchestration/MERGE_PLAN.md:308` (R15 row, which correctly lists K012/K018 in its scope); commit log `git log --all --oneline -- flavor_catalog/processes/kaon/K012.yaml flavor_catalog/processes/kaon/K018.yaml` returns `6a16bf4` and `98b203a` as the PKA-deposit SHAs; review `.orchestration/reviews/R14.md` Check 3.
-  Recommended fix: Optional — update MERGE_PLAN.md:307 R14 description to "T006 v2 + 8 other Wave-5 CA closures + B001 + B016 PKAs + codex-quota pause". Strikes "K012, K018" since they are in R15. No retroactive commit-list change needed since the SHA list itself is correct.
-
 - [R14-I2] severity:INFO tag:docs
   Title: B001 yaml carries an unresolved `open_issue` about x_d / chi_d prose treatment
   Description: `flavor_catalog/processes/beauty/B001.yaml:226` records "WA/CA should verify whether to retain only Delta m_d as the headline B001 observable or also list x_d and chi_d as companion values in prose." This open_issue was deposited at R14 commit `64b5043` (B001 PKA) and remains open at R14 tip (R14 commit `b709912` has B001 still in WRITER-INITIATED). The follow-up resolution is delivered downstream in R15 via the Wave-6 WA → CA → Opus arbitration chain (Opus arbitration document `flavor_catalog/signoff/by_process/B001_B003.md`). At R14 tip the open_issue is documented but unresolved; this is a workflow-seam expectation, not a defect — closed automatically once R15 review confirms the arbitration ruled `x_d` and `chi_d` stay in `pdg_or_equivalent.companion_*` blocks but the headline observable in prose is `Delta m_d` only.
   Evidence: `flavor_catalog/processes/beauty/B001.yaml:226` (open_issues block at R14 tip); resolution at `flavor_catalog/signoff/by_process/B001_B003.md` (deposited in R15 commit set per MERGE_PLAN.md:308); review `.orchestration/reviews/R14.md` Check 2.
   Recommended fix: Close automatically once R15 is reviewed; no R14-side change required.
-
-- [R15-I1] severity:LOW tag:docs
-  Title: MERGE_PLAN.md R15 row lists charged_lepton_top CA-v2 commit as `7500919`, actual SHA is `7500794`
-  Description: `.orchestration/MERGE_PLAN.md:308` R15 commit list reads "... `cd8816d`, `7500919`, `6d97db8`" but no commit with SHA `7500919` exists on this branch (`git log -1 7500919` returns `unknown revision`). The actual CA-cycle-2 commit for the charged_lepton_top family is `7500794` (subject `flavor-catalog(charged_lepton_top): CA batch ca_w6_charged_lepton_top_v2 — verify WA polish for L023 T020`, timestamp 2026-05-16T16:30:30-04:00, modifies L023.yaml + T020.yaml + ca_w6_charged_lepton_top_v2.md). Inventory typo only; the commit set itself is correctly described.
-  Evidence: `.orchestration/MERGE_PLAN.md:308` vs. `git log --grep="ca_w6_charged_lepton_top_v2" --oneline` returning `7500794`; review `.orchestration/reviews/R15.md` Check 2.
-  Recommended fix: Optional — update MERGE_PLAN.md:308 to replace `7500919` with `7500794`. Cosmetic only; no impact on catalog content or downstream review units.
 
 - [R15-I2] severity:INFO tag:docs
   Title: E009 carries `fact_check_verdict: PARTIAL` due to JS-only INSPIRE Weinberg-1989 URL render
@@ -189,12 +153,6 @@ Format per issue:
   Evidence: `flavor_catalog/processes/top_higgs_ew/T003.yaml:112-185`; review `.orchestration/reviews/R16.md` Check 1.
   Recommended fix: None — catalog is current. If a future reviewer prompt is generated automatically, source the expected anchor from `pdg_or_equivalent.value_summary` rather than from external recall.
 
-- [R16-I3] severity:INFO tag:docs
-  Title: B012 promotion from DEFERRED-SCOPE to ACTIVE could be misread as a quiet DA-rule amendment
-  Description: B012 was originally in DA-4's deferred list (not in DA-4's "10 unallocated"). The Wave-7 deferred-scope addendum (`round_004_addendum_deferred_scope.md:8-16`) re-promotes it to ACTIVE alongside T003/T004/T008/T012. The peer-review file `audits/wave7_deferred_scope_review.md:13` explicitly explains this: "B012 was already in DA-4's deferred list but is also correctly promoted because the external reviews identified exclusive radiative/helicity coverage as a real RS-chirality gap." So the disposition changes from `DEFERRED-SCOPE` to `ACTIVE`, but a strict reader could call this a quiet DA-rule amendment. The addendum frames it explicitly as Wave-7 external-review reconciliation rather than a DA-5 rerun, which is the right framing. Documentation seam only, not a defect.
-  Evidence: `flavor_catalog/worklogs/discovery/round_004_addendum_deferred_scope.md:8-16`; `flavor_catalog/audits/wave7_deferred_scope_review.md:13`; review `.orchestration/reviews/R16.md` Check 2.
-  Recommended fix: Optional — when citing DA-4 in future write-ups, prefer the formulation "DA-4 converged at 75; Wave-7 amended active coverage to 80 (4 unallocated + 1 previously-deferred B012 promoted on external-review grounds)" to make the bookkeeping unambiguous.
-
 - [R16-I4] severity:INFO tag:docs
   Title: B001/B003 arbitration commit `7e1b80b` chronologically predates the Wave-7 PKA cycle (2026-05-16T16:35 vs 18:27+)
   Description: `git log -1 --format="%ci" 7e1b80b` returns `2026-05-16 16:35:01`, while the earliest Wave-7 PKA commit (`e3ecf8b` T012) is `2026-05-16T18:26:49`. The MERGE_PLAN groups the arbitration under R16 (§B.1 row for Wave-7) by topical scope, but a strict-temporal reading would attach it to R15 (Wave-6 close). R15 review already cross-references the arbitration via `signoff/by_process/B001_B003.md`, so no information is lost; this is a bookkeeping seam only.
@@ -218,24 +176,6 @@ Format per issue:
   Description: The PI's "SECONDARY tier classification reasoning is documented" requirement from the R18 prompt is satisfied at TWO independent surfaces: (a) each YAML's one-line `priority_rationale` field (e.g. `K020.yaml:5` — "Deferred by DA-4...; Top-tier; charged-current LFV companion to K019. Lower implementation priority than Waves 1-7 PRIMARY entries"), and (b) the `PRIORITY_TIERS.md:90-99` Wave-8 §4 rationale table (per-entry "originally deferred" + "promoted in Wave-8" columns). The two sources agree pairwise for all 8 entries. The redundancy is desirable (the YAML is the per-process source of truth; the table is the wave-level overview), but a future re-promotion or de-promotion edit could drift one without the other. Documentation-only seam; not a defect.
   Evidence: `flavor_catalog/processes/secondary/kaon/K020.yaml:4-6` and `K019.yaml:4-5`; `flavor_catalog/PRIORITY_TIERS.md:90-99`; cross-confirmed for the 6 other SECONDARY entries (B007/B008/B013/B014/K021/T014); review `.orchestration/reviews/R18.md` Check 3.
   Recommended fix: None at present. Future SECONDARY waves: the wave runbook §6 reproducibility-note pattern (Wave-8 runbook does this correctly) ensures the new entries' YAML rationale and the PRIORITY_TIERS.md table row are landed in the same wave, minimizing drift risk.
-
-- [R19-I1] severity:LOW tag:provenance
-  Title: MERGE_PLAN.md:312 R19 commit list (and the user prompt) list `1cf8b57` as the CR005 PKA SHA; the actual SHA is `1cd8b57`
-  Description: `git log --oneline 7ed9117^..864cd6d` shows `1cd8b57 flavor-catalog(wave9): PKA-CR005 initial draft (collider_rs PRIMARY)` (timestamp 2026-05-17 16:48:42 -0400); `git cat-file -t 1cf8b57` returns "fatal: Not a valid object name". Prompt/MERGE_PLAN typo (`f` for `d`). No content is missing; the CR005 yaml+tex pair is correctly in the tree at `flavor_catalog/processes/collider_rs/CR005.{yaml,tex}`. Pure SHA-string transcription error in `MERGE_PLAN.md:312` and the user prompt list.
-  Evidence: `git log --oneline 7ed9117^..864cd6d | grep CR005`; `git cat-file -t 1cf8b57` -> fatal; `git cat-file -t 1cd8b57` -> commit; diff `/tmp/r19_plan.txt` vs `/tmp/r19_actual.txt`; review `.orchestration/reviews/R19.md` Check 2.
-  Recommended fix: Edit `MERGE_PLAN.md:312` and the R19 row's commit list to replace `1cf8b57` with `1cd8b57`. No git history change needed.
-
-- [R19-I2] severity:LOW tag:provenance
-  Title: Wave-9 CA-v2 ew_tail cycle-2 verdict commit `82daa9b` is in the Wave-9 chain but is NOT listed in MERGE_PLAN.md:312 R19 commit list (or the user prompt)
-  Description: `git log --oneline 7ed9117^..864cd6d | wc -l` returns 34, but MERGE_PLAN.md:312 R19 row and the user prompt list 33 SHAs. The missing SHA is `82daa9b flavor-catalog(wave9): CA-v2 ew_tail cycle-2 verdict` (timestamp 2026-05-17 18:13:42 -0400; subject documented in `wave_009_runbook.md:155`). The prompt explicitly excludes `82a96f0` (R03 provenance-doc) but does not address `82daa9b`. MERGE_PLAN.md elsewhere acknowledges `82daa9b` as the canonical Wave-9 CA-v2 ew_tail commit (`MERGE_PLAN.md:4`, `:68`) that supersedes the `backup/ca-v2-ew-tail-*` branch tips. So `82daa9b` belongs to R19 by content. The omission is a documentation seam in `MERGE_PLAN.md:312` and the user prompt only. No content is missing; the CR009/CR011 cycle-2 status-history `CHECKER-DONE` transitions correctly reflect the `82daa9b` state.
-  Evidence: `git log --oneline 7ed9117^..864cd6d | wc -l = 34`; `diff /tmp/r19_plan.txt /tmp/r19_actual.txt` shows the missing `82daa9b`; `git show 82daa9b --format="%s"` -> "flavor-catalog(wave9): CA-v2 ew_tail cycle-2 verdict"; `MERGE_PLAN.md:4`, `:68`; `flavor_catalog/worklogs/orchestration/wave_009_runbook.md:155`; review `.orchestration/reviews/R19.md` Check 2.
-  Recommended fix: Edit `MERGE_PLAN.md:312` to add `82daa9b` to the R19 commit list, bumping the count from 33 to 34 and adjusting the granularity-check note at `MERGE_PLAN.md:317` ("R19 is now correctly 34 commits"). The "82a96f0 belongs to R03 ONLY" caveat remains correct.
-
-- [R19-I5] severity:INFO tag:docs
-  Title: MERGE_PLAN.md:413 R19 grep-target list mentions `claim_level` field, but the collider_rs schema uses `limit_type` (under `pdg_or_equivalent.values[]`)
-  Description: `MERGE_PLAN.md:413` lists R19 grep targets as "each `CR0XX` ID, the `claim_level` field, the `pdg_or_equivalent` field, the SHA-256 listed in each `references/CR0XX/sha256sums.txt`". The `pdg_or_equivalent` and SHA-256 targets exist and were spot-checked (CR001 12-file SHA pass, all 14 YAMLs have `pdg_or_equivalent`). However, `claim_level` is not a field in the `flavor_catalog.process.v1` schema as used by collider_rs (or by any prior family I cross-checked). The semantically equivalent field is `limit_type` (e.g. `CR001.yaml:88` `limit_type: "95% CL mass exclusion interval upper edge..."`, `CR007.yaml:91` `limit_type: "lower_limit"`). This is a documentation drift between MERGE_PLAN.md's planner-era field-name guess and the schema's actual field name; not a missing-field defect. The reviewer-mandated check (verify each entry's limit-class field is filled and policy-aligned) was honored by checking `limit_type` instead.
-  Evidence: `grep -l "claim_level" flavor_catalog/processes/collider_rs/*.yaml` returns nothing; `grep -c "limit_type:" flavor_catalog/processes/collider_rs/*.yaml` shows it's used in all 14 YAMLs; `MERGE_PLAN.md:413`; review `.orchestration/reviews/R19.md` Check 2.
-  Recommended fix: Optional. Edit `MERGE_PLAN.md:413` to replace `claim_level` with `limit_type`, or add a one-line note that the schema field is named `limit_type` and the grep target should be that. No content or audit defect.
 
 - [R21-I2] severity:INFO tag:infra
   Title: `cloudflare-pages.config.md` is a markdown doc, not a `wrangler.toml` — Cloudflare Pages dashboard config must be entered manually
@@ -442,6 +382,48 @@ Format per issue:
 - [R09-I2] severity:INFO tag:docs  **CLOSED 2026-05-26** by C17.
   Title: `.gitkeep` placeholders left in family subdirs alongside `index.tex`
   Description: Removed 12 redundant `.gitkeep` placeholders in directories that now contain populated content (`flavor_catalog/processes/{beauty,charged_lepton,charm,edm_neutrino,kaon,top_higgs_ew}/`, `flavor_catalog/references/`, `flavor_catalog/signoff/by_process/`, and the four `flavor_catalog/worklogs/{checker,discovery,pka,writer}/`). Retained `flavor_catalog/signoff/round_index/.gitkeep` (sole tracked file in its directory). No functional impact.
+
+### Closed by C18
+
+- [R12-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C18.
+  Title: R12 dispatch prompt mis-identifies SINDRUM-II Au target as L008, undercounts W4 scope
+  Description: Closed via the new "Retroactive corrections (C18, 2026-05-26)" annotation block in `.orchestration/MERGE_PLAN.md` (between §B.1 granularity check and the uniqueness invariant). The block records the canonical scope (W4 = 20 PKAs, not "12+") and pins L004 as the canonical home of the SINDRUM-II Au limit. Dispatch-prompt drift only; catalog remains consistent. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R12-I2] severity:LOW tag:code  **CLOSED 2026-05-26** by C18.
+  Title: PKA commit `7d3da08` bundles two independent PKA drafts (EW001 + E004)
+  Description: Closed via the C18 retroactive-corrections block in `MERGE_PLAN.md` which annotates commit `7d3da08` as bundling EW001 + E004 PKAs (workflow-seam irregularity preserved as-is, no git history change). Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R12-I3] severity:INFO tag:code  **CLOSED 2026-05-26** by C18.
+  Title: Commit `bcd8907` triple-bundles unrelated workstreams (L001 arbitration + kaon_edm CHECKER-DONE transitions + ca_w4_kaon_edm worklog)
+  Description: Closed via the C18 retroactive-corrections block in `MERGE_PLAN.md` annotating `bcd8907` as bundling L001 Opus signoff + W4 kaon_edm CA cycle-1 verdict (E004/E006/E008/K017 `CHECKER-DONE`) + `ca_w4_kaon_edm.md` worklog. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R13-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C18.
+  Title: R13 dispatch prompt mis-identifies all three suggested spot-check process IDs (K010, B023, E007)
+  Description: Closed via the C18 retroactive-corrections block in `MERGE_PLAN.md` recording the canonical referents: K010 = `K_S → π⁰ e⁺e⁻`, B023 = `B → K*(892) ν ν̄`, E007 = `²²⁵Ra / ¹²⁹Xe atomic EDMs`. R13 reviewer cross-verified the actual catalog content; this is a one-time dispatch-prompt error. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R14-I1] severity:INFO tag:docs  **CLOSED 2026-05-26** by C18.
+  Title: MERGE_PLAN.md R14 row mis-attributes K012/K018 across the R14/R15 seam
+  Description: Closed by editing `MERGE_PLAN.md:307` R14 description from "T006 v2, B001, B016, K012, K018; codex quota pause + resumption plan." to "T006 v2 + 8 other Wave-5 CA closures + B001 + B016 PKAs; codex quota pause + resumption plan. (K012, K018 belong to R15 per R14-I1.)". K012 PKA = `6a16bf4` and K018 PKA = `98b203a`, both correctly listed in the R15 row. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R15-I1] severity:LOW tag:docs  **CLOSED 2026-05-26** by C18.
+  Title: MERGE_PLAN.md R15 row lists charged_lepton_top CA-v2 commit as `7500919`, actual SHA is `7500794`
+  Description: Closed by editing `MERGE_PLAN.md:308` R15 commit list to replace `7500919` (no such object) with `7500794` (canonical `flavor-catalog(charged_lepton_top): CA batch ca_w6_charged_lepton_top_v2 — verify WA polish for L023 T020`). Verified via `git log --all --format='%h %s' | grep ^7500794` and `git log --grep='ca_w6_charged_lepton_top_v2' --oneline`. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R16-I3] severity:INFO tag:docs  **CLOSED 2026-05-26** by C18.
+  Title: B012 promotion from DEFERRED-SCOPE to ACTIVE could be misread as a quiet DA-rule amendment
+  Description: Closed via the C18 retroactive-corrections block in `MERGE_PLAN.md` adopting the preferred framing: "DA-4 converged at 75; Wave-7 amended active coverage to 80 (4 unallocated + 1 previously-deferred B012 promoted on external-review grounds)." Documentation seam only. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R19-I1] severity:LOW tag:provenance  **CLOSED 2026-05-26** by C18.
+  Title: MERGE_PLAN.md:312 R19 commit list (and the user prompt) list `1cf8b57` as the CR005 PKA SHA; the actual SHA is `1cd8b57`
+  Description: Closed by editing `MERGE_PLAN.md:312` R19 commit list to replace `1cf8b57` (no such object) with `1cd8b57` (canonical `flavor-catalog(wave9): PKA-CR005 initial draft (collider_rs PRIMARY)`). Verified via `git log --all --format='%h %s' | grep ^1cd8b57`. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R19-I2] severity:LOW tag:provenance  **CLOSED 2026-05-26** by C18.
+  Title: Wave-9 CA-v2 ew_tail cycle-2 verdict commit `82daa9b` is in the Wave-9 chain but is NOT listed in MERGE_PLAN.md:312 R19 commit list (or the user prompt)
+  Description: Closed by inserting `82daa9b` between `950ca36` and `0c5dacc` in `MERGE_PLAN.md:312` R19 commit list and bumping the count "(33 commits ...)" → "(34 commits ...)". Granularity-check sentence at MERGE_PLAN.md:317 also updated to read "R19 is now correctly 34 commits (R03 commit `82a96f0` is excluded by design; missing `82daa9b` restored per C18)". The "82a96f0 belongs to R03 ONLY" caveat preserved. Range verification: `git log --oneline 7ed9117^..864cd6d | wc -l = 34`. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+- [R19-I5] severity:INFO tag:docs  **CLOSED 2026-05-26** by C18.
+  Title: MERGE_PLAN.md:413 R19 grep-target list mentions `claim_level` field, but the collider_rs schema uses `limit_type` (under `pdg_or_equivalent.values[]`)
+  Description: Closed by editing the R19 grep-target entry at MERGE_PLAN.md (line ~419 after C18 inserts) to replace `claim_level` with `limit_type` and add a parenthetical noting the planner-era field-name guess. `grep -l "claim_level" flavor_catalog/processes/collider_rs/*.yaml` returns nothing; `grep -c "limit_type:" flavor_catalog/processes/collider_rs/*.yaml` shows the field is present in all 14 CR0XX yamls. Evidence in `.orchestration/cleanup_reports/C18.md`.
 
 ### Auto-resolved / no-op
 
