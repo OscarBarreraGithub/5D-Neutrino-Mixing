@@ -99,12 +99,6 @@ Format per issue:
   Evidence: `docs/phase_logs/flavor_catalog_plan_v1.md:30-55`; `flavor_catalog/catalog_master.tex:48-49`; `flavor_catalog/README.md:38`; `docs/phase_logs/flavor_catalog_scaffold_impl.md`; review `.orchestration/reviews/R09.md` Code section.
   Recommended fix: Either accept (the scaffold-impl report already captures the divergence), or add a one-line note at the top of plan v1 pointing to the merger. Optional.
 
-- [R09-I2] severity:INFO tag:docs
-  Title: `.gitkeep` placeholders left in family subdirs alongside `index.tex`
-  Description: The scaffold commit (`83c0178`) created `flavor_catalog/processes/<family>/.gitkeep` and `flavor_catalog/processes/<family>/index.tex` together in each of the 6 PRIMARY family dirs (`kaon`, `charm`, `beauty`, `top_higgs_ew`, `charged_lepton`, `edm_neutrino`). Once `index.tex` exists, `.gitkeep` is redundant; it persists in the tree at HEAD and adds noise to `ls`/`tree` output. Same pattern applies to `references/.gitkeep`, `signoff/by_process/.gitkeep`, `signoff/round_index/.gitkeep`, and the four `worklogs/*/.gitkeep` placeholders, several of which now contain real content.
-  Evidence: `git show --stat 83c0178 | grep gitkeep` returns 11 `.gitkeep` placeholders; `flavor_catalog/processes/kaon/index.tex` is non-empty (auto-generated TOC); review `.orchestration/reviews/R09.md` Code section.
-  Recommended fix: Optional housekeeping — drop the `.gitkeep` files in dirs that now have committed content. No functional impact.
-
 - [R10a-I1] severity:INFO tag:docs
   Title: K001 sidecar `checker_agent_id: "CA"` points to a stale wave label
   Description: `flavor_catalog/processes/kaon/K001.yaml:9` declares `checker_agent_id: "CA"`, and the `status_history` records the actual CA cycle as `batch_id: "ca_w23_kaon_charm_edm"` at line 34. The Wave-1 kaon batch is `wa_wave1_kaon` / `ca_wave1_kaon` for K003-K006 and K013, while K001 (and K002) were drafted later under the sibling `w23_kaon_charm_edm` batch. Cosmetic — the batch_id in status_history is correct; the top-level `checker_agent_id` field is just unscoped.
@@ -442,6 +436,12 @@ Format per issue:
 - [R20-I3] severity:INFO tag:docs  **CLOSED 2026-05-26** by C16.
   Title: SESSION_NOTES.md §8 cites three Opus sign-off rounds; catalog at v0.4 has five
   Description: Closed by appending `round_004_index.md (Wave-8 SECONDARY)` and `round_005_index.md (Wave-9 collider_rs PRIMARY)` to the per-round verdict list at `flavor_catalog/SESSION_NOTES.md:373-374` and rephrasing the trailing line as "Opus's per-round verdicts (5 rounds at v0.4)". `ls flavor_catalog/signoff/round_*.md` returns 5 files, matching the new text and HANDOFF_PROMPT.md `:81-86`. The C16 §1 edit (above) also adds a "Most recent Opus round-5 sign-off: 14/14 Wave-9 collider_rs PRIMARY APPROVE (CR001-CR014)" preamble with a back-pointer to round-4. Pure-docs cosmetic alignment; no code change; no test re-run required. Evidence in `.orchestration/cleanup_reports/C16.md`.
+
+### Closed by C17
+
+- [R09-I2] severity:INFO tag:docs  **CLOSED 2026-05-26** by C17.
+  Title: `.gitkeep` placeholders left in family subdirs alongside `index.tex`
+  Description: Removed 12 redundant `.gitkeep` placeholders in directories that now contain populated content (`flavor_catalog/processes/{beauty,charged_lepton,charm,edm_neutrino,kaon,top_higgs_ew}/`, `flavor_catalog/references/`, `flavor_catalog/signoff/by_process/`, and the four `flavor_catalog/worklogs/{checker,discovery,pka,writer}/`). Retained `flavor_catalog/signoff/round_index/.gitkeep` (sole tracked file in its directory). No functional impact.
 
 ### Auto-resolved / no-op
 
