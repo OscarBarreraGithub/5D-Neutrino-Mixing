@@ -27,12 +27,6 @@ Format per issue:
   Evidence: `pyproject.toml:70-71`; `.orchestration/MERGE_PLAN.md:293`; commit `559b851`.
   Recommended fix: Update the MERGE_PLAN row to read `pyproject.toml [tool.pytest.ini_options]` instead of `pytest.ini`, or accept as an inventory nit and close.
 
-- [R02-I2] severity:INFO tag:code
-  Title: Re-derived spurion seed values would benefit from an in-source provenance pointer
-  Description: The new literal arrays in `default_spurion_seed()` (e.g. `up_singular_values = [0.1434, 0.3337, 1.2394]`, `up_left.theta12 = -2.4041`) were computed by a deterministic LSQ from `default_quark_targets()` per `docs/phase_logs/phase2_h4_impl.md` (path A). Without a comment, future readers will see them as magic numbers.
-  Evidence: `quarkConstraints/benchmarks.py:189-223`; `docs/phase_logs/phase2_h4_impl.md`.
-  Recommended fix: Add a one-line docstring or comment in `default_spurion_seed()` pointing to the impl log and stating "values are the LSQ-converged optimum from the previous seed under default_quark_targets() at mu = 163.5 GeV; overall_scale = 2.8 preserved".
-
 - [R03-I4] severity:INFO tag:docs
   Title: No top-level REFERENCES.md to cross-reference audit citations against
   Description: The R03 review prompt expects audit cross-refs to resolve into a `REFERENCES.md` (or similar) at the repo root. None exists. The closest analogue is `flavor_catalog/references/` (a different sub-system index). Provenance is instead encoded as inline arXiv citations in `docs/audits/bag_param_inventory.md` and the methodology-note appendix. All five primary eprints (2411.04268, 1911.06822, 1907.01025, 1505.06639, 1002.3612) and the PDG 2024 review (Phys. Rev. D 110, 030001) are real and externally resolvable, so this is presentational rather than substantive.
@@ -446,6 +440,12 @@ Format per issue:
 - [R22-I3] severity:INFO tag:ux  **CLOSED 2026-05-26** by C12.
   Title: `EntryTable` still emits `<th>Tier</th>` and `data-tier` after phase-10 removes the tier badge UI
   Description: Closed by removing the dead `data-tier={r.tier}` attribute from each `<tr class="row-link">` in `flavor_catalog/website/src/components/EntryTable.astro:70`. Prior cleanup (between `7053fb7` and the C12-state HEAD) had already dropped the `<th data-sort="tier">Tier</th>` column from the thead and the dead `tier` branch in `browse.astro` (no surviving `getAttribute('data-tier')` call remains); the only residue was the unused `data-tier` row attribute, which is now gone. The TypeScript `tier: string` field in the `IndexRow` interface is preserved because `ingest_catalog.py` still emits the field in the JSON payload; dropping it from the interface would force a wider refactor with no user-visible benefit. No JavaScript reads `data-tier` after this edit (verified by `grep -n 'data-tier' flavor_catalog/website/` → empty); no test re-run required. Evidence in `.orchestration/cleanup_reports/C12.md`.
+
+### Closed by C13
+
+- [R02-I2] severity:INFO tag:code  **CLOSED 2026-05-26** by C13.
+  Title: Re-derived spurion seed values would benefit from an in-source provenance pointer
+  Description: Closed by adding two in-source provenance pointers inside `quarkConstraints/benchmarks.py::default_spurion_seed` (line 189): (a) an extended multi-line docstring stating the singular-value and rotation literals were re-derived against PDG-2024 MS-bar quark masses with a pointer to `docs/phase_logs/phase2_h4_impl.md` for re-derivation details + audit log, and a note that `tests/test_quark_fit.py` pins the values so drift surfaces as a test failure; (b) a 3-line `#`-comment immediately above the `return SpurionSeed(` literal block carrying the short form requested by the dispatch brief (`# Spurion seed values re-derived against PDG-2024 MS-bar quark masses / (see docs/phase_logs/phase2_h4_impl.md for re-derivation details and / the audit log). Tests at tests/test_quark_fit.py pin these values.`). Both pointers live inside the function body so grep/AST-jump lands on them. No literal touched: `python -c "from quarkConstraints.benchmarks import default_spurion_seed; s = default_spurion_seed(); print(s.up_singular_values, s.down_singular_values, s.overall_scale)"` reproduces the pre-edit values to machine precision (`[0.1434281 0.33368792 1.23945796]`, `[0.22903978 0.16350921 0.28800013]`, `2.8`). Docs file `docs/phase_logs/phase2_h4_impl.md` confirmed to exist; test file `tests/test_quark_fit.py` confirmed to import and reference `default_spurion_seed` (lines 38, 55, 137, 150). No test re-run required (pure-comment change). Evidence in `.orchestration/cleanup_reports/C13.md`.
 
 ## Infra follow-ups
 - INFRA-1 severity:LOW tag:infra — Reconfigure Cloudflare to deploy from `main/flavor_catalog/website/` so the second branch can eventually be retired. **CLOSED 2026-05-25**: website branch merged into main (commit `cb58a36`); Cloudflare Pages production branch set to `main` with root `flavor_catalog/website/`; verified green deploy on commit `a809cc3`; `flavor-catalog-website/2026q2` deleted local + origin.
