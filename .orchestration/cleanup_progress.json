@@ -1,0 +1,138 @@
+{
+  "schema_version": "cleanup-v1",
+  "phase": "cleanup",
+  "queue": [
+    {
+      "unit": "C01",
+      "lane": "opus",
+      "tier": 1,
+      "status": "done"
+    },
+    {
+      "unit": "C02a-code",
+      "lane": "opus",
+      "tier": 1,
+      "status": "done"
+    },
+    {
+      "unit": "C03",
+      "lane": "opus",
+      "tier": 1,
+      "status": "done"
+    },
+    {
+      "unit": "C04",
+      "lane": "opus",
+      "tier": 2,
+      "status": "pending"
+    },
+    {
+      "unit": "C05",
+      "lane": "opus",
+      "tier": 3,
+      "status": "pending"
+    },
+    {
+      "unit": "C06",
+      "lane": "opus",
+      "tier": 3,
+      "status": "pending"
+    },
+    {
+      "unit": "C07",
+      "lane": "opus",
+      "tier": 3,
+      "status": "pending"
+    },
+    {
+      "unit": "C08",
+      "lane": "opus",
+      "tier": 3,
+      "status": "pending"
+    },
+    {
+      "unit": "C09",
+      "lane": "opus",
+      "tier": 4,
+      "status": "pending"
+    },
+    {
+      "unit": "C10",
+      "lane": "opus",
+      "tier": 4,
+      "status": "pending"
+    },
+    {
+      "unit": "C11",
+      "lane": "opus",
+      "tier": 4,
+      "status": "pending"
+    },
+    {
+      "unit": "C12",
+      "lane": "opus",
+      "tier": 4,
+      "status": "pending"
+    },
+    {
+      "unit": "C13",
+      "lane": "opus",
+      "tier": 5,
+      "status": "pending"
+    },
+    {
+      "unit": "C14",
+      "lane": "opus",
+      "tier": 5,
+      "status": "pending"
+    },
+    {
+      "unit": "C15",
+      "lane": "det",
+      "tier": 5,
+      "status": "pending"
+    },
+    {
+      "unit": "C16",
+      "lane": "opus",
+      "tier": 5,
+      "status": "pending"
+    },
+    {
+      "unit": "C17",
+      "lane": "det",
+      "tier": 5,
+      "status": "pending"
+    },
+    {
+      "unit": "C18",
+      "lane": "det",
+      "tier": 5,
+      "status": "pending"
+    },
+    {
+      "unit": "C19",
+      "lane": "opus",
+      "tier": 5,
+      "status": "pending"
+    },
+    {
+      "unit": "C20",
+      "lane": "det",
+      "tier": 5,
+      "status": "pending"
+    },
+    {
+      "unit": "C02b",
+      "lane": "deferred",
+      "tier": 6,
+      "status": "deferred"
+    },
+    {
+      "unit": "C02c",
+      "lane": "deferred",
+      "tier": 6,
+      "status": "deferred"
+    }
+  ]
+}

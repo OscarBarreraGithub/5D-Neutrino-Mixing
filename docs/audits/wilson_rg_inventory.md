@@ -174,6 +174,63 @@ scalar-LR sign convention by flipping only the scalar ADM off-diagonal.
     `quarkConstraints/deltaf2.py:692`, `quarkConstraints/deltaf2.py:860`.
     Recommended fix: completed docstring cleanup; do not alter bag constants.
 
+## Status as of 2026-05-25 post-cleanup (C03)
+
+The C03 cleanup unit (R04-I1..I4, Tier 1) closed the three Wilson-RG code /
+documentation items assigned to it (`R04-I1`, `R04-I2`, `R04-I3`).  The four
+items tagged `Recommended fix: defer / decide later` in the ten-item checklist
+above remain explicitly deferred (R04-I4, reassigned to **C19** —
+methodology-note polish — in `.orchestration/CLEANUP_PLAN.md` §C C19):
+
+1. **Item 2 — Hamiltonian/CFW comparison.**  A full Hamiltonian-sign comparison
+   to CFW/BBL was deferred to a separate convention audit; no change to the
+   matching signs in this cleanup wave.
+2. **Item 4 — Per-system RG endpoint migration.**  Non-kaon hadronic bag
+   inputs (B_d, B_s at `mu = m_b`; D0 at `3 GeV`; kaon B4/B5 at `3 GeV`) are
+   still evolved to the global default `mu_had = 2 GeV`.  Per-system endpoint
+   alignment would invalidate all existing Delta F=2 scan outputs and is
+   tracked as a separate orchestrated change.
+3. **Item 7 — LO vs NLO.**  The QCD running stays LO with one-loop ADM,
+   one-loop alpha_s, and continuous LO threshold matching.  A full NLO WET
+   evolution module remains a larger upgrade; estimated NLO residual is
+   `10-30%` for LR/scalar coefficients at `3 TeV -> 2 GeV`.
+4. **Item 10 — Endpoint caveat for matrix-element contraction.**  The hadronic
+   contraction is OK for the scalar `O4/O5` convention, with the per-system
+   endpoint caveat from item 4 above; bag constants are not altered.
+
+C03 explicitly verified, with no code change required, that the
+`paper_0710_1869` LR-sign convention (R04-I3) remains consistent with the
+post-C01 (R03-I1, FLAG 2024) canonical hadronic constants:
+
+- Matching: `q4_lr = -(L*R) * 1/M_KK^2`, `q5_lr = +(L*R) / (3 M_KK^2)`
+  (`quarkConstraints/paper_0710_1869/eft_deltaf2/matching_kkgluon.py:525-526`).
+- Hadronic matrix elements: `<Q4>_GeV4 = +2 m_K^2 f_K^2 R_chi B4`,
+  `<Q5>_GeV4 = +(2/3) m_K^2 f_K^2 R_chi B5`
+  (`quarkConstraints/paper_0710_1869/eft_deltaf2/hadronic.py:2237,2244`).
+- Contraction: `q4_lr * <Q4>_GeV4 + q5_lr * <Q5>_GeV4` with no extra sign
+  (`quarkConstraints/paper_0710_1869/eft_deltaf2/observables.py:917-918`).
+- BMU LR LO ADM stored as the Wilson-coefficient (upper-triangular)
+  transpose `((2, 12), (0, -16))`
+  (`quarkConstraints/paper_0710_1869/eft_deltaf2/rg.py:98-101`) is the
+  transpose of the operator ADM `[[2, 0], [12, -16]]` cited in
+  `quarkConstraints/qcd_running.py:50-57`, consistent with the Wilson-vs.
+  operator ADM convention difference (see audit script
+  `scripts/audit_wilson_rg.py:85-117`).
+
+The R04-I3 closure adds no new sign-flip beyond the post-C01 cleanup; the
+paper_0710_1869 slice and the repo-v1 `quarkConstraints/deltaf2.py` path
+both use the conventional positive scalar `O4/O5` LR sign with positive bag
+inputs.
+
+The C03 code changes themselves are: (R04-I1) a defensive upper-triangular
+guard added to `scripts/audit_wilson_rg.py::scalar_lr_segment_matrix`;
+(R04-I2) the function-local `from .qcd_running import evolve_deltaf2_wilsons`
+in `quarkConstraints/deltaf2.py::_evolve_wilsons` lifted to the module top
+(unconditional per reviewer M-7; `qcd_running` does not import `deltaf2` at
+module scope).  The audit script numeric output is unchanged
+(`C4_LR=1 -> 3.53816397486`, `C5_LR=1 -> (0.894757448992, 0.853891627884)`,
+max relative discrepancy `1.300e-16`).
+
 ## Invalidation-gate note
 
 Hole #5 already tripped the gate.  Revised hole #6 tightens it: at `M_KK = 3 TeV`, the

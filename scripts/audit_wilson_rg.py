@@ -88,10 +88,28 @@ def scalar_lr_segment_matrix(segment: Segment) -> np.ndarray:
     This is the BMU LR LO coefficient block ``[[2, 0], [12, -16]]``
     conjugated to the code's conventional scalar ``[C4_LR, C5_LR]`` order,
     giving ``[[-16, -6], [0, 2]]``.
+
+    Defensive guard (R04-I1, C03 cleanup, 2026-05-25): the closed-form
+    propagator below assumes the scalar LR coefficient ADM is strictly upper
+    triangular (``gamma_54 == 0``), which is what conjugating the BMU LR
+    block into the conventional ``[C4_LR, C5_LR]`` order produces.  If the
+    pinned anomalous-dimension entries are ever edited in a way that breaks
+    that property the shortcut becomes silently wrong, so we cross-check at
+    runtime and assert the lower-left entry is exactly zero.
     """
     gamma44 = -16.0
     gamma45 = -6.0
+    gamma54 = 0.0  # required by the upper-tri closed-form below
     gamma55 = 2.0
+    gamma_lr_local = np.array([[gamma44, gamma45], [gamma54, gamma55]], dtype=float)
+    if gamma_lr_local[1, 0] != 0.0 or not np.allclose(
+        gamma_lr_local - np.triu(gamma_lr_local), 0.0
+    ):
+        raise ValueError(
+            "audit_wilson_rg.scalar_lr_segment_matrix requires an upper-triangular "
+            "scalar LR ADM (gamma_54 == 0); update the closed-form propagator if "
+            "the anomalous-dimension block is changed."
+        )
     eta = segment.alpha_upper / segment.alpha_lower
     f44 = eta ** (gamma44 / (2.0 * beta0(segment.n_f)))
     f55 = eta ** (gamma55 / (2.0 * beta0(segment.n_f)))

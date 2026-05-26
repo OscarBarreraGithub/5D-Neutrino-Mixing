@@ -33,53 +33,11 @@ Format per issue:
   Evidence: `quarkConstraints/benchmarks.py:189-223`; `docs/phase_logs/phase2_h4_impl.md`.
   Recommended fix: Add a one-line docstring or comment in `default_spurion_seed()` pointing to the impl log and stating "values are the LSQ-converged optimum from the previous seed under default_quark_targets() at mu = 163.5 GeV; overall_scale = 2.8 preserved".
 
-- [R03-I1] severity:HIGH tag:code
-  Title: Duplicate (pre-audit) kaon hadronic constants in modern backend not updated by Phase-2 hole #5 audit
-  Description: `quarkConstraints/modern/phenomenology.py:421-431` carries a private copy of the kaon hadronic constants (`_KAON_B_1 = 0.717`, `_KAON_B_4 = 0.78`, `_KAON_B_5 = 0.57`, `_KAON_EPSILON_K_SM = 1.81e-3`) that were NOT updated when `dc9c498` updated the canonical values in `quarkConstraints/deltaf2.py:618-623` (`B_1_K=0.5503`, `B_4_K=0.903`, `B_5_K=0.691`, `EPSILON_K_SM=2.161e-3`). These literals are used by `_kaon_m12_np_from_bridge_match` (`modern/phenomenology.py:434`), `_evaluate_epsilon_k_from_bridge` (`:458`), and `_evaluate_delta_mk_from_bridge` (`:~500`), which feed the live modern pipeline at line 1323 inside `build_modern_point_phenomenology_artifact`. That function is imported by `scripts/export_collaborator_5tev_points.py:40`, so collaborator artifacts evaluate `epsilon_K` against the pre-audit (6.24x looser) NP budget. `phase2_h5_impl.md:71` explicitly declared the modern duplicates out-of-scope, but they are materially load-bearing.
-  Evidence: `quarkConstraints/modern/phenomenology.py:421-431,434,458,500,1323`; `quarkConstraints/deltaf2.py:618-623`; `scripts/export_collaborator_5tev_points.py:40`; `docs/phase_logs/phase2_h5_impl.md:71`; review `.orchestration/reviews/R03.md` Code section.
-  Recommended fix: Either (a) replace the module-private `_KAON_*` literals with `from ..deltaf2 import B_1_K as _KAON_B_1, B_4_K as _KAON_B_4, B_5_K as _KAON_B_5, EPSILON_K_SM as _KAON_EPSILON_K_SM, EPSILON_K_EXP as _KAON_EPSILON_K_EXP, ...` so there is a single source of truth; or (b) update the literals in place and add a test that pins both copies against each other.
-
-- [R03-I2] severity:MEDIUM tag:numerics
-  Title: Audited-constant pin test does not guard the modern backend duplicates
-  Description: `tests/test_quark_deltaf2.py::test_audited_deltaf2_hadronic_constants_match_selected_sources` (lines 111-117) only asserts the four post-audit values in `quarkConstraints.deltaf2`. It does not assert against `quarkConstraints.modern.phenomenology._KAON_*`, so the modern-backend duplicate (R03-I1) silently passes CI.
-  Evidence: `tests/test_quark_deltaf2.py:111-117`; `quarkConstraints/modern/phenomenology.py:421-431`; review `.orchestration/reviews/R03.md` Code section.
-  Recommended fix: After R03-I1 is resolved (preferably via the `from ..deltaf2 import` route), extend this test to also assert `np.isclose(phenomenology._KAON_B_1, deltaf2.B_1_K)`, etc.
-
-- [R03-I3] severity:MEDIUM tag:docs
-  Title: Five hole #5 follow-up tasks gating the final-claim invalidation gate remain open
-  Description: `docs/phase_logs/phase2_h5_signoff.md:104-136` enumerates five follow-up tasks (methodology-note band quote for the epsilon_K-driven M_KK bound, RUNA re-runs at three budget edges with a new `--epsilon-k-budget` CLI flag, band-edge M_KK quotation, methodology-note paragraph for the band construction, optional sensitivity-band figure). None of these is closed by the R03 commit set (they correctly depend on hole #6's Wilson-RG sign-off). The invalidation gate is therefore still TRIPPED and the methodology note still quotes the single central value 6.7e-5.
-  Evidence: `docs/phase_logs/phase2_h5_signoff.md:104-136`; `docs/audits/epsilon_k_sm_decision.md:129-137`; review `.orchestration/reviews/R03.md` Physics section.
-  Recommended fix: Track these as open issues against R04 (Wilson RG / BMU audit) or R05 (invalidation-gate rerun) so they are not lost, and confirm closure before any final paper claim is frozen.
-
 - [R03-I4] severity:INFO tag:docs
   Title: No top-level REFERENCES.md to cross-reference audit citations against
   Description: The R03 review prompt expects audit cross-refs to resolve into a `REFERENCES.md` (or similar) at the repo root. None exists. The closest analogue is `flavor_catalog/references/` (a different sub-system index). Provenance is instead encoded as inline arXiv citations in `docs/audits/bag_param_inventory.md` and the methodology-note appendix. All five primary eprints (2411.04268, 1911.06822, 1907.01025, 1505.06639, 1002.3612) and the PDG 2024 review (Phys. Rev. D 110, 030001) are real and externally resolvable, so this is presentational rather than substantive.
   Evidence: `docs/audits/bag_param_inventory.md:16-53`; `docs/quark_scan_methodology_note.tex` appendix `app:hadronic-input-provenance`; absence of `REFERENCES.md` at repo root.
   Recommended fix: Either create a top-level `REFERENCES.md` aggregating all citations referenced by `docs/audits/*.md`, or accept the inline-citation convention as the canonical pattern (and document it in `CLAUDE.md` so future audits follow suit).
-
-- [R04-I1] severity:LOW tag:numerics
-  Title: Audit-script closed-form shortcut silently assumes upper-triangular LR ADM
-  Description: `scripts/audit_wilson_rg.py::scalar_lr_segment_matrix` (lines 85-99) computes the LR evolution matrix in closed form by setting the lower-left entry to 0 explicitly: `return np.array([[f44, f45], [0.0, f55]])`. This relies on `_GAMMA_LR[1,0] == 0`, which is currently true (`quarkConstraints/qcd_running.py:54-57` has `[0.0, 2.0]` in the second row). If a future NLO upgrade or basis change populates the lower-left entry, the in-code `np.linalg.eig` path will still work but the audit reference will silently diverge from the production result. The 1.3e-16 max-relative-discrepancy guard would catch the regression, but the failure mode would be confusing.
-  Evidence: `scripts/audit_wilson_rg.py:85-99`; `quarkConstraints/qcd_running.py:54-57`; `.orchestration/reviews/R04.md` Check 3.
-  Recommended fix: Add a one-line assertion in `audit_wilson_rg.py` (and a corresponding test) that `_GAMMA_LR[1,0] == 0.0`, so the closed-form shortcut is gated on the upper-triangular assumption.
-
-- [R04-I2] severity:LOW tag:code
-  Title: `_evolve_wilsons` performs a function-local import
-  Description: `quarkConstraints/deltaf2.py:586` re-imports `evolve_deltaf2_wilsons` from `.qcd_running` inside the function body. This is harmless and avoids a circular import in the canonical control-flow, but in a stable API the import can usually be lifted to module-level.
-  Evidence: `quarkConstraints/deltaf2.py:586`; `.orchestration/reviews/R04.md` Check 3.
-  Recommended fix: Optional — check whether lifting the import to the top of `deltaf2.py` introduces any circular-import risk; if not, lift. Otherwise document the deliberate function-local import with a comment.
-
-- [R04-I3] severity:INFO tag:physics
-  Title: `paper_0710_1869` LR running module carries an independent BMU map — confirm sign-chain alignment in R06
-  Description: `quarkConstraints/paper_0710_1869/eft_deltaf2/rg.py` (added in commit `c540830`, post-R04) exposes its own `evolve_deltaf2_wilsons_lo` and an explicit paper-to-BMU LR operator/Wilson map plus a BMU LO LR ADM block. This is the CFW-comparison surface relevant to R06, not R04, and is NOT a consumer of `quarkConstraints.qcd_running.evolve_deltaf2_wilsons`. R04's sign convention is therefore not silently broken by it, but the two modules should be confirmed sign-consistent during R06.
-  Evidence: `quarkConstraints/paper_0710_1869/eft_deltaf2/rg.py:7-148,1480-1577`; commit `c540830`; `.orchestration/reviews/R04.md` Check 3.
-  Recommended fix: Ensure the R06 reviewer cross-checks the paper-to-BMU LR map in `paper_0710_1869` against the post-R04 canonical map `Q1_LR^BMU = -2 O5_LR`.
-
-- [R04-I4] severity:INFO tag:docs
-  Title: Four R04 deferred follow-ups remain open (endpoint migration, NLO BMU, VLL/VRR NLO, methodology-note tables)
-  Description: `docs/phase_logs/phase2_h6_signoff.md:99-116` records four follow-ups: (i) per-system endpoint migration from the global `mu_had = 2 GeV` to FLAG-quoted scales (`B_4`/`B_5` at 3 GeV, `B_d`/`B_s` at `m_b`, D at 3 GeV); (ii) BMU NLO/NDR LR-sector running; (iii) VLL/VRR NLO sanity check; (iv) per-system conversion tables in the methodology note. None is closed by the R04 commit set; the signoff explicitly defers them. These overlap with R03-I3 hole-#5 follow-ups. The 22.49× cumulative invalidation-gate factor is robust against (i)-(iii) because the dominant correction (factor ~3.6) is the ADM fix itself.
-  Evidence: `docs/phase_logs/phase2_h6_signoff.md:99-116`; `docs/audits/wilson_rg_inventory.md:108-119,138-149`; `.orchestration/reviews/R04.md` Issues section.
-  Recommended fix: Track these as open issues against R05 (invalidation-gate rerun) or later orchestrated upgrades; confirm closure before the final paper claim is frozen.
 
 - [R05-I1] severity:INFO tag:docs
   Title: Rerun commit subject says "8 RS-anarchy scans" but 9 dated directories exist
@@ -478,7 +436,44 @@ Format per issue:
   Recommended fix: Optional — drop the `<th>Tier</th>` column from `EntryTable.astro`'s thead, remove the `data-tier` attribute, and the dead `tier` branch in `browse.astro`'s pass loop. Cosmetic.
 
 ## Closed / Accepted-risk
-(none yet)
+
+### Closed by C01
+
+- [R03-I1] severity:HIGH tag:code  **CLOSED 2026-05-25** by commit `3ab1f8f` (C01a).
+  Title: Duplicate (pre-audit) kaon hadronic constants in modern backend not updated by Phase-2 hole #5 audit
+  Description: `quarkConstraints/modern/phenomenology.py:421-431` carried a private copy of the kaon hadronic constants (`_KAON_B_1 = 0.717`, `_KAON_B_4 = 0.78`, `_KAON_B_5 = 0.57`, `_KAON_EPSILON_K_SM = 1.81e-3`) that were NOT updated when `dc9c498` updated the canonical values in `quarkConstraints/deltaf2.py:618-623` (`B_1_K=0.5503`, `B_4_K=0.903`, `B_5_K=0.691`, `EPSILON_K_SM=2.161e-3`). Closed via recommended-fix option (b): the four stale literals were updated in place (option (a) `from ..deltaf2 import` is structurally impossible — the modern lane is firewalled from `deltaf2` at 3 enforcement layers: `tests/test_modern_phenomenology.py:41-52,198-249` + `quarkConstraints/modern/verifier.py:50-60`). Collaborator artifacts re-exported under `7899205` (C01b); ratio_epsilon_K columns tightened ~7x as forecast. Full diagnosis in `.orchestration/cleanup_reports/C01.md`.
+
+- [R03-I2] severity:MEDIUM tag:numerics  **CLOSED 2026-05-25** by commit `3ab1f8f` (C01a).
+  Title: Audited-constant pin test does not guard the modern backend duplicates
+  Description: `tests/test_quark_deltaf2.py::test_audited_deltaf2_hadronic_constants_match_selected_sources` (lines 111-117) only asserted the four post-audit values in `quarkConstraints.deltaf2` and did not cross-pin against `quarkConstraints.modern.phenomenology._KAON_*`. Closed by adding `test_modern_phenomenology_kaon_constants_match_deltaf2_canonical` in the same file. The new test imports both modules at test-function scope (legal — the firewall guards the modern source/sys.modules surface, not tests) and asserts `np.isclose` for all 11 kaon constant pairs with an explicit "Update both literals together" failure message.
+
+### Closed by C02a-code
+
+- [R03-I3] severity:MEDIUM tag:docs  **CLOSED 2026-05-25** by C02a-code (commit `3e1e07c`).
+  Title: Five hole #5 follow-up tasks gating the final-claim invalidation gate remain open
+  Description: `docs/phase_logs/phase2_h5_signoff.md:104-136` enumerates five follow-up tasks. Closure of this issue is **bookkeeping only**: it folds together one in-this-commit closure of tasks 1, 3, and 4 plus the deferred-but-tracked follow-ups for tasks 2 and 5.
+    - Tasks 1 (methodology-note band quote), 3 (band-edge $\Mkk^{\min}$ quotation `47.26^{+75.10}_{-25.05}` TeV), and 4 (methodology-note paragraph describing the band construction) are **resolved in this commit** by the new `\paragraph{Symbolic NP-budget band on $\Mkk^{\min}$}` paragraph in `docs/quark_scan_methodology_note.tex` (after line 729, immediately following the existing BGS-budget band quote). The paragraph cites the symbolic $1/\sqrt{|\Delta\epsilon_K|}$ scaling, includes the explicit ratios $2.59$ (tight) and $0.47$ (loose) at the C02a plan's documented edges $\Delta\epsilon_K\in\{1\times10^{-5},\,6.7\times10^{-5},\,3\times10^{-4}\}$, and cross-links the `--epsilon-k-budget` CLI seam.
+    - Task 2 (three RUNA reruns) is **deferred to cleanup unit C02c** (SLURM-budget reason — see CLEANUP_PLAN.md C02c). The CLI seam (`scripts/run_rs_anarchy.py --epsilon-k-budget {central,low,high}`) plumbed end-to-end through `EnsembleConfig` → `_worker_init` → `evaluate_delta_f2_constraints` → `evaluate_epsilon_k` IS landed in this commit; smoke runs confirm `central` is bit-for-bit identical to the pre-flag path and `low`/`high` rescale ε_K ratios by exactly $6.7$ / $0.2233$ as predicted.
+    - Task 5 (sensitivity-band figure) is **deferred to cleanup unit C02b** (paper finalization).
+  Evidence: `docs/quark_scan_methodology_note.tex` (new `\paragraph{Symbolic NP-budget band on $\Mkk^{\min}$}` after line 729); `scripts/run_rs_anarchy.py` (CLI flag + `EnsembleConfig` + `_worker_init` round-trip); `quarkConstraints/deltaf2.py` (`epsilon_k_np_budget_override` keyword); `tests/test_run_rs_anarchy.py` (12 new tests, all pass); 125/125 broader regression tests pass; PDF rebuilt cleanly (20 pp). Full diagnosis in `.orchestration/cleanup_reports/C02a-code.md`.
+
+### Closed by C03
+
+- [R04-I1] severity:LOW tag:numerics  **CLOSED 2026-05-25** by C03.
+  Title: Audit-script closed-form shortcut silently assumes upper-triangular LR ADM
+  Description: `scripts/audit_wilson_rg.py::scalar_lr_segment_matrix` set the lower-left ADM entry to `0.0` literal-by-literal but did not assert the upper-triangular precondition. Closed by hoisting `gamma54 = 0.0` into a named local, building `gamma_lr_local = np.array([[gamma44, gamma45], [gamma54, gamma55]])`, and raising `ValueError("audit_wilson_rg.scalar_lr_segment_matrix requires an upper-triangular scalar LR ADM (gamma_54 == 0); update the closed-form propagator if the anomalous-dimension block is changed.")` when `gamma_lr_local[1, 0] != 0.0` or `np.allclose(gamma_lr_local - np.triu(gamma_lr_local), 0.0)` fails. Numeric output unchanged (`C4_LR=1 -> 3.53816397486`, max relative discrepancy `1.300e-16`). Full diagnosis in `.orchestration/cleanup_reports/C03.md`.
+
+- [R04-I2] severity:LOW tag:code  **CLOSED 2026-05-25** by C03.
+  Title: `_evolve_wilsons` performs a function-local import
+  Description: The function-local `from .qcd_running import evolve_deltaf2_wilsons` in `quarkConstraints/deltaf2.py::_evolve_wilsons` (line 606 pre-cleanup) has been lifted to the module-top import block. Reviewer M-7 confirmed `quarkConstraints/qcd_running.py` does not import `deltaf2` at module scope (the module only imports `math` and `numpy`); the lift is therefore unconditional and non-circular. The orchestrator prompt's R04-I2 wording flipped the file (claimed the offender was in `qcd_running.py`); the plan (CLEANUP_PLAN.md line 46) and source agree the offender is in `deltaf2.py`. Closed by editing the module-top import block and replacing the function-local import line with a provenance docstring note. Focused suite `pytest -k 'wilson or rg or qcd or audit or bmu'` (103 passed) and broader sweep `pytest -k 'deltaf2 or epsilon_k or kaon or matching or modern'` (196 passed, 1 skipped) both green.
+
+- [R04-I3] severity:INFO tag:physics  **CLOSED 2026-05-25** by C03 (verification-only).
+  Title: `paper_0710_1869` LR running module carries an independent BMU map — confirm sign-chain alignment in R06
+  Description: C03 cross-checked the LR-sign chain in `quarkConstraints/paper_0710_1869/eft_deltaf2/{matching_kkgluon,hadronic,observables,rg}.py` against the post-C01 audited `quarkConstraints/deltaf2.py` path and found **no mismatch**. Both modules use the conventional positive scalar O4/O5 sign with `C4_LR < 0`, `C5_LR > 0` at matching, positive bag inputs, positive matrix-element prefactors, and no extra contraction sign. The BMU LR LO ADM is stored as the Wilson-coefficient transpose `((2,12),(0,-16))` in `paper_0710_1869/eft_deltaf2/rg.py:98-101` and as the operator form `[[2,0],[12,-16]]` in `qcd_running.py:50-57` / `scripts/audit_wilson_rg.py:85-117`, which is the standard convention difference between Wilson-coefficient ADM and operator ADM (transposes). The `paper_0710_1869` default LR bag values (`B4=0.78`, `B5=0.57` from ETM 2013) are intentionally distinct from the FLAG 2024 values in the repo-v1 path (`B_4_K=0.903`, `B_5_K=0.691`); the bundle identifier `hadronic.kaon.lr.b4.etm2013.table1.ms_2gev.v1` separates them by design. No code change required. Full file:line evidence table in `.orchestration/cleanup_reports/C03.md`.
+
+- [R04-I4] severity:INFO tag:docs  **CLOSED 2026-05-25** by C03 (docs-only tracking note).
+  Title: Four R04 deferred follow-ups remain open (endpoint migration, NLO BMU, VLL/VRR NLO, methodology-note tables)
+  Description: A new `## Status as of 2026-05-25 post-cleanup (C03)` section has been appended to `docs/audits/wilson_rg_inventory.md` (immediately before the existing `## Invalidation-gate note`) explicitly enumerating the four deferred follow-ups from the inventory's 10-item checklist: (item 2) Hamiltonian/CFW comparison; (item 4) per-system RG endpoint migration; (item 7) full NLO WET evolution module; (item 10) endpoint caveat for matrix-element contraction. The section also records the R04-I3 verification, the R04-I1/I2 code changes, and pins the audit-script numeric output. Per CLEANUP_PLAN.md §C C19, the substantive resolution of these methodology-note items is reassigned to **C19**; the C03 doc addendum is the bridge. (CLEANUP_QUEUE.md row for C20 also lists R04-I4 as an ACCEPTED-RISK candidate; the C19/C20 split is not litigated here.)
 
 ## Infra follow-ups
 - INFRA-1 severity:LOW tag:infra — Reconfigure Cloudflare to deploy from `main/flavor_catalog/website/` so the second branch can eventually be retired. **CLOSED 2026-05-25**: website branch merged into main (commit `cb58a36`); Cloudflare Pages production branch set to `main` with root `flavor_catalog/website/`; verified green deploy on commit `a809cc3`; `flavor-catalog-website/2026q2` deleted local + origin.

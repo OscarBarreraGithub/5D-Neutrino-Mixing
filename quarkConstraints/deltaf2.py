@@ -17,6 +17,7 @@ from typing import Mapping, Sequence
 
 from .couplings import QuarkMassBasisCouplings, compute_quark_kk_gluon_couplings
 from .fit import QuarkFitResult
+from .qcd_running import evolve_deltaf2_wilsons
 from .scales import DEFAULT_QUARK_TARGET_SCALE_GEV, DEFAULT_QUARK_XI_KK
 
 DELTA_F2_MODEL_V1 = "kk_gluon_tree_v1"
@@ -602,9 +603,11 @@ def _evolve_wilsons(
 
     With BMU's vector LR operator this means Q1_LR^BMU = -2 O5_LR and
     Q2_LR^BMU = O4_LR.  The FLAG-style B5 input is not sign-flipped.
-    """
-    from .qcd_running import evolve_deltaf2_wilsons
 
+    The ``qcd_running.evolve_deltaf2_wilsons`` symbol is imported at module
+    scope (lifted in C03 cleanup, R04-I2, 2026-05-25).  ``qcd_running`` does
+    not import ``deltaf2`` at module scope, so the lift is non-circular.
+    """
     c_vll_low, c_vrr_low, c4_lr_low, c5_lr_low = evolve_deltaf2_wilsons(
         wilsons.c1_vll,
         wilsons.c1_vrr,
