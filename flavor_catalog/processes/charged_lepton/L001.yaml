@@ -8,6 +8,31 @@ owner_agent_id: "PKA-L001"
 writer_agent_id: null
 checker_agent_id: "CA"
 opus_signoff_id: null
+# Wave assignment cross-reference (added 2026-05-25 by cleanup C10 for R10c-I3).
+# L001 is a plan-v1 Wave-1 PKA, but its WA/CA cycles were polished under the
+# sibling charged_lepton Wave-2/3 batch (three CA cycles plus Opus arbitration).
+# The wave-1-named worklog files do not exist for charged_lepton; the worklog
+# evidence lives in:
+#   flavor_catalog/worklogs/writer/wa_w23_charged_lepton.md       (WA cycle 1)
+#   flavor_catalog/worklogs/checker/ca_w23_charged_lepton.md      (CA cycle 1)
+#   flavor_catalog/worklogs/writer/wa_w23_charged_lepton_v2.md    (WA cycle 2)
+#   flavor_catalog/worklogs/checker/ca_w23_charged_lepton_v2.md   (CA cycle 2)
+#   flavor_catalog/worklogs/writer/wa_w23_charged_lepton_v3.md    (WA cycle 3)
+#   flavor_catalog/worklogs/checker/ca_w23_charged_lepton_v3.md   (CA cycle 3)
+# The status_history batch_id fields below already record this; the explicit
+# alias is for any future audit walking only *wave1* worklog filenames.
+wave_assignment: "wave1"
+worklog_alias:
+  family_batch: "w23_charged_lepton"
+  writer_worklogs:
+    - "flavor_catalog/worklogs/writer/wa_w23_charged_lepton.md"
+    - "flavor_catalog/worklogs/writer/wa_w23_charged_lepton_v2.md"
+    - "flavor_catalog/worklogs/writer/wa_w23_charged_lepton_v3.md"
+  checker_worklogs:
+    - "flavor_catalog/worklogs/checker/ca_w23_charged_lepton.md"
+    - "flavor_catalog/worklogs/checker/ca_w23_charged_lepton_v2.md"
+    - "flavor_catalog/worklogs/checker/ca_w23_charged_lepton_v3.md"
+  opus_arbitration_id: "opus_arbitration_L001"
 status_history:
   - state: "WRITER-INITIATED"
     timestamp: "2026-05-16T11:36:52-04:00"

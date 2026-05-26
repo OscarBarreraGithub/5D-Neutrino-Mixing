@@ -8,6 +8,27 @@ owner_agent_id: "PKA-T002"
 writer_agent_id: null
 checker_agent_id: "CA"
 opus_signoff_id: null
+# Wave assignment cross-reference (added 2026-05-25 by cleanup C10 for R10c-I3).
+# T002 is a plan-v1 Section C Wave-1 PKA, but its WA/CA cycles were polished
+# under the sibling top_higgs_ew Wave-2/3 batch because the wave-1 batch was
+# already in flight when T002 was drafted. The wave-1-named worklog files
+# (wa_wave1_top_higgs_ew{,_v2}.md / ca_wave1_top_higgs_ew{,_v2}.md) cover
+# T001 and T010 only; the worklog evidence for T002 lives in:
+#   flavor_catalog/worklogs/writer/wa_w23_top_higgs_ew.md       (WA cycle 1)
+#   flavor_catalog/worklogs/checker/ca_w23_top_higgs_ew.md      (CA cycle 1)
+#   flavor_catalog/worklogs/writer/wa_w23_top_higgs_ew_v2.md    (WA cycle 2)
+#   flavor_catalog/worklogs/checker/ca_w23_top_higgs_ew_v2.md   (CA cycle 2)
+# The status_history batch_id fields below already record this; the explicit
+# alias is for any future audit walking only *wave1* worklog filenames.
+wave_assignment: "wave1"
+worklog_alias:
+  family_batch: "w23_top_higgs_ew"
+  writer_worklogs:
+    - "flavor_catalog/worklogs/writer/wa_w23_top_higgs_ew.md"
+    - "flavor_catalog/worklogs/writer/wa_w23_top_higgs_ew_v2.md"
+  checker_worklogs:
+    - "flavor_catalog/worklogs/checker/ca_w23_top_higgs_ew.md"
+    - "flavor_catalog/worklogs/checker/ca_w23_top_higgs_ew_v2.md"
 status_history:
   - from: null
     to: "WRITER-INITIATED"
