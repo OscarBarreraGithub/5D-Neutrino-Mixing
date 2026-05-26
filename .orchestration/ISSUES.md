@@ -123,18 +123,6 @@ Format per issue:
   Evidence: `flavor_catalog/processes/kaon/K001.yaml:9, 34`; `flavor_catalog/worklogs/checker/ca_w23_kaon_charm_edm.md`; review `.orchestration/reviews/R10a.md` Issues row I1.
   Recommended fix: Optional — either populate `checker_agent_id` with the actual CA batch ID (`"ca_w23_kaon_charm_edm"`) on a future polish pass, or accept as a known convention.
 
-- [R10b-I1] severity:INFO tag:docs
-  Title: B011 yaml `sm_prediction_current.observable` field carries a typo "SM prediction for B_s gamma" (should be `B -> X_s gamma`)
-  Description: `flavor_catalog/processes/beauty/B011.yaml:94` reads `observable: "SM prediction for B_s gamma"`. The process is `bar B -> X_s gamma`, not the leptonic `B_s -> mu mu` mode; the value and snapshot are correct (the Misiak-Rehman-Steinhauser 2020 `(3.40 +/- 0.17) x 10^-4`, E_gamma > 1.6 GeV). WA flagged this in `wa_wave1_beauty.md` open-issues section as a "shorthand/typo" that WA deliberately did not touch because the block is PKA-owned; CA cycle 1 marked CHK-1..CHK-8 PASS without correcting it. Cosmetic — the value, units, conditions, source, sha256, and access date are all correct; only the human-readable observable label is wrong.
-  Evidence: `flavor_catalog/processes/beauty/B011.yaml:94`; `flavor_catalog/worklogs/writer/wa_wave1_beauty.md` B011 "Open issues for CA" bullet; review `.orchestration/reviews/R10b.md` Issues row I1.
-  Recommended fix: One-line PKA polish replacing `"SM prediction for B_s gamma"` with `"SM prediction for B -> X_s gamma"` on the next touch of B011.
-
-- [R10b-I2] severity:INFO tag:docs
-  Title: B009 yaml status_history entry for `WRITER-INITIATED -> PKA-DONE` omits the `state:` field
-  Description: `flavor_catalog/processes/beauty/B009.yaml:20-23` records the PKA-DONE transition with only `from`, `to`, `at`, `agent_id`, and `reason` fields — no top-level `state:` key. All other status_history entries in this yaml (and in the other 4 beauty Wave-1 yamls) carry a redundant `state:` field. Schema is permissive (the canonical state is in `to:`), but the inconsistency means a naive lookup of `state` across history entries will see a hole. Cosmetic.
-  Evidence: `flavor_catalog/processes/beauty/B009.yaml:20-23` vs `B009.yaml:12-19, 26-32`; review `.orchestration/reviews/R10b.md` Issues row I2.
-  Recommended fix: One-line PKA polish adding `state: "PKA-DONE"` on the next touch of B009; or formalize that `state` is redundant with `to` and remove it from all entries.
-
 - [R10c-I1] severity:INFO tag:docs
   Title: T010 PKA assignment combines plan rows T010 (R_b) and T011 (A_FB^b, A_b) into a single Z bbar b pole package; T011 has no separate file
   Description: `flavor_catalog/processes/top_higgs_ew/T010.yaml:11-12` declares `related_process_ids: [T011]`, and the PKA worklog (`flavor_catalog/worklogs/pka/T010.md`) plus the .tex header (`T010.tex:14-17`) both note the batch decision to fold plan row T011 (the Z-pole asymmetries A_FB^b and A_b) into the same file as T010 (R_b). The yaml's `open_issues` block at `T010.yaml:163-164` flags this for WA/orchestrator disposition: "Assignment combines plan row T010 with the T011 asymmetry row; WA/orchestrator should decide whether T011 remains a separate follow-up entry or is marked covered by this combined file." The Wave-1 WA/CA cycles passed without resolving this, and no separate `T011.{yaml,tex}` exists in `flavor_catalog/processes/top_higgs_ew/`. The combined file is internally complete (all three observables are catalogued), but the plan-row-to-file mapping is implicit rather than explicit.
@@ -164,12 +152,6 @@ Format per issue:
   Description: `flavor_catalog/worklogs/discovery/round_001_full_scope.md:55-60` enumerates four open PI escalations: (a) whether K013 alone satisfies the `K1 -> pi gamma` seed or K014 should be drafted as an alternate; (b) whether EW002 should be standalone CKM unitarity in addition to K018; (c) whether EW003 should remain a single inclusive/exclusive overview or trigger separate B029/B030/B031 PKAs; (d) whether E004/E006/E008 EDMs are catalog-only or future hard cuts. None of the four are linked to a downstream resolution doc or issue tracker entry. R12 (Wave-4) review should confirm these were resolved before Wave-4 dispatched the corresponding PKAs.
   Evidence: `flavor_catalog/worklogs/discovery/round_001_full_scope.md:55-60`; review `.orchestration/reviews/R11.md` Issues row I2.
   Recommended fix: When dispatching R12 review, cross-check that the four escalations were resolved (likely yes — EW001/EW002 and L003/L004/L005 are in R12 scope per `MERGE_PLAN.md:305`). Update DA-1 worklog with `RESOLVED-BY:` markers if so.
-
-- [R11-I3] severity:INFO tag:docs
-  Title: B025 records a no-PDF-policy gap for the Belle II CKM-2025 hadronic-tag input
-  Description: `flavor_catalog/processes/beauty/B025.yaml:232-233` notes that "The Belle II CKM-2025 hadronic-tag input is referenced by HFLAV as a conference talk PDF; this PKA did not snapshot the PDF under the no-PDF policy." Catalog value capture is correct downstream (the HFLAV joint average at value 0.358 ± 0.024 absorbs this input through the joint fit), so the gap is cosmetic for the current "operational_scan_only" claim level. If R_D is ever promoted to a live constraint, the missing snapshot should be back-filled (via the eventual arXiv/journal version, not the talk PDF).
-  Evidence: `flavor_catalog/processes/beauty/B025.yaml:232-233`; review `.orchestration/reviews/R11.md` Issues row I3.
-  Recommended fix: Monitor for the conference-talk -> arXiv publication transition; snapshot at that point. No urgency.
 
 - [R12-I1] severity:INFO tag:docs
   Title: R12 dispatch prompt mis-identifies SINDRUM-II Au target as L008, undercounts W4 scope
@@ -464,6 +446,20 @@ Format per issue:
 - [R10b-I3] severity:INFO tag:docs  **CLOSED 2026-05-25** by C08.
   Title: All 5 Wave-1 beauty yamls retain unresolved `open_issues` entries flagged by PKA/WA for CA disposition that were never formally closed
   Description: Closed by prepending resolution markers to the `open_issues` entries in all 5 Wave-1 beauty yamls. B002 (`[RESOLVED-by-C08]` HFLAV all-charmonium 0.710 canonical); B005 (`[RESOLVED-by-C08]` PDG live 3.34e-9 canonical, HFLAV Apr-2023 demoted to `hflav_historical_average`); B009 item 1 (`[RESOLVED-by-C08]` HFLAV Dec-2025 1.12e-4 canonical) + item 2 (`[DEFERRED-to-post-paper-finalization]` direct f_B|V_ub| construction not needed for operational_scan_only claim level); B011 (`[RESOLVED-by-C08]` Misiak 2020 3.40e-4 canonical SM, 2015 PDG-quote retained as `sm_prediction_pdg_review_quote`); B015 item 1 (`[CLOSED-as-N/A]` rejected-anchor provenance note, correct BaBar/Belle 1312.5364 + hep-ex/0503044 already cited) + item 2 (`[CLOSED-as-by-design]` exclusive B->K(*)ll and LFU details deferred to B016-B019 by PKA design). Original wording preserved verbatim after `Original note: ` in each. Evidence in `.orchestration/cleanup_reports/C08.md`.
+
+### Closed by C09
+
+- [R10b-I1] severity:INFO tag:docs  **CLOSED 2026-05-25** by C09.
+  Title: B011 yaml `sm_prediction_current.observable` field carries a typo "SM prediction for B_s gamma" (should be `B -> X_s gamma`)
+  Description: Closed by editing `flavor_catalog/processes/beauty/B011.yaml:94` from `observable: "SM prediction for B_s gamma"` to `observable: "SM prediction for B -> X_s gamma"`. Matches the ASCII-arrow notation used elsewhere in the same file (e.g. line 79 `"CP- and isospin-averaged branching fraction B(B -> X_s gamma)"`). Value `0.000340`, uncertainty `0.000017`, units, conditions (`E_gamma > 1.6 GeV in the decaying meson rest frame`), source (`Misiak, Rehman, Steinhauser 2020`), source_url, snapshot_path, and sha256 are all unchanged — this is a human-readable label fix only. Evidence in `.orchestration/cleanup_reports/C09.md`.
+
+- [R10b-I2] severity:INFO tag:docs  **CLOSED 2026-05-25** by C09.
+  Title: B009 yaml status_history entry for `WRITER-INITIATED -> PKA-DONE` omits the `state:` field
+  Description: Closed by prepending `state: "PKA-DONE"` at `flavor_catalog/processes/beauty/B009.yaml:19`. Now matches the pattern of all six other entries in the same `status_history` list (each carries `state:` as the leading key, with `to:` echoing the same value). The canonical state was already in the `to:` field, so this is presentational alignment only; no audit information changes. Evidence in `.orchestration/cleanup_reports/C09.md`.
+
+- [R11-I3] severity:INFO tag:docs  **CLOSED 2026-05-25** by C09.
+  Title: B025 records a no-PDF-policy gap for the Belle II CKM-2025 hadronic-tag input
+  Description: Closed by (a) prepending a `[DOCUMENTED-by-C09 2026-05-25]` resolution marker to the B025 `open_issues` entry at `flavor_catalog/processes/beauty/B025.yaml:233` explaining that the input is captured indirectly via the HFLAV joint-fit text snapshots and (b) adding a new citation-anchor entry at `flavor_catalog/website/_data/citation_anchors/B025.yaml` (block_key `canonical_average.belleII_hadronic_tag_input_no_pdf_policy_gap`) that uses a new `unsnapshotted_reason:` multi-line scalar and `status: UNSNAPSHOTTED-BY-POLICY` value to formally document the no-PDF-policy gap. The original wording is preserved verbatim after `Original note: ` in the B025 yaml so the audit trail is intact. Original recommended fix (snapshot the conference-talk PDF) is unchanged in priority — backfill the eventual arXiv/journal version of the hadronic-tag measurement when it appears; no urgency at the current `operational_scan_only` claim level. The new `unsnapshotted_reason:` field and `UNSNAPSHOTTED-BY-POLICY` status set a forward-looking convention for documenting future no-PDF-policy gaps. Evidence in `.orchestration/cleanup_reports/C09.md`.
 
 ## Infra follow-ups
 - INFRA-1 severity:LOW tag:infra — Reconfigure Cloudflare to deploy from `main/flavor_catalog/website/` so the second branch can eventually be retired. **CLOSED 2026-05-25**: website branch merged into main (commit `cb58a36`); Cloudflare Pages production branch set to `main` with root `flavor_catalog/website/`; verified green deploy on commit `a809cc3`; `flavor-catalog-website/2026q2` deleted local + origin.

@@ -201,3 +201,46 @@ sources:
         L17:     <category term="hep-ex" scheme="http://arxiv.org/schemas/atom"/>
         L18:     <published>2025-04-15T14:22:58Z</published>
         L19:     <arxiv:primary_category term="hep-ex"/>
+- block_key: canonical_average.belleII_hadronic_tag_input_no_pdf_policy_gap
+  source_url: https://hflav-eos.web.cern.ch/hflav-eos/semi/ckm25/html/RDsDsstar/RDRDs.html
+  snapshot_path: flavor_catalog/references/B025/hflav_ckm2025_logfile.txt
+  sha256: sha256:484f6ee19b8eaa50d6a304a3d5d211861dc28a94581dbb9d6656ad8a18a49422
+  access_date: '2026-05-16'
+  unsnapshotted_reason: |
+    HFLAV's CKM-2025 R(D)-R(D*) joint average ingests a Belle II hadronic-tag
+    input via the file `belleII_had_input.json` (referenced in
+    `hflav_ckm2025_logfile.txt` at the IntercorrelationMaps block), which HFLAV
+    sources from a Belle II conference talk distributed only as a PDF. Per the
+    catalog no-PDF policy (text-snapshot-only), this conference talk PDF was
+    not retrieved or hashed. The input value is captured indirectly via:
+    (a) the HFLAV joint-fit HTML snapshot (hflav_ckm2025_rdrds.txt, sha256
+    4da37c4b6e6488f36229e52e84a5fef7dc5e5f41d941ad0d7bf3e313aa5a1ef8) which
+    reports the joint R(D)=0.358 +- 0.024 and R(D*)=0.281 +- 0.011 averages
+    that absorb this input, and (b) the HFLAV logfile snapshot
+    (hflav_ckm2025_logfile.txt, sha256 484f6ee1...) which lists the JSON
+    filename. The Belle II 2025 arXiv publication
+    (belleii2025_arxiv2504_11220.txt, arXiv:2504.11220) is separately
+    snapshotted as a SELECTED experimental input (see
+    selected_experimental_inputs[6] above) and uses the semileptonic-tag
+    method; it is a different measurement than the hadronic-tag talk input
+    HFLAV ingests in its CKM-2025 average. Backfill plan: snapshot the
+    eventual arXiv/journal version of the hadronic-tag measurement when it
+    is published; no urgency at the current operational_scan_only claim level
+    since the catalog headline value already absorbs this input through the
+    HFLAV joint fit. Tracked under R11-I3, documented by C09.
+  anchors:
+  - anchor_field: unsnapshotted_input_provenance_note
+    anchor_string: belleII_had_input.json (HFLAV CKM-2025 hadronic-tag input; conference talk PDF; not snapshotted per no-PDF policy)
+    status: UNSNAPSHOTTED-BY-POLICY
+    matches:
+    - line_number: 1
+      context: |
+        L1: ../inputs/hflav_ckm2025/belleII_had_input.json
+        L2: ../inputs/hflav_ckm2025/belleII_sl_input.json
+        L3: Label =  LHCb_Hadronic
+        L4: LHCb hadronic Run1 + 16
+        L5: Label =  BelleII
+        L6: Belle II
+        L7: Label =  BelleII_sl
+        L8: Belle II sl
+        L9: IntercorrelationMaps: rs1=BelleII  rs2=BelleII_sl : applied full intercorr for: B2Cor
