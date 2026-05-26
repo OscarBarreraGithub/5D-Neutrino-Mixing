@@ -22,7 +22,7 @@ context will fill up and you'll lose continuity. Instead, you dispatch
 subagents and review short verdict lines.
 
 The split is:
-- **Codex GPT-5.5 xhigh** (via `~/bin/codex_worker.sh` or `codex exec`)
+- **Codex GPT-5.4 xhigh** (via `~/bin/codex_worker.sh` or `codex exec`)
   for the high-volume repetitive per-entry work: content extraction,
   citation-anchor resolution, batch JSON/YAML generation.
 - **Claude subagents** (via the Agent tool with `subagent_type:
@@ -260,7 +260,7 @@ A "How the catalog was built" page that:
 
 You (orchestrator Claude) write zero code and zero CSS. You dispatch.
 
-## Codex GPT-5.5 xhigh (NOT fast) — high-volume repetitive work
+## Codex GPT-5.4 xhigh (NOT fast) — high-volume repetitive work
 
 Owns:
 - For each of 102 entries: parse the YAML sidecar + `.tex`, extract

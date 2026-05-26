@@ -52,7 +52,7 @@ page's "view in source" modal works without an extra client fetch.
 
 ### Regenerate citation anchors (rare)
 
-Citation anchors are normally resolved by a codex (gpt-5.5 xhigh) Phase-2
+Citation anchors are normally resolved by a codex (gpt-5.4 xhigh) Phase-2
 job that reads the YAML manifests, fetches snapshots, and writes one
 YAML file per family under `_data/citation_anchors/`. If you need to
 re-resolve a family locally (after a snapshot edit, for example), the
@@ -208,7 +208,7 @@ If a catalog snapshot changes and an anchor goes stale:
    `python3 scripts/ingest_catalog.py` to re-stamp.
 
 2. **Canonical codex path** (multi-family, fresh resolution): see
-   [`WEBSITE_RUNBOOK.md`](./WEBSITE_RUNBOOK.md) for the gpt-5.5 xhigh
+   [`WEBSITE_RUNBOOK.md`](./WEBSITE_RUNBOOK.md) for the gpt-5.4 xhigh
    dispatch template and the family-aware prompt with the orchestrator's
    audit-trail conventions.
 

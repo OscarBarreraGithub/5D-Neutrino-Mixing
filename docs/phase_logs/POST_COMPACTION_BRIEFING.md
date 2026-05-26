@@ -25,7 +25,7 @@ This file is your wake-up briefing. Read it in full before acting.
 ### Roles
 - **You (Claude orchestrator)**: NO implementation. You spawn agents,
   read their outputs, decide phase transitions, and seal logs.
-- **Codex implementer (gpt-5.5 xhigh, NOT fast mode)**: all code/doc
+- **Codex implementer (gpt-5.4 xhigh, NOT fast mode)**: all code/doc
   writes, all audits, all literature lookups, all SLURM submissions.
 - **Codex peer reviewer**: a separate Codex invocation that critiques
   the implementer's diff.
@@ -56,7 +56,7 @@ This file is your wake-up briefing. Read it in full before acting.
   shell (`cat > /tmp/foo.md <<'EOF' ... EOF`).
 - Run in background via `run_in_background: true`. You'll be notified
   on completion. Don't poll.
-- Codex's gpt-5.5 xhigh takes 5-30 min per task depending on scope.
+- Codex's gpt-5.4 xhigh takes 5-30 min per task depending on scope.
   Plan accordingly.
 
 ### Communication discipline (impose on every Codex prompt)
@@ -122,7 +122,7 @@ Spawn an Opus sub-agent (`Agent` tool, `subagent_type: general-purpose`,
 
 ### Task B — Re-execute the 4 paper-grade notebooks under post-audit constants
 
-Spawn a Codex implementer (background, gpt-5.5 xhigh) with this brief:
+Spawn a Codex implementer (background, gpt-5.4 xhigh) with this brief:
 
 - The 4 notebooks live under `notebooks/`:
   - `dense_scan_2sigma_vs_1sigma_comparison.ipynb`

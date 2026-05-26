@@ -39,11 +39,11 @@ them defeats the cross-review safety.
 | Role | Model | Purpose | Output |
 |---|---|---|---|
 | **Orchestrator** | Claude Opus 4.x | Plan, dispatch, arbitrate, record decisions. **Does not write content.** | Worklogs, commits, sign-off docs |
-| **Process Knowledge Agent (PKA)** | Codex GPT-5.5 xhigh (not fast) | Per-unit research: download sources, extract values, write the first draft. | Per-unit `.tex` + `.yaml` sidecar + reference snapshots + worklog |
-| **Writer Agent (WA)** | Codex GPT-5.5 xhigh | Polish a batch of PKA drafts: tighten language, complete metadata, fix LaTeX. Does not invent content. | Updated `.tex`/`.yaml` + batch worklog |
-| **Checker Agent (CA)** | Codex GPT-5.5 xhigh, **must be a separate session from the matching WA** | Independent verification of a WA-polished batch. Runs an 8-item checklist (see below). Verdict: PASS / WRITER-REWORK. | CA worklog with per-unit pass/fail matrix + verified value table |
-| **Discovery Agent (DA)** | Codex GPT-5.5 xhigh | Survey the catalog vs. a target list; propose additions or recommend convergence. Multiple rounds. | Discovery worklog |
-| **Fact-Check Agent** | Codex GPT-5.5 xhigh with WebFetch | Independently re-fetch every cited source and verify that the claimed values actually appear in the source content. | Per-family fact-check report; aggregated checklist |
+| **Process Knowledge Agent (PKA)** | Codex GPT-5.4 xhigh (not fast) | Per-unit research: download sources, extract values, write the first draft. | Per-unit `.tex` + `.yaml` sidecar + reference snapshots + worklog |
+| **Writer Agent (WA)** | Codex GPT-5.4 xhigh | Polish a batch of PKA drafts: tighten language, complete metadata, fix LaTeX. Does not invent content. | Updated `.tex`/`.yaml` + batch worklog |
+| **Checker Agent (CA)** | Codex GPT-5.4 xhigh, **must be a separate session from the matching WA** | Independent verification of a WA-polished batch. Runs an 8-item checklist (see below). Verdict: PASS / WRITER-REWORK. | CA worklog with per-unit pass/fail matrix + verified value table |
+| **Discovery Agent (DA)** | Codex GPT-5.4 xhigh | Survey the catalog vs. a target list; propose additions or recommend convergence. Multiple rounds. | Discovery worklog |
+| **Fact-Check Agent** | Codex GPT-5.4 xhigh with WebFetch | Independently re-fetch every cited source and verify that the claimed values actually appear in the source content. | Per-family fact-check report; aggregated checklist |
 | **Opus sign-off agent** | Claude Opus 4.x | Final per-unit judgment: APPROVE / RETURN-TO-WA / ESCALATE-TO-PI. Reads the chain, applies the policy. | Round-level signoff index; per-unit signoff doc only for non-APPROVE |
 | **Opus arbitration agent** | Claude Opus 4.x | Called when WA/CA cycle cap is hit. Applies policy carve-outs and either overrides or returns. One corrective loop before PI escalation. | Arbitration doc + sidecar status update |
 

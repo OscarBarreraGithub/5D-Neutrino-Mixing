@@ -198,7 +198,7 @@ status` command exposed to query remaining quota; the only way to
 check is `codex exec --dangerously-bypass-approvals-and-sandbox
 "/status" < /dev/null` and parse stderr (which is what the probe does).
 
-### 4.4 Model: codex GPT-5.5 xhigh (not fast)
+### 4.4 Model: codex GPT-5.4 xhigh (not fast)
 
 Configured in `~/.codex/config.toml`. Do not invoke `codex --fast` —
 fast mode is a lighter model and is not appropriate for the work in this
@@ -224,7 +224,7 @@ The cluster's `randall_lab` partition is not available; use
 - Do not modify any per-process `.tex` content yourself. Always delegate
   to a WA. The orchestrator only writes orchestration meta-docs.
 - Do not invent agent dispatches with model names other than codex
-  GPT-5.5 xhigh (for content) or Opus (for sign-off / arbitration).
+  GPT-5.4 xhigh (for content) or Opus (for sign-off / arbitration).
   Mixing models breaks reproducibility.
 - Do not override the writer/checker separation rule. Two real BLOCKER
   physics errors in the companion paper were caught only because the

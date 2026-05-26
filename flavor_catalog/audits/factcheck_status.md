@@ -4,7 +4,7 @@
 CONTAINS the numerical value(s) the catalog entry claims to take from it.
 Not just URL HTTP-200; the paper content must match.
 
-**Method**: per-family codex (gpt-5.5 xhigh) fact-checkers with WebFetch.
+**Method**: per-family codex (gpt-5.4 xhigh) fact-checkers with WebFetch.
 Each agent reads its family's `.yaml` source_manifest, fetches the cited
 arXiv / PDG / HFLAV / FLAG / experiment-collaboration pages, and verifies the
 claimed numerical values appear at the cited source.

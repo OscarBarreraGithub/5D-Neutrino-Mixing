@@ -42,7 +42,7 @@ manifest by file path + checksum + size + run command + code SHA.
 
 ## Ownership
 
-- **Codex (gpt-5.5 xhigh)**: all implementation, audits, literature
+- **Codex (gpt-5.4 xhigh)**: all implementation, audits, literature
   search, code changes, doc edits, scan re-runs.
 - **Codex peer review** (a separate Codex invocation): reviews each
   Codex-implementer deliverable before sign-off.

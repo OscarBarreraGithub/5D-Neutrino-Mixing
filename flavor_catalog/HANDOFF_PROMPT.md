@@ -100,7 +100,7 @@ next phase of work the PI specifies.
 - ALWAYS run `~/bin/codex_check_usage.sh` before any new wave
   dispatch. Exit 0 = OK; exit 1 = blocked (quota). If blocked,
   document a pause and wait for the reset.
-- Codex model: GPT-5.5 xhigh reasoning (NOT fast mode). Set in
+- Codex model: GPT-5.4 xhigh reasoning (NOT fast mode). Set in
   `~/.codex/config.toml`.
 - Do not push to `paper/quark-scan-2026q2` — frozen at rc1.1.
 - Do not modify per-process .tex content yourself. Delegate to a

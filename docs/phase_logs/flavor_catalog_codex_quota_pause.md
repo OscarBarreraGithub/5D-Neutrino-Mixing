@@ -43,7 +43,7 @@ at 3:08 PM." Quota resets at **3:08 PM local (≈ 18 minutes from pause)**.
 
 ## Estimated codex budget for resumption
 
-- 4 WA-v2 (~12 min each, gpt-5.5 xhigh) ≈ ~50 min serial → dispatch in
+- 4 WA-v2 (~12 min each, gpt-5.4 xhigh) ≈ ~50 min serial → dispatch in
   parallel batches of 3–4. ≈ 1 wall-hour.
 - 4 CA-v2 ≈ same. ≈ 1 wall-hour.
 - 3 CA-w5b ≈ ~30 min.

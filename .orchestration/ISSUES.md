@@ -171,12 +171,6 @@ Format per issue:
   Evidence: `flavor_catalog/processes/beauty/B001.yaml:226` (open_issues block at R14 tip); resolution at `flavor_catalog/signoff/by_process/B001_B003.md` (deposited in R15 commit set per MERGE_PLAN.md:308); review `.orchestration/reviews/R14.md` Check 2.
   Recommended fix: Close automatically once R15 is reviewed; no R14-side change required.
 
-- [R14-I3] severity:LOW tag:docs
-  Title: Codex quota pause note cites gpt-5.5 but global config and CLAUDE.md use gpt-5.4
-  Description: `docs/phase_logs/flavor_catalog_codex_quota_pause.md:46` reads "4 WA-v2 (~12 min each, gpt-5.5 xhigh)". The global instructions at `~/.claude/CLAUDE.md` (Agent Orchestration section) explicitly state "Model: gpt-5.4, reasoning effort xhigh (configured in `~/.codex/config.toml`)". Either the pause note is using a typo / placeholder model version, or the note was drafted against a different draft of the orchestration config. Version-string inconsistency only — does not affect any catalog content. Future codex budget estimation should use the actually-configured model.
-  Evidence: `docs/phase_logs/flavor_catalog_codex_quota_pause.md:46` vs. `/n/home09/obarrera/.claude/CLAUDE.md` (Agent Orchestration → Codex CLI → Model line); commit `a9dd56c` (the pause-note deposit).
-  Recommended fix: Optional — update `flavor_catalog_codex_quota_pause.md:46` to read "gpt-5.4 xhigh" matching the actual config. Cosmetic only.
-
 - [R15-I1] severity:LOW tag:docs
   Title: MERGE_PLAN.md R15 row lists charged_lepton_top CA-v2 commit as `7500919`, actual SHA is `7500794`
   Description: `.orchestration/MERGE_PLAN.md:308` R15 commit list reads "... `cd8816d`, `7500919`, `6d97db8`" but no commit with SHA `7500919` exists on this branch (`git log -1 7500919` returns `unknown revision`). The actual CA-cycle-2 commit for the charged_lepton_top family is `7500794` (subject `flavor-catalog(charged_lepton_top): CA batch ca_w6_charged_lepton_top_v2 — verify WA polish for L023 T020`, timestamp 2026-05-16T16:30:30-04:00, modifies L023.yaml + T020.yaml + ca_w6_charged_lepton_top_v2.md). Inventory typo only; the commit set itself is correctly described.
@@ -260,12 +254,6 @@ Format per issue:
   Description: `SESSION_NOTES.md:38-39` reads "Fact-check status across all 88 processes: **86 VERIFIED / 2 PARTIAL / 0 MISMATCH / 0 FAILED**" — the v0.3-tagged state. §1 table immediately above (`:26-31`) is v0.4 (102 entries: 94 PRIMARY + 8 SECONDARY). HANDOFF_PROMPT.md `:14-17` correctly states v0.4 as "100 VERIFIED + 2 metadata-only PARTIAL". The §1 v0.3 sentence was not folded into the §1b Wave-9 update at `2bda5f1`. Cosmetic — same defect pattern as R19-I3 (tag annotation vs compile report drift).
   Evidence: `flavor_catalog/SESSION_NOTES.md:38-39` vs `flavor_catalog/SESSION_NOTES.md:26-31` and `flavor_catalog/HANDOFF_PROMPT.md:14-17`; review `.orchestration/reviews/R20.md` Check Code.
   Recommended fix: Optional one-line edit at `SESSION_NOTES.md:38-39` updating "88 processes" / "86 VERIFIED" to v0.4 tallies (102 / 100 VERIFIED / 2 PARTIAL), or carve the sentence into "as of v0.3" + pointer to §1b.
-
-- [R20-I2] severity:INFO tag:docs
-  Title: AGENTIC_WORKFLOW.md role table cites "Codex GPT-5.5 xhigh" model; user's global CLAUDE.md cites "gpt-5.4"
-  Description: `AGENTIC_WORKFLOW.md:42-48` and `HANDOFF_PROMPT.md:103-104` consistently name "Codex GPT-5.5 xhigh"; the user's global instructions at `/n/home09/obarrera/.claude/CLAUDE.md` cite "gpt-5.4, reasoning effort xhigh". Drift is benign (Codex CLI's model is pinned in `~/.codex/config.toml`; binary + xhigh reasoning are constant) but a fresh handoff Claude reading both sees two model names.
-  Evidence: `flavor_catalog/AGENTIC_WORKFLOW.md:42-48`; `flavor_catalog/HANDOFF_PROMPT.md:103-104`; `/n/home09/obarrera/.claude/CLAUDE.md`; review `.orchestration/reviews/R20.md` Check Code.
-  Recommended fix: Optional — drop the explicit version digit in the catalog docs ("Codex xhigh", model-pinned in config), or align both with whichever version is canonical for the v0.4 tag epoch. No content defect for R20.
 
 - [R20-I3] severity:INFO tag:docs
   Title: SESSION_NOTES.md §8 cites three Opus sign-off rounds; catalog at v0.4 has five
@@ -446,6 +434,16 @@ Format per issue:
 - [R02-I2] severity:INFO tag:code  **CLOSED 2026-05-26** by C13.
   Title: Re-derived spurion seed values would benefit from an in-source provenance pointer
   Description: Closed by adding two in-source provenance pointers inside `quarkConstraints/benchmarks.py::default_spurion_seed` (line 189): (a) an extended multi-line docstring stating the singular-value and rotation literals were re-derived against PDG-2024 MS-bar quark masses with a pointer to `docs/phase_logs/phase2_h4_impl.md` for re-derivation details + audit log, and a note that `tests/test_quark_fit.py` pins the values so drift surfaces as a test failure; (b) a 3-line `#`-comment immediately above the `return SpurionSeed(` literal block carrying the short form requested by the dispatch brief (`# Spurion seed values re-derived against PDG-2024 MS-bar quark masses / (see docs/phase_logs/phase2_h4_impl.md for re-derivation details and / the audit log). Tests at tests/test_quark_fit.py pin these values.`). Both pointers live inside the function body so grep/AST-jump lands on them. No literal touched: `python -c "from quarkConstraints.benchmarks import default_spurion_seed; s = default_spurion_seed(); print(s.up_singular_values, s.down_singular_values, s.overall_scale)"` reproduces the pre-edit values to machine precision (`[0.1434281 0.33368792 1.23945796]`, `[0.22903978 0.16350921 0.28800013]`, `2.8`). Docs file `docs/phase_logs/phase2_h4_impl.md` confirmed to exist; test file `tests/test_quark_fit.py` confirmed to import and reference `default_spurion_seed` (lines 38, 55, 137, 150). No test re-run required (pure-comment change). Evidence in `.orchestration/cleanup_reports/C13.md`.
+
+### Closed by C14
+
+- [R14-I3] severity:LOW tag:docs  **CLOSED 2026-05-26** by C14.
+  Title: Codex quota pause note cites gpt-5.5 but global config and CLAUDE.md use gpt-5.4
+  Description: Closed by replacing `gpt-5.5` → `gpt-5.4` in `docs/phase_logs/flavor_catalog_codex_quota_pause.md:46` (the explicit R14-I3 target) and aligning eight other prescriptive surfaces with the canonical model name set in `~/.codex/config.toml` (per `~/.claude/CLAUDE.md` Agent Orchestration section): `flavor_catalog/AGENTIC_WORKFLOW.md:42-46`, `flavor_catalog/HANDOFF_PROMPT.md:103`, `flavor_catalog/WEBSITE_BUILD_PROMPT.md:25,263`, `flavor_catalog/SESSION_NOTES.md:201,227`, `flavor_catalog/website/README.md:55,211`, `flavor_catalog/audits/factcheck_status.md:7`, `docs/paper_execution_decisions.md:45`, `docs/phase_logs/POST_COMPACTION_BRIEFING.md:28,59,125`. Historical/provenance contexts preserved verbatim: `flavor_catalog/website/WEBSITE_RUNBOOK.md` (completed-event log of Phase-2 anchor batches), `flavor_catalog/website/_data/priority/*.yaml` (`ranked_by` provenance stamps, ~99 entries), `docs/phase_logs/flavor_catalog_plan_v0.md` + `_plan_v1.md` (superseded plan drafts), and the R14/R20 review records that document the drift by definition. Pure-docs cosmetic alignment; no code change; no test re-run required. Evidence in `.orchestration/cleanup_reports/C14.md`.
+
+- [R20-I2] severity:INFO tag:docs  **CLOSED 2026-05-26** by C14.
+  Title: AGENTIC_WORKFLOW.md role table cites "Codex GPT-5.5 xhigh" model; user's global CLAUDE.md cites "gpt-5.4"
+  Description: Closed by the same nine-file edit batch as R14-I3 above. The two R20-I2-named targets (`AGENTIC_WORKFLOW.md:42-46` role table — 5 rows for PKA/WA/CA/DA/Fact-Check — and `HANDOFF_PROMPT.md:103` non-negotiable rule) now read "Codex GPT-5.4 xhigh", aligning with the canonical `gpt-5.4` set in `~/.codex/config.toml`. Evidence in `.orchestration/cleanup_reports/C14.md`.
 
 ## Infra follow-ups
 - INFRA-1 severity:LOW tag:infra — Reconfigure Cloudflare to deploy from `main/flavor_catalog/website/` so the second branch can eventually be retired. **CLOSED 2026-05-25**: website branch merged into main (commit `cb58a36`); Cloudflare Pages production branch set to `main` with root `flavor_catalog/website/`; verified green deploy on commit `a809cc3`; `flavor-catalog-website/2026q2` deleted local + origin.
