@@ -209,5 +209,5 @@ implementation_difficulty: "HIGH"
 implementation_difficulty_if_missing: "HIGH"
 implementation_notes: "Requires a new Delta B = 1 semileptonic weak Hamiltonian, Wilson matching and running for C7/C9/C10 plus primed operators, bin-aware SM predictions, charm/QED treatment, and experimental likelihood/covariance handling."
 open_issues:
-  - "The prompt's arXiv:1311.7283 and arXiv:1503.04114 anchors were checked and rejected as unrelated; correct BaBar/Belle arXiv records are 1312.5364 and hep-ex/0503044."
-  - "Exclusive B -> K ell ell, B -> K* ell ell, and LFU-ratio details are intentionally deferred to B016-B019."
+  - "[CLOSED-as-N/A-by-C08 2026-05-25] Informational provenance note recording that the original dispatch prompt's arXiv:1311.7283 and arXiv:1503.04114 anchors were rejected as unrelated; the correct BaBar/Belle arXiv records 1312.5364 and hep-ex/0503044 are already cited in the PKA. No further action required. Original note: The prompt's arXiv:1311.7283 and arXiv:1503.04114 anchors were checked and rejected as unrelated; correct BaBar/Belle arXiv records are 1312.5364 and hep-ex/0503044."
+  - "[CLOSED-as-by-design 2026-05-25 (C08)] Scope boundary documented at PKA-draft time and honored downstream: B016-B019 carry the exclusive B -> K(*) ell ell and LFU-ratio details. No action required. Original note: Exclusive B -> K ell ell, B -> K* ell ell, and LFU-ratio details are intentionally deferred to B016-B019."

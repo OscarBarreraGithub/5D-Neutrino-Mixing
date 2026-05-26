@@ -176,4 +176,4 @@ code_coverage:
 implementation_difficulty: HIGH
 implementation_difficulty_reason: "Requires new Delta S = 1 WET/SMEFT matching, RG evolution, K -> pi pi matrix elements, and treatment of electroweak/QCD penguin plus chromomagnetic operators; the repo's Delta F = 2 machinery is not a direct evaluator."
 open_issues:
-  - "Checker should confirm whether the catalog standard prefers the PDG listing value 0.00166 +/- 0.00023 or the S013EPS DataBlock OUR AVERAGE 1.68 +/- 0.20 in units of 10^-3."
+  - "[RESOLVED-by-C08 2026-05-25] Canonical headline is the PDG listing value 0.00166 +/- 0.00023 (now in pdg_or_equivalent.value/display_value at K003.yaml:66,69); the S013EPS DataBlock OUR AVERAGE 1.68 +/- 0.20 x 10^-3 is retained as supporting_value (K003.yaml:87,90). Rationale: the listing-fit row is what downstream consumers quote; CA Wave-1 cycle accepted this assignment implicitly when CHK-1..CHK-8 passed. Original note: Checker should confirm whether the catalog standard prefers the PDG listing value 0.00166 +/- 0.00023 or the S013EPS DataBlock OUR AVERAGE 1.68 +/- 0.20 in units of 10^-3."
