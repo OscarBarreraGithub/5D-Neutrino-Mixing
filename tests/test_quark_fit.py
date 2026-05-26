@@ -1,4 +1,31 @@
-"""Tests for the quark-sector exact fit layer."""
+"""Tests for the quark-sector exact fit layer.
+
+R02-I2 (C04) — coverage scope note for the spurion-seed assertions
+------------------------------------------------------------------
+
+The C04 dispatch prompt asked whether these tests "only cover k=0" in
+the same sense as the Wilson upper-limit test (R07-I2).  They do not.
+There is no "k" parameter here: the spurion seed is a deterministic
+benchmark point (``default_spurion_seed()`` in
+``quarkConstraints.benchmarks``) used by both ``fit_quark_sector`` and
+the quotient-equivalent regression family below.  The non-default
+seeds exercised in this file include:
+
+  * ``default_spurion_seed()`` itself (test_fit_quark_sector_*),
+  * ``_quotient_equivalent_seed(default_spurion_seed())`` — a
+    quotient-direction shift covering 2pi-translations of left/right
+    rotation angles and a multiplicative rescale of the overall scale
+    (test_fit_quark_sector_is_invariant_under_quotient_directions,
+    test_fit_orientation_false_remains_deterministic_and_restricted),
+  * ad-hoc seeds with non-trivial right-rotation angles
+    (test_canonical_vector_quotients_out_*).
+
+That spans the canonical fundamental domain (the "k=0" representative)
+*and* multiple quotient-equivalent orbits, so the suite is not
+analogous to the k=0-only Wilson-UL gap that R07-I2 closed.  The
+deeper provenance for the seed *literals* themselves (where the
+numerical values came from) is a separate issue routed to C13.
+"""
 
 import sys
 from pathlib import Path
