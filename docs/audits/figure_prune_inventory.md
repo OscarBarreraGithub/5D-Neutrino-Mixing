@@ -109,3 +109,32 @@ The unreferenced, ignored `results/figures/quark/runA/` scratch export directory
 - `rs_anarchy_pdg_pass_fraction_runA_8Mdraws.png`
 - `rs_anarchy_per_system_pass_rate_runA_8Mdraws.pdf`
 - `rs_anarchy_per_system_pass_rate_runA_8Mdraws.png`
+
+## Status as of 2026-05-26 post-cleanup (C19)
+
+Cleanup unit **C19** (Tier-5, final docs sweep) closes the R08-I3 INFO item
+("Historical-snapshot figure dirs deliberately left in tree").
+
+- `results/figures/quark_baseline_800k/` was already removed from the working
+  tree by a downstream pass; no tracked files reference it (`git ls-files`
+  returns no entries under that path).
+- `results/figures/quark_pre_audit_constants/` remains in the working tree
+  with 58 tracked files totaling ~5 MB. The original `## Summary` line above
+  (item 36) noted these were "Considered acceptable forensic state for the
+  rc1 window; revisit during repo-hygiene before tagging."
+
+**C19 disposition:** the `quark_pre_audit_constants/` directory is **kept
+in place** as a paper-archive companion. It is internally referenced by
+provenance discussion of the FLAG-2024 / pre-audit bag-parameter constants
+(see `docs/audits/bag_param_inventory.md` and the methodology-note rc1.1
+section discussing the hole-#5 invalidation); removing it would lose the
+visual record of the pre-audit exclusion boundaries. No methodology-note
+figure (`\includegraphics`) target depends on this directory, so the LaTeX
+build is unaffected. Tarballing-and-removing would be a follow-up housekeeping
+gesture only and is **explicitly deferred** to a future repo-hygiene tag rather
+than executed now, on the principle that the rc1 paper archive should keep
+the pre-audit visual companion intact.
+
+No `snapshots/` top-level directory exists on disk; the `.gitignore` line
+`snapshots/` (line 86) refers to ad-hoc scratch staging under that name and
+has no current footprint in the working tree.

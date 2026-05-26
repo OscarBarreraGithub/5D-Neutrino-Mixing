@@ -87,12 +87,6 @@ Format per issue:
   Evidence: `docs/quark_scan_methodology_note.tex:522, 527-532`; commit `e0b24e8`; review `.orchestration/reviews/R08.md` Issues row I2.
   Recommended fix: Spot-check `f_{u,2}` at published c-pattern in the next physics-touching unit; or accept since the surrounding numerical content was relaxed to `\mathcal{O}(...)` to match.
 
-- [R08-I3] severity:INFO tag:infra
-  Title: Historical-snapshot figure dirs (`quark_pre_audit_constants/`, `quark_baseline_800k/`) deliberately left in tree
-  Description: `docs/audits/figure_prune_inventory.md:30` documents that `results/figures/quark_pre_audit_constants/` and `results/figures/quark_baseline_800k/` were left untouched in the prune. They are not referenced by any current TeX source, but add a non-trivial binary footprint to clones. Considered acceptable forensic state for the rc1 window; revisit during repo-hygiene before tagging.
-  Evidence: `docs/audits/figure_prune_inventory.md:30`; review `.orchestration/reviews/R08.md` Issues row I3.
-  Recommended fix: Out of scope for R08. Optionally tarball + remove in a later hygiene pass; or accept indefinitely as a paper-archive companion.
-
 - [R09-I1] severity:INFO tag:docs
   Title: Scaffold collapsed plan-v1 separate `edm/` + `neutrino_universality/` families into single `edm_neutrino/` dir
   Description: `docs/phase_logs/flavor_catalog_plan_v1.md:30-55` listed 7 PRIMARY family directories including separate `edm/` and `neutrino_universality/`. The scaffold (`83c0178`) created only 6 PRIMARY dirs, merging the two into `edm_neutrino/` (visible in `flavor_catalog/catalog_master.tex:48-49` and `flavor_catalog/README.md:38`). The collapse is reasonable (both are diagonal-dipole / lepton-universality probes that share the same EFT operator class), is recorded in `docs/phase_logs/flavor_catalog_scaffold_impl.md`, and was consumed without contradiction by Waves 1–9. However, the plan-v1 document itself was not amended to reflect the rename, so a reader cross-referencing the plan against the tree will see a stale 7-family listing.
@@ -424,6 +418,12 @@ Format per issue:
 - [R19-I5] severity:INFO tag:docs  **CLOSED 2026-05-26** by C18.
   Title: MERGE_PLAN.md:413 R19 grep-target list mentions `claim_level` field, but the collider_rs schema uses `limit_type` (under `pdg_or_equivalent.values[]`)
   Description: Closed by editing the R19 grep-target entry at MERGE_PLAN.md (line ~419 after C18 inserts) to replace `claim_level` with `limit_type` and add a parenthetical noting the planner-era field-name guess. `grep -l "claim_level" flavor_catalog/processes/collider_rs/*.yaml` returns nothing; `grep -c "limit_type:" flavor_catalog/processes/collider_rs/*.yaml` shows the field is present in all 14 CR0XX yamls. Evidence in `.orchestration/cleanup_reports/C18.md`.
+
+### Closed by C19
+
+- [R08-I3] severity:INFO tag:infra  **CLOSED 2026-05-26** by C19 (accept-as-paper-archive-companion).
+  Title: Historical-snapshot figure dirs (`quark_pre_audit_constants/`, `quark_baseline_800k/`) deliberately left in tree
+  Description: Closed via accept-as-paper-archive-companion disposition recorded in `docs/audits/figure_prune_inventory.md` (new "Status as of 2026-05-26 post-cleanup (C19)" block). `quark_baseline_800k/` is already absent from the tree; `quark_pre_audit_constants/` is retained (58 files / ~5 MB) on `\includegraphics`-irrelevance and provenance grounds. No tracked code, no test code, no current TeX source references these dirs. Methodology PDF rebuilt (20 pp, 627505 bytes) with the C03→C19 substantive forwarding cross-reference sentence added (one line at `docs/quark_scan_methodology_note.tex`).
 
 ### Auto-resolved / no-op
 
