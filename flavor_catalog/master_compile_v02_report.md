@@ -48,3 +48,18 @@ pdfinfo catalog_master.pdf | head -20
 - Opus arbitrations: L001, B021, B023, B001, B003
 - Total approval status: 80/80 OPUS-APPROVED
 - Fact-check status: 79 VERIFIED, 1 PARTIAL (E009 INSPIRE JS-only; APS journal cross-check confirms content), 0 MISMATCH, 0 FAILED
+
+## Consolidation status (added by C07 cleanup, 2026-05-25)
+
+Reconciliation of the headline `79 VERIFIED, 1 PARTIAL` count against the per-family fact-check audits at the v0.2 boundary (tag `flavor-catalog-v0.2`):
+
+| Source | Entries | VERIFIED | PARTIAL | Notes |
+|---|---:|---:|---:|---|
+| Consolidated table in `audits/factcheck_status.md` (rows `:32-108`) | 75 | 74 | 1 | DA-4-converged set; PARTIAL row is E009. |
+| Wave-7 PRIMARY addendum in `audits/factcheck_top_higgs_ew.md:294-352` | 4 | 4 | 0 | T003, T004, T008, T012 — all VERIFIED. |
+| Wave-7 PRIMARY addendum in `audits/factcheck_beauty.md` (B012 row) | 1 | 1 | 0 | B012 VERIFIED. |
+| **Total at v0.2 boundary** | **80** | **79** | **1** | Matches headline above. |
+
+The v0.2 consolidated `audits/factcheck_status.md` table was inherited unchanged from the v0.1 tag (DA-4 converged at 75) and was not regenerated to fold in the 5 Wave-7 PRIMARY additions. The Wave-7 verdicts are individually authoritative in the per-family addendum sections cited above; the headline `79/80 VERIFIED` figure is the sum of the consolidated table (74 VERIFIED + 1 PARTIAL) and the two addenda (4 + 1 VERIFIED).
+
+This block closes `R17-I2` (LOW, docs) — see `.orchestration/ISSUES.md`. Forward-looking convention (Wave-10+): regenerate `audits/factcheck_status.md` at each master-compile bump, optionally using `tools/aggregate_factchecks.py`.

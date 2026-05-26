@@ -58,3 +58,21 @@ rm -f *.aux *.log *.out *.toc *.synctex.gz
 ## Priority Tier Cross-Reference
 
 The PRIMARY/SECONDARY split and implementation-priority rule are documented in `flavor_catalog/PRIORITY_TIERS.md`. Existing Waves 1-7 flavor entries and Wave-9 `collider_rs` entries are treated as PRIMARY for the v0.4 master catalog; Wave-8 additions remain SECONDARY and should not be pulled into code ahead of PRIMARY entries without explicit PI approval.
+
+## Consolidation status (added by C07 cleanup, 2026-05-25)
+
+Reconciliation of the v0.4 totals (`102/102 OPUS-APPROVED`, `101 VERIFIED + 1 PARTIAL`) against the per-family fact-check audits at the v0.4 boundary (tag `flavor-catalog-v0.4`):
+
+| Source | Entries | VERIFIED | PARTIAL | Notes |
+|---|---:|---:|---:|---|
+| Consolidated table in `audits/factcheck_status.md` (Waves 1-7 PRIMARY base, rows `:32-108`) | 75 | 74 | 1 | DA-4-converged set; PARTIAL row is E009 (INSPIRE JS-only metadata caveat). |
+| Wave-7 PRIMARY addenda in `audits/factcheck_top_higgs_ew.md:294-352` + `factcheck_beauty.md` (B012 row) | 5 | 5 | 0 | T003, T004, T008, T012, B012 — all VERIFIED. |
+| Wave-8 SECONDARY addenda in `audits/factcheck_kaon.md:254-313`, `factcheck_beauty.md:243-310`, `factcheck_top_higgs_ew.md:391-427` | 8 | 8 | 0 | K019/K020/K021/B007/B008/B013/B014/T014 — all VERIFIED. K020 was PARTIAL at v0.3 and cleared by post-v0.3 cycle-3 cleanup commit `b5c2375` (before the v0.4 tag). |
+| Wave-9 PRIMARY rows in consolidated table (`audits/factcheck_status.md`, CR001-CR014) | 14 | 14 | 0 | Added directly to the consolidated table by commit `0c5dacc` (folded in at v0.4 master-compile time). |
+| **Total at v0.4 boundary** | **102** | **101** | **1** | Matches headline `101 VERIFIED + 1 PARTIAL` in §"Approval and Fact-Check Summary" above. |
+
+At the v0.4 tag the consolidated `audits/factcheck_status.md` table has 89 rows (75 DA-4 base + 14 Wave-9 collider_rs); the 13 Wave-7 PRIMARY + Wave-8 SECONDARY verdicts remain in their per-family addendum sections rather than in the consolidated table. The Wave-7/Wave-8 verdicts are individually authoritative in the per-family addenda cited above; the headline `101 VERIFIED + 1 PARTIAL` figure is the sum of the consolidated table (88 VERIFIED + 1 PARTIAL) plus the Wave-7 addenda (5 VERIFIED) plus the Wave-8 addenda (8 VERIFIED).
+
+Note on the v0.4 tag annotation: `git cat-file -p flavor-catalog-v0.4` reads `100 VERIFIED + 2 PARTIAL`, which projects the v0.3-tagged historical K020 PARTIAL state. The numbers in this report (101V + 1P) reflect the at-tag state of v0.4 (K020 cleared pre-v0.4) and are canonical (see R19-I3 for context).
+
+This block closes `R19-I4` (LOW, docs) — see `.orchestration/ISSUES.md`. Forward-looking convention (Wave-10+): regenerate `audits/factcheck_status.md` at each master-compile bump, optionally using `tools/aggregate_factchecks.py`.

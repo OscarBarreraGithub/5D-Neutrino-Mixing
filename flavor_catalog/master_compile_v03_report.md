@@ -54,3 +54,20 @@ rm -f *.aux *.log *.out *.toc *.synctex.gz
 ## Priority Tier Cross-Reference
 
 SECONDARY entries are lower implementation priority by policy. See `flavor_catalog/PRIORITY_TIERS.md`, especially the Wave-8 rationale table and implementation-priority rule.
+
+## Consolidation status (added by C07 cleanup, 2026-05-25)
+
+Reconciliation of the v0.3 totals (`88/88 OPUS-APPROVED`, `86 VERIFIED + 2 PARTIAL`) against the per-family fact-check audits at the v0.3 boundary (tag `flavor-catalog-v0.3`):
+
+| Source | Entries | VERIFIED | PARTIAL | Notes |
+|---|---:|---:|---:|---|
+| Consolidated table in `audits/factcheck_status.md` (rows `:32-108`) | 75 | 74 | 1 | Unchanged from v0.1; PARTIAL row is E009. |
+| Wave-7 PRIMARY addenda in `audits/factcheck_top_higgs_ew.md:294-352` + `factcheck_beauty.md` (B012 row) | 5 | 5 | 0 | T003, T004, T008, T012, B012 — all VERIFIED. |
+| Wave-8 SECONDARY addenda in `audits/factcheck_kaon.md:254-313`, `factcheck_beauty.md:243-310`, `factcheck_top_higgs_ew.md:391-427` | 8 | 7 | 1 | K019/K021/B007/B008/B013/B014/T014 VERIFIED; K020 PARTIAL at the v0.3 tag (metadata-only NA62 author-line convention drift; cleared to VERIFIED by post-tag cycle-3 cleanup commit `b5c2375`). |
+| **Total at v0.3 boundary** | **88** | **86** | **2** | Matches headline `86 VERIFIED + 2 PARTIAL` in §"Approval and Fact-Check Summary" above. |
+
+The v0.3 consolidated `audits/factcheck_status.md` table was inherited unchanged from v0.1 (75 rows) and was not regenerated to fold in the 5 Wave-7 PRIMARY + 8 Wave-8 SECONDARY additions. The Wave-7 and Wave-8 verdicts are individually authoritative in the per-family addendum sections cited above; the headline `86 VERIFIED + 2 PARTIAL` figure is the sum of the consolidated table (74 VERIFIED + 1 PARTIAL) plus the Wave-7 addenda (5 VERIFIED) plus the Wave-8 addenda (7 VERIFIED + 1 PARTIAL).
+
+Note on the v0.3 tag annotation: `git cat-file -p flavor-catalog-v0.3` reads `87 VERIFIED + 1 PARTIAL`, which projects the post-tag K020 cleanup state. The numbers in this report and in `worklogs/orchestration/wave_008_runbook.md` §8 reflect the at-tag state and remain canonical (see R18-I1 for context).
+
+This block closes `R18-I3` (LOW, docs) — see `.orchestration/ISSUES.md`. Forward-looking convention (Wave-10+): regenerate `audits/factcheck_status.md` at each master-compile bump, optionally using `tools/aggregate_factchecks.py`.
