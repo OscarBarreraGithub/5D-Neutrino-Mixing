@@ -31,17 +31,20 @@ The structure below is **what to do if you have to pick this up tomorrow**.
 | Companion paper | `quarkscan-paper-rc1.1` on `paper/quark-scan-2026q2` (frozen) |
 | Priority policy | `flavor_catalog/PRIORITY_TIERS.md`. PRIMARY = `processes/<family>/`; SECONDARY = `processes/secondary/<family>/`. Wave-9 collider_rs is PRIMARY but in a new family — a new scope class opened by PI directive, not DA-deferred. |
 
-Most recent Opus round-4 sign-off: 8/8 SECONDARY APPROVE (K019, K020, K021,
-B007, B008, B013, B014, T014). See
-`flavor_catalog/signoff/round_004_index.md`.
+Most recent Opus round-5 sign-off: 14/14 Wave-9 collider_rs PRIMARY APPROVE
+(CR001-CR014). See `flavor_catalog/signoff/round_005_index.md`. Wave-8
+round-4 sign-off (8/8 SECONDARY APPROVE: K019, K020, K021, B007, B008,
+B013, B014, T014) at `flavor_catalog/signoff/round_004_index.md`.
 
-Fact-check status across all 88 processes:
-**86 VERIFIED / 2 PARTIAL / 0 MISMATCH / 0 FAILED**.
-- v0.2 PARTIAL: E009 (Weinberg three-gluon operator) — INSPIRE JS-only;
-  APS journal + local snapshot confirm content.
-- v0.3 PARTIAL: K020 (K+→π+ e μ) — NA62 2021 first-author convention
-  drift; values/year/DOI/URL all verified; same class as E009; accepted
-  per E009 precedent.
+Fact-check status across all 102 processes at v0.4 (post-Wave-9
+canonical, per C07 reconciliation):
+**101 VERIFIED / 1 PARTIAL / 0 MISMATCH / 0 FAILED**.
+- E009 (Weinberg three-gluon operator) — INSPIRE JS-only; APS journal +
+  local snapshot confirm content. PARTIAL since v0.2 by precedent.
+- K020 (K+→π+ e μ) was v0.3 PARTIAL (NA62 2021 first-author convention
+  drift), cleared by `b5c2375` before the v0.4 tag → VERIFIED at v0.4.
+  See `flavor_catalog/audits/factcheck_status.md` §"Tag annotation
+  provenance" for the at-tag vs post-tag accounting (R18-I1, R19-I3).
 
 ## 1a. Wave-8 summary (2026-05-17)
 
@@ -371,7 +374,10 @@ In rough order of importance for a quick review:
 1. `flavor_catalog/AGENTIC_WORKFLOW.md` — the reproducible playbook.
 2. `flavor_catalog/audits/factcheck_status.md` — the 80-row checklist.
 3. `flavor_catalog/signoff/round_001_index.md`,
-   `round_002_index.md`, `round_003_index.md` — Opus's per-round verdicts.
+   `round_002_index.md`, `round_003_index.md`,
+   `round_004_index.md` (Wave-8 SECONDARY),
+   `round_005_index.md` (Wave-9 collider_rs PRIMARY)
+   — Opus's per-round verdicts (5 rounds at v0.4).
 4. `flavor_catalog/signoff/by_process/L001.md`, `B021_B023.md`,
    `B001_B003.md` — the policy precedents.
 5. `flavor_catalog/external_research/deepresearch_may{15,16}_review.md`
