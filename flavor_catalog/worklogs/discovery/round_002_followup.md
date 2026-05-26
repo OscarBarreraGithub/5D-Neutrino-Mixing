@@ -49,3 +49,21 @@ PI escalations: Section C labels K006 as K_L -> mu+mu-, while the Wave-5 prompt 
 Dispatch Wave-5 as 20 PKAs in parallel. Expected catalog size after Wave-5 settles: 67 total drafts, with Section C coverage rising from 44/128 to 64/128 plus the three accepted EW global additions. The wave prioritizes Z/Higgs LFV, tqg top FCNC, muon/atomic EDMs, B invisible and nonleptonic gaps, CP-sensitive rare kaons, and under-populated charm LFV/electron rare modes.
 
 ===DA2_DISCOVERY_END===
+
+---
+
+## Closure Addendum (added by cleanup-C11, 2026-05-26)
+
+**Context**: Closes the K013/K014 carry-forward escalation noted at line 46 ("confirm whether K013 alone satisfies the ambiguous `K1 -> pi gamma` seed or whether K014 should be drafted later") and the K006/K010 description-vs-process-name nit. Companion to the R11-I2 / R12-I4 closure on DA-1.
+
+### Resolution log
+
+| Item | Resolution | Resolver |
+|---|---|---|
+| K013 alone vs. K014 later | RESOLVED — K013 retained; K014 (`K_S -> pi^0 gamma gamma`) recorded as DEFERRED-SCOPE in DA-4 Wave-7 addendum pending explicit PI override. | `worklogs/discovery/round_004_addendum_deferred_scope.md:43`. |
+| K006 (`K_L -> mu+ mu-`) vs. K010 (`K_S -> pi^0 e+ e-`) prompt-vs-yaml description mismatch | RESOLVED — DA-2 treatment was correct; K006 = drafted `K_L -> mu+ mu-`, K010 = `K_S -> pi^0 e+ e-` (the Wave-5 prompt wording was the only artifact). Logged separately as R13-I1 / R13-I2 dispatch-prompt nits. | R13 review + `signoff/round_002_index.md` correction routed via C-cleanup queue. |
+
+### Status
+
+DOC CLOSED for discovery-side bookkeeping. No DA-2 residual escalations remain open.
+

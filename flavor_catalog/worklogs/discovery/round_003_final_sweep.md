@@ -39,3 +39,22 @@ After Wave-6, the next DA round should be a capstone convergence check only. If 
 Dispatch the 8 Wave-6 PKAs above, prioritize closing the 17 current WA/CA items, and treat round 4 as the final convergence gate. Do not expand to a general Section C completion wave unless the PI changes the scope from a strengthened constraint catalog to a comprehensive 128-row catalog.
 
 ===DA3_DISCOVERY_END===
+
+---
+
+## Closure Addendum (added by cleanup-C11, 2026-05-26)
+
+**Context**: DA-3 did not raise PI escalations, but for symmetry with the DA-1/DA-2/DA-4 closure blocks (cleanup-C11 brief), this addendum records that the Wave-6 dispatch recommendation was honored and the eight Wave-6 PKAs (B001, B003, K012, K018, L023, B016, T020, E009) are all present and OPUS-approved as of DA-4 convergence.
+
+### Resolution log
+
+| DA-3 recommendation | Resolution | Resolver |
+|---|---|---|
+| Dispatch 8 Wave-6 PKAs | RESOLVED — all 8 drafted; final status verified in DA-4 inventory at `round_004_convergence.md:8-15`. | Wave-6 PKA + WA-v2/CA-v2 chain (`wa_w6_*`, `ca_w6_*`); Opus round-2 sign-off in `signoff/round_002_index.md` plus `signoff/by_process/B001_B003.md` arbitration. |
+| Close 17 in-cycle WA/CA items before stopping discovery | RESOLVED — round-2 sign-off completed; see DA-4 closure addendum. | `signoff/round_002_index.md`. |
+| Treat round 4 as final convergence gate | RESOLVED — DA-4 returned 0 additions and closed discovery. | `round_004_convergence.md`. |
+
+### Status
+
+DOC CLOSED. No DA-3 residual items remain open.
+

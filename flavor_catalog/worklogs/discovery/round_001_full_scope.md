@@ -64,3 +64,25 @@ I cross-checked the current process tree against plan v1 Section C and the orche
 Dispatch the three NIT-1 EW additions first, then the 21 Section C rows above as Wave-4 PKAs. This wave repairs the largest family imbalances while preserving high-impact flavor physics: charm CPV/rare decays, mu-e conversion, tau LFV, hadronic/atomic EDMs, and key paired B/kaon observables. Defer lower-priority long tails such as broad hadronic tau LFV, rare radiative charm, and additional B invisible/LFV modes until after this wave unless the PI explicitly redirects.
 
 ===DA1_DISCOVERY_END===
+
+---
+
+## Closure Addendum (added by cleanup-C11, 2026-05-26)
+
+**Closes**: R11-I2 INFO (unresolved PI-escalation thread) and R12-I4 INFO (Wave-4 partial resolution not back-annotated).
+
+### Resolution log for the four PI escalations (lines 55-60)
+
+| # | Escalation | Resolution | Resolver |
+|---|---|---|---|
+| (a) | K013 alone vs. K014 alternate `K1 -> pi gamma` | RESOLVED — K013 retained as the active radiative-kaon row; K014 (`K_S -> pi^0 gamma gamma`) recorded as DEFERRED-SCOPE pending an explicit PI choice over K013. | `worklogs/discovery/round_004_addendum_deferred_scope.md:43` (DA-4 Wave-7 addendum). |
+| (b) | EW002 standalone CKM-unitarity vs. defer | RESOLVED — EW002 drafted as a standalone NIT-1 global electroweak row in Wave-4 (`flavor_catalog/processes/top_higgs_ew/EW002.{yaml,tex}`). | Wave-4 PKA + WA-v2/CA-v2 chain: `worklogs/writer/wa_w4_ew_v2.md`, `worklogs/checker/ca_w4_ew_v2.md` (commits incl. `52acd5e`, `d6e78b6`). |
+| (c) | EW003 single overview vs. split into B029/B030/B031 PKAs | RESOLVED — EW003 retained as a single inclusive/exclusive `|V_cb|`/`|V_ub|` overview row in Wave-4 (`flavor_catalog/processes/top_higgs_ew/EW003.{yaml,tex}`); B029/B030/B031 explicitly recorded as DEFERRED-SCOPE "folded into EW003" by DA-4. | Wave-4 PKA + WA-v2/CA-v2 chain (above); deferred-scope assignment at `worklogs/discovery/round_004_addendum_deferred_scope.md:38`. |
+| (d) | E004/E006/E008 catalog-only vs. future hard cuts | PARTIALLY RESOLVED — all three drafted in Wave-4 as catalog rows (`flavor_catalog/processes/edm_neutrino/E004.{yaml,tex}` etc.); hard-cut intent NOT recorded in the yamls and remains open for the PI/synthesis stage. | Wave-4 PKA + `worklogs/writer/wa_w4_kaon_edm{,_v2}.md`, `worklogs/checker/ca_w4_kaon_edm{,_v2}.md`; hard-cut decision deferred to post-paper synthesis. |
+
+### Status
+
+DOC CLOSED for discovery-side bookkeeping. The hard-cut intent for atomic/hadronic EDMs (item (d)) is tracked at the synthesis layer, not on the DA-1 inventory; no DA-side action remains.
+
+Cross-link to dependent worklog: see DA-2 (`round_002_followup.md`) closure addendum for the residual K013/K014 carry-forward and DA-4 (`round_004_convergence.md`) for the final deferred-scope ruling.
+

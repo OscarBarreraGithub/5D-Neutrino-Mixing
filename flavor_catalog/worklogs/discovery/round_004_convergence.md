@@ -42,3 +42,29 @@ Mark the remaining Section C tail DEFERRED-SCOPE with categorical justification:
 Lock the catalog at the current 75 processes, with 0 DA-4 additions. Record the above rows as DEFERRED-SCOPE so the 128-row plan-v1 list has explicit closure, finish the eight Wave-6 rework rows, run Opus round-2 sign-off over every non-approved process, and proceed to the master compile.
 
 ===DA4_CONVERGENCE_END===
+
+---
+
+## Round-2 Closure Addendum (added by cleanup-C11, 2026-05-26)
+
+**Closes**: R15-I4 INFO (no downstream addendum back-linking the round-2 closure of the 25 then-pending OPUS approvals).
+
+### Resolution log
+
+At DA-4 deposit (`round_004_convergence.md:23`) the catalog state was 75 drafts with **25 sidecars not yet OPUS-APPROVED**: 17 CHECKER-DONE + 8 WRITER-REWORK (the Wave-6 additions B001, B003, B016, E009, K012, K018, L023, T020). The recommendation was "send the remaining CHECKER-DONE plus Wave-6 rework rows through Opus round-2 sign-off, then compile `catalog_master.tex`."
+
+This recommendation was honored as follows:
+
+| Item | Resolution | Resolver |
+|---|---|---|
+| 21 of the 25 pending sidecars | OPUS-APPROVED in round-2 sign-off. | `flavor_catalog/signoff/round_002_index.md`. |
+| B001 + B003 (Wave-6 Δm_d / Δm_s pair) | OPUS-APPROVED via dedicated arbitration record. | `flavor_catalog/signoff/by_process/B001_B003.md`. |
+| B021 + B023 arbitration (round-2 carry) | OPUS-APPROVED via dedicated arbitration record. | `flavor_catalog/signoff/by_process/B021_B023.md`. |
+| Total round-2 closure | 23 (21 + B001 + B003) → catalog at 73 of 75 OPUS-APPROVED at R15 close; remaining 2 closed in subsequent rounds (`round_003_index.md`, `round_004_index.md`, `round_005_index.md`). | Composite signoff trail above. |
+| Wave-7 deferred-scope reconciliation | 5 promotions (T003, T004, T008, T012, B012) raising the catalog from 75 → 80. | `round_004_addendum_deferred_scope.md`. |
+| `catalog_master.tex` compile | Done; consolidated v0.4 fact-check report at `flavor_catalog/master_compile_v04_report.md` records 102 processes / 101 VERIFIED / 1 PARTIAL. | `flavor_catalog/catalog_master.tex` + master-compile reports v0.2/v0.3/v0.4. |
+
+### Status
+
+DOC CLOSED. The DA-4 convergence ruling stands; no DA-5 was triggered. The discovery-side bookkeeping is complete and reconciled with the round-2 OPUS sign-off and the Wave-7 deferred-scope addendum.
+
