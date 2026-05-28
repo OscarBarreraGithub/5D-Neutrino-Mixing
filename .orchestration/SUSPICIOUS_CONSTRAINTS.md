@@ -175,3 +175,11 @@ need Im-part adapter). The other 18 are ΔB=1 (rare leptonic, semileptonic,
 radiative, LFU, baryonic, invisible, penguin) and need new machinery.
 
 Promotion candidates: B001 (Δm_d), B002 (sin2β), B003 (Δm_s), B004 (φ_s).
+
+## Top/Higgs/EW family (EW001-EW003 + T001-T020) — all deferred
+
+20 placeholders. EW oblique (S, T, U) parameters, CKM unitarity tensions,
+top FCNC (t→qV, t→Hq), Z-pole asymmetries (bb, cc), LFV Z + LFV Higgs
+decays. All require new EW-precision and FCNC machinery (radion + KK
+gauge mixing for STU; top FCNC dipole + chromo Wilson coefficients;
+LFV-boson 5D RS contributions).
