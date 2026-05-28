@@ -133,3 +133,22 @@ one-loop contributions to imaginary parts of dipole operators, hadronic
 matrix elements (Schiff moments for atomic, QCD sum rules for neutron),
 and theta-bar / Peccei-Quinn treatment for hadronic species. None of
 this is in the physics core yet.
+
+## Charged lepton family (L001-L023) — all deferred
+
+The current physics core has μ→eγ machinery (used in scanParams) but lacks
+LFV 4-fermion operators, μ→e conversion form factors, μ-onium / antimuonium
+treatment, and ν-trident amplitudes. All 11 charged-lepton constraints are
+non-vetoing placeholders.
+
+Deferred subgroups:
+- L001/L007/L008: LFV dipole decays (l → l' γ); MEG II 2025 BR(μ→eγ) < 1.5e-13.
+- L002/L009/L010: LFV 4-lepton decays (μ→3e, τ→3μ, τ→3e).
+- L003/L004/L005: μ → e conversion on Al / Au / Ti nuclei (SINDRUM-II Au < 7e-13).
+- L006: Muonium-antimuonium oscillation (P_MMbar).
+- L023: Neutrino trident production (CCFR; Altmannshofer-Gori-Pospelov 1406.2332).
+
+Full evaluation requires: LFV dipole + 4-fermion Wilson matching at the
+EW scale, RG to low energies, nuclear-overlap form factors for μ→e
+conversion (Kitano-Koike-Okada), Z' tridents for L023, and 5D-RS
+contributions to all of the above (KK gauge / Higgs / radion loops).
