@@ -78,3 +78,7 @@ Full evaluation would need:
 - Direct/indirect CP separation using the K_S -> pi0 e+ e- input.
 - CP-conserving long-distance treatment tied to K_L -> pi0 gamma gamma.
 - A branching-ratio evaluator for K_L -> pi0 charged-lepton modes.
+
+## K009 K_L -> pi0 mu+ mu-
+
+K009 is registered as a PRIMARY kaon constraint, but its evaluator is an explicit non-vetoing placeholder because rare semileptonic Delta S = 1 K_L -> pi0 mu+ mu- evaluation is deferred pending s -> d mu+ mu- matching, CP-interference, and long-distance inputs.
