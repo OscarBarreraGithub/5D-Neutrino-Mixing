@@ -42,7 +42,14 @@ _ID_RE = re.compile(r"^[A-Z]+[0-9]+$")
 # does not fail the suite. As the codex loop lands additional
 # constraints, they will register themselves and the bijection
 # assertions below will tighten automatically.
-IMPLEMENTED_IDS_AT_SCAFFOLD_TIME = {"K001", "K002", "K003", "K004", "K005"}
+IMPLEMENTED_IDS_AT_SCAFFOLD_TIME = {
+    "K001",
+    "K002",
+    "K003",
+    "K004",
+    "K005",
+    "K006",
+}
 
 
 # --------------------------------------------------------------------- #

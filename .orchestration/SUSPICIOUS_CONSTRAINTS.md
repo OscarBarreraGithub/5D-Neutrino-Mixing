@@ -55,3 +55,10 @@ Full evaluation would need:
   Nierste, hep-ph/0603079, using BR_SM(K_L -> pi^0 nu nubar) ~ 3e-11.
 - The direct KOTO 2024 upper limit BR(K_L -> pi^0 nu nubar) < 2.2e-9 at
   90% CL.
+
+## K006 K_L -> mu mu
+
+K006 is registered as a PRIMARY kaon constraint, but its evaluator is an
+explicit non-vetoing placeholder. K_L -> mu mu is long-distance dominated
+(~99% from 2-photon intermediate state), short-distance SM ~9e-10 from
+Buras et al; full evaluation deferred.

@@ -1,7 +1,7 @@
 """Placeholder adapters for rare kaon decays.
 
 The current physics core contains Delta F = 2 kaon-mixing machinery,
-but no Delta S = 1 semileptonic ``s -> d nu nubar`` Wilson matching or
+but no Delta S = 1 semileptonic ``s -> d`` Wilson matching or
 branching-ratio evaluator. This adapter makes that absence explicit at
 the catalog-constraint boundary so rare kaon modes can register without
 silently reusing unrelated kaon-mixing or eps'/eps machinery.
@@ -12,9 +12,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 __all__ = [
+    "KLONG_MUMU_DEFERRED_REASON",
     "KLONG_PI0_NUNU_DEFERRED_REASON",
     "KPLUS_PIPLUS_NUNU_DEFERRED_REASON",
     "RareKaonDecayPlaceholderResult",
+    "evaluate_klong_mumu_placeholder",
     "evaluate_klong_pi0_nunu_placeholder",
     "evaluate_kplus_piplus_nunu_placeholder",
 ]
@@ -30,6 +32,13 @@ KLONG_PI0_NUNU_DEFERRED_REASON = (
     "requires Delta S=1 K -> pi nu nubar Wilson matching, CKM inputs, "
     "SM-NP interference conventions, CP-odd K_L projection, and "
     "branching-ratio machinery not yet in the physics core"
+)
+
+KLONG_MUMU_DEFERRED_REASON = (
+    "requires Delta S=1 s -> d mu+ mu- short-distance Wilson matching, "
+    "CKM inputs, SM-NP interference conventions, and long-distance "
+    "two-photon treatment or a documented short-distance subtraction "
+    "not yet in the physics core"
 )
 
 
@@ -51,3 +60,8 @@ def evaluate_kplus_piplus_nunu_placeholder() -> RareKaonDecayPlaceholderResult:
 def evaluate_klong_pi0_nunu_placeholder() -> RareKaonDecayPlaceholderResult:
     """Return an explicit deferred result until neutral rare-kaon support exists."""
     return RareKaonDecayPlaceholderResult(reason=KLONG_PI0_NUNU_DEFERRED_REASON)
+
+
+def evaluate_klong_mumu_placeholder() -> RareKaonDecayPlaceholderResult:
+    """Return an explicit deferred result until K_L -> mu mu support exists."""
+    return RareKaonDecayPlaceholderResult(reason=KLONG_MUMU_DEFERRED_REASON)
