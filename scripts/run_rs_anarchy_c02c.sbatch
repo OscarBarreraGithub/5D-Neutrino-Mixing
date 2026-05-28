@@ -4,7 +4,7 @@
 #SBATCH --account=randall_lab
 #SBATCH --requeue
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=24G
+#SBATCH --mem=64G
 #SBATCH --time=03:00:00
 #SBATCH --output=logs/rs_anarchy_c02c_%x_%j.out
 #SBATCH --error=logs/rs_anarchy_c02c_%x_%j.err

@@ -1,0 +1,38 @@
+{
+  "convention": {
+    "g_s_pert": 1.05,
+    "g_s_star": 3.0,
+    "rescale_factor": 2.8571,
+    "M_KK_units": "TeV",
+    "M_KK_min_per_draw": "(M_KK_tile_GeV / 1000) * sqrt(max_ratio_pdg)"
+  },
+  "edges": {
+    "low": {
+      "n_pdg_pass": 2451593,
+      "p50_pert_TeV": 42.776,
+      "p95_pert_TeV": 115.13,
+      "p50_gs_star_3_TeV": 122.218,
+      "p95_gs_star_3_TeV": 328.942,
+      "path": "scan_outputs/rs_anarchy_c02c_budget_low_20260527T233233",
+      "epsilon_k_budget_edge": "low"
+    },
+    "central": {
+      "n_pdg_pass": 2451593,
+      "p50_pert_TeV": 16.526,
+      "p95_pert_TeV": 44.478,
+      "p50_gs_star_3_TeV": 47.217,
+      "p95_gs_star_3_TeV": 127.081,
+      "path": "scan_outputs/rs_anarchy_c02c_budget_central_20260527T233236",
+      "epsilon_k_budget_edge": "central"
+    },
+    "high": {
+      "n_pdg_pass": 2451593,
+      "p50_pert_TeV": 7.81,
+      "p95_pert_TeV": 21.02,
+      "p50_gs_star_3_TeV": 22.314,
+      "p95_gs_star_3_TeV": 60.056,
+      "path": "scan_outputs/rs_anarchy_c02c_budget_high_20260527T233237",
+      "epsilon_k_budget_edge": "high"
+    }
+  }
+}
