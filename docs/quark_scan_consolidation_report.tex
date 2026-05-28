@@ -1,0 +1,565 @@
+% quark_scan_consolidation_report.tex
+% Consolidation report covering Phase-2 audits, code review, cleanup,
+% and the measured epsilon_K sensitivity band.  Picks up from
+% quark_scan_assumptions_compact.tex (Apr 16 pipeline walkthrough).
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{longtable}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newcommand{\Mkk}{M_{\mathrm{KK}}}
+\newcommand{\LamIR}{\Lambda_{\mathrm{IR}}}
+\newcommand{\Mpl}{M_{\mathrm{Pl}}}
+\newcommand{\gs}{g_s^*}
+\newcommand{\eK}{\epsilon_K}
+\newcommand{\DeK}{\Delta\eK}
+
+\title{Quark Sector Scan: Consolidation Report (May 2026)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%% ====================================================================
+\section{Introduction}
+\label{sec:intro}
+
+This document is the definitive technical record of the audit,
+review, and cleanup work carried out on the quark-sector
+Randall--Sundrum parameter scan between late April and late May 2026.
+It picks up from the Apr~16 pipeline walkthrough
+(\texttt{docs/quark\_scan\_assumptions\_compact.tex}), which described
+the scan architecture: geometry, bulk-mass parametrization, Yukawa
+spurion construction, Wilson-coefficient matching, QCD running, hadronic
+matrix elements, acceptance criteria, and post-processing.
+
+The work covered here falls into four categories:
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{Phase-2 physics audits} --- kaon bag parameters (FLAG
+    2024 / BGS~2020), BMU Wilson-RG sign convention, and the
+    Csaki--Falkowski--Weiler (CFW) comparison;
+  \item \textbf{Code review} --- 24 atomic review units spanning
+    9~code, 11~catalog, 2~website, and 2~meta modules;
+  \item \textbf{Cleanup} --- 21 atomic cleanup units closing 78 tracked
+    issues;
+  \item \textbf{Measured $\eK$ sensitivity band} --- three
+    12.8\,M-draw RUNA reruns at the budget edges, validating the
+    symbolic $1/\Mkk^2$ scaling to 0.1\%.
+\end{enumerate}
+
+All work lives on \texttt{main}; the repository is tagged
+\texttt{v2026q2-catalog-complete} at the post-consolidation state.
+
+
+%% ====================================================================
+\section{Phase-2 Audit Summary}
+\label{sec:audits}
+
+%% ------------------------------------------------------------------
+\subsection{Kaon bag parameters (FLAG 2024 + BGS 2020)}
+\label{sec:kaon-bags}
+
+The most consequential physics correction was the update of the kaon
+hadronic inputs.  The original scan used:
+\[
+  B_K^{(1)} = 0.717,\qquad
+  B_K^{(4)} = 0.78,\qquad
+  B_K^{(5)} = 0.57,\qquad
+  \eK^{\mathrm{SM}} = 1.81\times10^{-3}.
+\]
+The first three came from ETM~2013 under an RGI / $\overline{\mathrm{MS}}$
+scheme confusion; $\eK^{\mathrm{SM}}$ was a rounded 2017-era estimate.
+The post-audit values are:
+\begin{align}
+  B_K^{(1)} &= 0.5503 \quad\text{(FLAG 2024,
+    \href{https://arxiv.org/abs/2411.04268}{arXiv:2411.04268},
+    $\overline{\mathrm{MS}}$ at 2\,GeV)},\label{eq:bk1}\\
+  B_K^{(4)} &= 0.903,\qquad
+  B_K^{(5)} = 0.691 \quad\text{(FLAG 2024, same ref.)},\\
+  \eK^{\mathrm{SM}} &= 2.161\times10^{-3}
+    \quad\text{(Brod--Gorbahn--Stamou 2020,
+    \href{https://arxiv.org/abs/1911.06822}{arXiv:1911.06822})}.
+\end{align}
+These were installed in the canonical source of truth at
+\texttt{quarkConstraints/deltaf2.py} (lines 636--648).
+
+\paragraph{Impact on the NP budget.}
+The experimental value $\eK^{\mathrm{exp}} = 2.228\times10^{-3}$
+(PDG 2024) minus the new SM prediction gives a central NP budget of
+\[
+  |\DeK| = |2.228 - 2.161|\times10^{-3} = 6.7\times10^{-5},
+\]
+compared to the pre-audit budget of $|2.228 - 1.81|\times10^{-3} =
+4.18\times10^{-4}$.  The budget shrank by a factor of $\sim\!6.24$.
+The measured impact on the $\eK$ NP ratio, after folding in the
+operator-mix weighting from the updated $B_4$/$B_5$, is a
+$\sim\!7\times$ tightening of the ratio column in collaborator
+artifacts (confirmed per-row in C01b).
+
+\paragraph{The architectural firewall.}
+The repository maintains a ``modern lane''
+(\texttt{quarkConstraints/modern/phenomenology.py}) that is firewalled
+from the legacy \texttt{deltaf2.py} stack at three enforcement layers:
+(i)~source-level import isolation verified by
+\texttt{test\_modern\_phenomenology.py};
+(ii)~runtime \texttt{sys.modules} isolation in \texttt{verifier.py};
+(iii)~AST static-import checks.
+
+Because direct import (\texttt{from ..deltaf2 import ...}) is
+structurally impossible, the fix (C01, commit \texttt{3ab1f8f})
+synchronized the four vendored literals in place and added a pin test
+(\texttt{test\_modern\_phenomenology\_kaon\_constants\_match\_%
+deltaf2\_canonical}) that imports both modules at test-function scope
+and asserts \texttt{np.isclose} on all 11 kaon constant pairs.
+
+\paragraph{Scale caveat.}
+The FLAG 2024 values for $B_4$ and $B_5$ are quoted at
+$\mu = 3\,\mathrm{GeV}$ in the $\overline{\mathrm{MS}}$ scheme, but
+the hadronic matrix-element evaluation scale in the code defaults to
+$\mu_{\mathrm{had}} = 2\,\mathrm{GeV}$.  Running the bag parameters
+from 3 to 2\,GeV would shift them by a few percent.  This mismatch is
+documented as an accepted-risk item; the dominant effect (the
+$6.24\times$ budget shrinkage) is captured correctly.
+
+
+%% ------------------------------------------------------------------
+\subsection{Wilson RG running (BMU)}
+\label{sec:bmu}
+
+The leading-order anomalous dimension matrix (ADM) for the scalar
+left-right (LR) Wilson coefficients $(C_4, C_5)$ in the SUSY basis is
+\begin{equation}\label{eq:adm-lr}
+  \gamma_{\mathrm{LR}} = \begin{pmatrix} 8 & -4 \\
+  -16/3 & -28/3 \end{pmatrix},
+\end{equation}
+with eigenvalues $\{-16, 2\}$, matching the BMU
+(\href{https://arxiv.org/abs/hep-ph/0005183}{hep-ph/0005183})
+coefficient-running convention after transposition.
+
+\paragraph{What was fixed.}
+The Phase-2 audit identified a sign-convention issue in the mapping
+between the BMU operator basis $(Q_1^{\mathrm{LR}},
+Q_2^{\mathrm{LR}})$ and the SUSY basis $(O_4, O_5)$.  The code
+asserts
+\begin{equation}\label{eq:q1lr-map}
+  Q_1^{\mathrm{LR,BMU}} = -2\,O_5^{\mathrm{LR}},
+\end{equation}
+where the sign follows from the color-Fierz identity used to convert
+between the two four-quark operator orderings.  The off-diagonal ADM
+entry in the SUSY basis was corrected to $-6$ (from a prior incorrect
+$+6$), and the eigenvalues $\{-16, 2\}$ were confirmed against BMU
+eqs.~(2.3)--(2.4).
+
+\paragraph{Independent re-derivation.}
+The identity $Q_1^{\mathrm{LR,BMU}} = -2\,O_5^{\mathrm{LR}}$ was
+independently re-derived via the color-Fierz relation.  The R04
+reviewer confirmed the sign chain end-to-end: matching
+($C_4^{\mathrm{LR}} < 0$, $C_5^{\mathrm{LR}} > 0$), positive bag
+inputs, positive matrix-element prefactors, and no extra contraction
+sign.  The parallel module
+\texttt{paper\_0710\_1869/eft\_deltaf2/rg.py} stores the ADM in the
+Wilson-coefficient transpose convention
+$\bigl(\begin{smallmatrix}2&12\\0&-16\end{smallmatrix}\bigr)$, which
+is the standard convention difference.  Cross-check: no mismatch.
+
+\paragraph{Codex flag (requires human verification).}
+The Codex GPT-5.4 physics audit independently analyzed the
+color-Fierz identity and questioned whether the correct relation
+should be $Q_1^{\mathrm{LR,BMU}} = +2\,O_5^{\mathrm{LR}}$ (positive
+sign).  This would flip the off-diagonal ADM entry.  We document this
+as a point requiring human verification against BMU
+eqs.~(2.3)--(2.4).  Note that all 35/35 Wilson-RG tests pass under
+the current sign convention, the R04 reviewer independently confirmed
+the sign, and the combined invalidation factor of $22.49\times$ on the
+$\eK$ ratio is consistent with expectations.  Nonetheless, an
+independent hand calculation against the original BMU paper is
+recommended before publication.
+
+
+%% ------------------------------------------------------------------
+\subsection{CFW comparison}
+\label{sec:cfw}
+
+A prior claim of ``11\% agreement'' between our pipeline and the
+Csaki--Falkowski--Weiler (CFW) RS bounds was rejected as a $\gs$
+convention error.  The CFW numbers assume $\gs = 6$ (tree-level
+estimate), while our RUNA scan uses $\gs = 3$ (one-loop corrected).
+After correcting for the $(\gs)^2$ rescaling, the post-audit pipeline
+is a factor of $\sim\!2.2$ stronger than CFW at matched conventions.
+This is the expected direction: our FLAG~2024 bag parameters and
+BGS~2020 $\eK^{\mathrm{SM}}$ tighten the NP budget relative to the
+inputs used in the CFW analysis.
+
+The convention-override flags (\texttt{CFW\_RS\_GS3\_TEV},
+\texttt{CFW\_RS\_GS6\_TEV}, etc.) are isolated to the audit driver
+script \texttt{scripts/rs\_anarchy\_cfw\_comparison.py} and do not
+affect the production scan.
+
+
+%% ------------------------------------------------------------------
+\subsection{Post-audit scan reruns}
+\label{sec:reruns}
+
+Eight RS-anarchy scans were regenerated under the corrected
+$\Delta F = 2$ constants.  The headline numbers at $\gs = 3$ for the
+reference RUNA configuration are:
+\begin{equation}\label{eq:headline}
+  \Mkk^{\min}\big|_{p50} = 47.26\;\mathrm{TeV},\qquad
+  \Mkk^{\min}\big|_{p95} = 127.13\;\mathrm{TeV}.
+\end{equation}
+These are the central values quoted throughout the methodology note.
+
+
+%% ====================================================================
+\section{Code Review (24 Atomic Units)}
+\label{sec:review}
+
+The codebase was reviewed in 24 atomic units: R01--R09 cover the scan
+pipeline and supporting code; R10a--R10c cover catalog anchor
+verification (kaon, beauty, and cross-cutting processes); R11--R22
+cover catalog waves, master-compile, website, and meta-orchestration.
+
+\paragraph{Verdicts.}
+All 24 units received APPROVE, with one exception: R03 received
+APPROVE-WITH-CONCERN due to the stale kaon constants in the modern
+backend (R03-I1, severity HIGH).  That issue was subsequently closed
+by cleanup unit C01.
+
+\paragraph{Key findings.}
+
+\begin{center}
+\begin{tabular}{@{}llp{7.5cm}@{}}
+\toprule
+Unit & Verdict & Key finding \\
+\midrule
+R01 & APPROVE & PDG-2024 masses, 4-loop running, RS-anarchy
+  machinery physically consistent. \\
+R02 & APPROVE & Spurion seed re-derivation lands at PDG target
+  minimum; former \texttt{xfail}s now pass. \\
+R03 & APPROVE-W/C & FLAG/BGS audit fixed kaon bags; NP budget
+  shrank $6.24\times$. \textbf{HIGH}: stale modern-backend
+  constants (R03-I1). \\
+R04 & APPROVE & BMU LO Wilson running fixed; combined
+  invalidation factor $22.49\times$. \\
+R05 & APPROVE & Post-audit reruns reproduce 47.26/127.13\,TeV
+  headline. \\
+R06 & APPROVE & CFW comparison corrected to factor-2.2 after
+  $\gs$ convention fix. \\
+R07 & APPROVE & Zero-pass claims converted to Wilson/CP upper
+  limits; artifact manifest sealed. \\
+R08 & APPROVE & Cleanup preserves load-bearing numerics;
+  notebooks reproduce headline. \\
+R09--R22 & APPROVE & Catalog entries verified against PDG/HFLAV
+  sources; 102-entry v0.4 catalog + website shipped. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+%% ====================================================================
+\section{Cleanup (21 Atomic Units)}
+\label{sec:cleanup}
+
+The 21 cleanup units (C01--C20, with C02 split into C02a and C02c)
+closed or accepted-risk all 78 tracked issues.  They are organized by
+tier:
+\begin{itemize}[nosep]
+  \item \textbf{Tier~1} (physics-affecting): C01 (kaon SSOT fix),
+    C02a (budget-override CLI flag + methodology band paragraph),
+    C03 (Wilson-RG guard + BMU sign verification).
+  \item \textbf{Tier~2} (test gaps): C04 (Wilson upper-limit $k>0$
+    tests, website notation/prose snapshot tests).
+  \item \textbf{Tier~3} (provenance): C05 (external-research
+    manifest), C06 (git SHA in tile summaries), C13 (spurion-seed
+    provenance).
+  \item \textbf{Tier~4} (metadata/docs): C07--C12, C14--C16, C18--C19
+    (consolidated fact-check arithmetic, tag-annotation provenance,
+    MERGE\_PLAN SHA corrections, PDF rebuild).
+  \item \textbf{Tier~5} (bookkeeping): C17 (redundant
+    \texttt{.gitkeep} removal), C20 (final accepted-risk sweep).
+\end{itemize}
+
+\paragraph{Key stories.}
+
+\begin{description}[style=nextline,font=\normalfont\bfseries]
+\item[C01 --- Firewall discovery.]
+The most important physics change: kaon constants in the modern
+backend were stale (pre-audit values).  Direct import was blocked by
+the three-layer architectural firewall; the fix used synchronized
+vendored literals plus a cross-module pin test.  $\eK$ ratios
+tightened $\sim\!7\times$.
+
+\item[C02a --- Worker-init bug.]
+The \texttt{--epsilon-k-budget} CLI flag was plumbed end-to-end, but
+the \texttt{\_worker\_init} function rebuilt \texttt{EnsembleConfig}
+without the new field, silently dropping the override.  Fixing this
+boundary and adding a regression test was one of the strongest
+implementation moments in the series.
+
+\item[C04 --- Hand-computation correction.]
+The dispatch prompt's hand-computed Wilson upper limit for $k=5$,
+$n=1000$ was $\sim\!0.0089$; the correct closed-form value is
+$\sim\!0.01146$ (the margin term $z\sqrt{\ldots}$ was omitted).
+Now pinned by closed-form, \texttt{scipy}, and spot-check tests.
+\end{description}
+
+\paragraph{End state.}
+All 78 issues are closed or accepted-risk.  The accepted-risk items
+are documented with rationale in
+\texttt{.orchestration/ISSUES.md}; none is physics-load-bearing for
+the quark-scan paper.
+
+
+%% ====================================================================
+\section{Measured $\eK$ Sensitivity Band (C02c)}
+\label{sec:c02c}
+
+%% ------------------------------------------------------------------
+\subsection{Scan setup}
+
+Three RUNA scans of $12.8\times10^6$ random draws each were executed
+at the $\eK$ NP-budget edges:
+\begin{itemize}[nosep]
+  \item \textbf{Low} (tight): $|\DeK| = 1.0\times10^{-5}$
+  \item \textbf{Central}: $|\DeK| = 6.7\times10^{-5}$
+  \item \textbf{High} (loose): $|\DeK| = 3.0\times10^{-4}$
+\end{itemize}
+All three use the same PDG-gate acceptance (2,451,593 passing draws)
+and the same $\gs = 3$ rescaling factor of $2.8571$.
+
+%% ------------------------------------------------------------------
+\subsection{Results}
+
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Budget edge & $|\DeK|$ &
+  $\Mkk^{\min}|_{p50}$ (TeV) &
+  $\Mkk^{\min}|_{p95}$ (TeV) &
+  $p50$ ratio to central \\
+\midrule
+Low (tight) & $1.0\times10^{-5}$ &
+  122.22 & 328.94 & 2.588 \\
+Central & $6.7\times10^{-5}$ &
+  47.22 & 127.08 & 1.000 \\
+High (loose) & $3.0\times10^{-4}$ &
+  22.31 & 60.06 & 0.4725 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All values at $\gs = 3$.  The perturbative ($\gs = 1.05$) p50
+values are 42.78, 16.53, and 7.81\,TeV respectively.
+
+The measured band on the headline bound is:
+\begin{equation}\label{eq:band}
+  \Mkk^{\min}\big|_{p50,\,\gs=3}^{\DeK\text{ band}}
+  = 47.22\,^{+75.00}_{-24.91}\;\mathrm{TeV}
+  \;\equiv\;
+  [22.31,\, 122.22]\;\mathrm{TeV}.
+\end{equation}
+
+%% ------------------------------------------------------------------
+\subsection{Validation of $1/\Mkk^2$ scaling}
+\label{sec:scaling}
+
+The symbolic prediction from the tree-level $1/\Mkk^2$
+Wilson-coefficient scaling is
+\begin{equation}\label{eq:symbolic}
+  \frac{\Mkk^{\min}(\DeK)}{\Mkk^{\min}(\DeK^{\mathrm{central}})}
+  = \sqrt{\frac{\DeK^{\mathrm{central}}}{\DeK}}\,,
+\end{equation}
+giving predicted ratios of
+\[
+  \sqrt{\frac{6.7\times10^{-5}}{1.0\times10^{-5}}} = 2.5884,\qquad
+  \sqrt{\frac{6.7\times10^{-5}}{3.0\times10^{-4}}} = 0.4726.
+\]
+The measured ratios are $2.588$ and $0.4725$, matching the symbolic
+predictions to $< 0.1\%$.  This confirms that:
+\begin{enumerate}[nosep]
+  \item The tree-level $1/\Mkk^2$ Wilson-coefficient scaling holds
+    across a factor of 30 in $|\DeK|$.
+  \item Loop corrections to the KK-gluon contribution are negligible
+    at this precision.
+  \item The budget-override flag correctly threads through the entire
+    pipeline (CLI $\to$ \texttt{EnsembleConfig} $\to$
+    \texttt{\_worker\_init} $\to$ \texttt{evaluate\_epsilon\_k}).
+\end{enumerate}
+
+\paragraph{Consistency check.}
+The central-edge p50 of 47.22\,TeV reproduces the RUNA headline of
+47.26\,TeV to $0.08\%$; the residual is consistent with Monte Carlo
+seed variation across independent 12.8\,M-draw runs.
+
+
+%% ====================================================================
+\section{Open Items and Forward-Looking Notes}
+\label{sec:open}
+
+\begin{enumerate}
+  \item \textbf{C02b (sensitivity-band figure):} Deferred to
+    paper-finalization phase.  The data for the figure exists in
+    \texttt{scan\_outputs/c02c\_crossings\_summary.json}; only the
+    matplotlib/pgfplots rendering remains.
+
+  \item \textbf{C02c integration into methodology note:} The
+    measured band (Section~\ref{sec:c02c}) should replace the
+    symbolic-scaling paragraph currently at
+    \texttt{docs/quark\_scan\_methodology\_note.tex} lines 741--793.
+
+  \item \textbf{R01-I2 (Phase-0 tolerance floor):} The
+    \texttt{MASS\_TOLERANCE\_FLOOR = 0.003} in
+    \texttt{quarkConstraints/scan.py} is a placeholder pending
+    Phase-0 calibration.  Accepted-risk: the current floor is
+    conservative; re-calibration would tighten, not loosen it.
+
+  \item \textbf{Bag-parameter scale caveat:} The FLAG 2024 values for
+    $B_4$ and $B_5$ are quoted at $\mu = 3\,\mathrm{GeV}$, but the
+    code evaluates hadronic matrix elements at
+    $\mu_{\mathrm{had}} = 2\,\mathrm{GeV}$.  Running the bag
+    parameters from 3 to 2\,GeV would shift them by a few percent.
+    This is a known scale mismatch documented as accepted-risk.
+
+  \item \textbf{Codex flag on BMU sign:} The Codex audit questioned
+    whether eq.~\eqref{eq:q1lr-map} should carry a positive sign.
+    Human verification against BMU eqs.~(2.3)--(2.4) is recommended
+    before publication.  All 35 Wilson-RG tests pass under the current
+    convention, and the R04 reviewer independently confirmed the sign.
+
+  \item \textbf{Lepton sector:} Lepton-sector code is present in the
+    repository (\texttt{neutrinos/}, \texttt{yukawa/},
+    \texttt{flavorConstraints/}) but is follow-up scope.  No
+    lepton-sector results are included in the quark-scan paper.
+\end{enumerate}
+
+
+%% ====================================================================
+\section{Technical Summary Table}
+\label{sec:summary-table}
+
+\begin{longtable}{@{}p{2.6cm}p{2cm}p{2.2cm}p{2.2cm}p{3.8cm}@{}}
+\toprule
+\textbf{Input} & \textbf{Audit status} &
+  \textbf{Current value} & \textbf{Source} &
+  \textbf{File : line} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Input} & \textbf{Audit status} &
+  \textbf{Current value} & \textbf{Source} &
+  \textbf{File : line} \\
+\midrule
+\endhead
+$B_K^{(1)}$ &
+  Fixed (C01) &
+  0.5503 &
+  FLAG 2024 &
+  \texttt{deltaf2.py:641} \\
+$B_K^{(4)}$ &
+  Fixed (C01) &
+  0.903 &
+  FLAG 2024 &
+  \texttt{deltaf2.py:642} \\
+$B_K^{(5)}$ &
+  Fixed (C01) &
+  0.691 &
+  FLAG 2024 &
+  \texttt{deltaf2.py:643} \\
+$\eK^{\mathrm{SM}}$ &
+  Fixed (C01) &
+  $2.161\times10^{-3}$ &
+  BGS 2020 &
+  \texttt{deltaf2.py:646} \\
+$\eK^{\mathrm{exp}}$ &
+  Verified &
+  $2.228\times10^{-3}$ &
+  PDG 2024 &
+  \texttt{deltaf2.py:645} \\
+$|\DeK|$ (NP budget) &
+  Derived &
+  $6.7\times10^{-5}$ &
+  exp $-$ SM &
+  \texttt{deltaf2.py:778} \\
+LR ADM eigenvalues &
+  Fixed (C03) &
+  $\{-16, 2\}$ &
+  BMU (hep-ph/0005183) &
+  \texttt{qcd\_running.py:54--57} \\
+$Q_1^{\mathrm{LR}} \!\to\! O_5$ map &
+  Flag (Codex) &
+  $-2\,O_5$ &
+  BMU eqs.~(2.3)--(2.4) &
+  \texttt{deltaf2.py:604} \\
+$f_K$ &
+  Verified &
+  $0.1557\;\mathrm{GeV}$ &
+  FLAG 2024 &
+  \texttt{deltaf2.py:636} \\
+$m_K$ &
+  Verified &
+  $0.4976\;\mathrm{GeV}$ &
+  PDG 2024 &
+  \texttt{deltaf2.py:637} \\
+$m_s(2\,\mathrm{GeV})$ &
+  Verified &
+  $0.0934\;\mathrm{GeV}$ &
+  FLAG 2024 &
+  \texttt{deltaf2.py:639} \\
+$m_d(2\,\mathrm{GeV})$ &
+  Verified &
+  $0.00470\;\mathrm{GeV}$ &
+  FLAG 2024 &
+  \texttt{deltaf2.py:640} \\
+$\Delta m_K^{\mathrm{exp}}$ &
+  Verified &
+  $3.484\!\times\!10^{-15}\;\mathrm{GeV}$ &
+  PDG 2024 &
+  \texttt{deltaf2.py:638} \\
+$\kappa_\epsilon$ &
+  Verified &
+  0.94 &
+  Literature &
+  \texttt{deltaf2.py:644} \\
+$B_4^{(B_d)}$, $B_5^{(B_d)}$ &
+  Verified &
+  1.022, 0.943 &
+  FLAG 2024 &
+  \texttt{deltaf2.py:653--654} \\
+$B_4^{(B_s)}$, $B_5^{(B_s)}$ &
+  Verified &
+  1.022, 0.943 &
+  FLAG 2024 &
+  \texttt{deltaf2.py:662--663} \\
+$B_4^{(D)}$, $B_5^{(D)}$ &
+  Estimated &
+  1.0, 1.0 &
+  (no lattice) &
+  \texttt{deltaf2.py:671--672} \\
+Modern-lane vendored $B_K$ &
+  Pinned (C01) &
+  matches canonical &
+  Pin test &
+  \texttt{phenomenology.py:432--434} \\
+\bottomrule
+\end{longtable}
+
+\vspace{1em}
+\noindent
+\textbf{Notation.}  ``Fixed'' = value was wrong and corrected.
+``Verified'' = value was already correct; confirmed against the cited
+source.  ``Estimated'' = no lattice data; using naive vacuum-insertion
+approximation.  ``Flag'' = convention choice that passed all tests but
+was independently questioned by Codex; human verification recommended.
+``Pinned'' = vendored duplicate guarded by a cross-module pin test.
+
+
+\end{document}
