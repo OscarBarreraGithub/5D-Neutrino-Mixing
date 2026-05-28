@@ -114,3 +114,22 @@ semileptonic kaon source observable for |V_us| f_+(0), not a Delta S = 1 rare
 decay. Full evaluation is deferred pending source-level |V_us| extraction,
 5D RS effects on the W-quark-quark coupling, radiative/isospin corrections,
 lattice f_+(0) provenance, and any new four-fermion contact-operator matching.
+
+## EDM family (E001-E009) — all deferred
+
+The current physics core has no CP-violating dipole machinery. All 7 EDM
+constraints are non-vetoing placeholders:
+
+- **E001** Electron EDM |d_e| < 4.1e-30 e·cm (JILA HfF+ 2023)
+- **E002** Muon EDM |d_μ| (BNL 2008, PSI muEDM aiming 1e-21)
+- **E004** Neutron EDM |d_n| < 1.8e-26 e·cm (nEDM PSI 2020)
+- **E006** Hg-199 atomic EDM < 7.4e-30 e·cm (Graner 2016)
+- **E007** Ra-225 + Xe-129 atomic EDMs (Schiff moment enhancement)
+- **E008** Quark chromo-EDM ~d_q from hadronic EDMs
+- **E009** Weinberg three-gluon CP-violating operator
+
+Full evaluation requires: CP-violating dipole Wilson matching, 5D RS
+one-loop contributions to imaginary parts of dipole operators, hadronic
+matrix elements (Schiff moments for atomic, QCD sum rules for neutron),
+and theta-bar / Peccei-Quinn treatment for hadronic species. None of
+this is in the physics core yet.
