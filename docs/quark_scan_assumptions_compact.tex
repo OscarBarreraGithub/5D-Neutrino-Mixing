@@ -25,6 +25,18 @@
 \begin{document}
 \maketitle
 
+\begin{center}
+\setlength{\fboxsep}{8pt}
+\fcolorbox{red!70!black}{red!5}{%
+  \parbox{0.92\linewidth}{%
+    \textbf{SUPERSEDED.} This Apr 16 walkthrough is preserved for historical
+    reference. For the current state of the pipeline see
+    \texttt{docs/quark\_scan\_consolidation\_report.tex} (May 2026 audit +
+    cleanup + C02c measured band).%
+  }%
+}
+\end{center}
+
 %% ====================================================================
 \section{Geometry}
 
@@ -401,8 +413,7 @@ contracted with hadronic matrix elements to get the NP mixing amplitude:
 \end{equation}
 where VRR and VLL share the same matrix element by parity. 
 
-\textcolor{red}{\textbf{To do:} I am pretty sure I have a factor of 2 subtlety here I need to fix. The matrix
-elements are
+The matrix elements used by the scan are
 \begin{equation}
   \mathrm{ME}_{\mathrm{VLL}} = \tfrac{2}{3} f_P^2 m_P B_1, \qquad
   \mathrm{ME}_{\mathrm{LR4}} = \bigl(\tfrac{r_\chi}{6} + \tfrac{1}{4}\bigr)
@@ -416,13 +427,15 @@ already absorb the $1/(2m_P)$ state-normalization factor, so $M_{12} =
 element in GeV and $\Delta m = 2|M_{12}|$. The code computes
 $\mathrm{ME}_{\mathrm{VLL}} = \tfrac{2}{3}\,f_P^2\,m_P\,B_1$ and contracts
 it directly with $C_i$ to obtain $M_{12}$, but elsewhere we compute
-$\langle Q_1\rangle = \tfrac{8}{3}\,f_P^2\,m_P^2\,B_K$ and divides by
-$2m_P$ explicitly. With the same $B_1 = B_K$.}
+$\langle Q_1\rangle = \tfrac{8}{3}\,f_P^2\,m_P^2\,B_K$ and divide by
+$2m_P$ explicitly, with the same $B_1 = B_K$.
 
 
 Hadronic inputs (decay constants, bag parameters, quark masses) come from
 FLAG~2024 and PDG~2024, with the exception of the $D^0$ LR bag parameters
 $B_4$, $B_5$ which are estimated at 1.0.
+For kaons, the post-audit inputs are $B_K^{(1)} = 0.5503$,
+$B_K^{(4)} = 0.903$, and $B_K^{(5)} = 0.691$.
 
 
 %% ====================================================================
@@ -444,9 +457,9 @@ For $\epsilon_K$, the observable is
 $\epsilon_K^{\mathrm{NP}} = |\kappa_\epsilon / (\sqrt{2}\,\Delta m_K)| \cdot
 |\mathrm{Im}(M_{12}^{\mathrm{NP}})|$
 with $\kappa_\epsilon = 0.94$, and the budget is the exp--SM gap:
-$|2.228\times10^{-3} - 1.81\times10^{-3}| = 4.18\times10^{-4}$.
-The absolute value discards the sign of the so there is no constructive/destructive
-interference with SM.
+$|2.228\times10^{-3} - 2.161\times10^{-3}| = 6.7\times10^{-5}$.
+The absolute value discards the sign of the NP contribution, so there is no
+constructive/destructive interference with SM.
 
 For $\Delta M_K$, the budget is $\Delta m_K^{\mathrm{exp}} / 2$ (the SM
 prediction is long distance dominated and unreliable, so the entire
@@ -483,11 +496,5 @@ Yukawa structure at each grid point, and the plotter picks the most favorable
 \texttt{overall\_scale}. So the contour shows the lowest $\Mkk$ at which
 any fitted point survives; it is not a statement about
 typical NMFV behavior.
-
-\textcolor{red}{\textbf{To do:} These figures answer ``can NMFV ever allow
-$\Mkk$ this low?'' Your note asks for an ensemble analysis: random $O(1)$
-Yukawas in the explicit $(\alpha_Q, \beta_Q, \gamma_Q)$ parametrization, keep
-points reproducing quark masses, histogram $\Mkk$ where
-$\mathrm{Im}(C_4^K)$ meets its bound. Both analyses are needed.}
 
 \end{document}
