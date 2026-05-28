@@ -166,3 +166,12 @@ non-vetoing placeholders for now.
 - **C004/C005** D⁰ → ll: ΔC=1 rare leptonic.
 - **C006/C008** D LFV: requires LFV operators.
 - **C007** D → π ll: rare semileptonic.
+
+## Beauty family (B001-B034) — all deferred (B001-B004 promotable)
+
+22 beauty placeholders. B001-B004 are ΔB=2 mixing observables and could be
+promoted to full impl using deltaf2.py (Δm_d, Δm_s exist; CP phases would
+need Im-part adapter). The other 18 are ΔB=1 (rare leptonic, semileptonic,
+radiative, LFU, baryonic, invisible, penguin) and need new machinery.
+
+Promotion candidates: B001 (Δm_d), B002 (sin2β), B003 (Δm_s), B004 (φ_s).
