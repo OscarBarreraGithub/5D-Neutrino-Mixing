@@ -130,8 +130,8 @@ def test_modern_phenomenology_kaon_constants_match_deltaf2_canonical():
     """
     import quarkConstraints.modern.phenomenology as modern_phen
 
-    # Use np.isclose (not ==) so float literals can differ in trailing digits
-    # if a future update introduces more precision on one side.
+    # Use a tight relative-only tolerance so tiny constants such as DELTA_M_K
+    # cannot drift by many orders of magnitude under np.isclose's default atol.
     pairs = [
         ("_KAON_B_1", "B_1_K"),
         ("_KAON_B_4", "B_4_K"),
@@ -148,7 +148,7 @@ def test_modern_phenomenology_kaon_constants_match_deltaf2_canonical():
     for modern_name, canonical_name in pairs:
         modern_val = getattr(modern_phen, modern_name)
         canonical_val = getattr(deltaf2, canonical_name)
-        assert np.isclose(modern_val, canonical_val), (
+        assert np.isclose(modern_val, canonical_val, rtol=1e-12, atol=0), (
             f"{modern_name}={modern_val} (vendored in modern/phenomenology.py) "
             f"out of sync with {canonical_name}={canonical_val} (canonical in deltaf2.py). "
             "Update both literals together."
