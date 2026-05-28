@@ -85,6 +85,11 @@ $$Y_N \to V_{\text{PMNS}} \cdot \text{diag}(Y_{N_1}, Y_{N_2}, Y_{N_3})$$
 
 ## Code Architecture
 
+The original computational stack is lepton-oriented. Post-consolidation, the
+active paper work is quark-sector, with `quarkConstraints/`, `qcd/`, and
+`flavor_catalog/` now first-class top-level packages alongside the lepton
+modules.
+
 ```
 5D-Neutrino-Mixing/
 ├── warpConfig/        # ✅ Geometry parameters and f-factor computation
@@ -110,6 +115,12 @@ $$Y_N \to V_{\text{PMNS}} \cdot \text{diag}(Y_{N_1}, Y_{N_2}, Y_{N_3})$$
 ├── flavorConstraints/ # ✅ LFV bounds (μ→eγ)
 │
 ├── scanParams/        # ✅ Parameter space sweep driver
+│
+├── quarkConstraints/  # ✅ Active quark-sector MFV scans, benchmarks, and ΔF=2 validation
+│
+├── qcd/               # ✅ 4-loop QCD running and threshold decoupling utilities
+│
+├── flavor_catalog/    # ✅ 94 PRIMARY + 8 SECONDARY constraints plus Astro website
 │
 └── derivations/       # LaTeX derivations (detailed physics)
 ```
