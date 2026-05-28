@@ -639,8 +639,19 @@ DELTA_M_K = 3.484e-15     # GeV, K_L - K_S mass difference (PDG)
 M_S_2GEV = 0.0934         # GeV, strange quark MS-bar mass at 2 GeV (FLAG)
 M_D_2GEV = 0.00467        # GeV, down quark MS-bar mass at 2 GeV (FLAG)
 B_1_K = 0.5503            # B_K MS-bar(2 GeV), FLAG 2024
-B_4_K = 0.903             # B_4^K MS-bar(3 GeV), FLAG 2024
-B_5_K = 0.691             # B_5^K MS-bar(3 GeV), FLAG 2024
+
+# FLAG B4/B5 scale caveat:
+# The LR kaon bag inputs below are FLAG 2024 MS-bar(3 GeV) values, while
+# ``mu_had`` defaults to 2 GeV and Wilson coefficients are normally evolved to
+# that scale before evaluation.  The matrix-element path intentionally keeps
+# using these existing numbers for now so current evaluations remain
+# numerically unchanged, but this is a known scale-matching caveat.
+# TODO: RG-run/convert B_4^K and B_5^K to 2 GeV in the matching scheme used
+# here, then update the matrix elements, provenance, and compatibility aliases.
+B_4_K_3GEV = 0.903        # B_4^K MS-bar(3 GeV), FLAG 2024
+B_5_K_3GEV = 0.691        # B_5^K MS-bar(3 GeV), FLAG 2024
+B_4_K = B_4_K_3GEV        # compatibility alias; prefer B_4_K_3GEV in new code
+B_5_K = B_5_K_3GEV        # compatibility alias; prefer B_5_K_3GEV in new code
 KAPPA_EPSILON = 0.94       # multiplicative correction (Buras et al.)
 EPSILON_K_EXP = 2.228e-3   # experimental value (PDG)
 EPSILON_K_SM = 2.161e-3    # SM epsilon_K, Brod-Gorbahn-Stamou 2020
@@ -702,14 +713,15 @@ def _kaon_matrix_elements() -> dict[str, float]:
         O5_LR = (bar s^alpha P_L d^beta)(bar s^beta P_R d^alpha)
 
     The O5_LR contraction below carries the conventional positive sign, so the
-    BMU vector-LR Fierz map is Q1_LR^BMU = -2 O5_LR and B_5_K stays positive.
+    BMU vector-LR Fierz map is Q1_LR^BMU = -2 O5_LR and B_5_K_3GEV stays
+    positive.
     """
     fk2_mk = F_K**2 * M_K
     m_ratio_sq = (M_K / (M_S_2GEV + M_D_2GEV)) ** 2
 
     o1_vll = (2.0 / 3.0) * fk2_mk * B_1_K
-    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * B_4_K
-    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * B_5_K
+    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * B_4_K_3GEV
+    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * B_5_K_3GEV
 
     return {
         "O1_VLL": o1_vll,
