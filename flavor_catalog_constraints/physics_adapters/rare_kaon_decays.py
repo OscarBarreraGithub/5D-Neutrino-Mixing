@@ -17,11 +17,13 @@ __all__ = [
     "KLONG_PI0EE_DEFERRED_REASON",
     "KLONG_PI0MUMU_DEFERRED_REASON",
     "KLONG_PI0_NUNU_DEFERRED_REASON",
+    "KL3_VUS_DEFERRED_REASON",
     "KSHORT_MUMU_DEFERRED_REASON",
     "KSHORT_PI0EE_DEFERRED_REASON",
     "KPLUS_PIPLUS_NUNU_DEFERRED_REASON",
     "RK_LFU_DEFERRED_REASON",
     "RareKaonDecayPlaceholderResult",
+    "evaluate_kl3_vus_placeholder",
     "evaluate_klong_mumu_placeholder",
     "evaluate_klong_pi0gg_placeholder",
     "evaluate_klong_pi0ee_placeholder",
@@ -91,6 +93,11 @@ RK_LFU_DEFERRED_REASON = (
     "radiative QED corrections"
 )
 
+KL3_VUS_DEFERRED_REASON = (
+    "requires |V_us| extraction + 5D RS effects on W-quark vertex + "
+    "radiative corrections"
+)
+
 
 @dataclass(frozen=True)
 class RareKaonDecayPlaceholderResult:
@@ -145,3 +152,8 @@ def evaluate_klong_pi0mumu_placeholder() -> RareKaonDecayPlaceholderResult:
 def evaluate_rk_lfu_placeholder() -> RareKaonDecayPlaceholderResult:
     """Return an explicit deferred result until charged-kaon LFU support exists."""
     return RareKaonDecayPlaceholderResult(reason=RK_LFU_DEFERRED_REASON)
+
+
+def evaluate_kl3_vus_placeholder() -> RareKaonDecayPlaceholderResult:
+    """Return an explicit deferred result until K_l3 V_us extraction exists."""
+    return RareKaonDecayPlaceholderResult(reason=KL3_VUS_DEFERRED_REASON)

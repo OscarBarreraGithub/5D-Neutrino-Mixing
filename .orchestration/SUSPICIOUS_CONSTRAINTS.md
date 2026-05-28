@@ -105,3 +105,12 @@ lepton-universality ratio, not a Delta S = 1 rare decay. Full evaluation is
 deferred pending modified W-lepton coupling treatment in 5D RS, radiative QED
 corrections matched to the inclusive K_l2 convention, and any new tree-level
 four-fermion contact-operator matching.
+
+## K018 K_l3 |V_us| f_+(0)
+
+K018 is registered as a PRIMARY kaon constraint, but its evaluator is an
+explicit non-vetoing placeholder. K_l3 is a tree-level charged-current
+semileptonic kaon source observable for |V_us| f_+(0), not a Delta S = 1 rare
+decay. Full evaluation is deferred pending source-level |V_us| extraction,
+5D RS effects on the W-quark-quark coupling, radiative/isospin corrections,
+lattice f_+(0) provenance, and any new four-fermion contact-operator matching.
