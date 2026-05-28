@@ -18,10 +18,12 @@ Full evaluation would need:
 - A convention audit so the result is not mixed with the existing Delta F = 2
   epsilon_K / Delta m_K machinery.
 
-Constraints with the same broad issue are likely K005, K006, K012, K013, and
-K017: rare or nonleptonic kaon modes require Delta S = 1 amplitudes, form
-factors or matrix elements, and usually electroweak-penguin or long-distance
-treatment that is not present in the current physics core.
+Constraints with the same broad issue are likely K005, K006, K012, and K013:
+rare or nonleptonic kaon modes require Delta S = 1 amplitudes, form factors
+or matrix elements, and usually electroweak-penguin or long-distance treatment
+that is not present in the current physics core. K017 is suspicious for a
+different reason: it is a charged-current LFU ratio, not a rare Delta S = 1
+mode.
 
 ## K004 K+ -> pi+ nu nubar
 
@@ -94,3 +96,12 @@ K012 is registered as a PRIMARY kaon constraint, but its evaluator is an explici
 ## K013 K_L -> pi0 gamma gamma
 
 K013 is registered as a PRIMARY kaon constraint, but its evaluator is an explicit non-vetoing placeholder because radiative ChPT evaluation is deferred pending chiral perturbation theory O(p^4)+O(p^6) amplitudes and photon matrix elements; Delta S = 1 Wilson matching alone is not enough.
+
+## K017 R_K charged-kaon LFU ratio
+
+K017 is registered as a PRIMARY kaon constraint, but its evaluator is an
+explicit non-vetoing placeholder. R_K is a tree-level charged-kaon
+lepton-universality ratio, not a Delta S = 1 rare decay. Full evaluation is
+deferred pending modified W-lepton coupling treatment in 5D RS, radiative QED
+corrections matched to the inclusive K_l2 convention, and any new tree-level
+four-fermion contact-operator matching.

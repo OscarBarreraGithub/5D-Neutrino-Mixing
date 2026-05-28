@@ -20,6 +20,7 @@ __all__ = [
     "KSHORT_MUMU_DEFERRED_REASON",
     "KSHORT_PI0EE_DEFERRED_REASON",
     "KPLUS_PIPLUS_NUNU_DEFERRED_REASON",
+    "RK_LFU_DEFERRED_REASON",
     "RareKaonDecayPlaceholderResult",
     "evaluate_klong_mumu_placeholder",
     "evaluate_klong_pi0gg_placeholder",
@@ -29,6 +30,7 @@ __all__ = [
     "evaluate_kshort_mumu_placeholder",
     "evaluate_kshort_pi0ee_placeholder",
     "evaluate_kplus_piplus_nunu_placeholder",
+    "evaluate_rk_lfu_placeholder",
 ]
 
 
@@ -84,6 +86,11 @@ KLONG_PI0MUMU_DEFERRED_REASON = (
     "K_L -> pi0 gamma gamma long-distance treatment not yet in the physics core"
 )
 
+RK_LFU_DEFERRED_REASON = (
+    "requires modified W-lepton coupling treatment in 5D RS + "
+    "radiative QED corrections"
+)
+
 
 @dataclass(frozen=True)
 class RareKaonDecayPlaceholderResult:
@@ -133,3 +140,8 @@ def evaluate_kshort_pi0ee_placeholder() -> RareKaonDecayPlaceholderResult:
 def evaluate_klong_pi0mumu_placeholder() -> RareKaonDecayPlaceholderResult:
     """Return an explicit deferred result until K_L -> pi0 mumu support exists."""
     return RareKaonDecayPlaceholderResult(reason=KLONG_PI0MUMU_DEFERRED_REASON)
+
+
+def evaluate_rk_lfu_placeholder() -> RareKaonDecayPlaceholderResult:
+    """Return an explicit deferred result until charged-kaon LFU support exists."""
+    return RareKaonDecayPlaceholderResult(reason=RK_LFU_DEFERRED_REASON)
