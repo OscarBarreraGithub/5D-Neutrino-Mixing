@@ -90,3 +90,7 @@ K010 is registered as a PRIMARY kaon constraint, but its evaluator is an explici
 ## K012 K_S -> mu mu
 
 K012 is registered as a PRIMARY kaon constraint, but its evaluator is an explicit non-vetoing placeholder because rare dimuon Delta S = 1 K_S -> mu+ mu- evaluation is deferred pending s -> d mu+ mu- matching, SM-NP interference conventions, K_S-specific long-distance two-photon treatment, time-dependent neutral-kaon interference conventions, and branching-ratio machinery.
+
+## K013 K_L -> pi0 gamma gamma
+
+K013 is registered as a PRIMARY kaon constraint, but its evaluator is an explicit non-vetoing placeholder because radiative ChPT evaluation is deferred pending chiral perturbation theory O(p^4)+O(p^6) amplitudes and photon matrix elements; Delta S = 1 Wilson matching alone is not enough.
