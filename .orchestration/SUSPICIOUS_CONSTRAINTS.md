@@ -183,3 +183,11 @@ top FCNC (t→qV, t→Hq), Z-pole asymmetries (bb, cc), LFV Z + LFV Higgs
 decays. All require new EW-precision and FCNC machinery (radion + KK
 gauge mixing for STU; top FCNC dipole + chromo Wilson coefficients;
 LFV-boson 5D RS contributions).
+
+## Collider-RS family (CR001-CR014) — all deferred
+
+14 placeholders. Direct-collider bounds on RS-sector states: KK gluon
+(dijet/ttbar), KK Z'/W' (dilepton/W'->lν), KK graviton (diphoton/dilepton),
+custodial top partners (T_{5/3}, T, B), singlet/doublet VLQs, DY EFT,
+VBS, diboson/diphoton resonances, four-top. All require LHC direct-search
+recasting + 5D-RS mass-coupling map.
