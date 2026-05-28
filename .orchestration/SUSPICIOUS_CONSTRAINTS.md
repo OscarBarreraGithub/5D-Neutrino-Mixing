@@ -22,3 +22,18 @@ Constraints with the same broad issue are likely K005, K006, K012, K013, and
 K017: rare or nonleptonic kaon modes require Delta S = 1 amplitudes, form
 factors or matrix elements, and usually electroweak-penguin or long-distance
 treatment that is not present in the current physics core.
+
+## K004 K+ -> pi+ nu nubar
+
+K004 is registered as a PRIMARY kaon constraint, but its evaluator is an
+explicit non-vetoing placeholder. This is a Delta S = 1 rare decay, not a
+Delta F = 2 kaon-mixing observable and not the K003 eps'/eps placeholder.
+
+Full evaluation would need:
+
+- K -> pi nu nu Wilson matching, including the relevant BMU operator mapping.
+- CKM elements and a documented SM-input convention.
+- SM--NP interference treatment for the charged branching ratio.
+- A Standard Model reference prediction from Buras, Schwab, and Uhlig,
+  hep-ph/0508165, using the SM-NNLO benchmark
+  BR_SM(K+ -> pi+ nu nubar) ~ 8.4e-11.
