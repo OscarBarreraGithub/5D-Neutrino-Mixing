@@ -42,9 +42,12 @@ python scripts/benchmark_perez_randall.py
   [`quark_scan_methodology_note.tex`](docs/quark_scan_methodology_note.tex)
   and the older [`quark_scan_assumptions_compact.tex`](docs/quark_scan_assumptions_compact.tex).
 
-Paper branch note: the active methodology note is
+Paper note: the active methodology note is
 [`docs/quark_scan_methodology_note.tex`](docs/quark_scan_methodology_note.tex)
-on `paper/quark-scan-2026q2`. The current paper scope is quark-sector only;
+on `main` (post-2026-05-25 consolidation; tagged `v2026q2-post-cleanup`).
+The consolidation report is at
+[`docs/quark_scan_consolidation_report.tex`](docs/quark_scan_consolidation_report.tex).
+The current paper scope is quark-sector only;
 lepton-sector packages remain repo tools for follow-up work.
 
 ## Packages
