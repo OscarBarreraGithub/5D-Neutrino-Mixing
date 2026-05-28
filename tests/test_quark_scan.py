@@ -3,6 +3,7 @@
 import csv
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -56,6 +57,44 @@ def test_quark_scan_threads_explicit_xi_kk_into_mkk():
 
     assert row["xi_KK"] == 2.0
     assert row["M_KK"] == 6000.0
+
+
+def test_quark_scan_threads_epsilon_k_budget_override(monkeypatch):
+    seen = {}
+
+    def fake_evaluate_delta_f2_constraints(*args, **kwargs):
+        seen["epsilon_k_np_budget_override"] = kwargs.get(
+            "epsilon_k_np_budget_override"
+        )
+        by_system = {
+            system: SimpleNamespace(ratio_to_bound=0.0, passes=True)
+            for system in ("K", "B_d", "B_s", "D")
+        }
+        return SimpleNamespace(
+            by_system=by_system,
+            operator_convention="test_deltaf2",
+            input_bundle="test_inputs",
+            passes_all=True,
+            max_ratio_to_bound=0.0,
+        )
+
+    monkeypatch.setattr(
+        "quarkConstraints.scan.evaluate_delta_f2_constraints",
+        fake_evaluate_delta_f2_constraints,
+    )
+    config = QuarkScanConfig(
+        r_values=[0.25],
+        overall_scale_values=[3.0],
+        Lambda_IR_values=[3000.0],
+        record_git_metadata=False,
+        max_nfev=80,
+        epsilon_k_np_budget_override=3.0e-4,
+    )
+
+    rows = run_quark_scan(config, progress_every=0)
+
+    assert len(rows) == 1
+    assert seen["epsilon_k_np_budget_override"] == 3.0e-4
 
 
 def test_quark_scan_rejects_points_that_fail_the_repo_proxy_gate():

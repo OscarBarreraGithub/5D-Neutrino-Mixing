@@ -201,6 +201,7 @@ class QuarkScanConfig:
     record_git_metadata: bool = True
     rng_seed_global: Optional[int] = None
     apply_acceptance_gate: bool = True
+    epsilon_k_np_budget_override: Optional[float] = None
 
     def __post_init__(self) -> None:
         self.r_values = _as_1d_float_array("r_values", self.r_values)
@@ -378,6 +379,7 @@ def run_quark_scan(
                         # perturbative g_s (legacy repo_v1 behavior)
                         compute_quark_kk_gluon_couplings(result, M_KK=M_KK, xi_KK=config.xi_KK, g_s_star=None),
                         M_KK=M_KK,
+                        epsilon_k_np_budget_override=config.epsilon_k_np_budget_override,
                     )
                     deltaf2_by_system = deltaf2.by_system
                     mass_log_residual = float(
