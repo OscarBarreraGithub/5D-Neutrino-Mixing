@@ -191,3 +191,17 @@ LFV-boson 5D RS contributions).
 custodial top partners (T_{5/3}, T, B), singlet/doublet VLQs, DY EFT,
 VBS, diboson/diphoton resonances, four-top. All require LHC direct-search
 recasting + 5D-RS mass-coupling map.
+
+## SECONDARY family (8 constraints) — all deferred
+
+- **beauty/B007/B008**: rare leptonic ee/ττ → routed via beauty placeholder.
+- **beauty/B013/B014**: exclusive radiative b→sγ / b→dγ → routed via beauty placeholder.
+- **kaon/K019/K020/K021**: LFV kaon semileptonic → routed via rare-kaon placeholder.
+- **top_higgs_ew/T014**: FCNC Z decays (down-sector) → routed via top/EW placeholder.
+
+All 102 catalogued constraints (94 PRIMARY + 8 SECONDARY) now register and
+return non-vetoing deferred results. Promotion to full evaluation will
+require building out: ΔS=1 / ΔC=1 / ΔB=1 Wilson machinery, K→ππ + LFV
+hadronic matrix elements, EDM dipole loops, LHC direct-search recasting,
+EW oblique loops, and Z/H LFV vertices. T011 was excluded as a yaml stub
+(cross-reference to T010, no anchor).
