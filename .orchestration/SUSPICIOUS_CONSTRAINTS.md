@@ -86,3 +86,7 @@ K009 is registered as a PRIMARY kaon constraint, but its evaluator is an explici
 ## K010 K_S -> pi0 e+ e-
 
 K010 is registered as a PRIMARY kaon constraint, but its evaluator is an explicit non-vetoing placeholder because rare semileptonic Delta S = 1 K_S -> pi0 e+ e- evaluation is deferred pending s -> d e+ e- matching, SM-NP interference conventions, form-factor treatment, phase-space extrapolation, and branching-ratio machinery.
+
+## K012 K_S -> mu mu
+
+K012 is registered as a PRIMARY kaon constraint, but its evaluator is an explicit non-vetoing placeholder because rare dimuon Delta S = 1 K_S -> mu+ mu- evaluation is deferred pending s -> d mu+ mu- matching, SM-NP interference conventions, K_S-specific long-distance two-photon treatment, time-dependent neutral-kaon interference conventions, and branching-ratio machinery.

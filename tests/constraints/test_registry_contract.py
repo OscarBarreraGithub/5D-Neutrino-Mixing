@@ -52,6 +52,7 @@ IMPLEMENTED_IDS_AT_SCAFFOLD_TIME = {
     "K008",
     "K009",
     "K010",
+    "K012",
 }
 
 
