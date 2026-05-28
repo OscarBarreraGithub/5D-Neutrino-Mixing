@@ -56,8 +56,10 @@ The work covered here falls into four categories:
     symbolic $1/\Mkk^2$ scaling to 0.1\%.
 \end{enumerate}
 
-All work lives on \texttt{main}; the repository is tagged
-\texttt{v2026q2-catalog-complete} at the post-consolidation state.
+All work lives on \texttt{main}; the post-review state is tagged
+\texttt{v2026q2-catalog-complete} (\texttt{a05832e}), and the
+post-cleanup state is tagged \texttt{v2026q2-post-cleanup}
+(\texttt{6d305d8}).
 
 
 %% ====================================================================
@@ -138,8 +140,8 @@ $6.24\times$ budget shrinkage) is captured correctly.
 The leading-order anomalous dimension matrix (ADM) for the scalar
 left-right (LR) Wilson coefficients $(C_4, C_5)$ in the SUSY basis is
 \begin{equation}\label{eq:adm-lr}
-  \gamma_{\mathrm{LR}} = \begin{pmatrix} 8 & -4 \\
-  -16/3 & -28/3 \end{pmatrix},
+  \gamma_{\mathrm{LR}} = \begin{pmatrix} -16 & -6 \\
+  0 & 2 \end{pmatrix},
 \end{equation}
 with eigenvalues $\{-16, 2\}$, matching the BMU
 (\href{https://arxiv.org/abs/hep-ph/0005183}{hep-ph/0005183})
@@ -171,18 +173,20 @@ Wilson-coefficient transpose convention
 $\bigl(\begin{smallmatrix}2&12\\0&-16\end{smallmatrix}\bigr)$, which
 is the standard convention difference.  Cross-check: no mismatch.
 
-\paragraph{Codex flag (requires human verification).}
-The Codex GPT-5.4 physics audit independently analyzed the
-color-Fierz identity and questioned whether the correct relation
+\paragraph{Codex flag (\textbf{requires human verification}).}
+The Codex GPT-5.5 physics audit independently analyzed the
+color-Fierz identity and concluded that the correct relation
 should be $Q_1^{\mathrm{LR,BMU}} = +2\,O_5^{\mathrm{LR}}$ (positive
-sign).  This would flip the off-diagonal ADM entry.  We document this
-as a point requiring human verification against BMU
-eqs.~(2.3)--(2.4).  Note that all 35/35 Wilson-RG tests pass under
-the current sign convention, the R04 reviewer independently confirmed
-the sign, and the combined invalidation factor of $22.49\times$ on the
-$\eK$ ratio is consistent with expectations.  Nonetheless, an
-independent hand calculation against the original BMU paper is
-recommended before publication.
+sign), i.e.\ the code's negative sign \emph{does not} match BMU.
+If correct, this would flip the off-diagonal ADM entry and propagate
+into the $\eK$ NP ratio.  \textbf{Human verification against BMU
+eqs.~(2.3)--(2.4) is required before publication.}  All 35/35
+Wilson-RG tests pass under the current sign convention, and the R04
+reviewer independently confirmed the sign, so there is no test-level
+evidence of a problem; however, a self-consistent but wrong sign
+convention would also pass all internal tests.  An independent hand
+calculation tracing the color-Fierz identity from the BMU paper
+through to the SUSY-basis ADM is mandatory.
 
 
 %% ------------------------------------------------------------------
@@ -352,7 +356,7 @@ Low (tight) & $1.0\times10^{-5}$ &
 Central & $6.7\times10^{-5}$ &
   47.22 & 127.08 & 1.000 \\
 High (loose) & $3.0\times10^{-4}$ &
-  22.31 & 60.06 & 0.4725 \\
+  22.31 & 60.06 & 0.4726 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -383,13 +387,14 @@ giving predicted ratios of
   \sqrt{\frac{6.7\times10^{-5}}{1.0\times10^{-5}}} = 2.5884,\qquad
   \sqrt{\frac{6.7\times10^{-5}}{3.0\times10^{-4}}} = 0.4726.
 \]
-The measured ratios are $2.588$ and $0.4725$, matching the symbolic
+The measured ratios are $2.588$ and $0.4726$, matching the symbolic
 predictions to $< 0.1\%$.  This confirms that:
 \begin{enumerate}[nosep]
   \item The tree-level $1/\Mkk^2$ Wilson-coefficient scaling holds
     across a factor of 30 in $|\DeK|$.
-  \item Loop corrections to the KK-gluon contribution are negligible
-    at this precision.
+  \item Tree-level $1/\Mkk^2$ scaling is validated at the $0.1\%$
+    level, consistent with negligible loop corrections at the
+    precision of this Monte Carlo analysis.
   \item The budget-override flag correctly threads through the entire
     pipeline (CLI $\to$ \texttt{EnsembleConfig} $\to$
     \texttt{\_worker\_init} $\to$ \texttt{evaluate\_epsilon\_k}).
@@ -429,16 +434,48 @@ seed variation across independent 12.8\,M-draw runs.
     parameters from 3 to 2\,GeV would shift them by a few percent.
     This is a known scale mismatch documented as accepted-risk.
 
-  \item \textbf{Codex flag on BMU sign:} The Codex audit questioned
-    whether eq.~\eqref{eq:q1lr-map} should carry a positive sign.
-    Human verification against BMU eqs.~(2.3)--(2.4) is recommended
+  \item \textbf{Codex flag on BMU sign (\textbf{action required}):}
+    The Codex GPT-5.5 audit concluded that
+    eq.~\eqref{eq:q1lr-map} should carry a \emph{positive} sign;
+    i.e.\ the code's current sign does not match BMU.  Human
+    verification against BMU eqs.~(2.3)--(2.4) is \textbf{required}
     before publication.  All 35 Wilson-RG tests pass under the current
-    convention, and the R04 reviewer independently confirmed the sign.
+    convention, and the R04 reviewer independently confirmed the sign,
+    but a self-consistent wrong sign would also pass internal tests.
 
   \item \textbf{Lepton sector:} Lepton-sector code is present in the
     repository (\texttt{neutrinos/}, \texttt{yukawa/},
     \texttt{flavorConstraints/}) but is follow-up scope.  No
     lepton-sector results are included in the quark-scan paper.
+
+  \item \textbf{Budget-override gap in \texttt{scan.py}:}
+    \texttt{quarkConstraints/scan.py} does not pass the
+    \texttt{epsilon\_k\_np\_budget\_override} through to
+    \texttt{evaluate\_epsilon\_k} --- it always uses the default
+    budget.  If budget sweeps should apply to that scan entry-point
+    (in addition to the CLI-driven ensemble path), this will need
+    plumbing.
+
+  \item \textbf{Test coverage gaps:} The modules \texttt{warpConfig},
+    \texttt{solvers}, \texttt{yukawa}, \texttt{neutrinos}, and most
+    standalone scripts have light or no test coverage.  These are
+    outside the quark-scan critical path but should be addressed
+    before relying on them for lepton-sector results.
+
+  \item \textbf{Stale compact assumptions document:}
+    \texttt{docs/quark\_scan\_assumptions\_compact.tex} still cites
+    $\eK^{\mathrm{SM}} = 1.81\times10^{-3}$ and the pre-audit RG
+    basis.  It should either be updated to match the post-audit
+    values or carry a prominent ``superseded by this consolidation
+    report'' note.
+
+  \item \textbf{Pin-test precision caveat:} The cross-module pin test
+    (C01) uses \texttt{np.isclose} with the default
+    \texttt{atol=1e-8}, which is too loose for very small constants
+    such as \texttt{DELTA\_M\_K $\sim 3.484\times10^{-15}$}.
+    Additionally, a simultaneous drift in both modules would not be
+    caught.  Tightening to a relative tolerance or adding an
+    independent literal assertion is recommended.
 \end{enumerate}
 
 
@@ -516,7 +553,7 @@ $m_s(2\,\mathrm{GeV})$ &
   \texttt{deltaf2.py:639} \\
 $m_d(2\,\mathrm{GeV})$ &
   Verified &
-  $0.00470\;\mathrm{GeV}$ &
+  $0.00467\;\mathrm{GeV}$ &
   FLAG 2024 &
   \texttt{deltaf2.py:640} \\
 $\Delta m_K^{\mathrm{exp}}$ &
@@ -531,19 +568,19 @@ $\kappa_\epsilon$ &
   \texttt{deltaf2.py:644} \\
 $B_4^{(B_d)}$, $B_5^{(B_d)}$ &
   Verified &
-  1.022, 0.943 &
+  1.02, 0.96 &
   FLAG 2024 &
-  \texttt{deltaf2.py:653--654} \\
+  \texttt{deltaf2.py:659--660} \\
 $B_4^{(B_s)}$, $B_5^{(B_s)}$ &
   Verified &
-  1.022, 0.943 &
+  1.02, 0.96 &
   FLAG 2024 &
-  \texttt{deltaf2.py:662--663} \\
+  \texttt{deltaf2.py:672--673} \\
 $B_4^{(D)}$, $B_5^{(D)}$ &
   Estimated &
   1.0, 1.0 &
   (no lattice) &
-  \texttt{deltaf2.py:671--672} \\
+  \texttt{deltaf2.py:686--687} \\
 Modern-lane vendored $B_K$ &
   Pinned (C01) &
   matches canonical &
