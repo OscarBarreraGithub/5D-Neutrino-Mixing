@@ -61,6 +61,25 @@ All work lives on \texttt{main}; the post-review state is tagged
 post-cleanup state is tagged \texttt{v2026q2-post-cleanup}
 (\texttt{6d305d8}).
 
+\begin{center}
+\setlength{\fboxsep}{8pt}
+\fcolorbox{red!70!black}{red!5}{%
+  \parbox{0.92\linewidth}{%
+    \textbf{Reader alert.}  Section~\ref{sec:bmu} describes one open
+    physics convention question (BMU scalar-LR sign) that
+    \textbf{requires human verification before publication}.  The
+    disagreement is between the Claude R04 reviewer
+    ($Q_1^{\mathrm{LR,BMU}} = -2\,O_5^{\mathrm{LR}}$, current code
+    convention) and the Codex GPT-5.5 worker-02 audit
+    ($Q_1^{\mathrm{LR,BMU}} = +2\,O_5^{\mathrm{LR}}$).  All 35/35
+    Wilson-RG tests pass under the current convention, so the issue
+    is invisible to the test suite; resolution requires reading BMU
+    eqs.~(2.3)--(2.4) by hand.  See also
+    Section~\ref{sec:open-bmu} below.%
+  }%
+}
+\end{center}
+
 
 %% ====================================================================
 \section{Phase-2 Audit Summary}
@@ -477,6 +496,193 @@ seed variation across independent 12.8\,M-draw runs.
     caught.  Tightening to a relative tolerance or adding an
     independent literal assertion is recommended.
 \end{enumerate}
+
+
+%% ====================================================================
+\section{Followup Actions (May 27--28, 2026)}
+\label{sec:followups}
+
+This appendix documents the seven commits landed on \texttt{main} after
+the first draft of this consolidation report.  They fall into four
+groups: documentation hygiene (A1, A2, B3), test hardening (A3, A4),
+code-consistency cleanups (B1, B2), and the outstanding human-verification
+item carried over from Section~\ref{sec:bmu}.  Numerical headline results
+(eq.~\ref{eq:headline} and the C02c band in
+Section~\ref{sec:c02c}) are unchanged by any of these commits.
+
+%% ------------------------------------------------------------------
+\subsection{Documentation hygiene}
+\label{sec:followup-docs}
+
+\paragraph{A1 --- Compact assumptions doc superseded
+(\texttt{5af0808}).}
+\texttt{docs/quark\_scan\_assumptions\_compact.tex} (the Apr~16
+walkthrough) now carries a prominent red ``SUPERSEDED'' banner
+pointing the reader at this report.  The same commit folds the
+post-audit kaon numbers into the body of the compact note inline:
+$\eK^{\mathrm{SM}} = 2.161\times10^{-3}$, NP budget
+$|\DeK| = 6.7\times10^{-5}$, $B_K^{(1)} = 0.5503$, $B_K^{(4)} = 0.903$,
+$B_K^{(5)} = 0.691$, and removes two stale \texttt{\textbackslash textcolor\{red\}\{To do\}} blocks
+whose content was resolved by the Phase-2 audit.  This closes open item~9
+from Section~\ref{sec:open}.
+
+\paragraph{A2 --- \texttt{CLAUDE.md} architecture section updated
+(\texttt{3bcb5ad}).}
+The agent-facing project notes \texttt{CLAUDE.md} previously described
+only the lepton-oriented module layout
+(\texttt{warpConfig/}, \texttt{solvers/}, \texttt{neutrinos/},
+\texttt{diagonalization/}, \texttt{yukawa/}, \texttt{flavorConstraints/},
+\texttt{scanParams/}).  A short prefix paragraph plus three new
+tree entries register \texttt{quarkConstraints/}, \texttt{qcd/}, and
+\texttt{flavor\_catalog/} as first-class top-level packages.  This
+brings the architecture section into agreement with where the
+production work actually lives post-consolidation.
+
+\paragraph{B3 --- Phase-0 mass-tolerance floor verified
+(\texttt{8b4028c}).}
+\texttt{scripts/calibrate\_phase0.py} was run against the
+post-C01 scan inputs and the resulting calibration matches the
+in-source floor \texttt{MASS\_TOLERANCE\_FLOOR = 0.003} (per-mille
+minimum) across all flavors.  The stale TODO comment in
+\texttt{quarkConstraints/scan.py} promising a future per-flavor
+replacement was rewritten to record the 2026-05-28 verification.
+Item~3 of Section~\ref{sec:open} (R01-I2) is therefore closed at
+accepted-risk on stronger evidence than before.
+
+%% ------------------------------------------------------------------
+\subsection{Test hardening}
+\label{sec:followup-tests}
+
+\paragraph{A3 --- Cross-module pin test tightened
+(\texttt{223cb1b}).}
+The kaon-constants cross-module pin test
+(\texttt{test\_modern\_phenomenology\_kaon\_constants\_match\_%
+deltaf2\_canonical}) used \texttt{np.isclose} with default tolerances
+(\texttt{rtol=1e-5}, \texttt{atol=1e-8}), too loose for very small
+constants such as \texttt{DELTA\_M\_K} $\sim 3.484\times10^{-15}$.
+The assertion is now \texttt{np.isclose(..., rtol=1e-12, atol=0)}, so a
+$1\!:\!10^{12}$ relative drift in any of the 11 vendored kaon literals
+is detected instead of $1\!:\!10^{8}$.  This addresses item~10 of
+Section~\ref{sec:open}.
+
+\paragraph{A4 --- Coverage for warpConfig and solvers
+(\texttt{04c3be3}).}
+Two new unit-test files (\texttt{tests/test\_warpconfig.py},
+\texttt{tests/test\_solvers.py}; 133 lines combined) add 7
+test functions exercising the previously-uncovered modules
+\texttt{warpConfig.wavefuncs} (the $c \to \tfrac{1}{2}$ logarithmic
+limit, the $c = 0$ closed form, large-$|c|$ no-overflow behavior, and
+the IR/UV identity) and \texttt{solvers.bessel} (fermion PP/PI roots
+matching $J_0$ zeros, BC selection sanity, and the standard gauge-NN
+first KK root).  This is a first pass on item~8 of Section~\ref{sec:open}.
+
+%% ------------------------------------------------------------------
+\subsection{Code consistency}
+\label{sec:followup-code}
+
+\paragraph{B1 --- Bag-parameter scale mismatch documented
+(\texttt{37cfa40}, option c).}
+\texttt{quarkConstraints/deltaf2.py} now distinguishes the FLAG 2024
+inputs explicitly as $B_4^K\_3\mathrm{GeV} = 0.903$ and
+$B_5^K\_3\mathrm{GeV} = 0.691$, with \texttt{B\_4\_K} / \texttt{B\_5\_K}
+kept as backward-compatibility aliases pointing at the same numbers and
+a multi-line comment block recording the FLAG~3\,GeV vs.\ code-default
+$\mu_{\mathrm{had}} = 2\,\mathrm{GeV}$ mismatch plus a TODO for proper
+2\,GeV RG-running.  The kaon matrix-element computation
+(\texttt{\_kaon\_matrix\_elements}) now reads the explicitly-named
+3\,GeV symbols.  \textbf{No numerical values change}; this is purely
+provenance hygiene addressing item~4 of Section~\ref{sec:open}.
+
+\paragraph{B2 --- $\eK$ budget override plumbed through legacy scan
+(\texttt{ebf417d}).}
+\texttt{quarkConstraints/scan.py} (the legacy
+\texttt{run\_quark\_scan} entry point) previously hardcoded the default
+NP budget when calling \texttt{evaluate\_delta\_f2\_constraints},
+silently ignoring caller-supplied overrides.  A new
+\texttt{epsilon\_k\_np\_budget\_override} field on
+\texttt{QuarkScanConfig} now threads through to the constraint
+evaluator, and a regression test
+(\texttt{test\_quark\_scan\_threads\_epsilon\_k\_budget\_override})
+patches the evaluator with a fake and asserts the override value
+($3.0\times10^{-4}$) actually arrives.  This closes item~7 of
+Section~\ref{sec:open} and brings the legacy path into parity with the
+CLI-driven ensemble path (which was already fixed under C02a).
+
+%% ------------------------------------------------------------------
+\subsection{Outstanding human-verification item --- BMU scalar-LR sign convention}
+\label{sec:open-bmu}
+
+The single physics open item that survives the followup pass is the
+BMU sign disagreement first flagged in Section~\ref{sec:bmu} and item~5
+of Section~\ref{sec:open}.  None of the seven followup commits above
+touches this question; it is repeated here so it cannot be missed by a
+reader skimming the appendix.
+
+\paragraph{The disagreement.}
+The Claude R04 reviewer, working from the color-Fierz identity, concluded
+\begin{equation}\label{eq:bmu-claude}
+  Q_1^{\mathrm{LR,BMU}} \;=\; -2\,O_5^{\mathrm{LR}}
+  \qquad\text{(Claude R04, current code convention).}
+\end{equation}
+The Codex GPT-5.5 worker-02 audit, working from BMU's
+four-dimensional LR Fierz relation, concluded
+\begin{equation}\label{eq:bmu-codex}
+  Q_1^{\mathrm{LR,BMU}} \;=\; +2\,O_5^{\mathrm{LR}}
+  \qquad\text{(Codex worker 02).}
+\end{equation}
+The two derivations disagree on the overall sign.  The code matches
+eq.~\eqref{eq:bmu-claude}; if eq.~\eqref{eq:bmu-codex} is the correct
+BMU convention, both code assertions must flip simultaneously (see below).
+
+\paragraph{Why the test suite cannot decide this.}
+All 35/35 Wilson-RG tests pass under the current sign convention.
+The reason is that the sign is consistently chosen on both the
+operator-definition side and the matrix-element/bag-parameter side, so
+a self-consistent but wrong sign convention produces the same final
+$\eK$ NP amplitude as a self-consistent correct one --- the
+disagreement only surfaces if one external reference is read
+literally.  The test suite catches a one-sided drift; it cannot catch
+a globally-flipped convention.
+
+\paragraph{Verification path.}
+Resolution requires reading
+\href{https://arxiv.org/abs/hep-ph/0005183}{BMU (hep-ph/0005183)},
+specifically eqs.~(2.3)--(2.4), by hand:
+\begin{enumerate}[nosep]
+  \item Identify BMU's definitions of $Q_1^{\mathrm{LR}}$ and
+    $Q_2^{\mathrm{LR}}$ (color and Dirac structure).
+  \item Identify the SUSY-basis operator $O_5^{\mathrm{LR}}$ used in
+    the code (see the docstring of
+    \texttt{quarkConstraints/deltaf2.py:\_kaon\_matrix\_elements}).
+  \item Apply the color-Fierz identity by hand and confirm whether the
+    relation reads $Q_1^{\mathrm{LR,BMU}} = -2\,O_5^{\mathrm{LR}}$ or
+    $+2\,O_5^{\mathrm{LR}}$.
+\end{enumerate}
+
+\paragraph{What to change on the code side if the sign flips.}
+If BMU's convention turns out to be $+2$, two assertions must flip in
+lockstep:
+\begin{itemize}[nosep]
+  \item \texttt{quarkConstraints/qcd\_running.py:10} (module-level
+    docstring/header asserting the $-2$ Fierz map).
+  \item \texttt{quarkConstraints/deltaf2.py:604} (the
+    \texttt{\_kaon\_matrix\_elements} docstring asserting the same map
+    and the positivity of \texttt{B\_5\_K\_3GEV}).
+\end{itemize}
+Flipping only one of these would leave the code in a genuinely
+inconsistent state and \emph{would} be caught by the Wilson-RG tests.
+Flipping both simultaneously will not be caught by any existing test;
+a downstream comparison against the published BMU $\eK$ numbers is the
+only programmatic check available.
+
+\paragraph{Status.}
+\textbf{This item is the only open physics convention question
+blocking the quark-scan paper.}  Until a human hand-check against BMU
+eqs.~(2.3)--(2.4) resolves the sign, the consolidation report's other
+results --- the FLAG~2024 / BGS~2020 update, the C02c measured band,
+and the seven followup commits above --- stand independently, but the
+$\eK$ NP-budget interpretation inherits a one-sign convention
+caveat.
 
 
 %% ====================================================================
