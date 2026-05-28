@@ -39,7 +39,8 @@ include = [
   "scanParams",
   "quarkConstraints*",
   "flavorConstraints",
-  "qcd"
+  "qcd",
+  "flavor_catalog_constraints*"
 ]
 
 [tool.ruff]
@@ -66,6 +67,7 @@ select = ["E", "F", "I", "B"]
 "tests/test_paper_*.py" = ["E501", "F401", "I001"]
 "tests/test_qcd_running.py" = ["F401", "I001"]
 "tests/test_quark_fit.py" = ["E501", "I001"]
+"flavor_catalog_constraints/TEMPLATE.py" = ["F401"]
 
 [tool.pytest.ini_options]
 xfail_strict = true

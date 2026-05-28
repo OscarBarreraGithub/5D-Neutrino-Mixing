@@ -1,0 +1,1 @@
+"""PRIMARY beauty-family constraints."""
