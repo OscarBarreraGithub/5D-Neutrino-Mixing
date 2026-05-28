@@ -39,7 +39,8 @@ include = [
   "scanParams",
   "quarkConstraints*",
   "flavorConstraints",
-  "qcd"
+  "qcd",
+  "flavor_catalog_constraints*"
 ]
 
 [tool.ruff]
