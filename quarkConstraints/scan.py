@@ -30,13 +30,11 @@ from .scales import (
 # Per-flavor mass tolerances at mu_common = m_t(m_t).
 #
 # Initial production policy: use PDG 2024 2sigma relative uncertainties with
-# a deterministic floor of 0.003 (per-mille minimum). After the user runs
-# ``scripts/calibrate_phase0.py``, the floor will be replaced by the
-# 95th-percentile log-residual from the Phase-0 dry scan (gating off).
+# a deterministic floor of 0.003 (per-mille minimum).
 #
-# TODO(Phase-0 calibration): replace ``MASS_TOLERANCE_FLOOR`` with the
-# per-flavor calibration loaded from
-# ``data/phase0_residual_calibration.json`` once the scan has been run.
+# Verified 2026-05-28 post-C01: calibration output matches current 0.003 value.
+# A larger production Phase-0 sweep can still replace this with per-flavor
+# values from ``data/phase0_residual_calibration.json`` if needed.
 MASS_TOLERANCE_FLOOR = 0.003
 
 # Per-element CKM 2sigma relative tolerances, derived from PDG 2024 §12
