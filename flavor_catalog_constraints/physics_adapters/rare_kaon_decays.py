@@ -12,8 +12,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 __all__ = [
+    "KLONG_PI0_NUNU_DEFERRED_REASON",
     "KPLUS_PIPLUS_NUNU_DEFERRED_REASON",
     "RareKaonDecayPlaceholderResult",
+    "evaluate_klong_pi0_nunu_placeholder",
     "evaluate_kplus_piplus_nunu_placeholder",
 ]
 
@@ -22,6 +24,12 @@ KPLUS_PIPLUS_NUNU_DEFERRED_REASON = (
     "requires Delta S=1 K -> pi nu nubar Wilson matching, CKM inputs, "
     "SM-NP interference conventions, and branching-ratio machinery not "
     "yet in the physics core"
+)
+
+KLONG_PI0_NUNU_DEFERRED_REASON = (
+    "requires Delta S=1 K -> pi nu nubar Wilson matching, CKM inputs, "
+    "SM-NP interference conventions, CP-odd K_L projection, and "
+    "branching-ratio machinery not yet in the physics core"
 )
 
 
@@ -38,3 +46,8 @@ class RareKaonDecayPlaceholderResult:
 def evaluate_kplus_piplus_nunu_placeholder() -> RareKaonDecayPlaceholderResult:
     """Return an explicit deferred result until rare-kaon support exists."""
     return RareKaonDecayPlaceholderResult()
+
+
+def evaluate_klong_pi0_nunu_placeholder() -> RareKaonDecayPlaceholderResult:
+    """Return an explicit deferred result until neutral rare-kaon support exists."""
+    return RareKaonDecayPlaceholderResult(reason=KLONG_PI0_NUNU_DEFERRED_REASON)

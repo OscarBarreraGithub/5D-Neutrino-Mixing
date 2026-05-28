@@ -37,3 +37,21 @@ Full evaluation would need:
 - A Standard Model reference prediction from Buras, Schwab, and Uhlig,
   hep-ph/0508165, using the SM-NNLO benchmark
   BR_SM(K+ -> pi+ nu nubar) ~ 8.4e-11.
+
+## K005 K_L -> pi^0 nu nubar
+
+K005 is registered as a PRIMARY kaon constraint, but its evaluator is an
+explicit non-vetoing placeholder. This is a Delta S = 1 rare decay and the
+neutral-kaon mode is a Standard-Model CP-violation-pure observable, with no
+charm contribution to lowest order.
+
+Full evaluation would need:
+
+- Delta S = 1 K -> pi nu nubar Wilson matching and operator-basis mapping.
+- CKM inputs, SM--NP interference conventions, and the CP-odd K_L projection.
+- A neutral-mode branching-ratio evaluator, separate from the charged K004
+  formula.
+- A Standard Model reference prediction from Buras, Gorbahn, Haisch, and
+  Nierste, hep-ph/0603079, using BR_SM(K_L -> pi^0 nu nubar) ~ 3e-11.
+- The direct KOTO 2024 upper limit BR(K_L -> pi^0 nu nubar) < 2.2e-9 at
+  90% CL.
