@@ -152,3 +152,17 @@ Full evaluation requires: LFV dipole + 4-fermion Wilson matching at the
 EW scale, RG to low energies, nuclear-overlap form factors for μ→e
 conversion (Kitano-Koike-Okada), Z' tridents for L023, and 5D-RS
 contributions to all of the above (KK gauge / Higgs / radion loops).
+
+## Charm family (C001-C008) — all deferred
+
+The current physics core has ΔC=2 D-mixing machinery via deltaf2.py
+(adapter could plug in for C001/C002), but ΔC=1 rare-decay machinery
+(D → ll, D → π ll, LFV charm) is absent. All 8 charm constraints are
+non-vetoing placeholders for now.
+
+- **C001/C002** D-mixing (ΔC=2): could be promoted to full implementation
+  using the existing deltaf2.delta_m_D evaluator. Tracked for follow-up.
+- **C003** Direct CPV: ΔC=1, requires NP penguins.
+- **C004/C005** D⁰ → ll: ΔC=1 rare leptonic.
+- **C006/C008** D LFV: requires LFV operators.
+- **C007** D → π ll: rare semileptonic.
