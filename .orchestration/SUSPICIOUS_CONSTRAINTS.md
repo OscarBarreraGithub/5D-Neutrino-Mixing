@@ -62,3 +62,19 @@ K006 is registered as a PRIMARY kaon constraint, but its evaluator is an
 explicit non-vetoing placeholder. K_L -> mu mu is long-distance dominated
 (~99% from 2-photon intermediate state), short-distance SM ~9e-10 from
 Buras et al; full evaluation deferred.
+
+## K008 K_L -> pi0 e+ e-
+
+K008 is registered as a PRIMARY kaon constraint, but its evaluator is an
+explicit non-vetoing placeholder. This is a Delta S = 1 rare semileptonic
+mode with direct/indirect CP interference and long-distance inputs from
+K_S -> pi0 e+ e- and K_L -> pi0 gamma gamma; it is not covered by the
+Delta F = 2 kaon-mixing machinery used for K001/K002.
+
+Full evaluation would need:
+
+- s -> d e+ e- Wilson matching and operator-basis mapping.
+- CKM inputs plus SM--NP interference conventions.
+- Direct/indirect CP separation using the K_S -> pi0 e+ e- input.
+- CP-conserving long-distance treatment tied to K_L -> pi0 gamma gamma.
+- A branching-ratio evaluator for K_L -> pi0 charged-lepton modes.
