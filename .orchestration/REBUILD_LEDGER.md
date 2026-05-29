@@ -65,8 +65,12 @@ orchestrator context resets. Updated after every per-constraint gate.
 | B005 | B_s→μμ | ✅ built | fixed (A_ΔΓ) | CODE-OK | ✅ APPROVE | ✅ be82e38 |
 | B011 | B→X_sγ | ✅ built | fixed (2 blockers) | fixed | ✅ APPROVE | ✅ f746d56 |
 | B022 | B⁺→K⁺νν̄ | ✅ built | fixed (LD) | fixed | ✅ APPROVE | ✅ e4c64d2 |
+| B006 | B⁰→μμ | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 30420b6 |
+| B012 | B→K*γ | ✅ reuse | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 6731ac0 |
+| B023 | B→K*νν̄ | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 93fd563 |
 
-**Done: 16 / ~102.** Wave-4 = B-rare PIONEERS that built 3 shared modules → now fan out:
+**Done: 19 / ~102.** Wave-5 = first fan-out reusing wave-4 modules (B006/B012/B023), one-per-shared-module-per-wave to avoid contention. NP proxies inherit from the shared modules (already in NEEDS_HUMAN_PHYSICS.md).
+Remaining rare_b_dilepton consumers (B015/B016/B017/B018/B019/B021 + secondary B007/B008/B013/B014): pre-extend the module once, then fan out as pure consumers. Wave-4 = B-rare PIONEERS that built 3 shared modules → now fan out:
 - `rare_b_dilepton` (B005) → B006, B015, B016, B017, B021 (+B018/B019 ratios, secondary B007/B008/B013/B014)
 - `bsgamma` (B011) → B012
 - `rare_b_nunu` (B022) → B023
