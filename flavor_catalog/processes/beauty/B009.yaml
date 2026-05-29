@@ -89,6 +89,8 @@ source_shas:
   babar2013_arxiv1207_0698.txt: "sha256:eb7d51abe66f1efb067f8d38563d34d3e78f649ed79c3b7dc9cf4ea8f2ce323b"
   babar2010_arxiv0912_2453.txt: "sha256:0e3378f2fc0ef5c4640d50c3a8faeef92bc14ea6c4f22eb082fa15bf94db86be"
   cfw2008_arxiv0804_1954.txt: "sha256:96029befd316c9a3c5ed9ee85a94a4efcbc72bd8dcb5a233bc2bd7b8133c6161"
+  flag2024_bplus_decay_constant_context.txt: "sha256:0f586a012f6361ff6f935015fcabbcebffe1f0af9e9c796eaceebb5ac734bca0"
+  pdg2024_ckm_vub_repo_target_context.txt: "sha256:0fe5059ea264733ab44d75f3290e4d8ea96f40d7dffdb83abb5d32701a4be20e"
 pdg_or_equivalent:
   canonical_average:
     source: "HFLAV Rare B decays, End of December 2025 update"
@@ -120,6 +122,32 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B009/utfit_summer2024_btaunu.txt"
     sha256: "c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3"
+  theory_flag_f_B:
+    source: "FLAG Review 2024 context plus repo deltaf2 F_BD default"
+    year: 2024
+    observable: "f_B input for the B+ -> tau+ nu_tau SM tree formula"
+    value: 0.1900
+    uncertainty: 0.0013
+    units: "GeV"
+    source_url: "https://arxiv.org/abs/2411.04268"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B009/flag2024_bplus_decay_constant_context.txt"
+    sha256: "0f586a012f6361ff6f935015fcabbcebffe1f0af9e9c796eaceebb5ac734bca0"
+    code_reference: "quarkConstraints/deltaf2.py:F_BD"
+    note: "YAML-backs the existing repo default f_B=0.1900 GeV; B009 validates the resulting SM branching fraction against the UTfit BR anchor."
+  theory_ckm_abs_vub:
+    source: "Repo CKM target with PDG 2024 |V_ub| context"
+    year: 2024
+    observable: "|V_ub| input for the B+ -> tau+ nu_tau SM tree formula"
+    value: 0.00368
+    uncertainty: null
+    units: "dimensionless"
+    source_url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    access_date: "2026-05-16"
+    snapshot_path: "flavor_catalog/references/B009/pdg2024_ckm_vub_repo_target_context.txt"
+    sha256: "0fe5059ea264733ab44d75f3290e4d8ea96f40d7dffdb83abb5d32701a4be20e"
+    code_reference: "quarkConstraints/modern/inputs.py:ModernDefaultCKMTarget.theta13"
+    note: "YAML-backs the existing repo default |V_ub|=0.00368; B009 validates the resulting SM branching fraction against the UTfit BR anchor."
   experimental_inputs:
     - experiment: "Belle"
       year: 2013
@@ -207,4 +235,4 @@ implementation_difficulty: "MEDIUM"
 implementation_difficulty_reason: "A live constraint would need a new charged-current leptonic-B observable and model matching to W'/charged-scalar/leptoquark-like amplitudes, but the experimental average and SM inputs are standard and no new QCD RG machinery is expected for the catalog-level formula."
 open_issues:
   - "[RESOLVED-by-C08 2026-05-25] Canonical headline is the HFLAV End-of-December-2025 rare-B average 1.12e-4 in pdg_or_equivalent (B009.yaml:93-100), per the PKA's stated default; the PDG 2025 listing is retained as a supporting value. Rationale: HFLAV folds in the latest Belle II hadronic-tag input and CA Wave-1 cycle accepted this assignment when CHK-1..CHK-8 passed. Original note: Writer/checker should decide whether the final prose should use HFLAV Dec. 2025 or PDG 2025 as the display canonical value; this PKA sidecar records both and uses HFLAV as the canonical current average."
-  - "[DEFERRED-to-post-paper-finalization 2026-05-25 (C08)] Direct f_B |V_ub| construction would require new FLAG snapshots; not required for the current operational_scan_only claim level (the UTfit SM prediction already covers the catalog use case). Revisit if B009 is ever promoted to a live constraint. Original note: If the catalog later wants a direct f_B |V_ub| construction rather than the UTfit SM prediction, it should add explicit FLAG f_B and |V_ub| snapshots."
+  - "[RESOLVED-by-B009-agent1 2026-05-29] Added explicit YAML theory anchors theory_flag_f_B=0.1900 GeV and theory_ckm_abs_vub=0.00368 with provenance snapshots; the live constraint loads both via load_anchor and still validates the SM branching fraction against the UTfit BR anchor."

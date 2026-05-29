@@ -1,0 +1,2 @@
+# Implement B009 — BR(B⁺→τ⁺ν). family=beauty. PIONEER: new leptonic_tree module.
+BUILD quarkConstraints/leptonic_tree.py (tree-level leptonic meson decay: BR = (G_F²/8π) m_B m_τ²(1-m_τ²/m_B²)² f_B² |V_ub|² τ_B). Wrap via new adapter. SM BR(B+→τν)~8.5e-5 — validate from B009.yaml (f_B, |V_ub|). RS NP = documented charged-current proxy (charged-Higgs/W' contribution scaling m_B²/M_KK²) → NEEDS-HUMAN-PHYSICS. Budget from B009.yaml (Belle/BaBar vs SM), HARD. Reusable by other leptonic tree modes.

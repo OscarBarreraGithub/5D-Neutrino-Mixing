@@ -29,6 +29,24 @@ references:
     url: "https://www.utfit.org/foswiki/bin/view/UTfit/ResultsSummer2024SM"
     snapshot_path: "flavor_catalog/references/B009/utfit_summer2024_btaunu.txt"
     sha256_of_local_snapshot: "c025b53f364189c59b427a8b6a2dd49b592a8c49e47d200a63d80c9515bc0eb3"
+  - key: flag2024_bplus_decay_constant_context
+    arxiv_id: "2411.04268"
+    doi: "10.48550/arXiv.2411.04268"
+    title: "FLAG Review 2024 B-meson decay-constant context for B009"
+    authors: "Y. Aoki et al. (Flavour Lattice Averaging Group)"
+    year: 2024
+    url: "https://arxiv.org/abs/2411.04268"
+    snapshot_path: "flavor_catalog/references/B009/flag2024_bplus_decay_constant_context.txt"
+    sha256_of_local_snapshot: "0f586a012f6361ff6f935015fcabbcebffe1f0af9e9c796eaceebb5ac734bca0"
+  - key: pdg2024_ckm_vub_repo_target_context
+    arxiv_id: null
+    doi: "10.1103/PhysRevD.110.030001"
+    title: "PDG 2024 CKM |Vub| context for the B009 repo target"
+    authors: "S. Navas et al. (Particle Data Group)"
+    year: 2024
+    url: "https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf"
+    snapshot_path: "flavor_catalog/references/B009/pdg2024_ckm_vub_repo_target_context.txt"
+    sha256_of_local_snapshot: "0fe5059ea264733ab44d75f3290e4d8ea96f40d7dffdb83abb5d32701a4be20e"
   - key: belle2013_arxiv1208_4678
     arxiv_id: "1208.4678"
     doi: "10.1103/PhysRevLett.110.131801"

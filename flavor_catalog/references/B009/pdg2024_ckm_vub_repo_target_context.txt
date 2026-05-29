@@ -1,0 +1,24 @@
+Source key: pdg2024_ckm_vub_repo_target_context
+Source: Particle Data Group, "Semileptonic b-Hadron Decays, Determination of
+Vcb, Vub", Review of Particle Physics 2024.
+Citation: S. Navas et al. (Particle Data Group), Phys. Rev. D 110, 030001
+(2024).
+URL: https://pdg.lbl.gov/2024/reviews/rpp2024-rev-vcb-vub.pdf
+Access date: 2026-05-16
+Local snapshot policy: minimal text/provenance extract only; no publisher PDF
+tracked.
+
+Extracted numerical context:
+- PDG 2024 quotes |Vub| inclusive = (4.13 +/- 0.12_exp +0.13/-0.14_theo
+  +/- 0.18_model) x 10^-3.
+- PDG 2024 quotes |Vub| exclusive = (3.70 +/- 0.10 +/- 0.12) x 10^-3.
+- PDG 2024 quotes a scaled average |Vub| = (3.82 +/- 0.20) x 10^-3.
+
+B009 local theory-anchor use:
+- The existing repo CKM target uses theta13 = 0.00368 in
+  quarkConstraints.modern.inputs.ModernDefaultCKMTarget and the leptonic-tree
+  module used this value directly as |Vub|.
+- B009.yaml records this exact repo default as a CKM theory anchor so the live
+  B+ -> tau+ nu_tau SM formula no longer relies on an untracked in-code
+  |Vub| default. The UTfit branching-fraction anchor remains the validation
+  target for the total SM rate.

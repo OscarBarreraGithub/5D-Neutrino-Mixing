@@ -1,0 +1,22 @@
+Source key: flag2024_bplus_decay_constant_context
+Source: FLAG Review 2024.
+URL: https://arxiv.org/abs/2411.04268
+arXiv: 2411.04268 [hep-lat]
+Access date: 2026-05-16
+Local snapshot policy: minimal text/provenance extract only; no publisher PDF tracked.
+
+Extracted context from the arXiv metadata/abstract:
+- FLAG reviews lattice-QCD results related to pion, kaon, D-meson, B-meson,
+  and nucleon physics.
+- For the heavy-quark sector, FLAG provides results for bottom-meson decay
+  constants, form factors, and mixing parameters relevant for CKM fits.
+- The B-meson leptonic decay-constant average used by the repo default is
+  f_B = 190.0(1.3) MeV.
+
+B009 local theory-anchor use:
+- The existing repo charged-leptonic tree input uses
+  quarkConstraints.deltaf2.F_BD = 0.1900 GeV, documented there as a FLAG 2024
+  B_d decay constant.
+- B009.yaml records this exact repo default as a theory anchor so the live
+  B+ -> tau+ nu_tau SM formula no longer relies on an untracked in-code
+  f_B default.

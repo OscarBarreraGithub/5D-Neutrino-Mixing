@@ -1,0 +1,9 @@
+1. SHOULD-FIX - `f_B` and `|V_ub|` are not YAML-backed: `LeptonicTreeInputs` uses repo defaults `f_B=0.1900 GeV` and `|V_ub|=0.00368` (`quarkConstraints/leptonic_tree.py:57-68`, `quarkConstraints/deltaf2.py:665`), while `B009.yaml` only has the UTfit BR anchor and explicitly says direct `f_B |V_ub|` snapshots are needed if B009 is promoted live (`flavor_catalog/processes/beauty/B009.yaml:210`). Correct physics/provenance: add/load explicit FLAG/CKM anchors, or state validation is only against UTfit; current formula gives `8.6308e-5`, matching UTfit `0.865e-4`.
+
+2. NIT - DeltaF2 amplitude/running checks are N/A for this tree-level leptonic rate: no `M12`, no CP imaginary-part observable, and no `*_with_running` Wilson evolution should enter. The rate path correctly uses `BR = BR_SM |1+r_NP|^2` (`quarkConstraints/leptonic_tree.py:214-215`) and compares `|Delta BR_NP|/budget` (`flavor_catalog_constraints/primary/beauty/B009.py:413-416`).
+
+3. NIT - Budget/anchors are physically defensible: HFLAV `1.12±0.19e-4` and UTfit `0.865±0.041e-4` are loaded from YAML (`flavor_catalog/processes/beauty/B009.yaml:93-122`); budget is `0.255e-4 + sqrt(0.19^2+0.041^2)e-4 = 4.4937e-5` (`flavor_catalog_constraints/primary/beauty/B009.py:279-299`), not a bare central residual.
+
+4. NIT - RS proxy is correctly flagged as non-complete physics: `r_NP=+m_B^2/M_KK^2` is a constructive unit-normalized charged-current proxy and is marked `NEEDS-HUMAN-PHYSICS` (`quarkConstraints/leptonic_tree.py:14-26`, `flavor_catalog_constraints/primary/beauty/B009.py:480-485`); at `M_KK=3 TeV`, `r=3.10e-6`, `Delta BR=5.35e-10`, far below budget.
+
+PHYSICS-NEEDS-FIXES
