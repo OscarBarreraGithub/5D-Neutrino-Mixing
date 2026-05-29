@@ -1,4 +1,4 @@
-"""Production tests for T018 (LFV h -> mu tau)."""
+"""Production tests for T019 (LFV h -> e tau)."""
 
 from __future__ import annotations
 
@@ -17,14 +17,14 @@ from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.physics_adapters.higgs_lfv import (
     higgs_lfv_yukawa_proxy_input,
 )
-from flavor_catalog_constraints.primary.top_higgs_ew import T018 as t018_module
+from flavor_catalog_constraints.primary.top_higgs_ew import T019 as t019_module
 from quarkConstraints.higgs_lfv import (
     h_lfv_branching_fraction_from_yukawas as core_h_lfv_branching_fraction_from_yukawas,
 )
 
-_PID = "T018"
+_PID = "T019"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
-_SIDECAR = _REPO_ROOT / "flavor_catalog" / "processes" / "top_higgs_ew" / "T018.yaml"
+_SIDECAR = _REPO_ROOT / "flavor_catalog" / "processes" / "top_higgs_ew" / "T019.yaml"
 _NUMBER_RE = re.compile(
     r"^\s*<?\s*(?P<number>[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)"
     r"(?:[eE][+-]?[0-9]+)?)\s*(?P<percent>%?)\s*$"
@@ -53,30 +53,30 @@ def _limit(entry, key: str = "normalized_value") -> float:
 
 
 def _proxy_point(
-    y_mu_tau: complex,
-    y_tau_mu: complex = 0.0j,
+    y_e_tau: complex,
+    y_tau_e: complex = 0.0j,
 ):
     proxy = higgs_lfv_yukawa_proxy_input(
-        "mu",
+        "e",
         "tau",
-        y_mu_tau,
-        y_tau_mu,
-        source="T018 test proxy",
+        y_e_tau,
+        y_tau_e,
+        source="T019 test proxy",
     )
     return point_builder.make_point(lepton_mass_basis_couplings=proxy)
 
 
 def _core_higgs_lfv_result(
-    y_mu_tau: complex,
-    y_tau_mu: complex = 0.0j,
+    y_e_tau: complex,
+    y_tau_e: complex = 0.0j,
     *,
     constraint,
 ):
     return core_h_lfv_branching_fraction_from_yukawas(
-        initial_flavor="mu",
+        initial_flavor="e",
         final_flavor="tau",
-        yukawa_ij=y_mu_tau,
-        yukawa_ji=y_tau_mu,
+        yukawa_ij=y_e_tau,
+        yukawa_ji=y_tau_e,
         br_limit=constraint.anchor.budget,
         inputs=constraint.sm_inputs,
     )
@@ -89,20 +89,22 @@ def test_registration_metadata():
     assert constraint.process_id == _PID
     assert constraint.severity is Severity.HARD
     assert constraint.family == "top_higgs_ew"
-    assert constraint.observable == "BR(h -> mu tau)"
+    assert constraint.observable == "BR(h -> e tau)"
 
 
 def test_anchor_matches_yaml_and_loud_fail_probe():
     constraint = fcc.get(_PID)
-    cms = _entry("CMS2021:T018:mutau_limit")
-    pdg_cms = _entry("PDG2025:T018:cms_run2")
-    pdg_atlas = _entry("PDG2025:T018:atlas_run2")
-    atlas = _entry("ATLAS2023:T018:mutau_limit")
-    cms_dataset = _entry("CMS2021:T018:dataset")
-    atlas_dataset = _entry("ATLAS2023:T018:dataset")
-    cms_2015_yukawa = _entry("CMS2015:T018:yukawa_limit")
+    atlas = _entry("ATLAS2023:T019:etau_limit")
+    pdg_atlas = _entry("PDG2025:T019:atlas_run2")
+    pdg_cms = _entry("PDG2025:T019:cms_run2")
+    cms = _entry("CMS2021:T019:etau_limit")
+    atlas_2019 = _entry("ATLAS2019:T019:etau_limit")
+    atlas_dataset = _entry("ATLAS2023:T019:dataset")
+    cms_dataset = _entry("CMS2021:T019:dataset")
+    atlas_2019_dataset = _entry("ATLAS2019:T019:dataset")
+    hkz = _entry("HarnikKoppZupan2012:T019:LFV_Higgs_EFT_allowance")
     inputs = constraint.sm_inputs
-    limit = _limit(cms)
+    limit = _limit(atlas)
     yukawa_limit = math.sqrt(
         limit
         * inputs.total_higgs_width_gev
@@ -112,40 +114,45 @@ def test_anchor_matches_yaml_and_loud_fail_probe():
     )
 
     assert constraint.anchor.experimental.value == pytest.approx(limit)
-    assert constraint.anchor.experimental.source_url == cms["source_url"]
+    assert constraint.anchor.experimental.source_url == atlas["source_url"]
     assert constraint.anchor.experimental.units == "branching fraction"
-    assert constraint.anchor.cms_limit.limit == pytest.approx(limit)
-    assert constraint.anchor.cms_limit.expected_limit == pytest.approx(
-        _limit(cms, "expected_value")
+    assert constraint.anchor.atlas_limit.limit == pytest.approx(limit)
+    assert constraint.anchor.atlas_limit.expected_limit == pytest.approx(
+        _limit(atlas, "expected_value")
+    )
+    assert constraint.anchor.pdg_atlas_limit.limit == pytest.approx(
+        _limit(pdg_atlas)
     )
     assert constraint.anchor.pdg_cms_limit.limit == pytest.approx(_limit(pdg_cms))
-    assert constraint.anchor.pdg_atlas_limit.limit == pytest.approx(_limit(pdg_atlas))
-    assert constraint.anchor.atlas_limit.limit == pytest.approx(_limit(atlas))
-    assert constraint.anchor.cms_dataset["value"] == cms_dataset["value"]
-    assert constraint.anchor.atlas_dataset["value"] == atlas_dataset["value"]
-    assert constraint.anchor.cms_2015_yukawa_limit.limit == pytest.approx(
-        _limit(cms_2015_yukawa, "value")
+    assert constraint.anchor.cms_limit.limit == pytest.approx(_limit(cms))
+    assert constraint.anchor.atlas_2019_limit.limit == pytest.approx(
+        _limit(atlas_2019)
     )
+    assert constraint.anchor.atlas_dataset["value"] == atlas_dataset["value"]
+    assert constraint.anchor.cms_dataset["value"] == cms_dataset["value"]
+    assert constraint.anchor.atlas_2019_dataset["value"] == atlas_2019_dataset["value"]
+    assert constraint.anchor.harnik_kopp_zupan_eft_allowance["value"] == hkz["value"]
     assert constraint.anchor.budget == pytest.approx(limit)
     assert constraint.anchor.effective_yukawa_limit == pytest.approx(yukawa_limit)
+    assert constraint.anchor.effective_yukawa_limit == pytest.approx(1.2780365e-3)
 
     with pytest.raises(AnchorError):
-        t018_module._load_scaffold_value_anchor(
-            "not a T018 value_id",
+        t019_module._load_scaffold_value_anchor(
+            "not a T019 value_id",
             process_id=_PID,
         )
 
 
-def test_t018_value_anchor_routes_through_scaffold_load_anchor(monkeypatch):
+def test_t019_value_anchor_routes_through_scaffold_load_anchor(monkeypatch):
     calls: list[tuple[str, ...]] = []
-    original_load_anchor = t018_module.load_anchor
+    original_load_anchor = t019_module.load_anchor
 
     def spy_load_anchor(*args, **kwargs):
         calls.append(tuple(kwargs["candidates"]))
         return original_load_anchor(*args, **kwargs)
 
-    monkeypatch.setattr(t018_module, "load_anchor", spy_load_anchor)
-    anchor = t018_module._load_t018_anchor(_PID)
+    monkeypatch.setattr(t019_module, "load_anchor", spy_load_anchor)
+    anchor = t019_module._load_t019_anchor(_PID)
 
     assert calls == [("pdg_or_equivalent.values[2]",)]
     assert anchor.value == pytest.approx(fcc.get(_PID).anchor.value)
@@ -158,10 +165,10 @@ def test_t018_value_anchor_routes_through_scaffold_load_anchor(monkeypatch):
             uncertainty=None,
         )
 
-    monkeypatch.setattr(t018_module, "load_anchor", mismatched_load_anchor)
+    monkeypatch.setattr(t019_module, "load_anchor", mismatched_load_anchor)
     with pytest.raises(AnchorError, match="load_anchor selected"):
-        t018_module._load_scaffold_value_anchor(
-            "CMS2021:T018:mutau_limit",
+        t019_module._load_scaffold_value_anchor(
+            "ATLAS2023:T019:etau_limit",
             process_id=_PID,
         )
 
@@ -183,57 +190,66 @@ def test_sm_higgs_lfv_rate_is_zero_and_formula_inputs_are_documented():
     assert result.passes is True
 
 
-def test_proxy_numerics_match_core_higgs_lfv_evaluator():
+def test_proxy_numerics_match_core_higgs_lfv_evaluator_and_manual_formula():
     constraint = fcc.get(_PID)
-    y_mu_tau = 2.0e-4 + 1.0e-4j
-    y_tau_mu = 0.5e-4j
-    result = constraint.evaluate(_proxy_point(y_mu_tau, y_tau_mu))
-    core_result = _core_higgs_lfv_result(
-        y_mu_tau, y_tau_mu, constraint=constraint
+    y_e_tau = 2.0e-4 + 1.0e-4j
+    y_tau_e = 0.5e-4j
+    result = constraint.evaluate(_proxy_point(y_e_tau, y_tau_e))
+    core_result = _core_higgs_lfv_result(y_e_tau, y_tau_e, constraint=constraint)
+    manual_width = (
+        constraint.sm_inputs.higgs_mass_gev
+        * (abs(y_e_tau) ** 2 + abs(y_tau_e) ** 2)
+        / (8.0 * math.pi)
     )
-    manual_yukawa_norm_squared = abs(y_mu_tau) ** 2 + abs(y_tau_mu) ** 2
+    manual_yukawa_norm_squared = abs(y_e_tau) ** 2 + abs(y_tau_e) ** 2
     manual_yukawa_norm = math.sqrt(manual_yukawa_norm_squared)
+    manual_br = manual_width / constraint.sm_inputs.total_higgs_width_gev
 
     assert result.predicted == pytest.approx(core_result.branching_fraction)
+    assert result.predicted == pytest.approx(manual_br)
     assert result.ratio == pytest.approx(core_result.ratio_to_limit)
     assert result.passes is core_result.passes
-    assert result.diagnostics["partial_width_gev"] == pytest.approx(
-        core_result.partial_width_gev
-    )
+    assert result.diagnostics["partial_width_gev"] == pytest.approx(manual_width)
     assert result.diagnostics["effective_yukawa_norm"] == pytest.approx(
         core_result.yukawa_norm
     )
     assert result.diagnostics["effective_yukawa_norm"] == pytest.approx(
         manual_yukawa_norm
     )
+    assert result.diagnostics["effective_yukawa_norm"] == pytest.approx(
+        2.29128784747792e-4
+    )
+    assert result.diagnostics["effective_yukawa_norm"] < result.diagnostics[
+        "effective_yukawa_limit"
+    ]
     assert result.diagnostics["effective_yukawa_norm_squared"] == pytest.approx(
         core_result.yukawa_norm_squared
     )
     assert result.diagnostics["effective_yukawa_norm_squared"] == pytest.approx(
         manual_yukawa_norm_squared
     )
-    assert result.diagnostics["y_mu_tau"] == pytest.approx(y_mu_tau)
-    assert result.diagnostics["y_tau_mu"] == pytest.approx(y_tau_mu)
+    assert result.diagnostics["y_e_tau"] == pytest.approx(y_e_tau)
+    assert result.diagnostics["y_tau_e"] == pytest.approx(y_tau_e)
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["higgs_lfv_proxy"][
         "matching_assumption"
     ]
 
 
-def test_matrix_proxy_extracts_mu_tau_entries():
+def test_matrix_proxy_extracts_e_tau_entries():
     matrix = np.zeros((3, 3), dtype=np.complex128)
-    matrix[1, 2] = 1.5e-4 + 0.5e-4j
-    matrix[2, 1] = -0.25e-4j
+    matrix[0, 2] = 1.5e-4 + 0.5e-4j
+    matrix[2, 0] = -0.25e-4j
     point = point_builder.make_point(
         lepton_mass_basis_couplings={
             "higgs_yukawa_matrix": matrix,
-            "source": "T018 matrix proxy",
+            "source": "T019 matrix proxy",
         }
     )
     result = fcc.get(_PID).evaluate(point)
     constraint = fcc.get(_PID)
     core_result = _core_higgs_lfv_result(
-        matrix[1, 2], matrix[2, 1], constraint=constraint
+        matrix[0, 2], matrix[2, 0], constraint=constraint
     )
 
     assert result.predicted == pytest.approx(core_result.branching_fraction)
@@ -246,8 +262,8 @@ def test_matrix_proxy_extracts_mu_tau_entries():
     assert result.diagnostics["effective_yukawa_norm_squared"] == pytest.approx(
         core_result.yukawa_norm_squared
     )
-    assert result.diagnostics["y_mu_tau"] == pytest.approx(matrix[1, 2])
-    assert result.diagnostics["y_tau_mu"] == pytest.approx(matrix[2, 1])
+    assert result.diagnostics["y_e_tau"] == pytest.approx(matrix[0, 2])
+    assert result.diagnostics["y_tau_e"] == pytest.approx(matrix[2, 0])
 
 
 def test_evaluate_without_input_degrades_gracefully():
@@ -268,7 +284,7 @@ def test_evaluate_without_input_degrades_gracefully():
 
 def test_invalid_lepton_input_is_unevaluated_not_real_pass():
     result = fcc.get(_PID).evaluate(
-        point_builder.make_point(lepton_mass_basis_couplings={"left_mutau": 1.0})
+        point_builder.make_point(lepton_mass_basis_couplings={"left_etau": 1.0})
     )
 
     assert result.passes is True
@@ -293,7 +309,7 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     ):
         assert isinstance(value, float)
         assert math.isfinite(value)
-    for key in ("y_mu_tau", "y_tau_mu"):
+    for key in ("y_e_tau", "y_tau_e"):
         assert isinstance(result.diagnostics[key], complex)
     for key in (
         "effective_yukawa_norm",
@@ -327,11 +343,11 @@ def test_safe_point_passes_and_large_np_point_fails(point, expected_pass: bool):
 
 def test_evaluate_is_pure_and_deterministic():
     proxy = higgs_lfv_yukawa_proxy_input(
-        "mu",
+        "e",
         "tau",
         0.15e-3 + 0.01e-3j,
         0.03e-3j,
-        source="T018 test proxy",
+        source="T019 test proxy",
     )
     point = point_builder.make_point(lepton_mass_basis_couplings=proxy)
     constraint = fcc.get(_PID)

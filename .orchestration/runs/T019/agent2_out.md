@@ -1,0 +1,8 @@
+1. SHOULD-FIX: `effective_yukawa_norm` is dimensionally misleading: T019 reports `result.yukawa_norm`, but core stores `|Y_eτ|^2+|Y_τe|^2`, not `sqrt(...)`; e.g. test values give `5.25e-8` vs correct norm `2.291e-4`, with limit `1.278e-3`. Fix value or rename to squared norm. `flavor_catalog_constraints/primary/top_higgs_ew/T019.py:416`, `quarkConstraints/higgs_lfv.py:184`, `quarkConstraints/higgs_lfv.py:226`.
+2. NIT: Check 1 Δm/CP amplitude selector is N/A: this is a Higgs decay BR, not mixing; code correctly uses charge-summed `m_h(|Y_eτ|^2+|Y_τe|^2)/(8πΓ_h)`, no wrong Re/Im `M12` path. `quarkConstraints/higgs_lfv.py:147-186`, `T019.py:386-390`.
+3. NIT: Check 2 QCD running is N/A: no ΔF=2 Wilsons/hadronic `mu_had`; evaluator correctly routes through `higgs_lfv`, not `deltaf2`. `flavor_catalog_constraints/physics_adapters/higgs_lfv.py:134-150`, `T019.py:41-47`.
+4. NIT: Budget is physically right: pure-NP SM=0 bound uses strongest observed ATLAS `BR < 2.0e-3` at 95% CL, not a central residual; CMS `2.2e-3` is weaker. `T019.yaml:126-135`, `T019.py:283-316`.
+5. NIT: Anchors match snapshots: PDG/ATLAS/CMS values `0.20%`, `0.22%`, datasets `138/137 fb^-1`, and older ATLAS `0.47%` agree with local snapshots. `T019.yaml:98-180`, `flavor_catalog/references/T019/pdg2025_higgs_lfv_review.txt:20-23`, `atlas2023_higg201911_arxiv_abs.txt:19-26`.
+6. NIT: HARD severity and NEEDS-HUMAN-PHYSICS proxy flag are appropriate; units are dimensionless BR with `m_h=125.25 GeV`, `Γ_h=4.07e-3 GeV`. `T019.py:340`, `T019.py:444-449`, `quarkConstraints/higgs_lfv.py:51-62`.
+
+PHYSICS-NEEDS-FIXES

@@ -1,13 +1,13 @@
-"""T018 - lepton-flavor-violating ``h -> mu tau`` branching fraction.
+"""T019 - lepton-flavor-violating ``h -> e tau`` branching fraction.
 
 Physics
 -------
 The Standard Model contribution is zero for catalog purposes.  This constraint
 therefore applies a pure-NP HARD upper bound to the charge-summed branching
-fraction ``BR(h -> mu+- tau-+)``.  The rate uses the shared Higgs LFV
+fraction ``BR(h -> e+- tau-+)``.  The rate uses the shared Higgs LFV
 effective-Yukawa convention
 
-    Gamma(h -> mu tau) = m_h (|Y_mu_tau|^2 + |Y_tau_mu|^2) / (8 pi),
+    Gamma(h -> e tau) = m_h (|Y_e_tau|^2 + |Y_tau_e|^2) / (8 pi),
     BR = Gamma / Gamma_h^total.
 
 RS matching status
@@ -16,13 +16,13 @@ NEEDS-HUMAN-PHYSICS.  A rigorous prediction needs the off-diagonal physical
 charged-lepton Higgs-Yukawa matrix after RS Higgs localization, KK-fermion
 mixing, and charged-lepton mass-basis rotation.  That matrix is not present on
 ``ParameterPoint``.  If a caller supplies ``lepton_mass_basis_couplings``, this
-v1 implementation uses a documented effective-Yukawa proxy through the Higgs
-LFV adapter: ``Y_mu_tau`` and ``Y_tau_mu`` are taken directly from the supplied
-proxy or Higgs-Yukawa matrix.
+v1 implementation uses the documented effective-Yukawa proxy built for T018:
+``Y_e_tau`` and ``Y_tau_e`` are taken directly from the supplied proxy or
+Higgs-Yukawa matrix.
 
 Catalog sidecar
 ---------------
-``flavor_catalog/processes/top_higgs_ew/T018.yaml`` is the source of truth for
+``flavor_catalog/processes/top_higgs_ew/T019.yaml`` is the source of truth for
 the 95% CL upper limit and provenance.  The numeric branching-fraction limit is
 parsed from the YAML entry and routed through the scaffold ``load_anchor`` path;
 no experimental number is hardcoded here.
@@ -49,32 +49,34 @@ from flavor_catalog_constraints.registry import register
 
 _FAMILY = "top_higgs_ew"
 _REQUIRED_EXTRA = "lepton_mass_basis_couplings"
-_CMS_LIMIT_VALUE_ID = "CMS2021:T018:mutau_limit"
-_PDG_CMS_LIMIT_VALUE_ID = "PDG2025:T018:cms_run2"
-_PDG_ATLAS_LIMIT_VALUE_ID = "PDG2025:T018:atlas_run2"
-_ATLAS_LIMIT_VALUE_ID = "ATLAS2023:T018:mutau_limit"
-_CMS_DATASET_VALUE_ID = "CMS2021:T018:dataset"
-_ATLAS_DATASET_VALUE_ID = "ATLAS2023:T018:dataset"
-_CMS_2015_YUKAWA_VALUE_ID = "CMS2015:T018:yukawa_limit"
+_PDG_ATLAS_LIMIT_VALUE_ID = "PDG2025:T019:atlas_run2"
+_PDG_CMS_LIMIT_VALUE_ID = "PDG2025:T019:cms_run2"
+_ATLAS_LIMIT_VALUE_ID = "ATLAS2023:T019:etau_limit"
+_ATLAS_DATASET_VALUE_ID = "ATLAS2023:T019:dataset"
+_CMS_LIMIT_VALUE_ID = "CMS2021:T019:etau_limit"
+_CMS_DATASET_VALUE_ID = "CMS2021:T019:dataset"
+_ATLAS_2019_LIMIT_VALUE_ID = "ATLAS2019:T019:etau_limit"
+_ATLAS_2019_DATASET_VALUE_ID = "ATLAS2019:T019:dataset"
+_HKZ_EFT_VALUE_ID = "HarnikKoppZupan2012:T019:LFV_Higgs_EFT_allowance"
 _NUMBER_RE = re.compile(
     r"^\s*<?\s*(?P<number>[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)"
     r"(?:[eE][+-]?[0-9]+)?)\s*(?P<percent>%?)\s*$"
 )
 _UNEVALUATED_REASON = (
-    "no off-diagonal Higgs-Yukawa mu-tau prediction available "
+    "no off-diagonal Higgs-Yukawa e-tau prediction available "
     "(charged-lepton Higgs-Yukawa FCNC not on ParameterPoint)"
 )
 _UNEVALUATED_NOTES = f"NOT EVALUATED - {_UNEVALUATED_REASON}"
 _NEEDS_HUMAN_PHYSICS = (
     "NEEDS-HUMAN-PHYSICS: off-diagonal charged-lepton Higgs Yukawas are not "
-    "on ParameterPoint; this v1 uses a documented effective-Yukawa proxy "
+    "on ParameterPoint; this v1 uses the documented effective-Yukawa proxy "
     "through the shared Higgs LFV module."
 )
 
 
 @dataclass(frozen=True)
 class HiggsLFVLimitEntry:
-    """Typed view over one value entry in the T018 YAML ``values`` list."""
+    """Typed view over one value entry in the T019 YAML ``values`` list."""
 
     value_id: str
     observable: str | None
@@ -89,17 +91,19 @@ class HiggsLFVLimitEntry:
 
 
 @dataclass(frozen=True)
-class T018Anchor:
-    """Typed T018 anchor bundle: CMS budget plus ATLAS/PDG context."""
+class T019Anchor:
+    """Typed T019 anchor bundle: ATLAS budget plus CMS/PDG context."""
 
     experimental: Anchor
-    cms_limit: HiggsLFVLimitEntry
-    pdg_cms_limit: HiggsLFVLimitEntry
-    pdg_atlas_limit: HiggsLFVLimitEntry
     atlas_limit: HiggsLFVLimitEntry
-    cms_dataset: Mapping[str, Any]
+    pdg_atlas_limit: HiggsLFVLimitEntry
+    pdg_cms_limit: HiggsLFVLimitEntry
+    cms_limit: HiggsLFVLimitEntry
+    atlas_2019_limit: HiggsLFVLimitEntry
     atlas_dataset: Mapping[str, Any]
-    cms_2015_yukawa_limit: HiggsLFVLimitEntry
+    cms_dataset: Mapping[str, Any]
+    atlas_2019_dataset: Mapping[str, Any]
+    harnik_kopp_zupan_eft_allowance: Mapping[str, Any]
     effective_yukawa_limit: float
 
     @property
@@ -140,7 +144,7 @@ def _parse_limit_value(
         match = _NUMBER_RE.match(value)
         if match is None:
             raise AnchorError(
-                f"{process_id}: T018 field {field_name!r}={value!r} is not "
+                f"{process_id}: T019 field {field_name!r}={value!r} is not "
                 "a numeric upper-limit string"
             )
         number = float(match.group("number"))
@@ -148,10 +152,10 @@ def _parse_limit_value(
             number /= 100.0
     else:
         raise AnchorError(
-            f"{process_id}: T018 field {field_name!r}={value!r} is not numeric"
+            f"{process_id}: T019 field {field_name!r}={value!r} is not numeric"
         )
     if not math.isfinite(number) or number <= 0.0:
-        raise AnchorError(f"{process_id}: T018 field {field_name!r} must be positive")
+        raise AnchorError(f"{process_id}: T019 field {field_name!r} must be positive")
     return number
 
 
@@ -180,7 +184,7 @@ def _find_value_entry(
             return index, entry
     present = [str(entry.get("value_id")) for entry in _pdg_values(process_id)]
     raise AnchorError(
-        f"{process_id}: value_id {value_id!r} not found in T018 values "
+        f"{process_id}: value_id {value_id!r} not found in T019 values "
         f"(present: {present})"
     )
 
@@ -270,53 +274,57 @@ def _dataset_entry(process_id: str, value_id: str) -> Mapping[str, Any]:
     return dict(entry)
 
 
-def _load_t018_anchor(process_id: str) -> T018Anchor:
+def _load_t019_anchor(process_id: str) -> T019Anchor:
     data = load_full_yaml(process_id, family=_FAMILY)
     pdg = data.get("pdg_or_equivalent")
     if not isinstance(pdg, Mapping):
         raise AnchorError(f"{process_id}: expected pdg_or_equivalent mapping")
     value_summary = _optional_str(pdg.get("value_summary"))
     experimental = _load_scaffold_value_anchor(
-        _CMS_LIMIT_VALUE_ID,
+        _ATLAS_LIMIT_VALUE_ID,
         process_id=process_id,
     )
     if experimental.units != "branching fraction":
         raise AnchorError(
-            f"{process_id}: CMS limit units must be 'branching fraction', "
+            f"{process_id}: ATLAS limit units must be 'branching fraction', "
             f"got {experimental.units!r}"
         )
-    cms = _entry_view(process_id, _CMS_LIMIT_VALUE_ID, value_summary=value_summary)
-    pdg_cms = _entry_view(
-        process_id,
-        _PDG_CMS_LIMIT_VALUE_ID,
-        value_summary=value_summary,
-    )
+    atlas = _entry_view(process_id, _ATLAS_LIMIT_VALUE_ID, value_summary=value_summary)
     pdg_atlas = _entry_view(
         process_id,
         _PDG_ATLAS_LIMIT_VALUE_ID,
         value_summary=value_summary,
     )
-    atlas = _entry_view(process_id, _ATLAS_LIMIT_VALUE_ID, value_summary=value_summary)
-    cms_2015_yukawa = _entry_view(
+    pdg_cms = _entry_view(
         process_id,
-        _CMS_2015_YUKAWA_VALUE_ID,
+        _PDG_CMS_LIMIT_VALUE_ID,
         value_summary=value_summary,
     )
-    if not math.isclose(experimental.value, cms.limit, rel_tol=0.0, abs_tol=0.0):
-        raise AnchorError(f"{process_id}: scaffold anchor and CMS entry disagree")
-    if experimental.value > atlas.limit:
+    cms = _entry_view(process_id, _CMS_LIMIT_VALUE_ID, value_summary=value_summary)
+    atlas_2019 = _entry_view(
+        process_id,
+        _ATLAS_2019_LIMIT_VALUE_ID,
+        value_summary=value_summary,
+    )
+    if not math.isclose(experimental.value, atlas.limit, rel_tol=0.0, abs_tol=0.0):
+        raise AnchorError(f"{process_id}: scaffold anchor and ATLAS entry disagree")
+    if not math.isclose(experimental.value, pdg_atlas.limit, rel_tol=0.0, abs_tol=0.0):
+        raise AnchorError(f"{process_id}: ATLAS entry and PDG ATLAS entry disagree")
+    if experimental.value > cms.limit:
         raise AnchorError(
-            f"{process_id}: selected CMS budget is weaker than ATLAS limit"
+            f"{process_id}: selected ATLAS budget is weaker than CMS limit"
         )
-    return T018Anchor(
+    return T019Anchor(
         experimental=experimental,
-        cms_limit=cms,
-        pdg_cms_limit=pdg_cms,
-        pdg_atlas_limit=pdg_atlas,
         atlas_limit=atlas,
-        cms_dataset=_dataset_entry(process_id, _CMS_DATASET_VALUE_ID),
+        pdg_atlas_limit=pdg_atlas,
+        pdg_cms_limit=pdg_cms,
+        cms_limit=cms,
+        atlas_2019_limit=atlas_2019,
         atlas_dataset=_dataset_entry(process_id, _ATLAS_DATASET_VALUE_ID),
-        cms_2015_yukawa_limit=cms_2015_yukawa,
+        cms_dataset=_dataset_entry(process_id, _CMS_DATASET_VALUE_ID),
+        atlas_2019_dataset=_dataset_entry(process_id, _ATLAS_2019_DATASET_VALUE_ID),
+        harnik_kopp_zupan_eft_allowance=_dataset_entry(process_id, _HKZ_EFT_VALUE_ID),
         effective_yukawa_limit=higgs_lfv_effective_yukawa_limit(
             experimental.value,
             inputs=higgs_lfv_default_inputs(),
@@ -326,17 +334,17 @@ def _load_t018_anchor(process_id: str) -> T018Anchor:
 
 @register
 class Constraint:
-    """Catalogued ``h -> mu tau`` LFV pure-NP branching-fraction constraint."""
+    """Catalogued ``h -> e tau`` LFV pure-NP branching-fraction constraint."""
 
-    process_id = "T018"
+    process_id = "T019"
     severity = Severity.HARD
-    observable = "BR(h -> mu tau)"
+    observable = "BR(h -> e tau)"
 
     def __init__(self) -> None:
-        self.anchor = _load_t018_anchor(self.process_id)
+        self.anchor = _load_t019_anchor(self.process_id)
         self.sm_inputs = higgs_lfv_default_inputs()
         self.sm_result = higgs_lfv_branching_fraction_from_yukawas(
-            initial_flavor="mu",
+            initial_flavor="e",
             final_flavor="tau",
             yukawa_ij=0.0j,
             yukawa_ji=0.0j,
@@ -359,7 +367,7 @@ class Constraint:
                 "evaluated": False,
                 "unevaluated_reason": _UNEVALUATED_REASON,
                 "passes_semantics": (
-                    "non-vetoing only; no BR(h -> mu tau) NP prediction was evaluated"
+                    "non-vetoing only; no BR(h -> e tau) NP prediction was evaluated"
                 ),
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
                 "budget_source": self.anchor.source_url,
@@ -377,7 +385,7 @@ class Constraint:
         try:
             result, proxy = higgs_lfv_branching_fraction_with_proxy(
                 lepton_input,
-                initial_flavor="mu",
+                initial_flavor="e",
                 final_flavor="tau",
                 br_limit=self.anchor.budget,
                 inputs=self.sm_inputs,
@@ -403,21 +411,23 @@ class Constraint:
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
                 "rs_matching_assumption": HIGGS_LFV_RS_PROXY_V1,
                 "higgs_lfv_proxy": dict(proxy.diagnostics),
-                "y_mu_tau": complex(result.yukawa_ij),
-                "y_tau_mu": complex(result.yukawa_ji),
+                "y_e_tau": complex(result.yukawa_ij),
+                "y_tau_e": complex(result.yukawa_ji),
                 "effective_yukawa_norm": float(result.yukawa_norm),
                 "effective_yukawa_norm_squared": float(result.yukawa_norm_squared),
                 "effective_yukawa_limit": float(self.anchor.effective_yukawa_limit),
-                "cms_limit_value_id": self.anchor.cms_limit.value_id,
-                "cms_expected_limit": self.anchor.cms_limit.expected_limit,
-                "pdg_cms_limit": float(self.anchor.pdg_cms_limit.limit),
+                "atlas_limit_value_id": self.anchor.atlas_limit.value_id,
+                "atlas_expected_limit": self.anchor.atlas_limit.expected_limit,
                 "pdg_atlas_limit": float(self.anchor.pdg_atlas_limit.limit),
-                "atlas_limit": float(self.anchor.atlas_limit.limit),
-                "cms_2015_yukawa_limit": float(
-                    self.anchor.cms_2015_yukawa_limit.limit
-                ),
-                "cms_dataset": dict(self.anchor.cms_dataset),
+                "pdg_cms_limit": float(self.anchor.pdg_cms_limit.limit),
+                "cms_limit": float(self.anchor.cms_limit.limit),
+                "atlas_2019_limit": float(self.anchor.atlas_2019_limit.limit),
                 "atlas_dataset": dict(self.anchor.atlas_dataset),
+                "cms_dataset": dict(self.anchor.cms_dataset),
+                "atlas_2019_dataset": dict(self.anchor.atlas_2019_dataset),
+                "harnik_kopp_zupan_eft_allowance": dict(
+                    self.anchor.harnik_kopp_zupan_eft_allowance
+                ),
                 "experimental_block": self.anchor.experimental.block_key,
                 "budget_source": self.anchor.source_url,
             }
@@ -433,7 +443,7 @@ class Constraint:
             ratio=float(result.ratio_to_limit),
             budget=float(result.br_limit),
             notes=(
-                "Pure-NP BR(h -> mu tau) bound using the shared Higgs LFV "
+                "Pure-NP BR(h -> e tau) bound using the shared Higgs LFV "
                 "effective-Yukawa width formula. The off-diagonal Higgs "
                 "Yukawas are documented proxy inputs and are flagged "
                 "NEEDS-HUMAN-PHYSICS."

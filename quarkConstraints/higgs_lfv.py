@@ -111,6 +111,7 @@ class HiggsLFVBranchingResult:
     yukawa_ij: complex
     yukawa_ji: complex
     yukawa_norm: float
+    yukawa_norm_squared: float
     proxy: HiggsLFVYukawaProxy | None = None
     diagnostics: Mapping[str, Any] = field(default_factory=dict)
 
@@ -181,7 +182,8 @@ def h_lfv_branching_fraction_from_yukawas(
         raise ValueError("Higgs LFV decay requires distinct charged leptons")
     y_ij = _finite_complex(yukawa_ij, "yukawa_ij")
     y_ji = _finite_complex(yukawa_ji, "yukawa_ji")
-    norm = float(abs(y_ij) ** 2 + abs(y_ji) ** 2)
+    norm_squared = float(abs(y_ij) ** 2 + abs(y_ji) ** 2)
+    norm = float(math.sqrt(norm_squared))
     width = h_lfv_partial_width(y_ij, y_ji, inputs=p)
     branching_fraction = float(width / p.total_higgs_width_gev)
 
@@ -202,6 +204,7 @@ def h_lfv_branching_fraction_from_yukawas(
         "yukawa_ij": y_ij,
         "yukawa_ji": y_ji,
         "yukawa_norm": norm,
+        "yukawa_norm_squared": norm_squared,
         "partial_width_gev": float(width),
         "fixed_total_width_policy": True,
     }
@@ -224,6 +227,7 @@ def h_lfv_branching_fraction_from_yukawas(
         yukawa_ij=y_ij,
         yukawa_ji=y_ji,
         yukawa_norm=norm,
+        yukawa_norm_squared=norm_squared,
         proxy=proxy,
         diagnostics=diagnostics,
     )
@@ -268,7 +272,10 @@ def h_lfv_yukawa_proxy(
             "final_flavor": final,
             "yukawa_ij": y_ij,
             "yukawa_ji": y_ji,
-            "yukawa_norm": float(abs(y_ij) ** 2 + abs(y_ji) ** 2),
+            "yukawa_norm": float(
+                math.sqrt(abs(y_ij) ** 2 + abs(y_ji) ** 2)
+            ),
+            "yukawa_norm_squared": float(abs(y_ij) ** 2 + abs(y_ji) ** 2),
             "proxy_source": proxy_input.source,
             "matching_assumption": HIGGS_LFV_RS_PROXY_V1,
         },
