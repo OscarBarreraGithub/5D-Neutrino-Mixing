@@ -1,0 +1,27 @@
+Source: SCOAP3/Springer open-access PDF
+URL: https://doi.org/10.1140/epjc/s10052-017-4888-4
+PDF URL: https://scoap3-prod-backend.s3.cern.ch/media/files/20226/10.1140/epjc/s10052-017-4888-4_a.pdf
+Access date: 2026-05-29
+DOI: 10.1140/epjc/s10052-017-4888-4
+Journal: Eur. Phys. J. C (2017) 77:344
+Title: New physics effects in charm meson decays involving c -> u l+ l- transitions
+Authors: Suchismita Sahoo and Rukmani Mohanta
+
+Use in C007:
+  D -> pi form-factor parameterization and inputs used by the local smooth
+  D+ -> pi+ mu+ mu- short-distance proxy:
+
+    f_+(q2) = f_+(0) / [(1 - x)(1 - a x)]
+    f_0(q2) = f_+(0) / [1 - x / b]
+    x = q2 / m_pole^2
+
+  Parameters:
+    f_+(0) = 0.67(3)
+    m_pole = 1.90(8) GeV
+    a = 0.28(14)
+    b = 1.27(17)
+
+  The same article presents the D+ -> pi+ mu+ mu- vector/axial distribution
+  used by the local proxy. The C007 implementation does not apply the
+  low/high-q2 windows from that theory study, the exact LHCb nonresonant
+  dimuon-window acceptance, or long-distance resonance amplitudes.

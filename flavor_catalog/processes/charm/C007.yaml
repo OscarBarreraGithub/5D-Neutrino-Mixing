@@ -76,8 +76,9 @@ source_shas:
   lhcb2013_arxiv1304_6365.txt: "sha256:64daf4ae376043bdac07a5dd86a090c00f9d74464c1e209569075b90c581deee"
   lhcb2021_arxiv2011_00217.txt: "sha256:7e293a7a298eb48a945c4cc77994ef4319ceaf4729f795f9249aa1956a37a9ac"
   pdg2026_dplus_piplus_mumu_pdgLive.txt: "sha256:1bfa609f88a7b60809d98a416abd581d00872547ea851e6eabb4f61c51d94adc"
-  sha256sums.txt: "sha256:9e541dc9d7bdfc6bd4d6b84ac28c5d4cfa2d15632dac9ef01b62b7b9270ebc4a"
-  source_manifest.yaml: "sha256:ffd18526848d65276620ab63706549207d82fec8c97a3659280c3a8e4824a817"
+  sahoo2017_epjc77_344_form_factors.txt: "sha256:3e48f953a5d2487edad51577fcc77a1b3e7f2d83665d53d6e690448e42933e3c"
+  sha256sums.txt: "sha256:86ef246136859e394d5fdc384047ed8d11d6af9388b0b5e158f6e952b1b01875"
+  source_manifest.yaml: "sha256:1fda8248ec3c6c3e2d64da765d8db55d085b89db5082d67b3b19911feb9a4c7f"
 pdg_or_equivalent:
   canonical_current_limit:
     source: "PDG Live/API S031.42"
@@ -152,6 +153,54 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/C007/lhcb2013_arxiv1304_6365.txt"
     sha256_of_text_snapshot: "sha256:64daf4ae376043bdac07a5dd86a090c00f9d74464c1e209569075b90c581deee"
+  dtopi_form_factor_fplus0:
+    source: "Sahoo and Mohanta Eur. Phys. J. C 77 (2017) 344"
+    source_key: "SahooMohanta2017:DToPiMuMuFormFactors"
+    year: 2017
+    observable: "D -> pi f_+(0) form-factor normalization"
+    value: 0.67
+    uncertainty: 0.03
+    units: "dimensionless"
+    source_url: "https://doi.org/10.1140/epjc/s10052-017-4888-4"
+    access_date: "2026-05-29"
+    snapshot_path: "flavor_catalog/references/C007/sahoo2017_epjc77_344_form_factors.txt"
+    sha256_of_text_snapshot: "sha256:3e48f953a5d2487edad51577fcc77a1b3e7f2d83665d53d6e690448e42933e3c"
+  dtopi_form_factor_pole_mass:
+    source: "Sahoo and Mohanta Eur. Phys. J. C 77 (2017) 344"
+    source_key: "SahooMohanta2017:DToPiMuMuFormFactors"
+    year: 2017
+    observable: "D -> pi f_+(q2), f_0(q2) pole mass m_pole"
+    value: 1.90
+    uncertainty: 0.08
+    units: "GeV"
+    source_url: "https://doi.org/10.1140/epjc/s10052-017-4888-4"
+    access_date: "2026-05-29"
+    snapshot_path: "flavor_catalog/references/C007/sahoo2017_epjc77_344_form_factors.txt"
+    sha256_of_text_snapshot: "sha256:3e48f953a5d2487edad51577fcc77a1b3e7f2d83665d53d6e690448e42933e3c"
+  dtopi_form_factor_fplus_shape_a:
+    source: "Sahoo and Mohanta Eur. Phys. J. C 77 (2017) 344"
+    source_key: "SahooMohanta2017:DToPiMuMuFormFactors"
+    year: 2017
+    observable: "D -> pi f_+(q2) BK-shape parameter a"
+    value: 0.28
+    uncertainty: 0.14
+    units: "dimensionless"
+    source_url: "https://doi.org/10.1140/epjc/s10052-017-4888-4"
+    access_date: "2026-05-29"
+    snapshot_path: "flavor_catalog/references/C007/sahoo2017_epjc77_344_form_factors.txt"
+    sha256_of_text_snapshot: "sha256:3e48f953a5d2487edad51577fcc77a1b3e7f2d83665d53d6e690448e42933e3c"
+  dtopi_form_factor_fzero_shape_b:
+    source: "Sahoo and Mohanta Eur. Phys. J. C 77 (2017) 344"
+    source_key: "SahooMohanta2017:DToPiMuMuFormFactors"
+    year: 2017
+    observable: "D -> pi f_0(q2) BK-shape parameter b"
+    value: 1.27
+    uncertainty: 0.17
+    units: "dimensionless"
+    source_url: "https://doi.org/10.1140/epjc/s10052-017-4888-4"
+    access_date: "2026-05-29"
+    snapshot_path: "flavor_catalog/references/C007/sahoo2017_epjc77_344_form_factors.txt"
+    sha256_of_text_snapshot: "sha256:3e48f953a5d2487edad51577fcc77a1b3e7f2d83665d53d6e690448e42933e3c"
   theory_context:
     source: "de Boer and Hiller 2015"
     source_key: "DeBoerHiller2015:RareCharmLeptons"

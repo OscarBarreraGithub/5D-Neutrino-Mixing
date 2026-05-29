@@ -47,6 +47,17 @@ references:
     snapshot_path: "flavor_catalog/references/C007/deboer_hiller2015_arxiv1510_00311.txt"
     sha256_of_local_snapshot: "sha256:52cda0c2388f717bd54329d6c7dc2251b637ac56ae115712b0a8f1764a457792"
     notes: "Post-2008 theory context for D_(s) -> P l+ l- rare charm Wilson-coefficient and resonance interpretation."
+  - key: SahooMohanta2017:DToPiMuMuFormFactors
+    arxiv_id: null
+    DOI: "10.1140/epjc/s10052-017-4888-4"
+    title: "New physics effects in charm meson decays involving c -> u l+ l- transitions"
+    authors: "Suchismita Sahoo and Rukmani Mohanta"
+    year: 2017
+    url: "https://doi.org/10.1140/epjc/s10052-017-4888-4"
+    access_date: "2026-05-29"
+    snapshot_path: "flavor_catalog/references/C007/sahoo2017_epjc77_344_form_factors.txt"
+    sha256_of_local_snapshot: "sha256:3e48f953a5d2487edad51577fcc77a1b3e7f2d83665d53d6e690448e42933e3c"
+    notes: "D -> pi f_+(q2), f_0(q2) shape and normalization inputs used by the C007 smooth full-q2 proxy; no LHCb window acceptance is applied from this source."
   - key: CsakiFalkowskiWeiler2008:CompositeFlavor
     arxiv_id: "0804.1954"
     DOI: "10.1088/1126-6708/2008/09/008"

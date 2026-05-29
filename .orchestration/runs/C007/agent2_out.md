@@ -1,0 +1,9 @@
+1. SHOULD-FIX: The HARD verdict compares a smooth full-`q2` integral to the C007 limit while diagnostics call it the constrained “short-distance window.” The core integrates `q2 = 4 m_mu^2` to `(m_D-m_pi)^2`, i.e. about `0.0447..2.993 GeV^2`, with no resonance-window mask; the source says resonance/away-from-resonance treatment matters. Correct physics: use the LHCb nonresonant dimuon windows/acceptance, or label the verdict as a full-`q2` proxy only. `quarkConstraints/rare_charm_semileptonic.py:185`, `quarkConstraints/rare_charm_semileptonic.py:277`, `flavor_catalog_constraints/primary/charm/C007.py:465`; refs `lhcb2013_arxiv1304_6365.txt:27`.
+
+2. SHOULD-FIX: The exclusive `D -> pi` form-factor inputs are hardcoded and not anchored in the C007 YAML/snapshots. Correct physics provenance should snapshot/source `f_+(0)=0.67(3)`, `m_pole=1.90(8) GeV`, `a=0.28(14)`, `b=1.27(17)`; `f_+(0)` alone gives about `2*0.03/0.67 = 9%` BR normalization uncertainty. `quarkConstraints/rare_charm_semileptonic.py:67`.
+
+3. NIT: Delta-F=2 amplitude/running checks are N/A for C007. The code does not use `M12`, so there is no wrong Re/Im choice, and no `*_with_running` Delta-F=2 path is expected for this semileptonic BR. The implemented rate uses `|C9+C9'|^2` and `|C10+C10'|^2`, which is the right pseudoscalar-to-pseudoscalar combination. `quarkConstraints/rare_charm_semileptonic.py:330`, `quarkConstraints/rare_charm_semileptonic.py:242`.
+
+4. NIT: Anchor spot-check passes: YAML/code use `6.7e-8` at 90% CL as budget, companion `7.4e-8` at 95% CL, previous `7.3e-8`/`8.3e-8`, and SM SD scale `1e-12`. Units are branching fractions, not GeV. `flavor_catalog/processes/charm/C007.yaml:82`, `flavor_catalog_constraints/primary/charm/C007.py:169`.
+
+PHYSICS-NEEDS-FIXES

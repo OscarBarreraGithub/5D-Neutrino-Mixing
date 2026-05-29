@@ -1,0 +1,2 @@
+# Implement C007 — BR(D⁺→π⁺μ⁺μ⁻). family=charm. REUSE rare_charm_dilepton.
+REUSE the c→uℓℓ machinery (built for C004) for the SEMILEPTONIC D+→π+μμ mode (add the exclusive D→π form-factor normalization, append-only; do not modify C004/C005 leptonic functions). LD-dominated (resonances) — the SHORT-distance window is the constrained part; document. RS proxy reused → NEEDS-HUMAN-PHYSICS. Budget from C007.yaml, HARD.
