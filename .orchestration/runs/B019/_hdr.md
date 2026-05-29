@@ -1,0 +1,2 @@
+# Implement B019 — R_K* (LFU ratio Γ(B→K*μμ)/Γ(B→K*ee)). family=beauty. REUSE rare_b_dilepton.
+analog of B018 (R_K) for the VECTOR K* mode: reuse the exclusive B→K*ℓℓ machinery (B016/B017 if K* form factors present; else add the K* form-factor normalization append-only). R_K* = BR(B→K*μμ)/BR(B→K*ee); SM≈1 (QED caveat). NP via lepton-non-universal C9/C10 proxy. Validate SM R_K*≈1 vs B019.yaml. RS proxy NEEDS-HUMAN-PHYSICS. Budget from B019.yaml, HARD. Append-only.
