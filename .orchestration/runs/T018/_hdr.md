@@ -1,0 +1,2 @@
+# Implement T018 — BR(h→μτ) LFV. family=top_higgs_ew. PIONEER: new higgs_lfv module.
+BUILD quarkConstraints/higgs_lfv.py (Higgs LFV decay h→ℓℓ' from an off-diagonal Higgs-Yukawa coupling: BR = Γ(h→μτ)/Γ_h^total with Γ ∝ (|Y_μτ|²+|Y_τμ|²) m_h /8π). Wrap via new adapter. SM=0 (LFV) → pure-NP bound vs the CMS/ATLAS limit (from T018.yaml), HARD. The off-diagonal Higgs-Yukawa is a documented RS proxy NEEDS-HUMAN-PHYSICS (RS Higgs-Yukawa FCNC not on ParameterPoint). Reusable by T019 (h→eτ), T020 (h→eμ).
