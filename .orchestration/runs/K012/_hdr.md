@@ -1,0 +1,2 @@
+# Implement K012 — BR(K_S→μ⁺μ⁻). family=kaon. REUSE rare_kaon_dilepton.
+REUSE the s→dℓℓ machinery (K006). K_S→μμ short-distance piece is the constrained NP part (LD-dominated total); analogous to K006 K_L→μμ but K_S. Reuse the SD evaluator (muon). Append-only (don't modify K006/K008/K009/K010 funcs). RS proxy NEEDS-HUMAN-PHYSICS. HARD vs K012.yaml limit. Validate SM SD if in yaml.

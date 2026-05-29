@@ -1,0 +1,6 @@
+You are agent1 fixing K012 (K_S→μ⁺μ⁻) + its module. Physics review .orchestration/runs/K012/agent2_out.md = PHYSICS-NEEDS-FIXES (2 BLOCKERS); code OK. Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX (BLOCKERS — real physics error):
+1. The K_S short-distance (ℓ=0) CP projection is WRONG: the code lifetime-rescales the K_L SD using the K_L REAL amplitude. The K_S ℓ=0 SD piece is IMAGINARY-sensitive: BR_SD(K_S→μμ)_{ℓ=0} ∝ Im[ -λ_c Y_c + λ_t C10 ]² (extracts |V_ts V_td sin(β+β_s)|), NOT Re()². Implement the correct Im-based K_S SD projection (ref arXiv:2104.06427). The SM SD with the Im amplitude is ~1.86e-13 (the YAML 5e-12 is TOTAL-SM context, not SD — don't validate SD against it; document this).
+2. Fix the SM sanity check accordingly (expect ~1.86e-13 SD, not 1.44e-12).
+3. Fix the tests: the independent recomputation must use the IMAGINARY combination (not (λ_t y_t).real / λ_c.real); a purely-REAL NP coupling should NOT fail K012 (the CPV K_S SD piece is Im-sensitive). Add a test asserting a real-only NP coupling gives ~SM (doesn't spuriously exclude).
+Keep RS proxy NEEDS-HUMAN-PHYSICS. Append-only to the module (don't modify K006/K008/K009/K010 funcs). Run tests/constraints/ -q green. OUTPUT <=12 lines: the corrected Im formula, SM SD number, real-coupling test result, pytest counts.
