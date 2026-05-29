@@ -1,0 +1,2 @@
+# Implement CR003 — collider resonance/VLQ mode (per CR003.yaml). family=collider_rs. REUSE collider_resonance.
+REUSE quarkConstraints/collider_resonance.py (mass-vs-limit recast). Read CR003.yaml for the specific channel (KK resonance or VLQ); compare the predicted mass to the exclusion limit (HARD). σ×BR recast = documented proxy NEEDS-HUMAN-PHYSICS. Append-only (don't modify CR001/CR002 funcs).
