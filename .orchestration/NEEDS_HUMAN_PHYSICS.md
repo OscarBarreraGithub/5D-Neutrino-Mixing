@@ -55,3 +55,15 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
 - **Needs human input:** no grounded SM long-distance charm phase / Γ₁₂; CP-phase verdict omits SM-side
   long-distance contribution (charm is theoretically dirty).
 - **Trail:** `.orchestration/runs/C002/`.
+
+### B004 — φ_s (B_s→J/ψφ)   [committed @ 6034c96]
+- **Needs human input:** SM φ_s = −2β_s taken from B004.yaml — no CKM-phase computation in the core.
+
+### EW002 — CKM first-row unitarity   [committed @ d640d2e]
+- **Needs human input:** RS charged-current / G_F matching not on ParameterPoint; only the SM-vs-data tension is rigorous (NP shift = 0).
+
+### EW003 — |V_cb|/|V_ub| incl-vs-excl   [committed @ 4947894]
+- **Needs human input:** charged-current EW/WET RS matching absent; rigorous part is the data/theory pull only.
+
+### L001 — μ→eγ   [committed @ 99063a2]
+- **Needs human input:** lepton-sector RS dipole couplings not on the quark-only ParameterPoint → dipole coefficient is a documented proxy; missing-input case returns explicitly `evaluated=False` (not a pass).

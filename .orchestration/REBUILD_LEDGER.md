@@ -58,8 +58,12 @@ orchestrator context resets. Updated after every per-constraint gate.
 | B002 | S_ψKs/sin2β | ✅ | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 80d4224 |
 | C002 | charm CPV | ✅ | fixed (budget) | fixed | ✅ APPROVE | ✅ b85f482 |
 | K005 | K_L→π⁰νν̄ | ✅ built | PHYSICS-OK | fixed | ✅ APPROVE | ✅ ed736c3 |
+| B004 | φ_s (Bs) | ✅ | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 6034c96 |
+| EW002 | CKM 1st-row | ✅ built | PHYSICS-OK | fixed | ✅ APPROVE | ✅ d640d2e |
+| EW003 | \|Vcb\|/\|Vub\| | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 4947894 |
+| L001 | μ→eγ | ✅ | fixed (semantics) | CODE-OK | ✅ APPROVE | ✅ 99063a2 |
 
-**Done: 9 / ~102.** K004/K005 = machinery-building (RS-NP proxy flagged). B002/C002 = CP-phase reuse of ΔF=2 M₁₂ (SM-phase input flagged). All NEEDS-HUMAN items tracked in NEEDS_HUMAN_PHYSICS.md.
+**Done: 13 / ~102.** Wave-3 = reuse/data-driven (B004 Bs phase, EW002/EW003 CKM data, L001 μ→eγ dipole). New adapters: ckm_unitarity, semileptonic_ckm, lepton. EW002/EW003 are SOFT (SM-vs-data tension). K004/K005 = machinery-building (RS-NP proxy flagged). B002/C002 = CP-phase reuse of ΔF=2 M₁₂ (SM-phase input flagged). All NEEDS-HUMAN items tracked in NEEDS_HUMAN_PHYSICS.md.
 Reviewer template (_agent3_common.md) hardened: isolation judged by what a constraint ADDS (shared worktree is dirty by design in parallel waves); cross-check must be independent of the adapter under test. Adapter wrappers: fd2f46a. Wave-1 reconciliation PASS (no clobber, suite green).
 Per-constraint audit trail (plans, reviews, fixes, verdicts) committed under `.orchestration/runs/<ID>/`.
 
