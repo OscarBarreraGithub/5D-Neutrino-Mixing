@@ -1,0 +1,7 @@
+1. SHOULD-FIX: Budget is a bare central phase, not uncertainty-aware: `B034.py:428-432` sets room = `|phi_s| = 0.074 rad`, and `test_B034.py:100-102` pins it; YAML has `sigma = 0.069 rad` at `B034.yaml:85-89`. Correct stub should use no veto budget or an uncertainty scale; current ratio is forced to 1.0.
+2. NIT: Amplitude verdict OK: no `|M12|`, real part, or fake CP amplitude is used; `predicted=None`, `sm_prediction=None` at `B034.py:459-467`, with no mixing reuse at `B034.py:483-489`.
+3. NIT: QCD-running verdict OK for a hard stub: B034 calls no DeltaF2 non-running path and no `*_with_running` path; missing DeltaB=1 RG is explicitly flagged at `charmless_b_phiphi.py:43-47` and `83-87`. Running effect is not quantifiable without faking the penguin calculation.
+4. NIT: Anchors OK: `phi_s=-0.074±0.069 rad`, `|lambda|=1.009±0.030` match YAML/snapshots (`B034.yaml:85-94`, `pdg2025...txt:12-13`, `lhcb2023...txt:23-25`); `beta_s=(3.7±3.5)e-2 rad` converts to `phi_s=-0.074±0.070`.
+5. NIT: Severity/units OK: `Severity.INFO` at `B034.py:449-450` is non-vetoing per `base.py:63-65`; phase units are rad/10^-2 rad and lambda dimensionless. Doc wording at `B034.tex:68` should avoid implying this is a hard constraint.
+
+PHYSICS-NEEDS-FIXES

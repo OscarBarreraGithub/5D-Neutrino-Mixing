@@ -1,0 +1,2 @@
+# Implement B034 — φ_s^sss (Bs→φφ penguin CP). family=beauty. HARD STUB (dual NEEDS-HUMAN).
+Bs→φφ is a pure b→sss penguin mode; the CP phase φ_s^sss is hadronic-penguin-polluted (QCDF/SCET) and not first-principles, with RS ΔB=1 penguin NP. Honest STUB like B033: load the measured φ_s^sss (HFLAV/LHCb) from B034.yaml, record it, NON-VETOING (INFO/SOFT). Flag NEEDS-HUMAN-PHYSICS on the SM hadronic-penguin side AND RS penguin side. No faked penguin calc. New small adapter (or reuse the B033 penguin-stub adapter pattern). Document.
