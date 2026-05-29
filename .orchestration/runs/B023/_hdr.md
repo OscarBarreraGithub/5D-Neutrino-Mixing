@@ -1,0 +1,2 @@
+# Implement B023 — BR(B→K*νν̄). family=beauty. REUSE the shared b→sνν̄ module.
+REUSE quarkConstraints/rare_b_nunu.py + physics_adapters/rare_b_nunu.py (built for B022; it already exposes K* coefficients r_kstar/epsilon/eta). B→K*νν̄ uses the K* (vector) coefficients; SM BR(B→K*νν)~9.0e-6 — validate. Same Z-like RS proxy → NEEDS-HUMAN-PHYSICS. Budget from B023.yaml (Belle II limit vs SM), HARD. Reuse the existing K* machinery; if any small addition is needed keep it append-only and do not modify B022's K+ functions.
