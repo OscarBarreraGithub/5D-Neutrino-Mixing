@@ -1,0 +1,2 @@
+# Implement B025 — R_D = Γ(B→Dτν)/Γ(B→Dℓν). family=beauty. PIONEER: new semileptonic_lfu module.
+BUILD quarkConstraints/semileptonic_lfu.py (charged-current LFU ratio R_D; SM R_D≈0.298 from HFLAV/lattice). Wrap via new adapter. SM from B025.yaml — validate. RS NP = documented charged-current proxy (W'/charged-Higgs/leptoquark-like, ∝ m_b m_τ/M_KK²) → NEEDS-HUMAN-PHYSICS. Budget from B025.yaml (HFLAV measured vs SM), HARD. Reusable by B026 (R_D*).
