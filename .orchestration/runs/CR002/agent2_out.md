@@ -1,0 +1,8 @@
+1. NIT — ΔF=2 amplitude check is N/A: CR002 is a collider mass lower bound, not a Δm/CP observable; no `M_12` path is used. Code routes through collider adapter, not `deltaf2`: `flavor_catalog_constraints/primary/collider_rs/CR002.py:45`, `:416-417`.
+2. NIT — QCD running-to-2 GeV check is N/A: this constraint has no Wilson coefficients or hadronic matrix elements, so no `*_with_running` evaluator is physically relevant. It uses `evaluate_resonance_limit`: `quarkConstraints/collider_resonance.py:144-204`.
+3. NIT — Budget is defensible: active bound is `m(t'(5/3)) > 1460 GeV = 1.46 TeV` at 95% CL from CR002 yaml/snapshot; code converts GeV to TeV and applies `m_limit/m_VLQ`. See `CR002.yaml:86-109`, `CR002.py:115-120`, `:332-339`, `collider_resonance.py:166-168`.
+4. NIT — Anchor spot-checks match: PDG `>1460`, CMS `1.33/1.30 TeV`, ATLAS pair-only `1.19 TeV`, pair+single `1.6 TeV` match snapshots. See `pdg_encoder_q009_tprime_5over3_2026.txt:10-20`, `:35-38`, `cms_2019_arxiv1810_03188.txt:27-30`, `atlas_2018_arxiv1807_11883.txt:23-28`.
+5. NIT — Observable wording is slightly misleading: `m(T_5/3 pair -> tW tW)` can read as a pair invariant mass, but the physics/code use the single VLQ mass lower bound. Prefer `m(T_5/3)` / `m(X_5/3)`. `CR002.py:366`, `test_CR002.py:53`.
+6. NIT — Diagnostic key `sigma_times_br_proxy_pb` is always `None` in this mass-only proxy; correct physics is no σ×BR recast is computed, only `m_VLQ = M_KK` with NEEDS-HUMAN-PHYSICS. `CR002.py:416-442`, `physics_adapters/collider_resonance.py:90-96`.
+
+PHYSICS-OK

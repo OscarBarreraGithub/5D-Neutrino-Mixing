@@ -85,3 +85,61 @@ def evaluate_collider_resonance_limit(
     """Compare a resonance prediction to an experimental limit."""
 
     return _evaluate_resonance_limit(prediction, limit)
+
+
+VLQ_PAIR_MASS_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: vector-like-quark pair-production recast v1 uses "
+    "m_VLQ = M_KK as a KK-fermion mass proxy and compares it to the "
+    "catalogued benchmark mass lower limit. It does not compute "
+    "sigma(pp->VLQ VLQ)*BR(VLQ->tW)^2, widths, branching-ratio mixtures, "
+    "acceptance, or the experiment's mass-dependent limit curve."
+)
+
+
+def resolve_vlq_mkk_gev(*, couplings: Any = None) -> tuple[float | None, str | None]:
+    """Resolve the KK-fermion proxy mass in GeV from declared point extras.
+
+    The current scan point carries the common ``M_KK`` scale on the quark
+    mass-basis couplings object.  CR002 interprets that scale as the
+    vector-like-quark mass proxy and flags the matching as
+    ``NEEDS-HUMAN-PHYSICS`` at the constraint result.
+    """
+
+    if couplings is not None:
+        return float(_mass_from_source_gev(couplings)), "quark_mass_basis_couplings.M_KK"
+    return None, None
+
+
+def vlq_pair_prediction_from_m_kk_gev(
+    m_kk_gev: float,
+    *,
+    resonance: str = "T_5/3 pair",
+    final_state: str = "tW tW",
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented v1 VLQ pair-production mass-proxy prediction."""
+
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=_kk_mass_tev_from_m_kk_gev(m_kk_gev),
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=VLQ_PAIR_MASS_PROXY_ASSUMPTION_V1,
+        diagnostics={
+            "m_kk_gev": float(m_kk_gev),
+            "m_vlq_proxy_gev": float(m_kk_gev),
+            "mass_proxy": "m_VLQ = M_KK",
+            "sigma_times_br_proxy_available": sigma_times_br is not None,
+        },
+    )
+
+
+__all__.extend(
+    [
+        "VLQ_PAIR_MASS_PROXY_ASSUMPTION_V1",
+        "resolve_vlq_mkk_gev",
+        "vlq_pair_prediction_from_m_kk_gev",
+    ]
+)

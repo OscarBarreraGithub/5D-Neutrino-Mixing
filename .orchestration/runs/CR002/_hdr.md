@@ -1,0 +1,2 @@
+# Implement CR002 — vector-like quark (T_5/3 or similar) pair production. family=collider_rs. REUSE collider_resonance.
+REUSE quarkConstraints/collider_resonance.py (mass-vs-limit recast, built for CR001). CR002: VLQ mass vs the ATLAS/CMS pair-production exclusion (from CR002.yaml). The VLQ mass relates to M_KK (KK fermion); recast σ×BR = documented proxy NEEDS-HUMAN-PHYSICS. HARD (mass exclusion). Append-only if any addition. Reusable by other CR VLQ modes.
