@@ -1,0 +1,9 @@
+1. NIT: Amplitude check is N/A for T003: no Δm/CP/M12 observable; active rate uses Γ(t→qγ)=0.5 α_em m_t (|λ_L|²+|λ_R|²), called at `flavor_catalog_constraints/primary/top_higgs_ew/T003.py:411`; correct dipole magnitude treatment in `quarkConstraints/top_fcnc.py:215`.
+2. NIT: QCD running is N/A: this is a top two-body decay, not ΔF=2 hadronic mixing; mu_had=2 GeV running would be physics-wrong. Verdict path is top_fcnc γ-dipole, not deltaf2, at `T003.py:50` and `T003.py:411`.
+3. NIT: Budget OK: active CMS charm-separated limit is BR(t→cγ)<1.51e-5 from `flavor_catalog/processes/top_higgs_ew/T003.yaml:130`; code uses pure-NP `predicted_np/budget` at `T003.py:418`. SM 4.6e-14 gives SM/limit=3.05e-9.
+4. NIT: Budget is defensible and not a bare central residual; collider upper-limit treatment is NP BR ≤ observed limit. PDG generic 9.5e-6 is not charm-separated per `flavor_catalog/references/T003/pdg_2026_top_gammaq_summary.txt:19`, so CMS choice is defensible though looser by 1.59x.
+5. NIT: Anchor spot-check OK: CMS 1.51e-5/1.54e-5 at `cms_2024_top21013_tqgamma.txt:25`, ATLAS 4.2e-5/4.5e-5 at `atlas_2023_2205_02537_tqgamma.txt:26`, SM 4.6e-14 and 0.428 λ² at `aguilar_saavedra_hepph0409342_tcgamma_sm.txt:22`.
+6. NIT: Severity/units/diagnostics OK: HARD at `T003.py:379`; BR dimensionless and partial width in GeV via `quarkConstraints/top_fcnc.py:74`; NEEDS-HUMAN-PHYSICS is surfaced at `T003.py:449`.
+7. NIT: Active normalization is 0.478792*(|λ_L|²+|λ_R|²) with current inputs, while YAML’s 0.428 λ² is paper-era context at `T003.py:429`; not an active-limit error, but do not interpret that diagnostic as the live coefficient.
+
+PHYSICS-OK
