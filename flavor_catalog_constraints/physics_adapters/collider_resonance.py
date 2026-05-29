@@ -376,3 +376,77 @@ __all__.extend(
         "kk_charged_current_prediction_from_m_kk_gev",
     ]
 )
+
+
+DY_CONTACT_OPERATOR_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: high-mass Drell-Yan contact-operator recast v1 "
+    "uses the supplied kk_ew_mass_gev, kk_gluon_mass_gev, or M_KK as a "
+    "Lambda_RS contact-scale proxy and compares it to the catalogued llqq "
+    "contact-interaction lower limit. It does not compute "
+    "4*pi/Lambda^2 ~= |g_q g_l|/M_V^2, helicity currents, interference sign, "
+    "light-quark and charged-lepton couplings, total widths, EFT validity, "
+    "PDF/electroweak systematics, or a binned high-mass dilepton likelihood."
+)
+
+
+def resolve_dy_contact_scale_gev(
+    *,
+    ew_mass_extra: Any = None,
+    gluon_mass_extra: Any = None,
+    couplings: Any = None,
+) -> tuple[float | None, str | None]:
+    """Resolve the CR009 ``Lambda_RS`` contact-scale proxy in GeV.
+
+    The neutral electroweak KK mass is the closest declared scale for a
+    dilepton contact operator.  If it is absent, the explicit KK-gluon scale
+    or the common quark-sector ``M_KK`` are used only as documented RS scale
+    proxies and are flagged by the CR009 result.
+    """
+
+    if ew_mass_extra is not None:
+        mass = float(ew_mass_extra)
+        _kk_mass_tev_from_m_kk_gev(mass)
+        return mass, "kk_ew_mass_gev"
+    if gluon_mass_extra is not None:
+        mass = float(gluon_mass_extra)
+        _kk_mass_tev_from_m_kk_gev(mass)
+        return mass, "kk_gluon_mass_gev"
+    if couplings is not None:
+        return float(_mass_from_source_gev(couplings)), "quark_mass_basis_couplings.M_KK"
+    return None, None
+
+
+def dy_contact_prediction_from_scale_gev(
+    lambda_proxy_gev: float,
+    *,
+    resonance: str = "llqq contact operator",
+    final_state: str = "ee + mumu high-mass tail",
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented CR009 contact-scale lower-bound proxy."""
+
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=_kk_mass_tev_from_m_kk_gev(lambda_proxy_gev),
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=DY_CONTACT_OPERATOR_PROXY_ASSUMPTION_V1,
+        diagnostics={
+            "lambda_rs_proxy_gev": float(lambda_proxy_gev),
+            "contact_scale_proxy": (
+                "Lambda_RS = kk_ew_mass_gev, kk_gluon_mass_gev, or M_KK"
+            ),
+            "sigma_or_eft_proxy_available": sigma_times_br is not None,
+        },
+    )
+
+
+__all__.extend(
+    [
+        "DY_CONTACT_OPERATOR_PROXY_ASSUMPTION_V1",
+        "resolve_dy_contact_scale_gev",
+        "dy_contact_prediction_from_scale_gev",
+    ]
+)

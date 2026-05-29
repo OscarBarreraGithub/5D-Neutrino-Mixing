@@ -1,0 +1,11 @@
+1. NIT: Amplitude check N/A and correct: CR009 is a collider contact-scale bound, not a Δm/CP observable; no `M_12`, real/imaginary-part, or Delta F=2 path is used in [CR009.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/collider_rs/CR009.py:406).
+
+2. NIT: QCD-running check N/A and correct: no hadronic Wilson evolution is physically relevant for high-mass DY; CR009 uses `resolve_dy_contact_scale_gev` and `evaluate_collider_resonance_limit`, not non-running Delta F=2 evaluators, at [CR009.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/collider_rs/CR009.py:408) and [CR009.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/collider_rs/CR009.py:469). Running effect: N/A.
+
+3. SHOULD-FIX: Active HARD budget is too tight for an unmatched generic RS point: code takes `max(limits)` = CMS RR constructive `36.4 TeV` at [CR009.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/collider_rs/CR009.py:340), but YAML/snapshot list model-dependent helicity/sign limits `23.9-36.4 TeV`; without RS llqq helicity/interference matching, use a declared benchmark or conservative floor `23.9 TeV`.
+
+4. NIT: Anchor numbers and units match the catalog snapshots: ATLAS `35.8,26.0,35.5,26.5,32.5,28.8 TeV`; CMS `23.9-36.4 TeV` in [CR009.yaml](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog/processes/collider_rs/CR009.yaml:99) and [pdg2025_compositeness_extract.txt](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog/references/CR009/pdg2025_compositeness_extract.txt:21).
+
+5. NIT: Units/ratio mechanics are internally consistent: GeV input is converted to TeV and compared as `Lambda_limit/Lambda_proxy`; e.g. `36.0 TeV` fails vs `36.4 TeV`, `36.4 TeV` passes at ratio `1.0`. Proxy status is clearly marked `NEEDS-HUMAN-PHYSICS` in [collider_resonance.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/physics_adapters/collider_resonance.py:381).
+
+PHYSICS-NEEDS-FIXES
