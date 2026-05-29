@@ -1,0 +1,7 @@
+1. NIT: ΔF=2 amplitude/CP checks are N/A: L023 is a trident ratio, not an \(M_{12}\) observable; code uses `sigma_ratio`, not `abs(M12)`/`Im(M12)` (`L023.py:574-588`, `neutrino_trident.py:185-206`).
+2. NIT: QCD running check is N/A and correctly absent: L023 imports/calls `neutrino_trident`, not `physics_adapters.deltaf2` or any non-running ΔF=2 path (`L023.py:51-55`, `L023.py:574-577`).
+3. NIT: Heavy-mediator response is physically consistent: `C_V_SM=1+4sW2`, `C_A_SM=1`, and \((C_V^2+C_A^2)/(C_{V,SM}^2+C_{A,SM}^2)\) match the standard heavy-\(Z'\) trident approximation; `2*v^2*g_nu*g_V/M^2` matches the \(L_\mu-L_\tau\) limit (`neutrino_trident.py:166-170`, `200-206`; source: https://arxiv.org/abs/1406.2332).
+4. NIT: Budget is uncertainty-aware, not a bare central residual: CCFR \(0.82\pm0.28\), 95% two-sided Gaussian \(z=1.95996\) gives budget \(0.5487899\) and band `[0.27121, 1.36879]`; SM ratio 1.0 is inside (`L023.yaml:115-119`, `153-160`; `L023.py:413-435`).
+5. NIT: Anchors match snapshots/catalog: CHARM-II `1.58±0.64`, CCFR `0.82±0.28`, NuTeV `0.72+1.73-0.72`, CCFR counts `37.0±12.4` vs `45.3±2.3` (`L023.yaml:97-152`; snapshots `ccfr1991_prl_snapshot.txt:13-19`, `dune2019_tridents_arxiv.txt:12-15`).
+6. NIT: Severity/proxy wording is acceptable: evaluated explicit proxy is HARD, while missing/invalid RS trident inputs return non-vetoing `evaluated=False`; proxy is clearly marked NEEDS-HUMAN-PHYSICS (`L023.py:14-19`, `495`, `538-562`, `606-620`).
+PHYSICS-OK

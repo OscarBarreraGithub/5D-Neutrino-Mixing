@@ -1,0 +1,2 @@
+# Implement L023 — neutrino trident production (νμ → νμ μ+μ-). family=charged_lepton. PIONEER (small) or proxy.
+Neutrino trident production cross-section ratio σ/σ_SM constrains new neutral-current contributions (RS Z' / KK Z to the ννμμ vertex). SM is well-predicted; the measured σ/σ_SM (CCFR/CHARM-II) from L023.yaml. The RS NP enters via a Z'-like correction to the ννμμ coupling — NOT on ParameterPoint → documented proxy NEEDS-HUMAN-PHYSICS. Build a small adapter; compare predicted σ/σ_SM to the measurement (HARD or SOFT per the catalog). Document the proxy.
