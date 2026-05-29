@@ -75,7 +75,13 @@ orchestrator context resets. Updated after every per-constraint gate.
 | T001 | t→cZ | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 72a22e4 |
 | B016 | B⁺→K⁺μμ | ✅ ext | fixed (3) | CODE-OK | ✅ APPROVE | ✅ 3cafb41 |
 
-**Done: 24 / ~102.** Wave-6 = multi-family PIONEERS — 5 new shared modules built in parallel:
+| K008 | K_L→π⁰ee | ✅ ext | fixed (blocker) | CODE-OK | ✅ APPROVE | ✅ |
+| C005 | D⁰→ee | ✅ reuse | PHYSICS-OK | fixed | ✅ APPROVE | ✅ |
+| T012 | Z→cc̄ | ✅ reuse | PHYSICS-OK | fixed | ✅ APPROVE | ✅ |
+| T002 | t→uZ | ✅ reuse | PHYSICS-OK | fixed | ✅ APPROVE | ✅ |
+| B015 | B→X_sℓℓ | ✅ ext | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
+
+**Done: 29 / ~102.** Wave-7 = fan-out of wave-6 modules (one per shared module). Review caught K008 direct-CP structure bug (y7V/y7A) + C005 stale-golden. SHAs in git log. Wave-6 = multi-family PIONEERS — 5 new shared modules built in parallel:
 `rare_kaon_dilepton`(→K008/K009/K010/K012), `rare_charm_dilepton`(→C005/C007), `zpole`(→T011/T012/T015-T017),
 `top_fcnc`(→T002-T008), exclusive `rare_b_dilepton`(→B015/B017-B019/B021). Ready for wide fan-out next.
 

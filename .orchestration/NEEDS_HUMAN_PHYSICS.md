@@ -81,3 +81,7 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
   `rare_kaon_dilepton` s→dℓℓ Z/penguin; `rare_charm_dilepton` c→uℓℓ; `zpole` Zbb-coupling-shift (classic RS Z→bb);
   `top_fcnc` top-Z FCNC coupling; exclusive `rare_b_dilepton` C9/C10 (B016 budget carries a 30% proxy-theory inflation).
   These propagate to all downstream consumers of each module.
+
+### Wave-7 (K008, C005, T012, T002, B015)   [committed — see git log]
+- **Rigorous:** SM sides validated (K_L→π0ee direct-CP y7V/y7A vs KTeV; Z→cc̄ R_c 0.1721/A_c 0.668; B→X_sℓℓ[1,6] 1.62e-6; t→uZ negligible; D⁰→ee SD≈0).
+- **Needs human input:** RS NP proxies inherited from the shared modules (s→dℓℓ y7V/y7A, c→uℓℓ, Zcc-shift, top-Z FCNC, C9/C10) — all the cross-cutting EW-coupling gap.
