@@ -1,0 +1,7 @@
+1. SHOULD-FIX: For NP, `A_DeltaGamma` is fixed to `+1` in the time-integrated factor, but complex `C10` or scalar/pseudoscalar NP changes it via the `P,S` amplitudes. Correct range for `y_s=0.0645` is `0.9394..1.0689`; current code always uses `1.0689`, up to a `12%` BR effect. `quarkConstraints/rare_b_dilepton.py:418`, `quarkConstraints/rare_b_dilepton.py:446`
+2. NIT: ΔF=2 amplitude checks are not applicable to B005; this is a ΔB=1 branching fraction. The code correctly uses `|C10_SM + C10_NP - C10p_NP + ...|^2`, not `Re/Im M12`. `quarkConstraints/rare_b_dilepton.py:446`
+3. NIT: The mandatory `*_with_running` Delta-F=2 check is not applicable here. `C10` has no LO QCD running to `2 GeV`; running effect for the B005 verdict is effectively `0` in this C10-only proxy. `quarkConstraints/rare_b_dilepton.py:353`, `quarkConstraints/rare_b_dilepton.py:523`
+4. NIT: Anchors and budget load correctly: exp `3.34(27)e-9`, SM `3.64(12)e-9`, budget `|0.30|e-9 + sqrt(0.27^2+0.12^2)e-9 = 5.9547e-10`. This is an NP-room bound, not a full two-sided likelihood. `flavor_catalog/processes/beauty/B005.yaml:71`, `flavor_catalog_constraints/primary/beauty/B005.py:133`
+5. NIT: SM validation is good: formula gives `3.64835e-9`, within `0.07 sigma_SM` of the `3.64e-9` YAML anchor; units are dimensionless branching fractions and HARD severity is appropriate. `quarkConstraints/rare_b_dilepton.py:17`, `tests/constraints/primary/beauty/test_B005.py:161`
+
+PHYSICS-NEEDS-FIXES
