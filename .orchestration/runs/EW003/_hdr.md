@@ -1,0 +1,2 @@
+# Implement EW003 — |V_cb| and |V_ub| inclusive-vs-exclusive tension. family=top_higgs_ew.
+Observable-level tension between inclusive and exclusive determinations (from EW003.yaml). Compute the tension/pull rigorously from the yaml values; RS NP is minimal — flag NP NEEDS-HUMAN-PHYSICS if not groundable. This is largely a data/observable constraint; SOFT severity (theory/experimental tension, not an NP veto). qcd/ running available if a scale choice is needed.
