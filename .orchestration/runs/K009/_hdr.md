@@ -1,0 +1,2 @@
+# Implement K009 — BR(K_L→π⁰μ⁺μ⁻). family=kaon. REUSE rare_kaon_dilepton (K008 machinery).
+REUSE the K008 K_L→π0ℓℓ direct/indirect/CPC + y7V/y7A machinery for the MUON mode (muon phase space + the muon vector/axial Wilson values per ISU/BMS). Append-only (do not modify K008's electron functions). RS y7V/y7A proxy reused → NEEDS-HUMAN-PHYSICS. Budget from K009.yaml, HARD. Validate SM if a value is in the yaml.
