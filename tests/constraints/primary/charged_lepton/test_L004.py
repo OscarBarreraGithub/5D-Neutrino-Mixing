@@ -16,6 +16,7 @@ from quarkConstraints.mu_e_conversion import (
     gold_nuclear_inputs,
     mu_e_conversion_coefficients,
     mu_e_conversion_from_components,
+    zero_mu_e_conversion_coefficients,
 )
 
 _PID = "L004"
@@ -31,6 +32,17 @@ _VN_AU = 0.146
 _SP_AU = 0.0614
 _SN_AU = 0.0918
 _CAPTURE_AU_S_INV = 13.07e6
+
+
+def test_pure_dipole_kko_normalization_benchmark():
+    result = mu_e_conversion_from_components(
+        dipole_parent_branching_fraction=1.0,
+        coefficients=zero_mu_e_conversion_coefficients(),
+        nuclear_inputs=gold_nuclear_inputs(),
+    )
+
+    assert result.conversion_rate == pytest.approx(0.003925365355581823)
+    assert result.dipole_component == pytest.approx(result.conversion_rate)
 
 
 def _yaml_pdg_block(path: Path = _SIDECAR):
@@ -294,7 +306,7 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     ("lepton", "expected_pass"),
     [
         ({"g_lv_p": 1.0e-13, "source": "safe L004 proxy"}, True),
-        ({"g_lv_p": 3.0e-9, "source": "excluded L004 proxy"}, False),
+        ({"g_lv_p": 1.0e-6, "source": "excluded L004 proxy"}, False),
     ],
 )
 def test_safe_point_passes_and_large_np_point_fails(lepton, expected_pass: bool):

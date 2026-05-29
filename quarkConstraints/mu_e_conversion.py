@@ -3,10 +3,11 @@
 This module implements the low-energy overlap-integral formula used for
 coherent muon-to-electron conversion in a nucleus,
 
-    omega_conv = 2 G_F^2 (|A_R^* D + g_LS^p S_p + g_LS^n S_n
-                          + g_LV^p V_p + g_LV^n V_n|^2
-                         + |A_L^* D + g_RS^p S_p + g_RS^n S_n
-                          + g_RV^p V_p + g_RV^n V_n|^2),
+    omega_conv = 2 G_F^2 m_mu^5
+                 (|A_R^* D + g_LS^p S_p + g_LS^n S_n
+                   + g_LV^p V_p + g_LV^n V_n|^2
+                  + |A_L^* D + g_RS^p S_p + g_RS^n S_n
+                   + g_RV^p V_p + g_RV^n V_n|^2),
     CR = omega_conv / Gamma_capture.
 
 The convention is the Kitano-Koike-Okada nucleon-coefficient convention for
@@ -28,11 +29,12 @@ from typing import Any, Mapping
 MU_E_CONVERSION_MODEL_V1 = "mu_e_conversion_kko_overlap_proxy_v1"
 MU_E_CONVERSION_INPUT_BUNDLE_V1 = "mu_e_conversion_nuclear_inputs_2026_v1"
 MU_E_CONVERSION_OPERATOR_CONVENTION = (
-    "omega_conv = 2*G_F^2*(|A_R^*D + g_LS^p S_p + g_LS^n S_n + "
+    "omega_conv = 2*G_F^2*m_mu^5*(|A_R^*D + g_LS^p S_p + g_LS^n S_n + "
     "g_LV^p V_p + g_LV^n V_n|^2 + |A_L^*D + g_RS^p S_p + "
     "g_RS^n S_n + g_RV^p V_p + g_RV^n V_n|^2); "
     "CR = omega_conv/Gamma_capture; g coefficients are dimensionless "
-    "nucleon coefficients in the Kitano-Koike-Okada convention."
+    "nucleon coefficients in the Kitano-Koike-Okada convention; tabulated "
+    "overlaps D,V,S are quoted in units of m_mu^(5/2)."
 )
 MU_E_CONVERSION_DIPOLE_CONVENTION = (
     "Dipole amplitudes use BR(mu -> e gamma) = "
@@ -49,6 +51,8 @@ MU_E_CONVERSION_PROXY_V1 = (
 
 HBAR_GEV_S = 6.582119569e-25
 G_F_GEV_MINUS2 = 1.1663787e-5
+MUON_MASS_GEV = 0.1056583755
+KKO_OVERLAP_DIMENSION_FACTOR_GEV5 = MUON_MASS_GEV**5
 
 
 @dataclass(frozen=True)
@@ -364,7 +368,7 @@ def mu_e_conversion_from_components(
             phase_status = "NEEDS-HUMAN-PHYSICS"
             verdict_branch = "lower_envelope_unknown_relative_phase"
 
-    prefactor = 2.0 * G_F_GEV_MINUS2**2
+    prefactor = 2.0 * G_F_GEV_MINUS2**2 * KKO_OVERLAP_DIMENSION_FACTOR_GEV5
     capture_gev = n.capture_rate_gev
     conversion_width = float(prefactor * total_inner)
     conversion_width_lower = float(prefactor * lower_inner)
@@ -410,6 +414,11 @@ def mu_e_conversion_from_components(
         ),
         "hbar_gev_s": float(HBAR_GEV_S),
         "g_fermi_gev_minus2": float(G_F_GEV_MINUS2),
+        "muon_mass_gev": float(MUON_MASS_GEV),
+        "kko_overlap_units": "m_mu^(5/2)",
+        "kko_overlap_dimension_factor_gev5": float(
+            KKO_OVERLAP_DIMENSION_FACTOR_GEV5
+        ),
         "target": n.target,
         "isotope": n.isotope,
         "overlap_D": float(n.D),
@@ -709,6 +718,8 @@ __all__ = [
     "MU_E_CONVERSION_PROXY_V1",
     "HBAR_GEV_S",
     "G_F_GEV_MINUS2",
+    "MUON_MASS_GEV",
+    "KKO_OVERLAP_DIMENSION_FACTOR_GEV5",
     "MuEConversionNuclearInputs",
     "MuEConversionCoefficientProxyInput",
     "MuEConversionResult",

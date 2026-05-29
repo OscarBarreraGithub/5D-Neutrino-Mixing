@@ -12,6 +12,11 @@ import yaml
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
+from quarkConstraints.mu_e_conversion import (
+    aluminum_nuclear_inputs,
+    mu_e_conversion_from_components,
+    zero_mu_e_conversion_coefficients,
+)
 
 _PID = "L003"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -22,6 +27,7 @@ _L001_SIDECAR = (
 
 _G_F = 1.1663787e-5
 _HBAR_GEV_S = 6.582119569e-25
+_M_MU_GEV = 0.1056583755
 _D_AL = 0.0362
 _VP_AL = 0.0161
 _VN_AL = 0.0173
@@ -97,11 +103,26 @@ def _manual_conversion_rate(
     lower_inner = max(0.0, dipole_inner + contact_inner - interference_inner)
     upper_inner = dipole_inner + contact_inner + interference_inner
     capture_gev = _CAPTURE_AL_S_INV * _HBAR_GEV_S
+    kko_dimension_factor = _M_MU_GEV**5
     return (
-        float(2.0 * _G_F**2 * lower_inner / capture_gev),
-        float(2.0 * _G_F**2 * upper_inner / capture_gev),
+        float(2.0 * _G_F**2 * kko_dimension_factor * lower_inner / capture_gev),
+        float(2.0 * _G_F**2 * kko_dimension_factor * upper_inner / capture_gev),
         contact_left,
         contact_right,
+    )
+
+
+def test_pure_dipole_kko_normalization_benchmark():
+    result = mu_e_conversion_from_components(
+        dipole_parent_branching_fraction=1.0,
+        coefficients=zero_mu_e_conversion_coefficients(),
+        nuclear_inputs=aluminum_nuclear_inputs(),
+    )
+
+    assert result.conversion_rate == pytest.approx(0.0026681715564055492)
+    assert result.dipole_component == pytest.approx(result.conversion_rate)
+    assert result.diagnostics["kko_overlap_dimension_factor_gev5"] == pytest.approx(
+        _M_MU_GEV**5
     )
 
 
@@ -314,7 +335,7 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
 
 def test_unknown_phase_interval_can_pass_when_constructive_branch_exceeds():
     constraint = fcc.get(_PID)
-    y_n_bar = (7.0e-4, 2.1e-3, 0.0)
+    y_n_bar = (1.12e-2, 3.36e-2, 0.0)
     dipole_br, _ = _manual_l001_dipole_br(
         y_n_bar,
         prefactor_br=constraint.anchor.dipole_prefactor_br.value,
@@ -348,7 +369,7 @@ def test_unknown_phase_interval_can_pass_when_constructive_branch_exceeds():
     ("lepton", "expected_pass"),
     [
         ({"g_lv_p": 1.0e-13, "source": "safe L003 proxy"}, True),
-        ({"g_lv_p": 1.0e-9, "source": "excluded L003 proxy"}, False),
+        ({"g_lv_p": 1.0e-8, "source": "excluded L003 proxy"}, False),
     ],
 )
 def test_safe_point_passes_and_large_np_point_fails(lepton, expected_pass: bool):
