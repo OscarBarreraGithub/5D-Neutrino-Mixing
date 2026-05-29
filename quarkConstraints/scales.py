@@ -19,6 +19,7 @@ from qcd.constants import M_TOP_MS
 
 DEFAULT_QUARK_XI_KK = 1.0
 GAUGE_KK_ROOT_NN = 2.448687135269161
+SPIN2_GRAVITON_KK_ROOT = 3.8317059702075125
 DEFAULT_QUARK_BENCHMARK_XI_KK = DEFAULT_QUARK_XI_KK
 # Wilson-coefficient reference scale (UNCHANGED at 3 TeV).
 DEFAULT_QUARK_TARGET_SCALE_GEV = 3000.0
@@ -50,3 +51,15 @@ def default_quark_m_kk_from_lambda_ir(
     if xi_KK <= 0:
         raise ValueError("xi_KK must be positive")
     return float(xi_KK * Lambda_IR)
+
+
+def spin2_graviton_mass_from_lambda_ir(
+    Lambda_IR: float,
+    root: float = SPIN2_GRAVITON_KK_ROOT,
+) -> float:
+    """Return the first spin-2 KK-graviton mass from the geometric IR scale."""
+    if Lambda_IR <= 0:
+        raise ValueError("Lambda_IR must be positive")
+    if root <= 0:
+        raise ValueError("root must be positive")
+    return float(root * Lambda_IR)

@@ -28,6 +28,7 @@ _EXPORTS = {
     "DeltaF2ObservableSummary": (".deltaf2", "DeltaF2ObservableSummary"),
     "DeltaF2WilsonSet": (".deltaf2", "DeltaF2WilsonSet"),
     "GAUGE_KK_ROOT_NN": (".scales", "GAUGE_KK_ROOT_NN"),
+    "SPIN2_GRAVITON_KK_ROOT": (".scales", "SPIN2_GRAVITON_KK_ROOT"),
     "ProxySummary": (".proxies", "ProxySummary"),
     "QuarkBenchmark": (".benchmarks", "QuarkBenchmark"),
     "QuarkBulkState": (".model", "QuarkBulkState"),
@@ -62,6 +63,10 @@ _EXPORTS = {
     "evaluate_delta_f2_constraints": (".deltaf2", "evaluate_delta_f2_constraints"),
     "evaluate_quark_fit": (".fit", "evaluate_quark_fit"),
     "fit_quark_sector": (".fit", "fit_quark_sector"),
+    "spin2_graviton_mass_from_lambda_ir": (
+        ".scales",
+        "spin2_graviton_mass_from_lambda_ir",
+    ),
     "jarlskog_invariant": (".fit", "jarlskog_invariant"),
     "r_sweep_plot_data": (".validation", "r_sweep_plot_data"),
     "rough_sm_targets": (".benchmarks", "rough_sm_targets"),
