@@ -1,0 +1,2 @@
+# Implement E008 — quark chromo-EDM (cEDM). family=edm_neutrino. HARD STUB (dual NEEDS-HUMAN).
+Quark cEDM bound needs hadronic matrix elements (→ nucleon/atomic EDMs) AND RS CP-odd chromo-dipole matching. Honest STUB like E004: load the relevant cEDM bound/anchor from E008.yaml, record it, NON-VETOING (INFO/SOFT), no faked hadronic calc. Flag NEEDS-HUMAN-PHYSICS on BOTH sides. New small adapter. Document.
