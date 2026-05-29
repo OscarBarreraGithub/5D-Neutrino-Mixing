@@ -67,3 +67,10 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
 
 ### L001 — μ→eγ   [committed @ 99063a2]
 - **Needs human input:** lepton-sector RS dipole couplings not on the quark-only ParameterPoint → dipole coefficient is a documented proxy; missing-input case returns explicitly `evaluated=False` (not a pass).
+
+### B005 / B011 / B022 — B-meson rare decays   [committed be82e38 / f746d56 / e4c64d2]
+- **Rigorous:** SM rates validated (B_s→μμ 3.65e-9; B→X_sγ 3.40e-4 with LL RG running; B⁺→K⁺νν̄ 5.58e-6 with correct long-distance split).
+- **Needs human input:** RS NP is a documented proxy in each shared module
+  (`rare_b_dilepton` C9/C10 penguin, `bsgamma` C7/C8 dipole, `rare_b_nunu` Z-like) —
+  full b→s EW-penguin/dipole RS matching needs EW KK couplings not on ParameterPoint (cross-cutting gap).
+- These shared modules are reused by the downstream fan-out (B006/B012/B015-B019/B021/B023); the NP-proxy caveat propagates to all of them.

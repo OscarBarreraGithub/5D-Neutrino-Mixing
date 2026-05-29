@@ -62,8 +62,15 @@ orchestrator context resets. Updated after every per-constraint gate.
 | EW002 | CKM 1st-row | ✅ built | PHYSICS-OK | fixed | ✅ APPROVE | ✅ d640d2e |
 | EW003 | \|Vcb\|/\|Vub\| | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 4947894 |
 | L001 | μ→eγ | ✅ | fixed (semantics) | CODE-OK | ✅ APPROVE | ✅ 99063a2 |
+| B005 | B_s→μμ | ✅ built | fixed (A_ΔΓ) | CODE-OK | ✅ APPROVE | ✅ be82e38 |
+| B011 | B→X_sγ | ✅ built | fixed (2 blockers) | fixed | ✅ APPROVE | ✅ f746d56 |
+| B022 | B⁺→K⁺νν̄ | ✅ built | fixed (LD) | fixed | ✅ APPROVE | ✅ e4c64d2 |
 
-**Done: 13 / ~102.** Wave-3 = reuse/data-driven (B004 Bs phase, EW002/EW003 CKM data, L001 μ→eγ dipole). New adapters: ckm_unitarity, semileptonic_ckm, lepton. EW002/EW003 are SOFT (SM-vs-data tension). K004/K005 = machinery-building (RS-NP proxy flagged). B002/C002 = CP-phase reuse of ΔF=2 M₁₂ (SM-phase input flagged). All NEEDS-HUMAN items tracked in NEEDS_HUMAN_PHYSICS.md.
+**Done: 16 / ~102.** Wave-4 = B-rare PIONEERS that built 3 shared modules → now fan out:
+- `rare_b_dilepton` (B005) → B006, B015, B016, B017, B021 (+B018/B019 ratios, secondary B007/B008/B013/B014)
+- `bsgamma` (B011) → B012
+- `rare_b_nunu` (B022) → B023
+Review caught real physics bugs (B011 chirality + RG running, B005 A_ΔΓ, B022 long-distance) — pipeline working. Wave-3 = reuse/data-driven (B004 Bs phase, EW002/EW003 CKM data, L001 μ→eγ dipole). New adapters: ckm_unitarity, semileptonic_ckm, lepton. EW002/EW003 are SOFT (SM-vs-data tension). K004/K005 = machinery-building (RS-NP proxy flagged). B002/C002 = CP-phase reuse of ΔF=2 M₁₂ (SM-phase input flagged). All NEEDS-HUMAN items tracked in NEEDS_HUMAN_PHYSICS.md.
 Reviewer template (_agent3_common.md) hardened: isolation judged by what a constraint ADDS (shared worktree is dirty by design in parallel waves); cross-check must be independent of the adapter under test. Adapter wrappers: fd2f46a. Wave-1 reconciliation PASS (no clobber, suite green).
 Per-constraint audit trail (plans, reviews, fixes, verdicts) committed under `.orchestration/runs/<ID>/`.
 
