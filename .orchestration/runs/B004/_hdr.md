@@ -1,0 +1,2 @@
+# Implement B004 — φ_s (CP phase in B_s→J/ψφ). family=beauty.
+REUSE the existing running B_s ΔF=2 complex M12 (physics_adapters/deltaf2.py bs-mixing complex helper, analogous to B002's bd helper; add an append-only bs phase helper if needed). NP phase shift φ_s^NP = arg(1 + M12^NP/M12^SM); compare to measured φ_s with an uncertainty-aware budget. exp + SM from B004.yaml. CP observable → use Im/phase of M12^NP. If the SM φ_s reference phase isn't in the core, take it from the yaml and flag NEEDS-HUMAN-PHYSICS (like B002's 2β). Do NOT modify deltaf2 core.

@@ -1,0 +1,9 @@
+- Plan executed: studied K001/K004/B002/B003, added B_s complex phase helper, implemented B004, added tests.
+- Physics: `phi_s = phi_s^SM + arg(1 + M12_Bs^NP/M12_Bs^SM)`, with `M12_SM = Delta m_Bs^SM / 2`.
+- Sources: exp `canonical_hflav_average`, SM `standard_model_reference` from `B004.yaml`.
+- Reused: existing Delta F=2 B_s Wilson/running/core matrix-element path via adapter. Built: append-only `bs_mixing_m12_np_from_wilsons_with_running`; no `deltaf2` core edits.
+- Budget: `0.016025292508658584 rad`, from `sqrt(sigma_exp^2 + sigma_SM,upper^2)` using B004 YAML.
+- SM validation: zero-NP point gives `phi_s = -0.0368 rad`, matching YAML SM reference; direct core recomputation validates complex `M12`.
+- NEEDS-HUMAN-PHYSICS: flagged for SM `phi_s^SM = -2 beta_s` because no core CKM phase exists.
+- Files changed: `flavor_catalog_constraints/primary/beauty/B004.py`, `tests/constraints/primary/beauty/test_B004.py`, `flavor_catalog_constraints/physics_adapters/deltaf2.py`.
+- Pytest: `test_B004.py` 10 passed; beauty constraints 37 passed; full `tests/constraints/` is 117 passed, 1 failed in unrelated untracked `EW003` numerical test, which I left untouched per isolation rules.
