@@ -1,0 +1,2 @@
+# Implement E001 — electron EDM |d_e|. family=edm_neutrino. PIONEER: new edm module.
+BUILD quarkConstraints/edm.py (CP-violating electric dipole: |d_e| from a CP-odd dipole coefficient). SM d_e is negligible (~1e-40) → pure-NP bound vs the JILA/ACME limit (from E001.yaml), HARD. The RS contribution is a one-loop CP-violating dipole needing complex RS couplings NOT on ParameterPoint → documented proxy, NEEDS-HUMAN-PHYSICS (likely the SM-side is trivially ~0 but the NP requires real loop machinery — flag clearly). Wrap via new adapter. Reusable by E002 (d_μ) etc.
