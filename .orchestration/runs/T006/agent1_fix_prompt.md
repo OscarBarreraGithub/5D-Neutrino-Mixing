@@ -1,0 +1,2 @@
+You are agent1 fixing T006 (t→ug) test. Code review .orchestration/runs/T006/agent3_out.md = CODE-NEEDS-FIXES (SHOULD-FIX); physics OK. Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX: the test recomputes the width with a local formula; change it to derive ζ_L/R from the couplings then call the core quarkConstraints.top_fcnc.gluon_dipole_branching_fraction and compare to Constraint.evaluate(). Isolated to test_T006.py. Run tests/constraints/primary/top_higgs_ew/test_T006.py -q + tests/constraints/ -q green. OUTPUT <=6 lines: change, pytest counts.
