@@ -72,21 +72,40 @@ source_shas:
   pdg2025_tau3e_pdglive_s035r58.txt: "sha256:7b5e0e7346d47cfaf87b63f80ae8b81e1afa05769c5343e9efd4d22a09ce3fb6"
 pdg_or_equivalent:
   primary_current_limit:
-    source: "PDG live tau branching-ratio datablock S035R58, 2025 update"
+    source: "Belle II Collaboration"
+    arxiv_id: "2507.18236"
+    journal: "JHEP 12 (2025) 169"
+    doi: "10.1007/JHEP12(2025)169"
     year: 2025
     observable: "Branching fraction upper limit for tau^- -> e^- e+ e^-"
-    value: 2.7e-8
+    value: 2.5e-8
     relation: "<"
     confidence_level: "90% C.L."
-    source_url: "https://pdglive.lbl.gov/BranchingRatio.action?desig=38&parCode=S035&home="
-    datablock_url: "https://pdglive.lbl.gov/DataBlock.action?node=S035R58"
-    access_date: "2026-05-16"
-    snapshot_path: "flavor_catalog/references/L010/pdg2025_tau3e_pdglive_s035r58.txt"
-    sha256: "7b5e0e7346d47cfaf87b63f80ae8b81e1afa05769c5343e9efd4d22a09ce3fb6"
-    pdg_reference_entry: "HAYASAKA 2010, Belle"
-    data_sample: "782 fb^-1"
-    center_of_mass_energy: "10.6 GeV"
+    source_url: "https://arxiv.org/abs/2507.18236"
+    journal_url: "https://doi.org/10.1007/JHEP12(2025)169"
+    access_date: "2026-05-29"
+    data_sample: "428 fb^-1"
+    expected_limit_90cl: 2.7e-8
+    observed_limit_90cl: 2.5e-8
+    table_reference: "JHEP12(2025)169 Table 1, eee row"
   primary_experiment:
+    source: "Belle II Collaboration"
+    arxiv_id: "2507.18236"
+    journal: "JHEP 12 (2025) 169"
+    doi: "10.1007/JHEP12(2025)169"
+    year: 2025
+    observable: "Branching fraction upper limit for tau^- -> e^- e+ e^-"
+    value: 2.5e-8
+    relation: "<"
+    confidence_level: "90% C.L."
+    data_sample: "428 fb^-1"
+    expected_limit_90cl: 2.7e-8
+    observed_limit_90cl: 2.5e-8
+    source_url: "https://arxiv.org/abs/2507.18236"
+    journal_url: "https://doi.org/10.1007/JHEP12(2025)169"
+    access_date: "2026-05-29"
+    table_reference: "JHEP12(2025)169 Table 1, eee row"
+  historical_primary_experiment:
     source: "Belle Collaboration"
     arxiv_id: "1001.3221"
     doi: "10.1016/j.physletb.2010.03.037"

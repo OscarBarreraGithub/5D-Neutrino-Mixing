@@ -1,0 +1,8 @@
+1. BLOCKER — Budget is stale/too loose: `L010.yaml:78,95` and `L010.py:246,307-309` use `2.7e-8` from PDG/Belle 2010, but Belle II JHEP12(2025)169 reports observed `BR(tau->eee) < 2.5e-8` at 90% CL (expected `2.7e-8`) for 428 fb^-1. Correct HARD budget is `2.5e-8`; current bound is 8% too loose in BR. Source: ([iris.unito.it](https://iris.unito.it/retrieve/c2704b56-3d12-488b-90e0-12c15c71a0bb/JHEP12%282025%29169.pdf))
+2. SHOULD-FIX — Tests lock in the stale YAML budget: `tests/constraints/primary/charged_lepton/test_L010.py:77-83,284` validate `constraint.anchor.budget == primary_current_limit`, so they will continue accepting `2.7e-8` unless the Belle II observed limit is added to the catalog anchor.
+3. NIT — ΔF=2 amplitude checklist is not applicable: L010 is a charged-lepton LFV branching fraction, not an `M_12` mass-difference/CP observable; no real/imaginary `M_12` choice is involved. The BR formula is in `quarkConstraints/lfv_three_body.py:330-391`.
+4. NIT — QCD running checklist is not applicable: L010 has no hadronic Wilson evolution or `mu_had=2 GeV`; it correctly does not use `deltaf2` or a `*_with_running` path.
+5. NIT — Flavor pinning is physically correct: `lfv_three_body_taue.py:193-211` calls the shared core with `initial=tau, final=e`, and matrix inputs use the `e,tau` off-diagonal element at `lfv_three_body_taue.py:335-342`, avoiding the `mu,e` default.
+6. NIT — Constructive dipole-contact envelope and SM treatment are correct: SM is set to `0.0` in `L010.py:306`, and the constructive unknown-phase envelope is used in `quarkConstraints/lfv_three_body.py:740-752`; RS proxy is flagged NEEDS-HUMAN-PHYSICS in `L010.py:263-268,310-315`.
+
+PHYSICS-NEEDS-FIXES

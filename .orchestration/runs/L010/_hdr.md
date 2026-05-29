@@ -1,0 +1,2 @@
+# Implement L010 — BR(τ→3e). family=charged_lepton. REUSE lfv_three_body.
+REUSE quarkConstraints/lfv_three_body.py (built for L002) with τ→e flavors PINNED (initial=tau, final=e; use the τe matrix element, NOT μe defaults — same care as L009). Dipole+contact+interference constructive envelope. SM=0 → pure-NP vs Belle II/limit (from L010.yaml), HARD. RS proxy NEEDS-HUMAN-PHYSICS. Append-only (don't modify L002/L009 funcs). Reject mismatched-flavor spurion aliases.
