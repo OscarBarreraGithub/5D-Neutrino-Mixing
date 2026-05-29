@@ -1,0 +1,8 @@
+1. NIT: Correct projection for K006: `BR_SD` uses `Re(Y_eff)` in `quarkConstraints/rare_kaon_dilepton.py:298-301`, appropriate for `K_L -> mu+ mu-` SD; no ΔF=2 `|M12|`/CP-imaginary mixup.
+2. NIT: QCD-running check is not applicable to this semileptonic `Y/C10`-type constraint; no `*_with_running` path is expected. Perturbative QCD inputs are encoded as `Y_t=0.94`, `P_c(Y)=0.115` in `quarkConstraints/rare_kaon_dilepton.py:78-81`; no 2 GeV ΔF=2 Wilson evolution should be forced.
+3. SHOULD-FIX: The SM SD number is not loaded “from K006.yaml”: `tests/constraints/primary/kaon/test_K006.py:193` hard-codes `8.209801430715005e-10`, while `flavor_catalog/processes/kaon/K006.yaml:69-105` contains only total BR `6.84e-9` and SD bound `<2.5e-9`. Correct physics/provenance: add a YAML/snapshot SM-SD anchor or stop claiming YAML validation.
+4. NIT: Budget is defensible and LD-aware: `flavor_catalog_constraints/primary/kaon/K006.py:384-408,490-493` compares total predicted `BR_SD` to Isidori-Unterdorfer `<2.5e-9`; SM formula gives `8.21e-10`, room `1.68e-9`, SM/budget `0.328`.
+5. NIT: Anchor values match snapshots: PDG total `6.84 +/- 0.11e-9` from `K006.yaml:69-80` and snapshot line 12; E871 `7.18 +/- 0.17e-9` from `K006.yaml:81-89`; IU bound `<2.5e-9` from `K006.yaml:98-105`.
+6. NIT: Severity/diagnostics are appropriate: `SOFT` is justified by LD domination in `flavor_catalog_constraints/primary/kaon/K006.py:20-25,441`; units are dimensionless branching fractions, not GeV; RS proxy is explicitly marked `NEEDS-HUMAN-PHYSICS` at `K006.py:526-530`.
+
+PHYSICS-NEEDS-FIXES

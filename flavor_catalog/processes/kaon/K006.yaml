@@ -78,6 +78,17 @@ pdg_or_equivalent:
   access_date: "2026-05-16"
   snapshot_path: "flavor_catalog/references/K006/pdg2024_kl_decay_modes.txt"
   sha256_of_text_snapshot: "7b8d82405b9c4bf76bf9efb6c3db59a5bd21ae2d77339e6ef0dce389ef50c585"
+  standard_model_short_distance_prediction:
+    year: 2006
+    observable: "SM BR(K_L -> mu+ mu-)_SD"
+    value: "0.79e-9"
+    uncertainty: "0.12e-9"
+    units: "branching fraction"
+    source: "Gorbahn and Haisch, Phys. Rev. Lett. 97 (2006) 122002"
+    source_key: "GorbahnHaisch2006:KLMuMuSDNNLO"
+    source_url: "https://arxiv.org/abs/hep-ph/0605203"
+    access_date: "2026-05-29"
+    provenance_note: "arXiv abstract quotes P_c(Y)=0.115 +/- 0.018 and BR(K_L -> mu+ mu-)_SD=(0.79 +/- 0.12) x 10^-9."
 supporting_numeric_values:
   - observable: "BNL E871 BR(K_L -> mu+ mu-) measurement"
     year: 2000

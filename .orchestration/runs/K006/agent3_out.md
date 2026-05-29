@@ -1,0 +1,10 @@
+1. SHOULD-FIX: [K006.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/kaon/K006.py:445) / [test_K006.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/tests/constraints/primary/kaon/test_K006.py:193): SM SD value is computed from hardcoded defaults and the test hardcodes `8.209801430715005e-10`; `K006.yaml` has total BR and `<2.5e-9` SD bound, but no explicit SM-SD anchor. Fix: add/load an explicit SM-SD YAML anchor via `load_anchor`, or stop claiming YAML validation for the SM number.
+2. NIT: Isolation OK: [K006.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/kaon/K006.py:51) reaches physics only through the adapter; all K006 code/test/core/adapter files are new; no `rare_kaon_snd.py` modification found. Fix: none.
+3. NIT: Contract OK: [K006.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/kaon/K006.py:553) returns real numeric fields; complex values stay in diagnostics; missing couplings returned `passes=True`, `predicted=None`, `ratio=None`, budget `2.5e-09`. Fix: none.
+4. NIT: Anchor loud-fail probes OK: mismatched SD observable and missing `supporting_numeric_values[999]` both raised `AnchorError`. Fix: none.
+5. NIT: Independent numerical check OK: SM constraint/core/manual all `8.209801430715005e-10`, diffs `0.0`; budget `2.5e-09`, room `1.6790198569284996e-09`.
+6. NIT: Safe/excluded checks OK: safe `BR=8.171667136750296e-10`, ratio `0.3268666854700118`, pass; excluded `BR=9.2697450263441e-08`, ratio `37.0789801053764`, fail; core diffs `0.0`.
+7. NIT: Determinism OK: repeated `evaluate()` results equal and input coupling matrices unchanged. Fix: none.
+8. Tests: focused K006 `11 passed`; `python -m pytest tests/constraints/ -q` -> `244 passed in 3.79s`; registry smoke -> `K006 kaon SOFT`.
+
+CODE-NEEDS-FIXES
