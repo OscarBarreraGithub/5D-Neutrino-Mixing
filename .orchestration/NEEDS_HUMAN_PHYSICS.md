@@ -95,3 +95,7 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
 ### Wave-9 (K010, C006, T004, T016, B018)   [committed — see git log]
 - RS NP proxies inherited from shared modules (s→dℓℓ K_S a_S w/ sign-envelope, c→uℓℓ LFV eμ coupling,
   top-photon dipole t→uγ, off-diagonal Z-eτ LFV, lepton-non-universal C9/C10 for R_K) — cross-cutting EW-coupling gap.
+
+### Wave-11 pioneers (B009, K018, CR001, E001, L002)   [committed — see git log]
+- **Rigorous:** B⁺→τν tree SM 8.63e-5; |V_us| K_l3 extraction + unitarity pull; KK-gluon mass vs tt̄ limit; e-EDM SM≈0; μ→3e dipole(L001)+contact+interference.
+- **Needs human input:** charged-current RS proxy (B009); CR σ×BR recast proxy (CR001); RS one-loop CP-odd dipole for EDMs (E001 — real loop machinery); μ→3e Z/box + dipole-contact relative PHASE (L002 uses conservative constructive envelope); K018 RS CKM shift ~0.
