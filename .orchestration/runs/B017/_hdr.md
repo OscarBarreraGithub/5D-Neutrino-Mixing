@@ -1,0 +1,2 @@
+# Implement B017 — B→K(*)ℓℓ angular/composite (R_K(*) context). family=beauty. REUSE rare_b_dilepton.
+REUSE the exclusive b→sℓℓ machinery (B016) + inclusive (B015). B017 covers the B→K(*)ℓℓ composite observable per B017.yaml (e.g. branching/angular in a reference bin). Reuse C9/C10 with the form-factor machinery; append-only if any addition (do not modify B005/B016/B015 functions). Use the same 30% proxy-theory budget treatment. RS C9/C10 proxy → NEEDS-HUMAN-PHYSICS. Budget from B017.yaml, HARD. Charged-mode scope where the catalog specifies it.

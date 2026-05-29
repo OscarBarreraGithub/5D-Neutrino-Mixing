@@ -324,3 +324,22 @@ def inclusive_b_to_xs_mumu_from_couplings(
         m_kk_gev=m_kk_gev,
         inputs=inputs,
     )
+
+
+# Append-only export for constraints that need to reuse the B016 proxy-budget
+# convention without importing quarkConstraints directly.
+from quarkConstraints import rare_b_dilepton as _rare_b_dilepton_core
+
+RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_FRACTION = (
+    _rare_b_dilepton_core.RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_FRACTION
+)
+RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_RATIONALE = (
+    _rare_b_dilepton_core.RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_RATIONALE
+)
+
+__all__.extend(
+    [
+        "RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_FRACTION",
+        "RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_RATIONALE",
+    ]
+)
