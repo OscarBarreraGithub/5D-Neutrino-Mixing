@@ -1,0 +1,9 @@
+- Plan: read scaffold/examples/YAML, add μτ adapter + T017 constraint, add tests, run full constraints suite.
+- Physics: SM LFV rate set to `0`; `BR = 2(|delta_g_L|^2+|delta_g_R|^2)/(SM Z-width weight + LFV weight)`.
+- Reused: shared `quarkConstraints.zpole_lfv` off-diagonal width machinery via a new append-only adapter.
+- Built: `zpole_lfv_mutau` proxy using μτ overlap entries / matrix index `(1, 2)`.
+- Budget: `BR(Z -> mu tau) < 6.5e-6` from `PDG2025:T017:zmutau_limit` in `T017.yaml`.
+- Validation: independent SM total width weight `3.649563333333334`; zero LFV point gives predicted `0`, SM `0`; coupling limit `0.003444003183921276`.
+- Gap: flagged `NEEDS-HUMAN-PHYSICS` because the off-diagonal RS `Z mu tau` coupling is only a documented proxy.
+- Files changed: [zpole_lfv_mutau.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/physics_adapters/zpole_lfv_mutau.py), [T017.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T017.py), [test_T017.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/tests/constraints/primary/top_higgs_ew/test_T017.py).
+- Tests: `test_T017.py` 13 passed; `python -m pytest tests/constraints/ -q` 429 passed.

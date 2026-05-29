@@ -1,0 +1,8 @@
+1. NIT: Δm/CP `M_12` check is N/A; T017 is an on-shell LFV rate and correctly uses `|delta_g_L|^2+|delta_g_R|^2` with charge factor 2, not Re/Im `M_12`: `quarkConstraints/zpole_lfv.py:155-167`, `zpole_lfv_mutau.py:172-180`.
+2. NIT: QCD running check is N/A; no ΔF=2 Wilsons or `mu_had=2 GeV` evolution apply to `Z->mu tau`. Verdict path calls `zpole_lfv_mutau_branching_fraction_with_proxy`, not `deltaf2`: `T017.py:365-369`. Running effect: undefined/0 for this EW BR.
+3. NIT: Budget is defensible: pure-NP `SM=0` upper-limit test, not a central residual. Code uses `BR_limit=6.5e-6` from YAML as `budget`: `T017.py:313-315`, `T017.py:365-368`; implied coupling limit is `3.444003e-3` for SM width weight `3.649563333`.
+4. NIT: Anchors match snapshots: PDG/ATLAS combined `B(Z->mu+- tau-+)<6.5e-6`, ATLAS leptonic-only `<7.2e-6`, CMS obs(exp) `12.0(5.3)e-6`: `T017.yaml:75-136`, `pdg2025_z_lfv_listing.txt:15-21`, `atlas2021_z_lfv_tau_arxiv_abs.txt:27-30`, `cms2025_smp23003_arxiv_abs.txt:26-30`.
+5. NIT: Severity/units OK: direct 95% CL LFV bound is `HARD` and dimensionless BR; GeV only enters the proxy scale `(m_Z/M_KK)^2`: `T017.py:324-326`, `zpole_lfv_mutau.py:131`.
+6. NIT: Direct adapter result inherits the shared core diagnostic string `BR(Z -> e+- mu-+)`; T017 overwrites it to `mu+- tau-+`, so the constraint output is correct, but standalone adapter diagnostics are mildly misleading: `quarkConstraints/zpole_lfv.py:190-196`, `T017.py:390-394`.
+
+PHYSICS-OK
