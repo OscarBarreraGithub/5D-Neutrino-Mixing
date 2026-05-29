@@ -11,32 +11,52 @@ from quarkConstraints.leptonic_tree import (
     LEPTONIC_TREE_BPLUS_TAUNU_YAML_INPUT_BUNDLE_V1,
     LEPTONIC_TREE_CHARGED_CURRENT_PROXY_ASSUMPTION_V1,
     LEPTONIC_TREE_INPUT_BUNDLE_V1,
+    LEPTONIC_TREE_KPLUS_EMUNU_YAML_INPUT_BUNDLE_V1,
+    LEPTONIC_TREE_LFU_RATIO_OPERATOR_CONVENTION,
+    LEPTONIC_TREE_LFU_RATIO_PROXY_ASSUMPTION_V1,
     LEPTONIC_TREE_MODEL_V1,
     LEPTONIC_TREE_OPERATOR_CONVENTION,
     LeptonicTreeBranchingResult,
     LeptonicTreeInputs,
+    LeptonicTreeRatioInputs,
+    LeptonicTreeRatioResult,
     bplus_tau_nu_inputs_from_theory_anchors as _bplus_tau_nu_inputs_from_theory_anchors,
     charged_current_proxy_amplitude_ratio as _charged_current_proxy_amplitude_ratio,
     default_bplus_tau_nu_inputs as _default_bplus_tau_nu_inputs,
+    default_kplus_enu_over_munu_inputs as _default_kplus_enu_over_munu_inputs,
     evaluate_leptonic_branching_fraction as _evaluate_leptonic_branching_fraction,
+    evaluate_leptonic_lfu_ratio as _evaluate_leptonic_lfu_ratio,
+    kplus_enu_over_munu_inputs_from_sm_ratio_anchor as _kplus_enu_over_munu_inputs_from_sm_ratio_anchor,
+    leptonic_lfu_tree_ratio_without_radiation as _leptonic_lfu_tree_ratio_without_radiation,
     lifetime_ps_to_gev_inverse as _lifetime_ps_to_gev_inverse,
     sm_branching_fraction as _sm_branching_fraction,
+    sm_leptonic_lfu_ratio as _sm_leptonic_lfu_ratio,
 )
 
 __all__ = [
     "LEPTONIC_TREE_MODEL_V1",
     "LEPTONIC_TREE_INPUT_BUNDLE_V1",
     "LEPTONIC_TREE_BPLUS_TAUNU_YAML_INPUT_BUNDLE_V1",
+    "LEPTONIC_TREE_KPLUS_EMUNU_YAML_INPUT_BUNDLE_V1",
     "LEPTONIC_TREE_OPERATOR_CONVENTION",
+    "LEPTONIC_TREE_LFU_RATIO_OPERATOR_CONVENTION",
     "LEPTONIC_TREE_CHARGED_CURRENT_PROXY_ASSUMPTION_V1",
+    "LEPTONIC_TREE_LFU_RATIO_PROXY_ASSUMPTION_V1",
     "LeptonicTreeInputs",
     "LeptonicTreeBranchingResult",
+    "LeptonicTreeRatioInputs",
+    "LeptonicTreeRatioResult",
     "leptonic_tree_default_bplus_tau_nu_inputs",
     "leptonic_tree_bplus_tau_nu_inputs_from_theory_anchors",
+    "leptonic_tree_default_kplus_enu_over_munu_inputs",
+    "leptonic_tree_kplus_enu_over_munu_inputs_from_sm_ratio_anchor",
     "leptonic_tree_lifetime_ps_to_gev_inverse",
     "leptonic_tree_sm_branching_fraction",
+    "leptonic_tree_lfu_tree_ratio_without_radiation",
+    "leptonic_tree_sm_lfu_ratio",
     "leptonic_tree_charged_current_proxy_amplitude_ratio",
     "bplus_tau_nu_branching_fraction",
+    "kplus_enu_over_munu_lfu_ratio",
 ]
 
 
@@ -59,6 +79,23 @@ def leptonic_tree_bplus_tau_nu_inputs_from_theory_anchors(
     )
 
 
+def leptonic_tree_default_kplus_enu_over_munu_inputs() -> LeptonicTreeRatioInputs:
+    """Return default ``R_K = Gamma(K -> e nu)/Gamma(K -> mu nu)`` inputs."""
+    return _default_kplus_enu_over_munu_inputs()
+
+
+def leptonic_tree_kplus_enu_over_munu_inputs_from_sm_ratio_anchor(
+    *,
+    sm_ratio: float,
+    constants_citation: str,
+) -> LeptonicTreeRatioInputs:
+    """Return K LFU ratio inputs with radiative effects fixed by an SM anchor."""
+    return _kplus_enu_over_munu_inputs_from_sm_ratio_anchor(
+        sm_ratio=sm_ratio,
+        constants_citation=constants_citation,
+    )
+
+
 def leptonic_tree_lifetime_ps_to_gev_inverse(
     tau_ps: float,
     hbar_gev_s: float,
@@ -72,6 +109,20 @@ def leptonic_tree_sm_branching_fraction(
 ) -> LeptonicTreeBranchingResult:
     """Evaluate the SM tree-level branching fraction."""
     return _sm_branching_fraction(inputs)
+
+
+def leptonic_tree_lfu_tree_ratio_without_radiation(
+    inputs: LeptonicTreeRatioInputs | None = None,
+) -> float:
+    """Return the tree-level LFU ratio before the radiative multiplier."""
+    return _leptonic_lfu_tree_ratio_without_radiation(inputs)
+
+
+def leptonic_tree_sm_lfu_ratio(
+    inputs: LeptonicTreeRatioInputs | None = None,
+) -> LeptonicTreeRatioResult:
+    """Evaluate the SM charged-leptonic LFU ratio."""
+    return _sm_leptonic_lfu_ratio(inputs)
 
 
 def leptonic_tree_charged_current_proxy_amplitude_ratio(
@@ -98,5 +149,21 @@ def bplus_tau_nu_branching_fraction(
     return _evaluate_leptonic_branching_fraction(
         m_kk_gev=m_kk_gev,
         np_amplitude_ratio=np_amplitude_ratio,
+        inputs=inputs,
+    )
+
+
+def kplus_enu_over_munu_lfu_ratio(
+    *,
+    m_kk_gev: float | None = None,
+    numerator_np_amplitude_ratio: complex | None = None,
+    denominator_np_amplitude_ratio: complex | None = None,
+    inputs: LeptonicTreeRatioInputs | None = None,
+) -> LeptonicTreeRatioResult:
+    """Evaluate ``R_K`` in the SM or documented lepton-nonuniversal proxy."""
+    return _evaluate_leptonic_lfu_ratio(
+        m_kk_gev=m_kk_gev,
+        numerator_np_amplitude_ratio=numerator_np_amplitude_ratio,
+        denominator_np_amplitude_ratio=denominator_np_amplitude_ratio,
         inputs=inputs,
     )

@@ -1,0 +1,2 @@
+# Implement K017 — R_K = Γ(K→eν)/Γ(K→μν) lepton universality. family=kaon. REUSE leptonic_tree.
+REUSE/extend quarkConstraints/leptonic_tree.py (built for B009) for the kaon leptonic LFU ratio R_K^{e/μ} = Γ(K→eν)/Γ(K→μν). SM R_K ≈ 2.477e-5 (helicity-suppressed, with rad. corrections — take the SM value + uncertainty from K017.yaml). NP enters as lepton-non-universal corrections → documented proxy NEEDS-HUMAN-PHYSICS. Budget from K017.yaml (measured vs SM), HARD/SOFT per the catalog. Append-only.
