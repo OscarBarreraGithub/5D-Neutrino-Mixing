@@ -1,0 +1,2 @@
+# Implement L004 — μ→e conversion in Au (CR(μ→e, Au)). family=charged_lepton. REUSE mu_e_conversion.
+REUSE quarkConstraints/mu_e_conversion.py (built for L003) with the GOLD (Au) nuclear overlap factors + capture rate (from L004.yaml/literature; KKO hep-ph/0203110). NOTE: the SINDRUM II Au limit 7e-13 is OBSERVED (not a projection), so this is HARD (unlike L003's projected Al). SM=0 → pure-NP bound. RS proxy NEEDS-HUMAN-PHYSICS; conservative interference. Append-only (don't modify L003's Al path; use the module's per-target nuclear inputs).
