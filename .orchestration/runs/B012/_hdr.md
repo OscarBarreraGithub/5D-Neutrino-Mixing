@@ -1,0 +1,2 @@
+# Implement B012 — BR(B→K*γ) (exclusive radiative). family=beauty. REUSE the shared C7 module.
+REUSE quarkConstraints/bsgamma.py + physics_adapters/bsgamma.py (built for B011, with RG-run C7/C8 to μ_b). B→K*γ is the exclusive mode: BR ∝ |C7^eff|² × (exclusive form-factor/normalization from B012.yaml). Reuse the RG-run C7 machinery; add only the exclusive normalization (append-only). SM BR(B→K*γ)~4.3e-5 — validate. RS dipole proxy reused → NEEDS-HUMAN-PHYSICS. Budget from B012.yaml, HARD. Do NOT modify B011's inclusive functions.

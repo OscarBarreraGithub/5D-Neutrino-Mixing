@@ -35,6 +35,9 @@ __all__ = [
     "bsgamma_default_sm_inputs",
     "bsgamma_branching_fraction_from_c7",
     "bsgamma_wilsons_from_couplings",
+    "exclusive_btokstargamma_from_c7",
+    "exclusive_btokstargamma_from_couplings",
+    "exclusive_btokstargamma_sm_branching_fraction",
     "inclusive_bsgamma_from_couplings",
     "inclusive_bsgamma_sm_branching_fraction",
 ]
@@ -108,3 +111,118 @@ def inclusive_bsgamma_sm_branching_fraction(
         inputs=inputs,
     )
 
+
+def _with_exclusive_btokstargamma_metadata(
+    result: BsgammaBranchingResult,
+    *,
+    normalization_label: str,
+    normalization_source: str | None,
+) -> BsgammaBranchingResult:
+    diagnostics = dict(result.diagnostics)
+    diagnostics.update(
+        {
+            "exclusive_mode": "B -> K*(892) gamma",
+            "exclusive_normalization_label": str(normalization_label),
+            "exclusive_normalization_source": (
+                "" if normalization_source is None else str(normalization_source)
+            ),
+            "exclusive_normalization_branching_fraction": float(
+                result.sm_branching_fraction
+            ),
+            "exclusive_branching_formula": (
+                "BR(B -> K* gamma) = BR_norm * "
+                "(|C7_SM + C7_NP|^2 + |C7p_SM + C7p_NP|^2) / "
+                "(|C7_SM|^2 + |C7p_SM|^2)"
+            ),
+            "exclusive_normalization_note": (
+                "The exclusive form-factor and normalization dependence is "
+                "absorbed into the caller-supplied BR_norm; C7/C8 running is "
+                "the shared b -> s gamma machinery."
+            ),
+        }
+    )
+    return BsgammaBranchingResult(
+        model_label=result.model_label,
+        input_bundle=result.input_bundle,
+        branching_fraction=result.branching_fraction,
+        sm_branching_fraction=result.sm_branching_fraction,
+        np_shift_branching_fraction=result.np_shift_branching_fraction,
+        ratio_to_sm=result.ratio_to_sm,
+        c7_sm_eff=result.c7_sm_eff,
+        c7p_sm_eff=result.c7p_sm_eff,
+        c7_total=result.c7_total,
+        c7p_total=result.c7p_total,
+        c7_np=result.c7_np,
+        c7p_np=result.c7p_np,
+        wilsons=result.wilsons,
+        diagnostics=diagnostics,
+    )
+
+
+def exclusive_btokstargamma_from_c7(
+    *,
+    c7_np: complex = 0.0j,
+    c7p_np: complex = 0.0j,
+    exclusive_sm_branching_fraction: float,
+    inputs: BsgammaSMInputs | None = None,
+    normalization_label: str = "B -> K*(892) gamma exclusive normalization",
+    normalization_source: str | None = None,
+) -> BsgammaBranchingResult:
+    """Evaluate exclusive ``B -> K*(892) gamma`` from explicit C7 shifts."""
+
+    result = _branching_fraction_from_c7(
+        c7_np=c7_np,
+        c7p_np=c7p_np,
+        sm_branching_fraction=exclusive_sm_branching_fraction,
+        inputs=inputs,
+    )
+    return _with_exclusive_btokstargamma_metadata(
+        result,
+        normalization_label=normalization_label,
+        normalization_source=normalization_source,
+    )
+
+
+def exclusive_btokstargamma_from_couplings(
+    couplings: QuarkMassBasisCouplings,
+    *,
+    exclusive_sm_branching_fraction: float,
+    m_kk_gev: float | None = None,
+    inputs: BsgammaSMInputs | None = None,
+    normalization_label: str = "B -> K*(892) gamma exclusive normalization",
+    normalization_source: str | None = None,
+) -> BsgammaBranchingResult:
+    """Evaluate exclusive ``B -> K*(892) gamma`` from mass-basis couplings."""
+
+    result = _evaluate_inclusive_bsgamma(
+        couplings,
+        sm_branching_fraction=exclusive_sm_branching_fraction,
+        m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+    return _with_exclusive_btokstargamma_metadata(
+        result,
+        normalization_label=normalization_label,
+        normalization_source=normalization_source,
+    )
+
+
+def exclusive_btokstargamma_sm_branching_fraction(
+    *,
+    exclusive_sm_branching_fraction: float,
+    inputs: BsgammaSMInputs | None = None,
+    normalization_label: str = "B -> K*(892) gamma exclusive normalization",
+    normalization_source: str | None = None,
+) -> BsgammaBranchingResult:
+    """Evaluate the SM-limit exclusive ``B -> K*(892) gamma`` branching fraction."""
+
+    result = _evaluate_inclusive_bsgamma(
+        None,
+        sm_branching_fraction=exclusive_sm_branching_fraction,
+        inputs=inputs,
+    )
+    return _with_exclusive_btokstargamma_metadata(
+        result,
+        normalization_label=normalization_label,
+        normalization_source=normalization_source,
+    )
