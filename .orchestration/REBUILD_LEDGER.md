@@ -55,8 +55,12 @@ orchestrator context resets. Updated after every per-constraint gate.
 | B003 | Δm_s | ✅ | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 6e65846 |
 | C001 | D⁰ mix | ✅ | PHYSICS-OK | fixed (blocker) | ✅ APPROVE | ✅ 9d72b6b |
 | K004 | BR(K⁺→π⁺νν̄) | ✅ built | PHYSICS-OK | fixed (2 blockers) | ✅ APPROVE | ✅ 4ff15a3 |
+| B002 | S_ψKs/sin2β | ✅ | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 80d4224 |
+| C002 | charm CPV | ✅ | fixed (budget) | fixed | ✅ APPROVE | ✅ b85f482 |
+| K005 | K_L→π⁰νν̄ | ✅ built | PHYSICS-OK | fixed | ✅ APPROVE | ✅ ed736c3 |
 
-**Done: 6 / ~102.** K004 = first machinery-building constraint (new ΔS=1 SM core + adapter; RS-NP proxy flagged in NEEDS_HUMAN_PHYSICS.md). Calibration of the hard path: PASS. Adapter wrappers: fd2f46a. Wave-1 reconciliation PASS (no clobber, suite green).
+**Done: 9 / ~102.** K004/K005 = machinery-building (RS-NP proxy flagged). B002/C002 = CP-phase reuse of ΔF=2 M₁₂ (SM-phase input flagged). All NEEDS-HUMAN items tracked in NEEDS_HUMAN_PHYSICS.md.
+Reviewer template (_agent3_common.md) hardened: isolation judged by what a constraint ADDS (shared worktree is dirty by design in parallel waves); cross-check must be independent of the adapter under test. Adapter wrappers: fd2f46a. Wave-1 reconciliation PASS (no clobber, suite green).
 Per-constraint audit trail (plans, reviews, fixes, verdicts) committed under `.orchestration/runs/<ID>/`.
 
 ## Next waves (machinery-building — slower, costlier, pre-stage adapters first)

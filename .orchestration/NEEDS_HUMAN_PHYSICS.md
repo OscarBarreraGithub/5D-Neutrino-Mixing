@@ -38,3 +38,20 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
   KK/Z/Z′ tower + neutrino-coupling matching is not available on
   `ParameterPoint` (see cross-cutting gap above).
 - **Trail:** `.orchestration/runs/K004/`.
+
+### K005 — BR(K_L→π⁰νν̄)   [status: committed @ ed736c3]
+- **Rigorous:** SM short-distance BR (purely CP-violating top term; validated 2.95×10⁻¹¹).
+- **Proxy / needs human input:** RS NP = same Z-like proxy as K004 (Im part); full RS-EW matching absent (cross-cutting gap).
+- **Trail:** `.orchestration/runs/K005/`.
+
+### B002 — S_ψKs / sin2β   [status: committed @ 80d4224]
+- **Rigorous:** NP mixing-phase shift from the existing running ΔF=2 complex M₁₂.
+- **Needs human input:** the SM reference phase 2β is taken from B002.yaml (β=22.63°) — no CKM-phase
+  computation exists in the core. Substitute a core-derived 2β when CKM-phase machinery is added.
+- **Trail:** `.orchestration/runs/B002/`.
+
+### C002 — CP violation in neutral charm mixing   [status: committed @ b85f482]
+- **Rigorous:** NP CP amplitude |Im(M₁₂^NP)| from running ΔF=2 D⁰ mixing; budget from HFLAV φ_M interval.
+- **Needs human input:** no grounded SM long-distance charm phase / Γ₁₂; CP-phase verdict omits SM-side
+  long-distance contribution (charm is theoretically dirty).
+- **Trail:** `.orchestration/runs/C002/`.
