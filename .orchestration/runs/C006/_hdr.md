@@ -1,0 +1,2 @@
+# Implement C006 — BR(D⁰→e±μ∓) LFV. family=charm. REUSE rare_charm_dilepton.
+LFV neutral-charm decay (SM=0 to excellent approx) → pure-NP bound vs PDG limit (from C006.yaml), HARD. Reuse the c→uℓℓ machinery with a lepton-flavor-violating (eμ) effective coupling — which is NOT on ParameterPoint → documented proxy, NEEDS-HUMAN-PHYSICS. Append-only (don't modify C004/C005/C007 funcs).
