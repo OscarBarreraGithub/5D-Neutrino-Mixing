@@ -85,3 +85,9 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
 ### Wave-7 (K008, C005, T012, T002, B015)   [committed — see git log]
 - **Rigorous:** SM sides validated (K_L→π0ee direct-CP y7V/y7A vs KTeV; Z→cc̄ R_c 0.1721/A_c 0.668; B→X_sℓℓ[1,6] 1.62e-6; t→uZ negligible; D⁰→ee SD≈0).
 - **Needs human input:** RS NP proxies inherited from the shared modules (s→dℓℓ y7V/y7A, c→uℓℓ, Zcc-shift, top-Z FCNC, C9/C10) — all the cross-cutting EW-coupling gap.
+
+### Wave-8 (K009, C007, T015, T003, B017)   [committed — see git log]
+- **Rigorous:** K_L→π0μμ y7V/y7A SM; B→K(*)ℓℓ R_K proxy SM=1; t→cγ pure-NP; Z→eμ LFV pure-NP; D⁺→π⁺μμ SD.
+- **Needs human input:** RS NP proxies (s→dℓℓ y7V/y7A, c→uℓℓ semileptonic, off-diagonal Z-eμ LFV coupling,
+  top-photon dipole, C9/C10) — cross-cutting EW-coupling gap. C007 is a FULL-q² proxy (resonance/LD windows
+  not applied) + 8.96% form-factor normalization uncertainty.
