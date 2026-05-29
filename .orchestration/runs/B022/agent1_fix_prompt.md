@@ -1,0 +1,5 @@
+You are agent1 fixing B022 (B⁺→K⁺νν̄) and module quarkConstraints/rare_b_nunu.py. Reviews: .orchestration/runs/B022/agent2_out.md = PHYSICS-NEEDS-FIXES, agent3_out.md = CODE-NEEDS-FIXES (BLOCKER). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX:
+1. (physics SHOULD-FIX) The charged-B long-distance term is incorrectly scaled by NP: code does BR = BR_SM_total·R_K. The long-distance piece BR_LD=6.09(53)e-7 is NOT modified by short-distance NP. Correct: BR = BR_LD + (BR_SM_total − BR_LD)·R_K, with BR_SM_total=5.58(37)e-6 (HPQCD2023, from B022.yaml). For R_K=4.002 this gives 2.050e-5 (not 2.233e-5).
+2. (code BLOCKER) B022 uses load_pdg_block, not the scaffold load_anchor. Route value-bearing anchors (SM, exp) through load_anchor; add a test that forces a mismatched/missing load_anchor and asserts loud AnchorError.
+Validate SM BR(B+→K+νν)≈5.58e-6. Keep NEEDS-HUMAN-PHYSICS Z-like proxy flag. Isolated to rare_b_nunu.py + B022.py + test. Run tests/constraints/ -q green. OUTPUT <=10 lines: changes, corrected BR number, pytest counts.

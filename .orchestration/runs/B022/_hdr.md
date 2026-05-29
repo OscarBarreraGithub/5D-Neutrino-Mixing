@@ -1,0 +1,2 @@
+# Implement B022 — BR(B⁺→K⁺νν̄). family=beauty. PIONEER: build the shared b→sνν̄ module.
+Analog of K004 for b→s. BUILD new module quarkConstraints/rare_b_nunu.py (SM: b→sνν̄ short-distance, X_t top function, SM BR(B+→K+νν)~5e-6 — validate) wrapped by a NEW adapter physics_adapters/rare_b_nunu.py. Design so B023 (B→K*νν) reuses it. RS NP = documented Z-like proxy (same approach as K004's rare_kaon_snd), flagged NEEDS-HUMAN-PHYSICS. Budget from B022.yaml (Belle II measured vs SM), HARD.
