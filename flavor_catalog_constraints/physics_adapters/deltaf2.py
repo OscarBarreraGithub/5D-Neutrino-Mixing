@@ -20,10 +20,25 @@ from quarkConstraints.deltaf2 import (
     DELTA_M_K,
     DELTA_M_BS_EXP,
     DELTA_M_BS_SM,
+    B_1_BD,
+    B_1_D,
+    B_4_BD,
+    B_4_D,
+    B_5_BD,
+    B_5_D,
     DeltaF2WilsonCoefficients,
     DeltaMKResult,
     EpsilonKResult,
+    F_BD,
+    F_D,
+    M_BD,
+    M_B_QUARK,
+    M_C_QUARK,
+    M_D_QUARK_BD,
+    M_D0,
+    M_U_QUARK,
     MesonMixingResult,
+    compute_m12_np as _compute_meson_m12_np,
     compute_delta_f2_wilsons,
     evaluate_bd_mixing_with_running as _evaluate_bd_mixing_with_running,
     evaluate_bs_mixing_with_running as _evaluate_bs_mixing_with_running,
@@ -32,6 +47,7 @@ from quarkConstraints.deltaf2 import (
     evaluate_d0_mixing_with_running as _evaluate_d0_mixing_with_running,
     evaluate_epsilon_k as _evaluate_epsilon_k,
     evaluate_epsilon_k_with_running as _evaluate_epsilon_k_with_running,
+    _evolve_wilsons as _evolve_delta_f2_wilsons,
 )
 
 __all__ = [
@@ -50,7 +66,9 @@ __all__ = [
     "delta_mk_from_wilsons_with_running",
     "delta_mk_core_inputs",
     "d0_mixing_from_wilsons_with_running",
+    "d0_mixing_m12_np_from_wilsons_with_running",
     "bd_mixing_from_wilsons_with_running",
+    "bd_mixing_m12_np_from_wilsons_with_running",
     "bd_mixing_core_inputs",
     "bs_mixing_from_wilsons_with_running",
     "bs_mixing_core_inputs",
@@ -252,6 +270,34 @@ def d0_mixing_from_wilsons_with_running(
     )
 
 
+def d0_mixing_m12_np_from_wilsons_with_running(
+    wilsons: DeltaF2WilsonCoefficients,
+    *,
+    mu_had: float = 2.0,
+) -> complex:
+    """Return complex ``M12^NP`` for D0 mixing after QCD running.
+
+    This is the phase-preserving companion to
+    :func:`d0_mixing_from_wilsons_with_running`.  It intentionally reuses the
+    same Delta F=2 core evolution and D0 matrix-element helper that feed the
+    audited magnitude evaluator, but does not collapse the result to
+    ``abs(M12^NP)``.
+    """
+    evolved = _evolve_delta_f2_wilsons(wilsons, mu_had=mu_had)
+    return complex(
+        _compute_meson_m12_np(
+            evolved,
+            F_D,
+            M_D0,
+            M_C_QUARK,
+            M_U_QUARK,
+            B_1_D,
+            B_4_D,
+            B_5_D,
+        )
+    )
+
+
 def bd_mixing_core_inputs() -> dict[str, float]:
     """Return the B_d mass-splitting inputs hardwired in the Delta F=2 core."""
     return {
@@ -290,6 +336,34 @@ def bd_mixing_from_wilsons_with_running(
         budget=budget,
         ratio_to_budget=ratio,
         passes=ratio <= 1.0,
+    )
+
+
+def bd_mixing_m12_np_from_wilsons_with_running(
+    wilsons: DeltaF2WilsonCoefficients,
+    *,
+    mu_had: float = 2.0,
+) -> complex:
+    """Return complex ``M12^NP`` for B_d mixing after QCD running.
+
+    This is the phase-preserving companion to
+    :func:`bd_mixing_from_wilsons_with_running`.  It intentionally reuses the
+    same Delta F=2 core evolution and B_d matrix-element helper that feed the
+    audited magnitude evaluator, but does not collapse the result to
+    ``abs(M12^NP)``.
+    """
+    evolved = _evolve_delta_f2_wilsons(wilsons, mu_had=mu_had)
+    return complex(
+        _compute_meson_m12_np(
+            evolved,
+            F_BD,
+            M_BD,
+            M_B_QUARK,
+            M_D_QUARK_BD,
+            B_1_BD,
+            B_4_BD,
+            B_5_BD,
+        )
     )
 
 
