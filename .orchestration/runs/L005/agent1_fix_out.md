@@ -1,0 +1,7 @@
+- Core fix: `omega_conv = 2 G_F^2 m_mu^5 |...|^2`; diagnostics now expose KKO `m_mu^(5/2)` overlap units.
+- Pure-dipole CR/BR: Ti `0.0041396134`, Al `0.0026681716`, Au `0.0039253654`.
+- L005 budget: `6.1e-13` HARD from KKO/SINDRUM II provenance: https://arxiv.org/abs/hep-ph/0203110.
+- L003 changed expected lower/upper proxy CR to `2.3450995e-23 / 2.6044861e-23`.
+- L004 changed expected lower/upper proxy CR to `3.6840073e-23 / 4.0780040e-23`.
+- RS proxy `NEEDS-HUMAN-PHYSICS` and conservative lower-envelope interference policy unchanged.
+- Pytest: charged-lepton `83 passed`; full `tests/constraints/` `727 passed`.

@@ -2,6 +2,17 @@ schema: flavor_catalog.source_manifest.v1
 process_id: L005
 generated_at: "2026-05-16T14:04:48-04:00"
 references:
+  - key: KKO2002_TitaniumMuE
+    arxiv_id: "hep-ph/0203110"
+    DOI: "10.1103/PhysRevD.66.096002"
+    title: "Detailed calculation of lepton flavor violating muon-electron conversion rate for various nuclei"
+    authors: "Ryuichiro Kitano, Masafumi Koike, and Yasuhiro Okada"
+    year: 2002
+    url: "https://arxiv.org/abs/hep-ph/0203110"
+    access_date: "2026-05-29"
+    sha256_of_local_snapshot: "sha256:f383d2372c32a92d851fe2563462356c9aa1fbe2806189ca136a6f591b81a72d"
+    snapshot_path: "flavor_catalog/references/L005/kko2002_titanium_limit_extract.txt"
+    use_note: "Primary L005 HARD budget provenance for the SINDRUM II titanium conversion branching-ratio limit < 6.1e-13 at 90% C.L."
   - key: PDG2026_MuonTiConversion
     arxiv_id: null
     DOI: null
@@ -12,7 +23,7 @@ references:
     access_date: "2026-05-16"
     sha256_of_local_snapshot: "sha256:41061ed0e0e6c3a8e54ff2985d48347e0c7128f82e87a69e8831842e53f5aa52"
     snapshot_path: "flavor_catalog/references/L005/pdg2026_muon_listing_s004_ti_conversion.txt"
-    use_note: "Canonical PDG live listing value for sigma(mu- Ti -> e- Ti) / sigma(mu- Ti -> capture) < 4.3e-12 at 90% C.L."
+    use_note: "Ground-state PDG live listing value < 4.3e-12 at 90% C.L.; retained as a local comparison, not the L005 HARD budget."
   - key: SINDRUMII1993_TitaniumMuE
     arxiv_id: null
     DOI: "10.1016/0370-2693(93)91383-X"

@@ -1,0 +1,2 @@
+# Implement L005 — μ→e conversion in Ti. family=charged_lepton. REUSE mu_e_conversion.
+REUSE quarkConstraints/mu_e_conversion.py (built for L003/L004) with TITANIUM nuclear overlaps + capture rate (from L005.yaml / KKO). SINDRUM II Ti limit (~6.1e-13) is OBSERVED → HARD. SM=0 → pure-NP. RS proxy NEEDS-HUMAN-PHYSICS; conservative interference. Append-only (per-target nuclear inputs; don't modify L003/L004 paths).

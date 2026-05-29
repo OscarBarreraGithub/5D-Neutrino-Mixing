@@ -83,27 +83,28 @@ version: "0.1.0"
 source_shas:
   cfw2008_arxiv0804_1954.txt: "sha256:4a60bdefbd6a2f2561666afcefd9abac5bbac8cdd18374286091a7d6dd2e8fba"
   comet_phase_i_tdr_arxiv1812_09018.txt: "sha256:f5521799ba5391840dca678635346194bb2cd36915f2ea4b7f9de68d35e78450"
+  kko2002_titanium_limit_extract.txt: "sha256:f383d2372c32a92d851fe2563462356c9aa1fbe2806189ca136a6f591b81a72d"
   mu2e_tdr_arxiv1501_05241.txt: "sha256:da321f22d972ddf4cb5623657cd881e834fb5849885a9c5616f192a57a149831"
   pdg2026_muon_listing_s004_ti_conversion.txt: "sha256:41061ed0e0e6c3a8e54ff2985d48347e0c7128f82e87a69e8831842e53f5aa52"
   sindrumii_1993_titanium_crossref.txt: "sha256:fc1354e78154dc9a8abb2b85631428f5d20c1c4fb1822037444b15fd249146f8"
 pdg_or_equivalent:
   primary_current_limit:
-    source: "Particle Data Group live muon listing, NODE=S004"
-    year: 2026
-    pdg_generated_timestamp: "2026-05-14T19:33:00"
+    source: "Kitano, Koike, Okada summary of the SINDRUM II titanium result"
+    year: 2002
     observable: "sigma(mu- Ti -> e- Ti) / sigma(mu- Ti -> capture)"
     target_material: "Ti"
-    value: 4.3e-12
+    value: 6.1e-13
     relation: "<"
     confidence_level: "90% C.L."
     document_id: "DOHMEN 93"
     technique: "SPEC"
     experiment: "SINDRUM II"
-    pdg_note: "Assumes mu- -> e- conversion leaves the nucleus in its ground state."
-    source_url: "https://pdg.lbl.gov/encoder_listings/s004.pdf"
-    access_date: "2026-05-16"
-    snapshot_path: "flavor_catalog/references/L005/pdg2026_muon_listing_s004_ti_conversion.txt"
-    sha256: "41061ed0e0e6c3a8e54ff2985d48347e0c7128f82e87a69e8831842e53f5aa52"
+    pdg_note: "KKO quotes the SINDRUM II PSI titanium conversion branching-ratio bound; the PDG live ground-state listing snapshot in this directory separately quotes 4.3e-12."
+    source_url: "https://arxiv.org/abs/hep-ph/0203110"
+    supporting_source_url: "https://doi.org/10.1016/0370-2693(93)91383-X"
+    access_date: "2026-05-29"
+    snapshot_path: "flavor_catalog/references/L005/kko2002_titanium_limit_extract.txt"
+    sha256: "f383d2372c32a92d851fe2563462356c9aa1fbe2806189ca136a6f591b81a72d"
   experimental_publication:
     source: "SINDRUM II Collaboration / Crossref DOI metadata"
     year: 1993
