@@ -1,0 +1,11 @@
+1. NIT: ΔF2 amplitude-part check is N/A for T020: this is a Higgs LFV decay, not an `M_12` observable. Verdict uses `BR ∝ |Y_eμ|^2+|Y_μe|^2` via [higgs_lfv.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/quarkConstraints/higgs_lfv.py:185) and [T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T020.py:388); no real/imaginary `M_12` confusion.
+
+2. NIT: QCD-running check is N/A: no hadronic Wilsons enter `h -> e mu`. T020 imports/calls only the shared Higgs-LFV adapter, [T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T020.py:46) and [T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T020.py:388); no non-running `deltaf2` path is used.
+
+3. NIT: Budget physics is correct: SM=0, pure-NP `BR <= 4.4e-5` CMS 95% CL from YAML lines 140-151, applied as `ratio = BR/limit` at [T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T020.py:435). With `m_h=125.25 GeV`, `Γ_h=4.07e-3 GeV`, the sqrt convention gives `sqrt(|Y_eμ|^2+|Y_μe|^2) <= 1.8956345e-4`.
+
+4. NIT: Auxiliary ATLAS provenance is inconsistent: YAML/diagnostics use `6.2e-5 (5.9e-5)` at T020.yaml lines 173-178 and [T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T020.py:424), but the local ATLAS snapshot says `6.1e-5 (5.8e-5)`. Verdict unaffected because CMS `4.4e-5` is stronger.
+
+5. NIT: Severity/units/diagnostics are appropriate: `Severity.HARD`, dimensionless BR budget, widths in GeV, and `NEEDS-HUMAN-PHYSICS` proxy warning is explicit at [T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T020.py:13) and [T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T020.py:445).
+
+PHYSICS-OK

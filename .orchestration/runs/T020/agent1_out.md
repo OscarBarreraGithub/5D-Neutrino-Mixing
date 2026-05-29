@@ -1,0 +1,9 @@
+- Plan executed: studied examples/YAML, implemented T020, added focused tests, ran suite.
+- Physics: pure-NP HARD `BR(h -> e mu)`, SM = `0`, using `Gamma = m_h*(|Y_e_mu|^2 + |Y_mu_e|^2)/(8*pi)` and `yukawa_norm = sqrt(...)`.
+- Reuse: reused `physics_adapters/higgs_lfv.py` over `quarkConstraints/higgs_lfv.py`; no new machinery.
+- Budget: `4.4e-5` from `T020.yaml` `CMS2023:T020:emu_limit`, PDG CMS entry matches.
+- Validation: effective Yukawa limit `1.8956345e-4`; sample proxy gives `BR = 1.7264841e-5`, ratio `0.39238`, matching core/manual formula.
+- Gap: diagnostics and docstring flag `NEEDS-HUMAN-PHYSICS` for missing full RS charged-lepton Higgs-Yukawa matching.
+- Files changed: [T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T020.py), [test_T020.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/tests/constraints/primary/top_higgs_ew/test_T020.py).
+- Pytest: targeted `14 passed`; full `python -m pytest tests/constraints/ -q` -> `678 passed in 14.99s`.
+- Unrelated pre-existing worktree changes were left untouched.
