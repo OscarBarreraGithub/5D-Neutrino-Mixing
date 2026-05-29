@@ -1,0 +1,5 @@
+You are agent1 fixing EW002 (CKM first-row unitarity). Code review .orchestration/runs/EW002/agent3_out.md = CODE-NEEDS-FIXES (physics .orchestration/runs/EW002/agent2_out.md = PHYSICS-OK). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX:
+1. (BLOCKER) EW002 bypasses scaffold load_anchor (uses load_full_yaml + custom build_anchor). Route the list-entry anchors through load_anchor (like EW003/K005 do); add a spy/probe test confirming load_anchor is used and that missing/mismatch fails loud.
+2. (BLOCKER) The test calls the adapter evaluate_first_row_sum directly, not Constraint.evaluate(). Rewrite the safe/excluded tests to call the constraint's evaluate() (with controlled/mocked anchors if needed) and assert against INDEPENDENT expected arithmetic (compute |Vud|^2+|Vus|^2+|Vub|^2 - 1 by hand), not by re-calling the adapter.
+Keep SOFT severity and the NEEDS-HUMAN-PHYSICS flag (RS charged-current matching absent). Isolated to EW002.py, its test, ckm_unitarity adapter. Run `python -m pytest tests/constraints/ -q` green. OUTPUT <=10 lines: changes, pytest counts.

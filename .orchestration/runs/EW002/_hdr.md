@@ -1,0 +1,2 @@
+# Implement EW002 — CKM first-row unitarity (|V_ud|^2+|V_us|^2+|V_ub|^2 = 1). family=top_higgs_ew.
+Largely a DATA-DRIVEN SM consistency test: compute the first-row sum and its deviation ΔCKM from the measured |V_ud|,|V_us|,|V_ub| (from EW002.yaml). The RS NP effect is a small shift; if no grounded RS contribution is available on ParameterPoint, report the SM/data deviation rigorously and flag the NP piece NEEDS-HUMAN-PHYSICS. Budget = unitarity uncertainty. Likely SOFT (SM-vs-data tension). No existing machinery needed beyond yaml values + simple arithmetic.
