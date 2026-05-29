@@ -1,0 +1,7 @@
+1. NIT: No amplitude issue. K018 is not Delta F=2, so no `M12` real/imaginary-part choice applies; the verdict uses `|V_us| = (|V_us| f_+(0))/f_+(0)` at `quarkConstraints/ckm_extraction.py:105` and compares magnitudes at `flavor_catalog_constraints/primary/kaon/K018.py:330`.
+2. NIT: QCD running is correctly not used. This constraint has no Wilson coefficients and does not call a non-running Delta F=2 path; `qcd_running_applied=False` is explicit at `K018.py:353`. Running effect is N/A, not a missing 2 GeV evolution.
+3. NIT: Budget is defensible/right. Code uses the YAML PDG total `|V_us|` uncertainty `0.00053` (`K018.py:293`, `K018.yaml:197-206`), not a bare residual; recomputation gives `0.223303774`, delta vs PDG `3.77e-6`, pull `0.00712 sigma`, propagated sigma `0.000538`.
+4. NIT: Anchor numbers match snapshots/catalog: `|V_us|f_+(0)=0.21656(35)` (`K018.yaml:96-100`), `f_+(0)=0.9698(17)` (`K018.yaml:213-217`), PDG `|V_us|=0.22330(53)` (`K018.yaml:197-202`), FLAG `0.22328(58)` (`K018.yaml:225-229`); audit confirms at `flavor_catalog/audits/factcheck_kaon.md:241-245`.
+5. NIT: Severity/units/diagnostics are appropriate. `Severity.SOFT` at `K018.py:311` matches source-level data/lattice consistency; dimensionless units are correct for `|V_us|` and `f_+(0)`, so GeV units are not applicable. RS matching gap is honestly flagged at `K018.py:15-21` and adapter `ckm_extraction.py:16-21`.
+
+PHYSICS-OK

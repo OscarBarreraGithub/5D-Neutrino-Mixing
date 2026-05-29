@@ -1,0 +1,2 @@
+You are agent1 fixing K018 (K_l3/V_us) test. Code review .orchestration/runs/K018/agent3_out.md = CODE-NEEDS-FIXES (SHOULD-FIX); physics OK. Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX (SHOULD-FIX): the test recomputes YAML arithmetic by hand; add a direct recomputation through the core quarkConstraints.ckm_extraction (extract_vus_from_kl3 + vus_consistency_pull) and compare to Constraint.evaluate(). Isolated to test_K018.py. Run tests/constraints/primary/kaon/test_K018.py -q + tests/constraints/ -q green. OUTPUT <=6 lines: change, pytest counts.

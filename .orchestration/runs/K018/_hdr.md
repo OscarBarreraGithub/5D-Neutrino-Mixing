@@ -1,0 +1,2 @@
+# Implement K018 — K_l3 / |V_us| f_+(0). family=kaon. PIONEER: new ckm_extraction module.
+BUILD quarkConstraints/ckm_extraction.py (|V_us| from K_l3 using f_+(0); the constraint tests consistency of the extracted |V_us| / CKM unitarity context). Largely DATA/lattice-driven (from K018.yaml: |V_us|f_+(0), f_+(0) lattice). RS NP shift is small → documented proxy or flag NEEDS-HUMAN-PHYSICS. Wrap via new adapter. Budget from K018.yaml; SOFT (data/lattice consistency) or HARD per the catalog. May share concept with EW002.
