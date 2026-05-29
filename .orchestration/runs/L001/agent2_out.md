@@ -1,0 +1,9 @@
+1. SHOULD-FIX: Missing/invalid lepton dipole inputs return `passes=True` for a HARD MEG II bound, which can be misread as satisfying L001; correct physics verdict is “not evaluated/no dipole prediction,” not a pass. [L001.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/charged_lepton/L001.py:241), [L001.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/charged_lepton/L001.py:270); budget is `BR < 1.5e-13`.
+
+2. NIT: ΔF=2 amplitude checks are N/A for L001; the correct observable is the dipole branching ratio using `|(Ybar_N Ybar_N†)_{eμ}|`, and the core does take the magnitude, not Re/Im. [muToEGamma.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavorConstraints/muToEGamma.py:187).
+
+3. NIT: QCD running is N/A for this charged-lepton radiative decay; there are no hadronic Wilsons or `mu_had=2 GeV` evolution to apply. The constraint correctly reaches physics only through the lepton adapter. [L001.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/charged_lepton/L001.py:44), [lepton.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/physics_adapters/lepton.py:289).
+
+4. NIT: Budget and anchors are physics-consistent: YAML/snapshot use MEG II `BR(mu+ -> e+ gamma) < 1.5e-13` at 90% CL; with `prefactor=4.0e-8`, `C=sqrt(BR/prefactor)=1.936491673e-3`. [L001.yaml](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog/processes/charged_lepton/L001.yaml:152), [megii2025_arxiv2504_15711.txt](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog/references/L001/megii2025_arxiv2504_15711.txt:22), [L001.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/charged_lepton/L001.py:208).
+
+PHYSICS-NEEDS-FIXES
