@@ -1,0 +1,8 @@
+You are agent1 fixing C001 (D0 mixing). Read the code review: .orchestration/runs/C001/agent3_out.md (physics .orchestration/runs/C001/agent2_out.md was PHYSICS-OK and CONFIRMED the YAML budget is the correct current value). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX (BLOCKER): C001 correctly overrides the core's STALE hardcoded D0 budget (6.25e-15 -> half 3.125e-15) with the current YAML anchor value (Delta_m_D=6.562e-15 -> budget 3.281e-15). This override is physically correct, but it is currently implicit and the test's "direct" cross-check hides the discrepancy.
+1. Make the budget-override policy EXPLICIT in C001.py: a clear comment/docstring explaining the constraint uses the catalog YAML Delta_m_D (current PDG/HFLAV) as the |M12^NP| <= Delta_m_D/2 budget, intentionally overriding the older hardcoded core constant.
+2. Fix the test cross-check to be apples-to-apples: compare result.ratio and result.budget against a DIRECT computation that uses the SAME (YAML) budget — i.e. recompute ratio = abs_m12_np / (yaml_delta_m_D/2) — and assert agreement; OR call the core with the budget override so audited.budget matches. Do not silently compare against the core's stale budget.
+3. (NIT) Add a loud-failure anchor regression test (missing candidate/value -> AnchorError).
+IGNORE the "worktree not clean / sees B001/B003/K002" finding — that is an expected parallel-wave artifact, not a C001 issue.
+Keep changes ISOLATED to C001.py and its test. Run `python -m pytest tests/constraints/primary/charm/test_C001.py -q` and `python -m pytest tests/constraints/ -q` until green.
+OUTPUT (<=12 lines): changes, the documented override, the corrected cross-check numbers, pytest counts, git diff --stat. No full files.

@@ -1,0 +1,11 @@
+1. NIT: Correct amplitude. C001 uses `result.abs_m12_np` and compares `|M12^NP|` to budget, not `Im M12`; core computes `abs(m12)` for D0 at `quarkConstraints/deltaf2.py:1006-1015`, consumed at `flavor_catalog_constraints/primary/charm/C001.py:160-171`. Correct for this non-CP Δm_D veto.
+
+2. NIT: QCD running is actually on the verdict path. C001 calls `d0_mixing_from_wilsons_with_running` at `C001.py:154-158`, adapter calls `_evaluate_d0_mixing_with_running` at `physics_adapters/deltaf2.py:238`, core evolves then evaluates at `quarkConstraints/deltaf2.py:1039-1045`. Representative test point: no-running `|M12|=3.43e-18 GeV`; running `|M12|=1.14e-16 GeV`, a `33.4x` change. The non-running helper at `quarkConstraints/deltaf2.py:435` is not used for C001’s verdict.
+
+3. NIT: Budget is right for C001. YAML has `Delta_m_D=(6.562 +/- 0.764)e-15 GeV`, so `|M12^NP| <= Delta_m_D/2 = 3.281e-15 GeV`; loaded and used at `C001.py:84-86` and `C001.py:154-158`, sourced from `flavor_catalog/processes/charm/C001.yaml:145-153`. This is the defensible long-distance-dominated convention. Core’s older hardcoded `6.25e-15 GeV` at `quarkConstraints/deltaf2.py:699` would give `3.125e-15 GeV`, 4.8% tighter, but C001 overrides it with the YAML anchor.
+
+4. NIT: Anchor numbers match snapshots. HFLAV: `x_D=0.405 +/- 0.043%`, `y_D=0.636 +/- 0.024%` at `C001.yaml:121-143` and `references/C001/hflav_ckm25_dmixing_global_fit.txt:15-17`; PDG/HFLAV: `0.997 +/- 0.116 x 10^10 hbar s^-1 = (6.562 +/- 0.764)e-15 GeV` at `references/C001/pdg2025_deltam_d_pdgLive.txt:14-21`.
+
+5. NIT: Severity and uncertainty language are appropriate. HARD is reasonable for an observed neutral-meson mixing veto, and diagnostics explicitly flag long-distance charm uncertainty at `C001.py:172-195`. Residual core caveat: D0 bag inputs are documented as comparable `3 GeV` inputs while the global endpoint is `2 GeV`, and LO RG has estimated `10-30%` LR/scalar residuals; this is already deferred in `docs/audits/wilson_rg_inventory.md:188-196`, not a C001 physics blocker.
+
+PHYSICS-OK

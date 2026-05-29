@@ -1,0 +1,2 @@
+# Implement constraint C001 — Neutral charm mixing (x_D, y_D, Delta m_D), family=charm.
+Observable: D0-D0bar mixing. RUNNING evaluator: quarkConstraints/deltaf2.py:evaluate_d0_mixing_with_running. Catalog: flavor_catalog/processes/charm/C001.yaml. Charm mixing is long-distance dominated and theoretically dirty; SM short-distance is small. Use the core's documented D0 convention (likely full measured mixing as NP room, analogous to Delta m_K). Document the budget choice clearly for reviewers; flag if the physics is uncertain.
