@@ -1,0 +1,7 @@
+1. NIT: Correct-amplitude check PASS/N/A: B026 is semileptonic LFU, not Δm/CP; it uses `R_D* = R_D*^SM |1+C_tau^proxy|^2`, so complex phases enter via magnitude-squared, not wrong Re/Im selection. `quarkConstraints/semileptonic_lfu.py:216`, `:219`; `flavor_catalog_constraints/primary/beauty/B026.py:372`.
+2. NIT: QCD-running check PASS/N/A: no ΔF=2 Wilson evolution is physically applicable here; B026 does not use the non-running DeltaF2 path for a DeltaF2 verdict. The charged-current proxy is explicitly matching-scale only and NEEDS-HUMAN-PHYSICS. `B026.py:366`, `:397`; `quarkConstraints/semileptonic_lfu.py:23`.
+3. NIT: Budget check PASS: uses HFLAV-vs-SM envelope, not bare residual: `|0.281-0.254| + sqrt(0.011^2+0.005^2) = 0.039083`; right for the requested HARD B026.yaml convention. `B026.py:240`, `:244`; `B026.yaml:86`, `:87`, `:114`, `:115`.
+4. NIT: Anchor check PASS: HFLAV snapshot has `R(D*)=0.281 ± 0.011`; SM row has `0.254 ± 0.005`, matching YAML and code-loaded `rdstar` keys. `hflav_ckm2025_rdrds.txt:174`, `:333`; `B026.py:274`.
+5. NIT: Severity/units/docs PASS: HARD, dimensionless ratio, and proxy limitations are correctly surfaced; no misleading GeV-unit use in the observable budget. `B026.py:20`, `:69`, `:329`, `:411`.
+
+PHYSICS-OK

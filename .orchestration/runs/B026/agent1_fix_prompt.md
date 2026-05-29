@@ -1,0 +1,2 @@
+You are agent1 fixing B026 (R_D*). Code review .orchestration/runs/B026/agent3_out.md = CODE-NEEDS-FIXES (BLOCKER); physics OK. Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX (BLOCKER): _load_b026_anchor accepts a mismatched load_anchor result (wrong block_key). After each load_anchor, assert the returned block_key is the expected candidate and raise AnchorError on mismatch. Add a monkeypatch regression test forcing a mismatched anchor. Isolated to B026.py + test. Run tests/constraints/ -q green. OUTPUT <=6 lines: change, pytest counts.
