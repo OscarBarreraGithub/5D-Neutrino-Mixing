@@ -1,0 +1,10 @@
+- Plan executed: studied scaffold/examples/T015/T016 YAML, added T016, added tests, ran full suite.
+- Physics: HARD pure-NP LFV bound, SM `BR(Z -> e tau)=0`; `BR = 2(|delta_g_L|^2+|delta_g_R|^2)/(SM width weight + LFV weight)`.
+- Source/budget: `BR(Z -> e+- tau-+) < 5.0e-6` at 95% CL from `T016.yaml` `PDG2025:T016:zetau_limit`; ATLAS 2021 same value.
+- Machinery: reused shared `zpole_lfv` branching/effective-coupling machinery; built append-only e-tau proxy adapter.
+- Validation: independent SM total width weight `3.649563333333334`; zero-proxy LFV BR `0.0`; effective coupling limit `0.0030205883455219616`.
+- NEEDS-HUMAN-PHYSICS: rigorous RS `Z e tau` matching is absent; proxy maps e-tau lepton overlap/matrix `[0,2]` to `delta g_etau`.
+- Files: [T016.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/top_higgs_ew/T016.py), [zpole_lfv_etau.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/physics_adapters/zpole_lfv_etau.py), [test_T016.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/tests/constraints/primary/top_higgs_ew/test_T016.py).
+- T015 left unchanged.
+- Tests: `python -m pytest tests/constraints/primary/top_higgs_ew/test_T016.py -q` -> 13 passed; `python -m pytest tests/constraints/ -q` -> 374 passed.
+- Worktree also has unrelated untracked files from other runs; I left them untouched.
