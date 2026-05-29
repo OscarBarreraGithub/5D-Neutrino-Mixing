@@ -1,0 +1,2 @@
+# Implement B021 — BR(Λ_b→Λμμ). family=beauty. REUSE rare_b_dilepton (baryonic).
+REUSE the b→sℓℓ C9/C10 machinery (B005/B016) for the BARYONIC Λ_b→Λℓℓ mode (add the Λ_b→Λ form-factor normalization, append-only; don't modify meson funcs). SM BR in the catalog q² bin from B021.yaml — validate. Use the 30% proxy-theory budget treatment. RS C9/C10 proxy NEEDS-HUMAN-PHYSICS. HARD. Baryonic form factors are harder — document the form-factor uncertainty.
