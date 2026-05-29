@@ -123,7 +123,13 @@ orchestrator context resets. Updated after every per-constraint gate.
 | CR004 | VLQ B→Hb | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
 | T006 | t→ug | ✅ reuse | PHYSICS-OK | fixed | ✅ APPROVE | ✅ |
 
-**Done: 64 / ~95.** Wave-14 (all reuses). SHAs in git log. Wave-13. New modules: semileptonic_lfu, mu_e_conversion. SHAs in git log. Wave-12. New modules: rare_b_baryon_dilepton, higgs_lfv. SHAs in git log. Wave-11 = NEW-module pioneers (leptonic_tree, ckm_extraction, collider_resonance, edm, lfv_three_body) → unlock B025/B026?, T018-20 via higgs_lfv next, CR fan-out, E002, L009/L010/L003-005. SHAs in git log. Wave-10 fan-out. SHAs in git log. New module: rare_b_kstar_dilepton. Wave-9 fan-out. SHAs in git log. (Target is ~95 catalog entries, not 102 — some IDs merged/removed.) Wave-8 fan-out. SHAs in git log. New modules: rare_charm_semileptonic, zpole_lfv. Wave-7 = fan-out of wave-6 modules (one per shared module). Review caught K008 direct-CP structure bug (y7V/y7A) + C005 stale-golden. SHAs in git log. Wave-6 = multi-family PIONEERS — 5 new shared modules built in parallel:
+| L005 | μ→e conv Ti | ✅ reuse | fixed (m_μ⁵ core) | fixed | ✅ APPROVE | ✅ |
+| K017 | R_K LFU | ✅ reuse | PHYSICS-OK | fixed | ✅ APPROVE | ✅ |
+| T007 | t→cH | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
+| CR005 | Z' dilepton | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
+| C003 | ΔA_CP (STUB) | ✅ stub | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
+
+**Done: 69 / ~95.** Wave-15. NOTE: L005 review found a shared mu_e_conversion m_μ⁵ normalization bug → fixed core + re-verified committed L003/L004 (Opus). C003 = first HARD honest-stub (INFO, dual NEEDS-HUMAN). SHAs in git log. Wave-14 (all reuses). SHAs in git log. Wave-13. New modules: semileptonic_lfu, mu_e_conversion. SHAs in git log. Wave-12. New modules: rare_b_baryon_dilepton, higgs_lfv. SHAs in git log. Wave-11 = NEW-module pioneers (leptonic_tree, ckm_extraction, collider_resonance, edm, lfv_three_body) → unlock B025/B026?, T018-20 via higgs_lfv next, CR fan-out, E002, L009/L010/L003-005. SHAs in git log. Wave-10 fan-out. SHAs in git log. New module: rare_b_kstar_dilepton. Wave-9 fan-out. SHAs in git log. (Target is ~95 catalog entries, not 102 — some IDs merged/removed.) Wave-8 fan-out. SHAs in git log. New modules: rare_charm_semileptonic, zpole_lfv. Wave-7 = fan-out of wave-6 modules (one per shared module). Review caught K008 direct-CP structure bug (y7V/y7A) + C005 stale-golden. SHAs in git log. Wave-6 = multi-family PIONEERS — 5 new shared modules built in parallel:
 `rare_kaon_dilepton`(→K008/K009/K010/K012), `rare_charm_dilepton`(→C005/C007), `zpole`(→T011/T012/T015-T017),
 `top_fcnc`(→T002-T008), exclusive `rare_b_dilepton`(→B015/B017-B019/B021). Ready for wide fan-out next.
 
