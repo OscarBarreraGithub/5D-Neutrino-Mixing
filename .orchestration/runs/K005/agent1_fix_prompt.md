@@ -1,0 +1,6 @@
+You are agent1 fixing K005 (K_L→π0νν̄). Reviews: .orchestration/runs/K005/agent2_out.md (PHYSICS-OK) and agent3_out.md (CODE-NEEDS-FIXES). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX:
+1. (SHOULD-FIX) Anchors load via load_full_yaml + custom list scanning; route value-bearing anchors through the scaffold load_anchor (extend it to handle the list-shaped K005 sidecar if needed), keeping the SM-limit BR validation.
+2. Add a one-line note that K005's extension of quarkConstraints/rare_kaon_snd.py is an INTENTIONAL append-only addition of the K_L→π0νν machinery (the K004 module), wrapped via physics_adapters/rare_kaon.py — this is the designed location for this physics, not an isolation violation.
+IGNORE the "git diff quarkConstraints non-empty / worktree has other files" BLOCKER — extending rare_kaon_snd.py is the correct, intended design; do not move it out. Keep the RS NP proxy + NEEDS-HUMAN-PHYSICS flag (accepted). K005 must only touch K005.py, its test, the append-only rare_kaon_snd.py K_L function, and the rare_kaon adapter.
+Run `python -m pytest tests/constraints/primary/kaon/test_K005.py -q` and `tests/constraints/ -q` green. OUTPUT <=12 lines: changes, pytest counts.

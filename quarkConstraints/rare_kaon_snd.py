@@ -58,6 +58,11 @@ RARE_KAON_RS_MATCHING_ASSUMPTION_V1 = (
     "Delta_q=Delta_nu=g/(2 c_W) stands in for the full RS EW KK/Z/Z' and "
     "neutrino-sector matching."
 )
+RARE_KAON_KAPPA_L_REF = 2.231e-10
+RARE_KAON_KAPPA_L_CITATION = (
+    "Buras et al. JHEP 11 (2015) 033, arXiv:1503.02693; "
+    "Buras-Venturini arXiv:2203.10099"
+)
 
 
 @dataclass(frozen=True)
@@ -168,6 +173,25 @@ class RareKaonBranchingResult:
     diagnostics: Mapping[str, float | complex | str] = field(default_factory=dict)
 
 
+@dataclass(frozen=True)
+class RareKaonNeutralBranchingResult:
+    """Branching-ratio prediction for ``K_L -> pi0 nu nubar``."""
+
+    model_label: str
+    input_bundle: str
+    branching_fraction: float
+    sm_branching_fraction: float
+    np_shift_branching_fraction: float
+    kappa_l: float
+    x_t: float
+    x_eff_top: complex
+    x_np_total: complex
+    lambda_wolfenstein: float
+    lambda_t: complex
+    wilsons: RareKaonWilsonCoefficients | None = None
+    diagnostics: Mapping[str, float | complex | str | bool] = field(default_factory=dict)
+
+
 def default_sm_inputs() -> RareKaonSMInputs:
     """Return the repo-owned default rare-kaon SM input bundle."""
     return RareKaonSMInputs()
@@ -203,6 +227,13 @@ def kappa_plus(inputs: RareKaonSMInputs | None = None) -> float:
     return float(p.kappa_plus_ref * (lam / p.kappa_lambda_ref) ** 8)
 
 
+def kappa_l(inputs: RareKaonSMInputs | None = None) -> float:
+    """Return ``kappa_L`` with the standard ``(lambda/0.225)^8`` rescaling."""
+    p = default_sm_inputs() if inputs is None else inputs
+    lam = ckm_factors(p).lambda_wolfenstein
+    return float(RARE_KAON_KAPPA_L_REF * (lam / p.kappa_lambda_ref) ** 8)
+
+
 def _branching_fraction_from_x_np(
     x_np_total: complex,
     *,
@@ -218,6 +249,20 @@ def _branching_fraction_from_x_np(
     ) ** 2
     kappa = kappa_plus(inputs)
     br = inputs.delta_em_correction * kappa * (imag_term + real_term)
+    return float(br), float(kappa), factors, x_eff_top
+
+
+def _neutral_branching_fraction_from_x_np(
+    x_np_total: complex,
+    *,
+    inputs: RareKaonSMInputs,
+) -> tuple[float, float, RareKaonCKMFactors, complex]:
+    factors = ckm_factors(inputs)
+    lam = factors.lambda_wolfenstein
+    x_eff_top = factors.lambda_t * inputs.x_t + complex(x_np_total)
+    imag_term = (x_eff_top.imag / lam**5) ** 2
+    kappa = kappa_l(inputs)
+    br = kappa * imag_term
     return float(br), float(kappa), factors, x_eff_top
 
 
@@ -239,6 +284,30 @@ def sm_branching_fraction(inputs: RareKaonSMInputs | None = None) -> RareKaonBra
         x_np_total=0.0j,
         lambda_wolfenstein=factors.lambda_wolfenstein,
         lambda_c=factors.lambda_c,
+        lambda_t=factors.lambda_t,
+    )
+
+
+def neutral_sm_branching_fraction(
+    inputs: RareKaonSMInputs | None = None,
+) -> RareKaonNeutralBranchingResult:
+    """Evaluate the SM-limit ``K_L -> pi0 nu nubar`` branching fraction."""
+    p = default_sm_inputs() if inputs is None else inputs
+    br, kappa, factors, x_eff_top = _neutral_branching_fraction_from_x_np(
+        0.0j,
+        inputs=p,
+    )
+    return RareKaonNeutralBranchingResult(
+        model_label=RARE_KAON_SND_MODEL_V1,
+        input_bundle=p.input_bundle,
+        branching_fraction=br,
+        sm_branching_fraction=br,
+        np_shift_branching_fraction=0.0,
+        kappa_l=kappa,
+        x_t=float(p.x_t),
+        x_eff_top=x_eff_top,
+        x_np_total=0.0j,
+        lambda_wolfenstein=factors.lambda_wolfenstein,
         lambda_t=factors.lambda_t,
     )
 
@@ -387,20 +456,92 @@ def evaluate_kplus_to_piplus_nunu(
     )
 
 
+def evaluate_klong_to_pi0_nunu(
+    source: QuarkMassBasisCouplings | RareKaonWilsonCoefficients | None = None,
+    *,
+    m_kk_gev: float | None = None,
+    inputs: RareKaonSMInputs | None = None,
+) -> RareKaonNeutralBranchingResult:
+    """Evaluate ``BR(K_L -> pi0 nu nubar)`` with the CP-odd imaginary projection."""
+    p = default_sm_inputs() if inputs is None else inputs
+    wilsons: RareKaonWilsonCoefficients | None
+    if source is None:
+        wilsons = None
+        x_np_total = 0.0j
+    elif isinstance(source, RareKaonWilsonCoefficients):
+        wilsons = source
+        x_np_total = source.x_np_total
+    else:
+        wilsons = compute_rare_kaon_wilsons(source, m_kk_gev=m_kk_gev, inputs=p)
+        x_np_total = wilsons.x_np_total
+
+    br, kappa, factors, x_eff_top = _neutral_branching_fraction_from_x_np(
+        x_np_total,
+        inputs=p,
+    )
+    sm = neutral_sm_branching_fraction(p).branching_fraction
+    diagnostics: dict[str, float | complex | str | bool] = {
+        "g_sm_squared_gev_minus2": g_sm_squared(p),
+        "kappa_l_ref": RARE_KAON_KAPPA_L_REF,
+        "kappa_l_citation": RARE_KAON_KAPPA_L_CITATION,
+        "imaginary_projection_only": True,
+        "matching_assumption": RARE_KAON_RS_MATCHING_ASSUMPTION_V1,
+    }
+    if wilsons is not None:
+        diagnostics.update(
+            {
+                "m_kk_gev": float(wilsons.M_KK),
+                "matching_scale_gev": float(wilsons.matching_scale),
+                "left_sd_coupling": complex(wilsons.left_sd_coupling),
+                "right_sd_coupling": complex(wilsons.right_sd_coupling),
+                "left_sd_overlap": complex(wilsons.left_sd_overlap),
+                "right_sd_overlap": complex(wilsons.right_sd_overlap),
+                "left_quark_delta": complex(wilsons.left_quark_delta),
+                "right_quark_delta": complex(wilsons.right_quark_delta),
+                "neutrino_delta": float(wilsons.neutrino_delta),
+                "x_np_left": complex(wilsons.x_np_left),
+                "x_np_right": complex(wilsons.x_np_right),
+                "x_np_total": complex(wilsons.x_np_total),
+            }
+        )
+
+    return RareKaonNeutralBranchingResult(
+        model_label=RARE_KAON_SND_MODEL_V1,
+        input_bundle=p.input_bundle,
+        branching_fraction=br,
+        sm_branching_fraction=sm,
+        np_shift_branching_fraction=float(br - sm),
+        kappa_l=kappa,
+        x_t=float(p.x_t),
+        x_eff_top=x_eff_top,
+        x_np_total=complex(x_np_total),
+        lambda_wolfenstein=factors.lambda_wolfenstein,
+        lambda_t=factors.lambda_t,
+        wilsons=wilsons,
+        diagnostics=diagnostics,
+    )
+
+
 __all__ = [
     "RARE_KAON_SND_MODEL_V1",
     "RARE_KAON_OPERATOR_CONVENTION",
     "RARE_KAON_INPUT_BUNDLE_V1",
     "RARE_KAON_RS_MATCHING_ASSUMPTION_V1",
+    "RARE_KAON_KAPPA_L_REF",
+    "RARE_KAON_KAPPA_L_CITATION",
     "RareKaonSMInputs",
     "RareKaonCKMFactors",
     "RareKaonWilsonCoefficients",
     "RareKaonBranchingResult",
+    "RareKaonNeutralBranchingResult",
     "default_sm_inputs",
     "ckm_factors",
     "kappa_plus",
+    "kappa_l",
     "g_sm_squared",
     "sm_branching_fraction",
+    "neutral_sm_branching_fraction",
     "compute_rare_kaon_wilsons",
     "evaluate_kplus_to_piplus_nunu",
+    "evaluate_klong_to_pi0_nunu",
 ]
