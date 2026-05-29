@@ -1,0 +1,11 @@
+1. SHOULD-FIX: Budget is uncertainty-aware but too loose for the stated “NP phase in M12” physics: [C002.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/charm/C002.py:256) uses |q/p| and phi_D rooms, giving budget 0.045 and |Im M12^NP| <= 1.48e-16 GeV; HFLAV also gives phiM=Arg(M12) 95% [-1.48,1.35] deg, implying sin budget 0.0258 and |Im M12^NP| <= 8.47e-17 GeV: [hflav_ckm25_dmixing_cpv_fit.txt](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog/references/C002/hflav_ckm25_dmixing_cpv_fit.txt:25).
+
+2. SHOULD-FIX: `q_over_p_phase_proxy_degrees = -arg(M12^NP)` is not a grounded φ_D diagnostic once Γ12 and the unknown long-distance SM phase enter; a real negative NP amplitude would report -180 deg while the CP-odd Im(M12^NP) is zero: [C002.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/charm/C002.py:368).
+
+3. NIT: Correct amplitude for the verdict: pass/fail uses `abs(Im M12^NP)/(Delta m_D/2)`, not `abs(M12^NP)`; the magnitude evaluator is diagnostic only: [C002.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/charm/C002.py:365).
+
+4. NIT: QCD running is actually used for the verdict via `*_with_running` at μ=2 GeV: [C002.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/primary/charm/C002.py:355) and [deltaf2.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog_constraints/physics_adapters/deltaf2.py:286). Example test coupling: running changes |M12| by ~33.4x and Im(M12) by ~53.0x.
+
+5. NIT: YAML/snapshot anchors and units match: |q/p|=0.983 +0.015/-0.014, 95% [0.955,1.012]; phi_D=-1.51 +1.03/-1.06 deg, 95% [-3.63,0.51]; Delta m_D=6.562e-15 GeV, so Delta m_D/2=3.281e-15 GeV: [C002.yaml](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog/processes/charm/C002.yaml:95), [C001.yaml](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/flavor_catalog/processes/charm/C001.yaml:152).
+
+PHYSICS-NEEDS-FIXES
