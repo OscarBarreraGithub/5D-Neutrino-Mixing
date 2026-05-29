@@ -1,0 +1,2 @@
+# Implement L002 — BR(μ→3e). family=charged_lepton. PIONEER: new lfv_three_body module.
+BUILD quarkConstraints/lfv_three_body.py (μ→3e rate from dipole + Z-penguin + box contributions). SM≈0 → pure-NP bound vs the SINDRUM/Mu3e limit (from L002.yaml), HARD. The dipole part can reuse the L001 lepton dipole; the Z/box parts need lepton RS couplings NOT on ParameterPoint → documented proxy, NEEDS-HUMAN-PHYSICS. Wrap via new adapter. Reusable by L009 (τ→3μ), L010 (τ→3e).
