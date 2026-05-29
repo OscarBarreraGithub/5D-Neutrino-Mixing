@@ -1,0 +1,2 @@
+# Implement CR011 — vector-boson-scattering (VBS) longitudinal. family=collider_rs. HARD STUB (dual NEEDS-HUMAN).
+VBS longitudinal-VV constrains strong-EWSB/composite-Higgs (RS dual) but needs a dedicated EFT/recast (unitarity, form factors) not first-principles here. Honest STUB: load the measured VBS bound from CR011.yaml, record it, NON-VETOING (INFO/SOFT), no faked recast. Flag NEEDS-HUMAN-PHYSICS on BOTH the SM/EFT side AND the RS strong-EWSB matching side. New small adapter. Document.
