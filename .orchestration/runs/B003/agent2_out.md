@@ -1,0 +1,8 @@
+1. NIT: PASS amplitude: B003 uses `|M12^NP|` for the mass splitting, not `Im(M12)`; CP imaginary-part logic is only in `epsilon_K`. `flavor_catalog_constraints/primary/beauty/B003.py:377`, `quarkConstraints/deltaf2.py:983-996`.
+2. NIT: PASS running: verdict path calls `bs_mixing_from_wilsons_with_running(..., mu_had=2.0)`, adapter calls `evaluate_bs_mixing_with_running`, core evolves then evaluates. Test coupling effect: `2.055e-15 -> 4.760e-14 GeV` (`x23.16`). `B003.py:370-375`, `physics_adapters/deltaf2.py:307-333`, `quarkConstraints/deltaf2.py:1030-1036`.
+3. NIT: PASS budget: hard veto is uncertainty-aware, not bare residual. Current numbers: central room `3.103e-15 GeV`, combined sigma `5.208e-13 GeV`, hard budget `2.635e-13 GeV`; core legacy budget `5.844e-12 GeV` is retained only as diagnostic and would be too loose. `B003.py:270-310`, `B003.py:441-450`.
+4. NIT: PASS anchors: YAML/snapshots agree: HFLAV `Delta m_s = 17.766 +/- 0.006 ps^-1`; PDG2025 cross-check `17.765 +/- 0.006 ps^-1`; FLAG `f_Bs sqrt(Bhat_Bs)=256.1 +/- 5.7 MeV`, `xi=1.216 +/- 0.016`. `B003.yaml:89-229`, `hflav_2024_dms.txt:21`, `flag_2024_bmixing.txt:26-29`.
+5. NIT: PASS severity/units: `HARD` is appropriate for observed, well-predicted `B_s` mixing; live comparison is consistently in GeV M12 units, with `delta_m_np_gev = 2|M12|` in diagnostics. `B003.py:345-398`.
+6. NIT: Known core caveat, not B003-specific: audit says `B_d/B_s` bags are quoted at `mu=m_b` while current Wilson endpoint is `2 GeV`; B003 truthfully uses/reports the mandated running endpoint. `docs/audits/wilson_rg_reference_values.md:110-119`, `B003.py:399-400`.
+
+PHYSICS-OK
