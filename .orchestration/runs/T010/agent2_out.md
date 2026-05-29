@@ -1,0 +1,7 @@
+1. NIT — ΔF=2 amplitude/running checks are not applicable to T010: no `M_12` observable or Wilson running is involved. Correct Z-pole physics is `Gamma_q ∝ |g_L|^2+|g_R|^2`, `A_b=(|g_L|^2-|g_R|^2)/(|g_L|^2+|g_R|^2)`, implemented in `quarkConstraints/zpole.py:225` and `quarkConstraints/zpole.py:260`.
+2. NIT — Anchors match the local source snapshots: `R_b^0=0.21629±0.00066`, `A_b=0.923±0.020`, SM-fit `R_b=0.21562±0.00013`, `A_b=0.9346±0.0001`; see `T010.yaml:93`, `T010.yaml:113`, `lepslc_2006_z_resonance.txt:11`, `lepslc_2006_z_resonance.txt:15`.
+3. NIT — SM validation is numerically acceptable: code gives `R_b=0.215620`, `A_b=0.935535`, matching requested `≈0.2156,≈0.935`; `A_b` is not tuned to the SM-fit central `0.9346` but differs by only `9.4e-4` vs exp `σ=0.020` (`T010.py:444`, `T010.py:480`).
+4. NIT — Budget is uncertainty-aware, not a bare residual: `σ_Rb=sqrt(0.00066^2+0.00013^2)=0.0006727`, `σ_Ab=sqrt(0.020^2+0.0001^2)=0.0200003`; implemented at `T010.py:307`, used at `T010.py:382`.
+5. NIT — Severity/diagnostics are physics-consistent: observed LEP/SLC Z-pole data justify `HARD`, while the RS Zbb shift is explicitly flagged `NEEDS-HUMAN-PHYSICS` because real EW KK/Z/Z' matching is absent (`T010.py:439`, `T010.py:529`, `quarkConstraints/zpole.py:335`).
+
+PHYSICS-OK

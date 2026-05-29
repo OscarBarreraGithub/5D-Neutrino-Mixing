@@ -1,0 +1,2 @@
+# Implement T010 — Z→bb̄ (R_b, A_b). family=top_higgs_ew. PIONEER: build shared Z-pole module.
+BUILD new quarkConstraints/zpole.py (Z→ff pseudo-observables: R_q, A_q from effective Zff couplings g_L,g_R). Wrap via NEW adapter physics_adapters/zpole.py. Design for reuse by T011/T012 (Z→cc), T015/T016/T017 (Z LFV). Validate SM R_b≈0.2156, A_b≈0.935 from T010.yaml. RS NP = documented Zbb-coupling-shift proxy (the classic RS Z→bb tension) → NEEDS-HUMAN-PHYSICS (RS EW KK Z-coupling shifts not on ParameterPoint). Budget from T010.yaml (LEP/SLD vs SM), HARD/SOFT per the data.
