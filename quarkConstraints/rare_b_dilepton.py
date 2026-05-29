@@ -674,19 +674,507 @@ def evaluate_bq_to_mumu(
     )
 
 
+RARE_B_DILEPTON_EXCLUSIVE_BK_MODEL_V1 = (
+    "rare_b_dilepton_b_to_k_mumu_c9_c10_form_factor_v1"
+)
+RARE_B_DILEPTON_EXCLUSIVE_BK_INPUT_BUNDLE_V1 = (
+    "rare_b_dilepton_b_to_k_mumu_bcl_repo_ckm_v1"
+)
+RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_BUNDLE_V1 = (
+    "b_to_k_fplus_bcl_hpqcd_lcsr_proxy_v1"
+)
+RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_CITATION = (
+    "BCL-style B -> K f_+(q^2) shape, normalized to f_+(0)=0.335 with a "
+    "B_s^* pole; intended as a lightweight HPQCD/LCSR-compatible proxy until "
+    "full covariance inputs are added"
+)
+RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1 = (
+    "C9/C10-only exclusive B -> K mu mu evaluator: C7, scalar/tensor "
+    "operators, nonlocal charm, charmonium-veto covariance, and q^2-bin "
+    "experimental correlations are not included in v1."
+)
+
+
+@dataclass(frozen=True)
+class RareBToKFormFactorInputs:
+    """Masses, lifetime, and BCL-like ``f_+(q^2)`` inputs for one ``B -> K`` mode."""
+
+    mode_key: str
+    display_name: str
+    parent_mass_gev: float
+    daughter_mass_gev: float
+    lifetime_ps: float
+    pole_mass_gev: float = 5.415
+    fplus_0: float = 0.335
+    bcl_a1: float = -1.5
+    bcl_a2: float = 0.0
+    source: str = RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_CITATION
+
+    def __post_init__(self) -> None:
+        for name in (
+            "parent_mass_gev",
+            "daughter_mass_gev",
+            "lifetime_ps",
+            "pole_mass_gev",
+            "fplus_0",
+        ):
+            value = float(getattr(self, name))
+            if not math.isfinite(value) or value <= 0.0:
+                raise ValueError(f"{name} must be positive and finite")
+        for name in ("bcl_a1", "bcl_a2"):
+            value = float(getattr(self, name))
+            if not math.isfinite(value):
+                raise ValueError(f"{name} must be finite")
+        if self.parent_mass_gev <= self.daughter_mass_gev:
+            raise ValueError("parent_mass_gev must be larger than daughter_mass_gev")
+
+    @property
+    def q2_max_gev2(self) -> float:
+        """Return the kinematic endpoint ``(m_B - m_K)^2``."""
+        return float((self.parent_mass_gev - self.daughter_mass_gev) ** 2)
+
+
+@dataclass(frozen=True)
+class RareBToKDileptonInputs:
+    """Reusable inputs for exclusive ``B -> K mu+ mu-`` integration."""
+
+    input_bundle: str = RARE_B_DILEPTON_EXCLUSIVE_BK_INPUT_BUNDLE_V1
+    c9_sm: float = 4.27
+    integration_steps: int = 800
+    short_distance_inputs: RareBDileptonSMInputs = field(
+        default_factory=RareBDileptonSMInputs
+    )
+    bplus_kplus: RareBToKFormFactorInputs = field(
+        default_factory=lambda: RareBToKFormFactorInputs(
+            mode_key="bplus_kplus",
+            display_name="B+ -> K+ mu+ mu-",
+            parent_mass_gev=5.27934,
+            daughter_mass_gev=0.493677,
+            lifetime_ps=1.638,
+            source=(
+                "PDG-era B+/K+ masses and tau_B+; "
+                + RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_CITATION
+            ),
+        )
+    )
+    bzero_kzero: RareBToKFormFactorInputs = field(
+        default_factory=lambda: RareBToKFormFactorInputs(
+            mode_key="bzero_kzero",
+            display_name="B0 -> K0 mu+ mu-",
+            parent_mass_gev=5.27966,
+            daughter_mass_gev=0.497611,
+            lifetime_ps=1.520,
+            source=(
+                "PDG-era B0/K0 masses and tau_B0; "
+                + RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_CITATION
+            ),
+        )
+    )
+    constants_citation: str = (
+        "Buras b->sll Hamiltonian convention; massless-limit "
+        "B -> K ll differential rate with leading muon-mass phase space; "
+        "repo CKM target quarkConstraints.modern.inputs.ModernDefaultCKMTarget"
+    )
+
+    def __post_init__(self) -> None:
+        if not math.isfinite(float(self.c9_sm)) or float(self.c9_sm) == 0.0:
+            raise ValueError("c9_sm must be finite and non-zero")
+        if int(self.integration_steps) < 20:
+            raise ValueError("integration_steps must be at least 20")
+
+    def mode(self, mode_key: str) -> RareBToKFormFactorInputs:
+        """Return the form-factor input block for ``mode_key``."""
+        if mode_key == "bplus_kplus":
+            return self.bplus_kplus
+        if mode_key == "bzero_kzero":
+            return self.bzero_kzero
+        raise ValueError(f"unsupported B -> K mode {mode_key!r}")
+
+
+@dataclass(frozen=True)
+class RareBToKDileptonBranchingResult:
+    """Partial branching-fraction prediction for ``B -> K mu+ mu-``."""
+
+    model_label: str
+    input_bundle: str
+    mode_key: str
+    q2_min_gev2: float
+    q2_max_gev2: float
+    branching_fraction: float
+    sm_branching_fraction: float
+    np_shift_branching_fraction: float
+    ratio_to_sm: float
+    c9_total: complex
+    c10_total: complex
+    c9_vector_np: complex
+    c10_axial_np: complex
+    lambda_t: complex
+    form_factor_bundle: str
+    wilsons: RareBDileptonWilsonCoefficients | None = None
+    diagnostics: Mapping[str, float | complex | str | bool] = field(default_factory=dict)
+
+
+def default_b_to_k_dilepton_inputs() -> RareBToKDileptonInputs:
+    """Return the repo-owned exclusive ``B -> K mu+ mu-`` input bundle."""
+    return RareBToKDileptonInputs()
+
+
+def _b_to_k_z(
+    q2_gev2: float,
+    mode: RareBToKFormFactorInputs,
+) -> float:
+    t_plus = (mode.parent_mass_gev + mode.daughter_mass_gev) ** 2
+    t_minus = mode.q2_max_gev2
+    t_0 = t_plus * (1.0 - math.sqrt(1.0 - t_minus / t_plus))
+    return float(
+        (math.sqrt(t_plus - q2_gev2) - math.sqrt(t_plus - t_0))
+        / (math.sqrt(t_plus - q2_gev2) + math.sqrt(t_plus - t_0))
+    )
+
+
+def b_to_k_fplus(
+    q2_gev2: float,
+    mode: RareBToKFormFactorInputs,
+) -> float:
+    """Evaluate the BCL-like ``B -> K`` vector form factor ``f_+(q^2)``."""
+    q2 = float(q2_gev2)
+    if q2 < 0.0 or q2 >= (mode.parent_mass_gev + mode.daughter_mass_gev) ** 2:
+        raise ValueError(f"q2_gev2={q2_gev2!r} outside B -> K z-expansion domain")
+    z_q = _b_to_k_z(q2, mode)
+    z_0 = _b_to_k_z(0.0, mode)
+    shape = 1.0 + mode.bcl_a1 * (z_q - z_0) + mode.bcl_a2 * (z_q * z_q - z_0 * z_0)
+    value = mode.fplus_0 * shape / (1.0 - q2 / mode.pole_mass_gev**2)
+    if not math.isfinite(value) or value <= 0.0:
+        raise ValueError(f"B -> K f_+(q2={q2}) must be positive and finite")
+    return float(value)
+
+
+def _kallen(x: float, y: float, z: float) -> float:
+    return float(x * x + y * y + z * z - 2.0 * (x * y + x * z + y * z))
+
+
+def _simpson_integral(
+    function: object,
+    lower: float,
+    upper: float,
+    *,
+    intervals: int,
+) -> float:
+    n = int(intervals)
+    if n % 2:
+        n += 1
+    if n <= 0 or upper <= lower:
+        raise ValueError("Simpson integration requires upper > lower and intervals > 0")
+    h = (upper - lower) / n
+    total = float(function(lower)) + float(function(upper))
+    odd_sum = 0.0
+    even_sum = 0.0
+    for index in range(1, n):
+        value = float(function(lower + index * h))
+        if index % 2:
+            odd_sum += value
+        else:
+            even_sum += value
+    return float(h / 3.0 * (total + 4.0 * odd_sum + 2.0 * even_sum))
+
+
+def _b_to_k_q2_bounds(
+    mode: RareBToKFormFactorInputs,
+    inputs: RareBToKDileptonInputs,
+    q2_min_gev2: float | None,
+    q2_max_gev2: float | None,
+) -> tuple[float, float]:
+    threshold = 4.0 * inputs.short_distance_inputs.muon_mass_gev**2
+    lower = threshold if q2_min_gev2 is None else float(q2_min_gev2)
+    upper = mode.q2_max_gev2 if q2_max_gev2 is None else float(q2_max_gev2)
+    if lower < threshold - 1.0e-12:
+        raise ValueError("q2_min_gev2 is below the dimuon threshold")
+    if upper > mode.q2_max_gev2 + 1.0e-12:
+        raise ValueError("q2_max_gev2 is above the B -> K endpoint")
+    if upper <= lower:
+        raise ValueError("q2_max_gev2 must be larger than q2_min_gev2")
+    return float(max(lower, threshold)), float(min(upper, mode.q2_max_gev2))
+
+
+def _b_to_k_differential_branching_fraction(
+    q2_gev2: float,
+    *,
+    mode: RareBToKFormFactorInputs,
+    inputs: RareBToKDileptonInputs,
+    c9_total: complex,
+    c10_total: complex,
+    lambda_t: complex,
+) -> float:
+    sd = inputs.short_distance_inputs
+    q2 = float(q2_gev2)
+    threshold = 4.0 * sd.muon_mass_gev**2
+    if q2 <= threshold or q2 >= mode.q2_max_gev2:
+        return 0.0
+    lam = _kallen(mode.parent_mass_gev**2, mode.daughter_mass_gev**2, q2)
+    if lam <= 0.0:
+        return 0.0
+    beta2 = 1.0 - threshold / q2
+    if beta2 <= 0.0:
+        return 0.0
+    beta = math.sqrt(beta2)
+    lepton_mass_factor = beta * (1.0 + 2.0 * sd.muon_mass_gev**2 / q2)
+    fplus = b_to_k_fplus(q2, mode)
+    tau = _tau_ps_to_gev_inverse(mode.lifetime_ps, sd.hbar_gev_s)
+    prefactor = (
+        tau
+        * sd.gf_gev_minus2**2
+        * sd.alpha_em_mz**2
+        * abs(lambda_t) ** 2
+        / (1536.0 * math.pi**5 * mode.parent_mass_gev**3)
+    )
+    amplitude_power = (
+        abs(complex(c9_total) * fplus) ** 2
+        + abs(complex(c10_total) * fplus) ** 2
+    )
+    return float(prefactor * lam ** 1.5 * lepton_mass_factor * amplitude_power)
+
+
+def _integrated_b_to_k_branching_fraction(
+    *,
+    mode: RareBToKFormFactorInputs,
+    inputs: RareBToKDileptonInputs,
+    q2_min_gev2: float,
+    q2_max_gev2: float,
+    c9_total: complex,
+    c10_total: complex,
+    lambda_t: complex,
+) -> float:
+    return _simpson_integral(
+        lambda q2: _b_to_k_differential_branching_fraction(
+            q2,
+            mode=mode,
+            inputs=inputs,
+            c9_total=c9_total,
+            c10_total=c10_total,
+            lambda_t=lambda_t,
+        ),
+        q2_min_gev2,
+        q2_max_gev2,
+        intervals=inputs.integration_steps,
+    )
+
+
+def sm_b_to_k_mumu_branching_fraction(
+    *,
+    mode: str = "bplus_kplus",
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    inputs: RareBToKDileptonInputs | None = None,
+) -> RareBToKDileptonBranchingResult:
+    """Evaluate the SM-limit partial ``BR(B -> K mu+ mu-)``."""
+    return evaluate_b_to_k_mumu(
+        None,
+        mode=mode,
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        inputs=inputs,
+    )
+
+
+def evaluate_b_to_k_mumu(
+    source: QuarkMassBasisCouplings | RareBDileptonWilsonCoefficients | None = None,
+    *,
+    mode: str = "bplus_kplus",
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    m_kk_gev: float | None = None,
+    inputs: RareBToKDileptonInputs | None = None,
+) -> RareBToKDileptonBranchingResult:
+    """Evaluate exclusive ``BR(B -> K mu+ mu-)`` with the shared C9/C10 proxy.
+
+    NEEDS-HUMAN-PHYSICS: RS new physics is inherited from the documented
+    ``b -> s mu mu`` C9/C10 proxy.  The exclusive rate is a C9/C10-only
+    form-factor integral; full C7, nonlocal charm, scalar/tensor and
+    experimental-covariance treatment is intentionally left to a later
+    physics pass.
+    """
+    p = default_b_to_k_dilepton_inputs() if inputs is None else inputs
+    mode_inputs = p.mode(mode)
+    q2_min, q2_max = _b_to_k_q2_bounds(mode_inputs, p, q2_min_gev2, q2_max_gev2)
+    factors = ckm_factors("b_s", p.short_distance_inputs)
+
+    wilsons: RareBDileptonWilsonCoefficients | None
+    if source is None:
+        wilsons = None
+        c9_np = c9p_np = c10_np = c10p_np = 0.0j
+    elif isinstance(source, RareBDileptonWilsonCoefficients):
+        wilsons = source
+        if wilsons.transition_key != "b_s":
+            raise ValueError("B -> K mu mu requires b_s Wilson coefficients")
+        c9_np = wilsons.c9_np
+        c9p_np = wilsons.c9p_np
+        c10_np = wilsons.c10_np
+        c10p_np = wilsons.c10p_np
+    else:
+        wilsons = compute_rare_b_dilepton_wilsons(
+            source,
+            transition="b_s",
+            m_kk_gev=m_kk_gev,
+            inputs=p.short_distance_inputs,
+        )
+        c9_np = wilsons.c9_np
+        c9p_np = wilsons.c9p_np
+        c10_np = wilsons.c10_np
+        c10p_np = wilsons.c10p_np
+
+    c9_vector_np = complex(c9_np + c9p_np)
+    c10_axial_np = complex(c10_np + c10p_np)
+    c9_total = complex(p.c9_sm + c9_vector_np)
+    c10_total = complex(p.short_distance_inputs.c10_sm + c10_axial_np)
+    c9_sm_total = complex(p.c9_sm)
+    c10_sm_total = complex(p.short_distance_inputs.c10_sm)
+
+    br = _integrated_b_to_k_branching_fraction(
+        mode=mode_inputs,
+        inputs=p,
+        q2_min_gev2=q2_min,
+        q2_max_gev2=q2_max,
+        c9_total=c9_total,
+        c10_total=c10_total,
+        lambda_t=factors.lambda_t,
+    )
+    sm_br = _integrated_b_to_k_branching_fraction(
+        mode=mode_inputs,
+        inputs=p,
+        q2_min_gev2=q2_min,
+        q2_max_gev2=q2_max,
+        c9_total=c9_sm_total,
+        c10_total=c10_sm_total,
+        lambda_t=factors.lambda_t,
+    )
+    q2_mid = 0.5 * (q2_min + q2_max)
+    diagnostics: dict[str, float | complex | str | bool] = {
+        "mode_display_name": mode_inputs.display_name,
+        "lambda_wolfenstein": float(factors.lambda_wolfenstein),
+        "lambda_t": complex(factors.lambda_t),
+        "c9_sm": float(p.c9_sm),
+        "c10_sm": float(p.short_distance_inputs.c10_sm),
+        "c9_total": complex(c9_total),
+        "c10_total": complex(c10_total),
+        "c9_vector_np": complex(c9_vector_np),
+        "c10_axial_np": complex(c10_axial_np),
+        "q2_min_gev2": float(q2_min),
+        "q2_max_gev2": float(q2_max),
+        "q2_bin_width_gev2": float(q2_max - q2_min),
+        "differential_branching_fraction_at_bin_center": (
+            _b_to_k_differential_branching_fraction(
+                q2_mid,
+                mode=mode_inputs,
+                inputs=p,
+                c9_total=c9_total,
+                c10_total=c10_total,
+                lambda_t=factors.lambda_t,
+            )
+        ),
+        "average_differential_branching_fraction": float(br / (q2_max - q2_min)),
+        "form_factor_bundle": RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_BUNDLE_V1,
+        "form_factor_source": mode_inputs.source,
+        "fplus_0": float(mode_inputs.fplus_0),
+        "fplus_q2_min": b_to_k_fplus(q2_min, mode_inputs),
+        "fplus_q2_mid": b_to_k_fplus(q2_mid, mode_inputs),
+        "fplus_q2_max_minus_epsilon": b_to_k_fplus(
+            q2_max - min(1.0e-6, 0.5 * (q2_max - q2_min)),
+            mode_inputs,
+        ),
+        "integration_steps": float(p.integration_steps),
+        "parent_mass_gev": float(mode_inputs.parent_mass_gev),
+        "daughter_mass_gev": float(mode_inputs.daughter_mass_gev),
+        "lifetime_ps": float(mode_inputs.lifetime_ps),
+        "constants_citation": p.constants_citation,
+        "matching_assumption": RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+        "exclusive_limitations": RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1,
+        "c7_nonlocal_charm_omitted": True,
+    }
+    if wilsons is not None:
+        diagnostics.update(
+            {
+                "m_kk_gev": float(wilsons.M_KK),
+                "matching_scale_gev": float(wilsons.matching_scale),
+                "left_qb_coupling": complex(wilsons.left_qb_coupling),
+                "right_qb_coupling": complex(wilsons.right_qb_coupling),
+                "left_qb_overlap": complex(wilsons.left_qb_overlap),
+                "right_qb_overlap": complex(wilsons.right_qb_overlap),
+                "left_quark_delta": complex(wilsons.left_quark_delta),
+                "right_quark_delta": complex(wilsons.right_quark_delta),
+                "muon_left_delta": float(wilsons.muon_left_delta),
+                "muon_right_delta": float(wilsons.muon_right_delta),
+                "muon_vector_delta": float(wilsons.muon_vector_delta),
+                "muon_axial_delta": float(wilsons.muon_axial_delta),
+                "c9_np": complex(wilsons.c9_np),
+                "c10_np": complex(wilsons.c10_np),
+                "c9p_np": complex(wilsons.c9p_np),
+                "c10p_np": complex(wilsons.c10p_np),
+            }
+        )
+
+    return RareBToKDileptonBranchingResult(
+        model_label=RARE_B_DILEPTON_EXCLUSIVE_BK_MODEL_V1,
+        input_bundle=p.input_bundle,
+        mode_key=mode,
+        q2_min_gev2=float(q2_min),
+        q2_max_gev2=float(q2_max),
+        branching_fraction=float(br),
+        sm_branching_fraction=float(sm_br),
+        np_shift_branching_fraction=float(br - sm_br),
+        ratio_to_sm=float(br / sm_br),
+        c9_total=complex(c9_total),
+        c10_total=complex(c10_total),
+        c9_vector_np=complex(c9_vector_np),
+        c10_axial_np=complex(c10_axial_np),
+        lambda_t=complex(factors.lambda_t),
+        form_factor_bundle=RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_BUNDLE_V1,
+        wilsons=wilsons,
+        diagnostics=diagnostics,
+    )
+
+
 __all__ = [
     "RARE_B_DILEPTON_MODEL_V1",
     "RARE_B_DILEPTON_OPERATOR_CONVENTION",
     "RARE_B_DILEPTON_INPUT_BUNDLE_V1",
     "RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_MODEL_V1",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_INPUT_BUNDLE_V1",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_BUNDLE_V1",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_CITATION",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1",
     "RareBDileptonMesonInputs",
     "RareBDileptonSMInputs",
     "RareBDileptonCKMFactors",
     "RareBDileptonWilsonCoefficients",
     "RareBLeptonicBranchingResult",
+    "RareBToKFormFactorInputs",
+    "RareBToKDileptonInputs",
+    "RareBToKDileptonBranchingResult",
     "default_sm_inputs",
     "ckm_factors",
     "compute_rare_b_dilepton_wilsons",
     "sm_branching_fraction",
     "evaluate_bq_to_mumu",
+    "default_b_to_k_dilepton_inputs",
+    "b_to_k_fplus",
+    "sm_b_to_k_mumu_branching_fraction",
+    "evaluate_b_to_k_mumu",
 ]
+
+
+RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_FRACTION = 0.30
+RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_RATIONALE = (
+    "B016 carries a 30% charged-total-BR proxy theory envelope for the v1 "
+    "exclusive B -> K mu mu evaluator.  The C9/C10-only, no-covariance formula "
+    "omits C7/dipole terms expected at roughly the 10% rate level, plus "
+    "nonlocal charm, form-factor, and bin-covariance uncertainties; the term is "
+    "therefore tied to the NEEDS-HUMAN-PHYSICS proxy limitation rather than a "
+    "sourced SM theory prediction."
+)
+__all__.extend(
+    [
+        "RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_FRACTION",
+        "RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_RATIONALE",
+    ]
+)

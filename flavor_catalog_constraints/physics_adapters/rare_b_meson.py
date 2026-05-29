@@ -11,19 +11,31 @@ from __future__ import annotations
 
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.rare_b_dilepton import (
+    RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_BUNDLE_V1,
+    RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_CITATION,
+    RARE_B_DILEPTON_EXCLUSIVE_BK_INPUT_BUNDLE_V1,
+    RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1,
+    RARE_B_DILEPTON_EXCLUSIVE_BK_MODEL_V1,
     RARE_B_DILEPTON_INPUT_BUNDLE_V1,
     RARE_B_DILEPTON_MODEL_V1,
     RARE_B_DILEPTON_OPERATOR_CONVENTION,
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+    RareBToKDileptonBranchingResult,
+    RareBToKDileptonInputs,
+    RareBToKFormFactorInputs,
     RareBDileptonCKMFactors,
     RareBDileptonMesonInputs,
     RareBDileptonSMInputs,
     RareBDileptonWilsonCoefficients,
     RareBLeptonicBranchingResult,
+    b_to_k_fplus as _b_to_k_fplus,
     ckm_factors as _ckm_factors,
     compute_rare_b_dilepton_wilsons as _compute_rare_b_dilepton_wilsons,
+    default_b_to_k_dilepton_inputs as _default_b_to_k_dilepton_inputs,
     default_sm_inputs as _default_sm_inputs,
+    evaluate_b_to_k_mumu as _evaluate_b_to_k_mumu,
     evaluate_bq_to_mumu as _evaluate_bq_to_mumu,
+    sm_b_to_k_mumu_branching_fraction as _sm_b_to_k_mumu_branching_fraction,
     sm_branching_fraction as _sm_branching_fraction,
 )
 
@@ -33,11 +45,19 @@ __all__ = [
     "RARE_B_DILEPTON_OPERATOR_CONVENTION",
     "RARE_B_DILEPTON_INPUT_BUNDLE_V1",
     "RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_MODEL_V1",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_INPUT_BUNDLE_V1",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_BUNDLE_V1",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_CITATION",
+    "RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1",
     "RareBDileptonMesonInputs",
     "RareBDileptonSMInputs",
     "RareBDileptonCKMFactors",
     "RareBDileptonWilsonCoefficients",
     "RareBLeptonicBranchingResult",
+    "RareBToKFormFactorInputs",
+    "RareBToKDileptonInputs",
+    "RareBToKDileptonBranchingResult",
     "rare_b_dilepton_default_sm_inputs",
     "rare_b_dilepton_ckm_factors",
     "rare_b_dilepton_sm_branching_fraction",
@@ -45,6 +65,12 @@ __all__ = [
     "bq_mumu_from_couplings",
     "bs_mumu_from_couplings",
     "bd_mumu_from_couplings",
+    "rare_b_to_k_dilepton_default_inputs",
+    "rare_b_to_k_fplus",
+    "rare_b_to_k_mumu_sm_branching_fraction",
+    "rare_b_to_k_mumu_branching_fraction",
+    "bplus_kplus_mumu_from_couplings",
+    "bzero_kzero_mumu_from_couplings",
 ]
 
 
@@ -126,6 +152,93 @@ def bd_mumu_from_couplings(
     return bq_mumu_from_couplings(
         couplings,
         transition="b_d",
+        m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def rare_b_to_k_dilepton_default_inputs() -> RareBToKDileptonInputs:
+    """Return the default exclusive ``B -> K mu+ mu-`` input bundle."""
+    return _default_b_to_k_dilepton_inputs()
+
+
+def rare_b_to_k_fplus(
+    q2_gev2: float,
+    mode: RareBToKFormFactorInputs,
+) -> float:
+    """Evaluate the adapter-exposed ``B -> K`` form factor ``f_+(q^2)``."""
+    return _b_to_k_fplus(q2_gev2, mode)
+
+
+def rare_b_to_k_mumu_sm_branching_fraction(
+    *,
+    mode: str = "bplus_kplus",
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    inputs: RareBToKDileptonInputs | None = None,
+) -> RareBToKDileptonBranchingResult:
+    """Evaluate the SM-limit partial ``BR(B -> K mu+ mu-)``."""
+    return _sm_b_to_k_mumu_branching_fraction(
+        mode=mode,
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        inputs=inputs,
+    )
+
+
+def rare_b_to_k_mumu_branching_fraction(
+    source: QuarkMassBasisCouplings | RareBDileptonWilsonCoefficients | None = None,
+    *,
+    mode: str = "bplus_kplus",
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    m_kk_gev: float | None = None,
+    inputs: RareBToKDileptonInputs | None = None,
+) -> RareBToKDileptonBranchingResult:
+    """Evaluate exclusive ``BR(B -> K mu+ mu-)`` from Wilsons or couplings."""
+    return _evaluate_b_to_k_mumu(
+        source,
+        mode=mode,
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def bplus_kplus_mumu_from_couplings(
+    couplings: QuarkMassBasisCouplings,
+    *,
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    m_kk_gev: float | None = None,
+    inputs: RareBToKDileptonInputs | None = None,
+) -> RareBToKDileptonBranchingResult:
+    """Evaluate ``BR(B+ -> K+ mu+ mu-)`` from mass-basis couplings."""
+    return rare_b_to_k_mumu_branching_fraction(
+        couplings,
+        mode="bplus_kplus",
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def bzero_kzero_mumu_from_couplings(
+    couplings: QuarkMassBasisCouplings,
+    *,
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    m_kk_gev: float | None = None,
+    inputs: RareBToKDileptonInputs | None = None,
+) -> RareBToKDileptonBranchingResult:
+    """Evaluate ``BR(B0 -> K0 mu+ mu-)`` from mass-basis couplings."""
+    return rare_b_to_k_mumu_branching_fraction(
+        couplings,
+        mode="bzero_kzero",
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
         m_kk_gev=m_kk_gev,
         inputs=inputs,
     )

@@ -1,0 +1,6 @@
+- B016 is now charged-only: only `B+ -> K+ ell+ ell-` is anchored; neutral mode is marked out of scope.
+- Low-q2 `1.1-6.0 GeV^2` is relabeled as an internal C9/C10 formula benchmark, not YAML/data validation.
+- Added exported rare-B proxy uncertainty metadata and wired it into B016 diagnostics/tests.
+- New HARD budget: `2.1348703212043185e-07` = residual `9.81e-10` + exp `4.00e-08` + 30% proxy theory `1.725e-07`.
+- Rationale: covers C9/C10-only/no-covariance limitation: omitted C7 at O(10%) plus charm, form-factor, and covariance uncertainty; still `NEEDS-HUMAN-PHYSICS`.
+- Pytest: `tests/constraints/primary/beauty/test_B016.py -q` `10 passed`; `tests/constraints/ -q` `244 passed`.
