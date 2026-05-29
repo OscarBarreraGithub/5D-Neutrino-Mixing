@@ -1,0 +1,2 @@
+# Implement C004 — BR(D⁰→μ⁺μ⁻). family=charm. PIONEER: build shared c→uℓℓ module.
+BUILD new quarkConstraints/rare_charm_dilepton.py (c→uℓℓ short-distance; D0→μμ is long-distance dominated — SD is the constrained part). Wrap via NEW adapter physics_adapters/rare_charm_dilepton.py. Design for reuse by C005 (D0→ee), C007 (D+→πμμ). Validate SM SD from C004.yaml. RS NP proxy → NEEDS-HUMAN-PHYSICS. Budget from C004.yaml, HARD. Charm is theoretically dirty — document caveats.
