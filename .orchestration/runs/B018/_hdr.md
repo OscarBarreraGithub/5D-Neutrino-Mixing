@@ -1,0 +1,2 @@
+# Implement B018 — R_K (LFU ratio Γ(B→Kμμ)/Γ(B→Kee)). family=beauty. REUSE rare_b_dilepton.
+REUSE the exclusive B→Kℓℓ machinery (B016/B017). R_K = BR(B→Kμμ)/BR(B→Kee) in the catalog q² bin (SM≈1 with QED corrections). NP via lepton-non-universal C9/C10 → proxy. SM R_K≈1.00 (validate vs B018.yaml). RS proxy NEEDS-HUMAN-PHYSICS (lepton-universal in this proxy → NP shift documented). Budget from B018.yaml, HARD or SOFT per the measurement. Append-only.
