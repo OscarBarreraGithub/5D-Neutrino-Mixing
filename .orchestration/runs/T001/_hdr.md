@@ -1,0 +1,2 @@
+# Implement T001 — BR(t→cZ) FCNC. family=top_higgs_ew. PIONEER: build shared top-FCNC module.
+BUILD new quarkConstraints/top_fcnc.py (top FCNC t→qV/qH branching ratios from effective top-FCNC couplings). Wrap via NEW adapter physics_adapters/top_fcnc.py. Design for reuse by T002 (t→uZ), T003/T004 (t→qγ), T005/T006 (t→qg), T007/T008 (t→qH). SM BR(t→cZ)~1e-14 (negligible) → this is essentially a pure-NP bound vs the collider limit (from T001.yaml). RS NP = documented top-Z FCNC coupling proxy → NEEDS-HUMAN-PHYSICS. Budget = experimental limit, HARD.
