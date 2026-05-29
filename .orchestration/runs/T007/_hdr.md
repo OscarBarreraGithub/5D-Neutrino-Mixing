@@ -1,0 +1,2 @@
+# Implement T007 — BR(t→cH) Yukawa FCNC. family=top_higgs_ew. REUSE top_fcnc.
+REUSE quarkConstraints/top_fcnc.py for the HIGGS-Yukawa FCNC t→cH (add the Higgs-FCNC width if not present, append-only; t→qH from an effective top-charm-Higgs Yukawa). SM negligible → pure-NP bound vs collider limit (from T007.yaml), HARD. RS top-Higgs FCNC proxy NEEDS-HUMAN-PHYSICS. Don't modify the Z/photon/gluon funcs. Reusable by T008 (t→uH).

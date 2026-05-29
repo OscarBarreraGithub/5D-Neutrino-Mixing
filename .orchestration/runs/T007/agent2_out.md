@@ -1,0 +1,7 @@
+1. NIT: ΔF=2 amplitude/CP check is not applicable to T007; code uses the correct scalar-width dependence `|y_L|^2+|y_R|^2`, not any `M12` real/imag part: `quarkConstraints/top_fcnc.py:248`, `quarkConstraints/top_fcnc.py:410`, `flavor_catalog_constraints/primary/top_higgs_ew/T007.py:375`.
+2. NIT: QCD-running check is not applicable to this top two-body Higgs decay; no `deltaf2` verdict path is used, and the active evaluator is the top-FCNC scalar path: `flavor_catalog_constraints/physics_adapters/top_fcnc.py:589`, `quarkConstraints/top_fcnc.py:248`.
+3. NIT: Budget is defensible: pure-NP `BR(t->Hc) <= 3.4e-4` from PDG/ATLAS headline, not a central residual; ATLAS multilepton `3.3e-4` is below PDG “do not use” separator and CMS combined is `3.7e-4`: `T007.yaml:82`, `T007.yaml:101`, `T007.yaml:141`, `T007.py:302`.
+4. NIT: Anchor values match local snapshots: PDG `3.4 x 10^-4`, ATLAS combined `3.4e-4`, CMS combined `0.037%=3.7e-4`; units are branching fractions at 95% CL: `pdg2026_top_hc_datablock.txt:15`, `atlas_2404_02123_arxiv_abs.txt:25`, `cms_2407_15172_arxiv_abs.txt:23`.
+5. NIT: Severity/notes are physics-consistent: HARD pure-NP collider limit, SM set to negligible zero proxy, RS Higgs-Yukawa mapping clearly flagged NEEDS-HUMAN-PHYSICS: `T007.py:23`, `T007.py:76`, `T007.py:430`.
+
+PHYSICS-OK
