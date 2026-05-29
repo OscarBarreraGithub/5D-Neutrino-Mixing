@@ -1,0 +1,6 @@
+1. NIT: No physics defects found. B033 is an INFO-only stub: it loads HFLAV `S_phiK_S = 0.74 ± 0.12`, `C = -0.09 ± 0.12`, and `sin2β = 0.710 ± 0.011`; `ΔS = 0.030`, budget `sqrt(0.12^2+0.011^2)=0.120503`, ratio `0.249`. `flavor_catalog_constraints/primary/beauty/B033.py:425`, `:468`, `flavor_catalog/processes/beauty/B033.yaml:79`.
+2. NIT: Correctly no `M12` amplitude is used for the B033 verdict; no misuse of `|M12^NP|` for this CP observable, and no reuse of B002 as a full `S_phiK_S` prediction. `flavor_catalog_constraints/primary/beauty/B033.py:471`, `:498`.
+3. NIT: QCD running is not applicable here because no RS `ΔB=1` penguin Wilsons/amplitude are computed; both SM hadronic penguin and RS penguin sides are explicitly `NEEDS-HUMAN-PHYSICS`. `flavor_catalog_constraints/physics_adapters/charmless_b_phiks.py:35`, `:42`, `flavor_catalog_constraints/primary/beauty/B033.py:490`.
+4. NIT: Severity and units are appropriate: `Severity.INFO`, dimensionless anchors, non-vetoing diagnostics. Focused tests pass: `9 passed`. `flavor_catalog_constraints/primary/beauty/B033.py:457`, `:486`.
+
+PHYSICS-OK
