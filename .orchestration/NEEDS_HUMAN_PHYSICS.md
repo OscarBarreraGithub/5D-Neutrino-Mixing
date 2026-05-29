@@ -74,3 +74,10 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
   (`rare_b_dilepton` C9/C10 penguin, `bsgamma` C7/C8 dipole, `rare_b_nunu` Z-like) —
   full b→s EW-penguin/dipole RS matching needs EW KK couplings not on ParameterPoint (cross-cutting gap).
 - These shared modules are reused by the downstream fan-out (B006/B012/B015-B019/B021/B023); the NP-proxy caveat propagates to all of them.
+
+### Wave-6 family pioneers (K006, C004, T010, T001, B016)   [committed df0eb34/cf65c4b/f8ad10d/72a22e4/3cafb41]
+- **Rigorous:** SM sides validated (K_L→μμ SD 0.82e-9 vs Gorbahn-Haisch; Z→bb̄ R_b 0.2156/A_b 0.935; B⁺→K⁺μμ 5.75e-7; t→cZ SM negligible; D⁰→μμ SD≈0).
+- **Needs human input (NP proxies, all from the cross-cutting EW-coupling gap):**
+  `rare_kaon_dilepton` s→dℓℓ Z/penguin; `rare_charm_dilepton` c→uℓℓ; `zpole` Zbb-coupling-shift (classic RS Z→bb);
+  `top_fcnc` top-Z FCNC coupling; exclusive `rare_b_dilepton` C9/C10 (B016 budget carries a 30% proxy-theory inflation).
+  These propagate to all downstream consumers of each module.

@@ -69,7 +69,17 @@ orchestrator context resets. Updated after every per-constraint gate.
 | B012 | B→K*γ | ✅ reuse | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 6731ac0 |
 | B023 | B→K*νν̄ | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 93fd563 |
 
-**Done: 19 / ~102.** Wave-5 = first fan-out reusing wave-4 modules (B006/B012/B023), one-per-shared-module-per-wave to avoid contention. NP proxies inherit from the shared modules (already in NEEDS_HUMAN_PHYSICS.md).
+| K006 | K_L→μμ | ✅ built | fixed (provenance) | fixed | ✅ APPROVE | ✅ df0eb34 |
+| C004 | D⁰→μμ | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ cf65c4b |
+| T010 | Z→bb̄ | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ f8ad10d |
+| T001 | t→cZ | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 72a22e4 |
+| B016 | B⁺→K⁺μμ | ✅ ext | fixed (3) | CODE-OK | ✅ APPROVE | ✅ 3cafb41 |
+
+**Done: 24 / ~102.** Wave-6 = multi-family PIONEERS — 5 new shared modules built in parallel:
+`rare_kaon_dilepton`(→K008/K009/K010/K012), `rare_charm_dilepton`(→C005/C007), `zpole`(→T011/T012/T015-T017),
+`top_fcnc`(→T002-T008), exclusive `rare_b_dilepton`(→B015/B017-B019/B021). Ready for wide fan-out next.
+
+**[prior wave-5 note below]** Wave-5 = first fan-out reusing wave-4 modules (B006/B012/B023), one-per-shared-module-per-wave to avoid contention. NP proxies inherit from the shared modules (already in NEEDS_HUMAN_PHYSICS.md).
 Remaining rare_b_dilepton consumers (B015/B016/B017/B018/B019/B021 + secondary B007/B008/B013/B014): pre-extend the module once, then fan out as pure consumers. Wave-4 = B-rare PIONEERS that built 3 shared modules → now fan out:
 - `rare_b_dilepton` (B005) → B006, B015, B016, B017, B021 (+B018/B019 ratios, secondary B007/B008/B013/B014)
 - `bsgamma` (B011) → B012
