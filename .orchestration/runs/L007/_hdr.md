@@ -1,0 +1,2 @@
+# Implement L007 — BR(τ→μγ). family=charged_lepton. REUSE the lepton dipole machinery.
+REUSE the lepton dipole machinery used by L001 (flavorConstraints.check_mu_to_e_gamma / the lepton adapter) generalized to the τ→μ dipole. SM≈0 → pure-NP dipole bound vs the Belle II / PDG limit (from L007.yaml), HARD. The τμ lepton dipole is a documented proxy NEEDS-HUMAN-PHYSICS (lepton-sector RS couplings not on ParameterPoint); unevaluated-input case explicitly evaluated=False (as L001). Append-only (don't modify L001's μ→eγ path).
