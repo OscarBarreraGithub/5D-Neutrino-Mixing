@@ -1,0 +1,2 @@
+# Implement E007 — radium/xenon atomic EDM (d_Ra, d_Xe). family=edm_neutrino. HARD STUB (dual NEEDS-HUMAN).
+Atomic (225Ra / 129Xe) EDM needs nuclear Schiff moments + atomic-structure factors AND RS CP-odd matching. Honest STUB like E006: load the measured limit(s) from E007.yaml, record, NON-VETOING (INFO/SOFT). Flag NEEDS-HUMAN-PHYSICS on BOTH the nuclear/atomic side AND RS CP-odd side. No faked Schiff/atomic calc. New small adapter (or reuse the atomic-EDM stub pattern). Document.
