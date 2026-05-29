@@ -265,3 +265,70 @@ __all__.extend(
         "vlq_b_pair_prediction_from_m_kk_gev",
     ]
 )
+
+
+KK_EW_DILEPTON_MASS_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: neutral electroweak KK dilepton recast v1 uses "
+    "the supplied kk_ew_mass_gev, or M_KK as a fallback mass proxy, and "
+    "compares it to a catalogued benchmark spin-1 dilepton mass lower bound. "
+    "It does not compute sigma(pp->gamma_KK/Z_KK)*BR(gamma_KK/Z_KK->ll), "
+    "light-quark and charged-lepton couplings, total width, interference, "
+    "acceptance, or the experiment's mass-dependent limit curve."
+)
+
+
+def resolve_kk_ew_mass_gev(
+    *,
+    mass_extra: Any = None,
+    couplings: Any = None,
+) -> tuple[float | None, str | None]:
+    """Resolve the neutral electroweak KK mass in GeV from declared extras.
+
+    The explicit ``kk_ew_mass_gev`` extra wins.  If absent, fall back to the
+    common quark-sector ``M_KK`` carried by the mass-basis couplings object;
+    the resulting collider interpretation is a documented mass proxy and is
+    flagged as ``NEEDS-HUMAN-PHYSICS`` by CR005.
+    """
+
+    if mass_extra is not None:
+        mass = float(mass_extra)
+        _kk_mass_tev_from_m_kk_gev(mass)
+        return mass, "kk_ew_mass_gev"
+    if couplings is not None:
+        return float(_mass_from_source_gev(couplings)), "quark_mass_basis_couplings.M_KK"
+    return None, None
+
+
+def kk_ew_dilepton_prediction_from_m_kk_gev(
+    m_kk_gev: float,
+    *,
+    resonance: str = "(gamma^(1), Z^(1))_KK",
+    final_state: str = "ee + mumu",
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented v1 neutral-EW KK dilepton mass proxy."""
+
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=_kk_mass_tev_from_m_kk_gev(m_kk_gev),
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=KK_EW_DILEPTON_MASS_PROXY_ASSUMPTION_V1,
+        diagnostics={
+            "m_kk_gev": float(m_kk_gev),
+            "m_kk_ew_proxy_gev": float(m_kk_gev),
+            "mass_proxy": "m_(gamma/Z KK) = kk_ew_mass_gev or M_KK",
+            "sigma_times_br_proxy_available": sigma_times_br is not None,
+        },
+    )
+
+
+__all__.extend(
+    [
+        "KK_EW_DILEPTON_MASS_PROXY_ASSUMPTION_V1",
+        "resolve_kk_ew_mass_gev",
+        "kk_ew_dilepton_prediction_from_m_kk_gev",
+    ]
+)

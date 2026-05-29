@@ -1,0 +1,7 @@
+1. NIT: Amplitude check is N/A. CR005 is a direct collider mass-limit proxy, not a ΔF=2 observable; it compares predicted mass only, with no `M_12`, Re/Im split, or CP amplitude path (`CR005.py:450`, `quarkConstraints/collider_resonance.py:166`).
+2. NIT: QCD running check is N/A. This path imports/uses `collider_resonance`, not `deltaf2`; no Wilson coefficients or `mu_had=2 GeV` evolution enter the verdict (`CR005.py:48`, `physics_adapters/collider_resonance.py:270`).
+3. NIT: Budget is defensible for the assigned HARD proxy: CMS2021 `Z'_SSM -> ee+mumu` lower bound `5.15 TeV` at 95% CL is active, with `ratio=m_limit/m_pred` (`CR005.yaml:80`, `CR005.py:501`, `quarkConstraints/collider_resonance.py:166`). Example: `6.0 TeV -> 0.858` passes.
+4. NIT: Anchor values match snapshots: CMS `5.15/4.56 TeV`, ATLAS `5.1 TeV` and `0.014 fb`, PDG `0.02 fb`; CR005 reference checksums all OK (`cms_2021_arxiv2103_02708.txt:25`, `atlas_2019_arxiv1903_06248.txt:24`, `pdg2024_zprime_searches.txt:20`).
+5. NIT: Severity/units/diagnostics are appropriate: `HARD`, GeV input converted to TeV, `sigma×BR` limits kept diagnostic and marked `NEEDS-HUMAN-PHYSICS`, not used as a fake recast (`CR005.py:391`, `physics_adapters/collider_resonance.py:302`, `CR005.py:479`).
+
+PHYSICS-OK
