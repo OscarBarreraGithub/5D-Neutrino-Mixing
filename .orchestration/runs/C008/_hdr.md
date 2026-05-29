@@ -1,0 +1,2 @@
+# Implement C008 — BR(D⁺→π⁺e±μ∓) LFV. family=charm. REUSE rare_charm machinery.
+LFV semileptonic charm decay (SM=0) → pure-NP bound vs limit (from C008.yaml), HARD. Reuse the D→π form-factor machinery (C007 rare_charm_semileptonic) + a lepton-flavor-violating (eμ) effective coupling (proxy, like C006). Append-only (don't modify C004-C007 funcs). NEEDS-HUMAN-PHYSICS (LFV coupling not on ParameterPoint).
