@@ -1,0 +1,2 @@
+# Implement L008 — BR(τ→eγ). family=charged_lepton. REUSE the lepton dipole machinery.
+REUSE the lepton dipole machinery (L001/L007 pattern) generalized to the τ→e dipole (row permutation for τ→e). SM≈0 → pure-NP dipole bound vs Belle II/PDG limit (from L008.yaml), HARD. τe dipole proxy NEEDS-HUMAN-PHYSICS; unevaluated→evaluated=False. Append-only (don't modify L001 μ→eγ / L007 τ→μγ paths). Test cross-checks via check_mu_to_e_gamma_raw with the τ→e rotation.
