@@ -1,0 +1,2 @@
+# Implement T015 — BR(Z→eμ) LFV. family=top_higgs_ew. REUSE zpole (LFV extension).
+REUSE the zpole module (built for T010) for the lepton-flavor-violating Z→eμ rate (off-diagonal Z-eμ effective coupling → BR). SM is zero (LFV) → pure-NP bound vs the experimental limit (from T015.yaml), HARD. The off-diagonal lepton Z coupling is NOT on ParameterPoint → documented proxy, NEEDS-HUMAN-PHYSICS. Append-only (do not modify T010/T012 diagonal functions).
