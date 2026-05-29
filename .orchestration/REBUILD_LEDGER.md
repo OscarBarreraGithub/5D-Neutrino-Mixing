@@ -54,8 +54,9 @@ orchestrator context resets. Updated after every per-constraint gate.
 | B001 | Δm_d | ✅ | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 8060cfb |
 | B003 | Δm_s | ✅ | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 6e65846 |
 | C001 | D⁰ mix | ✅ | PHYSICS-OK | fixed (blocker) | ✅ APPROVE | ✅ 9d72b6b |
+| K004 | BR(K⁺→π⁺νν̄) | ✅ built | PHYSICS-OK | fixed (2 blockers) | ✅ APPROVE | ✅ 4ff15a3 |
 
-**Done: 5 / ~102.** Adapter wrappers: fd2f46a. Wave-1 reconciliation PASS (no clobber, suite green).
+**Done: 6 / ~102.** K004 = first machinery-building constraint (new ΔS=1 SM core + adapter; RS-NP proxy flagged in NEEDS_HUMAN_PHYSICS.md). Calibration of the hard path: PASS. Adapter wrappers: fd2f46a. Wave-1 reconciliation PASS (no clobber, suite green).
 Per-constraint audit trail (plans, reviews, fixes, verdicts) committed under `.orchestration/runs/<ID>/`.
 
 ## Next waves (machinery-building — slower, costlier, pre-stage adapters first)
