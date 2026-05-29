@@ -1,0 +1,2 @@
+# Implement constraint B001 — Delta m_d (Neutral B_d mixing mass difference), family=beauty.
+Observable: B_d0-B_dbar0 oscillation mass splitting. RUNNING evaluator: quarkConstraints/deltaf2.py:evaluate_bd_mixing_with_running. Catalog: flavor_catalog/processes/beauty/B001.yaml. B_d mixing is well-measured AND well-predicted in SM; budget = uncertainty-aware NP room around the measured Delta m_d given SM+exp uncertainties. Check the core's bd convention + the yaml.
