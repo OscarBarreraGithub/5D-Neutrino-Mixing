@@ -1,0 +1,2 @@
+# Implement B015 — BR(B→X_sℓℓ) inclusive. family=beauty. REUSE/extend rare_b_dilepton.
+REUSE quarkConstraints/rare_b_dilepton.py (built for B005, exclusive added for B016) + adapter. B015 is the INCLUSIVE b→sℓℓ rate (low-q² and/or high-q² bins per B015.yaml), using C9,C10 (+C7). Append-only inclusive machinery (do not modify B005/B016 functions). Reuse the same C9/C10 proxy + the proxy-theory budget treatment from B016. Validate SM inclusive BR from B015.yaml. RS proxy NEEDS-HUMAN-PHYSICS. Budget from B015.yaml with documented proxy-theory uncertainty, HARD.

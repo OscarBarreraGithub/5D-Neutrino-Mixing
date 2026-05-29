@@ -16,10 +16,17 @@ from quarkConstraints.rare_b_dilepton import (
     RARE_B_DILEPTON_EXCLUSIVE_BK_INPUT_BUNDLE_V1,
     RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1,
     RARE_B_DILEPTON_EXCLUSIVE_BK_MODEL_V1,
+    RARE_B_DILEPTON_INCLUSIVE_XS_INPUT_BUNDLE_V1,
+    RARE_B_DILEPTON_INCLUSIVE_XS_LIMITATION_V1,
+    RARE_B_DILEPTON_INCLUSIVE_XS_MODEL_V1,
+    RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_FRACTION,
+    RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_RATIONALE,
     RARE_B_DILEPTON_INPUT_BUNDLE_V1,
     RARE_B_DILEPTON_MODEL_V1,
     RARE_B_DILEPTON_OPERATOR_CONVENTION,
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+    RareBInclusiveDileptonBranchingResult,
+    RareBInclusiveDileptonInputs,
     RareBToKDileptonBranchingResult,
     RareBToKDileptonInputs,
     RareBToKFormFactorInputs,
@@ -32,11 +39,14 @@ from quarkConstraints.rare_b_dilepton import (
     ckm_factors as _ckm_factors,
     compute_rare_b_dilepton_wilsons as _compute_rare_b_dilepton_wilsons,
     default_b_to_k_dilepton_inputs as _default_b_to_k_dilepton_inputs,
+    default_inclusive_b_to_xs_dilepton_inputs as _default_inclusive_b_to_xs_dilepton_inputs,
     default_sm_inputs as _default_sm_inputs,
     evaluate_b_to_k_mumu as _evaluate_b_to_k_mumu,
     evaluate_bq_to_mumu as _evaluate_bq_to_mumu,
+    evaluate_inclusive_b_to_xs_mumu as _evaluate_inclusive_b_to_xs_mumu,
     sm_b_to_k_mumu_branching_fraction as _sm_b_to_k_mumu_branching_fraction,
     sm_branching_fraction as _sm_branching_fraction,
+    sm_inclusive_b_to_xs_mumu_branching_fraction as _sm_inclusive_b_to_xs_mumu_branching_fraction,
 )
 
 __all__ = [
@@ -50,6 +60,11 @@ __all__ = [
     "RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_BUNDLE_V1",
     "RARE_B_DILEPTON_EXCLUSIVE_BK_FORM_FACTOR_CITATION",
     "RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1",
+    "RARE_B_DILEPTON_INCLUSIVE_XS_MODEL_V1",
+    "RARE_B_DILEPTON_INCLUSIVE_XS_INPUT_BUNDLE_V1",
+    "RARE_B_DILEPTON_INCLUSIVE_XS_LIMITATION_V1",
+    "RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_FRACTION",
+    "RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_RATIONALE",
     "RareBDileptonMesonInputs",
     "RareBDileptonSMInputs",
     "RareBDileptonCKMFactors",
@@ -58,6 +73,8 @@ __all__ = [
     "RareBToKFormFactorInputs",
     "RareBToKDileptonInputs",
     "RareBToKDileptonBranchingResult",
+    "RareBInclusiveDileptonInputs",
+    "RareBInclusiveDileptonBranchingResult",
     "rare_b_dilepton_default_sm_inputs",
     "rare_b_dilepton_ckm_factors",
     "rare_b_dilepton_sm_branching_fraction",
@@ -71,6 +88,10 @@ __all__ = [
     "rare_b_to_k_mumu_branching_fraction",
     "bplus_kplus_mumu_from_couplings",
     "bzero_kzero_mumu_from_couplings",
+    "rare_b_inclusive_xs_dilepton_default_inputs",
+    "rare_b_inclusive_xs_mumu_sm_branching_fraction",
+    "rare_b_inclusive_xs_mumu_branching_fraction",
+    "inclusive_b_to_xs_mumu_from_couplings",
 ]
 
 
@@ -237,6 +258,67 @@ def bzero_kzero_mumu_from_couplings(
     return rare_b_to_k_mumu_branching_fraction(
         couplings,
         mode="bzero_kzero",
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def rare_b_inclusive_xs_dilepton_default_inputs() -> RareBInclusiveDileptonInputs:
+    """Return the default inclusive ``B -> X_s mu+ mu-`` input bundle."""
+    return _default_inclusive_b_to_xs_dilepton_inputs()
+
+
+def rare_b_inclusive_xs_mumu_sm_branching_fraction(
+    *,
+    sm_branching_fraction: float,
+    q2_min_gev2: float,
+    q2_max_gev2: float,
+    inputs: RareBInclusiveDileptonInputs | None = None,
+) -> RareBInclusiveDileptonBranchingResult:
+    """Evaluate the SM-limit inclusive ``B -> X_s mu+ mu-`` bin."""
+    return _sm_inclusive_b_to_xs_mumu_branching_fraction(
+        sm_branching_fraction=sm_branching_fraction,
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        inputs=inputs,
+    )
+
+
+def rare_b_inclusive_xs_mumu_branching_fraction(
+    source: QuarkMassBasisCouplings | RareBDileptonWilsonCoefficients | None = None,
+    *,
+    sm_branching_fraction: float,
+    q2_min_gev2: float,
+    q2_max_gev2: float,
+    m_kk_gev: float | None = None,
+    inputs: RareBInclusiveDileptonInputs | None = None,
+) -> RareBInclusiveDileptonBranchingResult:
+    """Evaluate inclusive ``B -> X_s mu+ mu-`` from Wilsons or couplings."""
+    return _evaluate_inclusive_b_to_xs_mumu(
+        source,
+        sm_branching_fraction=sm_branching_fraction,
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def inclusive_b_to_xs_mumu_from_couplings(
+    couplings: QuarkMassBasisCouplings,
+    *,
+    sm_branching_fraction: float,
+    q2_min_gev2: float,
+    q2_max_gev2: float,
+    m_kk_gev: float | None = None,
+    inputs: RareBInclusiveDileptonInputs | None = None,
+) -> RareBInclusiveDileptonBranchingResult:
+    """Evaluate inclusive ``B -> X_s mu+ mu-`` from mass-basis couplings."""
+    return rare_b_inclusive_xs_mumu_branching_fraction(
+        couplings,
+        sm_branching_fraction=sm_branching_fraction,
         q2_min_gev2=q2_min_gev2,
         q2_max_gev2=q2_max_gev2,
         m_kk_gev=m_kk_gev,

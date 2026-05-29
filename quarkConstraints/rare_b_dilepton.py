@@ -1178,3 +1178,440 @@ __all__.extend(
         "RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_RATIONALE",
     ]
 )
+
+
+# ---------------------------------------------------------------------------
+# Inclusive B -> X_s l+ l- machinery (B015).
+#
+# This section is intentionally append-only relative to the B005 leptonic and
+# B016 exclusive functions above.  It reuses the same C9/C10 proxy and adds the
+# existing b -> s gamma C7 proxy as the dipole term in a normalized partonic
+# inclusive shape.
+
+from . import bsgamma as _bsgamma_core
+
+RARE_B_DILEPTON_INCLUSIVE_XS_MODEL_V1 = (
+    "rare_b_dilepton_b_to_xs_mumu_partonic_c7_c9_c10_proxy_v1"
+)
+RARE_B_DILEPTON_INCLUSIVE_XS_INPUT_BUNDLE_V1 = (
+    "rare_b_dilepton_b_to_xs_mumu_partonic_repo_ckm_v1"
+)
+RARE_B_DILEPTON_INCLUSIVE_XS_LIMITATION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: inclusive B -> X_s mu mu uses a leading partonic "
+    "C7/C9/C10 shape normalized to the caller-supplied SM bin branching "
+    "fraction.  It omits NNLO QCD, NLO QED, charm-resonance vetoes, "
+    "collinear-photon treatment, power corrections, and bin covariance."
+)
+RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_FRACTION = (
+    RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_FRACTION
+)
+RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_RATIONALE = (
+    "B015 reuses the B016 30% C9/C10-proxy theory envelope.  The inclusive "
+    "v1 evaluator has a better perturbative target than exclusive B -> K, but "
+    "still lacks the complete NNLO/QED/charm-veto and covariance treatment "
+    "needed for a production b -> s l l likelihood; the term is tied to the "
+    "NEEDS-HUMAN-PHYSICS proxy limitation."
+)
+
+
+@dataclass(frozen=True)
+class RareBInclusiveDileptonInputs:
+    """Reusable inputs for inclusive ``B -> X_s mu+ mu-`` bins."""
+
+    input_bundle: str = RARE_B_DILEPTON_INCLUSIVE_XS_INPUT_BUNDLE_V1
+    c9_sm: float = 4.27
+    partonic_b_mass_gev: float = 4.8
+    integration_steps: int = 800
+    short_distance_inputs: RareBDileptonSMInputs = field(
+        default_factory=RareBDileptonSMInputs
+    )
+    dipole_inputs: _bsgamma_core.BsgammaSMInputs = field(
+        default_factory=_bsgamma_core.default_sm_inputs
+    )
+    constants_citation: str = (
+        "LO partonic inclusive b -> s l l rate shape in the Buras C7/C9/C10 "
+        "Hamiltonian convention, normalized to a bin-specific SM branching "
+        "fraction supplied by the catalog sidecar; C7 proxy from "
+        "quarkConstraints.bsgamma and C9/C10 proxy from rare_b_dilepton."
+    )
+
+    def __post_init__(self) -> None:
+        for name in ("c9_sm", "partonic_b_mass_gev"):
+            value = float(getattr(self, name))
+            if not math.isfinite(value) or value <= 0.0:
+                raise ValueError(f"{name} must be positive and finite")
+        if int(self.integration_steps) < 20:
+            raise ValueError("integration_steps must be at least 20")
+
+
+@dataclass(frozen=True)
+class RareBInclusiveDileptonBranchingResult:
+    """Partial inclusive branching-fraction prediction for one q2 bin."""
+
+    model_label: str
+    input_bundle: str
+    q2_min_gev2: float
+    q2_max_gev2: float
+    branching_fraction: float
+    sm_branching_fraction: float
+    np_shift_branching_fraction: float
+    ratio_to_sm: float
+    c7_total: complex
+    c7p_total: complex
+    c9_total: complex
+    c9p_total: complex
+    c10_total: complex
+    c10p_total: complex
+    c7_np: complex
+    c7p_np: complex
+    c9_np: complex
+    c9p_np: complex
+    c10_np: complex
+    c10p_np: complex
+    lambda_t: complex
+    dilepton_wilsons: RareBDileptonWilsonCoefficients | None = None
+    dipole_wilsons: _bsgamma_core.BsgammaWilsonCoefficients | None = None
+    diagnostics: Mapping[str, float | complex | str | bool | Mapping[str, complex]] = (
+        field(default_factory=dict)
+    )
+
+
+def default_inclusive_b_to_xs_dilepton_inputs() -> RareBInclusiveDileptonInputs:
+    """Return the repo-owned inclusive ``B -> X_s mu+ mu-`` input bundle."""
+
+    return RareBInclusiveDileptonInputs()
+
+
+def _inclusive_xs_q2_bounds(
+    inputs: RareBInclusiveDileptonInputs,
+    q2_min_gev2: float,
+    q2_max_gev2: float,
+) -> tuple[float, float]:
+    threshold = 4.0 * inputs.short_distance_inputs.muon_mass_gev**2
+    upper_physical = inputs.partonic_b_mass_gev**2
+    lower = float(q2_min_gev2)
+    upper = float(q2_max_gev2)
+    if lower < threshold - 1.0e-12:
+        raise ValueError("q2_min_gev2 is below the dimuon threshold")
+    if upper > upper_physical + 1.0e-12:
+        raise ValueError("q2_max_gev2 is above the partonic b-quark endpoint")
+    if upper <= lower:
+        raise ValueError("q2_max_gev2 must be larger than q2_min_gev2")
+    return float(lower), float(upper)
+
+
+def _inclusive_xs_partonic_kernel(
+    q2_gev2: float,
+    *,
+    inputs: RareBInclusiveDileptonInputs,
+    c7_total: complex,
+    c7p_total: complex,
+    c9_total: complex,
+    c9p_total: complex,
+    c10_total: complex,
+    c10p_total: complex,
+) -> float:
+    q2 = float(q2_gev2)
+    shat = q2 / float(inputs.partonic_b_mass_gev) ** 2
+    if shat <= 0.0 or shat >= 1.0:
+        return 0.0
+    phase = (1.0 - shat) ** 2
+    vector_axial = (1.0 + 2.0 * shat) * (
+        abs(complex(c9_total)) ** 2
+        + abs(complex(c10_total)) ** 2
+        + abs(complex(c9p_total)) ** 2
+        + abs(complex(c10p_total)) ** 2
+    )
+    dipole = 4.0 * (1.0 + 2.0 / shat) * (
+        abs(complex(c7_total)) ** 2 + abs(complex(c7p_total)) ** 2
+    )
+    interference = 12.0 * (
+        (complex(c7_total) * complex(c9_total).conjugate()).real
+        + (complex(c7p_total) * complex(c9p_total).conjugate()).real
+    )
+    value = phase * (vector_axial + dipole + interference)
+    if not math.isfinite(value):
+        raise ValueError("inclusive B -> X_s ll kernel must be finite")
+    return float(max(0.0, value))
+
+
+def _inclusive_xs_shape_integral(
+    *,
+    inputs: RareBInclusiveDileptonInputs,
+    q2_min_gev2: float,
+    q2_max_gev2: float,
+    c7_total: complex,
+    c7p_total: complex,
+    c9_total: complex,
+    c9p_total: complex,
+    c10_total: complex,
+    c10p_total: complex,
+) -> float:
+    return _simpson_integral(
+        lambda q2: _inclusive_xs_partonic_kernel(
+            q2,
+            inputs=inputs,
+            c7_total=c7_total,
+            c7p_total=c7p_total,
+            c9_total=c9_total,
+            c9p_total=c9p_total,
+            c10_total=c10_total,
+            c10p_total=c10p_total,
+        ),
+        q2_min_gev2,
+        q2_max_gev2,
+        intervals=inputs.integration_steps,
+    )
+
+
+def sm_inclusive_b_to_xs_mumu_branching_fraction(
+    *,
+    sm_branching_fraction: float,
+    q2_min_gev2: float,
+    q2_max_gev2: float,
+    inputs: RareBInclusiveDileptonInputs | None = None,
+) -> RareBInclusiveDileptonBranchingResult:
+    """Evaluate the SM-limit inclusive ``B -> X_s mu+ mu-`` bin."""
+
+    return evaluate_inclusive_b_to_xs_mumu(
+        None,
+        sm_branching_fraction=sm_branching_fraction,
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        inputs=inputs,
+    )
+
+
+def evaluate_inclusive_b_to_xs_mumu(
+    source: QuarkMassBasisCouplings | RareBDileptonWilsonCoefficients | None = None,
+    *,
+    sm_branching_fraction: float,
+    q2_min_gev2: float,
+    q2_max_gev2: float,
+    m_kk_gev: float | None = None,
+    inputs: RareBInclusiveDileptonInputs | None = None,
+) -> RareBInclusiveDileptonBranchingResult:
+    """Evaluate inclusive ``B -> X_s mu+ mu-`` with C7/C9/C10 proxies.
+
+    NEEDS-HUMAN-PHYSICS: RS new physics combines the documented ``b -> s mu mu``
+    C9/C10 proxy with the existing ``b -> s gamma`` C7 proxy.  The inclusive
+    rate is only a normalized LO partonic bin shape; complete NNLO/QED/charm
+    treatment and experimental covariance are left to a later physics pass.
+    """
+
+    p = default_inclusive_b_to_xs_dilepton_inputs() if inputs is None else inputs
+    sm_br = _positive_float(sm_branching_fraction, "sm_branching_fraction")
+    q2_min, q2_max = _inclusive_xs_q2_bounds(p, q2_min_gev2, q2_max_gev2)
+    factors = ckm_factors("b_s", p.short_distance_inputs)
+
+    dilepton_wilsons: RareBDileptonWilsonCoefficients | None
+    dipole_wilsons: _bsgamma_core.BsgammaWilsonCoefficients | None
+    if source is None:
+        dilepton_wilsons = None
+        dipole_wilsons = None
+        c9_np = c9p_np = c10_np = c10p_np = 0.0j
+        c7_np = c7p_np = 0.0j
+    elif isinstance(source, RareBDileptonWilsonCoefficients):
+        if source.transition_key != "b_s":
+            raise ValueError("inclusive B -> X_s mu mu requires b_s Wilsons")
+        dilepton_wilsons = source
+        dipole_wilsons = None
+        c9_np = source.c9_np
+        c9p_np = source.c9p_np
+        c10_np = source.c10_np
+        c10p_np = source.c10p_np
+        c7_np = c7p_np = 0.0j
+    else:
+        dilepton_wilsons = compute_rare_b_dilepton_wilsons(
+            source,
+            transition="b_s",
+            m_kk_gev=m_kk_gev,
+            inputs=p.short_distance_inputs,
+        )
+        dipole_wilsons = _bsgamma_core.compute_bsgamma_wilsons(
+            source,
+            m_kk_gev=m_kk_gev,
+            inputs=p.dipole_inputs,
+        )
+        c9_np = dilepton_wilsons.c9_np
+        c9p_np = dilepton_wilsons.c9p_np
+        c10_np = dilepton_wilsons.c10_np
+        c10p_np = dilepton_wilsons.c10p_np
+        c7_np = dipole_wilsons.c7_np
+        c7p_np = dipole_wilsons.c7p_np
+
+    c7_total = complex(p.dipole_inputs.c7_sm_eff + c7_np)
+    c7p_total = complex(p.dipole_inputs.c7p_sm_eff + c7p_np)
+    c9_total = complex(p.c9_sm + c9_np)
+    c9p_total = complex(c9p_np)
+    c10_total = complex(p.short_distance_inputs.c10_sm + c10_np)
+    c10p_total = complex(c10p_np)
+
+    sm_integral = _inclusive_xs_shape_integral(
+        inputs=p,
+        q2_min_gev2=q2_min,
+        q2_max_gev2=q2_max,
+        c7_total=p.dipole_inputs.c7_sm_eff,
+        c7p_total=p.dipole_inputs.c7p_sm_eff,
+        c9_total=p.c9_sm,
+        c9p_total=0.0j,
+        c10_total=p.short_distance_inputs.c10_sm,
+        c10p_total=0.0j,
+    )
+    total_integral = _inclusive_xs_shape_integral(
+        inputs=p,
+        q2_min_gev2=q2_min,
+        q2_max_gev2=q2_max,
+        c7_total=c7_total,
+        c7p_total=c7p_total,
+        c9_total=c9_total,
+        c9p_total=c9p_total,
+        c10_total=c10_total,
+        c10p_total=c10p_total,
+    )
+    if sm_integral <= 0.0 or not math.isfinite(sm_integral):
+        raise ValueError("SM inclusive B -> X_s ll shape integral must be positive")
+    if total_integral < 0.0 or not math.isfinite(total_integral):
+        raise ValueError("total inclusive B -> X_s ll shape integral must be finite")
+
+    ratio_to_sm = total_integral / sm_integral
+    br = sm_br * ratio_to_sm
+    q2_mid = 0.5 * (q2_min + q2_max)
+    diagnostics: dict[str, float | complex | str | bool | Mapping[str, complex]] = {
+        "lambda_wolfenstein": float(factors.lambda_wolfenstein),
+        "lambda_t": complex(factors.lambda_t),
+        "q2_min_gev2": float(q2_min),
+        "q2_max_gev2": float(q2_max),
+        "q2_bin_width_gev2": float(q2_max - q2_min),
+        "q2_mid_gev2": float(q2_mid),
+        "partonic_b_mass_gev": float(p.partonic_b_mass_gev),
+        "c7_sm_eff": complex(p.dipole_inputs.c7_sm_eff),
+        "c7p_sm_eff": complex(p.dipole_inputs.c7p_sm_eff),
+        "c9_sm": float(p.c9_sm),
+        "c10_sm": float(p.short_distance_inputs.c10_sm),
+        "c7_total": complex(c7_total),
+        "c7p_total": complex(c7p_total),
+        "c9_total": complex(c9_total),
+        "c9p_total": complex(c9p_total),
+        "c10_total": complex(c10_total),
+        "c10p_total": complex(c10p_total),
+        "c7_np": complex(c7_np),
+        "c7p_np": complex(c7p_np),
+        "c9_np": complex(c9_np),
+        "c9p_np": complex(c9p_np),
+        "c10_np": complex(c10_np),
+        "c10p_np": complex(c10p_np),
+        "sm_shape_integral": float(sm_integral),
+        "total_shape_integral": float(total_integral),
+        "kernel_sm_at_bin_center": _inclusive_xs_partonic_kernel(
+            q2_mid,
+            inputs=p,
+            c7_total=p.dipole_inputs.c7_sm_eff,
+            c7p_total=p.dipole_inputs.c7p_sm_eff,
+            c9_total=p.c9_sm,
+            c9p_total=0.0j,
+            c10_total=p.short_distance_inputs.c10_sm,
+            c10p_total=0.0j,
+        ),
+        "kernel_total_at_bin_center": _inclusive_xs_partonic_kernel(
+            q2_mid,
+            inputs=p,
+            c7_total=c7_total,
+            c7p_total=c7p_total,
+            c9_total=c9_total,
+            c9p_total=c9p_total,
+            c10_total=c10_total,
+            c10p_total=c10p_total,
+        ),
+        "integration_steps": float(p.integration_steps),
+        "constants_citation": p.constants_citation,
+        "matching_assumption": RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+        "dipole_matching_assumption": _bsgamma_core.BSGAMMA_RS_MATCHING_ASSUMPTION_V1,
+        "inclusive_limitations": RARE_B_DILEPTON_INCLUSIVE_XS_LIMITATION_V1,
+        "c7_included": True,
+        "c9_c10_proxy_reused": True,
+    }
+    if dilepton_wilsons is not None:
+        diagnostics.update(
+            {
+                "m_kk_gev": float(dilepton_wilsons.M_KK),
+                "matching_scale_gev": float(dilepton_wilsons.matching_scale),
+                "left_qb_coupling": complex(dilepton_wilsons.left_qb_coupling),
+                "right_qb_coupling": complex(dilepton_wilsons.right_qb_coupling),
+                "left_qb_overlap": complex(dilepton_wilsons.left_qb_overlap),
+                "right_qb_overlap": complex(dilepton_wilsons.right_qb_overlap),
+                "left_quark_delta": complex(dilepton_wilsons.left_quark_delta),
+                "right_quark_delta": complex(dilepton_wilsons.right_quark_delta),
+                "muon_left_delta": float(dilepton_wilsons.muon_left_delta),
+                "muon_right_delta": float(dilepton_wilsons.muon_right_delta),
+                "muon_vector_delta": float(dilepton_wilsons.muon_vector_delta),
+                "muon_axial_delta": float(dilepton_wilsons.muon_axial_delta),
+                "dilepton_wilson_coefficients": {
+                    key: complex(value)
+                    for key, value in dilepton_wilsons.wilsons.items()
+                },
+            }
+        )
+    if dipole_wilsons is not None:
+        diagnostics.update(
+            {
+                "c7_np_matching": complex(dipole_wilsons.c7_np_matching),
+                "c7p_np_matching": complex(dipole_wilsons.c7p_np_matching),
+                "c8_np_matching": complex(dipole_wilsons.c8_np_matching),
+                "c8p_np_matching": complex(dipole_wilsons.c8p_np_matching),
+                "c8_np": complex(dipole_wilsons.c8_np),
+                "c8p_np": complex(dipole_wilsons.c8p_np),
+                "c7_running_from_c7": float(dipole_wilsons.c7_running_from_c7),
+                "c7_running_from_c8": float(dipole_wilsons.c7_running_from_c8),
+                "c8_running_from_c8": float(dipole_wilsons.c8_running_from_c8),
+                "alpha_s_matching_scale": float(dipole_wilsons.alpha_s_matching_scale),
+                "alpha_s_low_scale": float(dipole_wilsons.alpha_s_low_scale),
+                "dipole_wilson_coefficients": {
+                    key: complex(value)
+                    for key, value in dipole_wilsons.wilsons.items()
+                },
+            }
+        )
+
+    return RareBInclusiveDileptonBranchingResult(
+        model_label=RARE_B_DILEPTON_INCLUSIVE_XS_MODEL_V1,
+        input_bundle=p.input_bundle,
+        q2_min_gev2=float(q2_min),
+        q2_max_gev2=float(q2_max),
+        branching_fraction=float(br),
+        sm_branching_fraction=float(sm_br),
+        np_shift_branching_fraction=float(br - sm_br),
+        ratio_to_sm=float(ratio_to_sm),
+        c7_total=complex(c7_total),
+        c7p_total=complex(c7p_total),
+        c9_total=complex(c9_total),
+        c9p_total=complex(c9p_total),
+        c10_total=complex(c10_total),
+        c10p_total=complex(c10p_total),
+        c7_np=complex(c7_np),
+        c7p_np=complex(c7p_np),
+        c9_np=complex(c9_np),
+        c9p_np=complex(c9p_np),
+        c10_np=complex(c10_np),
+        c10p_np=complex(c10p_np),
+        lambda_t=complex(factors.lambda_t),
+        dilepton_wilsons=dilepton_wilsons,
+        dipole_wilsons=dipole_wilsons,
+        diagnostics=diagnostics,
+    )
+
+
+__all__.extend(
+    [
+        "RARE_B_DILEPTON_INCLUSIVE_XS_MODEL_V1",
+        "RARE_B_DILEPTON_INCLUSIVE_XS_INPUT_BUNDLE_V1",
+        "RARE_B_DILEPTON_INCLUSIVE_XS_LIMITATION_V1",
+        "RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_FRACTION",
+        "RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_RATIONALE",
+        "RareBInclusiveDileptonInputs",
+        "RareBInclusiveDileptonBranchingResult",
+        "default_inclusive_b_to_xs_dilepton_inputs",
+        "sm_inclusive_b_to_xs_mumu_branching_fraction",
+        "evaluate_inclusive_b_to_xs_mumu",
+    ]
+)
