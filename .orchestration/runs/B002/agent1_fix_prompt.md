@@ -1,0 +1,7 @@
+You are agent1 fixing B002 (S_ψKs / sin2β). Reviews: .orchestration/runs/B002/agent2_out.md (PHYSICS-OK) and agent3_out.md (CODE-NEEDS-FIXES). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+FIX:
+1. (code BLOCKER) The test's cross-check reuses the same adapter B002 calls, so it's not independent. Make it INDEPENDENT: compute the expected complex M12 directly from quarkConstraints.deltaf2 core (e.g. _evolve_wilsons + compute_m12_np, and evaluate_bd_mixing_with_running for the magnitude), then derive the expected NP phase shift and assert B002's result matches. Report the cross-check numbers.
+2. (SHOULD-FIX) Beta/penguin anchor values use load_pdg_block/find_block; route value-bearing anchors through the scaffold load_anchor (extend with a value_key if needed). Keep the 2β NEEDS-HUMAN-PHYSICS flag (no core CKM phase) — that is accepted.
+3. (SHOULD-FIX) Align the adapter contract for the phase wrapper if there's a mismatch (minor).
+IGNORE the "isolation fails / git diff quarkConstraints non-empty / worktree has B002/K005 files" finding — that is a parallel-wave worktree artifact, NOT a real defect. B002 must only touch B002.py, its test, and the append-only deltaf2 adapter phase helper. Do NOT modify quarkConstraints/ or other constraints. Keep physics as-is.
+Run `python -m pytest tests/constraints/primary/beauty/test_B002.py -q` and `tests/constraints/ -q` green. OUTPUT <=12 lines: changes, cross-check numbers, pytest counts.
