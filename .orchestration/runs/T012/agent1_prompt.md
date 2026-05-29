@@ -1,0 +1,14 @@
+# Implement T012 — Z→cc̄ (R_c, A_c). family=top_higgs_ew. REUSE zpole.
+REUSE quarkConstraints/zpole.py (built for T010) + adapter — it was designed generic over flavors. R_c, A_c from the charm effective Zcc couplings. Validate SM R_c≈0.1721, A_c≈0.667 from T012.yaml. RS Zcc-coupling-shift proxy reused → NEEDS-HUMAN-PHYSICS. Budget from T012.yaml (LEP/SLD vs SM). Append-only if needed (do not modify T010's b functions).
+
+## Shared pipeline rules (agent1 implementer; family-agnostic)
+Implement ONE constraint into the plugin scaffold flavor_catalog_constraints/. Two codex reviewers (physics + code) and an Opus reviewer follow you. First a SHORT plan, then implement. Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+STUDY: the gold-standard committed examples (primary/kaon/K001.py for ΔF=2-style, primary/kaon/K004.py for machinery-building with a documented proxy + NEEDS-HUMAN-PHYSICS flag) and the scaffold (base.py contract, anchors.py load_anchor, registry.py, point_builder.py, TEMPLATE.py). Read your constraint's catalog sidecar yaml (source of truth for values + provenance).
+RULES:
+1. REUSE existing physics where it exists (named in your header); only BUILD new machinery if none exists, in a NEW dedicated module wrapped by a NEW/append-only physics_adapters/* module. Constraints NEVER import physics modules directly — only via an adapter.
+2. Anchors loaded from the yaml via the scaffold load_anchor (schema-flex, typed, FAIL LOUD on missing/mismatch). NO hardcoded experimental/SM numbers.
+3. Numeric ConstraintResult fields MUST be real floats; complex amplitudes go in diagnostics. Pick severity (HARD for an observed bound NP must fit; SOFT for SM-tension/projection; INFO if non-vetoing). Missing required inputs → non-crashing result.
+4. If rigorous RS NP matching needs inputs NOT on ParameterPoint (e.g. EW KK/Z/Z'/lepton/neutrino couplings), build the rigorous SM/observable part and use a DOCUMENTED proxy for the NP part, explicitly flagged NEEDS-HUMAN-PHYSICS in the docstring + result.diagnostics (exactly like K004). Never invent ungrounded numbers silently.
+5. Keep ALL changes ISOLATED to your constraint file, its test, and your own append-only adapter/module. Do NOT modify other constraints or existing physics functions.
+TESTS tests/constraints/primary/<family>/test_<ID>.py: registration; anchor matches yaml + loud-fail probe; a real numerical check (validate against a known SM value or an INDEPENDENT recomputation from the underlying core, NOT by re-calling the same adapter); a safe point passes and an excluded point fails; evaluate pure. Run `python -m pytest tests/constraints/ -q` until green.
+OUTPUT (stdout, <=16 lines): plan; physics/parametrization + sources; reused-vs-built machinery; budget value + source; SM/numerical validation number; any NEEDS-HUMAN-PHYSICS gap; files changed; pytest counts. No full files.

@@ -1,0 +1,2 @@
+# Implement T012 — Z→cc̄ (R_c, A_c). family=top_higgs_ew. REUSE zpole.
+REUSE quarkConstraints/zpole.py (built for T010) + adapter — it was designed generic over flavors. R_c, A_c from the charm effective Zcc couplings. Validate SM R_c≈0.1721, A_c≈0.667 from T012.yaml. RS Zcc-coupling-shift proxy reused → NEEDS-HUMAN-PHYSICS. Budget from T012.yaml (LEP/SLD vs SM). Append-only if needed (do not modify T010's b functions).
