@@ -332,3 +332,47 @@ __all__.extend(
         "kk_ew_dilepton_prediction_from_m_kk_gev",
     ]
 )
+
+
+KK_CHARGED_CURRENT_MASS_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: charged electroweak KK/W' recast v1 uses the "
+    "supplied kk_ew_mass_gev, or M_KK as a fallback mass proxy, and compares "
+    "it to a catalogued benchmark W' mass lower bound. It does not compute "
+    "sigma(pp->W_KK)*BR(W_KK->l nu,tb), light-quark, lepton, or tb couplings, "
+    "total width, interference, acceptance, or the experiment's mass-dependent "
+    "limit curve."
+)
+
+
+def kk_charged_current_prediction_from_m_kk_gev(
+    m_kk_gev: float,
+    *,
+    resonance: str = "W_KK^(1)",
+    final_state: str = "ell nu",
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented v1 charged-current EW KK mass proxy."""
+
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=_kk_mass_tev_from_m_kk_gev(m_kk_gev),
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=KK_CHARGED_CURRENT_MASS_PROXY_ASSUMPTION_V1,
+        diagnostics={
+            "m_kk_gev": float(m_kk_gev),
+            "m_kk_charged_current_proxy_gev": float(m_kk_gev),
+            "mass_proxy": "m_WKK = kk_ew_mass_gev or M_KK",
+            "sigma_times_br_proxy_available": sigma_times_br is not None,
+        },
+    )
+
+
+__all__.extend(
+    [
+        "KK_CHARGED_CURRENT_MASS_PROXY_ASSUMPTION_V1",
+        "kk_charged_current_prediction_from_m_kk_gev",
+    ]
+)
