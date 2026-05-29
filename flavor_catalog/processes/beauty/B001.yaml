@@ -119,6 +119,23 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/B001/hflav_pdg2025_bd_mixing.txt"
     sha256_of_text_snapshot: "sha256:5427ddc287e4f74a051fa6f7e67837d5b20fad0ce13aa6313af1d82703bf7711"
+  standard_model_prediction:
+    source: "HPQCD Collaboration 2019"
+    arxiv_id: "1907.01025"
+    year: 2019
+    observable: "SM prediction for Delta M_d"
+    value: 0.555
+    uncertainty: 0.062
+    units: "ps^-1"
+    uncertainty_policy: "Use the larger asymmetric side and the second uncertainty in quadrature."
+    asymmetric_uncertainty_plus: 0.028
+    asymmetric_uncertainty_minus: 0.055
+    second_uncertainty: 0.029
+    value_summary: "Delta M_d^SM = 0.555(+0.028/-0.055)(0.029) ps^-1; sigma_SM uses sqrt(0.055^2 + 0.029^2)."
+    source_key: "HPQCD2019:BdMixingSM"
+    source_url: "https://arxiv.org/abs/1907.01025"
+    access_date: "2026-05-16"
+    provenance_note: "HPQCD 2019 Eq. (17); the catalog budget uses this uncertainty with the Delta F = 2 core SM central convention."
 recent_experimental_inputs:
   belleii_2023:
     source: "Belle II Collaboration, Phys. Rev. D 107, L091102 (2023)"
