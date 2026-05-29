@@ -204,3 +204,64 @@ __all__.extend(
         "vlq_t_pair_prediction_from_m_kk_gev",
     ]
 )
+
+
+VLQ_B_PAIR_MASS_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: charge -1/3 vector-like B pair-production recast "
+    "v1 uses m_B = M_KK as a KK-fermion mass proxy and compares it to the "
+    "catalogued benchmark mass lower limit. It does not compute "
+    "sigma(pp->B Bbar)*BR(B->tW/bZ/bH)^2, widths, branching-fraction "
+    "mixtures, acceptance, or the experiment's mass-dependent limit curve."
+)
+
+
+def resolve_charge_minus_one_third_vlq_mkk_gev(
+    *,
+    couplings: Any = None,
+) -> tuple[float | None, str | None]:
+    """Resolve the charge -1/3 bottom-partner proxy mass in GeV.
+
+    The current scan point carries the common quark-sector ``M_KK`` scale, not
+    a dedicated custodial charge -1/3 ``B`` spectrum.  CR004 therefore
+    interprets ``M_KK`` as the bottom-partner mass proxy and flags the matching
+    as ``NEEDS-HUMAN-PHYSICS`` at the result.
+    """
+
+    if couplings is not None:
+        return float(_mass_from_source_gev(couplings)), "quark_mass_basis_couplings.M_KK"
+    return None, None
+
+
+def vlq_b_pair_prediction_from_m_kk_gev(
+    m_kk_gev: float,
+    *,
+    resonance: str = "B pair",
+    final_state: str = "tW/bZ/bH",
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented v1 charge -1/3 VLQ pair-production mass proxy."""
+
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=_kk_mass_tev_from_m_kk_gev(m_kk_gev),
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=VLQ_B_PAIR_MASS_PROXY_ASSUMPTION_V1,
+        diagnostics={
+            "m_kk_gev": float(m_kk_gev),
+            "m_b_partner_proxy_gev": float(m_kk_gev),
+            "mass_proxy": "m_B = M_KK",
+            "sigma_times_br_proxy_available": sigma_times_br is not None,
+        },
+    )
+
+
+__all__.extend(
+    [
+        "VLQ_B_PAIR_MASS_PROXY_ASSUMPTION_V1",
+        "resolve_charge_minus_one_third_vlq_mkk_gev",
+        "vlq_b_pair_prediction_from_m_kk_gev",
+    ]
+)
