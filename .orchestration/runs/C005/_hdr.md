@@ -1,0 +1,2 @@
+# Implement C005 — BR(D⁰→e⁺e⁻). family=charm. REUSE rare_charm_dilepton.
+REUSE quarkConstraints/rare_charm_dilepton.py (built for C004) + adapter. D0→ee is the electron mode (strong helicity suppression ∝ m_e²); reuse the c→uℓℓ machinery with the electron mass. SM SD≈0, LD-dominated; HARD bound vs PDG limit (from C005.yaml). RS proxy reused → NEEDS-HUMAN-PHYSICS. Append-only if any addition needed (do not modify C004's muon functions).
