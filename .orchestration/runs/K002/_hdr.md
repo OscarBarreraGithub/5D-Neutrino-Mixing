@@ -1,0 +1,2 @@
+# Implement constraint K002 — Delta m_K (K_L-K_S mass difference), family=kaon.
+Observable: the K0-K0bar mass splitting. RUNNING evaluator: quarkConstraints/deltaf2.py:evaluate_delta_mk_with_running. Catalog: flavor_catalog/processes/kaon/K002.yaml (note schema-flex block, e.g. pdg_fit_assuming_cpt; Delta m_K in units like 10^10 hbar/s — convert to GeV). Long-distance dominated: SM short-distance is NOT subtracted; established core convention is |M_12^NP| <= Delta m_K^exp / 2. Verify against deltaf2 + yaml.
