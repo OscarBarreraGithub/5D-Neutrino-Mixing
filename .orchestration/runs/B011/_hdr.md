@@ -1,0 +1,2 @@
+# Implement B011 — BR(B̄→X_sγ). family=beauty. PIONEER: build the shared b→sγ dipole module.
+BUILD new module quarkConstraints/bsgamma.py (SM: C7 dipole, inclusive BR(B→X_sγ)~3.3e-4 at E_γ>1.6 GeV — validate) wrapped by a NEW adapter physics_adapters/bsgamma.py. Design so B012 (B→K*γ exclusive) can reuse the C7 machinery. RS NP = documented dipole-coefficient proxy (KK contributions to C7), flagged NEEDS-HUMAN-PHYSICS. Budget from B011.yaml (measured vs SM), HARD.
