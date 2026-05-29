@@ -1,0 +1,2 @@
+# Implement E006 — mercury EDM |d_Hg|. family=edm_neutrino. HARD STUB (dual NEEDS-HUMAN).
+Atomic (199Hg) EDM needs the nuclear Schiff moment + atomic-structure factors (large nonperturbative/atomic uncertainty) AND RS CP-odd matching. Honest STUB like C003/E004: load the measured |d_Hg| limit from E006.yaml, record it, NON-VETOING (INFO/SOFT), no faked Schiff/atomic calc. Flag NEEDS-HUMAN-PHYSICS on BOTH sides (Schiff moment + atomic structure AND RS CP-odd matching). New small adapter. Document.
