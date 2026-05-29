@@ -87,7 +87,13 @@ orchestrator context resets. Updated after every per-constraint gate.
 | T003 | t→cγ | ✅ reuse | PHYSICS-OK | fixed | ✅ APPROVE | ✅ |
 | B017 | B→K(*)ℓℓ | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
 
-**Done: 34 / ~95.** (Target is ~95 catalog entries, not 102 — some IDs merged/removed.) Wave-8 fan-out. SHAs in git log. New modules: rare_charm_semileptonic, zpole_lfv. Wave-7 = fan-out of wave-6 modules (one per shared module). Review caught K008 direct-CP structure bug (y7V/y7A) + C005 stale-golden. SHAs in git log. Wave-6 = multi-family PIONEERS — 5 new shared modules built in parallel:
+| K010 | K_S→π⁰ee | ✅ reuse | fixed (a_S sign) | CODE-OK | ✅ APPROVE | ✅ |
+| C006 | D⁰→eμ LFV | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
+| T004 | t→uγ | ✅ reuse | fixed (budget) | CODE-OK | ✅ APPROVE | ✅ |
+| T016 | Z→eτ LFV | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
+| B018 | R_K LFU | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ |
+
+**Done: 39 / ~95.** Wave-9 fan-out. SHAs in git log. (Target is ~95 catalog entries, not 102 — some IDs merged/removed.) Wave-8 fan-out. SHAs in git log. New modules: rare_charm_semileptonic, zpole_lfv. Wave-7 = fan-out of wave-6 modules (one per shared module). Review caught K008 direct-CP structure bug (y7V/y7A) + C005 stale-golden. SHAs in git log. Wave-6 = multi-family PIONEERS — 5 new shared modules built in parallel:
 `rare_kaon_dilepton`(→K008/K009/K010/K012), `rare_charm_dilepton`(→C005/C007), `zpole`(→T011/T012/T015-T017),
 `top_fcnc`(→T002-T008), exclusive `rare_b_dilepton`(→B015/B017-B019/B021). Ready for wide fan-out next.
 

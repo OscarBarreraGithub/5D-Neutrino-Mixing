@@ -91,3 +91,7 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
 - **Needs human input:** RS NP proxies (s→dℓℓ y7V/y7A, c→uℓℓ semileptonic, off-diagonal Z-eμ LFV coupling,
   top-photon dipole, C9/C10) — cross-cutting EW-coupling gap. C007 is a FULL-q² proxy (resonance/LD windows
   not applied) + 8.96% form-factor normalization uncertainty.
+
+### Wave-9 (K010, C006, T004, T016, B018)   [committed — see git log]
+- RS NP proxies inherited from shared modules (s→dℓℓ K_S a_S w/ sign-envelope, c→uℓℓ LFV eμ coupling,
+  top-photon dipole t→uγ, off-diagonal Z-eτ LFV, lepton-non-universal C9/C10 for R_K) — cross-cutting EW-coupling gap.
