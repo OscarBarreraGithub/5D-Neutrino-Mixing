@@ -4,49 +4,12 @@ family: top_higgs_ew
 standard_notation: "Z -> b bbar pole asymmetries: A_FB^{0,b}, A_b"
 process_name: "Z-pole bottom-quark forward-backward and left-right asymmetries"
 owner: "PKA"
-owner_agent_id: "PKA-T010"
+owner_agent_id: "PKA-T011"
 writer_agent_id: null
 checker_agent_id: null
 opus_signoff_id: null
-
-# ---------------------------------------------------------------------------
-# Cross-reference stub created by cleanup C10 (R10c-I1).
-#
-# Plan v1 (Section C) listed T010 (R_b) and T011 (A_FB^b, A_b) as separate
-# plan rows. The PKA cycle for the Wave-1 top_higgs_ew batch merged the two
-# rows into a single joint Z -> b bbar pole-observable package owned by
-# T010.{yaml,tex}, because the three observables share the same LEP/SLC
-# combination, the same PDG snapshot, and the same RS chirality-shift
-# analysis. This was recorded at the time in:
-#
-#   - flavor_catalog/processes/top_higgs_ew/T010.yaml
-#       (related_process_ids: [T011]; status_history reason at line ~20;
-#        open_issues note at line ~163-164)
-#   - flavor_catalog/processes/top_higgs_ew/T010.tex
-#       (Process subsection, lines 14-17)
-#   - flavor_catalog/worklogs/pka/T010.md
-#   - flavor_catalog/worklogs/discovery/round_004_addendum_deferred_scope.md
-#       (T011 row: "Folded into T010; promote if Zbb asymmetries need
-#        separate chiral ownership.")
-#   - flavor_catalog/signoff/round_003_index.md
-#       (T011 listed alongside T013/L021/L022/L024/L025 as DEFERRED-SCOPE)
-#
-# This file exists so that a tool walking the plan-row -> file mapping does
-# not see an unaccounted T011. It carries no physics content of its own;
-# all observables, SM predictions, current measurements, RS implications,
-# references, and provenance live in T010.{yaml,tex}.
-# ---------------------------------------------------------------------------
-
 related_process_ids:
   - T010
-merged_into: T010
-merge_rationale: >
-  Plan v1 rows T010 (R_b) and T011 (A_FB^b, A_b) share the LEP/SLC Z-pole
-  combination, the PDG Z-boson listing snapshot, and the RS Z b_L / b_R
-  coupling-shift analysis; the Wave-1 PKA cycle treated them as one joint
-  pole-observable package owned by T010. No separate T011 physics file
-  exists by design.
-
 status_history:
   - state: "CLOSED-AS-MERGED"
     timestamp: "2026-05-25T00:00:00-04:00"
@@ -57,17 +20,80 @@ status_history:
     agent_id: "cleanup-C10"
     batch_id: "cleanup-C10"
     reason: >
-      R10c-I1 closure: stub created to make the plan-row -> file mapping
-      explicit. T011 physics content lives in T010.{yaml,tex}.
-
-# Canonical home for the asymmetry physics:
-canonical_home:
-  process_id: T010
-  yaml_path: flavor_catalog/processes/top_higgs_ew/T010.yaml
-  tex_path: flavor_catalog/processes/top_higgs_ew/T010.tex
-  observables_covered:
-    - "A_FB^{0,b}"
-    - "A_b"
-
+      Historical cleanup stub: T011 was cross-referenced to T010 because the
+      Wave-1 catalog package grouped R_b, A_FB^{0,b}, and A_b together.
+  - state: "PROMOTED-STANDALONE"
+    timestamp: "2026-05-29T00:00:00-04:00"
+    from: "CLOSED-AS-MERGED"
+    to: "PROMOTED-STANDALONE"
+    at: "2026-05-29T00:00:00-04:00"
+    agent: "agent1"
+    agent_id: "agent1-T011"
+    reason: >
+      Promoted T011 to a standalone Zbb asymmetry constraint with its own
+      A_FB^{0,b} and A_b anchors. T010 remains related R_b context only.
+last_updated_at: "2026-05-29T00:00:00-04:00"
+version: "0.1.0"
+source_shas:
+  pdg_2025_z_boson_bottom_asymmetries.txt: "sha256:d04d396061c0be8f9adfc24381d9c932be900eb032db5a19d5a1a75fda4b7fa4"
+  lepslc_2006_z_resonance_bottom.txt: "sha256:3884e4fb5df4c43362ba6020477a300f8778da0ed5310506124ef90a187b1cf1"
+pdg_or_equivalent:
+  A_FB^{0,b}:
+    observable: "A_FB^{0,b}"
+    year: 2025
+    value: 0.0992
+    uncertainty: 0.0016
+    units: "dimensionless"
+    source: "PDG 2025 Z-boson listing, quoting the LEP/SLC final Z-pole heavy-flavour combination"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-29"
+    snapshot_path: "flavor_catalog/references/T011/pdg_2025_z_boson_bottom_asymmetries.txt"
+    sha256: "sha256:d04d396061c0be8f9adfc24381d9c932be900eb032db5a19d5a1a75fda4b7fa4"
+    lepslc_source: "ALEPH, DELPHI, L3, OPAL, SLD, LEP Electroweak Working Group, SLD Electroweak and Heavy Flavour Groups, final Z-resonance combination"
+    lepslc_year: 2006
+    lepslc_source_url: "https://arxiv.org/abs/hep-ex/0509008"
+    lepslc_snapshot_path: "flavor_catalog/references/T011/lepslc_2006_z_resonance_bottom.txt"
+    lepslc_sha256: "sha256:3884e4fb5df4c43362ba6020477a300f8778da0ed5310506124ef90a187b1cf1"
+    sm_fit_value: 0.1037
+    sm_fit_uncertainty: 0.0008
+    pull: 2.8
+  A_b:
+    observable: "A_b"
+    year: 2025
+    value: 0.923
+    uncertainty: 0.020
+    units: "dimensionless"
+    source: "PDG 2025 Z-boson listing, quoting the LEP/SLC final Z-pole heavy-flavour combination"
+    source_url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-29"
+    snapshot_path: "flavor_catalog/references/T011/pdg_2025_z_boson_bottom_asymmetries.txt"
+    sha256: "sha256:d04d396061c0be8f9adfc24381d9c932be900eb032db5a19d5a1a75fda4b7fa4"
+    lepslc_source: "ALEPH, DELPHI, L3, OPAL, SLD, LEP Electroweak Working Group, SLD Electroweak and Heavy Flavour Groups, final Z-resonance combination"
+    lepslc_year: 2006
+    lepslc_source_url: "https://arxiv.org/abs/hep-ex/0509008"
+    lepslc_snapshot_path: "flavor_catalog/references/T011/lepslc_2006_z_resonance_bottom.txt"
+    lepslc_sha256: "sha256:3884e4fb5df4c43362ba6020477a300f8778da0ed5310506124ef90a187b1cf1"
+    sm_fit_value: 0.9346
+    sm_fit_uncertainty: 0.0001
+    pull: 0.6
+paper_era_reference:
+  - key: "lepslc_2006_z_resonance_bottom"
+    role: "Final LEP/SLC heavy-flavour electroweak combination for A_FB^{0,b}, A_b, SM-fit values, and pulls."
+    snapshot_path: "flavor_catalog/references/T011/lepslc_2006_z_resonance_bottom.txt"
+    sha256: "sha256:3884e4fb5df4c43362ba6020477a300f8778da0ed5310506124ef90a187b1cf1"
+code_coverage:
+  status: "YES"
+  implementation_path: "flavor_catalog_constraints/primary/top_higgs_ew/T011.py"
+  tests_path: "tests/constraints/primary/top_higgs_ew/test_T011.py"
+  shared_physics_core: "quarkConstraints/zpole.py"
+  physics_adapter: "flavor_catalog_constraints/physics_adapters/zpole.py"
+implementation_difficulty: "HIGH"
+implementation_difficulty_reason: >
+  A rigorous RS prediction for Z b_L b_L and Z b_R b_R shifts requires the
+  electroweak KK/Z/Z' spectrum, custodial representations, fermion embeddings,
+  brane kinetic terms, and Z-mixing data. The live constraint therefore uses a
+  documented Zbb-shift proxy and flags the matching as NEEDS-HUMAN-PHYSICS.
+historical_notes:
+  - "This process was previously a CLOSED-AS-MERGED stub with canonical_home T010; it is now a standalone asymmetry constraint. T010 remains the related R_b entry."
 open_issues:
-  - "[CLOSED-as-merged-by-C10 2026-05-25] Plan-row T011 is folded into T010 by Wave-1 PKA design. Promote to a standalone file only if a future scan needs separate chiral ownership of the b-quark asymmetries (see worklogs/discovery/round_004_addendum_deferred_scope.md)."
+  - "NEEDS-HUMAN-PHYSICS: replace the overlap-based RS Zbb-shift proxy with model-complete electroweak KK/Z/Z' matching when those inputs are available."

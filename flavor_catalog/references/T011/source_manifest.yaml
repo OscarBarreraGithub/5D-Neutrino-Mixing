@@ -1,0 +1,24 @@
+schema: flavor_catalog.source_manifest.v1
+process_id: T011
+created_at: "2026-05-29T00:00:00-04:00"
+references:
+  - key: pdg_2025_z_boson_bottom_asymmetries
+    arxiv_id: null
+    doi: "10.1103/PhysRevD.110.030001"
+    title: "The Z Boson"
+    authors: "Particle Data Group; S. Navas et al."
+    year: 2025
+    url: "https://pdg.lbl.gov/2025/listings/rpp2025-list-z-boson.pdf"
+    access_date: "2026-05-29"
+    sha256_of_local_snapshot: "d04d396061c0be8f9adfc24381d9c932be900eb032db5a19d5a1a75fda4b7fa4"
+    snapshot_path: "flavor_catalog/references/T011/pdg_2025_z_boson_bottom_asymmetries.txt"
+  - key: lepslc_2006_z_resonance_bottom
+    arxiv_id: "hep-ex/0509008"
+    doi: "10.1016/j.physrep.2005.12.006"
+    title: "Precision Electroweak Measurements on the Z Resonance"
+    authors: "ALEPH Collaboration, DELPHI Collaboration, L3 Collaboration, OPAL Collaboration, SLD Collaboration, LEP Electroweak Working Group, SLD Electroweak and Heavy Flavour Groups"
+    year: 2006
+    url: "https://arxiv.org/abs/hep-ex/0509008"
+    access_date: "2026-05-29"
+    sha256_of_local_snapshot: "3884e4fb5df4c43362ba6020477a300f8778da0ed5310506124ef90a187b1cf1"
+    snapshot_path: "flavor_catalog/references/T011/lepslc_2006_z_resonance_bottom.txt"
