@@ -39,11 +39,30 @@ orchestrator context resets. Updated after every per-constraint gate.
 - [x] Scaffold fixes applied (real-number contract guard, K001 e2e physics test, registry comment) — 16/16 tests pass
 - [x] Scaffold committed
 
+## Systemic conventions (from K001 review — apply to ALL ΔF=2 constraints)
+
+- **QCD running MANDATORY**: use the `*_with_running` evaluator (Wilsons → μ=2 GeV). Non-running underpredicts ~10×.
+- **Budgets uncertainty-aware bands, not central residuals**: ε_K band per `docs/audits/epsilon_k_sm_decision.md` (loose edge ~3e-4). Long-distance Δm (kaon, charm): `|M12^NP| ≤ Δm^exp/2`. Bd/Bs: SM-vs-exp room w/ uncertainties.
+- Next waves: **pre-stage adapter wrappers in one commit before fanning out** (avoid shared-file write races).
+
 ## Per-constraint status
 
-| ID | Observable | agent1 | agent2(phys) | agent3(code) | opus | committed | notes |
-|----|-----------|--------|--------------|--------------|------|-----------|-------|
-| (none yet) | | | | | | | |
+| ID | Observable | agent1 | agent2 | agent3 | opus | committed |
+|----|-----------|--------|--------|--------|------|-----------|
+| K001 | ε_K | ✅ | ✅ | ✅ | ✅ APPROVE | ✅ 2fdfaa0 |
+| K002 | Δm_K | ✅ | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 67953fe |
+| B001 | Δm_d | ✅ | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 8060cfb |
+| B003 | Δm_s | ✅ | PHYSICS-OK | fixed | ✅ APPROVE | ✅ 6e65846 |
+| C001 | D⁰ mix | ✅ | PHYSICS-OK | fixed (blocker) | ✅ APPROVE | ✅ 9d72b6b |
+
+**Done: 5 / ~102.** Adapter wrappers: fd2f46a. Wave-1 reconciliation PASS (no clobber, suite green).
+Per-constraint audit trail (plans, reviews, fixes, verdicts) committed under `.orchestration/runs/<ID>/`.
+
+## Next waves (machinery-building — slower, costlier, pre-stage adapters first)
+
+Remaining ΔF=2-adjacent CP phases (B002 S_ψKs, B005-type) then the machinery families:
+rare ΔS=1 kaon (K003-K018), EDMs (E*), charged-lepton LFV (L*), charm rare (C*),
+top/Higgs/EW (T*/EW*), collider (CR*), secondary. Raise CODEX_MAX_CONCURRENCY→6; pipeline waves.
 
 ## Planned order (validation-first)
 
