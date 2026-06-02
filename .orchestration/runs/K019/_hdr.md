@@ -1,0 +1,2 @@
+# Implement K019 — LFV long-lived neutral-kaon decay (K_L→e μ). family=kaon, SECONDARY TIER.
+PLACE the constraint at flavor_catalog_constraints/secondary/kaon/K019.py and the test at tests/constraints/secondary/kaon/test_K019.py (SECONDARY level auto-derived from path). K_L→eμ is LFV (SM≈0) → pure-NP bound vs the BNL E871 / measured limit (from K019.yaml), HARD. Reuse the s→dℓℓ rare_kaon_dilepton machinery with a lepton-flavor-violating (eμ) effective coupling — documented proxy NEEDS-HUMAN-PHYSICS (LFV coupling not on ParameterPoint). Append-only.
