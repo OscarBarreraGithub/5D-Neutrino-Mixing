@@ -698,6 +698,160 @@ def _kallen(a: float, b: float, c: float) -> float:
     return float(a * a + b * b + c * c - 2.0 * (a * b + a * c + b * c))
 
 
+RARE_KAON_KL_PI0_EMU_MODEL_V1 = "rare_kaon_klong_pi0_emu_lfv_form_factor_proxy_v1"
+RARE_KAON_KL_PI0_EMU_INPUT_BUNDLE_V1 = (
+    "rare_kaon_klong_pi0_emu_full_q2_neutral_form_factor_inputs_v1"
+)
+RARE_KAON_KL_PI0_EMU_FORM_FACTOR_MODEL_V1 = (
+    "K0_to_pi0_fplus_fzero_single_pole_fplus0_FLAG2024_v1"
+)
+RARE_KAON_KL_PI0_EMU_PARAMETRIZATION_CITATION = (
+    RARE_KAON_KTOPI_EMU_PARAMETRIZATION_CITATION
+    + "; neutral K_L -> pi0 mode with standard neutral K_l3 f_+(q2)"
+)
+RARE_KAON_KL_PI0_EMU_PROXY_V1 = (
+    "NEEDS-HUMAN-PHYSICS: K_L -> pi0 e+- mu-+ v1 reuses the K020 "
+    "rare-kaon s->d neutral-current proxy and the K019 e-mu lepton spurion. "
+    "The K_L CP-eigenstate treatment is approximated by the standard neutral "
+    "K_l3 K->pi form factor and a charge-summed LFV rate; scalar/tensor "
+    "operators, charge-orientation-specific lepton matching, sd/ds CP-phase "
+    "matching, and a complete RS EW KK/Z/Z' tower are not available on "
+    "ParameterPoint."
+)
+RARE_KAON_KL_PI0_EMU_Q2_TREATMENT_V1 = (
+    "full_kinematic_q2_short_distance_lfv_proxy_with_klong_to_pi0_form_factor"
+)
+
+
+def rare_kaon_klong_pi0_emu_default_inputs() -> RareKaonKToPiLFVInputs:
+    """Return the neutral-mode ``K_L -> pi0 e+- mu-+`` LFV input bundle."""
+
+    return RareKaonKToPiLFVInputs(
+        input_bundle=RARE_KAON_KL_PI0_EMU_INPUT_BUNDLE_V1,
+        form_factor=RareKaonKToPiFormFactorInputs(
+            model_label=RARE_KAON_KL_PI0_EMU_FORM_FACTOR_MODEL_V1,
+            fplus_0=0.9698,
+            fzero_0=0.9698,
+            vector_pole_mass_gev=0.89166,
+            scalar_pole_mass_gev=1.43,
+            source=(
+                "FLAG/PDG-era neutral K_l3 f_+(0)=0.9698 with the same "
+                "single-pole K*(892) vector shape used by K020; K_L is "
+                "treated with the standard neutral-mode semileptonic "
+                "normalization for the K->pi vector current."
+            ),
+        ),
+        kplus_mass_gev=0.497611,
+        piplus_mass_gev=0.1349768,
+        kplus_lifetime_s=5.116e-8,
+        charge_state_factor=2.0,
+        constants_citation=(
+            "PDG-era K_L/K0 mass, pi0 mass, and K_L lifetime; neutral K_l3 "
+            "f_+(0) normalization; G_F, alpha, sin2thetaW, and CKM from the "
+            "shared rare_kaon_dilepton input bundle. charge_state_factor=2 "
+            "matches the K021 YAML limit summed over e+- mu-+ charge states."
+        ),
+    )
+
+
+def _neutral_klong_pi0_result(
+    result: RareKaonKToPiLFVBranchingResult,
+    *,
+    inputs: RareKaonKToPiLFVInputs,
+) -> RareKaonKToPiLFVBranchingResult:
+    diagnostics = dict(result.diagnostics)
+    diagnostics.update(
+        {
+            "base_model_label": RARE_KAON_KTOPI_EMU_MODEL_V1,
+            "model_label": RARE_KAON_KL_PI0_EMU_MODEL_V1,
+            "input_bundle": RARE_KAON_KL_PI0_EMU_INPUT_BUNDLE_V1,
+            "matching_assumption": RARE_KAON_KL_PI0_EMU_PROXY_V1,
+            "parametrization_citation": RARE_KAON_KL_PI0_EMU_PARAMETRIZATION_CITATION,
+            "q2_treatment": RARE_KAON_KL_PI0_EMU_Q2_TREATMENT_V1,
+            "sm_lfv_policy": (
+                "K_L -> pi0 e mu is charged-LFV and has zero SM rate for "
+                "catalog purposes."
+            ),
+            "neutral_mode": True,
+            "klong_cp_eigenstate_proxy": (
+                "K_L is treated with the standard neutral K->pi semileptonic "
+                "form-factor normalization; rigorous sd/ds CP-phase matching "
+                "is not available on ParameterPoint."
+            ),
+            "charge_conjugate_modes_included": True,
+            "charge_state_factor": float(inputs.charge_state_factor),
+            "summed_charge_states": "e+- mu-+",
+            "klong_mass_gev": float(inputs.kplus_mass_gev),
+            "pi0_mass_gev": float(inputs.piplus_mass_gev),
+            "klong_lifetime_s": float(inputs.kplus_lifetime_s),
+            "legacy_input_field_names": (
+                "RareKaonKToPiLFVInputs keeps kplus_mass_gev, piplus_mass_gev, "
+                "and kplus_lifetime_s field names for K020 compatibility; "
+                "K021 fills them with K_L, pi0, and K_L lifetime values."
+            ),
+        }
+    )
+    return RareKaonKToPiLFVBranchingResult(
+        model_label=RARE_KAON_KL_PI0_EMU_MODEL_V1,
+        input_bundle=inputs.input_bundle,
+        charge_mode=result.charge_mode,
+        branching_fraction=float(result.branching_fraction),
+        sm_branching_fraction=0.0,
+        np_shift_branching_fraction=float(result.np_shift_branching_fraction),
+        q2_min_gev2=float(result.q2_min_gev2),
+        q2_max_gev2=float(result.q2_max_gev2),
+        electron_mass_gev=float(result.electron_mass_gev),
+        muon_mass_gev=float(result.muon_mass_gev),
+        y_vector_lfv=complex(result.y_vector_lfv),
+        y_axial_lfv=complex(result.y_axial_lfv),
+        lambda_wolfenstein=float(result.lambda_wolfenstein),
+        wilsons=result.wilsons,
+        diagnostics=diagnostics,
+    )
+
+
+def klong_pi0_emu_sm(
+    inputs: RareKaonKToPiLFVInputs | None = None,
+    *,
+    charge_mode: str = "muplus_eminus",
+) -> RareKaonKToPiLFVBranchingResult:
+    """Return the catalog SM-limit ``K_L -> pi0 e+- mu-+`` rate, zero for LFV."""
+
+    p = rare_kaon_klong_pi0_emu_default_inputs() if inputs is None else inputs
+    return _neutral_klong_pi0_result(
+        _branching_from_wilsons(None, inputs=p, charge_mode=charge_mode),
+        inputs=p,
+    )
+
+
+def klong_pi0_emu_from_couplings(
+    quark_couplings: QuarkMassBasisCouplings | RareKaonKToPiLFVWilsonCoefficients,
+    lepton_couplings: object | None = None,
+    *,
+    m_kk_gev: float | None = None,
+    inputs: RareKaonKToPiLFVInputs | None = None,
+    charge_mode: str = "muplus_eminus",
+) -> RareKaonKToPiLFVBranchingResult:
+    """Evaluate charge-summed ``BR_SD(K_L -> pi0 e+- mu-+)`` from proxy couplings."""
+
+    p = rare_kaon_klong_pi0_emu_default_inputs() if inputs is None else inputs
+    if isinstance(quark_couplings, RareKaonKToPiLFVWilsonCoefficients):
+        wilsons = quark_couplings
+    else:
+        if lepton_couplings is None:
+            raise TypeError("lepton_couplings is required for K_L -> pi0 e mu LFV matching")
+        wilsons = rare_kaon_ktopi_emu_wilsons_from_couplings(
+            quark_couplings,
+            lepton_couplings,
+            m_kk_gev=m_kk_gev,
+            inputs=p,
+        )
+    return _neutral_klong_pi0_result(
+        _branching_from_wilsons(wilsons, inputs=p, charge_mode=charge_mode),
+        inputs=p,
+    )
+
+
 __all__ = [
     "QuarkMassBasisCouplings",
     "RareKaonKToPiFormFactorInputs",
@@ -713,8 +867,15 @@ __all__ = [
     "RARE_KAON_KTOPI_EMU_PARAMETRIZATION_CITATION",
     "RARE_KAON_KTOPI_EMU_PROXY_V1",
     "RARE_KAON_KTOPI_EMU_Q2_TREATMENT_V1",
+    "RARE_KAON_KL_PI0_EMU_MODEL_V1",
+    "RARE_KAON_KL_PI0_EMU_INPUT_BUNDLE_V1",
+    "RARE_KAON_KL_PI0_EMU_FORM_FACTOR_MODEL_V1",
+    "RARE_KAON_KL_PI0_EMU_PARAMETRIZATION_CITATION",
+    "RARE_KAON_KL_PI0_EMU_PROXY_V1",
+    "RARE_KAON_KL_PI0_EMU_Q2_TREATMENT_V1",
     "RARE_KAON_LFV_DILEPTON_PROXY_V1",
     "rare_kaon_ktopi_emu_default_inputs",
+    "rare_kaon_klong_pi0_emu_default_inputs",
     "rare_kaon_ktopi_emu_proxy_input",
     "rare_kaon_ktopi_emu_lepton_coupling_proxy",
     "rare_kaon_ktopi_fplus",
@@ -724,4 +885,6 @@ __all__ = [
     "rare_kaon_ktopi_emu_differential_branching_fraction",
     "kplus_piplus_emu_sm",
     "kplus_piplus_emu_from_couplings",
+    "klong_pi0_emu_sm",
+    "klong_pi0_emu_from_couplings",
 ]
