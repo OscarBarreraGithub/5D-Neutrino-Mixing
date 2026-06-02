@@ -1,0 +1,7 @@
+1. NIT: ΔF2 amplitude check is N/A for B007: this is a ΔB=1 branching-ratio constraint, not Δm or CP mixing; verdict uses `|P|^2+|S|^2` via `abs(...)**2`, not `Re/Im M12`. `quarkConstraints/rare_b_dilepton.py:485`, `flavor_catalog_constraints/secondary/beauty/B007.py:557`.
+2. NIT: QCD-running check is N/A/OK: B007 does not use the DeltaF2 non-running path; for this C9/C10-only leptonic proxy, C10 has no QCD running effect on the verdict and C9 is diagnostic-only. Running effect: 0 for the implemented verdict. `rare_b_dilepton.py:622-624`.
+3. NIT: Budget is defensible: code uses pure-NP upper-limit budgets `9.4e-9` Bs and `2.5e-9` Bd; using limit instead of limit-SM is looser by only `8.54e-14` (`9.1e-6`) and `2.48e-15` (`9.9e-7`). `B007.py:414`, `B007.py:484-486`.
+4. NIT: Anchors match YAML/snapshots: PDG/LHCb limits `BR(Bs->ee)<9.4e-9`, `BR(B0->ee)<2.5e-9`; Bobeth SM `8.54(0.55)e-14`, `2.48(0.21)e-15`. `flavor_catalog/processes/secondary/beauty/B007.yaml:82`, `:100`, `:303`, `:307`.
+5. NIT: Severity/units/diagnostics are physics-consistent: HARD is appropriate; observable is dimensionless branching fraction, not GeV; RS C9/C10 proxy is explicitly marked NEEDS-HUMAN-PHYSICS. `B007.py:67`, `B007.py:501`, `B007.py:645-652`.
+
+PHYSICS-OK
