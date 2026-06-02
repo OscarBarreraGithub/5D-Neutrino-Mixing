@@ -9,15 +9,24 @@ from __future__ import annotations
 
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.zpole import (
+    ZPOLE_DOWN_FCNC_PROXY_V1,
     ZPOLE_INPUT_BUNDLE_V1,
     ZPOLE_MODEL_V1,
     ZPOLE_RS_ZBB_PROXY_V1,
     ZPoleCouplings,
+    ZPoleDownFCNCBranchingResult,
+    ZPoleDownFCNCCouplingProxy,
     ZbbCouplingShiftProxy,
     ZPoleQuarkObservables,
     ZPoleSMInputs,
     asymmetry_parameter as _asymmetry_parameter,
     default_sm_inputs as _default_sm_inputs,
+    down_fcnc_branching_fraction_from_couplings as _down_fcnc_branching_from_couplings,
+    down_fcnc_branching_fraction_with_proxy as _down_fcnc_branching_with_proxy,
+    down_fcnc_coupling_proxy as _down_fcnc_coupling_proxy,
+    down_fcnc_effective_coupling_limit as _down_fcnc_effective_coupling_limit,
+    down_fcnc_sm_hadronic_width_weight as _down_fcnc_sm_hadronic_width_weight,
+    down_fcnc_sm_total_width_weight as _down_fcnc_sm_total_width_weight,
     evaluate_quark_pseudo_observables as _evaluate_quark_pseudo_observables,
     evaluate_zbb_with_proxy as _evaluate_zbb_with_proxy,
     forward_backward_asymmetry as _forward_backward_asymmetry,
@@ -38,6 +47,9 @@ __all__ = [
     "ZPoleCouplings",
     "ZPoleQuarkObservables",
     "ZbbCouplingShiftProxy",
+    "ZPoleDownFCNCBranchingResult",
+    "ZPoleDownFCNCCouplingProxy",
+    "ZPOLE_DOWN_FCNC_PROXY_V1",
     "zpole_default_sm_inputs",
     "zpole_inputs_with_bottom_radiator",
     "zpole_sm_couplings",
@@ -49,6 +61,12 @@ __all__ = [
     "zpole_evaluate_quark",
     "zpole_zbb_coupling_shift_proxy",
     "zpole_evaluate_zbb_with_proxy",
+    "zpole_down_fcnc_sm_hadronic_width_weight",
+    "zpole_down_fcnc_sm_total_width_weight",
+    "zpole_down_fcnc_branching_fraction_from_couplings",
+    "zpole_down_fcnc_effective_coupling_limit",
+    "zpole_down_fcnc_coupling_proxy",
+    "zpole_down_fcnc_branching_fraction_with_proxy",
 ]
 
 
@@ -153,3 +171,103 @@ def zpole_evaluate_zbb_with_proxy(
 ) -> tuple[ZPoleQuarkObservables, ZbbCouplingShiftProxy]:
     """Evaluate ``Z -> b bbar`` pseudo-observables with the RS proxy."""
     return _evaluate_zbb_with_proxy(couplings, m_kk_gev=m_kk_gev, inputs=inputs)
+
+
+def zpole_down_fcnc_sm_hadronic_width_weight(
+    inputs: ZPoleSMInputs | None = None,
+) -> dict[str, float]:
+    """Return SM hadronic Z-width weights from the shared Z-pole convention."""
+
+    return _down_fcnc_sm_hadronic_width_weight(inputs)
+
+
+def zpole_down_fcnc_sm_total_width_weight(
+    inputs: ZPoleSMInputs | None = None,
+) -> dict[str, float]:
+    """Return SM total Z-width weights from the shared Z-pole convention."""
+
+    return _down_fcnc_sm_total_width_weight(inputs)
+
+
+def zpole_down_fcnc_branching_fraction_from_couplings(
+    *,
+    flavor_i: str,
+    flavor_j: str,
+    delta_g_left: complex,
+    delta_g_right: complex,
+    br_limit: float | None = None,
+    inputs: ZPoleSMInputs | None = None,
+    charge_state_factor: float = 2.0,
+) -> ZPoleDownFCNCBranchingResult:
+    """Return ``BR(Z -> q_i qbar_j + q_j qbar_i)`` from FCNC couplings."""
+
+    return _down_fcnc_branching_from_couplings(
+        flavor_i=flavor_i,
+        flavor_j=flavor_j,
+        delta_g_left=delta_g_left,
+        delta_g_right=delta_g_right,
+        br_limit=br_limit,
+        inputs=inputs,
+        charge_state_factor=charge_state_factor,
+    )
+
+
+def zpole_down_fcnc_effective_coupling_limit(
+    br_limit: float,
+    *,
+    flavor_i: str,
+    flavor_j: str,
+    inputs: ZPoleSMInputs | None = None,
+    charge_state_factor: float = 2.0,
+) -> float:
+    """Return the limit on ``sqrt(|delta_g_L|^2 + |delta_g_R|^2)``."""
+
+    return _down_fcnc_effective_coupling_limit(
+        br_limit,
+        flavor_i=flavor_i,
+        flavor_j=flavor_j,
+        inputs=inputs,
+        charge_state_factor=charge_state_factor,
+    )
+
+
+def zpole_down_fcnc_coupling_proxy(
+    source: QuarkMassBasisCouplings,
+    *,
+    flavor_i: str,
+    flavor_j: str,
+    m_kk_gev: float | None = None,
+    inputs: ZPoleSMInputs | None = None,
+) -> ZPoleDownFCNCCouplingProxy:
+    """Map quark mass-basis overlaps onto an off-diagonal down-sector Z proxy."""
+
+    return _down_fcnc_coupling_proxy(
+        source,
+        flavor_i=flavor_i,
+        flavor_j=flavor_j,
+        m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def zpole_down_fcnc_branching_fraction_with_proxy(
+    source: QuarkMassBasisCouplings,
+    *,
+    flavor_i: str,
+    flavor_j: str,
+    br_limit: float | None = None,
+    m_kk_gev: float | None = None,
+    inputs: ZPoleSMInputs | None = None,
+    charge_state_factor: float = 2.0,
+) -> tuple[ZPoleDownFCNCBranchingResult, ZPoleDownFCNCCouplingProxy]:
+    """Evaluate an off-diagonal down-sector Z decay with the documented proxy."""
+
+    return _down_fcnc_branching_with_proxy(
+        source,
+        flavor_i=flavor_i,
+        flavor_j=flavor_j,
+        br_limit=br_limit,
+        m_kk_gev=m_kk_gev,
+        inputs=inputs,
+        charge_state_factor=charge_state_factor,
+    )

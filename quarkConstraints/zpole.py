@@ -488,3 +488,339 @@ def _real_diagonal(matrix: np.ndarray, index: int, name: str) -> float:
     if not math.isfinite(value.real):
         raise ValueError(f"{name} diagonal overlap must be finite")
     return float(value.real)
+
+
+ZPOLE_DOWN_FCNC_PROXY_V1 = (
+    "NEEDS-HUMAN-PHYSICS: off-diagonal down-sector Z couplings are not "
+    "available on ParameterPoint; available quark mass-basis overlap matrices "
+    "are mapped to delta g_ij = proxy_strength * (m_Z/M_KK)^2 * overlap_ij, "
+    "standing in for missing model-dependent RS EW KK/Z/Z' down-sector "
+    "neutral-current matching."
+)
+
+_DOWN_FCNC_FLAVOR_INDEX: Mapping[str, int] = {"d": 0, "s": 1, "b": 2}
+_DOWN_FCNC_CHARGED_LEPTONS: tuple[str, ...] = ("e", "mu", "tau")
+_DOWN_FCNC_NEUTRINO_FLAVORS: tuple[str, ...] = ("nu_e", "nu_mu", "nu_tau")
+_DOWN_FCNC_DEFAULT_CHARGE_STATE_FACTOR = 2.0
+
+
+@dataclass(frozen=True)
+class ZPoleDownFCNCCouplingProxy:
+    """Documented proxy for an off-diagonal down-sector Z coupling."""
+
+    model_label: str
+    matching_assumption: str
+    flavor_i: str
+    flavor_j: str
+    M_KK: float
+    matching_scale: float
+    left_overlap_ij: complex
+    right_overlap_ij: complex
+    scale_factor: float
+    delta_g_left_ij: complex
+    delta_g_right_ij: complex
+    diagnostics: Mapping[str, object]
+
+
+@dataclass(frozen=True)
+class ZPoleDownFCNCBranchingResult:
+    """Total-width-normalized result for ``Z -> q_i qbar_j + q_j qbar_i``."""
+
+    model_label: str
+    input_bundle: str
+    flavor_i: str
+    flavor_j: str
+    branching_fraction: float
+    sm_branching_fraction: float
+    ratio_to_limit: float | None
+    br_limit: float | None
+    passes: bool | None
+    delta_g_left: complex
+    delta_g_right: complex
+    coupling_norm: float
+    fcnc_width_weight: float
+    sm_hadronic_width_weight: float
+    sm_total_width_weight: float
+    total_hadronic_width_weight: float
+    total_width_weight: float
+    sm_hadronic_to_total_width_ratio: float
+    charge_state_factor: float
+    n_color: int
+    radiator: float
+    diagnostics: Mapping[str, object]
+
+
+def down_fcnc_sm_hadronic_width_weight(
+    inputs: ZPoleSMInputs | None = None,
+) -> dict[str, float]:
+    """Return SM hadronic Z-width weights from the shared Z-pole convention."""
+
+    p = default_sm_inputs() if inputs is None else inputs
+    return hadronic_width_weights(inputs=p)
+
+
+def down_fcnc_sm_total_width_weight(
+    inputs: ZPoleSMInputs | None = None,
+) -> dict[str, float]:
+    """Return SM total Z-width weights for quarks, charged leptons, and neutrinos."""
+
+    p = default_sm_inputs() if inputs is None else inputs
+    weights: dict[str, float] = {}
+    weights.update(down_fcnc_sm_hadronic_width_weight(p))
+    for flavor in _DOWN_FCNC_CHARGED_LEPTONS:
+        weights[flavor] = partial_width_weight(sm_couplings(flavor, p))
+    for flavor in _DOWN_FCNC_NEUTRINO_FLAVORS:
+        weights[flavor] = partial_width_weight(sm_couplings("nu", p))
+    return weights
+
+
+def down_fcnc_branching_fraction_from_couplings(
+    *,
+    flavor_i: str,
+    flavor_j: str,
+    delta_g_left: complex,
+    delta_g_right: complex,
+    br_limit: float | None = None,
+    inputs: ZPoleSMInputs | None = None,
+    charge_state_factor: float = _DOWN_FCNC_DEFAULT_CHARGE_STATE_FACTOR,
+) -> ZPoleDownFCNCBranchingResult:
+    """Return total-Z-width ``BR(Z -> q_i qbar_j + q_j qbar_i)``."""
+
+    p = default_sm_inputs() if inputs is None else inputs
+    first = _canonical_down_fcnc_flavor(flavor_i)
+    second = _canonical_down_fcnc_flavor(flavor_j)
+    if first == second:
+        raise ValueError("down-sector FCNC Z decay requires distinct flavors")
+
+    charge_factor = _positive_float("charge_state_factor", charge_state_factor)
+    left = complex(delta_g_left)
+    right = complex(delta_g_right)
+    coupling_norm = float(abs(left) ** 2 + abs(right) ** 2)
+    if not math.isfinite(coupling_norm):
+        raise ValueError("down-sector FCNC coupling norm must be finite")
+
+    sm_hadronic_weights = down_fcnc_sm_hadronic_width_weight(p)
+    sm_total_weights = down_fcnc_sm_total_width_weight(p)
+    sm_hadronic = float(sum(sm_hadronic_weights.values()))
+    sm_total = float(sum(sm_total_weights.values()))
+    if sm_hadronic <= 0.0:
+        raise ValueError("SM hadronic Z-width weight must be positive")
+    if sm_total <= 0.0:
+        raise ValueError("SM total Z-width weight must be positive")
+
+    radiator = _down_fcnc_pair_radiator(first, second, p)
+    fcnc_width = float(
+        charge_factor
+        * partial_width_weight(
+            ZPoleCouplings(flavor=first, g_left=left, g_right=right),
+            radiator=radiator,
+            n_color=3,
+        )
+    )
+    total_hadronic = float(sm_hadronic + fcnc_width)
+    total_width = float(sm_total + fcnc_width)
+    branching_fraction = float(fcnc_width / total_width)
+    hadronic_to_total = float(sm_hadronic / sm_total)
+
+    limit = None if br_limit is None else _bounded_probability("br_limit", br_limit)
+    ratio = None if limit is None else float(branching_fraction / limit)
+    passes = None if ratio is None else bool(ratio <= 1.0)
+
+    return ZPoleDownFCNCBranchingResult(
+        model_label=ZPOLE_MODEL_V1,
+        input_bundle=p.input_bundle,
+        flavor_i=first,
+        flavor_j=second,
+        branching_fraction=branching_fraction,
+        sm_branching_fraction=0.0,
+        ratio_to_limit=ratio,
+        br_limit=limit,
+        passes=passes,
+        delta_g_left=left,
+        delta_g_right=right,
+        coupling_norm=coupling_norm,
+        fcnc_width_weight=fcnc_width,
+        sm_hadronic_width_weight=sm_hadronic,
+        sm_total_width_weight=sm_total,
+        total_hadronic_width_weight=total_hadronic,
+        total_width_weight=total_width,
+        sm_hadronic_to_total_width_ratio=hadronic_to_total,
+        charge_state_factor=charge_factor,
+        n_color=3,
+        radiator=radiator,
+        diagnostics={
+            "base_model_label": ZPOLE_MODEL_V1,
+            "branching_formula": (
+                "BR(Z -> q_i qbar_j + q_j qbar_i) = "
+                "charge_state_factor * N_c * radiator_ij * "
+                "(|delta_g_L|^2 + |delta_g_R|^2) / "
+                "(SM total Z width weight + FCNC width weight)"
+            ),
+            "sm_hadronic_width_weights": dict(sm_hadronic_weights),
+            "sm_total_width_weights": dict(sm_total_weights),
+            "sm_hadronic_width_weight": float(sm_hadronic),
+            "sm_total_width_weight": float(sm_total),
+            "sm_hadronic_to_total_width_ratio": float(hadronic_to_total),
+            "sin2_theta_eff": float(p.sin2_theta_eff),
+            "m_z_gev": float(p.m_z_gev),
+        },
+    )
+
+
+def down_fcnc_effective_coupling_limit(
+    br_limit: float,
+    *,
+    flavor_i: str,
+    flavor_j: str,
+    inputs: ZPoleSMInputs | None = None,
+    charge_state_factor: float = _DOWN_FCNC_DEFAULT_CHARGE_STATE_FACTOR,
+) -> float:
+    """Return the limit on ``sqrt(|delta_g_L|^2 + |delta_g_R|^2)``."""
+
+    p = default_sm_inputs() if inputs is None else inputs
+    first = _canonical_down_fcnc_flavor(flavor_i)
+    second = _canonical_down_fcnc_flavor(flavor_j)
+    if first == second:
+        raise ValueError("down-sector FCNC Z decay requires distinct flavors")
+    limit = _bounded_probability("br_limit", br_limit)
+    charge_factor = _positive_float("charge_state_factor", charge_state_factor)
+    sm_total = float(sum(down_fcnc_sm_total_width_weight(p).values()))
+    radiator = _down_fcnc_pair_radiator(first, second, p)
+    norm_limit = limit * sm_total / (
+        charge_factor * 3.0 * radiator * (1.0 - limit)
+    )
+    return float(math.sqrt(norm_limit))
+
+
+def down_fcnc_coupling_proxy(
+    source: QuarkMassBasisCouplings,
+    *,
+    flavor_i: str,
+    flavor_j: str,
+    m_kk_gev: float | None = None,
+    inputs: ZPoleSMInputs | None = None,
+) -> ZPoleDownFCNCCouplingProxy:
+    """Map quark mass-basis overlaps onto an off-diagonal down-sector Z proxy."""
+
+    p = default_sm_inputs() if inputs is None else inputs
+    first = _canonical_down_fcnc_flavor(flavor_i)
+    second = _canonical_down_fcnc_flavor(flavor_j)
+    if first == second:
+        raise ValueError("down-sector FCNC Z decay requires distinct flavors")
+    first_index = _DOWN_FCNC_FLAVOR_INDEX[first]
+    second_index = _DOWN_FCNC_FLAVOR_INDEX[second]
+    resolved_m_kk = _positive_float(
+        "m_kk_gev",
+        getattr(source, "M_KK") if m_kk_gev is None else m_kk_gev,
+    )
+    left_overlap = _overlap_matrix(source, "left_overlap", "left_down")
+    right_overlap = _overlap_matrix(source, "right_down_overlap", "right_down")
+    left_ij = _down_fcnc_matrix_off_diagonal(
+        left_overlap,
+        first_index,
+        second_index,
+        "left_down_overlap",
+    )
+    right_ij = _down_fcnc_matrix_off_diagonal(
+        right_overlap,
+        first_index,
+        second_index,
+        "right_down_overlap",
+    )
+    scale = float((p.m_z_gev / resolved_m_kk) ** 2)
+    delta_left = complex(p.proxy_strength * scale * left_ij)
+    delta_right = complex(p.proxy_strength * scale * right_ij)
+    return ZPoleDownFCNCCouplingProxy(
+        model_label=ZPOLE_MODEL_V1,
+        matching_assumption=ZPOLE_DOWN_FCNC_PROXY_V1,
+        flavor_i=first,
+        flavor_j=second,
+        M_KK=resolved_m_kk,
+        matching_scale=resolved_m_kk,
+        left_overlap_ij=left_ij,
+        right_overlap_ij=right_ij,
+        scale_factor=scale,
+        delta_g_left_ij=delta_left,
+        delta_g_right_ij=delta_right,
+        diagnostics={
+            "m_kk_gev": float(resolved_m_kk),
+            "matching_scale_gev": float(resolved_m_kk),
+            "m_z_gev": float(p.m_z_gev),
+            "proxy_strength": float(p.proxy_strength),
+            "scale_factor": float(scale),
+            "flavor_i": first,
+            "flavor_j": second,
+            "left_overlap_ij": left_ij,
+            "right_overlap_ij": right_ij,
+            "delta_g_left_ij": delta_left,
+            "delta_g_right_ij": delta_right,
+            "matching_assumption": ZPOLE_DOWN_FCNC_PROXY_V1,
+        },
+    )
+
+
+def down_fcnc_branching_fraction_with_proxy(
+    source: QuarkMassBasisCouplings,
+    *,
+    flavor_i: str,
+    flavor_j: str,
+    br_limit: float | None = None,
+    m_kk_gev: float | None = None,
+    inputs: ZPoleSMInputs | None = None,
+    charge_state_factor: float = _DOWN_FCNC_DEFAULT_CHARGE_STATE_FACTOR,
+) -> tuple[ZPoleDownFCNCBranchingResult, ZPoleDownFCNCCouplingProxy]:
+    """Evaluate an off-diagonal down-sector Z decay with the documented proxy."""
+
+    p = default_sm_inputs() if inputs is None else inputs
+    proxy = down_fcnc_coupling_proxy(
+        source,
+        flavor_i=flavor_i,
+        flavor_j=flavor_j,
+        m_kk_gev=m_kk_gev,
+        inputs=p,
+    )
+    result = down_fcnc_branching_fraction_from_couplings(
+        flavor_i=flavor_i,
+        flavor_j=flavor_j,
+        delta_g_left=proxy.delta_g_left_ij,
+        delta_g_right=proxy.delta_g_right_ij,
+        br_limit=br_limit,
+        inputs=p,
+        charge_state_factor=charge_state_factor,
+    )
+    return result, proxy
+
+
+def _canonical_down_fcnc_flavor(flavor: str) -> str:
+    name = str(flavor).lower()
+    aliases = {
+        "down": "d",
+        "strange": "s",
+        "bottom": "b",
+        "beauty": "b",
+    }
+    canonical = aliases.get(name, name)
+    if canonical not in _DOWN_FCNC_FLAVOR_INDEX:
+        raise ValueError(f"{flavor!r} is not a supported down-sector flavor")
+    return canonical
+
+
+def _down_fcnc_pair_radiator(
+    flavor_i: str,
+    flavor_j: str,
+    inputs: ZPoleSMInputs,
+) -> float:
+    radiator = 0.5 * (inputs.radiator_for(flavor_i) + inputs.radiator_for(flavor_j))
+    return _positive_float("down-pair radiator", radiator)
+
+
+def _down_fcnc_matrix_off_diagonal(
+    matrix: np.ndarray,
+    row: int,
+    column: int,
+    name: str,
+) -> complex:
+    value = complex(matrix[row, column])
+    if not math.isfinite(value.real) or not math.isfinite(value.imag):
+        raise ValueError(f"{name}[{row},{column}] must be finite")
+    return value
