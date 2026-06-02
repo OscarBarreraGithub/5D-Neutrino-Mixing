@@ -12,6 +12,36 @@ deliverable. See `.orchestration/runs/<ID>/` for the full agent trail of each.
 
 ---
 
+## ★ EXECUTIVE SUMMARY — what needs human physics input (read this first)
+
+The rebuild is COMPLETE: **103 constraints (95 PRIMARY + 8 SECONDARY), full suite 1054 passed, 0 registry import failures.** Every constraint computes a rigorous, validated SM (or SM≈0 for forbidden processes) side and a defensible experimental budget. The human-input items below are confined to the **new-physics (RS) matching** and a handful of **incalculable-SM observables** — they are documented proxies, never fabricated numbers, and each is flagged in the constraint's docstring + result `diagnostics["needs_human_physics"]`. Of 103 constraints, **98 carry a proxy caveat; 5 are fully rigorous end-to-end** (K001 ε_K, K002 Δm_K, B001 Δm_d, B003 Δm_s, C001 D⁰ mixing — the ΔF=2 sector, because the KK-gluon coupling IS on `ParameterPoint`).
+
+The gaps cluster into **6 categories**:
+
+**G1 — Cross-cutting RS electroweak-coupling matching (the dominant gap; ~majority of the 98).**
+`ParameterPoint` exposes quark mass-basis couplings + the KK-gluon mass, but NOT the full RS EW sector (KK W/Z masses & profiles, Z-fermion coupling shifts, Z′ couplings, lepton/neutrino bulk profiles). So every EW-mediated NP contribution (rare semileptonic K/D/B decays, b→sνν, b→sℓℓ, Z-pole, dipoles) uses a documented coupling proxy for the **NP part only** (SM part is rigorous). *Decision needed:* build the shared RS-EW coupling machinery + extend `point_builder`/`ParameterPoint` (unlocks rigorous NP for ~all of these at once), or accept the bounded proxies. Affects: most of beauty, kaon, charm, top_higgs_ew rare/Z families.
+
+**G2 — Lepton-flavor-violating / off-diagonal lepton couplings not on `ParameterPoint`.**
+All LFV constraints supply the off-diagonal charged-lepton coupling as an explicit proxy: L001/L002/L005/L006/L008/L009/L010 (μ→eγ, μ→3e, μ–e conv, muonium, τ→eγ, τ→3μ, …), K019/K020/K021 (K→(π)eμ), Z→eμ/eτ/μτ LFV (T015–T017), Higgs LFV (T018–T020). *Decision needed:* RS lepton-sector flavor structure on `ParameterPoint`.
+
+**G3 — Collider σ×BR / recast gap (all of collider_rs, CR001–CR014).**
+Mass-vs-published-limit recasts use a single-number mass proxy; the full σ×BR, branching surface, width dependence, production mix, interference, and detector-acceptance/limit-curve recast are flagged. *Decision needed:* proper signal recasts (or accept mass-proxy bounds).
+
+**G4 — CKM-phase machinery absent in the core.**
+B002 (S_ψKs / sin2β) and B004 (φ_s) take the SM reference phase from the catalog yaml — no core CKM-phase computation exists. *Decision needed:* add CKM-phase machinery, then derive these in-core.
+
+**G5 — Incalculable-/dirty-SM honest stubs (INFO/SOFT, NON-VETOING) — dual NEEDS-HUMAN (SM side AND RS side).**
+These intentionally do not veto; they record the catalogued bound + flag both the missing SM calculation and the RS matching: **K003** (ε′/ε), **K013** (radiative kaon), **B032/B033/B034** (nonleptonic / φ_s^sss), **C003** (charm direct CPV), **E004/E006/E007/E008/E009** (EDMs: atomic/hadronic CP-odd matrix elements + Weinberg 3-gluon), **CR011** (needs full recast). Plus charged-current/G_F-matching pulls **EW002** (CKM 1st-row unitarity), **EW003** (|Vcb|/|Vub|), **K018** (|Vus| K_l3). *Decision needed:* genuine SM hadronic/ChPT/lattice inputs (ε′/ε, EDM matrix elements) or RS charged-current matching.
+
+**G6 — EDM CP-odd loop machinery + exclusive form factors / exclusive-SM predictions.**
+E001 (e-EDM) needs a genuine RS one-loop CP-odd dipole; E004–E009 need hadronic CP-odd matrix elements (overlaps G5). Exclusive radiative B013 (Bs→φγ) and B014 (B→ργ/ωγ) need real exclusive form factors, photon-helicity observables (A_Δ/S_φγ), and a genuine exclusive-SM theory BR prediction (none in catalog → their HARD budgets are honest *measurement-consistency* bands, not theory-vs-data room).
+
+**Bottom line / highest-leverage action:** building the shared **RS electroweak-coupling sector** on `ParameterPoint`/`point_builder` (G1) would convert the single largest block of proxies into rigorous NP in one move, and G2 is the lepton-sector extension of the same work. G4 (CKM phase) is a small, self-contained core addition. G5/G6 are genuinely hard SM-theory inputs (lattice/ChPT/loop) best sourced from the literature per observable. None of these block the catalog from running or affect the 5 fully-rigorous ΔF=2 anchors or any constraint's SM side.
+
+The per-constraint detail (with validated SM numbers, budgets, and exact proxy descriptions) follows below, wave by wave.
+
+---
+
 ## Cross-cutting infrastructure gap (affects many EW/rare/LFV constraints)
 
 **RS electroweak coupling inputs are not on `ParameterPoint`.** The scaffold's
