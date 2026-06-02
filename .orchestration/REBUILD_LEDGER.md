@@ -3,13 +3,15 @@
 Durable state for the from-scratch constraint implementation. Survives
 orchestrator context resets. Updated after every per-constraint gate.
 
-## ⏯️ CURRENT STATE / NEXT ACTION (read this first; updated 2026-06-02, post weekly-reset)
+## ✅ REBUILD COMPLETE (updated 2026-06-02)
 
-- **94 / 95 PRIMARY committed + pushed** (main in sync). Weekly codex budget RESET (0%/0%) — full headroom. Only **1 PRIMARY left: CR014** (+ 1 secondary: B014) = the FINAL wave-23. Pause monitor is OFF.
-- **WAVE-20 COMPLETE (5/5):** L006 `a6f0d74`, CR010 `75afcfc`, E009 `45e9477`, K019 `6e329c5`, B007 `ca580ca`. (960 passed).
-- **WAVE-21 COMPLETE (4/4):** CR012 `69648e2`, B008 `6ece7d8`, K020 `966af3b`, T014 `0183016` (T014 needed physics+architecture fixes). (1002 passed).
-- **WAVE-22 COMPLETE (3/3):** CR013 `cc5e457` (diphoton spin-2 graviton, reuse kk_graviton_resonance, Opus APPROVE — 94th PRIMARY), K021 `481369c` (K_L→π⁰eμ LFV, reuse K020 rare_kaon_lfv_semileptonic neutral-mode helper, Opus APPROVE), B013 `9a6db0b` (Bs→φγ exclusive, reuse bsgamma; agent2 SHOULD-FIX [budget SM side was a measurement not theory] → relabeled as honest measurement-consistency band + NEEDS-HUMAN gap → Opus APPROVE). Full suite **1033 passed**.
-- **NEXT ACTION on resume — the FINAL wave-23 (2 left):** CR014 (four-top tttt, reuse collider_resonance) + B014 (B→ργ/ωγ b→dγ exclusive, reuse bsgamma). Standard gate each: build prompts (`cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md`) → codex agent1 (OWN background task) → agent2∥agent3 → route fixes → Opus per-constraint → commit each → full suite → ledger + push. THEN finalize NEEDS_HUMAN_PHYSICS.md + present the structured 95/95 list (the user's final deliverable).
+- **95 / 95 PRIMARY + 8 SECONDARY = 103 constraints committed + pushed** (main in sync). Registry: 0 import_failures. Full suite **1054 passed**. By severity: 87 HARD / 12 INFO / 4 SOFT. By family: beauty 26, top_higgs_ew 21, kaon 16, collider_rs 14, charged_lepton 11, charm 8, edm_neutrino 7.
+- **Every constraint went through the full gate** (codex agent1 → codex agent2 physics ∥ codex agent3 code → route fixes → Claude Opus 4.8 independent final review → commit). The review gate caught real physics/architecture bugs that green tests missed (e.g. T014 hadronic-vs-total-Z denominator + adapter/core boundary; B013 measurement-vs-theory budget; B007 silent anchor block_key accept; earlier waves: ε_K running, K012 Im-sensitivity, L005 m_μ⁵, CR007 graviton root, …).
+- **WAVE-20 (5):** L006 `a6f0d74`, CR010 `75afcfc`, E009 `45e9477`, K019 `6e329c5`, B007 `ca580ca`.
+- **WAVE-21 (4):** CR012 `69648e2`, B008 `6ece7d8`, K020 `966af3b`, T014 `0183016`.
+- **WAVE-22 (3):** CR013 `cc5e457`, K021 `481369c`, B013 `9a6db0b`.
+- **WAVE-23 (2, FINAL):** CR014 `6910282` (four-top top-philic vector, 95th PRIMARY, Opus APPROVE), B014 `67b2f46` (B→ργ/ωγ exclusive b→dγ, last constraint, Opus APPROVE). Full suite **1054 passed**.
+- **REMAINING WORK:** none in the build. The standing human-input items (RS new-physics matching proxies, incalculable-SM honest stubs) are catalogued in `.orchestration/NEEDS_HUMAN_PHYSICS.md` — the final deliverable. All proxies are non-fabricated, flagged in each constraint's docstring + diagnostics + commit message.
 - Build prompts via `cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md` (reviewers: `_agent2_common.md`/`_agent3_common.md`); codex via `~/bin/codex_worker.sh` (CODEX_MAX_CONCURRENCY=6). NOTE: launch each agent1 as its OWN background Bash task (NOT a chained-heredoc eval — that wedges). See ORCHESTRATOR_RUNBOOK.md.
 - Build prompts via `cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md` (reviewers: `_agent2_common.md`/`_agent3_common.md`); codex via `~/bin/codex_worker.sh` (CODEX_MAX_CONCURRENCY=6). See ORCHESTRATOR_RUNBOOK.md for the full pattern.
 
@@ -174,6 +176,8 @@ orchestrator context resets. Updated after every per-constraint gate.
 | CR013 | diphoton spin-0/2 | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ cc5e457 |
 | K021 | K_L→π⁰eμ LFV (SEC) | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 481369c |
 | B013 | Bs→φγ excl (SEC) | ✅ reuse | fixed (SHOULD-FIX) | CODE-OK | ✅ APPROVE | ✅ 9a6db0b |
+| CR014 | four-top vector | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 6910282 |
+| B014 | B→ργ/ωγ b→dγ (SEC) | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 67b2f46 |
 
 **Done: 89 / 95 PRIMARY.** ⏸️ PAUSED at weekly 94% (spend-to-95% rule).
 REMAINING 6 PRIMARY: CR010, CR012, CR013, CR014 (collider reuses), E009 (Weinberg 3-gluon stub), L006 (muonium-antimuonium, niche).
