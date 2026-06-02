@@ -581,3 +581,75 @@ __all__.extend(
         "kk_diboson_spin1_prediction_from_m_kk_gev",
     ]
 )
+
+
+TOP_PHILIC_VECTOR_FOUR_TOP_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: top-philic vector four-top recast v1 uses the "
+    "supplied kk_ew_mass_gev, or M_KK as a fallback top-philic vector mass "
+    "proxy, and compares it to the catalogued CMS top-philic Z' mass "
+    "exclusion at the Gamma/m=50% benchmark. It does not compute "
+    "sigma(pp->ttbar Z')*BR(Z'->ttbar), the width-dependent signal "
+    "normalization, top-philic coupling pattern, four-top acceptance, "
+    "interference, or the SM four-top background likelihood."
+)
+
+
+def resolve_top_philic_vector_mass_gev(
+    *,
+    ew_mass_extra: Any = None,
+    couplings: Any = None,
+) -> tuple[float | None, str | None]:
+    """Resolve the CR014 top-philic vector mass proxy in GeV.
+
+    The explicit electroweak KK mass is the closest declared scan input for a
+    neutral Z'-like vector.  If it is absent, the common quark-sector ``M_KK``
+    carried by the mass-basis couplings object is used as the documented RS
+    scale proxy and flagged as ``NEEDS-HUMAN-PHYSICS`` by CR014.
+    """
+
+    if ew_mass_extra is not None:
+        mass = float(ew_mass_extra)
+        _kk_mass_tev_from_m_kk_gev(mass)
+        return mass, "kk_ew_mass_gev"
+    if couplings is not None:
+        return float(_mass_from_source_gev(couplings)), "quark_mass_basis_couplings.M_KK"
+    return None, None
+
+
+def top_philic_vector_four_top_prediction_from_mass_gev(
+    mass_gev: float,
+    *,
+    resonance: str = "top-philic vector mediator Z'",
+    final_state: str = "t tbar t tbar two-lepton",
+    width_over_mass: float | None = None,
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented CR014 top-philic vector four-top mass proxy."""
+
+    diagnostics = {
+        "m_top_philic_vector_proxy_gev": float(mass_gev),
+        "mass_proxy": "m_Zprime_top_philic = kk_ew_mass_gev or M_KK",
+        "width_over_mass_benchmark": (
+            None if width_over_mass is None else float(width_over_mass)
+        ),
+        "sigma_times_br_proxy_available": sigma_times_br is not None,
+    }
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=_kk_mass_tev_from_m_kk_gev(mass_gev),
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=TOP_PHILIC_VECTOR_FOUR_TOP_PROXY_ASSUMPTION_V1,
+        diagnostics=diagnostics,
+    )
+
+
+__all__.extend(
+    [
+        "TOP_PHILIC_VECTOR_FOUR_TOP_PROXY_ASSUMPTION_V1",
+        "resolve_top_philic_vector_mass_gev",
+        "top_philic_vector_four_top_prediction_from_mass_gev",
+    ]
+)
