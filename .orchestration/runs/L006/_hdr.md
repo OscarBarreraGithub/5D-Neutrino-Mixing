@@ -1,0 +1,2 @@
+# Implement L006 — muonium-antimuonium (M–M̄) conversion. family=charged_lepton (PRIMARY). small new module / proxy.
+Muonium-antimuonium conversion is a ΔL=2 process (lepton-number-violating four-fermion μ⁺e⁻↔μ⁻e⁺). SM≈0 → pure-NP bound vs the PSI MACS limit on the conversion probability G_MM̄ (from L006.yaml), HARD. The RS ΔL=2 effective operator is NOT on ParameterPoint → documented proxy NEEDS-HUMAN-PHYSICS. Build a small adapter; compare the predicted G_MM̄ (proxy) to the MACS limit. Document the proxy.
