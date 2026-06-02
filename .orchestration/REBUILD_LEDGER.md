@@ -5,13 +5,13 @@ orchestrator context resets. Updated after every per-constraint gate.
 
 ## ⏯️ CURRENT STATE / NEXT ACTION (read this first; updated 2026-06-02, post weekly-reset)
 
-- **92 / 95 PRIMARY committed + pushed** (main in sync). Weekly codex budget RESET (0%/0%) — full headroom; the 3 remaining primary + 6 secondary are all cheap reuses/stubs (machinery all built). Pause monitor is OFF (not needed this cycle).
-- **WAVE-20 COMPLETE (5/5 committed, full gate):** L006 `a6f0d74` (muonium–antimuonium, new muonium_conversion adapter, Opus APPROVE), CR010 `75afcfc` (VLQ (T,B) pair prod, reuse collider_resonance, Opus APPROVE), E009 `45e9477` (Weinberg 3-gluon INFO stub, dual NEEDS-HUMAN, Opus APPROVE), K019 `6e329c5` (K_L→eμ LFV, new rare_kaon_lfv_dilepton adapter, Opus APPROVE), B007 `ca580ca` (B0/Bs→ee, new rare_b_electronic adapter; agent3 caught 1 blocker [silent block_key mismatch] → fixed → Opus APPROVE). Full suite **960 passed**.
-- **NEXT ACTION on resume — the LAST 9** (3 primary + 6 secondary), grouped one-per-family-adapter per wave to avoid concurrent-append clobber:
-  - **wave-21:** CR012, B008, K020, T014 (4 distinct families)
-  - **wave-22:** CR013, B013, K021
-  - **wave-23:** CR014, B014
-  Each via the standard gate: build prompts → codex agent1 → agent2∥agent3 → route fixes → Opus per-constraint → commit each (secondary under `flavor_catalog_constraints/secondary/<family>/`) → full suite → ledger + push. THEN finalize NEEDS_HUMAN_PHYSICS.md + present the structured list (95/95).
+- **93 / 95 PRIMARY committed + pushed** (main in sync). Weekly codex budget RESET (0%/0%) — full headroom. Only **2 PRIMARY left: CR013, CR014** (+ 3 secondary: B013, K021, B014). Pause monitor is OFF.
+- **WAVE-20 COMPLETE (5/5):** L006 `a6f0d74`, CR010 `75afcfc`, E009 `45e9477`, K019 `6e329c5`, B007 `ca580ca`. (full gate, 960 passed).
+- **WAVE-21 COMPLETE (4/4):** CR012 `69648e2` (diboson spin-1, reuse collider_resonance, Opus APPROVE), B008 `6ece7d8` (Bs/B0→ττ, new rare_b_tauonic adapter, Opus APPROVE), K020 `966af3b` (K+→π+eμ LFV semileptonic, new rare_kaon_lfv_semileptonic 3-body form-factor adapter, Opus APPROVE), T014 `0183016` (FCNC Z→bs/bd/sd; agent2+agent3 BOTH caught blockers [hadronic-not-total-Z denominator; FCNC physics in adapter not core] → fixed → Opus APPROVE). Full suite **1002 passed**.
+- **NEXT ACTION on resume — the LAST 5** (2 primary + 3 secondary), one-per-family-adapter per wave:
+  - **wave-22:** CR013 (diphoton spin-0/2, reuse kk_graviton_resonance), B013 (Bs→φγ exclusive, reuse bsgamma), K021 (K_L→π⁰eμ LFV, reuse rare_kaon_lfv_semileptonic from K020)
+  - **wave-23:** CR014 (four-top, reuse collider_resonance), B014 (B→ργ/ωγ b→dγ, reuse bsgamma)
+  Each via the standard gate: build prompts (`cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md`) → codex agent1 (OWN background task, not chained heredoc) → agent2∥agent3 → route fixes → Opus per-constraint → commit each → full suite → ledger + push. THEN finalize NEEDS_HUMAN_PHYSICS.md + present the structured list (95/95).
 - Build prompts via `cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md` (reviewers: `_agent2_common.md`/`_agent3_common.md`); codex via `~/bin/codex_worker.sh` (CODEX_MAX_CONCURRENCY=6). NOTE: launch each agent1 as its OWN background Bash task (NOT a chained-heredoc eval — that wedges). See ORCHESTRATOR_RUNBOOK.md.
 - Build prompts via `cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md` (reviewers: `_agent2_common.md`/`_agent3_common.md`); codex via `~/bin/codex_worker.sh` (CODEX_MAX_CONCURRENCY=6). See ORCHESTRATOR_RUNBOOK.md for the full pattern.
 
@@ -169,6 +169,10 @@ orchestrator context resets. Updated after every per-constraint gate.
 | E009 | Weinberg 3g (STUB) | ✅ stub | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 45e9477 |
 | K019 | K_L→eμ LFV (SEC) | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 6e329c5 |
 | B007 | B0/Bs→ee (SEC) | ✅ reuse | PHYSICS-OK | fixed (1 blocker) | ✅ APPROVE | ✅ ca580ca |
+| CR012 | diboson spin-1 | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 69648e2 |
+| B008 | Bs/B0→ττ (SEC) | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 6ece7d8 |
+| K020 | K+→π+eμ LFV (SEC) | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 966af3b |
+| T014 | FCNC Z→bs/bd/sd (SEC) | ✅ built | fixed (blocker) | fixed (blocker) | ✅ APPROVE | ✅ 0183016 |
 
 **Done: 89 / 95 PRIMARY.** ⏸️ PAUSED at weekly 94% (spend-to-95% rule).
 REMAINING 6 PRIMARY: CR010, CR012, CR013, CR014 (collider reuses), E009 (Weinberg 3-gluon stub), L006 (muonium-antimuonium, niche).
