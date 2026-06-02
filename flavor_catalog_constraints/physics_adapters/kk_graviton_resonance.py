@@ -235,3 +235,67 @@ __all__ = [
     "resolve_kk_graviton_mass_gev",
     "resolve_kk_graviton_mass_mapping",
 ]
+
+
+KK_GRAVITON_DIPHOTON_RECAST_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: diphoton RS-graviton recast v1 uses the spin-2 "
+    "spectrum proxy m_GKK^(1) = x_G1 * Lambda_IR and compares it to a "
+    "catalogued pp->G_KK->gamma gamma benchmark mass lower limit at the "
+    "YAML-specified ktilde = k/M_Pl. It does not compute "
+    "sigma(pp->G_KK)*BR(G_KK->gamma gamma), the branching surface, "
+    "ktilde-dependent production, total width, acceptance, interference, or "
+    "the experiment's mass-dependent limit curve."
+)
+
+
+def kk_graviton_diphoton_prediction_from_lambda_ir_gev(
+    lambda_ir_gev: float,
+    *,
+    resonance: str = "G_KK^(1)",
+    final_state: str = "gamma gamma",
+    benchmark_ktilde: float | None = None,
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented CR013 spin-2 diphoton mass-proxy prediction."""
+
+    lambda_ir = _positive_finite(lambda_ir_gev, "Lambda_IR")
+    ktilde = (
+        None
+        if benchmark_ktilde is None
+        else _positive_finite(benchmark_ktilde, "benchmark_ktilde")
+    )
+    m_graviton_gev = spin2_graviton_mass_from_lambda_ir(lambda_ir)
+    mass_tev = kk_gluon_mass_tev_from_m_kk_gev(m_graviton_gev)
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=mass_tev,
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=KK_GRAVITON_DIPHOTON_RECAST_PROXY_ASSUMPTION_V1,
+        diagnostics={
+            "lambda_ir_gev": float(lambda_ir),
+            "benchmark_ktilde": None if ktilde is None else float(ktilde),
+            "graviton_spin2_root": float(SPIN2_GRAVITON_KK_ROOT),
+            "gauge_kk_root_nn": float(GAUGE_KK_ROOT_NN),
+            "m_graviton_gev": float(m_graviton_gev),
+            "m_graviton_proxy_gev": float(m_graviton_gev),
+            "m_graviton_proxy_tev": float(mass_tev),
+            "mass_proxy": "m_GKK = SPIN2_GRAVITON_KK_ROOT * Lambda_IR",
+            "spectrum_assumption": KK_GRAVITON_SPIN2_SPECTRUM_ASSUMPTION_V1,
+            "spectrum_mapping_status": "NEEDS-HUMAN-PHYSICS",
+            "sigma_times_br_proxy_available": sigma_times_br is not None,
+            "coupling_recast_status": "NEEDS-HUMAN-PHYSICS",
+            "branching_surface_recast_status": "NEEDS-HUMAN-PHYSICS",
+            "width_acceptance_recast_status": "NEEDS-HUMAN-PHYSICS",
+        },
+    )
+
+
+__all__.extend(
+    [
+        "KK_GRAVITON_DIPHOTON_RECAST_PROXY_ASSUMPTION_V1",
+        "kk_graviton_diphoton_prediction_from_lambda_ir_gev",
+    ]
+)
