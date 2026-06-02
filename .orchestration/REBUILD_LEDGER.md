@@ -3,6 +3,13 @@
 Durable state for the from-scratch constraint implementation. Survives
 orchestrator context resets. Updated after every per-constraint gate.
 
+## ⏯️ CURRENT STATE / NEXT ACTION (read this first; updated 2026-05-31, post weekly-reset)
+
+- **89 / 95 PRIMARY committed + pushed** (main in sync). Weekly codex budget RESET — full headroom; the 6 remaining primary + 8 secondary are all cheap reuses/stubs (machinery all built). Pause monitor is OFF (not needed this cycle).
+- **IN FLIGHT: wave-20 agent1 is RUNNING** (background; log `.orchestration/runs/wave20_agent1.log`) for: **CR010** (collider_resonance reuse), **B007** (→ secondary/beauty, B→ee reuse rare_b_dilepton), **K019** (→ secondary/kaon, K_L→eμ LFV reuse rare_kaon_dilepton), **E009** (Weinberg 3-gluon — EDM honest stub), **L006** (muonium–antimuonium ΔL=2 proxy). NONE committed yet.
+- **NEXT ACTION on resume:** (1) check `.orchestration/runs/<ID>/agent1_out.md` exist + `pytest tests/constraints/ -q`; (2) run the standard gate for wave-20: codex agent2∥agent3 reviewers → route fixes → Opus per-constraint → commit each (secondary ones live under `flavor_catalog_constraints/secondary/<family>/`) → update this ledger + push. (3) Then final waves for the LAST 9: **CR012, CR013, CR014** (collider reuses), **B008, B013, B014** (secondary beauty reuses), **K020, K021** (secondary kaon reuses), **T014** (secondary EW, reuse zpole). One-per-shared-module per wave.
+- Build prompts via `cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md` (reviewers: `_agent2_common.md`/`_agent3_common.md`); codex via `~/bin/codex_worker.sh` (CODEX_MAX_CONCURRENCY=6). See ORCHESTRATOR_RUNBOOK.md for the full pattern.
+
 ## Contract (decided 2026-05-28)
 
 - **Scope:** Build REAL, computing physics for every catalog constraint
