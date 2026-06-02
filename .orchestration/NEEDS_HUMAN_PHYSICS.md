@@ -99,3 +99,12 @@ families), or accept bounded proxies. (Independent of per-constraint correctness
 ### Wave-11 pioneers (B009, K018, CR001, E001, L002)   [committed — see git log]
 - **Rigorous:** B⁺→τν tree SM 8.63e-5; |V_us| K_l3 extraction + unitarity pull; KK-gluon mass vs tt̄ limit; e-EDM SM≈0; μ→3e dipole(L001)+contact+interference.
 - **Needs human input:** charged-current RS proxy (B009); CR σ×BR recast proxy (CR001); RS one-loop CP-odd dipole for EDMs (E001 — real loop machinery); μ→3e Z/box + dipole-contact relative PHASE (L002 uses conservative constructive envelope); K018 RS CKM shift ~0.
+
+> NOTE: waves 12–19 per-constraint flags are recorded in their commit messages + `.orchestration/runs/<ID>/`; a consolidated end-of-project pass will fold them into this file when 95/95 is reached.
+
+### Wave-20 (L006, CR010, E009, K019, B007)   [committed a6f0d74 / 75afcfc / 45e9477 / 6e329c5 / ca580ca]
+- **L006 — muonium→antimuonium P(M→M̄):** Rigorous pure-NP proxy P=P_limit·|G_C/G_F|²/(G_C/G_F)²_limit vs MACS/PSI bound P<8.3e-11. **Needs human input:** full RS ΔL_μ=−ΔL_e=2 four-lepton matching not on ParameterPoint (effective coupling supplied as documented proxy).
+- **CR010 — VLQ (T,B) pair production:** Rigorous mass-vs-limit recast (m_T=m_B=M_KK proxy) vs ATLAS/PDG 2025 ≥1.37 TeV. **Needs human input:** σ×BR / branching-surface / T,B spectrum / widths / acceptance / full limit-surface recast (cross-cutting collider recast gap).
+- **E009 — Weinberg three-gluon CP-odd operator:** INFO/non-vetoing; records neutron-EDM-derived |C_6|<1.2e-11 GeV⁻² (w<4.1e-11 GeV⁻², n-EDM 1.8e-26 e·cm). **Needs human input (dual):** hadronic CP-odd gluonic matrix element AND RS CP-odd gluonic matching on ParameterPoint.
+- **K019 — K_L→eμ LFV (secondary):** Rigorous pure-NP bound (SM≈0) BR<4.7e-12 (BNL E871) via rare_kaon_dilepton κ_μ adapted to the unequal-lepton (e,μ) two-body rate. **Needs human input:** off-diagonal charged-lepton neutral-current RS matching (eμ coupling supplied as documented proxy; cross-cutting EW-coupling gap).
+- **B007 — B0/Bs→ee (secondary):** Rigorous SM (Bs→ee 8.54e-14, B0→ee 2.45e-15, m_e² helicity suppression) vs limits BR(Bs→ee)<9.4e-9, BR(B0→ee)<2.5e-9. **Needs human input:** RS C9/C10 b→s(e e) NP matching (documented proxy; cross-cutting EW-coupling gap).
