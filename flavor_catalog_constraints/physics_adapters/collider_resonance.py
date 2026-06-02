@@ -513,3 +513,71 @@ __all__.extend(
         "vlq_tb_doublet_prediction_from_m_kk_gev",
     ]
 )
+
+
+KK_DIBOSON_SPIN1_MASS_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: spin-1 diboson resonance recast v1 uses the "
+    "supplied kk_ew_mass_gev, or M_KK as a fallback electroweak-vector mass "
+    "proxy, and compares it to a catalogued HVT model-B W'->WZ benchmark mass "
+    "lower bound. It does not compute sigma(pp->W'/Z'/V_KK)*BR(V->WW/WZ/ZZ), "
+    "the VV branching surface, total width, production-mode mixture, "
+    "interference, or the experiment's mass-dependent acceptance and limit "
+    "curve."
+)
+
+
+def resolve_kk_diboson_spin1_mass_gev(
+    *,
+    ew_mass_extra: Any = None,
+    couplings: Any = None,
+) -> tuple[float | None, str | None]:
+    """Resolve the CR012 spin-1 diboson mass proxy in GeV.
+
+    The explicit electroweak KK mass is the closest declared scan input for a
+    W'/Z'-like diboson resonance.  If it is absent, the common quark-sector
+    ``M_KK`` carried by the couplings object is used as a documented fallback
+    RS scale proxy and flagged as ``NEEDS-HUMAN-PHYSICS`` by CR012.
+    """
+
+    if ew_mass_extra is not None:
+        mass = float(ew_mass_extra)
+        _kk_mass_tev_from_m_kk_gev(mass)
+        return mass, "kk_ew_mass_gev"
+    if couplings is not None:
+        return float(_mass_from_source_gev(couplings)), "quark_mass_basis_couplings.M_KK"
+    return None, None
+
+
+def kk_diboson_spin1_prediction_from_m_kk_gev(
+    m_kk_gev: float,
+    *,
+    resonance: str = "V_KK^(1) spin-1",
+    final_state: str = "WW/WZ/ZZ",
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented CR012 spin-1 diboson mass-proxy prediction."""
+
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=_kk_mass_tev_from_m_kk_gev(m_kk_gev),
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=KK_DIBOSON_SPIN1_MASS_PROXY_ASSUMPTION_V1,
+        diagnostics={
+            "m_kk_gev": float(m_kk_gev),
+            "m_spin1_diboson_proxy_gev": float(m_kk_gev),
+            "mass_proxy": "m_spin1_diboson = kk_ew_mass_gev or M_KK",
+            "sigma_times_br_proxy_available": sigma_times_br is not None,
+        },
+    )
+
+
+__all__.extend(
+    [
+        "KK_DIBOSON_SPIN1_MASS_PROXY_ASSUMPTION_V1",
+        "resolve_kk_diboson_spin1_mass_gev",
+        "kk_diboson_spin1_prediction_from_m_kk_gev",
+    ]
+)
