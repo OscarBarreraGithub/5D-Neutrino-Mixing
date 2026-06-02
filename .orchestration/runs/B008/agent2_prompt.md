@@ -1,0 +1,14 @@
+# Implement B008 — rare tauonic leptonic neutral-B decays (B_s→τ+τ−, B0→τ+τ−). family=beauty, SECONDARY TIER. PLACE the constraint at flavor_catalog_constraints/secondary/beauty/B008.py and the test at tests/constraints/secondary/beauty/test_B008.py (SECONDARY level auto-derived from path). REUSE quarkConstraints/rare_b_dilepton.py via a NEW append-only adapter physics_adapters/rare_b_tauonic.py that MIRRORS the existing physics_adapters/rare_b_electronic.py (B007) but substitutes the charged-lepton mass m_ℓ = m_τ (NO helicity suppression here — τ is heavy, so SM BR is the LARGEST of the three lepton modes: SM BR(B_s→ττ)~7.7e-7, BR(B0→ττ)~2.2e-8). STUDY committed secondary/beauty/B007.py for the exact pattern. Budgets are the one-mode-at-a-time PDG upper limits from B008.yaml: BR(B_s→ττ) < 6.8e-3, BR(B0→ττ) < 2.1e-3, both 95% CL. HARD. RS C9/C10 NP is a documented proxy → NEEDS-HUMAN-PHYSICS. Append-only: do NOT modify the muon (rare_b_dilepton) or electron (rare_b_electronic) functions; reuse the C10-dominant Buras leptonic formula with the τ mass.
+
+## You are agent2 — PHYSICS fact-checker (codex). Review ONLY the physics of the constraint named above. Do NOT rewrite code; produce a precise numbered findings list. Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing.
+
+Files: flavor_catalog_constraints/primary/<family>/<ID>.py, its additive wrapper in flavor_catalog_constraints/physics_adapters/deltaf2.py, tests/constraints/primary/<family>/test_<ID>.py. Source of truth = the catalog yaml flavor_catalog/processes/<family>/<ID>.yaml + its reference snapshots; physics core = quarkConstraints/deltaf2.py; audit docs in docs/audits/.
+
+MANDATORY physics checks (verdict each):
+1. Correct amplitude: mass-difference observables (Δm) use |M_12^NP| (magnitude); CP observables use the IMAGINARY part. Confirm the code uses the right one (not the wrong part).
+2. **QCD running ACTUALLY used**: the constraint must call the *_with_running evaluator (Wilsons evolved to mu_had=2 GeV). Confirm it does NOT use the non-running path for its verdict. Quantify the running effect if you can.
+3. **Budget defensible & uncertainty-aware**: NOT a bare central residual. For long-distance-dominated Δm (kaon, charm) the accepted convention is |M_12^NP| <= Δm^exp/2; for Bd/Bs an SM-vs-exp room with uncertainties. Check the value against the yaml + core + any audit doc. State whether the budget is right, too tight, or too loose, with numbers.
+4. Anchor numbers loaded match PDG/HFLAV/the yaml snapshots (spot-check actual values).
+5. Severity appropriate; units consistent (GeV); any wrong/misleading physics in docstring/notes/diagnostics.
+
+OUTPUT (stdout, <=22 lines): numbered findings, each tagged BLOCKER / SHOULD-FIX / NIT with the precise issue + correct physics + file:line + numbers. End with: PHYSICS-OK or PHYSICS-NEEDS-FIXES.
