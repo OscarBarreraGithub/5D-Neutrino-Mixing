@@ -1,0 +1,7 @@
+1. NIT — Review-scope mismatch only: B014 is radiative, not ΔF=2, so the |M12|/Im(M12) check is N/A; the evaluated observable is dipole power `|C7+C7NP|^2+|C7p+C7pNP|^2`, correct for BRs. `flavor_catalog_constraints/secondary/beauty/B014.py:9`, `:692`.
+2. NIT — QCD running is actually used: B014 calls `exclusive_bdrhogamma_from_couplings` -> `bdgamma_wilsons_from_couplings` -> core `compute_bsgamma_wilsons`; no non-running verdict path. For 3 TeV -> 4.8 GeV, `u77=0.512`, `u78=0.119`, `u88=0.557`, giving `C7_low≈0.631*C7(M_KK)` for default `C8=C7`. `physics_adapters/bsgamma.py:349`, `:362`; `quarkConstraints/bsgamma.py:346`.
+3. NIT — Budget is defensible as labeled: uses per-mode measurement-consistency bands, not theory room: rho+ `9.8e-7±2.5e-7`, rho0 `8.6e-7±1.5e-7`, omega `4.4e-7+1.8/-1.6e-7`; worst saturation is rho0 because value/sigma `5.73`. `B014.py:296`, `:430`; `B014.yaml:81`, `:93`, `:105`.
+4. NIT — b→d normalization/CKM handling looks correct for this proxy: d-b slot `(0,2)` is selected, b-s slot is ignored, and diagnostics report `|Vtd/Vts|=0.214`, squared `0.0457`; exclusive BR anchors carry the CKM-suppressed normalization. `physics_adapters/bsgamma.py:115`, `:150`, `:246`; `B014.py:500`, `:661`.
+5. NIT — Caveats are honestly stated: no exclusive SM/form-factor theory block is used as a theory prediction; RS C7/C7′ proxy and B→rho/omega form factors are marked NEEDS-HUMAN-PHYSICS. `B014.py:101`, `:108`, `:637`.
+
+PHYSICS-OK
