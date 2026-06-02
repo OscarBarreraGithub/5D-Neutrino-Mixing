@@ -5,13 +5,11 @@ orchestrator context resets. Updated after every per-constraint gate.
 
 ## ⏯️ CURRENT STATE / NEXT ACTION (read this first; updated 2026-06-02, post weekly-reset)
 
-- **93 / 95 PRIMARY committed + pushed** (main in sync). Weekly codex budget RESET (0%/0%) — full headroom. Only **2 PRIMARY left: CR013, CR014** (+ 3 secondary: B013, K021, B014). Pause monitor is OFF.
-- **WAVE-20 COMPLETE (5/5):** L006 `a6f0d74`, CR010 `75afcfc`, E009 `45e9477`, K019 `6e329c5`, B007 `ca580ca`. (full gate, 960 passed).
-- **WAVE-21 COMPLETE (4/4):** CR012 `69648e2` (diboson spin-1, reuse collider_resonance, Opus APPROVE), B008 `6ece7d8` (Bs/B0→ττ, new rare_b_tauonic adapter, Opus APPROVE), K020 `966af3b` (K+→π+eμ LFV semileptonic, new rare_kaon_lfv_semileptonic 3-body form-factor adapter, Opus APPROVE), T014 `0183016` (FCNC Z→bs/bd/sd; agent2+agent3 BOTH caught blockers [hadronic-not-total-Z denominator; FCNC physics in adapter not core] → fixed → Opus APPROVE). Full suite **1002 passed**.
-- **NEXT ACTION on resume — the LAST 5** (2 primary + 3 secondary), one-per-family-adapter per wave:
-  - **wave-22:** CR013 (diphoton spin-0/2, reuse kk_graviton_resonance), B013 (Bs→φγ exclusive, reuse bsgamma), K021 (K_L→π⁰eμ LFV, reuse rare_kaon_lfv_semileptonic from K020)
-  - **wave-23:** CR014 (four-top, reuse collider_resonance), B014 (B→ργ/ωγ b→dγ, reuse bsgamma)
-  Each via the standard gate: build prompts (`cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md`) → codex agent1 (OWN background task, not chained heredoc) → agent2∥agent3 → route fixes → Opus per-constraint → commit each → full suite → ledger + push. THEN finalize NEEDS_HUMAN_PHYSICS.md + present the structured list (95/95).
+- **94 / 95 PRIMARY committed + pushed** (main in sync). Weekly codex budget RESET (0%/0%) — full headroom. Only **1 PRIMARY left: CR014** (+ 1 secondary: B014) = the FINAL wave-23. Pause monitor is OFF.
+- **WAVE-20 COMPLETE (5/5):** L006 `a6f0d74`, CR010 `75afcfc`, E009 `45e9477`, K019 `6e329c5`, B007 `ca580ca`. (960 passed).
+- **WAVE-21 COMPLETE (4/4):** CR012 `69648e2`, B008 `6ece7d8`, K020 `966af3b`, T014 `0183016` (T014 needed physics+architecture fixes). (1002 passed).
+- **WAVE-22 COMPLETE (3/3):** CR013 `cc5e457` (diphoton spin-2 graviton, reuse kk_graviton_resonance, Opus APPROVE — 94th PRIMARY), K021 `481369c` (K_L→π⁰eμ LFV, reuse K020 rare_kaon_lfv_semileptonic neutral-mode helper, Opus APPROVE), B013 `9a6db0b` (Bs→φγ exclusive, reuse bsgamma; agent2 SHOULD-FIX [budget SM side was a measurement not theory] → relabeled as honest measurement-consistency band + NEEDS-HUMAN gap → Opus APPROVE). Full suite **1033 passed**.
+- **NEXT ACTION on resume — the FINAL wave-23 (2 left):** CR014 (four-top tttt, reuse collider_resonance) + B014 (B→ργ/ωγ b→dγ exclusive, reuse bsgamma). Standard gate each: build prompts (`cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md`) → codex agent1 (OWN background task) → agent2∥agent3 → route fixes → Opus per-constraint → commit each → full suite → ledger + push. THEN finalize NEEDS_HUMAN_PHYSICS.md + present the structured 95/95 list (the user's final deliverable).
 - Build prompts via `cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md` (reviewers: `_agent2_common.md`/`_agent3_common.md`); codex via `~/bin/codex_worker.sh` (CODEX_MAX_CONCURRENCY=6). NOTE: launch each agent1 as its OWN background Bash task (NOT a chained-heredoc eval — that wedges). See ORCHESTRATOR_RUNBOOK.md.
 - Build prompts via `cat runs/<ID>/_hdr.md runs/_agent1_common_v2.md > runs/<ID>/agent1_prompt.md` (reviewers: `_agent2_common.md`/`_agent3_common.md`); codex via `~/bin/codex_worker.sh` (CODEX_MAX_CONCURRENCY=6). See ORCHESTRATOR_RUNBOOK.md for the full pattern.
 
@@ -173,6 +171,9 @@ orchestrator context resets. Updated after every per-constraint gate.
 | B008 | Bs/B0→ττ (SEC) | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 6ece7d8 |
 | K020 | K+→π+eμ LFV (SEC) | ✅ built | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 966af3b |
 | T014 | FCNC Z→bs/bd/sd (SEC) | ✅ built | fixed (blocker) | fixed (blocker) | ✅ APPROVE | ✅ 0183016 |
+| CR013 | diphoton spin-0/2 | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ cc5e457 |
+| K021 | K_L→π⁰eμ LFV (SEC) | ✅ reuse | PHYSICS-OK | CODE-OK | ✅ APPROVE | ✅ 481369c |
+| B013 | Bs→φγ excl (SEC) | ✅ reuse | fixed (SHOULD-FIX) | CODE-OK | ✅ APPROVE | ✅ 9a6db0b |
 
 **Done: 89 / 95 PRIMARY.** ⏸️ PAUSED at weekly 94% (spend-to-95% rule).
 REMAINING 6 PRIMARY: CR010, CR012, CR013, CR014 (collider reuses), E009 (Weinberg 3-gluon stub), L006 (muonium-antimuonium, niche).
