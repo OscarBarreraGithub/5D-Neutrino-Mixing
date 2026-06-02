@@ -450,3 +450,66 @@ __all__.extend(
         "dy_contact_prediction_from_scale_gev",
     ]
 )
+
+
+VLQ_TB_DOUBLET_MASS_PROXY_ASSUMPTION_V1 = (
+    "NEEDS-HUMAN-PHYSICS: weak-isospin (T,B) vector-like-quark doublet "
+    "pair-production recast v1 uses m_T = m_B = M_KK as a common KK-fermion "
+    "mass proxy and compares it to the catalogued simultaneous doublet mass "
+    "lower limit. It does not compute sigma(pp->T Tbar/B Bbar)*BR mixtures, "
+    "relative T/B rates, widths, mass splittings, acceptance, nonstandard "
+    "cascade decays, or the experiment's mass-dependent limit surface."
+)
+
+
+def resolve_vlq_tb_doublet_mkk_gev(
+    *,
+    couplings: Any = None,
+) -> tuple[float | None, str | None]:
+    """Resolve the common (T,B)-doublet proxy mass in GeV.
+
+    The current scan point carries the common quark-sector ``M_KK`` scale, not
+    a dedicated weak-isospin ``(T,B)`` vector-like-quark spectrum.  CR010
+    therefore interprets ``M_KK`` as the degenerate ``m_T=m_B`` mass proxy and
+    flags the matching as ``NEEDS-HUMAN-PHYSICS`` at the result.
+    """
+
+    if couplings is not None:
+        return float(_mass_from_source_gev(couplings)), "quark_mass_basis_couplings.M_KK"
+    return None, None
+
+
+def vlq_tb_doublet_prediction_from_m_kk_gev(
+    m_kk_gev: float,
+    *,
+    resonance: str = "(T,B) doublet pair",
+    final_state: str = "mixed W/Z/H third-generation final states",
+    sigma_times_br: float | None = None,
+    sigma_times_br_units: str | None = None,
+) -> ColliderResonancePrediction:
+    """Build the documented v1 weak-isospin (T,B)-doublet mass proxy."""
+
+    return ColliderResonancePrediction(
+        resonance=resonance,
+        final_state=final_state,
+        mass_tev=_kk_mass_tev_from_m_kk_gev(m_kk_gev),
+        sigma_times_br=sigma_times_br,
+        sigma_times_br_units=sigma_times_br_units,
+        matching_assumption=VLQ_TB_DOUBLET_MASS_PROXY_ASSUMPTION_V1,
+        diagnostics={
+            "m_kk_gev": float(m_kk_gev),
+            "m_t_doublet_proxy_gev": float(m_kk_gev),
+            "m_b_doublet_proxy_gev": float(m_kk_gev),
+            "mass_proxy": "m_T = m_B = M_KK",
+            "sigma_times_br_proxy_available": sigma_times_br is not None,
+        },
+    )
+
+
+__all__.extend(
+    [
+        "VLQ_TB_DOUBLET_MASS_PROXY_ASSUMPTION_V1",
+        "resolve_vlq_tb_doublet_mkk_gev",
+        "vlq_tb_doublet_prediction_from_m_kk_gev",
+    ]
+)
