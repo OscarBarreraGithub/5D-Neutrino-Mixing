@@ -39,6 +39,7 @@ _EXPORTS = {
     "QuarkScanConfig": (".scan", "QuarkScanConfig"),
     "QuarkSpurionPoint": (".model", "QuarkSpurionPoint"),
     "QuarkTargets": (".benchmarks", "QuarkTargets"),
+    "RSEWSpectrum": (".rs_ew_spectrum", "RSEWSpectrum"),
     "RotationParameters": (".model", "RotationParameters"),
     "benchmark_fit_summary": (".validation", "benchmark_fit_summary"),
     "benchmark_plot_data": (".validation", "benchmark_plot_data"),

@@ -1,0 +1,11 @@
+# DUAL REVIEW — W2 Phase 2 spectrum+overlap kernel (codex, gpt-5.x xhigh). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing. Do NOT modify code. Review `quarkConstraints/rs_ew_spectrum.py` + `tests/test_rs_ew_spectrum.py` + the `quarkConstraints/__init__.py` lazy export, against the approved design `.orchestration/rs_ew_sector_design_CONSENSUS.md` (§5.2, §6) and the dual-approved derivation `derivations/rs_ew_gauge_kk_coupling.tex`. An Opus reviewer checks in parallel; both must APPROVE.
+
+VERIFY (recompute/probe yourself, don't trust the author's numbers):
+1. **KK root + mass** — `kk_ew_mass_gev = x_1*Lambda_IR` with x_1 sourced from `solve_kk("gauge","NN",exact=True)` (NOT literal 2.4048). Confirm x_1≈2.4505 and kk_ew_mass≈7351.5 GeV at Λ_IR=3000, ε=1e-15. Recompute the root independently from bessel.py.
+2. **Overlap a(c)** — confirm `a(c)=Σ_n (M_KK²/m_n²) χ_n(1) Ω_n(c)` matches the derivation; recompute a(c) for a sample c yourself and compare to the code (author claims a(0.2)=21.92, a(0.65)=−1.476). Confirm the N-doubling truncation (rel<1e-3, raise at N=512) is actually implemented and works.
+3. **Zero-mode weight** — `w0(c,t)=g0(c,t)²/t` and the endpoint identities `g0(c,1)²=2 f_IR²`, `g0(c,ε)²=2 f_UV²` hold to ~machine precision (author: residual 2.2e-15). Confirm vs `warpConfig/wavefuncs.py`.
+4. **a_ref + sign precursors** — universal-c ⇒ a(c)−a_ref=0 for all; IR-localized small-c (b_R) ⇒ a(c_bR) > a(c_light). Confirm both. Sanity: does (m_Z²/M_KK²)·[a(c_bR)−a_ref] land ~1e-3 (order) at M_KK~few TeV? (precursor only; coupling-level is Phase 3).
+5. **Code quality** — pure/deterministic; cached results identical to uncached; finite (no NaN/Inf); the caching key is correct (no stale cross-(Λ_IR,ε,c) contamination); does NOT modify the 103 constraints/scaffold/existing cores; the `__init__` lazy export is safe.
+6. **Tests adequate + independent** (recompute from bessel/wavefuncs, not call-through). Run `python -m pytest tests/ -q`; report counts (author: 1644 passed, 1 skipped).
+
+OUTPUT (<=16 lines): numbered findings (BLOCKER/SHOULD-FIX/NIT) with file:line + the ACTUAL recomputed root/a(c)/endpoint residuals, the truncation-criterion check, pytest counts. End with: PHASE2-OK or PHASE2-NEEDS-FIXES.
