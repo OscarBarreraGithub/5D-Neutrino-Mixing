@@ -41,7 +41,8 @@ Build prompts under `.orchestration/runs/<ITEM>/`. Keep orchestrator context lea
 | ID | Item | Plan (codex+opus) | Impl review (codex+opus) | Committed |
 |----|------|-------------------|--------------------------|-----------|
 | W1 | G1 design — opus∥codex drafts → consensus → dual-review (codex caught contact-formula BLOCKER: dropped light-Z g_q^SM·δg_l^LFV) → revise → **RE-REVIEW DUAL APPROVE** (codex DESIGN-OK + Opus DESIGN-OK). `rs_ew_sector_design_CONSENSUS.md` is the implementation-ready spec; 7 phases; 24→26 FULL/17 PARTIAL/7 HUMAN. | dual ✅ | n/a (design) | `4e5eff0` |
-| W2-P1 | Derivation pins (gauge profiles, g_0(c,z), gauge-KK overlap a(c), vector diag, Z/W normalization) — codex author IN FLIGHT → dual physics review | author in flight | — | — |
+| W2-P1 | Derivation pins (`derivations/rs_ew_gauge_kk_coupling.tex`) — dual gate caught x_1=2.4048(ε→0) vs true gauge NN root ~2.45 + missing KK-sum truncation → fixed → **DUAL APPROVE** (codex+Opus PHASE1-OK). | dual ✅ | n/a (deriv) | `ffb4ad2` |
+| W2-P2 | Spectrum+overlap kernel (RSEWSpectrum, kk_ew_mass=x_1·Λ_IR, Ω_n(c), cached a(c), a_ref) — codex author IN FLIGHT → dual review | author in flight | — | — |
 | W2 | G1 implement, sub-phased per approved design (S1 KK gauge mass+a(c); S2 quark Z matrices; S3 lepton sector; S4 charged-current+oblique; S5 numeric oracle) | — | — | — |
 | W3 | Re-wire constraints proxy→rigorous (fan-out by family; update NEEDS_HUMAN flags+tests) | — | — | — |
 | W4 | G4 CKM phase (B002 sin2β, B004 φ_s) in-core | — | — | — |
