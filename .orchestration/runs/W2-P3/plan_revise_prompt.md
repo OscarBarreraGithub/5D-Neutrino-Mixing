@@ -1,0 +1,15 @@
+# W2 PHASE 3 PLAN REVISION (codex, gpt-5.x xhigh). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing. Revise `.orchestration/runs/W2-P3/plan.md` in place to fix the dual-review findings below (codex PLAN-NEEDS-FIXES + Opus PLAN-OK-with-NITs). No production code. Re-review (codex+opus) follows. Keep it concrete; ground in the approved design `.orchestration/rs_ew_sector_design_CONSENSUS.md`.
+
+BLOCKER 1 — lepton side of contacts/Wilsons under-specified. The 3a builder lists only quark inputs, but the neutral contacts `C_AB=(g_Z²/m_Z²)[(g_qA^SM+δg_qA)(g_lB^SM+δg_lB)−SM·SM]+Σ_V g_Vq g_Vl/M_V²` and the rare C9/C10 Wilsons REQUIRE the lepton couplings. Specify: Phase 3 uses the SM charged-lepton Z couplings g_{V,A}^ℓ (and the heavy-vector lepton coupling treatment) for the lepton side; the lepton δg_l and lepton-KK overlaps are deferred to Phase 4 (so set δg_l=0 here, but g_l^SM MUST enter — the light-Z product (g_q^SM+δg_q)·g_l^SM is the leading quark-NP × lepton-SM term that drives C9/C10). State exactly how the lepton couplings enter the stored `rs_semileptonic_wilsons` so the rare rewires do NOT undercount. (If the heavy-vector lepton KK coupling needs lepton profiles, defer that piece to Phase 4 and say so explicitly, keeping the light-Z piece rigorous now.)
+
+BLOCKER 2 — stored z_delta_g must be the COUPLING SHIFT, not the raw overlap. Pin: `z_delta_g_A^f = prefactor · [U† diag(a(c_f)−a_ref) U]` where prefactor = `s_Z g_A^{f,SM} (m_Z²/M_KK²)` (per design §1/§6) — dimensionless additive shift in the zpole convention. The raw `a(c)−a_ref` is NOT the shift; the plan must store δg with the prefactor applied.
+
+SHOULD-FIX 3 — move the full-subtraction SM-limit pin AND the IR-b_R sign/magnitude pin INTO the 3a "no rewiring" test gate (not just end-of-phase validation), so the builder is proven before any rewiring.
+
+SHOULD-FIX 4 — B017/B018/B019 are LFU RATIO observables (R_K-type), NOT LFV: preserve numerator/denominator semantics; note a lepton-universal Wilson largely cancels in the ratio. State this so the rewire keeps the ratio structure.
+
+SHOULD-FIX 5 — B015 also carries an existing C7 dipole proxy: Phase 3 replaces ONLY C9/C10/C9'/C10' (vector/axial); C7 stays as-is (dipole is Phase 7). State this.
+
+NITs — (a) c_Q/c_u/c_d live on `QuarkFitResult.bulk_state` (read `bulk_state.c_Q` etc.), not top-level; (b) ENUMERATE the 5 split rare-B adapter files (rare_b_meson.py, rare_b_electronic.py, rare_b_tauonic.py, rare_b_kstar_dilepton.py, rare_b_baryon.py) so no B0xx consumer is missed; (c) use the adapter-exported names `zpole_sm_couplings`/`zpole_shifted_couplings`/`zpole_evaluate_quark` (core names differ: sm_couplings/shifted_couplings/evaluate_quark_pseudo_observables). The new symbols (`build_from_rs_ew_inputs`, `rs_ew_couplings`, `rs_semileptonic_wilsons`, `rs_ew_spectrum` extra) not existing yet is EXPECTED — 3a creates them.
+
+OUTPUT (<=14 lines): the revised lepton-side spec, the prefactor pin for z_delta_g, the relocated 3a-gate tests, the LFU-ratio + C7 notes, and the enumerated rare-B files. Confirm plan.md updated. PLAN ONLY — no code.
