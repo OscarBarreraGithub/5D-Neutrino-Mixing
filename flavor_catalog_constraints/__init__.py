@@ -23,7 +23,13 @@ from .base import (
     ParameterPoint,
     Severity,
 )
-from .point_builder import KNOWN_EXTRA_KEYS, build_from_quark_couplings, empty_point, make_point
+from .point_builder import (
+    KNOWN_EXTRA_KEYS,
+    build_from_quark_couplings,
+    build_from_rs_ew_inputs,
+    empty_point,
+    make_point,
+)
 from .registry import (
     all_constraints,
     by_family,
@@ -58,5 +64,6 @@ __all__ = [
     "make_point",
     "empty_point",
     "build_from_quark_couplings",
+    "build_from_rs_ew_inputs",
     "KNOWN_EXTRA_KEYS",
 ]

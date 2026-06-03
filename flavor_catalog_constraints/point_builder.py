@@ -24,6 +24,12 @@ has computed":
     (mapping a raw scan row -> couplings) is a separate later task, but
     the construction path itself is usable today.
 
+``build_from_rs_ew_inputs(quark_fit_result, *, Lambda_IR, ...)``
+    Phase-3a electroweak builder. It constructs the RS-EW spectrum,
+    quark mass-basis light-Z shifts, neutral semileptonic contacts, and
+    C9/C10 Wilson bundles as extras. It deliberately does not rewire
+    any constraint consumer.
+
 The set of recognized extra keys lives in :data:`KNOWN_EXTRA_KEYS`; the
 contract test asserts every key a constraint reads is declared here, and
 :func:`make_point` enforces it at runtime.
@@ -40,6 +46,7 @@ __all__ = [
     "make_point",
     "empty_point",
     "build_from_quark_couplings",
+    "build_from_rs_ew_inputs",
 ]
 
 # The single registry of valid ``ParameterPoint.extras`` keys. Adding a
@@ -51,6 +58,9 @@ KNOWN_EXTRA_KEYS: frozenset[str] = frozenset(
         "kk_gluon_mass_gev",           # float, KK gluon mass (GeV)
         "kk_ew_mass_gev",              # float, KK electroweak gauge boson mass (GeV)
         "lepton_mass_basis_couplings", # future lepton-sector couplings object
+        "rs_ew_spectrum",              # quarkConstraints.rs_ew_spectrum.RSEWSpectrum
+        "rs_ew_couplings",             # quarkConstraints.rs_ew_couplings.RSEWMassBasisCouplings
+        "rs_semileptonic_wilsons",     # quarkConstraints.rs_semileptonic_wilsons.RSSemileptonicWilsonBundle
     }
 )
 
@@ -88,4 +98,37 @@ def build_from_quark_couplings(couplings: Any, *, raw: Any = None) -> ParameterP
     m_kk = getattr(couplings, "M_KK", None)
     if m_kk is not None:
         extras["kk_gluon_mass_gev"] = float(m_kk)
+    return make_point(raw=raw, **extras)
+
+
+def build_from_rs_ew_inputs(
+    quark_fit_result: Any,
+    *,
+    Lambda_IR: float,
+    k: float | None = None,
+    n_gauge_modes: int | None = None,
+    ew_model: str = "minimal_rs",
+    raw: Any = None,
+    **kwargs: Any,
+) -> ParameterPoint:
+    """Build a point carrying Phase-3a RS electroweak extras.
+
+    The fit result must expose ``bulk_state.c_Q``, ``bulk_state.c_u``,
+    ``bulk_state.c_d``, and the four mass-basis rotations
+    ``U_L_u``, ``U_L_d``, ``U_R_u``, ``U_R_d``.
+    """
+
+    from quarkConstraints.rs_ew_spectrum import DEFAULT_N_GAUGE_MODES
+    from warpConfig.baseParams import MPL
+
+    from .rs_ew_builder import build_rs_ew_extras
+
+    extras = build_rs_ew_extras(
+        quark_fit_result,
+        Lambda_IR=float(Lambda_IR),
+        k=float(MPL if k is None else k),
+        n_gauge_modes=int(DEFAULT_N_GAUGE_MODES if n_gauge_modes is None else n_gauge_modes),
+        ew_model=ew_model,
+        **kwargs,
+    )
     return make_point(raw=raw, **extras)
