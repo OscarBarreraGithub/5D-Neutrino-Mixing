@@ -19,12 +19,9 @@ the independent chiral-coupling formula then gives the expected ``A_c`` value.
 
 RS matching status
 ------------------
-NEEDS-HUMAN-PHYSICS.  A rigorous RS prediction for ``Z c_L c_L`` and
-``Z c_R c_R`` shifts requires electroweak KK/Z/Z' spectrum and mixing data,
-custodial representations, fermion embeddings, and brane kinetic terms that
-are not present on ``ParameterPoint``.  The NP part is therefore a documented
-proxy: available up-sector overlap non-universality is mapped onto
-``delta g_c ~ (m_Z/M_KK)^2 Delta overlap``.
+The minimal-RS gauge neutral-current piece is read from the Phase-3a
+``rs_ew_couplings`` extra.  The point-specific ``Zcc`` prediction uses
+``z_delta_g_L/R_u[1,1]`` directly, with no quark-overlap proxy.
 
 Severity
 --------
@@ -44,29 +41,28 @@ from flavor_catalog_constraints import anchors as anchor_scaffold
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.zpole_charm import (
-    ZPOLE_RS_ZCC_PROXY_V1,
     ZPoleQuarkObservables,
     zpole_default_sm_inputs,
     zpole_evaluate_quark,
-    zpole_evaluate_zcc_with_proxy,
     zpole_inputs_with_charm_radiator,
+    zpole_shifted_couplings,
+    zpole_sm_couplings,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "top_higgs_ew"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
-_OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
+_REQUIRED_EXTRA = "rs_ew_couplings"
 
 _RC_OBSERVABLE = "R_c^0"
 _AFB_OBSERVABLE = "A_FB^{0,c}"
 _AC_OBSERVABLE = "A_c"
 _VETO_OBSERVABLES = (_RC_OBSERVABLE, _AC_OBSERVABLE)
 
-_NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: rigorous RS Zcc matching requires EW KK/Z/Z' "
-    "coupling shifts, custodial representations, fermion embeddings, brane "
-    "kinetic terms, and Z-mixing data not present on ParameterPoint; this v1 "
-    "uses the documented charm-vs-up overlap non-universality proxy."
+_UNEVALUATED_REASON = "rs_ew_couplings not provided"
+_UNEVALUATED_NOTES = (
+    "T012 not evaluated: rs_ew_couplings not provided on ParameterPoint. "
+    "Result is non-vetoing and diagnostic-only; build points with "
+    "build_from_rs_ew_inputs for the rigorous Phase-3b path."
 )
 
 
@@ -303,6 +299,16 @@ def _pull_diagnostics(pull: ObservablePull, budget: ObservableBudget) -> dict[st
     }
 
 
+def _coupling_entry(source: Any, matrix_name: str, row: int, column: int) -> complex:
+    try:
+        value = complex(getattr(source, matrix_name)[row, column])
+    except (AttributeError, TypeError, KeyError, IndexError) as exc:
+        raise ValueError(f"{matrix_name}[{row},{column}] is not available") from exc
+    if not math.isfinite(value.real) or not math.isfinite(value.imag):
+        raise ValueError(f"{matrix_name}[{row},{column}] must be finite")
+    return value
+
+
 @register
 class Constraint:
     """Catalogued ``Z -> c cbar`` precision-electroweak constraint."""
@@ -320,18 +326,62 @@ class Constraint:
         )
         self.sm_observables = zpole_evaluate_quark("c", inputs=self.sm_inputs)
 
+    def _unevaluated_result(self, diagnostics: Mapping[str, Any]) -> ConstraintResult:
+        return ConstraintResult(
+            process_id=self.process_id,
+            severity=self.severity,
+            passes=True,
+            predicted=None,
+            sm_prediction=float(self.sm_observables.r_q),
+            experimental=float(self.anchor.value),
+            ratio=None,
+            budget=float(self.anchor.budget),
+            notes=_UNEVALUATED_NOTES,
+            diagnostics={
+                "evaluated": False,
+                "unevaluated_reason": _UNEVALUATED_REASON,
+                "passes_semantics": (
+                    "non-vetoing only; no Zcc Phase-3b NP prediction was evaluated"
+                ),
+                "required_parameter_point_extras": [_REQUIRED_EXTRA],
+                **dict(diagnostics),
+            },
+        )
+
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        proxy = None
-        missing_extra = couplings is None
-        if missing_extra:
-            prediction = self.sm_observables
-        else:
-            prediction, proxy = zpole_evaluate_zcc_with_proxy(
-                couplings,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-                inputs=self.sm_inputs,
+        rs_ew_couplings = point.get_extra(_REQUIRED_EXTRA)
+        if rs_ew_couplings is None:
+            return self._unevaluated_result(
+                {
+                    "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
+                }
+            )
+
+        try:
+            delta_g_left_c = _coupling_entry(
+                rs_ew_couplings, "z_delta_g_L_u", 1, 1
+            )
+            delta_g_right_c = _coupling_entry(
+                rs_ew_couplings, "z_delta_g_R_u", 1, 1
+            )
+            shifted_charm = zpole_shifted_couplings(
+                zpole_sm_couplings("c", self.sm_inputs),
+                delta_g_left=delta_g_left_c,
+                delta_g_right=delta_g_right_c,
+            )
+            prediction = zpole_evaluate_quark(
+                "c", {"c": shifted_charm}, inputs=self.sm_inputs
+            )
+        except (AttributeError, TypeError, ValueError) as exc:
+            return self._unevaluated_result(
+                {
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception": str(exc),
+                }
             )
 
         pulls = _pulls_for_observables(
@@ -344,6 +394,7 @@ class Constraint:
         passes = bool(ratio <= 1.0)
 
         diagnostics: dict[str, Any] = {
+            "evaluated": True,
             "selected_observable": selected.observable,
             "observables": {
                 key: _pull_diagnostics(pull, self.anchor.budgets[key])
@@ -365,17 +416,19 @@ class Constraint:
                 "sm_formula": float(self.sm_observables.a_fb),
                 "source_url": self.anchor.a_fb.source_url,
             },
-            "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
-            "rs_matching_assumption": ZPOLE_RS_ZCC_PROXY_V1,
+            "rs_matching_assumption": getattr(
+                rs_ew_couplings, "matching_assumption", None
+            ),
+            "rs_ew_model_label": getattr(rs_ew_couplings, "model_label", None),
+            "rs_ew_kk_mass_gev": float(getattr(rs_ew_couplings, "kk_ew_mass_gev")),
+            "delta_g_left_c": complex(delta_g_left_c),
+            "delta_g_right_c": complex(delta_g_right_c),
+            "shifted_zcc_couplings": {
+                "g_left": complex(shifted_charm.g_left),
+                "g_right": complex(shifted_charm.g_right),
+            },
             "required_parameter_point_extras": [_REQUIRED_EXTRA],
-            "kk_ew_mass_extra_used": kk_ew_mass is not None,
         }
-        if missing_extra:
-            diagnostics["missing_extra"] = _REQUIRED_EXTRA
-        if proxy is not None:
-            diagnostics["zcc_proxy"] = dict(proxy.diagnostics)
-            diagnostics["delta_g_left_c"] = float(proxy.delta_g_left_c)
-            diagnostics["delta_g_right_c"] = float(proxy.delta_g_right_c)
 
         return ConstraintResult(
             process_id=self.process_id,
@@ -390,8 +443,8 @@ class Constraint:
                 "Max one-sigma pull over R_c^0 and A_c. SM-limit "
                 "pseudo-observables use effective Zcc couplings with the "
                 "charm width radiator calibrated to the YAML R_c^0 anchor. "
-                "Point-specific RS shifts use a documented Zcc coupling-shift "
-                "proxy and are flagged NEEDS-HUMAN-PHYSICS."
+                "Point-specific RS shifts use Phase-3a minimal-RS gauge "
+                "neutral-current z_delta_g_L/R_u[1,1]."
             ),
             diagnostics=diagnostics,
         )

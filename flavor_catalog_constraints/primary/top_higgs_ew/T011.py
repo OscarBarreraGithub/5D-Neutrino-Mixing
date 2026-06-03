@@ -20,12 +20,10 @@ sidecar/snapshot provenance.
 
 RS matching status
 ------------------
-NEEDS-HUMAN-PHYSICS.  A rigorous RS prediction for ``Z b_L b_L`` and
-``Z b_R b_R`` shifts requires the electroweak KK/Z/Z' spectrum, custodial
-representations, fermion embeddings, brane kinetic terms, and Z-mixing data.
-Those inputs are not present on ``ParameterPoint``.  The NP part is therefore
-the documented T010 proxy: available bottom-vs-light overlap
-non-universality is mapped onto ``delta g_b ~ (m_Z/M_KK)^2 Delta overlap``.
+PARTIAL / NEEDS-HUMAN-PHYSICS.  The minimal-RS gauge neutral-current piece is
+read from the Phase-3a ``rs_ew_couplings`` extra.  The classic ``Zbb``
+fermion-KK/custodial/BKT completion is not included until Phase 6, so the
+diagnostics keep an explicit partial-status flag.
 
 Severity
 --------
@@ -56,17 +54,16 @@ from flavor_catalog_constraints import anchors as anchor_scaffold
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.zpole import (
-    ZPOLE_RS_ZBB_PROXY_V1,
     ZPoleQuarkObservables,
     zpole_default_sm_inputs,
     zpole_evaluate_quark,
-    zpole_evaluate_zbb_with_proxy,
+    zpole_shifted_couplings,
+    zpole_sm_couplings,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "top_higgs_ew"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
-_OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
+_REQUIRED_EXTRA = "rs_ew_couplings"
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 
 _AFB_OBSERVABLE = "A_FB^{0,b}"
@@ -79,10 +76,16 @@ _SM_SNAPSHOT_LABELS = {
 }
 _NUMBER_RE = r"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?"
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: rigorous RS Zbb asymmetry matching requires EW "
-    "KK/Z/Z' coupling shifts, custodial representations, fermion embeddings, "
-    "brane kinetic terms, and Z-mixing data not present on ParameterPoint; "
-    "this v1 uses the documented bottom-overlap non-universality proxy."
+    "PARTIAL/NEEDS-HUMAN-PHYSICS: Phase-3b uses rigorous minimal-RS gauge "
+    "neutral-current z_delta_g_L/R_d[2,2] from rs_ew_couplings; the classic "
+    "Zbb fermion-KK, custodial-representation, and brane-kinetic-term "
+    "completion is deferred to Phase 6."
+)
+_UNEVALUATED_REASON = "rs_ew_couplings not provided"
+_UNEVALUATED_NOTES = (
+    "T011 not evaluated: rs_ew_couplings not provided on ParameterPoint. "
+    "Result is non-vetoing and diagnostic-only; build points with "
+    "build_from_rs_ew_inputs for the rigorous Phase-3b path."
 )
 
 
@@ -610,6 +613,16 @@ def _shift_diagnostics(
     }
 
 
+def _coupling_entry(source: Any, matrix_name: str, row: int, column: int) -> complex:
+    try:
+        value = complex(getattr(source, matrix_name)[row, column])
+    except (AttributeError, TypeError, KeyError, IndexError) as exc:
+        raise ValueError(f"{matrix_name}[{row},{column}] is not available") from exc
+    if not math.isfinite(value.real) or not math.isfinite(value.imag):
+        raise ValueError(f"{matrix_name}[{row},{column}] must be finite")
+    return value
+
+
 @register
 class Constraint:
     """Catalogued ``Z -> b bbar`` pole-asymmetry constraint."""
@@ -623,18 +636,64 @@ class Constraint:
         self.sm_inputs = zpole_default_sm_inputs()
         self.sm_observables = zpole_evaluate_quark("b", inputs=self.sm_inputs)
 
+    def _unevaluated_result(self, diagnostics: Mapping[str, Any]) -> ConstraintResult:
+        return ConstraintResult(
+            process_id=self.process_id,
+            severity=self.severity,
+            passes=True,
+            predicted=None,
+            sm_prediction=float(self.sm_observables.a_fb),
+            experimental=float(self.anchor.value),
+            ratio=None,
+            budget=float(self.anchor.budget),
+            notes=_UNEVALUATED_NOTES,
+            diagnostics={
+                "evaluated": False,
+                "unevaluated_reason": _UNEVALUATED_REASON,
+                "passes_semantics": (
+                    "non-vetoing only; no Zbb Phase-3b asymmetry prediction "
+                    "was evaluated"
+                ),
+                "required_parameter_point_extras": [_REQUIRED_EXTRA],
+                "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+                **dict(diagnostics),
+            },
+        )
+
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        proxy = None
-        missing_extra = couplings is None
-        if missing_extra:
-            prediction = self.sm_observables
-        else:
-            prediction, proxy = zpole_evaluate_zbb_with_proxy(
-                couplings,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-                inputs=self.sm_inputs,
+        rs_ew_couplings = point.get_extra(_REQUIRED_EXTRA)
+        if rs_ew_couplings is None:
+            return self._unevaluated_result(
+                {
+                    "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
+                }
+            )
+
+        try:
+            delta_g_left_b = _coupling_entry(
+                rs_ew_couplings, "z_delta_g_L_d", 2, 2
+            )
+            delta_g_right_b = _coupling_entry(
+                rs_ew_couplings, "z_delta_g_R_d", 2, 2
+            )
+            shifted_bottom = zpole_shifted_couplings(
+                zpole_sm_couplings("b", self.sm_inputs),
+                delta_g_left=delta_g_left_b,
+                delta_g_right=delta_g_right_b,
+            )
+            prediction = zpole_evaluate_quark(
+                "b", {"b": shifted_bottom}, inputs=self.sm_inputs
+            )
+        except (AttributeError, TypeError, ValueError) as exc:
+            return self._unevaluated_result(
+                {
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception": str(exc),
+                }
             )
 
         shifts = _shifts_for_observables(
@@ -646,6 +705,7 @@ class Constraint:
         passes = bool(selected.ratio <= 1.0)
 
         diagnostics: dict[str, Any] = {
+            "evaluated": True,
             "selected_observable": selected.observable,
             "observables": {
                 key: _shift_diagnostics(shift, self.anchor.budgets[key])
@@ -676,16 +736,19 @@ class Constraint:
             "source_process_id": self.anchor.source_process_id,
             "canonical_home_fallback": self.anchor.canonical_home_fallback,
             "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
-            "rs_matching_assumption": ZPOLE_RS_ZBB_PROXY_V1,
+            "rs_matching_assumption": getattr(
+                rs_ew_couplings, "matching_assumption", None
+            ),
+            "rs_ew_model_label": getattr(rs_ew_couplings, "model_label", None),
+            "rs_ew_kk_mass_gev": float(getattr(rs_ew_couplings, "kk_ew_mass_gev")),
+            "delta_g_left_b": complex(delta_g_left_b),
+            "delta_g_right_b": complex(delta_g_right_b),
+            "shifted_zbb_couplings": {
+                "g_left": complex(shifted_bottom.g_left),
+                "g_right": complex(shifted_bottom.g_right),
+            },
             "required_parameter_point_extras": [_REQUIRED_EXTRA],
-            "kk_ew_mass_extra_used": kk_ew_mass is not None,
         }
-        if missing_extra:
-            diagnostics["missing_extra"] = _REQUIRED_EXTRA
-        if proxy is not None:
-            diagnostics["zbb_proxy"] = dict(proxy.diagnostics)
-            diagnostics["delta_g_left_b"] = float(proxy.delta_g_left_b)
-            diagnostics["delta_g_right_b"] = float(proxy.delta_g_right_b)
 
         return ConstraintResult(
             process_id=self.process_id,
@@ -699,8 +762,10 @@ class Constraint:
             notes=(
                 "Max NP-shift ratio over A_FB^{0,b} and A_b. SM-limit "
                 "pseudo-observables use effective Zbb and Zee couplings; "
-                "point-specific RS shifts use the documented Zbb "
-                "coupling-shift proxy and are flagged NEEDS-HUMAN-PHYSICS. "
+                "point-specific RS shifts use Phase-3a minimal-RS gauge "
+                "neutral-current z_delta_g_L/R_d[2,2]. Zbb "
+                "fermion-KK/custodial/BKT completion remains "
+                "PARTIAL/NEEDS-HUMAN-PHYSICS. "
                 "The budget is the LEP/SLC exp-vs-SM loose edge from YAML "
                 "provenance."
             ),

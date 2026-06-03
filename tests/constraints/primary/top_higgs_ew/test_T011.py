@@ -21,6 +21,7 @@ from quarkConstraints.zpole import (
     shifted_couplings,
     sm_couplings,
 )
+from tests.rs_ew_phase3b_helpers import sample_rs_ew_point, sm_limit_rs_ew_point
 
 _PID = "T011"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -222,6 +223,34 @@ def test_t011_anchors_route_through_scaffold_load_anchor(monkeypatch):
         t011_module._load_scaffold_entry_anchor("A_b", process_id=_PID)
 
 
+def _manual_zbb_observables(constraint, point):
+    inputs = constraint.sm_inputs
+    couplings = point.extras["rs_ew_couplings"]
+    delta_g_left = complex(couplings.z_delta_g_L_d[2, 2])
+    delta_g_right = complex(couplings.z_delta_g_R_d[2, 2])
+    shifted_bottom = shifted_couplings(
+        sm_couplings("b", inputs),
+        delta_g_left=delta_g_left,
+        delta_g_right=delta_g_right,
+    )
+    observables = evaluate_quark_pseudo_observables(
+        "b",
+        {"b": shifted_bottom},
+        inputs=inputs,
+    )
+    return delta_g_left, delta_g_right, shifted_bottom, observables
+
+
+def _manual_t011_ratio(constraint, observables):
+    manual_a_fb_shift = observables.a_fb - constraint.sm_observables.a_fb
+    manual_a_b_shift = observables.a_q - constraint.sm_observables.a_q
+    return max(
+        abs(manual_a_fb_shift)
+        / constraint.anchor.budgets["A_FB^{0,b}"].hard_veto_budget,
+        abs(manual_a_b_shift) / constraint.anchor.budgets["A_b"].hard_veto_budget,
+    )
+
+
 def test_sm_zpole_asymmetries_match_independent_effective_coupling_recomputation():
     constraint = fcc.get(_PID)
     inputs = constraint.sm_inputs
@@ -234,7 +263,7 @@ def test_sm_zpole_asymmetries_match_independent_effective_coupling_recomputation
     manual_a_b = (gl_b * gl_b - gr_b * gr_b) / (gl_b * gl_b + gr_b * gr_b)
     manual_a_fb = 0.75 * manual_a_e * manual_a_b
 
-    result = constraint.evaluate(point_builder.empty_point())
+    result = constraint.evaluate(sm_limit_rs_ew_point())
 
     assert manual_a_b == pytest.approx(constraint.sm_observables.a_q)
     assert manual_a_fb == pytest.approx(constraint.sm_observables.a_fb)
@@ -249,71 +278,59 @@ def test_sm_zpole_asymmetries_match_independent_effective_coupling_recomputation
     assert result.diagnostics["legacy_a_fb_context"]["lep_slc_pull_sigma"] == (
         pytest.approx(2.8)
     )
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["delta_g_left_b"] == pytest.approx(0.0j)
+    assert result.diagnostics["delta_g_right_b"] == pytest.approx(0.0j)
 
 
-def test_shifted_zbb_point_matches_independent_core_recomputation():
+def test_rigorous_rs_ew_zbb_point_matches_independent_core_recomputation():
     constraint = fcc.get(_PID)
-    couplings = _zbb_couplings(
-        left_diag=(0.0, 0.0, 0.0),
-        right_diag=(0.0, 0.0, 30.0),
+    point = sample_rs_ew_point()
+    delta_left, delta_right, shifted_bottom, manual_observables = (
+        _manual_zbb_observables(constraint, point)
     )
-    point = point_builder.build_from_quark_couplings(couplings)
     result = constraint.evaluate(point)
 
-    inputs = constraint.sm_inputs
-    scale = float((inputs.m_z_gev / couplings.M_KK) ** 2)
-    right_overlap = np.asarray(couplings.right_down_overlap, dtype=np.complex128)
-    right_nonuniversality = float(
-        (right_overlap[2, 2] - 0.5 * (right_overlap[0, 0] + right_overlap[1, 1])).real
+    assert delta_left != pytest.approx(0.0j)
+    assert delta_right != pytest.approx(0.0j)
+    assert result.diagnostics["evaluated"] is True
+    assert "zbb_proxy" not in result.diagnostics
+    assert result.diagnostics["delta_g_left_b"] == pytest.approx(delta_left)
+    assert result.diagnostics["delta_g_right_b"] == pytest.approx(delta_right)
+    assert result.diagnostics["shifted_zbb_couplings"]["g_left"] == pytest.approx(
+        shifted_bottom.g_left
     )
-    delta_g_right = float(inputs.proxy_strength * scale * right_nonuniversality)
-    shifted_bottom = shifted_couplings(
-        sm_couplings("b", inputs),
-        delta_g_right=delta_g_right,
+    assert result.diagnostics["shifted_zbb_couplings"]["g_right"] == pytest.approx(
+        shifted_bottom.g_right
     )
-    manual_observables = evaluate_quark_pseudo_observables(
-        "b",
-        {"b": shifted_bottom},
-        inputs=inputs,
-    )
-    manual_a_fb_shift = manual_observables.a_fb - constraint.sm_observables.a_fb
-    manual_a_b_shift = manual_observables.a_q - constraint.sm_observables.a_q
-    manual_ratio = max(
-        abs(manual_a_fb_shift) / constraint.anchor.budgets["A_FB^{0,b}"].hard_veto_budget,
-        abs(manual_a_b_shift) / constraint.anchor.budgets["A_b"].hard_veto_budget,
-    )
-
-    assert delta_g_right != pytest.approx(0.0)
-    assert result.diagnostics["delta_g_right_b"] == pytest.approx(delta_g_right)
     assert result.diagnostics["observables"]["A_FB^{0,b}"]["predicted"] == pytest.approx(
         manual_observables.a_fb
     )
     assert result.diagnostics["observables"]["A_b"]["predicted"] == pytest.approx(
         manual_observables.a_q
     )
-    assert result.ratio == pytest.approx(manual_ratio)
+    assert result.ratio == pytest.approx(_manual_t011_ratio(constraint, manual_observables))
+    assert "PARTIAL/NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
 
 
-def test_evaluate_without_input_reports_sm_limit_and_missing_extra():
-    result = fcc.get(_PID).evaluate(point_builder.empty_point())
+def test_old_style_point_reports_unevaluated_rs_ew_missing_extra():
+    old_style_point = point_builder.build_from_quark_couplings(
+        _zbb_couplings(left_diag=(0.0, 0.0, 0.0), right_diag=(0.0, 0.0, 30.0))
+    )
+    result = fcc.get(_PID).evaluate(old_style_point)
 
     assert result.process_id == _PID
     assert result.passes is True
-    assert result.predicted == pytest.approx(result.sm_prediction)
-    assert result.ratio == pytest.approx(0.0)
-    assert result.budget == pytest.approx(
-        fcc.get(_PID).anchor.budgets["A_FB^{0,b}"].hard_veto_budget
-    )
-    assert result.diagnostics["missing_extra"] == "quark_mass_basis_couplings"
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["missing_extra"] == "rs_ew_couplings"
+    assert result.diagnostics["legacy_quark_mass_basis_couplings_present"] is True
+    assert "rs_ew_couplings not provided" in result.notes
 
 
-def test_evaluate_runs_end_to_end_with_real_finite_fields_and_proxy_diagnostics():
-    couplings = _zbb_couplings(
-        left_diag=(0.0, 0.0, 0.0),
-        right_diag=(0.0, 0.0, 30.0),
-    )
-    point = point_builder.build_from_quark_couplings(couplings)
+def test_evaluate_runs_end_to_end_with_real_finite_fields_and_rs_ew_diagnostics():
+    point = sample_rs_ew_point()
     result = fcc.get(_PID).evaluate(point)
 
     assert result.process_id == _PID
@@ -326,69 +343,39 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_proxy_diagnostics(
     ):
         assert isinstance(value, float)
         assert math.isfinite(value)
-    assert result.passes is False
-    assert result.ratio > 1.0
-    assert isinstance(result.diagnostics["delta_g_left_b"], float)
-    assert isinstance(result.diagnostics["delta_g_right_b"], float)
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["rs_matching_assumption"]
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["zbb_proxy"]["matching_assumption"]
+    assert result.diagnostics["evaluated"] is True
+    assert isinstance(result.diagnostics["delta_g_left_b"], complex)
+    assert isinstance(result.diagnostics["delta_g_right_b"], complex)
+    assert result.diagnostics["rs_matching_assumption"]
 
 
-@pytest.mark.parametrize(
-    ("couplings", "expected_pass"),
-    [
-        (_zbb_couplings(left_diag=(0.2, 0.2, 0.2), right_diag=(0.1, 0.1, 0.1)), True),
-        (_zbb_couplings(left_diag=(0.0, 0.0, 0.0), right_diag=(0.0, 0.0, 30.0)), False),
-    ],
-)
-def test_safe_point_passes_and_large_proxy_shift_fails(
-    couplings: QuarkMassBasisCouplings,
-    expected_pass: bool,
-):
-    point = point_builder.build_from_quark_couplings(couplings)
-    result = fcc.get(_PID).evaluate(point)
+def test_sm_limit_rs_ew_point_recovers_committed_sm_only_output():
+    constraint = fcc.get(_PID)
+    result = constraint.evaluate(sm_limit_rs_ew_point())
 
-    assert result.passes is expected_pass
-    if expected_pass:
-        assert result.ratio < 1.0
-    else:
-        assert result.ratio > 1.0
-
-
-def test_optional_kk_ew_mass_extra_changes_proxy_scale():
-    couplings = _zbb_couplings(
-        left_diag=(0.0, 0.0, 0.0),
-        right_diag=(0.0, 0.0, 30.0),
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["delta_g_left_b"] == pytest.approx(0.0j)
+    assert result.diagnostics["delta_g_right_b"] == pytest.approx(0.0j)
+    assert result.diagnostics["observables"]["A_FB^{0,b}"]["predicted"] == pytest.approx(
+        constraint.sm_observables.a_fb
     )
-    default_point = point_builder.build_from_quark_couplings(couplings)
-    ew_point = point_builder.make_point(
-        quark_mass_basis_couplings=couplings,
-        kk_ew_mass_gev=6000.0,
+    assert result.diagnostics["observables"]["A_b"]["predicted"] == pytest.approx(
+        constraint.sm_observables.a_q
     )
-    default_result = fcc.get(_PID).evaluate(default_point)
-    ew_result = fcc.get(_PID).evaluate(ew_point)
-
-    assert default_result.diagnostics["zbb_proxy"]["m_kk_gev"] == pytest.approx(3000.0)
-    assert ew_result.diagnostics["zbb_proxy"]["m_kk_gev"] == pytest.approx(6000.0)
-    assert ew_result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert ew_result.diagnostics["delta_g_right_b"] == pytest.approx(
-        default_result.diagnostics["delta_g_right_b"] / 4.0
-    )
+    assert result.predicted == pytest.approx(result.sm_prediction)
+    assert result.ratio == pytest.approx(0.0)
 
 
 def test_evaluate_is_pure_and_deterministic():
-    couplings = _zbb_couplings(
-        left_diag=(0.0, 0.0, 0.0),
-        right_diag=(0.0, 0.0, 30.0),
-    )
-    before_left = couplings.left_overlap.copy()
-    before_right = couplings.right_down_overlap.copy()
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sample_rs_ew_point()
+    couplings = point.extras["rs_ew_couplings"]
+    before_left = couplings.z_delta_g_L_d.copy()
+    before_right = couplings.z_delta_g_R_d.copy()
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    np.testing.assert_array_equal(couplings.left_overlap, before_left)
-    np.testing.assert_array_equal(couplings.right_down_overlap, before_right)
+    np.testing.assert_array_equal(couplings.z_delta_g_L_d, before_left)
+    np.testing.assert_array_equal(couplings.z_delta_g_R_d, before_right)
