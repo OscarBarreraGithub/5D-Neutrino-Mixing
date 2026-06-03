@@ -13,6 +13,10 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.top_higgs_ew import EW003 as ew003_module
+from tests.constraints.charged_current_phase5b_helpers import (
+    charged_with_epsilon,
+    universal_charged_point,
+)
 
 _PID = "EW003"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -177,6 +181,80 @@ def test_numerical_pulls_match_independent_yaml_recomputation():
     assert result.budget == pytest.approx(3.0)
     assert result.ratio == pytest.approx(max_pull / 3.0)
     assert result.sm_prediction == pytest.approx(0.0)
+
+
+def test_absent_charged_current_path_keeps_data_level_pull_non_crashing():
+    constraint = fcc.get(_PID)
+    result = constraint.evaluate(point_builder.empty_point())
+
+    assert result.predicted == pytest.approx(3.0728851183895105)
+    assert result.experimental == pytest.approx(3.0)
+    assert result.ratio == pytest.approx(3.0728851183895105 / 3.0)
+    assert result.diagnostics["charged_current_diagnostics_available"] is False
+    assert (
+        result.diagnostics["charged_current_missing_optional_extra"]
+        == "rs_charged_current"
+    )
+    assert result.diagnostics["parameter_point_used_for_scalar_pull"] is False
+
+
+def test_charged_current_epsilon_diagnostics_preserve_scalar_pull():
+    constraint = fcc.get(_PID)
+    baseline = constraint.evaluate(point_builder.empty_point())
+    result = constraint.evaluate(universal_charged_point())
+    diagnostics = result.diagnostics["charged_current_diagnostics"]
+
+    assert result.predicted == pytest.approx(baseline.predicted)
+    assert result.experimental == pytest.approx(baseline.experimental)
+    assert result.ratio == pytest.approx(baseline.ratio)
+    assert result.passes is baseline.passes
+    assert result.diagnostics["charged_current_diagnostics_available"] is True
+    assert isinstance(diagnostics["epsilon_cb_light_average_e_mu"], complex)
+    assert isinstance(diagnostics["epsilon_ub_light_average_e_mu"], complex)
+    assert diagnostics["epsilon_cb"]["up_flavor"] == "c"
+    assert diagnostics["epsilon_cb"]["down_flavor"] == "b"
+    assert diagnostics["epsilon_ub"]["up_flavor"] == "u"
+    assert diagnostics["epsilon_ub"]["down_flavor"] == "b"
+    assert "m_wprime_gev" in diagnostics
+
+
+def test_universal_charged_current_shift_cancels_in_inclusive_exclusive_ratio():
+    constraint = fcc.get(_PID)
+    baseline = constraint.evaluate(point_builder.empty_point())
+    updates = {}
+    for lepton_index in range(3):
+        updates[(1, 2, lepton_index)] = 0.2 + 0.0j
+        updates[(0, 2, lepton_index)] = 0.2 + 0.0j
+    charged = charged_with_epsilon(
+        universal_charged_point().extras["rs_charged_current"],
+        updates,
+    )
+    result = constraint.evaluate(point_builder.make_point(rs_charged_current=charged))
+    diagnostics = result.diagnostics["charged_current_diagnostics"]
+
+    assert diagnostics["epsilon_cb_light_average_e_mu"] == pytest.approx(0.2 + 0.0j)
+    assert diagnostics["epsilon_ub_light_average_e_mu"] == pytest.approx(0.2 + 0.0j)
+    assert diagnostics["epsilon_cb_abs_1_plus"] == pytest.approx(1.2)
+    assert diagnostics["epsilon_ub_abs_1_plus"] == pytest.approx(1.2)
+    assert diagnostics["universal_cc_ratio_multiplier_vcb"] == pytest.approx(1.0)
+    assert diagnostics["universal_cc_ratio_multiplier_vub"] == pytest.approx(1.0)
+    assert diagnostics["universal_cc_pull_multiplier_vcb"] == pytest.approx(1.0)
+    assert diagnostics["universal_cc_pull_multiplier_vub"] == pytest.approx(1.0)
+    assert diagnostics["universal_cc_pull_shift_sigma_vcb"] == pytest.approx(0.0)
+    assert diagnostics["universal_cc_pull_shift_sigma_vub"] == pytest.approx(0.0)
+    assert diagnostics["universal_cc_cancellation_documented"] is True
+    assert result.predicted == pytest.approx(baseline.predicted)
+    assert result.ratio == pytest.approx(baseline.ratio)
+
+
+def test_covariance_scheme_needs_human_note_is_present():
+    result = fcc.get(_PID).evaluate(point_builder.empty_point())
+
+    assert result.diagnostics["matching_coverage"] == "PARTIAL"
+    assert result.diagnostics["ew003_covariance_scheme_input_supplied"] is False
+    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert "covariance/scheme" in result.diagnostics["needs_human_physics"]
+    assert "diagnostic only" in result.notes
 
 
 def test_safe_subobservable_passes_and_tension_subobservable_fails_soft_budget():

@@ -12,13 +12,19 @@ using asymmetric uncertainty components when the YAML provides them.  The
 statistical machinery lives in
 ``flavor_catalog_constraints.physics_adapters.semileptonic_ckm``.
 
+For points carrying ``rs_charged_current``, EW003 also reports the minimal-LH
+``epsilon_cb`` and ``epsilon_ub`` charged-current diagnostics from the shared
+adapter.  These diagnostics do not alter the scalar pull: a common vector
+rescaling ``|1 + epsilon|`` cancels in an inclusive/exclusive ratio for the
+same CKM element.  A differential treatment is only possible with a supplied
+covariance/scheme model.
+
 NEEDS-HUMAN-PHYSICS
 -------------------
-Rigorous RS matching for this observable would require charged-current
-W/W'/KK electroweak operators plus inclusive-scheme, exclusive form-factor,
-and CKM-fit covariance inputs that are not available on ``ParameterPoint``.
-No ungrounded RS proxy is applied; the result reports the data tension and
-flags this matching gap in diagnostics.
+Rigorous RS matching for this observable would require inclusive-scheme,
+exclusive form-factor, and CKM-fit covariance inputs that are not available on
+``ParameterPoint``.  No ungrounded RS proxy is applied; the result reports the
+data tension and flags this matching gap in diagnostics.
 
 Severity
 --------
@@ -42,10 +48,15 @@ from typing import Any, Mapping, Sequence
 from flavor_catalog_constraints import anchors as anchor_scaffold
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
+from flavor_catalog_constraints.physics_adapters.charged_current import (
+    EW003_CKM_TENSION_COVARIANCE_NEEDS_HUMAN,
+    EW003_CKM_TENSION_DIAGNOSTIC_STATUS,
+    charged_current_ckm_tension_diagnostics,
+    charged_current_source_diagnostics,
+)
 from flavor_catalog_constraints.physics_adapters.semileptonic_ckm import (
     CKMDetermination,
     InclusiveExclusivePull,
-    SEMILEPTONIC_CKM_RS_MATCHING_GAP,
     inclusive_exclusive_pull,
     summarize_ckm_tensions,
     uncertainty_from_components,
@@ -59,6 +70,7 @@ _PRIMARY_BUDGET_SOURCE = (
     "flavor_catalog/processes/top_higgs_ew/EW003.yaml: "
     "PDG 2024 |V_cb| inclusive-exclusive marginal consistency"
 )
+_OPTIONAL_CHARGED_CURRENT_EXTRA = "rs_charged_current"
 
 _PDG_VCB_INCLUSIVE = "PDG 2024 |V_cb| inclusive"
 _PDG_VCB_EXCLUSIVE = "PDG 2024 |V_cb| exclusive"
@@ -408,7 +420,7 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        diagnostics = {
+        diagnostics: dict[str, Any] = {
             "primary_pulls": {
                 self.pdg_vcb_pull.observable: _pull_diagnostics(self.pdg_vcb_pull),
                 self.pdg_vub_pull.observable: _pull_diagnostics(self.pdg_vub_pull),
@@ -432,11 +444,48 @@ class Constraint:
             "flag_vub_exclusive": float(self.anchor.flag_vub_exclusive.value),
             "budget_source": _PRIMARY_BUDGET_SOURCE,
             "budget_block": self.anchor.pdg_vcb_consistency_sigma.block_key,
-            "needs_human_physics": SEMILEPTONIC_CKM_RS_MATCHING_GAP,
+            "matching_coverage": "PARTIAL",
+            "ew003_charged_current_status": EW003_CKM_TENSION_DIAGNOSTIC_STATUS,
+            "ew003_covariance_scheme_status": (
+                EW003_CKM_TENSION_COVARIANCE_NEEDS_HUMAN
+            ),
+            "ew003_covariance_scheme_input_supplied": False,
+            "needs_human_physics": EW003_CKM_TENSION_COVARIANCE_NEEDS_HUMAN,
             "required_parameter_point_extras": [],
+            "optional_parameter_point_extras": [_OPTIONAL_CHARGED_CURRENT_EXTRA],
             "parameter_point_used": False,
+            "parameter_point_used_for_scalar_pull": False,
             "qcd_running_applied": False,
         }
+        charged = point.get_extra(_OPTIONAL_CHARGED_CURRENT_EXTRA)
+        if charged is None:
+            diagnostics.update(
+                {
+                    "charged_current_diagnostics_available": False,
+                    "charged_current_missing_optional_extra": (
+                        _OPTIONAL_CHARGED_CURRENT_EXTRA
+                    ),
+                }
+            )
+        else:
+            try:
+                diagnostics["charged_current_diagnostics"] = {
+                    **charged_current_ckm_tension_diagnostics(charged),
+                    **charged_current_source_diagnostics(charged),
+                }
+                diagnostics["charged_current_diagnostics_available"] = True
+                diagnostics["charged_current_missing_optional_extra"] = None
+            except Exception as exc:  # noqa: BLE001 - diagnostics degrade cleanly
+                diagnostics.update(
+                    {
+                        "charged_current_diagnostics_available": False,
+                        "charged_current_invalid_optional_extra": (
+                            _OPTIONAL_CHARGED_CURRENT_EXTRA
+                        ),
+                        "charged_current_exception_type": type(exc).__name__,
+                        "charged_current_exception_message": str(exc),
+                    }
+                )
 
         return ConstraintResult(
             process_id=self.process_id,
@@ -452,7 +501,9 @@ class Constraint:
                 "Primary scalar is max(PDG |V_cb| pull, PDG |V_ub| pull) "
                 "compared with the PDG 3.0 sigma marginal-consistency anchor; "
                 "SOFT failure flags tension but is not an NP veto. "
-                "No RS charged-current matching is applied."
+                "Minimal-LH charged-current epsilons are diagnostic only "
+                "because a universal rescaling cancels without a "
+                "covariance/scheme input."
             ),
             diagnostics=diagnostics,
         )

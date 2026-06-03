@@ -15,10 +15,13 @@ __all__ = [
     "CHARGED_CURRENT_MINIMAL_LH_STATUS",
     "CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN",
     "B025_PARTIAL_MATCHING_STATUS",
+    "EW003_CKM_TENSION_COVARIANCE_NEEDS_HUMAN",
+    "EW003_CKM_TENSION_DIAGNOSTIC_STATUS",
     "ChargedCurrentEpsilon",
     "ChargedCurrentFirstRowShift",
     "RSChargedCurrentCouplings",
     "charged_current_epsilon",
+    "charged_current_ckm_tension_diagnostics",
     "charged_current_light_epsilon",
     "charged_current_source_diagnostics",
     "ckm_first_row_delta_np",
@@ -40,6 +43,19 @@ B025_PARTIAL_MATCHING_STATUS = (
     "PARTIAL: the minimal vector LFU-ratio tree is evaluated from epsilon_cb, "
     "but scalar/RH WET coefficients and B -> D form-factor integration are not "
     "built."
+)
+EW003_CKM_TENSION_COVARIANCE_NEEDS_HUMAN = (
+    "NEEDS-HUMAN-PHYSICS: a rigorous inclusive-vs-exclusive |V_cb|/|V_ub| "
+    "charged-current treatment needs a covariance/scheme input separating "
+    "inclusive and exclusive CKM/form-factor uncertainties. The v1 "
+    "rs_charged_current epsilon is common to both determinations, so it is "
+    "reported only as a diagnostic and is not a naive NP veto."
+)
+EW003_CKM_TENSION_DIAGNOSTIC_STATUS = (
+    "PARTIAL/data-level: EW003 keeps the data-level inclusive-vs-exclusive "
+    "pull. Minimal-LH epsilon_cb and epsilon_ub are surfaced as diagnostics; "
+    "a universal charged-current rescaling cancels in each inclusive/exclusive "
+    "ratio."
 )
 
 _UP_INDEX = {"u": 0, "c": 1, "t": 2}
@@ -168,6 +184,45 @@ def ckm_first_row_delta_np(
     )
 
 
+def charged_current_ckm_tension_diagnostics(
+    source: RSChargedCurrentCouplings,
+) -> dict[str, Any]:
+    """Return EW003 diagnostics for common ``|V_cb|``/``|V_ub|`` rescalings.
+
+    EW003 compares inclusive and exclusive determinations of the same CKM
+    element.  With only the v1 common charged-current epsilon available, both
+    determinations receive the same ``|1 + epsilon|`` factor, so their ratio
+    and Gaussian tension are unchanged.  A differential treatment needs an
+    external covariance/scheme model and is intentionally not inferred here.
+    """
+
+    eps_cb = charged_current_light_epsilon(source, up="c", down="b")
+    eps_ub = charged_current_light_epsilon(source, up="u", down="b")
+    cb_ratio_multiplier = _common_rescaling_ratio_multiplier(eps_cb)
+    ub_ratio_multiplier = _common_rescaling_ratio_multiplier(eps_ub)
+    return {
+        "ew003_matching_coverage": "PARTIAL",
+        "ew003_charged_current_status": EW003_CKM_TENSION_DIAGNOSTIC_STATUS,
+        "ew003_covariance_scheme_status": (
+            EW003_CKM_TENSION_COVARIANCE_NEEDS_HUMAN
+        ),
+        "epsilon_cb": eps_cb.diagnostics,
+        "epsilon_ub": eps_ub.diagnostics,
+        "epsilon_cb_light_average_e_mu": eps_cb.epsilon,
+        "epsilon_ub_light_average_e_mu": eps_ub.epsilon,
+        "epsilon_cb_abs_1_plus": float(eps_cb.abs_multiplier),
+        "epsilon_ub_abs_1_plus": float(eps_ub.abs_multiplier),
+        "universal_cc_ratio_multiplier_vcb": float(cb_ratio_multiplier),
+        "universal_cc_ratio_multiplier_vub": float(ub_ratio_multiplier),
+        "universal_cc_pull_multiplier_vcb": float(cb_ratio_multiplier),
+        "universal_cc_pull_multiplier_vub": float(ub_ratio_multiplier),
+        "universal_cc_pull_shift_sigma_vcb": float(cb_ratio_multiplier - 1.0),
+        "universal_cc_pull_shift_sigma_vub": float(ub_ratio_multiplier - 1.0),
+        "universal_cc_cancellation_documented": True,
+        "universal_cc_cancellation_applied_to_scalar": False,
+    }
+
+
 def shifted_abs_ckm(ckm_abs: float, epsilon: ChargedCurrentEpsilon) -> float:
     """Return ``|V|_app = |V| |1 + epsilon|``."""
 
@@ -251,3 +306,10 @@ def _positive_real(value: float, name: str) -> float:
     if number <= 0.0:
         raise ValueError(f"{name} must be positive")
     return number
+
+
+def _common_rescaling_ratio_multiplier(epsilon: ChargedCurrentEpsilon) -> float:
+    multiplier = float(epsilon.abs_multiplier)
+    if multiplier <= 0.0:
+        raise ValueError("|1+epsilon| must be positive for ratio diagnostics")
+    return float(multiplier / multiplier)
