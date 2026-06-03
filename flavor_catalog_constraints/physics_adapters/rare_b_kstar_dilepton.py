@@ -7,6 +7,8 @@ matching and adds the vector-mode normalization needed by B019.
 
 from __future__ import annotations
 
+from dataclasses import replace
+
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.rare_b_kstar_dilepton import (
     RARE_B_DILEPTON_EXCLUSIVE_BKSTAR_FORM_FACTOR_BUNDLE_V1,
@@ -27,6 +29,12 @@ from quarkConstraints.rare_b_dilepton import (
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
     RareBDileptonWilsonCoefficients,
 )
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
+
+from .rare_b_meson import (
+    rare_b_dilepton_wilsons_from_rs_semileptonic,
+    rare_b_rs_semileptonic_vector_diagnostics,
+)
 
 __all__ = [
     "QuarkMassBasisCouplings",
@@ -46,6 +54,8 @@ __all__ = [
     "rare_b_to_kstar_mumu_sm_branching_fraction",
     "rare_b_to_kstar_mumu_branching_fraction",
     "bzero_kstarzero_mumu_from_couplings",
+    "rare_b_to_kstar_mumu_from_rs_semileptonic_wilsons",
+    "bzero_kstarzero_mumu_from_rs_semileptonic_wilsons",
 ]
 
 
@@ -118,5 +128,59 @@ def bzero_kstarzero_mumu_from_couplings(
         q2_min_gev2=q2_min_gev2,
         q2_max_gev2=q2_max_gev2,
         m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def rare_b_to_kstar_mumu_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    lepton: str = "mu",
+    mode: str = "bzero_kstarzero",
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    matching_scale_gev: float | None = None,
+    inputs: RareBToKStarDileptonInputs | None = None,
+) -> RareBToKStarDileptonBranchingResult:
+    """Evaluate ``BR(B -> K* l+ l-)`` from Phase-3a RS Wilsons."""
+
+    coeff = source.b_to_s_ll[lepton]
+    wilsons = rare_b_dilepton_wilsons_from_rs_semileptonic(
+        source,
+        transition="b_s",
+        lepton=lepton,
+        matching_scale_gev=matching_scale_gev,
+    )
+    result = _evaluate_b_to_kstar_mumu(
+        wilsons,
+        mode=mode,
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        inputs=inputs,
+    )
+    diagnostics = dict(result.diagnostics)
+    diagnostics.update(rare_b_rs_semileptonic_vector_diagnostics(coeff))
+    diagnostics["matching_assumption"] = coeff.matching_assumption
+    return replace(result, diagnostics=diagnostics)
+
+
+def bzero_kstarzero_mumu_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    lepton: str = "mu",
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    matching_scale_gev: float | None = None,
+    inputs: RareBToKStarDileptonInputs | None = None,
+) -> RareBToKStarDileptonBranchingResult:
+    """Evaluate ``BR(B0 -> K*(892)0 l+ l-)`` from Phase-3a RS Wilsons."""
+
+    return rare_b_to_kstar_mumu_from_rs_semileptonic_wilsons(
+        source,
+        lepton=lepton,
+        mode="bzero_kstarzero",
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        matching_scale_gev=matching_scale_gev,
         inputs=inputs,
     )

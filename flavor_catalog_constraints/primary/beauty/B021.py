@@ -32,10 +32,10 @@ hardcoded here.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The RS contribution uses the documented B005/B016 C9/C10 proxy.  A rigorous
-``Lambda_b -> Lambda mu mu`` likelihood needs EW KK/Z/Z' and lepton matching,
-C7/nonlocal charm, scalar/tensor terms, full baryonic form-factor covariance,
-and experimental bin correlations.
+The Phase-3a RS light-Z contribution supplies rigorous vector/axial
+``C9/C10/C9'/C10'`` Wilsons.  A complete ``Lambda_b -> Lambda mu mu``
+likelihood still needs C7/nonlocal charm, scalar/tensor terms, full baryonic
+form-factor covariance, and experimental bin correlations.
 """
 
 from __future__ import annotations
@@ -53,7 +53,7 @@ from flavor_catalog_constraints.physics_adapters.rare_b_baryon import (
     RARE_B_BARYONIC_DILEPTON_LIMITATION_V1,
     RARE_B_BARYONIC_DILEPTON_PROXY_THEORY_UNCERTAINTY_FRACTION,
     RARE_B_BARYONIC_DILEPTON_PROXY_THEORY_UNCERTAINTY_RATIONALE,
-    lambdab_lambda_mumu_from_couplings,
+    lambdab_lambda_mumu_from_rs_semileptonic_wilsons,
     lambdab_lambda_mumu_sm_branching_fraction,
     rare_b_baryon_dilepton_default_inputs,
 )
@@ -63,7 +63,7 @@ from flavor_catalog_constraints.physics_adapters.rare_b_meson import (
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _TOTAL_OBSERVABLE = "BR(Lambda_b0 -> Lambda mu+ mu-)"
 _HIGH_Q2_DIFFERENTIAL_OBSERVABLE = "dBR/dq2(Lambda_b0 -> Lambda mu+ mu-)"
@@ -79,10 +79,10 @@ _PARAMETRIZATION_CITATION = (
     "Hamiltonian convention reused from B005/B016"
 )
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z', lepton, C7/nonlocal "
-    "charm, scalar/tensor, full baryonic form-factor covariance, and "
-    "experimental-correlation matching is not available on ParameterPoint; "
-    "v1 uses the documented C9/C10 proxy."
+    "NEEDS-HUMAN-PHYSICS: Phase-3a supplies the light-Z vector/axial "
+    "C9/C10/C9'/C10' terms; C7/nonlocal charm, scalar/tensor, full baryonic "
+    "form-factor covariance, and experimental-correlation matching remain "
+    "deferred."
 )
 
 
@@ -587,8 +587,8 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -603,6 +603,9 @@ class Constraint:
                 diagnostics={
                     "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "active_bin": "high_q2_15_to_20_gev2_mumu",
                     "q2_min_gev2": float(self.anchor.q2_min_gev2),
                     "q2_max_gev2": float(self.anchor.q2_max_gev2),
@@ -633,11 +636,12 @@ class Constraint:
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result = lambdab_lambda_mumu_from_couplings(
-                couplings,
+            result = lambdab_lambda_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
                 q2_min_gev2=self.anchor.q2_min_gev2,
                 q2_max_gev2=self.anchor.q2_max_gev2,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
             )
         except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
@@ -649,11 +653,12 @@ class Constraint:
                 experimental=float(self.anchor.value),
                 budget=float(self.anchor.budget),
                 notes=(
-                    "NOT EVALUATED - invalid quark_mass_basis_couplings for "
-                    "the Lambda_b -> Lambda mu mu C9/C10 proxy"
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "the Lambda_b -> Lambda mu mu C9/C10 path"
                 ),
                 diagnostics={
                     "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception_message": str(exc),
                     "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
@@ -727,7 +732,10 @@ class Constraint:
                 "form_factor_uncertainty": (
                     RARE_B_BARYONIC_DILEPTON_PROXY_THEORY_UNCERTAINTY_RATIONALE
                 ),
-                "rs_matching_assumption": RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                "rs_matching_assumption": result.diagnostics.get(
+                    "rs_semileptonic_matching_assumption",
+                    RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                ),
                 "baryonic_limitations": RARE_B_BARYONIC_DILEPTON_LIMITATION_V1,
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
@@ -754,10 +762,9 @@ class Constraint:
             notes=(
                 "BR(Lambda_b -> Lambda mu mu) uses the B021 LHCb high-q2 "
                 "bin and a C9/C10-only leading-HQET baryonic form-factor "
-                "integral.  The RS contribution is the documented mass-basis "
-                "b-s C9/C10 proxy; full EW/lepton matching, C7/nonlocal charm, "
-                "and baryonic form-factor covariance are marked "
-                "NEEDS-HUMAN-PHYSICS.  The HARD ratio is the high-q2 bin BR "
+                "integral. Phase-3a RS semileptonic C9/C10/C9'/C10' Wilsons "
+                "enter additively; C7/nonlocal charm and baryonic form-factor "
+                "covariance remain deferred. The HARD ratio is the high-q2 bin BR "
                 "pull over the 30% proxy-theory budget."
             ),
             diagnostics=diagnostics,

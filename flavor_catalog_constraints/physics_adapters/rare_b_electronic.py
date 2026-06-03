@@ -24,6 +24,11 @@ from quarkConstraints.rare_b_dilepton import (
     evaluate_bq_to_mumu as _evaluate_bq_to_mumu,
     sm_branching_fraction as _sm_branching_fraction,
 )
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
+
+from .rare_b_meson import (
+    bq_mumu_from_rs_semileptonic_wilsons as _bq_mumu_from_rs_semileptonic_wilsons,
+)
 
 __all__ = [
     "ELECTRON_MASS_GEV",
@@ -43,6 +48,9 @@ __all__ = [
     "bq_ee_from_couplings",
     "bs_ee_from_couplings",
     "bd_ee_from_couplings",
+    "bq_ee_from_rs_semileptonic_wilsons",
+    "bs_ee_from_rs_semileptonic_wilsons",
+    "bd_ee_from_rs_semileptonic_wilsons",
 ]
 
 ELECTRON_MASS_GEV = 0.00051099895000
@@ -125,5 +133,55 @@ def bd_ee_from_couplings(
         couplings,
         transition="b_d",
         m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def bq_ee_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    transition: str,
+    matching_scale_gev: float | None = None,
+    inputs: RareBDileptonSMInputs | None = None,
+) -> RareBLeptonicBranchingResult:
+    """Evaluate ``BR(B_q -> e+ e-)`` from Phase-3a RS Wilsons."""
+
+    return _bq_mumu_from_rs_semileptonic_wilsons(
+        source,
+        transition=transition,
+        lepton="e",
+        matching_scale_gev=matching_scale_gev,
+        inputs=rare_b_electronic_default_sm_inputs() if inputs is None else inputs,
+    )
+
+
+def bs_ee_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareBDileptonSMInputs | None = None,
+) -> RareBLeptonicBranchingResult:
+    """Evaluate ``BR(B_s -> e+ e-)`` from Phase-3a RS Wilsons."""
+
+    return bq_ee_from_rs_semileptonic_wilsons(
+        source,
+        transition="b_s",
+        matching_scale_gev=matching_scale_gev,
+        inputs=inputs,
+    )
+
+
+def bd_ee_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareBDileptonSMInputs | None = None,
+) -> RareBLeptonicBranchingResult:
+    """Evaluate ``BR(B0 -> e+ e-)`` from Phase-3a RS Wilsons."""
+
+    return bq_ee_from_rs_semileptonic_wilsons(
+        source,
+        transition="b_d",
+        matching_scale_gev=matching_scale_gev,
         inputs=inputs,
     )

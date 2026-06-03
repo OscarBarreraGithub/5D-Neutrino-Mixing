@@ -37,10 +37,10 @@ but is not an anchor for this charged-mode constraint.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The RS contribution uses the shared documented Z/KK-penguin C9/C10 proxy
-because ``ParameterPoint`` lacks the electroweak KK/Z/Z', muon, dipole,
-nonlocal-charm, scalar/tensor, and covariance inputs needed for a global
-exclusive ``b -> s mu mu`` implementation.
+The Phase-3a RS light-Z contribution supplies rigorous vector/axial
+``C9/C10/C9'/C10'`` Wilsons.  Dipole, nonlocal-charm, scalar/tensor, and
+covariance inputs remain deferred for a global exclusive ``b -> s mu mu``
+implementation.
 """
 
 from __future__ import annotations
@@ -56,7 +56,7 @@ from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Se
 from flavor_catalog_constraints.physics_adapters.rare_b_meson import (
     RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1,
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-    bplus_kplus_mumu_from_couplings,
+    bplus_kplus_mumu_from_rs_semileptonic_wilsons,
     rare_b_to_k_dilepton_default_inputs,
     rare_b_to_k_mumu_sm_branching_fraction,
 )
@@ -64,7 +64,7 @@ from flavor_catalog_constraints.registry import register
 from quarkConstraints import rare_b_dilepton as rare_b_dilepton_core
 
 _FAMILY = "beauty"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _CHARGED_OBSERVABLE = "BR(B+ -> K+ ell+ ell-)"
 _LOW_Q2_BENCHMARK_Q2_MIN_GEV2 = 1.1
@@ -91,9 +91,9 @@ _PARAMETRIZATION_CITATION = (
     "low-q^2 number is an internal formula benchmark, not a data validation"
 )
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z', muon, C7/dipole, "
-    "nonlocal-charm, scalar/tensor and experimental-covariance matching is "
-    "not available on ParameterPoint; v1 uses the documented C9/C10 proxy."
+    "NEEDS-HUMAN-PHYSICS: Phase-3a supplies the light-Z vector/axial "
+    "C9/C10/C9'/C10' terms; C7/dipole, nonlocal-charm, scalar/tensor and "
+    "experimental-covariance matching remain deferred."
 )
 
 
@@ -453,8 +453,8 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -469,6 +469,9 @@ class Constraint:
                 diagnostics={
                     "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "sm_formula_branching_fraction": float(
                         self.sm_result.branching_fraction
                     ),
@@ -499,9 +502,10 @@ class Constraint:
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result = bplus_kplus_mumu_from_couplings(
-                couplings,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+            result = bplus_kplus_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
             )
         except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
@@ -513,11 +517,12 @@ class Constraint:
                 experimental=float(self.anchor.value),
                 budget=float(self.anchor.budget),
                 notes=(
-                    "NOT EVALUATED - invalid quark_mass_basis_couplings for "
-                    "the B -> K mu mu C9/C10 proxy"
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "the B -> K mu mu C9/C10 path"
                 ),
                 diagnostics={
                     "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception_message": str(exc),
                     "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
@@ -580,7 +585,11 @@ class Constraint:
                 "budget_source": self.anchor.budget_band.source,
                 "budget_construction": self.anchor.budget_band.construction,
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                "rs_matching_assumption": (
+                    result.wilsons.matching_assumption
+                    if result.wilsons is not None
+                    else RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1
+                ),
                 "exclusive_limitations": RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1,
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
@@ -606,9 +615,9 @@ class Constraint:
             budget=budget,
             notes=(
                 "BR(B+ -> K+ ell+ ell-) uses a C9/C10-only B -> K form-factor "
-                "q^2 integral. The RS contribution is the documented mass-basis "
-                "b-s C9/C10 proxy; full C7, nonlocal charm, scalar/tensor and "
-                "covariance treatment is marked NEEDS-HUMAN-PHYSICS. The HARD "
+                "q^2 integral. Phase-3a RS semileptonic C9/C10/C9'/C10' "
+                "Wilsons enter additively; full C7, nonlocal charm, scalar/tensor "
+                "and covariance treatment remains deferred. The HARD "
                 "ratio is the total BR pull from the HFLAV charged average over "
                 "the charged-mode budget with an explicit proxy theory envelope; "
                 "the neutral B0 mode is out of scope for B016."

@@ -53,14 +53,15 @@ from flavor_catalog_constraints.physics_adapters.rare_b_meson import (
     RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_FRACTION,
     RARE_B_DILEPTON_INCLUSIVE_XS_PROXY_THEORY_UNCERTAINTY_RATIONALE,
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-    inclusive_b_to_xs_mumu_from_couplings,
+    inclusive_b_to_xs_mumu_from_rs_semileptonic_wilsons,
     rare_b_inclusive_xs_dilepton_default_inputs,
     rare_b_inclusive_xs_mumu_sm_branching_fraction,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
+_DIPOLE_EXTRA = "quark_mass_basis_couplings"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _TOTAL_OBSERVABLE = "BR(B -> X_s ell+ ell-)"
 _PDG_TOTAL_OBSERVABLE = "PDG-listed BR(B -> X_s ell+ ell-)"
@@ -79,10 +80,10 @@ _PARAMETRIZATION_CITATION = (
     "validation; LO partonic C7/C9/C10 shape normalized to the YAML SM bin"
 )
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z', lepton, C7 loop, "
-    "NNLO/QED, charm-veto, power-correction and experimental-covariance "
-    "matching is not available on ParameterPoint; v1 uses the documented "
-    "C9/C10 proxy plus the existing C7 proxy."
+    "NEEDS-HUMAN-PHYSICS: Phase-3a supplies the light-Z vector/axial "
+    "C9/C10/C9'/C10' terms; the existing C7 proxy plus NNLO/QED, "
+    "charm-veto, power-correction and experimental-covariance matching "
+    "remain deferred."
 )
 
 
@@ -514,8 +515,8 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -530,6 +531,9 @@ class Constraint:
                 diagnostics={
                     "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra(_DIPOLE_EXTRA) is not None
+                    ),
                     "active_bin": "low_q2_1_to_6_gev2_mumu",
                     "q2_min_gev2": float(self.anchor.q2_min_gev2),
                     "q2_max_gev2": float(self.anchor.q2_max_gev2),
@@ -549,13 +553,16 @@ class Constraint:
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
+        dipole_couplings = point.get_extra(_DIPOLE_EXTRA)
         try:
-            result = inclusive_b_to_xs_mumu_from_couplings(
-                couplings,
+            result = inclusive_b_to_xs_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
                 sm_branching_fraction=self.anchor.sm_value,
                 q2_min_gev2=self.anchor.q2_min_gev2,
                 q2_max_gev2=self.anchor.q2_max_gev2,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                dipole_couplings=dipole_couplings,
                 inputs=self.sm_inputs,
             )
         except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
@@ -567,11 +574,12 @@ class Constraint:
                 experimental=float(self.anchor.value),
                 budget=float(self.anchor.budget),
                 notes=(
-                    "NOT EVALUATED - invalid quark_mass_basis_couplings for "
-                    "the inclusive B -> X_s mu mu C7/C9/C10 proxy"
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "the inclusive B -> X_s mu mu C9/C10 path"
                 ),
                 diagnostics={
                     "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception_message": str(exc),
                     "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
@@ -654,10 +662,16 @@ class Constraint:
                 "budget_source": self.anchor.budget_band.source,
                 "budget_construction": self.anchor.budget_band.construction,
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                "rs_matching_assumption": result.diagnostics.get(
+                    "rs_semileptonic_matching_assumption",
+                    RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                ),
                 "inclusive_limitations": RARE_B_DILEPTON_INCLUSIVE_XS_LIMITATION_V1,
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
+                "c7_dipole_source_extra": (
+                    _DIPOLE_EXTRA if dipole_couplings is not None else None
+                ),
                 "wilson_coefficients": {
                     **dict(result.diagnostics.get("dilepton_wilson_coefficients", {})),
                     **dict(result.diagnostics.get("dipole_wilson_coefficients", {})),
@@ -676,10 +690,11 @@ class Constraint:
             budget=budget,
             notes=(
                 "BR(B -> X_s ell+ ell-) uses the B015 low-q2 inclusive bin "
-                "with a normalized partonic C7/C9/C10 shape. The RS "
-                "contribution is the documented mass-basis b-s C9/C10 proxy "
-                "plus the existing C7 proxy; full NNLO/QED/charm/covariance "
-                "treatment is marked NEEDS-HUMAN-PHYSICS. The HARD ratio is "
+                "with a normalized partonic C7/C9/C10 shape. Phase-3a RS "
+                "semileptonic C9/C10/C9'/C10' Wilsons enter additively; the "
+                "existing C7 path is left unchanged and used only when its "
+                "coupling extra is present. Full NNLO/QED/charm/covariance "
+                "treatment remains deferred. The HARD ratio is "
                 "the total low-q2 BR pull over the YAML exp/SM/proxy budget."
             ),
             diagnostics=diagnostics,

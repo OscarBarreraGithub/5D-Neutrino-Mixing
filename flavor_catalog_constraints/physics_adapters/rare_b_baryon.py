@@ -8,6 +8,8 @@ integral and the reused rare_b_dilepton C9/C10 RS proxy remain isolated in
 
 from __future__ import annotations
 
+from dataclasses import replace
+
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.rare_b_dilepton import RareBDileptonWilsonCoefficients
 from quarkConstraints.rare_b_baryon_dilepton import (
@@ -25,6 +27,12 @@ from quarkConstraints.rare_b_baryon_dilepton import (
     evaluate_lambdab_to_lambda_mumu as _evaluate_lambdab_to_lambda_mumu,
     lambdab_to_lambda_fplus_fminus as _lambdab_to_lambda_fplus_fminus,
     sm_lambdab_to_lambda_mumu_branching_fraction as _sm_lambdab_to_lambda_mumu_branching_fraction,
+)
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
+
+from .rare_b_meson import (
+    rare_b_dilepton_wilsons_from_rs_semileptonic,
+    rare_b_rs_semileptonic_vector_diagnostics,
 )
 
 __all__ = [
@@ -45,6 +53,7 @@ __all__ = [
     "lambdab_lambda_mumu_sm_branching_fraction",
     "lambdab_lambda_mumu_branching_fraction",
     "lambdab_lambda_mumu_from_couplings",
+    "lambdab_lambda_mumu_from_rs_semileptonic_wilsons",
 ]
 
 
@@ -114,3 +123,33 @@ def lambdab_lambda_mumu_from_couplings(
         m_kk_gev=m_kk_gev,
         inputs=inputs,
     )
+
+
+def lambdab_lambda_mumu_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    lepton: str = "mu",
+    q2_min_gev2: float | None = None,
+    q2_max_gev2: float | None = None,
+    matching_scale_gev: float | None = None,
+    inputs: RareBBaryonDileptonInputs | None = None,
+) -> RareBBaryonDileptonBranchingResult:
+    """Evaluate ``BR(Lambda_b -> Lambda l+ l-)`` from Phase-3a RS Wilsons."""
+
+    coeff = source.b_to_s_ll[lepton]
+    wilsons = rare_b_dilepton_wilsons_from_rs_semileptonic(
+        source,
+        transition="b_s",
+        lepton=lepton,
+        matching_scale_gev=matching_scale_gev,
+    )
+    result = _evaluate_lambdab_to_lambda_mumu(
+        wilsons,
+        q2_min_gev2=q2_min_gev2,
+        q2_max_gev2=q2_max_gev2,
+        inputs=inputs,
+    )
+    diagnostics = dict(result.diagnostics)
+    diagnostics.update(rare_b_rs_semileptonic_vector_diagnostics(coeff))
+    diagnostics["matching_assumption"] = coeff.matching_assumption
+    return replace(result, diagnostics=diagnostics)

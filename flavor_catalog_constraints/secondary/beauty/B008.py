@@ -25,10 +25,9 @@ Numeric values below are loaded through scaffold anchor paths, not hardcoded.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The RS contribution uses the shared documented C9/C10 proxy because the
-``ParameterPoint`` does not provide the full electroweak KK/Z/Z', tau,
-Higgs/radion, scalar, or pseudoscalar matching inputs needed for a rigorous
-RS ``b -> q tau tau`` calculation.
+The Phase-3a RS light-Z contribution supplies rigorous vector/axial
+``C9/C10/C9'/C10'`` Wilsons.  Scalar and pseudoscalar matching remains
+deferred.
 """
 
 from __future__ import annotations
@@ -54,8 +53,8 @@ from flavor_catalog_constraints.physics_adapters.rare_b_tauonic import (
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
     RARE_B_TAUONIC_MODEL_NOTE_V1,
     TAU_MASS_GEV,
-    bd_tautau_from_couplings,
-    bs_tautau_from_couplings,
+    bd_tautau_from_rs_semileptonic_wilsons,
+    bs_tautau_from_rs_semileptonic_wilsons,
     rare_b_tauonic_default_sm_inputs,
     rare_b_tauonic_sm_branching_fraction,
 )
@@ -63,7 +62,7 @@ from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
 _TIER = ConstraintLevel.SECONDARY
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPECTED_UNITS = "branching fraction"
 
@@ -82,10 +81,9 @@ _PARAMETRIZATION_CITATION = (
     "SM B_q -> tau tau validation"
 )
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z', tau, "
-    "Higgs/radion, scalar and pseudoscalar b->q tau tau matching is not "
-    "available on ParameterPoint; v1 uses the documented Z/KK-penguin "
-    "C9/C10 proxy."
+    "NEEDS-HUMAN-PHYSICS: Phase-3a supplies the light-Z vector/axial "
+    "C9/C10/C9'/C10' terms; Higgs/radion scalar and pseudoscalar "
+    "b->q tau tau matching remains deferred."
 )
 
 
@@ -500,8 +498,8 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -514,7 +512,11 @@ class Constraint:
                     "constraint was not evaluated."
                 ),
                 diagnostics={
+                    "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "bs_sm_anchor_branching_fraction": float(
                         self.anchor.bs_standard_model.value
                     ),
@@ -536,16 +538,37 @@ class Constraint:
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         m_kk_gev = None if kk_ew_mass is None else float(kk_ew_mass)
-        bs_result = bs_tautau_from_couplings(
-            couplings,
-            m_kk_gev=m_kk_gev,
-            inputs=self.sm_inputs,
-        )
-        bd_result = bd_tautau_from_couplings(
-            couplings,
-            m_kk_gev=m_kk_gev,
-            inputs=self.sm_inputs,
-        )
+        try:
+            bs_result = bs_tautau_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                matching_scale_gev=m_kk_gev,
+                inputs=self.sm_inputs,
+            )
+            bd_result = bd_tautau_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                matching_scale_gev=m_kk_gev,
+                inputs=self.sm_inputs,
+            )
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                sm_prediction=float(self.anchor.sm_value),
+                experimental=float(self.anchor.value),
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "B_s/B0 -> tau+ tau-"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+                },
+            )
 
         channel_inputs = {
             "b_s": (
@@ -574,6 +597,7 @@ class Constraint:
             diagnostics = dict(result.diagnostics)
             diagnostics.update(
                 {
+                    "evaluated": True,
                     "predicted_branching_fraction": predicted,
                     "sm_anchor_branching_fraction": float(sm_anchor.value),
                     "sm_formula_branching_fraction": float(
@@ -629,8 +653,8 @@ class Constraint:
                 "Buras b->qll C10-dominant formula with the charged-lepton "
                 "mass set to m_tau. The HARD ratio is the largest 95%-CL "
                 "one-mode-at-a-time upper-limit saturation across the two "
-                "channels. The RS contribution is a documented C9/C10 proxy "
-                "and is marked NEEDS-HUMAN-PHYSICS."
+                "channels. Phase-3a RS semileptonic C10/C10' Wilsons enter "
+                "additively."
             ),
             diagnostics={
                 "active_channel": active_channel,
@@ -638,7 +662,10 @@ class Constraint:
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
                 "tau_mode_note": RARE_B_TAUONIC_MODEL_NOTE_V1,
-                "rs_matching_assumption": RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                "rs_matching_assumption": channel_diagnostics[active_channel].get(
+                    "rs_semileptonic_matching_assumption",
+                    RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                ),
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
                 "budget_source": _BUDGET_SOURCE,
                 "channels": channel_diagnostics,

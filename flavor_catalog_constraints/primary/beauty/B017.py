@@ -36,10 +36,10 @@ this sidecar.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The RS contribution uses the shared documented C9/C10 proxy.  A rigorous B017
-implementation needs EW KK/Z/Z', lepton-localization, electron-vs-muon, K*
-form-factor, angular-basis, nonlocal-charm, and covariance inputs that are not
-available on ``ParameterPoint``.
+The Phase-3a RS light-Z contribution supplies vector/axial
+``C9/C10/C9'/C10'`` Wilsons for both the muon numerator and electron
+denominator.  K* form-factor, angular-basis, nonlocal-charm, and covariance
+inputs remain deferred.
 """
 
 from __future__ import annotations
@@ -58,14 +58,14 @@ from flavor_catalog_constraints.physics_adapters.rare_b_meson import (
     RARE_B_DILEPTON_EXCLUSIVE_BK_PROXY_THEORY_UNCERTAINTY_RATIONALE,
     RARE_B_DILEPTON_INCLUSIVE_XS_LIMITATION_V1,
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-    bplus_kplus_mumu_from_couplings,
+    bplus_kplus_mumu_from_rs_semileptonic_wilsons,
     rare_b_to_k_dilepton_default_inputs,
     rare_b_to_k_mumu_sm_branching_fraction,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _INCLUSIVE_TOTAL_OBSERVABLE = "BR(B -> X_s ell+ ell-)"
 _CHARGED_TOTAL_OBSERVABLE = "BR(B+ -> K+ ell+ ell-)"
@@ -86,10 +86,10 @@ _PARAMETRIZATION_CITATION = (
     "and BCL-like B -> K f_+(q^2) q^2 integration reused from B016"
 )
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS B017 matching needs EW KK/Z/Z', "
-    "electron-vs-muon lepton couplings, C7/dipole, K* form factors, angular "
-    "basis, nonlocal-charm and experimental-covariance inputs not available "
-    "on ParameterPoint; v1 uses the documented B -> K C9/C10 proxy."
+    "NEEDS-HUMAN-PHYSICS: Phase-3a supplies light-Z vector/axial "
+    "C9/C10/C9'/C10' terms for the muon numerator and electron denominator; "
+    "C7/dipole, K* form factors, angular basis, nonlocal-charm and "
+    "experimental-covariance inputs remain deferred."
 )
 
 
@@ -582,16 +582,19 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             diagnostics = _anchor_diagnostics(self.anchor)
             diagnostics.update(
                 {
                     "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "rk_proxy_definition": (
                         "BR(B+ -> K+ mu mu; C9/C10, bin) / "
-                        "BR(B+ -> K+ mu mu; SM C9/C10, same bin)"
+                        "BR(B+ -> K+ e e; C9/C10, same bin)"
                     ),
                     "rk_proxy_denominator_branching_fraction": float(
                         self.sm_result.branching_fraction
@@ -626,16 +629,26 @@ class Constraint:
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result = bplus_kplus_mumu_from_couplings(
-                couplings,
+            result = bplus_kplus_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
                 q2_min_gev2=self.anchor.q2_min_gev2,
                 q2_max_gev2=self.anchor.q2_max_gev2,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
             )
-            charged_total_result = bplus_kplus_mumu_from_couplings(
-                couplings,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+            denominator_result = bplus_kplus_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="e",
+                q2_min_gev2=self.anchor.q2_min_gev2,
+                q2_max_gev2=self.anchor.q2_max_gev2,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+            charged_total_result = bplus_kplus_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
             )
         except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
@@ -643,6 +656,7 @@ class Constraint:
             diagnostics.update(
                 {
                     "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception_message": str(exc),
                     "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
@@ -656,13 +670,13 @@ class Constraint:
                 experimental=float(self.anchor.value),
                 budget=float(self.anchor.budget),
                 notes=(
-                    "NOT EVALUATED - invalid quark_mass_basis_couplings for "
-                    "the B017 B -> K central-q2 C9/C10 proxy"
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "the B017 B -> K central-q2 C9/C10 ratio"
                 ),
                 diagnostics=diagnostics,
             )
 
-        predicted = float(result.branching_fraction / self.sm_result.branching_fraction)
+        predicted = float(result.branching_fraction / denominator_result.branching_fraction)
         budget, ratio, passes = _budget_result(predicted, self.anchor)
 
         diagnostics = dict(result.diagnostics)
@@ -672,18 +686,20 @@ class Constraint:
                 "evaluated": True,
                 "rk_proxy_definition": (
                     "BR(B+ -> K+ mu mu; C9/C10, bin) / "
-                    "BR(B+ -> K+ mu mu; SM C9/C10, same bin)"
+                    "BR(B+ -> K+ e e; C9/C10, same bin)"
                 ),
                 "rk_proxy_numerator_branching_fraction": float(
                     result.branching_fraction
                 ),
                 "rk_proxy_denominator_branching_fraction": float(
-                    self.sm_result.branching_fraction
+                    denominator_result.branching_fraction
                 ),
                 "rk_proxy_sm_branching_fraction": float(
                     result.sm_branching_fraction
                 ),
-                "rk_proxy_ratio_to_sm": float(result.ratio_to_sm),
+                "rk_proxy_ratio_to_sm": float(predicted / _SM_RK_PROXY),
+                "rk_proxy_muon_ratio_to_sm": float(result.ratio_to_sm),
+                "rk_proxy_electron_ratio_to_sm": float(denominator_result.ratio_to_sm),
                 "charged_total_branching_fraction": float(
                     charged_total_result.branching_fraction
                 ),
@@ -704,7 +720,10 @@ class Constraint:
                     "nonlocal-charm or covariance backend is available"
                 ),
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                "rs_matching_assumption": result.diagnostics.get(
+                    "rs_semileptonic_matching_assumption",
+                    RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                ),
                 "exclusive_limitations": RARE_B_DILEPTON_EXCLUSIVE_BK_LIMITATION_V1,
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
@@ -714,6 +733,14 @@ class Constraint:
                     else {
                         key: complex(value)
                         for key, value in result.wilsons.wilsons.items()
+                    }
+                ),
+                "denominator_wilson_coefficients": (
+                    {}
+                    if denominator_result.wilsons is None
+                    else {
+                        key: complex(value)
+                        for key, value in denominator_result.wilsons.wilsons.items()
                     }
                 ),
             }
@@ -731,7 +758,8 @@ class Constraint:
             notes=(
                 "B017 uses the B017.yaml central-q2 charged R_K row as a HARD "
                 "single-number proxy. The prediction is the B016 B+ -> K+ mu "
-                "mu C9/C10 form-factor bin normalized to its SM value. K* "
+                "mu C9/C10 form-factor bin divided by the matching electron "
+                "bin so lepton-universal Wilsons cancel. K* "
                 "angular/R_K* and inclusive rows are carried as diagnostics; "
                 "the full global-fit treatment is marked NEEDS-HUMAN-PHYSICS."
             ),

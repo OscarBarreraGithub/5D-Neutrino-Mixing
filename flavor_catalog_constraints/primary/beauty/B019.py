@@ -14,12 +14,14 @@ lightweight K* form-factor normalization.  In the v1 catalog proxy the electron
 denominator is the same SM short-distance K* rate, so ``R_K*^SM = 1`` up to
 the QED/electron-mass caveat stored in ``B019.yaml``.
 
-The NP proxy follows the B018 pattern:
+The NP ratio follows the B018 pattern with lepton-specific Wilson entries:
 
-    R_K*^proxy = BR(B0 -> K*0 mu+ mu-; SM + NP_mu proxy, bin)
-                 / BR(B0 -> K*0 e+ e-; SM proxy, same bin).
+    R_K* = BR(B0 -> K*0 mu+ mu-; SM + NP_mu, bin)
+           / BR(B0 -> K*0 e+ e-; SM + NP_e, same bin).
 
-This is a lepton-non-universal stress proxy, not a complete RS LFU prediction.
+The electron denominator uses the same lightweight B -> K* core and the
+``e`` entry of ``rs_semileptonic_wilsons.b_to_s_ll``; electron mass, QED,
+and angular/form-factor covariance remain residual caveats.
 
 Severity
 --------
@@ -55,14 +57,14 @@ from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Se
 from flavor_catalog_constraints.physics_adapters.rare_b_kstar_dilepton import (
     RARE_B_DILEPTON_EXCLUSIVE_BKSTAR_LIMITATION_V1,
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-    bzero_kstarzero_mumu_from_couplings,
+    bzero_kstarzero_mumu_from_rs_semileptonic_wilsons,
     rare_b_to_kstar_dilepton_default_inputs,
     rare_b_to_kstar_mumu_sm_branching_fraction,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _RKSTAR_LOW_OBSERVABLE = "R_K* low-q2"
 _RKSTAR_CENTRAL_OBSERVABLE = "R_K* central-q2"
@@ -82,13 +84,12 @@ _PARAMETRIZATION_CITATION = (
     "append-only B -> K* vector form-factor normalization"
 )
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS R_K* matching needs EW KK/Z/Z', "
-    "electron-vs-muon lepton couplings, QED/radiative corrections, C7/dipole, "
-    "nonlocal charm, scalar/tensor operators, K* angular/form-factor "
-    "covariance, S-wave treatment and experimental covariance inputs not "
-    "available on ParameterPoint; v1 uses a documented muon-only-over-SM-"
-    "electron C9/C10 stress proxy. A truly lepton-universal C9/C10 shift "
-    "would largely cancel in R_K*."
+    "NEEDS-HUMAN-PHYSICS: Phase-3a supplies light-Z vector/axial "
+    "C9/C10/C9'/C10' terms for the muon numerator and electron denominator; "
+    "QED/radiative corrections, C7/dipole, nonlocal charm, scalar/tensor "
+    "operators, K* angular/form-factor covariance, S-wave treatment and "
+    "experimental covariance inputs remain deferred. Lepton-universal C9/C10 "
+    "shifts largely cancel in R_K*."
 )
 
 
@@ -680,16 +681,19 @@ class Constraint:
         self.anchor = _build_b019_anchor(observables)
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             diagnostics = _anchor_diagnostics(self.anchor)
             diagnostics.update(
                 {
                     "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "rkstar_proxy_definition": (
                         "BR(B0 -> K*0 mu mu; SM+NP_mu proxy, bin) / "
-                        "BR(B0 -> K*0 e e; SM proxy, same bin)"
+                        "BR(B0 -> K*0 e e; SM+NP_e proxy, same bin)"
                     ),
                     "sm_muon_branching_fraction": float(
                         self.sm_muon_result.branching_fraction
@@ -702,13 +706,13 @@ class Constraint:
                         self.sm_lfu_ratio - self.anchor.sm_value
                     ),
                     "electron_denominator_treatment": (
-                        "SM B -> K* ll rate reused as the electron denominator; "
-                        "electron mass and QED corrections are represented only "
-                        "by the B019.yaml SM/QED budget term"
+                        "B -> K* ll rate with the electron Wilson entry reused "
+                        "as the electron denominator; electron mass and QED "
+                        "corrections are represented only by the B019.yaml "
+                        "SM/QED budget term"
                     ),
                     "lepton_universal_cancellation_note": (
-                        "A truly lepton-universal C9/C10 shift would largely "
-                        "cancel in R_K*; the v1 result is a muon-only stress proxy"
+                        "A lepton-universal C9/C10 shift largely cancels in R_K*"
                     ),
                     "lepton_universal_rkstar_proxy": 1.0,
                     "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
@@ -730,11 +734,20 @@ class Constraint:
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result = bzero_kstarzero_mumu_from_couplings(
-                couplings,
+            result = bzero_kstarzero_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
                 q2_min_gev2=self.anchor.q2_min_gev2,
                 q2_max_gev2=self.anchor.q2_max_gev2,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+            denominator_result = bzero_kstarzero_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="e",
+                q2_min_gev2=self.anchor.q2_min_gev2,
+                q2_max_gev2=self.anchor.q2_max_gev2,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
             )
         except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
@@ -742,6 +755,7 @@ class Constraint:
             diagnostics.update(
                 {
                     "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception_message": str(exc),
                     "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
@@ -755,14 +769,14 @@ class Constraint:
                 experimental=float(self.anchor.value),
                 budget=float(self.anchor.budget),
                 notes=(
-                    "NOT EVALUATED - invalid quark_mass_basis_couplings for "
-                    "the B019 B -> K* central-q2 C9/C10 LFU proxy"
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "the B019 B -> K* central-q2 C9/C10 LFU ratio"
                 ),
                 diagnostics=diagnostics,
             )
 
         predicted = float(
-            result.branching_fraction / self.sm_electron_proxy_branching_fraction
+            result.branching_fraction / denominator_result.branching_fraction
         )
         budget, ratio, passes = _budget_result(predicted, self.anchor)
 
@@ -773,13 +787,13 @@ class Constraint:
                 "evaluated": True,
                 "rkstar_proxy_definition": (
                     "BR(B0 -> K*0 mu mu; SM+NP_mu proxy, bin) / "
-                    "BR(B0 -> K*0 e e; SM proxy, same bin)"
+                    "BR(B0 -> K*0 e e; SM+NP_e proxy, same bin)"
                 ),
                 "rkstar_proxy_numerator_branching_fraction": float(
                     result.branching_fraction
                 ),
                 "rkstar_proxy_denominator_branching_fraction": float(
-                    self.sm_electron_proxy_branching_fraction
+                    denominator_result.branching_fraction
                 ),
                 "sm_muon_branching_fraction": float(
                     self.sm_muon_result.branching_fraction
@@ -791,26 +805,32 @@ class Constraint:
                 "sm_formula_minus_sidecar": float(
                     self.sm_lfu_ratio - self.anchor.sm_value
                 ),
-                "rkstar_proxy_ratio_to_sm": float(result.ratio_to_sm),
+                "rkstar_proxy_ratio_to_sm": float(predicted / self.sm_lfu_ratio),
+                "rkstar_proxy_muon_ratio_to_sm": float(result.ratio_to_sm),
+                "rkstar_proxy_electron_ratio_to_sm": float(
+                    denominator_result.ratio_to_sm
+                ),
                 "np_shift_branching_fraction": float(
                     result.np_shift_branching_fraction
                 ),
                 "electron_denominator_treatment": (
-                    "SM B -> K* ll rate reused as the electron denominator; "
-                    "electron mass and QED corrections are represented only "
-                    "by the B019.yaml SM/QED budget term"
+                    "B -> K* ll rate with the electron Wilson entry reused as "
+                    "the electron denominator; electron mass and QED corrections "
+                    "are represented only by the B019.yaml SM/QED budget term"
                 ),
                 "qed_caveat": (
                     "SM R_K* is unity in the implemented C9/C10 proxy; B019.yaml "
                     "carries the BIP +/-0.01 QED uncertainty."
                 ),
                 "lepton_universal_cancellation_note": (
-                    "A truly lepton-universal C9/C10 shift would largely "
-                    "cancel in R_K*; the v1 result is a muon-only stress proxy"
+                    "A lepton-universal C9/C10 shift largely cancels in R_K*"
                 ),
                 "lepton_universal_rkstar_proxy": 1.0,
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                "rs_matching_assumption": result.diagnostics.get(
+                    "rs_semileptonic_matching_assumption",
+                    RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+                ),
                 "exclusive_kstar_limitations": (
                     RARE_B_DILEPTON_EXCLUSIVE_BKSTAR_LIMITATION_V1
                 ),
@@ -822,6 +842,14 @@ class Constraint:
                     else {
                         key: complex(value)
                         for key, value in result.wilsons.wilsons.items()
+                    }
+                ),
+                "denominator_wilson_coefficients": (
+                    {}
+                    if denominator_result.wilsons is None
+                    else {
+                        key: complex(value)
+                        for key, value in denominator_result.wilsons.wilsons.items()
                     }
                 ),
             }
@@ -838,11 +866,11 @@ class Constraint:
             budget=budget,
             notes=(
                 "B019 uses the B019.yaml central-q2 R_K* row. The prediction "
-                "is a B -> K* mu mu C9/C10 q^2-bin integral divided by an SM "
-                "electron-denominator proxy. Full electron-vs-muon, QED, C7, "
+                "is a B -> K* mu mu C9/C10 q^2-bin integral divided by the "
+                "matching electron Wilson denominator. Full electron-vs-muon, QED, C7, "
                 "nonlocal charm, angular/form-factor covariance and S-wave "
-                "matching is marked NEEDS-HUMAN-PHYSICS; a truly "
-                "lepton-universal C9/C10 shift would largely cancel in R_K*."
+                "matching beyond Phase-3a remains deferred; lepton-universal "
+                "C9/C10 shifts largely cancel in R_K*."
             ),
             diagnostics=diagnostics,
         )

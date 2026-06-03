@@ -24,6 +24,11 @@ from quarkConstraints.rare_b_dilepton import (
     evaluate_bq_to_mumu as _evaluate_bq_to_mumu,
     sm_branching_fraction as _sm_branching_fraction,
 )
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
+
+from .rare_b_meson import (
+    bq_mumu_from_rs_semileptonic_wilsons as _bq_mumu_from_rs_semileptonic_wilsons,
+)
 
 __all__ = [
     "TAU_MASS_GEV",
@@ -43,6 +48,9 @@ __all__ = [
     "bq_tautau_from_couplings",
     "bs_tautau_from_couplings",
     "bd_tautau_from_couplings",
+    "bq_tautau_from_rs_semileptonic_wilsons",
+    "bs_tautau_from_rs_semileptonic_wilsons",
+    "bd_tautau_from_rs_semileptonic_wilsons",
 ]
 
 TAU_MASS_GEV = 1.77686
@@ -125,5 +133,55 @@ def bd_tautau_from_couplings(
         couplings,
         transition="b_d",
         m_kk_gev=m_kk_gev,
+        inputs=inputs,
+    )
+
+
+def bq_tautau_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    transition: str,
+    matching_scale_gev: float | None = None,
+    inputs: RareBDileptonSMInputs | None = None,
+) -> RareBLeptonicBranchingResult:
+    """Evaluate ``BR(B_q -> tau+ tau-)`` from Phase-3a RS Wilsons."""
+
+    return _bq_mumu_from_rs_semileptonic_wilsons(
+        source,
+        transition=transition,
+        lepton="tau",
+        matching_scale_gev=matching_scale_gev,
+        inputs=rare_b_tauonic_default_sm_inputs() if inputs is None else inputs,
+    )
+
+
+def bs_tautau_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareBDileptonSMInputs | None = None,
+) -> RareBLeptonicBranchingResult:
+    """Evaluate ``BR(B_s -> tau+ tau-)`` from Phase-3a RS Wilsons."""
+
+    return bq_tautau_from_rs_semileptonic_wilsons(
+        source,
+        transition="b_s",
+        matching_scale_gev=matching_scale_gev,
+        inputs=inputs,
+    )
+
+
+def bd_tautau_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareBDileptonSMInputs | None = None,
+) -> RareBLeptonicBranchingResult:
+    """Evaluate ``BR(B0 -> tau+ tau-)`` from Phase-3a RS Wilsons."""
+
+    return bq_tautau_from_rs_semileptonic_wilsons(
+        source,
+        transition="b_d",
+        matching_scale_gev=matching_scale_gev,
         inputs=inputs,
     )
