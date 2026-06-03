@@ -10,14 +10,15 @@ charged-leptonic tree kernel in
 process-specific radiative multiplier is fixed by the K017 YAML
 Cirigliano-Rosell SM anchor.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-The RS contribution is a documented lepton-nonuniversal charged-current proxy.
-Complete matching needs W/W', charged-Higgs, heavy-neutrino, lepton-profile,
-and radiative-convention inputs that are not present on ``ParameterPoint``.
-The v1 proxy applies the existing unit-normalized ``m_K^2/M_KK^2`` amplitude
-shift to the electron mode and leaves the muon mode SM; diagnostics explicitly
-flag this as ``NEEDS-HUMAN-PHYSICS``.
+RS matching
+-----------
+For points carrying ``rs_charged_current``, K017 consumes the stored
+minimal-left-handed epsilons and evaluates
+
+    R_K = R_K^SM |1 + epsilon_us^e|^2 / |1 + epsilon_us^mu|^2.
+
+Charged-Higgs, heavy-neutrino, scalar/RH-current, and radiative nonminimal
+effects remain outside this minimal vector matching.  No mass proxy is used.
 
 Catalog sidecar
 ---------------
@@ -35,17 +36,20 @@ from typing import Any, Mapping
 
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
+from flavor_catalog_constraints.physics_adapters.charged_current import (
+    CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN,
+    charged_current_epsilon,
+    charged_current_source_diagnostics,
+    shifted_lfu_ratio,
+)
 from flavor_catalog_constraints.physics_adapters.leptonic_tree import (
-    LEPTONIC_TREE_LFU_RATIO_PROXY_ASSUMPTION_V1,
-    kplus_enu_over_munu_lfu_ratio,
     leptonic_tree_kplus_enu_over_munu_inputs_from_sm_ratio_anchor,
     leptonic_tree_sm_lfu_ratio,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
-_OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
-_OPTIONAL_QUARK_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_charged_current"
 _EXPERIMENTAL_ANCHOR_CANDIDATES = ("canonical_ratio",)
 _SM_ANCHOR_CANDIDATES = ("sm_prediction",)
 _DOMINANT_INPUT_CANDIDATES = ("dominant_experimental_input",)
@@ -54,7 +58,13 @@ _EXPECTED_UNITS = "dimensionless decay-rate ratio"
 _BUDGET_SOURCE = "flavor_catalog/processes/kaon/K017.yaml canonical_ratio + sm_prediction"
 _PARAMETRIZATION_CITATION = (
     "charged-pseudoscalar leptonic tree kernel with K017.yaml "
-    "Cirigliano-Rosell radiative SM ratio anchor"
+    "Cirigliano-Rosell radiative SM ratio anchor; minimal-LH epsilon_us "
+    "charged-current ratio from rs_charged_current"
+)
+_NONMINIMAL_STATUS = (
+    "NEEDS-HUMAN-PHYSICS: charged-Higgs, heavy-neutrino, scalar/RH-current, "
+    "and radiative nonminimal effects are not included in the minimal "
+    "left-handed epsilon_us LFU ratio."
 )
 
 
@@ -342,16 +352,6 @@ def _theory_input_citation(anchor: K017Anchor) -> str:
     )
 
 
-def _mass_from_point(point: ParameterPoint) -> tuple[float | None, str | None]:
-    kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-    if kk_ew_mass is not None:
-        return float(kk_ew_mass), _OPTIONAL_EW_MASS_EXTRA
-    couplings = point.get_extra(_OPTIONAL_QUARK_EXTRA)
-    if couplings is not None and getattr(couplings, "M_KK", None) is not None:
-        return float(getattr(couplings, "M_KK")), f"{_OPTIONAL_QUARK_EXTRA}.M_KK"
-    return None, None
-
-
 @register
 class Constraint:
     """Catalogued charged-kaon leptonic LFU-ratio constraint (K017)."""
@@ -369,45 +369,94 @@ class Constraint:
         self.sm_result = leptonic_tree_sm_lfu_ratio(self.ratio_inputs)
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        m_kk, mass_source = _mass_from_point(point)
-        if m_kk is None:
-            result = self.sm_result
+        result = self.sm_result
+        common_diagnostics: dict[str, Any] = {
+            "sm_anchor_ratio": float(self.anchor.sm_value),
+            "sm_formula_ratio": float(result.sm_ratio),
+            "sm_formula_minus_anchor": float(result.sm_ratio - self.anchor.sm_value),
+            "tree_ratio_without_radiation": float(
+                result.diagnostics["tree_ratio_without_radiation"]
+            ),
+            "radiative_correction_multiplier": float(
+                result.diagnostics["radiative_correction_multiplier"]
+            ),
+            "experimental_block": self.anchor.experimental.block_key,
+            "sm_block": self.anchor.standard_model.block_key,
+            "dominant_experimental_input_block": (
+                self.anchor.dominant_experimental_input.block_key
+            ),
+            "supporting_experimental_input_block": (
+                self.anchor.supporting_experimental_input.block_key
+            ),
+            "dominant_experimental_input_ratio": float(
+                self.anchor.dominant_experimental_input.value
+            ),
+            "supporting_experimental_input_ratio": float(
+                self.anchor.supporting_experimental_input.value
+            ),
+            "experimental_sigma": float(self.anchor.budget_band.experimental_sigma),
+            "sm_theory_sigma": float(self.anchor.budget_band.sm_theory_sigma),
+            "budget_combined_sigma": float(self.anchor.budget_band.combined_sigma),
+            "budget_central_residual": float(
+                self.anchor.budget_band.central_residual
+            ),
+            "hard_veto_np_shift_budget": float(
+                self.anchor.budget_band.hard_veto_budget
+            ),
+            "budget_lower_total_edge": float(
+                self.anchor.budget_band.lower_total_edge
+            ),
+            "budget_upper_total_edge": float(
+                self.anchor.budget_band.upper_total_edge
+            ),
+            "budget_source": self.anchor.budget_band.source,
+            "budget_policy": (
+                "|R_total - R_SM(formula)| compared with "
+                "|R_exp - R_SM(anchor)| + sqrt(sigma_exp^2 + sigma_SM^2)"
+            ),
+            "parametrization_citation": _PARAMETRIZATION_CITATION,
+            "nonminimal_charged_current_status": _NONMINIMAL_STATUS,
+            "needs_human_physics": CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN,
+        }
+
+        charged = point.get_extra(_REQUIRED_EXTRA)
+        if charged is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
                 passes=True,
-                predicted=float(result.ratio),
+                predicted=None,
                 sm_prediction=float(result.sm_ratio),
                 experimental=float(self.anchor.value),
-                ratio=0.0,
+                ratio=None,
                 budget=float(self.anchor.budget),
                 notes=(
-                    "SM K -> e nu over K -> mu nu LFU ratio evaluated; no KK EW "
-                    "mass was supplied, so the lepton-nonuniversal proxy was "
-                    "not applied."
+                    f"extra {_REQUIRED_EXTRA!r} absent; R_K charged-current "
+                    "epsilon shift was not evaluated."
                 ),
                 diagnostics={
-                    "lepton_nonuniversal_proxy_evaluated": False,
-                    "missing_extra": _OPTIONAL_EW_MASS_EXTRA,
-                    "sm_anchor_ratio": float(self.anchor.sm_value),
-                    "sm_formula_ratio": float(result.sm_ratio),
-                    "sm_formula_minus_anchor": float(result.sm_ratio - self.anchor.sm_value),
-                    "tree_ratio_without_radiation": float(
-                        result.diagnostics["tree_ratio_without_radiation"]
-                    ),
-                    "radiative_correction_multiplier": float(
-                        result.diagnostics["radiative_correction_multiplier"]
-                    ),
-                    "budget_source": self.anchor.budget_band.source,
-                    "needs_human_physics": LEPTONIC_TREE_LFU_RATIO_PROXY_ASSUMPTION_V1,
+                    "evaluated": False,
+                    "missing_extra": _REQUIRED_EXTRA,
+                    "np_shift_ratio": 0.0,
+                    **common_diagnostics,
                 },
             )
 
         try:
-            result = kplus_enu_over_munu_lfu_ratio(
-                m_kk_gev=m_kk,
-                inputs=self.ratio_inputs,
+            eps_e = charged_current_epsilon(
+                charged,
+                up="u",
+                down="s",
+                lepton="e",
             )
+            eps_mu = charged_current_epsilon(
+                charged,
+                up="u",
+                down="s",
+                lepton="mu",
+            )
+            predicted = shifted_lfu_ratio(float(result.sm_ratio), eps_e, eps_mu)
+            source_diag = charged_current_source_diagnostics(charged)
         except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
             return ConstraintResult(
                 process_id=self.process_id,
@@ -418,70 +467,36 @@ class Constraint:
                 experimental=float(self.anchor.value),
                 budget=float(self.anchor.budget),
                 notes=(
-                    "NOT EVALUATED - invalid KK mass for the K LFU "
-                    "lepton-nonuniversal charged-current proxy"
+                    "NOT EVALUATED - invalid rs_charged_current extra for K017 "
+                    "epsilon_us LFU ratio."
                 ),
                 diagnostics={
-                    "lepton_nonuniversal_proxy_evaluated": False,
-                    "invalid_extra": mass_source,
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception_message": str(exc),
-                    "budget_source": self.anchor.budget_band.source,
-                    "needs_human_physics": LEPTONIC_TREE_LFU_RATIO_PROXY_ASSUMPTION_V1,
+                    "np_shift_ratio": 0.0,
+                    **common_diagnostics,
                 },
             )
 
-        predicted = float(result.ratio)
-        np_shift = float(result.np_shift_ratio)
+        np_shift = float(predicted - result.sm_ratio)
         budget = float(self.anchor.budget)
         ratio = abs(np_shift) / budget if budget > 0.0 else float("inf")
-        diagnostics = dict(result.diagnostics)
+        diagnostics = dict(common_diagnostics)
         diagnostics.update(
             {
-                "lepton_nonuniversal_proxy_evaluated": True,
-                "mass_source": mass_source,
-                "kk_ew_mass_extra_used": mass_source == _OPTIONAL_EW_MASS_EXTRA,
-                "sm_anchor_ratio": float(self.anchor.sm_value),
-                "sm_formula_ratio": float(result.sm_ratio),
-                "sm_formula_minus_anchor": float(result.sm_ratio - self.anchor.sm_value),
-                "experimental_block": self.anchor.experimental.block_key,
-                "sm_block": self.anchor.standard_model.block_key,
-                "dominant_experimental_input_block": (
-                    self.anchor.dominant_experimental_input.block_key
-                ),
-                "supporting_experimental_input_block": (
-                    self.anchor.supporting_experimental_input.block_key
-                ),
-                "dominant_experimental_input_ratio": float(
-                    self.anchor.dominant_experimental_input.value
-                ),
-                "supporting_experimental_input_ratio": float(
-                    self.anchor.supporting_experimental_input.value
-                ),
+                "evaluated": True,
+                "epsilon_us_e": eps_e.epsilon,
+                "epsilon_us_mu": eps_mu.epsilon,
+                "numerator_rate_multiplier": float(eps_e.rate_multiplier),
+                "denominator_rate_multiplier": float(eps_mu.rate_multiplier),
                 "np_shift_ratio": float(np_shift),
-                "experimental_sigma": float(self.anchor.budget_band.experimental_sigma),
-                "sm_theory_sigma": float(self.anchor.budget_band.sm_theory_sigma),
-                "budget_combined_sigma": float(self.anchor.budget_band.combined_sigma),
-                "budget_central_residual": float(
-                    self.anchor.budget_band.central_residual
+                "rs_matching_formula": (
+                    "R_K = R_K^SM |1+epsilon_us^e|^2/"
+                    "|1+epsilon_us^mu|^2"
                 ),
-                "hard_veto_np_shift_budget": float(
-                    self.anchor.budget_band.hard_veto_budget
-                ),
-                "budget_lower_total_edge": float(
-                    self.anchor.budget_band.lower_total_edge
-                ),
-                "budget_upper_total_edge": float(
-                    self.anchor.budget_band.upper_total_edge
-                ),
-                "budget_source": self.anchor.budget_band.source,
-                "budget_policy": (
-                    "|R_total - R_SM(formula)| compared with "
-                    "|R_exp - R_SM(anchor)| + sqrt(sigma_exp^2 + sigma_SM^2)"
-                ),
-                "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": LEPTONIC_TREE_LFU_RATIO_PROXY_ASSUMPTION_V1,
-                "needs_human_physics": LEPTONIC_TREE_LFU_RATIO_PROXY_ASSUMPTION_V1,
+                **source_diag,
             }
         )
 
@@ -496,10 +511,9 @@ class Constraint:
             budget=budget,
             notes=(
                 "R_K uses the charged-leptonic tree helicity ratio with the "
-                "K017 YAML SM radiative normalization. The RS term is a "
-                "documented electron-only m_K^2/M_KK^2 amplitude proxy and is "
-                "marked NEEDS-HUMAN-PHYSICS. The HARD ratio is the NP shift "
-                "over the PDG-vs-SM YAML budget."
+                "K017 YAML SM radiative normalization and minimal-LH "
+                "rs_charged_current epsilons. The HARD ratio is the vector "
+                "LFU NP shift over the PDG-vs-SM YAML budget."
             ),
             diagnostics=diagnostics,
         )

@@ -18,13 +18,15 @@ HARD.  The observed HFLAV branching-fraction average is compared to the UTfit
 SM anchor by giving new physics the uncertainty-aware room
 ``|BR_exp - BR_SM(anchor)| + sqrt(sigma_exp^2 + sigma_SM^2)``.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-The RS contribution is a documented charged-current proxy.  Complete matching
-needs W/W', charged-Higgs, lepton, and neutrino couplings that are not present
-on ``ParameterPoint``.  The proxy rescales the SM amplitude by the
-unit-normalized factor ``1 + m_B^2/M_KK^2`` and is flagged
-``NEEDS-HUMAN-PHYSICS`` in result diagnostics.
+RS matching
+-----------
+For points carrying ``rs_charged_current``, B009 evaluates the minimal
+left-handed W/W' shift
+
+    BR(B+ -> tau+ nu_tau) = BR_SM |1 + epsilon_ub^tau|^2.
+
+Charged-Higgs, right-handed W, scalar, heavy-neutrino, and other nonminimal
+effects remain outside this vector matching.  No mass proxy is used.
 
 Catalog sidecar
 ---------------
@@ -43,17 +45,20 @@ from typing import Any, Mapping
 
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
+from flavor_catalog_constraints.physics_adapters.charged_current import (
+    CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN,
+    charged_current_epsilon,
+    charged_current_source_diagnostics,
+    shifted_branching_fraction,
+)
 from flavor_catalog_constraints.physics_adapters.leptonic_tree import (
-    LEPTONIC_TREE_CHARGED_CURRENT_PROXY_ASSUMPTION_V1,
-    bplus_tau_nu_branching_fraction,
     leptonic_tree_bplus_tau_nu_inputs_from_theory_anchors,
     leptonic_tree_sm_branching_fraction,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
-_OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
-_OPTIONAL_QUARK_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_charged_current"
 _EXPERIMENTAL_ANCHOR_CANDIDATES = ("canonical_average",)
 _PDG_AVERAGE_CANDIDATES = ("pdg_2025_average",)
 _SM_ANCHOR_CANDIDATES = ("sm_prediction",)
@@ -70,7 +75,13 @@ _BUDGET_SOURCE = (
 _PARAMETRIZATION_CITATION = (
     "tree-level charged pseudoscalar leptonic decay formula; "
     "B009.yaml theory_flag_f_B and theory_ckm_abs_vub anchors; "
-    "B009.yaml UTfit Summer 2024 SM BR anchor for validation"
+    "B009.yaml UTfit Summer 2024 SM BR anchor for validation; minimal-LH "
+    "epsilon_ub^tau charged-current shift from rs_charged_current"
+)
+_NONMINIMAL_STATUS = (
+    "PARTIAL: minimal left-handed W/W' epsilon_ub^tau is included; "
+    "charged-Higgs, right-handed W, scalar, and heavy-neutrino effects are not "
+    "built."
 )
 
 
@@ -366,16 +377,6 @@ def _theory_input_citation(anchor: B009Anchor) -> str:
     )
 
 
-def _mass_from_point(point: ParameterPoint) -> tuple[float | None, str | None]:
-    kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-    if kk_ew_mass is not None:
-        return float(kk_ew_mass), _OPTIONAL_EW_MASS_EXTRA
-    couplings = point.get_extra(_OPTIONAL_QUARK_EXTRA)
-    if couplings is not None and getattr(couplings, "M_KK", None) is not None:
-        return float(getattr(couplings, "M_KK")), f"{_OPTIONAL_QUARK_EXTRA}.M_KK"
-    return None, None
-
-
 @register
 class Constraint:
     """Catalogued ``B+ -> tau+ nu_tau`` branching-ratio constraint."""
@@ -394,50 +395,91 @@ class Constraint:
         self.sm_result = leptonic_tree_sm_branching_fraction(self.sm_inputs)
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        m_kk, mass_source = _mass_from_point(point)
-        if m_kk is None:
-            result = self.sm_result
-            predicted = float(result.branching_fraction)
+        result = self.sm_result
+        common_diagnostics: dict[str, Any] = {
+            "sm_anchor_branching_fraction": float(self.anchor.sm_value),
+            "sm_formula_branching_fraction": float(result.sm_branching_fraction),
+            "sm_formula_minus_anchor": float(
+                result.sm_branching_fraction - self.anchor.sm_value
+            ),
+            "pdg_2025_average_branching_fraction": float(
+                self.anchor.pdg_average.value
+            ),
+            "experimental_block": self.anchor.experimental.block_key,
+            "sm_block": self.anchor.standard_model.block_key,
+            "theory_inputs_yaml_backed": True,
+            "f_b_anchor_block": self.anchor.f_b.block_key,
+            "f_b_source_url": self.anchor.f_b.source_url,
+            "v_ub_anchor_block": self.anchor.v_ub.block_key,
+            "v_ub_source_url": self.anchor.v_ub.source_url,
+            "experimental_input_count": len(self.anchor.experimental_inputs),
+            "experimental_input_experiments": tuple(
+                row.experiment for row in self.anchor.experimental_inputs
+            ),
+            "meson_mass_gev": float(result.diagnostics["meson_mass_gev"]),
+            "lepton_mass_gev": float(result.diagnostics["lepton_mass_gev"]),
+            "decay_constant_gev": float(result.diagnostics["decay_constant_gev"]),
+            "ckm_abs": float(result.diagnostics["ckm_abs"]),
+            "experimental_sigma": float(self.anchor.budget_band.experimental_sigma),
+            "sm_theory_sigma": float(self.anchor.budget_band.sm_theory_sigma),
+            "budget_combined_sigma": float(self.anchor.budget_band.combined_sigma),
+            "budget_central_residual": float(
+                self.anchor.budget_band.central_residual
+            ),
+            "hard_veto_np_shift_budget": float(
+                self.anchor.budget_band.hard_veto_budget
+            ),
+            "budget_lower_total_edge": float(
+                self.anchor.budget_band.lower_total_edge
+            ),
+            "budget_upper_total_edge": float(
+                self.anchor.budget_band.upper_total_edge
+            ),
+            "budget_source": self.anchor.budget_band.source,
+            "budget_policy": (
+                "|BR_total - BR_SM(formula)| compared with "
+                "|BR_exp - BR_SM(anchor)| + sqrt(sigma_exp^2 + sigma_SM^2)"
+            ),
+            "parametrization_citation": _PARAMETRIZATION_CITATION,
+            "nonminimal_charged_current_status": _NONMINIMAL_STATUS,
+            "needs_human_physics": CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN,
+        }
+
+        charged = point.get_extra(_REQUIRED_EXTRA)
+        if charged is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
                 passes=True,
-                predicted=predicted,
+                predicted=None,
                 sm_prediction=float(result.sm_branching_fraction),
                 experimental=float(self.anchor.value),
-                ratio=0.0,
+                ratio=None,
                 budget=float(self.anchor.budget),
                 notes=(
-                    "SM tree-level B+ -> tau+ nu_tau evaluated; no KK EW mass "
-                    "was supplied, so the charged-current proxy was not applied."
+                    f"extra {_REQUIRED_EXTRA!r} absent; B+ -> tau nu "
+                    "charged-current epsilon shift was not evaluated."
                 ),
                 diagnostics={
-                    "charged_current_proxy_evaluated": False,
-                    "missing_extra": _OPTIONAL_EW_MASS_EXTRA,
-                    "sm_anchor_branching_fraction": float(self.anchor.sm_value),
-                    "sm_formula_branching_fraction": float(
-                        result.sm_branching_fraction
-                    ),
-                    "sm_formula_minus_anchor": float(
-                        result.sm_branching_fraction - self.anchor.sm_value
-                    ),
-                    "budget_source": self.anchor.budget_band.source,
-                    "theory_inputs_yaml_backed": True,
-                    "f_b_anchor_block": self.anchor.f_b.block_key,
-                    "f_b_source_url": self.anchor.f_b.source_url,
-                    "v_ub_anchor_block": self.anchor.v_ub.block_key,
-                    "v_ub_source_url": self.anchor.v_ub.source_url,
-                    "needs_human_physics": (
-                        LEPTONIC_TREE_CHARGED_CURRENT_PROXY_ASSUMPTION_V1
-                    ),
+                    "evaluated": False,
+                    "missing_extra": _REQUIRED_EXTRA,
+                    "np_shift_branching_fraction": 0.0,
+                    **common_diagnostics,
                 },
             )
 
         try:
-            result = bplus_tau_nu_branching_fraction(
-                m_kk_gev=m_kk,
-                inputs=self.sm_inputs,
+            epsilon_ub_tau = charged_current_epsilon(
+                charged,
+                up="u",
+                down="b",
+                lepton="tau",
             )
+            predicted = shifted_branching_fraction(
+                float(result.sm_branching_fraction),
+                epsilon_ub_tau,
+            )
+            source_diag = charged_current_source_diagnostics(charged)
         except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
             return ConstraintResult(
                 process_id=self.process_id,
@@ -448,80 +490,34 @@ class Constraint:
                 experimental=float(self.anchor.value),
                 budget=float(self.anchor.budget),
                 notes=(
-                    "NOT EVALUATED - invalid KK mass for the B+ -> tau+ nu_tau "
-                    "charged-current proxy"
+                    "NOT EVALUATED - invalid rs_charged_current extra for B009 "
+                    "epsilon_ub^tau shift."
                 ),
                 diagnostics={
-                    "charged_current_proxy_evaluated": False,
-                    "invalid_extra": mass_source,
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception_message": str(exc),
-                    "budget_source": self.anchor.budget_band.source,
-                    "needs_human_physics": (
-                        LEPTONIC_TREE_CHARGED_CURRENT_PROXY_ASSUMPTION_V1
-                    ),
+                    "np_shift_branching_fraction": 0.0,
+                    **common_diagnostics,
                 },
             )
 
-        predicted = float(result.branching_fraction)
-        np_shift = float(result.np_shift_branching_fraction)
+        predicted = float(predicted)
+        np_shift = float(predicted - result.sm_branching_fraction)
         budget = float(self.anchor.budget)
         ratio = abs(np_shift) / budget if budget > 0.0 else float("inf")
-        diagnostics = dict(result.diagnostics)
+        diagnostics = dict(common_diagnostics)
         diagnostics.update(
             {
-                "charged_current_proxy_evaluated": True,
-                "mass_source": mass_source,
-                "kk_ew_mass_extra_used": mass_source == _OPTIONAL_EW_MASS_EXTRA,
-                "sm_anchor_branching_fraction": float(self.anchor.sm_value),
-                "sm_formula_branching_fraction": float(
-                    result.sm_branching_fraction
-                ),
-                "sm_formula_minus_anchor": float(
-                    result.sm_branching_fraction - self.anchor.sm_value
-                ),
-                "pdg_2025_average_branching_fraction": float(
-                    self.anchor.pdg_average.value
-                ),
-                "experimental_block": self.anchor.experimental.block_key,
-                "sm_block": self.anchor.standard_model.block_key,
-                "theory_inputs_yaml_backed": True,
-                "f_b_anchor_block": self.anchor.f_b.block_key,
-                "f_b_source_url": self.anchor.f_b.source_url,
-                "v_ub_anchor_block": self.anchor.v_ub.block_key,
-                "v_ub_source_url": self.anchor.v_ub.source_url,
-                "experimental_input_count": len(self.anchor.experimental_inputs),
-                "experimental_input_experiments": tuple(
-                    row.experiment for row in self.anchor.experimental_inputs
-                ),
+                "evaluated": True,
+                "epsilon_ub_tau": epsilon_ub_tau.epsilon,
+                "amplitude_multiplier": float(epsilon_ub_tau.rate_multiplier),
                 "np_shift_branching_fraction": float(np_shift),
-                "experimental_sigma": float(self.anchor.budget_band.experimental_sigma),
-                "sm_theory_sigma": float(self.anchor.budget_band.sm_theory_sigma),
-                "budget_combined_sigma": float(self.anchor.budget_band.combined_sigma),
-                "budget_central_residual": float(
-                    self.anchor.budget_band.central_residual
+                "rs_matching_formula": (
+                    "BR(B+ -> tau+ nu_tau) = BR_SM |1+epsilon_ub^tau|^2"
                 ),
-                "hard_veto_np_shift_budget": float(
-                    self.anchor.budget_band.hard_veto_budget
-                ),
-                "budget_lower_total_edge": float(
-                    self.anchor.budget_band.lower_total_edge
-                ),
-                "budget_upper_total_edge": float(
-                    self.anchor.budget_band.upper_total_edge
-                ),
-                "budget_source": self.anchor.budget_band.source,
-                "budget_policy": (
-                    "|BR_total - BR_SM(formula)| compared with "
-                    "|BR_exp - BR_SM(anchor)| + sqrt(sigma_exp^2 + sigma_SM^2)"
-                ),
-                "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": (
-                    LEPTONIC_TREE_CHARGED_CURRENT_PROXY_ASSUMPTION_V1
-                ),
-                "needs_human_physics": (
-                    LEPTONIC_TREE_CHARGED_CURRENT_PROXY_ASSUMPTION_V1
-                ),
+                **source_diag,
             }
         )
 
@@ -536,10 +532,9 @@ class Constraint:
             budget=budget,
             notes=(
                 "BR(B+ -> tau+ nu_tau) uses the tree-level charged-leptonic "
-                "formula. The RS term is a documented charged-current "
-                "m_B^2/M_KK^2 amplitude proxy and is marked "
-                "NEEDS-HUMAN-PHYSICS. The HARD ratio is the NP shift over the "
-                "HFLAV-vs-UTfit YAML budget."
+                "formula with the B009 YAML f_B and |Vub| anchors and the "
+                "minimal-LH rs_charged_current epsilon_ub^tau shift. The HARD "
+                "ratio is the NP shift over the HFLAV-vs-UTfit YAML budget."
             ),
             diagnostics=diagnostics,
         )

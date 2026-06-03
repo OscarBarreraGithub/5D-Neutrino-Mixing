@@ -13,6 +13,11 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.top_higgs_ew import EW002 as ew002_module
+from tests.constraints.charged_current_phase5b_helpers import (
+    charged_with_epsilon,
+    sample_charged_point,
+    universal_charged_point,
+)
 
 _PID = "EW002"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -145,13 +150,14 @@ def test_numerical_delta_ckm_matches_independent_yaml_recomputation():
     expected_delta = float(first_row["value"] - 1.0)
     expected_pull = abs(expected_delta) / budget
 
-    result = constraint.evaluate(point_builder.empty_point())
+    result = constraint.evaluate(universal_charged_point())
 
-    assert result.predicted == pytest.approx(0.9983)
+    assert result.predicted == pytest.approx(1.0)
     assert result.sm_prediction == pytest.approx(1.0)
     assert result.experimental == pytest.approx(first_row["value"])
     assert result.budget == pytest.approx(0.0007)
-    assert result.diagnostics["delta_ckm"] == pytest.approx(expected_delta)
+    assert result.diagnostics["sm_vs_data_delta_ckm"] == pytest.approx(expected_delta)
+    assert result.diagnostics["np_shift_delta_ckm"] == pytest.approx(0.0, abs=1.0e-18)
     assert result.ratio == pytest.approx(expected_pull)
     assert result.ratio == pytest.approx(2.4285714285714284)
 
@@ -194,7 +200,7 @@ def test_vud_vus_diagnostic_arithmetic_is_independent():
 
 
 def test_soft_tension_reports_np_gap_and_real_finite_fields():
-    result = fcc.get(_PID).evaluate(point_builder.empty_point())
+    result = fcc.get(_PID).evaluate(sample_charged_point())
 
     assert result.process_id == _PID
     assert result.passes is False
@@ -207,9 +213,39 @@ def test_soft_tension_reports_np_gap_and_real_finite_fields():
     ):
         assert isinstance(value, float)
         assert math.isfinite(value)
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
-    assert result.diagnostics["np_shift_delta_ckm"] == pytest.approx(0.0)
+    charged = sample_charged_point().extras["rs_charged_current"]
+    expected_delta_np = (
+        2.0
+        * fcc.get(_PID).anchor.vud.value**2
+        * charged.epsilon[0, 0, 0].real
+        + 2.0
+        * fcc.get(_PID).anchor.vus.value**2
+        * (0.5 * (charged.epsilon[0, 1, 0] + charged.epsilon[0, 1, 1])).real
+    )
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["np_shift_delta_ckm"] == pytest.approx(expected_delta_np)
+    assert result.diagnostics["np_shift_delta_ckm"] == pytest.approx(
+        5.254734244800866e-05
+    )
+    assert result.predicted == pytest.approx(1.000052547342448)
+    assert result.diagnostics["epsilon_us_light_average_e_mu"] == pytest.approx(
+        0.5 * (charged.epsilon[0, 1, 0] + charged.epsilon[0, 1, 1])
+    )
     assert result.diagnostics["vub_value_block_in_ew002_yaml"] is False
+    assert "mass proxy" not in result.notes
+
+
+def test_absent_charged_current_degrades_non_vetoing():
+    result = fcc.get(_PID).evaluate(point_builder.empty_point())
+
+    assert result.passes is True
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["missing_extra"] == "rs_charged_current"
+    assert result.diagnostics["sm_vs_data_pull_sigma"] == pytest.approx(
+        2.4285714285714284
+    )
 
 
 def test_safe_unitarity_sum_passes_and_observed_soft_tension_fails():
@@ -226,10 +262,10 @@ def test_safe_unitarity_sum_passes_and_observed_soft_tension_fails():
         budget=0.02,
     )
 
-    safe = safe_constraint.evaluate(point_builder.empty_point())
-    excluded = excluded_constraint.evaluate(point_builder.empty_point())
+    safe = safe_constraint.evaluate(universal_charged_point())
+    excluded = excluded_constraint.evaluate(universal_charged_point())
     expected_safe_delta = float(0.8 * 0.8 + 0.6 * 0.6 + 0.0 * 0.0 - 1.0)
-    expected_excluded_delta = float(0.8 * 0.8 + 0.5 * 0.5 + 0.0 * 0.0 - 1.0)
+    expected_excluded_delta = float(1.0 - excluded_sum)
     expected_excluded_pull = abs(expected_excluded_delta) / 0.02
 
     assert safe_sum == pytest.approx(1.0)
@@ -240,9 +276,21 @@ def test_safe_unitarity_sum_passes_and_observed_soft_tension_fails():
 
     assert excluded_sum == pytest.approx(0.89)
     assert excluded.passes is False
-    assert excluded.predicted == pytest.approx(excluded_sum)
+    assert excluded.predicted == pytest.approx(1.0)
     assert excluded.diagnostics["delta_ckm"] == pytest.approx(expected_excluded_delta)
     assert excluded.ratio == pytest.approx(expected_excluded_pull)
+
+    shifted = charged_with_epsilon(
+        universal_charged_point().extras["rs_charged_current"],
+        {(0, 0, 0): 1.0e-3 + 0.0j},
+    )
+    shifted_result = safe_constraint.evaluate(
+        point_builder.make_point(rs_charged_current=shifted)
+    )
+    assert shifted_result.diagnostics["epsilon_ud_e"] == pytest.approx(1.0e-3 + 0.0j)
+    assert shifted_result.diagnostics["np_shift_delta_ckm"] == pytest.approx(
+        2.0 * 0.8 * 0.8 * 1.0e-3
+    )
 
 
 def test_evaluate_is_pure_and_deterministic():

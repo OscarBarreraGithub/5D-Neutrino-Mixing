@@ -5,7 +5,6 @@ from __future__ import annotations
 import math
 from pathlib import Path
 
-import numpy as np
 import pytest
 import yaml
 
@@ -14,8 +13,11 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.beauty import B025 as b025_module
-from quarkConstraints.couplings import QuarkMassBasisCouplings
-from quarkConstraints.semileptonic_lfu import evaluate_rd_lfu_ratio
+from tests.constraints.charged_current_phase5b_helpers import (
+    charged_with_epsilon,
+    sample_charged_point,
+    universal_charged_point,
+)
 
 _PID = "B025"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -25,57 +27,6 @@ _SIDECAR = _REPO_ROOT / "flavor_catalog" / "processes" / "beauty" / "B025.yaml"
 def _yaml_pdg_block():
     with open(_SIDECAR) as handle:
         return yaml.safe_load(handle)["pdg_or_equivalent"]
-
-
-def _bc_proxy_couplings(
-    *,
-    charm_left: complex = 1.0 + 0.0j,
-    bottom_right: complex = 0.0j,
-    M_KK: float = 3000.0,
-    g_s: float = 1.0,
-) -> QuarkMassBasisCouplings:
-    """Minimal valid mass-basis couplings for the c_L-b_R proxy slots."""
-
-    zeros = np.zeros((3, 3), dtype=np.complex128)
-    left_up = zeros.copy()
-    right_down = zeros.copy()
-    left_up[1, 1] = charm_left
-    right_down[2, 2] = bottom_right
-    return QuarkMassBasisCouplings(
-        M_KK=M_KK,
-        xi_KK=1.0,
-        alpha_s=0.09,
-        g_s=g_s,
-        left_overlap=zeros,
-        right_up_overlap=zeros,
-        right_down_overlap=zeros,
-        left_up=left_up,
-        left_down=zeros.copy(),
-        right_up=zeros.copy(),
-        right_down=right_down,
-    )
-
-
-def _manual_rd_proxy(
-    couplings: QuarkMassBasisCouplings,
-    *,
-    sm_rd: float,
-    m_kk_gev: float | None = None,
-    bottom_mass_gev: float = 4.183,
-    tau_mass_gev: float = 1.77686,
-    gf_gev_minus2: float = 1.1663787e-5,
-) -> tuple[float, complex]:
-    resolved_mkk = float(couplings.M_KK if m_kk_gev is None else m_kk_gev)
-    charm_left_overlap = complex(couplings.left_up[1, 1]) / float(couplings.g_s)
-    bottom_right_overlap = complex(couplings.right_down[2, 2]) / float(couplings.g_s)
-    scalar_shift = (
-        charm_left_overlap
-        * bottom_right_overlap
-        * bottom_mass_gev
-        * tau_mass_gev
-        / (2.0 * math.sqrt(2.0) * gf_gev_minus2 * resolved_mkk**2)
-    )
-    return float(sm_rd * abs(1.0 + scalar_shift) ** 2), complex(scalar_shift)
 
 
 def test_registration_metadata():
@@ -160,14 +111,15 @@ def test_evaluate_without_input_degrades_gracefully():
     assert result.sm_prediction == pytest.approx(constraint.anchor.sm_value)
     assert result.budget == pytest.approx(constraint.anchor.budget)
     assert result.diagnostics["evaluated"] is False
-    assert result.diagnostics["missing_extra"] == "quark_mass_basis_couplings"
+    assert result.diagnostics["missing_extra"] == "rs_charged_current"
+    assert result.diagnostics["matching_coverage"] == "PARTIAL"
+    assert "PARTIAL" in result.diagnostics["b025_partial_matching_status"]
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
 
 
 def test_sm_limit_rd_matches_yaml_sm_reference_and_manual_budget():
     constraint = fcc.get(_PID)
-    couplings = _bc_proxy_couplings(bottom_right=0.0j)
-    result = constraint.evaluate(point_builder.build_from_quark_couplings(couplings))
+    result = constraint.evaluate(universal_charged_point())
     expected_ratio = abs(constraint.anchor.sm_value - constraint.anchor.value) / (
         abs(constraint.anchor.value - constraint.anchor.sm_value)
         + math.sqrt(
@@ -183,30 +135,35 @@ def test_sm_limit_rd_matches_yaml_sm_reference_and_manual_budget():
     assert result.ratio == pytest.approx(0.7181657110965687)
     assert result.passes is True
     assert result.diagnostics["sm_formula_minus_anchor"] == pytest.approx(0.0)
+    assert result.diagnostics["epsilon_cb_tau"] == 0.0j
+    assert result.diagnostics["epsilon_cb_light_average_e_mu"] == 0.0j
+    assert result.diagnostics["np_shift_rd"] == pytest.approx(0.0)
 
 
-def test_np_prediction_matches_underlying_core_and_independent_formula():
+def test_vector_lfu_prediction_matches_independent_formula():
     constraint = fcc.get(_PID)
-    couplings = _bc_proxy_couplings(charm_left=1.0 + 0.2j, bottom_right=3.8 - 0.1j)
-    point = point_builder.build_from_quark_couplings(couplings)
-    result = constraint.evaluate(point)
-    direct = evaluate_rd_lfu_ratio(couplings, inputs=constraint.sm_inputs)
-    manual, scalar_shift = _manual_rd_proxy(couplings, sm_rd=constraint.anchor.sm_value)
-
-    assert result.predicted == pytest.approx(direct.ratio)
-    assert result.predicted == pytest.approx(manual)
-    assert result.diagnostics["scalar_amplitude_shift"] == pytest.approx(scalar_shift)
-    assert result.diagnostics["response_factor"] == pytest.approx(
-        abs(1.0 + scalar_shift) ** 2
+    charged = charged_with_epsilon(
+        universal_charged_point().extras["rs_charged_current"],
+        {(1, 2, 2): 0.5 + 0.0j, (1, 2, 0): 0.0j, (1, 2, 1): 0.0j},
     )
+    point = point_builder.make_point(rs_charged_current=charged)
+    result = constraint.evaluate(point)
+    manual = constraint.anchor.sm_value * abs(1.0 + 0.5) ** 2
+
+    assert result.predicted == pytest.approx(manual)
+    assert result.diagnostics["epsilon_cb_tau"] == pytest.approx(0.5 + 0.0j)
+    assert result.diagnostics["epsilon_cb_light_average_e_mu"] == pytest.approx(0.0j)
+    assert result.diagnostics["tau_rate_multiplier"] == pytest.approx(2.25)
+    assert result.diagnostics["light_rate_multiplier"] == pytest.approx(1.0)
     assert result.diagnostics["np_shift_rd"] == pytest.approx(
         result.predicted - constraint.anchor.sm_value
     )
+    assert result.passes is False
+    assert "mass proxy" not in result.notes
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
-    couplings = _bc_proxy_couplings(charm_left=1.0 + 0.2j, bottom_right=3.8 - 0.1j)
-    result = fcc.get(_PID).evaluate(point_builder.build_from_quark_couplings(couplings))
+    result = fcc.get(_PID).evaluate(sample_charged_point())
 
     assert result.process_id == _PID
     for value in (
@@ -218,85 +175,75 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     ):
         assert isinstance(value, float)
         assert math.isfinite(value)
-    for key in (
-        "charm_left_coupling",
-        "bottom_right_coupling",
-        "charm_left_overlap",
-        "bottom_right_overlap",
-        "scalar_overlap_proxy",
-        "scalar_amplitude_shift",
-    ):
+    for key in ("epsilon_cb_tau", "epsilon_cb_light_average_e_mu"):
         assert isinstance(result.diagnostics[key], complex)
     for key in (
-        "m_kk_gev",
-        "matching_scale_gev",
-        "bottom_mass_gev",
-        "tau_mass_gev",
-        "gf_gev_minus2",
-        "response_factor",
+        "kk_ew_mass_gev",
+        "m_w_gev",
+        "m_wprime_gev",
+        "tau_rate_multiplier",
+        "light_rate_multiplier",
         "np_shift_rd",
         "budget_combined_sigma",
     ):
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
-    assert result.diagnostics["up_down_sector_indices"] == (1, 2)
+    assert result.diagnostics["matching_coverage"] == "PARTIAL"
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
 
 
 @pytest.mark.parametrize(
-    ("couplings", "expected_pass"),
+    ("epsilon_cb_tau", "expected_pass"),
     [
-        (_bc_proxy_couplings(bottom_right=3.8), True),
-        (_bc_proxy_couplings(bottom_right=20.0), False),
+        (0.0, True),
+        (0.5, False),
     ],
 )
-def test_safe_point_passes_and_large_np_point_fails(
-    couplings: QuarkMassBasisCouplings,
+def test_safe_point_passes_and_large_vector_shift_fails(
+    epsilon_cb_tau: float,
     expected_pass: bool,
 ):
     constraint = fcc.get(_PID)
-    result = constraint.evaluate(point_builder.build_from_quark_couplings(couplings))
-    manual, _ = _manual_rd_proxy(couplings, sm_rd=constraint.anchor.sm_value)
+    charged = charged_with_epsilon(
+        universal_charged_point().extras["rs_charged_current"],
+        {(1, 2, 2): complex(epsilon_cb_tau), (1, 2, 0): 0.0j, (1, 2, 1): 0.0j},
+    )
+    result = constraint.evaluate(point_builder.make_point(rs_charged_current=charged))
+    manual = constraint.anchor.sm_value * abs(1.0 + epsilon_cb_tau) ** 2
 
     assert result.passes is expected_pass
     assert result.predicted == pytest.approx(manual)
     assert result.ratio == pytest.approx(
         abs(result.predicted - constraint.anchor.value) / constraint.anchor.budget
     )
-    if expected_pass:
-        assert result.ratio < 1.0
-    else:
-        assert result.ratio > 1.0
+    assert (result.ratio < 1.0) is expected_pass
 
 
-def test_optional_kk_ew_mass_extra_changes_matching_scale():
-    couplings = _bc_proxy_couplings(bottom_right=8.0)
-    default_point = point_builder.build_from_quark_couplings(couplings)
-    ew_point = point_builder.make_point(
-        quark_mass_basis_couplings=couplings,
-        kk_ew_mass_gev=6000.0,
+def test_universal_vector_shift_cancels_in_lfu_ratio_and_partial_flag_stays():
+    constraint = fcc.get(_PID)
+    charged = charged_with_epsilon(
+        universal_charged_point().extras["rs_charged_current"],
+        {
+            (1, 2, 0): 0.2 + 0.0j,
+            (1, 2, 1): 0.2 + 0.0j,
+            (1, 2, 2): 0.2 + 0.0j,
+        },
     )
-    default_result = fcc.get(_PID).evaluate(default_point)
-    ew_result = fcc.get(_PID).evaluate(ew_point)
+    result = constraint.evaluate(point_builder.make_point(rs_charged_current=charged))
 
-    assert default_result.diagnostics["m_kk_gev"] == pytest.approx(3000.0)
-    assert ew_result.diagnostics["m_kk_gev"] == pytest.approx(6000.0)
-    assert ew_result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert abs(ew_result.diagnostics["scalar_amplitude_shift"]) == pytest.approx(
-        abs(default_result.diagnostics["scalar_amplitude_shift"]) / 4.0
-    )
+    assert result.predicted == pytest.approx(constraint.anchor.sm_value)
+    assert result.diagnostics["tau_rate_multiplier"] == pytest.approx(1.44)
+    assert result.diagnostics["light_rate_multiplier"] == pytest.approx(1.44)
+    assert result.diagnostics["matching_coverage"] == "PARTIAL"
+    assert "PARTIAL" in result.diagnostics["b025_partial_matching_status"]
 
 
 def test_evaluate_is_pure_and_deterministic():
-    couplings = _bc_proxy_couplings(charm_left=1.0 + 0.2j, bottom_right=3.8 - 0.1j)
-    before_left_up = couplings.left_up.copy()
-    before_right_down = couplings.right_down.copy()
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sample_charged_point()
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    np.testing.assert_array_equal(couplings.left_up, before_left_up)
-    np.testing.assert_array_equal(couplings.right_down, before_right_down)
+    assert point.get_extra("rs_charged_current") is not None

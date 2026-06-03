@@ -12,13 +12,16 @@ The arithmetic and uncertainty propagation live in
 ``quarkConstraints.ckm_extraction`` and are reached only through
 ``flavor_catalog_constraints.physics_adapters.ckm_extraction``.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-A rigorous RS shift for K_l3 would require charged-current W/W'/KK
-electroweak quark couplings, possible right-handed-current terms,
-lepton-sector/G_F shifts, and radiative/isospin convention bookkeeping on
-``ParameterPoint``.  Those inputs are not present, so this v1 applies no
-point-dependent RS shift and reports the data/lattice consistency diagnostic.
+RS matching
+-----------
+For points carrying ``rs_charged_current``, K018 evaluates the minimal
+left-handed W/W' shift
+
+    |V_us|_app = |V_us| |1 + epsilon_us^light|.
+
+The light epsilon is the e/mu average because the K018 YAML extraction does
+not provide semileptonic mode weights.  Radiative/isospin bookkeeping remains
+diagnostic-only; no mass proxy is used.
 
 Severity
 --------
@@ -44,8 +47,14 @@ from typing import Any, Mapping, Sequence
 from flavor_catalog_constraints import anchors as anchor_scaffold
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
+from flavor_catalog_constraints.physics_adapters.charged_current import (
+    CHARGED_CURRENT_MINIMAL_LH_STATUS,
+    CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN,
+    charged_current_light_epsilon,
+    charged_current_source_diagnostics,
+    shifted_abs_ckm,
+)
 from flavor_catalog_constraints.physics_adapters.ckm_extraction import (
-    K018_RS_MATCHING_GAP,
     extract_vus_from_kl3,
     vus_consistency_pull,
 )
@@ -60,6 +69,12 @@ _FLAG_DERIVED_VUS_VALUE_ID = "FLAG2024:K018:Vus_from_fplus_Nf211"
 _BUDGET_SOURCE = (
     "flavor_catalog/processes/kaon/K018.yaml "
     "PDG2025:K018:Vus_from_Kl3.uncertainty_total"
+)
+_REQUIRED_EXTRA = "rs_charged_current"
+_RADIATIVE_ISOSPIN_MODE_STATUS = (
+    "PARTIAL: K018 consumes the rigorous minimal-LH epsilon_us shift, but "
+    "radiative/isospin conventions and e/mu mode weights are not exposed as "
+    "point-dependent inputs."
 )
 
 
@@ -315,7 +330,6 @@ class Constraint:
         self.anchor = _load_k018_anchor(self.process_id)
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        _ = point
         radiative_isospin = self.anchor.pdg_derived_vus.uncertainty_breakdown.get(
             "radiative_isospin",
             0.0,
@@ -332,52 +346,128 @@ class Constraint:
             reference_vus=self.anchor.pdg_derived_vus.value,
             budget=self.anchor.budget,
         )
+        common_diagnostics: dict[str, Any] = {
+            "qcd_running_applied": False,
+            "fplus_vus_value_id": self.anchor.fplus_vus.value_id,
+            "fplus_value_id": self.anchor.fplus_zero.value_id,
+            "pdg_derived_vus_value_id": self.anchor.pdg_derived_vus.value_id,
+            "flag_derived_vus_value_id": self.anchor.flag_derived_vus.value_id,
+            "fplus_vus": float(extraction.fplus_vus_product),
+            "fplus_vus_uncertainty": float(extraction.fplus_vus_uncertainty),
+            "fplus_zero": float(extraction.fplus_zero),
+            "fplus_zero_uncertainty": float(extraction.fplus_zero_uncertainty),
+            "extracted_vus_uncertainty": float(extraction.total_uncertainty),
+            "extracted_vus_uncertainty_components": dict(
+                extraction.uncertainty_components
+            ),
+            "pdg_yaml_uncertainty_breakdown": dict(
+                self.anchor.pdg_derived_vus.uncertainty_breakdown
+            ),
+            "sm_delta_vus_vs_pdg_derived": float(consistency.delta_vus),
+            "sm_abs_delta_vus_vs_pdg_derived": float(abs(consistency.delta_vus)),
+            "flag_derived_vus": float(self.anchor.flag_derived_vus.value),
+            "sm_delta_vus_vs_flag_derived": float(
+                extraction.vus - self.anchor.flag_derived_vus.value
+            ),
+            "budget_source": self.anchor.budget_source,
+            "fplus_vus_block": self.anchor.fplus_vus.block_key,
+            "fplus_block": self.anchor.fplus_zero.block_key,
+            "pdg_derived_vus_block": self.anchor.pdg_derived_vus.block_key,
+            "flag_derived_vus_block": self.anchor.flag_derived_vus.block_key,
+            "minimal_lh_vector_matching_status": CHARGED_CURRENT_MINIMAL_LH_STATUS,
+            "radiative_isospin_mode_weight_status": _RADIATIVE_ISOSPIN_MODE_STATUS,
+            "nonminimal_charged_current_status": (
+                CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN
+            ),
+        }
+
+        charged = point.get_extra(_REQUIRED_EXTRA)
+        if charged is None:
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                predicted=None,
+                sm_prediction=None,
+                experimental=float(self.anchor.pdg_derived_vus.value),
+                ratio=None,
+                budget=float(consistency.budget),
+                notes=(
+                    f"extra {_REQUIRED_EXTRA!r} absent; K_l3 epsilon_us shift "
+                    "was not evaluated."
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "missing_extra": _REQUIRED_EXTRA,
+                    "parameter_point_used": False,
+                    "np_shift_vus": 0.0,
+                    **common_diagnostics,
+                },
+            )
+
+        try:
+            epsilon_us = charged_current_light_epsilon(charged, up="u", down="s")
+            shifted_vus = shifted_abs_ckm(extraction.vus, epsilon_us)
+            shifted_consistency = vus_consistency_pull(
+                extracted_vus=shifted_vus,
+                reference_vus=self.anchor.pdg_derived_vus.value,
+                budget=self.anchor.budget,
+            )
+            source_diag = charged_current_source_diagnostics(charged)
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                predicted=None,
+                sm_prediction=None,
+                experimental=float(self.anchor.pdg_derived_vus.value),
+                ratio=None,
+                budget=float(consistency.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_charged_current extra for K018 "
+                    "epsilon_us shift."
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "parameter_point_used": False,
+                    "np_shift_vus": 0.0,
+                    **common_diagnostics,
+                },
+            )
 
         return ConstraintResult(
             process_id=self.process_id,
             severity=self.severity,
-            passes=bool(consistency.passes),
-            predicted=float(extraction.vus),
+            passes=bool(shifted_consistency.passes),
+            predicted=float(shifted_vus),
             sm_prediction=None,
             experimental=float(self.anchor.pdg_derived_vus.value),
-            ratio=float(consistency.pull_sigma),
-            budget=float(consistency.budget),
+            ratio=float(shifted_consistency.pull_sigma),
+            budget=float(shifted_consistency.budget),
             notes=(
                 "K_l3 |V_us| is recomputed from YAML |V_us| f_+(0) and FLAG "
-                "f_+(0). The SOFT ratio compares the recomputed value with the "
-                "YAML-derived |V_us| using the K018.yaml total uncertainty. "
-                "No point-dependent RS charged-current shift is applied."
+                "f_+(0), then shifted as |V_us|_app = |V_us| |1 + "
+                "epsilon_us^light| from rs_charged_current. The SOFT ratio "
+                "compares the shifted value with the YAML-derived |V_us|."
             ),
             diagnostics={
-                "parameter_point_used": False,
-                "qcd_running_applied": False,
-                "np_shift_vus": 0.0,
-                "needs_human_physics": K018_RS_MATCHING_GAP,
-                "fplus_vus_value_id": self.anchor.fplus_vus.value_id,
-                "fplus_value_id": self.anchor.fplus_zero.value_id,
-                "pdg_derived_vus_value_id": self.anchor.pdg_derived_vus.value_id,
-                "flag_derived_vus_value_id": self.anchor.flag_derived_vus.value_id,
-                "fplus_vus": float(extraction.fplus_vus_product),
-                "fplus_vus_uncertainty": float(extraction.fplus_vus_uncertainty),
-                "fplus_zero": float(extraction.fplus_zero),
-                "fplus_zero_uncertainty": float(extraction.fplus_zero_uncertainty),
-                "extracted_vus_uncertainty": float(extraction.total_uncertainty),
-                "extracted_vus_uncertainty_components": dict(
-                    extraction.uncertainty_components
+                "evaluated": True,
+                "parameter_point_used": True,
+                "epsilon_us_light_average_e_mu": epsilon_us.epsilon,
+                "abs_1_plus_epsilon_us_light": float(epsilon_us.abs_multiplier),
+                "np_shift_vus": float(shifted_vus - extraction.vus),
+                "relative_shift_vus": float((shifted_vus / extraction.vus) - 1.0),
+                "delta_vus_vs_pdg_derived": float(
+                    shifted_consistency.delta_vus
                 ),
-                "pdg_yaml_uncertainty_breakdown": dict(
-                    self.anchor.pdg_derived_vus.uncertainty_breakdown
+                "abs_delta_vus_vs_pdg_derived": float(
+                    abs(shifted_consistency.delta_vus)
                 ),
-                "delta_vus_vs_pdg_derived": float(consistency.delta_vus),
-                "abs_delta_vus_vs_pdg_derived": float(abs(consistency.delta_vus)),
-                "flag_derived_vus": float(self.anchor.flag_derived_vus.value),
-                "delta_vus_vs_flag_derived": float(
-                    extraction.vus - self.anchor.flag_derived_vus.value
-                ),
-                "budget_source": self.anchor.budget_source,
-                "fplus_vus_block": self.anchor.fplus_vus.block_key,
-                "fplus_block": self.anchor.fplus_zero.block_key,
-                "pdg_derived_vus_block": self.anchor.pdg_derived_vus.block_key,
-                "flag_derived_vus_block": self.anchor.flag_derived_vus.block_key,
+                **source_diag,
+                **common_diagnostics,
             },
         )

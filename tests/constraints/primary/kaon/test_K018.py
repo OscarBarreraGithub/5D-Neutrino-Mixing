@@ -13,6 +13,11 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.kaon import K018 as k018_module
+from tests.constraints.charged_current_phase5b_helpers import (
+    charged_with_epsilon,
+    sample_charged_point,
+    universal_charged_point,
+)
 from quarkConstraints.ckm_extraction import (
     extract_vus_from_kl3,
     vus_consistency_pull,
@@ -182,7 +187,7 @@ def test_numerical_extraction_matches_core_ckm_recomputation():
         budget=constraint.anchor.budget,
     )
 
-    result = constraint.evaluate(point_builder.empty_point())
+    result = constraint.evaluate(universal_charged_point())
 
     assert result.predicted == pytest.approx(extraction.vus)
     assert result.predicted == pytest.approx(0.22330377397401527)
@@ -205,22 +210,49 @@ def test_numerical_extraction_matches_core_ckm_recomputation():
     assert result.diagnostics["delta_vus_vs_pdg_derived"] == pytest.approx(
         consistency.delta_vus
     )
+    assert result.diagnostics["epsilon_us_light_average_e_mu"] == 0.0j
+    assert result.diagnostics["np_shift_vus"] == pytest.approx(0.0)
     assert result.diagnostics["flag_derived_vus"] == pytest.approx(
         constraint.anchor.flag_derived_vus.value
     )
     assert result.passes is consistency.passes
 
 
-def test_real_finite_fields_and_needs_human_physics_gap():
-    result = fcc.get(_PID).evaluate(point_builder.make_point(kk_ew_mass_gev=6000.0))
+def test_rigorous_epsilon_path_shifts_vus_and_keeps_real_finite_fields():
+    constraint = fcc.get(_PID)
+    point = sample_charged_point()
+    charged = point.extras["rs_charged_current"]
+    epsilon_us = 0.5 * (charged.epsilon[0, 1, 0] + charged.epsilon[0, 1, 1])
+    sm_vus = 0.22330377397401527
+    expected = sm_vus * abs(1.0 + epsilon_us)
+
+    result = constraint.evaluate(point)
 
     for value in (result.predicted, result.ratio, result.budget, result.experimental):
         assert isinstance(value, float)
         assert math.isfinite(value)
     assert result.sm_prediction is None
-    assert result.diagnostics["parameter_point_used"] is False
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["parameter_point_used"] is True
+    assert result.predicted == pytest.approx(expected)
+    assert result.predicted == pytest.approx(0.2233096753995752)
+    assert result.diagnostics["epsilon_us_light_average_e_mu"] == pytest.approx(
+        epsilon_us
+    )
+    assert result.diagnostics["np_shift_vus"] == pytest.approx(expected - sm_vus)
+    assert "PARTIAL" in result.diagnostics["radiative_isospin_mode_weight_status"]
+    assert "mass proxy" not in result.notes
+
+
+def test_absent_charged_current_degrades_non_vetoing():
+    result = fcc.get(_PID).evaluate(point_builder.empty_point())
+
+    assert result.passes is True
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["missing_extra"] == "rs_charged_current"
     assert result.diagnostics["np_shift_vus"] == pytest.approx(0.0)
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
 
 
 def test_safe_consistency_point_passes_and_controlled_tension_fails():
@@ -229,13 +261,13 @@ def test_safe_consistency_point_passes_and_controlled_tension_fails():
         fplus=1.0,
         reference_vus=0.2,
         budget=0.01,
-    ).evaluate(point_builder.empty_point())
+    ).evaluate(universal_charged_point())
     excluded = _controlled_constraint(
         fplus_vus=0.2,
         fplus=1.0,
         reference_vus=0.16,
         budget=0.01,
-    ).evaluate(point_builder.empty_point())
+    ).evaluate(universal_charged_point())
 
     assert safe.passes is True
     assert safe.predicted == pytest.approx(0.2)
@@ -244,9 +276,22 @@ def test_safe_consistency_point_passes_and_controlled_tension_fails():
     assert excluded.predicted == pytest.approx(0.2)
     assert excluded.ratio == pytest.approx(4.0)
 
+    shifted = charged_with_epsilon(
+        universal_charged_point().extras["rs_charged_current"],
+        {(0, 1, 0): 0.1 + 0.0j, (0, 1, 1): 0.1 + 0.0j},
+    )
+    shifted_result = _controlled_constraint(
+        fplus_vus=0.2,
+        fplus=1.0,
+        reference_vus=0.2,
+        budget=0.01,
+    ).evaluate(point_builder.make_point(rs_charged_current=shifted))
+    assert shifted_result.predicted == pytest.approx(0.22)
+    assert shifted_result.passes is False
+
 
 def test_evaluate_is_pure_and_deterministic():
-    point = point_builder.make_point(kk_ew_mass_gev=6000.0)
+    point = sample_charged_point()
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
@@ -254,5 +299,5 @@ def test_evaluate_is_pure_and_deterministic():
     empty = constraint.evaluate(point_builder.empty_point())
 
     assert first == second
-    assert first == empty
-    assert point.extras == {"kk_ew_mass_gev": 6000.0}
+    assert empty.diagnostics["evaluated"] is False
+    assert point.get_extra("rs_charged_current") is not None

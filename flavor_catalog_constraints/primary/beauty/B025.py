@@ -5,13 +5,13 @@ Physics
 The rigorous SM normalization is the HFLAV CKM-2025 SM reference in
 ``B025.yaml``.  This constraint does not hardcode the SM ratio; it loads the
 YAML ``sm_reference_used_by_hflav.rd_value`` anchor and passes it into the
-shared semileptonic-LFU core.  The v1 point-dependent prediction is
+shared semileptonic-LFU core.  For points carrying ``rs_charged_current``, the
+minimal vector prediction is
 
-    R_D^proxy = R_D^SM |1 + C_tau^proxy|^2,
+    R_D = R_D^SM |1 + epsilon_cb^tau|^2 / |1 + epsilon_cb^light|^2,
 
-where ``C_tau^proxy`` is the documented charged-current proxy in
-``quarkConstraints.semileptonic_lfu`` and scales like
-``m_b m_tau / M_KK^2``.
+where ``light`` is the e/mu denominator convention.  No scalar mass proxy is
+used.
 
 Severity
 --------
@@ -31,8 +31,8 @@ NEEDS-HUMAN-PHYSICS
 Full RS ``R_D`` matching requires the charged electroweak KK/W' tower,
 charged-Higgs or leptoquark sector, lepton and neutrino couplings, a full
 ``b -> c tau nu`` WET basis, and ``B -> D`` form-factor integration.  Those
-inputs are not available on ``ParameterPoint``; the implemented NP term is a
-documented stress proxy, not a complete model prediction.
+nonminimal pieces are not built, so B025 remains PARTIAL even though the
+minimal vector LFU-ratio tree is rigorous.
 """
 
 from __future__ import annotations
@@ -49,17 +49,22 @@ from flavor_catalog_constraints.anchors import (
     load_pdg_block,
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
+from flavor_catalog_constraints.physics_adapters.charged_current import (
+    B025_PARTIAL_MATCHING_STATUS,
+    CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN,
+    charged_current_epsilon,
+    charged_current_light_epsilon,
+    charged_current_source_diagnostics,
+    shifted_lfu_ratio,
+)
 from flavor_catalog_constraints.physics_adapters.semileptonic_lfu import (
-    SEMILEPTONIC_LFU_RS_MATCHING_ASSUMPTION_V1,
-    rd_lfu_ratio_from_couplings,
     semileptonic_lfu_inputs_with_sm_ratio,
     semileptonic_lfu_sm_ratio,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
-_OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
+_REQUIRED_EXTRA = "rs_charged_current"
 _EXPERIMENTAL_ANCHOR_CANDIDATES = ("canonical_average",)
 _SM_ANCHOR_CANDIDATES = ("sm_reference_used_by_hflav",)
 _JOINT_CONTEXT_CANDIDATES = ("joint_fit_context",)
@@ -70,14 +75,14 @@ _BUDGET_SOURCE = (
 )
 _PARAMETRIZATION_CITATION = (
     "HFLAV CKM 2025 R(D) average and SM arithmetic-reference row from "
-    "B025.yaml; charged-current scalar amplitude proxy in "
-    "quarkConstraints.semileptonic_lfu"
+    "B025.yaml; minimal-vector charged-current LFU ratio from "
+    "rs_charged_current epsilon_cb"
 )
 _NEEDS_HUMAN_PHYSICS = (
     "NEEDS-HUMAN-PHYSICS: full RS R_D matching needs charged EW KK/W', "
     "charged-Higgs or leptoquark sectors, lepton/neutrino couplings, the full "
     "b -> c tau nu WET operator basis, and B -> D form-factor integration; "
-    "v1 uses the documented m_b m_tau/M_KK^2 charged-current proxy."
+    "v1 includes only the minimal left-handed vector epsilon_cb LFU ratio."
 )
 
 
@@ -345,8 +350,24 @@ class Constraint:
         self.sm_result = semileptonic_lfu_sm_ratio(self.sm_inputs)
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        common_diagnostics: dict[str, Any] = {
+            "sm_anchor_rd": float(self.anchor.sm_value),
+            "sm_formula_rd": float(self.sm_result.ratio),
+            "sm_formula_minus_anchor": float(
+                self.sm_result.ratio - self.anchor.sm_value
+            ),
+            "parametrization_citation": _PARAMETRIZATION_CITATION,
+            "matching_coverage": "PARTIAL",
+            "b025_partial_matching_status": B025_PARTIAL_MATCHING_STATUS,
+            "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+            "nonminimal_charged_current_status": (
+                CHARGED_CURRENT_NONMINIMAL_NEEDS_HUMAN
+            ),
+            **_anchor_diagnostics(self.anchor),
+        }
+
+        charged = point.get_extra(_REQUIRED_EXTRA)
+        if charged is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -363,33 +384,61 @@ class Constraint:
                 diagnostics={
                     "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
-                    "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
-                    "rs_matching_assumption": SEMILEPTONIC_LFU_RS_MATCHING_ASSUMPTION_V1,
-                    **_anchor_diagnostics(self.anchor),
+                    "np_shift_rd": 0.0,
+                    **common_diagnostics,
                 },
             )
 
-        kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = rd_lfu_ratio_from_couplings(
-            couplings,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
-        predicted = float(result.ratio)
+        try:
+            eps_tau = charged_current_epsilon(
+                charged,
+                up="c",
+                down="b",
+                lepton="tau",
+            )
+            eps_light = charged_current_light_epsilon(charged, up="c", down="b")
+            predicted = shifted_lfu_ratio(float(self.sm_result.ratio), eps_tau, eps_light)
+            source_diag = charged_current_source_diagnostics(charged)
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                predicted=None,
+                sm_prediction=float(self.sm_result.ratio),
+                experimental=float(self.anchor.value),
+                ratio=None,
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_charged_current extra for B025 "
+                    "epsilon_cb LFU ratio."
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "np_shift_rd": 0.0,
+                    **common_diagnostics,
+                },
+            )
+
+        predicted = float(predicted)
         budget, ratio, passes = _budget_result(predicted, self.anchor)
-        diagnostics: dict[str, Any] = dict(result.diagnostics)
+        diagnostics: dict[str, Any] = dict(common_diagnostics)
         diagnostics.update(
             {
                 "evaluated": True,
-                "sm_anchor_rd": float(self.anchor.sm_value),
-                "sm_formula_rd": float(result.sm_ratio),
-                "sm_formula_minus_anchor": float(result.sm_ratio - self.anchor.sm_value),
-                "np_shift_rd": float(result.np_shift_ratio),
-                "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
-                "rs_matching_assumption": SEMILEPTONIC_LFU_RS_MATCHING_ASSUMPTION_V1,
-                "kk_ew_mass_extra_used": kk_ew_mass is not None,
-                **_anchor_diagnostics(self.anchor),
+                "epsilon_cb_tau": eps_tau.epsilon,
+                "epsilon_cb_light_average_e_mu": eps_light.epsilon,
+                "tau_rate_multiplier": float(eps_tau.rate_multiplier),
+                "light_rate_multiplier": float(eps_light.rate_multiplier),
+                "np_shift_rd": float(predicted - self.sm_result.ratio),
+                "rs_matching_formula": (
+                    "R_D = R_D^SM |1+epsilon_cb^tau|^2/"
+                    "|1+epsilon_cb^light|^2"
+                ),
+                **source_diag,
             }
         )
 
@@ -398,15 +447,16 @@ class Constraint:
             severity=self.severity,
             passes=passes,
             predicted=predicted,
-            sm_prediction=float(result.sm_ratio),
+            sm_prediction=float(self.sm_result.ratio),
             experimental=float(self.anchor.value),
             ratio=ratio,
             budget=budget,
             notes=(
-                "R_D uses the YAML HFLAV SM reference and the semileptonic-LFU "
-                "amplitude proxy R_D = R_D^SM |1 + C_tau^proxy|^2. The proxy "
-                "scales as m_b m_tau/M_KK^2 and is marked NEEDS-HUMAN-PHYSICS. "
-                "The HARD budget is the B025.yaml measured-vs-SM envelope."
+                "R_D uses the YAML HFLAV SM reference and the minimal-vector "
+                "LFU ratio from rs_charged_current epsilon_cb. B025 remains "
+                "PARTIAL because scalar/RH WET and form-factor integration are "
+                "not built. The HARD budget is the B025.yaml measured-vs-SM "
+                "envelope."
             ),
             diagnostics=diagnostics,
         )

@@ -13,6 +13,11 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.kaon import K017 as k017_module
+from tests.constraints.charged_current_phase5b_helpers import (
+    charged_with_epsilon,
+    sample_charged_point,
+    universal_charged_point,
+)
 from quarkConstraints.leptonic_tree import (
     evaluate_leptonic_lfu_ratio,
     kplus_enu_over_munu_inputs_from_sm_ratio_anchor,
@@ -130,19 +135,19 @@ def test_ratio_anchors_route_through_scaffold_load_anchor(monkeypatch):
         k017_module._load_k017_anchor(_PID)
 
 
-def test_evaluate_without_kk_mass_uses_sm_and_flags_missing_proxy_input():
+def test_absent_charged_current_degrades_non_vetoing():
     constraint = fcc.get(_PID)
     result = constraint.evaluate(point_builder.empty_point())
 
     assert result.process_id == _PID
     assert result.passes is True
-    assert result.predicted == pytest.approx(constraint.sm_result.ratio)
+    assert result.predicted is None
     assert result.sm_prediction == pytest.approx(constraint.sm_result.sm_ratio)
     assert result.experimental == pytest.approx(constraint.anchor.value)
-    assert result.ratio == pytest.approx(0.0)
+    assert result.ratio is None
     assert result.budget == pytest.approx(constraint.anchor.budget)
-    assert result.diagnostics["lepton_nonuniversal_proxy_evaluated"] is False
-    assert result.diagnostics["missing_extra"] == "kk_ew_mass_gev"
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["missing_extra"] == "rs_charged_current"
     assert result.diagnostics["sm_anchor_ratio"] == pytest.approx(
         constraint.anchor.sm_value
     )
@@ -151,7 +156,7 @@ def test_evaluate_without_kk_mass_uses_sm_and_flags_missing_proxy_input():
 
 def test_sm_limit_ratio_matches_core_evaluator_and_yaml_anchor():
     constraint = fcc.get(_PID)
-    result = constraint.evaluate(point_builder.make_point(kk_ew_mass_gev=1.0e9))
+    result = constraint.evaluate(universal_charged_point())
     core_inputs = _core_inputs_from_yaml_sm_anchor()
     core_sm = evaluate_leptonic_lfu_ratio(inputs=core_inputs)
 
@@ -168,40 +173,37 @@ def test_sm_limit_ratio_matches_core_evaluator_and_yaml_anchor():
     assert result.diagnostics["sm_anchor_ratio"] == pytest.approx(
         constraint.anchor.sm_value
     )
+    assert result.diagnostics["epsilon_us_e"] == 0.0j
+    assert result.diagnostics["epsilon_us_mu"] == 0.0j
+    assert result.diagnostics["np_shift_ratio"] == pytest.approx(0.0)
     assert result.passes is True
 
 
-def test_lepton_nonuniversal_proxy_matches_core_evaluator_from_yaml_anchor():
+def test_rigorous_lfu_epsilon_ratio_matches_independent_formula():
     constraint = fcc.get(_PID)
-    m_kk = 20.0
-    result = constraint.evaluate(point_builder.make_point(kk_ew_mass_gev=m_kk))
-    core_inputs = _core_inputs_from_yaml_sm_anchor()
-    expected = evaluate_leptonic_lfu_ratio(m_kk_gev=m_kk, inputs=core_inputs)
+    charged = charged_with_epsilon(
+        universal_charged_point().extras["rs_charged_current"],
+        {(0, 1, 0): 0.1 + 0.0j, (0, 1, 1): 0.0j},
+    )
+    result = constraint.evaluate(point_builder.make_point(rs_charged_current=charged))
+    expected = constraint.sm_result.ratio * abs(1.0 + 0.1) ** 2
 
-    assert result.predicted == pytest.approx(expected.ratio)
-    assert result.sm_prediction == pytest.approx(expected.sm_ratio)
-    assert result.diagnostics["numerator_np_amplitude_ratio"] == pytest.approx(
-        expected.numerator_np_amplitude_ratio
-    )
-    assert result.diagnostics["denominator_np_amplitude_ratio"] == pytest.approx(
-        expected.denominator_np_amplitude_ratio
-    )
-    assert result.diagnostics["numerator_amplitude_multiplier"] == pytest.approx(
-        expected.numerator_amplitude_multiplier
-    )
-    assert result.diagnostics["denominator_amplitude_multiplier"] == pytest.approx(
-        expected.denominator_amplitude_multiplier
-    )
+    assert result.predicted == pytest.approx(expected)
+    assert result.sm_prediction == pytest.approx(constraint.sm_result.sm_ratio)
+    assert result.diagnostics["epsilon_us_e"] == pytest.approx(0.1 + 0.0j)
+    assert result.diagnostics["epsilon_us_mu"] == pytest.approx(0.0j)
+    assert result.diagnostics["numerator_rate_multiplier"] == pytest.approx(1.21)
+    assert result.diagnostics["denominator_rate_multiplier"] == pytest.approx(1.0)
     assert result.ratio == pytest.approx(
-        abs(expected.np_shift_ratio) / constraint.anchor.budget
+        abs(expected - constraint.sm_result.ratio) / constraint.anchor.budget
     )
-    assert result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert result.diagnostics["uses_lepton_nonuniversal_proxy"] is True
+    assert result.passes is False
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert "mass proxy" not in result.notes
 
 
 def test_evaluate_runs_end_to_end_with_real_fields_and_complex_diagnostics():
-    result = fcc.get(_PID).evaluate(point_builder.make_point(kk_ew_mass_gev=20.0))
+    result = fcc.get(_PID).evaluate(sample_charged_point())
 
     for value in (
         result.predicted,
@@ -212,17 +214,17 @@ def test_evaluate_runs_end_to_end_with_real_fields_and_complex_diagnostics():
     ):
         assert isinstance(value, float)
         assert math.isfinite(value)
-    for key in ("numerator_np_amplitude_ratio", "denominator_np_amplitude_ratio"):
+    for key in ("epsilon_us_e", "epsilon_us_mu"):
         assert isinstance(result.diagnostics[key], complex)
     for key in (
-        "m_kk_gev",
-        "matching_scale_gev",
-        "numerator_amplitude_multiplier",
-        "denominator_amplitude_multiplier",
+        "kk_ew_mass_gev",
+        "m_w_gev",
+        "m_wprime_gev",
+        "numerator_rate_multiplier",
+        "denominator_rate_multiplier",
         "np_shift_ratio",
         "budget_combined_sigma",
         "hard_veto_np_shift_budget",
-        "meson_mass_gev",
         "tree_ratio_without_radiation",
         "radiative_correction_multiplier",
     ):
@@ -231,17 +233,23 @@ def test_evaluate_runs_end_to_end_with_real_fields_and_complex_diagnostics():
 
 
 @pytest.mark.parametrize(
-    ("m_kk_gev", "expected_pass"),
+    ("epsilon_us_e", "expected_pass"),
     [
-        (3000.0, True),
-        (3.0, False),
+        (0.0, True),
+        (0.1, False),
     ],
 )
-def test_safe_point_passes_and_large_proxy_point_fails(
-    m_kk_gev: float,
+def test_safe_point_passes_and_large_lfu_shift_fails(
+    epsilon_us_e: float,
     expected_pass: bool,
 ):
-    result = fcc.get(_PID).evaluate(point_builder.make_point(kk_ew_mass_gev=m_kk_gev))
+    charged = charged_with_epsilon(
+        universal_charged_point().extras["rs_charged_current"],
+        {(0, 1, 0): complex(epsilon_us_e), (0, 1, 1): 0.0j},
+    )
+    result = fcc.get(_PID).evaluate(
+        point_builder.make_point(rs_charged_current=charged)
+    )
 
     assert result.passes is expected_pass
     if expected_pass:
@@ -251,11 +259,11 @@ def test_safe_point_passes_and_large_proxy_point_fails(
 
 
 def test_evaluate_is_pure_and_deterministic():
-    point = point_builder.make_point(kk_ew_mass_gev=20.0)
+    point = sample_charged_point()
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    assert point.get_extra("kk_ew_mass_gev") == 20.0
+    assert point.get_extra("rs_charged_current") is not None
