@@ -10,9 +10,9 @@ short-distance dispersive component,
         Re(Y_eff) / lambda^5 + Re(lambda_c) P_c(Y) / lambda
     ]^2,
 
-with ``Y_eff = lambda_t (Y_L - Y_R)``.  The low-level formula and the
-documented RS matching assumption live in
-``quarkConstraints.rare_kaon_dilepton`` and are reached only through the
+with ``Y_eff = lambda_t (Y_L - Y_R)``.  The low-level formula lives in
+``quarkConstraints.rare_kaon_dilepton``; the RS short-distance shift is mapped
+from Phase-3a ``rs_semileptonic_wilsons.s_to_d_ll`` only through the
 ``flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton`` boundary.
 This module intentionally does not touch ``quarkConstraints.rare_kaon_snd``,
 which is reserved for ``K -> pi nu nubar``.
@@ -51,15 +51,16 @@ from flavor_catalog_constraints.anchors import (
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton import (
     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION,
-    RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-    klong_mumu_short_distance_from_couplings,
+    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    klong_mumu_short_distance_from_rs_semileptonic_wilsons,
     klong_mumu_short_distance_sm,
     rare_kaon_dilepton_default_sm_inputs,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _PDG_TOTAL_BLOCK = "pdg_or_equivalent"
 _E871_BLOCK = "supporting_numeric_values[0]"
@@ -519,8 +520,8 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -533,7 +534,11 @@ class Constraint:
                     "short-distance constraint was not evaluated."
                 ),
                 diagnostics={
+                    "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "pdg_total_branching_fraction": float(
                         self.anchor.total_rate.value
                     ),
@@ -560,15 +565,43 @@ class Constraint:
                         "with the conservative long-distance-separated "
                         "dispersive upper bound."
                     ),
+                    "needs_human_physics": (
+                        "NEEDS-HUMAN-PHYSICS: Phase-3a supplies the light-Z "
+                        "C10/C10p short-distance term; long-distance "
+                        "K_L -> mu+ mu- dispersive pieces remain outside "
+                        "this SD constraint."
+                    ),
                 },
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = klong_mumu_short_distance_from_couplings(
-            couplings,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
+        try:
+            result = klong_mumu_short_distance_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                sm_prediction=float(self.sm_result.branching_fraction),
+                experimental=float(self.anchor.value),
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "K_L -> mu+ mu- short-distance"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "budget_source": self.anchor.budget_band.source,
+                },
+            )
         predicted = float(result.branching_fraction)
         budget = float(self.anchor.budget)
         ratio = predicted / budget if budget > 0.0 else float("inf")
@@ -617,13 +650,14 @@ class Constraint:
                 "parametrization_citation": (
                     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION
                 ),
-                "rs_matching_assumption": (
-                    RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1
-                ),
+                "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
                 "needs_human_physics": (
-                    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z' tower "
-                    "and muon axial-coupling matching are not available on "
-                    "ParameterPoint; v1 uses the documented Z-like proxy."
+                    "NEEDS-HUMAN-PHYSICS: Phase-3a supplies the light-Z "
+                    "C10/C10p short-distance term; K_L -> mu+ mu- remains "
+                    "long-distance dominated and only the SD bound is tested."
+                ),
+                "rs_semileptonic_vector_matching_status": (
+                    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1
                 ),
                 "severity_justification": (
                     "HARD: K_L -> mu+ mu- is long-distance dominated, but "
@@ -659,10 +693,9 @@ class Constraint:
             budget=budget,
             notes=(
                 "BR(K_L -> mu+ mu-)_SD uses the Buras/Isidori "
-                "short-distance parametrization. RS contribution is a "
-                "documented Z-like Y-function shift from mass-basis s-d "
-                "couplings; full EW/lepton matching is marked "
-                "NEEDS-HUMAN-PHYSICS. The HARD budget is the conservative "
+                "short-distance parametrization. Phase-3a RS semileptonic "
+                "C10/C10p Wilsons are mapped additively into the Y input "
+                "with no second M_KK suppression. The HARD budget is the conservative "
                 "short-distance bound from K006.yaml, not the total PDG rate."
             ),
             diagnostics=diagnostics,

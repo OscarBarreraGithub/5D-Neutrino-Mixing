@@ -19,7 +19,13 @@ from quarkConstraints.model import RotationParameters, ckm_like_unitary
 from quarkConstraints.rare_kaon_dilepton import (
     KLONG_PI0EE_SM_Y7A_BAR,
     KLONG_PI0EE_SM_Y7V_BAR,
-    compute_klong_pi0ee_y7_wilsons,
+)
+from tests.rare_kaon_phase3d_helpers import (
+    core_y7_wilsons_from_rs_coeff,
+    rs_coeff,
+    sample_rare_kaon_point,
+    scaled_rare_kaon_point,
+    sm_limit_rare_kaon_point,
 )
 
 _PID = "K009"
@@ -243,7 +249,11 @@ def test_k009_anchor_loud_fail_probe():
 
 
 def test_evaluate_without_input_degrades_gracefully():
-    result = fcc.get(_PID).evaluate(point_builder.empty_point())
+    constraint = fcc.get(_PID)
+    result = constraint.evaluate(point_builder.empty_point())
+    old_style_result = constraint.evaluate(
+        point_builder.build_from_quark_couplings(_sd_couplings(left=1.0e-2j))
+    )
 
     assert result.process_id == _PID
     assert result.passes is True
@@ -254,14 +264,19 @@ def test_evaluate_without_input_degrades_gracefully():
         fcc.get(_PID).sm_result.direct_cp_branching_fraction
     )
     assert result.budget == pytest.approx(fcc.get(_PID).anchor.budget)
-    assert result.diagnostics["missing_extra"] == "quark_mass_basis_couplings"
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["missing_extra"] == "rs_semileptonic_wilsons"
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert old_style_result.passes is True
+    assert old_style_result.predicted is None
+    assert old_style_result.diagnostics["evaluated"] is False
+    assert old_style_result.diagnostics["missing_extra"] == "rs_semileptonic_wilsons"
+    assert old_style_result.diagnostics["legacy_quark_mass_basis_couplings_present"] is True
 
 
 def test_sm_limit_branching_fraction_matches_independent_recomputation():
     constraint = fcc.get(_PID)
-    couplings = _sd_couplings(left=0.0j, right=0.0j)
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sm_limit_rare_kaon_point()
     result = constraint.evaluate(point)
     independent = _independent_pi0mumu_components(
         constraint.sm_inputs,
@@ -298,6 +313,10 @@ def test_sm_limit_branching_fraction_matches_independent_recomputation():
     )
     assert abs(result.diagnostics["sm_constructive_anchor_pull"]) < 1.0
     assert abs(result.diagnostics["sm_destructive_anchor_pull"]) < 1.0
+    assert result.diagnostics["lambda_y7v_np_proxy"] == pytest.approx(0.0j)
+    assert result.diagnostics["lambda_y7a_np_proxy"] == pytest.approx(0.0j)
+    assert result.diagnostics["wilson_prefactor_reused"] is False
+    assert result.diagnostics["second_mkk_suppression_applied"] is False
     assert result.passes is True
 
 
@@ -325,8 +344,7 @@ def test_y7_structure_separates_direct_cp_and_vector_interference():
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
-    couplings = _sd_couplings(left=1.0e-5j, right=0.5e-5j)
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sample_rare_kaon_point()
     result = fcc.get(_PID).evaluate(point)
 
     assert result.process_id == _PID
@@ -366,29 +384,36 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     assert result.diagnostics["short_distance_direct_cp_only"] is True
     assert result.diagnostics["interference_sign_fixed"] is False
     assert result.diagnostics["uses_y7v_y7a_wilson_structure"] is True
-    assert result.diagnostics["uses_k008_y7v_y7a_rs_proxy"] is True
+    assert result.diagnostics["uses_k008_y7v_y7a_rs_proxy"] is False
+    assert result.diagnostics["uses_k008_y7v_y7a_core_inputs"] is True
     assert result.diagnostics["interference_uses_vector_y7v_only"] is True
     assert result.diagnostics["semileptonic_qcd_running_applied"] is False
     assert result.diagnostics["semileptonic_qcd_running_effect_fraction"] == 0.0
+    assert result.diagnostics["rs_semileptonic_wilsons_present"] is True
+    assert result.diagnostics["rs_semileptonic_matching_status"].endswith(
+        "no_second_1_over_M_KK_squared"
+    )
+    assert result.diagnostics["rare_kaon_proxy_reused"] is False
 
 
 @pytest.mark.parametrize(
-    ("couplings", "expected_pass"),
+    ("scale", "expected_pass"),
     [
-        (_sd_couplings(left=1.0e-5j), True),
-        (_sd_couplings(left=1.0e-1j), False),
+        (1.0, True),
+        (1.0e5, False),
     ],
 )
 def test_safe_point_passes_and_large_np_point_fails(
-    couplings: QuarkMassBasisCouplings,
+    scale: float,
     expected_pass: bool,
 ):
     constraint = fcc.get(_PID)
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = scaled_rare_kaon_point(scale=scale)
     result = constraint.evaluate(point)
-    wilsons = compute_klong_pi0ee_y7_wilsons(
-        couplings,
+    wilsons = core_y7_wilsons_from_rs_coeff(
+        rs_coeff(point, lepton="mu"),
         inputs=constraint.sm_inputs,
+        matching_scale_gev=point.extras["kk_ew_mass_gev"],
     )
     direct = _independent_pi0mumu_components(
         constraint.sm_inputs,
@@ -409,34 +434,29 @@ def test_safe_point_passes_and_large_np_point_fails(
         assert result.ratio > 10.0
 
 
-def test_optional_kk_ew_mass_extra_changes_matching_scale():
-    couplings = _sd_couplings(left=1.0e-3j)
-    default_point = point_builder.build_from_quark_couplings(couplings)
-    ew_point = point_builder.make_point(
-        quark_mass_basis_couplings=couplings,
-        kk_ew_mass_gev=6000.0,
-    )
+def test_optional_kk_ew_mass_extra_is_diagnostic_only_for_rigorous_wilsons():
+    default_point = scaled_rare_kaon_point(scale=20.0)
+    ew_point = scaled_rare_kaon_point(scale=20.0, kk_ew_mass_gev=6000.0)
     default_result = fcc.get(_PID).evaluate(default_point)
     ew_result = fcc.get(_PID).evaluate(ew_point)
 
     assert default_result.diagnostics["m_kk_gev"] == pytest.approx(3000.0)
     assert ew_result.diagnostics["m_kk_gev"] == pytest.approx(6000.0)
     assert ew_result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert abs(ew_result.diagnostics["lambda_y7a_np_proxy"]) == pytest.approx(
-        abs(default_result.diagnostics["lambda_y7a_np_proxy"]) / 4.0
+    assert ew_result.predicted == pytest.approx(default_result.predicted)
+    assert ew_result.diagnostics["lambda_y7a_np_proxy"] == pytest.approx(
+        default_result.diagnostics["lambda_y7a_np_proxy"]
     )
+    assert ew_result.diagnostics["second_mkk_suppression_applied"] is False
 
 
 def test_evaluate_is_pure_and_deterministic():
-    couplings = _sd_couplings(left=1.0e-5j, right=0.5e-5j)
-    before_left_down = couplings.left_down.copy()
-    before_right_down = couplings.right_down.copy()
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sample_rare_kaon_point()
+    before_bundle = point.extras["rs_semileptonic_wilsons"]
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    np.testing.assert_array_equal(couplings.left_down, before_left_down)
-    np.testing.assert_array_equal(couplings.right_down, before_right_down)
+    assert point.extras["rs_semileptonic_wilsons"] is before_bundle

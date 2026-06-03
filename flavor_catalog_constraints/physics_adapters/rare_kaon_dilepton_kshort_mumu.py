@@ -1,8 +1,9 @@
 """K_S -> mu+mu- short-distance wrapper over rare-kaon dileptons.
 
 This adapter is append-only relative to K006/K008/K009/K010.  It reuses the
-K006 ``s -> d mu+mu-`` Y-function Wilson proxy, but applies the K_S ell=0
-CP projection rather than the K_L real-amplitude projection:
+K006 ``Y`` effective-input core with Phase-3a ``s -> d mu+mu-`` C10/C10p
+Wilson shifts, but applies the K_S ell=0 CP projection rather than the K_L
+real-amplitude projection:
 
     BR(K_S -> mu+mu-)_SD,ell=0
         = (tau_KS / tau_KL) kappa_mu [
@@ -17,13 +18,11 @@ short-distance value is O(1.9e-13), while the catalog's O(5e-12) SM number is
 total-rate context and not an SD validation anchor.
 
 The total measured K_S rate is long-distance dominated, so this is only the
-constrained short-distance/NP proxy requested for K012.
+constrained short-distance component requested for K012.
 
 NEEDS-HUMAN-PHYSICS: a rigorous K_S dimuon prediction needs the time-dependent
 K_S/K_L interference/extraction treatment, long-distance two-photon amplitude,
-EW KK/Z/Z' tower, and muon-sector matching.  Those inputs are not available on
-ParameterPoint; v1 reuses the documented K006 axial-muon Y-function Wilson
-proxy.
+and non-light-Z or muon-sector effects outside Phase 3a.
 """
 
 from __future__ import annotations
@@ -39,13 +38,18 @@ from .rare_kaon_dilepton import (
     RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
     RareKaonDileptonSMInputs,
     RareKaonDileptonWilsonCoefficients,
+    _rs_semileptonic_coeff,
+    _tag_rs_result,
     klong_mumu_short_distance_from_couplings,
+    klong_mumu_short_distance_from_rs_semileptonic_wilsons,
     klong_mumu_short_distance_sm,
     rare_kaon_dilepton_ckm_factors,
     rare_kaon_dilepton_default_sm_inputs,
+    rare_kaon_y_wilsons_from_rs_semileptonic,
     rare_kaon_dilepton_kappa_mu,
     rare_kaon_dilepton_wilsons_from_couplings,
 )
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
 
 RARE_KAON_KSHORT_MUMU_MODEL_V1 = "rare_kaon_kshort_mumu_sd_im_projection_v1"
 KSHORT_MUMU_CP_PROJECTION_CITATION = (
@@ -58,17 +62,17 @@ RARE_KAON_KSHORT_MUMU_PARAMETRIZATION_CITATION = (
     + KSHORT_MUMU_CP_PROJECTION_CITATION
 )
 RARE_KAON_KSHORT_MUMU_RS_MATCHING_ASSUMPTION_V1 = (
-    "NEEDS-HUMAN-PHYSICS: K012 reuses the K006 s -> d mu+mu- axial-lepton "
-    "Y-function Wilson proxy and applies the K_S ell=0 imaginary CP "
-    "projection. Full long-distance two-photon treatment, time-dependent "
-    "experimental extraction, EW KK/Z/Z' matching, and muon-sector couplings "
-    "are not available on ParameterPoint."
+    "NEEDS-HUMAN-PHYSICS: K012 maps Phase-3a s -> d mu mu C10/C10p "
+    "Wilson shifts into the K006 Y effective input and applies the K_S "
+    "ell=0 imaginary CP projection. Full long-distance two-photon treatment, "
+    "time-dependent extraction, and non-light-Z or muon-sector effects remain "
+    "outside Phase 3a."
 )
 RARE_KAON_KSHORT_MUMU_SEMILEPTONIC_RUNNING_DIAGNOSTIC_V1 = (
     "No additional multiplicative QCD running is applied to the NP "
-    "semileptonic axial-lepton Y/C10 proxy between M_KK and the low scale: "
+    "semileptonic axial-lepton Y/C10 shift between M_KK and the low scale: "
     "the color-singlet semileptonic current has LO QCD factor 1.0 in this "
-    "restricted proxy. Complete EW matching and operator mixing remain part "
+    "restricted matching. Complete EW matching and operator mixing remain part "
     "of the NEEDS-HUMAN-PHYSICS limitation."
 )
 KSHORT_MUMU_LIFETIME_INPUTS_CITATION = (
@@ -323,6 +327,44 @@ def kshort_mumu_short_distance_from_couplings(
     )
 
 
+def kshort_mumu_short_distance_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    lepton: str = "mu",
+    matching_scale_gev: float | None = None,
+    inputs: RareKaonDileptonSMInputs | None = None,
+    lifetime_inputs: KShortMuMuLifetimeInputs | None = None,
+) -> KShortMuMuShortDistanceResult:
+    """Evaluate ``BR(K_S -> mu+mu-)_SD`` from Phase-3a RS C10/C10p."""
+
+    p = rare_kaon_dilepton_default_sm_inputs() if inputs is None else inputs
+    lifetimes = (
+        kshort_mumu_lifetime_inputs_default()
+        if lifetime_inputs is None
+        else lifetime_inputs
+    )
+    coeff = _rs_semileptonic_coeff(source, lepton=lepton)
+    wilsons = rare_kaon_y_wilsons_from_rs_semileptonic(
+        source,
+        lepton=lepton,
+        matching_scale_gev=matching_scale_gev,
+        inputs=p,
+    )
+    result = _kshort_mumu_sd_from_y_np(
+        wilsons.y_np_total,
+        inputs=p,
+        klong_result=klong_mumu_short_distance_from_rs_semileptonic_wilsons(
+            source,
+            lepton=lepton,
+            matching_scale_gev=matching_scale_gev,
+            inputs=p,
+        ),
+        lifetime_inputs=lifetimes,
+        wilsons=wilsons,
+    )
+    return _tag_rs_result(result, coeff, inputs=p)
+
+
 __all__ = [
     "RARE_KAON_KSHORT_MUMU_MODEL_V1",
     "KSHORT_MUMU_CP_PROJECTION_CITATION",
@@ -335,4 +377,5 @@ __all__ = [
     "kshort_mumu_lifetime_inputs_default",
     "kshort_mumu_short_distance_sm",
     "kshort_mumu_short_distance_from_couplings",
+    "kshort_mumu_short_distance_from_rs_semileptonic_wilsons",
 ]

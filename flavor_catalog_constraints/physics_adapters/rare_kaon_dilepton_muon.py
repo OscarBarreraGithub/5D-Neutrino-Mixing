@@ -1,13 +1,12 @@
 """Muon-mode wrapper for ``K_L -> pi0 mu+ mu-`` rare-kaon dileptons.
 
 This adapter is append-only relative to the K008 electron implementation.  It
-reuses the existing rare-kaon-dilepton CKM inputs and y7V/y7A RS proxy matching,
-but evaluates the K009 muon-mode direct/indirect/CPC decomposition with ChPT
-coefficients supplied by the K009 catalog sidecar.
+reuses the existing rare-kaon-dilepton CKM inputs and y7V/y7A core shape, with
+Phase-3a ``rs_semileptonic_wilsons.s_to_d_ll`` filling the short-distance RS
+C9/C10/C9p/C10p slots for the muon mode.
 
-NEEDS-HUMAN-PHYSICS: the RS y7V/y7A shifts are the K008 proxy reused for the
-muon final state.  A complete K009 matching needs EW KK/Z/Z' and muon-sector
-couplings that are not currently available on ``ParameterPoint``.
+NEEDS-HUMAN-PHYSICS: K009's long-distance interference/CPC treatment and
+neutral-current pieces beyond Phase-3a light-Z matching remain partial.
 """
 
 from __future__ import annotations
@@ -25,10 +24,14 @@ from .rare_kaon_dilepton import (
     RareKaonDileptonSMInputs,
     RARE_KAON_PI0EE_PARAMETRIZATION_CITATION,
     RARE_KAON_PI0EE_SEMILEPTONIC_RUNNING_DIAGNOSTIC_V1,
+    _rs_semileptonic_coeff,
+    _tag_rs_result,
+    rare_kaon_y7_wilsons_from_rs_semileptonic,
     rare_kaon_dilepton_ckm_factors,
     rare_kaon_dilepton_default_sm_inputs,
     rare_kaon_dilepton_g_sm_squared,
 )
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
 
 RARE_KAON_PI0MUMU_MODEL_V1 = "rare_kaon_pi0mumu_y7v_y7a_isu_rs_proxy_v1"
 RARE_KAON_PI0MUMU_Y7_OPERATOR_CONVENTION = (
@@ -38,10 +41,10 @@ RARE_KAON_PI0MUMU_Y7_OPERATOR_CONVENTION = (
     "interference uses the vector Q7V amplitude only"
 )
 RARE_KAON_PI0MUMU_RS_MATCHING_ASSUMPTION_V1 = (
-    "NEEDS-HUMAN-PHYSICS: K009 reuses the K008 y7V/y7A RS proxy matched "
-    "from quark KK-gluon mass-basis flavor overlaps and one Z-like neutral "
-    "boson. Muon-specific EW KK/Z/Z' and lepton-sector matching is not "
-    "available on ParameterPoint."
+    "NEEDS-HUMAN-PHYSICS: K009 maps Phase-3a s -> d mu mu C9/C10 "
+    "Wilson shifts into the K008 y7V/y7A core shape. Long-distance "
+    "interference/CPC treatment and non-light-Z neutral-current effects "
+    "remain outside Phase 3a."
 )
 RARE_KAON_PI0MUMU_PARAMETRIZATION_CITATION = (
     RARE_KAON_PI0EE_PARAMETRIZATION_CITATION
@@ -213,6 +216,32 @@ def klong_pi0mumu_y7_direct_cp_from_couplings(
         m_kk_gev=m_kk_gev,
         inputs=inputs,
     )
+
+
+def klong_pi0mumu_y7_direct_cp_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    chpt_inputs: KLongPi0EEChPTInputs,
+    lepton: str = "mu",
+    matching_scale_gev: float | None = None,
+    inputs: RareKaonDileptonSMInputs | None = None,
+) -> KLongPi0MuMuResult:
+    """Evaluate K009 from Phase-3a RS C9/C10 mapped to y7V/y7A."""
+
+    p = rare_kaon_dilepton_default_sm_inputs() if inputs is None else inputs
+    coeff = _rs_semileptonic_coeff(source, lepton=lepton)
+    wilsons = rare_kaon_y7_wilsons_from_rs_semileptonic(
+        source,
+        lepton=lepton,
+        matching_scale_gev=matching_scale_gev,
+        inputs=p,
+    )
+    result = evaluate_klong_pi0mumu_y7_direct_cp(
+        wilsons,
+        chpt_inputs=chpt_inputs,
+        inputs=p,
+    )
+    return _tag_rs_result(result, coeff, inputs=p)
 
 
 def evaluate_klong_pi0mumu_y7_direct_cp(
@@ -389,5 +418,6 @@ __all__ = [
     "KLongPi0MuMuResult",
     "klong_pi0mumu_y7_direct_cp_sm",
     "klong_pi0mumu_y7_direct_cp_from_couplings",
+    "klong_pi0mumu_y7_direct_cp_from_rs_semileptonic_wilsons",
     "evaluate_klong_pi0mumu_y7_direct_cp",
 ]

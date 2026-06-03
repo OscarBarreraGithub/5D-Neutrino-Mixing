@@ -4,7 +4,8 @@ Physics
 -------
 The observed ``K_S -> mu+ mu-`` total rate is long-distance dominated.  For the
 RS scan, K012 constrains only the short-distance dimuon ell=0 piece by reusing
-the K006 ``s -> d mu+mu-`` Y/C10 Wilson proxy and applying the K_S imaginary
+the K006 ``Y`` effective-input core with Phase-3a
+``rs_semileptonic_wilsons.s_to_d_ll`` C10/C10p and applying the K_S imaginary
 CP projection supplied by the K012 adapter,
 
     BR(K_S -> mu+mu-)_SD,ell=0
@@ -13,12 +14,12 @@ CP projection supplied by the K012 adapter,
             - Im(lambda_c) P_c(Y) / lambda
         ]^2.
 
-This is intentionally a documented proxy for the constrained NP piece, not a
+This is intentionally only the constrained short-distance piece, not a
 complete total-rate prediction.
 
 Severity
 --------
-HARD.  The short-distance proxy is compared with the K012.yaml PDG/LHCb 90% CL
+HARD.  The short-distance component is compared with the K012.yaml PDG/LHCb 90% CL
 upper limit.  The sidecar's SM entry is an approximate total-rate context
 number, not a short-distance anchor; it is carried diagnostically and is not
 used for a formula validation or subtraction.  The default SM short-distance
@@ -34,10 +35,10 @@ hardcoding value-bearing anchors.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The RS contribution is a proxy.  Complete matching needs the K_S/K_L CP and
-time-dependent extraction treatment, the long-distance two-photon amplitude,
-EW KK/Z/Z' tower effects, and muon-sector couplings that are not on
-``ParameterPoint``.
+The semileptonic short-distance input is the Phase-3a light-Z Wilson path.
+Complete K012 rigor still needs the K_S/K_L CP and time-dependent extraction
+treatment, the long-distance two-photon amplitude, and non-light-Z or
+muon-sector effects outside Phase 3a.
 """
 
 from __future__ import annotations
@@ -52,20 +53,21 @@ from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor,
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton import (
     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION,
-    RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
     rare_kaon_dilepton_default_sm_inputs,
 )
 from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton_kshort_mumu import (
     RARE_KAON_KSHORT_MUMU_PARAMETRIZATION_CITATION,
     RARE_KAON_KSHORT_MUMU_RS_MATCHING_ASSUMPTION_V1,
     kshort_mumu_lifetime_inputs_default,
-    kshort_mumu_short_distance_from_couplings,
+    kshort_mumu_short_distance_from_rs_semileptonic_wilsons,
     kshort_mumu_short_distance_sm,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _VALUES_SECTION = "pdg_or_equivalent"
 _SCAFFOLD_UNCERTAINTY_KEY = "__k012_uncertainty_is_parsed_below__"
@@ -116,7 +118,7 @@ class CatalogValueAnchor:
 
 @dataclass(frozen=True)
 class K012BudgetBand:
-    """K012 upper-limit budget for the HARD short-distance proxy."""
+    """K012 upper-limit budget for the HARD short-distance component."""
 
     source: str
     construction: str
@@ -383,7 +385,7 @@ def _build_budget_band(
         source=_BUDGET_SOURCE,
         construction=(
             "Compare the K006-Wilson-derived K_S ell=0 Im-projected "
-            "short-distance proxy directly with the K012.yaml PDG/LHCb "
+            "short-distance component directly with the K012.yaml PDG/LHCb "
             "total-rate upper limit. No SM or long-distance subtraction is "
             "applied."
         ),
@@ -471,8 +473,8 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -485,7 +487,11 @@ class Constraint:
                     "short-distance constraint was not evaluated."
                 ),
                 diagnostics={
+                    "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "pdg_headline_limit": float(self.anchor.headline_limit.value),
                     "lhcb_combined_limit": float(
                         self.anchor.lhcb_combined_limit.value
@@ -511,12 +517,35 @@ class Constraint:
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = kshort_mumu_short_distance_from_couplings(
-            couplings,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-            lifetime_inputs=self.lifetime_inputs,
-        )
+        try:
+            result = kshort_mumu_short_distance_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+                lifetime_inputs=self.lifetime_inputs,
+            )
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                sm_prediction=float(self.sm_result.branching_fraction),
+                experimental=float(self.anchor.value),
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "K_S -> mu+ mu- short-distance"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "budget_source": self.anchor.budget_band.source,
+                    "uses_imaginary_ks_ell0_projection": True,
+                },
+            )
         predicted = float(result.branching_fraction)
         budget = float(self.anchor.budget)
         ratio = predicted / budget if budget > 0.0 else float("inf")
@@ -562,14 +591,15 @@ class Constraint:
                 "k006_parametrization_citation": (
                     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION
                 ),
-                "rs_matching_assumption": (
-                    RARE_KAON_KSHORT_MUMU_RS_MATCHING_ASSUMPTION_V1
-                ),
-                "k006_matching_assumption_reused": (
-                    RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1
-                ),
+                "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+                "k006_matching_assumption_reused": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
                 "needs_human_physics": (
-                    RARE_KAON_KSHORT_MUMU_RS_MATCHING_ASSUMPTION_V1
+                    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1
+                    + " "
+                    + RARE_KAON_KSHORT_MUMU_RS_MATCHING_ASSUMPTION_V1
+                ),
+                "rs_semileptonic_vector_matching_status": (
+                    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1
                 ),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "kappa_mu": float(result.kappa_mu),
@@ -598,10 +628,10 @@ class Constraint:
             budget=budget,
             notes=(
                 "BR(K_S -> mu+ mu-)_SD,ell=0 reuses the K006 Buras/Isidori "
-                "s -> d mu+mu- Wilson proxy with the K_S imaginary CP "
-                "projection Im[-lambda_c Y_c + lambda_t C10]^2. The HARD "
+                "s -> d mu+mu- C10/C10p Wilson path with the K_S imaginary "
+                "CP projection Im[-lambda_c Y_c + lambda_t C10]^2. The HARD "
                 "budget is the K012.yaml PDG/LHCb 90% CL total-rate limit, "
-                "applied to the constrained short-distance proxy. The total "
+                "applied to the constrained short-distance component. The total "
                 "rate is long-distance dominated and the RS matching is "
                 "flagged NEEDS-HUMAN-PHYSICS."
             ),

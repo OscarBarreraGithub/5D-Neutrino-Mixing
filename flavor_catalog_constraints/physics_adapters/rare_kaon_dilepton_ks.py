@@ -1,8 +1,9 @@
 """K_S -> pi0 e+e- wrapper over the rare-kaon dilepton machinery.
 
 This adapter is append-only relative to the K008/K009 ``K -> pi0 l+l-`` paths.
-It reuses the existing K008 y7V/y7A RS proxy only as a documented shift of the
-CP-conserving vector ``a_S`` amplitude:
+It maps Phase-3a ``rs_semileptonic_wilsons.s_to_d_ll`` C9/C9p into the
+existing K008 y7V slot as a documented shift of the CP-conserving vector
+``a_S`` amplitude:
 
     BR(K_S -> pi0 e+e-) = 5.2e-9 |a_S^eff|^2,
     a_S^eff(s_a) = s_a |a_S| + Re(lambda_y7V^NP) / 1e-4,
@@ -15,10 +16,9 @@ anchor, so the SM-limit baseline is measurement-normalized.  The measured
 ``|a_S|`` leaves the sign free; diagnostics expose both signs, and K010 applies
 the conservative sign envelope when forming the HARD verdict.
 
-NEEDS-HUMAN-PHYSICS: the RS shift is a proxy.  A complete K010 prediction
-needs the long-distance K_S form factor plus EW KK/Z/Z'/photon-penguin and
-electron-sector matching, none of which is currently available on
-``ParameterPoint``.
+NEEDS-HUMAN-PHYSICS: a complete K010 prediction needs the long-distance K_S
+form factor plus EW KK/Z/Z'/photon-penguin and electron-sector inputs beyond
+the Phase-3a light-Z semileptonic Wilsons.
 """
 
 from __future__ import annotations
@@ -35,9 +35,13 @@ from .rare_kaon_dilepton import (
     RareKaonDileptonSMInputs,
     RARE_KAON_PI0EE_RS_MATCHING_ASSUMPTION_V2,
     RARE_KAON_PI0EE_SEMILEPTONIC_RUNNING_DIAGNOSTIC_V1,
+    _rs_semileptonic_coeff,
+    _tag_rs_result,
+    rare_kaon_y7_wilsons_from_rs_semileptonic,
     rare_kaon_dilepton_default_sm_inputs,
     rare_kaon_dilepton_g_sm_squared,
 )
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
 
 RARE_KAON_KS_PI0EE_MODEL_V1 = "rare_kaon_ks_pi0ee_a_s_bdi_y7v_rs_proxy_v1"
 RARE_KAON_KS_PI0EE_PARAMETRIZATION_CITATION = (
@@ -47,10 +51,10 @@ RARE_KAON_KS_PI0EE_PARAMETRIZATION_CITATION = (
 )
 RARE_KAON_KS_PI0EE_RS_MATCHING_ASSUMPTION_V1 = (
     "NEEDS-HUMAN-PHYSICS: K010 uses the a_S-driven K_S -> pi0 e+e- "
-    "full-rate formula, while the RS contribution is only a CP-conserving "
-    "vector-amplitude proxy built from the K008 y7V mass-basis coupling "
-    "shift. Full EW KK/Z/Z'/photon-penguin, electron-sector, and K_S "
-    "form-factor matching is not available on ParameterPoint."
+    "full-rate formula, while Phase-3a supplies only the semileptonic "
+    "light-Z C9/C9p shift mapped into the vector y7V input. Full EW "
+    "KK/Z/Z'/photon-penguin, electron-sector, and K_S form-factor matching "
+    "remain outside Phase 3a."
 )
 KSHORT_PI0EE_A_S_BRANCHING_COEFFICIENT = 5.2e-9
 KSHORT_PI0EE_A_S_PROXY_NORMALIZATION = 1.0e-4
@@ -128,6 +132,32 @@ def kshort_pi0ee_a_s_from_couplings(
         m_kk_gev=m_kk_gev,
         inputs=inputs,
     )
+
+
+def kshort_pi0ee_a_s_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    chpt_inputs: KShortPi0EEChPTInputs,
+    lepton: str = "e",
+    matching_scale_gev: float | None = None,
+    inputs: RareKaonDileptonSMInputs | None = None,
+) -> KShortPi0EEResult:
+    """Evaluate K010 from Phase-3a RS C9/C10 mapped to the y7V a_S shift."""
+
+    p = rare_kaon_dilepton_default_sm_inputs() if inputs is None else inputs
+    coeff = _rs_semileptonic_coeff(source, lepton=lepton)
+    wilsons = rare_kaon_y7_wilsons_from_rs_semileptonic(
+        source,
+        lepton=lepton,
+        matching_scale_gev=matching_scale_gev,
+        inputs=p,
+    )
+    result = evaluate_kshort_pi0ee_a_s(
+        wilsons,
+        chpt_inputs=chpt_inputs,
+        inputs=p,
+    )
+    return _tag_rs_result(result, coeff, inputs=p)
 
 
 def evaluate_kshort_pi0ee_a_s(

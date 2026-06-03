@@ -10,7 +10,8 @@ the electron-mode a_S parametrization
 
 for the full kinematic region.  The central ``|a_S|`` is extracted from the
 K010 full-region YAML anchor, while a possible RS contribution is a documented
-proxy shift of the CP-conserving vector amplitude reusing the K008 y7V matching.
+shift of the CP-conserving vector amplitude from the Phase-3a s -> d e e
+C9/C9p Wilsons mapped into the K008 y7V slot.
 
 Severity
 --------
@@ -27,9 +28,9 @@ partial-rate measurement, full-region extrapolation, event counts, and budget.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The RS shift is only a proxy.  Complete matching needs the K_S long-distance
-form factor and EW KK/Z/Z'/photon-penguin/electron-sector inputs not available
-on ``ParameterPoint``.
+The semileptonic short-distance input is the Phase-3a light-Z Wilson path.
+Complete K010 rigor still needs the K_S long-distance form factor and
+EW KK/Z/Z'/photon-penguin/electron-sector inputs not available in Phase 3a.
 """
 
 from __future__ import annotations
@@ -46,17 +47,19 @@ from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton_ks import (
     KShortPi0EEChPTInputs,
     RARE_KAON_KS_PI0EE_PARAMETRIZATION_CITATION,
     RARE_KAON_KS_PI0EE_RS_MATCHING_ASSUMPTION_V1,
-    kshort_pi0ee_a_s_from_couplings,
+    kshort_pi0ee_a_s_from_rs_semileptonic_wilsons,
     kshort_pi0ee_a_s_sm,
 )
 from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton import (
+    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1,
     RARE_KAON_PI0EE_SEMILEPTONIC_RUNNING_DIAGNOSTIC_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
     rare_kaon_dilepton_default_sm_inputs,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _SCAFFOLD_UNCERTAINTY_KEY = "__k010_uncertainty_is_parsed_below__"
 _EXPECTED_BRANCHING_UNITS = "branching fraction"
@@ -496,8 +499,8 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -510,13 +513,21 @@ class Constraint:
                     "constraint was not evaluated."
                 ),
                 diagnostics={
+                    "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "partial_rate_branching_fraction": float(
                         self.anchor.partial_rate.value
                     ),
                     "full_rate_branching_fraction": float(self.anchor.full_rate.value),
                     "budget_source": self.anchor.budget_band.source,
-                    "needs_human_physics": RARE_KAON_KS_PI0EE_RS_MATCHING_ASSUMPTION_V1,
+                    "needs_human_physics": (
+                        RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1
+                        + " "
+                        + RARE_KAON_KS_PI0EE_RS_MATCHING_ASSUMPTION_V1
+                    ),
                     "semileptonic_qcd_running_applied": False,
                     "semileptonic_qcd_running_multiplicative_factor": 1.0,
                     "semileptonic_qcd_running_effect_fraction": 0.0,
@@ -527,12 +538,34 @@ class Constraint:
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = kshort_pi0ee_a_s_from_couplings(
-            couplings,
-            chpt_inputs=self.chpt_inputs,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
+        try:
+            result = kshort_pi0ee_a_s_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                chpt_inputs=self.chpt_inputs,
+                lepton="e",
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                sm_prediction=float(self.sm_result.sm_branching_fraction),
+                experimental=float(self.anchor.value),
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "K_S -> pi0 e+ e-"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "budget_source": self.anchor.budget_band.source,
+                },
+            )
         selected_branch, sign_branches = _a_s_sign_branch_verdicts(
             result,
             self.anchor,
@@ -573,8 +606,15 @@ class Constraint:
                 "budget_upper_edge": float(self.anchor.budget_band.upper_edge),
                 "budget_sm_subtracted": self.anchor.budget_band.sm_subtracted,
                 "parametrization_citation": RARE_KAON_KS_PI0EE_PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": RARE_KAON_KS_PI0EE_RS_MATCHING_ASSUMPTION_V1,
-                "needs_human_physics": RARE_KAON_KS_PI0EE_RS_MATCHING_ASSUMPTION_V1,
+                "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+                "needs_human_physics": (
+                    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1
+                    + " "
+                    + RARE_KAON_KS_PI0EE_RS_MATCHING_ASSUMPTION_V1
+                ),
+                "rs_semileptonic_vector_matching_status": (
+                    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1
+                ),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "sm_branching_fraction": float(result.sm_branching_fraction),
                 "np_shift_branching_fraction": float(
@@ -627,8 +667,8 @@ class Constraint:
                 "budget is the K010.yaml PDG/NA48 full-rate uncertainty; the "
                 "direct partial-rate measurement is diagnostic. The RS shift "
                 "is evaluated for both a_S signs and the HARD verdict uses "
-                "the conservative least-excluded sign branch. The RS shift is "
-                "a NEEDS-HUMAN-PHYSICS vector y7V proxy reused from K008, not "
+                "the conservative least-excluded sign branch. Phase-3a RS "
+                "C9 maps additively into the y7V a_S shift; this is still not "
                 "a complete long-distance K_S matching."
             ),
             diagnostics=diagnostics,

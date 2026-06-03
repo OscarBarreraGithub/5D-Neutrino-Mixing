@@ -45,16 +45,17 @@ from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton import (
     KLongPi0EEChPTInputs,
     RARE_KAON_PI0EE_INTERFERENCE_LIMITATION_V1,
     RARE_KAON_PI0EE_PARAMETRIZATION_CITATION,
-    RARE_KAON_PI0EE_RS_MATCHING_ASSUMPTION_V2,
     RARE_KAON_PI0EE_SEMILEPTONIC_RUNNING_DIAGNOSTIC_V1,
-    klong_pi0ee_y7_direct_cp_from_couplings,
+    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    klong_pi0ee_y7_direct_cp_from_rs_semileptonic_wilsons,
     klong_pi0ee_y7_direct_cp_sm,
     rare_kaon_dilepton_default_sm_inputs,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _PDG_LIMIT_BLOCK = "pdg_or_equivalent"
 _VALUES_SECTION = "pdg_or_equivalent.values"
@@ -581,8 +582,8 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -595,7 +596,11 @@ class Constraint:
                     "direct-CP constraint was not evaluated."
                 ),
                 diagnostics={
+                    "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "budget_source": self.anchor.budget_band.source,
                     "semileptonic_qcd_running_applied": False,
                     "semileptonic_qcd_running_multiplicative_factor": 1.0,
@@ -622,7 +627,7 @@ class Constraint:
                         "K_L -> pi0 gamma gamma"
                     ),
                     "needs_human_physics": (
-                        RARE_KAON_PI0EE_RS_MATCHING_ASSUMPTION_V2
+                        RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1
                         + " "
                         + RARE_KAON_PI0EE_INTERFERENCE_LIMITATION_V1
                     ),
@@ -630,12 +635,34 @@ class Constraint:
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = klong_pi0ee_y7_direct_cp_from_couplings(
-            couplings,
-            chpt_inputs=self.chpt_inputs,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
+        try:
+            result = klong_pi0ee_y7_direct_cp_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                chpt_inputs=self.chpt_inputs,
+                lepton="e",
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                sm_prediction=float(self.sm_result.direct_cp_branching_fraction),
+                experimental=float(self.anchor.value),
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "K_L -> pi0 e+ e- direct CP"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "budget_source": self.anchor.budget_band.source,
+                },
+            )
         predicted = float(result.direct_cp_branching_fraction)
         budget = float(self.anchor.budget)
         ratio = predicted / budget if budget > 0.0 else float("inf")
@@ -676,13 +703,14 @@ class Constraint:
                 "budget_confidence_level": self.anchor.budget_band.confidence_level,
                 "budget_sm_subtracted": self.anchor.budget_band.sm_subtracted,
                 "parametrization_citation": RARE_KAON_PI0EE_PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": (
-                    RARE_KAON_PI0EE_RS_MATCHING_ASSUMPTION_V2
-                ),
+                "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
                 "needs_human_physics": (
-                    RARE_KAON_PI0EE_RS_MATCHING_ASSUMPTION_V2
+                    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1
                     + " "
                     + RARE_KAON_PI0EE_INTERFERENCE_LIMITATION_V1
+                ),
+                "rs_semileptonic_vector_matching_status": (
+                    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1
                 ),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "formula_normalization": float(
@@ -780,7 +808,7 @@ class Constraint:
                 "Wilson structure: direct CP is vector plus axial, while "
                 "the interference diagnostic is vector-only. The HARD "
                 "budget is the K008.yaml PDG/KTeV 90% CL total-rate limit; "
-                "RS y7V/y7A values are a NEEDS-HUMAN-PHYSICS proxy and "
+                "Phase-3a RS C9/C10 Wilsons enter additively through y7V/y7A; "
                 "indirect CP, interference, and CPC totals are diagnostics."
             ),
             diagnostics=diagnostics,
