@@ -18,12 +18,12 @@ where the factor of two implements the charge-summed ``e mu`` final state.
 
 RS matching status
 ------------------
-NEEDS-HUMAN-PHYSICS.  A rigorous prediction needs the off-diagonal lepton
-``Z e mu`` effective coupling after EW KK/Z/Z' mixing, lepton mass-basis
-rotation, and possible brane kinetic terms.  That coupling is not present on
-``ParameterPoint``.  If a caller supplies ``lepton_mass_basis_couplings``, this
-v1 implementation uses a documented proxy through the zpole LFV adapter:
-``delta g_emu = (m_Z/M_KK)^2 * lepton_overlap_emu``.
+PARTIAL/NEEDS-HUMAN-PHYSICS.  The tree-level light-Z prediction is read from
+``rs_ew_couplings.z_delta_g_L/R_e[0,1]`` and is rigorous within the Phase-4
+minimal-RS neutral-current builder.  In the current diagonal charged-lepton
+fit this matrix is diagonal, so the v1 tree-level LFV prediction is exactly
+zero and non-vetoing.  Loop-induced Z-LFV from the lepton dipole spurion is
+deferred to Phase 7 and is not faked here.
 
 Catalog sidecar
 ---------------
@@ -44,17 +44,14 @@ from flavor_catalog_constraints import anchors as anchor_scaffold
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.zpole_lfv import (
-    ZPOLE_LFV_PROXY_V1,
-    zpole_lfv_branching_fraction_from_couplings,
-    zpole_lfv_branching_fraction_with_proxy,
+    z_lfv_branching_fraction_from_couplings,
     zpole_lfv_effective_coupling_limit,
     zpole_lfv_sm_total_width_weight,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "top_higgs_ew"
-_REQUIRED_EXTRA = "lepton_mass_basis_couplings"
-_OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
+_REQUIRED_EXTRA = "rs_ew_couplings"
 _CMS_LIMIT_VALUE_ID = "CMS2025:T015:zemu_limit"
 _PDG_LIMIT_VALUE_ID = "PDG2025:T015:zemu_limit"
 _DATASET_VALUE_ID = "CMS2025:T015:dataset"
@@ -64,14 +61,17 @@ _NUMBER_RE = re.compile(
 )
 _UNEVALUATED_REASON = (
     "no off-diagonal lepton Z e-mu prediction available "
-    "(lepton-sector neutral-current coupling not on ParameterPoint)"
+    "(rs_ew_couplings not provided on ParameterPoint)"
 )
 _UNEVALUATED_NOTES = f"NOT EVALUATED - {_UNEVALUATED_REASON}"
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: off-diagonal lepton Z e-mu effective couplings are "
-    "not on ParameterPoint; this v1 uses a documented lepton-overlap proxy "
-    "through the shared zpole LFV extension."
+    "PARTIAL/NEEDS-HUMAN-PHYSICS: tree-level light-Z LFV uses rigorous "
+    "rs_ew_couplings.z_delta_g_L/R_e[0,1]; with the v1 diagonal "
+    "charged-lepton fit this off-diagonal entry is zero. Loop-induced Z-LFV "
+    "from the lfv_dipole_spurion is deferred to Phase 7."
 )
+_TREE_LEVEL_STATUS = "rigorous_tree_light_z_from_rs_ew_couplings"
+_LOOP_LFV_STATUS = "deferred_to_phase_7_lfv_dipole_spurion"
 
 
 @dataclass(frozen=True)
@@ -299,6 +299,16 @@ def _load_t015_anchor(process_id: str) -> T015Anchor:
     )
 
 
+def _coupling_entry(source: Any, matrix_name: str, row: int, column: int) -> complex:
+    try:
+        value = complex(getattr(source, matrix_name)[row, column])
+    except (AttributeError, TypeError, KeyError, IndexError) as exc:
+        raise ValueError(f"{matrix_name}[{row},{column}] is not available") from exc
+    if not math.isfinite(value.real) or not math.isfinite(value.imag):
+        raise ValueError(f"{matrix_name}[{row},{column}] must be finite")
+    return value
+
+
 @register
 class Constraint:
     """Catalogued ``Z -> e mu`` LFV pure-NP branching-fraction constraint."""
@@ -309,9 +319,11 @@ class Constraint:
 
     def __init__(self) -> None:
         self.anchor = _load_t015_anchor(self.process_id)
-        self.sm_result = zpole_lfv_branching_fraction_from_couplings(
+        self.sm_result = z_lfv_branching_fraction_from_couplings(
             delta_g_left=0.0j,
             delta_g_right=0.0j,
+            initial_flavor="e",
+            final_flavor="mu",
             br_limit=self.anchor.budget,
         )
 
@@ -333,6 +345,7 @@ class Constraint:
                     "non-vetoing only; no BR(Z -> e mu) NP prediction was evaluated"
                 ),
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+                "required_parameter_point_extras": [_REQUIRED_EXTRA],
                 "budget_source": self.anchor.source_url,
                 "experimental_block": self.anchor.experimental.block_key,
                 "sm_branching_fraction": 0.0,
@@ -341,18 +354,26 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        lepton_input = point.get_extra(_REQUIRED_EXTRA)
-        if lepton_input is None:
+        rs_ew_couplings = point.get_extra(_REQUIRED_EXTRA)
+        if rs_ew_couplings is None:
             return self._unevaluated_result(
-                {"missing_extra": _REQUIRED_EXTRA},
+                {
+                    "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_lepton_mass_basis_couplings_present": (
+                        point.get_extra("lepton_mass_basis_couplings") is not None
+                    ),
+                },
             )
 
-        kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result, proxy = zpole_lfv_branching_fraction_with_proxy(
-                lepton_input,
+            delta_g_left = _coupling_entry(rs_ew_couplings, "z_delta_g_L_e", 0, 1)
+            delta_g_right = _coupling_entry(rs_ew_couplings, "z_delta_g_R_e", 0, 1)
+            result = z_lfv_branching_fraction_from_couplings(
+                delta_g_left=delta_g_left,
+                delta_g_right=delta_g_right,
+                initial_flavor="e",
+                final_flavor="mu",
                 br_limit=self.anchor.budget,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
             )
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
             return self._unevaluated_result(
@@ -372,8 +393,21 @@ class Constraint:
                     "the HARD budget is applied to the pure-NP branching fraction."
                 ),
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
-                "rs_matching_assumption": ZPOLE_LFV_PROXY_V1,
-                "z_lfv_proxy": dict(proxy.diagnostics),
+                "tree_level_matching_status": _TREE_LEVEL_STATUS,
+                "loop_lfv_status": _LOOP_LFV_STATUS,
+                "rs_matching_assumption": getattr(
+                    rs_ew_couplings, "matching_assumption", None
+                ),
+                "rs_ew_model_label": getattr(rs_ew_couplings, "model_label", None),
+                "rs_ew_kk_mass_gev": float(
+                    getattr(rs_ew_couplings, "kk_ew_mass_gev")
+                ),
+                "z_delta_g_indices": {
+                    "left": "z_delta_g_L_e[0,1]",
+                    "right": "z_delta_g_R_e[0,1]",
+                },
+                "initial_flavor": result.initial_flavor,
+                "final_flavor": result.final_flavor,
                 "delta_g_left_emu": complex(result.delta_g_left),
                 "delta_g_right_emu": complex(result.delta_g_right),
                 "effective_coupling_norm": float(result.coupling_norm),
@@ -391,7 +425,7 @@ class Constraint:
                 "pdg_listing_value_id": self.anchor.pdg_limit.value_id,
                 "dataset": dict(self.anchor.dataset),
                 "budget_source": self.anchor.source_url,
-                "kk_ew_mass_extra_used": kk_ew_mass is not None,
+                "required_parameter_point_extras": [_REQUIRED_EXTRA],
             }
         )
 
@@ -407,8 +441,9 @@ class Constraint:
             notes=(
                 "Pure-NP BR(Z -> e mu) bound using the shared zpole "
                 "effective-coupling width weights. The off-diagonal Z e-mu "
-                "coupling is a documented lepton-overlap proxy and is flagged "
-                "NEEDS-HUMAN-PHYSICS."
+                "coupling is the Phase-4 tree-level light-Z "
+                "rs_ew_couplings.z_delta_g_e[0,1] entry; loop-induced Z-LFV "
+                "from the dipole spurion is deferred to Phase 7."
             ),
             diagnostics=diagnostics,
         )

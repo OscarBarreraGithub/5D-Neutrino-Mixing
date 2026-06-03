@@ -4,11 +4,10 @@ Constraint modules import this adapter only.  The effective-coupling width
 weights are reused from :mod:`quarkConstraints.zpole`; the new LFV glue lives
 in :mod:`quarkConstraints.zpole_lfv`.
 
-NEEDS-HUMAN-PHYSICS: ``ParameterPoint`` does not carry a rigorous
-off-diagonal lepton ``Z e mu`` effective coupling.  The proxy path maps
-caller-supplied lepton overlap spurions onto
-``delta g_emu ~ (m_Z/M_KK)^2 overlap_emu`` and is explicitly diagnostic-only
-until a full RS EW/lepton matching object exists.
+The Phase-4b constraint path uses the direct
+``z_lfv_branching_fraction_from_couplings`` export with explicit
+``rs_ew_couplings.z_delta_g_L/R_e`` matrix elements.  Legacy proxy helpers are
+kept for older callers, but T015-T017 do not use them.
 """
 
 from __future__ import annotations
@@ -38,6 +37,7 @@ __all__ = [
     "zpole_lfv_proxy_input",
     "zpole_lfv_sm_total_width_weight",
     "zpole_lfv_branching_fraction_from_couplings",
+    "z_lfv_branching_fraction_from_couplings",
     "zpole_lfv_effective_coupling_limit",
     "zpole_lfv_coupling_proxy",
     "zpole_lfv_branching_fraction_with_proxy",
@@ -73,14 +73,39 @@ def zpole_lfv_branching_fraction_from_couplings(
     *,
     delta_g_left: complex,
     delta_g_right: complex,
+    initial_flavor: str = "e",
+    final_flavor: str = "mu",
     br_limit: float | None = None,
     inputs: ZPoleSMInputs | None = None,
 ) -> ZPoleLFVBranchingResult:
-    """Return ``BR(Z -> e mu)`` from off-diagonal effective couplings."""
+    """Return ``BR(Z -> l_i l_j)`` from off-diagonal effective couplings."""
 
     return _branching_from_couplings(
         delta_g_left=delta_g_left,
         delta_g_right=delta_g_right,
+        initial_flavor=initial_flavor,
+        final_flavor=final_flavor,
+        br_limit=br_limit,
+        inputs=inputs,
+    )
+
+
+def z_lfv_branching_fraction_from_couplings(
+    *,
+    delta_g_left: complex,
+    delta_g_right: complex,
+    initial_flavor: str = "e",
+    final_flavor: str = "mu",
+    br_limit: float | None = None,
+    inputs: ZPoleSMInputs | None = None,
+) -> ZPoleLFVBranchingResult:
+    """Adapter-exported LFV Z branching fraction helper used by constraints."""
+
+    return zpole_lfv_branching_fraction_from_couplings(
+        delta_g_left=delta_g_left,
+        delta_g_right=delta_g_right,
+        initial_flavor=initial_flavor,
+        final_flavor=final_flavor,
         br_limit=br_limit,
         inputs=inputs,
     )

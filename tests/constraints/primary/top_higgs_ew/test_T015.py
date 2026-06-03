@@ -12,11 +12,17 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
-from flavor_catalog_constraints.physics_adapters.zpole_lfv import (
-    zpole_lfv_proxy_input,
-)
 from flavor_catalog_constraints.primary.top_higgs_ew import T015 as t015_module
-from quarkConstraints.zpole import default_sm_inputs, partial_width_weight, sm_couplings
+from tests.constraints.primary.top_higgs_ew.z_lfv_rewire_helpers import (
+    LFV_CHANNELS,
+    amplified_tree_point,
+    channel_deltas,
+    diagonal_rs_ew_point,
+    lfv_live_rs_ew_point,
+    manual_lfv_br,
+    manual_sm_width_weights,
+    old_style_lepton_only_point,
+)
 
 _PID = "T015"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -37,58 +43,6 @@ def _limit(entry) -> float:
     return float(str(entry["normalized_value"]).replace("<", "").strip())
 
 
-def _proxy_point(
-    left_emu_overlap: complex,
-    right_emu_overlap: complex = 0.0j,
-    *,
-    m_kk_gev: float = 3000.0,
-):
-    proxy = zpole_lfv_proxy_input(
-        left_emu_overlap,
-        right_emu_overlap,
-        m_kk_gev,
-        source="T015 test proxy",
-    )
-    return point_builder.make_point(lepton_mass_basis_couplings=proxy)
-
-
-def _manual_sm_width_weights():
-    inputs = default_sm_inputs()
-    weights = {}
-    for flavor in ("u", "d", "s", "c", "b"):
-        weights[flavor] = partial_width_weight(
-            sm_couplings(flavor, inputs),
-            radiator=inputs.radiator_for(flavor),
-        )
-    for flavor in ("e", "mu", "tau"):
-        weights[flavor] = partial_width_weight(sm_couplings(flavor, inputs))
-    for flavor in ("nu_e", "nu_mu", "nu_tau"):
-        weights[flavor] = partial_width_weight(sm_couplings("nu", inputs))
-    return weights
-
-
-def _manual_lfv_br(
-    left_emu_overlap: complex,
-    right_emu_overlap: complex = 0.0j,
-    *,
-    m_kk_gev: float = 3000.0,
-) -> tuple[float, complex, complex, float, float]:
-    inputs = default_sm_inputs()
-    scale = (inputs.m_z_gev / m_kk_gev) ** 2
-    delta_left = complex(scale * left_emu_overlap)
-    delta_right = complex(scale * right_emu_overlap)
-    norm = abs(delta_left) ** 2 + abs(delta_right) ** 2
-    sm_total = sum(_manual_sm_width_weights().values())
-    lfv_weight = 2.0 * norm
-    return (
-        float(lfv_weight / (sm_total + lfv_weight)),
-        delta_left,
-        delta_right,
-        float(norm),
-        float(sm_total),
-    )
-
-
 def test_registration_metadata():
     constraint = fcc.get(_PID)
 
@@ -96,7 +50,7 @@ def test_registration_metadata():
     assert constraint.process_id == _PID
     assert constraint.severity is Severity.HARD
     assert constraint.family == "top_higgs_ew"
-    assert constraint.observable == "BR(Z -> e mu)"
+    assert constraint.observable == LFV_CHANNELS[_PID]["observable"]
 
 
 def test_anchor_matches_yaml_and_loud_fail_probe():
@@ -105,7 +59,7 @@ def test_anchor_matches_yaml_and_loud_fail_probe():
     pdg = _entry("PDG2025:T015:zemu_limit")
     dataset = _entry("CMS2025:T015:dataset")
     limit = _limit(cms)
-    sm_total = sum(_manual_sm_width_weights().values())
+    sm_total = sum(manual_sm_width_weights().values())
     coupling_limit = math.sqrt(limit * sm_total / (2.0 * (1.0 - limit)))
 
     assert constraint.anchor.experimental.value == pytest.approx(limit)
@@ -156,70 +110,110 @@ def test_t015_value_anchor_routes_through_scaffold_load_anchor(monkeypatch):
         )
 
 
-def test_sm_zpole_total_weight_and_zero_lfv_rate_match_independent_recompute():
+def test_diagonal_rs_ew_builder_gives_zero_tree_lfv_and_loop_deferred():
     constraint = fcc.get(_PID)
-    sm_total = sum(_manual_sm_width_weights().values())
-    result = constraint.evaluate(_proxy_point(0.0j, 0.0j))
+    point = diagonal_rs_ew_point()
+    delta_left, delta_right = channel_deltas(point.extras["rs_ew_couplings"], _PID)
+    result = constraint.evaluate(point)
 
-    assert sm_total == pytest.approx(3.649563333333334)
+    assert delta_left == pytest.approx(0.0j, abs=1.0e-20)
+    assert delta_right == pytest.approx(0.0j, abs=1.0e-20)
     assert constraint.sm_result.branching_fraction == pytest.approx(0.0)
-    assert constraint.sm_result.sm_branching_fraction == pytest.approx(0.0)
     assert result.predicted == pytest.approx(0.0)
-    assert result.sm_prediction == pytest.approx(0.0)
-    assert result.diagnostics["sm_total_width_weight"] == pytest.approx(sm_total)
+    assert result.ratio == pytest.approx(0.0)
     assert result.passes is True
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["tree_level_matching_status"] == (
+        "rigorous_tree_light_z_from_rs_ew_couplings"
+    )
+    assert result.diagnostics["loop_lfv_status"] == (
+        "deferred_to_phase_7_lfv_dipole_spurion"
+    )
+    assert "lfv_dipole_spurion" in result.diagnostics["needs_human_physics"]
+    assert "proxy" not in result.diagnostics["needs_human_physics"].lower()
 
 
-def test_proxy_numerics_match_independent_effective_coupling_recomputation():
+def test_lfv_live_toy_nonzero_matches_independent_recompute_and_mkk_scaling():
     constraint = fcc.get(_PID)
-    left = 0.25 + 0.10j
-    right = 0.05j
-    result = constraint.evaluate(_proxy_point(left, right))
-    expected_br, delta_left, delta_right, norm, sm_total = _manual_lfv_br(left, right)
+    cfg = LFV_CHANNELS[_PID]
+    low = constraint.evaluate(lfv_live_rs_ew_point(3000.0))
+    high = constraint.evaluate(lfv_live_rs_ew_point(6000.0))
+    delta_left, delta_right = channel_deltas(
+        lfv_live_rs_ew_point(3000.0).extras["rs_ew_couplings"],
+        _PID,
+    )
+    expected_br, norm, sm_total = manual_lfv_br(delta_left, delta_right)
 
-    assert result.predicted == pytest.approx(expected_br)
-    assert result.ratio == pytest.approx(expected_br / constraint.anchor.budget)
-    assert result.diagnostics["delta_g_left_emu"] == pytest.approx(delta_left)
-    assert result.diagnostics["delta_g_right_emu"] == pytest.approx(delta_right)
-    assert result.diagnostics["effective_coupling_norm"] == pytest.approx(norm)
-    assert result.diagnostics["sm_total_width_weight"] == pytest.approx(sm_total)
-    assert result.diagnostics["charge_state_factor"] == pytest.approx(2.0)
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["z_lfv_proxy"]["matching_assumption"]
+    assert abs(delta_left) > 0.0 or abs(delta_right) > 0.0
+    assert low.predicted == pytest.approx(expected_br)
+    assert low.ratio == pytest.approx(expected_br / constraint.anchor.budget)
+    assert low.diagnostics[cfg["left_key"]] == pytest.approx(delta_left)
+    assert low.diagnostics[cfg["right_key"]] == pytest.approx(delta_right)
+    assert low.diagnostics["effective_coupling_norm"] == pytest.approx(norm)
+    assert low.diagnostics["sm_total_width_weight"] == pytest.approx(sm_total)
+    assert low.diagnostics["initial_flavor"] == cfg["initial_flavor"]
+    assert low.diagnostics["final_flavor"] == cfg["final_flavor"]
+    assert low.diagnostics["z_delta_g_indices"] == {
+        "left": "z_delta_g_L_e[0,1]",
+        "right": "z_delta_g_R_e[0,1]",
+    }
 
-
-def test_evaluate_without_input_degrades_gracefully():
-    result = fcc.get(_PID).evaluate(point_builder.empty_point())
-
-    assert result.process_id == _PID
-    assert result.passes is True
-    assert result.predicted is None
-    assert result.ratio is None
-    assert result.sm_prediction == pytest.approx(0.0)
-    assert result.experimental == pytest.approx(fcc.get(_PID).anchor.value)
-    assert result.budget == pytest.approx(fcc.get(_PID).anchor.budget)
-    assert result.notes.startswith("NOT EVALUATED -")
-    assert result.diagnostics["evaluated"] is False
-    assert result.diagnostics["missing_extra"] == "lepton_mass_basis_couplings"
-    assert "non-vetoing only" in result.diagnostics["passes_semantics"]
-
-
-def test_invalid_lepton_input_is_unevaluated_not_real_pass():
-    result = fcc.get(_PID).evaluate(
-        point_builder.make_point(lepton_mass_basis_couplings={"left_emu": 1.0})
+    assert high.diagnostics["effective_coupling_norm"] / norm == pytest.approx(
+        (3000.0 / 6000.0) ** 4,
+        rel=1.0e-12,
+    )
+    assert high.predicted / low.predicted == pytest.approx(
+        (3000.0 / 6000.0) ** 4,
+        rel=1.0e-8,
     )
 
+
+def test_absent_rs_ew_couplings_degrades_gracefully_for_empty_and_old_style_points():
+    for point, legacy_present in (
+        (point_builder.empty_point(), False),
+        (old_style_lepton_only_point(), True),
+    ):
+        result = fcc.get(_PID).evaluate(point)
+
+        assert result.process_id == _PID
+        assert result.passes is True
+        assert result.predicted is None
+        assert result.ratio is None
+        assert result.sm_prediction == pytest.approx(0.0)
+        assert result.experimental == pytest.approx(fcc.get(_PID).anchor.value)
+        assert result.budget == pytest.approx(fcc.get(_PID).anchor.budget)
+        assert result.notes.startswith("NOT EVALUATED -")
+        assert result.diagnostics["evaluated"] is False
+        assert result.diagnostics["missing_extra"] == "rs_ew_couplings"
+        assert result.diagnostics["legacy_lepton_mass_basis_couplings_present"] is legacy_present
+        assert "non-vetoing only" in result.diagnostics["passes_semantics"]
+
+
+def test_invalid_rs_ew_couplings_is_unevaluated_not_real_pass():
+    result = fcc.get(_PID).evaluate(point_builder.make_point(rs_ew_couplings=object()))
+
     assert result.passes is True
     assert result.predicted is None
     assert result.ratio is None
     assert result.notes.startswith("NOT EVALUATED -")
     assert result.diagnostics["evaluated"] is False
-    assert result.diagnostics["invalid_extra"] == "lepton_mass_basis_couplings"
-    assert result.diagnostics["exception_type"] == "KeyError"
+    assert result.diagnostics["invalid_extra"] == "rs_ew_couplings"
+    assert result.diagnostics["exception_type"] == "ValueError"
+
+
+def test_amplified_tree_coupling_fails_limit_in_new_path():
+    constraint = fcc.get(_PID)
+    result = constraint.evaluate(amplified_tree_point(_PID))
+    expected_br, norm, _ = manual_lfv_br(0.01, 0.0j)
+
+    assert result.predicted == pytest.approx(expected_br)
+    assert result.diagnostics["effective_coupling_norm"] == pytest.approx(norm)
+    assert result.passes is False
+    assert result.ratio > 1.0
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
-    result = fcc.get(_PID).evaluate(_proxy_point(0.03 + 0.02j, 0.01j))
+    result = fcc.get(_PID).evaluate(lfv_live_rs_ew_point())
 
     assert result.process_id == _PID
     for value in (
@@ -245,62 +239,12 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     assert result.diagnostics["evaluated"] is True
 
 
-@pytest.mark.parametrize(
-    ("point", "expected_pass"),
-    [
-        (_proxy_point(0.10), True),
-        (_proxy_point(10.0), False),
-    ],
-)
-def test_safe_point_passes_and_large_np_point_fails(point, expected_pass: bool):
-    result = fcc.get(_PID).evaluate(point)
-
-    assert result.passes is expected_pass
-    if expected_pass:
-        assert result.ratio < 1.0
-    else:
-        assert result.ratio > 10.0
-
-
-def test_optional_kk_ew_mass_extra_changes_proxy_scale():
-    proxy = zpole_lfv_proxy_input(
-        0.20,
-        0.0j,
-        3000.0,
-        source="T015 test proxy",
-    )
-    default_point = point_builder.make_point(lepton_mass_basis_couplings=proxy)
-    heavy_point = point_builder.make_point(
-        lepton_mass_basis_couplings=proxy,
-        kk_ew_mass_gev=6000.0,
-    )
-
-    default_result = fcc.get(_PID).evaluate(default_point)
-    heavy_result = fcc.get(_PID).evaluate(heavy_point)
-
-    assert default_result.diagnostics["z_lfv_proxy"]["m_kk_gev"] == pytest.approx(3000.0)
-    assert heavy_result.diagnostics["z_lfv_proxy"]["m_kk_gev"] == pytest.approx(6000.0)
-    assert heavy_result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert heavy_result.diagnostics["delta_g_left_emu"] == pytest.approx(
-        default_result.diagnostics["delta_g_left_emu"] / 4.0
-    )
-    assert heavy_result.diagnostics["effective_coupling_norm"] == pytest.approx(
-        default_result.diagnostics["effective_coupling_norm"] / 16.0
-    )
-
-
 def test_evaluate_is_pure_and_deterministic():
-    proxy = zpole_lfv_proxy_input(
-        0.15 + 0.01j,
-        0.03j,
-        3000.0,
-        source="T015 test proxy",
-    )
-    point = point_builder.make_point(lepton_mass_basis_couplings=proxy)
+    point = lfv_live_rs_ew_point()
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    assert point.get_extra("lepton_mass_basis_couplings") == proxy
+    assert point.get_extra("rs_ew_couplings") is not None
