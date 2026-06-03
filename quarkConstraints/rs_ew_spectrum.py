@@ -17,6 +17,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field, replace
 from functools import lru_cache
+from types import MappingProxyType
 from typing import Any, Mapping
 
 import numpy as np
@@ -55,6 +56,56 @@ class RSEWOverlapResult:
     previous_modes: int
     relative_delta: float
     partial_values: Mapping[int, float]
+
+
+@dataclass(frozen=True)
+class RSChargedGaugeDiagonalization:
+    """Charged W zero-plus-KK mass diagonalization on the gauge-NN tower."""
+
+    model_label: str
+    g2: float
+    v_higgs_gev: float
+    n_massive_modes: int
+    zero_plus_gauge_masses_gev: np.ndarray
+    zero_plus_chi_ir: np.ndarray
+    mass_matrix_gev2: np.ndarray
+    eigenvalues_gev2: np.ndarray
+    eigenvectors: np.ndarray
+    m_w_gev: float
+    m_wprime_gev: float
+    eta_W: float
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        n = int(self.n_massive_modes)
+        if n < 1:
+            raise ValueError("n_massive_modes must be positive")
+        for name in ("g2", "v_higgs_gev", "m_w_gev", "m_wprime_gev"):
+            value = float(getattr(self, name))
+            if not math.isfinite(value) or value <= 0.0:
+                raise ValueError(f"{name} must be positive and finite")
+            object.__setattr__(self, name, value)
+        eta = float(self.eta_W)
+        if eta not in {-1.0, 1.0}:
+            raise ValueError("eta_W must be pinned to +/-1")
+        object.__setattr__(self, "eta_W", eta)
+
+        vector_shape = (n + 1,)
+        matrix_shape = (n + 1, n + 1)
+        for name in ("zero_plus_gauge_masses_gev", "zero_plus_chi_ir", "eigenvalues_gev2"):
+            object.__setattr__(
+                self,
+                name,
+                _readonly_real_array(getattr(self, name), name, vector_shape),
+            )
+        for name in ("mass_matrix_gev2", "eigenvectors"):
+            object.__setattr__(
+                self,
+                name,
+                _readonly_real_array(getattr(self, name), name, matrix_shape),
+            )
+        object.__setattr__(self, "n_massive_modes", n)
+        object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
 
 
 def g0_squared(c: float, t: float | np.ndarray, epsilon: float) -> float | np.ndarray:
@@ -99,6 +150,20 @@ def w0(c: float, t: float | np.ndarray, epsilon: float) -> float | np.ndarray:
 def _validate_power_of_two(value: int, *, name: str) -> None:
     if value <= 0 or value & (value - 1):
         raise ValueError(f"{name} must be a positive power of two")
+
+
+def _readonly_real_array(
+    values: Any,
+    name: str,
+    shape: tuple[int, ...],
+) -> np.ndarray:
+    arr = np.array(values, dtype=float, copy=True)
+    if arr.shape != shape:
+        raise ValueError(f"{name} must have shape {shape}")
+    if not np.all(np.isfinite(arr)):
+        raise ValueError(f"{name} contains non-finite values")
+    arr.setflags(write=False)
+    return arr
 
 
 @lru_cache(maxsize=16)
@@ -387,6 +452,81 @@ class RSEWSpectrum:
             raise ValueError("max_modes must be between 1 and n_gauge_modes")
         return np.asarray([self.chi(i, 1.0) for i in range(n)], dtype=float)
 
+    def charged_w_diagonalization(
+        self,
+        *,
+        g2: float,
+        v_higgs_gev: float,
+        max_modes: int | None = None,
+    ) -> RSChargedGaugeDiagonalization:
+        """Diagonalize the charged W mass matrix on ``W_0 + W_KK`` modes.
+
+        The basis is the zero mode followed by the exact gauge-NN massive
+        tower already stored on this spectrum.  The matrix is
+        ``m_n^2 delta_mn + g2^2 v^2 chi_m(1) chi_n(1)/4`` with
+        ``chi_0(1)=1``.
+        """
+
+        n = self.n_gauge_modes if max_modes is None else int(max_modes)
+        if n < 1 or n > self.n_gauge_modes:
+            raise ValueError("max_modes must be between 1 and n_gauge_modes")
+        g2_float = float(g2)
+        v_float = float(v_higgs_gev)
+        for name, value in (("g2", g2_float), ("v_higgs_gev", v_float)):
+            if not math.isfinite(value) or value <= 0.0:
+                raise ValueError(f"{name} must be positive and finite")
+
+        zero_plus_masses = np.concatenate(
+            (np.array([0.0], dtype=float), self.gauge_masses_gev[:n])
+        )
+        zero_plus_chi = np.concatenate(
+            (np.array([1.0], dtype=float), self.chi_ir(max_modes=n))
+        )
+        higgs_rank_one = (g2_float * g2_float * v_float * v_float / 4.0) * np.outer(
+            zero_plus_chi,
+            zero_plus_chi,
+        )
+        mass_matrix = np.diag(zero_plus_masses * zero_plus_masses) + higgs_rank_one
+        eigenvalues, eigenvectors = np.linalg.eigh(mass_matrix)
+        if not np.all(np.isfinite(eigenvalues)) or not np.all(np.isfinite(eigenvectors)):
+            raise ValueError("charged W diagonalization produced non-finite values")
+        if np.any(eigenvalues < -1.0e-8):
+            raise ValueError("charged W mass matrix has a negative eigenvalue")
+        eigenvalues = np.maximum(eigenvalues, 0.0)
+        eigenvectors = np.array(eigenvectors, dtype=float, copy=True)
+        if eigenvectors[0, 0] < 0.0:
+            eigenvectors[:, 0] *= -1.0
+
+        first_kk_projection = float(eigenvectors[1, 0] / (eigenvectors[0, 0] * zero_plus_chi[1]))
+        if not math.isfinite(first_kk_projection) or first_kk_projection == 0.0:
+            raise ValueError("cannot pin eta_W from the light-W eigenvector")
+        eta_w = -1.0 if first_kk_projection < 0.0 else 1.0
+        return RSChargedGaugeDiagonalization(
+            model_label="RS_CHARGED_W_DIAGONALIZATION_V1",
+            g2=g2_float,
+            v_higgs_gev=v_float,
+            n_massive_modes=n,
+            zero_plus_gauge_masses_gev=zero_plus_masses,
+            zero_plus_chi_ir=zero_plus_chi,
+            mass_matrix_gev2=mass_matrix,
+            eigenvalues_gev2=eigenvalues,
+            eigenvectors=eigenvectors,
+            m_w_gev=math.sqrt(float(eigenvalues[0])),
+            m_wprime_gev=math.sqrt(float(eigenvalues[1])),
+            eta_W=eta_w,
+            metadata={
+                "basis": "zero_mode_plus_exact_gauge_NN_tower",
+                "matrix_formula": "m_n^2 delta_mn + g2^2 v^2 chi_m(1) chi_n(1)/4",
+                "zero_mode_chi_ir": 1.0,
+                "eta_W_source": (
+                    "sign(light_eigenvector_first_KK_component/"
+                    "(light_zero_component*chi_1_IR))"
+                ),
+                "eta_W_projection_value": first_kk_projection,
+                "exact_bessel": bool(self.exact_bessel),
+            },
+        )
+
     def omega(self, c: float, max_modes: int | None = None) -> np.ndarray:
         """Compute Omega_n(c) for the first ``max_modes`` massive modes."""
 
@@ -590,6 +730,7 @@ __all__ = [
     "DEFAULT_MIN_TRUNCATION_MODES",
     "DEFAULT_N_GAUGE_MODES",
     "DEFAULT_OVERLAP_RTOL",
+    "RSChargedGaugeDiagonalization",
     "RSEWOverlapConvergenceError",
     "RSEWOverlapResult",
     "RSEWSpectrum",

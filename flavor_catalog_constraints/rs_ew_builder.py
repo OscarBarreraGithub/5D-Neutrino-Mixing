@@ -9,6 +9,10 @@ from quarkConstraints.rs_ew_couplings import (
     build_rs_ew_couplings,
     build_rs_lepton_mass_basis_couplings,
 )
+from quarkConstraints.rs_charged_current import (
+    RSChargedCurrentInputs,
+    build_rs_charged_current,
+)
 from quarkConstraints.rs_ew_spectrum import (
     DEFAULT_N_GAUGE_MODES,
     DEFAULT_OVERLAP_RTOL,
@@ -33,6 +37,8 @@ def build_rs_ew_extras(
     lepton_yukawa_result: Any | None = None,
     lepton_sweep_inputs: dict[str, Any] | None = None,
     neutral_current_inputs: RSEWNeutralCurrentInputs | None = None,
+    include_charged_current: bool = False,
+    charged_current_inputs: RSChargedCurrentInputs | None = None,
     overlap_rel_tol: float = DEFAULT_OVERLAP_RTOL,
     min_overlap_modes: int = 16,
     max_overlap_modes: int | None = None,
@@ -78,6 +84,31 @@ def build_rs_ew_extras(
         max_overlap_modes=max_overlap_modes,
         model_label=str(ew_model),
     )
+    charged_current = None
+    if include_charged_current:
+        if lepton_couplings is None:
+            raise ValueError(
+                "include_charged_current=True requires lepton_yukawa_result "
+                "or lepton_sweep_inputs with c_L"
+            )
+        resolved_charged_inputs = charged_current_inputs
+        if resolved_charged_inputs is None:
+            resolved_charged_inputs = RSChargedCurrentInputs(
+                a_ref_c=float(couplings.a_ref_c)
+            )
+        if float(resolved_charged_inputs.a_ref_c) != float(couplings.a_ref_c):
+            raise ValueError("charged_current_inputs.a_ref_c must match rs_ew_couplings.a_ref_c")
+        charged_current = build_rs_charged_current(
+            quark_fit_result,
+            spectrum=spectrum,
+            lepton_mass_basis_couplings=lepton_couplings,
+            inputs=resolved_charged_inputs,
+            shared_a_ref=float(couplings.a_ref),
+            overlap_rel_tol=float(overlap_rel_tol),
+            min_overlap_modes=int(min_overlap_modes),
+            max_overlap_modes=max_overlap_modes,
+            model_label=str(ew_model),
+        )
     wilsons = build_rs_semileptonic_wilsons(couplings)
     return {
         "kk_ew_mass_gev": float(spectrum.kk_ew_mass_gev),
@@ -89,6 +120,7 @@ def build_rs_ew_extras(
             if lepton_couplings is None
             else {"lepton_mass_basis_couplings": lepton_couplings}
         ),
+        **({} if charged_current is None else {"rs_charged_current": charged_current}),
     }
 
 
