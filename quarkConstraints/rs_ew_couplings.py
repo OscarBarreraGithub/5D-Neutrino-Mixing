@@ -1,8 +1,8 @@
-"""RS electroweak quark neutral-current couplings.
+"""RS electroweak neutral-current couplings.
 
-This module is the Phase-3a bridge from the numerical RS-EW spectrum to
-mass-basis light-Z coupling shifts and same-flavor charged-lepton contacts.
-It intentionally does not call any rare-decay proxy helper.
+This module is the builder bridge from the numerical RS-EW spectrum to
+mass-basis light-Z coupling shifts and semileptonic contacts.  It intentionally
+does not call any rare-decay proxy helper.
 """
 
 from __future__ import annotations
@@ -23,21 +23,31 @@ from .rs_ew_spectrum import (
 
 
 RS_EW_COUPLINGS_INPUT_BUNDLE_V1 = "quarkConstraints.rs_ew_couplings.inputs.v1"
-RS_EW_COUPLINGS_MODEL_V1 = "RS_EW_NEUTRAL_CURRENT_PHASE3A_V1"
+RS_EW_COUPLINGS_MODEL_V1 = "RS_EW_NEUTRAL_CURRENT_PHASE4A_V1"
 RS_EW_COUPLINGS_MATCHING_ASSUMPTION_V1 = (
-    "minimal-RS light-Z quark neutral currents with charged-lepton SM Z "
-    "couplings; charged-lepton delta_g and heavy-neutral lepton exchange "
-    "are deferred to Phase 4"
+    "minimal-RS light-Z quark, charged-lepton, and active-neutrino neutral "
+    "currents with full light-Z product-minus-SM semileptonic contacts; "
+    "heavy neutral Z'/gamma' exchange remains deferred"
+)
+RS_LEPTON_MASS_BASIS_INPUT_BUNDLE_V1 = (
+    "quarkConstraints.rs_ew_couplings.lepton_inputs.v1"
+)
+RS_LEPTON_MASS_BASIS_MODEL_V1 = "RS_LEPTON_MASS_BASIS_PHASE4A_V1"
+RS_LEPTON_MASS_BASIS_MATCHING_ASSUMPTION_V1 = (
+    "charged-lepton Yukawa fit is diagonal, so U_e_L=U_e_R=I in the "
+    "charged-lepton mass basis; PMNS is stored once for active-neutrino "
+    "basis metadata and dipole spurions"
 )
 
 DEFAULT_A_REF_C = 0.65
 DEFAULT_S_Z = -1.0
 LEPTON_FLAVORS: tuple[str, str, str] = ("e", "mu", "tau")
+NEUTRINO_FLAVORS: tuple[str, str, str] = ("nu1", "nu2", "nu3")
 
 
 @dataclass(frozen=True)
 class RSEWNeutralCurrentInputs:
-    """Shared numerical inputs for Phase-3a neutral-current matching."""
+    """Shared numerical inputs for Phase-4a neutral-current matching."""
 
     input_bundle: str = RS_EW_COUPLINGS_INPUT_BUNDLE_V1
     alpha_em_mz: float = 1.0 / 127.952
@@ -69,6 +79,101 @@ class RSEWNeutralCurrentInputs:
 
 
 @dataclass(frozen=True)
+class RSLeptonMassBasisCouplings:
+    """Charged-lepton mass-basis inputs for Phase-4a light-Z matching."""
+
+    model_label: str
+    input_bundle: str
+    matching_assumption: str
+    kk_ew_mass_gev: float
+    c_L: np.ndarray
+    c_E: np.ndarray
+    c_N: np.ndarray
+    M_N: float
+    f_L: np.ndarray
+    f_E: np.ndarray
+    f_N: np.ndarray
+    f_N_UV: np.ndarray
+    Y_E_bar_vector: np.ndarray
+    Y_E_bar_matrix: np.ndarray
+    Y_N_bar_vector: np.ndarray
+    Y_N_matrix: np.ndarray
+    Y_N_bar_matrix: np.ndarray
+    pmns: np.ndarray
+    U_e_L: np.ndarray
+    U_e_R: np.ndarray
+    U_nu_L: np.ndarray
+    lfv_dipole_spurion: np.ndarray
+    params: Mapping[str, Any]
+    basis_metadata: Mapping[str, Any] = field(default_factory=dict)
+    matching_status: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        if not math.isfinite(float(self.kk_ew_mass_gev)) or float(self.kk_ew_mass_gev) <= 0.0:
+            raise ValueError("kk_ew_mass_gev must be positive and finite")
+        if not math.isfinite(float(self.M_N)) or float(self.M_N) <= 0.0:
+            raise ValueError("M_N must be positive and finite")
+        for name in ("c_L", "c_E", "c_N", "f_L", "f_E", "f_N", "f_N_UV"):
+            object.__setattr__(self, name, _readonly_real_triplet(getattr(self, name), name))
+        for name in ("Y_E_bar_vector", "Y_N_bar_vector"):
+            object.__setattr__(
+                self,
+                name,
+                _readonly_complex_triplet(getattr(self, name), name),
+            )
+        for name in (
+            "Y_E_bar_matrix",
+            "Y_N_matrix",
+            "Y_N_bar_matrix",
+            "pmns",
+            "U_e_L",
+            "U_e_R",
+            "U_nu_L",
+            "lfv_dipole_spurion",
+        ):
+            object.__setattr__(self, name, _readonly_complex_matrix(getattr(self, name), name))
+        for name in ("pmns", "U_e_L", "U_e_R", "U_nu_L"):
+            matrix = getattr(self, name)
+            identity = np.eye(3, dtype=np.complex128)
+            if not np.allclose(matrix.conjugate().T @ matrix, identity, rtol=0.0, atol=1.0e-8):
+                raise ValueError(f"{name} must be unitary")
+        if not np.allclose(
+            self.lfv_dipole_spurion,
+            self.lfv_dipole_spurion.conjugate().T,
+            rtol=0.0,
+            atol=5.0e-13,
+        ):
+            raise ValueError("lfv_dipole_spurion must be Hermitian")
+        object.__setattr__(self, "params", MappingProxyType(dict(self.params)))
+        object.__setattr__(
+            self,
+            "basis_metadata",
+            MappingProxyType(dict(self.basis_metadata)),
+        )
+        object.__setattr__(
+            self,
+            "matching_status",
+            MappingProxyType(dict(self.matching_status)),
+        )
+
+    @property
+    def Y_N_bar(self) -> np.ndarray:
+        return self.Y_N_bar_vector
+
+    @property
+    def Y_E_bar(self) -> np.ndarray:
+        return self.Y_E_bar_vector
+
+    @property
+    def y_n_bar(self) -> np.ndarray:
+        return self.Y_N_bar_vector
+
+    @property
+    def pmns_matrix(self) -> np.ndarray:
+        return self.pmns
+
+
+@dataclass(frozen=True)
 class RSEWMassBasisCouplings:
     """Mass-basis light-Z shifts and neutral semileptonic contacts."""
 
@@ -92,12 +197,14 @@ class RSEWMassBasisCouplings:
     z_delta_g_R_d: np.ndarray
     z_delta_g_L_e: np.ndarray
     z_delta_g_R_e: np.ndarray
+    z_delta_g_L_nu: np.ndarray
     z_total_g_L_u: np.ndarray
     z_total_g_R_u: np.ndarray
     z_total_g_L_d: np.ndarray
     z_total_g_R_d: np.ndarray
     z_total_g_L_e: np.ndarray
     z_total_g_R_e: np.ndarray
+    z_total_g_L_nu: np.ndarray
     neutral_contacts: Mapping[str, np.ndarray]
     a_profile_values: Mapping[str, np.ndarray]
     a_mass_basis: Mapping[str, np.ndarray]
@@ -120,12 +227,14 @@ class RSEWMassBasisCouplings:
             "z_delta_g_R_d",
             "z_delta_g_L_e",
             "z_delta_g_R_e",
+            "z_delta_g_L_nu",
             "z_total_g_L_u",
             "z_total_g_R_u",
             "z_total_g_L_d",
             "z_total_g_R_d",
             "z_total_g_L_e",
             "z_total_g_R_e",
+            "z_total_g_L_nu",
         )
         for name in matrix_names:
             arr = _readonly_complex_matrix(getattr(self, name), name)
@@ -181,11 +290,115 @@ class RSEWMassBasisCouplings:
         key = _contact_key(quark_sector, quark_chirality, lepton_chirality)
         return complex(self.neutral_contacts[key][int(i), int(j), int(a), int(b)])
 
+    def nunu_contact(
+        self,
+        quark_sector: str,
+        quark_chirality: str,
+        i: int,
+        j: int,
+        a: int,
+        b: int,
+    ) -> complex:
+        """Return ``C_AB(q_i q_j nu_a nu_b)`` in ``GeV^-2``."""
+
+        key = _nunu_contact_key(quark_sector, quark_chirality)
+        return complex(self.neutral_contacts[key][int(i), int(j), int(a), int(b)])
+
+
+def build_rs_lepton_mass_basis_couplings(
+    yukawa_result: Any,
+    *,
+    kk_ew_mass_gev: float,
+    rotation_unitarity_tolerance: float = 1.0e-8,
+) -> RSLeptonMassBasisCouplings:
+    """Build the Phase-4a charged-lepton mass-basis typed extra."""
+
+    from neutrinos.neutrinoValues import get_pmns
+
+    params = dict(getattr(yukawa_result, "params"))
+    k = _positive_float(params["k"], "k")
+    c_l = _broadcast_real_triplet(params["c_L"], "c_L")
+    c_e = _readonly_real_triplet(params["c_E"], "c_E")
+    c_n = _broadcast_real_triplet(params["c_N"], "c_N")
+    m_n = _positive_float(params["M_N"], "M_N")
+    y_e_bar = _readonly_complex_triplet(getattr(yukawa_result, "Y_E_bar"), "Y_E_bar")
+    y_n_bar = _readonly_complex_triplet(getattr(yukawa_result, "Y_N_bar"), "Y_N_bar")
+    y_n_matrix = _readonly_complex_matrix(
+        getattr(yukawa_result, "Y_N_matrix"),
+        "Y_N_matrix",
+    )
+    ordering = str(params["ordering"])
+    pmns = _readonly_complex_matrix(
+        get_pmns(
+            ordering,
+            float(params["majorana_alpha"]),
+            float(params["majorana_beta"]),
+        ),
+        "pmns",
+    )
+    y_n_bar_matrix_from_pmns = pmns @ np.diag(y_n_bar)
+    y_n_bar_matrix = np.array(2.0 * k * y_n_matrix, dtype=np.complex128, copy=True)
+    if not np.allclose(
+        y_n_bar_matrix,
+        y_n_bar_matrix_from_pmns,
+        rtol=1.0e-9,
+        atol=1.0e-12,
+    ):
+        raise ValueError("Y_N_bar_matrix must equal both 2*k*Y_N_matrix and PMNS@diag(Y_N_bar)")
+
+    identity = np.eye(3, dtype=np.complex128)
+    if not np.allclose(identity.conjugate().T @ identity, identity, rtol=0.0, atol=rotation_unitarity_tolerance):
+        raise ValueError("identity charged-lepton rotations failed unitarity validation")
+    params_with_mkk = dict(params)
+    params_with_mkk["M_KK"] = float(kk_ew_mass_gev)
+    lfv_spurion = y_n_bar_matrix @ y_n_bar_matrix.conjugate().T
+    return RSLeptonMassBasisCouplings(
+        model_label=RS_LEPTON_MASS_BASIS_MODEL_V1,
+        input_bundle=RS_LEPTON_MASS_BASIS_INPUT_BUNDLE_V1,
+        matching_assumption=RS_LEPTON_MASS_BASIS_MATCHING_ASSUMPTION_V1,
+        kk_ew_mass_gev=float(kk_ew_mass_gev),
+        c_L=c_l,
+        c_E=c_e,
+        c_N=c_n,
+        M_N=m_n,
+        f_L=_broadcast_real_triplet(getattr(yukawa_result, "f_L"), "f_L"),
+        f_E=_readonly_real_triplet(getattr(yukawa_result, "f_E"), "f_E"),
+        f_N=_broadcast_real_triplet(getattr(yukawa_result, "f_N"), "f_N"),
+        f_N_UV=_broadcast_real_triplet(getattr(yukawa_result, "f_N_UV"), "f_N_UV"),
+        Y_E_bar_vector=y_e_bar,
+        Y_E_bar_matrix=np.diag(y_e_bar),
+        Y_N_bar_vector=y_n_bar,
+        Y_N_matrix=y_n_matrix,
+        Y_N_bar_matrix=y_n_bar_matrix,
+        pmns=pmns,
+        U_e_L=identity,
+        U_e_R=identity,
+        U_nu_L=pmns,
+        lfv_dipole_spurion=lfv_spurion,
+        params=params_with_mkk,
+        basis_metadata={
+            "charged_lepton_basis": "charged-lepton mass basis",
+            "charged_lepton_fit": "diagonal",
+            "U_e_L_source": "identity_from_diagonal_charged_lepton_fit",
+            "U_e_R_source": "identity_from_diagonal_charged_lepton_fit",
+            "U_nu_L_source": "PMNS from neutrinos.neutrinoValues.get_pmns",
+            "pmns_second_rotation_applied": False,
+            "active_neutrino_current_basis": "neutrino mass basis for nu_a nu_b blocks",
+        },
+        matching_status={
+            "tree_level_light_z_lepton_currents": "available",
+            "loop_dipole_matching": "spurion_only",
+            "heavy_neutral_exchange": "deferred",
+            "uses_yukawa_result_params": True,
+        },
+    )
+
 
 def build_rs_ew_couplings(
     quark_fit_result: Any,
     *,
     spectrum: RSEWSpectrum,
+    lepton_mass_basis_couplings: RSLeptonMassBasisCouplings | None = None,
     inputs: RSEWNeutralCurrentInputs | None = None,
     overlap_rel_tol: float = DEFAULT_OVERLAP_RTOL,
     min_overlap_modes: int = DEFAULT_MIN_TRUNCATION_MODES,
@@ -193,7 +406,7 @@ def build_rs_ew_couplings(
     model_label: str = "minimal_rs",
     rotation_unitarity_tolerance: float = 1.0e-8,
 ) -> RSEWMassBasisCouplings:
-    """Build Phase-3a RS-EW mass-basis couplings from a quark fit result."""
+    """Build Phase-4a RS-EW mass-basis couplings from a quark fit result."""
 
     p = RSEWNeutralCurrentInputs() if inputs is None else inputs
     max_modes = _resolve_max_overlap_modes(spectrum, max_overlap_modes)
@@ -270,13 +483,68 @@ def build_rs_ew_couplings(
     g_r_d = _sm_chiral_z_coupling("d", "R", p.sin2_theta_w)
     g_l_e = _sm_chiral_z_coupling("e", "L", p.sin2_theta_w)
     g_r_e = _sm_chiral_z_coupling("e", "R", p.sin2_theta_w)
+    g_l_nu = _sm_chiral_z_coupling("nu", "L", p.sin2_theta_w)
 
     z_delta_l_u = _z_delta(g_l_u, a_mass["L_u"], scale=scale, s_z=p.s_z)
     z_delta_r_u = _z_delta(g_r_u, a_mass["R_u"], scale=scale, s_z=p.s_z)
     z_delta_l_d = _z_delta(g_l_d, a_mass["L_d"], scale=scale, s_z=p.s_z)
     z_delta_r_d = _z_delta(g_r_d, a_mass["R_d"], scale=scale, s_z=p.s_z)
-    z_delta_l_e = np.zeros((3, 3), dtype=np.complex128)
-    z_delta_r_e = np.zeros((3, 3), dtype=np.complex128)
+    lepton_matching_status: Mapping[str, Any]
+    if lepton_mass_basis_couplings is None:
+        z_delta_l_e = np.zeros((3, 3), dtype=np.complex128)
+        z_delta_r_e = np.zeros((3, 3), dtype=np.complex128)
+        z_delta_l_nu = np.zeros((3, 3), dtype=np.complex128)
+        lepton_matching_status = {
+            "lepton_mass_basis_couplings_present": False,
+            "charged_lepton_delta_g": "zero_deferred_or_not_supplied",
+            "active_neutrino_delta_g": "zero_deferred_or_not_supplied",
+        }
+    else:
+        lepton_profiles = {
+            "c_L": _a_triplet(
+                spectrum,
+                lepton_mass_basis_couplings.c_L,
+                a_ref=a_ref,
+                rel_tol=overlap_rel_tol,
+                min_modes=min_modes,
+                max_modes=max_modes,
+            ),
+            "c_E": _a_triplet(
+                spectrum,
+                lepton_mass_basis_couplings.c_E,
+                a_ref=a_ref,
+                rel_tol=overlap_rel_tol,
+                min_modes=min_modes,
+                max_modes=max_modes,
+            ),
+        }
+        a_profiles.update(lepton_profiles)
+        a_mass.update(
+            {
+                "L_e": _mass_basis_profile(
+                    lepton_mass_basis_couplings.U_e_L,
+                    lepton_profiles["c_L"],
+                ),
+                "R_e": _mass_basis_profile(
+                    lepton_mass_basis_couplings.U_e_R,
+                    lepton_profiles["c_E"],
+                ),
+                "L_nu": _mass_basis_profile(
+                    lepton_mass_basis_couplings.U_nu_L,
+                    lepton_profiles["c_L"],
+                ),
+            }
+        )
+        z_delta_l_e = _z_delta(g_l_e, a_mass["L_e"], scale=scale, s_z=p.s_z)
+        z_delta_r_e = _z_delta(g_r_e, a_mass["R_e"], scale=scale, s_z=p.s_z)
+        z_delta_l_nu = _z_delta(g_l_nu, a_mass["L_nu"], scale=scale, s_z=p.s_z)
+        lepton_matching_status = {
+            "lepton_mass_basis_couplings_present": True,
+            "charged_lepton_delta_g": "included_with_U_e_identity",
+            "active_neutrino_delta_g": "included_with_PMNS_basis_metadata",
+            "singlet_c_N_used_for_z_current": False,
+            "pmns_second_rotation_applied": False,
+        }
 
     contacts = _neutral_contacts(
         g_z=p.g_z,
@@ -286,6 +554,9 @@ def build_rs_ew_couplings(
         z_delta_g_R_u=z_delta_r_u,
         z_delta_g_L_d=z_delta_l_d,
         z_delta_g_R_d=z_delta_r_d,
+        z_delta_g_L_e=z_delta_l_e,
+        z_delta_g_R_e=z_delta_r_e,
+        z_delta_g_L_nu=z_delta_l_nu,
     )
 
     identity = np.eye(3, dtype=np.complex128)
@@ -310,12 +581,14 @@ def build_rs_ew_couplings(
         z_delta_g_R_d=z_delta_r_d,
         z_delta_g_L_e=z_delta_l_e,
         z_delta_g_R_e=z_delta_r_e,
+        z_delta_g_L_nu=z_delta_l_nu,
         z_total_g_L_u=g_l_u * identity + z_delta_l_u,
         z_total_g_R_u=g_r_u * identity + z_delta_r_u,
         z_total_g_L_d=g_l_d * identity + z_delta_l_d,
         z_total_g_R_d=g_r_d * identity + z_delta_r_d,
         z_total_g_L_e=g_l_e * identity + z_delta_l_e,
         z_total_g_R_e=g_r_e * identity + z_delta_r_e,
+        z_total_g_L_nu=g_l_nu * identity + z_delta_l_nu,
         neutral_contacts=contacts,
         a_profile_values=a_profiles,
         a_mass_basis=a_mass,
@@ -328,6 +601,11 @@ def build_rs_ew_couplings(
             "overlap_rel_tol": float(overlap_rel_tol),
             "min_overlap_modes": int(min_modes),
             "max_overlap_modes": int(max_modes),
+            "a_ref_interpretation": (
+                "EW-universal subtraction spectrum.a(DEFAULT_A_REF_C=0.65)"
+            ),
+            "lepton_matching_status": dict(lepton_matching_status),
+            "full_light_z_product_minus_sm_contacts": True,
             "z_delta_formula": (
                 "s_Z * g_A_SM * (m_Z^2/M_KK^2) * U^dagger "
                 "diag(a(c)-a_ref) U"
@@ -357,8 +635,32 @@ def _real_triplet_from_attr(source: Any, name: str) -> np.ndarray:
     return _readonly_real_triplet(getattr(source, name), name).copy()
 
 
+def _positive_float(value: Any, name: str) -> float:
+    number = float(value)
+    if not math.isfinite(number) or number <= 0.0:
+        raise ValueError(f"{name} must be positive and finite")
+    return number
+
+
+def _broadcast_real_triplet(values: Any, name: str) -> np.ndarray:
+    arr = np.array(values, dtype=float, copy=True)
+    if arr.shape == ():
+        arr = np.full(3, float(arr), dtype=float)
+    return _readonly_real_triplet(arr, name)
+
+
 def _readonly_real_triplet(values: Any, name: str) -> np.ndarray:
     arr = np.array(values, dtype=float, copy=True)
+    if arr.shape != (3,):
+        raise ValueError(f"{name} must have shape (3,)")
+    if not np.all(np.isfinite(arr)):
+        raise ValueError(f"{name} contains non-finite values")
+    arr.setflags(write=False)
+    return arr
+
+
+def _readonly_complex_triplet(values: Any, name: str) -> np.ndarray:
+    arr = np.array(values, dtype=np.complex128, copy=True)
     if arr.shape != (3,):
         raise ValueError(f"{name} must have shape (3,)")
     if not np.all(np.isfinite(arr)):
@@ -442,6 +744,11 @@ def _sm_chiral_z_coupling(species: str, chirality: str, sin2_theta_w: float) -> 
     elif species == "e":
         charge = -1.0
         t3 = -0.5 if chirality == "L" else 0.0
+    elif species == "nu":
+        if chirality != "L":
+            raise ValueError("active neutrino Z coupling is LH only")
+        charge = 0.0
+        t3 = 0.5
     else:
         raise ValueError(f"unsupported species {species!r}")
     return float(t3 - charge * s2)
@@ -458,6 +765,16 @@ def _contact_key(quark_sector: str, quark_chirality: str, lepton_chirality: str)
     return f"{sector}_{q_ch}{l_ch}"
 
 
+def _nunu_contact_key(quark_sector: str, quark_chirality: str) -> str:
+    sector = str(quark_sector)
+    if sector not in {"u", "d"}:
+        raise ValueError("quark_sector must be 'u' or 'd'")
+    q_ch = str(quark_chirality).upper()
+    if q_ch not in {"L", "R"}:
+        raise ValueError("quark_chirality must be 'L' or 'R'")
+    return f"{sector}_{q_ch}L_nunu"
+
+
 def _neutral_contact_tensor(
     *,
     g_z: float,
@@ -465,6 +782,7 @@ def _neutral_contact_tensor(
     g_q_sm: float,
     g_l_sm: float,
     z_delta_q: np.ndarray,
+    z_delta_l: np.ndarray,
 ) -> np.ndarray:
     prefactor = float(g_z) ** 2 / float(m_z_gev) ** 2
     tensor = np.zeros((3, 3, 3, 3), dtype=np.complex128)
@@ -476,7 +794,7 @@ def _neutral_contact_tensor(
                     delta_ab = 1.0 if a == b else 0.0
                     tensor[i, j, a, b] = prefactor * (
                         (g_q_sm * delta_ij + z_delta_q[i, j])
-                        * (g_l_sm * delta_ab)
+                        * (g_l_sm * delta_ab + z_delta_l[a, b])
                         - g_q_sm * g_l_sm * delta_ij * delta_ab
                     )
     return tensor
@@ -491,9 +809,13 @@ def _neutral_contacts(
     z_delta_g_R_u: np.ndarray,
     z_delta_g_L_d: np.ndarray,
     z_delta_g_R_d: np.ndarray,
+    z_delta_g_L_e: np.ndarray,
+    z_delta_g_R_e: np.ndarray,
+    z_delta_g_L_nu: np.ndarray,
 ) -> dict[str, np.ndarray]:
     g_l_e = _sm_chiral_z_coupling("e", "L", sin2_theta_w)
     g_r_e = _sm_chiral_z_coupling("e", "R", sin2_theta_w)
+    g_l_nu = _sm_chiral_z_coupling("nu", "L", sin2_theta_w)
     return {
         "u_LL": _neutral_contact_tensor(
             g_z=g_z,
@@ -501,6 +823,7 @@ def _neutral_contacts(
             g_q_sm=_sm_chiral_z_coupling("u", "L", sin2_theta_w),
             g_l_sm=g_l_e,
             z_delta_q=z_delta_g_L_u,
+            z_delta_l=z_delta_g_L_e,
         ),
         "u_LR": _neutral_contact_tensor(
             g_z=g_z,
@@ -508,6 +831,7 @@ def _neutral_contacts(
             g_q_sm=_sm_chiral_z_coupling("u", "L", sin2_theta_w),
             g_l_sm=g_r_e,
             z_delta_q=z_delta_g_L_u,
+            z_delta_l=z_delta_g_R_e,
         ),
         "u_RL": _neutral_contact_tensor(
             g_z=g_z,
@@ -515,6 +839,7 @@ def _neutral_contacts(
             g_q_sm=_sm_chiral_z_coupling("u", "R", sin2_theta_w),
             g_l_sm=g_l_e,
             z_delta_q=z_delta_g_R_u,
+            z_delta_l=z_delta_g_L_e,
         ),
         "u_RR": _neutral_contact_tensor(
             g_z=g_z,
@@ -522,6 +847,7 @@ def _neutral_contacts(
             g_q_sm=_sm_chiral_z_coupling("u", "R", sin2_theta_w),
             g_l_sm=g_r_e,
             z_delta_q=z_delta_g_R_u,
+            z_delta_l=z_delta_g_R_e,
         ),
         "d_LL": _neutral_contact_tensor(
             g_z=g_z,
@@ -529,6 +855,7 @@ def _neutral_contacts(
             g_q_sm=_sm_chiral_z_coupling("d", "L", sin2_theta_w),
             g_l_sm=g_l_e,
             z_delta_q=z_delta_g_L_d,
+            z_delta_l=z_delta_g_L_e,
         ),
         "d_LR": _neutral_contact_tensor(
             g_z=g_z,
@@ -536,6 +863,7 @@ def _neutral_contacts(
             g_q_sm=_sm_chiral_z_coupling("d", "L", sin2_theta_w),
             g_l_sm=g_r_e,
             z_delta_q=z_delta_g_L_d,
+            z_delta_l=z_delta_g_R_e,
         ),
         "d_RL": _neutral_contact_tensor(
             g_z=g_z,
@@ -543,6 +871,7 @@ def _neutral_contacts(
             g_q_sm=_sm_chiral_z_coupling("d", "R", sin2_theta_w),
             g_l_sm=g_l_e,
             z_delta_q=z_delta_g_R_d,
+            z_delta_l=z_delta_g_L_e,
         ),
         "d_RR": _neutral_contact_tensor(
             g_z=g_z,
@@ -550,6 +879,39 @@ def _neutral_contacts(
             g_q_sm=_sm_chiral_z_coupling("d", "R", sin2_theta_w),
             g_l_sm=g_r_e,
             z_delta_q=z_delta_g_R_d,
+            z_delta_l=z_delta_g_R_e,
+        ),
+        "u_LL_nunu": _neutral_contact_tensor(
+            g_z=g_z,
+            m_z_gev=m_z_gev,
+            g_q_sm=_sm_chiral_z_coupling("u", "L", sin2_theta_w),
+            g_l_sm=g_l_nu,
+            z_delta_q=z_delta_g_L_u,
+            z_delta_l=z_delta_g_L_nu,
+        ),
+        "u_RL_nunu": _neutral_contact_tensor(
+            g_z=g_z,
+            m_z_gev=m_z_gev,
+            g_q_sm=_sm_chiral_z_coupling("u", "R", sin2_theta_w),
+            g_l_sm=g_l_nu,
+            z_delta_q=z_delta_g_R_u,
+            z_delta_l=z_delta_g_L_nu,
+        ),
+        "d_LL_nunu": _neutral_contact_tensor(
+            g_z=g_z,
+            m_z_gev=m_z_gev,
+            g_q_sm=_sm_chiral_z_coupling("d", "L", sin2_theta_w),
+            g_l_sm=g_l_nu,
+            z_delta_q=z_delta_g_L_d,
+            z_delta_l=z_delta_g_L_nu,
+        ),
+        "d_RL_nunu": _neutral_contact_tensor(
+            g_z=g_z,
+            m_z_gev=m_z_gev,
+            g_q_sm=_sm_chiral_z_coupling("d", "R", sin2_theta_w),
+            g_l_sm=g_l_nu,
+            z_delta_q=z_delta_g_R_d,
+            z_delta_l=z_delta_g_L_nu,
         ),
     }
 
@@ -558,10 +920,16 @@ __all__ = [
     "DEFAULT_A_REF_C",
     "DEFAULT_S_Z",
     "LEPTON_FLAVORS",
+    "NEUTRINO_FLAVORS",
+    "RSLeptonMassBasisCouplings",
     "RSEWMassBasisCouplings",
     "RSEWNeutralCurrentInputs",
     "RS_EW_COUPLINGS_INPUT_BUNDLE_V1",
     "RS_EW_COUPLINGS_MATCHING_ASSUMPTION_V1",
     "RS_EW_COUPLINGS_MODEL_V1",
+    "RS_LEPTON_MASS_BASIS_INPUT_BUNDLE_V1",
+    "RS_LEPTON_MASS_BASIS_MATCHING_ASSUMPTION_V1",
+    "RS_LEPTON_MASS_BASIS_MODEL_V1",
     "build_rs_ew_couplings",
+    "build_rs_lepton_mass_basis_couplings",
 ]

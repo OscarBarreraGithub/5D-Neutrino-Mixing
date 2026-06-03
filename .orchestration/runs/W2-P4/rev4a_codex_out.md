@@ -1,0 +1,9 @@
+1. SHOULD-FIX [tests/test_rs_ew_phase4a.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/tests/test_rs_ew_phase4a.py:80): `lfv_llqq` is tested only in zero-LFV cases; no non-diagonal `U_e`/non-universal lepton-c toy asserts nonzero LFV. Runtime toy did produce `zLe_emu=2.312e-5`, `s_to_d e_mu C9=2.239e-4+6.309e-5j`.
+2. NIT [quarkConstraints/rs_ew_couplings.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/quarkConstraints/rs_ew_couplings.py:409): a few docstrings/messages still say Phase-3a after Phase-4a promotion.
+3. CONFIRMED [quarkConstraints/rs_ew_couplings.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/quarkConstraints/rs_ew_couplings.py:503): shared `a_ref=a(0.65)`, `c_L/c_E`, active-nu `c_L` not `c_N`, Hermitian; recomputed `z_e[0,0]=8.5400871097628e-06`, `z_nu[0,0]=-1.588676075184686e-05`.
+4. v1 LFV-zero physics verdict: with diagonal charged-lepton fit `U_e_L=U_e_R=I` and universal `c_L`, charged-lepton Z matrices are diagonal, so tree-level charged LFV is zero; loop/spurion LFV is deferred, not a bug.
+5. CONFIRMED [quarkConstraints/rs_ew_couplings.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/quarkConstraints/rs_ew_couplings.py:795): full contact supersedes 3a in-place; `dg_l=0` gives `b_to_s mu C9=0.3046272275031843+0.005803160503768459j`, unchanged; heavy neutral flags false.
+6. CONFIRMED [quarkConstraints/rs_semileptonic_wilsons.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/quarkConstraints/rs_semileptonic_wilsons.py:622): `nunu` uses `X_NP=C/g_SM^2`, no `_wilson_prefactor`; recomputed `s_to_d X_L[0,0]=0.000820388142621831-0.00011326866594393457j`; Majorana diff `2.0e-24`.
+7. Gate: `PYTHONDONTWRITEBYTECODE=1 pytest tests/ -q` -> `1652 passed, 1 skipped in 758.76s`; isolation OK: only builder/coupling modules plus tests touched, no constraint rewiring seen.
+
+P4A-NEEDS-FIXES

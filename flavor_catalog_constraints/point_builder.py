@@ -25,10 +25,9 @@ has computed":
     the construction path itself is usable today.
 
 ``build_from_rs_ew_inputs(quark_fit_result, *, Lambda_IR, ...)``
-    Phase-3a electroweak builder. It constructs the RS-EW spectrum,
-    quark mass-basis light-Z shifts, neutral semileptonic contacts, and
-    C9/C10 Wilson bundles as extras. It deliberately does not rewire
-    any constraint consumer.
+    Electroweak builder. It constructs the RS-EW spectrum, mass-basis
+    light-Z shifts, neutral semileptonic contacts, and Wilson bundles as
+    extras. It deliberately does not rewire any constraint consumer.
 
 The set of recognized extra keys lives in :data:`KNOWN_EXTRA_KEYS`; the
 contract test asserts every key a constraint reads is declared here, and
@@ -57,7 +56,7 @@ KNOWN_EXTRA_KEYS: frozenset[str] = frozenset(
         "quark_mass_basis_couplings",  # quarkConstraints.couplings.QuarkMassBasisCouplings
         "kk_gluon_mass_gev",           # float, KK gluon mass (GeV)
         "kk_ew_mass_gev",              # float, KK electroweak gauge boson mass (GeV)
-        "lepton_mass_basis_couplings", # future lepton-sector couplings object
+        "lepton_mass_basis_couplings", # quarkConstraints.rs_ew_couplings.RSLeptonMassBasisCouplings
         "rs_ew_spectrum",              # quarkConstraints.rs_ew_spectrum.RSEWSpectrum
         "rs_ew_couplings",             # quarkConstraints.rs_ew_couplings.RSEWMassBasisCouplings
         "rs_semileptonic_wilsons",     # quarkConstraints.rs_semileptonic_wilsons.RSSemileptonicWilsonBundle
@@ -111,7 +110,7 @@ def build_from_rs_ew_inputs(
     raw: Any = None,
     **kwargs: Any,
 ) -> ParameterPoint:
-    """Build a point carrying Phase-3a RS electroweak extras.
+    """Build a point carrying RS electroweak extras.
 
     The fit result must expose ``bulk_state.c_Q``, ``bulk_state.c_u``,
     ``bulk_state.c_d``, and the four mass-basis rotations
