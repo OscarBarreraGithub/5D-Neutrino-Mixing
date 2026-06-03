@@ -1,0 +1,15 @@
+# W2 PHASE 4 — SUB-STEP 4c-L: LFV leptonic rewire (codex, gpt-5.x xhigh). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing. Implement the LFV-leptonic part of sub-step 4c (plan `.orchestration/runs/W2-P4/plan.md` step 13), using the 4a lepton builder (committed 6665ccb: `rs_ew_couplings` lepton Z-matrices/contacts, `rs_semileptonic_wilsons.lfv_llqq`) and the established rewire+degradation pattern. First a SHORT plan, then implement. Codex + Opus dual-review (both must APPROVE). SCOPE = L002, L009, L003, L004, L005 ONLY.
+
+REWIRE (LFV leptonic — TREE neutral-current pieces only; keep loop pieces PARTIAL):
+- **L002 (μ→3e)**, **L009 (τ→3ℓ)**: rewire the TREE neutral-current / Z-penguin contact piece from the overlap proxy to the rigorous lepton off-diagonal contact (`G_AB` from the 4a lepton Z-matrices / lfv four-lepton contact). KEEP the dipole, dipole-contact relative PHASE, and box pieces PARTIAL/NEEDS-HUMAN (loop-level; deferred to Phase 7).
+- **L003/L004/L005 (μ-e conversion in nuclei)**: rewire the VECTOR contact piece `g_LV/RV^{p,n}` from the rigorous up/down `llqq` contacts (quark δg × off-diagonal e-μ lepton) to the existing μ-e conversion overlap machinery (KKO). KEEP the scalar, dipole, and interference pieces PARTIAL/NEEDS-HUMAN (the dipole is loop; scalar needs Higgs-lepton — deferred).
+- **v1 PHYSICS**: diagonal charged-lepton fit (U_e=I, universal c_L) ⇒ off-diagonal e-μ / μ-τ lepton coupling = 0 ⇒ the TREE contact pieces = 0 (rigorous-tree). So in v1 the vetoing power comes only from the still-PARTIAL dipole/box pieces (unchanged); the tree-contact rewire is rigorous-but-zero. Replace the old tree-contact NEEDS-HUMAN proxy flag with the honest "tree contact rigorous (=0 for diagonal fit); dipole/box/scalar loop pieces deferred" note. Do NOT touch or fake the PARTIAL loop pieces.
+- SM (LFV ⇒ SM≈0) / anchors / experimental limits UNCHANGED.
+
+GRACEFUL DEGRADATION: rigorous lepton couplings when present; ABSENT ⇒ the tree-contact piece is non-evaluated/zero with missing_extra noted, falling back to whatever PARTIAL behavior the constraint had (no crash, no fake pass).
+
+TESTS: v1-path (diagonal fit ⇒ tree contact=0); LFV-LIVE (non-diagonal-U_e toy ⇒ nonzero tree-contact contribution to the rate; cross-check independent of adapter + scaling); absent-path; AND confirm the dipole/box/scalar PARTIAL pieces + their NEEDS-HUMAN flags are PRESERVED (L002 dipole-contact phase envelope, L003/L004/L005 scalar/dipole). Replace proxy-only tree tests with these — enumerate, no silent coverage loss. `python -m pytest tests/ -q` stays green.
+
+CONSTRAINTS: physics ONLY via adapters; ConstraintResult numeric fields real finite floats; touch ONLY L002/L009/L003/L004/L005 + their adapters (lfv_three_body, mu_e_conversion) + tests. Note mu_e_conversion core was retro-OK'd (R4) — do NOT alter its m_μ⁵ normalization; only ADD the rigorous vector-contact input path.
+
+OUTPUT (<=16 lines): short plan; rewired files + IDs; v1-zero tree-contact + LFV-live nonzero + absent; confirm dipole/box/scalar PARTIAL preserved; old tree NEEDS-HUMAN resolved; test-count change; pytest counts. End with: P4CL-DONE.

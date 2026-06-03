@@ -6,7 +6,7 @@ The Standard Model rate is negligible for catalog purposes, so L002 is a
 pure-new-physics branching-fraction bound.  The v1 prediction combines
 
 * the off-shell dipole contribution reused from the L001 lepton-dipole adapter,
-* Z-penguin vector-contact amplitudes from a documented lepton-overlap proxy,
+* tree-level light-Z vector-contact amplitudes from Phase-4a lepton Z matrices,
 * caller-supplied box vector-contact amplitudes in the same convention.
 
 The lower-level formula and proxy matching live in
@@ -15,9 +15,9 @@ The lower-level formula and proxy matching live in
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The current ``ParameterPoint`` does not carry full charged-lepton RS
-neutral-current, EW KK/Z/Z', or box-matching couplings.  The Z/box contact
-terms therefore use explicit proxy inputs and are flagged in diagnostics.
+The tree-level light-Z contact is rigorous when ``rs_ew_couplings`` is present
+and is zero for the Phase-4a diagonal charged-lepton fit.  Dipole matching,
+dipole-contact phase, heavy neutral exchange, and box matching remain deferred.
 
 Catalog sidecar
 ---------------
@@ -41,8 +41,9 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.lfv_three_body import (
+    LFV_THREE_BODY_DEFERRED_PIECES_V1,
     LFV_THREE_BODY_OPERATOR_CONVENTION,
-    LFV_THREE_BODY_PROXY_V1,
+    LFV_THREE_BODY_TREE_CONTACT_RIGOROUS_V1,
     lfv_three_body_default_sm_inputs,
     mu_to_3e_from_lepton_input,
 )
@@ -51,6 +52,7 @@ from flavor_catalog_constraints.registry import register
 _FAMILY = "charged_lepton"
 _DIPOLE_PROCESS_ID = "L001"
 _REQUIRED_EXTRA = "lepton_mass_basis_couplings"
+_RS_EW_EXTRA = "rs_ew_couplings"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _LIMIT_ANCHOR_CANDIDATES = ("primary_current_limit",)
 _ORIGINAL_EXPERIMENT_CANDIDATES = ("original_experiment",)
@@ -232,15 +234,18 @@ class Constraint:
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
         lepton_input = point.get_extra(_REQUIRED_EXTRA)
+        rs_ew_couplings = point.get_extra(_RS_EW_EXTRA)
         if lepton_input is None:
-            return self._unevaluated_result(
-                diagnostics={"missing_extra": _REQUIRED_EXTRA},
-            )
+            if rs_ew_couplings is None:
+                return self._unevaluated_result(
+                    diagnostics={"missing_extra": _REQUIRED_EXTRA},
+                )
+            lepton_input = _tree_only_lepton_input()
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
             result = mu_to_3e_from_lepton_input(
-                lepton_input,
+                _adapter_input(lepton_input, rs_ew_couplings),
                 br_limit=self.anchor.budget,
                 dipole_br_limit=self.anchor.dipole_br_limit.value,
                 dipole_prefactor_br=self.anchor.dipole_prefactor_br.value,
@@ -261,7 +266,11 @@ class Constraint:
         diagnostics.update(
             {
                 "evaluated": True,
-                "needs_human_physics": LFV_THREE_BODY_PROXY_V1,
+                "needs_human_physics": LFV_THREE_BODY_DEFERRED_PIECES_V1,
+                "tree_contact_matching": diagnostics.get(
+                    "matching_assumption",
+                    LFV_THREE_BODY_TREE_CONTACT_RIGOROUS_V1,
+                ),
                 "operator_convention": LFV_THREE_BODY_OPERATOR_CONVENTION,
                 "sm_prediction_policy": (
                     "Charged-LFV SM rate is negligible; L002 is applied as a "
@@ -275,6 +284,7 @@ class Constraint:
                 "dipole_prefactor_block": self.anchor.dipole_prefactor_br.block_path,
                 "reference_scale_gev": float(_REFERENCE_SCALE_GEV),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
+                "rs_ew_couplings_extra_present": rs_ew_couplings is not None,
             }
         )
 
@@ -289,11 +299,33 @@ class Constraint:
             budget=float(result.br_limit),
             notes=(
                 "Pure-NP BR(mu -> 3e) from L001 dipole reuse plus documented "
-                "Z-penguin and box vector-contact proxies, including the "
+                "rigorous tree light-Z contact and deferred box inputs, including the "
                 "documented dipole-contact interference envelope; HARD budget "
                 "is the SINDRUM/PDG branching-fraction limit from L002.yaml. "
-                "Contact and interference matching are flagged "
-                "NEEDS-HUMAN-PHYSICS."
+                "Dipole, box, heavy-neutral, and unresolved interference pieces "
+                "remain NEEDS-HUMAN-PHYSICS."
             ),
             diagnostics=diagnostics,
         )
+
+
+def _adapter_input(lepton_input: Any, rs_ew_couplings: Any | None) -> Any:
+    if rs_ew_couplings is None:
+        return lepton_input
+    if isinstance(lepton_input, Mapping):
+        return {
+            **dict(lepton_input),
+            "lepton_mass_basis_couplings": lepton_input,
+            "rs_ew_couplings": rs_ew_couplings,
+        }
+    return {
+        "lepton_mass_basis_couplings": lepton_input,
+        "dipole": lepton_input,
+        "rs_ew_couplings": rs_ew_couplings,
+    }
+
+
+def _tree_only_lepton_input() -> dict[str, str]:
+    return {
+        "source": "tree-only rs_ew_couplings input; lepton_mass_basis_couplings absent"
+    }

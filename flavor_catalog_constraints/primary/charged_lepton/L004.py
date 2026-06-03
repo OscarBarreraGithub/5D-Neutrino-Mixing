@@ -14,12 +14,11 @@ selects the gold target nuclear inputs and the observed SINDRUM II Au limit.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The current ``ParameterPoint`` does not carry full RS charged-lepton
-neutral-current, Higgs/scalar, EW KK/Z/Z', or lepton-quark matching data.  The
-scalar/vector terms therefore use explicit low-energy coefficient proxies and
-are flagged in diagnostics.  Unknown dipole-contact phases use the conservative
-destructive-interference envelope for the HARD verdict and report the full
-interval.
+The tree-level light-Z vector contact is rigorous when ``rs_ew_couplings`` is
+present and is zero for the Phase-4a diagonal charged-lepton fit.  Scalar,
+dipole, heavy-neutral, and interference pieces remain deferred.  Unknown
+dipole-contact phases use the conservative destructive-interference envelope
+for the HARD verdict and report the full interval.
 
 Catalog sidecar
 ---------------
@@ -42,8 +41,9 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.mu_e_conversion import (
+    MU_E_CONVERSION_DEFERRED_PIECES_V1,
     MU_E_CONVERSION_OPERATOR_CONVENTION,
-    MU_E_CONVERSION_PROXY_V1,
+    MU_E_CONVERSION_VECTOR_TREE_RIGOROUS_V1,
     mu_e_conversion_from_lepton_input,
     mu_e_conversion_gold_nuclear_inputs,
 )
@@ -52,6 +52,7 @@ from flavor_catalog_constraints.registry import register
 _FAMILY = "charged_lepton"
 _DIPOLE_PROCESS_ID = "L001"
 _REQUIRED_EXTRA = "lepton_mass_basis_couplings"
+_RS_EW_EXTRA = "rs_ew_couplings"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _LIMIT_ANCHOR_CANDIDATES = ("primary_current_limit",)
 _DIPOLE_LIMIT_CANDIDATES = ("primary_current_limit",)
@@ -301,15 +302,18 @@ class Constraint:
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
         lepton_input = point.get_extra(_REQUIRED_EXTRA)
+        rs_ew_couplings = point.get_extra(_RS_EW_EXTRA)
         if lepton_input is None:
-            return self._unevaluated_result(
-                diagnostics={"missing_extra": _REQUIRED_EXTRA},
-            )
+            if rs_ew_couplings is None:
+                return self._unevaluated_result(
+                    diagnostics={"missing_extra": _REQUIRED_EXTRA},
+                )
+            lepton_input = _tree_only_lepton_input()
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
             result = mu_e_conversion_from_lepton_input(
-                lepton_input,
+                _adapter_input(lepton_input, rs_ew_couplings),
                 conversion_rate_limit=self.anchor.budget,
                 dipole_br_limit=self.anchor.dipole_br_limit.value,
                 dipole_prefactor_br=self.anchor.dipole_prefactor_br.value,
@@ -330,7 +334,11 @@ class Constraint:
         diagnostics.update(
             {
                 "evaluated": True,
-                "needs_human_physics": MU_E_CONVERSION_PROXY_V1,
+                "needs_human_physics": MU_E_CONVERSION_DEFERRED_PIECES_V1,
+                "vector_tree_matching": diagnostics.get(
+                    "vector_tree_matching",
+                    MU_E_CONVERSION_VECTOR_TREE_RIGOROUS_V1,
+                ),
                 "operator_convention": MU_E_CONVERSION_OPERATOR_CONVENTION,
                 "sm_prediction_policy": (
                     "Charged-LFV mu->e conversion has negligible SM rate; L004 "
@@ -358,6 +366,7 @@ class Constraint:
                 "dipole_prefactor_block": self.anchor.dipole_prefactor_br.block_path,
                 "reference_scale_gev": float(_REFERENCE_SCALE_GEV),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
+                "rs_ew_couplings_extra_present": rs_ew_couplings is not None,
             }
         )
 
@@ -372,12 +381,34 @@ class Constraint:
             budget=float(result.conversion_rate_limit),
             notes=(
                 "Pure-NP CR(mu Au -> e Au) from L001 dipole reuse plus "
-                "documented scalar/vector nucleon coefficient proxies and "
+                "rigorous tree light-Z vector coefficients, deferred scalar inputs, and "
                 "gold nuclear overlap integrals; observed SINDRUM II Au limit "
                 "from L004.yaml is a HARD veto. Ambiguous dipole-contact phase "
                 "uses the destructive-interference lower envelope for the "
-                "verdict and reports the full interval; scalar/vector matching "
-                "is flagged NEEDS-HUMAN-PHYSICS."
+                "verdict and reports the full interval; scalar, dipole, and "
+                "interference matching remain NEEDS-HUMAN-PHYSICS."
             ),
             diagnostics=diagnostics,
         )
+
+
+def _adapter_input(lepton_input: Any, rs_ew_couplings: Any | None) -> Any:
+    if rs_ew_couplings is None:
+        return lepton_input
+    if isinstance(lepton_input, Mapping):
+        return {
+            **dict(lepton_input),
+            "lepton_mass_basis_couplings": lepton_input,
+            "rs_ew_couplings": rs_ew_couplings,
+        }
+    return {
+        "lepton_mass_basis_couplings": lepton_input,
+        "dipole": lepton_input,
+        "rs_ew_couplings": rs_ew_couplings,
+    }
+
+
+def _tree_only_lepton_input() -> dict[str, str]:
+    return {
+        "source": "tree-only rs_ew_couplings input; lepton_mass_basis_couplings absent"
+    }

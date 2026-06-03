@@ -209,7 +209,7 @@ def test_invalid_lepton_input_is_unevaluated_not_real_pass():
     assert result.diagnostics["exception_type"] == "TypeError"
 
 
-def test_proxy_numerics_match_independent_overlap_recomputation():
+def test_absent_vector_ignores_legacy_vector_but_preserves_scalar_dipole():
     constraint = fcc.get(_PID)
     y_n_bar = (1.0e-4, 2.0e-4, 3.0e-4)
     lepton = {
@@ -230,8 +230,6 @@ def test_proxy_numerics_match_independent_overlap_recomputation():
     expected_cr_lower, expected_cr_upper, expected_left, expected_right = (
         _manual_conversion_rate(
             dipole_parent_br=expected_dipole_br,
-            g_lv_p=lepton["g_lv_p"],
-            g_lv_n=lepton["g_lv_n"],
             g_ls_p=lepton["g_ls_p"],
             g_rs_n=lepton["g_rs_n"],
         )
@@ -261,6 +259,9 @@ def test_proxy_numerics_match_independent_overlap_recomputation():
     assert result.diagnostics["contact_right_nuclear_amplitude"] == pytest.approx(
         expected_right
     )
+    assert result.diagnostics["vector_component"] == pytest.approx(0.0)
+    assert result.diagnostics["legacy_vector_proxy_ignored"] is True
+    assert result.diagnostics["vector_tree_missing_extra"] == "rs_ew_couplings"
     assert result.diagnostics["target"] == "Ti"
     assert result.diagnostics["dipole_input_present"] is True
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
@@ -321,6 +322,9 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
         assert math.isfinite(value)
     assert result.diagnostics["evaluated"] is True
     assert result.diagnostics["dipole_input_present"] is False
+    assert result.diagnostics["vector_component"] == pytest.approx(0.0)
+    assert result.diagnostics["legacy_vector_proxy_ignored"] is True
+    assert result.diagnostics["vector_tree_missing_extra"] == "rs_ew_couplings"
     assert result.diagnostics["target"] == "Ti"
     assert result.diagnostics["target_material"] == "Ti"
     assert result.diagnostics["budget_limit_status"] == "observed_experimental_bound"
@@ -328,20 +332,20 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
 
 
 @pytest.mark.parametrize(
-    ("lepton", "expected_pass"),
+    "lepton",
     [
-        ({"g_lv_p": 1.0e-13, "source": "safe L005 proxy"}, True),
-        ({"g_lv_p": 1.0e-6, "source": "excluded L005 proxy"}, False),
+        {"g_lv_p": 1.0e-13, "source": "safe stale L005 vector proxy"},
+        {"g_lv_p": 1.0e-6, "source": "excluded stale L005 vector proxy"},
     ],
 )
-def test_safe_point_passes_and_large_np_point_fails(lepton, expected_pass: bool):
+def test_legacy_vector_only_proxy_is_unevaluated_not_real_pass(lepton):
     result = fcc.get(_PID).evaluate(_point_from_mapping(lepton))
 
-    assert result.passes is expected_pass
-    if expected_pass:
-        assert result.ratio < 1.0
-    else:
-        assert result.ratio > 1.0
+    assert result.passes is True
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["exception_type"] == "TypeError"
 
 
 def test_evaluate_is_pure_and_deterministic():
@@ -357,4 +361,6 @@ def test_evaluate_is_pure_and_deterministic():
     second = constraint.evaluate(point)
 
     assert first == second
+    assert first.diagnostics["vector_component"] == pytest.approx(0.0)
+    assert first.diagnostics["legacy_vector_proxy_ignored"] is True
     assert point.get_extra("lepton_mass_basis_couplings") == lepton

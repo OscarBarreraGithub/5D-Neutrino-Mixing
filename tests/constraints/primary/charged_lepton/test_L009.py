@@ -11,12 +11,16 @@ import yaml
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
+from flavor_catalog_constraints.physics_adapters.lfv_three_body import (
+    lfv_three_body_contact_amplitudes as adapter_lfv_three_body_contact_amplitudes,
+)
 from flavor_catalog_constraints.physics_adapters.lfv_three_body_tau import (
+    tau_to_3mu_proxy_input,
     tau_to_3mu_from_lepton_input,
 )
 from quarkConstraints.lfv_three_body import (
     LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION,
-    lfv_three_body_contact_amplitudes,
+    lfv_three_body_contact_amplitudes as core_lfv_three_body_contact_amplitudes,
     lfv_three_body_from_components,
 )
 
@@ -40,7 +44,7 @@ def _core_tau3mu_prediction(
     *,
     m_kk_gev: float,
 ):
-    contact = lfv_three_body_contact_amplitudes(
+    contact = core_lfv_three_body_contact_amplitudes(
         lepton,
         initial_flavor="tau",
         final_flavor="mu",
@@ -176,7 +180,7 @@ def test_tau_mu_dipole_only_factor_matches_manual_formula():
         "dipole_parent_branching_fraction": dipole_parent_br,
         "source": "L009 dipole-only test proxy",
     }
-    result = constraint.evaluate(_point_from_mapping(lepton))
+    result = fcc.get(_PID).evaluate(_point_from_mapping(lepton))
     m_tau = constraint.sm_inputs.charged_lepton_mass("tau")
     m_mu = constraint.sm_inputs.charged_lepton_mass("mu")
     expected_factor = (
@@ -193,12 +197,14 @@ def test_tau_mu_dipole_only_factor_matches_manual_formula():
     assert result.diagnostics["initial_flavor"] == "tau"
     assert result.diagnostics["final_flavor"] == "mu"
     assert result.diagnostics["contact_input_present"] is False
+    assert result.diagnostics["tree_contact_missing_extra"] == "rs_ew_couplings"
+    assert "not evaluated" in result.diagnostics["tree_contact_matching"]
+    assert "overlap proxy" not in result.diagnostics["tree_contact_matching"]
     assert result.diagnostics["m_kk_gev"] == pytest.approx(3000.0)
     assert result.passes is True
 
 
-def test_matrix_contact_is_pinned_to_tau_mu_not_core_mu_e_default():
-    constraint = fcc.get(_PID)
+def test_legacy_matrix_overlap_is_ignored_as_absent_tree_input():
     left_overlap = [[0.0j for _ in range(3)] for _ in range(3)]
     left_overlap[0][1] = 0.09 + 0.01j
     left_overlap[1][2] = 0.003 + 0.004j
@@ -208,21 +214,34 @@ def test_matrix_contact_is_pinned_to_tau_mu_not_core_mu_e_default():
         "source": "L009 matrix pinning regression",
     }
 
-    result = constraint.evaluate(_point_from_mapping(lepton))
+    result = fcc.get(_PID).evaluate(_point_from_mapping(lepton))
 
-    assert result.predicted == pytest.approx(1.6896991450212318e-11)
-    assert not math.isclose(
-        result.predicted,
-        5.5422131956696402e-09,
-        rel_tol=1.0e-12,
+    assert result.passes is True
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["exception_type"] == "TypeError"
+
+
+def test_typed_legacy_overlap_only_proxy_is_unevaluated_not_real_pass():
+    proxy = tau_to_3mu_proxy_input(
+        1.0e-2,
+        0.0j,
+        3000.0,
+        source="typed stale L009 overlap proxy",
     )
-    assert result.diagnostics["left_lfv_overlap"] == pytest.approx(0.003 + 0.004j)
-    assert result.diagnostics["right_lfv_overlap"] == pytest.approx(0.0j)
-    assert result.diagnostics["initial_flavor"] == "tau"
-    assert result.diagnostics["final_flavor"] == "mu"
+    result = fcc.get(_PID).evaluate(
+        point_builder.make_point(lepton_mass_basis_couplings=proxy)
+    )
+
+    assert result.passes is True
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["exception_type"] == "TypeError"
 
 
-def test_proxy_numerics_match_independent_recomputation():
+def test_absent_tree_ignores_legacy_overlap_but_preserves_dipole_and_box():
     constraint = fcc.get(_PID)
     lepton = {
         "initial_flavor": "tau",
@@ -238,10 +257,18 @@ def test_proxy_numerics_match_independent_recomputation():
         "source": "L009 test proxy",
     }
     result = constraint.evaluate(_point_from_mapping(lepton))
-    expected = _core_tau3mu_prediction(
-        constraint,
+    expected_contact = adapter_lfv_three_body_contact_amplitudes(
         lepton,
+        initial_flavor="tau",
+        final_flavor="mu",
         m_kk_gev=3000.0,
+        inputs=constraint.sm_inputs,
+    )
+    expected = lfv_three_body_from_components(
+        dipole_parent_branching_fraction=lepton["dipole_parent_branching_fraction"],
+        contact_amplitudes=expected_contact,
+        br_limit=constraint.anchor.budget,
+        inputs=constraint.sm_inputs,
     )
 
     assert result.predicted == pytest.approx(expected.branching_fraction)
@@ -254,8 +281,10 @@ def test_proxy_numerics_match_independent_recomputation():
         expected.dipole_component
     )
     assert result.diagnostics["z_penguin_component"] == pytest.approx(
-        expected.z_penguin_component
+        0.0
     )
+    assert result.diagnostics["tree_contact_missing_extra"] == "rs_ew_couplings"
+    assert result.diagnostics["legacy_overlap_tree_proxy_ignored"] is True
     assert result.diagnostics["box_component"] == pytest.approx(expected.box_component)
     assert result.diagnostics["contact_component"] == pytest.approx(
         expected.contact_component
@@ -327,6 +356,9 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     assert result.diagnostics["evaluated"] is True
     assert result.diagnostics["contact_input_present"] is True
     assert result.diagnostics["dipole_input_present"] is False
+    assert result.diagnostics["tree_contact_missing_extra"] == "rs_ew_couplings"
+    assert result.diagnostics["legacy_overlap_tree_proxy_ignored"] is True
+    assert result.diagnostics["z_penguin_component"] == pytest.approx(0.0)
 
 
 @pytest.mark.parametrize(
@@ -346,30 +378,24 @@ def test_safe_point_passes_and_large_np_point_fails(lepton, expected_pass: bool)
         assert result.ratio > 10.0
 
 
-def test_optional_kk_ew_mass_extra_changes_z_scaling():
+def test_legacy_overlap_only_proxy_with_kk_override_is_unevaluated_not_real_pass():
     lepton = {
         "left_lfv_overlap": 0.1,
         "m_kk_gev": 3000.0,
         "source": "L009 scaling test proxy",
     }
-    default_point = point_builder.make_point(lepton_mass_basis_couplings=lepton)
-    heavy_point = point_builder.make_point(
-        lepton_mass_basis_couplings=lepton,
-        kk_ew_mass_gev=6000.0,
+    result = fcc.get(_PID).evaluate(
+        point_builder.make_point(
+            lepton_mass_basis_couplings=lepton,
+            kk_ew_mass_gev=6000.0,
+        )
     )
 
-    default_result = fcc.get(_PID).evaluate(default_point)
-    heavy_result = fcc.get(_PID).evaluate(heavy_point)
-
-    assert default_result.diagnostics["m_kk_gev"] == pytest.approx(3000.0)
-    assert heavy_result.diagnostics["m_kk_gev"] == pytest.approx(6000.0)
-    assert heavy_result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert heavy_result.diagnostics["z_penguin_component"] == pytest.approx(
-        default_result.diagnostics["z_penguin_component"] / 16.0
-    )
-    assert heavy_result.diagnostics["contact_component"] == pytest.approx(
-        default_result.diagnostics["contact_component"] / 16.0
-    )
+    assert result.passes is True
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["exception_type"] == "TypeError"
 
 
 def test_evaluate_is_pure_and_deterministic():

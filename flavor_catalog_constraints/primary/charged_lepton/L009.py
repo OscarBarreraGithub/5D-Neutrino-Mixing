@@ -9,16 +9,16 @@ the tau-specific adapter:
 
 * off-shell ``tau -> mu gamma`` dipole conversion when an explicit dipole
   parent branching fraction is supplied,
-* Z-penguin and box vector-contact proxy amplitudes,
+* tree-level light-Z vector-contact amplitudes from Phase-4a lepton Z matrices,
+* deferred box vector-contact inputs,
 * the same documented constructive dipole-contact interference envelope used
   by L002 when the chiral phase split is not supplied.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The current ``ParameterPoint`` does not carry the charged-lepton RS
-neutral-current, EW KK/Z/Z', loop-level tau dipole, or box-matching inputs
-needed for rigorous ``tau -> 3mu``.  The contact and dipole inputs are therefore
-explicit proxies and are flagged in diagnostics.
+The tree-level light-Z contact is rigorous when ``rs_ew_couplings`` is present
+and is zero for the Phase-4a diagonal charged-lepton fit.  Tau dipole matching,
+dipole-contact phase, heavy neutral exchange, and box matching remain deferred.
 
 Catalog sidecar
 ---------------
@@ -31,13 +31,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
+from typing import Any, Mapping
 
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.lfv_three_body_tau import (
+    LFV_THREE_BODY_DEFERRED_PIECES_V1,
     LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION,
     LFV_THREE_BODY_OPERATOR_CONVENTION,
-    LFV_THREE_BODY_PROXY_V1,
+    LFV_THREE_BODY_TREE_CONTACT_RIGOROUS_V1,
     TAU_TO_3MU_PROXY_V1,
     tau_to_3mu_default_sm_inputs,
     tau_to_3mu_from_lepton_input,
@@ -46,6 +48,7 @@ from flavor_catalog_constraints.registry import register
 
 _FAMILY = "charged_lepton"
 _REQUIRED_EXTRA = "lepton_mass_basis_couplings"
+_RS_EW_EXTRA = "rs_ew_couplings"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _LIMIT_ANCHOR_CANDIDATES = ("primary_current_limit",)
 _PRIMARY_EXPERIMENT_CANDIDATES = ("primary_experiment",)
@@ -180,15 +183,18 @@ class Constraint:
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
         lepton_input = point.get_extra(_REQUIRED_EXTRA)
+        rs_ew_couplings = point.get_extra(_RS_EW_EXTRA)
         if lepton_input is None:
-            return self._unevaluated_result(
-                diagnostics={"missing_extra": _REQUIRED_EXTRA},
-            )
+            if rs_ew_couplings is None:
+                return self._unevaluated_result(
+                    diagnostics={"missing_extra": _REQUIRED_EXTRA},
+                )
+            lepton_input = _tree_only_lepton_input()
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
             result = tau_to_3mu_from_lepton_input(
-                lepton_input,
+                _adapter_input(lepton_input, rs_ew_couplings),
                 br_limit=self.anchor.budget,
                 m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
@@ -206,8 +212,12 @@ class Constraint:
         diagnostics.update(
             {
                 "evaluated": True,
-                "needs_human_physics": TAU_TO_3MU_PROXY_V1,
-                "shared_contact_proxy": LFV_THREE_BODY_PROXY_V1,
+                "needs_human_physics": LFV_THREE_BODY_DEFERRED_PIECES_V1,
+                "tree_contact_matching": diagnostics.get(
+                    "matching_assumption",
+                    LFV_THREE_BODY_TREE_CONTACT_RIGOROUS_V1,
+                ),
+                "shared_contact_policy": TAU_TO_3MU_PROXY_V1,
                 "operator_convention": LFV_THREE_BODY_OPERATOR_CONVENTION,
                 "dipole_contact_interference_convention": (
                     LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION
@@ -225,6 +235,7 @@ class Constraint:
                 "initial_flavor": result.initial_flavor,
                 "final_flavor": result.final_flavor,
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
+                "rs_ew_couplings_extra_present": rs_ew_couplings is not None,
                 "reused_physics_module": "quarkConstraints.lfv_three_body",
             }
         )
@@ -242,8 +253,31 @@ class Constraint:
                 "Pure-NP BR(tau -> 3mu) from the shared L002 "
                 "lfv_three_body dipole/contact formula pinned to "
                 "initial=tau and final=mu. The HARD budget is the Belle II/PDG "
-                "branching-fraction limit from L009.yaml; RS contact, box, "
-                "and tau dipole matching are flagged NEEDS-HUMAN-PHYSICS."
+                "branching-fraction limit from L009.yaml; tree light-Z contact "
+                "is rigorous when present, while box, heavy-neutral, and tau "
+                "dipole matching remain NEEDS-HUMAN-PHYSICS."
             ),
             diagnostics=diagnostics,
         )
+
+
+def _adapter_input(lepton_input: Any, rs_ew_couplings: Any | None) -> Any:
+    if rs_ew_couplings is None:
+        return lepton_input
+    if isinstance(lepton_input, Mapping):
+        return {
+            **dict(lepton_input),
+            "lepton_mass_basis_couplings": lepton_input,
+            "rs_ew_couplings": rs_ew_couplings,
+        }
+    return {
+        "lepton_mass_basis_couplings": lepton_input,
+        "dipole": lepton_input,
+        "rs_ew_couplings": rs_ew_couplings,
+    }
+
+
+def _tree_only_lepton_input() -> dict[str, str]:
+    return {
+        "source": "tree-only rs_ew_couplings input; lepton_mass_basis_couplings absent"
+    }

@@ -4,12 +4,10 @@ This adapter pins the shared :mod:`quarkConstraints.lfv_three_body` machinery
 to ``tau -> 3mu`` for L009.  Constraint modules import this wrapper only; the
 lower-level physics module remains behind the adapter boundary.
 
-NEEDS-HUMAN-PHYSICS: a rigorous RS prediction for ``tau -> 3mu`` requires
-charged-lepton neutral-current, EW KK/Z/Z', loop-level dipole, and four-lepton
-box matching inputs that are not present on ``ParameterPoint``.  The contact
-terms reuse the documented L002 proxy convention, and any dipole component is
-accepted only as an explicit caller-supplied ``tau -> mu gamma`` branching
-fraction or chiral dipole amplitude in the low-energy convention.
+Tree-level light-Z contacts are read from the Phase-4a ``rs_ew_couplings``
+charged-lepton Z matrices when available.  The tau dipole, dipole-contact
+phase when only a parent dipole rate is supplied, heavy neutral exchange, and
+four-lepton boxes remain deferred.
 """
 
 from __future__ import annotations
@@ -17,8 +15,6 @@ from __future__ import annotations
 from dataclasses import replace
 import math
 from typing import Any, Mapping
-
-import numpy as np
 
 from quarkConstraints.lfv_three_body import (
     LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION,
@@ -31,10 +27,15 @@ from quarkConstraints.lfv_three_body import (
     LFVThreeBodyContactProxyInput,
     LFVThreeBodySMInputs,
     default_sm_inputs as _default_sm_inputs,
-    lfv_three_body_contact_amplitudes as _contact_amplitudes,
     lfv_three_body_from_components as _from_components,
-    lfv_three_body_has_contact_proxy as _has_contact_proxy,
     lfv_three_body_proxy_input as _proxy_input,
+)
+
+from .lfv_three_body import (
+    LFV_THREE_BODY_DEFERRED_PIECES_V1,
+    LFV_THREE_BODY_TREE_CONTACT_RIGOROUS_V1,
+    lfv_three_body_contact_amplitudes as _adapter_contact_amplitudes,
+    lfv_three_body_has_tree_contact_input as _has_tree_contact_input,
 )
 
 __all__ = [
@@ -43,6 +44,8 @@ __all__ = [
     "LFV_THREE_BODY_OPERATOR_CONVENTION",
     "LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION",
     "LFV_THREE_BODY_PROXY_V1",
+    "LFV_THREE_BODY_TREE_CONTACT_RIGOROUS_V1",
+    "LFV_THREE_BODY_DEFERRED_PIECES_V1",
     "TAU_TO_3MU_PROXY_V1",
     "LFVThreeBodySMInputs",
     "LFVThreeBodyContactProxyInput",
@@ -54,12 +57,10 @@ __all__ = [
 ]
 
 TAU_TO_3MU_PROXY_V1 = (
-    "NEEDS-HUMAN-PHYSICS: tau->3mu reuses the shared l_i->3l_j "
-    "Z-penguin/box contact proxy with initial_flavor='tau' and "
-    "final_flavor='mu'.  The tau->mu gamma dipole contribution is included "
-    "only when the caller supplies an explicit dipole parent branching "
-    "fraction or chiral dipole amplitudes; missing chiral phase information "
-    "uses the constructive sign-envelope convention."
+    "tree-level light-Z tau->3mu contact is rigorous when rs_ew_couplings is "
+    "present and is zero for the Phase-4a diagonal charged-lepton fit; "
+    "tau->mu gamma dipole, dipole-contact phase, heavy neutral exchange, and "
+    "box matching remain NEEDS-HUMAN-PHYSICS"
 )
 
 _INITIAL_FLAVOR = "tau"
@@ -67,38 +68,12 @@ _FINAL_FLAVOR = "mu"
 _ZERO_CONTACT_REFERENCE_SCALE_GEV = 3000.0
 _INITIAL_FLAVOR_KEYS = ("initial_flavor", "parent_flavor")
 _FINAL_FLAVOR_KEYS = ("final_flavor", "daughter_flavor")
-_LEFT_TAUMU_OVERLAP_KEYS = (
-    "left_lfv_overlap",
-    "left_taumu_overlap",
-    "left_tau_mu_overlap",
-    "left_mu_tau_overlap",
-)
-_RIGHT_TAUMU_OVERLAP_KEYS = (
-    "right_lfv_overlap",
-    "right_taumu_overlap",
-    "right_tau_mu_overlap",
-    "right_mu_tau_overlap",
-)
 _EMU_ALIAS_SPURION_KEYS = (
     "left_emu_overlap",
     "right_emu_overlap",
     "left_emu",
     "right_emu",
 )
-_LEFT_MATRIX_KEYS = (
-    "left_charged_lepton_overlap",
-    "left_lepton_overlap",
-    "left_overlap",
-)
-_RIGHT_MATRIX_KEYS = (
-    "right_charged_lepton_overlap",
-    "right_lepton_overlap",
-    "right_overlap",
-)
-_BOX_LL_KEYS = ("box_ll", "box_left_left", "box_L_L")
-_BOX_LR_KEYS = ("box_lr", "box_left_right", "box_L_R")
-_BOX_RL_KEYS = ("box_rl", "box_right_left", "box_R_L")
-_BOX_RR_KEYS = ("box_rr", "box_right_right", "box_R_R")
 _DIPOLE_BR_KEYS = (
     "dipole_parent_branching_fraction",
     "tau_to_mu_gamma_branching_fraction",
@@ -165,7 +140,8 @@ def tau_to_3mu_from_lepton_input(
 
     p = _default_sm_inputs() if inputs is None else inputs
     _assert_tau_to_3mu_flavors(lepton_input)
-    has_contact = _has_contact_proxy(lepton_input)
+    _assert_no_emu_alias_spurions(lepton_input)
+    has_contact = _has_tree_contact_input(lepton_input)
     dipole = _coerce_dipole_proxy(lepton_input)
     if not has_contact and not dipole["present"]:
         raise TypeError(
@@ -174,11 +150,11 @@ def tau_to_3mu_from_lepton_input(
         )
 
     if has_contact:
-        contact_proxy = _tau_contact_proxy(lepton_input, m_kk_gev=m_kk_gev)
-        contact = _contact_amplitudes(
-            contact_proxy,
+        contact = _adapter_contact_amplitudes(
+            lepton_input,
             initial_flavor=_INITIAL_FLAVOR,
             final_flavor=_FINAL_FLAVOR,
+            m_kk_gev=m_kk_gev,
             inputs=p,
         )
     else:
@@ -200,6 +176,7 @@ def tau_to_3mu_from_lepton_input(
             "pinned_final_flavor": _FINAL_FLAVOR,
             "contact_input_present": bool(has_contact),
             "contact_input_normalized_to_tau_mu": bool(has_contact),
+            "tree_contact_matching": contact.matching_assumption,
             "dipole_input_present": bool(dipole["present"]),
             "explicit_tau_to_mu_gamma_branching_fraction": float(
                 dipole["branching_fraction"]
@@ -208,6 +185,9 @@ def tau_to_3mu_from_lepton_input(
             "dipole_source": dipole["source"],
             "dipole_amplitudes_supplied": bool(dipole["amplitudes_supplied"]),
             "dipole_component_needs_human_physics": bool(dipole["present"]),
+            "deferred_matching_needs_human_physics": (
+                LFV_THREE_BODY_DEFERRED_PIECES_V1
+            ),
         }
     )
     return replace(result, diagnostics=diagnostics)
@@ -224,55 +204,15 @@ def _zero_contact_amplitudes(
         m_kk_gev,
         default=_ZERO_CONTACT_REFERENCE_SCALE_GEV,
     )
-    return _contact_amplitudes(
-        _proxy_input(
-            0.0j,
-            0.0j,
-            m_kk,
-            initial_flavor=_INITIAL_FLAVOR,
-            final_flavor=_FINAL_FLAVOR,
-            source="zero contact placeholder for explicit tau->mu gamma dipole",
-        ),
+    return _adapter_contact_amplitudes(
+        {
+            "m_kk_gev": m_kk,
+            "source": "zero tree-contact placeholder; rs_ew_couplings absent",
+        },
         initial_flavor=_INITIAL_FLAVOR,
         final_flavor=_FINAL_FLAVOR,
+        m_kk_gev=m_kk,
         inputs=inputs,
-    )
-
-
-def _tau_contact_proxy(
-    source: Any,
-    *,
-    m_kk_gev: float | None,
-) -> LFVThreeBodyContactProxyInput:
-    """Normalize contact inputs before the shared core can apply mu->e defaults."""
-
-    if isinstance(source, LFVThreeBodyContactProxyInput):
-        return _proxy_input(
-            source.left_lfv_overlap,
-            source.right_lfv_overlap,
-            source.m_kk_gev if m_kk_gev is None else m_kk_gev,
-            initial_flavor=_INITIAL_FLAVOR,
-            final_flavor=_FINAL_FLAVOR,
-            box_ll=source.box_ll,
-            box_lr=source.box_lr,
-            box_rl=source.box_rl,
-            box_rr=source.box_rr,
-            source=source.source,
-        )
-
-    _assert_no_emu_alias_spurions(source)
-    left, right = _tau_mu_overlaps(source)
-    return _proxy_input(
-        0.0j if left is None else left,
-        0.0j if right is None else right,
-        _resolve_m_kk(source, m_kk_gev),
-        initial_flavor=_INITIAL_FLAVOR,
-        final_flavor=_FINAL_FLAVOR,
-        box_ll=_optional_complex(_first_present(source, _BOX_LL_KEYS), "box_ll") or 0.0j,
-        box_lr=_optional_complex(_first_present(source, _BOX_LR_KEYS), "box_lr") or 0.0j,
-        box_rl=_optional_complex(_first_present(source, _BOX_RL_KEYS), "box_rl") or 0.0j,
-        box_rr=_optional_complex(_first_present(source, _BOX_RR_KEYS), "box_rr") or 0.0j,
-        source=_source_label(source) or "tau->3mu contact proxy normalized by adapter",
     )
 
 
@@ -284,36 +224,6 @@ def _assert_no_emu_alias_spurions(value: Any) -> None:
             "tau->3mu does not accept mu->e/e-mu overlap aliases "
             f"({keys}); use tau-mu generic LFV overlaps or a flavor matrix"
         )
-
-
-def _tau_mu_overlaps(value: Any) -> tuple[complex | None, complex | None]:
-    left = _first_present(value, _LEFT_TAUMU_OVERLAP_KEYS)
-    right = _first_present(value, _RIGHT_TAUMU_OVERLAP_KEYS)
-    if left is not None or right is not None:
-        return (
-            _optional_complex(left, "left_lfv_overlap"),
-            _optional_complex(right, "right_lfv_overlap"),
-        )
-
-    left_matrix = _first_present(value, _LEFT_MATRIX_KEYS)
-    right_matrix = _first_present(value, _RIGHT_MATRIX_KEYS)
-    if left_matrix is not None:
-        left = _matrix_offdiag(left_matrix, "left")
-    if right_matrix is not None:
-        right = _matrix_offdiag(right_matrix, "right")
-    return (
-        None if left is None else complex(left),
-        None if right is None else complex(right),
-    )
-
-
-def _matrix_offdiag(value: Any, name: str) -> complex:
-    matrix = np.asarray(value, dtype=np.complex128)
-    if matrix.shape != (3, 3):
-        raise ValueError(f"{name} charged-lepton overlap matrix must have shape (3, 3)")
-    if not np.all(np.isfinite(matrix.real)) or not np.all(np.isfinite(matrix.imag)):
-        raise ValueError(f"{name} charged-lepton overlap matrix entries must be finite")
-    return complex(matrix[_flavor_index(_FINAL_FLAVOR), _flavor_index(_INITIAL_FLAVOR)])
 
 
 def _coerce_dipole_proxy(source: Any) -> dict[str, Any]:
@@ -443,10 +353,6 @@ def _canonical_flavor(value: Any) -> str:
     if key not in _CHARGED_LEPTONS:
         raise ValueError(f"unsupported charged-lepton flavor {value!r}")
     return key
-
-
-def _flavor_index(flavor: str) -> int:
-    return {"e": 0, "mu": 1, "tau": 2}[_canonical_flavor(flavor)]
 
 
 def _positive_float(value: Any, name: str) -> float:
