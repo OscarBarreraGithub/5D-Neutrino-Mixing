@@ -32,10 +32,10 @@ anchor loader, not hardcoded in this constraint.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The RS contribution uses the shared documented Z/KK-penguin proxy because the
-``ParameterPoint`` does not provide the full electroweak KK/Z/Z',
-charged-lepton, Higgs/radion, scalar, or pseudoscalar matching inputs needed
-for a rigorous RS ``c -> u mu mu`` calculation.
+The short-distance vector/axial RS contribution consumes Phase-3a
+``rs_semileptonic_wilsons.c_to_u_ll`` C9/C10/C9'/C10' additively.  Charm
+long-distance context and scalar/pseudoscalar matching remain diagnostic and
+deferred.
 """
 
 from __future__ import annotations
@@ -47,15 +47,16 @@ from typing import Any, Mapping
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_charm_dilepton import (
-    RARE_CHARM_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-    d0_mumu_from_couplings,
+    RARE_CHARM_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    d0_mumu_from_rs_semileptonic_wilsons,
     rare_charm_dilepton_default_sm_inputs,
     rare_charm_dilepton_sm_branching_fraction,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "charm"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPECTED_UNITS = "branching fraction"
 
@@ -73,10 +74,10 @@ _PARAMETRIZATION_CITATION = (
     "Gisbert-Hiller-Suelmann JHEP 2024 rare-charm EFT context"
 )
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z', charged-lepton, "
-    "Higgs/radion, scalar and pseudoscalar c->u mu mu matching is not "
-    "available on ParameterPoint; v1 uses the documented Z/KK-penguin "
-    "C9/C10 proxy."
+    "NEEDS-HUMAN-PHYSICS: C004 uses rigorous Phase-3a light-Z "
+    "rs_semileptonic_wilsons.c_to_u_ll vector/axial C9/C10/C9'/C10' NP; "
+    "long-distance charm, heavy-neutral/lepton-tower completion, Higgs/radion, "
+    "scalar and pseudoscalar matching remain deferred."
 )
 
 
@@ -358,13 +359,16 @@ class Constraint:
                 "only the short-distance c->u mu mu component."
             ),
             "parametrization_citation": _PARAMETRIZATION_CITATION,
-            "rs_matching_assumption": RARE_CHARM_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+            "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+            "rs_semileptonic_vector_matching_status": (
+                RARE_CHARM_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1
+            ),
             "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
         }
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -377,17 +381,42 @@ class Constraint:
                     "short-distance constraint was not evaluated."
                 ),
                 diagnostics={
+                    "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     **self._base_diagnostics(),
                 },
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = d0_mumu_from_couplings(
-            couplings,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
+        try:
+            result = d0_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                sm_prediction=float(self.sm_result.branching_fraction),
+                experimental=float(self.anchor.value),
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "D0 -> mu+ mu-"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    **self._base_diagnostics(),
+                },
+            )
         predicted = float(result.branching_fraction)
         budget = float(self.anchor.budget)
         ratio = predicted / budget if budget > 0.0 else float("inf")
@@ -396,6 +425,7 @@ class Constraint:
         diagnostics.update(
             {
                 **self._base_diagnostics(),
+                "evaluated": True,
                 "np_shift_branching_fraction": float(
                     result.np_shift_branching_fraction
                 ),
@@ -426,12 +456,11 @@ class Constraint:
             budget=budget,
             notes=(
                 "BR_SD(D0 -> mu+ mu-) uses the shared c->u l l short-distance "
-                "C10-dominant formula. The RS contribution is a documented "
-                "Z/KK-penguin C9/C10 proxy from mass-basis u-c couplings; "
-                "full EW/lepton/scalar matching is marked NEEDS-HUMAN-PHYSICS. "
-                "The HARD ratio is the short-distance branching fraction over "
-                "the C004 YAML PDG 90% CL upper limit; long-distance charm "
-                "context is reported but not subtracted."
+                "C10-dominant formula. Phase-3a rs_semileptonic_wilsons.c_to_u_ll "
+                "C9/C10/C9'/C10' enter additively with no old proxy prefactor "
+                "or second M_KK suppression. The HARD ratio is the short-distance "
+                "branching fraction over the C004 YAML PDG 90% CL upper limit; "
+                "long-distance charm context is reported but not subtracted."
             ),
             diagnostics=diagnostics,
         )

@@ -8,6 +8,8 @@ the shared ``c -> u l+ l-`` Wilson machinery from
 
 from __future__ import annotations
 
+from dataclasses import replace
+
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.rare_charm_semileptonic import (
     RARE_CHARM_DTOPI_MUMU_FORM_FACTOR_MODEL_V1,
@@ -26,6 +28,13 @@ from quarkConstraints.rare_charm_semileptonic import (
     dtopi_mumu_q2_range as _q2_range,
     dtopi_mumu_sm as _dtopi_mumu_sm,
     evaluate_dplus_to_piplus_mumu as _evaluate_dplus_to_piplus_mumu,
+)
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
+
+from .rare_charm_dilepton import (
+    rare_charm_dilepton_wilsons_from_rs_semileptonic,
+    rare_charm_rs_semileptonic_coeff,
+    rare_charm_rs_semileptonic_vector_diagnostics,
 )
 
 __all__ = [
@@ -46,6 +55,7 @@ __all__ = [
     "rare_charm_dtopi_mumu_differential_branching_fraction",
     "dplus_piplus_mumu_sm",
     "dplus_piplus_mumu_from_couplings",
+    "dplus_piplus_mumu_from_rs_semileptonic_wilsons",
 ]
 
 
@@ -112,3 +122,28 @@ def dplus_piplus_mumu_from_couplings(
         m_kk_gev=m_kk_gev,
         inputs=inputs,
     )
+
+
+def dplus_piplus_mumu_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    lepton: str = "mu",
+    matching_scale_gev: float | None = None,
+    inputs: RareCharmDToPiMuMuInputs | None = None,
+) -> RareCharmDToPiMuMuBranchingResult:
+    """Evaluate smooth ``BR_SD(D+ -> pi+ mu+ mu-)`` from Phase-3a RS Wilsons."""
+
+    coeff = rare_charm_rs_semileptonic_coeff(source, lepton=lepton)
+    wilsons = rare_charm_dilepton_wilsons_from_rs_semileptonic(
+        source,
+        lepton=lepton,
+        matching_scale_gev=matching_scale_gev,
+    )
+    result = _evaluate_dplus_to_piplus_mumu(
+        wilsons,
+        inputs=inputs,
+    )
+    diagnostics = dict(result.diagnostics)
+    diagnostics.update(rare_charm_rs_semileptonic_vector_diagnostics(coeff))
+    diagnostics["matching_assumption"] = coeff.matching_assumption
+    return replace(result, diagnostics=diagnostics)

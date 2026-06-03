@@ -13,7 +13,13 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from quarkConstraints.couplings import QuarkMassBasisCouplings
-from quarkConstraints.rare_charm_dilepton import compute_rare_charm_dilepton_wilsons
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonCoefficients
+from tests.rare_charm_phase3d_helpers import (
+    rare_charm_point_with_wilsons,
+    rs_coeff,
+    sample_rare_charm_point,
+    sm_limit_rare_charm_point,
+)
 
 _PID = "C007"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -70,19 +76,13 @@ def _manual_kallen(a: float, b: float, c: float) -> float:
 
 
 def _manual_smooth_dtopi_mumu_proxy(
-    couplings: QuarkMassBasisCouplings,
+    coeff: RSSemileptonicWilsonCoefficients,
     inputs,
-    *,
-    m_kk_gev: float | None = None,
 ) -> float:
-    wilsons = compute_rare_charm_dilepton_wilsons(
-        couplings,
-        transition="c_u",
-        m_kk_gev=m_kk_gev,
-        inputs=inputs.rare_charm,
+    c9_semileptonic = complex(coeff.c9_np + coeff.c9p_np)
+    c10_semileptonic = complex(
+        inputs.rare_charm.c10_sm + coeff.c10_np + coeff.c10p_np
     )
-    c9_semileptonic = wilsons.c9_np + wilsons.c9p_np
-    c10_semileptonic = inputs.rare_charm.c10_sm + wilsons.c10_np + wilsons.c10p_np
 
     m_d = inputs.dplus_mass_gev
     m_pi = inputs.piplus_mass_gev
@@ -92,7 +92,7 @@ def _manual_smooth_dtopi_mumu_proxy(
     q2_min = 4.0 * m_mu * m_mu
     q2_max = (m_d - m_pi) ** 2
     tau = inputs.dplus_lifetime_ps * 1.0e-12 / inputs.rare_charm.hbar_gev_s
-    lambda_b = wilsons.lambda_b
+    lambda_b = complex(coeff.lambda_ckm)
     gamma0 = (
         inputs.rare_charm.gf_gev_minus2**2
         * inputs.rare_charm.alpha_em_mz**2
@@ -229,7 +229,8 @@ def test_anchor_loading_fails_loudly_for_missing_candidate_or_value():
 
 def test_evaluate_without_input_degrades_gracefully():
     constraint = fcc.get(_PID)
-    result = constraint.evaluate(point_builder.empty_point())
+    old_style_point = point_builder.build_from_quark_couplings(_uc_couplings(left=1.0))
+    result = constraint.evaluate(old_style_point)
 
     assert result.process_id == _PID
     assert result.passes is True
@@ -238,7 +239,9 @@ def test_evaluate_without_input_degrades_gracefully():
     assert result.experimental == pytest.approx(constraint.anchor.value)
     assert result.sm_prediction == pytest.approx(constraint.anchor.sm_value)
     assert result.budget == pytest.approx(constraint.anchor.budget)
-    assert result.diagnostics["missing_extra"] == "quark_mass_basis_couplings"
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["missing_extra"] == "rs_semileptonic_wilsons"
+    assert result.diagnostics["legacy_quark_mass_basis_couplings_present"] is True
     assert result.diagnostics["full_q2_proxy_constrained"] is True
     assert result.diagnostics["lhcb_nonresonant_dimuon_window_applied"] is False
     assert "full_kinematic_q2" in result.diagnostics["q2_treatment"]
@@ -248,30 +251,35 @@ def test_evaluate_without_input_degrades_gracefully():
 
 def test_zero_np_prediction_uses_yaml_short_distance_sm_scale():
     constraint = fcc.get(_PID)
-    couplings = _uc_couplings(left=0.0j, right=0.0j)
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sm_limit_rare_charm_point()
     result = constraint.evaluate(point)
 
     assert constraint.smooth_sm_result.branching_fraction == pytest.approx(0.0)
     assert result.sm_prediction == pytest.approx(1.0e-12)
     assert result.predicted == pytest.approx(1.0e-12)
     assert result.ratio == pytest.approx(1.0e-12 / constraint.anchor.budget)
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["rs_semileptonic_wilsons_present"] is True
+    assert abs(result.diagnostics["c9_semileptonic_np"]) < 1.0e-12
+    assert abs(result.diagnostics["c10_semileptonic_np"]) < 1.0e-12
     assert result.diagnostics["catalog_sm_short_distance_scale_added_incoherently"] is True
     assert result.diagnostics["long_distance_not_subtracted"] is True
     assert result.passes is True
 
 
-def test_form_factor_proxy_matches_independent_manual_integration():
+def test_rigorous_wilson_path_matches_independent_manual_integration():
     constraint = fcc.get(_PID)
-    couplings = _uc_couplings(left=2.0e-2 + 0.3e-2j, right=0.4e-2j)
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sample_rare_charm_point()
     result = constraint.evaluate(point)
-    manual = _manual_smooth_dtopi_mumu_proxy(couplings, constraint.sd_inputs)
+    manual = _manual_smooth_dtopi_mumu_proxy(
+        rs_coeff(point, lepton="mu"),
+        constraint.sd_inputs,
+    )
 
     assert result.diagnostics["smooth_full_q2_np_proxy_branching_fraction"] == (
         pytest.approx(manual, rel=1e-12, abs=0.0)
     )
-    assert manual == pytest.approx(9.132644202844895e-12, rel=1e-12, abs=0.0)
+    assert manual > 0.0
     assert result.predicted == pytest.approx(manual + constraint.anchor.sm_value)
     assert result.ratio == pytest.approx(result.predicted / constraint.anchor.budget)
     assert result.diagnostics["fplus_0"] == pytest.approx(0.67)
@@ -288,8 +296,7 @@ def test_form_factor_proxy_matches_independent_manual_integration():
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
-    couplings = _uc_couplings(left=1.0e-2 + 0.2e-2j, right=0.5e-2j)
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sample_rare_charm_point()
     result = fcc.get(_PID).evaluate(point)
 
     assert result.process_id == _PID
@@ -322,6 +329,10 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     ):
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["rs_semileptonic_wilsons_present"] is True
+    assert result.diagnostics["wilson_prefactor_reused"] is False
+    assert result.diagnostics["second_mkk_suppression_applied"] is False
     assert result.diagnostics["semileptonic_primed_combination_is_plus"] is True
     assert result.diagnostics["resonance_amplitudes_included"] is False
     assert result.diagnostics["full_q2_proxy_constrained"] is True
@@ -330,20 +341,22 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
 
 
 @pytest.mark.parametrize(
-    ("couplings", "expected_pass"),
+    ("point", "expected_pass"),
     [
-        (_uc_couplings(left=1.0), True),
-        (_uc_couplings(left=5.0), False),
+        (rare_charm_point_with_wilsons(lepton="mu", c9_np=10.0), True),
+        (rare_charm_point_with_wilsons(lepton="mu", c9_np=1.0e4), False),
     ],
 )
 def test_safe_point_passes_and_large_np_point_fails(
-    couplings: QuarkMassBasisCouplings,
+    point,
     expected_pass: bool,
 ):
     constraint = fcc.get(_PID)
-    point = point_builder.build_from_quark_couplings(couplings)
     result = constraint.evaluate(point)
-    manual = _manual_smooth_dtopi_mumu_proxy(couplings, constraint.sd_inputs)
+    manual = _manual_smooth_dtopi_mumu_proxy(
+        rs_coeff(point, lepton="mu"),
+        constraint.sd_inputs,
+    )
 
     assert result.passes is expected_pass
     assert result.predicted == pytest.approx(manual + constraint.anchor.sm_value)
@@ -354,40 +367,31 @@ def test_safe_point_passes_and_large_np_point_fails(
         assert result.ratio > 1.0
 
 
-def test_optional_kk_ew_mass_extra_changes_matching_scale():
-    couplings = _uc_couplings(left=1.0)
-    default_point = point_builder.build_from_quark_couplings(couplings)
-    ew_point = point_builder.make_point(
-        quark_mass_basis_couplings=couplings,
-        kk_ew_mass_gev=6000.0,
-    )
+def test_optional_kk_ew_mass_extra_is_diagnostic_only_no_second_suppression():
+    default_point = rare_charm_point_with_wilsons(lepton="mu", c9_np=100.0)
+    extras = dict(default_point.extras)
+    extras["kk_ew_mass_gev"] = 6000.0
+    ew_point = point_builder.make_point(**extras)
     default_result = fcc.get(_PID).evaluate(default_point)
     ew_result = fcc.get(_PID).evaluate(ew_point)
 
     assert default_result.diagnostics["m_kk_gev"] == pytest.approx(3000.0)
     assert ew_result.diagnostics["m_kk_gev"] == pytest.approx(6000.0)
     assert ew_result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert abs(ew_result.diagnostics["c10_semileptonic_np"]) == pytest.approx(
-        abs(default_result.diagnostics["c10_semileptonic_np"]) / 4.0
+    assert ew_result.predicted == pytest.approx(default_result.predicted)
+    assert ew_result.diagnostics["c9_semileptonic_np"] == pytest.approx(
+        default_result.diagnostics["c9_semileptonic_np"]
     )
-    assert (
-        ew_result.diagnostics["smooth_full_q2_np_proxy_branching_fraction"]
-        == pytest.approx(
-            default_result.diagnostics[
-                "smooth_full_q2_np_proxy_branching_fraction"
-            ]
-            / 16.0
-        )
-    )
+    assert ew_result.diagnostics["second_mkk_suppression_applied"] is False
 
 
 def test_evaluate_is_pure_and_deterministic():
     constraint = fcc.get(_PID)
-    couplings = _uc_couplings(left=0.5 + 0.1j, right=0.2j)
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = sample_rare_charm_point()
+    before_bundle = point.extras["rs_semileptonic_wilsons"]
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    assert np.all(point.extras["quark_mass_basis_couplings"].left_up == couplings.left_up)
+    assert point.extras["rs_semileptonic_wilsons"] is before_bundle

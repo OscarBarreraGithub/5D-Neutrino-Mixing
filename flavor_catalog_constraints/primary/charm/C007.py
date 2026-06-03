@@ -27,11 +27,11 @@ loader, not hardcoded in this constraint.
 
 NEEDS-HUMAN-PHYSICS
 -------------------
-The RS contribution reuses the shared documented Z/KK-penguin proxy because the
-``ParameterPoint`` does not provide the full electroweak KK/Z/Z',
-charged-lepton, scalar/tensor, resonance, or experimental dimuon-window
-information needed for a rigorous RS ``D+ -> pi+ mu+ mu-`` recast.  The HARD
-ratio is therefore a full-q2 proxy comparison, not a LHCb windowed recast.
+The short-distance vector/axial RS contribution consumes Phase-3a
+``rs_semileptonic_wilsons.c_to_u_ll`` C9/C10/C9'/C10' additively.  The HARD
+ratio remains a smooth full-q2 proxy comparison, not a LHCb windowed recast,
+because long-distance resonances, scalar/tensor terms, and exact dimuon-window
+acceptance remain diagnostic and deferred.
 """
 
 from __future__ import annotations
@@ -48,20 +48,21 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_charm_dilepton import (
-    RARE_CHARM_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+    RARE_CHARM_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
 )
 from flavor_catalog_constraints.physics_adapters.rare_charm_semileptonic import (
     RARE_CHARM_DTOPI_MUMU_PARAMETRIZATION_CITATION,
     RARE_CHARM_DTOPI_MUMU_RESONANCE_LIMITATION_V1,
     RareCharmDToPiFormFactorInputs,
-    dplus_piplus_mumu_from_couplings,
+    dplus_piplus_mumu_from_rs_semileptonic_wilsons,
     dplus_piplus_mumu_sm,
     rare_charm_dtopi_mumu_default_inputs,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "charm"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPECTED_BRANCHING_UNITS = "branching fraction"
 
@@ -86,11 +87,10 @@ _FULL_Q2_PROXY_TREATMENT = (
     "or_resonance_acceptance"
 )
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z', charged-lepton, "
-    "scalar/tensor, resonance and experimental dimuon-window matching is not "
-    "available on ParameterPoint; v1 uses the documented rare_charm_dilepton "
-    "Z/KK-penguin C9/C10 proxy plus a D->pi form-factor rate and compares the "
-    "full-q2 proxy to the C007 upper-limit budget."
+    "NEEDS-HUMAN-PHYSICS: C007 uses rigorous Phase-3a light-Z "
+    "rs_semileptonic_wilsons.c_to_u_ll vector/axial C9/C10/C9'/C10' NP; "
+    "long-distance resonance amplitudes, heavy-neutral/lepton-tower completion, "
+    "scalar/tensor terms and exact dimuon-window acceptance remain deferred."
 )
 
 
@@ -612,13 +612,16 @@ class Constraint:
             ),
             "parametrization_citation": RARE_CHARM_DTOPI_MUMU_PARAMETRIZATION_CITATION,
             "resonance_limitation": RARE_CHARM_DTOPI_MUMU_RESONANCE_LIMITATION_V1,
-            "rs_matching_assumption": RARE_CHARM_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+            "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+            "rs_semileptonic_vector_matching_status": (
+                RARE_CHARM_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1
+            ),
             "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
         }
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
+        rs_wilsons = point.get_extra(_REQUIRED_EXTRA)
+        if rs_wilsons is None:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
@@ -631,17 +634,43 @@ class Constraint:
                     "smooth full-q2 proxy constraint was not evaluated."
                 ),
                 diagnostics={
+                    "evaluated": False,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     **self._base_diagnostics(),
                 },
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = dplus_piplus_mumu_from_couplings(
-            couplings,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sd_inputs,
-        )
+        try:
+            result = dplus_piplus_mumu_from_rs_semileptonic_wilsons(
+                rs_wilsons,
+                lepton="mu",
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sd_inputs,
+            )
+        except Exception as exc:  # noqa: BLE001 - constraints degrade cleanly
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                sm_prediction=float(self.anchor.sm_value),
+                experimental=float(self.anchor.value),
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "D+ -> pi+ mu+ mu-"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    **self._base_diagnostics(),
+                },
+            )
         smooth_short_distance = float(result.branching_fraction)
         predicted = float(self.anchor.sm_value + smooth_short_distance)
         budget = float(self.anchor.budget)
@@ -651,6 +680,7 @@ class Constraint:
         diagnostics.update(
             {
                 **self._base_diagnostics(),
+                "evaluated": True,
                 "smooth_full_q2_np_proxy_branching_fraction": (
                     smooth_short_distance
                 ),
@@ -674,13 +704,13 @@ class Constraint:
             ratio=float(ratio),
             budget=budget,
             notes=(
-                "BR_SD(D+ -> pi+ mu+ mu-) reuses the shared c->u l l C9/C10 "
-                "Wilson proxy and adds an exclusive D->pi form-factor rate. "
-                "The HARD ratio is the smooth full-q2 proxy prediction over "
-                "the C007 YAML PDG/LHCb 90% CL upper limit. Long-distance "
+                "BR_SD(D+ -> pi+ mu+ mu-) consumes Phase-3a "
+                "rs_semileptonic_wilsons.c_to_u_ll C9/C10/C9'/C10' additively "
+                "and adds the existing exclusive D->pi form-factor rate. The "
+                "HARD ratio is the smooth full-q2 proxy prediction over the "
+                "C007 YAML PDG/LHCb 90% CL upper limit. Long-distance "
                 "rho/omega/phi resonance physics and exact LHCb dimuon-window "
-                "acceptance are documented but not applied; full RS matching "
-                "is marked NEEDS-HUMAN-PHYSICS."
+                "acceptance are documented but not applied."
             ),
             diagnostics=diagnostics,
         )
