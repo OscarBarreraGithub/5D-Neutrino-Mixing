@@ -1,0 +1,429 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{cite}
+
+\title{RS Electroweak Gauge-KK Coupling Normalization Pin}
+\author{Project Reference Document}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Statement}
+
+This note pins the conventions needed before implementing the electroweak
+gauge-KK overlap sector.  It covers:
+\begin{itemize}
+  \item normalized gauge profiles in the RS slice,
+  \item the normalized fermion zero-mode profile \(g_0(c,z)\),
+  \item the numerical overlap integral defining the form factor \(a(c)\),
+  \item charged and neutral vector diagonalization, and
+  \item the \(Z/W\) coupling normalization used by
+        \texttt{quarkConstraints/zpole.py}.
+\end{itemize}
+This is a derivation and convention pin only.  It does not implement production
+code, and it does not claim a closed-form expression for \(a(c)\).
+
+\section{Starting Point and Coordinates}
+
+The geometry follows \texttt{derivations/conventions.tex}:
+\begin{equation}
+  ds^2 = \frac{1}{(kz)^2}
+  \left(\eta_{\mu\nu} dx^\mu dx^\nu + dz^2\right), \qquad
+  z_h = \frac{1}{k}, \qquad z_v = \frac{1}{\Lambda_{\rm IR}},
+\end{equation}
+with
+\begin{equation}
+  \varepsilon = \frac{z_h}{z_v} = \frac{\Lambda_{\rm IR}}{k}, \qquad
+  L = \log\frac{z_v}{z_h} = \log\frac{1}{\varepsilon}.
+\end{equation}
+For numerical work it is useful to use the dimensionless coordinate
+\begin{equation}
+  t = \frac{z}{z_v}, \qquad t\in[\varepsilon,1].
+\end{equation}
+All profile integrals below are written in \(t\).  The equivalent \(z\)-space
+density is obtained by inserting \(dt=dz/z_v\).
+
+\section{Fermion Zero Mode}
+
+The repo convention is \(c=M_5/k\), with \(c>1/2\) UV localized and
+\(c<1/2\) IR localized.  The normalized zero-mode profile used for overlap
+integrals is
+\begin{equation}
+  \boxed{
+  g_0(c,t)
+    = \left[\frac{1-2c}{1-\varepsilon^{1-2c}}\right]^{1/2}
+      t^{1/2-c}}
+  \qquad (c\neq 1/2),
+  \label{eq:g0}
+\end{equation}
+with the continuous \(c\to 1/2\) limit
+\begin{equation}
+  g_0(1/2,t) = \frac{1}{\sqrt{L}}.
+\end{equation}
+The normalization condition is
+\begin{equation}
+  \int_\varepsilon^1 \frac{dt}{t}\, g_0(c,t)^2 = 1.
+  \label{eq:g0-normalization}
+\end{equation}
+Therefore the zero-mode probability density for quadrature is
+\begin{equation}
+  \boxed{
+  w_0(c,t) =
+  \frac{g_0(c,t)^2}{t}
+  = \frac{1-2c}{1-\varepsilon^{1-2c}}\,t^{-2c}},
+  \qquad
+  \int_\varepsilon^1 dt\,w_0(c,t)=1.
+  \label{eq:w0}
+\end{equation}
+At \(c=1/2\), \(w_0(1/2,t)=1/(Lt)\).
+
+This normalization is tied to the implemented overlap factors in
+\texttt{warpConfig/wavefuncs.py}:
+\begin{align}
+  f_{\rm IR}^2(c) &=
+  \frac{\frac{1}{2}-c}{1-\varepsilon^{1-2c}},
+  &
+  f_{\rm UV}^2(c) &=
+  \frac{\frac{1}{2}-c}{\varepsilon^{2c-1}-1}.
+\end{align}
+Equations~\eqref{eq:g0}--\eqref{eq:w0} imply the endpoint checks
+\begin{equation}
+  \boxed{g_0(c,1)^2 = 2 f_{\rm IR}^2(c)}, \qquad
+  \boxed{g_0(c,\varepsilon)^2 = 2 f_{\rm UV}^2(c)}.
+  \label{eq:ffactor-checks}
+\end{equation}
+These are the checks Phase 2 must use to align the full profile with the
+existing \(f_{\rm IR}\) and \(f_{\rm UV}\) functions.
+
+\section{Gauge Profiles}
+
+For a bulk gauge field with NN boundary conditions, the massive-mode profile
+equation in conformal coordinates has the standard solution
+\begin{equation}
+  h_n(t) = N_n\,t\left[J_1(x_n t)+\beta_n Y_1(x_n t)\right],
+  \qquad n\ge 1,
+  \label{eq:gauge-profile}
+\end{equation}
+where \(x_n=m_n z_v=m_n/\Lambda_{\rm IR}\).  The NN quantization condition is
+\begin{equation}
+  \boxed{
+  J_0(x_n)Y_0(\varepsilon x_n)
+  -J_0(\varepsilon x_n)Y_0(x_n)=0}
+  \label{eq:gauge-root}
+\end{equation}
+or equivalently
+\begin{equation}
+  \frac{J_0(x_n)}{Y_0(x_n)}
+  =
+  \frac{J_0(\varepsilon x_n)}{Y_0(\varepsilon x_n)}.
+\end{equation}
+This is the condition implemented by \texttt{solvers/bessel.py::solve\_kk}
+for the \texttt{gauge, NN} branch.  For small \(\varepsilon\), the first root
+approaches the first zero of \(J_0\),
+\begin{equation}
+  x_1 = j_{0,1}+O(1/L), \qquad j_{0,1}=2.4048\ldots,\qquad
+  M_{\rm KK}\equiv m_1=x_1\Lambda_{\rm IR}.
+  \label{eq:first-root}
+\end{equation}
+The number \(j_{0,1}\) is only the \(\varepsilon\to0\) limiting root.  In
+production, Phase 2 must source \(x_1\) numerically from
+\texttt{solve\_kk("gauge","NN", exact=True)} using
+\eqref{eq:gauge-root}; at physical \(\varepsilon\simeq10^{-15}\) this gives
+\(x_1\simeq2.45\), not the limiting literal \(2.4048\).
+The Bessel mixing coefficient can be evaluated from either brane at a root:
+\begin{equation}
+  \beta_n =
+  -\frac{J_0(x_n)}{Y_0(x_n)}
+  =
+  -\frac{J_0(\varepsilon x_n)}{Y_0(\varepsilon x_n)}.
+\end{equation}
+The canonical gauge-profile normalization is
+\begin{equation}
+  \boxed{
+  \int_\varepsilon^1 \frac{dt}{t}\,h_m(t)h_n(t)=\delta_{mn}},
+  \qquad
+  N_n^{-2} =
+  \int_\varepsilon^1 dt\,t
+  \left[J_1(x_n t)+\beta_n Y_1(x_n t)\right]^2 .
+  \label{eq:gauge-normalization}
+\end{equation}
+The zero mode is constant:
+\begin{equation}
+  h_0(t)=\frac{1}{\sqrt L}.
+\end{equation}
+
+For coupling computations it is cleaner to divide by the zero-mode profile and
+work with the zero-mode-relative gauge profile
+\begin{equation}
+  \boxed{\chi_n(t)=\frac{h_n(t)}{h_0(t)}=\sqrt L\,h_n(t)},
+  \qquad
+  \chi_0(t)=1.
+  \label{eq:relative-profile}
+\end{equation}
+This convention makes the gauge zero-mode coupling universal and puts all
+non-universality into massive-mode overlaps.
+
+\section{Gauge-KK Overlap and the Form Factor \texorpdfstring{\(a(c)\)}{a(c)}}
+
+The dimensionless coupling of gauge mode \(n\) to a fermion zero mode,
+relative to the corresponding gauge zero-mode coupling, is
+\begin{equation}
+  \boxed{
+  \Omega_n(c) =
+  \int_\varepsilon^1 dt\, w_0(c,t)\,\chi_n(t)}
+  =
+  \int_\varepsilon^1 dt\,
+  \frac{1-2c}{1-\varepsilon^{1-2c}}\,
+  t^{-2c}\,\chi_n(t).
+  \label{eq:omega}
+\end{equation}
+The normalization gives \(\Omega_0(c)=1\) for every \(c\).  For \(n\ge1\),
+\(\Omega_n(c)\) is the quantity Phase 2 must compute by numerical quadrature.
+The sign of an individual \(\chi_n\) is conventional, but the product
+\(\chi_n(1)\Omega_n(c)\) below is sign invariant.
+
+The numerical form factor that enters the leading light-\(Z\) coupling shift is
+defined by the same overlap data:
+\begin{equation}
+  \boxed{
+  a_N(c;\varepsilon) =
+  \sum_{n=1}^{N}
+  \frac{M_{\rm KK}^2}{m_n^2}\,
+  \chi_n(1)\,\Omega_n(c)}
+  \label{eq:a-numerical}
+\end{equation}
+with \(M_{\rm KK}=m_1=x_1\Lambda_{\rm IR}\).  The first-mode-reduced
+approximation is \(a_1(c)=\chi_1(1)\Omega_1(c)\).  Production scans may cache
+\(a_N(c;\varepsilon)\), but the source of truth remains the profile integral
+\eqref{eq:omega} and the vector diagonalization below.
+
+Phase 2 must make the KK truncation explicit.  Since the propagator weights
+scale as \(1/m_n^2\sim1/n^2\), evaluate \(a_N\) with
+\(N=16,32,64,\ldots\) and accept the doubled result only when
+\begin{equation}
+  \frac{|a_{2N}(c;\varepsilon)-a_N(c;\varepsilon)|}
+       {\max(|a_{2N}(c;\varepsilon)|,10^{-12})}
+  < 10^{-3}.
+  \label{eq:a-numerical-truncation}
+\end{equation}
+If this criterion is not reached by \(N=512\), the implementation must raise a
+convergence error instead of silently using the last partial sum.  A fixed
+cached \(N\) is allowed only after this test passes over the scan range.
+
+The universal piece is removed only after the overlap is computed:
+\begin{equation}
+  \boxed{a(c)\;\longrightarrow\;a(c)-a_{\rm ref}}.
+  \label{eq:aref}
+\end{equation}
+Here \(a_{\rm ref}\) denotes the universal overlap contribution absorbed into
+the measured electroweak inputs \(g_Z\), \(m_Z\), and \(G_F\).  It is not a new
+profile.  In the full universal-subtraction check, \(a_{\rm ref}\) is set equal
+to the common \(a(c)\), and all stored electroweak shifts must vanish.
+
+\section{Vector Diagonalization}
+
+Use mode indices \(m,n=0,\ldots,N\), with \(m_0=0\), \(m_n=x_n\Lambda_{\rm IR}\)
+for \(n\ge1\), and \(\chi_0(1)=1\).  For a brane-localized Higgs, the charged
+vector mass matrix in the \(\{W_n^\pm\}\) basis is
+\begin{equation}
+  \boxed{
+  (M_W^2)_{mn}
+  =
+  m_n^2\delta_{mn}
+  +\frac{g_2^2 v^2}{4}\,\chi_m(1)\chi_n(1)}
+  \label{eq:charged-mass-matrix}
+\end{equation}
+in the approved-design convention for \(v\), \(g_2\), and the brane Higgs
+mass term.
+
+In the neutral basis \((W^3_m,B_m)\), the mass matrix is
+\begin{equation}
+  \boxed{
+  (M_Z^2)_{(X,m)(Y,n)}
+  =
+  m_n^2\delta_{XY}\delta_{mn}
+  +\frac{v^2}{4}
+  \begin{pmatrix}
+    g_2^2 & -g_2g_Y\\
+    -g_2g_Y & g_Y^2
+  \end{pmatrix}_{XY}
+  \chi_m(1)\chi_n(1)}
+  \label{eq:neutral-mass-matrix}
+\end{equation}
+with \(X,Y=(W^3,B)\).  Diagonalizing
+\eqref{eq:charged-mass-matrix} and \eqref{eq:neutral-mass-matrix} identifies
+the photon, light \(W\), light \(Z\), and the heavy \(W'\), \(Z'\), and
+\(\gamma'\) modes.
+
+At first order in \(v^2/M_{\rm KK}^2\), mixing of the gauge zero mode with a
+heavy mode \(n\) is proportional to
+\(-m_Z^2\chi_n(1)/m_n^2\).  This minus sign is the perturbative origin of the
+minimal gauge-sector check
+\begin{equation}
+  \delta g_A^f
+  =
+  -g_A^{\rm SM}(f)\,
+  \frac{m_Z^2}{M_{\rm KK}^2}
+  \left[a(c_{f_A})-a_{\rm ref}\right]
+  +O\!\left(\frac{m_Z^4}{M_{\rm KK}^4}\right),
+  \label{eq:first-order-shift}
+\end{equation}
+for the single-tower, no-BKT, no-custodial-protection limit.  The production
+builder should still obtain the sign and coefficient from the vector
+eigenvectors, not by hard-coding \eqref{eq:first-order-shift}.
+
+\section{\texorpdfstring{\(Z\) and \(W\)}{Z and W} Coupling Normalization}
+
+The stored \(Z\)-pole shifts must match \texttt{quarkConstraints/zpole.py}:
+\begin{equation}
+  \boxed{
+  \mathcal L_Z =
+  g_Z Z_\mu\bar f\gamma^\mu
+  \left(g_L P_L+g_R P_R\right)f},
+  \qquad
+  g_Z=\sqrt{g_2^2+g_Y^2}=\frac{g_2}{\cos\theta_W}.
+  \label{eq:zpole-convention}
+\end{equation}
+With \(s_W=\sin\theta_W=g_Y/g_Z\) and \(c_W=\cos\theta_W=g_2/g_Z\),
+\begin{equation}
+  g_L^{\rm SM}=T_3-Qs_W^2,\qquad
+  g_R^{\rm SM}=-Qs_W^2.
+  \label{eq:sm-z-couplings}
+\end{equation}
+The values stored in \(\texttt{z\_delta\_g\_*}\) are dimensionless additive
+shifts inside the parentheses of \eqref{eq:zpole-convention}.  They must not
+be multiplied by \(g_Z\) before passing to \texttt{zpole.shifted\_couplings}.
+
+Given a normalized light-\(Z\) eigenvector \(V_Z[X,n]\), the exact numerical
+coupling in this convention is
+\begin{equation}
+  \boxed{
+  g_A^{\rm RS}(f)
+  =
+  \frac{1}{g_Z}
+  \sum_{X=W^3,B}\sum_{n=0}^{N}
+  V_Z[X,n]\,g_X\,q_X(f_A)\,\Omega_n(c_{f_A})}
+  \label{eq:exact-z-coupling}
+\end{equation}
+where \(q_{W^3}=T_3\), \(q_B=Y=Q-T_3\), \(g_{W^3}=g_2\), and \(g_B=g_Y\).
+Then
+\begin{equation}
+  \boxed{\delta g_A^f = g_A^{\rm RS}(f)-g_A^{\rm SM}(f)}.
+  \label{eq:stored-delta}
+\end{equation}
+This is the quantity stored in the \(Z\)-pole convention.
+
+The charged-current convention is
+\begin{equation}
+  \mathcal L_W =
+  \frac{g_2}{\sqrt2} W_\mu^+
+  \bar u\gamma^\mu
+  \left[(V_{\rm CKM}+\delta g_{W,ud,L})P_L
+        +\delta g_{W,ud,R}P_R\right]d
+  + {\rm h.c.}
+  \label{eq:w-convention}
+\end{equation}
+Minimal \(SU(2)_L\) has no right-handed \(W\) coupling before fermion-KK or
+custodial extensions, so \(\delta g_{W,ud,R}=0\) in the gauge-only minimal
+phase.
+
+\section{Code Mapping}
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Pinned object & Future implementation target \\
+\hline
+\(\varepsilon,z_h,z_v,L\) & \texttt{warpConfig/baseParams.py} \\
+\(f_{\rm IR}, f_{\rm UV}\) endpoint checks & \texttt{warpConfig/wavefuncs.py} \\
+Gauge NN roots \(x_n\), \(M_{\rm KK}=x_1\Lambda_{\rm IR}\) &
+  \texttt{solvers/bessel.py} \\
+\(g_0(c,t)\), \(w_0(c,t)\) & future profile helper \\
+\(\chi_n(t)\), \(\Omega_n(c)\), \(a_N(c)\) & future EW overlap kernel \\
+\(\delta g_A^f\) storage & \texttt{quarkConstraints/zpole.py} convention \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Verification Required Before Phase 2 Signoff}
+
+\subsection*{Universal subtraction}
+
+Force every relevant chiral representation to have \(a(c)=a_{\rm ref}\), or
+equivalently use a truly universal overlap with the same subtraction and
+identity flavor rotations.  Then Phase 2 must return
+\begin{equation}
+  \text{all } z\_\delta g = 0,\qquad
+  \delta g_{W,ud,L}=0 \text{ relative to } V_{\rm CKM},\qquad
+  \delta G_F/G_F=0
+\end{equation}
+after the same universal subtraction.  All affected \(Z\)-pole, FCNC,
+semileptonic, and charged-current adapters must reproduce their SM-limit or
+zero-NP predictions.
+
+\subsection*{Family-universal species}
+
+If \(c_Q\), \(c_u\), \(c_d\), \(c_L\), and \(c_E\) are family-universal within
+each gauge-charge species, but are not all equal to \(a_{\rm ref}\), all FCNC
+and LFV entries must vanish.  Diagonal \(Z\)-pole and charged-current shifts
+may remain as universal per-representation shifts.
+
+\subsection*{\texorpdfstring{\(Zb_R\)}{ZbR} sign and magnitude}
+
+For a minimal non-custodial benchmark with light down singlets UV localized and
+\(b_R\) more IR localized, \(c_{b_R}<c_{\rm light\,R}\), the overlap must obey
+\begin{equation}
+  a(c_{b_R}) > a(c_{\rm light\,R}).
+\end{equation}
+Because \(g_R^{\rm SM}(b)=-Q_b s_W^2=s_W^2/3>0\) and the gauge-sector
+diagonalization gives the minus sign in \eqref{eq:first-order-shift}, Phase 2
+must find
+\begin{equation}
+  \boxed{\delta g_R^b < 0}, \qquad
+  |\delta g_R^b| \sim 10^{-3}
+  \quad \text{for } M_{\rm KK}\sim 3~{\rm TeV}
+  \text{ and }O(1)\text{ IR compositeness}.
+\end{equation}
+The shift must scale as \(1/M_{\rm KK}^2\).  If the sign is reversed, check the
+light-\(Z\) eigenvector convention and the \(g_Z\) parentheses normalization.
+If the magnitude is off by an order of magnitude, check whether the code used
+\(\Lambda_{\rm IR}\) instead of \(M_{\rm KK}=x_1\Lambda_{\rm IR}\), double
+counted \(g_Z\), or omitted \(a_{\rm ref}\).
+
+\section{What Is Deferred}
+
+The exact closed-form expression for \(a(c)\), including any log-enhanced
+prefactor written purely in terms of \(f_{\rm IR}(c)\), is not derived here.
+This note pins the numerical overlap and the normalization convention only.
+Fermion-KK tree mixing, custodial representations, brane kinetic terms, loop
+dipoles, and Higgs-flavor matching are also outside this Phase 1 note.
+
+\begin{thebibliography}{9}
+
+\bibitem{AgashePerezSoni2004}
+K.~Agashe, G.~Perez, and A.~Soni,
+``Flavor Structure of Warped Extra Dimension Models,''
+Phys.\ Rev.\ D \textbf{71}, 016002 (2005),
+\href{https://arxiv.org/abs/hep-ph/0408134}{arXiv:hep-ph/0408134}.
+
+\bibitem{Casagrande2008}
+S.~Casagrande, F.~Goertz, U.~Haisch, M.~Neubert, and T.~Pfoh,
+``Flavor Physics in the Randall-Sundrum Model: I. Theoretical Setup and
+Electroweak Precision Tests,''
+JHEP \textbf{0810}, 094 (2008),
+\href{https://arxiv.org/abs/0807.4937}{arXiv:0807.4937}.
+
+\bibitem{BurasDulingGori2009}
+A.~J.~Buras, B.~Duling, and S.~Gori,
+``The Impact of Kaluza-Klein Fermions on Standard Model Fermion Couplings in a
+RS Model with Custodial Protection,''
+JHEP \textbf{0909}, 076 (2009),
+\href{https://arxiv.org/abs/0905.2318}{arXiv:0905.2318}.
+
+\end{thebibliography}
+
+\end{document}

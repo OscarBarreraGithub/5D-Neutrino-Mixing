@@ -1,0 +1,10 @@
+1. SHOULD-FIX: Gauge NN BC/profile is right, but the root pin is not: [derivation](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/derivations/rs_ew_gauge_kk_coupling.tex:111) gives the exact cross-product, while `solve_kk(... exact=True)` gives default `x1=2.448687`, not `2.4048`; standard RS quotes `(++)` gauge `M≈2.45 f`.
+2. APPROVE: `M_KK = x1 Lambda_IR` is correct if `x1` means the exact NN root used by [solvers/bessel.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/solvers/bessel.py:244), not the IR-only `J0` zero.
+3. APPROVE: `w0=g0^2/t`, `Omega_n=∫w0 chi_n`, and `a_N=Σ(M_KK^2/m_n^2)chi_n(1)Omega_n` are the right gauge-KK overlap objects; endpoint checks match [wavefuncs.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/warpConfig/wavefuncs.py:12).
+4. SHOULD-FIX: The KK sum is physically convergent, but Phase 2 still needs an explicit `N`/tolerance check; [derivation](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/derivations/rs_ew_gauge_kk_coupling.tex:183) defines `a_N` but not a truncation criterion.
+5. APPROVE: Z-pole normalization matches exactly: [derivation](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/derivations/rs_ew_gauge_kk_coupling.tex:262) says dimensionless additive shifts, and [zpole.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/quarkConstraints/zpole.py:211) adds them with no extra `g_Z`.
+6. APPROVE: `a_ref` subtraction is in the right place and makes universal-`c` shifts vanish; this matches consensus §6 tests at [design](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/.orchestration/rs_ew_sector_design_CONSENSUS.md:700).
+7. APPROVE: `b_R` sign/magnitude check is right: `a(c_bR)>a(light)`, `g_R^b=sW^2/3>0`, minus mixing sign gives `delta g_R^b<0`; `(91/3000)^2*0.077*O(10) ~ 10^-3`.
+8. APPROVE: Closed-form `a(c)`, fermion-KK mixing, custodial/BKT, and loops are honestly deferred in [derivation](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/derivations/rs_ew_gauge_kk_coupling.tex:378).
+
+PHASE1-NEEDS-FIXES

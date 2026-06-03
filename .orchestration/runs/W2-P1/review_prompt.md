@@ -1,0 +1,11 @@
+# DUAL PHYSICS REVIEW — W2 Phase 1 derivation (codex, gpt-5.x xhigh). Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing. Do NOT modify code. Review the new derivation `derivations/rs_ew_gauge_kk_coupling.tex` against the approved design `.orchestration/rs_ew_sector_design_CONSENSUS.md` (§5.1, §6) and the repo conventions. Verify the PHYSICS is correct and that it actually pins what Phase 2 needs. An Opus reviewer checks in parallel; both must APPROVE.
+
+VERIFY (cite derivations/ + standard RS):
+1. **Gauge profile + KK mass** — is `M_KK = x_1 Λ_IR` with x_1 the correct lightest RS gauge-KK root for the boundary conditions used (the design/Opus used the gauge NN root ≈2.40–2.45; the note uses ~2.4048 = J_0 zero)? Confirm the root + BC convention is right (or flag the discrepancy) and consistent with `solvers/bessel.py`.
+2. **Overlap `a(c)`** — is `Ω_n(c)=∫ dt w0(c,t)χ_n(t)` and `a_N(c)=Σ_n (M_KK²/m_n²)χ_n(1)Ω_n(c)` the correct fermion-zero-mode × gauge-KK overlap that produces the Z-coupling shift `δg_f/g_Z ∝ (m_Z²/M_KK²)[a(c_f)−a_ref]`? Check the zero-mode weight `w0(c,t)`/`g_0(c,z)` matches `warpConfig/wavefuncs.py` (f_IR/f_UV) conventions. Is the KK sum convergent / its truncation addressed?
+3. **Normalization pin** — does the `L_Z = g_Z Z_μ f̄γ^μ(g_L P_L+g_R P_R)f` convention with dimensionless additive `z_delta_g_*` (no extra g_Z) EXACTLY match `quarkConstraints/zpole.py` (`shifted_couplings`)? This is the top risk.
+4. **a_ref subtraction** — is subtracting `a_ref` after the numerical overlap the correct way to absorb the universal (flavor-blind) piece into measured G_F/m_Z/g_Z, so universal-c ⇒ all δg=0? Is `a_ref` defined unambiguously?
+5. **The two Phase-2 checks** — are they correctly stated and physically right: (i) universal-c/all-a_ref ⇒ all δg=0; (ii) IR-localized b_R ⇒ a(c_bR)>a(c_lightR) ⇒ δg_R^b<0, ~1e-3 at M_KK~3 TeV? Sanity-check the sign and the ~1e-3 magnitude.
+6. **Honesty** — closed-form a(c), fermion-KK mixing, custodial/BKT, loops correctly deferred (not silently assumed)?
+
+OUTPUT (<=14 lines): numbered findings (BLOCKER/SHOULD-FIX/NIT) with evidence; explicit check of the x_1 root, the overlap formula, and the zpole normalization match; sign/magnitude sanity of the b_R check. End with: PHASE1-OK or PHASE1-NEEDS-FIXES.
