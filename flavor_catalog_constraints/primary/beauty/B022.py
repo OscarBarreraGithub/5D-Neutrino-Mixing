@@ -9,8 +9,8 @@ core uses the Inami-Lim top function ``X_t`` and the standard
 ``B+ -> K+`` SM branching fraction is not hardcoded here: it is loaded from
 ``B022.yaml`` and supplied to the core as the total SM normalization.  The
 charged-mode long-distance term is kept fixed while new physics rescales only
-the short-distance remainder.  New physics is a documented Z-like RS proxy
-shift in the ``b -> s nu nubar`` Wilson response.
+the short-distance remainder.  New physics is the Phase-4d
+``rs_semileptonic_wilsons.b_to_s_nunu`` block mapped as ``X_NP=C/g_SM^2``.
 
 Severity
 --------
@@ -42,8 +42,9 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_b_nunu import (
-    RARE_B_NUNU_RS_MATCHING_ASSUMPTION_V1,
-    bplus_kplus_nunu_from_couplings,
+    RARE_B_NUNU_RS_SEMILEPTONIC_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    bplus_kplus_nunu_from_rs_semileptonic_wilsons,
     rare_b_nunu_default_sm_inputs,
     rare_b_nunu_sm_branching_fraction,
     rare_b_nunu_sm_inputs_with_bplus_kplus_normalization,
@@ -51,7 +52,7 @@ from flavor_catalog_constraints.physics_adapters.rare_b_nunu import (
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPECTED_UNITS = "branching fraction"
 _BELLE_II_OBSERVABLE_NAME = "Belle II evidence measurement"
@@ -65,11 +66,11 @@ _PARAMETRIZATION_CITATION = (
     "Inami-Lim X_t short-distance b -> s nu nubar response; "
     "HPQCD 2023 arXiv:2207.13371 SM B+ -> K+ nu nubar normalization"
 )
-_NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z' tower and neutrino "
-    "coupling matching are not available on ParameterPoint; v1 uses the "
-    "documented Z-like b -> s nu nubar proxy."
+_TREE_LEVEL_STATUS = (
+    "Phase-4d rigorous light-Z active-neutrino Wilson from "
+    "rs_semileptonic_wilsons.b_to_s_nunu; old one-Z-like proxy resolved."
 )
+_UNEVALUATED_REASON = "rs_semileptonic_wilsons.b_to_s_nunu not provided"
 _SCAFFOLD_NO_SCALAR_UNCERTAINTY_KEY = "__b022_no_scalar_uncertainty__"
 
 
@@ -447,36 +448,68 @@ class Constraint:
                 process_id=self.process_id,
                 severity=self.severity,
                 passes=True,
+                predicted=None,
                 sm_prediction=float(self.sm_result.branching_fraction),
                 experimental=float(self.anchor.value),
+                ratio=None,
                 budget=float(self.anchor.budget),
                 notes=(
-                    f"extra {_REQUIRED_EXTRA!r} absent; B+ -> K+ nu nubar "
-                    "constraint was not evaluated."
+                    "NOT EVALUATED - rs_semileptonic_wilsons.b_to_s_nunu "
+                    "absent; B+ -> K+ nu nubar constraint is non-vetoing."
                 ),
                 diagnostics={
+                    "evaluated": False,
+                    "unevaluated_reason": _UNEVALUATED_REASON,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "sm_anchor_branching_fraction": float(self.anchor.sm_value),
                     "sm_formula_branching_fraction": float(
                         self.sm_result.branching_fraction
                     ),
                     "budget_source": self.anchor.budget_band.source,
-                    "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+                    "tree_level_status": _TREE_LEVEL_STATUS,
                 },
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = bplus_kplus_nunu_from_couplings(
-            couplings,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
+        try:
+            result = bplus_kplus_nunu_from_rs_semileptonic_wilsons(
+                couplings,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+        except (AttributeError, KeyError, TypeError, ValueError) as exc:
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                predicted=None,
+                sm_prediction=float(self.sm_result.branching_fraction),
+                experimental=float(self.anchor.value),
+                ratio=None,
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "B+ -> K+ nu nubar"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "unevaluated_reason": _UNEVALUATED_REASON,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "tree_level_status": _TREE_LEVEL_STATUS,
+                },
+            )
         predicted = float(result.branching_fraction)
         budget, ratio, passes = _selected_budget(predicted, self.anchor)
 
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
             {
+                "evaluated": True,
                 "sm_anchor_branching_fraction": float(self.anchor.sm_value),
                 "sm_formula_branching_fraction": float(
                     result.sm_branching_fraction
@@ -505,8 +538,11 @@ class Constraint:
                 "budget_upper_edge": float(self.anchor.budget_band.upper_edge),
                 "budget_source": self.anchor.budget_band.source,
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": RARE_B_NUNU_RS_MATCHING_ASSUMPTION_V1,
-                "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+                "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+                "tree_level_status": _TREE_LEVEL_STATUS,
+                "rs_semileptonic_nunu_matching_status": (
+                    RARE_B_NUNU_RS_SEMILEPTONIC_MATCHING_STATUS_V1
+                ),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "lambda_wolfenstein": float(result.lambda_wolfenstein),
                 "lambda_t_bs": complex(result.lambda_t_bs),
@@ -539,10 +575,10 @@ class Constraint:
             notes=(
                 "BR(B+ -> K+ nu nubar) uses the shared b -> s nu nubar "
                 "short-distance X_t response normalized to the HPQCD SM "
-                "branching fraction from B022.yaml. RS contribution is a "
-                "documented Z-like proxy from mass-basis s-b couplings; full "
-                "EW/lepton matching is marked NEEDS-HUMAN-PHYSICS. Budget "
-                "combines Belle II and SM uncertainties in quadrature."
+                "branching fraction from B022.yaml. RS contribution is the "
+                "Phase-4d b_to_s_nunu Wilson block mapped as X_NP=C/g_SM^2; "
+                "the old one-Z-like proxy is not used. Budget combines Belle "
+                "II and SM uncertainties in quadrature."
             ),
             diagnostics=diagnostics,
         )

@@ -10,9 +10,10 @@ parametrization
            + (Re(lambda_c) P_c / lambda
               + Re(lambda_t X_t) / lambda^5)^2 ],
 
-with the corresponding RS proxy entering as a complex shift
-``lambda_t X_t -> lambda_t X_t + X_NP``.  The low-level formula and the
-documented RS matching assumption live in ``quarkConstraints.rare_kaon_snd``
+with the corresponding RS contribution entering as a complex shift
+``lambda_t X_t -> lambda_t X_t + X_NP``.  The NP shift is the Phase-4d
+``rs_semileptonic_wilsons.s_to_d_nunu`` block mapped as ``X_NP=C/g_SM^2``.
+The low-level formula and SM inputs live in ``quarkConstraints.rare_kaon_snd``
 and are reached only through the
 ``flavor_catalog_constraints.physics_adapters.rare_kaon`` boundary.
 
@@ -45,15 +46,16 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_kaon import (
-    RARE_KAON_RS_MATCHING_ASSUMPTION_V1,
-    kplus_piplus_nunu_from_couplings,
+    RARE_KAON_NUNU_RS_SEMILEPTONIC_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    kplus_piplus_nunu_from_rs_semileptonic_wilsons,
     rare_kaon_default_sm_inputs,
     rare_kaon_sm_branching_fraction,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPERIMENTAL_ANCHOR_CANDIDATES = ("latest_experimental_value",)
 _SM_ANCHOR_CANDIDATES = ("sm_prediction_buras_venturini_2022",)
@@ -68,6 +70,11 @@ _PARAMETRIZATION_CITATION = (
     "Buras et al. JHEP 11 (2015) 033, arXiv:1503.02693; "
     "Brod-Gorbahn-Stamou arXiv:2105.02868"
 )
+_TREE_LEVEL_STATUS = (
+    "Phase-4d rigorous light-Z active-neutrino Wilson from "
+    "rs_semileptonic_wilsons.s_to_d_nunu; old one-Z-like proxy resolved."
+)
+_UNEVALUATED_REASON = "rs_semileptonic_wilsons.s_to_d_nunu not provided"
 
 
 @dataclass(frozen=True)
@@ -351,35 +358,68 @@ class Constraint:
                 process_id=self.process_id,
                 severity=self.severity,
                 passes=True,
+                predicted=None,
                 sm_prediction=float(self.sm_result.branching_fraction),
                 experimental=float(self.anchor.value),
+                ratio=None,
                 budget=float(self.anchor.budget),
                 notes=(
-                    f"extra {_REQUIRED_EXTRA!r} absent; K+ -> pi+ nu nubar "
-                    "constraint was not evaluated."
+                    "NOT EVALUATED - rs_semileptonic_wilsons.s_to_d_nunu "
+                    "absent; K+ -> pi+ nu nubar constraint is non-vetoing."
                 ),
                 diagnostics={
+                    "evaluated": False,
+                    "unevaluated_reason": _UNEVALUATED_REASON,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "sm_anchor_branching_fraction": float(self.anchor.sm_value),
                     "sm_formula_branching_fraction": float(
                         self.sm_result.branching_fraction
                     ),
                     "budget_source": self.anchor.budget_band.source,
+                    "tree_level_status": _TREE_LEVEL_STATUS,
                 },
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = kplus_piplus_nunu_from_couplings(
-            couplings,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
+        try:
+            result = kplus_piplus_nunu_from_rs_semileptonic_wilsons(
+                couplings,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+        except (AttributeError, KeyError, TypeError, ValueError) as exc:
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                predicted=None,
+                sm_prediction=float(self.sm_result.branching_fraction),
+                experimental=float(self.anchor.value),
+                ratio=None,
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "K+ -> pi+ nu nubar"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "unevaluated_reason": _UNEVALUATED_REASON,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "tree_level_status": _TREE_LEVEL_STATUS,
+                },
+            )
         predicted = float(result.branching_fraction)
         budget, ratio, passes = _selected_budget(predicted, self.anchor)
 
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
             {
+                "evaluated": True,
                 "sm_anchor_branching_fraction": float(self.anchor.sm_value),
                 "sm_formula_branching_fraction": float(
                     result.sm_branching_fraction
@@ -409,11 +449,10 @@ class Constraint:
                 "budget_upper_edge": float(self.anchor.budget_band.upper_edge),
                 "budget_source": self.anchor.budget_band.source,
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": RARE_KAON_RS_MATCHING_ASSUMPTION_V1,
-                "needs_human_physics": (
-                    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z' tower "
-                    "and neutrino-coupling matching are not available on "
-                    "ParameterPoint; v1 uses the documented Z-like proxy."
+                "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+                "tree_level_status": _TREE_LEVEL_STATUS,
+                "rs_semileptonic_nunu_matching_status": (
+                    RARE_KAON_NUNU_RS_SEMILEPTONIC_MATCHING_STATUS_V1
                 ),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "kappa_plus": float(result.kappa_plus),
@@ -441,11 +480,10 @@ class Constraint:
             budget=budget,
             notes=(
                 "BR(K+ -> pi+ nu nubar) uses the Buras/Brod-Gorbahn-Stamou "
-                "short-distance parametrization. RS contribution is a "
-                "documented Z-like X-function shift from mass-basis s-d "
-                "couplings; full EW/lepton matching is marked "
-                "NEEDS-HUMAN-PHYSICS. Budget combines NA62 and SM theory "
-                "uncertainties in quadrature."
+                "short-distance parametrization. RS contribution is the "
+                "Phase-4d s_to_d_nunu Wilson block mapped as X_NP=C/g_SM^2; "
+                "the old one-Z-like proxy is not used. Budget combines NA62 "
+                "and SM theory uncertainties in quadrature."
             ),
             diagnostics=diagnostics,
         )

@@ -7,8 +7,8 @@ The SM short-distance prediction is the purely CP-violating sibling of K004,
     BR(K_L -> pi0 nu nubar) =
         kappa_L [ Im(lambda_t X_t) / lambda^5 ]^2.
 
-The RS proxy reuses the K004 ``s -> d nu nubar`` Wilson machinery, adding the
-same complex ``X_NP`` shift to ``lambda_t X_t`` but retaining only the
+The Phase-4d rewire reuses the K004 ``s -> d nu nubar`` Wilson machinery,
+adding the same complex ``X_NP`` shift to ``lambda_t X_t`` but retaining only the
 imaginary part,
 
     Im(lambda_t X_t + X_NP).
@@ -50,15 +50,16 @@ from flavor_catalog_constraints.anchors import (
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_kaon import (
     RARE_KAON_KAPPA_L_CITATION,
-    RARE_KAON_RS_MATCHING_ASSUMPTION_V1,
-    klong_pi0_nunu_from_couplings,
+    RARE_KAON_NUNU_RS_SEMILEPTONIC_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    klong_pi0_nunu_from_rs_semileptonic_wilsons,
     rare_kaon_default_sm_inputs,
     rare_kaon_neutral_sm_branching_fraction,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPECTED_UNITS = "dimensionless branching fraction"
 _KOTO_LIMIT_BLOCK = "experimental_inputs[0]"
@@ -74,6 +75,11 @@ _PARAMETRIZATION_CITATION = (
     "Brod-Gorbahn-Stamou arXiv:2105.02868; "
     "Buras-Venturini arXiv:2203.10099"
 )
+_TREE_LEVEL_STATUS = (
+    "Phase-4d rigorous light-Z active-neutrino Wilson from "
+    "rs_semileptonic_wilsons.s_to_d_nunu; old one-Z-like proxy resolved."
+)
+_UNEVALUATED_REASON = "rs_semileptonic_wilsons.s_to_d_nunu not provided"
 
 _UPPER_LIMIT_RE = re.compile(
     r"^\s*<\s*(?P<value>[0-9.eE+-]+)\s*$"
@@ -411,30 +417,62 @@ class Constraint:
                 process_id=self.process_id,
                 severity=self.severity,
                 passes=True,
+                predicted=None,
                 sm_prediction=float(self.sm_result.branching_fraction),
                 experimental=float(self.anchor.value),
+                ratio=None,
                 budget=float(self.anchor.budget),
                 notes=(
-                    f"extra {_REQUIRED_EXTRA!r} absent; K_L -> pi0 nu nubar "
-                    "constraint was not evaluated."
+                    "NOT EVALUATED - rs_semileptonic_wilsons.s_to_d_nunu "
+                    "absent; K_L -> pi0 nu nubar constraint is non-vetoing."
                 ),
                 diagnostics={
+                    "evaluated": False,
+                    "unevaluated_reason": _UNEVALUATED_REASON,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "sm_anchor_branching_fraction": float(self.anchor.sm_value),
                     "sm_formula_branching_fraction": float(
                         self.sm_result.branching_fraction
                     ),
                     "budget_source": self.anchor.budget_band.source,
                     "budget_construction": self.anchor.budget_band.construction,
+                    "tree_level_status": _TREE_LEVEL_STATUS,
                 },
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = klong_pi0_nunu_from_couplings(
-            couplings,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
+        try:
+            result = klong_pi0_nunu_from_rs_semileptonic_wilsons(
+                couplings,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+        except (AttributeError, KeyError, TypeError, ValueError) as exc:
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                predicted=None,
+                sm_prediction=float(self.sm_result.branching_fraction),
+                experimental=float(self.anchor.value),
+                ratio=None,
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "K_L -> pi0 nu nubar"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "unevaluated_reason": _UNEVALUATED_REASON,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "tree_level_status": _TREE_LEVEL_STATUS,
+                },
+            )
         predicted = float(result.branching_fraction)
         budget = float(self.anchor.budget)
         ratio = predicted / budget if budget > 0.0 else float("inf")
@@ -443,6 +481,7 @@ class Constraint:
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
             {
+                "evaluated": True,
                 "sm_anchor_branching_fraction": float(self.anchor.sm_value),
                 "sm_formula_branching_fraction": float(
                     result.sm_branching_fraction
@@ -475,11 +514,10 @@ class Constraint:
                 "budget_sm_subtracted": self.anchor.budget_band.sm_subtracted,
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
                 "kappa_l_citation": RARE_KAON_KAPPA_L_CITATION,
-                "rs_matching_assumption": RARE_KAON_RS_MATCHING_ASSUMPTION_V1,
-                "needs_human_physics": (
-                    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z' tower "
-                    "and neutrino-coupling matching are not available on "
-                    "ParameterPoint; v1 uses the documented Z-like proxy."
+                "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+                "tree_level_status": _TREE_LEVEL_STATUS,
+                "rs_semileptonic_nunu_matching_status": (
+                    RARE_KAON_NUNU_RS_SEMILEPTONIC_MATCHING_STATUS_V1
                 ),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "qcd_running_applied": False,
@@ -514,9 +552,9 @@ class Constraint:
             notes=(
                 "BR(K_L -> pi0 nu nubar) uses the purely CP-violating "
                 "Buras short-distance parametrization with Im(lambda_t X_t "
-                "+ X_NP). RS contribution is the same documented Z-like "
-                "X-function shift as K004, restricted to the imaginary part; "
-                "full EW/lepton matching is marked NEEDS-HUMAN-PHYSICS. "
+                "+ X_NP). RS contribution is the Phase-4d s_to_d_nunu Wilson "
+                "block mapped as X_NP=C/g_SM^2 and restricted to the "
+                "imaginary part; the old one-Z-like proxy is not used. "
                 "Budget is the KOTO 90% CL upper limit from K005.yaml."
             ),
             diagnostics=diagnostics,

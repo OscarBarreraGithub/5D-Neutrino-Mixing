@@ -3,7 +3,7 @@
 Physics
 -------
 The short-distance response is reused from the shared ``b -> s nu nubar``
-adapter built for B022.  The core supplies the Wilson proxy and the vector
+adapter built for B022.  The core supplies the Wilson response and the vector
 coefficient
 
     R_K* = (1 + 1.31 eta) epsilon^2,
@@ -14,7 +14,7 @@ loaded from ``B023.yaml`` and applied as
 
     BR(B -> K* nu nubar) = BR_SM(B -> K* nu nubar) R_K*.
 
-The RS contribution is the same documented Z-like proxy as B022.
+The RS contribution is the same Phase-4d ``b_to_s_nunu`` Wilson block as B022.
 
 Severity
 --------
@@ -30,12 +30,10 @@ Belle combined vector limit and Buras et al. 2015 SM reference.  The sidecar
 does not contain a Belle II vector-mode limit; this constraint preserves the
 catalogued Belle 2017 provenance.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-The full RS electroweak KK/Z/Z' tower and neutrino-sector matching are not
-available on ``ParameterPoint``.  The implemented NP term is therefore the
-same documented Z-like ``b -> s nu nubar`` proxy used by B022, not a complete
-model prediction.
+Phase-4d Rewire
+---------------
+The implemented NP term is ``rs_semileptonic_wilsons.b_to_s_nunu`` mapped
+directly as ``X_NP=C/g_SM^2``; the old one-Z-like proxy is not used.
 """
 
 from __future__ import annotations
@@ -50,15 +48,16 @@ from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_full_ya
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_b_nunu import (
     RARE_B_NUNU_KSTAR_ETA_COEFFICIENT,
-    RARE_B_NUNU_RS_MATCHING_ASSUMPTION_V1,
+    RARE_B_NUNU_RS_SEMILEPTONIC_MATCHING_STATUS_V1,
+    RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
     b_to_kstar_nunu_branching_fraction,
-    b_to_kstar_nunu_from_couplings,
+    b_to_kstar_nunu_from_rs_semileptonic_wilsons,
     rare_b_nunu_default_sm_inputs,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPECTED_UNITS = "branching fraction"
 _BELLE_COMBINED_VALUE_ID = "Belle2017:B023:combined_vector_limit"
@@ -73,11 +72,11 @@ _PARAMETRIZATION_CITATION = (
     "B -> K* nu nubar SM normalization and epsilon/eta/r_kstar response; "
     "shared Inami-Lim X_t b -> s nu nubar core"
 )
-_NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: full RS electroweak KK/Z/Z' tower and neutrino "
-    "coupling matching are not available on ParameterPoint; v1 uses the "
-    "documented Z-like b -> s nu nubar proxy."
+_TREE_LEVEL_STATUS = (
+    "Phase-4d rigorous light-Z active-neutrino Wilson from "
+    "rs_semileptonic_wilsons.b_to_s_nunu; old one-Z-like proxy resolved."
 )
+_UNEVALUATED_REASON = "rs_semileptonic_wilsons.b_to_s_nunu not provided"
 _UPPER_LIMIT_RE = re.compile(r"^\s*<\s*(?P<value>[0-9.eE+-]+)\s*$")
 
 
@@ -404,32 +403,63 @@ class Constraint:
                 process_id=self.process_id,
                 severity=self.severity,
                 passes=True,
+                predicted=None,
                 sm_prediction=float(self.sm_result.branching_fraction),
                 experimental=float(self.anchor.value),
+                ratio=None,
                 budget=float(self.anchor.budget),
                 notes=(
-                    f"extra {_REQUIRED_EXTRA!r} absent; B -> K* nu nubar "
-                    "constraint was not evaluated."
+                    "NOT EVALUATED - rs_semileptonic_wilsons.b_to_s_nunu "
+                    "absent; B -> K* nu nubar constraint is non-vetoing."
                 ),
                 diagnostics={
+                    "evaluated": False,
+                    "unevaluated_reason": _UNEVALUATED_REASON,
                     "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
                     "sm_anchor_branching_fraction": float(self.anchor.sm_value),
                     "sm_formula_branching_fraction": float(
                         self.sm_result.branching_fraction
                     ),
                     "budget_source": self.anchor.budget_band.source,
                     "budget_construction": self.anchor.budget_band.construction,
-                    "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+                    "tree_level_status": _TREE_LEVEL_STATUS,
                 },
             )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
-        result = b_to_kstar_nunu_from_couplings(
-            couplings,
-            sm_branching_fraction=self.anchor.sm_value,
-            m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
-            inputs=self.sm_inputs,
-        )
+        try:
+            result = b_to_kstar_nunu_from_rs_semileptonic_wilsons(
+                couplings,
+                sm_branching_fraction=self.anchor.sm_value,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+                inputs=self.sm_inputs,
+            )
+        except (AttributeError, KeyError, TypeError, ValueError) as exc:
+            return ConstraintResult(
+                process_id=self.process_id,
+                severity=self.severity,
+                passes=True,
+                predicted=None,
+                sm_prediction=float(self.sm_result.branching_fraction),
+                experimental=float(self.anchor.value),
+                ratio=None,
+                budget=float(self.anchor.budget),
+                notes=(
+                    "NOT EVALUATED - invalid rs_semileptonic_wilsons for "
+                    "B -> K* nu nubar"
+                ),
+                diagnostics={
+                    "evaluated": False,
+                    "unevaluated_reason": _UNEVALUATED_REASON,
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": type(exc).__name__,
+                    "exception_message": str(exc),
+                    "tree_level_status": _TREE_LEVEL_STATUS,
+                },
+            )
         predicted = float(result.branching_fraction)
         budget = float(self.anchor.budget)
         ratio = predicted / budget if budget > 0.0 else float("inf")
@@ -438,6 +468,7 @@ class Constraint:
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
             {
+                "evaluated": True,
                 "sm_anchor_branching_fraction": float(self.anchor.sm_value),
                 "sm_formula_branching_fraction": float(
                     result.sm_branching_fraction
@@ -464,8 +495,11 @@ class Constraint:
                 ),
                 "budget_sm_subtracted": self.anchor.budget_band.sm_subtracted,
                 "parametrization_citation": _PARAMETRIZATION_CITATION,
-                "rs_matching_assumption": RARE_B_NUNU_RS_MATCHING_ASSUMPTION_V1,
-                "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+                "rs_matching_assumption": RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+                "tree_level_status": _TREE_LEVEL_STATUS,
+                "rs_semileptonic_nunu_matching_status": (
+                    RARE_B_NUNU_RS_SEMILEPTONIC_MATCHING_STATUS_V1
+                ),
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "lambda_wolfenstein": float(result.lambda_wolfenstein),
                 "lambda_t_bs": complex(result.lambda_t_bs),
@@ -501,8 +535,8 @@ class Constraint:
                 "epsilon/eta response with the vector coefficient "
                 "r_kstar=(1+1.31 eta) epsilon^2, normalized to the Buras "
                 "2015 SM branching fraction from B023.yaml. RS contribution "
-                "is the documented Z-like proxy from mass-basis s-b couplings; "
-                "full EW/lepton matching is marked NEEDS-HUMAN-PHYSICS. "
+                "is the Phase-4d b_to_s_nunu Wilson block mapped as "
+                "X_NP=C/g_SM^2; the old one-Z-like proxy is not used. "
                 "Budget is the Belle 2017 90% CL combined upper limit."
             ),
             diagnostics=diagnostics,

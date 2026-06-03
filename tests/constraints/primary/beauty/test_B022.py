@@ -5,7 +5,6 @@ from __future__ import annotations
 import math
 from pathlib import Path
 
-import numpy as np
 import pytest
 import yaml
 
@@ -14,11 +13,15 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.beauty import B022 as b022_module
-from quarkConstraints.couplings import QuarkMassBasisCouplings
-from quarkConstraints.rare_b_nunu import (
-    default_sm_inputs,
-    evaluate_bplus_to_kplus_nunu,
-    sm_inputs_with_bplus_kplus_normalization,
+from flavor_catalog_constraints.physics_adapters.rare_b_nunu import (
+    bplus_kplus_nunu_from_rs_semileptonic_wilsons,
+)
+from tests.constraints.primary.nunu_phase4d_helpers import (
+    direct_contact_x_np,
+    nunu_block,
+    rigorous_point,
+    scalar_x_np,
+    sm_limit_point,
 )
 
 _PID = "B022"
@@ -36,42 +39,6 @@ def _find_entry(entries, key: str, expected: str):
         if str(entry.get(key)) == expected:
             return entry
     raise AssertionError(f"missing {key}={expected!r}")
-
-
-def _sb_couplings(
-    left: complex,
-    right: complex = 0.0j,
-    M_KK: float = 3000.0,
-) -> QuarkMassBasisCouplings:
-    """Minimal valid mass-basis couplings with only the s-b slot populated."""
-    zeros = np.zeros((3, 3), dtype=np.complex128)
-    left_down = zeros.copy()
-    right_down = zeros.copy()
-    left_down[1, 2] = left
-    left_down[2, 1] = np.conj(left)
-    right_down[1, 2] = right
-    right_down[2, 1] = np.conj(right)
-    return QuarkMassBasisCouplings(
-        M_KK=M_KK,
-        xi_KK=1.0,
-        alpha_s=0.09,
-        g_s=1.0,
-        left_overlap=zeros,
-        right_up_overlap=zeros,
-        right_down_overlap=zeros,
-        left_up=zeros,
-        left_down=left_down,
-        right_up=zeros,
-        right_down=right_down,
-    )
-
-
-def _core_inputs_for_constraint():
-    constraint = fcc.get(_PID)
-    return sm_inputs_with_bplus_kplus_normalization(
-        constraint.anchor.sm_value,
-        inputs=default_sm_inputs(),
-    )
 
 
 def test_registration_metadata():
@@ -180,7 +147,7 @@ def test_value_anchors_route_through_scaffold_load_anchor_and_fail_loudly(
         b022_module._load_b022_anchor(_PID)
 
 
-def test_evaluate_without_input_degrades_gracefully():
+def test_absent_rs_semileptonic_wilsons_degrades_gracefully():
     constraint = fcc.get(_PID)
     result = constraint.evaluate(point_builder.empty_point())
 
@@ -193,43 +160,81 @@ def test_evaluate_without_input_degrades_gracefully():
         constraint.sm_result.branching_fraction
     )
     assert result.budget == pytest.approx(constraint.anchor.budget)
-    assert result.diagnostics["missing_extra"] == "quark_mass_basis_couplings"
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["missing_extra"] == "rs_semileptonic_wilsons"
+    assert "needs_human_physics" not in result.diagnostics
 
 
-def test_sm_limit_branching_fraction_and_top_function_validation():
-    constraint = fcc.get(_PID)
-    couplings = _sb_couplings(left=0.0j, right=0.0j)
-    point = point_builder.build_from_quark_couplings(couplings)
-    result = constraint.evaluate(point)
-    direct = evaluate_bplus_to_kplus_nunu(couplings, inputs=_core_inputs_for_constraint())
-
-    x = (163.5 / 80.379) ** 2
-    x0 = x / 8.0 * (
-        (x + 2.0) / (x - 1.0)
-        + (3.0 * x - 6.0) / ((x - 1.0) ** 2) * math.log(x)
+def test_legacy_quark_proxy_only_is_unevaluated_not_real_pass():
+    result = fcc.get(_PID).evaluate(
+        point_builder.make_point(quark_mass_basis_couplings=object())
     )
-    expected_xt = 0.994 * x0
 
+    assert result.passes is True
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["missing_extra"] == "rs_semileptonic_wilsons"
+    assert result.diagnostics["legacy_quark_mass_basis_couplings_present"] is True
+
+
+def test_invalid_rs_semileptonic_wilsons_is_unevaluated_not_real_pass():
+    result = fcc.get(_PID).evaluate(
+        point_builder.make_point(rs_semileptonic_wilsons=object())
+    )
+
+    assert result.passes is True
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["invalid_extra"] == "rs_semileptonic_wilsons"
+
+
+def test_sm_limit_universal_quark_c_recovers_committed_sm_branching_fraction():
+    constraint = fcc.get(_PID)
+    point = sm_limit_point()
+    result = constraint.evaluate(point)
+    block = nunu_block(point, "b_to_s")
+    x_left, x_right, x_total = scalar_x_np(block)
+
+    assert x_left == pytest.approx(0.0j, abs=1.0e-18)
+    assert x_right == pytest.approx(0.0j, abs=1.0e-18)
+    assert x_total == pytest.approx(0.0j, abs=1.0e-18)
+    assert result.diagnostics["x_np_total"] == pytest.approx(0.0j, abs=1.0e-18)
     assert result.predicted == pytest.approx(5.58e-6)
     assert result.predicted == pytest.approx(result.sm_prediction)
-    assert result.predicted == pytest.approx(direct.branching_fraction)
-    assert result.diagnostics["x_t"] == pytest.approx(expected_xt)
-    assert result.diagnostics["c_l_sm"].real == pytest.approx(
-        -expected_xt / 0.23122
-    )
     assert result.ratio == pytest.approx(
         abs(result.predicted - constraint.anchor.value)
         / constraint.anchor.budget_band.combined_sigma_lower
     )
     assert result.passes is False
-    assert result.ratio > 2.7
+
+
+def test_rigorous_nonzero_xnp_shifts_br_and_matches_direct_contact():
+    constraint = fcc.get(_PID)
+    point = rigorous_point()
+    result = constraint.evaluate(point)
+    direct = bplus_kplus_nunu_from_rs_semileptonic_wilsons(
+        point.extras["rs_semileptonic_wilsons"],
+        inputs=constraint.sm_inputs,
+    )
+    x_left, x_right, x_total = direct_contact_x_np(point, "b_to_s")
+
+    assert abs(x_total) > 1.0e-2
+    assert result.diagnostics["x_np_left"] == pytest.approx(x_left)
+    assert result.diagnostics["x_np_right"] == pytest.approx(x_right)
+    assert result.diagnostics["x_np_total"] == pytest.approx(x_total)
+    assert result.predicted == pytest.approx(direct.branching_fraction)
+    assert result.predicted != pytest.approx(result.sm_prediction)
+    assert result.diagnostics["nunu_mapping"] == "X_NP=C/g_SM^2"
+    assert result.diagnostics["wilson_prefactor_reused"] is False
+    assert result.diagnostics["second_mkk_suppression_applied"] is False
+    assert result.diagnostics["legacy_one_z_proxy_reused"] is False
+    assert "needs_human_physics" not in result.diagnostics
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
-    couplings = _sb_couplings(left=-0.7 + 0.05j, right=0.02j)
-    point = point_builder.build_from_quark_couplings(couplings)
-    result = fcc.get(_PID).evaluate(point)
+    result = fcc.get(_PID).evaluate(rigorous_point())
 
     assert result.process_id == _PID
     for value in (
@@ -268,76 +273,46 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["down_sector_indices"] == (1, 2)
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert result.diagnostics["evaluated"] is True
 
 
-@pytest.mark.parametrize(
-    ("couplings", "expected_pass"),
-    [
-        (_sb_couplings(left=-0.7), True),
-        (_sb_couplings(left=-2.0), False),
-    ],
-)
-def test_belle_like_point_passes_and_large_np_point_fails(
-    couplings: QuarkMassBasisCouplings,
-    expected_pass: bool,
-):
-    constraint = fcc.get(_PID)
-    point = point_builder.build_from_quark_couplings(couplings)
-    result = constraint.evaluate(point)
-    direct = evaluate_bplus_to_kplus_nunu(couplings, inputs=_core_inputs_for_constraint())
-
-    assert result.passes is expected_pass
-    assert result.predicted == pytest.approx(direct.branching_fraction)
-    assert result.sm_prediction == pytest.approx(direct.sm_branching_fraction)
-    if expected_pass:
-        assert result.ratio < 1.0
-    else:
-        assert result.ratio > 1.0
-
-
-def test_charged_long_distance_piece_is_not_rescaled_by_short_distance_np():
-    couplings = _sb_couplings(left=-0.7)
-    direct = evaluate_bplus_to_kplus_nunu(couplings, inputs=_core_inputs_for_constraint())
-    br_ld = 6.09e-7
-    br_sm = 5.58e-6
-
-    assert direct.r_k == pytest.approx(4.00211528673656)
-    assert direct.branching_fraction == pytest.approx(
-        br_ld + (br_sm - br_ld) * direct.r_k
-    )
-    assert direct.branching_fraction == pytest.approx(2.0503514974408267e-5)
-    assert direct.branching_fraction != pytest.approx(br_sm * direct.r_k)
-
-
-def test_optional_kk_ew_mass_extra_changes_matching_scale():
-    couplings = _sb_couplings(left=-0.7)
-    default_point = point_builder.build_from_quark_couplings(couplings)
+def test_kk_ew_mass_extra_is_diagnostic_only_no_second_mkk_suppression():
+    base_point = rigorous_point()
     ew_point = point_builder.make_point(
-        quark_mass_basis_couplings=couplings,
+        rs_semileptonic_wilsons=base_point.extras["rs_semileptonic_wilsons"],
         kk_ew_mass_gev=6000.0,
     )
-    default_result = fcc.get(_PID).evaluate(default_point)
+    default_result = fcc.get(_PID).evaluate(base_point)
     ew_result = fcc.get(_PID).evaluate(ew_point)
 
     assert default_result.diagnostics["m_kk_gev"] == pytest.approx(3000.0)
     assert ew_result.diagnostics["m_kk_gev"] == pytest.approx(6000.0)
     assert ew_result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert abs(ew_result.diagnostics["x_np_total"]) == pytest.approx(
-        abs(default_result.diagnostics["x_np_total"]) / 4.0
+    assert ew_result.predicted == pytest.approx(default_result.predicted)
+    assert ew_result.diagnostics["x_np_total"] == pytest.approx(
+        default_result.diagnostics["x_np_total"]
     )
 
 
+def test_majorana_and_dirac_active_nu_rates_match():
+    dirac = fcc.get(_PID).evaluate(rigorous_point(alpha=0.0, beta=0.0))
+    majorana = fcc.get(_PID).evaluate(rigorous_point(alpha=1.1, beta=-0.7))
+
+    assert majorana.predicted == pytest.approx(dirac.predicted, rel=0.0, abs=1.0e-18)
+    assert majorana.diagnostics["x_np_total"] == pytest.approx(
+        dirac.diagnostics["x_np_total"],
+        abs=1.0e-18,
+    )
+    assert majorana.diagnostics["majorana_dirac_rate_factor"] == pytest.approx(1.0)
+
+
 def test_evaluate_is_pure_and_deterministic():
-    couplings = _sb_couplings(left=-0.7 + 0.05j, right=0.02j)
-    before_left_down = couplings.left_down.copy()
-    before_right_down = couplings.right_down.copy()
-    point = point_builder.build_from_quark_couplings(couplings)
+    point = rigorous_point()
+    before_bundle = point.extras["rs_semileptonic_wilsons"]
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    np.testing.assert_array_equal(couplings.left_down, before_left_down)
-    np.testing.assert_array_equal(couplings.right_down, before_right_down)
+    assert point.extras["rs_semileptonic_wilsons"] is before_bundle
