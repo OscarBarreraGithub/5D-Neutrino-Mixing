@@ -60,8 +60,9 @@ Build prompts under `.orchestration/runs/<ITEM>/`. Keep orchestrator context lea
 | -- | (tooling ~/bin/codex_worker.sh + codex_usage.sh: NOT in git, operator tooling — out of scope unless user includes) | — | — | — |
 
 ## ⏯️ CURRENT STATE / NEXT ACTION (updated 2026-06-02)
-- Governance gate active. Discovery audit done → R-worklist populated (R1–R8 above). "Last week's plan" = `PHASE3_SCAFFOLDING_PLAN.md` (3292d68, no codex sign-off; R7).
-- **R4 mu_e core: RETRO-OK** (dual ✅). **R1 scaffold: dual gate FAILED** (codex blockers vs Opus OK) → hardening fix IN FLIGHT (`by6va1dim`): NaN/Inf guard on ConstraintResult, optional load_anchor value_id/block_key/units/CL validation, immutable extras, reset_for_tests fix, TEMPLATE update — backward-compatible, suite must stay ≥1054.
-- **W1 G1 design: consensus synthesis IN FLIGHT** (`boyrrvgq2`) merging opus+codex drafts → then dual-review (codex+opus) → approved design.
-- NEXT when these land: (1) dual-review the R1 scaffold fix → retro-OK + commit; (2) dual-review the G1 consensus design → approved → begin W2 implementation sub-phases (each through the full gate: codex plan+impl → codex review + opus review → both APPROVE → commit). (3) Then remaining R-items R2/R3/R5/R7 (R8 low-stakes), then W3 re-wire, W4 CKM phase, W5 form factors, W6 harness+smoke→100M.
-- Concurrency: codex ≤6 via wrapper; launch each as OWN background task. Watch for orphan codex procs after agent-spawned codex (kill wrappers first, then children).
+- Governance gate active and working (it caught a real defect at EVERY stage: 3 scaffold blockers, design LFV cross-term, P1 KK-root limit error, P2 KK-tower bug — several flagged by codex after Opus had OK'd).
+- DONE (dual-approved + committed): **W1** design `4e5eff0`; **W2-P1** derivation `ffb4ad2`; **W2-P2** kernel `389de37`; **R1** scaffold hardened `f82036a`; **R4** mu_e retro-OK.
+- IN FLIGHT: **W2-P3** quark-NC PLAN (`b32iwdxhj`, plan-first) — when it lands: dual-review the plan (codex+opus) → implement sub-steps (3a builder+quark-Z/contacts; 3b Z-pole; 3c FCNC-Z; 3d rare B/K/charm) → dual-review each → commit.
+- NEXT after P3: W2-P4 lepton NC → P5 charged-current → P6 fermion-KK/Higgs (24→26) → P7 loops (mostly human-deferred). Then retro R2/R3/R5/R7 (R8 low-stakes). Then W4 CKM phase, W5 form factors, W6 full-catalog harness + smoke scan → 100M.
+- HUMAN-INPUT items still open (surfaced, NOT decided): custodial/BKT model choice; dipole-loop normalization; EDM basis/CP/matrix-elements; ε′/ε & charm/nonleptonic CPV SM adoption; collider σ×BR recast scope.
+- Concurrency: codex ≤6 via wrapper; launch each as OWN background task (never chained-heredoc). Watch for orphan codex after agent-spawned codex (kill wrappers before children). NOTE row "W2" (generic) is superseded by W2-P1..P7.
