@@ -24,9 +24,13 @@ in ``predicted`` / ``sm_prediction`` / ``experimental`` / ``ratio`` /
 
 from __future__ import annotations
 
+import math
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Mapping, Protocol, runtime_checkable
+from numbers import Real
+from types import MappingProxyType
+from typing import Any, Protocol, runtime_checkable
 
 __all__ = [
     "ConstraintLevel",
@@ -103,6 +107,15 @@ class ParameterPoint:
     raw: Any = None
     extras: Mapping[str, Any] = field(default_factory=dict)
 
+    def __post_init__(self) -> None:
+        if not isinstance(self.extras, Mapping):
+            raise TypeError(
+                f"ParameterPoint.extras must be a Mapping, got {type(self.extras).__name__}"
+            )
+        object.__setattr__(self, "extras", MappingProxyType(dict(self.extras)))
+        if isinstance(self.raw, Mapping):
+            object.__setattr__(self, "raw", MappingProxyType(dict(self.raw)))
+
     def get_extra(self, key: str, default: Any = None) -> Any:
         """Return ``extras[key]`` or ``default`` if absent.
 
@@ -156,17 +169,39 @@ class ConstraintResult:
     diagnostics: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
-        # Enforce the real-number contract at construction. bool/int/float
-        # and None are fine; a complex amplitude is a contract violation and
-        # belongs in ``diagnostics``. Raise (not coerce) so the author fixes
-        # the call site rather than silently dropping the imaginary part.
+        if not isinstance(self.severity, Severity):
+            raise TypeError(
+                f"ConstraintResult.severity must be a Severity, got {self.severity!r}"
+            )
+        if not isinstance(self.passes, bool):
+            raise TypeError(
+                f"ConstraintResult.passes must be bool, got {type(self.passes).__name__}"
+            )
+
+        # Enforce the real finite-number contract at construction. Complex
+        # amplitudes belong in ``diagnostics``; NaN/Inf would otherwise make
+        # ratio-based veto logic unsafe for large scans.
         for name in ("predicted", "sm_prediction", "experimental", "ratio", "budget"):
             value = getattr(self, name)
+            if value is None:
+                continue
             if isinstance(value, complex):
                 raise TypeError(
                     f"ConstraintResult.{name} must be a real number, got complex "
                     f"{value!r}; put complex amplitudes in `diagnostics` instead."
                 )
+            if isinstance(value, bool) or not isinstance(value, Real):
+                raise TypeError(
+                    f"ConstraintResult.{name} must be a real finite float or None, "
+                    f"got {type(value).__name__}"
+                )
+            float_value = float(value)
+            if not math.isfinite(float_value):
+                raise ValueError(
+                    f"ConstraintResult.{name} must be finite, got {value!r}"
+                )
+            if not isinstance(value, float):
+                object.__setattr__(self, name, float_value)
 
 
 @runtime_checkable

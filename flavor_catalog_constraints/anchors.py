@@ -182,8 +182,10 @@ class Anchor:
     block_key: str                    # which sub-block this came from
     value: float                      # the central value / bound (REQUIRED)
     uncertainty: float | None = None  # symmetric uncertainty if present
+    value_id: str | None = None
     observable: str | None = None
     units: str | None = None
+    confidence_level: str | None = None
     source: str | None = None
     source_url: str | None = None
     year: int | None = None
@@ -235,8 +237,10 @@ def build_anchor(
         uncertainty=_opt_float(
             sub.get(uncertainty_key), process_id=process_id, field_name=uncertainty_key
         ),
+        value_id=_as_str(sub.get("value_id")),
         observable=_as_str(sub.get("observable")),
         units=_as_str(sub.get("units")),
+        confidence_level=_as_str(_first_present(sub, "confidence_level", "cl")),
         source=_as_str(sub.get("source")),
         source_url=_as_str(sub.get("source_url")),
         year=_as_int(sub.get("year")),
@@ -246,6 +250,13 @@ def build_anchor(
 
 def _as_str(x: Any) -> str | None:
     return None if x is None else str(x)
+
+
+def _first_present(block: Mapping[str, Any], *keys: str) -> Any:
+    for key in keys:
+        if key in block:
+            return block[key]
+    return None
 
 
 def _as_int(x: Any) -> int | None:
@@ -265,6 +276,10 @@ def load_anchor(
     tier: ConstraintLevel | str = ConstraintLevel.PRIMARY,
     value_key: str = "value",
     uncertainty_key: str = "uncertainty",
+    expected_value_id: str | None = None,
+    expected_block_key: str | None = None,
+    expected_units: str | None = None,
+    expected_confidence_level: str | None = None,
 ) -> Anchor:
     """One-call convenience for the common single-anchor case.
 
@@ -272,14 +287,49 @@ def load_anchor(
     matching sub-block from ``candidates``, and returns a typed
     :class:`Anchor`. Any failure (missing file, missing block, missing
     value) raises :class:`AnchorError`.
+
+    Optional ``expected_*`` arguments are additive validation guards. They
+    preserve existing call behavior when omitted, and raise
+    :class:`AnchorError` when a loaded sidecar silently drifts away from the
+    caller's intended value id, block key, units, or confidence level.
     """
     block = load_pdg_block(process_id, family=family, tier=tier)
     matched_key = next((k for k in candidates if k in block), None)
     sub = find_block(block, candidates, process_id=process_id)
-    return build_anchor(
+    anchor = build_anchor(
         sub,
         process_id=process_id,
         block_key=matched_key or "?",
         value_key=value_key,
         uncertainty_key=uncertainty_key,
     )
+    _validate_expected(
+        anchor,
+        expected_value_id=expected_value_id,
+        expected_block_key=expected_block_key,
+        expected_units=expected_units,
+        expected_confidence_level=expected_confidence_level,
+    )
+    return anchor
+
+
+def _validate_expected(
+    anchor: Anchor,
+    *,
+    expected_value_id: str | None,
+    expected_block_key: str | None,
+    expected_units: str | None,
+    expected_confidence_level: str | None,
+) -> None:
+    checks = (
+        ("value_id", expected_value_id, anchor.value_id),
+        ("block_key", expected_block_key, anchor.block_key),
+        ("units", expected_units, anchor.units),
+        ("confidence_level", expected_confidence_level, anchor.confidence_level),
+    )
+    for field_name, expected, actual in checks:
+        if expected is not None and actual != expected:
+            raise AnchorError(
+                f"{anchor.process_id}: anchor {field_name} mismatch: "
+                f"expected {expected!r}, got {actual!r}"
+            )

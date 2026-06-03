@@ -166,10 +166,18 @@ def discover() -> None:
             if ispkg:
                 continue  # family subpackages carry no constraints themselves
             try:
-                importlib.import_module(modname)
+                module = importlib.import_module(modname)
+                if not _module_is_registered(modname):
+                    cls = getattr(module, "Constraint", None)
+                    if isinstance(cls, type):
+                        register(cls)
             except Exception as exc:  # noqa: BLE001 — isolation is the point
                 _IMPORT_FAILURES[modname] = exc
     _DISCOVERED = True
+
+
+def _module_is_registered(module_name: str) -> bool:
+    return any(type(constraint).__module__ == module_name for constraint in _REGISTRY.values())
 
 
 def import_failures() -> Dict[str, BaseException]:

@@ -15,6 +15,7 @@ empty constraint set) and scale up as real constraints land. They verify:
 
 from __future__ import annotations
 
+import math
 import re
 
 import pytest
@@ -44,6 +45,16 @@ def test_discovery_is_idempotent():
     a = fcc.all_constraints()
     b = fcc.all_constraints()
     assert set(a) == set(b)
+
+
+def test_reset_for_tests_allows_rediscovery():
+    before = fcc.all_constraints()
+    assert before
+    registry.reset_for_tests()
+    registry.discover()
+    after = registry.all_constraints()
+    assert set(after) == set(before)
+    assert after
 
 
 def test_every_constraint_satisfies_protocol(registry):
@@ -150,6 +161,41 @@ def test_anchor_loader_fails_loudly_on_missing_file():
         anchors.load_pdg_block("ZZ999", family="kaon")
 
 
+def test_anchor_loader_optional_validation_mismatches_raise(monkeypatch):
+    block = {
+        "canonical_limit": {
+            "value": 1.0,
+            "value_id": "PDG2026:Z999:limit",
+            "units": "dimensionless",
+            "confidence_level": "95% CL",
+        }
+    }
+
+    monkeypatch.setattr(anchors, "load_pdg_block", lambda *args, **kwargs: block)
+
+    anchor = anchors.load_anchor(
+        "Z999",
+        family="kaon",
+        candidates=("canonical_limit",),
+        expected_value_id="PDG2026:Z999:limit",
+        expected_block_key="canonical_limit",
+        expected_units="dimensionless",
+        expected_confidence_level="95% CL",
+    )
+    assert anchor.value_id == "PDG2026:Z999:limit"
+    assert anchor.confidence_level == "95% CL"
+
+    mismatch_cases = (
+        {"expected_value_id": "wrong"},
+        {"expected_block_key": "wrong_block"},
+        {"expected_units": "GeV"},
+        {"expected_confidence_level": "90% CL"},
+    )
+    for kwargs in mismatch_cases:
+        with pytest.raises(anchors.AnchorError, match="mismatch"):
+            anchors.load_anchor("Z999", family="kaon", candidates=("canonical_limit",), **kwargs)
+
+
 def test_extras_key_registry_rejects_unknown_keys():
     with pytest.raises(KeyError):
         point_builder.make_point(not_a_real_key=123)
@@ -159,6 +205,20 @@ def test_make_point_accepts_declared_keys():
     p = point_builder.make_point(kk_gluon_mass_gev=3000.0)
     assert p.get_extra("kk_gluon_mass_gev") == 3000.0
     assert p.get_extra("missing") is None
+
+
+def test_parameter_point_exposes_immutable_mappings():
+    raw = {"scan_id": 1}
+    p = point_builder.make_point(raw=raw, kk_gluon_mass_gev=3000.0)
+
+    raw["scan_id"] = 2
+    assert p.raw["scan_id"] == 1
+    assert p.get_extra("kk_gluon_mass_gev") == 3000.0
+
+    with pytest.raises(TypeError):
+        p.raw["scan_id"] = 3
+    with pytest.raises(TypeError):
+        p.extras["kk_gluon_mass_gev"] = 4000.0
 
 
 def test_constraint_result_rejects_complex_numeric_field():
@@ -178,3 +238,22 @@ def test_constraint_result_rejects_complex_numeric_field():
         predicted=1.0,
         ratio=None,
     )
+
+
+@pytest.mark.parametrize("field,value", [("ratio", math.nan), ("predicted", math.inf), ("budget", -math.inf)])
+def test_constraint_result_rejects_non_finite_numeric_field(field, value):
+    kwargs = {
+        "process_id": "K001",
+        "severity": Severity.HARD,
+        "passes": True,
+        field: value,
+    }
+    with pytest.raises(ValueError, match="must be finite"):
+        ConstraintResult(**kwargs)
+
+
+def test_constraint_result_rejects_non_bool_passes_and_bad_severity():
+    with pytest.raises(TypeError, match="passes must be bool"):
+        ConstraintResult(process_id="K001", severity=Severity.HARD, passes=1)
+    with pytest.raises(TypeError, match="severity must be a Severity"):
+        ConstraintResult(process_id="K001", severity="HARD", passes=True)

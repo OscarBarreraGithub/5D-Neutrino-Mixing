@@ -59,6 +59,14 @@ _ANCHOR_CANDIDATES = (
     "primary_current_limit",
 )
 
+# Optional defense-in-depth checks for the exact YAML value this constraint
+# intends to consume. Set to None only when the sidecar genuinely lacks the
+# field.
+_EXPECTED_ANCHOR_VALUE_ID = "PDG2026:XX000:canonical_value"
+_EXPECTED_ANCHOR_BLOCK_KEY = "canonical_experimental_value"
+_EXPECTED_ANCHOR_UNITS = "dimensionless"
+_EXPECTED_ANCHOR_CONFIDENCE_LEVEL = "95% CL"
+
 # The extra (if any) this constraint reads off the ParameterPoint. Must be
 # declared in point_builder.KNOWN_EXTRA_KEYS.
 _REQUIRED_EXTRA = "quark_mass_basis_couplings"
@@ -80,6 +88,10 @@ class Constraint:
             self.process_id,
             family=_FAMILY,
             candidates=_ANCHOR_CANDIDATES,
+            expected_value_id=_EXPECTED_ANCHOR_VALUE_ID,
+            expected_block_key=_EXPECTED_ANCHOR_BLOCK_KEY,
+            expected_units=_EXPECTED_ANCHOR_UNITS,
+            expected_confidence_level=_EXPECTED_ANCHOR_CONFIDENCE_LEVEL,
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
