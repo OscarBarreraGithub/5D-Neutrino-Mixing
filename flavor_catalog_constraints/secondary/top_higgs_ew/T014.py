@@ -6,7 +6,7 @@ The Standard Model rates for ``Z -> b sbar + bbar s``,
 ``Z -> b dbar + bbar d``, and ``Z -> s dbar + sbar d`` are loop, GIM, and CKM
 suppressed far below the direct non-standard hadronic-Z-width limit.  This
 constraint therefore applies a pure-NP HARD upper bound to the largest
-charge-summed FCNC branching-fraction proxy,
+charge-summed FCNC branching fraction,
 
     BR = Gamma(Z -> q_i qbar_j + q_j qbar_i)
          / (Gamma_Z^{SM,total} + Gamma_FCNC).
@@ -17,18 +17,15 @@ from ``quarkConstraints.zpole`` through the
 
 RS matching status
 ------------------
-NEEDS-HUMAN-PHYSICS.  A rigorous RS prediction needs the off-diagonal
-down-sector ``Z d_i d_j`` effective coupling after EW KK/Z/Z' mixing,
-custodial-embedding choices, brane kinetic terms, and down-quark mass-basis
-rotation.  Those inputs are not present on ``ParameterPoint``.  This v1
-implementation uses a documented proxy:
-``delta g_ij = (m_Z/M_KK)^2 * down_overlap_ij`` from the available quark
-mass-basis overlap matrices.
+The minimal-RS gauge neutral-current piece is read from the Phase-3a
+``rs_ew_couplings`` extra.  The point-specific FCNC-Z prediction uses the
+off-diagonal ``z_delta_g_L/R_d[i,j]`` entries directly, with no quark-overlap
+proxy.
 
 Severity
 --------
 HARD.  The catalogued rows are observed 95% CL direct upper limits on
-non-standard hadronic Z widths.  A point with an evaluated pure-NP proxy above
+non-standard hadronic Z widths.  A point with an evaluated pure-NP width above
 the relevant limit is excluded.
 
 Catalog sidecar
@@ -55,11 +52,8 @@ from flavor_catalog_constraints.base import (
     Severity,
 )
 from flavor_catalog_constraints.physics_adapters.zpole import (
-    ZPOLE_DOWN_FCNC_PROXY_V1,
     ZPoleDownFCNCBranchingResult,
-    ZPoleDownFCNCCouplingProxy,
     zpole_down_fcnc_branching_fraction_from_couplings,
-    zpole_down_fcnc_branching_fraction_with_proxy,
     zpole_down_fcnc_effective_coupling_limit,
     zpole_down_fcnc_sm_hadronic_width_weight,
     zpole_down_fcnc_sm_total_width_weight,
@@ -68,16 +62,15 @@ from flavor_catalog_constraints.registry import register
 
 _FAMILY = "top_higgs_ew"
 _TIER = ConstraintLevel.SECONDARY
-_REQUIRED_EXTRA = "quark_mass_basis_couplings"
-_OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
+_REQUIRED_EXTRA = "rs_ew_couplings"
 
 _BS_VALUE_ID = "ECFA2025:T014:zbs_direct_hadronic_width_limit"
 _BD_VALUE_ID = "ECFA2025:T014:zbd_direct_hadronic_width_limit"
 _SD_VALUE_ID = "AbuAjamieh2026:T014:zsd_direct_hadronic_width_limit"
-_CHANNEL_SPECS: tuple[tuple[str, str, str, str], ...] = (
-    ("bs", "b", "s", _BS_VALUE_ID),
-    ("bd", "b", "d", _BD_VALUE_ID),
-    ("sd", "s", "d", _SD_VALUE_ID),
+_CHANNEL_SPECS: tuple[tuple[str, str, str, str, int, int], ...] = (
+    ("bs", "s", "b", _BS_VALUE_ID, 1, 2),
+    ("bd", "d", "b", _BD_VALUE_ID, 0, 2),
+    ("sd", "d", "s", _SD_VALUE_ID, 0, 1),
 )
 
 _EXPECTED_UNITS = "dimensionless branching fraction"
@@ -87,20 +80,15 @@ _NUMBER_RE = re.compile(
     r"^\s*<?\s*(?P<number>[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)"
     r"(?:[eE][+-]?[0-9]+)?)\s*$"
 )
-_UNEVALUATED_REASON = (
-    "no off-diagonal down-sector Z coupling prediction available "
-    "(EW FCNC-Z matching not on ParameterPoint)"
+_UNEVALUATED_REASON = "rs_ew_couplings not provided"
+_UNEVALUATED_NOTES = (
+    "T014 not evaluated: rs_ew_couplings not provided on ParameterPoint. "
+    "Result is non-vetoing and diagnostic-only; build points with "
+    "build_from_rs_ew_inputs for the rigorous Phase-3c path."
 )
-_UNEVALUATED_NOTES = f"NOT EVALUATED - {_UNEVALUATED_REASON}"
 _BUDGET_SOURCE = (
     "flavor_catalog/processes/secondary/top_higgs_ew/T014.yaml "
     "pdg_or_equivalent direct non-standard hadronic-Z-width rows"
-)
-_NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: rigorous RS FCNC-Z matching requires EW KK/Z/Z' "
-    "mixing, custodial representations, brane kinetic terms, and the "
-    "down-sector Z neutral-current mass-basis coupling not present on "
-    "ParameterPoint; this v1 uses the documented down-overlap proxy."
 )
 
 
@@ -112,6 +100,8 @@ class DownFCNCLimitEntry:
     channel_key: str
     flavor_i: str
     flavor_j: str
+    generation_i: int
+    generation_j: int
     value_id: str
     observable: str | None
     confidence_level: str | None
@@ -160,15 +150,6 @@ class T014Anchor:
 
 def _optional_str(value: Any) -> str | None:
     return None if value is None else str(value)
-
-
-def _optional_int(value: Any) -> int | None:
-    if value is None:
-        return None
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return None
 
 
 def _parse_limit_value(
@@ -276,6 +257,8 @@ def _limit_entry(
     channel_key: str,
     flavor_i: str,
     flavor_j: str,
+    generation_i: int,
+    generation_j: int,
     value_id: str,
 ) -> DownFCNCLimitEntry:
     _, row = _find_value_entry(process_id, value_id)
@@ -304,6 +287,8 @@ def _limit_entry(
         channel_key=channel_key,
         flavor_i=flavor_i,
         flavor_j=flavor_j,
+        generation_i=int(generation_i),
+        generation_j=int(generation_j),
         value_id=value_id,
         observable=_optional_str(row.get("observable")),
         confidence_level=confidence_level,
@@ -324,9 +309,18 @@ def _load_t014_anchor(process_id: str) -> T014Anchor:
             channel_key=channel_key,
             flavor_i=flavor_i,
             flavor_j=flavor_j,
+            generation_i=generation_i,
+            generation_j=generation_j,
             value_id=value_id,
         )
-        for channel_key, flavor_i, flavor_j, value_id in _CHANNEL_SPECS
+        for (
+            channel_key,
+            flavor_i,
+            flavor_j,
+            value_id,
+            generation_i,
+            generation_j,
+        ) in _CHANNEL_SPECS
     }
     sm_hadronic = float(sum(zpole_down_fcnc_sm_hadronic_width_weight().values()))
     sm_total = float(sum(zpole_down_fcnc_sm_total_width_weight().values()))
@@ -341,7 +335,6 @@ def _load_t014_anchor(process_id: str) -> T014Anchor:
 def _channel_diagnostics(
     limit: DownFCNCLimitEntry,
     result: ZPoleDownFCNCBranchingResult,
-    proxy: ZPoleDownFCNCCouplingProxy,
 ) -> dict[str, Any]:
     return {
         "value_id": limit.value_id,
@@ -352,6 +345,11 @@ def _channel_diagnostics(
         "snapshot_path": limit.snapshot_path,
         "flavor_i": result.flavor_i,
         "flavor_j": result.flavor_j,
+        "generation_indices": [int(limit.generation_i), int(limit.generation_j)],
+        "conjugate_generation_indices": [
+            int(limit.generation_j),
+            int(limit.generation_i),
+        ],
         "predicted": float(result.branching_fraction),
         "sm_prediction": 0.0,
         "budget": float(result.br_limit),
@@ -372,8 +370,17 @@ def _channel_diagnostics(
         "charge_state_factor": float(result.charge_state_factor),
         "n_color": float(result.n_color),
         "radiator": float(result.radiator),
-        "proxy": dict(proxy.diagnostics),
     }
+
+
+def _coupling_entry(source: Any, matrix_name: str, row: int, column: int) -> complex:
+    try:
+        value = complex(getattr(source, matrix_name)[int(row), int(column)])
+    except (AttributeError, TypeError, KeyError, IndexError) as exc:
+        raise ValueError(f"{matrix_name}[{row},{column}] is not available") from exc
+    if not math.isfinite(value.real) or not math.isfinite(value.imag):
+        raise ValueError(f"{matrix_name}[{row},{column}] must be finite")
+    return value
 
 
 @register
@@ -416,8 +423,6 @@ class Constraint:
                     "prediction was evaluated"
                 ),
                 "required_parameter_point_extras": [_REQUIRED_EXTRA],
-                "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
-                "rs_matching_assumption": ZPOLE_DOWN_FCNC_PROXY_V1,
                 "budget_source": _BUDGET_SOURCE,
                 "sm_prediction_policy": (
                     "SM FCNC-Z rates are loop/GIM/CKM suppressed and treated "
@@ -428,24 +433,40 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        couplings = point.get_extra(_REQUIRED_EXTRA)
-        if couplings is None:
-            return self._unevaluated_result({"missing_extra": _REQUIRED_EXTRA})
+        rs_ew_couplings = point.get_extra(_REQUIRED_EXTRA)
+        if rs_ew_couplings is None:
+            return self._unevaluated_result(
+                {
+                    "missing_extra": _REQUIRED_EXTRA,
+                    "legacy_quark_mass_basis_couplings_present": (
+                        point.get_extra("quark_mass_basis_couplings") is not None
+                    ),
+                }
+            )
 
-        kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         channel_results: dict[str, ZPoleDownFCNCBranchingResult] = {}
-        channel_proxies: dict[str, ZPoleDownFCNCCouplingProxy] = {}
         try:
             for channel_key, entry in self.anchor.channels.items():
-                result, proxy = zpole_down_fcnc_branching_fraction_with_proxy(
-                    couplings,
+                delta_g_left = _coupling_entry(
+                    rs_ew_couplings,
+                    "z_delta_g_L_d",
+                    entry.generation_i,
+                    entry.generation_j,
+                )
+                delta_g_right = _coupling_entry(
+                    rs_ew_couplings,
+                    "z_delta_g_R_d",
+                    entry.generation_i,
+                    entry.generation_j,
+                )
+                result = zpole_down_fcnc_branching_fraction_from_couplings(
                     flavor_i=entry.flavor_i,
                     flavor_j=entry.flavor_j,
+                    delta_g_left=delta_g_left,
+                    delta_g_right=delta_g_right,
                     br_limit=entry.value,
-                    m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 )
                 channel_results[channel_key] = result
-                channel_proxies[channel_key] = proxy
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
             return self._unevaluated_result(
                 {
@@ -469,7 +490,6 @@ class Constraint:
                 key: _channel_diagnostics(
                     self.anchor.channels[key],
                     channel_results[key],
-                    channel_proxies[key],
                 )
                 for key in channel_results
             },
@@ -496,10 +516,14 @@ class Constraint:
             ],
             "sm_total_width_weights": selected.diagnostics["sm_total_width_weights"],
             "budget_source": _BUDGET_SOURCE,
-            "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
-            "rs_matching_assumption": ZPOLE_DOWN_FCNC_PROXY_V1,
+            "rs_matching_assumption": getattr(
+                rs_ew_couplings, "matching_assumption", None
+            ),
+            "rs_ew_model_label": getattr(rs_ew_couplings, "model_label", None),
+            "rs_ew_kk_mass_gev": float(
+                getattr(rs_ew_couplings, "kk_ew_mass_gev")
+            ),
             "required_parameter_point_extras": [_REQUIRED_EXTRA],
-            "kk_ew_mass_extra_used": kk_ew_mass is not None,
         }
 
         return ConstraintResult(
@@ -513,9 +537,9 @@ class Constraint:
             budget=float(selected.br_limit),
             notes=(
                 "Pure-NP direct hadronic-width bound on down-sector "
-                "FCNC Z decays. The off-diagonal Z q_i q_j coupling is a "
-                "documented down-overlap proxy and is flagged "
-                "NEEDS-HUMAN-PHYSICS."
+                "FCNC Z decays. Point-specific RS shifts use Phase-3a "
+                "minimal-RS gauge neutral-current z_delta_g_L/R_d "
+                "off-diagonal entries."
             ),
             diagnostics=diagnostics,
         )

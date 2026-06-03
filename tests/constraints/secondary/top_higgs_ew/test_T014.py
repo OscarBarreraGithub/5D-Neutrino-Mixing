@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -28,6 +29,7 @@ from quarkConstraints.zpole import (
     partial_width_weight,
     sm_couplings,
 )
+from tests.rs_ew_phase3b_helpers import sample_rs_ew_point, sm_limit_rs_ew_point
 
 _PID = "T014"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -63,23 +65,10 @@ def _set_pair(matrix, flavor_i: str, flavor_j: str, value: complex) -> None:
 
 
 def _fcnc_couplings(
-    *,
-    bs_left: complex = 0.0j,
-    bs_right: complex = 0.0j,
-    bd_left: complex = 0.0j,
-    bd_right: complex = 0.0j,
-    sd_left: complex = 0.0j,
-    sd_right: complex = 0.0j,
     M_KK: float = 3000.0,
 ) -> QuarkMassBasisCouplings:
     left_overlap = np.zeros((3, 3), dtype=np.complex128)
     right_overlap = np.zeros((3, 3), dtype=np.complex128)
-    _set_pair(left_overlap, "b", "s", bs_left)
-    _set_pair(right_overlap, "b", "s", bs_right)
-    _set_pair(left_overlap, "b", "d", bd_left)
-    _set_pair(right_overlap, "b", "d", bd_right)
-    _set_pair(left_overlap, "s", "d", sd_left)
-    _set_pair(right_overlap, "s", "d", sd_right)
     zeros = np.zeros((3, 3), dtype=np.complex128)
     return QuarkMassBasisCouplings(
         M_KK=M_KK,
@@ -93,6 +82,33 @@ def _fcnc_couplings(
         left_down=left_overlap.copy(),
         right_up=zeros,
         right_down=right_overlap.copy(),
+    )
+
+
+def _rs_ew_couplings(
+    *,
+    bs_left: complex = 0.0j,
+    bs_right: complex = 0.0j,
+    bd_left: complex = 0.0j,
+    bd_right: complex = 0.0j,
+    sd_left: complex = 0.0j,
+    sd_right: complex = 0.0j,
+    kk_ew_mass_gev: float = 3000.0,
+) -> SimpleNamespace:
+    z_left = np.zeros((3, 3), dtype=np.complex128)
+    z_right = np.zeros((3, 3), dtype=np.complex128)
+    _set_pair(z_left, "s", "b", bs_left)
+    _set_pair(z_right, "s", "b", bs_right)
+    _set_pair(z_left, "d", "b", bd_left)
+    _set_pair(z_right, "d", "b", bd_right)
+    _set_pair(z_left, "d", "s", sd_left)
+    _set_pair(z_right, "d", "s", sd_right)
+    return SimpleNamespace(
+        model_label="test-rs-ew-direct-z-delta",
+        matching_assumption="test direct z_delta_g_L/R_d fixture",
+        kk_ew_mass_gev=float(kk_ew_mass_gev),
+        z_delta_g_L_d=z_left,
+        z_delta_g_R_d=z_right,
     )
 
 
@@ -120,15 +136,12 @@ def _manual_sm_total_width_weights():
 def _manual_fcnc_br(
     flavor_i: str,
     flavor_j: str,
-    left_overlap: complex,
-    right_overlap: complex = 0.0j,
-    *,
-    m_kk_gev: float = 3000.0,
+    delta_left: complex,
+    delta_right: complex = 0.0j,
 ) -> tuple[float, complex, complex, float, float, float, float, float]:
     inputs = default_sm_inputs()
-    scale = (inputs.m_z_gev / m_kk_gev) ** 2
-    delta_left = complex(inputs.proxy_strength * scale * left_overlap)
-    delta_right = complex(inputs.proxy_strength * scale * right_overlap)
+    delta_left = complex(delta_left)
+    delta_right = complex(delta_right)
     norm = abs(delta_left) ** 2 + abs(delta_right) ** 2
     sm_hadronic = sum(_manual_sm_hadronic_width_weights().values())
     sm_total = sum(_manual_sm_total_width_weights().values())
@@ -166,6 +179,7 @@ def test_anchor_matches_yaml_and_loud_fail_probe():
         "bd": "ECFA2025:T014:zbd_direct_hadronic_width_limit",
         "sd": "AbuAjamieh2026:T014:zsd_direct_hadronic_width_limit",
     }
+    generation_indices = {"bs": (1, 2), "bd": (0, 2), "sd": (0, 1)}
     sm_hadronic = sum(_manual_sm_hadronic_width_weights().values())
     sm_total = sum(_manual_sm_total_width_weights().values())
 
@@ -189,6 +203,9 @@ def test_anchor_matches_yaml_and_loud_fail_probe():
         assert anchor.units == "dimensionless branching fraction"
         assert anchor.limit_type == entry["limit_type"]
         assert anchor.source_url == entry["source_url"]
+        assert (anchor.generation_i, anchor.generation_j) == generation_indices[
+            channel
+        ]
         assert anchor.effective_coupling_limit == pytest.approx(
             manual_coupling_limit
         )
@@ -247,19 +264,27 @@ def test_t014_value_anchors_route_through_scaffold_load_anchor(monkeypatch):
         )
 
 
-def test_zero_fcnc_coupling_and_width_weights_match_independent_recompute():
-    point = point_builder.make_point(quark_mass_basis_couplings=_fcnc_couplings())
+def test_sm_limit_fcnc_coupling_and_width_weights_match_independent_recompute():
+    point = sm_limit_rs_ew_point()
     result = fcc.get(_PID).evaluate(point)
     sm_hadronic = sum(_manual_sm_hadronic_width_weights().values())
     sm_total = sum(_manual_sm_total_width_weights().values())
+    couplings = point.extras["rs_ew_couplings"]
 
     assert sm_hadronic == pytest.approx(2.5225098333333333)
     assert sm_total == pytest.approx(3.649563333333334)
     assert sm_hadronic / sm_total == pytest.approx(0.6911812737414247)
+    assert np.max(np.abs(couplings.z_delta_g_L_d)) == pytest.approx(
+        0.0, rel=0.0, abs=1.0e-18
+    )
+    assert np.max(np.abs(couplings.z_delta_g_R_d)) == pytest.approx(
+        0.0, rel=0.0, abs=1.0e-18
+    )
     assert result.predicted == pytest.approx(0.0)
     assert result.sm_prediction == pytest.approx(0.0)
     assert result.ratio == pytest.approx(0.0)
     assert result.passes is True
+    assert result.diagnostics["evaluated"] is True
     assert result.diagnostics["sm_validation"][
         "sm_hadronic_width_weight"
     ] == pytest.approx(sm_hadronic)
@@ -275,15 +300,16 @@ def test_zero_fcnc_coupling_and_width_weights_match_independent_recompute():
             "zero_fcnc_coupling_branching_fractions"
         ].values()
     )
+    assert "needs_human_physics" not in result.diagnostics
+    assert "proxy" not in result.diagnostics["channels"]["bs"]
 
 
-def test_proxy_numerics_match_independent_effective_coupling_recomputation():
+def test_rigorous_rs_ew_bs_numerics_match_independent_recomputation():
     constraint = fcc.get(_PID)
-    left = 0.25 + 0.10j
-    right = 0.05j
-    point = point_builder.make_point(
-        quark_mass_basis_couplings=_fcnc_couplings(bs_left=left, bs_right=right)
-    )
+    point = sample_rs_ew_point()
+    couplings = point.extras["rs_ew_couplings"]
+    left = complex(couplings.z_delta_g_L_d[1, 2])
+    right = complex(couplings.z_delta_g_R_d[1, 2])
     result = constraint.evaluate(point)
     (
         expected_br,
@@ -295,21 +321,31 @@ def test_proxy_numerics_match_independent_effective_coupling_recomputation():
         fcnc_weight,
         hadronic_to_total,
     ) = (
-        _manual_fcnc_br("b", "s", left, right)
+        _manual_fcnc_br("s", "b", left, right)
     )
     core_result = down_fcnc_branching_fraction_from_couplings(
-        flavor_i="b",
-        flavor_j="s",
+        flavor_i="s",
+        flavor_j="b",
         delta_g_left=delta_left,
         delta_g_right=delta_right,
         br_limit=constraint.anchor.channels["bs"].value,
     )
 
-    assert result.diagnostics["selected_channel"] == "bs"
-    assert result.predicted == pytest.approx(expected_br)
-    assert result.predicted == pytest.approx(core_result.branching_fraction)
-    assert result.ratio == pytest.approx(expected_br / constraint.anchor.channels["bs"].value)
-    assert result.ratio == pytest.approx(core_result.ratio_to_limit)
+    assert left != pytest.approx(0.0j)
+    assert right != pytest.approx(0.0j)
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["channels"]["bs"]["predicted"] == pytest.approx(
+        expected_br
+    )
+    assert result.diagnostics["channels"]["bs"]["predicted"] == pytest.approx(
+        core_result.branching_fraction
+    )
+    assert result.diagnostics["channels"]["bs"]["ratio"] == pytest.approx(
+        expected_br / constraint.anchor.channels["bs"].value
+    )
+    assert result.diagnostics["channels"]["bs"]["ratio"] == pytest.approx(
+        core_result.ratio_to_limit
+    )
     assert result.diagnostics["channels"]["bs"]["delta_g_left"] == pytest.approx(
         delta_left
     )
@@ -334,47 +370,46 @@ def test_proxy_numerics_match_independent_effective_coupling_recomputation():
     assert result.diagnostics["channels"]["bs"][
         "sm_hadronic_to_total_width_ratio"
     ] == pytest.approx(hadronic_to_total)
-    assert "SM total Z width weight" in result.diagnostics["branching_formula"]
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["channels"]["bs"]["proxy"][
-        "matching_assumption"
+    assert result.diagnostics["channels"]["bs"]["generation_indices"] == [1, 2]
+    assert result.diagnostics["channels"]["bs"]["conjugate_generation_indices"] == [
+        2,
+        1,
     ]
+    assert "SM total Z width weight" in result.diagnostics["branching_formula"]
+    assert "needs_human_physics" not in result.diagnostics
+    assert "proxy" not in result.diagnostics["channels"]["bs"]
 
 
 def test_evaluate_without_or_with_invalid_input_degrades_gracefully():
-    missing = fcc.get(_PID).evaluate(point_builder.empty_point())
+    old_style = fcc.get(_PID).evaluate(
+        point_builder.build_from_quark_couplings(_fcnc_couplings())
+    )
     invalid = fcc.get(_PID).evaluate(
-        point_builder.make_point(quark_mass_basis_couplings={"left_bs": 1.0})
+        point_builder.make_point(rs_ew_couplings={"left_bs": 1.0})
     )
 
-    assert missing.process_id == _PID
-    assert missing.passes is True
-    assert missing.predicted is None
-    assert missing.ratio is None
-    assert missing.sm_prediction == pytest.approx(0.0)
-    assert missing.experimental == pytest.approx(fcc.get(_PID).anchor.value)
-    assert missing.budget == pytest.approx(fcc.get(_PID).anchor.budget)
-    assert missing.notes.startswith("NOT EVALUATED -")
-    assert missing.diagnostics["evaluated"] is False
-    assert missing.diagnostics["missing_extra"] == "quark_mass_basis_couplings"
+    assert old_style.process_id == _PID
+    assert old_style.passes is True
+    assert old_style.predicted is None
+    assert old_style.ratio is None
+    assert old_style.sm_prediction == pytest.approx(0.0)
+    assert old_style.experimental == pytest.approx(fcc.get(_PID).anchor.value)
+    assert old_style.budget == pytest.approx(fcc.get(_PID).anchor.budget)
+    assert "rs_ew_couplings not provided" in old_style.notes
+    assert old_style.diagnostics["evaluated"] is False
+    assert old_style.diagnostics["missing_extra"] == "rs_ew_couplings"
+    assert old_style.diagnostics["legacy_quark_mass_basis_couplings_present"] is True
+    assert "needs_human_physics" not in old_style.diagnostics
 
     assert invalid.passes is True
     assert invalid.predicted is None
     assert invalid.ratio is None
     assert invalid.diagnostics["evaluated"] is False
-    assert invalid.diagnostics["invalid_extra"] == "quark_mass_basis_couplings"
+    assert invalid.diagnostics["invalid_extra"] == "rs_ew_couplings"
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
-    result = fcc.get(_PID).evaluate(
-        point_builder.make_point(
-            quark_mass_basis_couplings=_fcnc_couplings(
-                bs_left=100.0,
-                bd_left=0.10 + 0.02j,
-                sd_right=0.05j,
-            )
-        )
-    )
+    result = fcc.get(_PID).evaluate(sample_rs_ew_point())
 
     assert result.process_id == _PID
     for value in (
@@ -386,8 +421,8 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     ):
         assert isinstance(value, float)
         assert math.isfinite(value)
-    assert result.passes is False
-    assert result.ratio > 1.0
+    assert isinstance(result.passes, bool)
+    assert result.ratio >= 0.0
     assert isinstance(result.diagnostics["channels"]["bs"]["delta_g_left"], complex)
     assert isinstance(result.diagnostics["channels"]["bs"]["delta_g_right"], complex)
     assert isinstance(
@@ -395,21 +430,24 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
         float,
     )
     assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["rs_matching_assumption"]
+    assert result.diagnostics["rs_ew_model_label"]
+    assert result.diagnostics["rs_ew_kk_mass_gev"] == pytest.approx(3000.0)
 
 
 @pytest.mark.parametrize(
     ("couplings", "expected_pass"),
     [
-        (_fcnc_couplings(bs_left=1.0, bd_left=0.5, sd_left=0.25), True),
-        (_fcnc_couplings(bs_left=100.0), False),
+        (_rs_ew_couplings(bs_left=1.0e-3, bd_left=5.0e-4, sd_left=2.5e-4), True),
+        (_rs_ew_couplings(bs_left=0.10), False),
     ],
 )
 def test_safe_point_passes_and_large_np_point_fails(
-    couplings: QuarkMassBasisCouplings,
+    couplings: SimpleNamespace,
     expected_pass: bool,
 ):
     result = fcc.get(_PID).evaluate(
-        point_builder.make_point(quark_mass_basis_couplings=couplings)
+        point_builder.make_point(rs_ew_couplings=couplings)
     )
 
     assert result.passes is expected_pass
@@ -419,49 +457,43 @@ def test_safe_point_passes_and_large_np_point_fails(
         assert result.ratio > 1.0
 
 
-def test_optional_kk_ew_mass_extra_changes_proxy_scale():
-    couplings = _fcnc_couplings(bs_left=20.0)
-    default_point = point_builder.make_point(quark_mass_basis_couplings=couplings)
+def test_legacy_kk_ew_mass_extra_does_not_rescale_direct_couplings():
+    couplings = _rs_ew_couplings(bs_left=2.0e-3)
+    default_point = point_builder.make_point(rs_ew_couplings=couplings)
     heavy_point = point_builder.make_point(
-        quark_mass_basis_couplings=couplings,
+        rs_ew_couplings=couplings,
         kk_ew_mass_gev=6000.0,
     )
 
     default_result = fcc.get(_PID).evaluate(default_point)
     heavy_result = fcc.get(_PID).evaluate(heavy_point)
 
-    assert default_result.diagnostics["channels"]["bs"]["proxy"]["m_kk_gev"] == (
-        pytest.approx(3000.0)
-    )
-    assert heavy_result.diagnostics["channels"]["bs"]["proxy"]["m_kk_gev"] == (
-        pytest.approx(6000.0)
-    )
-    assert heavy_result.diagnostics["kk_ew_mass_extra_used"] is True
+    assert "kk_ew_mass_extra_used" not in heavy_result.diagnostics
     assert heavy_result.diagnostics["channels"]["bs"]["delta_g_left"] == pytest.approx(
-        default_result.diagnostics["channels"]["bs"]["delta_g_left"] / 4.0
+        default_result.diagnostics["channels"]["bs"]["delta_g_left"]
     )
     assert heavy_result.diagnostics["channels"]["bs"]["effective_coupling_norm"] == (
         pytest.approx(
             default_result.diagnostics["channels"]["bs"]["effective_coupling_norm"]
-            / 16.0
         )
     )
+    assert heavy_result.predicted == pytest.approx(default_result.predicted)
 
 
 def test_evaluate_is_pure_and_deterministic():
-    couplings = _fcnc_couplings(
-        bs_left=0.15 + 0.01j,
-        bd_right=0.03j,
-        sd_left=0.02,
+    couplings = _rs_ew_couplings(
+        bs_left=1.5e-3 + 1.0e-4j,
+        bd_right=3.0e-4j,
+        sd_left=2.0e-4,
     )
-    before_left = couplings.left_overlap.copy()
-    before_right = couplings.right_down_overlap.copy()
-    point = point_builder.make_point(quark_mass_basis_couplings=couplings)
+    before_left = couplings.z_delta_g_L_d.copy()
+    before_right = couplings.z_delta_g_R_d.copy()
+    point = point_builder.make_point(rs_ew_couplings=couplings)
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    np.testing.assert_array_equal(couplings.left_overlap, before_left)
-    np.testing.assert_array_equal(couplings.right_down_overlap, before_right)
+    np.testing.assert_array_equal(couplings.z_delta_g_L_d, before_left)
+    np.testing.assert_array_equal(couplings.z_delta_g_R_d, before_right)
