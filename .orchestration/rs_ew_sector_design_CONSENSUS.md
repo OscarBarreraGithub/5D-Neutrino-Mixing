@@ -781,3 +781,5 @@ double-counted, and whether `a_ref` was omitted.
 3. EDM items: which EDM operator basis, CP-phase inputs, hadronic/nuclear
    matrix-element conventions, and promotion criteria to use once loop
    matching exists.
+
+> **CORRECTION (P5 dual review, 2026-06-03):** B025 (R(D)/R(D*)) is reclassified FULL→PARTIAL — the minimal-RS LH-vector tree piece is rigorous, but scalar/RH WET operators + form-factor integration are not built (consistent with B013/B014). Agreed count becomes **FULL 25 / PARTIAL 18 / HUMAN 7**. Ratified by both codex + Opus.
