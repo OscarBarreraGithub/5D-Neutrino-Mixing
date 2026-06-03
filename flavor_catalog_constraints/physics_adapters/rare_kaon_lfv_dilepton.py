@@ -1,9 +1,9 @@
 """LFV ``K_L -> e mu`` wrapper over rare-kaon dilepton machinery.
 
-The shared rare-kaon dilepton adapter owns the ``s -> d l l`` CKM inputs,
-``kappa_mu`` normalization, and quark-side Wilson proxy used by K006/K008/K009.
-This module reuses that machinery and adds only the lepton-flavor-violating
-``e mu`` glue needed for K019.
+The production Phase-4c path reads the rigorous off-diagonal ``e mu`` block
+from ``rs_semileptonic_wilsons.lfv_llqq`` and maps its C9/C10 inputs into the
+rare-kaon Y normalization without reusing the old one-boson proxy.  The older
+explicit-spurion helpers remain as legacy compatibility entry points only.
 
 The LFV two-body rate is normalized to the K006 ``K_L -> mu+mu-`` convention.
 For equal muon masses and a single axial coefficient it reduces to
@@ -15,12 +15,10 @@ For equal muon masses and a single axial coefficient it reduces to
           + [1 - (r_mu - r_e)^2] |(r_e + r_mu) Y_A|^2 }
         / (4 r_mu^2).
 
-NEEDS-HUMAN-PHYSICS: a rigorous RS prediction requires the off-diagonal
-charged-lepton neutral-current ``e mu`` coupling after EW KK/Z/Z' mixing and
-charged-lepton mass-basis rotation.  That coupling is not a standard
-``ParameterPoint`` input.  This v1 proxy accepts an explicit e-mu lepton
-overlap spurion and maps it to a Z-like LFV coupling while reusing the
-rare-kaon dilepton quark-side matching.
+With the current diagonal charged-lepton fit, the Phase-4a LFV block is
+rigorously zero at tree level, so the evaluated LFV rate is zero and
+non-vetoing.  Nonzero tree-level LFV requires non-diagonal lepton structure;
+loop-induced LFV is deferred.
 """
 
 from __future__ import annotations
@@ -42,8 +40,13 @@ from .rare_kaon_dilepton import (
     RareKaonDileptonWilsonCoefficients,
     rare_kaon_dilepton_ckm_factors,
     rare_kaon_dilepton_default_sm_inputs,
+    rare_kaon_dilepton_g_sm_squared,
     rare_kaon_dilepton_kappa_mu,
     rare_kaon_dilepton_wilsons_from_couplings,
+)
+from quarkConstraints.rs_semileptonic_wilsons import (
+    RSLFVSemileptonicWilsonCoefficients,
+    RSSemileptonicWilsonBundle,
 )
 
 RARE_KAON_LFV_DILEPTON_MODEL_V1 = "rare_kaon_lfv_klong_emu_proxy_v1"
@@ -53,11 +56,18 @@ RARE_KAON_LFV_DILEPTON_OPERATOR_CONVENTION = (
     "K_L -> e+- mu-+ branching fraction"
 )
 RARE_KAON_LFV_DILEPTON_PROXY_V1 = (
-    "NEEDS-HUMAN-PHYSICS: off-diagonal e-mu lepton neutral-current couplings "
-    "are not available on ParameterPoint; caller-supplied lepton overlap "
-    "spurions are mapped to Z-like LFV couplings delta_l_L/R = g_Z * "
-    "overlap_emu, standing in for the missing RS EW KK/Z/Z' and charged-"
-    "lepton mass-basis matching."
+    "LEGACY-PROXY: caller-supplied e-mu lepton overlap spurions are mapped "
+    "to Z-like LFV couplings. The Phase-4c K019/K020/K021 production path "
+    "does not use this proxy; it reads rs_semileptonic_wilsons.lfv_llqq."
+)
+RARE_KAON_LFV_TREE_LEVEL_NOTE_V1 = (
+    "tree-level LFV rigorous from Phase-4a lfv_llqq light-Z contacts "
+    "(=0 for the diagonal charged-lepton fit); nonzero only with "
+    "non-diagonal lepton structure / loop-induced LFV deferred"
+)
+RARE_KAON_LFV_RS_MATCHING_STATUS_V1 = (
+    "rs_semileptonic_lfv_llqq_additive_no_wilson_prefactor_reuse_no_second_"
+    "1_over_M_KK_squared"
 )
 RARE_KAON_LFV_DILEPTON_PARAMETRIZATION_CITATION = (
     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION
@@ -150,7 +160,7 @@ class RareKaonLFVWilsonCoefficients:
     y_vector_right: complex
     y_axial_left: complex
     y_axial_right: complex
-    base_same_flavor_wilsons: RareKaonDileptonWilsonCoefficients
+    base_same_flavor_wilsons: RareKaonDileptonWilsonCoefficients | None
 
     @property
     def y_vector_lfv(self) -> complex:
@@ -320,6 +330,168 @@ def rare_kaon_lfv_wilsons_from_couplings(
     )
 
 
+def rare_kaon_lfv_coeff_from_rs_semileptonic(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    transition: str = "s_to_d",
+    lepton_pair: str = "e_mu",
+) -> RSLFVSemileptonicWilsonCoefficients:
+    """Return the Phase-4a LFV ``s -> d e mu`` Wilson block."""
+
+    try:
+        coeff = source.lfv_llqq[transition][lepton_pair]
+    except (AttributeError, KeyError, TypeError) as exc:
+        raise ValueError(
+            "rs_semileptonic_wilsons.lfv_llqq"
+            f"[{transition!r}][{lepton_pair!r}] is not available"
+        ) from exc
+    if coeff.transition_key != "s_d":
+        raise ValueError(
+            f"lfv_llqq[{transition!r}][{lepton_pair!r}] "
+            f"transition_key={coeff.transition_key!r}, expected 's_d'"
+        )
+    if coeff.lepton_pair_key != lepton_pair:
+        raise ValueError(
+            f"LFV lepton pair {coeff.lepton_pair_key!r} does not match "
+            f"{lepton_pair!r}"
+        )
+    return coeff
+
+
+def rare_kaon_lfv_rs_semileptonic_diagnostics(
+    coeff: RSLFVSemileptonicWilsonCoefficients,
+    *,
+    source: RSSemileptonicWilsonBundle | None = None,
+    inputs: RareKaonLFVDileptonSMInputs | None = None,
+) -> dict[str, Any]:
+    """Diagnostics common to the rigorous LFV rare-kaon rewire."""
+
+    p = rare_kaon_lfv_default_sm_inputs() if inputs is None else inputs
+    return {
+        "rs_semileptonic_wilsons_present": True,
+        "rs_semileptonic_model_label": coeff.model_label,
+        "rs_semileptonic_operator_convention": coeff.operator_convention,
+        "rs_semileptonic_matching_assumption": coeff.matching_assumption,
+        "rs_semileptonic_matching_status": RARE_KAON_LFV_RS_MATCHING_STATUS_V1,
+        "tree_level_matching_status": (
+            "rigorous_tree_light_z_lfv_llqq_from_rs_semileptonic_wilsons"
+        ),
+        "lfv_tree_level_note": RARE_KAON_LFV_TREE_LEVEL_NOTE_V1,
+        "loop_lfv_status": "loop_induced_lfv_deferred",
+        "rs_semileptonic_transition_key": coeff.transition_key,
+        "rs_semileptonic_lepton_pair_key": coeff.lepton_pair_key,
+        "rs_semileptonic_quark_sector": coeff.quark_sector,
+        "rs_semileptonic_final_quark_index": int(coeff.final_quark_index),
+        "rs_semileptonic_initial_quark_index": int(coeff.initial_quark_index),
+        "rs_semileptonic_final_lepton_index": int(coeff.final_lepton_index),
+        "rs_semileptonic_initial_lepton_index": int(coeff.initial_lepton_index),
+        "rs_semileptonic_lambda_ckm_name": coeff.lambda_ckm_name,
+        "rs_semileptonic_lambda_ckm": complex(coeff.lambda_ckm),
+        "rs_semileptonic_contact_units": coeff.contact_units,
+        "rs_semileptonic_contacts": {
+            key: complex(value) for key, value in coeff.contacts.items()
+        },
+        "rs_semileptonic_wilson_coefficients": {
+            key: complex(value) for key, value in coeff.wilsons.items()
+        },
+        "kaon_c9_c10_to_y_normalization": _kaon_lfv_c9_c10_to_y_norm(p),
+        "lfv_contact_factorized": False,
+        "wilson_prefactor_reused": False,
+        "second_mkk_suppression_applied": False,
+        "includes_heavy_neutral_exchange": (
+            None if source is None else bool(source.includes_heavy_neutral_exchange)
+        ),
+        "includes_heavy_neutral_lepton": (
+            None if source is None else bool(source.includes_heavy_neutral_lepton)
+        ),
+    }
+
+
+def rare_kaon_lfv_wilsons_from_rs_semileptonic(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareKaonLFVDileptonSMInputs | None = None,
+    lepton_pair: str = "e_mu",
+) -> RareKaonLFVWilsonCoefficients:
+    """Map Phase-4a LFV C9/C10 Wilsons into the K019 Y inputs."""
+
+    p = rare_kaon_lfv_default_sm_inputs() if inputs is None else inputs
+    coeff = rare_kaon_lfv_coeff_from_rs_semileptonic(
+        source,
+        transition="s_to_d",
+        lepton_pair=lepton_pair,
+    )
+    scale = _diagnostic_matching_scale(matching_scale_gev)
+    norm = _kaon_lfv_c9_c10_to_y_norm(p)
+    lambda_ckm = complex(coeff.lambda_ckm)
+    left_vector_contact = complex(coeff.contact_LL + coeff.contact_LR)
+    right_vector_contact = complex(coeff.contact_RL + coeff.contact_RR)
+    left_axial_contact = complex(coeff.contact_LR - coeff.contact_LL)
+    right_axial_contact = complex(coeff.contact_RR - coeff.contact_RL)
+    return RareKaonLFVWilsonCoefficients(
+        model_label=coeff.model_label,
+        base_model_label=RARE_KAON_DILEPTON_MODEL_V1,
+        operator_convention=coeff.operator_convention,
+        matching_assumption=coeff.matching_assumption,
+        M_KK=scale,
+        matching_scale=scale,
+        left_sd_coupling=left_vector_contact,
+        right_sd_coupling=right_vector_contact,
+        left_sd_overlap=0.0j,
+        right_sd_overlap=0.0j,
+        left_quark_delta=left_vector_contact,
+        right_quark_delta=right_vector_contact,
+        lepton_left_delta_emu=complex(coeff.contact_LL + coeff.contact_RL),
+        lepton_right_delta_emu=complex(coeff.contact_LR + coeff.contact_RR),
+        lepton_vector_delta_emu=complex(
+            coeff.contact_LL + coeff.contact_LR + coeff.contact_RL + coeff.contact_RR
+        ),
+        lepton_axial_delta_emu=complex(
+            coeff.contact_LR + coeff.contact_RR - coeff.contact_LL - coeff.contact_RL
+        ),
+        y_vector_left=complex(-lambda_ckm * norm * complex(coeff.c9_lfv_np)),
+        y_vector_right=complex(-lambda_ckm * norm * complex(coeff.c9p_lfv_np)),
+        y_axial_left=complex(-lambda_ckm * norm * complex(coeff.c10_lfv_np)),
+        y_axial_right=complex(-lambda_ckm * norm * complex(coeff.c10p_lfv_np)),
+        base_same_flavor_wilsons=None,
+    )
+
+
+def klong_emu_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareKaonLFVDileptonSMInputs | None = None,
+    lepton_pair: str = "e_mu",
+) -> RareKaonLFVBranchingResult:
+    """Evaluate ``K_L -> e mu`` from Phase-4a LFV llqq Wilsons."""
+
+    p = rare_kaon_lfv_default_sm_inputs() if inputs is None else inputs
+    coeff = rare_kaon_lfv_coeff_from_rs_semileptonic(
+        source,
+        transition="s_to_d",
+        lepton_pair=lepton_pair,
+    )
+    wilsons = rare_kaon_lfv_wilsons_from_rs_semileptonic(
+        source,
+        matching_scale_gev=matching_scale_gev,
+        inputs=p,
+        lepton_pair=lepton_pair,
+    )
+    result = _branching_from_wilsons(wilsons, inputs=p)
+    diagnostics = dict(result.diagnostics)
+    diagnostics.update(
+        rare_kaon_lfv_rs_semileptonic_diagnostics(coeff, source=source, inputs=p)
+    )
+    diagnostics["base_matching_assumption"] = coeff.matching_assumption
+    diagnostics["matching_assumption"] = coeff.matching_assumption
+    diagnostics["s_to_d_lfv_llqq_rs_semileptonic_rewired"] = True
+    diagnostics["rare_kaon_lfv_proxy_reused"] = False
+    diagnostics["c9_c10_to_rare_kaon_effective_inputs"] = True
+    return replace(result, diagnostics=diagnostics)
+
+
 def rare_kaon_lfv_sm_branching_fraction(
     inputs: RareKaonLFVDileptonSMInputs | None = None,
 ) -> RareKaonLFVBranchingResult:
@@ -398,7 +570,11 @@ def _branching_from_wilsons(
     diagnostics: dict[str, Any] = {
         "base_model_label": RARE_KAON_DILEPTON_MODEL_V1,
         "base_matching_assumption": RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-        "matching_assumption": RARE_KAON_LFV_DILEPTON_PROXY_V1,
+        "matching_assumption": (
+            RARE_KAON_LFV_DILEPTON_PROXY_V1
+            if wilsons is None
+            else wilsons.matching_assumption
+        ),
         "operator_convention": RARE_KAON_LFV_DILEPTON_OPERATOR_CONVENTION,
         "input_bundle": inputs.input_bundle,
         "base_input_bundle": RARE_KAON_DILEPTON_INPUT_BUNDLE_V1,
@@ -448,24 +624,29 @@ def _branching_from_wilsons(
                 "lepton_right_delta_emu": complex(wilsons.lepton_right_delta_emu),
                 "lepton_vector_delta_emu": complex(wilsons.lepton_vector_delta_emu),
                 "lepton_axial_delta_emu": complex(wilsons.lepton_axial_delta_emu),
-                "base_muon_axial_delta": float(
-                    wilsons.base_same_flavor_wilsons.muon_axial_delta
-                ),
                 "y_vector_left": complex(wilsons.y_vector_left),
                 "y_vector_right": complex(wilsons.y_vector_right),
                 "y_axial_left": complex(wilsons.y_axial_left),
                 "y_axial_right": complex(wilsons.y_axial_right),
-                "base_y_np_left": complex(
-                    wilsons.base_same_flavor_wilsons.y_np_left
-                ),
-                "base_y_np_right": complex(
-                    wilsons.base_same_flavor_wilsons.y_np_right
-                ),
-                "base_y_np_total": complex(
-                    wilsons.base_same_flavor_wilsons.y_np_total
-                ),
             }
         )
+        if wilsons.base_same_flavor_wilsons is not None:
+            diagnostics.update(
+                {
+                    "base_muon_axial_delta": float(
+                        wilsons.base_same_flavor_wilsons.muon_axial_delta
+                    ),
+                    "base_y_np_left": complex(
+                        wilsons.base_same_flavor_wilsons.y_np_left
+                    ),
+                    "base_y_np_right": complex(
+                        wilsons.base_same_flavor_wilsons.y_np_right
+                    ),
+                    "base_y_np_total": complex(
+                        wilsons.base_same_flavor_wilsons.y_np_total
+                    ),
+                }
+            )
 
     return RareKaonLFVBranchingResult(
         model_label=RARE_KAON_LFV_DILEPTON_MODEL_V1,
@@ -489,6 +670,21 @@ def _weak_z_coupling(inputs: RareKaonDileptonSMInputs) -> float:
     g_weak = math.sqrt(4.0 * math.pi * inputs.alpha_em_mz / inputs.sin2_theta_w)
     cos_theta_w = math.sqrt(1.0 - inputs.sin2_theta_w)
     return float(g_weak / cos_theta_w)
+
+
+def _diagnostic_matching_scale(matching_scale_gev: float | None) -> float:
+    if matching_scale_gev is None:
+        return 0.0
+    return _positive_float(matching_scale_gev, "matching_scale_gev")
+
+
+def _kaon_lfv_c9_c10_to_y_norm(inputs: RareKaonLFVDileptonSMInputs) -> float:
+    return float(
+        math.sqrt(2.0)
+        * inputs.rare_kaon.gf_gev_minus2
+        * inputs.rare_kaon.alpha_em_mz
+        / (math.pi * rare_kaon_dilepton_g_sm_squared(inputs.rare_kaon))
+    )
 
 
 def _positive_float(value: object, name: str) -> float:
@@ -565,11 +761,17 @@ __all__ = [
     "RARE_KAON_LFV_DILEPTON_MODEL_V1",
     "RARE_KAON_LFV_DILEPTON_OPERATOR_CONVENTION",
     "RARE_KAON_LFV_DILEPTON_PROXY_V1",
+    "RARE_KAON_LFV_TREE_LEVEL_NOTE_V1",
+    "RARE_KAON_LFV_RS_MATCHING_STATUS_V1",
     "RARE_KAON_LFV_DILEPTON_PARAMETRIZATION_CITATION",
     "rare_kaon_lfv_default_sm_inputs",
     "rare_kaon_lfv_proxy_input",
     "rare_kaon_lfv_lepton_coupling_proxy",
     "rare_kaon_lfv_wilsons_from_couplings",
+    "rare_kaon_lfv_coeff_from_rs_semileptonic",
+    "rare_kaon_lfv_rs_semileptonic_diagnostics",
+    "rare_kaon_lfv_wilsons_from_rs_semileptonic",
     "rare_kaon_lfv_sm_branching_fraction",
     "klong_emu_from_couplings",
+    "klong_emu_from_rs_semileptonic_wilsons",
 ]

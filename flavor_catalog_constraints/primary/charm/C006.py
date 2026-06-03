@@ -11,7 +11,8 @@ This module reuses the shared C004/C005 ``c -> u l l`` machinery through the
 ``flavor_catalog_constraints.physics_adapters.rare_charm_lfv_dilepton``
 boundary.  The LFV extension keeps the same rare-charm Hamiltonian and uses
 the unequal-lepton pseudoscalar two-body formula with ``C9-C9'`` and
-``C10-C10'``.
+``C10-C10'`` fed directly from the Phase-4a LFV
+``rs_semileptonic_wilsons.lfv_llqq`` block.
 
 Severity
 --------
@@ -25,13 +26,13 @@ Catalog sidecar
 PDG/LHCb branching-fraction limit and provenance.  Numeric values below are
 loaded from that sidecar, not hardcoded here.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-A rigorous RS prediction needs the off-diagonal charged-lepton neutral-current
-``e mu`` coupling after EW KK/Z/Z' mixing and charged-lepton mass-basis
-rotation.  That coupling is not available as a standard ParameterPoint input.
-This v1 constraint accepts an explicit ``lepton_mass_basis_couplings`` proxy
-and marks the result NEEDS-HUMAN-PHYSICS.
+Phase-4c status
+---------------
+The tree-level LFV lepton coupling is now read from the Phase-4a lepton-aware
+semileptonic Wilson bundle.  For the current diagonal charged-lepton fit it is
+rigorously zero, so the tree-level LFV rate is zero and non-vetoing.  Nonzero
+tree-level rates require non-diagonal lepton structure; loop-induced LFV is
+deferred.
 """
 
 from __future__ import annotations
@@ -49,16 +50,15 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_charm_lfv_dilepton import (
-    RARE_CHARM_LFV_DILEPTON_PROXY_V1,
-    d0_emu_from_couplings,
+    RARE_CHARM_LFV_TREE_LEVEL_NOTE_V1,
+    d0_emu_from_rs_semileptonic_wilsons,
     rare_charm_lfv_default_sm_inputs,
     rare_charm_lfv_sm_branching_fraction,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "charm"
-_REQUIRED_QUARK_EXTRA = "quark_mass_basis_couplings"
-_REQUIRED_LEPTON_EXTRA = "lepton_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPECTED_UNITS = "branching fraction"
 
@@ -77,16 +77,8 @@ _PARAMETRIZATION_CITATION = (
     "Rare-charm c->u l l C9/C10 Hamiltonian reused from C004/C005; "
     "unequal-lepton pseudoscalar D0 -> e mu two-body normalization"
 )
-_UNEVALUATED_REASON = (
-    "missing c-u quark coupling or explicit e-mu lepton LFV proxy"
-)
+_UNEVALUATED_REASON = "missing rs_semileptonic_wilsons LFV llqq block"
 _UNEVALUATED_NOTES = f"NOT EVALUATED - {_UNEVALUATED_REASON}"
-_NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: the off-diagonal e-mu lepton neutral-current "
-    "coupling is not a standard ParameterPoint input; C006 v1 requires an "
-    "explicit lepton_mass_basis_couplings proxy and reuses the documented "
-    "rare-charm LFV Z-like matching."
-)
 
 
 @dataclass(frozen=True)
@@ -424,7 +416,8 @@ class Constraint:
             "sm_branching_fraction": 0.0,
             "sm_lfv_policy": (
                 "D0 -> e mu is charged-LFV and has zero SM rate for catalog "
-                "purposes; the HARD budget is applied to the pure-NP proxy."
+                "purposes; the HARD budget is applied to the pure-NP "
+                "tree-level prediction when the LFV llqq block is present."
             ),
             "charge_conjugate_modes_included": True,
             "rs_baseline_block": f"{rs.section_key}.{rs.block_key}",
@@ -437,8 +430,8 @@ class Constraint:
                 rs.composite_pseudo_goldstone_kk_gluon_scale_tev
             ),
             "parametrization_citation": _PARAMETRIZATION_CITATION,
-            "rs_matching_assumption": RARE_CHARM_LFV_DILEPTON_PROXY_V1,
-            "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+            "lfv_tree_level_note": RARE_CHARM_LFV_TREE_LEVEL_NOTE_V1,
+            "loop_lfv_status": "loop_induced_lfv_deferred",
         }
 
     def _unevaluated_result(self, diagnostics: Mapping[str, Any]) -> ConstraintResult:
@@ -464,34 +457,21 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        quark_input = point.get_extra(_REQUIRED_QUARK_EXTRA)
-        lepton_input = point.get_extra(_REQUIRED_LEPTON_EXTRA)
-        missing = [
-            key
-            for key, value in (
-                (_REQUIRED_QUARK_EXTRA, quark_input),
-                (_REQUIRED_LEPTON_EXTRA, lepton_input),
-            )
-            if value is None
-        ]
-        if missing:
-            return self._unevaluated_result({"missing_extras": tuple(missing)})
+        wilson_input = point.get_extra(_REQUIRED_EXTRA)
+        if wilson_input is None:
+            return self._unevaluated_result({"missing_extra": _REQUIRED_EXTRA})
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result = d0_emu_from_couplings(
-                quark_input,
-                lepton_input,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+            result = d0_emu_from_rs_semileptonic_wilsons(
+                wilson_input,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
             )
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
             return self._unevaluated_result(
                 {
-                    "invalid_extra": (
-                        _REQUIRED_QUARK_EXTRA,
-                        _REQUIRED_LEPTON_EXTRA,
-                    ),
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception": str(exc),
                 }
@@ -523,10 +503,10 @@ class Constraint:
             ratio=float(ratio),
             budget=budget,
             notes=(
-                "Pure-NP BR(D0 -> e+- mu-+) bound using the shared rare-charm "
-                "c->u l l C9/C10 Hamiltonian and an unequal-lepton D0 two-body "
-                "rate. The e-mu lepton coupling is an explicit documented "
-                "proxy and is flagged NEEDS-HUMAN-PHYSICS."
+                "Pure-NP BR(D0 -> e+- mu-+) bound using Phase-4a LFV llqq "
+                "Wilsons in the shared rare-charm C9/C10 Hamiltonian. "
+                "Tree-level LFV is rigorous and zero for the diagonal "
+                "charged-lepton fit; loop-induced LFV is deferred."
             ),
             diagnostics=diagnostics,
         )

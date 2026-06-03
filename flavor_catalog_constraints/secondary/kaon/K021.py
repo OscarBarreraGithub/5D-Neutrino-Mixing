@@ -7,8 +7,9 @@ rate is zero for catalog purposes.  K021 applies a pure-NP HARD upper bound,
 
     BR_NP(K_L -> pi0 e+- mu-+) <= BR_exp^upper.
 
-The short-distance proxy reuses the shared ``s -> d l l`` rare-kaon machinery
-and the K019 off-diagonal e-mu lepton-coupling pattern through
+The short-distance tree-level prediction reuses the shared ``s -> d l l``
+rare-kaon machinery and the Phase-4a LFV
+``rs_semileptonic_wilsons.lfv_llqq`` e-mu block through
 ``flavor_catalog_constraints.physics_adapters.rare_kaon_lfv_semileptonic``.
 The K021 neutral-mode adapter helper is append-only relative to K020: it keeps
 the same K->pi vector-current form-factor and three-body q2/angular integral,
@@ -27,15 +28,13 @@ Catalog sidecar
 for the PDG/KTeV branching-fraction limit and provenance.  Numeric values
 below are loaded through the scaffold anchor loader, not hardcoded here.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-A rigorous RS prediction needs the off-diagonal charged-lepton neutral-current
-``e mu`` coupling after EW KK/Z/Z' mixing and charged-lepton mass-basis
-rotation, plus the complete K_L CP-eigenstate sd/ds phase convention for the
-LFV charge orientations.  Those ingredients are not standard
-``ParameterPoint`` inputs.  This v1 constraint accepts an explicit
-``lepton_mass_basis_couplings`` proxy and marks the result
-NEEDS-HUMAN-PHYSICS.
+Phase-4c status
+---------------
+The tree-level LFV lepton coupling is now read from the Phase-4a lepton-aware
+semileptonic Wilson bundle.  For the current diagonal charged-lepton fit it is
+rigorously zero, so the tree-level LFV rate is zero and non-vetoing.  Nonzero
+tree-level rates require non-diagonal lepton structure; loop-induced LFV is
+deferred.
 """
 
 from __future__ import annotations
@@ -59,9 +58,9 @@ from flavor_catalog_constraints.base import (
 )
 from flavor_catalog_constraints.physics_adapters.rare_kaon_lfv_semileptonic import (
     RARE_KAON_KL_PI0_EMU_PARAMETRIZATION_CITATION,
-    RARE_KAON_KL_PI0_EMU_PROXY_V1,
     RARE_KAON_KL_PI0_EMU_Q2_TREATMENT_V1,
-    klong_pi0_emu_from_couplings,
+    RARE_KAON_LFV_TREE_LEVEL_NOTE_V1,
+    klong_pi0_emu_from_rs_semileptonic_wilsons,
     klong_pi0_emu_sm,
     rare_kaon_klong_pi0_emu_default_inputs,
 )
@@ -69,8 +68,7 @@ from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
 _TIER = ConstraintLevel.SECONDARY
-_REQUIRED_QUARK_EXTRA = "quark_mass_basis_couplings"
-_REQUIRED_LEPTON_EXTRA = "lepton_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _CURRENT_LIMIT_VALUE_ID = "PDG2025:K021:KL_pi0emu_limit"
 _KTEV_VALUE_ID = "KTeV2008:K021:KL_pi0mue_limit"
@@ -84,17 +82,8 @@ _BUDGET_SOURCE = (
     "PDG2025:K021:KL_pi0emu_limit "
     "(PDG 2025 K_L listing / KTeV 90% CL limit, charge-summed)"
 )
-_UNEVALUATED_REASON = (
-    "missing s-d quark coupling or explicit e-mu lepton LFV proxy"
-)
+_UNEVALUATED_REASON = "missing rs_semileptonic_wilsons LFV llqq block"
 _UNEVALUATED_NOTES = f"NOT EVALUATED - {_UNEVALUATED_REASON}"
-_NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: the off-diagonal e-mu lepton neutral-current "
-    "coupling and full K_L charge-orientation CP matching are not standard "
-    "ParameterPoint inputs; K021 v1 requires an explicit "
-    "lepton_mass_basis_couplings proxy and reuses the documented rare-kaon "
-    "LFV Z-like matching."
-)
 
 
 @dataclass(frozen=True)
@@ -364,7 +353,8 @@ class Constraint:
             "sm_lfv_policy": (
                 "K_L -> pi0 e mu is charged-LFV and has zero SM rate for "
                 "catalog purposes; the HARD budget is applied to the pure-NP "
-                "short-distance proxy."
+                "short-distance tree-level prediction when the LFV llqq block "
+                "is present."
             ),
             "charge_mode": _CHARGE_MODE,
             "charge_conjugate_modes_included": True,
@@ -373,8 +363,8 @@ class Constraint:
                 RARE_KAON_KL_PI0_EMU_PARAMETRIZATION_CITATION
             ),
             "q2_treatment": RARE_KAON_KL_PI0_EMU_Q2_TREATMENT_V1,
-            "rs_matching_assumption": RARE_KAON_KL_PI0_EMU_PROXY_V1,
-            "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+            "lfv_tree_level_note": RARE_KAON_LFV_TREE_LEVEL_NOTE_V1,
+            "loop_lfv_status": "loop_induced_lfv_deferred",
         }
 
     def _unevaluated_result(self, diagnostics: Mapping[str, Any]) -> ConstraintResult:
@@ -401,35 +391,22 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        quark_input = point.get_extra(_REQUIRED_QUARK_EXTRA)
-        lepton_input = point.get_extra(_REQUIRED_LEPTON_EXTRA)
-        missing = [
-            key
-            for key, value in (
-                (_REQUIRED_QUARK_EXTRA, quark_input),
-                (_REQUIRED_LEPTON_EXTRA, lepton_input),
-            )
-            if value is None
-        ]
-        if missing:
-            return self._unevaluated_result({"missing_extras": tuple(missing)})
+        wilson_input = point.get_extra(_REQUIRED_EXTRA)
+        if wilson_input is None:
+            return self._unevaluated_result({"missing_extra": _REQUIRED_EXTRA})
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result = klong_pi0_emu_from_couplings(
-                quark_input,
-                lepton_input,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+            result = klong_pi0_emu_from_rs_semileptonic_wilsons(
+                wilson_input,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
                 charge_mode=_CHARGE_MODE,
             )
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
             return self._unevaluated_result(
                 {
-                    "invalid_extra": (
-                        _REQUIRED_QUARK_EXTRA,
-                        _REQUIRED_LEPTON_EXTRA,
-                    ),
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception": str(exc),
                 }
@@ -464,12 +441,11 @@ class Constraint:
             ratio=float(ratio),
             budget=budget,
             notes=(
-                "Pure-NP BR(K_L -> pi0 e+- mu-+) bound using the shared "
-                "rare-kaon s->d l l Wilson proxy, the K019 e-mu lepton "
-                "spurion pattern, neutral K->pi form-factor three-body "
-                "phase-space integration, and the YAML charge-summed limit. "
-                "The e-mu lepton coupling and K_L CP matching are explicit "
-                "documented proxies and are flagged NEEDS-HUMAN-PHYSICS."
+                "Pure-NP BR(K_L -> pi0 e+- mu-+) bound using Phase-4a LFV "
+                "llqq Wilsons additively mapped into the neutral rare-kaon "
+                "K->pi inputs and the YAML charge-summed limit. Tree-level "
+                "LFV is rigorous and zero for the diagonal charged-lepton "
+                "fit; loop-induced LFV is deferred."
             ),
             diagnostics=diagnostics,
         )

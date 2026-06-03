@@ -10,9 +10,9 @@ is zero for catalog purposes.  K019 therefore applies a pure-NP upper bound,
 This module reuses the shared ``s -> d l l`` rare-kaon dilepton machinery
 through the
 ``flavor_catalog_constraints.physics_adapters.rare_kaon_lfv_dilepton``
-boundary.  The K019 adapter keeps the K006 ``kappa_mu`` and quark-side
-``s -> d`` Wilson proxy, then adds the unequal-lepton two-body phase-space
-normalization for a vector/axial LFV e-mu effective coupling.
+boundary.  The K019 adapter keeps the K006 ``kappa_mu`` normalization and
+feeds the Phase-4a rigorous ``rs_semileptonic_wilsons.lfv_llqq`` e-mu block
+into the unequal-lepton two-body phase-space normalization.
 
 Severity
 --------
@@ -27,13 +27,13 @@ for the BNL E871/PDG branching-fraction limit and provenance.  Numeric values
 below are loaded from that sidecar through the scaffold anchor loader, not
 hardcoded here.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-A rigorous RS prediction needs the off-diagonal charged-lepton neutral-current
-``e mu`` coupling after EW KK/Z/Z' mixing and charged-lepton mass-basis
-rotation.  That coupling is not a standard ParameterPoint input.  This v1
-constraint accepts an explicit ``lepton_mass_basis_couplings`` proxy and marks
-the result NEEDS-HUMAN-PHYSICS.
+Phase-4c status
+---------------
+The tree-level LFV lepton coupling is now read from the Phase-4a lepton-aware
+semileptonic Wilson bundle.  For the current diagonal charged-lepton fit it is
+rigorously zero, so the tree-level LFV rate is zero and non-vetoing.  Nonzero
+tree-level rates require non-diagonal lepton structure; loop-induced LFV is
+deferred.
 """
 
 from __future__ import annotations
@@ -57,8 +57,8 @@ from flavor_catalog_constraints.base import (
 )
 from flavor_catalog_constraints.physics_adapters.rare_kaon_lfv_dilepton import (
     RARE_KAON_LFV_DILEPTON_PARAMETRIZATION_CITATION,
-    RARE_KAON_LFV_DILEPTON_PROXY_V1,
-    klong_emu_from_couplings,
+    RARE_KAON_LFV_TREE_LEVEL_NOTE_V1,
+    klong_emu_from_rs_semileptonic_wilsons,
     rare_kaon_lfv_default_sm_inputs,
     rare_kaon_lfv_sm_branching_fraction,
 )
@@ -66,8 +66,7 @@ from flavor_catalog_constraints.registry import register
 
 _FAMILY = "kaon"
 _TIER = ConstraintLevel.SECONDARY
-_REQUIRED_QUARK_EXTRA = "quark_mass_basis_couplings"
-_REQUIRED_LEPTON_EXTRA = "lepton_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _PDG_BLOCK = "pdg_or_equivalent"
 _EXPERIMENT_INPUT_KEY = "experiment_input"
@@ -78,16 +77,8 @@ _BUDGET_SOURCE = (
     "flavor_catalog/processes/secondary/kaon/K019.yaml pdg_or_equivalent "
     "(PDG 2025 K_L listing / BNL E871 final 90% CL limit)"
 )
-_UNEVALUATED_REASON = (
-    "missing s-d quark coupling or explicit e-mu lepton LFV proxy"
-)
+_UNEVALUATED_REASON = "missing rs_semileptonic_wilsons LFV llqq block"
 _UNEVALUATED_NOTES = f"NOT EVALUATED - {_UNEVALUATED_REASON}"
-_NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: the off-diagonal e-mu lepton neutral-current "
-    "coupling is not a standard ParameterPoint input; K019 v1 requires an "
-    "explicit lepton_mass_basis_couplings proxy and reuses the documented "
-    "rare-kaon LFV Z-like matching."
-)
 
 
 @dataclass(frozen=True)
@@ -334,14 +325,15 @@ class Constraint:
             "sm_branching_fraction": 0.0,
             "sm_lfv_policy": (
                 "K_L -> e mu is charged-LFV and has zero SM rate for catalog "
-                "purposes; the HARD budget is applied to the pure-NP proxy."
+                "purposes; the HARD budget is applied to the pure-NP "
+                "tree-level prediction when the LFV llqq block is present."
             ),
             "charge_conjugate_modes_included": True,
             "parametrization_citation": (
                 RARE_KAON_LFV_DILEPTON_PARAMETRIZATION_CITATION
             ),
-            "rs_matching_assumption": RARE_KAON_LFV_DILEPTON_PROXY_V1,
-            "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+            "lfv_tree_level_note": RARE_KAON_LFV_TREE_LEVEL_NOTE_V1,
+            "loop_lfv_status": "loop_induced_lfv_deferred",
         }
 
     def _unevaluated_result(self, diagnostics: Mapping[str, Any]) -> ConstraintResult:
@@ -367,34 +359,21 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        quark_input = point.get_extra(_REQUIRED_QUARK_EXTRA)
-        lepton_input = point.get_extra(_REQUIRED_LEPTON_EXTRA)
-        missing = [
-            key
-            for key, value in (
-                (_REQUIRED_QUARK_EXTRA, quark_input),
-                (_REQUIRED_LEPTON_EXTRA, lepton_input),
-            )
-            if value is None
-        ]
-        if missing:
-            return self._unevaluated_result({"missing_extras": tuple(missing)})
+        wilson_input = point.get_extra(_REQUIRED_EXTRA)
+        if wilson_input is None:
+            return self._unevaluated_result({"missing_extra": _REQUIRED_EXTRA})
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result = klong_emu_from_couplings(
-                quark_input,
-                lepton_input,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+            result = klong_emu_from_rs_semileptonic_wilsons(
+                wilson_input,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sm_inputs,
             )
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
             return self._unevaluated_result(
                 {
-                    "invalid_extra": (
-                        _REQUIRED_QUARK_EXTRA,
-                        _REQUIRED_LEPTON_EXTRA,
-                    ),
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception": str(exc),
                 }
@@ -426,10 +405,10 @@ class Constraint:
             ratio=float(ratio),
             budget=budget,
             notes=(
-                "Pure-NP BR(K_L -> e+- mu-+) bound using the shared rare-kaon "
-                "s->d l l Y-function normalization and an unequal-lepton "
-                "K_L two-body rate. The e-mu lepton coupling is an explicit "
-                "documented proxy and is flagged NEEDS-HUMAN-PHYSICS."
+                "Pure-NP BR(K_L -> e+- mu-+) bound using Phase-4a LFV llqq "
+                "Wilsons additively mapped into the rare-kaon Y inputs. "
+                "Tree-level LFV is rigorous and zero for the diagonal "
+                "charged-lepton fit; loop-induced LFV is deferred."
             ),
             diagnostics=diagnostics,
         )

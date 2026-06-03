@@ -5,236 +5,28 @@ from __future__ import annotations
 import math
 from pathlib import Path
 
-import numpy as np
 import pytest
 import yaml
 
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
-from flavor_catalog_constraints.physics_adapters.rare_charm_lfv_semileptonic import (
-    rare_charm_lfv_proxy_input,
+from tests.constraints.lfv_rare_phase4c_helpers import (
+    diagonal_lfv_rare_point,
+    lfv_coeff,
+    lfv_live_rare_point,
+    manual_dtopi_emu_rate,
+    scaled_lfv_rare_point,
 )
-from quarkConstraints.couplings import QuarkMassBasisCouplings
-from quarkConstraints.rare_charm_lfv_dilepton import compute_rare_charm_lfv_wilsons
-from quarkConstraints.rare_charm_semileptonic import dtopi_fplus, dtopi_fzero
 
 _PID = "C008"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 _SIDECAR = _REPO_ROOT / "flavor_catalog" / "processes" / "charm" / "C008.yaml"
-_METRIC = np.diag([1.0, -1.0, -1.0, -1.0])
 
 
 def _yaml():
     with open(_SIDECAR) as handle:
         return yaml.safe_load(handle)
-
-
-def _uc_couplings(
-    left: complex,
-    right: complex = 0.0j,
-    M_KK: float = 3000.0,
-) -> QuarkMassBasisCouplings:
-    """Minimal valid mass-basis couplings with only the u-c slot populated."""
-
-    zeros = np.zeros((3, 3), dtype=np.complex128)
-    left_up = zeros.copy()
-    right_up = zeros.copy()
-    left_up[0, 1] = left
-    left_up[1, 0] = np.conj(left)
-    right_up[0, 1] = right
-    right_up[1, 0] = np.conj(right)
-    return QuarkMassBasisCouplings(
-        M_KK=M_KK,
-        xi_KK=1.0,
-        alpha_s=0.09,
-        g_s=1.0,
-        left_overlap=zeros,
-        right_up_overlap=zeros,
-        right_down_overlap=zeros,
-        left_up=left_up,
-        left_down=zeros.copy(),
-        right_up=right_up,
-        right_down=zeros.copy(),
-    )
-
-
-def _lfv_proxy(
-    left_emu_overlap: complex,
-    right_emu_overlap: complex = 0.0j,
-    *,
-    m_kk_gev: float = 3000.0,
-):
-    return rare_charm_lfv_proxy_input(
-        left_emu_overlap,
-        right_emu_overlap,
-        m_kk_gev,
-        source="C008 test lepton proxy",
-    )
-
-
-def _point(
-    quark: QuarkMassBasisCouplings,
-    lepton,
-    *,
-    kk_ew_mass_gev: float | None = None,
-):
-    extras = {
-        "quark_mass_basis_couplings": quark,
-        "lepton_mass_basis_couplings": lepton,
-    }
-    if kk_ew_mass_gev is not None:
-        extras["kk_ew_mass_gev"] = kk_ew_mass_gev
-    return point_builder.make_point(**extras)
-
-
-def _manual_kallen(a: float, b: float, c: float) -> float:
-    return a * a + b * b + c * c - 2.0 * (a * b + a * c + b * c)
-
-
-def _manual_dtopi_emu_proxy(
-    couplings: QuarkMassBasisCouplings,
-    lepton_proxy,
-    inputs,
-    *,
-    m_kk_gev: float | None = None,
-    charge_mode: str = "eplus_muminus",
-) -> float:
-    wilsons = compute_rare_charm_lfv_wilsons(
-        couplings,
-        lepton_proxy,
-        transition="c_u",
-        m_kk_gev=m_kk_gev,
-        inputs=inputs.rare_charm,
-    )
-    c9_semileptonic = wilsons.c9_lfv_np + wilsons.c9p_lfv_np
-    c10_semileptonic = wilsons.c10_lfv_np + wilsons.c10p_lfv_np
-
-    m_d = inputs.dplus_mass_gev
-    m_pi = inputs.piplus_mass_gev
-    m_e = inputs.rare_charm.electron.mass_gev
-    m_mu = inputs.rare_charm.muon.mass_gev
-    if charge_mode == "eplus_muminus":
-        m_minus, m_plus = m_mu, m_e
-    elif charge_mode == "eminus_muplus":
-        m_minus, m_plus = m_e, m_mu
-    else:
-        raise ValueError(charge_mode)
-    q2_min = (m_e + m_mu) ** 2
-    q2_max = (m_d - m_pi) ** 2
-    tau = inputs.dplus_lifetime_ps * 1.0e-12 / inputs.rare_charm.hbar_gev_s
-    gamma0 = (
-        inputs.rare_charm.gf_gev_minus2**2
-        * inputs.rare_charm.alpha_em_mz**2
-        * abs(wilsons.lambda_b) ** 2
-        / ((4.0 * math.pi) ** 5 * m_d**3)
-    )
-
-    q_nodes, q_weights = np.polynomial.legendre.leggauss(inputs.quadrature_points)
-    a_nodes, a_weights = np.polynomial.legendre.leggauss(48)
-    mid = 0.5 * (q2_max + q2_min)
-    half_width = 0.5 * (q2_max - q2_min)
-    total = 0.0
-    for q_node, q_weight in zip(q_nodes, q_weights):
-        q2 = mid + half_width * float(q_node)
-        lam_had = _manual_kallen(m_d * m_d, m_pi * m_pi, q2)
-        lam_lep = _manual_kallen(q2, m_minus * m_minus, m_plus * m_plus)
-        beta_lfv = math.sqrt(max(0.0, lam_lep)) / q2
-        angular = 0.0
-        for cos_theta, a_weight in zip(a_nodes, a_weights):
-            vector, axial = _manual_tensor_contractions(
-                q2,
-                float(cos_theta),
-                m_minus=m_minus,
-                m_plus=m_plus,
-                inputs=inputs,
-            )
-            angular += float(a_weight) * (
-                abs(c9_semileptonic) ** 2 * vector
-                + abs(c10_semileptonic) ** 2 * axial
-            )
-        total += (
-            float(q_weight)
-            * tau
-            * gamma0
-            * math.sqrt(max(0.0, lam_had))
-            * beta_lfv
-            * angular
-            / 4.0
-        )
-    return float(half_width * total)
-
-
-def _manual_tensor_contractions(
-    q2: float,
-    cos_theta: float,
-    *,
-    m_minus: float,
-    m_plus: float,
-    inputs,
-) -> tuple[float, float]:
-    root_q2 = math.sqrt(q2)
-    m_d = inputs.dplus_mass_gev
-    m_pi = inputs.piplus_mass_gev
-    m_d2 = m_d * m_d
-    m_pi2 = m_pi * m_pi
-    delta = m_d2 - m_pi2
-    lam_had = _manual_kallen(m_d2, m_pi2, q2)
-    lam_lep = _manual_kallen(q2, m_minus * m_minus, m_plus * m_plus)
-    p_had = math.sqrt(max(0.0, lam_had)) / (2.0 * root_q2)
-    p_lep = math.sqrt(max(0.0, lam_lep)) / (2.0 * root_q2)
-    e_d = (m_d2 - m_pi2 + q2) / (2.0 * root_q2)
-    e_pi = (m_d2 - m_pi2 - q2) / (2.0 * root_q2)
-    e_minus = (q2 + m_minus * m_minus - m_plus * m_plus) / (2.0 * root_q2)
-    e_plus = (q2 + m_plus * m_plus - m_minus * m_minus) / (2.0 * root_q2)
-    sin_theta = math.sqrt(max(0.0, 1.0 - cos_theta * cos_theta))
-
-    p_d = np.array([e_d, 0.0, 0.0, p_had], dtype=np.complex128)
-    p_pi = np.array([e_pi, 0.0, 0.0, p_had], dtype=np.complex128)
-    q_vec = np.array([root_q2, 0.0, 0.0, 0.0], dtype=np.complex128)
-    p_minus = np.array(
-        [e_minus, p_lep * sin_theta, 0.0, p_lep * cos_theta],
-        dtype=np.complex128,
-    )
-    p_plus = np.array(
-        [e_plus, -p_lep * sin_theta, 0.0, -p_lep * cos_theta],
-        dtype=np.complex128,
-    )
-    fplus = dtopi_fplus(q2, inputs)
-    fzero = dtopi_fzero(q2, inputs)
-    hadronic = fplus * (p_d + p_pi - delta / q2 * q_vec) + fzero * delta / q2 * q_vec
-    hadronic_cov = _METRIC @ hadronic
-    p_dot = float(np.real(p_minus @ _METRIC @ p_plus))
-    vector_tensor = _manual_lepton_tensor(p_minus, p_plus, p_dot + m_minus * m_plus)
-    axial_tensor = _manual_lepton_tensor(p_minus, p_plus, p_dot - m_minus * m_plus)
-    return (
-        _manual_contract(hadronic_cov, vector_tensor),
-        _manual_contract(hadronic_cov, axial_tensor),
-    )
-
-
-def _manual_lepton_tensor(
-    p_minus: np.ndarray,
-    p_plus: np.ndarray,
-    metric_term: float,
-) -> np.ndarray:
-    tensor = np.zeros((4, 4), dtype=np.complex128)
-    for mu in range(4):
-        for nu in range(4):
-            tensor[mu, nu] = 4.0 * (
-                p_minus[mu] * p_plus[nu]
-                + p_minus[nu] * p_plus[mu]
-                - _METRIC[mu, nu] * metric_term
-            )
-    return tensor
-
-
-def _manual_contract(hadronic_cov: np.ndarray, tensor: np.ndarray) -> float:
-    value = 0.0j
-    for mu in range(4):
-        for nu in range(4):
-            value += hadronic_cov[mu] * np.conjugate(hadronic_cov[nu]) * tensor[mu, nu]
-    return float(np.real(value))
 
 
 def test_registration_metadata():
@@ -244,7 +36,7 @@ def test_registration_metadata():
     assert constraint.process_id == _PID
     assert constraint.severity is Severity.HARD
     assert constraint.family == "charm"
-    assert constraint.observable == "BR(D+ -> pi+ e+- mu-+) LFV full-q2 proxy"
+    assert constraint.observable == "BR(D+ -> pi+ e+- mu-+) LFV full-q2 tree-level"
 
 
 def test_anchor_matches_yaml_and_budget():
@@ -299,7 +91,7 @@ def test_anchor_loading_fails_loudly_for_missing_candidate_or_value():
         )
 
 
-def test_evaluate_without_required_inputs_degrades_gracefully():
+def test_absent_rs_semileptonic_wilsons_degrades_gracefully():
     constraint = fcc.get(_PID)
     result = constraint.evaluate(point_builder.empty_point())
 
@@ -312,20 +104,12 @@ def test_evaluate_without_required_inputs_degrades_gracefully():
     assert result.budget == pytest.approx(constraint.anchor.budget)
     assert result.notes.startswith("NOT EVALUATED -")
     assert result.diagnostics["evaluated"] is False
-    assert result.diagnostics["missing_extras"] == (
-        "quark_mass_basis_couplings",
-        "lepton_mass_basis_couplings",
-    )
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert result.diagnostics["missing_extra"] == "rs_semileptonic_wilsons"
 
 
-def test_invalid_lepton_proxy_is_unevaluated_not_real_pass():
-    quark = _uc_couplings(left=1.0)
+def test_invalid_rs_semileptonic_wilsons_is_unevaluated_not_real_pass():
     result = fcc.get(_PID).evaluate(
-        point_builder.make_point(
-            quark_mass_basis_couplings=quark,
-            lepton_mass_basis_couplings={},
-        )
+        point_builder.make_point(rs_semileptonic_wilsons=object())
     )
 
     assert result.passes is True
@@ -333,61 +117,68 @@ def test_invalid_lepton_proxy_is_unevaluated_not_real_pass():
     assert result.ratio is None
     assert result.notes.startswith("NOT EVALUATED -")
     assert result.diagnostics["evaluated"] is False
-    assert result.diagnostics["invalid_extra"] == (
-        "quark_mass_basis_couplings",
-        "lepton_mass_basis_couplings",
-    )
-    assert result.diagnostics["exception_type"] == "KeyError"
+    assert result.diagnostics["invalid_extra"] == "rs_semileptonic_wilsons"
+    assert result.diagnostics["exception_type"] == "ValueError"
 
 
-def test_zero_np_prediction_and_sm_lfv_policy():
-    constraint = fcc.get(_PID)
-    quark = _uc_couplings(left=0.0j, right=0.0j)
-    lepton = _lfv_proxy(left_emu_overlap=0.5, right_emu_overlap=0.2j)
-    result = constraint.evaluate(_point(quark, lepton))
+def test_diagonal_rs_ew_builder_gives_zero_tree_lfv_and_resolves_proxy_flag():
+    result = fcc.get(_PID).evaluate(diagonal_lfv_rare_point())
+    coeff = lfv_coeff(diagonal_lfv_rare_point(), "c_to_u")
 
-    assert constraint.sm_result.branching_fraction == pytest.approx(0.0)
+    assert coeff.c9_lfv_np == pytest.approx(0.0j, abs=1.0e-24)
     assert result.predicted == pytest.approx(0.0)
-    assert result.sm_prediction == pytest.approx(0.0)
-    assert result.diagnostics["sm_lfv_policy"].startswith("D+ -> pi+ e mu")
-    assert result.diagnostics["prediction_per_charge_mode_branching_fraction"] == (
-        pytest.approx(0.0)
-    )
+    assert result.ratio == pytest.approx(0.0)
     assert result.passes is True
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["tree_level_matching_status"] == (
+        "rigorous_tree_light_z_lfv_llqq_from_rs_semileptonic_wilsons"
+    )
+    assert "diagonal charged-lepton fit" in result.diagnostics["lfv_tree_level_note"]
+    assert "NEEDS-HUMAN-PHYSICS" not in str(result.diagnostics)
+    assert "proxy" not in result.notes.lower()
 
 
-def test_lfv_dtopi_proxy_matches_independent_manual_integration():
+def test_lfv_live_toy_matches_independent_rate_and_mkk_scaling():
     constraint = fcc.get(_PID)
-    quark = _uc_couplings(left=2.0e-2 + 0.3e-2j, right=0.4e-2j)
-    lepton = _lfv_proxy(left_emu_overlap=0.40 + 0.10j, right_emu_overlap=0.05j)
-    result = constraint.evaluate(_point(quark, lepton))
-    manual = _manual_dtopi_emu_proxy(quark, lepton, constraint.sd_inputs)
+    low_point = lfv_live_rare_point(3000.0)
+    high_point = lfv_live_rare_point(6000.0)
+    low = constraint.evaluate(low_point)
+    high = constraint.evaluate(high_point)
+    coeff = lfv_coeff(low_point, "c_to_u")
+    manual = manual_dtopi_emu_rate(
+        coeff,
+        constraint.sd_inputs,
+        charge_mode="eplus_muminus",
+    )
 
-    assert result.predicted == pytest.approx(manual, rel=1e-12, abs=0.0)
-    assert result.predicted == pytest.approx(
-        1.2409725765054486e-11,
-        rel=1e-12,
-        abs=0.0,
-    )
-    assert result.diagnostics["eplus_muminus_ratio"] == pytest.approx(
-        result.predicted / constraint.anchor.eplus_muminus_limit.value
-    )
-    assert result.diagnostics["eminus_muplus_ratio"] == pytest.approx(
-        result.predicted / constraint.anchor.eminus_muplus_limit.value
-    )
-    assert result.ratio == pytest.approx(
+    assert abs(coeff.c9_lfv_np) > 0.0
+    assert low.predicted == pytest.approx(manual, rel=1.0e-12, abs=1.0e-30)
+    assert low.ratio == pytest.approx(
         max(
-            result.diagnostics["eplus_muminus_ratio"],
-            result.diagnostics["eminus_muplus_ratio"],
+            low.predicted / constraint.anchor.eplus_muminus_limit.value,
+            low.predicted / constraint.anchor.eminus_muplus_limit.value,
         )
     )
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["rs_matching_assumption"]
+    assert high.predicted / low.predicted == pytest.approx(
+        (3000.0 / 6000.0) ** 8,
+        rel=1.0e-8,
+    )
+    assert low.diagnostics["semileptonic_primed_combination_is_plus"] is True
+    assert low.diagnostics["wilson_prefactor_reused"] is False
+    assert low.diagnostics["second_mkk_suppression_applied"] is False
+
+
+def test_amplified_lfv_live_toy_bites_limit():
+    result = fcc.get(_PID).evaluate(
+        scaled_lfv_rare_point(lfv_live_rare_point(), "c_to_u", 1.0e5)
+    )
+
+    assert result.passes is False
+    assert result.ratio > 1.0
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
-    quark = _uc_couplings(left=1.0e-2 + 0.2e-2j, right=0.5e-2j)
-    lepton = _lfv_proxy(left_emu_overlap=0.3 + 0.1j, right_emu_overlap=0.2j)
-    result = fcc.get(_PID).evaluate(_point(quark, lepton))
+    result = fcc.get(_PID).evaluate(lfv_live_rare_point())
 
     assert result.process_id == _PID
     for value in (
@@ -400,86 +191,27 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
         assert isinstance(value, float)
         assert math.isfinite(value)
     for key in (
-        "left_uc_coupling",
-        "right_uc_coupling",
-        "lambda_b",
-        "lepton_left_delta_emu",
-        "lepton_right_delta_emu",
+        "rs_semileptonic_lambda_ckm",
         "c9_lfv_semileptonic_np",
         "c10_lfv_semileptonic_np",
         "c9_lfv_np",
         "c10_lfv_np",
     ):
         assert isinstance(result.diagnostics[key], complex)
-    for key in (
-        "m_kk_gev",
-        "matching_scale_gev",
-        "q2_min_gev2",
-        "q2_max_gev2",
-        "prediction_per_charge_mode_branching_fraction",
-        "np_shift_branching_fraction",
-    ):
-        assert isinstance(result.diagnostics[key], float)
-        assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["rs_semileptonic_wilsons_present"] is True
     assert result.diagnostics["wilson_coefficients"]
-    assert result.diagnostics["semileptonic_primed_combination_is_plus"] is True
     assert result.diagnostics["scalar_tensor_operators_included"] is False
     assert result.diagnostics["lhcb_window_acceptance_applied"] is False
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
-
-
-@pytest.mark.parametrize(
-    ("quark", "lepton", "expected_pass"),
-    [
-        (_uc_couplings(left=1.0), _lfv_proxy(0.5), True),
-        (_uc_couplings(left=5.0), _lfv_proxy(1.0), False),
-    ],
-)
-def test_safe_point_passes_and_large_np_point_fails(
-    quark: QuarkMassBasisCouplings,
-    lepton,
-    expected_pass: bool,
-):
-    constraint = fcc.get(_PID)
-    result = constraint.evaluate(_point(quark, lepton))
-
-    assert result.passes is expected_pass
-    if expected_pass:
-        assert result.ratio < 1.0
-    else:
-        assert result.ratio > 1.0
-
-
-def test_optional_kk_ew_mass_extra_changes_matching_scale():
-    quark = _uc_couplings(left=1.0)
-    lepton = _lfv_proxy(left_emu_overlap=0.5)
-    default_result = fcc.get(_PID).evaluate(_point(quark, lepton))
-    heavy_result = fcc.get(_PID).evaluate(
-        _point(quark, lepton, kk_ew_mass_gev=6000.0)
-    )
-
-    assert default_result.diagnostics["m_kk_gev"] == pytest.approx(3000.0)
-    assert heavy_result.diagnostics["m_kk_gev"] == pytest.approx(6000.0)
-    assert heavy_result.diagnostics["kk_ew_mass_extra_used"] is True
-    assert abs(heavy_result.diagnostics["c10_lfv_semileptonic_np"]) == pytest.approx(
-        abs(default_result.diagnostics["c10_lfv_semileptonic_np"]) / 4.0
-    )
-    assert heavy_result.predicted == pytest.approx(default_result.predicted / 16.0)
 
 
 def test_evaluate_is_pure_and_deterministic():
-    quark = _uc_couplings(left=1.0 + 0.2j, right=0.5j)
-    lepton = _lfv_proxy(left_emu_overlap=0.3 + 0.1j, right_emu_overlap=0.2j)
-    before_left_up = quark.left_up.copy()
-    before_right_up = quark.right_up.copy()
-    point = _point(quark, lepton)
+    point = lfv_live_rare_point()
+    before_bundle = point.extras["rs_semileptonic_wilsons"]
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    np.testing.assert_array_equal(quark.left_up, before_left_up)
-    np.testing.assert_array_equal(quark.right_up, before_right_up)
-    assert point.get_extra("lepton_mass_basis_couplings") == lepton
+    assert point.extras["rs_semileptonic_wilsons"] is before_bundle

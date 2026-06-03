@@ -4,13 +4,14 @@ Physics
 -------
 The Standard Model rate is zero for catalog purposes, so C008 is a pure-NP
 upper-bound constraint.  This module reuses the C007 D-to-pi form-factor
-machinery and the C006 charged-LFV ``e mu`` Wilson proxy through
+machinery and the Phase-4a LFV ``rs_semileptonic_wilsons.lfv_llqq`` block through
 ``flavor_catalog_constraints.physics_adapters.rare_charm_lfv_semileptonic``.
 
 The constrained prediction is a one-charge-mode smooth full-q2 short-distance
-proxy with vector/axial ``C9_LFV + C9p_LFV`` and ``C10_LFV + C10p_LFV``.  The
-same v1 e-mu proxy prediction is compared to both PDG/LHCb charge-mode limits
-from the C008 YAML, and the larger saturation is used for the HARD veto.
+tree-level rate with vector/axial ``C9_LFV + C9p_LFV`` and
+``C10_LFV + C10p_LFV``.  The same tree-level e-mu prediction is compared to
+both PDG/LHCb charge-mode limits from the C008 YAML, and the larger saturation
+is used for the HARD veto.
 
 Severity
 --------
@@ -24,14 +25,14 @@ Catalog sidecar
 two PDG/LHCb branching-fraction limits and provenance.  Numeric limit values
 below are loaded from that sidecar through the scaffold anchor loader.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-A rigorous RS prediction needs charge-mode-specific off-diagonal charged-lepton
-neutral-current couplings after EW KK/Z/Z' mixing and charged-lepton mass-basis
-rotation, plus scalar/tensor and LHCb acceptance information.  Those inputs are
-not available on ``ParameterPoint``.  This v1 constraint requires an explicit
-``lepton_mass_basis_couplings`` e-mu proxy and flags the result
-NEEDS-HUMAN-PHYSICS.
+Phase-4c status
+---------------
+The tree-level LFV lepton coupling is now read from the Phase-4a lepton-aware
+semileptonic Wilson bundle.  For the current diagonal charged-lepton fit it is
+rigorously zero, so the tree-level LFV rate is zero and non-vetoing.  Nonzero
+tree-level rates require non-diagonal lepton structure; loop-induced LFV is
+deferred.  Scalar/tensor, resonance, and LHCb acceptance effects remain
+outside this short-distance tree-level rewire.
 """
 
 from __future__ import annotations
@@ -49,18 +50,16 @@ from flavor_catalog_constraints.anchors import (
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_charm_lfv_semileptonic import (
     RARE_CHARM_DTOPI_EMU_PARAMETRIZATION_CITATION,
-    RARE_CHARM_DTOPI_EMU_PROXY_V1,
     RARE_CHARM_DTOPI_EMU_Q2_TREATMENT_V1,
-    RARE_CHARM_LFV_DILEPTON_PROXY_V1,
-    dplus_piplus_emu_from_couplings,
+    RARE_CHARM_LFV_TREE_LEVEL_NOTE_V1,
+    dplus_piplus_emu_from_rs_semileptonic_wilsons,
     dplus_piplus_emu_sm,
     rare_charm_dtopi_emu_default_inputs,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "charm"
-_REQUIRED_QUARK_EXTRA = "quark_mass_basis_couplings"
-_REQUIRED_LEPTON_EXTRA = "lepton_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_semileptonic_wilsons"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _EXPECTED_UNITS = "branching fraction"
 
@@ -75,17 +74,8 @@ _BUDGET_SOURCE = (
     "dplus_piplus_eplus_muminus and dplus_piplus_eminus_muplus "
     "(PDG Live/API S031.110/S031.111, LHCb 2021, 90% CL)"
 )
-_UNEVALUATED_REASON = (
-    "missing c-u quark coupling or explicit e-mu lepton LFV proxy"
-)
+_UNEVALUATED_REASON = "missing rs_semileptonic_wilsons LFV llqq block"
 _UNEVALUATED_NOTES = f"NOT EVALUATED - {_UNEVALUATED_REASON}"
-_NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: charge-mode-specific off-diagonal e-mu lepton "
-    "neutral-current couplings, scalar/tensor operators, resonance effects, "
-    "and LHCb acceptance/window matching are not available on ParameterPoint; "
-    "C008 v1 requires an explicit lepton_mass_basis_couplings proxy and reuses "
-    "the documented rare-charm LFV D->pi full-q2 short-distance proxy."
-)
 
 
 @dataclass(frozen=True)
@@ -435,7 +425,7 @@ class Constraint:
 
     process_id = "C008"
     severity = Severity.HARD
-    observable = "BR(D+ -> pi+ e+- mu-+) LFV full-q2 proxy"
+    observable = "BR(D+ -> pi+ e+- mu-+) LFV full-q2 tree-level"
 
     def __init__(self) -> None:
         self.anchor = _load_c008_anchor(self.process_id)
@@ -491,13 +481,14 @@ class Constraint:
             "sm_lfv_policy": (
                 "D+ -> pi+ e mu is charged-LFV and has zero SM rate for "
                 "catalog purposes; the HARD budget is applied to the pure-NP "
-                "proxy."
+                "tree-level prediction when the LFV llqq block is present."
             ),
             "charge_mode_prediction_policy": (
-                "The v1 e-mu proxy is not orientation-specific; the same "
-                "one-charge-mode prediction is compared to both C008 limits."
+                "The tree-level lfv_llqq e-mu block is not orientation-"
+                "specific; the same one-charge-mode prediction is compared "
+                "to both C008 limits."
             ),
-            "full_q2_proxy_constrained": True,
+            "full_q2_tree_level_prediction_constrained": True,
             "q2_treatment": RARE_CHARM_DTOPI_EMU_Q2_TREATMENT_V1,
             "lhcb_window_acceptance_applied": False,
             "resonance_amplitudes_included": False,
@@ -507,9 +498,12 @@ class Constraint:
             "rs_baseline_year": rs.year,
             "rs_baseline_use": rs.use,
             "parametrization_citation": RARE_CHARM_DTOPI_EMU_PARAMETRIZATION_CITATION,
-            "rs_matching_assumption": RARE_CHARM_DTOPI_EMU_PROXY_V1,
-            "lfv_lepton_matching_assumption": RARE_CHARM_LFV_DILEPTON_PROXY_V1,
-            "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+            "lfv_tree_level_note": RARE_CHARM_LFV_TREE_LEVEL_NOTE_V1,
+            "loop_lfv_status": "loop_induced_lfv_deferred",
+            "deferred_short_distance_effects": (
+                "scalar/tensor operators, resonance amplitudes, and LHCb "
+                "window/acceptance matching"
+            ),
         }
 
     def _unevaluated_result(self, diagnostics: Mapping[str, Any]) -> ConstraintResult:
@@ -535,35 +529,22 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        quark_input = point.get_extra(_REQUIRED_QUARK_EXTRA)
-        lepton_input = point.get_extra(_REQUIRED_LEPTON_EXTRA)
-        missing = [
-            key
-            for key, value in (
-                (_REQUIRED_QUARK_EXTRA, quark_input),
-                (_REQUIRED_LEPTON_EXTRA, lepton_input),
-            )
-            if value is None
-        ]
-        if missing:
-            return self._unevaluated_result({"missing_extras": tuple(missing)})
+        wilson_input = point.get_extra(_REQUIRED_EXTRA)
+        if wilson_input is None:
+            return self._unevaluated_result({"missing_extra": _REQUIRED_EXTRA})
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
         try:
-            result = dplus_piplus_emu_from_couplings(
-                quark_input,
-                lepton_input,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
+            result = dplus_piplus_emu_from_rs_semileptonic_wilsons(
+                wilson_input,
+                matching_scale_gev=None if kk_ew_mass is None else float(kk_ew_mass),
                 inputs=self.sd_inputs,
                 charge_mode="eplus_muminus",
             )
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
             return self._unevaluated_result(
                 {
-                    "invalid_extra": (
-                        _REQUIRED_QUARK_EXTRA,
-                        _REQUIRED_LEPTON_EXTRA,
-                    ),
+                    "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception": str(exc),
                 }
@@ -602,11 +583,12 @@ class Constraint:
             budget=budget,
             notes=(
                 "Pure-NP BR(D+ -> pi+ e+- mu-+) bound using the shared C007 "
-                "D->pi form-factor machinery and C006 e-mu LFV Wilson proxy. "
-                "The same one-charge-mode full-q2 short-distance proxy is "
+                "D->pi form-factor machinery and Phase-4a LFV llqq Wilsons. "
+                "The same one-charge-mode full-q2 short-distance prediction is "
                 "compared to both C008 YAML 90% CL charge-mode limits; the "
-                "larger saturation sets the HARD ratio. Full RS/lepton and "
-                "acceptance matching is flagged NEEDS-HUMAN-PHYSICS."
+                "larger saturation sets the HARD ratio. Tree-level LFV is "
+                "rigorous and zero for the diagonal charged-lepton fit; "
+                "loop-induced LFV is deferred."
             ),
             diagnostics=diagnostics,
         )

@@ -1,22 +1,22 @@
 """LFV ``K+ -> pi+ e mu`` semileptonic rare-kaon adapter.
 
-This adapter composes the shared ``s -> d l l`` rare-kaon Wilson proxy with
-the K019 e-mu LFV lepton-coupling pattern, then evaluates a full three-body
-``K -> pi`` vector-current rate.  The quark-side matching is deliberately the
-same documented Z-like proxy used by the rare-kaon dilepton path, but the
-pseudoscalar-to-pseudoscalar hadronic current uses the vector combination
-``left + right`` rather than the K_L two-body ``left - right`` combination.
+The production Phase-4c path reads the rigorous off-diagonal ``e mu`` block
+from ``rs_semileptonic_wilsons.lfv_llqq`` and maps its C9/C10 inputs into the
+rare-kaon K-to-pi Y normalization without reusing the old one-boson proxy.  The
+older explicit-spurion helpers remain as legacy compatibility entry points
+only.  The pseudoscalar-to-pseudoscalar hadronic current uses the vector
+combination ``left + right`` rather than the K_L two-body ``left - right``
+combination.
 
-NEEDS-HUMAN-PHYSICS: a rigorous RS prediction requires off-diagonal physical
-charged-lepton neutral-current couplings after EW KK/Z/Z' mixing and
-charged-lepton mass-basis rotations.  ``ParameterPoint`` does not carry those
-couplings, so this v1 path accepts an explicit e-mu lepton proxy and reports
-that limitation in diagnostics.
+With the current diagonal charged-lepton fit, the Phase-4a LFV block is
+rigorously zero at tree level, so the evaluated LFV rate is zero and
+non-vetoing.  Nonzero tree-level LFV requires non-diagonal lepton structure;
+loop-induced LFV is deferred.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from functools import lru_cache
 import math
 from typing import Any, Mapping
@@ -38,11 +38,15 @@ from .rare_kaon_dilepton import (
 from .rare_kaon_lfv_dilepton import (
     RARE_KAON_LFV_DILEPTON_PARAMETRIZATION_CITATION,
     RARE_KAON_LFV_DILEPTON_PROXY_V1,
+    RARE_KAON_LFV_TREE_LEVEL_NOTE_V1,
     RareKaonLFVLeptonCouplingProxy,
     RareKaonLFVLeptonProxyInput,
+    rare_kaon_lfv_coeff_from_rs_semileptonic,
     rare_kaon_lfv_lepton_coupling_proxy,
     rare_kaon_lfv_proxy_input,
+    rare_kaon_lfv_rs_semileptonic_diagnostics,
 )
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
 
 RARE_KAON_KTOPI_EMU_MODEL_V1 = "rare_kaon_kplus_piplus_emu_lfv_form_factor_proxy_v1"
 RARE_KAON_KTOPI_EMU_INPUT_BUNDLE_V1 = (
@@ -63,10 +67,10 @@ RARE_KAON_KTOPI_EMU_PARAMETRIZATION_CITATION = (
     + "; K->pi vector-current three-body phase space with f_+(q2)"
 )
 RARE_KAON_KTOPI_EMU_PROXY_V1 = (
-    "NEEDS-HUMAN-PHYSICS: K+ -> pi+ e mu v1 reuses the rare-kaon s->d "
-    "neutral-current proxy and the K019 e-mu lepton spurion. Scalar/tensor "
-    "operators, charge-orientation-specific lepton matching, and a complete "
-    "RS EW KK/Z/Z' tower are not available on ParameterPoint."
+    "LEGACY-PROXY: K+ -> pi+ e mu explicit-spurion compatibility path. The "
+    "Phase-4c K020 production path uses rs_semileptonic_wilsons.lfv_llqq; "
+    "scalar/tensor operators and charge-orientation-specific loop effects "
+    "remain deferred."
 )
 RARE_KAON_KTOPI_EMU_Q2_TREATMENT_V1 = (
     "full_kinematic_q2_short_distance_lfv_proxy_with_k_to_pi_form_factor"
@@ -172,8 +176,8 @@ class RareKaonKToPiLFVWilsonCoefficients:
     lepton_axial_delta_emu: complex
     y_vector_lfv: complex
     y_axial_lfv: complex
-    base_same_flavor_wilsons: RareKaonDileptonWilsonCoefficients
-    lepton_proxy: RareKaonLFVLeptonCouplingProxy
+    base_same_flavor_wilsons: RareKaonDileptonWilsonCoefficients | None
+    lepton_proxy: RareKaonLFVLeptonCouplingProxy | None
 
     @property
     def wilsons(self) -> Mapping[str, complex]:
@@ -335,6 +339,62 @@ def rare_kaon_ktopi_emu_wilsons_from_couplings(
     )
 
 
+def rare_kaon_ktopi_emu_wilsons_from_rs_semileptonic(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareKaonKToPiLFVInputs | None = None,
+    lepton_pair: str = "e_mu",
+) -> RareKaonKToPiLFVWilsonCoefficients:
+    """Map Phase-4a LFV C9/C10 Wilsons into the K->pi LFV Y inputs."""
+
+    p = rare_kaon_ktopi_emu_default_inputs() if inputs is None else inputs
+    coeff = rare_kaon_lfv_coeff_from_rs_semileptonic(
+        source,
+        transition="s_to_d",
+        lepton_pair=lepton_pair,
+    )
+    scale = _diagnostic_matching_scale(matching_scale_gev)
+    norm = _kaon_lfv_c9_c10_to_y_norm(p)
+    lambda_ckm = complex(coeff.lambda_ckm)
+    left_vector_contact = complex(coeff.contact_LL + coeff.contact_LR)
+    right_vector_contact = complex(coeff.contact_RL + coeff.contact_RR)
+    quark_vector_contact = left_vector_contact + right_vector_contact
+    y_vector = -lambda_ckm * norm * complex(
+        coeff.c9_lfv_np + coeff.c9p_lfv_np
+    )
+    y_axial = -lambda_ckm * norm * complex(
+        coeff.c10_lfv_np + coeff.c10p_lfv_np
+    )
+    return RareKaonKToPiLFVWilsonCoefficients(
+        model_label=coeff.model_label,
+        base_model_label=RARE_KAON_DILEPTON_MODEL_V1,
+        operator_convention=coeff.operator_convention,
+        matching_assumption=coeff.matching_assumption,
+        M_KK=scale,
+        matching_scale=scale,
+        left_sd_coupling=left_vector_contact,
+        right_sd_coupling=right_vector_contact,
+        left_sd_overlap=0.0j,
+        right_sd_overlap=0.0j,
+        left_quark_delta=left_vector_contact,
+        right_quark_delta=right_vector_contact,
+        quark_vector_delta=quark_vector_contact,
+        lepton_left_delta_emu=complex(coeff.contact_LL + coeff.contact_RL),
+        lepton_right_delta_emu=complex(coeff.contact_LR + coeff.contact_RR),
+        lepton_vector_delta_emu=complex(
+            coeff.contact_LL + coeff.contact_LR + coeff.contact_RL + coeff.contact_RR
+        ),
+        lepton_axial_delta_emu=complex(
+            coeff.contact_LR + coeff.contact_RR - coeff.contact_LL - coeff.contact_RL
+        ),
+        y_vector_lfv=complex(y_vector),
+        y_axial_lfv=complex(y_axial),
+        base_same_flavor_wilsons=None,
+        lepton_proxy=None,
+    )
+
+
 def rare_kaon_ktopi_emu_differential_branching_fraction(
     q2_gev2: float,
     *,
@@ -424,6 +484,43 @@ def kplus_piplus_emu_from_couplings(
     return _branching_from_wilsons(wilsons, inputs=p, charge_mode=charge_mode)
 
 
+def kplus_piplus_emu_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareKaonKToPiLFVInputs | None = None,
+    charge_mode: str = "muplus_eminus",
+    lepton_pair: str = "e_mu",
+) -> RareKaonKToPiLFVBranchingResult:
+    """Evaluate ``K+ -> pi+ e mu`` from Phase-4a LFV llqq Wilsons."""
+
+    p = rare_kaon_ktopi_emu_default_inputs() if inputs is None else inputs
+    coeff = rare_kaon_lfv_coeff_from_rs_semileptonic(
+        source,
+        transition="s_to_d",
+        lepton_pair=lepton_pair,
+    )
+    wilsons = rare_kaon_ktopi_emu_wilsons_from_rs_semileptonic(
+        source,
+        matching_scale_gev=matching_scale_gev,
+        inputs=p,
+        lepton_pair=lepton_pair,
+    )
+    result = _branching_from_wilsons(wilsons, inputs=p, charge_mode=charge_mode)
+    diagnostics = dict(result.diagnostics)
+    diagnostics.update(
+        rare_kaon_lfv_rs_semileptonic_diagnostics(coeff, source=source)
+    )
+    diagnostics["base_matching_assumption"] = coeff.matching_assumption
+    diagnostics["lfv_lepton_matching_assumption"] = coeff.matching_assumption
+    diagnostics["matching_assumption"] = coeff.matching_assumption
+    diagnostics["s_to_d_lfv_llqq_rs_semileptonic_rewired"] = True
+    diagnostics["rare_kaon_lfv_proxy_reused"] = False
+    diagnostics["c9_c10_to_rare_kaon_effective_inputs"] = True
+    diagnostics["lfv_tree_level_note"] = RARE_KAON_LFV_TREE_LEVEL_NOTE_V1
+    return replace(result, diagnostics=diagnostics)
+
+
 def _branching_from_wilsons(
     wilsons: RareKaonKToPiLFVWilsonCoefficients | None,
     *,
@@ -450,8 +547,16 @@ def _branching_from_wilsons(
         "base_model_label": RARE_KAON_DILEPTON_MODEL_V1,
         "base_input_bundle": RARE_KAON_DILEPTON_INPUT_BUNDLE_V1,
         "base_matching_assumption": RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-        "lfv_lepton_matching_assumption": RARE_KAON_LFV_DILEPTON_PROXY_V1,
-        "matching_assumption": RARE_KAON_KTOPI_EMU_PROXY_V1,
+        "lfv_lepton_matching_assumption": (
+            RARE_KAON_LFV_DILEPTON_PROXY_V1
+            if wilsons is None
+            else wilsons.matching_assumption
+        ),
+        "matching_assumption": (
+            RARE_KAON_KTOPI_EMU_PROXY_V1
+            if wilsons is None
+            else wilsons.matching_assumption
+        ),
         "operator_convention": RARE_KAON_KTOPI_EMU_OPERATOR_CONVENTION,
         "parametrization_citation": RARE_KAON_KTOPI_EMU_PARAMETRIZATION_CITATION,
         "q2_treatment": RARE_KAON_KTOPI_EMU_Q2_TREATMENT_V1,
@@ -518,18 +623,24 @@ def _branching_from_wilsons(
                 "lepton_right_delta_emu": complex(wilsons.lepton_right_delta_emu),
                 "lepton_vector_delta_emu": complex(wilsons.lepton_vector_delta_emu),
                 "lepton_axial_delta_emu": complex(wilsons.lepton_axial_delta_emu),
-                "base_muon_axial_delta": float(
-                    wilsons.base_same_flavor_wilsons.muon_axial_delta
-                ),
-                "base_y_np_left": complex(
-                    wilsons.base_same_flavor_wilsons.y_np_left
-                ),
-                "base_y_np_right": complex(
-                    wilsons.base_same_flavor_wilsons.y_np_right
-                ),
-                "proxy_source": wilsons.lepton_proxy.source,
             }
         )
+        if wilsons.base_same_flavor_wilsons is not None:
+            diagnostics.update(
+                {
+                    "base_muon_axial_delta": float(
+                        wilsons.base_same_flavor_wilsons.muon_axial_delta
+                    ),
+                    "base_y_np_left": complex(
+                        wilsons.base_same_flavor_wilsons.y_np_left
+                    ),
+                    "base_y_np_right": complex(
+                        wilsons.base_same_flavor_wilsons.y_np_right
+                    ),
+                }
+            )
+        if wilsons.lepton_proxy is not None:
+            diagnostics["proxy_source"] = wilsons.lepton_proxy.source
 
     return RareKaonKToPiLFVBranchingResult(
         model_label=RARE_KAON_KTOPI_EMU_MODEL_V1,
@@ -694,6 +805,24 @@ def _effective_hamiltonian_prefactor(inputs: RareKaonDileptonSMInputs) -> float:
     )
 
 
+def _diagnostic_matching_scale(matching_scale_gev: float | None) -> float:
+    if matching_scale_gev is None:
+        return 0.0
+    number = float(matching_scale_gev)
+    if not math.isfinite(number) or number <= 0.0:
+        raise ValueError("matching_scale_gev must be positive and finite")
+    return number
+
+
+def _kaon_lfv_c9_c10_to_y_norm(inputs: RareKaonKToPiLFVInputs) -> float:
+    return float(
+        math.sqrt(2.0)
+        * inputs.rare_kaon.gf_gev_minus2
+        * inputs.rare_kaon.alpha_em_mz
+        / (math.pi * rare_kaon_dilepton_g_sm_squared(inputs.rare_kaon))
+    )
+
+
 def _kallen(a: float, b: float, c: float) -> float:
     return float(a * a + b * b + c * c - 2.0 * (a * b + a * c + b * c))
 
@@ -710,13 +839,10 @@ RARE_KAON_KL_PI0_EMU_PARAMETRIZATION_CITATION = (
     + "; neutral K_L -> pi0 mode with standard neutral K_l3 f_+(q2)"
 )
 RARE_KAON_KL_PI0_EMU_PROXY_V1 = (
-    "NEEDS-HUMAN-PHYSICS: K_L -> pi0 e+- mu-+ v1 reuses the K020 "
-    "rare-kaon s->d neutral-current proxy and the K019 e-mu lepton spurion. "
-    "The K_L CP-eigenstate treatment is approximated by the standard neutral "
-    "K_l3 K->pi form factor and a charge-summed LFV rate; scalar/tensor "
-    "operators, charge-orientation-specific lepton matching, sd/ds CP-phase "
-    "matching, and a complete RS EW KK/Z/Z' tower are not available on "
-    "ParameterPoint."
+    "LEGACY-PROXY: K_L -> pi0 e+- mu-+ explicit-spurion compatibility path. "
+    "The Phase-4c K021 production path uses rs_semileptonic_wilsons.lfv_llqq; "
+    "scalar/tensor operators, charge-orientation-specific loop effects, and "
+    "full sd/ds CP-phase matching remain deferred."
 )
 RARE_KAON_KL_PI0_EMU_Q2_TREATMENT_V1 = (
     "full_kinematic_q2_short_distance_lfv_proxy_with_klong_to_pi0_form_factor"
@@ -765,7 +891,11 @@ def _neutral_klong_pi0_result(
             "base_model_label": RARE_KAON_KTOPI_EMU_MODEL_V1,
             "model_label": RARE_KAON_KL_PI0_EMU_MODEL_V1,
             "input_bundle": RARE_KAON_KL_PI0_EMU_INPUT_BUNDLE_V1,
-            "matching_assumption": RARE_KAON_KL_PI0_EMU_PROXY_V1,
+            "matching_assumption": (
+                RARE_KAON_KL_PI0_EMU_PROXY_V1
+                if result.wilsons is None
+                else result.wilsons.matching_assumption
+            ),
             "parametrization_citation": RARE_KAON_KL_PI0_EMU_PARAMETRIZATION_CITATION,
             "q2_treatment": RARE_KAON_KL_PI0_EMU_Q2_TREATMENT_V1,
             "sm_lfv_policy": (
@@ -852,6 +982,27 @@ def klong_pi0_emu_from_couplings(
     )
 
 
+def klong_pi0_emu_from_rs_semileptonic_wilsons(
+    source: RSSemileptonicWilsonBundle,
+    *,
+    matching_scale_gev: float | None = None,
+    inputs: RareKaonKToPiLFVInputs | None = None,
+    charge_mode: str = "muplus_eminus",
+    lepton_pair: str = "e_mu",
+) -> RareKaonKToPiLFVBranchingResult:
+    """Evaluate ``K_L -> pi0 e mu`` from Phase-4a LFV llqq Wilsons."""
+
+    p = rare_kaon_klong_pi0_emu_default_inputs() if inputs is None else inputs
+    base = kplus_piplus_emu_from_rs_semileptonic_wilsons(
+        source,
+        matching_scale_gev=matching_scale_gev,
+        inputs=p,
+        charge_mode=charge_mode,
+        lepton_pair=lepton_pair,
+    )
+    return _neutral_klong_pi0_result(base, inputs=p)
+
+
 __all__ = [
     "QuarkMassBasisCouplings",
     "RareKaonKToPiFormFactorInputs",
@@ -874,6 +1025,7 @@ __all__ = [
     "RARE_KAON_KL_PI0_EMU_PROXY_V1",
     "RARE_KAON_KL_PI0_EMU_Q2_TREATMENT_V1",
     "RARE_KAON_LFV_DILEPTON_PROXY_V1",
+    "RARE_KAON_LFV_TREE_LEVEL_NOTE_V1",
     "rare_kaon_ktopi_emu_default_inputs",
     "rare_kaon_klong_pi0_emu_default_inputs",
     "rare_kaon_ktopi_emu_proxy_input",
@@ -882,9 +1034,12 @@ __all__ = [
     "rare_kaon_ktopi_fzero",
     "rare_kaon_ktopi_emu_q2_range",
     "rare_kaon_ktopi_emu_wilsons_from_couplings",
+    "rare_kaon_ktopi_emu_wilsons_from_rs_semileptonic",
     "rare_kaon_ktopi_emu_differential_branching_fraction",
     "kplus_piplus_emu_sm",
     "kplus_piplus_emu_from_couplings",
+    "kplus_piplus_emu_from_rs_semileptonic_wilsons",
     "klong_pi0_emu_sm",
     "klong_pi0_emu_from_couplings",
+    "klong_pi0_emu_from_rs_semileptonic_wilsons",
 ]
