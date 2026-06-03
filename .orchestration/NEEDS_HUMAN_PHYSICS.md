@@ -38,6 +38,28 @@ E001 (e-EDM) needs a genuine RS one-loop CP-odd dipole; E004–E009 need hadroni
 
 **Bottom line / highest-leverage action:** building the shared **RS electroweak-coupling sector** on `ParameterPoint`/`point_builder` (G1) would convert the single largest block of proxies into rigorous NP in one move, and G2 is the lepton-sector extension of the same work. G4 (CKM phase) is a small, self-contained core addition. G5/G6 are genuinely hard SM-theory inputs (lattice/ChPT/loop) best sourced from the literature per observable. None of these block the catalog from running or affect the 5 fully-rigorous ΔF=2 anchors or any constraint's SM side.
 
+---
+
+## ★★ DOES EACH GAP *ACTUALLY* NEED HUMAN INPUT? (honest triage — added 2026-06-02)
+
+The "98 constraints carry a proxy" figure is misleading: most of it is **work we do (build G1)**, not human intervention. Triage:
+
+**(I) NOT human input — we build it (in the active plan):**
+- **G1 RS-EW couplings + G2 lepton couplings** — the bulk. Builds the RS Z-coupling shift / KK gauge sector from the existing `f_IR/f_UV`+`bessel` machinery onto `ParameterPoint`. Closes ~24–26 constraints to fully rigorous, ~13–16 to partial. (See `rs_ew_sector_design.md`.)
+- **G4 CKM phase (B002 sin2β, B004 φ_s)** — trivial arithmetic from the CKM matrix already in-repo. Small core addition. *(Reclassified: NOT a human decision.)*
+- **Exclusive form factors (B013 Bs→φγ, B014 B→ργ/ωγ)** — standard literature values (LCSR/lattice, e.g. Bharucha–Straub–Zwicky). Wire in with a cited source; human only sign-off on the source, no calculation. *(Reclassified: NOT a human decision, modulo source approval.)*
+
+**(II) GENUINELY needs human input — with the reason (TRICKY-PHYSICS vs YOUR-DECISION):**
+- **Collider σ×BR recasts — all CR* (14). → YOUR DECISION (scope/effort), not unknown physics.** Rigorous recast needs detector-level signal sim + experiment efficiency/acceptance maps; standard scan practice uses the published *mass* limit as a conservative bound (what we do). Decide: accept conservative mass bounds (recommended) vs invest in full recasts (large infra, marginal gain for a scan).
+- **ε′/ε — K003. → TRICKY PHYSICS (unsettled SM).** Lattice (RBC-UKQCD) vs large-Nc dual-QCD disagree on the SM central value AND error; making it vetoing forces endorsing one disputed value. Decide: keep advisory/non-vetoing, or adopt a specific reference + uncertainty.
+- **Charm direct CPV / nonleptonic — C003, B032–B034. → TRICKY PHYSICS.** Long-distance hadronic matrix elements, no controlled expansion ("theoretically dirty"); SM not reliably calculable. Same shape as ε′/ε.
+- **EDMs — E001, E004, E006–E009 (~6). → TRICKY PHYSICS *and* YOUR MODELING CHOICE — the one set G1 does NOT close.** (a) RS contribution = multiloop CP-odd dipole needing the **complex 5D-Yukawa phase structure**, which is a model input *you specify*; (b) quark/gluon CP-odd operators → atomic/neutron EDMs needs nuclear matrix elements (Schiff moments) with large literature uncertainties.
+- **(Minor, mostly closed by G1)** Charged-current/G_F RS matching for the data-pull constraints **EW002, EW003, K018**: the SM-vs-data tension is already rigorous (that IS the constraint); only the RS *shift* is a proxy, closed by G1's charged-current piece. Residual: whether the leading RS W-KK correction suffices.
+
+**Net after G1:** genuine human-input residual ≈ **EDMs (~6, hard physics + your CP-phase assumptions), ε′/ε + charm/nonleptonic CPV (~5, unsettled SM — adopt-or-keep-advisory), collider recasts (14, scope decision — recommend accept).** All are honest non-vetoing/advisory today, so they never silently exclude points.
+
+---
+
 The per-constraint detail (with validated SM numbers, budgets, and exact proxy descriptions) follows below, wave by wave.
 
 ---
