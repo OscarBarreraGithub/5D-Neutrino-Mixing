@@ -46,7 +46,7 @@ Build prompts under `.orchestration/runs/<ITEM>/`. Keep orchestrator context lea
 | W4 | G4 CKM phase (B002 sin2β, B004 φ_s) in-core | — | — | — |
 | W5 | Exclusive form factors (B013, B014) from cited literature | — | — | — |
 | W6 | Full-catalog cluster harness (sweep→point_builder→evaluate_all→serialized) + smoke scan | — | — | — |
-| R1 | Scaffold (base/anchors/registry/point_builder/TEMPLATE) `02e2424` — retro-review: **codex SCAFFOLD-NEEDS-FIXES (3 blockers: NaN/Inf accepted; load_anchor can't validate value_id/block_key/units/CL; extras mutably shared)** vs Opus SCAFFOLD-OK. DUAL gate fails → hardening fix IN FLIGHT (by6va1dim), backward-compatible, suite must stay ≥1054. | reviews done (split) | fix in flight | — |
+| R1 | Scaffold hardening `02e2424`→`f82036a` — retro-review found 3 framework gaps (NaN/Inf accepted; load_anchor couldn't validate value_id/block_key/units/CL; mutably-shared extras). Fixed: finite/bool/Severity guards, optional anchor validators, immutable extras, reset_for_tests, TEMPLATE. **RETRO-OK + HARDENED** ✅ (dual: codex SCAFFOLD-FIX-OK + Opus SCAFFOLD-FIX-OK; 1054→1061 passed, backward-compat verified) | dual ✅ | dual ✅ | `f82036a` |
 | R2 | ΔF=2 adapter running-wrappers `fd2f46a` — Opus-only | — | — | — |
 | R3 | Complex-M12 phase helpers (B002/C002) `e08977d` — Opus-only | — | — | — |
 | R4 | mu_e_conversion m_μ⁵ core fix `c6c949c` — **RETRO-OK** ✅ (codex MUE-OK + Opus MUE-OK; recomputed rate/BR matches to 15 sig figs; KKO m_μ⁵ dimensionally correct; L003/L004/L005 consistent; 1054 passed) | dual ✅ | n/a (review-only) | retro-OK |
