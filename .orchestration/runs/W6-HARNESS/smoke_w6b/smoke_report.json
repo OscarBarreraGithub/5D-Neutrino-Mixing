@@ -1,0 +1,764 @@
+{
+  "config": {
+    "base_seed": 20260604,
+    "c_half_atol": 1e-10,
+    "c_max": 0.9,
+    "c_min": 0.3,
+    "expected_registry_count": 103,
+    "k_gev": 1.2209e+19,
+    "lightest_nu_max_ev": 0.01,
+    "lightest_nu_min_ev": 0.0,
+    "m_n_max_gev": 1000000000000000.0,
+    "m_n_min_gev": 10000000000.0,
+    "max_fit_score": 0.01,
+    "max_overlap_modes": 512,
+    "min_overlap_modes": 16,
+    "mkk_values_gev": [
+      1000.0,
+      3000.0,
+      6000.0,
+      10000.0
+    ],
+    "n_draws_per_tile": 2500,
+    "n_gauge_modes": 512,
+    "normal_ordering_probability": 0.5,
+    "overlap_rel_tol": 0.001,
+    "perturbative_ybar_max": 4.0,
+    "quadrature_order": 4096,
+    "quark_fit_max_nfev": 80,
+    "quark_fit_r": 0.25,
+    "quark_y_abs_max": 4.0,
+    "require_fit_success": true,
+    "sanity_c": 0.4,
+    "sanity_mkk_gev": 50000.0,
+    "spline_grid_size": 241,
+    "spline_verify_points": 41,
+    "tile_seed_stride": 1009,
+    "v_gev": 174.0,
+    "xi_kk": 2.4487,
+    "y_floor": 0.1,
+    "y_half_range": 1.5,
+    "y_prior": "uniform",
+    "y_sigma": 1.0,
+    "y_trunc_sigma": 3.0
+  },
+  "config_hash": "ba868cdea6c09756",
+  "constraint_counts": {
+    "active_per_evaluated_point": 98.0,
+    "evaluated_per_evaluated_point": 98.0,
+    "exception_rate": 0.04854368932038835,
+    "tag_counts": {
+      "partial": 15210,
+      "proxy": 24336,
+      "rigorous": 10140,
+      "stub": 2535
+    }
+  },
+  "exception_ids": [
+    [
+      "E001",
+      507
+    ],
+    [
+      "E002",
+      507
+    ],
+    [
+      "L006",
+      507
+    ],
+    [
+      "L010",
+      507
+    ],
+    [
+      "L023",
+      507
+    ]
+  ],
+  "n_tiles": 4,
+  "provenance": {
+    "dirty": true,
+    "elapsed_wall_seconds": 1086.0865657549875,
+    "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+    "schema": "full_catalog_scan_w6b_row_v1"
+  },
+  "schema": "full_catalog_scan_w6b_summary_v1",
+  "tiles": [
+    {
+      "cache_metrics": {
+        "lambda_ir_gev": 408.37995671172456,
+        "mkk_gev": 1000.0,
+        "n_gauge_modes": 512,
+        "omega_precomputed": true,
+        "quadrature_order": 4096,
+        "spline_grid_size": 241,
+        "spline_max_a_rel_err": 4.755947824313214e-08,
+        "spline_max_modes": 512,
+        "spline_verify_points": 41
+      },
+      "complete": true,
+      "config_hash": "ba868cdea6c09756",
+      "constraint_active": 12838,
+      "constraint_evaluated": 12838,
+      "constraint_evaluations": 13493,
+      "constraint_exception_rate": 0.04854368932038835,
+      "constraint_exceptions": 655,
+      "exception_ids": {
+        "E001": 131,
+        "E002": 131,
+        "L006": 131,
+        "L010": 131,
+        "L023": 131
+      },
+      "hard_not_evaluated": {
+        "B005": 131,
+        "B006": 131,
+        "B007": 131,
+        "B008": 131,
+        "B009": 131,
+        "B025": 131,
+        "C004": 131,
+        "C005": 131,
+        "E001": 131,
+        "E002": 131,
+        "K006": 131,
+        "K012": 131,
+        "K017": 131,
+        "L006": 131,
+        "L010": 131,
+        "L023": 131,
+        "T001": 131,
+        "T002": 131,
+        "T010": 131,
+        "T011": 131,
+        "T015": 131,
+        "T016": 131,
+        "T017": 131
+      },
+      "hard_vetoes_proxy": {
+        "B011": 131,
+        "B012": 131,
+        "B013": 82,
+        "B015": 131,
+        "B016": 131,
+        "B018": 23,
+        "B019": 18,
+        "B021": 131,
+        "CR001": 131,
+        "CR002": 131,
+        "CR003": 131,
+        "CR004": 131,
+        "CR005": 131,
+        "CR006": 131,
+        "CR008": 131,
+        "CR009": 131,
+        "CR010": 131,
+        "CR012": 131,
+        "CR013": 131,
+        "EW001": 131,
+        "K010": 120,
+        "L002": 29,
+        "L004": 29,
+        "L005": 30,
+        "L007": 23,
+        "L008": 15
+      },
+      "hard_vetoes_rigorous": {
+        "B003": 131,
+        "B004": 131,
+        "B022": 131,
+        "B023": 131,
+        "K001": 131,
+        "K004": 131,
+        "L001": 59
+      },
+      "n_evaluated_points": 131,
+      "n_requested": 2500,
+      "n_rows": 2500,
+      "n_skipped": 2369,
+      "provenance": {
+        "dirty": true,
+        "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+        "registry_count": 103,
+        "schema": "full_catalog_scan_w6b_row_v1"
+      },
+      "seed": 20260604,
+      "skip_reasons": {
+        "nonperturbative_lepton_yukawa": 2368,
+        "quark_fit_failed": 1
+      },
+      "survives_all_HARD_inclusive": 0,
+      "survives_all_HARD_strict": 0,
+      "tag_counts": {
+        "partial": 3930,
+        "proxy": 6288,
+        "rigorous": 2620,
+        "stub": 655
+      },
+      "tile_id": 0,
+      "timing": {
+        "cache_build_seconds": 57.753093376988545,
+        "draw_loop_seconds": 953.3299496659893,
+        "elapsed_seconds": 1011.083063233993,
+        "post_cache_seconds_per_draw": 0.3813319798663957,
+        "post_cache_seconds_per_evaluated_point": 7.27732786004572
+      }
+    },
+    {
+      "cache_metrics": {
+        "lambda_ir_gev": 1225.1398701351736,
+        "mkk_gev": 3000.0,
+        "n_gauge_modes": 512,
+        "omega_precomputed": true,
+        "quadrature_order": 4096,
+        "spline_grid_size": 241,
+        "spline_max_a_rel_err": 4.3747261168242225e-08,
+        "spline_max_modes": 512,
+        "spline_verify_points": 41
+      },
+      "complete": true,
+      "config_hash": "ba868cdea6c09756",
+      "constraint_active": 10878,
+      "constraint_evaluated": 10878,
+      "constraint_evaluations": 11433,
+      "constraint_exception_rate": 0.04854368932038835,
+      "constraint_exceptions": 555,
+      "exception_ids": {
+        "E001": 111,
+        "E002": 111,
+        "L006": 111,
+        "L010": 111,
+        "L023": 111
+      },
+      "hard_not_evaluated": {
+        "B005": 111,
+        "B006": 111,
+        "B007": 111,
+        "B008": 111,
+        "B009": 111,
+        "B025": 111,
+        "C004": 111,
+        "C005": 111,
+        "E001": 111,
+        "E002": 111,
+        "K006": 111,
+        "K012": 111,
+        "K017": 111,
+        "L006": 111,
+        "L010": 111,
+        "L023": 111,
+        "T001": 111,
+        "T002": 111,
+        "T010": 111,
+        "T011": 111,
+        "T015": 111,
+        "T016": 111,
+        "T017": 111
+      },
+      "hard_vetoes_proxy": {
+        "B015": 59,
+        "B016": 111,
+        "B021": 59,
+        "CR001": 111,
+        "CR005": 111,
+        "CR006": 111,
+        "CR009": 111,
+        "CR012": 111,
+        "CR013": 111,
+        "EW001": 111,
+        "K010": 111,
+        "L002": 14,
+        "L004": 14,
+        "L005": 14,
+        "L007": 10,
+        "L008": 4
+      },
+      "hard_vetoes_rigorous": {
+        "B022": 111,
+        "K004": 111,
+        "L001": 36
+      },
+      "n_evaluated_points": 111,
+      "n_requested": 2500,
+      "n_rows": 2500,
+      "n_skipped": 2389,
+      "provenance": {
+        "dirty": true,
+        "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+        "registry_count": 103,
+        "schema": "full_catalog_scan_w6b_row_v1"
+      },
+      "seed": 20261613,
+      "skip_reasons": {
+        "nonperturbative_lepton_yukawa": 2389
+      },
+      "survives_all_HARD_inclusive": 0,
+      "survives_all_HARD_strict": 0,
+      "tag_counts": {
+        "partial": 3330,
+        "proxy": 5328,
+        "rigorous": 2220,
+        "stub": 555
+      },
+      "tile_id": 1,
+      "timing": {
+        "cache_build_seconds": 58.06590507400688,
+        "draw_loop_seconds": 915.1278307970206,
+        "elapsed_seconds": 973.1937554700125,
+        "post_cache_seconds_per_draw": 0.36605113231880826,
+        "post_cache_seconds_per_evaluated_point": 8.24439487204523
+      }
+    },
+    {
+      "cache_metrics": {
+        "lambda_ir_gev": 2450.2797402703472,
+        "mkk_gev": 6000.0,
+        "n_gauge_modes": 512,
+        "omega_precomputed": true,
+        "quadrature_order": 4096,
+        "spline_grid_size": 241,
+        "spline_max_a_rel_err": 4.1436860473228133e-08,
+        "spline_max_modes": 512,
+        "spline_verify_points": 41
+      },
+      "complete": true,
+      "config_hash": "ba868cdea6c09756",
+      "constraint_active": 13230,
+      "constraint_evaluated": 13230,
+      "constraint_evaluations": 13905,
+      "constraint_exception_rate": 0.04854368932038835,
+      "constraint_exceptions": 675,
+      "exception_ids": {
+        "E001": 135,
+        "E002": 135,
+        "L006": 135,
+        "L010": 135,
+        "L023": 135
+      },
+      "hard_not_evaluated": {
+        "B005": 135,
+        "B006": 135,
+        "B007": 135,
+        "B008": 135,
+        "B009": 135,
+        "B025": 135,
+        "C004": 135,
+        "C005": 135,
+        "E001": 135,
+        "E002": 135,
+        "K006": 135,
+        "K012": 135,
+        "K017": 135,
+        "L006": 135,
+        "L010": 135,
+        "L023": 135,
+        "T001": 135,
+        "T002": 135,
+        "T010": 135,
+        "T011": 135,
+        "T015": 135,
+        "T016": 135,
+        "T017": 135
+      },
+      "hard_vetoes_proxy": {
+        "CR006": 135,
+        "CR009": 135,
+        "L002": 10,
+        "L004": 9,
+        "L005": 10,
+        "L007": 3
+      },
+      "hard_vetoes_rigorous": {
+        "B022": 135,
+        "K004": 135,
+        "L001": 39
+      },
+      "n_evaluated_points": 135,
+      "n_requested": 2500,
+      "n_rows": 2500,
+      "n_skipped": 2365,
+      "provenance": {
+        "dirty": true,
+        "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+        "registry_count": 103,
+        "schema": "full_catalog_scan_w6b_row_v1"
+      },
+      "seed": 20262622,
+      "skip_reasons": {
+        "nonperturbative_lepton_yukawa": 2364,
+        "quark_fit_failed": 1
+      },
+      "survives_all_HARD_inclusive": 0,
+      "survives_all_HARD_strict": 0,
+      "tag_counts": {
+        "partial": 4050,
+        "proxy": 6480,
+        "rigorous": 2700,
+        "stub": 675
+      },
+      "tile_id": 2,
+      "timing": {
+        "cache_build_seconds": 58.226642800989794,
+        "draw_loop_seconds": 960.8418110469938,
+        "elapsed_seconds": 1019.0684734040115,
+        "post_cache_seconds_per_draw": 0.3843367244187975,
+        "post_cache_seconds_per_evaluated_point": 7.11734674849625
+      }
+    },
+    {
+      "cache_metrics": {
+        "lambda_ir_gev": 4083.7995671172457,
+        "mkk_gev": 10000.0,
+        "n_gauge_modes": 512,
+        "omega_precomputed": true,
+        "quadrature_order": 4096,
+        "spline_grid_size": 241,
+        "spline_max_a_rel_err": 3.9781141554582586e-08,
+        "spline_max_modes": 512,
+        "spline_verify_points": 41
+      },
+      "complete": true,
+      "config_hash": "ba868cdea6c09756",
+      "constraint_active": 12740,
+      "constraint_evaluated": 12740,
+      "constraint_evaluations": 13390,
+      "constraint_exception_rate": 0.04854368932038835,
+      "constraint_exceptions": 650,
+      "exception_ids": {
+        "E001": 130,
+        "E002": 130,
+        "L006": 130,
+        "L010": 130,
+        "L023": 130
+      },
+      "hard_not_evaluated": {
+        "B005": 130,
+        "B006": 130,
+        "B007": 130,
+        "B008": 130,
+        "B009": 130,
+        "B025": 130,
+        "C004": 130,
+        "C005": 130,
+        "E001": 130,
+        "E002": 130,
+        "K006": 130,
+        "K012": 130,
+        "K017": 130,
+        "L006": 130,
+        "L010": 130,
+        "L023": 130,
+        "T001": 130,
+        "T002": 130,
+        "T010": 130,
+        "T011": 130,
+        "T015": 130,
+        "T016": 130,
+        "T017": 130
+      },
+      "hard_vetoes_proxy": {
+        "CR009": 130
+      },
+      "hard_vetoes_rigorous": {
+        "B022": 130,
+        "K004": 62,
+        "L001": 27
+      },
+      "n_evaluated_points": 130,
+      "n_requested": 2500,
+      "n_rows": 2500,
+      "n_skipped": 2370,
+      "provenance": {
+        "dirty": true,
+        "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+        "registry_count": 103,
+        "schema": "full_catalog_scan_w6b_row_v1"
+      },
+      "seed": 20263631,
+      "skip_reasons": {
+        "nonperturbative_lepton_yukawa": 2370
+      },
+      "survives_all_HARD_inclusive": 0,
+      "survives_all_HARD_strict": 0,
+      "tag_counts": {
+        "partial": 3900,
+        "proxy": 6240,
+        "rigorous": 2600,
+        "stub": 650
+      },
+      "tile_id": 3,
+      "timing": {
+        "cache_build_seconds": 58.064148186007515,
+        "draw_loop_seconds": 945.5496716280177,
+        "elapsed_seconds": 1003.6138398270123,
+        "post_cache_seconds_per_draw": 0.37821986865120705,
+        "post_cache_seconds_per_evaluated_point": 7.273459012523213
+      }
+    }
+  ],
+  "timing": {
+    "cache_build_seconds_sum": 232.10978943799273,
+    "draw_loop_seconds_sum": 3774.8492631380213,
+    "extrapolated_1e8_core_hours_per_draw": 10485.692397605615,
+    "extrapolated_1e8_core_hours_per_evaluated_point": 206818.39048531785,
+    "post_cache_seconds_per_draw": 0.37748492631380215,
+    "post_cache_seconds_per_evaluated_point": 7.445462057471443,
+    "tile_elapsed_seconds_sum": 4006.9591319350293
+  },
+  "top_hard_not_evaluated": [
+    [
+      "B005",
+      507
+    ],
+    [
+      "B006",
+      507
+    ],
+    [
+      "B007",
+      507
+    ],
+    [
+      "B008",
+      507
+    ],
+    [
+      "B009",
+      507
+    ],
+    [
+      "B025",
+      507
+    ],
+    [
+      "C004",
+      507
+    ],
+    [
+      "C005",
+      507
+    ],
+    [
+      "E001",
+      507
+    ],
+    [
+      "E002",
+      507
+    ],
+    [
+      "K006",
+      507
+    ],
+    [
+      "K012",
+      507
+    ],
+    [
+      "K017",
+      507
+    ],
+    [
+      "L006",
+      507
+    ],
+    [
+      "L010",
+      507
+    ],
+    [
+      "L023",
+      507
+    ],
+    [
+      "T001",
+      507
+    ],
+    [
+      "T002",
+      507
+    ],
+    [
+      "T010",
+      507
+    ],
+    [
+      "T011",
+      507
+    ]
+  ],
+  "top_hard_vetoes_proxy": [
+    [
+      "CR009",
+      507
+    ],
+    [
+      "CR006",
+      377
+    ],
+    [
+      "B016",
+      242
+    ],
+    [
+      "CR001",
+      242
+    ],
+    [
+      "CR005",
+      242
+    ],
+    [
+      "CR012",
+      242
+    ],
+    [
+      "CR013",
+      242
+    ],
+    [
+      "EW001",
+      242
+    ],
+    [
+      "K010",
+      231
+    ],
+    [
+      "B015",
+      190
+    ],
+    [
+      "B021",
+      190
+    ],
+    [
+      "B011",
+      131
+    ],
+    [
+      "B012",
+      131
+    ],
+    [
+      "CR002",
+      131
+    ],
+    [
+      "CR003",
+      131
+    ],
+    [
+      "CR004",
+      131
+    ],
+    [
+      "CR008",
+      131
+    ],
+    [
+      "CR010",
+      131
+    ],
+    [
+      "B013",
+      82
+    ],
+    [
+      "L005",
+      54
+    ]
+  ],
+  "top_hard_vetoes_rigorous": [
+    [
+      "B022",
+      507
+    ],
+    [
+      "K004",
+      439
+    ],
+    [
+      "L001",
+      161
+    ],
+    [
+      "B003",
+      131
+    ],
+    [
+      "B004",
+      131
+    ],
+    [
+      "B023",
+      131
+    ],
+    [
+      "K001",
+      131
+    ]
+  ],
+  "totals": {
+    "constraint_active": 49686,
+    "constraint_evaluated": 49686,
+    "constraint_exceptions": 2535,
+    "constraint_results": 52221,
+    "n_evaluated_points": 507,
+    "n_requested": 10000,
+    "n_rows": 10000,
+    "n_skipped": 9493,
+    "survives_inclusive": 0,
+    "survives_strict": 0
+  },
+  "universal_c_sanity": {
+    "c": 0.4,
+    "coverage_complete": false,
+    "excluded_by_proxy": [],
+    "excluded_by_rigorous": [],
+    "hard_not_evaluated": [
+      "B005",
+      "B006",
+      "B007",
+      "B008",
+      "B009",
+      "B025",
+      "C004",
+      "C005",
+      "E001",
+      "E002",
+      "K006",
+      "K012",
+      "K017",
+      "L006",
+      "L010",
+      "L023",
+      "T001",
+      "T002",
+      "T010",
+      "T011",
+      "T015",
+      "T016",
+      "T017"
+    ],
+    "lambda_ir_gev": 20418.99783558623,
+    "mkk_gev": 50000.0,
+    "name": "universal_c_diagonal_leptons",
+    "passes_no_spurious_hard_exclusions": true,
+    "provenance": {
+      "config_hash": "ba868cdea6c09756",
+      "dirty": true,
+      "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+      "schema": "full_catalog_scan_w6b_row_v1"
+    },
+    "raw_excluded_by_proxy": [],
+    "raw_excluded_by_rigorous": [
+      "B022"
+    ],
+    "registry_count": 103,
+    "sm_tension_hard_exclusions": [
+      "B022"
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "cache_metrics": {
+    "lambda_ir_gev": 1225.1398701351736,
+    "mkk_gev": 3000.0,
+    "n_gauge_modes": 512,
+    "omega_precomputed": true,
+    "quadrature_order": 4096,
+    "spline_grid_size": 241,
+    "spline_max_a_rel_err": 4.3747261168242225e-08,
+    "spline_max_modes": 512,
+    "spline_verify_points": 41
+  },
+  "complete": true,
+  "config_hash": "b5e7435b6d127e36",
+  "constraint_active": 12446,
+  "constraint_evaluated": 12446,
+  "constraint_evaluations": 13081,
+  "constraint_exception_rate": 0.04854368932038835,
+  "constraint_exceptions": 635,
+  "exception_ids": {
+    "E001": 127,
+    "E002": 127,
+    "L006": 127,
+    "L010": 127,
+    "L023": 127
+  },
+  "hard_not_evaluated": {
+    "B005": 127,
+    "B006": 127,
+    "B007": 127,
+    "B008": 127,
+    "B009": 127,
+    "B025": 127,
+    "C004": 127,
+    "C005": 127,
+    "E001": 127,
+    "E002": 127,
+    "K006": 127,
+    "K012": 127,
+    "K017": 127,
+    "L006": 127,
+    "L010": 127,
+    "L023": 127,
+    "T001": 127,
+    "T002": 127,
+    "T010": 127,
+    "T011": 127,
+    "T015": 127,
+    "T016": 127,
+    "T017": 127
+  },
+  "hard_vetoes_proxy": {
+    "B015": 67,
+    "B016": 127,
+    "B021": 67,
+    "CR001": 127,
+    "CR005": 127,
+    "CR006": 127,
+    "CR009": 127,
+    "CR012": 127,
+    "CR013": 127,
+    "EW001": 127,
+    "K010": 127,
+    "L002": 22,
+    "L004": 22,
+    "L005": 23,
+    "L007": 14,
+    "L008": 1
+  },
+  "hard_vetoes_rigorous": {
+    "B022": 127,
+    "K004": 127,
+    "L001": 59
+  },
+  "n_evaluated_points": 127,
+  "n_requested": 2500,
+  "n_rows": 2500,
+  "n_skipped": 2373,
+  "provenance": {
+    "dirty": true,
+    "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+    "registry_count": 103,
+    "schema": "full_catalog_scan_w6b_row_v1"
+  },
+  "seed": 21260607,
+  "skip_reasons": {
+    "nonperturbative_lepton_yukawa": 2372,
+    "quark_fit_failed": 1
+  },
+  "survives_all_HARD_inclusive": 0,
+  "survives_all_HARD_strict": 0,
+  "tag_counts": {
+    "partial": 3810,
+    "proxy": 6096,
+    "rigorous": 2540,
+    "stub": 635
+  },
+  "tile_id": 1,
+  "timing": {
+    "cache_build_seconds": 58.68147284601582,
+    "draw_loop_seconds": 955.5821420519787,
+    "elapsed_seconds": 1014.2636356650037,
+    "post_cache_seconds_per_draw": 0.3822328568207915,
+    "post_cache_seconds_per_evaluated_point": 7.524268835054951
+  }
+}

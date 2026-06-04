@@ -1,0 +1,105 @@
+{
+  "cache_metrics": {
+    "lambda_ir_gev": 1225.1398701351736,
+    "mkk_gev": 3000.0,
+    "n_gauge_modes": 512,
+    "omega_precomputed": true,
+    "quadrature_order": 4096,
+    "spline_grid_size": 241,
+    "spline_max_a_rel_err": 4.3747261168242225e-08,
+    "spline_max_modes": 512,
+    "spline_verify_points": 41
+  },
+  "complete": true,
+  "config_hash": "ba868cdea6c09756",
+  "constraint_active": 10878,
+  "constraint_evaluated": 10878,
+  "constraint_evaluations": 11433,
+  "constraint_exception_rate": 0.04854368932038835,
+  "constraint_exceptions": 555,
+  "exception_ids": {
+    "E001": 111,
+    "E002": 111,
+    "L006": 111,
+    "L010": 111,
+    "L023": 111
+  },
+  "hard_not_evaluated": {
+    "B005": 111,
+    "B006": 111,
+    "B007": 111,
+    "B008": 111,
+    "B009": 111,
+    "B025": 111,
+    "C004": 111,
+    "C005": 111,
+    "E001": 111,
+    "E002": 111,
+    "K006": 111,
+    "K012": 111,
+    "K017": 111,
+    "L006": 111,
+    "L010": 111,
+    "L023": 111,
+    "T001": 111,
+    "T002": 111,
+    "T010": 111,
+    "T011": 111,
+    "T015": 111,
+    "T016": 111,
+    "T017": 111
+  },
+  "hard_vetoes_proxy": {
+    "B015": 59,
+    "B016": 111,
+    "B021": 59,
+    "CR001": 111,
+    "CR005": 111,
+    "CR006": 111,
+    "CR009": 111,
+    "CR012": 111,
+    "CR013": 111,
+    "EW001": 111,
+    "K010": 111,
+    "L002": 14,
+    "L004": 14,
+    "L005": 14,
+    "L007": 10,
+    "L008": 4
+  },
+  "hard_vetoes_rigorous": {
+    "B022": 111,
+    "K004": 111,
+    "L001": 36
+  },
+  "n_evaluated_points": 111,
+  "n_requested": 2500,
+  "n_rows": 2500,
+  "n_skipped": 2389,
+  "provenance": {
+    "dirty": true,
+    "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+    "registry_count": 103,
+    "schema": "full_catalog_scan_w6b_row_v1"
+  },
+  "seed": 20261613,
+  "skip_reasons": {
+    "nonperturbative_lepton_yukawa": 2389
+  },
+  "survives_all_HARD_inclusive": 0,
+  "survives_all_HARD_strict": 0,
+  "tag_counts": {
+    "partial": 3330,
+    "proxy": 5328,
+    "rigorous": 2220,
+    "stub": 555
+  },
+  "tile_id": 1,
+  "timing": {
+    "cache_build_seconds": 58.06590507400688,
+    "draw_loop_seconds": 915.1278307970206,
+    "elapsed_seconds": 973.1937554700125,
+    "post_cache_seconds_per_draw": 0.36605113231880826,
+    "post_cache_seconds_per_evaluated_point": 8.24439487204523
+  }
+}

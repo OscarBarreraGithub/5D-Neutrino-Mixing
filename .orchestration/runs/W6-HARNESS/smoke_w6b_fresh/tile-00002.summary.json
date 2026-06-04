@@ -1,0 +1,96 @@
+{
+  "cache_metrics": {
+    "lambda_ir_gev": 2450.2797402703472,
+    "mkk_gev": 6000.0,
+    "n_gauge_modes": 512,
+    "omega_precomputed": true,
+    "quadrature_order": 4096,
+    "spline_grid_size": 241,
+    "spline_max_a_rel_err": 4.1436860473228133e-08,
+    "spline_max_modes": 512,
+    "spline_verify_points": 41
+  },
+  "complete": true,
+  "config_hash": "b5e7435b6d127e36",
+  "constraint_active": 12348,
+  "constraint_evaluated": 12348,
+  "constraint_evaluations": 12978,
+  "constraint_exception_rate": 0.04854368932038835,
+  "constraint_exceptions": 630,
+  "exception_ids": {
+    "E001": 126,
+    "E002": 126,
+    "L006": 126,
+    "L010": 126,
+    "L023": 126
+  },
+  "hard_not_evaluated": {
+    "B005": 126,
+    "B006": 126,
+    "B007": 126,
+    "B008": 126,
+    "B009": 126,
+    "B025": 126,
+    "C004": 126,
+    "C005": 126,
+    "E001": 126,
+    "E002": 126,
+    "K006": 126,
+    "K012": 126,
+    "K017": 126,
+    "L006": 126,
+    "L010": 126,
+    "L023": 126,
+    "T001": 126,
+    "T002": 126,
+    "T010": 126,
+    "T011": 126,
+    "T015": 126,
+    "T016": 126,
+    "T017": 126
+  },
+  "hard_vetoes_proxy": {
+    "CR006": 126,
+    "CR009": 126,
+    "L002": 12,
+    "L004": 11,
+    "L005": 12,
+    "L007": 1
+  },
+  "hard_vetoes_rigorous": {
+    "B022": 126,
+    "K004": 126,
+    "L001": 34
+  },
+  "n_evaluated_points": 126,
+  "n_requested": 2500,
+  "n_rows": 2500,
+  "n_skipped": 2374,
+  "provenance": {
+    "dirty": true,
+    "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+    "registry_count": 103,
+    "schema": "full_catalog_scan_w6b_row_v1"
+  },
+  "seed": 22260610,
+  "skip_reasons": {
+    "nonperturbative_lepton_yukawa": 2373,
+    "quark_fit_failed": 1
+  },
+  "survives_all_HARD_inclusive": 0,
+  "survives_all_HARD_strict": 0,
+  "tag_counts": {
+    "partial": 3780,
+    "proxy": 6048,
+    "rigorous": 2520,
+    "stub": 630
+  },
+  "tile_id": 2,
+  "timing": {
+    "cache_build_seconds": 58.19004237500485,
+    "draw_loop_seconds": 947.5134632090048,
+    "elapsed_seconds": 1005.703527160018,
+    "post_cache_seconds_per_draw": 0.37900538528360195,
+    "post_cache_seconds_per_evaluated_point": 7.519948120706387
+  }
+}

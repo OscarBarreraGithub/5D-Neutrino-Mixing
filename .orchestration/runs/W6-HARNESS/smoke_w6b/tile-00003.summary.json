@@ -1,0 +1,90 @@
+{
+  "cache_metrics": {
+    "lambda_ir_gev": 4083.7995671172457,
+    "mkk_gev": 10000.0,
+    "n_gauge_modes": 512,
+    "omega_precomputed": true,
+    "quadrature_order": 4096,
+    "spline_grid_size": 241,
+    "spline_max_a_rel_err": 3.9781141554582586e-08,
+    "spline_max_modes": 512,
+    "spline_verify_points": 41
+  },
+  "complete": true,
+  "config_hash": "ba868cdea6c09756",
+  "constraint_active": 12740,
+  "constraint_evaluated": 12740,
+  "constraint_evaluations": 13390,
+  "constraint_exception_rate": 0.04854368932038835,
+  "constraint_exceptions": 650,
+  "exception_ids": {
+    "E001": 130,
+    "E002": 130,
+    "L006": 130,
+    "L010": 130,
+    "L023": 130
+  },
+  "hard_not_evaluated": {
+    "B005": 130,
+    "B006": 130,
+    "B007": 130,
+    "B008": 130,
+    "B009": 130,
+    "B025": 130,
+    "C004": 130,
+    "C005": 130,
+    "E001": 130,
+    "E002": 130,
+    "K006": 130,
+    "K012": 130,
+    "K017": 130,
+    "L006": 130,
+    "L010": 130,
+    "L023": 130,
+    "T001": 130,
+    "T002": 130,
+    "T010": 130,
+    "T011": 130,
+    "T015": 130,
+    "T016": 130,
+    "T017": 130
+  },
+  "hard_vetoes_proxy": {
+    "CR009": 130
+  },
+  "hard_vetoes_rigorous": {
+    "B022": 130,
+    "K004": 62,
+    "L001": 27
+  },
+  "n_evaluated_points": 130,
+  "n_requested": 2500,
+  "n_rows": 2500,
+  "n_skipped": 2370,
+  "provenance": {
+    "dirty": true,
+    "git_sha": "659ef21e6878f2337d235b26c4fa701bf06280f7",
+    "registry_count": 103,
+    "schema": "full_catalog_scan_w6b_row_v1"
+  },
+  "seed": 20263631,
+  "skip_reasons": {
+    "nonperturbative_lepton_yukawa": 2370
+  },
+  "survives_all_HARD_inclusive": 0,
+  "survives_all_HARD_strict": 0,
+  "tag_counts": {
+    "partial": 3900,
+    "proxy": 6240,
+    "rigorous": 2600,
+    "stub": 650
+  },
+  "tile_id": 3,
+  "timing": {
+    "cache_build_seconds": 58.064148186007515,
+    "draw_loop_seconds": 945.5496716280177,
+    "elapsed_seconds": 1003.6138398270123,
+    "post_cache_seconds_per_draw": 0.37821986865120705,
+    "post_cache_seconds_per_evaluated_point": 7.273459012523213
+  }
+}
