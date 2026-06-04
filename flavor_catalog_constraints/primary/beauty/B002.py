@@ -12,10 +12,8 @@ restricted to the B_d Delta F = 2 mixing amplitude,
 The complex ``M12^NP`` is evaluated through the Delta F = 2 adapter after
 QCD-running the B_d Wilson coefficients to ``mu_had = 2 GeV``.  The SM
 amplitude convention is ``M12^SM = Delta m_Bd^SM / 2`` from the same B_d core
-inputs used by B001.  The ``2 beta`` phase is not available from a core CKM fit
-in this repository, so this constraint explicitly flags that piece as
-``NEEDS-HUMAN-PHYSICS`` and uses the documented HFLAV physical solution in
-``B002.yaml``.
+inputs used by B001.  The ``2 beta`` phase is computed in core from the
+repo-owned CKM target via the rephasing-invariant unitarity-triangle angle.
 
 Severity
 --------
@@ -24,8 +22,9 @@ an uncertainty-aware dimensionless budget,
 
     sqrt(sigma_exp^2 + sigma_sin2beta^2 + sigma_penguin^2),
 
-where the first two terms come from the HFLAV average and physical beta
-solution in ``B002.yaml`` and the penguin term converts the documented
+where the first term comes from the HFLAV average, the second uses the
+documented HFLAV physical-beta uncertainty in ``B002.yaml`` around the in-core
+CKM central value, and the penguin term converts the documented
 ``|Delta phi_d| <= 0.68 deg`` bound into an S shift using ``|cos(2 beta)|``.
 
 Catalog sidecar
@@ -53,6 +52,9 @@ from flavor_catalog_constraints.physics_adapters.deltaf2 import (
     bd_mixing_m12_np_from_wilsons_with_running,
     bd_mixing_wilsons_from_couplings,
 )
+from flavor_catalog_constraints.physics_adapters.ckm_extraction import (
+    repo_default_ckm_phases,
+)
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "beauty"
@@ -71,9 +73,9 @@ _BUDGET_DOC_CITATION = (
     "flavor_catalog/processes/beauty/B002.tex:"
     "Constraint validity and model dependence"
 )
-_NEEDS_HUMAN_PHYSICS_2BETA = (
-    "NEEDS-HUMAN-PHYSICS: no core CKM/global-fit 2 beta phase is available; "
-    "using B002.yaml beta_physical_solution."
+_SM_PHASE_SOURCE_POLICY = (
+    "SM 2 beta computed in core from the repo-owned ModernDefaultCKMTarget; "
+    "B002.yaml beta_physical_solution supplies only the uncertainty anchor."
 )
 
 
@@ -120,6 +122,9 @@ class SpsiKsBudgetBand:
     sm_sin2beta_sigma: float
     penguin_phase_sigma: float
     sm_sin2beta: float
+    ckm_phase_source: str
+    beta_radians: float
+    beta_degrees: float
     two_beta_radians: float
     two_beta_degrees: float
     sigma_two_beta_radians: float
@@ -275,8 +280,9 @@ def _build_budget_band(
             f"{process_id}: core B_d M12^SM must be positive, got {m12_sm}"
         )
 
-    sm_sin2beta = math.sin(beta_solution.two_beta_radians)
-    cos_two_beta_abs = abs(math.cos(beta_solution.two_beta_radians))
+    ckm_phase = repo_default_ckm_phases()
+    sm_sin2beta = ckm_phase.sin_2beta
+    cos_two_beta_abs = abs(math.cos(ckm_phase.two_beta))
     sm_sigma = cos_two_beta_abs * beta_solution.sigma_two_beta_radians
     penguin_sigma = (
         cos_two_beta_abs * penguin_phase_bound.bound_abs_delta_phi_d_radians
@@ -300,8 +306,11 @@ def _build_budget_band(
         sm_sin2beta_sigma=sm_sigma,
         penguin_phase_sigma=penguin_sigma,
         sm_sin2beta=sm_sin2beta,
-        two_beta_radians=beta_solution.two_beta_radians,
-        two_beta_degrees=beta_solution.two_beta_degrees,
+        ckm_phase_source=ckm_phase.source,
+        beta_radians=ckm_phase.beta,
+        beta_degrees=ckm_phase.beta_degrees,
+        two_beta_radians=ckm_phase.two_beta,
+        two_beta_degrees=ckm_phase.two_beta_degrees,
         sigma_two_beta_radians=beta_solution.sigma_two_beta_radians,
         penguin_bound_radians=penguin_phase_bound.bound_abs_delta_phi_d_radians,
         m12_sm_gev=m12_sm,
@@ -375,7 +384,8 @@ class Constraint:
                 ),
                 diagnostics={
                     "missing_extra": _REQUIRED_EXTRA,
-                    "needs_human_physics": (_NEEDS_HUMAN_PHYSICS_2BETA,),
+                    "sm_phase_source_policy": _SM_PHASE_SOURCE_POLICY,
+                    "ckm_phase_source": self.anchor.budget_band.ckm_phase_source,
                 },
             )
 
@@ -412,8 +422,7 @@ class Constraint:
             notes=(
                 "S_psiK_S = sin(2 beta + arg(1 + M12_Bd^NP/M12_Bd^SM)); "
                 "M12_Bd^NP is the complex QCD-running Delta F=2 amplitude at "
-                "2 GeV. 2 beta uses B002.yaml and is flagged "
-                "NEEDS-HUMAN-PHYSICS because no core CKM phase is available."
+                "2 GeV. 2 beta is computed in core from the repo CKM target."
             ),
             diagnostics={
                 "m12_np_gev": complex(m12_np),
@@ -459,6 +468,9 @@ class Constraint:
                 ),
                 "two_beta_rad": self.anchor.budget_band.two_beta_radians,
                 "two_beta_deg": self.anchor.budget_band.two_beta_degrees,
+                "beta_rad": self.anchor.budget_band.beta_radians,
+                "beta_deg": self.anchor.budget_band.beta_degrees,
+                "ckm_phase_source": self.anchor.budget_band.ckm_phase_source,
                 "sigma_two_beta_rad": (
                     self.anchor.budget_band.sigma_two_beta_radians
                 ),
@@ -473,8 +485,7 @@ class Constraint:
                 "core_legacy_ratio_to_budget": float(
                     core_magnitude.ratio_to_budget
                 ),
-                "needs_human_physics": (_NEEDS_HUMAN_PHYSICS_2BETA,),
-                "sm_phase_source_policy": _NEEDS_HUMAN_PHYSICS_2BETA,
+                "sm_phase_source_policy": _SM_PHASE_SOURCE_POLICY,
                 "experimental_block": self.anchor.experimental.block_key,
                 "mode_specific_block": (
                     self.anchor.mode_specific_jpsi_ks.block_key

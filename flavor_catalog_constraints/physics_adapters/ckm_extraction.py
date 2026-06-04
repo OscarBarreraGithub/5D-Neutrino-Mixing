@@ -7,9 +7,13 @@ Constraint modules import this adapter rather than reaching into
 from __future__ import annotations
 
 from quarkConstraints.ckm_extraction import (
+    CKMPhaseAngles,
     KL3VusExtraction,
     VusConsistencyResult,
+    ckm_phases_from_matrix,
     extract_vus_from_kl3,
+    repo_default_ckm_matrix,
+    repo_default_ckm_phases,
     vus_consistency_pull,
 )
 
@@ -22,9 +26,13 @@ K018_RS_MATCHING_GAP = (
 )
 
 __all__ = [
+    "CKMPhaseAngles",
     "K018_RS_MATCHING_GAP",
     "KL3VusExtraction",
     "VusConsistencyResult",
+    "ckm_phases_from_matrix",
     "extract_vus_from_kl3",
+    "repo_default_ckm_matrix",
+    "repo_default_ckm_phases",
     "vus_consistency_pull",
 ]

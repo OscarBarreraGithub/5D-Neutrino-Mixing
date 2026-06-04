@@ -13,10 +13,8 @@ quark-flavor plugin the new physics is restricted to the complex
 The complex ``M12^NP`` is evaluated through the Delta F = 2 adapter after
 QCD-running the B_s Wilson coefficients to ``mu_had = 2 GeV``.  The SM
 amplitude convention is ``M12^SM = Delta m_Bs^SM / 2`` from the same B_s core
-inputs used by B003.  The SM ``phi_s`` reference phase is not available from a
-core CKM fit in this repository, so this constraint explicitly flags that
-piece as ``NEEDS-HUMAN-PHYSICS`` and uses the documented ``-2 beta_s`` value in
-``B004.yaml``.
+inputs used by B003.  The SM ``phi_s`` reference phase is computed in core
+from the repo-owned CKM target as ``phi_s = -2 beta_s``.
 
 Severity
 --------
@@ -29,8 +27,8 @@ Catalog sidecar
 ---------------
 ``flavor_catalog/processes/beauty/B004.yaml`` is the source of truth for the
 HFLAV phase average, the mode-specific ``J/psi K+K-`` average, the latest LHCb
-input, and the SM ``-2 beta_s`` reference.  Numeric values below are loaded
-through the scaffold anchor loader, not hardcoded in this constraint.
+input, and the SM ``-2 beta_s`` uncertainty.  The central SM phase is computed
+from the in-core CKM matrix target.
 """
 
 from __future__ import annotations
@@ -42,6 +40,9 @@ from typing import Any, Mapping
 
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
+from flavor_catalog_constraints.physics_adapters.ckm_extraction import (
+    repo_default_ckm_phases,
+)
 from flavor_catalog_constraints.physics_adapters.deltaf2 import (
     bs_mixing_core_inputs,
     bs_mixing_from_wilsons_with_running,
@@ -67,23 +68,28 @@ _BUDGET_DOC_CITATION = (
     "flavor_catalog/processes/beauty/B004.tex:"
     "Constraint validity / model dependence"
 )
-_NEEDS_HUMAN_PHYSICS_SM_PHASE = (
-    "NEEDS-HUMAN-PHYSICS: no core CKM/global-fit phi_s^SM (-2 beta_s) "
-    "phase is available; using B004.yaml standard_model_reference."
+_SM_PHASE_SOURCE_POLICY = (
+    "SM phi_s = -2 beta_s computed in core from the repo-owned "
+    "ModernDefaultCKMTarget; B004.yaml standard_model_reference supplies only "
+    "the uncertainty anchor."
 )
 
 
 @dataclass(frozen=True)
 class PhiSStandardModelReference:
-    """Typed SM ``-2 beta_s`` phase reference from the B004 sidecar."""
+    """Typed SM ``-2 beta_s`` phase reference and uncertainty provenance."""
 
     block_key: str
     source: str | None
     year: int | None
     value: float
+    yaml_value: float
     upper_uncertainty: float
     lower_uncertainty: float
     sigma: float
+    ckm_phase_source: str
+    beta_s: float
+    beta_s_degrees: float
     units: str | None
     observable: str | None
     source_url: str | None
@@ -211,14 +217,19 @@ def _load_sm_reference(process_id: str) -> PhiSStandardModelReference:
         raise AnchorError(
             f"{process_id}: SM phi_s asymmetric uncertainties must be positive"
         )
+    ckm_phase = repo_default_ckm_phases()
     return PhiSStandardModelReference(
         block_key=sm_anchor.block_key,
         source=sm_anchor.source,
         year=sm_anchor.year,
-        value=sm_anchor.value,
+        value=ckm_phase.phi_s,
+        yaml_value=sm_anchor.value,
         upper_uncertainty=upper,
         lower_uncertainty=lower,
         sigma=max(upper, lower),
+        ckm_phase_source=ckm_phase.source,
+        beta_s=ckm_phase.beta_s,
+        beta_s_degrees=ckm_phase.beta_s_degrees,
         units=sm_anchor.units,
         observable=sm_anchor.observable,
         source_url=sm_anchor.source_url,
@@ -372,7 +383,8 @@ class Constraint:
                 ),
                 diagnostics={
                     "missing_extra": _REQUIRED_EXTRA,
-                    "needs_human_physics": (_NEEDS_HUMAN_PHYSICS_SM_PHASE,),
+                    "sm_phase_source_policy": _SM_PHASE_SOURCE_POLICY,
+                    "ckm_phase_source": self.anchor.standard_model.ckm_phase_source,
                 },
             )
 
@@ -405,8 +417,7 @@ class Constraint:
             notes=(
                 "phi_s = phi_s^SM + arg(1 + M12_Bs^NP/M12_Bs^SM); "
                 "M12_Bs^NP is the complex QCD-running Delta F=2 amplitude at "
-                "2 GeV. phi_s^SM uses B004.yaml and is flagged "
-                "NEEDS-HUMAN-PHYSICS because no core CKM phase is available."
+                "2 GeV. phi_s^SM is computed in core from the repo CKM target."
             ),
             diagnostics={
                 "m12_np_gev": complex(m12_np),
@@ -468,8 +479,10 @@ class Constraint:
                 "core_legacy_ratio_to_budget": float(
                     core_magnitude.ratio_to_budget
                 ),
-                "needs_human_physics": (_NEEDS_HUMAN_PHYSICS_SM_PHASE,),
-                "sm_phase_source_policy": _NEEDS_HUMAN_PHYSICS_SM_PHASE,
+                "sm_phase_source_policy": _SM_PHASE_SOURCE_POLICY,
+                "ckm_phase_source": self.anchor.standard_model.ckm_phase_source,
+                "beta_s_rad": self.anchor.standard_model.beta_s,
+                "beta_s_deg": self.anchor.standard_model.beta_s_degrees,
                 "experimental_block": self.anchor.experimental.block_key,
                 "mode_specific_block": (
                     self.anchor.mode_specific_jpsi_kk.block_key
@@ -485,6 +498,7 @@ class Constraint:
                     self.anchor.latest_lhcb_jpsi_kk.value
                 ),
                 "sm_reference_block": self.anchor.standard_model.block_key,
+                "sm_reference_yaml_value": self.anchor.standard_model.yaml_value,
                 "sm_reference_source_url": self.anchor.standard_model.source_url,
             },
         )

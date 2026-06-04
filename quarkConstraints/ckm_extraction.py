@@ -13,13 +13,20 @@ components propagated in quadrature.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import cmath
 import math
 from typing import Mapping
 
+import numpy as np
+
 __all__ = [
+    "CKMPhaseAngles",
     "KL3VusExtraction",
     "VusConsistencyResult",
+    "ckm_phases_from_matrix",
     "extract_vus_from_kl3",
+    "repo_default_ckm_matrix",
+    "repo_default_ckm_phases",
     "vus_consistency_pull",
 ]
 
@@ -59,6 +66,22 @@ class VusConsistencyResult:
     passes: bool
 
 
+@dataclass(frozen=True)
+class CKMPhaseAngles:
+    """Rephasing-invariant CKM angles relevant for neutral B mixing."""
+
+    source: str
+    beta: float
+    beta_degrees: float
+    two_beta: float
+    two_beta_degrees: float
+    sin_2beta: float
+    beta_s: float
+    beta_s_degrees: float
+    phi_s: float
+    phi_s_degrees: float
+
+
 def _finite_float(name: str, value: object) -> float:
     try:
         number = float(value)
@@ -81,6 +104,99 @@ def _nonnegative_float(name: str, value: object) -> float:
     if number < 0.0:
         raise ValueError(f"{name} must be nonnegative")
     return number
+
+
+def _ckm_matrix(name: str, values: object) -> np.ndarray:
+    matrix = np.asarray(values, dtype=np.complex128)
+    if matrix.shape != (3, 3):
+        raise ValueError(f"{name} must have shape (3, 3)")
+    if not np.all(np.isfinite(matrix.real)) or not np.all(np.isfinite(matrix.imag)):
+        raise ValueError(f"{name} must contain finite entries")
+    return matrix
+
+
+def _nonzero_complex(name: str, value: complex) -> complex:
+    number = complex(value)
+    if not math.isfinite(number.real) or not math.isfinite(number.imag):
+        raise ValueError(f"{name} must be finite")
+    if abs(number) <= 0.0:
+        raise ValueError(f"{name} must be non-zero")
+    return number
+
+
+def ckm_phases_from_matrix(
+    ckm: object,
+    *,
+    source: str = "ckm_matrix_input",
+) -> CKMPhaseAngles:
+    """Compute ``beta``, ``sin(2 beta)``, and ``phi_s = -2 beta_s``.
+
+    The phase conventions are the standard rephasing-invariant definitions
+
+    ``beta = arg(-(V_cd V_cb*) / (V_td V_tb*))``
+
+    and
+
+    ``beta_s = arg(-(V_ts V_tb*) / (V_cs V_cb*))``.
+    """
+
+    matrix = _ckm_matrix("ckm", ckm)
+    beta_denominator = _nonzero_complex(
+        "V_td V_tb*",
+        matrix[2, 0] * np.conjugate(matrix[2, 2]),
+    )
+    beta_s_denominator = _nonzero_complex(
+        "V_cs V_cb*",
+        matrix[1, 1] * np.conjugate(matrix[1, 2]),
+    )
+    beta_ratio = -(
+        matrix[1, 0] * np.conjugate(matrix[1, 2])
+    ) / beta_denominator
+    beta_s_ratio = -(
+        matrix[2, 1] * np.conjugate(matrix[2, 2])
+    ) / beta_s_denominator
+    beta = float(cmath.phase(beta_ratio))
+    beta_s = float(cmath.phase(beta_s_ratio))
+    two_beta = 2.0 * beta
+    phi_s = -2.0 * beta_s
+    return CKMPhaseAngles(
+        source=str(source),
+        beta=beta,
+        beta_degrees=math.degrees(beta),
+        two_beta=two_beta,
+        two_beta_degrees=math.degrees(two_beta),
+        sin_2beta=float(math.sin(two_beta)),
+        beta_s=beta_s,
+        beta_s_degrees=math.degrees(beta_s),
+        phi_s=phi_s,
+        phi_s_degrees=math.degrees(phi_s),
+    )
+
+
+def repo_default_ckm_matrix() -> np.ndarray:
+    """Return the repo-owned PDG-2024 CKM target unitary."""
+
+    from quarkConstraints.modern.inputs import ModernDefaultCKMTarget
+    from quarkConstraints.model import RotationParameters, ckm_like_unitary
+
+    target = ModernDefaultCKMTarget()
+    return ckm_like_unitary(
+        RotationParameters(
+            theta12=float(target.theta12),
+            theta13=float(target.theta13),
+            theta23=float(target.theta23),
+            delta=float(target.delta),
+        )
+    )
+
+
+def repo_default_ckm_phases() -> CKMPhaseAngles:
+    """Return B-mixing CKM phases from the repo-owned PDG-2024 target."""
+
+    from quarkConstraints.modern.inputs import ModernDefaultCKMTarget
+
+    target = ModernDefaultCKMTarget()
+    return ckm_phases_from_matrix(repo_default_ckm_matrix(), source=target.target_id)
 
 
 def extract_vus_from_kl3(

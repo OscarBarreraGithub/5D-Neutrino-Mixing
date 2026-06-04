@@ -31,6 +31,7 @@ from quarkConstraints.deltaf2 import (
     evaluate_bs_mixing_with_running,
     _evolve_wilsons,
 )
+from quarkConstraints.ckm_extraction import repo_default_ckm_phases
 
 _PID = "B004"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -90,17 +91,22 @@ def _budget_from_yaml_and_core():
     pdg = _yaml_pdg_block()
     exp = pdg["canonical_hflav_average"]
     sm = pdg["standard_model_reference"]
+    phase = repo_default_ckm_phases()
     exp_sigma = float(exp["uncertainty"])
     sm_upper = abs(float(sm["upper_uncertainty"]))
     sm_lower = abs(float(sm["lower_uncertainty"]))
     combined_upper = math.sqrt(exp_sigma * exp_sigma + sm_upper * sm_upper)
     combined_lower = math.sqrt(exp_sigma * exp_sigma + sm_lower * sm_lower)
     return {
-        "central_residual": abs(_wrap_phase(float(sm["value"]) - float(exp["value"]))),
+        "central_residual": abs(_wrap_phase(phase.phi_s - float(exp["value"]))),
         "combined_upper": combined_upper,
         "combined_lower": combined_lower,
         "hard_budget": max(combined_upper, combined_lower),
         "m12_sm": DELTA_M_BS_SM / 2.0,
+        "phi_s": phase.phi_s,
+        "beta_s": phase.beta_s,
+        "beta_s_deg": phase.beta_s_degrees,
+        "ckm_phase_source": phase.source,
     }
 
 
@@ -169,12 +175,20 @@ def test_anchor_matches_yaml_and_budget_band():
     assert constraint.anchor.latest_lhcb_jpsi_kk.value == pytest.approx(
         latest["value"]
     )
-    assert constraint.anchor.standard_model.value == pytest.approx(sm["value"])
+    assert constraint.anchor.standard_model.value == pytest.approx(budget["phi_s"])
+    assert constraint.anchor.standard_model.yaml_value == pytest.approx(sm["value"])
     assert constraint.anchor.standard_model.upper_uncertainty == pytest.approx(
         sm["upper_uncertainty"]
     )
     assert constraint.anchor.standard_model.lower_uncertainty == pytest.approx(
         sm["lower_uncertainty"]
+    )
+    assert constraint.anchor.standard_model.beta_s == pytest.approx(budget["beta_s"])
+    assert constraint.anchor.standard_model.beta_s_degrees == pytest.approx(
+        budget["beta_s_deg"]
+    )
+    assert constraint.anchor.standard_model.ckm_phase_source == (
+        budget["ckm_phase_source"]
     )
     assert constraint.anchor.standard_model.source_url == sm["source_url"]
 
@@ -188,7 +202,7 @@ def test_anchor_matches_yaml_and_budget_band():
         budget["combined_lower"]
     )
     assert constraint.anchor.budget == pytest.approx(budget["hard_budget"])
-    assert constraint.anchor.budget == pytest.approx(0.016025292508658584)
+    assert constraint.anchor.budget == pytest.approx(0.016025292509030842)
     assert constraint.anchor.budget_band.m12_sm_gev == pytest.approx(
         budget["m12_sm"]
     )
@@ -221,15 +235,19 @@ def test_evaluate_without_input_degrades_gracefully():
     assert result.sm_prediction == pytest.approx(constraint.anchor.sm_value)
     assert result.budget == pytest.approx(constraint.anchor.budget)
     assert result.diagnostics["missing_extra"] == "quark_mass_basis_couplings"
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"][0]
+    assert "needs_human_physics" not in result.diagnostics
+    assert "NEEDS-HUMAN-PHYSICS" not in result.notes
+    assert result.diagnostics["ckm_phase_source"] == repo_default_ckm_phases().source
 
 
-def test_sm_limit_uses_yaml_phi_s_reference():
+def test_sm_limit_uses_in_core_ckm_phi_s_reference():
     constraint = fcc.get(_PID)
+    phase = repo_default_ckm_phases()
     couplings = _bs_couplings(left=0.0j, right=0.0j)
     result = constraint.evaluate(point_builder.build_from_quark_couplings(couplings))
 
-    assert result.predicted == pytest.approx(-0.0368)
+    assert result.predicted == pytest.approx(phase.phi_s)
+    assert result.predicted == pytest.approx(-0.037945102831894784)
     assert result.predicted == pytest.approx(result.sm_prediction)
     assert result.ratio == pytest.approx(
         abs(result.predicted - constraint.anchor.value)
@@ -237,7 +255,10 @@ def test_sm_limit_uses_yaml_phi_s_reference():
     )
     assert result.passes is True
     assert result.diagnostics["phi_s_np_rad"] == pytest.approx(0.0)
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"][0]
+    assert result.diagnostics["ckm_phase_source"] == phase.source
+    assert result.diagnostics["beta_s_rad"] == pytest.approx(phase.beta_s)
+    assert "needs_human_physics" not in result.diagnostics
+    assert "NEEDS-HUMAN-PHYSICS" not in result.notes
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
@@ -285,6 +306,8 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
         "budget_experimental_sigma",
         "budget_sm_phase_sigma_upper",
         "budget_sm_phase_sigma_lower",
+        "beta_s_rad",
+        "beta_s_deg",
         "delta_m_bs_sm_gev",
         "core_delta_m_bs_exp_gev",
         "core_legacy_m12_budget",
@@ -297,7 +320,9 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     assert result.diagnostics["core_input_key"] == "b_s"
     assert result.diagnostics["down_sector_indices"] == (1, 2)
     assert result.diagnostics["phase_uses_complex_m12_not_abs"] is True
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"][0]
+    assert result.diagnostics["ckm_phase_source"] == repo_default_ckm_phases().source
+    assert "needs_human_physics" not in result.diagnostics
+    assert "NEEDS-HUMAN-PHYSICS" not in result.notes
 
 
 def test_numbers_match_direct_running_complex_m12_phase_evaluator():
