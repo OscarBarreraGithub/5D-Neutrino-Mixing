@@ -19,10 +19,12 @@ LEP/SLC SM-fit ``R_b`` value in the YAML-referenced local source snapshot.
 
 RS matching status
 ------------------
-PARTIAL / NEEDS-HUMAN-PHYSICS.  The minimal-RS gauge neutral-current piece is
-read from the Phase-3a ``rs_ew_couplings`` extra.  The classic ``Zbb``
-fermion-KK/custodial/BKT completion is not included until Phase 6, so the
-diagnostics keep an explicit partial-status flag.
+Minimal-RS tree matching is read from the ``rs_ew_couplings`` extra.  When
+that object was built with ``include_fermion_kk_mixing=True``, its
+``z_delta_g_L/R_d[2,2]`` entries contain the gauge light-Z shift plus the
+minimal non-custodial Casagrande ZMA fermion-KK admixture.  Custodial
+representations, top-partner ``Zb_L`` terms, and BKT variants remain explicit
+human-input model choices.
 
 Severity
 --------
@@ -77,17 +79,21 @@ _SM_SNAPSHOT_LABELS = {
     _AB_OBSERVABLE: "A_b",
 }
 _NUMBER_RE = r"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?"
-_NEEDS_HUMAN_PHYSICS = (
-    "PARTIAL/NEEDS-HUMAN-PHYSICS: Phase-3b uses rigorous minimal-RS gauge "
-    "neutral-current z_delta_g_L/R_d[2,2] from rs_ew_couplings; the classic "
-    "Zbb fermion-KK, custodial-representation, and brane-kinetic-term "
-    "completion is deferred to Phase 6."
+_CUSTODIAL_VARIANT_STATUS = (
+    "NEEDS-HUMAN-PHYSICS: custodial representations, exotic/top-partner "
+    "Zb_L terms, and brane-kinetic-term variants are not inferred from the "
+    "minimal-RS quark fit."
+)
+_MINIMAL_RS_TREE_STATUS = (
+    "minimal-RS tree Zbb uses rs_ew_couplings.z_delta_g_L/R_d[2,2]; when "
+    "fermion_kk_mixing_included=True this is gauge plus the Casagrande ZMA "
+    "fermion-KK admixture."
 )
 _UNEVALUATED_REASON = "rs_ew_couplings not provided"
 _UNEVALUATED_NOTES = (
     "T010 not evaluated: rs_ew_couplings not provided on ParameterPoint. "
     "Result is non-vetoing and diagnostic-only; build points with "
-    "build_from_rs_ew_inputs for the rigorous Phase-3b path."
+    "build_from_rs_ew_inputs for the minimal-RS tree path."
 )
 
 
@@ -443,6 +449,26 @@ def _coupling_entry(source: Any, matrix_name: str, row: int, column: int) -> com
     return value
 
 
+def _rs_zbb_matching_diagnostics(source: Any | None) -> dict[str, Any]:
+    metadata = getattr(source, "metadata", {}) if source is not None else {}
+    if not isinstance(metadata, Mapping):
+        metadata = {}
+    fermion_included = bool(metadata.get("fermion_kk_mixing_included", False))
+    minimal_complete = bool(
+        metadata.get("minimal_rs_tree_zbb_complete", fermion_included)
+    )
+    return {
+        "minimal_rs_tree_complete": minimal_complete,
+        "minimal_rs_tree_status": _MINIMAL_RS_TREE_STATUS,
+        "fermion_kk_mixing_included": fermion_included,
+        "custodial_variant_needs_human": True,
+        "custodial_toppartner_zbL_needs_human": bool(
+            metadata.get("custodial_toppartner_zbL_needs_human", True)
+        ),
+        "needs_human_physics": _CUSTODIAL_VARIANT_STATUS,
+    }
+
+
 @register
 class Constraint:
     """Catalogued ``Z -> b bbar`` precision-electroweak constraint."""
@@ -475,10 +501,10 @@ class Constraint:
                 "evaluated": False,
                 "unevaluated_reason": _UNEVALUATED_REASON,
                 "passes_semantics": (
-                    "non-vetoing only; no Zbb Phase-3b NP prediction was evaluated"
+                    "non-vetoing only; no Zbb minimal-RS tree NP prediction was evaluated"
                 ),
                 "required_parameter_point_extras": [_REQUIRED_EXTRA],
-                "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+                **_rs_zbb_matching_diagnostics(None),
                 **dict(diagnostics),
             },
         )
@@ -563,7 +589,7 @@ class Constraint:
             "fcc_ee_projection_relative_uncertainty_percent": float(
                 self.anchor.fcc_projection.value
             ),
-            "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
+            **_rs_zbb_matching_diagnostics(rs_ew_couplings),
             "rs_matching_assumption": getattr(
                 rs_ew_couplings, "matching_assumption", None
             ),
@@ -592,9 +618,10 @@ class Constraint:
                 "pseudo-observables use effective Zbb couplings with the "
                 "bottom width radiator calibrated to the YAML-referenced "
                 "LEP/SLC SM-fit R_b value. Point-specific RS shifts use "
-                "Phase-3a minimal-RS gauge neutral-current z_delta_g_L/R_d[2,2]; "
-                "Zbb fermion-KK/custodial/BKT completion remains "
-                "PARTIAL/NEEDS-HUMAN-PHYSICS."
+                "rs_ew_couplings.z_delta_g_L/R_d[2,2], including the "
+                "minimal Casagrande fermion-KK admixture when that builder "
+                "flag was enabled. Custodial/top-partner and BKT variants "
+                "remain human-input model choices."
             ),
             diagnostics=diagnostics,
         )

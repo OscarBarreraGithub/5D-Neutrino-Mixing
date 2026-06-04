@@ -310,7 +310,12 @@ def test_rigorous_rs_ew_zbb_point_matches_independent_core_recomputation():
         manual_observables.a_q
     )
     assert result.ratio == pytest.approx(_manual_t011_ratio(constraint, manual_observables))
-    assert "PARTIAL/NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert result.diagnostics["minimal_rs_tree_complete"] is False
+    assert result.diagnostics["fermion_kk_mixing_included"] is False
+    assert result.diagnostics["custodial_variant_needs_human"] is True
+    assert result.diagnostics["custodial_toppartner_zbL_needs_human"] is True
+    assert "top-partner" in result.diagnostics["needs_human_physics"]
+    assert "PARTIAL/NEEDS-HUMAN-PHYSICS" not in result.diagnostics["needs_human_physics"]
 
 
 def test_old_style_point_reports_unevaluated_rs_ew_missing_extra():

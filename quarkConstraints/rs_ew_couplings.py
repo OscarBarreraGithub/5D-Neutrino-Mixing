@@ -29,6 +29,12 @@ RS_EW_COUPLINGS_MATCHING_ASSUMPTION_V1 = (
     "currents with full light-Z product-minus-SM semileptonic contacts; "
     "heavy neutral Z'/gamma' exchange remains deferred"
 )
+RS_ZBB_FERMION_KK_MIXING_MODEL_V1 = "RS_ZBB_FERMION_KK_MIXING_PHASE6A_V1"
+RS_ZBB_FERMION_KK_MIXING_MATCHING_ASSUMPTION_V1 = (
+    "minimal non-custodial Casagrande ZMA fermion-KK admixture for diagonal "
+    "Z b bbar only; no exact tower diagonalization, custodial top partner, "
+    "exotic fermion, or BKT contribution is inferred"
+)
 RS_LEPTON_MASS_BASIS_INPUT_BUNDLE_V1 = (
     "quarkConstraints.rs_ew_couplings.lepton_inputs.v1"
 )
@@ -171,6 +177,59 @@ class RSLeptonMassBasisCouplings:
     @property
     def pmns_matrix(self) -> np.ndarray:
         return self.pmns
+
+
+@dataclass(frozen=True)
+class RSZbbFermionKKMixing:
+    """Minimal-RS Casagrande Zbb fermion-KK admixture result."""
+
+    model_label: str
+    matching_assumption: str
+    lambda_ir_gev: float
+    m_b_gev: float
+    c_Q: np.ndarray
+    c_d: np.ndarray
+    F_Q: np.ndarray
+    F_d: np.ndarray
+    Y_d_bulk_basis: np.ndarray
+    profile_B_Q: np.ndarray
+    profile_B_d: np.ndarray
+    yukawa_ratio_column_b: np.ndarray
+    yukawa_ratio_row_b: np.ndarray
+    B_Q: float
+    B_d: float
+    delta_g_L_b: float
+    delta_g_R_b: float
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        lambda_ir = float(self.lambda_ir_gev)
+        if not math.isfinite(lambda_ir) or lambda_ir <= 0.0:
+            raise ValueError("lambda_ir_gev must be positive and finite")
+        m_b = float(self.m_b_gev)
+        if not math.isfinite(m_b) or m_b < 0.0:
+            raise ValueError("m_b_gev must be non-negative and finite")
+        object.__setattr__(self, "lambda_ir_gev", lambda_ir)
+        object.__setattr__(self, "m_b_gev", m_b)
+
+        for name in ("c_Q", "c_d", "F_Q", "F_d", "profile_B_Q", "profile_B_d"):
+            object.__setattr__(self, name, _readonly_real_triplet(getattr(self, name), name))
+        for name in ("yukawa_ratio_column_b", "yukawa_ratio_row_b"):
+            arr = _readonly_real_triplet(getattr(self, name), name)
+            if np.any(arr < 0.0):
+                raise ValueError(f"{name} must be non-negative")
+            object.__setattr__(self, name, arr)
+        object.__setattr__(
+            self,
+            "Y_d_bulk_basis",
+            _readonly_complex_matrix(self.Y_d_bulk_basis, "Y_d_bulk_basis"),
+        )
+        for name in ("B_Q", "B_d", "delta_g_L_b", "delta_g_R_b"):
+            value = float(getattr(self, name))
+            if not math.isfinite(value):
+                raise ValueError(f"{name} must be finite")
+            object.__setattr__(self, name, value)
+        object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
 
 
 @dataclass(frozen=True)
@@ -400,6 +459,7 @@ def build_rs_ew_couplings(
     spectrum: RSEWSpectrum,
     lepton_mass_basis_couplings: RSLeptonMassBasisCouplings | None = None,
     inputs: RSEWNeutralCurrentInputs | None = None,
+    include_fermion_kk_mixing: bool = False,
     overlap_rel_tol: float = DEFAULT_OVERLAP_RTOL,
     min_overlap_modes: int = DEFAULT_MIN_TRUNCATION_MODES,
     max_overlap_modes: int | None = None,
@@ -489,6 +549,18 @@ def build_rs_ew_couplings(
     z_delta_r_u = _z_delta(g_r_u, a_mass["R_u"], scale=scale, s_z=p.s_z)
     z_delta_l_d = _z_delta(g_l_d, a_mass["L_d"], scale=scale, s_z=p.s_z)
     z_delta_r_d = _z_delta(g_r_d, a_mass["R_d"], scale=scale, s_z=p.s_z)
+    zbb_fermion_mixing = None
+    if include_fermion_kk_mixing:
+        zbb_fermion_mixing = build_rs_zbb_fermion_kk_mixing(
+            quark_fit_result,
+            spectrum=spectrum,
+        )
+        z_delta_l_d = np.array(z_delta_l_d, dtype=np.complex128, copy=True)
+        z_delta_r_d = np.array(z_delta_r_d, dtype=np.complex128, copy=True)
+        z_delta_l_d[2, 2] += complex(zbb_fermion_mixing.delta_g_L_b, 0.0)
+        z_delta_r_d[2, 2] += complex(zbb_fermion_mixing.delta_g_R_b, 0.0)
+        z_delta_l_d = _hermitian(z_delta_l_d)
+        z_delta_r_d = _hermitian(z_delta_r_d)
     lepton_matching_status: Mapping[str, Any]
     if lepton_mass_basis_couplings is None:
         z_delta_l_e = np.zeros((3, 3), dtype=np.complex128)
@@ -560,10 +632,17 @@ def build_rs_ew_couplings(
     )
 
     identity = np.eye(3, dtype=np.complex128)
+    matching_assumption = RS_EW_COUPLINGS_MATCHING_ASSUMPTION_V1
+    if zbb_fermion_mixing is not None:
+        matching_assumption = (
+            f"{matching_assumption}; "
+            "diagonal Zbb minimal non-custodial Casagrande fermion-KK "
+            "admixture included using Lambda_IR=spectrum.lambda_ir_gev"
+        )
     return RSEWMassBasisCouplings(
         model_label=RS_EW_COUPLINGS_MODEL_V1,
         input_bundle=p.input_bundle,
-        matching_assumption=RS_EW_COUPLINGS_MATCHING_ASSUMPTION_V1,
+        matching_assumption=matching_assumption,
         kk_ew_mass_gev=float(spectrum.kk_ew_mass_gev),
         m_z_gev=float(p.m_z_gev),
         alpha_em_mz=float(p.alpha_em_mz),
@@ -597,7 +676,10 @@ def build_rs_ew_couplings(
             "ew_model": "minimal_rs",
             "custodial_protection_included": False,
             "brane_kinetic_terms_included": False,
-            "fermion_kk_mixing_included": False,
+            "fermion_kk_mixing_included": bool(zbb_fermion_mixing is not None),
+            "minimal_rs_tree_zbb_complete": bool(zbb_fermion_mixing is not None),
+            "custodial_variant_needs_human": True,
+            "custodial_toppartner_zbL_needs_human": True,
             "overlap_rel_tol": float(overlap_rel_tol),
             "min_overlap_modes": int(min_modes),
             "max_overlap_modes": int(max_modes),
@@ -610,6 +692,86 @@ def build_rs_ew_couplings(
                 "s_Z * g_A_SM * (m_Z^2/M_KK^2) * U^dagger "
                 "diag(a(c)-a_ref) U"
             ),
+            "zbb_fermion_kk_mixing": (
+                None
+                if zbb_fermion_mixing is None
+                else _zbb_fermion_kk_mixing_metadata(zbb_fermion_mixing)
+            ),
+        },
+    )
+
+
+def build_rs_zbb_fermion_kk_mixing(
+    quark_fit_result: Any,
+    *,
+    spectrum: RSEWSpectrum,
+) -> RSZbbFermionKKMixing:
+    """Build the Phase-6a minimal non-custodial Zbb fermion-KK shift."""
+
+    bulk_state = _required_attr(quark_fit_result, "bulk_state")
+    c_q = _real_triplet_required_attr(bulk_state, "c_Q")
+    c_d = _real_triplet_required_attr(bulk_state, "c_d")
+    f_q = _positive_real_triplet_required_attr(bulk_state, "F_Q")
+    f_d = _positive_real_triplet_required_attr(bulk_state, "F_d")
+    y_d = _complex_matrix_required_attr(bulk_state, "Y_d_bulk_basis")
+    masses_down = _real_triplet_required_attr(quark_fit_result, "masses_down")
+    m_b = float(masses_down[2])
+    if m_b < 0.0:
+        raise ValueError("masses_down[2] must be non-negative")
+
+    lambda_ir = _positive_float(
+        _required_attr(spectrum, "lambda_ir_gev"),
+        "spectrum.lambda_ir_gev",
+    )
+    y33_abs_sq = float(abs(y_d[2, 2]) ** 2)
+    if not math.isfinite(y33_abs_sq) or y33_abs_sq <= 0.0:
+        raise ValueError("Y_d_bulk_basis[2,2] must be non-zero and finite")
+
+    profile_b_q = _casagrande_zbb_B_profile_triplet(c_q, f_q, name="B_Q")
+    profile_b_d = _casagrande_zbb_B_profile_triplet(c_d, f_d, name="B_d")
+    row_ratio = np.array(np.abs(y_d[2, :]) ** 2 / y33_abs_sq, dtype=float)
+    column_ratio = np.array(np.abs(y_d[:, 2]) ** 2 / y33_abs_sq, dtype=float)
+    if not np.all(np.isfinite(row_ratio)) or not np.all(np.isfinite(column_ratio)):
+        raise ValueError("Y_d_bulk_basis Yukawa-ratio sums contain non-finite entries")
+
+    # Casagrande's Zbb convention cross-assigns the singlet tower sum to
+    # delta g_L^b and the doublet tower sum to delta g_R^b; keep B_d/B_Q
+    # names explicit to avoid swapping the chiral shifts in future edits.
+    B_d = float(np.dot(row_ratio, profile_b_d))
+    B_Q = float(np.dot(column_ratio, profile_b_q))
+    prefactor = float(m_b * m_b / (2.0 * lambda_ir * lambda_ir))
+    delta_g_L_b = float(prefactor * B_d)
+    delta_g_R_b = float(-prefactor * B_Q)
+
+    return RSZbbFermionKKMixing(
+        model_label=RS_ZBB_FERMION_KK_MIXING_MODEL_V1,
+        matching_assumption=RS_ZBB_FERMION_KK_MIXING_MATCHING_ASSUMPTION_V1,
+        lambda_ir_gev=lambda_ir,
+        m_b_gev=m_b,
+        c_Q=c_q,
+        c_d=c_d,
+        F_Q=f_q,
+        F_d=f_d,
+        Y_d_bulk_basis=y_d,
+        profile_B_Q=profile_b_q,
+        profile_B_d=profile_b_d,
+        yukawa_ratio_column_b=column_ratio,
+        yukawa_ratio_row_b=row_ratio,
+        B_Q=B_Q,
+        B_d=B_d,
+        delta_g_L_b=delta_g_L_b,
+        delta_g_R_b=delta_g_R_b,
+        metadata={
+            "source": "Casagrande et al. arXiv:0807.4937 minimal-RS Zbb ZMA",
+            "M_KK_convention": "geometric Lambda_IR = spectrum.lambda_ir_gev",
+            "physical_first_gauge_mass_gev": float(spectrum.kk_ew_mass_gev),
+            "includes_exact_fermion_tower_diagonalization": False,
+            "fermion_kk_mixing_included": True,
+            "custodial_protection_included": False,
+            "custodial_variant_needs_human": True,
+            "custodial_toppartner_zbL_needs_human": True,
+            "brane_kinetic_terms_included": False,
+            "row_column_indexing": "zero-based b index 2",
         },
     )
 
@@ -633,6 +795,28 @@ def _resolve_max_overlap_modes(
 
 def _real_triplet_from_attr(source: Any, name: str) -> np.ndarray:
     return _readonly_real_triplet(getattr(source, name), name).copy()
+
+
+def _required_attr(source: Any, name: str) -> Any:
+    try:
+        return getattr(source, name)
+    except AttributeError as exc:
+        raise ValueError(f"{name} is required for RS Zbb fermion-KK mixing") from exc
+
+
+def _real_triplet_required_attr(source: Any, name: str) -> np.ndarray:
+    return _readonly_real_triplet(_required_attr(source, name), name).copy()
+
+
+def _positive_real_triplet_required_attr(source: Any, name: str) -> np.ndarray:
+    arr = _real_triplet_required_attr(source, name)
+    if np.any(arr <= 0.0):
+        raise ValueError(f"{name} must be strictly positive")
+    return arr
+
+
+def _complex_matrix_required_attr(source: Any, name: str) -> np.ndarray:
+    return _readonly_complex_matrix(_required_attr(source, name), name).copy()
 
 
 def _positive_float(value: Any, name: str) -> float:
@@ -731,6 +915,66 @@ def _hermitian(matrix: np.ndarray) -> np.ndarray:
 
 def _z_delta(g_sm: float, a_mass_basis: np.ndarray, *, scale: float, s_z: float) -> np.ndarray:
     return _hermitian(float(s_z) * float(g_sm) * float(scale) * a_mass_basis)
+
+
+def _casagrande_zbb_B_profile_triplet(
+    c_values: np.ndarray,
+    F_values: np.ndarray,
+    *,
+    name: str,
+) -> np.ndarray:
+    values = np.array(
+        [
+            _casagrande_zbb_B_profile(float(c), float(f), name=f"{name}[{idx}]")
+            for idx, (c, f) in enumerate(zip(c_values, F_values, strict=True))
+        ],
+        dtype=float,
+    )
+    values.setflags(write=False)
+    return values
+
+
+def _casagrande_zbb_B_profile(c: float, F: float, *, name: str) -> float:
+    if not math.isfinite(c):
+        raise ValueError(f"{name} c must be finite")
+    if not math.isfinite(F) or F <= 0.0:
+        raise ValueError(f"{name} F must be positive and finite")
+    denom_left = 1.0 - 2.0 * c
+    denom_right = 3.0 + 2.0 * c
+    if denom_left == 0.0 or denom_right == 0.0:
+        raise ValueError(f"{name} Casagrande B(c) denominator is singular")
+    value = (1.0 / denom_left) * (1.0 / (F * F) - 1.0 + (F * F) / denom_right)
+    if not math.isfinite(value):
+        raise ValueError(f"{name} Casagrande B(c) is non-finite")
+    return float(value)
+
+
+def _zbb_fermion_kk_mixing_metadata(
+    mixing: RSZbbFermionKKMixing,
+) -> dict[str, Any]:
+    return {
+        "model_label": mixing.model_label,
+        "matching_assumption": mixing.matching_assumption,
+        "lambda_ir_gev": float(mixing.lambda_ir_gev),
+        "m_b_gev": float(mixing.m_b_gev),
+        "B_Q": float(mixing.B_Q),
+        "B_d": float(mixing.B_d),
+        "delta_g_L_b": float(mixing.delta_g_L_b),
+        "delta_g_R_b": float(mixing.delta_g_R_b),
+        "profile_B_Q": np.array(mixing.profile_B_Q, dtype=float, copy=True),
+        "profile_B_d": np.array(mixing.profile_B_d, dtype=float, copy=True),
+        "yukawa_ratio_column_b": np.array(
+            mixing.yukawa_ratio_column_b,
+            dtype=float,
+            copy=True,
+        ),
+        "yukawa_ratio_row_b": np.array(
+            mixing.yukawa_ratio_row_b,
+            dtype=float,
+            copy=True,
+        ),
+        **dict(mixing.metadata),
+    }
 
 
 def _sm_chiral_z_coupling(species: str, chirality: str, sin2_theta_w: float) -> float:
@@ -924,12 +1168,16 @@ __all__ = [
     "RSLeptonMassBasisCouplings",
     "RSEWMassBasisCouplings",
     "RSEWNeutralCurrentInputs",
+    "RSZbbFermionKKMixing",
     "RS_EW_COUPLINGS_INPUT_BUNDLE_V1",
     "RS_EW_COUPLINGS_MATCHING_ASSUMPTION_V1",
     "RS_EW_COUPLINGS_MODEL_V1",
     "RS_LEPTON_MASS_BASIS_INPUT_BUNDLE_V1",
     "RS_LEPTON_MASS_BASIS_MATCHING_ASSUMPTION_V1",
     "RS_LEPTON_MASS_BASIS_MODEL_V1",
+    "RS_ZBB_FERMION_KK_MIXING_MATCHING_ASSUMPTION_V1",
+    "RS_ZBB_FERMION_KK_MIXING_MODEL_V1",
     "build_rs_ew_couplings",
     "build_rs_lepton_mass_basis_couplings",
+    "build_rs_zbb_fermion_kk_mixing",
 ]

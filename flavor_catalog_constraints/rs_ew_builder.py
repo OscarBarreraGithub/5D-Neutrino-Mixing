@@ -47,9 +47,7 @@ def build_rs_ew_extras(
     """Build RS-EW neutral-current extras without rewiring constraints."""
 
     if ew_model != "minimal_rs":
-        raise ValueError("Phase 3a supports ew_model='minimal_rs' only")
-    if include_fermion_kk_mixing:
-        raise ValueError("fermion-KK mixing is deferred beyond Phase 3a")
+        raise ValueError("RS-EW extras currently support ew_model='minimal_rs' only")
     if include_loop_dipoles:
         raise ValueError("loop dipoles are deferred beyond Phase 3a")
 
@@ -79,6 +77,7 @@ def build_rs_ew_extras(
         spectrum=spectrum,
         lepton_mass_basis_couplings=lepton_couplings,
         inputs=neutral_current_inputs,
+        include_fermion_kk_mixing=bool(include_fermion_kk_mixing),
         overlap_rel_tol=float(overlap_rel_tol),
         min_overlap_modes=int(min_overlap_modes),
         max_overlap_modes=max_overlap_modes,
