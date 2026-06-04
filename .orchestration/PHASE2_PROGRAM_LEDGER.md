@@ -51,6 +51,7 @@ Build prompts under `.orchestration/runs/<ITEM>/`. Keep orchestrator context lea
 | W3 | Re-wire constraints proxy→rigorous (fan-out by family; update NEEDS_HUMAN flags+tests) | — | — | — |
 | W4 | G4 CKM phase (B002 sin2β, B004 φ_s) in-core | — | — | — |
 | W5 | Exclusive form factors (B013, B014) from cited literature | — | — | — |
+| W6 | Full-catalog scan harness. **PLAN DUAL-APPROVED** (perf: a(c)+Ω spline + per-tile spectrum injection hook => ~1.2-3 s/point => 1e8 ~4-8 core-yr feasible; honest veto: tag rigorous|proxy|partial|stub, survives_all_HARD strict+inclusive, excluded_by_rigorous vs _proxy). Sub-steps: W6a builder spectrum/spline-injection hook (code change) → W6b harness driver+tagging+checkpoint → smoke 1e4-1e6 (post-cache gate) → 1e8. **W6a IMPL IN FLIGHT.** | plan dual ✅ | W6a in flight | — |
 | W6 | Full-catalog cluster harness (sweep→point_builder→evaluate_all→serialized) + smoke scan | — | — | — |
 | R1 | Scaffold hardening `02e2424`→`f82036a` — retro-review found 3 framework gaps (NaN/Inf accepted; load_anchor couldn't validate value_id/block_key/units/CL; mutably-shared extras). Fixed: finite/bool/Severity guards, optional anchor validators, immutable extras, reset_for_tests, TEMPLATE. **RETRO-OK + HARDENED** ✅ (dual: codex SCAFFOLD-FIX-OK + Opus SCAFFOLD-FIX-OK; 1054→1061 passed, backward-compat verified) | dual ✅ | dual ✅ | `f82036a` |
 | R2 | ΔF=2 adapter running-wrappers `fd2f46a` — Opus-only | — | — | — |

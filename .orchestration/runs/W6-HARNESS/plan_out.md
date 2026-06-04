@@ -1,0 +1,3 @@
+Wrote the plan to [.orchestration/runs/W6-HARNESS/plan.md](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/.orchestration/runs/W6-HARNESS/plan.md).
+
+It is 18 lines, plan-only, and includes the sweep inputs/generation, full point-build path, registry evaluation, JSONL schema, tiling/checkpointing, cost/feasibility estimate, correctness guards, smoke plan, advisory categories, and review status.
