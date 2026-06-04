@@ -292,6 +292,7 @@ def test_quark_only_evaluate_draw_skips_leptons_filters_allowlist_and_is_determi
 
     def fake_fit(*args, **kwargs):
         assert kwargs["fit_orientation"] is True
+        assert kwargs["r"] == cfg.quark_fit_r
         fit_result = _FitResult(
             bulk_state=_BulkState(
                 c_Q=np.array([0.61, 0.62, 0.63]),
@@ -366,7 +367,7 @@ def test_quark_only_evaluate_draw_skips_leptons_filters_allowlist_and_is_determi
         cfg=cfg,
         spectrum=spectrum,
         overlap_cache=cache,
-        provenance={"mode": "quark_only"},
+        provenance={"mode": "quark_only", "quark_fit_r": cfg.quark_fit_r},
         registry_count=harness.EXPECTED_REGISTRY_COUNT,
         config_hash="abc",
     )
@@ -375,7 +376,18 @@ def test_quark_only_evaluate_draw_skips_leptons_filters_allowlist_and_is_determi
 
     assert row1["skipped"] is False
     assert row1["mode"] == "quark_only"
+    assert row1["quark_fit_r"] == cfg.quark_fit_r
+    assert row1["params"]["quark_fit_r"] == cfg.quark_fit_r
+    assert row1["provenance"]["quark_fit_r"] == cfg.quark_fit_r
+    assert row1["provenance"]["config_hash"] == "abc"
     assert "lepton_inputs" not in row1["params"]
+    assert "fitted_up_yukawa_singular_values" in row1["fit_diagnostics"]
+    assert "fitted_down_yukawa_singular_values" in row1["fit_diagnostics"]
+    np.testing.assert_allclose(
+        row1["fit_diagnostics"]["fitted_up_yukawa_singular_values"],
+        [0.0, 0.0, 3.0],
+        atol=1.0e-12,
+    )
     assert set(row1["constraints"]) == harness.QUARK_ONLY_ALLOWLIST_SET
     assert "EW002" not in row1["constraints"]
     assert captured_ids[-1] == harness.QUARK_ONLY_ALLOWLIST_IDS

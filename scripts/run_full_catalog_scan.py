@@ -407,6 +407,8 @@ def _evaluate_draw(
         "xi_KK": float(cfg.xi_kk),
         "k": float(cfg.k_gev),
     }
+    if cfg.quark_only:
+        params["quark_fit_r"] = float(cfg.quark_fit_r)
     fit_diagnostics: dict[str, Any] = {}
     try:
         y_u_seed, y_d_seed, quark_seed = _draw_quark_seed(rng, cfg)
@@ -427,7 +429,10 @@ def _evaluate_draw(
                 fit_orientation=True,
             )
             fit_result = quark_solution.result
-            fit_diagnostics = _quark_fit_diagnostics(quark_solution)
+            fit_diagnostics = _quark_fit_diagnostics(
+                quark_solution,
+                include_yukawa_singular_values=True,
+            )
             _require_valid_quark_fit(fit_result, fit_diagnostics, cfg)
             _require_no_c_half_singularity(
                 [
@@ -472,6 +477,7 @@ def _evaluate_draw(
                 "seed": int(draw_seed),
                 "skipped": False,
                 "mode": "quark_only",
+                "quark_fit_r": float(cfg.quark_fit_r),
                 "params": params,
                 "fit_diagnostics": fit_diagnostics,
                 "constraints": payload["constraints"],
@@ -632,6 +638,7 @@ def _evaluate_draw(
             row.update(
                 {
                     "mode": "quark_only",
+                    "quark_fit_r": float(cfg.quark_fit_r),
                     "allowlist": list(QUARK_ONLY_ALLOWLIST_IDS),
                     "lepton_sector": QUARK_ONLY_LEPTON_SECTOR_LABEL,
                     "deferred_lepton_followup": list(QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP),
@@ -742,9 +749,13 @@ def _rotation_from_unitary(matrix: np.ndarray) -> RotationParameters:
     return RotationParameters(theta12=theta12, theta13=theta13, theta23=theta23, delta=delta)
 
 
-def _quark_fit_diagnostics(solution: Any) -> dict[str, Any]:
+def _quark_fit_diagnostics(
+    solution: Any,
+    *,
+    include_yukawa_singular_values: bool = False,
+) -> dict[str, Any]:
     result = solution.result
-    return {
+    out = {
         "success": bool(solution.success),
         "message": str(solution.message),
         "nfev": int(solution.nfev),
@@ -764,6 +775,23 @@ def _quark_fit_diagnostics(solution: Any) -> dict[str, Any]:
         "bulk_c_u": _array_real(result.bulk_state.c_u),
         "bulk_c_d": _array_real(result.bulk_state.c_d),
     }
+    if include_yukawa_singular_values:
+        out.update(
+            {
+                "fitted_up_yukawa_singular_values": _yukawa_singular_values(
+                    result.point.Y_u
+                ),
+                "fitted_down_yukawa_singular_values": _yukawa_singular_values(
+                    result.point.Y_d
+                ),
+            }
+        )
+    return out
+
+
+def _yukawa_singular_values(matrix: Any) -> list[float]:
+    values = np.linalg.svd(np.asarray(matrix, dtype=np.complex128), compute_uv=False)
+    return [float(x) for x in np.sort(np.asarray(values, dtype=float))]
 
 
 def _require_valid_quark_fit(
@@ -1604,6 +1632,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             {
                 "schema": "quark_only_bucket1_scan_wq_row_v1",
                 "mode": "quark_only",
+                "quark_fit_r": float(cfg.quark_fit_r),
                 "allowlist": list(QUARK_ONLY_ALLOWLIST_IDS),
                 "candidate_allowlist": list(QUARK_ONLY_CANDIDATE_IDS),
                 "lepton_sector": QUARK_ONLY_LEPTON_SECTOR_LABEL,
