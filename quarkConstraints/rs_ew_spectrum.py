@@ -22,6 +22,7 @@ from typing import Any, Mapping
 
 import numpy as np
 from numpy.polynomial.legendre import leggauss
+from scipy.interpolate import CubicSpline
 from scipy.optimize import brentq
 from scipy.special import j0, j1, y0, y1
 
@@ -56,6 +57,264 @@ class RSEWOverlapResult:
     previous_modes: int
     relative_delta: float
     partial_values: Mapping[int, float]
+
+
+@dataclass(frozen=True)
+class RSEWOverlapSplineCache:
+    """Spline-backed ``a(c)``/``Omega_n(c)`` provider for a built spectrum."""
+
+    spectrum: "RSEWSpectrum"
+    c_grid: np.ndarray
+    a_grid: np.ndarray
+    omega_grid: np.ndarray | None
+    min_modes: int
+    max_modes: int
+    rel_tol: float
+    max_a_rel_err: float
+    verification_points: int
+    _a_spline: CubicSpline = field(repr=False)
+    _omega_spline: CubicSpline | None = field(default=None, repr=False)
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.spectrum, RSEWSpectrum):
+            raise TypeError("spectrum must be an RSEWSpectrum")
+        grid = np.array(self.c_grid, dtype=float, copy=True)
+        a_values = np.array(self.a_grid, dtype=float, copy=True)
+        if grid.ndim != 1 or grid.size < 5:
+            raise ValueError("c_grid must be a one-dimensional grid with at least 5 points")
+        if a_values.shape != grid.shape:
+            raise ValueError("a_grid must have the same shape as c_grid")
+        if not np.all(np.isfinite(grid)) or not np.all(np.isfinite(a_values)):
+            raise ValueError("spline grid values must be finite")
+        if not np.all(np.diff(grid) > 0.0):
+            raise ValueError("c_grid must be strictly increasing")
+
+        min_modes = int(self.min_modes)
+        max_modes = int(self.max_modes)
+        _validate_power_of_two(min_modes, name="min_modes")
+        _validate_power_of_two(max_modes, name="max_modes")
+        if max_modes <= min_modes:
+            raise ValueError("max_modes must be greater than min_modes")
+        if max_modes > int(self.spectrum.n_gauge_modes):
+            raise ValueError("max_modes exceeds spectrum.n_gauge_modes")
+        object.__setattr__(self, "min_modes", min_modes)
+        object.__setattr__(self, "max_modes", max_modes)
+        object.__setattr__(self, "rel_tol", float(self.rel_tol))
+
+        omega_values = None
+        if self.omega_grid is not None:
+            omega_values = np.array(self.omega_grid, dtype=float, copy=True)
+            if omega_values.shape != (grid.size, max_modes):
+                raise ValueError("omega_grid must have shape (len(c_grid), max_modes)")
+            if not np.all(np.isfinite(omega_values)):
+                raise ValueError("omega_grid contains non-finite values")
+            omega_values.setflags(write=False)
+        grid.setflags(write=False)
+        a_values.setflags(write=False)
+        object.__setattr__(self, "c_grid", grid)
+        object.__setattr__(self, "a_grid", a_values)
+        object.__setattr__(self, "omega_grid", omega_values)
+        object.__setattr__(self, "max_a_rel_err", float(self.max_a_rel_err))
+        object.__setattr__(self, "verification_points", int(self.verification_points))
+        object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
+
+    @classmethod
+    def build(
+        cls,
+        spectrum: "RSEWSpectrum",
+        *,
+        c_min: float = 0.3,
+        c_max: float = 0.9,
+        grid_size: int = 241,
+        include_omega: bool = True,
+        verify_points: int = 41,
+        rel_tol: float = DEFAULT_OVERLAP_RTOL,
+        min_modes: int = DEFAULT_MIN_TRUNCATION_MODES,
+        max_modes: int | None = None,
+        max_allowed_rel_err: float | None = 1.0e-3,
+    ) -> "RSEWOverlapSplineCache":
+        """Precompute cubic splines for raw ``a(c)`` and optional ``Omega_n(c)``.
+
+        The cache stores raw, unsubtracted ``a(c)`` values.  Its ``a`` method
+        applies the caller's ``a_ref`` subtraction so existing coupling code can
+        use the object anywhere an ``RSEWSpectrum`` overlap provider is expected.
+        """
+
+        if not isinstance(spectrum, RSEWSpectrum):
+            raise TypeError("spectrum must be an RSEWSpectrum")
+        min_n = int(min_modes)
+        max_n = _resolve_default_spline_max_modes(spectrum, max_modes)
+        _validate_power_of_two(min_n, name="min_modes")
+        _validate_power_of_two(max_n, name="max_modes")
+        if max_n <= min_n:
+            raise ValueError("max_modes must be greater than min_modes")
+
+        c_lo = float(c_min)
+        c_hi = float(c_max)
+        if not (math.isfinite(c_lo) and math.isfinite(c_hi) and c_hi > c_lo):
+            raise ValueError("c_min/c_max must be finite with c_max > c_min")
+        n_grid = int(grid_size)
+        if n_grid < 5:
+            raise ValueError("grid_size must be at least 5")
+        grid = np.linspace(c_lo, c_hi, n_grid, dtype=float)
+
+        a_values = np.array(
+            [
+                spectrum.a(
+                    float(c),
+                    rel_tol=float(rel_tol),
+                    min_modes=min_n,
+                    max_modes=max_n,
+                )
+                for c in grid
+            ],
+            dtype=float,
+        )
+        a_spline = CubicSpline(grid, a_values, extrapolate=False)
+
+        omega_values = None
+        omega_spline = None
+        if include_omega:
+            omega_values = np.stack(
+                [spectrum.omega(float(c), max_modes=max_n) for c in grid],
+                axis=0,
+            )
+            omega_spline = CubicSpline(grid, omega_values, axis=0, extrapolate=False)
+
+        n_verify = int(verify_points)
+        max_rel_err = 0.0
+        if n_verify > 0:
+            verify_grid = _spline_verification_grid(c_lo, c_hi, n_verify)
+            direct = np.array(
+                [
+                    spectrum.a(
+                        float(c),
+                        rel_tol=float(rel_tol),
+                        min_modes=min_n,
+                        max_modes=max_n,
+                    )
+                    for c in verify_grid
+                ],
+                dtype=float,
+            )
+            approx = np.array(a_spline(verify_grid), dtype=float)
+            rel_err = np.abs(approx - direct) / np.maximum(np.abs(direct), _DENOM_FLOOR)
+            if not np.all(np.isfinite(rel_err)):
+                raise ValueError("a(c) spline verification produced non-finite errors")
+            max_rel_err = float(np.max(rel_err))
+            if max_allowed_rel_err is not None and max_rel_err > float(max_allowed_rel_err):
+                raise ValueError(
+                    "a(c) spline max relative error "
+                    f"{max_rel_err:.6g} exceeds {float(max_allowed_rel_err):.6g}"
+                )
+
+        return cls(
+            spectrum=spectrum,
+            c_grid=grid,
+            a_grid=a_values,
+            omega_grid=omega_values,
+            min_modes=min_n,
+            max_modes=max_n,
+            rel_tol=float(rel_tol),
+            max_a_rel_err=max_rel_err,
+            verification_points=n_verify,
+            _a_spline=a_spline,
+            _omega_spline=omega_spline,
+            metadata={
+                "cache_type": "cubic_spline",
+                "c_min": c_lo,
+                "c_max": c_hi,
+                "grid_size": n_grid,
+                "include_omega": bool(include_omega),
+                "omega_modes": int(max_n) if include_omega else 0,
+                "max_allowed_rel_err": (
+                    None
+                    if max_allowed_rel_err is None
+                    else float(max_allowed_rel_err)
+                ),
+            },
+        )
+
+    @property
+    def c_min(self) -> float:
+        return float(self.c_grid[0])
+
+    @property
+    def c_max(self) -> float:
+        return float(self.c_grid[-1])
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self.spectrum, name)
+
+    def a_spline(self, c: float | np.ndarray) -> float | np.ndarray:
+        """Return interpolated raw ``a(c)`` without EW-universal subtraction."""
+
+        self._validate_c_in_range(c)
+        values = np.asarray(self._a_spline(c), dtype=float)
+        if np.isscalar(c):
+            return float(values)
+        return values
+
+    def omega_spline(self, c: float | np.ndarray) -> np.ndarray:
+        """Return interpolated raw ``Omega_n(c)`` vectors."""
+
+        if self._omega_spline is None:
+            raise ValueError("Omega_n(c) spline was not precomputed")
+        self._validate_c_in_range(c)
+        return np.asarray(self._omega_spline(c), dtype=float)
+
+    def a(
+        self,
+        c: float,
+        *,
+        a_ref: float = 0.0,
+        rel_tol: float = DEFAULT_OVERLAP_RTOL,
+        min_modes: int = DEFAULT_MIN_TRUNCATION_MODES,
+        max_modes: int | None = None,
+    ) -> float:
+        """Return interpolated ``a(c)-a_ref`` for the cache's truncation setup."""
+
+        resolved_max_modes = self.max_modes if max_modes is None else int(max_modes)
+        self._validate_overlap_request(rel_tol, min_modes, resolved_max_modes)
+        return float(self.a_spline(float(c)) - float(a_ref))
+
+    def omega(self, c: float, max_modes: int | None = None) -> np.ndarray:
+        """Return interpolated ``Omega_n(c)`` for the requested mode prefix."""
+
+        if self._omega_spline is None:
+            raise ValueError("Omega_n(c) spline was not precomputed")
+        n_modes = self.max_modes if max_modes is None else int(max_modes)
+        if n_modes < 1 or n_modes > self.max_modes:
+            raise ValueError("max_modes must be between 1 and cached max_modes")
+        omega = np.array(self.omega_spline(float(c)), dtype=float, copy=True)
+        if omega.shape != (self.max_modes,):
+            raise ValueError("Omega_n(c) spline returned an unexpected shape")
+        return omega[:n_modes]
+
+    def _validate_overlap_request(
+        self,
+        rel_tol: float,
+        min_modes: int,
+        max_modes: int,
+    ) -> None:
+        if int(min_modes) != self.min_modes or int(max_modes) != self.max_modes:
+            raise ValueError(
+                "spline cache overlap mode request does not match the precomputed cache"
+            )
+        if not math.isclose(float(rel_tol), self.rel_tol, rel_tol=0.0, abs_tol=0.0):
+            raise ValueError(
+                "spline cache overlap rel_tol request does not match the precomputed cache"
+            )
+
+    def _validate_c_in_range(self, c: float | np.ndarray) -> None:
+        values = np.asarray(c, dtype=float)
+        if not np.all(np.isfinite(values)):
+            raise ValueError("c must be finite")
+        if np.any(values < self.c_min) or np.any(values > self.c_max):
+            raise ValueError(
+                f"c must lie within the spline domain [{self.c_min:g}, {self.c_max:g}]"
+            )
 
 
 @dataclass(frozen=True)
@@ -658,6 +917,39 @@ class RSEWSpectrum:
         )
 
 
+def _resolve_default_spline_max_modes(
+    spectrum: RSEWSpectrum,
+    requested: int | None,
+) -> int:
+    if requested is not None:
+        max_modes = int(requested)
+    else:
+        max_modes = min(int(spectrum.n_gauge_modes), DEFAULT_MAX_TRUNCATION_MODES)
+        max_modes = 1 << (max_modes.bit_length() - 1)
+    if max_modes < 32:
+        raise ValueError("max_modes must be at least 32")
+    if max_modes > int(spectrum.n_gauge_modes):
+        raise ValueError("max_modes exceeds spectrum.n_gauge_modes")
+    if max_modes & (max_modes - 1):
+        raise ValueError("max_modes must be a power of two")
+    return max_modes
+
+
+def _spline_verification_grid(c_min: float, c_max: float, points: int) -> np.ndarray:
+    """Return off-knot verification points inside the interpolation interval."""
+
+    n = int(points)
+    if n < 1:
+        raise ValueError("points must be positive")
+    step = (float(c_max) - float(c_min)) / float(n)
+    return np.linspace(
+        float(c_min) + 0.5 * step,
+        float(c_max) - 0.5 * step,
+        n,
+        dtype=float,
+    )
+
+
 @lru_cache(maxsize=8)
 def _cached_spectrum(
     lambda_ir_gev: float,
@@ -733,6 +1025,7 @@ __all__ = [
     "RSChargedGaugeDiagonalization",
     "RSEWOverlapConvergenceError",
     "RSEWOverlapResult",
+    "RSEWOverlapSplineCache",
     "RSEWSpectrum",
     "a",
     "g0",

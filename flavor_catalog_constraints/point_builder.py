@@ -36,7 +36,7 @@ contract test asserts every key a constraint reads is declared here, and
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Callable
 
 from .base import ParameterPoint
 
@@ -110,6 +110,10 @@ def build_from_rs_ew_inputs(
     n_gauge_modes: int | None = None,
     ew_model: str = "minimal_rs",
     raw: Any = None,
+    spectrum: Any | None = None,
+    a_of_c: Callable[[float], float] | None = None,
+    omega_of_c: Callable[[float], Any] | None = None,
+    rs_ew_cache: Any | None = None,
     **kwargs: Any,
 ) -> ParameterPoint:
     """Build a point carrying RS electroweak extras.
@@ -130,6 +134,10 @@ def build_from_rs_ew_inputs(
         k=float(MPL if k is None else k),
         n_gauge_modes=int(DEFAULT_N_GAUGE_MODES if n_gauge_modes is None else n_gauge_modes),
         ew_model=ew_model,
+        spectrum=spectrum,
+        a_of_c=a_of_c,
+        omega_of_c=omega_of_c,
+        rs_ew_cache=rs_ew_cache,
         **kwargs,
     )
     return make_point(raw=raw, **extras)
