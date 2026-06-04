@@ -19,6 +19,7 @@ from quarkConstraints.rs_ew_spectrum import (
     DEFAULT_QUADRATURE_ORDER,
     RSEWSpectrum,
 )
+from quarkConstraints.rs_higgs_yukawas import build_rs_higgs_yukawas
 from quarkConstraints.rs_semileptonic_wilsons import (
     build_rs_semileptonic_wilsons,
 )
@@ -33,6 +34,7 @@ def build_rs_ew_extras(
     n_gauge_modes: int = DEFAULT_N_GAUGE_MODES,
     ew_model: str = "minimal_rs",
     include_fermion_kk_mixing: bool = False,
+    include_higgs_yukawas: bool = True,
     include_loop_dipoles: bool = False,
     lepton_yukawa_result: Any | None = None,
     lepton_sweep_inputs: dict[str, Any] | None = None,
@@ -84,6 +86,12 @@ def build_rs_ew_extras(
         model_label=str(ew_model),
     )
     charged_current = None
+    higgs_yukawas = None
+    if include_higgs_yukawas and lepton_couplings is not None:
+        higgs_yukawas = build_rs_higgs_yukawas(
+            lepton_couplings,
+            spectrum=spectrum,
+        )
     if include_charged_current:
         if lepton_couplings is None:
             raise ValueError(
@@ -120,6 +128,7 @@ def build_rs_ew_extras(
             else {"lepton_mass_basis_couplings": lepton_couplings}
         ),
         **({} if charged_current is None else {"rs_charged_current": charged_current}),
+        **({} if higgs_yukawas is None else {"rs_higgs_yukawas": higgs_yukawas}),
     }
 
 

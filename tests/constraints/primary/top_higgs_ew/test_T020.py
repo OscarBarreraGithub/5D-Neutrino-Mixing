@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 import math
 from pathlib import Path
 import re
@@ -14,8 +15,10 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
-from flavor_catalog_constraints.physics_adapters.higgs_lfv import (
-    higgs_lfv_yukawa_proxy_input,
+from tests.constraints.primary.top_higgs_ew.higgs_lfv_phase6b_helpers import (
+    constraint_point_with_pair,
+    diagonal_constraint_point,
+    live_higgs_yukawas,
 )
 from flavor_catalog_constraints.primary.top_higgs_ew import T020 as t020_module
 from quarkConstraints.higgs_lfv import (
@@ -57,18 +60,16 @@ def _limit(entry, key: str = "normalized_value") -> float:
     return value
 
 
-def _proxy_point(
+def _higgs_point(
     y_e_mu: complex,
     y_mu_e: complex = 0.0j,
 ):
-    proxy = higgs_lfv_yukawa_proxy_input(
+    return constraint_point_with_pair(
         "e",
         "mu",
         y_e_mu,
         y_mu_e,
-        source="T020 test proxy",
     )
-    return point_builder.make_point(lepton_mass_basis_couplings=proxy)
 
 
 def _core_higgs_lfv_result(
@@ -174,7 +175,7 @@ def test_t020_value_anchor_routes_through_scaffold_load_anchor(monkeypatch):
 
 def test_sm_higgs_lfv_rate_is_zero_and_formula_inputs_are_documented():
     constraint = fcc.get(_PID)
-    result = constraint.evaluate(_proxy_point(0.0j, 0.0j))
+    result = constraint.evaluate(diagonal_constraint_point())
 
     assert constraint.sm_result.branching_fraction == pytest.approx(0.0)
     assert constraint.sm_result.sm_branching_fraction == pytest.approx(0.0)
@@ -189,11 +190,11 @@ def test_sm_higgs_lfv_rate_is_zero_and_formula_inputs_are_documented():
     assert result.passes is True
 
 
-def test_proxy_numerics_match_core_higgs_lfv_evaluator_and_manual_formula():
+def test_rs_higgs_yukawa_numerics_match_core_higgs_lfv_evaluator_and_manual_formula():
     constraint = fcc.get(_PID)
     y_e_mu = 1.0e-4 + 0.4e-4j
     y_mu_e = 0.5e-4j
-    result = constraint.evaluate(_proxy_point(y_e_mu, y_mu_e))
+    result = constraint.evaluate(_higgs_point(y_e_mu, y_mu_e))
     core_result = _core_higgs_lfv_result(y_e_mu, y_mu_e, constraint=constraint)
     manual_width = (
         constraint.sm_inputs.higgs_mass_gev
@@ -226,21 +227,27 @@ def test_proxy_numerics_match_core_higgs_lfv_evaluator_and_manual_formula():
     )
     assert result.diagnostics["y_e_mu"] == pytest.approx(y_e_mu)
     assert result.diagnostics["y_mu_e"] == pytest.approx(y_mu_e)
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
-    assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["higgs_lfv_proxy"][
+    assert result.diagnostics["rs_higgs_yukawas_units"] == "dimensionless"
+    assert result.diagnostics["includes_fermion_kk_mixing"] is True
+    assert "NEEDS-HUMAN-PHYSICS" not in result.diagnostics["higgs_lfv_proxy"][
         "matching_assumption"
     ]
 
 
-def test_matrix_proxy_extracts_e_mu_entries():
+def test_rs_higgs_yukawa_matrix_extracts_e_mu_entries():
     matrix = np.zeros((3, 3), dtype=np.complex128)
     matrix[0, 1] = 1.1e-4 + 0.2e-4j
     matrix[1, 0] = -0.3e-4j
+    source = live_higgs_yukawas()
     point = point_builder.make_point(
-        lepton_mass_basis_couplings={
-            "higgs_yukawa_matrix": matrix,
-            "source": "T020 matrix proxy",
-        }
+        rs_higgs_yukawas=replace(
+            source,
+            higgs_yukawa_matrix=matrix,
+            diagnostics={
+                **dict(source.diagnostics),
+                "test_matrix_override": "T020",
+            },
+        )
     )
     result = fcc.get(_PID).evaluate(point)
     constraint = fcc.get(_PID)
@@ -274,13 +281,13 @@ def test_evaluate_without_input_degrades_gracefully():
     assert result.budget == pytest.approx(fcc.get(_PID).anchor.budget)
     assert result.notes.startswith("NOT EVALUATED -")
     assert result.diagnostics["evaluated"] is False
-    assert result.diagnostics["missing_extra"] == "lepton_mass_basis_couplings"
+    assert result.diagnostics["missing_extra"] == "rs_higgs_yukawas"
     assert "non-vetoing only" in result.diagnostics["passes_semantics"]
 
 
 def test_invalid_lepton_input_is_unevaluated_not_real_pass():
     result = fcc.get(_PID).evaluate(
-        point_builder.make_point(lepton_mass_basis_couplings={"left_emu": 1.0})
+        point_builder.make_point(rs_higgs_yukawas={"left_emu": 1.0})
     )
 
     assert result.passes is True
@@ -288,12 +295,12 @@ def test_invalid_lepton_input_is_unevaluated_not_real_pass():
     assert result.ratio is None
     assert result.notes.startswith("NOT EVALUATED -")
     assert result.diagnostics["evaluated"] is False
-    assert result.diagnostics["invalid_extra"] == "lepton_mass_basis_couplings"
+    assert result.diagnostics["invalid_extra"] == "rs_higgs_yukawas"
     assert result.diagnostics["exception_type"] == "KeyError"
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostics():
-    result = fcc.get(_PID).evaluate(_proxy_point(0.6e-4 + 0.1e-4j, 0.1e-4j))
+    result = fcc.get(_PID).evaluate(_higgs_point(0.6e-4 + 0.1e-4j, 0.1e-4j))
 
     assert result.process_id == _PID
     for value in (
@@ -323,9 +330,9 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
 @pytest.mark.parametrize(
     ("point", "expected_pass"),
     [
-        (_proxy_point(1.0e-4), True),
-        (_proxy_point(2.0e-4), False),
-        (_proxy_point(1.0e-3), False),
+        (_higgs_point(1.0e-4), True),
+        (_higgs_point(2.0e-4), False),
+        (_higgs_point(1.0e-3), False),
     ],
 )
 def test_safe_point_passes_and_excluded_points_fail(point, expected_pass: bool):
@@ -350,18 +357,12 @@ def test_e_mu_limit_is_tighter_than_existing_tau_higgs_lfv_limits():
 
 
 def test_evaluate_is_pure_and_deterministic():
-    proxy = higgs_lfv_yukawa_proxy_input(
-        "e",
-        "mu",
-        0.10e-3 + 0.01e-3j,
-        0.03e-3j,
-        source="T020 test proxy",
-    )
-    point = point_builder.make_point(lepton_mass_basis_couplings=proxy)
+    point = _higgs_point(0.10e-3 + 0.01e-3j, 0.03e-3j)
+    source = point.get_extra("rs_higgs_yukawas")
     constraint = fcc.get(_PID)
 
     first = constraint.evaluate(point)
     second = constraint.evaluate(point)
 
     assert first == second
-    assert point.get_extra("lepton_mass_basis_couplings") == proxy
+    assert point.get_extra("rs_higgs_yukawas") == source

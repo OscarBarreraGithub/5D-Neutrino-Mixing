@@ -12,13 +12,11 @@ effective-Yukawa convention built for T018/T019,
 
 RS matching status
 ------------------
-NEEDS-HUMAN-PHYSICS.  A rigorous prediction needs the off-diagonal physical
-charged-lepton Higgs-Yukawa matrix after RS Higgs localization, KK-fermion
-mixing, and charged-lepton mass-basis rotation.  That matrix is not present on
-``ParameterPoint``.  If a caller supplies ``lepton_mass_basis_couplings``, this
-v1 implementation uses the documented effective-Yukawa proxy built for
-T018/T019: ``Y_e_mu`` and ``Y_mu_e`` are taken directly from the supplied proxy
-or Higgs-Yukawa matrix.
+The production path reads the Phase-6b ``rs_higgs_yukawas`` extra and routes
+its mass-basis Higgs-Yukawa matrix through the shared Higgs LFV adapter.  With
+the repo v1 diagonal charged-lepton fit this gives exactly zero off-diagonal
+tree Higgs-LFV entries; nonzero generic RS Higgs-LFV requires a non-diagonal
+charged-lepton Yukawa/rotation structure supplied by a future lepton fit.
 
 Catalog sidecar
 ---------------
@@ -44,7 +42,6 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.higgs_lfv import (
-    HIGGS_LFV_RS_PROXY_V1,
     higgs_lfv_branching_fraction_from_yukawas,
     higgs_lfv_branching_fraction_with_proxy,
     higgs_lfv_default_inputs,
@@ -53,7 +50,7 @@ from flavor_catalog_constraints.physics_adapters.higgs_lfv import (
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "top_higgs_ew"
-_REQUIRED_EXTRA = "lepton_mass_basis_couplings"
+_REQUIRED_EXTRA = "rs_higgs_yukawas"
 _PDG_HIGGS_MASS_VALUE_ID = "PDG2025:T020:higgs_mass_hypothesis"
 _PDG_CMS_LIMIT_VALUE_ID = "PDG2025:T020:cms_run2"
 _PDG_ATLAS_LIMIT_VALUE_ID = "PDG2025:T020:atlas_run2"
@@ -70,13 +67,14 @@ _NUMBER_RE = re.compile(
 )
 _UNEVALUATED_REASON = (
     "no off-diagonal Higgs-Yukawa e-mu prediction available "
-    "(charged-lepton Higgs-Yukawa FCNC not on ParameterPoint)"
+    "(rs_higgs_yukawas not on ParameterPoint)"
 )
 _UNEVALUATED_NOTES = f"NOT EVALUATED - {_UNEVALUATED_REASON}"
 _NEEDS_HUMAN_PHYSICS = (
-    "NEEDS-HUMAN-PHYSICS: off-diagonal charged-lepton Higgs Yukawas are not "
-    "on ParameterPoint; this v1 uses the documented effective-Yukawa proxy "
-    "through the shared Higgs LFV module."
+    "Phase-6b v1 evaluates the minimal-RS tree/ZMA Higgs-LFV matrix supplied "
+    "on rs_higgs_yukawas. Generic nonzero RS Higgs-LFV still requires a "
+    "future non-diagonal charged-lepton fit; the current diagonal builder is "
+    "rigorous tree-level zero."
 )
 
 
@@ -380,13 +378,13 @@ class Constraint:
         )
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
-        lepton_input = point.get_extra(_REQUIRED_EXTRA)
-        if lepton_input is None:
+        higgs_input = point.get_extra(_REQUIRED_EXTRA)
+        if higgs_input is None:
             return self._unevaluated_result({"missing_extra": _REQUIRED_EXTRA})
 
         try:
             result, proxy = higgs_lfv_branching_fraction_with_proxy(
-                lepton_input,
+                higgs_input,
                 initial_flavor="e",
                 final_flavor="mu",
                 br_limit=self.anchor.budget,
@@ -411,7 +409,14 @@ class Constraint:
                     "branching fraction."
                 ),
                 "needs_human_physics": _NEEDS_HUMAN_PHYSICS,
-                "rs_matching_assumption": HIGGS_LFV_RS_PROXY_V1,
+                "rs_matching_assumption": str(proxy.matching_assumption),
+                "rs_higgs_yukawas_units": getattr(higgs_input, "units", None),
+                "includes_fermion_kk_mixing": bool(
+                    getattr(higgs_input, "includes_fermion_kk_mixing", False)
+                ),
+                "rs_higgs_yukawas_diagnostics": dict(
+                    getattr(higgs_input, "diagnostics", {})
+                ),
                 "higgs_lfv_proxy": dict(proxy.diagnostics),
                 "y_e_mu": complex(result.yukawa_ij),
                 "y_mu_e": complex(result.yukawa_ji),
@@ -443,9 +448,10 @@ class Constraint:
             budget=float(result.br_limit),
             notes=(
                 "Pure-NP BR(h -> e mu) bound using the shared Higgs LFV "
-                "effective-Yukawa width formula. The off-diagonal Higgs "
-                "Yukawas are documented proxy inputs and are flagged "
-                "NEEDS-HUMAN-PHYSICS."
+                "effective-Yukawa width formula and the Phase-6b "
+                "rs_higgs_yukawas tree matrix. The diagonal charged-lepton "
+                "v1 builder gives rigorous zero off-diagonal entries; "
+                "non-diagonal charged-lepton fits are deferred."
             ),
             diagnostics=diagnostics,
         )

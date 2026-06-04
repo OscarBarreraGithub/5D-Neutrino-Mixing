@@ -15,12 +15,10 @@ For charged-LFV Higgs decays the catalog SM prediction is zero.
 
 RS matching status
 ------------------
-NEEDS-HUMAN-PHYSICS: the current ``ParameterPoint`` does not carry the
-charged-lepton Higgs-Yukawa misalignment matrix.  The proxy helper accepts
-caller-supplied off-diagonal Higgs Yukawa entries directly, or extracts them
-from a supplied charged-lepton Higgs-Yukawa matrix.  This is a diagnostic
-effective-coupling proxy, not a complete RS calculation of Higgs localization,
-KK-fermion mixing, brane kinetic terms, or total-width modifications.
+The proxy helper accepts caller-supplied off-diagonal Higgs Yukawa entries
+directly, or extracts them from a supplied charged-lepton Higgs-Yukawa matrix.
+When the source object carries its own ``matching_assumption`` (for example
+``RSHiggsYukawaCouplings``), that assumption is propagated into diagnostics.
 """
 
 from __future__ import annotations
@@ -259,9 +257,10 @@ def h_lfv_yukawa_proxy(
     proxy_input = _coerce_proxy_input(source, initial=initial, final=final)
     y_ij = _finite_complex(proxy_input.yukawa_ij, "yukawa_ij")
     y_ji = _finite_complex(proxy_input.yukawa_ji, "yukawa_ji")
+    matching_assumption = _source_matching_assumption(source)
     return HiggsLFVYukawaProxy(
         model_label=HIGGS_LFV_MODEL_V1,
-        matching_assumption=HIGGS_LFV_RS_PROXY_V1,
+        matching_assumption=matching_assumption,
         initial_flavor=initial,
         final_flavor=final,
         yukawa_ij=y_ij,
@@ -277,7 +276,7 @@ def h_lfv_yukawa_proxy(
             ),
             "yukawa_norm_squared": float(abs(y_ij) ** 2 + abs(y_ji) ** 2),
             "proxy_source": proxy_input.source,
-            "matching_assumption": HIGGS_LFV_RS_PROXY_V1,
+            "matching_assumption": matching_assumption,
         },
     )
 
@@ -321,6 +320,16 @@ def _coerce_proxy_input(
     if isinstance(value, Mapping):
         return _proxy_from_mapping(value, initial=initial, final=final)
     return _proxy_from_object(value, initial=initial, final=final)
+
+
+def _source_matching_assumption(value: Any) -> str:
+    if isinstance(value, Mapping):
+        assumption = value.get("matching_assumption")
+    else:
+        assumption = getattr(value, "matching_assumption", None)
+    if assumption is None:
+        return HIGGS_LFV_RS_PROXY_V1
+    return str(assumption)
 
 
 def _orient_proxy_input(

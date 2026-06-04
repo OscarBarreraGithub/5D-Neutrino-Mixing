@@ -60,6 +60,7 @@ KNOWN_EXTRA_KEYS: frozenset[str] = frozenset(
         "rs_ew_spectrum",              # quarkConstraints.rs_ew_spectrum.RSEWSpectrum
         "rs_ew_couplings",             # quarkConstraints.rs_ew_couplings.RSEWMassBasisCouplings
         "rs_charged_current",          # quarkConstraints.rs_charged_current.RSChargedCurrentCouplings
+        "rs_higgs_yukawas",            # quarkConstraints.rs_higgs_yukawas.RSHiggsYukawaCouplings
         "rs_semileptonic_wilsons",     # quarkConstraints.rs_semileptonic_wilsons.RSSemileptonicWilsonBundle
     }
 )
