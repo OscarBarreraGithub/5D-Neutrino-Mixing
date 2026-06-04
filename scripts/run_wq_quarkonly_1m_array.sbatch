@@ -29,7 +29,7 @@
 #
 # Merge/analysis:
 #   No physical merge is needed. After all array tasks finish, run:
-#     python scripts/analyze_wq_quarkonly.py --input scan_outputs/wq_quarkonly_1M_<ts>
+#     python scripts/analyze_wq_quarkonly.py --input scan_outputs/wq_quarkonly_1M_<array_job_id>
 #   The analysis reads tile-*.jsonl recursively under every r*/shard-* directory
 #   and writes plots/ plus analysis_report.md at the output root.
 #
@@ -48,8 +48,8 @@ mkdir -p "${REPO_ROOT}/logs"
 TASK_ID="${SLURM_ARRAY_TASK_ID:-0}"
 eval "$("${REPO_ROOT}/scripts/wq_quarkonly_1m_plan.py" task-env --task-id "${TASK_ID}")"
 
-TIMESTAMP="${WQ_RUN_TIMESTAMP:-$(date -u +%Y%m%dT%H%M%S)}"
-OUTPUT_ROOT="${WQ_OUTPUT_ROOT:-${REPO_ROOT}/scan_outputs/wq_quarkonly_1M_${TIMESTAMP}}"
+WQ_OUTPUT_RUN_ID="${SLURM_ARRAY_JOB_ID:-${SLURM_JOB_ID:-manual}}"
+OUTPUT_ROOT="${WQ_OUTPUT_ROOT:-${REPO_ROOT}/scan_outputs/wq_quarkonly_1M_${WQ_OUTPUT_RUN_ID}}"
 OUTPUT_DIR="${OUTPUT_ROOT}/${WQ_R_LABEL}/shard-${WQ_DRAW_SHARD_PADDED}"
 N_WORKERS="${N_WORKERS:-${SLURM_CPUS_PER_TASK:-48}}"
 

@@ -91,3 +91,7 @@ snapshots/
 derivations/rs_ew_gauge_kk_coupling.pdf
 # raw scan tiles are large; keep summaries/reports only
 .orchestration/runs/W6-HARNESS/smoke_*/tile-*.jsonl
+# raw 1M quark-only scan tiles (large); keep analysis plots/report only
+scan_outputs/wq_quarkonly_1M_*/**/tile-*.jsonl
+scan_outputs/wq_quarkonly_1M_*/**/*.summary.json
+scan_outputs/wq_quarkonly_1M_*/**/run_summary.json
