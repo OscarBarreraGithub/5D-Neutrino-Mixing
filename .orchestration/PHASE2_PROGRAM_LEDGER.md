@@ -79,3 +79,13 @@ Retro-review of `quarkConstraints/deltaf2.py` (the core behind the 5 fully-rigor
 - CRUX: is deltaf2's RS NP Wilson `c1_vll` (line 342) matched in the SAME convention as `me_vll` (line 910), so their PRODUCT M12^NP satisfies Δm=2|M12|? Convention reconstruction is unreliable (agents quoted (1/3),(2/3),(4/3),(8/3) for ⟨O1⟩ across runs). NEEDS the definitive independent cross-check below.
 - DEFINITIVE TEST (pending): compute the RS KK-gluon Δm_K (and Δm_Bs) for a benchmark RS point via an EXPLICIT textbook RS-flavor formula (cited paper), compare to deltaf2's 2|M12^NP| for the SAME point. That bypasses the C1-vs-me convention split.
 - IMPACT IF REAL: ΔF=2 NP bounds 2× too loose → the 5 anchors admit points they should exclude in the 100M scan. MUST resolve before W6 scan.
+
+### ✅ R5 RESOLVED — ΔF=2 normalization is CORRECT (2026-06-03, dual-confirmed)
+Convention-independent cross-check (the coefficient-reconstruction split was settled by physical comparison to PUBLISHED RS formulas):
+- **Opus**: deltaf2 `2|M12^NP|` vs Csaki-Falkowski-Weiler 0804.1954 Eq.3.3-3.7 (KK-gluon t-channel + exact SU(3) Fierz ∑T^A⊗T^A=½(δδ-δδ/N_c)→(1/3)Q1) = **ratio 1.0000 to machine precision**.
+- **Codex**: deltaf2 vs Blanke et al. 0809.1073 Eq.4.33 = ratio ~1.69 (basis/running diff, "NOT the 0.5× failure mode; ×2 would be the WRONG fix").
+- RESOLUTION: deltaf2's `1/6` Wilson factor = ½(propagator)×⅓(color-Fierz); `me_vll=(2/3)f²mB` is the CORRECT matrix element IN THAT convention (color factor in the Wilson, not the ME). The "half" verdicts wrongly imposed the textbook ⟨O1⟩=(8/3)/(4/3) convention (color in the ME). **deltaf2 + the 5 anchors (K001/K002/B001/B003/C001) + B002/C002 are correctly normalized. NO FIX.**
+- DOC HAZARD (recorded, not a bug): the repo's `(2/3)`-ME/`/6`-Wilson convention must NEVER be mixed with textbook `(8/3)`-ME-convention Wilsons. The `paper_0710_1869` path uses the SAME `/6` (matching_kkgluon.py:523) and is test/script-only; no live constraint mixes them.
+- LESSON: the gate's value here was forcing the convention-independent published-formula cross-check; the orchestrator's refusal to blind-×2 on a split vote prevented BREAKING the bedrock.
+
+**R2/R3/R5 ALL RETRO-OK (dual). Remaining retro: R7/R8 (docs). Then W4/W5/W6.**
