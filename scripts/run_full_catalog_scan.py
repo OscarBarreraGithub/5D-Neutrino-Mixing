@@ -50,6 +50,77 @@ from yukawa.compute_yukawas import YukawaResult, compute_all_yukawas
 
 
 EXPECTED_REGISTRY_COUNT = 103
+QUARK_ONLY_CANDIDATE_IDS = (
+    "K001", "K002", "B001", "B002", "B003", "B004", "C001", "C002",
+    "B011", "B012", "B013", "B014",
+    "B032", "B033", "B034", "C003", "K003", "K013",
+    "T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008",
+    "T010", "T011", "T012", "T014",
+    "EW001", "EW002", "EW003",
+    "E004", "E006", "E007", "E008", "E009",
+)
+QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP = ("EW002",)
+QUARK_ONLY_OPTIONAL_LEPTON_DIAGNOSTIC_IDS = ("EW003",)
+QUARK_ONLY_ALLOWLIST_IDS = tuple(
+    pid for pid in QUARK_ONLY_CANDIDATE_IDS if pid not in QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP
+)
+QUARK_ONLY_ALLOWLIST_SET = frozenset(QUARK_ONLY_ALLOWLIST_IDS)
+QUARK_ONLY_LEPTON_SECTOR_LABEL = "dropped (not rigorous)"
+QUARK_ONLY_DEFERRED_SCOPE_TAG = "deferred_lepton_followup"
+QUARK_ONLY_FORBIDDEN_EXTRAS = frozenset(
+    {
+        "lepton_mass_basis_couplings",
+        "rs_charged_current",
+        "rs_higgs_yukawas",
+    }
+)
+QUARK_ONLY_BUILD_INCLUDE_FLAGS = {
+    "include_charged_current": False,
+    "include_fermion_kk_mixing": True,
+    "include_higgs_yukawas": False,
+}
+QUARK_ONLY_ALLOWLIST_EXTRAS: dict[str, tuple[str, ...]] = {
+    "K001": ("quark_mass_basis_couplings",),
+    "K002": ("quark_mass_basis_couplings",),
+    "B001": ("quark_mass_basis_couplings",),
+    "B002": ("quark_mass_basis_couplings",),
+    "B003": ("quark_mass_basis_couplings",),
+    "B004": ("quark_mass_basis_couplings",),
+    "C001": ("quark_mass_basis_couplings",),
+    "C002": ("quark_mass_basis_couplings",),
+    "B011": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "B012": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "B013": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "B014": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "B032": (),
+    "B033": (),
+    "B034": (),
+    "C003": (),
+    "K003": (),
+    "K013": (),
+    "T001": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "T002": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "T003": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "T004": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "T005": ("quark_mass_basis_couplings", "kk_gluon_mass_gev"),
+    "T006": ("quark_mass_basis_couplings", "kk_gluon_mass_gev"),
+    "T007": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "T008": ("quark_mass_basis_couplings", "kk_ew_mass_gev"),
+    "T010": ("rs_ew_couplings", "quark_mass_basis_couplings"),
+    "T011": ("rs_ew_couplings", "quark_mass_basis_couplings"),
+    "T012": ("rs_ew_couplings", "quark_mass_basis_couplings"),
+    "T014": ("rs_ew_couplings", "quark_mass_basis_couplings"),
+    "EW001": ("kk_ew_mass_gev", "kk_gluon_mass_gev", "quark_mass_basis_couplings"),
+    "EW003": ("rs_charged_current",),
+    "E004": (),
+    "E006": (),
+    "E007": (),
+    "E008": (),
+    "E009": (),
+}
+QUARK_ONLY_DEFERRED_EXTRAS: dict[str, tuple[str, ...]] = {
+    "EW002": ("rs_charged_current",),
+}
 DEFAULT_XI_KK = 2.4487
 DEFAULT_V_GEV = 174.0
 DEFAULT_BASE_SEED = 20260604
@@ -79,6 +150,7 @@ DEFAULT_SPLINE_VERIFY_POINTS = 41
 class ScanConfig:
     mkk_values_gev: tuple[float, ...]
     n_draws_per_tile: int
+    quark_only: bool = False
     xi_kk: float = DEFAULT_XI_KK
     k_gev: float = MPL
     v_gev: float = DEFAULT_V_GEV
@@ -210,6 +282,9 @@ def _run_tile(
     hard_not_evaluated: Counter[str] = Counter()
     tag_counts: Counter[str] = Counter()
     exception_ids: Counter[str] = Counter()
+    constraint_tallies = (
+        _empty_constraint_tallies(QUARK_ONLY_ALLOWLIST_IDS) if cfg.quark_only else None
+    )
     draw_loop_started = time.perf_counter()
 
     with tmp_jsonl.open("w", encoding="utf-8") as fh:
@@ -239,6 +314,7 @@ def _run_tile(
                 hard_not_evaluated=hard_not_evaluated,
                 tag_counts=tag_counts,
                 exception_ids=exception_ids,
+                constraint_tallies=constraint_tallies,
             )
 
     draw_loop_seconds = time.perf_counter() - draw_loop_started
@@ -289,6 +365,20 @@ def _run_tile(
         },
         "provenance": {**dict(provenance), "registry_count": int(registry_count)},
     }
+    if cfg.quark_only:
+        summary.update(
+            {
+                "mode": "quark_only",
+                "allowlist": list(QUARK_ONLY_ALLOWLIST_IDS),
+                "lepton_sector": QUARK_ONLY_LEPTON_SECTOR_LABEL,
+                "deferred_scope_tag": QUARK_ONLY_DEFERRED_SCOPE_TAG,
+                "deferred_lepton_followup": list(QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP),
+                "build_include_flags": dict(QUARK_ONLY_BUILD_INCLUDE_FLAGS),
+                "constraint_tallies": _finalize_constraint_tallies(
+                    constraint_tallies or {}
+                ),
+            }
+        )
 
     with tmp_summary.open("w", encoding="utf-8") as fh:
         json.dump(summary, fh, indent=2, sort_keys=True)
@@ -326,6 +416,89 @@ def _evaluate_draw(
             "Y_d_re": _matrix_real(y_d_seed.real),
             "Y_d_im": _matrix_real(y_d_seed.imag),
         }
+        if cfg.quark_only:
+            quark_solution = fit_quark_sector(
+                default_quark_targets(),
+                r=cfg.quark_fit_r,
+                seed=quark_seed,
+                Lambda_IR=tile.lambda_ir_gev,
+                k=cfg.k_gev,
+                max_nfev=cfg.quark_fit_max_nfev,
+                fit_orientation=True,
+            )
+            fit_result = quark_solution.result
+            fit_diagnostics = _quark_fit_diagnostics(quark_solution)
+            _require_valid_quark_fit(fit_result, fit_diagnostics, cfg)
+            _require_no_c_half_singularity(
+                [
+                    *np.asarray(fit_result.bulk_state.c_Q, dtype=float),
+                    *np.asarray(fit_result.bulk_state.c_u, dtype=float),
+                    *np.asarray(fit_result.bulk_state.c_d, dtype=float),
+                ],
+                cfg=cfg,
+            )
+            rs_point = point_builder.build_from_rs_ew_inputs(
+                fit_result,
+                Lambda_IR=tile.lambda_ir_gev,
+                k=cfg.k_gev,
+                n_gauge_modes=cfg.n_gauge_modes,
+                quadrature_order=cfg.quadrature_order,
+                min_overlap_modes=cfg.min_overlap_modes,
+                max_overlap_modes=cfg.max_overlap_modes,
+                overlap_rel_tol=cfg.overlap_rel_tol,
+                spectrum=spectrum,
+                rs_ew_cache=overlap_cache,
+                **QUARK_ONLY_BUILD_INCLUDE_FLAGS,
+                lepton_yukawa_result=None,
+                raw={"tile_id": tile.tile_id, "draw_id": draw_idx, "params": params},
+            )
+            quark_couplings = compute_quark_kk_gluon_couplings(
+                fit_result,
+                M_KK=tile.mkk_gev,
+                xi_KK=cfg.xi_kk,
+                g_s_star=None,
+            )
+            point = point_builder.make_point(
+                raw=rs_point.raw,
+                **dict(rs_point.extras),
+                quark_mass_basis_couplings=quark_couplings,
+                kk_gluon_mass_gev=float(tile.mkk_gev),
+            )
+            results = _evaluate_constraint_ids(point, QUARK_ONLY_ALLOWLIST_IDS)
+            payload = _classify_results(results)
+            return {
+                "draw_id": int(draw_idx),
+                "tile_id": int(tile.tile_id),
+                "seed": int(draw_seed),
+                "skipped": False,
+                "mode": "quark_only",
+                "params": params,
+                "fit_diagnostics": fit_diagnostics,
+                "constraints": payload["constraints"],
+                "survives_all_HARD_strict": payload["survives_all_HARD_strict"],
+                "survives_all_HARD_inclusive": payload["survives_all_HARD_inclusive"],
+                "excluded_by_rigorous": payload["excluded_by_rigorous"],
+                "excluded_by_proxy": payload["excluded_by_proxy"],
+                "hard_not_evaluated": payload["hard_not_evaluated"],
+                "coverage_complete": payload["coverage_complete"],
+                "advisory_flags": [
+                    QUARK_ONLY_DEFERRED_SCOPE_TAG,
+                    *payload["advisory_flags"],
+                ],
+                "allowlist": list(QUARK_ONLY_ALLOWLIST_IDS),
+                "lepton_sector": QUARK_ONLY_LEPTON_SECTOR_LABEL,
+                "deferred_lepton_followup": list(QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP),
+                "cache_metrics": {
+                    "spectrum_injected": point.extras.get("rs_ew_spectrum") is spectrum,
+                    "rs_ew_cache_injected": True,
+                    "spline_max_a_rel_err": float(overlap_cache.max_a_rel_err),
+                },
+                "provenance": {
+                    **dict(provenance),
+                    "registry_count": int(registry_count),
+                    "config_hash": config_hash,
+                },
+            }
         lepton_inputs = _draw_lepton_inputs(rng, cfg)
         params["lepton_inputs"] = dict(lepton_inputs)
 
@@ -427,7 +600,7 @@ def _evaluate_draw(
         }
     except Exception as exc:  # noqa: BLE001 - a failed draw must not abort a tile
         reason = _skip_reason(exc)
-        return {
+        row = {
             "draw_id": int(draw_idx),
             "tile_id": int(tile.tile_id),
             "seed": int(draw_seed),
@@ -455,6 +628,20 @@ def _evaluate_draw(
                 "config_hash": config_hash,
             },
         }
+        if cfg.quark_only:
+            row.update(
+                {
+                    "mode": "quark_only",
+                    "allowlist": list(QUARK_ONLY_ALLOWLIST_IDS),
+                    "lepton_sector": QUARK_ONLY_LEPTON_SECTOR_LABEL,
+                    "deferred_lepton_followup": list(QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP),
+                    "advisory_flags": [
+                        QUARK_ONLY_DEFERRED_SCOPE_TAG,
+                        *row["advisory_flags"],
+                    ],
+                }
+            )
+        return row
 
 
 def _draw_quark_seed(
@@ -691,6 +878,32 @@ def _classify_results(results: Mapping[str, ConstraintResult]) -> dict[str, Any]
     }
 
 
+def _evaluate_constraint_ids(
+    point: point_builder.ParameterPoint | Any,
+    process_ids: Sequence[str],
+) -> dict[str, ConstraintResult]:
+    """Evaluate a selected process-id list with registry-style isolation."""
+
+    available = registry.all_constraints()
+    missing = sorted(set(process_ids) - set(available))
+    if missing:
+        raise RuntimeError(f"quark-only allowlist ids are not registered: {missing}")
+    out: dict[str, ConstraintResult] = {}
+    for pid in process_ids:
+        constraint = available[str(pid)]
+        try:
+            out[str(pid)] = constraint.evaluate(point)
+        except Exception as exc:  # noqa: BLE001 - mirror registry.evaluate_all isolation
+            out[str(pid)] = ConstraintResult(
+                process_id=str(pid),
+                severity=getattr(constraint, "severity", Severity.HARD),
+                passes=False,
+                notes=f"evaluate() raised {type(exc).__name__}: {exc}",
+                diagnostics={"exception_type": type(exc).__name__, "exception": str(exc)},
+            )
+    return out
+
+
 def tag_result(result: ConstraintResult) -> tuple[str, str | None, str | None, dict[str, Any]]:
     """Return ``(tag, matching_status, needs_human, proxy_flags)`` for a result."""
 
@@ -805,6 +1018,7 @@ def _accumulate_row(
     hard_not_evaluated: Counter[str],
     tag_counts: Counter[str],
     exception_ids: Counter[str],
+    constraint_tallies: dict[str, dict[str, Any]] | None = None,
 ) -> None:
     counters["rows"] += 1
     if row.get("skipped"):
@@ -826,9 +1040,99 @@ def _accumulate_row(
         if item.get("exception_type"):
             counters["constraint_exceptions"] += 1
             exception_ids[str(pid)] += 1
+        if constraint_tallies is not None:
+            _accumulate_constraint_tally(constraint_tallies, str(pid), item)
     hard_veto_rigorous.update(str(x) for x in row.get("excluded_by_rigorous", []))
     hard_veto_proxy.update(str(x) for x in row.get("excluded_by_proxy", []))
     hard_not_evaluated.update(str(x) for x in row.get("hard_not_evaluated", []))
+
+
+def _empty_constraint_tallies(process_ids: Sequence[str]) -> dict[str, dict[str, Any]]:
+    return {
+        str(pid): {
+            "points": 0,
+            "evaluated": 0,
+            "active": 0,
+            "failed": 0,
+            "vetoed": 0,
+            "severity": None,
+            "tag": None,
+            "tag_counts": {},
+        }
+        for pid in process_ids
+    }
+
+
+def _accumulate_constraint_tally(
+    tallies: dict[str, dict[str, Any]],
+    pid: str,
+    item: Mapping[str, Any],
+) -> None:
+    tally = tallies.setdefault(pid, _empty_constraint_tallies((pid,))[pid])
+    tally["points"] = int(tally.get("points", 0)) + 1
+    if item.get("evaluated"):
+        tally["evaluated"] = int(tally.get("evaluated", 0)) + 1
+    if item.get("active"):
+        tally["active"] = int(tally.get("active", 0)) + 1
+    if not bool(item.get("passes", True)):
+        tally["failed"] = int(tally.get("failed", 0)) + 1
+        if (
+            str(item.get("severity")) == Severity.HARD.value
+            and bool(item.get("evaluated"))
+            and str(item.get("tag")) in {"rigorous", "proxy"}
+        ):
+            tally["vetoed"] = int(tally.get("vetoed", 0)) + 1
+    severity = item.get("severity")
+    if severity is not None:
+        tally["severity"] = str(severity)
+    tag = str(item.get("tag", "unknown"))
+    tag_counts = dict(tally.get("tag_counts", {}))
+    tag_counts[tag] = int(tag_counts.get(tag, 0)) + 1
+    tally["tag_counts"] = tag_counts
+    if len(tag_counts) == 1:
+        tally["tag"] = tag
+    else:
+        tally["tag"] = "mixed"
+
+
+def _finalize_constraint_tallies(
+    tallies: Mapping[str, Mapping[str, Any]]
+) -> dict[str, dict[str, Any]]:
+    return {
+        str(pid): {
+            "points": int(item.get("points", 0)),
+            "evaluated": int(item.get("evaluated", 0)),
+            "active": int(item.get("active", 0)),
+            "failed": int(item.get("failed", 0)),
+            "vetoed": int(item.get("vetoed", 0)),
+            "severity": item.get("severity"),
+            "tag": item.get("tag"),
+            "tag_counts": dict(sorted(dict(item.get("tag_counts", {})).items())),
+        }
+        for pid, item in sorted(tallies.items())
+    }
+
+
+def _merge_constraint_tallies(
+    target: dict[str, dict[str, Any]],
+    source: Mapping[str, Any],
+) -> None:
+    for pid, raw_item in dict(source).items():
+        item = dict(raw_item)
+        tally = target.setdefault(str(pid), _empty_constraint_tallies((str(pid),))[str(pid)])
+        for key in ("points", "evaluated", "active", "failed", "vetoed"):
+            tally[key] = int(tally.get(key, 0)) + int(item.get(key, 0))
+        severity = item.get("severity")
+        if severity is not None:
+            tally["severity"] = str(severity)
+        tag_counts = dict(tally.get("tag_counts", {}))
+        for tag, count in dict(item.get("tag_counts", {})).items():
+            tag_counts[str(tag)] = int(tag_counts.get(str(tag), 0)) + int(count)
+        tally["tag_counts"] = tag_counts
+        if len(tag_counts) == 1:
+            tally["tag"] = next(iter(tag_counts))
+        elif tag_counts:
+            tally["tag"] = "mixed"
 
 
 def run_universal_c_sanity(
@@ -981,6 +1285,9 @@ def _build_run_summary(
     hard_gap = Counter()
     tags = Counter()
     exceptions = Counter()
+    constraint_tallies = (
+        _empty_constraint_tallies(QUARK_ONLY_ALLOWLIST_IDS) if cfg.quark_only else None
+    )
     cache_seconds = 0.0
     draw_loop_seconds = 0.0
     elapsed_seconds = 0.0
@@ -1000,6 +1307,11 @@ def _build_run_summary(
         hard_gap.update(summary.get("hard_not_evaluated", {}))
         tags.update(summary.get("tag_counts", {}))
         exceptions.update(summary.get("exception_ids", {}))
+        if constraint_tallies is not None:
+            _merge_constraint_tallies(
+                constraint_tallies,
+                summary.get("constraint_tallies", {}),
+            )
         timing = dict(summary.get("timing", {}))
         cache_seconds += float(timing.get("cache_build_seconds", 0.0))
         draw_loop_seconds += float(timing.get("draw_loop_seconds", 0.0))
@@ -1007,7 +1319,7 @@ def _build_run_summary(
 
     post_cache_per_draw = _safe_div(draw_loop_seconds, totals["n_requested"])
     post_cache_per_evaluated = _safe_div(draw_loop_seconds, totals["n_evaluated_points"])
-    return {
+    out = {
         "schema": "full_catalog_scan_w6b_summary_v1",
         "config": _config_payload(cfg),
         "config_hash": config_hash,
@@ -1046,6 +1358,23 @@ def _build_run_summary(
         "universal_c_sanity": sanity,
         "tiles": list(summaries),
     }
+    if cfg.quark_only:
+        out.update(
+            {
+                "schema": "quark_only_bucket1_scan_wq_summary_v1",
+                "mode": "quark_only",
+                "allowlist": list(QUARK_ONLY_ALLOWLIST_IDS),
+                "candidate_allowlist": list(QUARK_ONLY_CANDIDATE_IDS),
+                "lepton_sector": QUARK_ONLY_LEPTON_SECTOR_LABEL,
+                "deferred_scope_tag": QUARK_ONLY_DEFERRED_SCOPE_TAG,
+                "deferred_lepton_followup": list(QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP),
+                "build_include_flags": dict(QUARK_ONLY_BUILD_INCLUDE_FLAGS),
+                "constraint_tallies": _finalize_constraint_tallies(
+                    constraint_tallies or {}
+                ),
+            }
+        )
+    return out
 
 
 def _write_markdown_report(path: Path, summary: Mapping[str, Any]) -> None:
@@ -1109,6 +1438,8 @@ def _completed_summary(path: Path, *, expected_hash: str, expected_draws: int) -
 def _config_payload(cfg: ScanConfig) -> dict[str, Any]:
     payload = asdict(cfg)
     payload["mkk_values_gev"] = list(cfg.mkk_values_gev)
+    if not cfg.quark_only:
+        payload.pop("quark_only", None)
     return payload
 
 
@@ -1177,6 +1508,7 @@ def _build_argparser() -> argparse.ArgumentParser:
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--n-draws", type=int, default=100)
     parser.add_argument("--m-kk-tev", type=str, default="1,3,5,10")
+    parser.add_argument("--quark-only", action="store_true")
     parser.add_argument("--xi-kk", type=float, default=DEFAULT_XI_KK)
     parser.add_argument("--k-gev", type=float, default=MPL)
     parser.add_argument("--v-gev", type=float, default=DEFAULT_V_GEV)
@@ -1224,6 +1556,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     cfg = ScanConfig(
         mkk_values_gev=mkk_values_gev,
         n_draws_per_tile=int(args.n_draws),
+        quark_only=bool(args.quark_only),
         xi_kk=float(args.xi_kk),
         k_gev=float(args.k_gev),
         v_gev=float(args.v_gev),
@@ -1266,6 +1599,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         "dirty": _git_dirty(),
         "schema": "full_catalog_scan_w6b_row_v1",
     }
+    if cfg.quark_only:
+        provenance.update(
+            {
+                "schema": "quark_only_bucket1_scan_wq_row_v1",
+                "mode": "quark_only",
+                "allowlist": list(QUARK_ONLY_ALLOWLIST_IDS),
+                "candidate_allowlist": list(QUARK_ONLY_CANDIDATE_IDS),
+                "lepton_sector": QUARK_ONLY_LEPTON_SECTOR_LABEL,
+                "deferred_scope_tag": QUARK_ONLY_DEFERRED_SCOPE_TAG,
+                "deferred_lepton_followup": list(QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP),
+                "build_include_flags": dict(QUARK_ONLY_BUILD_INCLUDE_FLAGS),
+            }
+        )
+    log_prefix = "[quark-only]" if cfg.quark_only else "[full-catalog]"
     tiles = _build_tiles(cfg)
     pending: list[TileSpec] = []
     summaries: list[dict[str, Any]] = []
@@ -1282,7 +1629,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             pending.append(tile)
         else:
             summaries.append(completed)
-            print(f"[full-catalog] resume skip tile {tile.tile_id:05d}")
+            print(f"{log_prefix} resume skip tile {tile.tile_id:05d}")
 
     cfg_payload = _config_payload(cfg)
     worker_payloads = [
@@ -1297,9 +1644,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         }
         for tile in pending
     ]
-    print(f"[full-catalog] output_dir={output_dir}")
-    print(f"[full-catalog] tiles={len(tiles)} pending={len(pending)} n_draws/tile={cfg.n_draws_per_tile}")
-    print(f"[full-catalog] registry_expected={cfg.expected_registry_count} workers={args.n_workers}")
+    print(f"{log_prefix} output_dir={output_dir}")
+    print(f"{log_prefix} tiles={len(tiles)} pending={len(pending)} n_draws/tile={cfg.n_draws_per_tile}")
+    print(f"{log_prefix} registry_expected={cfg.expected_registry_count} workers={args.n_workers}")
     start = time.perf_counter()
     if worker_payloads:
         if int(args.n_workers) <= 1:
@@ -1307,7 +1654,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             for payload in worker_payloads:
                 summary = _worker_run_tile(payload)
                 summaries.append(summary)
-                print(_tile_status_line(summary))
+                print(_tile_status_line(summary, prefix=log_prefix))
         else:
             with mp.Pool(
                 int(args.n_workers),
@@ -1316,13 +1663,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             ) as pool:
                 for summary in pool.imap_unordered(_worker_run_tile, worker_payloads):
                     summaries.append(summary)
-                    print(_tile_status_line(summary))
+                    print(_tile_status_line(summary, prefix=log_prefix))
 
     sanity = None
-    if not args.skip_sanity:
+    if cfg.quark_only:
+        sanity = {
+            "name": "universal_c_diagonal_leptons",
+            "skipped": True,
+            "reason": "quark_only mode drops the swept lepton sector",
+        }
+        print(f"{log_prefix} universal-c sanity skipped for quark-only mode")
+    elif not args.skip_sanity:
         sanity = run_universal_c_sanity(cfg, provenance=provenance, config_hash=config_hash)
         print(
-            "[full-catalog] universal-c sanity "
+            f"{log_prefix} universal-c sanity "
             f"passes={sanity['passes_no_spurious_hard_exclusions']}"
         )
     run_summary = _build_run_summary(
@@ -1341,14 +1695,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     if args.smoke_report_md:
         _write_markdown_report(Path(args.smoke_report_md), run_summary)
-    print(f"[full-catalog] run_summary={summary_path}")
+    print(f"{log_prefix} run_summary={summary_path}")
     return 0
 
 
-def _tile_status_line(summary: Mapping[str, Any]) -> str:
+def _tile_status_line(summary: Mapping[str, Any], *, prefix: str = "[full-catalog]") -> str:
     timing = dict(summary.get("timing", {}))
     return (
-        f"[full-catalog] tile {int(summary['tile_id']):05d} "
+        f"{prefix} tile {int(summary['tile_id']):05d} "
         f"eval={summary.get('n_evaluated_points', 0)}/{summary.get('n_requested', 0)} "
         f"skip={summary.get('n_skipped', 0)} "
         f"s/eval={_fmt_optional(timing.get('post_cache_seconds_per_evaluated_point'), 4)}"

@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 import importlib.util
+import ast
 import json
 import sys
+from dataclasses import dataclass
 from pathlib import Path
+
+import numpy as np
 
 from flavor_catalog_constraints.base import ConstraintResult, Severity
 
@@ -191,3 +195,347 @@ def test_completed_summary_resume_requires_complete_matching_hash_and_draws(tmp_
         encoding="utf-8",
     )
     assert harness._completed_summary(path, expected_hash="abc", expected_draws=10) is None
+
+
+def test_quark_only_config_payload_preserves_full_mode_hash_surface():
+    harness = _load_harness()
+    full_cfg = harness.ScanConfig(
+        mkk_values_gev=(1000.0, 3000.0),
+        n_draws_per_tile=5,
+        xi_kk=2.0,
+        base_seed=11,
+        tile_seed_stride=17,
+    )
+    quark_cfg = harness.ScanConfig(
+        mkk_values_gev=(1000.0, 3000.0),
+        n_draws_per_tile=5,
+        quark_only=True,
+        xi_kk=2.0,
+        base_seed=11,
+        tile_seed_stride=17,
+    )
+
+    assert "quark_only" not in harness._config_payload(full_cfg)
+    assert harness._config_payload(quark_cfg)["quark_only"] is True
+    assert harness._config_hash(full_cfg) != harness._config_hash(quark_cfg)
+
+
+def test_quark_only_allowlist_matches_candidate_verification_and_drops_ew002():
+    harness = _load_harness()
+
+    assert set(harness.QUARK_ONLY_CANDIDATE_IDS) == (
+        set(harness.QUARK_ONLY_ALLOWLIST_IDS)
+        | set(harness.QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP)
+    )
+    assert harness.QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP == ("EW002",)
+    assert "EW002" not in harness.QUARK_ONLY_ALLOWLIST_SET
+    assert harness.QUARK_ONLY_DEFERRED_EXTRAS["EW002"] == ("rs_charged_current",)
+
+    actual = _candidate_get_extra_usage(harness)
+    for pid in harness.QUARK_ONLY_ALLOWLIST_IDS:
+        assert tuple(actual[pid]) == harness.QUARK_ONLY_ALLOWLIST_EXTRAS[pid]
+        forbidden = set(actual[pid]) & harness.QUARK_ONLY_FORBIDDEN_EXTRAS
+        if pid not in harness.QUARK_ONLY_OPTIONAL_LEPTON_DIAGNOSTIC_IDS:
+            assert forbidden == set()
+    assert actual["EW002"] == ("rs_charged_current",)
+
+
+def test_quark_only_evaluate_draw_skips_leptons_filters_allowlist_and_is_deterministic(monkeypatch):
+    harness = _load_harness()
+    cfg = harness.ScanConfig(
+        mkk_values_gev=(3000.0,),
+        n_draws_per_tile=1,
+        quark_only=True,
+        quark_fit_max_nfev=1,
+    )
+    tile = harness.TileSpec(
+        tile_id=0,
+        mkk_gev=3000.0,
+        lambda_ir_gev=3000.0 / cfg.xi_kk,
+        n_draws=1,
+        seed=123,
+    )
+    spectrum = object()
+
+    @dataclass
+    class _Cache:
+        max_a_rel_err: float = 0.0
+
+    @dataclass
+    class _BulkState:
+        c_Q: np.ndarray
+        c_u: np.ndarray
+        c_d: np.ndarray
+
+    @dataclass
+    class _Point:
+        Y_u: np.ndarray
+        Y_d: np.ndarray
+
+    @dataclass
+    class _FitResult:
+        bulk_state: _BulkState
+        point: _Point
+        score: float
+        residual_norm: float
+        mass_residuals_up: np.ndarray
+        mass_residuals_down: np.ndarray
+        ckm_residuals: np.ndarray
+
+    @dataclass
+    class _Solution:
+        result: _FitResult
+        success: bool = True
+        message: str = "ok"
+        nfev: int = 1
+        initial_score: float = 1.0
+
+    def fake_fit(*args, **kwargs):
+        assert kwargs["fit_orientation"] is True
+        fit_result = _FitResult(
+            bulk_state=_BulkState(
+                c_Q=np.array([0.61, 0.62, 0.63]),
+                c_u=np.array([0.64, 0.65, 0.66]),
+                c_d=np.array([0.67, 0.68, 0.69]),
+            ),
+            point=_Point(
+                Y_u=np.ones((3, 3), dtype=np.complex128),
+                Y_d=np.ones((3, 3), dtype=np.complex128),
+            ),
+            score=0.0,
+            residual_norm=0.0,
+            mass_residuals_up=np.zeros(3),
+            mass_residuals_down=np.zeros(3),
+            ckm_residuals=np.zeros(4),
+        )
+        return _Solution(result=fit_result)
+
+    def forbidden(*_args, **_kwargs):
+        raise AssertionError("lepton stage must not run in quark-only mode")
+
+    def fake_build(fit_result, **kwargs):
+        assert kwargs["spectrum"] is spectrum
+        assert kwargs["rs_ew_cache"] is cache
+        assert kwargs["lepton_yukawa_result"] is None
+        assert kwargs["include_charged_current"] is False
+        assert kwargs["include_fermion_kk_mixing"] is True
+        assert kwargs["include_higgs_yukawas"] is False
+        return harness.point_builder.make_point(
+            raw=kwargs["raw"],
+            kk_ew_mass_gev=3000.0,
+            rs_ew_spectrum=spectrum,
+            rs_ew_couplings=object(),
+        )
+
+    @dataclass
+    class _Couplings:
+        M_KK: float
+
+    def fake_couplings(_fit_result, **kwargs):
+        return _Couplings(M_KK=float(kwargs["M_KK"]))
+
+    captured_ids: list[tuple[str, ...]] = []
+
+    def fake_evaluate_ids(_point, process_ids):
+        ids = tuple(process_ids)
+        captured_ids.append(ids)
+        return {
+            pid: ConstraintResult(
+                process_id=pid,
+                severity=Severity.HARD,
+                passes=pid != "K001",
+                ratio=2.0 if pid == "K001" else 0.1,
+                diagnostics={"evaluated": True},
+            )
+            for pid in ids
+        }
+
+    cache = _Cache()
+    monkeypatch.setattr(harness, "fit_quark_sector", fake_fit)
+    monkeypatch.setattr(harness, "_draw_lepton_inputs", forbidden)
+    monkeypatch.setattr(harness, "compute_all_yukawas", forbidden)
+    monkeypatch.setattr(harness, "_require_perturbative_leptons", forbidden)
+    monkeypatch.setattr(harness.point_builder, "build_from_rs_ew_inputs", fake_build)
+    monkeypatch.setattr(harness, "compute_quark_kk_gluon_couplings", fake_couplings)
+    monkeypatch.setattr(harness, "_evaluate_constraint_ids", fake_evaluate_ids)
+
+    kwargs = dict(
+        tile=tile,
+        draw_idx=0,
+        draw_seed=123,
+        cfg=cfg,
+        spectrum=spectrum,
+        overlap_cache=cache,
+        provenance={"mode": "quark_only"},
+        registry_count=harness.EXPECTED_REGISTRY_COUNT,
+        config_hash="abc",
+    )
+    row1 = harness._evaluate_draw(np.random.default_rng(123), **kwargs)
+    row2 = harness._evaluate_draw(np.random.default_rng(123), **kwargs)
+
+    assert row1["skipped"] is False
+    assert row1["mode"] == "quark_only"
+    assert "lepton_inputs" not in row1["params"]
+    assert set(row1["constraints"]) == harness.QUARK_ONLY_ALLOWLIST_SET
+    assert "EW002" not in row1["constraints"]
+    assert captured_ids[-1] == harness.QUARK_ONLY_ALLOWLIST_IDS
+    assert row1["params"] == row2["params"]
+    assert row1["constraints"] == row2["constraints"]
+
+
+def test_quark_only_constraint_tallies_count_evaluated_active_failed_and_vetoed():
+    harness = _load_harness()
+    tallies = harness._empty_constraint_tallies(("K001", "EW003"))
+    counters = {}
+    from collections import Counter
+
+    row = {
+        "skipped": False,
+        "survives_all_HARD_strict": False,
+        "survives_all_HARD_inclusive": False,
+        "excluded_by_rigorous": ["K001"],
+        "excluded_by_proxy": [],
+        "hard_not_evaluated": [],
+        "constraints": {
+            "K001": {
+                "passes": False,
+                "severity": "HARD",
+                "ratio": 2.0,
+                "active": True,
+                "evaluated": True,
+                "tag": "rigorous",
+            },
+            "EW003": {
+                "passes": False,
+                "severity": "SOFT",
+                "ratio": 1.2,
+                "active": True,
+                "evaluated": True,
+                "tag": "partial",
+            },
+        },
+    }
+    harness._accumulate_row(
+        row,
+        counters=Counter(counters),
+        hard_veto_rigorous=Counter(),
+        hard_veto_proxy=Counter(),
+        hard_not_evaluated=Counter(),
+        tag_counts=Counter(),
+        exception_ids=Counter(),
+        constraint_tallies=tallies,
+    )
+    final = harness._finalize_constraint_tallies(tallies)
+
+    assert final["K001"]["evaluated"] == 1
+    assert final["K001"]["active"] == 1
+    assert final["K001"]["failed"] == 1
+    assert final["K001"]["vetoed"] == 1
+    assert final["EW003"]["failed"] == 1
+    assert final["EW003"]["vetoed"] == 0
+
+
+def test_deltaf2_bucket1_ratios_relax_with_high_mkk():
+    from flavor_catalog_constraints import point_builder, registry
+    from quarkConstraints.benchmarks import default_quark_targets, default_spurion_seed
+    from quarkConstraints.couplings import compute_quark_kk_gluon_couplings
+    from quarkConstraints.fit import fit_quark_sector
+
+    fit = fit_quark_sector(
+        default_quark_targets(),
+        seed=default_spurion_seed(),
+        overall_scale=3.0,
+        max_nfev=120,
+    ).result
+    low = compute_quark_kk_gluon_couplings(fit, M_KK=1500.0, xi_KK=1.0, g_s_star=None)
+    high = compute_quark_kk_gluon_couplings(fit, M_KK=15000.0, xi_KK=1.0, g_s_star=None)
+    low_point = point_builder.make_point(
+        quark_mass_basis_couplings=low,
+        kk_gluon_mass_gev=1500.0,
+    )
+    high_point = point_builder.make_point(
+        quark_mass_basis_couplings=high,
+        kk_gluon_mass_gev=15000.0,
+    )
+
+    k001_low = registry.get("K001").evaluate(low_point)
+    k001_high = registry.get("K001").evaluate(high_point)
+    k002_low = registry.get("K002").evaluate(low_point)
+    k002_high = registry.get("K002").evaluate(high_point)
+
+    assert k001_low.ratio > k001_high.ratio
+    assert k002_low.ratio > k002_high.ratio
+    assert k001_low.passes is False
+    assert k001_high.passes is True
+
+
+def _candidate_get_extra_usage(harness):
+    constants_by_id = {}
+    usage = {}
+    for pid in harness.QUARK_ONLY_CANDIDATE_IDS:
+        paths = list((REPO_ROOT / "flavor_catalog_constraints").glob(f"**/{pid}.py"))
+        assert len(paths) == 1
+        tree = ast.parse(paths[0].read_text(encoding="utf-8"))
+        constants = {}
+        for node in tree.body:
+            if isinstance(node, ast.Assign):
+                for target in node.targets:
+                    if isinstance(target, ast.Name):
+                        constants[target.id] = _literal_or_none(node.value)
+        constants_by_id[pid] = constants
+        extras: list[str] = []
+
+        class _Visitor(ast.NodeVisitor):
+            def __init__(self):
+                self.env = {}
+
+            def visit_For(self, node):
+                if isinstance(node.target, ast.Name) and isinstance(node.iter, ast.Name):
+                    values = constants.get(node.iter.id)
+                    if isinstance(values, tuple):
+                        old = self.env.get(node.target.id, None)
+                        had_old = node.target.id in self.env
+                        for value in values:
+                            self.env[node.target.id] = (str(value),)
+                            for child in node.body:
+                                self.visit(child)
+                        if had_old:
+                            self.env[node.target.id] = old
+                        else:
+                            self.env.pop(node.target.id, None)
+                        for child in node.orelse:
+                            self.visit(child)
+                        return
+                self.generic_visit(node)
+
+            def visit_Call(self, node):
+                if isinstance(node.func, ast.Attribute) and node.func.attr == "get_extra":
+                    if node.args:
+                        extras.extend(_resolve_extra_arg(node.args[0], constants, self.env))
+                self.generic_visit(node)
+
+        _Visitor().visit(tree)
+        usage[pid] = tuple(dict.fromkeys(extras))
+    return usage
+
+
+def _literal_or_none(node):
+    try:
+        return ast.literal_eval(node)
+    except (ValueError, SyntaxError):
+        return None
+
+
+def _resolve_extra_arg(node, constants, env):
+    if isinstance(node, ast.Constant):
+        return [str(node.value)]
+    if isinstance(node, ast.Name):
+        if node.id in env:
+            return list(env[node.id])
+        value = constants.get(node.id)
+        if isinstance(value, str):
+            return [value]
+        if isinstance(value, tuple):
+            return [str(item) for item in value]
+        return [node.id]
+    return [ast.unparse(node)]

@@ -1,0 +1,1386 @@
+{
+  "allowlist": [
+    "K001",
+    "K002",
+    "B001",
+    "B002",
+    "B003",
+    "B004",
+    "C001",
+    "C002",
+    "B011",
+    "B012",
+    "B013",
+    "B014",
+    "B032",
+    "B033",
+    "B034",
+    "C003",
+    "K003",
+    "K013",
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008",
+    "T010",
+    "T011",
+    "T012",
+    "T014",
+    "EW001",
+    "EW003",
+    "E004",
+    "E006",
+    "E007",
+    "E008",
+    "E009"
+  ],
+  "build_include_flags": {
+    "include_charged_current": false,
+    "include_fermion_kk_mixing": true,
+    "include_higgs_yukawas": false
+  },
+  "candidate_allowlist": [
+    "K001",
+    "K002",
+    "B001",
+    "B002",
+    "B003",
+    "B004",
+    "C001",
+    "C002",
+    "B011",
+    "B012",
+    "B013",
+    "B014",
+    "B032",
+    "B033",
+    "B034",
+    "C003",
+    "K003",
+    "K013",
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008",
+    "T010",
+    "T011",
+    "T012",
+    "T014",
+    "EW001",
+    "EW002",
+    "EW003",
+    "E004",
+    "E006",
+    "E007",
+    "E008",
+    "E009"
+  ],
+  "config": {
+    "base_seed": 20260604,
+    "c_half_atol": 1e-10,
+    "c_max": 0.9,
+    "c_min": 0.3,
+    "expected_registry_count": 103,
+    "k_gev": 1.2209e+19,
+    "lightest_nu_max_ev": 0.01,
+    "lightest_nu_min_ev": 0.0,
+    "m_n_max_gev": 1000000000000000.0,
+    "m_n_min_gev": 10000000000.0,
+    "max_fit_score": 0.01,
+    "max_overlap_modes": 512,
+    "min_overlap_modes": 16,
+    "mkk_values_gev": [
+      3000.0
+    ],
+    "n_draws_per_tile": 1,
+    "n_gauge_modes": 512,
+    "normal_ordering_probability": 0.5,
+    "overlap_rel_tol": 0.001,
+    "perturbative_ybar_max": 4.0,
+    "quadrature_order": 4096,
+    "quark_fit_max_nfev": 120,
+    "quark_fit_r": 0.25,
+    "quark_only": true,
+    "quark_y_abs_max": 4.0,
+    "require_fit_success": true,
+    "sanity_c": 0.4,
+    "sanity_mkk_gev": 50000.0,
+    "spline_grid_size": 241,
+    "spline_verify_points": 41,
+    "tile_seed_stride": 1000003,
+    "v_gev": 174.0,
+    "xi_kk": 2.4487,
+    "y_floor": 0.1,
+    "y_half_range": 1.5,
+    "y_prior": "uniform",
+    "y_sigma": 1.0,
+    "y_trunc_sigma": 3.0
+  },
+  "config_hash": "c249c322866c3c90",
+  "constraint_counts": {
+    "active_per_evaluated_point": 37.0,
+    "evaluated_per_evaluated_point": 37.0,
+    "exception_rate": 0.0,
+    "tag_counts": {
+      "partial": 16,
+      "proxy": 12,
+      "rigorous": 9
+    }
+  },
+  "constraint_tallies": {
+    "B001": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    },
+    "B002": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    },
+    "B003": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    },
+    "B004": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    },
+    "B011": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "B012": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "B013": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "B014": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "B032": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "B033": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "B034": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 1,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "C001": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    },
+    "C002": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "C003": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "E004": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "E006": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "E007": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "E008": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "E009": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "EW001": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 1,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 1
+    },
+    "EW003": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 1,
+      "points": 1,
+      "severity": "SOFT",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "K001": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    },
+    "K002": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    },
+    "K003": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "K013": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "INFO",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "T001": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "T002": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "T003": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "T004": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "T005": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "T006": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "T007": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "T008": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "proxy",
+      "tag_counts": {
+        "proxy": 1
+      },
+      "vetoed": 0
+    },
+    "T010": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 1,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 1
+    },
+    "T011": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "partial",
+      "tag_counts": {
+        "partial": 1
+      },
+      "vetoed": 0
+    },
+    "T012": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    },
+    "T014": {
+      "active": 1,
+      "evaluated": 1,
+      "failed": 0,
+      "points": 1,
+      "severity": "HARD",
+      "tag": "rigorous",
+      "tag_counts": {
+        "rigorous": 1
+      },
+      "vetoed": 0
+    }
+  },
+  "deferred_lepton_followup": [
+    "EW002"
+  ],
+  "deferred_scope_tag": "deferred_lepton_followup",
+  "exception_ids": [],
+  "lepton_sector": "dropped (not rigorous)",
+  "mode": "quark_only",
+  "n_tiles": 1,
+  "provenance": {
+    "allowlist": [
+      "K001",
+      "K002",
+      "B001",
+      "B002",
+      "B003",
+      "B004",
+      "C001",
+      "C002",
+      "B011",
+      "B012",
+      "B013",
+      "B014",
+      "B032",
+      "B033",
+      "B034",
+      "C003",
+      "K003",
+      "K013",
+      "T001",
+      "T002",
+      "T003",
+      "T004",
+      "T005",
+      "T006",
+      "T007",
+      "T008",
+      "T010",
+      "T011",
+      "T012",
+      "T014",
+      "EW001",
+      "EW003",
+      "E004",
+      "E006",
+      "E007",
+      "E008",
+      "E009"
+    ],
+    "build_include_flags": {
+      "include_charged_current": false,
+      "include_fermion_kk_mixing": true,
+      "include_higgs_yukawas": false
+    },
+    "candidate_allowlist": [
+      "K001",
+      "K002",
+      "B001",
+      "B002",
+      "B003",
+      "B004",
+      "C001",
+      "C002",
+      "B011",
+      "B012",
+      "B013",
+      "B014",
+      "B032",
+      "B033",
+      "B034",
+      "C003",
+      "K003",
+      "K013",
+      "T001",
+      "T002",
+      "T003",
+      "T004",
+      "T005",
+      "T006",
+      "T007",
+      "T008",
+      "T010",
+      "T011",
+      "T012",
+      "T014",
+      "EW001",
+      "EW002",
+      "EW003",
+      "E004",
+      "E006",
+      "E007",
+      "E008",
+      "E009"
+    ],
+    "deferred_lepton_followup": [
+      "EW002"
+    ],
+    "deferred_scope_tag": "deferred_lepton_followup",
+    "dirty": true,
+    "elapsed_wall_seconds": 57.79742851800984,
+    "git_sha": "1b1e5173059321781e999534a45225f67aae3ed4",
+    "lepton_sector": "dropped (not rigorous)",
+    "mode": "quark_only",
+    "schema": "quark_only_bucket1_scan_wq_row_v1"
+  },
+  "schema": "quark_only_bucket1_scan_wq_summary_v1",
+  "tiles": [
+    {
+      "allowlist": [
+        "K001",
+        "K002",
+        "B001",
+        "B002",
+        "B003",
+        "B004",
+        "C001",
+        "C002",
+        "B011",
+        "B012",
+        "B013",
+        "B014",
+        "B032",
+        "B033",
+        "B034",
+        "C003",
+        "K003",
+        "K013",
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T008",
+        "T010",
+        "T011",
+        "T012",
+        "T014",
+        "EW001",
+        "EW003",
+        "E004",
+        "E006",
+        "E007",
+        "E008",
+        "E009"
+      ],
+      "build_include_flags": {
+        "include_charged_current": false,
+        "include_fermion_kk_mixing": true,
+        "include_higgs_yukawas": false
+      },
+      "cache_metrics": {
+        "lambda_ir_gev": 1225.1398701351736,
+        "mkk_gev": 3000.0,
+        "n_gauge_modes": 512,
+        "omega_precomputed": true,
+        "quadrature_order": 4096,
+        "spline_grid_size": 241,
+        "spline_max_a_rel_err": 4.3747261168242225e-08,
+        "spline_max_modes": 512,
+        "spline_verify_points": 41
+      },
+      "complete": true,
+      "config_hash": "c249c322866c3c90",
+      "constraint_active": 37,
+      "constraint_evaluated": 37,
+      "constraint_evaluations": 37,
+      "constraint_exception_rate": 0.0,
+      "constraint_exceptions": 0,
+      "constraint_tallies": {
+        "B001": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        },
+        "B002": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        },
+        "B003": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        },
+        "B004": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        },
+        "B011": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "B012": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "B013": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "B014": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "B032": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "B033": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "B034": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 1,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "C001": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        },
+        "C002": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "C003": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "E004": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "E006": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "E007": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "E008": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "E009": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "EW001": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 1,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 1
+        },
+        "EW003": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 1,
+          "points": 1,
+          "severity": "SOFT",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "K001": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        },
+        "K002": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        },
+        "K003": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "K013": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "INFO",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "T001": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "T002": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "T003": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "T004": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "T005": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "T006": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "T007": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "T008": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "proxy",
+          "tag_counts": {
+            "proxy": 1
+          },
+          "vetoed": 0
+        },
+        "T010": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 1,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 1
+        },
+        "T011": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "partial",
+          "tag_counts": {
+            "partial": 1
+          },
+          "vetoed": 0
+        },
+        "T012": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        },
+        "T014": {
+          "active": 1,
+          "evaluated": 1,
+          "failed": 0,
+          "points": 1,
+          "severity": "HARD",
+          "tag": "rigorous",
+          "tag_counts": {
+            "rigorous": 1
+          },
+          "vetoed": 0
+        }
+      },
+      "deferred_lepton_followup": [
+        "EW002"
+      ],
+      "deferred_scope_tag": "deferred_lepton_followup",
+      "exception_ids": {},
+      "hard_not_evaluated": {
+        "T001": 1,
+        "T002": 1,
+        "T010": 1,
+        "T011": 1
+      },
+      "hard_vetoes_proxy": {
+        "EW001": 1
+      },
+      "hard_vetoes_rigorous": {},
+      "lepton_sector": "dropped (not rigorous)",
+      "mode": "quark_only",
+      "n_evaluated_points": 1,
+      "n_requested": 1,
+      "n_rows": 1,
+      "n_skipped": 0,
+      "provenance": {
+        "allowlist": [
+          "K001",
+          "K002",
+          "B001",
+          "B002",
+          "B003",
+          "B004",
+          "C001",
+          "C002",
+          "B011",
+          "B012",
+          "B013",
+          "B014",
+          "B032",
+          "B033",
+          "B034",
+          "C003",
+          "K003",
+          "K013",
+          "T001",
+          "T002",
+          "T003",
+          "T004",
+          "T005",
+          "T006",
+          "T007",
+          "T008",
+          "T010",
+          "T011",
+          "T012",
+          "T014",
+          "EW001",
+          "EW003",
+          "E004",
+          "E006",
+          "E007",
+          "E008",
+          "E009"
+        ],
+        "build_include_flags": {
+          "include_charged_current": false,
+          "include_fermion_kk_mixing": true,
+          "include_higgs_yukawas": false
+        },
+        "candidate_allowlist": [
+          "K001",
+          "K002",
+          "B001",
+          "B002",
+          "B003",
+          "B004",
+          "C001",
+          "C002",
+          "B011",
+          "B012",
+          "B013",
+          "B014",
+          "B032",
+          "B033",
+          "B034",
+          "C003",
+          "K003",
+          "K013",
+          "T001",
+          "T002",
+          "T003",
+          "T004",
+          "T005",
+          "T006",
+          "T007",
+          "T008",
+          "T010",
+          "T011",
+          "T012",
+          "T014",
+          "EW001",
+          "EW002",
+          "EW003",
+          "E004",
+          "E006",
+          "E007",
+          "E008",
+          "E009"
+        ],
+        "deferred_lepton_followup": [
+          "EW002"
+        ],
+        "deferred_scope_tag": "deferred_lepton_followup",
+        "dirty": true,
+        "git_sha": "1b1e5173059321781e999534a45225f67aae3ed4",
+        "lepton_sector": "dropped (not rigorous)",
+        "mode": "quark_only",
+        "registry_count": 103,
+        "schema": "quark_only_bucket1_scan_wq_row_v1"
+      },
+      "seed": 20260604,
+      "skip_reasons": {},
+      "survives_all_HARD_inclusive": 0,
+      "survives_all_HARD_strict": 1,
+      "tag_counts": {
+        "partial": 16,
+        "proxy": 12,
+        "rigorous": 9
+      },
+      "tile_id": 0,
+      "timing": {
+        "cache_build_seconds": 53.4238441149937,
+        "draw_loop_seconds": 0.31833071197615936,
+        "elapsed_seconds": 53.74232373002451,
+        "post_cache_seconds_per_draw": 0.31833071197615936,
+        "post_cache_seconds_per_evaluated_point": 0.31833071197615936
+      }
+    }
+  ],
+  "timing": {
+    "cache_build_seconds_sum": 53.4238441149937,
+    "draw_loop_seconds_sum": 0.31833071197615936,
+    "extrapolated_1e8_core_hours_per_draw": 8842.519777115538,
+    "extrapolated_1e8_core_hours_per_evaluated_point": 8842.519777115538,
+    "post_cache_seconds_per_draw": 0.31833071197615936,
+    "post_cache_seconds_per_evaluated_point": 0.31833071197615936,
+    "tile_elapsed_seconds_sum": 53.74232373002451
+  },
+  "top_hard_not_evaluated": [
+    [
+      "T001",
+      1
+    ],
+    [
+      "T002",
+      1
+    ],
+    [
+      "T010",
+      1
+    ],
+    [
+      "T011",
+      1
+    ]
+  ],
+  "top_hard_vetoes_proxy": [
+    [
+      "EW001",
+      1
+    ]
+  ],
+  "top_hard_vetoes_rigorous": [],
+  "totals": {
+    "constraint_active": 37,
+    "constraint_evaluated": 37,
+    "constraint_exceptions": 0,
+    "constraint_results": 37,
+    "n_evaluated_points": 1,
+    "n_requested": 1,
+    "n_rows": 1,
+    "n_skipped": 0,
+    "survives_inclusive": 0,
+    "survives_strict": 1
+  },
+  "universal_c_sanity": {
+    "name": "universal_c_diagonal_leptons",
+    "reason": "quark_only mode drops the swept lepton sector",
+    "skipped": true
+  }
+}

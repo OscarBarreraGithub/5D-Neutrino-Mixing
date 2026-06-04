@@ -1,0 +1,15 @@
+# WQ QUARK-ONLY MINI-SCAN — INDEPENDENT REVIEW (codex reviewer, gpt-5.x xhigh)
+
+Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing. You are an INDEPENDENT reviewer of the AUTHOR's uncommitted change implementing a `--quark-only` Bucket-1 mini-scan in `scripts/run_full_catalog_scan.py` (+ tests). Do NOT trust the author's self-report — RE-DERIVE. The author's claimed summary is in `.orchestration/runs/WQ-QUARKONLY/author_out.md`; the diff is uncommitted (`git diff`).
+
+## WHAT TO VERIFY (recompute independently)
+1. **ALLOWLIST CORRECTNESS (the critical check).** For EVERY allowlisted constraint, OPEN its `evaluate` body and the extras it reads. CONFIRM it reads NO swept-lepton quantity (z_delta_g_*_e, z_delta_g_L_nu, rs_higgs_yukawas, lepton_mass_basis_couplings, PMNS, lepton Yukawas) and does NOT silently fall back to an SM/zero lepton default that would masquerade as a quark-only physics result. The author DROPPED EW002 (charged-current G_F, lepton-dependent) — confirm that was correct and that no OTHER allowlisted id has the same hidden dependence. SCRUTINIZE the borderline EW003 ("CC scalar data-only, not read for veto") and EW001 (oblique) and T010/T011 (Zbb fermion-KK — confirm it is the QUARK b piece, not leptons). Verdict each: IN-correct / should-be-OUT.
+2. **MODE CORRECTNESS.** Quark-only path skips `_draw_lepton_inputs`/`compute_all_yukawas`/`_require_perturbative_leptons`; builds with `include_charged_current=False, include_fermion_kk_mixing=True, include_higgs_yukawas=False, lepton_yukawa_result=None`; injects per-tile spectrum/cache; evaluates ONLY the allowlist; non-allowlist ids never appear as vetoes or spurious stubs. Confirm the flag values are right for the allowlist (e.g. fermion_kk needed for T010/T011; charged_current off is consistent with EW002 being OUT and EW003 not reading a veto-relevant CC field).
+3. **FULL-MODE UNCHANGED.** Default (flag OFF) behavior is byte-identical (config-hash surface preserved). Confirm.
+4. **DETERMINISM + TALLY.** Same seed → same params/ratios. The per-constraint veto tally (active/evaluated/failed counts per allowlist id) is correctly computed and serialized for later constraining-power ranking. Provenance records mode=quark_only + lepton_sector dropped (honest non-rigorous tag).
+5. **SMOKE SANITY.** Re-run or inspect the smoke artifacts; confirm ~100% yield, 0 exceptions, the M_KK monotonicity (ε_K/Δm relax as M_KK rises), and that the reported s/point is real post-cache. Note if dominant vetoes are PROXY (EW001/radiative) vs RIGOROUS (ΔF=2) — this must be reported honestly, not hidden.
+6. Run `python -m pytest tests/ -q` in the FOREGROUND; confirm green.
+
+## OUTPUT (≤14 lines)
+Per-area findings; the allowlist re-verification verdict (any id you'd move IN↔OUT, with reason); confirm/deny full-mode byte-identity + determinism + honest tagging; pytest counts. If you find a blocking defect, say what and how to fix. END with EXACTLY ONE of these lines:
+`WQ-REVIEW: APPROVE`  or  `WQ-REVIEW: NEEDS-FIXES`
