@@ -1,0 +1,8 @@
+1. 4-TeV floor: PASS — recomputed `d`: 614219 rows, `M_KK={5,7,10,15,20,30,50}` TeV, sub-4=0; fitted subsample 2100 rows, sub-4=0. Filter/A4 guard at `notebooks/wq_quarkonly_explore.py:170-175,423-427`; no raw-`df` post-filter bypass except tag/sev metadata.
+2. Axis floors: PASS — no `3.5` M_KK floor remains; C2 uses `set_ylim(4.0,...)` at `:800`, C3b uses `set_xlim(4.0,55.0)` at `:912`.
+3. T010 wording/advisory: PASS — T010/T001/T002/T011 recompute as `partial/HARD`, not veto-eligible; C1c output lists `partial & HARD ... ['T010(HARD)','T011(HARD)','T001(HARD)','T002(HARD)']`; markdown/source at `:579-582,:654-660,:737-747`.
+4. Scale-mixing: PASS — executed cell 11 has fitted max σ `Yu=4.441e-16`, `Yd=1.110e-16`, bulk-c mean σ `3.319e-03`; AB note reused on A/B panels at `:306-308,:350,:401,:446,:496,:541`; C3b per-r loop/labels at `:880-915`; C3a alternative-axis label at `:820-829,:867-878`.
+5. Rendered + clean: PASS — notebook has 18/18 executed code cells, 12 embedded `image/png` outputs, 0 error outputs, 0 traceback-like outputs; fig files also present in `notebooks/figs/`.
+6. Previously-passed items: PASS — per-row tags all single-valued; refit spot-check on 3 JSONL rows matched stored fitted SVs and bulk c with maxdiff `0.000e+00`; quark-only labeling at `:35-37,:94-96`; headline recompute: strict=1.0 for all ≥5 TeV, inclusive=0 only at 5 TeV, only eligible true veto is EW001 at 5 TeV, none ≥7.
+7. Remaining issue: none.
+WQ-NB-REVIEW2: APPROVE
