@@ -17,14 +17,27 @@
 #
 # This notebook builds **clear, well-labeled** exploratory figures from the completed
 # **1,000,000-point RS quark-only flavor scan**
-# (`scan_outputs/wq_quarkonly_1M_full/`). It supersedes the auto-generated plots in
+# (`scan_outputs/wq_quarkonly_1M_20128400/`). It supersedes the auto-generated plots in
 # `analysis/plots/` (which were not legible enough).
+#
+# **What changed vs the earlier 1M run.** This run carries **46 quark-only constraints**
+# (allowlist grew 37 → 46) with **two physics upgrades**:
+# 1. **Z→bb (`T010`/`T011`) is now RIGOROUS and VETOING** (previously held advisory). It
+#    is the **DOMINANT** constraint: it vetoes ~100% of points up to ~15 TeV and ~89% at
+#    20 TeV, pushing the *rigorous* M_KK floor to **~25–30 TeV** (strict survival 0%
+#    below 20 TeV, 100% by 30 TeV). This is the classic **non-custodial RS Zb_L problem**,
+#    and it is nearly **draw-independent** (the 3rd-gen doublet localization `c_Q3` is
+#    pinned by `m_t`).
+# 2. **Lepton-free collider KK-mass searches added** (`CR001` g_KK→tt, `CR002/3/4/8/10`
+#    vector-like-quark pairs, `CR007/CR013` KK graviton, `CR012` KK vector) as **proxy**
+#    carvers. Lepton collider searches (`CR005/006/009/011/014`) are intentionally **OUT**.
+#    ε_K/Δm (~1–3 TeV) and the collider floor (~1–5 TeV) are now **SUBDOMINANT** to Z→bb.
 #
 # **Three deliverables:**
 # - **A.** The actual values inside the quark Yukawas (all 9 entries of `Y_u`, `Y_d`).
 # - **B.** Bulk localization masses `c_Q`, `c_u`, `c_d` (geometric localization).
 # - **C.** The constraint-carving plot — `M_KK` vs a structural axis `X`, showing how
-#   the ~40 quark-only constraints work toward raising `M_KK`.
+#   the 46 quark-only constraints work toward raising `M_KK` (now dominated by Z→bb).
 #
 # ## Hard ground rules enforced throughout
 # 1. **`M_KK ≥ 4 TeV` everywhere.** The 1/2/3 TeV tiles are **dropped**; we use only
@@ -33,7 +46,7 @@
 #    **exact** `(quark_fit_r, M_KK)` cell or faceted by one of them. The scale is labeled
 #    on every panel.
 # 3. **These are QUARK-ONLY constraints.** The lepton sector is **dropped and is NOT yet
-#    rigorous**. The 37 allowlisted constraints are enumerated below and color-coded
+#    rigorous**. The 46 allowlisted constraints are enumerated below and color-coded
 #    **rigorous / proxy / partial** consistently across all plots, using the **per-row
 #    `tag`** field (not hardcoded).
 
@@ -69,11 +82,11 @@ mpl.rcParams.update({
 })
 
 SCAN_ROOT = os.path.abspath(
-    os.path.join(os.getcwd(), "..", "scan_outputs", "wq_quarkonly_1M_full")
+    os.path.join(os.getcwd(), "..", "scan_outputs", "wq_quarkonly_1M_20128400")
 )
 if not os.path.isdir(SCAN_ROOT):
     # fall back to absolute repo path if cwd is elsewhere
-    SCAN_ROOT = "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/wq_quarkonly_1M_full"
+    SCAN_ROOT = "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/wq_quarkonly_1M_20128400"
 CACHE = os.path.join(SCAN_ROOT, "wq_quarkonly_cache.parquet")
 SUBSAMPLE = os.path.join(SCAN_ROOT, "wq_quarkonly_fitted_subsample.parquet")
 FIGDIR = os.path.abspath(os.path.join(os.getcwd(), "figs"))
@@ -85,24 +98,35 @@ print("cache     :", CACHE)
 print("fig dir   :", FIGDIR)
 
 # %% [markdown]
-# ## The 37 quark-only allowlisted constraints
+# ## The 46 quark-only allowlisted constraints
 #
 # Physics names are read live from `flavor_catalog_constraints.registry` (each
 # constraint's `.observable`). The **rigorous / proxy / partial** split is taken from
 # the **per-row `tag`** stored in the scan output (verified below), *not* hardcoded.
 #
+# **What's new in this run (37 → 46):**
+# - **Z→bb (`T010`/`T011`) is now RIGOROUS and VETOING** — it moved out of the advisory
+#   group into the **rigorous** group, and is the **DOMINANT** carver (see narrative).
+# - **Lepton-free collider KK-mass searches added (proxy):** `CR001` g_KK→tt,
+#   `CR002/3/4/8/10` vector-like-quark pair production, `CR007/CR013` KK graviton,
+#   `CR012` KK vector. **Lepton collider searches `CR005/006/009/011/014` stay OUT.**
+#
 # **Honest scope statement:**
 # - **Lepton sector is DROPPED** and is **NOT yet fully rigorous** — this is a
 #   quark-only study.
+# - **Z→bb (rigorous, DOMINANT):** `T010`/`T011`. The non-custodial RS Zb_L coupling
+#   shift. This is now the single most constraining observable, vetoing ~100% of points
+#   up to ~15 TeV and ~89% at 20 TeV — it sets the rigorous M_KK floor at **~25–30 TeV**.
 # - **ΔF=2 meson mixing (rigorous):** `K001` ε_K, `K002` Δm_K, `B001` Δm_d,
-#   `B003` Δm_s, `C001` D-mixing, plus the rigorous mixing-phase observables.
-#   Their experimental reach is **~1–3 TeV**, so above 4 TeV they are already satisfied.
-# - **Radiative / oblique / collider (proxy):** `B011–B014` b→sγ family, `EW001`
-#   oblique S,T,U, top-FCNC `T003–T008`. These are **documented proxies**, not full RS
-#   loop matchings. The longest proxy reach is **~7 TeV** (EW001 / B012).
+#   `B003` Δm_s, `C001` D-mixing, plus rigorous mixing-phase observables `B002/B004/T012/T014`.
+#   Their experimental reach is **~1–3 TeV**, now **SUBDOMINANT** to Z→bb.
+# - **Collider KK searches (proxy):** `CR001–CR013` (gluon/graviton/vector/VLQ direct
+#   searches). Their reach is **~1–5 TeV**, also **SUBDOMINANT** to Z→bb above 4 TeV.
+# - **Radiative / oblique (proxy):** `B011–B014` b→sγ family, `EW001` oblique S,T,U,
+#   top-FCNC `T003–T008`. Documented proxies, not full RS loop matchings (~7 TeV reach).
 # - **Nonleptonic & EDM (partial):** `B032–B034`, `K003/K013`, `C003`, `E004–E009`,
-#   `EW003` — flagged `NEEDS-HUMAN-PHYSICS` (no first-principles SM/RS prediction yet);
-#   they are carried as advisory and do **not** veto.
+#   `EW003`, plus `T001/T002` top-FCNC pulls — flagged `NEEDS-HUMAN-PHYSICS` (no
+#   first-principles SM/RS prediction yet); carried as advisory and do **not** veto.
 
 # %%
 from flavor_catalog_constraints.registry import discover, get
@@ -113,6 +137,7 @@ ALLOWLIST = [
     "B014","B032","B033","B034","C003","K003","K013","T001","T002","T003","T004",
     "T005","T006","T007","T008","T010","T011","T012","T014","EW001","EW003",
     "E004","E006","E007","E008","E009",
+    "CR001","CR002","CR003","CR004","CR007","CR008","CR010","CR012","CR013",
 ]
 
 OBSERVABLE = {}
@@ -562,29 +587,30 @@ plt.show()
 # 3. **`X = Yukawa anarchy`** `= max_abs_quark_yukawa` (perturbativity proxy). Tried; it
 #    spreads constraint strength but is noisy and not monotonic — less informative than `r`.
 #
-# **The honest >4 TeV story.** Above the 4 TeV floor, **binary exclusion is essentially
-# empty**: rigorous ΔF=2 reach is ~1–3 TeV (already satisfied), and the only constraint
-# that actually vetoes a point past 4 TeV is the proxy `EW001` (oblique S,T,U) at 5 TeV —
-# nothing vetoes at ≥7 TeV. So a veto-fraction carving plot is a flat zero above 4 TeV.
-# Instead we rank by **median `ratio`** (proximity to bound; veto threshold `ratio = 1`)
-# per `(X, M_KK)` cell — this reveals *how close each constraint sits to biting* even
-# when it does not exclude.
+# **The honest >4 TeV story (NEW: Z→bb dominates).** With Z→bb (`T010`/`T011`) now
+# rigorous and vetoing, **binary exclusion above 4 TeV is no longer empty — it is
+# dominated by Z→bb**. `T010` vetoes essentially **100% of evaluated points up to ~15 TeV**
+# and **~89% at 20 TeV**, only releasing by **30 TeV** (strict + inclusive survival climb
+# from 0% below 20 TeV to ~100% at 30 TeV). This is the classic **non-custodial RS Zb_L
+# problem**: the third-generation doublet localization `c_Q3` is pinned by `m_t`, so the
+# Z–b_L coupling shift is large and nearly **draw-independent** (it carves almost
+# uniformly across `r`). The rigorous ΔF=2 set (ε_K/Δm, reach ~1–3 TeV) and the proxy
+# collider direct searches (`CR001–CR013`, reach ~1–5 TeV) are now **subdominant** — they
+# only bite at the lowest M_KK tiles. We show both the **binary veto fraction** (now
+# informative) and the **median `ratio`** (proximity to bound) per `(X, M_KK)` cell.
 #
 # **Crucial honesty caveat — `ratio` is not the same as a veto.** A constraint only
 # removes a point if it is (i) **HARD** severity **and** (ii) tagged **rigorous or
-# proxy** — this is exactly the harness `survives_all_HARD_inclusive` rule. Several
-# **partial** (NEEDS-HUMAN-PHYSICS) entries carry `ratio ≥ 1` or even ≫ 1 (notably
-# `T010` Z→bb pull, `B034`, `EW003`, and the placeholder-`ratio=1` nonleptonic/EDM
-# proxies `C003/K003/K013/B032`). These **do NOT carve anything**, but for two distinct
-# reasons that we name honestly per id: `T010` (and `T001/T002/T011`) are **`partial` &
-# HARD** — non-vetoing because their matching is *incomplete* (`partial`), NOT because
-# they are soft; the rest (`B032–B034`, `C003`, `K003`, `K013`, `EW003`, `E004–E009`)
-# are **`partial` & INFO/SOFT**. In all cases the high ratio reflects an *unfinished*
-# SM/RS prediction, not a real exclusion. We therefore split the dominant panel into
-# **veto-eligible carvers** (can
-# actually raise `M_KK`) vs **advisory-only high-ratio partials** (flagged, never veto),
-# so the reader is not misled. We organize C1 as: **veto-eligible dominant**,
-# **veto-eligible subdominant**, and **advisory-only / inactive**.
+# proxy** — this is exactly the harness `survives_all_HARD_inclusive` rule. **Z→bb
+# (`T010`/`T011`) is now `rigorous` & HARD, so it IS veto-eligible and is the dominant
+# carver.** The remaining **partial** (NEEDS-HUMAN-PHYSICS) entries that carry high
+# `ratio` (`B034`, `EW003`, the placeholder-`ratio=1` nonleptonic/EDM proxies
+# `C003/K003/K013/B032`, and the top-FCNC pulls `T001/T002`) still **do NOT carve
+# anything** — their matching is incomplete and they are carried advisory-only. We split
+# the panels into **veto-eligible carvers** (can actually raise `M_KK`) vs
+# **advisory-only high-ratio partials** (flagged, never veto), so the reader is not
+# misled. We organize C1 as: **veto-eligible dominant**, **veto-eligible subdominant**,
+# and **advisory-only / inactive**.
 
 # %%
 # Build a "carving" table: for each (r, M_KK) cell, median ratio per constraint (over
@@ -649,15 +675,20 @@ print(peak.head(18).to_string(index=False))
 # three panels is now by **veto eligibility first, then strength**, so the reader is not
 # misled by advisory partials with high ratios:
 # - **C1a — veto-eligible dominant** (HARD & rigorous/proxy, peak median ratio ≥ 0.05):
-#   constraints that genuinely push on `M_KK`.
+#   constraints that genuinely push on `M_KK`. **This is now headed by Z→bb
+#   (`T010`/`T011`, rigorous)** — its median ratio sits far above 1 across all `r` until
+#   the scale climbs past ~20–30 TeV — followed by the proxy collider searches
+#   (`CR001`/`CR012`/`CR013`) and `EW001`.
 # - **C1b — veto-eligible subdominant / inactive** (HARD & rigorous/proxy, peak < 0.05).
 # - **C1c — advisory-only (NON-VETOING) partials**: every entry here is tag=`partial`.
-#   They are non-vetoing for one of two distinct reasons, named per id in the panel:
-#   (i) **`partial` & HARD severity** — e.g. **`T010` (Z→bb)**, `T001`, `T002`, `T011`:
-#   these *are* HARD, but the harness rule requires tag ∈ {rigorous, proxy} to veto, and
-#   their matching is incomplete (`partial`, NEEDS-HUMAN-PHYSICS), so they do **not** carve;
-#   (ii) **`partial` & INFO/SOFT severity** — e.g. `B032–B034`, `C003`, `K003`, `K013`,
-#   `EW003`, `E004–E009`. High ratios here are unfinished-physics placeholders, not bounds.
+#   They are non-vetoing because their matching is incomplete (`partial`,
+#   NEEDS-HUMAN-PHYSICS), regardless of severity:
+#   (i) **`partial` & HARD severity** — e.g. `T001`, `T002` top-FCNC pulls: these *are*
+#   HARD, but the harness rule requires tag ∈ {rigorous, proxy} to veto, so they do **not**
+#   carve; (ii) **`partial` & INFO/SOFT severity** — e.g. `B032–B034`, `C003`, `K003`,
+#   `K013`, `EW003`, `E004–E009`. High ratios here are unfinished-physics placeholders, not
+#   bounds. **Note: Z→bb (`T010`/`T011`) is NO LONGER here — it is now rigorous & vetoing,
+#   in C1a.**
 #
 # Color = tag. Bold curve = 5 TeV (lowest surviving scale); faint = higher `M_KK`.
 
@@ -716,8 +747,9 @@ carving_panel(axes[1], carve_r, sub_ids,
 # Accurate non-veto reason per advisory id. The harness rule is: a point is removed
 # only by HARD AND tag in {rigorous, proxy}. So an entry is NON-VETOING if EITHER its
 # tag is `partial` (incomplete matching: no first-principles SM/RS prediction yet —
-# this holds even when its severity is HARD, e.g. T010 Z→bb) OR its severity is
-# INFO/SOFT. We name each correctly per its real (tag, severity).
+# this holds even when its severity is HARD, e.g. T001/T002 top-FCNC pulls) OR its
+# severity is INFO/SOFT. (Z→bb T010/T011 is NO LONGER here: it is now rigorous & vetoing.)
+# We name each correctly per its real (tag, severity).
 adv_partial_hard = [c for c in adv_ids if TAG[c] == "partial" and SEV[c] == "HARD"]
 adv_partial_soft = [c for c in adv_ids if TAG[c] == "partial" and SEV[c] in ("SOFT", "INFO")]
 adv_other = [c for c in adv_ids
@@ -734,8 +766,9 @@ carving_panel(axes[2], carve_r, adv_ids,
               "C1c — ADVISORY-ONLY (NON-VETOING) partials\n"
               "non-vetoing because PARTIAL (incomplete matching) or INFO/SOFT severity",
               "quark_fit_r")
-# Honest, per-id reason note (no blanket INFO/SOFT mislabel). T010 (Z→bb) etc. are
-# HARD but `partial`, so they still do not veto — that is the point.
+# Honest, per-id reason note (no blanket INFO/SOFT mislabel). T001/T002 (top-FCNC pulls)
+# are HARD but `partial`, so they still do not veto — that is the point. (Z→bb is now
+# rigorous & vetoing, so it appears in C1a, not here.)
 _reason_lines = []
 if adv_partial_hard:
     _reason_lines.append("HARD but `partial` (incomplete matching → non-vetoing): "
@@ -760,11 +793,12 @@ plt.show()
 # ### C2 — The "M_KK on y-axis" carving boundary
 #
 # The most literal reading of the brief: **M_KK on the y-axis**, `r` on the x-axis, and
-# one **boundary curve per constraint** = the `M_KK` at which that constraint's median
-# ratio crosses a chosen pressure level (we use ratio = 0.5, "half-way to the bound", and
-# also mark the true veto level ratio = 1 where it exists). Constraints whose ratio never
+# one **boundary curve per constraint** = the highest `M_KK` at which that constraint's
+# median ratio still exceeds a chosen pressure level. Constraints whose ratio never
 # reaches the level within `M_KK ≥ 4 TeV` are listed as non-carving. This directly shows
-# *which constraint controls the lower edge of allowed M_KK* as a function of `r`.
+# *which constraint controls the lower edge of allowed M_KK* as a function of `r` — and
+# the answer is now unambiguous: **Z→bb (`T010`/`T011`) carves the edge up to ~25–30 TeV**,
+# towering over the ΔF=2 and collider boundaries (which sit near the 4 TeV floor).
 
 # %%
 def reach_curve(carve, cid, level):
@@ -781,7 +815,8 @@ def reach_curve(carve, cid, level):
 # Only VETO-ELIGIBLE constraints can actually carve M_KK, so the boundary plot is
 # restricted to them (advisory partials are reported separately, not drawn as boundaries).
 fig, ax = plt.subplots(figsize=(11, 7.5))
-LEVEL = 0.3   # "carving" pressure level on the median ratio (no eligible cstr reaches 0.5)
+LEVEL = 0.3   # "carving" pressure level on the median ratio (Z->bb towers above this;
+              # ΔF=2/collider boundaries hover near the 4 TeV floor)
 peak_elig = peak[peak.eligible]
 carving_ids = peak_elig.loc[peak_elig.median_ratio >= LEVEL, "cid"].tolist()
 noncarving = peak_elig.loc[peak_elig.median_ratio < LEVEL, ["cid", "tag", "median_ratio"]]
@@ -830,10 +865,14 @@ print(noncarving.sort_values("median_ratio", ascending=False).to_string(index=Fa
 #
 # **(right) C3b — the honest binary-veto view, PER r (NOT pooled).** Binary exclusion is
 # both `M_KK`- and `r`-dependent, so we draw one line **per `r`** (encoded by line style +
-# marker) for each veto-eligible constraint, never pooling `r`. The panel is **deliberately
-# near-empty above 4 TeV** — that *is* the finding: above 4 TeV essentially nothing is
-# excluded; only `EW001` vetoes at 5 TeV (and it does so for **all** `r`, as the per-r
-# lines show). We display it so the reader sees the carving is genuinely thin, not hidden.
+# marker) for each veto-eligible constraint, never pooling `r`. The panel is now
+# **dominated by Z→bb (`T010`/`T011`, rigorous)**: its veto fraction is ~1.0 for **all `r`**
+# out to ~15 TeV, ~0.89 at 20 TeV, and only collapses to 0 by 30 TeV — the curves are
+# nearly on top of each other across `r`, the visual signature of the **draw-independent
+# non-custodial Zb_L bound**. The proxy collider searches (`CR001`/`CR012`/`CR013`) and
+# `EW001` veto only at the lowest tiles (5 TeV) and are gone by ≥7 TeV — they are
+# subdominant. So the M_KK lower edge is set by Z→bb at ~25–30 TeV, not by ΔF=2 or
+# collider direct searches.
 
 # %%
 # RH-down compositeness axis on the full frame d
@@ -912,9 +951,21 @@ ax.set_xlabel("M_KK [TeV]"); ax.set_ylabel("true veto fraction (PER r — not po
 ax.set_xlim(4.0, 55.0)  # floor every M_KK axis at the 4 TeV hard cut
 ax.set_ylim(-0.02, 1.02)
 ax.set_title("C3b — HONEST binary veto vs M_KK (≥4 TeV), PER r\n"
-             "veto-eligible only; only EW001 bites at 5 TeV (all r), nothing at ≥7 TeV")
+             "veto-eligible only; Z→bb (T010/T011) dominates ~1.0 to 15 TeV (all r), "
+             "collider/EW001 only at 5 TeV")
 if plotted:
-    ax.legend(fontsize=7.5, loc="center right", ncols=1)
+    # The legend can be large (many veto-eligible cstr x r). Show one entry per
+    # (constraint) using the first r-style as representative, plus a note that each
+    # constraint is drawn once per r; keeps it legible without hiding any curve.
+    handles, labels = ax.get_legend_handles_labels()
+    seen_cid, h2, l2 = set(), [], []
+    for h, l in zip(handles, labels):
+        cid_l = l.split(" ", 1)[0]
+        if cid_l not in seen_cid:
+            seen_cid.add(cid_l)
+            h2.append(h)
+            l2.append(l.rsplit(",", 1)[0] + "  (1 line per r)")
+    ax.legend(h2, l2, fontsize=7.5, loc="center right", ncols=1)
 else:
     ax.text(0.5, 0.5, "NO veto-eligible constraint vetoes any point at M_KK ≥ 5 TeV\n"
             "(all rigorous ΔF=2 + proxy bounds already satisfied)",
@@ -939,20 +990,30 @@ plt.show()
 # - **Plot B (bulk c).** Third-generation `c_Q`, `c_u`, `c_d` localize near/below 1/2
 #   (IR-localized heavy quarks); generations 1–2 sit well above 1/2 (UV-localized). The
 #   localization is set by `r` + mass/CKM targets and is essentially `M_KK`-independent.
-# - **Plot C (carving).** Chosen `X = r`; also tried RH-down compositeness `max(1/2−c_d)`
-#   and Yukawa-anarchy `max|Y_q|`. Among **veto-eligible** constraints (HARD & rigorous/
-#   proxy), the residual pressure above 4 TeV comes from the proxy `EW001` (oblique S,T,U)
-#   and the `B011/B012` b→sγ family, with the rigorous ΔF=2 set (`K001` ε_K, `B003` Δm_s,
-#   `B004` φ_s) next; all rise with `r`. **Important caveat surfaced by the data:** several
-#   high-`ratio` entries do **NOT veto**: `T010` (Z→bb), `T001`, `T002`, `T011` are
-#   `partial` **&** HARD — non-vetoing because their matching is *incomplete* (`partial`),
-#   not because they are soft; `B034`, `EW003`, and the placeholder-`ratio=1` nonleptonic/
-#   EDM proxies (`C003/K003/K013/B032/B033`, `E004–E009`) are `partial` **&** INFO/SOFT.
-#   All are NEEDS-HUMAN-PHYSICS and isolated into the C1c "advisory-only" panel so their
-#   ratio is not mistaken for a real bound.
-# - **Honest ≥4 TeV limitation.** Above the 4 TeV floor the carving is genuinely **thin**:
-#   strict (rigorous) survival is already 100% at ≥5 TeV (ΔF=2 reach ~1–3 TeV); inclusive
-#   survival is 0% at 5 TeV → 100% at ≥7 TeV, i.e. the **sole** real veto past 4 TeV is
-#   `EW001` at 5 TeV, and **nothing** excludes at ≥7 TeV. The `ratio` view (C1/C2) surfaces
-#   the residual structure that the binary-veto view (C3b) cannot.
+# - **Plot C (carving) — NEW dominant constraint: Z→bb.** Chosen `X = r`; also tried
+#   RH-down compositeness `max(1/2−c_d)` and Yukawa-anarchy `max|Y_q|`. With this run, the
+#   carving is **dominated by Z→bb (`T010`/`T011`, now rigorous & vetoing)**: it vetoes
+#   ~100% of evaluated points up to ~15 TeV and ~89% at 20 TeV, and its median ratio sits
+#   far above 1 across **all `r`** — i.e. it carves nearly **draw-independently**. The
+#   rigorous ΔF=2 set (`K001` ε_K, `B003` Δm_s, `B004` φ_s; reach ~1–3 TeV) and the proxy
+#   collider direct searches (`CR001–CR013`; reach ~1–5 TeV) plus `EW001`/`B011/B012` are
+#   now **subdominant** — they only bite at the lowest tiles. The remaining high-`ratio`
+#   **non-vetoing** partials (`T001`, `T002`, `B034`, `EW003`, the placeholder-`ratio=1`
+#   nonleptonic/EDM proxies `C003/K003/K013/B032/B033`, `E004–E009`) are isolated into the
+#   C1c "advisory-only" panel — their matching is incomplete (NEEDS-HUMAN-PHYSICS), so the
+#   ratio is not a real bound.
+# - **The headline: rigorous M_KK floor at ~25–30 TeV (non-custodial Zb_L).** Strict and
+#   inclusive survival are **0% below 20 TeV** and only climb to **~100% by 30 TeV** —
+#   driven entirely by Z→bb. This is the classic **non-custodial RS Zb_L problem**: the
+#   third-generation doublet localization `c_Q3` is pinned by `m_t`, forcing a large,
+#   nearly draw-independent shift in the Z–b_L coupling. The binary-veto view (C3b) now
+#   carries the signal directly (it is no longer near-empty above 4 TeV).
+# - **Honest caveats (must read).** (1) This is the **NON-CUSTODIAL** bound. Adding a
+#   custodial symmetry (e.g. P_LR / O(3) protection of Z b_L b_L) would relax the Z→bb
+#   constraint **substantially** — that protection is **deferred** and not in this run, so
+#   the ~25–30 TeV figure is the *unprotected* reach. (2) The exact ~25–30 TeV magnitude is
+#   **pending a literature cross-check**: this minimal-tree Z→bb term was only just
+#   un-suppressed (moved from advisory to rigorous), so the precise floor should be
+#   validated against the published non-custodial RS Zb_L bounds before being quoted as
+#   final.
 # print("notebook complete — figures written to", FIGDIR)
