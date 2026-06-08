@@ -11,7 +11,7 @@
 # WQ quark-only Bucket-1 mini-scan (dual-approved mode, commit 070cdb6).
 #
 # Fits the quark sector per draw (anarchic O(1) Yukawas) and evaluates ONLY the
-# 37 Bucket-1 constraints that need ZERO swept-lepton data. The lepton sector is
+# 46 Bucket-1 constraints that need ZERO swept-lepton data. The lepton sector is
 # DROPPED (not rigorous) and tagged as such. Purpose: first look at the RS quark
 # sector — M_KK reach vs anarchic Yukawa structure + per-constraint constraining
 # power.

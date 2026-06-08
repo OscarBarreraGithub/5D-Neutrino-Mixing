@@ -1,0 +1,17 @@
+# Z to bb — PROPOSE (do NOT code) the standard minimal-RS top-driven Zb_L coefficient (codex, gpt-5.x xhigh)
+
+Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing. This is a PROPOSAL-ONLY task. Write NO production code. Produce a short, citable proposal that an independent Opus reviewer will cross-check and the physicist will sign off before any implementation.
+
+## CONTEXT (read these first)
+- The Z to bb constraint currently implements ONLY the small bottom-mass-driven coupling shift. See `quarkConstraints/rs_ew_couplings.py` around lines 704-772 and 920-960: `build_rs_zbb_fermion_kk_mixing` uses `prefactor = m_b^2 / (2 * Lambda_IR^2)`, `delta_g_L_b = prefactor * B_d`, `delta_g_R_b = -prefactor * B_Q`, with Casagrande ZMA B-profiles `_casagrande_zbb_B_profile(c, F)`. The dominant top-partner term was deliberately omitted and flagged `custodial_toppartner_zbL_needs_human=True`.
+- We are FORGETTING CUSTODIAL for now. We want the MINIMAL, NON-CUSTODIAL form of the dominant correction to the LEFT-handed b coupling, which scales like m_t^2 / M_KK^2 because b_L is the SU(2) partner of the top.
+
+## WHAT TO PROPOSE
+1. The explicit standard minimal-RS (non-custodial) expression for the top-driven shift to the left-handed Z-b-b coupling, delta g_bL^top, and state whether there is a corresponding right-handed piece. Express it in terms of quantities the scan ALREADY has per point: the top mass (`fit_result.masses_up[2]`), the third-generation DOUBLET localization / bulk mass `c_Q[2]` and its IR overlap `F_Q[2]`, the right-handed top localization if needed (`c_u[2]`/`F_u[2]`), M_KK = Lambda_IR, v, and g_Z. Make the convention IDENTICAL to the existing implementation (same definition of g_L in `L_Z = g_Z Z_mu bbar gamma^mu (g_L P_L + g_R P_R) b`, and consistent with the existing Casagrande B-profile normalization so the new term ADDS cleanly to `z_delta_g_L_d[2,2]`).
+2. Cite the specific source equation(s). Use the standard RS Zbb / fermion-mixing literature, e.g. Casagrande, Goertz, Haisch, Neubert, Pfoh (arXiv:0807.4937), Agashe, Contino, Pomarol, Sundrum (custodial-motivation papers, hep-ph/0605341), Carena, Ponton, Santiago, Wagner. Give the equation number / form, and note the convention each uses and how it maps to ours. If sources differ by O(1) convention factors, say so explicitly and recommend ONE.
+3. Sanity / limits the implementation must satisfy: vanishes as m_t -> 0; scales as 1/M_KK^2; state the SIGN of delta g_bL^top for an IR-localized third generation; give the rough magnitude (per-mille-ish of g_bL for M_KK ~ few TeV); and confirm it is parametrically m_t^2/m_b^2 ~ 1000-2000x larger than the currently-coded m_b^2 piece.
+4. State exactly how it combines with the existing pieces (adds to the gauge + m_b^2 Casagrande term in `z_delta_g_L_d[2,2]`), and what NEW inputs (if any) the builder would need to pass.
+5. Be explicit about what the NON-custodial choice means physically (this is the large, unprotected RS Zbb correction; custodial would later reduce it) and any residual ambiguity the physicist should decide.
+
+## OUTPUT (<= 20 lines)
+The proposed formula (in our variables), the citation(s) + equation form + convention mapping, the sign/scaling/magnitude sanity points, how it combines with the existing term, any O(1) convention choice you are recommending and why, and the residual decision for the physicist. NO code. End with: ZBB-PROPOSAL-DONE.

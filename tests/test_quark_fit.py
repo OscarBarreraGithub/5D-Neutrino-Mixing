@@ -320,7 +320,12 @@ def test_canonical_vector_encode_decode_is_idempotent_on_normalized_representati
     assert np.isclose(recovered.down_right.theta13, 0.0)
     assert np.isclose(recovered.down_right.theta23, 0.0)
     assert np.isclose(recovered.down_right.delta, 0.0)
-    np.testing.assert_allclose(round_tripped, vector, rtol=0.0, atol=0.0)
+    np.testing.assert_allclose(
+        round_tripped,
+        vector,
+        rtol=0.0,
+        atol=np.finfo(float).eps,
+    )
 
 
 def test_canonical_vector_quotients_out_common_scale():

@@ -6,6 +6,7 @@ import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 
@@ -134,6 +135,30 @@ def test_resolved_proxy_wording_in_matching_status_remains_rigorous():
     assert proxy_flags == {}
 
 
+def test_deferred_custodial_refinement_without_needs_human_stays_rigorous():
+    harness = _load_harness()
+    result = ConstraintResult(
+        process_id="T010",
+        severity=Severity.HARD,
+        passes=False,
+        ratio=2.0,
+        diagnostics={
+            "evaluated": True,
+            "minimal_rs_tree_complete": True,
+            "minimal_rs_tree_veto_ready": True,
+            "custodial_variant_deferred": True,
+            "custodial_variant_deferred_note": "Deferred refinement: custodial variant.",
+        },
+    )
+
+    tag, matching_status, needs_human, proxy_flags = harness.tag_result(result)
+
+    assert tag == "rigorous"
+    assert matching_status is None
+    assert needs_human is None
+    assert proxy_flags == {}
+
+
 def test_tile_seed_stride_and_config_hash_are_deterministic():
     harness = _load_harness()
     cfg = harness.ScanConfig(
@@ -220,16 +245,33 @@ def test_quark_only_config_payload_preserves_full_mode_hash_surface():
     assert harness._config_hash(full_cfg) != harness._config_hash(quark_cfg)
 
 
-def test_quark_only_allowlist_matches_candidate_verification_and_drops_ew002():
+def test_quark_only_allowlist_matches_candidate_verification_and_drops_deferred_leptons():
     harness = _load_harness()
+    expected_collider_in = (
+        "CR001",
+        "CR002",
+        "CR003",
+        "CR004",
+        "CR007",
+        "CR008",
+        "CR010",
+        "CR012",
+        "CR013",
+    )
+    expected_collider_deferred = ("CR005", "CR006", "CR009", "CR011", "CR014")
 
     assert set(harness.QUARK_ONLY_CANDIDATE_IDS) == (
         set(harness.QUARK_ONLY_ALLOWLIST_IDS)
         | set(harness.QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP)
     )
-    assert harness.QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP == ("EW002",)
+    assert len(harness.QUARK_ONLY_ALLOWLIST_IDS) == 46
+    assert set(expected_collider_in) <= harness.QUARK_ONLY_ALLOWLIST_SET
+    assert set(expected_collider_deferred).isdisjoint(harness.QUARK_ONLY_ALLOWLIST_SET)
+    assert harness.QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP == (
+        "EW002",
+        *expected_collider_deferred,
+    )
     assert "EW002" not in harness.QUARK_ONLY_ALLOWLIST_SET
-    assert harness.QUARK_ONLY_DEFERRED_EXTRAS["EW002"] == ("rs_charged_current",)
 
     actual = _candidate_get_extra_usage(harness)
     for pid in harness.QUARK_ONLY_ALLOWLIST_IDS:
@@ -237,7 +279,66 @@ def test_quark_only_allowlist_matches_candidate_verification_and_drops_ew002():
         forbidden = set(actual[pid]) & harness.QUARK_ONLY_FORBIDDEN_EXTRAS
         if pid not in harness.QUARK_ONLY_OPTIONAL_LEPTON_DIAGNOSTIC_IDS:
             assert forbidden == set()
-    assert actual["EW002"] == ("rs_charged_current",)
+    for pid in harness.QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP:
+        assert actual[pid] == harness.QUARK_ONLY_DEFERRED_EXTRAS[pid]
+    for pid in expected_collider_in:
+        assert not set(actual[pid]) & harness.QUARK_ONLY_FORBIDDEN_EXTRAS
+
+
+def test_quark_only_collider_allowlist_is_active_proxy_and_monotonic():
+    from flavor_catalog_constraints import point_builder
+
+    harness = _load_harness()
+    collider_ids = (
+        "CR001",
+        "CR002",
+        "CR003",
+        "CR004",
+        "CR007",
+        "CR008",
+        "CR010",
+        "CR012",
+        "CR013",
+    )
+
+    def point(m_kk_gev: float):
+        return point_builder.make_point(
+            kk_ew_mass_gev=m_kk_gev,
+            kk_gluon_mass_gev=m_kk_gev,
+            quark_mass_basis_couplings=SimpleNamespace(M_KK=m_kk_gev, xi_KK=1.0),
+        )
+
+    low_results = harness._evaluate_constraint_ids(point(1000.0), collider_ids)
+    high_results = harness._evaluate_constraint_ids(point(50000.0), collider_ids)
+    low_payload = harness._classify_results(low_results)
+    high_payload = harness._classify_results(high_results)
+
+    assert low_payload["excluded_by_proxy"]
+    assert low_payload["survives_all_HARD_inclusive"] is False
+    assert high_payload["excluded_by_proxy"] == []
+    assert high_payload["survives_all_HARD_inclusive"] is True
+
+    for pid in collider_ids:
+        result = low_results[pid]
+        high_result = high_results[pid]
+        diagnostics = dict(result.diagnostics)
+        assert result.severity is Severity.HARD
+        assert low_payload["constraints"][pid]["evaluated"] is True
+        assert low_payload["constraints"][pid]["active"] is True
+        assert low_payload["constraints"][pid]["tag"] == "proxy"
+        assert "missing_extra" not in diagnostics
+        assert "missing_extras" not in diagnostics
+        assert result.ratio is not None
+        assert high_result.ratio is not None
+        assert result.ratio > high_result.ratio
+        assert high_result.passes is True
+        if pid in {"CR001", "CR007", "CR012", "CR013"}:
+            assert diagnostics["mass_source"] in {
+                "kk_gluon_mass_gev",
+                "kk_ew_mass_gev",
+            }
+        else:
+            assert diagnostics["mass_source"] == "quark_mass_basis_couplings.M_KK"
 
 
 def test_quark_only_evaluate_draw_skips_leptons_filters_allowlist_and_is_deterministic(monkeypatch):

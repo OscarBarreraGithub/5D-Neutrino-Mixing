@@ -311,10 +311,12 @@ def test_rigorous_rs_ew_zbb_point_matches_independent_core_recomputation():
     )
     assert result.ratio == pytest.approx(_manual_t011_ratio(constraint, manual_observables))
     assert result.diagnostics["minimal_rs_tree_complete"] is False
+    assert result.diagnostics["minimal_rs_tree_veto_ready"] is False
     assert result.diagnostics["fermion_kk_mixing_included"] is False
-    assert result.diagnostics["custodial_variant_needs_human"] is True
-    assert result.diagnostics["custodial_toppartner_zbL_needs_human"] is True
-    assert "top-partner" in result.diagnostics["needs_human_physics"]
+    assert result.diagnostics["custodial_variant_deferred"] is True
+    assert result.diagnostics["custodial_toppartner_zbL_deferred"] is True
+    assert result.diagnostics["brane_kinetic_terms_deferred"] is True
+    assert "minimal non-custodial Zbb is incomplete" in result.diagnostics["needs_human_physics"]
     assert "PARTIAL/NEEDS-HUMAN-PHYSICS" not in result.diagnostics["needs_human_physics"]
 
 

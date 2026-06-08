@@ -1,5 +1,8 @@
 import math
+import importlib.util
 from dataclasses import dataclass
+from pathlib import Path
+import sys
 
 import numpy as np
 import pytest
@@ -21,6 +24,20 @@ QUADRATURE_ORDER = 512
 MIN_OVERLAP_MODES = 16
 MAX_OVERLAP_MODES = 64
 OVERLAP_REL_TOL = 1.0e-3
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SCAN_SCRIPT_PATH = REPO_ROOT / "scripts" / "run_full_catalog_scan.py"
+
+
+def _load_scan_harness():
+    spec = importlib.util.spec_from_file_location(
+        "run_full_catalog_scan_zbb_retag",
+        SCAN_SCRIPT_PATH,
+    )
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
 
 
 @dataclass(frozen=True)
@@ -236,9 +253,12 @@ def test_universal_c_m_b_zero_sm_limit_keeps_t010_t011_at_committed_sm_values():
             assert isinstance(value, float)
             assert math.isfinite(value)
         assert result.diagnostics["minimal_rs_tree_complete"] is True
+        assert result.diagnostics["minimal_rs_tree_veto_ready"] is True
         assert result.diagnostics["fermion_kk_mixing_included"] is True
-        assert result.diagnostics["custodial_variant_needs_human"] is True
-        assert result.diagnostics["custodial_toppartner_zbL_needs_human"] is True
+        assert result.diagnostics["custodial_variant_deferred"] is True
+        assert result.diagnostics["custodial_toppartner_zbL_deferred"] is True
+        assert result.diagnostics["brane_kinetic_terms_deferred"] is True
+        assert "needs_human_physics" not in result.diagnostics
         assert result.predicted == pytest.approx(result.sm_prediction)
 
     assert t010.diagnostics["delta_g_left_b"] == pytest.approx(0.0j)
@@ -246,6 +266,51 @@ def test_universal_c_m_b_zero_sm_limit_keeps_t010_t011_at_committed_sm_values():
     assert t011.diagnostics["delta_g_left_b"] == pytest.approx(0.0j)
     assert t011.diagnostics["delta_g_right_b"] == pytest.approx(0.0j)
     assert t011.ratio == pytest.approx(0.0)
+
+
+def test_minimal_complete_zbb_is_rigorous_vetoing_and_numeric_values_are_unchanged():
+    harness = _load_scan_harness()
+    failing_point = _point(_fit(), include_fermion_kk_mixing=True)
+    t010 = fcc.get("T010").evaluate(failing_point)
+    t011 = fcc.get("T011").evaluate(failing_point)
+
+    assert t010.predicted == 0.21328283177386856
+    assert t010.ratio == 4.470421078527965
+    assert t011.predicted == 0.9383244719075848
+    assert t011.ratio == 0.08826504462857736
+
+    for result in (t010, t011):
+        assert result.diagnostics["minimal_rs_tree_complete"] is True
+        assert result.diagnostics["minimal_rs_tree_veto_ready"] is True
+        assert result.diagnostics["custodial_variant_deferred"] is True
+        assert "Deferred refinement" in result.diagnostics["custodial_variant_deferred_note"]
+        assert "needs_human_physics" not in result.diagnostics
+        tag, _, needs_human, proxy_flags = harness.tag_result(result)
+        assert tag == "rigorous"
+        assert needs_human is None
+        assert proxy_flags == {}
+
+    failing_payload = harness._classify_results({"T010": t010})
+    assert failing_payload["excluded_by_rigorous"] == ["T010"]
+    assert failing_payload["hard_not_evaluated"] == []
+    assert failing_payload["constraints"]["T010"]["tag"] == "rigorous"
+    assert failing_payload["survives_all_HARD_strict"] is False
+
+    passing_point = _point(
+        _fit(m_b_gev=0.0, universal_sm=True),
+        include_fermion_kk_mixing=True,
+    )
+    passing_payload = harness._classify_results(
+        {
+            "T010": fcc.get("T010").evaluate(passing_point),
+            "T011": fcc.get("T011").evaluate(passing_point),
+        }
+    )
+    assert passing_payload["excluded_by_rigorous"] == []
+    assert passing_payload["hard_not_evaluated"] == []
+    assert passing_payload["survives_all_HARD_strict"] is True
+    assert passing_payload["constraints"]["T010"]["tag"] == "rigorous"
+    assert passing_payload["constraints"]["T011"]["tag"] == "rigorous"
 
 
 def test_zbb_fermion_mixing_fails_loud_on_missing_required_inputs():

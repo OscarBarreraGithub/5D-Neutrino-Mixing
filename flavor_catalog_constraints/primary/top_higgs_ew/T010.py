@@ -79,10 +79,15 @@ _SM_SNAPSHOT_LABELS = {
     _AB_OBSERVABLE: "A_b",
 }
 _NUMBER_RE = r"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?"
-_CUSTODIAL_VARIANT_STATUS = (
-    "NEEDS-HUMAN-PHYSICS: custodial representations, exotic/top-partner "
+_CUSTODIAL_VARIANT_DEFERRED_NOTE = (
+    "Deferred refinement: custodial representations, exotic/top-partner "
     "Zb_L terms, and brane-kinetic-term variants are not inferred from the "
-    "minimal-RS quark fit."
+    "minimal non-custodial RS quark fit."
+)
+_MINIMAL_RS_TREE_INCOMPLETE_STATUS = (
+    "NEEDS-HUMAN-PHYSICS: minimal non-custodial Zbb is incomplete because "
+    "the Casagrande fermion-KK admixture is absent; rebuild with "
+    "include_fermion_kk_mixing=True for a veto-ready minimal constraint."
 )
 _MINIMAL_RS_TREE_STATUS = (
     "minimal-RS tree Zbb uses rs_ew_couplings.z_delta_g_L/R_d[2,2]; when "
@@ -457,16 +462,21 @@ def _rs_zbb_matching_diagnostics(source: Any | None) -> dict[str, Any]:
     minimal_complete = bool(
         metadata.get("minimal_rs_tree_zbb_complete", fermion_included)
     )
-    return {
+    diagnostics: dict[str, Any] = {
         "minimal_rs_tree_complete": minimal_complete,
         "minimal_rs_tree_status": _MINIMAL_RS_TREE_STATUS,
         "fermion_kk_mixing_included": fermion_included,
-        "custodial_variant_needs_human": True,
-        "custodial_toppartner_zbL_needs_human": bool(
+        "minimal_rs_tree_veto_ready": minimal_complete,
+        "custodial_variant_deferred": True,
+        "custodial_variant_deferred_note": _CUSTODIAL_VARIANT_DEFERRED_NOTE,
+        "custodial_toppartner_zbL_deferred": bool(
             metadata.get("custodial_toppartner_zbL_needs_human", True)
         ),
-        "needs_human_physics": _CUSTODIAL_VARIANT_STATUS,
+        "brane_kinetic_terms_deferred": True,
     }
+    if not minimal_complete:
+        diagnostics["needs_human_physics"] = _MINIMAL_RS_TREE_INCOMPLETE_STATUS
+    return diagnostics
 
 
 @register

@@ -57,9 +57,14 @@ QUARK_ONLY_CANDIDATE_IDS = (
     "T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008",
     "T010", "T011", "T012", "T014",
     "EW001", "EW002", "EW003",
+    "CR001", "CR002", "CR003", "CR004", "CR005", "CR006", "CR007",
+    "CR008", "CR009", "CR010", "CR011", "CR012", "CR013", "CR014",
     "E004", "E006", "E007", "E008", "E009",
 )
-QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP = ("EW002",)
+QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP = (
+    "EW002",
+    "CR005", "CR006", "CR009", "CR011", "CR014",
+)
 QUARK_ONLY_OPTIONAL_LEPTON_DIAGNOSTIC_IDS = ("EW003",)
 QUARK_ONLY_ALLOWLIST_IDS = tuple(
     pid for pid in QUARK_ONLY_CANDIDATE_IDS if pid not in QUARK_ONLY_DEFERRED_LEPTON_FOLLOWUP
@@ -72,6 +77,7 @@ QUARK_ONLY_FORBIDDEN_EXTRAS = frozenset(
         "lepton_mass_basis_couplings",
         "rs_charged_current",
         "rs_higgs_yukawas",
+        "rs_semileptonic_wilsons",
     }
 )
 QUARK_ONLY_BUILD_INCLUDE_FLAGS = {
@@ -112,6 +118,15 @@ QUARK_ONLY_ALLOWLIST_EXTRAS: dict[str, tuple[str, ...]] = {
     "T014": ("rs_ew_couplings", "quark_mass_basis_couplings"),
     "EW001": ("kk_ew_mass_gev", "kk_gluon_mass_gev", "quark_mass_basis_couplings"),
     "EW003": ("rs_charged_current",),
+    "CR001": ("kk_gluon_mass_gev", "quark_mass_basis_couplings"),
+    "CR002": ("quark_mass_basis_couplings",),
+    "CR003": ("quark_mass_basis_couplings",),
+    "CR004": ("quark_mass_basis_couplings",),
+    "CR007": ("kk_ew_mass_gev", "kk_gluon_mass_gev", "quark_mass_basis_couplings"),
+    "CR008": ("quark_mass_basis_couplings",),
+    "CR010": ("quark_mass_basis_couplings",),
+    "CR012": ("kk_ew_mass_gev", "quark_mass_basis_couplings"),
+    "CR013": ("kk_ew_mass_gev", "kk_gluon_mass_gev", "quark_mass_basis_couplings"),
     "E004": (),
     "E006": (),
     "E007": (),
@@ -120,6 +135,11 @@ QUARK_ONLY_ALLOWLIST_EXTRAS: dict[str, tuple[str, ...]] = {
 }
 QUARK_ONLY_DEFERRED_EXTRAS: dict[str, tuple[str, ...]] = {
     "EW002": ("rs_charged_current",),
+    "CR005": ("kk_ew_mass_gev", "quark_mass_basis_couplings"),
+    "CR006": ("kk_ew_mass_gev", "quark_mass_basis_couplings"),
+    "CR009": ("kk_ew_mass_gev", "kk_gluon_mass_gev", "quark_mass_basis_couplings"),
+    "CR011": (),
+    "CR014": ("kk_ew_mass_gev", "quark_mass_basis_couplings"),
 }
 DEFAULT_XI_KK = 2.4487
 DEFAULT_V_GEV = 174.0
