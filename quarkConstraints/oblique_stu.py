@@ -12,10 +12,12 @@ electroweak KK gauge sector, brane terms, custodial representation choices,
 fermion embeddings, Higgs localization, and the mapping to vacuum-polarization
 self energies or SMEFT bosonic operators.  The helper
 ``rs_minimal_oblique_proxy`` therefore implements only the documented classic
-minimal-RS scaling
+minimal-RS scaling, with a tree-level custodial proxy coefficient selected
+when ``ew_model="custodial_rs_plr"``:
 
     Delta S = c_S v^2 / M_KK^2,
-    Delta T = [pi L / (2 cos^2 theta_W)] v^2 / M_KK^2,
+    Delta T_minimal = [pi L / (2 cos^2 theta_W)] v^2 / M_KK^2,
+    Delta T_custodial = [-pi / (4 cos^2 theta_W L)] v^2 / M_KK^2,
     Delta U = 0,
 
 where ``L = k pi r_c`` is the warped volume.  ``c_S`` is supplied by the
@@ -31,9 +33,10 @@ import math
 from typing import Mapping
 
 OBLIQUE_STU_RS_PROXY_V1 = (
-    "NEEDS-HUMAN-PHYSICS: EW001 uses a minimal-RS oblique proxy, "
-    "Delta S = c_S v^2/M_KK^2 and Delta T = pi*L/(2*cW^2)*v^2/M_KK^2 "
-    "with U=0. The full EW KK gauge sector, custodial structure, brane terms, "
+    "NEEDS-HUMAN-PHYSICS: EW001 uses an RS oblique proxy, "
+    "Delta S = c_S v^2/M_KK^2 with U=0, and model-selected Delta T: "
+    "minimal_rs uses pi*L/(2*cW^2)*v^2/M_KK^2 while custodial_rs_plr uses "
+    "-pi/(4*cW^2*L)*v^2/M_KK^2. The full EW KK gauge sector, custodial structure, brane terms, "
     "fermion embeddings, Higgs localization, and EW global-fit matching are "
     "not available on ParameterPoint."
 )
@@ -43,6 +46,9 @@ DEFAULT_HIGGS_VEV_GEV = 246.21965
 DEFAULT_SIN2_THETA_W = 0.23122
 DEFAULT_RS_VOLUME_LOG = 35.0
 CHI2_2DOF_95 = 5.991464547107979
+MINIMAL_RS_EW_MODEL = "minimal_rs"
+CUSTODIAL_RS_PLR_EW_MODEL = "custodial_rs_plr"
+SUPPORTED_RS_EW_MODELS = (MINIMAL_RS_EW_MODEL, CUSTODIAL_RS_PLR_EW_MODEL)
 
 
 @dataclass(frozen=True)
@@ -109,6 +115,7 @@ class ObliqueSTUShift:
     sin2_theta_w: float
     rs_volume_log: float
     matching_assumption: str = OBLIQUE_STU_RS_PROXY_V1
+    ew_model: str = MINIMAL_RS_EW_MODEL
 
     def __post_init__(self) -> None:
         for name in (
@@ -123,6 +130,7 @@ class ObliqueSTUShift:
         ):
             _finite(getattr(self, name), name)
         _positive(self.m_kk_gev, "m_kk_gev")
+        _validate_ew_model(self.ew_model)
 
 
 @dataclass(frozen=True)
@@ -154,19 +162,55 @@ def minimal_rs_t_coefficient(
     return float(math.pi * volume / (2.0 * cos2))
 
 
+def custodial_rs_plr_t_coefficient(
+    *,
+    rs_volume_log: float = DEFAULT_RS_VOLUME_LOG,
+    sin2_theta_w: float = DEFAULT_SIN2_THETA_W,
+) -> float:
+    """Return the custodial-P_LR tree proxy ``Delta T`` coefficient."""
+    volume = _positive(rs_volume_log, "rs_volume_log")
+    sin2 = _finite(sin2_theta_w, "sin2_theta_w")
+    cos2 = 1.0 - sin2
+    if cos2 <= 0.0:
+        raise ValueError("sin2_theta_w must be less than one")
+    return float(-math.pi / (4.0 * cos2 * volume))
+
+
+def rs_oblique_t_coefficient(
+    *,
+    ew_model: str = MINIMAL_RS_EW_MODEL,
+    rs_volume_log: float = DEFAULT_RS_VOLUME_LOG,
+    sin2_theta_w: float = DEFAULT_SIN2_THETA_W,
+) -> float:
+    """Return the EW-model-selected RS oblique ``Delta T`` coefficient."""
+    model = _validate_ew_model(ew_model)
+    if model == CUSTODIAL_RS_PLR_EW_MODEL:
+        return custodial_rs_plr_t_coefficient(
+            rs_volume_log=rs_volume_log,
+            sin2_theta_w=sin2_theta_w,
+        )
+    return minimal_rs_t_coefficient(
+        rs_volume_log=rs_volume_log,
+        sin2_theta_w=sin2_theta_w,
+    )
+
+
 def rs_minimal_oblique_proxy(
     *,
     m_kk_gev: float,
     s_coefficient: float,
+    ew_model: str = MINIMAL_RS_EW_MODEL,
     higgs_vev_gev: float = DEFAULT_HIGGS_VEV_GEV,
     sin2_theta_w: float = DEFAULT_SIN2_THETA_W,
     rs_volume_log: float = DEFAULT_RS_VOLUME_LOG,
 ) -> ObliqueSTUShift:
-    """Return the documented minimal-RS ``S,T,U`` proxy at ``M_KK``."""
+    """Return the documented RS ``S,T,U`` proxy at ``M_KK``."""
+    model = _validate_ew_model(ew_model)
     mass = _positive(m_kk_gev, "m_kk_gev")
     vev = _positive(higgs_vev_gev, "higgs_vev_gev")
     coeff_s = _finite(s_coefficient, "s_coefficient")
-    coeff_t = minimal_rs_t_coefficient(
+    coeff_t = rs_oblique_t_coefficient(
+        ew_model=model,
         rs_volume_log=rs_volume_log,
         sin2_theta_w=sin2_theta_w,
     )
@@ -181,6 +225,7 @@ def rs_minimal_oblique_proxy(
         higgs_vev_gev=float(vev),
         sin2_theta_w=float(sin2_theta_w),
         rs_volume_log=float(rs_volume_log),
+        ew_model=model,
     )
 
 
@@ -207,6 +252,7 @@ def evaluate_rs_oblique_proxy(
     m_kk_gev: float,
     fit: ObliqueSTFit,
     s_coefficient: float,
+    ew_model: str = MINIMAL_RS_EW_MODEL,
     higgs_vev_gev: float = DEFAULT_HIGGS_VEV_GEV,
     sin2_theta_w: float = DEFAULT_SIN2_THETA_W,
     rs_volume_log: float = DEFAULT_RS_VOLUME_LOG,
@@ -215,6 +261,7 @@ def evaluate_rs_oblique_proxy(
     prediction = rs_minimal_oblique_proxy(
         m_kk_gev=m_kk_gev,
         s_coefficient=s_coefficient,
+        ew_model=ew_model,
         higgs_vev_gev=higgs_vev_gev,
         sin2_theta_w=sin2_theta_w,
         rs_volume_log=rs_volume_log,
@@ -227,6 +274,7 @@ def evaluate_rs_oblique_proxy(
     diagnostics = {
         "likelihood_model": OBLIQUE_STU_LIKELIHOOD_V1,
         "matching_assumption": OBLIQUE_STU_RS_PROXY_V1,
+        "ew_model": prediction.ew_model,
         "covariance": fit.covariance,
         "inverse_covariance": fit.inverse_covariance,
         "fit_s_central": float(fit.s_central),
@@ -264,6 +312,16 @@ def _positive(value: float, name: str) -> float:
     return number
 
 
+def _validate_ew_model(ew_model: str) -> str:
+    model = str(ew_model)
+    if model not in SUPPORTED_RS_EW_MODELS:
+        raise ValueError(
+            f"unsupported ew_model {model!r}; supported models are "
+            f"{SUPPORTED_RS_EW_MODELS}"
+        )
+    return model
+
+
 __all__ = [
     "CHI2_2DOF_95",
     "DEFAULT_HIGGS_VEV_GEV",
@@ -271,11 +329,14 @@ __all__ = [
     "DEFAULT_SIN2_THETA_W",
     "OBLIQUE_STU_LIKELIHOOD_V1",
     "OBLIQUE_STU_RS_PROXY_V1",
+    "CUSTODIAL_RS_PLR_EW_MODEL",
     "ObliqueSTComparison",
     "ObliqueSTFit",
     "ObliqueSTUShift",
     "compare_oblique_st_to_fit",
+    "custodial_rs_plr_t_coefficient",
     "evaluate_rs_oblique_proxy",
     "minimal_rs_t_coefficient",
+    "rs_oblique_t_coefficient",
     "rs_minimal_oblique_proxy",
 ]

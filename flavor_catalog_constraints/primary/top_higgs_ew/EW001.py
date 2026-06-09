@@ -63,6 +63,7 @@ _FAMILY = "top_higgs_ew"
 _EXPECTED_UNITS = "dimensionless"
 _MASS_EXTRAS = ("kk_ew_mass_gev", "kk_gluon_mass_gev")
 _COUPLINGS_EXTRA = "quark_mass_basis_couplings"
+_RS_EW_COUPLINGS_EXTRA = "rs_ew_couplings"
 _S_U_FIXED = "PDG 2025 global oblique fit, S with U fixed to zero"
 _T_U_FIXED = "PDG 2025 global oblique fit, T with U fixed to zero"
 _U_FIXED = "PDG 2025 global oblique fit, U fixed value"
@@ -345,6 +346,25 @@ def _resolve_m_kk_gev(point: ParameterPoint) -> tuple[float | None, str | None]:
     return None, None
 
 
+def _resolve_ew_model(point: ParameterPoint) -> str:
+    rs_ew_couplings = point.get_extra(_RS_EW_COUPLINGS_EXTRA)
+    metadata = getattr(rs_ew_couplings, "metadata", None)
+    if isinstance(metadata, Mapping) and metadata.get("ew_model") is not None:
+        return str(metadata["ew_model"])
+
+    raw = point.raw
+    if isinstance(raw, Mapping) and raw.get("ew_model") is not None:
+        return str(raw["ew_model"])
+    raw_model = getattr(raw, "ew_model", None)
+    if raw_model is not None:
+        return str(raw_model)
+
+    point_model = getattr(point, "ew_model", None)
+    if point_model is not None:
+        return str(point_model)
+    return "minimal_rs"
+
+
 def _sm_reference_chi2(fit: ObliqueSTFit) -> tuple[float, float, float, bool]:
     return compare_oblique_st_to_fit(s=0.0, t=0.0, fit=fit)
 
@@ -363,6 +383,7 @@ class Constraint:
 
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
         sm_chi2, _, _, _ = self.sm_reference
+        ew_model = _resolve_ew_model(point)
         m_kk_gev, mass_source = _resolve_m_kk_gev(point)
         if m_kk_gev is None:
             return ConstraintResult(
@@ -378,6 +399,7 @@ class Constraint:
                 ),
                 diagnostics={
                     "missing_extras": _MASS_EXTRAS + (_COUPLINGS_EXTRA,),
+                    "ew_model": ew_model,
                     "needs_human_physics": OBLIQUE_STU_RS_PROXY_V1,
                     "sm_reference_s": 0.0,
                     "sm_reference_t": 0.0,
@@ -392,6 +414,7 @@ class Constraint:
                 m_kk_gev=float(m_kk_gev),
                 fit=self.anchor.fit,
                 s_coefficient=float(self.anchor.warped_s_coefficient.value),
+                ew_model=ew_model,
             )
         except ValueError as exc:
             return ConstraintResult(
@@ -405,6 +428,7 @@ class Constraint:
                 diagnostics={
                     "invalid_m_kk_gev": m_kk_gev,
                     "mass_source": mass_source,
+                    "ew_model": ew_model,
                     "needs_human_physics": OBLIQUE_STU_RS_PROXY_V1,
                 },
             )
@@ -415,6 +439,7 @@ class Constraint:
             {
                 "needs_human_physics": OBLIQUE_STU_RS_PROXY_V1,
                 "likelihood_model": OBLIQUE_STU_LIKELIHOOD_V1,
+                "ew_model": ew_model,
                 "m_kk_gev": float(prediction.m_kk_gev),
                 "mass_source": mass_source,
                 "s_prediction": float(prediction.s),

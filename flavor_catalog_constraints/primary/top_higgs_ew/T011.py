@@ -82,6 +82,11 @@ _CUSTODIAL_VARIANT_DEFERRED_NOTE = (
     "Zb_L terms, and brane-kinetic-term variants are not inferred from the "
     "minimal non-custodial RS quark fit."
 )
+_CUSTODIAL_VARIANT_ACTIVE_NOTE = (
+    "custodial P_LR tree-level diagonal down-left Zbb protection is active "
+    "from rs_ew_couplings metadata; numerical top-partner loops remain "
+    "separately flagged."
+)
 _MINIMAL_RS_TREE_INCOMPLETE_STATUS = (
     "NEEDS-HUMAN-PHYSICS: minimal non-custodial Zbb is incomplete because "
     "the Casagrande fermion-KK admixture is absent; rebuild with "
@@ -642,19 +647,63 @@ def _rs_zbb_matching_diagnostics(source: Any | None) -> dict[str, Any]:
     minimal_complete = bool(
         metadata.get("minimal_rs_tree_zbb_complete", fermion_included)
     )
+    custodial_active = bool(metadata.get("custodial_protection_included", False))
+    zbb_tree_veto_ready = bool(minimal_complete or custodial_active)
     diagnostics: dict[str, Any] = {
+        "ew_model": str(metadata.get("ew_model", "minimal_rs")),
         "minimal_rs_tree_complete": minimal_complete,
         "minimal_rs_tree_status": _MINIMAL_RS_TREE_STATUS,
         "fermion_kk_mixing_included": fermion_included,
         "minimal_rs_tree_veto_ready": minimal_complete,
-        "custodial_variant_deferred": True,
-        "custodial_variant_deferred_note": _CUSTODIAL_VARIANT_DEFERRED_NOTE,
+        "zbb_tree_veto_ready": zbb_tree_veto_ready,
+        "custodial_protection_included": custodial_active,
+        "custodial_variant_deferred": not custodial_active,
         "custodial_toppartner_zbL_deferred": bool(
-            metadata.get("custodial_toppartner_zbL_needs_human", True)
+            metadata.get(
+                "custodial_toppartner_zbL_needs_human",
+                not bool(metadata.get("top_partner_loop_numerics_included", False)),
+            )
         ),
         "brane_kinetic_terms_deferred": True,
     }
-    if not minimal_complete:
+    if custodial_active:
+        diagnostics["custodial_variant_status"] = _CUSTODIAL_VARIANT_ACTIVE_NOTE
+    else:
+        diagnostics["custodial_variant_deferred_note"] = _CUSTODIAL_VARIANT_DEFERRED_NOTE
+
+    for key in (
+        "qL_rep",
+        "tR_rep",
+        "bR_rep",
+        "protect_scope",
+        "protected_down_left_diagonal_mask",
+        "protected_down_left_diagonal_indices",
+        "custodial_PLR_breaking_residual",
+        "custodial_residual_source",
+        "custodial_residual_value",
+        "custodial_residual_applied",
+        "kappa_b",
+        "rs_volume_log",
+        "bR_strategy",
+        "bR_elementary_zero_applied",
+        "include_top_partner_loops",
+        "top_partner_loops",
+        "top_partner_loop_numerics_included",
+        "custodial_toppartner_zbL_needs_human",
+        "custodial_fcnc_modeling",
+        "custodial_omissions",
+        "SU2_R_tower",
+        "custodian_spectrum",
+        "exact_NC_mixing",
+        "BKT",
+        "M_KK_convention",
+        "physical_first_gauge_mass_gev",
+        "lambda_ir_gev",
+    ):
+        if key in metadata:
+            diagnostics[key] = metadata[key]
+
+    if not zbb_tree_veto_ready:
         diagnostics["needs_human_physics"] = _MINIMAL_RS_TREE_INCOMPLETE_STATUS
     return diagnostics
 

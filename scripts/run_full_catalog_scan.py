@@ -116,7 +116,7 @@ QUARK_ONLY_ALLOWLIST_EXTRAS: dict[str, tuple[str, ...]] = {
     "T011": ("rs_ew_couplings", "quark_mass_basis_couplings"),
     "T012": ("rs_ew_couplings", "quark_mass_basis_couplings"),
     "T014": ("rs_ew_couplings", "quark_mass_basis_couplings"),
-    "EW001": ("kk_ew_mass_gev", "kk_gluon_mass_gev", "quark_mass_basis_couplings"),
+    "EW001": ("kk_ew_mass_gev", "kk_gluon_mass_gev", "quark_mass_basis_couplings", "rs_ew_couplings"),
     "EW003": ("rs_charged_current",),
     "CR001": ("kk_gluon_mass_gev", "quark_mass_basis_couplings"),
     "CR002": ("quark_mass_basis_couplings",),

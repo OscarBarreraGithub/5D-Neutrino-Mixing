@@ -10,7 +10,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 from types import MappingProxyType
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 import numpy as np
 
@@ -49,6 +49,17 @@ DEFAULT_A_REF_C = 0.65
 DEFAULT_S_Z = -1.0
 LEPTON_FLAVORS: tuple[str, str, str] = ("e", "mu", "tau")
 NEUTRINO_FLAVORS: tuple[str, str, str] = ("nu1", "nu2", "nu3")
+MINIMAL_RS_EW_MODEL = "minimal_rs"
+CUSTODIAL_RS_PLR_EW_MODEL = "custodial_rs_plr"
+SUPPORTED_RS_EW_MODELS: tuple[str, str] = (
+    MINIMAL_RS_EW_MODEL,
+    CUSTODIAL_RS_PLR_EW_MODEL,
+)
+DEFAULT_CUSTODIAL_PROTECT_SCOPE = "all_gen_down_left_diagonal"
+DEFAULT_CUSTODIAL_Q_L_REP = "all_gen_Q_L_bidoublet_(2,2)_{2/3}"
+DEFAULT_CUSTODIAL_T_R_REP = "t_R_singlet_(1,1)_{2/3}"
+DEFAULT_CUSTODIAL_B_R_REP = "b_R_elementary"
+DEFAULT_CUSTODIAL_B_R_STRATEGY = "elementary_zero"
 
 
 @dataclass(frozen=True)
@@ -464,9 +475,29 @@ def build_rs_ew_couplings(
     min_overlap_modes: int = DEFAULT_MIN_TRUNCATION_MODES,
     max_overlap_modes: int | None = None,
     model_label: str = "minimal_rs",
+    qL_rep: str = DEFAULT_CUSTODIAL_Q_L_REP,
+    tR_rep: str = DEFAULT_CUSTODIAL_T_R_REP,
+    bR_rep: str = DEFAULT_CUSTODIAL_B_R_REP,
+    protect_scope: Any = DEFAULT_CUSTODIAL_PROTECT_SCOPE,
+    bR_strategy: str = DEFAULT_CUSTODIAL_B_R_STRATEGY,
+    kappa_b: float = 0.0,
+    custodial_PLR_breaking_residual: bool = False,
+    include_top_partner_loops: bool = False,
     rotation_unitarity_tolerance: float = 1.0e-8,
 ) -> RSEWMassBasisCouplings:
     """Build Phase-4a RS-EW mass-basis couplings from a quark fit result."""
+
+    ew_model = _validate_ew_model(model_label)
+    if include_top_partner_loops:
+        raise ValueError("include_top_partner_loops=True is deferred to PR2")
+    if ew_model == CUSTODIAL_RS_PLR_EW_MODEL:
+        _validate_custodial_options(
+            qL_rep=qL_rep,
+            tR_rep=tR_rep,
+            bR_rep=bR_rep,
+            bR_strategy=bR_strategy,
+            kappa_b=kappa_b,
+        )
 
     p = RSEWNeutralCurrentInputs() if inputs is None else inputs
     max_modes = _resolve_max_overlap_modes(spectrum, max_overlap_modes)
@@ -561,6 +592,25 @@ def build_rs_ew_couplings(
         z_delta_r_d[2, 2] += complex(zbb_fermion_mixing.delta_g_R_b, 0.0)
         z_delta_l_d = _hermitian(z_delta_l_d)
         z_delta_r_d = _hermitian(z_delta_r_d)
+    minimal_z_delta_l_d_full = np.array(z_delta_l_d, dtype=np.complex128, copy=True)
+    minimal_z_delta_r_d_full = np.array(z_delta_r_d, dtype=np.complex128, copy=True)
+    custodial_metadata: dict[str, Any] | None = None
+    if ew_model == CUSTODIAL_RS_PLR_EW_MODEL:
+        z_delta_l_d, z_delta_r_d, custodial_metadata = _apply_custodial_rs_plr_proxy(
+            z_delta_l_d=z_delta_l_d,
+            z_delta_r_d=z_delta_r_d,
+            minimal_z_delta_l_d_full=minimal_z_delta_l_d_full,
+            minimal_z_delta_r_d_full=minimal_z_delta_r_d_full,
+            spectrum=spectrum,
+            qL_rep=qL_rep,
+            tR_rep=tR_rep,
+            bR_rep=bR_rep,
+            protect_scope=protect_scope,
+            bR_strategy=bR_strategy,
+            kappa_b=float(kappa_b),
+            custodial_PLR_breaking_residual=bool(custodial_PLR_breaking_residual),
+            include_top_partner_loops=bool(include_top_partner_loops),
+        )
     lepton_matching_status: Mapping[str, Any]
     if lepton_mass_basis_couplings is None:
         z_delta_l_e = np.zeros((3, 3), dtype=np.complex128)
@@ -671,9 +721,13 @@ def build_rs_ew_couplings(
         neutral_contacts=contacts,
         a_profile_values=a_profiles,
         a_mass_basis=a_mass,
-        metadata={
+    metadata={
             "requested_model_label": str(model_label),
-            "ew_model": "minimal_rs",
+            "ew_model": (
+                MINIMAL_RS_EW_MODEL
+                if ew_model == MINIMAL_RS_EW_MODEL
+                else CUSTODIAL_RS_PLR_EW_MODEL
+            ),
             "custodial_protection_included": False,
             "brane_kinetic_terms_included": False,
             "fermion_kk_mixing_included": bool(zbb_fermion_mixing is not None),
@@ -697,6 +751,7 @@ def build_rs_ew_couplings(
                 if zbb_fermion_mixing is None
                 else _zbb_fermion_kk_mixing_metadata(zbb_fermion_mixing)
             ),
+            **({} if custodial_metadata is None else custodial_metadata),
         },
     )
 
@@ -791,6 +846,172 @@ def _resolve_max_overlap_modes(
     if max_modes & (max_modes - 1):
         raise ValueError("max_overlap_modes must be a power of two")
     return max_modes
+
+
+def _validate_ew_model(model_label: str) -> str:
+    model = str(model_label)
+    if model not in SUPPORTED_RS_EW_MODELS:
+        raise ValueError(
+            f"unsupported ew_model/model_label {model!r}; "
+            f"supported models are {SUPPORTED_RS_EW_MODELS}"
+        )
+    return model
+
+
+def _validate_custodial_options(
+    *,
+    qL_rep: str,
+    tR_rep: str,
+    bR_rep: str,
+    bR_strategy: str,
+    kappa_b: float,
+) -> None:
+    if not str(qL_rep):
+        raise ValueError("qL_rep must be a non-empty string")
+    if not str(tR_rep):
+        raise ValueError("tR_rep must be a non-empty string")
+    if not str(bR_rep):
+        raise ValueError("bR_rep must be a non-empty string")
+    if str(bR_strategy) != DEFAULT_CUSTODIAL_B_R_STRATEGY:
+        raise ValueError(
+            "PR1 supports only bR_strategy='elementary_zero'; "
+            "explicit custodial b_R representations are deferred to PR2"
+        )
+    if not math.isfinite(float(kappa_b)):
+        raise ValueError("kappa_b must be finite")
+
+
+def _custodial_protected_down_left_mask(protect_scope: Any) -> np.ndarray:
+    mask = np.zeros((3, 3), dtype=bool)
+    if isinstance(protect_scope, str):
+        scope = protect_scope.strip().lower().replace("-", "_").replace(" ", "_")
+        if scope in {
+            DEFAULT_CUSTODIAL_PROTECT_SCOPE,
+            "all_gen_down_left_diag",
+            "all_generation_down_left_diagonal",
+        }:
+            np.fill_diagonal(mask, True)
+            return mask
+        if scope in {"third_gen_down_left_diagonal", "b_left_diagonal", "zbb_only"}:
+            mask[2, 2] = True
+            return mask
+        raise ValueError(f"unsupported custodial protect_scope {protect_scope!r}")
+
+    arr = np.asarray(protect_scope)
+    if arr.shape == (3, 3):
+        mask = np.asarray(arr, dtype=bool)
+    else:
+        try:
+            pairs: Sequence[Any] = list(protect_scope)
+        except TypeError as exc:
+            raise ValueError("protect_scope must be a supported string, mask, or index pairs") from exc
+        for pair in pairs:
+            if len(pair) != 2:
+                raise ValueError("protect_scope index pairs must have length two")
+            i = int(pair[0])
+            j = int(pair[1])
+            if not (0 <= i < 3 and 0 <= j < 3):
+                raise ValueError("protect_scope indices must be in {0,1,2}")
+            mask[i, j] = True
+
+    offdiag = mask.copy()
+    np.fill_diagonal(offdiag, False)
+    if np.any(offdiag):
+        raise ValueError("PR1 custodial protection can only target diagonal down-left entries")
+    if not np.any(mask):
+        raise ValueError("protect_scope must protect at least one diagonal entry")
+    return mask
+
+
+def _apply_custodial_rs_plr_proxy(
+    *,
+    z_delta_l_d: np.ndarray,
+    z_delta_r_d: np.ndarray,
+    minimal_z_delta_l_d_full: np.ndarray,
+    minimal_z_delta_r_d_full: np.ndarray,
+    spectrum: RSEWSpectrum,
+    qL_rep: str,
+    tR_rep: str,
+    bR_rep: str,
+    protect_scope: Any,
+    bR_strategy: str,
+    kappa_b: float,
+    custodial_PLR_breaking_residual: bool,
+    include_top_partner_loops: bool,
+) -> tuple[np.ndarray, np.ndarray, dict[str, Any]]:
+    mask = _custodial_protected_down_left_mask(protect_scope)
+    protected_indices = [
+        [int(i), int(j)]
+        for i in range(3)
+        for j in range(3)
+        if bool(mask[i, j])
+    ]
+    left = np.array(z_delta_l_d, dtype=np.complex128, copy=True)
+    right = np.array(z_delta_r_d, dtype=np.complex128, copy=True)
+
+    for i, j in protected_indices:
+        left[i, j] = 0.0j
+
+    volume_log = _positive_float(getattr(spectrum, "warp_log"), "spectrum.warp_log")
+    residual_value = 0.0j
+    residual_applied = False
+    if bool(custodial_PLR_breaking_residual) and bool(mask[2, 2]):
+        residual_value = complex(
+            float(kappa_b) * (1.0 / volume_log) * minimal_z_delta_l_d_full[2, 2]
+        )
+        left[2, 2] = residual_value
+        residual_applied = True
+
+    if str(bR_strategy) == DEFAULT_CUSTODIAL_B_R_STRATEGY:
+        right[2, 2] = 0.0j
+
+    left = _hermitian(left)
+    right = _hermitian(right)
+    omissions = {
+        "SU2_R_tower": False,
+        "custodian_spectrum": False,
+        "exact_NC_mixing": False,
+        "BKT": False,
+    }
+    metadata = {
+        "ew_model": CUSTODIAL_RS_PLR_EW_MODEL,
+        "custodial_protection_included": True,
+        "custodial_proxy_scope": "tree_level_P_LR_Zbb_diagonal_only",
+        "qL_rep": str(qL_rep),
+        "tR_rep": str(tR_rep),
+        "bR_rep": str(bR_rep),
+        "protect_scope": protect_scope if isinstance(protect_scope, str) else protected_indices,
+        "protected_down_left_diagonal_mask": mask.astype(bool).tolist(),
+        "protected_down_left_diagonal_indices": protected_indices,
+        "minimal_z_delta_l_d_full_source": (
+            "post minimal gauge-profile shift plus optional Casagrande Zbb admixture"
+        ),
+        "minimal_z_delta_l_d_full_b": complex(minimal_z_delta_l_d_full[2, 2]),
+        "minimal_z_delta_r_d_full_b": complex(minimal_z_delta_r_d_full[2, 2]),
+        "custodial_PLR_breaking_residual": bool(custodial_PLR_breaking_residual),
+        "custodial_residual_source": "kappa_b*(1/L)*minimal_z_delta_l_d_full[2,2]",
+        "custodial_residual_value": residual_value,
+        "custodial_residual_applied": residual_applied,
+        "kappa_b": float(kappa_b),
+        "rs_volume_log": float(volume_log),
+        "bR_strategy": str(bR_strategy),
+        "bR_elementary_zero_applied": True,
+        "include_top_partner_loops": bool(include_top_partner_loops),
+        "top_partner_loops": "deferred",
+        "top_partner_loop_numerics_included": False,
+        "custodial_toppartner_zbL_needs_human": True,
+        "custodial_variant_needs_human": False,
+        "custodial_fcnc_modeling": "deferred_PR2_off_diagonal_kept_minimal",
+        "custodial_omissions": omissions,
+        "SU2_R_tower": False,
+        "custodian_spectrum": False,
+        "exact_NC_mixing": False,
+        "BKT": False,
+        "M_KK_convention": "physical first electroweak gauge KK mass",
+        "physical_first_gauge_mass_gev": float(spectrum.kk_ew_mass_gev),
+        "lambda_ir_gev": float(spectrum.lambda_ir_gev),
+    }
+    return left, right, metadata
 
 
 def _real_triplet_from_attr(source: Any, name: str) -> np.ndarray:

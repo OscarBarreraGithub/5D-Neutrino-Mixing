@@ -8,7 +8,13 @@ from typing import Any, Callable
 import numpy as np
 
 from quarkConstraints.rs_ew_couplings import (
+    DEFAULT_CUSTODIAL_B_R_REP,
+    DEFAULT_CUSTODIAL_B_R_STRATEGY,
+    DEFAULT_CUSTODIAL_PROTECT_SCOPE,
+    DEFAULT_CUSTODIAL_Q_L_REP,
+    DEFAULT_CUSTODIAL_T_R_REP,
     RSEWNeutralCurrentInputs,
+    SUPPORTED_RS_EW_MODELS,
     build_rs_ew_couplings,
     build_rs_lepton_mass_basis_couplings,
 )
@@ -37,6 +43,14 @@ def build_rs_ew_extras(
     k: float = MPL,
     n_gauge_modes: int = DEFAULT_N_GAUGE_MODES,
     ew_model: str = "minimal_rs",
+    qL_rep: str = DEFAULT_CUSTODIAL_Q_L_REP,
+    tR_rep: str = DEFAULT_CUSTODIAL_T_R_REP,
+    bR_rep: str = DEFAULT_CUSTODIAL_B_R_REP,
+    protect_scope: Any = DEFAULT_CUSTODIAL_PROTECT_SCOPE,
+    bR_strategy: str = DEFAULT_CUSTODIAL_B_R_STRATEGY,
+    kappa_b: float = 0.0,
+    custodial_PLR_breaking_residual: bool = False,
+    include_top_partner_loops: bool = False,
     include_fermion_kk_mixing: bool = False,
     include_higgs_yukawas: bool = True,
     include_loop_dipoles: bool = False,
@@ -56,8 +70,13 @@ def build_rs_ew_extras(
 ) -> dict[str, Any]:
     """Build RS-EW neutral-current extras without rewiring constraints."""
 
-    if ew_model != "minimal_rs":
-        raise ValueError("RS-EW extras currently support ew_model='minimal_rs' only")
+    if str(ew_model) not in SUPPORTED_RS_EW_MODELS:
+        raise ValueError(
+            f"unsupported ew_model {ew_model!r}; supported models are "
+            f"{SUPPORTED_RS_EW_MODELS}"
+        )
+    if include_top_partner_loops:
+        raise ValueError("include_top_partner_loops=True is deferred to PR2")
     if include_loop_dipoles:
         raise ValueError("loop dipoles are deferred beyond Phase 3a")
 
@@ -104,6 +123,14 @@ def build_rs_ew_extras(
         min_overlap_modes=int(min_overlap_modes),
         max_overlap_modes=resolved_max_overlap_modes,
         model_label=str(ew_model),
+        qL_rep=qL_rep,
+        tR_rep=tR_rep,
+        bR_rep=bR_rep,
+        protect_scope=protect_scope,
+        bR_strategy=bR_strategy,
+        kappa_b=float(kappa_b),
+        custodial_PLR_breaking_residual=bool(custodial_PLR_breaking_residual),
+        include_top_partner_loops=bool(include_top_partner_loops),
     )
     charged_current = None
     higgs_yukawas = None
