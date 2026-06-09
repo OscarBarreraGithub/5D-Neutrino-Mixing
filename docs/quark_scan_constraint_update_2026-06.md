@@ -15,15 +15,18 @@ was held non-vetoing, and the direct collider KK-mass searches were excluded.
 ## Change 1 — Z→bb is now a live (vetoing) constraint
 
 **What was wrong (the reframing).** We initially thought Z→bb was missing its
-dominant `m_t²/M_KK²` term and needed new code. That was incorrect. In **minimal
-non-custodial RS** the dominant correction to the left-handed b coupling is the
-**gauge-KK profile term** (Casagrande et al, arXiv:0807.4937), whose size is set
-by the third-generation doublet overlap `F(c_Q3)²` — large because that doublet
-is IR-localized to give the top its mass. So it is top-*driven* through
-compositeness, not a literal `m_t²` fermion factor, and it was **already
-computed** in the scan: it lives in `z_delta_g_L/R_d[2,2]` via the exact KK-tower
-overlap `a(c)`, alongside the small `m_b²` Casagrande admixture. Adding the
-analytic `m_t²` term would have **double-counted**.
+dominant `m_t²/M_KK²` term and needed new code. That was incorrect: there was no
+missing term, and the dominant piece is not a literal `m_t²` factor. The full
+minimal non-custodial computation was **already** in the scan — the gauge-KK
+tower shift in `z_delta_g_L/R_d[2,2]` via the exact overlap `a(c)`, **plus** the
+`m_b²` Casagrande fermion-KK admixture, which uses the *full ZMA2 flavor sum*
+`B_d = Σ_i |Y_d[2,i]|²/|Y_d[2,2]|² · profile_B(c_d,F_d)` (not a b-only bracket).
+A later magnitude cross-check (codex + Opus, `.orchestration/runs/ZBB-XCHECK`,
+verdict CONVENTION-CHOICE) found that this **`m_b²` flavor-sum admixture actually
+DOMINATES** the gauge term by ~29× at a benchmark — correcting the initial
+characterization of it as "small". Adding the analytic `m_t²` term would have
+**double-counted**; the literal large `m_t²/M_KK²` Zb_L term is the
+representation-dependent **custodial** piece (deferred).
 
 **What was actually done.** T010/T011 already computed real `R_b`/`A_b` pulls but
 were held non-vetoing solely by an unconditional custodial `needs_human` flag
@@ -70,6 +73,27 @@ At M_KK = 1 TeV the excluding constraints now include the rigorous ΔF=2 set
 (ε_K = K001, Δm_s = B003, φ_s = B004) **plus the now-live Z→bb (T010/T011,
 rigorous)** and the collider direct searches (CR001 proxy, …). By ~30 TeV all
 clear. Full suite: 1716 passed / 1 skipped.
+
+## Magnitude cross-check (2026-06, codex + Opus, verdict CONVENTION-CHOICE)
+
+Because the now-live Z→bb became the dominant constraint (rigorous floor
+~25–30 TeV physical M_KK), its magnitude was independently cross-checked against
+Casagrande et al (arXiv:0807.4937). Findings (both agents agree, no code error):
+- The live `δg_bL ≈ −2.4e-3` is dominated by the `m_b²` **full ZMA2 flavor-sum**
+  admixture; the gauge-tower piece is ~29× smaller. T010 vetoes via **R_b**
+  (the A_b SM tension is *not* inflating the floor).
+- **Units reconcile the ~25–30 TeV vs the literature ≳10 TeV:** the scan's M_KK
+  is the *physical* first KK gauge mass `= x₁·Λ_IR` with `x₁ ≈ 2.45`; the
+  admixture prefactor uses `m_b²/(2 Λ_IR²)` (Casagrande's `M_KK ≡ Λ_IR`). So
+  ~25–30 TeV physical ↔ **~10–12 TeV in Λ_IR units** = consistent with the
+  standard non-custodial Zbb bound.
+- **Two convention choices the physicist owns (both currently the *aggressive*
+  direction):** (i) the *full flavor-sum* `B_d` (b mixing with the whole
+  down-tower, anarchic-Yukawa-dependent) vs the compact b-only ZbbRS bracket
+  (~4.5× smaller); (ii) `Λ_IR` vs physical-`M_KK` in the prefactor (~6×).
+  Reporting the floor in **Λ_IR units (~10–12 TeV)** matches the literature
+  convention; reporting physical M_KK gives ~25–30 TeV. No physics-code fix
+  warranted.
 
 ## Still deferred (not in this change)
 
