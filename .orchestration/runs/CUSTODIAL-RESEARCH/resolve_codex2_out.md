@@ -1,0 +1,23 @@
+Verdict: ChatGPT is right on the crux; the Opus panel was wrong.
+
+ACDRP proves that for a `P_LR` eigenstate with `T_L=T_R` and `T_L^3=T_R^3`, non-universal `Zψψ` corrections vanish; for `b_L`, they require `T_L^3=T_R^3=-1/2` and say `Z b_L b_L` gets no BSM correction. Source: https://cds.cern.ch/record/955133/files/0605341.pdf
+
+ACDRP explicitly includes the gauge-KK piece: their 5D gauge contribution is proportional to `T_R^3 - T_L^3`, so it vanishes for protected `b_L`; this is the leading gauge/compositeness/wavefunction correction. The fermion-KK piece is also protected in the bidoublet because ACDRP gets `c1=c2`, making the `Zb_L` operator coefficient vanish.
+
+Your repo’s minimal `m_b^2` admixture dominating by ~29x does not survive unchanged in the custodial branch. It is also protected if the bottom/down Yukawa embedding respects `P_LR`; only explicit bottom-mass `P_LR` breaking gives a small residual.
+
+All-generation `(2,2)_{2/3}` plus mass-basis rotation: valid and preferred for an anarchic flavor scan; third-gen-only is only a minimal EW fix and can reintroduce unprotected down-left flavor after rotations.
+
+Residual `δg_L^b`: ideal custodial limit is zero for the protected tree pieces; a `κ_b/L` residual is a model-systematic flag, not a theorem.
+
+`T_cust = -π/(4 c_W^2 L) v^2/M_KK^2` is defensible in the geometric `M_KK=Λ_IR` convention; it is the `-1/(2L^2)` suppressed replacement of minimal `T`.
+
+`S`: S, not T, is the dominant tree oblique after custodial protection, but ChatGPT’s `2π(1-1/L)` coefficient is geometric-scale convention. With repo physical first gauge mass `m1≈2.45 Λ_IR`, keep repo-like `c_S≈30` rather than replacing it by `2π`.
+
+`b_R`: default `δg_R^b≈0` is correct unless an explicit `b_R` representation is chosen to target `A_FB^b`.
+
+One-loop top partners: flag as required; `ΔT_loop~O(0.1)` and `δg_L^b~10^-3` at 2-3 TeV are plausible and model-dependent. Carena et al. stress these loop effects are calculable/sizable: https://arxiv.org/abs/hep-ph/0701055
+
+Final implementation prescription: custodial branch zeroes protected leading gauge plus protected fermion-mixing `Zb_L` pieces, keeps only explicit `P_LR`-breaking residuals/loops, uses all-gen bidoublets for flavor scans, keeps physical-vs-`Λ_IR` scale metadata explicit.
+
+CUSTODIAL-RESOLVE: CHATGPT-CORRECT

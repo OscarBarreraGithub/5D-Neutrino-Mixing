@@ -1,0 +1,12 @@
+ChatGPT is right on the crux. ACDRP [hep-ph/0605341](https://arxiv.org/abs/hep-ph/0605341) Eq. (18) makes the gauge-KK/nonuniversal vertex piece proportional to `T_R^3 - T_L^3`; for custodial `b_L`, `T_L^3=T_R^3=-1/2`, so the leading `F(c_Q3)^2` gauge/compositeness correction vanishes.
+ACDRP’s operator result also gives `c1=c2`, and the `Zb_L b_L` shift is `c2-c1`; Eq. (19)/(20) show the fermion-KK mixing terms are protected too when the embedding/Yukawa preserve `P_LR`.
+Therefore the earlier Opus panel finding was wrong: keeping the minimal-RS gauge piece while zeroing only the `m_b^2/Lambda_IR^2` admixture would falsely overconstrain custodial RS.
+Your repo’s “admixture dominates gauge by ~29x” is a minimal non-custodial calculation applied to the wrong branch; in a `P_LR` bottom sector that leading admixture is also zero, up to explicit `P_LR` breaking/residuals.
+All-generation `(2,2)_{2/3}` plus mass-basis rotation is valid for an anarchic scan; Carena-Ponton-Santiago-Wagner [hep-ph/0701055](https://arxiv.org/abs/hep-ph/0701055) explicitly use the same choice for the first two generations to allow CKM mixing.
+Residual `delta g_L^b`: ideal tree-level protected piece is zero; a `kappa_b/L` times minimal-gauge placeholder is acceptable only as an explicit-breaking/BC/BKT residual flag, not as a theorem-mandated term.
+Custodial oblique: confirmed from Casagrande et al. [0807.4937](https://arxiv.org/abs/0807.4937), Eq. (153): `S = 2π v^2/M_KK^2 (1-1/L)`, `T = -π v^2/(4 c_W^2 M_KK^2 L)`, `U=0`; tree-level S becomes dominant.
+Repo `c_S=30` is not the same convention as the analytic `2π`; it is a coarse physical first-KK-mass coefficient. If using `Lambda_IR=1/R'`, use `~6.1`; if using `m_1≈2.45 Lambda_IR`, coefficient is `~36`, close to the PDG-style `30`.
+`b_R`: default `delta g_R^b≈0` is right unless an explicit `b_R` representation is added for `A_FB^b`.
+Top-partner one-loop flag is right: Carena et al. show calculable, correlated loop `T` and `Zb_L` effects, with 2-3 TeV gauge KK and few-hundred-GeV custodians possible but model-dependent.
+Final prescription: custodial branch zeroes the leading protected `Zb_L` gauge and fermion-mixing tree terms, keeps only explicit-breaking residuals plus loop/top-partner terms, uses custodial S/T, and fixes `M_KK` convention before applying coefficients.
+CUSTODIAL-RESOLVE: CHATGPT-CORRECT - zero protected Zb_L gauge+fermion tree pieces; keep only explicit-breaking/residual/loop terms, with custodial S/T and physical-mass convention fixed.
