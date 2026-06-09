@@ -1,0 +1,21 @@
+Benchmark: M_KK^scan=20.0 TeV, Lambda_IR=8.168 TeV, c_Q3=0.364345, F_Q3=0.368327, L=34.9408.
+
+Scan/live: delta g_bL=-2.371e-3, delta g_bR=+1.401e-4; decomposition gauge=(+1.069e-4,-1.49e-7), m_b^2 fermion=(-2.478e-3,+1.403e-4).
+
+T010 at 20 TeV: R_b pred=0.217476, pull=+1.763; A_b pred=0.936005, pull=+0.650; selected=R_b.
+
+Scaling that point gives T010 crossing at 23.5 TeV; cache has T010 fail 100% at 15, 89.2% at 20, 0% at 30, median crossing 26.6 TeV. T011 is not the veto.
+
+Independent gauge formula with scan physical M_KK and repo F gives delta g_bL=+5.47e-6; exact gauge/analytic=19.6, full scan/analytic=-434, so the live veto is not the prompt’s gauge term.
+
+A_b/A_FB tension is not inflating the floor: A_FB is only loose/context in T011, A_b is subdominant in T010; R_b dominates and the RS shift overshoots R_b.
+
+Literature gap: Casagrande’s M_KK is Lambda_IR, with first gauge KK about 2.45 M_KK; thus 23.5-26.6 TeV physical first mass is about 9.6-10.8 TeV in arXiv:0807.4937 units.
+
+Diagnostic: the aggressive piece is the m_b^2 fermion-KK B_d term. For this row code B_d=-4.43e4, while compact ZbbRS bracket gives -9.78e3, a 4.5x smaller delta g_bL.
+
+Verdict: (iii) if the intended implementation is the compact standard ZbbRS formula in the prompt; suspected fix is the B_d/B_Q light-index bracket/normalization, not T010/A_b/L/a_ref/chirality. If full ZMA2 is intended, the physical 25 TeV scale is convention-consistent with the quoted 10 TeV bound.
+
+Source checked: Casagrande et al., https://arxiv.org/abs/0807.4937.
+
+ZBB-XCHECK-DONE

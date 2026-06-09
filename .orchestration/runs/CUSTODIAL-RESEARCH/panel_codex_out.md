@@ -1,0 +1,12 @@
+Refs checked: [ACDRP](https://arxiv.org/abs/hep-ph/0605341), [Carena et al.](https://arxiv.org/abs/hep-ph/0701055), [Casagrande et al. 2010](https://arxiv.org/abs/1005.4315); repo paths read as requested.
+Agree protection mapping: `P_LR` protects `b_L` in `Q_L=(2,2)_{2/3}`; it does not protect `t_L`, `Wtb`, or default `b_R`.
+Agree `Zb_L -> ~0` only as an ideal tree proxy: exact custodial RS still has irreducible/subleading `P_LR`-breaking and loop residuals, so metadata/residual knobs are mandatory.
+Agree `b_R` must remain live for `A_b/A_FB^b`; do not silently set it SM-like unless the physicist chooses that strategy.
+Agree T swap: `c_T=-pi/(4 c_W^2 L)` is defensible, negative, and gives the advertised `-1/(2L^2)` suppression vs minimal.
+Agree `U=0` at this proxy level.
+Partly agree S unchanged: custodial does not protect S, but repo `c_S=30` is a conservative screening coefficient, not the custodial tree formula; label it that way or make `c_S` configurable.
+Proxy switch is the best practical path because T010/T011 only consume `z_delta_g_L/R_d[2,2]` and EW001 only calls an ST proxy; a fake full NC builder would overclaim.
+Missing decisions: protection scope third-gen vs all-down-L, `t_R` embedding, `b_R` strategy/residual, `S` coefficient choice, and whether top-partner loop residuals are off/flagged/on with a spectrum.
+Main gap to fix before implementation: diagnostics must explicitly say no `SU(2)_R` gauge tower, custodial fermion spectrum, exact NC mixing, BKT effects, or Carena loop terms are included.
+Single best path: implement `ew_model="custodial_rs_plr"` proxy with representation metadata, ideal protected `b_L` plus residual option, live `b_R`, custodial T, configurable/conservative S.
+CUSTODIAL-PANEL: SOUND

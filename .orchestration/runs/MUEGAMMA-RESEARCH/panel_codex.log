@@ -1,0 +1,13 @@
+Findings from repo + primary checks ([PR 0805.4652](https://arxiv.org/abs/0805.4652), [WP 1004.2037](https://arxiv.org/abs/1004.2037), [Beneke 1508.01705](https://arxiv.org/abs/1508.01705), [ABP hep-ph/0606021](https://arxiv.org/abs/hep-ph/0606021), [MEG II 2504.15711](https://arxiv.org/abs/2504.15711)):
+Agree: repo PR term is an LMFV neutrino-spurion proxy; PR has two `Y_N` insertions and says NDA is above the explicit log loop, so “conservative” is faithful only inside that PR-LMFV brane-Higgs model.
+Needs correction: generic Warped Penguins is not universally just `Y_E Y_E† Y_E`; WP’s leading charged-W piece is `Y_E Y_N† Y_N`, neutral is `Y_E Y_E† Y_E`, and both collapse to `Y_*^3` only under equal anarchic `Y_E/Y_N` scales.
+Agree with fork: PR-LMFV vs generic anarchic are different theories, not approximations; do not sum/compare them without a model choice.
+NDA comparison: OK as PR-vs-PR “O(1)/conservative”; not OK as a universal statement against ABP/Beneke or across brane/bulk-Higgs prescriptions.
+Recommended path: mostly right, but “NDA coefficient x explicit anarchic factor” is too loose; calibrate to WP/Beneke conventions and report separate Higgs/cubic, charged-W/neutrino-cubic, gauge-floor, and PR-LMFV pieces.
+Best path I endorse: add a lepton mass-basis input; use mass-basis PR if physicist chooses LMFV, otherwise a Beneke/WP-calibrated estimator as provisional, with full Beneke matching reserved for publication.
+Practical blocker: current `ParameterPoint` cannot supply full `Y_E/Y_N`, `U_eL/U_eR`, `c_L/c_E`, profiles, wrong-chirality Yukawas, Higgs localization, custodial reps, or KK-scale convention.
+UV/Higgs issue: ABP brane-Higgs uncalculable vs Beneke regulated/narrow-bulk finite is a real prescription choice, not an O(1) nuisance; 15.8 TeV vs ~2 TeV must be labeled by Higgs setup.
+Numeric gap: 6 TeV/4.75 TeV are WP paper-era consistency benchmarks; L001 uses MEG II 2025 `BR<1.5e-13`, so TeV numbers must be recomputed or explicitly dated.
+Minimal decisions: LMFV vs generic/hybrid; whether generic `Y_N` participates in charged loops; exact/narrow/bulk Higgs plus wrong-chirality/KK-Higgs treatment; minimal vs custodial; `T` vs first-KK mass; central coefficients vs phase/O(1) scan.
+Error before physicist: spurion wording and numeric-bound wording need tightening, and the recommendation overstates what the current repo inputs can support.
+MUEG-PANEL: NEEDS-REVISION

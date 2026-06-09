@@ -1,0 +1,11 @@
+# mu->e gamma recommendation — ADVERSARIAL SIGN-OFF (find problems; is it really the best?)
+Repo: /n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing. RESEARCH-REVIEW ONLY, no code. Read BOTH research inputs and stress-test the recommendation before it goes to the physicist:
+- codex deep research: `.orchestration/runs/MUEGAMMA-RESEARCH/codex_research_out.md`
+- web literature survey: `.orchestration/runs/MUEGAMMA-RESEARCH/literature_out.md`
+- repo: `flavorConstraints/muToEGamma.py`, `flavor_catalog_constraints/physics_adapters/lepton.py`, `flavor_catalog_constraints/primary/charged_lepton/L001.py`.
+
+The recommendation to attack: (1) the repo's Perez-Randall C=0.02 NDA is the LMFV proxy (spurion (Y_N Y_N†)_12, two powers of the SMALL neutrino Yukawa; PR themselves say NDA OVERSHOOTS the explicit loop => conservative); (2) the GENERIC anarchic dipole is dominated by the charged-lepton cubic spurion Y_E Y_E† Y_E (Warped Penguins 1004.2037), which is LARGER and gives M_KK ~6 TeV (minimal)/~4.75 (custodial); (3) recommended path = a Beneke/Warped-Penguins-calibrated MASS-BASIS spurion estimator (NDA coefficient x explicit anarchic flavor factor), keeping the PR-LMFV term as a separately labeled baseline; (4) THE physics fork: is the lepton model Perez-Randall LMFV or generic anarchic? Different theories, not approximations.
+
+ADVERSARIALLY CHECK: Is the spurion identification correct (Y_E^3 generic-anarchic vs Y_N Y_N† LMFV)? Is "NDA conservative/agrees-to-O(1)-with-explicit" faithful to the sources? Is the recommended spurion-estimator really the best PRACTICAL option (vs plain NDA, vs full one-loop Beneke matching), given what our ParameterPoint can supply? Is the brane-vs-bulk-Higgs UV-sensitivity (ABP uncalculable vs Beneke regularized, 15.8 vs ~2 TeV) handled honestly? What is MISSING or WRONG? Are the "open physics decisions" the right and complete set? Any red flag before the physicist sees this?
+
+OUTPUT (<=14 lines): your adversarial findings; agree/disagree with the spurion ID + the NDA comparison + the recommended path; the single best path you'd endorse; the MINIMAL set of decisions the physicist must make; any error/gap. END with EXACTLY ONE line: `MUEG-PANEL: SOUND` or `MUEG-PANEL: NEEDS-REVISION`.
