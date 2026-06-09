@@ -74,6 +74,7 @@ QUARK_ONLY_LEPTON_SECTOR_LABEL = "dropped (not rigorous)"
 QUARK_ONLY_DEFERRED_SCOPE_TAG = "deferred_lepton_followup"
 QUARK_ONLY_FORBIDDEN_EXTRAS = frozenset(
     {
+        "lepton_lmfv_parameters",
         "lepton_mass_basis_couplings",
         "rs_charged_current",
         "rs_higgs_yukawas",

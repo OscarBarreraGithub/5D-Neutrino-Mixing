@@ -4,14 +4,9 @@ This is the catalog boundary for charged-lepton dipole LFV constraints.
 Constraint modules import this adapter only; the underlying implementation
 remains isolated in ``flavorConstraints``.
 
-NEEDS-HUMAN-PHYSICS
--------------------
-The current ``ParameterPoint`` scaffold is quark-sector first and does not
-carry a full lepton mass-basis RS coupling object.  Until that exists, this
-adapter accepts either the repo's ``YukawaResult`` or an explicit
-``MuToEGammaProxyInput`` made from caller-supplied lepton spurions
-``Y_N_bar``, PMNS, and ``M_KK``.  The proxy path is documented and flagged in
-diagnostics; it is not a substitute for a loop-level RS lepton-dipole match.
+The locked L001 path uses :class:`LMFVLeptonParameters`, a read-only carrier for
+the Perez-Randall LMFV NDA spurion.  Legacy caller-supplied proxy inputs remain
+supported and are still flagged in diagnostics.
 """
 
 from __future__ import annotations
@@ -30,8 +25,10 @@ from flavorConstraints.muToEGamma import (
 
 __all__ = [
     "LEPTON_DIPOLE_PROXY_ASSUMPTION_V1",
+    "LMFVLeptonParameters",
     "MuToEGammaProxyInput",
     "MuToEGammaBranchingResult",
+    "lmfv_lepton_parameters_from_yukawa_result",
     "mu_to_e_gamma_proxy_input",
     "mu_to_e_gamma_coefficient_from_limit",
     "mu_to_e_gamma_from_lepton_input",
@@ -43,6 +40,185 @@ LEPTON_DIPOLE_PROXY_ASSUMPTION_V1 = (
     "explicitly as Y_N_bar, PMNS, and M_KK, and the dipole normalization uses "
     "the repo's Perez-Randall NDA mu->e gamma convention."
 )
+
+
+LMFV_LEPTON_PARAMETERS_SOURCE_V1 = "yukawa.compute_yukawas.YukawaResult"
+LMFV_LEPTON_PARAMETERS_MATCHING_STATUS_V1 = "locked_lmfv_nda_carrier"
+_LMFV_FORBIDDEN_STATUS_TERMS = ("partial", "deferred", "proxy", "recast")
+
+
+def _finite_array(array: np.ndarray, *, name: str) -> None:
+    if not np.all(np.isfinite(array.real)) or not np.all(np.isfinite(array.imag)):
+        raise ValueError(f"{name} must contain only finite values")
+
+
+def _readonly_complex_array(value: Any, *, name: str, shape: tuple[int, ...]) -> np.ndarray:
+    array = np.array(value, dtype=np.complex128, copy=True)
+    if array.shape != shape:
+        raise ValueError(f"{name} must have shape {shape}")
+    _finite_array(array, name=name)
+    array.setflags(write=False)
+    return array
+
+
+def _readonly_real_array(value: Any, *, name: str, shape: tuple[int, ...]) -> np.ndarray:
+    array = np.array(value, dtype=np.float64, copy=True)
+    if array.shape != shape:
+        raise ValueError(f"{name} must have shape {shape}")
+    if not np.all(np.isfinite(array)):
+        raise ValueError(f"{name} must contain only finite values")
+    array.setflags(write=False)
+    return array
+
+
+def _broadcast_real_triplet(value: Any, *, name: str) -> np.ndarray:
+    array = np.asarray(value, dtype=np.float64)
+    if array.shape == ():
+        return np.full(3, float(array), dtype=np.float64)
+    if array.shape != (3,):
+        raise ValueError(f"{name} must be scalar or have shape (3,)")
+    return np.array(array, dtype=np.float64, copy=True)
+
+
+def _finite_float(value: Any, *, name: str) -> float:
+    number = float(value)
+    if not math.isfinite(number):
+        raise ValueError(f"{name} must be finite")
+    return number
+
+
+@dataclass(frozen=True)
+class LMFVLeptonParameters:
+    """Read-only Perez-Randall LMFV NDA carrier for ``mu -> e gamma``."""
+
+    Y_N: np.ndarray
+    Y_N_bar: np.ndarray
+    Y_N_matrix: np.ndarray
+    Y_N_bar_matrix: np.ndarray
+    pmns: np.ndarray
+    lmfv_spurion: np.ndarray
+    M_KK_gev: float
+    M_N_gev: float
+    c_L: np.ndarray
+    c_E: np.ndarray
+    c_N: np.ndarray
+    v_gev: float
+    k_gev: float
+    epsilon: float
+    Lambda_IR_gev: float
+    ordering: str
+    majorana_alpha: float
+    majorana_beta: float
+    max_abs_ybar: float
+    source: str = LMFV_LEPTON_PARAMETERS_SOURCE_V1
+    matching_status: str = LMFV_LEPTON_PARAMETERS_MATCHING_STATUS_V1
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "Y_N",
+            _readonly_complex_array(self.Y_N, name="Y_N", shape=(3,)),
+        )
+        object.__setattr__(
+            self,
+            "Y_N_bar",
+            _readonly_complex_array(self.Y_N_bar, name="Y_N_bar", shape=(3,)),
+        )
+        for name in ("Y_N_matrix", "Y_N_bar_matrix", "pmns", "lmfv_spurion"):
+            object.__setattr__(
+                self,
+                name,
+                _readonly_complex_array(getattr(self, name), name=name, shape=(3, 3)),
+            )
+        for name in ("c_L", "c_E", "c_N"):
+            object.__setattr__(
+                self,
+                name,
+                _readonly_real_array(getattr(self, name), name=name, shape=(3,)),
+            )
+
+        for name in ("M_KK_gev", "M_N_gev", "v_gev", "k_gev", "Lambda_IR_gev"):
+            value = _positive_finite(getattr(self, name), name=name)
+            object.__setattr__(self, name, value)
+        object.__setattr__(self, "epsilon", _finite_float(self.epsilon, name="epsilon"))
+        object.__setattr__(
+            self,
+            "majorana_alpha",
+            _finite_float(self.majorana_alpha, name="majorana_alpha"),
+        )
+        object.__setattr__(
+            self,
+            "majorana_beta",
+            _finite_float(self.majorana_beta, name="majorana_beta"),
+        )
+        max_abs_ybar = _finite_float(self.max_abs_ybar, name="max_abs_ybar")
+        if max_abs_ybar < 0.0:
+            raise ValueError("max_abs_ybar must be non-negative")
+        object.__setattr__(self, "max_abs_ybar", max_abs_ybar)
+
+        ordering = str(self.ordering)
+        if not ordering:
+            raise ValueError("ordering must be non-empty")
+        object.__setattr__(self, "ordering", ordering)
+        object.__setattr__(self, "source", str(self.source))
+        status = str(self.matching_status)
+        lowered_status = status.lower()
+        if any(term in lowered_status for term in _LMFV_FORBIDDEN_STATUS_TERMS):
+            raise ValueError("matching_status contains a proxy/partial/deferred marker")
+        object.__setattr__(self, "matching_status", status)
+
+        identity = np.eye(3, dtype=np.complex128)
+        if not np.allclose(
+            self.pmns.conjugate().T @ self.pmns,
+            identity,
+            rtol=0.0,
+            atol=1.0e-8,
+        ):
+            raise ValueError("pmns must be unitary")
+        if not np.allclose(
+            self.Y_N_bar,
+            2.0 * self.k_gev * self.Y_N,
+            rtol=1.0e-9,
+            atol=1.0e-24,
+        ):
+            raise ValueError("Y_N_bar must equal 2*k_gev*Y_N")
+        expected_ybar_matrix = 2.0 * self.k_gev * self.Y_N_matrix
+        expected_pmns_matrix = self.pmns @ np.diag(self.Y_N_bar)
+        if not np.allclose(
+            self.Y_N_bar_matrix,
+            expected_ybar_matrix,
+            rtol=1.0e-9,
+            atol=1.0e-12,
+        ) or not np.allclose(
+            self.Y_N_bar_matrix,
+            expected_pmns_matrix,
+            rtol=1.0e-9,
+            atol=1.0e-12,
+        ):
+            raise ValueError(
+                "Y_N_bar_matrix must equal both 2*k_gev*Y_N_matrix and "
+                "pmns@diag(Y_N_bar)"
+            )
+        expected_spurion = self.Y_N_bar_matrix @ self.Y_N_bar_matrix.conjugate().T
+        if not np.allclose(
+            self.lmfv_spurion,
+            expected_spurion,
+            rtol=1.0e-9,
+            atol=1.0e-12,
+        ):
+            raise ValueError("lmfv_spurion must equal Y_N_bar_matrix@Y_N_bar_matrix^dagger")
+
+    @property
+    def y_n_bar(self) -> np.ndarray:
+        """Alias matching legacy proxy naming."""
+
+        return self.Y_N_bar
+
+    @property
+    def pmns_matrix(self) -> np.ndarray:
+        """Alias matching legacy proxy naming."""
+
+        return self.pmns
 
 
 @dataclass(frozen=True)
@@ -89,6 +265,72 @@ def _positive_finite(value: Any, *, name: str) -> float:
     if not math.isfinite(number) or number <= 0.0:
         raise ValueError(f"{name} must be a positive finite number")
     return number
+
+
+def lmfv_lepton_parameters_from_yukawa_result(
+    yukawa_result: Any,
+    *,
+    m_kk_gev: float,
+    source: str = LMFV_LEPTON_PARAMETERS_SOURCE_V1,
+) -> LMFVLeptonParameters:
+    """Build the locked LMFV carrier from a repo ``YukawaResult``."""
+
+    from neutrinos.neutrinoValues import get_pmns
+
+    try:
+        params = dict(yukawa_result.params)
+    except Exception as exc:
+        raise ValueError("yukawa_result must expose a params mapping") from exc
+
+    k_gev = _positive_finite(params["k"], name="k")
+    y_n = _readonly_complex_array(getattr(yukawa_result, "Y_N"), name="Y_N", shape=(3,))
+    y_n_bar = _readonly_complex_array(
+        getattr(yukawa_result, "Y_N_bar"),
+        name="Y_N_bar",
+        shape=(3,),
+    )
+    y_n_matrix = _readonly_complex_array(
+        getattr(yukawa_result, "Y_N_matrix"),
+        name="Y_N_matrix",
+        shape=(3, 3),
+    )
+    ordering = str(params["ordering"])
+    pmns = get_pmns(
+        ordering,
+        float(params["majorana_alpha"]),
+        float(params["majorana_beta"]),
+    )
+    y_n_bar_matrix = 2.0 * k_gev * y_n_matrix
+    max_abs_ybar = max(
+        float(np.max(np.abs(getattr(yukawa_result, "Y_N_bar")))),
+        float(np.max(np.abs(getattr(yukawa_result, "Y_E_bar", [0.0])))),
+    )
+    return LMFVLeptonParameters(
+        Y_N=y_n,
+        Y_N_bar=y_n_bar,
+        Y_N_matrix=y_n_matrix,
+        Y_N_bar_matrix=y_n_bar_matrix,
+        pmns=pmns,
+        lmfv_spurion=y_n_bar_matrix @ y_n_bar_matrix.conjugate().T,
+        M_KK_gev=_positive_finite(m_kk_gev, name="m_kk_gev"),
+        M_N_gev=_positive_finite(params["M_N"], name="M_N"),
+        c_L=_broadcast_real_triplet(params["c_L"], name="c_L"),
+        c_E=_readonly_real_array(params["c_E"], name="c_E", shape=(3,)),
+        c_N=_broadcast_real_triplet(params["c_N"], name="c_N"),
+        v_gev=_positive_finite(params["v"], name="v"),
+        k_gev=k_gev,
+        epsilon=_finite_float(getattr(yukawa_result, "epsilon"), name="epsilon"),
+        Lambda_IR_gev=_positive_finite(params["Lambda_IR"], name="Lambda_IR"),
+        ordering=ordering,
+        majorana_alpha=_finite_float(
+            params["majorana_alpha"],
+            name="majorana_alpha",
+        ),
+        majorana_beta=_finite_float(params["majorana_beta"], name="majorana_beta"),
+        max_abs_ybar=max_abs_ybar,
+        source=source,
+        matching_status=LMFV_LEPTON_PARAMETERS_MATCHING_STATUS_V1,
+    )
 
 
 def _matrix_tuple(matrix: Any) -> tuple[tuple[complex, ...], ...]:
@@ -213,6 +455,10 @@ def _is_yukawa_result_like(value: Any) -> bool:
     return hasattr(value, "Y_N_matrix") and hasattr(value, "params")
 
 
+def _is_lmfv_lepton_parameters(value: Any) -> bool:
+    return isinstance(value, LMFVLeptonParameters)
+
+
 def _mapping_value(mapping: Mapping[str, Any], *keys: str) -> Any:
     for key in keys:
         if key in mapping:
@@ -245,10 +491,11 @@ def mu_to_e_gamma_from_lepton_input(
     *,
     br_limit: float,
     prefactor_br: float,
+    c_lfv: float | None = None,
     reference_scale_gev: float = 3000.0,
     m_kk_gev: float | None = None,
 ) -> MuToEGammaBranchingResult:
-    """Evaluate ``BR(mu -> e gamma)`` from a YukawaResult or proxy input."""
+    """Evaluate ``BR(mu -> e gamma)`` from an LMFV carrier, YukawaResult, or proxy."""
 
     limit = _positive_finite(br_limit, name="br_limit")
     prefactor = _positive_finite(prefactor_br, name="prefactor_br")
@@ -256,16 +503,76 @@ def mu_to_e_gamma_from_lepton_input(
         reference_scale_gev,
         name="reference_scale_gev",
     )
-    c_lfv = mu_to_e_gamma_coefficient_from_limit(limit, prefactor)
+    coefficient = (
+        mu_to_e_gamma_coefficient_from_limit(limit, prefactor)
+        if c_lfv is None
+        else _positive_finite(c_lfv, name="c_lfv")
+    )
 
     if isinstance(lepton_input, Mapping) and "yukawa_result" in lepton_input:
         lepton_input = lepton_input["yukawa_result"]
+
+    if _is_lmfv_lepton_parameters(lepton_input):
+        carrier = LMFVLeptonParameters(
+            Y_N=lepton_input.Y_N,
+            Y_N_bar=lepton_input.Y_N_bar,
+            Y_N_matrix=lepton_input.Y_N_matrix,
+            Y_N_bar_matrix=lepton_input.Y_N_bar_matrix,
+            pmns=lepton_input.pmns,
+            lmfv_spurion=lepton_input.lmfv_spurion,
+            M_KK_gev=lepton_input.M_KK_gev,
+            M_N_gev=lepton_input.M_N_gev,
+            c_L=lepton_input.c_L,
+            c_E=lepton_input.c_E,
+            c_N=lepton_input.c_N,
+            v_gev=lepton_input.v_gev,
+            k_gev=lepton_input.k_gev,
+            epsilon=lepton_input.epsilon,
+            Lambda_IR_gev=lepton_input.Lambda_IR_gev,
+            ordering=lepton_input.ordering,
+            majorana_alpha=lepton_input.majorana_alpha,
+            majorana_beta=lepton_input.majorana_beta,
+            max_abs_ybar=lepton_input.max_abs_ybar,
+            source=lepton_input.source,
+            matching_status=lepton_input.matching_status,
+        )
+        m_kk = _positive_finite(carrier.M_KK_gev, name="LMFVLeptonParameters.M_KK_gev")
+        if m_kk_gev is not None and not math.isclose(
+            _positive_finite(m_kk_gev, name="m_kk_gev"),
+            m_kk,
+            rel_tol=1.0e-12,
+            abs_tol=1.0e-9,
+        ):
+            raise ValueError("m_kk_gev override must match LMFVLeptonParameters.M_KK_gev")
+        core = _check_mu_to_e_gamma_raw(
+            carrier.Y_N_bar,
+            carrier.pmns,
+            M_KK=m_kk,
+            C=coefficient,
+            reference_scale=reference_scale,
+        )
+        return _result_from_core(
+            core,
+            br_limit=limit,
+            prefactor_br=prefactor,
+            c_lfv=coefficient,
+            reference_scale_gev=reference_scale,
+            m_kk_gev=m_kk,
+            input_kind="LMFVLeptonParameters",
+            used_proxy=False,
+            extra_diagnostics={
+                "extra_used": "lepton_lmfv_parameters",
+                "source": carrier.source,
+                "matching_status": carrier.matching_status,
+                "max_abs_ybar": float(carrier.max_abs_ybar),
+            },
+        )
 
     if _is_yukawa_result_like(lepton_input):
         m_kk = _m_kk_from_yukawa_result(lepton_input, m_kk_gev)
         core = _check_mu_to_e_gamma(
             lepton_input,
-            C=c_lfv,
+            C=coefficient,
             reference_scale=reference_scale,
             M_KK_override=m_kk,
         )
@@ -273,7 +580,7 @@ def mu_to_e_gamma_from_lepton_input(
             core,
             br_limit=limit,
             prefactor_br=prefactor,
-            c_lfv=c_lfv,
+            c_lfv=coefficient,
             reference_scale_gev=reference_scale,
             m_kk_gev=m_kk,
             input_kind="YukawaResult",
@@ -290,14 +597,14 @@ def mu_to_e_gamma_from_lepton_input(
         np.asarray(proxy.y_n_bar, dtype=complex),
         np.asarray(proxy.pmns, dtype=complex),
         M_KK=m_kk,
-        C=c_lfv,
+        C=coefficient,
         reference_scale=reference_scale,
     )
     return _result_from_core(
         core,
         br_limit=limit,
         prefactor_br=prefactor,
-        c_lfv=c_lfv,
+        c_lfv=coefficient,
         reference_scale_gev=reference_scale,
         m_kk_gev=m_kk,
         input_kind="MuToEGammaProxyInput",

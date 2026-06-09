@@ -202,8 +202,13 @@ def test_extras_key_registry_rejects_unknown_keys():
 
 
 def test_make_point_accepts_declared_keys():
-    p = point_builder.make_point(kk_gluon_mass_gev=3000.0)
+    marker = object()
+    p = point_builder.make_point(
+        kk_gluon_mass_gev=3000.0,
+        lepton_lmfv_parameters=marker,
+    )
     assert p.get_extra("kk_gluon_mass_gev") == 3000.0
+    assert p.get_extra("lepton_lmfv_parameters") is marker
     assert p.get_extra("missing") is None
 
 

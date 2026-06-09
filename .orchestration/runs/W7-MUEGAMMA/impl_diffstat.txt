@@ -1,0 +1,10 @@
+ .../physics_adapters/lepton.py                     | 335 ++++++++++++++++++++-
+ flavor_catalog_constraints/point_builder.py        |   1 +
+ .../primary/charged_lepton/L001.py                 |  62 ++--
+ flavor_catalog_constraints/rs_ew_builder.py        |  16 +
+ scripts/run_full_catalog_scan.py                   |   1 +
+ .../primary/charged_lepton/test_L001.py            | 305 +++++++++++--------
+ tests/constraints/test_contract.py                 |   7 +-
+ tests/test_full_catalog_scan_harness.py            | 134 ++++++++-
+ tests/test_mu_to_e_gamma.py                        |  48 +++
+ 9 files changed, 747 insertions(+), 162 deletions(-)

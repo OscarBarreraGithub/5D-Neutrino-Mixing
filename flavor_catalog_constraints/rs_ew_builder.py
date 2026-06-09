@@ -7,6 +7,9 @@ from typing import Any, Callable
 
 import numpy as np
 
+from flavor_catalog_constraints.physics_adapters.lepton import (
+    lmfv_lepton_parameters_from_yukawa_result,
+)
 from quarkConstraints.rs_ew_couplings import (
     DEFAULT_CUSTODIAL_B_R_REP,
     DEFAULT_CUSTODIAL_B_R_STRATEGY,
@@ -113,6 +116,14 @@ def build_rs_ew_extras(
             kk_ew_mass_gev=float(base_spectrum.kk_ew_mass_gev),
         )
     )
+    lmfv_leptons = (
+        None
+        if resolved_lepton_yukawas is None
+        else lmfv_lepton_parameters_from_yukawa_result(
+            resolved_lepton_yukawas,
+            m_kk_gev=float(base_spectrum.kk_ew_mass_gev),
+        )
+    )
     couplings = build_rs_ew_couplings(
         quark_fit_result,
         spectrum=overlap_provider,
@@ -173,6 +184,11 @@ def build_rs_ew_extras(
             {}
             if lepton_couplings is None
             else {"lepton_mass_basis_couplings": lepton_couplings}
+        ),
+        **(
+            {}
+            if lmfv_leptons is None
+            else {"lepton_lmfv_parameters": lmfv_leptons}
         ),
         **({} if charged_current is None else {"rs_charged_current": charged_current}),
         **({} if higgs_yukawas is None else {"rs_higgs_yukawas": higgs_yukawas}),

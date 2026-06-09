@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from flavorConstraints.muToEGamma import (
     C_PAPER,
@@ -97,3 +98,50 @@ def test_default_lfv_check_uses_internal_lambda_ir_convention():
 
     lfv = check_mu_to_e_gamma(result, C=C_PAPER, reference_scale=3000.0)
     assert np.isclose(lfv["rhs"], C_PAPER)
+
+
+def test_repo_benchmark_raw_core_values_and_br_oracle_are_distinct():
+    result = compute_all_yukawas(
+        Lambda_IR=3000.0,
+        c_L=0.58,
+        c_E=[0.75, 0.60, 0.50],
+        c_N=0.27,
+        M_N=1.22e18,
+        lightest_nu_mass=0.002,
+        ordering="normal",
+    )
+    U = _pmns_from_sin2()
+
+    core = check_mu_to_e_gamma_raw(
+        result.Y_N_bar,
+        U,
+        M_KK=3000.0,
+        C=C_PAPER,
+        reference_scale=3000.0,
+    )
+    c_consistent = coefficient_from_br_limit(1.5e-13)
+    core_consistent = check_mu_to_e_gamma_raw(
+        result.Y_N_bar,
+        U,
+        M_KK=3000.0,
+        C=c_consistent,
+        reference_scale=3000.0,
+    )
+    br_np = 4.0e-8 * float(core["lhs"]) ** 2
+
+    np.testing.assert_allclose(
+        result.Y_N_bar,
+        [0.20416916, 0.43091265, 1.02237364],
+        rtol=1.0e-8,
+        atol=1.0e-10,
+    )
+    assert core["off_diagonal_12"] == pytest.approx(
+        -0.034773700046830024 + 0.05165132075170267j
+    )
+    assert core["lhs"] == pytest.approx(0.062266115587389717)
+    assert core["rhs"] == pytest.approx(0.02)
+    assert core["ratio"] == pytest.approx(3.1133057793694858)
+    assert core_consistent["ratio"] == pytest.approx(32.154083827064859)
+    assert br_np == pytest.approx(1.5508276601368708e-10)
+    assert br_np / 1.5e-13 == pytest.approx(1033.8851067579139)
+    assert br_np > 1.5e-13

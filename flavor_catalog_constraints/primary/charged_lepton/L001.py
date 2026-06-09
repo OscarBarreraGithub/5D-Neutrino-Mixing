@@ -9,16 +9,10 @@ new-physics dipole bound:
             * (3 TeV / M_KK)^4.
 
 The lower-level dipole check is the existing
-``flavorConstraints.muToEGamma.check_mu_to_e_gamma`` machinery, reached only
-through ``flavor_catalog_constraints.physics_adapters.lepton``.
-
-NEEDS-HUMAN-PHYSICS
--------------------
-The current ``ParameterPoint`` can be quark-only and does not carry a full
-lepton-sector RS coupling object.  If a caller supplies the explicit proxy
-``lepton_mass_basis_couplings`` input accepted by the adapter, the result is
-flagged ``NEEDS-HUMAN-PHYSICS`` because that proxy is not a loop-level RS
-lepton-dipole matching calculation.
+``flavorConstraints.muToEGamma.check_mu_to_e_gamma_raw`` machinery, reached only
+through ``flavor_catalog_constraints.physics_adapters.lepton``.  The catalog
+hard veto is the branching fraction; the paper coefficient ``C=0.02`` is kept
+only as a dipole-RHS diagnostic.
 
 Catalog sidecar
 ---------------
@@ -42,13 +36,14 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.lepton import (
+    LMFVLeptonParameters,
     mu_to_e_gamma_coefficient_from_limit,
     mu_to_e_gamma_from_lepton_input,
 )
 from flavor_catalog_constraints.registry import register
 
 _FAMILY = "charged_lepton"
-_REQUIRED_EXTRA = "lepton_mass_basis_couplings"
+_REQUIRED_EXTRA = "lepton_lmfv_parameters"
 _OPTIONAL_EW_MASS_EXTRA = "kk_ew_mass_gev"
 _LIMIT_ANCHOR_CANDIDATES = ("primary_current_limit",)
 _REFERENCE_SCALE_GEV = 3000.0
@@ -58,7 +53,7 @@ _REFERENCE_SCALE_SOURCE = (
 )
 _UNEVALUATED_REASON = (
     "no lepton dipole prediction available "
-    "(lepton-sector RS couplings not on ParameterPoint)"
+    "(LMFV lepton carrier not on ParameterPoint)"
 )
 _UNEVALUATED_NOTES = f"NOT EVALUATED — {_UNEVALUATED_REASON}"
 
@@ -276,15 +271,37 @@ class Constraint:
                     "missing_extra": _REQUIRED_EXTRA,
                 },
             )
+        if not isinstance(lepton_input, LMFVLeptonParameters):
+            return self._unevaluated_result(
+                diagnostics={
+                    "invalid_extra": _REQUIRED_EXTRA,
+                    "exception_type": "TypeError",
+                    "exception": (
+                        f"{_REQUIRED_EXTRA} must be an LMFVLeptonParameters "
+                        "carrier"
+                    ),
+                },
+            )
 
         kk_ew_mass = point.get_extra(_OPTIONAL_EW_MASS_EXTRA)
+        kk_ew_mass_value = None if kk_ew_mass is None else float(kk_ew_mass)
+        kk_ew_mass_consistent = (
+            None
+            if kk_ew_mass_value is None
+            else math.isclose(
+                kk_ew_mass_value,
+                float(lepton_input.M_KK_gev),
+                rel_tol=1.0e-12,
+                abs_tol=1.0e-9,
+            )
+        )
         try:
             result = mu_to_e_gamma_from_lepton_input(
                 lepton_input,
                 br_limit=self.anchor.budget,
                 prefactor_br=self.anchor.prefactor_br.value,
+                c_lfv=self.anchor.c_paper.value,
                 reference_scale_gev=_REFERENCE_SCALE_GEV,
-                m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
             )
         except (KeyError, TypeError, ValueError) as exc:
             return self._unevaluated_result(
@@ -299,17 +316,22 @@ class Constraint:
         diagnostics.update(
             {
                 "evaluated": True,
+                "lmfv_model": "Perez-Randall LMFV NDA",
                 "dipole_lhs": float(result.dipole_lhs),
                 "dipole_rhs": float(result.dipole_rhs),
                 "dipole_ratio_to_bound": float(result.dipole_ratio_to_bound),
                 "lfv_coefficient": float(result.c_lfv),
+                "c_lfv_role": "dipole_rhs_diagnostic_only",
                 "prefactor_br": float(result.prefactor_br),
+                "br_limit": float(result.br_limit),
+                "br_ratio_to_limit": float(result.ratio_to_limit),
                 "m_kk_gev": float(result.m_kk_gev),
                 "reference_scale_gev": float(result.reference_scale_gev),
                 "reference_scale_source": _REFERENCE_SCALE_SOURCE,
                 "off_diagonal_12": complex(result.off_diagonal_12),
                 "product_matrix": result.product_matrix,
                 "input_kind": result.input_kind,
+                "extra_used": _REQUIRED_EXTRA,
                 "used_proxy": bool(result.used_proxy),
                 "sm_prediction_policy": (
                     "Charged-LFV SM rate is negligible; budget is applied to "
@@ -321,7 +343,10 @@ class Constraint:
                 "prefactor_block": self.anchor.prefactor_br.block_path,
                 "lfv_c_block": self.anchor.lfv_c.block_path,
                 "paper_c_lfv": float(self.anchor.c_paper.value),
-                "kk_ew_mass_extra_used": kk_ew_mass is not None,
+                "kk_ew_mass_extra_present": kk_ew_mass is not None,
+                "kk_ew_mass_extra_used": False,
+                "kk_ew_mass_extra_value": kk_ew_mass_value,
+                "kk_ew_mass_extra_consistent": kk_ew_mass_consistent,
             }
         )
 
@@ -335,11 +360,10 @@ class Constraint:
             ratio=float(result.ratio_to_limit),
             budget=float(result.br_limit),
             notes=(
-                "Pure-NP BR(mu -> e gamma) dipole check using the existing "
-                "flavorConstraints.muToEGamma machinery through the lepton "
-                "adapter; HARD budget is the MEG II branching-fraction limit "
-                "from L001.yaml. Proxy lepton inputs are flagged "
-                "NEEDS-HUMAN-PHYSICS."
+                "Pure-NP BR(mu -> e gamma) LMFV NDA prediction using the "
+                "existing flavorConstraints.muToEGamma machinery through the "
+                "lepton adapter; HARD budget is the MEG II branching-fraction "
+                "limit from L001.yaml."
             ),
             diagnostics=diagnostics,
         )
