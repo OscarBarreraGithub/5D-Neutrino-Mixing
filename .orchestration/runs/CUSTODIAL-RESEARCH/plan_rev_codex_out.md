@@ -1,0 +1,17 @@
+1. Config/builder: keep minimal defaults byte-identical in `point_builder.build_from_rs_ew_inputs` and `rs_ew_builder.build_rs_ew_extras`; allow `ew_model="custodial_rs_plr"` plus custodial kwargs/metadata.
+2. Couplings: in `quarkConstraints/rs_ew_couplings.build_rs_ew_couplings`, compute minimal arrays exactly as today, including optional Casagrande Zbb admixture, then save `minimal_z_delta_l_d_full`.
+3. FIX 1 / T014: zero only protected diagonal down-left entries, default `[0,0],[1,1],[2,2]` for all-gen bidoublet; leave all `i!=j` down-FCNC `z_delta_g_L_d` entries at minimal values.
+4. FIX 4 / residual: residual applies only to `z_delta_l_d[2,2] = kappa_b*(1/L)*minimal_z_delta_l_d_full[2,2]`, where saved minimal is gauge-profile + fermion-admixture sum.
+5. If custodial off-diagonal effects are desired later, flag as deferred custodial-FCNC PR2; do not assume them in PR1.
+6. `b_R`: default `bR_strategy="elementary_zero"` sets only `z_delta_r_d[2,2]=0`; other `R_d` entries stay minimal.
+7. Metadata: builder/couplings set actual `ew_model`, `custodial_protection_included`, protected diagonal mask, residual source/value, b_R/top-partner flags, M_KK convention, and omissions.
+8. FIX 2 / oblique core: add `ew_model` kwarg through `rs_minimal_oblique_proxy` -> `evaluate_rs_oblique_proxy`; keep `c_S` and `U=0`, switch T to `-pi/(4*cW^2*L)` for custodial.
+9. FIX 2 / EW001: add `_resolve_ew_model(point)` reading `point.get_extra("rs_ew_couplings").metadata["ew_model"]`, else top-level `ew_model`, else `"minimal_rs"`; pass to oblique proxy.
+10. Update `flavor_catalog_constraints/physics_adapters/oblique_stu.py` exports and EW001 diagnostics/notes to report the selected `ew_model`.
+11. FIX 3 / T010/T011: `_rs_zbb_matching_diagnostics` reads metadata and sets `custodial_variant_deferred=False` when custodial protection is active; keep top-partner loop deferred flag data-driven.
+12. T010/T011 diagnostics copy reps, residual, b_R strategy, omissions, and model status so harness tags custodial tree as active, not partial.
+13. Tests: keep minimal byte-identity, residual-capture ordering, c_S unchanged/T-swap, b_R default-zero, top-partner deferred flag, omissions metadata.
+14. Add T014 regression: minimal vs custodial off-diagonal `z_delta_g_L_d[bs,bd,sd]` and T014 Z->down-FCNC results are unchanged; only protected diagonals may differ.
+15. Add EW001/builder tests for `ew_model` plumbing, custodial T coefficient, S unchanged, and data-driven T010/T011 custodial diagnostics.
+16. PR1 remains tree-level custodial proxy only; numerical top-partner loops and custodial-FCNC modeling stay deferred.
+CUSTODIAL-PLAN-REV-DONE.
