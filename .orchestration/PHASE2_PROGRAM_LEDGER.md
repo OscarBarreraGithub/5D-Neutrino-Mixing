@@ -63,7 +63,34 @@ Build prompts under `.orchestration/runs/<ITEM>/`. Keep orchestrator context lea
 | R8 | Orchestration/status docs (ledgers, wave-done commits) — low stakes, doc-review | — | — | — |
 | -- | (tooling ~/bin/codex_worker.sh + codex_usage.sh: NOT in git, operator tooling — out of scope unless user includes) | — | — | — |
 
-## ⏯️ CURRENT STATE / NEXT ACTION (updated 2026-06-04 — pre-compaction snapshot)
+## ⏯️ CURRENT STATE / NEXT ACTION (updated 2026-06-09 — pre-compaction snapshot; read THIS block first, older blocks below are historical)
+
+**HEAD `71b8453`, full suite 1723 passed / 1 skipped, working tree clean, all pushed.**
+
+**GOVERNANCE GATE (unchanged, non-negotiable):** orchestrator ROUTES only — NO design decisions, NO production code. EVERY plan+impl needs BOTH a codex AND an Opus APPROVE. PHYSICS/MODEL decisions go to the USER, never to me.
+
+**DONE since the WQ 1M (all dual-approved + committed):**
+- **WQ quark-only program** (mode `070cdb6`, 1M build `2c0db4a`): quark-sector scan, Z→bb made LIVE + lepton-free collider CR* added (`4c73dd7`), 1M re-run job 20128400 → `scan_outputs/wq_quarkonly_1M_20128400` (`55dc7ce`), notebook re-pointed `4cee7be`, clean headline figures `988f169`. Notebook: `notebooks/wq_quarkonly_explore.ipynb`.
+- **Z→bb is now the DOMINANT quark constraint** (rigorous M_KK floor ~25-30 TeV PHYSICAL = **~10-12 TeV in Λ_IR units**, x1≈2.45 — consistent w/ literature ≳10 TeV; verdict CONVENTION-CHOICE). Dominated by the m_b² FULL-FLAVOR-SUM Casagrande admixture (NOT the gauge piece). This is the non-custodial RS Zb_L problem.
+- **μ→eγ: MODEL LOCKED = LMFV** (Perez-Randall, spurion (Y_N Y_N†)_12, C=0.02 NDA already coded in `flavorConstraints/muToEGamma.py`); confirmed cleanest vs Chen-Yu/anarchic/gauged (`3ba839e`). NDA conservative WITHIN LMFV; bounds rescale ~3x at MEG II 1.5e-13. **NOT YET BUILT.**
+- **CUSTODIAL PR1 BUILT + dual-approved + committed `71b8453`** (research → resolved a key contradiction → plan dual-approved `3580ff9` → build → fix → dual-review). `ew_model="custodial_rs_plr"` (default `minimal_rs` BYTE-IDENTICAL, config hash unchanged). Zeros ONLY protected DIAGONAL down-left `z_delta_g_L_d` (off-diagonal Z→bs/bd/sd FCNC + T014 UNCHANGED); residual κ_b/L (default 0); oblique keeps c_S, T→−π/(4cW²L), U=0, S now dominant; T010/T011 custodial active (data-driven deferred flag). Verified: a 15 TeV minimal-Zbb-vetoed point (ratio 1.135) now SURVIVES custodial (δg=0). Test `tests/test_rs_ew_custodial_pr1.py`.
+  - **KEY PHYSICS (3/3-agent-resolved, ACDRP hep-ph/0605341 Eq.18, vertex ∝ T³_R−T³_L):** P_LR protects the WHOLE non-universal Zb_L vertex INCLUDING the leading F(c_Q3)² gauge piece, NOT just the m_b² admixture. (Our EARLIER Opus-panel "only admixture" finding was WRONG; user's ChatGPT answer was right.) Spec: `.orchestration/runs/CUSTODIAL-RESEARCH/CORRECTED_PRESCRIPTION.md`.
+
+**NEXT ACTIONS (awaiting user go — DO NOT auto-launch):**
+1. **μ→eγ LMFV implementation** — build the lepton-sector ParameterPoint object (Y_N, PMNS, M_KK) + wire the L001 LMFV dipole. Sizeable lepton-sector build; gate it plan→review→build. (Touches lepton sector, minor overlap w/ point_builder/scan — sequence to avoid clobber with anything else.)
+2. **Custodial PR2 (DEFERRED)** — one-loop top-partner T/δg_bL numerics (Carena et al hep-ph/0701055 Eq.28-30) + custodial-FCNC modeling. Flagged-not-computed in PR1.
+3. **Optional:** run a custodial-ON scan to show the M_KK picture relax vs the non-custodial ~25-30 TeV.
+
+**OPERATIONAL GOTCHAS (learned 2026-06-09 — IMPORTANT):**
+- **codex rc=1 often STILL LANDS the work** — after any codex run, verify the ACTUAL tree state (`git status`, `git diff`, pytest) regardless of the reported exit code. Don't trust rc.
+- **Transient `EXIT=127`** = launch glitch (codex never ran, diff unchanged); smoke-test codex (`CODEX_TIMEOUT=60 bash ~/bin/codex_worker.sh --out /tmp/x -C "$PWD" "Reply CODEX_OK"`) then relaunch.
+- **Detached codex** (launched with `&` inside a `run_in_background` Bash) does NOT fire a harness notification → set a polling watcher (a `run_in_background` bash `while ! grep -q <VERDICT-MARKER> file && ps|grep [c]odex; do sleep 20; done`).
+- **pytest needs:** `source ~/.bashrc && conda activate ising_bootstrap && export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"` (else scipy GLIBCXX crash).
+- **Big tasks split** if codex keeps timing out (~50min CODEX_TIMEOUT) before finishing — do core, then a separate "complete tests" run.
+- **Concurrent codex edits to the SAME file = clobber risk** (saw it with Z→bb+collider) → serialize tracks that share a file, or reconcile carefully.
+- **Allowlist-extras manifest:** if a new code path reads a new `get_extra(...)`, update `QUARK_ONLY_ALLOWLIST_EXTRAS[pid]` in `scripts/run_full_catalog_scan.py` (the AST allowlist test enforces it). `rs_ew_couplings` is quark-side/not-forbidden.
+- **Commits:** `docs/*` and `scan_outputs/*` are gitignored → `git add -f` for docs/plots/reports; NEVER commit raw tile-*.jsonl. `SendMessage` to continue an agent is NOT available → spawn fresh agents.
+
 - Governance gate active: codex AND opus must APPROVE every plan+impl; orchestrator only ROUTES — NO design decisions, NO production code. The gate caught a real defect at nearly every stage.
 - **DONE (all dual-approved + committed) — HEAD `7956106`, full suite 1700 passed:**
   - **W2 RS-EW BUILD COMPLETE (P1→P6):** P1 derivation `ffb4ad2`; P2 spectrum/overlap kernel `389de37`; P3 quark-NC (3a builder `7813e6c` / 3b Z-pole `7c0ecff` / 3c FCNC-Z `651389e` / 3d-B rare-B `4834d50` / 3d-K rare-K `f04ae1c` / 3d-C rare-charm `0e0dc0c`); P4 lepton-NC (4a `7265c8d` / 4b Z-LFV `a585265` / 4c-KC `6665ccb` / 4c-L `711b56d` / 4d νν `4eac4ce`); P5 charged-current (5a `2b89ae2` / 5b `3f7762a` / 5c `ec071c8`); P6 fermion-KK/Higgs (6a Zbb `85c06ea` / 6b Higgs-LFV `ba1ed58` + test-helper fixup `3c52b3e`).
