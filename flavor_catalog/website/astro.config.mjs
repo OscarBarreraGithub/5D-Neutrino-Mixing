@@ -11,6 +11,9 @@ export default defineConfig({
   },
   vite: {
     server: {
+      // Allow access through VS Code Remote / SSH port forwarding (otherwise Vite
+      // returns "Blocked request. This host is not allowed."). Dev-only setting.
+      allowedHosts: true,
       fs: {
         // Allow Vite to read content JSON sitting under src/content/
         strict: true,

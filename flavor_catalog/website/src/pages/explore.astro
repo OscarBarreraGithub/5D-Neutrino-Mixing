@@ -1,0 +1,1378 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import scanData from '../content/scan_explorer.json';
+
+const embeddedScanData = JSON.stringify(scanData).replace(/</g, '\\u003c');
+const constraints = (scanData as any).constraints as any[];
+const meta = (scanData as any).meta;
+const repMatrices = (scanData as any).rep_matrices as any[];
+
+const groups = constraints.reduce((acc: Record<string, any[]>, item) => {
+  (acc[item.group] ||= []).push(item);
+  return acc;
+}, {});
+const groupNames = Object.keys(groups);
+
+const fmtR = (value: number) => Number(value) === 1 ? '1.0' : String(Number(value));
+const fmtTev = (value: number) => Number.isInteger(value) ? String(value) : value.toFixed(2);
+const groupLabel = (value: string) => value.replace(/_/g, ' ');
+const labelText = (label: string) => label.includes('\\') ? `\\(${label}\\)` : label;
+const matrixLatex = (name: string, matrix: number[][]) => {
+  const rows = matrix.map((row) => row.map((v) => Number(v).toPrecision(3)).join(' & ')).join(' \\\\ ');
+  return `\\[${name}=\\begin{bmatrix}${rows}\\end{bmatrix}\\]`;
+};
+const singularLatex = (name: string, values: number[]) => {
+  const items = values.map((v) => Number(v).toPrecision(4)).join(', ');
+  return `\\(${name}=(${items})\\)`;
+};
+const mkkMath = '\\(M_{KK}\\)';
+const rMath = '\\(r\\)';
+---
+<BaseLayout title="Scan Explorer" description="Interactive scan envelope and fitted Yukawa summaries for the 5D / RS flavor catalog.">
+  <header class="entry-header explore-header">
+    <div class="breadcrumbs"><a href="/">Catalog</a> &middot; Scan Explorer</div>
+    <h1>Scan Explorer</h1>
+    <p class="family-descriptor">
+      Constraint floors and fitted Yukawa singular values across the scan grid.
+    </p>
+  </header>
+
+  <section class="explore-controls" aria-labelledby="explore-controls-title">
+    <div class="controls-head">
+      <div>
+        <h2 id="explore-controls-title">Constraint selection</h2>
+        <p id="active-summary">{constraints.length} active constraints</p>
+      </div>
+      <div class="control-actions">
+        <button type="button" class="toggle-all" id="toggle-all">All off</button>
+        <label class="model-switch">
+          <span>Minimal</span>
+          <input type="checkbox" id="custodial-toggle" role="switch" aria-label="Use custodial dataset" />
+          <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+          <span>Custodial</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="constraint-groups">
+      {groupNames.map((name) => (
+        <fieldset class="constraint-group">
+          <legend>{groupLabel(name)}</legend>
+          <div class="constraint-list">
+            {groups[name].map((constraint) => (
+              <label class={`constraint-item ${constraint.default_on ? 'is-on' : ''}`}>
+                <input
+                  class="constraint-toggle"
+                  type="checkbox"
+                  value={constraint.id}
+                  checked={constraint.default_on}
+                  data-constraint-id={constraint.id}
+                />
+                <span class="constraint-copy">
+                  <span class="constraint-label">{labelText(constraint.label)}</span>
+                  <span class={`constraint-tag tag-${constraint.tag}`}>{constraint.tag}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+    </div>
+  </section>
+
+  <section class="explore-panel" aria-labelledby="minimum-title">
+    <div class="section-head">
+      <div>
+        <h2 id="minimum-title">Minimum {mkkMath} vs {rMath}</h2>
+        <p id="minimum-caption">Envelope floors are computed from the active constraints.</p>
+      </div>
+      <div class="plot-actions">
+        <label class="trace-toggle">
+          <input type="checkbox" id="show-all-traces" checked />
+          <span>Show all constraint traces</span>
+        </label>
+        <span class="model-pill" id="model-pill">minimal</span>
+      </div>
+    </div>
+    <div class="plot-shell">
+      <div class="plot-svg-wrap">
+        <svg id="minimum-plot" class="minimum-plot" role="img" aria-label="Minimum M_KK envelope plot"></svg>
+      </div>
+      <div class="plot-legend" id="constraint-legend" aria-label="Active constraint legend"></div>
+    </div>
+  </section>
+
+  <section class="explore-panel" aria-labelledby="yukawa-title">
+    <div class="section-head">
+      <div>
+        <h2 id="yukawa-title">Fitted Yukawas per \(r\)</h2>
+        <p>Each box reads the fitted singular-value summary at the current envelope {mkkMath}.</p>
+      </div>
+    </div>
+    <div class="yukawa-grid" id="yukawa-grid">
+      {meta.r_grid.map((r: number, index: number) => (
+        <article class="yukawa-card" data-yukawa-index={index}>
+          <header>
+            <h3>r = {fmtR(r)}</h3>
+            <span class="mkk-readout" data-mkk-readout>M_KK = --</span>
+          </header>
+          <div class="yukawa-chart" data-yukawa-chart></div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="explore-panel matrices-panel" aria-labelledby="matrices-title">
+    <div class="section-head">
+      <div>
+        <h2 id="matrices-title">Representative matrices</h2>
+        <p>Static examples of anarchic Yukawa structure from surviving custodial samples.</p>
+      </div>
+    </div>
+    <div class="matrix-grid">
+      {repMatrices.map((matrix) => (
+        <article class="matrix-card">
+          <header>
+            <h3>{matrix.label}</h3>
+            <p>
+              {matrix.ew_model}, r = {fmtR(matrix.r)}, M_KK = {fmtTev(matrix.mkk_tev)} TeV,
+              seed {matrix.seed}
+            </p>
+          </header>
+          <div class="matrix-pair">
+            <div class="matrix-katex">{matrixLatex('|Y_u|', matrix.Yu_abs)}</div>
+            <div class="matrix-katex">{matrixLatex('|Y_d|', matrix.Yd_abs)}</div>
+          </div>
+          <p class="singular-values">
+            {singularLatex('s_u', matrix.up_singular)}
+            <span>{singularLatex('s_d', matrix.down_singular)}</span>
+          </p>
+        </article>
+      ))}
+    </div>
+    <p class="matrix-note">
+      These entries show magnitudes \(|Y_{'{'}ij{'}'}|\) of the complex anarchic spurions.
+      The \(s_u\) and \(s_d\) values are singular values of the complex matrices
+      \(Y_u\) and \(Y_d\), so an SVD of the displayed \(|Y|\) matrices will not
+      reproduce them.
+    </p>
+  </section>
+
+  <p class="explore-notes">
+    Floor threshold: first grid point where the median veto fraction is &lt;= {meta.floor_threshold}.
+    {mkkMath} convention: {meta.mkk_convention}.
+    Each scan cell uses {meta.n_draws_per_cell.toLocaleString()} draws.
+  </p>
+
+  <script type="application/json" id="scan-data" set:html={embeddedScanData}></script>
+
+  <script is:inline>
+    (function () {
+      var raw = document.getElementById('scan-data');
+      if (!raw) return;
+      var data = JSON.parse(raw.textContent || '{}');
+      var constraints = data.constraints || [];
+      var rGrid = data.meta.r_grid || [];
+      var mkkGrid = data.meta.mkk_grid_tev || [];
+      var threshold = data.meta.floor_threshold;
+      var CAP_VALUE = 60;
+      var Y_MIN = 1;
+      var NS = 'http://www.w3.org/2000/svg';
+      var palette = [
+        '#c94747', '#2f7ebc', '#2f9b72', '#d28422', '#8a63c7',
+        '#008b8b', '#bd5d94', '#6f8e2e', '#b75a36', '#5e77c8',
+        '#a47a13', '#3f9a9a', '#a45ba0', '#4e8c49', '#9c6fcb',
+        '#bf6b63', '#597b9f'
+      ];
+      var colorById = {};
+      constraints.forEach(function (constraint, index) {
+        colorById[constraint.id] = palette[index % palette.length];
+      });
+
+      var rKeyCache = { minimal: {}, custodial: {} };
+      ['minimal', 'custodial'].forEach(function (model) {
+        var source = (data.veto && data.veto[model]) || {};
+        Object.keys(source).forEach(function (key) {
+          rKeyCache[model][String(Number(key))] = key;
+        });
+      });
+
+      var active = new Set();
+      var model = 'minimal';
+      var highlightedConstraintId = null;
+      var showAllConstraintTraces = true;
+      var boxes = Array.prototype.slice.call(document.querySelectorAll('.constraint-toggle'));
+      boxes.forEach(function (box) {
+        if (box.checked) active.add(box.value);
+      });
+
+      function formatR(value) {
+        return Number(value) === 1 ? '1.0' : String(Number(value));
+      }
+
+      function formatTev(value) {
+        return Number.isInteger(value) ? String(value) : Number(value).toFixed(2);
+      }
+
+      function displayMkk(envelope) {
+        return envelope.capped ? '>50' : formatTev(envelope.value);
+      }
+
+      function rKey(currentModel, r) {
+        return (rKeyCache[currentModel] && rKeyCache[currentModel][String(Number(r))]) || String(r);
+      }
+
+      function bareFloor(currentModel, r) {
+        var key = rKey(currentModel, r);
+        var floors = (data.bare_floor_tev && data.bare_floor_tev[currentModel]) || {};
+        return floors[key] || floors[String(Number(r))] || Y_MIN;
+      }
+
+      function floorForConstraint(currentModel, r, constraintId) {
+        var key = rKey(currentModel, r);
+        var row = data.veto && data.veto[currentModel] && data.veto[currentModel][key];
+        var vetoes = row && row[constraintId];
+        if (!Array.isArray(vetoes)) return null;
+        for (var i = 0; i < mkkGrid.length; i++) {
+          if (Number(vetoes[i]) <= threshold) return Number(mkkGrid[i]);
+        }
+        return null;
+      }
+
+      function envelopeForR(currentModel, r) {
+        var floor = bareFloor(currentModel, r);
+        var capped = false;
+        active.forEach(function (constraintId) {
+          var constraintFloor = floorForConstraint(currentModel, r, constraintId);
+          if (constraintFloor === null) {
+            capped = true;
+            return;
+          }
+          if (!capped) floor = Math.max(floor, constraintFloor);
+        });
+        return capped ? { capped: true, value: null } : { capped: false, value: floor };
+      }
+
+      function allEnvelopes() {
+        return rGrid.map(function (r) { return envelopeForR(model, r); });
+      }
+
+      function svgEl(name, attrs, text) {
+        var el = document.createElementNS(NS, name);
+        Object.keys(attrs || {}).forEach(function (key) {
+          el.setAttribute(key, attrs[key]);
+        });
+        if (text !== undefined) el.textContent = text;
+        return el;
+      }
+
+      function clear(el) {
+        while (el && el.firstChild) el.removeChild(el.firstChild);
+      }
+
+      function yFor(value, height, margin) {
+        var numeric = value === null ? CAP_VALUE : Math.max(Y_MIN, Number(value));
+        var t = (Math.log(numeric) - Math.log(Y_MIN)) / (Math.log(CAP_VALUE) - Math.log(Y_MIN));
+        return margin.top + (1 - t) * (height - margin.top - margin.bottom);
+      }
+
+      function constraintBites(currentModel, r, floor) {
+        if (floor === null) return true;
+        return Number(floor) > Number(bareFloor(currentModel, r)) + 1e-9;
+      }
+
+      function applyLegendHighlight() {
+        var hasHighlight = !!highlightedConstraintId;
+        Array.prototype.slice.call(document.querySelectorAll('[data-legend-constraint-id]')).forEach(function (row) {
+          row.classList.toggle('is-highlighted', hasHighlight && row.getAttribute('data-legend-constraint-id') === highlightedConstraintId);
+        });
+      }
+
+      function setConstraintHighlight(constraintId) {
+        highlightedConstraintId = constraintId && active.has(constraintId) ? constraintId : null;
+        renderMinimumPlot(allEnvelopes());
+        applyLegendHighlight();
+      }
+
+      function renderMinimumPlot(envelopes) {
+        var svg = document.getElementById('minimum-plot');
+        if (!svg) return;
+        clear(svg);
+        var width = 760;
+        var height = 410;
+        var margin = { top: 24, right: 22, bottom: 62, left: 62 };
+        var plotW = width - margin.left - margin.right;
+        var plotH = height - margin.top - margin.bottom;
+        svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+        function xForIndex(index) {
+          if (rGrid.length <= 1) return margin.left + plotW / 2;
+          return margin.left + (index / (rGrid.length - 1)) * plotW;
+        }
+
+        var capY = yFor(null, height, margin);
+        svg.appendChild(svgEl('line', {
+          x1: margin.left,
+          x2: width - margin.right,
+          y1: capY,
+          y2: capY,
+          class: 'grid-line cap-grid'
+        }));
+        svg.appendChild(svgEl('text', {
+          x: margin.left - 12,
+          y: capY - 6,
+          class: 'axis-label cap-label',
+          'text-anchor': 'end'
+        }, '>50'));
+
+        var ticks = [50, 20, 10, 5, 3, 2, 1];
+        ticks.forEach(function (tick) {
+          var y = yFor(tick, height, margin);
+          svg.appendChild(svgEl('line', {
+            x1: margin.left,
+            x2: width - margin.right,
+            y1: y,
+            y2: y,
+            class: 'grid-line'
+          }));
+          svg.appendChild(svgEl('text', {
+            x: margin.left - 12,
+            y: y + 4,
+            class: 'axis-label',
+            'text-anchor': 'end'
+          }, String(tick)));
+        });
+
+        rGrid.forEach(function (r, index) {
+          var x = xForIndex(index);
+          svg.appendChild(svgEl('line', {
+            x1: x,
+            x2: x,
+            y1: margin.top,
+            y2: height - margin.bottom,
+            class: 'grid-line vertical'
+          }));
+          svg.appendChild(svgEl('text', {
+            x: x,
+            y: height - margin.bottom + 28,
+            class: 'axis-label',
+            'text-anchor': 'middle'
+          }, formatR(r)));
+        });
+
+        svg.appendChild(svgEl('line', {
+          x1: margin.left,
+          x2: width - margin.right,
+          y1: height - margin.bottom,
+          y2: height - margin.bottom,
+          class: 'axis-line'
+        }));
+        svg.appendChild(svgEl('line', {
+          x1: margin.left,
+          x2: margin.left,
+          y1: margin.top,
+          y2: height - margin.bottom,
+          class: 'axis-line'
+        }));
+        svg.appendChild(svgEl('text', {
+          x: margin.left + plotW / 2,
+          y: height - 14,
+          class: 'axis-title',
+          'text-anchor': 'middle'
+        }, 'r'));
+        svg.appendChild(svgEl('text', {
+          x: -margin.top - plotH / 2,
+          y: 18,
+          class: 'axis-title',
+          'text-anchor': 'middle',
+          transform: 'rotate(-90)'
+        }, 'minimum M_KK [TeV]'));
+
+        function drawConstraintTrace(constraintId, mode) {
+          var pathParts = [];
+          var drawing = false;
+          var points = [];
+          rGrid.forEach(function (r, index) {
+            var floor = floorForConstraint(model, r, constraintId);
+            if (!constraintBites(model, r, floor)) {
+              drawing = false;
+              return;
+            }
+            var x = xForIndex(index);
+            var y = yFor(floor, height, margin);
+            points.push({ x: x, y: y });
+            pathParts.push((drawing ? 'L' : 'M') + x.toFixed(2) + ' ' + y.toFixed(2));
+            drawing = true;
+          });
+          if (pathParts.length > 0) {
+            svg.appendChild(svgEl('path', {
+              d: pathParts.join(' '),
+              class: 'constraint-path constraint-path-' + mode,
+              stroke: colorById[constraintId] || '#777',
+              'data-plot-constraint-id': constraintId
+            }));
+          }
+          points.forEach(function (point) {
+            svg.appendChild(svgEl('circle', {
+              cx: point.x,
+              cy: point.y,
+              r: mode === 'highlight' ? 3 : 2.1,
+              class: 'constraint-marker constraint-marker-' + mode,
+              fill: colorById[constraintId] || '#777',
+              stroke: colorById[constraintId] || '#777',
+              'data-plot-constraint-id': constraintId
+            }));
+          });
+        }
+
+        if (showAllConstraintTraces) {
+          Array.from(active).forEach(function (constraintId) {
+            drawConstraintTrace(constraintId, 'all');
+          });
+        }
+
+        var envPath = envelopes.map(function (envelope, index) {
+          var value = envelope.capped ? null : envelope.value;
+          return (index ? 'L' : 'M') + xForIndex(index).toFixed(2) + ' ' + yFor(value, height, margin).toFixed(2);
+        }).join(' ');
+        svg.appendChild(svgEl('path', { d: envPath, class: 'envelope-path' }));
+
+        envelopes.forEach(function (envelope, index) {
+          var y = yFor(envelope.capped ? null : envelope.value, height, margin);
+          var x = xForIndex(index);
+          svg.appendChild(svgEl('circle', {
+            cx: x,
+            cy: y,
+            r: 4.8,
+            class: 'envelope-point'
+          }));
+        });
+
+        if (highlightedConstraintId && active.has(highlightedConstraintId)) {
+          drawConstraintTrace(highlightedConstraintId, 'highlight');
+        }
+
+        envelopes.forEach(function (envelope, index) {
+          var y = yFor(envelope.capped ? null : envelope.value, height, margin);
+          var x = xForIndex(index);
+          svg.appendChild(svgEl('text', {
+            x: x,
+            y: y - 10,
+            class: 'point-label',
+            'text-anchor': 'middle'
+          }, displayMkk(envelope)));
+        });
+      }
+
+      function looksLatex(label) {
+        return String(label || '').indexOf('\\') !== -1;
+      }
+
+      function appendConstraintLabel(parent, label) {
+        var span = document.createElement('span');
+        span.className = 'legend-label-text';
+        span.textContent = looksLatex(label) ? '\\(' + label + '\\)' : label;
+        parent.appendChild(span);
+      }
+
+      function renderLegend() {
+        var legend = document.getElementById('constraint-legend');
+        if (!legend) return;
+        clear(legend);
+        if (active.size === 0) {
+          var empty = document.createElement('p');
+          empty.className = 'legend-empty';
+          empty.textContent = 'No active constraints; envelope follows the bare scan floor.';
+          legend.appendChild(empty);
+          return;
+        }
+        constraints.forEach(function (constraint) {
+          if (!active.has(constraint.id)) return;
+          var row = document.createElement('button');
+          row.type = 'button';
+          row.className = 'legend-row';
+          row.setAttribute('data-legend-constraint-id', constraint.id);
+          row.setAttribute('aria-label', 'Highlight ' + constraint.id + ' constraint');
+          row.addEventListener('mouseenter', function () { setConstraintHighlight(constraint.id); });
+          row.addEventListener('mouseleave', function () { setConstraintHighlight(null); });
+          row.addEventListener('focus', function () { setConstraintHighlight(constraint.id); });
+          row.addEventListener('blur', function () { setConstraintHighlight(null); });
+          var swatch = document.createElement('span');
+          swatch.className = 'legend-swatch';
+          swatch.style.background = colorById[constraint.id] || '#777';
+          var id = document.createElement('span');
+          id.className = 'legend-id';
+          id.textContent = constraint.id;
+          row.appendChild(swatch);
+          row.appendChild(id);
+          appendConstraintLabel(row, constraint.label);
+          legend.appendChild(row);
+        });
+        if (window.fcatRenderMath) window.fcatRenderMath(legend);
+      }
+
+      function updateCaption(envelopes) {
+        var caption = document.getElementById('minimum-caption');
+        var pill = document.getElementById('model-pill');
+        if (pill) pill.textContent = model;
+        if (!caption) return;
+        if (active.size === 0) {
+          caption.textContent = 'No constraints selected: the envelope is the bare scan floor for the ' + model + ' dataset.';
+          return;
+        }
+        var finite = envelopes.filter(function (item) { return !item.capped; }).map(function (item) { return item.value; });
+        var hasCap = envelopes.some(function (item) { return item.capped; });
+        var min = finite.length ? Math.min.apply(null, finite) : null;
+        var max = hasCap ? '>50' : formatTev(Math.max.apply(null, finite));
+        var span = min === null ? '>50 TeV' : formatTev(min) + '-' + max + ' TeV';
+        caption.textContent = 'With ' + active.size + ' active constraints in ' + model + ', the envelope spans ' + span + ' across the r grid.';
+      }
+
+      function getYukawa(currentModel, r, mkk) {
+        var key = rKey(currentModel, r);
+        var modelData = data.yukawa && data.yukawa[currentModel] && data.yukawa[currentModel][key];
+        if (!modelData || mkk === null) return null;
+        return modelData[String(Number(mkk))] || modelData[String(mkk)] || null;
+      }
+
+      function renderMiniYukawa(summary) {
+        var width = 300;
+        var height = 176;
+        var margin = { top: 14, right: 12, bottom: 42, left: 38 };
+        var svg = svgEl('svg', {
+          viewBox: '0 0 ' + width + ' ' + height,
+          class: 'mini-yukawa-svg',
+          role: 'img',
+          'aria-label': 'Grouped log-scale Yukawa singular values'
+        });
+        var values = [];
+        ['up', 'down'].forEach(function (kind) {
+          (summary[kind] || []).forEach(function (q, index) {
+            values.push({
+              kind: kind,
+              label: 'y' + (index + 1),
+              p25: Number(q[0]),
+              p50: Number(q[1]),
+              p75: Number(q[2])
+            });
+          });
+        });
+        var minValue = 0.1;
+        var maxValue = Math.max(6, values.reduce(function (acc, item) {
+          return Math.max(acc, item.p75 || 0);
+        }, 0));
+        function y(value) {
+          var numeric = Math.max(minValue, Number(value));
+          var t = (Math.log(numeric) - Math.log(minValue)) / (Math.log(maxValue) - Math.log(minValue));
+          return margin.top + (1 - t) * (height - margin.top - margin.bottom);
+        }
+        var ticks = [0.2, 0.5, 1, 2, 5].filter(function (tick) { return tick <= maxValue; });
+        ticks.forEach(function (tick) {
+          var yy = y(tick);
+          svg.appendChild(svgEl('line', {
+            x1: margin.left,
+            x2: width - margin.right,
+            y1: yy,
+            y2: yy,
+            class: 'mini-grid'
+          }));
+          svg.appendChild(svgEl('text', {
+            x: margin.left - 7,
+            y: yy + 4,
+            class: 'mini-axis',
+            'text-anchor': 'end'
+          }, String(tick)));
+        });
+        svg.appendChild(svgEl('line', {
+          x1: margin.left,
+          x2: width - margin.right,
+          y1: y(minValue),
+          y2: y(minValue),
+          class: 'mini-axis-line'
+        }));
+        svg.appendChild(svgEl('line', {
+          x1: margin.left,
+          x2: margin.left,
+          y1: margin.top,
+          y2: y(minValue),
+          class: 'mini-axis-line'
+        }));
+
+        var xs = [62, 94, 126, 184, 216, 248];
+        values.forEach(function (item, index) {
+          var x = xs[index];
+          var baseline = y(minValue);
+          var median = y(item.p50);
+          var low = y(item.p25);
+          var high = y(item.p75);
+          var cls = item.kind === 'up' ? 'bar-up' : 'bar-down';
+          svg.appendChild(svgEl('rect', {
+            x: x - 8,
+            y: median,
+            width: 16,
+            height: Math.max(2, baseline - median),
+            rx: 3,
+            class: 'median-bar ' + cls
+          }));
+          svg.appendChild(svgEl('line', {
+            x1: x,
+            x2: x,
+            y1: high,
+            y2: low,
+            class: 'whisker ' + cls
+          }));
+          svg.appendChild(svgEl('line', {
+            x1: x - 6,
+            x2: x + 6,
+            y1: high,
+            y2: high,
+            class: 'whisker-cap ' + cls
+          }));
+          svg.appendChild(svgEl('line', {
+            x1: x - 6,
+            x2: x + 6,
+            y1: low,
+            y2: low,
+            class: 'whisker-cap ' + cls
+          }));
+          svg.appendChild(svgEl('text', {
+            x: x,
+            y: height - 24,
+            class: 'mini-axis',
+            'text-anchor': 'middle'
+          }, item.label));
+        });
+        svg.appendChild(svgEl('text', {
+          x: 94,
+          y: height - 7,
+          class: 'mini-group-label',
+          'text-anchor': 'middle'
+        }, 'up'));
+        svg.appendChild(svgEl('text', {
+          x: 216,
+          y: height - 7,
+          class: 'mini-group-label',
+          'text-anchor': 'middle'
+        }, 'down'));
+        svg.appendChild(svgEl('text', {
+          x: 12,
+          y: 20,
+          class: 'mini-axis-title',
+          transform: 'rotate(-90 12 20)',
+          'text-anchor': 'end'
+        }, 'log y'));
+        return svg;
+      }
+
+      function renderYukawas(envelopes) {
+        var cards = Array.prototype.slice.call(document.querySelectorAll('[data-yukawa-index]'));
+        cards.forEach(function (card) {
+          var index = Number(card.getAttribute('data-yukawa-index'));
+          var r = rGrid[index];
+          var envelope = envelopes[index];
+          var readout = card.querySelector('[data-mkk-readout]');
+          var body = card.querySelector('[data-yukawa-chart]');
+          if (readout) readout.textContent = envelope.capped ? 'M_KK > 50 TeV' : 'M_KK = ' + formatTev(envelope.value) + ' TeV';
+          clear(body);
+          var summary = envelope.capped ? null : getYukawa(model, r, envelope.value);
+          if (!summary) {
+            var empty = document.createElement('div');
+            empty.className = 'yukawa-empty';
+            empty.textContent = '-';
+            body.appendChild(empty);
+            return;
+          }
+          body.appendChild(renderMiniYukawa(summary));
+          var n = document.createElement('p');
+          n.className = 'sample-count';
+          n.textContent = 'n = ' + Number(summary.n || 0).toLocaleString();
+          body.appendChild(n);
+        });
+      }
+
+      function syncControls() {
+        boxes.forEach(function (box) {
+          var item = box.closest('.constraint-item');
+          if (item) item.classList.toggle('is-on', box.checked);
+        });
+        var summary = document.getElementById('active-summary');
+        if (summary) summary.textContent = active.size + ' active constraint' + (active.size === 1 ? '' : 's');
+        var toggle = document.getElementById('toggle-all');
+        if (toggle) toggle.textContent = active.size === constraints.length ? 'All off' : 'All on';
+      }
+
+      function renderAll() {
+        syncControls();
+        if (highlightedConstraintId && !active.has(highlightedConstraintId)) highlightedConstraintId = null;
+        var envelopes = allEnvelopes();
+        renderMinimumPlot(envelopes);
+        renderLegend();
+        applyLegendHighlight();
+        updateCaption(envelopes);
+        renderYukawas(envelopes);
+      }
+
+      boxes.forEach(function (box) {
+        box.addEventListener('change', function () {
+          if (box.checked) active.add(box.value);
+          else active.delete(box.value);
+          renderAll();
+        });
+      });
+
+      var toggleAll = document.getElementById('toggle-all');
+      if (toggleAll) {
+        toggleAll.addEventListener('click', function () {
+          var turnOn = active.size !== constraints.length;
+          active.clear();
+          boxes.forEach(function (box) {
+            box.checked = turnOn;
+            if (turnOn) active.add(box.value);
+          });
+          renderAll();
+        });
+      }
+
+      var modelToggle = document.getElementById('custodial-toggle');
+      if (modelToggle) {
+        modelToggle.addEventListener('change', function () {
+          model = modelToggle.checked ? 'custodial' : 'minimal';
+          renderAll();
+        });
+      }
+
+      var showAllToggle = document.getElementById('show-all-traces');
+      if (showAllToggle) {
+        showAllToggle.addEventListener('change', function () {
+          showAllConstraintTraces = showAllToggle.checked;
+          renderMinimumPlot(allEnvelopes());
+        });
+      }
+
+      renderAll();
+    })();
+  </script>
+
+  <style is:global>
+    #minimum-plot .grid-line {
+      fill: none;
+      stroke: var(--color-border);
+      stroke-width: 1;
+    }
+
+    #minimum-plot .vertical {
+      opacity: 0.55;
+    }
+
+    #minimum-plot .cap-grid {
+      stroke: var(--color-border-strong);
+      stroke-dasharray: 4 4;
+    }
+
+    #minimum-plot .axis-line {
+      fill: none;
+      stroke: var(--color-border-strong);
+      stroke-width: 1.2;
+    }
+
+    #minimum-plot .axis-label,
+    #minimum-plot .axis-title,
+    #minimum-plot .point-label {
+      fill: var(--color-text-muted);
+      font-family: var(--font-sans);
+      font-size: 12px;
+    }
+
+    #minimum-plot .axis-title {
+      font-weight: 700;
+    }
+
+    #minimum-plot .point-label {
+      fill: var(--color-text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    #minimum-plot .constraint-path {
+      fill: none;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      transition: opacity 120ms ease, stroke-width 120ms ease;
+    }
+
+    #minimum-plot .constraint-marker {
+      transition: opacity 120ms ease, r 120ms ease;
+    }
+
+    #minimum-plot .constraint-path-all {
+      stroke-width: 1.1;
+      opacity: 0.22;
+    }
+
+    #minimum-plot .constraint-marker-all {
+      opacity: 0.22;
+    }
+
+    #minimum-plot .constraint-path-highlight {
+      stroke-width: 2.6;
+      opacity: 1;
+    }
+
+    #minimum-plot .constraint-marker-highlight {
+      opacity: 1;
+    }
+
+    #minimum-plot .envelope-path {
+      fill: none;
+      stroke: var(--color-accent);
+      stroke-width: 3.4;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+
+    #minimum-plot .envelope-point {
+      fill: var(--color-surface);
+      stroke: var(--color-accent);
+      stroke-width: 2;
+    }
+
+    #constraint-legend .legend-row {
+      appearance: none;
+      width: 100%;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      padding: 0.2rem 0.25rem;
+      display: grid;
+      grid-template-columns: 0.65rem max-content minmax(0, 1fr);
+      gap: 0.55rem;
+      align-items: center;
+      justify-items: start;
+      min-width: 0;
+      text-align: left;
+      font: inherit;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+    }
+
+    #constraint-legend .legend-row:hover,
+    #constraint-legend .legend-row:focus-visible,
+    #constraint-legend .legend-row.is-highlighted {
+      background: var(--color-surface-2);
+      border-color: var(--color-border);
+      color: var(--color-text);
+      outline: none;
+    }
+
+    #constraint-legend .legend-swatch {
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 0.18rem;
+      box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.16);
+    }
+
+    #constraint-legend .legend-id {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      color: var(--color-text);
+      font-weight: 700;
+      font-size: 0.72rem;
+      line-height: 1.15;
+      white-space: nowrap;
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface-2);
+      padding: 0.1rem 0.32rem;
+    }
+
+    #constraint-legend .legend-label-text {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      line-height: 1.3;
+    }
+
+    #constraint-legend .legend-empty {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: 0.86rem;
+    }
+
+    #yukawa-grid .mini-yukawa-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #yukawa-grid .mini-yukawa-svg .mini-grid {
+      fill: none;
+      stroke: var(--color-border);
+      stroke-width: 1;
+    }
+
+    #yukawa-grid .mini-yukawa-svg .mini-axis-line {
+      fill: none;
+      stroke: var(--color-border-strong);
+      stroke-width: 1.2;
+    }
+
+    #yukawa-grid .mini-yukawa-svg .mini-axis,
+    #yukawa-grid .mini-yukawa-svg .mini-group-label,
+    #yukawa-grid .mini-yukawa-svg .mini-axis-title {
+      fill: var(--color-text-muted);
+      font-family: var(--font-sans);
+      font-size: 12px;
+    }
+
+    #yukawa-grid .mini-yukawa-svg .median-bar.bar-up {
+      fill: #d28422;
+    }
+
+    #yukawa-grid .mini-yukawa-svg .median-bar.bar-down {
+      fill: #2f7ebc;
+    }
+
+    #yukawa-grid .mini-yukawa-svg .whisker,
+    #yukawa-grid .mini-yukawa-svg .whisker-cap {
+      stroke-width: 1.45;
+      stroke-linecap: round;
+      fill: none;
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    #yukawa-grid .mini-yukawa-svg .bar-up {
+      stroke: #a45d08;
+    }
+
+    #yukawa-grid .mini-yukawa-svg .bar-down {
+      stroke: #215f91;
+    }
+  </style>
+
+  <style>
+    .explore-header {
+      margin-bottom: 1.2rem;
+    }
+
+    .explore-controls,
+    .explore-panel {
+      margin: 1.4rem 0;
+      padding: 1rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+    }
+
+    .controls-head,
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .controls-head h2,
+    .section-head h2 {
+      margin: 0 0 0.25rem;
+      font-size: 1.15rem;
+      line-height: 1.25;
+    }
+
+    .controls-head p,
+    .section-head p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+
+    .control-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .toggle-all {
+      appearance: none;
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.75rem;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .toggle-all:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .model-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--color-text-muted);
+      font-size: 0.86rem;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .model-switch input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .switch-track {
+      width: 2.7rem;
+      height: 1.45rem;
+      padding: 0.18rem;
+      border-radius: 999px;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border-strong);
+      display: inline-flex;
+      align-items: center;
+      transition: border-color 120ms ease, background 120ms ease;
+    }
+
+    .switch-thumb {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 999px;
+      background: var(--color-text-muted);
+      transition: transform 120ms ease, background 120ms ease;
+    }
+
+    .model-switch input:checked + .switch-track {
+      border-color: var(--color-accent);
+      background: var(--color-accent-soft);
+    }
+
+    .model-switch input:checked + .switch-track .switch-thumb {
+      transform: translateX(1.22rem);
+      background: var(--color-accent);
+    }
+
+    .constraint-groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .constraint-group {
+      min-width: 0;
+      margin: 0;
+      padding: 0.7rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+    }
+
+    .constraint-group legend {
+      padding: 0 0.35rem;
+      color: var(--color-text-muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .constraint-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.42rem;
+    }
+
+    .constraint-item {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+      padding: 0.45rem 0.5rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      color: var(--color-text-muted);
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+    }
+
+    .constraint-item.is-on {
+      color: var(--color-text);
+      border-color: var(--color-border);
+      background: var(--color-surface);
+    }
+
+    .constraint-item input {
+      margin-top: 0.22rem;
+      accent-color: var(--color-accent);
+      flex: 0 0 auto;
+    }
+
+    .constraint-copy {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      font-size: 0.86rem;
+      line-height: 1.35;
+    }
+
+    .constraint-label {
+      overflow-wrap: anywhere;
+    }
+
+    .constraint-tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.08rem 0.42rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .tag-rigorous {
+      background: var(--badge-verified-bg);
+      color: var(--badge-verified-fg);
+    }
+
+    .tag-proxy {
+      background: var(--badge-partial-bg);
+      color: var(--badge-partial-fg);
+    }
+
+    .model-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      background: var(--color-accent-soft);
+      color: var(--color-accent);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    .plot-actions {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .trace-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--color-text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.2;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .trace-toggle input {
+      width: 0.95rem;
+      height: 0.95rem;
+      margin: 0;
+      accent-color: var(--color-accent);
+      flex: 0 0 auto;
+    }
+
+    .plot-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(210px, 0.34fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .plot-svg-wrap {
+      min-width: 0;
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      padding: 0.4rem;
+    }
+
+    .minimum-plot {
+      display: block;
+      width: 100%;
+      min-width: 560px;
+      height: auto;
+    }
+
+    .plot-legend {
+      min-width: 0;
+      display: grid;
+      gap: 0.38rem;
+      max-height: 410px;
+      overflow: auto;
+      padding-right: 0.15rem;
+      align-content: start;
+    }
+
+    .yukawa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+      gap: 0.8rem;
+    }
+
+    .yukawa-card,
+    .matrix-card {
+      min-width: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      padding: 0.8rem;
+    }
+
+    .yukawa-card header,
+    .matrix-card header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.35rem 0.55rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .yukawa-card h3,
+    .matrix-card h3 {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.25;
+    }
+
+    .mkk-readout {
+      font-family: var(--font-mono);
+      color: var(--color-accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .yukawa-chart {
+      min-height: 205px;
+    }
+
+    .sample-count {
+      margin: 0.1rem 0 0;
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      text-align: right;
+    }
+
+    .yukawa-empty {
+      min-height: 175px;
+      display: grid;
+      place-items: center;
+      color: var(--color-text-muted);
+      font-size: 1.4rem;
+      border: 1px dashed var(--color-border-strong);
+      border-radius: var(--radius-sm);
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .matrix-card header {
+      display: block;
+    }
+
+    .matrix-card header p {
+      margin: 0.2rem 0 0;
+      color: var(--color-text-muted);
+      font-size: 0.82rem;
+    }
+
+    .matrix-pair {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .matrix-katex {
+      min-width: 0;
+      overflow-x: auto;
+      padding-bottom: 0.1rem;
+    }
+
+    .matrix-katex .katex-display {
+      margin: 0.3rem 0;
+    }
+
+    .singular-values {
+      margin: 0.55rem 0 0;
+      color: var(--color-text-muted);
+      font-size: 0.83rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .matrix-note {
+      margin: 0.85rem 0 0;
+      color: var(--color-text-muted);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .explore-notes {
+      margin: 1rem 0 0;
+      color: var(--color-text-muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 820px) {
+      .controls-head,
+      .section-head,
+      .plot-shell {
+        display: block;
+      }
+
+      .control-actions {
+        justify-content: flex-start;
+        margin-top: 0.8rem;
+      }
+
+      .plot-legend {
+        max-height: none;
+        margin-top: 0.8rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .explore-controls,
+      .explore-panel {
+        padding: 0.75rem;
+      }
+
+      .constraint-groups {
+        grid-template-columns: 1fr;
+      }
+
+      .minimum-plot {
+        min-width: 500px;
+      }
+    }
+  </style>
+</BaseLayout>
