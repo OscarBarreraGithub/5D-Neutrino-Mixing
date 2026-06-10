@@ -99,3 +99,6 @@ scan_outputs/wq_quarkonly_1M_*/**/run_summary.json
 # review_local: track LaTeX/markdown review sources only; keep compiled PDFs out
 # (latexmk junk .fls/.fdb_latexmk/.log/.aux/.out/.synctex.gz already ignored above)
 review_local/*.pdf
+
+# Stale WQ smoke-test scratch (raw jsonl; superseded by the 1M runs in scan_outputs/)
+.orchestration/runs/WQ-QUARKONLY/
