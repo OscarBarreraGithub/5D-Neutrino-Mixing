@@ -165,6 +165,9 @@ DEFAULT_MAX_FIT_SCORE = 1.0e-2
 DEFAULT_C_HALF_ATOL = 1.0e-10
 DEFAULT_SPLINE_GRID_SIZE = 241
 DEFAULT_SPLINE_VERIFY_POINTS = 41
+MINIMAL_RS_EW_MODEL = "minimal_rs"
+CUSTODIAL_RS_PLR_EW_MODEL = "custodial_rs_plr"
+SUPPORTED_EW_MODELS = (MINIMAL_RS_EW_MODEL, CUSTODIAL_RS_PLR_EW_MODEL)
 
 
 @dataclass(frozen=True)
@@ -172,6 +175,7 @@ class ScanConfig:
     mkk_values_gev: tuple[float, ...]
     n_draws_per_tile: int
     quark_only: bool = False
+    ew_model: str = MINIMAL_RS_EW_MODEL
     xi_kk: float = DEFAULT_XI_KK
     k_gev: float = MPL
     v_gev: float = DEFAULT_V_GEV
@@ -282,7 +286,7 @@ def _run_tile(
         k_gev=cfg.k_gev,
         n_gauge_modes=cfg.n_gauge_modes,
         quadrature_order=cfg.quadrature_order,
-        model_label="minimal_rs",
+        model_label=cfg.ew_model,
     )
     overlap_cache = RSEWOverlapSplineCache.build(
         spectrum,
@@ -386,6 +390,7 @@ def _run_tile(
         },
         "provenance": {**dict(provenance), "registry_count": int(registry_count)},
     }
+    _annotate_ew_model(summary, cfg=cfg)
     if cfg.quark_only:
         summary.update(
             {
@@ -472,6 +477,7 @@ def _evaluate_draw(
                 min_overlap_modes=cfg.min_overlap_modes,
                 max_overlap_modes=cfg.max_overlap_modes,
                 overlap_rel_tol=cfg.overlap_rel_tol,
+                ew_model=cfg.ew_model,
                 spectrum=spectrum,
                 rs_ew_cache=overlap_cache,
                 **QUARK_ONLY_BUILD_INCLUDE_FLAGS,
@@ -492,7 +498,7 @@ def _evaluate_draw(
             )
             results = _evaluate_constraint_ids(point, QUARK_ONLY_ALLOWLIST_IDS)
             payload = _classify_results(results)
-            return {
+            row = {
                 "draw_id": int(draw_idx),
                 "tile_id": int(tile.tile_id),
                 "seed": int(draw_seed),
@@ -526,6 +532,8 @@ def _evaluate_draw(
                     "config_hash": config_hash,
                 },
             }
+            _annotate_ew_model(row, cfg=cfg)
+            return row
         lepton_inputs = _draw_lepton_inputs(rng, cfg)
         params["lepton_inputs"] = dict(lepton_inputs)
 
@@ -577,6 +585,7 @@ def _evaluate_draw(
             min_overlap_modes=cfg.min_overlap_modes,
             max_overlap_modes=cfg.max_overlap_modes,
             overlap_rel_tol=cfg.overlap_rel_tol,
+            ew_model=cfg.ew_model,
             spectrum=spectrum,
             rs_ew_cache=overlap_cache,
             include_charged_current=True,
@@ -599,7 +608,7 @@ def _evaluate_draw(
         )
         results = registry.evaluate_all(point)
         payload = _classify_results(results)
-        return {
+        row = {
             "draw_id": int(draw_idx),
             "tile_id": int(tile.tile_id),
             "seed": int(draw_seed),
@@ -625,6 +634,8 @@ def _evaluate_draw(
                 "config_hash": config_hash,
             },
         }
+        _annotate_ew_model(row, cfg=cfg)
+        return row
     except Exception as exc:  # noqa: BLE001 - a failed draw must not abort a tile
         reason = _skip_reason(exc)
         row = {
@@ -669,6 +680,7 @@ def _evaluate_draw(
                     ],
                 }
             )
+        _annotate_ew_model(row, cfg=cfg)
         return row
 
 
@@ -1203,7 +1215,7 @@ def run_universal_c_sanity(
         k_gev=cfg.k_gev,
         n_gauge_modes=cfg.n_gauge_modes,
         quadrature_order=cfg.quadrature_order,
-        model_label="minimal_rs",
+        model_label=cfg.ew_model,
     )
     cache = RSEWOverlapSplineCache.build(
         spectrum,
@@ -1268,6 +1280,7 @@ def run_universal_c_sanity(
         min_overlap_modes=cfg.min_overlap_modes,
         max_overlap_modes=cfg.max_overlap_modes,
         overlap_rel_tol=cfg.overlap_rel_tol,
+        ew_model=cfg.ew_model,
         spectrum=spectrum,
         rs_ew_cache=cache,
         include_charged_current=True,
@@ -1300,7 +1313,7 @@ def run_universal_c_sanity(
     spurious_proxy = [
         pid for pid in payload["excluded_by_proxy"] if pid not in sm_tension_ids
     ]
-    return {
+    out = {
         "name": "universal_c_diagonal_leptons",
         "mkk_gev": float(cfg.sanity_mkk_gev),
         "lambda_ir_gev": float(lambda_ir),
@@ -1318,6 +1331,8 @@ def run_universal_c_sanity(
         "coverage_complete": payload["coverage_complete"],
         "provenance": {**dict(provenance), "config_hash": config_hash},
     }
+    _annotate_ew_model(out, cfg=cfg)
+    return out
 
 
 def _build_run_summary(
@@ -1407,6 +1422,7 @@ def _build_run_summary(
         "universal_c_sanity": sanity,
         "tiles": list(summaries),
     }
+    _annotate_ew_model(out, cfg=cfg)
     if cfg.quark_only:
         out.update(
             {
@@ -1484,11 +1500,22 @@ def _completed_summary(path: Path, *, expected_hash: str, expected_draws: int) -
     return summary
 
 
+def _annotate_ew_model(payload: dict[str, Any], *, cfg: ScanConfig) -> None:
+    if cfg.ew_model == MINIMAL_RS_EW_MODEL:
+        return
+    payload["ew_model"] = cfg.ew_model
+    provenance = dict(payload.get("provenance", {}))
+    provenance["ew_model"] = cfg.ew_model
+    payload["provenance"] = provenance
+
+
 def _config_payload(cfg: ScanConfig) -> dict[str, Any]:
     payload = asdict(cfg)
     payload["mkk_values_gev"] = list(cfg.mkk_values_gev)
     if not cfg.quark_only:
         payload.pop("quark_only", None)
+    if cfg.ew_model == MINIMAL_RS_EW_MODEL:
+        payload.pop("ew_model", None)
     return payload
 
 
@@ -1558,6 +1585,7 @@ def _build_argparser() -> argparse.ArgumentParser:
     parser.add_argument("--n-draws", type=int, default=100)
     parser.add_argument("--m-kk-tev", type=str, default="1,3,5,10")
     parser.add_argument("--quark-only", action="store_true")
+    parser.add_argument("--ew-model", choices=SUPPORTED_EW_MODELS, default=MINIMAL_RS_EW_MODEL)
     parser.add_argument("--xi-kk", type=float, default=DEFAULT_XI_KK)
     parser.add_argument("--k-gev", type=float, default=MPL)
     parser.add_argument("--v-gev", type=float, default=DEFAULT_V_GEV)
@@ -1606,6 +1634,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         mkk_values_gev=mkk_values_gev,
         n_draws_per_tile=int(args.n_draws),
         quark_only=bool(args.quark_only),
+        ew_model=str(args.ew_model),
         xi_kk=float(args.xi_kk),
         k_gev=float(args.k_gev),
         v_gev=float(args.v_gev),
@@ -1648,6 +1677,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "dirty": _git_dirty(),
         "schema": "full_catalog_scan_w6b_row_v1",
     }
+    if cfg.ew_model != MINIMAL_RS_EW_MODEL:
+        provenance["ew_model"] = cfg.ew_model
     if cfg.quark_only:
         provenance.update(
             {

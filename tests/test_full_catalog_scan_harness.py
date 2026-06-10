@@ -9,6 +9,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
 
 from flavor_catalog_constraints.base import ConstraintResult, Severity
 
@@ -245,6 +246,64 @@ def test_quark_only_config_payload_preserves_full_mode_hash_surface():
     assert harness._config_hash(full_cfg) == "45e21a07585f7489"
     assert harness._config_hash(quark_cfg) == "d96cb734f724aedb"
     assert harness._config_hash(full_cfg) != harness._config_hash(quark_cfg)
+
+
+def test_ew_model_config_payload_round_trip_and_pinned_minimal_hashes():
+    harness = _load_harness()
+    wq_cfg = harness.ScanConfig(
+        mkk_values_gev=(
+            1000.0,
+            2000.0,
+            3000.0,
+            5000.0,
+            7000.0,
+            10000.0,
+            15000.0,
+            20000.0,
+            30000.0,
+            50000.0,
+        ),
+        n_draws_per_tile=2000,
+        quark_only=True,
+        base_seed=202606040000,
+        tile_seed_stride=1000003,
+        quark_fit_r=0.05,
+    )
+    custodial_cfg = harness.ScanConfig(
+        mkk_values_gev=(1000.0, 3000.0),
+        n_draws_per_tile=5,
+        quark_only=True,
+        ew_model=harness.CUSTODIAL_RS_PLR_EW_MODEL,
+    )
+
+    assert "ew_model" not in harness._config_payload(wq_cfg)
+    assert harness._config_hash(wq_cfg) == "c6939cc65d71f86a"
+    assert harness._config_from_payload(harness._config_payload(wq_cfg)).ew_model == (
+        harness.MINIMAL_RS_EW_MODEL
+    )
+    custodial_payload = harness._config_payload(custodial_cfg)
+    assert custodial_payload["ew_model"] == harness.CUSTODIAL_RS_PLR_EW_MODEL
+    assert harness._config_from_payload(custodial_payload).ew_model == (
+        harness.CUSTODIAL_RS_PLR_EW_MODEL
+    )
+
+
+def test_ew_model_argparse_choices():
+    harness = _load_harness()
+    parser = harness._build_argparser()
+
+    args = parser.parse_args(
+        [
+            "--output-dir",
+            "out",
+            "--ew-model",
+            harness.CUSTODIAL_RS_PLR_EW_MODEL,
+        ]
+    )
+
+    assert args.ew_model == harness.CUSTODIAL_RS_PLR_EW_MODEL
+    with pytest.raises(SystemExit):
+        parser.parse_args(["--output-dir", "out", "--ew-model", "nonsense"])
 
 
 def test_quark_only_allowlist_matches_candidate_verification_and_drops_deferred_leptons():
@@ -516,6 +575,168 @@ def test_quark_only_evaluate_draw_skips_leptons_filters_allowlist_and_is_determi
     assert serialized1 == expected_serialized
 
 
+def test_evaluate_draw_threads_custodial_ew_model_to_quark_only_and_full_builders(monkeypatch):
+    harness = _load_harness()
+    spectrum = object()
+
+    @dataclass
+    class _Cache:
+        max_a_rel_err: float = 0.0
+
+    @dataclass
+    class _BulkState:
+        c_Q: np.ndarray
+        c_u: np.ndarray
+        c_d: np.ndarray
+
+    @dataclass
+    class _Point:
+        Y_u: np.ndarray
+        Y_d: np.ndarray
+
+    @dataclass
+    class _FitResult:
+        bulk_state: _BulkState
+        point: _Point
+        score: float
+        residual_norm: float
+        mass_residuals_up: np.ndarray
+        mass_residuals_down: np.ndarray
+        ckm_residuals: np.ndarray
+
+    @dataclass
+    class _Solution:
+        result: _FitResult
+        success: bool = True
+        message: str = "ok"
+        nfev: int = 1
+        initial_score: float = 1.0
+
+    @dataclass
+    class _Leptons:
+        Y_E_bar: np.ndarray
+        Y_N_bar: np.ndarray
+
+        def is_perturbative(self, _max_ybar):
+            return True
+
+    @dataclass
+    class _Couplings:
+        M_KK: float
+
+    def fake_fit(*args, **kwargs):
+        fit_result = _FitResult(
+            bulk_state=_BulkState(
+                c_Q=np.array([0.61, 0.62, 0.63]),
+                c_u=np.array([0.64, 0.65, 0.66]),
+                c_d=np.array([0.67, 0.68, 0.69]),
+            ),
+            point=_Point(
+                Y_u=np.ones((3, 3), dtype=np.complex128),
+                Y_d=np.ones((3, 3), dtype=np.complex128),
+            ),
+            score=0.0,
+            residual_norm=0.0,
+            mass_residuals_up=np.zeros(3),
+            mass_residuals_down=np.zeros(3),
+            ckm_residuals=np.zeros(4),
+        )
+        return _Solution(result=fit_result)
+
+    captured_builds: list[dict[str, object]] = []
+
+    def fake_build(_fit_result, **kwargs):
+        captured_builds.append(dict(kwargs))
+        return harness.point_builder.make_point(
+            raw=kwargs["raw"],
+            kk_ew_mass_gev=3000.0,
+            rs_ew_spectrum=spectrum,
+            rs_ew_couplings=object(),
+        )
+
+    def fake_couplings(_fit_result, **kwargs):
+        return _Couplings(M_KK=float(kwargs["M_KK"]))
+
+    def fake_results(process_ids):
+        return {
+            pid: ConstraintResult(
+                process_id=pid,
+                severity=Severity.HARD,
+                passes=True,
+                ratio=0.1,
+                diagnostics={"evaluated": True},
+            )
+            for pid in process_ids
+        }
+
+    monkeypatch.setattr(harness, "fit_quark_sector", fake_fit)
+    monkeypatch.setattr(harness, "compute_all_yukawas", lambda *a, **k: _Leptons(np.ones(3), np.ones(3)))
+    monkeypatch.setattr(harness.point_builder, "build_from_rs_ew_inputs", fake_build)
+    monkeypatch.setattr(harness, "compute_quark_kk_gluon_couplings", fake_couplings)
+    monkeypatch.setattr(
+        harness,
+        "_draw_lepton_inputs",
+        lambda _rng, _cfg: {
+            "c_L": 0.61,
+            "c_E": [0.62, 0.63, 0.64],
+            "c_N": 0.65,
+            "M_N": 1.0e12,
+            "lightest_nu_mass": 0.001,
+            "ordering": "normal",
+            "majorana_alpha": 0.0,
+            "majorana_beta": 0.0,
+        },
+    )
+    monkeypatch.setattr(
+        harness,
+        "_evaluate_constraint_ids",
+        lambda _point, ids: fake_results(ids),
+    )
+    monkeypatch.setattr(
+        harness.registry,
+        "evaluate_all",
+        lambda _point: fake_results(("EW001",)),
+    )
+
+    for idx, quark_only in enumerate((True, False)):
+        cfg = harness.ScanConfig(
+            mkk_values_gev=(3000.0,),
+            n_draws_per_tile=1,
+            quark_only=quark_only,
+            ew_model=harness.CUSTODIAL_RS_PLR_EW_MODEL,
+            quark_fit_max_nfev=1,
+        )
+        tile = harness.TileSpec(
+            tile_id=0,
+            mkk_gev=3000.0,
+            lambda_ir_gev=3000.0 / cfg.xi_kk,
+            n_draws=1,
+            seed=900 + idx,
+        )
+        row = harness._evaluate_draw(
+            np.random.default_rng(900 + idx),
+            tile=tile,
+            draw_idx=0,
+            draw_seed=900 + idx,
+            cfg=cfg,
+            spectrum=spectrum,
+            overlap_cache=_Cache(),
+            provenance={},
+            registry_count=harness.EXPECTED_REGISTRY_COUNT,
+            config_hash="cust",
+        )
+
+        assert row["skipped"] is False
+        assert row["ew_model"] == harness.CUSTODIAL_RS_PLR_EW_MODEL
+        assert row["provenance"]["ew_model"] == harness.CUSTODIAL_RS_PLR_EW_MODEL
+
+    assert [kwargs["ew_model"] for kwargs in captured_builds] == [
+        harness.CUSTODIAL_RS_PLR_EW_MODEL,
+        harness.CUSTODIAL_RS_PLR_EW_MODEL,
+    ]
+    assert all(kwargs["spectrum"] is spectrum for kwargs in captured_builds)
+
+
 def test_nonperturbative_leptons_skip_before_l001_evaluation(monkeypatch):
     harness = _load_harness()
     cfg = harness.ScanConfig(
@@ -626,6 +847,99 @@ def test_nonperturbative_leptons_skip_before_l001_evaluation(monkeypatch):
     assert "nonperturbative_lepton_yukawa" in row["skip_error"]
     assert row["constraints"] == {}
     assert "lepton_inputs" in row["params"]
+
+
+def test_universal_c_sanity_uses_cfg_ew_model_for_spectrum_and_builder(monkeypatch):
+    harness = _load_harness()
+    captured = {"model_label": None, "ew_model": None}
+
+    @dataclass
+    class _Spectrum:
+        pass
+
+    @dataclass
+    class _Cache:
+        pass
+
+    @dataclass
+    class _BulkState:
+        c_Q: np.ndarray
+        c_u: np.ndarray
+        c_d: np.ndarray
+        F_Q: np.ndarray
+        F_u: np.ndarray
+        F_d: np.ndarray
+
+    @dataclass
+    class _FitResult:
+        bulk_state: _BulkState
+        U_L_u: np.ndarray
+        U_L_d: np.ndarray
+        U_R_u: np.ndarray
+        U_R_d: np.ndarray
+        ckm: np.ndarray
+
+    @dataclass
+    class _Solution:
+        result: _FitResult
+
+    fit = _FitResult(
+        bulk_state=_BulkState(
+            c_Q=np.ones(3),
+            c_u=np.ones(3),
+            c_d=np.ones(3),
+            F_Q=np.ones(3),
+            F_u=np.ones(3),
+            F_d=np.ones(3),
+        ),
+        U_L_u=np.eye(3),
+        U_L_d=np.eye(3),
+        U_R_u=np.eye(3),
+        U_R_d=np.eye(3),
+        ckm=np.eye(3),
+    )
+    spectrum = _Spectrum()
+
+    def fake_spectrum_build(**kwargs):
+        captured["model_label"] = kwargs["model_label"]
+        return spectrum
+
+    def fake_builder(_fit, **kwargs):
+        captured["ew_model"] = kwargs["ew_model"]
+        assert kwargs["spectrum"] is spectrum
+        return harness.point_builder.make_point(raw=kwargs["raw"], rs_ew_spectrum=spectrum)
+
+    monkeypatch.setattr(harness.registry, "discover", lambda: None)
+    monkeypatch.setattr(harness.registry, "import_failures", lambda: {})
+    monkeypatch.setattr(harness.registry, "all_constraints", lambda: {})
+    monkeypatch.setattr(harness.registry, "evaluate_all", lambda _point: {})
+    monkeypatch.setattr(harness.RSEWSpectrum, "build", fake_spectrum_build)
+    monkeypatch.setattr(harness.RSEWOverlapSplineCache, "build", lambda *a, **k: _Cache())
+    monkeypatch.setattr(harness, "fit_quark_sector", lambda *a, **k: _Solution(result=fit))
+    monkeypatch.setattr(harness, "f_IR", lambda *a, **k: 1.0)
+    monkeypatch.setattr(
+        harness,
+        "compute_all_yukawas",
+        lambda *a, **k: SimpleNamespace(Y_N_bar=np.ones(3)),
+    )
+    monkeypatch.setattr(harness, "_force_degenerate_neutrino_yukawas", lambda *a, **k: None)
+    monkeypatch.setattr(harness.point_builder, "build_from_rs_ew_inputs", fake_builder)
+    monkeypatch.setattr(harness, "compute_quark_kk_gluon_couplings", lambda *a, **k: object())
+    cfg = harness.ScanConfig(
+        mkk_values_gev=(3000.0,),
+        n_draws_per_tile=1,
+        ew_model=harness.CUSTODIAL_RS_PLR_EW_MODEL,
+        expected_registry_count=0,
+    )
+
+    result = harness.run_universal_c_sanity(cfg, provenance={}, config_hash="cust")
+
+    assert captured == {
+        "model_label": harness.CUSTODIAL_RS_PLR_EW_MODEL,
+        "ew_model": harness.CUSTODIAL_RS_PLR_EW_MODEL,
+    }
+    assert result["passes_no_spurious_hard_exclusions"] is True
+    assert result["ew_model"] == harness.CUSTODIAL_RS_PLR_EW_MODEL
 
 
 def test_quark_only_constraint_tallies_count_evaluated_active_failed_and_vetoed():

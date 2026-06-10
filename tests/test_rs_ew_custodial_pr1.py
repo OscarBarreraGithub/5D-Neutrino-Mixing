@@ -12,6 +12,7 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from quarkConstraints import oblique_stu as oblique_core
 from quarkConstraints.rs_ew_couplings import CUSTODIAL_RS_PLR_EW_MODEL
+from quarkConstraints.rs_ew_spectrum import RSEWSpectrum
 from tests.rs_ew_phase3b_helpers import (
     MAX_OVERLAP_MODES,
     MIN_OVERLAP_MODES,
@@ -136,6 +137,31 @@ def test_default_minimal_rs_is_byte_identical_to_explicit_minimal_and_keeps_scan
     assert default.metadata["ew_model"] == "minimal_rs"
     assert "ew_model" not in harness._config_payload(cfg)
     assert harness._config_hash(cfg) == "45e21a07585f7489"
+
+
+def test_injected_spectrum_model_label_mismatch_raises():
+    lambda_ir, k = _scales_for_mkk(3000.0)
+    spectrum = RSEWSpectrum.build(
+        lambda_ir_gev=lambda_ir,
+        k_gev=k,
+        n_gauge_modes=N_GAUGE_MODES,
+        quadrature_order=QUADRATURE_ORDER,
+        model_label="minimal_rs",
+    )
+
+    with pytest.raises(ValueError, match="model_label does not match ew_model"):
+        point_builder.build_from_rs_ew_inputs(
+            _sample_fit(),
+            Lambda_IR=lambda_ir,
+            k=k,
+            n_gauge_modes=N_GAUGE_MODES,
+            quadrature_order=QUADRATURE_ORDER,
+            min_overlap_modes=MIN_OVERLAP_MODES,
+            max_overlap_modes=MAX_OVERLAP_MODES,
+            overlap_rel_tol=OVERLAP_REL_TOL,
+            ew_model=CUSTODIAL_RS_PLR_EW_MODEL,
+            spectrum=spectrum,
+        )
 
 
 def test_custodial_zeroes_only_down_left_diagonal_applies_residual_and_zeroes_b_right():
