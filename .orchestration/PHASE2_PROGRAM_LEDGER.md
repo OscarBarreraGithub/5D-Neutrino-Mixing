@@ -63,7 +63,25 @@ Build prompts under `.orchestration/runs/<ITEM>/`. Keep orchestrator context lea
 | R8 | Orchestration/status docs (ledgers, wave-done commits) — low stakes, doc-review | — | — | — |
 | -- | (tooling ~/bin/codex_worker.sh + codex_usage.sh: NOT in git, operator tooling — out of scope unless user includes) | — | — | — |
 
-## ⏯️ CURRENT STATE / NEXT ACTION (updated 2026-06-09 — pre-compaction snapshot; read THIS block first, older blocks below are historical)
+## ⏯️ CURRENT STATE / NEXT ACTION (updated 2026-06-10 — read THIS block first, older blocks below are historical)
+
+**HEAD `3830d7c`. Full suite 1752 passed / 1 skipped. W7+W8+W9 (+W9b) all DONE, dual-gated, committed; pushing.**
+
+**JUST COMPLETED (user 2026-06-10: "do all 3" — each through the full dual-signoff gate plan→dual-review→revise→dual-approve→impl→dual-review→commit):**
+- **W7 `8ca55c8` — μ→eγ LMFV LIVE.** `LMFVLeptonParameters` carrier (Y_N/PMNS/M_KK + spurion (Y_N Y_N†)_12) wired to L001 via the existing `flavorConstraints/muToEGamma.py`. **Veto = BR_NP ≤ br_limit (MEG II 1.5e-13); C=0.02 is an INERT diagnostic, NOT the gate** (both reviewers flagged + a test pins `passes` to BR independent of c_lfv). Quark-only byte-identical (hashes `45e21a07585f7489`/`d96cb734f724aedb`); L001.tex/.yaml untouched; legacy scanParams derived-C kept separate.
+- **W8 `e6df1d8` — custodial PR2.** Carena hep-ph/0701055 Eq.28-30 one-loop top-partner ΔT/δg_bL (singlet +, bidoublet vertex genuinely −) + all-gen-bidoublet custodial-FCNC. **NO fabricated negative ΔT** (sign=−1 alone raises; negative requires numeric override). δg_L^b added to z_delta_g_L_d[2,2] in additive (t3−Q s²) convention, no spurious factor; z_delta_g_R_d untouched; T014 RH-minimal preserved. minimal_rs byte-identical (`45e21a07585f7489`), 15 TeV survivor holds.
+- **W9 `9b7bf6a` — `--ew-model {minimal_rs,custodial_rs_plr}` flag + comparison builder.** ScanConfig.ew_model POPPED from payload when minimal → hashes unchanged; custodial hash `f79cfe336ec9e07b`. Threaded through every build site w/ spectrum model_label co-edit; worker round-trip preserved.
+- **W9b `30dc91f` — comparison builder bounded-memory streaming refactor.** Original per-draw builder OOM'd at **>100 GB** on real 2M rows (retained full per-row constraints both runs + ~40M-row veto list). Refactored to disk-backed SQLite typed-key join + chunked `ParquetWriter` (PARQUET_CHUNK_ROWS=50000), schema-identical, aggregates byte-equivalent. Rebuilt at **414 MB peak**.
+- **CUSTODIAL 1M SCAN `3830d7c` (job 20675555).** SAME r×M_KK grid + seeds as baseline `wq_quarkonly_1M_20128400`, paired draw-for-draw. **RESULT: minimal rigorous floor ~25-30 TeV (T010/Z→bb) → custodial STRICT floor ~2-3 TeV** (T010 removed by P_LR; rigorous ΔF=2 K001/B003/B004 sets it, r-dep 1 TeV@r=0.05 → 3 TeV@r=1.0) **; custodial INCLUSIVE floor ~7 TeV** (proxy EW001 oblique-S now dominant + CR colliders). Output dual-review recomputed from raw JSONL: **50 cells × 2 runs, 0 mismatches; T010 vetoes 694123 minimal / 0 custodial** (custodial branch genuinely active). **UI-ready deliverable:** `scan_outputs/wq_quarkonly_1M_custodial_20675555/comparison/` (survival_by_r_mkk.csv, constraint_veto_by_r_mkk.csv, paired_draws/paired_vetoes.parquet, manifest/schema/README) — built for the future minimal-vs-custodial plotting interface.
+
+**NEXT ACTIONS / OPEN (awaiting user go):**
+1. **W8 top-partner loop was DEFERRED in the W9 scan run** (`custodial_top_partner_loop_status=deferred`). A loop-ON custodial rerun (`--ew-model custodial_rs_plr` with the loop flags) would shift the floors slightly (ΔT_loop~O(0.1), δg_L^b|loop~1e-3) — run if/when the user wants the loop-included custodial picture.
+2. Build the minimal-vs-custodial plotting interface off the `comparison/` schema (user's stated goal).
+
+**NEW OPERATIONAL GOTCHA (2026-06-10):** big comparison/merge jobs over the 1M JSONL OOM on the LOGIN node (~3 GB cap) AND naive in-memory pairing OOMs even at 96 GB — stream + sbatch `--mem`. Always run such builds on a compute node.
+
+---
+### (historical) ⏯️ STATE 2026-06-09 — pre-compaction snapshot
 
 **HEAD `71b8453`, full suite 1723 passed / 1 skipped, working tree clean, all pushed.**
 
