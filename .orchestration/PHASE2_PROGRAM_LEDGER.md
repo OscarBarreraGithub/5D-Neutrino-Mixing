@@ -65,7 +65,13 @@ Build prompts under `.orchestration/runs/<ITEM>/`. Keep orchestrator context lea
 
 ## ⏯️ CURRENT STATE / NEXT ACTION (updated 2026-06-10 — read THIS block first, older blocks below are historical)
 
-**HEAD `3830d7c`. Full suite 1752 passed / 1 skipped. W7+W8+W9 (+W9b) all DONE, dual-gated, committed; pushing.**
+**HEAD `37945a1`. Working tree CLEAN, only `main` (no loose branches/worktrees/stashes). `main` is ahead of `origin/main` by 3 commits that are intentionally NOT pushed** (`f731d46` Scan Explorer web tab, `f56b438` docs/STATE_OF_PROJECT.md + KK-collider problem statement, `37945a1` orchestration audit trail). **DO NOT push without intent: the Cloudflare site deploys from `main` (root `flavor_catalog/website/`), so pushing would deploy the Explorer tab live — the user does NOT want that yet.** Pushed history ends at `e7f5ce7`.
+
+**FOR A COMPLETE, CODE-GROUNDED STATE OF THE PROJECT, READ `docs/STATE_OF_PROJECT.md`** (IN/APPROXIMATE/CHOICES/TODO, dual-verified: 4 codex domain reviews → synthesis → Opus audit APPROVE). It supersedes the bullet summaries below for "what is rigorous vs approximate."
+
+**Earlier today (all dual-gated, committed):**
+
+**HEAD `3830d7c`. Full suite 1752 passed / 1 skipped. W7+W8+W9 (+W9b) all DONE, dual-gated, committed; pushed.**
 
 **JUST COMPLETED (user 2026-06-10: "do all 3" — each through the full dual-signoff gate plan→dual-review→revise→dual-approve→impl→dual-review→commit):**
 - **W7 `8ca55c8` — μ→eγ LMFV LIVE.** `LMFVLeptonParameters` carrier (Y_N/PMNS/M_KK + spurion (Y_N Y_N†)_12) wired to L001 via the existing `flavorConstraints/muToEGamma.py`. **Veto = BR_NP ≤ br_limit (MEG II 1.5e-13); C=0.02 is an INERT diagnostic, NOT the gate** (both reviewers flagged + a test pins `passes` to BR independent of c_lfv). Quark-only byte-identical (hashes `45e21a07585f7489`/`d96cb734f724aedb`); L001.tex/.yaml untouched; legacy scanParams derived-C kept separate.
