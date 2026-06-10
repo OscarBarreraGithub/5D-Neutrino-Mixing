@@ -1,0 +1,39 @@
+{
+  "base_seed": 202606040000,
+  "draw_shards_per_r": 10,
+  "draws_per_mkk_per_r": 20000,
+  "draws_per_mkk_per_shard": 2000,
+  "mkk_tev": [
+    1.0,
+    2.0,
+    3.0,
+    5.0,
+    7.0,
+    10.0,
+    15.0,
+    20.0,
+    30.0,
+    50.0
+  ],
+  "physics_note": "r weights the up-type MFV spurion in C_Q = r Yu Yu^dagger + Yd Yd^dagger; the grid spans down-dominated, default-near, and up-dominated LH-doublet localization.",
+  "r_grid": [
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "seed_disjointness": {
+    "chosen_block_value": 20000000,
+    "draw_seed_formula": "tile_seed + draw_idx",
+    "passes": true,
+    "per_shard_base_formula": "BASE_SEED + SHARD_SEED_BLOCK * task_id",
+    "required_block_gt": "tile_seed_stride * n_mkk_tiles + draws_per_mkk_per_shard",
+    "required_block_value": 10002030,
+    "tile_seed_formula": "base_seed + tile_seed_stride * tile_id"
+  },
+  "shard_seed_block": 20000000,
+  "tile_seed_stride": 1000003,
+  "total_draws": 1000000,
+  "total_tasks": 50
+}

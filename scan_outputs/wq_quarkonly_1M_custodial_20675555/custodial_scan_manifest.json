@@ -1,0 +1,11 @@
+{
+  "schema": "wq_quarkonly_custodial_scan_manifest_v1",
+  "ew_model": "custodial_rs_plr",
+  "custodial_tree_status": "included",
+  "custodial_top_partner_loop_status": "deferred",
+  "custodial_fcnc_mode": "pr1_minimal_offdiag",
+  "output_root": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/wq_quarkonly_1M_custodial_20675555",
+  "baseline_minimal_root": "/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scan_outputs/wq_quarkonly_1M_20128400",
+  "grid_source": "scripts/wq_quarkonly_1m_plan.py",
+  "git_sha": "9b7bf6a306133c1e04f2d0055fc7f4dc4aa62ad8"
+}

@@ -1,0 +1,433 @@
+{
+  "artifacts": {
+    "constraint_veto_by_r_mkk.csv": {
+      "columns": {
+        "active": {
+          "description": "Active records",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "constraint_id": {
+          "description": "Constraint process id",
+          "nullable": false,
+          "type": "string",
+          "unit": null
+        },
+        "evaluated": {
+          "description": "Evaluated records",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "ew_model": {
+          "description": "minimal_rs or custodial_rs_plr",
+          "nullable": false,
+          "type": "enum<string>",
+          "unit": null
+        },
+        "failed": {
+          "description": "Failed records",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "mkk_tev": {
+          "description": "KK scale in TeV",
+          "nullable": false,
+          "type": "float64",
+          "unit": "TeV"
+        },
+        "points": {
+          "description": "Constraint records",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "r": {
+          "description": "Quark-fit r grid value",
+          "nullable": false,
+          "type": "float64",
+          "unit": "dimensionless"
+        },
+        "severity": {
+          "description": "Constraint severity",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "tag": {
+          "description": "Harness tag",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "veto_fraction": {
+          "description": "vetoed / points",
+          "nullable": true,
+          "type": "float64",
+          "unit": null
+        },
+        "vetoed": {
+          "description": "Evaluated HARD rigorous/proxy failures",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        }
+      },
+      "description": "Constraint aggregate counts per model, (r, M_KK), id, tag, severity."
+    },
+    "paired_draws.parquet": {
+      "columns": {
+        "custodial_config_hash": {
+          "description": "Custodial config hash.",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "custodial_excluded_by_proxy": {
+          "description": "Custodial proxy HARD veto ids.",
+          "nullable": false,
+          "type": "list<string>",
+          "unit": null
+        },
+        "custodial_excluded_by_rigorous": {
+          "description": "Custodial rigorous HARD veto ids.",
+          "nullable": false,
+          "type": "list<string>",
+          "unit": null
+        },
+        "custodial_git_sha": {
+          "description": "Custodial git SHA.",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "custodial_hard_not_evaluated": {
+          "description": "Custodial HARD coverage gaps.",
+          "nullable": false,
+          "type": "list<string>",
+          "unit": null
+        },
+        "custodial_skip_reason": {
+          "description": "Custodial skip reason.",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "custodial_skipped": {
+          "description": "Whether the custodial draw skipped before evaluation.",
+          "nullable": false,
+          "type": "bool",
+          "unit": null
+        },
+        "custodial_survives_inclusive": {
+          "description": "Custodial inclusive HARD survival.",
+          "nullable": false,
+          "type": "bool",
+          "unit": null
+        },
+        "custodial_survives_strict": {
+          "description": "Custodial strict HARD survival.",
+          "nullable": false,
+          "type": "bool",
+          "unit": null
+        },
+        "draw_id_custodial": {
+          "description": "Custodial-run draw id.",
+          "nullable": false,
+          "type": "int32",
+          "unit": null
+        },
+        "draw_id_minimal": {
+          "description": "Minimal-run draw id.",
+          "nullable": false,
+          "type": "int32",
+          "unit": null
+        },
+        "draw_seed": {
+          "description": "Normalized raw row seed.",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "minimal_config_hash": {
+          "description": "Minimal config hash.",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "minimal_excluded_by_proxy": {
+          "description": "Minimal proxy HARD veto ids.",
+          "nullable": false,
+          "type": "list<string>",
+          "unit": null
+        },
+        "minimal_excluded_by_rigorous": {
+          "description": "Minimal rigorous HARD veto ids.",
+          "nullable": false,
+          "type": "list<string>",
+          "unit": null
+        },
+        "minimal_git_sha": {
+          "description": "Minimal git SHA.",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "minimal_hard_not_evaluated": {
+          "description": "Minimal HARD coverage gaps.",
+          "nullable": false,
+          "type": "list<string>",
+          "unit": null
+        },
+        "minimal_skip_reason": {
+          "description": "Minimal skip reason.",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "minimal_skipped": {
+          "description": "Whether the minimal draw skipped before evaluation.",
+          "nullable": false,
+          "type": "bool",
+          "unit": null
+        },
+        "minimal_survives_inclusive": {
+          "description": "Minimal inclusive HARD survival.",
+          "nullable": false,
+          "type": "bool",
+          "unit": null
+        },
+        "minimal_survives_strict": {
+          "description": "Minimal strict HARD survival.",
+          "nullable": false,
+          "type": "bool",
+          "unit": null
+        },
+        "mkk_gev": {
+          "description": "KK scale in GeV.",
+          "nullable": false,
+          "type": "float64",
+          "unit": "GeV"
+        },
+        "mkk_tev": {
+          "description": "KK scale in TeV.",
+          "nullable": false,
+          "type": "float64",
+          "unit": "TeV"
+        },
+        "r": {
+          "description": "Quark-fit r grid value.",
+          "nullable": false,
+          "type": "float64",
+          "unit": "dimensionless"
+        },
+        "tile_id_custodial": {
+          "description": "Custodial-run tile id.",
+          "nullable": false,
+          "type": "int32",
+          "unit": null
+        },
+        "tile_id_minimal": {
+          "description": "Minimal-run tile id.",
+          "nullable": false,
+          "type": "int32",
+          "unit": null
+        }
+      },
+      "description": "One row per normalized paired draw key."
+    },
+    "paired_vetoes.parquet": {
+      "columns": {
+        "active": {
+          "description": "Whether the constraint was active.",
+          "nullable": true,
+          "type": "bool",
+          "unit": null
+        },
+        "constraint_id": {
+          "description": "Constraint process id.",
+          "nullable": false,
+          "type": "string",
+          "unit": null
+        },
+        "draw_seed": {
+          "description": "Normalized raw row seed.",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "evaluated": {
+          "description": "Whether the constraint was evaluated.",
+          "nullable": false,
+          "type": "bool",
+          "unit": null
+        },
+        "ew_model": {
+          "description": "minimal_rs or custodial_rs_plr.",
+          "nullable": false,
+          "type": "enum<string>",
+          "unit": null
+        },
+        "mkk_tev": {
+          "description": "KK scale in TeV.",
+          "nullable": false,
+          "type": "float64",
+          "unit": "TeV"
+        },
+        "passes": {
+          "description": "Constraint pass flag when evaluated.",
+          "nullable": true,
+          "type": "bool",
+          "unit": null
+        },
+        "r": {
+          "description": "Quark-fit r grid value.",
+          "nullable": false,
+          "type": "float64",
+          "unit": "dimensionless"
+        },
+        "ratio": {
+          "description": "Constraint ratio when available.",
+          "nullable": true,
+          "type": "float64",
+          "unit": null
+        },
+        "severity": {
+          "description": "Constraint severity.",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "tag": {
+          "description": "Harness classification tag.",
+          "nullable": true,
+          "type": "string",
+          "unit": null
+        },
+        "veto_class": {
+          "description": "rigorous, proxy, or not_evaluated.",
+          "nullable": false,
+          "type": "enum<string>",
+          "unit": null
+        }
+      },
+      "description": "Long format constraint vetoes and explicit HARD coverage gaps."
+    },
+    "survival_by_r_mkk.csv": {
+      "columns": {
+        "custodial_evaluated": {
+          "description": "custodial evaluated",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "custodial_inclusive_survival_frac": {
+          "description": "custodial inclusive survival frac",
+          "nullable": true,
+          "type": "float64",
+          "unit": null
+        },
+        "custodial_rows": {
+          "description": "custodial rows",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "custodial_skipped": {
+          "description": "custodial skipped",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "custodial_strict_survival_frac": {
+          "description": "custodial strict survival frac",
+          "nullable": true,
+          "type": "float64",
+          "unit": null
+        },
+        "custodial_survives_inclusive": {
+          "description": "custodial survives inclusive",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "custodial_survives_strict": {
+          "description": "custodial survives strict",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "delta_inclusive_survival_frac": {
+          "description": "delta inclusive survival frac",
+          "nullable": true,
+          "type": "float64",
+          "unit": null
+        },
+        "delta_strict_survival_frac": {
+          "description": "delta strict survival frac",
+          "nullable": true,
+          "type": "float64",
+          "unit": null
+        },
+        "minimal_evaluated": {
+          "description": "minimal evaluated",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "minimal_inclusive_survival_frac": {
+          "description": "minimal inclusive survival frac",
+          "nullable": true,
+          "type": "float64",
+          "unit": null
+        },
+        "minimal_rows": {
+          "description": "minimal rows",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "minimal_skipped": {
+          "description": "minimal skipped",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "minimal_strict_survival_frac": {
+          "description": "minimal strict survival frac",
+          "nullable": true,
+          "type": "float64",
+          "unit": null
+        },
+        "minimal_survives_inclusive": {
+          "description": "minimal survives inclusive",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "minimal_survives_strict": {
+          "description": "minimal survives strict",
+          "nullable": false,
+          "type": "int64",
+          "unit": null
+        },
+        "mkk_tev": {
+          "description": "mkk tev",
+          "nullable": false,
+          "type": "float64",
+          "unit": "TeV"
+        },
+        "r": {
+          "description": "r",
+          "nullable": false,
+          "type": "float64",
+          "unit": null
+        }
+      },
+      "description": "Survival aggregates per (r, M_KK) for both models."
+    }
+  },
+  "schema": "wq_quarkonly_minimal_vs_custodial_schema_v1"
+}
