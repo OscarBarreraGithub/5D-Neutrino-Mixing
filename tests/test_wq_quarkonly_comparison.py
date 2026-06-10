@@ -113,6 +113,68 @@ def test_wq_quarkonly_comparison_pairs_seed_normalizes_survival_and_veto_enums(t
     assert (output / "run_index.json").is_file()
 
 
+def test_wq_quarkonly_comparison_streams_paired_vetoes_in_configured_chunks(
+    tmp_path,
+    monkeypatch,
+):
+    module = _load_comparison()
+    minimal = tmp_path / "wq_quarkonly_1M_20128400"
+    custodial = tmp_path / "wq_quarkonly_1M_custodial_999"
+    output = custodial / "comparison"
+    draw_count = 1200
+    chunk_rows = 64
+    expected_vetoes = draw_count * 2 * 3
+    constraints = {
+        "K001": _constraint(False, "rigorous", ratio=2.0),
+        "B011": _constraint(False, "proxy", ratio=3.0),
+        "T001": _constraint(False, "stub", evaluated=False, active=False),
+    }
+    rows = [
+        _row(
+            seed=10_000 + idx,
+            strict=False,
+            inclusive=False,
+            excluded_by_rigorous=["K001"],
+            excluded_by_proxy=["B011"],
+            hard_not_evaluated=["T001"],
+            constraints=constraints,
+        )
+        for idx in range(draw_count)
+    ]
+    _write_run(minimal, rows, config_hash="minhash", git_sha="minsha")
+    _write_run(custodial, rows, config_hash="custhash", git_sha="custsha")
+
+    batch_sizes = []
+    original_table_from_pylist = module._pyarrow_table_from_pylist
+
+    def recording_table_from_pylist(rows, schema):
+        batch_sizes.append(len(rows))
+        return original_table_from_pylist(rows, schema)
+
+    monkeypatch.setattr(module, "PARQUET_CHUNK_ROWS", chunk_rows)
+    monkeypatch.setattr(module, "_pyarrow_table_from_pylist", recording_table_from_pylist)
+
+    module.build_comparison(minimal, custodial, output)
+
+    for name in (
+        "paired_draws.parquet",
+        "paired_vetoes.parquet",
+        "survival_by_r_mkk.csv",
+        "constraint_veto_by_r_mkk.csv",
+        "manifest.json",
+        "schema.json",
+        "README.md",
+        "run_index.json",
+    ):
+        assert (output / name).is_file()
+
+    assert pq.ParquetFile(output / "paired_draws.parquet").metadata.num_rows == draw_count
+    assert pq.ParquetFile(output / "paired_vetoes.parquet").metadata.num_rows == expected_vetoes
+    assert batch_sizes
+    assert max(batch_sizes) == chunk_rows
+    assert all(size <= chunk_rows for size in batch_sizes)
+
+
 def _write_run(root: Path, rows, *, config_hash: str, git_sha: str) -> None:
     scan_plan = {
         "r_grid": [0.05],

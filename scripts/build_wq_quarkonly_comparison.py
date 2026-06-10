@@ -7,11 +7,13 @@ import argparse
 import csv
 import json
 import os
+import sqlite3
+import tempfile
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable, Mapping, Sequence
+from typing import Any, Callable, Iterable, Iterator, Mapping, Sequence
 
 
 SCHEMA_ID = "wq_quarkonly_minimal_vs_custodial_manifest_v1"
@@ -24,6 +26,8 @@ PHYSICS_TAGS = {
     "custodial_fcnc_mode": "pr1_minimal_offdiag",
     "oblique_proxy_status": "tree_level_custodial_proxy_top_partner_loop_deferred",
 }
+PARQUET_CHUNK_ROWS = 50_000
+RUN_TABLES = {"minimal_rows", "custodial_rows"}
 RUN_IDENTITY_FIELDS = {
     "array_job_id",
     "created_utc",
@@ -47,10 +51,13 @@ class ComparisonValidationError(RuntimeError):
 class RunRows:
     root: Path
     ew_model: str
-    rows: dict[tuple[float, float, int], dict[str, Any]]
+    table_name: str
+    row_count: int
     config_hashes: tuple[str, ...]
     git_shas: tuple[str, ...]
     scan_plan: dict[str, Any]
+    r_values: tuple[float, ...]
+    mkk_tev_values: tuple[float, ...]
 
 
 def build_comparison(minimal_root: Path, custodial_root: Path, output_dir: Path) -> dict[str, Any]:
@@ -58,18 +65,6 @@ def build_comparison(minimal_root: Path, custodial_root: Path, output_dir: Path)
     custodial_root = custodial_root.resolve()
     output_dir = output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
-
-    minimal = _load_run(minimal_root, ew_model=MINIMAL_RS_EW_MODEL)
-    custodial = _load_run(custodial_root, ew_model=CUSTODIAL_RS_PLR_EW_MODEL)
-    scan_plan_equivalent = _scan_plans_equivalent(minimal.scan_plan, custodial.scan_plan)
-    if not scan_plan_equivalent:
-        raise ComparisonValidationError("scan_plan.json differs beyond run identity fields")
-
-    validation = _validate_pairing(minimal.rows, custodial.rows)
-    paired_rows, veto_rows, survival_rows, constraint_rows = _build_artifact_rows(
-        minimal,
-        custodial,
-    )
 
     artifacts = {
         "readme": "README.md",
@@ -82,40 +77,84 @@ def build_comparison(minimal_root: Path, custodial_root: Path, output_dir: Path)
         "run_index": "run_index.json",
     }
 
-    _write_paired_draws(output_dir / artifacts["paired_draws"], paired_rows)
-    _write_paired_vetoes(output_dir / artifacts["paired_vetoes"], veto_rows)
-    _write_csv(output_dir / artifacts["survival_by_r_mkk"], SURVIVAL_COLUMNS, survival_rows)
-    _write_csv(
-        output_dir / artifacts["constraint_veto_by_r_mkk"],
-        CONSTRAINT_VETO_COLUMNS,
-        constraint_rows,
-    )
-    _write_json(output_dir / artifacts["schema"], _schema_payload())
-    _write_text(
-        output_dir / artifacts["readme"],
-        _readme_text(minimal.root, custodial.root),
-    )
+    with tempfile.TemporaryDirectory(prefix=".comparison-sqlite-", dir=output_dir) as tmpdir:
+        conn = sqlite3.connect(Path(tmpdir) / "comparison.sqlite")
+        try:
+            minimal = _load_run(
+                conn,
+                "minimal_rows",
+                minimal_root,
+                ew_model=MINIMAL_RS_EW_MODEL,
+            )
+            custodial = _load_run(
+                conn,
+                "custodial_rows",
+                custodial_root,
+                ew_model=CUSTODIAL_RS_PLR_EW_MODEL,
+            )
+            scan_plan_equivalent = _scan_plans_equivalent(minimal.scan_plan, custodial.scan_plan)
+            if not scan_plan_equivalent:
+                raise ComparisonValidationError("scan_plan.json differs beyond run identity fields")
 
-    manifest = _manifest_payload(
-        minimal,
-        custodial,
-        artifacts=artifacts,
-        validation={
-            **validation,
-            "scan_plan_equivalent": scan_plan_equivalent,
-            "passed": True,
-        },
-    )
-    run_index = _run_index_payload(minimal.root, custodial.root, output_dir, artifacts)
-    _write_json(output_dir / artifacts["run_index"], run_index)
-    _write_json(output_dir / artifacts["manifest"], manifest)
-    return manifest
+            validation = _validate_pairing(conn, minimal, custodial)
+            _write_paired_draws(
+                output_dir / artifacts["paired_draws"],
+                _iter_paired_draw_rows(conn, minimal, custodial),
+            )
+            _write_paired_vetoes(
+                output_dir / artifacts["paired_vetoes"],
+                _iter_paired_veto_rows(conn, minimal, custodial),
+            )
+            survival_rows, constraint_rows = _build_aggregate_rows(conn, minimal, custodial)
+            _write_csv(output_dir / artifacts["survival_by_r_mkk"], SURVIVAL_COLUMNS, survival_rows)
+            _write_csv(
+                output_dir / artifacts["constraint_veto_by_r_mkk"],
+                CONSTRAINT_VETO_COLUMNS,
+                constraint_rows,
+            )
+            _write_json(output_dir / artifacts["schema"], _schema_payload())
+            _write_text(
+                output_dir / artifacts["readme"],
+                _readme_text(minimal.root, custodial.root),
+            )
+
+            manifest = _manifest_payload(
+                minimal,
+                custodial,
+                artifacts=artifacts,
+                validation={
+                    **validation,
+                    "scan_plan_equivalent": scan_plan_equivalent,
+                    "passed": True,
+                },
+            )
+            run_index = _run_index_payload(minimal.root, custodial.root, output_dir, artifacts)
+            _write_json(output_dir / artifacts["run_index"], run_index)
+            _write_json(output_dir / artifacts["manifest"], manifest)
+            return manifest
+        finally:
+            conn.close()
 
 
-def _load_run(root: Path, *, ew_model: str) -> RunRows:
+def _load_run(
+    conn: sqlite3.Connection,
+    table_name: str,
+    root: Path,
+    *,
+    ew_model: str,
+) -> RunRows:
     scan_plan = _load_scan_plan(root)
-    rows: dict[tuple[float, float, int], dict[str, Any]] = {}
+    _create_run_table(conn, table_name)
+    table = _sql_table(table_name)
+    insert_sql = (
+        f"INSERT INTO {table} "
+        "(r, mkk_tev, draw_seed, ordinal, paired_json, veto_json, constraint_json) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?)"
+    )
     duplicate_count = 0
+    retained_count = 0
+    config_hashes: set[str] = set()
+    git_shas: set[str] = set()
     for path in _jsonl_paths(root):
         with path.open("r", encoding="utf-8") as fh:
             for line_no, line in enumerate(fh, start=1):
@@ -128,26 +167,34 @@ def _load_run(root: Path, *, ew_model: str) -> RunRows:
                         f"{path}:{line_no}: invalid JSONL row: {exc}"
                     ) from exc
                 row = _normalize_row(raw, path=path, line_no=line_no)
-                key = (row["r"], row["mkk_tev"], row["draw_seed"])
-                if key in rows:
+                paired_payload = _paired_payload(row)
+                try:
+                    conn.execute(
+                        insert_sql,
+                        (
+                            row["r"],
+                            row["mkk_tev"],
+                            row["draw_seed"],
+                            retained_count,
+                            _json_compact(paired_payload),
+                            _json_compact(_draw_veto_rows(ew_model, row)),
+                            _json_compact(list(_constraint_veto_contributions(row))),
+                        ),
+                    )
+                except sqlite3.IntegrityError:
                     duplicate_count += 1
                     continue
-                rows[key] = row
+                if paired_payload.get("config_hash"):
+                    config_hashes.add(str(paired_payload["config_hash"]))
+                if paired_payload.get("git_sha"):
+                    git_shas.add(str(paired_payload["git_sha"]))
+                retained_count += 1
+    conn.commit()
     if duplicate_count:
         raise ComparisonValidationError(f"{root}: duplicate pairing keys: {duplicate_count}")
-    if not rows:
+    if not retained_count:
         raise ComparisonValidationError(f"{root}: no tile-*.jsonl rows found")
 
-    config_hashes = {
-        str(row["config_hash"])
-        for row in rows.values()
-        if row.get("config_hash")
-    }
-    git_shas = {
-        str(row["git_sha"])
-        for row in rows.values()
-        if row.get("git_sha")
-    }
     for summary in _summary_payloads(root):
         if summary.get("config_hash"):
             config_hashes.add(str(summary["config_hash"]))
@@ -157,10 +204,13 @@ def _load_run(root: Path, *, ew_model: str) -> RunRows:
     return RunRows(
         root=root,
         ew_model=ew_model,
-        rows=rows,
+        table_name=table_name,
+        row_count=retained_count,
         config_hashes=tuple(sorted(config_hashes)),
         git_shas=tuple(sorted(git_shas)),
         scan_plan=scan_plan,
+        r_values=tuple(_sqlite_sorted_unique(conn, table_name, "r")),
+        mkk_tev_values=tuple(_sqlite_sorted_unique(conn, table_name, "mkk_tev")),
     )
 
 
@@ -200,38 +250,147 @@ def _normalize_row(raw: Mapping[str, Any], *, path: Path, line_no: int) -> dict[
     }
 
 
+def _paired_payload(row: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "r": row["r"],
+        "mkk_tev": row["mkk_tev"],
+        "mkk_gev": row["mkk_gev"],
+        "draw_seed": row["draw_seed"],
+        "tile_id": row["tile_id"],
+        "draw_id": row["draw_id"],
+        "skipped": row["skipped"],
+        "skip_reason": row["skip_reason"],
+        "survives_strict": row["survives_strict"],
+        "survives_inclusive": row["survives_inclusive"],
+        "excluded_by_rigorous": row["excluded_by_rigorous"],
+        "excluded_by_proxy": row["excluded_by_proxy"],
+        "hard_not_evaluated": row["hard_not_evaluated"],
+        "config_hash": row["config_hash"],
+        "git_sha": row["git_sha"],
+    }
+
+
+def _create_run_table(conn: sqlite3.Connection, table_name: str) -> None:
+    table = _sql_table(table_name)
+    conn.execute(
+        f"""
+        CREATE TABLE {table} (
+            r REAL NOT NULL,
+            mkk_tev REAL NOT NULL,
+            draw_seed INTEGER NOT NULL,
+            ordinal INTEGER NOT NULL,
+            paired_json TEXT NOT NULL,
+            veto_json TEXT NOT NULL,
+            constraint_json TEXT NOT NULL,
+            PRIMARY KEY (r, mkk_tev, draw_seed)
+        )
+        """
+    )
+    conn.execute(f"CREATE INDEX {table_name}_draw_seed_ordinal ON {table} (draw_seed, ordinal)")
+
+
+def _sql_table(table_name: str) -> str:
+    if table_name not in RUN_TABLES:
+        raise ValueError(f"unexpected run table: {table_name}")
+    return f'"{table_name}"'
+
+
+def _sqlite_sorted_unique(
+    conn: sqlite3.Connection,
+    table_name: str,
+    column_name: str,
+) -> list[float]:
+    if column_name not in {"r", "mkk_tev"}:
+        raise ValueError(f"unexpected grid column: {column_name}")
+    table = _sql_table(table_name)
+    return [
+        float(row[0])
+        for row in conn.execute(f"SELECT DISTINCT {column_name} FROM {table} ORDER BY {column_name}")
+    ]
+
+
+def _json_compact(payload: Any) -> str:
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+
 def _validate_pairing(
-    minimal_rows: Mapping[tuple[float, float, int], Mapping[str, Any]],
-    custodial_rows: Mapping[tuple[float, float, int], Mapping[str, Any]],
+    conn: sqlite3.Connection,
+    minimal: RunRows,
+    custodial: RunRows,
 ) -> dict[str, Any]:
-    minimal_keys = set(minimal_rows)
-    custodial_keys = set(custodial_rows)
-    minimal_only = minimal_keys - custodial_keys
-    custodial_only = custodial_keys - minimal_keys
-    minimal_seed_groups = {
-        int(row["draw_seed"]): (float(row["r"]), float(row["mkk_tev"]))
-        for row in minimal_rows.values()
-    }
-    custodial_seed_groups = {
-        int(row["draw_seed"]): (float(row["r"]), float(row["mkk_tev"]))
-        for row in custodial_rows.values()
-    }
-    seed_group_mismatches = sum(
-        1
-        for seed in set(minimal_seed_groups) & set(custodial_seed_groups)
-        if minimal_seed_groups[seed] != custodial_seed_groups[seed]
+    minimal_table = _sql_table(minimal.table_name)
+    custodial_table = _sql_table(custodial.table_name)
+    join_predicate = _join_predicate("m", "c")
+    paired_rows = _sqlite_count(
+        conn,
+        f"""
+        SELECT COUNT(*)
+        FROM {minimal_table} AS m
+        JOIN {custodial_table} AS c ON {join_predicate}
+        """,
+    )
+    minimal_only = _sqlite_count(
+        conn,
+        f"""
+        SELECT COUNT(*)
+        FROM {minimal_table} AS m
+        WHERE NOT EXISTS (
+            SELECT 1 FROM {custodial_table} AS c WHERE {join_predicate}
+        )
+        """,
+    )
+    custodial_only = _sqlite_count(
+        conn,
+        f"""
+        SELECT COUNT(*)
+        FROM {custodial_table} AS c
+        WHERE NOT EXISTS (
+            SELECT 1 FROM {minimal_table} AS m WHERE {join_predicate}
+        )
+        """,
+    )
+    seed_group_mismatches = _sqlite_count(
+        conn,
+        f"""
+        WITH minimal_latest AS (
+            SELECT rows.draw_seed, rows.r, rows.mkk_tev
+            FROM {minimal_table} AS rows
+            JOIN (
+                SELECT draw_seed, MAX(ordinal) AS ordinal
+                FROM {minimal_table}
+                GROUP BY draw_seed
+            ) AS latest
+              ON rows.draw_seed = latest.draw_seed
+             AND rows.ordinal = latest.ordinal
+        ),
+        custodial_latest AS (
+            SELECT rows.draw_seed, rows.r, rows.mkk_tev
+            FROM {custodial_table} AS rows
+            JOIN (
+                SELECT draw_seed, MAX(ordinal) AS ordinal
+                FROM {custodial_table}
+                GROUP BY draw_seed
+            ) AS latest
+              ON rows.draw_seed = latest.draw_seed
+             AND rows.ordinal = latest.ordinal
+        )
+        SELECT COUNT(*)
+        FROM minimal_latest AS m
+        JOIN custodial_latest AS c ON m.draw_seed = c.draw_seed
+        WHERE m.r != c.r OR m.mkk_tev != c.mkk_tev
+        """,
     )
     validation = {
-        "minimal_rows": len(minimal_rows),
-        "custodial_rows": len(custodial_rows),
-        "paired_rows": len(minimal_keys & custodial_keys),
+        "minimal_rows": minimal.row_count,
+        "custodial_rows": custodial.row_count,
+        "paired_rows": paired_rows,
         "duplicate_key_counts": {
             "minimal": 0,
             "custodial": 0,
         },
         "missing_pair_counts": {
-            "minimal_only": len(minimal_only),
-            "custodial_only": len(custodial_only),
+            "minimal_only": minimal_only,
+            "custodial_only": custodial_only,
             "draw_seed_group_mismatches": seed_group_mismatches,
         },
     }
@@ -243,63 +402,131 @@ def _validate_pairing(
     return validation
 
 
-def _build_artifact_rows(
+def _sqlite_count(conn: sqlite3.Connection, query: str) -> int:
+    return int(conn.execute(query).fetchone()[0])
+
+
+def _join_predicate(left_alias: str, right_alias: str) -> str:
+    return (
+        f"{left_alias}.r = {right_alias}.r "
+        f"AND {left_alias}.mkk_tev = {right_alias}.mkk_tev "
+        f"AND {left_alias}.draw_seed = {right_alias}.draw_seed"
+    )
+
+
+def _iter_paired_draw_rows(
+    conn: sqlite3.Connection,
     minimal: RunRows,
     custodial: RunRows,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
-    paired_rows: list[dict[str, Any]] = []
-    veto_rows: list[dict[str, Any]] = []
+) -> Iterator[dict[str, Any]]:
+    minimal_table = _sql_table(minimal.table_name)
+    custodial_table = _sql_table(custodial.table_name)
+    for min_payload, cust_payload in conn.execute(
+        f"""
+        SELECT m.paired_json, c.paired_json
+        FROM {minimal_table} AS m
+        JOIN {custodial_table} AS c ON {_join_predicate("m", "c")}
+        ORDER BY m.r, m.mkk_tev, m.draw_seed
+        """
+    ):
+        yield _paired_draw_row(json.loads(min_payload), json.loads(cust_payload))
+
+
+def _paired_draw_row(min_row: Mapping[str, Any], cust_row: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "r": min_row["r"],
+        "mkk_tev": min_row["mkk_tev"],
+        "mkk_gev": min_row["mkk_gev"],
+        "draw_seed": min_row["draw_seed"],
+        "tile_id_minimal": min_row["tile_id"],
+        "tile_id_custodial": cust_row["tile_id"],
+        "draw_id_minimal": min_row["draw_id"],
+        "draw_id_custodial": cust_row["draw_id"],
+        "minimal_skipped": min_row["skipped"],
+        "custodial_skipped": cust_row["skipped"],
+        "minimal_skip_reason": min_row["skip_reason"],
+        "custodial_skip_reason": cust_row["skip_reason"],
+        "minimal_survives_strict": min_row["survives_strict"],
+        "minimal_survives_inclusive": min_row["survives_inclusive"],
+        "custodial_survives_strict": cust_row["survives_strict"],
+        "custodial_survives_inclusive": cust_row["survives_inclusive"],
+        "minimal_excluded_by_rigorous": min_row["excluded_by_rigorous"],
+        "minimal_excluded_by_proxy": min_row["excluded_by_proxy"],
+        "custodial_excluded_by_rigorous": cust_row["excluded_by_rigorous"],
+        "custodial_excluded_by_proxy": cust_row["excluded_by_proxy"],
+        "minimal_hard_not_evaluated": min_row["hard_not_evaluated"],
+        "custodial_hard_not_evaluated": cust_row["hard_not_evaluated"],
+        "minimal_config_hash": min_row["config_hash"],
+        "custodial_config_hash": cust_row["config_hash"],
+        "minimal_git_sha": min_row["git_sha"],
+        "custodial_git_sha": cust_row["git_sha"],
+    }
+
+
+def _iter_paired_veto_rows(
+    conn: sqlite3.Connection,
+    minimal: RunRows,
+    custodial: RunRows,
+) -> Iterator[dict[str, Any]]:
+    minimal_table = _sql_table(minimal.table_name)
+    custodial_table = _sql_table(custodial.table_name)
+    for min_payload, cust_payload in conn.execute(
+        f"""
+        SELECT m.veto_json, c.veto_json
+        FROM {minimal_table} AS m
+        JOIN {custodial_table} AS c ON {_join_predicate("m", "c")}
+        ORDER BY m.r, m.mkk_tev, m.draw_seed
+        """
+    ):
+        yield from json.loads(min_payload)
+        yield from json.loads(cust_payload)
+
+
+def _build_aggregate_rows(
+    conn: sqlite3.Connection,
+    minimal: RunRows,
+    custodial: RunRows,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     survival = defaultdict(_survival_counter)
     constraint_veto = defaultdict(_constraint_counter)
+    minimal_table = _sql_table(minimal.table_name)
+    custodial_table = _sql_table(custodial.table_name)
 
-    for key in sorted(minimal.rows):
-        min_row = minimal.rows[key]
-        cust_row = custodial.rows[key]
-        paired_rows.append(
-            {
-                "r": min_row["r"],
-                "mkk_tev": min_row["mkk_tev"],
-                "mkk_gev": min_row["mkk_gev"],
-                "draw_seed": min_row["draw_seed"],
-                "tile_id_minimal": min_row["tile_id"],
-                "tile_id_custodial": cust_row["tile_id"],
-                "draw_id_minimal": min_row["draw_id"],
-                "draw_id_custodial": cust_row["draw_id"],
-                "minimal_skipped": min_row["skipped"],
-                "custodial_skipped": cust_row["skipped"],
-                "minimal_skip_reason": min_row["skip_reason"],
-                "custodial_skip_reason": cust_row["skip_reason"],
-                "minimal_survives_strict": min_row["survives_strict"],
-                "minimal_survives_inclusive": min_row["survives_inclusive"],
-                "custodial_survives_strict": cust_row["survives_strict"],
-                "custodial_survives_inclusive": cust_row["survives_inclusive"],
-                "minimal_excluded_by_rigorous": min_row["excluded_by_rigorous"],
-                "minimal_excluded_by_proxy": min_row["excluded_by_proxy"],
-                "custodial_excluded_by_rigorous": cust_row["excluded_by_rigorous"],
-                "custodial_excluded_by_proxy": cust_row["excluded_by_proxy"],
-                "minimal_hard_not_evaluated": min_row["hard_not_evaluated"],
-                "custodial_hard_not_evaluated": cust_row["hard_not_evaluated"],
-                "minimal_config_hash": min_row["config_hash"],
-                "custodial_config_hash": cust_row["config_hash"],
-                "minimal_git_sha": min_row["git_sha"],
-                "custodial_git_sha": cust_row["git_sha"],
-            }
-        )
+    for min_payload, cust_payload, min_constraints, cust_constraints in conn.execute(
+        f"""
+        SELECT m.paired_json, c.paired_json, m.constraint_json, c.constraint_json
+        FROM {minimal_table} AS m
+        JOIN {custodial_table} AS c ON {_join_predicate("m", "c")}
+        ORDER BY m.r, m.mkk_tev, m.draw_seed
+        """
+    ):
+        min_row = json.loads(min_payload)
+        cust_row = json.loads(cust_payload)
         _accumulate_survival(survival[(min_row["r"], min_row["mkk_tev"])], "minimal", min_row)
         _accumulate_survival(survival[(cust_row["r"], cust_row["mkk_tev"])], "custodial", cust_row)
-        for model, row in (
-            (MINIMAL_RS_EW_MODEL, min_row),
-            (CUSTODIAL_RS_PLR_EW_MODEL, cust_row),
-        ):
-            _accumulate_constraint_vetoes(constraint_veto, model, row)
-            veto_rows.extend(_draw_veto_rows(model, row))
+        for contribution in json.loads(min_constraints):
+            _accumulate_constraint_contribution(
+                constraint_veto,
+                MINIMAL_RS_EW_MODEL,
+                min_row["r"],
+                min_row["mkk_tev"],
+                contribution,
+            )
+        for contribution in json.loads(cust_constraints):
+            _accumulate_constraint_contribution(
+                constraint_veto,
+                CUSTODIAL_RS_PLR_EW_MODEL,
+                cust_row["r"],
+                cust_row["mkk_tev"],
+                contribution,
+            )
 
     survival_rows = [_finalize_survival_row(key, values) for key, values in sorted(survival.items())]
     constraint_rows = [
         _finalize_constraint_row(key, values)
         for key, values in sorted(constraint_veto.items())
     ]
-    return paired_rows, veto_rows, survival_rows, constraint_rows
+    return survival_rows, constraint_rows
 
 
 def _draw_veto_rows(ew_model: str, row: Mapping[str, Any]) -> list[dict[str, Any]]:
@@ -378,22 +605,63 @@ def _accumulate_constraint_vetoes(
     ew_model: str,
     row: Mapping[str, Any],
 ) -> None:
+    for contribution in _constraint_veto_contributions(row):
+        _accumulate_constraint_contribution(
+            aggregates,
+            ew_model,
+            row["r"],
+            row["mkk_tev"],
+            contribution,
+        )
+
+
+def _constraint_veto_contributions(row: Mapping[str, Any]) -> Iterator[dict[str, Any]]:
     for pid, raw_item in dict(row.get("constraints") or {}).items():
         item = dict(raw_item)
         tag = _nullable_str(item.get("tag"))
         severity = _nullable_str(item.get("severity"))
-        key = (ew_model, row["r"], row["mkk_tev"], str(pid), tag, severity)
-        counter = aggregates[key]
-        counter["points"] += 1
-        if item.get("evaluated"):
-            counter["evaluated"] += 1
-        if item.get("active"):
-            counter["active"] += 1
         failed = item.get("passes") is False
-        if failed:
-            counter["failed"] += 1
-        if failed and severity == "HARD" and item.get("evaluated") and tag in {"rigorous", "proxy"}:
-            counter["vetoed"] += 1
+        yield {
+            "constraint_id": str(pid),
+            "tag": tag,
+            "severity": severity,
+            "evaluated": bool(item.get("evaluated")),
+            "active": bool(item.get("active")),
+            "failed": failed,
+            "vetoed": bool(
+                failed
+                and severity == "HARD"
+                and item.get("evaluated")
+                and tag in {"rigorous", "proxy"}
+            ),
+        }
+
+
+def _accumulate_constraint_contribution(
+    aggregates: dict[tuple[str, float, float, str, str | None, str | None], dict[str, int]],
+    ew_model: str,
+    r_value: float,
+    mkk_tev: float,
+    contribution: Mapping[str, Any],
+) -> None:
+    key = (
+        ew_model,
+        r_value,
+        mkk_tev,
+        str(contribution["constraint_id"]),
+        _nullable_str(contribution.get("tag")),
+        _nullable_str(contribution.get("severity")),
+    )
+    counter = aggregates[key]
+    counter["points"] += 1
+    if contribution.get("evaluated"):
+        counter["evaluated"] += 1
+    if contribution.get("active"):
+        counter["active"] += 1
+    if contribution.get("failed"):
+        counter["failed"] += 1
+    if contribution.get("vetoed"):
+        counter["vetoed"] += 1
 
 
 def _finalize_survival_row(
@@ -479,10 +747,8 @@ def _manifest_payload(
             "ew_model": CUSTODIAL_RS_PLR_EW_MODEL,
         },
         "grid": {
-            "r_grid": list(plan.get("r_grid", _sorted_unique(row["r"] for row in minimal.rows.values()))),
-            "mkk_tev": list(
-                plan.get("mkk_tev", _sorted_unique(row["mkk_tev"] for row in minimal.rows.values()))
-            ),
+            "r_grid": list(plan.get("r_grid", minimal.r_values)),
+            "mkk_tev": list(plan.get("mkk_tev", minimal.mkk_tev_values)),
         },
         "seed_contract": {
             "base_seed": plan.get("base_seed"),
@@ -623,9 +889,8 @@ def _scrub_run_identity(value: Any) -> Any:
     return value
 
 
-def _write_paired_draws(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
+def _write_paired_draws(path: Path, rows: Iterable[Mapping[str, Any]]) -> None:
     import pyarrow as pa
-    import pyarrow.parquet as pq
 
     schema = pa.schema(
         [
@@ -657,13 +922,11 @@ def _write_paired_draws(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
             ("custodial_git_sha", pa.string()),
         ]
     )
-    table = pa.Table.from_pylist([dict(row) for row in rows], schema=schema)
-    _atomic_write(path, lambda tmp: pq.write_table(table, tmp, compression="snappy"))
+    _write_parquet_stream(path, rows, schema)
 
 
-def _write_paired_vetoes(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
+def _write_paired_vetoes(path: Path, rows: Iterable[Mapping[str, Any]]) -> None:
     import pyarrow as pa
-    import pyarrow.parquet as pq
 
     schema = pa.schema(
         [
@@ -681,8 +944,35 @@ def _write_paired_vetoes(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
             ("active", pa.bool_()),
         ]
     )
-    table = pa.Table.from_pylist([dict(row) for row in rows], schema=schema)
-    _atomic_write(path, lambda tmp: pq.write_table(table, tmp, compression="snappy"))
+    _write_parquet_stream(path, rows, schema)
+
+
+def _write_parquet_stream(path: Path, rows: Iterable[Mapping[str, Any]], schema: Any) -> None:
+    import pyarrow.parquet as pq
+
+    if PARQUET_CHUNK_ROWS <= 0:
+        raise ValueError("PARQUET_CHUNK_ROWS must be positive")
+
+    def writer(tmp: Path) -> None:
+        batch: list[dict[str, Any]] = []
+        wrote_batch = False
+        with pq.ParquetWriter(tmp, schema, compression="snappy") as parquet_writer:
+            for row in rows:
+                batch.append(dict(row))
+                if len(batch) >= PARQUET_CHUNK_ROWS:
+                    parquet_writer.write_table(_pyarrow_table_from_pylist(batch, schema))
+                    wrote_batch = True
+                    batch = []
+            if batch or not wrote_batch:
+                parquet_writer.write_table(_pyarrow_table_from_pylist(batch, schema))
+
+    _atomic_write(path, writer)
+
+
+def _pyarrow_table_from_pylist(rows: list[dict[str, Any]], schema: Any) -> Any:
+    import pyarrow as pa
+
+    return pa.Table.from_pylist(rows, schema=schema)
 
 
 def _write_csv(path: Path, columns: Sequence[str], rows: Sequence[Mapping[str, Any]]) -> None:
