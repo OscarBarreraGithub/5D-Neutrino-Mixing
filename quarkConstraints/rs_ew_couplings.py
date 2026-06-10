@@ -20,6 +20,8 @@ from .rs_ew_spectrum import (
     DEFAULT_OVERLAP_RTOL,
     RSEWSpectrum,
 )
+from warpConfig.baseParams import V_EWSB
+from warpConfig.wavefuncs import f_IR
 
 
 RS_EW_COUPLINGS_INPUT_BUNDLE_V1 = "quarkConstraints.rs_ew_couplings.inputs.v1"
@@ -60,6 +62,15 @@ DEFAULT_CUSTODIAL_Q_L_REP = "all_gen_Q_L_bidoublet_(2,2)_{2/3}"
 DEFAULT_CUSTODIAL_T_R_REP = "t_R_singlet_(1,1)_{2/3}"
 DEFAULT_CUSTODIAL_B_R_REP = "b_R_elementary"
 DEFAULT_CUSTODIAL_B_R_STRATEGY = "elementary_zero"
+CUSTODIAL_FCNC_PR1_MINIMAL_OFFDIAG = "pr1_minimal_offdiag"
+CUSTODIAL_FCNC_ALL_GEN_BIDOUBLET_PROXY = "all_gen_bidoublet_mass_basis_proxy"
+TOP_PARTNER_LOOP_SOURCE = (
+    "Carena-Ponton-Santiago-Wagner PhysRevD76 035006, arXiv:hep-ph/0701055"
+)
+TOP_PARTNER_LOOP_FORMULA_SET = (
+    "leading_singlet_main_text_plus_bidoublet_vertex; "
+    "full_Teq_Zbbeq_not_reconstructed"
+)
 
 
 @dataclass(frozen=True)
@@ -241,6 +252,146 @@ class RSZbbFermionKKMixing:
                 raise ValueError(f"{name} must be finite")
             object.__setattr__(self, name, value)
         object.__setattr__(self, "metadata", MappingProxyType(dict(self.metadata)))
+
+
+@dataclass(frozen=True)
+class RSCustodialTopPartnerLoopProxy:
+    """Tagged leading top-partner loop proxy for custodial RS."""
+
+    top_partner_loop_mode: str
+    include_top_partner_loops: bool
+    top_partner_loop_magnitudes_computed: bool
+    top_partner_zbb_loop_numerics_included: bool
+    top_partner_t_loop_numerics_included: bool
+    top_partner_loop_components_requested: str
+    top_partner_loop_components_applied: tuple[str, ...]
+    top_partner_loop_components_deferred: tuple[str, ...]
+    top_partner_loop_t_sign: str
+    top_partner_loop_t_source: str
+    top_partner_loop_sign_convention: str
+    top_partner_delta_t_singlet_magnitude: float
+    top_partner_delta_t_override: float | None
+    top_partner_delta_t_loop_applied: float
+    top_partner_delta_g_L_b_singlet: float
+    top_partner_delta_g_L_b_bidoublet_vertex: float
+    top_partner_delta_g_L_b_loop_applied: float
+    top_partner_delta_g_R_b_loop: float
+    top_partner_delta_g_R_b_loop_reason: str
+    top_partner_loop_inputs: Mapping[str, Any]
+    top_partner_loop_mass_ratios: Mapping[str, Any]
+    top_partner_loop_mixing_scales: Mapping[str, Any]
+
+    def __post_init__(self) -> None:
+        for name in (
+            "top_partner_delta_t_singlet_magnitude",
+            "top_partner_delta_t_loop_applied",
+            "top_partner_delta_g_L_b_singlet",
+            "top_partner_delta_g_L_b_bidoublet_vertex",
+            "top_partner_delta_g_L_b_loop_applied",
+            "top_partner_delta_g_R_b_loop",
+        ):
+            value = float(getattr(self, name))
+            if not math.isfinite(value):
+                raise ValueError(f"{name} must be finite")
+            object.__setattr__(self, name, value)
+        if self.top_partner_delta_t_override is not None:
+            override = float(self.top_partner_delta_t_override)
+            if not math.isfinite(override):
+                raise ValueError("top_partner_delta_t_override must be finite")
+            object.__setattr__(self, "top_partner_delta_t_override", override)
+        object.__setattr__(
+            self,
+            "top_partner_loop_components_applied",
+            tuple(str(item) for item in self.top_partner_loop_components_applied),
+        )
+        object.__setattr__(
+            self,
+            "top_partner_loop_components_deferred",
+            tuple(str(item) for item in self.top_partner_loop_components_deferred),
+        )
+        object.__setattr__(
+            self,
+            "top_partner_loop_inputs",
+            MappingProxyType(dict(self.top_partner_loop_inputs)),
+        )
+        object.__setattr__(
+            self,
+            "top_partner_loop_mass_ratios",
+            MappingProxyType(dict(self.top_partner_loop_mass_ratios)),
+        )
+        object.__setattr__(
+            self,
+            "top_partner_loop_mixing_scales",
+            MappingProxyType(dict(self.top_partner_loop_mixing_scales)),
+        )
+
+    @property
+    def top_partner_loop_numerics_included(self) -> bool:
+        """EW001-facing alias: true only when a ``Delta T`` loop is applied."""
+        return bool(self.top_partner_t_loop_numerics_included)
+
+    def metadata(self) -> dict[str, Any]:
+        """Return serializable diagnostic metadata for the coupling bundle."""
+        return {
+            "top_partner_loop_mode": str(self.top_partner_loop_mode),
+            "include_top_partner_loops": bool(self.include_top_partner_loops),
+            "top_partner_loop_magnitudes_computed": bool(
+                self.top_partner_loop_magnitudes_computed
+            ),
+            "top_partner_zbb_loop_numerics_included": bool(
+                self.top_partner_zbb_loop_numerics_included
+            ),
+            "top_partner_t_loop_numerics_included": bool(
+                self.top_partner_t_loop_numerics_included
+            ),
+            "top_partner_loop_numerics_included": bool(
+                self.top_partner_loop_numerics_included
+            ),
+            "top_partner_loop_source": TOP_PARTNER_LOOP_SOURCE,
+            "top_partner_loop_formula_set": TOP_PARTNER_LOOP_FORMULA_SET,
+            "top_partner_loop_components_requested": str(
+                self.top_partner_loop_components_requested
+            ),
+            "top_partner_loop_components_applied": list(
+                self.top_partner_loop_components_applied
+            ),
+            "top_partner_loop_components_deferred": list(
+                self.top_partner_loop_components_deferred
+            ),
+            "top_partner_loop_t_sign": str(self.top_partner_loop_t_sign),
+            "top_partner_loop_t_source": str(self.top_partner_loop_t_source),
+            "top_partner_loop_sign_convention": str(
+                self.top_partner_loop_sign_convention
+            ),
+            "top_partner_loop_exact_Teq_Zbbeq_included": False,
+            "top_partner_loop_proxy_status": "proxy_not_full_custodian_spectrum",
+            "top_partner_delta_t_singlet_magnitude": float(
+                self.top_partner_delta_t_singlet_magnitude
+            ),
+            "top_partner_delta_t_override": self.top_partner_delta_t_override,
+            "top_partner_delta_t_loop_applied": float(
+                self.top_partner_delta_t_loop_applied
+            ),
+            "top_partner_delta_g_L_b_singlet": float(
+                self.top_partner_delta_g_L_b_singlet
+            ),
+            "top_partner_delta_g_L_b_bidoublet_vertex": float(
+                self.top_partner_delta_g_L_b_bidoublet_vertex
+            ),
+            "top_partner_delta_g_L_b_loop_applied": float(
+                self.top_partner_delta_g_L_b_loop_applied
+            ),
+            "top_partner_delta_g_R_b_loop": float(self.top_partner_delta_g_R_b_loop),
+            "top_partner_delta_g_R_b_loop_reason": str(
+                self.top_partner_delta_g_R_b_loop_reason
+            ),
+            "top_partner_loop_applied_to_z_delta_g_L_d_22": bool(
+                self.top_partner_zbb_loop_numerics_included
+            ),
+            "top_partner_loop_inputs": dict(self.top_partner_loop_inputs),
+            "top_partner_loop_mass_ratios": dict(self.top_partner_loop_mass_ratios),
+            "top_partner_loop_mixing_scales": dict(self.top_partner_loop_mixing_scales),
+        }
 
 
 @dataclass(frozen=True)
@@ -483,13 +634,20 @@ def build_rs_ew_couplings(
     kappa_b: float = 0.0,
     custodial_PLR_breaking_residual: bool = False,
     include_top_partner_loops: bool = False,
+    top_partner_loop_t_sign: Any | None = None,
+    top_partner_loop_delta_t_override: float | None = None,
+    top_partner_loop_components: str = "defer",
+    top_partner_loop_mass_ratios: Mapping[str, Any] | None = None,
+    top_partner_loop_mixing_scales: Mapping[str, Any] | None = None,
+    custodial_fcnc_mode: str = CUSTODIAL_FCNC_PR1_MINIMAL_OFFDIAG,
+    kappa_fcnc: float = 0.0,
     rotation_unitarity_tolerance: float = 1.0e-8,
 ) -> RSEWMassBasisCouplings:
     """Build Phase-4a RS-EW mass-basis couplings from a quark fit result."""
 
     ew_model = _validate_ew_model(model_label)
-    if include_top_partner_loops:
-        raise ValueError("include_top_partner_loops=True is deferred to PR2")
+    if include_top_partner_loops and ew_model == MINIMAL_RS_EW_MODEL:
+        raise ValueError("include_top_partner_loops=True requires ew_model='custodial_rs_plr'")
     if ew_model == CUSTODIAL_RS_PLR_EW_MODEL:
         _validate_custodial_options(
             qL_rep=qL_rep,
@@ -596,6 +754,17 @@ def build_rs_ew_couplings(
     minimal_z_delta_r_d_full = np.array(z_delta_r_d, dtype=np.complex128, copy=True)
     custodial_metadata: dict[str, Any] | None = None
     if ew_model == CUSTODIAL_RS_PLR_EW_MODEL:
+        top_partner_loop_proxy = _build_custodial_top_partner_loop_proxy(
+            quark_fit_result,
+            spectrum=spectrum,
+            inputs=p,
+            include_top_partner_loops=bool(include_top_partner_loops),
+            top_partner_loop_t_sign=top_partner_loop_t_sign,
+            top_partner_loop_delta_t_override=top_partner_loop_delta_t_override,
+            top_partner_loop_components=str(top_partner_loop_components),
+            top_partner_loop_mass_ratios=top_partner_loop_mass_ratios,
+            top_partner_loop_mixing_scales=top_partner_loop_mixing_scales,
+        )
         z_delta_l_d, z_delta_r_d, custodial_metadata = _apply_custodial_rs_plr_proxy(
             z_delta_l_d=z_delta_l_d,
             z_delta_r_d=z_delta_r_d,
@@ -610,6 +779,9 @@ def build_rs_ew_couplings(
             kappa_b=float(kappa_b),
             custodial_PLR_breaking_residual=bool(custodial_PLR_breaking_residual),
             include_top_partner_loops=bool(include_top_partner_loops),
+            top_partner_loop_proxy=top_partner_loop_proxy,
+            custodial_fcnc_mode=str(custodial_fcnc_mode),
+            kappa_fcnc=float(kappa_fcnc),
         )
     lepton_matching_status: Mapping[str, Any]
     if lepton_mass_basis_couplings is None:
@@ -881,6 +1053,421 @@ def _validate_custodial_options(
         raise ValueError("kappa_b must be finite")
 
 
+def _build_custodial_top_partner_loop_proxy(
+    quark_fit_result: Any,
+    *,
+    spectrum: RSEWSpectrum,
+    inputs: RSEWNeutralCurrentInputs,
+    include_top_partner_loops: bool,
+    top_partner_loop_t_sign: Any | None,
+    top_partner_loop_delta_t_override: float | None,
+    top_partner_loop_components: str,
+    top_partner_loop_mass_ratios: Mapping[str, Any] | None,
+    top_partner_loop_mixing_scales: Mapping[str, Any] | None,
+) -> RSCustodialTopPartnerLoopProxy:
+    requested = str(top_partner_loop_components).strip()
+    allowed = {"defer", "singlet", "bidoublet_vertex", "singlet_plus_bidoublet_vertex"}
+    if requested not in allowed:
+        raise ValueError(f"unsupported top_partner_loop_components {requested!r}")
+
+    ratios = _top_partner_loop_knobs(
+        top_partner_loop_mass_ratios,
+        defaults={"rho_t": 1.0, "rho_q": 1.0, "rho_chi": 1.0},
+        name="top_partner_loop_mass_ratios",
+    )
+    mixings = _top_partner_loop_knobs(
+        top_partner_loop_mixing_scales,
+        defaults={"xi_s": 1.0, "xi_q": 1.0, "xi_chi": 1.0},
+        name="top_partner_loop_mixing_scales",
+    )
+    override = _finite_or_none(
+        top_partner_loop_delta_t_override,
+        "top_partner_loop_delta_t_override",
+    )
+    sign = _normalize_top_partner_t_sign(top_partner_loop_t_sign)
+    if bool(include_top_partner_loops) and sign == -1 and override is None:
+        raise ValueError(
+            "top_partner_loop_t_sign=-1 requires a finite "
+            "top_partner_loop_delta_t_override"
+        )
+
+    if not bool(include_top_partner_loops) or requested == "defer":
+        return RSCustodialTopPartnerLoopProxy(
+            top_partner_loop_mode="deferred",
+            include_top_partner_loops=bool(include_top_partner_loops),
+            top_partner_loop_magnitudes_computed=False,
+            top_partner_zbb_loop_numerics_included=False,
+            top_partner_t_loop_numerics_included=False,
+            top_partner_loop_components_requested=requested,
+            top_partner_loop_components_applied=(),
+            top_partner_loop_components_deferred=(),
+            top_partner_loop_t_sign=_top_partner_sign_metadata(sign, override),
+            top_partner_loop_t_source="not_applicable_vertex_only",
+            top_partner_loop_sign_convention="",
+            top_partner_delta_t_singlet_magnitude=0.0,
+            top_partner_delta_t_override=override,
+            top_partner_delta_t_loop_applied=0.0,
+            top_partner_delta_g_L_b_singlet=0.0,
+            top_partner_delta_g_L_b_bidoublet_vertex=0.0,
+            top_partner_delta_g_L_b_loop_applied=0.0,
+            top_partner_delta_g_R_b_loop=0.0,
+            top_partner_delta_g_R_b_loop_reason=(
+                "not present in leading Carena Zb_L proxy"
+            ),
+            top_partner_loop_inputs={},
+            top_partner_loop_mass_ratios={
+                **ratios,
+                "ratio_denominator": "physical_M_KK",
+            },
+            top_partner_loop_mixing_scales=mixings,
+        )
+
+    bulk_state = getattr(quark_fit_result, "bulk_state")
+    c_q = _real_triplet_from_attr(bulk_state, "c_Q")
+    c_u = _real_triplet_from_attr(bulk_state, "c_u")
+    f_q = _profile_triplet_from_attr_or_fallback(
+        bulk_state,
+        "F_Q",
+        c_q,
+        spectrum=spectrum,
+    )
+    f_u = _profile_triplet_from_attr_or_fallback(
+        bulk_state,
+        "F_u",
+        c_u,
+        spectrum=spectrum,
+    )
+    masses_up = _real_triplet_for_top_partner_loop(quark_fit_result, "masses_up")
+    m_t = float(masses_up[2])
+    if m_t <= 0.0:
+        raise ValueError("masses_up[2] must be positive for custodial top-partner loops")
+
+    m_kk = _positive_float(getattr(spectrum, "kk_ew_mass_gev"), "spectrum.kk_ew_mass_gev")
+    lambda_ir = _positive_float(getattr(spectrum, "lambda_ir_gev"), "spectrum.lambda_ir_gev")
+    warp_log = _positive_float(getattr(spectrum, "warp_log"), "spectrum.warp_log")
+    epsilon = _positive_float(getattr(spectrum, "epsilon"), "spectrum.epsilon")
+    sin2 = float(inputs.sin2_theta_w)
+    c_w2 = 1.0 - sin2
+    if c_w2 <= 0.0:
+        raise ValueError("inputs.sin2_theta_w must be less than one")
+    m_z = _positive_float(inputs.m_z_gev, "inputs.m_z_gev")
+    m_w = float(m_z * math.sqrt(c_w2))
+    alpha = _positive_float(inputs.alpha_em_mz, "inputs.alpha_em_mz")
+    f_q3 = _positive_float(f_q[2], "F_Q3")
+    f_u3 = _positive_float(f_u[2], "F_u3")
+    y_t_eff = float(m_t / (2.0 * float(V_EWSB) * f_q3 * f_u3))
+    if not math.isfinite(y_t_eff) or y_t_eff <= 0.0:
+        raise ValueError("Y_t_eff must be positive and finite")
+
+    m_t_partner = float(ratios["rho_t"] * m_kk)
+    m_q_partner = float(ratios["rho_q"] * m_kk)
+    m_chi_partner = float(ratios["rho_chi"] * m_kk)
+    m_q0t_t = float(mixings["xi_s"] * m_t / f_u3)
+    m_qt_t = float(mixings["xi_q"] * m_t / f_q3)
+    m_chid_t = float(mixings["xi_chi"] * m_t / f_q3)
+    for name, value in (
+        ("M_t", m_t_partner),
+        ("M_q", m_q_partner),
+        ("M_chi", m_chi_partner),
+        ("m_q0t_t", m_q0t_t),
+        ("m_qt_t", m_qt_t),
+        ("m_chid_t", m_chid_t),
+    ):
+        _positive_float(value, name)
+
+    t_top = float(3.0 * m_t * m_t / (16.0 * math.pi * sin2 * c_w2 * m_z * m_z))
+    log_t = math.log((m_t_partner * m_t_partner) / (m_t * m_t))
+    delta_t_singlet = float(
+        t_top
+        * (2.0 * m_q0t_t * m_q0t_t / (m_t_partner * m_t_partner))
+        * (log_t - 1.0 + (m_q0t_t * m_q0t_t) / (2.0 * m_t * m_t))
+    )
+    delta_g_singlet = float(
+        alpha
+        / (16.0 * math.pi * sin2 * m_w * m_w)
+        * (m_q0t_t**4 / (m_t_partner * m_t_partner))
+        * (
+            1.0
+            + 2.0
+            * m_t
+            * m_t
+            / (m_q0t_t * m_q0t_t)
+            * (log_t - 1.0)
+        )
+    )
+    delta_g_bidoublet = float(
+        alpha
+        / (32.0 * math.pi * sin2 * m_w * m_w)
+        * m_t
+        * m_t
+        * (
+            (m_qt_t * m_qt_t / (m_q_partner * m_q_partner))
+            * math.log((m_q_partner * m_q_partner) / (m_t * m_t))
+            - (m_chid_t * m_chid_t / (m_chi_partner * m_chi_partner))
+            * math.log((m_chi_partner * m_chi_partner) / (m_t * m_t))
+        )
+    )
+    for name, value in (
+        ("top_partner_delta_t_singlet_magnitude", delta_t_singlet),
+        ("top_partner_delta_g_L_b_singlet", delta_g_singlet),
+        ("top_partner_delta_g_L_b_bidoublet_vertex", delta_g_bidoublet),
+    ):
+        if not math.isfinite(value):
+            raise ValueError(f"{name} must be finite")
+
+    requested_has_singlet = requested in {"singlet", "singlet_plus_bidoublet_vertex"}
+    requested_has_bidoublet = requested in {
+        "bidoublet_vertex",
+        "singlet_plus_bidoublet_vertex",
+    }
+    t_input_valid = bool(override is not None or sign == +1)
+    if requested_has_singlet and not t_input_valid:
+        deferred = ("singlet",)
+        if requested_has_bidoublet:
+            deferred = ("singlet", "bidoublet_vertex")
+        return RSCustodialTopPartnerLoopProxy(
+            top_partner_loop_mode="computed_not_applied_missing_t_input",
+            include_top_partner_loops=True,
+            top_partner_loop_magnitudes_computed=True,
+            top_partner_zbb_loop_numerics_included=False,
+            top_partner_t_loop_numerics_included=False,
+            top_partner_loop_components_requested=requested,
+            top_partner_loop_components_applied=(),
+            top_partner_loop_components_deferred=deferred,
+            top_partner_loop_t_sign="None",
+            top_partner_loop_t_source="missing_t_input_not_applied",
+            top_partner_loop_sign_convention="",
+            top_partner_delta_t_singlet_magnitude=delta_t_singlet,
+            top_partner_delta_t_override=override,
+            top_partner_delta_t_loop_applied=0.0,
+            top_partner_delta_g_L_b_singlet=delta_g_singlet,
+            top_partner_delta_g_L_b_bidoublet_vertex=delta_g_bidoublet,
+            top_partner_delta_g_L_b_loop_applied=0.0,
+            top_partner_delta_g_R_b_loop=0.0,
+            top_partner_delta_g_R_b_loop_reason=(
+                "not present in leading Carena Zb_L proxy"
+            ),
+            top_partner_loop_inputs=_top_partner_loop_inputs_metadata(
+                m_t=m_t,
+                c_q3=float(c_q[2]),
+                f_q3=f_q3,
+                c_u3=float(c_u[2]),
+                f_u3=f_u3,
+                y_t_eff=y_t_eff,
+                m_z=m_z,
+                m_w=m_w,
+                alpha=alpha,
+                sin2=sin2,
+                c_w2=c_w2,
+                m_kk=m_kk,
+                lambda_ir=lambda_ir,
+                warp_log=warp_log,
+            ),
+            top_partner_loop_mass_ratios={
+                **ratios,
+                "ratio_denominator": "physical_M_KK",
+            },
+            top_partner_loop_mixing_scales=mixings,
+        )
+
+    applied: list[str] = []
+    deferred_list: list[str] = []
+    delta_g_applied = 0.0
+    if requested_has_singlet:
+        delta_g_applied += delta_g_singlet
+        applied.append("singlet")
+    if requested_has_bidoublet:
+        delta_g_applied += delta_g_bidoublet
+        applied.append("bidoublet_vertex")
+
+    if override is not None:
+        delta_t_applied = float(override)
+        t_included = True
+        t_source = "explicit_numeric_override"
+    elif requested_has_singlet and sign == +1:
+        delta_t_applied = delta_t_singlet
+        t_included = True
+        t_source = "explicit_singlet_positive"
+    else:
+        delta_t_applied = 0.0
+        t_included = False
+        t_source = "not_applicable_vertex_only"
+
+    zbb_included = bool(applied)
+    sign_meta = _top_partner_sign_metadata(sign, override)
+    sign_convention = (
+        "Carena leading Zbb shifts are additive in repo g_L; Delta T uses "
+        "positive singlet sign or explicit numeric override only"
+        if (zbb_included or t_included)
+        else ""
+    )
+    return RSCustodialTopPartnerLoopProxy(
+        top_partner_loop_mode="carena_leading_proxy_applied",
+        include_top_partner_loops=True,
+        top_partner_loop_magnitudes_computed=True,
+        top_partner_zbb_loop_numerics_included=zbb_included,
+        top_partner_t_loop_numerics_included=t_included,
+        top_partner_loop_components_requested=requested,
+        top_partner_loop_components_applied=tuple(applied),
+        top_partner_loop_components_deferred=tuple(deferred_list),
+        top_partner_loop_t_sign=sign_meta,
+        top_partner_loop_t_source=t_source,
+        top_partner_loop_sign_convention=sign_convention,
+        top_partner_delta_t_singlet_magnitude=delta_t_singlet,
+        top_partner_delta_t_override=override,
+        top_partner_delta_t_loop_applied=delta_t_applied,
+        top_partner_delta_g_L_b_singlet=delta_g_singlet,
+        top_partner_delta_g_L_b_bidoublet_vertex=delta_g_bidoublet,
+        top_partner_delta_g_L_b_loop_applied=delta_g_applied,
+        top_partner_delta_g_R_b_loop=0.0,
+        top_partner_delta_g_R_b_loop_reason=(
+            "not present in leading Carena Zb_L proxy"
+        ),
+        top_partner_loop_inputs=_top_partner_loop_inputs_metadata(
+            m_t=m_t,
+            c_q3=float(c_q[2]),
+            f_q3=f_q3,
+            c_u3=float(c_u[2]),
+            f_u3=f_u3,
+            y_t_eff=y_t_eff,
+            m_z=m_z,
+            m_w=m_w,
+            alpha=alpha,
+            sin2=sin2,
+            c_w2=c_w2,
+            m_kk=m_kk,
+            lambda_ir=lambda_ir,
+            warp_log=warp_log,
+        ),
+        top_partner_loop_mass_ratios={
+            **ratios,
+            "ratio_denominator": "physical_M_KK",
+        },
+        top_partner_loop_mixing_scales=mixings,
+    )
+
+
+def _finite_or_none(value: Any, name: str) -> float | None:
+    if value is None:
+        return None
+    number = float(value)
+    if not math.isfinite(number):
+        raise ValueError(f"{name} must be finite")
+    return number
+
+
+def _top_partner_loop_knobs(
+    values: Mapping[str, Any] | None,
+    *,
+    defaults: Mapping[str, float],
+    name: str,
+) -> dict[str, float]:
+    resolved = {str(key): float(value) for key, value in defaults.items()}
+    if values is not None:
+        unknown = set(values) - set(defaults)
+        if unknown:
+            raise ValueError(f"{name} contains unsupported keys: {sorted(unknown)}")
+        for key, value in values.items():
+            resolved[str(key)] = float(value)
+    for key, value in resolved.items():
+        if not math.isfinite(value) or value <= 0.0:
+            raise ValueError(f"{name}.{key} must be positive and finite")
+    return resolved
+
+
+def _normalize_top_partner_t_sign(value: Any | None) -> int | None:
+    if value is None:
+        return None
+    if isinstance(value, str):
+        cleaned = value.strip()
+        if cleaned in {"+1", "1"}:
+            return +1
+        if cleaned == "-1":
+            return -1
+    number = float(value)
+    if number == 1.0:
+        return +1
+    if number == -1.0:
+        return -1
+    raise ValueError("top_partner_loop_t_sign must be +1, -1, or None")
+
+
+def _top_partner_sign_metadata(sign: int | None, override: float | None) -> str:
+    if override is not None:
+        if sign == -1:
+            return "-1"
+        return "override"
+    if sign == +1:
+        return "+1"
+    if sign == -1:
+        return "-1"
+    return "None"
+
+
+def _profile_triplet_from_attr_or_fallback(
+    bulk_state: Any,
+    attr_name: str,
+    c_values: np.ndarray,
+    *,
+    spectrum: RSEWSpectrum,
+) -> np.ndarray:
+    if hasattr(bulk_state, attr_name):
+        values = _readonly_real_triplet(getattr(bulk_state, attr_name), attr_name)
+    else:
+        values = _readonly_real_triplet(
+            f_IR(c_values, _positive_float(getattr(spectrum, "epsilon"), "spectrum.epsilon")),
+            attr_name,
+        )
+    if np.any(values <= 0.0):
+        raise ValueError(f"{attr_name} must be strictly positive")
+    return values
+
+
+def _real_triplet_for_top_partner_loop(source: Any, name: str) -> np.ndarray:
+    try:
+        values = getattr(source, name)
+    except AttributeError as exc:
+        raise ValueError(f"{name} is required for custodial top-partner loops") from exc
+    return _readonly_real_triplet(values, name).copy()
+
+
+def _top_partner_loop_inputs_metadata(
+    *,
+    m_t: float,
+    c_q3: float,
+    f_q3: float,
+    c_u3: float,
+    f_u3: float,
+    y_t_eff: float,
+    m_z: float,
+    m_w: float,
+    alpha: float,
+    sin2: float,
+    c_w2: float,
+    m_kk: float,
+    lambda_ir: float,
+    warp_log: float,
+) -> dict[str, float | str]:
+    return {
+        "m_top_gev": float(m_t),
+        "c_Q3": float(c_q3),
+        "F_Q3": float(f_q3),
+        "c_u3": float(c_u3),
+        "F_u3": float(f_u3),
+        "Y_t_eff": float(y_t_eff),
+        "V_EWSB_gev": float(V_EWSB),
+        "m_Z_gev": float(m_z),
+        "m_W_gev": float(m_w),
+        "alpha_em_mz": float(alpha),
+        "sin2_theta_w": float(sin2),
+        "cW2": float(c_w2),
+        "M_KK_gev": float(m_kk),
+        "lambda_ir_gev": float(lambda_ir),
+        "warp_log": float(warp_log),
+        "M_KK_convention": "physical first electroweak gauge KK mass",
+    }
+
+
 def _custodial_protected_down_left_mask(protect_scope: Any) -> np.ndarray:
     mask = np.zeros((3, 3), dtype=bool)
     if isinstance(protect_scope, str):
@@ -938,6 +1525,9 @@ def _apply_custodial_rs_plr_proxy(
     kappa_b: float,
     custodial_PLR_breaking_residual: bool,
     include_top_partner_loops: bool,
+    top_partner_loop_proxy: RSCustodialTopPartnerLoopProxy,
+    custodial_fcnc_mode: str,
+    kappa_fcnc: float,
 ) -> tuple[np.ndarray, np.ndarray, dict[str, Any]]:
     mask = _custodial_protected_down_left_mask(protect_scope)
     protected_indices = [
@@ -965,6 +1555,57 @@ def _apply_custodial_rs_plr_proxy(
     if str(bR_strategy) == DEFAULT_CUSTODIAL_B_R_STRATEGY:
         right[2, 2] = 0.0j
 
+    fcnc_mode = str(custodial_fcnc_mode)
+    if fcnc_mode not in {
+        CUSTODIAL_FCNC_PR1_MINIMAL_OFFDIAG,
+        CUSTODIAL_FCNC_ALL_GEN_BIDOUBLET_PROXY,
+    }:
+        raise ValueError(f"unsupported custodial_fcnc_mode {custodial_fcnc_mode!r}")
+    kappa_fcnc_value = float(kappa_fcnc)
+    if not math.isfinite(kappa_fcnc_value):
+        raise ValueError("kappa_fcnc must be finite")
+    fcnc_metadata: dict[str, Any] = {}
+    if fcnc_mode == CUSTODIAL_FCNC_ALL_GEN_BIDOUBLET_PROXY:
+        before_left = np.array(left, dtype=np.complex128, copy=True)
+        offdiag_mask = ~np.eye(3, dtype=bool)
+        left[offdiag_mask] = 0.0j
+        residual_matrix = np.zeros((3, 3), dtype=np.complex128)
+        residual_matrix[offdiag_mask] = (
+            kappa_fcnc_value / volume_log * minimal_z_delta_l_d_full[offdiag_mask]
+        )
+        left[offdiag_mask] = residual_matrix[offdiag_mask]
+        fcnc_metadata = {
+            "custodial_fcnc_modeling": "all_gen_bidoublet_mass_basis_proxy",
+            "custodial_fcnc_mode": CUSTODIAL_FCNC_ALL_GEN_BIDOUBLET_PROXY,
+            "custodial_fcnc_basis": "all_gen_bidoublet_mass_basis",
+            "custodial_fcnc_leading_PLR_zeroed": True,
+            "custodial_fcnc_residual_source": (
+                "kappa_fcnc*(1/L)*minimal_z_delta_l_d_full[i,j]"
+            ),
+            "custodial_fcnc_residual_applied": bool(kappa_fcnc_value != 0.0),
+            "custodial_fcnc_rh_status": (
+                "right_handed_down_offdiagonal_kept_minimal"
+            ),
+            "kappa_fcnc": float(kappa_fcnc_value),
+            "minimal_z_delta_l_d_full_offdiag": _offdiag_metadata(
+                minimal_z_delta_l_d_full
+            ),
+            "minimal_z_delta_r_d_full_offdiag": _offdiag_metadata(
+                minimal_z_delta_r_d_full
+            ),
+            "custodial_z_delta_l_d_offdiag_before_after": {
+                "before": _offdiag_metadata(before_left),
+                "after": _offdiag_metadata(left),
+            },
+        }
+
+    z_delta_g_L_d_tree_pr1_b_before_top_partner = complex(left[2, 2])
+    if bool(top_partner_loop_proxy.top_partner_zbb_loop_numerics_included):
+        left[2, 2] += complex(
+            top_partner_loop_proxy.top_partner_delta_g_L_b_loop_applied,
+            0.0,
+        )
+
     left = _hermitian(left)
     right = _hermitian(right)
     omissions = {
@@ -973,6 +1614,14 @@ def _apply_custodial_rs_plr_proxy(
         "exact_NC_mixing": False,
         "BKT": False,
     }
+    omission_details = {
+        "SU2_R_tower": "not_included_in_PR2_proxy",
+        "custodian_spectrum": "not_inferred_full_spectrum_absent",
+        "exact_NC_mixing": "not_reconstructed",
+        "BKT": "not_included",
+        "full_Teq_Zbbeq_loop_matching": "not_reconstructed",
+    }
+    loop_metadata = top_partner_loop_proxy.metadata()
     metadata = {
         "ew_model": CUSTODIAL_RS_PLR_EW_MODEL,
         "custodial_protection_included": True,
@@ -997,21 +1646,49 @@ def _apply_custodial_rs_plr_proxy(
         "bR_strategy": str(bR_strategy),
         "bR_elementary_zero_applied": True,
         "include_top_partner_loops": bool(include_top_partner_loops),
-        "top_partner_loops": "deferred",
-        "top_partner_loop_numerics_included": False,
-        "custodial_toppartner_zbL_needs_human": True,
+        "top_partner_loops": (
+            "carena_leading_proxy"
+            if (
+                top_partner_loop_proxy.top_partner_zbb_loop_numerics_included
+                or top_partner_loop_proxy.top_partner_t_loop_numerics_included
+            )
+            else "deferred"
+        ),
+        **loop_metadata,
+        "z_delta_g_L_d_tree_pr1_b_before_top_partner": (
+            z_delta_g_L_d_tree_pr1_b_before_top_partner
+        ),
+        "custodial_toppartner_zbL_needs_human": not bool(
+            top_partner_loop_proxy.top_partner_zbb_loop_numerics_included
+        ),
         "custodial_variant_needs_human": False,
         "custodial_fcnc_modeling": "deferred_PR2_off_diagonal_kept_minimal",
         "custodial_omissions": omissions,
+        "custodial_omission_details": omission_details,
         "SU2_R_tower": False,
         "custodian_spectrum": False,
         "exact_NC_mixing": False,
         "BKT": False,
+        "custodian_spectrum_inferred": False,
+        "exact_top_partner_mass_matrix_included": False,
+        "brane_kinetic_terms_included": False,
+        "full_Teq_Zbbeq_loop_matching_included": False,
         "M_KK_convention": "physical first electroweak gauge KK mass",
         "physical_first_gauge_mass_gev": float(spectrum.kk_ew_mass_gev),
         "lambda_ir_gev": float(spectrum.lambda_ir_gev),
+        **fcnc_metadata,
     }
     return left, right, metadata
+
+
+def _offdiag_metadata(matrix: np.ndarray) -> dict[str, complex]:
+    arr = np.asarray(matrix, dtype=np.complex128)
+    return {
+        f"{i}{j}": complex(arr[i, j])
+        for i in range(3)
+        for j in range(3)
+        if i != j
+    }
 
 
 def _real_triplet_from_attr(source: Any, name: str) -> np.ndarray:
@@ -1387,6 +2064,7 @@ __all__ = [
     "LEPTON_FLAVORS",
     "NEUTRINO_FLAVORS",
     "RSLeptonMassBasisCouplings",
+    "RSCustodialTopPartnerLoopProxy",
     "RSEWMassBasisCouplings",
     "RSEWNeutralCurrentInputs",
     "RSZbbFermionKKMixing",

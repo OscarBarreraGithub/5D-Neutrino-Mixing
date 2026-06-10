@@ -28,9 +28,9 @@ must not be read as a full RS electroweak fit.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import math
-from typing import Mapping
+from typing import Any, Mapping
 
 OBLIQUE_STU_RS_PROXY_V1 = (
     "NEEDS-HUMAN-PHYSICS: EW001 uses an RS oblique proxy, "
@@ -116,6 +116,9 @@ class ObliqueSTUShift:
     rs_volume_log: float
     matching_assumption: str = OBLIQUE_STU_RS_PROXY_V1
     ew_model: str = MINIMAL_RS_EW_MODEL
+    t_tree: float | None = None
+    delta_t_loop: float = 0.0
+    loop_metadata: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         for name in (
@@ -129,8 +132,12 @@ class ObliqueSTUShift:
             "rs_volume_log",
         ):
             _finite(getattr(self, name), name)
+        _finite(self.delta_t_loop, "delta_t_loop")
+        if self.t_tree is not None:
+            _finite(self.t_tree, "t_tree")
         _positive(self.m_kk_gev, "m_kk_gev")
         _validate_ew_model(self.ew_model)
+        object.__setattr__(self, "loop_metadata", dict(self.loop_metadata))
 
 
 @dataclass(frozen=True)
@@ -145,7 +152,7 @@ class ObliqueSTComparison:
     chi2_budget: float
     ratio_to_budget: float
     passes: bool
-    diagnostics: Mapping[str, float | str | tuple[tuple[float, float], tuple[float, float]]]
+    diagnostics: Mapping[str, Any]
 
 
 def minimal_rs_t_coefficient(
@@ -203,6 +210,8 @@ def rs_minimal_oblique_proxy(
     higgs_vev_gev: float = DEFAULT_HIGGS_VEV_GEV,
     sin2_theta_w: float = DEFAULT_SIN2_THETA_W,
     rs_volume_log: float = DEFAULT_RS_VOLUME_LOG,
+    delta_t_loop: float = 0.0,
+    loop_metadata: Mapping[str, Any] | None = None,
 ) -> ObliqueSTUShift:
     """Return the documented RS ``S,T,U`` proxy at ``M_KK``."""
     model = _validate_ew_model(ew_model)
@@ -214,10 +223,18 @@ def rs_minimal_oblique_proxy(
         rs_volume_log=rs_volume_log,
         sin2_theta_w=sin2_theta_w,
     )
+    try:
+        loop_delta = _finite(delta_t_loop, "delta_t_loop")
+    except (TypeError, ValueError) as exc:
+        raise ValueError("delta_t_loop must be finite") from exc
+    loop_meta = {} if loop_metadata is None else dict(loop_metadata)
+    if bool(loop_meta.get("top_partner_loop_numerics_included", False)) and not math.isfinite(loop_delta):
+        raise ValueError("finite delta_t_loop is required when loop metadata says it is included")
     scale = float((vev / mass) ** 2)
+    t_tree = float(coeff_t * scale)
     return ObliqueSTUShift(
         s=float(coeff_s * scale),
-        t=float(coeff_t * scale),
+        t=float(t_tree + loop_delta),
         u=0.0,
         m_kk_gev=float(mass),
         s_coefficient=float(coeff_s),
@@ -226,6 +243,9 @@ def rs_minimal_oblique_proxy(
         sin2_theta_w=float(sin2_theta_w),
         rs_volume_log=float(rs_volume_log),
         ew_model=model,
+        t_tree=t_tree,
+        delta_t_loop=loop_delta,
+        loop_metadata=loop_meta,
     )
 
 
@@ -256,6 +276,8 @@ def evaluate_rs_oblique_proxy(
     higgs_vev_gev: float = DEFAULT_HIGGS_VEV_GEV,
     sin2_theta_w: float = DEFAULT_SIN2_THETA_W,
     rs_volume_log: float = DEFAULT_RS_VOLUME_LOG,
+    delta_t_loop: float = 0.0,
+    loop_metadata: Mapping[str, Any] | None = None,
 ) -> ObliqueSTComparison:
     """Evaluate the documented RS proxy against an ``S,T`` fit ellipse."""
     prediction = rs_minimal_oblique_proxy(
@@ -265,6 +287,8 @@ def evaluate_rs_oblique_proxy(
         higgs_vev_gev=higgs_vev_gev,
         sin2_theta_w=sin2_theta_w,
         rs_volume_log=rs_volume_log,
+        delta_t_loop=delta_t_loop,
+        loop_metadata=loop_metadata,
     )
     chi2, ratio, budget, passes = compare_oblique_st_to_fit(
         s=prediction.s,
@@ -285,6 +309,16 @@ def evaluate_rs_oblique_proxy(
         "rho_st": float(fit.rho_st),
         "confidence_level": float(fit.confidence_level),
     }
+    if float(prediction.delta_t_loop) != 0.0 or prediction.loop_metadata:
+        diagnostics.update(
+            {
+                "t_tree_prediction": float(
+                    prediction.t if prediction.t_tree is None else prediction.t_tree
+                ),
+                "t_loop_prediction": float(prediction.delta_t_loop),
+            }
+        )
+        diagnostics.update(dict(prediction.loop_metadata))
     return ObliqueSTComparison(
         prediction=prediction,
         fit=fit,

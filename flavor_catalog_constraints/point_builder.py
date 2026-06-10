@@ -36,7 +36,7 @@ contract test asserts every key a constraint reads is declared here, and
 
 from __future__ import annotations
 
-from typing import Any, Callable
+from typing import Any, Callable, Mapping
 
 from .base import ParameterPoint
 
@@ -118,6 +118,13 @@ def build_from_rs_ew_inputs(
     kappa_b: float = 0.0,
     custodial_PLR_breaking_residual: bool = False,
     include_top_partner_loops: bool = False,
+    top_partner_loop_t_sign: Any | None = None,
+    top_partner_loop_delta_t_override: float | None = None,
+    top_partner_loop_components: str = "defer",
+    top_partner_loop_mass_ratios: Mapping[str, Any] | None = None,
+    top_partner_loop_mixing_scales: Mapping[str, Any] | None = None,
+    custodial_fcnc_mode: str = "pr1_minimal_offdiag",
+    kappa_fcnc: float = 0.0,
     raw: Any = None,
     spectrum: Any | None = None,
     a_of_c: Callable[[float], float] | None = None,
@@ -151,6 +158,13 @@ def build_from_rs_ew_inputs(
         kappa_b=float(kappa_b),
         custodial_PLR_breaking_residual=bool(custodial_PLR_breaking_residual),
         include_top_partner_loops=bool(include_top_partner_loops),
+        top_partner_loop_t_sign=top_partner_loop_t_sign,
+        top_partner_loop_delta_t_override=top_partner_loop_delta_t_override,
+        top_partner_loop_components=str(top_partner_loop_components),
+        top_partner_loop_mass_ratios=top_partner_loop_mass_ratios,
+        top_partner_loop_mixing_scales=top_partner_loop_mixing_scales,
+        custodial_fcnc_mode=str(custodial_fcnc_mode),
+        kappa_fcnc=float(kappa_fcnc),
         spectrum=spectrum,
         a_of_c=a_of_c,
         omega_of_c=omega_of_c,

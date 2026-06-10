@@ -365,6 +365,14 @@ def _resolve_ew_model(point: ParameterPoint) -> str:
     return "minimal_rs"
 
 
+def _resolve_rs_ew_metadata(point: ParameterPoint) -> Mapping[str, Any]:
+    rs_ew_couplings = point.get_extra(_RS_EW_COUPLINGS_EXTRA)
+    metadata = getattr(rs_ew_couplings, "metadata", None)
+    if isinstance(metadata, Mapping):
+        return metadata
+    return {}
+
+
 def _sm_reference_chi2(fit: ObliqueSTFit) -> tuple[float, float, float, bool]:
     return compare_oblique_st_to_fit(s=0.0, t=0.0, fit=fit)
 
@@ -384,6 +392,7 @@ class Constraint:
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
         sm_chi2, _, _, _ = self.sm_reference
         ew_model = _resolve_ew_model(point)
+        rs_ew_metadata = _resolve_rs_ew_metadata(point)
         m_kk_gev, mass_source = _resolve_m_kk_gev(point)
         if m_kk_gev is None:
             return ConstraintResult(
@@ -409,12 +418,23 @@ class Constraint:
                 },
             )
 
+        loop_metadata: Mapping[str, Any] | None = None
+        delta_t_loop: Any = 0.0
+        if (
+            ew_model == "custodial_rs_plr"
+            and bool(rs_ew_metadata.get("top_partner_loop_numerics_included", False))
+        ):
+            loop_metadata = dict(rs_ew_metadata)
+            delta_t_loop = rs_ew_metadata.get("top_partner_delta_t_loop_applied")
+
         try:
             comparison = evaluate_rs_oblique_proxy(
                 m_kk_gev=float(m_kk_gev),
                 fit=self.anchor.fit,
                 s_coefficient=float(self.anchor.warped_s_coefficient.value),
                 ew_model=ew_model,
+                delta_t_loop=delta_t_loop,
+                loop_metadata=loop_metadata,
             )
         except ValueError as exc:
             return ConstraintResult(

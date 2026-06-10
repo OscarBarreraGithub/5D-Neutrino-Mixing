@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Callable
+from typing import Any, Callable, Mapping
 
 import numpy as np
 
@@ -54,6 +54,13 @@ def build_rs_ew_extras(
     kappa_b: float = 0.0,
     custodial_PLR_breaking_residual: bool = False,
     include_top_partner_loops: bool = False,
+    top_partner_loop_t_sign: Any | None = None,
+    top_partner_loop_delta_t_override: float | None = None,
+    top_partner_loop_components: str = "defer",
+    top_partner_loop_mass_ratios: Mapping[str, Any] | None = None,
+    top_partner_loop_mixing_scales: Mapping[str, Any] | None = None,
+    custodial_fcnc_mode: str = "pr1_minimal_offdiag",
+    kappa_fcnc: float = 0.0,
     include_fermion_kk_mixing: bool = False,
     include_higgs_yukawas: bool = True,
     include_loop_dipoles: bool = False,
@@ -78,8 +85,8 @@ def build_rs_ew_extras(
             f"unsupported ew_model {ew_model!r}; supported models are "
             f"{SUPPORTED_RS_EW_MODELS}"
         )
-    if include_top_partner_loops:
-        raise ValueError("include_top_partner_loops=True is deferred to PR2")
+    if include_top_partner_loops and str(ew_model) == "minimal_rs":
+        raise ValueError("include_top_partner_loops=True requires ew_model='custodial_rs_plr'")
     if include_loop_dipoles:
         raise ValueError("loop dipoles are deferred beyond Phase 3a")
 
@@ -142,6 +149,13 @@ def build_rs_ew_extras(
         kappa_b=float(kappa_b),
         custodial_PLR_breaking_residual=bool(custodial_PLR_breaking_residual),
         include_top_partner_loops=bool(include_top_partner_loops),
+        top_partner_loop_t_sign=top_partner_loop_t_sign,
+        top_partner_loop_delta_t_override=top_partner_loop_delta_t_override,
+        top_partner_loop_components=str(top_partner_loop_components),
+        top_partner_loop_mass_ratios=top_partner_loop_mass_ratios,
+        top_partner_loop_mixing_scales=top_partner_loop_mixing_scales,
+        custodial_fcnc_mode=str(custodial_fcnc_mode),
+        kappa_fcnc=float(kappa_fcnc),
     )
     charged_current = None
     higgs_yukawas = None

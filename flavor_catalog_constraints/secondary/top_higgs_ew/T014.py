@@ -525,6 +525,24 @@ class Constraint:
             ),
             "required_parameter_point_extras": [_REQUIRED_EXTRA],
         }
+        metadata = getattr(rs_ew_couplings, "metadata", {})
+        if not isinstance(metadata, Mapping):
+            metadata = {}
+        for key in (
+            "custodial_fcnc_modeling",
+            "custodial_fcnc_mode",
+            "custodial_fcnc_basis",
+            "custodial_fcnc_residual_source",
+            "custodial_fcnc_residual_applied",
+            "custodial_fcnc_leading_PLR_zeroed",
+            "custodial_fcnc_rh_status",
+            "kappa_fcnc",
+            "minimal_z_delta_l_d_full_offdiag",
+            "minimal_z_delta_r_d_full_offdiag",
+            "custodial_z_delta_l_d_offdiag_before_after",
+        ):
+            if key in metadata:
+                diagnostics[key] = metadata[key]
 
         return ConstraintResult(
             process_id=self.process_id,
