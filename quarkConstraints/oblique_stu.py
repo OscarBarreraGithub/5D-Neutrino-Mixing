@@ -16,14 +16,19 @@ minimal-RS scaling, with a tree-level custodial proxy coefficient selected
 when ``ew_model="custodial_rs_plr"``:
 
     Delta S = c_S v^2 / M_KK^2,
-    Delta T_minimal = [pi L / (2 cos^2 theta_W)] v^2 / M_KK^2,
-    Delta T_custodial = [-pi / (4 cos^2 theta_W L)] v^2 / M_KK^2,
+    Delta T_minimal = x_1^2 [pi L / (2 cos^2 theta_W)] v^2 / M_KK^2,
+    Delta T_custodial = -x_1^2 [pi / (4 cos^2 theta_W L)] v^2 / M_KK^2,
     Delta U = 0,
 
-where ``L = k pi r_c`` is the warped volume.  ``c_S`` is supplied by the
-catalog anchor, while the ``T`` coefficient is the standard volume-enhanced
-minimal-RS parametric form.  This proxy is suitable for catalog screening and
-must not be read as a full RS electroweak fit.
+where ``L = k pi r_c`` is the warped volume and ``x_1 ~ 2.4487`` is the first
+gauge-KK Bessel root (``M_KK = x_1 Lambda_IR``).  ``c_S`` is supplied by the
+catalog anchor and is calibrated in the PHYSICAL-M_KK convention.  The
+volume-enhanced ``T`` coefficient ``pi L/(2 cos^2)`` is derived in the
+GEOMETRIC-Lambda_IR convention, so it is multiplied by ``x_1^2`` here to put
+Delta T in the same physical-M_KK convention as Delta S (PLAN §5/M2); without
+this factor Delta T was ~x_1^2 ~ 6 too small (anti-conservative).  This proxy
+is suitable for catalog screening and must not be read as a full RS
+electroweak fit.
 """
 
 from __future__ import annotations
@@ -35,8 +40,11 @@ from typing import Any, Mapping
 OBLIQUE_STU_RS_PROXY_V1 = (
     "NEEDS-HUMAN-PHYSICS: EW001 uses an RS oblique proxy, "
     "Delta S = c_S v^2/M_KK^2 with U=0, and model-selected Delta T: "
-    "minimal_rs uses pi*L/(2*cW^2)*v^2/M_KK^2 while custodial_rs_plr uses "
-    "-pi/(4*cW^2*L)*v^2/M_KK^2. The full EW KK gauge sector, custodial structure, brane terms, "
+    "minimal_rs uses x1^2*pi*L/(2*cW^2)*v^2/M_KK^2 while custodial_rs_plr uses "
+    "-x1^2*pi/(4*cW^2*L)*v^2/M_KK^2 (x1 = first gauge-KK root, M_KK = x1*Lambda_IR; "
+    "the x1^2 factor puts the geometric-Lambda_IR Delta T coefficient in the same "
+    "physical-M_KK convention as the c_S calibration). "
+    "The full EW KK gauge sector, custodial structure, brane terms, "
     "fermion embeddings, Higgs localization, and EW global-fit matching are "
     "not available on ParameterPoint."
 )
@@ -46,6 +54,21 @@ DEFAULT_HIGGS_VEV_GEV = 246.21965
 DEFAULT_SIN2_THETA_W = 0.23122
 DEFAULT_RS_VOLUME_LOG = 35.0
 CHI2_2DOF_95 = 5.991464547107979
+
+# First electroweak gauge-KK Neumann-Neumann Bessel root, x_1 ~ 2.4487, so the
+# physical KK mass is M_KK = x_1 * Lambda_IR (mirrors quarkConstraints.scales
+# .GAUGE_KK_ROOT_NN).  The CGHNP volume-enhanced Delta T coefficient
+# pi*L/(2 cos^2) is derived in the GEOMETRIC-Lambda_IR convention (its natural
+# scale is Lambda_IR), but the proxy applies the SAME physical (v/M_KK)^2 scale
+# as the Delta S coefficient (which IS calibrated in the physical-M_KK
+# convention).  To evaluate Delta T in a single, documented convention that is
+# consistent with the Delta S calibration we express the Delta T coefficient in
+# the physical-M_KK convention by multiplying it by x_1^2: this is the
+# "rescale the coefficient" option of PLAN §5/M2, equivalent to using
+# (v/Lambda_IR)^2 = x_1^2 (v/M_KK)^2 for the Delta T term.  Without it Delta T
+# was ~x_1^2 ~ 6.0 too small (anti-conservative).
+GAUGE_KK_ROOT_NN = 2.448687135269161
+PHYSICAL_MKK_OVER_LAMBDA_IR_SQ = GAUGE_KK_ROOT_NN * GAUGE_KK_ROOT_NN
 MINIMAL_RS_EW_MODEL = "minimal_rs"
 CUSTODIAL_RS_PLR_EW_MODEL = "custodial_rs_plr"
 SUPPORTED_RS_EW_MODELS = (MINIMAL_RS_EW_MODEL, CUSTODIAL_RS_PLR_EW_MODEL)
@@ -166,7 +189,9 @@ def minimal_rs_t_coefficient(
     cos2 = 1.0 - sin2
     if cos2 <= 0.0:
         raise ValueError("sin2_theta_w must be less than one")
-    return float(math.pi * volume / (2.0 * cos2))
+    # x_1^2 converts the geometric-Lambda_IR coefficient to the physical-M_KK
+    # convention used by the proxy's shared (v/M_KK)^2 scale (PLAN §5/M2).
+    return float(PHYSICAL_MKK_OVER_LAMBDA_IR_SQ * math.pi * volume / (2.0 * cos2))
 
 
 def custodial_rs_plr_t_coefficient(
@@ -180,7 +205,9 @@ def custodial_rs_plr_t_coefficient(
     cos2 = 1.0 - sin2
     if cos2 <= 0.0:
         raise ValueError("sin2_theta_w must be less than one")
-    return float(-math.pi / (4.0 * cos2 * volume))
+    # x_1^2 converts the geometric-Lambda_IR coefficient to the physical-M_KK
+    # convention used by the proxy's shared (v/M_KK)^2 scale (PLAN §5/M2).
+    return float(-PHYSICAL_MKK_OVER_LAMBDA_IR_SQ * math.pi / (4.0 * cos2 * volume))
 
 
 def rs_oblique_t_coefficient(

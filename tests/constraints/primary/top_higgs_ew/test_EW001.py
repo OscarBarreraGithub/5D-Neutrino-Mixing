@@ -135,9 +135,15 @@ def test_sm_reference_and_numerical_chi2_match_independent_recomputation():
     expected = _manual_chi2(s=s_proxy, t=t_proxy, fit=fit)
 
     assert result.sm_prediction == pytest.approx(sm_manual)
+    # sm_prediction (S=T=0 reference) is M_KK-independent -> unchanged by M2.
     assert result.sm_prediction == pytest.approx(0.9627934850901363)
+    # ``expected`` is recomputed in-test from core.minimal_rs_t_coefficient(),
+    # which now carries the x1^2 physical-convention factor (M2), so this
+    # self-consistency check still holds.  The chi2 literal is re-pinned: the
+    # corrected Delta T is ~x1^2 ~ 6 larger, and chi2 is quadratic in (S, T),
+    # so the 6 TeV chi2 moved 3.6313 -> 519.5502 (PLAN §5/M2).
     assert result.predicted == pytest.approx(expected)
-    assert result.predicted == pytest.approx(3.6312587955526667)
+    assert result.predicted == pytest.approx(519.5501818374169)
     assert result.ratio == pytest.approx(expected / core.CHI2_2DOF_95)
     assert result.diagnostics["s_prediction"] == pytest.approx(s_proxy)
     assert result.diagnostics["t_prediction"] == pytest.approx(t_proxy)
@@ -164,7 +170,12 @@ def test_evaluate_without_input_degrades_gracefully():
 @pytest.mark.parametrize(
     ("m_kk_gev", "expected_pass"),
     [
-        (6000.0, True),
+        # Re-pinned after M2 (Delta T x1^2 physical-convention factor): the
+        # minimal-RS oblique floor moved up to ~16 TeV (the proxy is excluded
+        # from the STRICT lane, but this gate is now convention-honest).  6 TeV
+        # now FAILS (it passed only because Delta T was ~6 too small).
+        (18000.0, True),
+        (6000.0, False),
         (3000.0, False),
     ],
 )
