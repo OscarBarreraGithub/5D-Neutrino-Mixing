@@ -194,13 +194,17 @@ def _manual_zbb_observables(constraint, point):
 
 
 def _manual_t010_ratio(constraint, observables):
-    r_b_pull = (
-        observables.r_q - constraint.anchor.r_b.value
-    ) / constraint.anchor.budgets["R_b^0"].combined_sigma
-    a_b_pull = (
-        observables.a_q - constraint.anchor.a_b.value
-    ) / constraint.anchor.budgets["A_b"].combined_sigma
-    return max(abs(r_b_pull), abs(a_b_pull))
+    # M1: the veto scalar is the absolute NP shift (predicted - SM-limit)
+    # normalized by the T011-style loose-edge hard_veto_budget, taken as the
+    # max over R_b^0 and A_b -- NOT the legacy max|pull| vs experiment.
+    sm = constraint.sm_observables
+    r_b_shift = abs(observables.r_q - sm.r_q) / (
+        constraint.anchor.budgets["R_b^0"].hard_veto_budget
+    )
+    a_b_shift = abs(observables.a_q - sm.a_q) / (
+        constraint.anchor.budgets["A_b"].hard_veto_budget
+    )
+    return max(r_b_shift, a_b_shift)
 
 
 def test_sm_zpole_numbers_match_independent_effective_coupling_recomputation():
@@ -236,6 +240,19 @@ def test_sm_zpole_numbers_match_independent_effective_coupling_recomputation():
     assert result.diagnostics["delta_g_left_b"] == pytest.approx(0.0j)
     assert result.diagnostics["delta_g_right_b"] == pytest.approx(0.0j)
     assert result.predicted == pytest.approx(result.sm_prediction)
+    # M1 literature-anchored pin: at the SM-limit prediction the NP shift is 0,
+    # so the loose-edge veto ratio is 0 and the SM passes BY CONSTRUCTION (no
+    # 0.004sigma R_b knife-edge).  The legacy max|pull|-vs-experiment gate gave
+    # a non-zero SM ratio (~0.996) here -- the artifact M1 removes (PLAN §5/M1).
+    assert result.ratio == pytest.approx(0.0)
+    assert result.passes is True
+    # The veto budget is now the loose-edge hard_veto_budget (central residual
+    # + combined sigma), not the bare combined_sigma.
+    rb_budget = constraint.anchor.budgets["R_b^0"]
+    assert rb_budget.hard_veto_budget == pytest.approx(
+        rb_budget.central_residual + rb_budget.combined_sigma
+    )
+    assert result.budget == pytest.approx(rb_budget.hard_veto_budget)
 
 
 def test_old_style_point_reports_unevaluated_rs_ew_missing_extra():

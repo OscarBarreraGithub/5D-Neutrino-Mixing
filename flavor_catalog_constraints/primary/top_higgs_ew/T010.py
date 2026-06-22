@@ -121,13 +121,23 @@ class SMFitValue:
 
 @dataclass(frozen=True)
 class ObservableBudget:
-    """Uncertainty-aware budget for one Z-pole pseudo-observable."""
+    """Uncertainty-aware budget for one Z-pole pseudo-observable.
+
+    ``hard_veto_budget = central_residual + combined_sigma`` is the T011-style
+    loose-edge budget on the absolute NP shift (M1, PLAN §5/M1): it absorbs the
+    standing SM<->data central residual into the tolerance so the SM-limit point
+    (NP shift 0) passes by construction, while a genuine large RS shift is still
+    excluded.  ``combined_sigma`` alone is retained for the legacy max-pull
+    diagnostics.
+    """
 
     observable: str
     experimental_sigma: float
     sm_fit_sigma: float
     combined_sigma: float
     source: str
+    central_residual: float = 0.0
+    hard_veto_budget: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -153,7 +163,13 @@ class T010Anchor:
 
 @dataclass(frozen=True)
 class ObservablePull:
-    """One scalar pull entering the two-observable T010 max-pull result."""
+    """One scalar pull entering the two-observable T010 result.
+
+    The VETO scalar is ``np_shift_ratio`` (M1): the absolute NP shift
+    ``predicted - sm_prediction`` divided by the loose-edge ``hard_veto_budget``,
+    matching the sibling T011 gate.  ``pull``/``sm_pull`` (vs experiment, over
+    combined_sigma) are retained as legacy diagnostics only.
+    """
 
     observable: str
     predicted: float
@@ -162,10 +178,18 @@ class ObservablePull:
     budget: float
     pull: float
     sm_pull: float
+    np_shift: float = 0.0
+    hard_veto_budget: float = 0.0
 
     @property
     def abs_pull(self) -> float:
         return float(abs(self.pull))
+
+    @property
+    def np_shift_ratio(self) -> float:
+        if self.hard_veto_budget > 0.0:
+            return float(abs(self.np_shift) / self.hard_veto_budget)
+        return float("inf")
 
 
 def _required_float(value: Any, *, process_id: str, field_name: str) -> float:
@@ -342,6 +366,12 @@ def _build_budget(
         field_name=f"{observable}.sm_fit_uncertainty",
     )
     combined = math.sqrt(exp_sigma * exp_sigma + sm_sigma * sm_sigma)
+    # Loose-edge NP-shift budget (M1, mirrors T011._build_budget): the central
+    # residual |exp - sm_fit| plus the combined sigma.  The SM-limit prediction
+    # has NP shift 0 -> ratio 0, so it passes by construction (no 0.004sigma
+    # knife-edge), while a large RS shift is still excluded (PLAN §5/M1).
+    central = abs(float(experimental.value) - float(sm_fit.value))
+    hard_veto = central + combined
     return ObservableBudget(
         observable=observable,
         experimental_sigma=float(exp_sigma),
@@ -351,6 +381,8 @@ def _build_budget(
             "flavor_catalog/processes/top_higgs_ew/T010.yaml measured anchor "
             f"+ {sm_fit.source_path} SM-fit uncertainty"
         ),
+        central_residual=float(central),
+        hard_veto_budget=float(hard_veto),
     )
 
 
@@ -399,6 +431,7 @@ def _observable_pull(
 ) -> ObservablePull:
     pull = float((predicted - experimental.value) / budget.combined_sigma)
     sm_pull = float((sm_prediction - experimental.value) / budget.combined_sigma)
+    np_shift = float(predicted - sm_prediction)
     return ObservablePull(
         observable=observable,
         predicted=float(predicted),
@@ -407,6 +440,8 @@ def _observable_pull(
         budget=float(budget.combined_sigma),
         pull=pull,
         sm_pull=sm_pull,
+        np_shift=np_shift,
+        hard_veto_budget=float(budget.hard_veto_budget),
     )
 
 
@@ -443,6 +478,10 @@ def _pull_diagnostics(pull: ObservablePull, budget: ObservableBudget) -> dict[st
         "pull": float(pull.pull),
         "abs_pull": float(pull.abs_pull),
         "sm_pull": float(pull.sm_pull),
+        "np_shift": float(pull.np_shift),
+        "np_shift_ratio": float(pull.np_shift_ratio),
+        "hard_veto_budget": float(pull.hard_veto_budget),
+        "central_residual": float(budget.central_residual),
         "experimental_sigma": float(budget.experimental_sigma),
         "sm_fit_sigma": float(budget.sm_fit_sigma),
         "budget_source": budget.source,
@@ -650,8 +689,15 @@ class Constraint:
             prediction=prediction,
             sm_prediction=self.sm_observables,
         )
-        selected = max(pulls.values(), key=lambda item: item.abs_pull)
-        ratio = float(selected.abs_pull)
+        # M1: veto on the absolute NP shift relative to the SM-limit
+        # pseudo-observable, normalized by the T011-style loose-edge budget
+        # (PLAN §5/M1).  The legacy max|pull|-vs-experiment gate conflated the
+        # SM's standing -0.996sigma R_b tension with the RS exclusion, yielding
+        # a spurious O(100 TeV) floor; the NP-shift budget makes the SM-limit
+        # point (shift 0) pass by construction while still excluding a large RS
+        # shift, and matches the sibling A_b/A_FB^b gate (T011).
+        selected = max(pulls.values(), key=lambda item: item.np_shift_ratio)
+        ratio = float(selected.np_shift_ratio)
         passes = bool(ratio <= 1.0)
 
         diagnostics: dict[str, Any] = {
@@ -712,13 +758,18 @@ class Constraint:
             sm_prediction=float(selected.sm_prediction),
             experimental=float(selected.experimental),
             ratio=ratio,
-            budget=float(selected.budget),
+            budget=float(selected.hard_veto_budget),
             notes=(
-                "Max one-sigma pull over R_b^0 and A_b.  SM-limit "
-                "pseudo-observables use effective Zbb couplings with the "
-                "bottom width radiator calibrated to the YAML-referenced "
-                "LEP/SLC SM-fit R_b value. Point-specific RS shifts use "
-                "rs_ew_couplings.z_delta_g_L/R_d[2,2], including the "
+                "Max absolute NP shift (predicted - SM-limit) over R_b^0 and "
+                "A_b, normalized by the T011-style loose-edge budget "
+                "|exp - SM_fit| + sqrt(sigma_exp^2 + sigma_SM^2) (M1). The "
+                "SM-limit point has NP shift 0 -> ratio 0 (passes by "
+                "construction), separating the standing SM<->data R_b tension "
+                "from the RS exclusion and matching the sibling A_b/A_FB^b gate "
+                "(T011). SM-limit pseudo-observables use effective Zbb couplings "
+                "with the bottom width radiator calibrated to the "
+                "YAML-referenced LEP/SLC SM-fit R_b value. Point-specific RS "
+                "shifts use rs_ew_couplings.z_delta_g_L/R_d[2,2], including the "
                 "minimal Casagrande fermion-KK admixture when that builder "
                 "flag was enabled. Custodial/top-partner and BKT variants "
                 "remain human-input model choices."
