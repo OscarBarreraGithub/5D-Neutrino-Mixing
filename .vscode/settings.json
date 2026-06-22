@@ -1,24 +1,3 @@
 {
-    "latex-workshop.latex.tools": [
-        {
-            "name": "pdflatex",
-            "command": "pdflatex",
-            "args": [
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "%DOC%"
-            ]
-        }
-    ],
-    "latex-workshop.latex.recipes": [
-        {
-            "name": "pdflatex",
-            "tools": ["pdflatex"]
-        },
-        {
-            "name": "pdflatex x2",
-            "tools": ["pdflatex", "pdflatex"]
-        }
-    ]
+  "//latex": "LaTeX Workshop intentionally defers to the GLOBAL 'latexmk-icloud-safe' recipe in the user settings.json. Do NOT define 'latex-workshop.latex.recipes'/'.tools' here: a workspace array override replaces (not merges) the global list, which removes 'latexmk-icloud-safe' from the recipe set while it is still the forced default -> 'Failed to resolve build recipe' error. The global recipe cd's into %DIR% and passes only the basename, so it is already iCloud-spaced-path safe."
 }

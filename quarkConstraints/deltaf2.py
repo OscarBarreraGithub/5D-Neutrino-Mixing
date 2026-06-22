@@ -100,12 +100,10 @@ class DeltaF2WilsonCoefficients:
 class DeltaF2ObservableSummary:
     """Compact per-system exclusion summary.
 
-    ``effective_amplitude`` is the conservative exclusion surrogate used for
-    pass/fail: the largest weighted operator contribution after the common
-    reference-scale factor is applied. ``coherent_amplitude`` keeps the old
-    summed-operator diagnostic for bookkeeping, but it no longer controls the
-    exclusion decision because cancellations between unlike operators are not a
-    safe acceptance criterion.
+    In the live hadronic path, ``effective_amplitude`` is the evaluated
+    observable used for pass/fail: ``abs(epsilon_K^NP)`` for kaons and
+    ``abs(M12^NP)`` for the B/D systems. The dominant-operator weighted
+    surrogate is retained only for the legacy ``use_hadronic=False`` fallback.
     """
 
     input: DeltaF2Input
