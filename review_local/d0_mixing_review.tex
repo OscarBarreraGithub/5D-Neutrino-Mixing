@@ -1,0 +1,915 @@
+\documentclass[11pt]{article}
+
+% ============================================================
+%  D0-D0bar mixing in warped (Randall--Sundrum) models
+%  A slow, pedagogical internal review.
+%  Written to track (a) the physics, (b) what is in OUR code,
+%  (c) the subtleties and gaps.
+%  This is an internal working note, not for distribution.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% lightweight "callout" box
+\colorlet{shadecolor}{gray!12}
+\newenvironment{callout}[1]{%
+  \par\medskip\begin{shaded}\noindent\textbf{#1}\par\smallskip}{\end{shaded}\medskip}
+
+\newcommand{\MKK}{M_{\mathrm{KK}}}
+\newcommand{\LIR}{\Lambda_{\mathrm{IR}}}
+\newcommand{\sw}{s_W}
+\newcommand{\cw}{c_W}
+\newcommand{\swsq}{s_W^2}
+\newcommand{\cwsq}{c_W^2}
+\newcommand{\Pibig}{\Pi}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\vev}{v}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\SUL}{SU(2)_L}
+\newcommand{\SUR}{SU(2)_R}
+\newcommand{\UX}{U(1)_X}
+\newcommand{\PLR}{P_{LR}}
+\newcommand{\Tparam}{\hat{T}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\todo}[1]{{\color{red}[#1]}}
+
+% physics shorthands specific to this note
+\newcommand{\Dz}{D^0}
+\newcommand{\Dzbar}{\bar D^0}
+\newcommand{\xD}{x_D}
+\newcommand{\yD}{y_D}
+\newcommand{\Mtwelve}{M_{12}}
+\newcommand{\dmD}{\Delta m_D}
+\newcommand{\CQ}{\mathcal{C}_Q}
+\newcommand{\Yu}{Y_u}
+\newcommand{\Yd}{Y_d}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{\bf $\Dz$--$\Dzbar$ Mixing in Warped Models\\[4pt]
+\large A slow, pedagogical internal review --- physics, code, and subtleties}
+\author{Internal working note (5D--Neutrino--Mixing repo)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This note is a from-scratch walk-through of neutral charm mixing, $\Dz$--$\Dzbar$,
+and of why it earns a slot in our flavour constraint catalogue alongside the
+much more famous kaon and $B$-meson observables. It assumes the reader has
+never met the words ``$\xD$,'' ``$\yD$,'' or ``$\Delta F=2$''. The single
+sentence to carry through the whole note is this: \emph{$\Dz$ mixing is the only
+neutral-meson mixing observable built from up-type quarks, so it is the only
+$\Delta F=2$ window onto the up-quark and left-doublet flavour rotations that
+the down-sector ($K$, $B_d$, $B_s$) observables are structurally blind to.}
+Part~\ref{part:phys} defines the observable, the experimental numbers, and the
+short-distance effective Hamiltonian. Part~\ref{part:rs} explains how a warped
+extra dimension generates the effect through Kaluza--Klein (KK) gluon exchange,
+where the TeV floor comes from, and includes a worked numerical example.
+Part~\ref{part:align} addresses the complementarity question head-on --- why
+down-sector \emph{alignment} can hide $K$ and $B$ but \emph{not} $D$, and why
+\emph{custodial} (electroweak) protection does nothing here because this is a
+flavour problem, not an electroweak one. Part~\ref{part:code} documents exactly
+what our code does (\code{quarkConstraints/deltaf2.py}, the adapter, and the
+catalogue constraints \code{C001}/\code{C002}). Part~\ref{part:subtle}
+catalogues the subtleties --- above all the enormous Standard-Model (SM)
+long-distance contamination that forces us to use a deliberately conservative
+order-of-magnitude bound. An annotated reading guide closes the note. One
+companion note is assumed throughout: \code{epsilon\_k\_review.tex} (the
+down-sector sibling that runs on the \emph{same} \code{quarkConstraints.deltaf2}
+code path and develops the shared $\Delta F=2$ operator/matching machinery in
+the kaon context). This note keeps to the up-sector specifics, but
+\S\ref{sec:operators} is written to stand alone --- it states the four-operator
+basis and matching conventions it needs --- so a reader without the companion
+loses no logical step.
+\end{abstract}
+
+\tableofcontents
+
+% ====================================================================
+\part*{Orientation: why this note exists}
+\addcontentsline{toc}{section}{Orientation: why this note exists}
+% ====================================================================
+
+Our catalogue contains four neutral-meson mixing constraints. Three of them ---
+$\eps_K$ (\code{K001}), $B_d$ mixing (\code{B001}), $B_s$ mixing (\code{B003})
+--- live in the \emph{down} sector and are computed by the same
+$\Delta F=2$ engine. (A fourth down-sector beauty entry, \code{B004}, is the
+CP phase $\phi_s$ in $B_s\to J/\psi\,\phi$, a CP observable rather than a
+mass-splitting, and is not one of the mixing-magnitude siblings here.) The fourth, $\Dz$--$\Dzbar$ mixing (\code{C001}, with a
+CP-violation companion \code{C002}), is the lone \emph{up}-sector entry. Run
+purely as a number, $D$ mixing is one of the weaker of the four: the
+experimental window it leaves for new physics is wide because the SM prediction
+is theoretically filthy. So why keep it, and why write a whole note about it?
+
+Because it constrains a \emph{direction in flavour space that the other three
+cannot see at all}. The down-sector observables are sensitive to the
+left-handed \emph{down}-quark rotation; the up-sector left rotation, and the
+$\Yu\Yu^\dagger$ structure that produces it, can be made arbitrarily large
+without leaving a fingerprint in $\eps_K$, $\Delta m_d$, or $\Delta m_s$. The
+moment one is willing to ``align'' the down sector to evade the kaon bound ---
+a standard and powerful trick --- $D$ mixing becomes the binding check that the
+up sector has not been quietly inflated in the process. It is a
+\emph{complementarity} constraint, not a competitive one. That is the entire
+reason it is in the catalogue and the entire reason it is worth understanding.
+
+A one-paragraph executive summary, to be unpacked over the following pages:
+
+\begin{quote}
+\small
+A neutral $\Dz$ meson and its antiparticle $\Dzbar$ are not mass eigenstates;
+a tiny $|\Delta C|=2$ interaction lets one oscillate into the other, described
+by an off-diagonal element $\Mtwelve$ of a $2\times2$ effective Hamiltonian. The
+size of that mixing is summarised by two dimensionless numbers, $\xD$
+(dispersive, mass splitting) and $\yD$ (absorptive, width splitting), measured
+at $\xD\approx0.40\%$ and $\yD\approx0.64\%$, i.e.\ both a few parts in
+$10^{3}$. In the SM these are dominated by
+\emph{long-distance} hadronic physics that is orders of magnitude larger than
+the perturbative short-distance piece and is essentially incalculable --- so the
+SM ``prediction'' cannot be cleanly subtracted, and any honest bound treats the
+\emph{entire} measured splitting as headroom for new physics. In a warped model
+the new contribution is tree-level KK-gluon exchange between up-type quarks; its
+flavour-violating part survives the RS-GIM suppression and generically forces the
+lightest KK scale above ${\sim}20$~TeV unless the 5D Yukawas are mildly tuned.
+Custodial symmetry, which rescues the electroweak fit, does \emph{nothing} for
+this bound: it protects gauge couplings, not the colour-octet KK-gluon flavour
+operators. Our code implements the constraint as a deliberately conservative
+veto, $|\Mtwelve^{\rm NP}| \le \dmD^{\rm exp}/2$, on the same $\Delta F=2$ path
+that produces $\eps_K$.
+\end{quote}
+
+\noindent The logical spine of the whole note, in one picture:
+\begin{footnotesize}
+\begin{verbatim}
+  warped geometry  ==>  c_Q from doublet spurion  C_Q = r*(Yu Yu^dag) + (Yd Yd^dag)
+                              |                          ^^^^^^^^^^^^^
+                              |                          up-Yukawa enters with weight r
+                              |
+  left-up rotation U_L^u  (NOT seen by K,B which use U_L^d)
+                              |
+  KK-gluon tree exchange between up quarks ==> |Delta C|=2 operators (VLL,VRR,LR)
+                              |
+  M12^NP(D) = sum_i C_i <D0bar|O_i|D0>   (same machinery as epsilon_K, up sector)
+                              |
+  veto:  |M12^NP| <= Delta m_D^exp / 2     <== conservative: full splitting = NP room
+                              |              (SM long-distance >> short-distance, dirty)
+  C001 = Severity.HARD, RIGOROUS dF=2     [custodial does NOT change this: flavour, not EW]
+\end{verbatim}
+\end{footnotesize}
+\noindent Keep this map in mind. The two ideas a first-time reader most often
+gets backwards --- ``$D$ mixing duplicates $\eps_K$'' (it does not; different
+sector) and ``custodial symmetry relaxes it'' (it does not; wrong kind of
+symmetry) --- are both already flagged in the diagram and are defused in detail
+in the common-confusions box of \S\ref{sec:confusions}.
+
+% ====================================================================
+\part{The physics of charm mixing from scratch}
+\label{part:phys}
+% ====================================================================
+
+\section{What ``mixing'' means for a neutral meson}
+\label{sec:whatismixing}
+
+A $\Dz$ is a bound state of a charm quark and an anti-up quark,
+$\Dz = (c\bar u)$; its antiparticle is $\Dzbar = (\bar c u)$. They carry equal
+and opposite charm quantum number $C=\pm1$. The strong and electromagnetic
+interactions conserve $C$, so as long as only those act, a state that starts as
+$\Dz$ stays $\Dz$. The weak interaction does not conserve $C$: through a
+second-order ($|\Delta C|=2$) process the $\Dz$ can convert into a $\Dzbar$.
+The two flavour states therefore mix, exactly as a quantum-mechanical
+two-level system whose Hamiltonian has off-diagonal entries.
+
+The standard formalism is an effective non-Hermitian $2\times2$ Hamiltonian
+acting on the $(\Dz,\Dzbar)$ doublet,
+\begin{equation}
+\mathbf{H} = \mathbf{M} - \tfrac{i}{2}\boldsymbol{\Gamma}
+= \begin{pmatrix} M_{11} & \Mtwelve \\ \Mtwelve^{*} & M_{22}\end{pmatrix}
+- \frac{i}{2}\begin{pmatrix} \Gamma_{11} & \Gamma_{12} \\ \Gamma_{12}^{*} & \Gamma_{22}\end{pmatrix}.
+\label{eq:Heff}
+\end{equation}
+Here $\mathbf{M}$ is the dispersive (mass) part and $\boldsymbol{\Gamma}$ the
+absorptive (decay) part. The diagonal entries are the common mass and width;
+the physics of mixing lives entirely in the off-diagonal $\Mtwelve$ (virtual,
+short- and long-distance intermediate states) and $\Gamma_{12}$ (on-shell
+intermediate states common to $\Dz$ and $\Dzbar$). \textbf{For the purposes of
+our constraint, the single object of interest is $\Mtwelve$:} new heavy physics
+such as a KK gluon contributes a calculable short-distance piece
+$\Mtwelve^{\rm NP}$ to it, and nothing (at tree level) to $\Gamma_{12}$.
+
+\section{The observables $\xD$ and $\yD$}
+\label{sec:xy}
+
+Diagonalising \eqref{eq:Heff} gives two mass eigenstates with a mass splitting
+$\dmD$ and a width splitting $\Delta\Gamma_D$. It is conventional to make these
+dimensionless by dividing out the average width $\Gamma_D$ (equivalently the
+average lifetime):
+\begin{equation}
+\xD \equiv \frac{\dmD}{\Gamma_D}, \qquad
+\yD \equiv \frac{\Delta\Gamma_D}{2\,\Gamma_D}.
+\label{eq:xydef}
+\end{equation}
+$\xD$ is the \emph{dispersive} parameter (it measures the real, off-shell mass
+mixing and is what $\Mtwelve$ feeds), while $\yD$ is the \emph{absorptive}
+parameter (governed by $\Gamma_{12}$). In the convenient limit where
+CP violation in mixing is small, the two are tied to the off-diagonal
+Hamiltonian elements by
+\begin{equation}
+\xD \simeq \frac{2\,|\Mtwelve|}{\Gamma_D}, \qquad
+\yD \simeq \frac{|\Gamma_{12}|}{\Gamma_D},
+\label{eq:xy_m12}
+\end{equation}
+so a measurement of $\xD$ is, up to a factor of two and the (precisely known)
+charm width, a direct measurement of $|\Mtwelve|$. This is the link that lets us
+turn an experimental number into a bound on a new-physics amplitude.
+
+The current world-average values (HFLAV CKM2025 global all-CPV fit, as recorded
+in our catalogue sidecar \code{flavor\_catalog/processes/charm/C001.yaml}) are
+\begin{equation}
+\xD = (0.405 \pm 0.043)\,\%, \qquad
+\yD = (0.636 \pm 0.024)\,\%,
+\label{eq:xyval}
+\end{equation}
+i.e.\ both at the level of a few parts in a thousand. The associated mass
+splitting, taken from the PDG Live block produced by HFLAV and stored in the
+same sidecar, is
+\begin{equation}
+\dmD = (0.997 \pm 0.116)\times10^{10}\,\hbar\,\mathrm{s}^{-1}
+\;=\; (6.562 \pm 0.764)\times10^{-15}\ \mathrm{GeV}.
+\label{eq:dmDval}
+\end{equation}
+That charm mixing is non-zero at all was only firmly established (by Belle,
+BaBar, and later LHCb) over roughly 2007--2021; before that only upper limits
+existed. The smallness of $\xD,\yD$ is itself a piece of physics: it reflects an
+efficient GIM suppression in the up sector, where the relevant down-type quarks
+running in the loop ($d,s,b$) are all light compared to $m_W$.
+
+\section{Why charm is special, in one sentence and then in detail}
+\label{sec:special}
+
+\textbf{One sentence:} the $K$, $B_d$, $B_s$ systems are all built from
+\emph{down}-type quarks ($\bar s d$, $\bar b d$, $\bar b s$), so $D = (c\bar u)$
+is the \emph{only} neutral-meson mixing system built from \emph{up}-type quarks,
+and hence the only one whose short-distance amplitude is sensitive to flavour
+violation among up-type quarks (this uniqueness is the point of
+Gedalia--Grossman--Nir--Perez, 0906.1879).
+
+In detail, why does ``up vs down'' matter so much? New-physics
+$\Delta F=2$ amplitudes are products of two flavour-changing vertices. In the
+down sector the vertex is governed by the left-handed \emph{down}-quark rotation
+(and its right-handed partner); in the up sector, by the left-handed
+\emph{up}-quark rotation. These are independent matrices --- their misalignment
+is what the CKM matrix \emph{is}. A model can arrange the down-quark rotation to
+be nearly flavour-diagonal (suppressing $\eps_K$ and $B$ mixing) while leaving
+the up-quark rotation large; the down-sector observables register nothing, and
+only $D$ mixing notices. Charm is the up sector's $\eps_K$. There is a second
+practical reason charm is special, developed in \S\ref{sec:longdistance}: it is
+the one meson system where the SM long-distance contribution to the mixing sits
+\emph{orders of magnitude} above the perturbative short-distance piece
+(0906.1879), which is exactly why the bound it gives is conservative rather than
+precise.
+
+\section{The short-distance effective Hamiltonian}
+\label{sec:operators}
+
+Below the new-physics scale, the $|\Delta C|=2$ interaction that a KK gluon (or
+any heavy colour state) induces is a set of local four-quark operators built
+from $\bar u\,\Gamma\, c$ bilinears. We use the same compact operator basis that
+the whole $\Delta F=2$ engine uses; the down-sector ($\bar s d$) version is
+worked through in the companion \code{epsilon\_k\_review.tex}, and here we
+specialise the flavour labels to $(u,c)$. A self-contained word on which
+operators appear and why: a single tree-level colour-octet vector exchange (the
+KK gluon) connects two quark bilinears, each of which is left- or right-handed,
+giving same-chirality (LL, RR) and opposite-chirality (LR) structures; Fierz and
+colour rearrangement then reduce the independent LR contractions to the
+colour-singlet ($O_4$) and colour-octet ($O_5$) forms below. The same-chirality
+vector currents collapse to a single $O_1$ each by the Fierz identity for
+chiral currents. Heavier ($S,T$) operator structures do not arise from a
+\emph{vector} exchange at tree level, which is why exactly these four operators
+--- and not the full eight-operator SUSY-style basis --- appear here. The
+effective Hamiltonian is
+\begin{equation}
+\mathcal{H}^{|\Delta C|=2}_{\rm eff}
+= C_1^{\rm VLL}\,O_1^{\rm VLL} + C_1^{\rm VRR}\,O_1^{\rm VRR}
++ C_4^{\rm LR}\,O_4^{\rm LR} + C_5^{\rm LR}\,O_5^{\rm LR},
+\label{eq:Heff_op}
+\end{equation}
+with the operators
+\begin{align}
+O_1^{\rm VLL} &= (\bar u_L\gamma_\mu c_L)(\bar u_L\gamma^\mu c_L), &
+O_1^{\rm VRR} &= (\bar u_R\gamma_\mu c_R)(\bar u_R\gamma^\mu c_R), \\
+O_4^{\rm LR} &= (\bar u_L\, c_R)(\bar u_R\, c_L), &
+O_5^{\rm LR} &= (\bar u_L^\alpha c_R^\beta)(\bar u_R^\beta c_L^\alpha),
+\end{align}
+where $\alpha,\beta$ are colour indices. The vector LL/RR operators come from
+same-chirality KK-gluon exchange; the scalar/tensor LR operators come from
+opposite-chirality exchange and are the dangerous ones, both because they suffer
+a chiral enhancement in the matrix element and because their QCD running grows
+them toward the hadronic scale. The hadronic matrix elements
+$\langle\Dzbar|O_i|\Dz\rangle$ convert the Wilson coefficients into a physical
+$\Mtwelve^{\rm NP}$,
+\begin{equation}
+\Mtwelve^{\rm NP} = \sum_i C_i(\mu_{\rm had})\,\langle\Dzbar|O_i|\Dz\rangle(\mu_{\rm had}),
+\label{eq:m12np}
+\end{equation}
+with everything evaluated at a common hadronic scale $\mu_{\rm had}=2$~GeV after
+QCD renormalisation-group (RG) running from the matching scale $\MKK$. This is
+the formula \eqref{eq:m12np} that our code evaluates; the rest of the note is
+about (i) what produces the $C_i$ in RS, and (ii) what we compare
+$|\Mtwelve^{\rm NP}|$ against.
+
+% ====================================================================
+\part{How a warped model generates charm mixing}
+\label{part:rs}
+% ====================================================================
+
+\section{RS recap and the up-sector localisation}
+\label{sec:rsrecap}
+
+Recall the geometry (repo conventions). Space is a slice of AdS$_5$ with a UV
+brane (Planck scale) and an IR brane (TeV scale); the warp factor is
+$\eps = e^{-k\pi r_c}\sim10^{-15}$. A bulk fermion has a dimensionless bulk mass
+$c$ that localises its zero mode: $c>\tfrac12$ peaks the wavefunction at the UV
+brane (small overlap with the IR-localised Higgs, hence a light SM fermion),
+while $c<\tfrac12$ peaks it at the IR brane (large overlap, heavy fermion). The
+normalised value of the zero mode at the IR brane is the overlap factor
+$f_{\rm IR}(c)$, with $f_{\rm IR}^2(c) = (\tfrac12-c)/(1-\eps^{1-2c})$ in the
+repo convention.
+
+The flavour structure of \emph{both} sectors is set by where the doublet quarks
+$Q$ and the singlet quarks $u,d$ sit. The crucial object for charm mixing is the
+left-handed doublet localisation, because $D$ mixing involves the left-handed
+up-type current $\bar u_L\gamma_\mu c_L$ (and its right-handed partner). The
+non-universality of the $f_{\rm IR}(c_{Q_i})$ across the three doublet
+generations is exactly what makes the KK gluon couple non-diagonally in the
+quark mass basis --- the RS realisation of a flavour-violating vertex.
+
+\section{The KK-gluon contribution, parametrically}
+\label{sec:kkgluon}
+
+A bulk gluon has a KK tower. The first excited gluon mode is localised toward
+the IR brane, so it couples much more strongly to the IR-localised (heavy)
+quarks than to the UV-localised (light) ones --- this \emph{non-universality} is
+the source of tree-level flavour violation. Schematically, the colour-octet
+KK-gluon exchange between up-type quarks $i,j$ gives a Wilson coefficient
+\begin{equation}
+C_{ij} \;\sim\; \frac{g_{s*}^2}{\MKK^2}\,
+\big(g_L^{ij}\big)\big(g_L^{ij}\big) + (\text{LR, RR pieces}),
+\label{eq:Cij_param}
+\end{equation}
+where $\MKK$ is the KK-gluon mass, $g_{s*}$ is the \emph{enhanced} 5D gluon
+coupling, and $g_L^{ij}$ is the flavour-off-diagonal coupling of the KK gluon
+to the left-handed mass-basis up quarks. Two features of \eqref{eq:Cij_param}
+are essential and both are encoded in our code (\S\ref{part:code}):
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{The $1/\MKK^2$ decoupling} is the universal heavy-mediator
+suppression; this is the lever that turns the constraint into a lower bound on
+$\MKK$.
+\item \textbf{The enhanced coupling $g_{s*}$.} Because the first KK gluon is
+IR-peaked, its coupling to zero-mode quarks is enhanced relative to the ordinary
+4D strong coupling $g_s$ by a volume factor. Our coupling helper writes this
+factor as the IR-brane wavefunction ratio: ``\emph{the first KK-gluon mode has a
+wavefunction peaked near the IR brane, enhancing its coupling to zero-mode
+quarks by a factor $\sqrt{2k\pi r_c}$.}'' Numerically, with
+$L\equiv k\pi r_c\approx37$, one has $\sqrt{2k\pi r_c}=\sqrt{2L}\approx8.6$. The
+quantity that actually equals the familiar ``$\sim6$'' is the
+\emph{logarithmic} enhancement of the IR-localised (heavy-quark) coupling,
+$\sqrt{L}=\sqrt{k\pi r_c}\approx\sqrt{37}\approx6.1$; this is the CFW form
+$g_{s*}=g_s(\MKK)\,\log^{1/2}(R'/R)$ with $\log(R'/R)=k\pi r_c$. The two should
+not be conflated: $\sqrt{2L}\approx8.6$ is the flat-mode value at the IR brane,
+while $\sqrt{L}\approx6.1$ is the relevant coupling enhancement. Typical values
+are $g_{s*}\sim6$ at tree level (CFW 2008) or $\sim3$ at one loop (GGNP 2009).
+\end{itemize}
+The off-diagonal couplings $g_L^{ij}$ are themselves suppressed by the
+RS-GIM mechanism: they scale like products of the small overlap factors
+$f_{\rm IR}(c_{Q_i})f_{\rm IR}(c_{Q_j})$, so a transition between light
+generations carries two small factors. This is what saves RS from being
+immediately excluded --- but in the up sector the suppression is not enough to
+make charm mixing negligible, and that is the whole point.
+
+\section{Where the TeV floor comes from}
+\label{sec:floor}
+
+Putting \eqref{eq:Cij_param} into \eqref{eq:m12np} and demanding
+$|\Mtwelve^{\rm NP}|$ stay inside the measured charm splitting gives a lower
+bound on $\MKK$. In the fully anarchic scenario (5D Yukawas all $O(1)$ with
+random phases), the published bounds are stringent. Csaki--Falkowski--Weiler
+(0804.1954) find that the lightest KK-gluon mode must generically be heavier
+than about $21$~TeV from the combined $\Delta F=2$ set, with the constraint
+strengthening to about $33$~TeV in composite-pseudo-Goldstone-Higgs realisations.
+Our catalogue stores both of these as contextual anchors in \code{C001.yaml}
+(\code{cfw2008\_standard\_rs\_kk\_gluon\_scale} $=21$~TeV and
+\code{cfw2008\_composite\_pseudo\_goldstone\_kk\_gluon\_scale} $=33$~TeV). It is
+worth being precise about \emph{which} observable drives the anarchic bound: for
+the down sector it is $\eps_K$ through the chirally-enhanced LR operator --- CFW
+0804.1954 find $\mathrm{Im}\,C_4^K$ the most strongly constrained quantity, with
+$\MKK\sim(22\pm6)$~TeV (Blanke et al., 0809.1073, reach the same conclusion in
+the custodial setting). Charm mixing is somewhat less restrictive than
+$\eps_K$ in the anarchic case, but --- and this is the recurring theme --- it
+becomes the \emph{dominant} bound the moment one aligns the down sector to soften
+$\eps_K$ (\S\ref{part:align}).
+
+\begin{callout}{Worked numerical example --- a single $\MKK=3$~TeV benchmark.}
+We build the example directly from our code's D-system hadronic inputs
+(\code{quarkConstraints/deltaf2.py}). With
+$F_D=0.2120$~GeV, $M_{D^0}=1.86484$~GeV, $m_c=1.27$~GeV, $m_u=0.00216$~GeV,
+and bag parameters $B_1^D=0.75$, $B_4^D=B_5^D=1.0$, the chiral ratio is
+$r_\chi = (M_{D^0}/(m_c+m_u))^2 \approx 2.15$ and the matrix elements come out
+to (in $\mathrm{GeV}^3$)
+\[
+\langle O_1^{\rm VLL}\rangle \approx 4.19\times10^{-2},\quad
+\langle O_4^{\rm LR}\rangle \approx 5.10\times10^{-2},\quad
+\langle O_5^{\rm LR}\rangle \approx 9.70\times10^{-2}.
+\]
+Take illustrative off-diagonal KK-gluon couplings, left- and right-handed equal
+for simplicity, $g_L^{uc}=g_R^{uc}=\ell$ at $\MKK=3000$~GeV. The code's
+conventions \eqref{eq:codewilsons} are
+$C_1^{\rm VLL} = \ell^2/(6\,\MKK^2)$,
+$C_4^{\rm LR} = -\ell^2/\MKK^2$, and
+$C_5^{\rm LR} = \ell^2/(3\,\MKK^2)$, so at the matching scale (no running, for
+transparency) the two contributions to $\Mtwelve^{\rm NP}$ are
+\[
+\Mtwelve^{\rm NP}\big|_{\rm VLL}
+= \frac{\ell^2}{6\,\MKK^2}\,(4.19\times10^{-2}),\qquad
+\Mtwelve^{\rm NP}\big|_{\rm LR}
+= \frac{\ell^2}{\MKK^2}\Big(-5.10\times10^{-2}+\tfrac13\,9.70\times10^{-2}\Big).
+\]
+The LR piece is the larger one in magnitude --- $|\Mtwelve^{\rm LR}|\approx
+2.7\times|\Mtwelve^{\rm VLL}|$ --- which is the chiral-enhancement effect this
+note keeps emphasising; it is shown here, not asserted. The conservative budget
+(next section) is $\dmD^{\rm exp}/2 \approx 3.28\times10^{-15}$~GeV. Summing both
+operators,
+\begin{align*}
+\ell = 1\times10^{-3} &\;\Rightarrow\; |\Mtwelve^{\rm NP}| \approx 1.3\times10^{-15}\ \mathrm{GeV},\quad \text{ratio} \approx 0.40\ \ (\textbf{passes}),\\
+\ell = 3\times10^{-3} &\;\Rightarrow\; |\Mtwelve^{\rm NP}| \approx 1.2\times10^{-14}\ \mathrm{GeV},\quad \text{ratio} \approx 3.6\ \ (\textbf{vetoed}),\\
+\ell = 1\times10^{-2} &\;\Rightarrow\; |\Mtwelve^{\rm NP}| \approx 1.3\times10^{-13}\ \mathrm{GeV},\quad \text{ratio} \approx 40\ \ (\textbf{badly vetoed}).
+\end{align*}
+(The VLL-only numbers are smaller --- $7.8\times10^{-16}$, $7.0\times10^{-15}$,
+$7.8\times10^{-14}$~GeV, ratios $0.24/2.1/24$ --- so keeping only VLL would
+\emph{under}-count the bound by the very chiral factor under discussion; the
+equal-coupling LR sum used above partially cancels against VLL in this sign
+choice, but the LR operator alone is the dominant single contribution and the
+full RG-run result is more constraining still.) This single benchmark contains
+the whole mechanism: at $3$~TeV an off-diagonal up-charm coupling of only a
+few$\times10^{-3}$ already saturates the charm budget. To survive at $3$~TeV one
+needs the up-sector left rotation to be small --- alignment in the \emph{up}
+sector --- which is precisely the structure charm mixing exists to police.
+\end{callout}
+
+% ====================================================================
+\part{Alignment, complementarity, and (non-)custodial dependence}
+\label{part:align}
+% ====================================================================
+
+\section{Why down-sector alignment promotes the up-sector observable}
+\label{sec:alignment}
+
+The most important structural fact about this constraint --- recorded as a
+``subtlety'' in both \code{C001.yaml} and \code{C002.yaml}: \emph{``down-sector
+alignment promotes up-sector observables''} --- is a statement about a
+zero-sum game between the two sectors.
+
+The CKM matrix is $V_{\rm CKM}=U_L^{u\dagger}U_L^d$, the mismatch between the
+left up-quark and left down-quark rotations. It is fixed by experiment. A model
+builder who wants to evade the fierce $\eps_K$ bound can try to make $U_L^d$
+nearly diagonal (``down alignment''), so that the down-sector KK-gluon vertices
+are almost flavour-conserving. But $V_{\rm CKM}$ is then carried \emph{entirely}
+by $U_L^u$: aligning down necessarily \emph{mis}aligns up by the full CKM angle.
+The up-sector off-diagonal couplings $g_L^{uc}$ grow, and $D$ mixing --- which
+sees precisely $U_L^u$ --- lights up. In other words, you cannot make both
+sectors simultaneously flavour-diagonal while reproducing the observed CKM
+mixing; pushing the flavour violation out of the down sector pushes it into the
+up sector, where charm mixing is waiting. This is why $\eps_K$ and $D$ mixing
+are \emph{complementary}: aligned-down models that look safe in $K$ and $B$ are
+exactly the ones that $D$ mixing constrains. This complementarity argument is a
+staple of the broader RS-flavour and alignment literature rather than the
+content of any single paper; GGNP (0906.1879) supply the premise that $D$ is the
+unique up-type system, and CFW (0804.1954) supply the anarchic RS bounds, but
+the down-alignment-forces-up-misalignment logic should be attributed to the
+alignment literature generally, not to either of those references in
+particular.
+
+\section{Where the up-Yukawa enters our model: the $r$ parameter}
+\label{sec:rparam}
+
+This complementarity is not an abstraction in our code --- it is a single
+numerical knob. In the minimal-flavour-violation-native parametrisation of
+\code{quarkConstraints/model.py}, the left-handed doublet bulk masses are
+\emph{not} derived from the down Yukawa alone. They come from diagonalising the
+composite doublet spurion (\code{model.py}, line 237):
+\begin{equation}
+\boxed{\;\CQ \;=\; r\,\big(\Yu\Yu^\dagger\big) \;+\; \big(\Yd\Yd^\dagger\big).\;}
+\label{eq:CQ}
+\end{equation}
+The eigenvectors of $\CQ$ fix the doublet rotation $\mathtt{rotation\_Q}$, hence
+the left-handed up rotation $U_L^u$, hence the off-diagonal mass-basis KK-gluon
+couplings $\mathtt{left\_up}[i,j]$ that feed the $D$-system Wilson coefficients.
+\textbf{The dimensionless weight $r\ge0$ is exactly the dial that tunes how much
+the up-Yukawa contributes to the doublet flavour structure}, and therefore how
+much up-sector flavour violation (and charm mixing) a point carries. In the
+repo $r$ is a non-negative real input (\code{model.py} validates
+\code{r >= 0.0}); $r=0$ would build the doublet localisation purely from the
+down Yukawa (maximal down alignment, maximal up misalignment), while larger $r$
+shares the structure between the two. The same $\CQ$ feeds both sectors, so this
+single parameter ties the $\eps_K$ and $D$-mixing predictions together. When the
+note says ``$D$ mixing is the up-sector handle on the $r$ parameter,'' this
+equation is what it means.
+
+\section{Does custodial symmetry or alignment change the bound?}
+\label{sec:custodial}
+
+\textbf{Custodial symmetry does not touch this constraint.} This is the single
+most common confusion to import from the electroweak side of the catalogue, so
+it deserves a sharp statement. The custodial
+$\SUL\times\SUR\times\UX\times\PLR$ construction (see \code{stu\_review.tex})
+exists to tame the electroweak $T$ parameter and the $Z\bar b_L b_L$ vertex. It
+protects \emph{gauge-boson} couplings. The KK-gluon $\Delta F=2$ operators of
+\eqref{eq:Heff_op} are \emph{colour-octet} four-quark operators; they are a
+\emph{flavour} effect, generated by QCD, and the electroweak custodial group
+says nothing about them. Blanke et al.\ (0809.1073) make exactly this point: the
+$\PLR$ protection suppresses tree-level flavour-changing \emph{$Z$} couplings to
+left-handed down quarks, but it ``does not suppress KK-gluon contributions to
+$\Delta F=2$ processes,'' and the flavour bounds remain severe regardless. So in
+our catalogue, switching the scan from \code{minimal\_rs} to
+\code{custodial\_rs\_plr} changes \code{EW001}, \code{T010}, \code{T011} --- and
+leaves \code{C001}/\code{C002} (and $\eps_K$, $\Delta m_s$, $\phi_s$) exactly as
+they were. The $\Delta F=2$ floor is the \emph{rigorous} floor precisely because
+it is immune to the electroweak model choice.
+
+\emph{Alignment}, by contrast, very much does change the bound --- that is the
+content of \S\ref{sec:alignment}. The lever there is the flavour structure of
+the 5D Yukawas (and our $r$ parameter), not a symmetry of the electroweak
+sector. The two routes must not be conflated: custodial protection is an
+electroweak knob that leaves charm mixing fixed; alignment is a flavour knob
+that trades $\eps_K$ against $D$ mixing.
+
+\section{Is our treatment rigorous or a proxy?}
+\label{sec:rigor}
+
+\code{C001} is tagged \textbf{rigorous} in the same sense the down-sector
+$\Delta F=2$ constraints are: it runs the audited matching $\to$ QCD-running
+$\to$ hadronic-matrix-element path of \code{quarkConstraints.deltaf2}, the
+\emph{same} engine that produces $\eps_K$. There is no closed-form parametric
+surrogate involved (contrast the oblique $S,T$ proxy of \code{EW001}). What
+makes the \emph{number} conservative is not the machinery but the \emph{budget
+policy}: because the SM long-distance piece is incalculable, we deliberately do
+not subtract any SM expectation and treat the whole measured splitting as
+new-physics room (\S\ref{sec:longdistance}). So: the operator/matching/running
+is rigorous; the budget is intentionally loose. The CP-violation companion
+\code{C002} is a different story --- it is a \textbf{partial / NEEDS-HUMAN-PHYSICS}
+proxy, because the full HFLAV $(|q/p|,\phi_D)$ likelihood, $\Gamma_{12}$, and the
+SM long-distance \emph{phase} are not implemented; see \S\ref{sec:c002}.
+
+% ====================================================================
+\part{What is in OUR code}
+\label{part:code}
+% ====================================================================
+
+\emph{Reader here for the physics may skim Part~\ref{part:code} on a first pass
+and jump to the subtleties in Part~\ref{part:subtle}; this part documents the
+exact code so the note doubles as an implementation reference.}
+
+\section{The $\Delta F=2$ core: the D-system input}
+\label{sec:core}
+
+The up-sector $\Delta F=2$ path lives in \code{quarkConstraints/deltaf2.py}. The
+default input bundle \code{DEFAULT\_DELTA\_F2\_INPUTS\_V1} contains four
+\code{DeltaF2Input} records; the charm one is
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+field & value (D-system \code{DeltaF2Input}) \\
+\midrule
+\code{key} & \code{"d"} \\
+\code{display\_name} & \code{"D mixing"} \\
+\code{column\_name} & \code{"d\_ratio"} \\
+\code{reject\_reason} & \code{"d\_mix"} \\
+\code{sector} & \code{"up"} \quad(the only up-sector entry) \\
+\code{generations} & \code{(0, 1)} \quad($u$--$c$, i.e.\ indices 0 and 1) \\
+\code{bound} & \code{3.125e-15} \quad(GeV; the core default, overridden by the catalog) \\
+\code{lr1\_weight},\,\code{lr2\_weight} & \code{7.0},\,\code{2.0} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The \code{sector="up"} flag is what routes the pairing to the up-type couplings:
+\code{\_pair\_couplings} reads \code{couplings.left\_up[i,j]} and
+\code{couplings.right\_up[i,j]} for $\{i,j\}=\{0,1\}$, whereas the kaon/$B$
+entries read \code{left\_down}/\code{right\_down}. This one line is the entire
+``up vs down'' distinction at the code level.
+
+\section{From couplings to Wilson coefficients}
+\label{sec:wilsons}
+
+\code{compute\_delta\_f2\_wilsons} forms the $|\Delta C|=2$ coefficients from the
+mass-basis couplings $(\ell,\rho)\equiv(\code{left\_up},\code{right\_up})$ at
+$u$--$c$, with $\code{prefactor}=1/\MKK^2$:
+\begin{align}
+C_1^{\rm VLL} &= \frac{\ell^2}{6\,\MKK^2}, &
+C_1^{\rm VRR} &= \frac{\rho^2}{6\,\MKK^2}, \nonumber\\
+C_4^{\rm LR} &= -\frac{\ell\,\rho}{\MKK^2}, &
+C_5^{\rm LR} &= \frac{\ell\,\rho}{3\,\MKK^2}.
+\label{eq:codewilsons}
+\end{align}
+These are matched at $\mu=\MKK$. The mass-basis couplings themselves are built in
+\code{quarkConstraints/couplings.py} by
+\code{compute\_quark\_kk\_gluon\_couplings}: each is the effective gluon coupling
+times a mass-basis overlap, \code{left\_up = g\_s * left\_up\_overlap} (and
+similarly for \code{right\_up}), where \code{left\_up\_overlap} is built from the
+fitted up-sector left rotation \code{U\_L\_u} and the doublet overlap vector
+\code{F\_Q}. The enhanced 5D coupling enters as \code{g\_s\_star} (default
+\code{None} $\Rightarrow$ perturbative $g_s(\MKK)$; callers pass
+$g_{s*}\sim6$ for the IR-enhanced tree value).
+
+\section{QCD running and the hadronic matrix elements}
+\label{sec:running}
+
+By default the coefficients are RG-evolved from $\MKK$ to $\mu_{\rm had}=2$~GeV
+(\code{\_evolve\_wilsons} $\to$ \code{evolve\_deltaf2\_wilsons}) before the
+matrix elements are applied. The D-system hadronic parameters are module-level
+constants in \code{deltaf2.py}:
+\begin{equation}
+F_D = 0.2120,\ \ M_{D^0}=1.86484,\ \ m_c=1.27,\ \ m_u=0.00216\ \mathrm{(GeV)},\ \
+B_1^D=0.75,\ \ B_4^D=B_5^D=1.0.
+\end{equation}
+The matrix-element helper \code{\_meson\_matrix\_elements} computes, with
+$r_\chi=(M_{D^0}/(m_c+m_u))^2$,
+\begin{align}
+\langle O_1^{\rm VLL}\rangle &= \tfrac{2}{3}\,F_D^2 M_{D^0}\,B_1^D, \nonumber\\
+\langle O_4^{\rm LR}\rangle &= \big(\tfrac{r_\chi}{6}+\tfrac14\big)F_D^2 M_{D^0}\,B_4^D, \nonumber\\
+\langle O_5^{\rm LR}\rangle &= \big(\tfrac{r_\chi}{2}+\tfrac{1}{12}\big)F_D^2 M_{D^0}\,B_5^D,
+\label{eq:codeME}
+\end{align}
+and \code{evaluate\_d0\_mixing} forms $|\Mtwelve^{\rm NP}|$ by summing
+\eqref{eq:m12np}, with the VRR matrix element equal to the VLL one by parity. The
+$B_4^D=B_5^D=1.0$ values are flagged in-code as ``\emph{estimated}'' and
+$B_1^D=0.75$ as ``\emph{less precise}'' --- a real, documented uncertainty in
+the charm matrix elements (\S\ref{sec:subtle_me}).
+
+\section{The veto: budget policy and the YAML override}
+\label{sec:veto}
+
+The exclusion decision is a single ratio. The conservative budget is half the
+measured mass splitting --- \code{\_d0\_budget} returns
+\code{DELTA\_M\_D\_EXP / 2.0} with the in-core
+\code{DELTA\_M\_D\_EXP = 6.25e-15}~GeV, and a point passes iff
+\begin{equation}
+\boxed{\;|\Mtwelve^{\rm NP}| \;\le\; \frac{\dmD^{\rm exp}}{2}.\;}
+\label{eq:veto}
+\end{equation}
+The catalogue constraint \code{flavor\_catalog\_constraints/primary/charm/C001.py}
+\emph{overrides} the in-core default with the YAML anchor: the
+\code{D0MixingAnchor.budget} property returns
+$0.5\times\code{Delta\_m\_D.value\_GeV}$ with
+\code{value\_GeV = 6.562e-15}~GeV, i.e.\ a budget of
+$3.281\times10^{-15}$~GeV --- slightly above the older hardcoded
+$6.25\times10^{-15}/2 = 3.125\times10^{-15}$~GeV. The constraint docstring is
+explicit that this is ``\emph{an explicit catalog override of the older hardcoded
+D0 value still present in the $\Delta F=2$ core}.''
+
+\code{C001} is declared with
+\begin{center}
+\code{process\_id = "C001"},\quad \code{severity = Severity.HARD},\quad
+\code{observable = "D0-D0bar mixing"}.
+\end{center}
+It is a \textbf{HARD} veto: a point whose $|\Mtwelve^{\rm NP}|$ exceeds the
+budget is removed. The path into the core is the thin adapter
+\code{flavor\_catalog\_constraints/physics\_adapters/deltaf2.py}, through
+\code{d0\_mixing\_wilsons\_from\_couplings} (which pulls the \code{"d"} entry out
+of the default bundle) and \code{d0\_mixing\_from\_wilsons\_with\_running}
+(which RG-runs to $2$~GeV and applies the catalog budget). If the required extra
+\code{quark\_mass\_basis\_couplings} is absent, \code{C001} returns
+\code{passes=True} with a ``not evaluated'' note rather than failing closed.
+
+\section{The CP-violation companion \code{C002}}
+\label{sec:c002}
+
+Indirect CP violation in charm mixing is described by $|q/p|$ and
+$\phi_D=\mathrm{Arg}(q/p)$; the CP-conserving point is $(|q/p|,\phi_D)=(1,0)$,
+which the data prefer. The HFLAV CKM2025 values in \code{C002.yaml} are
+$|q/p| = 0.983^{+0.015}_{-0.014}$ and
+$\phi_D = -1.51^{+1.03}_{-1.06}$ degrees, both consistent with no
+indirect CP violation (the $(1,0)$ point sits at $\Delta\chi^2=2.16$,
+$0.95\sigma$). \code{C002} (also \code{Severity.HARD}) is honest about being a
+proxy: it does \emph{not} implement the full $(|q/p|,\phi_D)$ likelihood. Instead
+it forms the CP-odd amplitude fraction
+\begin{equation}
+\frac{|\mathrm{Im}\,\Mtwelve^{\rm NP}|}{\dmD^{\rm exp}/2}
+\;\Big/\; \text{budget},
+\label{eq:c002}
+\end{equation}
+where the HARD budget is the maximal $|\sin\phi_M|$ allowed by the HFLAV all-CPV
+$\phi_M=\mathrm{Arg}(\Mtwelve)$ $95\%$ interval $[-1.48,\,1.35]$ degrees, read
+from the local HFLAV snapshot. The module sets the diagnostics
+\code{sm\_long\_distance\_phase\_grounded = False} and
+\code{full\_hflav\_likelihood\_used = False}, and carries a
+\code{needs\_human\_physics} string stating that a full treatment needs the
+$(|q/p|,\phi_D)$ contour, $\Gamma_{12}$, and the SM long-distance charm phase.
+The amplitude normalisation reuses the \emph{same} $\dmD^{\rm exp}/2$ anchor as
+\code{C001}. In short: \code{C001} is the rigorous magnitude veto; \code{C002} is
+a conservative, flagged CP-odd proxy bolted onto the same complex
+$\Mtwelve^{\rm NP}$.
+
+% ====================================================================
+\part{Subtleties and the gap to ``rigorous''}
+\label{part:subtle}
+% ====================================================================
+
+\section{The SM long-distance contamination is the whole story}
+\label{sec:longdistance}
+
+This is the defining subtlety of charm mixing and the reason the budget is what
+it is. Unlike $K$ and $B$ mixing, where the short-distance (top/charm-loop) SM
+amplitude can be computed and subtracted with controlled uncertainty, the SM
+$\Dz$ mixing amplitude is \emph{dominated by long-distance hadronic
+intermediate states} --- on-shell $\pi\pi$, $K\bar K$, $\dots$ --- whose
+contribution sits orders of magnitude above the perturbative short-distance
+piece and is, for practical purposes, incalculable from first principles
+(GGNP, 0906.1879). The measured $\xD\approx0.40\%$, $\yD\approx0.64\%$ are
+therefore consistent with being \emph{entirely} SM long-distance; there is no clean ``SM expectation''
+to subtract. The honest response, which is exactly our code's policy, is to make
+\emph{no} SM subtraction and treat the full measured splitting as available
+new-physics room. The \code{C001} docstring states this directly: ``\emph{the
+budget is intentionally the full measured splitting, not a central
+SM-minus-experiment residual, because the charm SM prediction is theoretically
+dirty},'' and the diagnostics carry a \code{physics\_uncertainty} note to the
+same effect. The cost is a bound that is only good to an order of magnitude; the
+benefit is that the bound is \emph{robust} --- it cannot be wrong by being too
+aggressive. Contrast the down sector, where the $B$ mass-splitting constraints
+\code{B001} ($\Delta m_d$) and \code{B003} ($\Delta m_s$) \emph{do} use
+catalog-level uncertainty-aware SM-vs-experiment budgets, schematically
+$(|\Delta m_{\rm exp}-\Delta m_{\rm SM}|+\sigma_{\rm combined})/2$, because
+there the SM piece is calculable. That differs from the older core fallback
+budget, which used the max of the full experimental splitting and the central
+SM--experiment residual.
+
+\section{The charm matrix elements are the weakest hadronic input}
+\label{sec:subtle_me}
+
+The D-system bag parameters in our code are explicitly the least precise of the
+four systems: \code{B\_1\_D = 0.75} is annotated ``\emph{less precise}'' and
+\code{B\_4\_D = B\_5\_D = 1.0} are annotated ``\emph{estimated}''. By contrast
+the kaon and $B$ inputs carry FLAG 2024 provenance. Because the LR matrix
+elements \eqref{eq:codeME} carry the large chiral factor $r_\chi\approx2.15$,
+they dominate the sum for an anarchic point, so the $\sim O(1)$ uncertainty in
+$B_4^D,B_5^D$ propagates directly into $|\Mtwelve^{\rm NP}|$. This is a smaller
+effect than the order-of-magnitude budget looseness of \S\ref{sec:longdistance},
+but it is a genuine input gap and is the first thing to upgrade if the charm
+bound ever needs sharpening.
+
+\section{The $\MKK$ convention (the factor that bites the whole catalogue)}
+\label{sec:convention}
+
+As in the down-sector and electroweak notes, ``$\MKK$'' is overloaded. Our
+quark-sector default is $\MKK = \xi_{\rm KK}\,\LIR$ with
+\code{DEFAULT\_QUARK\_XI\_KK = 1.0} (\code{quarkConstraints/scales.py}), i.e.\ by
+default we identify the matching scale with the geometric IR scale $\LIR$. But
+the physical first KK \emph{gauge/gluon} mass is $x_1\LIR\approx2.45\,\LIR$. A
+charm bound quoted as ``$\MKK\gtrsim20$~TeV'' in $\LIR$ units is a different
+physical statement than the same number in first-KK-mass units. Whenever the
+CFW $21$/$33$~TeV anchors are compared against our scan grid (which is stated in
+$\LIR$), this $\sim2.45$ factor must be tracked. The default
+\code{xi\_KK=1.0} means the code currently uses the $\LIR$ convention; an
+enhanced $g_{s*}$ passed by the caller is the other large lever and must be
+declared alongside the scale.
+
+\section{What \code{C002} defers}
+\label{sec:c002defer}
+
+The CP companion is the clearest ``not yet rigorous'' piece. It constrains a
+one-dimensional CP-odd $\Mtwelve^{\rm NP}$ fraction against a one-dimensional
+HFLAV $\phi_M$ window. A production-grade treatment would (i) use the full
+two-dimensional HFLAV $(|q/p|,\phi_D)$ contour and covariance, (ii) include
+$\Gamma_{12}$ (the absorptive mixing that ties $\phi_D$ to $\phi_M$ and
+$\phi_\Gamma$), and (iii) ground the SM long-distance charm phase, which is
+currently set to the CP-conserving proxy ($\phi_{\rm SM}=0$). All three are
+recorded in the module's \code{needs\_human\_physics} diagnostic and in the
+\code{C002.yaml} open issues. Until then \code{C002} is a conservative
+diagnostic, not a likelihood.
+
+\section{Checklist: what ``even more rigorous charm'' would require}
+\label{sec:checklist}
+
+\begin{enumerate}[leftmargin=1.8em]
+\item Replace the ``estimated'' $B_4^D,B_5^D=1.0$ and ``less precise''
+$B_1^D=0.75$ with lattice/FLAG charm bag parameters, with provenance, and
+reconcile the LR scale convention (the same $3$~GeV vs $2$~GeV caveat the kaon
+LR inputs carry).
+\item Decide and document the $\MKK$ convention ($\LIR$ vs physical first KK
+mass, $\xi_{\rm KK}$) consistently with the CFW $21$/$33$~TeV anchors before
+quoting a TeV bound from charm.
+\item Promote \code{C002} to the full HFLAV $(|q/p|,\phi_D)$ likelihood with
+$\Gamma_{12}$ and a grounded (or explicitly marginalised) SM long-distance phase.
+\item Keep the budget conservative: do \emph{not} attempt an SM long-distance
+subtraction for \code{C001} unless a defensible charm-SM audit supersedes the
+current convention (the \code{C001} docstring explicitly invites reviewers to
+scrutinise this policy if such an audit appears).
+\end{enumerate}
+
+\begin{callout}{Common confusions, defused.}
+\label{sec:confusions}
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item[\textbf{A.}] \emph{``$D$ mixing just duplicates $\eps_K$.''} No. $\eps_K$
+is a \emph{down}-sector observable, sensitive to $U_L^d$; $D$ mixing is the only
+\emph{up}-sector neutral-meson observable, sensitive to $U_L^u$. They probe
+\emph{independent} rotations, and a model can satisfy one while badly violating
+the other.
+\item[\textbf{B.}] \emph{``Custodial symmetry relaxes the charm bound.''} No.
+Custodial $\SUL\times\SUR\times\PLR$ protects electroweak \emph{gauge}
+couplings; the KK-gluon $\Delta F=2$ operators are colour-octet \emph{flavour}
+operators and are untouched (Blanke et al., 0809.1073). \code{C001} is identical
+in the minimal and custodial scans.
+\item[\textbf{C.}] \emph{``A weak charm bound means charm is unimportant.''} No.
+The bound is weak as a \emph{number} only because of SM long-distance
+contamination; its \emph{value to the catalogue} is that it polices the up
+sector, which is exactly the sector that down-alignment inflates.
+\item[\textbf{D.}] \emph{``$\xD$ and $\yD$ measure the same thing.''} No. $\xD$
+is dispersive (mass mixing, $\propto|\Mtwelve|$) and is what our short-distance
+new-physics amplitude feeds; $\yD$ is absorptive (width mixing,
+$\propto|\Gamma_{12}|$) and is a long-distance object the KK gluon does not
+generate at tree level --- because $\Gamma_{12}$ is built from \emph{on-shell}
+final states common to $\Dz$ and $\Dzbar$ (an absorptive imaginary part that
+requires real intermediate hadrons), and a heavy off-shell mediator simply
+cannot supply those.
+\item[\textbf{E.}] \emph{``The budget subtracts an SM prediction.''} No.
+Uniquely among the four systems, \code{C001} treats the \emph{entire} measured
+$\dmD$ as new-physics room ($|\Mtwelve^{\rm NP}|\le\dmD^{\rm exp}/2$) because the
+charm SM is incalculable; the down-sector $B$ constraints \emph{do} subtract.
+\end{itemize}
+\end{callout}
+
+% ====================================================================
+\part*{Annotated reading guide}
+\addcontentsline{toc}{section}{Annotated reading guide}
+% ====================================================================
+
+\begin{description}[leftmargin=0em,style=nextline]
+\item[Gedalia, Grossman, Nir, Perez, arXiv:0906.1879.] \emph{The} reference for
+two of this note's premises: that $D$ is the only neutral meson made of up-type
+quarks, and that it is the only system where SM long-distance swamps
+short-distance. The down-alignment-promotes-up-sector-flavour-violation
+complementarity argument of \S\ref{sec:alignment} is \emph{not} from this paper;
+it belongs to the broader RS-flavour/alignment literature and should not be
+sourced here. Read \S\ref{sec:special} and \S\ref{sec:longdistance} alongside
+it.
+
+\item[Csaki, Falkowski, Weiler, arXiv:0804.1954.] The RS-flavour anatomy paper
+behind the contextual $\sim21$~TeV (anarchic) and $\sim33$~TeV (composite
+pseudo-Goldstone) KK-gluon scales stored in \code{C001.yaml}. The RS-GIM
+suppression of the off-diagonal couplings and the IR-enhanced
+$g_{s*}=g_s(\MKK)\,\log^{1/2}(R'/R)\sim6$ (i.e.\ $\sqrt{k\pi r_c}$, not
+$\sqrt{2k\pi r_c}$) are theirs. The reference for
+\S\ref{sec:kkgluon}--\S\ref{sec:floor}.
+
+\item[Blanke, Buras, Duling, Gori, Weiler, arXiv:0809.1073.] $\Delta F=2$ in
+custodially-protected warped models. Source for the key statement of
+\S\ref{sec:custodial}: $\PLR$/custodial protection is \emph{electroweak} and does
+\emph{not} relax the KK-gluon $\Delta F=2$ bounds. (That $\eps_K$ via the LR
+operator dominates the anarchic flavour bound, with $\MKK\gtrsim20$~TeV unless
+Yukawas are tuned, is specifically CFW 0804.1954's result; Blanke et al.\
+confirm it survives the custodial construction.)
+
+\item[Companion: \code{epsilon\_k\_review.tex}.] The down-sector sibling that
+runs on the \emph{same} \code{quarkConstraints.deltaf2} engine, and the place to
+read the shared $\Delta F=2$ operator basis, KK-gluon matching, QCD running, and
+BMU hadronic conventions worked through in the kaon ($\bar s d$) context. The
+present note specialises that machinery to the $(u,c)$ flavour labels and does
+not re-derive the common parts. Reading the two side by side makes the up/down
+complementarity of \S\ref{part:align} concrete: identical code path, different
+\code{sector} flag, independent rotations.
+
+\item[Sibling note: \code{delta\_m\_d\_review.tex}.] Same template and
+directory, but $B_d$ mixing ($\Delta m_d$, a \emph{down}-sector observable) ---
+not to be confused with $D^0$ charm mixing despite the similar name. Useful as a
+direct down-sector counterpoint to this note.
+
+\item[Catalogue sidecars \code{C001.yaml}, \code{C002.yaml}.] The source of truth
+for the HFLAV/PDG numbers used here: $\xD,\yD,\dmD$ (C001) and
+$|q/p|,\phi_D,\phi_M$ (C002), each with source URL, access date, snapshot path,
+and sha256. The recorded ``subtlety'' note --- \emph{down-sector alignment
+promotes up-sector observables} --- is the one-line statement of this note's
+thesis.
+\end{description}
+
+\bigskip
+\noindent\rule{\linewidth}{0.4pt}\\
+\footnotesize
+\emph{Internal note. The operator coefficients \eqref{eq:codewilsons}, matrix
+elements \eqref{eq:codeME}, budget \eqref{eq:veto}, and all numerical values
+($\dmD$, $\xD$, $\yD$, $g_{s*}$, the $21$/$33$~TeV anchors, $\xi_{\rm KK}=1$) are
+as stored in \code{quarkConstraints/deltaf2.py},
+\code{quarkConstraints/couplings.py}, \code{quarkConstraints/model.py}, and the
+\code{C001}/\code{C002} sidecars. The ``rigorous'' tag for \code{C001} and the
+``partial / NEEDS-HUMAN-PHYSICS'' tag for \code{C002} follow the constraint
+docstrings and the catalogue ledgers. Cross-check before citing externally.}
+
+\end{document}

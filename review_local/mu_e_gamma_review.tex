@@ -1,0 +1,1016 @@
+\documentclass[11pt]{article}
+
+% ============================================================
+%  mu -> e gamma in warped (Randall--Sundrum) models
+%  A slow, pedagogical internal review.
+%  Written to track (a) the physics, (b) what is in OUR code,
+%  (c) the subtleties and gaps.
+%  This is an internal working note, not for distribution.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% lightweight "callout" box
+\colorlet{shadecolor}{gray!12}
+\newenvironment{callout}[1]{%
+  \par\medskip\begin{shaded}\noindent\textbf{#1}\par\smallskip}{\end{shaded}\medskip}
+
+\newcommand{\MKK}{M_{\mathrm{KK}}}
+\newcommand{\LIR}{\Lambda_{\mathrm{IR}}}
+\newcommand{\sw}{s_W}
+\newcommand{\cw}{c_W}
+\newcommand{\swsq}{s_W^2}
+\newcommand{\cwsq}{c_W^2}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\vev}{v}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\YN}{Y_N}
+\newcommand{\YNb}{\bar Y_N}
+\newcommand{\YNmat}{\mathbf{Y}_N}
+\newcommand{\YNbmat}{\bar{\mathbf{Y}}_N}
+\newcommand{\spur}{(\YNb\YNb^\dagger)_{12}}
+\newcommand{\BR}{\mathcal{B}}
+\newcommand{\Vpmns}{V_{\mathrm{PMNS}}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\todo}[1]{{\color{red}[#1]}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{\bf Lepton Flavour Violation: $\mu\to e\gamma$ in Warped Models\\[4pt]
+\large A slow, pedagogical internal review --- physics, code, and subtleties}
+\author{Internal working note (5D--Neutrino--Mixing repo)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This note is a from-scratch, deliberately slow walk-through of the
+charged-lepton-flavour-violating (cLFV) decay $\mu\to e\gamma$ and how it
+constrains a Randall--Sundrum (RS) warped extra dimension. It is the single most
+powerful lepton-sector probe in our flavour catalogue: a sharp, background-free
+experimental limit (MEG~II, 2025) multiplied against a sharply model-dependent
+RS prediction. The note assumes \emph{no} prior knowledge of dipole operators,
+the seesaw mechanism, or ``RS-GIM'': all three are built up from the beginning.
+Part~\ref{part:sm} defines the observable, the magnetic-dipole operator, and the
+branching-ratio formula. Part~\ref{part:rs} explains \emph{why} warped models
+generate $\mu\to e\gamma$, what the RS-GIM mechanism does, and where the
+multi-TeV Kaluza--Klein (KK) floor comes from. Part~\ref{part:model} contrasts
+the three model choices --- anarchic, Chen--Yu alignment, and the
+lepton-minimal-flavour-violation (LMFV) hypothesis of Perez--Randall that our
+code locks in --- and asks honestly whether our treatment is rigorous or proxy.
+Part~\ref{part:code} documents exactly what our code does
+(\code{flavorConstraints/muToEGamma.py}, the constraint \code{L001}, the
+\code{LMFVLeptonParameters} carrier), including the \emph{critical honesty point}
+that the veto is the branching ratio, not the famous coefficient $C=0.02$.
+Part~\ref{part:subtle} catalogues the subtleties and the gap to ``rigorous.'' An
+annotated reading guide closes the note.
+\end{abstract}
+
+\tableofcontents
+
+% ====================================================================
+\part*{Orientation: why this note exists}
+\addcontentsline{toc}{section}{Orientation: why this note exists}
+% ====================================================================
+
+In our constraint catalogue, the quark-sector flavour-changing observables
+($\eps_K$, $\Delta m_d$, $\Delta m_s$, $D^0$--$\bar D^0$) and $Z\to b\bar b$ are
+the work-horses of the production scans. $\mu\to e\gamma$ is different in two
+ways, and both are worth stating up front. First, it lives in the
+\emph{lepton} sector: it is constraint \code{L001} in the \code{charged\_lepton}
+family, it is \code{Severity.HARD}, and as of wave~W7 (commit \code{8ca55c8}) it
+is \emph{live} in the catalogue --- but it is \emph{not} part of the quark-only
+production scans, because those scans never build the lepton carrier it needs.
+Second, its experimental side is essentially perfect (a single, clean
+branching-ratio limit) while its theory side is among the most model-dependent
+numbers in the whole catalogue: the prediction depends on the entire
+right-handed-neutrino / seesaw sector (the neutrino Yukawa $\YN$, the PMNS
+matrix, the Majorana scale $M_N$) through one off-diagonal spurion. To know what
+our scan is really doing --- and what it would take to call \code{L001}
+``rigorous'' --- we need to understand $\mu\to e\gamma$ from the ground up. That
+is the purpose of this note.
+
+A one-paragraph executive summary, to be unpacked over the following pages:
+
+\begin{quote}
+\small
+$\mu\to e\gamma$ is a \emph{magnetic-dipole} flavour transition: a muon flips to
+an electron while emitting a photon, which in the Standard Model (SM) is
+forbidden to all practical purposes by the smallness of neutrino masses. Any new
+physics that talks to both the muon and the electron generates an effective
+dipole operator $\bar e\,\sigma^{\mu\nu}\mu\,F_{\mu\nu}$, and the decay rate
+measures the square of its coefficient. In RS the photon, the leptons and the
+heavy KK states all live in the warped bulk, so flavour-violating dipoles are
+generated by KK exchange; their size is controlled by the \emph{differences} in
+how the various lepton flavours localise (the ``RS-GIM'' mechanism). Whether the
+prediction sits at, above, or below the experimental ceiling depends entirely on
+the \emph{model of lepton flavour}. We adopt lepton minimal flavour violation
+(LMFV, Perez--Randall): there, the only flavour-violating spurion is built from
+the neutrino Yukawa, the relevant amplitude is $\propto\spur$, and naive
+dimensional analysis (NDA) gives $\BR\sim 4\times10^{-8}\,|\spur|^2\,(3\,
+\mathrm{TeV}/\MKK)^4$. Confronting this with the MEG~II limit
+$\BR<1.5\times10^{-13}$ either pushes $\MKK$ into the multi-TeV range or forces
+the spurion to be small --- which, because the spurion carries the PMNS matrix
+and the seesaw scale, ties the LFV bound directly to the neutrino mass sector.
+\end{quote}
+
+\noindent The logical spine of the whole note, in one picture:
+\begin{footnotesize}
+\begin{verbatim}
+  muon ---[ dipole operator  e mu sigma.F ]---> electron + photon   ( LFV: needs new physics )
+                           |
+   SM rate ~ (Dm_nu^2 / M_W^2)^2 ~ 10^-54   ==>  ANY signal = new physics, zero background
+                           |
+   RS: photon + leptons + Higgs in the bulk  ==>  KK exchange makes a dipole
+                           |
+   RS-GIM:  amplitude ~ DIFFERENCE of flavour localisations  ==>  small, but NOT zero
+                           |
+   size set by the MODEL of lepton flavour:
+       |
+       +-- anarchic        (ABP 0606021)  ==> M_KK floor ~ few-10 TeV  (strongest cLFV bound)
+       |
+       +-- Chen-Yu align   (degeneracy)   ==> dipole suppressed by alignment, floor lowered
+       |
+       +-- LMFV  (Perez-Randall 0805.4652) <== OUR CHOICE
+                   spurion = (Ybar_N Ybar_N^dag)_12 ,  NDA coeff C ~ 0.02
+                           |
+   confront with MEG II 2025:  BR(mu->e gamma) < 1.5e-13   ==>  HARD veto in L001
+                           |
+   ( the model fork above, and a code-honesty caveat about C, come in Parts III-IV )
+\end{verbatim}
+\end{footnotesize}
+\noindent Keep this map in mind; every box in it is unpacked below. The model
+fork (which of the three flavour hypotheses our code locks in, and why) is
+Part~\ref{part:model}; the most subtle implementation point --- that the coefficient
+$C=0.02$ is \emph{not} what the code tests against --- is deferred to
+\S\ref{sec:honesty}, where it can be proven from a unit test rather than merely
+asserted.
+
+\medskip
+\noindent\textbf{How to read this note.} The audiences differ.
+A reader here for the \emph{physics} should read Parts~\ref{part:sm}--\ref{part:model}
+(the observable, the RS mechanism, the model fork) and may skim Part~\ref{part:code}
+(the code documentation) on a first pass, returning to it only for the honesty
+point \S\ref{sec:honesty}. A reader here for the \emph{implementation} can move
+quickly through Parts~\ref{part:sm}--\ref{part:rs} and dwell on
+Parts~\ref{part:code}--\ref{part:subtle}. Everyone should read \S\ref{sec:honesty}
+and the worked example in \S\ref{sec:floor}.
+
+% ====================================================================
+\part{The Standard-Model framework: what $\mu\to e\gamma$ is}
+\label{part:sm}
+% ====================================================================
+
+\section{The observable, in words and in numbers}
+\label{sec:observable}
+
+A free positive muon decays overwhelmingly through $\mu^+\to e^+\nu_e\bar\nu_\mu$
+(Michel decay). The process of interest here is the rare \emph{radiative}
+variant in which the two neutrinos are absent:
+\begin{equation}
+\mu^+ \to e^+ \gamma .
+\end{equation}
+The two final-state neutrinos are what carry away lepton-family number in the
+ordinary decay; removing them means the muon-ness of the initial state has been
+converted directly into electron-ness. That is \emph{charged lepton flavour
+violation} (cLFV): a transition between lepton generations with no compensating
+neutrinos. The experimental signature is clean and almost background-free: a
+back-to-back, monochromatic $e^+$ and $\gamma$, each carrying half the muon rest
+energy, $E_e = E_\gamma = m_\mu/2 \approx 52.8$~MeV.
+
+\begin{definition}[Branching ratio]
+The branching ratio $\BR(\mu\to e\gamma)$ is the fraction of all muon decays that
+proceed through the $e\gamma$ final state,
+\[
+\BR(\mu\to e\gamma) \equiv \frac{\Gamma(\mu\to e\gamma)}{\Gamma(\mu\to\text{all})}
+   \simeq \frac{\Gamma(\mu\to e\gamma)}{\Gamma(\mu\to e\nu\bar\nu)},
+\]
+the last step because Michel decay saturates the total muon width. It is the
+quantity experiments report as an upper limit.
+\end{definition}
+
+\section{Why the SM rate is, for our purposes, exactly zero}
+\label{sec:smrate}
+
+In the SM augmented with massive neutrinos, $\mu\to e\gamma$ \emph{is} generated:
+at one loop, a $W$ boson and a neutrino circulate, and neutrino oscillations
+($\nu_\mu \leftrightarrow \nu_e$ mixing) supply the flavour change. But the
+amplitude is throttled by the GIM mechanism: it is proportional to the
+\emph{difference} of neutrino-mass-squared splittings over the $W$ mass squared,
+\begin{equation}
+\BR(\mu\to e\gamma)_{\rm SM} \sim \frac{3\alpha}{32\pi}
+   \left|\sum_i U^*_{ei}U_{\mu i}\frac{\Delta m^2_{i1}}{M_W^2}\right|^2
+   \;\sim\; 10^{-54}.
+\label{eq:smrate}
+\end{equation}
+The number is so far below any conceivable experiment (the MEG~II reach
+$\sim 1.5\times10^{-13}$ is some $41$ orders of magnitude --- a factor
+$\sim 10^{41}$ --- above this SM rate) that for catalogue purposes the SM
+prediction is \emph{zero}. This is the single most important practical feature of
+$\mu\to e\gamma$: there is no irreducible SM background to subtract, no hadronic
+uncertainty, no theory error on the ``floor.'' \textbf{Any} observed signal is
+unambiguously new physics. Our code encodes exactly this: \code{L001} sets
+\code{sm\_prediction = 0.0} and applies its entire budget to the
+\emph{new-physics} branching fraction (see \S\ref{sec:codeL001}).
+
+\section{The effective operator: a magnetic dipole}
+\label{sec:operator}
+
+Because the photon is on-shell and massless, the most general
+flavour-violating $\mu$--$e$--$\gamma$ vertex is fixed by gauge invariance to be
+a \emph{magnetic-dipole} (chirality-flipping) operator. After integrating out
+whatever heavy physics generates it, the relevant piece of the Lagrangian is
+\begin{equation}
+\mathcal{L}_{\rm dipole} \;=\;
+   \frac{e\,m_\mu}{2}\;\bar e\,\sigma^{\mu\nu}\big(A_L P_L + A_R P_R\big)\mu\;
+   F_{\mu\nu} \;+\; \text{h.c.},
+\label{eq:dipoleop}
+\end{equation}
+where $\sigma^{\mu\nu}=\tfrac{i}{2}[\gamma^\mu,\gamma^\nu]$,
+$P_{L,R}=\tfrac{1}{2}(1\mp\gamma_5)$ are chirality projectors, $F_{\mu\nu}$ is the
+photon field strength, and $A_{L,R}$ are dimensionful Wilson coefficients
+(dimension $1/\text{mass}^2$) carrying the model dependence. Three features of
+\eqref{eq:dipoleop} are worth pausing on:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{It flips chirality.} $\bar e\,\sigma^{\mu\nu}\mu$ connects a
+left-handed lepton to a right-handed one, which is why the explicit factor of
+$m_\mu$ (a chirality-flipping mass insertion) appears out front. A theory with no
+source of chirality breaking cannot generate it.
+\item \textbf{It is a dimension-6 operator} (after counting the Higgs vev that
+supplies $m_\mu$): suppressed by two powers of the new-physics scale. Hence the
+amplitude scales as $1/\MKK^2$ and the \emph{rate} as $1/\MKK^4$. This is the
+origin of the famous $(\MKK)^{-4}$ in every branching-ratio formula below.
+\item \textbf{It is loop-induced.} A dipole requires a photon to attach to a
+charged line inside a loop; there is no tree-level dipole. The loop supplies a
+factor $1/16\pi^2$, which the NDA estimate will track.
+\end{itemize}
+The decay rate is the square of \eqref{eq:dipoleop}'s coefficient; in the
+standard normalisation,
+\begin{equation}
+\BR(\mu\to e\gamma) = \frac{48\pi^3\alpha}{G_F^2}
+   \left(|A_L|^2 + |A_R|^2\right),
+\label{eq:brgeneric}
+\end{equation}
+so the entire job of any model --- SM, supersymmetry, or RS --- is to compute the
+two numbers $A_L, A_R$.
+
+\section{The experimental constraint: MEG II 2025}
+\label{sec:expt}
+
+The strongest existing limit comes from the MEG~II experiment at PSI, which
+stops $\sim 10^{14}$ positive muons and looks for the back-to-back $e^+\gamma$
+signature. The value our catalogue uses (the primary anchor in \code{L001.yaml})
+is
+\begin{equation}
+\boxed{\;\BR(\mu^+\to e^+\gamma) < 1.5\times10^{-13}\quad (90\%\ \text{C.L.}),\;}
+\label{eq:megii}
+\end{equation}
+from the 2021--2022 physics runs (published October 2025; quoted search
+sensitivity $2.2\times10^{-13}$). For context, the catalogue sidecar also stores
+the experimental history, which is a thirty-year march of improving limits:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Experiment / dataset & $\BR$ upper limit (90\% C.L.) & era \\
+\midrule
+MEGA (used by Perez--Randall) & $1.2\times10^{-11}$ & paper-era input \\
+MEG full 2009--2013          & $4.2\times10^{-13}$ & 2016 \\
+MEG~II 2021-only             & $7.5\times10^{-13}$ & 2024 \\
+MEG + MEG~II combination     & $3.1\times10^{-13}$ & 2024 \\
+\textbf{MEG~II 2021--2022 (primary)} & $\mathbf{1.5\times10^{-13}}$ & \textbf{2025} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent The first row matters for our code: when Perez--Randall did their NDA
+estimate in 2008 they used the contemporaneous MEGA bound
+$1.2\times10^{-11}$, and \emph{that} input is where the coefficient $0.02$ comes
+from (\S\ref{sec:Cnumber}). The last row is what the live scan tests against. The
+factor of $\sim 80$ between them ($1.2\times10^{-11}$ vs $1.5\times10^{-13}$)
+tightens any derived coefficient by $\sqrt{80}\approx 9$ and is the reason the
+``paper'' coefficient and the ``live'' coefficient differ.
+
+% ====================================================================
+\part{How warped models generate $\mu\to e\gamma$}
+\label{part:rs}
+% ====================================================================
+
+\section{RS recap: where leptons and the photon live}
+\label{sec:rsrecap}
+
+Recall the geometry (repo conventions). Spacetime is a slice of AdS$_5$ between a
+UV brane at $z=1/k$ (Planck scale) and an IR brane at $z=1/\LIR$ (TeV scale); the
+warp factor is $\eps=\LIR/k\sim10^{-15}$. A 5D fermion carries a dimensionless
+bulk-mass parameter $c=M_5/k$ that fixes where its massless zero mode lives:
+\begin{itemize}[leftmargin=1.4em]
+\item $c>\half$: the zero mode is peaked at the \emph{UV} brane, with an
+exponentially small overlap at the IR brane;
+\item $c<\half$: the zero mode is peaked at the \emph{IR} brane, with an
+$\mathcal{O}(1)$ overlap there.
+\end{itemize}
+The normalised brane overlap (an ``$f$-factor'') is, in the repo's convention,
+$f_{\rm IR}^2(c)=(\half-c)/(1-\eps^{1-2c})$. Light leptons, which need small
+masses, are UV-localised ($c>\half$, small $f$); this is the central RS idea ---
+hierarchies come from \emph{geometry}, not from hierarchical 5D couplings.
+
+The photon (and the $W$, $Z$, gluon) are bulk gauge fields. Their zero modes are
+the SM gauge bosons; their excited KK modes are localised toward the IR brane
+with masses $m_n \simeq x_n\LIR$, where the $x_n$ are Bessel roots
+(the first gauge KK root for Neumann--Neumann boundary conditions is
+$x_1\approx 2.45$, the constant \code{GAUGE\_KK\_ROOT\_NN = 2.448687135269161}
+in our code). \textbf{This factor of $2.45$ matters for every TeV bound we quote}
+and is a recurring source of confusion --- see \S\ref{sec:Mconvention}.
+
+\section{The mechanism: KK exchange and the chirality flip}
+\label{sec:mechanism}
+
+How does a dipole appear? The Higgs sits on (or near) the IR brane, and the heavy
+KK fermions and KK gauge bosons pile up there too. A light external muon
+(UV-localised) has a small but non-zero tail reaching the IR brane; there it can
+(i) pick up a chirality-flipping mass insertion from the Higgs vev, (ii) emit a
+photon, and (iii) be converted to an electron by a flavour-violating
+KK-fermion/KK-gauge exchange. Diagrammatically this is exactly the loop that
+generates \eqref{eq:dipoleop}: a heavy KK line inside, a photon attached, a mass
+insertion to flip chirality. Integrating out the KK tower gives a dipole
+coefficient
+\begin{equation}
+A \;\sim\; \frac{1}{16\pi^2}\,\frac{1}{\MKK^2}\times(\text{flavour structure}),
+\label{eq:Aparam}
+\end{equation}
+the $1/16\pi^2$ from the loop and the $1/\MKK^2$ from the heavy propagators ---
+the universal decoupling. As Agashe, Blechman, and Petriello
+(hep-ph/0606021) stress, the calculation is only \emph{finite and trustworthy}
+when the Higgs propagates in the bulk; with a strictly brane-localised Higgs the
+dipole is formally ultraviolet-sensitive (uncalculable), and one must treat its
+coefficient as an NDA estimate. Our code does the latter --- it uses an NDA
+coefficient, not a finite loop integral --- which is the honest reason
+\code{L001}'s \emph{prediction} side is model-dependent
+(\S\ref{sec:rigorous}).
+
+\section{RS-GIM: why the answer is small but not zero}
+\label{sec:rsgim}
+
+The ``flavour structure'' in \eqref{eq:Aparam} is where the magic --- and the
+constraint --- lives. In RS, the flavour-violating coupling of a KK gauge boson to
+two leptons is governed by their bulk localisations. If \emph{all} lepton flavours
+sat at exactly the same place in the bulk, the KK gauge couplings would be
+flavour-universal and rotate away: no flavour violation, in perfect analogy with
+the ordinary GIM mechanism --- it is the \emph{same} idea as the
+mass-splitting-\emph{difference} structure that suppresses the SM rate
+\eqref{eq:smrate}, where the amplitude vanishes in the limit of degenerate
+neutrino masses. They do \emph{not} sit at the same place --- that is
+how the mass hierarchy is generated --- but they sit at \emph{similar} places (all
+light leptons are UV-localised), so the flavour-violating piece is the small
+\emph{difference} of their localisations. The reason a \emph{difference} is the
+violation is basis misalignment: the KK gauge couplings are diagonal in the
+\emph{flavour-localisation} basis (each generation couples according to where its
+zero mode sits in the bulk), but the physical states live in the \emph{mass}
+basis; the mismatch between these two bases --- set by how differently the
+generations are localised --- is what cannot be rotated away. This is the
+\textbf{RS-GIM mechanism}:
+\begin{equation}
+A_{\mu\to e} \;\propto\; (\alpha_\mu - \alpha_e),
+\qquad \alpha_i = \text{(KK coupling set by the localisation of flavour } i),
+\end{equation}
+where the $\alpha_i$ are controlled by the same $f$-factors $f_{\rm IR}(c)$ of
+\S\ref{sec:rsrecap} that set the lepton masses. The individual $\alpha_i$ are all
+$\mathcal{O}(0.1)$ in the anarchic estimate of hep-ph/0606021; the suppression is
+\emph{not} in their magnitudes but in their \emph{difference}
+$(\alpha_\mu-\alpha_e)$, which is what enters the dipole. (This
+$(\alpha_\mu-\alpha_e)$ picture is the \emph{anarchic} flavour-violation
+mechanism of \S\ref{sec:anarchic}; it is distinct from the single LMFV spurion
+$\spur$ our code actually uses, built from neutrino Yukawas rather than from the
+charged-lepton localisations $\alpha_i$ --- the two are different sources of
+$\mu\to e$ violation, and the LMFV one is what \eqref{eq:prBR} encodes.) The same
+geometry that explains \emph{why} the electron is lighter than the muon also
+\emph{suppresses} (but does not forbid) $\mu\to e$ transitions. RS-GIM is the
+lepton-sector analogue of the quark-sector RS-GIM that protects $\eps_K$ and
+$\Delta m_K$. It is what makes the model survive at all; whether it survives
+comfortably or barely is the quantitative question of Part~\ref{part:model}.
+
+\section{The branching-ratio formula our code uses (LMFV/NDA)}
+\label{sec:brformula}
+
+Specialising to the LMFV hypothesis (motivated in \S\ref{sec:lmfv}), the only
+flavour-violating object is the neutrino Yukawa, and the $\mu$--$e$ dipole is
+controlled by the (1,2) entry of the Hermitian spurion $\YNb\YNb^\dagger$. The
+Perez--Randall NDA dipole operator (their Eq.~(29)) and the resulting
+branching ratio (their Eq.~(30), with the spurion bound their Eq.~(31)) are
+\begin{equation}
+\mathcal{O}^{\rm IR}_{\rm dipole} \approx
+   \frac{e\,m_\mu}{2\cdot 16\pi^2\,k^2}\,\spur\,
+   F^{\mu\nu}\,\bar e_L\,\sigma_{\mu\nu}\,\mu,
+\label{eq:prdipole}
+\end{equation}
+\begin{equation}
+\boxed{\;\BR(\mu\to e\gamma) \simeq 4\times10^{-8}\;
+   |\spur|^2\;\left(\frac{3\ \mathrm{TeV}}{\MKK}\right)^{4}.\;}
+\label{eq:prBR}
+\end{equation}
+Here $\YNb = 2k\,\YN$ is the dimensionless rescaled neutrino Yukawa (the same
+$2k$ rescaling the repo uses everywhere), so $\spur$ is dimensionless and
+$\mathcal{O}(1)$ for anarchic Yukawas. Two structural facts to carry forward:
+\begin{itemize}[leftmargin=1.4em]
+\item The prefactor $4\times10^{-8}$ is the NDA packaging of
+$(\alpha/\ldots)(1/16\pi^2)^2$ etc., evaluated at the reference scale $3$~TeV. In
+our code it is the constant \code{PREFAC\_BR = 4.0e-8}.
+\item The $(\MKK)^{-4}$ scaling is the dipole-rate scaling of
+\S\ref{sec:operator}: raising the KK scale by a factor of two suppresses the rate
+by sixteen. This is what converts an experimental limit into a \emph{lower bound}
+on $\MKK$.
+\end{itemize}
+
+\section{Where the $\MKK$ floor comes from}
+\label{sec:floor}
+
+Turn \eqref{eq:prBR} around. Imposing $\BR<\BR_{\rm lim}$ gives, equivalently, a
+bound on the spurion or a bound on the KK scale:
+\begin{equation}
+|\spur| \;\lesssim\; \sqrt{\frac{\BR_{\rm lim}}{4\times10^{-8}}}
+   \left(\frac{\MKK}{3\ \mathrm{TeV}}\right)^{2}
+   \;\equiv\; C\left(\frac{\MKK}{3\ \mathrm{TeV}}\right)^{2},
+\label{eq:spurbound}
+\end{equation}
+which \emph{defines} the coefficient $C$ (this is the form
+\code{coefficient\_from\_br\_limit} in our code computes). For an
+$\mathcal{O}(1)$ anarchic spurion $|\spur|\sim 1$, \eqref{eq:spurbound} forces
+$\MKK \gtrsim 3\,\mathrm{TeV}/\sqrt{C}$. With the paper-era input
+$C\approx 0.02$ this is $\MKK\gtrsim 3/\sqrt{0.02}\approx 21$~TeV; with the
+MEG~II input the coefficient drops to $C\approx 1.9\times10^{-3}$ and the floor
+climbs further still. This is the celebrated \textbf{RS lepton-LFV problem}: in
+the anarchic case the lepton-flavour-violating observables collectively force
+$\MKK$ to many TeV, well above the electroweak floor set by $S,T$. ABP make this
+case from the \emph{full set} of cLFV observables --- $\mu$--$e$ conversion in
+nuclei, rare $\mu$ decays (including $\mu\to e\gamma$), and rare $\tau$ decays ---
+and emphasise a built-in \emph{tension} between the loop-induced dipole
+($\mu\to e\gamma$) and tree-level $\mu$--$e$ conversion, which depend oppositely on
+the Yukawa size, so that no single observable can be tuned away without aggravating
+another. (In much of the RS-LFV literature $\mu$--$e$ conversion, not
+$\mu\to e\gamma$, is the leading bound.) The LMFV and alignment models of
+Part~\ref{part:model} exist precisely to relax this collective tension.
+
+\begin{callout}{Worked numerical example --- one benchmark point, all the numbers.}
+This is the actual benchmark pinned in our unit test
+(\code{tests/.../test\_L001.py}). (The spurion $\spur$ used here is fully defined
+only in \S\ref{sec:lmfv}--\S\ref{sec:brformula}: it is the $(1,2)$ entry of the
+Hermitian matrix $\YNb\YNb^\dagger$ with $\YNb$ the PMNS-rotated rescaled neutrino
+Yukawa. For this example treat $|\spur|$ as a given number.) The point has spurion
+magnitude $|\spur|\approx 0.0623$ at $\MKK=3$~TeV (so the reference factor
+$(3\,\mathrm{TeV}/\MKK)^4=1$); this is the test's
+$\code{\_ORACLE\_LHS}=0.062266\ldots$, the absolute value of
+$\code{\_ORACLE\_OFFDIAG}=-0.0348+0.0517\,i$. Note this is already an
+order of magnitude \emph{below} $\mathcal{O}(1)$ --- the LMFV partial
+alignment and the small neutrino Yukawa eigenvalues have done real work here, and
+this is \emph{not} the raw anarchic $|\spur|\sim 1$ scenario of
+\S\ref{sec:anarchic}. Even so, the point fails. The predicted new-physics
+branching ratio \eqref{eq:prBR} is
+\[
+\BR_{\rm NP} = 4\times10^{-8}\times(0.0623)^2\times 1
+   \;\approx\; 1.55\times10^{-10}
+   \quad(\text{the test's }\code{\_ORACLE\_BR}=1.5508\ldots\times10^{-10}).
+\]
+Confront with MEG~II, $\BR_{\rm lim}=1.5\times10^{-13}$:
+\[
+\frac{\BR_{\rm NP}}{\BR_{\rm lim}} = \frac{1.55\times10^{-10}}{1.5\times10^{-13}}
+   \;\approx\; 1.03\times10^{3}
+   \quad(\text{the test's }\code{\_ORACLE\_BR\_RATIO}=1033.9),
+\]
+so this point \emph{fails} the bound by three orders of magnitude --- it is
+\textbf{vetoed}. (For comparison the inert dipole diagnostic at the paper
+coefficient is $\text{rhs}=C(\MKK/3000)^2=0.02$ and the dipole ratio
+$|\spur|/\text{rhs}=3.11$, the test's
+$\code{\_ORACLE\_DIP\_RATIO\_PAPER\_C}=3.1133$ --- but recall \S\ref{sec:honesty},
+that ratio is \emph{not} the gate.) To rescue the point one would need to raise
+$\MKK$ by $(1.03\times10^3)^{1/4}\approx 5.7$, i.e.\ to $\MKK\approx 17$~TeV, or to
+suppress the spurion further. The same arithmetic, in words: \emph{even a
+sub-$\mathcal{O}(1)$ spurion ($|\spur|\approx 0.06$) at $3$~TeV overshoots the
+MEG~II ceiling by $\sim 1000\times$, and only a $\sim 6\times$ heavier KK scale
+(or a $\sim 30\times$ smaller spurion) brings it under.}
+\end{callout}
+
+% ====================================================================
+\part{Model dependence: anarchic vs.\ Chen--Yu vs.\ LMFV}
+\label{part:model}
+% ====================================================================
+
+\emph{The experimental limit \eqref{eq:megii} is model-independent. The
+\emph{prediction} \eqref{eq:prBR} is not: the spurion $\spur$ and the relevant
+$C$ depend entirely on the assumed model of lepton flavour. This part lays out
+the three options and explains which one our code locks in, and why.}
+
+\section{Option 1: anarchic flavour (the maximal, most constrained case)}
+\label{sec:anarchic}
+
+The default RS flavour hypothesis is \emph{anarchy}: the 5D Yukawa couplings are
+structureless $\mathcal{O}(1)$ complex numbers, and \emph{all} the observed
+hierarchy comes from the $f$-factors. This is the framework of
+Agashe--Blechman--Petriello (hep-ph/0606021), whose central thesis is that
+precisely because flavour is geometric, LFV becomes a \emph{direct probe of the
+geometry}: the same localisation pattern that fits the charged-lepton masses
+predicts the $\mu\to e$ dipole, with no freedom left to hide it. In the anarchic
+case the spurion is generically $\mathcal{O}(1)$, the individual $\alpha_i$ are
+only $\mathcal{O}(0.1)$ (RS-GIM acts through their \emph{differences}, not their
+magnitudes), and the bound \eqref{eq:spurbound} bites hard: the cLFV observables
+collectively push the lightest KK gauge mass into the few-to-ten-TeV range across
+the natural parameter space. ABP frame this as a \emph{virtue}: forthcoming
+$\mu\to e\gamma$ and $\mu$-conversion experiments ``definitively test'' the RS
+geometric origin of the lepton hierarchy. The price is that the minimal anarchic
+model is in tension with EW precision unless $\MKK$ is uncomfortably high.
+
+\section{Option 2: generic alignment / degeneracy (the ``Chen--Yu'' option)}
+\label{sec:chenyu}
+
+A second route --- which we label generically, as it is a mechanism rather than a
+single canonical reference --- is to give up anarchy and \emph{align} (or partially
+degenerate) the lepton bulk masses so that the flavour-violating differences
+$(\alpha_\mu-\alpha_e)$ in the RS-GIM expression are suppressed by construction.
+If the relevant lepton localisations are forced to be degenerate, the dipole
+spurion shrinks and the $\mu\to e\gamma$ bound is relaxed --- much as
+\emph{quark}-sector bulk-mass alignment relaxes $\eps_K$. The cost is that the
+alignment is an extra assumption (a flavour symmetry or a boundary condition) not
+required by the geometry itself; it trades predictivity for a lower KK floor. Our
+internal model survey recorded this as a viable but less clean alternative: it
+works, but it requires importing structure that anarchy and LMFV avoid.
+
+\section{Option 3: LMFV (Perez--Randall) --- our locked choice}
+\label{sec:lmfv}
+
+The model our code adopts is \emph{lepton minimal flavour violation} (LMFV),
+following Perez--Randall (0805.4652). The idea is the lepton analogue of minimal
+flavour violation in the quark sector: \emph{assume the only spurions that break
+lepton flavour are the Yukawa matrices themselves}. Concretely, Perez--Randall
+take the bulk mass matrices (the $c$-parameters promoted to matrices) to be
+functions of the Yukawas,
+\begin{align}
+C_E &= \mathbb{1} + a\,k^2\,Y_E^\dagger Y_E, \nonumber\\
+C_N &= \mathbb{1} + b\,k^2\,Y_N^\dagger Y_N, \\
+C_L &= \mathbb{1} + a_E\,k^2\,Y_E Y_E^\dagger + b_N\,k^2\,Y_N Y_N^\dagger,
+\nonumber
+\end{align}
+with $a,b,a_E,b_N$ real $\mathcal{O}(1)$ coefficients. Physically, building the
+$c$-parameter matrices out of the Yukawas forces them to be (approximately)
+diagonalised by the \emph{same} unitary rotations as the Yukawas themselves; the
+localisation basis and the mass basis are then nearly aligned by construction, so
+the leftover misalignment that feeds the dipole is small and calculable rather than
+anarchic. The consequence is \emph{partial alignment}: because the bulk masses are
+built from the same Yukawas that produce the fermion masses, the flavour-violating
+misalignment is not arbitrary but is governed by the Yukawa spurions. For the charged-lepton dipole,
+working in the charged-lepton mass basis, the only surviving flavour-violating
+combination relevant to $\mu\to e\gamma$ is
+\begin{equation}
+\spur, \qquad \YN \to \Vpmns\cdot\mathrm{diag}(Y_{N_1},Y_{N_2},Y_{N_3}),
+\label{eq:YNrot}
+\end{equation}
+i.e.\ the neutrino Yukawa rotated into the physical basis by the PMNS matrix.
+This is the precise statement that \textbf{$\mu\to e\gamma$ in LMFV is a window on
+the right-handed-neutrino / seesaw sector}: the spurion carries the PMNS angles
+(through $\Vpmns$), the neutrino Yukawa eigenvalues $Y_{N_i}$, and --- because
+those eigenvalues are fixed by the seesaw relation
+$m_{\nu_i}\propto Y_{N_i}^2/M_N$ --- the Majorana scale $M_N$. Change the neutrino
+spectrum, ordering, or Majorana phases, and the $\mu\to e\gamma$ prediction moves.
+
+Why LMFV and not the other two? Our internal model survey (recorded in the
+orchestration ledger) compared LMFV against anarchic, Chen--Yu, and a gauged
+variant and concluded LMFV is the \emph{cleanest}: it is predictive (no extra
+flavour symmetry imposed by hand, unlike Chen--Yu), it is less constrained than
+raw anarchy (the partial alignment softens the dipole), and its NDA coefficient
+is already coded. The verdict recorded was: ``model locked $=$ LMFV
+(Perez--Randall), spurion $\spur$, $C=0.02$ NDA; NDA conservative \emph{within}
+LMFV; bounds rescale $\sim 3\times$ at MEG~II.''
+
+\begin{callout}{Common confusions, defused.}
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item[\textbf{A.}] \emph{``The coefficient $C=0.02$ is what the code tests
+against.''} No --- the gate is the branching ratio $\BR_{\rm NP}\le\BR_{\rm lim}$.
+$C$ is an \emph{inert diagnostic} that scales only the dipole right-hand side, not
+the pass/fail. A unit test pins this (\S\ref{sec:honesty}).
+\item[\textbf{B.}] \emph{``$\mu\to e\gamma$ is a quark-sector constraint in our
+scans.''} No --- it is \code{L001} in the \code{charged\_lepton} family, and it is
+\emph{not} evaluated in the quark-only production scans, which never build the
+lepton carrier. It returns ``NOT EVALUATED'' there (\S\ref{sec:notinscan}).
+\item[\textbf{C.}] \emph{``The bound depends only on the lepton masses.''} No ---
+in LMFV it depends on the entire neutrino sector: $\YN$, the PMNS matrix, the
+Majorana scale $M_N$, the ordering and the Majorana phases, all through
+$\spur$ \eqref{eq:YNrot}.
+\item[\textbf{D.}] \emph{``$\MKK$ means one fixed thing.''} It is overloaded by
+the factor $x_1\approx 2.45$: the physical first KK gauge mass is
+$x_1\LIR$, but the repo's default LFV convention uses $\MKK=\LIR$
+(\S\ref{sec:Mconvention}).
+\item[\textbf{E.}] \emph{``The SM contributes a background.''} No --- the SM rate
+is $\sim 10^{-54}$, so \code{L001} sets \code{sm\_prediction = 0.0} and the bound
+is a pure new-physics veto.
+\end{itemize}
+\end{callout}
+
+\section{Does custodial symmetry or alignment change \emph{this} bound?}
+\label{sec:custodial}
+
+A natural question, given the importance of custodial symmetry for the oblique
+$S,T$ bounds: does it help with $\mu\to e\gamma$? The honest answer is
+\emph{essentially no, not directly}. Custodial $SU(2)_R\times P_{LR}$ is designed
+to protect the \emph{electroweak} observables (the $T$ parameter, the
+$Z\bar b_L b_L$ vertex); it says nothing about the lepton-flavour-violating dipole
+spurion. The custodial route to a $\sim 3$~TeV electroweak KK floor --- extending
+the bulk gauge group to a left--right symmetric $SU(2)_L\times SU(2)_R$ --- is a
+known solution that ABP note (attributing it to earlier work) but do \emph{not}
+themselves scan; it addresses the oblique and $Z\bar b_L b_L$ bounds, not the
+dipole. The physics point stands on its own logic, not on a quoted ABP scan:
+custodial symmetry can let the KK scale be light \emph{as far as $S,T$ are
+concerned}, but the LFV dipole spurion is untouched, so $\mu\to e\gamma$ (and
+$\mu$--$e$ conversion) then become the binding constraints instead. The lever that
+actually moves the LFV bound is the
+\emph{flavour} structure --- anarchy vs.\ alignment vs.\ LMFV --- not the
+electroweak custodial structure. This is why our LFV treatment is a separate
+constraint (\code{L001}) with its own model choice (LMFV), decoupled from the
+custodial \code{ew\_model} switch that governs the oblique and $Zb\bar b$
+constraints.
+
+\section{Is our treatment rigorous or a proxy?}
+\label{sec:rigorous}
+
+We must be precise here, because the catalogue tags it carefully. The
+\emph{experimental} side of \code{L001} --- the MEG~II limit \eqref{eq:megii} ---
+is fully \emph{rigorous}: a published, snapshotted, fact-checked number. The
+\emph{prediction} side is an \emph{NDA estimate}, not a finite one-loop
+computation: it uses the Perez--Randall dipole prefactor $4\times10^{-8}$ and a
+fixed $\MKK$ convention rather than evaluating the loop integral over the actual
+KK tower with the point's wavefunction overlaps. The adapter says so explicitly,
+in the constant \code{LEPTON\_DIPOLE\_PROXY\_ASSUMPTION\_V1}, which is flagged
+\code{NEEDS-HUMAN-PHYSICS}. So the correct tag is: \emph{rigorous experimental
+limit, NDA/model prediction}. Where the lepton carrier is generated from a full
+\code{YukawaResult} (not a caller-supplied stub) the catalogue marks the result
+\code{rigorous} in the sense that no proxy input was injected --- but the
+underlying dipole normalisation is still the NDA form, which is a model
+assumption, not a derived loop.
+
+These two statements are not in tension once one sees that they live on
+\emph{orthogonal axes}, and the apparent paradox dissolves the moment they are
+separated:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & \textbf{Axis 1: input provenance} & \textbf{Axis 2: physics fidelity} \\
+ & (the \code{used\_proxy} flag) & (the dipole calculation) \\
+\midrule
+question asked & real \code{YukawaResult} or caller stub? & NDA estimate or finite loop? \\
+``rigorous'' here & real $\Rightarrow$ no proxy input & --- (axis~1 only) \\
+today's status    & can be \emph{rigorous} (real carrier) & always \emph{proxy} (NDA, never a loop) \\
+\bottomrule
+\end{tabular}
+\end{center}
+The catalogue's \code{rigorous} tag refers to \emph{axis~1 only}: it certifies
+that the spurion came from a genuine \code{YukawaResult}, not a hand-supplied
+stub. The \emph{physics} (axis~2) is \emph{proxy regardless} --- the dipole
+normalisation is the NDA form for every point, real carrier or not. So a result
+can be ``rigorous'' (axis~1) and ``proxy'' (axis~2) at once with no contradiction;
+the gap to a truly rigorous prediction is entirely on axis~2 and is the subtlety
+of \S\ref{part:subtle}.
+
+% ====================================================================
+\part{What is in OUR code}
+\label{part:code}
+% ====================================================================
+
+\emph{Reader here for the physics may skim Part~\ref{part:code} on a first pass
+and jump to the subtleties in Part~\ref{part:subtle}; this part documents the
+exact code so the note doubles as an implementation reference.}
+
+\section{The low-level dipole check: \code{flavorConstraints/muToEGamma.py}}
+\label{sec:codemuegamma}
+
+The physics primitive lives in \code{flavorConstraints/muToEGamma.py}. Its
+module-level constants encode the Perez--Randall NDA convention exactly:
+\begin{equation}
+\code{PREFAC\_BR} = 4.0\times10^{-8},\quad
+\code{BR\_LIMIT\_PAPER} = 1.2\times10^{-11},\quad
+\code{C\_PAPER} = 0.02,\quad
+\code{GAUGE\_KK\_ROOT\_NN} = 2.448687\ldots
+\end{equation}
+The two workhorse functions are:
+\begin{itemize}[leftmargin=1.4em]
+\item \code{coefficient\_from\_br\_limit(br\_limit, prefactor=PREFAC\_BR)} returns
+$C=\sqrt{\BR_{\rm lim}/\text{prefactor}}$ --- the inversion of
+\eqref{eq:spurbound}. With $\BR_{\rm lim}=1.2\times10^{-11}$ this gives
+$\sqrt{1.2\times10^{-11}/4\times10^{-8}}\approx 0.0173$, which the paper rounds up
+to $0.02$ (the source comment says exactly this); with the MEG~II
+$1.5\times10^{-13}$ it gives $0.0019364916731037085$, the value stored as the
+live \code{lfv\_C} in \code{L001.yaml}.
+\item \code{check\_mu\_to\_e\_gamma\_raw(Y\_N\_bar, pmns, M\_KK, C=C\_PAPER,
+reference\_scale=3000.0)} builds $\YNbmat=\Vpmns\cdot\mathrm{diag}(\YNb)$,
+forms the Hermitian product $\YNbmat\YNbmat^\dagger$, extracts
+the $(0,1)$ entry (the $e\mu$ spurion $\spur$), and compares
+$\text{lhs}=|\spur|$ against $\text{rhs}=C\,(\MKK/3000)^2$. It returns
+\code{lhs}, \code{rhs}, \code{passes} ($=\text{lhs}\le\text{rhs}$), \code{ratio},
+\code{off\_diagonal\_12}, and the full \code{product\_matrix}.
+\end{itemize}
+Note the default \emph{internal} $\MKK$ convention: \code{check\_mu\_to\_e\_gamma}
+falls back to \code{M\_KK = Lambda\_IR} (the geometric IR scale) unless an
+explicit \code{M\_KK} is stored or overridden; the helper
+\code{default\_m\_kk\_from\_lambda\_ir} exists to map $\LIR\mapsto x_1\LIR$ but is
+``\emph{not} the repo's default LFV convention.'' This is the $2.45$ ambiguity
+again (\S\ref{sec:Mconvention}).
+
+\section{The LMFV carrier: \code{LMFVLeptonParameters}}
+\label{sec:carrier}
+
+The catalogue boundary is
+\code{flavor\_catalog\_constraints/physics\_adapters/lepton.py}, which wraps the
+primitive above. Its central object is the frozen dataclass
+\code{LMFVLeptonParameters}, a read-only carrier for the Perez--Randall spurion.
+It stores $\YN$, $\YNb$, the $3\times3$ matrices $\YNmat$ and
+$\YNbmat$, the PMNS matrix, the precomputed \code{lmfv\_spurion}
+$=\YNbmat\YNbmat^\dagger$, the scales $M_{KK}$, $M_N$, $v$,
+$k$, $\LIR$, $\eps$, the bulk masses $c_L,c_E,c_N$, the ordering, the Majorana
+phases, and \code{max\_abs\_ybar}. Its \code{\_\_post\_init\_\_} enforces the
+physics as runtime invariants, which is the cleanest documentation of the model:
+\begin{itemize}[leftmargin=1.4em]
+\item the PMNS matrix must be \emph{unitary};
+\item $\YNb = 2k\,\YN$ (the rescaling convention);
+\item $\YNbmat = 2k\,\YNmat = \Vpmns\cdot\mathrm{diag}(\YNb)$
+(the rotation \eqref{eq:YNrot});
+\item \code{lmfv\_spurion} $= \YNbmat\YNbmat^\dagger$;
+\item the \code{matching\_status} string may not contain any of
+\code{\{"partial","deferred","proxy","recast"\}} --- a guard so that a carrier
+built from a real \code{YukawaResult} cannot be silently tagged as a proxy.
+\end{itemize}
+The builder \code{lmfv\_lepton\_parameters\_from\_yukawa\_result} constructs this
+carrier from a repo \code{YukawaResult} plus an explicit \code{m\_kk\_gev}, pulling
+the PMNS from \code{neutrinos.neutrinoValues.get\_pmns(ordering, alpha, beta)}.
+This is the ``locked'' path; the legacy \code{MuToEGammaProxyInput} (caller
+supplies $\YNb$, PMNS, $\MKK$ directly) still works but is permanently flagged
+\code{used\_proxy=True}.
+
+\section{The catalogue constraint \code{L001}}
+\label{sec:codeL001}
+
+The catalogued constraint is
+\code{flavor\_catalog\_constraints/primary/charged\_lepton/L001.py}. Its identity:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\code{process\_id} & \code{"L001"} \\
+\code{severity} & \code{Severity.HARD} \\
+\code{observable} & \code{"BR(mu -> e gamma)"} \\
+required extra & \code{"lepton\_lmfv\_parameters"} (an \code{LMFVLeptonParameters}) \\
+optional extra & \code{"kk\_ew\_mass\_gev"} (consistency-checked, not used) \\
+budget & MEG~II limit, $1.5\times10^{-13}$, from \code{L001.yaml} \\
+reference scale & \code{3000.0}~GeV (Perez--Randall NDA convention) \\
+\bottomrule
+\end{tabular}
+\end{center}
+The numeric anchors are \emph{loaded from the YAML sidecar and
+consistency-checked}, not hardcoded: \code{\_load\_l001\_anchor} asserts
+that \code{repo\_default.br\_limit} equals the primary MEG~II limit and that
+\code{repo\_default.lfv\_C} equals $\sqrt{\BR_{\rm lim}/\text{prefac}}$ to within
+$10^{-12}$. The pure-new-physics branching fraction is
+\begin{equation}
+\BR_{\rm NP} = \code{prefactor\_br}\times|\spur|^2\times
+   \left(\frac{3\ \mathrm{TeV}}{\MKK}\right)^4,
+\label{eq:codeBR}
+\end{equation}
+computed by \code{mu\_to\_e\_gamma\_from\_lepton\_input} in the adapter (which
+calls \code{check\_mu\_to\_e\_gamma\_raw} for the spurion and then squares it into
+a branching fraction). The \code{ConstraintResult} reports
+\code{predicted} $=\BR_{\rm NP}$, \code{sm\_prediction} $=0.0$,
+\code{experimental} $=1.5\times10^{-13}$, \code{ratio} $=\BR_{\rm NP}/\BR_{\rm lim}$,
+\code{budget} $=\BR_{\rm lim}$, and \code{passes} $=(\BR_{\rm NP}\le\BR_{\rm lim})$.
+
+\section{The critical honesty point: the gate is BR, not $C$}
+\label{sec:honesty}
+
+This is the single most important implementation fact in the whole note, and it
+is easy to get wrong because the literature (and our own docs) talk constantly
+about ``the coefficient $C$.'' \textbf{In our code the veto is
+$\BR_{\rm NP}\le\BR_{\rm lim}$. The coefficient $C=0.02$ does \emph{not} enter the
+pass/fail decision at all.} It is computed, stored, and reported --- as
+\code{lfv\_coefficient}, with the explicit diagnostic
+\code{c\_lfv\_role = "dipole\_rhs\_diagnostic\_only"} --- but it only scales the
+\emph{dipole right-hand side} \code{dipole\_rhs} $=C(\MKK/3000)^2$, which is a
+diagnostic comparison, never the gate.
+
+The proof is a unit test,
+\code{test\_pass\_fail\_is\_pinned\_to\_br\_and\_independent\_of\_c\_lfv}. It runs
+the \emph{same} benchmark carrier twice, once with \code{c\_lfv=0.02} (paper) and
+once with \code{c\_lfv=100.0} (deliberately absurd), and asserts:
+\begin{itemize}[leftmargin=1.4em,nosep]
+\item the two \code{dipole\_rhs} values differ (so $C$ \emph{is} doing something
+to the diagnostic);
+\item the \emph{dipole} sub-check flips: \code{core\_passes} is \code{False} at
+$C=0.02$ but \code{True} at $C=100$;
+\item \emph{nevertheless} the two \code{branching\_fraction} values are
+identical, the two \code{ratio\_to\_limit} values are identical, and
+\code{paper.passes is loose.passes is False}.
+\end{itemize}
+In words: cranking the coefficient up by a factor of $5000$ flips the inert
+dipole diagnostic from fail to pass, but the actual constraint verdict
+\textbf{does not move}, because the verdict is the branching ratio against the
+MEG~II limit. This was flagged by both reviewers in the W7 dual sign-off and is
+recorded verbatim in the program ledger: \emph{``Veto $=$ BR\_NP $\le$ br\_limit
+(MEG~II 1.5e-13); C$=$0.02 is an INERT diagnostic, NOT the gate.''} If you take
+one thing from this note, take this.
+
+\section{Severity, anchors, and the ``NOT EVALUATED'' path}
+\label{sec:notinscan}
+
+\code{L001} is \code{Severity.HARD}: a point that predicts $\BR_{\rm NP}>\BR_{\rm lim}$
+is \emph{vetoed} outright. But there is a crucial subtlety about \emph{when} it is
+evaluated. \code{L001.evaluate} first looks for the required extra
+\code{"lepton\_lmfv\_parameters"} on the \code{ParameterPoint}. If it is absent
+(or not an \code{LMFVLeptonParameters}), \code{L001} returns
+\code{\_unevaluated\_result}: \code{passes=True}, \code{predicted=None}, with the
+diagnostic \code{evaluated=False} and the note
+``\emph{NOT EVALUATED --- no lepton dipole prediction available (LMFV lepton
+carrier not on ParameterPoint)}'' and the semantics
+``\emph{non-vetoing only; no BR(mu -> e gamma) prediction was evaluated}.''
+
+This is exactly the state of the \emph{quark-only production scans}. The point
+builder registers \code{"lepton\_lmfv\_parameters"} as a known extra
+(\code{point\_builder.py}), but the quark-only builders never populate it ---
+they build quark couplings, KK masses, and the EW spectrum, not a lepton carrier.
+So although \code{L001} is live and \code{HARD}, in the 1M quark-only scans it is
+a non-vetoing pass-through: \textbf{it is a lepton-sector constraint that is not
+in the quark-only production scans}. To actually exercise it one builds a lepton
+\code{ParameterPoint} carrying an \code{LMFVLeptonParameters} (e.g.\ via
+\code{lmfv\_lepton\_parameters\_from\_yukawa\_result}), which is what the W7 tests
+do and what a future lepton-sector scan would do.
+
+\section{Provenance and status (W7, commit \code{8ca55c8})}
+\label{sec:provenance}
+
+The catalogue entry is heavily provenance-tracked. \code{L001.yaml} records the
+MEG~II limit (snapshot
+\code{megii2025\_arxiv2504\_15711.txt}, sha256 \code{3560d6\ldots}), the
+paper-era reference (Perez--Randall 0805.4652, snapshot
+\code{perez\_randall\_2008\_arxiv0805\_4652.txt}), and the repo defaults
+(\code{prefac\_br=4.0e-8}, \code{c\_paper=0.02}, derived
+\code{lfv\_C}$=0.0019364916731037085$). Its \code{status\_history} shows the full
+dual-signoff trail: writer/checker cycles, an Opus arbitration
+(\code{opus\_arbitration\_L001}) that ruled the $3$~TeV reference scale is a
+theoretical convention rather than a measured observable, an Opus round-1
+approval, and a fact-check verdict \code{VERIFIED} with zero findings. The W7
+ledger entry summarises the wiring: the carrier
+(``$\YN$/PMNS/$\MKK$ + spurion $\spur$'') wired to \code{L001} through the
+existing \code{muToEGamma.py}, quark-only behaviour byte-identical (config hashes
+\code{45e21a07585f7489}/\code{d96cb734f724aedb}), and the \code{L001.tex}/\code{.yaml}
+sidecars left untouched.
+
+% ====================================================================
+\part{Subtleties and the gap to ``rigorous''}
+\label{part:subtle}
+% ====================================================================
+
+\section{NDA, not a loop}
+The prediction \eqref{eq:codeBR} is an NDA \emph{estimate} of the dipole, not a
+finite one-loop calculation over the KK tower. As ABP emphasise, the dipole is
+only genuinely calculable with a \emph{bulk} Higgs; with the brane-localised NDA
+form the coefficient $4\times10^{-8}$ absorbs an $\mathcal{O}(1)$ uncertainty.
+The adapter labels this honestly in
+\code{LEPTON\_DIPOLE\_PROXY\_ASSUMPTION\_V1} (\code{NEEDS-HUMAN-PHYSICS}). A
+rigorous upgrade would compute the dipole from the actual KK-fermion/KK-gauge
+loop with the point's wavefunction overlaps, the same machinery that already
+feeds the quark-sector $Z\bar b\bar b$ and $\Delta F=2$ constraints.
+
+\section{The $C=0.02$ number and its rescaling}
+\label{sec:Cnumber}
+The coefficient $0.02$ is \emph{not} fundamental: it is
+$\sqrt{\BR_{\rm lim}/4\times10^{-8}}$ evaluated at the \emph{2008} MEGA input
+$1.2\times10^{-11}$ (giving $0.0173$, rounded up). At the MEG~II limit it becomes
+$\approx 1.9\times10^{-3}$. The catalogue keeps \emph{both}: \code{c\_paper=0.02}
+for paper reproduction, and the derived live \code{lfv\_C}$\approx 1.9\times10^{-3}$.
+Because the bound on the spurion scales linearly with $C$, the MEG~II update
+tightens the spurion bound by $\sqrt{1.2\times10^{-11}/1.5\times10^{-13}}\approx 9$
+relative to the paper era --- equivalently the $\MKK$ floor climbs by $\sqrt{9}=3$.
+The ledger records this as ``bounds rescale $\sim 3\times$ at MEG~II.''
+\textbf{But remember \S\ref{sec:honesty}: in the live gate $C$ is inert; the
+rescaling that actually matters is in the branching ratio, through $\BR_{\rm lim}$.}
+
+\section{The $\MKK$ convention: the factor of $2.45$}
+\label{sec:Mconvention}
+``$\MKK$'' is overloaded, exactly as in the oblique-$S,T$ note. The physical
+first KK gauge mass is $\MKK^{\rm phys}=x_1\LIR\approx 2.45\,\LIR$
+(\code{GAUGE\_KK\_ROOT\_NN}). The repo's \emph{default LFV convention}, however,
+uses $\MKK=\LIR$ (see the fallback in \code{check\_mu\_to\_e\_gamma} and the
+docstring of \code{check\_mu\_to\_e\_gamma\_raw}). A bound quoted as ``$\sim10$~TeV''
+in $\LIR$ units is ``$\sim 25$~TeV'' physical --- a $2.45\times$ difference, and
+because the rate goes as $\MKK^{-4}$, a factor of $2.45^4\approx 36$ in the
+branching ratio. Whichever convention the prefactor $4\times10^{-8}$ and the
+$3$~TeV reference were calibrated in \emph{must} match the $\MKK$ fed to
+\code{L001}. The helper \code{default\_m\_kk\_from\_lambda\_ir} exists precisely to
+make the conversion explicit when one wants the physical convention.
+
+\section{Dependence on the neutrino sector inputs}
+The spurion $\spur$ is \emph{not} a free knob; it is fixed by the neutrino-sector
+inputs through \eqref{eq:YNrot}: the PMNS angles and phases, the neutrino Yukawa
+eigenvalues $Y_{N_i}$, the mass ordering, and (via the seesaw) the Majorana scale
+$M_N$. Two consequences. First, the LFV bound and the neutrino-mass fit are
+\emph{correlated}: one cannot tune the spectrum to fit oscillation data without
+moving $\mu\to e\gamma$. Second, the Majorana phases (\code{majorana\_alpha},
+\code{majorana\_beta}) and the ordering enter the carrier explicitly, so a scan
+that marginalises over them is marginalising over the LFV prediction too. A
+rigorous lepton scan must vary these consistently, not fix them.
+
+\section{It is not (yet) in a production scan}
+As \S\ref{sec:notinscan} explains, \code{L001} is live and \code{HARD} but
+returns ``NOT EVALUATED'' wherever the lepton carrier is absent --- which is every
+quark-only production scan to date. The constraint is wired and tested, but the
+\emph{lepton-sector scan that would actually feed it} is follow-up scope (the
+paper branch is quark-sector only). Until that scan exists, \code{L001}'s
+practical effect on published results is null; its value today is as a tested,
+ready-to-fire constraint and as documentation of the LMFV model choice.
+
+\section{Checklist: what ``rigorous $\mu\to e\gamma$'' would require}
+\begin{enumerate}[leftmargin=1.8em]
+\item Replace the NDA prefactor \eqref{eq:codeBR} with a finite one-loop dipole
+over the KK tower, using the point's wavefunction overlaps (bulk-Higgs scheme,
+per ABP).
+\item Fix a single, documented $\MKK$ convention (physical $x_1\LIR$ vs.\ $\LIR$)
+and use it consistently in the prefactor calibration and the carrier.
+\item Build a genuine lepton-sector scan that populates
+\code{lepton\_lmfv\_parameters}, varying $\YN$, the PMNS angles/phases, the
+ordering, and $M_N$ consistently with oscillation and cosmological data.
+\item Decide whether to expose both a paper-reproduction mode ($C=0.02$, MEGA
+input) and the live MEG~II mode, with the convention difference documented.
+\item Cross-check the LMFV prediction against the anarchic and Chen--Yu
+alternatives at the same benchmark, to bound the model-choice uncertainty.
+\end{enumerate}
+
+% ====================================================================
+\part*{Annotated reading guide}
+\addcontentsline{toc}{section}{Annotated reading guide}
+% ====================================================================
+
+\begin{description}[leftmargin=0em,style=nextline]
+\item[Perez \& Randall, arXiv:0805.4652 (\emph{JHEP 01(2009)077}).] The model our
+code adopts. Natural neutrino masses/mixings from warped geometry, the LMFV
+hypothesis (bulk masses built from Yukawa spurions), and the NDA $\mu\to e\gamma$
+dipole. Their Eq.~(29) (dipole operator) and Eqs.~(30)--(31) (NDA branching ratio
+and spurion bound) are our \eqref{eq:prdipole}--\eqref{eq:prBR}, with $\YN\to\Vpmns
+\,\mathrm{diag}(Y_N)$ their Eq.~(12); the coefficient $C\approx0.02$
+\eqref{eq:spurbound} and the spurion $\spur$ are theirs.
+Read \S\ref{sec:lmfv}--\S\ref{sec:brformula} alongside it. The single most
+load-bearing reference for our \code{L001}.
+
+\item[Agashe, Blechman, Petriello, hep-ph/0606021 (\emph{PRD 74 (2006) 053011}).]
+The anarchic-RS LFV paper: LFV (especially $\mu\to e\gamma$) as a \emph{direct
+probe} of the geometric origin of flavour, the RS-GIM mechanism in the lepton
+sector, the bulk-vs-brane Higgs calculability issue, and the multi-TeV KK floor.
+The reference for \S\ref{sec:mechanism}--\S\ref{sec:anarchic} and for why
+custodial symmetry does not relax the LFV bound (\S\ref{sec:custodial}).
+
+\item[MEG II Collaboration, arXiv:2504.15711 (2025).] The current primary
+experimental limit \eqref{eq:megii}, $\BR<1.5\times10^{-13}$ (90\% C.L.). This is
+the snapshotted, fact-checked anchor in \code{L001.yaml}. The rigorous side of the
+constraint.
+
+\item[MEG II 2024 (arXiv:2310.12614) and MEG 2016 (arXiv:1605.05081).] The
+intermediate and prior limits ($7.5$, $3.1$, $4.2\times10^{-13}$) recorded in the
+sidecar's experimental history; useful for understanding the rescaling of $C$
+(\S\ref{sec:Cnumber}).
+
+\item[Repo: \code{flavorConstraints/muToEGamma.py}.] The physics primitive:
+\code{PREFAC\_BR}, \code{C\_PAPER}, \code{coefficient\_from\_br\_limit},
+\code{check\_mu\_to\_e\_gamma\_raw}. Read \S\ref{sec:codemuegamma} with it open.
+
+\item[Repo: \code{flavor\_catalog\_constraints/physics\_adapters/lepton.py}.] The
+catalogue boundary and the \code{LMFVLeptonParameters} carrier (the spurion, the
+invariants, the proxy flag). \S\ref{sec:carrier}.
+
+\item[Repo: \code{.../primary/charged\_lepton/L001.py} and \code{L001.yaml}.] The
+\code{Severity.HARD} constraint, the anchors, the ``NOT EVALUATED'' path, and the
+\code{c\_lfv\_role = dipole\_rhs\_diagnostic\_only} diagnostic. \S\ref{sec:codeL001}.
+
+\item[Repo: \code{tests/.../test\_L001.py},
+\code{test\_pass\_fail\_is\_pinned\_to\_br\_and\_independent\_of\_c\_lfv}.] The
+proof that the gate is the branching ratio, not $C$. The benchmark oracle
+$\BR=1.55\times10^{-10}$, ratio $1033.9$. \S\ref{sec:honesty} and the worked
+example.
+
+\item[Ledger: \code{.orchestration/PHASE2\_PROGRAM\_LEDGER.md} (W7, commit
+\code{8ca55c8}).] The wiring summary, the byte-identical-quark-scan guarantee, the
+``$C$ inert'' note, and the LMFV-vs-alternatives verdict. \S\ref{sec:provenance}.
+\end{description}
+
+\bigskip
+\noindent\rule{\linewidth}{0.4pt}\\
+\footnotesize
+\emph{Internal note. Equation \eqref{eq:prBR} is the NDA form our code uses; the
+numerical inputs ($\code{PREFAC\_BR}=4\times10^{-8}$, $\code{C\_PAPER}=0.02$,
+derived $\code{lfv\_C}\approx1.9\times10^{-3}$, MEG~II
+$\BR_{\rm lim}=1.5\times10^{-13}$, reference scale $3$~TeV) are as stored in
+\code{muToEGamma.py} and \code{L001.yaml}. The ``rigorous experimental limit /
+NDA prediction'' tagging and the ``$C$ inert, BR is the gate'' fact follow the
+code and the orchestration ledgers. Cross-check before citing externally.}
+
+\end{document}

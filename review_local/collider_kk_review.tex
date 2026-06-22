@@ -1,0 +1,993 @@
+\documentclass[11pt]{article}
+
+% ============================================================
+%  Direct collider bounds on KK masses in warped (RS) models
+%  A slow, pedagogical internal review.
+%  Tracks (a) the collider physics, (b) what OUR code does,
+%  (c) the subtleties and the gap to "rigorous".
+%  Internal working note, not for distribution.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% lightweight "callout" box
+\colorlet{shadecolor}{gray!12}
+\newenvironment{callout}[1]{%
+  \par\medskip\begin{shaded}\noindent\textbf{#1}\par\smallskip}{\end{shaded}\medskip}
+
+\newcommand{\MKK}{M_{\mathrm{KK}}}
+\newcommand{\LIR}{\Lambda_{\mathrm{IR}}}
+\newcommand{\sw}{s_W}
+\newcommand{\cw}{c_W}
+\newcommand{\swsq}{s_W^2}
+\newcommand{\cwsq}{c_W^2}
+\newcommand{\Pibig}{\Pi}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\vev}{v}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\SUL}{SU(2)_L}
+\newcommand{\SUR}{SU(2)_R}
+\newcommand{\UX}{U(1)_X}
+\newcommand{\PLR}{P_{LR}}
+\newcommand{\Tparam}{\hat{T}}
+\newcommand{\gKK}{g_{\mathrm{KK}}}
+\newcommand{\GKK}{G_{\mathrm{KK}}}
+\newcommand{\sBR}{\sigma\!\times\!\mathrm{BR}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\todo}[1]{{\color{red}[#1]}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{\bf Direct Collider Bounds on Kaluza--Klein Masses in Warped Models\\[4pt]
+\large A slow, pedagogical internal review --- physics, code, and subtleties}
+\author{Internal working note (5D--Neutrino--Mixing repo)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This note is a from-scratch walk-through of the \emph{direct} collider searches
+that bound the lightest Kaluza--Klein (KK) mass in a Randall--Sundrum (RS)
+warped extra dimension, and of how our catalogue encodes them as the
+\code{collider\_rs} family (\code{CR001}--\code{CR014}). It assumes no prior
+knowledge of resonance searches, vector-like quarks, or KK gravitons --- each is
+built up slowly. Part~\ref{part:why} explains why a fourteen-process direct-search
+family belongs in a flavour/EW catalogue at all, and why these particular bounds
+are the \emph{least} binding ones we carry. Part~\ref{part:phys} defines the
+collider observables: resonant production of a heavy state, its decay channels,
+the cross-section-times-branching-ratio ($\sBR$) curve, and the mass-exclusion
+edge a search reports. Part~\ref{part:rs} explains how RS produces each kind of
+signal --- KK gluon, KK graviton, KK electroweak vectors, and the custodial
+vector-like quark (VLQ) partners --- and where a near-flat $\MKK$ floor comes
+from. Part~\ref{part:model} addresses custodial and alignment dependence and
+states plainly that \emph{our treatment is a mass-exclusion proxy, not a
+rigorous recast}. Part~\ref{part:code} documents exactly what the code does
+(the shared adapter \code{collider\_resonance.py}, the per-process
+\code{CR0xx.py}, their YAML sidecars, severities, and the quark-only allowlist
+split). Part~\ref{part:subtle} catalogues the subtleties and the precise gap to
+``rigorous,'' including the $\MKK$ convention. An annotated reading guide closes
+the note.
+\end{abstract}
+
+\tableofcontents
+
+% ====================================================================
+\part*{Orientation: why this note exists}
+\addcontentsline{toc}{section}{Orientation: why this note exists}
+\label{part:why}
+% ====================================================================
+
+Our constraint catalogue is dominated, numerically, by \emph{indirect} probes:
+meson mixing ($\eps_K$, $\Delta m_s$, $\phi_s$), the $Z\to b\bar b$ vertex, and
+the oblique parameters. Those are low-energy observables that feel a heavy KK
+tower only through tiny virtual effects, and precisely because the effects are
+tiny, even a small measured deviation translates into an enormous lower bound on
+$\MKK$ --- tens of TeV in the anarchic-flavour regime. The \code{collider\_rs}
+family is the \emph{opposite} kind of constraint: a heavy KK state is produced
+\emph{on shell} at the LHC and seen (or excluded) directly. These direct
+searches are conceptually the cleanest bounds we have --- ``did we make the
+particle or not'' --- yet in our scan they are the \emph{weakest}, because the
+energy of even a 13~TeV collider caps the reach at a few TeV, whereas the
+indirect bounds already sit far above that. The reason for the cap is the
+\emph{parton luminosity}: to make a resonance of mass $M$ the colliding partons
+must carry a fraction $x\sim M/\sqrt{s}$ of each proton's momentum, and the
+parton densities fall steeply with $x$. At $\sqrt s = 13$~TeV a 6~TeV resonance
+already needs $x\sim 0.5$, where the quark/gluon densities are tiny, so the
+production cross section collapses long before $\sqrt s$ is reached. That is why
+the cleanest bounds are also the weakest. Understanding this, and exactly how
+honestly we encode it, is the purpose of this note.
+
+A one-paragraph executive summary, to be unpacked over the following pages:
+
+\begin{quote}
+\small
+A warped extra dimension predicts a whole spectrum of TeV-scale resonances: a
+colour-octet KK gluon that decays overwhelmingly to top pairs, a spin-2 KK
+graviton that shows up in diboson and diphoton channels, KK partners of the
+electroweak gauge bosons, and (in the custodial version) vector-like quark
+partners of the top and bottom. The LHC hunts every one of these as a bump in an
+invariant-mass spectrum, or as pair-produced heavy quarks, and reports a
+mass-exclusion edge: ``no signal below $M_\star$.'' Collected together, these
+edges form a near-flat \emph{direct-search floor} on $\MKK$ of order a few TeV.
+Our catalogue carries fourteen of them (\code{CR001}--\code{CR014}), but it does
+\emph{not} run a real collider recast: each one is a documented
+\emph{mass-exclusion proxy} that interprets the scan's single KK mass scale as
+the relevant resonance mass and asks only whether it clears the catalogued
+benchmark edge. The proxy is honest about being a proxy --- every module is
+tagged \code{NEEDS-HUMAN-PHYSICS} --- and because the rigorous flavour bounds
+already push $\MKK$ above $\sim 25$~TeV (physical), these few-TeV direct floors
+essentially never bite once the indirect bounds are switched on.
+\end{quote}
+
+\noindent The logical spine of the whole note, in one picture:
+\begin{footnotesize}
+\begin{verbatim}
+  RS spectrum at the TeV scale
+       |
+       +-- KK gluon g_KK^(1)  --(decays to)-->  t tbar        ==> CR001  (resonance bump)
+       |
+       +-- KK graviton G_KK^(1) (spin 2) ------>  WW/ZZ, gamma gamma  ==> CR007, CR013
+       |
+       +-- KK EW vectors (spin 1)  ----------->  WW/WZ/ZZ, ll, l nu   ==> CR012; CR005,CR006(OUT)
+       |
+       +-- custodial VLQ partners (T_5/3, T, B, (T,B))  -- pair produced --> CR002/3/4/8/10
+       |
+       +-- contact / VBS / four-top tails  ------------------------------> CR009,CR011,CR014(OUT)
+                           |
+   each search => an experimental MASS-EXCLUSION EDGE M*  (a few TeV)
+                           |
+   OUR CODE: m_predicted = (a KK mass scale)  ;  pass iff  m_predicted >= M*
+             ratio = M* / m_predicted  ;  ratio <= 1 passes   [PROXY, not a recast]
+                           |
+   net effect: near-flat direct floor ~ few TeV
+               -> SMOTHERED by the rigorous flavour floor (~25-30 TeV physical)
+               -> at M_KK = 1 TeV CR001 excludes; by ~30 TeV all CR* clear
+\end{verbatim}
+\end{footnotesize}
+\noindent\emph{Legend (all defined where each process is introduced in
+Part~\ref{part:rs}):} $T_{5/3},T,B,(T,B)$ are the custodial vector-like quark
+partners (\S\ref{sec:vlq}); ``HVT model~B'' is the heavy-vector-triplet diboson
+benchmark for the KK spin-1 vector (\S\ref{sec:ewkk}); ``VBS'' is vector-boson
+scattering and ``INFO'' marks the lone non-vetoing record (\code{CR011},
+\S\ref{sec:severity}).
+
+\noindent Keep this map in mind; every branch is unpacked below. The single most
+important honesty point --- defused here at the top and revisited throughout ---
+is that the arrow ``$\sBR$, width, interference, acceptance'' that a real recast
+would compute is \emph{not} in our code. We compare masses, not rates.
+
+% ====================================================================
+\part{The collider physics, from scratch}
+\label{part:phys}
+% ====================================================================
+
+\section{What a ``direct search'' actually measures}
+\label{sec:directsearch}
+
+Imagine some new heavy particle $X$ of mass $M_X$ a few TeV. At a hadron
+collider two protons collide; their constituent quarks and gluons can, with some
+probability, fuse to make $X$. If $X$ is unstable it decays promptly into
+ordinary particles. A ``direct search'' is the experimental program of looking
+for the kinematic signature of that production-and-decay chain in the recorded
+events. There are two archetypes, and every \code{CR0xx} constraint is one of
+them.
+
+\emph{(Where do the heavy states $X$ come from? A warped extra dimension predicts
+a whole tower of TeV-scale KK resonances --- a colour-octet KK gluon, a spin-2 KK
+graviton, KK partners of the electroweak gauge bosons, and custodial vector-like
+quark partners of the top and bottom. The full RS spectrum is built up in
+Part~\ref{part:rs}; for now it is enough to know that such states exist and are a
+few TeV heavy. Terms like ``vector-like quark,'' ``top-philic,'' and ``boosted
+top'' that appear below are defined where each process is introduced in
+Part~\ref{part:rs}.)}
+
+\begin{definition}[Resonance (bump) search]
+A single heavy state $X$ is produced and decays to a definite final state
+$f\bar f$ or $VV$. Because $X$ has a definite mass, the invariant mass of its
+decay products $m_{f\bar f}$ piles up in a narrow ``bump'' centred at $M_X$,
+sitting on a smooth Standard-Model (SM) background. The search scans $m_{f\bar
+f}$, sees no bump, and reports an upper limit on the production rate
+$\sigma(pp\to X)\times \mathrm{BR}(X\to f\bar f)$ as a function of $M_X$.
+\end{definition}
+
+\begin{definition}[Pair-production search]
+A heavy fermion $Q$ (here a vector-like quark) is produced in pairs $Q\bar Q$
+through its (model-independent) strong coupling to gluons. Each $Q$ then decays
+to a SM quark plus a $W$, $Z$, or Higgs. The search demands the full cascade
+($b W$, $t Z$, $t H$, $\dots$) and reports a lower limit on $M_Q$ for an assumed
+mixture of branching fractions. Because the production is QCD-driven, the bound
+is nearly model-independent in the production cross section and depends mainly on
+the assumed decay pattern.
+\end{definition}
+
+In both cases the quantity the experiment actually hands you is a curve, not a
+number: an upper limit on $\sBR$ versus mass (resonance), or equivalently a
+\emph{mass-exclusion edge} $M_\star$ where the model's own predicted $\sBR$ curve
+crosses the experimental limit. Below $M_\star$ the model is excluded; above it
+the rate is too small to see. The edge is therefore \emph{benchmark-dependent}:
+it presumes a specific signal model (production coupling, width, branching
+fractions). This benchmark dependence is the crack through which all of our
+proxy approximations enter (\S\ref{part:model}).
+
+\section{Cross section, branching ratio, width: the three ingredients}
+\label{sec:sbr}
+
+The rate of a resonance signal factorises, schematically, as
+\begin{equation}
+N_{\mathrm{signal}} \;\propto\;
+\underbrace{\sigma(pp\to X)}_{\text{production}}\;\times\;
+\underbrace{\mathrm{BR}(X\to f\bar f)}_{\text{decay fraction}}\;\times\;
+\underbrace{A\,\epsilon}_{\text{acceptance}\times\text{efficiency}},
+\label{eq:rate}
+\end{equation}
+and the comparison to data is done as a function of $M_X$. Three model inputs
+control it:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Production cross section} $\sigma(pp\to X)$: set by how strongly $X$
+couples to the colliding partons (light quarks and gluons) and by the parton
+densities, which fall steeply with mass --- this is the ``parton luminosity''
+suppression that caps the reach at high mass.
+\item \textbf{Branching ratio} $\mathrm{BR}(X\to f\bar f)$: the fraction of
+decays into the searched channel. An RS KK gluon, for instance, is
+\emph{top-philic} --- it couples most strongly to the IR-localised top (the RS
+localisation mechanism is recalled in Part~\ref{part:rs}), so
+$\mathrm{BR}(\gKK\to t\bar t)$ is large and the $t\bar t$ channel is the place
+to look.
+\item \textbf{Total width} $\Gamma_X$: how broad the bump is. A narrow resonance
+gives a sharp peak; a broad one ($\Gamma_X/M_X\sim 0.1$--$0.5$) smears across
+many mass bins and is much harder to distinguish from background. The RS KK gluon
+is famously \emph{broad}: the canonical Lillie--Randall--Wang value is
+$\Gamma/M\sim 0.17$ (configuration-dependent, $\sim 0.15$--$0.3$ across the
+literature), and our sidecar records the benchmark used here as
+\code{width\_over\_mass: 0.153}.
+\end{itemize}
+Interference between the resonance and the SM continuum, and the detector
+acceptance, complete the list. \textbf{A rigorous recast computes all of these
+from the model point.} Our code computes \emph{none} of them; it uses only the
+mass. That is the entire content of the ``proxy'' tag, and it is worth stating
+this early and bluntly.
+
+\section{The effective-operator view (for the tails)}
+\label{sec:eft}
+
+Two of the fourteen searches are not bump hunts at all but \emph{tail}
+measurements, and they are cleanest in effective-field-theory (EFT) language.
+When the resonance is too heavy to produce on shell, integrating it out leaves a
+\emph{contact operator} --- a four-fermion interaction suppressed by a scale
+$\Lambda$. The classic example is high-mass Drell--Yan: a virtual KK photon/$Z$
+or KK gluon exchanged between quarks and leptons generates
+\begin{equation}
+\mathcal{L}_{\mathrm{contact}} \;\sim\; \frac{4\pi}{\Lambda^2}\,
+(\bar q\,\Gamma\, q)(\bar\ell\,\Gamma\,\ell),
+\qquad
+\Lambda \;\sim\; \frac{\MKK}{\sqrt{|g_q g_\ell|}},
+\label{eq:contact}
+\end{equation}
+which distorts the smooth high-mass tail of the dilepton spectrum rather than
+producing a peak. The search bounds $\Lambda$; our \code{CR009} pins, by an
+explicit \emph{conservative} policy (\code{CR009.py} selects the
+\emph{weakest} catalogued edge), the destructive-interference limit
+$\Lambda_{LL} > 23.9$~TeV from CMS. Stronger benchmarks (e.g.\ the ATLAS
+constructive $\Lambda_{LL}^{+} > 35.8$~TeV) are retained only as diagnostics. The longitudinal vector-boson
+scattering (VBS) measurement (\code{CR011}) is the analogous probe of the
+\emph{strong electroweak-symmetry-breaking} sector: it tests whether $W_L W_L$
+scattering grows with energy as it would if the Higgs sector were composite, and
+reports a fiducial cross-section upper limit. These tail observables bound the
+\emph{scale} $\Lambda$ or a fiducial rate, not a resonance mass --- a distinction
+that matters for how the proxy treats them (\S\ref{part:code}).
+
+% ====================================================================
+\part{How RS generates each signal, and where the floor comes from}
+\label{part:rs}
+% ====================================================================
+
+\section{RS recap: the spectrum at the TeV scale}
+\label{sec:rsrecap}
+
+Recall the geometry (repo conventions). Spacetime is a slice of AdS$_5$ with a
+UV brane at the Planck scale and an IR brane at the TeV scale; the warp factor
+$\eps = e^{-k\pi r_c}\sim 10^{-15}$ generates the hierarchy. Every bulk field
+has a tower of KK modes whose masses are set by the IR scale,
+\begin{equation}
+m_n \;=\; x_n\,\LIR, \qquad
+x_1^{\rm gauge} \approx 2.45, \quad
+x_1^{\rm grav} \approx 3.83,
+\label{eq:KKmass}
+\end{equation}
+where the $x_n$ are roots of a Bessel function and $\LIR$ is the IR scale. The
+root depends on the spin: the first KK \emph{gauge} mode sits near the first zero
+of $J_0$ ($2.405$ in the $\eps\to0$ Neumann limit, shifted to the finite-$\eps$
+NN root $x_1^{\rm gauge}\approx 2.45$), whereas the first KK \emph{graviton}
+mode sits at the first zero of $J_1$, $x_1^{\rm grav}\approx 3.83$, so the
+lightest graviton is heavier than the lightest gauge resonance by a factor
+$x_1^{\rm grav}/x_1^{\rm gauge}\approx 1.5$ (Agashe--Davoudiasl--Perez--Soni,
+arXiv:hep-ph/0701186). The physical first KK mass is therefore
+$\MKK^{\mathrm{phys}} = x_1\LIR$, with $x_1$ the spin-appropriate root --- a
+factor we will have to keep track of carefully (\S\ref{sec:Mconvention}), because
+collider papers quote masses of \emph{physical} resonances while some theory
+formulas use $\MKK\equiv\LIR$.
+
+What sits in the tower? The bulk gauge fields give KK gluons (colour octet, the
+heaviest-produced and most strongly coupled), KK $W$/$Z$/$\gamma$ (electroweak
+vectors), and --- because RS is a theory of \emph{gravity} in 5D --- KK
+gravitons (spin 2). Bulk fermions give KK quark and lepton partners; in the
+custodial model (\S\ref{part:model}) the third-generation partners are
+\emph{vector-like quarks} with exotic and standard charges. Each of these is a
+collider target, and our fourteen processes enumerate them.
+
+\section{The KK gluon \texorpdfstring{$\to t\bar t$}{-> ttbar} (CR001)}
+\label{sec:cr001}
+
+The KK gluon is the flagship RS collider signature. It is a colour octet, so it
+is produced in $q\bar q$ annihilation through the QCD (colour) interaction --- but
+crucially \emph{not} at full strong-coupling strength. The light quarks that
+dominate the proton's parton luminosity are UV-localised, and their overlap with
+the IR-peaked KK-gluon wavefunction is small, so the production coupling to light
+quarks is \emph{suppressed} to roughly $0.2\,g_s$ (Lillie--Randall--Wang,
+arXiv:hep-ph/0701166). Gluon fusion $gg\to\gKK$ is moreover \emph{forbidden} by
+wavefunction orthogonality (the flat SM-gluon zero mode is orthogonal to the
+first KK mode), so the dominant gluon parton luminosity does not contribute at
+all. This suppressed light-quark coupling is the main reason the KK-gluon
+production cross section falls and the direct reach caps at a few TeV. By
+contrast the KK gluon couples \emph{strongly} to whatever is localised near the
+IR brane: in anarchic RS the top quark is the most IR-localised SM fermion, so
+the KK gluon is \emph{top-philic}, $\mathrm{BR}(\gKK\to t\bar t)$ dominates, and
+the relevant search is a $t\bar t$ resonance hunt. (Lillie--Randall--Wang made
+exactly this point and motivated boosted-top reconstruction; it is the paper-era
+theory reference in our \code{CR001.yaml}.)
+
+Experimentally one looks for a broad bump in the $t\bar t$ invariant-mass
+spectrum. The current best benchmark exclusion we encode is the full-Run-2 CMS
+all-topology search \mbox{CMS-B2G-25-009} (arXiv:2603.23454), which excludes the
+RS KK-gluon benchmark over $0.5 < m(\gKK) < 5.5$~TeV; our \code{CR001.yaml}
+records the upper edge $5.5$~TeV as the active budget, with historical edges
+(CMS~2019 at $4.55$~TeV, PDG~Live~$3.8$~TeV, ATLAS~2013 at $2.07$~TeV,
+ATLAS~2012 at $1.5$~TeV) retained for cross-check. \textbf{This is the one
+constraint that fixes the smoke-test scale}: a model with $\MKK = 1$~TeV is below
+the $5.5$~TeV edge and is \emph{excluded} by \code{CR001}; a model with $\MKK
+\gtrsim 30$~TeV clears it (and every other \code{CR0xx} edge) easily.
+
+\section{The KK graviton: diboson and diphoton (CR007, CR013)}
+\label{sec:graviton}
+
+The KK graviton is the genuinely RS-distinguishing state: it is spin 2, a direct
+consequence of gravity propagating in the bulk. In the ``bulk RS'' scenario its
+couplings are controlled by the dimensionless ratio $\tilde k = k/M_{\rm Pl}$,
+and it decays preferentially to the longitudinal electroweak bosons and to the
+Higgs/top --- i.e.\ to $WW$, $ZZ$ (\code{CR007}, final state \code{"WW, ZZ"}) and
+to $\gamma\gamma$ (\code{CR013}, final state \code{"gamma gamma"}). The diphoton
+channel is experimentally golden because it is narrow and clean, even though the
+$\gamma\gamma$ branching fraction is small.
+
+Our \code{CR007} active budget is the PDG-2025 bulk-graviton diboson edge at
+$\tilde k = 0.5$ (\code{value\_id} ending \code{bulk\_graviton\_diboson\_mass\_kMpl\_0p5}),
+$m(\GKK) > 1.4$~TeV; the YAML also carries stronger diphoton/dilepton edges (up
+to $4.8$~TeV) as alternative benchmarks. \code{CR013} uses the CMS-2024 diphoton
+RS-graviton benchmark at $\tilde k = 0.1$, $m_{G^\star} > 4.8$~TeV. The two
+constraints read the same KK-graviton mass scale but compare it to
+\emph{different} couplings ($\tilde k$) benchmarks --- a reminder that the
+``mass edge'' is always conditional on an assumed coupling.
+
+\section{KK electroweak vectors: diboson, dilepton, charged current (CR012, CR005, CR006)}
+\label{sec:ewkk}
+
+The KK partners of the electroweak gauge bosons are spin-1 resonances. A neutral
+one decays to $WW/WZ/ZZ$ (\code{CR012}, treated through the heavy-vector-triplet
+``HVT model~B'' $W'\to WZ$ benchmark, $m(W') > 4.4$~TeV) and to charged-lepton
+pairs $\ell^+\ell^-$ (\code{CR005}, $Z'$-like dilepton, $\sim 5.15$~TeV); a
+charged one is a $W'$-like state decaying to $\ell\nu$ or $tb$ (\code{CR006},
+$\sim 6.0$~TeV). The dilepton and charged-current channels are the most powerful
+\emph{if} the KK vector couples to leptons --- which in anarchic RS it does, but
+the strength is model-dependent.
+
+This is exactly why \code{CR005} and \code{CR006} are held \emph{out} of the
+quark-only scan: they are \emph{lepton-involving} searches, and a quark-only
+parameter point has no swept lepton-sector data to define the leptonic
+couplings. Concretely, the \code{CR005} dilepton rate needs the KK-$Z'$ coupling
+to electrons, $g_{ee}$, which is fixed by the lepton bulk-mass parameters
+($c_L$, $c_e$) that a \emph{quark}-only scan never varies; with no such value in
+the point's extras, recasting \code{CR005} would have to invent the coupling. So
+the module is held out rather than fed a fabricated input. \code{CR012}
+($WW/WZ/ZZ$, no final-state leptons required) reads only the geometry/quark
+extras and stays \emph{in}. The split is bookkeeping about what data a point
+carries, not a physics claim that leptonic channels are unimportant.
+
+\section{Custodial vector-like quarks: pair production (CR002, CR003, CR004, CR008, CR010)}
+\label{sec:vlq}
+
+In the custodial RS model (\S\ref{part:model}) the third-generation quark
+doublet is embedded in an enlarged representation, which brings along
+\emph{vector-like quark} (VLQ) partners: new heavy quarks whose left- and
+right-handed components transform identically (hence ``vector-like''), so their
+mass is not tied to electroweak symmetry breaking. The custodial structure
+predicts an \emph{exotic-charge} partner $T_{5/3}$ (electric charge $+5/3$), a
+charge-$2/3$ partner $T$, a charge-$-1/3$ partner $B$, and weak-isospin
+doublets. These are pair-produced by QCD and cascade to third-generation final
+states:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Constraint & Partner & Decay cascade \\
+\midrule
+\code{CR002} & $T_{5/3}$ (exotic charge $+5/3$) & $tW\,tW$ \\
+\code{CR003} & $T$ (custodial, charge $2/3$) & $Wb/Zt/Ht$ \\
+\code{CR004} & $B$ (charge $-1/3$) & $tW/bZ/bH$ \\
+\code{CR008} & $T$ (singlet, non-custodial) & $Wb/Ht/Zt$ \\
+\code{CR010} & $(T,B)$ weak-isospin doublet & mixed third-generation \\
+\bottomrule
+\end{tabular}
+\end{center}
+The exclusions are all $\sim 1.4$--$1.6$~TeV (e.g.\ \code{CR002} reads $T_{5/3}
+> 1.46$~TeV from ATLAS; \code{CR003}'s active budget reads $m_T > 1.48$~TeV from
+the CMS all-third-generation decay-mixture limit, CMS-B2G-20-011 /
+arXiv:2209.07327; \code{CR004} reads $m_B > 1570$~GeV; \code{CR008} reads $>
+1.36$~TeV; \code{CR010} reads $m_T = m_B > 1.37$~TeV). The stronger pure-$Wb$
+ATLAS edge ($m_T > 1.70$~TeV, arXiv:2401.17165) is deliberately demoted to a
+diagnostic in \code{CR003.py}: because a \code{ParameterPoint} carries no VLQ
+branching fractions, the active HARD budget is the all-decay-mixture limit, not
+the channel-pure one. These are markedly weaker than the gauge-resonance bounds because
+pair production needs \emph{twice} the resonance mass in collision energy, so the
+kinematic reach is roughly halved. \textbf{Physically, a VLQ partner mass is set
+by the same KK scale, so in RS these searches probe $\MKK$ too} --- which is
+exactly why our proxy interprets the scan's $\MKK$ as the VLQ mass
+(\S\ref{sec:codeproxy}).
+
+\section{The tails: contact and VBS and four-top (CR009, CR011, CR014)}
+\label{sec:tails}
+
+Two of the fourteen processes are genuinely \emph{not} on-shell resonance
+searches. \code{CR009} is the high-mass Drell--Yan contact-interaction bound
+(\S\ref{sec:eft}): it interprets the scan's KK scale as the EFT contact scale
+$\Lambda_{\rm RS}$ and compares to the conservative (weakest) $\ell\ell qq$
+compositeness limit ($\Lambda_{LL} > 23.9$~TeV, CMS destructive). \code{CR011}
+is the longitudinal same-sign $WW$ VBS fiducial cross-section measurement (ATLAS
+2025, $\sigma_{\rm fid} < 0.45$~fb at 95\% C.L.). A third lepton-involving
+process, \code{CR014}, is grouped with these for allowlist purposes but is in
+fact a \emph{resonance} search: BSM four-top production with a top-philic vector
+mediator (CMS-B2G-25-005, $Z'\to t\bar t$ excluded up to $850$~GeV at
+$\Gamma/m = 50\%$). It is held out not because it is a tail but because its
+two-lepton selection makes it lepton-involving. All three are held \emph{out} of
+the quark-only allowlist (\S\ref{sec:allowlist}).
+
+\section{Where the near-flat \texorpdfstring{$\MKK$}{M\_KK} floor comes from}
+\label{sec:floor}
+
+Step back from the catalogue. Each search returns a mass edge $M_\star$ of order
+a few TeV. The KK gluon gives the highest, $\sim 5.5$~TeV; the KK EW vectors and
+gravitons give $\sim 4$--$6$~TeV (in their leptonic/diphoton channels) or
+$\sim 1.4$~TeV (diboson); the VLQ partners give $\sim 1.4$--$1.7$~TeV. Taken as a
+\emph{set}, and interpreting each edge as a lower bound on the common scale
+$\MKK$, the union is a \emph{near-flat direct-search floor}: whatever the precise
+benchmark, a model with $\MKK$ below a few TeV is excluded by \emph{something},
+and a model with $\MKK$ well above $\sim 6$~TeV clears the quark-only IN
+direct mass-edge set. The full catalogue still contains held-out tail/contact
+entries such as \code{CR009}, so this sentence is not a statement about every
+\code{CR0xx} module. This is the
+``floor'' language of the orchestration ledger: at $\MKK = 1$~TeV \code{CR001}
+(and most others) excludes; ``by $\sim 30$~TeV all clear.''
+
+The floor is ``near-flat'' rather than a single sharp number precisely because it
+is a \emph{union of unlike edges}, not one measurement repeated. The same scan
+point $\MKK$ is judged against very different benchmarks at once: a resonance
+edge (\code{CR001}, $5.5$~TeV), a pair-production edge (\code{CR002}, $1.46$~TeV
+--- lower because pair production needs $\sim 2\MKK$ of collision energy), a
+graviton edge (\code{CR007}/\code{CR013}, $1.4$/$4.8$~TeV, carrying the spin-2
+root, \S\ref{sec:Mconvention}), and a contact-scale edge (\code{CR009},
+$23.9$~TeV, a different observable entirely). The envelope of these dissimilar
+edges is what looks ``flat'' from a distance; up close it is a staircase of
+different physics. Below all of them the point is excluded by whichever bites
+first; above the highest the whole set clears together. The reach caps where it
+does for the parton-luminosity reason of the Orientation: at $\sqrt s = 13$~TeV
+the cross section to make a multi-TeV resonance is suppressed by the steeply
+falling parton densities, so no edge climbs much past a few TeV (the contact tail
+excepted, since it bounds a virtual scale, not an on-shell mass).
+
+\begin{callout}{Worked example --- the smoke test, one number at a time ($\MKK = 1$~TeV vs.\ $30$~TeV).}
+Take a scan point with physical $\MKK = 1000$~GeV. The shared adapter converts
+this to TeV, $m_{\rm pred} = 1.0$~TeV (\code{kk\_mass\_tev\_from\_m\_kk\_gev}
+divides by $1000$). \code{CR001} loads the active edge $M_\star = 5.5$~TeV and
+forms
+\[
+\text{ratio} = \frac{M_\star}{m_{\rm pred}} = \frac{5.5}{1.0} = 5.5 > 1
+\quad\Rightarrow\quad \textbf{fails (vetoed)}.
+\]
+The pass test is literally \code{prediction.mass\_tev >= limit.value}, i.e.\
+$1.0 \ge 5.5$ is False. Now take $\MKK = 30{,}000$~GeV, $m_{\rm pred} = 30$~TeV:
+\[
+\text{ratio} = \frac{5.5}{30} \approx 0.18 < 1 \quad\Rightarrow\quad \textbf{passes}.
+\]
+Every other \code{CR0xx} edge ($23.9$~TeV for the conservative contact bound,
+$\le 6$~TeV for the resonances) is likewise cleared at $30$~TeV. This single pair of numbers
+is the whole behaviour: the direct floor turns off somewhere between a few TeV
+and (for the contact tail) tens of TeV, and the rigorous flavour floor sits
+\emph{above} that --- which is why these constraints are present for completeness
+but rarely decisive.
+
+\medskip
+\emph{The same $\MKK$, unlike edges.} The $1$~TeV smoke test above hides the more
+confusing point that one scan value is judged against \emph{dissimilar} edges at
+once. Take the borderline $m_{\rm pred} = 2.0$~TeV and run three processes:
+\[
+\underbrace{\tfrac{5.5}{2.0}=2.75>1}_{\text{\code{CR001} resonance: FAILS}},
+\qquad
+\underbrace{\tfrac{1.46}{2.0}=0.73<1}_{\text{\code{CR002} VLQ pair: PASSES}},
+\qquad
+\underbrace{\tfrac{23.9}{2.0}=11.95>1}_{\text{\code{CR009} contact: FAILS}}.
+\]
+The \emph{same} $\MKK$ clears the pair-production edge (which is low because pair
+production costs $\sim 2\MKK$ of collision energy) while failing both the
+resonance edge and the contact-scale edge --- this is the ``union of unlike
+edges'' of \S\ref{sec:floor} made arithmetic, and it is why the floor is a
+staircase, not one number.
+
+\medskip
+\emph{The $2.45$ (and $3.83$) convention in action.} Suppose the scan instead
+reports $\LIR = 2.0$~TeV (i.e.\ the $\MKK\equiv\LIR$ convention) rather than a
+physical mass. To compare against a collider edge --- always quoted in
+\emph{physical} resonance mass --- one must first apply the Bessel root: for the
+KK-gluon resonance (\code{CR001}) the physical mass is
+$x_1^{\rm gauge}\LIR \approx 2.45\times 2.0 = 4.9$~TeV, whereas for the spin-2
+graviton (\code{CR007}/\code{CR013}) it is $x_1^{\rm grav}\LIR \approx 3.83\times
+2.0 = 7.66$~TeV. Feeding the bare $2.0$~TeV into either comparison --- or feeding
+$2.45$ to the graviton --- mis-scales the ratio. This is the conversion
+\S\ref{sec:Mconvention} calls mandatory; the proxy is only consistent if the
+scan and the edge already share one convention.
+\end{callout}
+
+% ====================================================================
+\part{Model dependence, and the honest ``proxy'' label}
+\label{part:model}
+% ====================================================================
+
+\section{Custodial symmetry: which searches even exist}
+\label{sec:custodial}
+
+Custodial symmetry --- the enlarged bulk gauge group $\SUL\times\SUR\times\UX$
+that tames the oblique $T$ parameter --- changes the collider menu in a concrete
+way: it \emph{introduces} the vector-like quark partners. The exotic-charge
+$T_{5/3}$ (\code{CR002}) is a smoking-gun of the custodial bidoublet embedding of
+the top; it simply does not exist in the minimal model. So \code{CR002}--\code{CR004}
+and \code{CR010} are \emph{custodial-specific} searches, while \code{CR008} (a
+non-custodial singlet $T$) is their minimal-model counterpart. The sidecars label
+this explicitly (\code{subclass: "Custodial fermion partner; charge 2/3"} for
+\code{CR003}).
+
+The flip side: custodial symmetry \emph{lowers} the indirect floor (it removes
+the volume-enhanced $T$ and the $Zb_L$ veto), which is precisely the regime where
+a few-TeV direct floor could in principle matter. In the custodial scan the
+rigorous floor drops to the $\Delta F = 2$ set ($\sim 2$--$3$~TeV), and the
+inclusive floor ($\sim 7$~TeV) is then set by the \emph{proxy} oblique-$S$ plus
+these \code{CR*} searches. So the direct collider bounds are most relevant
+exactly when custodial protection is on --- but even then they sit at the same
+order as, and are encoded less rigorously than, the proxy oblique-$S$.
+
+\section{Flavour alignment: does it move the collider bound?}
+\label{sec:alignment}
+
+Flavour alignment (aligning the bulk masses to suppress flavour-changing neutral
+currents) is the standard way to \emph{lower} the indirect $\Delta F = 2$ floor.
+It does \emph{not} directly relax a direct collider bound, because the production
+of a KK gluon or graviton is governed by its (flavour-diagonal) coupling to light
+quarks and gluons, not by the flavour-violating couplings that alignment
+suppresses. What alignment \emph{can} change is the decay pattern (e.g.\ the
+top-philic branching fractions) and hence the precise mass edge --- but our proxy
+does not use branching fractions at all, so in our encoding alignment has
+\emph{no effect} on the direct floor. This is a feature of the proxy's
+crudeness, not a physics statement, and it is worth flagging as such.
+
+\section{Is our treatment rigorous? No --- it is a mass-exclusion proxy}
+\label{sec:proxy}
+
+Here is the blunt assessment, and it is the same for all fourteen processes. A
+\emph{rigorous} recast of any of these searches would, for each scan point,
+compute the production cross section $\sigma(pp\to X)$ from the RS couplings, the
+branching fractions into the searched channel, the total width and line shape,
+the interference with the SM continuum, fold all of that through the published
+analysis acceptance, and compare to the experiment's \emph{mass-dependent} limit
+curve. Our code does \emph{none} of this. It takes a single KK mass scale from
+the scan point, calls it the resonance (or VLQ, or contact-scale) mass, and asks
+only whether that mass clears the catalogued benchmark edge. Every module carries
+the assumption string \code{COLLIDER\_RESONANCE\_MASS\_PROXY\_ASSUMPTION\_V1}
+(or a process-specific analogue) whose text begins
+\code{"NEEDS-HUMAN-PHYSICS: ... uses the catalogued benchmark mass-exclusion edge
+as a mass lower bound. It does not compute sigma(pp->X)*BR(X->final state),
+width, interference, or acceptance."} The matching status in the module
+docstrings is uniformly \code{NEEDS-HUMAN-PHYSICS}; the relevance class in the
+sidecars is \code{"Cross-check ... subleading to low-energy flavor constraints"}.
+\textbf{Tag honestly: every \code{CR0xx} is a \emph{proxy}, not rigorous.}
+
+% ====================================================================
+\part{What is in OUR code}
+\label{part:code}
+% ====================================================================
+
+\emph{Reader here for the physics may skim Part~\ref{part:code} on a first pass
+and jump to the subtleties in Part~\ref{part:subtle}; this part documents the
+exact code so the note doubles as an implementation reference.}
+
+\section{The shared comparison machinery}
+\label{sec:codeproxy}
+
+The reusable core lives in \code{quarkConstraints/collider\_resonance.py}, reached
+only through the boundary adapter
+\code{flavor\_catalog\_constraints/physics\_adapters/collider\_resonance.py}.
+Three dataclasses carry the logic:
+\code{ColliderResonancePrediction} (the model side: \code{resonance},
+\code{final\_state}, \code{mass\_tev}, optional \code{sigma\_times\_br}),
+\code{ColliderResonanceLimit} (the experiment side: \code{value}, \code{units},
+\code{limit\_kind}, \code{benchmark\_model}, $\dots$), and
+\code{ColliderResonanceComparison} (the result). The mass conversion is the
+one-liner
+\begin{equation}
+\code{kk\_mass\_tev\_from\_m\_kk\_gev}:\quad m_{\rm TeV} = m_{\rm GeV}/1000,
+\label{eq:gev2tev}
+\end{equation}
+guarded to be positive and finite. The comparison is
+\code{evaluate\_resonance\_limit}, whose two branches are
+\begin{align}
+\text{(mass lower bound)}\quad
+&\text{ratio} = \frac{m_{\rm limit}}{m_{\rm pred}}, \quad
+\text{passes} \iff m_{\rm pred} \ge m_{\rm limit};
+\label{eq:ratiomass}\\
+\text{($\sBR$ upper limit)}\quad
+&\text{ratio} = \frac{\sBR_{\rm pred}}{\text{limit}}, \quad
+\text{passes} \iff \text{ratio} \le 1.
+\label{eq:ratiosbr}
+\end{align}
+The two constants \code{MASS\_LOWER\_BOUND = "mass\_lower\_bound"} and
+\code{SIGMA\_TIMES\_BR\_UPPER\_LIMIT = "sigma\_times\_br\_upper\_limit"} name the
+two branches. In production \emph{every} \code{CR0xx} uses the first branch
+(mass): the second exists for a future $\sBR$ recast but is never reached,
+because no scan point carries a \code{sigma\_times\_br} prediction. The
+comparison also enforces that the prediction's \code{resonance} and
+\code{final\_state} strings match the limit's --- a guard against, say, comparing
+a $t\bar t$ prediction to a $\gamma\gamma$ limit.
+
+\section{Per-process mass resolution and the extras they read}
+\label{sec:extras}
+
+Each \code{CR0xx.py} resolves a mass from the \code{ParameterPoint} ``extras''
+and builds a prediction through a process-specific helper in the adapter. The
+resolution order is documented and deterministic. For \code{CR001},
+\code{resolve\_kk\_gluon\_mass\_gev} reads the explicit \code{kk\_gluon\_mass\_gev}
+extra if present, else falls back to \code{quark\_mass\_basis\_couplings.M\_KK}
+(the function \code{mass\_from\_source\_gev} pulls the \code{M\_KK} attribute).
+The electroweak-sector processes read \code{kk\_ew\_mass\_gev} first, falling
+back to \code{M\_KK}. The proxy-assumption strings make the interpretation
+explicit, e.g.\ for the VLQ searches \code{VLQ\_PAIR\_MASS\_PROXY\_ASSUMPTION\_V1}
+declares \code{"uses m\_VLQ = M\_KK as a KK-fermion mass proxy"}, and the
+charge-$2/3$/$-1/3$ variants (\code{VLQ\_T\_PAIR\_...}, \code{VLQ\_B\_PAIR\_...})
+analogously set $m_T = \MKK$, $m_B = \MKK$. The contact-scale resolver
+\code{resolve\_dy\_contact\_scale\_gev} (CR009) prefers \code{kk\_ew\_mass\_gev},
+then \code{kk\_gluon\_mass\_gev}, then \code{M\_KK}, as the
+$\Lambda_{\rm RS}$ proxy. The full map of which extras each constraint reads is:
+\begin{center}\small
+\begin{tabular}{lll}
+\toprule
+Constraint & Mass proxy interpretation & Extras read \\
+\midrule
+\code{CR001} & $m(\gKK) = $ \code{kk\_gluon\_mass\_gev} or \code{M\_KK} & \code{kk\_gluon\_mass\_gev}, couplings \\
+\code{CR002/3/4} & $m_{\rm VLQ} = \MKK$ & \code{quark\_mass\_basis\_couplings} \\
+\code{CR007} & $m(\GKK) = $ \code{kk\_ew}/\code{kk\_gluon}/\code{M\_KK} & all three \\
+\code{CR008/10} & $m_{\rm VLQ} = \MKK$ & \code{quark\_mass\_basis\_couplings} \\
+\code{CR012} & $m_{V_{\rm KK}} = $ \code{kk\_ew\_mass\_gev} or \code{M\_KK} & \code{kk\_ew\_mass\_gev}, couplings \\
+\code{CR013} & $m(\GKK) = $ \code{kk\_ew}/\code{kk\_gluon}/\code{M\_KK} & all three \\
+\midrule
+\multicolumn{3}{l}{\emph{held OUT of quark-only (lepton-involving / INFO):}} \\
+\code{CR005} & $m(Z'_{\rm KK}) = $ \code{kk\_ew} or \code{M\_KK} & \code{kk\_ew\_mass\_gev}, couplings \\
+\code{CR006} & $m(W'_{\rm KK}) = $ \code{kk\_ew} or \code{M\_KK} & \code{kk\_ew\_mass\_gev}, couplings \\
+\code{CR009} & $\Lambda_{\rm RS} = $ \code{kk\_ew}/\code{kk\_gluon}/\code{M\_KK} & all three \\
+\code{CR011} & (VBS fiducial $\sigma$; no mass) & none \\
+\code{CR014} & $m(Z'_{\rm top\text{-}philic}) = $ \code{kk\_ew} or \code{M\_KK} & \code{kk\_ew\_mass\_gev}, couplings \\
+\bottomrule
+\end{tabular}
+\end{center}
+These extras are read from \code{QUARK\_ONLY\_ALLOWLIST\_EXTRAS} in the scan
+machinery; the quark-only point already supplies \code{kk\_gluon\_mass\_gev},
+\code{kk\_ew\_mass\_gev}, and \code{quark\_mass\_basis\_couplings}, so no silent
+SM/zero default is injected.
+
+\section{Severities and how a point is vetoed}
+\label{sec:severity}
+
+Thirteen of the fourteen constraints are \code{Severity.HARD}: a point whose
+predicted mass falls \emph{below} the active benchmark edge fails and is
+\emph{vetoed}. The reported \code{ratio} is $m_{\rm limit}/m_{\rm pred}$, so
+$\text{ratio} \le 1$ passes, matching the catalogue contract that ``ratio above
+budget'' is a failure. The lone exception is \code{CR011} (VBS), which is
+\code{Severity.INFO}: it forms the advisory comparison $\sigma_{\rm fid}/0.45\,
+\text{fb} \le 1$ but is \emph{non-vetoing} by construction --- its own code notes
+\code{"INFO/non-vetoing even when advisory passes=False"}, and because no scan
+point supplies a predicted fiducial $W_L W_L$ cross section, it records a
+non-vetoing result without ever recasting. So \code{CR011} is informational only:
+it never excludes a point.
+
+\section{Missing-input behaviour (fail-safe vs.\ fail-loud)}
+\label{sec:missing}
+
+The modules distinguish two failure modes carefully. If the mass extras are
+entirely \emph{absent}, the constraint returns \code{passes=True} with a note
+that it ``was not evaluated'' (it does not veto on missing data --- see
+\code{CR001.evaluate} returning early when \code{m\_kk\_gev is None}). If the
+extras are \emph{present but invalid} (non-numeric, non-finite, non-positive),
+the constraint returns \code{passes=False} with an \code{exception\_type}
+diagnostic --- it fails loudly rather than silently passing a malformed point.
+This asymmetry is deliberate: absence of data is not evidence of exclusion, but
+corrupt data should not slip through.
+
+\section{The active benchmark, exactly}
+\label{sec:active}
+
+Each YAML stores a \code{pdg\_or\_equivalent.values} list of historical and
+current edges; the Python pins one as the \emph{active} budget by its
+\code{value\_id}. For \code{CR001} the active id is
+\code{CMS2026:CR001:gkk\_ttbar\_mass\_exclusion} ($5.5$~TeV, CMS-B2G-25-009);
+the historical CMS-2019/PDG/ATLAS edges are loaded too but only reported in
+\code{diagnostics["historical\_mass\_limits\_tev"]}. The budget policy string is
+explicit: \code{"active HARD budget is the CMS2026 current canonical RS KK-gluon
+ttbar benchmark mass-exclusion upper edge ... interpreted as a lower bound above
+the excluded interval for that benchmark."} A representative active-edge map:
+\begin{center}\small
+\begin{tabular}{llll}
+\toprule
+Constraint & Active edge & Experiment / source & Final state \\
+\midrule
+\code{CR001} & $5.5$~TeV & CMS-B2G-25-009, arXiv:2603.23454 & $t\bar t$ \\
+\code{CR002} & $1.46$~TeV & ATLAS, PDG q009 / arXiv:2212.05263 & $tW\,tW$ \\
+\code{CR003} & $1.48$~TeV & CMS-B2G-20-011, arXiv:2209.07327 & $Wb/Zt/Ht$ \\
+\code{CR004} & $1.57$~TeV & CMS, PRD~110 (2024) 052004 & $tW/bZ/bH$ \\
+\code{CR007} & $1.4$~TeV ($\tilde k{=}0.5$) & PDG-2025 bulk graviton & $WW/ZZ$ \\
+\code{CR008} & $1.36$~TeV & ATLAS, PDG t$'$ AAD~24N & $Wb/Ht/Zt$ \\
+\code{CR010} & $1.37$~TeV & ATLAS Run-2 VLQ comb. & mixed 3rd-gen \\
+\code{CR012} & $4.4$~TeV & CMS-B2G-20-009 (HVT~B $W'{\to}WZ$) & $WW/WZ/ZZ$ \\
+\code{CR013} & $4.8$~TeV ($\tilde k{=}0.1$) & CMS-2024 RS-graviton diphoton & $\gamma\gamma$ \\
+\midrule
+\multicolumn{4}{l}{\emph{held OUT of quark-only:}} \\
+\code{CR005} & $5.15$~TeV & CMS, JHEP~07 (2021) 208 & $\ell^+\ell^-$ \\
+\code{CR006} & $6.0$~TeV & ATLAS, arXiv:1906.05609 & $\ell\nu$ \\
+\code{CR009} & $23.9$~TeV ($\Lambda_{LL}$, conservative) & CMS, arXiv:2103.02708 & $\ell\ell qq$ \\
+\code{CR011} & $0.45$~fb (INFO) & ATLAS, PRL~135 (2025) 111802 & $W_L W_L$ VBS \\
+\code{CR014} & $0.85$~TeV & CMS-B2G-25-005 ($\Gamma/m{=}50\%$) & four-top \\
+\bottomrule
+\end{tabular}
+\end{center}
+(Values are the active budgets as stored in the sidecars; the YAMLs also carry
+alternative/historical edges for auditability.)
+
+\section{The quark-only allowlist split: 9 IN, 5 OUT}
+\label{sec:allowlist}
+
+The change recorded in \code{docs/quark\_scan\_constraint\_update\_2026-06.md}
+(Change~2) added the \emph{lepton-free} collider searches to the quark-only
+allowlist, growing it from $37$ to $46$ constraints. The split is encoded in the
+scan machinery (\code{QUARK\_ONLY\_ALLOWLIST\_EXTRAS} and the IN/OUT id lists):
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{IN (9, proxy / HARD):} \code{CR001} ($\gKK\to t\bar t$);
+\code{CR002}, \code{CR003}, \code{CR004}, \code{CR008}, \code{CR010} (VLQ pair
+production); \code{CR007} \& \code{CR013} (KK graviton $\to WW/ZZ$,
+$\gamma\gamma$); \code{CR012} (KK spin-1 $\to WW/WZ/ZZ$). Each was verified to
+read only quark/geometry extras (\code{kk\_gluon\_mass\_gev},
+\code{kk\_ew\_mass\_gev}, \code{quark\_mass\_basis\_couplings}).
+\item \textbf{OUT (5, deferred, lepton-involving or INFO):} \code{CR005}
+(dilepton resonance), \code{CR006} ($W'\to\ell\nu$), \code{CR009} ($\ell\ell qq$
+contact), \code{CR011} (VBS, INFO/non-vetoing), \code{CR014} (four-top with
+two-lepton selection).
+\end{itemize}
+The logic is purely about \emph{what data a quark-only point carries}: a point
+with no swept lepton sector cannot define the leptonic couplings that the OUT
+searches need, so including them would invent inputs. \code{CR011} is also OUT
+because it is INFO and would never veto anyway. The net effect, per the ledger:
+at $\MKK = 1$~TeV the excluding constraints include the rigorous $\Delta F = 2$
+set ($\eps_K = $ \code{K001}, $\Delta m_s = $ \code{B003}, $\phi_s = $
+\code{B004}) and the now-live $Z\to b\bar b$ (\code{T010}/\code{T011}, rigorous)
+\emph{plus} the collider direct searches (\code{CR001} proxy, $\dots$); by
+$\sim 30$~TeV all clear.
+
+% ====================================================================
+\part{Subtleties and the gap to ``rigorous''}
+\label{part:subtle}
+% ====================================================================
+
+\section{The proxy compares masses, not rates}
+The single defining limitation: \eqref{eq:ratiomass} compares the scan's KK mass
+to an experimental \emph{mass edge} that was itself derived under a specific
+benchmark signal model. If the real RS point has a smaller production cross
+section than the benchmark (e.g.\ heavier/more-UV-localised partons feeding the
+resonance), a \emph{lighter} resonance could survive that the proxy would
+exclude --- and vice versa. The proxy is therefore neither conservative nor
+aggressive in a controlled way; it is simply a mass cut at a benchmark-defined
+edge. This is the content of the uniform \code{NEEDS-HUMAN-PHYSICS} tag.
+
+\section{The \texorpdfstring{$\MKK$}{M\_KK} convention: the factor of $2.45$ again}
+\label{sec:Mconvention}
+``$\MKK$'' is overloaded in exactly the way the $S,T,U$ note flags for the
+oblique sector. The collider papers report the mass of a \emph{physical}
+resonance --- $\MKK^{\rm phys} = x_1\LIR$ \eqref{eq:KKmass}. But the scan's
+reported $\MKK$, and any theory formula written with $\MKK\equiv\LIR$, differ by
+that factor $x_1$. Crucially, \emph{$x_1$ is not universal across the
+processes}: for the KK gauge and VLQ states it is $x_1^{\rm gauge}\approx 2.45$,
+whereas for the spin-2 KK \emph{gravitons} (\code{CR007}, \code{CR013}) it is
+$x_1^{\rm grav}\approx 3.83$ --- so a single physical $\LIR$ feeds a graviton
+edge that is $\sim 1.5\times$ higher in physical mass than the gauge edge. The
+ledger spells out the gauge-sector consequence for the \emph{rigorous} $Z\to
+b\bar b$ floor: ``$\sim 25$--$30$~TeV physical $\leftrightarrow \sim 10$--$12$~TeV
+in $\LIR$ units'' (this $\sim 2.45$ mapping is correct for gauge/$Zb\bar b$, but
+the graviton constraints would carry $\sim 3.83$). \textbf{The same care is
+mandatory here}: whatever scale the scan feeds into \eqref{eq:gev2tev} must be in
+the \emph{same} convention as the experimental edge it is compared to, and for
+the graviton processes the \emph{spin-2 root} must be used, not the gauge one. If
+the scan passes a physical $\MKK$ but the benchmark edge is quoted (as collider
+edges are) in physical resonance mass, the comparison is consistent; mixing
+conventions --- or applying the gauge root to a graviton --- would mis-scale the
+\code{CR0xx} ratio (by $\sim 2.45$ for gauge, $\sim 3.83$ for gravitons).
+
+\section{Pair production halves the reach}
+The VLQ searches (\code{CR002}--\code{CR004}, \code{CR008}, \code{CR010}) are
+pair-production bounds, so their mass edges ($\sim 1.4$--$1.7$~TeV) are
+\emph{not} directly comparable to the single-resonance edges ($\sim 4$--$6$~TeV):
+pair production needs $\sim 2 M_Q$ in partonic energy. Interpreting both as
+``lower bounds on the same $\MKK$'' (as the proxy does) is a crude
+over-simplification --- the VLQ partner mass and the KK gauge mass are both set
+by $\LIR$ but with different $\mathcal{O}(1)$ coefficients. A rigorous treatment
+would carry separate spectra; the proxy collapses them to one $\MKK$.
+
+\section{Benchmark coupling dependence ($\tilde k$, $\Gamma/M$)}
+Several edges are explicitly conditional on a coupling benchmark: \code{CR007}
+uses $\tilde k = k/M_{\rm Pl} = 0.5$, \code{CR013} uses $\tilde k = 0.1$,
+\code{CR014} uses $\Gamma/m = 50\%$, and \code{CR001}'s line shape assumes
+$\Gamma/M \approx 0.153$. The active edge moves with these choices (the YAMLs
+carry alternative-benchmark values). Our proxy pins one benchmark per process and
+does not propagate the model point's \emph{actual} coupling into the edge --- a
+deferred piece.
+
+\section{Tail observables shoe-horned into a mass cut}
+\code{CR009} (a contact scale $\Lambda$) and \code{CR011} (a fiducial VBS cross
+section) are not resonance masses, yet \code{CR009} is forced through the same
+mass-lower-bound comparison by treating $\Lambda_{\rm RS}$ as a ``mass.'' That is
+dimensionally fine (both are TeV scales) but physically a different observable;
+the relation $\Lambda \sim \MKK/\sqrt{|g_q g_\ell|}$ \eqref{eq:contact} carries
+coupling factors the proxy ignores. \code{CR011} side-steps the issue by being
+INFO/non-vetoing.
+
+\section{The rigorous floor smothers the direct floor}
+The practical reason these constraints rarely decide anything: in the anarchic
+quark scan the rigorous flavour bounds already push the physical $\MKK$ floor to
+$\sim 25$--$30$~TeV (\code{T010}/\code{T011} $Z\to b\bar b$ plus $\Delta F = 2$),
+and the methodology note records even higher anarchic comparison scales
+(\code{CR001.yaml} auxiliary inputs: RUNA p50 $\MKK^{\rm min} = 47.26$~TeV,
+p95 $127.13$~TeV at $g_{s\star} = 3$). A few-TeV direct floor cannot bite above
+that. The direct searches matter only in the \emph{custodial} regime, where the
+rigorous floor drops to $\sim 2$--$3$~TeV; even there the proxy oblique-$S$ and
+the \code{CR*} proxies set the inclusive ($\sim 7$~TeV) floor, and both are
+\emph{proxy}, not rigorous --- so the honest headline custodial floor remains the
+rigorous $\Delta F = 2$ value.
+
+\section{Checklist: what ``rigorous direct bounds'' would require}
+\begin{enumerate}[leftmargin=1.8em]
+\item Replace the mass-edge comparison \eqref{eq:ratiomass} with a per-point
+$\sBR$ computation (the coded-but-unused branch \eqref{eq:ratiosbr}), using RS
+production couplings and branching fractions.
+\item Fold in width, line shape, interference, and the published analysis
+acceptance; compare to the experiment's \emph{mass-dependent} limit curve, not a
+single edge.
+\item Carry separate KK-gauge and VLQ-partner spectra rather than one $\MKK$, and
+fix a single documented $\MKK$ convention (physical vs.\ $\LIR$).
+\item Propagate the model point's actual coupling benchmark ($\tilde k$,
+$\Gamma/M$) into the chosen edge.
+\item Treat the contact (\code{CR009}) and VBS (\code{CR011}) tails as the EFT /
+fiducial observables they are, not as mass cuts.
+\end{enumerate}
+
+\begin{callout}{Common confusions, defused.}
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item[\textbf{A.}] \emph{``The direct searches are our strongest bound because
+they probe real particles.''} No --- they are conceptually the cleanest but
+\emph{numerically the weakest} here. The 13~TeV collider caps the reach at a few
+TeV; the indirect flavour bounds already sit at $\sim 25$--$30$~TeV (physical).
+\item[\textbf{B.}] \emph{``Our code computes the cross section.''} No --- it
+compares \emph{masses} to a benchmark edge. No $\sigma$, BR, width,
+interference, or acceptance is computed; every module is tagged
+\code{NEEDS-HUMAN-PHYSICS}.
+\item[\textbf{C.}] \emph{``$\MKK$ means one thing.''} Overloaded by the Bessel
+root $x_1$ (physical first KK mass vs.\ $\LIR$, \S\ref{sec:Mconvention}), and
+$x_1$ is \emph{spin-dependent}: $x_1^{\rm gauge}\approx 2.45$ for KK gauge/VLQ
+states but $x_1^{\rm grav}\approx 3.83$ for the spin-2 KK gravitons (\code{CR007},
+\code{CR013}), so the graviton edges carry an extra factor $\sim 1.5$.
+\item[\textbf{C$'$.}] \emph{``All the mass edges are the same kind of bound.''}
+No --- resonance ($\sim 5$~TeV) and pair-production ($\sim 1.5$~TeV) edges differ
+because pair production needs $\sim 2 M_Q$ in collision energy; the proxy
+collapses both onto one $\MKK$ (\S\ref{sec:Mconvention}).
+\item[\textbf{D.}] \emph{``CR011 (VBS) can veto a point.''} No --- it is
+\code{Severity.INFO}, non-vetoing even when its advisory comparison returns
+\code{passes=False}.
+\item[\textbf{E.}] \emph{``All 14 run in the quark-only scan.''} No --- 9
+lepton-free ones are IN, 5 lepton-involving/INFO (\code{CR005}, \code{CR006},
+\code{CR009}, \code{CR011}, \code{CR014}) are OUT.
+\end{itemize}
+\end{callout}
+
+% ====================================================================
+\part*{Annotated reading guide}
+\addcontentsline{toc}{section}{Annotated reading guide}
+% ====================================================================
+
+\noindent\emph{How to read this note.} A \textbf{physics-first} reader who knows
+nothing should take Parts~\ref{part:phys}--\ref{part:rs} (the collider physics
+and the RS spectrum) and then the ``common confusions'' box, skimming the
+code-detail Part~\ref{part:code}. An \textbf{implementer} can jump straight to
+Part~\ref{part:code} (modules, severities, active edges, allowlist) and use
+Parts~\ref{part:phys}--\ref{part:rs} as background. Everyone should read
+Part~\ref{part:subtle} before quoting a bound externally. The references below
+are grouped by process.
+
+\begin{description}[leftmargin=0em,style=nextline]
+\item[Lillie, Randall, Wang, arXiv:hep-ph/0701166.] The theory baseline for the
+KK gluon as a top-philic LHC resonance; motivates boosted-top reconstruction. The
+paper-era reference in \code{CR001.yaml}; read alongside \S\ref{sec:cr001}. Not a
+measured limit (a discovery-reach projection).
+
+\item[CMS-B2G-25-009, arXiv:2603.23454.] The current best full-Run-2 CMS
+all-topology $t\bar t$ resonance search; excludes the RS KK-gluon benchmark up to
+$5.5$~TeV. The \emph{active} budget of \code{CR001} and the constraint that sets
+the smoke-test scale.
+
+\item[ATLAS $T_{5/3}$ search, arXiv:2212.05263; CMS-B2G-20-011, arXiv:2209.07327
+(active \code{CR003}); ATLAS $T\to Wb$, arXiv:2401.17165 (\code{CR003}
+diagnostic).] Representative vector-like-quark pair-production limits
+($\sim 1.4$--$1.7$~TeV) feeding \code{CR002}/\code{CR003}. The active
+\code{CR003} budget is the CMS all-decay-mixture edge ($1.48$~TeV); the stronger
+ATLAS pure-$Wb$ edge ($1.70$~TeV) is held as a diagnostic. Read with
+\S\ref{sec:vlq}; the exotic-charge $T_{5/3}$ is the custodial smoking gun.
+
+\item[CMS high-mass diphoton RS graviton (CMS-2024); PDG-2025 Extra Dimensions
+listing.] Source of the \code{CR013}/\code{CR007} KK-graviton edges
+($\sim 4.8$~TeV diphoton at $\tilde k = 0.1$; $1.4$~TeV diboson at $\tilde k =
+0.5$). The spin-2 state is the RS-distinguishing signature (\S\ref{sec:graviton}).
+
+\item[CMS-B2G-20-009 (HVT $W'\to WZ$).] The heavy-vector-triplet diboson
+benchmark behind \code{CR012} ($m(W') > 4.4$~TeV). The model-independent spin-1
+diboson route (\S\ref{sec:ewkk}).
+
+\item[PDG-2025 quark--lepton compositeness review (CMS, arXiv:2103.02708).] The
+$\ell\ell qq$ contact-interaction bound behind \code{CR009}; the active budget is
+the \emph{conservative} (weakest) destructive edge $\Lambda_{LL} > 23.9$~TeV, with
+stronger benchmarks (ATLAS $\Lambda_{LL}^{+} > 35.8$~TeV) retained as diagnostics.
+The EFT-tail observable of \S\ref{sec:eft}. Held OUT of quark-only.
+
+\item[ATLAS longitudinal same-sign $WW$ VBS, PRL~135 (2025) 111802
+(arXiv:2503.11317).] The fiducial cross-section measurement behind \code{CR011}
+($< 0.45$~fb), our one INFO/non-vetoing collider record (\S\ref{sec:severity}).
+
+\item[Repo code.] \code{quarkConstraints/collider\_resonance.py} (the shared
+$\sBR$/mass machinery), the boundary adapter
+\code{flavor\_catalog\_constraints/physics\_adapters/collider\_resonance.py}, the
+fourteen \code{.../primary/collider\_rs/CR0xx.py}, their sidecars
+\code{flavor\_catalog/processes/collider\_rs/CR0xx.yaml}, and the allowlist split
+in \code{docs/quark\_scan\_constraint\_update\_2026-06.md} (Change~2) with
+\code{QUARK\_ONLY\_ALLOWLIST\_EXTRAS}. \textbf{These are the source of truth for
+every number and tag in this note.}
+\end{description}
+
+\bigskip
+\noindent\rule{\linewidth}{0.4pt}\\
+\footnotesize
+\emph{Internal note. All active benchmark edges, severities, extras, and
+``proxy vs rigorous'' tags are as stored in the \code{collider\_rs} sidecars and
+modules and in the orchestration ledgers; every \code{CR0xx} is a
+mass-exclusion \emph{proxy} (\code{NEEDS-HUMAN-PHYSICS}), not a rigorous recast.
+The $\MKK$ convention (factor $x_1$, spin-dependent: $\approx 2.45$ for KK
+gauge/VLQ, $\approx 3.83$ for KK gravitons) must be checked before quoting a
+TeV bound externally.}
+
+\end{document}

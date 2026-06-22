@@ -1,0 +1,377 @@
+\documentclass[11pt]{article}
+
+% ============================================================
+%  Physics + status summary for external collaborators.
+%  Self-contained: assumes general BSM/flavour background,
+%  zero knowledge of any specific implementation.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% lightweight "callout" box
+\colorlet{shadecolor}{gray!12}
+\newenvironment{callout}[1]{%
+  \par\medskip\begin{shaded}\noindent\textbf{#1}\par\smallskip}{\end{shaded}\medskip}
+
+\newcommand{\MKK}{M_{\mathrm{KK}}}
+\newcommand{\LIR}{\Lambda_{\mathrm{IR}}}
+\newcommand{\epsK}{\varepsilon_K}
+\newcommand{\dmd}{\Delta m_d}
+\newcommand{\dms}{\Delta m_s}
+\newcommand{\phis}{\phi_s}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\vev}{v}
+\newcommand{\cwsq}{c_W^2}
+
+\setlist{nosep}
+
+\title{\bf A Warped Extra Dimension for Flavour and Electroweak Physics\\[3pt]
+\large Physics logic and project status --- a summary for external collaborators}
+\author{Project summary note}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+We summarise, for an external reader with a general BSM/flavour background, the
+physics of a Randall--Sundrum (RS) warped-extra-dimension model of fermion masses
+and mixings, the observables we require it to reproduce, and the precision
+constraints we impose. The central claim of the framework is that the observed
+hierarchies in charged-fermion masses and CKM/PMNS mixing arise from
+\emph{geometry} --- the localisation of bulk fermions in the warped fifth
+dimension --- rather than from hierarchical five-dimensional couplings, which are
+taken anarchic and $\mathcal{O}(1)$. We then give an honest, item-by-item account
+of how each constraint is treated, distinguishing the observables we compute
+with full in-repo matching paths (the main $\Delta F=2$ meson-mixing set and the
+$Z\to b\bar b$ vertex) from those handled as approximate or framework-dependent
+predictions (the lepton-flavour-violating dipole, the oblique parameters $S,T,U$,
+and the direct collider bounds), and close with the project status and open items.
+\end{abstract}
+
+% ====================================================================
+\section{The model in one section}
+% ====================================================================
+
+The spacetime is a slice of five-dimensional anti-de~Sitter space (AdS$_5$)
+bounded by two branes,
+\begin{equation}
+ds^2 = e^{-2k|y|}\,\eta_{\mu\nu}\,dx^\mu dx^\nu - dy^2,
+\qquad 0 \le y \le \pi r_c,
+\end{equation}
+with a UV (Planck-scale) brane at $y=0$ and an IR (TeV-scale) brane at
+$y=\pi r_c$. The exponential warp factor $\eps = e^{-k\pi r_c}\sim 10^{-15}$
+generates the Planck/electroweak hierarchy from an $\mathcal{O}(1)$ radius. A
+single large dimensionless number,
+\begin{equation}
+L \equiv k\pi r_c = \ln(1/\eps) = \ln(M_{\rm Pl}/\mathrm{TeV}) \approx 35,
+\end{equation}
+controls almost everything below.
+
+\paragraph{Geometric flavour.} The Higgs is localised near the IR brane, and each
+Standard-Model (SM) fermion is the zero mode of a bulk field whose profile is set
+by a single dimensionless bulk-mass parameter $c$ (in units of $k$). For $c>1/2$
+the zero mode is repelled from the IR brane and its value there is exponentially
+small; for $c<1/2$ it is $\mathcal{O}(1)$.
+The 4D Yukawa coupling of a given fermion is the product of the IR-brane
+overlaps (``$f$-factors'') of the two chiralities times the anarchic
+five-dimensional Yukawa,
+\begin{equation}
+y^{\rm 4D}_{ij} \;\sim\; f_{Q_i}\, Y^{\rm 5D}_{ij}\, f_{u_j},
+\qquad
+f^2(c) = \frac{\tfrac12 - c}{1 - \eps^{\,1-2c}},
+\end{equation}
+with all $Y^{\rm 5D}_{ij}=\mathcal{O}(1)$ and generic in phase. Because the
+$f$-factors span many orders of magnitude as $c$ is dialled across $1/2$, the
+\emph{products} $f_{Q_i}f_{u_j}$ are strongly hierarchical even though every
+fundamental coupling is of order unity. This reproduces the charged-fermion mass
+hierarchy and, through the same hierarchical left-handed $f$-factors, the small
+CKM mixing angles --- mixing among generation $i$ and $j$ scales as
+$f_{Q_i}/f_{Q_j}$. The complex anarchic Yukawas supply the CKM CP phase with no
+extra ingredient.
+
+\paragraph{RS-GIM alignment.} The same localisation that explains the masses
+automatically suppresses flavour-changing neutral currents. Kaluza--Klein (KK)
+gauge bosons couple to a fermion in proportion to its IR overlap, so their
+flavour-violating couplings are controlled by the \emph{same} small $f$-factors
+that already suppress the light-quark masses. This built-in alignment --- the
+``RS-GIM'' mechanism --- means new-physics flavour amplitudes are not generic at
+the $1/\MKK^2$ scale but carry an extra mass-weighted suppression. It is partial,
+not complete: a small, generically complex misalignment survives, and that
+residue is what the meson-mixing constraints of Section~\ref{sec:constraints}
+probe.
+
+\paragraph{Neutrinos.} Light neutrino masses are generated by a UV-localised
+Majorana mass for right-handed singlet neutrinos, giving a Type-I seesaw. In the
+charged-lepton mass basis the PMNS matrix is carried by the neutrino Yukawa,
+$Y_N \to V_{\rm PMNS}\,\mathrm{diag}(Y_{N_1},Y_{N_2},Y_{N_3})$, and the seesaw
+fixes the overall neutrino-mass scale through the right-handed bulk-mass profile
+and the UV Majorana scale.
+
+% ====================================================================
+\section{What we require the model to reproduce}
+% ====================================================================
+
+The target observables, treated as data the model must accommodate, are:
+\begin{itemize}[leftmargin=1.4em]
+\item the three charged-lepton masses and the six quark masses (PDG central
+values, run to a common scale);
+\item the CKM matrix --- all four parameters, including the CP-violating phase
+(equivalently the Jarlskog invariant);
+\item in the lepton sector, the PMNS mixing angles and the two measured neutrino
+mass-squared splittings $\Delta m^2_{21}$ and $\Delta m^2_{31}$, with the sum of
+neutrino masses kept below the cosmological bound $\sum m_\nu \lesssim 0.082$~eV.
+\end{itemize}
+A viable parameter point is one whose anarchic $\mathcal{O}(1)$ five-dimensional
+couplings, after geometric localisation, reproduce these to within their
+uncertainties while keeping all couplings perturbative.
+
+% ====================================================================
+\section{The constraints we impose}
+\label{sec:constraints}
+% ====================================================================
+
+Each subsection states the physics and our treatment status
+(\emph{rigorous} vs.\ \emph{proxy}).
+
+\subsection{$\Delta F=2$ meson mixing: the RS flavour/CP problem}
+
+\emph{Status: rigorous for the implemented short-distance $K$, $B$, and
+$D$-mixing amplitude paths; the $D$ CP-violation companion is a flagged proxy.}
+
+A heavy KK gluon couples to both quark chiralities, so integrating it out at
+tree level generates the relevant vector and left--right $\Delta F=2$ operators
+for this benchmark --- not only the vector left--left operator that the SM box
+already produces, but also chirality-flipping left--right operators. The
+left--right operators are
+\emph{doubly enhanced}: by a large chiral factor in the hadronic matrix element
+(for the kaon, $(m_K/(m_s+m_d))^2 \approx 26$; this number is scale- and
+scheme-dependent, and is sometimes quoted as a smaller matrix-element ratio
+times a separate RG factor) and by QCD renormalisation-group
+running between the multi-TeV matching scale and the few-GeV hadronic scale.
+Our pipeline builds the genuine Wilson coefficients from the localisation
+profiles, runs them, contracts with lattice or documented in-repo matrix
+elements, and vetoes any point exceeding an uncertainty-aware budget. The set
+comprises:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{$\epsK$} (the CP-violating, imaginary part of $K^0$--$\bar K^0$
+mixing): the single sharpest constraint. Because it probes the imaginary part of
+the chirally- and RG-enhanced left--right operator, carrying a generic
+$\mathcal{O}(1)$ phase with no extra GIM protection, it is roughly an order of
+magnitude tighter than the real part. In an anarchic warped model it historically
+forces the lightest KK gluon above $\sim 20$~TeV. This is ``the RS flavour/CP
+problem.''
+\item \textbf{$D^0$--$\bar D^0$ mixing} (up-sector magnitude), \textbf{$\dmd$}
+and \textbf{$\dms$} ($B_d$ and $B_s$ mass splittings), and the \textbf{$B_s$
+mixing CP phase $\phis$}. The $B_{d,s}$ channels are live rigorous constraints;
+the $D$-mixing magnitude veto is rigorous but deliberately conservative because
+the SM long-distance charm amplitude is not subtracted. The separate $D$
+CP-violation entry uses a one-dimensional CP-odd proxy until the full HFLAV
+$(|q/p|,\phi_D)$ likelihood, $\Gamma_{12}$, and the SM long-distance phase are
+implemented.
+\end{itemize}
+
+\subsection{$\mu\to e\gamma$: the lepton-flavour-violating dipole}
+
+\emph{Status: live HARD constraint with a rigorous experimental limit, but an
+NDA lepton-MFV prediction rather than a finite KK-loop calculation.}
+
+With leptons and the photon in the bulk and a brane Higgs, KK exchange generates
+a chirality-flipping magnetic-dipole operator
+$\bar e\,\sigma^{\mu\nu}\mu\,F_{\mu\nu}$ mediating $\mu\to e\gamma$. The
+prediction is sharply model-dependent on the lepton-flavour structure, so we
+adopt a lepton minimal-flavour-violation framework in which the dipole's flavour
+violation is tied to the neutrino Yukawa and the seesaw. The implemented
+constraint is a validated NDA formula,
+$\mathrm{BR}\propto |(\bar Y_N\bar Y_N^\dagger)_{e\mu}|^2(3~\mathrm{TeV}/\MKK)^4$;
+a fully rigorous upgrade would replace that prefactor with the finite bulk-Higgs
+KK-loop calculation. We veto against the latest experimental limit,
+$\mathrm{BR}(\mu\to e\gamma) < 1.5\times10^{-13}$.
+Because this constraint lives entirely in the lepton sector, it does not enter
+the quark-sector scans.
+
+\subsection{$Z\to b\bar b$: the non-universal bottom coupling}
+
+\emph{Status: rigorous for the minimal-RS tree path; custodial protection is a
+documented proxy relaxation.}
+
+RS is not a universal theory: the IR-localised third-generation doublet
+$(t_L,b_L)$ couples most strongly to the KK gauge tower, so its $Z$ coupling is
+distorted the most. This shows up as a shift in the left-handed bottom coupling
+$g_L^b$, probed by the $Z$-pole pseudo-observables $R_b$ (the $b\bar b$ branching
+fraction, mostly $g_L^b$) and $A_b$ (the asymmetry, sensitive to
+$g_L^b - g_R^b$). This is a genuine vertex correction, not an oblique effect, and
+cannot be folded into $S,T,U$. In the minimal model it is the \emph{dominant
+electroweak constraint}, setting a rigorous floor of $\sim 25$--$30$~TeV in
+physical first-KK-gauge mass.
+
+\subsection{Oblique parameters $S$, $T$, $U$}
+
+\emph{Status: leading-order parametric PROXY --- not a spectral computation.}
+
+The Peskin--Takeuchi parameters package the universal new-physics shifts to the
+$W$/$Z$ self-energies. $T$ measures custodial-isospin breaking; $S$ measures the
+overall size of the new electroweak sector. In RS, the IR-brane Higgs mixes the
+flat gauge zero modes with the IR-localised KK tower, giving
+$\{S,T\}\sim \vev^2/\MKK^2$. The danger is the coefficient of $T$: with the
+minimal (SM) bulk gauge group there is no custodial symmetry, and the gauge
+normalisation over the warped volume produces a factor of $L\approx 35$,
+\begin{equation}
+\Delta T_{\rm minimal} \simeq \frac{\pi L}{2\,\cwsq}\,\frac{\vev^2}{\MKK^2}
+\;\approx\; 71.5\,\frac{\vev^2}{\MKK^2},
+\qquad \vev = 246~\text{GeV},
+\end{equation}
+where here $\vev = 246$~GeV is the full Higgs-doublet vacuum expectation value
+(the convention of the literature this estimate is drawn from; the coefficient
+would be $\approx 143$ in the $\vev = 174 = 246/\sqrt2$~GeV normalisation). With
+$\vev = 246$~GeV, even at $\MKK = 3$~TeV one finds $\Delta T \approx 0.5$, a
+$\sim 7\sigma$ excursion.
+\textbf{Our treatment is honest about being a proxy:} we use the
+closed-form parametric scalings above (with $\Delta S = c_S\,\vev^2/\MKK^2$,
+$c_S=\mathcal{O}(\text{tens})$, $U\equiv 0$) and test against the PDG global
+$(S,T)$ ellipse. The \emph{experimental} side is rigorous; the \emph{prediction}
+is leading-order and omits the higher-derivative oblique parameters ($W,Y$) that
+are not negligible for light KK modes. A rigorous treatment would replace the
+parametric coefficients with a per-point spectral/loop computation.
+
+\subsection{Direct collider bounds on KK masses}
+
+\emph{Status: PROXY recasts (near-flat mass floor).}
+
+LHC resonance searches (a colour-octet KK gluon decaying to $t\bar t$, a KK
+graviton in diboson/diphoton, KK electroweak vectors, and pair-produced
+vector-like quark partners in the custodial version) each report a mass-exclusion
+edge; together they form a near-flat direct-search floor of a few TeV. We do not
+run full collider recasts: each bound is interpreted as a mass-exclusion proxy
+that asks whether the scan's KK scale clears the catalogued benchmark edge.
+Because the indirect flavour bounds already push $\MKK$ well above these edges,
+the direct floors essentially never bind once the indirect constraints are on.
+
+% ====================================================================
+\section{Minimal vs.\ custodial: where the KK scale floor sits}
+% ====================================================================
+
+In the \textbf{minimal} model (SM bulk gauge group), the volume-enhanced oblique
+$T$ and the $Z\to b\bar b$ vertex are the killers: together they force the
+lightest KK gauge scale to $\sim 25$--$30$~TeV in physical mass (equivalently
+$\sim 10$--$12$~TeV in IR-scale $\LIR$ units, the two differing by the first KK
+gauge root $x_1\approx 2.45$, close to the first zero of the Bessel function
+$J_0$ at $2.405$).
+
+Enlarging the bulk gauge group to the standard \textbf{custodial} structure,
+$SU(2)_L\times SU(2)_R\times U(1)_X$ with a discrete left--right parity
+$P_{LR}$, cures these. The continuous $SU(2)_R$ removes the volume enhancement of
+$T$ (the coefficient $\pi L/2\cwsq$ flips to $-\pi/4\cwsq L$, a suppression by
+$\sim 1/(2L^2)\sim 4\times10^{-4}$), and the discrete $P_{LR}$ separately
+protects the $Z\bar b_L b_L$ vertex. In the paired quark-sector scans, with their
+particular flavour-structure choices, neutralising $T$ and $Z b_L$ moves the
+rigorous floor onto the $\Delta F=2$ flavour set at $\sim 2$--$3$~TeV. When the
+proxy oblique-$S$ (now the binding oblique number, unprotected) and the proxy
+collider edges are folded in, the \emph{inclusive} floor rises to $\sim 7$~TeV.
+
+\begin{callout}{The crucial honest point.}
+Custodial protection helps the \emph{electroweak} bounds only. It does
+\emph{nothing} for the flavour/CP problem: the KK-gluon $\Delta F=2$ amplitudes,
+and $\epsK$ in particular, are untouched by $SU(2)_R$ or $P_{LR}$. The
+$\sim 20$~TeV anarchic $\epsK$ bound therefore remains the separate, hardest
+constraint, addressable only by flavour alignment, larger bulk masses, or an
+imposed flavour symmetry --- not by the custodial cure.
+\end{callout}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}p{4.0cm} p{4.4cm} c p{2.9cm}@{}}
+\toprule
+\textbf{Constraint} & \textbf{Physics target} & \textbf{Treatment} & \textbf{Role} \\
+\midrule
+$\epsK$ (kaon CP) & Im part of $K$--$\bar K$ mixing & rigorous & generic anarchic floor ($\sim 20$~TeV) \\
+$\dmd,\ \dms,\ \phis$ & $B_{d,s}$ mixing + CP phase & rigorous & scan flavour floor (few TeV) \\
+$D^0$--$\bar D^0$ & up-sector magnitude; CP proxy separate & rigorous / partial & alignment complement \\
+$\mu\to e\gamma$ & LFV magnetic dipole & NDA LMFV & lepton sector; seesaw-tied \\
+$Z\to b\bar b$ ($R_b,A_b$) & non-universal $g_{L,R}^b$ & rigorous & dominant EW (minimal) \\
+$S,T,U$ (oblique) & $W$/$Z$ self-energies & \textbf{proxy} & $T$ kills minimal model \\
+Direct KK searches & on-shell LHC resonances & \textbf{proxy} & near-flat floor (few TeV) \\
+\bottomrule
+\end{tabular}
+\caption{Constraint catalogue: physics target, treatment status, and role.}
+\end{table}
+
+% ====================================================================
+\section{Where we are: project status}
+% ====================================================================
+
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Quark-sector scans completed.} Parameter scans over the quark
+sector are done for both the minimal and custodial models, run as a paired
+comparison. These reproduce the quark masses and the CKM matrix (including its
+CP phase) and apply the $\Delta F=2$ set, $Z\to b\bar b$, and the oblique and
+collider proxies. The quoted few-TeV custodial scan floor is the result after the
+scan's flavour-structure choices; it should not be read as erasing the separate
+generic anarchic $\epsK$ estimate of order $20$~TeV.
+\item \textbf{Lepton-sector LFV implemented, not yet in production scans.} The
+$\mu\to e\gamma$ constraint is built and validated against the experimental
+limit, but is not yet wired into the production parameter scans; the lepton-sector
+fit (PMNS, neutrino splittings) is follow-up scope.
+\item \textbf{Oblique and collider bounds are leading-order proxies.} The
+$S,T,U$ prediction is the closed-form parametric scaling described above, and the
+collider bounds are mass-exclusion recasts. Both are flagged as approximate and
+await a full spectral/loop (oblique) and proper recast (collider) treatment.
+\item \textbf{Custodial one-loop top-partner contributions computed, not switched
+on.} The finite, calculable one-loop corrections from the light top-partner KK
+fermions (a positive $\Delta T$ from the top-singlet partner, correlated with a
+$\delta g_L^b$ shift of opposite sign) are derived and available, but the
+custodial scans currently run at tree level with the loop deferred.
+\end{itemize}
+
+\paragraph{Rigorous vs.\ approximate, in one line.} The main $K/B/D$ mixing
+amplitude paths and the minimal-RS $Z\to b\bar b$ tree path are rigorous in the
+repo's current matching conventions; $D$-mixing CP violation is partial,
+$\mu\to e\gamma$ is an NDA LMFV estimate, custodial $Zb_L$ protection is a proxy
+relaxation, and the oblique $S,T,U$ and collider bounds are leading-order
+proxies. The bottom line is robust to this split: generic anarchic flavour,
+especially $\epsK$, is the hardest physics problem, while the paired custodial
+scan shows how much the floor moves once a particular flavour structure is
+chosen.
+
+\paragraph{Open items / caveats.}
+\begin{itemize}[leftmargin=1.4em]
+\item Replace the oblique $S,T,U$ proxy with a per-point spectral computation,
+including the higher-derivative ($W,Y$) parameters relevant for light KK modes.
+\item Replace the collider mass-exclusion proxies with genuine cross-section
+recasts.
+\item Switch on the custodial one-loop top-partner contributions in the scans;
+re-derive the custodial floors with the loop included.
+\item Bring the lepton-sector LFV and the PMNS/neutrino-splitting fit into the
+production scans.
+\item Note the two distinct conventions for ``KK mass'' (physical first KK mass
+vs.\ the IR scale $\LIR$), which differ by the first KK gauge root
+$x_1\approx 2.45$ (near the first $J_0$ zero, $2.405$); all quoted floors
+state which is meant.
+\end{itemize}
+
+% ====================================================================
+\section*{Reading pointers}
+\addcontentsline{toc}{section}{Reading pointers}
+% ====================================================================
+
+Warped flavour and RS-GIM: Gherghetta--Pomarol (hep-ph/0003129),
+Grossman--Neubert (hep-ph/9912408), Agashe--Contino--Pomarol (hep-ph/0412089).
+Anarchic $\Delta F=2$ and the $\epsK$ bound: Csaki--Falkowski--Weiler
+(arXiv:0804.1954), Blanke et al.\ (arXiv:0809.1073). Charged-lepton flavour
+violation: Agashe--Blechman--Petriello (hep-ph/0606021). Custodial cure of $T$:
+Agashe--Delgado--May--Sundrum (hep-ph/0308036); $P_{LR}$ protection of
+$Z\bar b_L b_L$: Agashe--Contino--Da~Rold--Pomarol (hep-ph/0605341); one-loop
+top-partner analysis: Carena--Ponton--Santiago--Wagner (hep-ph/0701055). An
+alternative geometry lowering the floor without custodial symmetry:
+Cabrer--von~Gersdorff--Quir\'os (arXiv:1103.1388).
+
+\end{document}

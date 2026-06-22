@@ -1,0 +1,981 @@
+\documentclass[11pt]{article}
+
+% ============================================================
+%  Z -> b bbar : R_b and A_b in warped (Randall--Sundrum) models
+%  A slow, pedagogical internal review.
+%  Written to track (a) the physics, (b) what is in OUR code,
+%  (c) the subtleties and gaps.
+%  This is an internal working note, not for distribution.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% lightweight "callout" box
+\colorlet{shadecolor}{gray!12}
+\newenvironment{callout}[1]{%
+  \par\medskip\begin{shaded}\noindent\textbf{#1}\par\smallskip}{\end{shaded}\medskip}
+
+\newcommand{\MKK}{M_{\mathrm{KK}}}
+\newcommand{\LIR}{\Lambda_{\mathrm{IR}}}
+\newcommand{\sw}{s_W}
+\newcommand{\cw}{c_W}
+\newcommand{\swsq}{s_W^2}
+\newcommand{\cwsq}{c_W^2}
+\newcommand{\Pibig}{\Pi}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\vev}{v}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\SUL}{SU(2)_L}
+\newcommand{\SUR}{SU(2)_R}
+\newcommand{\UX}{U(1)_X}
+\newcommand{\PLR}{P_{LR}}
+\newcommand{\Tparam}{\hat{T}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\todo}[1]{{\color{red}[#1]}}
+\newcommand{\gL}{g_L^b}
+\newcommand{\gR}{g_R^b}
+\newcommand{\dgL}{\delta g_L^b}
+\newcommand{\dgR}{\delta g_R^b}
+\newcommand{\Rb}{R_b}
+\newcommand{\Ab}{A_b}
+\newcommand{\Afb}{A_{FB}^{0,b}}
+\newcommand{\Fc}{F}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{\bf $Z\to b\bar b$: $R_b$ and $A_b$ in Warped Models\\[4pt]
+\large A slow, pedagogical internal review --- physics, code, and subtleties}
+\author{Internal working note (5D--Neutrino--Mixing repo)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This note is a from-scratch walk-through of the $Z\to b\bar b$ precision
+electroweak constraint and the way it bounds a Randall--Sundrum (RS) warped
+extra dimension. In our quark-sector catalogue $Z\to b\bar b$ is the
+\emph{dominant non-custodial electroweak constraint} --- the rigorous floor it
+sets, $\sim 25$--$30$~TeV in \emph{physical} first-KK-gauge mass
+($\approx 10$--$12$~TeV in $\LIR$ units), sits well above the oblique
+$S,T$ proxy and the $\Delta F=2$ flavour bounds in the minimal model. The note
+assumes no prior knowledge of $Z$-pole pseudo-observables, of the bottom
+chiral couplings, or of how a fifth dimension distorts them. Part~\ref{part:sm}
+builds the observables $R_b$ and $A_b$ from the chiral $Zb\bar b$ vertex.
+Part~\ref{part:rs} explains how RS shifts $\dgL$ through two physically distinct
+pieces --- a gauge-KK wavefunction overlap and a fermion-KK admixture --- and
+where the KK-mass floor comes from. Part~\ref{part:cust} treats the custodial
+$\PLR$ protection that removes the entire non-universal $Zb_L$ vertex.
+Part~\ref{part:code} documents exactly what our code does
+(\code{quarkConstraints/rs\_ew\_couplings.py}, \code{T010}, \code{T011}), every
+constant grounded in the files. Part~\ref{part:subtle} catalogues the
+subtleties and the precise gap to ``rigorous,'' including the
+$\MKK$-convention factor of $x_1\approx 2.45$. An annotated reading guide closes
+the note. It cross-references \code{stu\_review.tex} (oblique $S,T,U$) and
+\code{custodial\_review.tex} throughout.
+\end{abstract}
+
+\tableofcontents
+
+% ====================================================================
+\part*{Orientation: why this note exists}
+\addcontentsline{toc}{section}{Orientation: why this note exists}
+% ====================================================================
+
+There is a useful division of labour among the electroweak constraints on a
+warped model. The oblique parameters $S,T,U$ (\code{EW001}, documented in
+\code{stu\_review.tex}) capture the \emph{universal} distortions that the new
+heavy sector imprints on the $W$ and $Z$ propagators; they treat all fermions
+democratically. But RS is emphatically \emph{not} a universal theory: light
+fermions are pinned to the ultraviolet (UV) brane and heavy ones leak toward the
+infrared (IR) brane, so the Kaluza--Klein (KK) gauge bosons couple to different
+generations with different strengths. The third-generation left-handed doublet,
+$(t_L, b_L)$, is the most IR-localised of all the quark doublets --- it has to
+be, to give the top its large mass --- and that means its coupling to the
+$Z$ is distorted the most. $Z\to b\bar b$ is the precision observable that
+catches exactly this \emph{non-oblique}, generation-specific effect. One cannot
+fold it into $S,T,U$; it is a genuinely different operator on a genuinely
+different vertex.
+
+In our catalogue this matters quantitatively. In the minimal (non-custodial) RS
+scan, $Z\to b\bar b$ --- implemented as the paired constraints \code{T010}
+($R_b$) and \code{T011} ($A_b$/$\Afb$) --- is the constraint that sets the
+\emph{rigorous} KK-scale floor, and it sits \emph{above} both the oblique
+proxy and the $\Delta F=2$ kaon/$B$-meson bounds. So if you want to know what
+really keeps the minimal-model KK scale high, the answer is $Z\to b\bar b$.
+
+A one-paragraph executive summary, unpacked over the following pages:
+
+\begin{quote}
+\small
+The $Z$ boson couples to the bottom quark through two chiral couplings, $\gL$
+and $\gR$. Two precision numbers from the $Z$ pole pin them down: $R_b$, the
+fraction of hadronic $Z$ decays that go to $b\bar b$ (mostly sensitive to the
+\emph{left}-handed coupling), and the asymmetry $A_b$ (sensitive to the
+\emph{difference} of left and right). In RS the left-handed shift $\dgL$ gets
+\emph{two} contributions: a \textbf{gauge-KK} piece from the distorted
+zero-mode gauge wavefunction sampled by the IR-localised $b_L$ --- set by the
+third-generation doublet IR overlap $F(c_{Q_3})$ through an exact overlap
+$a(c)$ --- and a \textbf{fermion-KK admixture} of order $m_b^2/\MKK^2$, in which
+$b_L$ mixes into the heavy KK down-type tower, summed over \emph{all} down
+flavours weighted by Yukawa ratios. At a realistic anarchic-Yukawa scan point
+the second piece \emph{dominates the first by a factor $\sim 23$}, so the veto is
+really driven by the $m_b^2$ flavour-sum admixture feeding $R_b$. The resulting
+non-custodial floor is $\sim 25$--$30$~TeV physical $\MKK$. The custodial cure is a discrete
+left--right parity $\PLR$ that protects the \emph{whole} non-universal $Zb_L$
+vertex --- gauge piece and admixture together --- so under the custodial
+scan $Z\to b\bar b$ stops vetoing entirely. The right-handed coupling $\gR$
+(hence $A_b$) is \emph{not} protected and stays a residual; the long-standing
+$\sim 2.8\sigma$ $\Afb$ tension is carried as context, never as a veto.
+\end{quote}
+
+\noindent The logical spine of the whole note, in one picture:
+\begin{footnotesize}
+\begin{verbatim}
+  Z couples to b:  L_Z = g_Z Z_mu bbar gamma^mu (g_L P_L + g_R P_R) b
+        |
+        +--> R_b = Gamma_b / Gamma_had   (mostly |g_L|^2)  ==> T010 veto scalar
+        +--> A_b = (|g_L|^2 - |g_R|^2)/(|g_L|^2 + |g_R|^2)  ==> T011, A_FB^0,b context
+        |
+  RS shifts the LEFT coupling, delta g_L^b = (i) gauge-KK + (ii) m_b^2 admixture
+        |
+        (i)  gauge-KK overlap:  s_Z * g_L^SM * (m_Z^2/M_KK^2) * (a(c_Q3) - a_ref)
+        |       set by 3rd-gen doublet IR overlap F(c_Q3)            [volume-aware]
+        |
+        (ii) Casagrande admixture:  (m_b^2 / 2 Lambda_IR^2) * B_d
+        |       B_d = SUM_i |Y_d[2,i]|^2/|Y_d[2,2]|^2 * B(c_d_i,F_d_i)   FULL flavour sum
+        |       ==> DOMINATES (i) by ~23x (anarchic point) ==> floor ~25-30 TeV physical M_KK
+        |                                          (~10-12 TeV in Lambda_IR units)
+        |
+  cure:  custodial SU(2)_L x SU(2)_R x U(1)_X  with  P_LR (b_L bidoublet, T3_L=T3_R)
+        |
+        +-- P_LR zeroes the WHOLE non-universal Z b_L vertex (gauge + admixture)
+        |        ==> T010 removed:  694123 minimal vetoes  -->  0 custodial
+        |
+        +-- b_R NOT protected  ==> A_b / A_FB^0,b stay a residual (model-dependent)
+\end{verbatim}
+\end{footnotesize}
+\noindent Keep this map in mind; every box is unpacked below. The two most common
+confusions --- that ``the $m_b^2$ piece is small'' (it is not; it dominates) and
+that ``$\PLR$ only protects the tiny admixture'' (it protects the whole vertex)
+--- are both defused as we go.
+
+% ====================================================================
+\part{The Standard-Model framework: $R_b$ and $A_b$}
+\label{part:sm}
+% ====================================================================
+
+\section{The chiral $Zb\bar b$ vertex}
+\label{sec:vertex}
+
+Everything starts with how the $Z$ couples to the bottom quark. At tree level in
+the SM the interaction is a current--current coupling that treats the two bottom
+chiralities independently:
+\begin{equation}
+\mathcal{L}_Z = g_Z\, Z_\mu\, \bar b\, \gamma^\mu \big(\gL\, P_L + \gR\, P_R\big)\, b,
+\qquad P_{L,R} = \tfrac{1}{2}(1\mp\gamma_5),
+\label{eq:LZ}
+\end{equation}
+where $g_Z = e/(\sw\cw)$ is the overall neutral-current strength and
+$P_{L,R}$ project onto left/right chirality. This is exactly the normalisation
+our code uses (the docstring of \code{T010}/\code{T011} states it verbatim). The
+two chiral couplings are fixed by the bottom quark's weak isospin $T^3$ and
+electric charge $Q$:
+\begin{equation}
+\gL = T^3_b - Q_b\,\swsq = -\tfrac{1}{2} + \tfrac{1}{3}\swsq,
+\qquad
+\gR = -\,Q_b\,\swsq = \tfrac{1}{3}\swsq,
+\label{eq:gLgR}
+\end{equation}
+using $T^3_{b_L} = -\tfrac12$, $T^3_{b_R}=0$, and $Q_b=-\tfrac13$. Our code
+generates these from \code{\_sm\_chiral\_z\_coupling("d","L"/"R",sin2\_theta\_w)},
+which returns precisely $T^3 - Q\,\swsq$. Numerically, with
+$\swsq=0.23122$, $\gL \approx -0.423$ and $\gR \approx +0.077$: the left coupling
+is large and negative, the right one small and positive. \textbf{That asymmetry
+is the whole reason $R_b$ and $A_b$ probe different things}, as we now see.
+
+New physics shows up as additive shifts $\gL \to \gL + \dgL$ and
+$\gR \to \gR + \dgR$. The job of the rest of this note is to compute $\dgL$ and
+$\dgR$ in RS and to ask whether the data tolerate them.
+
+\section{$R_b$: the partial-width ratio}
+\label{sec:Rb}
+
+The first pseudo-observable is a ratio of partial widths,
+\begin{equation}
+R_b \equiv \frac{\Gamma(Z\to b\bar b)}{\Gamma(Z\to \text{hadrons})}.
+\label{eq:Rbdef}
+\end{equation}
+Why a ratio, and why this one? Three reasons, all of which are why $R_b$ is such
+a clean precision observable.
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{It is a width, so it scales as the squared coupling}:
+$\Gamma(Z\to b\bar b) \propto |\gL|^2 + |\gR|^2$ (up to phase-space and QCD/QED
+radiator factors). Because $|\gL| \gg |\gR|$, the width --- and hence $R_b$ ---
+is dominated by the \emph{left-handed} coupling. \textbf{So $R_b$ is, to good
+approximation, a measurement of $\gL$.} This is exactly the coupling RS shifts
+the most.
+\item \textbf{Taking a ratio cancels the bulk of the radiative and oblique
+corrections.} Universal effects (e.g.\ the $\rho$ parameter, photon vacuum
+polarisation, most of the QED/QCD radiator) act on numerator and denominator
+together and drop out. What survives in $R_b$ is the \emph{$b$-specific} vertex
+correction --- precisely the non-oblique piece RS generates.
+\item \textbf{It is measured to extraordinary precision.} The LEP/SLC
+combination our catalogue stores is $R_b^0 = 0.21629 \pm 0.00066$ --- a relative
+error of $3\times10^{-3}$. A vertex shift of even a fraction of a percent in
+$|\gL|^2$ is therefore visible.
+\end{enumerate}
+
+To turn a coupling shift into a prediction, write $R_b$ schematically as
+$R_b \approx \Gamma_b/(\Gamma_b + \Gamma_{\rm other})$ with
+$\Gamma_b \propto |\gL|^2 + |\gR|^2$ times a known radiator. A small left shift
+$\dgL$ moves $R_b$ by
+\begin{equation}
+\frac{\delta R_b}{R_b} \;\approx\; (1-R_b)\,\frac{2\,\gL\,\dgL + 2\,\gR\,\dgR}
+{|\gL|^2+|\gR|^2}.
+\label{eq:dRb}
+\end{equation}
+The factor $(1-R_b)$ is the standard ratio-of-widths feedback (raising
+$\Gamma_b$ also raises $\Gamma_{\rm had}$). The key structural point is the
+coefficient $2\gL$ in front of $\dgL$: with $\gL\approx-0.423<0$ it is
+\emph{large and negative}, so the \emph{sign} of the $R_b$ shift is opposite to
+the sign of $\dgL$. A \emph{positive} $\dgL$ makes $\gL$ less negative, i.e.\ it
+\emph{lowers} $|\gL|$ and hence lowers $R_b$ below its SM value; a \emph{negative}
+$\dgL$ makes $\gL$ more negative, raising $|\gL|$ and raising $R_b$. The
+\emph{sign} of the total $\dgL$ is point-dependent: the gauge piece is positive
+(it pushes $R_b$ down), while the dominant $m_b^2$ flavour-sum admixture can carry
+either sign depending on the anarchic Yukawa pattern. At a realistic scan point
+the negative admixture wins, so the total $\dgL<0$ and $R_b$ is pushed
+\emph{up} (see the worked example in \S\ref{sec:admixture}); at the near-diagonal
+regression benchmark of \S\ref{sec:codeveto} the bottom term dominates instead,
+$\dgL>0$, and the predicted $R_b=0.21328$ falls \emph{below} the SM fit $0.21562$.
+Either way the magnitude overshoots the budget and $R_b$ does the vetoing. Our
+code does not use the linearised
+\eqref{eq:dRb}; it shifts the couplings and recomputes the full pseudo-observable
+through the shared \code{zpole} machinery (\S\ref{sec:zpolecode}). But
+\eqref{eq:dRb} is the right mental model for why $R_b$ is sensitive.
+
+\section{$A_b$ and $\Afb$: the asymmetries}
+\label{sec:Ab}
+
+The second family of observables measures a \emph{parity asymmetry} rather than a
+rate. Define the bottom asymmetry parameter
+\begin{equation}
+A_b \equiv \frac{|\gL|^2 - |\gR|^2}{|\gL|^2 + |\gR|^2}.
+\label{eq:Abdef}
+\end{equation}
+This is exactly the definition in \code{T010}/\code{T011}. Read it physically:
+the numerator is the \emph{difference} of left and right squared couplings, so
+$A_b$ measures the \emph{chiral imbalance} of the $Zb\bar b$ vertex. In the SM,
+because $|\gL|\gg|\gR|$, $A_b$ is close to one ($A_b^{\rm SM}\approx 0.935$): the
+$Z$ couples almost purely to left-handed bottoms. Crucially, $A_b$ depends on
+$|\gR|^2$ through the \emph{small} denominator-and-numerator difference, so it is
+\emph{relatively} more sensitive to the right-handed coupling than $R_b$ is ---
+this is the one $Z$-pole quantity that genuinely probes $\gR$.
+
+The forward--backward asymmetry on the $Z$ pole factorises into a product:
+\begin{equation}
+\Afb = \tfrac{3}{4}\,A_e\,A_b,
+\label{eq:Afbdef}
+\end{equation}
+with $A_e$ the analogous electron asymmetry parameter (fixed by leptonic data).
+So $\Afb$ is just $A_b$ times a known constant. The reason we single it out is
+historical and is one of the most famous loose ends in $Z$-pole physics:
+
+\begin{callout}{The $\Afb$ anomaly --- context, not a veto.}
+The LEP/SLC measurement of $\Afb$ has sat a persistent $\sim 2.8\sigma$ below
+the SM fit for two decades. Our catalogue records this directly: the measured
+$\Afb = 0.0992 \pm 0.0016$, and the stored ``LEP/SLC final-combination pull''
+anchor is literally $2.8$. Because an unprotected right-handed bottom coupling is
+\emph{exactly} the knob that could shift $A_b$ (and hence $\Afb$), it is tempting
+to treat this tension as a constraint. \textbf{We deliberately do not.} The
+veto scalar in \code{T011} is the size of the \emph{new-physics shift relative to
+the SM prediction}, divided by a loose ``central-plus-combined'' budget
+(\S\ref{sec:codeveto}); the $2.8\sigma$ data--vs--SM gap is loaded and reported
+as \emph{context only}. A model point is never excluded merely because the SM
+itself disagrees with $\Afb$. This is the correct and defensible design: we are
+testing whether RS \emph{moves} the observable too much, not whether the SM
+already mis-predicts it.
+\end{callout}
+
+\section{What the data say, in numbers}
+\label{sec:numbers}
+
+The anchors our catalogue uses (LEP/SLC combinations, stored in
+\code{flavor\_catalog/processes/top\_higgs\_ew/T010.yaml} and \code{T011.yaml})
+are:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Observable & Measured value & Role in our code \\
+\midrule
+$R_b^0$ & $0.21629 \pm 0.00066$ & \code{T010} veto scalar (with $A_b$) \\
+$A_b$ & $0.923 \pm 0.020$ & \code{T010} and \code{T011} veto scalar \\
+$\Afb$ & $0.0992 \pm 0.0016$ & \code{T011} veto scalar; carries $2.8\sigma$ SM tension \\
+LEP/SLC $\Afb$ pull & $2.8$ (no $\sigma$) & context-only anchor \\
+\bottomrule
+\end{tabular}
+\end{center}
+Each observable is compared against a \emph{SM-fit reference value} (loaded from
+a snapshot, not assumed zero), and the budget combines the experimental and
+SM-fit uncertainties in quadrature. The precision is the headline: a relative
+$3\times10^{-3}$ on $R_b$ is what makes $Z\to b\bar b$ such a sharp probe of the
+small vertex shifts RS generates.
+
+% ====================================================================
+\part{How warped models generate $\dgL$}
+\label{part:rs}
+% ====================================================================
+
+\section{RS recap: localisation and the two scales}
+\label{sec:rsrecap}
+
+Recall the geometry (consistent with the repo conventions and with
+\code{stu\_review.tex}). Spacetime is a slice of AdS$_5$ with a UV brane at the
+Planck scale and an IR brane at the TeV scale; the warp factor is
+$\eps = e^{-k\pi r_c}\sim 10^{-15}$ and the \emph{volume log} is
+\begin{equation}
+L \equiv k\pi r_c = \ln(1/\eps) = \ln(M_{\rm Pl}/\mathrm{TeV}) \approx 35.
+\label{eq:L}
+\end{equation}
+Our code computes this as \code{warp\_log = -math.log(epsilon)} in
+\code{warpConfig/baseParams.py}, with $M_{\rm Pl}=1.2209\times10^{19}$~GeV and a
+default $\LIR = 3000$~GeV.
+
+A bulk fermion has a dimensionless bulk-mass parameter $c$ that controls where
+its zero mode lives. The relevant summary number is the \textbf{IR overlap}
+$F(c)$ --- the value of the canonically normalised zero-mode wavefunction at the
+IR brane (the repo's $f_{\rm IR}(c)$). Schematically,
+\begin{equation}
+F^2(c) = \frac{\tfrac12 - c}{1 - \eps^{1-2c}},
+\end{equation}
+so that $c>\tfrac12$ gives a UV-peaked profile with exponentially small $F$
+(light fermions), while $c<\tfrac12$ gives an IR-peaked profile with $F=O(1)$
+(heavy fermions). The third-generation doublet must be strongly IR-localised to
+feed the top mass, so $c_{Q_3}<\tfrac12$ and $F(c_{Q_3})=O(1)$. \textbf{This
+single number, $F(c_{Q_3})$, is the protagonist of the whole $Z\to b\bar b$
+story}: it controls both contributions to $\dgL$ below.
+
+The gauge KK tower has masses $m_n = x_n\,\LIR$ with $x_n$ the roots of the
+appropriate Bessel combination. The lightest one, with the finite-$\eps$
+Neumann--Neumann boundary conditions our solver uses, sits at
+$x_1\approx 2.45$, so the \emph{physical} first KK gauge mass is
+\begin{equation}
+\boxed{\;\MKK^{\rm phys} = x_1\,\LIR \approx 2.45\,\LIR.\;}
+\label{eq:x1}
+\end{equation}
+Our spectrum object exposes this as \code{kk\_ew\_mass\_gev} (docstring: ``First
+physical electroweak gauge KK mass, \code{x\_1 * Lambda\_IR}''). The factor
+$2.45$ is the single most important convention in this note when quoting TeV
+bounds --- see the dedicated discussion in \S\ref{sec:Mconvention}.
+
+\section{Piece (i): the gauge-KK wavefunction shift}
+\label{sec:gauge}
+
+Here is the first mechanism, in words. The SM $Z$ is the (nearly) flat zero mode
+of the bulk neutral gauge field. ``Flat'' is deceptive: canonical normalisation
+over the warped fifth dimension stretches the proper measure by the volume,
+leaving the normalised zero mode slightly \emph{non-flat} --- enhanced toward the
+IR brane where the warp factor is smallest. A fermion sees the $Z$ coupling
+weighted by where its own wavefunction sits. A UV-localised light fermion samples
+the (suppressed) UV tail and gets essentially the universal SM coupling; an
+IR-localised fermion like $b_L$ samples the IR-enhanced region and gets a
+\emph{non-universal} extra piece. Integrating out the heavy KK gauge tower
+packages this into a shift proportional to $\vev^2/\MKK^2$ (equivalently
+$m_Z^2/\MKK^2$) times an overlap factor that depends on the fermion's $c$.
+
+Our code encodes this exactly. The overlap form factor is
+\begin{equation}
+a(c) = \sum_n \frac{\MKK^2}{m_n^2}\,\chi_n(1)\,\Omega_n(c),
+\label{eq:ac}
+\end{equation}
+a sum over the KK gauge tower (index $n$) of the heavy-propagator weight
+$\MKK^2/m_n^2$, times the gauge KK profile evaluated at the IR brane
+$\chi_n(1)$, times the fermion overlap $\Omega_n(c)$ of mode $n$ with the
+zero-mode fermion of bulk mass $c$. This is the docstring formula of
+\code{rs\_ew\_spectrum.py} verbatim, built from the exact gauge Neumann--Neumann
+tower in \code{solvers.bessel}; the sum is truncated with a doubled-$N$
+convergence test (\code{a\_with\_diagnostics}). The mass-basis coupling shift is
+then
+\begin{equation}
+\boxed{\;\dgL\big|_{\rm gauge} = s_Z\,g_L^{b,\rm SM}\,\frac{m_Z^2}{\MKK^2}\,
+\big[a(c_{Q_3}) - a_{\rm ref}\big],\;}
+\label{eq:zdelta}
+\end{equation}
+which is the \code{\_z\_delta} routine: \code{s\_z * g\_sm * scale *}
+(mass-basis $a$), with \code{scale = (m\_z/M\_KK)\^{}2}, \code{s\_z = -1.0}
+(\code{DEFAULT\_S\_Z}), and the metadata string ``\code{s\_Z * g\_A\_SM *
+(m\_Z\^{}2/M\_KK\^{}2) * U\^{}dagger diag(a(c)-a\_ref) U}.'' Three features deserve
+comment:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{The subtraction $a_{\rm ref}$ is an EW-universal reference.} The
+code subtracts $a(c)$ at a fixed reference $c$, \code{DEFAULT\_A\_REF\_C = 0.65}
+(a UV-localised value): only the \emph{non-universal}, $c$-dependent part of the
+overlap is physical, because the universal part renormalises into the SM
+coupling. So what enters \eqref{eq:zdelta} is $a(c_{Q_3})-a(0.65)$.
+\item \textbf{It is set by $F(c_{Q_3})$.} The overlap $\Omega_n(c_{Q_3})$ is
+large precisely because the $b_L$ profile is IR-peaked; the size of the gauge
+shift tracks $F(c_{Q_3})^2$, the squared IR overlap of the third-generation
+doublet. Light generations, UV-localised, give a negligible gauge shift.
+\item \textbf{The rotation to the mass basis.} The diagonal $a(c)$ values are
+rotated by the left-down diagonalisation matrix
+(\code{\_mass\_basis\_profile}: $U^\dagger \,\mathrm{diag}(a)\,U$), so the
+$[2,2]$ entry that feeds $b\bar b$ is a properly mass-basis quantity, not a
+naive gauge-basis one.
+\end{itemize}
+The parametric size is the universal RS decoupling, $\dgL|_{\rm gauge}\sim
+F(c_{Q_3})^2\, m_Z^2/\MKK^2$. Its sign follows from the explicit factors: with
+$s_Z=-1$ and $g_L^{b,\rm SM}<0$ the prefactor $s_Z\,g_L^{b,\rm SM}>0$, and for an
+IR-localised doublet ($c_{Q_3}<a_{\rm ref}=0.65$) the overlap difference
+$a(c_{Q_3})-a_{\rm ref}>0$, so $\dgL|_{\rm gauge}>0$ --- a positive shift that
+on its own makes $\gL$ less negative, lowering $|\gL|$ and pulling $R_b$ down. The
+(larger) admixture piece below is \emph{not} sign-locked to the gauge piece: at a
+realistic anarchic point it comes out \emph{negative} and overwhelms the gauge
+contribution, so the total $\dgL$ is negative there. The veto is set by the
+\emph{magnitude} of the dominant admixture, not by the gauge sign.
+
+\section{Piece (ii): the Casagrande $m_b^2$ fermion-KK admixture}
+\label{sec:admixture}
+
+The second mechanism is distinct and, in our code, larger. When the bottom mass
+is switched on by the IR-brane Yukawa, the physical $b_L$ is not purely the
+zero-mode fermion: it picks up a small admixture of the heavy KK down-type
+fermions. Those KK fermions have different (IR-localised) $Z$ couplings, so the
+admixture shifts the effective $Zb_Lb_L$ vertex. The size is set by the
+mass-mixing-squared over the KK mass-squared, i.e.\ $\propto m_b^2/\MKK^2$ ---
+this is the ``$m_q^2/\MKK^2$ fermion-KK admixture'' of Casagrande, Goertz,
+Haisch, Neubert, Pfoh (arXiv:0807.4937), which our code cites by name.
+
+The implementation (\code{build\_rs\_zbb\_fermion\_kk\_mixing}) is:
+\begin{equation}
+\boxed{\;\dgL\big|_{\rm admix} = \frac{m_b^2}{2\,\LIR^2}\,B_d,
+\qquad
+B_d = \sum_{i} \frac{|Y_d[2,i]|^2}{|Y_d[2,2]|^2}\,B(c_{d_i}, F_{d_i}),\;}
+\label{eq:admix}
+\end{equation}
+with the closed-form per-flavour profile
+\begin{equation}
+B(c, F) = \frac{1}{1-2c}\left(\frac{1}{F^2} - 1 + \frac{F^2}{3+2c}\right).
+\label{eq:Bprofile}
+\end{equation}
+Equation \eqref{eq:Bprofile} is the exact
+\code{\_casagrande\_zbb\_B\_profile} function; \eqref{eq:admix} is the
+\code{prefactor = m\_b**2/(2*lambda\_ir**2)} times \code{B\_d = np.dot(row\_ratio,
+profile\_b\_d)}.
+
+\paragraph{Reading $B(c,F)$ --- and why the \emph{light} partners dominate.} The
+profile \eqref{eq:Bprofile} is the single most important and most counter-intuitive
+object in the note, so it is worth reading term by term. The overall $1/(1-2c)$ is
+the KK normalisation factor; its \emph{sign flips at $c=\tfrac12$} --- it is
+positive for the IR-localised bottom ($c_b<\tfrac12$) but \emph{negative} for the
+UV-localised light singlets ($c>\tfrac12$). Inside the bracket, the $1/F^2$ term is
+the dominant one and it \emph{blows up for UV-localised fields}, where $F$ is
+exponentially small; the $-1$ and the small $F^2/(3+2c)$ are $O(1)$ corrections. So
+$|B(c,F)|$ is large precisely for the \emph{light} down-type partners (large $c$,
+tiny $F$, hence enormous $1/F^2$) and only $O(1)$ for the IR-localised bottom
+itself --- and, because of the $1/(1-2c)<0$ prefactor, those light-partner terms
+enter with the \emph{opposite sign} to the bottom term. This is the surprise: the
+sum $B_d$ is \emph{not} dominated by the $b$, but by the $s$- and $d$-type KK
+partners, whose $1/F^2$ enhancement ($F^2$ of order $10^{-3}$--$10^{-4}$ for the
+light down singlets) is huge, and which flip the overall sign. The off-diagonal
+anarchic Yukawas $Y_d[2,i]$ that bring these light partners into the sum are
+exactly what makes the full flavour sum $\sim 4.5\times$ larger (and, at an
+anarchic point, sign-flipped) relative to the $b$-only bracket below.
+
+Two further structural points are essential and are the crux of the whole note.
+
+\paragraph{It is a \emph{full flavour sum}, not a $b$-only bracket.} The weight
+$|Y_d[2,i]|^2/|Y_d[2,2]|^2$ runs over \emph{all} down-type generations $i$, not
+just $i=2$ (the bottom). Physically, the left-handed bottom mixes into the
+\emph{entire} down KK tower --- strange and down KK partners included --- with
+strengths governed by the off-diagonal anarchic Yukawas $Y_d[2,i]$. Our code uses
+the full ZMA (zero-mode approximation) flavour sum
+\code{B\_d = $\sum_i$ |Y\_d[2,i]|\^{}2/|Y\_d[2,2]|\^{}2 $\cdot$ profile\_B}, which
+the docs note explicitly contrasts with ``a $b$-only bracket.'' The compact
+$b$-only version (just the $i=2$ term) is roughly $4.5\times$ smaller; the full
+sum is the \emph{aggressive} choice and is the one the scan runs.
+
+\paragraph{The chiral cross-assignment.} Casagrande's convention
+\emph{cross-assigns} the towers: the down-\emph{singlet} tower sum
+($B_d$, built from $c_d$ and $F_d$) feeds the \emph{left}-handed shift $\dgL$,
+while the down-\emph{doublet} tower sum ($B_Q$, built from $c_Q$ and $F_Q$) feeds
+the \emph{right}-handed shift $\dgR$. The code comment is explicit:
+``Casagrande's Zbb convention cross-assigns the singlet tower sum to
+\code{delta\_g\_L\_b} and the doublet tower sum to \code{delta\_g\_R\_b}.'' So
+\begin{equation}
+\dgL\big|_{\rm admix} = +\frac{m_b^2}{2\LIR^2}\,B_d,
+\qquad
+\dgR\big|_{\rm admix} = -\frac{m_b^2}{2\LIR^2}\,B_Q,
+\end{equation}
+with the relative sign as coded (\code{delta\_g\_R\_b = -prefactor * B\_Q}). This
+is easy to get backwards in a future edit, which is exactly why the code keeps
+the $B_d$/$B_Q$ names explicit.
+
+\begin{callout}{Worked numerical example --- the $\sim 23\times$ dominance and the floor.}
+The internal magnitude cross-check (codex + Opus, run \code{ZBB-XCHECK},
+verdict \emph{CONVENTION-CHOICE}) decomposed $\dgL$ at a realistic anarchic scan
+point ($c_{Q_3}\!\approx\!0.364$, $F_{Q_3}\!\approx\!0.368$, $\LIR\!\approx\!8.2$~TeV,
+physical $\MKK\!\approx\!20$~TeV) and found
+\[
+\dgL\big|_{\rm gauge}\approx +1.07\times10^{-4},
+\qquad
+\dgL\big|_{\rm admix}\approx -2.48\times10^{-3},
+\qquad
+\dgL \approx -2.37\times 10^{-3},
+\]
+so the admixture \emph{dominates the gauge piece by a factor
+$|{-2.48}|/|{+1.07}|\approx 23$} and \emph{flips the sign} of the total (the
+gauge piece alone is positive; the negative admixture wins). The headline
+``$m_b^2$ piece'' --- which one might naively dismiss as tiny because $m_b$ is
+small --- in fact dominates, through the full anarchic flavour sum and the
+sign-flipping $1/(1-2c)$, $1/F^2$ enhancements in $B(c,F)$ for the UV-localised
+light down singlets. The dominant pull is $R_b$, not $A_b$ ($A_b$ is subdominant
+in \code{T010} and only loose/context in \code{T011}), so $Z\to b\bar b$ vetoes
+\emph{via} $R_b$; the $\Afb$ tension stays context-only. A separate,
+near-diagonal regression benchmark ($\LIR=3$~TeV) pins the constraint code:
+there the bottom term dominates instead ($\dgL>0$), \code{T010} reports predicted
+$R_b=0.21328$ (below the SM fit), ratio $4.47042$ --- well above the veto
+threshold of $1$, so the point is excluded. Tracing the floor at the anarchic
+point: the veto persists up to a physical $\MKK\sim 25$--$30$~TeV (crossing
+$\approx 23.5$--$26.6$~TeV in the cross-check) before the $\vev^2/\MKK^2$
+suppression brings the shift inside the $R_b$ budget. In $\LIR$ units (the
+literature convention) that is $\sim 10$--$12$~TeV, the standard non-custodial
+$Zb\bar b$ bound.
+\end{callout}
+
+\section{Assembling $\dgL$ and where the floor comes from}
+\label{sec:assemble}
+
+Our builder adds the two pieces into the $[2,2]$ entry of the down-type coupling
+matrices. With \code{include\_fermion\_kk\_mixing=True}, the code does
+\begin{equation}
+\code{z\_delta\_g\_L\_d[2,2] += delta\_g\_L\_b},
+\qquad
+\code{z\_delta\_g\_R\_d[2,2] += delta\_g\_R\_b},
+\end{equation}
+where the matrices already contain the gauge piece of \eqref{eq:zdelta}. So the
+$[2,2]$ entry that \code{T010}/\code{T011} read is gauge $+$ admixture, exactly
+as the constraint docstrings state (``\emph{gauge light-Z shift plus the minimal
+non-custodial Casagrande ZMA fermion-KK admixture}''). Both contributions carry
+the universal $1/\MKK^2$ (or $1/\LIR^2$) decoupling, so raising the KK scale
+suppresses the shift; the floor is the scale at which the dominant ($R_b$) pull
+drops to the size of the experimental-plus-SM budget. Because the admixture
+dominates and feeds $R_b$, the floor is essentially set by the $m_b^2$ flavour
+sum: $\sim 25$--$30$~TeV physical $\MKK$ ($\sim 10$--$12$~TeV in $\LIR$ units).
+
+A note on the missing ``$m_t^2$'' term, because it caused an internal
+mis-step worth recording. One might expect a much larger $m_t^2/\MKK^2$ shift on
+$b_L$ (since $b_L$ shares the doublet with the heavy top). There is such a term,
+but in the minimal model it is \emph{not} a separate analytic addition: the
+literal large $m_t^2/\MKK^2$ $Zb_L$ piece is the \emph{representation-dependent
+custodial} contribution, and adding an analytic $m_t^2$ term on top of the
+already-complete minimal computation would \emph{double-count}. The minimal-RS
+tree result (gauge $+$ $m_b^2$ admixture) is complete on its own; the $m_t^2$
+custodial piece is deferred (\S\ref{part:cust}).
+
+% ====================================================================
+\part{Custodial protection: $\PLR$ and the whole $Zb_L$ vertex}
+\label{part:cust}
+% ====================================================================
+
+\section{Why $Z\to b\bar b$ needs its own custodial mechanism}
+\label{sec:needplr}
+
+The oblique $T$ parameter is cured by enlarging the bulk gauge group to
+$\SUL\times\SUR\times\UX$, which supplies a continuous custodial $\SUR$
+(see \code{stu\_review.tex} and \code{custodial\_review.tex}). But $\SUR$ alone
+does \emph{not} protect the $Zb_L$ vertex: that is a separate, generation-specific
+correction, and a continuous custodial isospin says nothing about it. The
+protection of $\dgL$ requires \emph{more} --- a discrete left--right parity
+$\PLR$ that exchanges $\SUL\leftrightarrow\SUR$, realised by embedding the
+third-generation doublet as a bidoublet. This is the Agashe--Contino--Da
+Rold--Pomarol mechanism (hep-ph/0605341), whose \emph{entire purpose} was to
+solve the RS $Z\to b\bar b$ problem.
+
+\section{The $\PLR$ protection theorem}
+\label{sec:plr}
+
+The argument is two constraints meeting. Embed $(t_L, b_L)$ as a bidoublet
+$(2,2)_{2/3}$ of $\SUL\times\SUR$, so that the left-handed bottom satisfies
+\begin{equation}
+T^3_L(b_L) = T^3_R(b_L) = -\tfrac12,
+\end{equation}
+i.e.\ $b_L$ is an eigenstate of $\PLR$ with equal left and right isospin. Then:
+\begin{itemize}[leftmargin=1.4em]
+\item invariance under the unbroken vectorial $U(1)_V$ (the diagonal of
+$T^3_L,T^3_R$) fixes the \emph{sum} of the charges, so any vertex shift obeys
+$\delta T^3_L + \delta T^3_R = 0$;
+\item invariance under the discrete $\PLR$ forces left and right to \emph{move
+together}, $\delta T^3_L = \delta T^3_R$.
+\end{itemize}
+Two equations in two unknowns force $\delta T^3_L = \delta T^3_R = 0$: the
+non-universal correction to the left-handed charge vanishes,
+$\dgL\to 0$. \textbf{In one line:} \emph{$\PLR$ makes the left and right
+couplings move together, $U(1)_V$ forbids the pair from moving, so neither
+moves.} The protected object is the \emph{whole} non-universal $\propto
+(T^3_L - T^3_R)$ correction to $Zb_Lb_L$.
+
+\paragraph{Crucially, this includes the leading gauge piece.} A point we got
+wrong once internally (recorded in \code{.orchestration/runs/CUSTODIAL-RESEARCH})
+and then resolved from the ACDRP theorem: $\PLR$ protects the
+\emph{dominant}, compositeness-driven $\dgL$ --- the gauge-KK overlap piece
+$\propto F(c_{Q_3})^2$ --- not merely the small $m_b^2$ admixture. This must be
+so, because the dominant minimal-RS $Zb_L$ correction \emph{is} the gauge piece,
+and the whole point of ACDRP custodial is to remove exactly that. The $m_b^2$
+admixture is \emph{also} protected, provided the bottom Yukawa embedding respects
+$\PLR$; only explicit $\PLR$-breaking (e.g.\ from the bottom mass itself) leaves
+a small residual. So the protection is of the \emph{entire} non-universal
+$Zb_L$ vertex, gauge and admixture together.
+
+\section{What is and is not protected}
+\label{sec:protect}
+
+The representation assignments (and our code defaults) are:
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Field & Representation & $Z$-vertex status & Code default \\
+\midrule
+$Q_L=(t_L,b_L)$ & $(2,2)_{2/3}$ bidoublet & $\dgL$ protected by $\PLR$ & \code{...Q\_L\_bidoublet\_(2,2)\_\{2/3\}} \\
+$t_R$ & $(1,1)_{2/3}$ singlet & $T^3_R=0$ (singlet) & \code{t\_R\_singlet\_(1,1)\_\{2/3\}} \\
+$b_R$ & elementary / unprotected & $\dgR$ \emph{not} protected & \code{b\_R\_elementary} \\
+scope & all-gen down-left, diag.\ & --- & \code{all\_gen\_down\_left\_diagonal} \\
+\bottomrule
+\end{tabular}
+\end{center}
+These are the literal module constants \code{DEFAULT\_CUSTODIAL\_Q\_L\_REP},
+\code{DEFAULT\_CUSTODIAL\_T\_R\_REP}, \code{DEFAULT\_CUSTODIAL\_B\_R\_REP},
+\code{DEFAULT\_CUSTODIAL\_PROTECT\_SCOPE}, with
+\code{DEFAULT\_CUSTODIAL\_B\_R\_STRATEGY = "elementary\_zero"}. The bookkeeping:
+\begin{itemize}[leftmargin=1.4em]
+\item $\dgL$ ($R_b$, the left coupling): \emph{protected} by $\PLR$ on the
+bidoublet --- gauge piece and admixture together.
+\item $\dgR$ ($A_b$, the right coupling): \emph{not} protected. There is no
+$\PLR$ acting on $b_R$ (it is treated as elementary), so $A_b$ and $\Afb$ remain
+a residual, representation-dependent observable.
+\end{itemize}
+Why leave $b_R$ unprotected? Because it is the one handle on data this class of
+models keeps. $A_b$/$\Afb$ probe the right-handed coupling --- exactly the sector
+$\SUR$ and $\PLR$ leave open --- and the historical $\sim 2.8\sigma$ $\Afb$
+tension is precisely what an unprotected $b_R$ could address. So
+``$b_R$ unprotected'' is a \emph{feature}: it keeps $A_b$ a live,
+model-dependent observable rather than zeroing it by fiat.
+
+\section{The deferred one-loop top-partner piece}
+\label{sec:loop}
+
+Even with $\PLR$ killing the tree-level $\dgL$, there is a calculable one-loop
+contribution from the light top-partner KK fermions (the custodians) that mixes
+into both the $T$ parameter and $\dgL$. Our code carries the hook:
+\code{rs\_ew\_couplings.py} has named fields
+\code{top\_partner\_delta\_g\_L\_b\_singlet} and
+\code{top\_partner\_delta\_g\_L\_b\_bidoublet\_vertex} (formula set
+``\code{leading\_singlet\_main\_text\_plus\_bidoublet\_vertex}'', source
+Carena--Pont\'on--Santiago--Wagner hep-ph/0701055), and the magnitudes are
+built from the top-partner masses $m_{\rm partner}=\rho_t\,\MKK$ and the mixing
+$\propto m_t/F(c_{Q_3})$. \textbf{But the production custodial scan ran with the
+loop deferred} (\code{include\_top\_partner\_loops=False} by default; the proxy
+reports \code{top\_partner\_loop\_mode="deferred"} and
+\code{top\_partner\_loops="deferred"}). So the custodial $Z\to b\bar b$ result we
+quote is tree-level $\PLR$ protection, with the (finite, sign-definite) one-loop
+piece a flagged, overridable input.
+
+% ====================================================================
+\part{What is in OUR code}
+\label{part:code}
+% ====================================================================
+
+\emph{Reader here for the physics may skim Part~\ref{part:code} on a first pass
+and jump to the subtleties in Part~\ref{part:subtle}; this part documents the
+exact code so the note doubles as an implementation reference.}
+
+\section{The coupling builder, exactly}
+\label{sec:builder}
+
+The chain is: \code{rs\_ew\_spectrum.py} builds the exact gauge KK tower and the
+overlap $a(c)$ of \eqref{eq:ac}; \code{rs\_ew\_couplings.py} assembles the
+mass-basis coupling shifts. The gauge piece is \code{\_z\_delta} of
+\eqref{eq:zdelta} with \code{DEFAULT\_S\_Z = -1.0}, \code{DEFAULT\_A\_REF\_C =
+0.65}, and \code{sin2\_theta\_w = 0.23122}. The admixture is
+\code{build\_rs\_zbb\_fermion\_kk\_mixing} of \eqref{eq:admix}--\eqref{eq:Bprofile}.
+The two are summed into \code{z\_delta\_g\_L\_d[2,2]} and
+\code{z\_delta\_g\_R\_d[2,2]}. The resulting object's \code{matching\_assumption}
+records ``\emph{diagonal Zbb minimal non-custodial Casagrande fermion-KK
+admixture included using Lambda\_IR=spectrum.lambda\_ir\_gev}.''
+
+The custodial branch (\code{ew\_model = "custodial\_rs\_plr"}) calls
+\code{\_apply\_custodial\_rs\_plr\_proxy}, which \emph{zeroes the protected
+left-handed entry}: for each protected index $(i,j)$ in the down-left mask it
+sets \code{left[i,j] = 0}, and in particular \code{left[2,2] = 0} --- removing
+the \emph{whole} non-universal $Zb_L$ vertex (gauge plus admixture), exactly the
+$\PLR$ statement. The right-handed entry is zeroed by the elementary-$b_R$
+strategy (\code{right[2,2] = 0} when \code{bR\_strategy == "elementary\_zero"}),
+i.e.\ the proxy keeps no residual $\dgR$ in the default. An optional
+$\PLR$-breaking residual $\propto \kappa_b\,(1/L)\,$(minimal $[2,2]$) is available
+but off by default (\code{kappa\_b = 0}).
+
+\section{The $Z$-pole pseudo-observables, exactly}
+\label{sec:zpolecode}
+
+\code{T010} and \code{T011} both read the $[2,2]$ entries of
+\code{z\_delta\_g\_L\_d} and \code{z\_delta\_g\_R\_d} (via \code{\_coupling\_entry}),
+shift the SM bottom couplings (\code{zpole\_shifted\_couplings}), and recompute
+the pseudo-observables through the shared \code{quarkConstraints.zpole} machinery
+(\code{zpole\_evaluate\_quark("b", ...)}) reached through the
+\code{physics\_adapters.zpole} boundary. The SM-limit bottom radiator is
+calibrated to the LEP/SLC SM-fit $R_b$ value. Definitions \eqref{eq:Rbdef},
+\eqref{eq:Abdef}, \eqref{eq:Afbdef} are computed there.
+
+\section{The veto, exactly}
+\label{sec:codeveto}
+
+Both constraints are \code{Severity.HARD}; a failing point routes to
+\code{excluded\_by\_rigorous}.
+
+\paragraph{\code{T010} ($R_b$).} The veto scalar is the \emph{maximum absolute
+pull} over the two observables $\{R_b^0, A_b\}$:
+\begin{equation}
+\text{pull}_X = \frac{\text{predicted}_X - \text{measured}_X}{\sqrt{\sigma_{\rm exp}^2 + \sigma_{\rm SM}^2}},
+\qquad
+\text{ratio} = \max\big(|\text{pull}_{R_b}|,\ |\text{pull}_{A_b}|\big),
+\end{equation}
+and the point \code{passes} iff $\text{ratio}\le 1.0$ (\code{selected =
+max(pulls, key=abs\_pull)}; \code{passes = ratio <= 1.0}). The budget combines
+the experimental and SM-fit sigmas in quadrature
+(\code{combined = sqrt(exp\_sigma\^{}2 + sm\_sigma\^{}2)}). At the regression
+benchmark, \code{T010} reports predicted $0.21328$, ratio $4.47042$ --- a veto,
+driven by $R_b$.
+
+\paragraph{\code{T011} ($A_b$/$\Afb$).} The veto scalar is the
+\emph{new-physics shift relative to the SM prediction}, divided by a loose
+``central-plus-combined'' budget:
+\begin{equation}
+\text{ratio}_X = \frac{|\,\text{predicted}_X - \text{SM}_X\,|}{|\text{measured}_X - \text{SM}^{\rm fit}_X| + \sqrt{\sigma_{\rm exp}^2 + \sigma_{\rm SM}^2}},
+\end{equation}
+maximised over $\{\Afb, A_b\}$, passing iff $\le 1.0$ (\code{np\_shift =
+predicted - sm\_prediction}; \code{ratio = abs(np\_shift)/hard\_veto\_budget};
+\code{budget = central + combined}). \textbf{This is the design that keeps the
+$2.8\sigma$ anomaly context-only}: the numerator is the size of the RS
+\emph{shift}, so a point is vetoed only if RS \emph{moves} $A_b$ too much --- not
+because the SM already mis-predicts $\Afb$. At the regression benchmark,
+\code{T011} reports predicted $0.93832$, ratio $0.08827$ --- comfortably passing
+(the RS shift on $A_b$ is small). So in the paired data $Z\to b\bar b$ vetoes
+through \code{T010}/$R_b$, not through \code{T011}/$A_b$.
+
+\section{What the paired scans actually showed}
+\label{sec:scans}
+
+In the paired 1M quark-only scans (minimal baseline vs custodial, same
+$r\times\MKK$ grid and seeds, ledger \code{PHASE2\_PROGRAM\_LEDGER.md}):
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Minimal:} \code{T010} ($Z\to b\bar b$) sets the rigorous floor,
+$\sim 25$--$30$~TeV physical $\MKK$ ($\approx 10$--$12$~TeV in $\LIR$ units). It
+vetoes $694{,}123$ of the 1M draws --- the dominant rigorous veto, above the
+oblique proxy and the $\Delta F=2$ set.
+\item \textbf{Custodial:} \code{T010} is \emph{removed} by $\PLR$ --- the same
+$694{,}123$ minimal vetoes drop to \textbf{$0$} custodial (verified
+draw-for-draw; the custodial branch is genuinely active with
+\code{ew\_model = "custodial\_rs\_plr"} on all $1{,}000{,}000$ rows). The rigorous
+floor then falls to the $\Delta F=2$ set ($\eps_K$/$\Delta m_s$/$\phi_s$ =
+\code{K001}/\code{B003}/\code{B004}), $\sim 2$--$3$~TeV.
+\end{itemize}
+The headline is the cleanest possible demonstration of the mechanism: a
+constraint that excludes $\sim 70\%$ of the minimal-model draws is switched off
+\emph{entirely} by turning on $\PLR$, taking the rigorous KK floor from
+$\sim 25$--$30$~TeV down to $\sim 2$--$3$~TeV.
+
+\begin{callout}{Four common confusions, defused.}
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item[\textbf{A.}] \emph{``The $m_b^2$ admixture is a small correction.''} No ---
+at a realistic anarchic scan point it \emph{dominates} the gauge piece by
+$\sim 23\times$ (and flips its sign) and is what drives the $R_b$ veto. The
+smallness of $m_b$ is overcome by the full anarchic flavour sum and the
+$1/(1-2c)$, $1/F^2$ enhancements in $B(c,F)$.
+\item[\textbf{B.}] \emph{``$Z\to b\bar b$ vetoes through the $\Afb$ anomaly.''}
+No --- it vetoes through \emph{$R_b$} (\code{T010}). The $2.8\sigma$ $\Afb$
+SM tension is loaded as \emph{context only}; \code{T011}'s veto scalar is the RS
+shift, not the data--SM gap.
+\item[\textbf{C.}] \emph{``$\PLR$ only protects the tiny fermion-mixing piece.''}
+No --- $\PLR$ protects the \emph{whole} non-universal $Zb_L$ vertex, including the
+leading gauge piece $\propto F(c_{Q_3})^2$. That is the entire purpose of the
+ACDRP custodial construction.
+\item[\textbf{D.}] \emph{``$\MKK$ means one thing.''} It is overloaded by the
+factor $x_1\approx 2.45$ --- physical first KK gauge mass vs.\ $\LIR$
+(\S\ref{sec:Mconvention}). A ``$10$--$12$~TeV'' bound in $\LIR$ units is
+``$25$--$30$~TeV'' physical.
+\end{itemize}
+\end{callout}
+
+% ====================================================================
+\part{Subtleties and the gap to ``rigorous''}
+\label{part:subtle}
+% ====================================================================
+
+\section{The $\MKK$ convention: the factor of $2.45$}
+\label{sec:Mconvention}
+``$\MKK$'' is overloaded, and the two readings differ by the first Bessel root
+$x_1\approx 2.45$ \eqref{eq:x1}. Two facts have to be kept straight:
+\begin{itemize}[leftmargin=1.4em]
+\item the \emph{physical} first KK gauge mass is
+$\MKK^{\rm phys} = x_1\LIR \approx 2.45\,\LIR$ (our \code{kk\_ew\_mass\_gev});
+\item the admixture prefactor in \eqref{eq:admix} uses $m_b^2/(2\LIR^2)$ ---
+i.e.\ Casagrande's convention $\MKK \equiv \LIR$ (the code metadata:
+``\code{M\_KK\_convention: geometric Lambda\_IR = spectrum.lambda\_ir\_gev}'').
+\end{itemize}
+So the same physical bound reads ``$\sim 25$--$30$~TeV'' in physical $\MKK$ and
+``$\sim 10$--$12$~TeV'' in $\LIR$ units --- a $2.45\times$ difference. The
+$\LIR$-unit number is the one to compare against the literature non-custodial
+$Zb\bar b$ bound; the physical number is what our scan reports. This is the same
+hazard \code{stu\_review.tex} flags for the oblique $\vev^2/\MKK^2$, and it is the
+single most common source of apparent factor-of-a-few discrepancies.
+
+\section{Two ``aggressive-direction'' convention choices}
+\label{sec:aggressive}
+The magnitude cross-check (verdict CONVENTION-CHOICE) found \emph{no code error}
+but flagged two physicist-owned choices, both currently in the aggressive
+(stronger-bound) direction:
+\begin{enumerate}[leftmargin=1.8em]
+\item \textbf{Full flavour-sum $B_d$ vs the $b$-only bracket.} The full ZMA
+flavour sum (bottom mixing with the whole down tower, anarchic-Yukawa-dependent)
+is $\sim 4.5\times$ larger than the compact $b$-only $Zb\bar b$ bracket. The full
+sum is what the code uses.
+\item \textbf{$\LIR$ vs physical-$\MKK$ in the prefactor.} As above, a
+$\sim 2.45$--$6\times$ effect on the reported floor depending on convention.
+\end{enumerate}
+Neither is a bug; both are documented choices. Reporting the floor in $\LIR$
+units ($\sim 10$--$12$~TeV) matches the literature; reporting physical $\MKK$
+gives $\sim 25$--$30$~TeV. A reader comparing our number to a paper must check
+which convention is in play.
+
+\section{Rigorous, proxy, or partial?}
+\label{sec:tags}
+Honest tagging, per the code and ledgers:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Piece & Status & Basis \\
+\midrule
+Minimal gauge-KK $\dgL$ & \textbf{rigorous} & exact $a(c)$ from the KK tower, converged \\
+Minimal $m_b^2$ admixture & \textbf{rigorous} & closed-form Casagrande ZMA, full flavour sum \\
+\code{T010}/\code{T011} veto & \textbf{rigorous} & \code{Severity.HARD}, \code{minimal\_rs\_tree\_veto\_ready} \\
+$\Afb$ anomaly use & context-only & not a veto scalar (by design) \\
+Custodial $\PLR$ protection & proxy & zeroes the protected entry; no exact $\SUR$ tower \\
+Top-partner one-loop & deferred & coded hook, off in the production scan \\
+Brane kinetic terms & deferred & not scanned \\
+\bottomrule
+\end{tabular}
+\end{center}
+The minimal-RS tree path is genuinely rigorous: it is the exact gauge overlap
+plus the closed-form admixture, and the constraint is vetoing
+(\code{minimal\_rs\_tree\_veto\_ready} $\to$ tagged rigorous). The custodial
+\emph{relaxation} is a proxy (it zeroes the protected couplings rather than
+diagonalising the full custodial spectrum), and the one-loop and BKT refinements
+are deferred --- exactly the omissions recorded in the
+\code{custodial\_omissions} metadata (\code{SU2\_R\_tower},
+\code{custodian\_spectrum}, \code{exact\_NC\_mixing}, \code{BKT}).
+
+\section{Deferred pieces and known hazards}
+\label{sec:deferred}
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{The custodial $m_t^2$ $Zb_L$ piece} (the large
+$m_t^2/\MKK^2$ shift) is representation-dependent and deferred; adding it
+analytically on top of the complete minimal computation would double-count
+(\S\ref{sec:assemble}).
+\item \textbf{The one-loop top-partner $\dgL$ and $\Delta T$} are coded but off;
+at $\MKK\sim$ few~TeV they are not negligible and a loop-on custodial rerun would
+shift the custodial floor.
+\item \textbf{The custodial $\PLR$-breaking residual} ($\kappa_b\neq 0$) is
+available but unused; it is the only way the model leaves a small $\dgL$ after
+custodial protection.
+\item \textbf{$b_R$ / $A_b$} is left unprotected by choice; the $\Afb$ tension is
+context. A future treatment that wanted to \emph{address} the anomaly would turn
+this into a live, fitted residual.
+\end{itemize}
+
+\section{Checklist: what ``fully rigorous custodial $Z\to b\bar b$'' would require}
+\begin{enumerate}[leftmargin=1.8em]
+\item Replace the $\PLR$ zeroing proxy with an explicit diagonalisation of the
+custodial fermion/gauge spectrum (the $\SUR$ tower and custodians).
+\item Turn on the one-loop top-partner $\dgL$/$\Delta T$ (the Carena et al.\
+formulas already coded) for the custodial mode.
+\item Fix and document a single $\MKK$ convention end-to-end ($\LIR$ vs
+physical), and state it whenever a TeV floor is quoted.
+\item Decide a brane-kinetic-term policy (zero, or scanned with a prior).
+\item Decide whether to keep $A_b$/$\Afb$ context-only or promote it to a fitted
+residual that the model can use to address the $2.8\sigma$ tension.
+\end{enumerate}
+
+% ====================================================================
+\part*{Annotated reading guide}
+\addcontentsline{toc}{section}{Annotated reading guide}
+% ====================================================================
+
+\begin{description}[leftmargin=0em,style=nextline]
+\item[Agashe, Contino, Da Rold, Pomarol, hep-ph/0605341.] \emph{The}
+custodial-$Zb_L$ paper: the discrete $\PLR$ parity, the bidoublet embedding with
+$T^3_L=T^3_R$, and the two-constraint theorem that forces $\dgL\to 0$
+(\S\ref{sec:plr}). The key takeaway for us is that the protected object is the
+\emph{whole} non-universal vertex, including the leading gauge piece --- which is
+why the custodial scan removes \code{T010} entirely. Cited directly in our
+\code{T010}/\code{T011} and in the custodial metadata.
+
+\item[Casagrande, Goertz, Haisch, Neubert, Pfoh, arXiv:0807.4937
+(\emph{JHEP 10(2008)094}).] The flavour-in-RS paper our admixture is built from:
+the mass-basis KK decomposition, the $m_q^2/\MKK^2$ fermion-KK admixture, the
+ZMA, and the $B(c,F)$ profile of \eqref{eq:Bprofile}. The chiral
+cross-assignment (singlet tower $\to\dgL$, doublet tower $\to\dgR$) and the
+$\MKK\equiv\LIR$ prefactor convention are theirs. This is the reference to mine
+if/when we tighten the $Z\to b\bar b$ implementation. Its companion
+1005.4315 is the one \code{stu\_review.tex} points to for the oblique upgrade.
+
+\item[Carena, Pont\'on, Santiago, Wagner, hep-ph/0701055.] The one-loop
+top-partner contributions to $\Delta T$ and $\dgL$ in custodial RS; the source of
+the deferred loop hook (\code{TOP\_PARTNER\_LOOP\_SOURCE},
+\S\ref{sec:loop}). Read alongside \code{stu\_review.tex}~\S on the loop.
+
+\item[Our \code{stu\_review.tex}.] The companion oblique-$S,T,U$ note. Read it
+for the $T$-parameter cure by continuous $\SUR$ (distinct from the $\PLR$
+protection here), the $c_S=30$ proxy, and the same $\MKK$-convention hazard. The
+division of labour --- $S,T,U$ universal, $Z\to b\bar b$ non-oblique --- is the
+reason both notes exist.
+
+\item[Our \code{custodial\_review.tex}.] The custodial-construction note. Read it
+for the full $\SUL\times\SUR\times\UX$ group, the bidoublet/singlet
+representation assignments, and how the custodial switch (\code{custodial\_rs\_plr})
+threads through the scan payload.
+
+\item[Repo files to read in order.] \code{quarkConstraints/rs\_ew\_spectrum.py}
+(the tower and $a(c)$); \code{quarkConstraints/rs\_ew\_couplings.py} (the gauge
+shift, the admixture \code{build\_rs\_zbb\_fermion\_kk\_mixing}, and the
+\code{\_apply\_custodial\_rs\_plr\_proxy} zeroing);
+\code{flavor\_catalog\_constraints/primary/top\_higgs\_ew/T010.py} and
+\code{T011.py} (the $Z$-pole pulls and the veto logic);
+\code{docs/quark\_scan\_constraint\_update\_2026-06.md} (the made-live note and
+the magnitude cross-check).
+\end{description}
+
+\bigskip
+\noindent\rule{\linewidth}{0.4pt}\\
+\footnotesize
+\emph{Internal note. Equations \eqref{eq:zdelta}, \eqref{eq:admix},
+\eqref{eq:Bprofile} are the forms our code uses; the constants
+($s_Z=-1$, $a_{\rm ref,c}=0.65$, $\swsq=0.23122$, $\LIR=3000$~GeV, $L\approx35$,
+$x_1\approx2.45$), the anchors ($R_b^0=0.21629\pm0.00066$, $A_b=0.923\pm0.020$,
+$\Afb=0.0992\pm0.0016$), and the regression values (\code{T010} $0.21328/4.47042$,
+\code{T011} $0.93832/0.08827$; $694{,}123$ minimal vetoes $\to 0$ custodial) are
+as stored in \code{rs\_ew\_couplings.py}, \code{rs\_ew\_spectrum.py}, the
+\code{T010}/\code{T011} YAML sidecars, and the orchestration ledgers. All
+``rigorous vs proxy'' tags follow those ledgers. Cross-check before citing
+externally.}
+
+\end{document}

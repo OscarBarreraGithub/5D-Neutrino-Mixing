@@ -1,0 +1,969 @@
+\documentclass[11pt]{article}
+
+% ============================================================
+%  Delta m_d (B_d - B_dbar mixing) in warped (Randall--Sundrum) models
+%  A slow, pedagogical internal review.
+%  Written to track (a) the physics, (b) what is in OUR code,
+%  (c) the subtleties and gaps.
+%  This is an internal working note, not for distribution.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% lightweight "callout" box
+\colorlet{shadecolor}{gray!12}
+\newenvironment{callout}[1]{%
+  \par\medskip\begin{shaded}\noindent\textbf{#1}\par\smallskip}{\end{shaded}\medskip}
+
+\newcommand{\MKK}{M_{\mathrm{KK}}}
+\newcommand{\LIR}{\Lambda_{\mathrm{IR}}}
+\newcommand{\sw}{s_W}
+\newcommand{\cw}{c_W}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\vev}{v}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Mtwelve}{M_{12}}
+\newcommand{\Bd}{B_d}
+\newcommand{\Bdbar}{\bar B_d}
+\newcommand{\dmd}{\Delta m_d}
+\newcommand{\epsK}{\varepsilon_K}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\todo}[1]{{\color{red}[#1]}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{\bf $B_d$--$\bar B_d$ Mixing: $\Delta m_d$ in Warped Models\\[4pt]
+\large A slow, pedagogical internal review --- physics, code, and subtleties}
+\author{Internal working note (5D--Neutrino--Mixing repo)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This note is a from-scratch, deliberately slow walk-through of the neutral
+$B_d$-meson mass splitting $\dmd$ and how it constrains a Randall--Sundrum (RS)
+warped extra dimension. It assumes no prior knowledge of meson mixing, the
+$\Delta F=2$ effective Hamiltonian, or the warped flavour mechanism: all are
+built up from the beginning. The central message is a \emph{contrast}: $\dmd$ is
+a CP-\emph{conserving} magnitude --- the real part of an off-diagonal mass-matrix
+element --- and is therefore markedly \emph{less} constraining than its CP-odd
+cousin $\epsK$, which feeds on an imaginary part with a large chiral
+enhancement. Part~\ref{part:sm} defines the observable and its Standard-Model
+(SM) reference. Part~\ref{part:rs} explains how RS generates a tree-level
+Kaluza--Klein (KK) gluon contribution, where the left--right (LR) operators come
+from, and where the few-TeV floor sits; it contains a fully worked numerical
+example. Part~\ref{part:custodial} asks whether custodial symmetry or flavour
+alignment moves the bound (short answer: not really, for this observable).
+Part~\ref{part:code} documents exactly what our code does
+(\code{quarkConstraints/deltaf2.py}, the \code{physics\_adapters/deltaf2.py}
+boundary, and the catalogue constraint \code{B001}, which is
+\code{Severity.HARD} and \emph{rigorous}). Part~\ref{part:subtle} catalogues the
+conventions and gaps. An annotated reading guide closes the note. The shared
+$\Delta F=2$ machinery (operator basis, KK-gluon matching, RG running, matrix
+elements) is the \emph{same} core that drives the other meson systems; we state
+it self-containedly here, in the form the $B_d$ evaluation actually uses, rather
+than relying on an external companion.
+\end{abstract}
+
+\tableofcontents
+
+% ====================================================================
+\part*{Orientation: why this note exists}
+\addcontentsline{toc}{section}{Orientation: why this note exists}
+% ====================================================================
+
+Our constraint catalogue contains four neutral-meson mixing systems --- the
+kaon ($\epsK$ and $\Delta m_K$), $B_d$, $B_s$, and $D^0$ --- all computed by a
+\emph{single} $\Delta F=2$ core (\code{quarkConstraints/deltaf2.py}). They share
+the operators, the hadronic-matrix-element structure, and the QCD running. What
+distinguishes them is (i) which quark bilinear they probe, (ii) how big the SM
+amplitude is, and (iii) --- crucially --- whether the constraint reads the
+\emph{magnitude} or the \emph{phase} of the new-physics amplitude. The kaon's
+$\epsK$ reads a phase; $\dmd$ reads a magnitude. That one structural difference
+is why $\epsK$ pushes the warped KK scale to $\sim$tens of TeV while $\dmd$
+typically settles for a few TeV. This note exists to make that difference
+precise --- both as physics and as code --- because in our catalogue
+\code{B001} ($\dmd$) is a \code{Severity.HARD}, \emph{rigorous} veto, and we want
+to know exactly what it is and is not doing.
+
+A one-paragraph executive summary, to be unpacked over the following pages:
+
+\begin{quote}
+\small
+Two neutral $B_d$ states, $\Bd=(\bar b d)$ and $\Bdbar=(b \bar d)$, are mixed by a
+$\Delta B=2$ amplitude $\Mtwelve$; the observed oscillation frequency is the mass
+splitting $\dmd = 2|\Mtwelve|$. In RS, light quarks live near the UV brane and the
+heavy KK gluons near the IR brane, so a tree-level KK-gluon exchange generates new
+$\Delta F=2$ four-quark operators suppressed by $1/\MKK^2$, including dangerous
+left--right (LR) operators absent in the SM. Because $\dmd$ constrains only
+$|\Mtwelve^{\rm NP}|$ --- a \emph{magnitude} --- the bound sees the operator
+coefficient times an $\mathcal{O}(1)$ chiral factor, with \emph{no} access to the
+$\mathcal{O}(1)$ CP phase that $\epsK$ exploits and \emph{no} kaon-sized chiral
+blow-up. The net effect: anarchic RS satisfies $\dmd$ for
+$\MKK\sim\text{few TeV}$, an order of magnitude below the $\sim20$~TeV that $\epsK$
+demands. Our code vetoes a point when $|\Mtwelve^{\rm NP}|$ exceeds an
+uncertainty-aware ``SM-versus-experiment room'' budget, $\sim\dmd^{\rm exp}/2$ at
+leading order.
+\end{quote}
+
+\noindent The logical spine of the whole note, in one picture (every symbol ---
+$\Mtwelve$, the VLL/VRR/LR operators $C_4/C_5$, the chiral factor $r_\chi$, the
+custodial $P_{LR}$, $g_s^*$ --- is defined where it is first used below; read this
+as a map to return to, not a self-contained statement):
+\begin{footnotesize}
+\begin{verbatim}
+  B_d = (bbar d),  B_dbar = (b dbar)   --mixed by-->   M_12  (Delta B = 2 amplitude)
+                          |
+   observable: Delta m_d = 2 |M_12|   ==  a MAGNITUDE (real part), not a phase
+                          |
+   RS: light quarks UV, KK gluon IR  ==>  tree KK-gluon exchange  ~ (g_s*^2 / M_KK^2)
+                          |              generates VLL, VRR, and LR (C4,C5) operators
+                          |
+   LR operators chirally + RG enhanced  --but for B_d only mildly (r_chi ~ 1.6)
+                          |                  [kaon: bare r_chi ~ 26 x running ~8 = ~200,
+                          |                   hence eps_K is the killer]
+                          |
+   CONSTRAINT: |M_12^NP| < budget (uncertainty-aware band)  ==  HARD veto (B001)
+                          |
+   eps_K (imag part, chiral x running ~200)  ==> ~20 TeV  <==> Delta m_d (real) ==> ~few TeV
+                          |
+   custodial P_LR: protects Z b_L b_L, NOT the KK-gluon Delta m_d  ==> B001 unchanged
+\end{verbatim}
+\end{footnotesize}
+\noindent Keep this map in mind; every box in it is unpacked below. The single
+most common confusion --- that $\dmd$ and $\epsK$ are ``the same constraint in two
+mesons'' --- is already half-defused here: they are the \emph{real} and
+\emph{imaginary} projections of the same kind of amplitude, and those projections
+carry wildly different enhancement factors.
+
+% ====================================================================
+\part{The physics from scratch: what $\Delta m_d$ is}
+\label{part:sm}
+% ====================================================================
+
+\section{Mixing: two states, one amplitude}
+\label{sec:mixing}
+
+A neutral $B_d$ meson is a bound state $\Bd=(\bar b\, d)$ with bottom number
+$+1$; its antiparticle is $\Bdbar=(b\,\bar d)$. The strong and electromagnetic
+interactions conserve flavour, so naively these two are distinct, stable
+flavour eigenstates. The weak interaction does not conserve $b$- and $d$-number
+separately: a second-order weak process can turn a $\Bd$ into a $\Bdbar$. This is
+a $\Delta B = 2$ transition (bottom number changes by two units), and it makes
+the two flavour states mix.
+
+The two-state system is governed by an effective $2\times2$ Hamiltonian
+$H = M - \tfrac{i}{2}\Gamma$, where $M$ (mass matrix) and $\Gamma$ (decay matrix)
+are Hermitian. The off-diagonal entry $\Mtwelve \equiv M_{12}$ is the dispersive
+(virtual) mixing amplitude; $\Gamma_{12}$ is the absorptive (on-shell) one. The
+physical (mass) eigenstates $B_{d,H}$ and $B_{d,L}$ (heavy/light) are linear combinations of
+$\Bd$ and $\Bdbar$, and they are split in mass by
+\begin{equation}
+\boxed{\;\dmd \;\equiv\; m_{B_H} - m_{B_L} \;\simeq\; 2\,|\Mtwelve|\;,\;}
+\label{eq:dmddef}
+\end{equation}
+the approximation holding to excellent accuracy because $|\Gamma_{12}|\ll
+|\Mtwelve|$ in the $B_d$ system. Experimentally, $\dmd$ is measured as an
+\emph{oscillation frequency}: a meson born as $\Bd$ oscillates into $\Bdbar$ and
+back with angular frequency $\dmd/\hbar$. The companion observables stored
+alongside it are the dimensionless ratio $x_d = \dmd/\Gamma_d$ and the
+time-integrated mixing probability $\chi_d$.
+
+\begin{definition}[The observable]
+$\dmd$ is the mass difference of the two neutral-$B_d$ mass eigenstates, equal to
+twice the magnitude of the dispersive mixing amplitude $\Mtwelve$. It is
+\textbf{CP-conserving}: it depends on $|\Mtwelve|$, not on $\arg\Mtwelve$. The
+CP-violating information lives in the \emph{phase} of $\Mtwelve$ (relative to the
+decay amplitudes), which is a separate observable.
+\end{definition}
+
+This is the conceptual fork in the road, and it is worth pausing on. Write
+$\Mtwelve = |\Mtwelve|\,e^{i\phi}$. Then $\dmd$ sees $|\Mtwelve|$ and is blind to
+$\phi$; the CP asymmetries ($\sin 2\beta$, $\phi_s$ in the $B_s$ system, $\epsK$
+in the kaon system) see $\phi$ and are blind to a real shift of $|\Mtwelve|$. A
+new-physics contribution that is \emph{aligned} in phase with the SM adds to
+$|\Mtwelve|$ but generates no new CP violation; one that is \emph{misaligned}
+moves the phase. The kaon's $\epsK$ is so powerful precisely because it isolates
+an imaginary part that is tiny in the SM, so any new imaginary piece stands out.
+$\dmd$, by contrast, sits on top of a large, real SM amplitude and can only
+constrain a \emph{shift} of a number that is already $\mathcal{O}(1)$ in SM
+units. We return to this contrast quantitatively in
+\S\ref{sec:realvsimag}.
+
+\section{The SM expectation and the measurement}
+\label{sec:smvalue}
+
+In the SM, $\Mtwelve$ comes from the famous box diagrams: two $W$ bosons and two
+up-type quarks (dominantly the top) running in a loop, with external $b$ and $d$
+legs. The amplitude is therefore CKM- and loop-suppressed, scaling as
+$\Mtwelve^{\rm SM}\propto (V_{tb}V_{td}^*)^2\, S_0(x_t)\, f_{B_d}^2\hat B_{B_d}$,
+where $S_0$ is the Inami--Lim loop function, $f_{B_d}$ the decay constant, and
+$\hat B_{B_d}$ the bag parameter. The CKM combination $V_{tb}V_{td}^*\sim
+V_{td}$ is what makes $\dmd$ a probe of the $1\!\leftrightarrow\!3$ down-sector
+transition.
+
+The numbers our catalogue uses (sidecar \code{B001.yaml}) are, for the
+\emph{experiment}, the HFLAV/PDG~2025 world average
+\begin{equation}
+\dmd^{\rm exp} = 0.5069 \pm 0.0019~\text{ps}^{-1},
+\label{eq:dmdexp}
+\end{equation}
+and, for the \emph{theory}, the HPQCD~2019 lattice prediction (arXiv:1907.01025)
+\begin{equation}
+\dmd^{\rm SM} = 0.555\,{}^{+0.028}_{-0.055}\,(0.029)~\text{ps}^{-1}
+   \;=\; 0.555 \pm 0.062~\text{ps}^{-1},
+\label{eq:dmdsm}
+\end{equation}
+where the symmetrised uncertainty combines the larger asymmetric side
+($0.055$) with the second uncertainty ($0.029$) in quadrature,
+$\sqrt{0.055^2+0.029^2}=0.062$, exactly the \code{uncertainty\_policy} recorded
+in the YAML. The two agree at about $0.8\sigma$ --- the SM already accounts for
+the entire measured oscillation. Note the catalogue stores both the modern
+Belle~II value ($0.516\pm0.008\pm0.005$~ps$^{-1}$, arXiv:2302.12791) under
+\code{recent\_experimental\_inputs} and the legacy Csaki--Falkowski--Weiler RS
+context bounds ($21$ and $33$~TeV, arXiv:0804.1954) under
+\code{paper\_era\_reference}; only the HFLAV/PDG average and the HPQCD SM number
+feed the live constraint.
+
+The fact that SM and experiment agree is what \emph{defines the room} for new
+physics: any RS contribution to $|\Mtwelve|$ must fit inside the gap between them,
+dressed by uncertainties. That ``room'' is the budget of \S\ref{sec:budget}.
+
+\section{The $\Delta F=2$ effective operators}
+\label{sec:operators}
+
+Below the KK scale, the new physics is invisible as particles and shows up only
+as local four-quark operators --- the language of effective field theory. For a
+$\bar b d \to b \bar d$ ($\Delta B=2$) transition, the complete dimension-six
+basis has eight operators; the subset our tree-level KK-gluon matching generates
+is
+\begin{align}
+Q_1^{\rm VLL} &= (\bar d_L\gamma_\mu b_L)(\bar d_L\gamma^\mu b_L), &
+Q_1^{\rm VRR} &= (\bar d_R\gamma_\mu b_R)(\bar d_R\gamma^\mu b_R),
+\label{eq:VLL}\\
+Q_4^{\rm LR} &= (\bar d_R\, b_L)(\bar d_L\, b_R), &
+Q_5^{\rm LR} &= (\bar d_R^\alpha b_L^\beta)(\bar d_L^\beta b_R^\alpha),
+\label{eq:LR}
+\end{align}
+with $\alpha,\beta$ colour indices. The VLL operator \eqref{eq:VLL} has the same
+chiral structure as the SM box; VRR is its parity mirror; the two LR operators
+\eqref{eq:LR} are \emph{chirality-mixing} (scalar/tensor-like) and have no SM
+counterpart. (The full basis also contains SLL/SRR scalar operators, which a pure
+vector KK-gluon exchange does not generate at tree level; see
+\S\ref{sec:gap}.) The effective Hamiltonian is
+\begin{equation}
+\mathcal{H}^{\Delta B=2}_{\rm eff}
+   = \sum_i C_i(\mu)\, Q_i(\mu),
+\label{eq:Heff}
+\end{equation}
+and the mixing amplitude is the meson matrix element
+\begin{equation}
+\Mtwelve^{\rm NP}
+   = \langle \Bdbar |\, \mathcal{H}^{\Delta B=2}_{\rm eff}\, | \Bd\rangle
+   = \sum_i C_i(\mu)\, \langle \Bdbar | Q_i(\mu) | \Bd\rangle .
+\label{eq:M12sum}
+\end{equation}
+Two features will dominate everything downstream:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{The LR operators are special.} Their hadronic matrix elements are
+enhanced relative to the VLL one by a \emph{chiral factor}
+$r_\chi = \big(m_P/(m_{q_1}+m_{q_2})\big)^2$ (for $B_d$,
+$m_P=m_{B_d}$, $m_{q_1}+m_{q_2}=m_b+m_d$), which is large because the meson mass
+is much bigger than the sum of its constituent current-quark masses --- the
+pseudoscalar density is fixed by the equations of motion to $\sim m_P^2/(m_{q_1}+m_{q_2})$.
+They are also enhanced
+by QCD running between the matching scale and the hadronic scale (the LR
+anomalous dimension is large). This is the same mechanism that makes LR operators
+the dominant danger in \emph{every} meson system.
+\item \textbf{But the $B_d$ chiral factor is modest.} For $B_d$,
+$r_\chi=(5.28/(4.18+0.005))^2\approx 1.6$ --- order unity. For the kaon, with the
+repo's FLAG $2$~GeV light-quark masses the \emph{bare} chiral factor is
+$r_\chi=(m_K/(m_s+m_d))^2\approx 26$, and this is multiplied by the LR QCD-running
+factor $\sim8$ (the $C_4$--$C_5$ pair mixes under a $2\times2$ anomalous-dimension
+matrix that enhances the LR contribution between the matching and hadronic
+scales). The two combine to a kaon LR enhancement of order
+$26\times8\sim200$ relative to the VLL one
+(the breakdown is worked through in the kaon note's running section; note that
+Csaki--Falkowski--Weiler quote a \emph{combined} chiral-plus-running factor
+$\tfrac34\,(m_K/(m_s+m_d))^2\,\eta_1^{-5}\approx18$ in their normalisation, which
+already folds in the running and so should not be multiplied by it again). For
+$B_d$ the running enhancement is similar in kind but the chiral prefactor is
+$\sim1.6$, not $\sim26$, so the $B_d$ LR operator ends up only mildly enhanced.
+\textbf{The $B_d$ LR operator is enhanced, but nowhere near as violently as the
+kaon's.} This is half the reason $\dmd$ is weaker than $\epsK$; the other half is
+the magnitude versus phase distinction.
+\end{itemize}
+
+% ====================================================================
+\part{How RS generates $\Delta m_d$}
+\label{part:rs}
+% ====================================================================
+
+\section{The warped flavour mechanism, in just enough detail}
+\label{sec:rsmech}
+
+Recall the RS picture (consistent with the repo conventions). Spacetime is a
+slice of AdS$_5$ between a UV brane (Planck scale) and an IR brane (TeV scale).
+Bulk fermions carry a dimensionless bulk-mass parameter $c$ that localises their
+zero mode: $c>\tfrac12$ peaks the wavefunction toward the UV brane (light
+fermions), $c<\tfrac12$ toward the IR brane (heavy fermions). The Higgs sits on
+the IR brane, so a fermion's mass is set by how much of its wavefunction reaches
+the IR --- this is the geometric origin of the Yukawa hierarchy, with
+$\mathcal{O}(1)$ (\emph{anarchic}) 5D couplings.
+
+Now bring in the gauge sector. The gluon has a KK tower; the first KK gluon is
+localised near the IR brane and is heavy, $\MKK\sim$~few TeV. Its coupling to a
+given quark depends on the overlap of the (flat-ish) zero-mode quark profile and
+the (IR-peaked) KK-gluon profile. Two consequences follow, and both matter for
+$\dmd$:
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{The KK gluon couples non-universally.} IR-localised (heavy) quarks
+couple to the KK gluon much more strongly than UV-localised (light) ones. The
+coupling is enhanced over the ordinary 4D strong coupling by a volume factor
+$\sqrt{2k\pi r_c}\sim\sqrt{2L}$; this is the $g_s^*\sim 6$ at tree level
+documented in \code{quarkConstraints/couplings.py} (citing
+Csaki--Falkowski--Weiler 0804.1954).
+\item \textbf{Non-universal $\Rightarrow$ flavour-violating.} Because the coupling
+is generation-dependent, rotating to the quark mass basis does \emph{not}
+diagonalise the KK-gluon coupling. Off-diagonal couplings survive --- a
+tree-level flavour-changing neutral current. This is the warped analogue of an
+``RS-GIM'' partial protection: the off-diagonal couplings are suppressed by the
+small UV-localised light-quark wavefunctions, but not zero.
+\end{enumerate}
+Integrating out the first KK gluon at tree level produces exactly the
+$\Delta F=2$ operators of \eqref{eq:VLL}--\eqref{eq:LR}, with coefficients set by
+the off-diagonal mass-basis couplings and a $1/\MKK^2$ propagator.
+
+\section{Parametric size and where the floor comes from}
+\label{sec:parametric}
+
+Schematically, the Wilson coefficient of a $\Delta B=2$ operator from KK-gluon
+exchange is
+\begin{equation}
+C_i \;\sim\; \frac{(g_s^*)^2}{\MKK^2}\; (\Delta_L)_{db}\,(\Delta_R)_{db}\,,
+\label{eq:Cscale}
+\end{equation}
+where $(\Delta_{L,R})_{db}$ are the left/right off-diagonal $d$--$b$ couplings in
+the mass basis. For the chirality-mixing LR operators, \emph{both} a left and a
+right coupling appear; for VLL only left couplings, for VRR only right. The
+mixing amplitude is then $\Mtwelve^{\rm NP}\sim C_i\langle Q_i\rangle$, and the
+constraint
+\begin{equation}
+|\Mtwelve^{\rm NP}| \;\lesssim\; \tfrac12\,\dmd^{\rm exp}
+\label{eq:floorcondition}
+\end{equation}
+turns into a \emph{lower bound on $\MKK$}, because $|\Mtwelve^{\rm NP}|\propto
+1/\MKK^2$. Plugging in anarchic $\mathcal{O}(1)$ couplings dressed by the warped
+suppression of the light-quark profiles, the $B_d$ bound from the LR operator
+comes out at the few-TeV level for the chirality-flip coefficient. This is the
+floor.
+
+It is illuminating to put the four meson systems side by side, because they all
+use \emph{the same} formula \eqref{eq:Cscale} and differ only in the flavour
+indices, the matrix elements, and --- decisively --- whether the constraint reads
+a magnitude or a phase:
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+System & Transition & Constraint reads & Anarchic $\MKK$ floor \\
+\midrule
+$\epsK$ & $s\!\leftrightarrow\! d$ & \textbf{Im}$\Mtwelve$ (phase) & $\sim 20$~TeV \\
+$\dmd$ (\textbf{this note}) & $b\!\leftrightarrow\! d$, $\sim V_{td}$ & $|\Mtwelve|$ (magnitude) & $\sim$ few TeV \\
+$\Delta m_s$ / $\phi_s$ & $b\!\leftrightarrow\! s$, $\sim V_{ts}$ & magnitude / phase & $\sim 2$--$3$~TeV \\
+$D^0$ mixing & $c\!\leftrightarrow\! u$ (up) & magnitude & $\sim$ few TeV \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent $D^0$ is also only a few-TeV constraint even though, like $\dmd$, it
+reads a magnitude: it is an up-sector ($c$--$u$) transition, so it carries neither
+the large down-sector chiral enhancement nor a kaon-sized CKM/SM hierarchy to
+contrast against. Magnitude-reading down-sector ($\dmd$, $\Delta m_s$) and the
+up-sector ($D^0$) therefore land in the same few-TeV band, while only the
+phase-reading $\epsK$ climbs to tens of TeV.
+The $\sim20$~TeV figure for $\epsK$ is the value the Csaki--Falkowski--Weiler and
+Blanke et al.\ analyses (0804.1954, 0809.1073) quote for the lightest KK gluon in
+the fully anarchic scenario; $\dmd$ lives an order of magnitude below it. That
+gap --- same model, same machinery, factor of $\sim$$7$--$10$ in the scale --- is
+the entire reason this note exists.
+
+\section{Real versus imaginary: the quantitative contrast}
+\label{sec:realvsimag}
+
+Why is reading a magnitude so much weaker than reading a phase? Three multiplying
+factors, all in $\epsK$'s favour:
+\begin{enumerate}[leftmargin=1.8em]
+\item \textbf{The SM imaginary part is tiny.} $\epsK$ measures $\mathrm{Im}
+\Mtwelve^{K}$, which in the SM is suppressed by a small CKM phase. The NP
+contribution competes against a small number, so a modest NP imaginary piece is a
+large fractional perturbation. $\dmd$ measures $|\Mtwelve^{B_d}|$, which sits on
+top of the \emph{full} SM amplitude --- a large, well-measured number. NP can only
+nudge it.
+\item \textbf{The anarchic phase is generic $\mathcal{O}(1)$.} In anarchic RS the
+NP contribution carries an uncorrelated $\mathcal{O}(1)$ CP phase, so the
+imaginary part is not suppressed on the NP side --- $\epsK$ gets the full
+$|\Mtwelve^{\rm NP}|$ times $\sin(\mathcal{O}(1))$. The phase is ``free'' danger;
+the magnitude has no such bonus.
+\item \textbf{The kaon chiral enhancement is huge; the $B_d$ one is mild.} As
+above, the kaon LR operator is enhanced by $\sim$$200$ = (bare chiral $r_\chi\approx26$)
+$\times$ (LR running $\sim8$) relative to the VLL operator, whereas the $B_d$
+chiral prefactor is only $r_\chi\approx1.6$. So even operator-for-operator, the
+kaon amplitude is amplified far more.
+\end{enumerate}
+Multiply these and one understands the $\sim20$~TeV (kaon) versus few-TeV ($B_d$)
+hierarchy without a single Feynman diagram. \textbf{Slogan:} \emph{$\epsK$ wins on
+three counts --- tiny SM imaginary part, free $\mathcal{O}(1)$ NP phase, and a
+giant chiral enhancement --- and $\dmd$ has none of them; it is the same physics
+read through a much blunter projection.}
+
+\begin{callout}{Worked example --- the $B_d$ budget and a KK-scale estimate.}
+\textbf{Step 1: the matrix elements.} With the in-code constants
+$f_{B_d}=0.1900$~GeV, $m_{B_d}=5.27972$~GeV, $m_b=4.18$~GeV,
+$m_d=0.00467$~GeV, and bag parameters $B_1=0.87,\ B_4=1.02,\ B_5=0.96$, the chiral
+ratio is $r_\chi=(m_{B_d}/(m_b+m_d))^2\approx1.59$ and
+\[
+\langle Q_1^{\rm VLL}\rangle = \tfrac23 f_{B_d}^2 m_{B_d} B_1 \approx 0.111~\text{GeV}^3,
+\quad
+\langle Q_4^{\rm LR}\rangle \approx 0.100~\text{GeV}^3,
+\quad
+\langle Q_5^{\rm LR}\rangle \approx 0.161~\text{GeV}^3.
+\]
+Note the LR matrix element is comparable to (not the $\sim$$26\times$ of the
+kaon's chirally enhanced matrix element) the VLL one --- the
+$B_d$ chiral enhancement is mild, exactly as advertised.
+
+\textbf{Step 2: the budget.} The experimental world average
+\eqref{eq:dmdexp} converts to GeV via the in-code anchor
+$\dmd^{\rm exp}=3.334\times10^{-13}$~GeV (so
+$1~\text{ps}^{-1}\leftrightarrow6.58\times10^{-13}$~GeV). The SM central from the
+core convention is $\dmd^{\rm SM}=3.6\times10^{-13}$~GeV. The
+\emph{leading-order} core budget is
+\[
+\text{budget}_{\rm core}=\max\!\Big(\tfrac{\dmd^{\rm exp}}{2},\
+\tfrac{|\dmd^{\rm exp}-\dmd^{\rm SM}|}{2}\Big)
+=\tfrac{3.334\times10^{-13}}{2}=1.667\times10^{-13}~\text{GeV}.
+\]
+The catalogue \emph{HARD} budget instead uses the uncertainty-aware room
+\[
+\text{budget}_{\rm B001}=\frac{|\dmd^{\rm exp}-\dmd^{\rm SM}|+\sqrt{\sigma_{\rm exp}^2+\sigma_{\rm SM}^2}}{2}
+\approx 3.38\times10^{-14}~\text{GeV},
+\]
+with $\sigma_{\rm SM}$ dominating ($\sigma_{\rm SM}\approx4.1\times10^{-14}$,
+$\sigma_{\rm exp}\approx1.2\times10^{-15}$~GeV). The central (no-$\sigma$) room is
+$1.33\times10^{-14}$~GeV. \textbf{So the live veto is the loose band,
+$\sim3.4\times10^{-14}$~GeV} --- five times tighter than the naive
+$\dmd^{\rm exp}/2$, because it folds in the SM/exp agreement.
+
+\textbf{Step 3: invert for the KK scale (the headline ``few TeV'').} Now close the
+loop. The dominant operator is $Q_4^{\rm LR}$, with coefficient
+$C_4^{\rm LR}=-(g_s^*)^2(\Delta_L)_{db}(\Delta_R)_{db}/\MKK^2$
+[Eq.~\eqref{eq:Cscale} with the $-1$ colour factor of Eq.~\eqref{eq:codeLR}], so
+\[
+|\Mtwelve^{\rm NP}|\;\approx\;\frac{(g_s^*)^2\,|(\Delta_L)_{db}(\Delta_R)_{db}|}{\MKK^2}\,
+\langle Q_4^{\rm LR}\rangle .
+\]
+For the inputs take the volume-enhanced strong coupling $g_s^*\approx6$
+(\S\ref{sec:rsmech}, so $(g_s^*)^2\approx36$) and the \emph{anarchic} RS-GIM
+off-diagonal couplings. These are not free: RS-GIM ties them to the same overlap
+factors that set the light-quark masses, $(\Delta_{L,R})_{db}\sim f_{d}\,f_{b}$,
+which for the $d$--$b$ entry land near $(\Delta_L)_{db}\sim(\Delta_R)_{db}\sim
+3\times10^{-4}$ in units where the diagonal heavy coupling is $\mathcal{O}(1)$
+(the geometric suppression of the UV-localised light-quark profiles). Then
+$|(\Delta_L)_{db}(\Delta_R)_{db}|\sim9\times10^{-8}$ and
+\[
+|\Mtwelve^{\rm NP}|\;\approx\;\frac{36\times(9\times10^{-8})}{(\MKK/\text{GeV})^2}\times0.10~\text{GeV}^3
+\;=\;\frac{3.2\times10^{-7}~\text{GeV}^3}{(\MKK/\text{GeV})^2}\,\text{GeV}.
+\]
+Setting this equal to the live budget $\approx3.4\times10^{-14}$~GeV and solving,
+\[
+\MKK\;\approx\;\sqrt{\frac{3.2\times10^{-7}}{3.4\times10^{-14}}}~\text{GeV}
+\;\approx\;3\times10^{3}~\text{GeV}\;\approx\;\textbf{3 TeV},
+\]
+which is the order-of-magnitude origin of the few-TeV floor that the whole note
+rests on. The result is only logarithmically sensitive to the inputs (it depends
+on $\sqrt{(g_s^*)^2|\Delta\Delta|\langle Q_4\rangle/\text{budget}}$), so the
+residual $\mathcal{O}(1)$ anarchic spread and the running of $C_4$ move it by
+factors of order one, not orders of magnitude. (Contrast the kaon: the same
+inversion run on $\mathrm{Im}\,C_4^K$ --- which competes against a tiny SM
+imaginary part rather than the full amplitude, and carries the $\sim200\times$
+chiral-plus-running enhanced kaon LR contribution --- pushes the floor an order of magnitude higher,
+to $\sim20$~TeV. The three multiplying advantages of $\epsK$ over $\dmd$ are
+itemised in \S\ref{sec:realvsimag}.)
+
+\textbf{Step 4: contrast with $\epsK$.} The kaon budget is
+$|\epsK^{\rm exp}-\epsK^{\rm SM}|=|2.228-2.161|\times10^{-3}=6.7\times10^{-5}$
+(dimensionless), read off the \emph{imaginary} part of $\Mtwelve^K$ through a
+$1/\Delta m_K$ amplification. The kaon constraint is sharper not because its
+budget is smaller in some common unit, but because (i) it taps the small SM
+imaginary part, (ii) it gets the free anarchic phase, and (iii) its LR
+contribution (chiral $\times$ running) is $\sim$$200\times$ bigger. The single benchmark above contains the whole
+story: for the same KK scale, $|M_{12}^{B_d,\,\rm NP}|$ must merely stay below a
+number of order the full $B_d$ amplitude, whereas $\mathrm{Im}\,M_{12}^{K,\,\rm NP}$
+must stay below a number two-plus orders of magnitude below the full kaon
+amplitude.
+\end{callout}
+
+% ====================================================================
+\part{Model, custodial, and alignment dependence}
+\label{part:custodial}
+% ====================================================================
+
+\section{Does custodial symmetry change this bound?}
+\label{sec:custodial}
+
+The custodial-symmetry story that dominates the electroweak sector (the
+$SU(2)_L$-type bulk gauge enlargement to $SU(2)_L\times SU(2)_R\times U(1)_X$ with a
+discrete $P_{LR}$) is, for $\dmd$, almost a non-event --- and this is worth saying
+clearly because it is a common source of confusion. Custodial protection does two
+specific things: (a) the continuous $SU(2)_R$ kills the volume-enhanced $T$
+parameter, and (b) the discrete $P_{LR}$ protects the $Z\bar b_L b_L$ vertex (and,
+in the flavour sector, the \emph{tree-level $Z$-mediated} flavour-changing
+coupling to left-handed down quarks).
+
+But $\dmd$ in our code is generated by \textbf{KK-gluon} exchange, not by
+$Z$ exchange. The $P_{LR}$ protection of the $Zd_Ld_L$ coupling does \emph{not}
+touch the gluonic operators, because the gluon is a colour octet and is blind to
+the $SU(2)_R$/$P_{LR}$ structure that protects the $Z$ couplings. Blanke et al.\
+(0809.1073) make exactly this point: $P_{LR}$ strongly suppresses the
+$Z$-mediated $\Delta F=2$ contribution to left-handed down quarks, but this
+\emph{does not directly relax the $B_d$ mixing bound} from the KK gluon --- it
+rather removes a competing $Z$ contribution and lets the gluonic one stand. So
+the headline is:
+\begin{center}
+\fbox{\parbox{0.92\linewidth}{\centering
+\textbf{Custodial $P_{LR}$ does \emph{not} move the $\dmd$ / \code{B001} bound.}
+It protects $Z\bar b_L b_L$ (handled separately in our \code{T010}/\code{T011}),
+not the KK-gluon $\Delta B=2$ operators that drive $|M_{12}^{B_d,\,\rm NP}|$.}}
+\end{center}
+This is the concrete meaning of the brief's tag ``B001 is not affected by
+custodial.'' In our paired minimal-vs-custodial scans, turning on the custodial
+mode removes the $Z\to b\bar b$ veto but leaves the $\Delta F=2$ set
+($\epsK$/$\Delta m_s$/$\phi_s$, with $\dmd$ alongside) as the rigorous floor.
+
+\section{Does flavour alignment change it?}
+\label{sec:alignment}
+
+Yes --- and this is the lever that actually matters for $\dmd$. The bound
+\eqref{eq:floorcondition} assumes \emph{anarchic} flavour: $\mathcal{O}(1)$,
+uncorrelated 5D Yukawas with no special structure. If instead one
+\emph{aligns} the bulk masses / 5D Yukawas so that the off-diagonal mass-basis
+couplings $(\Delta_{L,R})_{db}$ are suppressed beyond their generic anarchic
+size, the Wilson coefficient \eqref{eq:Cscale} shrinks and the KK floor drops.
+Blanke et al.\ (0809.1073) exhibit exactly such regions: ``only modest
+fine-tuning'' suffices to satisfy all $\Delta F=2$ and electroweak constraints
+down to $\MKK\simeq3$~TeV. Alignment is a statement about the \emph{flavour}
+structure of the 5D couplings, orthogonal to the custodial \emph{gauge}
+structure; the two evade different bounds (alignment for $\Delta F=2$, custodial
+for electroweak).
+
+\textbf{What our code does about this:} it does \emph{not} impose anarchy or
+alignment by fiat --- it computes $(\Delta_{L,R})_{db}$ from the actual fitted
+mass-basis couplings of the scanned point (the \code{quark\_mass\_basis\_couplings}
+extra; \S\ref{sec:codeflow}). A point that happens to be aligned will simply
+produce a small $|\Mtwelve^{\rm NP}|$ and pass; a generic anarchic point will
+produce a large one and fail. The constraint is therefore \emph{honest about
+alignment}: it rewards genuinely aligned points and penalises generic ones,
+rather than baking in an assumption.
+
+\section{Rigorous or proxy?}
+\label{sec:rigor}
+
+For $\dmd$, our treatment is \textbf{rigorous}, not a proxy, and it is worth
+being precise about what that means here (contrast the oblique $S,T,U$ sector,
+which is an avowed proxy). The $\dmd$ path:
+\begin{itemize}[leftmargin=1.4em]
+\item uses the \emph{actual} fitted mass-basis couplings of the point, not a
+parametric estimate;
+\item builds genuine Wilson coefficients from a tree-level KK-gluon matching;
+\item QCD-runs them from the matching scale to $\mu_{\rm had}=2$~GeV with a real
+RG evolution;
+\item contracts them with FLAG-2024 hadronic matrix elements (the
+$f_{B_d},B_i$ above); and
+\item compares $|\Mtwelve^{\rm NP}|$ to an uncertainty-aware budget built from the
+HFLAV/PDG experiment and the HPQCD SM number.
+\end{itemize}
+The honest caveats (scalar SLL/SRR operators not generated, single-KK-mode
+truncation, leading-log running, GeV/ps anchor) are conventions and deferred
+refinements, \emph{not} parametric guesses; they are catalogued in
+\S\ref{part:subtle}. By the catalogue's own taxonomy this is a \code{rigorous}
+constraint with documented approximations, which is why \code{B001} carries
+\code{Severity.HARD}.
+
+% ====================================================================
+\part{What is in OUR code}
+\label{part:code}
+% ====================================================================
+
+\emph{Reader here for the physics may skim Part~\ref{part:code} on a first pass
+and jump to the subtleties in Part~\ref{part:subtle}; this part documents the
+exact code so the note doubles as an implementation reference. The one physical
+takeaway to retain from all of it: the code literally calls \code{abs()} on the
+complex $\Mtwelve^{\rm NP}$ before comparing to the budget (\S\ref{sec:codeME}) ---
+that single line is what makes $\dmd$ a magnitude constraint rather than a phase
+one, and it is the code-level shadow of the whole real-vs-imaginary thesis.}
+
+\section{The three layers}
+\label{sec:layers}
+
+The $\dmd$ evaluation passes through three files, in order:
+\begin{enumerate}[leftmargin=1.6em]
+\item \code{quarkConstraints/deltaf2.py} --- the shared $\Delta F=2$ \emph{core}:
+operator matching, hadronic matrix elements, QCD running, and the per-system
+evaluators.
+\item \code{flavor\_catalog\_constraints/physics\_adapters/deltaf2.py} --- a thin,
+append-only \emph{adapter} that exposes a stable surface
+(\code{bd\_mixing\_wilsons\_from\_couplings},
+\code{bd\_mixing\_from\_wilsons\_with\_running},
+\code{bd\_mixing\_core\_inputs}) so the catalogue never imports core internals
+directly.
+\item \code{flavor\_catalog\_constraints/primary/beauty/B001.py} --- the
+\emph{catalogue constraint}: it loads the YAML anchors, builds the
+uncertainty-aware budget, calls the adapter, and returns a pass/fail
+\code{ConstraintResult}.
+\end{enumerate}
+
+\section{The Wilson coefficients, exactly}
+\label{sec:codewilsons}
+
+In \code{compute\_delta\_f2\_wilsons} (\code{deltaf2.py}), with
+$\text{prefactor}=1/\MKK^2$ and the off-diagonal $d$--$b$ mass-basis couplings
+\code{left}, \code{right}, the four coefficients are
+\begin{align}
+C_1^{\rm VLL} &= \frac{\text{left}\cdot\text{left}}{6\,\MKK^2}, &
+C_1^{\rm VRR} &= \frac{\text{right}\cdot\text{right}}{6\,\MKK^2},
+\label{eq:codeVLL}\\
+C_4^{\rm LR} &= -\,\frac{\text{left}\cdot\text{right}}{\MKK^2}, &
+C_5^{\rm LR} &= +\,\frac{\text{left}\cdot\text{right}}{3\,\MKK^2}.
+\label{eq:codeLR}
+\end{align}
+These are matched at $\mu=\MKK$ (the \code{matching\_scale} field). The relative
+weights ($1/6$ for the vector colour-singlet projection, $-1$ and $+1/3$ for the
+two LR colour structures) are the standard tree-level KK-gluon Fierz/colour
+factors. The $B_d$ entry is selected from the default bundle by key \code{"b\_d"}
+(generations \code{(0, 2)}, i.e.\ $d$--$b$, sector \code{"down"}), with the
+adapter helper \code{\_bd\_wilsons} pulling exactly that entry out of
+\code{DEFAULT\_DELTA\_F2\_INPUTS\_V1}.
+
+\section{The matrix elements and $M_{12}$, exactly}
+\label{sec:codeME}
+
+The generic per-meson matrix elements live in \code{\_meson\_matrix\_elements}:
+with $f_P, m_P$, current-quark masses $m_{q_1},m_{q_2}$, and bag parameters
+$B_1,B_4,B_5$,
+\begin{align}
+\langle Q_1^{\rm VLL}\rangle &= \tfrac23 f_P^2 m_P\, B_1, \\
+\langle Q_4^{\rm LR}\rangle &= \big(\tfrac{r_\chi}{6}+\tfrac14\big) f_P^2 m_P\, B_4, &
+\langle Q_5^{\rm LR}\rangle &= \big(\tfrac{r_\chi}{2}+\tfrac1{12}\big) f_P^2 m_P\, B_5,
+\end{align}
+with $r_\chi=(m_P/(m_{q_1}+m_{q_2}))^2$ --- the chiral factor of
+\S\ref{sec:operators} made explicit in code. The $B_d$ inputs are the
+module-level constants
+\begin{equation}
+\begin{aligned}
+&F\_BD=0.1900~\text{GeV},\ M\_BD=5.27972~\text{GeV},\
+M\_B\_QUARK=4.18~\text{GeV},\ M\_D\_QUARK\_BD=0.00467~\text{GeV},\\
+&B\_1\_BD=0.87,\quad B\_4\_BD=1.02,\quad B\_5\_BD=0.96
+\quad(\text{FLAG 2024}).
+\end{aligned}
+\end{equation}
+The function \code{compute\_m12\_np} forms the coherent sum
+\eqref{eq:M12sum},
+\begin{equation}
+\Mtwelve^{\rm NP}
+   = C_1^{\rm VLL}\langle Q_1\rangle + C_1^{\rm VRR}\langle Q_1\rangle
+   + C_4^{\rm LR}\langle Q_4\rangle + C_5^{\rm LR}\langle Q_5\rangle,
+\label{eq:codeM12}
+\end{equation}
+(VRR reuses the VLL matrix element by parity) and \code{evaluate\_bd\_mixing}
+takes the magnitude \code{abs(m12)}. \textbf{This is the code-level embodiment of
+``$\dmd$ is a magnitude'':} the very last step throws away the phase via
+\code{abs(\,)}. The phase-preserving companion
+\code{bd\_mixing\_m12\_np\_from\_wilsons\_with\_running} exists in the adapter
+(returning the complex $\Mtwelve^{\rm NP}$) but is \emph{not} what \code{B001}
+uses --- it is there for diagnostics and for the CP observables that \emph{do}
+read the phase.
+
+\section{QCD running}
+\label{sec:coderunning}
+
+By default the core runs the Wilson coefficients from $\MKK$ down to
+$\mu_{\rm had}=2.0$~GeV via leading-log QCD evolution
+(\code{\_evolve\_wilsons} $\to$ \code{evolve\_deltaf2\_wilsons}) before
+contracting with the $2$-GeV matrix elements. The VLL/VRR coefficients run with
+the current-current anomalous dimension; the LR coefficients $C_4,C_5$ run in the
+scalar basis matched to the $B_4/B_5$ inputs. \code{B001} always runs
+(\code{mu\_had = \_MU\_HAD\_GEV = 2.0}, \code{qcd\_running\_applied: True} in the
+diagnostics).
+
+\section{The budget and the veto, exactly}
+\label{sec:budget}
+
+One point to settle up front, because it is assembled piecemeal elsewhere in the
+note: there are \emph{two} budgets, and they are not the same number. The
+``$\text{budget}=\dmd^{\rm exp}/2$'' convention named in the brief and the CLAUDE
+notes is the \emph{core/diagnostic} budget \eqref{eq:corebudget}; it is computed
+and reported but \textbf{is not what \code{B001} vetoes on}. The live HARD veto
+uses the tighter uncertainty-aware band \eqref{eq:b001budget}, about five times
+smaller. Whenever this note says ``the budget,'' it means the live band unless
+explicitly flagged as the core convention.
+
+This is where \code{B001} differs from the bare core. The core's legacy $B_d$
+budget (\code{\_bd\_budget}, mirrored in \code{bd\_mixing\_core\_inputs}) is
+\begin{equation}
+\text{budget}_{\rm core}
+   = \max\!\Big(\tfrac{\dmd^{\rm exp}}{2},\ \tfrac{|\dmd^{\rm exp}-\dmd^{\rm SM}|}{2}\Big)
+   = 1.667\times10^{-13}~\text{GeV},
+\label{eq:corebudget}
+\end{equation}
+using the in-code constants \code{DELTA\_M\_BD\_EXP = 3.334e-13} and
+\code{DELTA\_M\_BD\_SM = 3.6e-13} (GeV). This is the ``\textbf{budget = experimental
+$\Delta m$ over $2$}'' convention referenced in the brief: at leading order the
+$B_d$ budget is just $\dmd^{\rm exp}/2$, because the exp/SM gap is smaller than the
+experimental value itself. The constraint keeps this as a \emph{diagnostic}
+(\code{core\_default\_budget}, \code{core\_default\_ratio}).
+
+The \emph{live} HARD budget that \code{B001} actually vetoes on is the
+uncertainty-aware band built in \code{\_build\_budget\_band}:
+\begin{equation}
+\boxed{\;\text{budget}_{\rm B001}
+   = \frac{|\dmd^{\rm exp}-\dmd^{\rm SM}| + \sqrt{\sigma_{\rm exp}^2+\sigma_{\rm SM}^2}}{2}
+   \;\approx\; 3.38\times10^{-14}~\text{GeV}\;}
+\label{eq:b001budget}
+\end{equation}
+(the \code{loose\_budget}, assigned to \code{hard\_veto\_budget}). Here the
+experiment and its uncertainty come from the YAML
+(\code{canonical\_experimental\_average}: $0.5069\pm0.0019$~ps$^{-1}$), converted
+to GeV through the anchor \code{DELTA\_M\_BD\_EXP\_GeV} (which the code
+\emph{cross-checks} against the core \code{DELTA\_M\_BD\_EXP} to
+$10^{-12}$ relative tolerance, raising an \code{AnchorError} on mismatch); the SM
+uncertainty $\sigma_{\rm SM}=\sqrt{0.055^2+0.029^2}=0.062$~ps$^{-1}$ comes from the
+HPQCD asymmetric uncertainties and is independently \emph{validated} against the
+component quadrature in \code{\_validated\_sm\_theory\_sigma\_ps\_inv}. The band
+also records a \code{central\_budget} ($|{\rm gap}|/2$) and a \code{tight\_budget}
+($\max({\rm gap}-\sigma,\ \sigma_{\rm exp})/2$) for sensitivity studies; the HARD
+veto uses the loose one.
+
+The verdict: \code{evaluate\_bd\_mixing\_with\_running} returns
+$\text{ratio} = |\Mtwelve^{\rm NP}|/\text{budget}_{\rm B001}$ and
+\code{passes = (ratio <= 1.0)}. A point with $\text{ratio} > 1$ is
+\textbf{vetoed}. The constraint class is
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\code{process\_id} & \code{"B001"} \\
+\code{severity} & \code{Severity.HARD} \\
+\code{observable} & \code{"Delta m\_d"} \\
+required extra & \code{quark\_mass\_basis\_couplings} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{The control flow, end to end}
+\label{sec:codeflow}
+
+\code{Constraint.evaluate(point)} does:
+\begin{enumerate}[leftmargin=1.6em]
+\item \code{couplings = point.get\_extra("quark\_mass\_basis\_couplings")}. If
+\emph{absent}, it returns \code{passes=True} with a note that the constraint was
+not evaluated (a graceful skip, not a silent pass of physics) and a diagnostic
+\code{\{"missing\_extra": ...\}}.
+\item \code{wilsons = bd\_mixing\_wilsons\_from\_couplings(couplings)} --- pulls
+the \code{"b\_d"} Wilsons \eqref{eq:codeVLL}--\eqref{eq:codeLR}.
+\item \code{result = bd\_mixing\_from\_wilsons\_with\_running(wilsons,
+mu\_had=2.0, m12\_np\_budget=self.anchor.budget)} --- runs to $2$~GeV, contracts
+the matrix elements, takes the magnitude, and divides by the B001 budget
+\eqref{eq:b001budget}.
+\item It also evaluates the \emph{core} budget result for the diagnostic
+\code{core\_default\_ratio}/\code{core\_default\_passes}.
+\item Returns a \code{ConstraintResult} with \code{predicted}
+$=|\Mtwelve^{\rm NP}|$ (GeV), \code{ratio}, \code{budget}, the SM and experimental
+central values, and a rich \code{diagnostics} dict
+(\code{abs\_m12\_np\_gev}, \code{m\_kk\_gev}, \code{matching\_scale\_gev},
+the complex \code{left\_db\_coupling}/\code{right\_db\_coupling}, the four
+\code{wilson\_coefficients}, every budget variant, and full anchor provenance).
+\end{enumerate}
+The anchors are read from the sidecar \code{B001.yaml}: experiment from
+\code{canonical\_experimental\_average}, SM from \code{standard\_model\_prediction}
+(HPQCD~2019), and the GeV/bag constants from \code{auxiliary\_code\_inputs.\\deltaf2\_bd\_constants}, whose
+\code{DELTA\_M\_BD\_EXP\_GeV = 3.334e-13} is the conversion anchor cross-checked
+against the core.
+
+% ====================================================================
+\part{Subtleties and the gap to ``rigorous''}
+\label{part:subtle}
+% ====================================================================
+
+\section{The operator basis is a subset (SLL/SRR absent)}
+\label{sec:gap}
+A pure vector KK-\emph{gluon} exchange at tree level generates VLL, VRR, and the
+two LR operators \eqref{eq:VLL}--\eqref{eq:LR} --- but \emph{not} the scalar
+$Q_2^{\rm SLL}/Q_3^{\rm SRR}$ operators of the full eight-operator basis. Blanke
+et al.\ (0809.1073) carry the full set and note that for $B_{d,s}$ physics the
+$Q_4^{\rm LR}$-type operator ``turns out to be as important as'' the others. Our
+core is therefore a faithful tree-level KK-gluon matching, but it omits the
+scalar operators that would arise from KK-Higgs or radion exchange and from
+one-loop matching. For $\dmd$ this is a small effect (the dominant LR piece is
+present), but it is an approximation, not the full EFT.
+
+\section{Single-KK-mode truncation}
+The matching keeps only the \emph{first} KK gluon (one $1/\MKK^2$ propagator). The
+full tower sums to a slightly larger coefficient; the truncation is conservative
+in the standard convention but is a known approximation. The same first-mode
+choice fixes the $\MKK$-convention question below.
+
+\section{The $\MKK$ convention}
+\label{sec:Mconvention}
+``$\MKK$'' is overloaded, exactly as in the oblique sector. The repo bookkeeping
+default is \code{xi\_KK = 1.0}, i.e.\ $\MKK=\LIR$ (the geometric IR scale), per
+\code{scales.py} (\code{DEFAULT\_QUARK\_XI\_KK = 1.0}). The \emph{physical} first
+KK-gauge mass is $\MKK^{\rm phys}=x_1\LIR$ with the NN root
+\code{GAUGE\_KK\_ROOT\_NN = 2.4487}, so a bound stated in $\LIR$ units is
+$\approx2.45\times$ larger in physical units. When comparing our few-TeV $\dmd$
+floor to a literature ``$\sim$~few TeV'' or to the CFW $21$/$33$~TeV context
+values, the convention must match. The Wilson-coefficient reference scale
+\code{DEFAULT\_QUARK\_TARGET\_SCALE\_GEV = 3000.0} (3~TeV) is a separate,
+$\alpha_s$-anchoring scale and should not be conflated with $\MKK$.
+
+\section{Leading-log QCD running and the bag-scale caveat}
+The running is leading-log, and the bag parameters are FLAG-2024 values reported
+at their own renormalisation scales; the kaon LR bags carry an explicit
+$3~\text{GeV}\!\to\!2~\text{GeV}$ scale-matching \code{TODO} in the core. For
+$B_d$ the $B_4/B_5$ inputs are used as stored; a fully NLO treatment would
+RG-match the bags to $\mu_{\rm had}$ in the same scheme as the Wilson running.
+
+\section{Coupling normalisation: $g_s$ vs $g_s^*$}
+The default \code{compute\_quark\_kk\_gluon\_couplings} uses the perturbative
+4D $g_s(\MKK)$ unless an explicit enhanced \code{g\_s\_star} is supplied
+($\sim6$ at tree level, $\sim3$ at one loop, per the docstring citing CFW
+0804.1954 and Gedalia--Grossman--Nir--Perez 2009). Whether a given scan uses the
+plain or enhanced coupling shifts the floor by the corresponding factor; the
+$\dmd$ \emph{magnitude} scales linearly in the product of the two off-diagonal
+couplings, so a $g_s^*/g_s$ enhancement of $\sim2$ moves $|\Mtwelve^{\rm NP}|$ by
+$\sim4$, i.e.\ the $\MKK$ floor by $\sim2$.
+
+\section{Budget policy is a choice}
+The HARD veto uses the \emph{loose} band \eqref{eq:b001budget}; the central and
+tight variants are computed and stored but not used for the veto. This is a
+deliberate, documented policy (an NP contribution as large as the
+SM-vs-experiment gap \emph{plus} a combined-$\sigma$ cushion is tolerated). A
+stricter analysis would use the central or tight band, tightening the $\dmd$
+floor by up to a factor $\sim2.5$ in $|\Mtwelve^{\rm NP}|$ (so $\sim1.6$ in
+$\MKK$). The ledger records this as a deliberate, uncertainty-aware choice rather
+than an oversight.
+
+\section{Checklist: what a stricter $\dmd$ treatment would add}
+\begin{enumerate}[leftmargin=1.8em]
+\item Add the scalar SLL/SRR operators (KK-Higgs/radion and one-loop matching).
+\item Sum the full KK-gluon tower instead of the first mode.
+\item Promote the leading-log running to NLO and RG-match the $B_d$ bag
+parameters to $\mu_{\rm had}$ consistently.
+\item Fix and document a single $\MKK$ convention (physical vs $\LIR$) across the
+$\Delta F=2$ and electroweak sectors.
+\item Decide the budget-band policy (loose / central / tight) on physics grounds
+rather than convention.
+\end{enumerate}
+
+% ====================================================================
+\part*{Common confusions}
+\addcontentsline{toc}{section}{Common confusions}
+% ====================================================================
+
+\begin{callout}{Four common confusions, defused.}
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item[\textbf{A.}] \emph{``$\dmd$ and $\epsK$ are the same constraint in two
+mesons.''} No --- $\dmd$ reads the \textbf{magnitude} $|\Mtwelve|$ (CP-conserving),
+$\epsK$ reads the \textbf{imaginary part} (CP-violating). The kaon also has a
+$\sim$$200\times$ enhancement of its LR operator (bare chiral $r_\chi\!\approx\!26$
+times LR running $\sim$$8$) versus a chiral prefactor $\sim$$1.6$ for $B_d$. Three
+compounding factors make $\epsK$ the $\sim$$20$~TeV killer and $\dmd$ a few-TeV
+constraint.
+\item[\textbf{B.}] \emph{``Custodial symmetry relaxes the $\dmd$ bound.''} No ---
+$P_{LR}$ protects the $Z\bar b_L b_L$ (and $Z$-mediated $\Delta F=2$) coupling,
+but \code{B001} is a \textbf{KK-gluon} effect, blind to $P_{LR}$. What relaxes
+$\dmd$ is \emph{flavour alignment} of the 5D couplings, a different lever.
+\item[\textbf{C.}] \emph{``The budget is the SM--experiment gap.''} Partly --- the
+\emph{core} budget is $\max(\dmd^{\rm exp}/2,\,|{\rm gap}|/2)=\dmd^{\rm exp}/2$,
+but the \textbf{live HARD budget} \eqref{eq:b001budget} is the smaller
+uncertainty-aware $(|{\rm gap}|+\sqrt{\sigma_{\rm exp}^2+\sigma_{\rm SM}^2})/2
+\approx3.4\times10^{-14}$~GeV. Quote that one.
+\item[\textbf{D.}] \emph{``$\MKK$ means one thing.''} It is overloaded by
+$x_1\approx2.45$: the code default is $\MKK=\LIR$ (\code{xi\_KK=1.0}), while the
+physical first KK mass is $2.45\,\LIR$. A few-TeV floor in $\LIR$ units is
+$\sim2.45\times$ higher physically.
+\end{itemize}
+\end{callout}
+
+% ====================================================================
+\part*{Annotated reading guide}
+\addcontentsline{toc}{section}{Annotated reading guide}
+% ====================================================================
+
+\begin{description}[leftmargin=0em,style=nextline]
+\item[Sibling notes (same $\Delta F=2$ core).] The shared machinery --- operator
+basis, KK-gluon matching, RG running, and hadronic matrix elements --- is stated
+self-containedly above (\S\ref{sec:operators}, \S\ref{sec:rsmech},
+\S\ref{sec:codewilsons}--\S\ref{sec:coderunning}) in the form the $B_d$
+evaluation uses, so this note stands alone. The same core drives the kaon
+($\epsK$, \code{epsilon\_k\_review.tex}), $B_s$ ($\Delta m_s$/$\phi_s$,
+\code{delta\_m\_s\_review.tex}), and $D^0$ (\code{d0\_mixing\_review.tex})
+reviews; the kaon note carries the fullest treatment of the LR chiral-plus-running
+enhancement, and is the natural cross-read for the real-vs-imaginary contrast.
+
+\item[Csaki, Falkowski, Weiler, arXiv:0804.1954.] The anarchic RS-flavour paper.
+The tree-level KK-gluon $\Delta F=2$ Hamiltonian (their VLL/LR operators
+\eqref{eq:VLL}--\eqref{eq:LR}), the chiral-plus-running enhancement of the kaon LR operator
+($\sim$$200$ with the repo's bare $r_\chi\approx26$; CFW quote a combined
+chiral-plus-running factor $\approx18$ in their own normalisation), the $g_s^*\sim6$ enhanced coupling, and the anarchic
+$\MKK\gtrsim\mathcal{O}(20)$~TeV bound from $\epsK$ versus the much milder
+$B_d$ bound. The $21$~TeV / $33$~TeV context values in our \code{B001.yaml}
+\code{paper\_era\_reference} are theirs. This is the reference for
+\S\ref{sec:operators}--\S\ref{sec:realvsimag}.
+
+\item[Blanke, Buras, Duling, Gori, Weiler, arXiv:0809.1073.] The full
+six/eight-operator $\Delta F=2$ analysis in custodially-protected warped models.
+Read it for: the complete operator basis (including the SLL/SRR our core omits,
+\S\ref{sec:gap}); the statement that $\epsK$ is the dominant constraint via the
+LR chirality-flip operator; that $P_{LR}$ suppresses the $Z$-mediated piece but
+does \emph{not directly relax} the $B_d$ KK-gluon bound (\S\ref{sec:custodial});
+and the existence of ``modest fine-tuning'' / alignment regions reaching
+$\MKK\simeq3$~TeV (\S\ref{sec:alignment}).
+
+\item[HPQCD Collaboration, arXiv:1907.01025.] The SM lattice prediction
+$\dmd^{\rm SM}=0.555\,{}^{+0.028}_{-0.055}(0.029)$~ps$^{-1}$ used as the theory
+anchor \eqref{eq:dmdsm} and as the $\sigma_{\rm SM}$ in the B001 budget
+\eqref{eq:b001budget}.
+
+\item[FLAG Review 2024, arXiv:2411.04268.] Source of the $B_d$ decay constant and
+bag parameters ($f_{B_d}, B_1, B_4, B_5$) used in the matrix elements
+(\S\ref{sec:codeME}); auxiliary lattice context in the YAML.
+
+\item[Belle II Collaboration, arXiv:2302.12791.] The modern direct $\dmd$
+measurement ($0.516\pm0.008\pm0.005$~ps$^{-1}$, $190~\text{fb}^{-1}$) stored under
+\code{recent\_experimental\_inputs}; not the live anchor, but a consistency
+cross-check on \eqref{eq:dmdexp}.
+\end{description}
+
+\bigskip
+\noindent\rule{\linewidth}{0.4pt}\\
+\footnotesize
+\emph{Internal note. The formulas \eqref{eq:codeVLL}--\eqref{eq:codeM12} and the
+budgets \eqref{eq:corebudget}--\eqref{eq:b001budget} are exactly what
+\code{quarkConstraints/deltaf2.py}, \code{physics\_adapters/deltaf2.py}, and
+\code{B001.py} compute; the constants ($f_{B_d}=0.19$, $m_{B_d}=5.27972$,
+$B_{1,4,5}=0.87/1.02/0.96$, \code{DELTA\_M\_BD\_EXP=3.334e-13},
+\code{DELTA\_M\_BD\_SM=3.6e-13}, $\mu_{\rm had}=2$~GeV) are as stored in those
+files and \code{B001.yaml}. ``Rigorous vs proxy'' tags follow the orchestration
+ledgers: \code{B001} is \code{Severity.HARD} and rigorous. Cross-check before
+citing externally.}
+
+\end{document}

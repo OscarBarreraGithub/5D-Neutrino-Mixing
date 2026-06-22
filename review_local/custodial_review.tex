@@ -1,0 +1,1020 @@
+\documentclass[11pt]{article}
+
+% ============================================================
+%  Custodial symmetry in warped (Randall--Sundrum) models:
+%  what it does and why.  A slow, pedagogical internal review.
+%  Written to track (a) the physics, (b) what is in OUR code,
+%  (c) the subtleties and gaps.
+%  This is an internal working note, not for distribution.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% lightweight "callout" box
+\colorlet{shadecolor}{gray!12}
+\newenvironment{callout}[1]{%
+  \par\medskip\begin{shaded}\noindent\textbf{#1}\par\smallskip}{\end{shaded}\medskip}
+
+\newcommand{\MKK}{M_{\mathrm{KK}}}
+\newcommand{\LIR}{\Lambda_{\mathrm{IR}}}
+\newcommand{\sw}{s_W}
+\newcommand{\cw}{c_W}
+\newcommand{\swsq}{s_W^2}
+\newcommand{\cwsq}{c_W^2}
+\newcommand{\Pibig}{\Pi}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\vev}{v}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\SUL}{SU(2)_L}
+\newcommand{\SUR}{SU(2)_R}
+\newcommand{\UX}{U(1)_X}
+\newcommand{\PLR}{P_{LR}}
+\newcommand{\Tparam}{\hat{T}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\todo}[1]{{\color{red}[#1]}}
+\newcommand{\dgL}{\delta g_L^b}
+\newcommand{\dgR}{\delta g_R^b}
+\newcommand{\rhoparam}{\rho}
+\newcommand{\Afb}{A_{FB}^{0,b}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{\bf Custodial Symmetry in Warped Models: What It Does and Why\\[4pt]
+\large A slow, pedagogical internal review --- physics, code, and subtleties}
+\author{Internal working note (5D--Neutrino--Mixing repo)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This is the integrative ``why custodial'' note. It pulls together a single
+question that runs through the whole electroweak side of our catalogue:
+\emph{the minimal Randall--Sundrum (RS) model is forced up to a Kaluza--Klein
+scale of $\MKK\sim 8$--$10$~TeV by precision electroweak data --- chiefly the
+oblique $T$ parameter and the $Z\to b\bar b$ vertex --- which is uncomfortably
+heavy for the LHC, and adding a custodial structure
+($\SUL\times\SUR\times\UX$ plus a discrete $L\!\leftrightarrow\! R$ parity
+$\PLR$) lowers that floor to a few TeV.} The note assumes no prior knowledge of
+custodial isospin or of why a warped fifth dimension threatens it: everything is
+built from the ground up. Part~\ref{part:why} sets up custodial isospin and the
+$\rhoparam$ parameter. Part~\ref{part:rs} explains why minimal RS generates a
+\emph{volume-enhanced} $T$ and a non-universal $Z\bar b_L b_L$ shift, and where
+the $\MKK$ floor comes from. Part~\ref{part:cure} is the heart of the note: the
+\emph{continuous} $\SUR$ protection of $T$ (the one-vs-two IR mass-parameter
+argument), the \emph{separate, discrete} $\PLR$ protection of $Z\bar b_L b_L$,
+the standard representations, the calculable one-loop top-partner corrections,
+and --- crucially --- exactly what custodial does \emph{not} touch ($S$, $Z\bar
+b_R b_R$/$A_b$, and the \emph{entire} flavour/CP problem). Part~\ref{part:code}
+documents our code's \code{ew\_model} switch
+(\code{minimal\_rs} vs \code{custodial\_rs\_plr}) and the paired-scan result.
+Part~\ref{part:subtle} is the honest gap-to-rigorous ledger. It cross-references
+the companion notes \code{stu\_review.tex} (oblique $S,T,U$),
+\code{z\_to\_bb\_review.tex} ($R_b$/$A_b$), and
+\code{rs\_flavor\_anarchy\_review.tex} (the $\Delta F=2$ problem custodial does
+\emph{not} solve).
+\end{abstract}
+
+\tableofcontents
+
+% ====================================================================
+\part*{Orientation: why this note exists}
+\addcontentsline{toc}{section}{Orientation: why this note exists}
+% ====================================================================
+
+A warped extra dimension is an elegant solution to the gauge hierarchy problem,
+and it doubles as a theory of flavour. But for two decades the standard
+objection to the simplest realisation has been a single sentence: \emph{precision
+electroweak data force the new states too high to see}. In the minimal
+(non-custodial) RS model two effects push the lightest Kaluza--Klein (KK) gauge
+resonance up to roughly $8$--$10$~TeV: the oblique $T$ parameter and the
+$Z\to b\bar b$ vertex shift. At that scale the model is, for practical purposes,
+invisible to the LHC, and the connection to TeV-scale physics that motivated the
+construction is lost.
+
+Custodial symmetry is the standard response. It is not a tuning or a fudge: it
+is a \emph{symmetry} imposed on the 5D bulk that forbids the dangerous
+corrections, lowering the electroweak floor to $\sim 3$~TeV --- inside the
+collider's reach. Our catalogue implements exactly this, as a switch
+between two electroweak models, \code{ew\_model = "minimal\_rs"} and
+\code{ew\_model = "custodial\_rs\_plr"}, and we have run paired
+million-point scans to see the floor move. This note explains, slowly and from
+first principles, what that switch does, why it works, and --- equally important
+--- what it leaves untouched.
+
+A one-paragraph executive summary, to be unpacked over the following pages:
+
+\begin{quote}
+\small
+The Standard Model protects the relation $M_W = M_Z\cw$ at tree level through an
+approximate \emph{custodial isospin} symmetry $SU(2)_V$; the oblique $T$
+parameter measures how badly any new sector breaks it. Minimal RS breaks it
+\emph{badly}, because the bulk gauge group is only $\SUL\times U(1)_Y$ and the
+correction is amplified by the large warp volume $L=\ln(M_{\rm Pl}/{\rm
+TeV})\approx 35$ --- this is the celebrated RS $T$-parameter problem. The cure is
+to enlarge the bulk gauge group to $\SUL\times\SUR\times\UX$, supplying a
+\emph{continuous} custodial $\SUR$ that cancels the volume-enhanced $T$.
+\emph{Separately} --- and this is the most-confused point --- a \emph{discrete}
+left--right parity $\PLR$, realised by putting $(t_L,b_L)$ in a bidoublet with
+$T^3_L=T^3_R$, protects the $Z\bar b_L b_L$ vertex through a ``two constraints
+meeting'' argument. The leftover one-loop contributions from the light
+top-partners are finite, sign-definite, and \emph{correlated}. The costs are an
+enlarged gauge group, extra light KK states (custodians), and more parameters.
+What custodial does \emph{not} do: it leaves $S$ unprotected (now the binding
+oblique constraint), leaves $Z\bar b_R b_R$/$A_b$ unprotected (a feature, not a
+bug), and does \emph{nothing} for the flavour/CP problem
+($\epsilon_K$, $\Delta m_{B}$, \dots), which is a separate $\sim$TeV-or-worse
+issue addressed by RS-GIM and alignment, not by custodial symmetry.
+\end{quote}
+
+\noindent The logical spine of the whole note, in one picture:
+\begin{footnotesize}
+\begin{verbatim}
+  custodial isospin  SU(2)_L x SU(2)_R --> SU(2)_V  ==guards==> rho=1 ==> T=0
+                           |
+  minimal RS bulk = SU(2)_L x U(1)_Y  == NO custodial ==>
+        |                                volume-enhanced  Delta T ~ (pi L / 2 cw^2)(v^2/M^2)
+        |                                non-universal    delta g_L^b   (Z -> b bbar)
+        |                                ==> M_KK floor ~ 8-10 TeV  (too heavy for LHC)
+        |
+  cure: enlarge bulk gauge group to  SU(2)_L x SU(2)_R x U(1)_X
+        |
+        +-- SU(2)_R  (CONTINUOUS)  ==> kills volume-enhanced T  (+pi L/2 --> -pi/4L)
+        |        but does NOTHING for Z b_L      [protects T only]
+        |
+        +-- P_LR  (DISCRETE L<->R, needs (2,2) bidoublet, T3_L=T3_R)
+        |        ==> protects the WHOLE non-universal Z b_L vertex   [protects Zb_L only]
+        |
+  NOT protected by either:  S parameter (sets the ~3 TeV floor);  Z b_R / A_b (residual)
+  NOT touched at all:       epsilon_K, Delta m_B  ==>  FLAVOUR problem  (RS-GIM/alignment)
+\end{verbatim}
+\end{footnotesize}
+\noindent Keep this map in mind. The single most common confusion --- that
+``custodial'' is one knob that fixes everything --- is defused right here: there
+are \emph{two} distinct protective arrows ($\SUR$ for $T$, $\PLR$ for $Zb_L$),
+$S$ is protected by neither, and the flavour problem lives in a different room
+entirely.
+
+% ====================================================================
+\part{Custodial isospin and the $\rhoparam$ parameter, from scratch}
+\label{part:why}
+% ====================================================================
+
+\section{The symmetry that guards $M_W = M_Z\cw$}
+\label{sec:custodial}
+
+Everything in this note hinges on one approximate symmetry of the Standard
+Model, so we build it carefully. The Higgs field $H$ is a complex $SU(2)_L$
+doublet --- four real fields. Package them into a $2\times2$ matrix,
+\begin{equation}
+\Sigma = \big(\,\tilde H\ \ H\,\big), \qquad \tilde H = i\sigma_2 H^*,
+\end{equation}
+and notice that a \emph{global} $\SUL\times\SUR$ can act on it from both sides,
+$\Sigma \to U_L\,\Sigma\,U_R^\dagger$. The Higgs potential depends only on the
+combination $\mathrm{tr}(\Sigma^\dagger\Sigma) = 2|H|^2$, which is invariant
+under all of $\SUL\times\SUR$. When the Higgs acquires its vacuum expectation
+value, $\langle\Sigma\rangle = \tfrac{\vev}{\sqrt2}\,\mathbb{1}$, the symmetry
+breaks to the diagonal subgroup,
+\begin{equation}
+\SUL\times\SUR \ \longrightarrow\ SU(2)_V,
+\end{equation}
+because $\langle\Sigma\rangle$ is left invariant only when $U_L = U_R$. This
+surviving vectorial $SU(2)_V$ is what we call \textbf{custodial isospin}.
+
+What does it ``guard''? The three would-be Goldstone bosons --- the ones eaten by
+$W^\pm$ and $Z$ --- form a \emph{triplet} of $SU(2)_V$. A symmetry that rotates
+them into one another forces their masses to be equal: the gauge-boson mass
+matrix is proportional to the identity in isospin space. In the limit of exact
+custodial symmetry (switching off hypercharge $g'$ and the up--down Yukawa
+splitting) this means the three masses come out equal \emph{before} hypercharge
+mixing, so that after mixing
+\begin{equation}
+\rhoparam \equiv \frac{M_W^2}{M_Z^2\,\cwsq} = 1
+\label{eq:rho}
+\end{equation}
+holds at tree level, where $\cwsq = 1-\swsq$. The name ``custodial'' is literal:
+the symmetry is the custodian of the relation $M_W = M_Z\cw$.
+
+\begin{definition}[Custodial isospin]
+The approximate global $SU(2)_V$ symmetry of the SM Higgs sector that survives
+electroweak symmetry breaking and forces the would-be Goldstone bosons into a
+degenerate triplet. It is exact only when $g'\to 0$ and the up and down Yukawas
+are equal; in the SM it is broken explicitly by hypercharge (which singles out
+the $T^3_R$ direction) and by the large top--bottom mass splitting.
+\end{definition}
+
+\section{$T$ is the meter that reads custodial breaking}
+\label{sec:Tmeter}
+
+Custodial isospin is only \emph{approximate} in the SM. Two sources break it: (i)
+gauging hypercharge, $g'\neq 0$ --- in the SM $\SUR$ is merely global, and turning
+on $g'$ picks out its $T^3_R$ direction, breaking $SU(2)_V$ explicitly; and (ii)
+the enormous top--bottom Yukawa splitting. Each makes $\rhoparam$ drift away from
+unity at loop level. The size of that drift is, by definition, the oblique $T$
+parameter:
+\begin{equation}
+\alpha\,T \;=\; \rhoparam - 1 \;=\; \Delta\rhoparam .
+\label{eq:Tisrho}
+\end{equation}
+This is the one fact to carry through the entire note:
+
+\begin{callout}{The slogan, stated once and used everywhere.}
+\emph{$T$ measures custodial-isospin breaking in the new sector.} A theory that
+respects custodial symmetry automatically has a small $T$; a theory that breaks
+it badly has a large $T$. Minimal RS is the second kind. The whole purpose of
+custodial RS is to make it the first kind --- to impose, in the 5D bulk, the very
+symmetry whose breaking $T$ measures.
+\end{callout}
+
+\noindent The companion note \code{stu\_review.tex} gives the formal
+Peskin--Takeuchi definitions of $S$, $T$, $U$ in terms of gauge self-energies; we
+borrow only the physical reading here: $T$ is the charged-minus-neutral
+self-energy difference at zero momentum (an isospin-breaking ``$W$/$Z$
+splitting''), while $S$ measures the overall \emph{size} of the new
+electroweak-charged sector and says nothing about custodial breaking. That last
+clause is why $S$ will turn out to be unprotected.
+
+\section{The experimental target}
+\label{sec:target}
+
+The electroweak data constrain $(S,T)$ to a tilted error ellipse. The numbers our
+catalogue uses (PDG~2025 global fit, $U$ fixed to zero), stored in the
+\code{EW001.yaml} anchor and read by our code, are
+\begin{equation}
+S = 0.026 \pm 0.075, \qquad T = 0.047 \pm 0.066, \qquad \rho_{ST} = +0.90 .
+\label{eq:fit}
+\end{equation}
+The strong positive correlation $\rho_{ST}=+0.90$ makes the allowed region a thin
+diagonal band: a model that raises $S$ and $T$ \emph{together} is mildly
+constrained, but one that raises only $T$ moves \emph{across} the band and is
+excluded fast. Minimal RS does exactly the dangerous thing --- it pushes $T$ hard
+while moving $S$ only modestly --- which is the quantitative reason the minimal
+floor is so high. Custodial symmetry's job is to bring the model back inside this
+ellipse at a much lower $\MKK$.
+
+% ====================================================================
+\part{Why minimal RS is in trouble}
+\label{part:rs}
+% ====================================================================
+
+\section{The geometry and the one large number}
+\label{sec:geom}
+
+Recall the setup (consistent with the repo conventions and the companion notes).
+Spacetime is a slice of AdS$_5$ with a UV brane at the Planck scale and an IR
+brane at the TeV scale. The warp factor is $\eps = e^{-k\pi r_c}\sim 10^{-15}$,
+and the single number that controls everything is the \textbf{warp volume}
+\begin{equation}
+\boxed{\;L \equiv k\pi r_c = \ln(1/\eps) = \ln(M_{\rm Pl}/{\rm TeV}) \approx 35.\;}
+\label{eq:L}
+\end{equation}
+This is the same big logarithm that solves the gauge hierarchy problem and
+generates fermion mass hierarchies through localisation; our code stores it as
+\code{DEFAULT\_RS\_VOLUME\_LOG = 35.0} in
+\code{quarkConstraints/oblique\_stu.py} and computes it per point as
+\code{warp\_log = -math.log(epsilon)} (companion note
+\code{z\_to\_bb\_review.tex}). The lightest KK gauge mode sits at
+$\MKK^{\rm phys} = x_1\,\LIR$ with $x_1\approx 2.45$ (the first finite-$\eps$
+Neumann root used by our solver); the $\sim 2.45$ factor between the physical
+mass and the geometric scale $\LIR$ is a recurring convention hazard we return to
+in \S\ref{sec:Mconvention}.
+
+\section{The $T$-parameter problem and where the volume factor enters}
+\label{sec:Tprob}
+
+The Higgs lives on (or very near) the IR brane, and so do the heavy KK gauge
+modes. When the Higgs gets its vev it mixes the flat SM $W/Z$ zero modes with the
+IR-localised KK tower; integrating out the tower shifts the $W$ and $Z$
+propagators --- an oblique correction scaling as the universal decoupling
+$\vev^2/\MKK^2$.
+
+The danger is in the \emph{coefficient} of $T$, and the cleanest way to see where
+the volume factor comes from is this. A gauge zero mode looks ``flat,'' but it
+must be \emph{canonically normalised} by integrating $|\psi_0|^2$ over the warped
+fifth dimension; the AdS warping stretches that proper measure so the
+normalisation integral runs over an effective length $\propto L$. The normalised
+zero mode is therefore suppressed by $1/\sqrt L$ across most of the bulk but
+relatively \emph{enhanced} at the IR brane. The Higgs sits exactly there, so it
+samples the zero mode precisely where the volume normalisation piles it up, and
+the resulting $W$/$Z$--KK mixing carries an explicit factor of $L$. In the
+minimal bulk gauge group $\SUL\times U(1)_Y$ there is nothing forcing the charged
+and neutral self-energies to be equal, so the $L$-enhanced difference survives:
+\begin{equation}
+\boxed{\;\Delta T_{\rm minimal} \;\simeq\; \frac{\pi L}{2\,\cwsq}\,
+\frac{\vev^2}{\MKK^2}.\;}
+\label{eq:Tmin}
+\end{equation}
+This is the parametric form our code encodes (function
+\code{minimal\_rs\_t\_coefficient} in \code{oblique\_stu.py}, returning
+$\pi L/(2\cwsq)\approx 71.5$). Numerically the coefficient is enormous: with
+$L=35$ and $\cwsq\approx0.769$ it is $\approx 71.5$, so even a $3$~TeV KK scale
+gives $\Delta T\approx 0.48$ --- about $7\sigma$ in $T$ alone against
+\eqref{eq:fit}. Driving $\Delta T$ below $\sim 0.1$ requires $\MKK\gtrsim
+8$--$10$~TeV. This is the \textbf{RS $T$-parameter problem}: custodial breaking by
+the minimal bulk gauge group, amplified by the very hierarchy volume that
+motivates the model. The holographic reading (Agashe--Delgado--May--Sundrum,
+hep-ph/0308036) states it cleanly: the dual composite-Higgs sector simply
+\emph{lacks custodial isospin}.
+
+\section{The companion problem: $Z\to b\bar b$}
+\label{sec:Zbb}
+
+There is a second, logically independent electroweak problem, and it is
+\emph{non-oblique}. Because light fermions are UV-localised and heavy ones
+IR-localised, the KK gauge bosons couple non-universally to different
+generations. The third-generation left-handed doublet $(t_L,b_L)$ must be
+strongly IR-localised to feed the large top mass, so its coupling to the $Z$ is
+distorted the most. The result is a shift $\dgL$ to the left-handed bottom
+coupling that one \emph{cannot} fold into $S,T,U$ --- it is a different operator on
+a different vertex. In our code this is the paired constraint set \code{T010}
+($R_b$) and \code{T011} ($A_b$/$\Afb$), documented in full in the companion
+\code{z\_to\_bb\_review.tex}. The key facts to import here:
+\begin{itemize}[leftmargin=1.4em]
+\item $\dgL$ has \emph{two} pieces: a gauge-KK wavefunction overlap (set by the
+third-generation doublet IR overlap $F(c_{Q_3})$) and a Casagrande
+$\propto m_b^2/\LIR^2$ fermion-KK admixture (a full anarchic flavour sum). At a
+realistic anarchic scan point the admixture dominates the gauge piece by a factor
+$\sim 23$ (companion note \code{z\_to\_bb\_review.tex}), and the veto runs through
+$R_b$.
+\item In the \emph{minimal} model this is the constraint that sets the
+\emph{rigorous} floor: $\sim 25$--$30$~TeV in physical $\MKK$
+($\approx 10$--$12$~TeV in $\LIR$ units), above both the oblique proxy and the
+$\Delta F=2$ flavour set.
+\end{itemize}
+So in the minimal model the binding electroweak constraints are $T$ (oblique) and
+$Z\to b\bar b$ (non-oblique), and \emph{both} are addressed by custodial
+structure --- but, as we are about to see, by \emph{two different} pieces of it.
+
+% ====================================================================
+\part{The custodial cure --- and its limits}
+\label{part:cure}
+% ====================================================================
+
+\section{The idea: gauge the custodial symmetry in the bulk}
+\label{sec:idea}
+
+The fix (Agashe--Delgado--May--Sundrum, hep-ph/0308036) is to make the 5D bulk
+\emph{respect} custodial isospin, so that the dangerous $\Delta T$ is forbidden by
+symmetry rather than tuned away. Enlarge the bulk gauge group from the SM to
+\begin{equation}
+\boxed{\;G_{\rm bulk} = \SUL \times \SUR \times \UX,\qquad X = \frac{B-L}{2},\;}
+\label{eq:group}
+\end{equation}
+and break it down to the SM on the UV brane (by boundary conditions / orbifold
+parities) while \emph{preserving} a custodial $SU(2)_V$ in the IR/Higgs sector.
+Hypercharge is then the combination $Y = T^3_R + (B-L)/2$. The Higgs is promoted
+to a \textbf{bidoublet} $(2,2)$ of $\SUL\times\SUR$, so its vev leaves an
+unbroken diagonal $SU(2)_V$ --- precisely the custodial symmetry of
+\S\ref{sec:custodial}, now built into the 5D theory. In the dual language: we
+have handed the composite Higgs a global custodial $\SUR$, so the strong dynamics
+no longer breaks isospin at leading order.
+
+\section{$\SUR$ removes the volume-enhanced $T$ (the one-vs-two argument)}
+\label{sec:Tcure}
+
+Why does this work? The sharpest statement is a parameter count at the IR brane.
+In the minimal model the IR boundary conditions fix what become the $W$ and $Z$
+mass terms \emph{independently}: there are effectively \emph{two} mass
+parameters, with nothing relating them, so $\Pibig_{11}(0)\neq\Pibig_{33}(0)$ and
+$T$ is generated (and then volume-enhanced). With custodial $\SUR$ the Higgs is a
+bidoublet, and its vev enters the IR boundary condition through a \emph{single}
+mass parameter that acts symmetrically on the charged and neutral sectors. One
+parameter cannot split the charged and neutral self-energies, so the
+volume-enhanced difference is forced to cancel:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & IR mass parameters & consequence \\
+\midrule
+minimal $\SUL\times U(1)_Y$ & two (independent $M_W$, $M_Z$ terms) & $\Pibig_{11}\neq\Pibig_{33}\Rightarrow T\propto L$ \\
+custodial $\SUL\times\SUR\times\UX$ & one (single bidoublet vev) & $\Pibig_{11}=\Pibig_{33}$ at leading order $\Rightarrow T$ tiny \\
+\bottomrule
+\end{tabular}
+\end{center}
+Concretely, in hep-ph/0308036 the leading log-enhanced contribution to $T$
+cancels against the hypercharge piece once the gauge sector respects the
+symmetry; what survives starts at higher order in $\vev z_v$. The structural
+replacement our code adopts is the coefficient \emph{flip}
+\begin{equation}
+\boxed{\;c_T:\quad \frac{\pi L}{2\,\cwsq}\ \xrightarrow{\ \text{custodial}\ }\
+-\,\frac{\pi}{4\,\cwsq\,L}.\;}
+\label{eq:Tcust}
+\end{equation}
+Three things to read off \eqref{eq:Tcust}:
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{$L$ moves from numerator to denominator.} The $\mathcal{O}(L)$
+\emph{enhancement} becomes an $\mathcal{O}(1/L)$ \emph{suppression}; the net
+coefficient shrinks by $\sim 1/(2L^2)\approx 4\times10^{-4}$. $T$ is rendered
+essentially harmless.
+\item \textbf{The leftover is small and model-dependent.} The leading
+custodial-symmetric piece cancels; the residual is parametrically
+$\mathcal{O}(1/L)$ and its sign is \emph{not} universal --- it depends on the
+residual $\SUR$-breaking (UV boundary conditions, brane kinetic terms). The clean
+closed form $-\pi/(4\cwsq L)$ with a definite sign is the \emph{specific minimal
+parametrisation our code adopts}, not a theorem; the robust statement is item (1).
+\item \textbf{$S$ is untouched.} Custodial $\SUR$ says nothing about
+$\Pibig'_{33}-\Pibig'_{3Q}$. In fact hep-ph/0308036 finds that $S$ receives no
+dimension-6 contribution and is suppressed to dimension-8 (a $(\vev z_v)^4$
+effect), so it is small --- but it is \emph{not protected by custodial symmetry},
+and after the volume-enhanced $T$ is gone, $S$ is the binding oblique constraint.
+This is why the custodial floor is $S$-dominated, and why their fit lands at
+$\gtrsim 3$~TeV.
+\end{enumerate}
+
+\begin{callout}{Worked numerical example --- one benchmark, three numbers ($\MKK=3$~TeV).}
+Take $\vev = 246$~GeV, $\MKK = 3000$~GeV, so the decoupling factor is
+\[
+\frac{\vev^2}{\MKK^2} = \left(\frac{246}{3000}\right)^2 \approx 6.7\times10^{-3}.
+\]
+With $L=35$, $\cwsq\approx0.769$, and our code's $c_S=30$:
+\begin{align*}
+\Delta T_{\rm minimal}  &= \tfrac{\pi L}{2\cwsq}\cdot\tfrac{\vev^2}{\MKK^2}
+   \approx 71.5\times 6.7\times10^{-3} \approx 0.48
+   &&(\text{vs.\ }T=0.047\pm0.066:\ \sim 6.6\sigma,\ \textbf{excluded}),\\
+\Delta T_{\rm custodial} &= -\tfrac{\pi}{4\cwsq L}\cdot\tfrac{\vev^2}{\MKK^2}
+   \approx -0.029\times 6.7\times10^{-3} \approx -2\times10^{-4}
+   &&(\textbf{negligible}),\\
+\Delta S &= c_S\cdot\tfrac{\vev^2}{\MKK^2}
+   \approx 30\times 6.7\times10^{-3} \approx 0.20
+   &&(\text{vs.\ }S=0.026\pm0.075:\ 2.3\sigma\text{ in }S\text{ alone}).
+\end{align*}
+The whole story is in this one benchmark: minimal $T$ is a $\sim 7\sigma$
+disaster (forcing $\MKK\sim 8$--$10$~TeV); custodial $\SUR$ makes $T$ vanish; the
+binding oblique number becomes $S\approx 0.20$. Note that $3$~TeV is \emph{below}
+the proxy-$S$ ceiling: $S=0.20$ at $3$~TeV gives a correlated $\chi^2\approx 47$
+against \eqref{eq:fit} (the proxy \code{EW001} gate badly fails), and the
+$c_S=30$ proxy only re-enters the $95\%$ ellipse near $\MKK\approx 6$~TeV. The
+``few~TeV'' headline is therefore the \emph{rigorous-only} floor (set by
+$\Delta F=2$ once custodial has cleared $T$ and $Z\bar b_L b_L$), not the proxy-$S$
+floor --- the two are reconciled in \S\ref{sec:scans}. The coefficient flip
+\eqref{eq:Tcust} is \emph{the same one} our \code{oblique\_stu.py} dispatches on
+the \code{ew\_model} string (\S\ref{part:code}).
+\end{callout}
+
+\section{$\PLR$: a \emph{separate} protection for $Z\bar b_L b_L$}
+\label{sec:PLR}
+
+Here is the point most worth slowing down on, because it is the one we ourselves
+got wrong once internally (recorded in the orchestration ledger). Continuous
+$\SUR$ cures $T$ --- but it does \emph{nothing} for the non-universal $Z\bar b_L
+b_L$ vertex. That vertex is a generation-specific correction, and a continuous
+custodial isospin says nothing about it. Protecting $\dgL$ requires \emph{more}: a
+\emph{discrete} left--right parity $\PLR$ that exchanges
+$\SUL\leftrightarrow\SUR$. This is the Agashe--Contino--Da Rold--Pomarol (ACDRP,
+hep-ph/0605341) mechanism, whose \emph{entire purpose} was to solve the RS
+$Z\to b\bar b$ problem.
+
+The construction embeds the third-generation doublet as a bidoublet,
+$Q_L=(t_L,b_L)\in(2,2)_{2/3}$ of $\SUL\times\SUR$, chosen so that the left-handed
+bottom carries equal left and right isospin,
+\begin{equation}
+T^3_L(b_L) = T^3_R(b_L) = -\tfrac12 ,
+\end{equation}
+i.e.\ $b_L$ is an eigenstate of $\PLR$. The protection theorem is then
+\emph{two constraints meeting}:
+\begin{itemize}[leftmargin=1.4em]
+\item invariance under the unbroken vectorial $U(1)_V$ (the diagonal of
+$T^3_L,T^3_R$) fixes the \emph{sum} of the charges, so any vertex shift obeys
+$\delta T^3_L + \delta T^3_R = 0$;
+\item invariance under the discrete $\PLR$ forces left and right to move
+\emph{together}, $\delta T^3_L = \delta T^3_R$.
+\end{itemize}
+Two equations in two unknowns force $\delta T^3_L = \delta T^3_R = 0$: the
+non-universal correction to the left-handed bottom coupling vanishes,
+$\dgL\to 0$. \textbf{In one line:} \emph{$\PLR$ makes the left and right couplings
+move together, $U(1)_V$ forbids the pair from moving, so neither moves.} The
+protected object is the \emph{whole} non-universal $\propto(T^3_L-T^3_R)$
+correction --- which, importantly, \emph{includes the leading gauge-KK piece}
+$\propto F(c_{Q_3})^2$, not merely the small $m_b^2$ admixture. (We initially
+believed only the admixture was protected; the ACDRP theorem and a three-agent
+re-derivation corrected this, recorded in
+\code{.orchestration/runs/CUSTODIAL-RESEARCH/CORRECTED\_PRESCRIPTION.md}.)
+
+\begin{callout}{Two separate clocks --- the single most useful thing to remember.}
+The $T$-parameter protection (\emph{continuous} $\SUR$) and the $Z\bar b_L b_L$
+protection (\emph{discrete} $\PLR$ on the bidoublet) are \emph{different}
+statements in the \emph{same} custodial group. A model can have one without the
+other. In our scan, turning on \code{ew\_model = "custodial\_rs\_plr"} flips
+\emph{both} the $\Delta T$ coefficient \eqref{eq:Tcust} \emph{and} the
+$Z\bar b_L b_L$ treatment in \code{T010}/\code{T011} at once --- but they are two
+physically independent mechanisms bundled into one switch.
+\end{callout}
+
+\section{The standard representations, and exactly what is/isn't protected}
+\label{sec:reps}
+
+The standard custodial embedding (and our code's defaults) are:
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Field & Representation & Protection type & Code default \\
+\midrule
+$Q_L=(t_L,b_L)$ & $(2,2)_{2/3}$ bidoublet & $\PLR$ ($T^3_L=T^3_R$) & \code{...Q\_L\_bidoublet\_(2,2)\_\{2/3\}} \\
+$t_R$ & $(1,1)_{2/3}$ singlet & singlet ($T^3=0$) & \code{t\_R\_singlet\_(1,1)\_\{2/3\}} \\
+$b_R$ & elementary / unprotected & none & \code{b\_R\_elementary} \\
+scope & all-gen down-left, diag.\ & --- & \code{all\_gen\_down\_left\_diagonal} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The table teaches \emph{two distinct} protections that are easy to lump together.
+$b_L$ is protected by the $\PLR$ / vector-like mechanism --- which is \emph{why} it
+needs the bidoublet, to enforce $T^3_L=T^3_R$. The right-handed top $t_R$ is
+protected for an entirely different reason: it is an $SU(2)$ \emph{singlet}
+($T^3=0$), so it does not couple to $W^3$ at all and nothing can shift its
+neutral-current vertex. Same group, different logic --- which is exactly why $t_R$
+sits in $(1,1)$ and $Q_L$ in $(2,2)$.
+
+The protection bookkeeping, stated once and for all:
+\begin{itemize}[leftmargin=1.4em]
+\item $\Delta T$: volume-enhanced piece removed by continuous $\SUR$
+\eqref{eq:Tcust}. \emph{Protected.}
+\item $\dgL$ ($Z\bar b_L b_L$, feeds $R_b$): removed by discrete $\PLR$ on the
+bidoublet, gauge piece and admixture together. \emph{Protected.}
+\item $\dgR$ ($Z\bar b_R b_R$, feeds $A_b$/$\Afb$): \emph{not} protected ---
+there is no $\PLR$ on $b_R$ (treated as elementary). \emph{Residual.}
+\item $\Delta S$: \emph{not} protected; sets the residual electroweak floor.
+\end{itemize}
+
+\paragraph{Why leave $b_R$ unprotected on purpose.} It is the one handle on data
+this class of models keeps. The asymmetry $A_b$ (hence $\Afb$) is the one $Z$-pole
+quantity that probes the \emph{right-handed} down coupling --- exactly the sector
+$\SUR$ and $\PLR$ leave open. The forward--backward $\Afb$ has sat a persistent
+$\sim2.8\sigma$ below the SM fit at LEP/SLD for two decades, and an unprotected
+$b_R$ is precisely the knob that could shift it (ACDRP note that a sizeable
+$\dgR\sim+0.02$ would address the anomaly). So ``$b_R$ unprotected'' is a
+\emph{feature}: it preserves a live, model-dependent observable rather than
+zeroing it by fiat. Our code therefore treats $A_b$ as context, never as a veto
+(see \code{z\_to\_bb\_review.tex} and \S\ref{part:code}).
+
+\section{The calculable one-loop top-partner corrections}
+\label{sec:loop}
+
+This is the deepest payoff of the symmetry, and it is easy to under-sell. The
+\emph{same} $\SUR/\PLR$ that kills the tree-level $T$ and $\dgL$ also forbids the
+local 5D counterterms that would otherwise renormalise them; the symmetry is
+broken only \emph{non-locally} (by UV-brane boundary conditions, far from the IR
+where the loop lives). A would-be UV divergence has no counterterm to land on,
+so the leading \emph{one-loop} contributions from the light top-partner KK
+fermions (the ``custodians'') come out \emph{finite and cutoff-independent}.
+
+\begin{callout}{Why the loop is a prediction, not a parameter.}
+\emph{The symmetry that removes the tree-level effect also forbids the
+counterterm that would make the loop ambiguous --- so the loop is calculable.}
+Moreover the two observables are \emph{correlated}: they come from the \emph{same}
+top-partner multiplets mixing with the top, so $\Delta T_{\rm loop}$ and
+$\dgL|_{\rm loop}$ trace a single band in the $(\Delta T,\dgL)$ plane and a
+custodial fit constrains them \emph{jointly}.
+\end{callout}
+
+\noindent Carena--Pont\'on--Santiago--Wagner (hep-ph/0701055, Eqs.~28--30) give
+the explicit formulas. The signs are fixed: the singlet custodial partner of
+$t_R$ contributes a \emph{positive} $\Delta T_{\rm loop}$, while the bidoublet
+vertex contribution to $\dgL$ comes with the \emph{opposite} sign,
+\begin{equation}
+\Delta T^{\rm singlet}_{\rm loop} > 0, \qquad \delta g_L^{b,\,\rm bidoublet} < 0 .
+\label{eq:loopsigns}
+\end{equation}
+At $\MKK\sim$~few~TeV these are $\mathcal{O}(0.1)$ for $T$ and
+$\mathcal{O}(10^{-3})$ for $\dgL$ --- \emph{not} negligible at the scale where
+custodial RS lives. \textbf{Our code carries the hook but defers it in the
+production scan} (\S\ref{part:code}): the named fields exist in
+\code{rs\_ew\_couplings.py}, the formulas are coded with the correct singlet-$+$
+and bidoublet-vertex-$-$ signs, but the million-point custodial run was tree-level
+($\code{custodial\_top\_partner\_loop\_status = deferred}$).
+
+\section{What custodial does NOT do: the flavour/CP problem}
+\label{sec:flavour}
+
+This section is the most important caveat in the note, and it is the one most
+often skipped. \textbf{Custodial symmetry does nothing for the flavour and CP
+problem.} The protections above are all about the \emph{electroweak} sector ---
+$T$, $S$, and the third-generation $Z$ vertices. They are blind to the
+\emph{flavour-changing neutral current} (FCNC) operators that anarchic 5D Yukawas
+generate when KK gluons and KK $Z'$ bosons are integrated out:
+\begin{equation}
+\frac{1}{\MKK^2}\,(\bar d_L\,\gamma^\mu\,s_L)(\bar d_R\,s_R) + \dots
+\ \Longrightarrow\ \epsilon_K,\ \Delta m_{B_d},\ \Delta m_{B_s},\ D^0\text{--}\bar D^0,\ \dots
+\end{equation}
+The most stringent of these, the CP-violating kaon parameter $\epsilon_K$, by
+itself forces $\MKK$ into the few-TeV-or-worse range \emph{independently} of
+anything custodial. This is a \emph{different room} entirely:
+\begin{itemize}[leftmargin=1.4em]
+\item The electroweak bounds ($T$, $Z\to b\bar b$) are cured by
+\emph{custodial symmetry} (this note).
+\item The flavour bounds ($\epsilon_K$, $\Delta F=2$) are softened by
+\emph{RS-GIM / flavour alignment} --- the automatic suppression of FCNCs by the
+same wavefunction overlaps that give the masses, optionally helped by aligning the
+bulk masses (the companion note \code{rs\_flavor\_anarchy\_review.tex}; the
+alignment philosophy is the flavour analogue of custodial, cf.\ 0907.0474).
+\end{itemize}
+The two mechanisms are orthogonal. A model can be perfectly custodial and still be
+killed by $\epsilon_K$; conversely, aligning the bulk masses does nothing for the
+oblique $T$. In our paired scan this shows up directly: once custodial removes
+$Z\to b\bar b$ and $T$, the \emph{rigorous} floor falls onto the $\Delta F=2$ set
+($\epsilon_K$/$\Delta m_s$/$\phi_s$ = \code{K001}/\code{B003}/\code{B004}) at
+$\sim 2$--$3$~TeV --- i.e.\ the flavour constraints become binding precisely
+because custodial has cleared the electroweak ones out of the way. Custodial moves
+the bottleneck; it does not remove it.
+
+\section{The costs of going custodial}
+\label{sec:costs}
+
+Custodial protection is not free. The price tag:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{An enlarged gauge group.} $\SUL\times\SUR\times\UX$ instead of the
+SM bulk group means more bulk gauge fields and a more intricate set of UV/IR
+boundary conditions to break it correctly.
+\item \textbf{Extra light KK states.} The custodial structure requires extra
+fermions --- the custodians / top-partners --- which are necessarily \emph{light}
+(near $\MKK$) and are the states a $3$~TeV custodial model would expose at the
+LHC. Their masses and mixings are exactly what feed the one-loop corrections of
+\S\ref{sec:loop}.
+\item \textbf{More parameters.} The representation choices ($t_R$ and $b_R$
+embeddings, protection scope), the $\PLR$-breaking residual, the brane kinetic
+terms, and the custodian mass ratios are all new inputs. Our code surfaces these
+as explicit metadata (\S\ref{part:code}) rather than burying them.
+\item \textbf{It buys electroweak room, not flavour room} (\S\ref{sec:flavour}).
+\end{itemize}
+The trade is worth it because it converts an $8$--$10$~TeV model into a $\sim
+3$~TeV one --- the difference between ``invisible'' and ``testable.''
+
+\section{The bottom line on scales}
+\label{sec:scales}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Model & Binding EW constraint & Lightest KK gauge mass floor \\
+\midrule
+Minimal RS (non-custodial) & $\Delta T\propto \pi L/2\cwsq$, and $Z\to b\bar b$ & $\sim 8$--$10$~TeV (oblique); $\sim 25$--$30$~TeV phys.\ ($Zbb$) \\
+Custodial $\SUL\times\SUR\times\UX\times\PLR$ & $\Delta S$ (T and $Zb_L$ protected) & $\sim 3$~TeV \\
+\bottomrule
+\end{tabular}
+\end{center}
+The custodial model trades a volume-enhanced $T$ and a large $Z\to b\bar b$ shift
+for an unprotected $S$, which is numerically much milder --- dropping the
+electroweak floor into LHC range. (For contrast, a different philosophy reaches
+the same end by changing the \emph{geometry} rather than adding a \emph{symmetry}:
+Cabrer--von Gersdorff--Quir\'os deform the IR metric to suppress $S$ and $T$ with
+no custodial symmetry at all, reaching $\MKK\sim 1$~TeV. Our scan implements the
+symmetry route; the geometric route is a comparison point, not a drop-in. See
+\code{stu\_review.tex}.)
+
+% ====================================================================
+\part{What is in OUR code}
+\label{part:code}
+% ====================================================================
+
+\emph{Reader here for the physics may skim Part~\ref{part:code} and jump to the
+subtleties in Part~\ref{part:subtle}; this part documents the exact code so the
+note doubles as an implementation reference.}
+
+\section{The model switch}
+\label{sec:switch}
+
+The entire custodial vs.\ minimal choice is a single string. Two modules define
+it identically:
+\begin{equation*}
+\code{SUPPORTED\_RS\_EW\_MODELS = ("minimal\_rs", "custodial\_rs\_plr")},
+\end{equation*}
+with default \code{"minimal\_rs"} in both \code{quarkConstraints/oblique\_stu.py}
+and \code{quarkConstraints/rs\_ew\_couplings.py}. The constraint builder
+\code{flavor\_catalog\_constraints/rs\_ew\_builder.py} threads it through every
+build site via the \code{ew\_model} argument of \code{build\_rs\_ew\_extras},
+co-editing the spectrum's \code{model\_label}. A crucial guard at the top of both
+the builder and \code{build\_rs\_ew\_couplings}:
+\begin{center}
+\code{include\_top\_partner\_loops=True requires ew\_model='custodial\_rs\_plr'}
+\end{center}
+raises otherwise --- you cannot ask for custodial loops in the minimal model. Per
+the orchestration ledger, when \code{ew\_model} is minimal the key is
+\emph{popped} from the scan payload so config hashes are unchanged: the
+minimal-model run is byte-identical to the pre-custodial code (ledger hash
+\code{45e21a07585f7489}), while the custodial payload carries a distinct hash
+(\code{f79cfe336ec9e07b}). The custodial build is genuinely a different code path,
+not a relabel.
+
+\section{The oblique side: the $T$ coefficient flip}
+\label{sec:codeT}
+
+In \code{oblique\_stu.py} the predicted shifts are the closed-form proxy
+\begin{align}
+\Delta S &= c_S\,\frac{\vev^2}{\MKK^2}, & c_S &= 30\ \ (\text{\code{EW001.yaml} anchor}),
+\label{eq:codeS}\\
+\Delta T_{\rm minimal} &= \frac{\pi L}{2\,\cwsq}\,\frac{\vev^2}{\MKK^2}, &
+\Delta T_{\rm custodial} &= -\frac{\pi}{4\,\cwsq\,L}\,\frac{\vev^2}{\MKK^2},
+\label{eq:codeT}\\
+\Delta U &= 0,
+\end{align}
+with module constants \code{DEFAULT\_HIGGS\_VEV\_GEV = 246.21965},
+\code{DEFAULT\_SIN2\_THETA\_W = 0.23122}, \code{DEFAULT\_RS\_VOLUME\_LOG = 35.0},
+and \code{CHI2\_2DOF\_95 = 5.991464547107979}. The two $\Delta T$ coefficient
+functions are \code{minimal\_rs\_t\_coefficient}
+($+\pi L/2\cwsq\approx 71.5$) and \code{custodial\_rs\_plr\_t\_coefficient}
+($-\pi/(4\cwsq L)\approx -0.029$), and \code{rs\_oblique\_t\_coefficient}
+dispatches between them on the \code{ew\_model} string. The likelihood
+\code{compare\_oblique\_st\_to\_fit} forms the correlated $\chi^2$ against the
+ellipse \eqref{eq:fit} and passes iff $\chi^2\le 5.991$. The constraint
+\code{EW001} is \code{Severity.HARD}: a point outside the $95\%$ ellipse is
+\emph{vetoed}. \textbf{But \code{EW001} is tagged \emph{proxy}, not rigorous} ---
+its prediction $(S_p,T_p)$ is a parametric estimate, not a per-point spectral
+computation (the docstring header reads \code{NEEDS-HUMAN-PHYSICS}).
+
+\section{The $Z\to b\bar b$ side: the $\PLR$ zeroing}
+\label{sec:codeZbb}
+
+The custodial $\PLR$ protection is implemented in \code{rs\_ew\_couplings.py} by
+\code{\_apply\_custodial\_rs\_plr\_proxy}, called when
+\code{ew\_model == "custodial\_rs\_plr"}. It \emph{zeroes the protected
+left-handed entry}: for each protected diagonal index $(i,j)$ in the down-left
+mask it sets \code{left[i,j] = 0}, and in particular \code{left[2,2] = 0} ---
+removing the \emph{whole} non-universal $Z\bar b_L b_L$ vertex (gauge piece plus
+Casagrande admixture together), exactly the ACDRP statement of \S\ref{sec:PLR}.
+The right-handed entry is zeroed by the elementary-$b_R$ strategy
+(\code{right[2,2] = 0} when \code{bR\_strategy == "elementary\_zero"}), so the
+default proxy keeps no residual $\dgR$. The representation metadata is the literal
+module constants
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Constant & Value \\
+\midrule
+\code{DEFAULT\_CUSTODIAL\_Q\_L\_REP}   & \code{"all\_gen\_Q\_L\_bidoublet\_(2,2)\_\{2/3\}"} \\
+\code{DEFAULT\_CUSTODIAL\_T\_R\_REP}   & \code{"t\_R\_singlet\_(1,1)\_\{2/3\}"} \\
+\code{DEFAULT\_CUSTODIAL\_B\_R\_REP}   & \code{"b\_R\_elementary"} \\
+\code{DEFAULT\_CUSTODIAL\_B\_R\_STRATEGY} & \code{"elementary\_zero"} \\
+\code{DEFAULT\_CUSTODIAL\_PROTECT\_SCOPE} & \code{"all\_gen\_down\_left\_diagonal"} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The protection scope is \emph{diagonal} down-left entries only: PR1 explicitly
+forbids targeting off-diagonal entries (\code{\_custodial\_protected\_down\_left\_mask}
+raises ``PR1 custodial protection can only target diagonal down-left entries''),
+so the off-diagonal $Z\to bs/bd/sd$ FCNC entries and the right-handed \code{T014}
+treatment are \emph{unchanged} by going custodial. There is an optional
+$\PLR$-breaking residual $\propto\kappa_b\,(1/L)\,(\text{minimal }[2,2])$, but it
+is off by default (\code{kappa\_b = 0.0}) --- the only switch that would leave a
+small $\dgL$ after protection.
+
+\section{The deferred one-loop hook}
+\label{sec:codeloop}
+
+The one-loop top-partner quantities live in \code{rs\_ew\_couplings.py} as the
+dataclass \code{RSCustodialTopPartnerLoopProxy}, with named fields including
+\code{top\_partner\_delta\_t\_singlet\_magnitude},
+\code{top\_partner\_delta\_g\_L\_b\_singlet}, and
+\code{top\_partner\_delta\_g\_L\_b\_bidoublet\_vertex}. The source is recorded as
+\code{TOP\_PARTNER\_LOOP\_SOURCE = "Carena-Ponton-Santiago-Wagner PhysRevD76
+035006, arXiv:hep-ph/0701055"}, and the formula set is
+\code{"leading\_singlet\_main\_text\_plus\_bidoublet\_vertex"}. The magnitudes are
+built from the top-partner masses $m_{\rm partner}=\rho\,\MKK$ and mixings
+$\propto m_t/F(c)$, with the singlet $\Delta T$ explicitly positive and the
+bidoublet vertex contribution explicitly negative --- matching
+\eqref{eq:loopsigns}. The honesty guards are notable:
+\begin{itemize}[leftmargin=1.4em]
+\item \code{include\_top\_partner\_loops = False} by default; the production
+custodial scan ran with the loop deferred.
+\item A \emph{negative} $\Delta T$ is never fabricated: passing
+\code{top\_partner\_loop\_t\_sign = -1} alone raises; a negative $\Delta T$
+requires an explicit \code{top\_partner\_loop\_delta\_t\_override} (ledger entry
+W8: ``NO fabricated negative $\Delta T$'').
+\item The proxy records its own omissions:
+\code{custodial\_omissions = \{SU2\_R\_tower, custodian\_spectrum,
+exact\_NC\_mixing, BKT\}}, all \code{False} (i.e.\ not included), so the
+metadata never claims more than it computes.
+\end{itemize}
+
+\section{What the paired million-point scan showed}
+\label{sec:scans}
+
+The decisive test was a paired 1M quark-only scan: a minimal baseline (job
+\code{20128400}) and a custodial run (job \code{20675555}) on the \emph{same}
+$r\times\MKK$ grid and seeds, paired draw-for-draw. The result, recomputed from
+raw JSONL in an output dual-review (50 cells $\times$ 2 runs, 0 mismatches):
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Minimal:} the rigorous floor is set by $Z\to b\bar b$
+(\code{T010}/\code{T011}), $\sim 25$--$30$~TeV physical $\MKK$
+($\approx 10$--$12$~TeV in $\LIR$ units). \code{T010} vetoes
+$694{,}123$ of the million draws.
+\item \textbf{Custodial:} the \emph{same} $694{,}123$ \code{T010} vetoes drop to
+\textbf{$0$} (custodial branch genuinely active on all $1{,}000{,}000$ rows). The
+\emph{rigorous} floor then falls to the $\Delta F=2$ flavour set
+(\code{K001}/\code{B003}/\code{B004}), $\sim 2$--$3$~TeV --- the bottleneck
+custodial cannot touch (\S\ref{sec:flavour}).
+\end{itemize}
+\textbf{The honesty point on the inclusive floor.} Because \code{EW001} is tagged
+\emph{proxy}, it does \emph{not} count toward the rigorous floor. So the headline
+``custodial $\to 2$--$3$~TeV'' is the \emph{rigorous-only} number. The proxy
+oblique-$S$ (with $c_S=30$) plus the collider \code{CR*} searches still bite at a
+higher scale, so the custodial \emph{inclusive} floor is $\sim 7$~TeV. The entire
+gap between $2$--$3$~TeV (rigorous) and $\sim 7$~TeV (inclusive) is the
+\emph{not-yet-rigorous} proxy $S$ and collider recasts --- which is the strongest
+practical argument for upgrading \code{EW001} from a parametric proxy to a
+spectral computation.
+
+% ====================================================================
+\part{Subtleties and the gap to ``rigorous''}
+\label{part:subtle}
+% ====================================================================
+
+\section{Rigorous, proxy, or partial?}
+\label{sec:tags}
+
+Honest tagging, per the code and the orchestration ledgers:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Piece & Status & Basis \\
+\midrule
+$T$ coefficient flip (\eqref{eq:Tcust}) & \textbf{proxy} & closed-form, not per-point spectral \\
+$\Delta S$ ($c_S=30$) & \textbf{proxy} & catalogue anchor, not spectral \\
+$Z\bar b_L b_L$ $\PLR$ zeroing & \textbf{proxy} & zeroes \code{left[2,2]}; no $\SUR$ tower \\
+\code{EW001} likelihood vs.\ fit & rigorous & correlated $\chi^2$ to PDG ellipse \\
+Minimal-RS tree $Z\to b\bar b$ & rigorous & exact $a(c)$ $+$ closed-form admixture \\
+Top-partner one-loop & deferred & coded hook, off in the scan \\
+Brane kinetic terms & deferred & not scanned \\
+\bottomrule
+\end{tabular}
+\end{center}
+The \emph{custodial relaxation} is a proxy on both sides: the oblique $T$ flip is
+a parametric coefficient, and the $\PLR$ protection zeroes the protected couplings
+rather than diagonalising the full custodial $\SUR$ tower and custodian spectrum.
+The \emph{experimental} side of \code{EW001} (the $\chi^2$ to the ellipse) and the
+\emph{minimal-RS} tree path are the genuinely rigorous ingredients; custodial is
+the relaxation layered on top, and it is the part to harden first.
+
+\section{The $\MKK$ convention: the factor of $\sim 2.45$}
+\label{sec:Mconvention}
+
+``$\MKK$'' is overloaded by the first Bessel root $x_1\approx 2.45$. The physical
+first KK gauge mass is $\MKK^{\rm phys} = x_1\LIR \approx 2.45\,\LIR$, while some
+literature oblique and $Z\to b\bar b$ formulas use $\MKK\equiv\LIR$. A bound
+quoted as ``$\sim 10$~TeV'' in $\LIR$ units is ``$\sim 25$~TeV'' physical --- a
+$2.45\times$ difference, and the single most common source of apparent
+factor-of-a-few discrepancies between our floors and a paper's. Whichever
+convention $c_S=30$ and the $T$ coefficients were calibrated in must match the
+$\MKK$ fed to \code{EW001}; this is flagged in both companion notes.
+
+\section{The $c_S=30$ number and the inclusive floor}
+\label{sec:cS}
+
+$c_S=30$ comes from the \code{EW001.yaml} ``warped-extra-dimension $S$
+coefficient'' anchor (value \code{30.0}); the same file records a one-sided
+$S\lesssim 0.18$ and an $\MKK\gtrsim 3.2$~TeV context value. An $\mathcal{O}(30)$
+coefficient is on the conservative/large side --- canonical tree-level RS
+estimates put $c_S$ closer to $2\pi$--$\mathcal{O}(10)$ depending on the gauge
+content and UV-brane kinetic terms. \textbf{This one number drives the custodial
+inclusive floor} ($\sim 7$~TeV, \S\ref{sec:scans}), so its provenance and
+$\MKK$ convention are exactly what to nail down before quoting a custodial
+$S$-bound externally.
+
+\section{Deferred pieces and known hazards}
+\label{sec:deferred}
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{The one-loop top-partner $\Delta T$ and $\dgL$} are coded but off in
+the scan. At $\MKK\sim$ few~TeV they are $\Delta T_{\rm loop}\sim\mathcal{O}(0.1)$
+and $\dgL|_{\rm loop}\sim 10^{-3}$ --- not negligible --- so a loop-on custodial
+rerun would shift the custodial floors somewhat (ledger ``next step'' item~1).
+\item \textbf{The full $\SUR$ tower / custodian spectrum} is not diagonalised; the
+custodial relaxation is a coupling-zeroing proxy
+(\code{custodial\_omissions} all \code{False}).
+\item \textbf{Brane kinetic terms} are set to zero. UV-brane gauge kinetic terms
+are free parameters that shift both $S$ and $T$ and could relax the bounds
+further; they are an explicit human model choice, not scanned.
+\item \textbf{Higher-derivative oblique parameters $W$, $Y$} are dropped. For
+light KK modes they are the same parametric size as $\hat S,\hat T$, so the
+projection onto $(S,T)$ with $U=0$ is itself an approximation (see
+\code{stu\_review.tex}).
+\item \textbf{The flavour/CP problem} is untouched by custodial and is the
+binding \emph{rigorous} constraint after custodial protection
+(\S\ref{sec:flavour}); it is handled by the $\Delta F=2$ constraints and the
+alignment discussion in \code{rs\_flavor\_anarchy\_review.tex}.
+\end{itemize}
+
+\section{Checklist: what ``fully rigorous custodial'' would require}
+\begin{enumerate}[leftmargin=1.8em]
+\item Replace the parametric $S,T$ proxy \eqref{eq:codeS}--\eqref{eq:codeT} with a
+per-point KK-gauge-sum from \code{rs\_ew\_spectrum} (the same machinery already
+feeding $Z\to b\bar b$), in one fixed, documented $\MKK$ convention.
+\item Replace the $\PLR$ coupling-zeroing with an explicit diagonalisation of the
+custodial fermion/gauge spectrum (the $\SUR$ tower and custodians).
+\item Turn on the one-loop top-partner $T$/$\dgL$ (the Carena et al.\ formulas are
+already coded) for the custodial mode, and use their correlation.
+\item Decide a brane-kinetic-term policy (zero, or scanned with a prior).
+\item Decide whether $A_b$/$\Afb$ stays context-only or becomes a fitted residual
+that an unprotected $b_R$ can use to address the $2.8\sigma$ anomaly.
+\item Keep the flavour bounds separate and rigorous --- custodial does not relax
+them.
+\end{enumerate}
+
+\begin{callout}{Five common confusions, defused.}
+\begin{itemize}[leftmargin=1.2em,nosep]
+\item[\textbf{A.}] \emph{``Custodial is one knob that fixes $T$ \textbf{and}
+$Zb_L$.''} No --- \emph{continuous} $\SUR$ protects $T$; the \emph{discrete} $\PLR$
+(needing the bidoublet, $T^3_L=T^3_R$) protects $Zb_L$. One group, two
+independent statements; a model can have one without the other.
+\item[\textbf{B.}] \emph{``$\PLR$ only protects the tiny $m_b^2$ admixture.''} No
+--- it protects the \emph{whole} non-universal $Zb_L$ vertex, including the leading
+gauge piece $\propto F(c_{Q_3})^2$. (We got this wrong once; the ledger records
+the correction.)
+\item[\textbf{C.}] \emph{``Custodial also protects $S$ and $b_R$/$A_b$.''} No ---
+$S$ is protected by neither $\SUR$ nor $\PLR$ and sets the floor; $b_R$ is left
+\emph{deliberately} unprotected so $\Afb$ stays a live observable.
+\item[\textbf{D.}] \emph{``Custodial fixes the flavour problem too.''} No ---
+$\epsilon_K$ and $\Delta F=2$ are untouched; they are addressed by RS-GIM /
+alignment, a separate mechanism, and become the binding rigorous constraint once
+custodial removes the electroweak ones.
+\item[\textbf{E.}] \emph{``$\MKK$ means one thing.''} It is overloaded by
+$x_1\approx 2.45$ --- physical first KK mass vs.\ $\LIR$ (\S\ref{sec:Mconvention}).
+\end{itemize}
+\end{callout}
+
+% ====================================================================
+\part*{Annotated reading guide}
+\addcontentsline{toc}{section}{Annotated reading guide}
+% ====================================================================
+
+\begin{description}[leftmargin=0em,style=nextline]
+\item[Agashe, Delgado, May, Sundrum, hep-ph/0308036.] \emph{The}
+custodial-$T$ paper. Introduces $\SUL\times\SUR\times U(1)_{B-L}$ in the RS bulk,
+the bidoublet Higgs, and the cancellation of the volume-log-enhanced $T$; shows
+$S$ is suppressed to dimension-8 and is the residual constraint, with the fit
+landing at $\gtrsim 3$~TeV. The source of \S\ref{sec:idea}--\S\ref{sec:Tcure} and
+the coefficient flip \eqref{eq:Tcust}.
+
+\item[Agashe, Contino, Da Rold, Pomarol, hep-ph/0605341.] \emph{The}
+custodial-$Zb_L$ paper. The discrete $\PLR$ parity, the $(2,2)_{2/3}$ bidoublet
+with $T^3_L=T^3_R$, and the two-constraint theorem ($\delta T^3_L+\delta T^3_R=0$
+from $U(1)_V$, $\delta T^3_L=\delta T^3_R$ from $\PLR$) forcing $\dgL\to0$
+(\S\ref{sec:PLR}). The protected object is the \emph{whole} non-universal vertex;
+$b_R$ is left unprotected, and a $\dgR\sim+0.02$ would address $\Afb$. Cited
+directly in our \code{T010}/\code{T011} and custodial metadata.
+
+\item[Carena, Pont\'on, Santiago, Wagner, hep-ph/0607106 \& hep-ph/0701055.]
+Light-KK custodial RS with explicit oblique fits; \textbf{0701055} has the
+one-loop top-partner $T$ and $\dgL$ (Eqs.~28--30, singlet-$+$ and
+bidoublet-vertex-$-$) that our deferred loop hook implements (\S\ref{sec:loop},
+\S\ref{sec:codeloop}). The ``$\sim 3$~TeV'' custodial floor traces to these.
+
+\item[Casagrande, Goertz, Haisch, Neubert, Pfoh, 1005.4315
+(\emph{JHEP 09(2010)014}).] The most explicit pedagogical worked custodial RS:
+mass-basis KK decomposition, closed-form $T$ and $Zb_L$-protection formulas, the
+explicit minimal-vs-custodial bound comparison. \textbf{The reference to mine
+when upgrading our proxy to a spectral computation.} Its flavour companion
+0807.4937 is the one our $Z\to b\bar b$ admixture is built from.
+
+\item[Our \code{stu\_review.tex}.] The oblique $S,T,U$ note. Read it for the
+formal Peskin--Takeuchi definitions, the $c_S=30$ proxy, the same $\MKK$-convention
+hazard, and the $W,Y$ caveat. This custodial note is the integrative ``why''
+sitting above it.
+
+\item[Our \code{z\_to\_bb\_review.tex}.] The $R_b$/$A_b$ note. Read it for the
+two-piece $\dgL$, the $\sim 23\times$ admixture dominance, the $694{,}123\to0$
+veto count, and the context-only $\Afb$ treatment --- the non-oblique companion to
+the $T$ story here.
+
+\item[Our \code{rs\_flavor\_anarchy\_review.tex}.] The $\Delta F=2$ /
+$\epsilon_K$ note. Read it for the problem custodial does \emph{not} solve
+(\S\ref{sec:flavour}) --- the flavour bottleneck that becomes binding once the
+electroweak constraints are custodially cured.
+
+\item[Repo files to read in order.] \code{quarkConstraints/oblique\_stu.py}
+(the $T$ coefficient flip and the likelihood);
+\code{quarkConstraints/rs\_ew\_couplings.py} (the
+\code{DEFAULT\_CUSTODIAL\_*} reps, \code{\_apply\_custodial\_rs\_plr\_proxy}, and
+the top-partner loop fields); \code{flavor\_catalog\_constraints/rs\_ew\_builder.py}
+(the \code{ew\_model} threading and the loop guard);
+\code{.orchestration/PHASE2\_PROGRAM\_LEDGER.md} (the W1/W7/W8/W9 + PR1/PR2
+entries and the paired-scan numbers); \code{docs/custodial\_problem\_statement.md}
+(the original six questions this implementation answers).
+\end{description}
+
+\bigskip
+\noindent\rule{\linewidth}{0.4pt}\\
+\footnotesize
+\emph{Internal note. Equations \eqref{eq:Tmin}, \eqref{eq:Tcust},
+\eqref{eq:codeS}--\eqref{eq:codeT} are the parametric forms our code uses; the
+constants ($c_S=30$, $L=35$, $\vev=246.21965$~GeV, $\swsq=0.23122$,
+$x_1\approx2.45$), the representation defaults
+(\code{...Q\_L\_bidoublet\_(2,2)\_\{2/3\}}, \code{t\_R\_singlet\_(1,1)\_\{2/3\}},
+\code{b\_R\_elementary}, \code{elementary\_zero},
+\code{all\_gen\_down\_left\_diagonal}), the model strings
+(\code{minimal\_rs}/\code{custodial\_rs\_plr}, hashes
+\code{45e21a07585f7489}/\code{f79cfe336ec9e07b}), and the scan results
+($694{,}123$ minimal \code{T010} vetoes $\to 0$ custodial; rigorous floor
+$\sim25$--$30\to2$--$3$~TeV; inclusive $\sim7$~TeV from proxy $S$) are as stored
+in \code{oblique\_stu.py}, \code{rs\_ew\_couplings.py}, \code{rs\_ew\_builder.py},
+\code{EW001.yaml}, and the orchestration ledgers. All ``rigorous vs proxy'' tags
+follow those ledgers. Cross-check before citing externally.}
+
+\end{document}

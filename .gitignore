@@ -95,3 +95,7 @@ derivations/rs_ew_gauge_kk_coupling.pdf
 scan_outputs/wq_quarkonly_1M_*/**/tile-*.jsonl
 scan_outputs/wq_quarkonly_1M_*/**/*.summary.json
 scan_outputs/wq_quarkonly_1M_*/**/run_summary.json
+
+# review_local: track LaTeX/markdown review sources only; keep compiled PDFs out
+# (latexmk junk .fls/.fdb_latexmk/.log/.aux/.out/.synctex.gz already ignored above)
+review_local/*.pdf
