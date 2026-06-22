@@ -449,9 +449,11 @@ def _kaon_m12_np_from_bridge_match(
     fk2_mk = _KAON_F_K**2 * _KAON_M_K
     m_ratio_sq = (_KAON_M_K / (_KAON_M_S_2GEV + _KAON_M_D_2GEV)) ** 2
 
-    o1_vll = (2.0 / 3.0) * fk2_mk * _KAON_B_1
-    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * _KAON_B_4
-    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * _KAON_B_5
+    # GGMS Eq. (8) M12-ready normalization (PLAN §2.2): singlet O4 -> LARGE
+    # (R/4 + 1/24), crossed O5 -> SMALL (R/12 + 1/8), O1 -> (1/3).
+    o1_vll = (1.0 / 3.0) * fk2_mk * _KAON_B_1
+    o4_lr = (m_ratio_sq * (1.0 / 4.0) + 1.0 / 24.0) * fk2_mk * _KAON_B_4
+    o5_lr = (m_ratio_sq * (1.0 / 12.0) + 1.0 / 8.0) * fk2_mk * _KAON_B_5
 
     return (
         c1_vll * o1_vll
@@ -479,9 +481,11 @@ def _evaluate_epsilon_k_from_bridge(
 
     fk2_mk = _KAON_F_K**2 * _KAON_M_K
     m_ratio_sq = (_KAON_M_K / (_KAON_M_S_2GEV + _KAON_M_D_2GEV)) ** 2
-    o1_vll = (2.0 / 3.0) * fk2_mk * _KAON_B_1
-    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * _KAON_B_4
-    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * _KAON_B_5
+    # GGMS Eq. (8) M12-ready normalization (PLAN §2.2): singlet O4 -> LARGE,
+    # crossed O5 -> SMALL, O1 -> (1/3).
+    o1_vll = (1.0 / 3.0) * fk2_mk * _KAON_B_1
+    o4_lr = (m_ratio_sq * (1.0 / 4.0) + 1.0 / 24.0) * fk2_mk * _KAON_B_4
+    o5_lr = (m_ratio_sq * (1.0 / 12.0) + 1.0 / 8.0) * fk2_mk * _KAON_B_5
     prefactor = abs(_KAON_KAPPA_EPSILON / (math.sqrt(2.0) * _KAON_DELTA_M_K))
 
     operator_sizes = {
@@ -513,9 +517,11 @@ def _evaluate_delta_mk_from_bridge(
 
     fk2_mk = _KAON_F_K**2 * _KAON_M_K
     m_ratio_sq = (_KAON_M_K / (_KAON_M_S_2GEV + _KAON_M_D_2GEV)) ** 2
-    o1_vll = (2.0 / 3.0) * fk2_mk * _KAON_B_1
-    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * _KAON_B_4
-    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * _KAON_B_5
+    # GGMS Eq. (8) M12-ready normalization (PLAN §2.2): singlet O4 -> LARGE,
+    # crossed O5 -> SMALL, O1 -> (1/3).
+    o1_vll = (1.0 / 3.0) * fk2_mk * _KAON_B_1
+    o4_lr = (m_ratio_sq * (1.0 / 4.0) + 1.0 / 24.0) * fk2_mk * _KAON_B_4
+    o5_lr = (m_ratio_sq * (1.0 / 12.0) + 1.0 / 8.0) * fk2_mk * _KAON_B_5
 
     operator_sizes = {
         "C1_VLL": float(abs(c1_vll * o1_vll)),
@@ -575,9 +581,12 @@ def _meson_matrix_elements_inline(
     """Compute (me_vll, me_lr4, me_lr5) for a generic pseudoscalar meson."""
     fp2_mp = f_P**2 * m_P
     r_chi = (m_P / (m_q1 + m_q2)) ** 2
-    me_vll = (2.0 / 3.0) * fp2_mp * B_1
-    me_lr4 = (r_chi / 6.0 + 0.25) * fp2_mp * B_4
-    me_lr5 = (r_chi / 2.0 + 1.0 / 12.0) * fp2_mp * B_5
+    # GGMS Eq. (8) M12-ready normalization (PLAN §2.2): singlet O4 -> LARGE
+    # (R/4 + 1/24), crossed O5 -> SMALL (R/12 + 1/8), O1 -> (1/3).  Must stay
+    # byte-identical to ``deltaf2._meson_matrix_elements`` (all 6 ME sites).
+    me_vll = (1.0 / 3.0) * fp2_mp * B_1
+    me_lr4 = (r_chi / 4.0 + 1.0 / 24.0) * fp2_mp * B_4
+    me_lr5 = (r_chi / 12.0 + 1.0 / 8.0) * fp2_mp * B_5
     return me_vll, me_lr4, me_lr5
 
 

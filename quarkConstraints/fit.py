@@ -231,6 +231,123 @@ def _ordered_dirac_svd(matrix: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.n
     return U_l[:, idx], singular_values[idx], U_r[:, idx]
 
 
+# Phase-floor below which a CKM entry is treated as a vanishing pivot and the
+# branch-free phase extraction falls back to the canonical (+1) SVD phase.
+# This guards against routing a near-zero entry through a complex argument and
+# must be a documented, fixed value (B2 determinism recipe, PLAN §1.2).
+_CKM_PHASE_TOL = 1.0e-300
+
+
+def _branch_free_unit_phase(z: complex) -> complex:
+    """Return ``z/|z|`` (a unit-modulus complex phase) with a documented,
+    signed-zero-safe fallback.
+
+    The raw SVD factors are defined only up to per-column phases, so the ckm
+    matrix ``V = U_L_u^dagger U_L_d`` carries an arbitrary, machine-dependent
+    column-phase convention.  To pin a deterministic convention we extract the
+    phase of a target entry ``z`` as the complex unit ``z/|z|`` rather than
+    routing ``z`` through ``np.angle`` -- the latter is a signed-zero branch
+    hazard (``np.angle(-0.0+0j) = pi``, not 0).  If ``|z|`` is at or below the
+    documented floor ``_CKM_PHASE_TOL`` the entry is a vanishing pivot and we
+    take the canonical ``+1`` phase (leave the column phase as the SVD output)
+    rather than dividing by ~0 or raising in the hot scan loop.  Raising would
+    abort scan draws; a documented canonical fallback keeps the 1M-row paired
+    scan deterministic.
+    """
+    mag = abs(z)
+    if mag > _CKM_PHASE_TOL:
+        return complex(z) / mag
+    return 1.0 + 0.0j
+
+
+def _real_sign(x: float) -> float:
+    """Signed-zero-safe real-positivity sign.
+
+    Returns ``+1.0`` whenever ``x.real >= 0.0`` (so both ``+0.0`` and ``-0.0``
+    map to ``+1.0``, removing the signed-zero branch) and ``-1.0`` otherwise.
+    Used to pin a CKM entry that the PDG convention requires real and >= 0.
+    """
+    return 1.0 if float(x) >= 0.0 else -1.0
+
+
+def _rephase_to_pdg_convention(
+    U_L_u: np.ndarray,
+    U_R_u: np.ndarray,
+    U_L_d: np.ndarray,
+    U_R_d: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Rephase the Dirac SVD factors into the PDG standard CKM convention.
+
+    The numpy SVD factors are unique only up to per-column phases
+    ``U_L -> U_L P``, ``U_R -> U_R P`` (``P`` diagonal unitary).  This freedom
+    leaves masses, ``|CKM|`` and the Jarlskog invariant unchanged but rotates
+    the mass-basis coupling structure ``D_ij -> e^{i(phi_j - phi_i)} D_ij`` and
+    hence ``Im(M12)`` (the epsilon_K input).  We remove the freedom by pinning a
+    single deterministic convention: the PDG standard parameterization in which
+    ``V_ud, V_us, V_cb, V_tb`` are real and >= 0 with the single physical phase
+    carried by ``V_ub`` (PLAN §1.2, approach A).
+
+    Rephasing acts as ``V'_ij = conj(pa_i) V_ij pb_j`` for diagonal unitary
+    up-/down-phases ``P_u = diag(pa)``, ``P_d = diag(pb)``.  Making an entry
+    real >= 0 fixes one relative phase; with the global anchor ``pa_0 = 1`` the
+    six column phases carry five physical degrees of freedom.  We pin FIVE
+    entries real >= 0 -- ``V_ud, V_us, V_cb, V_tb`` (the four PDG anchors) plus
+    ``V_ts`` (the fifth condition needed to remove ALL residual rephasing
+    freedom) -- which leaves the single physical CKM phase in ``V_ub``.  All
+    phase arithmetic uses branch-free unit-modulus complex factors
+    (``z/|z|``), never ``np.angle`` (PLAN §1.2 determinism recipe).
+
+    Solve order (each line fixes one entry real, expressed in unit phases
+    ``g_ij = phase(V_ij)``):
+        pa_0 = 1                       (global anchor, arg(V_ud) = 0)
+        pb_0 = conj(g_00)              (V_ud real)
+        pb_1 = conj(g_01)              (V_us real)
+        pa_2 = g_21 * pb_1             (V_ts real)
+        pb_2 = pa_2 * conj(g_22)       (V_tb real)
+        pa_1 = g_12 * pb_2             (V_cb real)
+
+    Rephasing a Dirac field multiplies BOTH its L and R rotation columns by the
+    same phase, so ``U_L^dagger M U_R = diag(s)`` (the masses) is preserved.
+    Applied to an already-canonical set the transformation is the identity, so
+    it is idempotent and bit-stable on re-evaluation.
+    """
+    V = U_L_u.conj().T @ U_L_d
+
+    g00 = _branch_free_unit_phase(V[0, 0])
+    g01 = _branch_free_unit_phase(V[0, 1])
+    g12 = _branch_free_unit_phase(V[1, 2])
+    g21 = _branch_free_unit_phase(V[2, 1])
+    g22 = _branch_free_unit_phase(V[2, 2])
+
+    pa = np.ones(3, dtype=np.complex128)
+    pb = np.ones(3, dtype=np.complex128)
+    pa[0] = 1.0 + 0.0j
+    pb[0] = g00.conjugate()
+    pb[1] = g01.conjugate()
+    pa[2] = g21 * pb[1]
+    pb[2] = pa[2] * g22.conjugate()
+    pa[1] = g12 * pb[2]
+
+    # Apply the relative phases, then signed-zero-safe sign pins so each of the
+    # five anchored entries is real >= 0 (not merely real).  V'_ij = conj(pa_i)
+    # V_ij pb_j.
+    V_rot = np.diag(pa).conj() @ V @ np.diag(pb)
+    pb[0] *= _real_sign(V_rot[0, 0].real)  # V_ud >= 0
+    pb[1] *= _real_sign(V_rot[0, 1].real)  # V_us >= 0
+    pa[2] *= _real_sign(V_rot[2, 1].real)  # V_ts >= 0 (5th, full-fixing)
+    pb[2] *= _real_sign(V_rot[2, 2].real)  # V_tb >= 0
+    pa[1] *= _real_sign(V_rot[1, 2].real)  # V_cb >= 0
+
+    # Apply the SAME phases to both chiralities so the masses are untouched.
+    P_u = np.diag(pa)
+    P_d = np.diag(pb)
+    U_L_u_new = U_L_u @ P_u
+    U_R_u_new = U_R_u @ P_u
+    U_L_d_new = U_L_d @ P_d
+    U_R_d_new = U_R_d @ P_d
+    return U_L_u_new, U_R_u_new, U_L_d_new, U_R_d_new
+
+
 def build_mass_matrices(bulk_state: QuarkBulkState) -> tuple[np.ndarray, np.ndarray]:
     """Construct the full quark mass matrices in the bulk-mass basis."""
     F_Q = np.diag(bulk_state.F_Q)
@@ -246,6 +363,13 @@ def mass_matrix_observables(M_u: np.ndarray, M_d: np.ndarray) -> Dict[str, np.nd
     """Extract masses and CKM from the two Dirac mass matrices."""
     U_L_u, masses_up, U_R_u = _ordered_dirac_svd(M_u)
     U_L_d, masses_down, U_R_d = _ordered_dirac_svd(M_d)
+    # Remove the raw-SVD per-column phase freedom by rephasing into the PDG
+    # standard CKM convention.  Without this the ckm phase (and hence Im(M12),
+    # the epsilon_K input) is convention-dependent; |CKM|, masses and the
+    # Jarlskog invariant are unaffected (B2 fix, PLAN §1.2).
+    U_L_u, U_R_u, U_L_d, U_R_d = _rephase_to_pdg_convention(
+        U_L_u, U_R_u, U_L_d, U_R_d
+    )
     ckm = U_L_u.conj().T @ U_L_d
     return {
         "U_L_u": U_L_u,

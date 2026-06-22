@@ -199,6 +199,62 @@ class TestChiralEnhancement:
 
 
 # ===================================================================
+# 2b. B3 literature-anchored ABSOLUTE pins (GGMS hep-ph/9604387 Eq. 8)
+# ===================================================================
+
+class TestB3GGMSMatrixElementCoefficients:
+    """Literature-anchored absolute pins for the corrected Delta-F=2 matrix
+    elements (M7).  Expected values are built from the GGMS Eq. (8) closed-form
+    RATIONALS in-test -- NEVER read off the production ``_kaon_matrix_elements``
+    output -- so these are an independent oracle, not a self-pin.  In the
+    M12-ready normalization the colour-SINGLET O4 carries the LARGE coefficient
+    (R/4 + 1/24), the colour-CROSSED O5 the SMALL (R/12 + 1/8), and O1 is
+    (1/3).  The previous code had O4/O5 swapped and each x2 too large.
+    """
+
+    def _R(self) -> float:
+        return (M_K / (M_S_2GEV + M_D_2GEV)) ** 2
+
+    def test_o4_o5_coefficient_ratio_matches_ggms_closed_form_rational(self):
+        R = self._R()
+        # GGMS Eq. (8) closed-form rationals, written literally (the oracle):
+        coeff_o4 = R / 4.0 + 1.0 / 24.0   # colour-SINGLET, LARGE
+        coeff_o5 = R / 12.0 + 1.0 / 8.0   # colour-CROSSED, SMALL
+        expected_ratio = coeff_o4 / coeff_o5
+        # ~2.85 at R ~ 25.7 (PLAN §2.3 / §6.1).
+        assert expected_ratio == pytest.approx(2.853, rel=2.0e-3)
+        # Production matrix elements, with the bag factors divided out, must
+        # reproduce the same coefficient ratio.
+        me = _kaon_matrix_elements()
+        produced_ratio = (me["O4_LR"] / B_4_K) / (me["O5_LR"] / B_5_K)
+        assert produced_ratio == pytest.approx(expected_ratio, rel=1.0e-12)
+
+    def test_singlet_o4_carries_the_large_coefficient_at_large_R(self):
+        # Guards against a re-swap: at R >> 1 the singlet coefficient dominates.
+        R = self._R()
+        assert R > 1.0
+        coeff_o4 = R / 4.0 + 1.0 / 24.0
+        coeff_o5 = R / 12.0 + 1.0 / 8.0
+        assert coeff_o4 > coeff_o5
+        me = _kaon_matrix_elements()
+        assert (me["O4_LR"] / B_4_K) > (me["O5_LR"] / B_5_K)
+
+    def test_o1_vll_is_one_third_normalization(self):
+        # The M12-ready O1 is (1/3) f^2 m B1 -- half the legacy (2/3).  Required
+        # for the SM box to reproduce the textbook epsilon_K master formula
+        # (PLAN §2.2 SM-box anchor); this is the pin that catches the missing
+        # 1/(2 m_M).
+        expected_o1 = (1.0 / 3.0) * F_K**2 * M_K * B_1_K
+        me = _kaon_matrix_elements()
+        assert me["O1_VLL"] == pytest.approx(expected_o1, rel=1.0e-12)
+
+    def test_absolute_o1_matrix_element_matches_literature_number(self):
+        # Absolute M12-ready O1 ME ~ 2.21e-3 GeV^3 (PLAN §6.1, slice-4 M-2).
+        me = _kaon_matrix_elements()
+        assert me["O1_VLL"] == pytest.approx(2.213e-3, rel=5.0e-3)
+
+
+# ===================================================================
 # 3. CP structure
 # ===================================================================
 

@@ -339,9 +339,12 @@ def test_numbers_match_direct_running_complex_m12_phase_evaluator():
         magnitude.abs_m12_np
     )
     assert abs(m12_np) == pytest.approx(magnitude.abs_m12_np)
-    assert result.predicted == pytest.approx(0.719946777000659)
-    assert result.ratio == pytest.approx(0.5612204047521414)
-    assert result.diagnostics["phi_d_np_deg"] == pytest.approx(0.950163068823887)
+    # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
+    assert result.predicted == pytest.approx(0.7141677847043207)
+    # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
+    assert result.ratio == pytest.approx(0.23515615344786672)
+    # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
+    assert result.diagnostics["phi_d_np_deg"] == pytest.approx(0.4751141998920815)
 
 
 @pytest.mark.parametrize(
@@ -362,9 +365,13 @@ def test_safe_point_passes_and_large_np_point_fails(
     if expected_pass:
         assert result.ratio <= 1.0
     else:
-        assert result.ratio > 10.0
+        # bound relaxed 10.0 -> 1.0 after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2
+        # phase: the large-NP point still fails the constraint (passes=False) but
+        # its ratio dropped to ~7.16.
+        assert result.ratio > 1.0
+        # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
         assert result.diagnostics["phi_d_np_deg"] == pytest.approx(
-            22.52011154516739
+            11.712217215803447
         )
 
 

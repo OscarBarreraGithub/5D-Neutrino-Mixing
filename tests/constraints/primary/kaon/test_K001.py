@@ -194,14 +194,22 @@ def test_reference_couplings_show_qcd_running_enhancement():
         epsilon_k_np_budget_override=central_budget,
     )
 
-    assert unrun.ratio_to_budget == pytest.approx(0.26555011996248595)
-    assert run.ratio_to_budget == pytest.approx(2.844741580402456)
+    # Re-pinned after B3 (GGMS Eq. 8 O4/O5 un-swap + 1/(2 m_M)); fixed _sd_couplings
+    # (no SVD pipeline) so B2 does not enter.  The run (post-RG, physical) ratio
+    # moves ~x1.73 as expected; the unrun ratio moves more (the swap annihilated
+    # the leading chiral term pre-running, PLAN §0.2), both legitimate snapshots
+    # downstream of the test_epsilon_k_physics literature-anchored O4/O5 pins.
+    assert unrun.ratio_to_budget == pytest.approx(1.4067965606347435)
+    assert run.ratio_to_budget == pytest.approx(4.932284791072436)
 
 
 @pytest.mark.parametrize(
     ("couplings", "expected_pass"),
     [
-        (_sd_couplings(left=1.0e-5 + 0.5e-5j, right=1.0e-5 + 0.2e-5j), True),
+        # expected_pass re-pinned True->False after B3 (GGMS O4/O5 un-swap +
+        # 1/(2 m_M)): the corrected kaon LR contribution is ~x1.7 larger, so this
+        # point now crosses the epsilon_K veto (ratio ~1.09 > 1).
+        (_sd_couplings(left=1.0e-5 + 0.5e-5j, right=1.0e-5 + 0.2e-5j), False),
         (_sd_couplings(left=1.0e-4 + 0.5e-4j, right=1.0e-4 + 0.2e-4j), False),
     ],
 )
@@ -222,7 +230,10 @@ def test_pass_fail_and_numbers_match_audited_evaluate_epsilon_k(
     if expected_pass:
         assert result.ratio <= 1.0
     else:
-        assert result.ratio > 10.0
+        # bound relaxed 10.0 -> 1.0 after B3 (GGMS O4/O5 un-swap + 1/(2 m_M)):
+        # the smaller couplings0 point now crosses the veto at ratio ~1.09
+        # (couplings1 remains ~108), so both points exceed the budget.
+        assert result.ratio > 1.0
 
 
 def test_evaluate_is_pure_and_deterministic():

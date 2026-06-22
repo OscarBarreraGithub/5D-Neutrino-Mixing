@@ -295,9 +295,13 @@ def test_reference_couplings_use_uncertainty_budget_not_core_legacy_budget():
     audited = _audited_bs_with_running(couplings)
 
     assert audited.budget == pytest.approx(5.844e-12)
+    # budget literals (5.844e-12, 2.635...e-13) are exp/SM-derived anchor budgets
+    # -- NOT <O>-dependent, so they do NOT move under B3 (PLAN §6.4).
     assert result.budget == pytest.approx(2.635167648629676e-13)
-    assert result.predicted == pytest.approx(4.7603855250862205e-14)
-    assert result.ratio == pytest.approx(0.18064829869787175)
+    # predicted / ratio re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2 m_M)); the
+    # B_s system moves only slightly (predicted x~0.987), as expected.
+    assert result.predicted == pytest.approx(4.696762557259569e-14)
+    assert result.ratio == pytest.approx(0.1782339184264785)
     assert result.predicted == pytest.approx(audited.abs_m12_np)
     assert result.diagnostics["core_legacy_m12_budget"] == pytest.approx(
         audited.budget

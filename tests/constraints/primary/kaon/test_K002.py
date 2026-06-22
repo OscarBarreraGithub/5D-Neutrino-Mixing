@@ -166,9 +166,13 @@ def test_reference_couplings_show_qcd_running_enhancement():
     unrun = evaluate_delta_mk(wilsons)
     run = evaluate_delta_mk_with_running(wilsons, mu_had=2.0)
 
-    assert unrun.ratio_to_exp == pytest.approx(0.008753373215325102)
-    assert run.ratio_to_exp == pytest.approx(0.09343760390731619)
-    assert run.ratio_to_exp > 10.0 * unrun.ratio_to_exp
+    # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
+    assert unrun.ratio_to_exp == pytest.approx(0.04621191599919545)
+    # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
+    assert run.ratio_to_exp == pytest.approx(0.16197440615774486)
+    # enhancement factor relaxed 10x -> 3x after B3: un-swapping O4/O5 lifts the
+    # unrun ratio more than the run ratio, so the running enhancement is now ~3.5x.
+    assert run.ratio_to_exp > 3.0 * unrun.ratio_to_exp
 
 
 @pytest.mark.parametrize(
@@ -198,7 +202,10 @@ def test_pass_fail_and_numbers_match_audited_evaluate_delta_mk(
         pytest.approx(audited.ratio_to_exp)
     )
     if expected_pass:
-        assert result.ratio < 0.1
+        # bound relaxed 0.1 -> 0.2 after B3 (GGMS O4/O5 un-swap + 1/(2m_M)):
+        # the point still passes the constraint (passes=True) but its ratio
+        # rose to ~0.162; couplings1 remains a clear fail at ~16.
+        assert result.ratio < 0.2
     else:
         assert result.ratio > 9.0
 

@@ -41,12 +41,16 @@ from quarkConstraints.fit import (
     QUARK_FIT_CANONICAL_VECTOR_SIZE,
     QuarkFitSeed,
     QuarkTargets,
+    _ordered_dirac_svd,
+    _rephase_to_pdg_convention,
     ckm_observables,
     evaluate_quark_fit,
     decode_quark_fit_canonical_vector,
     encode_quark_fit_canonical_vector,
     fit_quark_sector,
     fit_residuals,
+    jarlskog_invariant,
+    mass_matrix_observables,
 )
 from quarkConstraints.model import RotationParameters, build_mfv_point_from_singular_values
 
@@ -625,3 +629,96 @@ def test_target_ckm_observables_match_pdg_2024():
     assert jarlskog == pytest.approx(3.1e-5, abs=2e-6), f"J = {jarlskog}"
     # Sign of J must be positive (PDG convention; SM CP phase delta > 0).
     assert jarlskog > 0
+
+
+# ===================================================================
+# B2 — PDG SVD rephasing: convention-stability, determinism, invariants
+# ===================================================================
+
+def _b2_mass_matrix_pair(seed: int):
+    """A hierarchical complex Dirac mass-matrix pair (up, down)."""
+    rng = np.random.default_rng(seed)
+
+    def _rand(scales):
+        a = rng.standard_normal((3, 3)) + 1j * rng.standard_normal((3, 3))
+        return a * np.array(scales)[None, :]
+
+    return _rand([1.0e-3, 0.5, 170.0]), _rand([5.0e-3, 0.1, 4.2])
+
+
+def test_b2_rephasing_makes_epsilon_k_inputs_convention_stable():
+    """The audit's x6 demonstration, inverted into a regression guard: an
+    arbitrary PHYSICAL column rephasing of the SVD factors (the raw-SVD gauge
+    freedom) must leave the rephased CKM -- and hence Im(M12)/epsilon_K -- bit-
+    stable to machine precision."""
+    M_u, M_d = _b2_mass_matrix_pair(11)
+    U_Lu, _, U_Ru = _ordered_dirac_svd(M_u)
+    U_Ld, _, U_Rd = _ordered_dirac_svd(M_d)
+
+    a, _, c, _ = _rephase_to_pdg_convention(U_Lu, U_Ru, U_Ld, U_Rd)
+    V_base = a.conj().T @ c
+
+    rng = np.random.default_rng(99)
+    P_u = np.diag(np.exp(1j * rng.uniform(0.0, 2.0 * np.pi, 3)))
+    P_d = np.diag(np.exp(1j * rng.uniform(0.0, 2.0 * np.pi, 3)))
+    a2, _, c2, _ = _rephase_to_pdg_convention(
+        U_Lu @ P_u, U_Ru @ P_u, U_Ld @ P_d, U_Rd @ P_d
+    )
+    V_phased = a2.conj().T @ c2
+
+    # Im(M12) ~ Im of products of CKM entries: invariant CKM => invariant ImM12.
+    np.testing.assert_allclose(V_phased, V_base, atol=1.0e-12, rtol=0.0)
+
+
+def test_b2_rephasing_is_deterministic_bit_identical():
+    """Paired-scan guard (the (r, mkk, draw_seed) join): the SAME input through
+    the rephasing must give a BIT-identical CKM twice (==, not just rtol), and
+    a random physical pre-rephasing must reproduce it bit-identically -- catching
+    any np.angle/signed-zero branch nondeterminism."""
+    M_u, M_d = _b2_mass_matrix_pair(7)
+    U_Lu, _, U_Ru = _ordered_dirac_svd(M_u)
+    U_Ld, _, U_Rd = _ordered_dirac_svd(M_d)
+
+    a1, _, c1, _ = _rephase_to_pdg_convention(U_Lu, U_Ru, U_Ld, U_Rd)
+    a2, _, c2, _ = _rephase_to_pdg_convention(U_Lu, U_Ru, U_Ld, U_Rd)
+    assert np.array_equal(a1.conj().T @ c1, a2.conj().T @ c2)
+
+
+def test_b2_pdg_convention_entries_real_nonnegative():
+    """After the fix, V_ud, V_us, V_cb, V_tb are real and >= 0; the single
+    physical phase is carried by V_ub (PLAN §1.3)."""
+    M_u, M_d = _b2_mass_matrix_pair(3)
+    obs = mass_matrix_observables(M_u, M_d)
+    V = obs["ckm"]
+    for entry in (V[0, 0], V[0, 1], V[1, 2], V[2, 2]):
+        assert abs(entry.imag) < 1.0e-12
+        assert entry.real >= 0.0
+    # V_ub carries a nonzero physical phase (not pinned real).
+    assert abs(V[0, 2]) > 0.0
+
+
+def test_b2_rephasing_preserves_masses_ckm_magnitudes_and_jarlskog():
+    """Invariants pin: masses, |CKM| element-by-element, and the Jarlskog
+    invariant are unchanged by the rephasing (rtol <= 1e-12)."""
+    M_u, M_d = _b2_mass_matrix_pair(5)
+    U_Lu, s_u, U_Ru = _ordered_dirac_svd(M_u)
+    U_Ld, s_d, U_Rd = _ordered_dirac_svd(M_d)
+    V_raw = U_Lu.conj().T @ U_Ld
+
+    obs = mass_matrix_observables(M_u, M_d)
+    np.testing.assert_allclose(obs["masses_up"], s_u, rtol=1.0e-12)
+    np.testing.assert_allclose(obs["masses_down"], s_d, rtol=1.0e-12)
+    np.testing.assert_allclose(np.abs(obs["ckm"]), np.abs(V_raw), rtol=1.0e-12)
+    assert jarlskog_invariant(obs["ckm"]) == pytest.approx(
+        jarlskog_invariant(V_raw), rel=1.0e-10
+    )
+
+
+def test_b2_rephasing_is_idempotent():
+    """Applying the rephasing to an already-canonical set is a no-op."""
+    M_u, M_d = _b2_mass_matrix_pair(13)
+    obs = mass_matrix_observables(M_u, M_d)
+    a, b, c, d = _rephase_to_pdg_convention(
+        obs["U_L_u"], obs["U_R_u"], obs["U_L_d"], obs["U_R_d"]
+    )
+    np.testing.assert_allclose(a.conj().T @ c, obs["ckm"], atol=1.0e-13, rtol=0.0)

@@ -281,8 +281,10 @@ def test_pass_fail_and_numbers_match_running_evaluator_amplitude(
         audited.ratio_to_budget
     )
     if expected_pass:
-        assert result.predicted == pytest.approx(2.1778918692437868e-14)
-        assert result.ratio == pytest.approx(0.6462779345898491)
+        # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
+        assert result.predicted == pytest.approx(2.170088427952279e-14)
+        # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
+        assert result.ratio == pytest.approx(0.6439623045111523)
         assert result.ratio <= 1.0
     else:
         assert result.ratio > 10.0

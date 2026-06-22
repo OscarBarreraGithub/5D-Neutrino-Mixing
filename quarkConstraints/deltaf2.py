@@ -717,9 +717,15 @@ def _kaon_matrix_elements() -> dict[str, float]:
     fk2_mk = F_K**2 * M_K
     m_ratio_sq = (M_K / (M_S_2GEV + M_D_2GEV)) ** 2
 
-    o1_vll = (2.0 / 3.0) * fk2_mk * B_1_K
-    o4_lr = (m_ratio_sq * (1.0 / 6.0) + 1.0 / 4.0) * fk2_mk * B_4_K_3GEV
-    o5_lr = (m_ratio_sq * (1.0 / 2.0) + 1.0 / 12.0) * fk2_mk * B_5_K_3GEV
+    # GGMS (hep-ph/9604387) Eq. (8), M12-ready single-power-of-m_M normalization
+    # (B=1).  The colour-SINGLET O4 carries the LARGE chiral coefficient
+    # (R/4 + 1/24); the colour-CROSSED O5 carries the SMALL (R/12 + 1/8).  The
+    # previous code had these swapped AND each x2 too large (missing 1/(2 m_M));
+    # see PLAN §2.2.  O1 is (1/3), half the legacy (2/3), required so the SM box
+    # reproduces the textbook epsilon_K master formula (PLAN §2.2 SM-box anchor).
+    o1_vll = (1.0 / 3.0) * fk2_mk * B_1_K
+    o4_lr = (m_ratio_sq * (1.0 / 4.0) + 1.0 / 24.0) * fk2_mk * B_4_K_3GEV
+    o5_lr = (m_ratio_sq * (1.0 / 12.0) + 1.0 / 8.0) * fk2_mk * B_5_K_3GEV
 
     return {
         "O1_VLL": o1_vll,
@@ -905,9 +911,12 @@ def _meson_matrix_elements(
     """
     fp2_mp = f_P**2 * m_P
     r_chi = (m_P / (m_q1 + m_q2)) ** 2
-    me_vll = (2.0 / 3.0) * fp2_mp * B_1
-    me_lr4 = (r_chi / 6.0 + 0.25) * fp2_mp * B_4
-    me_lr5 = (r_chi / 2.0 + 1.0 / 12.0) * fp2_mp * B_5
+    # GGMS Eq. (8) M12-ready normalization; colour-singlet O4 gets the LARGE
+    # coefficient, colour-crossed O5 the SMALL one, O1 is (1/3).  See PLAN §2.2
+    # and ``_kaon_matrix_elements``; all six ME sites must stay byte-identical.
+    me_vll = (1.0 / 3.0) * fp2_mp * B_1
+    me_lr4 = (r_chi / 4.0 + 1.0 / 24.0) * fp2_mp * B_4
+    me_lr5 = (r_chi / 12.0 + 1.0 / 8.0) * fp2_mp * B_5
     return me_vll, me_lr4, me_lr5
 
 
