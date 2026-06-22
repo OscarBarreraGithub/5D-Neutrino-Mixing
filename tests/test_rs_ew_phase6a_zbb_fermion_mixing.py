@@ -132,32 +132,111 @@ def _point(
     )
 
 
-def _manual_B(c: float, F: float) -> float:
-    return (1.0 / (1.0 - 2.0 * c)) * (
-        1.0 / (F * F) - 1.0 + (F * F) / (3.0 + 2.0 * c)
+def _cghnp_diagonal_bracket(c_repo: float, f_repo: float) -> float:
+    """CGHNP (0807.4937) Z->bb ZMA DIAGONAL bracket, computed independently in
+    the test from the convention dictionary (c_CGHNP = -c_repo,
+    F^2_CGHNP = 2 f_IR,repo^2) -- NOT a byte-copy of the production line.
+
+    Starting from the CGHNP bracket in its OWN variables,
+        B(c_C, F_C) = 1/(1 - 2 c_C) * ( 1/F_C^2 - 1 + F_C^2/(3 + 2 c_C) ),
+    substitute c_C = -c_repo and F_C^2 = 2 f_repo^2:
+        1/(1 - 2(-c)) = 1/(1 + 2c),  1/F_C^2 = 1/(2 f^2),  F_C^2 = 2 f^2,
+        3 + 2 c_C = 3 - 2c.
+    => B(c, f) = 1/(1 + 2c) * ( 1/(2 f^2) - 1 + 2 f^2/(3 - 2c) ).
+
+    This is the literature-anchored check (M7 refinement 4): the OLD _manual_B
+    was byte-identical to the buggy production bracket, which is exactly why the
+    suite passed with the sign-flipped term live.  We derive from the dictionary
+    instead so the test is an independent oracle, not a re-pin against the code.
+    """
+    c_cghnp = -c_repo
+    f_cghnp_sq = 2.0 * f_repo * f_repo
+    return (1.0 / (1.0 - 2.0 * c_cghnp)) * (
+        1.0 / f_cghnp_sq - 1.0 + f_cghnp_sq / (3.0 + 2.0 * c_cghnp)
     )
 
 
 def _manual_fermion_shift(fit: _QuarkFit, lambda_ir_gev: float) -> tuple[float, float]:
-    y_d = fit.bulk_state.Y_d_bulk_basis
+    """Independent CGHNP fermion-KK shift (PLAN §4.2 structure).
+
+    delta g_L^b = +(m_b^2/2 M_KK^2) * B_d,
+    delta g_R^b = -(m_b^2/2 M_KK^2) * B_Q, with
+      B_d = B_diag(c_d3, f_d3)
+            + (1/(2 f_d3^2)) * sum_{i=1,2} |Y_d,3i|^2/|Y_d,33|^2 * 1/(1 - 2 c_d_i),
+    and symmetric B_Q (column sum, c_Q, f_q3).  The diagonal (b_R/b_L) term
+    uses the CGHNP bracket; the light-generation sum uses the COMMON 1/(2 f_3^2)
+    factor, NOT a per-light-gen full bracket (PLAN §4.2 error 1a).
+    """
+    bs = fit.bulk_state
+    y_d = bs.Y_d_bulk_basis
     denom = abs(y_d[2, 2]) ** 2
     row_ratio = np.abs(y_d[2, :]) ** 2 / denom
     column_ratio = np.abs(y_d[:, 2]) ** 2 / denom
-    profile_d = np.array(
-        [_manual_B(c, f) for c, f in zip(fit.bulk_state.c_d, fit.bulk_state.F_d)]
+    f_d3_sq = float(bs.F_d[2]) ** 2
+    f_q3_sq = float(bs.F_Q[2]) ** 2
+
+    light_sum_d = sum(
+        float(row_ratio[i]) / (1.0 - 2.0 * float(bs.c_d[i])) for i in (0, 1)
     )
-    profile_q = np.array(
-        [_manual_B(c, f) for c, f in zip(fit.bulk_state.c_Q, fit.bulk_state.F_Q)]
+    light_sum_q = sum(
+        float(column_ratio[i]) / (1.0 - 2.0 * float(bs.c_Q[i])) for i in (0, 1)
     )
+    B_d = _cghnp_diagonal_bracket(float(bs.c_d[2]), float(bs.F_d[2])) + (
+        1.0 / (2.0 * f_d3_sq)
+    ) * light_sum_d
+    B_Q = _cghnp_diagonal_bracket(float(bs.c_Q[2]), float(bs.F_Q[2])) + (
+        1.0 / (2.0 * f_q3_sq)
+    ) * light_sum_q
     prefactor = fit.masses_down[2] ** 2 / (2.0 * lambda_ir_gev**2)
-    return (
-        float(prefactor * np.dot(row_ratio, profile_d)),
-        float(-prefactor * np.dot(column_ratio, profile_q)),
-    )
+    return float(prefactor * B_d), float(-prefactor * B_Q)
 
 
 def _zbb_metadata(point):
     return point.extras["rs_ew_couplings"].metadata["zbb_fermion_kk_mixing"]
+
+
+def test_cghnp_diagonal_bracket_matches_convention_dictionary_and_production():
+    """Literature-anchored ABSOLUTE pin for the B1 diagonal bracket (M7).
+
+    The expected value is built from the CGHNP convention dictionary
+    (c_CGHNP = -c_repo, F^2_CGHNP = 2 f_repo^2) in-test, NOT read off the
+    production function -- the production ``_casagrande_zbb_B_profile`` must
+    AGREE with that independent oracle.  This is the pin that would have caught
+    the sign-flipped / F^2-missing bracket the suite previously hid.
+    """
+    from quarkConstraints.rs_ew_couplings import _casagrande_zbb_B_profile
+
+    fit = _fit()
+    c_d3 = float(fit.bulk_state.c_d[2])  # 0.20: IR-localized
+    f_d3 = float(fit.bulk_state.F_d[2])
+    expected = _cghnp_diagonal_bracket(c_d3, f_d3)
+    produced = _casagrande_zbb_B_profile(c_d3, f_d3, name="B_d[2]")
+    assert produced == pytest.approx(expected, rel=1.0e-14)
+
+    # Closed-form spot value from the dictionary: with c_C = -c, F_C^2 = 2 f^2,
+    # B = 1/(1 + 2c) * (1/(2 f^2) - 1 + 2 f^2/(3 - 2c)).  For a UV-localized
+    # b_R (c_r > 1/2), 1 + 2c > 0 so the bracket is the correct SIGN (the old
+    # 1/(1 - 2c) was negative there, flipping delta g_L^b).
+    c_uv = 0.557
+    f_uv = float(_fit().bulk_state.F_d[1])  # arbitrary positive overlap
+    manual = (1.0 / (1.0 + 2.0 * c_uv)) * (
+        1.0 / (2.0 * f_uv * f_uv) - 1.0 + (2.0 * f_uv * f_uv) / (3.0 - 2.0 * c_uv)
+    )
+    assert _casagrande_zbb_B_profile(c_uv, f_uv, name="uv") == pytest.approx(manual)
+
+
+def test_casagrande_zbb_fermion_piece_is_smaller_than_gauge_piece():
+    """Magnitude guard (M7): the corrected CGHNP fermion piece must NOT exceed
+    the independently-verified gauge piece (the old bug inflated it ~30x)."""
+    fit = _fit()
+    gauge_only = _point(fit, include_fermion_kk_mixing=False).extras["rs_ew_couplings"]
+    mixed = _point(fit, include_fermion_kk_mixing=True).extras["rs_ew_couplings"]
+    gauge_L = complex(gauge_only.z_delta_g_L_d[2, 2])
+    fermion_L = complex(mixed.z_delta_g_L_d[2, 2]) - gauge_L
+    gauge_R = complex(gauge_only.z_delta_g_R_d[2, 2])
+    fermion_R = complex(mixed.z_delta_g_R_d[2, 2]) - gauge_R
+    assert abs(fermion_L) < abs(gauge_L)
+    assert abs(fermion_R) < abs(gauge_R)
 
 
 def test_casagrande_zbb_fermion_shift_signs_and_independent_formula():
@@ -170,14 +249,19 @@ def test_casagrande_zbb_fermion_shift_signs_and_independent_formula():
         point.extras["rs_ew_spectrum"].lambda_ir_gev,
     )
 
+    # Production matches the INDEPENDENT convention-dictionary recomputation
+    # (CGHNP c=-c_repo, F^2=2 f^2), the literature-anchored oracle (M7).
     assert zbb["delta_g_L_b"] == pytest.approx(manual_left, rel=1.0e-14, abs=1.0e-18)
     assert zbb["delta_g_R_b"] == pytest.approx(manual_right, rel=1.0e-14, abs=1.0e-18)
-    assert zbb["delta_g_L_b"] == pytest.approx(2.3518892841117975e-05)
-    assert zbb["delta_g_R_b"] == pytest.approx(-5.49194949716315e-04)
+    # Re-pinned after B1 (CGHNP retranslation: c-sign + F^2=2f^2 + flavour-sum
+    # index).  The OLD pins (2.35e-5, -5.49e-4) were pins-of-the-bug; the
+    # corrected fermion piece is sign-correct and much smaller.
+    assert zbb["delta_g_L_b"] == pytest.approx(3.7365283558008076e-06)
+    assert zbb["delta_g_R_b"] == pytest.approx(-1.9279722543603958e-05)
+    # SM-Zbb sign pins (UV-localized b_R, c_r > 1/2): delta g_L^b > 0 (reduces
+    # R_b), delta g_R^b < 0.  These FAILED under the old sign-flipped bracket.
     assert zbb["delta_g_L_b"] > 0.0
     assert zbb["delta_g_R_b"] < 0.0
-    assert 1.0e-5 < abs(zbb["delta_g_L_b"]) < 1.0e-4
-    assert 1.0e-4 < abs(zbb["delta_g_R_b"]) < 1.0e-3
     assert couplings.metadata["fermion_kk_mixing_included"] is True
     assert couplings.metadata["minimal_rs_tree_zbb_complete"] is True
     assert couplings.metadata["custodial_toppartner_zbL_needs_human"] is True
@@ -265,7 +349,13 @@ def test_universal_c_m_b_zero_sm_limit_keeps_t010_t011_at_committed_sm_values():
     assert t010.diagnostics["delta_g_right_b"] == pytest.approx(0.0j)
     assert t011.diagnostics["delta_g_left_b"] == pytest.approx(0.0j)
     assert t011.diagnostics["delta_g_right_b"] == pytest.approx(0.0j)
+    # M1 literature-anchored pin: at the SM-limit prediction the NP shift is 0,
+    # so BOTH gates' veto ratios are 0 -> the SM passes by construction (no
+    # 0.004sigma R_b knife-edge).  Pre-M1, T010's max|pull|-vs-experiment gate
+    # gave a NON-zero SM ratio (~0.996) here -- the gate artifact this fixes.
     assert t011.ratio == pytest.approx(0.0)
+    assert t010.ratio == pytest.approx(0.0)
+    assert t010.passes is True
 
 
 def test_minimal_complete_zbb_is_rigorous_vetoing_and_numeric_values_are_unchanged():
@@ -274,10 +364,13 @@ def test_minimal_complete_zbb_is_rigorous_vetoing_and_numeric_values_are_unchang
     t010 = fcc.get("T010").evaluate(failing_point)
     t011 = fcc.get("T011").evaluate(failing_point)
 
-    assert t010.predicted == 0.21328283177386856
-    assert t010.ratio == 4.470421078527965
-    assert t011.predicted == 0.9383244719075848
-    assert t011.ratio == 0.08826504462857736
+    # Re-pinned after B1 (corrected fermion-KK couplings) AND M1 (T010 R_b veto
+    # now uses the T011-style loose-edge NP-shift budget, not max|pull| vs exp).
+    # t010.ratio is now |predicted - SM_limit| / hard_veto_budget.
+    assert t010.predicted == pytest.approx(0.21337155324655482)
+    assert t010.ratio == pytest.approx(1.6745946465205102)
+    assert t011.predicted == pytest.approx(0.9374824088474414)
+    assert t011.ratio == pytest.approx(0.0616176902505238)
 
     for result in (t010, t011):
         assert result.diagnostics["minimal_rs_tree_complete"] is True

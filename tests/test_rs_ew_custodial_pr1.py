@@ -296,18 +296,33 @@ def test_t010_t011_custodial_tree_is_active_not_deferred_and_stays_rigorous():
         assert proxy_flags == {}
 
 
-def test_15tev_minimal_zbb_veto_survives_in_custodial_branch():
+def test_15tev_minimal_zbb_t010_no_longer_vetoes_after_b1_m1_fixes():
+    """After B1 (corrected, ~sign-flipped, much smaller fermion-KK admixture)
+    and M1 (T011-style loose-edge NP-shift budget on R_b), the minimal T010
+    no longer vetoes at 15 TeV: the spurious O(100 TeV) gate artifact -- driven
+    by the ~190x-inflated, wrong-signed delta g_L^b read against a 0.004sigma
+    R_b knife-edge -- has collapsed.  T010 ceases to be the minimal-floor
+    driver above a few TeV (it still vetoes at 3 TeV; see below).  The custodial
+    branch zeroes the fermion piece and also passes.  (This test previously
+    encoded the buggy 15 TeV minimal veto; PLAN §5/M1 + §4.)"""
     minimal_point = _zbb_point(mkk_gev=15_000.0)
+    minimal_point_3tev = _zbb_point(mkk_gev=3_000.0)
     custodial_point = _zbb_point(
         mkk_gev=15_000.0,
         ew_model=CUSTODIAL_RS_PLR_EW_MODEL,
     )
     minimal_t010 = fcc.get("T010").evaluate(minimal_point)
+    minimal_t010_3tev = fcc.get("T010").evaluate(minimal_point_3tev)
     custodial_t010 = fcc.get("T010").evaluate(custodial_point)
     custodial_t011 = fcc.get("T011").evaluate(custodial_point)
 
-    assert minimal_t010.passes is False
-    assert minimal_t010.ratio == pytest.approx(1.135208212413654)
+    # Corrected minimal T010: passes at 15 TeV (artifact gone), still vetoes at
+    # 3 TeV (a genuine large RS shift there).
+    assert minimal_t010.passes is True
+    assert minimal_t010.ratio == pytest.approx(0.06705098290545637)
+    assert minimal_t010.ratio < 1.0
+    assert minimal_t010_3tev.passes is False
+    assert minimal_t010_3tev.ratio > 1.0
     assert custodial_t010.passes is True
     assert custodial_t011.passes is True
     assert custodial_t010.ratio < 1.0

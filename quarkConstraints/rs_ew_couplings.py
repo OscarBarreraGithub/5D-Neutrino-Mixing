@@ -954,6 +954,8 @@ def build_rs_zbb_fermion_kk_mixing(
     if not math.isfinite(y33_abs_sq) or y33_abs_sq <= 0.0:
         raise ValueError("Y_d_bulk_basis[2,2] must be non-zero and finite")
 
+    # Per-generation diagonal CGHNP brackets (metadata; the b_R/b_L diagonal
+    # term used in the sum is the 3rd-generation entry, profile_b_*[2]).
     profile_b_q = _casagrande_zbb_B_profile_triplet(c_q, f_q, name="B_Q")
     profile_b_d = _casagrande_zbb_B_profile_triplet(c_d, f_d, name="B_d")
     row_ratio = np.array(np.abs(y_d[2, :]) ** 2 / y33_abs_sq, dtype=float)
@@ -961,11 +963,28 @@ def build_rs_zbb_fermion_kk_mixing(
     if not np.all(np.isfinite(row_ratio)) or not np.all(np.isfinite(column_ratio)):
         raise ValueError("Y_d_bulk_basis Yukawa-ratio sums contain non-finite entries")
 
-    # Casagrande's Zbb convention cross-assigns the singlet tower sum to
-    # delta g_L^b and the doublet tower sum to delta g_R^b; keep B_d/B_Q
-    # names explicit to avoid swapping the chiral shifts in future edits.
-    B_d = float(np.dot(row_ratio, profile_b_d))
-    B_Q = float(np.dot(column_ratio, profile_b_q))
+    # CGHNP (0807.4937) Z->bb ZMA, retranslated (PLAN §4.2):
+    #   B_d = B_correct(c_d3, f_d3)
+    #         + (1/(2 f_d3^2)) * sum_{i=1,2} |Y_d,3i|^2/|Y_d,33|^2 * 1/(1 - 2 c_d_i)
+    # and the symmetric expression for B_Q with c_Q, f_q3, column_ratio.  The
+    # diagonal (b_R/b_L) term carries the 3rd-gen bracket; the light-generation
+    # flavour sum carries the COMMON 1/(2 f_3^2) factor (the 3rd-gen singlet
+    # overlap), NOT a per-light-gen full bracket B(c_d_i, F_d_i) -- the former
+    # is the CGHNP structure, the latter inflated i=1,2 by F^2(c_d3)/F^2(c_d_i)
+    # ~ 10^2..10^4 (PLAN §4.2 error 1a).
+    f_d3_sq = float(f_d[2]) ** 2
+    f_q3_sq = float(f_q[2]) ** 2
+    light_sum_d = 0.0
+    light_sum_q = 0.0
+    for i in (0, 1):
+        denom_d = 1.0 - 2.0 * float(c_d[i])
+        denom_q = 1.0 - 2.0 * float(c_q[i])
+        if denom_d == 0.0 or denom_q == 0.0:
+            raise ValueError("Zbb light-generation flavour-sum denominator (1 - 2c) is singular")
+        light_sum_d += float(row_ratio[i]) / denom_d
+        light_sum_q += float(column_ratio[i]) / denom_q
+    B_d = float(profile_b_d[2] + (1.0 / (2.0 * f_d3_sq)) * light_sum_d)
+    B_Q = float(profile_b_q[2] + (1.0 / (2.0 * f_q3_sq)) * light_sum_q)
     prefactor = float(m_b * m_b / (2.0 * lambda_ir * lambda_ir))
     delta_g_L_b = float(prefactor * B_d)
     delta_g_R_b = float(-prefactor * B_Q)
@@ -1833,15 +1852,29 @@ def _casagrande_zbb_B_profile_triplet(
 
 
 def _casagrande_zbb_B_profile(c: float, F: float, *, name: str) -> float:
+    """Diagonal (3rd-generation) CGHNP Z->bb bracket in repo variables.
+
+    CGHNP (0807.4937) Z->bb ZMA, translated through the convention dictionary
+    ``c_CGHNP = -c_repo``, ``F^2_CGHNP = 2 f_IR,repo^2`` (proved exactly in audit
+    slice 3).  In repo variables the diagonal bracket is
+
+        B(c, F) = 1/(1 + 2c) * ( 1/(2 F^2) - 1 + 2 F^2/(3 - 2c) ).
+
+    The previous code used ``1/(1 - 2c) * (1/F^2 - 1 + F^2/(3 + 2c))`` -- the
+    c-sign was wrong in BOTH denominators and the F^2 = 2 f^2 factor was
+    missing.  For UV-localized b_R (c > 1/2, scan-typical) the old ``1/(1 - 2c)``
+    is negative, giving the wrong SIGN of delta g_L^b (PLAN §4.2).
+    """
     if not math.isfinite(c):
         raise ValueError(f"{name} c must be finite")
     if not math.isfinite(F) or F <= 0.0:
         raise ValueError(f"{name} F must be positive and finite")
-    denom_left = 1.0 - 2.0 * c
-    denom_right = 3.0 + 2.0 * c
+    denom_left = 1.0 + 2.0 * c
+    denom_right = 3.0 - 2.0 * c
     if denom_left == 0.0 or denom_right == 0.0:
         raise ValueError(f"{name} Casagrande B(c) denominator is singular")
-    value = (1.0 / denom_left) * (1.0 / (F * F) - 1.0 + (F * F) / denom_right)
+    f_sq = F * F
+    value = (1.0 / denom_left) * (1.0 / (2.0 * f_sq) - 1.0 + (2.0 * f_sq) / denom_right)
     if not math.isfinite(value):
         raise ValueError(f"{name} Casagrande B(c) is non-finite")
     return float(value)

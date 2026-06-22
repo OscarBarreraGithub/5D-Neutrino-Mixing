@@ -179,7 +179,12 @@ def test_t010_singlet_zbb_pseudo_observable_oracle():
         0.9354140642148572
     )
     assert result.diagnostics["selected_observable"] == "R_b^0"
-    assert result.ratio == pytest.approx(1.4680590546247065)
+    # ratio re-pinned after M1: it is now |predicted - SM_limit| / hard_veto_budget
+    # (T011-style loose-edge), not max|pull| vs experiment.  The shifted-coupling
+    # / predicted / A_b oracle values above are unchanged (they are the Zbb
+    # pseudo-observables, not the gate scalar).  This fixed delta_g now PASSES.
+    assert result.ratio == pytest.approx(0.2364937629532263)
+    assert result.passes is True
 
 
 def test_bidoublet_vertex_numeric_oracle_no_fake_negative_t():
