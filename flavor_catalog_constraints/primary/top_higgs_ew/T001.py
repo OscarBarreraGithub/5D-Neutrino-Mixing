@@ -384,6 +384,11 @@ class Constraint:
                 "operator_convention": TOP_FCNC_Z_VECTOR_CONVENTION,
                 "rs_matching_assumption": TOP_FCNC_RS_Z_MATCHING_ASSUMPTION_V1,
                 "needs_human_physics": TOP_FCNC_RS_Z_MATCHING_ASSUMPTION_V1,
+                # Structured tag-class hint consumed by run_full_catalog_scan
+                # tag_result (M5): the RS t->qZ contribution is a documented
+                # overlap proxy.  This replaces brittle prose substring matching
+                # (the legacy "proxy" in needs_text missed the plural "proxies").
+                "tag_class": "proxy",
                 "kk_ew_mass_extra_used": kk_ew_mass is not None,
                 "sm_is_negligible_for_limit": True,
             }

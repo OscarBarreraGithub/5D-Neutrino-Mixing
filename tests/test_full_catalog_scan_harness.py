@@ -112,6 +112,62 @@ def test_evaluated_proxy_with_unevaluated_subobservable_note_stays_proxy():
     assert proxy_flags["mass_proxy"] == "exclusive C7 normalization proxy"
 
 
+def test_plural_proxies_in_needs_human_is_tagged_proxy_not_partial():
+    """M5 regression: the legacy ``"proxy" in needs_text`` missed the plural
+    "proxies" (the T001/T002 t->qZ overlap-proxy wording), mis-tagging an
+    evaluated, passing proxy as ``partial`` on 100% of rows.  The plural-robust
+    match must now tag it ``proxy``."""
+    harness = _load_harness()
+    result = ConstraintResult(
+        process_id="T001",
+        severity=Severity.HARD,
+        passes=True,
+        ratio=1.0e-8,
+        diagnostics={
+            "evaluated": True,
+            "needs_human_physics": (
+                "NEEDS-HUMAN-PHYSICS: up-sector KK-gluon couplings are used as "
+                "neutral-current flavor-overlap proxies; ..."
+            ),
+        },
+    )
+
+    tag, _, needs_human, _ = harness.tag_result(result)
+    assert tag == "proxy"
+    assert needs_human is not None
+
+
+def test_structured_tag_class_hint_overrides_prose_matching():
+    """M5: a constraint declaring ``diagnostics["tag_class"]`` is tagged by the
+    structured hint, independent of any prose phrasing (the durable fix)."""
+    harness = _load_harness()
+    result = ConstraintResult(
+        process_id="T002",
+        severity=Severity.HARD,
+        passes=True,
+        ratio=1.0e-9,
+        diagnostics={
+            "evaluated": True,
+            "tag_class": "proxy",
+            # No "proxy"/"proxies" anywhere in the prose -- structured hint wins.
+            "needs_human_physics": "documented overlap stand-in for the full match",
+        },
+    )
+
+    tag, _, _, _ = harness.tag_result(result)
+    assert tag == "proxy"
+
+    # An unevaluated point still reports "stub" even with a tag_class hint.
+    unevaluated = ConstraintResult(
+        process_id="T002",
+        severity=Severity.HARD,
+        passes=True,
+        diagnostics={"missing_extra": "quark_mass_basis_couplings", "tag_class": "proxy"},
+    )
+    tag_uneval, _, _, _ = harness.tag_result(unevaluated)
+    assert tag_uneval == "stub"
+
+
 def test_resolved_proxy_wording_in_matching_status_remains_rigorous():
     harness = _load_harness()
     result = ConstraintResult(

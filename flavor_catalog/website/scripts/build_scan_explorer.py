@@ -300,11 +300,17 @@ def _stream_scan_roots() -> tuple[
                     for cid, result in constraints.items():
                         tag = str(result.get("tag") or "unknown")
                         tag_counts[cid][tag] += 1
+                        # Count a veto only for a tag that can actually veto in
+                        # the harness/comparison semantics (tag in {rigorous,
+                        # proxy}); a partial/stub HARD failure never vetoes
+                        # strict OR inclusive floors, so it must not appear in
+                        # the explorer's veto fractions either (slice-5 F7).
                         if (
                             bool(result.get("active"))
                             and bool(result.get("evaluated"))
                             and str(result.get("severity")) == "HARD"
                             and result.get("passes") is False
+                            and tag in ("rigorous", "proxy")
                         ):
                             veto_counts[key][cid] += 1
 

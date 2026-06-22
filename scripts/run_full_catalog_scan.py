@@ -965,6 +965,36 @@ def _evaluate_constraint_ids(
     return out
 
 
+def _structured_tag_class(diag: Mapping[str, Any]) -> str | None:
+    """Return a constraint's explicit structured tag-class hint, if present.
+
+    A constraint result may declare ``diagnostics["tag_class"]`` as one of
+    ``{"rigorous", "proxy", "partial", "stub"}`` (M5, slice-5 F8).  This is the
+    durable replacement for prose substring matching on ``needs_human_physics`` /
+    ``matching_status``: it cannot be fooled by plurals ("proxies") or by
+    phrasings like "proxy pending rigorous treatment".  Unknown / missing values
+    return ``None`` so the legacy prose match remains the fallback.
+    """
+    value = _string_or_none(diag.get("tag_class"))
+    if value is None:
+        return None
+    normalized = value.strip().lower()
+    if normalized in ("rigorous", "proxy", "partial", "stub"):
+        return normalized
+    return None
+
+
+def _mentions_proxy(text: str) -> bool:
+    """Plural-robust detection of "proxy"/"proxies" in a lowercased prose blob.
+
+    The legacy ``"proxy" in text`` missed the plural "proxies" (p-r-o-x-i-e-s
+    does not contain the substring "proxy"), mis-tagging the T001/T002 t->qZ
+    overlap proxies as "partial" on 100% of rows (M5).  This is the deprecated
+    prose fallback; constraints should prefer the structured ``tag_class`` hint.
+    """
+    return "proxy" in text or "proxies" in text
+
+
 def tag_result(result: ConstraintResult) -> tuple[str, str | None, str | None, dict[str, Any]]:
     """Return ``(tag, matching_status, needs_human, proxy_flags)`` for a result."""
 
@@ -973,24 +1003,33 @@ def tag_result(result: ConstraintResult) -> tuple[str, str | None, str | None, d
     matching_status = _matching_status(diag)
     needs_human = _string_or_none(diag.get("needs_human_physics"))
     proxy_flags = _proxy_flags(diag)
+    tag_class = _structured_tag_class(diag)
     status_text = "" if matching_status is None else matching_status.lower()
     needs_text = "" if needs_human is None else needs_human.lower()
     if not evaluated or "missing_extra" in diag or "exception_type" in diag:
         return "stub", matching_status, needs_human, proxy_flags
+    # Durable, structured tag-class hint (M5): a constraint may declare its tag
+    # class explicitly via diag["tag_class"] instead of relying on brittle prose
+    # substring matching (the legacy "proxy" in needs_text missed the plural
+    # "proxies", mis-tagging T001/T002 proxies as "partial").  Honored after the
+    # stub/missing checks above so an unevaluated point still reports "stub".
+    if tag_class in ("proxy", "rigorous", "partial"):
+        return tag_class, matching_status, needs_human, proxy_flags
     if "stub" in status_text or "quarantine" in status_text:
         return "stub", matching_status, needs_human, proxy_flags
     if proxy_flags:
         return "proxy", matching_status, needs_human, proxy_flags
     if needs_human:
-        if "proxy" in needs_text or "recast" in needs_text:
+        if _mentions_proxy(needs_text) or "recast" in needs_text:
             return "proxy", matching_status, needs_human, proxy_flags
         return "partial", matching_status, needs_human, proxy_flags
     if "partial" in status_text or "needs-human" in status_text or "deferred" in status_text:
         return "partial", matching_status, needs_human, proxy_flags
-    if "proxy" in status_text or "recast" in status_text:
+    if _mentions_proxy(status_text) or "recast" in status_text:
         resolved_proxy_phrases = (
             "no proxy",
             "proxy resolved",
+            "proxies resolved",
             "proxy is not used",
             "proxy not used",
             "not a proxy",
