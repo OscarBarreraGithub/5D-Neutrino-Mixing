@@ -27,3 +27,17 @@ PLAN v3 dual-approved at Opus level:
   Zbb 5 TeV; combined 20 TeV (proxy S,T,U); Zbb NOT leading. See FINAL_REVIEW.md.
 - mu->e gamma from full-catalog lepton-viable subset (job 24025068, 4977 draws).
 - Interactive notebook delivered. NOTHING committed/pushed. Codex backup still owed pre-push.
+
+## LIT-REPRODUCTION (2026-06-22)
+- references/ : 16 paper PDFs + refs.bib + REFERENCES.md + PLOT_SPECS.md (research agent ad89b531).
+- scripts/extract_plot_quantities.py : replays draws through FIXED code -> per-draw
+  delta_g_b(TOTAL gauge+fermion), S, T, |epsK|, M12; VALIDATION bit-identical (recomputed
+  ratio_T010/EW001 == stored, max_abs=0 over 2500 draws).
+- notebooks/constraint_plots_vs_literature.ipynb : 7 figs, 0 err. Z->bb (CGHNP 0807.4937
+  Fig8), S-T (Fig4), epsK (Bauer 0912.1625), D0 (Gedalia 0906.1879), dm_d/dm_s, mu->egamma.
+- FINAL-REVIEW CAUGHT + FIXED a plot bug: extraction first used fermion-only delta_g_b;
+  corrected to TOTAL z_delta_g_L_d[2,2] (gauge +8.7e-5 dominant, matches audit). Physics/scan
+  unaffected; was purely a plot-quantity bug.
+- Z->bb points form an M_KK-ordered locus (gauge-dominated, c_Q3 ~pinned by top mass) not an
+  anarchic cloud -- honest structural difference vs CGHNP; panel (c) resolves it.
+- All reproduction files UNCOMMITTED (user reviewing).
