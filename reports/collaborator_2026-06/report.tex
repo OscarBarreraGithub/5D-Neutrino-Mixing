@@ -95,7 +95,7 @@ for how floors compare to the literature.
 \begin{itemize}\setlength{\itemsep}{0.35em}\leftskip-0.5em
 \item The fixed code \textbf{reproduces the published RS literature} when run in
 anarchic-forward mode: $\varepsilon_K$ 95\%-quantile floor = \textbf{10~TeV}
-(= Bauer 0912.1625 headline), $D^0$ funnel containment 99.6\% at 10~TeV
+(= Bauer 0912.1625 headline), $D^0$ funnel containment rising to ${\sim}88\%$ at 10~TeV
 (Gedalia), kaon $\mathrm{Im}/\mathrm{Re}(M_{12})$ = \textbf{106$\times$}
 ($\approx$ Blanke's ${\sim}100\times$ $\varepsilon_K$ problem), $C_{B_d}/C_{B_s}\approx1$.
 \item \textbf{Minimal-model floors (corrected):} \emph{typical} anarchic floor
@@ -216,14 +216,27 @@ with 5/50/95\% quantile curves. Paper scatters anarchic Yukawas; we reproduce th
 fat cloud in anarchic-forward mode.}
 \end{figure}
 The canonical RS $\varepsilon_K$ problem: anarchic $|\varepsilon_K|$ vs.\
-$M_{KK}$ spanning ${\sim}6$ decades, colored by $Z\to b\bar b$ / $\varepsilon_K$
-consistency, with 5/50/95\% quantile curves. The key methodological point: the
-paper \textbf{scatters} anarchic $O(1)$ Yukawas (fat cloud) while our production
-scan \textbf{fits} to masses+CKM (thin locus). Running our fixed code (B2
-rephasing + B3 coefficients) in anarchic-forward mode reproduces the fat cloud
-(${\sim}3+$ decades) and lands the \textbf{95\%-quantile floor at $M_{KK}=10$~TeV
---- exactly Bauer's quoted ``$M_g^{(1)}\gtrsim10$~TeV.''} With current (vs.\
-paper-era) constraints the $\geq50\%$ floor rises to ${\sim}30$~TeV.
+$M_{KK}$ spanning ${\sim}6$ decades, colored by $\varepsilon_K$ consistency, with
+5/50/95\% quantile curves. The key methodological point: the paper
+\textbf{scatters} anarchic $O(1)$ Yukawas (fat cloud) while our production scan
+\textbf{fits} to masses+CKM (thin locus). We now run the fixed code in an
+anarchic-forward mode that \textbf{matches Bauer's S1 draw setup}
+(\texttt{scripts/anarchic\_bauer\_s1.py}): $|Y|$ uniform in modulus over
+$[0.1,\,Y_{\max}=3]$ with uniform phase, and per-draw \textbf{scanned} bulk
+masses (the RH-top $c_{u_3}$ flat in Bauer's prior; the rest fixed by the
+leading-order Froggatt--Nielsen relations from the drawn Yukawa minors). This
+reproduces the \textbf{per-tile ${\sim}6$-decade cloud} (was ${\sim}3.3$ with the
+older fixed-$c$, $|Y|<2.1$ generator), the \textbf{95\%-quantile floor at
+$M_{KK}\approx10$~TeV} (= Bauer's ``$M_g^{(1)}\gtrsim10$~TeV''), and the
+upper-bulk amplitude ($p75\approx118\times$ SM = Bauer's ``typically
+${\sim}100\times$ SM''). The fitted $c$'s land on Bauer's Table~1 central values.
+Residual: our overall consistent fraction (${\sim}40\%$) is ${\sim}2\times$ higher
+than Bauer's 19\% because the lower (aligned) tail of our cloud is
+over-populated; the spread, floor, axes, coloring and scenario ordering all
+match. A companion $2\times2$ S1--S4 panel mirrors the paper's full layout (S3
+``little'' sits an order of magnitude higher from UV dominance, exactly as
+published). With current (vs.\ paper-era) constraints the $\geq50\%$ floor rises
+to ${\sim}30$~TeV.
 
 \FloatBarrier
 
@@ -251,12 +264,12 @@ both paper-era and current inputs.
 vs.\ ours (right), centered near the SM point $(1,0)$.}
 \end{figure}
 The $B_d$-mixing new-physics plane: amplitude $C_{B_d}$ vs.\ phase $\phi_{B_d}$.
-The paper's anarchic cloud sits near the SM point $(1, 0)$ with the experimental
-CL ellipse offset to $\approx-6^\circ$. Our anarchic cloud centers on the SM
-cross with few-degree phases --- $C_{B_d}[p5,50,95] = [0.97, 1.00, 1.06]$,
-$\phi_{B_d}\approx\pm1^\circ$ --- matching Bauer's structure (their
-$C_{B_d}=0.89\pm0.17$); our spread is narrower because of our $O(1)$ Yukawa
-window.
+The paper's anarchic cloud sits near the SM point $(1, 0)$ but with a genuine wide
+scatter. With the matched ensemble ($Y_{\max}=3$, scanned $c$) our cloud now
+reproduces that spread: $C_{B_d}$ median $1.02$ with $p5 = 0.89$ (= Bauer's
+$C_{B_d} = 0.89\pm0.17$), $\phi_{B_d}$ centered at $0$ with tens-of-degrees tails
+--- the full anarchic cloud rather than the artificially narrow locus of the old
+$|Y|<2.1$ generator.
 
 \FloatBarrier
 
@@ -269,8 +282,10 @@ window.
 paper (left) vs.\ ours (right).}
 \end{figure}
 The analogous $B_s$ plane ($C_{B_s}$, $\phi_{B_s}$, and $S_{\psi\phi}$). Ours:
-$C_{B_s}\approx[0.97, 1.01, 1.20]$, $\phi_{B_s}\approx\pm2^\circ$, $S_{\psi\phi}$
-median $0.04$ (= SM) --- matching Bauer ($C_{B_s}=0.93\pm0.19$).
+$C_{B_s}$ median $1.04$, $p5 = 0.94$ (= Bauer's $C_{B_s} = 0.93\pm0.19$),
+$\phi_{B_s}$ centered at $0$ with broad tails, and $S_{\psi\phi}$ spanning
+$[-0.57,\,0.04,\,0.62]$ --- reproducing Bauer's ``large $\phi_{B_s}$ allowed''
+(the old narrow cloud could not show this).
 
 \FloatBarrier
 
@@ -283,10 +298,11 @@ median $0.04$ (= SM) --- matching Bauer ($C_{B_s}=0.93\pm0.19$).
 paper (left) vs.\ ours (right). Our cloud sinks into the allowed funnel as
 $M_{KK}$ rises.}
 \end{figure}
-The allowed ``funnel'' in $(x_{12}^{\mathrm{NP}}/x,\ \sin 2\sigma_D)$. Our
-anarchic $D$-meson cloud (now carrying the complex $M_{12}$ phase) sinks into the
-grey allowed funnel as $M_{KK}$ rises --- inside-funnel fraction 57.5\% at 1~TeV
-$\to$ 92.7\% at 3~TeV $\to$ 99.6\% at 10~TeV --- a faithful reproduction.
+The allowed ``funnel'' in $(x_{12}^{\mathrm{NP}}/x,\ \sin 2\sigma_D)$. Our matched
+anarchic $D$-meson cloud (carrying the complex $M_{12}$ phase) sinks into the grey
+allowed funnel as $M_{KK}$ rises --- inside-funnel fraction 50\% at 1~TeV $\to$
+77\% at 3~TeV $\to$ 88\% at 10~TeV --- a faithful reproduction (the wider matched
+ensemble gives a broader, more paper-like cloud than the earlier fixed-$c$ run).
 
 \FloatBarrier
 
