@@ -114,6 +114,18 @@ def show_paper(ax, fname, title):
     ax.set_axis_off()
     ax.set_title(title, fontsize=10)
 
+# Export the FULL two-panel side-by-side (PAPER left | OURS right) to the
+# collaborator report, matching every other report figure (which is a two-panel
+# `paper crop | ours` figure saved whole). Same filenames report.tex picks up.
+REPORT_FIGDIR = REPO / "reports" / "collaborator_2026-06" / "figures"
+def save_report(fig, name):
+    # Save the WHOLE figure (both panels) as the report PNG, like the anarchic
+    # build's save_report — keeps STU/Zbb consistent with the other 6 figures.
+    if not REPORT_FIGDIR.exists():
+        return
+    fig.savefig(REPORT_FIGDIR / name, dpi=150, bbox_inches="tight")
+    print(f"[export] {name} -> {REPORT_FIGDIR/name}")
+
 # --- our continuous-M_KK points (Zbb, S-T, eps_K, survival) ---
 PTS = REPO / "scan_outputs" / "sidebyside_points.parquet"
 dfc = pd.read_parquet(PTS)
@@ -196,7 +208,7 @@ handles = [Line2D([], [], color="#1f77b4", label="ours: EW001 / PDG-2025"),
            Line2D([], [], color="#888888", label="paper: CGHNP 2008"),
            Line2D([], [], marker="+", ls="", color="k", label="SM")]
 ax.legend(handles=handles, loc="upper left")
-plt.tight_layout(); plt.show()
+plt.tight_layout(); save_report(fig, "fig_STU.png"); plt.show()
 
 r1 = sub.iloc[(sub.M_KK_TeV-1).abs().argmin()]
 r10 = sub.iloc[(sub.M_KK_TeV-10).abs().argmin()]
@@ -334,8 +346,15 @@ ax.contourf(GLg, GRg, chi2, levels=[0]+LEV,
 ax.contour(GLg, GRg, chi2, levels=LEV, colors="k", linewidths=0.4, alpha=0.4)
 ax.plot(SM_GL_B, SM_GR_B, "ko", ms=6, zorder=6)
 ax.annotate("SM", (SM_GL_B, SM_GR_B), textcoords="offset points", xytext=(6, -12))
-sc = ax.scatter(dfc["g_L_b"], dfc["g_R_b"], c=dfc["M_KK_TeV"], cmap="viridis",
-                norm=mpl.colors.LogNorm(), s=10, edgecolor="none", alpha=0.85, zorder=5)
+# Dense near-horizontal stripe (paper Fig. 8 left panel): g_R^b is pinned at ~0.0774
+# while g_L^b slides toward 0 as M_KK drops. Plot ALL in-window points small+dense so
+# the razor-thin stripe reads as a continuous line (it spans only ~5e-5 in g_R^b).
+win = ((dfc["g_L_b"] >= -0.44) & (dfc["g_L_b"] <= -0.40) &
+       (dfc["g_R_b"] >= 0.05) & (dfc["g_R_b"] <= 0.12))
+dpl = dfc[win].sort_values("g_L_b")
+ax.plot(dpl["g_L_b"], dpl["g_R_b"], "-", color="#3b528b", lw=2.2, alpha=0.7, zorder=4)
+sc = ax.scatter(dpl["g_L_b"], dpl["g_R_b"], c=dpl["M_KK_TeV"], cmap="viridis",
+                norm=mpl.colors.LogNorm(), s=6, edgecolor="none", alpha=0.9, zorder=5)
 cb = fig.colorbar(sc, ax=ax, pad=0.02); cb.set_label(r"$M_{\rm KK}$ [TeV]")
 ax.set_xlim(-0.44, -0.40); ax.set_ylim(0.05, 0.12)
 ax.set_xlabel(r"$g_L^b$"); ax.set_ylabel(r"$g_R^b$")
@@ -347,7 +366,7 @@ handles = [Line2D([], [], marker="s", ls="", color="#ffe14d", label="68% CL"),
            Line2D([], [], marker="o", ls="", color="k", label="SM ref (paper)"),
            Line2D([], [], marker="o", ls="", color="#3b528b", label="our RS draws")]
 ax.legend(handles=handles, loc="upper left")
-plt.tight_layout(); plt.show()
+plt.tight_layout(); save_report(fig, "fig_Zbb_gLgR.png"); plt.show()
 print("our g_L^b range:", float(dfc.g_L_b.min()), float(dfc.g_L_b.max()))
 print("our g_R^b range:", float(dfc.g_R_b.min()), float(dfc.g_R_b.max()))
 """)

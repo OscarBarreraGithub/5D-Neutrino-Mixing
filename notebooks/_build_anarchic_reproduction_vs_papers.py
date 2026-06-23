@@ -529,6 +529,15 @@ def CB_phi(np_m12, m12_sm):
     r = full / m12_sm
     return np.abs(r), 0.5*np.degrees(np.angle(r))   # C, phi[deg]
 
+# --- Bauer's experimental (CKMfitter global-fit) favored regions, Figs. 6/7 ---
+# Drawn as Gaussian 68%/95% CL ellipses from the quoted marginals (no correlation
+# is quoted, so axis-aligned). Bauer Fig.6: C_Bd=0.89+-0.17, phi_Bd=(-5.8+-2.8) deg.
+def cl_ellipses(ax, cx, cy, sx, sy, fc68="#ffe14d", fc95="#ff8c00"):
+    # 95% first (drawn under), then 68% on top -- matches the paper's yellow-in-orange look.
+    for nsig, fc, z in [(np.sqrt(5.991), fc95, 2), (np.sqrt(2.279), fc68, 3)]:
+        ax.add_patch(Ellipse((cx, cy), 2*nsig*sx, 2*nsig*sy, facecolor=fc,
+                             edgecolor="none", alpha=1.0, zorder=z))
+
 m12_bd = cm12(dc, "Bd", MKK_BQ)
 C_bd, phi_bd = CB_phi(m12_bd, M12_SM_BD)
 
@@ -536,12 +545,18 @@ fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.2))
 show_paper(axes[0], "bauer_0912.1625_fig6_CBd_phiBd.png",
            "Paper (Bauer 2009 Fig. 6): $\\phi_{B_d}$ vs $C_{B_d}$ (S1)")
 ax = axes[1]
-ax.scatter(C_bd, phi_bd, c="tab:blue", **SCAT_KW, label="anarchic forward (3 TeV)")
+# experimental favored regions (Bauer's global fit): C_Bd=0.89+-0.17, phi_Bd=-5.8+-2.8 deg
+cl_ellipses(ax, 0.89, -5.8, 0.17, 2.8)
+ax.scatter(C_bd, phi_bd, c="tab:blue", **SCAT_KW, label="anarchic forward (3 TeV)", zorder=4)
 ax.scatter([1.0],[0.0], marker="x", c="k", s=90, lw=2.5, zorder=6, label="SM")
+exp68 = Line2D([], [], marker="s", ls="", color="#ffe14d", label="68% CL (exp)")
+exp95 = Line2D([], [], marker="s", ls="", color="#ff8c00", label="95% CL (exp)")
 ax.set_xlabel(r"$C_{B_d}$"); ax.set_ylabel(r"$\phi_{B_d}$  [deg]")
-ax.set_xlim(0.6,1.6); ax.set_ylim(-12,15)
+ax.set_xlim(0.4,1.6); ax.set_ylim(-15,15)
 ax.set_title("Ours (anarchic forward): $\\phi_{B_d}$ vs $C_{B_d}$")
-ax.legend(loc="upper left", markerscale=4); ax.grid(alpha=0.3)
+h, l = ax.get_legend_handles_labels()
+ax.legend(handles=[exp68, exp95]+h, loc="upper left", markerscale=4, fontsize=8)
+ax.grid(alpha=0.3)
 plt.tight_layout(); save_report(fig, "fig_CBd_phiBd.png"); plt.show()
 
 print("=== Bauer Fig.6 vs ours (M_KK=3 TeV) ===")
@@ -570,12 +585,20 @@ fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.2))
 show_paper(axes[0], "bauer_0912.1625_fig7_CBs_phiBs.png",
            "Paper (Bauer 2009 Fig. 7): $\\phi_{B_s}$ vs $C_{B_s}$ (S1)")
 ax = axes[1]
-ax.scatter(C_bs, phi_bs, c="tab:purple", **SCAT_KW, label="anarchic forward (3 TeV)")
+# Bauer's experimental psi-phi fit has a TWOFOLD ambiguity -> two favored regions:
+#   C_Bs = 0.93 +- 0.19 ; phi_Bs = (-19.0 +- 10.8) deg  AND  (-69.9 +- 10.1) deg
+cl_ellipses(ax, 0.93, -19.0, 0.19, 10.8)
+cl_ellipses(ax, 0.93, -69.9, 0.19, 10.1)
+ax.scatter(C_bs, phi_bs, c="tab:purple", **SCAT_KW, label="anarchic forward (3 TeV)", zorder=4)
 ax.scatter([1.0],[0.0], marker="x", c="k", s=90, lw=2.5, zorder=6, label="SM")
+exp68 = Line2D([], [], marker="s", ls="", color="#ffe14d", label="68% CL (exp)")
+exp95 = Line2D([], [], marker="s", ls="", color="#ff8c00", label="95% CL (exp)")
 ax.set_xlabel(r"$C_{B_s}$"); ax.set_ylabel(r"$\phi_{B_s}$  [deg]")
-ax.set_xlim(0.6,1.6); ax.set_ylim(-90,90)
+ax.set_xlim(0.6,2.0); ax.set_ylim(-90,90)
 ax.set_title("Ours (anarchic forward): $\\phi_{B_s}$ vs $C_{B_s}$")
-ax.legend(loc="upper left", markerscale=4); ax.grid(alpha=0.3)
+h, l = ax.get_legend_handles_labels()
+ax.legend(handles=[exp68, exp95]+h, loc="upper right", markerscale=4, fontsize=8)
+ax.grid(alpha=0.3)
 plt.tight_layout(); save_report(fig, "fig_CBs_phiBs.png"); plt.show()
 
 print("=== Bauer Fig.7 vs ours (M_KK=3 TeV) ===")
@@ -608,21 +631,37 @@ fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.4))
 show_paper(axes[0], "gedalia_0906.1879_fig1_Dfunnel.png",
            "Paper (Gedalia 2009 Fig. 1): $x_{12}^{NP}/x_{12}$ vs $\\sin 2\\sigma_D$")
 ax = axes[1]
-# Draw the grey funnel: y in [0,1]; for each x=sin(phi), allowed y_max = min(1, 0.18/|x|)
-xs = np.linspace(-1, 1, 400)
+# Gedalia Fig.1 styling: the lavender allowed FUNNEL (CP-violating bound
+# |x12^NP/x12 * sin2sigma| <= sin(phi)_exp ~ 0.18, capped at the CP-conserving
+# bound x12^NP/x12 <= 1), the YELLOW horizontal GMFV band at the bottom, and the
+# small RED/pink LMFV box near sin2sigma = +1.
+GMFV_TOP = 0.12          # GMFV band height (Gedalia: x12^NP/x12 <~ 0.1-0.13)
+LMFV_X0  = 0.85          # LMFV box sits at large sin2sigma (aligned, O(1) phase)
+xs = np.linspace(-1, 1, 600)
 ymax = np.minimum(1.0, SIN_PHI_BOUND_D/np.maximum(np.abs(xs), 1e-3))
-ax.fill_between(xs, 0, ymax, color="0.7", alpha=0.55, label="Gedalia allowed (funnel)")
+# lavender funnel (match the paper's light blue-violet fill)
+ax.fill_between(xs, 0, ymax, color="#c9cdec", alpha=0.95, zorder=0,
+                label="Gedalia allowed (funnel)")
+ax.plot(xs, ymax, color="#5b5ea6", lw=1.0, zorder=1)
+# yellow GMFV band along the bottom
+ax.axhspan(0, GMFV_TOP, color="#e9e520", alpha=0.85, zorder=0.5)
+ax.text(-0.35, GMFV_TOP*0.5, "GMFV", fontsize=9, va="center", zorder=3)
+# red LMFV box near sin2sigma ~ 1
+ax.add_patch(Rectangle((LMFV_X0, 0), 1.0-LMFV_X0, GMFV_TOP, facecolor="#d98b9e",
+                       edgecolor="none", alpha=0.95, zorder=0.6))
+ax.text(LMFV_X0+0.02, GMFV_TOP*1.25, "LMFV", fontsize=8, va="center", zorder=3)
 cols = {1.0:"tab:red", 3.0:"tab:orange", 10.0:"tab:green"}
 for mkk, c in cols.items():
     m12 = cm12(dc, "D", mkk)
     y = 2*np.abs(m12)/(GAMMA_D*X12_EXP_D)
     x = np.sin(np.angle(m12))
     s = np.random.default_rng(1).choice(len(y), size=min(6000,len(y)), replace=False)
-    ax.scatter(x[s], y[s], s=3, c=c, alpha=0.30, rasterized=True, label=f"$M_{{KK}}$={mkk:g} TeV")
-ax.set_xlim(-1,1); ax.set_ylim(0,1.2)
+    ax.scatter(x[s], y[s], s=3, c=c, alpha=0.35, rasterized=True, zorder=2,
+               label=f"$M_{{KK}}$={mkk:g} TeV")
+ax.set_xlim(-1,1); ax.set_ylim(0,1.0)
 ax.set_xlabel(r"$\sin 2\sigma_D=\sin(\arg M_{12}^{\rm NP})$"); ax.set_ylabel(r"$x_{12}^{\rm NP}/x_{12}$")
 ax.set_title("Ours (anarchic forward): $D$ cloud on the Gedalia funnel")
-ax.legend(loc="upper right", markerscale=3.5); ax.grid(alpha=0.3)
+ax.legend(loc="upper right", markerscale=3.5, fontsize=8); ax.grid(alpha=0.25)
 plt.tight_layout(); save_report(fig, "fig_D0_funnel.png"); plt.show()
 
 print("=== Gedalia Fig.1 — fraction of anarchic D draws inside the funnel ===")
@@ -652,13 +691,31 @@ fig, axes = plt.subplots(1, 3, figsize=(16.5, 5.2), gridspec_kw={"width_ratios":
 show_paper(axes[0], "blanke_0809.1073_fig2_M12planes.png",
            "Paper (Blanke 2008 Fig. 2): $\\mathrm{Re}/\\mathrm{Im}(M_{12})_{KK}$ (K left, $B_s$ right)")
 
+# Blanke Fig.2 is a density-COLOURED SCATTER (their colorbar = local point count,
+# ~1..100). We reproduce that: scatter coloured by 2D log-density so the fuzzy
+# diagonal cloud and its bright core read like the paper (a hexbin washes that out).
+from matplotlib.colors import LogNorm as _LogNorm
+def density_scatter(ax, x, y, xext, yext, cmap=OURS_CMAP):
+    lx, ly = np.log10(x), np.log10(y)
+    H, xe, ye = np.histogram2d(lx, ly, bins=80,
+                               range=[np.log10(xext), np.log10(yext)])
+    ix = np.clip(np.searchsorted(xe, lx) - 1, 0, H.shape[0]-1)
+    iy = np.clip(np.searchsorted(ye, ly) - 1, 0, H.shape[1]-1)
+    cval = np.clip(H[ix, iy], 1, None)
+    order = np.argsort(cval)  # bright (dense) points drawn last
+    sc = ax.scatter(x[order], y[order], c=cval[order], s=2.5, cmap=cmap,
+                    norm=_LogNorm(vmin=1, vmax=max(cval.max(), 10)),
+                    alpha=0.85, edgecolor="none", rasterized=True)
+    ax.set_xscale("log"); ax.set_yscale("log")
+    ax.set_xlim(*xext); ax.set_ylim(*yext)
+    ax.axhline(1, color="grey", lw=0.7); ax.axvline(1, color="grey", lw=0.7)
+    return sc
+
 # Kaon panel: Im/Im_SM vs Re/Re_SM (log-log, abs values for log scale)
 m12_K = cm12(dc, "K", MKK_BQ)
 reK = np.abs(m12_K.real/M12_SM_K.real); imK = np.abs(m12_K.imag/M12_SM_K.imag)
 axK = axes[1]
-hb = axK.hexbin(reK, imK, xscale="log", yscale="log", gridsize=45, cmap=OURS_CMAP,
-                bins="log", mincnt=1, extent=(-5,3,-3,5))
-axK.axhline(1, color="grey", lw=0.7); axK.axvline(1, color="grey", lw=0.7)
+density_scatter(axK, reK, imK, (1e-3, 1e3), (1e-5, 1e5))  # match Blanke kaon panel
 axK.set_xlabel(r"$|\mathrm{Re}(M_{12}^K)_{\rm KK}/\mathrm{Re}(M_{12}^K)_{\rm SM}|$")
 axK.set_ylabel(r"$|\mathrm{Im}(M_{12}^K)_{\rm KK}/\mathrm{Im}(M_{12}^K)_{\rm SM}|$")
 axK.set_title("Ours: kaon $M_{12}$ plane (3 TeV)")
@@ -667,12 +724,11 @@ axK.set_title("Ours: kaon $M_{12}$ plane (3 TeV)")
 m12_Bs = cm12(dc, "Bs", MKK_BQ)
 reBs = np.abs(m12_Bs.real/abs(M12_SM_BS)); imBs = np.abs(m12_Bs.imag/abs(M12_SM_BS))
 axS = axes[2]
-hb2 = axS.hexbin(reBs, imBs, xscale="log", yscale="log", gridsize=45, cmap=OURS_CMAP,
-                 bins="log", mincnt=1, extent=(-5,1,-5,1))
-axS.axhline(1, color="grey", lw=0.7); axS.axvline(1, color="grey", lw=0.7)
+scS = density_scatter(axS, reBs, imBs, (1e-5, 1e3), (1e-5, 1e3))  # match Blanke Bs panel
 axS.set_xlabel(r"$|\mathrm{Re}(M_{12}^s)_{\rm KK}/(M_{12}^s)_{\rm SM}|$")
 axS.set_ylabel(r"$|\mathrm{Im}(M_{12}^s)_{\rm KK}/(M_{12}^s)_{\rm SM}|$")
 axS.set_title("Ours: $B_s$ $M_{12}$ plane (3 TeV)")
+cb = fig.colorbar(scS, ax=axS, pad=0.02); cb.set_label("point count")
 plt.tight_layout(); save_report(fig, "fig_ReIm_M12.png"); plt.show()
 
 print("=== Blanke Fig.2 vs ours (M_KK=3 TeV) ===")
