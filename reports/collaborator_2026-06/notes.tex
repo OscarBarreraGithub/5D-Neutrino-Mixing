@@ -8,7 +8,7 @@
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
 \setlength{\parskip}{0.5em}
 \setlength{\parindent}{0pt}
-\graphicspath{{figures_solo/}}
+\graphicspath{{figures_solo/}{../../references/paper_figures/}}
 
 \begin{document}
 
@@ -18,8 +18,10 @@
 \vspace{0.5em}
 Quick notes after the constraint-code audit and fixes. Two things here: (1) the floor
 summary (what M\textsubscript{KK} the minimal model actually needs), and (2) our reproductions
-of the relevant published figures, showing just our own panel in each case. All run on the
-fixed code.
+of the relevant published figures, side by side with the paper. Everything is the minimal
+(non-custodial) RS model in the S1 anarchic scenario, so in each comparison the paper panel on
+the left is cropped to the SINGLE minimal/S1 panel we actually reproduce (the custodial panels
+and the other scenarios in those figures are deliberately not shown). All run on the fixed code.
 
 \hrulefill
 
@@ -77,51 +79,123 @@ does not move the combined floor, so it is not the driver.
 
 \hrulefill
 
-\section*{2. Reproductions (our panel only)}
+\section*{2. Reproductions (paper left, ours right)}
 
-For each, this is just our reproduction. The real published figure is in the longer report; here
-we show only the thing we are actually reproducing.
+Each comparison is the correctly cropped single paper panel (minimal RS / S1 anarchic) on the left,
+our reproduction on the right. Where the published figure was a multi-panel (a custodial companion,
+a Higgs-mass sweep, or the S2/S3/S4 scenarios), only the one panel we reproduce is shown.
 
-\subsection*{$S,T,U$ oblique (vs Casagrande et al.\ 0807.4937, Fig.\ 4)}
-Our $S$-$T$ plane. The RS minimal wedge climbs steeply in $T$ (the volume-enhanced $T$ problem) and
-leaves our PDG-2025 ellipse fast; grey is the 2008 ellipse for reference. This is the irreducible
-bound that sets the existence floor.
+\subsection*{$S,T,U$ oblique (Casagrande et al.\ 0807.4937, Fig.\ 4)}
+Our $S$-$T$ plane vs the paper. The RS minimal wedge climbs steeply in $T$ (the volume-enhanced $T$
+problem) and leaves our PDG-2025 ellipse fast; grey is the 2008 ellipse for reference. This is the
+irreducible bound that sets the existence floor. The paper panel on the left is the minimal RS one
+(the blue wedge shooting up in $T$); the custodial companion panel, where the blue band stays pinned
+near $T=0$, is not what we model and is dropped.
 
-\begin{center}\includegraphics[width=0.72\textwidth]{solo_STU.png}\end{center}
+\begin{center}
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{{casagrande_0807.4937_fig4_ST_solo}.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{solo_STU.png}
+\end{minipage}
+\\[0.3em]
+{\small paper (left, 0807.4937 Fig.\ 4, minimal RS panel) vs ours (right)}
+\end{center}
 
-\subsection*{$Z\to b\bar b$ couplings (vs Casagrande et al.\ 0807.4937, Fig.\ 8)}
-Our $(g_L^b, g_R^b)$ plane. The RS stripe pins at $g_R^b \approx 0.077$ and slides to less-negative
-$g_L^b$ as $M_{\rm KK}$ drops, staying right by the SM point. With the B1 fix this is gauge-dominated
-and weak (bites only to about 5 TeV), not the 25 to 30 TeV the bug produced.
+\subsection*{$Z\to b\bar b$ couplings (Casagrande et al.\ 0807.4937, Fig.\ 8)}
+Our $(g_L^b, g_R^b)$ plane vs the paper. The RS stripe pins at $g_R^b \approx 0.077$ and slides to
+less-negative $g_L^b$ as $M_{\rm KK}$ drops, staying right by the SM point. With the B1 fix this is
+gauge-dominated and weak (bites only to about 5 TeV), not the 25 to 30 TeV the bug produced. The
+paper panel on the left is the RS scatter/stripe; the companion $m_h = 60$ to $1000$ GeV Higgs-mass
+sweep panel, which we do not compute, is dropped.
 
-\begin{center}\includegraphics[width=0.72\textwidth]{solo_Zbb_gLgR.png}\end{center}
+\begin{center}
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{{casagrande_0807.4937_fig8_gLgR_solo}.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{solo_Zbb_gLgR.png}
+\end{minipage}
+\\[0.3em]
+{\small paper (left, 0807.4937 Fig.\ 8, minimal RS panel) vs ours (right)}
+\end{center}
 
-\subsection*{$\varepsilon_K$ (vs Bauer et al.\ 0912.1625, Fig.\ 4)}
-Our anarchic $|\varepsilon_K|$ cloud, using Bauer's S1 draw setup ($Y_{\max}=3$, scanned $c$). Fat,
-about 6 to 7 decades, with the 5/50/95 percent quantile curves. The 95 percent quantile enters the
-allowed band near 10 TeV, which is Bauer's headline number.
+\subsection*{$\varepsilon_K$ (Bauer et al.\ 0912.1625, Fig.\ 4)}
+Our anarchic $|\varepsilon_K|$ cloud vs the paper, using Bauer's S1 draw setup ($Y_{\max}=3$, scanned
+$c$). Fat, about 6 to 7 decades, with the 5/50/95 percent quantile curves. The 95 percent quantile
+enters the allowed band near 10 TeV, which is Bauer's headline number. Following Bauer's Fig.~4
+caption the points are coloured by $Z\to b\bar b$ consistency: grey is the full ensemble without the
+$Z\to b\bar b$ cut, blue is consistent with both $Z\to b\bar b$ couplings at 99\% CL, and orange is
+consistent with both $Z\to b\bar b$ (99\% CL) and $|\varepsilon_K|\in[1.2,3.2]\times10^{-3}$ (95\% CL).
+The per-draw $Z\to b\bar b$ shift is the total mass-basis $[2,2]$ entry (gauge-KK plus the Casagrande
+fermion-KK admixture) computed on the same anarchic draws by
+\texttt{scripts/anarchic\_bauer\_s1\_zbb.py}. The paper figure is a 2x2 over
+scenarios S1 to S4; the left panel here is the S1 anarchic panel (top-left of the original), the only
+one we reproduce, and S2/S3/S4 are dropped.
 
-\begin{center}\includegraphics[width=0.74\textwidth]{solo_epsK_cloud.png}\end{center}
+\begin{center}
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{{bauer_0912.1625_fig4_epsK_solo}.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{solo_epsK_cloud.png}
+\end{minipage}
+\\[0.3em]
+{\small paper (left, 0912.1625 Fig.\ 4, S1 panel) vs ours (right)}
+\end{center}
 
-\subsection*{Consistency fraction (vs Bauer et al.\ 0912.1625, Fig.\ 5)}
-Fraction of anarchic points consistent vs $M_{\rm KK}$, paper-era window vs current strict gate.
-The rising $1/M_{\rm KK}^2$ decoupling is the same shape as the paper.
+\subsection*{Consistency fraction (Bauer et al.\ 0912.1625, Fig.\ 5)}
+Fraction of anarchic points consistent with $|\varepsilon_K|$ vs $M_{\rm KK}$, paper-era window vs
+current strict gate. The rising $1/M_{\rm KK}^2$ decoupling is the same shape as the paper. The paper
+figure has three panels, $P(|\varepsilon_K|)$, $P(Z\to b\bar b)$, and $P(\text{total})$; the left
+panel here is the $P(|\varepsilon_K|)$ one (top-left of the original), since that is the quantity we
+plot. We reproduce the S1 (black solid) curve in it; the $Z\to b\bar b$ and total panels are dropped.
 
-\begin{center}\includegraphics[width=0.7\textwidth]{solo_consistency.png}\end{center}
+\begin{center}
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{{bauer_0912.1625_fig5_consistency_solo}.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{solo_consistency.png}
+\end{minipage}
+\\[0.3em]
+{\small paper (left, 0912.1625 Fig.\ 5, $P(|\varepsilon_K|)$ panel) vs ours (right)}
+\end{center}
 
-\subsection*{$D^0$ mixing (vs Gedalia, Grossman, Nir, Perez 0906.1879, Fig.\ 1)}
-Our anarchic $D$-meson cloud on the Gedalia funnel, cleaned up to a single 3 TeV density plus the
-median-$y$ trend at 1, 3, 10 TeV. The cloud sinks into the allowed funnel as $M_{\rm KK}$ rises.
-(Optional figure: say the word if you would rather drop it.)
+\subsection*{$D^0$ mixing (Gedalia, Grossman, Nir, Perez 0906.1879, Fig.\ 1)}
+Our anarchic $D$-meson cloud on the Gedalia funnel vs the paper, cleaned up to a single 3 TeV density
+plus the median-$y$ trend at 1, 3, 10 TeV. The cloud sinks into the allowed funnel as $M_{\rm KK}$
+rises. The paper figure is a single panel (the allowed funnel with the GMFV and LMFV bands), kept as
+is. (Optional figure: say the word if you would rather drop it.)
 
-\begin{center}\includegraphics[width=0.72\textwidth]{solo_D0_funnel.png}\end{center}
+\begin{center}
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{{gedalia_0906.1879_fig1_Dfunnel_solo}.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{solo_D0_funnel.png}
+\end{minipage}
+\\[0.3em]
+{\small paper (left, 0906.1879 Fig.\ 1, single funnel panel) vs ours (right)}
+\end{center}
 
-\subsection*{$\Delta F=2$ amplitudes (vs Blanke et al.\ 0809.1073, Fig.\ 2)}
-Re vs Im of the KK contribution to $M_{12}$, for $K$ (left) and $B_s$ (right). For kaons the
-imaginary part dominates the real part by about $100\times$ (the $\varepsilon_K$ problem); ours is
-$106\times$.
+\subsection*{$\Delta F=2$ amplitudes (Blanke et al.\ 0809.1073, Fig.\ 2)}
+Re vs Im of the KK contribution to $M_{12}$, for $K$ (left sub-panel) and $B_s$ (right sub-panel). For
+kaons the imaginary part dominates the real part by about $100\times$ (the $\varepsilon_K$ problem);
+ours is $106\times$. The paper Fig.\ 2 is exactly these two systems, $K$ and $B_s$ (it has no $D$ or
+$B_d$ sub-panels), so both are kept on the left.
 
-\begin{center}\includegraphics[width=0.92\textwidth]{solo_ReIm_M12.png}\end{center}
+\begin{center}
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{{blanke_0809.1073_fig2_M12planes_solo}.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{solo_ReIm_M12.png}
+\end{minipage}
+\\[0.3em]
+{\small paper (left, 0809.1073 Fig.\ 2, $K$ and $B_s$ panels) vs ours (right)}
+\end{center}
 
 \vspace{0.5em}
 \hrulefill
