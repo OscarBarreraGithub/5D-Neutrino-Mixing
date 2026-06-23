@@ -74,20 +74,49 @@ REPO = Path.cwd().parent if Path.cwd().name == "notebooks" else Path.cwd()
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 FIGDIR = REPO / "references" / "paper_figures"
-DATA = REPO / "scan_outputs" / "anarchic_reproduction" / "anarchic_draws.parquet"
+ARDIR = REPO / "scan_outputs" / "anarchic_reproduction"
 
+# --- Bauer-S1-MATCHED anarchic ensemble (scripts/anarchic_bauer_s1.py) ----------
+# This is the ensemble that MATCHES the paper's draw setup (Bauer 0912.1625 Sec
+# 5.1-5.2): |Y| ~ Uniform(0.1, Y_max=3) in MODULUS with uniform phase (NDA / S1),
+# and per-draw SCANNED bulk masses (the RH top c_u3 flat in the Bauer prior;
+# remaining c's fixed by the leading-order Froggatt-Nielsen relations using the
+# actual drawn Yukawa minors).  Versus the older fixed-c / Re-Im-uniform |Y|<~2.1
+# generator, this widens the |eps_K| cloud from ~3.3 to ~6 decades per M_KK tile
+# and lowers the consistent fraction toward Bauer's S1 value.
+DATA = ARDIR / "anarchic_bauer_S1.parquet"
 df = pd.read_parquet(DATA)
-print("anarchic-forward draws:", len(df), "  tiles (TeV):", sorted(df.M_KK_TeV.unique()))
+# Schema bridge to the analysis code below (old generator used 'eps_k_np').
+if "eps_k_np" not in df.columns and "eps_K_np" in df.columns:
+    df["eps_k_np"] = df["eps_K_np"].values
+print("Bauer-S1-matched anarchic draws:", len(df),
+      "  tiles (TeV):", sorted(df.M_KK_TeV.unique()))
+
+# All four Bauer benchmark scenarios (for the 2x2 Fig. 4 mirror).
+SCEN_DATA = {}
+for _sc in ("S1", "S2", "S3", "S4"):
+    _p = ARDIR / f"anarchic_bauer_{_sc}.parquet"
+    if _p.exists():
+        _d = pd.read_parquet(_p)
+        if "eps_k_np" not in _d.columns:
+            _d["eps_k_np"] = _d["eps_K_np"].values
+        SCEN_DATA[_sc] = _d
+print("scenarios loaded:", list(SCEN_DATA.keys()))
 
 # --- complex M12^NP forward extract (re-run that EMITS the CP phase per system) -
 # scripts/anarchic_complex_m12.py reuses the SAME forward inner loop (same fixed c,
 # same |Y| prior, same M_KK->Lambda map, same RG to mu_had=2 GeV) but writes the
 # COMPLEX M12^NP for K, B_d, B_s, D. This unlocks the Bauer Fig.6/7 (C_Bq vs phi_Bq),
 # Gedalia Fig.1 (D funnel) and Blanke Fig.2 (Re/Im M12) planes, which need the PHASE.
-DATA_CM12 = REPO / "scan_outputs" / "anarchic_reproduction" / "anarchic_complex_m12.parquet"
+# Prefer the Bauer-S1-MATCHED complex-M12 ensemble (same Y_max=3 / scanned-c setup
+# as above, with the CP phase emitted); fall back to the legacy fixed-c file.
+DATA_CM12_MATCHED = ARDIR / "anarchic_bauer_s1_m12.parquet"
+DATA_CM12_LEGACY  = ARDIR / "anarchic_complex_m12.parquet"
+DATA_CM12 = DATA_CM12_MATCHED if DATA_CM12_MATCHED.exists() else DATA_CM12_LEGACY
 dc = pd.read_parquet(DATA_CM12)
 tiles_c = np.array(sorted(dc.M_KK_TeV.unique()))
-print("complex-M12 draws:", len(dc), "  tiles (TeV):", list(tiles_c))
+print(f"complex-M12 draws ({'S1-matched' if DATA_CM12==DATA_CM12_MATCHED else 'legacy fixed-c'}):",
+      len(dc), "  tiles (TeV):", list(tiles_c))
 
 # --- experimental inputs -------------------------------------------------------
 SM_EPS_K     = 2.161e-3          # Brod-Gorbahn-Stamou 2020 SM eps_K
@@ -105,6 +134,13 @@ print(f"BUDGET_NOW |EXP-SM| = {BUDGET_NOW:.3e};  paper window {WIN_PAPER};  curr
 def show_paper(ax, fname, title):
     img = mpimg.imread(FIGDIR / fname)
     ax.imshow(img); ax.axis("off"); ax.set_title(title, fontsize=10)
+
+# --- export matched figures to the collaborator report at dpi 150 ---------------
+REPORT_FIGDIR = REPO / "reports" / "collaborator_2026-06" / "figures"
+def save_report(fig, name):
+    if REPORT_FIGDIR.exists():
+        fig.savefig(REPORT_FIGDIR / name, dpi=150, bbox_inches="tight")
+        print(f"[export] {name} -> {REPORT_FIGDIR/name}")
 
 # --- consistent style across all "ours" panels --------------------------------
 OURS_CMAP = "viridis"
@@ -145,14 +181,25 @@ axes, with the paper-era window and the 5/50/95% quantile curves.
 
 The plotted $y$ = realized $|\varepsilon_K^{\rm tot}|=|\varepsilon_K^{\rm SM}+\varepsilon_K^{\rm NP}e^{i\phi}|$
 with a random NP phase $\phi$ per draw (the NP magnitude $|\varepsilon_K^{\rm NP}|$ is the
-recovered per-draw amplitude). Our closest scenario is **S1** ($Y_{\max}=3$ in the paper vs
-$|Y|\le\sqrt2\cdot1.5\approx2.1$ here; fixed-$c$ point vs scanned $c$-priors).
+recovered per-draw amplitude).
+
+**Ensemble = Bauer S1, matched.** We now use the S1-matched generator
+(`scripts/anarchic_bauer_s1.py`): $|Y|\sim\mathrm{Uniform}(0.1,Y_{\max}{=}3)$ in **modulus**
+with uniform phase (Bauer Sec 5.1 NDA prior), and **scanned** bulk masses — the RH-top
+$c_{u3}$ is drawn flat in Bauer's $]{-}1/2,2]$ prior (repo convention $[-2,1/2)$) and the
+other eight $c$'s are fixed PER DRAW by the leading-order Froggatt-Nielsen relations using
+the actual drawn Yukawa minors, so the geometry reproduces masses+CKM while genuinely
+**scattering** the $c$'s (Bauer Table 1 widths). This widens the per-tile $|\varepsilon_K|$
+cloud to **$\sim$6 decades** (vs $\sim$3.3 for the old fixed-$c$, $|Y|\!<\!2.1$ generator).
 """))
 
 cells.append(code(r"""
 rng = np.random.default_rng(7)
 phi = rng.uniform(0, 2*np.pi, len(df))
 df["eps_k_total"] = np.abs(SM_EPS_K + df["eps_k_np"].values * np.exp(1j*phi))
+# Current strict repo gate: |eps_K^NP| <= |exp - SM| (~6.8e-5).
+if "pass_eps_K_current" not in df.columns:
+    df["pass_eps_K_current"] = df["eps_k_np"].values <= BUDGET_NOW
 
 tiles = np.array(sorted(df.M_KK_TeV.unique()))
 def quantile_curves(col, qs=(5,50,95)):
@@ -180,12 +227,12 @@ for q,ls,lab in [(95,"-","95%"),(50,"--","50%"),(5,"-","5%")]:
 ax.axhspan(WIN_PAPER[0], WIN_PAPER[1], color="green", alpha=0.12, zorder=0)
 ax.axhline(SM_EPS_K, color="k", lw=0.8, ls=":")
 ax.text(0.5, SM_EPS_K*1.1, "SM", fontsize=8)
-ax.set_yscale("log"); ax.set_xlim(1,10.5); ax.set_ylim(1e-5,1e2)
+ax.set_yscale("log"); ax.set_xlim(1,10.5); ax.set_ylim(1e-7,1e3)
 ax.set_xlabel(r"$M_{\rm KK}$ [TeV]"); ax.set_ylabel(r"$|\varepsilon_K|$")
 ax.set_title("Our anarchic-forward cloud (paper-era window [1.2,3.2]e-3)\n+ 5/50/95% quantile curves")
 ax.legend(loc="upper right", fontsize=8, markerscale=4)
 ax.grid(alpha=0.25, which="both")
-plt.tight_layout(); plt.show()
+plt.tight_layout(); save_report(fig, "fig_epsK_cloud.png"); plt.show()
 
 # quantitative comparison
 print("=== PAPER-ERA validation (Bauer headline: median consistent for M_KK >~ 8 TeV;")
@@ -198,6 +245,75 @@ for m in tiles:
     g = df[df.M_KK_TeV==m]
     frac = ((g.eps_k_total>=WIN_PAPER[0])&(g.eps_k_total<=WIN_PAPER[1])).mean()
     print(f"  M_KK={m:5.1f} TeV : {frac*100:5.1f}% consistent with paper-era |eps_K| window")
+"""))
+
+# ---------------------------------------------------------------------------
+# FIGURE 1b — Bauer Fig.4 2x2 mirror (S1-S4), matched ensemble
+# ---------------------------------------------------------------------------
+cells.append(md(r"""
+## Fig. 1b — Bauer Fig. 4 **2$\times$2 mirror** (S1–S4), matched ensemble
+
+The same paper-era $|\varepsilon_K|$ cloud, but now drawn for **all four Bauer benchmark
+scenarios** in the paper's $2\times2$ layout, each with its own matched setup:
+
+| | $Y_{\max}$ | $c_{u3}$ prior (repo) | extra |
+|---|---|---|---|
+| **S1** standard | 3 | $[-2,\tfrac12)$ | — |
+| **S2** aligned  | 3 | $[-2,\tfrac12)$ | common $c_d$ (U(3)) |
+| **S3** little   | 3 | $[-\tfrac52,\tfrac12)$ | $L=\ln10^3\approx7$ (volume-truncated) |
+| **S4** large    | 12 | $[-2,\tfrac12)$ | $Y_{\max}=12$ |
+
+Grey = all draws; orange = consistent with $|\varepsilon_K|\in[1.2,3.2]\times10^{-3}$
+(95% CL); navy curves = 5/50/95% quantiles. S3 sits an order of magnitude higher (UV
+dominance), exactly as Bauer's S3 panel (axes shifted to $10^{-2}$–$10^3$).
+"""))
+
+cells.append(code(r"""
+SCEN_INFO = {"S1": ("standard",          (1e-7,1e3)),
+             "S2": ("aligned (common $c_d$)", (1e-7,1e3)),
+             "S3": ("little ($L=\\ln10^3$)",  (1e-2,1e3)),
+             "S4": ("large ($Y_{max}=12$)",   (1e-7,1e3))}
+rng4 = np.random.default_rng(11)
+fig, axes = plt.subplots(2, 2, figsize=(13, 9.5))
+for ax, sc in zip(axes.flat, ("S1","S2","S3","S4")):
+    if sc not in SCEN_DATA:
+        ax.set_title(f"{sc}: (data missing)"); continue
+    d = SCEN_DATA[sc].copy()
+    ph = rng4.uniform(0, 2*np.pi, len(d))
+    d["eps_tot"] = np.abs(SM_EPS_K + d["eps_k_np"].values * np.exp(1j*ph))
+    tl = np.array(sorted(d.M_KK_TeV.unique()))
+    subsc = pd.concat([g.sample(min(5000,len(g)), random_state=2) for _,g in d.groupby("M_KK_TeV")],
+                      ignore_index=True)
+    cons = (subsc.eps_tot>=WIN_PAPER[0]) & (subsc.eps_tot<=WIN_PAPER[1])
+    xj = subsc.M_KK_TeV.values * (1 + rng4.uniform(-0.16,0.16,len(subsc)))
+    ax.scatter(xj[~cons], subsc.eps_tot.values[~cons], s=2, c="0.6", alpha=0.30, rasterized=True, label="all draws")
+    ax.scatter(xj[cons],  subsc.eps_tot.values[cons],  s=2, c="orange", alpha=0.6, rasterized=True, label="$|\\varepsilon_K|$ consistent")
+    for q,ls in [(95,"-"),(50,"--"),(5,"-")]:
+        qq = np.array([np.percentile(d[d.M_KK_TeV==m].eps_tot, q) for m in tl])
+        ax.plot(tl, qq, color="navy", ls=ls, lw=1.5, zorder=5)
+    ax.axhspan(WIN_PAPER[0], WIN_PAPER[1], color="green", alpha=0.12, zorder=0)
+    ax.axhline(SM_EPS_K, color="k", lw=0.7, ls=":")
+    frac = ((d.eps_tot>=WIN_PAPER[0])&(d.eps_tot<=WIN_PAPER[1])).mean()
+    npp = d["eps_k_np"].values
+    dex = np.log10(np.percentile(npp,99.5)/max(np.percentile(npp,0.5),1e-300))
+    ax.set_yscale("log"); ax.set_xlim(1,10.5); ax.set_ylim(*SCEN_INFO[sc][1])
+    ax.set_title(f"{sc}: {SCEN_INFO[sc][0]}  —  consistent={frac*100:.0f}%, spread={dex:.1f} dex")
+    ax.set_xlabel(r"$M_{\rm KK}$ [TeV]"); ax.set_ylabel(r"$|\varepsilon_K|$")
+    ax.grid(alpha=0.25, which="both")
+    if sc=="S1": ax.legend(loc="upper right", fontsize=8, markerscale=4)
+plt.suptitle("Our matched anarchic clouds, Bauer Fig.4 layout (S1-S4)", y=1.0)
+plt.tight_layout(); plt.show()
+
+print("Bauer quoted: S1 eps_K-consistent=19%; S3 ~5% (worst, UV-dominance); S4 ~38% (Y_max=12).")
+for sc in ("S1","S2","S3","S4"):
+    if sc not in SCEN_DATA: continue
+    d = SCEN_DATA[sc]
+    npp = d["eps_k_np"].values
+    # per-tile (fixed M_KK) spread, averaged -> the 'cloud thickness' Bauer quotes
+    pertile = np.mean([np.log10(np.percentile(d[d.M_KK_TeV==m].eps_k_np,99.5)/
+                                max(np.percentile(d[d.M_KK_TeV==m].eps_k_np,0.5),1e-300))
+                       for m in sorted(d.M_KK_TeV.unique())])
+    print(f"  {sc}: per-tile cloud spread ~ {pertile:.1f} decades  (n={len(d)}, PDGpass={d.passes_pdg.mean():.1%})")
 """))
 
 # ---------------------------------------------------------------------------
@@ -222,7 +338,7 @@ ax.scatter(xj2[cons_now],  sub.eps_k_total.values[cons_now],  s=2, c="crimson", 
 for q,ls in [(95,"-"),(50,"--"),(5,"-")]:
     ax.plot(tiles, qc[q], color="navy", ls=ls, lw=1.4)
 ax.axhline(SM_EPS_K, color="k", lw=0.8, ls=":")
-ax.set_yscale("log"); ax.set_xlim(1,10.5); ax.set_ylim(1e-5,1e2)
+ax.set_yscale("log"); ax.set_xlim(1,10.5); ax.set_ylim(1e-7,1e3)
 ax.set_xlabel(r"$M_{\rm KK}$ [TeV]"); ax.set_ylabel(r"$|\varepsilon_K|$")
 ax.set_title("CURRENT $\\varepsilon_K$ gate (NP $\\leq$ |exp-SM| $\\approx$ 6.8e-5)")
 ax.legend(loc="upper right", fontsize=8, markerscale=4); ax.grid(alpha=0.25, which="both")
@@ -263,10 +379,11 @@ ax.set_xlim(1,10.5); ax.set_ylim(0,100)
 ax.set_xlabel(r"$M_{\rm KK}$ [TeV]"); ax.set_ylabel(r"% of anarchic draws consistent with $|\varepsilon_K|$")
 ax.set_title("Our % consistent vs $M_{KK}$ (paper-era vs current)")
 ax.legend(fontsize=8); ax.grid(alpha=0.3)
-plt.tight_layout(); plt.show()
+plt.tight_layout(); save_report(fig, "fig_consistency.png"); plt.show()
 print("Bauer S1: P(eps_K)=19%, P(eps_K)>10% requires M_KK>3.6 TeV; S4 (Y_max=12): 75%.")
-print("Our config (|Y|<~2.1, fixed c) sits between S1 and S4 in absolute fraction; the")
-print("DECOUPLING SHAPE (rising %, ~1/M_KK^2) and the ~10 TeV floor reproduce the paper.")
+print("Our matched S1 ensemble (Y_max=3, scanned c) reproduces the DECOUPLING SHAPE")
+print("(rising %, ~1/M_KK^2) and the ~10 TeV 95%-quantile floor; the absolute fraction is")
+print("higher than 19% because our cloud's lower (aligned) tail is fatter (documented).")
 """))
 
 # ---------------------------------------------------------------------------
@@ -425,7 +542,7 @@ ax.set_xlabel(r"$C_{B_d}$"); ax.set_ylabel(r"$\phi_{B_d}$  [deg]")
 ax.set_xlim(0.6,1.6); ax.set_ylim(-12,15)
 ax.set_title("Ours (anarchic forward): $\\phi_{B_d}$ vs $C_{B_d}$")
 ax.legend(loc="upper left", markerscale=4); ax.grid(alpha=0.3)
-plt.tight_layout(); plt.show()
+plt.tight_layout(); save_report(fig, "fig_CBd_phiBd.png"); plt.show()
 
 print("=== Bauer Fig.6 vs ours (M_KK=3 TeV) ===")
 print(f"  Bauer quoted: C_Bd = 0.89 +- 0.17 (shifts +-0.3 possible); phi_Bd = (-5.8 +- 2.8) deg, |phi|<~10 deg")
@@ -459,7 +576,7 @@ ax.set_xlabel(r"$C_{B_s}$"); ax.set_ylabel(r"$\phi_{B_s}$  [deg]")
 ax.set_xlim(0.6,1.6); ax.set_ylim(-90,90)
 ax.set_title("Ours (anarchic forward): $\\phi_{B_s}$ vs $C_{B_s}$")
 ax.legend(loc="upper left", markerscale=4); ax.grid(alpha=0.3)
-plt.tight_layout(); plt.show()
+plt.tight_layout(); save_report(fig, "fig_CBs_phiBs.png"); plt.show()
 
 print("=== Bauer Fig.7 vs ours (M_KK=3 TeV) ===")
 print(f"  Bauer quoted: C_Bs = 0.93 +- 0.19 (shifts +-0.4 possible); large phi_Bs allowed; (S_psiphi)_SM ~ 0.04")
@@ -506,7 +623,7 @@ ax.set_xlim(-1,1); ax.set_ylim(0,1.2)
 ax.set_xlabel(r"$\sin 2\sigma_D=\sin(\arg M_{12}^{\rm NP})$"); ax.set_ylabel(r"$x_{12}^{\rm NP}/x_{12}$")
 ax.set_title("Ours (anarchic forward): $D$ cloud on the Gedalia funnel")
 ax.legend(loc="upper right", markerscale=3.5); ax.grid(alpha=0.3)
-plt.tight_layout(); plt.show()
+plt.tight_layout(); save_report(fig, "fig_D0_funnel.png"); plt.show()
 
 print("=== Gedalia Fig.1 — fraction of anarchic D draws inside the funnel ===")
 for mkk in tiles_c:
@@ -556,7 +673,7 @@ axS.axhline(1, color="grey", lw=0.7); axS.axvline(1, color="grey", lw=0.7)
 axS.set_xlabel(r"$|\mathrm{Re}(M_{12}^s)_{\rm KK}/(M_{12}^s)_{\rm SM}|$")
 axS.set_ylabel(r"$|\mathrm{Im}(M_{12}^s)_{\rm KK}/(M_{12}^s)_{\rm SM}|$")
 axS.set_title("Ours: $B_s$ $M_{12}$ plane (3 TeV)")
-plt.tight_layout(); plt.show()
+plt.tight_layout(); save_report(fig, "fig_ReIm_M12.png"); plt.show()
 
 print("=== Blanke Fig.2 vs ours (M_KK=3 TeV) ===")
 print(f"  Kaon: Blanke notes Im(M12)_KK >> Re(M12)_KK by ~100x (the eps_K problem).")
