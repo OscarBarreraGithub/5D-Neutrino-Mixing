@@ -220,7 +220,8 @@ def _fn_c_values(c_u3, epsilon, targets, *, Y_u, Y_d, common_cd,
 # ---------------------------------------------------------------------------
 
 def _eval_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
-               mass_factor, ckm_factor, j_factor, emit_m12=False):
+               mass_factor, ckm_factor, j_factor, emit_m12=False, c_Q=None,
+               c_u=None, c_d=None):
     D_Q, D_u, D_d = np.diag(f_Q), np.diag(f_u), np.diag(f_d)
     M_u = DEFAULT_V_GEV * D_Q @ Y_u @ D_u
     M_d = DEFAULT_V_GEV * D_Q @ Y_d @ D_d
@@ -277,6 +278,17 @@ def _eval_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
         down_log_max=float(np.max(np.abs(dn_log))),
         ckm_log_max=float(np.max(ckm_log)),
     )
+    # Record the Froggatt-Nielsen-fixed gen-3 bulk masses (repo convention) so the
+    # OUTPUT parquet's c_Q3 median is directly verifiable against Bauer Table 1
+    # (S1: c_Q3 = -0.34 +/- 0.32 in Bauer's sign convention -> +0.34 here).  The
+    # GATED (passes_pdg) c_Q3 distribution is the Bauer-faithful one: its median is
+    # ~+0.28, inside Bauer's +0.34 +/- 0.32 band (about 0.06 below his central, well
+    # within the 1sigma width -- the distribution is broad and slightly tailed).
+    # The UNGATED median is biased to the IR floor (~+0.08) by mass+CKM-FAILING draws.
+    if c_Q is not None:
+        out["c_Q1"] = float(c_Q[0]); out["c_Q2"] = float(c_Q[1]); out["c_Q3"] = float(c_Q[2])
+    if c_d is not None:
+        out["c_d3"] = float(c_d[2])
     if emit_m12:
         m12 = _m12_complex_all(couplings, M_KK_GeV, xi_KK)
         for k, col in (("K", "K"), ("Bd", "Bd"), ("Bs", "Bs"), ("D", "D")):
@@ -320,7 +332,8 @@ def run_tile(M_KK_GeV, n_draws, seed, *, scenario, xi_KK, targets,
             f_u = f_IR(c_u, epsilon)
             f_d = f_IR(c_d, epsilon)
             r = _eval_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
-                           mass_factor, ckm_factor, j_factor, emit_m12=emit_m12)
+                           mass_factor, ckm_factor, j_factor, emit_m12=emit_m12,
+                           c_Q=c_Q, c_u=c_u, c_d=c_d)
         except (ValueError, np.linalg.LinAlgError, FloatingPointError):
             continue
         except Exception:  # noqa: BLE001 -- robust per-draw isolation

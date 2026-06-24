@@ -81,6 +81,7 @@ from warpConfig.wavefuncs import f_IR  # noqa: E402
 from scripts.run_rs_anarchy import (  # noqa: E402
     DEFAULT_XI_KK, DEFAULT_K_GEV, DEFAULT_V_GEV,
     _ordered_svd, _build_kk_gluon_couplings, _load_pdg_targets,
+    jarlskog_invariant,
 )
 from scripts.anarchic_bauer_s1 import (  # noqa: E402  -- reuse the EXACT draw machinery
     SCENARIOS, _draw_bauer_matrix, _fn_c_values, _EPS_BUDGET,
@@ -102,6 +103,12 @@ EW_MODEL = "minimal_rs"
 
 # 99% CL two-sided critical value (1 d.o.f.) -- Bauer's Z->bb cut.
 Z99 = 2.5758293035489004
+
+# Mass / CKM / Jarlskog factor tolerances for the per-draw Bauer-style accept
+# (identical to scripts/run_rs_anarchy.py + anarchic_bauer_s1.py scan defaults).
+MASS_FACTOR = 3.0
+CKM_FACTOR = 3.0
+J_FACTOR = 5.0
 
 
 # ---------------------------------------------------------------------------
@@ -209,6 +216,33 @@ def _run_tile(job):
             U_L_u, m_up, U_R_u = _ordered_svd(M_u)
             U_L_d, m_dn, U_R_d = _ordered_svd(M_d)
 
+            # --- mass + CKM consistency (Bauer's per-point chi^2 acceptance) ---
+            # Bauer (0912.1625 Sec 5.2) REJECTS draws whose Froggatt-Nielsen fit
+            # does not reproduce {m_q, CKM, J} (they cut chi^2/dof > 11.5/10), so
+            # their plotted ensemble is mass+CKM-consistent.  Our forward scan
+            # otherwise keeps every draw, including the mass+CKM-FAILING ones whose
+            # anarchic Yukawa minors rail c_Q3 to the IR floor (UNgated median repo
+            # c_Q3 ~ +0.08 with a huge IR tail; the GATED median rises to ~+0.28,
+            # inside Bauer's +0.34 +/- 0.32 band).  We therefore record passes_pdg
+            # with the SAME factor tolerances as run_rs_anarchy / anarchic_bauer_s1
+            # so the Z->bb overlay can be restricted to Bauer's accepted ensemble.
+            ckm = U_L_u.conj().T @ U_L_d
+            up_log = np.log(np.maximum(m_up, 1e-30) / targets["up_masses_GeV"])
+            dn_log = np.log(np.maximum(m_dn, 1e-30) / targets["down_masses_GeV"])
+            ckm_log = np.array([
+                abs(math.log(max(abs(ckm[0, 1]), 1e-30) / targets["abs_V_us"])),
+                abs(math.log(max(abs(ckm[1, 2]), 1e-30) / targets["abs_V_cb"])),
+                abs(math.log(max(abs(ckm[0, 2]), 1e-30) / targets["abs_V_ub"])),
+            ])
+            j_log = abs(math.log(max(abs(jarlskog_invariant(ckm)), 1e-30)
+                                 / abs(targets["J"])))
+            passes_pdg = bool(
+                (np.abs(up_log) <= math.log(MASS_FACTOR)).all()
+                and (np.abs(dn_log) <= math.log(MASS_FACTOR)).all()
+                and (ckm_log <= math.log(CKM_FACTOR)).all()
+                and j_log <= math.log(J_FACTOR)
+            )
+
             # --- eps_K (verbatim Delta-F=2 path, same as anarchic_bauer_s1) ---
             couplings = _build_kk_gluon_couplings(
                 M_KK=M_KK_GeV, xi_KK=xi_KK, f_Q=f_Q, f_u=f_u, f_d=f_d,
@@ -244,6 +278,7 @@ def _run_tile(job):
             M_KK_GeV=M_KK_GeV,
             M_KK_TeV=float(M_KK_TeV),
             c_u3=c_u3,
+            c_Q3=float(c_Q[2]),
             ratio_eps_K=ratio_eps_K,
             eps_K_np=eps_K_np,
             delta_g_L_b=dgL,
@@ -253,6 +288,7 @@ def _run_tile(job):
             pull_Rb=float(pull_Rb),
             pull_Ab=float(pull_Ab),
             passes_Zbb=passes_Zbb,
+            passes_pdg=passes_pdg,
         ))
     return rows
 

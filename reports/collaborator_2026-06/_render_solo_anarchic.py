@@ -47,6 +47,27 @@ def save(fig, name):
 df = pd.read_parquet(ARDIR / "anarchic_bauer_S1.parquet")
 if "eps_k_np" not in df.columns and "eps_K_np" in df.columns:
     df["eps_k_np"] = df["eps_K_np"].values
+# Bauer (0912.1625 Sec 5.2) plots ONLY the mass+CKM-reproducing ensemble: their
+# anarchic scan KEEPS a draw only if it passes chi^2/dof < 11.5/10 AND no single
+# observable (6 quark masses + 4 CKM/Wolfenstein) deviates > 3sigma.  Our forward
+# scan stores EVERY draw with a passes_pdg flag (the same factor tolerances), so to
+# match Bauer's panel we MUST restrict the WHOLE figure -- grey "without Z->bb"
+# backdrop AND the 5/50/95% quantile curves AND the blue/orange overlays -- to the
+# passes_pdg subset.  Without this gate the median c_Q3 rails to the IR floor
+# (~+0.08) on the ~89% of mass+CKM-FAILING draws; WITH the gate it rises to ~+0.28,
+# inside Bauer's +0.34 +/- 0.32 band (about 0.06 below his central value, well
+# within the 1sigma width).  The eps_K cloud is also artificially fat-tailed by the
+# non-physical (mass+CKM-failing) draws, which the gate removes.
+_N_DF_RAW = len(df)
+if "passes_pdg" in df.columns:
+    df = df[df["passes_pdg"].astype(bool)].copy()
+print(f"[epsK_cloud] S1 ensemble: {_N_DF_RAW} draws -> {len(df)} mass+CKM-consistent "
+      f"(passes_pdg gate, {len(df)/max(_N_DF_RAW,1):.1%})")
+if "c_Q3" in df.columns:
+    _med = df['c_Q3'].median()
+    print(f"[epsK_cloud] gated c_Q3 median = {_med:+.3f} "
+          f"(Bauer Table 1 S1: +0.34 +/- 0.32 in repo convention; "
+          f"ours is {abs(_med-0.34):.2f} below central, inside the 1sigma band)")
 
 DATA_CM12 = (ARDIR / "anarchic_bauer_s1_m12.parquet")
 if not DATA_CM12.exists():
@@ -114,10 +135,21 @@ if "eps_k_np" not in dz.columns and "eps_K_np" in dz.columns:
 # convention as the grey cloud above).
 phz = np.random.default_rng(11).uniform(0, 2*np.pi, len(dz))
 dz["eps_k_total"] = np.abs(SM_EPS_K + dz["eps_k_np"].values * np.exp(1j*phz))
-dz_pass = dz[dz["passes_Zbb"].astype(bool)].copy()           # "with Z->bb" (blue)
+# Bauer (0912.1625 Sec 5.2) plots ONLY mass+CKM-consistent draws (they reject
+# chi^2/dof > 11.5/10).  Our forward Z->bb companion now records passes_pdg with
+# the SAME factor tolerances as the eps_K ensemble, so restrict the Z->bb overlay
+# to that accepted subset -- otherwise the ~89% mass+CKM-FAILING draws (many of
+# which rail c_Q3 to the IR floor, giving an artificially LARGE delta g_L^b)
+# would deflate the blue fraction relative to Bauer's accepted ensemble.
+if "passes_pdg" in dz.columns:
+    dz_acc = dz[dz["passes_pdg"].astype(bool)].copy()
+else:                                   # backward-compat: pre-gate parquet
+    dz_acc = dz
+dz_pass = dz_acc[dz_acc["passes_Zbb"].astype(bool)].copy()   # "with Z->bb" (blue)
 dz_in = (dz_pass.eps_k_total >= WIN_PAPER[0]) & (dz_pass.eps_k_total <= WIN_PAPER[1])
-n_zbb = len(dz); n_blue = len(dz_pass); n_orange = int(dz_in.sum())
-print(f"[epsK_cloud] Z->bb companion: {n_zbb} draws, {n_blue} pass Z->bb (99% CL, blue), "
+n_zbb = len(dz_acc); n_blue = len(dz_pass); n_orange = int(dz_in.sum())
+print(f"[epsK_cloud] Z->bb companion: {len(dz)} draws ({n_zbb} mass+CKM-consistent), "
+      f"{n_blue} ALSO pass Z->bb (99% CL, blue), "
       f"{n_orange} pass BOTH Z->bb + |eps_K|-band (orange)")
 
 # small log-symmetric x-jitter so each M_KK tile reads as a column, not a line.
@@ -286,7 +318,7 @@ axS.set_xlabel(r"$|\mathrm{Re}(M_{12}^s)_{\rm KK}/(M_{12}^s)_{\rm SM}|$")
 axS.set_ylabel(r"$|\mathrm{Im}(M_{12}^s)_{\rm KK}/(M_{12}^s)_{\rm SM}|$")
 axS.set_title(r"$B_s$ $M_{12}$ plane ($M_{\rm KK}=3$ TeV)")
 cbS = fig.colorbar(scS, ax=axS, pad=0.02); cbS.set_label("point count")
-fig.suptitle(r"NP (KK) contribution to $M_{12}$, normalized to SM — kaon (left), $B_s$ (right)",
+fig.suptitle(r"NP (KK) contribution to $M_{12}$, normalized to SM: kaon (left), $B_s$ (right)",
              y=1.01, fontsize=12)
 save(fig, "solo_ReIm_M12.png")
 

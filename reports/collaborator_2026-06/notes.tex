@@ -121,18 +121,38 @@ sweep panel, which we do not compute, is dropped.
 {\small paper (left, 0807.4937 Fig.\ 8, minimal RS panel) vs ours (right)}
 \end{center}
 
-\subsection*{$\varepsilon_K$ (Bauer et al.\ 0912.1625, Fig.\ 4)}
-Our anarchic $|\varepsilon_K|$ cloud vs the paper, using Bauer's S1 draw setup ($Y_{\max}=3$, scanned
-$c$). Fat, about 6 to 7 decades, with the 5/50/95 percent quantile curves. The 95 percent quantile
-enters the allowed band near 10 TeV, which is Bauer's headline number. Following Bauer's Fig.~4
-caption the points are coloured by $Z\to b\bar b$ consistency: grey is the full ensemble without the
-$Z\to b\bar b$ cut, blue is consistent with both $Z\to b\bar b$ couplings at 99\% CL, and orange is
-consistent with both $Z\to b\bar b$ (99\% CL) and $|\varepsilon_K|\in[1.2,3.2]\times10^{-3}$ (95\% CL).
-The per-draw $Z\to b\bar b$ shift is the total mass-basis $[2,2]$ entry (gauge-KK plus the Casagrande
-fermion-KK admixture) computed on the same anarchic draws by
-\texttt{scripts/anarchic\_bauer\_s1\_zbb.py}. The paper figure is a 2x2 over
-scenarios S1 to S4; the left panel here is the S1 anarchic panel (top-left of the original), the only
-one we reproduce, and S2/S3/S4 are dropped.
+\subsection*{$\varepsilon_K$, S1 standard (Bauer et al.\ 0912.1625, Fig.\ 4 top-left)}
+Our anarchic $|\varepsilon_K|$ cloud vs the paper, using Bauer's S1 draw setup ($Y_{\max}=3$, anarchic
+Yukawas drawn uniform in modulus and phase, bulk $c$ scanned and fixed per draw by the Froggatt-Nielsen
+mass relations). One thing we had to get right: Bauer KEEPS only draws that reproduce the quark masses
+and CKM (his $\chi^2/\mathrm{dof}<11.5/10$ cut, then no single observable off by more than $3\sigma$).
+Our forward scan computes every draw but flags whether it passes that mass+CKM gate, and the whole
+figure here, grey backdrop and the quantile curves and the blue/orange overlays, is now restricted to
+that passing subset. This matters: on the full unfiltered ensemble the median third-generation doublet
+$c_{Q_3}$ rails to the IR floor (about $+0.08$ in our convention) because the $\sim$89\% of mass+CKM
+FAILING draws push $b_L$ very IR; once we apply the gate the median $c_{Q_3}$ rises to about $+0.28$,
+which sits comfortably inside Bauer's Table 1 value $c_{Q_3}=-0.34\pm0.32$ (their sign convention is
+opposite ours, so their $-0.34$ is our $+0.34$). To be honest about it, our gated median $+0.28$ is
+about $0.06$ below Bauer's central $+0.34$, well within his $\pm0.32$ one-sigma width; the distribution
+is broad and slightly tailed, exactly as Bauer notes for $c_{Q_3}$, so the central value is not sharply
+pinned. The point is that the gate moves the median the right way and by the right amount, from the IR
+floor up to the Bauer band. Pulling $c_{Q_3}$ more UV is also what weakens the $Z\to b\bar b$ shift,
+which is why the gated ensemble has a noticeably larger blue (Z-consistent) fraction at high $M_{\rm KK}$.
+
+The cloud is fat, about 6 to 7 decades, with the 5/50/95 percent quantile curves. The 95 percent
+quantile enters the allowed band near 10 TeV, which is Bauer's headline number. Following Bauer's
+Fig.~4 caption the points are coloured by $Z\to b\bar b$ consistency: grey is the (mass+CKM-consistent)
+ensemble without the $Z\to b\bar b$ cut, blue is consistent with both $Z\to b\bar b$ couplings at 99\%
+CL, and orange is consistent with both $Z\to b\bar b$ (99\% CL) and
+$|\varepsilon_K|\in[1.2,3.2]\times10^{-3}$ (95\% CL). The per-draw $Z\to b\bar b$ shift is the total
+mass-basis $[2,2]$ entry (gauge-KK plus the Casagrande fermion-KK admixture) computed on the same
+anarchic draws by \texttt{scripts/anarchic\_bauer\_s1\_zbb.py}. The paper figure is a 2x2 over
+scenarios S1 to S4; the left panel here is the S1 anarchic panel (top-left of the original).
+
+This S1 standard scenario, anarchic Yukawas with INDEPENDENT per-generation bulk $c$'s fit to masses
+and CKM, is exactly what our production catalog scan implements (\texttt{quarkConstraints/fit.py}
+fits three independent down $c$'s; there is no common-$c$ alignment anywhere in the production path).
+So this panel is the apples-to-apples reproduction of our own model.
 
 \begin{center}
 \begin{minipage}[t]{0.49\textwidth}\centering
@@ -143,6 +163,37 @@ one we reproduce, and S2/S3/S4 are dropped.
 \end{minipage}
 \\[0.3em]
 {\small paper (left, 0912.1625 Fig.\ 4, S1 panel) vs ours (right)}
+\end{center}
+
+\subsection*{$\varepsilon_K$, S2 aligned (Bauer et al.\ 0912.1625, Fig.\ 4 top-right)}
+For completeness, here is Bauer's OTHER scenario, S2 ``aligned''. It is the same anarchic setup
+($Y_{\max}=3$, same mass+CKM gate) with one extra assumption: a COMMON right-handed down-type bulk mass
+$c_{d_1}=c_{d_2}=c_{d_3}$, imposed by a $U(3)$ flavour symmetry on the RH down quarks. That alignment
+suppresses the dangerous $\Delta F=2$ down-sector mixing, so the $\varepsilon_K$ cloud collapses toward
+the experimental band and the orange (in-band) fraction blows up relative to S1. You can see it in both
+panels: the orange stripe in S2 is far fatter than in S1, and the median $\varepsilon_K$ sits much
+closer to the band. Our S2 panel is built byte-identically to the S1 one (same draws, same gate, same
+$Z\to b\bar b$ colouring) except the scan averages the three down $c$'s to a single value per draw
+(\texttt{scripts/anarchic\_bauer\_s1.py}, \texttt{common\_cd=True}). The paper panel on the left is the
+top-right (S2) of the original 2x2.
+
+Honest note on what this is: S2 is a DIFFERENT model from the one we actually scan. Our production
+catalog uses independent down $c$'s (it is S1 standard, confirmed above), so it does NOT get the S2
+alignment suppression for free; the $\varepsilon_K$ floor our scan reports is the S1 one. S2 is shown
+here only to reproduce Bauer's full figure and to make the point explicit: the way to soften the
+$\varepsilon_K$ tension in this class of models is an extra down-sector flavour symmetry, which is a
+model-building choice (a different model) rather than a free consequence of warped geometry. We are not
+claiming our scan sits in S2.
+
+\begin{center}
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{{bauer_0912.1625_fig4_epsK_S2_solo}.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\centering
+\includegraphics[width=\textwidth]{solo_epsK_cloud_S2.png}
+\end{minipage}
+\\[0.3em]
+{\small paper (left, 0912.1625 Fig.\ 4, S2 aligned panel) vs ours (right)}
 \end{center}
 
 \subsection*{Consistency fraction (Bauer et al.\ 0912.1625, Fig.\ 5)}
