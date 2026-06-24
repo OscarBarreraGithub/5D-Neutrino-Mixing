@@ -965,7 +965,10 @@ def build_rs_zbb_fermion_kk_mixing(
 
     # CGHNP (0807.4937) Z->bb ZMA, retranslated (PLAN §4.2):
     #   B_d = B_correct(c_d3, f_d3)
-    #         + (1/(2 f_d3^2)) * sum_{i=1,2} |Y_d,3i|^2/|Y_d,33|^2 * 1/(1 - 2 c_d_i)
+    #         + (1/(2 f_d3^2)) * sum_{i=1,2} |Y_d,3i|^2/|Y_d,33|^2 * 1/(1 + 2 c_d_i)
+    #   (the 1/(1 - 2 c_di) of Eq. (170) is in the CGHNP c-convention; with
+    #    c_CGHNP = -c_repo this becomes 1/(1 + 2 c_di,repo), matching the
+    #    converted diagonal bracket below.)
     # and the symmetric expression for B_Q with c_Q, f_q3, column_ratio.  The
     # diagonal (b_R/b_L) term carries the 3rd-gen bracket; the light-generation
     # flavour sum carries the COMMON 1/(2 f_3^2) factor (the 3rd-gen singlet
@@ -977,10 +980,21 @@ def build_rs_zbb_fermion_kk_mixing(
     light_sum_d = 0.0
     light_sum_q = 0.0
     for i in (0, 1):
-        denom_d = 1.0 - 2.0 * float(c_d[i])
-        denom_q = 1.0 - 2.0 * float(c_q[i])
+        # CGHNP (0807.4937) Eq. (170) flavour-sum denominator is 1/(1 - 2 c_di)
+        # in THEIR convention c_di,CGHNP.  The convention dictionary is
+        # c_CGHNP = -c_repo (proved in audit slice 3), so 1 - 2 c_di,CGHNP =
+        # 1 + 2 c_di,repo.  The diagonal bracket _casagrande_zbb_B_profile
+        # already applies this conversion (it uses 1 + 2c); the light-generation
+        # flavour sum MUST use the same converted denominator.  Using the
+        # un-converted 1 - 2 c_repo here was a bug: for the scan-typical UV light
+        # singlets (c_repo ~ +0.6, i.e. c_CGHNP ~ -0.6) it gives a NEGATIVE,
+        # large denominator factor 1/(1 - 2*0.6) = -3.3, flipping the sign and
+        # inflating |delta g_L^b| by ~5-8x (e.g. -0.044 vs the correct +0.007 at
+        # the Bauer-S1 central point, M_KK = 3 TeV).
+        denom_d = 1.0 + 2.0 * float(c_d[i])
+        denom_q = 1.0 + 2.0 * float(c_q[i])
         if denom_d == 0.0 or denom_q == 0.0:
-            raise ValueError("Zbb light-generation flavour-sum denominator (1 - 2c) is singular")
+            raise ValueError("Zbb light-generation flavour-sum denominator (1 + 2c) is singular")
         light_sum_d += float(row_ratio[i]) / denom_d
         light_sum_q += float(column_ratio[i]) / denom_q
     B_d = float(profile_b_d[2] + (1.0 / (2.0 * f_d3_sq)) * light_sum_d)

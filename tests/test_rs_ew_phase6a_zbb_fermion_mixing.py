@@ -162,10 +162,17 @@ def _manual_fermion_shift(fit: _QuarkFit, lambda_ir_gev: float) -> tuple[float, 
     delta g_L^b = +(m_b^2/2 M_KK^2) * B_d,
     delta g_R^b = -(m_b^2/2 M_KK^2) * B_Q, with
       B_d = B_diag(c_d3, f_d3)
-            + (1/(2 f_d3^2)) * sum_{i=1,2} |Y_d,3i|^2/|Y_d,33|^2 * 1/(1 - 2 c_d_i),
+            + (1/(2 f_d3^2)) * sum_{i=1,2} |Y_d,3i|^2/|Y_d,33|^2 * 1/(1 + 2 c_d_i),
     and symmetric B_Q (column sum, c_Q, f_q3).  The diagonal (b_R/b_L) term
     uses the CGHNP bracket; the light-generation sum uses the COMMON 1/(2 f_3^2)
     factor, NOT a per-light-gen full bracket (PLAN §4.2 error 1a).
+
+    The flavour-sum denominator is 1/(1 - 2 c_di) in CGHNP variables
+    (Eq. 170); through the convention dictionary c_CGHNP = -c_repo it becomes
+    1/(1 + 2 c_di,repo) -- the SAME conversion already applied to the diagonal
+    bracket (_cghnp_diagonal_bracket).  The previous oracle used the
+    un-converted 1/(1 - 2 c_repo), which shared the production bug and so could
+    not catch it; it is now the independent, sign-correct check.
     """
     bs = fit.bulk_state
     y_d = bs.Y_d_bulk_basis
@@ -176,10 +183,10 @@ def _manual_fermion_shift(fit: _QuarkFit, lambda_ir_gev: float) -> tuple[float, 
     f_q3_sq = float(bs.F_Q[2]) ** 2
 
     light_sum_d = sum(
-        float(row_ratio[i]) / (1.0 - 2.0 * float(bs.c_d[i])) for i in (0, 1)
+        float(row_ratio[i]) / (1.0 + 2.0 * float(bs.c_d[i])) for i in (0, 1)
     )
     light_sum_q = sum(
-        float(column_ratio[i]) / (1.0 - 2.0 * float(bs.c_Q[i])) for i in (0, 1)
+        float(column_ratio[i]) / (1.0 + 2.0 * float(bs.c_Q[i])) for i in (0, 1)
     )
     B_d = _cghnp_diagonal_bracket(float(bs.c_d[2]), float(bs.F_d[2])) + (
         1.0 / (2.0 * f_d3_sq)
@@ -256,8 +263,8 @@ def test_casagrande_zbb_fermion_shift_signs_and_independent_formula():
     # Re-pinned after B1 (CGHNP retranslation: c-sign + F^2=2f^2 + flavour-sum
     # index).  The OLD pins (2.35e-5, -5.49e-4) were pins-of-the-bug; the
     # corrected fermion piece is sign-correct and much smaller.
-    assert zbb["delta_g_L_b"] == pytest.approx(3.7365283558008076e-06)
-    assert zbb["delta_g_R_b"] == pytest.approx(-1.9279722543603958e-05)
+    assert zbb["delta_g_L_b"] == pytest.approx(3.7365285051847189e-06)
+    assert zbb["delta_g_R_b"] == pytest.approx(-1.9279722705643624e-05)
     # SM-Zbb sign pins (UV-localized b_R, c_r > 1/2): delta g_L^b > 0 (reduces
     # R_b), delta g_R^b < 0.  These FAILED under the old sign-flipped bracket.
     assert zbb["delta_g_L_b"] > 0.0
@@ -440,3 +447,57 @@ def test_zbb_fermion_mixing_fails_loud_on_missing_required_inputs():
 
     with pytest.raises(ValueError, match="masses_down"):
         build_rs_zbb_fermion_kk_mixing(_MissingMassFit(fit.bulk_state), spectrum=spectrum)
+
+
+def test_zbb_flavour_sum_sign_convention_uv_light_singlets():
+    """Regression pin for the CGHNP flavour-sum convention bug (2026-06-23).
+
+    The light-generation flavour sum in B_d/B_Q uses 1/(1 - 2 c_di) in the
+    CGHNP convention; with c_CGHNP = -c_repo it MUST become 1/(1 + 2 c_di,repo).
+    Using the un-converted 1/(1 - 2 c_repo) made the denominator NEGATIVE for the
+    scan-typical UV light singlets (c_repo ~ +0.6) and inflated |delta g_L^b| by
+    ~5-8x with the WRONG SIGN.  The default ``_fit`` fixture hid this because its
+    off-diagonal Yukawas are ~1e-5 (flavour sum ~1e-10, negligible); this test
+    uses O(1) off-diagonal Yukawas + UV light down singlets so the flavour sum is
+    O(1) and the sign/magnitude is exercised.
+    """
+    eps = 1.0e-15
+    c_q = np.array([0.63, 0.57, 0.34], dtype=float)   # IR b-doublet (Bauer-S1)
+    c_d = np.array([0.66, 0.62, 0.58], dtype=float)   # UV light down singlets
+    y_d = np.array(
+        [[1.0, 0.3, 0.5], [0.4, 1.0, 0.6], [1.5, 0.9, 1.0]],
+        dtype=np.complex128,
+    )
+
+    @dataclass(frozen=True)
+    class _BS:
+        c_Q: np.ndarray
+        c_u: np.ndarray
+        c_d: np.ndarray
+        F_Q: np.ndarray
+        F_d: np.ndarray
+        Y_d_bulk_basis: np.ndarray
+
+    @dataclass(frozen=True)
+    class _FR:
+        bulk_state: object
+        masses_down: np.ndarray
+
+    bs = _BS(
+        c_Q=c_q, c_u=c_q, c_d=c_d,
+        F_Q=np.asarray(f_IR(c_q, eps), dtype=float),
+        F_d=np.asarray(f_IR(c_d, eps), dtype=float),
+        Y_d_bulk_basis=y_d,
+    )
+    fr = _FR(bulk_state=bs, masses_down=np.array([0.004, 0.09, 2.5]))
+    spectrum = RSEWSpectrum.build(
+        lambda_ir_gev=3000.0 / 2.45, k_gev=1.2209e19,
+        n_gauge_modes=128, quadrature_order=1024, model_label="minimal_rs",
+    )
+    fk = build_rs_zbb_fermion_kk_mixing(fr, spectrum=spectrum)
+
+    # The fix: positive, bounded delta g_L^b (the SM/Casagrande sign), magnitude
+    # comparable to the gauge piece -- NOT a large negative O(0.01) blow-up.
+    assert fk.delta_g_L_b == pytest.approx(5.847017e-03, rel=1e-4)
+    assert fk.delta_g_L_b > 0.0
+    assert 0.0 < fk.delta_g_L_b < 0.02   # bounded, not inflated 5-8x
