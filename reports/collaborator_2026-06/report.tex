@@ -214,8 +214,9 @@ bites only to ${\sim}5$~TeV.
 \caption{Anarchic $|\varepsilon_K|$ vs.\ $M_{KK}$: paper (left, S1--S4) vs.\ ours
 (right, S1), Bauer's grey/blue/orange $Z\to b\bar b$ colouring with 5/50/95\%
 quantile curves. Paper scatters anarchic Yukawas; we reproduce the fat cloud in
-anarchic-forward mode. Grey, blue and orange all come from one dense single
-ensemble, so the cloud is continuous and de-banded.}
+anarchic-forward mode. Grey and the quantiles come from the fat 990k anarchic-S1
+ensemble (restoring Bauer's tail spread); dense blue/orange from the 202k
+$Z\to b\bar b$ companion --- both the same Bauer-S1 prior.}
 \end{figure}
 The canonical RS $\varepsilon_K$ problem: anarchic $|\varepsilon_K|$ vs.\
 $M_{KK}$ spanning ${\sim}6$ decades, colored by $\varepsilon_K$ consistency, with
@@ -232,11 +233,17 @@ older fixed-$c$, $|Y|<2.1$ generator), the \textbf{95\%-quantile floor at
 $M_{KK}\approx10$~TeV} (= Bauer's ``$M_g^{(1)}\gtrsim10$~TeV''), and the
 upper-bulk amplitude ($p75\approx118\times$ SM = Bauer's ``typically
 ${\sim}100\times$ SM''). The fitted $c$'s land on Bauer's Table~1 central values.
-The grey/blue/orange points and the 5/50/95\% quantiles are now drawn from a
-SINGLE dense ensemble (the 202{,}500-draw \texttt{anarchic\_bauer\_s1\_zbb} run on
-a fine 45-tile 1--20~TeV grid: 22{,}880 mass+CKM-gated grey, 5{,}401
-$Z\to b\bar b$-passing blue, ${\sim}5{,}000$ in-window orange), so the cloud is
-continuous and de-banded (no per-tile striping). One honest, real difference (not
+The figure is a HYBRID of two layers from the SAME Bauer-S1 prior. The grey
+backdrop and the 5/50/95\% quantiles come from the FAT 990{,}000-draw
+\texttt{anarchic\_bauer\_S1} ensemble (112{,}024 mass+CKM-gated draws on the
+45-tile 1--20~TeV grid), which samples the $|\varepsilon_K|$ tails far better than
+the companion run and restores Bauer's headline per-tile spread (median ${\sim}3.7$,
+max ${\sim}4.9$ decades). The dense blue ($Z\to b\bar b$-passing) and orange
+($|\varepsilon_K|$-window) overlays come from the 202{,}500-draw
+\texttt{anarchic\_bauer\_s1\_zbb} companion (22{,}880 mass+CKM-gated, 5{,}401
+$Z\to b\bar b$-passing blue, ${\sim}5{,}000$ in-window orange). Both layers are the
+same anarchic prior, so blue is a representative $Z\to b\bar b$-passing subset of the
+grey distribution. One honest, real difference (not
 a plotting artifact): our blue ($Z\to b\bar b$-consistent) points fill in only
 ABOVE ${\sim}4.5$~TeV, whereas Bauer's blue blankets the plane down to 1~TeV ---
 because our corrected $Z\to b\bar b$ (PDG-2025 $R_b/A_b$ + exact coupling) is

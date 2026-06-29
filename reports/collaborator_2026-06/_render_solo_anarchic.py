@@ -113,29 +113,24 @@ def cm12(df_, sys_, mkk):
 #   ORANGE "with |eps_K|"     = the subset consistent with BOTH the Z->bb cut AND
 #                               |eps_K| in [1.2, 3.2]e-3 (the 95% CL exp. window).
 #
-# The Z->bb companion anarchic_bauer_s1_zbb.parquet (202,500 draws on a fine 45-tile
-# M_KK grid 1-20 TeV, ~4500/tile) is now the SINGLE ensemble for the whole figure.
-# It RE-DRAWS the Bauer-S1 ensemble and, per draw, carries the TOTAL mass-basis [2,2]
-# Z->bb shift (gauge-KK + Casagrande fermion-KK, the exact object the T010/T011 Z-pole
-# adapter consumes), a self-consistent eps_K, the passes_pdg mass+CKM gate, and the
-# passes_Zbb 99% CL flag.  Of the 202,500 draws, 22,880 pass the mass+CKM gate (grey
-# backdrop); of those, 5,401 pass Z->bb (blue) and ~5,000 also land in the eps_K window
-# (orange).
-#
-# DENSITY (de-banded): because grey, blue, orange AND the 5/50/95% quantiles all come
-# from this ONE dense ensemble, the cloud is continuous over ~6 decades with no
-# column-per-tile striping -- this REPLACES the earlier construction that underlaid a
-# separate dF=2-only cloud as grey and overlaid a sparse Z->bb scatter (which made grey
-# far denser than blue and broke Bauer's grey/blue/orange layering).  The plot is
-# clipped to 1-10.5 TeV to match Bauer's axes.
-# --- SINGLE ENSEMBLE (Bauer Fig.4 structure) -------------------------------
-# Bauer colours ONE ensemble by the cut: grey = no Z->bb cut, blue = passes Z->bb
-# (99% CL), orange = + |eps_K| window.  The Z->bb companion parquet carries the
-# self-consistent eps_K_np AND passes_pdg AND passes_Zbb per draw, so we render
-# grey/blue/orange AND the 5/50/95% quantiles all from that SAME ensemble -- the
-# faithful construction (grey is then literally the superset blue is drawn from).
-# We no longer underlay the separate 990k dF=2-only cloud, which made grey far
-# denser than blue and broke Bauer's blue-dominant structure.
+# HYBRID construction (faithful to Bauer's FAT spread AND a dense blue band):
+#   GREY backdrop + 5/50/95% cyan quantiles  <- the FAT 990k Bauer-S1 ensemble
+#       (`df`, already passes_pdg-gated near the top of the script).  This ensemble
+#       samples the |eps_K| tails far better than the 202k Z->bb companion, restoring
+#       Bauer's headline per-tile spread (median ~3.7 / max ~4.9 decades) and the 95%
+#       quantile crossing the upper exp. window edge 3.2e-3 only near M_KK ~ 10 TeV.
+#   BLUE "with Z->bb" + ORANGE "with |eps_K|"  <- the DENSE 202k Z->bb companion
+#       (`anarchic_bauer_s1_zbb.parquet`), which carries the self-consistent
+#       passes_Zbb 99% CL flag per draw (5,401 blue points; the old ~100-point sparse
+#       -blue problem is gone now that the companion is dense, so we no longer need the
+#       single-ensemble construction for blue density).
+# Both layers are the SAME Bauer-S1 prior, so the blue Z->bb-passing points are a
+# representative subset of the grey distribution: grey = full 990k anarchic superset
+# (no Z->bb cut); blue/orange = dense 202k Z->bb-flagged subset of that same prior.
+# HONEST PHYSICS NOTE (preserved): the blue band fills only ABOVE ~4.5 TeV -- our
+# corrected Z->bb is STRONGER than Bauer's 2009 cut, so it vetoes the low-mass draws
+# Bauer kept.  That gap is a real result, NOT a plotting artifact.  Plot clipped to
+# 1-10.5 TeV (Bauer axes); 5/50/95% cyan quantiles retained.
 ZBB = ARDIR / "anarchic_bauer_s1_zbb.parquet"
 dz = pd.read_parquet(ZBB)
 if "eps_k_np" not in dz.columns and "eps_K_np" in dz.columns:
@@ -150,15 +145,33 @@ else:
     dz_acc = dz
 dz_pass = dz_acc[dz_acc["passes_Zbb"].astype(bool)].copy()   # "with Z->bb" (blue)
 dz_in = (dz_pass.eps_k_total >= WIN_PAPER[0]) & (dz_pass.eps_k_total <= WIN_PAPER[1])
-n_zbb = len(dz_acc); n_blue = len(dz_pass); n_orange = int(dz_in.sum())
-print(f"[epsK_cloud] single ensemble: {len(dz)} draws -> {n_zbb} mass+CKM-consistent "
-      f"(grey), {n_blue} pass Z->bb (99% CL, blue), "
-      f"{n_orange} pass BOTH Z->bb + |eps_K|-band (orange)")
+n_blue = len(dz_pass); n_orange = int(dz_in.sum())
 
-tiles = np.array(sorted(dz_acc.M_KK_TeV.unique()))
+# GREY + quantiles come from the FAT 990k anarchic superset (`df`, passes_pdg-gated):
+# realize its self-consistent |eps_K| with a random NP phase (same recipe as zbb), then
+# subsample ~7000/tile for legibility.  This restores Bauer's ~5-decade tail spread.
+df["eps_k_total"] = np.abs(
+    SM_EPS_K + df["eps_K_np"].values
+    * np.exp(1j*np.random.default_rng(11).uniform(0, 2*np.pi, len(df))))
+tiles = np.array(sorted(df.M_KK_TeV.unique()))
+_GREY_PER_TILE = 7000
+_grey_parts, _rng_sub = [], np.random.default_rng(23)
+for _m in tiles:
+    _gg = df[df.M_KK_TeV == _m]
+    if len(_gg) > _GREY_PER_TILE:
+        _gg = _gg.iloc[_rng_sub.choice(len(_gg), _GREY_PER_TILE, replace=False)]
+    _grey_parts.append(_gg)
+df_grey = pd.concat(_grey_parts, ignore_index=True)
+n_grey = len(df[df.M_KK_TeV.isin(tiles)])  # full accepted grey count (for the print)
+print(f"[epsK_cloud] HYBRID: grey+quantiles from FAT 990k anarchic-S1 "
+      f"({n_grey} mass+CKM-consistent, {len(df_grey)} subsampled @ {_GREY_PER_TILE}/tile); "
+      f"blue/orange from DENSE 202k Z->bb companion "
+      f"({len(dz_acc)} accepted -> {n_blue} pass Z->bb (99% CL, blue), "
+      f"{n_orange} also in |eps_K|-band (orange))")
+
 def quantile_curves(frame, col, tiles_, qs=(5, 50, 95)):
     return {q: np.array([np.percentile(frame[frame.M_KK_TeV == m][col], q) for m in tiles_]) for q in qs}
-qc = quantile_curves(dz_acc, "eps_k_total", tiles)
+qc = quantile_curves(df, "eps_k_total", tiles)   # quantiles from the FAT ensemble
 
 # small log-symmetric x-jitter so each M_KK tile reads as a column, not a line.
 def _xjit(mkk, seed, w=0.11):
@@ -168,9 +181,9 @@ def _xjit(mkk, seed, w=0.11):
 fig, ax = plt.subplots(figsize=(8.2, 6.2))
 # exp. band drawn first so points sit on top of the shaded window.
 ax.axhspan(WIN_PAPER[0], WIN_PAPER[1], color="green", alpha=0.10, zorder=0)
-# GREY: FULL accepted ensemble (no Z->bb cut) -- the superset.
-xjg = _xjit(dz_acc.M_KK_TeV.values, 3)
-ax.scatter(xjg, dz_acc.eps_k_total.values, s=5, c="0.62",
+# GREY: FAT 990k accepted ensemble (no Z->bb cut) -- the fat-tailed superset.
+xjg = _xjit(df_grey.M_KK_TeV.values, 3)
+ax.scatter(xjg, df_grey.eps_k_total.values, s=5, c="0.62",
            alpha=0.35, rasterized=True, zorder=1, linewidths=0,
            label=r"without $Z\to b\bar b$ (full ensemble)")
 # BLUE: Z->bb-consistent (99% CL) subset drawn ON TOP, same ensemble.
