@@ -1,5 +1,10 @@
 # RS-anarchy follow-up campaign — orchestrator submission guide
 
+> **LEGACY (May 2026 ΔF=2/anarchy follow-up campaign, pre-audit).** These runs
+> predate the June 2026 audit and do not reflect the corrected minimal-RS floors
+> (typical ~30 TeV ε_K; existence ~18-20 TeV S,T,U; Z→bb ~5 TeV). See
+> `docs/FLOOR_SUMMARY.md` and `reports/collaborator_2026-06/CONTENT.md`.
+
 This file lists the exact `sbatch` commands (in the right order) for the
 five follow-up runs. **Do not run these blindly**: read the constraints
 on each run first.

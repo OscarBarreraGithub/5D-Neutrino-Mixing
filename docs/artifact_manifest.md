@@ -1,5 +1,12 @@
 # Canonical Artifact Manifest
 
+> **LEGACY (May 2026 ΔF=2-only / anarchy artifacts, pre-audit).** This manifest
+> seals the `quarkscan-paper-rc1` ΔF=2 scan artifacts. It predates the June 2026
+> audit and does not reflect the corrected minimal-RS floors (typical ~30 TeV
+> from `epsilon_K`, existence ~18-20 TeV from oblique S,T,U, Z→bb ~5 TeV). For
+> the current picture see `docs/FLOOR_SUMMARY.md` and
+> `reports/collaborator_2026-06/CONTENT.md`.
+
 **Tag**: `quarkscan-paper-rc1` (to be created only at Phase 3 sign-off)  
 **Date sealed**: 2026-05-15  
 **Branch**: `paper/quark-scan-2026q2`  

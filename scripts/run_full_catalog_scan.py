@@ -969,11 +969,17 @@ def _structured_tag_class(diag: Mapping[str, Any]) -> str | None:
     """Return a constraint's explicit structured tag-class hint, if present.
 
     A constraint result may declare ``diagnostics["tag_class"]`` as one of
-    ``{"rigorous", "proxy", "partial", "stub"}`` (M5, slice-5 F8).  This is the
+    ``{"rigorous", "proxy", "partial"}`` (M5, slice-5 F8).  This is the
     durable replacement for prose substring matching on ``needs_human_physics`` /
     ``matching_status``: it cannot be fooled by plurals ("proxies") or by
     phrasings like "proxy pending rigorous treatment".  Unknown / missing values
     return ``None`` so the legacy prose match remains the fallback.
+
+    Note: ``"stub"`` is recognized as a normalized value here but is NOT honored
+    as a structured override in ``tag_result`` -- stub classification is decided
+    earlier by the missing-extra / exception / unevaluated checks, so a declared
+    ``tag_class == "stub"`` falls through to those.  Do not rely on it as an
+    explicit per-constraint hint.
     """
     value = _string_or_none(diag.get("tag_class"))
     if value is None:

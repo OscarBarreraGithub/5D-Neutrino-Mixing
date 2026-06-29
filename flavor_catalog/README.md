@@ -1,14 +1,14 @@
 # Flavor Constraint Catalog
 
-A discovery-mode catalog of low-energy flavor and direct-collider RS
-constraints, maintained as a companion artifact to the quark-scan paper
-at rc1.1. Not a live constraint backend; should stay separate from the
-existing scan / solver / neutrino / Yukawa / paper-note code paths
-until the PI approves a later integration step.
+A catalog of low-energy flavor and direct-collider RS constraints (YAML
+sidecars + `.tex` prose + reference manifests). It is now **paired with the
+live `flavor_catalog_constraints/` Python backend**, which implements these
+entries as executable pass/fail constraints used by the production scans.
+This directory remains the human-facing source of truth for anchors and
+provenance; the Python package is the runtime.
 
-This work lives on branch `flavor-catalog/2026q2`. Do not merge to
-`paper/quark-scan-2026q2` (frozen at rc1.1). Merge into `main` only on
-PI sign-off.
+This work originated on branch `flavor-catalog/2026q2` and has since been
+merged to `main`.
 
 ## Layout
 
@@ -33,7 +33,7 @@ flavor_catalog/
     kaon/                         # 13 entries
     charm/                        # 8 entries
     beauty/                       # 22 entries
-    top_higgs_ew/                 # 19 entries
+    top_higgs_ew/                 # 20 entries
     charged_lepton/               # 11 entries (LFV)
     edm_neutrino/                 # 7 entries
     collider_rs/                  # 14 entries (Wave-9: KK gauge resonances,
@@ -74,7 +74,13 @@ catalog size policy.
 
 ## Build
 
-`catalog_master.pdf` at the current tag `flavor-catalog-v0.4` is built
+The catalog now contains **103 entries = 95 PRIMARY + 8 SECONDARY** across
+seven families (top_higgs_ew grew from 19 to 20 since v0.4; this matches the
+`flavor_catalog_constraints/` registry, which discovers 103 = 95 PRIMARY + 8
+SECONDARY). The historical compile/sign-off record below is for the
+`flavor-catalog-v0.4` tag (102 entries).
+
+`catalog_master.pdf` at tag `flavor-catalog-v0.4` was built
 from **102 OPUS-APPROVED entries** across seven families.
 
 - **9 waves** of additions:
@@ -120,7 +126,7 @@ should include `from`, `to`, `at`, `agent_id`, and `reason`.
 `flavor_catalog/PRIORITY_TIERS.md` is the binding policy doc. In short:
 
 - **PRIMARY** (the default, no `priority_tier` field): the Waves 1–7
-  flavor + Wave-9 collider_rs entries (94 total). These are the
+  flavor + Wave-9 collider_rs entries (95 total). These are the
   canonical RS-flavor + RS-collider constraints; downstream code
   implementation should start here.
 - **SECONDARY** (`priority_tier: SECONDARY` + `promoted_in_wave`):

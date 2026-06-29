@@ -1,5 +1,16 @@
 # Custodial protection for our warped (RS) flavor scan — problem statement / questions
 
+> **Post-audit correction (June 2026).** The framing below ("two EW observables
+> dominate — Z→bb and oblique T — pushing the floor to ~10 TeV in Λ_IR units")
+> reflects the pre-audit picture and is partly retracted. After the B1 fix,
+> **Z→bb collapses to ~5 TeV and is NOT a dominant constraint**. For corrected
+> minimal non-custodial RS, the irreducible EXISTENCE floor (~18-20 TeV physical
+> M_KK) is set by **oblique S,T,U** (the RS T-problem, no Yukawa freedom), and
+> the TYPICAL ~30 TeV floor is set by the tunable flavor constraint `epsilon_K`.
+> Custodial structure fixes the oblique T problem but does NOT relax `epsilon_K`.
+> The physics questions about custodial *modeling* below remain valid; only the
+> "what dominates" motivation is updated. See `docs/FLOOR_SUMMARY.md`.
+
 ## Setup
 We run a large parameter scan of a Randall–Sundrum warped extra dimension with
 anarchic 5D Yukawas and bulk fermions localized by dimensionless masses `c`,
@@ -22,8 +33,9 @@ to know exactly how to model it at the level of our scan's granularity.
   distinct pieces**: (i) a **gauge–KK wavefunction** piece (Z zero-mode profile /
   KK mixing, set by the third-generation doublet IR overlap `F(c_Q3)`), and
   (ii) a **fermion–KK mixing admixture** (a Casagrande ZMA `∝ m_b²/Λ_IR²` term).
-- **Oblique:** a leading-order proxy, ΔS = c_S · v²/M_KK², ΔT = (πL / 2c_W²) ·
-  v²/M_KK² with `L = ln(M_Pl/TeV) ≈ 35`, and U = 0.
+- **Oblique:** a leading-order proxy, ΔS = c_S · v²/M_KK², ΔT_minimal =
+  x₁² · (πL / 2c_W²) · v²/M_KK² with `L = ln(M_Pl/TeV) ≈ 35`, `x₁ ≈ 2.45`
+  (physical-M_KK convention; the `x₁²` factor was the M2 fix), and U = 0.
 
 Standard references we're working from: Agashe–Contino–Da Rold–Pomarol
 (hep-ph/0605341, the P_LR protection of Zb_L) and Carena–Pontón–Santiago–Wagner

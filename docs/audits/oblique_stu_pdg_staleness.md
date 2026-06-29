@@ -20,7 +20,20 @@ Where it lives (would need updating in lockstep):
 - Write-ups quoting the same triple: `review_local/constraint_formulas.tex` (local);
   check `docs/quark_scan_methodology_note.tex` for any S/T statement too.
 
-Bounded impact: oblique is a proxy (does NOT set the rigorous floor; Z->bbar at
-~25-30 TeV dominates). The prediction-side formulas and constants
+**UPDATE (post-audit, June 2026).** The "bounded impact" framing below is now
+out of date in TWO ways. (1) Oblique S,T,U is NO LONGER subleading: after the B1
+fix, Z→bb collapsed to ~5 TeV and is not the driver. Oblique S,T,U now sets the
+minimal-model EXISTENCE (fine-tuned, irreducible) floor at ~18-20 TeV physical
+M_KK, while the typical ~30 TeV floor comes from `epsilon_K`. So the data-side
+fit anchors here DO matter for the existence floor and should be reconciled with
+current PDG. (2) The prediction-side `dT` formula below is missing the M2
+physical-M_KK factor: the correct minimal form is
+`dT = x1^2 * piL/(2 c_W^2) * v^2/M_KK^2` with `x1 ~ 2.45` (the geometric
+`piL/(2 c_W^2)` is in Lambda_IR units). See `docs/FLOOR_SUMMARY.md`.
+
+Bounded impact (original 2026-06-17 note, retained for history): oblique was then
+thought to be a proxy that does NOT set the rigorous floor (Z->bbar at ~25-30 TeV
+believed dominant -- now known to be the B1 artifact). The prediction-side
+formulas and constants
 (dT = piL/2c_W^2 v^2/M_KK^2, dS = 30 v^2/M_KK^2, L=35, v=246.21965, sin^2thetaW=0.23122)
-all check out; only the data-side fit anchors are stale.
+were checked; only the data-side fit anchors were flagged stale.

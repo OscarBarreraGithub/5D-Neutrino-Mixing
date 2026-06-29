@@ -18,8 +18,14 @@ NEEDS-HUMAN-PHYSICS.  The current ``ParameterPoint`` does not carry the full
 electroweak KK gauge sector.  The NP side therefore uses the documented
 minimal-RS proxy from ``quarkConstraints.oblique_stu``:
 ``Delta S = c_S v^2/M_KK^2`` with ``c_S`` loaded from the PDG warped-context
-anchor, and ``Delta T = pi L/(2 c_W^2) v^2/M_KK^2`` with ``U = 0``.  This is
-the classic RS T-parameter problem proxy, not a full custodial/EW fit.
+anchor, and ``Delta T = x_1^2 [pi L/(2 c_W^2)] v^2/M_KK^2`` with ``U = 0``.
+The ``x_1^2`` factor (``x_1 ~ 2.4487``, the first gauge-KK Bessel root, with
+``M_KK = x_1 Lambda_IR``) converts the volume-enhanced ``pi L/(2 c_W^2)``
+coefficient from the geometric-Lambda_IR convention into the physical-M_KK
+convention that ``Delta S`` already uses (PLAN M2); without it ``Delta T`` was
+~``x_1^2 ~ 6`` too weak.  This is the classic RS T-parameter problem proxy,
+not a full custodial/EW fit.  See ``quarkConstraints.oblique_stu`` for the
+canonical implementation and convention note.
 
 Severity
 --------

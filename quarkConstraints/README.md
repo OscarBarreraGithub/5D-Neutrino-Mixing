@@ -12,6 +12,13 @@ generic RS flavor/CP problem into a controlled next-to-MFV structure. The
 key low-energy dial is the parameter `r`, which suppresses down-sector flavor
 violation and can make KK scales near 2 TeV viable.
 
+> **Scope note (this 2 TeV figure is the old 0710.1869/FPR MFV lane, not the
+> current minimal floor).** The audited minimal non-custodial floor is *not*
+> 2 TeV: it is a typical ~30 TeV from `epsilon_K` and an irreducible existence
+> ~18–20 TeV from oblique S,T,U (post-B1 Z→bb is only ~5 TeV). See
+> [`docs/FLOOR_SUMMARY.md`](../docs/FLOOR_SUMMARY.md). The 2 TeV claim is the
+> FPR-MFV-`r` mechanism in isolation, which this package implements as one lane.
+
 ## Canonical Docs
 
 - [`README.md`](./README.md): collaborator-facing quark package overview
@@ -40,9 +47,12 @@ The current exploratory scaffold includes:
 - lightweight proxy and quark-basis misalignment diagnostics
 - a scan wrapper and benchmark script
 
-The default target table is a repo-owned fixed-scale bundle at `mu = 3 TeV`
-(`default_quark_targets()`), while `rough_sm_targets()` remains as a
-compatibility helper for earlier exploratory naming.
+The default target table is a repo-owned bundle (`default_quark_targets()`)
+whose PDG quark masses are evolved to `m_t(m_t) = 163.5 GeV`; the `mu = 3 TeV`
+scale is the Wilson-coefficient *reference* scale, not the mass-input scale.
+`rough_sm_targets()` remains as a compatibility helper for earlier exploratory
+naming. The `modern` lane below is the current provenance/versioned-artifact
+machinery (not merely "planned").
 
 ## Caveats
 

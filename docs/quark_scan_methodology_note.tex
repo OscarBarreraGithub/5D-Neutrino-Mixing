@@ -45,6 +45,24 @@
 \begin{document}
 \maketitle
 
+\begin{center}
+\fcolorbox{red}{yellow!20}{\parbox{0.95\linewidth}{\small
+\textbf{LEGACY / SUPERSEDED (May 2026 $\Delta F=2$-only note).}
+This note covers only the $\Delta F=2$ flavor sector and predates the June 2026
+audit. Its headline flavor-only floors ($47.26$, $127.13$, $44.50$~TeV) and the
+CFW factor-$2.2$ reconciliation narrative are \emph{not} the current
+project floors and should not be read as such. It also states that the repo
+``does not compute oblique parameters, $Zb\bar b$ corrections, or global EWPO''
+--- that is no longer true (see \texttt{quarkConstraints/oblique\_stu.py},
+\texttt{rs\_ew\_couplings.py}, and the EW001/T010/T011 catalog constraints).
+The corrected, authoritative picture: a \emph{typical} minimal floor
+$\sim 30$~TeV from $\varepsilon_K$, an \emph{existence} floor $\sim 18$--$20$~TeV
+from irreducible oblique $S,T,U$, and $Zb\bar b \sim 5$~TeV after the B1 fix; the
+audit reproduces Bauer 0912.1625, Gedalia 0906.1879, and Blanke 0809.1073. See
+\texttt{docs/FLOOR\_SUMMARY.md} and
+\texttt{reports/collaborator\_2026-06/CONTENT.md}.}}
+\end{center}
+
 %% =====================================================================
 \section{What the headline outcome is}
 \label{sec:summary}

@@ -93,9 +93,11 @@ things have changed since.
    projections reach about 5.7 TeV (discovery) to 6.6 TeV (exclusion).
 
 3. The model framing shifted. It is now understood that minimal anarchic RS is
-   pushed to tens of TeV by flavor and electroweak data, not by colliders (the
-   epsilon_K bound alone forces the KK gluon above roughly 24 TeV in anarchic RS,
-   consistent with the floor our own scan finds). The field moved to custodial RS,
+   pushed to tens of TeV by flavor and electroweak data, not by colliders. Our
+   corrected scan finds a TYPICAL ~30 TeV minimal floor from `epsilon_K` (flavor)
+   and an irreducible EXISTENCE floor ~18-20 TeV from oblique S,T,U; the
+   post-B1-fix Z->bb constraint is only ~5 TeV. Collider limits (~4 TeV) sit far
+   below all of these. The field moved to custodial RS,
    composite Higgs / partial compositeness, and "little RS" with brane-localized
    kinetic terms, which can bring the scale down toward 5 TeV.
 

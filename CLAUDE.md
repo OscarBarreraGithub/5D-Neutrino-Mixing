@@ -4,16 +4,25 @@ This file is agent-facing context for working in the repo. Canonical user-facing
 documentation lives in `README.md` and the module `README.md` files. Superseded
 planning notes should be recovered from git history when needed.
 
-This repository implements a parameter sweep for the lepton sector in a
-Randall-Sundrum warped extra dimension. The goal is to find regions of parameter
-space that reproduce observed charged lepton masses and viable light neutrino
-masses using geometric localization rather than hierarchical Yukawa couplings.
+This repository originated as a lepton-sector parameter sweep in a
+Randall-Sundrum warped extra dimension (geometric localization of charged-lepton
+and neutrino masses), and that machinery remains. **Active documentation and the
+current paper work are quark-sector / full-catalog**, not lepton: the audited
+ΔF=2 + RS-electroweak constraints and the 103-constraint flavor/collider catalog.
+The lepton-sector directories are follow-up scope.
 
 All work lives on `main` (post-2026-05-25 consolidation; tagged
-`v2026q2-catalog-complete`). The canonical quark-sector methodology note is
-`docs/quark_scan_methodology_note.tex`/`.pdf`. This paper is quark-sector only;
-lepton-sector directories are follow-up scope. The Cloudflare-deployed catalog
-website builds from `main` with root `flavor_catalog/website/`.
+`v2026q2-catalog-complete`). The authoritative current-state docs are
+`docs/FLOOR_SUMMARY.md`, `docs/STATE_OF_PROJECT.md`, and the June 2026
+collaborator report `reports/collaborator_2026-06/CONTENT.md`. The legacy
+quark-sector methodology note `docs/quark_scan_methodology_note.tex`/`.pdf` is
+ΔF=2-only and pre-audit (carries a SUPERSEDED banner); its flavor-only floors are
+not the current floors. The Cloudflare-deployed catalog website builds from
+`main` with root `flavor_catalog/website/`.
+
+**Corrected minimal-RS floor (post-audit, June 2026):** typical ~30 TeV from the
+tunable `epsilon_K`; existence ~18-20 TeV from irreducible oblique S,T,U; Z→bb
+~5 TeV after the B1 fix (the old "25-30 TeV Z→bb floor" was a B1 bug, not real).
 
 ---
 
@@ -120,7 +129,7 @@ modules.
 │
 ├── qcd/               # ✅ 4-loop QCD running and threshold decoupling utilities
 │
-├── flavor_catalog/    # ✅ 94 PRIMARY + 8 SECONDARY constraints plus Astro website
+├── flavor_catalog/    # ✅ 95 PRIMARY + 8 SECONDARY constraints (103 total) plus Astro website
 │
 └── derivations/       # LaTeX derivations (detailed physics)
 ```

@@ -1,3 +1,20 @@
+> **SUPERSEDED (post-audit, June 2026).** This note's central claim — that the
+> now-live Z→bb became the *dominant* constraint with a "rigorous floor
+> ~25–30 TeV physical M_KK (~10–12 TeV in Λ_IR units)" — is **WRONG**. It was an
+> artifact of the **B1** bug: the Casagrande `m_b²` fermion-KK admixture was
+> mistranslated (wrong sign, ~190× too large), which faked the 25–30 TeV
+> (108 TeV at 1σ) Z→bb exclusion. After the B1 + residual-B1 fixes, **Z→bb
+> collapses to ~5 TeV** and is gauge-dominated; the "full ZMA2 flavor-sum
+> dominates the gauge term by ~29×" characterization below is part of the same
+> artifact. The corrected picture: the minimal non-custodial floor is a TYPICAL
+> ~30 TeV from the tunable `epsilon_K` and an EXISTENCE ~18–20 TeV from
+> irreducible oblique S,T,U. The Λ_IR-vs-physical-M_KK unit reconciliation
+> argument below does NOT rescue the old number — it was a real code bug, not a
+> convention. See `docs/FLOOR_SUMMARY.md` and
+> `reports/collaborator_2026-06/CONTENT.md` for the authoritative floors. The
+> mechanical change records here (allowlist 37→46, collider searches added) are
+> still accurate.
+
 # Quark-only scan: Z→bb made live + collider KK-mass searches added (2026-06)
 
 This note records two changes to the quark-only (`--quark-only`) constraint set,

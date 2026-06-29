@@ -310,6 +310,17 @@ def _rephase_to_pdg_convention(
     same phase, so ``U_L^dagger M U_R = diag(s)`` (the masses) is preserved.
     Applied to an already-canonical set the transformation is the identity, so
     it is idempotent and bit-stable on re-evaluation.
+
+    Gauge note (B2 audit, verified): the FIFTH anchor (``V_ts``) is a free gauge
+    choice, not a physical input.  PDG/Bauer Eq.(113) fix ``V_cs`` instead; the
+    two choices differ only by a rephasing.  All physical observables here are
+    rephasing-invariant -- ``|CKM|``, the Jarlskog invariant, the quark masses,
+    ``epsilon_K``, and every ``|M12|`` / ``Delta-m`` are bit-identical under the
+    two anchors.  Only the B-meson NP *phases* ``arg(M12_NP)`` (consumed by
+    B002 ``S_psiKS`` / B004 ``S_psiphi``) move with the 5th anchor -- but that is
+    a separate, pre-existing convention fragility in those two constraints
+    (see ``docs/KNOWN_ISSUES.md``), not affected by the ``V_ts`` vs ``V_cs``
+    choice, and not used by any floor or reproduction in the production scan.
     """
     V = U_L_u.conj().T @ U_L_d
 

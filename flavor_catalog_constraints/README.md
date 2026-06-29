@@ -1,11 +1,20 @@
 # flavor_catalog_constraints
 
-A plug-in constraint system for the RS flavor scan. Each of the ~102
-catalogued flavor-physics observables becomes **one self-contained file**
-that wraps existing physics, loads its experimental anchor from the
-catalog, and returns a standardized pass/fail result. Adding a constraint
-is dropping in a file; deleting one is removing a file. No file imports
-another constraint, and one broken constraint cannot break the rest.
+A plug-in constraint system for the RS flavor scan. Each catalogued
+flavor-physics observable becomes **one self-contained file** that wraps
+existing physics, loads its experimental anchor from the catalog, and returns
+a standardized pass/fail result (the registry currently discovers 103 = 95
+PRIMARY + 8 SECONDARY). Adding a constraint is dropping in a file; deleting one
+is removing a file. No file imports another constraint, and one broken
+constraint cannot break the rest.
+
+Beyond the ΔF=2 adapter (`physics_adapters/deltaf2.py`), the package wires
+RS-electroweak observables (oblique S,T,U via `quarkConstraints/oblique_stu.py`,
+Z→bb T010/T011, off-diagonal Z FCNC T014, EW001), top/Higgs and collider
+recasts, and semileptonic Wilson coefficients, via `rs_ew_builder.py` and
+`point_builder.py`. Runtime tag policy (`rigorous` / `proxy` / `partial` /
+`stub`, plus HARD/SOFT/INFO severity) is decided by the scan harness
+(`scripts/run_full_catalog_scan.py:tag_result`), not by static metadata.
 
 ## Layout
 
