@@ -139,15 +139,34 @@ pinned. The point is that the gate moves the median the right way and by the rig
 floor up to the Bauer band. Pulling $c_{Q_3}$ more UV is also what weakens the $Z\to b\bar b$ shift,
 which is why the gated ensemble has a noticeably larger blue (Z-consistent) fraction at high $M_{\rm KK}$.
 
-The cloud is fat, about 6 to 7 decades, with the 5/50/95 percent quantile curves. The 95 percent
-quantile enters the allowed band near 10 TeV, which is Bauer's headline number. Following Bauer's
-Fig.~4 caption the points are coloured by $Z\to b\bar b$ consistency: grey is the (mass+CKM-consistent)
-ensemble without the $Z\to b\bar b$ cut, blue is consistent with both $Z\to b\bar b$ couplings at 99\%
-CL, and orange is consistent with both $Z\to b\bar b$ (99\% CL) and
-$|\varepsilon_K|\in[1.2,3.2]\times10^{-3}$ (95\% CL). The per-draw $Z\to b\bar b$ shift is the total
-mass-basis $[2,2]$ entry (gauge-KK plus the Casagrande fermion-KK admixture) computed on the same
-anarchic draws by \texttt{scripts/anarchic\_bauer\_s1\_zbb.py}. The paper figure is a 2x2 over
-scenarios S1 to S4; the left panel here is the S1 anarchic panel (top-left of the original).
+The cloud is fat, about 6 to 7 decades, and it is dense and continuous: grey, blue and orange are
+now drawn from a SINGLE dense ensemble (the 202{,}500-draw \texttt{anarchic\_bauer\_s1\_zbb} run
+on a fine 45-tile $M_{\rm KK}$ grid from 1 to 20 TeV, clipped to 1 to 10.5 TeV here to match Bauer;
+22{,}880 mass+CKM-gated draws form the grey backdrop, of which 5{,}401 pass $Z\to b\bar b$ and about
+5{,}000 land in the $|\varepsilon_K|$ window). Earlier drafts overlaid a sparse $Z\to b\bar b$ scatter
+on a separate cloud; this single-ensemble construction de-bands the figure so the column-per-tile
+striping is gone and the density now matches the paper's. The 5/50/95 percent quantile curves (cyan)
+are computed on that same gated ensemble; the 95 percent quantile enters the allowed band near 10 TeV,
+which is Bauer's headline number. Following Bauer's Fig.~4 caption the points are coloured by
+$Z\to b\bar b$ consistency: grey is the (mass+CKM-consistent) ensemble without the $Z\to b\bar b$ cut,
+blue is consistent with both $Z\to b\bar b$ couplings at 99\% CL, and orange is consistent with both
+$Z\to b\bar b$ (99\% CL) and $|\varepsilon_K|\in[1.2,3.2]\times10^{-3}$ (95\% CL). The per-draw
+$Z\to b\bar b$ shift is the total mass-basis $[2,2]$ entry (gauge-KK plus the Casagrande fermion-KK
+admixture) computed on the same anarchic draws by \texttt{scripts/anarchic\_bauer\_s1\_zbb.py}. The
+paper figure is a 2x2 over scenarios S1 to S4; the left panel here is the S1 anarchic panel (top-left
+of the original).
+
+One honest difference from Bauer, and it is a real result rather than a plotting artifact: in our
+panel the blue ($Z\to b\bar b$-consistent) points fill in only ABOVE about 4.5 TeV (the blue fraction
+is essentially zero below 4 TeV, crosses 1 percent near 4.5 TeV, and climbs from there), whereas
+Bauer's blue blankets the entire plane down to 1 TeV. The reason is that our corrected $Z\to b\bar b$
+constraint is genuinely STRONGER than Bauer's 2009 version: we use the PDG-2025 $R_b$/$A_b$ inputs and
+the exact $Z b\bar b$ coupling shift, so low-$M_{\rm KK}$ draws that Bauer would have called $Z\to
+b\bar b$-consistent are vetoed in our evaluation. This is the same physics that pushes our $Z\to
+b\bar b$ floor to about 5 TeV (Section 1), so the blue onset near 4.5 TeV is exactly where it should
+be. We are not claiming a pixel-perfect match to Bauer's blue coverage; the cloud shape, decoupling,
+quantile floor and orange in-band stripe do match, but our blue is honestly more restrictive at low
+$M_{\rm KK}$.
 
 This S1 standard scenario, anarchic Yukawas with INDEPENDENT per-generation bulk $c$'s fit to masses
 and CKM, is exactly what our production catalog scan implements (\texttt{quarkConstraints/fit.py}

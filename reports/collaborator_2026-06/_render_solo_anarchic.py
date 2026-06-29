@@ -91,8 +91,18 @@ GAMMA_D = HBAR_GEVS / TAU_D0
 X12_EXP_D = 1.00e-2
 SIN_PHI_BOUND_D = 0.0022/0.012
 
+def _nearest_tile(df_, mkk):
+    """Snap a requested M_KK (TeV) to the nearest available tile.
+
+    The de-band re-run uses a fine geomspace grid (no exact 1/3/10 TeV tiles),
+    so exact-match lookups would return empty.  Snapping keeps the render
+    grid-agnostic and picks the closest physical scale.
+    """
+    av = df_.M_KK_TeV.values
+    return float(av[np.argmin(np.abs(av - mkk))])
+
 def cm12(df_, sys_, mkk):
-    g = df_[df_.M_KK_TeV == mkk]
+    g = df_[df_.M_KK_TeV == _nearest_tile(df_, mkk)]
     return g[f"re_m12_{sys_}"].values + 1j*g[f"im_m12_{sys_}"].values
 
 # ============================================================ 3. solo_epsK_cloud
@@ -103,54 +113,52 @@ def cm12(df_, sys_, mkk):
 #   ORANGE "with |eps_K|"     = the subset consistent with BOTH the Z->bb cut AND
 #                               |eps_K| in [1.2, 3.2]e-3 (the 95% CL exp. window).
 #
-# The big anarchic_bauer_S1.parquet (260k draws) carries ONLY the dF=2 ratios +
-# c_u3 -- it has no Z->bb flag -- so the per-draw passes_Zbb comes from the
-# companion anarchic_bauer_s1_zbb.parquet (12k draws, 1200/tile) built by
-# scripts/anarchic_bauer_s1_zbb.py.  That companion RE-DRAWS the SAME Bauer-S1
-# ensemble and, per draw, adds the TOTAL mass-basis [2,2] Z->bb shift (gauge-KK +
-# Casagrande fermion-KK, the exact object the T010/T011 Z-pole adapter consumes)
-# and a self-consistent eps_K on the same draw, then flags passes_Zbb at 99% CL.
+# The Z->bb companion anarchic_bauer_s1_zbb.parquet (202,500 draws on a fine 45-tile
+# M_KK grid 1-20 TeV, ~4500/tile) is now the SINGLE ensemble for the whole figure.
+# It RE-DRAWS the Bauer-S1 ensemble and, per draw, carries the TOTAL mass-basis [2,2]
+# Z->bb shift (gauge-KK + Casagrande fermion-KK, the exact object the T010/T011 Z-pole
+# adapter consumes), a self-consistent eps_K, the passes_pdg mass+CKM gate, and the
+# passes_Zbb 99% CL flag.  Of the 202,500 draws, 22,880 pass the mass+CKM gate (grey
+# backdrop); of those, 5,401 pass Z->bb (blue) and ~5,000 also land in the eps_K window
+# (orange).
 #
-# DENSITY / LAYERING (honest note): only the 12k companion carries the Z->bb flag,
-# so grey-from-the-companion-alone would be sparse.  To keep the cloud SHAPE and
-# the 5/50/95% quantiles identical to the published-style fat cloud we underlay
-# the FULL 260k-draw eps_K cloud as the grey "without Z->bb" backdrop, and overlay
-# the 12k Z->bb-flagged points (blue = pass, orange = pass+band) ON TOP.  This is
-# the option flagged in the task brief.  Grey is therefore the full ensemble (no
-# cut) and blue/orange are the cut subsets -- exactly Bauer's grey/blue/orange.
-rng = np.random.default_rng(7)
-phi = rng.uniform(0, 2*np.pi, len(df))
-df["eps_k_total"] = np.abs(SM_EPS_K + df["eps_k_np"].values * np.exp(1j*phi))
-tiles = np.array(sorted(df.M_KK_TeV.unique()))
-def quantile_curves(frame, col, tiles_, qs=(5, 50, 95)):
-    return {q: np.array([np.percentile(frame[frame.M_KK_TeV == m][col], q) for m in tiles_]) for q in qs}
-qc = quantile_curves(df, "eps_k_total", tiles)
-
-# --- Z->bb companion (blue/orange layers) ----------------------------------
+# DENSITY (de-banded): because grey, blue, orange AND the 5/50/95% quantiles all come
+# from this ONE dense ensemble, the cloud is continuous over ~6 decades with no
+# column-per-tile striping -- this REPLACES the earlier construction that underlaid a
+# separate dF=2-only cloud as grey and overlaid a sparse Z->bb scatter (which made grey
+# far denser than blue and broke Bauer's grey/blue/orange layering).  The plot is
+# clipped to 1-10.5 TeV to match Bauer's axes.
+# --- SINGLE ENSEMBLE (Bauer Fig.4 structure) -------------------------------
+# Bauer colours ONE ensemble by the cut: grey = no Z->bb cut, blue = passes Z->bb
+# (99% CL), orange = + |eps_K| window.  The Z->bb companion parquet carries the
+# self-consistent eps_K_np AND passes_pdg AND passes_Zbb per draw, so we render
+# grey/blue/orange AND the 5/50/95% quantiles all from that SAME ensemble -- the
+# faithful construction (grey is then literally the superset blue is drawn from).
+# We no longer underlay the separate 990k dF=2-only cloud, which made grey far
+# denser than blue and broke Bauer's blue-dominant structure.
 ZBB = ARDIR / "anarchic_bauer_s1_zbb.parquet"
 dz = pd.read_parquet(ZBB)
 if "eps_k_np" not in dz.columns and "eps_K_np" in dz.columns:
     dz["eps_k_np"] = dz["eps_K_np"].values
-# realized |eps_K| with a random phase on the SAME draw's NP amplitude (same
-# convention as the grey cloud above).
 phz = np.random.default_rng(11).uniform(0, 2*np.pi, len(dz))
 dz["eps_k_total"] = np.abs(SM_EPS_K + dz["eps_k_np"].values * np.exp(1j*phz))
-# Bauer (0912.1625 Sec 5.2) plots ONLY mass+CKM-consistent draws (they reject
-# chi^2/dof > 11.5/10).  Our forward Z->bb companion now records passes_pdg with
-# the SAME factor tolerances as the eps_K ensemble, so restrict the Z->bb overlay
-# to that accepted subset -- otherwise the ~89% mass+CKM-FAILING draws (many of
-# which rail c_Q3 to the IR floor, giving an artificially LARGE delta g_L^b)
-# would deflate the blue fraction relative to Bauer's accepted ensemble.
+# Bauer plots ONLY mass+CKM-consistent draws (chi^2/dof < 11.5/10); our passes_pdg
+# carries the same factor tolerances, so the WHOLE figure is that accepted subset.
 if "passes_pdg" in dz.columns:
     dz_acc = dz[dz["passes_pdg"].astype(bool)].copy()
-else:                                   # backward-compat: pre-gate parquet
+else:
     dz_acc = dz
 dz_pass = dz_acc[dz_acc["passes_Zbb"].astype(bool)].copy()   # "with Z->bb" (blue)
 dz_in = (dz_pass.eps_k_total >= WIN_PAPER[0]) & (dz_pass.eps_k_total <= WIN_PAPER[1])
 n_zbb = len(dz_acc); n_blue = len(dz_pass); n_orange = int(dz_in.sum())
-print(f"[epsK_cloud] Z->bb companion: {len(dz)} draws ({n_zbb} mass+CKM-consistent), "
-      f"{n_blue} ALSO pass Z->bb (99% CL, blue), "
+print(f"[epsK_cloud] single ensemble: {len(dz)} draws -> {n_zbb} mass+CKM-consistent "
+      f"(grey), {n_blue} pass Z->bb (99% CL, blue), "
       f"{n_orange} pass BOTH Z->bb + |eps_K|-band (orange)")
+
+tiles = np.array(sorted(dz_acc.M_KK_TeV.unique()))
+def quantile_curves(frame, col, tiles_, qs=(5, 50, 95)):
+    return {q: np.array([np.percentile(frame[frame.M_KK_TeV == m][col], q) for m in tiles_]) for q in qs}
+qc = quantile_curves(dz_acc, "eps_k_total", tiles)
 
 # small log-symmetric x-jitter so each M_KK tile reads as a column, not a line.
 def _xjit(mkk, seed, w=0.11):
@@ -160,26 +168,22 @@ def _xjit(mkk, seed, w=0.11):
 fig, ax = plt.subplots(figsize=(8.2, 6.2))
 # exp. band drawn first so points sit on top of the shaded window.
 ax.axhspan(WIN_PAPER[0], WIN_PAPER[1], color="green", alpha=0.10, zorder=0)
-# GREY backdrop: FULL anarchic cloud WITHOUT the Z->bb cut (subsample/tile for
-# legibility).  Faint + small so it reads as the "without Z->bb" density haze and
-# blue/orange clearly sit on top, as in Bauer Fig. 4.
-sub = pd.concat([g.sample(min(7000, len(g)), random_state=1)
-                 for _, g in df.groupby("M_KK_TeV")], ignore_index=True)
-ax.scatter(_xjit(sub.M_KK_TeV.values, 3), sub.eps_k_total.values, s=3, c="0.72",
-           alpha=0.16, rasterized=True, zorder=1, linewidths=0,
+# GREY: FULL accepted ensemble (no Z->bb cut) -- the superset.
+xjg = _xjit(dz_acc.M_KK_TeV.values, 3)
+ax.scatter(xjg, dz_acc.eps_k_total.values, s=5, c="0.62",
+           alpha=0.35, rasterized=True, zorder=1, linewidths=0,
            label=r"without $Z\to b\bar b$ (full ensemble)")
-# BLUE: Z->bb-consistent (99% CL) draws ("with Z->bb"), ON TOP of grey, larger +
-# more opaque + saturated blue so the layer is unmistakably distinct.
+# BLUE: Z->bb-consistent (99% CL) subset drawn ON TOP, same ensemble.
 xjb = _xjit(dz_pass.M_KK_TeV.values, 5)
-ax.scatter(xjb, dz_pass.eps_k_total.values, s=11, c="#1f4fff", alpha=0.55,
+ax.scatter(xjb, dz_pass.eps_k_total.values, s=7, c="#1f4fff", alpha=0.6,
            rasterized=True, zorder=3, linewidths=0,
            label=r"with $Z\to b\bar b$ (99\% CL)")
 # ORANGE: BOTH Z->bb (99% CL) AND |eps_K| in [1.2,3.2]e-3 -> the in-window stripe.
-ax.scatter(xjb[dz_in.values], dz_pass.eps_k_total.values[dz_in.values], s=15,
+ax.scatter(xjb[dz_in.values], dz_pass.eps_k_total.values[dz_in.values], s=11,
            c="#ff8c00", alpha=0.95, rasterized=True, zorder=4, linewidths=0,
            label=r"with $|\varepsilon_K|$ (both, $[1.2,3.2]\times10^{-3}$)")
 for q, ls, lab in [(95, "-", "95%"), (50, "--", "median"), (5, "-", "5%")]:
-    ax.plot(tiles, qc[q], color="navy", ls=ls, lw=1.8, zorder=5,
+    ax.plot(tiles, qc[q], color="#00cccc", ls=ls, lw=1.8, zorder=5,
             label=f"{lab} quantile")
 # faint outline of the exp. band edges + a labelled legend proxy for the band.
 ax.axhline(WIN_PAPER[0], color="green", lw=0.6, ls="--", alpha=0.5, zorder=2)
@@ -200,6 +204,10 @@ save(fig, "solo_epsK_cloud.png")
 
 # ============================================================ 4. solo_consistency
 # (verbatim physics from build FIGURE 3)
+# realized |eps_K| on the big eps_K cloud (the consistency curves use the full
+# 990k-draw ensemble; the eps_K SCATTER above renders from the Z->bb companion).
+df["eps_k_total"] = np.abs(SM_EPS_K + df["eps_k_np"].values
+                           * np.exp(1j*np.random.default_rng(7).uniform(0, 2*np.pi, len(df))))
 df["pass_eps_K_current"] = df["eps_k_np"].values <= BUDGET_NOW
 frac_paper = [((df[df.M_KK_TeV == m].eps_k_total >= WIN_PAPER[0]) &
                (df[df.M_KK_TeV == m].eps_k_total <= WIN_PAPER[1])).mean()*100 for m in tiles]
@@ -258,9 +266,9 @@ cb.set_label(r"our $D$ draws / bin at $M_{\rm KK}=3$ TeV (log count)")
 # median-y guide lines for 1/3/10 TeV -> the M_KK trend (cloud sinks into funnel)
 med_cols = {1.0: "tab:red", 3.0: "tab:orange", 10.0: "tab:green"}
 for mkk, c in med_cols.items():
-    if mkk not in tiles_c:
-        continue
     m12 = cm12(dc, "D", mkk)
+    if m12.size == 0:
+        continue
     ymed = float(np.median(2*np.abs(m12)/(GAMMA_D*X12_EXP_D)))
     ax.axhline(ymed, color=c, lw=2.2, ls="--", zorder=3)
     ax.text(0.985, min(ymed*1.02, 0.96), f"median $y$, {mkk:g} TeV = {ymed:.3f}",
@@ -305,7 +313,7 @@ fig, (axK, axS) = plt.subplots(1, 2, figsize=(13.0, 5.6))
 # Kaon panel
 m12_K = cm12(dc, "K", MKK_BQ)
 reK = np.abs(m12_K.real/M12_SM_K.real); imK = np.abs(m12_K.imag/M12_SM_K.imag)
-scK = density_scatter(axK, reK, imK, (1e-3, 1e3), (1e-5, 1e5))
+scK = density_scatter(axK, reK, imK, (1e-5, 1e3), (1e-5, 1e5))
 axK.set_xlabel(r"$|\mathrm{Re}(M_{12}^K)_{\rm KK}/\mathrm{Re}(M_{12}^K)_{\rm SM}|$")
 axK.set_ylabel(r"$|\mathrm{Im}(M_{12}^K)_{\rm KK}/\mathrm{Im}(M_{12}^K)_{\rm SM}|$")
 axK.set_title(r"Kaon $M_{12}$ plane ($M_{\rm KK}=3$ TeV)")
