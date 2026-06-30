@@ -52,9 +52,16 @@ DEFAULT_S_Z = -1.0
 LEPTON_FLAVORS: tuple[str, str, str] = ("e", "mu", "tau")
 NEUTRINO_FLAVORS: tuple[str, str, str] = ("nu1", "nu2", "nu3")
 MINIMAL_RS_EW_MODEL = "minimal_rs"
+# SU(2)_R only: SU(2)_R protects the oblique T parameter, but WITHOUT the discrete
+# P_LR the Z b_L vertex is unprotected.  In this couplings module that means the
+# P_LR proxy (which zeroes delta_g_L_b on the protected mask) is NOT applied, so
+# the Z b_L couplings stay at their minimal, unprotected values.  The T protection
+# is supplied separately by oblique_stu.py.
+CUSTODIAL_RS_SU2R_EW_MODEL = "custodial_rs_su2r"
 CUSTODIAL_RS_PLR_EW_MODEL = "custodial_rs_plr"
-SUPPORTED_RS_EW_MODELS: tuple[str, str] = (
+SUPPORTED_RS_EW_MODELS: tuple[str, str, str] = (
     MINIMAL_RS_EW_MODEL,
+    CUSTODIAL_RS_SU2R_EW_MODEL,
     CUSTODIAL_RS_PLR_EW_MODEL,
 )
 DEFAULT_CUSTODIAL_PROTECT_SCOPE = "all_gen_down_left_diagonal"
@@ -646,7 +653,7 @@ def build_rs_ew_couplings(
     """Build Phase-4a RS-EW mass-basis couplings from a quark fit result."""
 
     ew_model = _validate_ew_model(model_label)
-    if include_top_partner_loops and ew_model == MINIMAL_RS_EW_MODEL:
+    if include_top_partner_loops and ew_model != CUSTODIAL_RS_PLR_EW_MODEL:
         raise ValueError("include_top_partner_loops=True requires ew_model='custodial_rs_plr'")
     if ew_model == CUSTODIAL_RS_PLR_EW_MODEL:
         _validate_custodial_options(

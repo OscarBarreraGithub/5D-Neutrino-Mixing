@@ -70,8 +70,19 @@ CHI2_2DOF_95 = 5.991464547107979
 GAUGE_KK_ROOT_NN = 2.448687135269161
 PHYSICAL_MKK_OVER_LAMBDA_IR_SQ = GAUGE_KK_ROOT_NN * GAUGE_KK_ROOT_NN
 MINIMAL_RS_EW_MODEL = "minimal_rs"
+# SU(2)_R only: the custodial SU(2)_R protects the oblique T parameter (CGHNP
+# Eq. 153) but WITHOUT the discrete P_LR, so the Z b_L vertex is left unprotected
+# (it stays at its minimal value in rs_ew_couplings.py).  This isolates what the
+# SU(2)_R custodial gauge structure buys (the T cure) from what the extra P_LR
+# discrete symmetry buys (the Z b_L cure).  For the oblique sector S,T,U this is
+# identical to custodial_rs_plr, because P_LR does not act on the oblique params.
+CUSTODIAL_RS_SU2R_EW_MODEL = "custodial_rs_su2r"
 CUSTODIAL_RS_PLR_EW_MODEL = "custodial_rs_plr"
-SUPPORTED_RS_EW_MODELS = (MINIMAL_RS_EW_MODEL, CUSTODIAL_RS_PLR_EW_MODEL)
+SUPPORTED_RS_EW_MODELS = (
+    MINIMAL_RS_EW_MODEL,
+    CUSTODIAL_RS_SU2R_EW_MODEL,
+    CUSTODIAL_RS_PLR_EW_MODEL,
+)
 
 
 @dataclass(frozen=True)
@@ -235,7 +246,10 @@ def rs_oblique_t_coefficient(
 ) -> float:
     """Return the EW-model-selected RS oblique ``Delta T`` coefficient."""
     model = _validate_ew_model(ew_model)
-    if model == CUSTODIAL_RS_PLR_EW_MODEL:
+    # Both custodial models protect T via SU(2)_R (CGHNP Eq. 153); the difference
+    # between them (P_LR protection of Z b_L) lives in rs_ew_couplings.py, not in
+    # the oblique sector, so they share the same Delta T coefficient here.
+    if model in (CUSTODIAL_RS_PLR_EW_MODEL, CUSTODIAL_RS_SU2R_EW_MODEL):
         return custodial_rs_plr_t_coefficient(
             rs_volume_log=rs_volume_log,
             sin2_theta_w=sin2_theta_w,
