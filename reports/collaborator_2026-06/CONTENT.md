@@ -9,14 +9,17 @@ We work in a minimal Randall–Sundrum (RS) warped extra dimension; fermion mass
 
 We validate the fixed code two ways. (i) A **constrained-fit scan**: draw bulk masses + a seed, fit the Yukawas to reproduce the measured quark masses + CKM (a near-unique solution → a thin "locus"). (ii) An **anarchic-forward scan**: draw complex O(1) anarchic Yukawas, compute observables forward, keep mass+CKM-reproducing points (the multi-decade "cloud" the literature uses). The papers scatter anarchic Yukawas; our production scan fits — so the two give very different spreads, which matters for how floors compare to the literature.
 
+**Lane framing (important).** The reproductions in this report are the **anarchic baseline (LANE A)** — the literature strawman — used to validate the code against published figures. They are **NOT the production / our model**: production AS RUN (LANE B) is the fit-aligned MFV with a sharp ε_K wall at **~7 TeV**, and the FPR ideal (LANE C, V5KM-aligned) is **~2 TeV**. So the ~30 TeV anarchic ε_K cloud below is the strawman, not "our floor". Canonical three-lane definitions: `docs/MODEL_CONVENTIONS.md`.
+
 ## Headline findings (box)
 - The fixed code **reproduces the published RS literature** when run in anarchic-forward mode: ε_K 95%-quantile floor = **10 TeV** (= Bauer 0912.1625 headline), D⁰ funnel containment rising to ~88% at 10 TeV (Gedalia), kaon Im/Re(M12) = **106×** (≈ Blanke's ~100× ε_K problem), C_Bd/C_Bs ≈ 1.
 - **Minimal-model floors (corrected):** *typical* anarchic floor with current data ≈ **30 TeV**, set by ε_K (flavor); *existence* (fine-tuned) floor ≈ **18–20 TeV**, set irreducibly by **S,T,U**. Z→bb no longer leads (≈5 TeV).
 - Flavor constraints are **tunable** (alignment drives the NP → 0); **S,T,U is irreducible** (no Yukawa freedom). This is precisely why custodial RS exists.
 
 ## Floor table (two columns: typical/median vs existence/best-tuned)
+Note: the eps_K typical floor below is **LANE A (anarchic)**, the literature strawman. Production AS RUN (LANE B) is ~7 TeV; the FPR ideal (LANE C) is ~2 TeV. See `docs/MODEL_CONVENTIONS.md`.
 | Constraint | Typical (median) floor | Existence (best/tuned) floor | Tunable? |
-| eps_K | ~30 TeV (anarchic, current) | <~1 TeV | yes (align Im M12 -> 0) |
+| eps_K | ~30 TeV (LANE A anarchic, current; NOT production) | <~1 TeV | yes (align Im M12 -> 0) |
 | Delta m_d (B_d) | few TeV | <~1 TeV | yes |
 | Delta m_s (B_s) | few TeV | <~1 TeV | yes |
 | D0 | low | <~1 TeV | yes |

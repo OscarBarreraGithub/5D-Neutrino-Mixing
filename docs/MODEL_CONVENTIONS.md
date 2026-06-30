@@ -11,13 +11,18 @@ Date: 2026-06-29.
 
 | Lane | Flavor structure | Purpose | Spread | epsilon_K floor |
 |---|---|---|---|---|
-| **Production / our model** | **RS-MFV (Fitzpatrick-Perez-Randall 0710.1869), aligned** | the floors, catalog, website, the model we advocate | thin locus | LOW (FPR ~2 TeV / production run ~7 TeV) — *to be re-verified, see sec 5* |
-| **Anarchic reproduction** | **anarchy** (Bauer/Casagrande) | reproduce the published Bauer/Casagrande/Blanke plots, side-by-side | fat ~6-decade cloud | HIGH (~10 TeV paper-era, ~30 TeV current) |
+| **Production / our model (AS RUN)** | **simplified MFV, FIT-aligned, NO V5KM** — `C_Q = r C_u + C_d` + BulkMassMap, least-squares fit to masses+CKM | the floors, catalog, website (what we actually run today) | thin fitted locus (sharp wall) | **~6.3-7 TeV** (verified, sec 5) |
+| **FPR ideal (NOT yet wired to production)** | **full FPR 0710.1869, V5KM-aligned** (`paper_0710_1869/`) | the principled aligned model we *want* | thin | **~2 TeV** (literature) |
+| **Anarchic reproduction** | **anarchy** (Bauer/Casagrande) | reproduce the published Bauer/Casagrande/Blanke plots, side-by-side | fat ~6-decade cloud | **~10 TeV paper-era, ~30 TeV current** |
 
-**The anarchic ~10-30 TeV epsilon_K wall is the BASELINE/strawman the literature
-criticizes — it is NOT our model.** Our model is the *aligned* FPR-MFV one, whose
-whole point is to suppress that wall. When we quote "our floor," it must be the
-FPR-aligned number, not the anarchic one.
+**Two corrections to keep straight:**
+1. **The anarchic ~10-30 TeV epsilon_K wall is the BASELINE/strawman the literature
+   criticizes — it is NOT our model.** Quoting it as "our floor" is wrong.
+2. **What we RUN in production is NOT the full FPR model either.** It is a *simplified,
+   fit-aligned* MFV (`r` + BulkMassMap, no V5KM GIM rotation), giving **~7 TeV** — it sits
+   *between* the FPR ideal (~2 TeV, V5KM) and the anarchic wall (~10-30 TeV). Do NOT
+   relabel the ~7 TeV production number as the FPR ~2 TeV. To reach the FPR ideal we must
+   actually wire V5KM (and/or RH-down degeneracy, sec 4) into the production path.
 
 The Bauer scenarios **S1/S2/S3/S4 live ONLY in the anarchic reproduction lane**
 (`scripts/anarchic_bauer_s1.py`). They are Bauer's benchmarks, not our model.
@@ -142,21 +147,30 @@ NOT a wrong/mislabeled scenario.]
 
 ---
 
-## 5. Floors by lane (to be stated separately, never blended)
+## 5. Floors by lane (VERIFIED — state separately, never blended)
 
-- **Anarchic reproduction (Bauer S1):** epsilon_K typical (median) floor ~30 TeV
-  current / 95%-quantile ~10 TeV paper-era; S,T,U existence ~18-20 TeV (irreducible,
-  flavor-independent); Z->bb ~5 TeV. These are the numbers in the collaborator
-  report / notes.pdf reproductions. They describe ANARCHY.
-- **FPR-aligned production:** the aligned model suppresses the flavor wall. The old
-  FPR lane quotes ~2 TeV; the QUARK-FIX production 100k recorded ~7 TeV epsilon_K and
-  ~20 TeV S,T,U. **This number must be re-verified directly from the production scan
-  output and stated next to the anarchic one** (open item).
+The epsilon_K floor depends entirely on the lane. Verified ordering (lowest to highest):
 
-**Whenever a floor is quoted anywhere (FLOOR_SUMMARY, the reassessment plan, the
-report), it MUST be tagged with its lane.** The RS-vs-SM reassessment note is about
-*anarchic* RS; the production model is *aligned* FPR-MFV — different models, different
-floors.
+| Model | epsilon_K floor | What it is | Source |
+|---|---|---|---|
+| **FPR ideal (full V5KM)** | **~2 TeV** | the principled aligned model — NOT yet on the production path | 0710.1869 literature / `paper_0710_1869/` |
+| **Production AS RUN (simplified MFV, fit-aligned, no V5KM)** | **~6.3-7 TeV** | `r`+BulkMassMap fit to masses+CKM; sharp wall (100% veto <=5 TeV, 0% >=7 TeV) — a near-unique fitted locus, not a scatter | `scan_outputs/fix100k_minimal_20260622T080053/constraint_matrix.parquet` (K001) |
+| **Anarchic reproduction, paper-era inputs** | **~10 TeV** (95% quantile) | Bauer S1 anarchic scatter | `anarchic_bauer_s1.py` / notes.pdf |
+| **Anarchic reproduction, current inputs** | **~30 TeV** (median) | Bauer S1 anarchic scatter, current eps_K budget | same |
+
+Other (lane-independent or production) floors: **S,T,U existence ~18-20 TeV** (irreducible,
+no Yukawa freedom — same in every lane); **Z->bb ~5 TeV** (post-B1).
+
+**Two things this table makes explicit:**
+1. The reassessment note / notes.pdf reproductions use the **anarchic** ~10-30 TeV
+   numbers — that is the *strawman*, not our model.
+2. What we **actually run** in production gives **~7 TeV** (simplified fit-aligned MFV),
+   which is **neither** the anarchic wall **nor** the FPR ~2 TeV ideal. The gap from 7 to
+   2 TeV is exactly the principled alignment (V5KM / RH-down degeneracy) we have NOT yet
+   wired into production.
+
+**Whenever a floor is quoted anywhere (FLOOR_SUMMARY, the reassessment plan, the report,
+README, STATE_OF_PROJECT), it MUST be tagged with one of the four rows above.**
 
 ---
 

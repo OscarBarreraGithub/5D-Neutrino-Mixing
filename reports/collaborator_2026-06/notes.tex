@@ -23,6 +23,13 @@ of the relevant published figures, side by side with the paper. Everything is th
 the left is cropped to the SINGLE minimal/S1 panel we actually reproduce (the custodial panels
 and the other scenarios in those figures are deliberately not shown). All run on the fixed code.
 
+\textbf{Lane note (important).} These reproductions are the \textbf{anarchic baseline (lane A)}
+-- the literature strawman -- used to validate the code against published figures. They are
+\textbf{NOT the production / our model}: production as run (lane B, the fit-aligned MFV without
+V5KM) is a sharp $\varepsilon_K$ wall at about \textbf{7 TeV}, and the FPR ideal (lane C, V5KM
+aligned) is about \textbf{2 TeV}. So the $\sim$30 TeV anarchic $\varepsilon_K$ cloud below is the
+strawman, not ``our floor''. Canonical three-lane definitions: \texttt{docs/MODEL\_CONVENTIONS.md}.
+
 \hrulefill
 
 \section*{1. Floor summary}
@@ -31,7 +38,9 @@ There are two honest notions of a floor, and they are very different:
 
 \begin{itemize}
 \item \textbf{Typical floor:} where the \emph{median} anarchic point becomes allowed. This is
-the usual literature statement. With current data it is about \textbf{30 TeV}, set by $\varepsilon_K$.
+the usual literature statement (\textbf{lane A, anarchic strawman -- NOT our model}). With current
+data it is about \textbf{30 TeV}, set by $\varepsilon_K$. (Production as run, lane B, is a sharp
+$\varepsilon_K$ wall at $\sim$7 TeV; the FPR ideal, lane C, is $\sim$2 TeV.)
 \item \textbf{Existence floor:} where even a single best-case (fine-tuned) point is allowed. This
 is about \textbf{18 to 20 TeV}, set by $S,T,U$.
 \end{itemize}
@@ -47,7 +56,7 @@ oblique $S,T,U$ bound. This is exactly why custodial RS exists (it protects $T$)
 \toprule
 Constraint & Typical (median) floor & Existence (best/tuned) floor & Tunable? \\
 \midrule
-$\varepsilon_K$            & $\sim$30 TeV (current) & below $\sim$1 TeV & yes (align $\mathrm{Im}\,M_{12}\to0$) \\
+$\varepsilon_K$            & $\sim$30 TeV (lane A anarchic; lane B $\sim$7, lane C $\sim$2) & below $\sim$1 TeV & yes (align $\mathrm{Im}\,M_{12}\to0$) \\
 $\Delta m_d$ ($B_d$)       & few TeV                & below $\sim$1 TeV & yes \\
 $\Delta m_s$ ($B_s$)       & few TeV                & below $\sim$1 TeV & yes \\
 $D^0$                      & low                    & below $\sim$1 TeV & yes \\

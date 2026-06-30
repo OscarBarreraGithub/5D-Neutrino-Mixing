@@ -89,6 +89,15 @@ observables forward, keep mass+CKM-reproducing points (the multi-decade
 production scan fits --- so the two give very different spreads, which matters
 for how floors compare to the literature.
 
+\textbf{Lane framing (important).} The reproductions in this report are the
+\textbf{anarchic baseline (lane A)} --- the literature strawman --- used to validate
+the code against published figures. They are \textbf{NOT the production / our model}:
+production as run (lane B, the fit-aligned MFV without V5KM) is a sharp
+$\varepsilon_K$ wall at $\approx$\textbf{7~TeV}, and the FPR ideal (lane C, V5KM
+aligned) is $\approx$\textbf{2~TeV}. So the ${\sim}30$~TeV anarchic $\varepsilon_K$
+cloud below is the strawman, not ``our floor''. Canonical three-lane definitions:
+\texttt{docs/MODEL\_CONVENTIONS.md}.
+
 % ===================== HEADLINE BOX =====================
 \headlinebox{%
 {\large\bfseries\color{accent} Headline findings}\\[0.5em]
@@ -120,6 +129,11 @@ crosses the bound. Flavor constraints separate the two by orders of magnitude
 (they are tunable); the oblique $S,T,U$ constraint does not (it has no Yukawa
 freedom).
 
+The $\varepsilon_K$ ``typical'' floor in the table below is \textbf{lane A
+(anarchic)} --- the literature strawman, NOT our model. Production as run (lane B)
+is a sharp wall at $\approx$7~TeV, and the FPR ideal (lane C, V5KM) is
+$\approx$2~TeV (see \texttt{docs/MODEL\_CONVENTIONS.md}).
+
 \begin{center}
 \small
 \setlength{\tabcolsep}{5pt}
@@ -127,7 +141,7 @@ freedom).
 \toprule
 \textbf{Constraint} & \textbf{Typical (median)} & \textbf{Existence (best/tuned)} & \textbf{Tunable?} \\
 \midrule
-$\varepsilon_K$            & ${\sim}30$~TeV (anarchic) & ${\lesssim}1$~TeV & yes (align $\mathrm{Im}\,M_{12}\!\to\!0$) \\
+$\varepsilon_K$            & ${\sim}30$~TeV (lane A anarchic; lane B prod.\ ${\sim}7$, lane C FPR ${\sim}2$) & ${\lesssim}1$~TeV & yes (align $\mathrm{Im}\,M_{12}\!\to\!0$) \\
 $\Delta m_d$ ($B_d$)       & few TeV & ${\lesssim}1$~TeV & yes \\
 $\Delta m_s$ ($B_s$)       & few TeV & ${\lesssim}1$~TeV & yes \\
 $D^0$                      & low & ${\lesssim}1$~TeV & yes \\

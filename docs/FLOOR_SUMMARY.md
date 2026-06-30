@@ -11,20 +11,37 @@ with `x₁ ≈ 2.4487`. Do not confuse with the geometric `Λ_IR ≡ 1/z_v`.
 
 ## The floor
 
-| Constraint | Floor (physical M_KK) | Type | Tunable? | Driver |
-|---|---|---|---|---|
-| `epsilon_K` (K001) | **~30 TeV** | typical (median anarchic) | **yes** — align Im M12 → 0 | flavor / CP |
-| oblique S,T,U (EW001) | **~18–20 TeV** | **existence** (best-tuned) | **no** — no Yukawa freedom | RS T-problem |
-| Z→bb (T010/T011) | **~5 TeV** | — | no (gauge-dominated; c_Q3 pinned by m_t) | EW |
-| Δm_s (B003), Δm_d, Δm_K, D⁰ | few TeV → <~1 TeV | tunable | yes | flavor |
-| collider KK searches (CR*) | ~4 TeV | subleading | — | direct search |
+The `epsilon_K` floor is **LANE-DEPENDENT** — there are THREE distinct flavor-model
+lanes with different floors, and they must never be blended (canonical definitions:
+[`docs/MODEL_CONVENTIONS.md`](MODEL_CONVENTIONS.md)). Every floor below is tagged
+with its lane; "lane-independent" floors carry no Yukawa freedom and are the same
+across all three.
+
+| Constraint | Floor (physical M_KK) | Lane | Type | Tunable? | Driver |
+|---|---|---|---|---|---|
+| `epsilon_K` (K001) | **~30 TeV** (median) / ~10 TeV (paper-era 95%q) | **A — anarchic reproduction** (literature strawman, NOT our model) | typical (median anarchic) | **yes** — align Im M12 → 0 | flavor / CP |
+| `epsilon_K` (K001) | **~6.3–7 TeV** | **B — production AS RUN** (simplified fit-aligned MFV, no V5KM — what we actually run) | sharp wall, near-unique fitted locus | (V5KM alignment not yet wired) | flavor / CP |
+| `epsilon_K` (K001) | **~2 TeV** | **C — FPR ideal** (full V5KM alignment, not yet in production) | literature target | **yes** — V5KM alignment | flavor / CP |
+| oblique S,T,U (EW001) | **~18–20 TeV** | lane-independent | **existence** (best-tuned) | **no** — no Yukawa freedom | RS T-problem |
+| Z→bb (T010/T011) | **~5 TeV** | lane-independent | — | no (gauge-dominated; c_Q3 pinned by m_t) | EW |
+| Δm_s (B003), Δm_d, Δm_K, D⁰ | few TeV → <~1 TeV | A (anarchic) | tunable | yes | flavor |
+| collider KK searches (CR*) | ~4 TeV | lane-independent | subleading | — | direct search |
+
+**The epsilon_K lane gap.** Production AS RUN (~7 TeV) is **NEITHER** the anarchic
+wall (~10–30 TeV) **NOR** the FPR ~2 TeV ideal; the 7→2 TeV gap is exactly the
+principled alignment (FPR V5KM, or Bauer-S2-style RH-down U(3) degeneracy) not yet
+wired into the production path.
 
 Two distinct notions of "floor":
 
-- **Typical (median anarchic) floor ≈ 30 TeV**, set by `epsilon_K`. This is
-  where a *median* anarchic point survives. It is **tunable**: aligning the
-  down-sector so Im M12 → 0 drives the NP contribution to zero, so the
-  *existence* floor for any single flavor constraint is ≲1 TeV.
+- **Typical (median anarchic) floor ≈ 30 TeV** (**LANE A — anarchic, the
+  literature strawman, NOT our model**), set by `epsilon_K`. This is where a
+  *median* anarchic point survives. It is **tunable**: aligning the down-sector
+  so Im M12 → 0 drives the NP contribution to zero, so the *existence* floor for
+  any single flavor constraint is ≲1 TeV. Note: what we **actually run** in
+  production (**LANE B**) sits at **~7 TeV** (a sharp fitted wall), and the **FPR
+  ideal** (**LANE C**, V5KM aligned) is **~2 TeV** — do not quote the ~30 TeV
+  anarchic number as "our floor".
 - **Existence (fine-tuned, irreducible) floor ≈ 18–20 TeV**, set by oblique
   **S,T,U** (the RS T-parameter problem). This carries **no Yukawa freedom**, so
   min ≈ median (spread only ~1.5×): even maximally fine-tuned Yukawas cannot put
@@ -62,8 +79,10 @@ Six implementation errors found by an adversarial audit, now fixed:
 
 ## Validated literature reproductions
 
-Run the fixed code in **anarchic-forward** mode (draw complex O(1) Yukawas,
-forward-compute, keep mass+CKM-reproducing points):
+These reproductions are **LANE A (anarchic)** — the baseline used to validate the
+code against the published literature, **NOT** the production / our model (LANE B,
+the fit-aligned MFV at ~7 TeV). Run the fixed code in **anarchic-forward** mode
+(draw complex O(1) Yukawas, forward-compute, keep mass+CKM-reproducing points):
 
 - **Bauer 0912.1625**: `epsilon_K` 95%-quantile floor ≈ 10 TeV (paper-era
   inputs); ~106× Im/Re(M12) "ε_K problem" (≈ Bauer's ~100×). Script:

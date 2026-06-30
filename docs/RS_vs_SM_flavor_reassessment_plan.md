@@ -10,6 +10,14 @@ and the burden of proof is on the surviving-flavor-advantage claim.
 Supporting material: `/tmp/.../lit_analysis_RS_vs_SM_flavor.md` (literature
 analysis, 30+ refs), `docs/FLOOR_SUMMARY.md`, `reports/collaborator_2026-06/CONTENT.md`.
 
+> **LANE NOTE (read first).** This note is about **LANE A — anarchic RS** (the
+> literature strawman) specifically, NOT lane B (production AS RUN, ~7 TeV) or
+> lane C (FPR ideal, ~2 TeV). So its ~10–30 TeV epsilon_K numbers are the
+> **anarchic** floors *by design* — they are the thing the note interrogates, not
+> our production model. Canonical three-lane definitions:
+> [`docs/MODEL_CONVENTIONS.md`](MODEL_CONVENTIONS.md). Always tag a floor with its
+> lane.
+
 ---
 
 ## 0. The thesis

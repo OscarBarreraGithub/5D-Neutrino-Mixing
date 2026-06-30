@@ -10,18 +10,27 @@ flavor/collider catalog, and parameter scans.
 
 For the minimal (non-custodial) quark-sector model, the corrected floors are:
 
-| Constraint | Floor (physical M_KK) | Type | Tunable? |
-|---|---|---|---|
-| `epsilon_K` (K001) | ~30 TeV | typical (median anarchic) | yes — align Im M12 → 0 |
-| oblique S,T,U (EW001) | ~18–20 TeV | existence (irreducible) | no — no Yukawa freedom |
-| Z→bb (T010) | ~5 TeV | — | no (gauge-dominated) |
-| collider (CR*) | ~4 TeV | subleading | — |
+| Constraint | Floor (physical M_KK) | Lane | Type | Tunable? |
+|---|---|---|---|---|
+| `epsilon_K` (K001) | ~30 TeV | **A (anarchic)** | typical (median anarchic) | yes — align Im M12 → 0 |
+| `epsilon_K` (K001) | ~6.3–7 TeV | **B (production AS RUN)** | sharp wall, fitted locus | (alignment not yet wired) |
+| `epsilon_K` (K001) | ~2 TeV | **C (FPR ideal, V5KM)** | literature, not yet in production | yes — V5KM alignment |
+| oblique S,T,U (EW001) | ~18–20 TeV | lane-independent | existence (irreducible) | no — no Yukawa freedom |
+| Z→bb (T010) | ~5 TeV | lane-independent | — | no (gauge-dominated) |
+| collider (CR*) | ~4 TeV | lane-independent | subleading | — |
+
+The `epsilon_K` floor is **LANE-DEPENDENT**: ~30 TeV is the **anarchic** lane (the
+literature strawman, NOT our model), ~7 TeV is what **production actually runs**
+(simplified fit-aligned MFV, no V5KM), and ~2 TeV is the **FPR ideal** (V5KM
+alignment, not yet wired into production). Always tag a floor with its lane; the
+canonical lane definitions live in
+[`docs/MODEL_CONVENTIONS.md`](docs/MODEL_CONVENTIONS.md).
 
 The old "25–30 TeV Z→bb-dominated floor" (and "108 TeV at 1σ") was a **B1**
 sign/normalization bug, now fixed: Z→bb collapses to ~5 TeV and is not the
 driver. Custodial RS fixes the oblique T problem but does **not** relax
 `epsilon_K`. The fixed code reproduces Bauer 0912.1625 (ε_K ~10 TeV paper-era,
-~106× problem), Gedalia 0906.1879 (D⁰ funnel), and Blanke 0809.1073.
+~106× problem; lane A), Gedalia 0906.1879 (D⁰ funnel), and Blanke 0809.1073.
 
 - Authoritative summary: [`docs/FLOOR_SUMMARY.md`](docs/FLOOR_SUMMARY.md)
 - Full project state: [`docs/STATE_OF_PROJECT.md`](docs/STATE_OF_PROJECT.md)
