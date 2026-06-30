@@ -18,6 +18,47 @@ local `references/papers/` archive (2026-06-29).
 
 ---
 
+## CRITICAL — real physics vs proxy limitation: why custodial is "flavor-blind" here
+
+When our code shows custodial touching **only** S/T/U and Z→bb (and *nothing* in the
+flavor sector), that is **~90% real physics and ~10% proxy limitation**. These must not
+be conflated.
+
+**REAL (not an artifact).** ε_K is dominated by the **KK-gluon** LR/C₄ operator. The KK
+gluon is a **color octet, electroweak singlet** — uncharged under the custodial group
+(SU(2)_L×SU(2)_R×U(1)_X×P_LR), which is purely electroweak. So custodialization *cannot*
+change the leading ε_K amplitude. This is confirmed by a **full calculation, not our
+proxy**: **Blanke 2008** (0809.1073) computed the complete ΔF=2 *inside the custodial
+model* (custodians, EW KK bosons, everything) and still found **M_KK ≳ 18–30 TeV** from
+ε_K. Bauer II (0912.1625): C₄ "is a pure QCD effect ... insensitive to the precise
+embedding of the electroweak gauge symmetry." **So the ε_K wall is genuinely
+custodial-blind, regardless of our proxy.**
+
+**PROXY LIMITATION (genuinely missing).** Our implementation is a **leading-order tree
+EW proxy**, NOT the full custodial model. It does NOT implement:
+- the **custodian KK fermion spectrum** (charge-5/3 states, bidoublet partners) — absent;
+- the **subleading custodial flavor effects** custodial *does* touch: the EW KK bosons
+  (KK-Z, Z′, Z_H) contribute to ΔF=2 (Blanke: "Z_H, Z′ can compete with KK gluons" in
+  B-physics) and custodian loops enter b→sγ. **`deltaf2.py` has NO `ew_model` branch**, so
+  it cannot see these even in principle;
+- **physical loop inputs** (ξ/ρ are knobs that break CPSW's wavefunction correlation),
+  the **full ΔT** (singlet-only; drops the dominant *negative* bidoublet ΔT), and a
+  non-trivial **b_R representation** (g_R^b is hard-zeroed).
+
+**Therefore:** the headline conclusion *"custodial fixes EW (~2–3 TeV) but not the ε_K
+wall (~tens of TeV)"* is **REAL and literature-confirmed**. But the stronger-sounding
+*"custodial does literally nothing to any flavor observable"* — which is what our code
+prints — is **partly a proxy limitation**, because we never implemented the subleading
+custodial flavor contributions.
+
+**Adequacy.** This proxy IS adequate for the **RS-vs-SM note's thesis** (which rests on
+the leading C₄ operator fact that Blanke confirms with a full calculation). It is NOT
+adequate for **custodial phenomenology** (A_FB^b, b→sγ, the subleading custodial ΔF=2,
+the precise custodial EW floor) — that is the deferred **full custodial implementation**
+(roadmap D), scoped by the four proxy items in §3.
+
+---
+
 ## 0. Source-paper inventory (all local in `references/papers/`)
 
 | Short | Paper | arXiv / journal | Local file | Used for |
