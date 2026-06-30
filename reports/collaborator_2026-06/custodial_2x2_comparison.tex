@@ -1,30 +1,33 @@
 \documentclass[11pt]{article}
 
-\usepackage[margin=0.9in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{xcolor}
 \usepackage{caption}
 \usepackage{float}
-% placeins is unavailable on this system; with [H] floats are placed in-line, so
-% a no-op \FloatBarrier suffices to keep each figure with its paragraph.
 \providecommand{\FloatBarrier}{}
 \usepackage[colorlinks=true,linkcolor=accent,urlcolor=accent,citecolor=accent]{hyperref}
 
-% --- both figure roots: our solo PNGs + composites, and the raw paper crops ---
-\graphicspath{{figures_solo/}{../../references/paper_figures/}}
+\graphicspath{{figures_local/}{figures_solo/}{../../references/paper_figures/}}
 
 % --- colours ---
 \definecolor{accent}{RGB}{20,90,150}
 \definecolor{accentlight}{RGB}{232,240,248}
-\definecolor{warn}{RGB}{150,70,20}
+\definecolor{rulegray}{RGB}{120,120,120}
 
-% --- section heading styling: a touch of colour ---
+% --- section heading styling ---
 \makeatletter
 \renewcommand\section{\@startsection{section}{1}{\z@}%
-  {-3.0ex \@plus -1ex \@minus -.2ex}%
-  {1.8ex \@plus.2ex}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\normalfont\Large\bfseries\color{accent}}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
   {\normalfont\large\bfseries\color{accent}}}
 \makeatother
 
@@ -32,181 +35,233 @@
 \setlength{\parskip}{0.4em}
 \setlength{\parindent}{0pt}
 
-\newcommand{\headlinebox}[1]{%
-  \begin{center}
-  \setlength{\fboxsep}{11pt}%
-  \setlength{\fboxrule}{1.1pt}%
-  \fcolorbox{accent}{accentlight}{%
-    \begin{minipage}{0.93\textwidth}
-    #1
-    \end{minipage}}%
-  \end{center}}
+% row label: bold tag with a thin rule
+\newcommand{\rowlabel}[2]{%
+  \vspace{0.2em}{\bfseries #1}\hfill{\small\color{rulegray} #2}\par\vspace{-0.3em}
+  {\color{rulegray}\hrule}\vspace{0.4em}}
+
+% one paper|ours figure row
+\newcommand{\pairrow}[2]{%
+\begin{figure}[H]\centering
+\begin{minipage}[c]{0.49\textwidth}\centering\includegraphics[width=\linewidth]{#1}\end{minipage}\hfill
+\begin{minipage}[c]{0.49\textwidth}\centering\includegraphics[width=\linewidth]{#2}\end{minipage}
+\end{figure}}
 
 \begin{document}
 
-% ===================== TITLE BLOCK =====================
+% ===================== TITLE =====================
 \begin{center}
-{\color{accent}\rule{\textwidth}{1.4pt}}\\[1.0em]
-{\LARGE\bfseries Custodial vs.\ Minimal: a 2$\times$2 Comparison\par}
-\vspace{0.5em}
-{\large One $2\times2$ grid per observable --- \textbf{paper} vs.\ \textbf{ours},
-\textbf{no custodial} vs.\ \textbf{custodial}.\par}
-\vspace{0.5em}
-{\normalsize June 2026\par}
+{\color{accent}\rule{\textwidth}{1.5pt}}\\[1.0em]
+{\LARGE\bfseries Custodial Symmetry in Our RS Scan\\[0.3em]
+What It Touches, Paper vs.\ Ours, and the SU(2)$_R$ / $P_{LR}$ Split\par}
+\vspace{0.6em}
+{\large June 2026\par}
 \vspace{0.3em}
-{\color{accent}\rule{\textwidth}{1.4pt}}
+{\color{accent}\rule{\textwidth}{1.5pt}}
 \end{center}
 \vspace{0.6em}
 
-% ===================== INTRODUCTION =====================
-\section{The question, and the one-line answer}
+\textbf{The one-line answer.} Custodial symmetry is an \emph{electroweak} cure, not a
+\emph{flavor} cure. It protects the oblique $T$ parameter and the $Z\,b_L\bar b_L$
+vertex, pulling those floors from tens of TeV down to a few~TeV, but it leaves the
+$\varepsilon_K$ wall flat at tens of TeV, because the binding kaon operator is the
+color-octet KK-gluon $C_4$, an electroweak singlet the custodial group cannot touch.
+This note works through that observable by observable, separates the two protections
+custodial actually provides, and lists which papers we followed.
 
-\textbf{The question.} Does custodial symmetry
-($\mathrm{SU(2)}_L\times\mathrm{SU(2)}_R\times\mathrm{U(1)}_X\times P_{LR}$) move
-the floors that our minimal-RS scan actually runs into? For each of three
-observables we put four panels on a strict $2\times2$ grid: the published figure
-(\textbf{\textcolor{warn}{PAPER}}, left column) beside our fixed-code
-reproduction (\textbf{\textcolor{accent}{OURS}}, right column), \emph{without}
-custodial (top row) above \emph{with} custodial (bottom row).
+% ===================== WHAT CUSTODIAL TOUCHES =====================
+\section*{1.\quad What custodial symmetry touches, and how we implemented it}
 
-\textbf{The one-line answer.} Custodial is an \emph{electroweak} cure, not a
-\emph{flavor} cure. It pulls the electroweak floors down --- the oblique $T$
-parameter collapses to $\sim0$ and the $Z\,b\bar b$ shifts collapse onto the SM
---- but it leaves the $\varepsilon_K$ wall flat at tens of TeV, because the
-binding kaon operator is the color-octet KK-gluon $C_4$, an electroweak singlet
-the custodial group cannot touch. This is visible \emph{both} in the literature
-and in ours: Blanke's \emph{full} custodial $\Delta F{=}2$ calculation finds the
-same $\varepsilon_K$ wall as the minimal anarchic scans.
+Custodial RS gauges $\mathrm{SU(2)}_L\times\mathrm{SU(2)}_R\times\mathrm{U(1)}_X$
+with the discrete $P_{LR}$. It is an electroweak symmetry: it acts on the oblique
+parameters and the $Z\,b\bar b$ vertex, and is blind to the color-octet KK-gluon
+operator that sets $\varepsilon_K$.
 
-\headlinebox{%
-{\bfseries\color{accent} How to read each grid.}\;
-Columns: \textbf{\textcolor{warn}{PAPER}} (cropped published figure) $\mid$
-\textbf{\textcolor{accent}{OURS}} (our code).
-Rows: \textbf{no custodial} (top) $\mid$ \textbf{custodial} (bottom).
-For $\varepsilon_K$ the two OURS panels are deliberately the \emph{same} cloud
-(custodial changes nothing); for $S,T,U$ and $Z\to b\bar b$ the bottom-row
-trajectory visibly relaxes toward the SM. The detailed provenance, attribution,
-and per-paper floor tables live in
-\texttt{custodial\_comparison.tex}; this note is just the pictures.
-\par}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.35}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.175\textwidth}>{\raggedright\arraybackslash}p{0.095\textwidth}>{\raggedright\arraybackslash}p{0.325\textwidth}>{\raggedright\arraybackslash}p{0.295\textwidth}@{}}
+\toprule
+\textbf{Observable} & \textbf{Touched?} & \textbf{Mechanism} & \textbf{How we implemented it} \\
+\midrule
+$S,T,U$ oblique & \textbf{yes} ($T$) &
+SU(2)$_R$ removes the $\log L$ enhancement of $T$ (ADMS); $\Delta T\propto+L\to-1/L$ &
+custodial $\Delta T=-\dfrac{\pi v^2}{4c_W^2 M_{KK}^2 L}$ (CGHNP Eq.~153), \texttt{oblique\_stu.py}; $S$ stays unprotected \\
+$Z\to b\bar b$, $g_L^b$ & \textbf{yes} (tree) &
+$P_{LR}$ with $b_L\in(2,2)_{2/3}$ zeroes $\delta g_L^b$ at tree level (ACDP) &
+$\delta g_L^b\to0$ on the protected mask (ACDP Eqs.~3--12); $1/L$ residual is a proxy knob \\
+$Z\to b\bar b$, $g_R^b$ & \textbf{yes} (zero) &
+$b_R\in(1,1)_{-1/3}$: $T^3_L=T^3_R=0\Rightarrow\delta g_R^b=0$ by $P_C$ (ACDP Tab.~1) &
+$g_R^b=0$ (singlet embedding, ACDP Tab.~1); not pinned in code \\
+$Z\to b\bar b$ loops & partial &
+top partners re-introduce $-\delta g_L^b$, $+\Delta T$(singlet)/$-\Delta T$(bidoublet) (CPSW) &
+CPSW Eqs.~13--15, 35; $\xi,\rho$ mass inputs are proxy knobs \\
+$\varepsilon_K,\ \Delta m_K,\ \Delta F{=}2$ & \textbf{no} &
+the KK-gluon $C_4$ operator is a color octet, electroweak \emph{singlet} --- uncharged under the custodial group &
+unchanged: \texttt{deltaf2.py} has no \texttt{ew\_model} branch. Blanke's full custodial calc confirms the wall \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\textbf{Lane note.} The $\varepsilon_K$ comparison uses our \textbf{anarchic
-baseline (lane A)} --- the literature strawman --- so it lines up against
-Bauer/Blanke. Production as run (lane B, fit-aligned MFV) is a sharper wall at
-$\approx$7~TeV; the FPR/aligned ideal (lane C) is $\approx$2~TeV. Custodial moves
-\emph{none} of these flavor lanes; only flavor alignment does.
+Our custodial run is a leading-order tree EW proxy; its four documented
+approximations and the full equation-by-equation provenance are in
+\texttt{docs/CUSTODIAL\_PROVENANCE.md}, and the per-paper equation/figure map is in
+\texttt{docs/CUSTODIAL\_PAPER\_MAP.pdf}.
+
+% ===================== TWO PROTECTIONS =====================
+\section*{2.\quad The two protections: SU(2)$_R$ protects $T$, $P_{LR}$ protects $Z b_L$}
+
+Custodial bundles two distinct protections that do different jobs, and we can switch
+them on separately. The gauge SU(2)$_R$ tames the oblique $T$ parameter; the extra
+discrete $P_{LR}$ protects the $Z b_L$ vertex. Running all three models (minimal,
+SU(2)$_R$ only, SU(2)$_R\!+\!P_{LR}$) gives the clean decomposition below: the
+oblique floor is the largest $M_{KK}$ excluded at $95\%$ against the PDG-2025
+$U$-fixed ellipse, and $\delta g_L^b$ is the $Z b_L$ vertex shift at $M_{KK}=3$~TeV.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.35}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+\toprule
+\textbf{EW model (code)} & \textbf{oblique $S,T,U$ floor} & \textbf{$Z b_L$ shift $\delta g_L^b$} \\
+\midrule
+minimal RS \newline {\footnotesize\texttt{minimal\_rs}} &
+$16.0$~TeV \newline ($T$ problem) &
+$2.6\times10^{-3}$ \newline (unprotected) \\
+SU(2)$_R$ only \newline {\footnotesize\texttt{custodial\_rs\_su2r}} &
+$5.8$~TeV \newline ($T$ fixed; set by $S$) &
+$2.6\times10^{-3}$ \newline (= minimal, still unprotected) \\
+SU(2)$_R + P_{LR}$ \newline {\footnotesize\texttt{custodial\_rs\_plr}} &
+$5.8$~TeV \newline (unchanged) &
+$0$ \newline (protected) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+SU(2)$_R$ alone does the entire oblique job: it pulls the $S,T,U$ floor from
+$16$ down to $5.8$~TeV (the leftover is the unprotected $S$), and it leaves $Z b_L$
+exactly where minimal had it. $P_{LR}$ then does the $Z b_L$ job: it collapses
+$\delta g_L^b$ to zero without touching the oblique floor at all. So each symmetry
+cures one observable, independently. This is why the $Z\to b\bar b$ ``no custodial''
+plot below stands for \emph{both} minimal and SU(2)$_R$-only: SU(2)$_R$ does not move
+those couplings, only $P_{LR}$ does.
+
+% ===================== (a) STU =====================
+\section*{3.\quad Paper vs.\ ours, constraint by constraint}
+In every comparison the published figure is on the left and our reproduction is on
+the right, in the same axes.
 
 \FloatBarrier
 \clearpage
 
-% ===================== (1) eps_K =====================
-\section{(1)\quad $\varepsilon_K$ --- the wall does \emph{not} move}
+\subsection*{(a)\quad $S,T,U$ oblique --- SU(2)$_R$ protects $T$}
+CGHNP Fig.~4 is one figure with a minimal (left) and a custodial (right) panel;
+$P_{LR}$ does not change either.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{cmp2x2_epsK.png}
-\caption{\textbf{$\varepsilon_K$: custodial is blind to the kaon wall.}
-\emph{Top (no custodial):} the minimal anarchic $|\varepsilon_K|$ cloud, Bauer
-0912.1625 Fig.~4 (left) and our Lane-A reproduction (right) --- both span
-${\sim}6$ decades with the same grey / blue / orange Z$\to b\bar b$ / $|\varepsilon_K|$
-layering. \emph{Bottom (custodial):} Blanke 0809.1073 Fig.~9 (left) computes the
-$\varepsilon_K$ fine-tuning \textbf{inside the full custodial model} and still
-crosses $\Delta_{BG}{<}20$ only at $M_{KK}{\approx}18$~TeV and $\Delta_{BG}{<}10$
-at ${\approx}30$~TeV; our custodial panel (right) is the \emph{identical} cloud
-plus the annotation, because the KK-gluon $C_4$ operator is an EW singlet that
-custodial cannot touch. \textbf{The wall stays at tens of TeV in both the paper
-(Blanke, full custodial) and ours.} Floors: ours Lane-A
-${\sim}9$--$24$~TeV; literature ${\sim}18$--$33$~TeV (Blanke 18/30, CFW 21/33,
-Bauer~II ${\sim}10$, Archer 10--30); custodial moves none of them.}
+\rowlabel{No custodial}{paper (left) $|$ ours (right)}
+\pairrow{paper_STU.png}{ours_STU.png}
+\vspace{-0.6em}
+\captionof{figure}{The $S$--$T$ plane, same axes both sides. Minimal RS sweeps a
+wedge that climbs steeply in $T$ (the volume-enhanced ``RS $T$ problem'') as
+$M_{KK}$ runs $10\to1$~TeV against the CL ellipses. Our scan reproduces the paper
+wedge.}
+
+\vspace{0.8em}
+\rowlabel{With custodial (SU(2)$_R$)}{paper (left) $|$ ours (right)}
+\pairrow{paper_ST_custodial.png}{ours_ST_custodial.png}
+\vspace{-0.6em}
+\captionof{figure}{\emph{Paper} (left): CGHNP 0807.4937 Fig.~4 \textbf{right panel},
+the RS corrections \emph{with} custodial protection. The blue region now runs flat
+along the $S$-axis at $T\approx0$; the volume-enhanced $T$ is gone. \emph{Ours}
+(right): the custodial trajectory shows the same collapse, $T\to0$, with the
+residual floor set by the \emph{unprotected} $S$. Same axes, same behaviour --- this
+paper panel is the right half of the very figure whose left half is the row above.}
+
+\FloatBarrier
+\clearpage
+
+% ===================== (b) Zbb =====================
+\subsection*{(b)\quad $Z\to b\bar b$ --- $P_{LR}$ protects $g_L^b$ at tree level}
+
+The minimal stripe below is also the SU(2)$_R$-only result; only $P_{LR}$ collapses it.
+
+\rowlabel{No custodial \emph{and} SU(2)$_R$ only}{paper (left) $|$ ours (right)}
+\pairrow{paper_Zbb_gLgR.png}{ours_Zbb_gLgR.png}
+\vspace{-0.6em}
+\captionof{figure}{The $(g_L^b,g_R^b)$ plane, same axes both sides. The minimal
+stripe sweeps away from the SM in $g_L^b$ at nearly fixed $g_R^b$ as $M_{KK}$ drops.
+Our scan reproduces the paper stripe and SM point. SU(2)$_R$-only sits on this same
+stripe: $\delta g_L^b$ is unchanged from minimal ($2.6\times10^{-3}$).}
+
+\vspace{0.8em}
+\rowlabel{With $P_{LR}$}{ours --- no published $(g_L^b,g_R^b)$ custodial panel exists}
+\begin{figure}[H]\centering
+\includegraphics[width=0.54\textwidth]{ours_Zbb_custodial.png}
 \end{figure}
+\vspace{-0.6em}
+\captionof{figure}{CGHNP plots only the minimal $Z\to b\bar b$ (Fig.~8 is minimal in
+both panels), so there is no published $(g_L^b,g_R^b)$ figure for the custodial case
+to put on the left. \emph{Ours}: with $P_{LR}$ the $b$ couplings collapse onto the SM
+($\delta g_L^b\to0$, $\delta g_R^b\to0$ for $b_R\in(1,1)_{-1/3}$), landing
+$\sim\!35\times$ closer to the SM than the minimal/SU(2)$_R$ stripe above. Top-partner
+loops partially re-introduce $\delta g_L^b$ (CPSW).}
 
 \FloatBarrier
 \clearpage
 
-% ===================== (2) S,T,U =====================
-\section{(2)\quad $S,T,U$ oblique --- custodial pulls $T\to0$}
+% ===================== (c) epsK =====================
+\subsection*{(c)\quad $\varepsilon_K$ --- custodial does \emph{not} move the wall}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{cmp2x2_STU.png}
-\caption{\textbf{$S,T,U$: custodial protects $T$.} \emph{Top (no custodial):}
-the minimal RS $S$--$T$ trajectory climbs steeply in $T$ (the volume-enhanced
-``RS $T$ problem''), in CGHNP 0807.4937 Fig.~4 (left) and in ours (right, the
-points shoot up off the recentered PDG-2025 ellipse). \emph{Bottom (custodial):}
-CPSW 0701055 Fig.~1 (left) shows the custodial $\delta g_{bL}$--$\Delta T$
-correlation with $\Delta T$ driven back toward $0$; our custodial $P_{LR}$
-trajectory (right) hugs the $S$-axis at $T\!\approx\!0$ (minimal $T$ reaches
-${\sim}25$ at 1~TeV; custodial $|T|{<}0.01$ everywhere), the ADMS mechanism
-($\mathrm{SU(2)}_R$ turns $\Delta T\propto{+}L$ into ${-}1/L$). \textbf{Custodial
-relieves the oblique floor in both paper and ours:} our minimal
-${\sim}18$--$20$~TeV existence wall $\to$ custodial ${\sim}2$--$3$~TeV
-(literature, $S$-limited), with the residual set by the \emph{unprotected} $S$.}
-\end{figure}
+\rowlabel{No custodial = with custodial}{paper (left) $|$ ours (right)}
+\pairrow{paper_epsK.png}{ours_epsK.png}
+\vspace{-0.6em}
+\captionof{figure}{Anarchic $|\varepsilon_K|$ vs.\ $M_{KK}$, same axes both sides;
+both span $\sim\!6$ decades with the $95\%$-quantile floor near $10$~TeV.
+\textbf{This one row stands for both conditions:} custodial is blind to
+$\varepsilon_K$, because the binding operator is the color-octet KK-gluon $C_4$, an
+electroweak singlet the custodial group cannot touch, so the cloud is
+\emph{identical} with or without it. The full custodial calculation agrees: Blanke
+0809.1073 computes $\Delta F=2$ inside the custodial model and still finds
+$M_{KK}\gtrsim18$--$30$~TeV.}
 
 \FloatBarrier
 \clearpage
 
-% ===================== (3) Z->bb =====================
-\section{(3)\quad $Z\to b\bar b$ --- custodial collapses onto the SM}
+% ===================== PAPERS =====================
+\section*{4.\quad Which papers we followed}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{cmp2x2_Zbb.png}
-\caption{\textbf{$Z\to b\bar b$: $P_{LR}$ collapses the $b$ couplings to the SM.}
-\emph{Top (no custodial):} the minimal $(g_L^b,g_R^b)$ stripe sweeps away from
-the SM as $M_{KK}$ drops, in CGHNP 0807.4937 Fig.~8 (left) and ours (right),
-overlaid on the $Z$-pole 68/95/99\% CL ellipses. \emph{Bottom (custodial):} CPSW
-0607106 Fig.~1 (left) --- the \textbf{bidoublet} embedding (red) sits inside the
-allowed band because $P_{LR}$ with $b_L\in(2,2)_{2/3}$ zeroes $\delta g_L^b$ at
-tree level, while the unprotected ``gauge'' / ``doublets'' curves run far below;
-our custodial $P_{LR}$ proxy (right) collapses onto the SM point ($\delta g_L^b$
-suppressed by $1/L$, $\delta g_R^b\!\to\!0$ for $b_R\in(1,1)_{-1/3}$), landing
-${\sim}35\times$ closer to the SM than the minimal stripe. \textbf{Custodial
-protects $Z b_L\bar b_L$ at tree level in both paper and ours} (top-partner loops
-partially re-introduce it; see \texttt{custodial\_comparison.tex}). Floor: our
-minimal $Z\to b\bar b$ bites only to ${\sim}5$~TeV (post-B1-fix; the old
-$25$--$30$~TeV was a sign-bug).}
-\end{figure}
+\textbf{Followed (formulas taken and coded up):} the four electroweak-custodial
+papers. \textbf{CGHNP} (Casagrande et al., 0807.4937): the custodial $T$ (Eq.~153),
+the minimal/custodial oblique, and the $Z b\bar b$ tree couplings (Eq.~170).
+\textbf{ADMS} (Agashe-Delgado-May-Sundrum, hep-ph/0308036): the custodial-$T$
+mechanism. \textbf{ACDP} (Agashe-Contino-Da~Rold-Pomarol, hep-ph/0605341): the
+$P_{LR}$ protection of $Z b_L$ and the $g_R$ embedding. \textbf{CPSW}
+(Carena-Pont\'on-Santiago-Wagner, hep-ph/0607106 and 0701055): the top-partner one
+loop.
 
-\FloatBarrier
-\clearpage
+\textbf{Did not follow (cross-checks only, nothing implemented):} the
+custodial-flavor papers. \textbf{CFW} (0804.1954) and \textbf{Blanke et al.}
+(0809.1073) and \textbf{Bauer~II} (0912.1625), including Bauer~II Fig.~13 / Eq.~131
+(the custodial right-handed $Z$ FCNC, enhanced $\sim\!10\times$), are used only to
+confirm that the $\varepsilon_K$ wall stays at tens of TeV. The split is electroweak
+vs.\ flavor: we follow the papers that give the custodial effect on $S,T,U$ and
+$Z b\bar b$, the floors we run into, and we do not implement the custodial flavor
+effects, which stay subleading to the KK-gluon for $\varepsilon_K$. The detailed
+per-paper map is \texttt{docs/CUSTODIAL\_PAPER\_MAP.pdf}.
 
-% ===================== CLOSING =====================
-\section{Bottom line}
+% ===================== CONCLUSION =====================
+\section*{Bottom line}
 
-\headlinebox{%
-\begin{itemize}\setlength{\itemsep}{0.35em}\leftskip-0.6em
-\item \textbf{Custodial is an EW cure, not a flavor cure.} It pulls $T\to0$ and
-collapses the $Z\,b\bar b$ shifts onto the SM, but leaves the $\varepsilon_K$
-wall flat at tens of TeV --- in the literature (Blanke's full custodial
-$\Delta F{=}2$) and in ours.
-\item \textbf{The EW floors drop, the flavor wall does not.} $S,T,U$:
-${\sim}18$--$20$~TeV $\to{\sim}2$--$3$~TeV ($S$-limited). $Z\to b\bar b$:
-tree-protected. $\varepsilon_K$: unchanged at tens of TeV; only flavor
-\emph{alignment} (lane C) moves it to ${\sim}2$~TeV.
-\item \textbf{These plots show the leading physics only.} The OURS custodial
-panels use a leading-order tree EW proxy (custodial $T$, $P_{LR}$ $Z b_L\bar b_L$
-protection); the subleading custodial phenomenology is the deferred full build,
-scoped in \texttt{custodial\_comparison.tex}.
-\end{itemize}}
-
-\textbf{Two caveats on the OURS custodial panels (so they are not over-read).}
-\begin{enumerate}\setlength{\itemsep}{0.3em}\leftskip-0.4em
-\item \emph{The $Z\to b\bar b$ custodial collapse ($\delta g_R^b\!\to\!0$) is
-representation-specific.} It is exact only for $b_R\in(1,1)_{-1/3}$, where
-$T^3_L{=}T^3_R{=}0$ gives $P_C$ protection (ACDP Table~1, row~2). Other $b_R$
-embeddings give a \emph{nonzero} $\delta g_R^b$ of either sign (e.g.\ the
-$(2,4)$-type used to fit $A_{FB}^b$). Our panel pins the protected embedding; it
-is a model choice, not a theorem.
-\item \emph{The ``$\varepsilon_K$ identical'' claim is exact for the dominant
-operator, not for every flavor observable.} The $\varepsilon_K$ \emph{wall} is
-genuinely custodial-blind --- it is set by the color-octet KK-gluon $C_4$, an EW
-singlet (and Blanke's full custodial $\Delta F{=}2$ confirms it). But custodial
-\emph{does} touch flavor at subleading order through the EW KK bosons (Blanke:
-$Z_H,Z'$ can compete with the KK gluon in $B$-mixing) and custodian loops
-($b\to s\gamma$). Our \texttt{deltaf2} path has no $\mathrm{ew\_model}$ branch, so
-``custodial changes \emph{nothing} in flavor'' is a leading-order statement; what
-is rigorous is that the binding $\varepsilon_K$ wall does not move.
-\end{enumerate}
+Custodial symmetry does exactly two things to what we run, and they are separable:
+SU(2)$_R$ protects the oblique $T$ parameter (the $S,T,U$ floor drops from $16$ to
+$5.8$~TeV, the residual set by the unprotected $S$), and the extra $P_{LR}$ protects
+the $Z\,b_L\bar b_L$ vertex at tree level (top-partner loops partially undo it). It
+does \textbf{nothing} to $\varepsilon_K$: the binding kaon operator is the
+color-octet KK-gluon $C_4$, an electroweak singlet, so the wall stays at tens of
+TeV --- in our run and in Blanke's full custodial calculation alike. Custodial is an
+electroweak cure, not a flavor cure. Only flavor \emph{alignment} (RH-down U(3)
+degeneracy, 5D-MFV, $V_{5KM}$) moves the $\varepsilon_K$ wall.
 
 \end{document}
