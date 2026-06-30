@@ -1,0 +1,236 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Custodial Symmetry in Randall-Sundrum}\\[2pt]
+{\large A pedagogical walkthrough}\\[4pt]
+{\small June 2026}
+\end{center}
+
+\vspace{0.5em}
+Built up from the ground: where custodial symmetry comes from, how it is added to
+RS, what it modifies and why, the electroweak-versus-flavor split, and when the
+protection is valid. Each piece is tied to what our code actually does.
+
+\section{Why there is a problem at all}
+
+In Randall-Sundrum the SM gauge fields live in the 5D bulk between a UV brane
+(Planck scale) and an IR brane (TeV scale). Every 4D gauge boson is the
+\emph{zero mode} of a 5D field, with an infinite tower of Kaluza-Klein (KK)
+excitations above it at the TeV scale. Electroweak symmetry breaking happens on (or
+near) the IR brane, where the Higgs lives. When the Higgs gets its vev it does not
+only give mass to the zero-mode $W$ and $Z$, it also \emph{mixes} them with their
+heavy KK partners; integrating those out shifts the properties of the light $W$ and
+$Z$. Those shifts are what the LEP/SLC precision data measure, encoded in the
+oblique parameters $S,T,U$.
+
+The dangerous one is $T$. It measures the breaking of \emph{custodial isospin},
+which controls
+\[
+\rho = \frac{M_W^2}{M_Z^2\cos^2\theta_W},
+\]
+measured to be $1$ to high precision. In minimal RS the correction to $T$ is not
+just nonzero, it is \textbf{enhanced by the warp volume},
+\[
+\Delta T_{\min}\simeq +\frac{\pi v^2}{2\cos^2\theta_W M_{KK}^2}\,L,
+\qquad L\equiv k\pi r_c\approx 35\text{--}37,
+\]
+where $L$ is the logarithm of the Planck-to-TeV hierarchy, the very thing RS is
+built to generate. It is large and cannot be made small, so $T$ forces the first KK
+gauge bosons up to roughly $10$~TeV. This is the ``RS $T$ problem'': a little-hierarchy
+problem in which precision electroweak data push the new physics back up to
+$\sim\!10$~TeV. It happens because the bulk gauge symmetry of minimal RS is just the
+SM's $\mathrm{SU(2)}_L\times\mathrm{U(1)}_Y$, and the IR brane where EWSB happens has
+no reason to respect custodial isospin, so nothing forbids a large, volume-enhanced
+$T$.
+
+\section{Where the cure comes from: custodial symmetry in the SM}
+
+Step back to the ordinary Standard Model. Write the Higgs doublet as a $2\times2$
+matrix $\Sigma=(\tilde H, H)$. The Higgs \emph{potential} is invariant under a larger
+global symmetry than one might expect: $\mathrm{SU(2)}_L\times\mathrm{SU(2)}_R$,
+acting as $\Sigma\to L\,\Sigma\,R^\dagger$. The vev $\Sigma\to v\,\mathbb{1}$ breaks
+this to the diagonal subgroup $\mathrm{SU(2)}_{L+R}\equiv\mathrm{SU(2)}_V$, the
+\textbf{custodial symmetry}.
+
+That diagonal symmetry is what guarantees $\rho=1$ at tree level in the SM: the three
+would-be Goldstones (the longitudinal $W,Z$) form a custodial triplet, locking the
+$W$ and $Z$ masses in the symmetric ratio. $T$ stays zero until something breaks
+$\mathrm{SU(2)}_V$; in the SM only the hypercharge coupling $g'$ and the top-bottom
+Yukawa splitting do, and both are small. The point: \textbf{custodial
+$\mathrm{SU(2)}_V$ forbids $T$.} If you could impose it on the new physics, $T$ would
+be protected.
+
+\section{How custodial is added to RS}
+
+The idea (Agashe, Delgado, May, Sundrum 2003, ``ADMS'') is to \emph{gauge} this
+custodial symmetry in the bulk, enlarging the bulk gauge group:
+\[
+\mathrm{SU(2)}_L\times\mathrm{U(1)}_Y\ \longrightarrow\
+\mathrm{SU(2)}_L\times\mathrm{SU(2)}_R\times\mathrm{U(1)}_X.
+\]
+Hypercharge is now a combination, $Y=T^3_R+X$, with the extra $\mathrm{U(1)}_X$
+essentially $(B-L)/2$. To recover the SM at low energy the extra symmetry is broken
+back with \textbf{boundary conditions}:
+\begin{itemize}
+\item On the \textbf{UV brane}, $\mathrm{SU(2)}_R\times\mathrm{U(1)}_X\to\mathrm{U(1)}_Y$
+(Dirichlet BCs for the broken generators remove their zero modes and give the
+$W_R,Z'$ KK modes UV-brane masses, so there is no light right-handed $W$ or extra
+$Z$).
+\item On the \textbf{IR brane}, the Higgs is a \emph{bidoublet} $(2,2)$ of
+$\mathrm{SU(2)}_L\times\mathrm{SU(2)}_R$, and its vev breaks
+$\mathrm{SU(2)}_L\times\mathrm{SU(2)}_R\to\mathrm{SU(2)}_V$, exactly as in the SM.
+\end{itemize}
+Now the IR brane, where EWSB happens, \emph{respects the diagonal custodial
+$\mathrm{SU(2)}_V$}, so the large volume-enhanced $T$ is forbidden by the bulk
+symmetry. The only custodial breaking left is the $\mathrm{SU(2)}_R\to\mathrm{U(1)}_Y$
+breaking on the \emph{UV} brane, far from the IR-localized fields, so the zero modes
+barely feel it.
+
+\section{What this does to $T$ (and why $S$ is untouched)}
+
+The result is the closed form our code uses, CGHNP Eq.~153:
+\[
+\Delta T_{\rm cust}\simeq -\frac{\pi v^2}{4\cos^2\theta_W M_{KK}^2}\,\frac1L.
+\]
+Compared with the minimal case the $+L$ became $-1/L$: the sign flipped and the
+volume \emph{enhancement} became a volume \emph{suppression}. The ratio is
+\[
+\left|\frac{T_{\min}}{T_{\rm cust}}\right| = 2L^2\approx 2450,
+\]
+so custodial $T$ is $\sim\!2450\times$ smaller. The leading $L$-enhanced piece is
+now symmetry-forbidden; what survives is a small residual from the UV-brane breaking
+that the IR-localized zero mode only feels through its exponentially small UV tail,
+hence the $1/L$. In our run this pulls the oblique floor from $\sim\!16$ to
+$\sim\!5.8$~TeV.
+
+The floor does not go to zero because \textbf{$S$ is not protected}. $S$ measures a
+different combination (roughly the $W$-$B$ kinetic mixing from the KK tower), and
+custodial $\mathrm{SU(2)}_V$ says nothing about it. So once $T$ is killed, $S$ sets
+the residual floor ($\sim\!2$--$3$~TeV in the literature, $\sim\!5.8$~TeV in our more
+conservative proxy). Custodial fixes $T$; $S$ survives and sets the wall.
+
+\section{The second problem, and the second tool: $P_{LR}$}
+
+Gauging $\mathrm{SU(2)}_R$ fixes the oblique $T$ but not the $Z\to b\bar b$ vertex.
+The top is heavy, so the left-handed doublet $(t,b)_L$ is IR-localized
+($c_{Q_3}<1/2$); $b_L$ lives in that doublet, so it is IR-localized too, and
+IR-localized fermions overlap strongly with the KK gauge bosons and the Higgs. The
+$Z b_L\bar b_L$ coupling therefore gets a large correction $\delta g_L^b$, shifting
+$R_b,A_b,A_{FB}^b$ and giving a bound independent of $T$.
+
+The fix needs an additional \emph{discrete} symmetry, $P_{LR}$, the exchange
+$L\leftrightarrow R$ inside the custodial group (Agashe, Contino, Da~Rold, Pomarol
+2006, ``ACDP''). The dangerous correction comes from the broken generators and is
+\emph{odd under $P_{LR}$}, so if $b_L$ is a $P_{LR}$ eigenstate the correction must
+cancel. $P_{LR}$ exchanges $T^3_L\leftrightarrow T^3_R$, so the protected point is
+\[
+T^3_L = T^3_R.
+\]
+One arranges this by embedding $(t,b)_L$ in a \textbf{bidoublet} $(2,2)_{2/3}$ where
+$b_L$ sits at $(T^3_L,T^3_R)=(-\tfrac12,-\tfrac12)$; there $P_{LR}$ leaves it
+invariant and $\delta g_L^b\to0$ at tree level. The price is physical: a bidoublet
+has four components, so besides $(t,b)_L$ it contains exotic partners, including a
+charge-$5/3$ quark and an extra charge-$2/3$ quark. These are the \textbf{custodians},
+new TeV-scale KK fermions, and they are where the loop corrections below come from.
+
+For the right-handed $b$: a singlet $(1,1)_{-1/3}$ has $T^3_L=T^3_R=0$, trivially
+$P_{LR}$-symmetric, so $\delta g_R^b=0$. (Other embeddings, e.g.\ the $(2,4)$-type used
+to \emph{fit} $A_{FB}^b$, break this and give a nonzero $\delta g_R^b$. So
+$g_R^b=0$ is an embedding choice, not a theorem.)
+
+\section{The decomposition in our code}
+
+Custodial is therefore two protections doing two jobs, which is the
+\texttt{custodial\_rs\_su2r} vs \texttt{custodial\_rs\_plr} split in the code:
+\begin{itemize}
+\item \textbf{$\mathrm{SU(2)}_R$} protects the oblique $T$: floor $16\to5.8$~TeV. It
+does nothing to $Z b_L$.
+\item \textbf{$P_{LR}$} protects $Z b_L$: $\delta g_L^b\to0$. It does nothing to the
+oblique floor.
+\end{itemize}
+Run side by side, \texttt{custodial\_rs\_su2r} and \texttt{custodial\_rs\_plr} give
+the \emph{same} $5.8$~TeV oblique floor but a \emph{different} $\delta g_L^b$ (the
+first leaves it at the minimal $2.6\times10^{-3}$, the second zeroes it). Two
+symmetries, two observables, independent.
+
+\section{Electroweak versus flavor}
+
+Custodial is an \textbf{electroweak} symmetry: it gauges
+$\mathrm{SU(2)}_R\times\mathrm{U(1)}_X$ and a discrete parity inside it, acting on
+electroweak quantum numbers. So the things it protects are electroweak: the oblique
+parameters and the $Z$ couplings.
+
+The RS \textbf{flavor} problem comes from somewhere else: the \textbf{KK gluon}.
+Anarchic 5D Yukawas plus geometric localization generate flavor-violating quark
+couplings to the first KK gluon, and KK-gluon exchange produces $\Delta F=2$
+operators; the one that dominates $\varepsilon_K$ is the left-right operator $C_4$,
+QCD- and chirally enhanced. Crucially, \textbf{the KK gluon is a color octet and
+an electroweak singlet.} It is neutral under $\mathrm{SU(2)}_L,\mathrm{SU(2)}_R,
+\mathrm{U(1)}_X$, so the custodial group cannot act on it. Custodializing the model
+leaves the leading $\varepsilon_K$ amplitude \emph{exactly unchanged}.
+
+This is why the electroweak floors drop to a few TeV but the $\varepsilon_K$ wall
+sits at tens of TeV. It is physics, not a code limitation: Blanke et al.\ computed
+the entire $\Delta F=2$ set inside the full custodial model and still found
+$M_{KK}\gtrsim18$--$30$~TeV, and Bauer~II states $C_4$ ``is a pure QCD effect
+$\ldots$ insensitive to the precise embedding of the electroweak gauge symmetry.''
+What moves the $\varepsilon_K$ wall is \textbf{flavor alignment} (RH-down $U(3)$
+degeneracy, $V_{5KM}$, 5D-MFV), a different axis. Custodial and alignment are
+orthogonal cures for orthogonal problems: custodial for electroweak, alignment for
+flavor.
+
+\section{Subtleties: when ``nothing'' is not literally nothing}
+
+The same custodial structure that protects the diagonal $Z b_L$ vertex also reshuffles
+the flavor-violating $Z$ couplings. Bauer~II Fig.~13 / Eq.~131 is exactly this: the
+left-handed $Z$-mediated FCNCs are suppressed by $L$, but the right-handed ones are
+\emph{enhanced} by about a factor of $10$. So custodial genuinely changes the
+tree-level $Z$ contribution to $\Delta F=2$. For $\varepsilon_K$ this stays subleading
+to the KK gluon, so it does not move the wall; where it matters is rare decays like
+$K\to\pi\nu\bar\nu$. Hence the careful statement is ``custodial does not move the
+$\varepsilon_K$ wall,'' not ``custodial does literally nothing to flavor.''
+
+\section{When is the protection valid, and what are its limits}
+
+\begin{itemize}
+\item \textbf{Tree-level, loop-corrected.} $P_{LR}$ zeroes $\delta g_L^b$ at tree
+level, but the custodian top-partners in loops (Carena, Pont\'on, Santiago, Wagner,
+``CPSW'') bring back a negative $\delta g_L^b$ correlated with $+\Delta T$.
+\item \textbf{Embedding-dependent.} The protection holds only for
+$q_L\in(2,2)_{2/3}$ and $b_R\in(1,1)_{-1/3}$; other choices lose it (sometimes on
+purpose, to fit $A_{FB}^b$).
+\item \textbf{Leading-order in $1/L$.} The custodial $T$ (Eq.~153) is the leading
+$1/L$ piece; there are subleading corrections.
+\item \textbf{It costs new states.} The bidoublets force the custodian fermions,
+including the charge-$5/3$ quark, into the TeV-scale spectrum.
+\end{itemize}
+
+For \emph{our} implementation specifically: we do not build the full 5D custodial
+model, we impose its leading results as a proxy: swap in the custodial $T$
+coefficient, zero $\delta g_L^b$ on the protected mask, zero $\delta g_R^b$ for the
+singlet, add the CPSW loops, and leave the KK-gluon $\Delta F=2$ untouched. The four
+places where that proxy is softer than a real model (the $\kappa_b/L$ residual, the
+$\xi/\rho$ loop-mass inputs, the unpinned $g_R$ embedding, the singlet-only $\Delta T$)
+are documented in \texttt{docs/CUSTODIAL\_PROVENANCE.md} and are what a full custodial
+build (roadmap~D) would replace with derived numbers.
+
+\vspace{0.5em}
+\hrulefill
+
+\textbf{In four sentences.} Minimal RS has a volume-enhanced $T$ problem and a
+$Z b_L$ problem, both electroweak. Gauging a bulk custodial $\mathrm{SU(2)}_R$ makes
+the IR brane respect custodial isospin, killing the enhanced $T$ and leaving the
+unprotected $S$ as the residual floor. Adding the discrete $P_{LR}$ with the bidoublet
+embedding protects $Z b_L$ on top of that. None of it touches $\varepsilon_K$, set by
+the color-octet, electroweak-singlet KK gluon, so flavor needs its own separate cure:
+alignment.
+
+\end{document}

@@ -338,65 +338,32 @@ fig, ax = plt.subplots(figsize=(7.6, 6.4))
 ax.contourf(GLg, GRg, chi2, levels=[0]+LEV,
             colors=["#ffe14d", "#ff9f1c", "#e23b3b"], alpha=0.9)
 ax.contour(GLg, GRg, chi2, levels=LEV, colors="k", linewidths=0.4, alpha=0.4)
-ax.set_xlim(*ZBB_XLIM); ax.set_ylim(*ZBB_YLIM)
+# Moderate zoom: enough to show the custodial clump hugging SM AND the minimal
+# stripe peeling away, with NO cluttering inset.
+ax.set_xlim(-0.4240, -0.4110); ax.set_ylim(0.0650, 0.1120)
 ax.set_xlabel(r"$g_L^b$"); ax.set_ylabel(r"$g_R^b$")
-# faint minimal stripe behind, for contrast
-ax.plot(dpl["g_L_b"], dpl["g_R_b"], "-", color="0.6", lw=1.4, alpha=0.45, zorder=4)
-ax.scatter(dpl["g_L_b"], dpl["g_R_b"], c="0.7", s=6, alpha=0.3, zorder=4)
-# SM as a hollow ring UNDER the custodial diamonds (so they remain visible).
-ax.plot(SM_GL_B, SM_GR_B, marker="o", ms=12, mfc="none", mec="k", mew=1.6, zorder=6)
+# minimal stripe sweeping AWAY from SM (clear grey) + a direction arrow.
+ax.plot(dpl["g_L_b"], dpl["g_R_b"], "-", color="0.55", lw=1.6, alpha=0.6, zorder=4)
+ax.scatter(dpl["g_L_b"], dpl["g_R_b"], c="0.62", s=16, alpha=0.55, zorder=4)
+ax.annotate("", xy=(-0.4122, SM_GR_B), xytext=(-0.4180, SM_GR_B),
+            arrowprops=dict(arrowstyle="-|>", color="0.45", lw=1.6))
+ax.text(-0.4150, SM_GR_B - 0.0030, "minimal RS sweeps away",
+        color="0.35", fontsize=9.5, ha="center", va="top")
+# SM as a hollow ring UNDER the custodial diamonds (so they stay visible).
+ax.plot(SM_GL_B, SM_GR_B, marker="o", ms=14, mfc="none", mec="k", mew=1.8, zorder=6)
 ax.annotate("SM", (SM_GL_B, SM_GR_B), textcoords="offset points",
-            xytext=(8, -14), fontweight="bold", zorder=9)
+            xytext=(-23, -3), fontweight="bold", fontsize=11, zorder=9)
+# custodial diamonds: a tight bright clump hugging SM.
 sc = ax.scatter(gL_cust, gR_cust, c=dpl["M_KK_TeV"].to_numpy(), cmap="viridis",
-                norm=ZBB_NORM, s=18, edgecolor="k", lw=0.3, alpha=0.95, zorder=7,
+                norm=ZBB_NORM, s=30, edgecolor="k", lw=0.4, alpha=0.97, zorder=7,
                 marker="D")
-# Arrow lands ON the collapsed cluster (at the SM point), not on the ellipse body.
-ax.annotate(r"custodial $P_{LR}$ proxy:"
-            "\ncollapses onto SM\n($\\delta g_L^b/L$, $\\delta g_R^b\\!\\to\\!0$)",
-            xy=(SM_GL_B, SM_GR_B),
-            xytext=(-0.4135, 0.112), fontsize=9.5, color="#1b5e20", fontweight="bold",
-            ha="left", va="top",
-            arrowprops=dict(arrowstyle="-|>", color="#1b5e20", lw=1.4,
-                            shrinkB=3, connectionstyle="arc3,rad=-0.10"))
-ax.text(0.985, 0.03,
-        f"custodial points are ${ratio:.0f}\\times$ closer to SM than minimal",
-        transform=ax.transAxes, ha="right", va="bottom", fontsize=8.5,
-        bbox=dict(boxstyle="round,pad=0.3", fc="#eaf6ea", ec="0.4", alpha=0.95))
-
-# --- ZOOM INSET making the collapse visually verifiable ---------------------
-# The custodial diamonds sit within ~6e-4 of SM in g_L^b (invisible at full
-# scale); a tight zoom resolves them hugging SM while minimal points peel off.
-# Pin the inset in the OPEN lower-right region (below the ellipses, above the
-# "35x" caption) so it does not sit on top of the CL ellipses.
-axin = inset_axes(ax, width="100%", height="100%",
-                  bbox_to_anchor=(0.545, 0.155, 0.43, 0.38),
-                  bbox_transform=ax.transAxes, borderpad=0)
-# Window CENTRED on SM/cluster (not jammed left) with vertical headroom so the
-# minimal stripe peeling rightward is clearly separated from the custodial knot.
-IN_XLIM = (-0.4220, -0.4176); IN_YLIM = (0.0758, 0.0792)
-# minimal points inside the zoom window (peeling away to the right) — distinct
-# open grey circles so they don't blend into a flat pale line.
-mwin = ((dpl["g_L_b"] >= IN_XLIM[0]) & (dpl["g_L_b"] <= IN_XLIM[1]) &
-        (dpl["g_R_b"] >= IN_YLIM[0]) & (dpl["g_R_b"] <= IN_YLIM[1]))
-axin.scatter(dpl["g_L_b"][mwin], dpl["g_R_b"][mwin], s=22, facecolors="none",
-             edgecolors="0.55", lw=0.8, alpha=0.85, zorder=4,
-             label="minimal (peels off $\\rightarrow$)")
-# custodial diamonds: larger, bright-edged, ON TOP — the headline of the inset.
-axin.scatter(gL_cust, gR_cust, c=dpl["M_KK_TeV"].to_numpy(), cmap="viridis",
-             norm=ZBB_NORM, s=46, edgecolor="k", lw=0.5, alpha=0.97, zorder=7,
-             marker="D", label="custodial (on SM)")
-# SM ring UNDER the diamonds but visible.
-axin.plot(SM_GL_B, SM_GR_B, marker="o", ms=15, mfc="none", mec="k", mew=1.8, zorder=6)
-axin.annotate("SM", (SM_GL_B, SM_GR_B), textcoords="offset points",
-              xytext=(6, -11), fontsize=8.0, fontweight="bold")
-axin.set_xlim(*IN_XLIM); axin.set_ylim(*IN_YLIM)
-axin.set_xticks([-0.421, -0.420, -0.419, -0.418]); axin.set_yticks([0.077, 0.078])
-axin.tick_params(labelsize=7.0)
-axin.set_title("zoom $\\times$ ~17: custodial knot hugs SM", fontsize=8.0)
-axin.grid(True, alpha=0.25)
-axin.legend(loc="upper right", fontsize=6.6, framealpha=0.9, handletextpad=0.3,
-            borderpad=0.3)
-mark_inset(ax, axin, loc1=2, loc2=3, fc="none", ec="0.45", lw=0.9)
+# one clean label in the open upper-right, no crossing arrow.
+ax.text(0.975, 0.96,
+        "custodial $P_{LR}$:\n$b$ couplings collapse onto SM\n"
+        f"(${ratio:.0f}\\times$ closer than minimal)",
+        transform=ax.transAxes, ha="right", va="top", color="#1b5e20",
+        fontweight="bold", fontsize=10.5,
+        bbox=dict(boxstyle="round,pad=0.4", fc="#eaf6ea", ec="#1b5e20", alpha=0.95))
 
 cb = fig.colorbar(sc, ax=ax, pad=0.02); cb.set_label(r"$M_{\rm KK}$ [TeV]")
 ax.set_title("OURS — custodial $P_{LR}$ proxy $(g_L^b,g_R^b)$\n"
