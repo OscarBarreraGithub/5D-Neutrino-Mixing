@@ -1,0 +1,34 @@
+{
+  "lane": "A (anarchic, Bauer-S1 forward); literature strawman",
+  "n_passes_pdg": 111551,
+  "M_KK_grid_TeV": [
+    1.0,
+    20.0,
+    45
+  ],
+  "experimental_1sigma": {
+    "sin2beta": 0.017,
+    "phi_s_rad": 0.016,
+    "C_Bd": 0.08,
+    "C_Bs": 0.09,
+    "D0": "amplitude vs Delta m_D^exp (long-distance dominated, conservative)"
+  },
+  "generic_deviation_floor_TeV": {
+    "B_s phase (phi_s)": 1.6384001410127922,
+    "B_s magnitude (C_Bs)": NaN,
+    "B_d phase (sin2beta)": 1.874587589784166,
+    "B_d magnitude (C_Bd)": 1.0610917921577514,
+    "D0 amplitude (|M12|)": NaN
+  },
+  "survival_floor_TeV": {
+    "epsilon_K_median": 18.951142956132635,
+    "STU_existence": [
+      18.0,
+      20.0
+    ],
+    "binding": 20.0
+  },
+  "highest_generic_deviation_floor_TeV": 1.874587589784166,
+  "verdict": "B_confirmed",
+  "interpretation": "No anarchic point that survives epsilon_K + S,T,U shows a >1sigma flavor deviation in any quark channel: the generic-deviation floors all sit an order of magnitude in M_KK below the binding survival floor -> (B)."
+}

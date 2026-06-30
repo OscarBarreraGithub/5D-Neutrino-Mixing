@@ -1,0 +1,51 @@
+{
+  "description": "C1 oblique M_KK floor (TeV) = largest M_KK excluded at 95% by the RS oblique proxy (ratio_to_budget>1, passes=False).",
+  "s_coefficient": 30.0,
+  "s_coefficient_source": "flavor_catalog/processes/top_higgs_ew/EW001.yaml (warped S coeff)",
+  "proxy_defaults": {
+    "higgs_vev_gev": 246.21965,
+    "sin2_theta_w": 0.23122,
+    "rs_volume_log": 35.0
+  },
+  "chi2_budget_95_2dof": 5.991464547107979,
+  "m_grid_tev": {
+    "min": 1.0,
+    "max": 40.0,
+    "n": 39001
+  },
+  "fits": {
+    "CGHNP-2008": {
+      "s": 0.07,
+      "t": 0.16,
+      "sigma_s": 0.1,
+      "sigma_t": 0.1,
+      "rho_st": 0.85
+    },
+    "PDG-2025 U-fixed": {
+      "s": 0.026,
+      "t": 0.047,
+      "sigma_s": 0.075,
+      "sigma_t": 0.066,
+      "rho_st": 0.9
+    },
+    "PDG-2025 U-free": {
+      "s": 0.021,
+      "t": 0.04,
+      "sigma_s": 0.096,
+      "sigma_t": 0.12,
+      "rho_st": 0.91
+    }
+  },
+  "floors_tev": {
+    "minimal_rs": {
+      "CGHNP-2008": 10.392,
+      "PDG-2025 U-fixed": 15.955,
+      "PDG-2025 U-free": 13.178
+    },
+    "custodial_rs_plr": {
+      "CGHNP-2008": 7.617,
+      "PDG-2025 U-fixed": 5.796,
+      "PDG-2025 U-free": 4.546
+    }
+  }
+}
