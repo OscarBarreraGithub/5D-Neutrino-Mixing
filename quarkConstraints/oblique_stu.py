@@ -183,7 +183,15 @@ def minimal_rs_t_coefficient(
     rs_volume_log: float = DEFAULT_RS_VOLUME_LOG,
     sin2_theta_w: float = DEFAULT_SIN2_THETA_W,
 ) -> float:
-    """Return the volume-enhanced minimal-RS ``Delta T`` coefficient."""
+    """Return the volume-enhanced minimal-RS ``Delta T`` coefficient.
+
+    SOURCE: CGHNP (Casagrande-Goertz-Haisch-Neubert-Pfoh, arXiv:0807.4937)
+    Eq. (147), T = (pi v^2 / (2 cos^2 theta_W M_KK^2)) (L - 1/(2L)) in the
+    GEOMETRIC-Lambda_IR convention.  This implementation keeps the leading L
+    (a deliberate, conservative ~0.04% over-estimate that drops the -1/(2L)
+    subleading term -> tighter floor) and applies the x_1^2 geometric->physical
+    conversion below.  See docs/CUSTODIAL_PROVENANCE.md (item 1).
+    """
     volume = _positive(rs_volume_log, "rs_volume_log")
     sin2 = _finite(sin2_theta_w, "sin2_theta_w")
     cos2 = 1.0 - sin2
@@ -199,7 +207,16 @@ def custodial_rs_plr_t_coefficient(
     rs_volume_log: float = DEFAULT_RS_VOLUME_LOG,
     sin2_theta_w: float = DEFAULT_SIN2_THETA_W,
 ) -> float:
-    """Return the custodial-P_LR tree proxy ``Delta T`` coefficient."""
+    """Return the custodial-P_LR tree proxy ``Delta T`` coefficient.
+
+    SOURCE: CGHNP (arXiv:0807.4937) Eq. (153), the custodial SU(2)_R result
+    T = -(pi v^2 / (4 cos^2 theta_W M_KK^2)) (1/L) in the GEOMETRIC-Lambda_IR
+    convention, which CGHNP attribute to Agashe-Delgado-May-Sundrum
+    (hep-ph/0308036, [33] therein).  The 1/L suppression AND the sign flip
+    (relative to minimal_rs_t_coefficient) are both genuinely in CGHNP (153);
+    the x_1^2 geometric->physical conversion below matches the minimal case.
+    See docs/CUSTODIAL_PROVENANCE.md (item 2).
+    """
     volume = _positive(rs_volume_log, "rs_volume_log")
     sin2 = _finite(sin2_theta_w, "sin2_theta_w")
     cos2 = 1.0 - sin2

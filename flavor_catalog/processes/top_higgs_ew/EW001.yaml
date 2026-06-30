@@ -153,6 +153,13 @@ pdg_or_equivalent:
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
     sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
+  # PROVENANCE (docs/CUSTODIAL_PROVENANCE.md item 3): the value 30.0 is
+  # PROSE-sourced from the snapshot, which reads verbatim "S approximately
+  # 30 v^2 / M_KK^2" (pdg_2025_electroweak_stu.txt). An automated literal-string
+  # anchor for "30.0" reports UNRESOLVED because the prose carries "30", not
+  # "30.0"; the number itself is sourced and corroborated by the snapshot's
+  # "S <= 0.18 -> M_KK >= 3.2 TeV" line and by CGHNP 0807.4937 Eq. (147), whose
+  # S-part gives ~36.6 in the physical-M_KK convention (same order).
   - observable: "PDG 2025 warped-extra-dimension S coefficient"
     year: 2025
     value: 30.0
