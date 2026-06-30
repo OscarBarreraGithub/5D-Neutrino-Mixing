@@ -62,9 +62,12 @@ if "c_Q3" in df.columns:
     print(f"[epsK_cloud_S2] gated c_Q3 median = {df['c_Q3'].median():+.3f} "
           f"(Bauer Table 1 S2: -0.24 +/- 0.43 -> +0.24 repo convention)")
 
-rng = np.random.default_rng(7)
-phi = rng.uniform(0, 2 * np.pi, len(df))
-df["eps_k_total"] = np.abs(SM_EPS_K + df["eps_k_np"].values * np.exp(1j * phi))
+# Realize self-consistent |eps_K| with a random NP phase (same recipe as the S1
+# hybrid in _render_solo_anarchic.py: rng(11) on eps_K_np), so the grey backdrop
+# and cyan quantiles come from the FAT S2 ensemble.
+df["eps_k_total"] = np.abs(
+    SM_EPS_K + df["eps_k_np"].values
+    * np.exp(1j * np.random.default_rng(11).uniform(0, 2 * np.pi, len(df))))
 tiles = np.array(sorted(df.M_KK_TeV.unique()))
 
 
@@ -106,22 +109,29 @@ def _xjit(mkk, seed, w=0.11):
 
 fig, ax = plt.subplots(figsize=(8.2, 6.2))
 ax.axhspan(WIN_PAPER[0], WIN_PAPER[1], color="green", alpha=0.10, zorder=0)
-# GREY backdrop: full mass+CKM-consistent S2 cloud (no Z->bb cut).
-sub = pd.concat([g.sample(min(7000, len(g)), random_state=1)
-                 for _, g in df.groupby("M_KK_TeV")], ignore_index=True)
-ax.scatter(_xjit(sub.M_KK_TeV.values, 3), sub.eps_k_total.values, s=3, c="0.72",
-           alpha=0.16, rasterized=True, zorder=1, linewidths=0,
+# GREY backdrop: full mass+CKM-consistent S2 cloud (no Z->bb cut) -- explicit
+# 7000/tile subsample (rng 23), MIRRORING the S1 hybrid styling exactly.
+_GREY_PER_TILE = 7000
+_grey_parts, _rng_sub = [], np.random.default_rng(23)
+for _m in tiles:
+    _gg = df[df.M_KK_TeV == _m]
+    if len(_gg) > _GREY_PER_TILE:
+        _gg = _gg.iloc[_rng_sub.choice(len(_gg), _GREY_PER_TILE, replace=False)]
+    _grey_parts.append(_gg)
+df_grey = pd.concat(_grey_parts, ignore_index=True)
+ax.scatter(_xjit(df_grey.M_KK_TeV.values, 3), df_grey.eps_k_total.values, s=5,
+           c="0.62", alpha=0.35, rasterized=True, zorder=1, linewidths=0,
            label=r"without $Z\to b\bar b$ (full ensemble)")
 if have_zbb and len(dz_pass):
     xjb = _xjit(dz_pass.M_KK_TeV.values, 5)
-    ax.scatter(xjb, dz_pass.eps_k_total.values, s=11, c="#1f4fff", alpha=0.55,
+    ax.scatter(xjb, dz_pass.eps_k_total.values, s=7, c="#1f4fff", alpha=0.6,
                rasterized=True, zorder=3, linewidths=0,
                label=r"with $Z\to b\bar b$ (99\% CL)")
-    ax.scatter(xjb[dz_in.values], dz_pass.eps_k_total.values[dz_in.values], s=15,
+    ax.scatter(xjb[dz_in.values], dz_pass.eps_k_total.values[dz_in.values], s=11,
                c="#ff8c00", alpha=0.95, rasterized=True, zorder=4, linewidths=0,
                label=r"with $|\varepsilon_K|$ (both, $[1.2,3.2]\times10^{-3}$)")
 for q, ls, lab in [(95, "-", "95%"), (50, "--", "median"), (5, "-", "5%")]:
-    ax.plot(tiles, qc[q], color="navy", ls=ls, lw=1.8, zorder=5,
+    ax.plot(tiles, qc[q], color="#00cccc", ls=ls, lw=1.8, zorder=5,
             label=f"{lab} quantile")
 ax.axhline(WIN_PAPER[0], color="green", lw=0.6, ls="--", alpha=0.5, zorder=2)
 ax.axhline(WIN_PAPER[1], color="green", lw=0.6, ls="--", alpha=0.5, zorder=2)
