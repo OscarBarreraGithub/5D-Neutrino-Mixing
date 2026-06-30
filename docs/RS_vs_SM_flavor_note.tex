@@ -323,12 +323,35 @@ What would it take to rescue a low $\MKK$? Two distinct additions, neither for f
 
 \paragraph{Custodial protection fixes the electroweak sector, not $\epsK$.}
 The custodial $SU(2)_L\!\times\!SU(2)_R\!\times\!U(1)_X\!\times\!P_{LR}$ structure
-cancels the leading $T$ and protects $Z\to b\bar b$, relieving the oblique floor from
-$\sim$16\,TeV to $\sim$6\,TeV (Table~\ref{tab:oblique}). But $\epsK$ is a
-color-octet KK-gluon left--right operator, a singlet under the electroweak
-custodial group; it is \emph{untouched} by custodialization. After custodial, the
-$\epsK$ wall ($\sim$9--24\,TeV) is the binding constraint. Custodial buys
-electroweak viability, and nothing on flavor.
+cancels the leading $T$ (SU(2)$_R$~\cite{ADMS}) and protects the $Z\,b_L\bar b_L$
+vertex (the discrete $P_{LR}$~\cite{ACDP}), relieving the oblique floor from
+$\sim$16\,TeV to $\sim$6\,TeV (Table~\ref{tab:oblique}); the residual is set by $S$,
+which custodial does \emph{not} protect. But $\epsK$ is a color-octet KK-gluon
+left--right ($C_4$) operator, a \emph{singlet} under the electroweak custodial group,
+and is therefore untouched by custodialization. This is not an inference from operator
+counting alone: Blanke \emph{et al.}~\cite{Blanke} computed the full $\Delta F=2$ set
+\emph{inside the custodial model} and still find $\MKK\gtrsim18\TeV$ (fine-tuning
+$<20$) / $\gtrsim30\TeV$ ($<10$); Cs\'aki--Falkowski--Weiler~\cite{CFW} make the split
+explicit --- custodial passes electroweak precision at $\sim$3\,TeV while $\epsK$
+forces $\MKK\gtrsim21\text{--}33\TeV$. Figure~\ref{fig:ladder} collects this: the
+electroweak floors ($S,T,U$ and $Z\to b\bar b$) move to a few TeV under custodial,
+while the $\epsK$ wall does not move at all, in our numbers and in the literature
+alike. Custodial buys electroweak viability, and nothing on flavor.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{custodial_decoupling_ladder.png}
+  \caption{\textbf{Custodial decoupling ladder.} Per-constraint KK-scale floor,
+  minimal (circle) $\to$ custodial (square), ours (blue) vs literature (red). The
+  electroweak constraints ($S,T,U$, $Z\to b\bar b$) shift \emph{left} under
+  custodialization (arrows); $\epsK$ and the other flavor constraints do not move
+  (``$=$''), because the binding kaon operator is a color-octet KK-gluon, blind to
+  the electroweak custodial group. Literature anchors: \cite{ADMS,CPSW,CFW,Blanke,Bauer}.
+  (Leading custodial physics only; the subleading custodial flavor effects ---
+  EW KK-boson $\Delta F=2$, custodian loops --- are not in our proxy and do not change
+  the $\epsK$ wall.)}
+  \label{fig:ladder}
+\end{figure}
 
 \paragraph{Flavor alignment fixes $\epsK$, by adding structure.}
 Aligning or degenerating the flavor sector --- 5D MFV, a horizontal $U(1)$, or a
@@ -389,13 +412,26 @@ it does not affect the anarchic verdict above.
 \small
 \bibitem{APS} K.~Agashe, G.~Perez, A.~Soni, \emph{Flavor structure of warped extra
 dimension models}, Phys.\ Rev.\ D \textbf{71} (2005) 016002 [hep-ph/0408134].
-\bibitem{CGHNP} M.~S.~Carena \emph{et al.}, \emph{Precision electroweak data and
-unification of couplings in warped extra dimensions} and follow-ups (2008-era $S,T$
-fit, used as the historical reference ellipse).
+\bibitem{CGHNP} S.~Casagrande, F.~Goertz, U.~Haisch, M.~Neubert, T.~Pfoh,
+\emph{Flavor Physics in the Randall-Sundrum Model: I}, JHEP \textbf{10} (2008) 094
+[arXiv:0807.4937] (minimal-RS $S,T,U$ and $Z\to b\bar b$; the custodial $\Delta T$
+distillation, Eq.~153).
 \bibitem{Bauer} M.~Bauer, S.~Casagrande, U.~Haisch, M.~Neubert, \emph{Flavor Physics
 in the Randall-Sundrum Model: II}, JHEP \textbf{09} (2010) 017 [arXiv:0912.1625].
-\bibitem{Blanke} M.~Blanke \emph{et al.}, $\Delta F=2$ observables and fine-tuning
-in the RS model (KK-gluon $\epsK$ analysis).
+\bibitem{Blanke} M.~Blanke, A.~J.~Buras, B.~Duling, S.~Gori, A.~Weiler,
+\emph{$\Delta F=2$ Observables and Fine-Tuning in a Warped Extra Dimension with
+Custodial Protection}, JHEP \textbf{03} (2009) 001 [arXiv:0809.1073].
+\bibitem{ADMS} K.~Agashe, A.~Delgado, M.~J.~May, R.~Sundrum, \emph{RS1, Custodial
+Isospin and Precision Tests}, JHEP \textbf{08} (2003) 050 [hep-ph/0308036].
+\bibitem{ACDP} K.~Agashe, R.~Contino, L.~Da Rold, A.~Pomarol, \emph{A custodial
+symmetry for $Z b\bar b$}, Phys.\ Lett.\ B \textbf{641} (2006) 62 [hep-ph/0605341].
+\bibitem{CPSW} M.~Carena, E.~Pont\'on, J.~Santiago, C.~E.~M.~Wagner, \emph{Light
+Kaluza-Klein states in Randall-Sundrum models with custodial $SU(2)$} and
+\emph{Electroweak constraints on warped models with custodial symmetry},
+Nucl.\ Phys.\ B \textbf{759} (2006) 202 / \textbf{767} (2007) 54 [hep-ph/0607106,
+hep-ph/0701055].
+\bibitem{CFW} C.~Cs\'aki, A.~Falkowski, A.~Weiler, \emph{The Flavor of the Composite
+Pseudo-Goldstone Higgs}, JHEP \textbf{09} (2008) 008 [arXiv:0804.1954].
 \bibitem{FPR} A.~L.~Fitzpatrick, G.~Perez, L.~Randall, \emph{A GIM mechanism from
 extra dimensions}, [arXiv:0710.1869].
 \bibitem{PDG2025} Particle Data Group, electroweak review (oblique $S,T,U$ fit,
