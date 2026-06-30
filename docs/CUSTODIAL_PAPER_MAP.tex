@@ -1,0 +1,55 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.7in]{geometry}
+\usepackage{amsmath,amssymb,xcolor,enumitem}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\definecolor{accent}{RGB}{0,80,160}
+\setlist[itemize]{leftmargin=1.4em,topsep=1pt,itemsep=0pt}
+\newcommand{\paper}[2]{\medskip\noindent\textbf{\color{accent}#1}\ \textit{(#2)}}
+\newcommand{\got}[1]{\\[1pt]\hspace*{1.4em}\textbf{Formulas we took:} #1}
+\newcommand{\comp}[1]{\\[1pt]\hspace*{1.4em}\textbf{Computes (custodial vs.\ non):} #1}
+\pagestyle{empty}
+\begin{document}
+\begin{center}
+{\large\bfseries Custodial paper map --- where each formula comes from, and what each paper compares}\\[2pt]
+{\footnotesize Which papers gave us \emph{formulas} (top group) vs.\ \emph{comparison/validation numbers} (bottom group). Detail: \texttt{docs/CUSTODIAL\_PROVENANCE.md}.}
+\end{center}
+
+\noindent\rule{\textwidth}{0.8pt}
+\textbf{\color{accent}Papers we took custodial formulas FROM}
+\noindent\rule{\textwidth}{0.3pt}
+
+\paper{CGHNP --- Flavor in minimal RS, I}{Casagrande, Goertz, Haisch, Neubert, Pfoh; arXiv:0807.4937}
+\got{minimal $\Delta T$ (Eq.~147); \textbf{custodial $\Delta T$ (Eq.~153)} --- the exact closed form our code uses; $Z\to b\bar b$ tree $g_L^b,g_R^b$ (Eq.~170).}
+\comp{minimal-RS $S,T,U$ and $Z\to b\bar b$; presents custodial SU(2)$_R$ as ``cure \#4'' for $T$ --- minimal $T\Rightarrow M_{KK}\!>\!4$\,TeV vs.\ custodial (S-limited) $\Rightarrow\!2.4$\,TeV.}
+
+\paper{ADMS --- RS1, Custodial Isospin and Precision Tests}{Agashe, Delgado, May, Sundrum; hep-ph/0308036}
+\got{the custodial-$T$ \emph{mechanism} (SU(2)$_R$ kills the $\log(k\pi r_c)$ enhancement); the origin distilled into CGHNP Eq.~153 (analytic; no closed form copied directly).}
+\comp{$T$ (protected $\to\!\sim$3\,TeV floor from $S$), $S$ (unprotected), $Zb_L$; the custodial vs.\ log-enhanced-minimal $T$ contrast.}
+
+\paper{ACDP --- A custodial symmetry for $Z b\bar b$}{Agashe, Contino, Da Rold, Pomarol; hep-ph/0605341}
+\got{the $P_{LR}$ protection $\delta g_L^b\!\to\!0$ (Eqs.~3--12); the $b_R$ representation map (Table~1) $\Rightarrow$ our $g_R^b\!=\!0$ choice ($b_R\!\in\!(1,1)_{-1/3}$).}
+\comp{$\delta g_L^b$ (protected) and $\delta g_R^b$ (rep-dependent sign) custodial vs.\ minimal; the $A_{FB}^b$ anomaly.}
+
+\paper{CPSW --- Light KK / EW constraints with custodial SU(2)}{Carena, Pont\'on, Santiago, Wagner; hep-ph/0607106 + hep-ph/0701055}
+\got{the top-partner one-loop $\delta g_L^b$ (Eqs.~14--15) and $\Delta T$ (Eq.~13, with $T_{\rm top}$ Eq.~35).}
+\comp{custodial $T$ (bidoublet $-T$, singlet $+T$), the loop $\delta g_L^b$, and $S$; custodial gauge-KK floor $\sim$2.5--3\,TeV.}
+
+\medskip\noindent\rule{\textwidth}{0.3pt}
+\textbf{\color{accent}Papers used for COMPARISON / VALIDATION (no formula taken)}
+\noindent\rule{\textwidth}{0.3pt}
+
+\paper{CFW --- The Flavor of the Composite pGB Higgs}{Cs\'aki, Falkowski, Weiler; arXiv:0804.1954}
+\got{none.}
+\comp{anarchic $\varepsilon_K$ (KK-gluon $\Rightarrow M_{KK}\!\gtrsim\!21$\,TeV RS / 33\,TeV GHU) \emph{assuming} custodial EW ($\sim$3\,TeV) --- the explicit EW-vs-flavor split we reproduce.}
+
+\paper{Blanke et al.\ --- $\Delta F=2$ with custodial protection}{Blanke, Buras, Duling, Gori, Weiler; arXiv:0809.1073}
+\got{none.}
+\comp{the \textbf{full} $\Delta F=2$ set \emph{inside the custodial model} $\Rightarrow$ $\varepsilon_K$ wall \emph{stays} $M_{KK}\!\gtrsim\!18$--30\,TeV --- the proof that custodial does not touch flavor.}
+
+\paper{Bauer II --- Flavor in RS, II}{Bauer, Casagrande, Haisch, Neubert; arXiv:0912.1625}
+\got{none (for custodial).}
+\comp{anarchic minimal $\varepsilon_K$ (our Lane-A baseline, $M_g^{(1)}\!\gtrsim\!10$\,TeV); notes $Zb_L$ is removable by custodial.}
+
+\bigskip\noindent\rule{\textwidth}{0.8pt}
+\noindent\footnotesize\textbf{One-line summary.} We take the \emph{leading} custodial formulas from CGHNP (the $T$ closed forms), ADMS (the $T$ mechanism), ACDP ($P_{LR}$ $Zbb$), and CPSW (the loops); CFW, Blanke, and Bauer supply the comparison numbers that show custodial is an \emph{electroweak} cure ($S,T,U$ and $Z\to b\bar b$ to a few TeV), not a flavor cure (the $\varepsilon_K$ wall stays at tens of TeV).
+\end{document}
