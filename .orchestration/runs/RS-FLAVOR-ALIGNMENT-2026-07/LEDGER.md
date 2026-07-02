@@ -62,6 +62,19 @@ down magnitude (unlike S2/FPR/Redi-Weiler which suppress magnitude). OPEN decisi
 (running, job bhozq792x): does I_d (EDM CP invariant) stay small for NB, or does up-sector
 CP leak back via Y_uY_u^dag? That is the make-or-break for the "EDM-quiet" claim.
 
+### F3 — kaon-CP and neutron-EDM are INDEPENDENT CP invariants (VALIDATED, the key result)
+The EDM discriminator (job bhozq792x + sanity): at M_KK=3 TeV,
+- flat anarchy: |I_d|=2.86, epsK pass 2%.
+- **NB eta=0 (real down, complex up): epsK pass 100%, |sin Phi_12|=1e-16, BUT |I_d|=4.1-5.8 (EDM LOUD).**
+- Sanity: fully-real Yukawas (rho_cp=0) give |I_d|=0 EXACTLY (estimator validated); turning ON
+  up-sector CP (rho=1) drives |I_d| 0 -> 5.8 while the kaon phase stays dead.
+=> The kaon operator phase theta_K=arg[(G_L^d)_12(G_R^d)_12] and the EDM invariant
+I_d=Im[F_Q(YuYu^d+YdYd^d)Yd F_d]_11 are INDEPENDENT. A real down sector kills theta_K (eps_K
+safe, Delta m_K anarchic) but NOT I_d, because the neutron EDM feeds on Y_uY_u^dag (up-sector CP).
+**CP-only alignment of the kaon operator does NOT give an EDM-quiet theory; that needs genuine
+Nelson-Barr (confined CP / real det), not just a real Y_d.** This is the sharp, honest, novel
+result. Cross-signed: Codex-A specced the invariant, Codex-D predicted the leak, numerics confirm.
+
 ### NOVELTY BOUNDARY (Codex-D) — what we can honestly stake
 - Do NOT claim broad "CP-only alignment fixes eps_K+EDM" (Redi-Weiler 1106.6357, Minimal CP
   Violation) or "warped Nelson-Barr" (Girmohanta 2203.09002) as new.
