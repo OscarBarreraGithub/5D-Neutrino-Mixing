@@ -140,3 +140,16 @@ proxy not calibrated d_n; added Bauer-Malm-Neubert 1110.0471; corrected the S2 r
 (magnitude-align leaves |I_d|~1.9, EDM NOT suppressed) which STRENGTHENS the result:
 BOTH single-axis cures fail the EDM. Report FINAL: RS_flavor_alignment_note.pdf (5pp).
 Codex agent specs + sign-off saved in this dir (codex_*.md).
+
+## F4 — perturbation / tuning-radius: tuned accident vs protected manifold (Opus spec, VALIDATED)
+Perturb Y_d' = Y_d + delta*s_Y*(M o Z), Z unit-Frobenius, ensembles {full,re,im}.
+- **Anarchic tuned survivor:** delta_crit=1.6% (ISOTROPIC: real 1.0%, imag 2.5%, A=0.4~1);
+  Delta_tune=112 (= budget-regularized Barbieri-Giudice sensitivity); budget exponent
+  p=0.92~1 (accidental cancellation); d_sym=0.00 (ZERO real dirs keep eps_K=0 => ISOLATED point).
+- **Nelson-Barr (real Y_d):** real perturbations NEVER break eps_K (d_sym=1.00: eps_K identically
+  0 to machine precision along ALL 9 real dirs => 9-dim protected flat); only CP/imag perturbations
+  move it (delta~40% for this small-R_K point). Not tuned; symmetry-protected.
+=> Quantitative naturalness discriminator: d_sym (0 vs 1) + p (1 vs 0) + A (1 vs >>1) cleanly
+separate "tuned accident" (isolated, ~1% perturbation kills it, BG~112) from "symmetry manifold".
+Answers PI Q: max perturbation before eps_K breaks = ~1% for the anarchic tuned point (any
+direction); UNBOUNDED (real) for NB. scripts/tuning_radius_epsK.py + scripts/perturb_yukawa_stability.py.
