@@ -131,3 +131,12 @@ then the decisive floor-vs-mechanism comparison {anarchy | rank-one | NB | S2 | 
   `scripts/instrument_epsK_phase.py` (retains complex G_L/G_R, true Phi) on branch
   `align/instrument-phase`; smoke-tested; launched 500k-draw instrumented run (M_KK 2,3 TeV).
   Codex theory job still running.
+
+## SIGN-OFF (2026-07-02): Codex review VERDICT = SOUND-WITH-FIXES -> fixes applied
+Codex independently reproduced F1 (57.2%/7.0%/corr 0.821) and confirmed F3 physics.
+Fixes applied to the note: theta_K=arg M12 convention; I_d written as mass-basis
+Im(B11/A11); "NB eta=0" relabeled an explicit TOY (not genuine NB); I_d called a
+proxy not calibrated d_n; added Bauer-Malm-Neubert 1110.0471; corrected the S2 row
+(magnitude-align leaves |I_d|~1.9, EDM NOT suppressed) which STRENGTHENS the result:
+BOTH single-axis cures fail the EDM. Report FINAL: RS_flavor_alignment_note.pdf (5pp).
+Codex agent specs + sign-off saved in this dir (codex_*.md).

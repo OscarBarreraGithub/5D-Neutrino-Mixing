@@ -43,11 +43,15 @@ itself, which weights survivors by a phase-volume factor $P_{\rm pass}(R_K)\sim
 1/R_K$. (ii) A ``CP-only'' alignment that makes the down Yukawa real kills the
 kaon phase exactly and passes $\epsK$ at $100\%$ \emph{while keeping the coupling
 magnitude anarchic}, so $\dmK$ stays large. This is a distinct corner from the
-magnitude cures. (iii) That same point is \emph{not} EDM-safe: the neutron-EDM CP
-invariant $I_d=\mathrm{Im}\,[F_Q(Y_uY_u^\dagger+Y_dY_d^\dagger)Y_dF_d]_{11}$ stays
-$O(1)$, sourced by up-sector CP through $Y_uY_u^\dagger$, independent of the kaon
-phase. The kaon operator and the neutron EDM are governed by \emph{different} CP
-invariants; aligning one does not align the other. The practical consequence is
+magnitude cures. (iii) That same point is \emph{not} EDM-safe: the mass-basis neutron-EDM CP
+proxy $I_d=\mathrm{Im}(B_{11}/A_{11})$, with the misaligned spurion
+$B=U_{Ld}^\dagger F_Q(Y_uY_u^\dagger+Y_dY_d^\dagger)Y_dF_d\,U_{Rd}$ and the down mass
+matrix $A=U_{Ld}^\dagger F_Q Y_d F_d\,U_{Rd}$, stays $O(1)$, sourced by up-sector CP
+through $Y_uY_u^\dagger$, independent of the kaon phase. The kaon operator and the
+neutron EDM are governed by \emph{different} CP invariants; aligning one does not
+align the other. The same holds for the \emph{magnitude} cures: right-handed-down
+$U(3)$ suppresses $|C_4|$ (hence $\dmK$) but leaves $I_d$ at $O(1)$. So neither a
+magnitude alignment nor a CP-only alignment reaches an EDM-safe theory. The practical consequence is
 that ``sequester CP'' is not one condition but (at least) two, and the
 $(\dmK,\,d_n)$ plane separates every candidate mechanism. The genuinely open,
 buildable target is a calculable construction that suppresses the kaon operator
@@ -66,14 +70,16 @@ the color-octet KK-gluon left-right operator,
   \GR_{12}\sim g_{s*} f_{d_1}f_{d_2}\,e^{i\phi_R},
 \end{equation}
 with $\phi_{L,R}$ order-one anarchic phases. Writing $R_K\equiv 2|M_{12}^{LR}|/\dmK$
-and $\theta_K\equiv\arg[\GL_{12}\GR_{12}]$,
+and $\theta_K\equiv\arg M_{12}^{LR}$ (the amplitude phase; the LR matrix element and
+Wilson prefactor are real, so $\theta_K=\arg[\GL_{12}\GR_{12}]$),
 \begin{equation}
   |\epsK^{\rm NP}| \simeq \frac{\kappa_\epsilon}{2\sqrt2}\,R_K\,|\sin\theta_K|
   \simeq 0.332\,R_K\,|\sin\theta_K|,\qquad
-  \dmK^{\rm NP}\propto R_K\cos\theta_K .
+  \dmK^{\rm NP}\propto \mathrm{Re}\,M_{12}^{LR}\propto R_K\cos\theta_K .
 \end{equation}
-So $\epsK$ measures $R_K\sin\theta_K$ and $\dmK$ measures $R_K\cos\theta_K$: the same
-magnitude $R_K$, projected on the imaginary and real axes. A low-$\MKK$ survivor can
+So $\epsK\propto\mathrm{Im}\,M_{12}=R_K\sin\theta_K$ and the NP piece of $\dmK\propto
+\mathrm{Re}\,M_{12}=R_K\cos\theta_K$: the same magnitude $R_K$, projected on the
+imaginary and real axes. A low-$\MKK$ survivor can
 therefore be built two ways, by small $R_K$ (small magnitude) or by small
 $\sin\theta_K$ (aligned phase). These are physically different and, as we show, they
 predict different things.
@@ -110,48 +116,57 @@ The point of this note is that a low-$\MKK$ RS quark sector must control more th
 CP structure, and they are independent:
 \begin{itemize}\itemsep2pt
 \item $\theta_K=\arg[\GL_{12}\GR_{12}]$ sets $\epsK$ (kaon $1$-$2$, left-right).
-\item $I_d=\mathrm{Im}\,[F_Q(Y_uY_u^\dagger+Y_dY_d^\dagger)Y_dF_d]_{11}/(\text{mass})$
-  sets the neutron EDM. The tree KK-gluon EDM vanishes (the diagonal couplings are
-  real); the leading RS contribution is the one-loop Higgs/KK-fermion dipole with the
-  \emph{misaligned} spurion $Y_uY_u^\dagger+Y_dY_d^\dagger$~\cite{APS}.
+\item $I_d=\mathrm{Im}(B_{11}/A_{11})$, the mass-basis, mass-normalized CP invariant
+  ($A=U_{Ld}^\dagger F_Q Y_d F_d U_{Rd}$ the down mass matrix,
+  $B=U_{Ld}^\dagger F_Q(Y_uY_u^\dagger+Y_dY_d^\dagger)Y_dF_d U_{Rd}$ the misaligned
+  spurion), a proxy for the neutron EDM. The tree KK-gluon EDM vanishes (the diagonal
+  couplings are real); the leading RS contribution is the one-loop Higgs/KK-fermion
+  dipole with the misaligned $Y_uY_u^\dagger+Y_dY_d^\dagger$~\cite{APS}. We track $I_d$
+  as a rephasing-invariant diagnostic, \emph{not} a calibrated $d_n$ (the absolute
+  normalization carries an $O(3)$ hadronic/loop uncertainty and is not applied).
 \item $\theta_D=\arg[(G_L^u)_{12}(G_R^u)_{12}]$ sets $D^0$ CP violation (up $1$-$2$).
 \end{itemize}
 The crucial feature is that $I_d$ feeds on $Y_uY_u^\dagger$: up-sector CP enters the
 down-quark EDM directly, with no reference to the kaon phase $\theta_K$.
 
-\section{F2/F3: CP-only alignment fixes $\epsK$ but not the EDM}
-Consider the cleanest CP-only alignment: a real anarchic down Yukawa, with CP carried
-by the up sector (a Nelson-Barr-like routing that keeps a realistic Jarlskog $J$). By
-construction the down $M_d$ is real, so $\theta_K=0$ and $\epsK$ vanishes at tree
-level, while $|C_4|$ is untouched. The forward Monte Carlo confirms this and adds the
-decisive point (Table~\ref{tab:disc}, Fig.~\ref{fig:disc}):
+\section{F2/F3: a real down sector fixes $\epsK$ but not the EDM}
+Consider the cleanest CP-only toy: a real anarchic down Yukawa, with CP carried by the
+up sector through a shared rank-one spurion (a Nelson-Barr-\emph{like} routing that
+keeps a realistic Jarlskog $J$). We stress this is a diagnostic toy, \emph{not} a
+genuine Nelson-Barr model: only the down Yukawa is made real, the up sector is left
+anarchically complex. By construction $M_d$ is real, so $\theta_K=0$ and $\epsK$
+vanishes at tree level, while $|C_4|$ is untouched. The forward Monte Carlo confirms
+this and adds the decisive point (Table~\ref{tab:disc}, Fig.~\ref{fig:disc}):
 \begin{table}[h]
   \centering
-  \caption{Mechanism comparison at $\MKK=3\TeV$ (PDG$+J$-passing points).
-  $|C_4|$ is the $\dmK$ proxy; $|I_d|$ is the neutron-EDM CP invariant.}
+  \caption{Mechanism comparison at $\MKK=3\TeV$ (PDG$+J$-passing points, $\sim$1100
+  each). $\log_{10}|C_4|$ is the $\dmK$ proxy; $|I_d|$ is the mass-basis EDM CP proxy.}
   \label{tab:disc}
   \begin{tabular}{lcccc}
     \toprule
     Lane & $\epsK$ pass & $|\sin\theta_K|$ & $\log_{10}|C_4|$ & $|I_d|$ (EDM) \\
     \midrule
-    flat anarchy                 & $2\%$   & $0.54$      & $-15.9$ & $2.9$ \\
-    magnitude align ($U(3)_{d_R}$) & high  & --           & suppressed & suppressed \\
-    \textbf{CP-only (real $Y_d$)} & $\mathbf{100\%}$ & $\mathbf{10^{-16}}$ & $\mathbf{-15.9}$ & $\mathbf{4.1}$ \\
+    flat anarchy                    & $2.1\%$ & $0.54$    & $-15.9$ & $2.7$ \\
+    magnitude align ($U(3)_{d_R}$, S2) & $65\%$ & --      & $-31$ (killed) & $1.9$ \\
+    \textbf{CP-only toy (real $Y_d$)} & $\mathbf{100\%}$ & $\mathbf{10^{-16}}$ & $\mathbf{-16.0}$ & $\mathbf{4.3}$ \\
     \midrule
-    sanity: fully real $Y_{u,d}$ & --      & $10^{-16}$   & --      & $0.0$ \\
+    sanity: fully real $Y_{u,d}$    & --      & $10^{-16}$ & --     & $0.0$ \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-A real down sector passes $\epsK$ at $100\%$ with the coupling magnitude at its
-anarchic value (so $\dmK$ stays large), yet the EDM invariant is $|I_d|\simeq4$,
+The real down sector passes $\epsK$ at $100\%$ with the coupling magnitude at its
+anarchic value (so $\dmK$ stays large), yet the EDM proxy is $|I_d|\simeq4.3$,
 \emph{larger} than flat anarchy. Turning up-sector CP off (fully real Yukawas) sends
 $I_d\to0$ exactly, confirming both the estimator and the mechanism: the residual EDM
-is up-sector CP leaking through $Y_uY_u^\dagger$. Aligning the kaon operator does
-nothing to it. This is the central result: \textbf{CP-only alignment of the kaon
-operator does not yield an EDM-safe theory}. An EDM cure requires controlling the
-up-sector CP as well, which is precisely what genuine Nelson-Barr (a real quark mass
-determinant, CP confined to a heavy sector) delivers and a merely real $Y_d$ does not.
+is up-sector CP leaking through $Y_uY_u^\dagger$, and aligning the kaon operator does
+nothing to it. The magnitude cure fares no better on the EDM: $U(3)_{d_R}$ drives
+$|C_4|$ down by $\sim$15 decades (so $\dmK$ is quiet) but $I_d$ stays at $1.9$. This is
+the central result: \textbf{neither a magnitude alignment nor a CP-only alignment of
+the kaon operator yields an EDM-safe theory}. An EDM cure requires confining the
+up-sector CP as well, which is precisely what \emph{genuine} Nelson-Barr (a real quark
+mass determinant, CP confined to a heavy sector) delivers and a merely real $Y_d$ does
+not.
 
 \begin{figure}[t]
   \centering
@@ -169,7 +184,8 @@ suppression of $\epsK$ with reduced EDMs exists in composite/warped language
 (Redi-Weiler~\cite{RediWeiler}); warped Nelson-Barr with CP moved to a heavy sector
 exists (Girmohanta et al.~\cite{Girmohanta}); the magnitude cures are FPR
 $5$D-MFV~\cite{FPR}, Santiago right-handed-down protection~\cite{Santiago}, and
-flavor shining~\cite{Shining}; CP sequestering in warped space is
+flavor shining~\cite{Shining}, with a gauge-sector variant (extended bulk $SU(3)$) by
+Bauer-Malm-Neubert~\cite{BMN}; CP sequestering in warped space is
 Cheung-Fitzpatrick-Randall~\cite{CFR}. The defensible, and to our knowledge
 unpublished, content is narrower:
 \begin{enumerate}\itemsep2pt
@@ -228,6 +244,7 @@ and the $(\dmK,\,d_n)$ discriminator that certifies it, is the concrete next ste
 \bibitem{CFR} C.~Cheung, A.~L.~Fitzpatrick, L.~Randall, arXiv:0711.4421 (CP sequestering).
 \bibitem{RediWeiler} M.~Redi, A.~Weiler, arXiv:1106.6357 (minimal CP violation).
 \bibitem{Girmohanta} S.~Girmohanta, S.~J.~Lee, Y.~Nakai, M.~Suzuki, arXiv:2203.09002 (warped Nelson-Barr).
+\bibitem{BMN} M.~Bauer, R.~Malm, M.~Neubert, arXiv:1110.0471 (extended bulk $SU(3)$ flavor cure).
 \bibitem{GT} A.~Greljo, A.~E.~Thomsen (rank-one sequential Yukawas); Barbieri et al.\ $U(2)$ flavor.
 \end{thebibliography}
 \end{document}
