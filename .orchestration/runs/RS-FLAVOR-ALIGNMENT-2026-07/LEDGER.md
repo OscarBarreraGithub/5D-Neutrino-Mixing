@@ -52,6 +52,26 @@ anarchy mostly survives by drawing accidentally small flavor-violating MAGNITUDE
 This overturns the working premise and Opus-H1's "all survivors are Delta m_K-loud." Caveat: uses
 ratio_dm_K as a |C_4| proxy; the instrumented run (true Phi) will confirm/refute.
 
+### F2 — Nelson-Barr / CP-only lane works numerically (VALIDATED, Codex-B spec + Claude build)
+NB draw (Y_d real anarchic, CP via up-sector rank-one spurion; eta_leak = down leakage).
+At M_KK=3 TeV, eta_leak=0: |sin Phi_12| median 1.2e-16 (down phase exactly cancels),
+|C_4| RETAINED at anarchic scale (log10 -15.9 vs flat -15.5 => Delta m_K large),
+**100% eps_K pass** (414/414) vs flat ~1%, CP displaced to up sector (|sin PhiD_12|~0.64),
+CKM alive (|J|/J_pdg~1.4). This is the defensible-new corner (D): eps_K-safe WITH anarchic
+down magnitude (unlike S2/FPR/Redi-Weiler which suppress magnitude). OPEN decisive test
+(running, job bhozq792x): does I_d (EDM CP invariant) stay small for NB, or does up-sector
+CP leak back via Y_uY_u^dag? That is the make-or-break for the "EDM-quiet" claim.
+
+### NOVELTY BOUNDARY (Codex-D) — what we can honestly stake
+- Do NOT claim broad "CP-only alignment fixes eps_K+EDM" (Redi-Weiler 1106.6357, Minimal CP
+  Violation) or "warped Nelson-Barr" (Girmohanta 2203.09002) as new.
+- DEFENSIBLE new lane: CP-only kaon alignment KEEPING ANARCHIC DOWN MAGNITUDE (Delta m_K stays
+  large) + the (Delta m_K, nEDM) discriminator + the F1 survival taxonomy. Differentiator MUST
+  be anarchic-down-magnitude + kaon/EDM phenomenology. Radiative stability needs a spurion proof.
+- Rank-one/U(2) lane (Codex-E2): structural magnitude suppression, floor ~2-3 TeV; WARNING the
+  c-fit must enforce c_Q1=c_Q2, c_d1=c_d2 or U(2) silently breaks. Decisive metric: M50_all
+  (min M_KK with >=50% pass-all) across {flat | RH-align | rank-one+U(2) | +CP-sequester}.
+
 ## Hypotheses (reframed by F1: magnitude-alignment [known: S2/FPR] vs phase-alignment [novel])
 | ID | Claim (one line) | Branch | Status |
 |----|------------------|--------|--------|
@@ -63,6 +83,34 @@ ratio_dm_K as a |C_4| proxy; the instrumented run (true Phi) will confirm/refute
 
 **Dependency/GAP:** no neutron/quark EDM estimator in the code yet. H1/H2's sharpest smoking gun
 (EDM) needs a chromo-dipole estimator built from the KK structure. TASK before H1/H2 can close.
+
+## THE STEER (correct deep-research report, 2026-07-02) — 3-part structural change
+The literature verdict: the fix is NOT prettier alignment of two i.i.d.-anarchic Yukawas.
+It is (1) **replace the anarchic ENSEMBLE** with sequentially-generated LOW-RANK spurions
+(Y_f ~ y3 n3n3d + eps y2 n2n2d + eps' y1 n1n1d; Greljo-Thomsen) under an accidental
+**intermediate** light-family symmetry (U(2)^5; Isidori/Barbieri) — the sweet spot BETWEEN
+anarchy and MFV; (2) **factorize/localize** flavor breaking away from the deep-IR
+Higgs/compositeness sector (flavor branes, multi-scale; Vecchi); (3) **sequester CP** so
+kaon CPV is spurion-suppressed not phase-cancelled (CP-odd bulk scalar; Cheung-Fitzpatrick-
+Randall / Nelson-Barr). Each piece exists separately; NO calculable 5D construction combines
+all three -> that gap is our target. Keeps the RS virtue (geometric mass hierarchy), fixes
+eps_K structurally. Refs: FPR 5D-MFV, Santiago min-flavor-protection, Csaki-Perez-Surujon-
+Weiler flavor-shining, A4, Bauer-Malm-Neubert extra-SU(3), Greljo-Thomsen rank-one,
+Vecchi flavor-branes, Cheung-Fitzpatrick-Randall CP-sequester, Isidori U(2)^5.
+
+**Convergence:** our F1 + Opus + Codex independently reached the CP-sequester axis
+(Nelson-Barr); the report ADDS the ensemble axis (rank-one) + intermediate-symmetry framing.
+
+## CODEX FLEET (5 agents, disjoint, ANALYSIS/SPEC only — running 2026-07-02)
+- A (bd5q7zltp): EDM estimator spec (the missing observable / sharpest smoking gun).
+- B (btxrpy9j1): Nelson-Barr / single-CP-spurion draw spec (CP-sequester axis).
+- C (bm064ggg0): tuning-volume analysis, explains F1 (P_pass(R_K) arcsin law).
+- D (btfflykqs): novelty / literature boundary audit (what is genuinely new).
+- E2 (bmhkuall2): the rank-one / U(2) "wrong ensemble" axis (report's deepest point).
+- (old cx_E on the WRONG eigenquestions report was NEVER launched — user corrected it.)
+Synthesis target: build EDM estimator + rank-one & NB draw modes into instrument_epsK_phase.py,
+then the decisive floor-vs-mechanism comparison {anarchy | rank-one | NB | S2 | FPR} in
+(eps_K floor, Delta m_K, d_n) space, and the great report.
 
 ## Log
 - 2026-07-02: run opened; 3 independent perspectives launched (map + Opus theory + Codex theory).
