@@ -139,6 +139,24 @@ def _instrument_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
     out["GLu12_abs"] = float(abs(glu)); out["GRu12_abs"] = float(abs(gru))
     out["C4Dabs_12"] = float(abs(glu * gru) / M_KK_GeV**2)
     out["PhiD_12"] = float(np.angle(glu * gru))
+
+    # EDM CP invariant (Codex-A / Agashe-Perez-Soni): tree KK-gluon EDM vanishes
+    # (diagonal couplings real); the RS neutron EDM comes from the one-loop
+    # Higgs/KK-fermion dipole ~ Im[B_11/A_11] with the MISALIGNED spurion
+    # B = F_Q (Y_u Y_u^d + Y_d Y_d^d) Y_d F_d.  I_d is rephasing-invariant; the
+    # absolute d_n normalization is O(3)-parametric and is NOT applied here.
+    FQ, Fd, Fu = np.diag(f_Q), np.diag(f_d), np.diag(f_u)
+    YuYu = Y_u @ Y_u.conj().T
+    YdYd = Y_d @ Y_d.conj().T
+    A_d = U_L_d.conj().T @ FQ @ Y_d @ Fd @ U_R_d
+    B_d = U_L_d.conj().T @ FQ @ (YuYu + YdYd) @ Y_d @ Fd @ U_R_d
+    S_d = B_d[0, 0] / A_d[0, 0] if abs(A_d[0, 0]) > 0 else 0.0 + 0.0j
+    out["edm_Id"] = float(np.imag(S_d))          # down-quark EDM CP invariant
+    out["edm_Sd_abs"] = float(abs(S_d))
+    A_u = U_L_u.conj().T @ FQ @ Y_u @ Fu @ U_R_u
+    B_u = U_L_u.conj().T @ FQ @ (YuYu + YdYd) @ Y_u @ Fu @ U_R_u
+    S_u = B_u[0, 0] / A_u[0, 0] if abs(A_u[0, 0]) > 0 else 0.0 + 0.0j
+    out["edm_Iu"] = float(np.imag(S_u))          # up-quark EDM CP invariant
     return out
 
 
