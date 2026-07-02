@@ -25,7 +25,49 @@ from scripts.anarchic_bauer_s1 import (
 )
 from scripts.run_rs_anarchy import (
     _ordered_svd, _build_kk_gluon_couplings, _load_pdg_targets,
+    jarlskog_invariant,
 )
+
+
+# ---------------------------------------------------------------------------
+# Draw ensembles
+# ---------------------------------------------------------------------------
+def _draw_real_bauer_matrix(rng, y_min=0.1, y_max=3.0):
+    mag = rng.uniform(y_min, y_max, size=(3, 3))
+    sign = rng.choice(np.array([-1.0, 1.0]), size=(3, 3))
+    return sign * mag
+
+
+def _draw_real_bauer_vector(rng, y_min=0.1, y_max=3.0):
+    mag = rng.uniform(y_min, y_max, size=3)
+    sign = rng.choice(np.array([-1.0, 1.0]), size=3)
+    return sign * mag
+
+
+def _rms(x):
+    return float(np.sqrt(np.mean(np.abs(x) ** 2)))
+
+
+def _rank_one_like(a, b, target_rms):
+    raw = np.outer(a, b)
+    return raw * (target_rms / max(_rms(raw), 1e-12))
+
+
+def draw_nelson_barr_yukawas(rng, *, y_min=0.1, y_max=3.0, rho_cp=1.0, eta_leak=0.0):
+    """Nelson-Barr-like draw (Codex-B spec): real anarchic down magnitudes, CP
+    routed through the up sector via a shared rank-one spurion on the left-doublet
+    index.  eta_leak=0 => Y_d real => sin(Phi_12)=0 while |C_4| stays anarchic and
+    CKM CP survives in Y_u (rho_cp~1)."""
+    R_u = _draw_real_bauer_matrix(rng, y_min, y_max)
+    R_d = _draw_real_bauer_matrix(rng, y_min, y_max)
+    a_Q = _draw_real_bauer_vector(rng, y_min, y_max)   # shared CP-odd left direction
+    b_u = _draw_real_bauer_vector(rng, y_min, y_max)
+    b_d = _draw_real_bauer_vector(rng, y_min, y_max)
+    S_u = _rank_one_like(a_Q, b_u, _rms(R_u))
+    S_d = _rank_one_like(a_Q, b_d, _rms(R_d))
+    Y_u = R_u.astype(np.complex128) + 1j * rho_cp * S_u
+    Y_d = R_d.astype(np.complex128) + 1j * eta_leak * rho_cp * S_d
+    return Y_u, Y_d
 from quarkConstraints.deltaf2 import (
     evaluate_delta_f2_constraints, compute_delta_f2_wilsons,
     evaluate_delta_mk_with_running,
@@ -41,8 +83,10 @@ def _instrument_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
     U_L_u, m_up, U_R_u = _ordered_svd(M_u)
     U_L_d, m_dn, U_R_d = _ordered_svd(M_d)
     ckm = U_L_u.conj().T @ U_L_d
+    J = float(jarlskog_invariant(ckm))
 
-    # PDG gate (same tolerances as production _eval_draw)
+    # PDG gate (same tolerances as production _eval_draw), now incl. Jarlskog J
+    # so CP is actually reproduced (needed for the Nelson-Barr comparison).
     up_log = np.log(np.maximum(m_up, 1e-30) / targets["up_masses_GeV"])
     dn_log = np.log(np.maximum(m_dn, 1e-30) / targets["down_masses_GeV"])
     ckm_log = np.array([
@@ -50,10 +94,12 @@ def _instrument_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
         abs(math.log(max(abs(ckm[1, 2]), 1e-30) / targets["abs_V_cb"])),
         abs(math.log(max(abs(ckm[0, 2]), 1e-30) / targets["abs_V_ub"])),
     ])
+    j_log = abs(math.log(max(abs(J), 1e-30) / abs(targets["J"])))
     passes_pdg = bool(
         (np.abs(up_log) <= math.log(mass_factor)).all()
         and (np.abs(dn_log) <= math.log(mass_factor)).all()
         and (ckm_log <= math.log(ckm_factor)).all()
+        and j_log <= math.log(j_factor)
     )
 
     couplings = _build_kk_gluon_couplings(
@@ -62,6 +108,8 @@ def _instrument_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
     )
     GL = np.asarray(couplings.left_down)    # 3x3 complex, g_s * U_Ld^dag F_Q^2 U_Ld
     GR = np.asarray(couplings.right_down)   # 3x3 complex, g_s * U_Rd^dag F_d^2 U_Rd
+    GLu = np.asarray(couplings.left_up)     # up-sector, for D0/up CP (CP displacement)
+    GRu = np.asarray(couplings.right_up)
 
     df2 = evaluate_delta_f2_constraints(couplings, M_KK=M_KK_GeV, xi_KK=xi_KK)
     bs = df2.by_system
@@ -73,7 +121,7 @@ def _instrument_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
     except Exception:
         ratio_dm_K = float("nan")
 
-    out = dict(passes_pdg=passes_pdg,
+    out = dict(passes_pdg=passes_pdg, J=J,
                ratio_eps_K=ratio_eps_K, ratio_dm_K=ratio_dm_K,
                ratio_B_d=float(bs["B_d"].ratio_to_bound),
                ratio_B_s=float(bs["B_s"].ratio_to_bound),
@@ -83,14 +131,19 @@ def _instrument_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
         gl, gr = GL[i, j], GR[i, j]
         out[f"GL{tag}_abs"] = float(abs(gl)); out[f"GL{tag}_arg"] = float(np.angle(gl))
         out[f"GR{tag}_abs"] = float(abs(gr)); out[f"GR{tag}_arg"] = float(np.angle(gr))
-        # C4-like driver for this sector
         prod = gl * gr
         out[f"C4abs_{tag}"] = float(abs(prod) / M_KK_GeV**2)
         out[f"Phi_{tag}"] = float(np.angle(prod))           # total phase; eps ~ sin(Phi)
+    # up-sector 1-2 (D0 / where CP is displaced under down-sector CP alignment)
+    glu, gru = GLu[0, 1], GRu[0, 1]
+    out["GLu12_abs"] = float(abs(glu)); out["GRu12_abs"] = float(abs(gru))
+    out["C4Dabs_12"] = float(abs(glu * gru) / M_KK_GeV**2)
+    out["PhiD_12"] = float(np.angle(glu * gru))
     return out
 
 
-def run(scenario, M_KK_TeV_list, n_draws, seed, xi_KK=1.0):
+def run(scenario, M_KK_TeV_list, n_draws, seed, xi_KK=1.0,
+        draw_mode="bauer", rho_cp=1.0, eta_leak=0.0):
     targets = _load_pdg_targets()
     sc = SCENARIOS[scenario]
     y_max = sc["y_max"]; c_max = sc["c_max"]
@@ -107,8 +160,12 @@ def run(scenario, M_KK_TeV_list, n_draws, seed, xi_KK=1.0):
         for _ in range(n_draws):
             c_u3 = float(rng.uniform(c_lo_scan, c_hi_scan))
             try:
-                Y_u = _draw_bauer_matrix(rng, 0.1, y_max)
-                Y_d = _draw_bauer_matrix(rng, 0.1, y_max)
+                if draw_mode == "nelson_barr":
+                    Y_u, Y_d = draw_nelson_barr_yukawas(
+                        rng, y_min=0.1, y_max=y_max, rho_cp=rho_cp, eta_leak=eta_leak)
+                else:
+                    Y_u = _draw_bauer_matrix(rng, 0.1, y_max)
+                    Y_d = _draw_bauer_matrix(rng, 0.1, y_max)
                 c_Q, c_u, c_d = _fn_c_values(c_u3, epsilon, targets, Y_u=Y_u, Y_d=Y_d,
                                              common_cd=common_cd, rng=rng, c_jitter=0.0)
                 f_Q, f_u, f_d = f_IR(c_Q, epsilon), f_IR(c_u, epsilon), f_IR(c_d, epsilon)
@@ -119,6 +176,7 @@ def run(scenario, M_KK_TeV_list, n_draws, seed, xi_KK=1.0):
             except Exception:
                 continue
             r["M_KK_TeV"] = M_KK_TeV; r["scenario"] = scenario
+            r["draw_mode"] = draw_mode; r["eta_leak"] = float(eta_leak)
             rows.append(r); n_ok += 1
         print(f"  M_KK={M_KK_TeV} TeV: {n_ok}/{n_draws} evaluated", flush=True)
     return pd.DataFrame(rows)
@@ -130,10 +188,15 @@ if __name__ == "__main__":
     ap.add_argument("--mkk", default="1.5,2.0,3.0", help="comma TeV list")
     ap.add_argument("--ndraws", type=int, default=20000)
     ap.add_argument("--seed", type=int, default=12345)
+    ap.add_argument("--draw-mode", default="bauer", choices=["bauer", "nelson_barr"])
+    ap.add_argument("--rho-cp", type=float, default=1.0)
+    ap.add_argument("--eta-leak", type=float, default=0.0)
     ap.add_argument("--out", default=".orchestration/runs/RS-FLAVOR-ALIGNMENT-2026-07/instrument_S1.parquet")
     a = ap.parse_args()
     mkk = [float(x) for x in a.mkk.split(",")]
-    print(f"instrumenting scenario={a.scenario} M_KK={mkk} n={a.ndraws}")
-    df = run(a.scenario, mkk, a.ndraws, a.seed)
+    print(f"instrumenting scenario={a.scenario} mode={a.draw_mode} "
+          f"rho_cp={a.rho_cp} eta_leak={a.eta_leak} M_KK={mkk} n={a.ndraws}")
+    df = run(a.scenario, mkk, a.ndraws, a.seed,
+             draw_mode=a.draw_mode, rho_cp=a.rho_cp, eta_leak=a.eta_leak)
     df.to_parquet(a.out)
     print(f"wrote {len(df)} rows -> {a.out}")
