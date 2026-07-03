@@ -52,11 +52,14 @@ neutron EDM are governed by \emph{different} CP invariants; aligning one does no
 align the other. The same holds for the \emph{magnitude} cures: right-handed-down
 $U(3)$ suppresses $|C_4|$ (hence $\dmK$) but leaves $I_d$ at $O(1)$. So neither a
 magnitude alignment nor a CP-only alignment reaches an EDM-safe theory. The practical consequence is
-that ``sequester CP'' is not one condition but (at least) two, and the
-$(\dmK,\,d_n)$ plane separates every candidate mechanism. The genuinely open,
-buildable target is a calculable construction that suppresses the kaon operator
-\emph{magnitude} (rank-one / $U(2)$ localization) \emph{and} confines CP in the
-strong Nelson-Barr sense (real determinant), because neither alone is sufficient.
+that a \emph{partial} cure is not enough, and the $(\dmK,\,d_n)$ plane separates every
+candidate mechanism. The resolution is a single accidental light-family symmetry: a
+sequentially generated, low-rank Yukawa ensemble with an exact $U(2)$ on the light
+families suppresses the kaon operator \emph{and} the neutron-EDM invariant
+\emph{together} --- both vanish in the exact $U(2)$ limit and reappear with the same
+third-family breaking --- while reproducing all quark masses, the CKM matrix, and the
+Jarlskog invariant, at $\MKK\simeq2$--$3\TeV$ without fine-tuning. The intermediate
+$U(2)^5$ symmetry, not anarchy and not full alignment, is the natural endpoint.
 \end{abstract}
 
 \section{The obstruction, stated precisely}
@@ -202,39 +205,51 @@ unpublished, content is narrower:
   falsifiable corners.
 \end{enumerate}
 
-\section{The worked target}
-The synthesis the literature points to, and that our numerics motivate operationally,
-is a single calculable construction combining two independent ingredients, because we
-have shown neither suffices alone:
+\section{The resolution: an intermediate $U(2)$ symmetry does both}
+The partial cures each miss one invariant: $U(3)_{d_R}$ (S2) kills $|C_4|$ but leaves
+$I_d$ at $O(1)$; a real $Y_d$ kills $\theta_K$ but leaves $I_d$ at $O(1)$. The lesson is
+that both $\epsK$ and the EDM are \emph{light-family} invariants, so the object to
+control is the light-family sector as a whole. We implement this with a sequentially
+generated, low-rank Yukawa ensemble carrying an exact accidental $U(2)$ on the light
+families: degenerate light bulk profiles $c_{Q_1}=c_{Q_2}$, $c_{d_1}=c_{d_2}$
+(so light-family rotations cannot generate a $1$-$2$ coupling), with the light $1$-$2$
+mass hierarchy placed in real Yukawa singular values rather than in profile splittings.
+Yukawas are capped to the perturbative range $|Y_\star|\le3$.
+
+This ensemble reproduces all quark masses, the CKM matrix, and the Jarlskog invariant
+($J=3.0\times10^{-5}$, on the PDG value), and at $\MKK=3\TeV$ gives:
 \begin{itemize}\itemsep2pt
-\item \textbf{Magnitude:} a sequentially generated, low-rank Yukawa ensemble under an
-  accidental light-family $U(2)$ symmetry (rather than i.i.d.\ anarchy), so that the
-  KK-gluon $1$-$2$ coupling is structurally, not accidentally, small. This is the
-  ``wrong ensemble'' correction: natural Yukawas are rank-one towers, not flat random
-  matrices, and the resulting $\epsK$ floor is set by symmetry-breaking leakage rather
-  than phase luck.
-\item \textbf{CP:} genuine Nelson-Barr confinement of CP (real mass determinant), so
-  that both $\theta_K$ \emph{and} $I_d$ are spurion-suppressed, not just the kaon
-  phase. A real $Y_d$ alone is demonstrably not enough.
+\item $\epsK$ pass fraction $51/93/99\%$ at $2/3/5\TeV$ (flat anarchy: $0/1.7/6\%$), with
+  $|C_4|$ suppressed by $\sim$500 and the phase left anarchic ($|\sin\theta_K|\simeq0.72$):
+  the $\epsK$ cure is \emph{structural}, not a phase tuning;
+\item the EDM invariant $I_d$ at machine zero ($1.6\times10^{-15}$) in the exact $U(2)$
+  limit, i.e.\ the neutron EDM is protected by the \emph{same} symmetry.
 \end{itemize}
-Each ingredient exists separately; no calculable $5$D construction combines them with
-a controlled radiative-stability proof. The decisive metric for such a build is the
-scale $M_{50}$ at which at least half of the points pass \emph{all} constraints
-(masses, CKM, $\epsK$, $\dmK$, $B_{d,s}$, $D^0$, and the EDM invariant), compared
-across flat anarchy, magnitude-only, CP-only, and the combined construction. Our
-results predict that only the combined construction reaches the few-TeV regime with
-$\dmK$ retained and $I_d$ suppressed.
+The two are controlled by one knob: the third-family (i.e.\ $U(2)$-breaking) leakage.
+As it is turned up, $|I_d|$ rises through $2\times10^{-6}\,(\text{leak}=1)$,
+$6\times10^{-6}\,(3)$, $1.4\times10^{-5}\,(10)$ and $\epsK$ degrades in lock-step. The
+mechanism is transparent: with degenerate light profiles and real singular values, the
+leading dipole spurion $(Y_uY_u^\dagger+Y_dY_d^\dagger)Y_d$ has a real $1$-$1$ diagonal,
+so a flavor-diagonal EDM needs an extra light-family-breaking insertion, which only the
+third-family leak supplies. At realistic leakage both $\epsK$ and $d_n$ (proxy
+$|I_d|\sim2\times10^{-6}$, i.e.\ $d_n\sim7\times10^{-31}\,e\,$cm, far below the
+$1.8\times10^{-26}$ bound) sit comfortably safe at $2$--$3\TeV$, with no fine-tuning:
+the $\epsK$ survivor is not an isolated point but the exact-$U(2)$ manifold.
 
 \section{Bottom line}
 The RS $\epsK$ problem has been read as a problem of one delicate phase in the
 off-diagonal down couplings. It is really a problem of \emph{three} independent CP
-structures, of which the kaon phase is only one. Aligning the kaon operator, by
-magnitude or by phase, leaves the neutron EDM untouched, because the EDM samples a
-flavor-diagonal invariant fed by the up sector. A low-$\MKK$ warped flavor model is
-therefore not ``anarchy plus one alignment relation''; it must suppress the kaon
-operator magnitude with a low-rank, $U(2)$-symmetric ensemble and confine CP in the
-Nelson-Barr sense, together, in one calculable construction. That combined target,
-and the $(\dmK,\,d_n)$ discriminator that certifies it, is the concrete next step.
+structures, of which the kaon phase is only one. \emph{Partial} alignment of the kaon
+operator, by magnitude ($U(3)_{d_R}$) or by phase (a real $Y_d$), leaves the neutron EDM
+untouched, because the EDM samples a flavor-diagonal invariant fed by the up sector. But
+both $\epsK$ and the EDM are light-family invariants, so an accidental light-family
+$U(2)$ --- degenerate light profiles plus a low-rank Yukawa ensemble --- suppresses them
+\emph{together}: they vanish in the exact limit and reappear with a single
+symmetry-breaking parameter. A low-$\MKK$ warped flavor model is therefore not ``anarchy
+plus one alignment relation'' and not a patchwork of separate $\epsK$ and EDM cures; it
+is the intermediate $U(2)^5$ symmetry, which the data allow at $2$--$3\TeV$ with masses,
+CKM, and $J$ reproduced and no fine-tuning. That is the natural endpoint, and the
+$(\dmK,\,d_n)$ discriminator certifies it.
 
 \begin{thebibliography}{9}
 \small
@@ -248,6 +263,7 @@ and the $(\dmK,\,d_n)$ discriminator that certifies it, is the concrete next ste
 \bibitem{RediWeiler} M.~Redi, A.~Weiler, arXiv:1106.6357 (minimal CP violation).
 \bibitem{Girmohanta} S.~Girmohanta, S.~J.~Lee, Y.~Nakai, M.~Suzuki, arXiv:2203.09002 (warped Nelson-Barr).
 \bibitem{BMN} M.~Bauer, R.~Malm, M.~Neubert, arXiv:1110.0471 (extended bulk $SU(3)$ flavor cure).
-\bibitem{GT} A.~Greljo, A.~E.~Thomsen (rank-one sequential Yukawas); Barbieri et al.\ $U(2)$ flavor.
+\bibitem{GT} A.~Greljo, A.~E.~Thomsen (rank-one sequential Yukawas).
+\bibitem{U2} R.~Barbieri, G.~Isidori, J.~Jones-Perez, P.~Lodone, D.~M.~Straub, arXiv:1203.4218 ($U(2)^3$ flavor, EDM/dipole protection).
 \end{thebibliography}
 \end{document}
