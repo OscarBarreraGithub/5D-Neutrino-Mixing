@@ -53,20 +53,34 @@ def _rank_one_like(a, b, target_rms):
     return raw * (target_rms / max(_rms(raw), 1e-12))
 
 
-def draw_nelson_barr_yukawas(rng, *, y_min=0.1, y_max=3.0, rho_cp=1.0, eta_leak=0.0):
+def draw_nelson_barr_yukawas(rng, *, y_min=0.1, y_max=3.0, rho_cp=1.0, eta_leak=0.0,
+                             perturbative_cap=3.0):
     """Nelson-Barr-like draw (Codex-B spec): real anarchic down magnitudes, CP
     routed through the up sector via a shared rank-one spurion on the left-doublet
     index.  eta_leak=0 => Y_d real => sin(Phi_12)=0 while |C_4| stays anarchic and
-    CKM CP survives in Y_u (rho_cp~1)."""
-    R_u = _draw_real_bauer_matrix(rng, y_min, y_max)
-    R_d = _draw_real_bauer_matrix(rng, y_min, y_max)
-    a_Q = _draw_real_bauer_vector(rng, y_min, y_max)   # shared CP-odd left direction
-    b_u = _draw_real_bauer_vector(rng, y_min, y_max)
+    CKM CP survives in Y_u (rho_cp~1).
+
+    perturbativity: R + i*rho*S superposes two O(y_max) matrices, so raw entries can
+    exceed the 5D perturbative bound |Y*|<~3.  We build R,S at HALF amplitude so the
+    complex sum lands in [~y_min, ~y_max], then hard-rescale any draw whose max|Y|
+    still exceeds `perturbative_cap` (the overall scale is absorbed by the c-fit, and
+    a phase/reality structure -- what sets theta_K -- is rescale-invariant).
+    """
+    half = 0.5 * y_max
+    R_u = _draw_real_bauer_matrix(rng, y_min, half)
+    R_d = _draw_real_bauer_matrix(rng, y_min, y_max)   # down stays full (real, perturbative)
+    a_Q = _draw_real_bauer_vector(rng, y_min, half)    # shared CP-odd left direction
+    b_u = _draw_real_bauer_vector(rng, y_min, half)
     b_d = _draw_real_bauer_vector(rng, y_min, y_max)
     S_u = _rank_one_like(a_Q, b_u, _rms(R_u))
     S_d = _rank_one_like(a_Q, b_d, _rms(R_d))
     Y_u = R_u.astype(np.complex128) + 1j * rho_cp * S_u
     Y_d = R_d.astype(np.complex128) + 1j * eta_leak * rho_cp * S_d
+    if perturbative_cap:
+        for Y in (Y_u, Y_d):
+            m = np.abs(Y).max()
+            if m > perturbative_cap:
+                Y *= perturbative_cap / m
     return Y_u, Y_d
 from quarkConstraints.deltaf2 import (
     evaluate_delta_f2_constraints, compute_delta_f2_wilsons,
