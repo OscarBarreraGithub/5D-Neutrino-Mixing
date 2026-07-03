@@ -1,0 +1,11 @@
+**VERDICT: SOUND-WITH-CAVEATS.**
+
+The result is physically sound. In [scripts/rankone_u2_lane.py](/n/holylabs/randall_lab/Lab/obarrera/5D-Neutrino-Mixing/scripts/rankone_u2_lane.py:198), the exact-leak limit keeps RH light-family rotations inside degenerate `f_u1=f_u2`, `f_d1=f_d2` subspaces, while the 1-2 mass hierarchy is in real singular values. Then the leading APS dipole spurion is MFV-like in the down basis: `(YuYu† + YdYd†)Yd` has a real 1-1 diagonal at this order. A flavor-diagonal EDM needs an extra light-family/right-sector misalignment spurion; the third-family leak supplies it. So `C4^K` and `I_d` turning on together with leak is not surprising once stated this way.
+
+`I_d = Im(B11/A11)` with `B = U_Ld† F_Q (YuYu†+YdYd†) Yd F_d U_Rd` is the right mass-basis, mass-normalized RS EDM proxy. It is not a calibrated neutron EDM prediction, but if flat `|I_d| ~ 3` maps to `d_n ~ 1e-24 e cm`, then `|I_d| ~ 2e-6` maps to `~7e-31 e cm`, far below the current `|d_n| < 1.8e-26 e cm` bound.
+
+I do not see an artifact. A read-only sanity run gave exact-leak median `|I_d| = 8.4e-16` while `Y_d` had complex entries (`median max Im(Yd) ~ 0.22`). Replacing only structured `Y_u` by anarchic complex `Y_u` lifted median `|I_d|` to `9.3e-2`. `A11` is nonzero and mass-normalized, so this is not a trivial zero from a real `Y_d` or a zero denominator.
+
+Novelty framing: honest if narrow. U(2)-type flavor protection of CP/flavor/dipoles is known in `U(2)^3`/partial-compositeness literature. The defensible claim is the explicit RS rank-one/U(2) ensemble demonstration that the same accidental light-family symmetry suppresses both KK-gluon `C4^K` and the APS down-EDM invariant, with both vanishing in the exact limit and reappearing with the same leak.
+
+Sources: Agashe-Perez-Soni RS CP problem/EDM proxy context: https://arxiv.org/abs/hep-ph/0408134; U(2)^3 flavor: https://arxiv.org/abs/1203.4218; composite dipoles/U(2)^3 caveats: https://arxiv.org/abs/1403.2756; minimal CP/composite prior art: https://arxiv.org/abs/1106.6357; neutron EDM bound: https://arxiv.org/abs/2001.11966.

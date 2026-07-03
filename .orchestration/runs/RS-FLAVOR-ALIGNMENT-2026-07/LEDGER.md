@@ -168,7 +168,7 @@ MAGNITUDE axis only -- CP is anarchic, so (per F3) the EDM stays O(1); the full 
 still needs NB CP-sequester on top. The CKM/CP left-frame boosts (23x4,13x4,CP x20) compensate
 the F_Q profile dressing; output J lands on PDG so they are calibration, not tuning.
 
-## F6 — rank-one/U(2) suppresses eps_K AND the EDM TOGETHER (PENDING Codex sign-off, potential finale)
+## F6 — rank-one/U(2) suppresses eps_K AND the EDM TOGETHER (CONFIRMED, Codex SOUND-WITH-CAVEATS)
 The comprehensive light-family U(2) (both LH doublet and RH up+down degenerate + rank-one)
 suppresses BOTH the eps_K operator and the neutron-EDM invariant I_d=Im(B11/A11):
 - exact U(2) (zero 3rd-family leak): |I_d|=1.6e-15 (MACHINE ZERO), eps_K pass 100%.
@@ -183,3 +183,4 @@ no tuning. This is the intermediate-U(2)^5 sweet spot (Barbieri-Isidori) demonst
 HONEST: U(2)^5 protecting EDMs is EXPECTED in the flavor literature; the NEW content is the
 numerical demonstration that eps_K and the EDM are suppressed by the SAME U(2) and vanish
 together in the exact limit, in one calculable RS rank-one generator. Codex verify: job b3g47ocup.
+Codex explanation (folded): exact limit => APS spurion (YuYu+YdYd)Yd has REAL 1-1 diagonal (MFV-like); flavor-diagonal EDM needs a light-family-breaking spurion, supplied by the 3rd-family leak. Verified complex-Yd (not a real-Yd trick), d_n~7e-31 (far below bound), no artifact. Novelty: U(2)^3 dipole protection known (Barbieri 1203.4218); NEW = same U(2) kills C4^K AND APS EDM, both vanishing in exact limit, in an RS rank-one generator.
