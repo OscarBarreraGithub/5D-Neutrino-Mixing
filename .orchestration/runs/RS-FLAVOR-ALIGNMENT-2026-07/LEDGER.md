@@ -167,3 +167,19 @@ accident, and masses+CKM+J genuinely reproduced. Confirms Codex-E2. Caveat: this
 MAGNITUDE axis only -- CP is anarchic, so (per F3) the EDM stays O(1); the full construction
 still needs NB CP-sequester on top. The CKM/CP left-frame boosts (23x4,13x4,CP x20) compensate
 the F_Q profile dressing; output J lands on PDG so they are calibration, not tuning.
+
+## F6 — rank-one/U(2) suppresses eps_K AND the EDM TOGETHER (PENDING Codex sign-off, potential finale)
+The comprehensive light-family U(2) (both LH doublet and RH up+down degenerate + rank-one)
+suppresses BOTH the eps_K operator and the neutron-EDM invariant I_d=Im(B11/A11):
+- exact U(2) (zero 3rd-family leak): |I_d|=1.6e-15 (MACHINE ZERO), eps_K pass 100%.
+- leak=1: |I_d|=2.2e-6 (eps_K 95%); leak=3: 6.2e-6 (47%); leak=10: 1.4e-5 (5%).
+- I_d and eps_K controlled by the SAME third-family-leak (U(2)-breaking) parameter; both -> 0
+  in the exact limit. |I_u| also ~8e-8. CP present (J=3.0e-5 PDG). Y_d is COMPLEX (theta_K=0.72
+  anarchic) so this is NOT a real-Yd cancellation. Control: anarchic complex up => |I_d| 2e-6->8e-2.
+- flat baseline |I_d|~3 (<-> d_n~1e-24, 100x over bound) => ~1e6 suppression => d_n well below bound.
+=> REVISES the "need a SEPARATE CP-sequester" conclusion (that was S2 = RH-down only, EDM O(1)).
+The full light-family U(2) protects eps_K AND EDM together at 2-3 TeV, masses+CKM+J reproduced,
+no tuning. This is the intermediate-U(2)^5 sweet spot (Barbieri-Isidori) demonstrated in RS.
+HONEST: U(2)^5 protecting EDMs is EXPECTED in the flavor literature; the NEW content is the
+numerical demonstration that eps_K and the EDM are suppressed by the SAME U(2) and vanish
+together in the exact limit, in one calculable RS rank-one generator. Codex verify: job b3g47ocup.
