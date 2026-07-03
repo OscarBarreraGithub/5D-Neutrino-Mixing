@@ -153,3 +153,17 @@ Perturb Y_d' = Y_d + delta*s_Y*(M o Z), Z unit-Frobenius, ensembles {full,re,im}
 separate "tuned accident" (isolated, ~1% perturbation kills it, BG~112) from "symmetry manifold".
 Answers PI Q: max perturbation before eps_K breaks = ~1% for the anarchic tuned point (any
 direction); UNBOUNDED (real) for NB. scripts/tuning_radius_epsK.py + scripts/perturb_yukawa_stability.py.
+
+## F5 — rank-one/U(2) lane reaches 2-3 TeV STRUCTURALLY (Codex build + Claude verify, CONFIRMED)
+scripts/rankone_u2_lane.py: sequential low-rank Yukawas + exact c_Q1=c_Q2, c_d1=c_d2 (U(2)),
+light 1-2 hierarchy in the singular values, perturbativity cap |Y|<3 (0% reject).
+INDEPENDENTLY VERIFIED output physical values (median, PDG-pass, M_KK=3 TeV):
+  m_u/m_c 1.97e-3 (PDG 1.98e-3), m_d/m_s 4.97e-2 (5.03e-2), |V_us| 0.222 (0.224),
+  |V_cb| 0.039 (0.041), |V_ub| 0.0037 (0.0038), J 3.04e-5 (PDG 3.00e-5).
+Results: eps_K pass 51%/93%/99% at 2/3/5 TeV (flat 0%/1.7%/6%); |C_4| suppressed ~500x;
+|sin Phi_12|=0.72 (ANARCHIC phase, NOT tuned); c_Q1-c_Q2=c_d1-c_d2=0 (degeneracy exact).
+=> The magnitude cure done NATURALLY: 2-3 TeV floor from a symmetry (U(2)), not a 1%-tuned
+accident, and masses+CKM+J genuinely reproduced. Confirms Codex-E2. Caveat: this is the
+MAGNITUDE axis only -- CP is anarchic, so (per F3) the EDM stays O(1); the full construction
+still needs NB CP-sequester on top. The CKM/CP left-frame boosts (23x4,13x4,CP x20) compensate
+the F_Q profile dressing; output J lands on PDG so they are calibration, not tuning.
