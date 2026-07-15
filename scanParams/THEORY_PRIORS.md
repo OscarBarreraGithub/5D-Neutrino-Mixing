@@ -33,6 +33,7 @@ Use:
 
 - `M_KK = xi_KK * Lambda_IR`,
 - v1 default `xi_KK = 1.0`.
+- named calibrated LFV convention: `perez_randall_geometric_lambda_ir_v1`.
 
 Because LFV scales as `(3 TeV / M_KK)^4`, changing `xi_KK` by O(1) factors materially changes pass/fail rates.
 

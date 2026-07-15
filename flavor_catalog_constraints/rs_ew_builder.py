@@ -7,6 +7,10 @@ from typing import Any, Callable, Mapping
 
 import numpy as np
 
+from flavorConstraints import (
+    assert_perez_randall_lfv_m_kk_convention,
+    perez_randall_lfv_m_kk_from_lambda_ir,
+)
 from flavor_catalog_constraints.physics_adapters.lepton import (
     lmfv_lepton_parameters_from_yukawa_result,
 )
@@ -128,7 +132,10 @@ def build_rs_ew_extras(
         if resolved_lepton_yukawas is None
         else lmfv_lepton_parameters_from_yukawa_result(
             resolved_lepton_yukawas,
-            m_kk_gev=float(base_spectrum.kk_ew_mass_gev),
+            m_kk_gev=assert_perez_randall_lfv_m_kk_convention(
+                m_kk_gev=perez_randall_lfv_m_kk_from_lambda_ir(float(Lambda_IR)),
+                Lambda_IR=float(Lambda_IR),
+            ),
         )
     )
     couplings = build_rs_ew_couplings(

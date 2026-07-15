@@ -85,6 +85,11 @@ Here `Lambda_IR = 1 / z_v` is the geometric IR scale. The default
 physical first KK mode has mass `Lambda_IR`. If you switch to a physical
 first-KK convention, also update `lfv_reference_scale` consistently.
 
+The calibrated Perez-Randall LFV prefactor path is labeled
+`perez_randall_geometric_lambda_ir_v1` in `flavorConstraints.muToEGamma`; catalog
+LMFV carriers for `L001` use the same `M_KK = Lambda_IR` convention even when an
+RS-EW point also carries a separate physical `kk_ew_mass_gev`.
+
 To reproduce the Perez-Randall paper-era bound, set:
 
 ```python

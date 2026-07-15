@@ -22,7 +22,12 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
-from flavorConstraints import PREFAC_BR, check_mu_to_e_gamma, coefficient_from_br_limit
+from flavorConstraints import (
+    PREFAC_BR,
+    check_mu_to_e_gamma,
+    coefficient_from_br_limit,
+    perez_randall_lfv_m_kk_from_lambda_ir,
+)
 from warpConfig.baseParams import MPL
 from warpConfig.wavefuncs import f_IR
 from yukawa import YukawaResult, compute_all_yukawas
@@ -396,7 +401,10 @@ def _evaluate_point(
 ) -> Dict[str, Any]:
     """Evaluate one parameter point and return a row dict."""
     M_N = float(MN_over_k * config.k)
-    M_KK = float(config.xi_KK * Lambda_IR)
+    M_KK = perez_randall_lfv_m_kk_from_lambda_ir(
+        Lambda_IR,
+        xi_KK=config.xi_KK,
+    )
     cL_degeneracy = _derive_cL_degeneracy_metadata(
         c_L0=c_L,
         k=config.k,

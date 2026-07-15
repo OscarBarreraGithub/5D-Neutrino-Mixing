@@ -4,10 +4,14 @@ import pytest
 from flavorConstraints.muToEGamma import (
     C_PAPER,
     GAUGE_KK_ROOT_NN,
+    PEREZ_RANDALL_LFV_M_KK_CONVENTION,
+    PEREZ_RANDALL_LFV_XI_KK,
+    assert_perez_randall_lfv_m_kk_convention,
     check_mu_to_e_gamma,
     check_mu_to_e_gamma_raw,
     coefficient_from_br_limit,
     default_m_kk_from_lambda_ir,
+    perez_randall_lfv_m_kk_from_lambda_ir,
 )
 from neutrinos.neutrinoValues import pmns_matrix
 from yukawa import compute_all_yukawas
@@ -95,9 +99,30 @@ def test_default_lfv_check_uses_internal_lambda_ir_convention():
 
     explicit_gauge_mkk = default_m_kk_from_lambda_ir(3000.0)
     assert np.isclose(explicit_gauge_mkk, GAUGE_KK_ROOT_NN * 3000.0)
+    assert PEREZ_RANDALL_LFV_M_KK_CONVENTION == "perez_randall_geometric_lambda_ir_v1"
+    assert np.isclose(PEREZ_RANDALL_LFV_XI_KK, 1.0)
+    assert np.isclose(perez_randall_lfv_m_kk_from_lambda_ir(3000.0), 3000.0)
+    assert np.isclose(
+        assert_perez_randall_lfv_m_kk_convention(
+            m_kk_gev=3000.0,
+            Lambda_IR=3000.0,
+        ),
+        3000.0,
+    )
 
     lfv = check_mu_to_e_gamma(result, C=C_PAPER, reference_scale=3000.0)
     assert np.isclose(lfv["rhs"], C_PAPER)
+
+
+def test_perez_randall_lfv_mkk_assertion_rejects_physical_gauge_mass():
+    """M-14 guard: do not feed the first-gauge Bessel mass to the calibrated LFV prefactor."""
+    physical_gauge_mkk = default_m_kk_from_lambda_ir(3000.0)
+
+    with pytest.raises(AssertionError, match=PEREZ_RANDALL_LFV_M_KK_CONVENTION):
+        assert_perez_randall_lfv_m_kk_convention(
+            m_kk_gev=physical_gauge_mkk,
+            Lambda_IR=3000.0,
+        )
 
 
 def test_repo_benchmark_raw_core_values_and_br_oracle_are_distinct():

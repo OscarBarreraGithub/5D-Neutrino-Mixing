@@ -34,10 +34,49 @@ BR_LIMIT_PAPER = 1.2e-11
 # Paper bound quoted for IR-brane Higgs, Eq. (4.14).
 # Note: sqrt(BR_LIMIT_PAPER / PREFAC_BR) ≈ 0.0173; the paper rounds up to 0.02.
 C_PAPER = 0.02
+PEREZ_RANDALL_LFV_M_KK_CONVENTION = "perez_randall_geometric_lambda_ir_v1"
+PEREZ_RANDALL_LFV_XI_KK = 1.0
 # Optional utility for converting the geometric IR scale into the first gauge KK
 # mass, m_{g^(1)} = x_1 * Lambda_IR, with x_1 from the (NN) Bessel equation.
 # This is not the repo's default LFV convention.
 GAUGE_KK_ROOT_NN = 2.448687135269161
+
+
+def perez_randall_lfv_m_kk_from_lambda_ir(
+    Lambda_IR: float,
+    *,
+    xi_KK: float = PEREZ_RANDALL_LFV_XI_KK,
+) -> float:
+    """Return the KK scale paired with the repo's Perez-Randall LFV prefactor.
+
+    The calibrated repo default uses the geometric IR scale directly,
+    ``M_KK = Lambda_IR``.  Non-unit ``xi_KK`` values are explicit systematic
+    variations and must be paired with consistent metadata/reference-scale choices.
+    """
+    if Lambda_IR <= 0:
+        raise ValueError("Lambda_IR must be positive")
+    if xi_KK <= 0:
+        raise ValueError("xi_KK must be positive")
+    return float(xi_KK * Lambda_IR)
+
+
+def assert_perez_randall_lfv_m_kk_convention(
+    *,
+    m_kk_gev: float,
+    Lambda_IR: float,
+    xi_KK: float = PEREZ_RANDALL_LFV_XI_KK,
+    rtol: float = 1.0e-12,
+    atol: float = 1.0e-9,
+) -> float:
+    """Assert that ``m_kk_gev`` uses the named Perez-Randall LFV convention."""
+    expected = perez_randall_lfv_m_kk_from_lambda_ir(Lambda_IR, xi_KK=xi_KK)
+    if not np.isclose(float(m_kk_gev), expected, rtol=rtol, atol=atol):
+        raise AssertionError(
+            f"{PEREZ_RANDALL_LFV_M_KK_CONVENTION} requires M_KK={expected:.17g} GeV "
+            f"for Lambda_IR={float(Lambda_IR):.17g} GeV and xi_KK={float(xi_KK):.17g}; "
+            f"got {float(m_kk_gev):.17g} GeV"
+        )
+    return float(m_kk_gev)
 
 
 def default_m_kk_from_lambda_ir(Lambda_IR: float, xi_KK: float = GAUGE_KK_ROOT_NN) -> float:

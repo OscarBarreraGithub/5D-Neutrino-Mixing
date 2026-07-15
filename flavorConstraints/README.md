@@ -67,6 +67,10 @@ You can pass this as `C` explicitly or compute it via
 - `check_mu_to_e_gamma()` uses the repo's internal LFV convention
   `M_KK = Lambda_IR` unless you pass `M_KK_override` or provide an explicit
   `params["M_KK"]`.
+- The named convention for the calibrated `PREFAC_BR = 4e-8` path is
+  `perez_randall_geometric_lambda_ir_v1`; use
+  `perez_randall_lfv_m_kk_from_lambda_ir(Lambda_IR)` when attaching LMFV
+  carriers for `L001`.
 - `scanParams.ScanConfig` defaults to the **MEG II 2025** bound
   `br_limit = 1.5e-13` and derives `lfv_C` per run via
   `coefficient_from_br_limit()`.
@@ -89,6 +93,8 @@ You can pass this as `C` explicitly or compute it via
 - `check_mu_to_e_gamma(yukawa_result, C=C_PAPER, reference_scale=3000)`
 - `check_mu_to_e_gamma_raw(Y_N_bar, pmns, M_KK, C=C_PAPER, reference_scale=3000)`
 - `coefficient_from_br_limit(br_limit, prefactor=4e-8)`
+- `perez_randall_lfv_m_kk_from_lambda_ir(Lambda_IR)` for the calibrated LFV
+  convention
 - `default_m_kk_from_lambda_ir(Lambda_IR, xi_KK=GAUGE_KK_ROOT_NN)`
 
 ## Notes

@@ -18,6 +18,7 @@ from typing import Any, Mapping
 import numpy as np
 
 from flavorConstraints.muToEGamma import (
+    PEREZ_RANDALL_LFV_M_KK_CONVENTION,
     check_mu_to_e_gamma as _check_mu_to_e_gamma,
     check_mu_to_e_gamma_raw as _check_mu_to_e_gamma_raw,
     coefficient_from_br_limit as _coefficient_from_br_limit,
@@ -564,6 +565,8 @@ def mu_to_e_gamma_from_lepton_input(
                 "extra_used": "lepton_lmfv_parameters",
                 "source": carrier.source,
                 "matching_status": carrier.matching_status,
+                "m_kk_convention": PEREZ_RANDALL_LFV_M_KK_CONVENTION,
+                "m_kk_source": "LMFVLeptonParameters.M_KK_gev",
                 "max_abs_ybar": float(carrier.max_abs_ybar),
             },
         )

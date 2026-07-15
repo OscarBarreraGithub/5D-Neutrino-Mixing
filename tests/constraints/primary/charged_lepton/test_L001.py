@@ -12,6 +12,7 @@ import numpy as np
 import pytest
 import yaml
 
+from flavorConstraints import PEREZ_RANDALL_LFV_M_KK_CONVENTION
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
@@ -202,6 +203,8 @@ def test_generated_carrier_oracle_is_rigorous_and_br_vetoed():
     assert result.diagnostics["extra_used"] == "lepton_lmfv_parameters"
     assert result.diagnostics["used_proxy"] is False
     assert result.diagnostics["lmfv_model"] == "Perez-Randall LMFV NDA"
+    assert result.diagnostics["m_kk_convention"] == PEREZ_RANDALL_LFV_M_KK_CONVENTION
+    assert result.diagnostics["m_kk_source"] == "LMFVLeptonParameters.M_KK_gev"
     assert result.diagnostics["kk_ew_mass_extra_present"] is True
     assert result.diagnostics["kk_ew_mass_extra_used"] is False
     assert result.diagnostics["kk_ew_mass_extra_consistent"] is True
