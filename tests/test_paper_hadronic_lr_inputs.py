@@ -132,10 +132,10 @@ EXPECTED_DEFAULT_LR_HADRONIC_HAMILTONIAN_CONVENTION_ID = (
     "heff.sum_ci_qi.no_hc_factor.v1"
 )
 EXPECTED_DEFAULT_LR_HADRONIC_Q4_MATRIX_ELEMENT_FORMULA_ID = (
-    "kaon.q4_lr.o4_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+    "kaon.q4_lr.o4_scalar_lr.1over2_rchi_fk2_mk2_b4_mu.plpr_projectors.v2"
 )
 EXPECTED_DEFAULT_LR_HADRONIC_Q5_MATRIX_ELEMENT_FORMULA_ID = (
-    "kaon.q5_lr.o5_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+    "kaon.q5_lr.o5_scalar_lr.1over6_rchi_fk2_mk2_b5_mu.plpr_projectors.v2"
 )
 EXPECTED_DEFAULT_LR_HADRONIC_PROVENANCE_IDS = [
     EXPECTED_DEFAULT_LR_HADRONIC_SOURCE_ID,
@@ -712,15 +712,16 @@ def test_custom_lr_hadronic_builder_is_custom_only_and_matches_bv2004_eq5() -> N
     assert q4_matrix_element_GeV4 is not None
     assert q5_matrix_element_GeV4 is not None
 
+    # M-27: PL/PR projectors add the audited /4 relative to the old Eq. (5) pin.
     expected_q4 = (
-        2.0
+        0.5
         * LR_HADRONIC_PROBE_R_CHI
         * (m_K0_GeV**2)
         * (f_K_GeV**2)
         * LR_HADRONIC_PROBE_B4
     )
     expected_q5 = (
-        (2.0 / 3.0)
+        (1.0 / 6.0)
         * LR_HADRONIC_PROBE_R_CHI
         * (m_K0_GeV**2)
         * (f_K_GeV**2)
@@ -1202,15 +1203,16 @@ def test_default_kaon_lr_hadronic_bundle_is_deterministic_and_carries_frozen_etm
         assert operator_label in source_text
         assert f"{bag_value:.2f}" in source_text
 
+    # M-27: PL/PR projectors add the audited /4 relative to the old Eq. (5) pin.
     expected_q4 = (
-        2.0
+        0.5
         * float(payload["R_chi_mu_had"])
         * (float(payload["m_K0_GeV"]) ** 2)
         * (float(payload["f_K_GeV"]) ** 2)
         * float(payload["B4_mu_had"])
     )
     expected_q5 = (
-        (2.0 / 3.0)
+        (1.0 / 6.0)
         * float(payload["R_chi_mu_had"])
         * (float(payload["m_K0_GeV"]) ** 2)
         * (float(payload["f_K_GeV"]) ** 2)

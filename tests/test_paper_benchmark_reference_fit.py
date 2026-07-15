@@ -53,6 +53,8 @@ from quarkConstraints.paper_0710_1869.conventions import (
     PAPER_0710_1869_UNIVERSAL_TERM_COEFFICIENT_POLICY_ID,
 )
 from quarkConstraints.paper_0710_1869.inputs import (
+    PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT,
+    PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET,
     PAPER_0710_1869_PHYSICAL_SEED_TO_PROFILE_CONTRACT_SCHEMA_ID,
     default_paper_0710_1869_physical_seed_to_profile_contract,
 )
@@ -250,9 +252,26 @@ def test_physical_benchmark_builder_uses_exact_frozen_contract_and_stays_separat
     assert physical_state.claim_level_id == PAPER_0710_1869_PHYSICAL_CLAIM_LEVEL_ID
     assert physical_state.profile_input_policy_id == PAPER_0710_1869_DERIVED_PROFILE_INPUT_POLICY_ID
     assert physical_state.physical_profile_status_id == PAPER_0710_1869_POINT_DERIVED_PHYSICAL_STATUS_ID
-    np.testing.assert_allclose(physical_state.c_Q, physical_state.eig_Q, atol=1.0e-12)
-    np.testing.assert_allclose(physical_state.c_u, physical_state.eig_u, atol=1.0e-12)
-    np.testing.assert_allclose(physical_state.c_d, physical_state.eig_d, atol=1.0e-12)
+    affine_policies = {
+        policy.sector_id: policy
+        for policy in physical_point.physical_contract.universal_term_policy.sector_policies
+    }
+    for sector_id, c_values, eig_values in (
+        ("Q", physical_state.c_Q, physical_state.eig_Q),
+        ("u", physical_state.c_u, physical_state.eig_u),
+        ("d", physical_state.c_d, physical_state.eig_d),
+    ):
+        policy = affine_policies[sector_id]
+        assert policy.leading_term_coefficient == (
+            PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT
+        )
+        assert policy.universal_offset == PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET
+        # C-6: physical seeded profiles use the negative-slope affine map c = -lambda + 0.6.
+        np.testing.assert_allclose(
+            c_values,
+            policy.leading_term_coefficient * eig_values + policy.universal_offset,
+            atol=1.0e-12,
+        )
     assert not np.allclose(physical_state.c_Q, structural_state.c_Q)
     assert not np.allclose(physical_state.c_u, structural_state.c_u)
     assert not np.allclose(physical_state.c_d, structural_state.c_d)
@@ -292,15 +311,15 @@ def test_physical_benchmark_builder_rejects_mutated_frozen_contract():
     contract = default_paper_0710_1869_physical_seed_to_profile_contract()
     mutated_contract = replace(
         contract,
-        universal_term_policy=replace(
-            contract.universal_term_policy,
-            notes="mutated universal-term policy",
+        mapping_policy=replace(
+            contract.mapping_policy,
+            notes="mutated seed-to-profile mapping policy",
         ),
     )
 
     with pytest.raises(
         ValueError,
-        match="physical_contract.universal_term_policy must match the exact frozen QS1 default",
+        match="physical_contract.mapping_policy must match the exact frozen QS1 default",
     ):
         build_paper_0710_1869_seeded_physical_point(
             benchmark,

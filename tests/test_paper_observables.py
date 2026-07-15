@@ -790,6 +790,12 @@ def _complex_from_payload(value: Any) -> complex:
     return complex(float(value["real"]), float(value["imag"]))
 
 
+def _assert_coefficient_payload(payload: Mapping[str, Any], operator_name: str, expected: complex) -> None:
+    observed = _complex_from_payload(payload["coefficients"][operator_name])
+    assert observed.real == pytest.approx(expected.real, rel=0.0, abs=1.0e-24)
+    assert observed.imag == pytest.approx(expected.imag, rel=0.0, abs=1.0e-24)
+
+
 def _build_custom_lr_hadronic_inputs(
     *,
     renormalization_scheme_id: str = LR_HADRONIC_PROBE_SCHEME_ID,
@@ -1581,8 +1587,10 @@ def test_default_kaon_observable_export_is_finite_deterministic_and_np_only() ->
 def test_observable_evaluation_rejects_nonzero_q4_lr_contribution() -> None:
     module = _load_observables_module()
     evaluator = _get_observable_evaluator(module)
+    lr_evaluator = _get_custom_lr_observable_evaluator(module)
     hadronic_value = _default_hadronic_value()
     rg_value = _default_rg_result()
+    q4_probe = complex(1.0e-12, 0.0)
 
     mutated_rg_value = _mutate_first_supported_path(
         rg_value,
@@ -1590,26 +1598,54 @@ def test_observable_evaluation_rejects_nonzero_q4_lr_contribution() -> None:
             ("wilsons", "q4_lr"),
             ("q4_lr",),
         ),
-        lambda _original: complex(1.0e-12, 0.0),
+        lambda _original: q4_probe,
     )
 
-    with pytest.raises(ValueError) as exc_info:
+    # C-2: the default path no longer hard-errors on LR coefficients; it carries
+    # them in the Wilson snapshot while explicit LR surfaces own LR matrix elements.
+    payload = _payload_from_value(
         _invoke_observable_evaluation(
             evaluator,
             rg_value=mutated_rg_value,
             hadronic_value=hadronic_value,
         )
+    )
+    _assert_coefficient_payload(payload, "Q4_LR", q4_probe)
 
-    message = str(exc_info.value)
-    assert "Q4_LR" in message
-    _assert_observable_lr_guard_message(message)
+    custom_hadronic = _build_custom_lr_hadronic_inputs(
+        renormalization_scheme_id=str(hadronic_value.renormalization_scheme_id),
+        mu_had_GeV=float(hadronic_value.mu_had_GeV),
+        source_prefix="hadronic.kaon.c2_q4_lr_probe",
+    )
+    custom_wilsons = _build_lr_probe_wilsons(
+        q4_lr=q4_probe,
+        q5_lr=0.0 + 0.0j,
+        renormalization_scheme_id=str(custom_hadronic.renormalization_scheme_id),
+        matching_scale_GeV=float(custom_hadronic.mu_had_GeV),
+    )
+    lr_payload = _payload_from_value(
+        _invoke_observable_evaluation(
+            lr_evaluator,
+            rg_value=custom_wilsons,
+            hadronic_value=custom_hadronic,
+        )
+    )
+    expected_lr_m12 = (
+        q4_probe * float(custom_hadronic.q4_matrix_element_GeV4)
+    ) / (2.0 * float(custom_hadronic.m_K0_GeV))
+    observed_lr_m12 = _complex_from_payload(lr_payload["M12_K_LR_NP_GeV"])
+    assert abs(observed_lr_m12) > 0.0
+    assert observed_lr_m12.real == pytest.approx(expected_lr_m12.real, rel=0.0, abs=1.0e-24)
+    assert observed_lr_m12.imag == pytest.approx(expected_lr_m12.imag, rel=0.0, abs=1.0e-24)
 
 
 def test_observable_evaluation_rejects_nonzero_q5_lr_contribution() -> None:
     module = _load_observables_module()
     evaluator = _get_observable_evaluator(module)
+    lr_evaluator = _get_custom_lr_observable_evaluator(module)
     hadronic_value = _default_hadronic_value()
     rg_value = _default_rg_result()
+    q5_probe = complex(1.0e-12, 0.0)
 
     mutated_rg_value = _mutate_first_supported_path(
         rg_value,
@@ -1617,19 +1653,45 @@ def test_observable_evaluation_rejects_nonzero_q5_lr_contribution() -> None:
             ("wilsons", "q5_lr"),
             ("q5_lr",),
         ),
-        lambda _original: complex(1.0e-12, 0.0),
+        lambda _original: q5_probe,
     )
 
-    with pytest.raises(ValueError) as exc_info:
+    # C-2: the default path no longer hard-errors on LR coefficients; it carries
+    # them in the Wilson snapshot while explicit LR surfaces own LR matrix elements.
+    payload = _payload_from_value(
         _invoke_observable_evaluation(
             evaluator,
             rg_value=mutated_rg_value,
             hadronic_value=hadronic_value,
         )
+    )
+    _assert_coefficient_payload(payload, "Q5_LR", q5_probe)
 
-    message = str(exc_info.value)
-    assert "Q5_LR" in message
-    _assert_observable_lr_guard_message(message)
+    custom_hadronic = _build_custom_lr_hadronic_inputs(
+        renormalization_scheme_id=str(hadronic_value.renormalization_scheme_id),
+        mu_had_GeV=float(hadronic_value.mu_had_GeV),
+        source_prefix="hadronic.kaon.c2_q5_lr_probe",
+    )
+    custom_wilsons = _build_lr_probe_wilsons(
+        q4_lr=0.0 + 0.0j,
+        q5_lr=q5_probe,
+        renormalization_scheme_id=str(custom_hadronic.renormalization_scheme_id),
+        matching_scale_GeV=float(custom_hadronic.mu_had_GeV),
+    )
+    lr_payload = _payload_from_value(
+        _invoke_observable_evaluation(
+            lr_evaluator,
+            rg_value=custom_wilsons,
+            hadronic_value=custom_hadronic,
+        )
+    )
+    expected_lr_m12 = (
+        q5_probe * float(custom_hadronic.q5_matrix_element_GeV4)
+    ) / (2.0 * float(custom_hadronic.m_K0_GeV))
+    observed_lr_m12 = _complex_from_payload(lr_payload["M12_K_LR_NP_GeV"])
+    assert abs(observed_lr_m12) > 0.0
+    assert observed_lr_m12.real == pytest.approx(expected_lr_m12.real, rel=0.0, abs=1.0e-24)
+    assert observed_lr_m12.imag == pytest.approx(expected_lr_m12.imag, rel=0.0, abs=1.0e-24)
 
 
 def test_observable_evaluation_rejects_lr_even_with_custom_lr_hadronic_inputs() -> None:
@@ -1851,23 +1913,32 @@ def test_default_q1_only_observable_path_still_rejects_nonzero_lr_without_custom
     module = _load_observables_module()
     default_evaluator = _get_observable_evaluator(module)
     custom_evaluator = _get_custom_lr_observable_evaluator(module)
+    default_hadronic = _default_hadronic_value()
     custom_hadronic = _build_custom_lr_hadronic_inputs()
     default_path_wilsons = _build_lr_probe_wilsons(
-        matching_scale_GeV=float(_default_hadronic_value().mu_had_GeV),
+        matching_scale_GeV=float(default_hadronic.mu_had_GeV),
     )
     custom_wilsons = _build_lr_probe_wilsons(
         renormalization_scheme_id=LR_HADRONIC_PROBE_SCHEME_ID,
         matching_scale_GeV=float(custom_hadronic.mu_had_GeV),
     )
 
-    with pytest.raises(ValueError) as exc_info:
+    # C-2: nonzero LR Wilsons now flow through the default observable payload
+    # without the old guard; explicit LR hadronic inputs produce the LR M12 piece.
+    default_payload = _payload_from_value(
         _invoke_observable_evaluation(
             default_evaluator,
             rg_value=default_path_wilsons,
-            hadronic_value=_default_hadronic_value(),
+            hadronic_value=default_hadronic,
         )
-
-    _assert_observable_lr_guard_message(str(exc_info.value))
+    )
+    _assert_coefficient_payload(default_payload, "Q4_LR", LR_OBSERVABLE_PROBE_Q4)
+    _assert_coefficient_payload(default_payload, "Q5_LR", LR_OBSERVABLE_PROBE_Q5)
+    assert _complex_from_payload(default_payload["M12_K_NP_GeV"]) == pytest.approx(
+        0.0 + 0.0j,
+        rel=0.0,
+        abs=1.0e-24,
+    )
 
     custom_result = _invoke_observable_evaluation(
         custom_evaluator,
@@ -1875,7 +1946,14 @@ def test_default_q1_only_observable_path_still_rejects_nonzero_lr_without_custom
         hadronic_value=custom_hadronic,
     )
     custom_payload = _payload_from_value(custom_result)
+    expected_lr_m12 = (
+        custom_wilsons.q4_lr * float(custom_hadronic.q4_matrix_element_GeV4)
+        + custom_wilsons.q5_lr * float(custom_hadronic.q5_matrix_element_GeV4)
+    ) / (2.0 * float(custom_hadronic.m_K0_GeV))
     assert custom_payload["m12_observable_id"] == EXPECTED_LR_ONLY_M12_OBSERVABLE_ID
+    observed_lr_m12 = _complex_from_payload(custom_payload["M12_K_LR_NP_GeV"])
+    assert abs(observed_lr_m12) > 0.0
+    assert observed_lr_m12 == pytest.approx(expected_lr_m12, rel=0.0, abs=1.0e-24)
 
 
 def test_custom_total_observable_path_matches_hand_calculation_and_existing_pieces() -> None:
@@ -2091,14 +2169,16 @@ def test_default_q1_only_path_remains_blocked_while_custom_total_path_succeeds()
     combined_evaluator = _get_custom_total_observable_evaluator(module)
     custom_q1_hadronic, custom_lr_hadronic, combined_wilsons = _build_custom_total_probe_inputs()
 
-    with pytest.raises(ValueError) as exc_info:
+    # C-2: the default payload carries LR Wilsons instead of blocking the pipeline.
+    default_payload = _payload_from_value(
         _invoke_observable_evaluation(
             default_evaluator,
             rg_value=combined_wilsons,
             hadronic_value=_default_hadronic_value(),
         )
-
-    _assert_observable_lr_guard_message(str(exc_info.value))
+    )
+    _assert_coefficient_payload(default_payload, "Q4_LR", combined_wilsons.q4_lr)
+    _assert_coefficient_payload(default_payload, "Q5_LR", combined_wilsons.q5_lr)
 
     combined_payload = _payload_from_value(
         _invoke_custom_total_observable_evaluation(
@@ -2109,6 +2189,19 @@ def test_default_q1_only_path_remains_blocked_while_custom_total_path_succeeds()
         )
     )
     assert combined_payload["m12_observable_id"] == EXPECTED_CUSTOM_TOTAL_M12_OBSERVABLE_ID
+    observed_lr = _complex_from_payload(combined_payload["M12_K_LR_NP_GeV"])
+    observed_total = _complex_from_payload(combined_payload["M12_K_NP_TOTAL_GeV"])
+    expected_lr = (
+        combined_wilsons.q4_lr * float(custom_lr_hadronic.q4_matrix_element_GeV4)
+        + combined_wilsons.q5_lr * float(custom_lr_hadronic.q5_matrix_element_GeV4)
+    ) / (2.0 * float(custom_lr_hadronic.m_K0_GeV))
+    assert abs(observed_lr) > 0.0
+    assert observed_lr == pytest.approx(expected_lr, rel=0.0, abs=1.0e-24)
+    assert observed_total == pytest.approx(
+        _complex_from_payload(combined_payload["M12_K_NP_Q1_GeV"]) + observed_lr,
+        rel=0.0,
+        abs=1.0e-24,
+    )
     assert "epsilon_K_NP" not in combined_payload.get("observables", {})
 
 

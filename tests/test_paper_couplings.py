@@ -279,17 +279,30 @@ def test_default_kkgluon_benchmark_summary_is_present_and_deterministic() -> Non
 
     first = summary_fn().as_dict()
     second = summary_fn().as_dict()
+    couplings = module.default_paper_0710_1869_kk_gluon_couplings()
     assert json.dumps(first, sort_keys=True) == json.dumps(second, sort_keys=True)
     assert first["benchmark_status"] == "sourced_structural_only"
-    assert first["kk_gluon_normalization_id"] == "explicit_mu_gs.g_s_sqrt_4pi_alpha_s.v1"
+    # C-5: KK-gluon summaries carry the sqrt(2L) RS-volume factor in g_s*.
+    assert first["kk_gluon_normalization_id"] == (
+        "explicit_mu_gs.g_s_sqrt_4pi_alpha_s.with_rs_volume_sqrt_2L.v2"
+    )
     assert first["mu_gs_semantics_id"] == "alpha_s.high_precision.msbar.at_mu_gs_GeV.v1"
     assert first["propagator_mass_rule_id"] == (
         "propagator_mass.scale_point_propagator_mass_GeV.v1"
     )
     assert len(first["matrix_summaries"]) == 4
     matrix_summaries = {item["label"]: item for item in first["matrix_summaries"]}
+    gs_star_factor = (
+        float(first["g_s_mu_gs"])
+        * float(couplings.left_down_aligned.rs_volume_sqrt_2L)
+    )
     assert matrix_summaries["left_up_aligned"]["raw_offdiag_fro_norm"] == pytest.approx(0.0)
     assert matrix_summaries["left_down_aligned"]["raw_offdiag_fro_norm"] > 0.0
+    assert matrix_summaries["left_down_aligned"]["raw_gs_normalized_offdiag_fro_norm"] == pytest.approx(
+        gs_star_factor * matrix_summaries["left_down_aligned"]["raw_offdiag_fro_norm"],
+        rel=0.0,
+        abs=1.0e-15,
+    )
     assert matrix_summaries["left_down_aligned"]["max_abs_imag_raw"] > 0.0
     assert matrix_summaries["right_up_diagonal"]["raw_offdiag_fro_norm"] == pytest.approx(0.0)
     assert matrix_summaries["right_down_diagonal"]["raw_offdiag_fro_norm"] == pytest.approx(0.0)

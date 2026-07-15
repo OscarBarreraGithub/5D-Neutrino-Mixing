@@ -66,9 +66,10 @@ EXPECTED_ARTIFACT_FILENAMES = {
     "provenance": "provenance.json",
 }
 EXPECTED_ARTIFACT_ROWS = {"M12_K_NP.re", "M12_K_NP.im", "Delta_m_K_NP"}
-EXPECTED_SUPPORTED_OPERATORS = ["Q1_VLL", "Q1_VRR"]
+EXPECTED_SUPPORTED_OPERATORS = ["Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR"]
 EXPECTED_FULL_RG_SUPPORTED_OPERATORS = ["Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR"]
 EXPECTED_GUARDED_LR_OPERATORS = ["Q4_LR", "Q5_LR"]
+EXPECTED_UNSUPPORTED_OPERATORS: list[str] = []
 EXPECTED_GUARDED_LR_DEFINITION_IDS = [
     PAPER_0710_1869_DELTAF2_OPERATOR_DEFINITION_Q4_LR_ID,
     PAPER_0710_1869_DELTAF2_OPERATOR_DEFINITION_Q5_LR_ID,
@@ -88,7 +89,7 @@ EXPECTED_SYNTHETIC_LR_INPUT = [
     {"real": -0.75, "imag": 0.25},
 ]
 EXPECTED_SYNTHETIC_BMU_INPUT = [
-    {"real": -0.375, "imag": 0.125},
+    {"real": 0.375, "imag": -0.125},
     {"real": 1.25, "imag": -0.5},
 ]
 EXPECTED_CUSTOM_TOTAL_SCOPE_ID = "kaon.np_only.custom_total.q1_plus_lr.v1"
@@ -586,7 +587,7 @@ def test_acceptance_benchmark_reports_artifact_verifier_status() -> None:
     )
     assert (
         lr_summary["matching_unsupported_observable_operator_names"]
-        == EXPECTED_GUARDED_LR_OPERATORS
+        == EXPECTED_UNSUPPORTED_OPERATORS
     )
     assert lr_summary["rg_supported_operator_names"] == EXPECTED_FULL_RG_SUPPORTED_OPERATORS
     assert lr_summary["rg_unsupported_operator_names"] == []
@@ -611,8 +612,9 @@ def test_acceptance_benchmark_reports_artifact_verifier_status() -> None:
     assert lr_summary["rg_lr_basis_map_supported"] is True
     assert lr_checks["matching_references_lr_contract"] is True
     assert lr_checks["matching_references_lr_contract_status"] is True
-    assert lr_checks["matching_supported_subset_stays_q1_only"] is True
-    assert lr_checks["matching_unsupported_subset_is_lr_only"] is True
+    # C-2: LR coefficients are exported and flow through matching instead of staying guarded.
+    assert lr_checks["matching_supported_subset_is_q1_lr"] is True
+    assert lr_checks["matching_unsupported_subset_is_empty"] is True
     assert lr_checks["rg_contract_references_lr_contract"] is True
     assert lr_checks["rg_contract_references_lr_contract_status"] is True
     assert lr_summary["rg_supported_operator_names"] == EXPECTED_FULL_RG_SUPPORTED_OPERATORS
@@ -759,15 +761,16 @@ def test_acceptance_benchmark_reports_custom_lr_hadronic_probe() -> None:
     assert probe["b5_source_scheme_id"] == probe["declared_scheme_id"]
     assert probe["r_chi_source_scheme_id"] == probe["declared_scheme_id"]
 
+    # M-27: PL/PR projectors add the audited /4 relative to the old Eq. (5) pin.
     expected_q4 = (
-        2.0
+        0.5
         * float(probe["R_chi_mu_had"])
         * (float(probe["m_K0_GeV"]) ** 2)
         * (float(probe["f_K_GeV"]) ** 2)
         * float(probe["B4_mu_had"])
     )
     expected_q5 = (
-        (2.0 / 3.0)
+        (1.0 / 6.0)
         * float(probe["R_chi_mu_had"])
         * (float(probe["m_K0_GeV"]) ** 2)
         * (float(probe["f_K_GeV"]) ** 2)
@@ -886,15 +889,16 @@ def test_acceptance_benchmark_reports_default_lr_hadronic_probe() -> None:
         bag_value=EXPECTED_DEFAULT_LR_HADRONIC_B5_VALUE,
     )
 
+    # M-27: PL/PR projectors add the audited /4 relative to the old Eq. (5) pin.
     expected_q4 = (
-        2.0
+        0.5
         * float(probe["R_chi_mu_had"])
         * (float(probe["m_K0_GeV"]) ** 2)
         * (float(probe["f_K_GeV"]) ** 2)
         * float(probe["B4_mu_had"])
     )
     expected_q5 = (
-        (2.0 / 3.0)
+        (1.0 / 6.0)
         * float(probe["R_chi_mu_had"])
         * (float(probe["m_K0_GeV"]) ** 2)
         * (float(probe["f_K_GeV"]) ** 2)

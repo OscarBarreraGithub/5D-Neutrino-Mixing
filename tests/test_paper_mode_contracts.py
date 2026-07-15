@@ -134,6 +134,12 @@ def test_qs1_physical_seed_to_profile_policies_default_to_frozen_contract():
     universal_policy = Paper07101869UniversalTermPolicy()
     mapping_policy = Paper07101869SeedToProfileMappingPolicy()
     contract = Paper07101869PhysicalSeedToProfileContract()
+    expected_affine_coefficients = [
+        (
+            PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT,
+            PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET,
+        )
+    ] * 3
 
     assert sector_policy.schema_id == PAPER_0710_1869_AFFINE_BULK_MASS_SECTOR_POLICY_SCHEMA_ID
     assert sector_policy.leading_term_coefficient == (
@@ -144,10 +150,11 @@ def test_qs1_physical_seed_to_profile_policies_default_to_frozen_contract():
     assert universal_policy.schema_id == PAPER_0710_1869_UNIVERSAL_TERM_POLICY_SCHEMA_ID
     assert universal_policy.policy_id == PAPER_0710_1869_UNIVERSAL_TERM_COEFFICIENT_POLICY_ID
     assert [policy.sector_id for policy in universal_policy.sector_policies] == ["Q", "u", "d"]
+    # C-6: the audited seed->profile policy is negative-slope, c = -lambda + 0.6.
     assert [
         (policy.leading_term_coefficient, policy.universal_offset)
         for policy in universal_policy.sector_policies
-    ] == [(1.0, 0.0), (1.0, 0.0), (1.0, 0.0)]
+    ] == expected_affine_coefficients
 
     assert mapping_policy.schema_id == PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_SCHEMA_ID
     assert mapping_policy.policy_id == PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_POLICY_ID
@@ -170,19 +177,27 @@ def test_qs1_physical_seed_to_profile_policies_default_to_frozen_contract():
     assert [
         (policy.leading_term_coefficient, policy.universal_offset)
         for policy in contract.universal_term_policy.sector_policies
-    ] == [(1.0, 0.0), (1.0, 0.0), (1.0, 0.0)]
+    ] == expected_affine_coefficients
 
 
 @pytest.mark.parametrize(
     ("overrides", "expected_message"),
     [
         ({"leading_term_coefficient": 1.5}, "leading_term_coefficient"),
-        ({"universal_offset": 0.25}, "universal_offset"),
     ],
 )
 def test_affine_sector_policy_rejects_widened_numerics(overrides, expected_message):
     with pytest.raises(ValueError, match=expected_message):
         Paper07101869AffineBulkMassSectorPolicy(**overrides)
+
+
+def test_affine_sector_policy_accepts_explicit_finite_offset_override():
+    # C-6 freezes the default offset at 0.6, while non-default sector policies only
+    # require a finite explicit offset and a negative leading coefficient.
+    policy = Paper07101869AffineBulkMassSectorPolicy(universal_offset=0.25)
+
+    assert policy.leading_term_coefficient == PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT
+    assert policy.universal_offset == 0.25
 
 
 @pytest.mark.parametrize(
@@ -231,7 +246,7 @@ def test_universal_term_policy_rejects_widened_sector_coefficients():
     widened = Paper07101869AffineBulkMassSectorPolicy()
     object.__setattr__(widened, "leading_term_coefficient", 2.0)
 
-    with pytest.raises(ValueError, match="sector_policies must keep leading_term_coefficient"):
+    with pytest.raises(ValueError, match="sector_policies must use negative leading_term_coefficient"):
         Paper07101869UniversalTermPolicy(
             sector_policies=(
                 widened,
