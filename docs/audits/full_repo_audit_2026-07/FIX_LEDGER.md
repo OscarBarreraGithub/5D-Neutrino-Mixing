@@ -60,10 +60,10 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 ### εK / ΔF=2 budget coherence (M-1…M-7)
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| M-1 | EPSK | MAJ | εK budget split-brain ×4.5 core vs catalog | `deltaf2.py:794-795`, `K001.py:206-231` | PENDING |
-| M-2 | EPSK | MAJ | K001 budget sign-blind | `K001.py:211-218` | PENDING |
+| M-1 | EPSK | MAJ | εK budget split-brain ×4.5 core vs catalog | `deltaf2.py:794-795`, `K001.py:206-231` | VERIFIED (unified policy, mandate-strict band) |
+| M-2 | EPSK | MAJ | K001 budget sign-blind | `K001.py:211-218` | VERIFIED (sign-aware, K004 pattern) |
 | M-3 | EPSK | MAJ | Opposite budget philosophy for Δm | `deltaf2.py:956-968` | PENDING |
-| M-4 | EPSK | MAJ | Mixed CLs across HARD vetoes catalog-wide | catalog-wide | PENDING |
+| M-4 | EPSK | MAJ | Mixed CLs across HARD vetoes catalog-wide | catalog-wide | VERIFIED (policy-id + CL labeled; global-CL disclaimed) |
 | M-5 | EPSK | MAJ | B022 (B→Kνν) HARD-vetoes SM limit | `primary/beauty/B022.py` | PENDING |
 | M-6 | RG | MAJ | B-meson Wilsons over-run below m_b (~25% C4 inflation) | `deltaf2.py:464`, `modern/evaluation.py:177` | PENDING |
 | M-7 | RG | MAJ | LO-only ΔF=2 running biases εK floor low ~10-15% | `deltaf2.py` | PENDING |
@@ -169,3 +169,18 @@ Enumerated and dispositioned in [`MINOR_FINDINGS_LEDGER.md`](MINOR_FINDINGS_LEDG
   9.4x D0 "tightening" retracted as a units artifact.
 - Claude audit (direct): retraction complete, no dangling refs to removed symbols anywhere, banners honest,
   guard raises, both scripts compile. VERIFIED.
+
+### Cycle 5 — Lane C straggler tests — VERIFIED (commit `911b879`)
+- Cycle-1's pytest -k filter missed 9 test_paper_* files -> 16 tests failed on the already-audited Lane C fixes.
+- Codex reconciled: (A) re-pins to corrected ME formula IDs / sqrt(2L) couplings / affine coefficients;
+  (B) test_paper_observables converted from asserting the OLD C-2 bug (reject LR) to asserting corrected
+  behavior (LR flows + independent hand-check M12 = <Q4>*C4/(2 m_K)). Claude spot-audit: category-B genuine
+  corrected-physics, not re-pin. 226 paper tests green.
+
+### Cycle 6 — epsilon_K budget M-1/M-2/M-4 — VERIFIED (commit `dbae398`)
+- Codex research proposal (orchestrator steered: mandate-strict sigma = sqrt(sigma_BGS^2+sigma_exp^2), SM-choice
+  diagnostic-only) then implement. One shared EpsilonKBudgetPolicy consumed by core deltaf2 + catalog K001.
+- Claude audit: **APPROVE** (executed) - mandate fidelity (1.80336e-4, no SM-choice inflation), split-brain
+  killed (same policy object, YAML cross-validated), sign-aware per K004, re-pins mechanical (20.67/5.60=3.69),
+  floor band arithmetic correct. Production eps_K floor now a BAND (raise-edge ~3.3-3.6, central ~6.3-7,
+  lower-edge ~4.8-5.4 TeV). 107 tests green. NOTE: 2 Lane-A repro scripts still use own central budget (fold into P5b).
