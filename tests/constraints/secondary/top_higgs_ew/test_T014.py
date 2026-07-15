@@ -401,10 +401,10 @@ def test_evaluate_without_or_with_invalid_input_degrades_gracefully():
     assert old_style.diagnostics["legacy_quark_mass_basis_couplings_present"] is True
     assert "needs_human_physics" not in old_style.diagnostics
 
-    assert invalid.passes is True
+    assert invalid.passes is False
     assert invalid.predicted is None
     assert invalid.ratio is None
-    assert invalid.diagnostics["evaluated"] is False
+    assert invalid.diagnostics["evaluated"] is True
     assert invalid.diagnostics["invalid_extra"] == "rs_ew_couplings"
 
 

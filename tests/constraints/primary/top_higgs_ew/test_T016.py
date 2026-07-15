@@ -202,11 +202,11 @@ def test_absent_rs_ew_couplings_degrades_gracefully_for_empty_and_old_style_poin
 def test_invalid_rs_ew_couplings_is_unevaluated_not_real_pass():
     result = fcc.get(_PID).evaluate(point_builder.make_point(rs_ew_couplings=object()))
 
-    assert result.passes is True
+    assert result.passes is False
     assert result.predicted is None
     assert result.ratio is None
     assert result.notes.startswith("NOT EVALUATED -")
-    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["evaluated"] is True
     assert result.diagnostics["invalid_extra"] == "rs_ew_couplings"
     assert result.diagnostics["exception_type"] == "ValueError"
 

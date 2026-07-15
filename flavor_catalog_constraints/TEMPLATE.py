@@ -97,7 +97,7 @@ class Constraint:
     def evaluate(self, point: ParameterPoint) -> ConstraintResult:
         inputs = point.get_extra(_REQUIRED_EXTRA)
         if inputs is None:
-            # Degrade gracefully: no input -> cannot predict. Report
+            # Legitimately absent extra: no input -> cannot predict. Report
             # INFO-style (no veto via ratio) with a clear note.
             return ConstraintResult(
                 process_id=self.process_id,
@@ -109,6 +109,10 @@ class Constraint:
             )
 
         # ---- call the physics adapter and build the result --------------
+        # M-18: if the extra is present but malformed/NaN, either let the
+        # exception propagate to the registry or return diagnostics with
+        # {"invalid_extra": _REQUIRED_EXTRA}; HARD invalid extras fail closed
+        # under the base.ConstraintResult contract.
         # result = epsilon_k_from_couplings(inputs)
         # predicted = float(result.epsilon_k_np)
         # budget = float(result.epsilon_k_np_budget)

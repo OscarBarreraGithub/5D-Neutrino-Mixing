@@ -382,11 +382,12 @@ def run_quark_scan(
             )
             for overall_scale in config.overall_scale_values:
                 current_seed = default_spurion_seed()
+                current_overall_scale: float | None = float(overall_scale)
                 for r_val in config.r_values:
                     solution = fit_quark_sector(
                         config.targets,
                         r=float(r_val),
-                        overall_scale=float(overall_scale),
+                        overall_scale=current_overall_scale,
                         seed=current_seed,
                         k=config.k,
                         Lambda_IR=float(Lambda_IR),
@@ -395,6 +396,9 @@ def run_quark_scan(
                         fit_orientation=config.fit_orientation,
                     )
                     current_seed = solution.seed
+                    # M-16: solution.seed already has the physical scale absorbed.
+                    # Reapplying the loop's overall_scale would x-scale the warm start.
+                    current_overall_scale = None
                     result = solution.result
                     diagnostics = summarize_flavor_diagnostics(result, m_kk=M_KK)
                     quark_couplings = compute_quark_kk_gluon_couplings(

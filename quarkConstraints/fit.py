@@ -624,33 +624,24 @@ def _sort_physical_spectrum(
     return sorted_spectrum, _rotation_from_unitary(rotated)
 
 
-def _canonicalize_reported_seed(
-    seed: QuarkFitSeed,
-    *,
-    ckm_observables: np.ndarray,
-) -> QuarkFitSeed:
-    """Canonicalize a fitted seed into the frozen reported representative."""
-    up_singular_values = np.sort(
-        _require_positive_physical_spectrum("up physical singular values", seed.up_singular_values)
+def _canonicalize_reported_seed(seed: QuarkFitSeed) -> QuarkFitSeed:
+    """Return the normalized fitted seed that can be re-evaluated verbatim."""
+    # M-15: do not set up_left=I and rebuild down_left from CKM observables.
+    # Only a common left rotation is gauge; reporting the actual fitted
+    # left-rotation pair keeps the seed gauge-equivalent to the optimum.
+    up_singular_values = _require_positive_physical_spectrum(
+        "up physical singular values", seed.up_singular_values
     )
-    down_singular_values = np.sort(
-        _require_positive_physical_spectrum("down physical singular values", seed.down_singular_values)
+    down_singular_values = _require_positive_physical_spectrum(
+        "down physical singular values", seed.down_singular_values
     )
-    up_singular_values = np.round(up_singular_values, 5)
-    down_singular_values = np.round(down_singular_values, 5)
-    down_left = _rotation_from_ckm_observables(ckm_observables)
     return QuarkFitSeed(
         up_singular_values=up_singular_values,
         down_singular_values=down_singular_values,
         overall_scale=1.0,
-        up_left=RotationParameters(),
+        up_left=_canonicalize_rotation(seed.up_left),
         up_right=RotationParameters(),
-        down_left=RotationParameters(
-            theta12=float(np.round(down_left.theta12, 5)),
-            theta13=float(np.round(down_left.theta13, 5)),
-            theta23=float(np.round(down_left.theta23, 5)),
-            delta=float(np.round(down_left.delta, 5)),
-        ),
+        down_left=_canonicalize_rotation(seed.down_left),
         down_right=RotationParameters(),
     )
 
@@ -840,7 +831,7 @@ def fit_quark_sector(
     raw_best_seed = _decode_seed(optimum.x, template, fit_orientation)
     best_point = _seed_to_point(raw_best_seed, r=r, Lambda_IR=Lambda_IR, k=k)
     best_result = evaluate_quark_fit(best_point, targets, bulk_mass_map=bulk_map)
-    best_seed = _canonicalize_reported_seed(raw_best_seed, ckm_observables=best_result.ckm_observables)
+    best_seed = _canonicalize_reported_seed(raw_best_seed)
     return QuarkFitSolution(
         seed=best_seed,
         result=best_result,

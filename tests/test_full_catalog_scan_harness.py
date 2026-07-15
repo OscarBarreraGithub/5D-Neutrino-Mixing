@@ -82,13 +82,69 @@ def test_hard_veto_policy_separates_rigorous_proxy_partial_stub_and_advisory():
 
     assert payload["excluded_by_rigorous"] == ["R001"]
     assert payload["excluded_by_proxy"] == ["P001"]
-    assert payload["hard_not_evaluated"] == ["H001", "S001"]
+    assert payload["excluded_by_partial"] == ["H001"]
+    assert payload["hard_not_evaluated"] == ["S001"]
     assert payload["survives_all_HARD_strict"] is False
     assert payload["survives_all_HARD_inclusive"] is False
     assert "SOFT:SOFT1" in payload["advisory_flags"]
     assert "INFO:INFO1" in payload["advisory_flags"]
     assert payload["constraints"]["H001"]["tag"] == "partial"
     assert payload["constraints"]["S001"]["tag"] == "stub"
+
+
+def test_failing_evaluated_hard_partial_vetoes_inclusive_survival():
+    """M-17: evaluated HARD partial failures are vetoes, not coverage gaps."""
+    harness = _load_harness()
+    payload = harness._classify_results(
+        {
+            "H001": ConstraintResult(
+                process_id="H001",
+                severity=Severity.HARD,
+                passes=False,
+                ratio=4.0,
+                diagnostics={
+                    "evaluated": True,
+                    "needs_human_physics": "NEEDS-HUMAN-PHYSICS: partial EFT matching",
+                },
+            )
+        }
+    )
+
+    assert payload["excluded_by_rigorous"] == []
+    assert payload["excluded_by_proxy"] == []
+    assert payload["excluded_by_partial"] == ["H001"]
+    assert payload["hard_not_evaluated"] == []
+    assert payload["coverage_complete"] is True
+    assert payload["survives_all_HARD_strict"] is True
+    assert payload["survives_all_HARD_inclusive"] is False
+
+
+def test_malformed_hard_extra_is_evaluated_veto_not_coverage_gap():
+    """M-18: malformed-present extras fail closed for HARD constraints."""
+    harness = _load_harness()
+    payload = harness._classify_results(
+        {
+            "K001": ConstraintResult(
+                process_id="K001",
+                severity=Severity.HARD,
+                passes=True,
+                diagnostics={
+                    "evaluated": False,
+                    "invalid_extra": "quark_mass_basis_couplings",
+                    "exception_type": "ValueError",
+                },
+            )
+        }
+    )
+
+    assert payload["constraints"]["K001"]["passes"] is False
+    assert payload["constraints"]["K001"]["evaluated"] is True
+    assert payload["constraints"]["K001"]["tag"] == "rigorous"
+    assert payload["excluded_by_rigorous"] == ["K001"]
+    assert payload["hard_not_evaluated"] == []
+    assert payload["coverage_complete"] is True
+    assert payload["survives_all_HARD_strict"] is False
+    assert payload["survives_all_HARD_inclusive"] is False
 
 
 def test_evaluated_proxy_with_unevaluated_subobservable_note_stays_proxy():
@@ -1074,6 +1130,7 @@ def test_quark_only_constraint_tallies_count_evaluated_active_failed_and_vetoed(
         counters=Counter(counters),
         hard_veto_rigorous=Counter(),
         hard_veto_proxy=Counter(),
+        hard_veto_partial=Counter(),
         hard_not_evaluated=Counter(),
         tag_counts=Counter(),
         exception_ids=Counter(),

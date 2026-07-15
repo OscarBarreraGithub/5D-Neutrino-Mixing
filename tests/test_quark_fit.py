@@ -83,24 +83,6 @@ def _identity_rotation() -> RotationParameters:
     return RotationParameters()
 
 
-def _rotation_from_ckm_observables(observables: np.ndarray) -> RotationParameters:
-    vus, vcb, vub, jarlskog = np.round(np.asarray(observables, dtype=float), 5)
-    s13 = float(np.clip(abs(vub), 0.0, 1.0))
-    c13 = float(np.sqrt(max(1.0 - s13 * s13, 0.0)))
-    s12 = float(np.clip(abs(vus) / max(c13, 1e-15), 0.0, 1.0))
-    s23 = float(np.clip(abs(vcb) / max(c13, 1e-15), 0.0, 1.0))
-    c12 = float(np.sqrt(max(1.0 - s12 * s12, 0.0)))
-    c23 = float(np.sqrt(max(1.0 - s23 * s23, 0.0)))
-    denominator = max(c12 * c13 * c13 * c23 * s12 * s13 * s23, 1e-30)
-    delta = float(np.arcsin(np.clip(jarlskog / denominator, -1.0, 1.0)))
-    return RotationParameters(
-        theta12=float(np.round(np.arcsin(s12), 5)),
-        theta13=float(np.round(np.arcsin(s13), 5)),
-        theta23=float(np.round(np.arcsin(s23), 5)),
-        delta=float(np.round(((delta + np.pi) % (2.0 * np.pi)) - np.pi, 5)),
-    )
-
-
 def _quotient_equivalent_seed(seed: QuarkFitSeed) -> QuarkFitSeed:
     return QuarkFitSeed(
         up_singular_values=seed.up_singular_values / 7.0,
@@ -154,18 +136,65 @@ def test_fit_quark_sector_returns_the_canonical_quotient_representative():
     solution = fit_quark_sector(default_quark_targets(), seed=default_spurion_seed(), overall_scale=3.0, max_nfev=120)
 
     assert np.isclose(solution.seed.overall_scale, 1.0)
-    assert np.all(np.diff(solution.seed.up_singular_values) >= -1e-12)
-    assert np.all(np.diff(solution.seed.down_singular_values) >= -1e-12)
-    _assert_rotation_close(solution.seed.up_left, _identity_rotation())
     _assert_rotation_close(solution.seed.up_right, _identity_rotation())
     _assert_rotation_close(solution.seed.down_right, _identity_rotation())
-    _assert_rotation_close(solution.seed.down_left, _rotation_from_ckm_observables(solution.result.ckm_observables))
     np.testing.assert_allclose(
         encode_quark_fit_canonical_vector(solution.seed),
         encode_quark_fit_canonical_vector(decode_quark_fit_canonical_vector(encode_quark_fit_canonical_vector(solution.seed))),
         rtol=0.0,
         atol=1e-12,
     )
+
+
+def test_reported_fit_seed_re_evaluates_to_the_fitted_score():
+    """M-15: the reported seed must remain gauge-equivalent to the optimum."""
+    targets = default_quark_targets()
+    solution = fit_quark_sector(
+        targets,
+        seed=default_spurion_seed(),
+        overall_scale=3.0,
+        max_nfev=2000,
+    )
+    reported_point = build_mfv_point_from_singular_values(
+        up_singular_values=solution.seed.up_singular_values,
+        down_singular_values=solution.seed.down_singular_values,
+        overall_scale=solution.seed.overall_scale,
+        r=solution.result.point.r,
+        up_left=solution.seed.up_left,
+        up_right=solution.seed.up_right,
+        down_left=solution.seed.down_left,
+        down_right=solution.seed.down_right,
+        Lambda_IR=solution.result.point.Lambda_IR,
+        k=solution.result.point.k,
+        label="reported-seed-regression",
+    )
+    reported_result = evaluate_quark_fit(reported_point, targets)
+
+    assert reported_result.score == pytest.approx(solution.result.score, rel=0.0, abs=1.0e-12)
+    assert reported_result.score < 1.0e-6
+    np.testing.assert_allclose(reported_result.masses_up, solution.result.masses_up, rtol=0.0, atol=1.0e-12)
+    np.testing.assert_allclose(
+        reported_result.masses_down, solution.result.masses_down, rtol=0.0, atol=1.0e-12
+    )
+    np.testing.assert_allclose(
+        reported_result.ckm_observables, solution.result.ckm_observables, rtol=0.0, atol=1.0e-12
+    )
+
+
+def test_chained_normalized_seed_warm_start_is_not_rescaled():
+    """M-16: normalized solution seeds must be chained with overall_scale=None."""
+    targets = default_quark_targets()
+    fitted = fit_quark_sector(targets, overall_scale=3.0, max_nfev=120)
+    warm = fit_quark_sector(targets, seed=fitted.seed, overall_scale=None, max_nfev=1)
+    cold = fit_quark_sector(
+        targets,
+        seed=default_spurion_seed(),
+        overall_scale=3.0,
+        max_nfev=1,
+    )
+
+    assert warm.initial_score == pytest.approx(fitted.result.score, rel=0.0, abs=1.0e-12)
+    assert warm.initial_score <= cold.initial_score
 
 
 def test_fitted_ckm_matrix_is_unitary():
@@ -567,15 +596,10 @@ def test_fit_orientation_false_remains_deterministic_and_restricted():
         atol=5e-6,
     )
     assert np.isclose(base_solution.seed.overall_scale, 1.0)
-    assert np.all(np.diff(base_solution.seed.up_singular_values) >= -1e-12)
-    assert np.all(np.diff(base_solution.seed.down_singular_values) >= -1e-12)
-    _assert_rotation_close(base_solution.seed.up_left, _identity_rotation())
+    assert np.all(base_solution.seed.up_singular_values > 0.0)
+    assert np.all(base_solution.seed.down_singular_values > 0.0)
     _assert_rotation_close(base_solution.seed.up_right, _identity_rotation())
     _assert_rotation_close(base_solution.seed.down_right, _identity_rotation())
-    _assert_rotation_close(
-        base_solution.seed.down_left,
-        _rotation_from_ckm_observables(base_solution.result.ckm_observables),
-    )
 
 
 def test_fit_residuals_reject_zero_ckm_observable_scales():

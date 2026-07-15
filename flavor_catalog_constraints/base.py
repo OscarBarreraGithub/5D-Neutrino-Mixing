@@ -177,6 +177,20 @@ class ConstraintResult:
             raise TypeError(
                 f"ConstraintResult.passes must be bool, got {type(self.passes).__name__}"
             )
+        diagnostics = dict(self.diagnostics)
+        invalid_extra = (
+            "invalid_extra" in diagnostics
+            and "missing_extra" not in diagnostics
+            and "missing_extras" not in diagnostics
+        )
+        if self.severity is Severity.HARD and invalid_extra:
+            # M-18: an extra that is present but malformed is a fail-closed
+            # evaluated invalid input, distinct from a legitimately absent extra.
+            object.__setattr__(self, "passes", False)
+            diagnostics["evaluated"] = True
+            diagnostics.setdefault("invalid_input", True)
+            diagnostics.setdefault("invalid_input_policy", "fail_closed_m18")
+            object.__setattr__(self, "diagnostics", MappingProxyType(diagnostics))
 
         # Enforce the real finite-number contract at construction. Complex
         # amplitudes belong in ``diagnostics``; NaN/Inf would otherwise make

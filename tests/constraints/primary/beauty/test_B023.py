@@ -173,10 +173,10 @@ def test_invalid_rs_semileptonic_wilsons_is_unevaluated_not_real_pass():
         point_builder.make_point(rs_semileptonic_wilsons=object())
     )
 
-    assert result.passes is True
+    assert result.passes is False
     assert result.predicted is None
     assert result.ratio is None
-    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["evaluated"] is True
     assert result.diagnostics["invalid_extra"] == "rs_semileptonic_wilsons"
 
 

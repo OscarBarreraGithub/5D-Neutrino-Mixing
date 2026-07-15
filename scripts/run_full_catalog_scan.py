@@ -362,6 +362,7 @@ def _run_tile(
     counters: Counter[str] = Counter()
     hard_veto_rigorous: Counter[str] = Counter()
     hard_veto_proxy: Counter[str] = Counter()
+    hard_veto_partial: Counter[str] = Counter()
     hard_not_evaluated: Counter[str] = Counter()
     tag_counts: Counter[str] = Counter()
     exception_ids: Counter[str] = Counter()
@@ -394,6 +395,7 @@ def _run_tile(
                 counters=counters,
                 hard_veto_rigorous=hard_veto_rigorous,
                 hard_veto_proxy=hard_veto_proxy,
+                hard_veto_partial=hard_veto_partial,
                 hard_not_evaluated=hard_not_evaluated,
                 tag_counts=tag_counts,
                 exception_ids=exception_ids,
@@ -424,6 +426,7 @@ def _run_tile(
         "tag_counts": dict(sorted(tag_counts.items())),
         "hard_vetoes_rigorous": dict(sorted(hard_veto_rigorous.items())),
         "hard_vetoes_proxy": dict(sorted(hard_veto_proxy.items())),
+        "hard_vetoes_partial": dict(sorted(hard_veto_partial.items())),
         "hard_not_evaluated": dict(sorted(hard_not_evaluated.items())),
         "exception_ids": dict(sorted(exception_ids.items())),
         "timing": {
@@ -585,6 +588,7 @@ def _evaluate_draw(
                 "survives_all_HARD_inclusive": payload["survives_all_HARD_inclusive"],
                 "excluded_by_rigorous": payload["excluded_by_rigorous"],
                 "excluded_by_proxy": payload["excluded_by_proxy"],
+                "excluded_by_partial": payload["excluded_by_partial"],
                 "hard_not_evaluated": payload["hard_not_evaluated"],
                 "coverage_complete": payload["coverage_complete"],
                 "advisory_flags": [
@@ -709,6 +713,7 @@ def _evaluate_draw(
             "survives_all_HARD_inclusive": payload["survives_all_HARD_inclusive"],
             "excluded_by_rigorous": payload["excluded_by_rigorous"],
             "excluded_by_proxy": payload["excluded_by_proxy"],
+            "excluded_by_partial": payload["excluded_by_partial"],
             "hard_not_evaluated": payload["hard_not_evaluated"],
             "coverage_complete": payload["coverage_complete"],
             "advisory_flags": payload["advisory_flags"],
@@ -743,6 +748,7 @@ def _evaluate_draw(
             "survives_all_HARD_inclusive": False,
             "excluded_by_rigorous": [],
             "excluded_by_proxy": [],
+            "excluded_by_partial": [],
             "hard_not_evaluated": [],
             "coverage_complete": False,
             "advisory_flags": [reason],
@@ -969,6 +975,7 @@ def _classify_results(results: Mapping[str, ConstraintResult]) -> dict[str, Any]
     constraints: dict[str, Any] = {}
     excluded_by_rigorous: list[str] = []
     excluded_by_proxy: list[str] = []
+    excluded_by_partial: list[str] = []
     hard_not_evaluated: list[str] = []
     advisory_flags: list[str] = []
 
@@ -1003,6 +1010,12 @@ def _classify_results(results: Mapping[str, ConstraintResult]) -> dict[str, Any]
             elif evaluated and tag == "proxy":
                 if not result.passes:
                     excluded_by_proxy.append(pid)
+            elif evaluated and tag == "partial":
+                # M-17: evaluated HARD partials are data-bearing constraints.
+                # A failing partial vetoes the inclusive tally; it is not a
+                # coverage gap.
+                if not result.passes:
+                    excluded_by_partial.append(pid)
             else:
                 hard_not_evaluated.append(pid)
         elif not result.passes:
@@ -1021,9 +1034,12 @@ def _classify_results(results: Mapping[str, ConstraintResult]) -> dict[str, Any]
     return {
         "constraints": constraints,
         "survives_all_HARD_strict": not excluded_by_rigorous,
-        "survives_all_HARD_inclusive": not excluded_by_rigorous and not excluded_by_proxy,
+        "survives_all_HARD_inclusive": (
+            not excluded_by_rigorous and not excluded_by_proxy and not excluded_by_partial
+        ),
         "excluded_by_rigorous": excluded_by_rigorous,
         "excluded_by_proxy": excluded_by_proxy,
+        "excluded_by_partial": excluded_by_partial,
         "hard_not_evaluated": hard_not_evaluated,
         "coverage_complete": not hard_not_evaluated,
         "advisory_flags": advisory_flags,
@@ -1103,7 +1119,10 @@ def tag_result(result: ConstraintResult) -> tuple[str, str | None, str | None, d
     tag_class = _structured_tag_class(diag)
     status_text = "" if matching_status is None else matching_status.lower()
     needs_text = "" if needs_human is None else needs_human.lower()
-    if not evaluated or "missing_extra" in diag or "exception_type" in diag:
+    invalid_extra = (
+        "invalid_extra" in diag and "missing_extra" not in diag and "missing_extras" not in diag
+    )
+    if not invalid_extra and (not evaluated or "missing_extra" in diag or "exception_type" in diag):
         return "stub", matching_status, needs_human, proxy_flags
     # Durable, structured tag-class hint (M5): a constraint may declare its tag
     # class explicitly via diag["tag_class"] instead of relying on brittle prose
@@ -1140,6 +1159,10 @@ def tag_result(result: ConstraintResult) -> tuple[str, str | None, str | None, d
 
 def _result_evaluated(result: ConstraintResult) -> bool:
     diag = dict(result.diagnostics)
+    if "invalid_extra" in diag and "missing_extra" not in diag and "missing_extras" not in diag:
+        # M-18: malformed-present extras are evaluated invalid inputs for HARD
+        # veto accounting; they are not coverage gaps.
+        return True
     if "exception_type" in diag:
         return False
     if "evaluated" in diag:
@@ -1212,6 +1235,7 @@ def _accumulate_row(
     counters: Counter[str],
     hard_veto_rigorous: Counter[str],
     hard_veto_proxy: Counter[str],
+    hard_veto_partial: Counter[str],
     hard_not_evaluated: Counter[str],
     tag_counts: Counter[str],
     exception_ids: Counter[str],
@@ -1241,6 +1265,7 @@ def _accumulate_row(
             _accumulate_constraint_tally(constraint_tallies, str(pid), item)
     hard_veto_rigorous.update(str(x) for x in row.get("excluded_by_rigorous", []))
     hard_veto_proxy.update(str(x) for x in row.get("excluded_by_proxy", []))
+    hard_veto_partial.update(str(x) for x in row.get("excluded_by_partial", []))
     hard_not_evaluated.update(str(x) for x in row.get("hard_not_evaluated", []))
 
 
@@ -1454,7 +1479,11 @@ def run_universal_c_sanity(
     payload = _classify_results(results)
     sm_tension_ids = [
         pid
-        for pid in [*payload["excluded_by_rigorous"], *payload["excluded_by_proxy"]]
+        for pid in [
+            *payload["excluded_by_rigorous"],
+            *payload["excluded_by_proxy"],
+            *payload["excluded_by_partial"],
+        ]
         if _is_sm_tension_only(results[pid])
     ]
     spurious_rigorous = [
@@ -1462,6 +1491,9 @@ def run_universal_c_sanity(
     ]
     spurious_proxy = [
         pid for pid in payload["excluded_by_proxy"] if pid not in sm_tension_ids
+    ]
+    spurious_partial = [
+        pid for pid in payload["excluded_by_partial"] if pid not in sm_tension_ids
     ]
     out = {
         "name": "universal_c_diagonal_leptons",
@@ -1471,12 +1503,14 @@ def run_universal_c_sanity(
         "registry_count": count,
         "excluded_by_rigorous": spurious_rigorous,
         "excluded_by_proxy": spurious_proxy,
+        "excluded_by_partial": spurious_partial,
         "raw_excluded_by_rigorous": payload["excluded_by_rigorous"],
         "raw_excluded_by_proxy": payload["excluded_by_proxy"],
+        "raw_excluded_by_partial": payload["excluded_by_partial"],
         "sm_tension_hard_exclusions": sm_tension_ids,
         "hard_not_evaluated": payload["hard_not_evaluated"],
         "passes_no_spurious_hard_exclusions": (
-            not spurious_rigorous and not spurious_proxy
+            not spurious_rigorous and not spurious_proxy and not spurious_partial
         ),
         "coverage_complete": payload["coverage_complete"],
         "provenance": {**dict(provenance), "config_hash": config_hash},
@@ -1496,6 +1530,7 @@ def _build_run_summary(
     totals: Counter[str] = Counter()
     rigorous = Counter()
     proxy = Counter()
+    partial = Counter()
     hard_gap = Counter()
     tags = Counter()
     exceptions = Counter()
@@ -1518,6 +1553,7 @@ def _build_run_summary(
         totals["survives_inclusive"] += int(summary.get("survives_all_HARD_inclusive", 0))
         rigorous.update(summary.get("hard_vetoes_rigorous", {}))
         proxy.update(summary.get("hard_vetoes_proxy", {}))
+        partial.update(summary.get("hard_vetoes_partial", {}))
         hard_gap.update(summary.get("hard_not_evaluated", {}))
         tags.update(summary.get("tag_counts", {}))
         exceptions.update(summary.get("exception_ids", {}))
@@ -1567,6 +1603,7 @@ def _build_run_summary(
         },
         "top_hard_vetoes_rigorous": rigorous.most_common(20),
         "top_hard_vetoes_proxy": proxy.most_common(20),
+        "top_hard_vetoes_partial": partial.most_common(20),
         "top_hard_not_evaluated": hard_gap.most_common(20),
         "exception_ids": exceptions.most_common(20),
         "universal_c_sanity": sanity,
@@ -1621,6 +1658,7 @@ def _write_markdown_report(path: Path, summary: Mapping[str, Any]) -> None:
         f"- constraint exception rate: {_fmt_optional(counts.get('exception_rate'), 6)}",
         f"- top rigorous HARD vetoes: {summary.get('top_hard_vetoes_rigorous', [])[:10]}",
         f"- top proxy HARD vetoes: {summary.get('top_hard_vetoes_proxy', [])[:10]}",
+        f"- top partial HARD vetoes: {summary.get('top_hard_vetoes_partial', [])[:10]}",
         (
             "- universal-c sanity: "
             f"{bool(sanity.get('passes_no_spurious_hard_exclusions'))}; "

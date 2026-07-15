@@ -128,11 +128,11 @@ def test_invalid_lepton_input_is_unevaluated_not_real_pass():
         point_builder.make_point(lepton_mass_basis_couplings={"y_n_bar": [1.0, 2.0]})
     )
 
-    assert result.passes is True
+    assert result.passes is False
     assert result.predicted is None
     assert result.ratio is None
     assert result.notes.startswith("NOT EVALUATED -")
-    assert result.diagnostics["evaluated"] is False
+    assert result.diagnostics["evaluated"] is True
     assert result.diagnostics["invalid_extra"] == "lepton_mass_basis_couplings"
     assert result.diagnostics["exception_type"] in {"KeyError", "ValueError", "TypeError"}
 

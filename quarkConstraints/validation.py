@@ -258,17 +258,21 @@ def r_sweep_plot_data(
     c_d = []
     f_q3 = []
     current_seed = seed
+    current_overall_scale: float | None = scale
 
     for r_value in r_arr:
         solution = fit_quark_sector(
             targets,
             r=float(r_value),
-            overall_scale=scale,
+            overall_scale=current_overall_scale,
             seed=current_seed,
             bulk_map=bulk_map,
             max_nfev=max_nfev,
         )
         current_seed = solution.seed
+        # M-16: fitted seeds are normalized physical seeds; do not reapply
+        # the originally requested overall_scale on chained warm starts.
+        current_overall_scale = None
         result = solution.result
         m_kk = default_quark_m_kk_from_lambda_ir(result.point.Lambda_IR, xi_KK=xi_KK)
         diagnostics = summarize_flavor_diagnostics(result, m_kk=m_kk)

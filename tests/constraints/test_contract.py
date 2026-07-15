@@ -262,3 +262,24 @@ def test_constraint_result_rejects_non_bool_passes_and_bad_severity():
         ConstraintResult(process_id="K001", severity=Severity.HARD, passes=1)
     with pytest.raises(TypeError, match="severity must be a Severity"):
         ConstraintResult(process_id="K001", severity="HARD", passes=True)
+
+
+def test_hard_constraint_result_invalid_extra_fails_closed_but_missing_extra_does_not():
+    invalid = ConstraintResult(
+        process_id="K001",
+        severity=Severity.HARD,
+        passes=True,
+        diagnostics={"evaluated": False, "invalid_extra": "quark_mass_basis_couplings"},
+    )
+    missing = ConstraintResult(
+        process_id="K001",
+        severity=Severity.HARD,
+        passes=True,
+        diagnostics={"missing_extra": "quark_mass_basis_couplings"},
+    )
+
+    assert invalid.passes is False
+    assert invalid.diagnostics["evaluated"] is True
+    assert invalid.diagnostics["invalid_input"] is True
+    assert missing.passes is True
+    assert missing.diagnostics["missing_extra"] == "quark_mass_basis_couplings"
