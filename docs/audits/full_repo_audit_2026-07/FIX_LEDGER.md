@@ -106,9 +106,9 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 ### Lane A modern verification (M-25, M-34, M-35)
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| M-25 | MODERN | MAJ | modern/ circular verification + wrong bound fields | `modern/` verifiers, `matching.py:517-543` | PENDING |
-| M-34 | MODERN | MAJ | Self-referential validation scripts + PR tension | `benchmark_quark_0710_1869.py`, `audit_wilson_rg.py` | PENDING |
-| M-35 | WEB | MAJ | Website envelope floor statistically optimistic (max ignores joint) | website Scan Explorer | PENDING |
+| M-25 | MODERN | MAJ | modern/ circular verification + wrong bound fields | `modern/` verifiers, `matching.py:517-543` | VERIFIED (bound field=policy edge; dead projection removed; schema-only banner) |
+| M-34 | MODERN | MAJ | Self-referential validation scripts + PR tension | `benchmark_quark_0710_1869.py`, `audit_wilson_rg.py` | DOC (self-consistency banners; PR tension convention-dependent; no fabricated targets) |
+| M-35 | WEB | MAJ | Website envelope floor statistically optimistic (max ignores joint) | website Scan Explorer | VERIFIED (true joint-veto floor; per-constraint fallback labeled) |
 
 ### Documentation / reproducibility (M-22, M-23, M-24, M-36)
 | ID | Grp | Severity | Title | Location | Disposition |

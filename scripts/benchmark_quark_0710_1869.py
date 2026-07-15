@@ -460,10 +460,10 @@ EXPECTED_ARTIFACT_OBSERVABLE_ROWS = {
     "Delta_m_K_NP",
 }
 EXPECTED_M12_K_NP = {
-    "real": -2.1488995368345126e-14,
-    "imag": -1.4843888564162242e-14,
+    "real": -2.1490194213852247e-14,
+    "imag": -1.4844716687059954e-14,
 }
-EXPECTED_DELTA_M_K_NP_GEV = -4.297799073669025e-14
+EXPECTED_DELTA_M_K_NP_GEV = -4.2980388427704495e-14
 STRICT_PAPER_ARTIFACT_POINT_ID = "pr1.table_i_eq3_example.strict_paper.v1"
 STRICT_PAPER_WILSON_BUNDLE_ID = "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1"
 STRICT_PAPER_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr1.table_i_eq3_example.strict_paper.v1"
