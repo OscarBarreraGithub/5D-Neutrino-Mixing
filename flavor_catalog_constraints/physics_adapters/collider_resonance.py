@@ -270,10 +270,12 @@ __all__.extend(
 KK_EW_DILEPTON_MASS_PROXY_ASSUMPTION_V1 = (
     "NEEDS-HUMAN-PHYSICS: neutral electroweak KK dilepton recast v1 uses "
     "the supplied kk_ew_mass_gev, or M_KK as a fallback mass proxy, and "
-    "compares it to a catalogued benchmark spin-1 dilepton mass lower bound. "
-    "It does not compute sigma(pp->gamma_KK/Z_KK)*BR(gamma_KK/Z_KK->ll), "
-    "light-quark and charged-lepton couplings, total width, interference, "
-    "acceptance, or the experiment's mass-dependent limit curve."
+    "reports an advisory comparison to a catalogued benchmark spin-1 dilepton "
+    "mass lower bound. Per M-26, raw SSM edges must not HARD-veto "
+    "sqrt(L)-suppressed RS KK electroweak bosons. It does not compute "
+    "sigma(pp->gamma_KK/Z_KK)*BR(gamma_KK/Z_KK->ll), light-quark and "
+    "charged-lepton couplings, total width, interference, acceptance, or the "
+    "experiment's mass-dependent limit curve."
 )
 
 
@@ -336,11 +338,12 @@ __all__.extend(
 
 KK_CHARGED_CURRENT_MASS_PROXY_ASSUMPTION_V1 = (
     "NEEDS-HUMAN-PHYSICS: charged electroweak KK/W' recast v1 uses the "
-    "supplied kk_ew_mass_gev, or M_KK as a fallback mass proxy, and compares "
-    "it to a catalogued benchmark W' mass lower bound. It does not compute "
-    "sigma(pp->W_KK)*BR(W_KK->l nu,tb), light-quark, lepton, or tb couplings, "
-    "total width, interference, acceptance, or the experiment's mass-dependent "
-    "limit curve."
+    "supplied kk_ew_mass_gev, or M_KK as a fallback mass proxy, and reports "
+    "an advisory comparison to a catalogued benchmark W' mass lower bound. Per "
+    "M-26, raw SSM edges must not HARD-veto sqrt(L)-suppressed RS KK "
+    "electroweak bosons. It does not compute sigma(pp->W_KK)*BR(W_KK->l nu,tb), "
+    "light-quark, lepton, or tb couplings, total width, interference, "
+    "acceptance, or the experiment's mass-dependent limit curve."
 )
 
 

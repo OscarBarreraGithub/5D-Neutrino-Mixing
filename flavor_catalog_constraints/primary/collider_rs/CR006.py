@@ -18,15 +18,16 @@ NEEDS-HUMAN-PHYSICS.  A complete recast needs
 ``sigma(pp -> W_KK) * BR(W_KK -> ell nu, tb)``, light-quark, lepton, and
 third-generation quark couplings, total width, interference, acceptance, and
 the experiment's mass-dependent limit curve.  The current ``ParameterPoint``
-may carry the EW KK mass but not that collider signal model, so CR006 uses the
-documented benchmark mass-exclusion proxy.  The ``sigma*BR`` recast status is
-reported only as diagnostics.
+may carry the EW KK mass but not that collider signal model.  CR006 therefore
+keeps the documented benchmark mass-exclusion proxy as an advisory diagnostic
+only.  The ``sigma*BR`` recast status is reported only as diagnostics.
 
 Severity
 --------
-HARD.  The active budget is the PDG 2025 / ATLAS 2019 95% CL SSM-W'
-``e nu`` benchmark lower mass limit loaded from ``CR006.yaml``.  The ratio is
-``m_limit / m_KK_EW`` so ``ratio <= 1`` passes.
+INFO.  The active budget is the PDG 2025 / ATLAS 2019 95% CL SSM-W'
+``e nu`` benchmark lower mass limit loaded from ``CR006.yaml``.  The advisory
+ratio is ``m_limit / m_KK_EW`` so ``ratio <= 1`` passes the SSM proxy, but
+failures must not veto RS points.
 
 Catalog sidecar
 ---------------
@@ -82,12 +83,18 @@ _KNOWN_VALUE_IDS = (
     _CMS_TB_L,
 )
 _BUDGET_POLICY = (
-    "active HARD budget is the PDG2025/ATLAS2019 SSM W' -> e nu mass "
-    "lower limit in CR006.yaml. CMS combined e/mu and CMS tb limits are "
-    "retained as diagnostics because ParameterPoint does not provide the "
-    "charged-vector production, branching-fraction, width, and acceptance "
-    "model needed to choose a channel-specific RS limit."
+    "active INFO budget is the PDG2025/ATLAS2019 SSM W' -> e nu mass "
+    "lower limit in CR006.yaml. Per M-26 this raw SSM mass edge is "
+    "advisory only for RS electroweak KK bosons because light-quark "
+    "production couplings are sqrt(L)-suppressed. CMS combined e/mu and "
+    "CMS tb limits are retained as diagnostics because ParameterPoint does "
+    "not provide the charged-vector production, branching-fraction, width, "
+    "and acceptance model needed to choose a channel-specific RS limit."
 )
+_M26_SEVERITY_POLICY = "INFO/non-vetoing until an RS sigma*BR recast is supplied"
+_RS_VOLUME_LOG_FOR_SUPPRESSION_NOTE = 35.0
+_LIGHT_QUARK_COUPLING_RATIO_TO_SSM = 1.0 / math.sqrt(_RS_VOLUME_LOG_FOR_SUPPRESSION_NOTE)
+_PRODUCTION_RATE_SUPPRESSION_ESTIMATE = _LIGHT_QUARK_COUPLING_RATIO_TO_SSM**2
 
 
 @dataclass(frozen=True)
@@ -347,10 +354,10 @@ def _limit_from_anchor(
 
 @register
 class Constraint:
-    """Catalogued charged-current electroweak KK/W' mass constraint."""
+    """Catalogued charged-current electroweak KK/W' advisory record."""
 
     process_id = "CR006"
-    severity = Severity.HARD
+    severity = Severity.INFO
     observable = "m(W_KK^(1) -> ell nu, tb)"
 
     def __init__(self) -> None:
@@ -370,10 +377,13 @@ class Constraint:
             return ConstraintResult(
                 process_id=self.process_id,
                 severity=self.severity,
-                passes=False,
+                passes=True,
                 experimental=float(self.anchor.value),
                 budget=float(self.anchor.budget),
-                notes=f"invalid charged-EW KK mass input; CR006 not evaluated: {exc}",
+                notes=(
+                    "invalid charged-EW KK mass input; non-vetoing CR006 INFO "
+                    f"record kept without RS recast: {exc}"
+                ),
                 diagnostics={
                     "exception_type": type(exc).__name__,
                     "exception": str(exc),
@@ -384,6 +394,7 @@ class Constraint:
                     "needs_human_physics": (
                         KK_CHARGED_CURRENT_MASS_PROXY_ASSUMPTION_V1
                     ),
+                    "severity_policy": _M26_SEVERITY_POLICY,
                 },
             )
 
@@ -409,6 +420,7 @@ class Constraint:
                     "needs_human_physics": (
                         KK_CHARGED_CURRENT_MASS_PROXY_ASSUMPTION_V1
                     ),
+                    "severity_policy": _M26_SEVERITY_POLICY,
                 },
             )
 
@@ -461,6 +473,20 @@ class Constraint:
                 ),
                 "sigma_times_br_recast_status": "NEEDS-HUMAN-PHYSICS",
                 "sigma_times_br_proxy_fb": comparison.predicted_sigma_times_br,
+                "severity_policy": _M26_SEVERITY_POLICY,
+                "m26_ssm_benchmark_status": "advisory_not_hard_veto",
+                "rs_light_quark_coupling_ratio_to_ssm": (
+                    _LIGHT_QUARK_COUPLING_RATIO_TO_SSM
+                ),
+                "rs_light_quark_production_rate_suppression_estimate": (
+                    _PRODUCTION_RATE_SUPPRESSION_ESTIMATE
+                ),
+                "rs_sigma_times_br_suppression_note": (
+                    "M-26: production is already suppressed by roughly 1/L from "
+                    "g_q^RS/g_q^SSM ~ 1/sqrt(L); branching and width effects can "
+                    "reduce sigma*BR further, so the raw SSM mass edge is not an "
+                    "RS recast."
+                ),
             }
         )
 
@@ -475,8 +501,9 @@ class Constraint:
             notes=(
                 "Charged-current electroweak KK/W' resonance uses the documented "
                 "benchmark mass-exclusion proxy and the active PDG/ATLAS SSM "
-                "e nu mass lower bound. HARD ratio is m_limit/m_WKK; full "
-                "sigma*BR recast is marked NEEDS-HUMAN-PHYSICS."
+                "e nu mass lower bound as an INFO advisory. Per M-26 this is "
+                "not a HARD veto on sqrt(L)-suppressed RS KK electroweak bosons; "
+                "full sigma*BR recast is marked NEEDS-HUMAN-PHYSICS."
             ),
             diagnostics=diagnostics,
         )

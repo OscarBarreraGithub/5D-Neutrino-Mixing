@@ -1,6 +1,6 @@
 # Minimal-RS Floor Summary (canonical current state)
 
-**Status:** authoritative. Post-audit (June 2026). This is the one-page,
+**Status:** authoritative. Post-audit (July 2026 C-3/M-26 reconciliation). This is the one-page,
 up-to-date summary of the minimal (non-custodial) Randall–Sundrum quark-sector
 KK-scale floor. Where any older doc disagrees, this file and
 [`reports/collaborator_2026-06/CONTENT.md`](../reports/collaborator_2026-06/CONTENT.md)
@@ -42,10 +42,10 @@ across all three.
 | `epsilon_K` (K001) | **~30 TeV** (median) / ~10 TeV (paper-era 95%q) | **A — anarchic reproduction** (literature strawman, NOT our model) | typical (median anarchic) | **yes** — align Im M12 → 0 | flavor / CP |
 | `epsilon_K` (K001) | **~6.3–7 TeV** | **B — production AS RUN** (simplified fit-aligned MFV, no V5KM — what we actually run) | sharp wall, near-unique fitted locus | (V5KM alignment not yet wired) | flavor / CP |
 | `epsilon_K` (K001) | **~2 TeV** | **C — FPR ideal** (full V5KM alignment, not yet in production) | literature target | **yes** — V5KM alignment | flavor / CP |
-| oblique S,T,U (EW001) | **~18–20 TeV** | lane-independent | **existence** (best-tuned) | **no** — no Yukawa freedom | RS T-problem |
+| oblique S,T,U (EW001) | **~16 TeV** (code-verified **15.96 TeV**) | lane-independent | **existence** (best-tuned) | **no** — no Yukawa freedom | RS T-problem |
 | Z→bb (T010/T011) | **~5 TeV** | lane-independent | — | no (gauge-dominated; c_Q3 pinned by m_t) | EW |
 | Δm_s (B003), Δm_d, Δm_K, D⁰ | few TeV → <~1 TeV | A (anarchic) | tunable | yes | flavor |
-| collider KK searches (CR*) | ~4 TeV | lane-independent | subleading | — | direct search |
+| collider KK searches (CR*) | **5.5 TeV** from CR001; CR005/CR006 SSM EW edges are INFO only | lane-independent | subleading | — | direct search |
 
 **The epsilon_K lane gap.** Production AS RUN (~7 TeV) is **NEITHER** the anarchic
 wall (~10–30 TeV) **NOR** the FPR ~2 TeV ideal; the 7→2 TeV gap is exactly the
@@ -62,10 +62,13 @@ Two distinct notions of "floor":
   production (**LANE B**) sits at **~7 TeV** (a sharp fitted wall), and the **FPR
   ideal** (**LANE C**, V5KM aligned) is **~2 TeV** — do not quote the ~30 TeV
   anarchic number as "our floor".
-- **Existence (fine-tuned, irreducible) floor ≈ 18–20 TeV**, set by oblique
+- **Existence (fine-tuned, irreducible) floor ≈ 16 TeV** (code-verified
+  **15.96 TeV**), set by oblique
   **S,T,U** (the RS T-parameter problem). This carries **no Yukawa freedom**, so
   min ≈ median (spread only ~1.5×): even maximally fine-tuned Yukawas cannot put
-  minimal RS below ~18–20 TeV. This is precisely the motivation for custodial RS.
+  minimal RS below ~16 TeV under the shipped EW001 anchors and coefficients.
+  The same shipped ellipse gives a custodial oblique floor of **5.80 TeV**.
+  This is precisely the motivation for custodial RS.
 
 **Z→bb is NOT the driver.** The old claim of a "25–30 TeV Z→bb-dominated floor"
 (and "108 TeV at 1σ") was a **B1** bug (see below); corrected, Z→bb collapses to

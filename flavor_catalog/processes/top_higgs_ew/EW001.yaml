@@ -83,6 +83,12 @@ source_shas:
   pdg_2025_electroweak_stu.txt: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
   peskin_takeuchi_1992_oblique.txt: "sha256:0a0453cd411843e9f77bb28bbe272d00a7919975c051e99fb2b8ad0c13c1a0c1"
 pdg_or_equivalent:
+  # C-3 (audit 2026-07): these active U=0 S/T/rho anchors are a PLAUSIBLE recent
+  # oblique fit (consistent with e.g. Reina-Silvestrini Nov 2025, S=+0.05+-0.09,
+  # T=+0.08+-0.07, rho~+0.91), but the exact "PDG 2025 Table 10.8" attribution is
+  # UNPINNED (audit S8.3 could not corroborate it against a specific edition).
+  # PROVENANCE ACTION: pin the exact source (edition + table) BEFORE publication.
+  # The values may stand; only the citation label is unverified.
   - observable: "PDG 2025 global oblique fit, S with U fixed to zero"
     year: 2025
     value: 0.026
@@ -193,31 +199,31 @@ pdg_or_equivalent:
     snapshot_path: "flavor_catalog/references/EW001/pdg_2025_electroweak_stu.txt"
     sha256: "sha256:c902522a3c60e467431328bdbbc6f3e5fd0dccb2598a240519828f878ddc932d"
   - observable: "Gfitter public oblique fit, S"
-    year: 2026
+    year: 2018
     value: 0.05
     uncertainty: 0.11
     units: "dimensionless"
-    source: "Gfitter Oblique Parameters public page"
+    source: "Gfitter Oblique Parameters public page (2018 update)"
     source_url: "https://project-gfitter.web.cern.ch/Oblique_Parameters/"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt"
     sha256: "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f"
   - observable: "Gfitter public oblique fit, T"
-    year: 2026
+    year: 2018
     value: 0.09
     uncertainty: 0.13
     units: "dimensionless"
-    source: "Gfitter Oblique Parameters public page"
+    source: "Gfitter Oblique Parameters public page (2018 update)"
     source_url: "https://project-gfitter.web.cern.ch/Oblique_Parameters/"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt"
     sha256: "sha256:c9fde1fad4e18f5260c40270fad8f848b286130cc336460d319d1df10613d02f"
   - observable: "Gfitter public oblique fit, U"
-    year: 2026
+    year: 2018
     value: 0.01
     uncertainty: 0.11
     units: "dimensionless"
-    source: "Gfitter Oblique Parameters public page"
+    source: "Gfitter Oblique Parameters public page (2018 update)"
     source_url: "https://project-gfitter.web.cern.ch/Oblique_Parameters/"
     access_date: "2026-05-16"
     snapshot_path: "flavor_catalog/references/EW001/gfitter_oblique_parameters.txt"

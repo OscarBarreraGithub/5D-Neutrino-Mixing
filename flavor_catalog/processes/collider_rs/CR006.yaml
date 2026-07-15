@@ -330,7 +330,8 @@ implementation_difficulty: "HIGH"
 implementation_difficulty_reason: "Needs a collider reinterpretation workflow: RS charged-vector production and decays, branching fractions to tb/WZ/Wh/exotics, finite-width/interference handling, detector acceptance, and ATLAS/CMS likelihood or recast machinery."
 constraint_validity:
   experimental_status: "Robust direct mass exclusions for the stated W' simplified models."
-  rs_model_dependence: "High. SSM lnu limits assume light-quark and charged-lepton couplings that can be suppressed in custodial RS; tb limits are closer but still depend on chirality, total width, production coupling, and branching fraction assumptions."
+  active_code_policy: "M-26: INFO/advisory only; the SSM lnu mass edges are not HARD vetoes for sqrt(L)-suppressed RS electroweak KK bosons without a sigma*BR recast."
+  rs_model_dependence: "High. SSM lnu limits assume light-quark and charged-lepton couplings that can be suppressed in custodial RS; tb limits are closer but still depend on chirality, total width, production coupling, and branching fraction assumptions. RS production from valence quarks is suppressed by g_q/g_SSM ~ 1/sqrt(L), before channel-specific branching and width effects."
   relevant_rs_masses:
     - "charged electroweak gauge KK mode mass M_{W_KK}"
     - "nearby custodial charged-vector masses when degenerate"

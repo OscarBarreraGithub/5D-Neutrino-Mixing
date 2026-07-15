@@ -42,7 +42,7 @@ def test_registration_metadata():
 
     assert isinstance(constraint, ConstraintProtocol)
     assert constraint.process_id == _PID
-    assert constraint.severity is Severity.HARD
+    assert constraint.severity is Severity.INFO
     assert constraint.family == "collider_rs"
     assert constraint.observable == "m((gamma^(1), Z^(1))_KK -> l+l-)"
 
@@ -92,6 +92,7 @@ def test_evaluate_without_input_degrades_gracefully():
         "quark_mass_basis_couplings",
     )
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
+    assert "INFO/non-vetoing" in result.diagnostics["severity_policy"]
 
 
 def test_mass_limit_numerics_validate_against_core_not_adapter():
@@ -146,9 +147,11 @@ def test_safe_point_passes_and_excluded_point_fails():
     )
 
     assert safe.passes is True
+    assert safe.severity is Severity.INFO
     assert safe.predicted == pytest.approx((limit_gev + 1000.0) / 1000.0)
     assert safe.ratio < 1.0
     assert excluded.passes is False
+    assert excluded.severity is Severity.INFO
     assert excluded.predicted == pytest.approx((limit_gev - 1000.0) / 1000.0)
     assert excluded.ratio > 1.0
     assert excluded.experimental == pytest.approx(constraint.anchor.budget)
@@ -159,17 +162,37 @@ def test_safe_point_passes_and_excluded_point_fails():
     assert excluded.diagnostics["sigma_times_br_recast_status"] == (
         "NEEDS-HUMAN-PHYSICS"
     )
+    assert excluded.diagnostics["m26_ssm_benchmark_status"] == (
+        "advisory_not_hard_veto"
+    )
+    assert excluded.diagnostics["rs_light_quark_coupling_ratio_to_ssm"] == pytest.approx(
+        1.0 / math.sqrt(35.0)
+    )
 
 
 def test_invalid_ew_mass_is_non_crashing_failure():
     point = point_builder.make_point(kk_ew_mass_gev=-1.0)
     result = fcc.get(_PID).evaluate(point)
 
-    assert result.passes is False
+    assert result.passes is True
+    assert result.severity is Severity.INFO
     assert result.predicted is None
     assert result.ratio is None
     assert result.experimental == pytest.approx(fcc.get(_PID).anchor.value)
     assert result.diagnostics["exception_type"] == "ValueError"
+    assert "INFO/non-vetoing" in result.diagnostics["severity_policy"]
+
+
+def test_m26_sqrt_l_suppressed_rs_state_is_not_hard_vetoed():
+    result = fcc.get(_PID).evaluate(point_builder.make_point(kk_ew_mass_gev=4000.0))
+
+    assert result.severity is Severity.INFO
+    assert result.passes is False
+    assert result.ratio > 1.0
+    assert result.diagnostics["m26_ssm_benchmark_status"] == (
+        "advisory_not_hard_veto"
+    )
+    assert "sqrt(L)" in result.notes
 
 
 def test_evaluate_is_pure_and_deterministic():

@@ -200,13 +200,15 @@ class Constraint:
                 inputs=self.sm_inputs,
             )
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
-            return self._unevaluated_result(
-                diagnostics={
-                    "invalid_extra": _REQUIRED_EXTRA,
-                    "exception_type": type(exc).__name__,
-                    "exception": str(exc),
-                },
-            )
+            diagnostics: dict[str, object] = {
+                "exception_type": type(exc).__name__,
+                "exception": str(exc),
+            }
+            if _is_unevaluated_legacy_proxy_exception(exc, lepton_input):
+                diagnostics["legacy_overlap_tree_proxy_ignored"] = True
+            else:
+                diagnostics["invalid_extra"] = _REQUIRED_EXTRA
+            return self._unevaluated_result(diagnostics=diagnostics)
 
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
@@ -275,6 +277,42 @@ def _adapter_input(lepton_input: Any, rs_ew_couplings: Any | None) -> Any:
         "dipole": lepton_input,
         "rs_ew_couplings": rs_ew_couplings,
     }
+
+
+def _is_unevaluated_legacy_proxy_exception(exc: Exception, lepton_input: Any) -> bool:
+    """Return true for stale overlap/flavor probes that carry no L009 prediction."""
+
+    message = str(exc)
+    if isinstance(exc, ValueError):
+        return (
+            "pinned to initial_flavor='tau'" in message
+            or "mu->e/e-mu overlap aliases" in message
+        )
+    if not isinstance(exc, TypeError):
+        return False
+    if "must provide tau->3mu contact proxy inputs" not in message:
+        return False
+    return _has_legacy_overlap_like_input(lepton_input)
+
+
+def _has_legacy_overlap_like_input(lepton_input: Any) -> bool:
+    keys = (
+        "left_lfv_overlap",
+        "right_lfv_overlap",
+        "left_emu_overlap",
+        "right_emu_overlap",
+        "left_emu",
+        "right_emu",
+        "left_charged_lepton_overlap",
+        "right_charged_lepton_overlap",
+        "left_lepton_overlap",
+        "right_lepton_overlap",
+        "left_overlap",
+        "right_overlap",
+    )
+    if isinstance(lepton_input, Mapping):
+        return any(key in lepton_input for key in keys)
+    return any(hasattr(lepton_input, key) for key in keys)
 
 
 def _tree_only_lepton_input() -> dict[str, str]:

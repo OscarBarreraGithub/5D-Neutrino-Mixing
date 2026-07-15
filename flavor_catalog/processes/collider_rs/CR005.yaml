@@ -336,8 +336,10 @@ recent_experimental_inputs:
     sha256: "sha256:c33742062e29e14425bfc2de696d926ac1dbf6d49304a59f696a56a7f9dbb311"
 constraint_validity:
   experimental_status: "robust null-search upper limits and benchmark mass exclusions in prompt ee and mumu spectra"
+  active_code_policy: "M-26: INFO/advisory only; the CMS/ATLAS SSM mass edges are not HARD vetoes for sqrt(L)-suppressed RS electroweak KK bosons without a sigma*BR recast."
   model_dependence:
     - "SSM Z' mass limits assume SM-like fermion couplings and benchmark widths, not a custodial-RS coupling pattern."
+    - "RS electroweak KK production from valence quarks is suppressed by g_q/g_SSM ~ 1/sqrt(L); branching and width effects can reduce sigma x BR further."
     - "Custodial-RS neutral KK bosons can be broad and can preferentially decay to third-generation fermions, Higgs-sector states, or longitudinal electroweak bosons."
     - "Light-quark production couplings and dilepton branching fractions must be supplied before translating the 5.15 TeV SSM benchmark into M_KK."
   relevant_rs_parameters:

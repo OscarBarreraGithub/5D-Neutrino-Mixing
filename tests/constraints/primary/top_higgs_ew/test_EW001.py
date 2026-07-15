@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 from pathlib import Path
+import re
 from types import SimpleNamespace
 
 import pytest
@@ -40,6 +41,30 @@ def _manual_chi2(*, s: float, t: float, fit: core.ObliqueSTFit) -> float:
     cov_st = float(fit.rho_st * fit.sigma_s * fit.sigma_t)
     det = var_s * var_t - cov_st * cov_st
     return float((var_t * ds * ds - 2.0 * cov_st * ds * dt + var_s * dt * dt) / det)
+
+
+def _solved_floor_tev(*, ew_model: str = "minimal_rs") -> float:
+    constraint = fcc.get(_PID)
+    lo = 100.0
+    hi = 100000.0
+
+    def chi2(m_kk_gev: float) -> float:
+        return core.evaluate_rs_oblique_proxy(
+            m_kk_gev=m_kk_gev,
+            fit=constraint.anchor.fit,
+            s_coefficient=constraint.anchor.warped_s_coefficient.value,
+            ew_model=ew_model,
+        ).chi2
+
+    assert chi2(lo) > core.CHI2_2DOF_95
+    assert chi2(hi) < core.CHI2_2DOF_95
+    for _ in range(160):
+        mid = 0.5 * (lo + hi)
+        if chi2(mid) > core.CHI2_2DOF_95:
+            lo = mid
+        else:
+            hi = mid
+    return hi / 1000.0
 
 
 def test_registration_metadata():
@@ -80,6 +105,12 @@ def test_anchor_matches_yaml_and_loud_fail_probe():
         mkk_entry["value"]
     )
     assert constraint.anchor.budget == pytest.approx(core.CHI2_2DOF_95)
+    gfitter_s = _entry("Gfitter public oblique fit, S")
+    gfitter_t = _entry("Gfitter public oblique fit, T")
+    gfitter_u = _entry("Gfitter public oblique fit, U")
+    assert gfitter_s["year"] == 2018
+    assert gfitter_t["year"] == 2018
+    assert gfitter_u["year"] == 2018
 
     with pytest.raises(AnchorError):
         ew001_module._load_value_anchor("not a real EW001 observable", process_id=_PID)
@@ -195,6 +226,21 @@ def test_safe_point_passes_and_excluded_point_fails(
         assert result.ratio < 1.0
     else:
         assert result.ratio > 1.0
+
+
+def test_c3_documented_floor_matches_code_solved_floor():
+    floor_tev = _solved_floor_tev()
+    custodial_floor_tev = _solved_floor_tev(ew_model="custodial_rs_plr")
+
+    assert floor_tev == pytest.approx(15.955484201013507, rel=1e-12)
+    assert custodial_floor_tev == pytest.approx(5.796965450093533, rel=1e-12)
+
+    for path in (_REPO_ROOT / "docs" / "FLOOR_SUMMARY.md", _REPO_ROOT / "CLAUDE.md"):
+        text = path.read_text()
+        match = re.search(r"code-verified\s+\*\*([0-9]+\.[0-9]+)\s+TeV\*\*", text)
+        assert match, f"{path} is missing the C-3 code-verified EW001 floor"
+        assert float(match.group(1)) == pytest.approx(round(floor_tev, 2))
+        assert "18-20 TeV" not in text
 
 
 def test_mass_resolution_prefers_ew_mass_and_falls_back_to_couplings():

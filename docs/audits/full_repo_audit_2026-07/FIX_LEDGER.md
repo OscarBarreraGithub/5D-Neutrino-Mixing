@@ -88,9 +88,9 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 ### QCD running (M-19..M-21)
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| M-19 | QCD | MAJ | 3-loop mass-decoupling d3 wrong (value+slope sign) | `qcd/decoupling.py:117-128` | PENDING |
-| M-20 | QCD | MAJ | Spurious 6→6 threshold matching (m_t 163.5 vs 162.5) | `qcd/mass_running.py:187-191` | PENDING |
-| M-21 | QCD | MAJ | PDG m_t(MS̄) σ understated ~2.5× + load-bearing test | `pdg_quark_masses.py:110-116`, test | PENDING |
+| M-19 | QCD | MAJ | 3-loop mass-decoupling d3 wrong (value+slope sign) | `qcd/decoupling.py:117-128` | VERIFIED (CKS closed-form d3, increasing in n_l) |
+| M-20 | QCD | MAJ | Spurious 6→6 threshold matching (m_t 163.5 vs 162.5) | `qcd/mass_running.py:187-191` | VERIFIED (equal-nf no-op; m_t(m_t)=162.5 propagated) |
+| M-21 | QCD | MAJ | PDG m_t(MS̄) σ understated ~2.5× + load-bearing test | `pdg_quark_masses.py:110-116`, test | VERIFIED (sigma_t=1.8; test asserts true ordering) |
 
 ### Collider / EW existence floor (C-3, M-26)
 | ID | Grp | Severity | Title | Location | Disposition |

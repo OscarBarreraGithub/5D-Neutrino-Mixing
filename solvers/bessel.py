@@ -40,6 +40,8 @@ DEFAULT_EXACT    = True     # True = exact ratio condition; False = IR-only Jν(
 # Small cutoffs
 _TINY = 1e-14
 _MIN_X = 1e-12
+_SCAN_START_X = 1e-6
+_ROOT_SCAN_STEP = math.pi / 16.0
 
 
 # =========================
@@ -152,26 +154,31 @@ def _approx_jv_zeros(nu: float, n_roots: int) -> np.ndarray:
 
 def _bracket_around(F: Callable[[float], float],
                     x0: float,
-                    rel: float = 0.2,
-                    max_expand: int = 25) -> Optional[Tuple[float, float]]:
+                    half_width: float = math.pi / 3.0,
+                    max_expand: int = 4) -> Optional[Tuple[float, float]]:
     """
-    Try to find a sign-change bracket around x0 by symmetric expansion.
+    Try to find a sign-change bracket around x0 by additive expansion.
+
+    C-4: keep brackets narrower than the ~pi Bessel-root spacing.  The old
+    relative window grew wider than adjacent root spacing and could skip roots.
     """
-    a = max(x0 * (1.0 - rel), _MIN_X)
-    b = x0 * (1.0 + rel)
+    width = min(float(half_width), 0.49 * math.pi)
+    a = max(float(x0) - width, _SCAN_START_X)
+    b = float(x0) + width
     fa = F(a)
     fb = F(b)
     if np.sign(fa) == 0.0:
-        return (max(a * 0.9, _MIN_X), a * 1.1)
+        return (max(a - 0.1 * width, _SCAN_START_X), a + 0.1 * width)
     if np.sign(fb) == 0.0:
-        return (max(b * 0.9, _MIN_X), b * 1.1)
+        return (max(b - 0.1 * width, _SCAN_START_X), b + 0.1 * width)
     if np.sign(fa) != np.sign(fb):
         return (a, b)
 
-    # Expand multiplicatively until sign change (or give up)
+    # Expand additively, capped below pi/2 so one bracket cannot span two roots.
     for _ in range(max_expand):
-        a = max(a * 0.8, _MIN_X)
-        b = b * 1.25
+        width = min(width * 1.2, 0.49 * math.pi)
+        a = max(float(x0) - width, _SCAN_START_X)
+        b = float(x0) + width
         fa = F(a)
         fb = F(b)
         if np.sign(fa) != np.sign(fb):
@@ -188,19 +195,59 @@ def _scan_for_brackets(F: Callable[[float], float],
     Linear scan to collect brackets with sign changes of F.
     """
     brackets = []
-    x_prev = max(x_start, _MIN_X)
+    x_prev = max(x_start, _SCAN_START_X)
     f_prev = F(x_prev)
     x = x_prev
     while len(brackets) < n_needed and x < x_max:
-        x = x + step
+        x = min(x + step, x_max)
         f = F(x)
+        if not (np.isfinite(f_prev) and np.isfinite(f)):
+            x_prev, f_prev = x, f
+            continue
         if np.sign(f_prev) == 0.0:
             # near exact zero, create a small bracket
-            brackets.append((max(x_prev * 0.9, _MIN_X), x_prev * 1.1))
+            delta = min(step * 0.25, 0.1)
+            brackets.append((max(x_prev - delta, _SCAN_START_X), x_prev + delta))
         elif np.sign(f_prev) != np.sign(f):
             brackets.append((x_prev, x))
         x_prev, f_prev = x, f
     return brackets
+
+
+def _sorted_unique_roots(xs: List[float], tol: float) -> np.ndarray:
+    """Return strictly increasing roots, dropping numerical duplicates."""
+    if not xs:
+        return np.array([], dtype=float)
+    duplicate_tol = max(100.0 * float(tol), 1e-9)
+    ordered = np.array(sorted(float(x) for x in xs), dtype=float)
+    unique = [float(ordered[0])]
+    for root in ordered[1:]:
+        if abs(float(root) - unique[-1]) <= duplicate_tol:
+            warnings.warn(
+                "Duplicate KK Bessel root encountered during C-4 validation; "
+                "dropping the duplicate.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+            continue
+        unique.append(float(root))
+    return np.array(unique, dtype=float)
+
+
+def _validate_roots(xs: np.ndarray, *, tol: float) -> None:
+    """Validate monotonicity and flag root-spacing gaps large enough to imply a skip."""
+    if len(xs) < 2:
+        return
+    duplicate_tol = max(100.0 * float(tol), 1e-9)
+    diffs = np.diff(xs)
+    if not np.all(diffs > duplicate_tol):
+        raise RuntimeError("KK Bessel roots are not strictly increasing after C-4 validation")
+    if np.any(diffs > 1.5 * math.pi):
+        warnings.warn(
+            "Large gap between consecutive KK Bessel roots; a root may have been skipped.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
 
 
 # =========================
@@ -260,29 +307,15 @@ def solve_kk(species: str,
     # Build the function F(x)
     F = _F_exact(nu, eps) if exact else _F_ironly(nu)
 
-    # Seed guesses from J_ν zeros (or asymptotic), then bracket for F
-    seeds = _approx_jv_zeros(nu, max(n_roots, 5))
-    brackets: List[Tuple[float, float]] = []
-
-    # First try symmetric brackets around each seed
-    for x0 in seeds:
-        if len(brackets) >= n_roots:
-            break
-        br = _bracket_around(F, x0, rel=0.2, max_expand=30)
-        if br is not None:
-            brackets.append(br)
-
-    # If we still need more brackets, do a linear scan
-    if len(brackets) < n_roots:
-        # Step ~ π is a decent spacing for consecutive roots
-        extra = _scan_for_brackets(
-            F,
-            x_start=seeds[-1] if len(seeds) else 0.5,
-            step=math.pi,
-            n_needed=n_roots - len(brackets),
-            x_max=x_max,
-        )
-        brackets.extend(extra)
+    # C-4: scan sequentially with a fixed step below the ~pi root spacing.  This
+    # avoids relative seed windows that grow wide enough to contain multiple roots.
+    brackets = _scan_for_brackets(
+        F,
+        x_start=_SCAN_START_X,
+        step=_ROOT_SCAN_STEP,
+        n_needed=n_roots,
+        x_max=x_max,
+    )
 
     if len(brackets) < n_roots:
         warnings.warn(
@@ -293,17 +326,25 @@ def solve_kk(species: str,
         n_roots = len(brackets)
 
     # Solve each bracket with Brent
-    xs = []
+    xs_raw = []
     for (a, b) in brackets[:n_roots]:
         try:
             root = brentq(F, a, b, xtol=tol, rtol=tol, maxiter=200)
         except ValueError:
             # Failsafe: nudge ends slightly and retry once
-            aa = max(a * 0.99, _MIN_X)
-            bb = b * 1.01
+            aa = max(a - 0.01 * (b - a), _SCAN_START_X)
+            bb = b + 0.01 * (b - a)
             root = brentq(F, aa, bb, xtol=tol, rtol=tol, maxiter=200)
-        xs.append(root)
-    xs = np.array(xs)
+        xs_raw.append(root)
+    xs = _sorted_unique_roots(xs_raw, tol)
+    if len(xs) < n_roots:
+        warnings.warn(
+            f"Only found {len(xs)} unique KK Bessel roots up to x={x_max}. "
+            "Returning fewer roots.",
+            stacklevel=2,
+        )
+        n_roots = len(xs)
+    _validate_roots(xs, tol=tol)
 
     # Map to masses: m = x * Λ
     masses = xs * Lam
