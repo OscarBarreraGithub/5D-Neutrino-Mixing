@@ -95,13 +95,13 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 ### Collider / EW existence floor (C-3, M-26)
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| C-3 | EW | CRIT | EW001 oblique anchors + 15.96 vs 18-20 TeV floor | `EW001.yaml:82-118` | PENDING |
-| M-26 | EW | MAJ | Collider SSM benchmarks as HARD vetoes to ×L-suppressed RS | CR005/CR006, CR001 | PENDING |
+| C-3 | EW | CRIT | EW001 oblique anchors + 15.96 vs 18-20 TeV floor | `EW001.yaml:82-118` | VERIFIED (docs reconciled to code-verified 15.96 TeV; Gfitter 2018; citation flagged pin-before-pub) |
+| M-26 | EW | MAJ | Collider SSM benchmarks as HARD vetoes to ×L-suppressed RS | CR005/CR006, CR001 | VERIFIED (CR005/6 HARD->INFO; CR001 intact; recast=human) |
 
 ### Bessel solver (C-4)
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| C-4 | BESSEL | CRIT | KK Bessel solver skips/misorders roots n≥5 | `solvers/bessel.py:153-179,264-285` | PENDING |
+| C-4 | BESSEL | CRIT | KK Bessel solver skips/misorders roots n≥5 | `solvers/bessel.py:153-179,264-285` | VERIFIED (additive-spacing sign scan; deep roots vs brute force; production roots unchanged) |
 
 ### Lane A modern verification (M-25, M-34, M-35)
 | ID | Grp | Severity | Title | Location | Disposition |

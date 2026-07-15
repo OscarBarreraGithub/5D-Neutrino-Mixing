@@ -11,7 +11,10 @@ from types import MappingProxyType
 import pytest
 
 from quarkConstraints.benchmarks import evaluate_default_benchmark
-from quarkConstraints.deltaf2 import evaluate_delta_f2_constraints
+from quarkConstraints.deltaf2 import (
+    delta_f2_epsilon_k_budget_policy,
+    evaluate_delta_f2_constraints,
+)
 from quarkConstraints.modern import (
     MODERN_PHENOMENOLOGY_SYSTEM_IDS,
     MODERN_POINT_COUPLINGS_SCHEMA_ID,
@@ -196,8 +199,15 @@ def test_modern_point_evaluation_bridge_matches_repo_summary():
     for key in ("b_d_ratio", "b_s_ratio", "d_ratio"):
         assert modern_ratios[key] == pytest.approx(repo_ratios[key])
 
-    # epsilon_K in the modern evaluation uses the new hadronic bound 4.18e-4
-    assert evaluation.verdict_for("K").bound == pytest.approx(4.18e-4)
+    epsilon_summary = evaluation.deltaf2.get("epsilon_k")
+    expected_budget, expected_direction = (
+        delta_f2_epsilon_k_budget_policy().selected_signed_budget(
+            epsilon_summary.diagnostics["epsilon_k_np_signed"]
+        )
+    )
+    assert epsilon_summary.diagnostics["epsilon_k_selected_budget_direction"] == expected_direction
+    assert epsilon_summary.bound == pytest.approx(expected_budget)
+    assert evaluation.verdict_for("K").bound == pytest.approx(expected_budget)
 
 
 def test_modern_point_evaluation_rejects_xi_kk_mismatch_against_modern_bundle():

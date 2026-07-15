@@ -463,102 +463,6 @@ def default_modern_point_matching(
     return build_modern_point_matching(source, inputs=inputs, M_KK=M_KK, xi_KK=xi_KK)
 
 
-def matching_to_deltaf2_summary(
-    matching: ModernPointMatching,
-    *,
-    inputs: ModernDefaultInputs | None = None,
-) -> Any:
-    """Project raw modern matching data into the current exclusion surrogate."""
-
-    bundle = default_modern_default_inputs() if inputs is None else inputs
-    if not isinstance(bundle, ModernDefaultInputs):
-        raise TypeError("inputs must be a ModernDefaultInputs instance")
-    weights = bundle.operator_weight_policy
-    input_by_system = {
-        _system_id_for_input_id(system_input.system_id): system_input
-        for system_input in bundle.neutral_meson_inputs
-    }
-    from ..deltaf2 import (
-        DeltaF2ConstraintSummary,
-        DeltaF2Input,
-        DeltaF2ObservableSummary,
-        DeltaF2WilsonCoefficients,
-    )
-
-    observables: list[DeltaF2ObservableSummary] = []
-    for system in matching.system_matches:
-        system_input = input_by_system[system.system_id]
-        deltaf2_input = DeltaF2Input(
-            key=system.backend_key,
-            display_name=system.display_name,
-            column_name=system_input.column_name,
-            reject_reason=system_input.reject_reason,
-            sector=system.sector_id,
-            generations=system.generations,
-            bound=system_input.bound,
-            ll_weight=weights.ll_weight,
-            rr_weight=weights.rr_weight,
-            lr1_weight=weights.lr1_weight,
-            lr2_weight=weights.lr2_weight,
-            reference_scale=weights.reference_scale_GeV,
-            note=system.note,
-        )
-        wilsons = DeltaF2WilsonCoefficients(
-            input=deltaf2_input,
-            M_KK=matching.M_KK,
-            matching_scale=system.matching_scale_GeV,
-            left_coupling=system.left_coupling,
-            right_coupling=system.right_coupling,
-            c1_vll=system.c1_vll,
-            c1_vrr=system.c1_vrr,
-            c4_lr=system.c4_lr,
-            c5_lr=system.c5_lr,
-            lambda_ir_gev=float(matching.Lambda_IR),
-            m_kk_physical_gev=float(matching.M_KK),
-            g_eff=float(matching.g_s),
-            coupling_policy_id=bundle.qcd_metadata.coupling_policy_id,
-            operator_convention_id=bundle.operator_weight_policy.operator_convention_id,
-        )
-        weighted = {
-            "C1_VLL": weights.ll_weight * system.c1_vll,
-            "C1_VRR": weights.rr_weight * system.c1_vrr,
-            "C4_LR": weights.lr1_weight * system.c4_lr,
-            "C5_LR": weights.lr2_weight * system.c5_lr,
-        }
-        operator_sizes = {
-            name: float(weights.reference_scale_GeV**2 * abs(value))
-            for name, value in weighted.items()
-        }
-        dominant_operator = max(operator_sizes, key=operator_sizes.get)
-        coherent_amplitude = float(weights.reference_scale_GeV**2 * abs(sum(weighted.values())))
-        effective_amplitude = float(operator_sizes[dominant_operator])
-        ratio_to_bound = float(effective_amplitude / system_input.bound)
-        observables.append(
-            DeltaF2ObservableSummary(
-                input=deltaf2_input,
-                wilsons=wilsons,
-                effective_amplitude=effective_amplitude,
-                coherent_amplitude=coherent_amplitude,
-                ratio_to_bound=ratio_to_bound,
-                passes=ratio_to_bound <= 1.0,
-                dominant_operator=dominant_operator,
-                dominant_operator_size=operator_sizes[dominant_operator],
-                weighted_operator_sizes=operator_sizes,
-            )
-        )
-    return DeltaF2ConstraintSummary(
-        model_label=matching.operator_basis_id,
-        input_bundle_label=bundle.bundle_id,
-        M_KK=matching.M_KK,
-        xi_KK=matching.xi_KK,
-        observables=tuple(observables),
-        lambda_ir_gev=float(matching.Lambda_IR),
-        m_kk_physical_gev=float(matching.M_KK),
-        coupling_policy_id=bundle.qcd_metadata.coupling_policy_id,
-        g_eff=float(matching.g_s),
-    )
-
-
 __all__ = [
     "MODERN_MATCHING_SYSTEM_IDS",
     "MODERN_MATCHING_SYSTEM_SCHEMA_ID",
@@ -570,7 +474,10 @@ __all__ = [
     "ModernSystemMatching",
     "build_modern_point_matching",
     "default_modern_point_matching",
-    "matching_to_deltaf2_summary",
 ]
 
 ModernPointMatchingSystem = ModernSystemMatching
+
+# Removed in M-25: the old matching_to_deltaf2_summary projection had no
+# callers and divided dimensionless operator surrogates by dimensionful
+# hadronic GeV budgets.

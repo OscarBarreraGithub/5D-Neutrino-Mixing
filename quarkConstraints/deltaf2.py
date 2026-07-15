@@ -328,6 +328,7 @@ class DeltaF2ObservableSummary:
     dominant_operator: str
     dominant_operator_size: float
     weighted_operator_sizes: Mapping[str, float]
+    bound_override: float | None = None
     budget_policy_id: str | None = None
     confidence_level: str | None = None
     diagnostics: Mapping[str, Any] = field(default_factory=dict)
@@ -354,6 +355,8 @@ class DeltaF2ObservableSummary:
 
     @property
     def bound(self) -> float:
+        if self.bound_override is not None:
+            return float(self.bound_override)
         return self.input.bound
 
 
@@ -602,6 +605,7 @@ class _HadronicEvaluation:
     operator_sizes: Mapping[str, float]
     dominant_operator: str
     dominant_size: float
+    bound: float | None = None
     budget_policy_id: str | None = None
     confidence_level: str | None = None
     diagnostics: Mapping[str, Any] = field(default_factory=dict)
@@ -676,6 +680,7 @@ def _hadronic_eval_for_system(
             operator_sizes=operator_sizes,
             dominant_operator=dominant_operator,
             dominant_size=dominant_size,
+            bound=float(eps_result.epsilon_k_np_budget),
             budget_policy_id=eps_result.budget_policy_id,
             confidence_level=eps_result.confidence_level,
             diagnostics=diagnostics,
@@ -707,6 +712,7 @@ def _hadronic_eval_for_system(
             operator_sizes=operator_sizes,
             dominant_operator=dominant_operator,
             dominant_size=dominant_size,
+            bound=float(result.budget),
             budget_policy_id=result.budget_policy_id,
             confidence_level=result.confidence_level,
             diagnostics=diagnostics,
@@ -738,6 +744,7 @@ def _hadronic_eval_for_system(
             operator_sizes=operator_sizes,
             dominant_operator=dominant_operator,
             dominant_size=dominant_size,
+            bound=float(result.budget),
             budget_policy_id=result.budget_policy_id,
             confidence_level=result.confidence_level,
             diagnostics=diagnostics,
@@ -769,6 +776,7 @@ def _hadronic_eval_for_system(
             operator_sizes=operator_sizes,
             dominant_operator=dominant_operator,
             dominant_size=dominant_size,
+            bound=float(result.budget),
             budget_policy_id=result.budget_policy_id,
             confidence_level=result.confidence_level,
             diagnostics=diagnostics,
@@ -865,6 +873,7 @@ def evaluate_delta_f2_constraints(
             budget_policy_id = hadronic_result.budget_policy_id
             confidence_level = hadronic_result.confidence_level
             diagnostics = hadronic_result.diagnostics
+            bound_override = hadronic_result.bound
         else:
             # Fallback: old operator-weight surrogate with legacy bounds
             weighted = {
@@ -888,6 +897,7 @@ def evaluate_delta_f2_constraints(
             budget_policy_id = None
             confidence_level = None
             diagnostics = {}
+            bound_override = None
 
         observables.append(
             DeltaF2ObservableSummary(
@@ -900,6 +910,7 @@ def evaluate_delta_f2_constraints(
                 dominant_operator=dominant_operator,
                 dominant_operator_size=dominant_size,
                 weighted_operator_sizes=operator_sizes,
+                bound_override=bound_override,
                 budget_policy_id=budget_policy_id,
                 confidence_level=confidence_level,
                 diagnostics=diagnostics,

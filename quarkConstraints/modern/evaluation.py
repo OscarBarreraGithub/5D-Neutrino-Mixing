@@ -235,28 +235,13 @@ def _deltaf2_summary_from_matching(
             budget_policy_id = hadronic_result.budget_policy_id
             confidence_level = hadronic_result.confidence_level
             diagnostics = hadronic_result.diagnostics
+            bound_override = hadronic_result.bound
         else:
-            # Fallback: old operator-weight surrogate
-            weighted = {
-                "C1_VLL": item.ll_weight * wilsons.c1_vll,
-                "C1_VRR": item.rr_weight * wilsons.c1_vrr,
-                "C4_LR": item.lr1_weight * wilsons.c4_lr,
-                "C5_LR": item.lr2_weight * wilsons.c5_lr,
-            }
-            operator_sizes = {
-                name: float(item.reference_scale**2 * abs(value))
-                for name, value in weighted.items()
-            }
-            dominant_operator = max(operator_sizes, key=operator_sizes.get)
-            coherent_amplitude = float(
-                item.reference_scale**2 * abs(sum(weighted.values()))
+            raise RuntimeError(
+                "modern point evaluation no longer supports the old operator-weight "
+                "surrogate fallback: its dimensionless amplitudes are incompatible "
+                "with the hadronic GeV budgets in the modern input bundle"
             )
-            effective_amplitude = float(operator_sizes[dominant_operator])
-            dominant_size = effective_amplitude
-            ratio_to_bound = float(effective_amplitude / item.bound)
-            budget_policy_id = None
-            confidence_level = None
-            diagnostics = {}
 
         observables.append(
             DeltaF2ObservableSummary(
@@ -269,6 +254,7 @@ def _deltaf2_summary_from_matching(
                 dominant_operator=dominant_operator,
                 dominant_operator_size=dominant_size,
                 weighted_operator_sizes=operator_sizes,
+                bound_override=bound_override,
                 budget_policy_id=budget_policy_id,
                 confidence_level=confidence_level,
                 diagnostics=diagnostics,

@@ -159,7 +159,8 @@ const rMath = '\\(r\\)';
   </section>
 
   <p class="explore-notes">
-    Floor threshold: first grid point where the median veto fraction is &lt;= {meta.floor_threshold}.
+    Floor threshold: first grid point where the default joint veto fraction is &lt;= {meta.floor_threshold}
+    when joint data is present; custom subsets and stale artifacts use per-constraint curves.
     {mkkMath} convention: {meta.mkk_convention}.
     Each scan cell uses {meta.n_draws_per_cell.toLocaleString()} draws.
   </p>
@@ -202,8 +203,12 @@ const rMath = '\\(r\\)';
       var highlightedConstraintId = null;
       var showAllConstraintTraces = true;
       var boxes = Array.prototype.slice.call(document.querySelectorAll('.constraint-toggle'));
+      var defaultActive = new Set();
       boxes.forEach(function (box) {
-        if (box.checked) active.add(box.value);
+        if (box.checked) {
+          active.add(box.value);
+          defaultActive.add(box.value);
+        }
       });
 
       function formatR(value) {
@@ -228,10 +233,7 @@ const rMath = '\\(r\\)';
         return floors[key] || floors[String(Number(r))] || Y_MIN;
       }
 
-      function floorForConstraint(currentModel, r, constraintId) {
-        var key = rKey(currentModel, r);
-        var row = data.veto && data.veto[currentModel] && data.veto[currentModel][key];
-        var vetoes = row && row[constraintId];
+      function floorFromVetoes(vetoes) {
         if (!Array.isArray(vetoes)) return null;
         for (var i = 0; i < mkkGrid.length; i++) {
           if (Number(vetoes[i]) <= threshold) return Number(mkkGrid[i]);
@@ -239,8 +241,38 @@ const rMath = '\\(r\\)';
         return null;
       }
 
+      function floorForConstraint(currentModel, r, constraintId) {
+        var key = rKey(currentModel, r);
+        var row = data.veto && data.veto[currentModel] && data.veto[currentModel][key];
+        return floorFromVetoes(row && row[constraintId]);
+      }
+
+      function jointVetoesForR(currentModel, r) {
+        var key = rKey(currentModel, r);
+        var row = data.joint_veto && data.joint_veto[currentModel];
+        return row && row[key];
+      }
+
+      function jointFloorForR(currentModel, r) {
+        return floorFromVetoes(jointVetoesForR(currentModel, r));
+      }
+
+      function isDefaultActiveSet() {
+        if (active.size !== defaultActive.size) return false;
+        var ok = true;
+        defaultActive.forEach(function (constraintId) {
+          if (!active.has(constraintId)) ok = false;
+        });
+        return ok;
+      }
+
       function envelopeForR(currentModel, r) {
         var floor = bareFloor(currentModel, r);
+        if (active.size > 0 && isDefaultActiveSet() && Array.isArray(jointVetoesForR(currentModel, r))) {
+          var jointFloor = jointFloorForR(currentModel, r);
+          if (jointFloor === null) return { capped: true, value: null };
+          return { capped: false, value: Math.max(floor, jointFloor) };
+        }
         var capped = false;
         active.forEach(function (constraintId) {
           var constraintFloor = floorForConstraint(currentModel, r, constraintId);
@@ -526,7 +558,12 @@ const rMath = '\\(r\\)';
         var min = finite.length ? Math.min.apply(null, finite) : null;
         var max = hasCap ? '>50' : formatTev(Math.max.apply(null, finite));
         var span = min === null ? '>50 TeV' : formatTev(min) + '-' + max + ' TeV';
-        caption.textContent = 'With ' + active.size + ' active constraints in ' + model + ', the envelope spans ' + span + ' across the r grid.';
+        var mode = (
+          isDefaultActiveSet() && rGrid.some(function (r) {
+            return Array.isArray(jointVetoesForR(model, r));
+          })
+        ) ? 'joint-veto' : 'per-constraint lower-bound';
+        caption.textContent = 'With ' + active.size + ' active constraints in ' + model + ', the ' + mode + ' envelope spans ' + span + ' across the r grid.';
       }
 
       function getYukawa(currentModel, r, mkk) {

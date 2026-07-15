@@ -1,6 +1,20 @@
 #!/usr/bin/env python3
 """Numerical audit for repo-v1 Delta F=2 Wilson running.
 
+HONESTY BANNER: this script is a SELF-CONSISTENCY / linear-algebra check, not
+physics validation against external paper targets. Its "independent LO
+textbook" path shares the codebase alpha_s routine and the same LO anomalous
+dimension block, so it verifies propagation algebra and basis bookkeeping only.
+A true validation requires external Buras/UTfit/literature reference numbers
+with a pass/fail tolerance, which are not embedded here. Treat this as a
+diagnostic for the quarantined Lane C / Delta-F=2 stack, not production
+validation; see `docs/audits/full_repo_audit_2026-07/FIX_LEDGER.md`.
+
+Related reporting caveat: the Perez-Randall "O(3-4)x tension" conclusion is
+convention-dependent; it shrinks to about 1.8x under plausible (seesaw
+prefactor, v) choices and should not be treated as a robust physics-validation
+failure.
+
 The script compares the public in-code evolution with an independent LO
 textbook calculation in the scalar LR basis used by ``deltaf2.py``:
 

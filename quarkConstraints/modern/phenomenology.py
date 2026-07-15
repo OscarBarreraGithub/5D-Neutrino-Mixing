@@ -435,6 +435,21 @@ _KAON_B_5 = 0.691
 _KAON_KAPPA_EPSILON = 0.94
 _KAON_EPSILON_K_EXP = 2.228e-3
 _KAON_EPSILON_K_SM = 2.161e-3
+_KAON_EPSILON_K_SIGMA_BGS = 0.18e-3
+_KAON_EPSILON_K_SIGMA_EXP = 0.011e-3
+_KAON_EPSILON_K_BUDGET_POLICY_ID = "epsilon_k_bgs2020_pdg2024_bgs_exp_one_sigma_v1"
+_KAON_EPSILON_K_PRIMARY_COMBINED_SIGMA = math.hypot(
+    _KAON_EPSILON_K_SIGMA_BGS,
+    _KAON_EPSILON_K_SIGMA_EXP,
+)
+_KAON_EPSILON_K_BUDGET_LOWERS = abs(
+    (_KAON_EPSILON_K_EXP - _KAON_EPSILON_K_SM)
+    - _KAON_EPSILON_K_PRIMARY_COMBINED_SIGMA
+)
+_KAON_EPSILON_K_BUDGET_RAISES = abs(
+    (_KAON_EPSILON_K_EXP - _KAON_EPSILON_K_SM)
+    + _KAON_EPSILON_K_PRIMARY_COMBINED_SIGMA
+)
 
 
 def _kaon_m12_np_from_bridge_match(
@@ -465,13 +480,20 @@ def _kaon_m12_np_from_bridge_match(
 
 def _evaluate_epsilon_k_from_bridge(
     system_match: Mapping[str, Any],
-) -> tuple[float, dict[str, float], str, float]:
-    """Evaluate epsilon_K^NP from bridge match and return (ratio_to_budget, operator_sizes, dominant, dominant_size)."""
+) -> tuple[float, dict[str, float], str, float, float, str]:
+    """Evaluate epsilon_K^NP and return the selected signed policy budget too."""
     m12_np = _kaon_m12_np_from_bridge_match(system_match)
-    im_m12_np = m12_np.imag
-    epsilon_k_np = abs(_KAON_KAPPA_EPSILON / (math.sqrt(2.0) * _KAON_DELTA_M_K) * im_m12_np)
-    budget = abs(_KAON_EPSILON_K_EXP - _KAON_EPSILON_K_SM)
-    ratio = epsilon_k_np / budget if budget > 0.0 else float("inf")
+    im_m12_np = float(m12_np.imag)
+    epsilon_k_np_signed = float(
+        _KAON_KAPPA_EPSILON / (math.sqrt(2.0) * _KAON_DELTA_M_K) * im_m12_np
+    )
+    budget = (
+        _KAON_EPSILON_K_BUDGET_RAISES
+        if epsilon_k_np_signed >= 0.0
+        else _KAON_EPSILON_K_BUDGET_LOWERS
+    )
+    budget_direction = "raises_epsilon_k" if epsilon_k_np_signed >= 0.0 else "lowers_epsilon_k"
+    ratio = abs(epsilon_k_np_signed) / budget if budget > 0.0 else float("inf")
 
     # Provide per-operator breakdown using imaginary parts
     c1_vll = _complex_from_payload("system_match.c1_vll", system_match["c1_vll"])
@@ -497,7 +519,7 @@ def _evaluate_epsilon_k_from_bridge(
     dominant_operator = max(operator_sizes, key=operator_sizes.get)
     dominant_size = float(operator_sizes[dominant_operator])
 
-    return ratio, operator_sizes, dominant_operator, dominant_size
+    return ratio, operator_sizes, dominant_operator, dominant_size, float(budget), budget_direction
 
 
 def _evaluate_delta_mk_from_bridge(
@@ -1371,18 +1393,28 @@ class ModernPointPhenomenologyArtifactV1:
 
             if system_id == "epsilon_K":
                 # CP-violating epsilon_K uses proper hadronic matrix elements
-                ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
+                (
+                    ratio_to_bound,
+                    operator_sizes,
+                    dominant_operator,
+                    dominant_size,
+                    result_bound,
+                    budget_direction,
+                ) = (
                     _evaluate_epsilon_k_from_bridge(evolved_match)
                 )
                 note = (
                     f"{input_item.note} Evaluated with proper hadronic matrix elements "
-                    "for CP-violating kaon mixing (QCD-evolved). Included in acceptance."
+                    "for CP-violating kaon mixing (QCD-evolved). Included in acceptance. "
+                    f"epsilon_K budget policy {_KAON_EPSILON_K_BUDGET_POLICY_ID}, "
+                    f"selected direction {budget_direction}."
                 )
             elif system_id == "K":
                 # Non-CP Delta m_K uses proper hadronic matrix elements
                 ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
                     _evaluate_delta_mk_from_bridge(evolved_match)
                 )
+                result_bound = float(input_item.bound)
                 note = (
                     f"{input_item.note} Evaluated with proper hadronic matrix elements "
                     "for non-CP kaon mass difference (QCD-evolved). Included in acceptance."
@@ -1391,6 +1423,7 @@ class ModernPointPhenomenologyArtifactV1:
                 ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
                     _evaluate_bd_mixing_from_bridge(evolved_match)
                 )
+                result_bound = float(input_item.bound)
                 note = (
                     f"{input_item.note} Evaluated with proper hadronic matrix elements "
                     "for B_d mixing (QCD-evolved). Included in acceptance."
@@ -1399,6 +1432,7 @@ class ModernPointPhenomenologyArtifactV1:
                 ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
                     _evaluate_bs_mixing_from_bridge(evolved_match)
                 )
+                result_bound = float(input_item.bound)
                 note = (
                     f"{input_item.note} Evaluated with proper hadronic matrix elements "
                     "for B_s mixing (QCD-evolved). Included in acceptance."
@@ -1407,6 +1441,7 @@ class ModernPointPhenomenologyArtifactV1:
                 ratio_to_bound, operator_sizes, dominant_operator, dominant_size = (
                     _evaluate_d0_mixing_from_bridge(evolved_match)
                 )
+                result_bound = float(input_item.bound)
                 note = (
                     f"{input_item.note} Evaluated with proper hadronic matrix elements "
                     "for D0 mixing (QCD-evolved). Included in acceptance."
@@ -1421,6 +1456,7 @@ class ModernPointPhenomenologyArtifactV1:
                     reference_scale=weights.reference_scale_GeV,
                 )
                 ratio_to_bound = float(dominant_size / input_item.bound)
+                result_bound = float(input_item.bound)
                 note = f"{input_item.note} Included in acceptance (QCD-evolved)."
 
             results.append(
@@ -1441,7 +1477,7 @@ class ModernPointPhenomenologyArtifactV1:
                     ),
                     passes=ratio_to_bound <= 1.0,
                     ratio_to_bound=ratio_to_bound,
-                    bound=float(input_item.bound),
+                    bound=result_bound,
                     dominant_operator=dominant_operator,
                     dominant_operator_size=dominant_size,
                     weighted_operator_sizes=operator_sizes,

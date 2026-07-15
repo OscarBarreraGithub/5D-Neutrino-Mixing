@@ -188,6 +188,17 @@ def _empty_veto_tree() -> dict[str, dict[str, dict[str, list[float]]]]:
     return {model: {_r_key(r): {} for r in R_GRID} for model in MODEL_ROOTS}
 
 
+def _is_strict_vetoing_result(result: dict[str, Any]) -> bool:
+    tag = str(result.get("tag") or "unknown")
+    return (
+        bool(result.get("active"))
+        and bool(result.get("evaluated"))
+        and str(result.get("severity")) == "HARD"
+        and result.get("passes") is False
+        and tag in ("rigorous", "proxy")
+    )
+
+
 def _compact_rep_row(row: dict[str, Any]) -> dict[str, Any]:
     params = row["params"]
     return {
@@ -251,6 +262,7 @@ def _stream_scan_roots() -> tuple[
     dict[tuple[str, str, int], int],
     dict[tuple[str, str, int], int],
     dict[tuple[str, str, int], Counter[str]],
+    dict[tuple[str, str, int], int],
     dict[tuple[str, str, int], SingularCell],
     dict[str, Counter[str]],
     dict[tuple[str, float], RepCandidate],
@@ -259,6 +271,7 @@ def _stream_scan_roots() -> tuple[
     raw_counts: dict[tuple[str, str, int], int] = defaultdict(int)
     evaluated_counts: dict[tuple[str, str, int], int] = defaultdict(int)
     veto_counts: dict[tuple[str, str, int], Counter[str]] = defaultdict(Counter)
+    joint_veto_counts: dict[tuple[str, str, int], int] = defaultdict(int)
     singular_cells: dict[tuple[str, str, int], SingularCell] = defaultdict(SingularCell)
     tag_counts: dict[str, Counter[str]] = defaultdict(Counter)
     rep_candidates: dict[tuple[str, float], RepCandidate] = {}
@@ -297,6 +310,7 @@ def _stream_scan_roots() -> tuple[
                         singular_cells[key].append(up_singular, down_singular)
 
                     constraints = row.get("constraints") or {}
+                    row_joint_vetoed = False
                     for cid, result in constraints.items():
                         tag = str(result.get("tag") or "unknown")
                         tag_counts[cid][tag] += 1
@@ -305,14 +319,11 @@ def _stream_scan_roots() -> tuple[
                         # proxy}); a partial/stub HARD failure never vetoes
                         # strict OR inclusive floors, so it must not appear in
                         # the explorer's veto fractions either (slice-5 F7).
-                        if (
-                            bool(result.get("active"))
-                            and bool(result.get("evaluated"))
-                            and str(result.get("severity")) == "HARD"
-                            and result.get("passes") is False
-                            and tag in ("rigorous", "proxy")
-                        ):
+                        if _is_strict_vetoing_result(result):
                             veto_counts[key][cid] += 1
+                            row_joint_vetoed = True
+                    if row_joint_vetoed:
+                        joint_veto_counts[key] += 1
 
                     _maybe_take_rep(
                         rep_candidates,
@@ -341,6 +352,7 @@ def _stream_scan_roots() -> tuple[
         raw_counts,
         evaluated_counts,
         veto_counts,
+        joint_veto_counts,
         singular_cells,
         tag_counts,
         rep_candidates,
@@ -354,7 +366,7 @@ def _build_constraints(
     veto_counts: dict[tuple[str, str, int], Counter[str]],
     tag_counts: dict[str, Counter[str]],
 ) -> list[dict[str, Any]]:
-    biting_ids: set[str] = set()
+    contributing_ids: set[str] = set()
     for cid in tag_counts:
         for model in MODEL_ROOTS:
             for r_value in R_GRID:
@@ -364,17 +376,16 @@ def _build_constraints(
                     denom = evaluated_counts.get(key, 0)
                     if denom <= 0:
                         continue
-                    fraction = veto_counts.get(key, Counter()).get(cid, 0) / denom
-                    if fraction > FLOOR_THRESHOLD:
-                        biting_ids.add(cid)
+                    if veto_counts.get(key, Counter()).get(cid, 0) > 0:
+                        contributing_ids.add(cid)
                         break
-                if cid in biting_ids:
+                if cid in contributing_ids:
                     break
-            if cid in biting_ids:
+            if cid in contributing_ids:
                 break
 
     constraints = []
-    for cid in sorted(biting_ids):
+    for cid in sorted(contributing_ids):
         entry = _load_entry(cid)
         constraints.append(
             {
@@ -389,6 +400,27 @@ def _build_constraints(
     group_order = {"electroweak": 0, "meson_mixing": 1, "collider": 2, "edm": 3, "other": 4}
     constraints.sort(key=lambda item: (group_order.get(item["group"], 9), item["id"]))
     return constraints
+
+
+def _build_joint_veto_tree(
+    *,
+    evaluated_counts: dict[tuple[str, str, int], int],
+    joint_veto_counts: dict[tuple[str, str, int], int],
+) -> dict[str, dict[str, list[float]]]:
+    joint_veto: dict[str, dict[str, list[float]]] = {
+        model: {_r_key(r): [] for r in R_GRID} for model in MODEL_ROOTS
+    }
+    for model in MODEL_ROOTS:
+        for r_value in R_GRID:
+            r_key = _r_key(r_value)
+            values = []
+            for mkk_tev in MKK_GRID_TEV:
+                key = (model, r_key, mkk_tev)
+                denom = evaluated_counts.get(key, 0)
+                fraction = 0.0 if denom <= 0 else joint_veto_counts.get(key, 0) / denom
+                values.append(_round_fixed(fraction, digits=6))
+            joint_veto[model][r_key] = values
+    return joint_veto
 
 
 def _build_veto_tree(
@@ -634,6 +666,7 @@ def build() -> dict[str, Any]:
         raw_counts,
         evaluated_counts,
         veto_counts,
+        joint_veto_counts,
         singular_cells,
         tag_counts,
         rep_candidates,
@@ -650,6 +683,10 @@ def build() -> dict[str, Any]:
         evaluated_counts=evaluated_counts,
         veto_counts=veto_counts,
     )
+    joint_veto = _build_joint_veto_tree(
+        evaluated_counts=evaluated_counts,
+        joint_veto_counts=joint_veto_counts,
+    )
     yukawa = _build_yukawa_tree(singular_cells)
     rep_matrices, residuals = _reconstruct_rep_matrices(rep_candidates)
 
@@ -662,11 +699,17 @@ def build() -> dict[str, Any]:
             "minimal_root": str(MINIMAL_ROOT.relative_to(REPO_ROOT)),
             "custodial_root": str(CUSTODIAL_ROOT.relative_to(REPO_ROOT)),
             "floor_threshold": FLOOR_THRESHOLD,
+            "envelope_floor_policy": (
+                "default_all_constraints_uses_true_joint_veto_fraction_any_active_"
+                "hard_rigorous_proxy_failure; custom browser subsets use stored "
+                "per-constraint curves as an optimistic lower-bound proxy"
+            ),
             "mkk_convention": "physical first KK mass m1 = 2.45 * Lambda_IR",
             "n_draws_per_cell": n_draws_per_cell,
             "generated_from_git": _git_sha(),
         },
         "constraints": constraints,
+        "joint_veto": joint_veto,
         "veto": veto,
         "bare_floor_tev": _build_bare_floor(evaluated_counts),
         "yukawa": yukawa,

@@ -1,6 +1,20 @@
 #!/usr/bin/env python3
 """Contract-first acceptance benchmark for the paper_0710_1869 path.
 
+HONESTY BANNER: this script is a SELF-CONSISTENCY / artifact-contract check
+for the quarantined Lane C implementation. It is not physics validation
+against arXiv 0710.1869 paper target numbers: no independent paper target
+numbers are embedded here, and PASS means the package artifacts, schema IDs,
+hashes, import fences, and the package's own verifier agree with themselves.
+A true validation requires external reference numbers from the paper/literature
+and remains pending while Lane C is quarantined as non-production
+(`docs/audits/full_repo_audit_2026-07/FIX_LEDGER.md`).
+
+Related reporting caveat: the Perez-Randall "O(3-4)x tension" conclusion is
+convention-dependent; it shrinks to about 1.8x under plausible (seesaw
+prefactor, v) choices and should not be treated as a robust physics-validation
+failure.
+
 The script imports the paper package through the real
 ``quarkConstraints.paper_0710_1869`` path, checks for repo-v1 leakage, and
 builds a deterministic structural summary from the paper-only modules.

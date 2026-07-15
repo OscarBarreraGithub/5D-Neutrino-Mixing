@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 
 from qcd.constants import M_TOP_MS
@@ -78,6 +79,16 @@ MODERN_DEFAULT_PROVENANCE_RECORD_IDS = (
     "quarkConstraints.modern.inputs.modern_default.source.deltaf2_inputs.v1",
     "quarkConstraints.modern.inputs.modern_default.source.scale_conventions.v1",
     "quarkConstraints.modern.inputs.modern_default.source.alpha_s_reference.v1",
+)
+MODERN_DEFAULT_EPSILON_K_EXP = 2.228e-3
+MODERN_DEFAULT_EPSILON_K_SM = 2.161e-3
+MODERN_DEFAULT_EPSILON_K_SIGMA_BGS = 0.18e-3
+MODERN_DEFAULT_EPSILON_K_SIGMA_EXP = 0.011e-3
+# Mirrors delta_f2_epsilon_k_budget_policy().budget_raises_epsilon_k without
+# importing quarkConstraints.deltaf2, which the modern input registry forbids.
+MODERN_DEFAULT_EPSILON_K_BOUND_RAISES = abs(
+    (MODERN_DEFAULT_EPSILON_K_EXP - MODERN_DEFAULT_EPSILON_K_SM)
+    + math.hypot(MODERN_DEFAULT_EPSILON_K_SIGMA_BGS, MODERN_DEFAULT_EPSILON_K_SIGMA_EXP)
 )
 
 
@@ -963,8 +974,13 @@ def default_modern_default_neutral_meson_inputs() -> tuple[ModernDefaultNeutralM
             reject_reason="epsilon_k",
             sector_id="down",
             generations=(0, 1),
-            bound=4.18e-4,
-            note="Kaon CP violation evaluated with proper hadronic matrix elements (BMU basis).",
+            bound=MODERN_DEFAULT_EPSILON_K_BOUND_RAISES,
+            note=(
+                "Kaon CP violation evaluated with proper hadronic matrix elements "
+                "(BMU basis). Static bundle bound is the shared epsilon_K policy's "
+                "raises-epsilon band edge; evaluated artifacts report the selected "
+                "signed edge for each point."
+            ),
         ),
         ModernDefaultNeutralMesonInput(
             system_id="K",

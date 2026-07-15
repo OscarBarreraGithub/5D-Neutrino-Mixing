@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 """Audit the internal consistency of the displayed Perez–Randall benchmark.
 
+HONESTY BANNER: this is a convention-sensitive consistency diagnostic, not a
+paper-target validation. The displayed O(3-4)x tension is not robust: it
+shrinks to about 1.8x under plausible (seesaw prefactor, v) choices and can be
+closed within the assumed M_N variation. Do not quote it as a physics
+validation failure while Lane C remains quarantined.
+
 This script checks whether the numbers shown in arXiv:0805.4652 Eq. (10) can
 reproduce the example neutrino spectrum in Eq. (7) when combined with Eq. (6)
 and the quoted overlap data in Eq. (11) / Table I.
@@ -94,7 +100,9 @@ def main() -> int:
     print("Conclusion:")
     print("  Under paper-like geometry choices, the displayed Eq. (10) neutrino Yukawas")
     print("  do not reproduce the example spectrum in Eq. (7).")
-    print("  The discrepancy is O(3-4) in kY_N, not an O(1) convention drift.")
+    print("  This is convention-dependent, not a robust validation failure:")
+    print("  the tension shrinks to about 1.8x under plausible (prefactor, v) choices")
+    print("  and can close within the assumed M_N variation.")
     return 0
 
 

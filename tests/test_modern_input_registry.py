@@ -37,6 +37,7 @@ from quarkConstraints.modern.conventions import (
 from quarkConstraints.modern.inputs import (
     MODERN_DEFAULT_ALPHA_S_POLICY_ID,
     MODERN_DEFAULT_COUPLING_POLICY_ID,
+    MODERN_DEFAULT_EPSILON_K_BOUND_RAISES,
     MODERN_DEFAULT_INPUTS_SCHEMA_ID,
     MODERN_DEFAULT_MASS_TARGET_SCALE_GEV,
     MODERN_DEFAULT_NEUTRAL_MESON_SYSTEM_IDS,
@@ -200,6 +201,15 @@ def test_modern_registry_separates_strict_paper_and_modern_default_bundle_famili
     assert len(resolved) == 2
     assert strict.validate_resolved_paper_inputs(resolved) == resolved
     assert modern_default.neutral_meson_inputs[0].system_id == "epsilon_K"
+    from quarkConstraints.deltaf2 import delta_f2_epsilon_k_budget_policy
+
+    epsilon_policy = delta_f2_epsilon_k_budget_policy()
+    assert MODERN_DEFAULT_EPSILON_K_BOUND_RAISES == pytest.approx(
+        epsilon_policy.budget_raises_epsilon_k
+    )
+    assert modern_default.neutral_meson_inputs[0].bound == pytest.approx(
+        epsilon_policy.budget_raises_epsilon_k
+    )
     assert modern_default.neutral_meson_inputs[-1].system_id == "D0"
     assert modern_default.operator_weight_policy.policy_id == (
         modern_default.neutral_meson_inputs[0].weight_policy_id

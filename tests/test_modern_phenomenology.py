@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 from quarkConstraints.benchmarks import evaluate_default_benchmark
+from quarkConstraints.deltaf2 import delta_f2_epsilon_k_budget_policy
 from quarkConstraints.modern.conventions import MODERN_INPUT_REGISTRY_SCHEMA_ID, MODERN_LANE_ID
 from quarkConstraints.modern.phenomenology import (
     MODERN_PHENOMENOLOGY_POLICY_ID,
@@ -165,6 +166,11 @@ def test_modern_point_phenomenology_sidecar_separates_epsilon_k_from_blocked_k(t
     assert epsilon_k.bridge_system_id == "K"
     assert epsilon_k.bridge_backend_key == "epsilon_k"
     assert epsilon_k.treatment_id == MODERN_POINT_PHENOMENOLOGY_SYSTEM_TREATMENT_IDS["epsilon_K"]
+    policy = delta_f2_epsilon_k_budget_policy()
+    assert epsilon_k.bound == pytest.approx(policy.budget_raises_epsilon_k)
+    assert epsilon_k.bound != pytest.approx(4.18e-4)
+    assert policy.policy_id in epsilon_k.note
+    assert "selected direction raises_epsilon_k" in epsilon_k.note
 
     kaon = loaded.system_result("K")
     assert kaon.evaluated_from_bridge is True

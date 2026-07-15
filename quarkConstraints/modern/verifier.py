@@ -1,4 +1,12 @@
-"""Artifact-only verification helpers for the modern quark lane."""
+"""Artifact-only verification helpers for the modern quark lane.
+
+HONESTY BANNER: these verifiers check schema and exported-field
+self-consistency only. They do not recompute Wilson matching, QCD running,
+hadronic matrix elements, or physics bounds from independent oracles; a green
+modern verifier result is not physics validation. Independent physics checks
+live in the Delta-F=2/GGMS and QCD-running oracle tests, for example
+``tests/test_epsilon_k_physics.py`` and ``tests/test_qcd_running.py``.
+"""
 
 from __future__ import annotations
 
@@ -355,7 +363,7 @@ def _verify_import_isolation(issues: list[VerificationIssue], report: ImportIsol
 
 
 def verify_artifact(artifact: ModernPointArtifactV1) -> ModernPointArtifactVerificationReport:
-    """Validate that one exported modern point artifact is self-consistent."""
+    """Validate exported-field self-consistency, not physics correctness."""
 
     contract = FrozenVerifierContract()
     import_isolation = _build_import_isolation_report()
@@ -922,7 +930,7 @@ def verify_bridge_artifact_path(path: str | Path) -> ModernPointBridgeArtifactVe
 def verify_phenomenology_artifact(
     artifact: ModernPointPhenomenologyArtifactV1,
 ) -> ModernPointPhenomenologyArtifactVerificationReport:
-    """Validate that one exported modern QS5 sidecar is self-consistent."""
+    """Validate QS5 sidecar self-consistency, not physics correctness."""
 
     contract = FrozenPhenomenologyVerifierContract()
     import_isolation = _build_import_isolation_report()
