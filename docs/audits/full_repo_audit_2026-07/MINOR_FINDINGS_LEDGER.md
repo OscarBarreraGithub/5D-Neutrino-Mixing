@@ -9,6 +9,11 @@ ESCALATE items (RESOLVED in escalation cycle, commit 422dc18, Claude audit APPRO
 - RD-01: "Z-prime proxy C9/C10 matching is off by x2 and sign." FIXED: corrected by -0.5 (1/2 chiral
   projector + tree-level exchange sign; WET/Buras-Girrbach) in rare_b_dilepton, rare_charm_dilepton,
   rs_semileptonic_wilsons. Symmetric LFU ratios unchanged; absolute NP shifts + interference move.
+  Downstream (found in the final full-suite run): K006 (K_L->mumu short distance) consumes
+  rs_semileptonic_wilsons, so RD-01's interference-direction flip makes unit coupling genuinely exceed the
+  bound (ratio 1.38); the K006 "safe point" test was moved 1.0 -> 0.3 (a real constraint tightening, not a
+  mask). A cluster of DeltaF=2 pins (B001/B002/B003, epsilon_k_ratio) also drifted <0.2% from the minors
+  alpha_s(M_Z) 0.1179 -> 0.1180 unification and were refreshed to the current evaluator values.
 - NMF-03: "T-series silently pass malformed coupling objects." RESOLVED: verified T010/11/12/14/15/16/17
   already fail-close on malformed z_delta_g_* via M-18 (_coupling_entry -> invalid_extra), executed NaN
   cases directly; added regression coverage. (Also fixed a related M-18 over-reach straggler where L-series
