@@ -184,3 +184,16 @@ HONEST: U(2)^5 protecting EDMs is EXPECTED in the flavor literature; the NEW con
 numerical demonstration that eps_K and the EDM are suppressed by the SAME U(2) and vanish
 together in the exact limit, in one calculable RS rank-one generator. Codex verify: job b3g47ocup.
 Codex explanation (folded): exact limit => APS spurion (YuYu+YdYd)Yd has REAL 1-1 diagonal (MFV-like); flavor-diagonal EDM needs a light-family-breaking spurion, supplied by the 3rd-family leak. Verified complex-Yd (not a real-Yd trick), d_n~7e-31 (far below bound), no artifact. Novelty: U(2)^3 dipole protection known (Barbieri 1203.4218); NEW = same U(2) kills C4^K AND APS EDM, both vanishing in exact limit, in an RS rank-one generator.
+
+## F7 — perturbation study: eps_K response as a linear-operator field on Yukawa space (2026-07-15)
+scripts/yukawa_perturbation_study.py + plot_perturbation_study.py; full writeup in
+PERTURBATION_STUDY.md; figs fig_perturb_{noise,gradient,pca}.png.
+- A (naive multiplicative noise Y_ij->Y_ij(1+sigma z_ij)): phase-tuned survivor breaks
+  at sub-percent (below 50% by sigma~5e-3, fails by 36x); Nelson-Barr NEVER breaks
+  (real noise preserves real Y_d); U(2) robust to 10-30%. Confirms PI's guess.
+- B (gradient g=grad Im C4, 18 real comps = local linear operator): tuning radius
+  delta_min=S_bound/|g|: flat_tuned 7.9e-4 (fragile), flat_typical 0.15, u2 0.024.
+- C (gradient field): CP-purity |g_im|^2/|g|^2 = symmetry fingerprint: anarchy ~0.5
+  (isotropic, isolated point), NB 1.000 (real half of Yukawa space EXACTLY flat; PCA
+  cliff -> machine zero past the 9 imaginary dirs), u2 0.87. The allowed submanifold =
+  kernel of the linear-response operator; its dim/orientation says which symmetry to gauge.

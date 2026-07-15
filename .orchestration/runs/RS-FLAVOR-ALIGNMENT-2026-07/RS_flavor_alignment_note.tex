@@ -236,6 +236,42 @@ $|I_d|\sim2\times10^{-6}$, i.e.\ $d_n\sim7\times10^{-31}\,e\,$cm, far below the
 $1.8\times10^{-26}$ bound) sit comfortably safe at $2$--$3\TeV$, with no fine-tuning:
 the $\epsK$ survivor is not an isolated point but the exact-$U(2)$ manifold.
 
+\section{Naturalness: the tuning radius and the shape of the allowed set}
+The distinction between a fine-tuned survivor and a symmetry-protected one is made
+quantitative by perturbing the Yukawas and watching $\epsK$ respond. Under naive
+multiplicative noise $Y_{ij}\to Y_{ij}(1+\sigma z_{ij})$, $z\sim N(0,1)$ per entry
+(Fig.~\ref{fig:noise}): the phase-aligned anarchic survivor breaks at
+\emph{sub-percent} noise (below half-surviving by $\sigma\simeq5\times10^{-3}$, failing
+by up to $36\times$ the bound), whereas the $U(2)$ ensemble tolerates $\sim$10--30\%
+and the real-$Y_d$ (Nelson-Barr) point \emph{never} breaks, since real noise preserves
+the reality of $Y_d$ and hence $\theta_K=0$ exactly.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.98\textwidth]{fig_perturb_noise.png}
+  \caption{Multiplicative-noise breakdown. Left: fraction still passing $\epsK$ vs
+  noise $\sigma$. Right: how badly it fails. The phase-tuned survivor is fragile at
+  $\sigma\lesssim10^{-2}$; Nelson-Barr is flat (real noise cannot break a real $Y_d$);
+  $U(2)$ is robust to tens of percent.}
+  \label{fig:noise}
+\end{figure}
+
+The response is a \emph{local linear operator}: the gradient
+$g(Y)=\nabla_{Y_d}\,\mathrm{Im}\,C_4$, a covector on the $18$-real-dimensional Yukawa
+tangent space. Its magnitude is the inverse tuning radius (the steepest-direction
+$\delta_{\rm crit}=S_{\rm bound}/|g|$ is $7.9\times10^{-4}$ for the phase-tuned point
+versus $O(10^{-1})$ for the magnitude-suppressed and $U(2)$ points), and its
+\emph{direction}, collected over an ensemble, fingerprints the protecting symmetry.
+Quantified by the CP-purity $|g_{\rm imag}|^2/|g|^2$ (the fraction of the sensitivity
+in CP-breaking directions): anarchy is isotropic ($\simeq0.5$, no protected
+directions, an isolated point), Nelson-Barr is exactly $1.000$ (the real half of
+Yukawa space is an exactly flat protected manifold; a principal-component analysis of
+the gradient field shows the variance collapse to machine zero beyond the $9$
+imaginary directions), and $U(2)$ is $0.87$ (mostly protected, the residual set by the
+third-family leak). So the ``submanifold of allowed Yukawas'' is precisely the kernel
+of the linear-response operator; its dimension and orientation say which symmetry to
+gauge.
+
 \section{Bottom line}
 The RS $\epsK$ problem has been read as a problem of one delicate phase in the
 off-diagonal down couplings. It is really a problem of \emph{three} independent CP
