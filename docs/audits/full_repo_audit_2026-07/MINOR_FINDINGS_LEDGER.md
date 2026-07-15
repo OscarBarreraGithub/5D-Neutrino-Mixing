@@ -4,10 +4,16 @@ Scope: every minor finding and note in `AUDIT_COMPENDIUM.md` section 4 and secti
 
 Status totals: FIXED 8, DOC 50, WONT-FIX 2, ALREADY-COVERED 0, ALREADY-CORRECT 1, ESCALATE 2.
 
-ESCALATE items needing their own fix cycle:
+ESCALATE items (RESOLVED in escalation cycle, commit 422dc18, Claude audit APPROVE):
 
-- RD-01: "Z-prime proxy C9/C10 matching is off by x2 and sign relative to standard weak-effective-theory conventions."
-- NMF-03: "T-series constraints silently pass malformed coupling objects while CR-series constraints fail closed."
+- RD-01: "Z-prime proxy C9/C10 matching is off by x2 and sign." FIXED: corrected by -0.5 (1/2 chiral
+  projector + tree-level exchange sign; WET/Buras-Girrbach) in rare_b_dilepton, rare_charm_dilepton,
+  rs_semileptonic_wilsons. Symmetric LFU ratios unchanged; absolute NP shifts + interference move.
+- NMF-03: "T-series silently pass malformed coupling objects." RESOLVED: verified T010/11/12/14/15/16/17
+  already fail-close on malformed z_delta_g_* via M-18 (_coupling_entry -> invalid_extra), executed NaN
+  cases directly; added regression coverage. (Also fixed a related M-18 over-reach straggler where L-series
+  legitimate unevaluated cases were wrongly fail-closed: L002/L004/L005/L007/L008/L010 now follow the L009
+  pattern; malformed still fails closed.)
 
 ## Section 4: Lepton Core, Report 01
 
