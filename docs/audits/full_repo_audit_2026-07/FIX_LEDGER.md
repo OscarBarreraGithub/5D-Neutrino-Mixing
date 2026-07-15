@@ -1,0 +1,139 @@
+# Audit Fix Ledger — full_repo_audit_2026-07
+
+Tracks disposition of **every** finding in [`AUDIT_COMPENDIUM.md`](AUDIT_COMPENDIUM.md).
+Process per code finding (per user directive): **Codex researches → Codex fixes → Claude audits**;
+serial (never parallel) to stay within session limits. A finding advances to `VERIFIED`
+only after a Claude audit subagent signs off on the Codex fix. Findings that require **no code
+change** (already-correct, revised-away, documentation-only, or deliberately-deferred) are marked
+with an explicit rationale — nothing is silently dropped.
+
+Disposition legend:
+- `PENDING` — not yet started
+- `IN-PROGRESS` — Codex researching/fixing or Claude auditing
+- `FIXED` — Codex fix applied, awaiting Claude audit
+- `VERIFIED` — Claude audit signed off
+- `DOC-ONLY` — resolved by documentation/banner change, no physics-code change
+- `WONT-FIX` — deliberately not changed; rationale recorded
+- `ALREADY-CORRECT` — audit re-checked; code was right (revision in §8.3 or on re-verification)
+
+Column `Grp` groups findings fixed together in one Codex/Claude cycle.
+
+---
+
+## Priority 1 — Lane C (`paper_0710_1869/`) bundle (§8.6 item 1)
+
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| C-1 | L | CRIT | Lane C RG inverted + untransposed ADM | `paper_0710_1869/eft_deltaf2/rg.py:288-313,1361-1365,1516-1519` | PENDING |
+| C-2 | L | CRIT | Lane C default path zeroes C4 (C4≡0) | `paper_0710_1869/eft_deltaf2/matching_kkgluon.py:191-198,504-527` | PENDING |
+| C-5 | L | CRIT | Lane C missing √(2πkr_c) volume factor | `paper_0710_1869/.../couplings.py:241-243` | PENDING |
+| C-6 | L | CRIT | Lane C seed→profile inverts RS localization | `paper_0710_1869/.../fit.py` (physical branch) | PENDING |
+| M-8 | L | MAJ | Lane C Fierz sign in paper→BMU map (+2 vs −2) | `paper_0710_1869/eft_deltaf2/rg.py:110-125` | PENDING |
+| M-27 | L | MAJ | Lane C matrix elements ×4 (P_L/P_R vs (1∓γ5)) | `paper_0710_1869/.../hadronic.py` | PENDING |
+| M-28 | L | MAJ | Lane C circular validation + strict_paper Table I fail | `paper_0710_1869/` tests/verifier | PENDING |
+| M-13(C) | L | MAJ | Lane C ξ_g=1 KK-gluon default | `paper_0710_1869/.../kkgluon.py` | PENDING |
+
+## Priority 2 — LFV normalizations (§8.6 item 2)
+
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| M-29 | LFV | MAJ | μ→3e interference coeff 2√2·e vs KO 8e (+sign) | `lfv_three_body.py:710` | PENDING |
+| M-30 | LFV | MAJ | τ→3ℓ / τ→ℓγ missing BR(τ→ℓνν̄)≈0.177 (×5.65) | `lfv_three_body.py`, L007/L008 prefactor | PENDING |
+
+## Priority 3 — Mechanical ×2 / kernel / proxy (§8.6 item 3)
+
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| M-9 | TOP | MAJ | t→qγ/qg dipole widths ×2 too large | `top_fcnc.py:215-245` | PENDING |
+| M-31 | TOP | MAJ | M-9 propagates to T003–T006 + tests hardcode buggy BR | `processes/top_higgs_ew/`, tests | PENDING |
+| M-32 | BK | MAJ | B→K*μμ kernel: missing q² + transverse ×2 + primed-Wilson sign | beauty B→K*μμ kernel; `test_B019` | PENDING |
+| M-33 | RD | MAJ | R(D)/R(D*) stress proxy Wilson dimensionful (GeV²) | `semileptonic_lfu.py:191-193` | PENDING |
+
+## Priority 4 — compare_2007_vs_modern (§8.6 item 4)
+
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| C-7 | CMP | CRIT | Rescales scan ratios by bounds scan never used (~1e6 units) | `compare_2007_vs_modern.py` | PENDING |
+
+## Priority 5 — everything else (§7)
+
+### εK / ΔF=2 budget coherence (M-1…M-7)
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| M-1 | EPSK | MAJ | εK budget split-brain ×4.5 core vs catalog | `deltaf2.py:794-795`, `K001.py:206-231` | PENDING |
+| M-2 | EPSK | MAJ | K001 budget sign-blind | `K001.py:211-218` | PENDING |
+| M-3 | EPSK | MAJ | Opposite budget philosophy for Δm | `deltaf2.py:956-968` | PENDING |
+| M-4 | EPSK | MAJ | Mixed CLs across HARD vetoes catalog-wide | catalog-wide | PENDING |
+| M-5 | EPSK | MAJ | B022 (B→Kνν) HARD-vetoes SM limit | `primary/beauty/B022.py` | PENDING |
+| M-6 | RG | MAJ | B-meson Wilsons over-run below m_b (~25% C4 inflation) | `deltaf2.py:464`, `modern/evaluation.py:177` | PENDING |
+| M-7 | RG | MAJ | LO-only ΔF=2 running biases εK floor low ~10-15% | `deltaf2.py` | PENDING |
+
+### Normalization / convention (M-10..M-14)
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| M-10 | HYUK | MAJ | rs_higgs_yukawas.py unfixed twin of B1 Zbb bug | `rs_higgs_yukawas.py:292-304` | PENDING |
+| M-11 | LANEA | MAJ | Lane A Bauer bridge factor-2 (Y_max≈1.5 not 3) | `anarchic_bauer_s1.py:24-33,191-201` | PENDING |
+| M-12 | LANEA | MAJ | Lane A drops Wolfenstein A + hash() seeds | `anarchic_bauer_s1.py:194,408` | PENDING |
+| M-13 | GSSTAR | MAJ | Lane B/C KK-gluon g_s* normalization ~13× | `quark_model_core` scales/matching | PENDING |
+| M-14 | LFVCONV | MAJ | μ→eγ M_KK convention split ×2.45⁴ | `scanParams/scan.py:226-227`, `rs_ew_builder.py:131` | PENDING |
+
+### Fit / scan logic (M-15..M-18)
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| M-15 | FIT | MAJ | Reported fit seed not gauge-equivalent | `fit.py:627-655,843` | PENDING |
+| M-16 | FIT | MAJ | Scan seed chaining double-applies overall_scale | `scan.py:360-373`, `validation.py:242-271` | PENDING |
+| M-17 | HARDP | MAJ | Evaluated hard-partial never vetoes/miscounted | `run_full_catalog_scan.py:913-921` | PENDING |
+| M-18 | HARDP | MAJ | Catalog silent-pass on invalid input | `TEMPLATE.py` design | PENDING |
+
+### QCD running (M-19..M-21)
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| M-19 | QCD | MAJ | 3-loop mass-decoupling d3 wrong (value+slope sign) | `qcd/decoupling.py:117-128` | PENDING |
+| M-20 | QCD | MAJ | Spurious 6→6 threshold matching (m_t 163.5 vs 162.5) | `qcd/mass_running.py:187-191` | PENDING |
+| M-21 | QCD | MAJ | PDG m_t(MS̄) σ understated ~2.5× + load-bearing test | `pdg_quark_masses.py:110-116`, test | PENDING |
+
+### Collider / EW existence floor (C-3, M-26)
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| C-3 | EW | CRIT | EW001 oblique anchors + 15.96 vs 18-20 TeV floor | `EW001.yaml:82-118` | PENDING |
+| M-26 | EW | MAJ | Collider SSM benchmarks as HARD vetoes to ×L-suppressed RS | CR005/CR006, CR001 | PENDING |
+
+### Bessel solver (C-4)
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| C-4 | BESSEL | CRIT | KK Bessel solver skips/misorders roots n≥5 | `solvers/bessel.py:153-179,264-285` | PENDING |
+
+### Lane A modern verification (M-25, M-34, M-35)
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| M-25 | MODERN | MAJ | modern/ circular verification + wrong bound fields | `modern/` verifiers, `matching.py:517-543` | PENDING |
+| M-34 | MODERN | MAJ | Self-referential validation scripts + PR tension | `benchmark_quark_0710_1869.py`, `audit_wilson_rg.py` | PENDING |
+| M-35 | WEB | MAJ | Website envelope floor statistically optimistic (max ignores joint) | website Scan Explorer | PENDING |
+
+### Documentation / reproducibility (M-22, M-23, M-24, M-36)
+| ID | Grp | Severity | Title | Location | Disposition |
+|----|-----|----------|-------|----------|-------------|
+| M-22 | DOC | MAJ | review_local/ certifies pre-B3 physics as CONFIRMED | `review_local/*.tex`, `docs/audits/*` | PENDING |
+| M-23 | DOC | MAJ | Headline floor parquet absent from tree | `FLOOR_SUMMARY.md` refs | PENDING |
+| M-24 | DOC | MAJ | Un-bannered stale Zbb 25-30 TeV artifact | `scan_outputs/wq_quarkonly_1M_.../` | PENDING |
+| M-36 | DOC | MAJ | Un-bannered pre-B1 notebook (Zbb 25-30 TeV) | `notebooks/wq_quarkonly_explore.ipynb` | PENDING |
+
+## §8.3 Revisions (first-pass claims corrected — track for documentation)
+
+| ID | Disposition | Note |
+|----|-------------|------|
+| C-3 anchors | ALREADY-CORRECT (anchors) | S,T anchors plausibly legit recent fit; only 15.96-vs-18-20 TeV floor mismatch stands (kept under C-3/EW) |
+| CR001 anchor | ALREADY-CORRECT | CMS-B2G-25-009 real (5.5 TeV observed); provenance concern withdrawn |
+| K004 anchor | ALREADY-CORRECT | NA62 Moriond-2026 9.6e-11 real; residual is policy only (see M-4) |
+| Seesaw factor-2 | ALREADY-CORRECT | self-consistent (g₀²=2f²); documentation gap only |
+| NuFIT 6.1 | DOC | plausible; pin table values before publication |
+
+## Minor findings (§4, §8.4) — triaged in a dedicated pass after majors
+
+Enumerated and dispositioned in [`MINOR_FINDINGS_LEDGER.md`](MINOR_FINDINGS_LEDGER.md) (created during the minors pass).
+
+---
+
+## Cycle log
+
+(Each Codex/Claude cycle appended here with commit hash + audit verdict.)
