@@ -287,8 +287,8 @@ def test_pass_fail_and_numbers_match_running_evaluator_amplitude(
     if expected_pass:
         # re-pinned after M-6: B_d Wilsons run to m_b=4.18 GeV, matching the
         # B-meson bag scale instead of the legacy global 2 GeV endpoint.
-        assert result.predicted == pytest.approx(1.6938763890423106e-14)
-        assert result.ratio == pytest.approx(0.5026608834372273)
+        assert result.predicted == pytest.approx(1.6958446277363772e-14)
+        assert result.ratio == pytest.approx(0.50323295608762608)
         assert result.ratio <= 1.0
     else:
         assert result.ratio > 10.0

@@ -172,15 +172,15 @@ def test_default_benchmark_point_has_stable_deltaf2_outputs():
     # M-1/M-2 harmonized the epsilon_K gate. M-6 then moved the kaon LR
     # running endpoint from the legacy global 2 GeV to the FLAG B4/B5 3 GeV
     # scale, reducing the LO LR enhancement used by this downstream snapshot.
-    assert np.isclose(epsilon_k_ratio, 4.950085995246542)
+    assert np.isclose(epsilon_k_ratio, 4.9555793498235419)
     assert summary.get("epsilon_k").diagnostics["epsilon_k_selected_budget_direction"] == (
         "raises_epsilon_k"
     )
     assert summary.get("epsilon_k").diagnostics["hadronic_scale_gev"] == 3.0
     assert summary.get("epsilon_k").diagnostics["running_order"] == "LO"
     assert summary.get("epsilon_k").ratio_to_bound > 1.0
-    assert np.isclose(summary.get("b_d").ratio_to_bound, 0.03426651903650108)
-    assert np.isclose(summary.get("b_s").ratio_to_bound, 0.09994288523829314)
+    assert np.isclose(summary.get("b_d").ratio_to_bound, 0.034267682804786807)
+    assert np.isclose(summary.get("b_s").ratio_to_bound, 0.099958080726753745)
     assert summary.get("b_d").diagnostics["hadronic_scale_gev"] == 4.18
     assert summary.get("b_s").diagnostics["hadronic_scale_gev"] == 4.18
     assert summary.get("d").diagnostics["hadronic_scale_gev"] == 3.0

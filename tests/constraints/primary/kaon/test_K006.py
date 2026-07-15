@@ -314,7 +314,10 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
 @pytest.mark.parametrize(
     ("scale", "expected_pass"),
     [
-        (1.0, True),
+        # RD-01 corrected the Z' C9/C10 matching by -0.5, flipping the
+        # interference direction for this fixture; scale=1.0 now exceeds the
+        # short-distance bound, so keep the safe branch deliberately sub-unit.
+        (0.3, True),
         (1.0e5, False),
     ],
 )

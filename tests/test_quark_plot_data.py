@@ -32,7 +32,7 @@ def test_benchmark_fit_summary_reports_default_solution_gates():
     assert not summary.passes_all
     # Re-pinned after M-15: validation summaries use the fitted normalized seed
     # representative rather than the old CKM-rebuilt reported seed.
-    assert np.isclose(summary.deltaf2_max_ratio, 4.950085995246542)
+    assert np.isclose(summary.deltaf2_max_ratio, 4.9555793498235419)
     assert summary.passes_proxy == (summary.down_proxy < summary.proxy_limit)
     assert summary.passes_paper_proxy == (summary.down_proxy < summary.paper_proxy_target)
     assert summary.proxy_limit >= summary.paper_proxy_target

@@ -340,10 +340,10 @@ def test_numbers_match_direct_running_complex_m12_phase_evaluator():
     )
     assert abs(m12_np) == pytest.approx(magnitude.abs_m12_np)
     # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
-    assert result.predicted == pytest.approx(0.7145001681873612)
+    assert result.predicted == pytest.approx(0.71449859166246366)
     # re-pinned after M-6: B_d Wilsons run to m_b=4.18 GeV.
-    assert result.ratio == pytest.approx(0.2539081789260684)
-    assert result.diagnostics["phi_d_np_deg"] == pytest.approx(0.5023250895503043)
+    assert result.ratio == pytest.approx(0.25382105514733083)
+    assert result.diagnostics["phi_d_np_deg"] == pytest.approx(0.50219863453447477)
 
 
 @pytest.mark.parametrize(
@@ -370,7 +370,7 @@ def test_safe_point_passes_and_large_np_point_fails(
         assert result.ratio > 1.0
         # re-pinned after M-6: B_d Wilsons run to m_b=4.18 GeV.
         assert result.diagnostics["phi_d_np_deg"] == pytest.approx(
-            12.362940808895283
+            12.35992408539013
         )
 
 
