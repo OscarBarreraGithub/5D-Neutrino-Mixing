@@ -75,7 +75,7 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 | M-11 | LANEA | MAJ | Lane A Bauer bridge factor-2 (Y_max≈1.5 not 3) | `anarchic_bauer_s1.py:24-33,191-201` | VERIFIED (2v bridge; Y_max~3; wall ~30->~5.7 TeV) |
 | M-12 | LANEA | MAJ | Lane A drops Wolfenstein A + hash() seeds | `anarchic_bauer_s1.py:194,408` | VERIFIED (Wolfenstein A + deterministic seeds) |
 | M-13 | GSSTAR | MAJ | Lane B/C KK-gluon g_s* normalization ~13× | `quark_model_core` scales/matching | VERIFIED (convention hardened, production bit-identical; physical-coupling ~59 TeV re-quote = OPEN HUMAN DECISION) |
-| M-14 | LFVCONV | MAJ | μ→eγ M_KK convention split ×2.45⁴ | `scanParams/scan.py:226-227`, `rs_ew_builder.py:131` | PENDING |
+| M-14 | LFVCONV | MAJ | μ→eγ M_KK convention split ×2.45⁴ | `scanParams/scan.py:226-227`, `rs_ew_builder.py:131` | VERIFIED (unified geometric convention; scan+catalog agree; assertion-guarded) |
 
 ### Fit / scan logic (M-15..M-18)
 | ID | Grp | Severity | Title | Location | Disposition |
@@ -184,3 +184,25 @@ Enumerated and dispositioned in [`MINOR_FINDINGS_LEDGER.md`](MINOR_FINDINGS_LEDG
   killed (same policy object, YAML cross-validated), sign-aware per K004, re-pins mechanical (20.67/5.60=3.69),
   floor band arithmetic correct. Production eps_K floor now a BAND (raise-edge ~3.3-3.6, central ~6.3-7,
   lower-edge ~4.8-5.4 TeV). 107 tests green. NOTE: 2 Lane-A repro scripts still use own central budget (fold into P5b).
+
+### Cycle 7 — Delta-m/B022/mu_had/LO M-3/M-5/M-6/M-7 — VERIFIED/DOC (commit `3c60300`)
+- Codex implement (per approved proposal). Claude audit: **APPROVE** (executed) - B budgets recompute to full
+  precision, C4(2GeV)/C4(m_b)=1.2496 inflation removed, B022 SM point passes (ratio 0), LO caveat in 3 sites,
+  eps_K floor 7.10->6.67 TeV verified. Residual: kaon chi-factor masses still 2 GeV (secondary). 186 tests green.
+
+### Cycle 8 — Higgs B1 twin + Lane A M-10/M-11/M-12 — VERIFIED (commit `2c9989b`)
+- Codex fix. Claude audit: **APPROVE** - shared casagrande helper matches B1 conversion over 20k points, Zbb
+  output bit-identical (already-correct preserved), h->ll UV shift +8.2%->-0.3% (sign fixed), Bauer 2v bridge
+  (Y_max~3), Wolfenstein A + deterministic seeds, anarchic wall ~30->~5.7 TeV. 53 tests green.
+
+### Cycle 9 — KK-gluon g_s*/M_KK convention hardening M-13 — VERIFIED (commit `bc414fe`)
+- Codex research proposal (production uses physical M_KK but LEGACY perturbative coupling; physical coupling
+  -> ~59 TeV; re-quote = human decision) then implement hardening only. Claude audit: **APPROVE** - production
+  bit-identical (git-stash compare, 17 digits), 3 distinct coupling policy IDs, modern split off, assertions
+  fire, docs honest. 149 tests green. OPEN DECISION flagged: physical-coupling floor re-quote (~59 TeV + rerun).
+
+### Cycle 10 — mu->e gamma convention M-14 — VERIFIED (commit `7e4b940`)
+- Codex research+fix: 4e-8 calibrated at geometric Lambda_IR; catalog path was the drift (physical 2.45*Lambda,
+  BR 36x too small). Claude audit: **APPROVE** - both paths agree to 15 digits, legacy unchanged, catalog moved
+  by exactly 2.4487^4, calibration self-consistent, assertion-guarded. 195 tests green. Lepton floor (labeled):
+  M_KK^LFV=Lambda_IR >= ~17 TeV (physical-equiv ~41.7 TeV).
