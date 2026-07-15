@@ -1100,7 +1100,7 @@ class HadronicArtifactBundleV1:
             if value <= 0.0:
                 raise ArtifactSchemaError(f"hadronic.{field_name} must be positive")
         expected_q1_matrix_element = (
-            (8.0 / 3.0) * (self.f_K_GeV**2) * (self.m_K0_GeV**2) * self.B_K_mu_had
+            (2.0 / 3.0) * (self.f_K_GeV**2) * (self.m_K0_GeV**2) * self.B_K_mu_had
         )
         if not isclose(
             self.q1_matrix_element_GeV4,

@@ -167,6 +167,8 @@ class Paper07101869KKGluonFlavorMatrix:
     chiral_id: str
     basis_id: str
     g_s_mu_gs: float
+    rs_volume_L: float
+    rs_volume_sqrt_2L: float
     universal_component: float
     raw_dimensionless: np.ndarray
     universal_subtracted_dimensionless: np.ndarray
@@ -189,6 +191,23 @@ class Paper07101869KKGluonFlavorMatrix:
         require_member("sector_id", self.sector_id, ("Q", "u", "d"))
         require_member("chiral_id", self.chiral_id, ("left", "right"))
         object.__setattr__(self, "g_s_mu_gs", require_positive_finite("g_s_mu_gs", self.g_s_mu_gs))
+        object.__setattr__(
+            self,
+            "rs_volume_L",
+            require_positive_finite("rs_volume_L", self.rs_volume_L),
+        )
+        object.__setattr__(
+            self,
+            "rs_volume_sqrt_2L",
+            require_positive_finite("rs_volume_sqrt_2L", self.rs_volume_sqrt_2L),
+        )
+        if not math.isclose(
+            self.rs_volume_sqrt_2L,
+            math.sqrt(2.0 * self.rs_volume_L),
+            rel_tol=1.0e-12,
+            abs_tol=0.0,
+        ):
+            raise ValueError("rs_volume_sqrt_2L must equal sqrt(2*rs_volume_L)")
         if not math.isfinite(float(self.universal_component)):
             raise ValueError("universal_component must be finite")
         object.__setattr__(self, "raw_dimensionless", _hermitian(self.raw_dimensionless))
@@ -215,20 +234,28 @@ class Paper07101869KKGluonFlavorMatrix:
             raise ValueError(
                 "universal_subtracted_dimensionless must subtract the universal identity piece"
             )
-        if not np.allclose(
-            self.raw_gs_normalized,
-            self.g_s_mu_gs * self.raw_dimensionless,
-            atol=1.0e-12,
-        ):
-            raise ValueError("raw_gs_normalized must equal g_s_mu_gs * raw_dimensionless")
+        expected_raw_gs = self.g_s_mu_gs * (
+            self.rs_volume_sqrt_2L * self.raw_dimensionless
+            - (np.eye(3, dtype=np.complex128) / self.rs_volume_sqrt_2L)
+        )
+        if not np.allclose(self.raw_gs_normalized, expected_raw_gs, atol=1.0e-12):
+            raise ValueError(
+                "raw_gs_normalized must equal "
+                "g_s_mu_gs * (sqrt(2L) * raw_dimensionless - I / sqrt(2L))"
+            )
+        expected_subtracted_gs = (
+            self.g_s_mu_gs
+            * self.rs_volume_sqrt_2L
+            * self.universal_subtracted_dimensionless
+        )
         if not np.allclose(
             self.universal_subtracted_gs_normalized,
-            self.g_s_mu_gs * self.universal_subtracted_dimensionless,
+            expected_subtracted_gs,
             atol=1.0e-12,
         ):
             raise ValueError(
                 "universal_subtracted_gs_normalized must equal "
-                "g_s_mu_gs * universal_subtracted_dimensionless"
+                "g_s_mu_gs * sqrt(2L) * universal_subtracted_dimensionless"
             )
         if not math.isclose(
             float(np.trace(self.universal_subtracted_dimensionless).real),
@@ -268,6 +295,8 @@ class Paper07101869KKGluonFlavorMatrix:
             "chiral_id": self.chiral_id,
             "basis_id": self.basis_id,
             "g_s_mu_gs": self.g_s_mu_gs,
+            "rs_volume_L": self.rs_volume_L,
+            "rs_volume_sqrt_2L": self.rs_volume_sqrt_2L,
             "universal_component": self.universal_component,
             "raw_dimensionless": _matrix_to_rows(self.raw_dimensionless),
             "universal_subtracted_dimensionless": _matrix_to_rows(
@@ -818,17 +847,22 @@ def _build_matrix_block(
     raw = _hermitian(raw_dimensionless)
     subtracted, universal_component = _subtract_universal_piece(raw)
     g_s = normalization.g_s_mu_gs
+    sqrt_2L = normalization.rs_volume_sqrt_2L
     return Paper07101869KKGluonFlavorMatrix(
         label=label,
         sector_id=sector_id,
         chiral_id=chiral_id,
         basis_id=basis_id,
         g_s_mu_gs=g_s,
+        rs_volume_L=normalization.rs_volume_L,
+        rs_volume_sqrt_2L=sqrt_2L,
         universal_component=universal_component,
         raw_dimensionless=raw,
         universal_subtracted_dimensionless=subtracted,
-        raw_gs_normalized=_hermitian(g_s * raw),
-        universal_subtracted_gs_normalized=_hermitian(g_s * subtracted),
+        raw_gs_normalized=_hermitian(
+            g_s * (sqrt_2L * raw - (np.eye(3, dtype=np.complex128) / sqrt_2L))
+        ),
+        universal_subtracted_gs_normalized=_hermitian(g_s * sqrt_2L * subtracted),
     )
 
 
@@ -932,6 +966,7 @@ def build_paper_0710_1869_kk_gluon_couplings(
         raw_dimensionless=u_kernel,
         normalization=normalization,
     )
+    # RESIDUAL(C-2): default RH-down alignment model choice pending paper 0710.1869.
     right_down = _build_matrix_block(
         label="right_down_diagonal",
         sector_id="d",

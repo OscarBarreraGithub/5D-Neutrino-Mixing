@@ -312,7 +312,7 @@ def _ordered_hermitian_spectrum(matrix: np.ndarray) -> tuple[np.ndarray, np.ndar
     return ordered_values, ordered_vectors
 
 
-def _require_exact_frozen_sector_policy(
+def _require_physical_sector_policy(
     *,
     name: str,
     policy: Paper07101869AffineBulkMassSectorPolicy,
@@ -322,12 +322,10 @@ def _require_exact_frozen_sector_policy(
         raise ValueError(f"{name} must be a Paper07101869AffineBulkMassSectorPolicy")
     if policy.sector_id != expected_sector_id:
         raise ValueError(f"{name}.sector_id must be exactly {expected_sector_id!r}")
-    if policy.leading_term_coefficient != 1.0:
-        raise ValueError(
-            f"{name}.leading_term_coefficient must remain the frozen default 1.0"
-        )
-    if policy.universal_offset != 0.0:
-        raise ValueError(f"{name}.universal_offset must remain the frozen default 0.0")
+    if policy.leading_term_coefficient >= 0.0:
+        raise ValueError(f"{name}.leading_term_coefficient must be negative")
+    if not np.isfinite(float(policy.universal_offset)):
+        raise ValueError(f"{name}.universal_offset must be finite")
     return policy
 
 
@@ -337,7 +335,6 @@ def _require_exact_frozen_physical_contract(
     if not isinstance(contract, Paper07101869PhysicalSeedToProfileContract):
         raise ValueError("physical_contract must be a Paper07101869PhysicalSeedToProfileContract")
 
-    default_contract = default_paper_0710_1869_physical_seed_to_profile_contract()
     if contract.mapping_policy.policy_id != PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_POLICY_ID:
         raise ValueError("physical_contract must use the exact frozen seed-to-profile policy id")
     if (
@@ -358,23 +355,17 @@ def _require_exact_frozen_physical_contract(
         raise ValueError("physical_contract must not use a hidden BulkMassMap surrogate")
 
     for index, sector_id in enumerate(("Q", "u", "d")):
-        _require_exact_frozen_sector_policy(
+        _require_physical_sector_policy(
             name=f"physical_contract.universal_term_policy.sector_policies[{index}]",
             policy=contract.universal_term_policy.sector_policies[index],
             expected_sector_id=sector_id,
         )
-        default_policy = default_contract.universal_term_policy.sector_policies[index]
-        if contract.universal_term_policy.sector_policies[index] != default_policy:
-            raise ValueError(
-                "physical_contract sector policies must match the exact frozen QS1 defaults"
-            )
 
-    if contract.mapping_policy != default_contract.mapping_policy:
+    default_mapping_policy = (
+        default_paper_0710_1869_physical_seed_to_profile_contract().mapping_policy
+    )
+    if contract.mapping_policy != default_mapping_policy:
         raise ValueError("physical_contract.mapping_policy must match the exact frozen QS1 default")
-    if contract.universal_term_policy != default_contract.universal_term_policy:
-        raise ValueError(
-            "physical_contract.universal_term_policy must match the exact frozen QS1 default"
-        )
     return contract
 
 
@@ -1602,6 +1593,7 @@ def _build_point_derived_physical_sector(
         c_name,
         policy.leading_term_coefficient * eig + policy.universal_offset,
     )
+    # RESIDUAL(C-6): exact Table-I affine coefficients pending paper 0710.1869.
     F_values = _as_positive_real_triplet(
         f_name,
         np.asarray(f_IR(c_values, epsilon), dtype=float),

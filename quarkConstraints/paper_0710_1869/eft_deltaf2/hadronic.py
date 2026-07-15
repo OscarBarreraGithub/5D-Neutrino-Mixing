@@ -92,22 +92,22 @@ PAPER_0710_1869_DELTAF2_HAMILTONIAN_CONVENTION_ID = (
     "heff.sum_ci_qi.no_hc_factor.v1"
 )
 PAPER_0710_1869_DELTAF2_KAON_MATRIX_ELEMENT_FORMULA_ID = (
-    "kaon.q1_vll_vrr.8over3_fk2_mk2_bk_mu.v1"
+    "kaon.q1_vll_vrr.2over3_fk2_mk2_bk_mu.plpr_projectors.v2"
 )
 PAPER_0710_1869_DELTAF2_BD_MATRIX_ELEMENT_FORMULA_ID = (
-    "bd.q1_vll_vrr.8over3_fbd2_mbd2_bbd_mu.v1"
+    "bd.q1_vll_vrr.2over3_fbd2_mbd2_bbd_mu.plpr_projectors.v2"
 )
 PAPER_0710_1869_DELTAF2_BS_MATRIX_ELEMENT_FORMULA_ID = (
-    "bs.q1_vll_vrr.8over3_fbs2_mbs2_bbs_mu.v1"
+    "bs.q1_vll_vrr.2over3_fbs2_mbs2_bbs_mu.plpr_projectors.v2"
 )
 PAPER_0710_1869_DELTAF2_D0_MATRIX_ELEMENT_FORMULA_ID = (
-    "d0.q1_vll_vrr.8over3_fd2_md2_bd0_mu.v1"
+    "d0.q1_vll_vrr.2over3_fd2_md2_bd0_mu.plpr_projectors.v2"
 )
 PAPER_0710_1869_DELTAF2_KAON_LR_Q4_MATRIX_ELEMENT_FORMULA_ID = (
-    "kaon.q4_lr.o4_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+    "kaon.q4_lr.o4_scalar_lr.1over2_rchi_fk2_mk2_b4_mu.plpr_projectors.v2"
 )
 PAPER_0710_1869_DELTAF2_KAON_LR_Q5_MATRIX_ELEMENT_FORMULA_ID = (
-    "kaon.q5_lr.o5_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+    "kaon.q5_lr.o5_scalar_lr.1over6_rchi_fk2_mk2_b5_mu.plpr_projectors.v2"
 )
 PAPER_0710_1869_DELTAF2_KAON_LR_CHIRAL_RATIO_DEFINITION_ID = (
     "kaon.lr.chiral_ratio.r_chi.mu_had.custom_input.v1"
@@ -762,7 +762,7 @@ class Paper07101869KaonHadronicBundle:
     def q1_matrix_element_GeV4(self) -> float:
         return _require_finite_float(
             "q1_matrix_element_GeV4",
-            (8.0 / 3.0)
+            (2.0 / 3.0)
             * (self.f_K_GeV**2)
             * (self.m_K0_GeV**2)
             * self.B_K_mu_had,
@@ -1255,7 +1255,7 @@ class Paper07101869BMesonHadronicBundle:
     def q1_matrix_element_GeV4(self) -> float:
         return _require_finite_float(
             "q1_matrix_element_GeV4",
-            (8.0 / 3.0)
+            (2.0 / 3.0)
             * (self.meson_decay_constant_GeV**2)
             * (self.meson_mass_GeV**2)
             * self.bag_parameter_mu_had,
@@ -1655,7 +1655,7 @@ class Paper07101869D0HadronicBundle:
     def q1_matrix_element_GeV4(self) -> float:
         return _require_finite_float(
             "q1_matrix_element_GeV4",
-            (8.0 / 3.0)
+            (2.0 / 3.0)
             * (self.meson_decay_constant_GeV**2)
             * (self.meson_mass_GeV**2)
             * self.bag_parameter_mu_had,
@@ -2234,14 +2234,18 @@ class Paper07101869KaonLRHadronicInputs:
     def q4_matrix_element_GeV4(self) -> float:
         return _require_finite_float(
             "q4_matrix_element_GeV4",
-            2.0 * (self.m_K0_GeV**2) * (self.f_K_GeV**2) * self.R_chi_mu_had * self.B4_mu_had,
+            0.5
+            * (self.m_K0_GeV**2)
+            * (self.f_K_GeV**2)
+            * self.R_chi_mu_had
+            * self.B4_mu_had,
         )
 
     @property
     def q5_matrix_element_GeV4(self) -> float:
         return _require_finite_float(
             "q5_matrix_element_GeV4",
-            (2.0 / 3.0)
+            (1.0 / 6.0)
             * (self.m_K0_GeV**2)
             * (self.f_K_GeV**2)
             * self.R_chi_mu_had

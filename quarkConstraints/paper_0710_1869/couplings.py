@@ -8,6 +8,7 @@ from dataclasses import asdict, dataclass
 import numpy as np
 
 from qcd import alpha_s
+from warpConfig.baseParams import MPL, get_warp_params
 
 from .conventions import PAPER_0710_1869_MODE_ID, PAPER_0710_1869_PAPER_ID
 from .scales import Paper07101869ScalePoint, default_paper_0710_1869_scales
@@ -26,8 +27,13 @@ PAPER_0710_1869_GAUGE_NORMALIZATION_SCHEMA_ID = (
 PAPER_0710_1869_DIMENSIONLESS_MATRIX_POLICY_ID = (
     "dimensionless_flavor_matrices.separate_from_gs.normalization.v1"
 )
-PAPER_0710_1869_GS_NORMALIZATION_ID = "explicit_mu_gs.g_s_sqrt_4pi_alpha_s.v1"
+PAPER_0710_1869_GS_NORMALIZATION_ID = (
+    "explicit_mu_gs.g_s_sqrt_4pi_alpha_s.with_rs_volume_sqrt_2L.v2"
+)
 PAPER_0710_1869_MU_GS_SEMANTICS_ID = "alpha_s.high_precision.msbar.at_mu_gs_GeV.v1"
+PAPER_0710_1869_RS_VOLUME_POLICY_ID = (
+    "rs_volume.L_equals_log_k_over_lambda_ir.sqrt_2L_kk_gluon.v1"
+)
 PAPER_0710_1869_PROPAGATOR_MASS_RULE_ID = (
     "propagator_mass.scale_point_propagator_mass_GeV.v1"
 )
@@ -49,13 +55,20 @@ class Paper07101869CouplingContract:
     kk_gluon_normalization_id: str = PAPER_0710_1869_GS_NORMALIZATION_ID
     mu_gs_semantics_id: str = PAPER_0710_1869_MU_GS_SEMANTICS_ID
     alpha_s_precision: str = "high"
+    rs_volume_policy_id: str = PAPER_0710_1869_RS_VOLUME_POLICY_ID
     propagator_mass_rule_id: str = PAPER_0710_1869_PROPAGATOR_MASS_RULE_ID
     universal_subtraction_policy_id: str = PAPER_0710_1869_UNIVERSAL_SUBTRACTION_POLICY_ID
     single_mode_scale_policy_id: str = PAPER_0710_1869_SINGLE_MODE_SCALE_POLICY_ID
     effective_scale_policy_id: str = PAPER_0710_1869_EFFECTIVE_SCALE_POLICY_ID
     mu_gs_semantics_note: str = (
         "Evaluate alpha_s only at scale_point.mu_gs_GeV with precision='high'. "
-        "mu_match_GeV and propagator masses do not change g_s normalization."
+        "mu_match_GeV and propagator masses do not change the 4D g_s normalization."
+    )
+    rs_volume_note: str = (
+        "The KK-gluon flavor matrices use the RS volume L = log(k/Lambda_IR) = "
+        "pi*k*r_c from the repository warp geometry. Full matrices are normalized "
+        "as g_s*(sqrt(2L)*raw - I/sqrt(2L)); FCNC-subtracted matrices are "
+        "g_s*sqrt(2L)*subtracted."
     )
     propagator_mass_rule_note: str = (
         "Heavy propagator denominators use scale_point.propagator_mass_GeV. "
@@ -89,11 +102,13 @@ class Paper07101869CouplingContract:
             "dimensionless_matrix_policy_id",
             "kk_gluon_normalization_id",
             "mu_gs_semantics_id",
+            "rs_volume_policy_id",
             "propagator_mass_rule_id",
             "universal_subtraction_policy_id",
             "single_mode_scale_policy_id",
             "effective_scale_policy_id",
             "mu_gs_semantics_note",
+            "rs_volume_note",
             "propagator_mass_rule_note",
             "universal_subtraction_note",
             "scale_policy_note",
@@ -122,12 +137,16 @@ class Paper07101869GaugeCouplingNormalization:
     """Resolved QCD normalization bundle for one paper-mode scale point."""
 
     scale_label: str
+    Lambda_IR_GeV: float
     mu_gs_GeV: float
     mu_match_GeV: float
     m_g1_GeV: float
     propagator_mass_GeV: float
     alpha_s_mu_gs: float
     g_s_mu_gs: float
+    rs_volume_L: float
+    rs_volume_sqrt_2L: float
+    g_s_star_mu_gs: float
     schema_id: str = PAPER_0710_1869_GAUGE_NORMALIZATION_SCHEMA_ID
     contract_schema_id: str = PAPER_0710_1869_COUPLINGS_SCHEMA_ID
     mode_id: str = PAPER_0710_1869_MODE_ID
@@ -135,6 +154,7 @@ class Paper07101869GaugeCouplingNormalization:
     kk_gluon_normalization_id: str = PAPER_0710_1869_GS_NORMALIZATION_ID
     mu_gs_semantics_id: str = PAPER_0710_1869_MU_GS_SEMANTICS_ID
     alpha_s_precision: str = "high"
+    rs_volume_policy_id: str = PAPER_0710_1869_RS_VOLUME_POLICY_ID
     scale_policy_id: str = PAPER_0710_1869_SINGLE_MODE_SCALE_POLICY_ID
     propagator_mass_rule_id: str = PAPER_0710_1869_PROPAGATOR_MASS_RULE_ID
     m_KK_eff_GeV: float | None = None
@@ -179,6 +199,7 @@ class Paper07101869GaugeCouplingNormalization:
         for field_name in (
             "kk_gluon_normalization_id",
             "mu_gs_semantics_id",
+            "rs_volume_policy_id",
             "propagator_mass_rule_id",
         ):
             object.__setattr__(
@@ -187,6 +208,11 @@ class Paper07101869GaugeCouplingNormalization:
                 require_nonempty_identifier(field_name, getattr(self, field_name)),
             )
 
+        object.__setattr__(
+            self,
+            "Lambda_IR_GeV",
+            require_positive_finite("Lambda_IR_GeV", self.Lambda_IR_GeV),
+        )
         object.__setattr__(self, "mu_gs_GeV", require_positive_finite("mu_gs_GeV", self.mu_gs_GeV))
         object.__setattr__(
             self,
@@ -213,6 +239,21 @@ class Paper07101869GaugeCouplingNormalization:
             self,
             "g_s_mu_gs",
             require_positive_finite("g_s_mu_gs", self.g_s_mu_gs),
+        )
+        object.__setattr__(
+            self,
+            "rs_volume_L",
+            require_positive_finite("rs_volume_L", self.rs_volume_L),
+        )
+        object.__setattr__(
+            self,
+            "rs_volume_sqrt_2L",
+            require_positive_finite("rs_volume_sqrt_2L", self.rs_volume_sqrt_2L),
+        )
+        object.__setattr__(
+            self,
+            "g_s_star_mu_gs",
+            require_positive_finite("g_s_star_mu_gs", self.g_s_star_mu_gs),
         )
 
         expected_scale_policy = (
@@ -241,6 +282,22 @@ class Paper07101869GaugeCouplingNormalization:
         expected_gs = math.sqrt(4.0 * math.pi * self.alpha_s_mu_gs)
         if not math.isclose(self.g_s_mu_gs, expected_gs, rel_tol=1.0e-12, abs_tol=0.0):
             raise ValueError("g_s_mu_gs must equal sqrt(4*pi*alpha_s_mu_gs)")
+        expected_sqrt_2L = math.sqrt(2.0 * self.rs_volume_L)
+        if not math.isclose(
+            self.rs_volume_sqrt_2L,
+            expected_sqrt_2L,
+            rel_tol=1.0e-12,
+            abs_tol=0.0,
+        ):
+            raise ValueError("rs_volume_sqrt_2L must equal sqrt(2*rs_volume_L)")
+        expected_gs_star = self.g_s_mu_gs * self.rs_volume_sqrt_2L
+        if not math.isclose(
+            self.g_s_star_mu_gs,
+            expected_gs_star,
+            rel_tol=1.0e-12,
+            abs_tol=0.0,
+        ):
+            raise ValueError("g_s_star_mu_gs must equal g_s_mu_gs * rs_volume_sqrt_2L")
 
     def as_dict(self) -> dict[str, float | str | None]:
         """Return a stable mapping representation."""
@@ -276,17 +333,30 @@ def evaluate_paper_0710_1869_gauge_coupling(
         "g_s(mu_gs_GeV)",
         math.sqrt(4.0 * math.pi * resolved_alpha_s),
     )
+    rs_volume_L = require_positive_finite(
+        "rs_volume_L",
+        get_warp_params(k=MPL, Lambda_IR=resolved_scale.Lambda_IR_GeV)["warp_log"],
+    )
+    rs_volume_sqrt_2L = require_positive_finite(
+        "rs_volume_sqrt_2L",
+        math.sqrt(2.0 * rs_volume_L),
+    )
     return Paper07101869GaugeCouplingNormalization(
         scale_label=resolved_scale.label,
+        Lambda_IR_GeV=resolved_scale.Lambda_IR_GeV,
         mu_gs_GeV=resolved_scale.mu_gs_GeV,
         mu_match_GeV=resolved_scale.mu_match_GeV,
         m_g1_GeV=resolved_scale.m_g1_GeV,
         propagator_mass_GeV=resolved_scale.propagator_mass_GeV,
         alpha_s_mu_gs=resolved_alpha_s,
         g_s_mu_gs=resolved_g_s,
+        rs_volume_L=rs_volume_L,
+        rs_volume_sqrt_2L=rs_volume_sqrt_2L,
+        g_s_star_mu_gs=resolved_g_s * rs_volume_sqrt_2L,
         kk_gluon_normalization_id=resolved_contract.kk_gluon_normalization_id,
         mu_gs_semantics_id=resolved_contract.mu_gs_semantics_id,
         alpha_s_precision=resolved_contract.alpha_s_precision,
+        rs_volume_policy_id=resolved_contract.rs_volume_policy_id,
         scale_policy_id=resolved_contract.scale_policy_id_for(resolved_scale),
         propagator_mass_rule_id=resolved_contract.propagator_mass_rule_id,
         m_KK_eff_GeV=resolved_scale.m_KK_eff_GeV,
@@ -347,6 +417,18 @@ def build_coupling_contract_summary() -> dict[str, object]:
                 rel_tol=1.0e-12,
                 abs_tol=0.0,
             ),
+            "rs_volume_sqrt_2L_matches_volume": math.isclose(
+                normalization.rs_volume_sqrt_2L,
+                math.sqrt(2.0 * normalization.rs_volume_L),
+                rel_tol=1.0e-12,
+                abs_tol=0.0,
+            ),
+            "gs_star_carries_rs_volume": math.isclose(
+                normalization.g_s_star_mu_gs,
+                normalization.g_s_mu_gs * normalization.rs_volume_sqrt_2L,
+                rel_tol=1.0e-12,
+                abs_tol=0.0,
+            ),
         },
     }
 
@@ -364,15 +446,20 @@ def kk_gluon_normalization(
         "mode_id": normalization.mode_id,
         "paper_id": normalization.paper_id,
         "scale_label": normalization.scale_label,
+        "Lambda_IR_GeV": normalization.Lambda_IR_GeV,
         "mu_gs_GeV": normalization.mu_gs_GeV,
         "m_g1_GeV": normalization.m_g1_GeV,
         "m_KK_eff_GeV": normalization.m_KK_eff_GeV,
         "propagator_mass_GeV": normalization.propagator_mass_GeV,
         "alpha_s_mu_gs": normalization.alpha_s_mu_gs,
         "g_s_mu_gs": normalization.g_s_mu_gs,
+        "rs_volume_L": normalization.rs_volume_L,
+        "rs_volume_sqrt_2L": normalization.rs_volume_sqrt_2L,
+        "g_s_star_mu_gs": normalization.g_s_star_mu_gs,
         "kk_gluon_normalization_id": normalization.kk_gluon_normalization_id,
         "mu_gs_semantics_id": normalization.mu_gs_semantics_id,
         "alpha_s_precision": normalization.alpha_s_precision,
+        "rs_volume_policy_id": normalization.rs_volume_policy_id,
         "scale_policy_id": normalization.scale_policy_id,
         "propagator_mass_rule_id": normalization.propagator_mass_rule_id,
     }
@@ -410,7 +497,18 @@ def kk_gluon_coupling_matrix(
     if subtract_universal:
         universal = float(np.trace(raw).real / 3.0)
         raw = raw - universal * np.eye(3, dtype=np.complex128)
-    normalized = normalization.g_s_mu_gs * 0.5 * (raw + raw.conjugate().T)
+        normalized = (
+            normalization.g_s_mu_gs
+            * normalization.rs_volume_sqrt_2L
+            * 0.5
+            * (raw + raw.conjugate().T)
+        )
+    else:
+        hermitian_raw = 0.5 * (raw + raw.conjugate().T)
+        normalized = normalization.g_s_mu_gs * (
+            normalization.rs_volume_sqrt_2L * hermitian_raw
+            - (np.eye(3, dtype=np.complex128) / normalization.rs_volume_sqrt_2L)
+        )
     if not np.allclose(normalized.imag, 0.0, atol=1.0e-12):
         raise ValueError("compatibility matrix carries non-negligible imaginary parts")
     return [[float(value) for value in row] for row in normalized.real.tolist()]
@@ -434,6 +532,7 @@ __all__ = [
     "PAPER_0710_1869_GS_NORMALIZATION_ID",
     "PAPER_0710_1869_MU_GS_SEMANTICS_ID",
     "PAPER_0710_1869_PROPAGATOR_MASS_RULE_ID",
+    "PAPER_0710_1869_RS_VOLUME_POLICY_ID",
     "PAPER_0710_1869_SINGLE_MODE_SCALE_POLICY_ID",
     "PAPER_0710_1869_UNIVERSAL_SUBTRACTION_POLICY_ID",
     "Paper07101869CouplingContract",

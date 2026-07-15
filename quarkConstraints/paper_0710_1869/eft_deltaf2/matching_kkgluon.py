@@ -48,7 +48,7 @@ PAPER_0710_1869_DELTAF2_MATCHING_SUMMARY_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.eft_deltaf2.matching_summary.v1"
 )
 PAPER_0710_1869_DELTAF2_MATCHING_OBSERVABLE_SUPPORT_STATUS_ID = (
-    "paper_0710_1869.deltaf2.matching.lr_coefficients_exported.custom_lr_hadronic_active.custom_lr_only_and_custom_combined_observable_surfaces_active.default_q1_observables_only.v4"
+    "paper_0710_1869.deltaf2.matching.lr_coefficients_exported.observable_surface_lr_capable.default_rh_down_alignment_residual.v5"
 )
 
 
@@ -191,11 +191,10 @@ class Paper07101869KKGluonDeltaF2Match:
     supported_observable_operator_names: tuple[str, ...] = (
         PAPER_0710_1869_DELTAF2_Q1_VLL,
         PAPER_0710_1869_DELTAF2_Q1_VRR,
-    )
-    unsupported_observable_operator_names: tuple[str, ...] = (
         PAPER_0710_1869_DELTAF2_Q4_LR,
         PAPER_0710_1869_DELTAF2_Q5_LR,
     )
+    unsupported_observable_operator_names: tuple[str, ...] = ()
     lr_observable_support_contract_id: str = PAPER_0710_1869_DELTAF2_RG_LR_BASIS_CONTRACT_ID
     lr_observable_support_status_id: str = (
         PAPER_0710_1869_DELTAF2_MATCHING_OBSERVABLE_SUPPORT_STATUS_ID
@@ -206,8 +205,7 @@ class Paper07101869KKGluonDeltaF2Match:
         "is available through the frozen BMU NDR-MS bridge, custom LR hadronic "
         "inputs are active under exact scheme/scale alignment, and separate custom "
         "LR-only plus custom combined Q1+LR observable surfaces are available. "
-        "The default/exported paper-facing observable path still stays limited "
-        "to Q1_VLL/Q1_VRR."
+        "RESIDUAL(C-2): default RH-down alignment model choice pending paper 0710.1869."
     )
     contract_schema_id: str = PAPER_0710_1869_DELTAF2_WILSON_CONTRACT_SCHEMA_ID
     schema_id: str = PAPER_0710_1869_DELTAF2_KKGLUON_MATCH_SCHEMA_ID
@@ -285,17 +283,14 @@ class Paper07101869KKGluonDeltaF2Match:
         if tuple(self.supported_observable_operator_names) != (
             PAPER_0710_1869_DELTAF2_Q1_VLL,
             PAPER_0710_1869_DELTAF2_Q1_VRR,
-        ):
-            raise ValueError(
-                "supported_observable_operator_names must remain the frozen Q1 observable subset"
-            )
-        if tuple(self.unsupported_observable_operator_names) != (
             PAPER_0710_1869_DELTAF2_Q4_LR,
             PAPER_0710_1869_DELTAF2_Q5_LR,
         ):
             raise ValueError(
-                "unsupported_observable_operator_names must remain the frozen LR audit subset"
+                "supported_observable_operator_names must include the Q1 and LR observable subset"
             )
+        if tuple(self.unsupported_observable_operator_names) != ():
+            raise ValueError("unsupported_observable_operator_names must be empty")
 
     def as_dict(self) -> dict[str, object]:
         return {

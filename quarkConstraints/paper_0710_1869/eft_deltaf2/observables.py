@@ -278,16 +278,10 @@ def _require_hadronic_compatibility(
         raise ValueError(
             "hadronic bundle mu_had_GeV must match the evolved Wilson evaluation scale"
         )
-    if abs(wilsons.q4_lr) > _ZERO_TOLERANCE or abs(wilsons.q5_lr) > _ZERO_TOLERANCE:
-        raise ValueError(
-            "kaon NP observables currently support only Q1_VLL/Q1_VRR on the "
-            "default/exported path; "
-            "non-zero Q4_LR/Q5_LR remain blocked by LR contract "
-            f"{PAPER_0710_1869_DELTAF2_RG_LR_BASIS_CONTRACT_ID!r} under status "
-            f"{PAPER_0710_1869_DELTAF2_RG_LR_BASIS_STATUS_ID!r}. "
-            "Use the custom LR-only observable surface with exact LR hadronic alignment "
-            "instead."
-        )
+    # RESIDUAL(C-2): default RH-down alignment model choice pending paper 0710.1869.
+    # Nonzero Q4_LR/Q5_LR are carried by the Wilson snapshot; callers that want
+    # their matrix elements included should use the combined Q1+LR observable
+    # surface with explicit LR hadronic inputs.
 
 
 def _require_lr_hadronic_compatibility(

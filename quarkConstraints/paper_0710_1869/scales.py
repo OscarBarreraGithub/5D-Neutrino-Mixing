@@ -15,6 +15,7 @@ from .validation import (
 )
 
 PAPER_0710_1869_SCALES_SCHEMA_ID = "quarkConstraints.paper_0710_1869.scales.v1"
+PAPER_0710_1869_DEFAULT_XI_G = 2.448687135269161
 
 
 @dataclass(frozen=True)
@@ -25,7 +26,7 @@ class Paper07101869ScalePoint:
     mode_id: str = PAPER_0710_1869_MODE_ID
     label: str = "central"
     Lambda_IR_GeV: float = 3000.0
-    m_g1_GeV: float = 3000.0
+    m_g1_GeV: float | None = None
     xi_g: float | None = None
     mu_match_GeV: float = 3000.0
     mu_gs_GeV: float = 3000.0
@@ -47,13 +48,24 @@ class Paper07101869ScalePoint:
             "Lambda_IR_GeV",
             require_positive_finite("Lambda_IR_GeV", self.Lambda_IR_GeV),
         )
-        object.__setattr__(self, "m_g1_GeV", require_positive_finite("m_g1_GeV", self.m_g1_GeV))
-        derived_xi_g = float(self.m_g1_GeV / self.Lambda_IR_GeV)
-        resolved_xi_g = (
-            derived_xi_g if self.xi_g is None else require_positive_finite("xi_g", self.xi_g)
-        )
+        if self.m_g1_GeV is None:
+            resolved_xi_g = (
+                PAPER_0710_1869_DEFAULT_XI_G
+                if self.xi_g is None
+                else require_positive_finite("xi_g", self.xi_g)
+            )
+            resolved_m_g1 = float(resolved_xi_g * self.Lambda_IR_GeV)
+        else:
+            resolved_m_g1 = require_positive_finite("m_g1_GeV", self.m_g1_GeV)
+            resolved_xi_g = (
+                float(resolved_m_g1 / self.Lambda_IR_GeV)
+                if self.xi_g is None
+                else require_positive_finite("xi_g", self.xi_g)
+            )
+        derived_xi_g = float(resolved_m_g1 / self.Lambda_IR_GeV)
         if not math.isclose(resolved_xi_g, derived_xi_g, rel_tol=1e-12, abs_tol=0.0):
             raise ValueError("xi_g must equal m_g1_GeV / Lambda_IR_GeV")
+        object.__setattr__(self, "m_g1_GeV", resolved_m_g1)
         object.__setattr__(self, "xi_g", resolved_xi_g)
         object.__setattr__(
             self,

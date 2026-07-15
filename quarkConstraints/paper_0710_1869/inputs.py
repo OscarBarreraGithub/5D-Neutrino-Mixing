@@ -34,11 +34,11 @@ PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_SCHEMA_ID = (
 PAPER_0710_1869_PHYSICAL_SEED_TO_PROFILE_CONTRACT_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.seed_to_profile_contract.v1"
 )
-PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT = 1.0
-PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET = 0.0
+PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT = -1.0
+PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET = 0.6
 PAPER_0710_1869_BULK_MASS_PARAMETERIZATION_ID = (
     "quarkConstraints.paper_0710_1869.bulk_mass_parameterization."
-    "affine_per_sector_eigenvalues.v1"
+    "affine_per_sector_eigenvalues.provisional_negative_slope.v2"
 )
 PAPER_0710_1869_EIGENVALUE_ORDERING_ID = (
     "quarkConstraints.paper_0710_1869.bulk_mass_ordering.ascending_eigenvalues.v1"
@@ -56,6 +56,13 @@ def _require_exact_finite_float(name: str, value: float, *, expected: float) -> 
     numeric = _require_finite_float(name, value)
     if numeric != expected:
         raise ValueError(f"{name} must be exactly {expected!r}")
+    return numeric
+
+
+def _require_negative_finite_float(name: str, value: float) -> float:
+    numeric = _require_finite_float(name, value)
+    if numeric >= 0.0:
+        raise ValueError(f"{name} must be negative")
     return numeric
 
 
@@ -299,16 +306,17 @@ class Paper07101869Eq3Example:
 
 @dataclass(frozen=True)
 class Paper07101869AffineBulkMassSectorPolicy:
-    """Frozen affine bulk-mass map for one MFV sector."""
+    """Affine bulk-mass map for one MFV sector."""
 
     schema_id: str = PAPER_0710_1869_AFFINE_BULK_MASS_SECTOR_POLICY_SCHEMA_ID
     sector_id: str = "Q"
     leading_term_coefficient: float = PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT
     universal_offset: float = PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET
     notes: str = (
-        "Affine eigenvalue map for one sector. The default frozen paper-owned "
-        "choice keeps the leading coefficient at +1 and the omitted universal "
-        "term at 0 instead of routing through a hidden surrogate."
+        "RESIDUAL(C-6): exact Table-I affine coefficients pending paper 0710.1869. "
+        "Provisional negative-slope affine eigenvalue map for one sector; larger "
+        "Yukawa eigenvalues map to smaller c values so the heaviest quark is the "
+        "most IR-localized."
     )
 
     def __post_init__(self) -> None:
@@ -329,19 +337,17 @@ class Paper07101869AffineBulkMassSectorPolicy:
         object.__setattr__(
             self,
             "leading_term_coefficient",
-            _require_exact_finite_float(
+            _require_negative_finite_float(
                 "leading_term_coefficient",
                 self.leading_term_coefficient,
-                expected=PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT,
             ),
         )
         object.__setattr__(
             self,
             "universal_offset",
-            _require_exact_finite_float(
+            _require_finite_float(
                 "universal_offset",
                 self.universal_offset,
-                expected=PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET,
             ),
         )
         object.__setattr__(self, "notes", require_nonempty_identifier("notes", self.notes))
@@ -388,13 +394,13 @@ class Paper07101869UniversalTermPolicy:
         )
     )
     omitted_terms_treatment_id: str = (
-        "quarkConstraints.paper_0710_1869.omitted_terms.explicit_zero_offset.v1"
+        "quarkConstraints.paper_0710_1869.omitted_terms.provisional_affine_offsets.v2"
     )
     notes: str = (
+        "RESIDUAL(C-6): exact Table-I affine coefficients pending paper 0710.1869. "
         "Closed default policy for the missing paper-honest physical bridge: "
-        "all sector-leading coefficients are frozen to +1.0 and all universal "
-        "offsets are frozen to 0.0 until a later reviewed version explicitly "
-        "widens that choice."
+        "sector policies are explicit affine maps with negative leading "
+        "coefficients until a later reviewed version installs the sourced values."
     )
 
     def __post_init__(self) -> None:
@@ -431,10 +437,9 @@ class Paper07101869UniversalTermPolicy:
         if sector_ids != ("Q", "u", "d"):
             raise ValueError("sector_policies must be ordered as Q, u, d")
         for policy in policies:
-            if policy.leading_term_coefficient != PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT:
-                raise ValueError("sector_policies must keep leading_term_coefficient at 1.0")
-            if policy.universal_offset != PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET:
-                raise ValueError("sector_policies must keep universal_offset at 0.0")
+            if policy.leading_term_coefficient >= 0.0:
+                raise ValueError("sector_policies must use negative leading_term_coefficient")
+            _require_finite_float("sector_policy.universal_offset", policy.universal_offset)
         object.__setattr__(self, "sector_policies", policies)
         object.__setattr__(
             self,

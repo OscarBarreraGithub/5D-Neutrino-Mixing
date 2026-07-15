@@ -108,24 +108,24 @@ _PAPER_LR_OPERATOR_DEFINITION_IDS = (
     PAPER_0710_1869_DELTAF2_OPERATOR_DEFINITION_Q5_LR_ID,
 )
 _PAPER_TO_BMU_LR_OPERATOR_MAP = (
-    (0.0, 2.0),
+    (0.0, -2.0),
     (1.0, 0.0),
 )
 _BMU_TO_PAPER_LR_OPERATOR_MAP = (
     (0.0, 1.0),
-    (0.5, 0.0),
+    (-0.5, 0.0),
 )
 _PAPER_TO_BMU_LR_WILSON_MAP = (
-    (0.0, 0.5),
+    (0.0, -0.5),
     (1.0, 0.0),
 )
 _BMU_TO_PAPER_LR_WILSON_MAP = (
     (0.0, 1.0),
-    (2.0, 0.0),
+    (-2.0, 0.0),
 )
 _LR_BASIS_SOURCE_ID = (
     "becirevic-villadoro.hep-lat-0408029.plus.ciuchini.hep-ph-9711402.plus."
-    "bmu.hep-ph-0005183.lr_map.ndr_ms.frozen.v2"
+    "bmu.hep-ph-0005183.lr_map.ndr_ms.frozen.v3"
 )
 _LR_BASIS_SOURCE_CITATION = (
     "Becirevic and Villadoro, hep-lat/0408029 (O4/O5 scalar LR basis used in the "
@@ -297,17 +297,17 @@ def _closed_form_bmu_lr_segment_matrix(
     gamma22 = _GAMMA0_BMU_LR[1][1]
     exponent_1 = gamma11 / (2.0 * beta0_value)
     exponent_2 = gamma22 / (2.0 * beta0_value)
-    eta = alpha_end / alpha_start
+    eta = alpha_start / alpha_end
     eta_a1 = eta**exponent_1
     eta_a2 = eta**exponent_2
-    off_diagonal = (gamma12 / (gamma22 - gamma11)) * (eta_a2 - eta_a1)
+    off_diagonal = (gamma12 / (gamma11 - gamma22)) * (eta_a1 - eta_a2)
     return (
         (
             _require_finite_complex("u11", eta_a1 + 0.0j),
-            _require_finite_complex("u12", off_diagonal + 0.0j),
+            0.0 + 0.0j,
         ),
         (
-            0.0 + 0.0j,
+            _require_finite_complex("u21", off_diagonal + 0.0j),
             _require_finite_complex("u22", eta_a2 + 0.0j),
         ),
     )
@@ -1360,7 +1360,7 @@ def compute_deltaf2_lo_evolution_matrix(
         )
         exponent_vll = resolved_adm.gamma0_vll / (2.0 * float(beta_0(n_f)))
         exponent_vrr = resolved_adm.gamma0_vrr / (2.0 * float(beta_0(n_f)))
-        eta = alpha_end / alpha_start
+        eta = alpha_start / alpha_end
         vll_factor = float(eta**exponent_vll)
         vrr_factor = float(eta**exponent_vrr)
         bmu_lr_segment = _closed_form_bmu_lr_segment_matrix(

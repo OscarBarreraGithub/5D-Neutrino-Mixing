@@ -13,7 +13,9 @@ PAPER_0710_1869_CONVENTIONS_SCHEMA_ID = (
 )
 PAPER_0710_1869_OPERATOR_BASIS_ID = "kk_gluon_tree_np_only.v1"
 PAPER_0710_1869_MATCHING_ID = "eft_matching.lo.v1"
-PAPER_0710_1869_KK_GLUON_NORMALIZATION_ID = "explicit_mu_gs.normalization.v1"
+PAPER_0710_1869_KK_GLUON_NORMALIZATION_ID = (
+    "explicit_mu_gs.g_s_sqrt_4pi_alpha_s.with_rs_volume_sqrt_2L.v2"
+)
 PAPER_0710_1869_PROVENANCE_POLICY_ID = "deterministic_bundle.required.v1"
 PAPER_0710_1869_VERIFIER_POLICY_ID = "independent_verifier.required.v1"
 PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_POLICY_ID = (
@@ -22,7 +24,7 @@ PAPER_0710_1869_SEED_TO_PROFILE_MAPPING_POLICY_ID = (
 )
 PAPER_0710_1869_UNIVERSAL_TERM_COEFFICIENT_POLICY_ID = (
     "quarkConstraints.paper_0710_1869.universal_terms."
-    "explicit_zero_offset_unit_leading_coefficients.v1"
+    "provisional_negative_slope_affine_coefficients.v2"
 )
 PAPER_0710_1869_PROFILE_DERIVATION_POLICY_ID = (
     "quarkConstraints.paper_0710_1869.profile_derivation."

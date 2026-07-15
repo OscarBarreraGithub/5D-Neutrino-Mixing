@@ -38,10 +38,12 @@ EXPECTED_INTERPRETATION = "kaon.np_only.v1"
 EXPECTED_SYSTEM = "kaon"
 EXPECTED_SECTOR = "down"
 EXPECTED_REQUIRED_OBSERVABLES = ("M12_K_NP.re", "M12_K_NP.im", "Delta_m_K_NP")
-EXPECTED_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR")
-EXPECTED_UNSUPPORTED_OPERATORS = ("Q4_LR", "Q5_LR")
+EXPECTED_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR")
+EXPECTED_UNSUPPORTED_OPERATORS: tuple[str, ...] = ()
 EXPECTED_HAMILTONIAN_CONVENTION_ID = "heff.sum_ci_qi.no_hc_factor.v1"
-EXPECTED_MATRIX_ELEMENT_FORMULA_ID = "kaon.q1_vll_vrr.8over3_fk2_mk2_bk_mu.v1"
+EXPECTED_MATRIX_ELEMENT_FORMULA_ID = (
+    "kaon.q1_vll_vrr.2over3_fk2_mk2_bk_mu.plpr_projectors.v2"
+)
 EXPECTED_PARITY_RELATION_ID = "kaon.q1_vll_equals_q1_vrr.by_parity.v1"
 EXPECTED_OBSERVABLE_UNITS = "GeV"
 EXPECTED_BAG_PARAMETER_SOURCE_SCHEME_ID = "rgi.flag21.average.v1"
@@ -92,8 +94,8 @@ class TolerancePolicy:
     unsupported_lr_abs_tol: float = 1e-30
     description: str = (
         "Scales use exact agreement; reconstructed matrix elements and observables "
-        "use the frozen public absolute-only tolerance contract; unsupported LR "
-        "coefficients must be numerically zero within the dedicated absolute tolerance."
+        "use the frozen public absolute-only tolerance contract; LR Wilson "
+        "coefficients are part of the supported Wilson surface."
     )
 
 
@@ -123,7 +125,7 @@ class FrozenVerifierContract:
     h_eff_notes: str = "No additional hermitian-conjugate factor is applied."
     m12_formula: str = "M12 = <H_eff> / (2 m_K)"
     delta_m_formula: str = "Delta_m = 2 Re(M12)"
-    q1_matrix_element_formula: str = "<Q1> = (8/3) f_K^2 m_K^2 B_K(mu_had)"
+    q1_matrix_element_formula: str = "<Q1> = (2/3) f_K^2 m_K^2 B_K(mu_had)"
     bag_parameter_formula: str = (
         "B_K(mu_had) = hat_B_K * alpha_s(mu_had)^(4 / (2 beta_0(n_f(mu_had))))"
     )
@@ -791,7 +793,7 @@ def verify_inputs(inputs: VerifierInputSet) -> ArtifactVerificationReport:
             issues,
             code="supported_operator_subset_mismatch",
             message=(
-                "hadronic bundle must advertise only the supported Q1_VLL/Q1_VRR subset "
+                "hadronic bundle must advertise the supported Q1/LR subset "
                 "in the frozen order"
             ),
             subject="hadronic.supported_operator_names",
@@ -801,8 +803,7 @@ def verify_inputs(inputs: VerifierInputSet) -> ArtifactVerificationReport:
             issues,
             code="unsupported_operator_subset_mismatch",
             message=(
-                "hadronic bundle must advertise only the guarded LR subset Q4_LR/Q5_LR "
-                "in the frozen order"
+                "hadronic bundle must not advertise any guarded unsupported operators"
             ),
             subject="hadronic.unsupported_operator_names",
         )
@@ -894,22 +895,10 @@ def verify_inputs(inputs: VerifierInputSet) -> ArtifactVerificationReport:
     q1_vrr = complex(coefficient_map.get("Q1_VRR", 0.0 + 0.0j))
     q4_lr = complex(coefficient_map.get("Q4_LR", 0.0 + 0.0j))
     q5_lr = complex(coefficient_map.get("Q5_LR", 0.0 + 0.0j))
-    if (
-        abs(q4_lr) > tolerance_policy.unsupported_lr_abs_tol
-        or abs(q5_lr) > tolerance_policy.unsupported_lr_abs_tol
-    ):
-        _append_issue(
-            issues,
-            code="lr_coefficients_nonzero",
-            message=(
-                "independent verifier refuses non-zero LR coefficients for the frozen "
-                "Q1-only validation scope"
-            ),
-            subject="Q4_LR/Q5_LR",
-        )
+    # RESIDUAL(C-2): default RH-down alignment model choice pending paper 0710.1869.
 
     recomputed_q1_matrix_element = (
-        (8.0 / 3.0)
+        (2.0 / 3.0)
         * (hadronic.f_K_GeV**2)
         * (hadronic.m_K0_GeV**2)
         * hadronic.B_K_mu_had

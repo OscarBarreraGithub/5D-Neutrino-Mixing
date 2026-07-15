@@ -44,7 +44,7 @@ PAPER_0710_1869_DELTAF2_OPERATOR_DEFINITION_Q5_LR_ID = (
     "paper_0710_1869.deltaf2.q5_lr.susy_o5.scalar_lr.color_mixed.v1"
 )
 PAPER_0710_1869_DELTAF2_PROJECTOR_NORMALIZATION_ID = (
-    "paper_0710_1869.deltaf2.projectors.pl_pr_equals_1mp_gamma5_over_2.v1"
+    "paper_0710_1869.deltaf2.projectors.pl_pr_equals_1mp_gamma5_over_2.v2"
 )
 PAPER_0710_1869_DELTAF2_PROJECTOR_NORMALIZATION_NOTE = (
     "All chiral bilinears use P_L = (1-gamma5)/2 and P_R = (1+gamma5)/2. "
@@ -54,12 +54,10 @@ PAPER_0710_1869_DELTAF2_PROJECTOR_NORMALIZATION_NOTE = (
     "factor-of-two projector convention."
 )
 PAPER_0710_1869_DELTAF2_OPERATOR_METADATA_COMPATIBILITY_NOTE = (
-    "This LR-freeze slice is a metadata clarification only. It does not change the "
-    "frozen operator ordering, projector normalization convention already used by "
-    "the formulas, supported Q1-only observable subset, or any matching/RG/"
-    "observable numeric behavior. Legacy susy_o4/susy_o5 identifiers are preserved "
-    "as stable machine ids and are not statements about the underlying mediator "
-    "sector."
+    "This slice keeps the frozen operator ordering while pairing the explicit "
+    "P_L/P_R projector normalization with projector-normalized hadronic matrix "
+    "elements. Legacy susy_o4/susy_o5 identifiers are preserved as stable machine "
+    "ids and are not statements about the underlying mediator sector."
 )
 
 # This matches the frozen paper-mode conventions bundle while the explicit
