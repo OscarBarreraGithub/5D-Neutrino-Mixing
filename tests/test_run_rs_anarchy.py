@@ -4,11 +4,10 @@ Coverage (cleanup unit C02a-code, R03-I3 task 2):
 
 1. The flag round-trips: parsed args, ``EnsembleConfig``, and the resolved
    numerical override on the ``deltaf2`` side all agree.
-2. The default (``central``) reproduces the pre-flag code path bit-for-bit
-   by passing ``None`` for ``epsilon_k_np_budget_override`` — i.e. the
-   ``deltaf2`` default ~6.7e-5 is used.
-3. The 'low' and 'high' edges map to the documented numerical values
-   (1e-5 and 3e-4 respectively) and propagate into ``evaluate_epsilon_k``.
+2. The default (``central``) delegates to the shared deltaf2 sign-aware
+   one-sigma policy by passing ``None`` for ``epsilon_k_np_budget_override``.
+3. The 'low' and 'high' edges map to the shared policy's lower/upper signed
+   budgets and propagate into ``evaluate_epsilon_k``.
 4. Invalid edges are rejected by argparse.
 
 No SLURM scan is executed here; the actual three-edge RUNA reruns are
@@ -37,45 +36,59 @@ def rs_module():
 
 
 def test_budget_edge_table_has_three_entries(rs_module):
-    """The {central, low, high} edge contract is fixed by the C02a plan."""
+    """The {central, low, high} edge contract follows the shared policy."""
+    from quarkConstraints.deltaf2 import delta_f2_epsilon_k_budget_policy
+
+    policy = delta_f2_epsilon_k_budget_policy()
     assert set(rs_module.EPSILON_K_BUDGET_EDGES.keys()) == {
         "central",
         "low",
         "high",
     }
     assert rs_module.EPSILON_K_BUDGET_EDGES["central"] is None
-    assert rs_module.EPSILON_K_BUDGET_EDGES["low"] == pytest.approx(1.0e-5)
-    assert rs_module.EPSILON_K_BUDGET_EDGES["high"] == pytest.approx(3.0e-4)
+    assert rs_module.EPSILON_K_BUDGET_EDGES["low"] == pytest.approx(
+        policy.budget_lowers_epsilon_k
+    )
+    assert rs_module.EPSILON_K_BUDGET_EDGES["high"] == pytest.approx(
+        policy.budget_raises_epsilon_k
+    )
     assert rs_module.DEFAULT_EPSILON_K_BUDGET == "central"
 
 
 def test_argparser_default_is_central(rs_module):
-    """Omitting the flag must reproduce the pre-flag behaviour."""
+    """Omitting the flag must select the shared-policy default."""
     parser = rs_module._build_argparser()
     args = parser.parse_args(["--output-dir", "/tmp/_rs_anarchy_dummy"])
     assert args.epsilon_k_budget == "central"
 
 
 @pytest.mark.parametrize(
-    "edge, expected_override",
+    "edge",
     [
-        ("central", None),
-        ("low", 1.0e-5),
-        ("high", 3.0e-4),
+        "central",
+        "low",
+        "high",
     ],
 )
-def test_argparser_accepts_three_edges(rs_module, edge, expected_override):
+def test_argparser_accepts_three_edges(rs_module, edge):
     """Each documented edge label parses and maps to the expected value."""
     parser = rs_module._build_argparser()
     args = parser.parse_args(
         ["--output-dir", "/tmp/_rs_anarchy_dummy", "--epsilon-k-budget", edge]
     )
     assert args.epsilon_k_budget == edge
-    assert rs_module.EPSILON_K_BUDGET_EDGES[args.epsilon_k_budget] == (
-        pytest.approx(expected_override)
-        if expected_override is not None
-        else None
-    )
+    if edge == "central":
+        assert rs_module.EPSILON_K_BUDGET_EDGES[edge] is None
+    else:
+        from quarkConstraints.deltaf2 import delta_f2_epsilon_k_budget_policy
+
+        policy = delta_f2_epsilon_k_budget_policy()
+        expected = (
+            policy.budget_lowers_epsilon_k
+            if edge == "low"
+            else policy.budget_raises_epsilon_k
+        )
+        assert rs_module.EPSILON_K_BUDGET_EDGES[edge] == pytest.approx(expected)
 
 
 def test_argparser_rejects_unknown_edge(rs_module):
@@ -94,6 +107,9 @@ def test_argparser_rejects_unknown_edge(rs_module):
 
 def test_ensemble_config_round_trip(rs_module):
     """EnsembleConfig stores both the edge label and the resolved override."""
+    from quarkConstraints.deltaf2 import delta_f2_epsilon_k_budget_policy
+
+    policy = delta_f2_epsilon_k_budget_policy()
     cfg = rs_module.EnsembleConfig(
         mkk_values_GeV=(5000.0,),
         n_draws_per_tile=1,
@@ -101,7 +117,9 @@ def test_ensemble_config_round_trip(rs_module):
         epsilon_k_np_budget_override=rs_module.EPSILON_K_BUDGET_EDGES["low"],
     )
     assert cfg.epsilon_k_budget_edge == "low"
-    assert cfg.epsilon_k_np_budget_override == pytest.approx(1.0e-5)
+    assert cfg.epsilon_k_np_budget_override == pytest.approx(
+        policy.budget_lowers_epsilon_k
+    )
 
     cfg_default = rs_module.EnsembleConfig(
         mkk_values_GeV=(5000.0,), n_draws_per_tile=1
@@ -143,10 +161,9 @@ def _make_kaon_wilsons(c_imag: float = 1.0):
 
 
 def test_evaluate_epsilon_k_default_budget_matches_implicit():
-    """Passing ``None`` reproduces the historical default exactly."""
+    """Passing ``None`` uses the shared sign-aware default exactly."""
     from quarkConstraints.deltaf2 import (
-        EPSILON_K_EXP,
-        EPSILON_K_SM,
+        delta_f2_epsilon_k_budget_policy,
         evaluate_epsilon_k,
     )
 
@@ -156,20 +173,27 @@ def test_evaluate_epsilon_k_default_budget_matches_implicit():
         wilsons,
         epsilon_k_np_budget_override=None,
     )
-    assert implicit.epsilon_k_np_budget == pytest.approx(
-        abs(EPSILON_K_EXP - EPSILON_K_SM)
+    expected_budget, expected_direction = (
+        delta_f2_epsilon_k_budget_policy().selected_signed_budget(
+            implicit.epsilon_k_np_signed
+        )
     )
+    assert implicit.epsilon_k_np_budget == pytest.approx(
+        expected_budget
+    )
+    assert implicit.selected_budget_direction == expected_direction
     assert explicit.epsilon_k_np_budget == pytest.approx(
         implicit.epsilon_k_np_budget
     )
     assert explicit.ratio_to_budget == pytest.approx(implicit.ratio_to_budget)
 
 
-@pytest.mark.parametrize("override", [1.0e-5, 3.0e-4])
-def test_evaluate_epsilon_k_override_rescales_ratio(override):
+@pytest.mark.parametrize("edge", ["low", "high"])
+def test_evaluate_epsilon_k_override_rescales_ratio(rs_module, edge):
     """Replacing the budget rescales ratio_to_budget by 1/override exactly."""
     from quarkConstraints.deltaf2 import evaluate_epsilon_k
 
+    override = rs_module.EPSILON_K_BUDGET_EDGES[edge]
     wilsons = _make_kaon_wilsons()
     baseline = evaluate_epsilon_k(wilsons)
     overridden = evaluate_epsilon_k(
@@ -222,15 +246,17 @@ def test_worker_init_round_trips_budget_override(rs_module, monkeypatch):
         "pdg_j_factor": rs_module.PDG_J_FACTOR_TOL,
         "base_seed": 20260506,
         "epsilon_k_budget_edge": "high",
-        "epsilon_k_np_budget_override": 3.0e-4,
+        "epsilon_k_np_budget_override": rs_module.EPSILON_K_BUDGET_EDGES["high"],
     }
     rs_module._worker_init(cfg_dict)
     cfg = rs_module._GLOBAL_CFG
     assert cfg is not None
     assert cfg.epsilon_k_budget_edge == "high"
-    assert cfg.epsilon_k_np_budget_override == pytest.approx(3.0e-4)
+    assert cfg.epsilon_k_np_budget_override == pytest.approx(
+        rs_module.EPSILON_K_BUDGET_EDGES["high"]
+    )
 
-    # And the default-edge path stays None (the legacy bit-for-bit case).
+    # And the default-edge path stays None so the shared core policy is used.
     cfg_dict["epsilon_k_budget_edge"] = "central"
     cfg_dict["epsilon_k_np_budget_override"] = None
     rs_module._worker_init(cfg_dict)

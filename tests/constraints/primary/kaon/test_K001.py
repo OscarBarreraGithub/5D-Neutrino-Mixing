@@ -16,6 +16,7 @@ from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.deltaf2 import (
     DEFAULT_DELTA_F2_INPUTS_V1,
     compute_delta_f2_wilsons,
+    delta_f2_epsilon_k_budget_policy,
     evaluate_epsilon_k,
     evaluate_epsilon_k_with_running,
 )
@@ -68,12 +69,15 @@ def _kaon_wilsons(couplings: QuarkMassBasisCouplings):
 
 def _audited_epsilon_k_with_running(
     couplings: QuarkMassBasisCouplings,
-    budget: float,
+    budget: float | None = None,
 ):
+    kwargs = {}
+    if budget is not None:
+        kwargs["epsilon_k_np_budget_override"] = budget
     return evaluate_epsilon_k_with_running(
         _kaon_wilsons(couplings),
         mu_had=2.0,
-        epsilon_k_np_budget_override=budget,
+        **kwargs,
     )
 
 
@@ -103,28 +107,63 @@ def test_anchor_matches_yaml():
     assert constraint.anchor.flag_bag_parameters.b_k_msbar_2gev_nf21 == (
         flag["B_K_MSbar_2GeV_Nf21"]
     )
+    policy = delta_f2_epsilon_k_budget_policy()
     central_budget = abs(exp["value"] - sm["value"])
-    bgs_sigma = math.sqrt(
+    grouped_sigma = math.sqrt(
         sum(value * value for value in sm["grouped_uncertainties"].values())
     )
-    combined_sigma = math.sqrt(
-        bgs_sigma * bgs_sigma
-        + exp["uncertainty"] * exp["uncertainty"]
-        + (0.15e-3) * (0.15e-3)
-    )
-    loose_budget = abs(exp["value"] - (sm["value"] - combined_sigma))
+    combined_sigma = math.sqrt((0.18e-3) ** 2 + exp["uncertainty"] ** 2)
+    lower_budget = abs(combined_sigma - central_budget)
+    upper_budget = central_budget + combined_sigma
 
     assert constraint.anchor.central_budget == pytest.approx(central_budget)
-    assert constraint.anchor.budget_band.sm_theory_sigma == pytest.approx(bgs_sigma)
+    assert constraint.anchor.budget_band.policy_id == policy.policy_id
+    assert constraint.anchor.budget_band.confidence_level == (
+        "68.27% one_sigma_sensitivity"
+    )
+    assert constraint.anchor.budget_band.sm_theory_sigma == pytest.approx(0.18e-3)
+    assert grouped_sigma != pytest.approx(
+        constraint.anchor.budget_band.sm_theory_sigma
+    )
     assert constraint.anchor.budget_band.combined_sigma == pytest.approx(
         combined_sigma
     )
     assert constraint.anchor.budget_band.tight_budget == pytest.approx(
-        exp["uncertainty"]
+        min(lower_budget, upper_budget)
     )
-    assert constraint.anchor.budget_band.loose_budget == pytest.approx(loose_budget)
-    assert constraint.anchor.budget == pytest.approx(loose_budget)
-    assert constraint.anchor.budget == pytest.approx(3.0370868171657726e-4)
+    assert constraint.anchor.budget_band.loose_budget == pytest.approx(
+        max(lower_budget, upper_budget)
+    )
+    assert constraint.anchor.budget_band.budget_lowers_epsilon_k == pytest.approx(
+        lower_budget
+    )
+    assert constraint.anchor.budget_band.budget_raises_epsilon_k == pytest.approx(
+        upper_budget
+    )
+    assert constraint.anchor.budget_band.sm_choice_sensitivity == pytest.approx(0.15e-3)
+    assert policy.sm_choice_sensitivity == pytest.approx(0.15e-3)
+    assert constraint.anchor.budget == pytest.approx(upper_budget)
+    assert constraint.anchor.budget == pytest.approx(2.4733579788827265e-4)
+
+
+def test_core_and_k001_share_epsilon_k_budget_policy():
+    """Cross-pin K001 to the shared Delta-F=2 epsilon_K budget policy."""
+    constraint = fcc.get(_PID)
+    policy = delta_f2_epsilon_k_budget_policy()
+    band = constraint.anchor.budget_band
+
+    assert band.policy_id == policy.policy_id
+    assert band.confidence_level == policy.confidence_level
+    assert band.central_budget == pytest.approx(policy.central_budget)
+    assert band.combined_sigma == pytest.approx(policy.primary_combined_sigma)
+    assert band.budget_lowers_epsilon_k == pytest.approx(
+        policy.budget_lowers_epsilon_k
+    )
+    assert band.budget_raises_epsilon_k == pytest.approx(
+        policy.budget_raises_epsilon_k
+    )
+    assert band.tight_budget == pytest.approx(policy.tight_budget)
+    assert band.loose_budget == pytest.approx(policy.loose_budget)
 
 
 def test_evaluate_without_input_degrades_gracefully():
@@ -159,6 +198,8 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
     assert isinstance(result.diagnostics["wilson_coefficients"]["C4_LR"], complex)
     for key in (
         "im_m12_np_gev",
+        "epsilon_k_np_signed",
+        "epsilon_k_np_abs",
         "hadronic_scale_gev",
         "matching_scale_gev",
         "m_kk_gev",
@@ -167,16 +208,27 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
         "loose_band_np_budget",
         "hard_veto_np_budget",
         "budget_combined_sigma",
+        "budget_primary_combined_sigma",
         "budget_sm_theory_sigma",
         "budget_experimental_sigma",
-        "budget_sm_choice_sigma",
-        "budget_sm_at_loose_edge",
-        "budget_sm_at_tight_edge",
+        "budget_lowers_epsilon_k",
+        "budget_raises_epsilon_k",
+        "signed_lower_edge",
+        "signed_upper_edge",
+        "sm_choice_sensitivity",
+        "budget_sm_choice_sensitivity",
     ):
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["qcd_running_applied"] is True
     assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(2.0)
+    assert result.diagnostics["budget_policy_id"] == (
+        delta_f2_epsilon_k_budget_policy().policy_id
+    )
+    assert result.diagnostics["confidence_level"] == (
+        "68.27% one_sigma_sensitivity"
+    )
+    assert result.diagnostics["sm_choice_sensitivity_in_hard_gate"] is False
 
 
 def test_reference_couplings_show_qcd_running_enhancement():
@@ -220,10 +272,10 @@ def test_pass_fail_and_numbers_match_audited_evaluate_epsilon_k(
     constraint = fcc.get(_PID)
     point = point_builder.build_from_quark_couplings(couplings)
     result = constraint.evaluate(point)
-    audited = _audited_epsilon_k_with_running(couplings, constraint.anchor.budget)
+    audited = _audited_epsilon_k_with_running(couplings)
 
     assert result.passes is expected_pass
-    assert result.predicted == pytest.approx(audited.epsilon_k_np)
+    assert result.predicted == pytest.approx(audited.epsilon_k_np_signed)
     assert result.ratio == pytest.approx(audited.ratio_to_budget)
     assert result.budget == pytest.approx(audited.epsilon_k_np_budget)
     assert result.diagnostics["im_m12_np_gev"] == pytest.approx(audited.im_m12_np)

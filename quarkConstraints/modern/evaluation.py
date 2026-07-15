@@ -213,14 +213,15 @@ def _deltaf2_summary_from_matching(
         hadronic_result = _hadronic_eval_for_system(item.key, wilsons)
 
         if hadronic_result is not None:
-            (
-                ratio_to_bound,
-                effective_amplitude,
-                coherent_amplitude,
-                operator_sizes,
-                dominant_operator,
-                dominant_size,
-            ) = hadronic_result
+            ratio_to_bound = hadronic_result.ratio_to_bound
+            effective_amplitude = hadronic_result.effective_amplitude
+            coherent_amplitude = hadronic_result.coherent_amplitude
+            operator_sizes = hadronic_result.operator_sizes
+            dominant_operator = hadronic_result.dominant_operator
+            dominant_size = hadronic_result.dominant_size
+            budget_policy_id = hadronic_result.budget_policy_id
+            confidence_level = hadronic_result.confidence_level
+            diagnostics = hadronic_result.diagnostics
         else:
             # Fallback: old operator-weight surrogate
             weighted = {
@@ -240,6 +241,9 @@ def _deltaf2_summary_from_matching(
             effective_amplitude = float(operator_sizes[dominant_operator])
             dominant_size = effective_amplitude
             ratio_to_bound = float(effective_amplitude / item.bound)
+            budget_policy_id = None
+            confidence_level = None
+            diagnostics = {}
 
         observables.append(
             DeltaF2ObservableSummary(
@@ -252,6 +256,9 @@ def _deltaf2_summary_from_matching(
                 dominant_operator=dominant_operator,
                 dominant_operator_size=dominant_size,
                 weighted_operator_sizes=operator_sizes,
+                budget_policy_id=budget_policy_id,
+                confidence_level=confidence_level,
+                diagnostics=diagnostics,
             )
         )
     return DeltaF2ConstraintSummary(

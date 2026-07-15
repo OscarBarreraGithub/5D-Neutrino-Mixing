@@ -62,6 +62,7 @@ if str(_REPO_ROOT) not in sys.path:
 from qcd import alpha_s
 from quarkConstraints.deltaf2 import (
     compute_delta_f2_wilsons,
+    delta_f2_epsilon_k_budget_policy,
     evaluate_delta_f2_constraints,
     evaluate_delta_mk_with_running,
 )
@@ -109,20 +110,15 @@ DEFAULT_Y_TRUNC_SIGMA: float = 3.0
 # epsilon_K NP-budget edges for the M_KK^min band sensitivity study
 # ---------------------------------------------------------------------------
 #
-# The current code default is ``budget = |EPSILON_K_EXP - EPSILON_K_SM|``
-# ~ 6.7e-5, i.e. the post-audit BGS 2020 + PDG 2024 central value. The two
-# bracket edges below come from the BGS 2020 total-uncertainty discussion
-# in docs/phase_logs/phase2_h5_signoff.md:90-101 and the C02a cleanup plan
-# (low ~1e-5, high ~3e-4); under the symbolic 1/sqrt(|Delta epsilon_K|)
-# scaling of M_KK^min they correspond to factor 2.59x (tight) and 0.47x
-# (loose) excursions on the central headline value.
-#
-# Passing ``--epsilon-k-budget central`` is bit-for-bit identical to the
-# pre-flag code path (None override -> code default is used).
+# The default path delegates to the shared core policy, which selects the
+# signed one-sigma budget by the sign of epsilon_K^NP.  The scalar low/high
+# overrides are the same policy's lower/upper signed budgets, provided for
+# edge scans and older scalar-budget tooling.
+_EPSILON_K_POLICY = delta_f2_epsilon_k_budget_policy()
 EPSILON_K_BUDGET_EDGES: dict = {
-    "central": None,    # use deltaf2 code default (~6.7e-5)
-    "low": 1.0e-5,      # tight NP budget (raises M_KK^min ~2.59x)
-    "high": 3.0e-4,     # loose NP budget (lowers M_KK^min ~0.47x)
+    "central": None,  # use deltaf2 shared sign-aware one-sigma policy
+    "low": _EPSILON_K_POLICY.budget_lowers_epsilon_k,
+    "high": _EPSILON_K_POLICY.budget_raises_epsilon_k,
 }
 DEFAULT_EPSILON_K_BUDGET: str = "central"
 
@@ -291,8 +287,8 @@ class EnsembleConfig:
     base_seed: int = 20260506
     # epsilon_K NP-budget edge label and the resolved numerical override.
     # ``epsilon_k_budget_edge`` is "central"/"low"/"high"; the resolved
-    # numerical value is None for "central" (use deltaf2 code default) and
-    # an explicit budget value for "low"/"high". See EPSILON_K_BUDGET_EDGES.
+    # numerical value is None for "central" (shared sign-aware core policy) and
+    # an explicit scalar budget value for "low"/"high".
     epsilon_k_budget_edge: str = DEFAULT_EPSILON_K_BUDGET
     epsilon_k_np_budget_override: Optional[float] = None
 
@@ -732,24 +728,17 @@ def _build_argparser() -> argparse.ArgumentParser:
                    help="Allowed multiplicative deviation in |V_us|, |V_cb|, |V_ub|.")
     p.add_argument("--pdg-j-factor", type=float, default=PDG_J_FACTOR_TOL,
                    help="Allowed multiplicative deviation in the Jarlskog invariant J.")
-    # epsilon_K NP-budget sensitivity sweep (cleanup unit C02a-code).
-    # 'central' (default) reproduces the pre-flag code path bit-for-bit and
-    # uses the deltaf2 default ~6.7e-5. 'low' and 'high' replace the budget
-    # with 1e-5 and 3e-4 respectively to bracket the BGS total uncertainty
-    # (see docs/phase_logs/phase2_h5_signoff.md:90-101 and the band-quote
-    # paragraph in docs/quark_scan_methodology_note.tex).
+    # epsilon_K NP-budget sensitivity sweep. 'central' (default) delegates to
+    # the deltaf2 shared sign-aware one-sigma policy; 'low' and 'high' replace
+    # the direction-aware policy with scalar lower/upper signed budgets.
     p.add_argument(
         "--epsilon-k-budget",
         type=str,
         default=DEFAULT_EPSILON_K_BUDGET,
         choices=tuple(EPSILON_K_BUDGET_EDGES.keys()),
-        help="epsilon_K NP-budget edge: 'central' uses the deltaf2 default "
-             "(~6.7e-5, BGS 2020 + PDG 2024); 'low' (1e-5) gives the tight "
-             "edge that raises M_KK^min by ~2.59x; 'high' (3e-4) gives the "
-             "loose edge that lowers M_KK^min by ~0.47x. The actual RUNA "
-             "reruns across the three edges are tracked as cleanup unit "
-             "C02c; this flag exposes the seam without committing to a "
-             "scan in this commit.",
+        help="epsilon_K NP-budget edge: 'central' uses the shared deltaf2 "
+             "sign-aware 68.27% one-sigma policy; 'low' and 'high' are scalar "
+             "overrides for the policy's lower/upper signed budgets.",
     )
     return p
 
@@ -810,7 +799,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if cfg.epsilon_k_np_budget_override is None:
         print(
             f"[rs_anarchy] eps_K budget = {cfg.epsilon_k_budget_edge} "
-            "(deltaf2 default ~6.7e-5; bit-for-bit reproduces pre-flag runs)"
+            "(deltaf2 shared sign-aware one-sigma policy)"
         )
     else:
         print(

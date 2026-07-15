@@ -16,8 +16,8 @@ Severity
 HARD.  ``epsilon_K`` is observed, and any RS new-physics contribution must fit
 inside the uncertainty-aware NP budget band documented in
 ``docs/audits/epsilon_k_sm_decision.md:34-37,71-100``.  The central residual
-``|epsilon_exp - epsilon_SM|`` is kept as a diagnostic; the HARD veto uses the
-loose edge of the documented 1-sigma band.
+``epsilon_exp - epsilon_SM`` is kept as a diagnostic; the HARD veto uses the
+shared Delta-F=2 direction-aware one-sigma budget.
 
 Catalog sidecar
 ---------------
@@ -42,6 +42,8 @@ from flavor_catalog_constraints.anchors import (
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.deltaf2 import (
+    EpsilonKBudgetPolicy,
+    epsilon_k_budget_policy,
     epsilon_k_from_wilsons_with_running,
     epsilon_k_wilsons_from_couplings,
 )
@@ -54,33 +56,33 @@ _EXPERIMENTAL_ANCHOR_CANDIDATES = ("canonical_experimental_value",)
 _SM_ANCHOR_CANDIDATES = ("standard_model_reference",)
 _FLAG_BAG_CANDIDATES = ("flag_bag_parameters",)
 _BUDGET_DOC_CITATION = "docs/audits/epsilon_k_sm_decision.md:34-37,71-100"
-_SM_CHOICE_SENSITIVITY = 0.15e-3
 _MU_HAD_GEV = 2.0
 
 
 @dataclass(frozen=True)
 class EpsilonKBudgetBand:
-    """Documented epsilon_K NP budget band for the K001 HARD veto.
+    """Shared epsilon_K NP budget policy plus K001 YAML provenance.
 
-    The construction follows ``docs/audits/epsilon_k_sm_decision.md``:
-    combine the BGS grouped SM uncertainty, PDG experimental uncertainty, and
-    SM-choice sensitivity in quadrature; keep the central residual as a
-    diagnostic; use the loose edge as the veto budget for catalog exclusions.
-    The BGS grouped uncertainty includes the published kappa_epsilon=0.94(2)
-    contribution through the non-perturbative group.
+    The numbers are owned by ``quarkConstraints.deltaf2``.  K001 only validates
+    that its YAML anchor agrees with the shared policy and carries the grouped
+    BGS uncertainty components as provenance diagnostics.
     """
 
+    policy_id: str
+    confidence_level: str
     doc_citation: str
     central_budget: float
     tight_budget: float
     loose_budget: float
     hard_veto_budget: float
+    budget_lowers_epsilon_k: float
+    budget_raises_epsilon_k: float
+    signed_lower_edge: float
+    signed_upper_edge: float
     sm_theory_sigma: float
     experimental_sigma: float
-    sm_choice_sigma: float
     combined_sigma: float
-    sm_at_loose_edge: float
-    sm_at_tight_edge: float
+    sm_choice_sensitivity: float
     bgs_grouped_uncertainties: Mapping[str, float]
 
 
@@ -136,7 +138,7 @@ class EpsilonKAnchor:
 
     @property
     def budget(self) -> float:
-        """Uncertainty-aware HARD veto budget for ``|epsilon_K^NP|``."""
+        """Largest scalar edge for legacy display; actual veto is sign-selected."""
         return self.budget_band.hard_veto_budget
 
 
@@ -192,49 +194,74 @@ def _build_budget_band(
     standard_model: Anchor,
     standard_model_sub: Mapping[str, Any],
 ) -> EpsilonKBudgetBand:
+    policy: EpsilonKBudgetPolicy = epsilon_k_budget_policy()
     if experimental.uncertainty is None or experimental.uncertainty <= 0.0:
         raise AnchorError(
             f"{process_id}: epsilon_K experimental uncertainty is required "
             "for the documented budget band"
+        )
+    if not math.isclose(
+        experimental.value,
+        policy.experimental_value,
+        rel_tol=0.0,
+        abs_tol=1e-15,
+    ):
+        raise AnchorError(
+            f"{process_id}: experimental epsilon_K value {experimental.value} "
+            f"does not match shared policy {policy.experimental_value}"
+        )
+    if not math.isclose(
+        experimental.uncertainty,
+        policy.sigma_exp,
+        rel_tol=0.0,
+        abs_tol=1e-15,
+    ):
+        raise AnchorError(
+            f"{process_id}: experimental epsilon_K uncertainty "
+            f"{experimental.uncertainty} does not match shared policy {policy.sigma_exp}"
+        )
+    if not math.isclose(
+        standard_model.value,
+        policy.sm_value,
+        rel_tol=0.0,
+        abs_tol=1e-15,
+    ):
+        raise AnchorError(
+            f"{process_id}: SM epsilon_K value {standard_model.value} "
+            f"does not match shared policy {policy.sm_value}"
         )
 
     grouped = _load_bgs_grouped_uncertainties(
         standard_model_sub,
         process_id=process_id,
     )
-    sm_theory_sigma = math.sqrt(sum(value * value for value in grouped.values()))
-    combined_sigma = math.sqrt(
-        sm_theory_sigma * sm_theory_sigma
-        + experimental.uncertainty * experimental.uncertainty
-        + _SM_CHOICE_SENSITIVITY * _SM_CHOICE_SENSITIVITY
-    )
-    central_budget = abs(experimental.value - standard_model.value)
-    sm_at_loose_edge = standard_model.value - combined_sigma
-    sm_at_tight_edge = standard_model.value + combined_sigma
-    loose_budget = abs(experimental.value - sm_at_loose_edge)
-
-    # The audit prescribes the lower/tighter band edge as the experimental
-    # error floor once the SM-shifted central value crosses the experiment.
-    tight_budget = float(experimental.uncertainty)
-
-    if central_budget <= 0.0 or loose_budget <= 0.0 or tight_budget <= 0.0:
+    if (
+        policy.central_budget <= 0.0
+        or policy.tight_budget <= 0.0
+        or policy.loose_budget <= 0.0
+    ):
         raise AnchorError(
             f"{process_id}: epsilon_K NP budgets must be positive "
-            f"(central={central_budget}, loose={loose_budget}, tight={tight_budget})"
+            f"(central={policy.central_budget}, loose={policy.loose_budget}, "
+            f"tight={policy.tight_budget})"
         )
 
     return EpsilonKBudgetBand(
-        doc_citation=_BUDGET_DOC_CITATION,
-        central_budget=central_budget,
-        tight_budget=tight_budget,
-        loose_budget=loose_budget,
-        hard_veto_budget=loose_budget,
-        sm_theory_sigma=sm_theory_sigma,
-        experimental_sigma=float(experimental.uncertainty),
-        sm_choice_sigma=_SM_CHOICE_SENSITIVITY,
-        combined_sigma=combined_sigma,
-        sm_at_loose_edge=sm_at_loose_edge,
-        sm_at_tight_edge=sm_at_tight_edge,
+        policy_id=policy.policy_id,
+        confidence_level=policy.confidence_level,
+        doc_citation=policy.doc_citation,
+        central_budget=policy.central_budget,
+        tight_budget=policy.tight_budget,
+        loose_budget=policy.loose_budget,
+        hard_veto_budget=policy.loose_budget,
+        budget_lowers_epsilon_k=policy.budget_lowers_epsilon_k,
+        budget_raises_epsilon_k=policy.budget_raises_epsilon_k,
+        signed_lower_edge=policy.lower_signed_edge,
+        signed_upper_edge=policy.upper_signed_edge,
+        sm_theory_sigma=policy.sigma_bgs,
+        experimental_sigma=policy.sigma_exp,
+        combined_sigma=policy.primary_combined_sigma,
+        sm_choice_sensitivity=policy.sm_choice_sensitivity,
         bgs_grouped_uncertainties=grouped,
     )
 
@@ -320,19 +347,27 @@ class Constraint:
                 budget=float(self.anchor.budget),
                 notes=(
                     f"extra {_REQUIRED_EXTRA!r} absent; epsilon_K constraint "
-                    "was not evaluated."
+                    "was not evaluated. NOTE: catalog-wide single-CL migration "
+                    "is a separate policy decision."
                 ),
-                diagnostics={"missing_extra": _REQUIRED_EXTRA},
+                diagnostics={
+                    "missing_extra": _REQUIRED_EXTRA,
+                    "budget_policy_id": self.anchor.budget_band.policy_id,
+                    "confidence_level": self.anchor.budget_band.confidence_level,
+                    "catalog_confidence_level_note": (
+                        "Delta-F=2 epsilon_K reports its own one-sigma "
+                        "sensitivity label; no global catalog CL is implied."
+                    ),
+                },
             )
 
         wilsons = epsilon_k_wilsons_from_couplings(couplings)
         result = epsilon_k_from_wilsons_with_running(
             wilsons,
             mu_had=_MU_HAD_GEV,
-            epsilon_k_np_budget=self.anchor.budget,
         )
 
-        predicted = float(result.epsilon_k_np)
+        predicted = float(result.epsilon_k_np_signed)
         ratio = float(result.ratio_to_budget)
         budget = float(result.epsilon_k_np_budget)
 
@@ -346,14 +381,18 @@ class Constraint:
             ratio=ratio,
             budget=budget,
             notes=(
-                "|epsilon_K^NP| uses kappa_epsilon Im(M12^NP)/(sqrt(2) Delta m_K); "
-                "Wilsons are QCD-evolved to 2 GeV; HARD budget is the "
-                "uncertainty-aware loose band edge from "
-                f"{_BUDGET_DOC_CITATION}."
+                "Signed epsilon_K^NP uses kappa_epsilon Im(M12^NP)/(sqrt(2) Delta m_K); "
+                "Wilsons are QCD-evolved to 2 GeV; HARD budget is selected by "
+                "the sign of epsilon_K^NP from the shared one-sigma policy. "
+                "NOTE: catalog-wide single-CL migration is a separate policy decision."
             ),
             diagnostics={
                 "im_m12_np_gev": float(result.im_m12_np),
-                "epsilon_k_np_is_absolute": True,
+                "epsilon_k_np_signed": float(result.epsilon_k_np_signed),
+                "epsilon_k_np_abs": float(result.epsilon_k_np),
+                "epsilon_k_np_is_absolute": False,
+                "epsilon_k_selected_budget_direction": result.selected_budget_direction,
+                "epsilon_k_selected_signed_budget": float(result.epsilon_k_np_budget),
                 "qcd_running_applied": True,
                 "hadronic_scale_gev": _MU_HAD_GEV,
                 "matching_scale_gev": float(wilsons.matching_scale),
@@ -361,25 +400,46 @@ class Constraint:
                 "left_sd_coupling": complex(wilsons.left_coupling),
                 "right_sd_coupling": complex(wilsons.right_coupling),
                 "wilson_coefficients": _complex_mapping(wilsons.wilsons),
+                "budget_policy_id": self.anchor.budget_band.policy_id,
+                "confidence_level": self.anchor.budget_band.confidence_level,
                 "budget_doc_citation": self.anchor.budget_band.doc_citation,
                 "central_np_budget": self.anchor.budget_band.central_budget,
                 "tight_band_np_budget": self.anchor.budget_band.tight_budget,
                 "loose_band_np_budget": self.anchor.budget_band.loose_budget,
-                "hard_veto_np_budget": self.anchor.budget_band.hard_veto_budget,
+                "hard_veto_np_budget": float(result.epsilon_k_np_budget),
+                "budget_lowers_epsilon_k": (
+                    self.anchor.budget_band.budget_lowers_epsilon_k
+                ),
+                "budget_raises_epsilon_k": (
+                    self.anchor.budget_band.budget_raises_epsilon_k
+                ),
+                "signed_lower_edge": self.anchor.budget_band.signed_lower_edge,
+                "signed_upper_edge": self.anchor.budget_band.signed_upper_edge,
                 "budget_combined_sigma": self.anchor.budget_band.combined_sigma,
+                "budget_primary_combined_sigma": (
+                    self.anchor.budget_band.combined_sigma
+                ),
                 "budget_sm_theory_sigma": self.anchor.budget_band.sm_theory_sigma,
                 "budget_experimental_sigma": (
                     self.anchor.budget_band.experimental_sigma
                 ),
-                "budget_sm_choice_sigma": self.anchor.budget_band.sm_choice_sigma,
-                "budget_sm_at_loose_edge": self.anchor.budget_band.sm_at_loose_edge,
-                "budget_sm_at_tight_edge": self.anchor.budget_band.sm_at_tight_edge,
+                "sm_choice_sensitivity": (
+                    self.anchor.budget_band.sm_choice_sensitivity
+                ),
+                "budget_sm_choice_sensitivity": (
+                    self.anchor.budget_band.sm_choice_sensitivity
+                ),
+                "sm_choice_sensitivity_in_hard_gate": False,
+                "catalog_confidence_level_note": (
+                    "Delta-F=2 epsilon_K reports its own one-sigma "
+                    "sensitivity label; no global catalog CL is implied."
+                ),
                 "bgs_grouped_uncertainties": dict(
                     self.anchor.budget_band.bgs_grouped_uncertainties
                 ),
                 "kappa_epsilon_uncertainty_policy": (
-                    "BGS kappa_epsilon=0.94(2) is folded into the grouped "
-                    "SM uncertainty used by the documented budget band."
+                    "BGS kappa_epsilon=0.94(2) is part of the published "
+                    "sigma_BGS=0.18e-3 used by the shared hard budget policy."
                 ),
                 "experimental_block": self.anchor.experimental.block_key,
                 "sm_block": self.anchor.standard_model.block_key,

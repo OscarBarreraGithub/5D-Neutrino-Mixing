@@ -12,8 +12,9 @@ not to provide a general-purpose EFT/RG package.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Mapping, Sequence
+import math
+from dataclasses import dataclass, field
+from typing import Any, Mapping, Sequence
 
 from .couplings import QuarkMassBasisCouplings, compute_quark_kk_gluon_couplings
 from .fit import QuarkFitResult
@@ -24,6 +25,10 @@ DELTA_F2_MODEL_V1 = "kk_gluon_tree_v1"
 DELTA_F2_INPUT_BUNDLE_V1 = "deltaf2_inputs_mu3tev_v1"
 DELTA_F2_OPERATOR_CONVENTION = DELTA_F2_MODEL_V1
 DELTA_F2_INPUT_BUNDLE = DELTA_F2_INPUT_BUNDLE_V1
+DELTA_F2_CATALOG_CL_NOTE = (
+    "NOTE: Delta-F=2 epsilon_K uses a 68.27% one-sigma sensitivity budget; "
+    "catalog-wide single-CL harmonization is a separate policy decision."
+)
 
 
 @dataclass(frozen=True)
@@ -97,6 +102,62 @@ class DeltaF2WilsonCoefficients:
 
 
 @dataclass(frozen=True)
+class EpsilonKBudgetPolicy:
+    """Shared epsilon_K NP-budget policy for core and catalog consumers."""
+
+    policy_id: str
+    confidence_level: str
+    doc_citation: str
+    experimental_value: float
+    sm_value: float
+    central_residual_signed: float
+    central_budget: float
+    sigma_bgs: float
+    sigma_exp: float
+    primary_combined_sigma: float
+    sm_choice_sensitivity: float
+    lower_signed_edge: float
+    upper_signed_edge: float
+    budget_lowers_epsilon_k: float
+    budget_raises_epsilon_k: float
+    tight_budget: float
+    loose_budget: float
+
+    def selected_signed_budget(self, epsilon_k_np_signed: float) -> tuple[float, str]:
+        """Return the direction-aware HARD budget for a signed NP shift."""
+
+        if epsilon_k_np_signed >= 0.0:
+            return self.budget_raises_epsilon_k, "raises_epsilon_k"
+        return self.budget_lowers_epsilon_k, "lowers_epsilon_k"
+
+    def as_diagnostics(self) -> dict[str, Any]:
+        """Diagnostic payload shared by core and catalog reports."""
+
+        return {
+            "budget_policy_id": self.policy_id,
+            "confidence_level": self.confidence_level,
+            "budget_doc_citation": self.doc_citation,
+            "central_np_budget": float(self.central_budget),
+            "central_residual_signed": float(self.central_residual_signed),
+            "tight_band_np_budget": float(self.tight_budget),
+            "loose_band_np_budget": float(self.loose_budget),
+            "signed_lower_edge": float(self.lower_signed_edge),
+            "signed_upper_edge": float(self.upper_signed_edge),
+            "budget_lowers_epsilon_k": float(self.budget_lowers_epsilon_k),
+            "budget_raises_epsilon_k": float(self.budget_raises_epsilon_k),
+            "hard_veto_np_budget": "direction_selected",
+            "budget_combined_sigma": float(self.primary_combined_sigma),
+            "budget_primary_combined_sigma": float(self.primary_combined_sigma),
+            "budget_sm_theory_sigma": float(self.sigma_bgs),
+            "budget_experimental_sigma": float(self.sigma_exp),
+            "sm_choice_sensitivity": float(self.sm_choice_sensitivity),
+            "budget_sm_choice_sensitivity": float(self.sm_choice_sensitivity),
+            "sm_choice_sensitivity_in_hard_gate": False,
+            "catalog_confidence_level_note": DELTA_F2_CATALOG_CL_NOTE,
+        }
+
+
+@dataclass(frozen=True)
 class DeltaF2ObservableSummary:
     """Compact per-system exclusion summary.
 
@@ -115,6 +176,9 @@ class DeltaF2ObservableSummary:
     dominant_operator: str
     dominant_operator_size: float
     weighted_operator_sizes: Mapping[str, float]
+    budget_policy_id: str | None = None
+    confidence_level: str | None = None
+    diagnostics: Mapping[str, Any] = field(default_factory=dict)
 
     @property
     def key(self) -> str:
@@ -346,17 +410,29 @@ def compute_delta_f2_wilsons(
     return tuple(out)
 
 
+@dataclass(frozen=True)
+class _HadronicEvaluation:
+    ratio_to_bound: float
+    effective_amplitude: float
+    coherent_amplitude: float
+    operator_sizes: Mapping[str, float]
+    dominant_operator: str
+    dominant_size: float
+    budget_policy_id: str | None = None
+    confidence_level: str | None = None
+    diagnostics: Mapping[str, Any] = field(default_factory=dict)
+
+
 def _hadronic_eval_for_system(
     key: str,
     wilsons: DeltaF2WilsonCoefficients,
     *,
     epsilon_k_np_budget_override: float | None = None,
-) -> tuple[float, float, float, dict[str, float], str, float] | None:
+) -> _HadronicEvaluation | None:
     """Attempt proper hadronic evaluation for a known meson system.
 
-    Returns (ratio_to_bound, effective_amplitude, coherent_amplitude,
-             operator_sizes, dominant_operator, dominant_size) or None if
-    the system key is not recognized for hadronic evaluation.
+    Returns an internal hadronic-evaluation payload or None if the system key
+    is not recognized for hadronic evaluation.
 
     ``epsilon_k_np_budget_override`` is forwarded to :func:`evaluate_epsilon_k`
     only when ``key == "epsilon_k"``; it is silently ignored otherwise.
@@ -379,13 +455,27 @@ def _hadronic_eval_for_system(
         dominant_operator = max(operator_sizes, key=operator_sizes.get)
         dominant_size = float(operator_sizes[dominant_operator])
         effective_amplitude = eps_result.epsilon_k_np
-        return (
-            eps_result.ratio_to_budget,
-            effective_amplitude,
-            effective_amplitude,
-            operator_sizes,
-            dominant_operator,
-            dominant_size,
+        diagnostics = {
+            "epsilon_k_np_signed": float(eps_result.epsilon_k_np_signed),
+            "epsilon_k_np_abs": float(eps_result.epsilon_k_np),
+            "epsilon_k_selected_budget_direction": (
+                eps_result.selected_budget_direction
+            ),
+            "epsilon_k_selected_signed_budget": float(eps_result.epsilon_k_np_budget),
+            "central_diagnostic_budget": float(eps_result.central_diagnostic_budget),
+            "epsilon_k_np_is_absolute": True,
+        }
+        diagnostics.update(delta_f2_epsilon_k_budget_policy().as_diagnostics())
+        return _HadronicEvaluation(
+            ratio_to_bound=float(eps_result.ratio_to_budget),
+            effective_amplitude=effective_amplitude,
+            coherent_amplitude=float(eps_result.epsilon_k_np_signed),
+            operator_sizes=operator_sizes,
+            dominant_operator=dominant_operator,
+            dominant_size=dominant_size,
+            budget_policy_id=eps_result.budget_policy_id,
+            confidence_level=eps_result.confidence_level,
+            diagnostics=diagnostics,
         )
     elif key == "b_d":
         result = evaluate_bd_mixing(wilsons)
@@ -400,13 +490,13 @@ def _hadronic_eval_for_system(
         }
         dominant_operator = max(operator_sizes, key=operator_sizes.get)
         dominant_size = float(operator_sizes[dominant_operator])
-        return (
-            result.ratio_to_budget,
-            result.abs_m12_np,
-            result.abs_m12_np,
-            operator_sizes,
-            dominant_operator,
-            dominant_size,
+        return _HadronicEvaluation(
+            ratio_to_bound=result.ratio_to_budget,
+            effective_amplitude=result.abs_m12_np,
+            coherent_amplitude=result.abs_m12_np,
+            operator_sizes=operator_sizes,
+            dominant_operator=dominant_operator,
+            dominant_size=dominant_size,
         )
     elif key == "b_s":
         result = evaluate_bs_mixing(wilsons)
@@ -421,13 +511,13 @@ def _hadronic_eval_for_system(
         }
         dominant_operator = max(operator_sizes, key=operator_sizes.get)
         dominant_size = float(operator_sizes[dominant_operator])
-        return (
-            result.ratio_to_budget,
-            result.abs_m12_np,
-            result.abs_m12_np,
-            operator_sizes,
-            dominant_operator,
-            dominant_size,
+        return _HadronicEvaluation(
+            ratio_to_bound=result.ratio_to_budget,
+            effective_amplitude=result.abs_m12_np,
+            coherent_amplitude=result.abs_m12_np,
+            operator_sizes=operator_sizes,
+            dominant_operator=dominant_operator,
+            dominant_size=dominant_size,
         )
     elif key == "d":
         result = evaluate_d0_mixing(wilsons)
@@ -442,13 +532,13 @@ def _hadronic_eval_for_system(
         }
         dominant_operator = max(operator_sizes, key=operator_sizes.get)
         dominant_size = float(operator_sizes[dominant_operator])
-        return (
-            result.ratio_to_budget,
-            result.abs_m12_np,
-            result.abs_m12_np,
-            operator_sizes,
-            dominant_operator,
-            dominant_size,
+        return _HadronicEvaluation(
+            ratio_to_bound=result.ratio_to_budget,
+            effective_amplitude=result.abs_m12_np,
+            coherent_amplitude=result.abs_m12_np,
+            operator_sizes=operator_sizes,
+            dominant_operator=dominant_operator,
+            dominant_size=dominant_size,
         )
     return None
 
@@ -498,11 +588,10 @@ def evaluate_delta_f2_constraints(
     use_hadronic : bool
         If True (default), use proper hadronic matrix elements for all systems.
     epsilon_k_np_budget_override : float, optional
-        Override the default ε_K NP budget |EPSILON_K_EXP - EPSILON_K_SM|
-        (~6.7e-5) with an explicit numerical value. Used by the
-        ``--epsilon-k-budget`` CLI sweep across central / low / high edges
-        for the band-quote sensitivity study (see cleanup unit
-        C02a-code and ``docs/phase_logs/phase2_h5_signoff.md``).
+        Override the default ε_K direction-aware one-sigma policy with an
+        explicit scalar value. Used by the ``--epsilon-k-budget`` CLI sweep
+        across central / low / high edges for the band-quote sensitivity study
+        (see cleanup unit C02a-code and ``docs/phase_logs/phase2_h5_signoff.md``).
         Has no effect on B_d, B_s, or D systems.
     """
     couplings = _coerce_couplings(source, M_KK=M_KK, xi_KK=xi_KK)
@@ -531,14 +620,15 @@ def evaluate_delta_f2_constraints(
             )
 
         if hadronic_result is not None:
-            (
-                ratio_to_bound,
-                effective_amplitude,
-                coherent_amplitude,
-                operator_sizes,
-                dominant_operator,
-                dominant_size,
-            ) = hadronic_result
+            ratio_to_bound = hadronic_result.ratio_to_bound
+            effective_amplitude = hadronic_result.effective_amplitude
+            coherent_amplitude = hadronic_result.coherent_amplitude
+            operator_sizes = hadronic_result.operator_sizes
+            dominant_operator = hadronic_result.dominant_operator
+            dominant_size = hadronic_result.dominant_size
+            budget_policy_id = hadronic_result.budget_policy_id
+            confidence_level = hadronic_result.confidence_level
+            diagnostics = hadronic_result.diagnostics
         else:
             # Fallback: old operator-weight surrogate with legacy bounds
             weighted = {
@@ -559,6 +649,9 @@ def evaluate_delta_f2_constraints(
             dominant_size = effective_amplitude
             legacy_bound = LEGACY_OPERATOR_WEIGHT_BOUNDS.get(item.key, item.bound)
             ratio_to_bound = float(effective_amplitude / legacy_bound)
+            budget_policy_id = None
+            confidence_level = None
+            diagnostics = {}
 
         observables.append(
             DeltaF2ObservableSummary(
@@ -571,6 +664,9 @@ def evaluate_delta_f2_constraints(
                 dominant_operator=dominant_operator,
                 dominant_operator_size=dominant_size,
                 weighted_operator_sizes=operator_sizes,
+                budget_policy_id=budget_policy_id,
+                confidence_level=confidence_level,
+                diagnostics=diagnostics,
             )
         )
     return DeltaF2ConstraintSummary(
@@ -653,6 +749,53 @@ B_5_K = B_5_K_3GEV        # compatibility alias; prefer B_5_K_3GEV in new code
 KAPPA_EPSILON = 0.94       # multiplicative correction (Buras et al.)
 EPSILON_K_EXP = 2.228e-3   # experimental value (PDG)
 EPSILON_K_SM = 2.161e-3    # SM epsilon_K, Brod-Gorbahn-Stamou 2020
+EPSILON_K_BUDGET_POLICY_ID = "epsilon_k_bgs2020_pdg2024_bgs_exp_one_sigma_v1"
+EPSILON_K_BUDGET_CONFIDENCE_LEVEL = "68.27% one_sigma_sensitivity"
+EPSILON_K_BUDGET_DOC_CITATION = "docs/audits/epsilon_k_sm_decision.md:34-37,71-100"
+EPSILON_K_SIGMA_BGS = 0.18e-3
+EPSILON_K_SIGMA_EXP = 0.011e-3
+EPSILON_K_SM_CHOICE_SENSITIVITY = 0.15e-3
+EPSILON_K_CENTRAL_RESIDUAL_SIGNED = EPSILON_K_EXP - EPSILON_K_SM
+EPSILON_K_CENTRAL_BUDGET = abs(EPSILON_K_CENTRAL_RESIDUAL_SIGNED)
+EPSILON_K_PRIMARY_COMBINED_SIGMA = math.sqrt(
+    EPSILON_K_SIGMA_BGS**2 + EPSILON_K_SIGMA_EXP**2
+)
+EPSILON_K_SIGNED_LOWER_EDGE = (
+    EPSILON_K_CENTRAL_RESIDUAL_SIGNED - EPSILON_K_PRIMARY_COMBINED_SIGMA
+)
+EPSILON_K_SIGNED_UPPER_EDGE = (
+    EPSILON_K_CENTRAL_RESIDUAL_SIGNED + EPSILON_K_PRIMARY_COMBINED_SIGMA
+)
+EPSILON_K_BUDGET_LOWERS = abs(EPSILON_K_SIGNED_LOWER_EDGE)
+EPSILON_K_BUDGET_RAISES = abs(EPSILON_K_SIGNED_UPPER_EDGE)
+EPSILON_K_TIGHT_BUDGET = min(EPSILON_K_BUDGET_LOWERS, EPSILON_K_BUDGET_RAISES)
+EPSILON_K_LOOSE_BUDGET = max(EPSILON_K_BUDGET_LOWERS, EPSILON_K_BUDGET_RAISES)
+
+EPSILON_K_BUDGET_POLICY = EpsilonKBudgetPolicy(
+    policy_id=EPSILON_K_BUDGET_POLICY_ID,
+    confidence_level=EPSILON_K_BUDGET_CONFIDENCE_LEVEL,
+    doc_citation=EPSILON_K_BUDGET_DOC_CITATION,
+    experimental_value=EPSILON_K_EXP,
+    sm_value=EPSILON_K_SM,
+    central_residual_signed=EPSILON_K_CENTRAL_RESIDUAL_SIGNED,
+    central_budget=EPSILON_K_CENTRAL_BUDGET,
+    sigma_bgs=EPSILON_K_SIGMA_BGS,
+    sigma_exp=EPSILON_K_SIGMA_EXP,
+    primary_combined_sigma=EPSILON_K_PRIMARY_COMBINED_SIGMA,
+    sm_choice_sensitivity=EPSILON_K_SM_CHOICE_SENSITIVITY,
+    lower_signed_edge=EPSILON_K_SIGNED_LOWER_EDGE,
+    upper_signed_edge=EPSILON_K_SIGNED_UPPER_EDGE,
+    budget_lowers_epsilon_k=EPSILON_K_BUDGET_LOWERS,
+    budget_raises_epsilon_k=EPSILON_K_BUDGET_RAISES,
+    tight_budget=EPSILON_K_TIGHT_BUDGET,
+    loose_budget=EPSILON_K_LOOSE_BUDGET,
+)
+
+
+def delta_f2_epsilon_k_budget_policy() -> EpsilonKBudgetPolicy:
+    """Return the canonical shared epsilon_K budget policy."""
+
+    return EPSILON_K_BUDGET_POLICY
 
 KAON_HADRONIC_PARAMS_V1 = "kaon_hadronic_params_bmu_2gev_v1"
 
@@ -751,9 +894,18 @@ class EpsilonKResult:
 
     im_m12_np: float           # Im(M_12^NP) in GeV
     epsilon_k_np: float        # |epsilon_K^NP|
-    epsilon_k_np_budget: float  # allowed NP budget |epsilon_K^exp - epsilon_K^SM|
-    ratio_to_budget: float     # epsilon_k_np / budget
+    epsilon_k_np_budget: float  # selected direction-aware allowed NP budget
+    ratio_to_budget: float     # |epsilon_k_np_signed| / selected budget
     passes: bool               # ratio <= 1.0
+    epsilon_k_np_signed: float = 0.0
+    selected_budget_direction: str = "unknown"
+    central_diagnostic_budget: float = EPSILON_K_CENTRAL_BUDGET
+    budget_raises_epsilon_k: float = EPSILON_K_BUDGET_RAISES
+    budget_lowers_epsilon_k: float = EPSILON_K_BUDGET_LOWERS
+    primary_combined_sigma: float = EPSILON_K_PRIMARY_COMBINED_SIGMA
+    sm_choice_sensitivity: float = EPSILON_K_SM_CHOICE_SENSITIVITY
+    budget_policy_id: str = EPSILON_K_BUDGET_POLICY_ID
+    confidence_level: str = EPSILON_K_BUDGET_CONFIDENCE_LEVEL
 
 
 @dataclass(frozen=True)
@@ -774,32 +926,40 @@ def evaluate_epsilon_k(
 
     This uses the physical formula:
         epsilon_K^NP = (kappa_epsilon / (sqrt(2) * Delta_m_K)) * Im(M_12^NP)
-    and compares to the experimental budget |epsilon_K^exp - epsilon_K^SM|.
+    and compares to the signed, direction-aware one-sigma NP budget from
+    :func:`delta_f2_epsilon_k_budget_policy`.
 
     Parameters
     ----------
     wilsons : DeltaF2WilsonCoefficients
         Wilson coefficients (typically RG-evolved to mu_had).
     epsilon_k_np_budget_override : float, optional
-        Replace the default budget |EPSILON_K_EXP - EPSILON_K_SM| (~6.7e-5)
-        with an explicit numerical value. Used by the
+        Replace the default direction-aware budget with an explicit numerical
+        scalar value. Used by the legacy
         ``--epsilon-k-budget`` CLI sweep across central / low / high edges
         for the band-quote sensitivity study (cleanup unit C02a-code).
     """
-    import math
-
     m12_np = _compute_m12_np(wilsons)
     im_m12_np = float(m12_np.imag)
-    epsilon_k_np = abs(KAPPA_EPSILON / (math.sqrt(2.0) * DELTA_M_K) * im_m12_np)
+    epsilon_k_np_signed = float(
+        KAPPA_EPSILON / (math.sqrt(2.0) * DELTA_M_K) * im_m12_np
+    )
+    epsilon_k_np = abs(epsilon_k_np_signed)
     if epsilon_k_np_budget_override is None:
-        budget = abs(EPSILON_K_EXP - EPSILON_K_SM)
+        policy = delta_f2_epsilon_k_budget_policy()
+        budget, direction = policy.selected_signed_budget(epsilon_k_np_signed)
+        budget_policy_id = policy.policy_id
+        confidence_level = policy.confidence_level
     else:
         if epsilon_k_np_budget_override <= 0.0:
             raise ValueError(
                 "epsilon_k_np_budget_override must be positive"
             )
         budget = float(epsilon_k_np_budget_override)
-    ratio = epsilon_k_np / budget if budget > 0.0 else float("inf")
+        direction = "manual_scalar_override"
+        budget_policy_id = f"{EPSILON_K_BUDGET_POLICY_ID}:manual_scalar_override"
+        confidence_level = "manual_scalar_override"
+    ratio = abs(epsilon_k_np_signed) / budget if budget > 0.0 else float("inf")
 
     return EpsilonKResult(
         im_m12_np=im_m12_np,
@@ -807,6 +967,15 @@ def evaluate_epsilon_k(
         epsilon_k_np_budget=budget,
         ratio_to_budget=ratio,
         passes=ratio <= 1.0,
+        epsilon_k_np_signed=epsilon_k_np_signed,
+        selected_budget_direction=direction,
+        central_diagnostic_budget=EPSILON_K_CENTRAL_BUDGET,
+        budget_raises_epsilon_k=EPSILON_K_BUDGET_RAISES,
+        budget_lowers_epsilon_k=EPSILON_K_BUDGET_LOWERS,
+        primary_combined_sigma=EPSILON_K_PRIMARY_COMBINED_SIGMA,
+        sm_choice_sensitivity=EPSILON_K_SM_CHOICE_SENSITIVITY,
+        budget_policy_id=budget_policy_id,
+        confidence_level=confidence_level,
     )
 
 

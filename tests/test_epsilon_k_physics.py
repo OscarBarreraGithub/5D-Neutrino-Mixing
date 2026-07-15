@@ -32,6 +32,7 @@ from quarkConstraints.deltaf2 import (
     _compute_m12_np,
     _kaon_matrix_elements,
     compute_delta_f2_wilsons,
+    delta_f2_epsilon_k_budget_policy,
     evaluate_delta_mk,
     evaluate_epsilon_k,
 )
@@ -352,26 +353,42 @@ class TestMKKScaling:
 # ===================================================================
 
 class TestNPBudget:
-    """The NP budget |epsilon_K^exp - epsilon_K^SM| should use BGS 2020."""
+    """The NP budget should use the shared signed BGS+exp one-sigma policy."""
 
     def test_np_budget_is_positive_and_correct_order(self):
-        budget = abs(EPSILON_K_EXP - EPSILON_K_SM)
-        # Expected after the Phase 2 hole #5 audit:
-        # 2.228e-3 - 2.161e-3 = 6.7e-5.
-        assert 1e-5 < budget < 1e-4, (
-            f"NP budget = {budget:.3e}, expected ~6.7e-5"
+        policy = delta_f2_epsilon_k_budget_policy()
+        central_budget = abs(EPSILON_K_EXP - EPSILON_K_SM)
+        combined_sigma = math.sqrt((0.18e-3) ** 2 + (0.011e-3) ** 2)
+
+        assert policy.central_budget == pytest.approx(central_budget)
+        assert policy.primary_combined_sigma == pytest.approx(combined_sigma)
+        assert policy.budget_lowers_epsilon_k == pytest.approx(
+            abs(combined_sigma - central_budget)
         )
+        assert policy.budget_raises_epsilon_k == pytest.approx(
+            central_budget + combined_sigma
+        )
+        assert policy.sm_choice_sensitivity == pytest.approx(0.15e-3)
         # exp > SM, so positive
         assert EPSILON_K_EXP > EPSILON_K_SM, (
             "epsilon_K^exp should exceed epsilon_K^SM"
         )
 
     def test_budget_stored_in_result(self):
-        """The EpsilonKResult should carry the correct budget."""
+        """The EpsilonKResult should carry the direction-selected budget."""
         wilsons = _make_wilsons(left=0.01 + 0.005j, right=0.05 + 0.02j)
         result = evaluate_epsilon_k(wilsons)
-        expected_budget = abs(EPSILON_K_EXP - EPSILON_K_SM)
+        policy = delta_f2_epsilon_k_budget_policy()
+        expected_budget, expected_direction = policy.selected_signed_budget(
+            result.epsilon_k_np_signed
+        )
         assert np.isclose(result.epsilon_k_np_budget, expected_budget, rtol=1e-10)
+        assert result.selected_budget_direction == expected_direction
+        assert result.central_diagnostic_budget == pytest.approx(
+            abs(EPSILON_K_EXP - EPSILON_K_SM)
+        )
+        assert result.budget_policy_id == policy.policy_id
+        assert result.confidence_level == "68.27% one_sigma_sensitivity"
 
 
 # ===================================================================
@@ -499,5 +516,7 @@ class TestFittedPointSmokeTest:
 
     def test_epsilon_k_budget_matches_constants(self, kaon_wilsons):
         result = evaluate_epsilon_k(kaon_wilsons)
-        expected = abs(EPSILON_K_EXP - EPSILON_K_SM)
+        expected, _ = delta_f2_epsilon_k_budget_policy().selected_signed_budget(
+            result.epsilon_k_np_signed
+        )
         assert np.isclose(result.epsilon_k_np_budget, expected)

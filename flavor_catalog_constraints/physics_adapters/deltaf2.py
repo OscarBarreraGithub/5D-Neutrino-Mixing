@@ -31,6 +31,7 @@ from quarkConstraints.deltaf2 import (
     B_5_D,
     DeltaF2WilsonCoefficients,
     DeltaMKResult,
+    EpsilonKBudgetPolicy,
     EpsilonKResult,
     F_BS,
     F_BD,
@@ -46,6 +47,7 @@ from quarkConstraints.deltaf2 import (
     MesonMixingResult,
     compute_m12_np as _compute_meson_m12_np,
     compute_delta_f2_wilsons,
+    delta_f2_epsilon_k_budget_policy as _epsilon_k_budget_policy,
     evaluate_bd_mixing_with_running as _evaluate_bd_mixing_with_running,
     evaluate_bs_mixing_with_running as _evaluate_bs_mixing_with_running,
     evaluate_delta_mk as _evaluate_delta_mk,
@@ -59,6 +61,7 @@ from quarkConstraints.deltaf2 import (
 __all__ = [
     "QuarkMassBasisCouplings",
     "DeltaF2WilsonCoefficients",
+    "EpsilonKBudgetPolicy",
     "EpsilonKResult",
     "DeltaMKResult",
     "MesonMixingResult",
@@ -69,6 +72,7 @@ __all__ = [
     "bs_mixing_wilsons_from_couplings",
     "epsilon_k_from_wilsons",
     "epsilon_k_from_wilsons_with_running",
+    "epsilon_k_budget_policy",
     "delta_mk_from_wilsons_with_running",
     "delta_mk_core_inputs",
     "d0_mixing_from_wilsons_with_running",
@@ -209,6 +213,12 @@ def epsilon_k_from_wilsons_with_running(
         mu_had=mu_had,
         epsilon_k_np_budget_override=epsilon_k_np_budget,
     )
+
+
+def epsilon_k_budget_policy() -> EpsilonKBudgetPolicy:
+    """Return the shared core epsilon_K budget policy."""
+
+    return _epsilon_k_budget_policy()
 
 
 def delta_mk_core_inputs() -> dict[str, float]:

@@ -164,10 +164,13 @@ def test_default_benchmark_point_has_stable_deltaf2_outputs():
     # Snapshot re-pinned after B2 (PDG SVD rephasing -> convention-stable Im M12)
     # and B3 (GGMS Eq. 8 O4/O5 un-swap + 1/(2 m_M)); see test_epsilon_k_physics
     # for the literature-anchored absolute pins this snapshot is downstream of.
-    # B2 fixes the previously convention-dependent epsilon_K phase, so this
-    # benchmark moved 1.9286... (buggy/legacy phase) -> 20.6675...; b/d systems
-    # still pass (phase-magnitude only).
-    assert np.isclose(epsilon_k_ratio, 20.667539197050676)
+    # M-1/M-2 harmonized the epsilon_K gate: this point's signed NP raises
+    # epsilon_K, so the shared policy selects the upper one-sigma budget
+    # 2.4733579788827265e-4 rather than the bare 6.7e-5 central gap.
+    assert np.isclose(epsilon_k_ratio, 5.598563321706886)
+    assert summary.get("epsilon_k").diagnostics["epsilon_k_selected_budget_direction"] == (
+        "raises_epsilon_k"
+    )
     assert summary.get("epsilon_k").ratio_to_bound > 1.0
     assert summary.get("b_d").ratio_to_bound < 1.0
     assert summary.get("b_s").ratio_to_bound < 1.0
