@@ -24,14 +24,14 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| C-1 | L | CRIT | Lane C RG inverted + untransposed ADM | `paper_0710_1869/eft_deltaf2/rg.py:288-313,1361-1365,1516-1519` | PENDING |
-| C-2 | L | CRIT | Lane C default path zeroes C4 (C4≡0) | `paper_0710_1869/eft_deltaf2/matching_kkgluon.py:191-198,504-527` | PENDING |
-| C-5 | L | CRIT | Lane C missing √(2πkr_c) volume factor | `paper_0710_1869/.../couplings.py:241-243` | PENDING |
-| C-6 | L | CRIT | Lane C seed→profile inverts RS localization | `paper_0710_1869/.../fit.py` (physical branch) | PENDING |
-| M-8 | L | MAJ | Lane C Fierz sign in paper→BMU map (+2 vs −2) | `paper_0710_1869/eft_deltaf2/rg.py:110-125` | PENDING |
-| M-27 | L | MAJ | Lane C matrix elements ×4 (P_L/P_R vs (1∓γ5)) | `paper_0710_1869/.../hadronic.py` | PENDING |
-| M-28 | L | MAJ | Lane C circular validation + strict_paper Table I fail | `paper_0710_1869/` tests/verifier | PENDING |
-| M-13(C) | L | MAJ | Lane C ξ_g=1 KK-gluon default | `paper_0710_1869/.../kkgluon.py` | PENDING |
+| C-1 | L | CRIT | Lane C RG inverted + untransposed ADM | `paper_0710_1869/eft_deltaf2/rg.py:288-313,1361-1365,1516-1519` | VERIFIED |
+| C-2 | L | CRIT | Lane C default path zeroes C4 (C4≡0) | `paper_0710_1869/eft_deltaf2/matching_kkgluon.py:191-198,504-527` | VERIFIED (capability fixed; RESIDUAL: default alignment model pending paper) |
+| C-5 | L | CRIT | Lane C missing √(2πkr_c) volume factor | `paper_0710_1869/.../couplings.py:241-243` | VERIFIED |
+| C-6 | L | CRIT | Lane C seed→profile inverts RS localization | `paper_0710_1869/.../fit.py` (physical branch) | VERIFIED (orientation fixed; RESIDUAL: exact Table-I coeffs pending paper) |
+| M-8 | L | MAJ | Lane C Fierz sign in paper→BMU map (+2 vs −2) | `paper_0710_1869/eft_deltaf2/rg.py:110-125` | VERIFIED |
+| M-27 | L | MAJ | Lane C matrix elements ×4 (P_L/P_R vs (1∓γ5)) | `paper_0710_1869/.../hadronic.py` | VERIFIED |
+| M-28 | L | MAJ | Lane C circular validation + strict_paper Table I fail | `paper_0710_1869/` tests/verifier | VERIFIED (RG test de-circularized; benchmark/model self-formula tests remain regression-guards only, acceptable for quarantined lane) |
+| M-13(C) | L | MAJ | Lane C ξ_g=1 KK-gluon default | `paper_0710_1869/.../kkgluon.py` | VERIFIED |
 
 ## Priority 2 — LFV normalizations (§8.6 item 2)
 
@@ -136,4 +136,14 @@ Enumerated and dispositioned in [`MINOR_FINDINGS_LEDGER.md`](MINOR_FINDINGS_LEDG
 
 ## Cycle log
 
-(Each Codex/Claude cycle appended here with commit hash + audit verdict.)
+### Cycle 1 — Lane C bundle (C-1,C-2,C-5,C-6,M-8,M-27,M-28,M-13C) — VERIFIED
+- Codex research (scoping): all 8 confirmed with file:line + corrected constants; noted numeric
+  cancellation between C-5 (×8.48), M-27 (÷4), M-13 (×1/6) → must fix coordinately.
+- Codex fix L1 (commit `26b181a`): RG direction+transpose, Fierz −2, ME ÷4, √(2L) volume + g_s* unfreeze,
+  ξ_g=2.4487, C-6 negative-slope orientation, C-2 LR/C4 capability. Sanity: C1=0.729, C4=3.543.
+- Codex fix L2 (commit `676c131`): de-circularize RG test (independent BBL Eq-3.94 oracle),
+  reconcile convention/contract-ID test pins, regenerate goldens/results, quarantine banner + residual markers.
+- Claude audit: **APPROVE** — all 7 checks PASS, numerics executed independently (C1=0.729, C4=3.543,
+  Fierz round-trip, ME ratios =4.0, √(2L)=8.48, ξ_g=2.4487); RG oracle genuinely independent; isolated to Lane C; 66/66 green.
+- Residuals (documented, pending arXiv:0710.1869 not in-repo): C-6 exact Table-I affine coefficients;
+  C-2 default RH-down alignment model; M-28 strict-paper Eq.(3) re-extraction. Lane C stays NON-PRODUCTION-quarantined.
