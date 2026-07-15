@@ -37,8 +37,8 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| M-29 | LFV | MAJ | μ→3e interference coeff 2√2·e vs KO 8e (+sign) | `lfv_three_body.py:710` | PENDING |
-| M-30 | LFV | MAJ | τ→3ℓ / τ→ℓγ missing BR(τ→ℓνν̄)≈0.177 (×5.65) | `lfv_three_body.py`, L007/L008 prefactor | PENDING |
+| M-29 | LFV | MAJ | μ→3e interference coeff 2√2·e vs KO 8e (+sign) | `lfv_three_body.py:778` | VERIFIED |
+| M-30 | LFV | MAJ | τ→3ℓ / τ→ℓγ missing BR(τ→ℓνν̄)≈0.177 (×5.65) | `lfv_three_body.py`, L007/L008 prefactor | VERIFIED |
 
 ## Priority 3 — Mechanical ×2 / kernel / proxy (§8.6 item 3)
 
@@ -147,3 +147,9 @@ Enumerated and dispositioned in [`MINOR_FINDINGS_LEDGER.md`](MINOR_FINDINGS_LEDG
   Fierz round-trip, ME ratios =4.0, √(2L)=8.48, ξ_g=2.4487); RG oracle genuinely independent; isolated to Lane C; 66/66 green.
 - Residuals (documented, pending arXiv:0710.1869 not in-repo): C-6 exact Table-I affine coefficients;
   C-2 default RH-down alignment model; M-28 strict-paper Eq.(3) re-extraction. Lane C stays NON-PRODUCTION-quarantined.
+
+### Cycle 2 — LFV normalizations (M-29, M-30) — VERIFIED (commit `23c95e8`)
+- Codex research+fix: M-29 mu->3e interference 2sqrt(2)e -> -8e (KO RMP 73 Eq 2.14);
+  M-30 tau->3l/tau->l-gamma width->BR via PDG tau leptonic BR (0.1782 e / 0.1739 mu). Muon unchanged.
+- Claude audit: **APPROVE** — verified -8e magnitude (8-vs-16 resolved via contact (2,1) structure),
+  subtle sqrt(leptonic_br) envelope scaling correct, muon bit-identical, test pins literature-anchored. 137 tests green.
