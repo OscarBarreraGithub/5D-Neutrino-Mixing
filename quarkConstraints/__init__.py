@@ -12,6 +12,15 @@ from importlib import import_module
 _EXPORTS = {
     "AlignmentDiagnostics": (".proxies", "AlignmentDiagnostics"),
     "BulkMassMap": (".model", "BulkMassMap"),
+    "COUPLING_POLICY_FIXED_GSSTAR_3": (".couplings", "COUPLING_POLICY_FIXED_GSSTAR_3"),
+    "COUPLING_POLICY_PERTURBATIVE_4D_LEGACY": (
+        ".couplings",
+        "COUPLING_POLICY_PERTURBATIVE_4D_LEGACY",
+    ),
+    "COUPLING_POLICY_RS_VOLUME_SQRT2L_PHYSICAL": (
+        ".couplings",
+        "COUPLING_POLICY_RS_VOLUME_SQRT2L_PHYSICAL",
+    ),
     "DELTA_F2_INPUT_BUNDLE": (".deltaf2", "DELTA_F2_INPUT_BUNDLE"),
     "DELTA_F2_OPERATOR_CONVENTION": (".deltaf2", "DELTA_F2_OPERATOR_CONVENTION"),
     "DEFAULT_QUARK_BENCHMARK_H_RS_MAX": (".scales", "DEFAULT_QUARK_BENCHMARK_H_RS_MAX"),
@@ -28,6 +37,22 @@ _EXPORTS = {
     "DeltaF2ObservableSummary": (".deltaf2", "DeltaF2ObservableSummary"),
     "DeltaF2WilsonSet": (".deltaf2", "DeltaF2WilsonSet"),
     "GAUGE_KK_ROOT_NN": (".scales", "GAUGE_KK_ROOT_NN"),
+    "KK_GLUON_PHYSICAL_MASS_CONVENTION_ID": (
+        ".scales",
+        "KK_GLUON_PHYSICAL_MASS_CONVENTION_ID",
+    ),
+    "OPERATOR_CONVENTION_FIXED_GSSTAR_3": (
+        ".couplings",
+        "OPERATOR_CONVENTION_FIXED_GSSTAR_3",
+    ),
+    "OPERATOR_CONVENTION_PERTURBATIVE_4D_LEGACY": (
+        ".couplings",
+        "OPERATOR_CONVENTION_PERTURBATIVE_4D_LEGACY",
+    ),
+    "OPERATOR_CONVENTION_RS_VOLUME_SQRT2L_PHYSICAL": (
+        ".couplings",
+        "OPERATOR_CONVENTION_RS_VOLUME_SQRT2L_PHYSICAL",
+    ),
     "SPIN2_GRAVITON_KK_ROOT": (".scales", "SPIN2_GRAVITON_KK_ROOT"),
     "ProxySummary": (".proxies", "ProxySummary"),
     "QuarkBenchmark": (".benchmarks", "QuarkBenchmark"),

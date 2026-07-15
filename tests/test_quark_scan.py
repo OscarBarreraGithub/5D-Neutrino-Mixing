@@ -5,6 +5,8 @@ import sys
 from pathlib import Path
 from types import SimpleNamespace
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from quarkConstraints.scan import QuarkScanConfig, run_quark_scan
@@ -20,12 +22,20 @@ def test_quark_scan_returns_rows_and_writes_csv(tmp_path):
         record_git_metadata=False,
         max_nfev=80,
     )
-    rows = run_quark_scan(config, output_csv=str(csv_path), progress_every=0)
+    with pytest.warns(RuntimeWarning, match="xi_KK=1.0"):
+        rows = run_quark_scan(config, output_csv=str(csv_path), progress_every=0)
 
     assert len(rows) == 2
     assert "fit_score" in rows[0]
     assert "M_KK" in rows[0]
+    assert "m_kk_physical_gev" in rows[0]
+    assert "lambda_ir_gev" in rows[0]
     assert "xi_KK" in rows[0]
+    assert "mass_convention_id" in rows[0]
+    assert "coupling_policy_id" in rows[0]
+    assert "g_s_4d" in rows[0]
+    assert "g_eff" in rows[0]
+    assert "g_s_multiplier" in rows[0]
     assert "proxy_h_rs" in rows[0]
     assert "deltaf2_passes" in rows[0]
     assert "epsilon_k_ratio" in rows[0]
@@ -42,6 +52,7 @@ def test_quark_scan_returns_rows_and_writes_csv(tmp_path):
     assert "alignment_ratio" in file_rows[0]
     assert "deltaf2_max_ratio" in file_rows[0]
     assert "fit_parameterization" in file_rows[0]
+    assert "mass_convention_id" in file_rows[0]
 
 
 def test_quark_scan_threads_explicit_xi_kk_into_mkk():
@@ -91,7 +102,8 @@ def test_quark_scan_threads_epsilon_k_budget_override(monkeypatch):
         epsilon_k_np_budget_override=3.0e-4,
     )
 
-    rows = run_quark_scan(config, progress_every=0)
+    with pytest.warns(RuntimeWarning, match="xi_KK=1.0"):
+        rows = run_quark_scan(config, progress_every=0)
 
     assert len(rows) == 1
     assert seen["epsilon_k_np_budget_override"] == 3.0e-4
@@ -108,7 +120,8 @@ def test_quark_scan_rejects_points_that_fail_the_repo_proxy_gate():
         max_nfev=100,
         max_proxy_h_rs=0.5,
     )
-    row = run_quark_scan(config, progress_every=0)[0]
+    with pytest.warns(RuntimeWarning, match="xi_KK=1.0"):
+        row = run_quark_scan(config, progress_every=0)[0]
 
     assert row["proxy_h_rs"] > config.max_proxy_h_rs
     assert row["passes_all"] is False

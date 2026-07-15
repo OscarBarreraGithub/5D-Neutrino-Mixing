@@ -44,6 +44,11 @@ from quarkConstraints.rs_ew_spectrum import (
     RSEWOverlapSplineCache,
     RSEWSpectrum,
 )
+from quarkConstraints.scales import (
+    KKGluonMassConvention,
+    KKGluonMassConventionError,
+    assert_kk_gluon_mass_convention,
+)
 from warpConfig.baseParams import MPL
 from warpConfig.wavefuncs import f_IR
 from yukawa.compute_yukawas import YukawaResult, compute_all_yukawas
@@ -224,6 +229,54 @@ class TileSpec:
     lambda_ir_gev: float
     n_draws: int
     seed: int
+
+
+def _tile_mass_convention(tile: TileSpec, cfg: ScanConfig) -> KKGluonMassConvention:
+    return assert_kk_gluon_mass_convention(
+        lambda_ir_gev=float(tile.lambda_ir_gev),
+        m_kk_physical_gev=float(tile.mkk_gev),
+        xi_kk=float(cfg.xi_kk),
+        context=f"run_full_catalog_scan tile {tile.tile_id}",
+    )
+
+
+def _assert_scan_kk_gluon_boundary(
+    *,
+    params: Mapping[str, Any],
+    kk_gluon_mass_gev: float,
+    couplings: Any,
+    context: str,
+) -> None:
+    scale = assert_kk_gluon_mass_convention(
+        lambda_ir_gev=float(params.get("lambda_ir_gev", params["Lambda_IR"])),
+        m_kk_physical_gev=float(params.get("m_kk_physical_gev", params["M_KK"])),
+        xi_kk=float(params["xi_KK"]),
+        mass_convention_id=str(params.get("mass_convention_id", "")) or None,
+        context=context,
+    )
+    checks = {
+        "params.M_KK": float(params["M_KK"]),
+        "kk_gluon_mass_gev": float(kk_gluon_mass_gev),
+        "couplings.M_KK": float(couplings.M_KK),
+    }
+    if getattr(couplings, "m_kk_physical_gev", None) is not None:
+        checks["couplings.m_kk_physical_gev"] = float(couplings.m_kk_physical_gev)
+    for label, value in checks.items():
+        if not math.isclose(value, scale.m_kk_physical_gev, rel_tol=1e-12, abs_tol=1e-9):
+            raise KKGluonMassConventionError(
+                f"{context}: {label}={value:.17g} does not match "
+                f"m_kk_physical_gev={scale.m_kk_physical_gev:.17g}"
+            )
+    if getattr(couplings, "lambda_ir_gev", None) is not None and not math.isclose(
+        float(couplings.lambda_ir_gev),
+        scale.lambda_ir_gev,
+        rel_tol=1e-12,
+        abs_tol=1e-9,
+    ):
+        raise KKGluonMassConventionError(
+            f"{context}: couplings.lambda_ir_gev={float(couplings.lambda_ir_gev):.17g} "
+            f"does not match params.lambda_ir_gev={scale.lambda_ir_gev:.17g}"
+        )
 
 
 _GLOBAL_CFG: ScanConfig | None = None
@@ -432,10 +485,9 @@ def _evaluate_draw(
     registry_count: int,
     config_hash: str,
 ) -> dict[str, Any]:
+    scale = _tile_mass_convention(tile, cfg)
     params: dict[str, Any] = {
-        "Lambda_IR": float(tile.lambda_ir_gev),
-        "M_KK": float(tile.mkk_gev),
-        "xi_KK": float(cfg.xi_kk),
+        **scale.as_params(),
         "k": float(cfg.k_gev),
     }
     if cfg.quark_only:
@@ -491,15 +543,31 @@ def _evaluate_draw(
             )
             quark_couplings = compute_quark_kk_gluon_couplings(
                 fit_result,
-                M_KK=tile.mkk_gev,
-                xi_KK=cfg.xi_kk,
+                m_kk_physical_gev=scale.m_kk_physical_gev,
+                lambda_ir_gev=scale.lambda_ir_gev,
+                xi_KK=scale.xi_kk,
                 g_s_star=None,
+            )
+            params.update(
+                {
+                    "coupling_policy_id": quark_couplings.coupling_policy_id,
+                    "operator_convention_id": quark_couplings.operator_convention_id,
+                    "g_s_4d": quark_couplings.g_s_4d,
+                    "g_eff": quark_couplings.g_eff,
+                    "g_s_multiplier": quark_couplings.g_s_multiplier,
+                }
+            )
+            _assert_scan_kk_gluon_boundary(
+                params=params,
+                kk_gluon_mass_gev=scale.m_kk_physical_gev,
+                couplings=quark_couplings,
+                context="run_full_catalog_scan._evaluate_draw",
             )
             point = point_builder.make_point(
                 raw=rs_point.raw,
                 **dict(rs_point.extras),
                 quark_mass_basis_couplings=quark_couplings,
-                kk_gluon_mass_gev=float(tile.mkk_gev),
+                kk_gluon_mass_gev=float(scale.m_kk_physical_gev),
             )
             results = _evaluate_constraint_ids(point, QUARK_ONLY_ALLOWLIST_IDS)
             payload = _classify_results(results)
@@ -601,15 +669,31 @@ def _evaluate_draw(
         )
         quark_couplings = compute_quark_kk_gluon_couplings(
             fit_result,
-            M_KK=tile.mkk_gev,
-            xi_KK=cfg.xi_kk,
+            m_kk_physical_gev=scale.m_kk_physical_gev,
+            lambda_ir_gev=scale.lambda_ir_gev,
+            xi_KK=scale.xi_kk,
             g_s_star=None,
+        )
+        params.update(
+            {
+                "coupling_policy_id": quark_couplings.coupling_policy_id,
+                "operator_convention_id": quark_couplings.operator_convention_id,
+                "g_s_4d": quark_couplings.g_s_4d,
+                "g_eff": quark_couplings.g_eff,
+                "g_s_multiplier": quark_couplings.g_s_multiplier,
+            }
+        )
+        _assert_scan_kk_gluon_boundary(
+            params=params,
+            kk_gluon_mass_gev=scale.m_kk_physical_gev,
+            couplings=quark_couplings,
+            context="run_full_catalog_scan._evaluate_draw",
         )
         point = point_builder.make_point(
             raw=rs_point.raw,
             **dict(rs_point.extras),
             quark_mass_basis_couplings=quark_couplings,
-            kk_gluon_mass_gev=float(tile.mkk_gev),
+            kk_gluon_mass_gev=float(scale.m_kk_physical_gev),
         )
         results = registry.evaluate_all(point)
         payload = _classify_results(results)
@@ -641,6 +725,8 @@ def _evaluate_draw(
         }
         _annotate_ew_model(row, cfg=cfg)
         return row
+    except KKGluonMassConventionError:
+        raise
     except Exception as exc:  # noqa: BLE001 - a failed draw must not abort a tile
         reason = _skip_reason(exc)
         row = {
@@ -1260,6 +1346,12 @@ def run_universal_c_sanity(
     if count != cfg.expected_registry_count or failures:
         raise RuntimeError(f"registry sanity failed: count={count}, failures={sorted(failures)}")
     lambda_ir = cfg.sanity_mkk_gev / cfg.xi_kk
+    scale = assert_kk_gluon_mass_convention(
+        lambda_ir_gev=lambda_ir,
+        m_kk_physical_gev=cfg.sanity_mkk_gev,
+        xi_kk=cfg.xi_kk,
+        context="run_full_catalog_scan.run_universal_c_sanity",
+    )
     spectrum = RSEWSpectrum.build(
         lambda_ir_gev=lambda_ir,
         k_gev=cfg.k_gev,
@@ -1339,16 +1431,24 @@ def run_universal_c_sanity(
         lepton_yukawa_result=lepton_yukawas,
         raw={"sanity": "universal_c_diagonal_leptons"},
     )
+    quark_couplings = compute_quark_kk_gluon_couplings(
+        fit,
+        m_kk_physical_gev=scale.m_kk_physical_gev,
+        lambda_ir_gev=scale.lambda_ir_gev,
+        xi_KK=scale.xi_kk,
+        g_s_star=None,
+    )
+    _assert_scan_kk_gluon_boundary(
+        params=scale.as_params(),
+        kk_gluon_mass_gev=scale.m_kk_physical_gev,
+        couplings=quark_couplings,
+        context="run_full_catalog_scan.run_universal_c_sanity",
+    )
     point = point_builder.make_point(
         raw=rs_point.raw,
         **dict(rs_point.extras),
-        quark_mass_basis_couplings=compute_quark_kk_gluon_couplings(
-            fit,
-            M_KK=cfg.sanity_mkk_gev,
-            xi_KK=cfg.xi_kk,
-            g_s_star=None,
-        ),
-        kk_gluon_mass_gev=float(cfg.sanity_mkk_gev),
+        quark_mass_basis_couplings=quark_couplings,
+        kk_gluon_mass_gev=float(scale.m_kk_physical_gev),
     )
     results = registry.evaluate_all(point)
     payload = _classify_results(results)
@@ -1617,6 +1717,12 @@ def _build_tiles(cfg: ScanConfig) -> list[TileSpec]:
         if mkk <= 0.0:
             raise ValueError("M_KK values must be positive")
         lambda_ir = float(mkk / cfg.xi_kk)
+        assert_kk_gluon_mass_convention(
+            lambda_ir_gev=lambda_ir,
+            m_kk_physical_gev=float(mkk),
+            xi_kk=float(cfg.xi_kk),
+            context=f"run_full_catalog_scan._build_tiles tile {tile_id}",
+        )
         out.append(
             TileSpec(
                 tile_id=tile_id,

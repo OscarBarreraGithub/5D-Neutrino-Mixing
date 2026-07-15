@@ -176,7 +176,7 @@ def test_modern_point_evaluation_bridge_matches_repo_summary():
         policy=default_modern_phenomenology_policy(),
         inputs=ModernDefaultInputs(),
     )
-    # The repo backend uses perturbative g_s; pass g_s_star=None to match.
+    # Match the modern fixed-g_sstar_3 benchmark normalization.
     from quarkConstraints.couplings import compute_quark_kk_gluon_couplings
 
     repo_summary = evaluate_delta_f2_constraints(

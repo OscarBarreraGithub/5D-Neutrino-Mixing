@@ -71,10 +71,10 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 ### Normalization / convention (M-10..M-14)
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| M-10 | HYUK | MAJ | rs_higgs_yukawas.py unfixed twin of B1 Zbb bug | `rs_higgs_yukawas.py:292-304` | PENDING |
-| M-11 | LANEA | MAJ | Lane A Bauer bridge factor-2 (Y_max≈1.5 not 3) | `anarchic_bauer_s1.py:24-33,191-201` | PENDING |
-| M-12 | LANEA | MAJ | Lane A drops Wolfenstein A + hash() seeds | `anarchic_bauer_s1.py:194,408` | PENDING |
-| M-13 | GSSTAR | MAJ | Lane B/C KK-gluon g_s* normalization ~13× | `quark_model_core` scales/matching | PENDING |
+| M-10 | HYUK | MAJ | rs_higgs_yukawas.py unfixed twin of B1 Zbb bug | `rs_higgs_yukawas.py:292-304` | VERIFIED (B1-converted shared helper; Zbb bit-identical; sign fixed) |
+| M-11 | LANEA | MAJ | Lane A Bauer bridge factor-2 (Y_max≈1.5 not 3) | `anarchic_bauer_s1.py:24-33,191-201` | VERIFIED (2v bridge; Y_max~3; wall ~30->~5.7 TeV) |
+| M-12 | LANEA | MAJ | Lane A drops Wolfenstein A + hash() seeds | `anarchic_bauer_s1.py:194,408` | VERIFIED (Wolfenstein A + deterministic seeds) |
+| M-13 | GSSTAR | MAJ | Lane B/C KK-gluon g_s* normalization ~13× | `quark_model_core` scales/matching | FIXED (convention hardening + legacy-floor documentation; physical-coupling re-quote remains HUMAN decision) |
 | M-14 | LFVCONV | MAJ | μ→eγ M_KK convention split ×2.45⁴ | `scanParams/scan.py:226-227`, `rs_ew_builder.py:131` | PENDING |
 
 ### Fit / scan logic (M-15..M-18)

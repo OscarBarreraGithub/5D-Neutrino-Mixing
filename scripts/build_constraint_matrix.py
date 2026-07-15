@@ -22,7 +22,7 @@ extracts, for every draw, a small fixed set of columns:
     pass_<ID>  : bool, constraints[ID]["passes"]   for each ID in CONSTRAINT_SET
                  (None/NA for skipped rows and for IDs absent from the row)
     ratio_<ID> : float, constraints[ID]["ratio"]   for each ID in CONSTRAINT_SET
-    pass_COLLIDER : DERIVED bool, M_KK >= COLLIDER_THRESHOLD_GEV (geometric;
+    pass_COLLIDER : DERIVED bool, M_KK >= COLLIDER_THRESHOLD_GEV (physical;
                  defined for every row regardless of `evaluated`)
 
 The whole point: physics is evaluated ONCE here. The explorer notebook then
@@ -49,6 +49,15 @@ import glob
 import json
 import os
 import sys
+
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
+from quarkConstraints.scales import (
+    KKGluonMassConventionError,
+    assert_kk_gluon_mass_convention,
+)
 
 # --------------------------------------------------------------------------
 # CONFIG -- edit here. Maps the user's "review_local" constraint set to the
@@ -125,6 +134,28 @@ def build_records(files, collider_gev, limit=None):
         mkk_gev = params.get("M_KK")
         if mkk_gev is None:
             continue
+        m_kk_physical_gev = float(params.get("m_kk_physical_gev", mkk_gev))
+        lambda_ir_gev = params.get("lambda_ir_gev", params.get("Lambda_IR"))
+        xi_kk = params.get("xi_KK")
+        mass_convention_id = params.get("mass_convention_id")
+        if lambda_ir_gev is not None and xi_kk is not None:
+            try:
+                assert_kk_gluon_mass_convention(
+                    lambda_ir_gev=float(lambda_ir_gev),
+                    m_kk_physical_gev=m_kk_physical_gev,
+                    xi_kk=float(xi_kk),
+                    mass_convention_id=(
+                        None if mass_convention_id is None else str(mass_convention_id)
+                    ),
+                    context="build_constraint_matrix.build_records",
+                )
+            except KKGluonMassConventionError:
+                raise
+        if abs(float(mkk_gev) - m_kk_physical_gev) > 1e-9:
+            raise KKGluonMassConventionError(
+                "build_constraint_matrix.build_records: params['M_KK'] must be the "
+                "physical first KK-gluon mass and match m_kk_physical_gev"
+            )
         fd = row.get("fit_diagnostics") or {}
         cons = row.get("constraints", {}) or {}
         skipped = bool(row.get("skipped", False))
@@ -135,8 +166,14 @@ def build_records(files, collider_gev, limit=None):
         # and must be excluded from all survival/veto/floor statistics.
         evaluated = bool(cons) and not skipped
         rec = {
-            "M_KK_TeV": float(mkk_gev) / 1000.0,
-            "M_KK_GeV": float(mkk_gev),
+            "M_KK_TeV": m_kk_physical_gev / 1000.0,
+            "M_KK_GeV": m_kk_physical_gev,
+            "m_kk_physical_gev": m_kk_physical_gev,
+            "lambda_ir_gev": (
+                float(lambda_ir_gev) if lambda_ir_gev is not None else float("nan")
+            ),
+            "xi_KK": float(xi_kk) if xi_kk is not None else float("nan"),
+            "mass_convention_id": "" if mass_convention_id is None else str(mass_convention_id),
             "r": row.get("quark_fit_r", params.get("quark_fit_r")),
             "fit_success": bool(fd.get("success", True)),
             "skipped": skipped,
@@ -271,7 +308,7 @@ def _write_npz_from_records(out, records):
         vals = [r.get(col) for r in records]
         if col.startswith("pass_") or col in bool_cols:
             arrays[col] = np.array([(-1 if v is None else int(bool(v))) for v in vals], dtype=np.int8)
-        elif col == "skip_reason":
+        elif col in {"skip_reason", "mass_convention_id"}:
             arrays[col] = np.array(["" if v is None else str(v) for v in vals], dtype=object)
         else:
             arrays[col] = np.array([(float("nan") if v is None else v) for v in vals], dtype=float)

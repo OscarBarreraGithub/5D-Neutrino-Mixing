@@ -36,9 +36,11 @@ from quarkConstraints.modern.conventions import (
 )
 from quarkConstraints.modern.inputs import (
     MODERN_DEFAULT_ALPHA_S_POLICY_ID,
+    MODERN_DEFAULT_COUPLING_POLICY_ID,
     MODERN_DEFAULT_INPUTS_SCHEMA_ID,
     MODERN_DEFAULT_MASS_TARGET_SCALE_GEV,
     MODERN_DEFAULT_NEUTRAL_MESON_SYSTEM_IDS,
+    MODERN_DEFAULT_OPERATOR_CONVENTION_ID,
     MODERN_DEFAULT_PROVENANCE_RECORD_IDS,
     MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV,
     MODERN_DEFAULT_RESOLUTION_POLICY_ID,
@@ -120,6 +122,9 @@ def test_modern_registry_freezes_lane_and_schema_ids():
     assert modern_default.operator_weight_policy.reference_scale_GeV == pytest.approx(
         MODERN_DEFAULT_TARGET_SCALE_GEV
     )
+    assert modern_default.operator_weight_policy.operator_convention_id == (
+        MODERN_DEFAULT_OPERATOR_CONVENTION_ID
+    )
     assert modern_default.operator_weight_policy.lr1_weight == pytest.approx(7.0)
     assert modern_default.ckm_target.target_id
     assert modern_default.ckm_target.theta12 == pytest.approx(0.2274)
@@ -156,6 +161,7 @@ def test_modern_registry_freezes_lane_and_schema_ids():
         MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV
     )
     assert modern_default.qcd_metadata.alpha_s_policy_id == MODERN_DEFAULT_ALPHA_S_POLICY_ID
+    assert modern_default.qcd_metadata.coupling_policy_id == MODERN_DEFAULT_COUPLING_POLICY_ID
     assert tuple(record.record_id for record in modern_default.provenance_records) == (
         MODERN_DEFAULT_PROVENANCE_RECORD_IDS
     )

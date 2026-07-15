@@ -39,6 +39,10 @@ _COUPLINGS_KEYS = (
     "xi_KK",
     "alpha_s",
     "g_s",
+    "g_s_4d",
+    "g_eff",
+    "g_s_multiplier",
+    "coupling_policy_id",
     "left_overlap",
     "right_up_overlap",
     "right_down_overlap",
@@ -285,6 +289,20 @@ def _canonical_couplings_payload(value: Any) -> dict[str, Any]:
             "bridge_artifact.couplings.alpha_s", payload["alpha_s"]
         ),
         "g_s": _require_positive_float("bridge_artifact.couplings.g_s", payload["g_s"]),
+        "g_s_4d": _require_positive_float(
+            "bridge_artifact.couplings.g_s_4d", payload["g_s_4d"]
+        ),
+        "g_eff": _require_positive_float(
+            "bridge_artifact.couplings.g_eff", payload["g_eff"]
+        ),
+        "g_s_multiplier": _require_positive_float(
+            "bridge_artifact.couplings.g_s_multiplier",
+            payload["g_s_multiplier"],
+        ),
+        "coupling_policy_id": _require_text(
+            "bridge_artifact.couplings.coupling_policy_id",
+            payload["coupling_policy_id"],
+        ),
         "left_overlap": _canonical_matrix_payload(
             "bridge_artifact.couplings.left_overlap", payload["left_overlap"]
         ),

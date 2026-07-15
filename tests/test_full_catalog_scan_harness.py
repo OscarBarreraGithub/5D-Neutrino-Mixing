@@ -552,9 +552,22 @@ def test_quark_only_evaluate_draw_skips_leptons_filters_allowlist_and_is_determi
     @dataclass
     class _Couplings:
         M_KK: float
+        xi_KK: float
+        m_kk_physical_gev: float
+        lambda_ir_gev: float
+        coupling_policy_id: str = "perturbative_4d_legacy"
+        operator_convention_id: str = "kk_gluon_tree.perturbative_4d_legacy.v1"
+        g_s_4d: float = 1.0
+        g_eff: float = 1.0
+        g_s_multiplier: float = 1.0
 
     def fake_couplings(_fit_result, **kwargs):
-        return _Couplings(M_KK=float(kwargs["M_KK"]))
+        return _Couplings(
+            M_KK=float(kwargs["m_kk_physical_gev"]),
+            xi_KK=float(kwargs["xi_KK"]),
+            m_kk_physical_gev=float(kwargs["m_kk_physical_gev"]),
+            lambda_ir_gev=float(kwargs["lambda_ir_gev"]),
+        )
 
     captured_ids: list[tuple[str, ...]] = []
 
@@ -628,7 +641,16 @@ def test_quark_only_evaluate_draw_skips_leptons_filters_allowlist_and_is_determi
     ).encode()
     expected_serialized = '{"advisory_flags":["deferred_lepton_followup"],"allowlist":["K001","K002","B001","B002","B003","B004","C001","C002","B011","B012","B013","B014","B032","B033","B034","C003","K003","K013","T001","T002","T003","T004","T005","T006","T007","T008","T010","T011","T012","T014","EW001","EW003","CR001","CR002","CR003","CR004","CR007","CR008","CR010","CR012","CR013","E004","E006","E007","E008","E009"],"cache_metrics":{"rs_ew_cache_injected":true,"spectrum_injected":true,"spline_max_a_rel_err":0.0},"constraints":{"B001":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B002":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B003":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B004":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B011":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B012":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B013":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B014":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B032":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B033":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"B034":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"C001":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"C002":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"C003":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR001":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR002":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR003":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR004":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR007":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR008":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR010":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR012":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"CR013":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"E004":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"E006":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"E007":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"E008":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"E009":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"EW001":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"EW003":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"K001":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":false,"proxy_flags":{},"ratio":2.0,"severity":"HARD","tag":"rigorous"},"K002":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"K003":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"K013":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T001":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T002":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T003":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T004":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T005":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T006":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T007":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T008":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T010":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T011":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T012":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"},"T014":{"active":true,"evaluated":true,"match_status":null,"needs_human_physics":null,"passes":true,"proxy_flags":{},"ratio":0.1,"severity":"HARD","tag":"rigorous"}},"coverage_complete":true,"deferred_lepton_followup":["EW002","CR005","CR006","CR009","CR011","CR014"],"draw_id":0,"excluded_by_proxy":[],"excluded_by_rigorous":["K001"],"fit_diagnostics":{"bulk_c_Q":[0.61,0.62,0.63],"bulk_c_d":[0.67,0.68,0.69],"bulk_c_u":[0.64,0.65,0.66],"fitted_down_yukawa_singular_values":[0.0,0.0,3.0],"fitted_up_yukawa_singular_values":[0.0,0.0,3.0],"initial_score":1.0,"max_abs_quark_yukawa":1.0,"max_ckm_residual":0.0,"max_down_log_residual":0.0,"max_up_log_residual":0.0,"message":"ok","nfev":1,"residual_norm":0.0,"score":0.0,"success":true},"hard_not_evaluated":[],"lepton_sector":"dropped (not rigorous)","mode":"quark_only","params":{"Lambda_IR":1225.1398701351736,"M_KK":3000.0,"k":1.2209e+19,"quark_fit_r":0.25,"quark_yukawa_seed":{"Y_d_im":[[0.6847299845497847,1.25580147532063,0.37660201720639197],[1.251367717642807,1.0940707532813247,-0.8455713802500362],[1.0983822922147288,0.6922558091137612,-0.6664041291032166]],"Y_d_re":[[0.8973753858602489,0.0544951105581426,-0.8053331255487975],[-1.0022880202777662,-0.00663309450661842,0.24817392184595977],[-0.9469860377145608,-1.4553152497193032,-0.0866003133286175]],"Y_u_im":[[1.1696780793335577,0.038911365688595545,-0.7651061967936106],[0.9727247882922341,-0.8587111098747136,0.7244011567041291],[0.38982061376904253,1.282221775575501,-0.8042754341807435]],"Y_u_re":[[0.5470555897444305,-1.3385369435933319,-0.8389203816821659],[-0.9468845679039909,-0.972282296744909,0.9362835199673212],[1.2700349940811693,-0.6702768066086813,0.9592636847790064]]},"xi_KK":2.4487},"provenance":{"config_hash":"abc","mode":"quark_only","quark_fit_r":0.25,"registry_count":103},"quark_fit_r":0.25,"seed":123,"skipped":false,"survives_all_HARD_inclusive":false,"survives_all_HARD_strict":false,"tile_id":0}'.encode()
     assert serialized1 == serialized2
-    assert serialized1 == expected_serialized
+    assert row1["params"]["M_KK"] == pytest.approx(3000.0)
+    assert row1["params"]["m_kk_physical_gev"] == pytest.approx(3000.0)
+    assert row1["params"]["lambda_ir_gev"] == pytest.approx(tile.lambda_ir_gev)
+    assert row1["params"]["xi_KK"] == pytest.approx(cfg.xi_kk)
+    assert row1["params"]["coupling_policy_id"] == "perturbative_4d_legacy"
+    assert (
+        row1["params"]["operator_convention_id"]
+        == "kk_gluon_tree.perturbative_4d_legacy.v1"
+    )
+    assert row1["params"]["g_s_multiplier"] == pytest.approx(1.0)
 
 
 def test_evaluate_draw_threads_custodial_ew_model_to_quark_only_and_full_builders(monkeypatch):
@@ -679,6 +701,14 @@ def test_evaluate_draw_threads_custodial_ew_model_to_quark_only_and_full_builder
     @dataclass
     class _Couplings:
         M_KK: float
+        xi_KK: float
+        m_kk_physical_gev: float
+        lambda_ir_gev: float
+        coupling_policy_id: str = "perturbative_4d_legacy"
+        operator_convention_id: str = "kk_gluon_tree.perturbative_4d_legacy.v1"
+        g_s_4d: float = 1.0
+        g_eff: float = 1.0
+        g_s_multiplier: float = 1.0
 
     def fake_fit(*args, **kwargs):
         fit_result = _FitResult(
@@ -711,7 +741,12 @@ def test_evaluate_draw_threads_custodial_ew_model_to_quark_only_and_full_builder
         )
 
     def fake_couplings(_fit_result, **kwargs):
-        return _Couplings(M_KK=float(kwargs["M_KK"]))
+        return _Couplings(
+            M_KK=float(kwargs["m_kk_physical_gev"]),
+            xi_KK=float(kwargs["xi_KK"]),
+            m_kk_physical_gev=float(kwargs["m_kk_physical_gev"]),
+            lambda_ir_gev=float(kwargs["lambda_ir_gev"]),
+        )
 
     def fake_results(process_ids):
         return {
@@ -980,7 +1015,11 @@ def test_universal_c_sanity_uses_cfg_ew_model_for_spectrum_and_builder(monkeypat
     )
     monkeypatch.setattr(harness, "_force_degenerate_neutrino_yukawas", lambda *a, **k: None)
     monkeypatch.setattr(harness.point_builder, "build_from_rs_ew_inputs", fake_builder)
-    monkeypatch.setattr(harness, "compute_quark_kk_gluon_couplings", lambda *a, **k: object())
+    monkeypatch.setattr(
+        harness,
+        "compute_quark_kk_gluon_couplings",
+        lambda *a, **k: SimpleNamespace(M_KK=float(k["m_kk_physical_gev"])),
+    )
     cfg = harness.ScanConfig(
         mkk_values_gev=(3000.0,),
         n_draws_per_tile=1,
@@ -1062,8 +1101,8 @@ def test_deltaf2_bucket1_ratios_relax_with_high_mkk():
         overall_scale=3.0,
         max_nfev=120,
     ).result
-    low = compute_quark_kk_gluon_couplings(fit, M_KK=1500.0, xi_KK=1.0, g_s_star=None)
-    high = compute_quark_kk_gluon_couplings(fit, M_KK=15000.0, xi_KK=1.0, g_s_star=None)
+    low = compute_quark_kk_gluon_couplings(fit, M_KK=1500.0, g_s_star=None)
+    high = compute_quark_kk_gluon_couplings(fit, M_KK=15000.0, g_s_star=None)
     low_point = point_builder.make_point(
         quark_mass_basis_couplings=low,
         kk_gluon_mass_gev=1500.0,
@@ -1082,6 +1121,39 @@ def test_deltaf2_bucket1_ratios_relax_with_high_mkk():
     assert k002_low.ratio > k002_high.ratio
     assert k001_low.passes is False
     assert k001_high.passes is True
+
+
+def test_kk_gluon_mass_boundary_accepts_physical_tile_and_rejects_mismatch():
+    harness = _load_harness()
+    cfg = harness.ScanConfig(
+        mkk_values_gev=(7000.0,),
+        n_draws_per_tile=1,
+        xi_kk=harness.DEFAULT_XI_KK,
+    )
+    tile = harness._build_tiles(cfg)[0]
+    scale = harness._tile_mass_convention(tile, cfg)
+    couplings = SimpleNamespace(
+        M_KK=scale.m_kk_physical_gev,
+        m_kk_physical_gev=scale.m_kk_physical_gev,
+        lambda_ir_gev=scale.lambda_ir_gev,
+    )
+
+    harness._assert_scan_kk_gluon_boundary(
+        params=scale.as_params(),
+        kk_gluon_mass_gev=scale.m_kk_physical_gev,
+        couplings=couplings,
+        context="unit-test physical tile",
+    )
+
+    mismatched_tile = harness.TileSpec(
+        tile_id=99,
+        mkk_gev=7000.0,
+        lambda_ir_gev=7000.0,
+        n_draws=1,
+        seed=1,
+    )
+    with pytest.raises(ValueError, match="mass convention mismatch"):
+        harness._tile_mass_convention(mismatched_tile, cfg)
 
 
 def _candidate_get_extra_usage(harness):

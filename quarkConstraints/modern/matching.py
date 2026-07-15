@@ -513,6 +513,11 @@ def matching_to_deltaf2_summary(
             c1_vrr=system.c1_vrr,
             c4_lr=system.c4_lr,
             c5_lr=system.c5_lr,
+            lambda_ir_gev=float(matching.Lambda_IR),
+            m_kk_physical_gev=float(matching.M_KK),
+            g_eff=float(matching.g_s),
+            coupling_policy_id=bundle.qcd_metadata.coupling_policy_id,
+            operator_convention_id=bundle.operator_weight_policy.operator_convention_id,
         )
         weighted = {
             "C1_VLL": weights.ll_weight * system.c1_vll,
@@ -547,6 +552,10 @@ def matching_to_deltaf2_summary(
         M_KK=matching.M_KK,
         xi_KK=matching.xi_KK,
         observables=tuple(observables),
+        lambda_ir_gev=float(matching.Lambda_IR),
+        m_kk_physical_gev=float(matching.M_KK),
+        coupling_policy_id=bundle.qcd_metadata.coupling_policy_id,
+        g_eff=float(matching.g_s),
     )
 
 

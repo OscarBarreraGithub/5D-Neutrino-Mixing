@@ -16,12 +16,17 @@ import math
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Sequence
 
-from .couplings import QuarkMassBasisCouplings, compute_quark_kk_gluon_couplings
+from .couplings import (
+    COUPLING_POLICY_PERTURBATIVE_4D_LEGACY,
+    OPERATOR_CONVENTION_PERTURBATIVE_4D_LEGACY,
+    QuarkMassBasisCouplings,
+    compute_quark_kk_gluon_couplings,
+)
 from .fit import QuarkFitResult
 from .qcd_running import evolve_deltaf2_wilsons
 from .scales import DEFAULT_QUARK_TARGET_SCALE_GEV, DEFAULT_QUARK_XI_KK
 
-DELTA_F2_MODEL_V1 = "kk_gluon_tree_v1"
+DELTA_F2_MODEL_V1 = OPERATOR_CONVENTION_PERTURBATIVE_4D_LEGACY
 DELTA_F2_INPUT_BUNDLE_V1 = "deltaf2_inputs_mu3tev_v1"
 DELTA_F2_OPERATOR_CONVENTION = DELTA_F2_MODEL_V1
 DELTA_F2_INPUT_BUNDLE = DELTA_F2_INPUT_BUNDLE_V1
@@ -169,6 +174,14 @@ class DeltaF2WilsonCoefficients:
     c1_vrr: complex
     c4_lr: complex
     c5_lr: complex
+    lambda_ir_gev: float | None = None
+    m_kk_physical_gev: float | None = None
+    mass_convention_id: str | None = None
+    g_s_4d: float | None = None
+    g_eff: float | None = None
+    g_s_multiplier: float | None = None
+    coupling_policy_id: str = COUPLING_POLICY_PERTURBATIVE_4D_LEGACY
+    operator_convention_id: str = DELTA_F2_MODEL_V1
 
     @property
     def wilsons(self) -> Mapping[str, complex]:
@@ -353,6 +366,13 @@ class DeltaF2ConstraintSummary:
     M_KK: float
     xi_KK: float
     observables: tuple[DeltaF2ObservableSummary, ...]
+    lambda_ir_gev: float | None = None
+    m_kk_physical_gev: float | None = None
+    mass_convention_id: str | None = None
+    coupling_policy_id: str = COUPLING_POLICY_PERTURBATIVE_4D_LEGACY
+    g_s_4d: float | None = None
+    g_eff: float | None = None
+    g_s_multiplier: float | None = None
 
     @property
     def passes_all(self) -> bool:
@@ -495,7 +515,7 @@ def _coerce_couplings(
     source: QuarkFitResult | QuarkMassBasisCouplings,
     *,
     M_KK: float | None,
-    xi_KK: float,
+    xi_KK: float | None,
 ) -> QuarkMassBasisCouplings:
     if isinstance(source, QuarkMassBasisCouplings):
         return source
@@ -525,7 +545,7 @@ def compute_delta_f2_wilsons(
     source: QuarkFitResult | QuarkMassBasisCouplings,
     *,
     M_KK: float | None = None,
-    xi_KK: float = DEFAULT_QUARK_XI_KK,
+    xi_KK: float | None = None,
     inputs: Sequence[DeltaF2Input] | None = None,
 ) -> tuple[DeltaF2WilsonCoefficients, ...]:
     """Compute tree-level KK-gluon-inspired ``Delta F = 2`` Wilsons.
@@ -534,7 +554,7 @@ def compute_delta_f2_wilsons(
     left-left operator, one vector right-right operator, and two left-right
     operators. The coefficients are matched directly at ``mu = M_KK``.
     """
-    if xi_KK <= 0.0:
+    if xi_KK is not None and xi_KK <= 0.0:
         raise ValueError("xi_KK must be positive")
     couplings = _coerce_couplings(source, M_KK=M_KK, xi_KK=xi_KK)
     items = default_delta_f2_inputs() if inputs is None else tuple(inputs)
@@ -553,6 +573,22 @@ def compute_delta_f2_wilsons(
                 c1_vrr=right * right * prefactor / 6.0,
                 c4_lr=-(left * right) * prefactor,
                 c5_lr=(left * right) * prefactor / 3.0,
+                lambda_ir_gev=getattr(couplings, "lambda_ir_gev", None),
+                m_kk_physical_gev=getattr(couplings, "m_kk_physical_gev", couplings.M_KK),
+                mass_convention_id=getattr(couplings, "mass_convention_id", None),
+                g_s_4d=getattr(couplings, "g_s_4d", None),
+                g_eff=getattr(couplings, "g_eff", getattr(couplings, "g_s", None)),
+                g_s_multiplier=getattr(couplings, "g_s_multiplier", None),
+                coupling_policy_id=getattr(
+                    couplings,
+                    "coupling_policy_id",
+                    COUPLING_POLICY_PERTURBATIVE_4D_LEGACY,
+                ),
+                operator_convention_id=getattr(
+                    couplings,
+                    "operator_convention_id",
+                    DELTA_F2_MODEL_V1,
+                ),
             )
         )
     return tuple(out)
@@ -615,6 +651,22 @@ def _hadronic_eval_for_system(
             "hadronic_scale_gev": float(wilsons.matching_scale),
             "running_order": eps_result.running_order,
             "running_bias_note": eps_result.running_bias_note,
+            "m_kk_physical_gev": float(
+                wilsons.m_kk_physical_gev
+                if wilsons.m_kk_physical_gev is not None
+                else wilsons.M_KK
+            ),
+            "lambda_ir_gev": (
+                None if wilsons.lambda_ir_gev is None else float(wilsons.lambda_ir_gev)
+            ),
+            "mass_convention_id": wilsons.mass_convention_id,
+            "coupling_policy_id": wilsons.coupling_policy_id,
+            "operator_convention_id": wilsons.operator_convention_id,
+            "g_s_4d": None if wilsons.g_s_4d is None else float(wilsons.g_s_4d),
+            "g_eff": None if wilsons.g_eff is None else float(wilsons.g_eff),
+            "g_s_multiplier": (
+                None if wilsons.g_s_multiplier is None else float(wilsons.g_s_multiplier)
+            ),
         }
         diagnostics.update(delta_f2_epsilon_k_budget_policy().as_diagnostics())
         return _HadronicEvaluation(
@@ -728,7 +780,7 @@ def evaluate_delta_f2_constraints(
     source: QuarkFitResult | QuarkMassBasisCouplings,
     *,
     M_KK: float | None = None,
-    xi_KK: float = DEFAULT_QUARK_XI_KK,
+    xi_KK: float | None = None,
     inputs: Sequence[DeltaF2Input] | None = None,
     apply_qcd_running: bool = True,
     mu_had: float | Mapping[str, float] | None = None,
@@ -854,11 +906,22 @@ def evaluate_delta_f2_constraints(
             )
         )
     return DeltaF2ConstraintSummary(
-        model_label=DELTA_F2_MODEL_V1,
+        model_label=str(getattr(couplings, "operator_convention_id", DELTA_F2_MODEL_V1)),
         input_bundle_label=DELTA_F2_INPUT_BUNDLE_V1,
         M_KK=float(couplings.M_KK),
         xi_KK=float(getattr(couplings, "xi_KK", xi_KK)),
         observables=tuple(observables),
+        lambda_ir_gev=getattr(couplings, "lambda_ir_gev", None),
+        m_kk_physical_gev=getattr(couplings, "m_kk_physical_gev", couplings.M_KK),
+        mass_convention_id=getattr(couplings, "mass_convention_id", None),
+        coupling_policy_id=getattr(
+            couplings,
+            "coupling_policy_id",
+            COUPLING_POLICY_PERTURBATIVE_4D_LEGACY,
+        ),
+        g_s_4d=getattr(couplings, "g_s_4d", None),
+        g_eff=getattr(couplings, "g_eff", getattr(couplings, "g_s", None)),
+        g_s_multiplier=getattr(couplings, "g_s_multiplier", None),
     )
 
 
@@ -908,6 +971,14 @@ def _evolve_wilsons(
         c1_vrr=c_vrr_low,
         c4_lr=c4_lr_low,
         c5_lr=c5_lr_low,
+        lambda_ir_gev=wilsons.lambda_ir_gev,
+        m_kk_physical_gev=wilsons.m_kk_physical_gev,
+        mass_convention_id=wilsons.mass_convention_id,
+        g_s_4d=wilsons.g_s_4d,
+        g_eff=wilsons.g_eff,
+        g_s_multiplier=wilsons.g_s_multiplier,
+        coupling_policy_id=wilsons.coupling_policy_id,
+        operator_convention_id=wilsons.operator_convention_id,
     )
 
 

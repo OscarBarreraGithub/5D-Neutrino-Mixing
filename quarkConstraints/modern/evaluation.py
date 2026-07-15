@@ -215,6 +215,11 @@ def _deltaf2_summary_from_matching(
             c1_vrr=c1_vrr,
             c4_lr=c4_lr,
             c5_lr=c5_lr,
+            lambda_ir_gev=float(matching.Lambda_IR),
+            m_kk_physical_gev=float(matching.M_KK),
+            g_eff=float(matching.g_s),
+            coupling_policy_id=bundle.qcd_metadata.coupling_policy_id,
+            operator_convention_id=bundle.operator_weight_policy.operator_convention_id,
         )
 
         # Use proper hadronic evaluation for all systems
@@ -275,6 +280,10 @@ def _deltaf2_summary_from_matching(
         M_KK=float(matching.M_KK),
         xi_KK=float(matching.xi_KK),
         observables=tuple(observables),
+        lambda_ir_gev=float(matching.Lambda_IR),
+        m_kk_physical_gev=float(matching.M_KK),
+        coupling_policy_id=bundle.qcd_metadata.coupling_policy_id,
+        g_eff=float(matching.g_s),
     )
 
 
@@ -662,9 +671,9 @@ def evaluate_modern_point(
     )
     resolved_point_label = fit_result.point.label if point_label is None else str(point_label)
     resolved_point_id = resolved_point_label if point_id is None else str(point_id)
-    resolved_g_s_star = (
-        resolved_inputs.qcd_metadata.g_s_star if g_s_star is _SENTINEL else g_s_star
-    )
+    coupling_kwargs = {}
+    if g_s_star is not _SENTINEL:
+        coupling_kwargs["g_s_star"] = g_s_star
     couplings = build_modern_point_couplings(
         fit_result,
         inputs=resolved_inputs,
@@ -672,7 +681,7 @@ def evaluate_modern_point(
         point_label=resolved_point_label,
         M_KK=resolved_m_kk,
         xi_KK=xi_KK,
-        g_s_star=resolved_g_s_star,
+        **coupling_kwargs,
     )
     matching = build_modern_point_matching(
         couplings,

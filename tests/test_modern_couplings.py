@@ -38,6 +38,11 @@ def test_modern_point_couplings_matches_repo_formula_for_benchmark_point() -> No
     assert modern.M_KK == repo.M_KK
     assert modern.alpha_s == repo.alpha_s
     assert modern.g_s == repo.g_s
+    assert modern.g_s_4d == repo.g_s_4d
+    assert modern.g_eff == repo.g_eff
+    assert modern.g_s_multiplier == repo.g_s_multiplier
+    assert modern.coupling_policy_id == repo.coupling_policy_id
+    assert modern.operator_convention_id == repo.operator_convention_id
     assert np.allclose(np.asarray(modern.left_up), repo.left_up)
     assert np.allclose(np.asarray(modern.left_down), repo.left_down)
     assert np.allclose(np.asarray(modern.right_up), repo.right_up)

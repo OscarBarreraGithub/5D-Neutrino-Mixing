@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import subprocess
+import warnings
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
@@ -24,6 +25,7 @@ from .proxies import summarize_flavor_diagnostics
 from .scales import (
     DEFAULT_QUARK_BENCHMARK_H_RS_MAX,
     DEFAULT_QUARK_XI_KK,
+    assert_kk_gluon_mass_convention,
     default_quark_m_kk_from_lambda_ir,
 )
 
@@ -77,8 +79,15 @@ CSV_COLUMNS = [
     "overall_scale",
     "xi_KK",
     "Lambda_IR",
+    "lambda_ir_gev",
     "M_KK",
+    "m_kk_physical_gev",
+    "mass_convention_id",
     "k",
+    "coupling_policy_id",
+    "g_s_4d",
+    "g_eff",
+    "g_s_multiplier",
     "fit_success",
     "fit_score",
     "residual_norm",
@@ -343,6 +352,15 @@ def run_quark_scan(
     progress_every: int = 100,
 ) -> List[Dict[str, object]]:
     """Run the quark-sector scan and optionally write a CSV file."""
+    if abs(float(config.xi_KK) - float(DEFAULT_QUARK_XI_KK)) <= 1e-15:
+        warnings.warn(
+            "QuarkScanConfig uses xi_KK=1.0, so the legacy lower-level scan "
+            "sets M_KK equal to Lambda_IR. The M_KK column is only safe to "
+            "interpret with the emitted mass_convention_id; pass "
+            "xi_KK=GAUGE_KK_ROOT_NN for the physical first gauge-KK mass.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
     git_commit, dirty_tree = _resolve_git_metadata(config.record_git_metadata)
     rows: List[Dict[str, object]] = []
     handle = None
@@ -356,6 +374,12 @@ def run_quark_scan(
         sample_index = 0
         for Lambda_IR in config.Lambda_IR_values:
             M_KK = default_quark_m_kk_from_lambda_ir(float(Lambda_IR), xi_KK=config.xi_KK)
+            scale = assert_kk_gluon_mass_convention(
+                lambda_ir_gev=float(Lambda_IR),
+                m_kk_physical_gev=float(M_KK),
+                xi_kk=float(config.xi_KK),
+                context="quarkConstraints.scan.run_quark_scan",
+            )
             for overall_scale in config.overall_scale_values:
                 current_seed = default_spurion_seed()
                 for r_val in config.r_values:
@@ -373,9 +397,16 @@ def run_quark_scan(
                     current_seed = solution.seed
                     result = solution.result
                     diagnostics = summarize_flavor_diagnostics(result, m_kk=M_KK)
+                    quark_couplings = compute_quark_kk_gluon_couplings(
+                        result,
+                        m_kk_physical_gev=scale.m_kk_physical_gev,
+                        lambda_ir_gev=scale.lambda_ir_gev,
+                        xi_KK=scale.xi_kk,
+                        g_s_star=None,
+                    )
                     deltaf2 = evaluate_delta_f2_constraints(
                         # perturbative g_s (legacy repo_v1 behavior)
-                        compute_quark_kk_gluon_couplings(result, M_KK=M_KK, xi_KK=config.xi_KK, g_s_star=None),
+                        quark_couplings,
                         M_KK=M_KK,
                         epsilon_k_np_budget_override=config.epsilon_k_np_budget_override,
                     )
@@ -415,8 +446,15 @@ def run_quark_scan(
                         "overall_scale": float(overall_scale),
                         "xi_KK": config.xi_KK,
                         "Lambda_IR": float(Lambda_IR),
-                        "M_KK": M_KK,
+                        "lambda_ir_gev": scale.lambda_ir_gev,
+                        "M_KK": scale.m_kk_physical_gev,
+                        "m_kk_physical_gev": scale.m_kk_physical_gev,
+                        "mass_convention_id": scale.mass_convention_id,
                         "k": config.k,
+                        "coupling_policy_id": quark_couplings.coupling_policy_id,
+                        "g_s_4d": quark_couplings.g_s_4d,
+                        "g_eff": quark_couplings.g_eff,
+                        "g_s_multiplier": quark_couplings.g_s_multiplier,
                         "fit_success": solution.success,
                         "fit_score": result.score,
                         "residual_norm": result.residual_norm,

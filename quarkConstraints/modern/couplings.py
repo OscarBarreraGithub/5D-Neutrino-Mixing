@@ -14,16 +14,18 @@ from ..fit import QuarkFitResult, QuarkFitSolution
 from .conventions import MODERN_LANE_ID
 from .inputs import (
     MODERN_DEFAULT_ALPHA_S_POLICY_ID,
+    MODERN_DEFAULT_COUPLING_POLICY_ID,
     MODERN_DEFAULT_INPUT_BUNDLE_ID,
     MODERN_DEFAULT_INPUT_PROVENANCE_ID,
     MODERN_DEFAULT_INPUTS_SCHEMA_ID,
+    MODERN_DEFAULT_OPERATOR_CONVENTION_ID,
     MODERN_DEFAULT_RESOLUTION_POLICY_ID,
     ModernDefaultInputs,
     default_modern_default_inputs,
 )
 
 MODERN_POINT_COUPLINGS_SCHEMA_ID = "quarkConstraints.modern.couplings.point.v1"
-MODERN_POINT_COUPLING_CONVENTION_ID = "quarkConstraints.modern.couplings.mass_basis.repo_v1_wrapper.v1"
+MODERN_POINT_COUPLING_CONVENTION_ID = MODERN_DEFAULT_OPERATOR_CONVENTION_ID
 
 
 def _require_text(name: str, value: str) -> str:
@@ -108,6 +110,10 @@ class ModernPointCouplings:
     xi_KK: float = 0.0
     alpha_s: float = 0.0
     g_s: float = 0.0
+    g_s_4d: float = 0.0
+    g_eff: float = 0.0
+    g_s_multiplier: float = 0.0
+    coupling_policy_id: str = MODERN_DEFAULT_COUPLING_POLICY_ID
     left_overlap: tuple[tuple[complex, ...], ...] = ()
     right_up_overlap: tuple[tuple[complex, ...], ...] = ()
     right_down_overlap: tuple[tuple[complex, ...], ...] = ()
@@ -180,6 +186,18 @@ class ModernPointCouplings:
         object.__setattr__(self, "xi_KK", _require_positive_float("xi_KK", self.xi_KK))
         object.__setattr__(self, "alpha_s", _require_positive_float("alpha_s", self.alpha_s))
         object.__setattr__(self, "g_s", _require_positive_float("g_s", self.g_s))
+        object.__setattr__(self, "g_s_4d", _require_positive_float("g_s_4d", self.g_s_4d))
+        object.__setattr__(self, "g_eff", _require_positive_float("g_eff", self.g_eff))
+        object.__setattr__(
+            self,
+            "g_s_multiplier",
+            _require_positive_float("g_s_multiplier", self.g_s_multiplier),
+        )
+        object.__setattr__(
+            self,
+            "coupling_policy_id",
+            _require_text("coupling_policy_id", self.coupling_policy_id),
+        )
         object.__setattr__(self, "left_overlap", _canonical_complex_matrix("left_overlap", self.left_overlap))
         object.__setattr__(
             self,
@@ -217,6 +235,10 @@ class ModernPointCouplings:
             "xi_KK": self.xi_KK,
             "alpha_s": self.alpha_s,
             "g_s": self.g_s,
+            "g_s_4d": self.g_s_4d,
+            "g_eff": self.g_eff,
+            "g_s_multiplier": self.g_s_multiplier,
+            "coupling_policy_id": self.coupling_policy_id,
             "left_overlap": _matrix_payload(self.left_overlap),
             "right_up_overlap": _matrix_payload(self.right_up_overlap),
             "right_down_overlap": _matrix_payload(self.right_down_overlap),
@@ -248,6 +270,10 @@ class ModernPointCouplings:
             xi_KK=float(payload["xi_KK"]),
             alpha_s=float(payload["alpha_s"]),
             g_s=float(payload["g_s"]),
+            g_s_4d=float(payload["g_s_4d"]),
+            g_eff=float(payload["g_eff"]),
+            g_s_multiplier=float(payload["g_s_multiplier"]),
+            coupling_policy_id=str(payload["coupling_policy_id"]),
             left_overlap=_matrix_from_payload("left_overlap", payload["left_overlap"]),
             right_up_overlap=_matrix_from_payload("right_up_overlap", payload["right_up_overlap"]),
             right_down_overlap=_matrix_from_payload("right_down_overlap", payload["right_down_overlap"]),
@@ -288,7 +314,8 @@ def build_modern_point_couplings(
     resolved_xi_kk = bundle.qcd_metadata.xi_KK if xi_KK is None else float(xi_KK)
     if abs(resolved_xi_kk - bundle.qcd_metadata.xi_KK) > 1e-12:
         raise ValueError("xi_KK must match modern input bundle qcd_metadata.xi_KK")
-    resolved_g_s_star = bundle.qcd_metadata.g_s_star if g_s_star is _SENTINEL else g_s_star
+    using_bundle_coupling_policy = g_s_star is _SENTINEL
+    resolved_g_s_star = bundle.qcd_metadata.g_s_star if using_bundle_coupling_policy else g_s_star
     from ..couplings import compute_quark_kk_gluon_couplings
 
     couplings = compute_quark_kk_gluon_couplings(
@@ -296,6 +323,11 @@ def build_modern_point_couplings(
         M_KK=M_KK,
         xi_KK=resolved_xi_kk,
         g_s_star=resolved_g_s_star,
+        coupling_policy_id=(
+            bundle.qcd_metadata.coupling_policy_id
+            if using_bundle_coupling_policy
+            else None
+        ),
     )
     state = fit_result.state
     resolved_point_label = fit_result.point.label if point_label is None else str(point_label)
@@ -303,7 +335,7 @@ def build_modern_point_couplings(
     return ModernPointCouplings(
         qcd_metadata_id=bundle.qcd_metadata.metadata_id,
         alpha_s_policy_id=bundle.qcd_metadata.alpha_s_policy_id,
-        operator_convention_id=MODERN_POINT_COUPLING_CONVENTION_ID,
+        operator_convention_id=couplings.operator_convention_id,
         ckm_target_id=bundle.ckm_target.target_id,
         quark_mass_target_id=bundle.quark_mass_target.target_id,
         point_id=resolved_point_id,
@@ -313,6 +345,10 @@ def build_modern_point_couplings(
         xi_KK=float(couplings.xi_KK),
         alpha_s=float(couplings.alpha_s),
         g_s=float(couplings.g_s),
+        g_s_4d=float(couplings.g_s_4d),
+        g_eff=float(couplings.g_eff),
+        g_s_multiplier=float(couplings.g_s_multiplier),
+        coupling_policy_id=couplings.coupling_policy_id,
         left_overlap=couplings.left_overlap,
         right_up_overlap=couplings.right_up_overlap,
         right_down_overlap=couplings.right_down_overlap,

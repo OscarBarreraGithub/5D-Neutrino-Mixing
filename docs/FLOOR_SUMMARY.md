@@ -12,6 +12,23 @@ Delta-F=2 running is LO; the LR (C4) enhancement is likely low by ~10-15% in
 M_KK vs NLO -- eps_K floors are therefore mildly CONSERVATIVE (understated) in
 this direction.
 
+> **M-13 convention warning (do not re-quote without a rerun):** the Lane-B
+> production floor quoted here (~6.3-7 TeV) uses the **legacy perturbative
+> KK-gluon coupling**, `g_s* = g_s(M_KK) ~ 1.0`, with
+> `coupling_policy_id = perturbative_4d_legacy`
+> (`operator_convention_id = kk_gluon_tree.perturbative_4d_legacy.v1`). It is
+> **not** the physical RS volume-enhanced coupling
+> `g_s* = g_s(M_KK) * sqrt(2L) ~ 8.5 g_s`
+> (`coupling_policy_id = rs_volume_sqrt2L_physical`). If the physical RS
+> coupling is adopted, the eps_K-driven Lane-B scale would move by roughly
+> `sqrt(2L) ~ 8.5`, i.e. the ~7 TeV wall would become roughly **~59 TeV** by a
+> fixed-axis rescale. That is **not** an exact replacement floor; the exact
+> number requires a scan rerun. The open decision is whether to keep the
+> explicitly labeled legacy-perturbative floor or adopt the physical RS coupling
+> and rerun/re-quote. See audit item **M-13** in
+> `docs/audits/full_repo_audit_2026-07/AUDIT_COMPENDIUM.md` and the convention
+> hardening notes in `docs/MODEL_CONVENTIONS.md`.
+
 ## The floor
 
 The `epsilon_K` floor is **LANE-DEPENDENT** — there are THREE distinct flavor-model

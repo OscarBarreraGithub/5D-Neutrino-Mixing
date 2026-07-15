@@ -61,6 +61,8 @@ MODERN_DEFAULT_QCD_METADATA_ID = (
 MODERN_DEFAULT_ALPHA_S_POLICY_ID = (
     "qcd.alpha_s.high_precision.threshold_matched.reference_only.v1"
 )
+MODERN_DEFAULT_COUPLING_POLICY_ID = "fixed_gsstar_3"
+MODERN_DEFAULT_OPERATOR_CONVENTION_ID = "kk_gluon_tree.fixed_gsstar_3.v1"
 # WC alpha_s reference / Delta-F=2 matching scale (UNCHANGED at 3 TeV).
 MODERN_DEFAULT_TARGET_SCALE_GEV = 3000.0
 MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV = 0.0797
@@ -553,7 +555,7 @@ class ModernDefaultOperatorWeightPolicy:
 
     schema_id: str = MODERN_DEFAULT_OPERATOR_WEIGHT_POLICY_SCHEMA_ID
     policy_id: str = MODERN_DEFAULT_WEIGHT_POLICY_ID
-    operator_convention_id: str = "kk_gluon_tree_v1"
+    operator_convention_id: str = MODERN_DEFAULT_OPERATOR_CONVENTION_ID
     acceptance_semantics_id: str = "largest_weighted_operator_amplitude.v1"
     reference_scale_GeV: float = MODERN_DEFAULT_TARGET_SCALE_GEV
     ll_weight: float = 1.0
@@ -799,6 +801,7 @@ class ModernDefaultQCDMetadata:
     alpha_s_policy_id: str = MODERN_DEFAULT_ALPHA_S_POLICY_ID
     alpha_s_precision: str = "high"
     g_s_star: float | None = 3.0
+    coupling_policy_id: str = MODERN_DEFAULT_COUPLING_POLICY_ID
     scale_convention_provenance_record_id: str = MODERN_DEFAULT_PROVENANCE_RECORD_IDS[2]
     alpha_s_provenance_record_id: str = MODERN_DEFAULT_PROVENANCE_RECORD_IDS[3]
     notes: str = (
@@ -854,6 +857,15 @@ class ModernDefaultQCDMetadata:
             object.__setattr__(self, "g_s_star", g_s_star_val)
         object.__setattr__(
             self,
+            "coupling_policy_id",
+            _require_exact(
+                "coupling_policy_id",
+                self.coupling_policy_id,
+                expected=MODERN_DEFAULT_COUPLING_POLICY_ID,
+            ),
+        )
+        object.__setattr__(
+            self,
             "scale_convention_provenance_record_id",
             _require_exact(
                 "scale_convention_provenance_record_id",
@@ -884,6 +896,7 @@ class ModernDefaultQCDMetadata:
             "alpha_s_policy_id": self.alpha_s_policy_id,
             "alpha_s_precision": self.alpha_s_precision,
             "g_s_star": self.g_s_star,
+            "coupling_policy_id": self.coupling_policy_id,
             "scale_convention_provenance_record_id": self.scale_convention_provenance_record_id,
             "alpha_s_provenance_record_id": self.alpha_s_provenance_record_id,
             "notes": self.notes,

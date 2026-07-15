@@ -399,6 +399,22 @@ class Constraint:
                 "running_bias_note": result.running_bias_note,
                 "matching_scale_gev": float(wilsons.matching_scale),
                 "m_kk_gev": float(wilsons.M_KK),
+                "m_kk_physical_gev": float(
+                    wilsons.m_kk_physical_gev
+                    if wilsons.m_kk_physical_gev is not None
+                    else wilsons.M_KK
+                ),
+                "lambda_ir_gev": (
+                    None if wilsons.lambda_ir_gev is None else float(wilsons.lambda_ir_gev)
+                ),
+                "mass_convention_id": wilsons.mass_convention_id,
+                "coupling_policy_id": wilsons.coupling_policy_id,
+                "operator_convention_id": wilsons.operator_convention_id,
+                "g_s_4d": None if wilsons.g_s_4d is None else float(wilsons.g_s_4d),
+                "g_eff": None if wilsons.g_eff is None else float(wilsons.g_eff),
+                "g_s_multiplier": (
+                    None if wilsons.g_s_multiplier is None else float(wilsons.g_s_multiplier)
+                ),
                 "left_sd_coupling": complex(wilsons.left_coupling),
                 "right_sd_coupling": complex(wilsons.right_coupling),
                 "wilson_coefficients": _complex_mapping(wilsons.wilsons),

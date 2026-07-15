@@ -945,6 +945,10 @@ class ModernPointBridgeCouplingsRecord:
     xi_KK: float = 0.0
     alpha_s: float = 0.0
     g_s: float = 0.0
+    g_s_4d: float = 0.0
+    g_eff: float = 0.0
+    g_s_multiplier: float = 0.0
+    coupling_policy_id: str = ""
     left_overlap: tuple[tuple[complex, ...], ...] = ()
     right_up_overlap: tuple[tuple[complex, ...], ...] = ()
     right_down_overlap: tuple[tuple[complex, ...], ...] = ()
@@ -975,6 +979,18 @@ class ModernPointBridgeCouplingsRecord:
         object.__setattr__(self, "xi_KK", _require_positive_float("xi_KK", self.xi_KK))
         object.__setattr__(self, "alpha_s", _require_positive_float("alpha_s", self.alpha_s))
         object.__setattr__(self, "g_s", _require_positive_float("g_s", self.g_s))
+        object.__setattr__(self, "g_s_4d", _require_positive_float("g_s_4d", self.g_s_4d))
+        object.__setattr__(self, "g_eff", _require_positive_float("g_eff", self.g_eff))
+        object.__setattr__(
+            self,
+            "g_s_multiplier",
+            _require_positive_float("g_s_multiplier", self.g_s_multiplier),
+        )
+        object.__setattr__(
+            self,
+            "coupling_policy_id",
+            _require_text("coupling_policy_id", self.coupling_policy_id),
+        )
         object.__setattr__(self, "left_overlap", _canonical_complex_matrix("left_overlap", self.left_overlap))
         object.__setattr__(self, "right_up_overlap", _canonical_complex_matrix("right_up_overlap", self.right_up_overlap))
         object.__setattr__(self, "right_down_overlap", _canonical_complex_matrix("right_down_overlap", self.right_down_overlap))
@@ -1004,6 +1020,10 @@ class ModernPointBridgeCouplingsRecord:
             "xi_KK": self.xi_KK,
             "alpha_s": self.alpha_s,
             "g_s": self.g_s,
+            "g_s_4d": self.g_s_4d,
+            "g_eff": self.g_eff,
+            "g_s_multiplier": self.g_s_multiplier,
+            "coupling_policy_id": self.coupling_policy_id,
             "left_overlap": _matrix_payload(self.left_overlap),
             "right_up_overlap": _matrix_payload(self.right_up_overlap),
             "right_down_overlap": _matrix_payload(self.right_down_overlap),
@@ -1038,6 +1058,10 @@ class ModernPointBridgeCouplingsRecord:
                 "xi_KK",
                 "alpha_s",
                 "g_s",
+                "g_s_4d",
+                "g_eff",
+                "g_s_multiplier",
+                "coupling_policy_id",
                 "left_overlap",
                 "right_up_overlap",
                 "right_down_overlap",
@@ -1068,6 +1092,16 @@ class ModernPointBridgeCouplingsRecord:
             xi_KK=_require_positive_float("bridge.couplings.xi_KK", mapping["xi_KK"]),
             alpha_s=_require_positive_float("bridge.couplings.alpha_s", mapping["alpha_s"]),
             g_s=_require_positive_float("bridge.couplings.g_s", mapping["g_s"]),
+            g_s_4d=_require_positive_float("bridge.couplings.g_s_4d", mapping["g_s_4d"]),
+            g_eff=_require_positive_float("bridge.couplings.g_eff", mapping["g_eff"]),
+            g_s_multiplier=_require_positive_float(
+                "bridge.couplings.g_s_multiplier",
+                mapping["g_s_multiplier"],
+            ),
+            coupling_policy_id=_require_text_value(
+                mapping["coupling_policy_id"],
+                context="bridge.couplings.coupling_policy_id",
+            ),
             left_overlap=_matrix_from_payload("bridge.couplings.left_overlap", mapping["left_overlap"]),
             right_up_overlap=_matrix_from_payload("bridge.couplings.right_up_overlap", mapping["right_up_overlap"]),
             right_down_overlap=_matrix_from_payload("bridge.couplings.right_down_overlap", mapping["right_down_overlap"]),

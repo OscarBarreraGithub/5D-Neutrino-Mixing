@@ -24,6 +24,24 @@ Date: 2026-06-29.
    relabel the ~7 TeV production number as the FPR ~2 TeV. To reach the FPR ideal we must
    actually wire V5KM (and/or RH-down degeneracy, sec 4) into the production path.
 
+> **M-13 coupling convention warning:** the Lane-B production floor (~6.3-7 TeV)
+> is a **legacy perturbative-coupling** floor, not a physical RS KK-gluon
+> coupling floor. Production currently uses
+> `coupling_policy_id = perturbative_4d_legacy`, i.e.
+> `g_s* = g_s(M_KK) ~ 1.0`
+> (`operator_convention_id = kk_gluon_tree.perturbative_4d_legacy.v1`), while
+> the physical RS default would be
+> `coupling_policy_id = rs_volume_sqrt2L_physical`, i.e.
+> `g_s* = g_s(M_KK) * sqrt(2L) ~ 8.5 g_s`
+> (`operator_convention_id = kk_gluon_tree.rs_volume_sqrt2L_physical.v1`).
+> At fixed fitted points this would raise the eps_K-driven Lane-B scale by
+> roughly `sqrt(2L) ~ 8.5`, so ~7 TeV becomes **roughly ~59 TeV**. This is only
+> a rough fixed-axis rescale; the exact physical-coupling floor requires a scan
+> rerun. The open decision is whether to keep the explicitly labeled legacy
+> floor or adopt the physical RS coupling and rerun/re-quote. Cross-reference
+> audit item **M-13** in
+> `docs/audits/full_repo_audit_2026-07/AUDIT_COMPENDIUM.md`.
+
 The Bauer scenarios **S1/S2/S3/S4 live ONLY in the anarchic reproduction lane**
 (`scripts/anarchic_bauer_s1.py`). They are Bauer's benchmarks, not our model.
 "Are we S1 or S2?" -> for the production model, NEITHER; we are FPR-MFV.
