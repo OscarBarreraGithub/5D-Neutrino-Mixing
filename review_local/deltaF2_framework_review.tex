@@ -78,8 +78,8 @@ and states the unified RS flavour/CP problem ($\eps_K$ worst at $\sim20$~TeV
 anarchic, the heavy-meson and charm bounds milder, custodial symmetry
 \emph{useless} here). Part~\ref{part:code} documents our implementation
 (\code{quarkConstraints/deltaf2.py}) line by line, including the load-bearing
-$(2/3)$-matrix-element / $(1/6)$-Wilson convention --- and \emph{why} it equals
-the standard published normalization to machine precision. Part~\ref{part:subtle}
+post-B3 M12-ready matrix elements and the unchanged $(1/6)$ Wilson colour factor.
+Part~\ref{part:subtle}
 records the subtleties, the deferred pieces, and the documented hazards. An
 annotated reading guide closes the note. This note is the \emph{authoritative
 normalization reference} for the four meson notes: when in doubt about a factor,
@@ -107,17 +107,12 @@ this single note, derive everything once, pin the normalization convention once,
 and let the four observable-specific notes specialise.
 
 There is a second, sharper reason this note exists. The single most consequential
-subtlety in the whole quark-flavour pipeline is a normalization convention --- the
-split of an $SU(3)$ colour factor between the Wilson coefficient and the hadronic
-matrix element. Our code carries the colour factor in the Wilson (a $1/6$ on the
-vector operator) and uses a $(2/3)$ matrix element; the textbook carries it in
-the matrix element (an $8/3$ matrix element) with a different Wilson. \emph{Both
-are correct in isolation; mixing them is a factor-of-two bug.} This nearly broke
-the pipeline once (the ``R5 factor-2 scare''), and was resolved only by an
-independent, convention-free cross-check against the published RS formula. That
-resolution lives in \S\ref{sec:r5}, and it is the reason this note is tagged the
-authoritative reference: any future edit to a meson note that touches a factor
-must be checked against it.
+subtlety in the whole quark-flavour pipeline is a normalization convention: the
+Wilson coefficient carries a $1/6$ colour factor, while the M12-ready matrix
+element carries the post-B3 $\tfrac13$ prefactor. The older pre-B3 review text
+mixed this with a stale $\tfrac23$ M12-ready value and a swapped, doubled LR pair.
+That is why this note is tagged the authoritative reference: any future edit to a
+meson note that touches a factor must be checked against \S\ref{sec:r5}.
 
 A one-paragraph executive summary, to be unpacked over the following pages:
 
@@ -498,13 +493,13 @@ the vector operator, using the repo matrix elements
 (\S\ref{sec:codeME}) with $f_K=0.1557$~GeV, $m_K=0.498$~GeV, $r_\chi\approx26$:
 \[
 \frac{\langle\QLRfour\rangle}{\langle\QVLL\rangle}
-= \frac{\big(\tfrac16 r_\chi+\tfrac14\big)B_4^K}{\tfrac23 B_1^K}
-\approx 11 ,
-\qquad\Big(\text{and }\frac{\langle\QLRfive\rangle}{\langle\QVLL\rangle}\approx24\Big),
+= \frac{\big(\tfrac14 r_\chi+\tfrac{1}{24}\big)B_4^K}{\tfrac13 B_1^K}
+\approx 32 ,
+\qquad\Big(\text{and }\frac{\langle\QLRfive\rangle}{\langle\QVLL\rangle}\approx8.6\Big),
 \]
-then QCD running multiplies the LR piece by $\sim8$ (\S\ref{sec:running}):
+then QCD running multiplies the LR piece by a factor of a few (\S\ref{sec:running}):
 \[
-11\times 8 \;\approx\; \sim 10^2 .
+32\times 3.5 \;\approx\; \sim 10^2 .
 \]
 So the LR operator, although born with a Wilson coefficient comparable to VLL,
 dominates $\Mtwelve^{\rm NP}$ by roughly two orders of magnitude. Feeding the
@@ -645,17 +640,17 @@ code's $O_1/O_4/O_5$ basis; the generic
 the same for any pseudoscalar. Both build the same structure, with
 $f_P^2 m_P$ the dimensionful prefactor and $r_\chi$ of \eqref{eq:rchi}:
 \begin{align}
-\langle O_1^{\mathrm{VLL}}\rangle &= \tfrac{2}{3}\,f_P^2 m_P\, B_1,
+\langle O_1^{\mathrm{VLL}}\rangle &= \tfrac{1}{3}\,f_P^2 m_P\, B_1,
 \label{eq:O1ME}\\
-\langle O_4^{\mathrm{LR}}\rangle &= \big(\tfrac16\,r_\chi + \tfrac14\big)\,f_P^2 m_P\, B_4,
+\langle O_4^{\mathrm{LR}}\rangle &= \big(\tfrac14\,r_\chi + \tfrac{1}{24}\big)\,f_P^2 m_P\, B_4,
 \label{eq:O4ME}\\
-\langle O_5^{\mathrm{LR}}\rangle &= \big(\tfrac12\,r_\chi + \tfrac{1}{12}\big)\,f_P^2 m_P\, B_5.
+\langle O_5^{\mathrm{LR}}\rangle &= \big(\tfrac{1}{12}\,r_\chi + \tfrac18\big)\,f_P^2 m_P\, B_5.
 \label{eq:O5ME}
 \end{align}
-The code lines are \code{me\_vll = (2.0/3.0)*fp2\_mp*B\_1},
-\code{me\_lr4 = (r\_chi/6.0 + 0.25)*fp2\_mp*B\_4}, and
-\code{me\_lr5 = (r\_chi/2.0 + 1.0/12.0)*fp2\_mp*B\_5}
-(\code{deltaf2.py}:910--912; the kaon copy at lines~722--724). The chiral factor
+The code lines are \code{me\_vll = (1.0/3.0)*fp2\_mp*B\_1},
+\code{me\_lr4 = (r\_chi/4.0 + 1.0/24.0)*fp2\_mp*B\_4}, and
+\code{me\_lr5 = (r\_chi/12.0 + 1.0/8.0)*fp2\_mp*B\_5}
+(\code{deltaf2.py}:1451--1453; the kaon copy at lines~1230--1232). The chiral factor
 $r_\chi$ lives \emph{inside} the LR matrix elements \eqref{eq:O4ME}--\eqref{eq:O5ME}
 --- the enhancement of \S\ref{sec:chiral}. The hadronic inputs are FLAG-2024 / PDG
 constants pinned in the module; the per-system bag parameters are listed below.
@@ -671,10 +666,9 @@ $D$   & $0.2120$ & $1.86484$ & $0.75$ & $1.0$ & $1.0$ & \code{F\_D},\,\code{M\_D
 \bottomrule
 \end{tabular}
 \end{center}
-The $\tfrac23$ prefactor in \eqref{eq:O1ME} (literally \code{me\_vll = (2/3)\dots})
-is the load-bearing convention choice: it pairs with the $1/6$ in the Wilson
-\eqref{eq:codeC1} so that the colour factor is carried in the Wilson, not in the
-matrix element. See \S\ref{sec:r5}.
+The $\tfrac13$ prefactor in \eqref{eq:O1ME} is the post-B3 M12-ready convention:
+the usual $1/(2m_P)$ has already been absorbed. The $1/6$ in the Wilson
+\eqref{eq:codeC1} is unchanged. See \S\ref{sec:r5}.
 
 \section{Assembling $M_{12}^{\rm NP}$}
 \label{sec:codeM12}
@@ -761,70 +755,35 @@ budgets of \S\ref{sec:codeM12}.
 \label{part:subtle}
 % ====================================================================
 
-\section{The normalization convention --- and the factor-of-two that nearly broke it}
+\section{The normalization convention: the factor-of-two that nearly broke it}
 \label{sec:r5}
 
-This is the single most important subtlety in the whole pipeline, recorded in the
-orchestration ledger (\code{.orchestration/PHASE2\_PROGRAM\_LEDGER.md}) as the
-``R5'' item --- a $\Delta F=2$ factor-2 scare that resolved to \emph{the code is
-correct}. The hazard is that there are \emph{two} internally consistent
-conventions for splitting an $SU(3)$ colour factor between the Wilson coefficient
-and the matrix element, and \emph{mixing them gives a factor of two wrong}:
+This is the single most important subtlety in the whole pipeline. The R5 ledger
+fixed the $1/6$ Wilson colour split. The later B3 audit fixed a separate
+M12-normalisation issue in the matrix elements. The current convention is:
 \begin{itemize}[leftmargin=1.4em]
 \item \textbf{The repo convention} carries the colour factor in the
 \emph{Wilson}: the vector coefficient gets a $1/6$ \eqref{eq:codeC1}, namely
-$\half$ (propagator) $\times\,\tfrac13$ (colour Fierz, from \eqref{eq:fierz}), and
-the matrix element is $\langle O_1\rangle = \tfrac{2}{3} f_P^2 m_P B_1$
-\eqref{eq:O1ME}.
-\item \textbf{The textbook convention} carries the colour factor in the
-\emph{matrix element}: $\langle O_1\rangle = \tfrac{8}{3} f_P^2 m_P B_1$ with a
-correspondingly different (larger) Wilson normalization. The textbook ratio
-$\tfrac83/\tfrac23 = 4 = \Nc + 1/\Nc\cdot\dots$ is exactly the colour factor moved
-from one side to the other.
+$\half$ (propagator) $\times\,\tfrac13$ (colour Fierz, from \eqref{eq:fierz}).
+\item \textbf{The repo matrix elements} are M12-ready GeV$^3$ objects:
+$\langle O_1\rangle=\tfrac13 f_P^2 m_P B_1$,
+$\langle O_4\rangle=(\tfrac14 r_\chi+\tfrac{1}{24})f_P^2 m_P B_4$, and
+$\langle O_5\rangle=(\tfrac{1}{12} r_\chi+\tfrac18)f_P^2 m_P B_5$.
+\item \textbf{The Lane-C \code{plpr\_projectors.v2} exports} store non-M12-ready
+GeV$^4$ projector forms and divide by $2m_P$ when constructing $M_{12}$:
+$Q_1=(2/3)f_P^2m_P^2B_1$, $Q_4=(1/2)r_\chi f_P^2m_P^2B_4$, and
+$Q_5=(1/6)r_\chi f_P^2m_P^2B_5$ in the Lane-C file.
 \end{itemize}
-Both are correct \emph{in isolation}. The danger is using a textbook-$\tfrac83$
-matrix element with a repo-$1/6$ Wilson (or vice versa), which double-counts or
-half-counts the colour and shifts $\Mtwelve^{\rm NP}$ by exactly two.
+The pre-B3 review text collapsed these layers and certified the stale $\tfrac23$
+M12-ready value. That statement is superseded.
 
-\paragraph{How R5 was resolved (the convention-free cross-check).} Coefficient-by-%
-coefficient reconstruction proved unreliable --- reviewers quoted
-$\tfrac13,\tfrac23,\tfrac43,\tfrac83$ for $\langle O_1\rangle$ across different
-runs, and the vote split. The resolution was to bypass the coefficient bookkeeping
-entirely and compare a \emph{physical} quantity to a \emph{published} RS formula.
-Per the ledger's ``R5 RESOLVED'' section (2026-06-03, dual-confirmed):
-\begin{itemize}[leftmargin=1.4em]
-\item the repo's $2|\Mtwelve^{\rm NP}|$ was compared directly to the KK-gluon
-$\Delta F=2$ formula of Csaki--Falkowski--Weiler (0804.1954, Eqs.~3.3--3.7), with
-the exact $SU(3)$ Fierz $\sum_A\TA\otimes\TA=\half(\delta\otimes\delta
--\tfrac1{\Nc}\delta\otimes\delta)\to(\tfrac13)Q_1$, and gave a
-\textbf{ratio of $1.0000$ to machine precision};
-\item an independent cross-check against Blanke et al.\ (0809.1073, Eq.~4.33) gave
-$\sim1.69$, attributed to a basis/running difference and explicitly flagged as
-``\emph{NOT the $0.5\times$ failure mode; $\times2$ would be the WRONG fix}.''
-\end{itemize}
-The conclusion, verbatim in spirit: deltaf2's $1/6$ Wilson factor is
-$\half(\text{propagator})\times\tfrac13(\text{colour-Fierz})$;
-$\langle O_1\rangle=\tfrac23 f_P^2 m_P B_1$ is the \emph{correct} matrix element
-\emph{in that convention} (colour factor in the Wilson, not the matrix element).
-The ``half'' verdicts had wrongly imposed the textbook $\tfrac83$/$\tfrac43$
-convention. The core and the five anchored constraints
-(\code{K001},\code{K002},\code{B001},\code{B003},\code{C001}, plus
-\code{B002},\code{C002}) are all correctly normalized. \textbf{NO FIX.}
-
-\begin{callout}{Documentation hazard --- do not ``fix'' the $1/6$ (ledger R5).}
-The ledger entry is blunt: ``\emph{DO NOT ``fix'' this --- a $\times2$ would BREAK
-agreement with the literature.}'' The repo's $(2/3)$-matrix-element /
-$(1/6)$-Wilson convention is verified against the published RS formula
-(0804.1954) to machine precision. \textbf{Never mix it with the textbook
-$(8/3)$-matrix-element convention.} The constraints
+\begin{callout}{Post-B3 correction: do not restore the pre-B3 matrix elements.}
+The June-2026 B3 audit and the 2026-07 full-repo audit corrected this section.
+The $1/6$ Wilson factor stays. The M12-ready matrix elements are the GGMS forms
+in \eqref{eq:O1ME}--\eqref{eq:O5ME}. Do not restore the old $\tfrac23$ O1
+coefficient or the swapped and doubled LR pair. The constraints
 \code{K001}/\code{K002}/\code{B001}/\code{B003}/\code{C001} and the $\Delta F=2$
-core are all in the repo convention; the isolated matching path
-\code{quarkConstraints/paper\_0710\_1869/eft\_deltaf2/matching\_kkgluon.py}
-(line~523) uses
-the \emph{same} $1/6$ and is test/script-only, so no live constraint mixes
-conventions. If you find yourself about to insert a factor of two anywhere in the
-$M_{12}^{\rm NP}$ chain, stop and re-read this box. This is the central reason this
-note is the authoritative normalization reference for the four meson notes.
+core are all in the post-B3 repo convention.
 \end{callout}
 
 \section{The $M_{\rm KK}$ convention: the factor of $2.45$}
@@ -964,7 +923,7 @@ to disagree on a factor, this note is canonical (\S\ref{sec:r5}).}
 \emph{Internal note. The operator basis \eqref{eq:QVLL}--\eqref{eq:QLR5}, the
 matching \eqref{eq:codeWilson}, and the matrix elements
 \eqref{eq:O1ME}--\eqref{eq:O5ME} are the exact forms our code uses; the numerical
-constants ($1/6$ and $2/3$ colour split, $r_\chi$, the bag parameters,
+constants ($1/6$ Wilson factor, $\tfrac13$ M12-ready $O_1$, $r_\chi$, the bag parameters,
 $\kappa_\eps=0.94$, $\Delta m_K=3.484\times10^{-15}$~GeV) are as stored in
 \code{quarkConstraints/deltaf2.py}. The ``rigorous vs.\ proxy'' tags and the R5
 resolution follow the orchestration ledger

@@ -73,9 +73,9 @@ help. Part~\ref{part:code} documents exactly what our code does
 (\code{quarkConstraints/deltaf2.py}, the kaon adapter, and \code{K001}), with the
 repo's particular normalisation convention spelled out in full. Part~\ref{part:subtle}
 catalogues the subtleties --- above all the normalisation hazard recorded in the
-ledger (the $(2/3)$-matrix-element / $1/6$-Wilson convention, cross-checked
-against the literature to machine precision, that must never be mixed with the
-textbook $8/3$ convention). An annotated reading guide closes the note.
+ledger and the later B3 correction: the Wilson still carries the $1/6$ colour
+factor, while the M12-ready matrix element now carries the $\tfrac13$ prefactor
+used by \code{deltaf2.py}. An annotated reading guide closes the note.
 \end{abstract}
 
 \tableofcontents
@@ -474,15 +474,15 @@ $f_K=0.1557$~GeV, $m_K=0.498$~GeV) carry the chiral enhancement of the LR
 operator:
 \[
 \frac{\langle \QLRfour\rangle}{\langle\QVLL\rangle}
-\;=\; \frac{\big(\tfrac16 r_\chi+\tfrac14\big)B_4^K}{\tfrac23 B_1^K}
-\;\approx\; 11 ,
-\qquad \text{then QCD running} \;\times\; \sim 8
+\;=\; \frac{\big(\tfrac14 r_\chi+\tfrac{1}{24}\big)B_4^K}{\tfrac13 B_1^K}
+\;\approx\; 32 ,
+\qquad \text{then QCD running} \;\times\; \text{a few}
 \;\Rightarrow\; \sim 10^2 ,
 \]
 where the bare chiral factor $r_\chi\approx26$ \eqref{eq:chiral} enters the LR
-matrix element through the colour/Fierz combination $\tfrac16 r_\chi+\tfrac14$
+matrix element through the GGMS combination $\tfrac14 r_\chi+\tfrac{1}{24}$
 \eqref{eq:O4ME}, not as $r_\chi$ itself (the partner $\langle\QLRfive\rangle/%
-\langle\QVLL\rangle\approx24$ is even larger). So the LR operator, although born
+\langle\QVLL\rangle\approx8.6$ is smaller). So the LR operator, although born
 with a coefficient comparable to VLL, dominates $\ImMtwelve$ by roughly two orders
 of magnitude. Feeding $\ImMtwelve$ into the master formula \eqref{eq:epskmaster}
 with $\dmk = 3.48\times10^{-15}$~GeV and $\kappa_\eps=0.94$ produces an
@@ -690,20 +690,21 @@ $m_K=0.49761$~GeV (\code{M\_K}), and FLAG-2024 bag parameters $B_1^K=0.5503$
 \code{B\_4\_K\_3GEV}, \code{B\_5\_K\_3GEV}). Writing $f_K^2 m_K$ and the chiral
 ratio $r_\chi=(m_K/(m_s+m_d))^2$ with $m_s=0.0934$, $m_d=0.00467$~GeV at $2$~GeV:
 \begin{align}
-\langle O_1^{\mathrm{VLL}}\rangle &= \tfrac{2}{3}\,f_K^2 m_K\, B_1^K,
+\langle O_1^{\mathrm{VLL}}\rangle &= \tfrac{1}{3}\,f_K^2 m_K\, B_1^K,
 \label{eq:O1ME}\\
-\langle O_4^{\mathrm{LR}}\rangle &= \big(\tfrac16\,r_\chi + \tfrac14\big)\,f_K^2 m_K\, B_4^K,
+\langle O_4^{\mathrm{LR}}\rangle &= \big(\tfrac14\,r_\chi + \tfrac{1}{24}\big)\,f_K^2 m_K\, B_4^K,
 \label{eq:O4ME}\\
-\langle O_5^{\mathrm{LR}}\rangle &= \big(\tfrac12\,r_\chi + \tfrac{1}{12}\big)\,f_K^2 m_K\, B_5^K.
+\langle O_5^{\mathrm{LR}}\rangle &= \big(\tfrac{1}{12}\,r_\chi + \tfrac18\big)\,f_K^2 m_K\, B_5^K.
 \label{eq:O5ME}
 \end{align}
 The chiral factor $r_\chi\approx25.7$ (from these very masses, $m_s=0.0934$,
 $m_d=0.00467$~GeV) lives \emph{inside} the LR matrix elements
-\eqref{eq:O4ME}--\eqref{eq:O5ME} --- exactly the enhancement of
-\S\ref{sec:basis}. The prefactor $\tfrac{2}{3}$ in \eqref{eq:O1ME} is the
-load-bearing convention choice discussed next; it pairs with the $1/6$ in the
-Wilson coefficient \eqref{eq:codeC1} (colour factor carried in the Wilson, not in
-the matrix element).
+\eqref{eq:O4ME}--\eqref{eq:O5ME}, exactly the enhancement of
+\S\ref{sec:basis}. The prefactor $\tfrac{1}{3}$ in \eqref{eq:O1ME} and the LR
+coefficients above are the post-B3 GGMS M12-ready forms used by \code{deltaf2.py}.
+The June-2026 B3 audit, confirmed by the 2026-07 full-repo audit, corrected stale
+pre-B3 text that used $\tfrac23$ for $O_1$ and had the $O_4/O_5$ coefficients
+swapped and doubled.
 
 \section{Assembling $M_{12}^{\rm NP}$ and $\varepsilon_K$}
 \label{sec:codeassemble}
@@ -773,46 +774,33 @@ The sidecar status is \code{FACT-CHECKED} (\code{VERIFIED}, 0 findings).
 \label{part:subtle}
 % ====================================================================
 
-\section{The normalisation convention --- and the factor-of-two that nearly broke it}
+\section{The normalisation convention: the factor-of-two that nearly broke it}
 \label{sec:r5}
 
-This is the single most important subtlety in the whole pipeline, and it is
-recorded in the orchestration ledger as ``R5'' (a $\Delta F=2$ factor-2 scare that
-resolved to \emph{the code is correct}). The hazard: there are two internally
-consistent conventions for splitting a colour factor between the Wilson
-coefficient and the matrix element, and \emph{mixing them gives a factor of two
-wrong}.
+This is the single most important subtlety in the whole pipeline. The R5 ledger
+fixed the $1/6$ Wilson colour split, and the later B3 audit fixed a separate
+M12-normalisation issue in the matrix elements. The current convention is:
 \begin{itemize}[leftmargin=1.4em]
 \item \textbf{The repo convention} carries the colour factor in the
 \emph{Wilson}: the vector coefficient gets a $1/6$ \eqref{eq:codeC1}, namely
-$\half$ (propagator) $\times\,\tfrac13$ (colour Fierz), and the matrix element is
-$\langle O_1\rangle = \tfrac{2}{3} f_K^2 m_K B_1$ \eqref{eq:O1ME}.
-\item \textbf{The textbook convention} carries the colour factor in the
-\emph{matrix element}: $\langle O_1\rangle = \tfrac{8}{3} f_K^2 m_K B_1$ with a
-correspondingly different Wilson normalisation.
+$\half$ (propagator) $\times\,\tfrac13$ (colour Fierz).
+\item \textbf{The repo matrix elements} are M12-ready GeV$^3$ objects:
+$\langle O_1\rangle=\tfrac13 f_K^2 m_K B_1$,
+$\langle O_4\rangle=(\tfrac14 r_\chi+\tfrac{1}{24})f_K^2 m_K B_4$, and
+$\langle O_5\rangle=(\tfrac{1}{12} r_\chi+\tfrac18)f_K^2 m_K B_5$.
+\item \textbf{The Lane-C \code{plpr\_projectors.v2} exports} store non-M12-ready
+GeV$^4$ projector forms and divide by $2m_K$ when constructing $M_{12}$:
+$Q_1=(2/3)f_K^2m_K^2B_1$, $Q_4=(1/2)r_\chi f_K^2m_K^2B_4$, and
+$Q_5=(1/6)r_\chi f_K^2m_K^2B_5$ in the Lane-C file.
 \end{itemize}
-Both are correct \emph{in isolation}; the danger is using a textbook-$8/3$ matrix
-element with a repo-$1/6$ Wilson, or vice versa, which double-counts (or
-half-counts) the colour. The ledger records the resolution: the repo's
-$2|\Mtwelve^{\rm NP}|$ was compared directly to the published KK-gluon formula of
-Csaki--Falkowski--Weiler (0804.1954, Eqs.~3.3--3.7, with the exact $SU(3)$ Fierz
-$\sum_A T^A\otimes T^A=\half(\delta\otimes\delta-\tfrac1{N_c}\delta\otimes\delta)$)
-and gave a ratio of $1.0000$ \emph{to machine precision}. A cross-check against
-Blanke et al.\ (0809.1073, Eq.~4.33) gave $\sim1.69$, attributed to a
-basis/running difference, explicitly ``not the $0.5\times$ failure mode.''
+The pre-B3 review text collapsed these layers and therefore certified the stale
+$\tfrac23$ M12-ready value. That statement is superseded.
 
-\begin{callout}{Convention hazard --- do not ``fix'' the $1/6$.}
-The ledger entry is blunt: ``\emph{DO NOT ``fix'' this --- a $\times2$ would BREAK
-agreement with the literature.}'' The repo's $(2/3)$-matrix-element /
-$1/6$-Wilson convention is verified against the published RS formula to machine
-precision. Never mix it with the textbook $8/3$-matrix-element convention. The
-constraints \code{K001}/\code{K002}/\code{B001}/\code{B003}/\code{C001} and the
-$\Delta F=2$ core are all correctly normalised in the repo convention; the
-isolated matching path
-\code{quarkConstraints/paper\_0710\_1869/eft\_deltaf2/matching\_kkgluon.py}
-(line~523, \code{q1\_vll=...*(prefactor/6.0)}) uses the \emph{same} $1/6$ and is
-test/script-only, so no live constraint mixes conventions. If you find yourself
-about to insert a factor of two here, stop and re-read this box.
+\begin{callout}{Post-B3 correction: do not restore the pre-B3 matrix elements.}
+The June-2026 B3 audit and the 2026-07 full-repo audit corrected this section.
+The $1/6$ Wilson factor stays. The M12-ready matrix elements are the GGMS forms
+in \eqref{eq:O1ME}--\eqref{eq:O5ME}. Do not restore the old $\tfrac23$ O1
+coefficient or the swapped and doubled LR pair.
 \end{callout}
 
 \section{The $M_{\rm KK}$ convention: the factor of $2.45$}
@@ -944,7 +932,8 @@ anomalous dimensions implemented in \code{qcd\_running.py} (\code{\_GAMMA\_VLL},
 \eqref{eq:QVLL}--\eqref{eq:QLR5}, and the code expressions
 \eqref{eq:codeC1}--\eqref{eq:codeeps} are exactly what \code{deltaf2.py} and
 \code{K001} use; the constants ($\kappa_\eps=0.94$, $\dmk=3.484\times10^{-15}$,
-$f_K=0.1557$, the $1/6$/$\tfrac23$ convention, $B_4^K=0.903$, $B_5^K=0.691$) are
+$f_K=0.1557$, the $1/6$ Wilson and $\tfrac13$ M12-ready matrix-element convention,
+$B_4^K=0.903$, $B_5^K=0.691$) are
 as stored in the repo. The ``rigorous vs proxy'' tags and the R5 resolution follow
 the orchestration ledgers; the $1/6$ Wilson normalisation is verified against
 0804.1954 to machine precision --- do not alter it. Cross-check before citing

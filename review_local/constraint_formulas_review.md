@@ -72,7 +72,7 @@ All checks **pass** unless noted.
 
 2. **γ_VLL = 4 anomalous dimension** — Plausible/standard for the QCD LO VLL running; consistent with Buras–Misiak–Urban. UNVERIFIED to the exact value against BMU here (no equation fetched), but it is the textbook LO value and not in doubt.
 
-3. **Matrix-element prefactors** ⟨Q₁⟩=(2/3)f²mB₁, ⟨Q₄⟩=(1/6 r_χ+1/4)f²mB₄, ⟨Q₅⟩=(1/2 r_χ+1/12)f²mB₅ — the ⟨Q₁⟩=(2/3) factor matches Blanke Eq. (4.27) exactly. The (1/6 r_χ+1/4) and (1/2 r_χ+1/12) LR structures are the standard SUSY-basis matrix elements (Q₄, Q₅) and are internally consistent. CONFIRMED as a standard parametrization.
+3. **Matrix-element prefactors** SUPERSEDED by the June-2026 B3 audit and confirmed by the 2026-07 full-repo audit. The earlier review text certified the pre-B3 M12-ready values, with ⟨Q₁⟩=(2/3)f²mB₁ and the LR coefficients swapped and doubled. The current `deltaf2.py` M12-ready GGMS forms are ⟨O₁⟩=(1/3)f²mB₁, ⟨O₄⟩=(r_χ/4+1/24)f²mB₄, and ⟨O₅⟩=(r_χ/12+1/8)f²mB₅. The `O4` term carries the large LR coefficient and `O5` the small one. The old CONFIRMED verdict is retracted for the M12-ready forms.
 
 4. **r_χ = (m_M/(m_q1+m_q2))²** — CONFIRMED.
    - Kaon: with PDG MS-bar(2 GeV) m_s≈93.5 MeV, m_d≈4.7 MeV → **r_χ ≈ 25.7** ✓ (doc says ≈26).

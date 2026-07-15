@@ -29,6 +29,53 @@ this direction.
 > `docs/audits/full_repo_audit_2026-07/AUDIT_COMPENDIUM.md` and the convention
 > hardening notes in `docs/MODEL_CONVENTIONS.md`.
 
+## Reproducibility status
+
+This page is a summary, not a committed floor-statistics artifact. Older text
+cited `scan_outputs/fix100k_minimal_20260622T080053/constraint_matrix.parquet`.
+That path is under ignored `scan_outputs/` and is not tracked by `git ls-files`;
+local working copies may exist, but the committed repository does not contain
+that matrix. Do not treat it as committed evidence for the floor table.
+
+The committed Lane B scan and matrix workflow is:
+
+```bash
+python scripts/run_full_catalog_scan.py \
+  --output-dir scan_outputs/<run-dir> \
+  --quark-only \
+  --m-kk-tev 1,2,3,5,7,10,15,20,30,50 \
+  --n-draws <draws-per-mass> \
+  --base-seed <integer> \
+  --n-workers <workers>
+
+python scripts/build_constraint_matrix.py \
+  scan_outputs/<run-dir> \
+  --collider-gev 5500
+```
+
+`scripts/build_constraint_matrix.py` writes
+`scan_outputs/<run-dir>/constraint_matrix.parquet` when pyarrow is installed, or
+`constraint_matrix.npz` otherwise. The website explorer build is a separate
+committed aggregation step:
+
+```bash
+python flavor_catalog/website/scripts/build_scan_explorer.py
+```
+
+As currently committed, the website builder reads hard-coded JSONL roots
+(`scan_outputs/wq_quarkonly_1M_20128400` and
+`scan_outputs/wq_quarkonly_1M_custodial_20675555`) and writes
+`flavor_catalog/website/src/content/scan_explorer.json`. It does not consume the
+`constraint_matrix.parquet` file produced by `scripts/build_constraint_matrix.py`.
+
+There is no committed command or script that reads a committed parquet and
+computes the Lane A `median` and `95 percent quantile` floor statistics quoted
+below. To make those numbers reproducible from the repository alone, add a
+versioned extractor that reads the relevant anarchic scan output, defines the
+floor crossing rule, computes the median and 95 percent quantile summaries, and
+writes a tracked report or manifest with the exact input path, seed policy, and
+command line.
+
 ## The floor
 
 The `epsilon_K` floor is **LANE-DEPENDENT** — there are THREE distinct flavor-model

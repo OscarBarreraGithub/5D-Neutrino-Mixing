@@ -13,6 +13,11 @@
 # ---
 
 # %% [markdown]
+# > **SUPERSEDED (B1 retraction).** This is a historical pre-B1 notebook artifact.
+# > Its 25-30 TeV `Z->bb` floor came from the retracted B1 bug. The corrected
+# > `Z->bb` floor is about 5 TeV. Do not use this notebook for headline floors.
+
+# %% [markdown]
 # # WQ Quark-Only 1M Scan — Exploratory Plots
 #
 # This notebook builds **clear, well-labeled** exploratory figures from the completed

@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# SUPERSEDED (B1 retraction): this historical pre-B1 artifact preserves a
+# retracted analysis. The 25-30 TeV Z->bb floor came from the B1 bug; the
+# corrected Z->bb floor is about 5 TeV.
 """Headline figures for the WQ quark-only 1M r x M_KK scan.
 
 Read-only on the scan cache; writes only PNGs (+README) into this directory.
@@ -19,8 +22,8 @@ RUN = os.path.abspath(os.path.join(HERE, "..", ".."))
 CACHE = os.path.join(RUN, "wq_quarkonly_cache.parquet")
 OUT = HERE
 
-SUBTITLE = ("quark-only, non-custodial RS  |  Z$\\to b\\bar b$ floor "
-            "$\\sim$25--30 TeV is the non-custodial RS $Zb_L$ bound")
+SUBTITLE = ("SUPERSEDED pre-B1 artifact: the 25-30 TeV Z$\\to b\\bar b$ "
+            "floor was retracted; corrected floor is $\\sim$5 TeV")
 
 # Physics names for constraint IDs that veto anything
 NAMES = {
@@ -114,7 +117,7 @@ def fig1_survival(ns):
     ax.set_ylabel("rigorous strict survival fraction")
     ax.legend(title="fit draw $r$", loc="center left", framealpha=0.9)
     fig.tight_layout(rect=[0, 0, 1, 0.90])
-    titles(fig, ax, "Survival vs KK scale: sharp Z$\\to b\\bar b$ floor near 25--30 TeV")
+    titles(fig, ax, "SUPERSEDED pre-B1 survival plot: Z$\\to b\\bar b$ floor retracted")
     p = os.path.join(OUT, "fig1_survival_vs_MKK.png")
     fig.savefig(p); plt.close(fig)
     return p
@@ -143,8 +146,8 @@ def fig2_reach(ns, cids, tags):
     y = np.arange(len(items))
     ax.barh(y, vals, color=cols, edgecolor="black", lw=0.7, height=0.72)
     for yi, v, (c, (rr, t)) in zip(y, vals, items):
-        # T010 grid reach is 20 TeV but true >50% crossing is 20-30 TeV
-        txt = f"{v:g} TeV" + ("  (crossing 20--30)" if c == "T010" else "")
+        # T010 grid reach was a pre-B1 result and is now superseded.
+        txt = f"{v:g} TeV" + ("  (SUPERSEDED; corrected floor ~5 TeV)" if c == "T010" else "")
         ax.text(v + 0.6, yi, txt, va="center", fontsize=12.5)
     ax.set_yticks(y)
     ax.set_yticklabels(labels)
@@ -155,7 +158,7 @@ def fig2_reach(ns, cids, tags):
            Patch(facecolor=PRX, edgecolor="black", label="proxy")]
     ax.legend(handles=leg, loc="lower right", framealpha=0.95)
     fig.tight_layout(rect=[0, 0, 1, 0.91])
-    titles(fig, ax, "Which constraint sets the KK floor?  Z$\\to b\\bar b$ dominates by ~4$\\times$")
+    titles(fig, ax, "SUPERSEDED pre-B1 ranking: Z$\\to b\\bar b$ dominance retracted")
     p = os.path.join(OUT, "fig2_constraint_reach_ranking.png")
     fig.savefig(p); plt.close(fig)
     return p, reach
@@ -173,7 +176,7 @@ def fig3_zbb_curve(ns):
         ax.plot(grid, y, "-" + mk, color=c, lw=lw, ms=7, label=lab)
     ax.axhline(0.5, color="0.5", ls="--", lw=1.2)
     ax.axvspan(20, 30, color="orange", alpha=0.14, zorder=0)
-    ax.annotate("Z$\\to b\\bar b$ veto crosses 50%\nbetween 20 and 30 TeV",
+    ax.annotate("SUPERSEDED pre-B1 crossing;\ncorrected floor is $\\sim$5 TeV",
                 xy=(22, 0.5), xytext=(7, 0.30), fontsize=12.5, color="darkred",
                 arrowprops=dict(arrowstyle="->", color="darkred", lw=1.7))
     ax.set_xscale("log")
@@ -183,7 +186,7 @@ def fig3_zbb_curve(ns):
     ax.set_ylabel("fraction of points vetoed")
     ax.legend(loc="center left", framealpha=0.92)
     fig.tight_layout(rect=[0, 0, 1, 0.90])
-    titles(fig, ax, "Z$\\to b\\bar b$ veto dwarfs $\\epsilon_K$ and the KK-gluon collider bound")
+    titles(fig, ax, "SUPERSEDED pre-B1 Z$\\to b\\bar b$ veto curve")
     p = os.path.join(OUT, "fig3_Zbb_veto_vs_MKK.png")
     fig.savefig(p); plt.close(fig)
     return p

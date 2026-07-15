@@ -1,3 +1,7 @@
+> **SUPERSEDED (B1 retraction).** This is a historical pre-B1 analysis artifact.
+> Its 25-30 TeV `Z->bb` floor came from the retracted B1 bug. The corrected
+> `Z->bb` floor is about 5 TeV. Do not use this report for headline floors.
+
 # WQ Quark-Only Analysis Report
 
 - input JSONL files: 500

@@ -54,10 +54,15 @@ conventions, Yellow for `5% <= Delta < 10%`, and Red for `Delta >= 10%`.
 
 ## Convention-fixed and out-of-scope constants
 
-The exact matrix-element prefactors in `_kaon_matrix_elements()` and
-`_meson_matrix_elements()` were inspected but not changed: `2/3`,
-`1/6`, `1/4`, `1/2`, and `1/12`.  The Phase 2 hole #5 scope is input
-provenance; any Wilson-running or basis-normalization audit belongs to hole #6.
+Post-B3 correction: the sentence that previously recorded the matrix-element
+prefactors as inspected and unchanged was stale. The June-2026 B3 audit and the
+2026-07 full-repo audit corrected the M12-ready GGMS forms used by
+`_kaon_matrix_elements()` and `_meson_matrix_elements()`: `O1 = (1/3) f^2 m B1`,
+`O4 = (r_chi/4 + 1/24) f^2 m B4`, and
+`O5 = (r_chi/12 + 1/8) f^2 m B5`. The pre-B3 record used `2/3` for `O1` and
+swapped and doubled the LR coefficients. This inventory remains an input
+provenance document; the matrix-element correction is recorded here only to avoid
+certifying the stale pre-B3 values.
 
 The `DeltaF2Input` bounds and the legacy operator-weight bounds were also
 inspected.  The hadronic path used by the scan computes budgets from the

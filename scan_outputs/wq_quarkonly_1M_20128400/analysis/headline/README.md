@@ -1,3 +1,7 @@
+> **SUPERSEDED (B1 retraction).** This is a historical pre-B1 headline artifact.
+> Its 25-30 TeV `Z->bb` floor came from the retracted B1 bug. The corrected
+> `Z->bb` floor is about 5 TeV. Do not use these figures for headline floors.
+
 # Headline figures — WQ quark-only 1M r×M_KK scan (run 20128400)
 
 Five large, single-message, publication-quality figures distilled from the

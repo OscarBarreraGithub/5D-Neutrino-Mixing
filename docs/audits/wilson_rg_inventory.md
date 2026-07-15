@@ -21,7 +21,7 @@ hadronic matrix elements.  Exact reference numbers are in
 | Active flavors | Fixed path includes top, bottom, and charm thresholds.  `3 TeV -> 2 GeV` crosses `n_f=6 -> 5 -> 4`; charm is below endpoint. | `quarkConstraints/qcd_running.py:36`, `quarkConstraints/qcd_running.py:65`, `quarkConstraints/qcd_running.py:144`, `quarkConstraints/qcd_running.py:276`, `tests/test_wilson_rg_audit.py:49` |
 | Anomalous dimensions | Revised post-review reference: `gamma_VLL = 4`; conventional scalar LR coefficient ADM `[[-16, -6], [0, 2]]`, mapped from BMU LR `[ [2,0], [12,-16] ]` with `Q1_LR^BMU = -2 O5_LR`. | `quarkConstraints/qcd_running.py:44`, `quarkConstraints/qcd_running.py:54` |
 | Evolution direction | Post-audit convention uses `alpha_s(mu_high)/alpha_s(mu_low)` for both VLL and LR. | `quarkConstraints/qcd_running.py:172`, `quarkConstraints/qcd_running.py:183`, `quarkConstraints/qcd_running.py:186`, `quarkConstraints/qcd_running.py:198` |
-| Matrix elements | Kaon and generic meson contractions pair `C4_LR` with `B4` and `C5_LR` with `B5`. | `quarkConstraints/deltaf2.py:675`, `quarkConstraints/deltaf2.py:693`, `quarkConstraints/deltaf2.py:821`, `quarkConstraints/deltaf2.py:860` |
+| Matrix elements | Post-B3 M12-ready GGMS contractions pair `C4_LR` with `B4` and `C5_LR` with `B5`: `O1 = (1/3) f^2 m B1`, `O4 = (r_chi/4 + 1/24) f^2 m B4`, `O5 = (r_chi/12 + 1/8) f^2 m B5`. The earlier pre-B3 audit text used `2/3` for `O1` and had the LR coefficients swapped and doubled. | `quarkConstraints/deltaf2.py:1230`, `quarkConstraints/deltaf2.py:1231`, `quarkConstraints/deltaf2.py:1232`, `quarkConstraints/deltaf2.py:1451`, `quarkConstraints/deltaf2.py:1452`, `quarkConstraints/deltaf2.py:1453` |
 | alpha_s side feed | Matching couplings use the shared high-precision `qcd.alpha_s`; Wilson RG uses its own LO wrapper but was regression-tested against `qcd.running.alpha_s(..., n_loops=1, matching_loops=0)`. | `quarkConstraints/couplings.py:145`, `qcd/running.py:118`, `qcd/constants.py:28`, `tests/test_wilson_rg_audit.py:55` |
 
 ## Sign-convention chain audit
@@ -44,14 +44,16 @@ scalar-LR sign convention by flipping only the scalar ADM off-diagonal.
    `quarkConstraints/qcd_running.py:7` and `quarkConstraints/qcd_running.py:50`.
 
 2. Matrix-element contraction
-   `_kaon_matrix_elements()` uses the literal positive expression
-   `<O5_LR> = (r_chi / 2 + 1/12) f_K^2 m_K B_5_K` at
-   `quarkConstraints/deltaf2.py:689`; generic B/D mesons use the same sign and
-   prefactor at `quarkConstraints/deltaf2.py:851`.  The contraction multiplies
-   `C5_LR * <O5_LR>` with no extra sign at `quarkConstraints/deltaf2.py:705`
-   and `quarkConstraints/deltaf2.py:873`.  This is the conventional positive
-   scalar-B5 sign used with SOFTSUSY/Wilson/FlavorKit-style bag inputs, not a
-   sign-flipped nonstandard O5 contraction.
+   `_kaon_matrix_elements()` uses the post-B3 positive expressions
+   `<O4_LR> = (r_chi / 4 + 1/24) f_K^2 m_K B_4_K` and
+   `<O5_LR> = (r_chi / 12 + 1/8) f_K^2 m_K B_5_K` at
+   `quarkConstraints/deltaf2.py:1231` and `quarkConstraints/deltaf2.py:1232`;
+   generic B/D mesons use the same M12-ready form at
+   `quarkConstraints/deltaf2.py:1452` and `quarkConstraints/deltaf2.py:1453`.
+   The June-2026 B3 audit and 2026-07 full-repo audit corrected the stale
+   pre-B3 text that put the large coefficient on `O5` and doubled both LR
+   coefficients.  The contraction still uses the conventional positive scalar-B5
+   sign, not a sign-flipped nonstandard O5 contraction.
 
 3. Bag parameter `B_5`
    `B_5_K = 0.691` is the positive FLAG 2024 input at
@@ -204,11 +206,13 @@ post-C01 (R03-I1, FLAG 2024) canonical hadronic constants:
 
 - Matching: `q4_lr = -(L*R) * 1/M_KK^2`, `q5_lr = +(L*R) / (3 M_KK^2)`
   (`quarkConstraints/paper_0710_1869/eft_deltaf2/matching_kkgluon.py:525-526`).
-- Hadronic matrix elements: `<Q4>_GeV4 = +2 m_K^2 f_K^2 R_chi B4`,
-  `<Q5>_GeV4 = +(2/3) m_K^2 f_K^2 R_chi B5`
-  (`quarkConstraints/paper_0710_1869/eft_deltaf2/hadronic.py:2237,2244`).
+- Hadronic matrix elements: `<Q1>_GeV4 = +(2/3) f_K^2 m_K^2 B_K`,
+  `<Q4>_GeV4 = +(1/2) m_K^2 f_K^2 R_chi B4`, and
+  `<Q5>_GeV4 = +(1/6) m_K^2 f_K^2 R_chi B5`
+  (`quarkConstraints/paper_0710_1869/eft_deltaf2/hadronic.py:765,2237,2248`).
 - Contraction: `q4_lr * <Q4>_GeV4 + q5_lr * <Q5>_GeV4` with no extra sign
-  (`quarkConstraints/paper_0710_1869/eft_deltaf2/observables.py:917-918`).
+  and with the non-M12-ready GeV4 matrix elements divided by `2 m_K`
+  (`quarkConstraints/paper_0710_1869/eft_deltaf2/observables.py:911-914`).
 - BMU LR LO ADM stored as the Wilson-coefficient (upper-triangular)
   transpose `((2, 12), (0, -16))`
   (`quarkConstraints/paper_0710_1869/eft_deltaf2/rg.py:98-101`) is the
