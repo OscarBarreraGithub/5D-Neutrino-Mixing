@@ -219,7 +219,7 @@ SCENARIOS = {
     # name:        (Y_max, c_max,  L_override (None = geometric eps from M_KK), label)
     "S1": dict(y_max=3.0,  c_max=2.0,  L=None, label="standard"),
     "S2": dict(y_max=3.0,  c_max=2.0,  L=None, label="aligned (common c_d)"),
-    "S3": dict(y_max=3.0,  c_max=2.5,  L=7.0,  label="little (L=ln 1e3)"),
+    "S3": dict(y_max=3.0,  c_max=2.5,  L=7.0,  label="little (L=7.0)"),
     "S4": dict(y_max=12.0, c_max=2.0,  L=None, label="large (Y_max=12)"),
 }
 

@@ -4,4 +4,7 @@
 #   DRAFT -> WRITER-INITIATED -> WRITER-DONE -> CHECKER-DONE -> OPUS-APPROVED
 #   Any non-terminal state may transition to BLOCKED-PI or DEFERRED-SCOPE
 #   on iteration-cap hit.
+# NOTE: Deprecated scaffold. The authoritative catalog is discovered from
+# flavor_catalog_constraints.registry, currently 103 constraints. This file is
+# intentionally not consumed by production scans or catalog tests.
 processes: []

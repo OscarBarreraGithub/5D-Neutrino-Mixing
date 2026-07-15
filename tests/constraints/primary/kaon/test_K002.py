@@ -169,7 +169,7 @@ def test_reference_couplings_show_qcd_running_enhancement():
     # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
     assert unrun.ratio_to_exp == pytest.approx(0.04621191599919545)
     # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
-    assert run.ratio_to_exp == pytest.approx(0.14246308812403433)
+    assert run.ratio_to_exp == pytest.approx(0.14262740811971927)
     # enhancement factor relaxed 10x -> 3x after B3: un-swapping O4/O5 lifts the
     # unrun ratio more than the run ratio, so the running enhancement is now ~3.5x.
     assert run.ratio_to_exp > 3.0 * unrun.ratio_to_exp

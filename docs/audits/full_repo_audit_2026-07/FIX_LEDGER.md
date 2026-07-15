@@ -113,10 +113,10 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 ### Documentation / reproducibility (M-22, M-23, M-24, M-36)
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| M-22 | DOC | MAJ | review_local/ certifies pre-B3 physics as CONFIRMED | `review_local/*.tex`, `docs/audits/*` | PENDING |
-| M-23 | DOC | MAJ | Headline floor parquet absent from tree | `FLOOR_SUMMARY.md` refs | PENDING |
-| M-24 | DOC | MAJ | Un-bannered stale Zbb 25-30 TeV artifact | `scan_outputs/wq_quarkonly_1M_.../` | PENDING |
-| M-36 | DOC | MAJ | Un-bannered pre-B1 notebook (Zbb 25-30 TeV) | `notebooks/wq_quarkonly_explore.ipynb` | PENDING |
+| M-22 | DOC | MAJ | review_local/ certifies pre-B3 physics as CONFIRMED | `review_local/*.tex`, `docs/audits/*` | DOC (review_local + audits corrected to post-B3 ME, verified vs code) |
+| M-23 | DOC | MAJ | Headline floor parquet absent from tree | `FLOOR_SUMMARY.md` refs | DOC (FLOOR_SUMMARY parquet ref corrected; reproduction path documented) |
+| M-24 | DOC | MAJ | Un-bannered stale Zbb 25-30 TeV artifact | `scan_outputs/wq_quarkonly_1M_.../` | DOC (SUPERSEDED banners on 1M analysis artifacts) |
+| M-36 | DOC | MAJ | Un-bannered pre-B1 notebook (Zbb 25-30 TeV) | `notebooks/wq_quarkonly_explore.ipynb` | DOC (SUPERSEDED banner cell in notebook + paired .py) |
 
 ## §8.3 Revisions (first-pass claims corrected — track for documentation)
 

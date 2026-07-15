@@ -57,7 +57,7 @@ def compute_charged_lepton_yukawas(
         Electroweak VEV (GeV). Default 174 GeV.
     lepton_masses : tuple of 3 floats, optional
         Physical charged lepton masses (m_e, m_μ, m_τ) in GeV.
-        Default uses PDG 2024 values from constants.py.
+        Default uses the legacy charged-lepton values from constants.py.
 
     Returns
     -------

@@ -254,7 +254,7 @@ def test_reference_couplings_show_qcd_running_enhancement():
     # the leading chiral term pre-running, PLAN §0.2), both legitimate snapshots
     # downstream of the test_epsilon_k_physics literature-anchored O4/O5 pins.
     assert unrun.ratio_to_budget == pytest.approx(1.4067965606347435)
-    assert run.ratio_to_budget == pytest.approx(4.338088536180677)
+    assert run.ratio_to_budget == pytest.approx(4.343092733908694)
 
 
 @pytest.mark.parametrize(

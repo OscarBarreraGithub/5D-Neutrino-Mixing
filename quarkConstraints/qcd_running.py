@@ -27,13 +27,13 @@ import math
 
 import numpy as np
 
-from qcd.constants import M_TOP_MS
+from qcd.constants import ALPHA_S_MZ, M_TOP_MS
 
 # ---------------------------------------------------------------------------
 # Standard physical constants
 # ---------------------------------------------------------------------------
 
-_ALPHA_S_MZ_DEFAULT = 0.1179
+_ALPHA_S_MZ_DEFAULT = ALPHA_S_MZ
 _MZ_DEFAULT = 91.1876
 _MT_DEFAULT = M_TOP_MS
 _MB_DEFAULT = 4.18
@@ -97,7 +97,7 @@ def run_alpha_s(
     mu : float
         Target renormalization scale in GeV.
     alpha_s_mz : float
-        α_s at the Z mass (default 0.1179).
+        α_s at the Z mass (default: qcd.constants.ALPHA_S_MZ).
     m_z : float
         Z boson mass in GeV (default 91.1876).
     m_t : float
@@ -242,7 +242,7 @@ def evolve_deltaf2_wilsons(
     mu_low : float
         Hadronic scale in GeV (default 2.0).
     alpha_s_mz : float
-        α_s(M_Z) (default 0.1179).
+        α_s(M_Z) (default: qcd.constants.ALPHA_S_MZ).
     m_z : float
         Z mass in GeV.
     m_t : float

@@ -69,7 +69,7 @@ def _zero_pass_label(run_dir: Path) -> str:
     p_ul = wilson_upper_limit(0, n_total)
     return (
         rf"N={_format_count_short(n_total)}, "
-        rf"$p\leq{_format_sci_tex(p_ul)}$ 95% CL"
+        rf"$p\leq{_format_sci_tex(p_ul)}$ $z=1.92$ UL"
     )
 
 

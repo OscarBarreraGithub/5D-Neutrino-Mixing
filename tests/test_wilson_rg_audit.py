@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from qcd.constants import M_TOP_MS
+from qcd.constants import ALPHA_S_MZ, M_TOP_MS
 from qcd.running import alpha_s as reference_alpha_s
 from quarkConstraints.qcd_running import (
     _nf_for_scale,
@@ -28,10 +28,10 @@ def _as_real_tuple(values: tuple[complex, complex, complex, complex]) -> tuple[f
 
 def test_unit_wilson_evolution_matches_audited_lo_reference() -> None:
     expected = {
-        "C1_VLL": (0.7291270619675457, 0.0, 0.0, 0.0),
-        "C1_VRR": (0.0, 0.7291270619675457, 0.0, 0.0),
-        "C4_LR": (0.0, 0.0, 3.538238709484566, 0.0),
-        "C5_LR": (0.0, 0.0, 0.8947831120355858, 0.853889373377808),
+        "C1_VLL": (0.7288737958332887, 0.0, 0.0, 0.0),
+        "C1_VRR": (0.0, 0.7288737958332887, 0.0, 0.0),
+        "C4_LR": (0.0, 0.0, 3.5431590851191723, 0.0),
+        "C5_LR": (0.0, 0.0, 0.8964726753709399, 0.8537410590063527),
     }
     unit_vectors = {
         "C1_VLL": (1.0, 0.0, 0.0, 0.0),
@@ -59,7 +59,7 @@ def test_alpha_s_uses_top_bottom_thresholds_for_3tev_to_2gev_path() -> None:
             mu,
             n_loops=1,
             matching_loops=0,
-            alpha_s_ref=0.1179,
+            alpha_s_ref=ALPHA_S_MZ,
         )
         assert observed == pytest.approx(expected, rel=1.0e-10, abs=1.0e-14)
 

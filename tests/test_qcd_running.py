@@ -26,13 +26,14 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from quarkConstraints.qcd_running import run_alpha_s, evolve_deltaf2_wilsons
+from qcd.constants import ALPHA_S_MZ
 
 
 # ---------------------------------------------------------------------------
 # Physical constants used in tests
 # ---------------------------------------------------------------------------
 
-_ALPHA_S_MZ_MODULE = 0.1179  # internal default of qcd_running
+_ALPHA_S_MZ_MODULE = ALPHA_S_MZ  # internal default of qcd_running
 _M_Z = 91.1876
 _M_B = 4.18    # GeV, b-quark MS-bar mass
 _M_C = 1.27    # GeV, c-quark MS-bar mass
@@ -48,7 +49,7 @@ class TestRunAlphaS:
     """Tests for the run_alpha_s(mu) one-loop wrapper."""
 
     def test_alpha_s_at_mz_equals_input_value(self):
-        """alpha_s(M_Z) should return the input value (0.1179)."""
+        """alpha_s(M_Z) should return the shared PDG input value."""
         result = run_alpha_s(_M_Z)
         assert abs(result - _ALPHA_S_MZ_MODULE) < 1e-6, (
             f"alpha_s(M_Z) = {result}, expected ~{_ALPHA_S_MZ_MODULE}"

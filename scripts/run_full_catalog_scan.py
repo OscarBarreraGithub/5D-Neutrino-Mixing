@@ -1031,6 +1031,9 @@ def _classify_results(results: Mapping[str, ConstraintResult]) -> dict[str, Any]
     if hard_not_evaluated:
         advisory_flags.append("hard_coverage_gap:" + ",".join(hard_not_evaluated))
 
+    # Historical field names: strict is looser because it counts rigorous HARD
+    # vetoes only. Inclusive is stricter because it also counts proxy and
+    # partial HARD vetoes.
     return {
         "constraints": constraints,
         "survives_all_HARD_strict": not excluded_by_rigorous,

@@ -113,7 +113,7 @@ def _zero_pass_summary(run_dir: Path) -> dict[str, float | int] | None:
     return {
         "n_total": n_total,
         "n_pass": n_pass,
-        "p_ul_95": wilson_upper_limit(0, n_total),
+        "p_ul_z1p92": wilson_upper_limit(0, n_total),
     }
 
 
@@ -122,7 +122,7 @@ def _zero_pass_note(stats: dict[str, float | int] | None) -> str:
         return "stored gate has zero accepted draws"
     return (
         rf"stored gate: N={_format_count_short(int(stats['n_total']))}, "
-        rf"$p\leq{_format_sci_tex(float(stats['p_ul_95']))}$ 95% CL"
+        rf"$p\leq{_format_sci_tex(float(stats['p_ul_z1p92']))}$ $z=1.92$ UL"
     )
 
 

@@ -11,6 +11,9 @@ def wilson_upper_limit(k: int, n: int, z: float = 1.92) -> float:
     The default ``z=1.92`` follows the convention used in the quark-scan
     zero-pass audit, where a zero-success observation gives
     ``z**2 / (n + z**2) ~= 3.69 / n`` for large ``n``.
+    This is a local audit convention, not a standard 95 percent one-sided
+    upper limit; as a Gaussian score it corresponds to about 97.3 percent
+    one-sided coverage.
     """
     if n <= 0:
         raise ValueError("n must be positive")

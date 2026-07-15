@@ -11,15 +11,16 @@ grep -nE "zero PDG passes?|0/.*PDG|no.*pass|moreUV.*0|moreIR.*0|Run C.*0|factor-
 
 The Wilson-score upper limits use the repo helper
 `quarkConstraints.finite_stats.wilson_upper_limit(k, n)`, with the
-audit convention `z = 1.92`.
+audit convention `z = 1.92`. This is about 97.3 percent one-sided Gaussian
+coverage, not the standard one-sided 95 percent choice.
 
 ## Canonical Zero-Pass Ensembles
 
-| Run | Run dir | N total | N pass observed | p_UL_95 | Implied physical bound |
+| Run | Run dir | N total | N pass observed | p_UL_z1p92 | Implied physical bound |
 |---|---|---:|---:|---:|---|
-| Run 3 moreUV | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | 2.304e-6 | No more than 0.000230% of anarchic draws with the `c -> c + 0.05` pattern and default uniform Y-prior pass the factor-3/5 PDG gate, at 95% confidence. |
-| Run 3 moreIR | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | 2.304e-6 | No more than 0.000230% of anarchic draws with the `c -> c - 0.05` pattern and default uniform Y-prior pass the factor-3/5 PDG gate, at 95% confidence. |
-| Run C CFW-like gate | `scan_outputs/rs_anarchy_runC_20260515T085323` | 4,000,000 | 0 | 9.216e-7 | No more than 0.0000922% of anarchic draws with the baseline c-pattern and CFW-like wide/floored Y-prior pass the factor-1.5/2.5 PDG gate, at 95% confidence. |
+| Run 3 moreUV | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | 2.304e-6 | No more than 0.000230% of anarchic draws with the `c -> c + 0.05` pattern and default uniform Y-prior pass the factor-3/5 PDG gate, at the z=1.92 audit convention. |
+| Run 3 moreIR | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | 2.304e-6 | No more than 0.000230% of anarchic draws with the `c -> c - 0.05` pattern and default uniform Y-prior pass the factor-3/5 PDG gate, at the z=1.92 audit convention. |
+| Run C CFW-like gate | `scan_outputs/rs_anarchy_runC_20260515T085323` | 4,000,000 | 0 | 9.216e-7 | No more than 0.0000922% of anarchic draws with the baseline c-pattern and CFW-like wide/floored Y-prior pass the factor-1.5/2.5 PDG gate, at the z=1.92 audit convention. |
 
 ## Provenance
 
@@ -31,7 +32,7 @@ audit convention `z = 1.92`.
 
 ## Claim Locations
 
-| File:line | Claim verbatim | Run dir | N total | N pass observed | Gate definition | p_UL_95 |
+| File:line | Claim verbatim | Run dir | N total | N pass observed | Gate definition | p_UL_z1p92 |
 |---|---|---|---:|---:|---|---:|
 | `docs/quark_scan_methodology_note.tex:739-743` | `moreUV ... produced no PDG-passing draws in N=1,600,000 attempts ... p_pass <= 2.3e-6` | `scan_outputs/rs_anarchy_run3_moreUV_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
 | `docs/quark_scan_methodology_note.tex:739-743` | `moreIR ... produced no PDG-passing draws in N=1,600,000 attempts ... p_pass <= 2.3e-6` | `scan_outputs/rs_anarchy_run3_moreIR_20260515T085324` | 1,600,000 | 0 | factor-3 masses/CKM, factor-5 J | 2.304e-6 |
