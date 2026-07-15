@@ -156,7 +156,7 @@ def test_lfv_live_toy_matches_independent_rate_and_mkk_scaling():
 
 def test_amplified_lfv_live_toy_bites_limit():
     result = fcc.get(_PID).evaluate(
-        scaled_lfv_rare_point(lfv_live_rare_point(), "c_to_u", 1.0e5)
+        scaled_lfv_rare_point(lfv_live_rare_point(), "c_to_u", 2.0e5)
     )
 
     assert result.passes is False

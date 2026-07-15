@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -58,6 +59,24 @@ def _zcc_couplings(
         left_down=left_up_overlap.copy(),
         right_up=right_up_overlap.copy(),
         right_down=zeros,
+    )
+
+
+def _malformed_zcc_rs_ew_couplings(kind: str) -> SimpleNamespace:
+    right = np.zeros((3, 3), dtype=np.complex128)
+    if kind == "nan":
+        left = np.zeros((3, 3), dtype=np.complex128)
+        left[1, 1] = complex(np.nan, 0.0)
+    elif kind == "shape":
+        left = np.zeros((1, 1), dtype=np.complex128)
+    else:
+        raise AssertionError(f"unknown malformed coupling kind {kind!r}")
+    return SimpleNamespace(
+        z_delta_g_L_u=left,
+        z_delta_g_R_u=right,
+        matching_assumption="malformed z_delta_g_* regression fixture",
+        model_label="malformed-test",
+        kk_ew_mass_gev=3000.0,
     )
 
 
@@ -237,6 +256,32 @@ def test_old_style_point_reports_unevaluated_rs_ew_missing_extra():
     assert result.diagnostics["missing_extra"] == "rs_ew_couplings"
     assert result.diagnostics["legacy_quark_mass_basis_couplings_present"] is True
     assert "rs_ew_couplings not provided" in result.notes
+
+
+@pytest.mark.parametrize(
+    ("kind", "message"),
+    [
+        ("nan", "z_delta_g_L_u[1,1] must be finite"),
+        ("shape", "z_delta_g_L_u[1,1] is not available"),
+    ],
+)
+def test_present_malformed_z_delta_g_coupling_fails_closed(kind, message):
+    point = point_builder.make_point(
+        rs_ew_couplings=_malformed_zcc_rs_ew_couplings(kind)
+    )
+
+    result = fcc.get(_PID).evaluate(point)
+
+    assert result.process_id == _PID
+    assert result.passes is False
+    assert result.predicted is None
+    assert result.ratio is None
+    assert result.diagnostics["evaluated"] is True
+    assert result.diagnostics["invalid_extra"] == "rs_ew_couplings"
+    assert result.diagnostics["invalid_input"] is True
+    assert result.diagnostics["invalid_input_policy"] == "fail_closed_m18"
+    assert result.diagnostics["exception_type"] == "ValueError"
+    assert result.diagnostics["exception"] == message
 
 
 def test_evaluate_runs_end_to_end_with_real_finite_fields_and_rs_ew_diagnostics():

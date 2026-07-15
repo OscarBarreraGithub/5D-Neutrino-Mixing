@@ -30,7 +30,10 @@ required for a model-complete RS ``c -> u l l`` prediction.  The v1 matching
 below is a documented Z/KK-penguin proxy: divide the supplied quark coupling by
 ``g_s`` to keep the flavor-overlap structure, couple that overlap to one
 Z-like neutral boson at ``M_KK``, use SM-Z charged-lepton vector/axial charges,
-and match the result onto ``C9``/``C10`` in the Hamiltonian above.
+and match the result onto ``C9``/``C10`` in the Hamiltonian above.  The chiral
+lepton currents are decomposed as ``lbar gamma_mu P_{L,R} l = (V +/- A)/2``,
+giving the tree-level proxy normalization ``+pi Delta_uc Delta_{V,A}/(2
+sqrt(2) G_F alpha lambda_b M_KK^2)`` in this module's Lagrangian convention.
 """
 
 from __future__ import annotations
@@ -56,9 +59,10 @@ RARE_CHARM_DILEPTON_INPUT_BUNDLE_V1 = "rare_charm_dilepton_sm_inputs_charm_sd_v1
 RARE_CHARM_DILEPTON_RS_MATCHING_ASSUMPTION_V1 = (
     "NEEDS-HUMAN-PHYSICS: quark KK-gluon mass-basis couplings are used as "
     "neutral-current flavor-overlap proxies; a single Z-like EW KK/Z-penguin "
-    "boson with SM-Z charged-lepton vector/axial charges stands in for the "
-    "full RS EW KK/Z/Z', lepton, Higgs/radion, scalar and pseudoscalar "
-    "c->u l l matching."
+    "boson with SM-Z charged-lepton vector/axial charges is WET-matched with "
+    "+pi/(2 sqrt(2) G_F alpha lambda_b M_KK^2); it stands in for the full "
+    "RS EW KK/Z/Z', lepton, Higgs/radion, scalar and pseudoscalar c->u l l "
+    "matching."
 )
 
 
@@ -351,9 +355,10 @@ def _wilson_prefactor(
     inputs: RareCharmDileptonSMInputs,
 ) -> complex:
     return complex(
-        -math.pi
+        math.pi
         / (
-            math.sqrt(2.0)
+            2.0
+            * math.sqrt(2.0)
             * inputs.gf_gev_minus2
             * inputs.alpha_em_mz
             * lambda_b

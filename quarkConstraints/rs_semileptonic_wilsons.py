@@ -2,7 +2,10 @@
 
 The coefficients in this module are matched directly from physical contact
 terms in ``GeV^-2``.  They intentionally do not route through the older proxy
-helpers that insert a single ``1/M_KK^2`` factor.
+helpers that insert a single ``1/M_KK^2`` factor.  The charged-lepton
+``C9/C10`` blocks use the same WET convention as ``rare_b_dilepton`` and
+``rare_charm_dilepton``; chiral lepton contacts contribute to vector/axial
+operators with the explicit ``1/2`` from ``P_{L,R}``.
 """
 
 from __future__ import annotations
@@ -29,8 +32,9 @@ RS_SEMILEPTONIC_OPERATOR_CONVENTION = (
 )
 RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1 = (
     "C9/C10 matched from Phase-4a full light-Z neutral contacts in GeV^-2; "
-    "charged-lepton blocks use only the legitimate G_F/alpha/lambda adapter; "
-    "active-nu blocks use X_NP=C/g_SM^2 directly with no second 1/M_KK^2"
+    "charged-lepton blocks use +pi/(2 sqrt(2) G_F alpha lambda) with the "
+    "P_L/P_R -> (V,A)/2 factor; active-nu blocks use X_NP=C/g_SM^2 directly "
+    "with no second 1/M_KK^2"
 )
 
 
@@ -646,9 +650,10 @@ def _dimensionless_wilson_prefactor(
     if abs(lambda_ckm) <= 0.0:
         raise ValueError("lambda_ckm must be non-zero")
     return complex(
-        -math.pi
+        math.pi
         / (
-            math.sqrt(2.0)
+            2.0
+            * math.sqrt(2.0)
             * float(gf_gev_minus2)
             * float(alpha_em_mz)
             * complex(lambda_ckm)

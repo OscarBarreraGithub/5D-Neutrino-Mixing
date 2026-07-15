@@ -152,12 +152,12 @@ def test_rotated_nonuniversal_leptons_generate_lfv_wilsons_and_mkk_scaling():
     assert abs(lfv_sd_emu.c9_lfv_np) > 1.0e-7
     assert abs(lfv_sd_emu.c10_lfv_np) > 1.0e-7
     assert lfv_sd_emu.c9_lfv_np == pytest.approx(
-        0.00023656625045856276 + 6.666935783109433e-05j,
+        -0.00011828312522928138 - 3.333467891554716e-05j,
         rel=1.0e-10,
         abs=1.0e-14,
     )
     assert lfv_sd_emu.c10_lfv_np == pytest.approx(
-        -0.00023656625045856276 - 6.666935783109433e-05j,
+        0.00011828312522928138 + 3.333467891554716e-05j,
         rel=1.0e-10,
         abs=1.0e-14,
     )
@@ -280,7 +280,7 @@ def test_completed_contact_reduces_to_phase3a_when_lepton_delta_g_is_zero():
 
     assert new_contact == pytest.approx(old_contact, rel=0.0, abs=1.0e-22)
     assert new_wilson.c9_np == pytest.approx(
-        0.3046272275031843 + 0.005803160503768459j,
+        -0.15231361375159214 - 0.0029015802518842296j,
         rel=1.0e-12,
         abs=1.0e-14,
     )
@@ -385,7 +385,9 @@ def _manual_c9(contact_ll: complex, contact_lr: complex, *, transition: str) -> 
     lambda_ckm = rare_kaon_dilepton.ckm_factors().lambda_t
     if transition != "s_d":
         raise AssertionError("test helper only supports s_d")
-    prefactor = -math.pi / (math.sqrt(2.0) * GF_GEV_MINUS2 * ALPHA_EM_MZ * lambda_ckm)
+    prefactor = math.pi / (
+        2.0 * math.sqrt(2.0) * GF_GEV_MINUS2 * ALPHA_EM_MZ * lambda_ckm
+    )
     return prefactor * (contact_ll + contact_lr)
 
 

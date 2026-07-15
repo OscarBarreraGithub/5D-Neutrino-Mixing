@@ -33,6 +33,8 @@ from dataclasses import dataclass
 import math
 from typing import Any, Mapping
 
+import numpy as np
+
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.lfv_three_body_tau import (
@@ -292,27 +294,66 @@ def _is_unevaluated_legacy_proxy_exception(exc: Exception, lepton_input: Any) ->
         return False
     if "must provide tau->3mu contact proxy inputs" not in message:
         return False
-    return _has_legacy_overlap_like_input(lepton_input)
+    return _has_finite_legacy_overlap_like_input(lepton_input)
 
 
-def _has_legacy_overlap_like_input(lepton_input: Any) -> bool:
-    keys = (
-        "left_lfv_overlap",
-        "right_lfv_overlap",
-        "left_emu_overlap",
-        "right_emu_overlap",
-        "left_emu",
-        "right_emu",
-        "left_charged_lepton_overlap",
-        "right_charged_lepton_overlap",
-        "left_lepton_overlap",
-        "right_lepton_overlap",
-        "left_overlap",
-        "right_overlap",
+_LEGACY_SCALAR_OVERLAP_KEYS = (
+    "left_lfv_overlap",
+    "right_lfv_overlap",
+    "left_emu_overlap",
+    "right_emu_overlap",
+    "left_emu",
+    "right_emu",
+)
+_LEGACY_MATRIX_OVERLAP_KEYS = (
+    "left_charged_lepton_overlap",
+    "right_charged_lepton_overlap",
+    "left_lepton_overlap",
+    "right_lepton_overlap",
+    "left_overlap",
+    "right_overlap",
+)
+
+
+def _has_finite_legacy_overlap_like_input(lepton_input: Any) -> bool:
+    return any(
+        _finite_complex_like(value)
+        for value in _present_values(lepton_input, _LEGACY_SCALAR_OVERLAP_KEYS)
+    ) or any(
+        _finite_matrix_like(value)
+        for value in _present_values(lepton_input, _LEGACY_MATRIX_OVERLAP_KEYS)
     )
-    if isinstance(lepton_input, Mapping):
-        return any(key in lepton_input for key in keys)
-    return any(hasattr(lepton_input, key) for key in keys)
+
+
+def _present_values(value: Any, keys: tuple[str, ...]):
+    if isinstance(value, Mapping):
+        for key in keys:
+            if key in value:
+                yield value[key]
+        return
+    for key in keys:
+        if hasattr(value, key):
+            yield getattr(value, key)
+
+
+def _finite_complex_like(value: Any) -> bool:
+    try:
+        number = complex(value)
+    except (TypeError, ValueError):
+        return False
+    return math.isfinite(number.real) and math.isfinite(number.imag)
+
+
+def _finite_matrix_like(value: Any) -> bool:
+    try:
+        matrix = np.asarray(value, dtype=np.complex128)
+    except (TypeError, ValueError):
+        return False
+    return (
+        matrix.shape == (3, 3)
+        and bool(np.all(np.isfinite(matrix.real)))
+        and bool(np.all(np.isfinite(matrix.imag)))
+    )
 
 
 def _tree_only_lepton_input() -> dict[str, str]:

@@ -306,13 +306,15 @@ class Constraint:
                 m_kk_gev=None if kk_ew_mass is None else float(kk_ew_mass),
             )
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
-            return self._unevaluated_result(
-                diagnostics={
-                    "invalid_extra": _REQUIRED_EXTRA,
-                    "exception_type": type(exc).__name__,
-                    "exception": str(exc),
-                },
-            )
+            diagnostics: dict[str, object] = {
+                "exception_type": type(exc).__name__,
+                "exception": str(exc),
+            }
+            if _is_intentional_flavor_override(exc):
+                diagnostics["caller_flavor_override_rejected"] = True
+            else:
+                diagnostics["invalid_extra"] = _REQUIRED_EXTRA
+            return self._unevaluated_result(diagnostics=diagnostics)
 
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
@@ -374,3 +376,11 @@ class Constraint:
             ),
             diagnostics=diagnostics,
         )
+
+
+def _is_intentional_flavor_override(exc: Exception) -> bool:
+    message = str(exc)
+    return isinstance(exc, ValueError) and (
+        "tau->mu gamma adapter is pinned to initial_flavor='tau'" in message
+        or "tau->mu gamma adapter is pinned to final_flavor='mu'" in message
+    )

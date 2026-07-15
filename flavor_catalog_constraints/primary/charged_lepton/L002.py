@@ -33,6 +33,8 @@ from dataclasses import dataclass
 import math
 from typing import Any, Mapping
 
+import numpy as np
+
 from flavor_catalog_constraints.anchors import (
     Anchor,
     AnchorError,
@@ -254,13 +256,15 @@ class Constraint:
                 inputs=self.sm_inputs,
             )
         except (KeyError, TypeError, ValueError) as exc:
-            return self._unevaluated_result(
-                diagnostics={
-                    "invalid_extra": _REQUIRED_EXTRA,
-                    "exception_type": type(exc).__name__,
-                    "exception": str(exc),
-                },
-            )
+            diagnostics: dict[str, object] = {
+                "exception_type": type(exc).__name__,
+                "exception": str(exc),
+            }
+            if _is_unevaluated_legacy_proxy_exception(exc, lepton_input):
+                diagnostics["legacy_overlap_tree_proxy_ignored"] = True
+            else:
+                diagnostics["invalid_extra"] = _REQUIRED_EXTRA
+            return self._unevaluated_result(diagnostics=diagnostics)
 
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
@@ -323,6 +327,82 @@ def _adapter_input(lepton_input: Any, rs_ew_couplings: Any | None) -> Any:
         "dipole": lepton_input,
         "rs_ew_couplings": rs_ew_couplings,
     }
+
+
+_LEGACY_SCALAR_OVERLAP_KEYS = (
+    "left_lfv_overlap",
+    "right_lfv_overlap",
+    "left_emu_overlap",
+    "right_emu_overlap",
+    "left_emu",
+    "right_emu",
+)
+_LEGACY_MATRIX_OVERLAP_KEYS = (
+    "left_charged_lepton_overlap",
+    "right_charged_lepton_overlap",
+    "left_lepton_overlap",
+    "right_lepton_overlap",
+    "left_overlap",
+    "right_overlap",
+)
+
+
+def _is_unevaluated_legacy_proxy_exception(exc: Exception, lepton_input: Any) -> bool:
+    message = str(exc)
+    if isinstance(exc, ValueError):
+        return (
+            "pinned to initial_flavor='mu'" in message
+            or "pinned to final_flavor='e'" in message
+        )
+    if not isinstance(exc, TypeError):
+        return False
+    if (
+        "must provide a dipole source and/or lfv three-body tree contact inputs"
+        not in message
+    ):
+        return False
+    return _has_finite_legacy_overlap_like_input(lepton_input)
+
+
+def _has_finite_legacy_overlap_like_input(lepton_input: Any) -> bool:
+    return any(
+        _finite_complex_like(value)
+        for value in _present_values(lepton_input, _LEGACY_SCALAR_OVERLAP_KEYS)
+    ) or any(
+        _finite_matrix_like(value)
+        for value in _present_values(lepton_input, _LEGACY_MATRIX_OVERLAP_KEYS)
+    )
+
+
+def _present_values(value: Any, keys: tuple[str, ...]):
+    if isinstance(value, Mapping):
+        for key in keys:
+            if key in value:
+                yield value[key]
+        return
+    for key in keys:
+        if hasattr(value, key):
+            yield getattr(value, key)
+
+
+def _finite_complex_like(value: Any) -> bool:
+    try:
+        number = complex(value)
+    except (TypeError, ValueError):
+        return False
+    return math.isfinite(number.real) and math.isfinite(number.imag)
+
+
+def _finite_matrix_like(value: Any) -> bool:
+    try:
+        matrix = np.asarray(value, dtype=np.complex128)
+    except (TypeError, ValueError):
+        return False
+    return (
+        matrix.shape == (3, 3)
+        and bool(np.all(np.isfinite(matrix.real)))
+        and bool(np.all(np.isfinite(matrix.imag)))
+    )
 
 
 def _tree_only_lepton_input() -> dict[str, str]:

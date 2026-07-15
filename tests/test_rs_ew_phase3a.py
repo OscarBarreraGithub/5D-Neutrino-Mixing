@@ -309,22 +309,22 @@ def test_independent_manual_recompute_matches_representative_wilsons(sample_fit,
     )
 
     assert manual_bsmu["C9_NP"] == pytest.approx(
-        0.3046272275031843 + 0.005803160503768459j,
+        -0.15231361375159214 - 0.0029015802518842296j,
         rel=1.0e-11,
         abs=1.0e-13,
     )
     assert manual_bsmu["C10_NP"] == pytest.approx(
-        -4.055208033854954 - 0.07725187039095388j,
+        2.027604016927477 + 0.03862593519547694j,
         rel=1.0e-11,
         abs=1.0e-13,
     )
     assert manual_sdee["C9_NP"] == pytest.approx(
-        -0.7330216825644758 - 0.2065809673108971j,
+        0.3665108412822379 + 0.10329048365544855j,
         rel=1.0e-11,
         abs=1.0e-13,
     )
     assert manual_cumu["C10_NP"] == pytest.approx(
-        -20.440774502502464 - 31.385940166591617j,
+        10.220387251251232 + 15.692970083295808j,
         rel=1.0e-11,
         abs=1.0e-12,
     )
@@ -364,7 +364,13 @@ def _manual_wilsons(
     c_lr = _manual_contact(z_l, quark_sector, "L", g_r_e, final_index, initial_index, lepton_index)
     c_rl = _manual_contact(z_r, quark_sector, "R", g_l_e, final_index, initial_index, lepton_index)
     c_rr = _manual_contact(z_r, quark_sector, "R", g_r_e, final_index, initial_index, lepton_index)
-    prefactor = -math.pi / (math.sqrt(2.0) * GF_GEV_MINUS2 * ALPHA_EM_MZ * _manual_lambda(transition))
+    prefactor = math.pi / (
+        2.0
+        * math.sqrt(2.0)
+        * GF_GEV_MINUS2
+        * ALPHA_EM_MZ
+        * _manual_lambda(transition)
+    )
     return {
         "C9_NP": prefactor * (c_ll + c_lr),
         "C10_NP": prefactor * (c_lr - c_ll),

@@ -248,13 +248,15 @@ class Constraint:
                 inputs=self.sm_inputs,
             )
         except (AttributeError, KeyError, TypeError, ValueError) as exc:
-            return self._unevaluated_result(
-                diagnostics={
-                    "invalid_extra": _REQUIRED_EXTRA,
-                    "exception_type": type(exc).__name__,
-                    "exception": str(exc),
-                },
-            )
+            diagnostics: dict[str, object] = {
+                "exception_type": type(exc).__name__,
+                "exception": str(exc),
+            }
+            if _is_unevaluated_rejection(exc, lepton_input):
+                diagnostics["caller_flavor_or_alias_rejected"] = True
+            else:
+                diagnostics["invalid_extra"] = _REQUIRED_EXTRA
+            return self._unevaluated_result(diagnostics=diagnostics)
 
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
@@ -316,3 +318,65 @@ class Constraint:
             ),
             diagnostics=diagnostics,
         )
+
+
+_MISMATCHED_SPURION_KEYS = (
+    "left_emu_overlap",
+    "right_emu_overlap",
+    "left_emu",
+    "right_emu",
+    "left_mue_overlap",
+    "right_mue_overlap",
+    "left_mu_e_overlap",
+    "right_mu_e_overlap",
+    "left_e_mu_overlap",
+    "right_e_mu_overlap",
+    "left_taumu_overlap",
+    "right_taumu_overlap",
+    "left_mutau_overlap",
+    "right_mutau_overlap",
+    "left_tau_mu_overlap",
+    "right_tau_mu_overlap",
+    "left_mu_tau_overlap",
+    "right_mu_tau_overlap",
+)
+
+
+def _is_unevaluated_rejection(exc: Exception, lepton_input: Any) -> bool:
+    message = str(exc)
+    if not isinstance(exc, ValueError):
+        return False
+    if (
+        "tau_to_3e_from_lepton_input is pinned to initial_flavor='tau'" in message
+        or "tau_to_3e_from_lepton_input is pinned to final_flavor='e'" in message
+    ):
+        return True
+    if "tau->3e does not accept mu-e or tau-mu overlap aliases" not in message:
+        return False
+    return _has_finite_mismatched_spurion_alias(lepton_input)
+
+
+def _has_finite_mismatched_spurion_alias(lepton_input: Any) -> bool:
+    return any(
+        _finite_complex_like(value)
+        for value in _present_values(lepton_input, _MISMATCHED_SPURION_KEYS)
+    )
+
+
+def _present_values(value: Any, keys: tuple[str, ...]):
+    if isinstance(value, Mapping):
+        for key in keys:
+            if key in value:
+                yield value[key]
+        return
+    for key in keys:
+        if hasattr(value, key):
+            yield getattr(value, key)
+
+
+def _finite_complex_like(value: Any) -> bool:
+    try:
+        number = complex(value)
+    except (TypeError, ValueError):
+        return False
+    return math.isfinite(number.real) and math.isfinite(number.imag)

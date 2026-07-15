@@ -322,13 +322,15 @@ class Constraint:
                 nuclear_inputs=self.nuclear_inputs,
             )
         except (KeyError, TypeError, ValueError) as exc:
-            return self._unevaluated_result(
-                diagnostics={
-                    "invalid_extra": _REQUIRED_EXTRA,
-                    "exception_type": type(exc).__name__,
-                    "exception": str(exc),
-                },
-            )
+            diagnostics: dict[str, object] = {
+                "exception_type": type(exc).__name__,
+                "exception": str(exc),
+            }
+            if _is_unevaluated_legacy_vector_exception(exc, lepton_input):
+                diagnostics["legacy_vector_proxy_ignored"] = True
+            else:
+                diagnostics["invalid_extra"] = _REQUIRED_EXTRA
+            return self._unevaluated_result(diagnostics=diagnostics)
 
         diagnostics = dict(result.diagnostics)
         diagnostics.update(
@@ -406,6 +408,64 @@ def _adapter_input(lepton_input: Any, rs_ew_couplings: Any | None) -> Any:
         "dipole": lepton_input,
         "rs_ew_couplings": rs_ew_couplings,
     }
+
+
+_LEGACY_VECTOR_COEFFICIENT_KEYS = (
+    "g_lv_p",
+    "g_LV_p",
+    "g_lv_proton",
+    "g_LV_proton",
+    "g_lv_n",
+    "g_LV_n",
+    "g_lv_neutron",
+    "g_LV_neutron",
+    "g_rv_p",
+    "g_RV_p",
+    "g_rv_proton",
+    "g_RV_proton",
+    "g_rv_n",
+    "g_RV_n",
+    "g_rv_neutron",
+    "g_RV_neutron",
+)
+
+
+def _is_unevaluated_legacy_vector_exception(exc: Exception, lepton_input: Any) -> bool:
+    if not isinstance(exc, TypeError):
+        return False
+    if (
+        "must provide a dipole source and/or mu-e conversion scalar/dipole "
+        "coefficient or rs_ew_couplings vector inputs"
+        not in str(exc)
+    ):
+        return False
+    return _has_finite_legacy_vector_like_input(lepton_input)
+
+
+def _has_finite_legacy_vector_like_input(lepton_input: Any) -> bool:
+    return any(
+        _finite_complex_like(value)
+        for value in _present_values(lepton_input, _LEGACY_VECTOR_COEFFICIENT_KEYS)
+    )
+
+
+def _present_values(value: Any, keys: tuple[str, ...]):
+    if isinstance(value, Mapping):
+        for key in keys:
+            if key in value:
+                yield value[key]
+        return
+    for key in keys:
+        if hasattr(value, key):
+            yield getattr(value, key)
+
+
+def _finite_complex_like(value: Any) -> bool:
+    try:
+        number = complex(value)
+    except (TypeError, ValueError):
+        return False
+    return math.isfinite(number.real) and math.isfinite(number.imag)
 
 
 def _tree_only_lepton_input() -> dict[str, str]:
