@@ -34,6 +34,11 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from quarkConstraints.finite_stats import wilson_upper_limit
+from quarkConstraints.deltaf2 import (
+    EPSILON_K_EXP,
+    EPSILON_K_SM,
+    delta_f2_epsilon_k_budget_policy,
+)
 
 DEFAULT_OUT = REPO / "results/figures/quark"
 MKK_TICKS = [1, 2, 3, 5, 10, 20, 30, 50, 100, 200]
@@ -73,9 +78,8 @@ CFW_MARKERS = (
     ),
 )
 
-EPSILON_K_EXP = 2.228e-3
-EPSILON_K_SM_DEFAULT = 2.161e-3
-EPSILON_K_BUDGET_DEFAULT = abs(EPSILON_K_EXP - EPSILON_K_SM_DEFAULT)
+EPSILON_K_SM_DEFAULT = EPSILON_K_SM
+EPSILON_K_BUDGET_DEFAULT = delta_f2_epsilon_k_budget_policy().central_budget
 
 CURRENT_BAGS = {
     "B_1_K": 0.5503,

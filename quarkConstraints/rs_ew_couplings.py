@@ -14,6 +14,9 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
+from .casagrande_profiles import (
+    casagrande_cghnp_B_profile as _casagrande_zbb_B_profile,
+)
 from .rs_ew_spectrum import (
     DEFAULT_MAX_TRUNCATION_MODES,
     DEFAULT_MIN_TRUNCATION_MODES,
@@ -1870,35 +1873,6 @@ def _casagrande_zbb_B_profile_triplet(
     )
     values.setflags(write=False)
     return values
-
-
-def _casagrande_zbb_B_profile(c: float, F: float, *, name: str) -> float:
-    """Diagonal (3rd-generation) CGHNP Z->bb bracket in repo variables.
-
-    CGHNP (0807.4937) Z->bb ZMA, translated through the convention dictionary
-    ``c_CGHNP = -c_repo``, ``F^2_CGHNP = 2 f_IR,repo^2`` (proved exactly in audit
-    slice 3).  In repo variables the diagonal bracket is
-
-        B(c, F) = 1/(1 + 2c) * ( 1/(2 F^2) - 1 + 2 F^2/(3 - 2c) ).
-
-    The previous code used ``1/(1 - 2c) * (1/F^2 - 1 + F^2/(3 + 2c))`` -- the
-    c-sign was wrong in BOTH denominators and the F^2 = 2 f^2 factor was
-    missing.  For UV-localized b_R (c > 1/2, scan-typical) the old ``1/(1 - 2c)``
-    is negative, giving the wrong SIGN of delta g_L^b (PLAN §4.2).
-    """
-    if not math.isfinite(c):
-        raise ValueError(f"{name} c must be finite")
-    if not math.isfinite(F) or F <= 0.0:
-        raise ValueError(f"{name} F must be positive and finite")
-    denom_left = 1.0 + 2.0 * c
-    denom_right = 3.0 - 2.0 * c
-    if denom_left == 0.0 or denom_right == 0.0:
-        raise ValueError(f"{name} Casagrande B(c) denominator is singular")
-    f_sq = F * F
-    value = (1.0 / denom_left) * (1.0 / (2.0 * f_sq) - 1.0 + (2.0 * f_sq) / denom_right)
-    if not math.isfinite(value):
-        raise ValueError(f"{name} Casagrande B(c) is non-finite")
-    return float(value)
 
 
 def _zbb_fermion_kk_mixing_metadata(

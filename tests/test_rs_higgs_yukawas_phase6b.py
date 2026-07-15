@@ -13,6 +13,7 @@ from quarkConstraints.higgs_lfv import (
 from quarkConstraints.rs_higgs_yukawas import (
     RS_HIGGS_YUKAWA_MATCHING_ASSUMPTION_V1,
     RSHiggsYukawaCouplings,
+    _casagrande_higgs_B_profile,
     build_rs_higgs_yukawas,
 )
 from tests.constraints.primary.top_higgs_ew.higgs_lfv_phase6b_helpers import (
@@ -73,6 +74,43 @@ def test_builder_emits_declared_immutable_api_and_diagonal_v1_exact_zero():
         higgs.units = "GeV"
 
 
+def test_higgs_B_profile_matches_b1_convention_dictionary_for_uv_leptons():
+    from quarkConstraints.rs_ew_couplings import _casagrande_zbb_B_profile
+
+    c_uv = 0.68
+    f_uv = 0.04
+    produced = _casagrande_higgs_B_profile(c_uv, f_uv, name="B_l[uv]")
+    expected = (1.0 / (1.0 + 2.0 * c_uv)) * (
+        1.0 / (2.0 * f_uv * f_uv) - 1.0 + (2.0 * f_uv * f_uv) / (3.0 - 2.0 * c_uv)
+    )
+    raw_cghnp_with_repo_inputs = (1.0 / (1.0 - 2.0 * c_uv)) * (
+        1.0 / (f_uv * f_uv) - 1.0 + (f_uv * f_uv) / (3.0 + 2.0 * c_uv)
+    )
+
+    assert produced == pytest.approx(expected, rel=1.0e-14)
+    assert produced == pytest.approx(
+        _casagrande_zbb_B_profile(c_uv, f_uv, name="B_l[uv]"),
+        rel=1.0e-14,
+    )
+    assert produced > 0.0
+    assert raw_cghnp_with_repo_inputs < 0.0
+
+
+def test_uv_localized_diagonal_higgs_yukawas_are_suppressed():
+    higgs = diagonal_higgs_point().extras["rs_higgs_yukawas"]
+    sm_yukawa = higgs.charged_lepton_masses_gev / higgs.v_gev
+    produced = np.real(np.diag(higgs.higgs_yukawa_matrix))
+
+    assert np.all(higgs.c_L > 0.5)
+    assert np.all(higgs.c_E > 0.5)
+    assert np.all(higgs.profile_B_L > 0.0)
+    assert np.all(higgs.profile_B_E > 0.0)
+    assert np.all(np.real(np.diag(higgs.delta_L)) > 0.0)
+    assert np.all(np.real(np.diag(higgs.delta_E)) > 0.0)
+    assert produced[2] < sm_yukawa[2]
+    assert produced[2] / sm_yukawa[2] == pytest.approx(0.9969519444773504)
+
+
 @pytest.mark.parametrize("pid", ["T018", "T019", "T020"])
 def test_diagonal_v1_t018_t019_t020_evaluate_rigorous_zero(pid):
     result = fcc.get(pid).evaluate(
@@ -113,7 +151,7 @@ def test_lfv_live_toy_nonzero_matches_core_and_scales_as_inverse_lambda_ir_squar
 
     assert higgs_3tev.diagnostics["charged_lepton_yukawa_is_diagonal"] is False
     assert higgs_3tev.diagnostics["higgs_lfv_offdiag_exact_zero"] is False
-    assert abs(higgs_3tev.higgs_yukawa_matrix[1, 2]) > 1.0e-5
+    assert abs(higgs_3tev.higgs_yukawa_matrix[1, 2]) > 1.0e-10
     assert adapter_result.branching_fraction == pytest.approx(
         core_result.branching_fraction
     )

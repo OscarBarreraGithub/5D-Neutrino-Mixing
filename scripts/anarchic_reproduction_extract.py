@@ -55,9 +55,11 @@ from quarkConstraints.deltaf2 import (  # noqa: E402
     EPSILON_K_SM,
     DELTA_M_K,
     DEFAULT_DELTA_F2_INPUTS_V1,
+    delta_f2_epsilon_k_budget_policy,
 )
 
-BUDGET_CENTRAL = abs(EPSILON_K_EXP - EPSILON_K_SM)  # ~6.7e-5
+_EPSILON_K_POLICY = delta_f2_epsilon_k_budget_policy()
+BUDGET_CENTRAL = _EPSILON_K_POLICY.central_budget  # central diagnostic budget
 _BOUNDS = {i.key: i.bound for i in DEFAULT_DELTA_F2_INPUTS_V1}
 BOUND_EPS_K = _BOUNDS["epsilon_k"]
 BOUND_BD = _BOUNDS["b_d"]

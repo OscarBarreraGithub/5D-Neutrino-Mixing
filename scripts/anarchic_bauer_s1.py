@@ -24,10 +24,15 @@ Convention bridge (verified numerically)
 Repo uses c = M_5/k with c < 1/2 -> IR-localized and
     f_IR(c)^2 = (1/2 - c) / (1 - eps^(1-2c)).
 Bauer/Casagrande use F(c_paper) ~ sqrt(1 + 2 c_paper) with c_paper near -1/2.
-Numerically  f_IR(c_repo) = (1/sqrt2) * F_Bauer(c_paper = -c_repo)  -- the sqrt2
-is exactly Bauer's v/sqrt2 (v=246) vs the repo's v=174 convention, so the 4D mass
-v_repo * f_IR is physically identical.  We therefore work ENTIRELY in the repo
-convention: scan c_repo and use the repo's own f_IR + deltaf2 pipeline verbatim.
+Numerically  f_IR(c_repo) = (1/sqrt2) * F_Bauer(c_paper = -c_repo) exactly.
+Bauer's mass relation is m = 174 GeV * F_L * Y_Bauer * F_R, so in repo f_IR
+variables the faithful Lane-A bridge is
+    m = 2 * 174 GeV * f_L * Y_Bauer * f_R.
+Equivalently, Bauer's |Y| <= 3 prior maps to the repo effective 5D Yukawa
+Y_repo = 2 * Y_Bauer; using only one sqrt(2) would make this script an
+effective Y_max ~= 1.5 scan.  We therefore use the explicit 2*v mass prefactor
+for the FN inversion and the per-draw SVD, while the DeltaF=2 pipeline still
+receives the repo f_IR profiles.
 
   Bauer c_u3 prior ]-1/2, c_max]  <->  repo c_{Q3,u3} prior  [-c_max, 1/2).
   S1: c_max = 2   -> repo prior [-2, 0.5).
@@ -56,7 +61,10 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scipy.optimize import brentq
+try:
+    from scipy.optimize import brentq as _scipy_brentq
+except Exception:  # noqa: BLE001 -- scipy is optional for the Lane-A CLI helper
+    _scipy_brentq = None
 
 REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
@@ -64,37 +72,142 @@ if str(REPO) not in sys.path:
 
 from warpConfig.wavefuncs import f_IR  # noqa: E402
 from warpConfig.baseParams import MPL  # noqa: E402
-from scripts.run_rs_anarchy import (  # noqa: E402  -- reuse forward physics verbatim
-    DEFAULT_XI_KK, DEFAULT_K_GEV, DEFAULT_V_GEV,
-    _ordered_svd, _build_kk_gluon_couplings, _load_pdg_targets, jarlskog_invariant,
-)
-import quarkConstraints.deltaf2 as d  # noqa: E402
-from quarkConstraints.deltaf2 import (  # noqa: E402
-    compute_delta_f2_wilsons, evaluate_delta_f2_constraints,
-    evaluate_delta_mk_with_running,
-    _evolve_wilsons, compute_m12_np, _compute_m12_np,
-    F_BD, M_BD, M_B_QUARK, M_D_QUARK_BD, B_1_BD, B_4_BD, B_5_BD,
-    F_BS, M_BS, M_S_QUARK_BS, B_1_BS, B_4_BS, B_5_BS,
-    F_D, M_D0, M_C_QUARK, M_U_QUARK, B_1_D, B_4_D, B_5_D,
-)
+
+
+DEFAULT_XI_KK = 2.4487
+DEFAULT_K_GEV = MPL
+DEFAULT_V_GEV = 174.0
+
+_RUN_RS_ANARCHY_HELPERS = None
+_DELTAF2_HELPERS = None
+
+
+def _run_rs_anarchy_helpers():
+    """Load the heavy forward-physics helpers only when running the ensemble."""
+
+    global _RUN_RS_ANARCHY_HELPERS
+    if _RUN_RS_ANARCHY_HELPERS is None:
+        from scripts.run_rs_anarchy import (  # noqa: PLC0415
+            _build_kk_gluon_couplings,
+            _load_pdg_targets,
+            _ordered_svd,
+            jarlskog_invariant,
+        )
+
+        _RUN_RS_ANARCHY_HELPERS = (
+            _ordered_svd,
+            _build_kk_gluon_couplings,
+            _load_pdg_targets,
+            jarlskog_invariant,
+        )
+    return _RUN_RS_ANARCHY_HELPERS
+
+
+def _deltaf2_helpers():
+    """Load DeltaF=2 helpers lazily; bridge tests do not need the QCD stack."""
+
+    global _DELTAF2_HELPERS
+    if _DELTAF2_HELPERS is None:
+        from quarkConstraints.deltaf2 import (  # noqa: PLC0415
+            B_1_BD,
+            B_1_BS,
+            B_1_D,
+            B_4_BD,
+            B_4_BS,
+            B_4_D,
+            B_5_BD,
+            B_5_BS,
+            B_5_D,
+            F_BD,
+            F_BS,
+            F_D,
+            M_BD,
+            M_BS,
+            M_B_QUARK,
+            M_C_QUARK,
+            M_D0,
+            M_D_QUARK_BD,
+            M_S_QUARK_BS,
+            M_U_QUARK,
+            _compute_m12_np,
+            _evolve_wilsons,
+            compute_delta_f2_wilsons,
+            compute_m12_np,
+            evaluate_delta_f2_constraints,
+            evaluate_delta_mk_with_running,
+        )
+
+        _DELTAF2_HELPERS = {
+            "B_1_BD": B_1_BD,
+            "B_1_BS": B_1_BS,
+            "B_1_D": B_1_D,
+            "B_4_BD": B_4_BD,
+            "B_4_BS": B_4_BS,
+            "B_4_D": B_4_D,
+            "B_5_BD": B_5_BD,
+            "B_5_BS": B_5_BS,
+            "B_5_D": B_5_D,
+            "F_BD": F_BD,
+            "F_BS": F_BS,
+            "F_D": F_D,
+            "M_BD": M_BD,
+            "M_BS": M_BS,
+            "M_B_QUARK": M_B_QUARK,
+            "M_C_QUARK": M_C_QUARK,
+            "M_D0": M_D0,
+            "M_D_QUARK_BD": M_D_QUARK_BD,
+            "M_S_QUARK_BS": M_S_QUARK_BS,
+            "M_U_QUARK": M_U_QUARK,
+            "_compute_m12_np": _compute_m12_np,
+            "_evolve_wilsons": _evolve_wilsons,
+            "compute_delta_f2_wilsons": compute_delta_f2_wilsons,
+            "compute_m12_np": compute_m12_np,
+            "evaluate_delta_f2_constraints": evaluate_delta_f2_constraints,
+            "evaluate_delta_mk_with_running": evaluate_delta_mk_with_running,
+        }
+    return _DELTAF2_HELPERS
 
 
 def _m12_complex_all(couplings, M_KK, xi_KK, mu_had=2.0):
     """Complex M_12^NP (GeV) per system from RG-evolved Wilsons (reuses the
     SAME machinery as scripts/anarchic_complex_m12.py)."""
-    coeffs = compute_delta_f2_wilsons(couplings, M_KK=M_KK, xi_KK=xi_KK)
-    wbk = {c.input.key: _evolve_wilsons(c, mu_had=mu_had) for c in coeffs}
+    h = _deltaf2_helpers()
+    coeffs = h["compute_delta_f2_wilsons"](couplings, M_KK=M_KK, xi_KK=xi_KK)
+    wbk = {c.input.key: h["_evolve_wilsons"](c, mu_had=mu_had) for c in coeffs}
     return {
-        "K": _compute_m12_np(wbk["epsilon_k"]),
-        "Bd": compute_m12_np(wbk["b_d"], F_BD, M_BD, M_B_QUARK, M_D_QUARK_BD,
-                             B_1_BD, B_4_BD, B_5_BD),
-        "Bs": compute_m12_np(wbk["b_s"], F_BS, M_BS, M_B_QUARK, M_S_QUARK_BS,
-                             B_1_BS, B_4_BS, B_5_BS),
-        "D": compute_m12_np(wbk["d"], F_D, M_D0, M_C_QUARK, M_U_QUARK,
-                            B_1_D, B_4_D, B_5_D),
+        "K": h["_compute_m12_np"](wbk["epsilon_k"]),
+        "Bd": h["compute_m12_np"](
+            wbk["b_d"], h["F_BD"], h["M_BD"], h["M_B_QUARK"], h["M_D_QUARK_BD"],
+            h["B_1_BD"], h["B_4_BD"], h["B_5_BD"],
+        ),
+        "Bs": h["compute_m12_np"](
+            wbk["b_s"], h["F_BS"], h["M_BS"], h["M_B_QUARK"], h["M_S_QUARK_BS"],
+            h["B_1_BS"], h["B_4_BS"], h["B_5_BS"],
+        ),
+        "D": h["compute_m12_np"](
+            wbk["d"], h["F_D"], h["M_D0"], h["M_C_QUARK"], h["M_U_QUARK"],
+            h["B_1_D"], h["B_4_D"], h["B_5_D"],
+        ),
     }
 
-_EPS_BUDGET = abs(d.EPSILON_K_EXP - d.EPSILON_K_SM)
+
+def _epsilon_k_central_budget() -> float:
+    try:
+        from quarkConstraints.deltaf2 import (  # noqa: PLC0415
+            delta_f2_epsilon_k_budget_policy,
+        )
+
+        return float(delta_f2_epsilon_k_budget_policy().central_budget)
+    except Exception:  # noqa: BLE001 -- keep lightweight imports usable
+        return abs(2.228e-3 - 2.161e-3)
+
+
+_EPS_BUDGET = _epsilon_k_central_budget()
+
+# f_IR = F_Bauer/sqrt(2), so Bauer m = v F Y F is repo m = 2 v f Y f.
+BAUER_REPO_MASS_PREFAC_GEV = 2.0 * DEFAULT_V_GEV
+
+SCENARIO_SEED_STRIDE = 100_003
 
 
 # ---------------------------------------------------------------------------
@@ -110,7 +223,8 @@ SCENARIOS = {
     "S4": dict(y_max=12.0, c_max=2.0,  L=None, label="large (Y_max=12)"),
 }
 
-# Wolfenstein A, lambda (PDG 2024) for the FN c-hierarchy.
+# Fallback Wolfenstein A, lambda for the FN c-hierarchy.  The live FN path
+# derives A from the repo CKM targets when they are present.
 WOLF_LAMBDA = 0.2250
 WOLF_A = 0.826
 
@@ -147,11 +261,50 @@ def _invert_f_IR(f_target: float, epsilon: float, c_lo: float, c_hi: float) -> f
     if f_target <= f_at_hi:
         return c_hi
     g = lambda c: float(f_IR(np.array([c]), epsilon)[0]) - f_target
-    return float(brentq(g, c_lo, c_hi, xtol=1e-10, rtol=1e-12))
+    return float(_brentq(g, c_lo, c_hi, xtol=1e-10, rtol=1e-12))
+
+
+def _brentq(func, a: float, b: float, *, xtol: float, rtol: float) -> float:
+    if _scipy_brentq is not None:
+        return float(_scipy_brentq(func, a, b, xtol=xtol, rtol=rtol))
+
+    fa = float(func(a))
+    fb = float(func(b))
+    if fa == 0.0:
+        return float(a)
+    if fb == 0.0:
+        return float(b)
+    if fa * fb > 0.0:
+        raise ValueError("root is not bracketed")
+    lo, hi = float(a), float(b)
+    flo = fa
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        fmid = float(func(mid))
+        if fmid == 0.0 or abs(hi - lo) <= max(xtol, rtol * max(1.0, abs(mid))):
+            return float(mid)
+        if flo * fmid <= 0.0:
+            hi = mid
+        else:
+            lo, flo = mid, fmid
+    return float(0.5 * (lo + hi))
 
 
 def _minor11(Y):  # |(M_q)_11| = |minor of the (1,1) entry| = |Y_22 Y_33 - Y_23 Y_32|
     return abs(Y[1, 1] * Y[2, 2] - Y[1, 2] * Y[2, 1])
+
+
+def _repo_wolfenstein_lam_A(targets) -> tuple[float, float]:
+    """Return the FN Wolfenstein (lambda, A) from the repo CKM targets."""
+
+    lam = float(targets.get("abs_V_us", WOLF_LAMBDA))
+    if not math.isfinite(lam) or lam <= 0.0:
+        lam = WOLF_LAMBDA
+    v_cb = float(targets.get("abs_V_cb", WOLF_A * lam * lam))
+    A = v_cb / (lam * lam)
+    if not math.isfinite(A) or A <= 0.0:
+        A = WOLF_A
+    return lam, A
 
 
 def _fn_c_values(c_u3, epsilon, targets, *, Y_u, Y_d, common_cd,
@@ -168,15 +321,15 @@ def _fn_c_values(c_u3, epsilon, targets, *, Y_u, Y_d, common_cd,
     does (Table 1 widths) -- this Yukawa-driven c-scatter, NOT an ad-hoc jitter,
     is what widens the published eps_K cloud to ~6 decades.
 
-    FN target f-factors (rearranging eq. I:96, repo v convention, masses use v):
+    FN target f-factors (rearranging eq. I:96, Bauer->repo bridge 2*v):
         f_u3 = f_IR(c_u3)                                  (scanned, RH top)
-        f_Q3 = m_t / (v |Y_u33| f_u3)                      -> f_Q3 (-> c_Q3)
-        left-doublet ratios from CKM (I:106): f_Q1:f_Q2:f_Q3 = l^3 : A l^2 : 1
-        f_u2 = m_c / (v (|M_u11|/|Y_u33|) f_Q2),  f_u1 = m_u/(v(detYu/|M_u11|)f_Q1)
-        f_d3 = m_b/(v|Y_d33|f_Q3),  f_d2, f_d1 analogously
+        f_Q3 = m_t / (2 v |Y_u33| f_u3)                    -> f_Q3 (-> c_Q3)
+        left-doublet ratios from CKM (I:106): f_Q1:f_Q2:f_Q3 = A l^3 : A l^2 : 1
+        f_u2 = m_c / (2 v (|M_u11|/|Y_u33|) f_Q2),
+        f_u1 = m_u / (2 v (detYu/|M_u11|) f_Q1), and analogously for down.
     """
-    lam, A = WOLF_LAMBDA, WOLF_A
-    v = DEFAULT_V_GEV
+    lam, A = _repo_wolfenstein_lam_A(targets)
+    v = BAUER_REPO_MASS_PREFAC_GEV
     mu = targets["up_masses_GeV"]; md = targets["down_masses_GeV"]
     m_u, m_c, m_t = (float(x) for x in mu)
     m_d, m_s, m_b = (float(x) for x in md)
@@ -191,7 +344,7 @@ def _fn_c_values(c_u3, epsilon, targets, *, Y_u, Y_d, common_cd,
     fu3 = float(f_IR(np.array([c_u3]), epsilon)[0])
     fQ3 = m_t / (v * Yu33 * fu3 + eps_)
     # Left doublet hierarchy from CKM (I:106): independent of the RH sector.
-    fQ = np.array([fQ3 * lam**3, fQ3 * (A * lam**2), fQ3])
+    fQ = np.array([fQ3 * (A * lam**3), fQ3 * (A * lam**2), fQ3])
 
     # Remaining RH f's solved from eq. I:96 second/first relations:
     fu2 = m_c / (v * (minYu / max(Yu33, eps_)) * fQ[1] + eps_)
@@ -222,9 +375,13 @@ def _fn_c_values(c_u3, epsilon, targets, *, Y_u, Y_d, common_cd,
 def _eval_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
                mass_factor, ckm_factor, j_factor, emit_m12=False, c_Q=None,
                c_u=None, c_d=None):
+    _ordered_svd, _build_kk_gluon_couplings, _, jarlskog_invariant = (
+        _run_rs_anarchy_helpers()
+    )
+    h = _deltaf2_helpers()
     D_Q, D_u, D_d = np.diag(f_Q), np.diag(f_u), np.diag(f_d)
-    M_u = DEFAULT_V_GEV * D_Q @ Y_u @ D_u
-    M_d = DEFAULT_V_GEV * D_Q @ Y_d @ D_d
+    M_u = BAUER_REPO_MASS_PREFAC_GEV * D_Q @ Y_u @ D_u
+    M_d = BAUER_REPO_MASS_PREFAC_GEV * D_Q @ Y_d @ D_d
     U_L_u, m_up, U_R_u = _ordered_svd(M_u)
     U_L_d, m_dn, U_R_d = _ordered_svd(M_d)
     ckm = U_L_u.conj().T @ U_L_d
@@ -253,23 +410,36 @@ def _eval_draw(Y_u, Y_d, f_Q, f_u, f_d, M_KK_GeV, xi_KK, targets,
         M_KK=M_KK_GeV, xi_KK=xi_KK, f_Q=f_Q, f_u=f_u, f_d=f_d,
         U_L_u=U_L_u, U_L_d=U_L_d, U_R_u=U_R_u, U_R_d=U_R_d,
     )
-    df2 = evaluate_delta_f2_constraints(couplings, M_KK=M_KK_GeV, xi_KK=xi_KK)
+    df2 = h["evaluate_delta_f2_constraints"](
+        couplings, M_KK=M_KK_GeV, xi_KK=xi_KK
+    )
     bs = df2.by_system
-    ratio_eps_K = float(bs["K"].ratio_to_bound)
-    # |eps_K^NP| = ratio * budget (linear in budget) -> realized |eps_K^tot|.
-    eps_K_np = ratio_eps_K * _EPS_BUDGET
+    eps_k_summary = bs["K"]
+    ratio_eps_K = float(eps_k_summary.ratio_to_bound)
+    eps_K_np = float(abs(eps_k_summary.effective_amplitude))
+    eps_K_np_signed = float(eps_k_summary.coherent_amplitude)
     # Delta m_K from the unevolved kaon Wilsons run to mu_had (same as run_rs_anarchy).
     try:
-        unev = compute_delta_f2_wilsons(couplings, M_KK=M_KK_GeV, xi_KK=xi_KK)
+        unev = h["compute_delta_f2_wilsons"](couplings, M_KK=M_KK_GeV, xi_KK=xi_KK)
         w_k = next((w for w in unev if w.input.key == "epsilon_k"), None)
-        ratio_dm_K = (float(evaluate_delta_mk_with_running(w_k, mu_had=2.0).ratio_to_exp)
-                      if w_k is not None else float("nan"))
+        ratio_dm_K = (
+            float(h["evaluate_delta_mk_with_running"](w_k, mu_had=2.0).ratio_to_exp)
+            if w_k is not None
+            else float("nan")
+        )
     except Exception:  # noqa: BLE001
         ratio_dm_K = float("nan")
     out = dict(
         passes_pdg=passes_pdg,
         ratio_eps_K=ratio_eps_K,
         eps_K_np=eps_K_np,
+        eps_K_np_signed=eps_K_np_signed,
+        eps_K_np_budget=float(
+            eps_k_summary.diagnostics.get(
+                "epsilon_k_selected_signed_budget",
+                eps_K_np / ratio_eps_K if ratio_eps_K > 0.0 else math.nan,
+            )
+        ),
         ratio_dm_K=ratio_dm_K,
         ratio_B_d=float(bs["B_d"].ratio_to_bound),
         ratio_B_s=float(bs["B_s"].ratio_to_bound),
@@ -352,6 +522,7 @@ _WORKER_KW = None
 
 def _worker_init(kw):
     global _WORKER_TARGETS, _WORKER_KW
+    _, _, _load_pdg_targets, _ = _run_rs_anarchy_helpers()
     _WORKER_TARGETS = _load_pdg_targets()
     _WORKER_KW = kw
 
@@ -365,6 +536,19 @@ def _worker_run(job):
         j_factor=_WORKER_KW["j_factor"], c_jitter=_WORKER_KW["c_jitter"],
         emit_m12=_WORKER_KW["emit_m12"],
     )
+
+
+def _scenario_seed_offset(scenario: str) -> int:
+    """Deterministic scenario offset; Python's salted hash is not reproducible."""
+
+    try:
+        return SCENARIO_SEED_STRIDE * sorted(SCENARIOS).index(scenario)
+    except ValueError as exc:
+        raise ValueError(f"unknown Bauer scenario {scenario!r}") from exc
+
+
+def _job_seed(base_seed: int, tile_index: int, scenario: str) -> int:
+    return int(base_seed) + 1009 * int(tile_index) + _scenario_seed_offset(scenario)
 
 
 def main(argv=None):
@@ -405,7 +589,7 @@ def main(argv=None):
         print(f"[bauer] scenario {scenario} ({sc['label']}): Y_max={sc['y_max']} "
               f"c_max={sc['c_max']} L={'geom' if sc['L'] is None else sc['L']}")
         for idx, t in enumerate(mkk_tev):
-            seed = args.base_seed + 1009 * idx + 100003 * (hash(scenario) % 7919)
+            seed = _job_seed(args.base_seed, idx, scenario)
             jobs.append((scenario, t, seed))
 
     kw = dict(per_tile=args.per_tile, mass_factor=args.mass_factor,

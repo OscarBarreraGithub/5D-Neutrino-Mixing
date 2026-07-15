@@ -78,19 +78,10 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from warpConfig.wavefuncs import f_IR  # noqa: E402
-from scripts.run_rs_anarchy import (  # noqa: E402
-    DEFAULT_XI_KK, DEFAULT_K_GEV, DEFAULT_V_GEV,
-    _ordered_svd, _build_kk_gluon_couplings, _load_pdg_targets,
-    jarlskog_invariant,
-)
 from scripts.anarchic_bauer_s1 import (  # noqa: E402  -- reuse the EXACT draw machinery
-    SCENARIOS, _draw_bauer_matrix, _fn_c_values, _EPS_BUDGET,
+    BAUER_REPO_MASS_PREFAC_GEV, DEFAULT_K_GEV, DEFAULT_XI_KK, SCENARIOS,
+    _deltaf2_helpers, _draw_bauer_matrix, _fn_c_values, _run_rs_anarchy_helpers,
 )
-import quarkConstraints.deltaf2 as _d2  # noqa: E402
-from quarkConstraints.deltaf2 import evaluate_delta_f2_constraints  # noqa: E402
-from quarkConstraints.rs_ew_spectrum import RSEWSpectrum  # noqa: E402
-from quarkConstraints.rs_ew_couplings import build_rs_ew_couplings  # noqa: E402
-
 # RS-EW build knobs -- MUST match scripts/run_full_catalog_scan.py defaults so
 # the Z->bb shift is the same object the fitted-point plots use.
 K_GEV = 1.2209e19
@@ -158,6 +149,7 @@ def _worker_init():
         zpole_default_sm_inputs, zpole_inputs_with_bottom_radiator,
         zpole_sm_couplings,
     )
+    _, _, _load_pdg_targets, _ = _run_rs_anarchy_helpers()
     anc = _load_t010_anchor("T010")
     sm_inputs = zpole_inputs_with_bottom_radiator(
         anc.sm_fit_values[_RB_OBSERVABLE].value, zpole_default_sm_inputs()
@@ -173,9 +165,15 @@ def _worker_init():
 
 def _run_tile(job):
     """One (scenario, M_KK_TeV, seed) tile -> list of row dicts."""
+    from quarkConstraints.rs_ew_couplings import build_rs_ew_couplings
+    from quarkConstraints.rs_ew_spectrum import RSEWSpectrum
     from flavor_catalog_constraints.physics_adapters.zpole import (
         zpole_shifted_couplings, zpole_evaluate_quark,
     )
+    _ordered_svd, _build_kk_gluon_couplings, _, jarlskog_invariant = (
+        _run_rs_anarchy_helpers()
+    )
+    deltaf2 = _deltaf2_helpers()
     scenario, M_KK_TeV, seed, n_draws = job
     sc = SCENARIOS[scenario]
     y_max = sc["y_max"]
@@ -211,8 +209,8 @@ def _run_tile(job):
             f_u = f_IR(c_u, epsilon)
             f_d = f_IR(c_d, epsilon)
             D_Q, D_u, D_d = np.diag(f_Q), np.diag(f_u), np.diag(f_d)
-            M_u = DEFAULT_V_GEV * D_Q @ Y_u @ D_u
-            M_d = DEFAULT_V_GEV * D_Q @ Y_d @ D_d
+            M_u = BAUER_REPO_MASS_PREFAC_GEV * D_Q @ Y_u @ D_u
+            M_d = BAUER_REPO_MASS_PREFAC_GEV * D_Q @ Y_d @ D_d
             U_L_u, m_up, U_R_u = _ordered_svd(M_u)
             U_L_d, m_dn, U_R_d = _ordered_svd(M_d)
 
@@ -248,9 +246,12 @@ def _run_tile(job):
                 M_KK=M_KK_GeV, xi_KK=xi_KK, f_Q=f_Q, f_u=f_u, f_d=f_d,
                 U_L_u=U_L_u, U_L_d=U_L_d, U_R_u=U_R_u, U_R_d=U_R_d,
             )
-            df2 = evaluate_delta_f2_constraints(couplings, M_KK=M_KK_GeV, xi_KK=xi_KK)
-            ratio_eps_K = float(df2.by_system["K"].ratio_to_bound)
-            eps_K_np = ratio_eps_K * _EPS_BUDGET
+            df2 = deltaf2["evaluate_delta_f2_constraints"](
+                couplings, M_KK=M_KK_GeV, xi_KK=xi_KK
+            )
+            eps_k_summary = df2.by_system["K"]
+            ratio_eps_K = float(eps_k_summary.ratio_to_bound)
+            eps_K_np = float(abs(eps_k_summary.effective_amplitude))
 
             # --- Z->bb: TOTAL mass-basis [2,2] shift (gauge-KK + fermion-KK) ---
             bs = _DuckBulkState(c_Q, c_u, c_d, f_Q, f_u, f_d, Y_d)

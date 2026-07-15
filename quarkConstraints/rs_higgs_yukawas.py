@@ -15,6 +15,7 @@ from typing import Any, Mapping
 
 import numpy as np
 
+from quarkConstraints.casagrande_profiles import casagrande_cghnp_B_profile
 from yukawa.constants import LEPTON_MASSES
 
 
@@ -290,18 +291,15 @@ def _casagrande_higgs_B_profile_triplet(
 
 
 def _casagrande_higgs_B_profile(c: float, F: float, *, name: str) -> float:
-    if not math.isfinite(c):
-        raise ValueError(f"{name} c must be finite")
-    if not math.isfinite(F) or F <= 0.0:
-        raise ValueError(f"{name} F must be positive and finite")
-    denom_left = 1.0 - 2.0 * c
-    denom_right = 3.0 + 2.0 * c
-    if denom_left == 0.0 or denom_right == 0.0:
-        raise ValueError(f"{name} Casagrande B(c) denominator is singular")
-    value = (1.0 / denom_left) * (1.0 / (F * F) - 1.0 + (F * F) / denom_right)
-    if not math.isfinite(value):
-        raise ValueError(f"{name} Casagrande B(c) is non-finite")
-    return float(value)
+    """CGHNP Higgs-Yukawa fermion-KK bracket in repo variables.
+
+    This is the same diagonal CGHNP bracket used for the audited B1 Zbb fix:
+    ``c_CGHNP = -c_repo`` and ``F_CGHNP^2 = 2 f_IR,repo^2``.  Keeping the
+    Higgs and Zbb paths on the same helper prevents the old raw-CGHNP
+    ``1/(1 - 2c)`` form from reappearing with repo-convention profiles.
+    """
+
+    return casagrande_cghnp_B_profile(c, F, name=name)
 
 
 def _required_attr(source: Any, name: str) -> Any:
