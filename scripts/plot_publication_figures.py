@@ -6,8 +6,8 @@ Produces two figures:
 1. **System-by-system exclusion boundaries** in the (r, M_KK) plane with
    individual contours for each meson system and the combined exclusion.
 
-2. **M_KK lower bound: 2007 vs modern** showing how constraints have
-   tightened since the original Fitzpatrick-Perez-Randall paper.
+2. **SUPERSEDED/CORRECTED 2007-vs-modern notice** replacing the former
+   post-hoc rescaled lower-bound comparison.
 
 Usage
 -----
@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import textwrap
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -61,15 +62,17 @@ SYSTEM_CONTOUR_STYLES: dict[str, dict[str, Any]] = {
     "D0": {"color": "#1B7837", "linestyle": (0, (3, 1, 1, 1, 1, 1)), "linewidth": 2},
 }
 
-# 2007 vs modern bound rescaling: ratio = bound_modern / bound_2007
-# If < 1, modern bound is tighter.
-BOUND_RATIOS: dict[str, float] = {
-    "epsilon_K": 0.70,
-    "K": 0.70,
-    "B_d": 0.67,
-    "B_s": 0.37,
-    "D0": 0.106,
-}
+SUPERSEDED_2007_COMPARISON_TITLE = (
+    "SUPERSEDED/CORRECTED: 2007-vs-modern all-system rescale"
+)
+
+SUPERSEDED_2007_COMPARISON_NOTICE = (
+    "The former 2007-vs-modern lower-bound comparison is retracted. Modern scan "
+    "rows store ratios against hadronic |M12| budgets in GeV for B_d, B_s, and "
+    "D0. The old rescale used legacy dimensionless operator-weight bounds for "
+    "those systems, so it multiplied incompatible quantities. The prior 9.4x "
+    "D0 tightening claim and the shaded tightening band were units artifacts."
+)
 
 DEFAULT_PUBLICATION_XI_KK = GAUGE_KK_ROOT_NN
 
@@ -530,7 +533,8 @@ def _compute_min_mkk_by_r(
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """For each unique r value, find the minimum M_KK at which a point passes.
 
-    If *use_2007* is True, rescale ratios to 2007-era bounds before checking.
+    The former ``use_2007=True`` mode is disabled by C-7: it mixed hadronic
+    |M12|/budget ratios with legacy dimensionless operator-weight bounds.
 
     Returns
     -------
@@ -541,6 +545,11 @@ def _compute_min_mkk_by_r(
     r = data["r"]
     mkk = data["M_KK"]
     ratios_list = data["ratios"]
+    if use_2007:
+        raise ValueError(
+            "2007 rescaling is superseded: no same-convention B_d/B_s/D0 "
+            "hadronic 2007 budgets are available in the scan rows."
+        )
 
     # Group by r
     by_r: dict[float, list[tuple[float, dict[str, float]]]] = defaultdict(list)
@@ -559,13 +568,10 @@ def _compute_min_mkk_by_r(
             if not ratios:
                 continue
 
-            if use_2007:
-                rescaled = {s: ratios.get(s, 0.0) * BOUND_RATIOS.get(s, 1.0) for s in SYSTEM_IDS}
-            else:
-                rescaled = {s: ratios.get(s, 0.0) for s in SYSTEM_IDS}
+            modern_ratios = {s: ratios.get(s, 0.0) for s in SYSTEM_IDS}
 
             # Aggregate over overall_scale: accept if max ratio <= 1
-            max_r = max(rescaled.values())
+            max_r = max(modern_ratios.values())
             if max_r <= 1.0 and mkk_val < best_mkk:
                 best_mkk = mkk_val
                 found = True
@@ -578,97 +584,36 @@ def _compute_min_mkk_by_r(
 
 
 def build_mkk_bound_comparison_figure(data: dict[str, Any]) -> plt.Figure:
-    """Build fig 2 (m_gkk lower bound, 2007 vs modern) and return the Figure."""
-    r_modern, mkk_modern, has_modern = _compute_min_mkk_by_r(data, use_2007=False)
-    r_2007, mkk_2007, has_2007 = _compute_min_mkk_by_r(data, use_2007=True)
-
-    # Both arrays share the same r grid by construction
-    assert np.array_equal(r_modern, r_2007)
-    r_vals = r_modern
-
-    # Convert GeV -> TeV
-    mkk_modern_tev = mkk_modern / 1e3
-    mkk_2007_tev = mkk_2007 / 1e3
-
+    """Build fig 2 as a superseded/corrected banner."""
     fig, ax = plt.subplots(figsize=(8, 5))
-
-    # Plot modern bound
-    m_mask = has_modern
-    ax.plot(
-        r_vals[m_mask], mkk_modern_tev[m_mask],
-        marker="s", ms=5, lw=2.2,
-        color="#2166AC", markerfacecolor="#2166AC",
-        markeredgecolor="#1A4E7A", markeredgewidth=0.8,
-        label=r"Modern (2024+) bound",
-        zorder=4,
+    ax.axis("off")
+    ax.text(
+        0.5,
+        0.72,
+        SUPERSEDED_2007_COMPARISON_TITLE,
+        ha="center",
+        va="center",
+        fontsize=14,
+        fontweight="bold",
     )
-
-    # Plot 2007 bound
-    a_mask = has_2007
-    ax.plot(
-        r_vals[a_mask], mkk_2007_tev[a_mask],
-        marker="o", ms=5, lw=2.2,
-        color="#C0392B", markerfacecolor="#C0392B",
-        markeredgecolor="#922B21", markeredgewidth=0.8,
-        linestyle="dashed",
-        label=r"2007 (FPR) bound",
-        zorder=4,
+    ax.text(
+        0.5,
+        0.45,
+        textwrap.fill(SUPERSEDED_2007_COMPARISON_NOTICE, width=82),
+        ha="center",
+        va="center",
+        fontsize=10.5,
+        linespacing=1.35,
     )
-
-    # Shade the region between the two curves where both have data
-    both_mask = has_modern & has_2007
-    if np.any(both_mask):
-        r_both = r_vals[both_mask]
-        mkk_mod_both = mkk_modern_tev[both_mask]
-        mkk_07_both = mkk_2007_tev[both_mask]
-        ax.fill_between(
-            r_both,
-            mkk_07_both,
-            mkk_mod_both,
-            alpha=0.25,
-            color="#9B59B6",
-            label="Constraint tightening since 2007",
-            zorder=2,
-        )
-
-    # Mark fully excluded r values (no passing point at any M_KK) with arrows
-    excluded_modern = ~has_modern
-    if np.any(excluded_modern):
-        y_top = 20.0  # TeV -- mark as > 20 TeV
-        ax.scatter(
-            r_vals[excluded_modern],
-            np.full(np.sum(excluded_modern), y_top),
-            marker="^", s=60, c="#2166AC", edgecolors="#1A4E7A",
-            linewidths=0.8, zorder=5,
-        )
-
-    excluded_2007 = ~has_2007
-    if np.any(excluded_2007):
-        y_top = 20.0
-        ax.scatter(
-            r_vals[excluded_2007],
-            np.full(np.sum(excluded_2007), y_top),
-            marker="^", s=60, c="#C0392B", edgecolors="#922B21",
-            linewidths=0.8, zorder=5,
-        )
-
-    # (LHC direct search line removed for cleaner presentation)
-
-    ax.set_xscale("log")
-    ax.set_xlabel(r"$r$", fontsize=14)
-    ax.set_ylabel(r"Minimum $m_{g^{(1)}}$ [TeV]", fontsize=14)
-
-    ax.legend(
-        loc="best",
-        framealpha=0.92,
-        edgecolor="0.7",
+    ax.text(
+        0.5,
+        0.18,
+        "This figure intentionally contains no 2007-vs-modern lower-bound curve.",
+        ha="center",
+        va="center",
         fontsize=10,
+        style="italic",
     )
-    ax.grid(True, which="both", alpha=0.2, linewidth=0.5)
-
-    # Minor ticks
-    ax.minorticks_on()
-
     fig.tight_layout()
     return fig
 
@@ -734,7 +679,7 @@ def main() -> int:
         print(f"  Saved: {p}")
 
     # --- Figure 2 ---
-    print("Plotting Figure 2: M_KK lower bound -- 2007 vs modern ...")
+    print("Writing Figure 2 superseded/corrected 2007-vs-modern notice ...")
     saved_2 = _plot_mkk_bound_comparison(data, output_dir)
     for p in saved_2:
         print(f"  Saved: {p}")

@@ -53,7 +53,7 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| C-7 | CMP | CRIT | Rescales scan ratios by bounds scan never used (~1e6 units) | `compare_2007_vs_modern.py` | PENDING |
+| C-7 | CMP | CRIT | Rescales scan ratios by bounds scan never used (~1e6 units) | `compare_2007_vs_modern.py` | VERIFIED (invalid all-system comparison retracted; superseded/corrected banners; no dangling refs) |
 
 ## Priority 5 — everything else (§7)
 
@@ -160,3 +160,12 @@ Enumerated and dispositioned in [`MINOR_FINDINGS_LEDGER.md`](MINOR_FINDINGS_LEDG
 - Claude audit: **APPROVE** — M-9 confirmed by auditor's own Dirac trace (ratio exactly 2), M-31 bit-exact
   halves, M-32 transversity structure correct (SM proxy 6.87e-7 = ~73% PDG, acceptable), M-33 dimensionless,
   B025 unaffected. 93 tests green.
+
+### Cycle 4 — C-7 compare_2007_vs_modern retraction — VERIFIED (commit pending)
+- Codex research+fix: chose option (b) RETRACT. Modern B/D ratios are hadronic |M12|/GeV budgets; the only
+  legacy "2007" B/D numbers are dimensionless operator-weights (~1e6 apart) so a same-convention all-system
+  comparison is NOT reconstructable. Removed RESCALE/ratios_2007/accepted_2007, added SUPERSEDED/CORRECTED
+  banners, guarded plot_publication_figures use_2007=True to raise, removed publication BOUND_RATIOS.
+  9.4x D0 "tightening" retracted as a units artifact.
+- Claude audit (direct): retraction complete, no dangling refs to removed symbols anywhere, banners honest,
+  guard raises, both scripts compile. VERIFIED.
