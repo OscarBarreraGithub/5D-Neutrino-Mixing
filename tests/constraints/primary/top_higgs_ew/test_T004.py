@@ -214,7 +214,7 @@ def test_pure_np_limit_and_core_width_cross_check():
         inputs=constraint.sm_inputs,
     )
 
-    assert core.branching_fraction == pytest.approx(6.068421034828811e-6)
+    assert core.branching_fraction == pytest.approx(3.0342105174144055e-6)
     assert result.predicted == pytest.approx(core.branching_fraction)
     assert result.ratio == pytest.approx(
         core.branching_fraction / constraint.anchor.budget

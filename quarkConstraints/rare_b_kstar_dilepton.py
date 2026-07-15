@@ -281,17 +281,17 @@ def b_to_kstar_form_factors(
     }
 
 
-def _kstar_helicity_weight(
+def _kstar_helicity_components(
     q2_gev2: float,
     *,
     mode: RareBToKStarFormFactorInputs,
-) -> float:
+) -> tuple[float, float, float]:
     q2 = float(q2_gev2)
     if q2 <= 0.0 or q2 >= mode.q2_max_gev2:
-        return 0.0
+        return (0.0, 0.0, 0.0)
     lam = _kallen(mode.parent_mass_gev**2, mode.daughter_mass_gev**2, q2)
     if lam <= 0.0:
-        return 0.0
+        return (0.0, 0.0, 0.0)
     ff = b_to_kstar_form_factors(q2, mode)
     sqrt_lam = math.sqrt(lam)
     m_b = mode.parent_mass_gev
@@ -302,10 +302,23 @@ def _kstar_helicity_weight(
         (m_b * m_b - m_v * m_v - q2) * (m_b + m_v) * ff["A1"]
         - lam * ff["A2"] / (m_b + m_v)
     ) / (2.0 * m_v * math.sqrt(q2))
-    value = h_perp * h_perp + h_parallel * h_parallel + h_long * h_long
-    if not math.isfinite(value):
-        raise ValueError("B -> K* helicity weight must be finite")
-    return float(max(0.0, value))
+    values = (h_perp * h_perp, h_parallel * h_parallel, h_long * h_long)
+    if not all(math.isfinite(value) for value in values):
+        raise ValueError("B -> K* helicity weights must be finite")
+    return tuple(float(max(0.0, value)) for value in values)
+
+
+def _kstar_helicity_weight(
+    q2_gev2: float,
+    *,
+    mode: RareBToKStarFormFactorInputs,
+) -> float:
+    """Return the corrected SM-like transversity weight for diagnostics."""
+
+    q2 = float(q2_gev2)
+    h_perp2, h_parallel2, h_long2 = _kstar_helicity_components(q2, mode=mode)
+    # Report 17/M-32: N^2 carries q^2 and transverse A_perp,A_parallel have sqrt(2).
+    return float(q2 * (2.0 * h_perp2 + 2.0 * h_parallel2 + h_long2))
 
 
 def _b_to_kstar_q2_bounds(
@@ -331,8 +344,10 @@ def _b_to_kstar_differential_branching_fraction(
     *,
     mode: RareBToKStarFormFactorInputs,
     inputs: RareBToKStarDileptonInputs,
-    c9_total: complex,
-    c10_total: complex,
+    c9_plus_total: complex,
+    c10_plus_total: complex,
+    c9_minus_total: complex,
+    c10_minus_total: complex,
     lambda_t: complex,
 ) -> float:
     sd = inputs.short_distance_inputs
@@ -348,7 +363,7 @@ def _b_to_kstar_differential_branching_fraction(
         return 0.0
     beta = math.sqrt(beta2)
     lepton_mass_factor = beta * (1.0 + 2.0 * sd.muon_mass_gev**2 / q2)
-    helicity_weight = _kstar_helicity_weight(q2, mode=mode)
+    h_perp2, h_parallel2, h_long2 = _kstar_helicity_components(q2, mode=mode)
     tau = _tau_ps_to_gev_inverse(mode.lifetime_ps, sd.hbar_gev_s)
     prefactor = (
         tau
@@ -357,13 +372,18 @@ def _b_to_kstar_differential_branching_fraction(
         * abs(lambda_t) ** 2
         / (3072.0 * math.pi**5 * mode.parent_mass_gev**3)
     )
-    amplitude_power = abs(complex(c9_total)) ** 2 + abs(complex(c10_total)) ** 2
+    plus_power = abs(complex(c9_plus_total)) ** 2 + abs(complex(c10_plus_total)) ** 2
+    minus_power = abs(complex(c9_minus_total)) ** 2 + abs(complex(c10_minus_total)) ** 2
+    # Report 17/M-32: A_perp uses C+C', while A_parallel and A_0 use C-C'.
+    transversity_power = q2 * (
+        2.0 * h_perp2 * plus_power
+        + (2.0 * h_parallel2 + h_long2) * minus_power
+    )
     return float(
         prefactor
         * math.sqrt(lam)
         * lepton_mass_factor
-        * helicity_weight
-        * amplitude_power
+        * transversity_power
     )
 
 
@@ -373,8 +393,10 @@ def _integrated_b_to_kstar_branching_fraction(
     inputs: RareBToKStarDileptonInputs,
     q2_min_gev2: float,
     q2_max_gev2: float,
-    c9_total: complex,
-    c10_total: complex,
+    c9_plus_total: complex,
+    c10_plus_total: complex,
+    c9_minus_total: complex,
+    c10_minus_total: complex,
     lambda_t: complex,
 ) -> float:
     return _simpson_integral(
@@ -382,8 +404,10 @@ def _integrated_b_to_kstar_branching_fraction(
             q2,
             mode=mode,
             inputs=inputs,
-            c9_total=c9_total,
-            c10_total=c10_total,
+            c9_plus_total=c9_plus_total,
+            c10_plus_total=c10_plus_total,
+            c9_minus_total=c9_minus_total,
+            c10_minus_total=c10_minus_total,
             lambda_t=lambda_t,
         ),
         q2_min_gev2,
@@ -450,10 +474,14 @@ def evaluate_b_to_kstar_mumu(
         c10_np = wilsons.c10_np
         c10p_np = wilsons.c10p_np
 
-    c9_vector_np = complex(c9_np + c9p_np)
-    c10_axial_np = complex(c10_np + c10p_np)
-    c9_total = complex(p.c9_sm + c9_vector_np)
-    c10_total = complex(p.short_distance_inputs.c10_sm + c10_axial_np)
+    c9_plus_np = complex(c9_np + c9p_np)
+    c10_plus_np = complex(c10_np + c10p_np)
+    c9_minus_np = complex(c9_np - c9p_np)
+    c10_minus_np = complex(c10_np - c10p_np)
+    c9_plus_total = complex(p.c9_sm + c9_plus_np)
+    c10_plus_total = complex(p.short_distance_inputs.c10_sm + c10_plus_np)
+    c9_minus_total = complex(p.c9_sm + c9_minus_np)
+    c10_minus_total = complex(p.short_distance_inputs.c10_sm + c10_minus_np)
     c9_sm_total = complex(p.c9_sm)
     c10_sm_total = complex(p.short_distance_inputs.c10_sm)
 
@@ -462,8 +490,10 @@ def evaluate_b_to_kstar_mumu(
         inputs=p,
         q2_min_gev2=q2_min,
         q2_max_gev2=q2_max,
-        c9_total=c9_total,
-        c10_total=c10_total,
+        c9_plus_total=c9_plus_total,
+        c10_plus_total=c10_plus_total,
+        c9_minus_total=c9_minus_total,
+        c10_minus_total=c10_minus_total,
         lambda_t=factors.lambda_t,
     )
     sm_br = _integrated_b_to_kstar_branching_fraction(
@@ -471,8 +501,10 @@ def evaluate_b_to_kstar_mumu(
         inputs=p,
         q2_min_gev2=q2_min,
         q2_max_gev2=q2_max,
-        c9_total=c9_sm_total,
-        c10_total=c10_sm_total,
+        c9_plus_total=c9_sm_total,
+        c10_plus_total=c10_sm_total,
+        c9_minus_total=c9_sm_total,
+        c10_minus_total=c10_sm_total,
         lambda_t=factors.lambda_t,
     )
     if sm_br <= 0.0 or not math.isfinite(sm_br):
@@ -486,10 +518,18 @@ def evaluate_b_to_kstar_mumu(
         "lambda_t": complex(factors.lambda_t),
         "c9_sm": float(p.c9_sm),
         "c10_sm": float(p.short_distance_inputs.c10_sm),
-        "c9_total": complex(c9_total),
-        "c10_total": complex(c10_total),
-        "c9_vector_np": complex(c9_vector_np),
-        "c10_axial_np": complex(c10_axial_np),
+        "c9_total": complex(c9_plus_total),
+        "c10_total": complex(c10_plus_total),
+        "c9_vector_np": complex(c9_plus_np),
+        "c10_axial_np": complex(c10_plus_np),
+        "c9_plus_total": complex(c9_plus_total),
+        "c10_plus_total": complex(c10_plus_total),
+        "c9_minus_total": complex(c9_minus_total),
+        "c10_minus_total": complex(c10_minus_total),
+        "c9_plus_np": complex(c9_plus_np),
+        "c10_plus_np": complex(c10_plus_np),
+        "c9_minus_np": complex(c9_minus_np),
+        "c10_minus_np": complex(c10_minus_np),
         "q2_min_gev2": float(q2_min),
         "q2_max_gev2": float(q2_max),
         "q2_bin_width_gev2": float(q2_max - q2_min),
@@ -498,8 +538,10 @@ def evaluate_b_to_kstar_mumu(
                 q2_mid,
                 mode=mode_inputs,
                 inputs=p,
-                c9_total=c9_total,
-                c10_total=c10_total,
+                c9_plus_total=c9_plus_total,
+                c10_plus_total=c10_plus_total,
+                c9_minus_total=c9_minus_total,
+                c10_minus_total=c10_minus_total,
                 lambda_t=factors.lambda_t,
             )
         ),
@@ -561,10 +603,10 @@ def evaluate_b_to_kstar_mumu(
         sm_branching_fraction=float(sm_br),
         np_shift_branching_fraction=float(br - sm_br),
         ratio_to_sm=float(br / sm_br),
-        c9_total=complex(c9_total),
-        c10_total=complex(c10_total),
-        c9_vector_np=complex(c9_vector_np),
-        c10_axial_np=complex(c10_axial_np),
+        c9_total=complex(c9_plus_total),
+        c10_total=complex(c10_plus_total),
+        c9_vector_np=complex(c9_plus_np),
+        c10_axial_np=complex(c10_plus_np),
         lambda_t=complex(factors.lambda_t),
         form_factor_bundle=RARE_B_DILEPTON_EXCLUSIVE_BKSTAR_FORM_FACTOR_BUNDLE_V1,
         wilsons=wilsons,

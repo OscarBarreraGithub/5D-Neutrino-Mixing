@@ -222,7 +222,8 @@ def top_photon_dipole_partial_width(
     p = default_sm_inputs() if inputs is None else inputs
     left = _finite_complex(dipole_left, "dipole_left")
     right = _finite_complex(dipole_right, "dipole_right")
-    return float(0.5 * p.alpha_em_mz * p.m_top_gev * (abs(left) ** 2 + abs(right) ** 2))
+    # Report 06/M-9 trace check: this dipole convention gives Gamma = alpha*m_t/4.
+    return float(0.25 * p.alpha_em_mz * p.m_top_gev * (abs(left) ** 2 + abs(right) ** 2))
 
 
 def top_gluon_dipole_partial_width(
@@ -237,7 +238,8 @@ def top_gluon_dipole_partial_width(
     right = _finite_complex(dipole_right, "dipole_right")
     color_factor = 4.0 / 3.0
     return float(
-        0.5
+        # Report 06/M-9 trace check: same dipole normalization as t -> q gamma.
+        0.25
         * color_factor
         * p.alpha_s_mt
         * p.m_top_gev

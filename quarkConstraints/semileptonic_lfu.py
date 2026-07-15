@@ -12,7 +12,7 @@ amplitude-level charged-current stress proxy,
 
 with
 
-    C_tau^proxy = xi_cb^scalar m_b m_tau / (2 sqrt(2) G_F M_KK^2).
+    C_tau^proxy = xi_cb^scalar m_b m_tau / (2 sqrt(2) M_KK^2).
 
 ``xi_cb^scalar`` is built from the current quark mass-basis coupling object by
 dividing out ``g_s`` and multiplying the charm-left and bottom-right diagonal
@@ -42,7 +42,7 @@ from .couplings import QuarkMassBasisCouplings
 SEMILEPTONIC_LFU_MODEL_V1 = "semileptonic_lfu_rd_charged_current_proxy_v1"
 SEMILEPTONIC_LFU_OPERATOR_CONVENTION = (
     "amplitude proxy for (cbar P_L b)(taubar P_L nu_tau) normalized to "
-    "2 sqrt(2) G_F"
+    "the dimensionless m_b*m_tau/M_KK^2 charged-current stress scaling"
 )
 SEMILEPTONIC_LFU_INPUT_BUNDLE_V1 = "semileptonic_lfu_yaml_sm_ratio_proxy_inputs_v1"
 SEMILEPTONIC_LFU_RS_MATCHING_ASSUMPTION_V1 = (
@@ -188,7 +188,8 @@ def compute_semileptonic_lfu_wilson_proxy(
     charm_left_overlap = charm_left / g_s
     bottom_right_overlap = bottom_right / g_s
     scalar_overlap = charm_left_overlap * bottom_right_overlap
-    normalizer = 2.0 * math.sqrt(2.0) * p.gf_gev_minus2 * resolved_m_kk**2
+    # Report 17/M-33: m_b*m_tau/M_KK^2 is already dimensionless; no extra 1/G_F.
+    normalizer = 2.0 * math.sqrt(2.0) * resolved_m_kk**2
     scalar_shift = (
         scalar_overlap * p.bottom_mass_gev * p.tau_mass_gev / normalizer
     )

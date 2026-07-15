@@ -64,7 +64,6 @@ def _manual_rdstar_proxy(
     m_kk_gev: float | None = None,
     bottom_mass_gev: float = 4.183,
     tau_mass_gev: float = 1.77686,
-    gf_gev_minus2: float = 1.1663787e-5,
 ) -> tuple[float, complex]:
     resolved_mkk = float(couplings.M_KK if m_kk_gev is None else m_kk_gev)
     charm_left_overlap = complex(couplings.left_up[1, 1]) / float(couplings.g_s)
@@ -74,7 +73,7 @@ def _manual_rdstar_proxy(
         * bottom_right_overlap
         * bottom_mass_gev
         * tau_mass_gev
-        / (2.0 * math.sqrt(2.0) * gf_gev_minus2 * resolved_mkk**2)
+        / (2.0 * math.sqrt(2.0) * resolved_mkk**2)
     )
     return float(sm_rdstar * abs(1.0 + scalar_shift) ** 2), complex(scalar_shift)
 
@@ -228,6 +227,9 @@ def test_np_prediction_matches_underlying_core_and_independent_formula():
     assert result.predicted == pytest.approx(direct.ratio)
     assert result.predicted == pytest.approx(manual)
     assert result.diagnostics["scalar_amplitude_shift"] == pytest.approx(scalar_shift)
+    assert result.diagnostics["scalar_amplitude_shift"] == pytest.approx(
+        1.1153648024684316e-06 + 1.9270700775632591e-07j
+    )
     assert result.diagnostics["response_factor"] == pytest.approx(
         abs(1.0 + scalar_shift) ** 2
     )
@@ -279,7 +281,7 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     ("couplings", "expected_pass"),
     [
         (_bc_proxy_couplings(bottom_right=2.0), True),
-        (_bc_proxy_couplings(bottom_right=8.0), False),
+        (_bc_proxy_couplings(bottom_right=5.0e5), False),
     ],
 )
 def test_safe_point_passes_and_large_np_point_fails(

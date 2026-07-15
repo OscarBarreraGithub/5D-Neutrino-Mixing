@@ -212,7 +212,7 @@ def test_sm_limit_and_core_width_recomputation():
         inputs=constraint.sm_inputs,
     )
 
-    assert core.branching_fraction == pytest.approx(1.118111915877719e-4)
+    assert core.branching_fraction == pytest.approx(5.590559579388595e-5)
     assert result.predicted == pytest.approx(core.branching_fraction)
     assert result.ratio == pytest.approx(core.branching_fraction / constraint.anchor.budget)
     assert result.diagnostics["dipole_scale_suppression"] == pytest.approx(
@@ -230,7 +230,7 @@ def test_safe_point_passes_and_large_np_point_fails():
         point_builder.make_point(quark_mass_basis_couplings=_ut_couplings(left=0.4))
     )
     excluded = constraint.evaluate(
-        point_builder.make_point(quark_mass_basis_couplings=_ut_couplings(left=0.5))
+        point_builder.make_point(quark_mass_basis_couplings=_ut_couplings(left=0.7))
     )
 
     assert safe.passes is True

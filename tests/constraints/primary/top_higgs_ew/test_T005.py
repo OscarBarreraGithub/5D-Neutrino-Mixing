@@ -84,7 +84,7 @@ def _manual_t_to_c_gluon_proxy_br(
     dipole_left = left_qt / g_s * suppression
     dipole_right = right_qt / g_s * suppression
     partial_width = (
-        0.5
+        0.25
         * (4.0 / 3.0)
         * inputs.alpha_s_mt
         * inputs.m_top_gev
@@ -211,7 +211,7 @@ def test_sm_limit_and_manual_width_recomputation():
         inputs=constraint.sm_inputs,
     )
 
-    assert manual == pytest.approx(1.118111915877719e-4)
+    assert manual == pytest.approx(5.590559579388595e-5)
     assert result.predicted == pytest.approx(manual)
     assert result.ratio == pytest.approx(manual / constraint.anchor.budget)
     assert result.diagnostics["dipole_scale_suppression"] == pytest.approx(
@@ -229,7 +229,7 @@ def test_safe_point_passes_and_large_np_point_fails():
         point_builder.make_point(quark_mass_basis_couplings=_ct_couplings(left=1.0))
     )
     excluded = constraint.evaluate(
-        point_builder.make_point(quark_mass_basis_couplings=_ct_couplings(left=2.0))
+        point_builder.make_point(quark_mass_basis_couplings=_ct_couplings(left=3.0))
     )
 
     assert safe.passes is True

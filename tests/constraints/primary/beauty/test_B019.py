@@ -16,6 +16,7 @@ from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.beauty import B019 as b019_module
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.model import RotationParameters, ckm_like_unitary
+from quarkConstraints.rare_b_dilepton import RareBDileptonWilsonCoefficients
 from quarkConstraints.rare_b_kstar_dilepton import evaluate_b_to_kstar_mumu
 from tests.rare_b_phase3d_helpers import (
     core_wilsons_from_rs_coeff,
@@ -86,7 +87,7 @@ def _manual_form_factors(q2: float, mode) -> tuple[float, float, float]:
     )
 
 
-def _manual_kstar_helicity_weight(q2: float, mode) -> float:
+def _manual_kstar_helicity_components(q2: float, mode) -> tuple[float, float, float]:
     m_b = mode.parent_mass_gev
     m_v = mode.daughter_mass_gev
     kallen = (
@@ -96,7 +97,7 @@ def _manual_kstar_helicity_weight(q2: float, mode) -> float:
         - 2.0 * (m_b**2 * m_v**2 + m_b**2 * q2 + m_v**2 * q2)
     )
     if q2 <= 0.0 or kallen <= 0.0:
-        return 0.0
+        return (0.0, 0.0, 0.0)
     v_ff, a1_ff, a2_ff = _manual_form_factors(q2, mode)
     sqrt_kallen = math.sqrt(kallen)
     h_perp = sqrt_kallen * v_ff / (m_b + m_v)
@@ -105,17 +106,23 @@ def _manual_kstar_helicity_weight(q2: float, mode) -> float:
         (m_b * m_b - m_v * m_v - q2) * (m_b + m_v) * a1_ff
         - kallen * a2_ff / (m_b + m_v)
     ) / (2.0 * m_v * math.sqrt(q2))
-    return float(h_perp * h_perp + h_parallel * h_parallel + h_long * h_long)
+    return (
+        float(h_perp * h_perp),
+        float(h_parallel * h_parallel),
+        float(h_long * h_long),
+    )
 
 
-def _manual_b_to_kstar_mumu(
+def _independent_b_to_kstar_mumu(
     inputs,
     *,
     q2_min_gev2: float,
     q2_max_gev2: float,
-    c9_total: complex,
-    c10_total: complex,
-    grid_points: int = 12001,
+    c9_plus_total: complex,
+    c10_plus_total: complex,
+    c9_minus_total: complex,
+    c10_minus_total: complex,
+    quadrature_order: int = 240,
 ) -> float:
     sd = inputs.short_distance_inputs
     mode = inputs.bzero_kstarzero
@@ -156,17 +163,64 @@ def _manual_b_to_kstar_mumu(
             * abs(lambda_t) ** 2
             / (3072.0 * math.pi**5 * mode.parent_mass_gev**3)
         )
+        h_perp2, h_parallel2, h_long2 = _manual_kstar_helicity_components(q2, mode)
+        plus_power = abs(complex(c9_plus_total)) ** 2 + abs(
+            complex(c10_plus_total)
+        ) ** 2
+        minus_power = abs(complex(c9_minus_total)) ** 2 + abs(
+            complex(c10_minus_total)
+        ) ** 2
         return float(
             prefactor
             * math.sqrt(kallen)
             * lepton_mass_factor
-            * _manual_kstar_helicity_weight(q2, mode)
-            * (abs(complex(c9_total)) ** 2 + abs(complex(c10_total)) ** 2)
+            * q2
+            * (
+                2.0 * h_perp2 * plus_power
+                + (2.0 * h_parallel2 + h_long2) * minus_power
+            )
         )
 
-    xs = np.linspace(q2_min_gev2, q2_max_gev2, grid_points)
-    ys = np.array([dbr(float(x)) for x in xs])
-    return float(np.trapezoid(ys, xs))
+    nodes, weights = np.polynomial.legendre.leggauss(quadrature_order)
+    center = 0.5 * (q2_min_gev2 + q2_max_gev2)
+    half_width = 0.5 * (q2_max_gev2 - q2_min_gev2)
+    total = sum(
+        float(weight) * dbr(float(center + half_width * node))
+        for node, weight in zip(nodes, weights)
+    )
+    return float(half_width * total)
+
+
+def _b_s_test_wilsons(
+    *,
+    c9_np: complex = 0.0j,
+    c10_np: complex = 0.0j,
+    c9p_np: complex = 0.0j,
+    c10p_np: complex = 0.0j,
+) -> RareBDileptonWilsonCoefficients:
+    return RareBDileptonWilsonCoefficients(
+        model_label="test",
+        operator_convention="test",
+        matching_assumption="test",
+        transition_key="b_s",
+        M_KK=3000.0,
+        matching_scale=3000.0,
+        lambda_t=1.0 + 0.0j,
+        left_qb_coupling=0.0j,
+        right_qb_coupling=0.0j,
+        left_qb_overlap=0.0j,
+        right_qb_overlap=0.0j,
+        left_quark_delta=0.0j,
+        right_quark_delta=0.0j,
+        muon_left_delta=0.0,
+        muon_right_delta=0.0,
+        muon_vector_delta=0.0,
+        muon_axial_delta=0.0,
+        c9_np=c9_np,
+        c10_np=c10_np,
+        c9p_np=c9p_np,
+        c10p_np=c10p_np,
+    )
 
 
 def test_registration_metadata():
@@ -317,23 +371,29 @@ def test_sm_limit_rkstar_matches_independent_integral_and_yaml_budget():
     constraint = fcc.get(_PID)
     result = constraint.evaluate(sm_limit_rare_b_point())
     sd = constraint.sm_inputs.short_distance_inputs
-    manual = _manual_b_to_kstar_mumu(
+    manual = _independent_b_to_kstar_mumu(
         constraint.sm_inputs,
         q2_min_gev2=constraint.anchor.q2_min_gev2,
         q2_max_gev2=constraint.anchor.q2_max_gev2,
-        c9_total=constraint.sm_inputs.c9_sm,
-        c10_total=sd.c10_sm,
+        c9_plus_total=constraint.sm_inputs.c9_sm,
+        c10_plus_total=sd.c10_sm,
+        c9_minus_total=constraint.sm_inputs.c9_sm,
+        c10_minus_total=sd.c10_sm,
     )
+    full_range_sm = evaluate_b_to_kstar_mumu(None, inputs=constraint.sm_inputs)
 
     assert result.diagnostics["rkstar_proxy_numerator_branching_fraction"] == (
-        pytest.approx(manual, rel=3.0e-4)
+        pytest.approx(manual, rel=3.0e-6)
     )
     assert result.diagnostics["rkstar_proxy_denominator_branching_fraction"] == (
-        pytest.approx(manual, rel=3.0e-4)
+        pytest.approx(manual, rel=3.0e-6)
     )
     assert result.diagnostics["rkstar_proxy_denominator_branching_fraction"] == (
-        pytest.approx(3.676601736716339e-08)
+        pytest.approx(1.3328867345746024e-07)
     )
+    # Report 17/M-32: corrected proxy is near PDG's ~9.4e-7 with C7/charm omitted.
+    assert full_range_sm.branching_fraction == pytest.approx(6.870672220424328e-07)
+    assert full_range_sm.branching_fraction == pytest.approx(9.4e-7, rel=0.35)
     assert result.predicted == pytest.approx(1.0)
     assert result.predicted == pytest.approx(result.sm_prediction)
     assert result.diagnostics["sm_theory_lfu_ratio"] == pytest.approx(1.0)
@@ -384,6 +444,51 @@ def test_np_prediction_matches_underlying_core_recomputation():
     assert result.diagnostics["c10_axial_np"] == pytest.approx(direct_mu.c10_axial_np)
     assert result.diagnostics["denominator_wilson_coefficients"]["C9_NP"] == (
         pytest.approx(direct_e.diagnostics["c9_np"])
+    )
+
+
+def test_primed_wilson_response_uses_transversity_sign_split():
+    constraint = fcc.get(_PID)
+    inputs = constraint.sm_inputs
+    sd = inputs.short_distance_inputs
+    q2_min = constraint.anchor.q2_min_gev2
+    q2_max = constraint.anchor.q2_max_gev2
+
+    positive_c9p = evaluate_b_to_kstar_mumu(
+        _b_s_test_wilsons(c9p_np=1.0 + 0.0j),
+        q2_min_gev2=q2_min,
+        q2_max_gev2=q2_max,
+        inputs=inputs,
+    )
+    negative_c9p = evaluate_b_to_kstar_mumu(
+        _b_s_test_wilsons(c9p_np=-1.0 + 0.0j),
+        q2_min_gev2=q2_min,
+        q2_max_gev2=q2_max,
+        inputs=inputs,
+    )
+    independent_positive = _independent_b_to_kstar_mumu(
+        inputs,
+        q2_min_gev2=q2_min,
+        q2_max_gev2=q2_max,
+        c9_plus_total=inputs.c9_sm + 1.0,
+        c10_plus_total=sd.c10_sm,
+        c9_minus_total=inputs.c9_sm - 1.0,
+        c10_minus_total=sd.c10_sm,
+    )
+
+    assert positive_c9p.branching_fraction == pytest.approx(
+        independent_positive,
+        rel=3.0e-6,
+    )
+    assert positive_c9p.ratio_to_sm == pytest.approx(0.8397821921413937)
+    assert negative_c9p.ratio_to_sm == pytest.approx(1.2172506584098113)
+    assert positive_c9p.ratio_to_sm < 1.0
+    assert negative_c9p.ratio_to_sm > 1.0
+    assert positive_c9p.diagnostics["c9_plus_total"] == pytest.approx(
+        inputs.c9_sm + 1.0
+    )
+    assert positive_c9p.diagnostics["c9_minus_total"] == pytest.approx(
+        inputs.c9_sm - 1.0
     )
 
 

@@ -205,7 +205,7 @@ def test_sm_limit_and_core_width_cross_check():
         inputs=constraint.sm_inputs,
     )
 
-    assert core.branching_fraction == pytest.approx(6.068421034828811e-6)
+    assert core.branching_fraction == pytest.approx(3.0342105174144055e-6)
     assert result.predicted == pytest.approx(core.branching_fraction)
     assert result.ratio == pytest.approx(
         core.branching_fraction / constraint.anchor.budget
@@ -230,7 +230,7 @@ def test_safe_point_passes_and_large_np_point_fails():
         point_builder.build_from_quark_couplings(_ct_couplings(left=1.0))
     )
     excluded = constraint.evaluate(
-        point_builder.build_from_quark_couplings(_ct_couplings(left=2.0))
+        point_builder.build_from_quark_couplings(_ct_couplings(left=2.5))
     )
 
     assert safe.passes is True
