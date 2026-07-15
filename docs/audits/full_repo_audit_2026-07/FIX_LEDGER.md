@@ -62,11 +62,11 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 |----|-----|----------|-------|----------|-------------|
 | M-1 | EPSK | MAJ | εK budget split-brain ×4.5 core vs catalog | `deltaf2.py:794-795`, `K001.py:206-231` | VERIFIED (unified policy, mandate-strict band) |
 | M-2 | EPSK | MAJ | K001 budget sign-blind | `K001.py:211-218` | VERIFIED (sign-aware, K004 pattern) |
-| M-3 | EPSK | MAJ | Opposite budget philosophy for Δm | `deltaf2.py:956-968` | PENDING |
+| M-3 | EPSK | MAJ | Opposite budget philosophy for Δm | `deltaf2.py:956-968` | VERIFIED (B001/B003 one-sigma policy; D0 labeled envelope) |
 | M-4 | EPSK | MAJ | Mixed CLs across HARD vetoes catalog-wide | catalog-wide | VERIFIED (policy-id + CL labeled; global-CL disclaimed) |
-| M-5 | EPSK | MAJ | B022 (B→Kνν) HARD-vetoes SM limit | `primary/beauty/B022.py` | PENDING |
-| M-6 | RG | MAJ | B-meson Wilsons over-run below m_b (~25% C4 inflation) | `deltaf2.py:464`, `modern/evaluation.py:177` | PENDING |
-| M-7 | RG | MAJ | LO-only ΔF=2 running biases εK floor low ~10-15% | `deltaf2.py` | PENDING |
+| M-5 | EPSK | MAJ | B022 (B→Kνν) HARD-vetoes SM limit | `primary/beauty/B022.py` | VERIFIED (|exp-SM|+sigma; SM point passes) |
+| M-6 | RG | MAJ | B-meson Wilsons over-run below m_b (~25% C4 inflation) | `deltaf2.py:464`, `modern/evaluation.py:177` | VERIFIED (per-system mu_had; RESIDUAL: kaon chi-factor masses still 2 GeV, secondary) |
+| M-7 | RG | MAJ | LO-only ΔF=2 running biases εK floor low ~10-15% | `deltaf2.py` | DOC (LO bias caveat added; NLO out of scope) |
 
 ### Normalization / convention (M-10..M-14)
 | ID | Grp | Severity | Title | Location | Disposition |
