@@ -5,7 +5,7 @@ symmetric 1-sigma uncertainties, the reference scale at which each mass is
 quoted, and the active-flavor count at that reference). It also exposes
 helper utilities that RG-evolve those values to a single common
 renormalization scale (typically ``mu_common = qcd.constants.M_TOP_MS =
-163.5 GeV``) so the quark fitter can score against a *consistent* MS-bar
+162.5 GeV``) so the quark fitter can score against a *consistent* MS-bar
 target table rather than an ad-hoc mix of scales.
 
 The Wilson-coefficient ``alpha_s`` reference scale used for Delta-F=2
@@ -110,7 +110,9 @@ PDG_2024_QUARK_MASSES: Dict[str, PDGQuarkMass] = {
     "t": PDGQuarkMass(
         flavor="t",
         central_GeV=162.5,
-        sigma_GeV=0.7,
+        # PDG quotes +2.1/-1.5 GeV; the scalar schema stores the
+        # symmetrized one-sigma width.
+        sigma_GeV=1.8,
         mu_ref_GeV=162.5,
         n_f_at_reference=6,
     ),

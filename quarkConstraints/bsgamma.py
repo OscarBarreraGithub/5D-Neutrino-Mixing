@@ -37,6 +37,8 @@ from typing import Mapping
 
 import numpy as np
 
+from qcd.constants import M_TOP_MS
+
 from .couplings import QuarkMassBasisCouplings
 from .qcd_running import run_alpha_s
 
@@ -73,7 +75,7 @@ class BsgammaSMInputs:
     c8_proxy_normalization: float = 1.0
     alpha_s_mz: float = 0.1179
     m_z_gev: float = 91.1876
-    m_t_gev: float = 163.5
+    m_t_gev: float = M_TOP_MS
     m_b_gev: float = 4.18
     m_c_gev: float = 1.27
     constants_citation: str = (

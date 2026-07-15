@@ -5,6 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
+from qcd.constants import M_TOP_MS
 from qcd.running import alpha_s as reference_alpha_s
 from quarkConstraints.qcd_running import (
     _nf_for_scale,
@@ -15,7 +16,7 @@ from quarkConstraints.qcd_running import (
 
 MU_HIGH_GEV = 3000.0
 MU_LOW_GEV = 2.0
-M_T_GEV = 163.5
+M_T_GEV = M_TOP_MS
 M_B_GEV = 4.18
 M_C_GEV = 1.27
 
@@ -27,10 +28,10 @@ def _as_real_tuple(values: tuple[complex, complex, complex, complex]) -> tuple[f
 
 def test_unit_wilson_evolution_matches_audited_lo_reference() -> None:
     expected = {
-        "C1_VLL": (0.7291309121712547, 0.0, 0.0, 0.0),
-        "C1_VRR": (0.0, 0.7291309121712547, 0.0, 0.0),
-        "C4_LR": (0.0, 0.0, 3.538163974864062, 0.0),
-        "C5_LR": (0.0, 0.0, 0.8947574489917701, 0.853891627883906),
+        "C1_VLL": (0.7291270619675457, 0.0, 0.0, 0.0),
+        "C1_VRR": (0.0, 0.7291270619675457, 0.0, 0.0),
+        "C4_LR": (0.0, 0.0, 3.538238709484566, 0.0),
+        "C5_LR": (0.0, 0.0, 0.8947831120355858, 0.853889373377808),
     }
     unit_vectors = {
         "C1_VLL": (1.0, 0.0, 0.0, 0.0),

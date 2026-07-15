@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from qcd.constants import M_TOP_MS
+
 from .conventions import (
     MODERN_DEFAULT_BUNDLE_FAMILY_ID,
     MODERN_DEFAULT_BUNDLE_SLUG,
@@ -70,7 +72,7 @@ MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV = 0.0797
 # Equals ``qcd.constants.M_TOP_MS`` so all PDG quark masses are RG-evolved
 # to a single common scale at which the fitter scores residuals. Kept
 # orthogonal to the WC reference scale above on purpose.
-MODERN_DEFAULT_MASS_TARGET_SCALE_GEV = 163.5
+MODERN_DEFAULT_MASS_TARGET_SCALE_GEV = M_TOP_MS
 MODERN_DEFAULT_PROVENANCE_RECORD_IDS = (
     "quarkConstraints.modern.inputs.modern_default.source.fixed_scale_targets.v1",
     "quarkConstraints.modern.inputs.modern_default.source.deltaf2_inputs.v1",
@@ -80,7 +82,7 @@ MODERN_DEFAULT_PROVENANCE_RECORD_IDS = (
 
 
 def _default_up_masses_tuple() -> tuple[float, float, float]:
-    """Return PDG-2024 up-quark MS-bar mass triplet at ``mu = 163.5 GeV``.
+    """Return PDG-2024 up-quark MS-bar mass triplet at ``mu = M_TOP_MS``.
 
     Sourced from :func:`quarkConstraints.pdg_quark_masses.pdg_up_down_arrays_at_scale`
     so the modern-lane fence is preserved (no legacy ``benchmarks`` import).
@@ -94,7 +96,7 @@ def _default_up_masses_tuple() -> tuple[float, float, float]:
 
 
 def _default_down_masses_tuple() -> tuple[float, float, float]:
-    """Return PDG-2024 down-quark MS-bar mass triplet at ``mu = 163.5 GeV``."""
+    """Return PDG-2024 down-quark MS-bar mass triplet at ``mu = M_TOP_MS``."""
     from quarkConstraints.pdg_quark_masses import pdg_up_down_arrays_at_scale
 
     _, down = pdg_up_down_arrays_at_scale(MODERN_DEFAULT_MASS_TARGET_SCALE_GEV)
@@ -644,7 +646,7 @@ class ModernDefaultCKMTarget:
     provenance_record_id: str = MODERN_DEFAULT_PROVENANCE_RECORD_IDS[0]
     notes: str = (
         "Repo-owned CKM target metadata for the fixed-scale mass-target fit "
-        "bundle (mu = m_t(m_t) = 163.5 GeV). V_CKM is one-loop QCD-invariant "
+        "bundle (mu = m_t(m_t) = 162.5 GeV). V_CKM is one-loop QCD-invariant "
         "between mu_common and mu_had >= m_W, so the same unitary is reused "
         "wherever V_CKM is needed. Stores only the explicit angles and phase "
         "used to build the target unitary."
@@ -716,7 +718,7 @@ class ModernDefaultQuarkMassTarget:
     provenance_record_id: str = MODERN_DEFAULT_PROVENANCE_RECORD_IDS[0]
     notes: str = (
         "Repo-owned PDG-2024 MS-bar quark mass targets RG-evolved to "
-        "mu = m_t(m_t) = 163.5 GeV. Values are produced by "
+        "mu = m_t(m_t) = 162.5 GeV. Values are produced by "
         "quarkConstraints.benchmarks.default_quark_targets(). Wilson-coefficient "
         "alpha_s reference stays at 3 TeV (orthogonal scale)."
     )

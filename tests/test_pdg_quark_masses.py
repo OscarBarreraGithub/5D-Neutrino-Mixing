@@ -18,7 +18,10 @@ def test_pdg_inputs_have_expected_metadata():
     expected_flavors = ("u", "d", "s", "c", "b", "t")
     assert tuple(PDG_2024_QUARK_MASSES.keys()) == expected_flavors
     # Top reference is m_t(m_t).
-    assert PDG_2024_QUARK_MASSES["t"].mu_ref_GeV == pytest.approx(162.5)
+    assert M_TOP_MS == pytest.approx(162.5)
+    assert PDG_2024_QUARK_MASSES["t"].central_GeV == pytest.approx(M_TOP_MS)
+    assert PDG_2024_QUARK_MASSES["t"].sigma_GeV == pytest.approx(1.8)
+    assert PDG_2024_QUARK_MASSES["t"].mu_ref_GeV == pytest.approx(M_TOP_MS)
     assert PDG_2024_QUARK_MASSES["t"].n_f_at_reference == 6
     # Bottom reference is m_b(m_b) with n_f=5.
     assert PDG_2024_QUARK_MASSES["b"].mu_ref_GeV == pytest.approx(4.183)
@@ -56,21 +59,20 @@ def test_bottom_runs_to_top_scale_in_expected_window():
 
 
 def test_top_at_top_scale_is_within_one_percent_of_pdg_central():
-    # m_t runs from 162.5 to 163.5; per-mille effect.
+    # The common top scale is the PDG MS-bar reference point.
     out = pdg_quark_masses_at_scale(M_TOP_MS, flavors=("t",))
     assert abs(out["t"] - 162.5) / 162.5 < 0.01
 
 
-def test_2sigma_relative_floor_is_at_least_3_per_mille():
+def test_2sigma_relative_uncertainties_follow_pdg_inputs():
     rel = pdg_2sigma_relative_at_scale(M_TOP_MS)
-    # Per plan v3 §4: empirical floor across all quarks is max(0.003, ...).
-    # PDG itself gives strictly larger 2sigma uncertainties for light quarks
-    # and a tight 0.0086 for top. Verify the absolute floor.
     for f, val in rel.items():
         assert val > 0.0, f"PDG 2sigma must be positive for {f}"
-    # Sanity: top is the tightest, charm is also tight, light quarks looser.
-    assert rel["t"] < rel["s"]
-    assert rel["s"] < rel["d"]
+    assert rel["t"] == pytest.approx(2.0 * 1.8 / 162.5)
+    # With PDG 2024's +2.1/-1.5 GeV top uncertainty, top is no longer the
+    # tightest relative constraint; it is looser than strange but tighter than
+    # the light u/d inputs.
+    assert rel["s"] < rel["t"] < rel["d"]
 
 
 def test_up_down_arrays_have_expected_layout():

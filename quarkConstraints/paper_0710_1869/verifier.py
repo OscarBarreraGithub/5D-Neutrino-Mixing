@@ -8,6 +8,8 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from qcd.constants import M_TOP_MS
+
 from .artifacts import (
     ArtifactSchemaError,
     ComplexValue,
@@ -53,7 +55,7 @@ EXPECTED_PROVENANCE_MODE_ID = "paper_sourced_defaults.v1"
 DEFAULT_THRESHOLD_MASSES_GEV = (
     (1.27, 4),
     (4.18, 5),
-    (163.5, 6),
+    (M_TOP_MS, 6),
 )
 FROZEN_PUBLIC_TOLERANCES = {"abs": 1.0e-18, "rel": 0.0}
 

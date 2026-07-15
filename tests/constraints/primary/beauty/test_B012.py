@@ -12,6 +12,7 @@ import yaml
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
+from qcd.constants import M_TOP_MS
 from flavor_catalog_constraints.primary.beauty import B012 as b012_module
 from quarkConstraints import bsgamma as bsgamma_core
 from quarkConstraints.couplings import QuarkMassBasisCouplings
@@ -114,7 +115,7 @@ def _manual_ll_running_coefficients(
         matching_scale_gev,
         *[
             scale
-            for scale in (163.5, 4.18, 1.27)
+            for scale in (M_TOP_MS, 4.18, 1.27)
             if low_scale_gev < scale < matching_scale_gev
         ],
         low_scale_gev,
@@ -123,7 +124,7 @@ def _manual_ll_running_coefficients(
     u78_total = 0.0
     u88_total = 1.0
     for high, low in zip(boundaries, boundaries[1:]):
-        nf = 6 if high > 163.5 else 5 if high > 4.18 else 4 if high > 1.27 else 3
+        nf = 6 if high > M_TOP_MS else 5 if high > 4.18 else 4 if high > 1.27 else 3
         beta0 = (33.0 - 2.0 * nf) / 3.0
         eta = run_alpha_s(high) / run_alpha_s(low)
         u77 = eta ** ((32.0 / 3.0) / (2.0 * beta0))

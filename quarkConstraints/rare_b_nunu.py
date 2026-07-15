@@ -50,6 +50,8 @@ from typing import Mapping
 
 import numpy as np
 
+from qcd.constants import M_TOP_MS
+
 from .couplings import QuarkMassBasisCouplings
 from .model import RotationParameters, ckm_like_unitary
 
@@ -82,7 +84,7 @@ class RareBNuNuSMInputs:
     input_bundle: str = RARE_B_NUNU_INPUT_BUNDLE_V1
     br_bplus_kplus_sm: float = 5.58e-6
     br_bplus_kplus_long_distance: float = 6.09e-7
-    m_t_msbar_gev: float = 163.5
+    m_t_msbar_gev: float = M_TOP_MS
     m_w_gev: float = 80.379
     eta_x: float = 0.994
     sin2_theta_w: float = 0.23122
@@ -93,7 +95,7 @@ class RareBNuNuSMInputs:
     theta23: float = 0.0415
     delta: float = 1.196
     constants_citation: str = (
-        "Inami-Lim top function with eta_X=0.994 and m_t(m_t)=163.5 GeV; "
+        "Inami-Lim top function with eta_X=0.994 and m_t(m_t)=162.5 GeV; "
         "electroweak constants follow the rare-kaon input bundle in this repo; "
         "repo CKM target quarkConstraints.modern.inputs.ModernDefaultCKMTarget"
     )

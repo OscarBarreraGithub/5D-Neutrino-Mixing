@@ -4,9 +4,8 @@ Two scales coexist and must stay orthogonal:
 
 * ``DEFAULT_QUARK_FIT_SCALE_GEV`` — the renormalization scale at which
   PDG 2024 MS-bar quark mass targets are reported and the fitter scores
-  residuals. Chosen as ``qcd.constants.M_TOP_MS = 163.5 GeV`` so all
-  quarks (light, charm, bottom, top) live in MS-bar n_f=5 between m_b
-  and m_t (top runs from 162.5 to 163.5 in n_f=6, per-mille effect).
+  residuals. Chosen as ``qcd.constants.M_TOP_MS = 162.5 GeV`` so all
+  quarks use the PDG-consistent top MS-bar reference scale.
 
 * ``DEFAULT_QUARK_TARGET_SCALE_GEV`` — the *Wilson-coefficient*
   matching/reference scale at which alpha_s is anchored for Delta-F=2

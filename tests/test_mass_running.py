@@ -6,7 +6,8 @@ import numpy as np
 import pytest
 
 from qcd.constants import M_BOTTOM, M_CHARM, M_TOP_MS
-from qcd.decoupling import match_alpha_s, match_msbar_mass
+import qcd.mass_running as mass_running
+from qcd.decoupling import _coeffs_msbar_mass, match_alpha_s, match_msbar_mass
 from qcd.mass_running import run_msbar_mass
 from qcd.running import alpha_s as alpha_s_running
 
@@ -72,6 +73,55 @@ def test_charm_decoupling_at_mu_2gev():
 def test_match_msbar_mass_is_identity_at_zero_loops():
     out = match_msbar_mass(1.0, alpha_s=0.2, direction="down", n_f_high=5, matching_loops=0)
     assert out == pytest.approx(1.0)
+
+
+def test_msbar_mass_d3_matches_cks_closed_form():
+    """CKS Eq. (20) gives an increasing 3-loop mass-decoupling d3(n_l)."""
+    expected = {
+        3: 1.9218095703292382,
+        4: 1.946537179697389,
+        5: 1.9712647890655397,
+    }
+    values = []
+    for n_l, expected_d3 in expected.items():
+        d2, d3 = _coeffs_msbar_mass(n_l)
+        assert d2 == pytest.approx(89.0 / 432.0)
+        assert d3 == pytest.approx(expected_d3, rel=1e-13)
+        values.append(d3)
+    assert values == sorted(values)
+
+
+def test_match_msbar_mass_equal_nf_is_noop():
+    out = match_msbar_mass(
+        100.0,
+        alpha_s=0.1,
+        direction="down",
+        n_f_high=6,
+        matching_loops=3,
+        n_f_from=6,
+        n_f_to=6,
+    )
+    assert out == pytest.approx(100.0)
+
+
+def test_top_legacy_equal_nf_crossing_applies_no_matching(monkeypatch):
+    """Recreate the old 162.5 -> 163.5 equal-nf crossing and require no jump."""
+    monkeypatch.setattr(mass_running, "M_TOP_MS", 163.5)
+    with_matching = mass_running.run_msbar_mass(
+        162.5,
+        162.5,
+        3000.0,
+        n_f_ref=6,
+        matching_loops=3,
+    )
+    without_matching = mass_running.run_msbar_mass(
+        162.5,
+        162.5,
+        3000.0,
+        n_f_ref=6,
+        matching_loops=0,
+    )
+    assert with_matching == pytest.approx(without_matching, rel=1e-12)
 
 
 def test_match_msbar_mass_inverse_is_close_to_identity():

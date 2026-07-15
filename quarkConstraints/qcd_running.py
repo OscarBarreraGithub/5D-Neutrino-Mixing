@@ -27,13 +27,15 @@ import math
 
 import numpy as np
 
+from qcd.constants import M_TOP_MS
+
 # ---------------------------------------------------------------------------
 # Standard physical constants
 # ---------------------------------------------------------------------------
 
 _ALPHA_S_MZ_DEFAULT = 0.1179
 _MZ_DEFAULT = 91.1876
-_MT_DEFAULT = 163.5
+_MT_DEFAULT = M_TOP_MS
 _MB_DEFAULT = 4.18
 _MC_DEFAULT = 1.27
 
@@ -99,7 +101,7 @@ def run_alpha_s(
     m_z : float
         Z boson mass in GeV (default 91.1876).
     m_t : float
-        Top quark threshold in GeV (default 163.5).
+        Top quark threshold in GeV (default: qcd.constants.M_TOP_MS).
     m_b : float
         Bottom quark mass threshold in GeV (default 4.18).
     m_c : float

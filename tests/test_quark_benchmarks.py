@@ -44,7 +44,7 @@ def test_default_quark_targets_use_pdg2024_mt_label():
     assert targets.label == "pdg-2024-msbar-mu-mt-v1"
     # Mass-target scale moves to mu = m_t(m_t).
     assert np.isclose(DEFAULT_QUARK_FIT_SCALE_GEV, M_TOP_MS)
-    assert np.isclose(DEFAULT_QUARK_FIT_SCALE_GEV, 163.5)
+    assert np.isclose(DEFAULT_QUARK_FIT_SCALE_GEV, 162.5)
     # WC matching scale stays at 3 TeV (orthogonal).
     assert np.isclose(DEFAULT_QUARK_TARGET_SCALE_GEV, 3000.0)
 
@@ -60,7 +60,7 @@ def test_pdg2024_target_bundle_provenance_assertions():
     bundle = _FIXED_SCALE_TARGETS_PDG2024_MT_V1
     assert bundle["label"] == "pdg-2024-msbar-mu-mt-v1"
     assert bundle["edition"] == PDG_QUARK_MASSES_EDITION
-    assert np.isclose(bundle["scale_GeV"], 163.5)
+    assert np.isclose(bundle["scale_GeV"], M_TOP_MS)
     # Per-flavor 2sigma relative arrays are present and positive.
     assert bundle["up_2sigma_relative"].shape == (3,)
     assert bundle["down_2sigma_relative"].shape == (3,)
@@ -82,5 +82,5 @@ def test_default_benchmark_has_expected_metadata():
     assert bench.name == "repo-local-mfv-benchmark"
     assert bench.point.metadata["preferred_r_window"] == (0.1, 0.4)
     assert np.isclose(bench.point.metadata["overall_y"], 2.8)
-    assert np.isclose(bench.point.metadata["default_target_scale_GeV"], 163.5)
+    assert np.isclose(bench.point.metadata["default_target_scale_GeV"], M_TOP_MS)
     assert bench.point.metadata["default_target_label"] == "pdg-2024-msbar-mu-mt-v1"

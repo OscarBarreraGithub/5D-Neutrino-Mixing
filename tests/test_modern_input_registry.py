@@ -155,7 +155,7 @@ def test_modern_registry_freezes_lane_and_schema_ids():
     # scale and stays at 3 TeV (Wilson-coefficient running anchor).
     assert modern_default.qcd_metadata.alpha_s_reference_scale_GeV == pytest.approx(3000.0)
     assert MODERN_DEFAULT_TARGET_SCALE_GEV == pytest.approx(3000.0)
-    assert MODERN_DEFAULT_MASS_TARGET_SCALE_GEV == pytest.approx(163.5)
+    assert MODERN_DEFAULT_MASS_TARGET_SCALE_GEV == pytest.approx(162.5)
     assert MODERN_DEFAULT_TARGET_SCALE_GEV != MODERN_DEFAULT_MASS_TARGET_SCALE_GEV
     assert modern_default.qcd_metadata.alpha_s_reference_value == pytest.approx(
         MODERN_DEFAULT_REFERENCE_ALPHA_S_3TEV

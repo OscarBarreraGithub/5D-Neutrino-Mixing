@@ -13,10 +13,10 @@ M_Z = 91.1876
 
 # Quark masses (GeV)
 # charm and bottom: MS-bar mass evaluated at its own scale
-# top: MS-bar mass at m_t (preferred for MS-bar matching)
+# top: MS-bar mass at m_t from PDG 2024 cross-section/MS-bar extraction
 M_CHARM = 1.27
 M_BOTTOM = 4.18
-M_TOP_MS = 163.5
+M_TOP_MS = 162.5
 
 # Top pole mass (kept for reference / optional use)
 M_TOP_POLE = 172.69

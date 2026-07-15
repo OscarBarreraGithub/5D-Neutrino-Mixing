@@ -49,9 +49,8 @@ def _build_pdg2024_mt_target_bundle() -> dict[str, object]:
     """Build the PDG 2024 MS-bar target bundle at ``mu = m_t(m_t)``.
 
     The light/charm/bottom inputs are RG-evolved from their PDG 2024
-    reference scales to ``mu_common = qcd.constants.M_TOP_MS = 163.5 GeV``
-    using :func:`qcd.mass_running.run_msbar_mass`. Top is run from
-    ``m_t(m_t) = 162.5`` to 163.5 GeV; the effect is per-mille.
+    reference scales to ``mu_common = qcd.constants.M_TOP_MS = 162.5 GeV``
+    using :func:`qcd.mass_running.run_msbar_mass`.
 
     The Wilson-coefficient ``alpha_s`` reference scale is **independent**
     of this mass-target scale; see ``modern/inputs.py``.
@@ -152,7 +151,7 @@ def default_quark_targets() -> QuarkTargets:
     """Return the default PDG-2024 quark target table at ``mu = m_t(m_t)``.
 
     The mass targets are PDG 2024 MS-bar values RG-evolved to
-    ``DEFAULT_QUARK_FIT_SCALE_GEV = qcd.constants.M_TOP_MS = 163.5 GeV``;
+    ``DEFAULT_QUARK_FIT_SCALE_GEV = qcd.constants.M_TOP_MS = 162.5 GeV``;
     the CKM target is the PDG 2024 central unitary. The Wilson-coefficient
     ``alpha_s`` reference scale stays at 3 TeV (see ``modern/inputs.py``);
     the two scales are kept orthogonal.
@@ -279,7 +278,7 @@ def default_quark_benchmark() -> QuarkBenchmark:
         notes=(
             "Deterministic repo-local regression point. "
             "Use default_quark_targets() for the PDG-2024 MS-bar target "
-            "bundle RG-evolved to mu = m_t(m_t) = 163.5 GeV."
+            "bundle RG-evolved to mu = m_t(m_t) = 162.5 GeV."
         ),
     )
 

@@ -48,7 +48,7 @@ The current exploratory scaffold includes:
 - a scan wrapper and benchmark script
 
 The default target table is a repo-owned bundle (`default_quark_targets()`)
-whose PDG quark masses are evolved to `m_t(m_t) = 163.5 GeV`; the `mu = 3 TeV`
+whose PDG quark masses are evolved to `m_t(m_t) = 162.5 GeV`; the `mu = 3 TeV`
 scale is the Wilson-coefficient *reference* scale, not the mass-input scale.
 `rough_sm_targets()` remains as a compatibility helper for earlier exploratory
 naming. The `modern` lane below is the current provenance/versioned-artifact

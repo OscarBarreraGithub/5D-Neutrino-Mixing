@@ -243,6 +243,8 @@ def run_msbar_mass(
                 direction=direction,
                 n_f_high=n_f_high,
                 matching_loops=eff_match_loops,
+                n_f_from=nf,
+                n_f_to=nf_next,
             )
 
     return float(current_m)

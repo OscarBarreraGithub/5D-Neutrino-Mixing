@@ -68,7 +68,7 @@ with no explicit $\mu$ on the right-hand side. This ODE is integrated numericall
 
 ### Flavor thresholds
 
-As $\mu$ crosses a quark mass threshold, the number of active flavors changes and the beta function coefficients shift discontinuously. For running from $M_Z$ to TeV scales, the only crossing is the top quark, and by default we match at $m_t(m_t) \approx 163.5$ GeV:
+As $\mu$ crosses a quark mass threshold, the number of active flavors changes and the beta function coefficients shift discontinuously. For running from $M_Z$ to TeV scales, the only crossing is the top quark, and by default we match at $m_t(m_t) \approx 162.5$ GeV:
 
 $$
 M_Z \;\xrightarrow{n_f = 5}\; m_t \;\xrightarrow{n_f = 6}\; \mu_{\text{target}}
@@ -83,7 +83,7 @@ corrections through the requested matching order (default is 3-loop matching for
 | Scale | $\alpha_s$ (4-loop) |
 |-------|:-------------------:|
 | $M_Z = 91.19$ GeV | 0.1180 (input) |
-| $m_t = 163.5$ GeV | 0.1084 |
+| $m_t = 162.5$ GeV | 0.1084 |
 | 1 TeV | 0.0885 |
 | 3 TeV | 0.0797 |
 | 5 TeV | 0.0761 |

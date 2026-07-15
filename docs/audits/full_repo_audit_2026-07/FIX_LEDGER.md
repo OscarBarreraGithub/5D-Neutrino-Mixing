@@ -80,10 +80,10 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 ### Fit / scan logic (M-15..M-18)
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| M-15 | FIT | MAJ | Reported fit seed not gauge-equivalent | `fit.py:627-655,843` | PENDING |
-| M-16 | FIT | MAJ | Scan seed chaining double-applies overall_scale | `scan.py:360-373`, `validation.py:242-271` | PENDING |
-| M-17 | HARDP | MAJ | Evaluated hard-partial never vetoes/miscounted | `run_full_catalog_scan.py:913-921` | PENDING |
-| M-18 | HARDP | MAJ | Catalog silent-pass on invalid input | `TEMPLATE.py` design | PENDING |
+| M-15 | FIT | MAJ | Reported fit seed not gauge-equivalent | `fit.py:627-655,843` | VERIFIED (actual fitted rotations; reported==fitted score) |
+| M-16 | FIT | MAJ | Scan seed chaining double-applies overall_scale | `scan.py:360-373`, `validation.py:242-271` | VERIFIED (overall_scale applied once; warm<=cold) |
+| M-17 | HARDP | MAJ | Evaluated hard-partial never vetoes/miscounted | `run_full_catalog_scan.py:913-921` | VERIFIED (excluded_by_partial; inclusive vetoes) |
+| M-18 | HARDP | MAJ | Catalog silent-pass on invalid input | `TEMPLATE.py` design | VERIFIED (malformed fails closed; absent still passes) |
 
 ### QCD running (M-19..M-21)
 | ID | Grp | Severity | Title | Location | Disposition |
