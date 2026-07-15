@@ -126,7 +126,7 @@ def _sample_scales() -> tuple[ArtifactScale, ...]:
 
 
 def _sample_q1_matrix_element(*, m_K0_GeV: float, f_K_GeV: float, B_K_mu_had: float) -> float:
-    return (8.0 / 3.0) * (f_K_GeV**2) * (m_K0_GeV**2) * B_K_mu_had
+    return (2.0 / 3.0) * (f_K_GeV**2) * (m_K0_GeV**2) * B_K_mu_had
 
 
 def _sample_quartet() -> tuple[
@@ -240,7 +240,7 @@ def _sample_quartet() -> tuple[
         operator_normalization=operator_normalization,
         renormalization_scheme=scheme,
         scales=(ArtifactScale(name="mu_had", role="hadronic evaluation scale", value_gev=2.0),),
-        matrix_element_formula_id="kaon.q1_vll_vrr.8over3_fk2_mk2_bk_mu.v1",
+        matrix_element_formula_id="kaon.q1_vll_vrr.2over3_fk2_mk2_bk_mu.plpr_projectors.v2",
         hamiltonian_convention_id="heff.sum_ci_qi.no_hc_factor.v1",
         parity_relation_id="kaon.q1_vll_equals_q1_vrr.by_parity.v1",
         supported_operator_names=DEFAULT_KAON_SUPPORTED_OPERATORS,
@@ -688,7 +688,7 @@ def test_verifier_enforces_q1_matrix_element_identity_and_numeric_reconstruction
     assert "delta_m_reconstruction_mismatch" in numeric_codes
 
 
-def test_verifier_rejects_nonzero_lr_coefficients() -> None:
+def test_verifier_accepts_nonzero_lr_coefficients_on_supported_surface() -> None:
     wilson, hadronic, observable, provenance = _sample_quartet()
     broken_wilson = _replace_coefficient_value(
         wilson,
@@ -705,7 +705,12 @@ def test_verifier_rejects_nonzero_lr_coefficients() -> None:
         )
     )
 
-    assert {issue.code for issue in report.issues} >= {"lr_coefficients_nonzero"}
+    issue_codes = {issue.code for issue in report.issues}
+    assert "lr_coefficients_nonzero" not in issue_codes
+    assert issue_codes <= {
+        "import_isolation_failed",
+        "import_isolation_runtime_violation",
+    }
 
 
 def test_verifier_imports_only_artifact_schema_helpers() -> None:
@@ -917,7 +922,7 @@ def test_standalone_verifier_rejects_numeric_tampering(tmp_path: Path) -> None:
     assert "m12_reconstruction_mismatch" in verifier_payload["issue_codes"]
 
 
-def test_standalone_verifier_rejects_scope_creep_from_epsilon_k_and_lr_support(
+def test_standalone_verifier_rejects_epsilon_k_scope_creep_and_accepts_lr_support(
     tmp_path: Path,
 ) -> None:
     _export_default_artifacts(tmp_path)
@@ -941,14 +946,12 @@ def test_standalone_verifier_rejects_scope_creep_from_epsilon_k_and_lr_support(
     wilson_payload = json.loads(wilson_path.read_text(encoding="utf-8"))
     wilson_payload.pop("supported_operator_names", None)
     wilson_payload.pop("unsupported_operator_names", None)
-    wilson_payload["coefficients"].append(
-        {
-            "operator": "Q4_LR",
-            "sector": "down",
-            "system": "kaon",
-            "value": {"real": 1.0e-9, "imag": 0.0},
-        }
-    )
+    for coefficient in wilson_payload["coefficients"]:
+        if coefficient["operator"] == "Q4_LR":
+            coefficient["value"] = {"real": 1.0e-9, "imag": 0.0}
+            break
+    else:
+        raise AssertionError("sample Wilson artifact did not contain Q4_LR")
     wilson_path.write_text(
         json.dumps(wilson_payload, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -959,5 +962,5 @@ def test_standalone_verifier_rejects_scope_creep_from_epsilon_k_and_lr_support(
     assert verifier_payload["ok"] is False
     assert verifier_payload["schema_ok"] is True
     assert verifier_payload["scope_ok"] is False
-    assert "lr_coefficients_nonzero" in verifier_payload["issue_codes"]
+    assert "lr_coefficients_nonzero" not in verifier_payload["issue_codes"]
     assert "unexpected_observable_row" in verifier_payload["issue_codes"]

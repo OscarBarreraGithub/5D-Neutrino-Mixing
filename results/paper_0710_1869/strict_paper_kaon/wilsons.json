@@ -6,12 +6,30 @@
       "sector": "down",
       "system": "kaon",
       "value": {
-        "imag": -1.0429109107548845e-12,
-        "real": -1.509786848232995e-12
+        "imag": -6.642417851036288e-12,
+        "real": -9.616003638032409e-12
       }
     },
     {
       "operator": "Q1_VRR",
+      "sector": "down",
+      "system": "kaon",
+      "value": {
+        "imag": 0.0,
+        "real": 0.0
+      }
+    },
+    {
+      "operator": "Q4_LR",
+      "sector": "down",
+      "system": "kaon",
+      "value": {
+        "imag": 0.0,
+        "real": 0.0
+      }
+    },
+    {
+      "operator": "Q5_LR",
       "sector": "down",
       "system": "kaon",
       "value": {
@@ -26,12 +44,30 @@
       "sector": "down",
       "system": "kaon",
       "value": {
-        "imag": -7.601544537269597e-13,
-        "real": -1.1004498898491606e-12
+        "imag": -9.113213790531881e-12,
+        "real": -1.3192891343059674e-11
       }
     },
     {
       "operator": "Q1_VRR",
+      "sector": "down",
+      "system": "kaon",
+      "value": {
+        "imag": 0.0,
+        "real": 0.0
+      }
+    },
+    {
+      "operator": "Q4_LR",
+      "sector": "down",
+      "system": "kaon",
+      "value": {
+        "imag": 0.0,
+        "real": 0.0
+      }
+    },
+    {
+      "operator": "Q5_LR",
       "sector": "down",
       "system": "kaon",
       "value": {
@@ -48,7 +84,7 @@
     "schema_name": "paper_0710_1869.wilson_bundle",
     "schema_version": 1
   },
-  "notes": "Kaon NP-only Wilson surface at mu_had. Exported coefficients are restricted to Q1_VLL and Q1_VRR only; LR operators remain unsupported and are carried only as explicit out-of-scope labels.",
+  "notes": "Kaon NP-only Wilson surface at mu_had. Exported coefficients include the corrected Q1/LR support surface. The default kaon point has zero LR coefficients under the current RH-down alignment residual.",
   "operator_basis": "kk_gluon_tree_np_only.v1",
   "operator_normalization": "paper_0710_1869.deltaf2.kk_gluon_tree_color_normalization.v1",
   "provenance_ids": [
@@ -71,14 +107,12 @@
     {
       "name": "m_g1",
       "role": "KK-gluon propagator mass",
-      "value_gev": 3000.0
+      "value_gev": 7346.0614058074825
     }
   ],
   "supported_operator_names": [
     "Q1_VLL",
-    "Q1_VRR"
-  ],
-  "unsupported_operator_names": [
+    "Q1_VRR",
     "Q4_LR",
     "Q5_LR"
   ]

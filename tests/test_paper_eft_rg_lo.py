@@ -71,10 +71,10 @@ PARAMETERIZED_RG_NAMES = (
 )
 RG_DEFAULT_LOW_SCALE_GEV = 2.0
 EXPECTED_RG_LR_BASIS_CONTRACT_ID = (
-    "paper_q4q5_to_bmu_lr_basis.map_frozen.audit_ready.v2"
+    "paper_q4q5_to_bmu_lr_basis.map_frozen.audit_ready.v3"
 )
 EXPECTED_RG_LR_BASIS_DIRECTION_ID = (
-    "paper_q4q5_operator_order.to_bmu_q1lr_q2lr_operator_order.map_frozen.v2"
+    "paper_q4q5_operator_order.to_bmu_q1lr_q2lr_operator_order.map_frozen.v3"
 )
 EXPECTED_RG_LR_BMU_BASIS_ID = "bmu.lr_basis.q1lr_q2lr.ndr_ms.lo.v1"
 EXPECTED_PAPER_LR_OPERATOR_DEFINITION_IDS = (
@@ -774,11 +774,37 @@ def _toy_wilsons(
     )
 
 
-def _vll_lo_factor(mu_high_GeV: float, mu_low_GeV: float, *, n_f: int) -> float:
-    exponent = 6.0 / (33.0 - (2.0 * float(n_f)))
+def _independent_bbl_beta0(n_f: int) -> float:
+    return 11.0 - ((2.0 / 3.0) * float(n_f))
+
+
+def _independent_bbl_vll_exponent(*, n_f: int) -> float:
+    gamma0_vll_transposed = ((4.0,),)
+    return gamma0_vll_transposed[0][0] / (2.0 * _independent_bbl_beta0(n_f))
+
+
+def _independent_bbl_vll_segment_factor(
+    mu_high_GeV: float,
+    mu_low_GeV: float,
+    *,
+    n_f: int,
+) -> float:
     alpha_high = alpha_s(mu_high_GeV, n_loops=1, matching_loops=0)
     alpha_low = alpha_s(mu_low_GeV, n_loops=1, matching_loops=0)
-    return float((alpha_low / alpha_high) ** exponent)
+    eta = alpha_high / alpha_low
+    return float(eta ** _independent_bbl_vll_exponent(n_f=n_f))
+
+
+def _independent_bbl_vll_threshold_factor(mu_high_GeV: float, mu_low_GeV: float) -> float:
+    segments = (
+        (float(mu_high_GeV), float(M_TOP_MS), 6),
+        (float(M_TOP_MS), float(M_BOTTOM), 5),
+        (float(M_BOTTOM), float(mu_low_GeV), 4),
+    )
+    factor = 1.0
+    for high, low, n_f in segments:
+        factor *= _independent_bbl_vll_segment_factor(high, low, n_f=n_f)
+    return float(factor)
 
 
 def test_importing_rg_module_does_not_load_repo_v1_modules() -> None:
@@ -1051,9 +1077,9 @@ def test_vll_vrr_fixed_nf_lo_regression_matches_bmu_exponent() -> None:
     evolve_fn = _get_callable(module, PARAMETERIZED_RG_NAMES)
     assert callable(evolve_fn), "RG module exposes no evolution callable"
 
-    mu_high = 100.0
-    mu_low = 10.0
-    factor = _vll_lo_factor(mu_high, mu_low, n_f=5)
+    mu_high = 3000.0
+    mu_low = 2.0
+    factor = _independent_bbl_vll_threshold_factor(mu_high, mu_low)
     wilsons = _toy_wilsons(
         matching_scale_GeV=mu_high,
         q1_vll=1.0,
@@ -1062,6 +1088,8 @@ def test_vll_vrr_fixed_nf_lo_regression_matches_bmu_exponent() -> None:
     evolved = _invoke_rg_evolution(evolve_fn, value=wilsons, mu_low_GeV=mu_low)
     coefficients = _coefficient_complex_map(evolved)
 
+    assert _independent_bbl_vll_exponent(n_f=5) == pytest.approx(6.0 / 23.0)
+    assert factor == pytest.approx(0.729, rel=5.0e-4)
     assert coefficients["Q1_VLL"].real == pytest.approx(factor, rel=1.0e-9, abs=1.0e-12)
     assert coefficients["Q1_VLL"].imag == pytest.approx(0.0, abs=1.0e-12)
     assert coefficients["Q1_VRR"].real == pytest.approx(factor, rel=1.0e-9, abs=1.0e-12)

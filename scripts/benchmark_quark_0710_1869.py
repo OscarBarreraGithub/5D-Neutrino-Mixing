@@ -315,10 +315,10 @@ EXPECTED_DEFAULT_LR_OPERATOR_NORMALIZATION_ID = (
 )
 EXPECTED_DEFAULT_LR_HAMILTONIAN_CONVENTION_ID = "heff.sum_ci_qi.no_hc_factor.v1"
 EXPECTED_DEFAULT_LR_Q4_FORMULA_ID = (
-    "kaon.q4_lr.o4_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+    "kaon.q4_lr.o4_scalar_lr.1over2_rchi_fk2_mk2_b4_mu.plpr_projectors.v2"
 )
 EXPECTED_DEFAULT_LR_Q5_FORMULA_ID = (
-    "kaon.q5_lr.o5_scalar_lr.bv2004.eq5.matrix_element.mu_had.v1"
+    "kaon.q5_lr.o5_scalar_lr.1over6_rchi_fk2_mk2_b5_mu.plpr_projectors.v2"
 )
 EXPECTED_DEFAULT_LR_HADRONIC_ETM_CITATION = (
     "ETM Collaboration, JHEP 03 (2013) 089, arXiv:1207.1287"
@@ -429,25 +429,27 @@ B_CUSTOM_Q1_PROBE_CONFIG = {
         "source_prefix": "hadronic.d0.custom_q1_probe",
     },
 }
-EXPECTED_SUPPORTED_OPERATORS = {"Q1_VLL", "Q1_VRR"}
-EXPECTED_UNSUPPORTED_OPERATORS = {"Q4_LR", "Q5_LR"}
-EXPECTED_SUPPORTED_OPERATOR_ORDER = ("Q1_VLL", "Q1_VRR")
+EXPECTED_SUPPORTED_OPERATORS = {"Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR"}
+EXPECTED_UNSUPPORTED_OPERATORS: set[str] = set()
+EXPECTED_SUPPORTED_OPERATOR_ORDER = ("Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR")
+EXPECTED_DEFAULT_Q1_SUPPORTED_OPERATORS = {"Q1_VLL", "Q1_VRR"}
+EXPECTED_DEFAULT_Q1_UNSUPPORTED_OPERATORS = {"Q4_LR", "Q5_LR"}
 EXPECTED_GUARDED_LR_OPERATOR_ORDER = ("Q4_LR", "Q5_LR")
 EXPECTED_BMU_LR_OPERATOR_ORDER = ("Q1_LR_BMU", "Q2_LR_BMU")
-EXPECTED_PAPER_TO_BMU_OPERATOR_MAP = ((0.0, 2.0), (1.0, 0.0))
-EXPECTED_BMU_TO_PAPER_OPERATOR_MAP = ((0.0, 1.0), (0.5, 0.0))
-EXPECTED_PAPER_TO_BMU_WILSON_MAP = ((0.0, 0.5), (1.0, 0.0))
-EXPECTED_BMU_TO_PAPER_WILSON_MAP = ((0.0, 1.0), (2.0, 0.0))
+EXPECTED_PAPER_TO_BMU_OPERATOR_MAP = ((0.0, -2.0), (1.0, 0.0))
+EXPECTED_BMU_TO_PAPER_OPERATOR_MAP = ((0.0, 1.0), (-0.5, 0.0))
+EXPECTED_PAPER_TO_BMU_WILSON_MAP = ((0.0, -0.5), (1.0, 0.0))
+EXPECTED_BMU_TO_PAPER_WILSON_MAP = ((0.0, 1.0), (-2.0, 0.0))
 EXPECTED_ARTIFACT_OBSERVABLE_ROWS = {
     "M12_K_NP.re",
     "M12_K_NP.im",
     "Delta_m_K_NP",
 }
 EXPECTED_M12_K_NP = {
-    "real": -1.3495753042583394e-14,
-    "imag": -9.322420653906486e-15,
+    "real": -2.1488995368345126e-14,
+    "imag": -1.4843888564162242e-14,
 }
-EXPECTED_DELTA_M_K_NP_GEV = -2.6991506085166787e-14
+EXPECTED_DELTA_M_K_NP_GEV = -4.297799073669025e-14
 STRICT_PAPER_ARTIFACT_POINT_ID = "pr1.table_i_eq3_example.strict_paper.v1"
 STRICT_PAPER_WILSON_BUNDLE_ID = "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1"
 STRICT_PAPER_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr1.table_i_eq3_example.strict_paper.v1"
@@ -2868,8 +2870,7 @@ def _build_eft_rg_lo_summary(modules: Mapping[str, Any]) -> tuple[list[str], dic
         "lr_contract_running_is_active": lr_running_activated is True,
         "public_lr_rg_support_is_active": lr_basis_map_supported is True,
         "supported_operator_surface_is_full_lr_rg": (
-            tuple(supported_operator_names)
-            == EXPECTED_SUPPORTED_OPERATOR_ORDER + EXPECTED_GUARDED_LR_OPERATOR_ORDER
+            tuple(supported_operator_names) == EXPECTED_SUPPORTED_OPERATOR_ORDER
         ),
         "unsupported_operator_surface_is_empty": tuple(unsupported_operator_names) == tuple(),
         "matching_input_scheme_matches_summary": (
@@ -2986,14 +2987,14 @@ def _build_eft_rg_lo_summary(modules: Mapping[str, Any]) -> tuple[list[str], dic
                 and _real_matrix_vector_multiply(paper_to_bmu_operator_map, (1.0, 0.0))
                 == (0.0, 1.0)
                 and _real_matrix_vector_multiply(paper_to_bmu_operator_map, (0.0, 1.0))
-                == (2.0, 0.0)
+                == (-2.0, 0.0)
             ),
             "wilson_basis_vectors_map_as_frozen": (
                 paper_to_bmu_wilson_map is not None
                 and _real_matrix_vector_multiply(paper_to_bmu_wilson_map, (1.0, 0.0))
                 == (0.0, 1.0)
                 and _real_matrix_vector_multiply(paper_to_bmu_wilson_map, (0.0, 1.0))
-                == (0.5, 0.0)
+                == (-0.5, 0.0)
             ),
             "contract_matches_rg_export": (
                 lr_contract_contract_id == contract_lr_basis_contract_id
@@ -3122,7 +3123,7 @@ def _build_lr_contract_freeze_summary(
             dict(entry)
             for entry in operators
             if isinstance(entry, Mapping)
-            and str(entry.get("name")) in EXPECTED_UNSUPPORTED_OPERATORS
+            and str(entry.get("name")) in EXPECTED_GUARDED_LR_OPERATOR_ORDER
         ]
 
     paper_lr_operator_names = [str(entry.get("name")) for entry in lr_operator_entries]
@@ -3230,14 +3231,14 @@ def _build_lr_contract_freeze_summary(
             and _real_matrix_vector_multiply(paper_to_bmu_operator_map, (1.0, 0.0))
             == (0.0, 1.0)
             and _real_matrix_vector_multiply(paper_to_bmu_operator_map, (0.0, 1.0))
-            == (2.0, 0.0)
+            == (-2.0, 0.0)
         ),
         "wilson_basis_vectors_map_as_frozen": (
             paper_to_bmu_wilson_map is not None
             and _real_matrix_vector_multiply(paper_to_bmu_wilson_map, (1.0, 0.0))
                 == (0.0, 1.0)
                 and _real_matrix_vector_multiply(paper_to_bmu_wilson_map, (0.0, 1.0))
-                == (0.5, 0.0)
+                == (-0.5, 0.0)
             ),
         "lr_running_is_active": (
             lr_basis_contract_payload.get("lr_running_activated") is True
@@ -3249,11 +3250,11 @@ def _build_lr_contract_freeze_summary(
         "matching_references_lr_contract_status": (
             matching_payload.get("lr_basis_status_id") == lr_basis_contract_payload.get("status_id")
         ),
-        "matching_supported_subset_stays_q1_only": (
+        "matching_supported_subset_is_q1_lr": (
             tuple(matching_supported_operator_names) == EXPECTED_SUPPORTED_OPERATOR_ORDER
         ),
-        "matching_unsupported_subset_is_lr_only": (
-            tuple(matching_unsupported_operator_names) == EXPECTED_GUARDED_LR_OPERATOR_ORDER
+        "matching_unsupported_subset_is_empty": (
+            tuple(matching_unsupported_operator_names) == tuple()
         ),
         "rg_contract_references_lr_contract": (
             rg_contract_payload.get("lr_basis_contract_id")
@@ -3264,8 +3265,7 @@ def _build_lr_contract_freeze_summary(
             == lr_basis_contract_payload.get("status_id")
         ),
         "rg_supported_subset_is_lr_running_surface": (
-            tuple(rg_supported_operator_names)
-            == EXPECTED_SUPPORTED_OPERATOR_ORDER + EXPECTED_GUARDED_LR_OPERATOR_ORDER
+            tuple(rg_supported_operator_names) == EXPECTED_SUPPORTED_OPERATOR_ORDER
         ),
         "rg_unsupported_subset_is_empty": (
             tuple(rg_unsupported_operator_names) == tuple()
@@ -3752,11 +3752,11 @@ def _build_hadronic_summary(modules: Mapping[str, Any]) -> tuple[list[str], dict
         "default_export_matches_builder_default": builder_default_payload == payload,
         "supported_operator_subset_is_pr5a": isinstance(operator_names, Sequence)
         and not isinstance(operator_names, (str, bytes, bytearray))
-        and {str(item) for item in operator_names} == EXPECTED_SUPPORTED_OPERATORS,
+        and {str(item) for item in operator_names} == EXPECTED_DEFAULT_Q1_SUPPORTED_OPERATORS,
         "unsupported_operator_subset_is_lr_only": isinstance(unsupported_operator_names, Sequence)
         and not isinstance(unsupported_operator_names, (str, bytes, bytearray))
         and {str(item) for item in unsupported_operator_names}
-        == EXPECTED_UNSUPPORTED_OPERATORS,
+        == EXPECTED_DEFAULT_Q1_UNSUPPORTED_OPERATORS,
     }
     failures.extend(
         f"hadronic acceptance check failed: {name}" for name, ok in checks.items() if not ok
@@ -3945,7 +3945,7 @@ def _build_default_lr_hadronic_probe_summary(
         for value in (b4_mu_had, r_chi_mu_had, m_K0_GeV, f_K_GeV)
     ):
         expected_q4 = (
-            2.0
+            0.5
             * float(r_chi_mu_had)
             * (float(m_K0_GeV) ** 2)
             * (float(f_K_GeV) ** 2)
@@ -3956,7 +3956,7 @@ def _build_default_lr_hadronic_probe_summary(
         for value in (b5_mu_had, r_chi_mu_had, m_K0_GeV, f_K_GeV)
     ):
         expected_q5 = (
-            (2.0 / 3.0)
+            (1.0 / 6.0)
             * float(r_chi_mu_had)
             * (float(m_K0_GeV) ** 2)
             * (float(f_K_GeV) ** 2)
@@ -4692,8 +4692,8 @@ def _build_custom_lr_hadronic_probe_summary(
         )
     )
     default_bundle_unchanged = (
-        set(default_supported_operator_names) == EXPECTED_SUPPORTED_OPERATORS
-        and set(default_unsupported_operator_names) == EXPECTED_UNSUPPORTED_OPERATORS
+        set(default_supported_operator_names) == EXPECTED_DEFAULT_Q1_SUPPORTED_OPERATORS
+        and set(default_unsupported_operator_names) == EXPECTED_DEFAULT_Q1_UNSUPPORTED_OPERATORS
         and default_lr_fields_absent
     )
 
@@ -4833,14 +4833,14 @@ def _build_custom_lr_hadronic_probe_summary(
     q4_matrix_element_GeV4 = _extract_lr_matrix_element(payload, "Q4_LR")
     q5_matrix_element_GeV4 = _extract_lr_matrix_element(payload, "Q5_LR")
     expected_q4 = (
-        2.0
+        0.5
         * LR_HADRONIC_PROBE_R_CHI
         * (m_K0_GeV**2)
         * (f_K_GeV**2)
         * LR_HADRONIC_PROBE_B4
     )
     expected_q5 = (
-        (2.0 / 3.0)
+        (1.0 / 6.0)
         * LR_HADRONIC_PROBE_R_CHI
         * (m_K0_GeV**2)
         * (f_K_GeV**2)
@@ -5825,7 +5825,7 @@ def _materialize_artifact_summary(
                 coefficient_summary[name]["real"] == 0.0
                 and coefficient_summary[name]["imag"] == 0.0
             )
-            for name in sorted(EXPECTED_UNSUPPORTED_OPERATORS)
+            for name in sorted(EXPECTED_GUARDED_LR_OPERATOR_ORDER)
         ),
         "canonical_export_files_present": canonical_export_files_present,
         "tracked_default_exports_match_current_export": (

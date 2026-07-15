@@ -1,4 +1,11 @@
-"""Dedicated canonical package for the paper-facing 0710.1869 workflow."""
+"""Dedicated canonical package for the paper-facing 0710.1869 workflow.
+
+Lane C is NON-PRODUCTION. Conventions corrected 2026-07 (audit
+C-1,M-8,M-27,C-5,M-13,C-6,C-2). Two residuals remain, C-6 exact Table-I
+affine coefficients and C-2 default RH-down alignment model, pending
+arXiv:0710.1869 which is not in-repo. Therefore NO code-verified FPR
+epsilon_K floor may be quoted from this lane until those residuals close.
+"""
 
 from .artifacts import (
     HADRONIC_BUNDLE_SCHEMA,

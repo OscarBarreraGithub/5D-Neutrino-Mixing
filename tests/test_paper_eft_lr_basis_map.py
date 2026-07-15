@@ -7,19 +7,19 @@ from collections.abc import Sequence
 
 import pytest
 
-EXPECTED_CONTRACT_ID = "paper_q4q5_to_bmu_lr_basis.map_frozen.audit_ready.v2"
+EXPECTED_CONTRACT_ID = "paper_q4q5_to_bmu_lr_basis.map_frozen.audit_ready.v3"
 EXPECTED_STATUS_ID = (
     "paper_q4q5_to_bmu_lr_basis.map_frozen."
     "lr_rg_active.custom_lr_hadronic_active."
     "custom_lr_only_observable_active.custom_combined_observable_active."
-    "default_export_q1_only.v6"
+    "default_export_lr_capable.v7"
 )
 EXPECTED_PAPER_OPERATOR_ORDER = ("Q4_LR", "Q5_LR")
 EXPECTED_BMU_OPERATOR_ORDER = ("Q1_LR_BMU", "Q2_LR_BMU")
-EXPECTED_PAPER_TO_BMU_OPERATOR_MAP = ((0.0, 2.0), (1.0, 0.0))
-EXPECTED_BMU_TO_PAPER_OPERATOR_MAP = ((0.0, 1.0), (0.5, 0.0))
-EXPECTED_PAPER_TO_BMU_WILSON_MAP = ((0.0, 0.5), (1.0, 0.0))
-EXPECTED_BMU_TO_PAPER_WILSON_MAP = ((0.0, 1.0), (2.0, 0.0))
+EXPECTED_PAPER_TO_BMU_OPERATOR_MAP = ((0.0, -2.0), (1.0, 0.0))
+EXPECTED_BMU_TO_PAPER_OPERATOR_MAP = ((0.0, 1.0), (-0.5, 0.0))
+EXPECTED_PAPER_TO_BMU_WILSON_MAP = ((0.0, -0.5), (1.0, 0.0))
+EXPECTED_BMU_TO_PAPER_WILSON_MAP = ((0.0, 1.0), (-2.0, 0.0))
 
 
 def _load_rg_module():
@@ -73,7 +73,7 @@ def test_lr_basis_contract_exposes_exact_frozen_map_metadata() -> None:
     assert ".custom_lr_hadronic_active." in contract.status_id
     assert ".custom_lr_only_observable_active." in contract.status_id
     assert ".custom_combined_observable_active." in contract.status_id
-    assert contract.status_id.endswith(".default_export_q1_only.v6")
+    assert contract.status_id.endswith(".default_export_lr_capable.v7")
     assert tuple(contract.paper_operator_order) == EXPECTED_PAPER_OPERATOR_ORDER
     assert tuple(contract.bmu_lr_operator_order) == EXPECTED_BMU_OPERATOR_ORDER
     assert contract.mapping_matrix_frozen is True
@@ -143,21 +143,21 @@ def test_lr_map_round_trip_identity_and_basis_vectors() -> None:
     )
 
     assert _matrix_vector_multiply(operator_forward, (1.0, 0.0)) == (0.0, 1.0)
-    assert _matrix_vector_multiply(operator_forward, (0.0, 1.0)) == (2.0, 0.0)
+    assert _matrix_vector_multiply(operator_forward, (0.0, 1.0)) == (-2.0, 0.0)
     assert _matrix_vector_multiply(wilson_forward, (1.0, 0.0)) == (0.0, 1.0)
-    assert _matrix_vector_multiply(wilson_forward, (0.0, 1.0)) == (0.5, 0.0)
+    assert _matrix_vector_multiply(wilson_forward, (0.0, 1.0)) == (-0.5, 0.0)
 
     assert rg_module.map_paper_lr_wilsons_to_bmu_lr((1.0 + 0.0j, 0.0 + 0.0j)) == (
         0.0 + 0.0j,
         1.0 + 0.0j,
     )
     assert rg_module.map_paper_lr_wilsons_to_bmu_lr((0.0 + 0.0j, 1.0 + 0.0j)) == (
-        0.5 + 0.0j,
+        -0.5 + 0.0j,
         0.0 + 0.0j,
     )
     assert rg_module.map_bmu_lr_wilsons_to_paper_lr((1.0 + 0.0j, 0.0 + 0.0j)) == (
         0.0 + 0.0j,
-        2.0 + 0.0j,
+        -2.0 + 0.0j,
     )
     assert rg_module.map_bmu_lr_wilsons_to_paper_lr((0.0 + 0.0j, 1.0 + 0.0j)) == (
         1.0 + 0.0j,

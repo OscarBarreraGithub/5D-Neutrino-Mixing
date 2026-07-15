@@ -1,7 +1,7 @@
 {
   "B_K_mu_had": 0.5557449829565828,
   "alpha_s_policy_id": "qcd.alpha_s.lo.beta0.thresholds_continuous.v1",
-  "bag_parameter_conversion_alpha_s_mu_had": 0.26770024052060604,
+  "bag_parameter_conversion_alpha_s_mu_had": 0.267700240520606,
   "bag_parameter_conversion_beta0": 8.333333333333334,
   "bag_parameter_conversion_exponent": 0.24,
   "bag_parameter_conversion_formula_id": "b_k_mu_had.equals.hat_b_k_rgi_times_alpha_s_mu_had_pow_2_over_beta0_lo.v1",
@@ -46,7 +46,7 @@
     "year": 2024
   },
   "mass_source_id": "strict.paper.mass.source.v1",
-  "matrix_element_formula_id": "kaon.q1_vll_vrr.8over3_fk2_mk2_bk_mu.v1",
+  "matrix_element_formula_id": "kaon.q1_vll_vrr.2over3_fk2_mk2_bk_mu.plpr_projectors.v2",
   "metadata": {
     "bundle_id": "hadronic.kaon.pr1.table_i_eq3_example.strict_paper.v1",
     "mode": "paper_0710_1869",
@@ -65,7 +65,7 @@
     "strict.paper.decay.constant.source.v1",
     "strict.paper.bag.source.v1"
   ],
-  "q1_matrix_element_GeV4": 0.008896136795909601,
+  "q1_matrix_element_GeV4": 0.0022240341989774003,
   "renormalization_scheme": "bmu.hep-ph-0005183.ndr-ms.lo.v1",
   "scales": [
     {
@@ -81,19 +81,18 @@
     {
       "name": "m_g1",
       "role": "KK-gluon propagator mass",
-      "value_gev": 3000.0
+      "value_gev": 7346.0614058074825
     }
   ],
   "source_id": "strict.paper.hadronic.source.v1",
   "source_wilson_bundle_id": "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1",
   "supported_operator_names": [
     "Q1_VLL",
-    "Q1_VRR"
+    "Q1_VRR",
+    "Q4_LR",
+    "Q5_LR"
   ],
   "system": "kaon",
   "system_id": "kaon",
-  "unsupported_operator_names": [
-    "Q4_LR",
-    "Q5_LR"
-  ]
+  "unsupported_operator_names": []
 }

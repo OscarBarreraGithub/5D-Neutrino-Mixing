@@ -30,26 +30,26 @@ STRICT_PAPER_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr1.table_i_eq3_example.strict_
 STRICT_PAPER_OBSERVABLE_BUNDLE_ID = "observable.kaon.pr1.table_i_eq3_example.strict_paper.v1"
 STRICT_PAPER_PROVENANCE_BUNDLE_ID = "provenance.kaon.pr1.table_i_eq3_example.strict_paper.v1"
 STRICT_PAPER_ARTIFACT_DIR = _REPO_ROOT / "results" / "paper_0710_1869" / "strict_paper_kaon"
-DEFAULT_KAON_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR")
-DEFAULT_KAON_UNSUPPORTED_OPERATORS = ("Q4_LR", "Q5_LR")
+DEFAULT_KAON_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR")
+DEFAULT_KAON_UNSUPPORTED_OPERATORS: tuple[str, ...] = ()
 DELTA_M_RELATION_ID = "delta_m_k_np.equals.2_re_m12_k_np.v1"
 DEFAULT_BAG_PARAMETER_CONVERSION_FORMULA_ID = (
     "b_k_mu_had.equals.hat_b_k_rgi_times_alpha_s_mu_had_pow_2_over_beta0_lo.v1"
 )
 DEFAULT_KAON_FROZEN_MATCHING_Q1_VLL = complex(
-    -1.1004498898491606e-12,
-    -7.601544537269597e-13,
+    -1.3192891343059674e-11,
+    -9.113213790531881e-12,
 )
 DEFAULT_KAON_FROZEN_RG_Q1_VLL = complex(
-    -1.509786848232995e-12,
-    -1.0429109107548845e-12,
+    -9.616003638032409e-12,
+    -6.642417851036288e-12,
 )
-DEFAULT_KAON_FROZEN_BAG_PARAMETER_CONVERSION_ALPHA_S_MU_HAD = 0.26770024052060604
+DEFAULT_KAON_FROZEN_BAG_PARAMETER_CONVERSION_ALPHA_S_MU_HAD = 0.267700240520606
 DEFAULT_KAON_FROZEN_M12_K_NP = complex(
-    -1.3495753042583394e-14,
-    -9.322420653906486e-15,
+    -2.1488995368345126e-14,
+    -1.4843888564162242e-14,
 )
-DEFAULT_KAON_FROZEN_DELTA_M_K_NP_GEV = -2.6991506085166787e-14
+DEFAULT_KAON_FROZEN_DELTA_M_K_NP_GEV = -4.297799073669025e-14
 DEFAULT_KAON_ARTIFACT_FILENAMES = {
     "wilsons": "wilsons.json",
     "observables": "observables.json",
@@ -1089,11 +1089,11 @@ class HadronicArtifactBundleV1:
         _ensure_unique_strings(self.provenance_ids, context="hadronic.provenance_ids")
         if tuple(self.supported_operator_names) != DEFAULT_KAON_SUPPORTED_OPERATORS:
             raise ArtifactSchemaError(
-                "hadronic.supported_operator_names must match the kaon NP-only Q1 subset"
+                "hadronic.supported_operator_names must match the kaon NP-only Q1/LR subset"
             )
         if tuple(self.unsupported_operator_names) != DEFAULT_KAON_UNSUPPORTED_OPERATORS:
             raise ArtifactSchemaError(
-                "hadronic.unsupported_operator_names must match the guarded LR subset"
+                "hadronic.unsupported_operator_names must be empty for the corrected Q1/LR subset"
             )
         for field_name in ("m_K0_GeV", "f_K_GeV", "B_K_mu_had", "q1_matrix_element_GeV4"):
             value = _require_float(getattr(self, field_name), context=f"hadronic.{field_name}")
@@ -1973,9 +1973,9 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
             DEFAULT_RG_PROVENANCE_ID,
         ),
         notes=(
-            "Kaon NP-only Wilson surface at mu_had. Exported coefficients are restricted to "
-            "Q1_VLL and Q1_VRR only; LR operators remain unsupported and are carried only as "
-            "explicit out-of-scope labels."
+            "Kaon NP-only Wilson surface at mu_had. Exported coefficients include the "
+            "corrected Q1/LR support surface. The default kaon point has zero LR "
+            "coefficients under the current RH-down alignment residual."
         ),
     )
 
@@ -2006,8 +2006,8 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
         matrix_element_formula_id=hadronic.matrix_element_formula_id,
         hamiltonian_convention_id=hadronic.hamiltonian_convention_id,
         parity_relation_id=hadronic.parity_relation_id,
-        supported_operator_names=hadronic.supported_operator_names,
-        unsupported_operator_names=hadronic.unsupported_operator_names,
+        supported_operator_names=DEFAULT_KAON_SUPPORTED_OPERATORS,
+        unsupported_operator_names=DEFAULT_KAON_UNSUPPORTED_OPERATORS,
         m_K0_GeV=hadronic.m_K0_GeV,
         f_K_GeV=hadronic.f_K_GeV,
         B_K_mu_had=hadronic.B_K_mu_had,

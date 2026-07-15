@@ -64,7 +64,7 @@ EXPECTED_Q5_LR_DEFINITION_ID = (
     "paper_0710_1869.deltaf2.q5_lr.susy_o5.scalar_lr.color_mixed.v1"
 )
 EXPECTED_PROJECTOR_NORMALIZATION_ID = (
-    "paper_0710_1869.deltaf2.projectors.pl_pr_equals_1mp_gamma5_over_2.v1"
+    "paper_0710_1869.deltaf2.projectors.pl_pr_equals_1mp_gamma5_over_2.v2"
 )
 EXPECTED_PROJECTOR_NORMALIZATION_NOTE = (
     "All chiral bilinears use P_L = (1-gamma5)/2 and P_R = (1+gamma5)/2. "
@@ -609,6 +609,8 @@ def test_zero_fcnc_toy_couplings_give_zero_wilsons() -> None:
         zero_left_down_universal_component * np.eye(3, dtype=np.complex128)
     )
     g_s_mu_gs = float(couplings.left_down_aligned.g_s_mu_gs)
+    sqrt_2L = float(couplings.left_down_aligned.rs_volume_sqrt_2L)
+    identity = np.eye(3, dtype=np.complex128)
 
     assert np.allclose(
         zero_left_down_raw - np.diag(np.diag(zero_left_down_raw)),
@@ -623,8 +625,9 @@ def test_zero_fcnc_toy_couplings_give_zero_wilsons() -> None:
         raw_dimensionless=zero_left_down_raw,
         universal_component=zero_left_down_universal_component,
         universal_subtracted_dimensionless=zero_left_down_subtracted,
-        raw_gs_normalized=g_s_mu_gs * zero_left_down_raw,
-        universal_subtracted_gs_normalized=g_s_mu_gs * zero_left_down_subtracted,
+        raw_gs_normalized=g_s_mu_gs
+        * ((sqrt_2L * zero_left_down_raw) - (identity / sqrt_2L)),
+        universal_subtracted_gs_normalized=g_s_mu_gs * sqrt_2L * zero_left_down_subtracted,
     )
     zero_fcnc_couplings = dataclasses.replace(couplings, left_down_aligned=zero_left_down)
     payload = _payload_from_value(_invoke_matching(callable_obj, kk_couplings=zero_fcnc_couplings))

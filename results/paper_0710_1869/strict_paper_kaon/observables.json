@@ -4,8 +4,8 @@
   "interpretation": "kaon.np_only.v1",
   "m12_observable_id": "M12_K_NP",
   "m12_value": {
-    "imag": -9.322420653906486e-15,
-    "real": -1.3495753042583394e-14
+    "imag": -1.4843888564162242e-14,
+    "real": -2.1488995368345126e-14
   },
   "metadata": {
     "bundle_id": "observable.kaon.pr1.table_i_eq3_example.strict_paper.v1",
@@ -21,19 +21,19 @@
       "name": "M12_K_NP.re",
       "system": "kaon",
       "units": "GeV",
-      "value": -1.3495753042583394e-14
+      "value": -2.1488995368345126e-14
     },
     {
       "name": "M12_K_NP.im",
       "system": "kaon",
       "units": "GeV",
-      "value": -9.322420653906486e-15
+      "value": -1.4843888564162242e-14
     },
     {
       "name": "Delta_m_K_NP",
       "system": "kaon",
       "units": "GeV",
-      "value": -2.6991506085166787e-14
+      "value": -4.297799073669025e-14
     }
   ],
   "operator_basis": "kk_gluon_tree_np_only.v1",
@@ -62,16 +62,14 @@
     {
       "name": "m_g1",
       "role": "KK-gluon propagator mass",
-      "value_gev": 3000.0
+      "value_gev": 7346.0614058074825
     }
   ],
   "source_hadronic_bundle_id": "hadronic.kaon.pr1.table_i_eq3_example.strict_paper.v1",
   "source_wilson_bundle_id": "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1",
   "supported_operator_names": [
     "Q1_VLL",
-    "Q1_VRR"
-  ],
-  "unsupported_operator_names": [
+    "Q1_VRR",
     "Q4_LR",
     "Q5_LR"
   ]

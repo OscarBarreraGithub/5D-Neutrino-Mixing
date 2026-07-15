@@ -75,14 +75,14 @@ EXPECTED_GUARDED_LR_DEFINITION_IDS = [
 ]
 EXPECTED_LR_PAPER_OPERATOR_ORDER = ["Q4_LR", "Q5_LR"]
 EXPECTED_LR_BMU_OPERATOR_ORDER = ["Q1_LR_BMU", "Q2_LR_BMU"]
-EXPECTED_PAPER_TO_BMU_OPERATOR_MAP = [[0.0, 2.0], [1.0, 0.0]]
-EXPECTED_BMU_TO_PAPER_OPERATOR_MAP = [[0.0, 1.0], [0.5, 0.0]]
-EXPECTED_PAPER_TO_BMU_WILSON_MAP = [[0.0, 0.5], [1.0, 0.0]]
-EXPECTED_BMU_TO_PAPER_WILSON_MAP = [[0.0, 1.0], [2.0, 0.0]]
-EXPECTED_MATCHING_Q1_VLL = {"real": -1.1004498898491606e-12, "imag": -7.601544537269597e-13}
-EXPECTED_RG_Q1_VLL = {"real": -1.509786848232995e-12, "imag": -1.0429109107548845e-12}
-EXPECTED_M12_K_NP = {"real": -1.3495753042583394e-14, "imag": -9.322420653906486e-15}
-EXPECTED_DELTA_M_K_NP_GEV = -2.6991506085166787e-14
+EXPECTED_PAPER_TO_BMU_OPERATOR_MAP = [[0.0, -2.0], [1.0, 0.0]]
+EXPECTED_BMU_TO_PAPER_OPERATOR_MAP = [[0.0, 1.0], [-0.5, 0.0]]
+EXPECTED_PAPER_TO_BMU_WILSON_MAP = [[0.0, -0.5], [1.0, 0.0]]
+EXPECTED_BMU_TO_PAPER_WILSON_MAP = [[0.0, 1.0], [-2.0, 0.0]]
+EXPECTED_MATCHING_Q1_VLL = {"real": -1.3192891343059674e-11, "imag": -9.113213790531881e-12}
+EXPECTED_RG_Q1_VLL = {"real": -9.616003638032409e-12, "imag": -6.642417851036288e-12}
+EXPECTED_M12_K_NP = {"real": -2.1488995368345126e-14, "imag": -1.4843888564162242e-14}
+EXPECTED_DELTA_M_K_NP_GEV = -4.297799073669025e-14
 EXPECTED_SYNTHETIC_LR_INPUT = [
     {"real": 1.25, "imag": -0.5},
     {"real": -0.75, "imag": 0.25},
@@ -176,7 +176,7 @@ def _assert_lr_status_semantics(status_id: object) -> None:
     assert ".custom_lr_hadronic_active." in status_id
     assert ".custom_lr_only_observable_active." in status_id
     assert ".custom_combined_observable_active." in status_id
-    assert status_id.endswith(".default_export_q1_only.v6")
+    assert status_id.endswith(".default_export_lr_capable.v7")
 
 
 def _canonical_tolerance_policy() -> dict[str, object]:

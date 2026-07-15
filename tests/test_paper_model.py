@@ -23,6 +23,8 @@ from quarkConstraints.paper_0710_1869.conventions import (
 )
 from quarkConstraints.paper_0710_1869.inputs import default_paper_0710_1869_table_i_inputs
 from quarkConstraints.paper_0710_1869.inputs import (
+    PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT,
+    PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET,
     PAPER_0710_1869_PHYSICAL_SEED_TO_PROFILE_CONTRACT_SCHEMA_ID,
     default_paper_0710_1869_physical_seed_to_profile_contract,
 )
@@ -67,6 +69,13 @@ from warpConfig.wavefuncs import f_IR
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MODEL_MODULE_PATH = REPO_ROOT / "quarkConstraints" / "paper_0710_1869" / "model.py"
+
+
+def _physical_sector_policy(contract, sector_id: str):
+    for policy in contract.universal_term_policy.sector_policies:
+        if policy.sector_id == sector_id:
+            return policy
+    raise AssertionError(f"missing physical sector policy {sector_id!r}")
 
 
 def test_default_table_i_benchmark_preserves_quoted_sector_values():
@@ -245,6 +254,14 @@ def test_physical_contract_is_exactly_frozen():
         == PAPER_0710_1869_UNIVERSAL_TERM_COEFFICIENT_POLICY_ID
     )
     assert not contract.mapping_policy.uses_hidden_bulk_mass_map_surrogate
+    for sector_id in ("Q", "u", "d"):
+        policy = _physical_sector_policy(contract, sector_id)
+        assert policy.leading_term_coefficient == pytest.approx(
+            PAPER_0710_1869_AFFINE_BULK_MASS_LEADING_TERM_COEFFICIENT
+        )
+        assert policy.universal_offset == pytest.approx(
+            PAPER_0710_1869_AFFINE_BULK_MASS_UNIVERSAL_OFFSET
+        )
 
 
 def test_physical_point_and_bulk_state_use_point_derived_frozen_contract_and_stay_distinct_from_reference_only_path():
@@ -272,9 +289,27 @@ def test_physical_point_and_bulk_state_use_point_derived_frozen_contract_and_sta
     assert physical_bulk_state.profile_input_policy_id == PAPER_0710_1869_DERIVED_PROFILE_INPUT_POLICY_ID
     assert physical_bulk_state.physical_contract == default_paper_0710_1869_physical_seed_to_profile_contract()
 
-    np.testing.assert_allclose(physical_bulk_state.c_Q, physical_bulk_state.eig_Q, atol=1.0e-12)
-    np.testing.assert_allclose(physical_bulk_state.c_u, physical_bulk_state.eig_u, atol=1.0e-12)
-    np.testing.assert_allclose(physical_bulk_state.c_d, physical_bulk_state.eig_d, atol=1.0e-12)
+    q_policy = _physical_sector_policy(physical_bulk_state.physical_contract, "Q")
+    u_policy = _physical_sector_policy(physical_bulk_state.physical_contract, "u")
+    d_policy = _physical_sector_policy(physical_bulk_state.physical_contract, "d")
+    np.testing.assert_allclose(
+        physical_bulk_state.c_Q,
+        (q_policy.leading_term_coefficient * physical_bulk_state.eig_Q)
+        + q_policy.universal_offset,
+        atol=1.0e-12,
+    )
+    np.testing.assert_allclose(
+        physical_bulk_state.c_u,
+        (u_policy.leading_term_coefficient * physical_bulk_state.eig_u)
+        + u_policy.universal_offset,
+        atol=1.0e-12,
+    )
+    np.testing.assert_allclose(
+        physical_bulk_state.c_d,
+        (d_policy.leading_term_coefficient * physical_bulk_state.eig_d)
+        + d_policy.universal_offset,
+        atol=1.0e-12,
+    )
     np.testing.assert_allclose(
         physical_bulk_state.F_Q,
         np.asarray(f_IR(physical_bulk_state.c_Q, physical_bulk_state.epsilon), dtype=float),
@@ -341,7 +376,7 @@ def test_physical_bulk_state_rejects_forged_payload_and_mutated_nested_contracts
             c_Q=physical_state.c_Q + np.array([1.0e-8, 0.0, 0.0]),
         )
 
-    with pytest.raises(ValueError, match="physical_contract.universal_term_policy must match the exact frozen QS1 default"):
+    with pytest.raises(ValueError, match="physical bulk-state contract must match point.physical_contract"):
         replace(physical_state, physical_contract=mutated_contract)
 
 
