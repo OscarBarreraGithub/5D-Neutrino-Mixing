@@ -17,6 +17,7 @@ from flavor_catalog_constraints.physics_adapters.lepton_tau_mu import (
     tau_to_mu_gamma_from_lepton_input,
     tau_to_mu_gamma_proxy_input,
 )
+from quarkConstraints.lfv_three_body import TAU_TO_MU_NUNU_BRANCHING_FRACTION
 
 _PID = "L007"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -179,10 +180,12 @@ def test_proxy_numerics_match_mu_to_e_core_with_tau_mu_rotation():
     m_kk_gev = 3000.0
     reference_scale_gev = 3000.0
     result = constraint.evaluate(_proxy_point(y_n_bar))
-
-    c_lfv = math.sqrt(
-        constraint.anchor.budget / constraint.anchor.dipole_prefactor_br.value
+    effective_prefactor = (
+        constraint.anchor.dipole_prefactor_br.value
+        * TAU_TO_MU_NUNU_BRANCHING_FRACTION
     )
+
+    c_lfv = math.sqrt(constraint.anchor.budget / effective_prefactor)
     core = check_mu_to_e_gamma_raw(
         np.asarray(y_n_bar, dtype=complex),
         _tau_mu_rotation_pmns()[[1, 2, 0], :],
@@ -191,7 +194,7 @@ def test_proxy_numerics_match_mu_to_e_core_with_tau_mu_rotation():
         reference_scale=reference_scale_gev,
     )
     expected_br = float(
-        constraint.anchor.dipole_prefactor_br.value
+        effective_prefactor
         * float(core["lhs"]) ** 2
         * (reference_scale_gev / m_kk_gev) ** 4
     )
@@ -215,8 +218,13 @@ def test_proxy_numerics_match_mu_to_e_core_with_tau_mu_rotation():
     )
     assert abs(expected_off_23) > 0.0
     assert expected_off_12 == pytest.approx(0.0j)
-    assert result.diagnostics["lfv_coefficient"] == pytest.approx(
-        math.sqrt(constraint.anchor.budget / constraint.anchor.dipole_prefactor_br.value)
+    assert result.diagnostics["lfv_coefficient"] == pytest.approx(c_lfv)
+    assert result.diagnostics["prefactor_br"] == pytest.approx(effective_prefactor)
+    assert result.diagnostics["muon_normalized_prefactor_br"] == pytest.approx(
+        constraint.anchor.dipole_prefactor_br.value
+    )
+    assert result.diagnostics["tau_leptonic_branching_fraction"] == pytest.approx(
+        TAU_TO_MU_NUNU_BRANCHING_FRACTION
     )
     assert result.diagnostics["evaluated"] is True
     assert "NEEDS-HUMAN-PHYSICS" in result.diagnostics["needs_human_physics"]
@@ -259,7 +267,7 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     ("point", "expected_pass"),
     [
         (_proxy_point((0.01, 0.02, 0.03)), True),
-        (_proxy_point((0.10, 1.00, 3.00)), False),
+        (_proxy_point((0.10, 1.00, 6.00)), False),
     ],
 )
 def test_safe_point_passes_and_large_np_point_fails(point, expected_pass: bool):

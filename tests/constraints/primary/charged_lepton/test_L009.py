@@ -20,6 +20,7 @@ from flavor_catalog_constraints.physics_adapters.lfv_three_body_tau import (
 )
 from quarkConstraints.lfv_three_body import (
     LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION,
+    TAU_TO_MU_NUNU_BRANCHING_FRACTION,
     lfv_three_body_contact_amplitudes as core_lfv_three_body_contact_amplitudes,
     lfv_three_body_from_components,
 )
@@ -194,6 +195,9 @@ def test_tau_mu_dipole_only_factor_matches_manual_formula():
     assert result.diagnostics["dipole_conversion_factor"] == pytest.approx(
         expected_factor
     )
+    assert result.diagnostics["leptonic_normalization_branching_fraction"] == pytest.approx(
+        TAU_TO_MU_NUNU_BRANCHING_FRACTION
+    )
     assert result.diagnostics["initial_flavor"] == "tau"
     assert result.diagnostics["final_flavor"] == "mu"
     assert result.diagnostics["contact_input_present"] is False
@@ -276,6 +280,9 @@ def test_absent_tree_ignores_legacy_overlap_but_preserves_dipole_and_box():
     assert result.sm_prediction == pytest.approx(0.0)
     assert result.diagnostics["dipole_parent_branching_fraction"] == pytest.approx(
         expected.dipole_parent_branching_fraction
+    )
+    assert result.diagnostics["leptonic_normalization_branching_fraction"] == pytest.approx(
+        TAU_TO_MU_NUNU_BRANCHING_FRACTION
     )
     assert result.diagnostics["dipole_component"] == pytest.approx(
         expected.dipole_component
@@ -365,7 +372,7 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
     ("lepton", "expected_pass"),
     [
         ({"box_ll": 1.0e-5, "m_kk_gev": 3000.0}, True),
-        ({"box_ll": 5.0e-4, "m_kk_gev": 3000.0}, False),
+        ({"box_ll": 1.0e-3, "m_kk_gev": 3000.0}, False),
     ],
 )
 def test_safe_point_passes_and_large_np_point_fails(lepton, expected_pass: bool):

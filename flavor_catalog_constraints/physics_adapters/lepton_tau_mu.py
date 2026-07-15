@@ -24,6 +24,10 @@ from flavorConstraints.muToEGamma import (
     check_mu_to_e_gamma as _check_mu_to_e_gamma,
     check_mu_to_e_gamma_raw as _check_mu_to_e_gamma_raw,
 )
+from quarkConstraints.lfv_three_body import (
+    PDG_TAU_LEPTONIC_BRANCHING_FRACTION_SOURCE,
+    TAU_TO_MU_NUNU_BRANCHING_FRACTION,
+)
 
 from .lepton import (
     LEPTON_DIPOLE_PROXY_ASSUMPTION_V1,
@@ -152,7 +156,9 @@ def tau_to_mu_gamma_from_lepton_input(
 
     _assert_tau_to_mu_flavors(lepton_input)
     limit = _positive_finite(br_limit, name="br_limit")
-    prefactor = _positive_finite(prefactor_br, name="prefactor_br")
+    raw_prefactor = _positive_finite(prefactor_br, name="prefactor_br")
+    # PDG B(tau->mu nu nubar) converts the reused muon-normalized NDA width to a tau BR.
+    prefactor = float(raw_prefactor * TAU_TO_MU_NUNU_BRANCHING_FRACTION)
     reference_scale = _positive_finite(
         reference_scale_gev,
         name="reference_scale_gev",
@@ -184,6 +190,7 @@ def tau_to_mu_gamma_from_lepton_input(
             product_matrix=product,
             br_limit=limit,
             prefactor_br=prefactor,
+            raw_prefactor_br=raw_prefactor,
             c_lfv=c_lfv,
             reference_scale_gev=reference_scale,
             m_kk_gev=m_kk,
@@ -213,6 +220,7 @@ def tau_to_mu_gamma_from_lepton_input(
         product_matrix=product,
         br_limit=limit,
         prefactor_br=prefactor,
+        raw_prefactor_br=raw_prefactor,
         c_lfv=c_lfv,
         reference_scale_gev=reference_scale,
         m_kk_gev=m_kk,
@@ -254,6 +262,7 @@ def _result_from_core(
     product_matrix: np.ndarray,
     br_limit: float,
     prefactor_br: float,
+    raw_prefactor_br: float,
     c_lfv: float,
     reference_scale_gev: float,
     m_kk_gev: float,
@@ -278,8 +287,16 @@ def _result_from_core(
         "reused_physics_module": "flavorConstraints.muToEGamma",
         "reused_adapter_validation": "flavor_catalog_constraints.physics_adapters.lepton",
         "branching_formula": (
-            "BR_NP = prefactor_br * |(Y_N_bar Y_N_bar^dagger)_{mu tau}|^2 "
+            "BR_NP = muon_normalized_prefactor_br * B(tau->mu nu nubar) * "
+            "|(Y_N_bar Y_N_bar^dagger)_{mu tau}|^2 "
             "* (reference_scale_gev / M_KK)^4"
+        ),
+        "muon_normalized_prefactor_br": float(raw_prefactor_br),
+        "tau_leptonic_branching_fraction": float(
+            TAU_TO_MU_NUNU_BRANCHING_FRACTION
+        ),
+        "tau_leptonic_branching_fraction_source": (
+            PDG_TAU_LEPTONIC_BRANCHING_FRACTION_SOURCE
         ),
         "flavor_basis": "(e, mu, tau)",
         "final_flavor": _FINAL_FLAVOR,

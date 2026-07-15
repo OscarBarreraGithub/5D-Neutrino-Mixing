@@ -16,6 +16,7 @@ from flavor_catalog_constraints.physics_adapters.mu_e_conversion import (
     MU_E_CONVERSION_DEFERRED_PIECES_V1,
     MU_E_CONVERSION_VECTOR_TREE_RIGOROUS_V1,
 )
+from quarkConstraints.lfv_three_body import TAU_TO_MU_NUNU_BRANCHING_FRACTION
 from quarkConstraints.mu_e_conversion import G_F_GEV_MINUS2, MUON_MASS_GEV
 from tests.constraints.primary.charged_lepton.test_L002 import _rotation_pmns
 from tests.constraints.primary.top_higgs_ew.z_lfv_rewire_helpers import (
@@ -25,6 +26,10 @@ from tests.constraints.primary.top_higgs_ew.z_lfv_rewire_helpers import (
 
 
 _LEPTON_INDEX = {"e": 0, "mu": 1, "tau": 2}
+_THREE_BODY_LEPTONIC_NORMALIZATION = {
+    ("mu", "e"): 1.0,
+    ("tau", "mu"): TAU_TO_MU_NUNU_BRANCHING_FRACTION,
+}
 
 
 def _point_with_rs_ew(base_point):
@@ -60,7 +65,10 @@ def _manual_three_body_tree_component(couplings, *, initial: str, final: str) ->
     z_lr = 2.0 * couplings.z_delta_g_L_e[f, i] * couplings.z_total_g_R_e[f, f]
     z_rl = 2.0 * couplings.z_delta_g_R_e[f, i] * couplings.z_total_g_L_e[f, f]
     z_rr = 2.0 * couplings.z_delta_g_R_e[f, i] * couplings.z_total_g_R_e[f, f]
-    return float(2.0 * (abs(z_ll) ** 2 + abs(z_rr) ** 2) + abs(z_lr) ** 2 + abs(z_rl) ** 2)
+    width_component = float(
+        2.0 * (abs(z_ll) ** 2 + abs(z_rr) ** 2) + abs(z_lr) ** 2 + abs(z_rl) ** 2
+    )
+    return float(width_component * _THREE_BODY_LEPTONIC_NORMALIZATION[(initial, final)])
 
 
 def _manual_mu_e_vector_component(couplings, nuclear) -> float:

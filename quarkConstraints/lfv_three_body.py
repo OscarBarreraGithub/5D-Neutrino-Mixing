@@ -9,8 +9,9 @@ The implemented v1 convention is
     BR(l_i -> 3 l_j) =
         BR(l_i -> l_j gamma) * alpha/(3 pi)
             * (log(m_i^2 / m_j^2) - 11/4)
-        + 2 (|G_LL|^2 + |G_RR|^2) + |G_LR|^2 + |G_RL|^2,
-        + I_dipole-contact,
+        + BR(l_i -> l_j nu nubar)
+            * [2 (|G_LL|^2 + |G_RR|^2) + |G_LR|^2 + |G_RL|^2
+               + I_dipole-contact],
 
 where ``G_AB = G_AB^Z + G_AB^box`` are dimensionless vector-contact
 amplitudes in the Hamiltonian convention
@@ -42,20 +43,22 @@ LFV_THREE_BODY_MODEL_V1 = "lfv_three_body_dipole_z_box_proxy_v1"
 LFV_THREE_BODY_INPUT_BUNDLE_V1 = "lfv_three_body_sm_inputs_2026_v1"
 LFV_THREE_BODY_OPERATOR_CONVENTION = (
     "BR(l_i -> 3 l_j) = BR(l_i -> l_j gamma) * alpha/(3*pi) * "
-    "(log(m_i^2/m_j^2)-11/4) + "
-    "2(|G_LL|^2+|G_RR|^2)+|G_LR|^2+|G_RL|^2 "
-    "+ I_dipole-contact; "
+    "(log(m_i^2/m_j^2)-11/4) + BR(l_i -> l_j nu nubar) * "
+    "[2(|G_LL|^2+|G_RR|^2)+|G_LR|^2+|G_RL|^2 "
+    "+ I_dipole-contact]; "
     "G_AB are dimensionless vector-contact amplitudes normalized to "
     "4 G_F/sqrt(2)."
 )
 LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION = (
     "Dipole-contact interference uses chiral dipole amplitudes A_L,A_R "
     "normalized by BR(l_i -> l_j gamma)=384*pi^2*(|A_L|^2+|A_R|^2) "
-    "and I_dc=2*sqrt(2)*e*Re[A_R*(2G_LL+G_LR)^* + "
-    "A_L*(2G_RR+G_RL)^*].  If only the parent dipole branching fraction "
+    "for muons and by 384*pi^2*BR(l_i -> l_j nu nubar) for taus.  "
+    "Kuno-Okada give I_dc=-8*e*Re[A_R*(2G_LL+G_LR)^* + "
+    "A_L*(2G_RR+G_RL)^*] for the width normalized to "
+    "G_F^2*m_i^5/(192*pi^3).  If only the parent dipole branching fraction "
     "is known, the relative phase/chiral split is NEEDS-HUMAN-PHYSICS and "
-    "the reported HARD prediction uses the constructive sign-envelope upper "
-    "bound; the destructive lower envelope is kept in diagnostics."
+    "the reported HARD prediction uses the constructive |8e| sign-envelope "
+    "upper bound; the destructive lower envelope is kept in diagnostics."
 )
 LFV_THREE_BODY_PROXY_V1 = (
     "NEEDS-HUMAN-PHYSICS: off-diagonal charged-lepton neutral-current and "
@@ -72,6 +75,17 @@ _CHARGED_LEPTON_MASSES_GEV = {
     "tau": 1.77686,
 }
 _CHARGED_LEPTONS = frozenset(_CHARGED_LEPTON_MASSES_GEV)
+TAU_TO_E_NUNU_BRANCHING_FRACTION = 0.1782
+TAU_TO_MU_NUNU_BRANCHING_FRACTION = 0.1739
+PDG_TAU_LEPTONIC_BRANCHING_FRACTION_SOURCE = (
+    "PDG tau branching-fraction review: B(tau->e nu nubar)=0.1782 and "
+    "B(tau->mu nu nubar)=0.1739."
+)
+_LEPTONIC_NORMALIZATION_BRANCHING_FRACTIONS = {
+    ("mu", "e"): 1.0,
+    ("tau", "e"): TAU_TO_E_NUNU_BRANCHING_FRACTION,
+    ("tau", "mu"): TAU_TO_MU_NUNU_BRANCHING_FRACTION,
+}
 
 
 @dataclass(frozen=True)
@@ -86,6 +100,9 @@ class LFVThreeBodySMInputs:
     charged_lepton_masses_gev: Mapping[str, float] = field(
         default_factory=lambda: dict(_CHARGED_LEPTON_MASSES_GEV)
     )
+    leptonic_normalization_branching_fractions: Mapping[tuple[str, str], float] = field(
+        default_factory=lambda: dict(_LEPTONIC_NORMALIZATION_BRANCHING_FRACTIONS)
+    )
 
     def charged_lepton_mass(self, flavor: str) -> float:
         key = _canonical_charged_lepton(flavor)
@@ -96,6 +113,29 @@ class LFVThreeBodySMInputs:
 
         _canonical_charged_lepton(flavor)
         return float(-0.5 + self.sin2_theta_w), float(self.sin2_theta_w)
+
+    def leptonic_normalization_branching_fraction(
+        self,
+        initial_flavor: str,
+        final_flavor: str,
+    ) -> float:
+        """Return ``BR(l_i -> l_j nu nubar)`` converting KO widths to BRs."""
+
+        key = (
+            _canonical_charged_lepton(initial_flavor),
+            _canonical_charged_lepton(final_flavor),
+        )
+        if key not in self.leptonic_normalization_branching_fractions:
+            raise ValueError(
+                "missing leptonic normalization branching fraction for "
+                f"{key[0]} -> {key[1]} nu nubar"
+            )
+        number = float(self.leptonic_normalization_branching_fractions[key])
+        if not math.isfinite(number) or not 0.0 < number <= 1.0:
+            raise ValueError(
+                "leptonic normalization branching fraction must lie in (0, 1]"
+            )
+        return number
 
 
 @dataclass(frozen=True)
@@ -349,6 +389,10 @@ def lfv_three_body_from_components(
     final_mass = p.charged_lepton_mass(final)
     if initial_mass <= final_mass:
         raise ValueError("parent lepton must be heavier than final lepton")
+    leptonic_normalization_br = p.leptonic_normalization_branching_fraction(
+        initial,
+        final,
+    )
 
     log_enhancement = math.log((initial_mass / final_mass) ** 2) - 11.0 / 4.0
     dipole_factor = float(p.alpha_em / (3.0 * math.pi) * log_enhancement)
@@ -356,24 +400,27 @@ def lfv_three_body_from_components(
         raise ValueError("dipole conversion factor is negative")
 
     dipole_component = float(dipole_br * dipole_factor)
-    z_component = _vector_contact_rate(
+    z_width_component = _vector_contact_rate(
         contact_amplitudes.z_ll,
         contact_amplitudes.z_lr,
         contact_amplitudes.z_rl,
         contact_amplitudes.z_rr,
     )
-    box_component = _vector_contact_rate(
+    box_width_component = _vector_contact_rate(
         contact_amplitudes.box_ll,
         contact_amplitudes.box_lr,
         contact_amplitudes.box_rl,
         contact_amplitudes.box_rr,
     )
-    contact_component = _vector_contact_rate(
+    contact_width_component = _vector_contact_rate(
         contact_amplitudes.total_ll,
         contact_amplitudes.total_lr,
         contact_amplitudes.total_rl,
         contact_amplitudes.total_rr,
     )
+    z_component = float(leptonic_normalization_br * z_width_component)
+    box_component = float(leptonic_normalization_br * box_width_component)
+    contact_component = float(leptonic_normalization_br * contact_width_component)
     dipole_contact = _dipole_contact_interference(
         dipole_parent_branching_fraction=dipole_br,
         total_ll=contact_amplitudes.total_ll,
@@ -381,6 +428,7 @@ def lfv_three_body_from_components(
         total_rl=contact_amplitudes.total_rl,
         total_rr=contact_amplitudes.total_rr,
         alpha_em=p.alpha_em,
+        leptonic_normalization_branching_fraction=leptonic_normalization_br,
         dipole_amplitude_left=dipole_amplitude_left,
         dipole_amplitude_right=dipole_amplitude_right,
     )
@@ -405,6 +453,13 @@ def lfv_three_body_from_components(
         "alpha_em": float(p.alpha_em),
         "initial_lepton_mass_gev": float(initial_mass),
         "final_lepton_mass_gev": float(final_mass),
+        "leptonic_normalization_branching_fraction": float(
+            leptonic_normalization_br
+        ),
+        "leptonic_normalization_source": (
+            "muon normalization is unity; tau normalization uses "
+            f"{PDG_TAU_LEPTONIC_BRANCHING_FRACTION_SOURCE}"
+        ),
         "dipole_log_enhancement": float(log_enhancement),
         "dipole_conversion_factor": float(dipole_factor),
         "dipole_parent_branching_fraction": float(dipole_br),
@@ -413,6 +468,12 @@ def lfv_three_body_from_components(
         "box_component": float(box_component),
         "z_box_interference_component": float(interference),
         "contact_component": float(contact_component),
+        "z_penguin_width_component": float(z_width_component),
+        "box_width_component": float(box_width_component),
+        "z_box_interference_width_component": float(
+            contact_width_component - z_width_component - box_width_component
+        ),
+        "contact_width_component": float(contact_width_component),
         "dipole_contact_interference_component": float(dipole_contact.component),
         "dipole_contact_interference_lower": float(dipole_contact.lower),
         "dipole_contact_interference_upper": float(dipole_contact.upper),
@@ -435,10 +496,11 @@ def lfv_three_body_from_components(
         "branching_formula": (
             "BR = BR(l_i -> l_j gamma) * alpha/(3*pi) * "
             "(log(m_i^2/m_j^2)-11/4) + "
-            "2(|G_LL|^2+|G_RR|^2)+|G_LR|^2+|G_RL|^2 with "
+            "BR(l_i -> l_j nu nubar) * "
+            "[2(|G_LL|^2+|G_RR|^2)+|G_LR|^2+|G_RL|^2 with "
             "G_AB=G_AB^Z+G_AB^box plus "
-            "I_dc=2*sqrt(2)*e*Re[A_R*(2G_LL+G_LR)^* + "
-            "A_L*(2G_RR+G_RL)^*]."
+            "I_dc=-8*e*Re[A_R*(2G_LL+G_LR)^* + "
+            "A_L*(2G_RR+G_RL)^*]] (Kuno-Okada)."
         ),
         **dict(contact_amplitudes.diagnostics),
     }
@@ -698,16 +760,22 @@ def _dipole_contact_interference(
     total_rl: complex,
     total_rr: complex,
     alpha_em: float,
+    leptonic_normalization_branching_fraction: float,
     dipole_amplitude_left: complex | None,
     dipole_amplitude_right: complex | None,
 ) -> _DipoleContactInterference:
     chiral_left = complex(2.0 * total_rr + total_rl)
     chiral_right = complex(2.0 * total_ll + total_lr)
+    leptonic_br = float(leptonic_normalization_branching_fraction)
+    if not math.isfinite(leptonic_br) or not 0.0 < leptonic_br <= 1.0:
+        raise ValueError("leptonic normalization branching fraction must lie in (0, 1]")
     dipole_norm = math.sqrt(
-        float(dipole_parent_branching_fraction) / (384.0 * math.pi**2)
+        float(dipole_parent_branching_fraction)
+        / (384.0 * math.pi**2 * leptonic_br)
     )
     electric_charge = math.sqrt(4.0 * math.pi * float(alpha_em))
-    coefficient = 2.0 * math.sqrt(2.0) * electric_charge
+    # Kuno-Okada RMP 73 (2001), Eq. (2.14): -8e times this chiral pairing.
+    coefficient = -8.0 * electric_charge
     has_explicit_amplitudes = (
         dipole_amplitude_left is not None or dipole_amplitude_right is not None
     )
@@ -722,7 +790,8 @@ def _dipole_contact_interference(
             "dipole_amplitude_right",
         )
         component = float(
-            coefficient
+            leptonic_br
+            * coefficient
             * (right * chiral_right.conjugate() + left * chiral_left.conjugate()).real
         )
         return _DipoleContactInterference(
@@ -738,7 +807,8 @@ def _dipole_contact_interference(
         )
 
     envelope = float(
-        coefficient
+        abs(coefficient)
+        * leptonic_br
         * dipole_norm
         * math.sqrt(abs(chiral_left) ** 2 + abs(chiral_right) ** 2)
     )

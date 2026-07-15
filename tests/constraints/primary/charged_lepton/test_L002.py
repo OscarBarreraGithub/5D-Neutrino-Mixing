@@ -320,15 +320,16 @@ def test_core_dipole_contact_interference_uses_chiral_structure():
     electric_charge = math.sqrt(4.0 * math.pi * inputs.alpha_em)
     left_combo = 2.0 * contact.total_rr + contact.total_rl
     right_combo = 2.0 * contact.total_ll + contact.total_lr
+    # Kuno-Okada Eq. (2.14) fixes the coefficient/sign to -8e in this convention.
     expected_interference = float(
-        2.0
-        * math.sqrt(2.0)
+        -8.0
         * electric_charge
         * (a_right * right_combo.conjugate() + a_left * left_combo.conjugate()).real
     )
 
     assert result.dipole_contact_interference_component == pytest.approx(
-        expected_interference
+        expected_interference,
+        abs=0.0,
     )
     assert result.dipole_contact_interference_treatment == (
         "explicit_chiral_dipole_amplitudes"
