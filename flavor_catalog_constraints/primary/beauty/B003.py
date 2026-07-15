@@ -11,7 +11,7 @@ the audited Delta F = 2 core,
 with ``M12^NP`` built from the B_s Wilson coefficients produced by
 ``quarkConstraints.deltaf2``.  This module reaches that core only through the
 ``flavor_catalog_constraints.physics_adapters.deltaf2`` boundary, and uses the
-QCD-running path that evolves Wilsons to ``mu_had = 2 GeV`` before applying the
+QCD-running path that evolves Wilsons to ``mu_had = m_b`` before applying the
 core B_s matrix elements.
 
 Severity
@@ -23,8 +23,8 @@ uncertainty-aware NP room in the M12 amplitude,
 
 where ``sigma_combined`` combines the HFLAV experimental uncertainty and the
 FLAG ``f_Bs sqrt(Bhat_Bs)`` normalization uncertainty in quadrature.  The core
-also reports its legacy generous budget ``max(Delta m_exp/2, residual/2)``;
-that value is retained in diagnostics, not used as the catalog veto.
+and catalog now use this same promoted B003 budget; the old full measured
+splitting envelope is retained only as a diagnostic comparison.
 
 Catalog sidecar
 ---------------
@@ -68,7 +68,7 @@ _BUDGET_DOC_CITATION = (
     "auxiliary_theory_inputs.flag_2024_bmixing; "
     "docs/audits/bag_param_inventory.md:38-45"
 )
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 4.18
 _HBAR_GEV_PER_PS = 6.582119569e-13
 
 
@@ -113,6 +113,9 @@ class BsMixingBudgetBand:
     flag_f_bs_sqrt_bhat_relative_sigma: float
     core_delta_m_exp_gev: float
     core_delta_m_sm_gev: float
+    core_default_m12_budget: float
+    core_budget_policy_id: str
+    core_budget_confidence_level: str
     core_legacy_m12_budget: float
 
 
@@ -348,7 +351,10 @@ def _build_budget_band(
         ),
         core_delta_m_exp_gev=core_inputs["delta_m_bs_exp_gev"],
         core_delta_m_sm_gev=core_inputs["delta_m_bs_sm_gev"],
-        core_legacy_m12_budget=core_inputs["core_m12_budget_gev"],
+        core_default_m12_budget=core_inputs["core_m12_budget_gev"],
+        core_budget_policy_id=str(core_inputs["core_budget_policy_id"]),
+        core_budget_confidence_level=str(core_inputs["core_budget_confidence_level"]),
+        core_legacy_m12_budget=core_inputs["legacy_full_delta_m_m12_budget_gev"],
     )
 
 
@@ -421,6 +427,7 @@ class Constraint:
         ratio = float(result.ratio_to_budget)
         budget = float(result.budget)
         core_budget = float(self.anchor.budget_band.core_legacy_m12_budget)
+        core_default_budget = float(self.anchor.budget_band.core_default_m12_budget)
 
         return ConstraintResult(
             process_id=self.process_id,
@@ -432,7 +439,7 @@ class Constraint:
             ratio=ratio,
             budget=budget,
             notes=(
-                "|M12^NP(B_s)| is evaluated with Wilsons QCD-evolved to 2 GeV; "
+                "|M12^NP(B_s)| is evaluated with Wilsons QCD-evolved to m_b=4.18 GeV; "
                 "predicted and budget are |M12^NP| in GeV, while "
                 "sm_prediction/experimental are Delta m_s in GeV; "
                 "the HARD budget is the one-sigma SM-vs-HFLAV M12 room using "
@@ -450,6 +457,8 @@ class Constraint:
                 "wilson_coefficients": _complex_mapping(wilsons.wilsons),
                 "system": result.system,
                 "budget_doc_citation": self.anchor.budget_band.doc_citation,
+                "budget_policy_id": self.anchor.budget_band.core_budget_policy_id,
+                "confidence_level": self.anchor.budget_band.core_budget_confidence_level,
                 "central_np_budget": self.anchor.budget_band.central_budget,
                 "loose_band_np_budget": self.anchor.budget_band.loose_budget,
                 "hard_veto_np_budget": self.anchor.budget_band.hard_veto_budget,
@@ -485,14 +494,19 @@ class Constraint:
                 ),
                 "core_delta_m_exp_gev": self.anchor.budget_band.core_delta_m_exp_gev,
                 "core_delta_m_sm_gev": self.anchor.budget_band.core_delta_m_sm_gev,
+                "core_default_m12_budget": core_default_budget,
                 "core_legacy_m12_budget": core_budget,
                 "core_legacy_ratio_to_budget": (
                     predicted / core_budget if core_budget > 0.0 else float("inf")
                 ),
+                "core_default_ratio_to_budget": (
+                    predicted / core_default_budget
+                    if core_default_budget > 0.0
+                    else float("inf")
+                ),
                 "core_budget_policy": (
-                    "Delta F=2 core reports max(Delta m_exp/2, residual/2); "
-                    "B003 catalog veto overrides this with an uncertainty-aware "
-                    "SM-vs-HFLAV M12 room."
+                    "Delta F=2 core default is the B003 one-sigma SM-vs-HFLAV "
+                    "M12 room; the legacy diagnostic is Delta m_exp/2 only."
                 ),
                 "experimental_block": self.anchor.experimental.block_key,
                 "auxiliary_theory_block": self.anchor.flag_bmixing.block_key,

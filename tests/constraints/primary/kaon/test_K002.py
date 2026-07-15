@@ -71,7 +71,7 @@ def _kaon_wilsons(couplings: QuarkMassBasisCouplings):
 
 
 def _audited_delta_mk_with_running(couplings: QuarkMassBasisCouplings):
-    return evaluate_delta_mk_with_running(_kaon_wilsons(couplings), mu_had=2.0)
+    return evaluate_delta_mk_with_running(_kaon_wilsons(couplings), mu_had=3.0)
 
 
 def _gev_from_yaml_rate(value: float) -> float:
@@ -154,7 +154,7 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["qcd_running_applied"] is True
-    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(2.0)
+    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(3.0)
     assert result.diagnostics["sm_subtracted"] is False
     assert result.diagnostics["long_distance_dominated"] is True
 
@@ -164,12 +164,12 @@ def test_reference_couplings_show_qcd_running_enhancement():
     wilsons = _kaon_wilsons(couplings)
 
     unrun = evaluate_delta_mk(wilsons)
-    run = evaluate_delta_mk_with_running(wilsons, mu_had=2.0)
+    run = evaluate_delta_mk_with_running(wilsons, mu_had=3.0)
 
     # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
     assert unrun.ratio_to_exp == pytest.approx(0.04621191599919545)
     # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
-    assert run.ratio_to_exp == pytest.approx(0.16197440615774486)
+    assert run.ratio_to_exp == pytest.approx(0.14246009166296417)
     # enhancement factor relaxed 10x -> 3x after B3: un-swapping O4/O5 lifts the
     # unrun ratio more than the run ratio, so the running enhancement is now ~3.5x.
     assert run.ratio_to_exp > 3.0 * unrun.ratio_to_exp

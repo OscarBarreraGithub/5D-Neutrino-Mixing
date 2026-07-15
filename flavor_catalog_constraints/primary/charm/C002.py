@@ -10,7 +10,7 @@ uses a conservative CP-odd amplitude proxy:
 
     |Im M12^NP| / (Delta m_D^exp / 2).
 
-The Wilson coefficients are QCD-evolved to ``mu_had = 2 GeV`` before applying
+The Wilson coefficients are QCD-evolved to ``mu_had = 3 GeV`` before applying
 the D0 matrix elements.  The HARD budget is set by the HFLAV all-CPV
 ``phiM = Arg(M12)`` 95% CL interval in the C002 HFLAV snapshot,
 ``[-1.48, 1.35]`` degrees, mapped to ``max|sin(phiM)|``.
@@ -64,7 +64,7 @@ _DELTA_M_D_ANCHOR_CANDIDATES = ("Delta_m_D",)
 _CP_CONSERVING_Q_OVER_P = 1.0
 _CP_CONSERVING_PHI_D_DEG = 0.0
 _CP_CONSERVING_PHI_M_DEG = 0.0
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 3.0
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 _FLOAT_RE = r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?"
 _PLUS_MINUS_RE = re.compile(
@@ -513,7 +513,7 @@ class Constraint:
             budget=float(self.anchor.budget),
             notes=(
                 "|Im(M12^NP)|/(Delta m_D^exp/2) uses QCD-evolved D0 Wilsons "
-                "at 2 GeV.  HARD budget uses the C002 HFLAV all-CPV 95% "
+                "at 3 GeV.  HARD budget uses the C002 HFLAV all-CPV 95% "
                 "phiM=Arg(M12) room from the local snapshot; full charm LD "
                 "phase and HFLAV contour mapping are marked NEEDS-HUMAN-PHYSICS."
             ),

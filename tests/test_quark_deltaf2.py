@@ -164,14 +164,24 @@ def test_default_benchmark_point_has_stable_deltaf2_outputs():
     # Snapshot re-pinned after B2 (PDG SVD rephasing -> convention-stable Im M12)
     # and B3 (GGMS Eq. 8 O4/O5 un-swap + 1/(2 m_M)); see test_epsilon_k_physics
     # for the literature-anchored absolute pins this snapshot is downstream of.
-    # M-1/M-2 harmonized the epsilon_K gate: this point's signed NP raises
-    # epsilon_K, so the shared policy selects the upper one-sigma budget
-    # 2.4733579788827265e-4 rather than the bare 6.7e-5 central gap.
-    assert np.isclose(epsilon_k_ratio, 5.598563321706886)
+    # M-1/M-2 harmonized the epsilon_K gate. M-6 then moved the kaon LR
+    # running endpoint from the legacy global 2 GeV to the FLAG B4/B5 3 GeV
+    # scale, reducing the LO LR enhancement used by this downstream snapshot.
+    assert np.isclose(epsilon_k_ratio, 4.946273252771718)
     assert summary.get("epsilon_k").diagnostics["epsilon_k_selected_budget_direction"] == (
         "raises_epsilon_k"
     )
+    assert summary.get("epsilon_k").diagnostics["hadronic_scale_gev"] == 3.0
+    assert summary.get("epsilon_k").diagnostics["running_order"] == "LO"
     assert summary.get("epsilon_k").ratio_to_bound > 1.0
+    assert np.isclose(summary.get("b_d").ratio_to_bound, 0.03423937737097663)
+    assert np.isclose(summary.get("b_s").ratio_to_bound, 0.09986525004544926)
+    assert summary.get("b_d").diagnostics["hadronic_scale_gev"] == 4.18
+    assert summary.get("b_s").diagnostics["hadronic_scale_gev"] == 4.18
+    assert summary.get("d").diagnostics["hadronic_scale_gev"] == 3.0
+    assert summary.get("b_d").budget_policy_id == "b_d_delta_m_hpqcd2019_hflav2025_one_sigma_v1"
+    assert summary.get("b_s").budget_policy_id == "b_s_delta_m_flag2024_hflav2024_one_sigma_v1"
+    assert summary.get("d").confidence_level == "not_a_gaussian_cl_conservative_long_distance_envelope"
     assert summary.get("b_d").ratio_to_bound < 1.0
     assert summary.get("b_s").ratio_to_bound < 1.0
     assert summary.get("d").ratio_to_bound < 1.0

@@ -22,7 +22,7 @@ from quarkConstraints.deltaf2 import (
 _PID = "C001"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 _SIDECAR = _REPO_ROOT / "flavor_catalog" / "processes" / "charm" / "C001.yaml"
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 3.0
 
 
 def _yaml_pdg_block():

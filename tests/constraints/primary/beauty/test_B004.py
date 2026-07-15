@@ -115,7 +115,7 @@ def _direct_core_phi_s(
     constraint,
 ):
     wilsons = _bs_wilsons(couplings)
-    evolved = _evolve_wilsons(wilsons, mu_had=2.0)
+    evolved = _evolve_wilsons(wilsons, mu_had=4.18)
     m12_np = compute_m12_np(
         evolved,
         F_BS,
@@ -126,7 +126,7 @@ def _direct_core_phi_s(
         B_4_BS,
         B_5_BS,
     )
-    magnitude = evaluate_bs_mixing_with_running(wilsons, mu_had=2.0)
+    magnitude = evaluate_bs_mixing_with_running(wilsons, mu_had=4.18)
     m12_ratio = m12_np / constraint.anchor.budget_band.m12_sm_gev
     phi_s_np = cmath.phase(1.0 + m12_ratio)
     predicted = _wrap_phase(constraint.anchor.sm_value + phi_s_np)
@@ -316,7 +316,7 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["qcd_running_applied"] is True
-    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(2.0)
+    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(4.18)
     assert result.diagnostics["core_input_key"] == "b_s"
     assert result.diagnostics["down_sector_indices"] == (1, 2)
     assert result.diagnostics["phase_uses_complex_m12_not_abs"] is True

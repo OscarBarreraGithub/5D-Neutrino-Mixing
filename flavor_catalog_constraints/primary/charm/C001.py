@@ -9,7 +9,7 @@ Delta F = 2 running path in ``quarkConstraints.deltaf2``:
 
     |M12^NP| <= Delta m_D^exp / 2.
 
-The Wilson coefficients are QCD-evolved to ``mu_had = 2 GeV`` before applying
+The Wilson coefficients are QCD-evolved to ``mu_had = 3 GeV`` before applying
 the D0 hadronic matrix elements.  This module reaches the core only through
 ``flavor_catalog_constraints.physics_adapters.deltaf2``.
 
@@ -56,7 +56,7 @@ _BUDGET_DOC_CITATION = (
     "docs/audits/bag_param_inventory.md:53; "
     "flavor_catalog/processes/charm/C001.yaml:145-157"
 )
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 3.0
 
 
 @dataclass(frozen=True)
@@ -175,7 +175,7 @@ class Constraint:
             ratio=ratio,
             budget=budget,
             notes=(
-                "|M12^NP| for D0 mixing; Wilsons are QCD-evolved to 2 GeV; "
+                "|M12^NP| for D0 mixing; Wilsons are QCD-evolved to 3 GeV; "
                 "HARD budget uses the conservative long-distance-dominated "
                 "charm convention |M12^NP| <= Delta m_D^exp/2 from "
                 f"{_BUDGET_DOC_CITATION}."

@@ -972,8 +972,12 @@ def default_modern_default_neutral_meson_inputs() -> tuple[ModernDefaultNeutralM
             reject_reason="b_d_mix",
             sector_id="down",
             generations=(0, 2),
-            bound=1.667e-13,
-            note="B_d mixing evaluated with proper hadronic matrix elements (FLAG 2024 / PDG).",
+            bound=3.3698997794593685e-14,
+            note=(
+                "B_d mixing evaluated with proper hadronic matrix elements "
+                "(FLAG 2024 / PDG); bound is the B001 one-sigma "
+                "SM-vs-experiment M12 room."
+            ),
         ),
         ModernDefaultNeutralMesonInput(
             system_id="B_s",
@@ -984,8 +988,12 @@ def default_modern_default_neutral_meson_inputs() -> tuple[ModernDefaultNeutralM
             reject_reason="b_s_mix",
             sector_id="down",
             generations=(1, 2),
-            bound=5.844e-12,
-            note="B_s mixing evaluated with proper hadronic matrix elements (FLAG 2024 / PDG).",
+            bound=2.6351676486296766e-13,
+            note=(
+                "B_s mixing evaluated with proper hadronic matrix elements "
+                "(FLAG 2024 / PDG); bound is the B003 one-sigma "
+                "SM-vs-experiment M12 room."
+            ),
         ),
         ModernDefaultNeutralMesonInput(
             system_id="D0",

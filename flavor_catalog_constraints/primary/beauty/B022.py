@@ -14,12 +14,11 @@ the short-distance remainder.  New physics is the Phase-4d
 
 Severity
 --------
-HARD.  The total predicted branching fraction is compared with the Belle II
-evidence measurement recorded in ``B022.yaml``.  The direction-aware one-sigma
-budget combines the Belle II statistical/systematic uncertainty and the HPQCD
-SM-normalization uncertainty in quadrature.  Because Belle II is above the SM
-central prediction, the SM-limit point is a measured tension rather than a
-guaranteed passing point.
+HARD.  The new-physics shift away from the HPQCD SM central prediction is
+compared with the Belle II excess room recorded in ``B022.yaml``.  The
+direction-aware one-sigma budget is ``|exp - SM| + sigma`` using the Belle II
+statistical/systematic uncertainty and the HPQCD SM-normalization uncertainty
+in quadrature.  The SM-limit point therefore has zero NP shift and passes.
 
 Catalog sidecar
 ---------------
@@ -62,6 +61,8 @@ _BUDGET_SOURCE = (
     "pdg_or_equivalent.observables[Belle II evidence measurement] "
     "+ pdg_or_equivalent.values[HPQCD2023:B022:sm_prediction]"
 )
+_BUDGET_POLICY_ID = "b022_belleii2023_hpqcd2023_np_shift_one_sigma_v1"
+_BUDGET_CONFIDENCE_LEVEL = "68.27% one_sigma_sensitivity"
 _PARAMETRIZATION_CITATION = (
     "Inami-Lim X_t short-distance b -> s nu nubar response; "
     "HPQCD 2023 arXiv:2207.13371 SM B+ -> K+ nu nubar normalization"
@@ -108,6 +109,8 @@ class RareBBudgetBand:
     combined_sigma_upper: float
     combined_sigma_lower: float
     hard_veto_budget: float
+    budget_raises_branching_fraction: float
+    budget_lowers_branching_fraction: float
     lower_edge: float
     upper_edge: float
 
@@ -380,18 +383,23 @@ def _build_budget_band(
     )
     lower_edge = experimental.value - combined_lower
     upper_edge = experimental.value + combined_upper
-    hard_budget = max(combined_upper, combined_lower)
+    central_residual = float(experimental.value - standard_model.value)
+    budget_raises = abs(central_residual) + combined_upper
+    budget_lowers = abs(central_residual) + combined_lower
+    hard_budget = max(budget_raises, budget_lowers)
     if hard_budget <= 0.0 or lower_edge <= 0.0:
         raise AnchorError("B022: constructed branching-ratio budget is invalid")
     return RareBBudgetBand(
         source=_BUDGET_SOURCE,
-        central_residual=float(experimental.value - standard_model.value),
+        central_residual=central_residual,
         experimental_sigma_upper=float(experimental.uncertainty_upper),
         experimental_sigma_lower=float(experimental.uncertainty_lower),
         sm_theory_sigma=float(standard_model.uncertainty),
         combined_sigma_upper=float(combined_upper),
         combined_sigma_lower=float(combined_lower),
         hard_veto_budget=float(hard_budget),
+        budget_raises_branching_fraction=float(budget_raises),
+        budget_lowers_branching_fraction=float(budget_lowers),
         lower_edge=float(lower_edge),
         upper_edge=float(upper_edge),
     )
@@ -414,11 +422,11 @@ def _selected_budget(
     predicted: float,
     anchor: B022Anchor,
 ) -> tuple[float, float, bool]:
-    pull = float(predicted - anchor.value)
+    pull = float(predicted - anchor.sm_value)
     budget = (
-        anchor.budget_band.combined_sigma_upper
+        anchor.budget_band.budget_raises_branching_fraction
         if pull >= 0.0
-        else anchor.budget_band.combined_sigma_lower
+        else anchor.budget_band.budget_lowers_branching_fraction
     )
     ratio = abs(pull) / budget if budget > 0.0 else float("inf")
     return float(budget), float(ratio), bool(ratio <= 1.0)
@@ -468,6 +476,8 @@ class Constraint:
                     "sm_formula_branching_fraction": float(
                         self.sm_result.branching_fraction
                     ),
+                    "budget_policy_id": _BUDGET_POLICY_ID,
+                    "confidence_level": _BUDGET_CONFIDENCE_LEVEL,
                     "budget_source": self.anchor.budget_band.source,
                     "tree_level_status": _TREE_LEVEL_STATUS,
                 },
@@ -500,6 +510,8 @@ class Constraint:
                     "invalid_extra": _REQUIRED_EXTRA,
                     "exception_type": type(exc).__name__,
                     "exception_message": str(exc),
+                    "budget_policy_id": _BUDGET_POLICY_ID,
+                    "confidence_level": _BUDGET_CONFIDENCE_LEVEL,
                     "tree_level_status": _TREE_LEVEL_STATUS,
                 },
             )
@@ -533,6 +545,20 @@ class Constraint:
                 ),
                 "budget_combined_sigma_lower": float(
                     self.anchor.budget_band.combined_sigma_lower
+                ),
+                "budget_raises_branching_fraction": float(
+                    self.anchor.budget_band.budget_raises_branching_fraction
+                ),
+                "budget_lowers_branching_fraction": float(
+                    self.anchor.budget_band.budget_lowers_branching_fraction
+                ),
+                "budget_policy_id": _BUDGET_POLICY_ID,
+                "confidence_level": _BUDGET_CONFIDENCE_LEVEL,
+                "budget_construction": (
+                    "|exp - SM| + sigma; compare NP shift from SM"
+                ),
+                "np_shift_from_sm_branching_fraction": float(
+                    predicted - self.anchor.sm_value
                 ),
                 "budget_lower_edge": float(self.anchor.budget_band.lower_edge),
                 "budget_upper_edge": float(self.anchor.budget_band.upper_edge),
@@ -578,7 +604,8 @@ class Constraint:
                 "branching fraction from B022.yaml. RS contribution is the "
                 "Phase-4d b_to_s_nunu Wilson block mapped as X_NP=C/g_SM^2; "
                 "the old one-Z-like proxy is not used. Budget combines Belle "
-                "II and SM uncertainties in quadrature."
+                "II and SM uncertainties in quadrature and compares the NP "
+                "shift away from the SM, not the SM tension with Belle II."
             ),
             diagnostics=diagnostics,
         )

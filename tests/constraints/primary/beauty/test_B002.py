@@ -128,7 +128,7 @@ def _core_spsi_ks_from_running_m12(
     constraint,
 ):
     wilsons = _bd_wilsons(couplings)
-    evolved = _evolve_wilsons(wilsons, mu_had=2.0)
+    evolved = _evolve_wilsons(wilsons, mu_had=4.18)
     m12_np = compute_m12_np(
         evolved,
         F_BD,
@@ -139,7 +139,7 @@ def _core_spsi_ks_from_running_m12(
         B_4_BD,
         B_5_BD,
     )
-    magnitude = evaluate_bd_mixing_with_running(wilsons, mu_had=2.0)
+    magnitude = evaluate_bd_mixing_with_running(wilsons, mu_had=4.18)
     m12_ratio = m12_np / constraint.anchor.budget_band.m12_sm_gev
     phi_d_np = cmath.phase(1.0 + m12_ratio)
     predicted = math.sin(constraint.anchor.budget_band.two_beta_radians + phi_d_np)
@@ -309,7 +309,7 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["qcd_running_applied"] is True
-    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(2.0)
+    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(4.18)
     assert result.diagnostics["core_input_key"] == "b_d"
     assert result.diagnostics["down_sector_indices"] == (0, 2)
     assert result.diagnostics["phase_uses_complex_m12_not_abs"] is True
@@ -340,11 +340,10 @@ def test_numbers_match_direct_running_complex_m12_phase_evaluator():
     )
     assert abs(m12_np) == pytest.approx(magnitude.abs_m12_np)
     # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
-    assert result.predicted == pytest.approx(0.7141677847043207)
-    # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
-    assert result.ratio == pytest.approx(0.23515615344786672)
-    # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
-    assert result.diagnostics["phi_d_np_deg"] == pytest.approx(0.4751141998920815)
+    assert result.predicted == pytest.approx(0.7145001681873612)
+    # re-pinned after M-6: B_d Wilsons run to m_b=4.18 GeV.
+    assert result.ratio == pytest.approx(0.25391000636650746)
+    assert result.diagnostics["phi_d_np_deg"] == pytest.approx(0.5023277419751613)
 
 
 @pytest.mark.parametrize(
@@ -366,12 +365,12 @@ def test_safe_point_passes_and_large_np_point_fails(
         assert result.ratio <= 1.0
     else:
         # bound relaxed 10.0 -> 1.0 after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2
-        # phase: the large-NP point still fails the constraint (passes=False) but
-        # its ratio dropped to ~7.16.
+        # phase plus M-6 m_b running: the large-NP point still fails the
+        # constraint (passes=False) but its ratio is O(7.5).
         assert result.ratio > 1.0
-        # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
+        # re-pinned after M-6: B_d Wilsons run to m_b=4.18 GeV.
         assert result.diagnostics["phi_d_np_deg"] == pytest.approx(
-            11.712217215803447
+            12.363004084663716
         )
 
 

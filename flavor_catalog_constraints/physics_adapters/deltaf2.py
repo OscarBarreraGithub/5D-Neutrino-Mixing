@@ -47,6 +47,8 @@ from quarkConstraints.deltaf2 import (
     MesonMixingResult,
     compute_m12_np as _compute_meson_m12_np,
     compute_delta_f2_wilsons,
+    delta_f2_bd_budget_policy as _bd_budget_policy,
+    delta_f2_bs_budget_policy as _bs_budget_policy,
     delta_f2_epsilon_k_budget_policy as _epsilon_k_budget_policy,
     evaluate_bd_mixing_with_running as _evaluate_bd_mixing_with_running,
     evaluate_bs_mixing_with_running as _evaluate_bs_mixing_with_running,
@@ -315,14 +317,16 @@ def d0_mixing_m12_np_from_wilsons_with_running(
     )
 
 
-def bd_mixing_core_inputs() -> dict[str, float]:
+def bd_mixing_core_inputs() -> dict[str, float | str]:
     """Return the B_d mass-splitting inputs hardwired in the Delta F=2 core."""
+    policy = _bd_budget_policy()
     return {
         "delta_m_bd_exp_gev": float(DELTA_M_BD_EXP),
         "delta_m_bd_sm_gev": float(DELTA_M_BD_SM),
-        "core_m12_budget_gev": float(
-            max(DELTA_M_BD_EXP / 2.0, abs(DELTA_M_BD_EXP - DELTA_M_BD_SM) / 2.0)
-        ),
+        "core_m12_budget_gev": float(policy.budget),
+        "core_budget_policy_id": policy.policy_id,
+        "core_budget_confidence_level": policy.confidence_level,
+        "legacy_full_delta_m_m12_budget_gev": float(DELTA_M_BD_EXP / 2.0),
     }
 
 
@@ -384,14 +388,16 @@ def bd_mixing_m12_np_from_wilsons_with_running(
     )
 
 
-def bs_mixing_core_inputs() -> dict[str, float]:
+def bs_mixing_core_inputs() -> dict[str, float | str]:
     """Return the B_s mass-splitting inputs hardwired in the Delta F=2 core."""
+    policy = _bs_budget_policy()
     return {
         "delta_m_bs_exp_gev": float(DELTA_M_BS_EXP),
         "delta_m_bs_sm_gev": float(DELTA_M_BS_SM),
-        "core_m12_budget_gev": float(
-            max(DELTA_M_BS_EXP / 2.0, abs(DELTA_M_BS_EXP - DELTA_M_BS_SM) / 2.0)
-        ),
+        "core_m12_budget_gev": float(policy.budget),
+        "core_budget_policy_id": policy.policy_id,
+        "core_budget_confidence_level": policy.confidence_level,
+        "legacy_full_delta_m_m12_budget_gev": float(DELTA_M_BS_EXP / 2.0),
     }
 
 

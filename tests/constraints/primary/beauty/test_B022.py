@@ -95,8 +95,16 @@ def test_anchor_matches_yaml_and_budget_band():
     assert constraint.anchor.budget_band.combined_sigma_lower == pytest.approx(
         combined_down
     )
-    assert constraint.anchor.budget == pytest.approx(max(combined_up, combined_down))
-    assert constraint.anchor.budget == pytest.approx(7.080741486595878e-6)
+    budget_raises = abs(float(exp["value"]) - float(sm["value"])) + combined_up
+    budget_lowers = abs(float(exp["value"]) - float(sm["value"])) + combined_down
+    assert constraint.anchor.budget_band.budget_raises_branching_fraction == (
+        pytest.approx(budget_raises)
+    )
+    assert constraint.anchor.budget_band.budget_lowers_branching_fraction == (
+        pytest.approx(budget_lowers)
+    )
+    assert constraint.anchor.budget == pytest.approx(max(budget_raises, budget_lowers))
+    assert constraint.anchor.budget == pytest.approx(2.4500741486595877e-5)
 
 
 def test_value_anchors_route_through_scaffold_load_anchor_and_fail_loudly(
@@ -162,6 +170,10 @@ def test_absent_rs_semileptonic_wilsons_degrades_gracefully():
     assert result.budget == pytest.approx(constraint.anchor.budget)
     assert result.diagnostics["evaluated"] is False
     assert result.diagnostics["missing_extra"] == "rs_semileptonic_wilsons"
+    assert result.diagnostics["budget_policy_id"] == (
+        "b022_belleii2023_hpqcd2023_np_shift_one_sigma_v1"
+    )
+    assert result.diagnostics["confidence_level"] == "68.27% one_sigma_sensitivity"
     assert "needs_human_physics" not in result.diagnostics
 
 
@@ -203,11 +215,16 @@ def test_sm_limit_universal_quark_c_recovers_committed_sm_branching_fraction():
     assert result.diagnostics["x_np_total"] == pytest.approx(0.0j, abs=1.0e-18)
     assert result.predicted == pytest.approx(5.58e-6)
     assert result.predicted == pytest.approx(result.sm_prediction)
-    assert result.ratio == pytest.approx(
-        abs(result.predicted - constraint.anchor.value)
-        / constraint.anchor.budget_band.combined_sigma_lower
+    assert result.ratio == pytest.approx(0.0, abs=1.0e-12)
+    assert result.diagnostics["np_shift_from_sm_branching_fraction"] == pytest.approx(
+        0.0,
+        abs=1.0e-18,
     )
-    assert result.passes is False
+    assert result.diagnostics["budget_policy_id"] == (
+        "b022_belleii2023_hpqcd2023_np_shift_one_sigma_v1"
+    )
+    assert result.diagnostics["confidence_level"] == "68.27% one_sigma_sensitivity"
+    assert result.passes is True
 
 
 def test_rigorous_nonzero_xnp_shifts_br_and_matches_direct_contact():
@@ -269,6 +286,9 @@ def test_evaluate_runs_end_to_end_with_real_finite_fields_and_complex_diagnostic
         "np_shift_branching_fraction",
         "budget_combined_sigma_upper",
         "budget_combined_sigma_lower",
+        "budget_raises_branching_fraction",
+        "budget_lowers_branching_fraction",
+        "np_shift_from_sm_branching_fraction",
     ):
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])

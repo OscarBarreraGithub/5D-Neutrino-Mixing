@@ -76,7 +76,7 @@ def _audited_epsilon_k_with_running(
         kwargs["epsilon_k_np_budget_override"] = budget
     return evaluate_epsilon_k_with_running(
         _kaon_wilsons(couplings),
-        mu_had=2.0,
+        mu_had=3.0,
         **kwargs,
     )
 
@@ -221,7 +221,9 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["qcd_running_applied"] is True
-    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(2.0)
+    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(3.0)
+    assert result.diagnostics["running_order"] == "LO"
+    assert "NLO" in result.diagnostics["running_bias_note"]
     assert result.diagnostics["budget_policy_id"] == (
         delta_f2_epsilon_k_budget_policy().policy_id
     )
@@ -242,7 +244,7 @@ def test_reference_couplings_show_qcd_running_enhancement():
     )
     run = evaluate_epsilon_k_with_running(
         wilsons,
-        mu_had=2.0,
+        mu_had=3.0,
         epsilon_k_np_budget_override=central_budget,
     )
 
@@ -252,7 +254,7 @@ def test_reference_couplings_show_qcd_running_enhancement():
     # the leading chiral term pre-running, PLAN §0.2), both legitimate snapshots
     # downstream of the test_epsilon_k_physics literature-anchored O4/O5 pins.
     assert unrun.ratio_to_budget == pytest.approx(1.4067965606347435)
-    assert run.ratio_to_budget == pytest.approx(4.932284791072436)
+    assert run.ratio_to_budget == pytest.approx(4.33799728201613)
 
 
 @pytest.mark.parametrize(

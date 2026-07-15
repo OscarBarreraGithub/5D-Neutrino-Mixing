@@ -8,6 +8,9 @@ win.
 
 All scales below are the **physical first gauge-KK mass** `M_KK = x₁·Λ_IR`
 with `x₁ ≈ 2.4487`. Do not confuse with the geometric `Λ_IR ≡ 1/z_v`.
+Delta-F=2 running is LO; the LR (C4) enhancement is likely low by ~10-15% in
+M_KK vs NLO -- eps_K floors are therefore mildly CONSERVATIVE (understated) in
+this direction.
 
 ## The floor
 

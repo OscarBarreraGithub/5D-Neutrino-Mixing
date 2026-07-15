@@ -14,6 +14,7 @@ from ..deltaf2 import (
     DeltaF2ObservableSummary,
     DeltaF2WilsonCoefficients,
     _hadronic_eval_for_system,
+    delta_f2_default_mu_had_for_system,
 )
 from ..fit import QuarkFitResult, QuarkFitSolution
 from ..scales import DEFAULT_QUARK_XI_KK, default_quark_m_kk_from_lambda_ir
@@ -173,7 +174,7 @@ def _deltaf2_summary_from_matching(
     *,
     bundle: ModernDefaultInputs,
     apply_qcd_running: bool = True,
-    mu_had: float = 2.0,
+    mu_had: float | Mapping[str, float] | None = None,
 ) -> DeltaF2ConstraintSummary:
     from ..qcd_running import evolve_deltaf2_wilsons
 
@@ -190,12 +191,19 @@ def _deltaf2_summary_from_matching(
         evolved_scale = float(system.matching_scale_GeV)
 
         if apply_qcd_running:
+            system_mu_had = (
+                delta_f2_default_mu_had_for_system(item.key)
+                if mu_had is None
+                else float(mu_had.get(item.key, delta_f2_default_mu_had_for_system(item.key)))
+                if isinstance(mu_had, Mapping)
+                else float(mu_had)
+            )
             c1_vll, c1_vrr, c4_lr, c5_lr = evolve_deltaf2_wilsons(
                 c1_vll, c1_vrr, c4_lr, c5_lr,
                 mu_high=float(system.matching_scale_GeV),
-                mu_low=mu_had,
+                mu_low=system_mu_had,
             )
-            evolved_scale = mu_had
+            evolved_scale = system_mu_had
 
         wilsons = DeltaF2WilsonCoefficients(
             input=item,

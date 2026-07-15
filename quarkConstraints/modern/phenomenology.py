@@ -548,6 +548,14 @@ _BD_B4 = 1.02
 _BD_B5 = 0.96
 _BD_DM_EXP = 3.334e-13
 _BD_DM_SM = 3.6e-13
+_BD_DM_EXP_PS_INV = 0.5069
+_BD_DM_EXP_SIGMA_PS_INV = 0.0019
+_BD_DM_SM_SIGMA_PS_INV = 0.062
+_BD_DM_GEV_PER_PS_INV = _BD_DM_EXP / _BD_DM_EXP_PS_INV
+_BD_DM_EXP_SIGMA = _BD_DM_EXP_SIGMA_PS_INV * _BD_DM_GEV_PER_PS_INV
+_BD_DM_SM_SIGMA = _BD_DM_SM_SIGMA_PS_INV * _BD_DM_GEV_PER_PS_INV
+_BD_DM_COMBINED_SIGMA = math.hypot(_BD_DM_EXP_SIGMA, _BD_DM_SM_SIGMA)
+_BD_M12_BUDGET = (abs(_BD_DM_EXP - _BD_DM_SM) + _BD_DM_COMBINED_SIGMA) / 2.0
 
 _BS_F = 0.2303
 _BS_M = 5.36692
@@ -556,8 +564,22 @@ _BS_MQ2 = 0.0934
 _BS_B1 = 0.87
 _BS_B4 = 1.02
 _BS_B5 = 0.96
-_BS_DM_EXP = 1.1688e-11
+_HBAR_GEV_PER_PS = 6.582119569e-13
+_BS_DM_EXP_PS_INV = 17.766
+_BS_DM_EXP_SIGMA_PS_INV = 0.006
+_BS_DM_EXP = _BS_DM_EXP_PS_INV * _HBAR_GEV_PER_PS
+_BS_DM_EXP_SIGMA = _BS_DM_EXP_SIGMA_PS_INV * _HBAR_GEV_PER_PS
 _BS_DM_SM = 1.17e-11
+_BS_FLAG_F_BS_SQRT_BHAT_BS_MEV = 256.1
+_BS_FLAG_F_BS_SQRT_BHAT_BS_SIGMA_MEV = 5.7
+_BS_DM_SM_SIGMA = (
+    abs(_BS_DM_SM)
+    * 2.0
+    * _BS_FLAG_F_BS_SQRT_BHAT_BS_SIGMA_MEV
+    / _BS_FLAG_F_BS_SQRT_BHAT_BS_MEV
+)
+_BS_DM_COMBINED_SIGMA = math.hypot(_BS_DM_EXP_SIGMA, _BS_DM_SM_SIGMA)
+_BS_M12_BUDGET = (abs(_BS_DM_EXP - _BS_DM_SM) + _BS_DM_COMBINED_SIGMA) / 2.0
 
 _D0_F = 0.2120
 _D0_M = 1.86484
@@ -567,6 +589,20 @@ _D0_B1 = 0.75
 _D0_B4 = 1.0
 _D0_B5 = 1.0
 _D0_DM_EXP = 6.25e-15
+
+_MU_HAD_KAON_GEV = 3.0
+_MU_HAD_B_GEV = 4.18
+_MU_HAD_D0_GEV = 3.0
+
+
+def _mu_had_for_modern_system(system_id: str) -> float:
+    if system_id in {"epsilon_K", "K"}:
+        return _MU_HAD_KAON_GEV
+    if system_id in {"B_d", "B_s"}:
+        return _MU_HAD_B_GEV
+    if system_id == "D0":
+        return _MU_HAD_D0_GEV
+    raise ValueError(f"unknown modern system_id {system_id!r}")
 
 
 def _meson_matrix_elements_inline(
@@ -662,10 +698,9 @@ def _evaluate_bd_mixing_from_bridge(
     system_match: Mapping[str, Any],
 ) -> tuple[float, dict[str, float], str, float]:
     """Evaluate B_d mixing NP contribution from bridge match."""
-    budget = max(_BD_DM_EXP / 2.0, abs(_BD_DM_EXP - _BD_DM_SM) / 2.0)
     return _evaluate_meson_mixing_from_bridge(
         system_match, _BD_F, _BD_M, _BD_MQ1, _BD_MQ2,
-        _BD_B1, _BD_B4, _BD_B5, budget,
+        _BD_B1, _BD_B4, _BD_B5, _BD_M12_BUDGET,
     )
 
 
@@ -673,10 +708,9 @@ def _evaluate_bs_mixing_from_bridge(
     system_match: Mapping[str, Any],
 ) -> tuple[float, dict[str, float], str, float]:
     """Evaluate B_s mixing NP contribution from bridge match."""
-    budget = max(_BS_DM_EXP / 2.0, abs(_BS_DM_EXP - _BS_DM_SM) / 2.0)
     return _evaluate_meson_mixing_from_bridge(
         system_match, _BS_F, _BS_M, _BS_MQ1, _BS_MQ2,
-        _BS_B1, _BS_B4, _BS_B5, budget,
+        _BS_B1, _BS_B4, _BS_B5, _BS_M12_BUDGET,
     )
 
 
@@ -1329,7 +1363,10 @@ class ModernPointPhenomenologyArtifactV1:
             # Evolve Wilson coefficients from matching scale to hadronic
             # scale so the sidecar is consistent with the evaluation layer
             # (which applies QCD running by default).
-            evolved_match = _evolve_bridge_wilsons(system_match)
+            evolved_match = _evolve_bridge_wilsons(
+                system_match,
+                mu_had=_mu_had_for_modern_system(system_id),
+            )
             input_item = bundle_inputs[system_id]
 
             if system_id == "epsilon_K":

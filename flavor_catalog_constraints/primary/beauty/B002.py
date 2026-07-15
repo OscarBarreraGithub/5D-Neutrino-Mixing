@@ -10,7 +10,7 @@ restricted to the B_d Delta F = 2 mixing amplitude,
     S_psiK_S = sin(2 beta + phi_d^NP).
 
 The complex ``M12^NP`` is evaluated through the Delta F = 2 adapter after
-QCD-running the B_d Wilson coefficients to ``mu_had = 2 GeV``.  The SM
+QCD-running the B_d Wilson coefficients to ``mu_had = m_b``.  The SM
 amplitude convention is ``M12^SM = Delta m_Bd^SM / 2`` from the same B_d core
 inputs used by B001.  The ``2 beta`` phase is computed in core from the
 repo-owned CKM target via the rephasing-invariant unitarity-triangle angle.
@@ -60,7 +60,7 @@ from flavor_catalog_constraints.registry import register
 _FAMILY = "beauty"
 _REQUIRED_EXTRA = "quark_mass_basis_couplings"
 _EXPECTED_OBSERVABLE = "S_psiK_S"
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 4.18
 
 _EXPERIMENTAL_ANCHOR_CANDIDATES = ("canonical_experimental_average",)
 _MODE_SPECIFIC_ANCHOR_CANDIDATES = ("mode_specific_jpsi_ks",)
@@ -422,7 +422,7 @@ class Constraint:
             notes=(
                 "S_psiK_S = sin(2 beta + arg(1 + M12_Bd^NP/M12_Bd^SM)); "
                 "M12_Bd^NP is the complex QCD-running Delta F=2 amplitude at "
-                "2 GeV. 2 beta is computed in core from the repo CKM target."
+                "m_b=4.18 GeV. 2 beta is computed in core from the repo CKM target."
             ),
             diagnostics={
                 "m12_np_gev": complex(m12_np),

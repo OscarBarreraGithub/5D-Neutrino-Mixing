@@ -29,6 +29,85 @@ DELTA_F2_CATALOG_CL_NOTE = (
     "NOTE: Delta-F=2 epsilon_K uses a 68.27% one-sigma sensitivity budget; "
     "catalog-wide single-CL harmonization is a separate policy decision."
 )
+DELTA_F2_RUNNING_ORDER = "LO"
+DELTA_F2_LO_RUNNING_BIAS_NOTE = (
+    "Delta-F=2 running is LO; the LR (C4) enhancement is likely low by "
+    "~10-15% in M_KK vs NLO -- eps_K floors are therefore mildly "
+    "CONSERVATIVE (understated) in this direction."
+)
+DELTA_F2_MU_HAD_KAON_GEV = 3.0
+DELTA_F2_MU_HAD_B_GEV = 4.18
+DELTA_F2_MU_HAD_D_GEV = 3.0
+
+# HFLAV/B001-B003 mass-splitting budget inputs. These are intentionally kept
+# near DEFAULT_DELTA_F2_INPUTS_V1 because the input bundle's ``bound`` field is
+# a public diagnostic, while the hadronic constants live further below.
+HBAR_GEV_PER_PS = 6.582119569e-13
+
+DELTA_M_BD_EXP = 3.334e-13
+DELTA_M_BD_SM = 3.6e-13
+DELTA_M_BD_EXP_PS_INV = 0.5069
+DELTA_M_BD_EXP_SIGMA_PS_INV = 0.0019
+DELTA_M_BD_SM_SIGMA_PS_INV = 0.062
+DELTA_M_BD_GEV_PER_PS_INV = DELTA_M_BD_EXP / DELTA_M_BD_EXP_PS_INV
+DELTA_M_BD_EXP_SIGMA = DELTA_M_BD_EXP_SIGMA_PS_INV * DELTA_M_BD_GEV_PER_PS_INV
+DELTA_M_BD_SM_SIGMA = DELTA_M_BD_SM_SIGMA_PS_INV * DELTA_M_BD_GEV_PER_PS_INV
+DELTA_M_BD_COMBINED_SIGMA = math.hypot(
+    DELTA_M_BD_EXP_SIGMA,
+    DELTA_M_BD_SM_SIGMA,
+)
+DELTA_M_BD_CENTRAL_BUDGET = abs(DELTA_M_BD_EXP - DELTA_M_BD_SM) / 2.0
+DELTA_M_BD_BUDGET = (
+    abs(DELTA_M_BD_EXP - DELTA_M_BD_SM) + DELTA_M_BD_COMBINED_SIGMA
+) / 2.0
+
+DELTA_M_BS_EXP_PS_INV = 17.766
+DELTA_M_BS_EXP_SIGMA_PS_INV = 0.006
+DELTA_M_BS_EXP = DELTA_M_BS_EXP_PS_INV * HBAR_GEV_PER_PS
+DELTA_M_BS_EXP_SIGMA = DELTA_M_BS_EXP_SIGMA_PS_INV * HBAR_GEV_PER_PS
+DELTA_M_BS_SM = 1.17e-11
+DELTA_M_BS_FLAG_F_BS_SQRT_BHAT_BS_MEV = 256.1
+DELTA_M_BS_FLAG_F_BS_SQRT_BHAT_BS_SIGMA_MEV = 5.7
+DELTA_M_BS_SM_SIGMA = (
+    abs(DELTA_M_BS_SM)
+    * 2.0
+    * DELTA_M_BS_FLAG_F_BS_SQRT_BHAT_BS_SIGMA_MEV
+    / DELTA_M_BS_FLAG_F_BS_SQRT_BHAT_BS_MEV
+)
+DELTA_M_BS_COMBINED_SIGMA = math.hypot(
+    DELTA_M_BS_EXP_SIGMA,
+    DELTA_M_BS_SM_SIGMA,
+)
+DELTA_M_BS_CENTRAL_BUDGET = abs(DELTA_M_BS_EXP - DELTA_M_BS_SM) / 2.0
+DELTA_M_BS_BUDGET = (
+    abs(DELTA_M_BS_EXP - DELTA_M_BS_SM) + DELTA_M_BS_COMBINED_SIGMA
+) / 2.0
+
+DELTA_M_D_EXP = 6.25e-15
+DELTA_M_D_BUDGET = DELTA_M_D_EXP / 2.0
+
+
+def delta_f2_default_mu_had_for_system(key: str) -> float:
+    """Return the default hadronic RG endpoint for one Delta-F=2 system."""
+
+    if key == "epsilon_k":
+        return DELTA_F2_MU_HAD_KAON_GEV
+    if key in {"b_d", "b_s"}:
+        return DELTA_F2_MU_HAD_B_GEV
+    if key == "d":
+        return DELTA_F2_MU_HAD_D_GEV
+    raise KeyError(key)
+
+
+def _resolve_mu_had_for_system(
+    key: str,
+    mu_had: float | Mapping[str, float] | None,
+) -> float:
+    if mu_had is None:
+        return delta_f2_default_mu_had_for_system(key)
+    if isinstance(mu_had, Mapping):
+        return float(mu_had.get(key, delta_f2_default_mu_had_for_system(key)))
+    return float(mu_had)
 
 
 @dataclass(frozen=True)
@@ -154,6 +233,66 @@ class EpsilonKBudgetPolicy:
             "budget_sm_choice_sensitivity": float(self.sm_choice_sensitivity),
             "sm_choice_sensitivity_in_hard_gate": False,
             "catalog_confidence_level_note": DELTA_F2_CATALOG_CL_NOTE,
+            "running_order": DELTA_F2_RUNNING_ORDER,
+            "running_bias_note": DELTA_F2_LO_RUNNING_BIAS_NOTE,
+        }
+
+
+@dataclass(frozen=True)
+class DeltaMNPBudgetPolicy:
+    """Named NP-budget policy for a neutral-meson mass splitting."""
+
+    policy_id: str
+    confidence_level: str
+    doc_citation: str
+    system: str
+    budget: float
+    construction: str
+    experimental_delta_m: float
+    sm_delta_m: float | None
+    central_delta_m_residual: float | None
+    experimental_sigma_delta_m: float | None
+    sm_sigma_delta_m: float | None
+    combined_sigma_delta_m: float | None
+    legacy_full_delta_m_m12_budget: float
+    note: str
+
+    def as_diagnostics(self) -> dict[str, Any]:
+        return {
+            "budget_policy_id": self.policy_id,
+            "confidence_level": self.confidence_level,
+            "budget_doc_citation": self.doc_citation,
+            "budget_construction": self.construction,
+            "hard_veto_np_budget": float(self.budget),
+            "central_np_budget": (
+                None
+                if self.central_delta_m_residual is None
+                else float(self.central_delta_m_residual / 2.0)
+            ),
+            "experimental_delta_m_gev": float(self.experimental_delta_m),
+            "sm_delta_m_gev": None if self.sm_delta_m is None else float(self.sm_delta_m),
+            "central_delta_m_residual_gev": (
+                None
+                if self.central_delta_m_residual is None
+                else float(self.central_delta_m_residual)
+            ),
+            "budget_experimental_delta_m_sigma_gev": (
+                None
+                if self.experimental_sigma_delta_m is None
+                else float(self.experimental_sigma_delta_m)
+            ),
+            "budget_sm_delta_m_sigma_gev": (
+                None if self.sm_sigma_delta_m is None else float(self.sm_sigma_delta_m)
+            ),
+            "budget_combined_delta_m_sigma_gev": (
+                None
+                if self.combined_sigma_delta_m is None
+                else float(self.combined_sigma_delta_m)
+            ),
+            "legacy_full_delta_m_m12_budget": float(
+                self.legacy_full_delta_m_m12_budget
+            ),
+            "budget_policy_note": self.note,
         }
 
 
@@ -291,12 +430,15 @@ DEFAULT_DELTA_F2_INPUTS_V1: tuple[DeltaF2Input, ...] = (
         reject_reason="b_d_mix",
         sector="down",
         generations=(0, 2),
-        bound=1.667e-13,
+        bound=DELTA_M_BD_BUDGET,
         ll_weight=1.0,
         rr_weight=1.0,
         lr1_weight=7.0,
         lr2_weight=2.0,
-        note="B_d mixing with proper hadronic matrix elements (FLAG 2024 / PDG).",
+        note=(
+            "B_d mixing with proper hadronic matrix elements (FLAG 2024 / PDG); "
+            "budget follows the B001 one-sigma SM-vs-experiment room."
+        ),
     ),
     DeltaF2Input(
         key="b_s",
@@ -305,12 +447,15 @@ DEFAULT_DELTA_F2_INPUTS_V1: tuple[DeltaF2Input, ...] = (
         reject_reason="b_s_mix",
         sector="down",
         generations=(1, 2),
-        bound=5.844e-12,
+        bound=DELTA_M_BS_BUDGET,
         ll_weight=1.0,
         rr_weight=1.0,
         lr1_weight=7.0,
         lr2_weight=2.0,
-        note="B_s mixing with proper hadronic matrix elements (FLAG 2024 / PDG).",
+        note=(
+            "B_s mixing with proper hadronic matrix elements (FLAG 2024 / PDG); "
+            "budget follows the B003 one-sigma SM-vs-experiment room."
+        ),
     ),
     DeltaF2Input(
         key="d",
@@ -319,12 +464,15 @@ DEFAULT_DELTA_F2_INPUTS_V1: tuple[DeltaF2Input, ...] = (
         reject_reason="d_mix",
         sector="up",
         generations=(0, 1),
-        bound=3.125e-15,
+        bound=DELTA_M_D_BUDGET,
         ll_weight=1.0,
         rr_weight=1.0,
         lr1_weight=7.0,
         lr2_weight=2.0,
-        note="D0 mixing with proper hadronic matrix elements (FLAG 2024 / HFLAV).",
+        note=(
+            "D0 mixing with proper hadronic matrix elements (FLAG 2024 / HFLAV); "
+            "budget is a conservative long-distance envelope, not a Gaussian CL."
+        ),
     ),
 )
 
@@ -464,6 +612,9 @@ def _hadronic_eval_for_system(
             "epsilon_k_selected_signed_budget": float(eps_result.epsilon_k_np_budget),
             "central_diagnostic_budget": float(eps_result.central_diagnostic_budget),
             "epsilon_k_np_is_absolute": True,
+            "hadronic_scale_gev": float(wilsons.matching_scale),
+            "running_order": eps_result.running_order,
+            "running_bias_note": eps_result.running_bias_note,
         }
         diagnostics.update(delta_f2_epsilon_k_budget_policy().as_diagnostics())
         return _HadronicEvaluation(
@@ -490,6 +641,13 @@ def _hadronic_eval_for_system(
         }
         dominant_operator = max(operator_sizes, key=operator_sizes.get)
         dominant_size = float(operator_sizes[dominant_operator])
+        diagnostics = result.diagnostics
+        diagnostics = {
+            **diagnostics,
+            "abs_m12_np_gev": float(result.abs_m12_np),
+            "hadronic_scale_gev": float(wilsons.matching_scale),
+            "running_order": DELTA_F2_RUNNING_ORDER,
+        }
         return _HadronicEvaluation(
             ratio_to_bound=result.ratio_to_budget,
             effective_amplitude=result.abs_m12_np,
@@ -497,6 +655,9 @@ def _hadronic_eval_for_system(
             operator_sizes=operator_sizes,
             dominant_operator=dominant_operator,
             dominant_size=dominant_size,
+            budget_policy_id=result.budget_policy_id,
+            confidence_level=result.confidence_level,
+            diagnostics=diagnostics,
         )
     elif key == "b_s":
         result = evaluate_bs_mixing(wilsons)
@@ -511,6 +672,13 @@ def _hadronic_eval_for_system(
         }
         dominant_operator = max(operator_sizes, key=operator_sizes.get)
         dominant_size = float(operator_sizes[dominant_operator])
+        diagnostics = result.diagnostics
+        diagnostics = {
+            **diagnostics,
+            "abs_m12_np_gev": float(result.abs_m12_np),
+            "hadronic_scale_gev": float(wilsons.matching_scale),
+            "running_order": DELTA_F2_RUNNING_ORDER,
+        }
         return _HadronicEvaluation(
             ratio_to_bound=result.ratio_to_budget,
             effective_amplitude=result.abs_m12_np,
@@ -518,6 +686,9 @@ def _hadronic_eval_for_system(
             operator_sizes=operator_sizes,
             dominant_operator=dominant_operator,
             dominant_size=dominant_size,
+            budget_policy_id=result.budget_policy_id,
+            confidence_level=result.confidence_level,
+            diagnostics=diagnostics,
         )
     elif key == "d":
         result = evaluate_d0_mixing(wilsons)
@@ -532,6 +703,13 @@ def _hadronic_eval_for_system(
         }
         dominant_operator = max(operator_sizes, key=operator_sizes.get)
         dominant_size = float(operator_sizes[dominant_operator])
+        diagnostics = result.diagnostics
+        diagnostics = {
+            **diagnostics,
+            "abs_m12_np_gev": float(result.abs_m12_np),
+            "hadronic_scale_gev": float(wilsons.matching_scale),
+            "running_order": DELTA_F2_RUNNING_ORDER,
+        }
         return _HadronicEvaluation(
             ratio_to_bound=result.ratio_to_budget,
             effective_amplitude=result.abs_m12_np,
@@ -539,6 +717,9 @@ def _hadronic_eval_for_system(
             operator_sizes=operator_sizes,
             dominant_operator=dominant_operator,
             dominant_size=dominant_size,
+            budget_policy_id=result.budget_policy_id,
+            confidence_level=result.confidence_level,
+            diagnostics=diagnostics,
         )
     return None
 
@@ -550,17 +731,17 @@ def evaluate_delta_f2_constraints(
     xi_KK: float = DEFAULT_QUARK_XI_KK,
     inputs: Sequence[DeltaF2Input] | None = None,
     apply_qcd_running: bool = True,
-    mu_had: float = 2.0,
+    mu_had: float | Mapping[str, float] | None = None,
     use_hadronic: bool = True,
     epsilon_k_np_budget_override: float | None = None,
 ) -> DeltaF2ConstraintSummary:
     """Evaluate the repo-owned ``Delta F = 2`` benchmark bundle.
 
     By default, Wilson coefficients are QCD-evolved from the matching scale
-    (M_KK) down to the hadronic scale ``mu_had`` (default 2 GeV) using
-    leading-log RG running before applying the exclusion bound. This is the
-    physically correct procedure since the hadronic matrix elements are
-    evaluated at mu_had.
+    (M_KK) down to a per-system hadronic scale using leading-log RG running
+    before applying the exclusion bound: 3 GeV for kaons, 4.18 GeV for B_d/B_s,
+    and 3 GeV for D0. This matches the dominant bag-parameter conventions more
+    closely than the legacy global 2 GeV endpoint.
 
     Set ``apply_qcd_running=False`` to recover the previous behavior of using
     Wilson coefficients at the matching scale without running (backward
@@ -583,8 +764,10 @@ def evaluate_delta_f2_constraints(
         Override the default input bundle.
     apply_qcd_running : bool
         If True (default), evolve Wilson coefficients from M_KK to mu_had.
-    mu_had : float
-        Hadronic scale for RG evolution in GeV (default 2.0).
+    mu_had : float, mapping, or None
+        Hadronic scale for RG evolution in GeV. ``None`` (default) selects the
+        per-system endpoints; a scalar preserves a legacy common endpoint; a
+        mapping may override selected input keys.
     use_hadronic : bool
         If True (default), use proper hadronic matrix elements for all systems.
     epsilon_k_np_budget_override : float, optional
@@ -605,7 +788,8 @@ def evaluate_delta_f2_constraints(
     for coeffs in coefficients:
         # Optionally evolve Wilson coefficients to the hadronic scale
         if apply_qcd_running:
-            evolved_coeffs = _evolve_wilsons(coeffs, mu_had=mu_had)
+            system_mu_had = _resolve_mu_had_for_system(coeffs.input.key, mu_had)
+            evolved_coeffs = _evolve_wilsons(coeffs, mu_had=system_mu_had)
         else:
             evolved_coeffs = coeffs
         item = evolved_coeffs.input
@@ -701,6 +885,10 @@ def _evolve_wilsons(
     The ``qcd_running.evolve_deltaf2_wilsons`` symbol is imported at module
     scope (lifted in C03 cleanup, R04-I2, 2026-05-25).  ``qcd_running`` does
     not import ``deltaf2`` at module scope, so the lift is non-circular.
+
+    Running-order caveat: Delta-F=2 running is LO; the LR (C4) enhancement is
+    likely low by ~10-15% in M_KK vs NLO -- eps_K floors are therefore mildly
+    CONSERVATIVE (understated) in this direction.
     """
     c_vll_low, c_vrr_low, c4_lr_low, c5_lr_low = evolve_deltaf2_wilsons(
         wilsons.c1_vll,
@@ -734,14 +922,11 @@ M_S_2GEV = 0.0934         # GeV, strange quark MS-bar mass at 2 GeV (FLAG)
 M_D_2GEV = 0.00467        # GeV, down quark MS-bar mass at 2 GeV (FLAG)
 B_1_K = 0.5503            # B_K MS-bar(2 GeV), FLAG 2024
 
-# FLAG B4/B5 scale caveat:
-# The LR kaon bag inputs below are FLAG 2024 MS-bar(3 GeV) values, while
-# ``mu_had`` defaults to 2 GeV and Wilson coefficients are normally evolved to
-# that scale before evaluation.  The matrix-element path intentionally keeps
-# using these existing numbers for now so current evaluations remain
-# numerically unchanged, but this is a known scale-matching caveat.
-# TODO: RG-run/convert B_4^K and B_5^K to 2 GeV in the matching scheme used
-# here, then update the matrix elements, provenance, and compatibility aliases.
+# FLAG B4/B5 scale note:
+# The LR kaon bag inputs below are FLAG 2024 MS-bar(3 GeV) values, so the
+# default kaon Wilson endpoint is now 3 GeV.  The VLL B_K and quark-mass inputs
+# retain the pre-existing 2 GeV literals; a full common-scheme kaon input
+# refresh is a separate hadronic-input update.
 B_4_K_3GEV = 0.903        # B_4^K MS-bar(3 GeV), FLAG 2024
 B_5_K_3GEV = 0.691        # B_5^K MS-bar(3 GeV), FLAG 2024
 B_4_K = B_4_K_3GEV        # compatibility alias; prefer B_4_K_3GEV in new code
@@ -797,6 +982,106 @@ def delta_f2_epsilon_k_budget_policy() -> EpsilonKBudgetPolicy:
 
     return EPSILON_K_BUDGET_POLICY
 
+
+B_D_MIXING_BUDGET_POLICY_ID = "b_d_delta_m_hpqcd2019_hflav2025_one_sigma_v1"
+B_S_MIXING_BUDGET_POLICY_ID = "b_s_delta_m_flag2024_hflav2024_one_sigma_v1"
+D0_MIXING_BUDGET_POLICY_ID = "d0_delta_m_exp_half_long_distance_envelope_v1"
+DELTA_M_BUDGET_CONFIDENCE_LEVEL = "68.27% one_sigma_sensitivity"
+D0_MIXING_BUDGET_CONFIDENCE_LEVEL = (
+    "not_a_gaussian_cl_conservative_long_distance_envelope"
+)
+
+B_D_MIXING_BUDGET_POLICY = DeltaMNPBudgetPolicy(
+    policy_id=B_D_MIXING_BUDGET_POLICY_ID,
+    confidence_level=DELTA_M_BUDGET_CONFIDENCE_LEVEL,
+    doc_citation=(
+        "flavor_catalog/processes/beauty/B001.yaml:"
+        "pdg_or_equivalent.canonical_experimental_average,"
+        "standard_model_prediction; auxiliary_code_inputs.deltaf2_bd_constants"
+    ),
+    system="B_d",
+    budget=DELTA_M_BD_BUDGET,
+    construction="(|Delta m_exp - Delta m_SM| + sqrt(sigma_exp^2 + sigma_SM^2)) / 2",
+    experimental_delta_m=DELTA_M_BD_EXP,
+    sm_delta_m=DELTA_M_BD_SM,
+    central_delta_m_residual=abs(DELTA_M_BD_EXP - DELTA_M_BD_SM),
+    experimental_sigma_delta_m=DELTA_M_BD_EXP_SIGMA,
+    sm_sigma_delta_m=DELTA_M_BD_SM_SIGMA,
+    combined_sigma_delta_m=DELTA_M_BD_COMBINED_SIGMA,
+    legacy_full_delta_m_m12_budget=DELTA_M_BD_EXP / 2.0,
+    note=(
+        "B001 catalog policy promoted into the core: HFLAV/PDG 2025 "
+        "Delta m_d=0.5069(19) ps^-1 with the in-code GeV conversion, "
+        "core SM central 3.6e-13 GeV, and HPQCD 2019 sigma_SM=0.062 ps^-1."
+    ),
+)
+
+B_S_MIXING_BUDGET_POLICY = DeltaMNPBudgetPolicy(
+    policy_id=B_S_MIXING_BUDGET_POLICY_ID,
+    confidence_level=DELTA_M_BUDGET_CONFIDENCE_LEVEL,
+    doc_citation=(
+        "flavor_catalog/processes/beauty/B003.yaml:"
+        "pdg_or_equivalent.canonical_hflav_recommended;"
+        "auxiliary_theory_inputs.flag_2024_bmixing"
+    ),
+    system="B_s",
+    budget=DELTA_M_BS_BUDGET,
+    construction="(|Delta m_exp - Delta m_SM| + sqrt(sigma_exp^2 + sigma_SM^2)) / 2",
+    experimental_delta_m=DELTA_M_BS_EXP,
+    sm_delta_m=DELTA_M_BS_SM,
+    central_delta_m_residual=abs(DELTA_M_BS_EXP - DELTA_M_BS_SM),
+    experimental_sigma_delta_m=DELTA_M_BS_EXP_SIGMA,
+    sm_sigma_delta_m=DELTA_M_BS_SM_SIGMA,
+    combined_sigma_delta_m=DELTA_M_BS_COMBINED_SIGMA,
+    legacy_full_delta_m_m12_budget=DELTA_M_BS_EXP / 2.0,
+    note=(
+        "B003 catalog policy promoted into the core: HFLAV Fall 2024 "
+        "Delta m_s=17.766(6) ps^-1, hbar=6.582119569e-13 GeV ps, "
+        "core SM central 1.17e-11 GeV, and FLAG 2024 "
+        "f_Bs sqrt(Bhat_Bs)=256.1(5.7) MeV propagated as a 2x relative "
+        "Delta m_s theory error."
+    ),
+)
+
+D0_MIXING_BUDGET_POLICY = DeltaMNPBudgetPolicy(
+    policy_id=D0_MIXING_BUDGET_POLICY_ID,
+    confidence_level=D0_MIXING_BUDGET_CONFIDENCE_LEVEL,
+    doc_citation="quarkConstraints/deltaf2.py:DELTA_M_D_EXP",
+    system="D0",
+    budget=DELTA_M_D_BUDGET,
+    construction="Delta m_D_exp / 2",
+    experimental_delta_m=DELTA_M_D_EXP,
+    sm_delta_m=None,
+    central_delta_m_residual=None,
+    experimental_sigma_delta_m=None,
+    sm_sigma_delta_m=None,
+    combined_sigma_delta_m=None,
+    legacy_full_delta_m_m12_budget=DELTA_M_D_BUDGET,
+    note=(
+        "D0 mixing remains a conservative long-distance envelope because the "
+        "short-distance SM subtraction is not defensible; this is not a 68% "
+        "Gaussian confidence level."
+    ),
+)
+
+
+def delta_f2_bd_budget_policy() -> DeltaMNPBudgetPolicy:
+    """Return the B_d Delta-m NP-budget policy."""
+
+    return B_D_MIXING_BUDGET_POLICY
+
+
+def delta_f2_bs_budget_policy() -> DeltaMNPBudgetPolicy:
+    """Return the B_s Delta-m NP-budget policy."""
+
+    return B_S_MIXING_BUDGET_POLICY
+
+
+def delta_f2_d0_budget_policy() -> DeltaMNPBudgetPolicy:
+    """Return the D0 conservative Delta-m envelope policy."""
+
+    return D0_MIXING_BUDGET_POLICY
+
 KAON_HADRONIC_PARAMS_V1 = "kaon_hadronic_params_bmu_2gev_v1"
 
 # ---------------------------------------------------------------------------
@@ -810,8 +1095,6 @@ M_D_QUARK_BD = 0.00467      # GeV, d quark MS-bar mass at 2 GeV
 B_1_BD = 0.87               # VLL bag parameter (FLAG 2024, renormalized)
 B_4_BD = 1.02               # LR bag parameter (FLAG 2024)
 B_5_BD = 0.96               # LR bag parameter (FLAG 2024)
-DELTA_M_BD_EXP = 3.334e-13  # GeV, experimental (PDG)
-DELTA_M_BD_SM = 3.6e-13     # GeV, SM prediction (CKMfitter)
 
 # ---------------------------------------------------------------------------
 # B_s meson hadronic parameters (FLAG 2024 / PDG)
@@ -823,8 +1106,6 @@ M_S_QUARK_BS = 0.0934       # GeV, s quark MS-bar mass at 2 GeV
 B_1_BS = 0.87               # VLL bag parameter (FLAG 2024)
 B_4_BS = 1.02               # LR bag parameter (FLAG 2024)
 B_5_BS = 0.96               # LR bag parameter (FLAG 2024)
-DELTA_M_BS_EXP = 1.1688e-11 # GeV, experimental (PDG)
-DELTA_M_BS_SM = 1.17e-11    # GeV, SM prediction (CKMfitter)
 
 # ---------------------------------------------------------------------------
 # D0 meson hadronic parameters (FLAG 2024 / PDG / HFLAV)
@@ -837,9 +1118,7 @@ M_U_QUARK = 0.00216         # GeV, u quark MS-bar mass at 2 GeV
 B_1_D = 0.75                # VLL bag parameter (less precise)
 B_4_D = 1.0                 # LR bag parameter (estimated)
 B_5_D = 1.0                 # LR bag parameter (estimated)
-DELTA_M_D_EXP = 6.25e-15    # GeV, experimental (HFLAV)
-
-MESON_HADRONIC_PARAMS_V1 = "meson_hadronic_params_bmu_2gev_v1"
+MESON_HADRONIC_PARAMS_V1 = "meson_hadronic_params_bmu_per_system_mu_v2"
 
 
 def _kaon_matrix_elements() -> dict[str, float]:
@@ -906,6 +1185,8 @@ class EpsilonKResult:
     sm_choice_sensitivity: float = EPSILON_K_SM_CHOICE_SENSITIVITY
     budget_policy_id: str = EPSILON_K_BUDGET_POLICY_ID
     confidence_level: str = EPSILON_K_BUDGET_CONFIDENCE_LEVEL
+    running_order: str = DELTA_F2_RUNNING_ORDER
+    running_bias_note: str = DELTA_F2_LO_RUNNING_BIAS_NOTE
 
 
 @dataclass(frozen=True)
@@ -976,6 +1257,8 @@ def evaluate_epsilon_k(
         sm_choice_sensitivity=EPSILON_K_SM_CHOICE_SENSITIVITY,
         budget_policy_id=budget_policy_id,
         confidence_level=confidence_level,
+        running_order=DELTA_F2_RUNNING_ORDER,
+        running_bias_note=DELTA_F2_LO_RUNNING_BIAS_NOTE,
     )
 
 
@@ -1001,14 +1284,14 @@ def evaluate_delta_mk(
 
 def evaluate_epsilon_k_with_running(
     wilsons: DeltaF2WilsonCoefficients,
-    mu_had: float = 2.0,
+    mu_had: float = DELTA_F2_MU_HAD_KAON_GEV,
     *,
     epsilon_k_np_budget_override: float | None = None,
 ) -> EpsilonKResult:
     """Like ``evaluate_epsilon_k`` but with QCD RG evolution from M_KK to mu_had.
 
     The Wilson coefficients are evolved from the matching scale stored in
-    ``wilsons.matching_scale`` (typically M_KK) down to ``mu_had`` (default 2 GeV)
+    ``wilsons.matching_scale`` (typically M_KK) down to ``mu_had`` (default 3 GeV)
     using leading-log QCD running before evaluating epsilon_K with the hadronic
     matrix elements at that scale.
 
@@ -1017,7 +1300,7 @@ def evaluate_epsilon_k_with_running(
     wilsons : DeltaF2WilsonCoefficients
         Wilson coefficients at the matching scale.
     mu_had : float
-        Hadronic scale in GeV (default 2.0).
+        Hadronic scale in GeV (default 3.0 for the kaon LR path).
     epsilon_k_np_budget_override : float, optional
         Override for the NP budget; see :func:`evaluate_epsilon_k`.
 
@@ -1035,12 +1318,12 @@ def evaluate_epsilon_k_with_running(
 
 def evaluate_delta_mk_with_running(
     wilsons: DeltaF2WilsonCoefficients,
-    mu_had: float = 2.0,
+    mu_had: float = DELTA_F2_MU_HAD_KAON_GEV,
 ) -> DeltaMKResult:
     """Like ``evaluate_delta_mk`` but with QCD RG evolution from M_KK to mu_had.
 
     The Wilson coefficients are evolved from the matching scale stored in
-    ``wilsons.matching_scale`` (typically M_KK) down to ``mu_had`` (default 2 GeV)
+    ``wilsons.matching_scale`` (typically M_KK) down to ``mu_had`` (default 3 GeV)
     using leading-log QCD running before evaluating Delta m_K.
 
     Parameters
@@ -1048,7 +1331,7 @@ def evaluate_delta_mk_with_running(
     wilsons : DeltaF2WilsonCoefficients
         Wilson coefficients at the matching scale.
     mu_had : float
-        Hadronic scale in GeV (default 2.0).
+        Hadronic scale in GeV (default 3.0 for the kaon LR path).
 
     Returns
     -------
@@ -1120,21 +1403,24 @@ class MesonMixingResult:
     budget: float        # allowed NP budget in GeV (half of Delta m)
     ratio_to_budget: float  # abs_m12_np / budget
     passes: bool         # ratio <= 1.0
+    budget_policy_id: str = ""
+    confidence_level: str = ""
+    diagnostics: Mapping[str, Any] = field(default_factory=dict)
 
 
 def _bd_budget() -> float:
-    """NP budget for B_d mixing: max(DeltaM_exp/2, |DeltaM_exp - DeltaM_SM|/2)."""
-    return max(DELTA_M_BD_EXP / 2.0, abs(DELTA_M_BD_EXP - DELTA_M_BD_SM) / 2.0)
+    """NP budget for B_d mixing under the one-sigma B001 policy."""
+    return delta_f2_bd_budget_policy().budget
 
 
 def _bs_budget() -> float:
-    """NP budget for B_s mixing: max(DeltaM_exp/2, |DeltaM_exp - DeltaM_SM|/2)."""
-    return max(DELTA_M_BS_EXP / 2.0, abs(DELTA_M_BS_EXP - DELTA_M_BS_SM) / 2.0)
+    """NP budget for B_s mixing under the one-sigma B003 policy."""
+    return delta_f2_bs_budget_policy().budget
 
 
 def _d0_budget() -> float:
-    """NP budget for D0 mixing: DeltaM_exp/2 (long-distance SM dominates)."""
-    return DELTA_M_D_EXP / 2.0
+    """NP budget for D0 mixing: conservative long-distance envelope."""
+    return delta_f2_d0_budget_policy().budget
 
 
 def evaluate_bd_mixing(
@@ -1147,12 +1433,16 @@ def evaluate_bd_mixing(
     abs_m12 = abs(m12)
     budget = _bd_budget()
     ratio = abs_m12 / budget if budget > 0.0 else float("inf")
+    policy = delta_f2_bd_budget_policy()
     return MesonMixingResult(
         system="B_d",
         abs_m12_np=abs_m12,
         budget=budget,
         ratio_to_budget=ratio,
         passes=ratio <= 1.0,
+        budget_policy_id=policy.policy_id,
+        confidence_level=policy.confidence_level,
+        diagnostics=policy.as_diagnostics(),
     )
 
 
@@ -1166,12 +1456,16 @@ def evaluate_bs_mixing(
     abs_m12 = abs(m12)
     budget = _bs_budget()
     ratio = abs_m12 / budget if budget > 0.0 else float("inf")
+    policy = delta_f2_bs_budget_policy()
     return MesonMixingResult(
         system="B_s",
         abs_m12_np=abs_m12,
         budget=budget,
         ratio_to_budget=ratio,
         passes=ratio <= 1.0,
+        budget_policy_id=policy.policy_id,
+        confidence_level=policy.confidence_level,
+        diagnostics=policy.as_diagnostics(),
     )
 
 
@@ -1185,37 +1479,41 @@ def evaluate_d0_mixing(
     abs_m12 = abs(m12)
     budget = _d0_budget()
     ratio = abs_m12 / budget if budget > 0.0 else float("inf")
+    policy = delta_f2_d0_budget_policy()
     return MesonMixingResult(
         system="D0",
         abs_m12_np=abs_m12,
         budget=budget,
         ratio_to_budget=ratio,
         passes=ratio <= 1.0,
+        budget_policy_id=policy.policy_id,
+        confidence_level=policy.confidence_level,
+        diagnostics=policy.as_diagnostics(),
     )
 
 
 def evaluate_bd_mixing_with_running(
     wilsons: DeltaF2WilsonCoefficients,
-    mu_had: float = 2.0,
+    mu_had: float = DELTA_F2_MU_HAD_B_GEV,
 ) -> MesonMixingResult:
-    """Like ``evaluate_bd_mixing`` but with QCD RG evolution from M_KK to mu_had."""
+    """Like ``evaluate_bd_mixing`` but with QCD RG evolution from M_KK to m_b."""
     evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
     return evaluate_bd_mixing(evolved)
 
 
 def evaluate_bs_mixing_with_running(
     wilsons: DeltaF2WilsonCoefficients,
-    mu_had: float = 2.0,
+    mu_had: float = DELTA_F2_MU_HAD_B_GEV,
 ) -> MesonMixingResult:
-    """Like ``evaluate_bs_mixing`` but with QCD RG evolution from M_KK to mu_had."""
+    """Like ``evaluate_bs_mixing`` but with QCD RG evolution from M_KK to m_b."""
     evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
     return evaluate_bs_mixing(evolved)
 
 
 def evaluate_d0_mixing_with_running(
     wilsons: DeltaF2WilsonCoefficients,
-    mu_had: float = 2.0,
+    mu_had: float = DELTA_F2_MU_HAD_D_GEV,
 ) -> MesonMixingResult:
-    """Like ``evaluate_d0_mixing`` but with QCD RG evolution from M_KK to mu_had."""
+    """Like ``evaluate_d0_mixing`` but with QCD RG evolution from M_KK to 3 GeV."""
     evolved = _evolve_wilsons(wilsons, mu_had=mu_had)
     return evaluate_d0_mixing(evolved)

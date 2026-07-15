@@ -4,15 +4,13 @@ Physics
 -------
 ``Delta m_d`` is the mass splitting in ``B_d0-B_dbar0`` mixing.  The
 new-physics contribution is evaluated with the audited Delta F = 2 core as
-``|M12^NP|`` after QCD-running the Wilson coefficients to ``mu_had = 2 GeV``.
+``|M12^NP|`` after QCD-running the Wilson coefficients to ``mu_had = m_b``.
 
 Severity
 --------
 HARD.  The oscillation frequency is observed, and the RS new-physics
 contribution must fit inside an uncertainty-aware SM-vs-experiment room.  The
-core's legacy B_d convention uses
-``max(Delta m_exp / 2, |Delta m_exp - Delta m_SM| / 2)``; this plugin keeps
-that core budget as a diagnostic and applies the requested catalog budget,
+core and catalog use the same promoted B001 budget,
 
     (|Delta m_exp - Delta m_SM| + sigma_combined) / 2,
 
@@ -63,7 +61,7 @@ _BUDGET_DOC_CITATION = (
     "docs/audits/bag_param_inventory.md:36-37; "
     "HPQCD 2019 arXiv:1907.01025"
 )
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 4.18
 
 
 @dataclass(frozen=True)
@@ -102,6 +100,8 @@ class BdMixingBudgetBand:
     sm_delta_m_sigma_policy: str | None
     gev_per_ps_inverse: float
     core_default_budget: float
+    core_budget_policy_id: str
+    core_budget_confidence_level: str
 
 
 @dataclass(frozen=True)
@@ -361,6 +361,8 @@ def _build_budget_band(
         ),
         gev_per_ps_inverse=gev_per_ps_inverse,
         core_default_budget=core_inputs["core_m12_budget_gev"],
+        core_budget_policy_id=str(core_inputs["core_budget_policy_id"]),
+        core_budget_confidence_level=str(core_inputs["core_budget_confidence_level"]),
     )
 
 
@@ -455,7 +457,7 @@ class Constraint:
             budget=budget,
             notes=(
                 "|M12_Bd^NP| is evaluated by the QCD-running Delta F=2 core "
-                "at 2 GeV; the HARD budget is the uncertainty-aware "
+                "at m_b=4.18 GeV; the HARD budget is the uncertainty-aware "
                 "SM-vs-experiment room documented in diagnostics."
             ),
             diagnostics={
@@ -470,6 +472,8 @@ class Constraint:
                 "right_db_coupling": complex(wilsons.right_coupling),
                 "wilson_coefficients": _complex_mapping(wilsons.wilsons),
                 "budget_doc_citation": self.anchor.budget_band.doc_citation,
+                "budget_policy_id": self.anchor.budget_band.core_budget_policy_id,
+                "confidence_level": self.anchor.budget_band.core_budget_confidence_level,
                 "budget_construction": (
                     "(|Delta m_exp - Delta m_SM| + "
                     "sqrt(sigma_exp^2 + sigma_SM^2)) / 2"

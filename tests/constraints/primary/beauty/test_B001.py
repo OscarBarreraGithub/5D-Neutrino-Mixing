@@ -251,7 +251,11 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["qcd_running_applied"] is True
-    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(2.0)
+    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(4.18)
+    assert result.diagnostics["budget_policy_id"] == (
+        "b_d_delta_m_hpqcd2019_hflav2025_one_sigma_v1"
+    )
+    assert result.diagnostics["confidence_level"] == "68.27% one_sigma_sensitivity"
     assert result.diagnostics["core_input_key"] == "b_d"
     assert result.diagnostics["down_sector_indices"] == (0, 2)
 
@@ -270,7 +274,7 @@ def test_pass_fail_and_numbers_match_running_evaluator_amplitude(
     constraint = fcc.get(_PID)
     point = point_builder.build_from_quark_couplings(couplings)
     result = constraint.evaluate(point)
-    audited = evaluate_bd_mixing_with_running(_bd_wilsons(couplings), mu_had=2.0)
+    audited = evaluate_bd_mixing_with_running(_bd_wilsons(couplings), mu_had=4.18)
 
     assert result.passes is expected_pass
     assert result.predicted == pytest.approx(audited.abs_m12_np)
@@ -281,10 +285,10 @@ def test_pass_fail_and_numbers_match_running_evaluator_amplitude(
         audited.ratio_to_budget
     )
     if expected_pass:
-        # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
-        assert result.predicted == pytest.approx(2.170088427952279e-14)
-        # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M))
-        assert result.ratio == pytest.approx(0.6439623045111523)
+        # re-pinned after M-6: B_d Wilsons run to m_b=4.18 GeV, matching the
+        # B-meson bag scale instead of the legacy global 2 GeV endpoint.
+        assert result.predicted == pytest.approx(1.6938763890423106e-14)
+        assert result.ratio == pytest.approx(0.5026488916278864)
         assert result.ratio <= 1.0
     else:
         assert result.ratio > 10.0

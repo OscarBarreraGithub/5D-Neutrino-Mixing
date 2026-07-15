@@ -56,7 +56,7 @@ _EXPERIMENTAL_ANCHOR_CANDIDATES = ("canonical_experimental_value",)
 _SM_ANCHOR_CANDIDATES = ("standard_model_reference",)
 _FLAG_BAG_CANDIDATES = ("flag_bag_parameters",)
 _BUDGET_DOC_CITATION = "docs/audits/epsilon_k_sm_decision.md:34-37,71-100"
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 3.0
 
 
 @dataclass(frozen=True)
@@ -382,7 +382,7 @@ class Constraint:
             budget=budget,
             notes=(
                 "Signed epsilon_K^NP uses kappa_epsilon Im(M12^NP)/(sqrt(2) Delta m_K); "
-                "Wilsons are QCD-evolved to 2 GeV; HARD budget is selected by "
+                "Wilsons are QCD-evolved to 3 GeV; HARD budget is selected by "
                 "the sign of epsilon_K^NP from the shared one-sigma policy. "
                 "NOTE: catalog-wide single-CL migration is a separate policy decision."
             ),
@@ -395,6 +395,8 @@ class Constraint:
                 "epsilon_k_selected_signed_budget": float(result.epsilon_k_np_budget),
                 "qcd_running_applied": True,
                 "hadronic_scale_gev": _MU_HAD_GEV,
+                "running_order": result.running_order,
+                "running_bias_note": result.running_bias_note,
                 "matching_scale_gev": float(wilsons.matching_scale),
                 "m_kk_gev": float(wilsons.M_KK),
                 "left_sd_coupling": complex(wilsons.left_coupling),

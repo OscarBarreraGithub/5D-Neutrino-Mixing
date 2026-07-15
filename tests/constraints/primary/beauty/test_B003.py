@@ -79,7 +79,7 @@ def _bs_wilsons(couplings: QuarkMassBasisCouplings):
 
 
 def _audited_bs_with_running(couplings: QuarkMassBasisCouplings):
-    return evaluate_bs_mixing_with_running(_bs_wilsons(couplings), mu_had=2.0)
+    return evaluate_bs_mixing_with_running(_bs_wilsons(couplings), mu_had=4.18)
 
 
 def test_registration_metadata():
@@ -128,10 +128,8 @@ def test_anchor_matches_yaml():
     )
     central_budget = abs(exp_delta_m_gev - DELTA_M_BS_SM) / 2.0
     loose_budget = (abs(exp_delta_m_gev - DELTA_M_BS_SM) + combined_sigma) / 2.0
-    core_budget = max(
-        DELTA_M_BS_EXP / 2.0,
-        abs(DELTA_M_BS_EXP - DELTA_M_BS_SM) / 2.0,
-    )
+    core_default_budget = loose_budget
+    core_legacy_budget = DELTA_M_BS_EXP / 2.0
 
     assert constraint.anchor.budget_band.experimental_delta_m_gev == pytest.approx(
         exp_delta_m_gev
@@ -149,8 +147,11 @@ def test_anchor_matches_yaml():
     assert constraint.anchor.budget_band.loose_budget == pytest.approx(loose_budget)
     assert constraint.anchor.budget == pytest.approx(loose_budget)
     assert constraint.anchor.budget == pytest.approx(2.635167648629676e-13)
+    assert constraint.anchor.budget_band.core_default_m12_budget == pytest.approx(
+        core_default_budget
+    )
     assert constraint.anchor.budget_band.core_legacy_m12_budget == pytest.approx(
-        core_budget
+        core_legacy_budget
     )
 
 
@@ -264,13 +265,19 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
         "flag_f_bs_sqrt_bhat_bs_uncertainty_mev",
         "core_delta_m_exp_gev",
         "core_delta_m_sm_gev",
+        "core_default_m12_budget",
         "core_legacy_m12_budget",
+        "core_default_ratio_to_budget",
         "core_legacy_ratio_to_budget",
     ):
         assert isinstance(result.diagnostics[key], float)
         assert math.isfinite(result.diagnostics[key])
     assert result.diagnostics["qcd_running_applied"] is True
-    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(2.0)
+    assert result.diagnostics["hadronic_scale_gev"] == pytest.approx(4.18)
+    assert result.diagnostics["budget_policy_id"] == (
+        "b_s_delta_m_flag2024_hflav2024_one_sigma_v1"
+    )
+    assert result.diagnostics["confidence_level"] == "68.27% one_sigma_sensitivity"
     assert result.diagnostics["system"] == "B_s"
     assert result.sm_prediction == pytest.approx(
         result.diagnostics["sm_delta_m_gev"]
@@ -294,20 +301,25 @@ def test_reference_couplings_use_uncertainty_budget_not_core_legacy_budget():
     result = constraint.evaluate(point_builder.build_from_quark_couplings(couplings))
     audited = _audited_bs_with_running(couplings)
 
-    assert audited.budget == pytest.approx(5.844e-12)
-    # budget literals (5.844e-12, 2.635...e-13) are exp/SM-derived anchor budgets
-    # -- NOT <O>-dependent, so they do NOT move under B3 (PLAN §6.4).
+    assert audited.budget == pytest.approx(2.6351676486296766e-13)
+    # The promoted core default now matches the B003 catalog one-sigma budget.
+    # The former full-Delta-m envelope is retained only in diagnostics.
     assert result.budget == pytest.approx(2.635167648629676e-13)
-    # predicted / ratio re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2 m_M)); the
-    # B_s system moves only slightly (predicted x~0.987), as expected.
-    assert result.predicted == pytest.approx(4.696762557259569e-14)
-    assert result.ratio == pytest.approx(0.1782339184264785)
+    # Re-pinned after M-6: B_s Wilsons run to m_b=4.18 GeV.
+    assert result.predicted == pytest.approx(3.672492443960319e-14)
+    assert result.ratio == pytest.approx(0.13936466038014947)
     assert result.predicted == pytest.approx(audited.abs_m12_np)
-    assert result.diagnostics["core_legacy_m12_budget"] == pytest.approx(
+    assert result.diagnostics["core_default_m12_budget"] == pytest.approx(
         audited.budget
     )
-    assert result.diagnostics["core_legacy_ratio_to_budget"] == pytest.approx(
+    assert result.diagnostics["core_default_ratio_to_budget"] == pytest.approx(
         audited.ratio_to_budget
+    )
+    assert result.diagnostics["core_legacy_m12_budget"] == pytest.approx(
+        DELTA_M_BS_EXP / 2.0
+    )
+    assert result.diagnostics["core_legacy_ratio_to_budget"] == pytest.approx(
+        result.predicted / (DELTA_M_BS_EXP / 2.0)
     )
     assert result.ratio == pytest.approx(result.predicted / constraint.anchor.budget)
 
@@ -332,11 +344,17 @@ def test_pass_fail_and_numbers_match_running_evaluator_prediction(
     assert result.predicted == pytest.approx(audited.abs_m12_np)
     assert result.budget == pytest.approx(constraint.anchor.budget)
     assert result.ratio == pytest.approx(audited.abs_m12_np / constraint.anchor.budget)
-    assert result.diagnostics["core_legacy_m12_budget"] == pytest.approx(
+    assert result.diagnostics["core_default_m12_budget"] == pytest.approx(
         audited.budget
     )
-    assert result.diagnostics["core_legacy_ratio_to_budget"] == pytest.approx(
+    assert result.diagnostics["core_default_ratio_to_budget"] == pytest.approx(
         audited.ratio_to_budget
+    )
+    assert result.diagnostics["core_legacy_m12_budget"] == pytest.approx(
+        DELTA_M_BS_EXP / 2.0
+    )
+    assert result.diagnostics["core_legacy_ratio_to_budget"] == pytest.approx(
+        result.predicted / (DELTA_M_BS_EXP / 2.0)
     )
     for value in (audited.abs_m12_np, audited.ratio_to_budget, audited.budget):
         assert isinstance(value, float)

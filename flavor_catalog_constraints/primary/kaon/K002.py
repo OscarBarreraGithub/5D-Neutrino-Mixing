@@ -42,7 +42,7 @@ _EXPERIMENTAL_ANCHOR_CANDIDATES = ("pdg_fit_assuming_cpt",)
 _EXPECTED_UNITS = "10^10 hbar s^-1"
 _UNIT_SCALE_HBAR_PER_SECOND = 1.0e10
 _HBAR_GEV_SECONDS = float(constants.hbar / constants.electron_volt * 1.0e-9)
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 3.0
 _BUDGET_DOC_CITATION = (
     "docs/quark_scan_assumptions_compact.tex:464-466; "
     "quarkConstraints/deltaf2.py:809-825"
@@ -191,7 +191,7 @@ class Constraint:
             budget=budget,
             notes=(
                 "|M12^NP| is compared to Delta m_K^exp / 2 with no SM "
-                "short-distance subtraction; Wilsons are QCD-evolved to 2 GeV."
+                "short-distance subtraction; Wilsons are QCD-evolved to 3 GeV."
             ),
             diagnostics={
                 "abs_m12_np_gev": predicted,

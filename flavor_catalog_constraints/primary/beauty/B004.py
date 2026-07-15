@@ -11,7 +11,7 @@ quark-flavor plugin the new physics is restricted to the complex
     phi_s = phi_s^SM + phi_s^NP.
 
 The complex ``M12^NP`` is evaluated through the Delta F = 2 adapter after
-QCD-running the B_s Wilson coefficients to ``mu_had = 2 GeV``.  The SM
+QCD-running the B_s Wilson coefficients to ``mu_had = m_b``.  The SM
 amplitude convention is ``M12^SM = Delta m_Bs^SM / 2`` from the same B_s core
 inputs used by B003.  The SM ``phi_s`` reference phase is computed in core
 from the repo-owned CKM target as ``phi_s = -2 beta_s``.
@@ -56,7 +56,7 @@ _REQUIRED_EXTRA = "quark_mass_basis_couplings"
 _EXPECTED_UNITS = "rad"
 _EXPECTED_OBSERVABLE = "phi_s"
 _PHASE_OBSERVABLE_TOKENS = ("phi_s", "beta_s")
-_MU_HAD_GEV = 2.0
+_MU_HAD_GEV = 4.18
 
 _EXPERIMENTAL_ANCHOR_CANDIDATES = ("canonical_hflav_average",)
 _MODE_SPECIFIC_ANCHOR_CANDIDATES = ("mode_specific_jpsi_kk_average",)
@@ -417,7 +417,7 @@ class Constraint:
             notes=(
                 "phi_s = phi_s^SM + arg(1 + M12_Bs^NP/M12_Bs^SM); "
                 "M12_Bs^NP is the complex QCD-running Delta F=2 amplitude at "
-                "2 GeV. phi_s^SM is computed in core from the repo CKM target."
+                "m_b=4.18 GeV. phi_s^SM is computed in core from the repo CKM target."
             ),
             diagnostics={
                 "m12_np_gev": complex(m12_np),
