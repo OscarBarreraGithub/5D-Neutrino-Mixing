@@ -44,10 +44,10 @@ Column `Grp` groups findings fixed together in one Codex/Claude cycle.
 
 | ID | Grp | Severity | Title | Location | Disposition |
 |----|-----|----------|-------|----------|-------------|
-| M-9 | TOP | MAJ | t→qγ/qg dipole widths ×2 too large | `top_fcnc.py:215-245` | PENDING |
-| M-31 | TOP | MAJ | M-9 propagates to T003–T006 + tests hardcode buggy BR | `processes/top_higgs_ew/`, tests | PENDING |
-| M-32 | BK | MAJ | B→K*μμ kernel: missing q² + transverse ×2 + primed-Wilson sign | beauty B→K*μμ kernel; `test_B019` | PENDING |
-| M-33 | RD | MAJ | R(D)/R(D*) stress proxy Wilson dimensionful (GeV²) | `semileptonic_lfu.py:191-193` | PENDING |
+| M-9 | TOP | MAJ | t→qγ/qg dipole widths ×2 too large | `top_fcnc.py:225,241` | VERIFIED |
+| M-31 | TOP | MAJ | M-9 propagates to T003–T006 + tests hardcode buggy BR | `processes/top_higgs_ew/`, tests | VERIFIED |
+| M-32 | BK | MAJ | B→K*μμ kernel: missing q² + transverse ×2 + primed-Wilson sign | `rare_b_kstar_dilepton.py`; `test_B019` | VERIFIED |
+| M-33 | RD | MAJ | R(D)/R(D*) stress proxy Wilson dimensionful (GeV²) | `semileptonic_lfu.py:192` | VERIFIED |
 
 ## Priority 4 — compare_2007_vs_modern (§8.6 item 4)
 
@@ -153,3 +153,10 @@ Enumerated and dispositioned in [`MINOR_FINDINGS_LEDGER.md`](MINOR_FINDINGS_LEDG
   M-30 tau->3l/tau->l-gamma width->BR via PDG tau leptonic BR (0.1782 e / 0.1739 mu). Muon unchanged.
 - Claude audit: **APPROVE** — verified -8e magnitude (8-vs-16 resolved via contact (2,1) structure),
   subtle sqrt(leptonic_br) envelope scaling correct, muon bit-identical, test pins literature-anchored. 137 tests green.
+
+### Cycle 3 — Mechanical (M-9, M-31, M-32, M-33) — VERIFIED (commit `75bc84d`)
+- Codex research+fix: M-9 top dipole 0.5->0.25; M-31 T003-T006 BR=old/2 + fixtures; M-32 B->K* kernel
+  q^2+factor-2 + (C±C') split, independent Gauss-Legendre oracle; M-33 R(D) proxy dimensionless.
+- Claude audit: **APPROVE** — M-9 confirmed by auditor's own Dirac trace (ratio exactly 2), M-31 bit-exact
+  halves, M-32 transversity structure correct (SM proxy 6.87e-7 = ~73% PDG, acceptable), M-33 dimensionless,
+  B025 unaffected. 93 tests green.
