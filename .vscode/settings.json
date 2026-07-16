@@ -1,3 +1,43 @@
 {
-  "//latex": "LaTeX Workshop intentionally defers to the GLOBAL 'latexmk-icloud-safe' recipe in the user settings.json. Do NOT define 'latex-workshop.latex.recipes'/'.tools' here: a workspace array override replaces (not merges) the global list, which removes 'latexmk-icloud-safe' from the recipe set while it is still the forced default -> 'Failed to resolve build recipe' error. The global recipe cd's into %DIR% and passes only the basename, so it is already iCloud-spaced-path safe."
+  "//latex": "LaTeX Workshop intentionally defers to the GLOBAL 'latexmk-icloud-safe' recipe in the user settings.json. Do NOT define 'latex-workshop.latex.recipes'/'.tools' here: a workspace array override replaces (not merges) the global list, which removes 'latexmk-icloud-safe' from the recipe set while it is still the forced default -> 'Failed to resolve build recipe' error. The global recipe cd's into %DIR% and passes only the basename, so it is already iCloud-spaced-path safe.",
+
+  "//performance": "These excludes keep VSCode's file watcher, search index, the Codex/ChatGPT extension indexer, and Pylance from walking the multi-GB data trees (scan_outputs/, results/, references/) inside a memory-capped Slurm job. Indexing those trees is what OOM-kills the session on a no-swap compute node. These are additive object/array settings that MERGE with VSCode defaults (they do not replace them), so no default watcher/search excludes are lost. scan_outputs/results/references stay VISIBLE in the Explorer; they are only excluded from watching/search/analysis.",
+
+  "files.watcherExclude": {
+    "**/scan_outputs/**": true,
+    "**/results/**": true,
+    "**/references/**": true,
+    "**/.orchestration/**": true,
+    "**/node_modules/**": true,
+    "**/.pytest_cache/**": true,
+    "**/__pycache__/**": true,
+    "**/.git/objects/**": true,
+    "**/*.parquet": true,
+    "**/*.pdf": true
+  },
+
+  "search.exclude": {
+    "**/scan_outputs/**": true,
+    "**/results/**": true,
+    "**/references/**": true,
+    "**/.orchestration/**": true,
+    "**/node_modules/**": true,
+    "**/.pytest_cache/**": true,
+    "**/__pycache__/**": true
+  },
+
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true
+  },
+
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "python.analysis.exclude": [
+    "**/scan_outputs/**",
+    "**/results/**",
+    "**/references/**",
+    "**/.orchestration/**",
+    "**/node_modules/**",
+    "**/__pycache__/**"
+  ]
 }
