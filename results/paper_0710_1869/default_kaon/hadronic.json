@@ -88,11 +88,12 @@
   "source_wilson_bundle_id": "wilson.kaon.pr1.table_i_eq3_example.central.v1",
   "supported_operator_names": [
     "Q1_VLL",
-    "Q1_VRR",
-    "Q4_LR",
-    "Q5_LR"
+    "Q1_VRR"
   ],
   "system": "kaon",
   "system_id": "kaon",
-  "unsupported_operator_names": []
+  "unsupported_operator_names": [
+    "Q4_LR",
+    "Q5_LR"
+  ]
 }

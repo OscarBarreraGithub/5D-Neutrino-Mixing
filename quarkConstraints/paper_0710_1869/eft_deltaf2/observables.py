@@ -45,11 +45,7 @@ from .rg import (
     Paper07101869DeltaF2RGWilsonSnapshot,
     run_deltaf2_wilsons_lo,
 )
-from .rg_inputs import (
-    PAPER_0710_1869_DELTAF2_RG_LR_BASIS_CONTRACT_ID,
-    PAPER_0710_1869_DELTAF2_RG_LR_BASIS_STATUS_ID,
-    PAPER_0710_1869_DELTAF2_RG_SCHEME_ID,
-)
+from .rg_inputs import PAPER_0710_1869_DELTAF2_RG_SCHEME_ID
 
 PAPER_0710_1869_DELTAF2_KAON_NP_OBSERVABLE_SCHEMA_ID = (
     "quarkConstraints.paper_0710_1869.eft_deltaf2.kaon_np_observable_result.v1"
@@ -278,10 +274,21 @@ def _require_hadronic_compatibility(
         raise ValueError(
             "hadronic bundle mu_had_GeV must match the evolved Wilson evaluation scale"
         )
-    # RESIDUAL(C-2): default RH-down alignment model choice pending paper 0710.1869.
-    # Nonzero Q4_LR/Q5_LR are carried by the Wilson snapshot; callers that want
-    # their matrix elements included should use the combined Q1+LR observable
-    # surface with explicit LR hadronic inputs.
+    nonzero_lr_operators = tuple(
+        operator_name
+        for operator_name, coefficient in (
+            (PAPER_0710_1869_DELTAF2_Q4_LR, wilsons.q4_lr),
+            (PAPER_0710_1869_DELTAF2_Q5_LR, wilsons.q5_lr),
+        )
+        if complex(coefficient) != 0.0 + 0.0j
+    )
+    if nonzero_lr_operators:
+        joined = ", ".join(nonzero_lr_operators)
+        raise ValueError(
+            "the default kaon observable is Q1-only and cannot contract nonzero "
+            f"{joined}; use compute_kaon_custom_total_observables with explicit "
+            "Q1 and LR hadronic inputs"
+        )
 
 
 def _require_lr_hadronic_compatibility(
@@ -1871,7 +1878,7 @@ def compute_kaon_np_observables(
     *,
     hadronic_bundle: Paper07101869KaonHadronicBundle | None = None,
 ) -> Paper07101869KaonNPObservableResult:
-    """Compute the kaon NP-only observable subset from evolved paper-mode Wilsons."""
+    """Compute the Q1-only kaon NP subset, rejecting any nonzero LR coefficients."""
 
     resolved_hadronic_bundle = (
         default_paper_0710_1869_kaon_hadronic_bundle()

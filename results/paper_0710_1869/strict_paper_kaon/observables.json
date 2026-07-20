@@ -69,7 +69,9 @@
   "source_wilson_bundle_id": "wilson.kaon.pr1.table_i_eq3_example.strict_paper.v1",
   "supported_operator_names": [
     "Q1_VLL",
-    "Q1_VRR",
+    "Q1_VRR"
+  ],
+  "unsupported_operator_names": [
     "Q4_LR",
     "Q5_LR"
   ]

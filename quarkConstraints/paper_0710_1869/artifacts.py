@@ -30,8 +30,20 @@ STRICT_PAPER_HADRONIC_BUNDLE_ID = "hadronic.kaon.pr1.table_i_eq3_example.strict_
 STRICT_PAPER_OBSERVABLE_BUNDLE_ID = "observable.kaon.pr1.table_i_eq3_example.strict_paper.v1"
 STRICT_PAPER_PROVENANCE_BUNDLE_ID = "provenance.kaon.pr1.table_i_eq3_example.strict_paper.v1"
 STRICT_PAPER_ARTIFACT_DIR = _REPO_ROOT / "results" / "paper_0710_1869" / "strict_paper_kaon"
-DEFAULT_KAON_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR")
-DEFAULT_KAON_UNSUPPORTED_OPERATORS: tuple[str, ...] = ()
+DEFAULT_KAON_WILSON_SUPPORTED_OPERATORS = (
+    "Q1_VLL",
+    "Q1_VRR",
+    "Q4_LR",
+    "Q5_LR",
+)
+DEFAULT_KAON_WILSON_UNSUPPORTED_OPERATORS: tuple[str, ...] = ()
+DEFAULT_KAON_Q1_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR")
+DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS = ("Q4_LR", "Q5_LR")
+
+# Backward-compatible aliases for callers that used the pre-split Wilson contract.
+# New code must select the Wilson or Q1-only constants explicitly.
+DEFAULT_KAON_SUPPORTED_OPERATORS = DEFAULT_KAON_WILSON_SUPPORTED_OPERATORS
+DEFAULT_KAON_UNSUPPORTED_OPERATORS = DEFAULT_KAON_WILSON_UNSUPPORTED_OPERATORS
 DELTA_M_RELATION_ID = "delta_m_k_np.equals.2_re_m12_k_np.v1"
 DEFAULT_BAG_PARAMETER_CONVERSION_FORMULA_ID = (
     "b_k_mu_had.equals.hat_b_k_rgi_times_alpha_s_mu_had_pow_2_over_beta0_lo.v1"
@@ -957,7 +969,7 @@ class ObservableArtifactBundleV1:
 
 @dataclass(frozen=True)
 class HadronicArtifactBundleV1:
-    """Exported hadronic-input bundle for the kaon NP-only paper scope."""
+    """Exported Q1-only hadronic-input bundle for the kaon paper scope."""
 
     metadata: ArtifactMetadata
     operator_basis: str
@@ -976,8 +988,8 @@ class HadronicArtifactBundleV1:
     mu_had_GeV: float | None = None
     source_id: str | None = None
     hadronic_source_id: str | None = None
-    supported_operator_names: tuple[str, ...] = DEFAULT_KAON_SUPPORTED_OPERATORS
-    unsupported_operator_names: tuple[str, ...] = DEFAULT_KAON_UNSUPPORTED_OPERATORS
+    supported_operator_names: tuple[str, ...] = DEFAULT_KAON_Q1_SUPPORTED_OPERATORS
+    unsupported_operator_names: tuple[str, ...] = DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS
     operator_normalization: str | None = None
     hat_B_K_rgi_source_value: float | None = None
     bag_parameter_source_scheme_id: str | None = None
@@ -1087,13 +1099,14 @@ class HadronicArtifactBundleV1:
             context="hadronic.unsupported_operator_names",
         )
         _ensure_unique_strings(self.provenance_ids, context="hadronic.provenance_ids")
-        if tuple(self.supported_operator_names) != DEFAULT_KAON_SUPPORTED_OPERATORS:
+        if tuple(self.supported_operator_names) != DEFAULT_KAON_Q1_SUPPORTED_OPERATORS:
             raise ArtifactSchemaError(
-                "hadronic.supported_operator_names must match the kaon NP-only Q1/LR subset"
+                "hadronic.supported_operator_names must match the kaon Q1-only subset"
             )
-        if tuple(self.unsupported_operator_names) != DEFAULT_KAON_UNSUPPORTED_OPERATORS:
+        if tuple(self.unsupported_operator_names) != DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS:
             raise ArtifactSchemaError(
-                "hadronic.unsupported_operator_names must be empty for the corrected Q1/LR subset"
+                "hadronic.unsupported_operator_names must identify Q4_LR/Q5_LR, which "
+                "require separate LR hadronic inputs"
             )
         for field_name in ("m_K0_GeV", "f_K_GeV", "B_K_mu_had", "q1_matrix_element_GeV4"):
             value = _require_float(getattr(self, field_name), context=f"hadronic.{field_name}")
@@ -1403,7 +1416,7 @@ class HadronicArtifactBundleV1:
                 context="hadronic_bundle.parity_relation_id",
             ),
             supported_operator_names=(
-                DEFAULT_KAON_SUPPORTED_OPERATORS
+                DEFAULT_KAON_Q1_SUPPORTED_OPERATORS
                 if "supported_operator_names" not in mapping
                 else _parse_string_ids(
                     mapping.get("supported_operator_names"),
@@ -1411,7 +1424,7 @@ class HadronicArtifactBundleV1:
                 )
             ),
             unsupported_operator_names=(
-                DEFAULT_KAON_UNSUPPORTED_OPERATORS
+                DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS
                 if "unsupported_operator_names" not in mapping
                 else _parse_string_ids(
                     mapping.get("unsupported_operator_names"),
@@ -1688,38 +1701,41 @@ class Paper07101869ArtifactExportSet:
             raise ArtifactSchemaError(
                 "observable bundle must reference the exported hadronic bundle"
             )
-        if (
-            self.wilson_bundle.supported_operator_names
-            and tuple(self.wilson_bundle.supported_operator_names)
-            != tuple(self.hadronic_bundle.supported_operator_names)
+        if tuple(self.wilson_bundle.supported_operator_names) != (
+            DEFAULT_KAON_WILSON_SUPPORTED_OPERATORS
         ):
             raise ArtifactSchemaError(
-                "Wilson and hadronic bundles must advertise the same supported operator subset"
+                "Wilson bundle must advertise the full Q1/Q4/Q5 coefficient surface"
             )
-        if (
-            self.wilson_bundle.unsupported_operator_names
-            and tuple(self.wilson_bundle.unsupported_operator_names)
-            != tuple(self.hadronic_bundle.unsupported_operator_names)
+        if tuple(self.wilson_bundle.unsupported_operator_names) != (
+            DEFAULT_KAON_WILSON_UNSUPPORTED_OPERATORS
         ):
             raise ArtifactSchemaError(
-                "Wilson and hadronic bundles must advertise the same unsupported operator subset"
+                "Wilson bundle must not mark Q1/Q4/Q5 coefficients unsupported"
             )
-        if (
-            self.observable_bundle.supported_operator_names
-            and tuple(self.observable_bundle.supported_operator_names)
-            != tuple(self.hadronic_bundle.supported_operator_names)
+        if tuple(self.hadronic_bundle.supported_operator_names) != (
+            DEFAULT_KAON_Q1_SUPPORTED_OPERATORS
         ):
             raise ArtifactSchemaError(
-                "Observable and hadronic bundles must advertise the same supported operator subset"
+                "Hadronic bundle must advertise only the Q1 operator subset"
             )
-        if (
-            self.observable_bundle.unsupported_operator_names
-            and tuple(self.observable_bundle.unsupported_operator_names)
-            != tuple(self.hadronic_bundle.unsupported_operator_names)
+        if tuple(self.hadronic_bundle.unsupported_operator_names) != (
+            DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS
         ):
             raise ArtifactSchemaError(
-                "Observable and hadronic bundles must advertise the same "
-                "unsupported operator subset"
+                "Hadronic bundle must mark Q4_LR/Q5_LR as unsupported"
+            )
+        if tuple(self.observable_bundle.supported_operator_names) != (
+            DEFAULT_KAON_Q1_SUPPORTED_OPERATORS
+        ):
+            raise ArtifactSchemaError(
+                "Observable bundle must advertise only the contracted Q1 operator subset"
+            )
+        if tuple(self.observable_bundle.unsupported_operator_names) != (
+            DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS
+        ):
+            raise ArtifactSchemaError(
+                "Observable bundle must mark uncontracted Q4_LR/Q5_LR as unsupported"
             )
         provenance_ids = {record.record_id for record in self.provenance_bundle.records}
         referenced_ids = (
@@ -1795,7 +1811,7 @@ def _supported_wilson_records(
             operator=operator_name,
             value=ComplexValue.from_complex(coefficient_map[operator_name]),
         )
-        for operator_name in DEFAULT_KAON_SUPPORTED_OPERATORS
+        for operator_name in DEFAULT_KAON_WILSON_SUPPORTED_OPERATORS
     )
 
 
@@ -1965,8 +1981,8 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
             sector=matching.wilsons.sector_id,
             system=matching.wilsons.system_id,
         ),
-        supported_operator_names=DEFAULT_KAON_SUPPORTED_OPERATORS,
-        unsupported_operator_names=DEFAULT_KAON_UNSUPPORTED_OPERATORS,
+        supported_operator_names=DEFAULT_KAON_WILSON_SUPPORTED_OPERATORS,
+        unsupported_operator_names=DEFAULT_KAON_WILSON_UNSUPPORTED_OPERATORS,
         provenance_ids=(
             DEFAULT_PAPER_PROVENANCE_ID,
             DEFAULT_MATCHING_PROVENANCE_ID,
@@ -2006,8 +2022,8 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
         matrix_element_formula_id=hadronic.matrix_element_formula_id,
         hamiltonian_convention_id=hadronic.hamiltonian_convention_id,
         parity_relation_id=hadronic.parity_relation_id,
-        supported_operator_names=DEFAULT_KAON_SUPPORTED_OPERATORS,
-        unsupported_operator_names=DEFAULT_KAON_UNSUPPORTED_OPERATORS,
+        supported_operator_names=DEFAULT_KAON_Q1_SUPPORTED_OPERATORS,
+        unsupported_operator_names=DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS,
         m_K0_GeV=hadronic.m_K0_GeV,
         f_K_GeV=hadronic.f_K_GeV,
         B_K_mu_had=hadronic.B_K_mu_had,
@@ -2072,8 +2088,8 @@ def build_default_paper_0710_1869_kaon_artifact_export_set() -> Paper07101869Art
         delta_m_observable_id=observable.delta_m_observable_id,
         delta_m_relation_id=DELTA_M_RELATION_ID,
         m12_value=ComplexValue.from_complex(frozen_m12),
-        supported_operator_names=DEFAULT_KAON_SUPPORTED_OPERATORS,
-        unsupported_operator_names=DEFAULT_KAON_UNSUPPORTED_OPERATORS,
+        supported_operator_names=DEFAULT_KAON_Q1_SUPPORTED_OPERATORS,
+        unsupported_operator_names=DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS,
         provenance_ids=(
             DEFAULT_PAPER_PROVENANCE_ID,
             DEFAULT_MATCHING_PROVENANCE_ID,
@@ -2357,9 +2373,13 @@ __all__ = [
     "DEFAULT_KAON_HADRONIC_BUNDLE_ID",
     "DEFAULT_KAON_OBSERVABLE_BUNDLE_ID",
     "DEFAULT_KAON_PROVENANCE_BUNDLE_ID",
+    "DEFAULT_KAON_Q1_SUPPORTED_OPERATORS",
+    "DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS",
     "DEFAULT_KAON_SUPPORTED_OPERATORS",
     "DEFAULT_KAON_UNSUPPORTED_OPERATORS",
     "DEFAULT_KAON_WILSON_BUNDLE_ID",
+    "DEFAULT_KAON_WILSON_SUPPORTED_OPERATORS",
+    "DEFAULT_KAON_WILSON_UNSUPPORTED_OPERATORS",
     "DEFAULT_MATCHING_PROVENANCE_ID",
     "DEFAULT_PAPER_PROVENANCE_ID",
     "DEFAULT_RG_PROVENANCE_ID",

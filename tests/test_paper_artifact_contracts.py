@@ -15,8 +15,10 @@ import pytest
 
 import quarkConstraints.paper_0710_1869.verifier as verifier
 from quarkConstraints.paper_0710_1869.artifacts import (
-    DEFAULT_KAON_SUPPORTED_OPERATORS,
-    DEFAULT_KAON_UNSUPPORTED_OPERATORS,
+    DEFAULT_KAON_Q1_SUPPORTED_OPERATORS,
+    DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS,
+    DEFAULT_KAON_WILSON_SUPPORTED_OPERATORS,
+    DEFAULT_KAON_WILSON_UNSUPPORTED_OPERATORS,
     HADRONIC_BUNDLE_SCHEMA,
     OBSERVABLE_BUNDLE_SCHEMA,
     PAPER_MODE,
@@ -225,6 +227,8 @@ def _sample_quartet() -> tuple[
         ),
         coefficient_scale_name="mu_had",
         matching_scale_name="mu_match",
+        supported_operator_names=DEFAULT_KAON_WILSON_SUPPORTED_OPERATORS,
+        unsupported_operator_names=DEFAULT_KAON_WILSON_UNSUPPORTED_OPERATORS,
         provenance_ids=("inputs.deltaf2",),
     )
 
@@ -243,8 +247,8 @@ def _sample_quartet() -> tuple[
         matrix_element_formula_id="kaon.q1_vll_vrr.2over3_fk2_mk2_bk_mu.plpr_projectors.v2",
         hamiltonian_convention_id="heff.sum_ci_qi.no_hc_factor.v1",
         parity_relation_id="kaon.q1_vll_equals_q1_vrr.by_parity.v1",
-        supported_operator_names=DEFAULT_KAON_SUPPORTED_OPERATORS,
-        unsupported_operator_names=DEFAULT_KAON_UNSUPPORTED_OPERATORS,
+        supported_operator_names=DEFAULT_KAON_Q1_SUPPORTED_OPERATORS,
+        unsupported_operator_names=DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS,
         mu_had_GeV=2.0,
         m_K0_GeV=0.497611,
         f_K_GeV=0.1557,
@@ -332,8 +336,8 @@ def _sample_quartet() -> tuple[
                 units="GeV",
             ),
         ),
-        supported_operator_names=DEFAULT_KAON_SUPPORTED_OPERATORS,
-        unsupported_operator_names=DEFAULT_KAON_UNSUPPORTED_OPERATORS,
+        supported_operator_names=DEFAULT_KAON_Q1_SUPPORTED_OPERATORS,
+        unsupported_operator_names=DEFAULT_KAON_Q1_UNSUPPORTED_OPERATORS,
         provenance_ids=(
             "inputs.deltaf2",
             "hadronic.bundle.v1",
@@ -688,7 +692,7 @@ def test_verifier_enforces_q1_matrix_element_identity_and_numeric_reconstruction
     assert "delta_m_reconstruction_mismatch" in numeric_codes
 
 
-def test_verifier_accepts_nonzero_lr_coefficients_on_supported_surface() -> None:
+def test_verifier_rejects_nonzero_lr_coefficients_for_q1_only_artifacts() -> None:
     wilson, hadronic, observable, provenance = _sample_quartet()
     broken_wilson = _replace_coefficient_value(
         wilson,
@@ -706,11 +710,7 @@ def test_verifier_accepts_nonzero_lr_coefficients_on_supported_surface() -> None
     )
 
     issue_codes = {issue.code for issue in report.issues}
-    assert "lr_coefficients_nonzero" not in issue_codes
-    assert issue_codes <= {
-        "import_isolation_failed",
-        "import_isolation_runtime_violation",
-    }
+    assert "lr_coefficients_nonzero" in issue_codes
 
 
 def test_verifier_imports_only_artifact_schema_helpers() -> None:
@@ -922,7 +922,7 @@ def test_standalone_verifier_rejects_numeric_tampering(tmp_path: Path) -> None:
     assert "m12_reconstruction_mismatch" in verifier_payload["issue_codes"]
 
 
-def test_standalone_verifier_rejects_epsilon_k_scope_creep_and_accepts_lr_support(
+def test_standalone_verifier_rejects_scope_creep_lr_and_missing_wilson_contract(
     tmp_path: Path,
 ) -> None:
     _export_default_artifacts(tmp_path)
@@ -960,7 +960,11 @@ def test_standalone_verifier_rejects_epsilon_k_scope_creep_and_accepts_lr_suppor
     verifier_payload = _verify_exported_artifacts(tmp_path, check=False)
 
     assert verifier_payload["ok"] is False
-    assert verifier_payload["schema_ok"] is True
+    assert verifier_payload["schema_ok"] is False
     assert verifier_payload["scope_ok"] is False
-    assert "lr_coefficients_nonzero" not in verifier_payload["issue_codes"]
+    assert (
+        "wilson_supported_operator_subset_mismatch"
+        in verifier_payload["issue_codes"]
+    )
+    assert "lr_coefficients_nonzero" in verifier_payload["issue_codes"]
     assert "unexpected_observable_row" in verifier_payload["issue_codes"]

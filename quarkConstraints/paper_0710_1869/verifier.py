@@ -40,8 +40,14 @@ EXPECTED_INTERPRETATION = "kaon.np_only.v1"
 EXPECTED_SYSTEM = "kaon"
 EXPECTED_SECTOR = "down"
 EXPECTED_REQUIRED_OBSERVABLES = ("M12_K_NP.re", "M12_K_NP.im", "Delta_m_K_NP")
-EXPECTED_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR")
-EXPECTED_UNSUPPORTED_OPERATORS: tuple[str, ...] = ()
+EXPECTED_WILSON_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR", "Q4_LR", "Q5_LR")
+EXPECTED_WILSON_UNSUPPORTED_OPERATORS: tuple[str, ...] = ()
+EXPECTED_Q1_SUPPORTED_OPERATORS = ("Q1_VLL", "Q1_VRR")
+EXPECTED_Q1_UNSUPPORTED_OPERATORS = ("Q4_LR", "Q5_LR")
+
+# Compatibility aliases: these historically described the Wilson surface.
+EXPECTED_SUPPORTED_OPERATORS = EXPECTED_WILSON_SUPPORTED_OPERATORS
+EXPECTED_UNSUPPORTED_OPERATORS = EXPECTED_WILSON_UNSUPPORTED_OPERATORS
 EXPECTED_HAMILTONIAN_CONVENTION_ID = "heff.sum_ci_qi.no_hc_factor.v1"
 EXPECTED_MATRIX_ELEMENT_FORMULA_ID = (
     "kaon.q1_vll_vrr.2over3_fk2_mk2_bk_mu.plpr_projectors.v2"
@@ -96,8 +102,9 @@ class TolerancePolicy:
     unsupported_lr_abs_tol: float = 1e-30
     description: str = (
         "Scales use exact agreement; reconstructed matrix elements and observables "
-        "use the frozen public absolute-only tolerance contract; LR Wilson "
-        "coefficients are part of the supported Wilson surface."
+        "use the frozen public absolute-only tolerance contract; the Wilson bundle "
+        "may carry LR slots, but Q1-only artifact reconstruction requires them to "
+        "be numerically zero."
     )
 
 
@@ -110,8 +117,12 @@ class FrozenVerifierContract:
     interpretation: str = EXPECTED_INTERPRETATION
     system: str = EXPECTED_SYSTEM
     sector: str = EXPECTED_SECTOR
-    supported_operators: tuple[str, ...] = EXPECTED_SUPPORTED_OPERATORS
-    unsupported_operators: tuple[str, ...] = EXPECTED_UNSUPPORTED_OPERATORS
+    supported_operators: tuple[str, ...] = EXPECTED_WILSON_SUPPORTED_OPERATORS
+    unsupported_operators: tuple[str, ...] = EXPECTED_WILSON_UNSUPPORTED_OPERATORS
+    hadronic_supported_operators: tuple[str, ...] = EXPECTED_Q1_SUPPORTED_OPERATORS
+    hadronic_unsupported_operators: tuple[str, ...] = EXPECTED_Q1_UNSUPPORTED_OPERATORS
+    observable_supported_operators: tuple[str, ...] = EXPECTED_Q1_SUPPORTED_OPERATORS
+    observable_unsupported_operators: tuple[str, ...] = EXPECTED_Q1_UNSUPPORTED_OPERATORS
     required_observables: tuple[str, ...] = EXPECTED_REQUIRED_OBSERVABLES
     observable_units: str = EXPECTED_OBSERVABLE_UNITS
     hamiltonian_convention_id: str = EXPECTED_HAMILTONIAN_CONVENTION_ID
@@ -790,24 +801,59 @@ def verify_inputs(inputs: VerifierInputSet) -> ArtifactVerificationReport:
             subject="hadronic.input_provenance_mode_id",
         )
 
-    if tuple(hadronic.supported_operator_names) != contract.supported_operators:
+    if tuple(wilson.supported_operator_names) != contract.supported_operators:
+        _append_issue(
+            issues,
+            code="wilson_supported_operator_subset_mismatch",
+            message="Wilson bundle must advertise the full Q1/Q4/Q5 coefficient surface",
+            subject="wilson.supported_operator_names",
+        )
+    if tuple(wilson.unsupported_operator_names) != contract.unsupported_operators:
+        _append_issue(
+            issues,
+            code="wilson_unsupported_operator_subset_mismatch",
+            message="Wilson bundle must not mark Q1/Q4/Q5 coefficient slots unsupported",
+            subject="wilson.unsupported_operator_names",
+        )
+    if (
+        tuple(hadronic.supported_operator_names)
+        != contract.hadronic_supported_operators
+    ):
         _append_issue(
             issues,
             code="supported_operator_subset_mismatch",
-            message=(
-                "hadronic bundle must advertise the supported Q1/LR subset "
-                "in the frozen order"
-            ),
+            message="hadronic bundle must advertise only the supported Q1 subset",
             subject="hadronic.supported_operator_names",
         )
-    if tuple(hadronic.unsupported_operator_names) != contract.unsupported_operators:
+    if (
+        tuple(hadronic.unsupported_operator_names)
+        != contract.hadronic_unsupported_operators
+    ):
         _append_issue(
             issues,
             code="unsupported_operator_subset_mismatch",
-            message=(
-                "hadronic bundle must not advertise any guarded unsupported operators"
-            ),
+            message="hadronic bundle must mark Q4_LR/Q5_LR as requiring LR inputs",
             subject="hadronic.unsupported_operator_names",
+        )
+    if (
+        tuple(observable.supported_operator_names)
+        != contract.observable_supported_operators
+    ):
+        _append_issue(
+            issues,
+            code="observable_supported_operator_subset_mismatch",
+            message="observable bundle must advertise only the contracted Q1 subset",
+            subject="observable.supported_operator_names",
+        )
+    if (
+        tuple(observable.unsupported_operator_names)
+        != contract.observable_unsupported_operators
+    ):
+        _append_issue(
+            issues,
+            code="observable_unsupported_operator_subset_mismatch",
+            message="observable bundle must mark uncontracted Q4_LR/Q5_LR as unsupported",
+            subject="observable.unsupported_operator_names",
         )
 
     wilson_scales = _scale_map(wilson.scales)
@@ -882,10 +928,17 @@ def verify_inputs(inputs: VerifierInputSet) -> ArtifactVerificationReport:
     expected_operator_names = set(contract.supported_operators) | set(
         contract.unsupported_operators
     )
+    for operator_name in sorted(expected_operator_names - set(coefficient_map)):
+        _append_issue(
+            issues,
+            code="required_wilson_operator_missing",
+            message=f"Wilson bundle is missing required operator {operator_name!r}",
+            subject=operator_name,
+        )
     for operator_name in sorted(set(coefficient_map) - expected_operator_names):
         _append_issue(
             issues,
-            code="unexpected_operator_name",
+            code="unexpected_wilson_operator",
             message=(
                 "standalone verifier only supports the frozen Q1/Q4/Q5 export boundary; "
                 f"encountered unexpected Wilson operator {operator_name!r}"
@@ -897,7 +950,22 @@ def verify_inputs(inputs: VerifierInputSet) -> ArtifactVerificationReport:
     q1_vrr = complex(coefficient_map.get("Q1_VRR", 0.0 + 0.0j))
     q4_lr = complex(coefficient_map.get("Q4_LR", 0.0 + 0.0j))
     q5_lr = complex(coefficient_map.get("Q5_LR", 0.0 + 0.0j))
-    # RESIDUAL(C-2): default RH-down alignment model choice pending paper 0710.1869.
+    nonzero_lr_operators = tuple(
+        operator_name
+        for operator_name, coefficient in (("Q4_LR", q4_lr), ("Q5_LR", q5_lr))
+        if abs(coefficient) > tolerance_policy.unsupported_lr_abs_tol
+    )
+    if nonzero_lr_operators:
+        _append_issue(
+            issues,
+            code="lr_coefficients_nonzero",
+            message=(
+                "Q1-only hadronic/observable artifacts cannot reconstruct nonzero "
+                f"{', '.join(nonzero_lr_operators)}; use an explicit combined Q1+LR "
+                "observable artifact"
+            ),
+            subject=",".join(nonzero_lr_operators),
+        )
 
     recomputed_q1_matrix_element = (
         (2.0 / 3.0)
