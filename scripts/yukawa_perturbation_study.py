@@ -37,6 +37,7 @@ from scripts.anarchic_bauer_s1 import _draw_bauer_matrix, _fn_c_values, SCENARIO
 from scripts.instrument_epsK_phase import _instrument_draw, draw_nelson_barr_yukawas
 from scripts.run_rs_anarchy import _load_pdg_targets
 from scripts.rankone_u2_lane import _draw_rankone_u2_yukawas, _assign_u2_bulk_masses
+from scripts.reproducible_seeds import stable_seed_offset
 
 TARGETS = _load_pdg_targets()
 MKK = 3000.0
@@ -219,7 +220,12 @@ if __name__ == "__main__":
         print("finding base points...", flush=True)
         pts = {}
         for c in classes:
-            pts[c] = get_base_point(c, np.random.default_rng(a.seed + hash(c) % 1000))
+            class_seed = a.seed + stable_seed_offset(
+                c,
+                modulus=1000,
+                namespace="yukawa_perturbation.base_point.v1",
+            )
+            pts[c] = get_base_point(c, np.random.default_rng(class_seed))
             re, imc4, ok = evaluate(*pts[c])
             print(f"  {c}: ratio_eps_K={re:.3f}  Im(C4)={imc4:.2e}", flush=True)
 
@@ -248,7 +254,12 @@ if __name__ == "__main__":
     if a.part in ("C", "all"):
         print("\n=== C: gradient-direction field, PCA -> dangerous-subspace dimension ===", flush=True)
         for c in ["flat_typical", "nelson_barr", "u2"]:
-            G = gradient_field(c, a.nens, np.random.default_rng(a.seed + 31 * (hash(c) % 97)))
+            class_seed = a.seed + 31 * stable_seed_offset(
+                c,
+                modulus=97,
+                namespace="yukawa_perturbation.gradient_field.v1",
+            )
+            G = gradient_field(c, a.nens, np.random.default_rng(class_seed))
             if len(G) < 3:
                 print(f"  {c}: too few gradients ({len(G)})"); continue
             sv = np.linalg.svd(G, compute_uv=False)
