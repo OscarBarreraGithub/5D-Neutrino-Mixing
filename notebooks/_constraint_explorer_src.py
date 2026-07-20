@@ -80,7 +80,7 @@
 # the already-evaluated draws survive* the currently selected subset of cuts. This
 # is what makes toggling instant even at 100k+ draws.
 #
-# ## The constraint set and ID mapping (`review_local`)
+# ## The constraint set and ID mapping (`reports/physics_reviews`, formerly `review_local`)
 #
 # | physics | scan ID | notes |
 # |---|---|---|

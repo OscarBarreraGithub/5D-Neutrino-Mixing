@@ -2,7 +2,7 @@
 
 **Reviewer role:** theoretical-physics fact-checker (citation + physics-soundness audit)
 **Date:** 2026-06-17
-**Target:** `review_local/constraint_formulas.tex` (Warped Quark Sector Constraints)
+**Target:** `reports/physics_reviews/constraint_formulas.tex` (Warped Quark Sector Constraints)
 **Scope:** every literature citation verified against the actual source (equation numbers, numerical values, attribution), plus physics/internal-consistency checks. **No edits were made to the .tex file** — this is a review only.
 
 **Overall verdict:** The document is **substantially solid**. Of 13 reference items checked, **9 CONFIRMED**, **3 PARTIAL** (real paper, correct physics, but an equation-number or precision slip), **1 INCORRECT** (PDG oblique-fit central values/correlation do not match any current PDG fit). All physics-arithmetic and internal-consistency checks pass. The single most important fix is the **PDG 2024/2025 S,T fit numbers in the oblique section** (Ref. 11), which are wrong and should be replaced.

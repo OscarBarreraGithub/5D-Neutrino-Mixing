@@ -60,7 +60,7 @@ from quarkConstraints.scales import (
 )
 
 # --------------------------------------------------------------------------
-# CONFIG -- edit here. Maps the user's "review_local" constraint set to the
+# CONFIG -- edit here. Maps the per-observable physics-review constraint set (reports/physics_reviews/, formerly review_local/) to the
 # scan's internal constraint IDs. Auto-discovery warns about any that are
 # absent from the actual data (e.g. L001 is full-catalog-only).
 # --------------------------------------------------------------------------
