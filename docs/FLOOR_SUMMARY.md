@@ -6,6 +6,11 @@ KK-scale floor. Where any older doc disagrees, this file and
 [`reports/collaborator_2026-06/CONTENT.md`](../reports/collaborator_2026-06/CONTENT.md)
 win.
 
+**Quotability rule (Gate 0, 2026-07-20):** no floor number is quotable outside
+this repo unless it names its **lane**, **coupling policy**, **mass
+convention**, **epsilon_K budget policy**, and the **scan commit SHA** it came
+from. Numbers without all five tags are internal diagnostics.
+
 All scales below are the **physical first gauge-KK mass** `M_KK = x₁·Λ_IR`
 with `x₁ ≈ 2.4487`. Do not confuse with the geometric `Λ_IR ≡ 1/z_v`.
 Delta-F=2 running is LO; the LR (C4) enhancement is likely low by ~10-15% in
@@ -86,7 +91,7 @@ across all three.
 
 | Constraint | Floor (physical M_KK) | Lane | Type | Tunable? | Driver |
 |---|---|---|---|---|---|
-| `epsilon_K` (K001) | **~30 TeV** (median) / ~10 TeV (paper-era 95%q) | **A — anarchic reproduction** (literature strawman, NOT our model) | typical (median anarchic) | **yes** — align Im M12 → 0 | flavor / CP |
+| `epsilon_K` (K001) | **pending rerun** — corrected code gives an exploratory **~5.7 TeV** median (M-11/M-12, commit 2c9989b, legacy coupling); the old **~30 TeV** median is from stale pre-correction artifacts. Paper-era 95%q reproduction: ~10 TeV | **A — anarchic reproduction** (literature strawman, NOT our model) | typical (median anarchic) | **yes** — align Im M12 → 0 | flavor / CP |
 | `epsilon_K` (K001) | **~6.3–7 TeV** | **B — production AS RUN** (simplified fit-aligned MFV, no V5KM — what we actually run) | sharp wall, near-unique fitted locus | (V5KM alignment not yet wired) | flavor / CP |
 | `epsilon_K` (K001) | **~2 TeV** | **C — FPR ideal** (full V5KM alignment, not yet in production) | literature target | **yes** — V5KM alignment | flavor / CP |
 | oblique S,T,U (EW001) | **~16 TeV** (code-verified **15.96 TeV**) | lane-independent | **existence** (best-tuned) | **no** — no Yukawa freedom | RS T-problem |
@@ -94,21 +99,29 @@ across all three.
 | Δm_s (B003), Δm_d, Δm_K, D⁰ | few TeV → <~1 TeV | A (anarchic) | tunable | yes | flavor |
 | collider KK searches (CR*) | **5.5 TeV** from CR001; CR005/CR006 SSM EW edges are INFO only | lane-independent | subleading | — | direct search |
 
-**The epsilon_K lane gap.** Production AS RUN (~7 TeV) is **NEITHER** the anarchic
-wall (~10–30 TeV) **NOR** the FPR ~2 TeV ideal; the 7→2 TeV gap is exactly the
-principled alignment (FPR V5KM, or Bauer-S2-style RH-down U(3) degeneracy) not yet
-wired into the production path.
+**The epsilon_K lane gap (Lane A under reconciliation).** Production AS RUN
+(~7 TeV) is **NOT** the FPR ~2 TeV ideal; the 7→2 TeV gap is exactly the
+principled alignment (FPR V5KM, or Bauer-S2-style RH-down U(3) degeneracy) not
+yet wired into the production path. **Where the anarchic wall now sits is an
+open question:** the July 2026 corrections (M-11 Bauer mass bridge factor 2,
+M-12 Wolfenstein-A in f_Q1; commit 2c9989b) moved the exploratory Lane-A
+current-inputs median from ~30 TeV to **~5.7 TeV** under the stated legacy
+coupling convention. If that survives a production-scale rerun, the intended
+"anarchic 30 vs production 7" contrast collapses and Lanes A and B may be
+similar. No corrected large rerun exists yet (audit P0-3 / Gate 5).
 
 Two distinct notions of "floor":
 
-- **Typical (median anarchic) floor ≈ 30 TeV** (**LANE A — anarchic, the
-  literature strawman, NOT our model**), set by `epsilon_K`. This is where a
-  *median* anarchic point survives. It is **tunable**: aligning the down-sector
-  so Im M12 → 0 drives the NP contribution to zero, so the *existence* floor for
-  any single flavor constraint is ≲1 TeV. Note: what we **actually run** in
-  production (**LANE B**) sits at **~7 TeV** (a sharp fitted wall), and the **FPR
-  ideal** (**LANE C**, V5KM aligned) is **~2 TeV** — do not quote the ~30 TeV
-  anarchic number as "our floor".
+- **Typical (median anarchic) floor: PENDING RERUN** (**LANE A — anarchic, the
+  literature strawman, NOT our model**), set by `epsilon_K`. The honest current
+  statement: the corrected code reports an exploratory **~5.7 TeV** median,
+  while the widely quoted **~30 TeV** comes from stale pre-correction runs.
+  This floor is **tunable**: aligning the down-sector so Im M12 → 0 drives the
+  NP contribution to zero, so the *existence* floor for any single flavor
+  constraint is ≲1 TeV. Note: what we **actually run** in production
+  (**LANE B**) sits at **~7 TeV** (a sharp fitted wall), and the **FPR
+  ideal** (**LANE C**, V5KM aligned) is **~2 TeV** — do not quote either
+  Lane-A number as "our floor".
 - **Existence (fine-tuned, irreducible) floor ≈ 16 TeV** (code-verified
   **15.96 TeV**), set by oblique
   **S,T,U** (the RS T-parameter problem). This carries **no Yukawa freedom**, so

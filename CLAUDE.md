@@ -21,8 +21,11 @@ not the current floors. The Cloudflare-deployed catalog website builds from
 `main` with root `flavor_catalog/website/`.
 
 **Corrected minimal-RS floor (post-audit, July 2026 C-3 reconciliation):** the `epsilon_K` floor is
-LANE-DEPENDENT (see the lanes subsection below) — ~30 TeV is the ANARCHIC lane
-(strawman), ~7 TeV is what production actually runs, ~2 TeV is the FPR ideal;
+LANE-DEPENDENT (see the lanes subsection below) — the ANARCHIC lane (strawman)
+is PENDING RERUN: corrected code gives an exploratory ~5.7 TeV median (M-11/M-12,
+commit 2c9989b, legacy coupling), while the widely quoted ~30 TeV is from stale
+pre-correction artifacts; ~7 TeV is what production actually runs, ~2 TeV is the
+FPR ideal;
 existence ~16 TeV from irreducible oblique S,T,U (lane-independent, code-verified
 15.96 TeV); Z→bb
 ~5 TeV after the B1 fix (the old "25-30 TeV Z→bb floor" was a B1 bug, not real).
@@ -38,22 +41,24 @@ quoting any flavor floor).
 
 | Lane | What it is | epsilon_K floor | Code |
 |---|---|---|---|
-| **A — Anarchic reproduction** | fat anarchic scatter (Bauer/Casagrande S1-S4); the literature BASELINE/strawman, **NOT our model** | **~10 TeV** paper-era (95% quantile) / **~30 TeV** current (median) | `scripts/anarchic_bauer_s1.py` |
+| **A — Anarchic reproduction** | fat anarchic scatter (Bauer/Casagrande S1-S4); the literature BASELINE/strawman, **NOT our model** | **~10 TeV** paper-era (95% quantile); current-inputs median **PENDING RERUN** (corrected code: exploratory **~5.7 TeV**, commit 2c9989b; stale artifacts say ~30 TeV) | `scripts/anarchic_bauer_s1.py` |
 | **B — Production AS RUN** | simplified MFV, fit to masses+CKM, NO V5KM (`C_Q = r·C_u + C_d` + BulkMassMap); sharp wall, near-unique fitted locus — **what we actually run** | **~6.3-7 TeV** (verified) | `scripts/run_full_catalog_scan.py` → `quarkConstraints/model.py` |
 | **C — FPR ideal** | full FPR 0710.1869 with V5KM alignment; the principled aligned model we WANT — **NOT yet wired into production** | **~2 TeV** (literature) | `quarkConstraints/paper_0710_1869/` |
 
 Lane-independent floors: **S,T,U existence ~16 TeV** (code-verified **15.96 TeV**,
 irreducible, same in every lane); **Z→bb ~5 TeV**.
 
-**KEY:** production (~7 TeV) is NEITHER the anarchic wall NOR the FPR ~2 TeV
-ideal; the 7→2 TeV gap is the principled alignment (V5KM, or Bauer-S2-style
-RH-down U(3) degeneracy) not yet in production. Bauer's S2 (RH-down degeneracy)
+**KEY:** production (~7 TeV) is NOT the FPR ~2 TeV ideal; the 7→2 TeV gap is
+the principled alignment (V5KM, or Bauer-S2-style RH-down U(3) degeneracy) not
+yet in production. Where the anarchic wall sits relative to production is OPEN
+until the corrected Lane-A rerun (if ~5.7 TeV holds, lanes A and B may be
+similar). Bauer's S2 (RH-down degeneracy)
 is a MORE TARGETED epsilon_K cure than FPR's LH V5KM rotation, because epsilon_K
 is dominated by the LR / C_4 operator.
 
 **RULE: always tag an epsilon_K floor with its lane (A anarchic / B production /
-C FPR). Never quote a bare "~30 TeV" or "~7 TeV" as "our floor" without naming
-the lane.**
+C FPR) AND its coupling policy. Never quote a bare number as "our floor" without
+naming both; see the quotability rule in `docs/FLOOR_SUMMARY.md`.**
 
 ---
 

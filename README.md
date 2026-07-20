@@ -22,19 +22,23 @@ For the minimal (non-custodial) quark-sector model, the corrected floors are:
 
 | Constraint | Floor (physical M_KK) | Lane | Type | Tunable? |
 |---|---|---|---|---|
-| `epsilon_K` (K001) | ~30 TeV | **A (anarchic)** | typical (median anarchic) | yes — align Im M12 → 0 |
+| `epsilon_K` (K001) | pending rerun: exploratory ~5.7 TeV corrected (commit 2c9989b); ~30 TeV in stale pre-correction artifacts | **A (anarchic)** | typical (median anarchic) | yes — align Im M12 → 0 |
 | `epsilon_K` (K001) | ~6.3–7 TeV | **B (production AS RUN)** | sharp wall, fitted locus | (alignment not yet wired) |
 | `epsilon_K` (K001) | ~2 TeV | **C (FPR ideal, V5KM)** | literature, not yet in production | yes — V5KM alignment |
-| oblique S,T,U (EW001) | ~18–20 TeV | lane-independent | existence (irreducible) | no — no Yukawa freedom |
+| oblique S,T,U (EW001) | ~16 TeV (code-verified 15.96 TeV) | lane-independent | existence (irreducible) | no — no Yukawa freedom |
 | Z→bb (T010) | ~5 TeV | lane-independent | — | no (gauge-dominated) |
 | collider (CR*) | ~4 TeV | lane-independent | subleading | — |
 
-The `epsilon_K` floor is **LANE-DEPENDENT**: ~30 TeV is the **anarchic** lane (the
-literature strawman, NOT our model), ~7 TeV is what **production actually runs**
-(simplified fit-aligned MFV, no V5KM), and ~2 TeV is the **FPR ideal** (V5KM
-alignment, not yet wired into production). Always tag a floor with its lane; the
+The `epsilon_K` floor is **LANE-DEPENDENT**: the **anarchic** lane (the
+literature strawman, NOT our model) is under reconciliation — the July 2026
+code corrections moved its exploratory median from ~30 TeV to ~5.7 TeV (legacy
+coupling convention) and a corrected production-scale rerun is pending (audit
+P0-3); ~7 TeV is what **production actually runs** (simplified fit-aligned MFV,
+no V5KM); ~2 TeV is the **FPR ideal** (V5KM alignment, not yet wired into
+production). Always tag a floor with its lane and coupling policy; the
 canonical lane definitions live in
-[`docs/MODEL_CONVENTIONS.md`](docs/MODEL_CONVENTIONS.md).
+[`docs/MODEL_CONVENTIONS.md`](docs/MODEL_CONVENTIONS.md) and the quotability
+rule in [`docs/FLOOR_SUMMARY.md`](docs/FLOOR_SUMMARY.md).
 
 The old "25–30 TeV Z→bb-dominated floor" (and "108 TeV at 1σ") was a **B1**
 sign/normalization bug, now fixed: Z→bb collapses to ~5 TeV and is not the
