@@ -43,6 +43,7 @@ docs/*
 !docs/quark_scan_consolidation_report.tex
 !docs/paper_execution_decisions.md
 !docs/paper_execution_roadmap.md
+!docs/REPOSITORY_AUDIT_AND_RESEARCH_ROADMAP_2026-07-15.md
 !docs/phase_logs/
 !docs/phase_logs/**
 
@@ -75,6 +76,10 @@ artifacts/*.tar.gz
 artifacts/*.tar.gz.sha256
 !artifacts/quarkscan_paper_rc1_manifest_bundle.tar.gz
 !artifacts/quarkscan_paper_rc1_manifest_bundle.tar.gz.sha256
+
+# Grant/proposal working files stay local; not part of the shared repo.
+grant/
+grants/
 
 # Temporary scratch files
 tmp*.json
