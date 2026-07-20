@@ -57,12 +57,15 @@ KNOWN_EXTRA_KEYS: frozenset[str] = frozenset(
         "kk_gluon_mass_gev",           # float, KK gluon mass (GeV)
         "kk_ew_mass_gev",              # float, KK electroweak gauge boson mass (GeV)
         "lepton_mass_basis_couplings", # quarkConstraints.rs_ew_couplings.RSLeptonMassBasisCouplings
-        "lepton_lmfv_parameters",      # flavor_catalog_constraints.physics_adapters.lepton.LMFVLeptonParameters
+        # flavor_catalog_constraints.physics_adapters.lepton.LMFVLeptonParameters
+        "lepton_lmfv_parameters",
         "rs_ew_spectrum",              # quarkConstraints.rs_ew_spectrum.RSEWSpectrum
         "rs_ew_couplings",             # quarkConstraints.rs_ew_couplings.RSEWMassBasisCouplings
-        "rs_charged_current",          # quarkConstraints.rs_charged_current.RSChargedCurrentCouplings
+        # quarkConstraints.rs_charged_current.RSChargedCurrentCouplings
+        "rs_charged_current",
         "rs_higgs_yukawas",            # quarkConstraints.rs_higgs_yukawas.RSHiggsYukawaCouplings
-        "rs_semileptonic_wilsons",     # quarkConstraints.rs_semileptonic_wilsons.RSSemileptonicWilsonBundle
+        # quarkConstraints.rs_semileptonic_wilsons.RSSemileptonicWilsonBundle
+        "rs_semileptonic_wilsons",
     }
 )
 

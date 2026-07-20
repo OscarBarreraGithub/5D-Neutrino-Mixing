@@ -22,8 +22,8 @@ The coefficient inputs accepted here are explicit low-energy proxies.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Any, Mapping
 
 MU_E_CONVERSION_MODEL_V1 = "mu_e_conversion_kko_overlap_proxy_v1"

@@ -36,9 +36,9 @@ experimental HFLAV average, physical beta solution, and penguin phase bound.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import cmath
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 from flavor_catalog_constraints.anchors import (
@@ -47,15 +47,15 @@ from flavor_catalog_constraints.anchors import (
     load_anchor,
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
+from flavor_catalog_constraints.physics_adapters.ckm_extraction import (
+    neutral_b_mixing_sm_amplitude,
+    repo_default_ckm_phases,
+)
 from flavor_catalog_constraints.physics_adapters.deltaf2 import (
     bd_mixing_core_inputs,
     bd_mixing_from_wilsons_with_running,
     bd_mixing_m12_np_from_wilsons_with_running,
     bd_mixing_wilsons_from_couplings,
-)
-from flavor_catalog_constraints.physics_adapters.ckm_extraction import (
-    neutral_b_mixing_sm_amplitude,
-    repo_default_ckm_phases,
 )
 from flavor_catalog_constraints.registry import register
 

@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 from quarkConstraints.rs_charged_current import (
-    RSChargedCurrentCouplings,
     RS_CHARGED_CURRENT_MATCHING_ASSUMPTION_V1,
+    RSChargedCurrentCouplings,
 )
 
 __all__ = [
@@ -252,7 +252,8 @@ def shifted_branching_fraction(
 ) -> float:
     """Return ``BR_SM |1 + epsilon|^2``."""
 
-    return float(_positive_real(sm_branching_fraction, "sm_branching_fraction") * epsilon.rate_multiplier)
+    sm_value = _positive_real(sm_branching_fraction, "sm_branching_fraction")
+    return float(sm_value * epsilon.rate_multiplier)
 
 
 def charged_current_source_diagnostics(

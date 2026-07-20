@@ -13,7 +13,6 @@ from quarkConstraints.qcd_running import (
     run_alpha_s,
 )
 
-
 MU_HIGH_GEV = 3000.0
 MU_LOW_GEV = 2.0
 M_T_GEV = M_TOP_MS

@@ -35,8 +35,8 @@ typed validation; no experimental number is hardcoded here.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from statistics import NormalDist
 from typing import Any, Mapping
 

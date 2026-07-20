@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import math
-from pathlib import Path
 import re
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -23,10 +23,10 @@ from quarkConstraints.deltaf2 import (
     M_C_QUARK,
     M_D0,
     M_U_QUARK,
+    _evolve_wilsons,
     compute_delta_f2_wilsons,
     compute_m12_np,
     evaluate_d0_mixing_with_running,
-    _evolve_wilsons,
 )
 
 _PID = "C002"

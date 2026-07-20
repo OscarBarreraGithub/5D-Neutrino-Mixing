@@ -15,8 +15,8 @@ the explicitly reported non-vetoing "NP room".
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 __all__ = [
     "RADIATIVE_KAON_STUB_MODEL_V1",

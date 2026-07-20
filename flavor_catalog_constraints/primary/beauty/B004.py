@@ -34,9 +34,9 @@ from the in-core CKM matrix target.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import cmath
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor

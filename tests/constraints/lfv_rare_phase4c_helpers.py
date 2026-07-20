@@ -2,18 +2,18 @@
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 from functools import lru_cache
 
 import numpy as np
 
 from flavor_catalog_constraints import point_builder
+from quarkConstraints.rare_charm_semileptonic import dtopi_fplus, dtopi_fzero
 from quarkConstraints.rare_kaon_dilepton import ckm_factors as kaon_ckm_factors
 from quarkConstraints.rare_kaon_dilepton import g_sm_squared as kaon_g_sm_squared
 from quarkConstraints.rs_ew_couplings import build_rs_ew_couplings
 from quarkConstraints.rs_semileptonic_wilsons import build_rs_semileptonic_wilsons
-from quarkConstraints.rare_charm_semileptonic import dtopi_fplus, dtopi_fzero
 from tests.constraints.primary.top_higgs_ew.z_lfv_rewire_helpers import (
     _rot12,
     _rot13,

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """Plots for the Yukawa perturbation study (RS-FLAVOR-ALIGNMENT-2026-07).
 Reads perturb_study.npz written by scripts/yukawa_perturbation_study.py."""
-import sys
 from pathlib import Path
 import numpy as np
 import matplotlib; matplotlib.use("Agg")

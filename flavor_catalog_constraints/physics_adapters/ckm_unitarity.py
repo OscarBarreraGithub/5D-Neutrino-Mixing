@@ -13,8 +13,8 @@ are not available on the current ParameterPoint.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 __all__ = [
     "CKMFirstRowUnitarityResult",

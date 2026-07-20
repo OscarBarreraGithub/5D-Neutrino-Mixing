@@ -17,8 +17,8 @@ and analysis acceptance.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Any, Mapping
 
 MASS_LOWER_BOUND = "mass_lower_bound"
@@ -138,7 +138,7 @@ def mass_from_source_gev(source: Any) -> float:
 
     if not hasattr(source, "M_KK"):
         raise AttributeError("collider resonance source must provide M_KK")
-    return _positive_finite(getattr(source, "M_KK"), "source.M_KK")
+    return _positive_finite(source.M_KK, "source.M_KK")
 
 
 def evaluate_resonance_limit(

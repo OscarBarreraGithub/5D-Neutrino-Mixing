@@ -10,8 +10,8 @@ Wilson-value consumption point.
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.rare_charm_dilepton import (
@@ -22,13 +22,23 @@ from quarkConstraints.rare_charm_dilepton import (
     RareCharmDileptonCKMFactors,
     RareCharmDileptonSMInputs,
     RareCharmDileptonWilsonCoefficients,
-    RareCharmLeptonInputs,
     RareCharmLeptonicBranchingResult,
+    RareCharmLeptonInputs,
     RareCharmMesonInputs,
+)
+from quarkConstraints.rare_charm_dilepton import (
     ckm_factors as _ckm_factors,
+)
+from quarkConstraints.rare_charm_dilepton import (
     compute_rare_charm_dilepton_wilsons as _compute_rare_charm_dilepton_wilsons,
+)
+from quarkConstraints.rare_charm_dilepton import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.rare_charm_dilepton import (
     evaluate_d0_to_ll as _evaluate_d0_to_ll,
+)
+from quarkConstraints.rare_charm_dilepton import (
     sm_branching_fraction as _sm_branching_fraction,
 )
 from quarkConstraints.rs_semileptonic_wilsons import (

@@ -37,7 +37,6 @@ from scripts.run_full_catalog_scan import (
     _svd_seed_parts,
 )
 
-
 MINIMAL_ROOT = REPO_ROOT / "scan_outputs/wq_quarkonly_1M_20128400"
 CUSTODIAL_ROOT = REPO_ROOT / "scan_outputs/wq_quarkonly_1M_custodial_20675555"
 OUTPUT_PATH = REPO_ROOT / "flavor_catalog/website/src/content/scan_explorer.json"
@@ -638,7 +637,7 @@ def _write_summary(
         "# Scan Explorer Data Implementation Summary",
         "",
         f"- Built `{OUTPUT_PATH.relative_to(REPO_ROOT)}` ({size_bytes:,} bytes).",
-        f"- Streamed rows: "
+        "- Streamed rows: "
         + ", ".join(f"{model}={count:,}" for model, count in rows_by_model.items())
         + ".",
         f"- Included {len(constraints)} constraints: "

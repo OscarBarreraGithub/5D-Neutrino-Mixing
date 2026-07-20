@@ -31,8 +31,8 @@ run to ``mu_b`` with the standard leading-log ``C7``-``C8`` mixing.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Mapping
 
 import numpy as np
@@ -330,7 +330,7 @@ def compute_bsgamma_wilsons(
 
     p = default_sm_inputs() if inputs is None else inputs
     resolved_m_kk = _positive_float(
-        getattr(source, "M_KK") if m_kk_gev is None else m_kk_gev,
+        source.M_KK if m_kk_gev is None else m_kk_gev,
         "m_kk_gev",
     )
     left_bs = _matrix_entry(source, "left_down", 1, 2)

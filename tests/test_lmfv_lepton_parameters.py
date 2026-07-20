@@ -2,22 +2,22 @@
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 
 import numpy as np
 import pytest
 
-from flavorConstraints import (
-    GAUGE_KK_ROOT_NN,
-    PEREZ_RANDALL_LFV_M_KK_CONVENTION,
-    perez_randall_lfv_m_kk_from_lambda_ir,
-)
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.physics_adapters.lepton import (
     LMFVLeptonParameters,
     lmfv_lepton_parameters_from_yukawa_result,
+)
+from flavorConstraints import (
+    GAUGE_KK_ROOT_NN,
+    PEREZ_RANDALL_LFV_M_KK_CONVENTION,
+    perez_randall_lfv_m_kk_from_lambda_ir,
 )
 from scanParams import ScanConfig, run_scan
 from tests.rs_ew_phase3b_helpers import (

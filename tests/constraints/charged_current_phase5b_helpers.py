@@ -8,8 +8,8 @@ from functools import lru_cache
 import numpy as np
 
 from flavor_catalog_constraints import point_builder
-from quarkConstraints.rs_ew_couplings import DEFAULT_A_REF_C
 from quarkConstraints.rs_charged_current import RSChargedCurrentCouplings
+from quarkConstraints.rs_ew_couplings import DEFAULT_A_REF_C
 from tests.rs_ew_phase3b_helpers import (
     MAX_OVERLAP_MODES,
     MIN_OVERLAP_MODES,

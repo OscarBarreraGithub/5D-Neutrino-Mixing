@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import math
-from pathlib import Path
 import re
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -15,12 +15,12 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.top_higgs_ew import T010 as t010_module
+from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.zpole import (
     evaluate_quark_pseudo_observables,
     shifted_couplings,
     sm_couplings,
 )
-from quarkConstraints.couplings import QuarkMassBasisCouplings
 from tests.rs_ew_phase3b_helpers import sample_rs_ew_point, sm_limit_rs_ew_point
 
 _PID = "T010"

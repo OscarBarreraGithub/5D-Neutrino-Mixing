@@ -55,7 +55,6 @@ if str(REPO_ROOT) not in sys.path:
 
 from quarkConstraints.scales import GAUGE_KK_ROOT_NN  # noqa: E402
 
-
 BASE_CSV_COLUMNS = [
     "r",
     "m_gkk_TeV",

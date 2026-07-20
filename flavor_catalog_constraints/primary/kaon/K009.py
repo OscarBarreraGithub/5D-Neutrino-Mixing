@@ -37,19 +37,19 @@ non-light-Z neutral-current pieces that are not part of Phase 3a.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
 import re
+from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 from flavor_catalog_constraints import anchors as anchor_scaffold
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton import (
-    KLongPi0EEChPTInputs,
-    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1,
     RARE_KAON_PI0EE_SEMILEPTONIC_RUNNING_DIAGNOSTIC_V1,
+    RARE_KAON_RS_SEMILEPTONIC_VECTOR_MATCHING_STATUS_V1,
     RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    KLongPi0EEChPTInputs,
     rare_kaon_dilepton_default_sm_inputs,
 )
 from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton_muon import (

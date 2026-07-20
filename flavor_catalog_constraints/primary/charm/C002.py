@@ -33,17 +33,17 @@ path used for ``phiM``.  The D0 amplitude normalization uses the same
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
-from pathlib import Path
 import re
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from flavor_catalog_constraints.anchors import (
     Anchor,
     AnchorError,
-    load_full_yaml,
     load_anchor,
+    load_full_yaml,
 )
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.deltaf2 import (

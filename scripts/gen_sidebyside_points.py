@@ -52,16 +52,15 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+import scripts.run_full_catalog_scan as scan  # noqa: E402
 from flavor_catalog_constraints import point_builder, registry  # noqa: E402
 from quarkConstraints.benchmarks import default_quark_targets  # noqa: E402
 from quarkConstraints.couplings import compute_quark_kk_gluon_couplings  # noqa: E402
 from quarkConstraints.fit import QuarkFitSeed, fit_quark_sector  # noqa: E402
 from quarkConstraints.rs_ew_spectrum import (  # noqa: E402
-    RSEWSpectrum,
     RSEWOverlapSplineCache,
+    RSEWSpectrum,
 )
-
-import scripts.run_full_catalog_scan as scan  # noqa: E402
 
 # --- scan config knobs (must match the gridded extractor / stored run) -------
 K_GEV = 1.2209e19

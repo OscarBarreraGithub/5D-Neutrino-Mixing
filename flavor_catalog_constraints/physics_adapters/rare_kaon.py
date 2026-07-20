@@ -13,8 +13,8 @@ directly into the shared Buras/BGS rare-kaon core.
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 
 import numpy as np
 
@@ -31,20 +31,40 @@ from quarkConstraints.rare_kaon_snd import (
     RareKaonNeutralBranchingResult,
     RareKaonSMInputs,
     RareKaonWilsonCoefficients,
+)
+from quarkConstraints.rare_kaon_snd import (
     ckm_factors as _ckm_factors,
+)
+from quarkConstraints.rare_kaon_snd import (
     compute_rare_kaon_wilsons as _compute_rare_kaon_wilsons,
+)
+from quarkConstraints.rare_kaon_snd import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.rare_kaon_snd import (
     evaluate_klong_to_pi0_nunu as _evaluate_klong_to_pi0_nunu,
+)
+from quarkConstraints.rare_kaon_snd import (
     evaluate_kplus_to_piplus_nunu as _evaluate_kplus_to_piplus_nunu,
+)
+from quarkConstraints.rare_kaon_snd import (
     g_sm_squared as _g_sm_squared,
+)
+from quarkConstraints.rare_kaon_snd import (
     kappa_l as _kappa_l,
+)
+from quarkConstraints.rare_kaon_snd import (
     kappa_plus as _kappa_plus,
+)
+from quarkConstraints.rare_kaon_snd import (
     neutral_sm_branching_fraction as _neutral_sm_branching_fraction,
+)
+from quarkConstraints.rare_kaon_snd import (
     sm_branching_fraction as _sm_branching_fraction,
 )
 from quarkConstraints.rs_semileptonic_wilsons import (
-    RSNuNuWilsonCoefficients,
     RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    RSNuNuWilsonCoefficients,
     RSSemileptonicWilsonBundle,
 )
 
@@ -165,7 +185,11 @@ def _rs_s_to_d_nunu_coeff(
             "rs_semileptonic_wilsons.s_to_d_nunu transition_key="
             f"{coeff.transition_key!r}, expected 's_d'"
         )
-    if coeff.quark_sector != "d" or int(coeff.final_quark_index) != 0 or int(coeff.initial_quark_index) != 1:
+    if (
+        coeff.quark_sector != "d"
+        or int(coeff.final_quark_index) != 0
+        or int(coeff.initial_quark_index) != 1
+    ):
         raise ValueError("rs_semileptonic_wilsons.s_to_d_nunu has inconsistent quark indices")
     return coeff
 

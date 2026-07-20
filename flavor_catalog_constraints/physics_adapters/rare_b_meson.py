@@ -9,8 +9,8 @@ rare-B Wilson dataclass at the Wilson-value consumption point.
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 
 from quarkConstraints import bsgamma as _bsgamma_core
 from quarkConstraints import rare_b_dilepton as _rare_b_dilepton_core
@@ -30,27 +30,51 @@ from quarkConstraints.rare_b_dilepton import (
     RARE_B_DILEPTON_MODEL_V1,
     RARE_B_DILEPTON_OPERATOR_CONVENTION,
     RARE_B_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
-    RareBInclusiveDileptonBranchingResult,
-    RareBInclusiveDileptonInputs,
-    RareBToKDileptonBranchingResult,
-    RareBToKDileptonInputs,
-    RareBToKFormFactorInputs,
     RareBDileptonCKMFactors,
     RareBDileptonMesonInputs,
     RareBDileptonSMInputs,
     RareBDileptonWilsonCoefficients,
+    RareBInclusiveDileptonBranchingResult,
+    RareBInclusiveDileptonInputs,
     RareBLeptonicBranchingResult,
+    RareBToKDileptonBranchingResult,
+    RareBToKDileptonInputs,
+    RareBToKFormFactorInputs,
+)
+from quarkConstraints.rare_b_dilepton import (
     b_to_k_fplus as _b_to_k_fplus,
+)
+from quarkConstraints.rare_b_dilepton import (
     ckm_factors as _ckm_factors,
+)
+from quarkConstraints.rare_b_dilepton import (
     compute_rare_b_dilepton_wilsons as _compute_rare_b_dilepton_wilsons,
+)
+from quarkConstraints.rare_b_dilepton import (
     default_b_to_k_dilepton_inputs as _default_b_to_k_dilepton_inputs,
+)
+from quarkConstraints.rare_b_dilepton import (
     default_inclusive_b_to_xs_dilepton_inputs as _default_inclusive_b_to_xs_dilepton_inputs,
+)
+from quarkConstraints.rare_b_dilepton import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.rare_b_dilepton import (
     evaluate_b_to_k_mumu as _evaluate_b_to_k_mumu,
+)
+from quarkConstraints.rare_b_dilepton import (
     evaluate_bq_to_mumu as _evaluate_bq_to_mumu,
+)
+from quarkConstraints.rare_b_dilepton import (
     evaluate_inclusive_b_to_xs_mumu as _evaluate_inclusive_b_to_xs_mumu,
+)
+from quarkConstraints.rare_b_dilepton import (
     sm_b_to_k_mumu_branching_fraction as _sm_b_to_k_mumu_branching_fraction,
+)
+from quarkConstraints.rare_b_dilepton import (
     sm_branching_fraction as _sm_branching_fraction,
+)
+from quarkConstraints.rare_b_dilepton import (
     sm_inclusive_b_to_xs_mumu_branching_fraction as _sm_inclusive_b_to_xs_mumu_branching_fraction,
 )
 from quarkConstraints.rs_semileptonic_wilsons import (

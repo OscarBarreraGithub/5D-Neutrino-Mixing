@@ -10,9 +10,9 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from quarkConstraints.scan import QuarkScanConfig, run_quark_scan
 from quarkConstraints.fit import QuarkFitSeed
 from quarkConstraints.model import RotationParameters
+from quarkConstraints.scan import QuarkScanConfig, run_quark_scan
 
 
 def test_quark_scan_returns_rows_and_writes_csv(tmp_path):

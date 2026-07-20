@@ -17,15 +17,15 @@ present on ``ParameterPoint``.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, replace
 import math
+from dataclasses import dataclass, replace
 from typing import Mapping
 
 import numpy as np
 
 from flavor_catalog_constraints.physics_adapters.zpole import (
-    QuarkMassBasisCouplings,
     ZPOLE_MODEL_V1,
+    QuarkMassBasisCouplings,
     ZPoleQuarkObservables,
     ZPoleSMInputs,
     zpole_default_sm_inputs,
@@ -112,7 +112,7 @@ def zpole_zcc_coupling_shift_proxy(
     p = zpole_default_sm_inputs() if inputs is None else inputs
     resolved_m_kk = _positive_float(
         "m_kk_gev",
-        getattr(source, "M_KK") if m_kk_gev is None else m_kk_gev,
+        source.M_KK if m_kk_gev is None else m_kk_gev,
     )
     left_overlap = _left_up_overlap(source)
     right_overlap = _overlap_matrix(source, "right_up_overlap", "right_up")

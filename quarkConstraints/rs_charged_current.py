@@ -24,7 +24,6 @@ from .rs_ew_spectrum import (
     RSEWSpectrum,
 )
 
-
 RS_CHARGED_CURRENT_INPUT_BUNDLE_V1 = "quarkConstraints.rs_charged_current.inputs.v1"
 RS_CHARGED_CURRENT_MODEL_V1 = "RS_EW_CHARGED_CURRENT_PHASE5A_V1"
 RS_CHARGED_CURRENT_MATCHING_ASSUMPTION_V1 = (
@@ -219,8 +218,8 @@ def build_rs_charged_current(
     if min_modes >= max_modes:
         raise ValueError("min_overlap_modes must be smaller than max_overlap_modes")
 
-    bulk_state = getattr(quark_fit_result, "bulk_state")
-    c_q = _readonly_real_triplet(getattr(bulk_state, "c_Q"), "c_Q")
+    bulk_state = quark_fit_result.bulk_state
+    c_q = _readonly_real_triplet(bulk_state.c_Q, "c_Q")
     c_l = _readonly_real_triplet(lepton_mass_basis_couplings.c_L, "c_L")
     u_l_u = _unitary_matrix_from_attr(
         quark_fit_result,
@@ -238,7 +237,9 @@ def build_rs_charged_current(
         tolerance=rotation_unitarity_tolerance,
     )
     ckm = u_l_u.conjugate().T @ u_l_d
-    if not np.allclose(ckm.conjugate().T @ ckm, np.eye(3), rtol=0.0, atol=rotation_unitarity_tolerance):
+    if not np.allclose(
+        ckm.conjugate().T @ ckm, np.eye(3), rtol=0.0, atol=rotation_unitarity_tolerance
+    ):
         raise ValueError("V_CKM=U_L_u^dagger U_L_d must be unitary")
 
     a_ref = (
@@ -308,7 +309,8 @@ def build_rs_charged_current(
     for i in range(3):
         for j in range(3):
             if abs(ckm[i, j]) <= _CKM_DENOM_FLOOR:
-                if abs(delta_ud_l[i, j]) <= _ZERO_ATOL and np.max(np.abs(contact_actual[i, j])) <= _ZERO_ATOL:
+                contact_max = np.max(np.abs(contact_actual[i, j]))
+                if abs(delta_ud_l[i, j]) <= _ZERO_ATOL and contact_max <= _ZERO_ATOL:
                     continue
                 raise ValueError(
                     "epsilon is undefined for a numerically zero V_CKM entry "
@@ -374,7 +376,9 @@ def build_rs_charged_current(
             "max_overlap_modes": int(max_modes),
         },
         diagnostics={
-            "w_diagonalization_location": "quarkConstraints.rs_ew_spectrum.RSEWSpectrum.charged_w_diagonalization",
+            "w_diagonalization_location": (
+                "quarkConstraints.rs_ew_spectrum.RSEWSpectrum.charged_w_diagonalization"
+            ),
             "a_ref_source": (
                 "shared_a_ref_from_rs_ew_couplings"
                 if shared_a_ref is not None

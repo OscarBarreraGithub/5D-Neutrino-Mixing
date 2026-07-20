@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import math
-from pathlib import Path
 import re
+from pathlib import Path
 
 import pytest
 import yaml
@@ -13,11 +13,11 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
-from flavor_catalog_constraints.primary.beauty import B023 as b023_module
 from flavor_catalog_constraints.physics_adapters.rare_b_nunu import (
     RARE_B_NUNU_KSTAR_ETA_COEFFICIENT,
     b_to_kstar_nunu_from_rs_semileptonic_wilsons,
 )
+from flavor_catalog_constraints.primary.beauty import B023 as b023_module
 from tests.constraints.primary.nunu_phase4d_helpers import (
     direct_contact_x_np,
     nunu_block,

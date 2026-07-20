@@ -8,7 +8,6 @@ from flavor_catalog_constraints import point_builder
 from quarkConstraints import rare_b_dilepton, rare_charm_dilepton, rare_kaon_dilepton
 from quarkConstraints.rs_ew_couplings import DEFAULT_A_REF_C, DEFAULT_S_Z
 
-
 GAUGE_ROOT_EPS_1E_MINUS_15 = 2.450509663813736
 EPSILON_RS = 1.0e-15
 TARGET_MKK_GEV = 3000.0
@@ -268,7 +267,10 @@ def test_contact_units_immutability_determinism_and_finiteness(sample_fit, sampl
         wilsons.c_to_u_ll,
     ):
         for coeffs in block.values():
-            assert all(math.isfinite(value.real) and math.isfinite(value.imag) for value in coeffs.wilsons.values())
+            assert all(
+                math.isfinite(value.real) and math.isfinite(value.imag)
+                for value in coeffs.wilsons.values()
+            )
 
     for name in ("z_delta_g_L_u", "z_delta_g_R_u", "z_delta_g_L_d", "z_delta_g_R_d"):
         assert np.array_equal(getattr(couplings, name), getattr(repeat_couplings, name))
@@ -407,7 +409,12 @@ def _manual_z_delta(
     )
     a_mass = rotation.conjugate().T @ np.diag(a_values) @ rotation
     a_mass = 0.5 * (a_mass + a_mass.conjugate().T)
-    return DEFAULT_S_Z * _manual_sm_chiral_z(species, chirality) * (M_Z_GEV / spectrum.kk_ew_mass_gev) ** 2 * a_mass
+    return (
+        DEFAULT_S_Z
+        * _manual_sm_chiral_z(species, chirality)
+        * (M_Z_GEV / spectrum.kk_ew_mass_gev) ** 2
+        * a_mass
+    )
 
 
 def _manual_contact(

@@ -10,21 +10,25 @@ import pytest
 import yaml
 
 import flavor_catalog_constraints as fcc
-from flavorConstraints.muToEGamma import (
-    check_mu_to_e_gamma_raw,
-    coefficient_from_br_limit,
-)
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.physics_adapters.lfv_three_body import (
     lfv_three_body_contact_amplitudes as adapter_lfv_three_body_contact_amplitudes,
+)
+from flavor_catalog_constraints.physics_adapters.lfv_three_body import (
     lfv_three_body_proxy_input,
     mu_to_3e_from_lepton_input,
 )
+from flavorConstraints.muToEGamma import (
+    check_mu_to_e_gamma_raw,
+    coefficient_from_br_limit,
+)
 from quarkConstraints.lfv_three_body import (
     LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION,
-    lfv_three_body_contact_amplitudes as core_lfv_three_body_contact_amplitudes,
     lfv_three_body_from_components,
+)
+from quarkConstraints.lfv_three_body import (
+    lfv_three_body_contact_amplitudes as core_lfv_three_body_contact_amplitudes,
 )
 
 _PID = "L002"

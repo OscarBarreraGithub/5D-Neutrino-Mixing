@@ -51,10 +51,10 @@ if str(REPO) not in sys.path:
 # Bounds / budgets the forward run used (so ratio * bound recovers the NP amp).
 # These are read straight from quarkConstraints.deltaf2 so the recovery is exact.
 from quarkConstraints.deltaf2 import (  # noqa: E402
+    DEFAULT_DELTA_F2_INPUTS_V1,
+    DELTA_M_K,
     EPSILON_K_EXP,
     EPSILON_K_SM,
-    DELTA_M_K,
-    DEFAULT_DELTA_F2_INPUTS_V1,
     delta_f2_epsilon_k_budget_policy,
 )
 

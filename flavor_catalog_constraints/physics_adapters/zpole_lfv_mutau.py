@@ -13,8 +13,8 @@ diagnostic-only until a full RS EW/lepton matching object exists.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 import numpy as np
@@ -23,8 +23,14 @@ from quarkConstraints.zpole import ZPoleSMInputs, default_sm_inputs
 from quarkConstraints.zpole_lfv import (
     ZPOLE_LFV_MODEL_V1,
     ZPoleLFVBranchingResult,
+)
+from quarkConstraints.zpole_lfv import (
     sm_total_width_weight as _sm_total_width_weight,
+)
+from quarkConstraints.zpole_lfv import (
     z_lfv_branching_fraction_from_couplings as _branching_from_couplings,
+)
+from quarkConstraints.zpole_lfv import (
     z_lfv_effective_coupling_limit as _effective_coupling_limit,
 )
 

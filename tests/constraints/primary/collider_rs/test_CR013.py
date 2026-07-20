@@ -14,8 +14,8 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.collider_rs import CR013 as cr013_module
-from quarkConstraints.scales import GAUGE_KK_ROOT_NN, SPIN2_GRAVITON_KK_ROOT
 from quarkConstraints import collider_resonance as core
+from quarkConstraints.scales import GAUGE_KK_ROOT_NN, SPIN2_GRAVITON_KK_ROOT
 
 _PID = "CR013"
 _ACTIVE_VALUE_ID = "PDG2025:CR013:CMS2024_RSG_diphoton_kMPl_0p1"

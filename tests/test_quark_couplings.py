@@ -1,8 +1,8 @@
 """Tests for quark mass-basis KK-gluon couplings."""
 
 import sys
-from pathlib import Path
 from math import log, sqrt
+from pathlib import Path
 
 import numpy as np
 import pytest

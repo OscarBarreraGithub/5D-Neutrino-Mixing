@@ -11,7 +11,6 @@ from __future__ import annotations
 from dataclasses import replace
 
 from quarkConstraints.couplings import QuarkMassBasisCouplings
-from quarkConstraints.rare_b_dilepton import RareBDileptonWilsonCoefficients
 from quarkConstraints.rare_b_baryon_dilepton import (
     RARE_B_BARYONIC_DILEPTON_FORM_FACTOR_BUNDLE_V1,
     RARE_B_BARYONIC_DILEPTON_FORM_FACTOR_CITATION,
@@ -23,11 +22,20 @@ from quarkConstraints.rare_b_baryon_dilepton import (
     RareBBaryonDileptonBranchingResult,
     RareBBaryonDileptonInputs,
     RareBBaryonFormFactorInputs,
+)
+from quarkConstraints.rare_b_baryon_dilepton import (
     default_lambdab_to_lambda_dilepton_inputs as _default_lambdab_to_lambda_dilepton_inputs,
+)
+from quarkConstraints.rare_b_baryon_dilepton import (
     evaluate_lambdab_to_lambda_mumu as _evaluate_lambdab_to_lambda_mumu,
+)
+from quarkConstraints.rare_b_baryon_dilepton import (
     lambdab_to_lambda_fplus_fminus as _lambdab_to_lambda_fplus_fminus,
+)
+from quarkConstraints.rare_b_baryon_dilepton import (
     sm_lambdab_to_lambda_mumu_branching_fraction as _sm_lambdab_to_lambda_mumu_branching_fraction,
 )
+from quarkConstraints.rare_b_dilepton import RareBDileptonWilsonCoefficients
 from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
 
 from .rare_b_meson import (

@@ -11,7 +11,6 @@ from quarkConstraints.rs_ew_spectrum import RSEWOverlapSplineCache, RSEWSpectrum
 from warpConfig.wavefuncs import f_IR
 from yukawa.compute_yukawas import compute_all_yukawas
 
-
 GAUGE_ROOT_EPS_1E_MINUS_15 = 2.450509663813736
 EPSILON_RS = 1.0e-15
 N_GAUGE_MODES = 64

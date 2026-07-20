@@ -19,8 +19,8 @@ for a complete ``D+ -> pi+ mu+ mu-`` RS recast.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Mapping
 
 import numpy as np
@@ -32,6 +32,8 @@ from .rare_charm_dilepton import (
     RareCharmDileptonWilsonCoefficients,
     ckm_factors,
     compute_rare_charm_dilepton_wilsons,
+)
+from .rare_charm_dilepton import (
     default_sm_inputs as rare_charm_dilepton_default_sm_inputs,
 )
 

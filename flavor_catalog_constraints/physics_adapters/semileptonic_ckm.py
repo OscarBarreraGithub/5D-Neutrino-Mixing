@@ -9,8 +9,8 @@ statistical machinery locally.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Mapping, Sequence
 
 SEMILEPTONIC_CKM_RS_MATCHING_GAP = (

@@ -12,8 +12,8 @@ import yaml
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
-from qcd.constants import M_TOP_MS
 from flavor_catalog_constraints.primary.beauty import B012 as b012_module
+from qcd.constants import M_TOP_MS
 from quarkConstraints import bsgamma as bsgamma_core
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.qcd_running import run_alpha_s

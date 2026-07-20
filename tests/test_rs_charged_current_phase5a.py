@@ -323,7 +323,9 @@ def _manual_charged_contact(spectrum, fit, lepton, ckm):
         prefactor = 0.5 * g2**2 / spectrum.gauge_masses_gev[mode_index] ** 2
         q_mode = fit.U_L_u.conjugate().T @ np.diag(omega_q[mode_index]) @ fit.U_L_d
         q_ratio = q_mode / ckm
-        l_mode = _hermitian(lepton.U_e_L.conjugate().T @ np.diag(omega_l[mode_index]) @ lepton.U_e_L)
+        l_mode = _hermitian(
+            lepton.U_e_L.conjugate().T @ np.diag(omega_l[mode_index]) @ lepton.U_e_L
+        )
         contact += prefactor * q_ratio[:, :, None, None] * l_mode[None, None, :, :]
         mu_contact += prefactor * l_mode[0, 0] * l_mode[1, 1]
     return contact, mu_contact

@@ -17,8 +17,8 @@ prediction and must remain INFO-only unless the missing physics is supplied.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 __all__ = [
     "BS_TO_PHI_PHI_NONLEPTONIC_STUB_MODEL_V1",

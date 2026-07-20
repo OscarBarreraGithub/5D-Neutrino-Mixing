@@ -9,34 +9,52 @@ shared place for K008/K009/K010/K012 dilepton rare-kaon reuse.
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.rare_kaon_dilepton import (
-    KLongPi0EEChPTInputs,
-    KLongPi0EEResult,
-    KLongMuMuShortDistanceResult,
-    RARE_KAON_PI0EE_INTERFERENCE_LIMITATION_V1,
-    RARE_KAON_PI0EE_MODEL_V1,
-    RARE_KAON_PI0EE_PARAMETRIZATION_CITATION,
     RARE_KAON_DILEPTON_INPUT_BUNDLE_V1,
     RARE_KAON_DILEPTON_MODEL_V1,
     RARE_KAON_DILEPTON_OPERATOR_CONVENTION,
     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION,
     RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+    RARE_KAON_PI0EE_INTERFERENCE_LIMITATION_V1,
+    RARE_KAON_PI0EE_MODEL_V1,
+    RARE_KAON_PI0EE_PARAMETRIZATION_CITATION,
+    KLongMuMuShortDistanceResult,
+    KLongPi0EEChPTInputs,
+    KLongPi0EEResult,
     RareKaonDileptonCKMFactors,
     RareKaonDileptonSMInputs,
     RareKaonDileptonWilsonCoefficients,
+)
+from quarkConstraints.rare_kaon_dilepton import (
     ckm_factors as _ckm_factors,
+)
+from quarkConstraints.rare_kaon_dilepton import (
     compute_rare_kaon_dilepton_wilsons as _compute_rare_kaon_dilepton_wilsons,
+)
+from quarkConstraints.rare_kaon_dilepton import (
     default_sm_inputs as _default_sm_inputs,
-    evaluate_klong_pi0ee_direct_cp as _evaluate_klong_pi0ee_direct_cp,
+)
+from quarkConstraints.rare_kaon_dilepton import (
     evaluate_klong_mumu_short_distance as _evaluate_klong_mumu_short_distance,
+)
+from quarkConstraints.rare_kaon_dilepton import (
+    evaluate_klong_pi0ee_direct_cp as _evaluate_klong_pi0ee_direct_cp,
+)
+from quarkConstraints.rare_kaon_dilepton import (
     g_sm_squared as _g_sm_squared,
+)
+from quarkConstraints.rare_kaon_dilepton import (
     kappa_mu as _kappa_mu,
-    klong_pi0ee_direct_cp_sm as _klong_pi0ee_direct_cp_sm,
+)
+from quarkConstraints.rare_kaon_dilepton import (
     klong_mumu_short_distance_sm as _klong_mumu_short_distance_sm,
+)
+from quarkConstraints.rare_kaon_dilepton import (
+    klong_pi0ee_direct_cp_sm as _klong_pi0ee_direct_cp_sm,
 )
 from quarkConstraints.rs_semileptonic_wilsons import (
     RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
@@ -372,7 +390,9 @@ def klong_pi0ee_direct_cp_from_couplings(
     )
 
 
-from quarkConstraints import rare_kaon_dilepton as _rare_kaon_dilepton_core
+from quarkConstraints import (  # noqa: E402, I001 (append-only section)
+    rare_kaon_dilepton as _rare_kaon_dilepton_core,
+)
 
 RARE_KAON_PI0EE_MODEL_V2 = _rare_kaon_dilepton_core.RARE_KAON_PI0EE_MODEL_V2
 RARE_KAON_PI0EE_Y7_OPERATOR_CONVENTION = (

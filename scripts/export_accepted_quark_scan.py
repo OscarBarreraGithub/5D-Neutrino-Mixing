@@ -34,7 +34,6 @@ if str(REPO_ROOT) not in sys.path:
 
 from quarkConstraints.scales import GAUGE_KK_ROOT_NN  # noqa: E402
 
-
 SYSTEMS = ["epsilon_K", "K", "B_d", "B_s", "D0"]
 
 CSV_COLUMNS = [

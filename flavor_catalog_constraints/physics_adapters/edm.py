@@ -14,8 +14,8 @@ for the requested lepton and flags the result.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 from quarkConstraints.edm import (
@@ -23,7 +23,11 @@ from quarkConstraints.edm import (
     EDM_RS_MATCHING_GAP_V1,
     HBARC_GEV_CM,
     ChargedLeptonEDMResult,
+)
+from quarkConstraints.edm import (
     evaluate_charged_lepton_edm as _evaluate_charged_lepton_edm,
+)
+from quarkConstraints.edm import (
     evaluate_charged_lepton_edm_from_chiral_dipole as _evaluate_from_chiral_dipole,
 )
 

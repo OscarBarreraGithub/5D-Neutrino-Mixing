@@ -29,7 +29,6 @@ from scipy.special import j0, j1, y0, y1
 from solvers.bessel import solve_kk
 from warpConfig.baseParams import DEFAULT_LAMBDA_IR, MPL, get_warp_params
 
-
 DEFAULT_N_GAUGE_MODES = 512
 DEFAULT_OVERLAP_RTOL = 1.0e-3
 DEFAULT_MIN_TRUNCATION_MODES = 16

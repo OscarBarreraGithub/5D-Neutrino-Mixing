@@ -24,7 +24,7 @@ from .couplings import (
 )
 from .fit import QuarkFitResult
 from .qcd_running import evolve_deltaf2_wilsons
-from .scales import DEFAULT_QUARK_TARGET_SCALE_GEV, DEFAULT_QUARK_XI_KK
+from .scales import DEFAULT_QUARK_TARGET_SCALE_GEV
 
 DELTA_F2_MODEL_V1 = OPERATOR_CONVENTION_PERTURBATIVE_4D_LEGACY
 DELTA_F2_INPUT_BUNDLE_V1 = "deltaf2_inputs_mu3tev_v1"

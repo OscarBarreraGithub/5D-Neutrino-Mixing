@@ -14,12 +14,13 @@ loop-induced LFV is deferred.
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 from typing import Any
 
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.rare_charm_dilepton import RareCharmDileptonSMInputs
+from quarkConstraints.rare_charm_dilepton import default_sm_inputs as _default_sm_inputs
 from quarkConstraints.rare_charm_lfv_dilepton import (
     RARE_CHARM_LFV_DILEPTON_MODEL_V1,
     RARE_CHARM_LFV_DILEPTON_OPERATOR_CONVENTION,
@@ -28,13 +29,22 @@ from quarkConstraints.rare_charm_lfv_dilepton import (
     RareCharmLFVLeptonCouplingProxy,
     RareCharmLFVLeptonProxyInput,
     RareCharmLFVWilsonCoefficients,
+)
+from quarkConstraints.rare_charm_lfv_dilepton import (
     compute_rare_charm_lfv_wilsons as _compute_lfv_wilsons,
+)
+from quarkConstraints.rare_charm_lfv_dilepton import (
     evaluate_d0_to_emu as _evaluate_d0_to_emu,
+)
+from quarkConstraints.rare_charm_lfv_dilepton import (
     rare_charm_lfv_lepton_coupling_proxy as _lepton_proxy,
+)
+from quarkConstraints.rare_charm_lfv_dilepton import (
     rare_charm_lfv_proxy_input as _proxy_input,
+)
+from quarkConstraints.rare_charm_lfv_dilepton import (
     rare_charm_lfv_sm_branching_fraction as _sm_branching_fraction,
 )
-from quarkConstraints.rare_charm_dilepton import default_sm_inputs as _default_sm_inputs
 from quarkConstraints.rs_semileptonic_wilsons import (
     RSLFVSemileptonicWilsonCoefficients,
     RSSemileptonicWilsonBundle,

@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import numpy as np
 import pytest
 
-from qcd.constants import M_BOTTOM, M_CHARM, M_TOP_MS
 import qcd.mass_running as mass_running
+from qcd.constants import M_BOTTOM, M_CHARM, M_TOP_MS
 from qcd.decoupling import _coeffs_msbar_mass, match_alpha_s, match_msbar_mass
 from qcd.mass_running import run_msbar_mass
 from qcd.running import alpha_s as alpha_s_running

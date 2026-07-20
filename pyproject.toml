@@ -46,12 +46,39 @@ include = [
 [tool.ruff]
 target-version = "py39"
 line-length = 100
-extend-exclude = ["*.ipynb"]
+# Lint scope (audit P0-6): production/paper code is linted — the library
+# packages, scripts/, and tests/. Historical and process trees are explicitly
+# out of scope rather than papered over with per-rule ignores:
+#   .orchestration/ (multi-agent build ledgers and run logs),
+#   reports/ (report/figure builder one-offs), notebooks/ (executed artifacts).
+extend-exclude = ["*.ipynb", ".orchestration", "reports", "notebooks"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B"]
 
 [tool.ruff.lint.per-file-ignores]
+# scripts/ bootstrap sys.path before imports, so E402 is structural there.
+"scripts/*.py" = ["E402"]
+# Research/exploratory analysis scripts keep their terse one-liner style;
+# production drivers (run_full_catalog_scan, benchmark_*) are fully linted
+# apart from the bootstrap E402 above.
+"scripts/analyze_wq_quarkonly.py" = ["E501"]
+"scripts/anarchic_*.py" = ["E501", "E702", "E731", "F841"]
+"scripts/build_constraint_matrix.py" = ["E501"]
+"scripts/build_wq_quarkonly_comparison.py" = ["E501"]
+"scripts/export_*.py" = ["E501"]
+"scripts/extract_plot_quantities.py" = ["B007", "E501"]
+"scripts/instrument_epsK_phase.py" = ["E501", "E702"]
+"scripts/perturb_yukawa_stability.py" = ["E501", "E701", "E702", "F841", "I001"]
+"scripts/plot_perturbation_study.py" = ["E501", "E701", "E702", "I001"]
+"scripts/plot_rs_anarchy_summary.py" = ["E741"]
+"scripts/rankone_u2_lane.py" = ["E501", "E731"]
+"scripts/rs_anarchy_*.py" = ["B007", "E501"]
+"scripts/tuning_radius_epsK.py" = ["E501", "E701", "E702", "I001"]
+"scripts/yukawa_per_element_anatomy.py" = ["E702"]
+"scripts/yukawa_perturbation_study.py" = ["E501", "E701", "E702"]
+# Website generator utilities (long anchor/citation strings).
+"flavor_catalog/website/scripts/*.py" = ["E402", "E501"]
 "quarkConstraints/modern/*.py" = ["E402", "E501", "F401", "F811", "I001"]
 "quarkConstraints/paper_0710_1869/*.py" = ["B009", "E501", "I001"]
 "quarkConstraints/fit.py" = ["E501"]
@@ -71,3 +98,4 @@ select = ["E", "F", "I", "B"]
 
 [tool.pytest.ini_options]
 xfail_strict = true
+testpaths = ["tests"]

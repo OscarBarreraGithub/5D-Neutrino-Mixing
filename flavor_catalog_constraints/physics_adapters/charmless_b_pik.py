@@ -14,8 +14,8 @@ constraint.  It is not a prediction and must remain non-vetoing.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 __all__ = [
     "B_TO_PI_K_NONLEPTONIC_STUB_MODEL_V1",

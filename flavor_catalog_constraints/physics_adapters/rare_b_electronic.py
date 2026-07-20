@@ -19,9 +19,17 @@ from quarkConstraints.rare_b_dilepton import (
     RareBDileptonSMInputs,
     RareBDileptonWilsonCoefficients,
     RareBLeptonicBranchingResult,
+)
+from quarkConstraints.rare_b_dilepton import (
     ckm_factors as _ckm_factors,
+)
+from quarkConstraints.rare_b_dilepton import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.rare_b_dilepton import (
     evaluate_bq_to_mumu as _evaluate_bq_to_mumu,
+)
+from quarkConstraints.rare_b_dilepton import (
     sm_branching_fraction as _sm_branching_fraction,
 )
 from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
@@ -77,7 +85,8 @@ def rare_b_electronic_ckm_factors(
     inputs: RareBDileptonSMInputs | None = None,
 ) -> RareBDileptonCKMFactors:
     """Return the CKM factors used by the electron-mode rare-beauty core."""
-    return _ckm_factors(transition, rare_b_electronic_default_sm_inputs() if inputs is None else inputs)
+    resolved = rare_b_electronic_default_sm_inputs() if inputs is None else inputs
+    return _ckm_factors(transition, resolved)
 
 
 def rare_b_electronic_sm_branching_fraction(

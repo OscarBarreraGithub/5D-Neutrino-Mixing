@@ -8,8 +8,8 @@ only; the underlying physics implementation remains isolated in
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 import numpy as np
 
@@ -21,14 +21,22 @@ from quarkConstraints.bsgamma import (
     BsgammaBranchingResult,
     BsgammaSMInputs,
     BsgammaWilsonCoefficients,
+)
+from quarkConstraints.bsgamma import (
     branching_fraction_from_c7 as _branching_fraction_from_c7,
+)
+from quarkConstraints.bsgamma import (
     compute_bsgamma_wilsons as _compute_bsgamma_wilsons,
+)
+from quarkConstraints.bsgamma import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.bsgamma import (
     evaluate_inclusive_bsgamma as _evaluate_inclusive_bsgamma,
 )
 from quarkConstraints.couplings import QuarkMassBasisCouplings
-from quarkConstraints.modern.inputs import ModernDefaultCKMTarget
 from quarkConstraints.model import RotationParameters, ckm_like_unitary
+from quarkConstraints.modern.inputs import ModernDefaultCKMTarget
 
 __all__ = [
     "QuarkMassBasisCouplings",
@@ -133,10 +141,10 @@ def _bd_source_as_bs_source(source: QuarkMassBasisCouplings) -> QuarkMassBasisCo
     right_down[2, 1] = np.conjugate(right_bd)
 
     return QuarkMassBasisCouplings(
-        M_KK=float(getattr(source, "M_KK")),
-        xi_KK=float(getattr(source, "xi_KK")),
-        alpha_s=float(getattr(source, "alpha_s")),
-        g_s=float(getattr(source, "g_s")),
+        M_KK=float(source.M_KK),
+        xi_KK=float(source.xi_KK),
+        alpha_s=float(source.alpha_s),
+        g_s=float(source.g_s),
         left_overlap=_matrix(source, "left_overlap").copy(),
         right_up_overlap=_matrix(source, "right_up_overlap").copy(),
         right_down_overlap=_matrix(source, "right_down_overlap").copy(),

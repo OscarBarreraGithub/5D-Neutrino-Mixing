@@ -297,8 +297,14 @@ def test_nunu_majorana_phases_cancel_for_universal_active_cL():
     w_majorana = majorana.extras["rs_semileptonic_wilsons"]
 
     assert np.max(np.abs(c_dirac.z_delta_g_L_nu - c_majorana.z_delta_g_L_nu)) < 1.0e-18
-    assert np.max(np.abs(w_dirac.b_to_s_nunu.x_np_left - w_majorana.b_to_s_nunu.x_np_left)) < 1.0e-18
-    assert np.max(np.abs(w_dirac.s_to_d_nunu.x_np_left - w_majorana.s_to_d_nunu.x_np_left)) < 1.0e-18
+    assert (
+        np.max(np.abs(w_dirac.b_to_s_nunu.x_np_left - w_majorana.b_to_s_nunu.x_np_left))
+        < 1.0e-18
+    )
+    assert (
+        np.max(np.abs(w_dirac.s_to_d_nunu.x_np_left - w_majorana.s_to_d_nunu.x_np_left))
+        < 1.0e-18
+    )
 
 
 def test_determinism_finiteness_and_immutability_of_4a_extras():
@@ -308,9 +314,15 @@ def test_determinism_finiteness_and_immutability_of_4a_extras():
     couplings = point.extras["rs_ew_couplings"]
     wilsons = point.extras["rs_semileptonic_wilsons"]
 
-    assert np.array_equal(lepton.Y_N_bar_matrix, repeat.extras["lepton_mass_basis_couplings"].Y_N_bar_matrix)
+    assert np.array_equal(
+        lepton.Y_N_bar_matrix,
+        repeat.extras["lepton_mass_basis_couplings"].Y_N_bar_matrix,
+    )
     assert np.array_equal(couplings.z_delta_g_L_nu, repeat.extras["rs_ew_couplings"].z_delta_g_L_nu)
-    assert np.array_equal(wilsons.b_to_s_nunu.x_np_left, repeat.extras["rs_semileptonic_wilsons"].b_to_s_nunu.x_np_left)
+    assert np.array_equal(
+        wilsons.b_to_s_nunu.x_np_left,
+        repeat.extras["rs_semileptonic_wilsons"].b_to_s_nunu.x_np_left,
+    )
     for arr in (
         lepton.Y_E_bar_matrix,
         lepton.Y_N_bar_matrix,
@@ -333,7 +345,12 @@ def test_determinism_finiteness_and_immutability_of_4a_extras():
 
 
 def _manual_z_delta(spectrum, rotation, c_values, species: str, chirality: str):
-    a_ref = spectrum.a(DEFAULT_A_REF_C, rel_tol=OVERLAP_REL_TOL, min_modes=MIN_OVERLAP_MODES, max_modes=MAX_OVERLAP_MODES)
+    a_ref = spectrum.a(
+        DEFAULT_A_REF_C,
+        rel_tol=OVERLAP_REL_TOL,
+        min_modes=MIN_OVERLAP_MODES,
+        max_modes=MAX_OVERLAP_MODES,
+    )
     a_values = np.array(
         [
             spectrum.a(

@@ -186,7 +186,10 @@ def test_default_benchmark_point_has_stable_deltaf2_outputs():
     assert summary.get("d").diagnostics["hadronic_scale_gev"] == 3.0
     assert summary.get("b_d").budget_policy_id == "b_d_delta_m_hpqcd2019_hflav2025_one_sigma_v1"
     assert summary.get("b_s").budget_policy_id == "b_s_delta_m_flag2024_hflav2024_one_sigma_v1"
-    assert summary.get("d").confidence_level == "not_a_gaussian_cl_conservative_long_distance_envelope"
+    assert (
+        summary.get("d").confidence_level
+        == "not_a_gaussian_cl_conservative_long_distance_envelope"
+    )
     assert summary.get("b_d").ratio_to_bound < 1.0
     assert summary.get("b_s").ratio_to_bound < 1.0
     assert summary.get("d").ratio_to_bound < 1.0

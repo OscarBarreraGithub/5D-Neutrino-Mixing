@@ -43,13 +43,13 @@ muon-sector effects outside Phase 3a.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
 import re
+from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 from flavor_catalog_constraints import anchors as anchor_scaffold
-from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor, load_full_yaml
+from flavor_catalog_constraints.anchors import AnchorError, load_anchor, load_full_yaml
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton import (
     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION,

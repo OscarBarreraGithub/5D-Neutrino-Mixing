@@ -47,7 +47,6 @@ from scripts.run_rs_anarchy import (  # noqa: E402
 )
 from warpConfig.wavefuncs import f_IR  # noqa: E402
 
-
 LAM = 0.2250
 WOLF_A = 0.826
 PERTURBATIVE_CAP = 3.0

@@ -36,8 +36,8 @@ acceptance remain diagnostic and deferred.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, replace
 import math
+from dataclasses import dataclass, replace
 from typing import Any, Mapping
 
 from flavor_catalog_constraints.anchors import (

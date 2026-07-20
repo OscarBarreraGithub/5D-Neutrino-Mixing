@@ -21,7 +21,6 @@ from typing import Any
 
 import yaml
 
-
 ROOT = Path(__file__).resolve().parents[3]
 PRIMARY_DIR = ROOT / "flavor_catalog/processes/beauty"
 SECONDARY_DIR = ROOT / "flavor_catalog/processes/secondary/beauty"

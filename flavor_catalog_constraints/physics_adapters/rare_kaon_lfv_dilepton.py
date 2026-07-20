@@ -23,19 +23,23 @@ loop-induced LFV is deferred.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, replace
 import math
+from dataclasses import dataclass, field, replace
 from typing import Any, Mapping
 
 from quarkConstraints.deltaf2 import M_K
+from quarkConstraints.rs_semileptonic_wilsons import (
+    RSLFVSemileptonicWilsonCoefficients,
+    RSSemileptonicWilsonBundle,
+)
 
 from .rare_kaon_dilepton import (
-    QuarkMassBasisCouplings,
     RARE_KAON_DILEPTON_INPUT_BUNDLE_V1,
     RARE_KAON_DILEPTON_MODEL_V1,
     RARE_KAON_DILEPTON_OPERATOR_CONVENTION,
     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION,
     RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+    QuarkMassBasisCouplings,
     RareKaonDileptonSMInputs,
     RareKaonDileptonWilsonCoefficients,
     rare_kaon_dilepton_ckm_factors,
@@ -43,10 +47,6 @@ from .rare_kaon_dilepton import (
     rare_kaon_dilepton_g_sm_squared,
     rare_kaon_dilepton_kappa_mu,
     rare_kaon_dilepton_wilsons_from_couplings,
-)
-from quarkConstraints.rs_semileptonic_wilsons import (
-    RSLFVSemileptonicWilsonCoefficients,
-    RSSemileptonicWilsonBundle,
 )
 
 RARE_KAON_LFV_DILEPTON_MODEL_V1 = "rare_kaon_lfv_klong_emu_proxy_v1"
@@ -427,8 +427,6 @@ def rare_kaon_lfv_wilsons_from_rs_semileptonic(
     lambda_ckm = complex(coeff.lambda_ckm)
     left_vector_contact = complex(coeff.contact_LL + coeff.contact_LR)
     right_vector_contact = complex(coeff.contact_RL + coeff.contact_RR)
-    left_axial_contact = complex(coeff.contact_LR - coeff.contact_LL)
-    right_axial_contact = complex(coeff.contact_RR - coeff.contact_RL)
     return RareKaonLFVWilsonCoefficients(
         model_label=coeff.model_label,
         base_model_label=RARE_KAON_DILEPTON_MODEL_V1,

@@ -33,8 +33,8 @@ available bottom-vs-light overlap non-universality onto
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, replace
 import math
+from dataclasses import dataclass, field, replace
 from typing import Mapping
 
 import numpy as np
@@ -342,7 +342,7 @@ def zbb_coupling_shift_proxy(
     p = default_sm_inputs() if inputs is None else inputs
     resolved_m_kk = _positive_float(
         "m_kk_gev",
-        getattr(source, "M_KK") if m_kk_gev is None else m_kk_gev,
+        source.M_KK if m_kk_gev is None else m_kk_gev,
     )
     left_overlap = _overlap_matrix(source, "left_overlap", "left_down")
     right_overlap = _overlap_matrix(source, "right_down_overlap", "right_down")
@@ -711,7 +711,7 @@ def down_fcnc_coupling_proxy(
     second_index = _DOWN_FCNC_FLAVOR_INDEX[second]
     resolved_m_kk = _positive_float(
         "m_kk_gev",
-        getattr(source, "M_KK") if m_kk_gev is None else m_kk_gev,
+        source.M_KK if m_kk_gev is None else m_kk_gev,
     )
     left_overlap = _overlap_matrix(source, "left_overlap", "left_down")
     right_overlap = _overlap_matrix(source, "right_down_overlap", "right_down")

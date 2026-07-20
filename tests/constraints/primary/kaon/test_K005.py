@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import math
-from pathlib import Path
 import re
+from pathlib import Path
 
 import pytest
 import yaml
@@ -12,10 +12,10 @@ import yaml
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
-from flavor_catalog_constraints.primary.kaon import K005 as k005_module
 from flavor_catalog_constraints.physics_adapters.rare_kaon import (
     klong_pi0_nunu_from_rs_semileptonic_wilsons,
 )
+from flavor_catalog_constraints.primary.kaon import K005 as k005_module
 from tests.constraints.primary.nunu_phase4d_helpers import (
     direct_contact_x_np,
     nunu_block,

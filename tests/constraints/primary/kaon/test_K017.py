@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -13,14 +13,14 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.kaon import K017 as k017_module
+from quarkConstraints.leptonic_tree import (
+    evaluate_leptonic_lfu_ratio,
+    kplus_enu_over_munu_inputs_from_sm_ratio_anchor,
+)
 from tests.constraints.charged_current_phase5b_helpers import (
     charged_with_epsilon,
     sample_charged_point,
     universal_charged_point,
-)
-from quarkConstraints.leptonic_tree import (
-    evaluate_leptonic_lfu_ratio,
-    kplus_enu_over_munu_inputs_from_sm_ratio_anchor,
 )
 
 _PID = "K017"

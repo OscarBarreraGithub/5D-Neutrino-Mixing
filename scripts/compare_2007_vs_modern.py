@@ -163,7 +163,8 @@ def write_superseded_markdown(records, agg, outdir):
         '## What remains valid',
         '',
         '- The input scan rows can be summarized under the modern scan convention.',
-        '- Modern acceptance is the stored scan gate: fit success, verifier gates, and ratio gates.',
+        '- Modern acceptance is the stored scan gate: '
+        'fit success, verifier gates, and ratio gates.',
         '- The stored B_d, B_s, and D0 ratios are hadronic |M12|/budget quantities in GeV.',
         '',
         '## What is not computed',

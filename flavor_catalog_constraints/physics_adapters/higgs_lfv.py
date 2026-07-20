@@ -21,12 +21,26 @@ from quarkConstraints.higgs_lfv import (
     HiggsLFVInputs,
     HiggsLFVYukawaProxy,
     HiggsLFVYukawaProxyInput,
+)
+from quarkConstraints.higgs_lfv import (
     default_higgs_lfv_inputs as _default_inputs,
+)
+from quarkConstraints.higgs_lfv import (
     h_lfv_branching_fraction_from_yukawas as _branching_from_yukawas,
+)
+from quarkConstraints.higgs_lfv import (
     h_lfv_branching_fraction_with_proxy as _branching_with_proxy,
+)
+from quarkConstraints.higgs_lfv import (
     h_lfv_effective_yukawa_limit as _effective_yukawa_limit,
+)
+from quarkConstraints.higgs_lfv import (
     h_lfv_partial_width as _partial_width,
+)
+from quarkConstraints.higgs_lfv import (
     h_lfv_yukawa_proxy as _yukawa_proxy,
+)
+from quarkConstraints.higgs_lfv import (
     h_lfv_yukawa_proxy_input as _proxy_input,
 )
 

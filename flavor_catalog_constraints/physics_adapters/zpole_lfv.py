@@ -12,20 +12,32 @@ kept for older callers, but T015-T017 do not use them.
 
 from __future__ import annotations
 
+from quarkConstraints.zpole import ZPoleSMInputs
 from quarkConstraints.zpole_lfv import (
     ZPOLE_LFV_MODEL_V1,
     ZPOLE_LFV_PROXY_V1,
     ZPoleLFVBranchingResult,
     ZPoleLFVCouplingProxy,
     ZPoleLFVProxyInput,
+)
+from quarkConstraints.zpole_lfv import (
     sm_total_width_weight as _sm_total_width_weight,
+)
+from quarkConstraints.zpole_lfv import (
     z_lfv_branching_fraction_from_couplings as _branching_from_couplings,
+)
+from quarkConstraints.zpole_lfv import (
     z_lfv_branching_fraction_with_proxy as _branching_with_proxy,
+)
+from quarkConstraints.zpole_lfv import (
     z_lfv_coupling_proxy as _coupling_proxy,
+)
+from quarkConstraints.zpole_lfv import (
     z_lfv_effective_coupling_limit as _effective_coupling_limit,
+)
+from quarkConstraints.zpole_lfv import (
     z_lfv_proxy_input as _proxy_input,
 )
-from quarkConstraints.zpole import ZPoleSMInputs
 
 __all__ = [
     "ZPOLE_LFV_MODEL_V1",

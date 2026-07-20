@@ -34,9 +34,6 @@ import sys
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from warpConfig.baseParams import MPL, get_warp_params  # noqa: E402
-from warpConfig.wavefuncs import f_IR  # noqa: E402
-
 from quarkConstraints.benchmarks import default_quark_targets, default_spurion_seed  # noqa: E402
 from quarkConstraints.fit import (  # noqa: E402
     _canonicalize_fit_seed,
@@ -63,7 +60,8 @@ from quarkConstraints.scales import (  # noqa: E402
     DEFAULT_QUARK_TARGET_SCALE_GEV,
     GAUGE_KK_ROOT_NN,
 )
-
+from warpConfig.baseParams import MPL, get_warp_params  # noqa: E402
+from warpConfig.wavefuncs import f_IR  # noqa: E402
 
 DEFAULT_OUTPUT = REPO_ROOT / "artifacts" / "collaborator_direct_affine_5_10tev_points.csv"
 DEFAULT_PROVENANCE = (

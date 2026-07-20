@@ -14,8 +14,8 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.collider_rs import CR007 as cr007_module
-from quarkConstraints.scales import GAUGE_KK_ROOT_NN, SPIN2_GRAVITON_KK_ROOT
 from quarkConstraints import collider_resonance as core
+from quarkConstraints.scales import GAUGE_KK_ROOT_NN, SPIN2_GRAVITON_KK_ROOT
 
 _PID = "CR007"
 _ACTIVE_VALUE_ID = "PDG2025:CR007:bulk_graviton_diboson_mass_kMpl_0p5"

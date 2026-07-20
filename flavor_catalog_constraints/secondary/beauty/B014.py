@@ -41,8 +41,8 @@ sidecar, not hardcoded in this constraint.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 from flavor_catalog_constraints.anchors import (
@@ -59,8 +59,8 @@ from flavor_catalog_constraints.base import (
 )
 from flavor_catalog_constraints.physics_adapters.bsgamma import (
     BSGAMMA_RS_MATCHING_ASSUMPTION_V1,
-    bsgamma_default_sm_inputs,
     bdgamma_ckm_factors,
+    bsgamma_default_sm_inputs,
     exclusive_bdrhogamma_from_couplings,
     exclusive_bdrhogamma_sm_branching_fraction,
 )

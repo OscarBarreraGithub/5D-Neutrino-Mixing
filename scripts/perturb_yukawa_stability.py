@@ -1,9 +1,11 @@
 import sys; sys.path.insert(0,".")
-import numpy as np, math
-from warpConfig.wavefuncs import f_IR
-from scripts.anarchic_bauer_s1 import _draw_bauer_matrix, _fn_c_values, SCENARIOS, DEFAULT_K_GEV
+
+import numpy as np
+
+from scripts.anarchic_bauer_s1 import DEFAULT_K_GEV, SCENARIOS, _draw_bauer_matrix, _fn_c_values
 from scripts.instrument_epsK_phase import _instrument_draw, draw_nelson_barr_yukawas
 from scripts.run_rs_anarchy import _load_pdg_targets
+from warpConfig.wavefuncs import f_IR
 
 targets=_load_pdg_targets(); sc=SCENARIOS["S1"]; ymax=sc["y_max"]
 MKK=3000.0; xi=1.0; eps=MKK/xi/DEFAULT_K_GEV

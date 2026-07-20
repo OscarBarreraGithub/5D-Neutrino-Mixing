@@ -21,8 +21,8 @@ loader and converts it to GeV before building the ``Delta m_K^exp / 2`` budget.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Mapping
 
 from scipy import constants

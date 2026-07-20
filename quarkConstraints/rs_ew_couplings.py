@@ -14,6 +14,9 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
+from warpConfig.baseParams import V_EWSB
+from warpConfig.wavefuncs import f_IR
+
 from .casagrande_profiles import (
     casagrande_cghnp_B_profile as _casagrande_zbb_B_profile,
 )
@@ -23,9 +26,6 @@ from .rs_ew_spectrum import (
     DEFAULT_OVERLAP_RTOL,
     RSEWSpectrum,
 )
-from warpConfig.baseParams import V_EWSB
-from warpConfig.wavefuncs import f_IR
-
 
 RS_EW_COUPLINGS_INPUT_BUNDLE_V1 = "quarkConstraints.rs_ew_couplings.inputs.v1"
 RS_EW_COUPLINGS_MODEL_V1 = "RS_EW_NEUTRAL_CURRENT_PHASE4A_V1"
@@ -546,16 +546,16 @@ def build_rs_lepton_mass_basis_couplings(
 
     from neutrinos.neutrinoValues import get_pmns
 
-    params = dict(getattr(yukawa_result, "params"))
+    params = dict(yukawa_result.params)
     k = _positive_float(params["k"], "k")
     c_l = _broadcast_real_triplet(params["c_L"], "c_L")
     c_e = _readonly_real_triplet(params["c_E"], "c_E")
     c_n = _broadcast_real_triplet(params["c_N"], "c_N")
     m_n = _positive_float(params["M_N"], "M_N")
-    y_e_bar = _readonly_complex_triplet(getattr(yukawa_result, "Y_E_bar"), "Y_E_bar")
-    y_n_bar = _readonly_complex_triplet(getattr(yukawa_result, "Y_N_bar"), "Y_N_bar")
+    y_e_bar = _readonly_complex_triplet(yukawa_result.Y_E_bar, "Y_E_bar")
+    y_n_bar = _readonly_complex_triplet(yukawa_result.Y_N_bar, "Y_N_bar")
     y_n_matrix = _readonly_complex_matrix(
-        getattr(yukawa_result, "Y_N_matrix"),
+        yukawa_result.Y_N_matrix,
         "Y_N_matrix",
     )
     ordering = str(params["ordering"])
@@ -578,7 +578,12 @@ def build_rs_lepton_mass_basis_couplings(
         raise ValueError("Y_N_bar_matrix must equal both 2*k*Y_N_matrix and PMNS@diag(Y_N_bar)")
 
     identity = np.eye(3, dtype=np.complex128)
-    if not np.allclose(identity.conjugate().T @ identity, identity, rtol=0.0, atol=rotation_unitarity_tolerance):
+    if not np.allclose(
+        identity.conjugate().T @ identity,
+        identity,
+        rtol=0.0,
+        atol=rotation_unitarity_tolerance,
+    ):
         raise ValueError("identity charged-lepton rotations failed unitarity validation")
     params_with_mkk = dict(params)
     params_with_mkk["M_KK"] = float(kk_ew_mass_gev)
@@ -592,10 +597,10 @@ def build_rs_lepton_mass_basis_couplings(
         c_E=c_e,
         c_N=c_n,
         M_N=m_n,
-        f_L=_broadcast_real_triplet(getattr(yukawa_result, "f_L"), "f_L"),
-        f_E=_readonly_real_triplet(getattr(yukawa_result, "f_E"), "f_E"),
-        f_N=_broadcast_real_triplet(getattr(yukawa_result, "f_N"), "f_N"),
-        f_N_UV=_broadcast_real_triplet(getattr(yukawa_result, "f_N_UV"), "f_N_UV"),
+        f_L=_broadcast_real_triplet(yukawa_result.f_L, "f_L"),
+        f_E=_readonly_real_triplet(yukawa_result.f_E, "f_E"),
+        f_N=_broadcast_real_triplet(yukawa_result.f_N, "f_N"),
+        f_N_UV=_broadcast_real_triplet(yukawa_result.f_N_UV, "f_N_UV"),
         Y_E_bar_vector=y_e_bar,
         Y_E_bar_matrix=np.diag(y_e_bar),
         Y_N_bar_vector=y_n_bar,
@@ -673,7 +678,7 @@ def build_rs_ew_couplings(
     if min_modes >= max_modes:
         raise ValueError("min_overlap_modes must be smaller than max_overlap_modes")
 
-    bulk_state = getattr(quark_fit_result, "bulk_state")
+    bulk_state = quark_fit_result.bulk_state
     c_q = _real_triplet_from_attr(bulk_state, "c_Q")
     c_u = _real_triplet_from_attr(bulk_state, "c_u")
     c_d = _real_triplet_from_attr(bulk_state, "c_d")
@@ -1165,7 +1170,7 @@ def _build_custodial_top_partner_loop_proxy(
             top_partner_loop_mixing_scales=mixings,
         )
 
-    bulk_state = getattr(quark_fit_result, "bulk_state")
+    bulk_state = quark_fit_result.bulk_state
     c_q = _real_triplet_from_attr(bulk_state, "c_Q")
     c_u = _real_triplet_from_attr(bulk_state, "c_u")
     f_q = _profile_triplet_from_attr_or_fallback(
@@ -1185,10 +1190,10 @@ def _build_custodial_top_partner_loop_proxy(
     if m_t <= 0.0:
         raise ValueError("masses_up[2] must be positive for custodial top-partner loops")
 
-    m_kk = _positive_float(getattr(spectrum, "kk_ew_mass_gev"), "spectrum.kk_ew_mass_gev")
-    lambda_ir = _positive_float(getattr(spectrum, "lambda_ir_gev"), "spectrum.lambda_ir_gev")
-    warp_log = _positive_float(getattr(spectrum, "warp_log"), "spectrum.warp_log")
-    epsilon = _positive_float(getattr(spectrum, "epsilon"), "spectrum.epsilon")
+    m_kk = _positive_float(spectrum.kk_ew_mass_gev, "spectrum.kk_ew_mass_gev")
+    lambda_ir = _positive_float(spectrum.lambda_ir_gev, "spectrum.lambda_ir_gev")
+    warp_log = _positive_float(spectrum.warp_log, "spectrum.warp_log")
+    _positive_float(spectrum.epsilon, "spectrum.epsilon")  # validate only
     sin2 = float(inputs.sin2_theta_w)
     c_w2 = 1.0 - sin2
     if c_w2 <= 0.0:
@@ -1458,7 +1463,7 @@ def _profile_triplet_from_attr_or_fallback(
         values = _readonly_real_triplet(getattr(bulk_state, attr_name), attr_name)
     else:
         values = _readonly_real_triplet(
-            f_IR(c_values, _positive_float(getattr(spectrum, "epsilon"), "spectrum.epsilon")),
+            f_IR(c_values, _positive_float(spectrum.epsilon, "spectrum.epsilon")),
             attr_name,
         )
     if np.any(values <= 0.0):
@@ -1534,7 +1539,9 @@ def _custodial_protected_down_left_mask(protect_scope: Any) -> np.ndarray:
         try:
             pairs: Sequence[Any] = list(protect_scope)
         except TypeError as exc:
-            raise ValueError("protect_scope must be a supported string, mask, or index pairs") from exc
+            raise ValueError(
+                "protect_scope must be a supported string, mask, or index pairs"
+            ) from exc
         for pair in pairs:
             if len(pair) != 2:
                 raise ValueError("protect_scope index pairs must have length two")
@@ -1585,7 +1592,7 @@ def _apply_custodial_rs_plr_proxy(
     for i, j in protected_indices:
         left[i, j] = 0.0j
 
-    volume_log = _positive_float(getattr(spectrum, "warp_log"), "spectrum.warp_log")
+    volume_log = _positive_float(spectrum.warp_log, "spectrum.warp_log")
     residual_value = 0.0j
     residual_applied = False
     if bool(custodial_PLR_breaking_residual) and bool(mask[2, 2]):

@@ -43,14 +43,14 @@ Wilsons are present in the data model for future reuse but are zero here.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Mapping
 
 import numpy as np
 
 from .couplings import QuarkMassBasisCouplings
-from .deltaf2 import F_BD, F_BS, M_BD, M_BS, M_B_QUARK, M_D_QUARK_BD, M_S_QUARK_BS
+from .deltaf2 import F_BD, F_BS, M_B_QUARK, M_BD, M_BS, M_D_QUARK_BD, M_S_QUARK_BS
 from .model import RotationParameters, ckm_like_unitary
 
 RARE_B_DILEPTON_MODEL_V1 = "rare_b_dilepton_buras_c10_rs_proxy_v1"
@@ -367,7 +367,7 @@ def compute_rare_b_dilepton_wilsons(
     p = default_sm_inputs() if inputs is None else inputs
     meson = p.meson(transition)
     resolved_m_kk = _positive_float(
-        getattr(source, "M_KK") if m_kk_gev is None else m_kk_gev,
+        source.M_KK if m_kk_gev is None else m_kk_gev,
         "m_kk_gev",
     )
     q_idx = meson.light_down_index
@@ -1193,7 +1193,7 @@ __all__.extend(
 # existing b -> s gamma C7 proxy as the dipole term in a normalized partonic
 # inclusive shape.
 
-from . import bsgamma as _bsgamma_core
+from . import bsgamma as _bsgamma_core  # noqa: E402 (append-only section)
 
 RARE_B_DILEPTON_INCLUSIVE_XS_MODEL_V1 = (
     "rare_b_dilepton_b_to_xs_mumu_partonic_c7_c9_c10_proxy_v1"

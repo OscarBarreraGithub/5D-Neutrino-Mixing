@@ -77,11 +77,18 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from warpConfig.wavefuncs import f_IR  # noqa: E402
 from scripts.anarchic_bauer_s1 import (  # noqa: E402  -- reuse the EXACT draw machinery
-    BAUER_REPO_MASS_PREFAC_GEV, DEFAULT_K_GEV, DEFAULT_XI_KK, SCENARIOS,
-    _deltaf2_helpers, _draw_bauer_matrix, _fn_c_values, _run_rs_anarchy_helpers,
+    BAUER_REPO_MASS_PREFAC_GEV,
+    DEFAULT_K_GEV,
+    DEFAULT_XI_KK,
+    SCENARIOS,
+    _deltaf2_helpers,
+    _draw_bauer_matrix,
+    _fn_c_values,
+    _run_rs_anarchy_helpers,
 )
+from warpConfig.wavefuncs import f_IR  # noqa: E402
+
 # RS-EW build knobs -- MUST match scripts/run_full_catalog_scan.py defaults so
 # the Z->bb shift is the same object the fitted-point plots use.
 K_GEV = 1.2209e19
@@ -142,12 +149,15 @@ def _worker_init():
     """Per-process one-time setup: PDG targets + Z-pole SM-fit reference."""
     from flavor_catalog_constraints import registry
     registry.discover()
-    from flavor_catalog_constraints.primary.top_higgs_ew.T010 import (
-        _load_t010_anchor, _RB_OBSERVABLE, _AB_OBSERVABLE,
-    )
     from flavor_catalog_constraints.physics_adapters.zpole import (
-        zpole_default_sm_inputs, zpole_inputs_with_bottom_radiator,
+        zpole_default_sm_inputs,
+        zpole_inputs_with_bottom_radiator,
         zpole_sm_couplings,
+    )
+    from flavor_catalog_constraints.primary.top_higgs_ew.T010 import (
+        _AB_OBSERVABLE,
+        _RB_OBSERVABLE,
+        _load_t010_anchor,
     )
     _, _, _load_pdg_targets, _ = _run_rs_anarchy_helpers()
     anc = _load_t010_anchor("T010")
@@ -165,11 +175,12 @@ def _worker_init():
 
 def _run_tile(job):
     """One (scenario, M_KK_TeV, seed) tile -> list of row dicts."""
+    from flavor_catalog_constraints.physics_adapters.zpole import (
+        zpole_evaluate_quark,
+        zpole_shifted_couplings,
+    )
     from quarkConstraints.rs_ew_couplings import build_rs_ew_couplings
     from quarkConstraints.rs_ew_spectrum import RSEWSpectrum
-    from flavor_catalog_constraints.physics_adapters.zpole import (
-        zpole_shifted_couplings, zpole_evaluate_quark,
-    )
     _ordered_svd, _build_kk_gluon_couplings, _, jarlskog_invariant = (
         _run_rs_anarchy_helpers()
     )

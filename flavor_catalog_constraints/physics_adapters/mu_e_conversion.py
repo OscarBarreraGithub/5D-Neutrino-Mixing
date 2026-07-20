@@ -24,14 +24,32 @@ from quarkConstraints.mu_e_conversion import (
     MuEConversionCoefficientProxyInput,
     MuEConversionNuclearInputs,
     MuEConversionResult,
+)
+from quarkConstraints.mu_e_conversion import (
     aluminum_nuclear_inputs as _aluminum_nuclear_inputs,
+)
+from quarkConstraints.mu_e_conversion import (
     gold_nuclear_inputs as _gold_nuclear_inputs,
+)
+from quarkConstraints.mu_e_conversion import (
     mu_e_conversion_coefficients as _coefficients,
+)
+from quarkConstraints.mu_e_conversion import (
     mu_e_conversion_from_components as _from_components,
+)
+from quarkConstraints.mu_e_conversion import (
     mu_e_conversion_has_coefficient_proxy as _has_coefficient_proxy,
+)
+from quarkConstraints.mu_e_conversion import (
     mu_e_conversion_proxy_input as _proxy_input,
+)
+from quarkConstraints.mu_e_conversion import (
     nuclear_inputs_for_target as _nuclear_inputs_for_target,
+)
+from quarkConstraints.mu_e_conversion import (
     titanium_nuclear_inputs as _titanium_nuclear_inputs,
+)
+from quarkConstraints.mu_e_conversion import (
     zero_mu_e_conversion_coefficients as _zero_coefficients,
 )
 

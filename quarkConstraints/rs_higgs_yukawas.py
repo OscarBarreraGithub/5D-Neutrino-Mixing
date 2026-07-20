@@ -8,8 +8,8 @@ non-diagonal charged-lepton structure through the mass-basis lepton object.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any, Mapping
 
@@ -17,7 +17,6 @@ import numpy as np
 
 from quarkConstraints.casagrande_profiles import casagrande_cghnp_B_profile
 from yukawa.constants import LEPTON_MASSES
-
 
 RS_HIGGS_YUKAWA_INPUT_BUNDLE_V1 = "quarkConstraints.rs_higgs_yukawas.inputs.v1"
 RS_HIGGS_YUKAWA_MODEL_V1 = "RS_HIGGS_YUKAWA_PHASE6B_V1"

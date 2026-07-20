@@ -14,8 +14,8 @@ Two scales coexist and must stay orthogonal:
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 from qcd.constants import M_TOP_MS
 

@@ -18,8 +18,8 @@ comparison helper for tests or future diagnostics.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any
 
 __all__ = [

@@ -15,8 +15,8 @@ chosen "NP room" reported by the constraint.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 __all__ = [
     "CHARM_DIRECT_CP_STUB_MODEL_V1",

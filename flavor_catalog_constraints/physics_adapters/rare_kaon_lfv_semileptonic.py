@@ -16,18 +16,20 @@ loop-induced LFV is deferred.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field, replace
 from functools import lru_cache
-import math
 from typing import Any, Mapping
 
 import numpy as np
 
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
+
 from .rare_kaon_dilepton import (
-    QuarkMassBasisCouplings,
     RARE_KAON_DILEPTON_INPUT_BUNDLE_V1,
     RARE_KAON_DILEPTON_MODEL_V1,
     RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+    QuarkMassBasisCouplings,
     RareKaonDileptonSMInputs,
     RareKaonDileptonWilsonCoefficients,
     rare_kaon_dilepton_ckm_factors,
@@ -46,7 +48,6 @@ from .rare_kaon_lfv_dilepton import (
     rare_kaon_lfv_proxy_input,
     rare_kaon_lfv_rs_semileptonic_diagnostics,
 )
-from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
 
 RARE_KAON_KTOPI_EMU_MODEL_V1 = "rare_kaon_kplus_piplus_emu_lfv_form_factor_proxy_v1"
 RARE_KAON_KTOPI_EMU_INPUT_BUNDLE_V1 = (

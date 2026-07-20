@@ -20,8 +20,8 @@ calculation is performed here.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any
 
 __all__ = [

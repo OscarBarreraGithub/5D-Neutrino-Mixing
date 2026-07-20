@@ -16,9 +16,17 @@ from quarkConstraints.collider_resonance import (
     ColliderResonanceComparison,
     ColliderResonanceLimit,
     ColliderResonancePrediction,
+)
+from quarkConstraints.collider_resonance import (
     evaluate_resonance_limit as _evaluate_resonance_limit,
+)
+from quarkConstraints.collider_resonance import (
     kk_gluon_prediction_from_m_kk_gev as _kk_gluon_prediction_from_m_kk_gev,
+)
+from quarkConstraints.collider_resonance import (
     kk_mass_tev_from_m_kk_gev as _kk_mass_tev_from_m_kk_gev,
+)
+from quarkConstraints.collider_resonance import (
     mass_from_source_gev as _mass_from_source_gev,
 )
 

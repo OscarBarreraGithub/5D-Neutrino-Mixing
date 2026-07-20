@@ -16,8 +16,8 @@ non-vetoing.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 __all__ = [
     "B_TO_PHI_KS_NONLEPTONIC_STUB_MODEL_V1",

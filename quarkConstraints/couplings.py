@@ -26,7 +26,6 @@ from .scales import (
     assert_kk_gluon_mass_convention,
 )
 
-
 COUPLING_POLICY_PERTURBATIVE_4D_LEGACY = "perturbative_4d_legacy"
 COUPLING_POLICY_FIXED_GSSTAR_3 = "fixed_gsstar_3"
 COUPLING_POLICY_RS_VOLUME_SQRT2L_PHYSICAL = "rs_volume_sqrt2L_physical"

@@ -6,11 +6,14 @@ anisotropy A=dcrit(re)/dcrit(im), the budget exponent p (dcrit ~ eps_max^p:
 0=symmetry, 1=accident), and d_sym (fraction of real dirs with eps_K identically 0).
 Reuses _instrument_draw for the eps_K eval. Two budgets via ratio thresholds."""
 import sys; sys.path.insert(0,".")
-import numpy as np, math
-from warpConfig.wavefuncs import f_IR
-from scripts.anarchic_bauer_s1 import _draw_bauer_matrix, _fn_c_values, SCENARIOS, DEFAULT_K_GEV
-from scripts.instrument_epsK_phase import _instrument_draw, draw_nelson_barr_yukawas, _rms
+import math
+
+import numpy as np
+
+from scripts.anarchic_bauer_s1 import DEFAULT_K_GEV, SCENARIOS, _draw_bauer_matrix, _fn_c_values
+from scripts.instrument_epsK_phase import _instrument_draw, _rms, draw_nelson_barr_yukawas
 from scripts.run_rs_anarchy import _load_pdg_targets
+from warpConfig.wavefuncs import f_IR
 
 targets=_load_pdg_targets(); sc=SCENARIOS["S1"]; ymax=sc["y_max"]
 MKK=3000.0; xi=1.0; epsG=MKK/xi/DEFAULT_K_GEV; mf,cf,jf=3.0,3.0,10.0
@@ -41,7 +44,7 @@ def gen_Z(rng,kind):
     else: Z=(rng.normal(size=(3,3))+1j*rng.normal(size=(3,3)))/np.sqrt(2)
     return Z/ (np.linalg.norm(Z)+1e-30)
 def dcrit(Yu,Yd,f,rng,kind,thr,ndir=96):
-    sY=_rms(Yd); deltas=np.geomspace(1e-5,1.0,26); 
+    sY=_rms(Yd); deltas=np.geomspace(1e-5,1.0,26) 
     for d in deltas:
         npass=0
         for _ in range(ndir):

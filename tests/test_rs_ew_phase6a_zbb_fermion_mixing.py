@@ -1,8 +1,8 @@
-import math
 import importlib.util
+import math
+import sys
 from dataclasses import dataclass
 from pathlib import Path
-import sys
 
 import numpy as np
 import pytest
@@ -15,7 +15,6 @@ from quarkConstraints.rs_ew_couplings import (
 )
 from quarkConstraints.rs_ew_spectrum import RSEWSpectrum
 from warpConfig.wavefuncs import f_IR
-
 
 GAUGE_ROOT_EPS_1E_MINUS_15 = 2.450509663813736
 EPSILON_RS = 1.0e-15

@@ -35,8 +35,8 @@ checked with typed, loud list-entry validation.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Iterable, Mapping
 
 from flavor_catalog_constraints import anchors as anchor_scaffold

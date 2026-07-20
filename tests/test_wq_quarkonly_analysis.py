@@ -6,7 +6,6 @@ from pathlib import Path
 
 import pytest
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = REPO_ROOT / "scripts" / "analyze_wq_quarkonly.py"
 PLAN_PATH = REPO_ROOT / "scripts" / "wq_quarkonly_1m_plan.py"

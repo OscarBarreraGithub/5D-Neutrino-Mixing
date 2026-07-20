@@ -46,10 +46,10 @@ anchors must live under T011 and load through the scaffold ``load_anchor`` path.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
-from pathlib import Path
 import re
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from flavor_catalog_constraints import anchors as anchor_scaffold
@@ -866,7 +866,7 @@ class Constraint:
                 rs_ew_couplings, "matching_assumption", None
             ),
             "rs_ew_model_label": getattr(rs_ew_couplings, "model_label", None),
-            "rs_ew_kk_mass_gev": float(getattr(rs_ew_couplings, "kk_ew_mass_gev")),
+            "rs_ew_kk_mass_gev": float(rs_ew_couplings.kk_ew_mass_gev),
             "delta_g_left_b": complex(delta_g_left_b),
             "delta_g_right_b": complex(delta_g_right_b),
             "shifted_zbb_couplings": {

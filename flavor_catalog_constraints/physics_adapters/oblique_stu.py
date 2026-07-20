@@ -17,8 +17,8 @@ from quarkConstraints.oblique_stu import (
     custodial_rs_plr_t_coefficient,
     evaluate_rs_oblique_proxy,
     minimal_rs_t_coefficient,
-    rs_oblique_t_coefficient,
     rs_minimal_oblique_proxy,
+    rs_oblique_t_coefficient,
 )
 
 __all__ = [

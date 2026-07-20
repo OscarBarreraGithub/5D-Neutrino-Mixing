@@ -16,7 +16,6 @@ from solvers.bessel import solve_kk
 from warpConfig.baseParams import get_warp_params
 from warpConfig.wavefuncs import f_IR, f_UV
 
-
 LAMBDA_IR_GEV = 3000.0
 EPSILON_RS = 1.0e-15
 K_GEV = LAMBDA_IR_GEV / EPSILON_RS

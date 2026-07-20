@@ -22,9 +22,9 @@ quark-side matching are reused from C007/C004.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from functools import lru_cache
-import math
 from typing import Any, Mapping
 
 import numpy as np

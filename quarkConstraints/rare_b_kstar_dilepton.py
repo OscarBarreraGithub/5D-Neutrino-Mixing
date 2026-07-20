@@ -29,8 +29,8 @@ RS prediction needs electroweak KK/Z/Z' and lepton-sector inputs not carried by
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Mapping
 
 from .couplings import QuarkMassBasisCouplings

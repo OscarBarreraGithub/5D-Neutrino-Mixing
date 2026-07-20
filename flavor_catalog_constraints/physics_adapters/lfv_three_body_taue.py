@@ -14,8 +14,8 @@ fraction or chiral dipole amplitude in the low-energy convention.
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 from typing import Any, Mapping
 
 import numpy as np
@@ -30,10 +30,20 @@ from quarkConstraints.lfv_three_body import (
     LFVThreeBodyContactAmplitudes,
     LFVThreeBodyContactProxyInput,
     LFVThreeBodySMInputs,
+)
+from quarkConstraints.lfv_three_body import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.lfv_three_body import (
     lfv_three_body_contact_amplitudes as _contact_amplitudes,
+)
+from quarkConstraints.lfv_three_body import (
     lfv_three_body_from_components as _from_components,
+)
+from quarkConstraints.lfv_three_body import (
     lfv_three_body_has_contact_proxy as _has_contact_proxy,
+)
+from quarkConstraints.lfv_three_body import (
     lfv_three_body_proxy_input as _proxy_input,
 )
 

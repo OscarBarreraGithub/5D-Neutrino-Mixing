@@ -9,7 +9,6 @@ import shlex
 from dataclasses import asdict, dataclass
 from typing import Sequence
 
-
 R_GRID = (0.05, 0.10, 0.25, 0.50, 1.00)
 M_KK_TEV = (1.0, 2.0, 3.0, 5.0, 7.0, 10.0, 15.0, 20.0, 30.0, 50.0)
 DRAWS_PER_MKK_PER_R = 20_000

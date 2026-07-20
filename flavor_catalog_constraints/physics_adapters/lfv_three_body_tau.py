@@ -12,8 +12,8 @@ four-lepton boxes remain deferred.
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 from typing import Any, Mapping
 
 from quarkConstraints.lfv_three_body import (
@@ -26,15 +26,25 @@ from quarkConstraints.lfv_three_body import (
     LFVThreeBodyContactAmplitudes,
     LFVThreeBodyContactProxyInput,
     LFVThreeBodySMInputs,
+)
+from quarkConstraints.lfv_three_body import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.lfv_three_body import (
     lfv_three_body_from_components as _from_components,
+)
+from quarkConstraints.lfv_three_body import (
     lfv_three_body_proxy_input as _proxy_input,
 )
 
 from .lfv_three_body import (
     LFV_THREE_BODY_DEFERRED_PIECES_V1,
     LFV_THREE_BODY_TREE_CONTACT_RIGOROUS_V1,
+)
+from .lfv_three_body import (
     lfv_three_body_contact_amplitudes as _adapter_contact_amplitudes,
+)
+from .lfv_three_body import (
     lfv_three_body_has_tree_contact_input as _has_tree_contact_input,
 )
 

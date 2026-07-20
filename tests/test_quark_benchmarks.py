@@ -3,7 +3,6 @@
 import warnings
 
 import numpy as np
-import pytest
 
 from qcd.constants import M_TOP_MS
 from quarkConstraints.benchmarks import (

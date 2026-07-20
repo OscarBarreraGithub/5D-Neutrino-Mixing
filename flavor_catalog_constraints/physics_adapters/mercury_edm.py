@@ -19,8 +19,8 @@ limit loaded by the constraint from the catalog sidecar.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 __all__ = [
     "MERCURY_EDM_STUB_MODEL_V1",

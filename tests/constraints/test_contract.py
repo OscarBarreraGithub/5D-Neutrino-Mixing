@@ -245,7 +245,10 @@ def test_constraint_result_rejects_complex_numeric_field():
     )
 
 
-@pytest.mark.parametrize("field,value", [("ratio", math.nan), ("predicted", math.inf), ("budget", -math.inf)])
+@pytest.mark.parametrize(
+    "field,value",
+    [("ratio", math.nan), ("predicted", math.inf), ("budget", -math.inf)],
+)
 def test_constraint_result_rejects_non_finite_numeric_field(field, value):
     kwargs = {
         "process_id": "K001",

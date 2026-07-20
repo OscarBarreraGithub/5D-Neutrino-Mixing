@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
-from pathlib import Path
 import re
+from dataclasses import replace
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -15,14 +15,14 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
+from flavor_catalog_constraints.primary.top_higgs_ew import T018 as t018_module
+from quarkConstraints.higgs_lfv import (
+    h_lfv_branching_fraction_from_yukawas as core_h_lfv_branching_fraction_from_yukawas,
+)
 from tests.constraints.primary.top_higgs_ew.higgs_lfv_phase6b_helpers import (
     constraint_point_with_pair,
     diagonal_constraint_point,
     live_higgs_yukawas,
-)
-from flavor_catalog_constraints.primary.top_higgs_ew import T018 as t018_module
-from quarkConstraints.higgs_lfv import (
-    h_lfv_branching_fraction_from_yukawas as core_h_lfv_branching_fraction_from_yukawas,
 )
 
 _PID = "T018"

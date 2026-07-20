@@ -152,7 +152,7 @@ def main():
             row = "  ".join(f"{np.median(Y[(f, i, j)]):8.4f}" for j in (1, 2, 3))
             print(f"   i={i}:  {row}")
     print()
-    print(f"=== Per-point spread of log10|Y_off| (single-r would be ~0) ===")
+    print("=== Per-point spread of log10|Y_off| (single-r would be ~0) ===")
     print(f"  Y_u: median {np.median(std_per_point_u):.3f} dex, "
           f"95% {np.percentile(std_per_point_u, 95):.3f} dex")
     print(f"  Y_d: median {np.median(std_per_point_d):.3f} dex, "

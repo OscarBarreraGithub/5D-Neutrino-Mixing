@@ -14,19 +14,27 @@ small |C4| (magnitude) or small sin(Phi) (phase).  Now we can tell which, exactl
 RESEARCH TOOL (run RS-FLAVOR-ALIGNMENT-2026-07). Not wired into production.
 """
 from __future__ import annotations
-import argparse, math
+
+import argparse
+import math
+
 import numpy as np
 import pandas as pd
 
-from warpConfig.wavefuncs import f_IR
 from scripts.anarchic_bauer_s1 import (
-    _draw_bauer_matrix, _fn_c_values, SCENARIOS,
-    DEFAULT_K_GEV, DEFAULT_V_GEV,
+    DEFAULT_K_GEV,
+    DEFAULT_V_GEV,
+    SCENARIOS,
+    _draw_bauer_matrix,
+    _fn_c_values,
 )
 from scripts.run_rs_anarchy import (
-    _ordered_svd, _build_kk_gluon_couplings, _load_pdg_targets,
+    _build_kk_gluon_couplings,
+    _load_pdg_targets,
+    _ordered_svd,
     jarlskog_invariant,
 )
+from warpConfig.wavefuncs import f_IR
 
 
 # ---------------------------------------------------------------------------
@@ -83,7 +91,8 @@ def draw_nelson_barr_yukawas(rng, *, y_min=0.1, y_max=3.0, rho_cp=1.0, eta_leak=
                 Y *= perturbative_cap / m
     return Y_u, Y_d
 from quarkConstraints.deltaf2 import (
-    evaluate_delta_f2_constraints, compute_delta_f2_wilsons,
+    compute_delta_f2_wilsons,
+    evaluate_delta_f2_constraints,
     evaluate_delta_mk_with_running,
 )
 

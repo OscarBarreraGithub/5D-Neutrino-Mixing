@@ -38,9 +38,9 @@ scaffold ``load_anchor`` path; no experimental number is hardcoded here.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
 import re
+from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 from flavor_catalog_constraints import anchors as anchor_scaffold
@@ -521,7 +521,7 @@ class Constraint:
             ),
             "rs_ew_model_label": getattr(rs_ew_couplings, "model_label", None),
             "rs_ew_kk_mass_gev": float(
-                getattr(rs_ew_couplings, "kk_ew_mass_gev")
+                rs_ew_couplings.kk_ew_mass_gev
             ),
             "required_parameter_point_extras": [_REQUIRED_EXTRA],
         }

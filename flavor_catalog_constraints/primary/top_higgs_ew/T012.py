@@ -33,8 +33,8 @@ the T012 veto scalar requested here.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 from flavor_catalog_constraints import anchors as anchor_scaffold
@@ -420,7 +420,7 @@ class Constraint:
                 rs_ew_couplings, "matching_assumption", None
             ),
             "rs_ew_model_label": getattr(rs_ew_couplings, "model_label", None),
-            "rs_ew_kk_mass_gev": float(getattr(rs_ew_couplings, "kk_ew_mass_gev")),
+            "rs_ew_kk_mass_gev": float(rs_ew_couplings.kk_ew_mass_gev),
             "delta_g_left_c": complex(delta_g_left_c),
             "delta_g_right_c": complex(delta_g_right_c),
             "shifted_zcc_couplings": {

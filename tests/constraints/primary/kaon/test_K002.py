@@ -7,8 +7,8 @@ from pathlib import Path
 
 import numpy as np
 import pytest
-from scipy import constants
 import yaml
+from scipy import constants
 
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder

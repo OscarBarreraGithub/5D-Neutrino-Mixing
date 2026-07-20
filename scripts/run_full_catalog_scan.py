@@ -53,7 +53,6 @@ from warpConfig.baseParams import MPL
 from warpConfig.wavefuncs import f_IR
 from yukawa.compute_yukawas import YukawaResult, compute_all_yukawas
 
-
 EXPECTED_REGISTRY_COUNT = 103
 QUARK_ONLY_CANDIDATE_IDS = (
     "K001", "K002", "B001", "B002", "B003", "B004", "C001", "C002",
@@ -122,7 +121,12 @@ QUARK_ONLY_ALLOWLIST_EXTRAS: dict[str, tuple[str, ...]] = {
     "T011": ("rs_ew_couplings", "quark_mass_basis_couplings"),
     "T012": ("rs_ew_couplings", "quark_mass_basis_couplings"),
     "T014": ("rs_ew_couplings", "quark_mass_basis_couplings"),
-    "EW001": ("kk_ew_mass_gev", "kk_gluon_mass_gev", "quark_mass_basis_couplings", "rs_ew_couplings"),
+    "EW001": (
+        "kk_ew_mass_gev",
+        "kk_gluon_mass_gev",
+        "quark_mass_basis_couplings",
+        "rs_ew_couplings",
+    ),
     "EW003": ("rs_charged_current",),
     "CR001": ("kk_gluon_mass_gev", "quark_mass_basis_couplings"),
     "CR002": ("quark_mass_basis_couplings",),
@@ -171,7 +175,8 @@ DEFAULT_C_HALF_ATOL = 1.0e-10
 DEFAULT_SPLINE_GRID_SIZE = 241
 DEFAULT_SPLINE_VERIFY_POINTS = 41
 MINIMAL_RS_EW_MODEL = "minimal_rs"
-CUSTODIAL_RS_SU2R_EW_MODEL = "custodial_rs_su2r"  # SU(2)_R protects T only, no P_LR (Z b_L unprotected)
+# SU(2)_R protects T only, no P_LR (Z b_L unprotected)
+CUSTODIAL_RS_SU2R_EW_MODEL = "custodial_rs_su2r"
 CUSTODIAL_RS_PLR_EW_MODEL = "custodial_rs_plr"
 SUPPORTED_EW_MODELS = (
     MINIMAL_RS_EW_MODEL,
@@ -858,7 +863,9 @@ def _draw_lepton_inputs(rng: np.random.Generator, cfg: ScanConfig) -> dict[str, 
     }
 
 
-def _svd_seed_parts(matrix: np.ndarray) -> tuple[np.ndarray, RotationParameters, RotationParameters]:
+def _svd_seed_parts(
+    matrix: np.ndarray,
+) -> tuple[np.ndarray, RotationParameters, RotationParameters]:
     u, s, vh = np.linalg.svd(np.asarray(matrix, dtype=np.complex128), full_matrices=True)
     order = np.argsort(s, kind="mergesort")
     s_sorted = np.asarray(s[order], dtype=float)
@@ -934,7 +941,10 @@ def _require_valid_quark_fit(
     score = float(fit_diagnostics.get("score", math.inf))
     if not math.isfinite(score) or score > cfg.max_fit_score:
         raise RuntimeError(f"quark_fit_score_exceeded:{score:.6g}")
-    max_y = max(float(np.max(np.abs(fit_result.point.Y_u))), float(np.max(np.abs(fit_result.point.Y_d))))
+    max_y = max(
+        float(np.max(np.abs(fit_result.point.Y_u))),
+        float(np.max(np.abs(fit_result.point.Y_d))),
+    )
     if not math.isfinite(max_y) or max_y > cfg.quark_y_abs_max:
         raise RuntimeError(f"nonperturbative_quark_yukawa:{max_y:.6g}")
 
@@ -1153,7 +1163,8 @@ def tag_result(result: ConstraintResult) -> tuple[str, str | None, str | None, d
             "proxy not used",
             "not a proxy",
         )
-        if "rigorous" not in status_text and not any(phrase in status_text for phrase in resolved_proxy_phrases):
+        is_proxyish = any(phrase in status_text for phrase in resolved_proxy_phrases)
+        if "rigorous" not in status_text and not is_proxyish:
             return "proxy", matching_status, needs_human, proxy_flags
     if "recast" in status_text:
         return "proxy", matching_status, needs_human, proxy_flags
@@ -1208,7 +1219,9 @@ def _is_sm_tension_only(result: ConstraintResult) -> bool:
 
 
 def _matching_status(diag: Mapping[str, Any]) -> str | None:
-    status_keys = [key for key in diag if key == "matching_status" or key.endswith("_matching_status")]
+    status_keys = [
+        key for key in diag if key == "matching_status" or key.endswith("_matching_status")
+    ]
     if not status_keys:
         return None
     if len(status_keys) == 1:
@@ -1601,7 +1614,9 @@ def _build_run_summary(
             "active_per_evaluated_point": _safe_div(
                 totals["constraint_active"], totals["n_evaluated_points"]
             ),
-            "exception_rate": _safe_div(totals["constraint_exceptions"], totals["constraint_results"]),
+            "exception_rate": _safe_div(
+                totals["constraint_exceptions"], totals["constraint_results"]
+            ),
             "tag_counts": dict(sorted(tags.items())),
         },
         "top_hard_vetoes_rigorous": rigorous.most_common(20),
@@ -1656,8 +1671,10 @@ def _write_markdown_report(path: Path, summary: Mapping[str, Any]) -> None:
             "- extrapolated 1e8 core-hours per evaluated point: "
             f"{_fmt_optional(timing.get('extrapolated_1e8_core_hours_per_evaluated_point'), 2)}"
         ),
-        f"- evaluated constraints per point: {_fmt_optional(counts.get('evaluated_per_evaluated_point'), 3)}",
-        f"- active constraints per point: {_fmt_optional(counts.get('active_per_evaluated_point'), 3)}",
+        "- evaluated constraints per point: "
+        f"{_fmt_optional(counts.get('evaluated_per_evaluated_point'), 3)}",
+        "- active constraints per point: "
+        f"{_fmt_optional(counts.get('active_per_evaluated_point'), 3)}",
         f"- constraint exception rate: {_fmt_optional(counts.get('exception_rate'), 6)}",
         f"- top rigorous HARD vetoes: {summary.get('top_hard_vetoes_rigorous', [])[:10]}",
         f"- top proxy HARD vetoes: {summary.get('top_hard_vetoes_proxy', [])[:10]}",
@@ -1673,7 +1690,9 @@ def _write_markdown_report(path: Path, summary: Mapping[str, Any]) -> None:
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
-def _completed_summary(path: Path, *, expected_hash: str, expected_draws: int) -> dict[str, Any] | None:
+def _completed_summary(
+    path: Path, *, expected_hash: str, expected_draws: int
+) -> dict[str, Any] | None:
     if not path.is_file():
         return None
     try:
@@ -1788,7 +1807,9 @@ def _build_argparser() -> argparse.ArgumentParser:
     parser.add_argument("--v-gev", type=float, default=DEFAULT_V_GEV)
     parser.add_argument("--base-seed", type=int, default=DEFAULT_BASE_SEED)
     parser.add_argument("--tile-seed-stride", type=int, default=DEFAULT_TILE_SEED_STRIDE)
-    parser.add_argument("--n-workers", type=int, default=int(os.environ.get("SLURM_CPUS_PER_TASK", "1")))
+    parser.add_argument(
+        "--n-workers", type=int, default=int(os.environ.get("SLURM_CPUS_PER_TASK", "1"))
+    )
     parser.add_argument("--no-resume", action="store_true")
     parser.add_argument("--skip-sanity", action="store_true")
     parser.add_argument("--smoke-report", type=str, default=None)
@@ -1805,7 +1826,9 @@ def _build_argparser() -> argparse.ArgumentParser:
     parser.add_argument("--lightest-nu-min-ev", type=float, default=DEFAULT_LIGHTEST_NU_MIN_EV)
     parser.add_argument("--lightest-nu-max-ev", type=float, default=DEFAULT_LIGHTEST_NU_MAX_EV)
     parser.add_argument("--normal-ordering-probability", type=float, default=0.5)
-    parser.add_argument("--perturbative-ybar-max", type=float, default=DEFAULT_PERTURBATIVE_YBAR_MAX)
+    parser.add_argument(
+        "--perturbative-ybar-max", type=float, default=DEFAULT_PERTURBATIVE_YBAR_MAX
+    )
     parser.add_argument("--quark-y-abs-max", type=float, default=DEFAULT_QUARK_Y_ABS_MAX)
     parser.add_argument("--quark-fit-r", type=float, default=DEFAULT_QUARK_FIT_R)
     parser.add_argument("--quark-fit-max-nfev", type=int, default=DEFAULT_QUARK_FIT_MAX_NFEV)
@@ -1923,7 +1946,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         for tile in pending
     ]
     print(f"{log_prefix} output_dir={output_dir}")
-    print(f"{log_prefix} tiles={len(tiles)} pending={len(pending)} n_draws/tile={cfg.n_draws_per_tile}")
+    print(
+        f"{log_prefix} tiles={len(tiles)} pending={len(pending)} "
+        f"n_draws/tile={cfg.n_draws_per_tile}"
+    )
     print(f"{log_prefix} registry_expected={cfg.expected_registry_count} workers={args.n_workers}")
     start = time.perf_counter()
     if worker_payloads:
@@ -1965,7 +1991,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         sanity=sanity,
     )
     summary_path = output_dir / "run_summary.json"
-    summary_path.write_text(json.dumps(run_summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    summary_path.write_text(
+        json.dumps(run_summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     if args.smoke_report:
         Path(args.smoke_report).write_text(
             json.dumps(run_summary, indent=2, sort_keys=True) + "\n",

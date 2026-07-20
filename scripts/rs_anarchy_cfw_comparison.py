@@ -33,12 +33,12 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from quarkConstraints.finite_stats import wilson_upper_limit
 from quarkConstraints.deltaf2 import (
     EPSILON_K_EXP,
     EPSILON_K_SM,
     delta_f2_epsilon_k_budget_policy,
 )
+from quarkConstraints.finite_stats import wilson_upper_limit
 
 DEFAULT_OUT = REPO / "results/figures/quark"
 MKK_TICKS = [1, 2, 3, 5, 10, 20, 30, 50, 100, 200]

@@ -46,9 +46,9 @@ and experimental covariance inputs that are not available on ``ParameterPoint``.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
 import re
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 from flavor_catalog_constraints import anchors as anchor_scaffold

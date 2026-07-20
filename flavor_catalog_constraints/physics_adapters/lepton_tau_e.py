@@ -14,14 +14,16 @@ proxies in the same Perez-Randall NDA normalization used by L001.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 import numpy as np
 
 from flavorConstraints.muToEGamma import (
     check_mu_to_e_gamma as _check_mu_to_e_gamma,
+)
+from flavorConstraints.muToEGamma import (
     check_mu_to_e_gamma_raw as _check_mu_to_e_gamma_raw,
 )
 from quarkConstraints.lfv_three_body import (

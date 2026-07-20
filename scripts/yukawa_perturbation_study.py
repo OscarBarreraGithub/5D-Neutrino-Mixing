@@ -23,21 +23,24 @@ Im(C_4)_12 is recovered as  S = C4abs_12 * sin(Phi_12)  (signed, smooth) from th
 instrumented evaluator, so gradients are well defined even at theta_K~0.
 """
 from __future__ import annotations
-import argparse, math
+
+import argparse
+import math
+import sys
 from pathlib import Path
+
 import numpy as np
 
-import sys
 REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from warpConfig.wavefuncs import f_IR
-from scripts.anarchic_bauer_s1 import _draw_bauer_matrix, _fn_c_values, SCENARIOS, DEFAULT_K_GEV
+from scripts.anarchic_bauer_s1 import DEFAULT_K_GEV, SCENARIOS, _draw_bauer_matrix, _fn_c_values
 from scripts.instrument_epsK_phase import _instrument_draw, draw_nelson_barr_yukawas
-from scripts.run_rs_anarchy import _load_pdg_targets
-from scripts.rankone_u2_lane import _draw_rankone_u2_yukawas, _assign_u2_bulk_masses
+from scripts.rankone_u2_lane import _assign_u2_bulk_masses, _draw_rankone_u2_yukawas
 from scripts.reproducible_seeds import stable_seed_offset
+from scripts.run_rs_anarchy import _load_pdg_targets
+from warpConfig.wavefuncs import f_IR
 
 TARGETS = _load_pdg_targets()
 MKK = 3000.0
@@ -246,10 +249,10 @@ if __name__ == "__main__":
             Sb = s_bound(*pts[c])
             gnorm = np.linalg.norm(g)
             dmin = Sb / gnorm if gnorm > 0 else float("inf")  # tuning radius along steepest dir
-            save[f"grad_{c}"] = g; save[f"gradlabels"] = np.array(labels)
+            save[f"grad_{c}"] = g; save["gradlabels"] = np.array(labels)
             top = np.argsort(-np.abs(g))[:4]
             print(f"\n{c}: |grad|={gnorm:.2e}  S_bound={Sb:.2e}  tuning radius delta_min={dmin:.2e}", flush=True)
-            print(f"   most dangerous entries: " + ", ".join(f"{labels[k]}({g[k]:+.1e})" for k in top), flush=True)
+            print("   most dangerous entries: " + ", ".join(f"{labels[k]}({g[k]:+.1e})" for k in top), flush=True)
 
     if a.part in ("C", "all"):
         print("\n=== C: gradient-direction field, PCA -> dangerous-subspace dimension ===", flush=True)

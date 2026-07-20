@@ -42,7 +42,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import List, Tuple
+from typing import List
 
 import numpy as np
 
@@ -57,7 +57,6 @@ from quarkConstraints.scan import (
     QuarkScanConfig,
     run_quark_scan,
 )
-
 
 _UP_FLAVORS = ("u", "c", "t")
 _DOWN_FLAVORS = ("d", "s", "b")

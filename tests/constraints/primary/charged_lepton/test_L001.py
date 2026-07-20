@@ -12,7 +12,6 @@ import numpy as np
 import pytest
 import yaml
 
-from flavorConstraints import PEREZ_RANDALL_LFV_M_KK_CONVENTION
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
@@ -22,6 +21,7 @@ from flavor_catalog_constraints.physics_adapters.lepton import (
     mu_to_e_gamma_from_lepton_input,
     mu_to_e_gamma_proxy_input,
 )
+from flavorConstraints import PEREZ_RANDALL_LFV_M_KK_CONVENTION
 from yukawa import compute_all_yukawas
 
 _PID = "L001"

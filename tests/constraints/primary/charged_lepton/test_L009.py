@@ -15,14 +15,16 @@ from flavor_catalog_constraints.physics_adapters.lfv_three_body import (
     lfv_three_body_contact_amplitudes as adapter_lfv_three_body_contact_amplitudes,
 )
 from flavor_catalog_constraints.physics_adapters.lfv_three_body_tau import (
-    tau_to_3mu_proxy_input,
     tau_to_3mu_from_lepton_input,
+    tau_to_3mu_proxy_input,
 )
 from quarkConstraints.lfv_three_body import (
     LFV_THREE_BODY_DIPOLE_CONTACT_INTERFERENCE_CONVENTION,
     TAU_TO_MU_NUNU_BRANCHING_FRACTION,
-    lfv_three_body_contact_amplitudes as core_lfv_three_body_contact_amplitudes,
     lfv_three_body_from_components,
+)
+from quarkConstraints.lfv_three_body import (
+    lfv_three_body_contact_amplitudes as core_lfv_three_body_contact_amplitudes,
 )
 
 _PID = "L009"

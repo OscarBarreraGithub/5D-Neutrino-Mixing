@@ -61,6 +61,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
 try:
     from scipy.optimize import brentq as _scipy_brentq
 except Exception:  # noqa: BLE001 -- scipy is optional for the Lane-A CLI helper
@@ -70,9 +71,8 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from warpConfig.wavefuncs import f_IR  # noqa: E402
 from warpConfig.baseParams import MPL  # noqa: E402
-
+from warpConfig.wavefuncs import f_IR  # noqa: E402
 
 DEFAULT_XI_KK = 2.4487
 DEFAULT_K_GEV = MPL
@@ -121,9 +121,9 @@ def _deltaf2_helpers():
             F_BD,
             F_BS,
             F_D,
+            M_B_QUARK,
             M_BD,
             M_BS,
-            M_B_QUARK,
             M_C_QUARK,
             M_D0,
             M_D_QUARK_BD,

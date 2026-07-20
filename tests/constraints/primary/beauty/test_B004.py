@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import cmath
-from dataclasses import replace
 import math
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +16,10 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.beauty import B004 as b004_module
+from quarkConstraints.ckm_extraction import (
+    repo_default_ckm_matrix,
+    repo_default_ckm_phases,
+)
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.deltaf2 import (
     B_1_BS,
@@ -24,17 +28,13 @@ from quarkConstraints.deltaf2 import (
     DEFAULT_DELTA_F2_INPUTS_V1,
     DELTA_M_BS_SM,
     F_BS,
-    M_BS,
     M_B_QUARK,
+    M_BS,
     M_S_QUARK_BS,
+    _evolve_wilsons,
     compute_delta_f2_wilsons,
     compute_m12_np,
     evaluate_bs_mixing_with_running,
-    _evolve_wilsons,
-)
-from quarkConstraints.ckm_extraction import (
-    repo_default_ckm_matrix,
-    repo_default_ckm_phases,
 )
 
 _PID = "B004"

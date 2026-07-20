@@ -48,7 +48,7 @@ import os
 import subprocess
 import sys
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional, Sequence, Tuple
 
@@ -60,17 +60,16 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 from qcd import alpha_s
+from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.deltaf2 import (
     compute_delta_f2_wilsons,
     delta_f2_epsilon_k_budget_policy,
     evaluate_delta_f2_constraints,
     evaluate_delta_mk_with_running,
 )
-from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.fit import jarlskog_invariant
 from warpConfig.baseParams import MPL
 from warpConfig.wavefuncs import f_IR
-
 
 # ---------------------------------------------------------------------------
 # Canonical ACPS-like c-value pattern
@@ -230,7 +229,7 @@ def _draw_anarchic_matrix(
         def _sample_truncated_normal() -> np.ndarray:
             # Draw a (3,3) array with each entry resampled until within cap.
             arr = rng.normal(loc=0.0, scale=sigma, size=(3, 3))
-            for attempt in range(64):
+            for _attempt in range(64):
                 bad = np.abs(arr) > cap
                 if not bad.any():
                     return arr
@@ -788,7 +787,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     print(f"[rs_anarchy] c_u         = {cfg.c_u}")
     print(f"[rs_anarchy] c_d         = {cfg.c_d}")
     if cfg.y_prior == "uniform":
-        print(f"[rs_anarchy] Y prior: uniform; |Y| in [{cfg.y_floor}, sqrt(2)*{cfg.y_half_range}]; iid Re/Im")
+        print(
+            f"[rs_anarchy] Y prior: uniform; "
+            f"|Y| in [{cfg.y_floor}, sqrt(2)*{cfg.y_half_range}]; iid Re/Im"
+        )
     else:
         print(
             f"[rs_anarchy] Y prior: gaussian; sigma={cfg.y_sigma}, "
@@ -825,7 +827,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     rows_path = output_dir / "draws.jsonl"
     summary_path = output_dir / "tile_summary.json"
-    targets = _load_pdg_targets()
+    _load_pdg_targets()  # fail fast if PDG targets are unavailable
 
     cfg_dict = {
         "mkk_values_GeV": list(cfg.mkk_values_GeV),

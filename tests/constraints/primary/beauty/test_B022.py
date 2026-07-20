@@ -12,10 +12,10 @@ import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
-from flavor_catalog_constraints.primary.beauty import B022 as b022_module
 from flavor_catalog_constraints.physics_adapters.rare_b_nunu import (
     bplus_kplus_nunu_from_rs_semileptonic_wilsons,
 )
+from flavor_catalog_constraints.primary.beauty import B022 as b022_module
 from tests.constraints.primary.nunu_phase4d_helpers import (
     direct_contact_x_np,
     nunu_block,

@@ -39,8 +39,8 @@ the expected value IDs or units are missing.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 from flavor_catalog_constraints import anchors as anchor_scaffold
@@ -53,9 +53,9 @@ from flavor_catalog_constraints.anchors import (
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.vbs_longitudinal import (
     HUMAN_SUPPLIED_SIGMA_RAW_KEY,
-    VBSFiducialLimit,
     VBS_LONGITUDINAL_RS_MATCHING_GAP_V1,
     VBS_LONGITUDINAL_SM_EFT_GAP_V1,
+    VBSFiducialLimit,
     compare_vbs_fiducial_limit,
     human_prediction_from_raw,
 )

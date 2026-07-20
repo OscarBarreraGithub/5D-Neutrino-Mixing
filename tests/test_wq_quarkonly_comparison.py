@@ -8,7 +8,6 @@ from pathlib import Path
 
 import pyarrow.parquet as pq
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = REPO_ROOT / "scripts" / "build_wq_quarkonly_comparison.py"
 

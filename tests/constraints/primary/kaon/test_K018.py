@@ -13,14 +13,14 @@ from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.anchors import Anchor, AnchorError
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.primary.kaon import K018 as k018_module
+from quarkConstraints.ckm_extraction import (
+    extract_vus_from_kl3,
+    vus_consistency_pull,
+)
 from tests.constraints.charged_current_phase5b_helpers import (
     charged_with_epsilon,
     sample_charged_point,
     universal_charged_point,
-)
-from quarkConstraints.ckm_extraction import (
-    extract_vus_from_kl3,
-    vus_consistency_pull,
 )
 
 _PID = "K018"

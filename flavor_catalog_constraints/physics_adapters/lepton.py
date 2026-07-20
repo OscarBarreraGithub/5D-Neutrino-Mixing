@@ -11,16 +11,22 @@ supported and are still flagged in diagnostics.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 import numpy as np
 
 from flavorConstraints.muToEGamma import (
     PEREZ_RANDALL_LFV_M_KK_CONVENTION,
+)
+from flavorConstraints.muToEGamma import (
     check_mu_to_e_gamma as _check_mu_to_e_gamma,
+)
+from flavorConstraints.muToEGamma import (
     check_mu_to_e_gamma_raw as _check_mu_to_e_gamma_raw,
+)
+from flavorConstraints.muToEGamma import (
     coefficient_from_br_limit as _coefficient_from_br_limit,
 )
 
@@ -284,14 +290,14 @@ def lmfv_lepton_parameters_from_yukawa_result(
         raise ValueError("yukawa_result must expose a params mapping") from exc
 
     k_gev = _positive_finite(params["k"], name="k")
-    y_n = _readonly_complex_array(getattr(yukawa_result, "Y_N"), name="Y_N", shape=(3,))
+    y_n = _readonly_complex_array(yukawa_result.Y_N, name="Y_N", shape=(3,))
     y_n_bar = _readonly_complex_array(
-        getattr(yukawa_result, "Y_N_bar"),
+        yukawa_result.Y_N_bar,
         name="Y_N_bar",
         shape=(3,),
     )
     y_n_matrix = _readonly_complex_array(
-        getattr(yukawa_result, "Y_N_matrix"),
+        yukawa_result.Y_N_matrix,
         name="Y_N_matrix",
         shape=(3, 3),
     )
@@ -303,7 +309,7 @@ def lmfv_lepton_parameters_from_yukawa_result(
     )
     y_n_bar_matrix = 2.0 * k_gev * y_n_matrix
     max_abs_ybar = max(
-        float(np.max(np.abs(getattr(yukawa_result, "Y_N_bar")))),
+        float(np.max(np.abs(yukawa_result.Y_N_bar))),
         float(np.max(np.abs(getattr(yukawa_result, "Y_E_bar", [0.0])))),
     )
     return LMFVLeptonParameters(
@@ -320,7 +326,7 @@ def lmfv_lepton_parameters_from_yukawa_result(
         c_N=_broadcast_real_triplet(params["c_N"], name="c_N"),
         v_gev=_positive_finite(params["v"], name="v"),
         k_gev=k_gev,
-        epsilon=_finite_float(getattr(yukawa_result, "epsilon"), name="epsilon"),
+        epsilon=_finite_float(yukawa_result.epsilon, name="epsilon"),
         Lambda_IR_gev=_positive_finite(params["Lambda_IR"], name="Lambda_IR"),
         ordering=ordering,
         majorana_alpha=_finite_float(

@@ -17,13 +17,12 @@ from typing import Mapping
 
 import numpy as np
 
-from . import rare_b_nunu as _rare_b_nunu
 from . import rare_b_dilepton as _rare_b
+from . import rare_b_nunu as _rare_b_nunu
 from . import rare_charm_dilepton as _rare_charm
 from . import rare_kaon_dilepton as _rare_kaon
 from . import rare_kaon_snd as _rare_kaon_nunu
 from .rs_ew_couplings import LEPTON_FLAVORS, RSEWMassBasisCouplings
-
 
 RS_SEMILEPTONIC_WILSONS_MODEL_V1 = "RS_EW_SEMILEPTONIC_WILSONS_PHASE4A_V1"
 RS_SEMILEPTONIC_OPERATOR_CONVENTION = (
@@ -206,7 +205,8 @@ class RSNuNuWilsonCoefficients:
             raise ValueError("contact_units must be 'GeV^-2'")
         if self.quark_sector not in {"u", "d"}:
             raise ValueError("quark_sector must be 'u' or 'd'")
-        if not math.isfinite(float(self.g_sm_squared_gev_minus2)) or float(self.g_sm_squared_gev_minus2) <= 0.0:
+        g_sm_squared = float(self.g_sm_squared_gev_minus2)
+        if not math.isfinite(g_sm_squared) or g_sm_squared <= 0.0:
             raise ValueError("g_sm_squared_gev_minus2 must be positive and finite")
         for name in ("contact_LL", "contact_RL", "x_np_left", "x_np_right"):
             object.__setattr__(self, name, _readonly_complex_matrix(getattr(self, name), name))

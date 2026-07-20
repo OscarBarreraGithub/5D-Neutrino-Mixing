@@ -11,8 +11,8 @@ short-distance core, with no charged-lepton Wilson prefactor and no second
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, replace
 import math
+from dataclasses import dataclass, field, replace
 from typing import Mapping
 
 import numpy as np
@@ -27,23 +27,43 @@ from quarkConstraints.rare_b_nunu import (
     RARE_B_NUNU_RS_MATCHING_ASSUMPTION_V1,
     RareBNuNuBranchingResult,
     RareBNuNuCKMFactors,
-    RareBNuNuSMInputs,
     RareBNuNuShortDistanceResult,
+    RareBNuNuSMInputs,
     RareBNuNuWilsonCoefficients,
+)
+from quarkConstraints.rare_b_nunu import (
     ckm_factors as _ckm_factors,
+)
+from quarkConstraints.rare_b_nunu import (
     compute_rare_b_nunu_wilsons as _compute_rare_b_nunu_wilsons,
+)
+from quarkConstraints.rare_b_nunu import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.rare_b_nunu import (
     evaluate_bplus_to_kplus_nunu as _evaluate_bplus_to_kplus_nunu,
+)
+from quarkConstraints.rare_b_nunu import (
     g_sm_squared as _g_sm_squared,
+)
+from quarkConstraints.rare_b_nunu import (
     inami_lim_x0 as _inami_lim_x0,
+)
+from quarkConstraints.rare_b_nunu import (
     short_distance_response as _short_distance_response,
+)
+from quarkConstraints.rare_b_nunu import (
     sm_branching_fraction as _sm_branching_fraction,
+)
+from quarkConstraints.rare_b_nunu import (
     sm_inputs_with_bplus_kplus_normalization as _sm_inputs_with_bplus_kplus_normalization,
+)
+from quarkConstraints.rare_b_nunu import (
     x_t_top_function as _x_t_top_function,
 )
 from quarkConstraints.rs_semileptonic_wilsons import (
-    RSNuNuWilsonCoefficients,
     RS_SEMILEPTONIC_MATCHING_ASSUMPTION_V1,
+    RSNuNuWilsonCoefficients,
     RSSemileptonicWilsonBundle,
 )
 
@@ -214,7 +234,11 @@ def _rs_b_to_s_nunu_coeff(
             "rs_semileptonic_wilsons.b_to_s_nunu transition_key="
             f"{coeff.transition_key!r}, expected 'b_s'"
         )
-    if coeff.quark_sector != "d" or int(coeff.final_quark_index) != 1 or int(coeff.initial_quark_index) != 2:
+    if (
+        coeff.quark_sector != "d"
+        or int(coeff.final_quark_index) != 1
+        or int(coeff.initial_quark_index) != 2
+    ):
         raise ValueError("rs_semileptonic_wilsons.b_to_s_nunu has inconsistent quark indices")
     return coeff
 

@@ -1,4 +1,3 @@
-import math
 from dataclasses import FrozenInstanceError, replace
 
 import numpy as np
@@ -18,8 +17,8 @@ from quarkConstraints.rs_higgs_yukawas import (
 )
 from tests.constraints.primary.top_higgs_ew.higgs_lfv_phase6b_helpers import (
     diagonal_higgs_point,
-    live_lepton_couplings,
     live_higgs_yukawas,
+    live_lepton_couplings,
 )
 
 

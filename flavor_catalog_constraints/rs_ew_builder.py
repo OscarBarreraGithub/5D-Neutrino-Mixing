@@ -7,12 +7,16 @@ from typing import Any, Callable, Mapping
 
 import numpy as np
 
+from flavor_catalog_constraints.physics_adapters.lepton import (
+    lmfv_lepton_parameters_from_yukawa_result,
+)
 from flavorConstraints import (
     assert_perez_randall_lfv_m_kk_convention,
     perez_randall_lfv_m_kk_from_lambda_ir,
 )
-from flavor_catalog_constraints.physics_adapters.lepton import (
-    lmfv_lepton_parameters_from_yukawa_result,
+from quarkConstraints.rs_charged_current import (
+    RSChargedCurrentInputs,
+    build_rs_charged_current,
 )
 from quarkConstraints.rs_ew_couplings import (
     DEFAULT_CUSTODIAL_B_R_REP,
@@ -20,14 +24,10 @@ from quarkConstraints.rs_ew_couplings import (
     DEFAULT_CUSTODIAL_PROTECT_SCOPE,
     DEFAULT_CUSTODIAL_Q_L_REP,
     DEFAULT_CUSTODIAL_T_R_REP,
-    RSEWNeutralCurrentInputs,
     SUPPORTED_RS_EW_MODELS,
+    RSEWNeutralCurrentInputs,
     build_rs_ew_couplings,
     build_rs_lepton_mass_basis_couplings,
-)
-from quarkConstraints.rs_charged_current import (
-    RSChargedCurrentInputs,
-    build_rs_charged_current,
 )
 from quarkConstraints.rs_ew_spectrum import (
     DEFAULT_MAX_TRUNCATION_MODES,

@@ -7,8 +7,8 @@ and the documented RS top-Z proxy remain isolated in ``quarkConstraints``.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, replace
 import math
+from dataclasses import dataclass, replace
 from typing import Mapping
 
 import numpy as np
@@ -25,17 +25,41 @@ from quarkConstraints.top_fcnc import (
     TopFCNCBranchingResult,
     TopFCNCSMInputs,
     TopZFCNCProxyCouplings,
+)
+from quarkConstraints.top_fcnc import (
     compute_top_z_fcnc_proxy as _compute_top_z_fcnc_proxy,
+)
+from quarkConstraints.top_fcnc import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.top_fcnc import (
     evaluate_t_to_q_z as _evaluate_t_to_q_z,
+)
+from quarkConstraints.top_fcnc import (
     gluon_dipole_branching_fraction as _gluon_dipole_branching_fraction,
+)
+from quarkConstraints.top_fcnc import (
     higgs_scalar_branching_fraction as _higgs_scalar_branching_fraction,
+)
+from quarkConstraints.top_fcnc import (
     photon_dipole_branching_fraction as _photon_dipole_branching_fraction,
+)
+from quarkConstraints.top_fcnc import (
     top_gluon_dipole_partial_width as _top_gluon_dipole_partial_width,
+)
+from quarkConstraints.top_fcnc import (
     top_higgs_scalar_partial_width as _top_higgs_scalar_partial_width,
+)
+from quarkConstraints.top_fcnc import (
     top_photon_dipole_partial_width as _top_photon_dipole_partial_width,
+)
+from quarkConstraints.top_fcnc import (
     top_z_vector_partial_width as _top_z_vector_partial_width,
+)
+from quarkConstraints.top_fcnc import (
     weak_neutral_current_coupling as _weak_neutral_current_coupling,
+)
+from quarkConstraints.top_fcnc import (
     z_vector_branching_fraction as _z_vector_branching_fraction,
 )
 
@@ -256,7 +280,7 @@ def top_photon_dipole_proxy_from_couplings(
         raise ValueError("light_up_index must be 0 (u) or 1 (c)")
     p = top_fcnc_default_sm_inputs() if inputs is None else inputs
     resolved_m_kk = _positive_float(
-        getattr(couplings, "M_KK") if m_kk_gev is None else m_kk_gev,
+        couplings.M_KK if m_kk_gev is None else m_kk_gev,
         "m_kk_gev",
     )
     left_qt = _matrix_entry(couplings, "left_up", light_up_index, 2)
@@ -420,7 +444,7 @@ def top_gluon_dipole_proxy_from_couplings(
         raise ValueError("light_up_index must be 0 (u) or 1 (c)")
     p = top_fcnc_default_sm_inputs() if inputs is None else inputs
     resolved_m_kk = _positive_float(
-        getattr(couplings, "M_KK") if m_kk_gev is None else m_kk_gev,
+        couplings.M_KK if m_kk_gev is None else m_kk_gev,
         "m_kk_gev",
     )
     left_qt = _matrix_entry(couplings, "left_up", light_up_index, 2)
@@ -557,7 +581,7 @@ def top_higgs_scalar_proxy_from_couplings(
         raise ValueError("light_up_index must be 0 (u) or 1 (c)")
     p = top_fcnc_default_sm_inputs() if inputs is None else inputs
     resolved_m_kk = _positive_float(
-        getattr(couplings, "M_KK") if m_kk_gev is None else m_kk_gev,
+        couplings.M_KK if m_kk_gev is None else m_kk_gev,
         "m_kk_gev",
     )
     left_qt = _matrix_entry(couplings, "left_up", light_up_index, 2)

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -13,8 +13,8 @@ import yaml
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintLevel, ConstraintProtocol, Severity
-from qcd.constants import M_TOP_MS
 from flavor_catalog_constraints.secondary.beauty import B013 as b013_module
+from qcd.constants import M_TOP_MS
 from quarkConstraints import bsgamma as bsgamma_core
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from quarkConstraints.qcd_running import run_alpha_s

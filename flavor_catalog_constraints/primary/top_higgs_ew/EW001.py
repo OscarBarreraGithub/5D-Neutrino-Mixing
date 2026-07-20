@@ -45,8 +45,8 @@ fails loudly on missing observables.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 from flavor_catalog_constraints import anchors as anchor_scaffold
@@ -348,7 +348,7 @@ def _resolve_m_kk_gev(point: ParameterPoint) -> tuple[float | None, str | None]:
             return float(value), key
     couplings = point.get_extra(_COUPLINGS_EXTRA)
     if couplings is not None and getattr(couplings, "M_KK", None) is not None:
-        return float(getattr(couplings, "M_KK")), f"{_COUPLINGS_EXTRA}.M_KK"
+        return float(couplings.M_KK), f"{_COUPLINGS_EXTRA}.M_KK"
     return None, None
 
 

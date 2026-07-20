@@ -15,7 +15,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Iterable, Iterator, Mapping, Sequence
 
-
 SCHEMA_ID = "wq_quarkonly_minimal_vs_custodial_manifest_v1"
 MINIMAL_RS_EW_MODEL = "minimal_rs"
 CUSTODIAL_RS_PLR_EW_MODEL = "custodial_rs_plr"

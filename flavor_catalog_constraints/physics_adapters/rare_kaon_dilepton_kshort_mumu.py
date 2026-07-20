@@ -27,15 +27,17 @@ and non-light-Z or muon-sector effects outside Phase 3a.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Mapping
 
+from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
+
 from .rare_kaon_dilepton import (
-    KLongMuMuShortDistanceResult,
-    QuarkMassBasisCouplings,
     RARE_KAON_DILEPTON_PARAMETRIZATION_CITATION,
     RARE_KAON_DILEPTON_RS_MATCHING_ASSUMPTION_V1,
+    KLongMuMuShortDistanceResult,
+    QuarkMassBasisCouplings,
     RareKaonDileptonSMInputs,
     RareKaonDileptonWilsonCoefficients,
     _rs_semileptonic_coeff,
@@ -45,11 +47,10 @@ from .rare_kaon_dilepton import (
     klong_mumu_short_distance_sm,
     rare_kaon_dilepton_ckm_factors,
     rare_kaon_dilepton_default_sm_inputs,
-    rare_kaon_y_wilsons_from_rs_semileptonic,
     rare_kaon_dilepton_kappa_mu,
     rare_kaon_dilepton_wilsons_from_couplings,
+    rare_kaon_y_wilsons_from_rs_semileptonic,
 )
-from quarkConstraints.rs_semileptonic_wilsons import RSSemileptonicWilsonBundle
 
 RARE_KAON_KSHORT_MUMU_MODEL_V1 = "rare_kaon_kshort_mumu_sd_im_projection_v1"
 KSHORT_MUMU_CP_PROJECTION_CITATION = (

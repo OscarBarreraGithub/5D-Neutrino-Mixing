@@ -1,5 +1,13 @@
 # WQ Quark-Only Analysis Report
 
+> **SUPERSEDED (pre-audit, June 2026 vintage).** This custodial 1M-row analysis
+> predates the July 2026 audit corrections (Lane-A normalization, epsilon_K
+> budgets, per-system RG stopping scales, QCD constants, B002/B004 CP phases,
+> fail-closed scan paths). Like the minimal-lane twin (already bannered with
+> the B1 retraction), it validates pipeline mechanics only; it is NOT a
+> current post-audit production result. See docs/FLOOR_SUMMARY.md and audit
+> P0-1 in docs/REPOSITORY_AUDIT_AND_RESEARCH_ROADMAP_2026-07-15.md.
+
 - input JSONL files: 500
 - rows: 1000000
 - evaluated rows: 878705

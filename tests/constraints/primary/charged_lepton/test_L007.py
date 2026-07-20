@@ -10,13 +10,13 @@ import pytest
 import yaml
 
 import flavor_catalog_constraints as fcc
-from flavorConstraints.muToEGamma import check_mu_to_e_gamma_raw
 from flavor_catalog_constraints import anchors, point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
 from flavor_catalog_constraints.physics_adapters.lepton_tau_mu import (
     tau_to_mu_gamma_from_lepton_input,
     tau_to_mu_gamma_proxy_input,
 )
+from flavorConstraints.muToEGamma import check_mu_to_e_gamma_raw
 from quarkConstraints.lfv_three_body import TAU_TO_MU_NUNU_BRANCHING_FRACTION
 
 _PID = "L007"

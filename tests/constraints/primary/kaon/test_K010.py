@@ -12,10 +12,10 @@ import yaml
 import flavor_catalog_constraints as fcc
 from flavor_catalog_constraints import point_builder
 from flavor_catalog_constraints.base import ConstraintProtocol, Severity
-from flavor_catalog_constraints.primary.kaon import K010 as k010_module
 from flavor_catalog_constraints.physics_adapters.rare_kaon_dilepton_ks import (
     KSHORT_PI0EE_A_S_BRANCHING_COEFFICIENT,
 )
+from flavor_catalog_constraints.primary.kaon import K010 as k010_module
 from quarkConstraints.couplings import QuarkMassBasisCouplings
 from tests.rare_kaon_phase3d_helpers import (
     core_y7_wilsons_from_rs_coeff,

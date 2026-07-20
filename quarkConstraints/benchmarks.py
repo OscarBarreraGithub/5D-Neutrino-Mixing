@@ -7,8 +7,6 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from qcd.constants import M_TOP_MS
-
 from .fit import (
     QuarkFitResult,
     QuarkFitSolution,

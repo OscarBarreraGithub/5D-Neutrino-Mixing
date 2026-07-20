@@ -31,8 +31,8 @@ dimensionless quark-overlap stress factor.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Mapping
 
 import numpy as np
@@ -179,7 +179,7 @@ def compute_semileptonic_lfu_wilson_proxy(
 
     p = default_inputs() if inputs is None else inputs
     resolved_m_kk = _positive_float(
-        getattr(source, "M_KK") if m_kk_gev is None else m_kk_gev,
+        source.M_KK if m_kk_gev is None else m_kk_gev,
         "m_kk_gev",
     )
     g_s = _positive_float(getattr(source, "g_s", 1.0), "g_s")

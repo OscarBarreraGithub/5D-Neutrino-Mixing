@@ -24,7 +24,6 @@ from tests.constraints.primary.top_higgs_ew.z_lfv_rewire_helpers import (
     lfv_live_rs_ew_point,
 )
 
-
 _LEPTON_INDEX = {"e": 0, "mu": 1, "tau": 2}
 _THREE_BODY_LEPTONIC_NORMALIZATION = {
     ("mu", "e"): 1.0,

@@ -28,8 +28,8 @@ made explicit in diagnostics for catalog-level scans.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Mapping
 
 from .deltaf2 import F_BD

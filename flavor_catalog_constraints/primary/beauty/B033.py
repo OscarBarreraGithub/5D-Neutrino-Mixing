@@ -31,8 +31,8 @@ virtualized as one-entry mapping blocks and routed through the scaffold
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from typing import Any, Mapping
 
 from flavor_catalog_constraints import anchors as anchor_scaffold

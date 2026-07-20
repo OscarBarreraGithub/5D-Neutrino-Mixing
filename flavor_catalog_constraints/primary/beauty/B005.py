@@ -40,8 +40,8 @@ remains deferred.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity

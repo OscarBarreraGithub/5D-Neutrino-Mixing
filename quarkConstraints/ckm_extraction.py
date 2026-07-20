@@ -12,9 +12,9 @@ components propagated in quadrature.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import cmath
 import math
+from dataclasses import dataclass
 from typing import Mapping
 
 import numpy as np
@@ -198,8 +198,8 @@ def ckm_phases_from_matrix(
 def repo_default_ckm_matrix() -> np.ndarray:
     """Return the repo-owned PDG-2024 CKM target unitary."""
 
-    from quarkConstraints.modern.inputs import ModernDefaultCKMTarget
     from quarkConstraints.model import RotationParameters, ckm_like_unitary
+    from quarkConstraints.modern.inputs import ModernDefaultCKMTarget
 
     target = ModernDefaultCKMTarget()
     return ckm_like_unitary(

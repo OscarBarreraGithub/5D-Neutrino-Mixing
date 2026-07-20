@@ -26,8 +26,14 @@ from quarkConstraints.lfv_three_body import (
     LFVThreeBodyContactAmplitudes,
     LFVThreeBodyContactProxyInput,
     LFVThreeBodySMInputs,
+)
+from quarkConstraints.lfv_three_body import (
     default_sm_inputs as _default_sm_inputs,
+)
+from quarkConstraints.lfv_three_body import (
     lfv_three_body_from_components as _from_components,
+)
+from quarkConstraints.lfv_three_body import (
     lfv_three_body_proxy_input as _proxy_input,
 )
 
@@ -388,10 +394,10 @@ def _rigorous_tree_contact_amplitudes(
     i = _flavor_index(initial)
     f = _flavor_index(final)
 
-    z_delta_l = _finite_matrix(getattr(couplings, "z_delta_g_L_e"), "z_delta_g_L_e")
-    z_delta_r = _finite_matrix(getattr(couplings, "z_delta_g_R_e"), "z_delta_g_R_e")
-    z_total_l = _finite_matrix(getattr(couplings, "z_total_g_L_e"), "z_total_g_L_e")
-    z_total_r = _finite_matrix(getattr(couplings, "z_total_g_R_e"), "z_total_g_R_e")
+    z_delta_l = _finite_matrix(couplings.z_delta_g_L_e, "z_delta_g_L_e")
+    z_delta_r = _finite_matrix(couplings.z_delta_g_R_e, "z_delta_g_R_e")
+    z_total_l = _finite_matrix(couplings.z_total_g_L_e, "z_total_g_L_e")
+    z_total_r = _finite_matrix(couplings.z_total_g_R_e, "z_total_g_R_e")
 
     delta_left = complex(z_delta_l[f, i])
     delta_right = complex(z_delta_r[f, i])

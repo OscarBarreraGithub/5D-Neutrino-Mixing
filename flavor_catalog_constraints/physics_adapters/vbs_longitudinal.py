@@ -16,8 +16,8 @@ No mass proxy, EFT coefficient proxy, form-factor convention, or RS
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Any, Mapping
 
 VBS_LONGITUDINAL_SM_EFT_GAP_V1 = (

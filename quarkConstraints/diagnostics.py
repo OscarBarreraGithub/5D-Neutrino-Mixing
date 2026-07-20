@@ -18,14 +18,13 @@ Per plan v3 §6 (NEW: ``quarkConstraints/diagnostics.py``).
 
 from __future__ import annotations
 
-from typing import Mapping, Optional
+from typing import Mapping
 
 import numpy as np
 
 from qcd.mass_running import run_msbar_mass
 from warpConfig.baseParams import V_EWSB, get_warp_params
 from warpConfig.wavefuncs import f_IR
-
 
 _UP_FLAVORS: tuple[str, str, str] = ("u", "c", "t")
 _DOWN_FLAVORS: tuple[str, str, str] = ("d", "s", "b")

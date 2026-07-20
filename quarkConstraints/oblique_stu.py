@@ -33,8 +33,8 @@ electroweak fit.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Any, Mapping
 
 OBLIQUE_STU_RS_PROXY_V1 = (
@@ -286,7 +286,8 @@ def rs_minimal_oblique_proxy(
     except (TypeError, ValueError) as exc:
         raise ValueError("delta_t_loop must be finite") from exc
     loop_meta = {} if loop_metadata is None else dict(loop_metadata)
-    if bool(loop_meta.get("top_partner_loop_numerics_included", False)) and not math.isfinite(loop_delta):
+    loop_numerics_included = bool(loop_meta.get("top_partner_loop_numerics_included", False))
+    if loop_numerics_included and not math.isfinite(loop_delta):
         raise ValueError("finite delta_t_loop is required when loop metadata says it is included")
     scale = float((vev / mass) ** 2)
     t_tree = float(coeff_t * scale)

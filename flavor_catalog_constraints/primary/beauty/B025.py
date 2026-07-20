@@ -37,9 +37,9 @@ minimal vector LFU-ratio tree is rigorous.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
-from typing import Any, Mapping
+from dataclasses import dataclass
+from typing import Any
 
 from flavor_catalog_constraints.anchors import (
     Anchor,

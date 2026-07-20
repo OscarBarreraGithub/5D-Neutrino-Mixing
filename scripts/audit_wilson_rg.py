@@ -27,9 +27,9 @@ Run from the repo root:
 
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from pathlib import Path
-import sys
 
 import numpy as np
 
@@ -37,7 +37,6 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
 from quarkConstraints.qcd_running import evolve_deltaf2_wilsons, run_alpha_s
-
 
 MU_HIGH_GEV = 3000.0
 MU_LOW_GEV = 2.0

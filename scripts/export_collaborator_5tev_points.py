@@ -33,17 +33,20 @@ if str(REPO_ROOT) not in sys.path:
 
 from quarkConstraints.benchmarks import default_quark_targets, default_spurion_seed  # noqa: E402
 from quarkConstraints.fit import fit_quark_sector, jarlskog_invariant  # noqa: E402
-from quarkConstraints.modern.bridge_artifacts import build_modern_point_bridge_artifact  # noqa: E402
+from quarkConstraints.modern.bridge_artifacts import (
+    build_modern_point_bridge_artifact,  # noqa: E402
+)
 from quarkConstraints.modern.couplings import build_modern_point_couplings  # noqa: E402
 from quarkConstraints.modern.evaluation import MODERN_POINT_EVALUATION_SCHEMA_ID  # noqa: E402
 from quarkConstraints.modern.matching import build_modern_point_matching  # noqa: E402
-from quarkConstraints.modern.phenomenology import build_modern_point_phenomenology_artifact  # noqa: E402
+from quarkConstraints.modern.phenomenology import (
+    build_modern_point_phenomenology_artifact,  # noqa: E402
+)
 from quarkConstraints.scales import (  # noqa: E402
     DEFAULT_QUARK_FIT_SCALE_GEV,
     DEFAULT_QUARK_TARGET_SCALE_GEV,
     GAUGE_KK_ROOT_NN,
 )
-
 
 RUN_DIR = REPO_ROOT / "scan_outputs/collaborator_5tev_current_20260518T232900"
 MERGED_JSONL = RUN_DIR / "merged/results.jsonl"

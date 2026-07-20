@@ -38,8 +38,8 @@ sqrt(2) G_F alpha lambda_b M_KK^2)`` in this module's Lagrangian convention.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 import math
+from dataclasses import dataclass, field
 from typing import Mapping
 
 import numpy as np
@@ -380,7 +380,7 @@ def compute_rare_charm_dilepton_wilsons(
     p = default_sm_inputs() if inputs is None else inputs
     meson = p.d0
     resolved_m_kk = _positive_float(
-        getattr(source, "M_KK") if m_kk_gev is None else m_kk_gev,
+        source.M_KK if m_kk_gev is None else m_kk_gev,
         "m_kk_gev",
     )
     u_idx = meson.light_up_index

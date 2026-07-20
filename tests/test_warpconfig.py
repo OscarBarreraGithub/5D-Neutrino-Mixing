@@ -3,7 +3,6 @@ import pytest
 
 from warpConfig.wavefuncs import f_IR, f_UV
 
-
 EPSILON_RS = 1.0e-15
 
 

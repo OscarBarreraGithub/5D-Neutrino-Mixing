@@ -40,14 +40,13 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+# Reuse the scan's own helpers so the replay is byte-identical.
+import scripts.run_full_catalog_scan as scan  # noqa: E402
 from flavor_catalog_constraints import point_builder, registry  # noqa: E402
 from quarkConstraints.benchmarks import default_quark_targets  # noqa: E402
 from quarkConstraints.couplings import compute_quark_kk_gluon_couplings  # noqa: E402
 from quarkConstraints.fit import QuarkFitSeed, fit_quark_sector  # noqa: E402
-from quarkConstraints.rs_ew_spectrum import RSEWSpectrum, RSEWOverlapSplineCache  # noqa: E402
-
-# Reuse the scan's own helpers so the replay is byte-identical.
-import scripts.run_full_catalog_scan as scan  # noqa: E402
+from quarkConstraints.rs_ew_spectrum import RSEWOverlapSplineCache, RSEWSpectrum  # noqa: E402
 
 # Constraint IDs whose ratio we recompute / extract.
 EXTRACT_IDS = ("T010", "T011", "EW001", "K001", "C001", "C002", "B001", "B003")
