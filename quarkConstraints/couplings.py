@@ -196,6 +196,8 @@ class QuarkMassBasisCouplings:
     g_s_multiplier: float | None = None
     coupling_policy_id: str = COUPLING_POLICY_PERTURBATIVE_4D_LEGACY
     operator_convention_id: str | None = None
+    ckm_matrix: np.ndarray | None = None
+    ckm_source: str | None = None
 
     def __post_init__(self) -> None:
         lambda_ir = (
@@ -233,6 +235,29 @@ class QuarkMassBasisCouplings:
                 "operator_convention_id must match coupling_policy_id: "
                 f"{operator_convention_id!r} != {expected_operator!r}"
             )
+        ckm_matrix = self.ckm_matrix
+        ckm_source = self.ckm_source
+        if ckm_matrix is None:
+            if ckm_source is not None:
+                raise ValueError("ckm_source requires ckm_matrix")
+        else:
+            ckm_matrix = np.asarray(ckm_matrix, dtype=np.complex128).copy()
+            if ckm_matrix.shape != (3, 3):
+                raise ValueError("ckm_matrix must have shape (3, 3)")
+            if not np.all(np.isfinite(ckm_matrix)):
+                raise ValueError("ckm_matrix must contain finite entries")
+            if not np.allclose(
+                ckm_matrix.conjugate().T @ ckm_matrix,
+                np.eye(3, dtype=np.complex128),
+                rtol=0.0,
+                atol=1e-10,
+            ):
+                raise ValueError("ckm_matrix must be unitary")
+            if ckm_source is None:
+                ckm_source = "quark_mass_basis_couplings.ckm_matrix"
+            elif not str(ckm_source).strip():
+                raise ValueError("ckm_source must be non-empty")
+            ckm_matrix.setflags(write=False)
         object.__setattr__(self, "M_KK", float(scale.m_kk_physical_gev))
         object.__setattr__(self, "xi_KK", float(scale.xi_kk))
         object.__setattr__(self, "lambda_ir_gev", float(scale.lambda_ir_gev))
@@ -242,6 +267,8 @@ class QuarkMassBasisCouplings:
         object.__setattr__(self, "g_eff", g_eff)
         object.__setattr__(self, "g_s_multiplier", multiplier)
         object.__setattr__(self, "operator_convention_id", operator_convention_id)
+        object.__setattr__(self, "ckm_matrix", ckm_matrix)
+        object.__setattr__(self, "ckm_source", ckm_source)
 
     @property
     def left_down_offdiag_norm(self) -> float:
@@ -373,4 +400,6 @@ def compute_quark_kk_gluon_couplings(
         g_s_multiplier=coupling_policy.g_s_multiplier,
         coupling_policy_id=coupling_policy.coupling_policy_id,
         operator_convention_id=coupling_policy.operator_convention_id,
+        ckm_matrix=fit_result.ckm_matrix,
+        ckm_source="QuarkFitResult.ckm_matrix (U_L_u^dagger U_L_d)",
     )

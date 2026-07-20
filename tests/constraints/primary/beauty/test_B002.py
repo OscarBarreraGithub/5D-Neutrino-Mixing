@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import cmath
+from dataclasses import replace
 import math
 from pathlib import Path
 
@@ -29,7 +30,10 @@ from quarkConstraints.deltaf2 import (
     evaluate_bd_mixing_with_running,
     _evolve_wilsons,
 )
-from quarkConstraints.ckm_extraction import repo_default_ckm_phases
+from quarkConstraints.ckm_extraction import (
+    repo_default_ckm_matrix,
+    repo_default_ckm_phases,
+)
 
 _PID = "B002"
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -49,6 +53,7 @@ def _bd_couplings(
     left: complex,
     right: complex,
     M_KK: float = 3000.0,
+    ckm_matrix: np.ndarray | None = None,
 ) -> QuarkMassBasisCouplings:
     """Minimal valid mass-basis couplings with only the d-b slot populated."""
     zeros = np.zeros((3, 3), dtype=np.complex128)
@@ -70,6 +75,42 @@ def _bd_couplings(
         left_down=left_down,
         right_up=zeros,
         right_down=right_down,
+        ckm_matrix=ckm_matrix,
+        ckm_source=("B002 test CKM" if ckm_matrix is not None else None),
+    )
+
+
+def _rephase_couplings(
+    couplings: QuarkMassBasisCouplings,
+    *,
+    up_phases: np.ndarray,
+    down_phases: np.ndarray,
+) -> QuarkMassBasisCouplings:
+    """Apply a simultaneous Dirac mass-eigenstate rephasing."""
+
+    up = np.diag(up_phases)
+    down = np.diag(down_phases)
+    def transform_up(matrix: np.ndarray) -> np.ndarray:
+        return up.conjugate() @ matrix @ up
+
+    def transform_down(matrix: np.ndarray) -> np.ndarray:
+        return down.conjugate() @ matrix @ down
+
+    return replace(
+        couplings,
+        left_overlap=transform_down(couplings.left_overlap),
+        right_up_overlap=transform_up(couplings.right_up_overlap),
+        right_down_overlap=transform_down(couplings.right_down_overlap),
+        left_up=transform_up(couplings.left_up),
+        left_down=transform_down(couplings.left_down),
+        right_up=transform_up(couplings.right_up),
+        right_down=transform_down(couplings.right_down),
+        ckm_matrix=(
+            up.conjugate()
+            @ np.asarray(couplings.ckm_matrix, dtype=np.complex128)
+            @ down
+        ),
+        ckm_source="B002 random rephasing",
     )
 
 
@@ -140,7 +181,18 @@ def _core_spsi_ks_from_running_m12(
         B_5_BD,
     )
     magnitude = evaluate_bd_mixing_with_running(wilsons, mu_had=4.18)
-    m12_ratio = m12_np / constraint.anchor.budget_band.m12_sm_gev
+    ckm = (
+        repo_default_ckm_matrix()
+        if couplings.ckm_matrix is None
+        else np.asarray(couplings.ckm_matrix, dtype=np.complex128)
+    )
+    ckm_factor = (np.conjugate(ckm[2, 0]) * ckm[2, 2]) ** 2
+    m12_sm = (
+        constraint.anchor.budget_band.m12_sm_gev
+        * ckm_factor
+        / abs(ckm_factor)
+    )
+    m12_ratio = m12_np / m12_sm
     phi_d_np = cmath.phase(1.0 + m12_ratio)
     predicted = math.sin(constraint.anchor.budget_band.two_beta_radians + phi_d_np)
     residual = abs(predicted - constraint.anchor.value)
@@ -275,12 +327,15 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
         assert math.isfinite(value)
     assert isinstance(result.diagnostics["m12_np_gev"], complex)
     assert isinstance(result.diagnostics["m12_np_over_m12_sm"], complex)
+    assert isinstance(result.diagnostics["m12_sm_box_gev"], complex)
+    assert isinstance(result.diagnostics["m12_sm_box_ckm_factor"], complex)
     assert isinstance(result.diagnostics["left_db_coupling"], complex)
     assert isinstance(result.diagnostics["wilson_coefficients"]["C1_VLL"], complex)
     for key in (
         "abs_m12_np_gev",
         "core_abs_m12_np_gev",
         "m12_sm_gev",
+        "m12_sm_box_phase_rad",
         "re_m12_np_over_m12_sm",
         "im_m12_np_over_m12_sm",
         "phi_d_np_rad",
@@ -313,6 +368,7 @@ def test_evaluate_runs_end_to_end_with_real_couplings_and_real_finite_fields():
     assert result.diagnostics["core_input_key"] == "b_d"
     assert result.diagnostics["down_sector_indices"] == (0, 2)
     assert result.diagnostics["phase_uses_complex_m12_not_abs"] is True
+    assert abs(result.diagnostics["m12_sm_box_gev"].imag) > 1.0e-18
     assert result.diagnostics["ckm_phase_source"] == repo_default_ckm_phases().source
     assert "needs_human_physics" not in result.diagnostics
     assert "NEEDS-HUMAN-PHYSICS" not in result.notes
@@ -339,11 +395,12 @@ def test_numbers_match_direct_running_complex_m12_phase_evaluator():
         magnitude.abs_m12_np
     )
     assert abs(m12_np) == pytest.approx(magnitude.abs_m12_np)
-    # re-pinned after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2 phase
-    assert result.predicted == pytest.approx(0.71449859166246366)
-    # re-pinned after M-6: B_d Wilsons run to m_b=4.18 GeV.
-    assert result.ratio == pytest.approx(0.25382105514733083)
-    assert result.diagnostics["phi_d_np_deg"] == pytest.approx(0.50219863453447477)
+    # Re-pinned after restoring the complex SM-box phase.
+    assert result.predicted == pytest.approx(0.7126711557121855)
+    assert result.ratio == pytest.approx(0.1507128479757265)
+    assert result.diagnostics["phi_d_np_deg"] == pytest.approx(
+        0.3527422342297369
+    )
 
 
 @pytest.mark.parametrize(
@@ -364,13 +421,10 @@ def test_safe_point_passes_and_large_np_point_fails(
     if expected_pass:
         assert result.ratio <= 1.0
     else:
-        # bound relaxed 10.0 -> 1.0 after B3 (GGMS O4/O5 un-swap + 1/(2m_M)) + B2
-        # phase plus M-6 m_b running: the large-NP point still fails the
-        # constraint (passes=False) but its ratio is O(7.5).
         assert result.ratio > 1.0
-        # re-pinned after M-6: B_d Wilsons run to m_b=4.18 GeV.
+        # Re-pinned after restoring the complex SM-box phase.
         assert result.diagnostics["phi_d_np_deg"] == pytest.approx(
-            12.35992408539013
+            7.636816740620537
         )
 
 
@@ -387,3 +441,35 @@ def test_evaluate_is_pure_and_deterministic():
     assert first == second
     np.testing.assert_array_equal(couplings.left_down, before_left_down)
     np.testing.assert_array_equal(couplings.right_down, before_right_down)
+
+
+def test_prediction_is_invariant_under_random_quark_field_rephasings():
+    rng = np.random.default_rng(20022026)
+    couplings = _bd_couplings(
+        left=1.0e-3 + 2.0e-3j,
+        right=-0.7e-3 + 0.4e-3j,
+        ckm_matrix=repo_default_ckm_matrix(),
+    )
+    constraint = fcc.get(_PID)
+    baseline = constraint.evaluate(point_builder.build_from_quark_couplings(couplings))
+
+    for _ in range(16):
+        up_phases = np.exp(1j * rng.uniform(-math.pi, math.pi, size=3))
+        down_phases = np.exp(1j * rng.uniform(-math.pi, math.pi, size=3))
+        rephased = _rephase_couplings(
+            couplings,
+            up_phases=up_phases,
+            down_phases=down_phases,
+        )
+        result = constraint.evaluate(point_builder.build_from_quark_couplings(rephased))
+
+        assert result.predicted == pytest.approx(baseline.predicted, abs=2e-14)
+        assert result.ratio == pytest.approx(baseline.ratio, abs=2e-12)
+        assert result.diagnostics["phi_d_np_rad"] == pytest.approx(
+            baseline.diagnostics["phi_d_np_rad"],
+            abs=2e-14,
+        )
+        assert result.diagnostics["m12_np_over_m12_sm"] == pytest.approx(
+            baseline.diagnostics["m12_np_over_m12_sm"],
+            abs=2e-14,
+        )

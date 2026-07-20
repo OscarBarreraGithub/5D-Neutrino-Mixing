@@ -20,10 +20,12 @@ from typing import Mapping
 import numpy as np
 
 __all__ = [
+    "NeutralBMixingSMAmplitude",
     "CKMPhaseAngles",
     "KL3VusExtraction",
     "VusConsistencyResult",
     "ckm_phases_from_matrix",
+    "neutral_b_mixing_sm_amplitude",
     "extract_vus_from_kl3",
     "repo_default_ckm_matrix",
     "repo_default_ckm_phases",
@@ -80,6 +82,26 @@ class CKMPhaseAngles:
     beta_s_degrees: float
     phi_s: float
     phi_s_degrees: float
+
+
+@dataclass(frozen=True)
+class NeutralBMixingSMAmplitude:
+    """Complex SM dispersive amplitude for a neutral ``B_q`` system.
+
+    The magnitude is fixed by ``Delta m_q^SM / 2`` and the weak phase by the
+    top-box CKM factor ``(V_tq* V_tb)^2``.  Keeping this phase is essential:
+    only the ratio of a new-physics amplitude to this complex SM amplitude is
+    invariant under quark mass-eigenstate rephasings.
+    """
+
+    system: str
+    light_down_index: int
+    delta_m_sm_gev: float
+    magnitude_gev: float
+    ckm_factor: complex
+    phase_factor: complex
+    amplitude_gev: complex
+    ckm_source: str
 
 
 def _finite_float(name: str, value: object) -> float:
@@ -197,6 +219,65 @@ def repo_default_ckm_phases() -> CKMPhaseAngles:
 
     target = ModernDefaultCKMTarget()
     return ckm_phases_from_matrix(repo_default_ckm_matrix(), source=target.target_id)
+
+
+def neutral_b_mixing_sm_amplitude(
+    *,
+    delta_m_sm_gev: float,
+    light_down_index: int,
+    ckm: object | None = None,
+    ckm_source: str | None = None,
+) -> NeutralBMixingSMAmplitude:
+    """Return the complex ``M12_SM`` for ``B_d`` or ``B_s`` mixing.
+
+    The short-distance and hadronic inputs already encoded in
+    ``delta_m_sm_gev`` determine ``|M12_SM| = Delta m_SM / 2``.  The phase is
+    restored from the SM top-box factor
+
+    ``lambda_tq^2 = (conj(V_tq) * V_tb)^2``.
+
+    This convention transforms exactly like Wilson coefficients built from
+    the mass-basis ``q-b`` coupling squared.  Consequently
+    ``M12_NP / M12_SM`` is unchanged by simultaneous quark-field rephasings.
+    See arXiv:0809.1073, Eqs. (4.39)--(4.45), for the neutral-B amplitude and
+    CP-phase convention used by the RS analysis.
+    """
+
+    delta_m = _positive_float("delta_m_sm_gev", delta_m_sm_gev)
+    if light_down_index not in (0, 1):
+        raise ValueError("light_down_index must be 0 (d) or 1 (s)")
+
+    if ckm is None:
+        matrix = repo_default_ckm_matrix()
+        source = repo_default_ckm_phases().source
+    else:
+        matrix = _ckm_matrix("ckm", ckm)
+        source = (
+            "quark_mass_basis_couplings.ckm_matrix"
+            if ckm_source is None
+            else str(ckm_source)
+        )
+    if not source.strip():
+        raise ValueError("ckm_source must be non-empty")
+
+    lambda_tq = _nonzero_complex(
+        "conj(V_tq) V_tb",
+        np.conjugate(matrix[2, light_down_index]) * matrix[2, 2],
+    )
+    ckm_factor = lambda_tq * lambda_tq
+    phase_factor = ckm_factor / abs(ckm_factor)
+    magnitude = delta_m / 2.0
+    system = "B_d" if light_down_index == 0 else "B_s"
+    return NeutralBMixingSMAmplitude(
+        system=system,
+        light_down_index=int(light_down_index),
+        delta_m_sm_gev=float(delta_m),
+        magnitude_gev=float(magnitude),
+        ckm_factor=complex(ckm_factor),
+        phase_factor=complex(phase_factor),
+        amplitude_gev=complex(magnitude * phase_factor),
+        ckm_source=source,
+    )
 
 
 def extract_vus_from_kl3(

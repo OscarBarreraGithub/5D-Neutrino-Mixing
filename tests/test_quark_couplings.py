@@ -59,6 +59,10 @@ def test_mass_basis_couplings_have_expected_shapes_and_are_finite():
         assert np.all(np.isfinite(matrix.imag))
         assert np.allclose(matrix, matrix.conjugate().T, atol=1e-12)
 
+    np.testing.assert_allclose(couplings.ckm_matrix, result.ckm_matrix)
+    assert couplings.ckm_source == "QuarkFitResult.ckm_matrix (U_L_u^dagger U_L_d)"
+    assert couplings.ckm_matrix.flags.writeable is False
+
     predicted_left_up = result.ckm_matrix @ couplings.left_overlap @ result.ckm_matrix.conjugate().T
     assert np.allclose(couplings.left_up / couplings.g_s, predicted_left_up, atol=1e-10)
 

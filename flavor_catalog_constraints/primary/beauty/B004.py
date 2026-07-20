@@ -12,9 +12,10 @@ quark-flavor plugin the new physics is restricted to the complex
 
 The complex ``M12^NP`` is evaluated through the Delta F = 2 adapter after
 QCD-running the B_s Wilson coefficients to ``mu_had = m_b``.  The SM
-amplitude convention is ``M12^SM = Delta m_Bs^SM / 2`` from the same B_s core
-inputs used by B003.  The SM ``phi_s`` reference phase is computed in core
-from the repo-owned CKM target as ``phi_s = -2 beta_s``.
+amplitude has magnitude ``|M12^SM| = Delta m_Bs^SM / 2`` from the same B_s
+core inputs used by B003 and phase ``arg((V_ts* V_tb)^2)`` from the fitted
+point CKM matrix.  The SM ``phi_s`` reference phase is computed in core from
+the repo-owned CKM target as ``phi_s = -2 beta_s``.
 
 Severity
 --------
@@ -41,6 +42,7 @@ from typing import Any, Mapping
 from flavor_catalog_constraints.anchors import Anchor, AnchorError, load_anchor
 from flavor_catalog_constraints.base import ConstraintResult, ParameterPoint, Severity
 from flavor_catalog_constraints.physics_adapters.ckm_extraction import (
+    neutral_b_mixing_sm_amplitude,
     repo_default_ckm_phases,
 )
 from flavor_catalog_constraints.physics_adapters.deltaf2 import (
@@ -72,6 +74,11 @@ _SM_PHASE_SOURCE_POLICY = (
     "SM phi_s = -2 beta_s computed in core from the repo-owned "
     "ModernDefaultCKMTarget; B004.yaml standard_model_reference supplies only "
     "the uncertainty anchor."
+)
+_SM_BOX_CKM_SOURCE_POLICY = (
+    "M12_SM uses the fitted QuarkMassBasisCouplings.ckm_matrix when present; "
+    "legacy/manual coupling objects fall back to the repo-owned "
+    "ModernDefaultCKMTarget. The phase convention is (conj(V_ts) V_tb)^2."
 )
 
 
@@ -398,7 +405,13 @@ class Constraint:
             mu_had=_MU_HAD_GEV,
         )
 
-        m12_sm = self.anchor.budget_band.m12_sm_gev
+        sm_box = neutral_b_mixing_sm_amplitude(
+            delta_m_sm_gev=self.anchor.budget_band.delta_m_bs_sm_gev,
+            light_down_index=1,
+            ckm=getattr(couplings, "ckm_matrix", None),
+            ckm_source=getattr(couplings, "ckm_source", None),
+        )
+        m12_sm = sm_box.amplitude_gev
         m12_ratio = complex(m12_np / m12_sm)
         total_mixing_ratio = 1.0 + m12_ratio
         phi_s_np = float(cmath.phase(total_mixing_ratio))
@@ -424,7 +437,11 @@ class Constraint:
                 "abs_m12_np_gev": float(abs(m12_np)),
                 "im_m12_np_gev": float(m12_np.imag),
                 "core_abs_m12_np_gev": float(core_magnitude.abs_m12_np),
-                "m12_sm_gev": float(m12_sm),
+                "m12_sm_gev": float(sm_box.magnitude_gev),
+                "m12_sm_box_gev": complex(m12_sm),
+                "m12_sm_box_phase_rad": float(cmath.phase(m12_sm)),
+                "m12_sm_box_ckm_factor": complex(sm_box.ckm_factor),
+                "m12_sm_box_ckm_source": sm_box.ckm_source,
                 "m12_np_over_m12_sm": m12_ratio,
                 "re_m12_np_over_m12_sm": float(m12_ratio.real),
                 "im_m12_np_over_m12_sm": float(m12_ratio.imag),
@@ -444,7 +461,10 @@ class Constraint:
                 "wilson_coefficients": _complex_mapping(wilsons.wilsons),
                 "phase_formula": "phi_s_np = arg(1 + M12_NP / M12_SM)",
                 "phase_uses_complex_m12_not_abs": True,
-                "m12_sm_convention": "positive real Delta m_Bs^SM / 2",
+                "m12_sm_convention": (
+                    "|M12_SM| = Delta m_Bs^SM / 2; "
+                    "phase = arg((conj(V_ts) V_tb)^2)"
+                ),
                 "budget_doc_citation": self.anchor.budget_band.doc_citation,
                 "budget_construction": (
                     "sqrt(sigma_exp^2 + sigma_phi_s_SM^2), direction-aware "
@@ -480,6 +500,7 @@ class Constraint:
                     core_magnitude.ratio_to_budget
                 ),
                 "sm_phase_source_policy": _SM_PHASE_SOURCE_POLICY,
+                "sm_box_ckm_source_policy": _SM_BOX_CKM_SOURCE_POLICY,
                 "ckm_phase_source": self.anchor.standard_model.ckm_phase_source,
                 "beta_s_rad": self.anchor.standard_model.beta_s,
                 "beta_s_deg": self.anchor.standard_model.beta_s_degrees,

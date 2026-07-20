@@ -347,6 +347,8 @@ def _build_kk_gluon_couplings(
         left_down=_hermitian(g_s * left_overlap),
         right_up=_hermitian(g_s * right_up_overlap),
         right_down=_hermitian(g_s * right_down_overlap),
+        ckm_matrix=U_L_u.conj().T @ U_L_d,
+        ckm_source="run_rs_anarchy SVD (U_L_u^dagger U_L_d)",
     )
 
 
