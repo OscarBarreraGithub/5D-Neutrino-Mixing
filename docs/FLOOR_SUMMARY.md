@@ -176,5 +176,5 @@ methods give very different spreads, which matters when comparing floors.
 - Oblique convention: `quarkConstraints/oblique_stu.py`,
   `flavor_catalog_constraints/primary/top_higgs_ew/EW001.py`
 - Legacy ΔF=2-only writeups (SUPERSEDED banners):
-  `docs/quark_scan_methodology_note.tex`, `docs/quark_scan_consolidation_report.tex`,
-  `docs/quark_scan_constraint_update_2026-06.md`
+  `docs/quark_scan_methodology_note.tex`, `docs/archive/superseded/quark_scan_consolidation_report.tex`,
+  `docs/archive/superseded/quark_scan_constraint_update_2026-06.md`

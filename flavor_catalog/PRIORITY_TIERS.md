@@ -121,7 +121,7 @@ The PI handoff that introduced the tier system is
 `flavor_catalog/HANDOFF_PROMPT.md`, under the "Priority tagging" section.
 
 Orchestrator decisions on the PI's behalf are recorded in
-`docs/phase_logs/flavor_catalog_orchestrator_decisions.md`.
+`docs/archive/phase_logs/flavor_catalog_orchestrator_decisions.md`.
 
 ## 7. How To Extend
 

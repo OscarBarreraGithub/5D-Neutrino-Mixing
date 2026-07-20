@@ -1,10 +1,20 @@
 # Constraining a Warped 5th Dimension
 
-This repository contains numerical tools for Randall-Sundrum flavor studies
-across the lepton and quark sectors: zero-mode overlaps, KK spectra, Yukawa
-inversion, lepton-flavor constraints, quark-sector MFV workflows, audited
-ΔF=2 and RS electroweak (oblique S,T,U, Z→bb) constraints, a 103-constraint
-flavor/collider catalog, and parameter scans.
+Numerical tools for constraining Randall-Sundrum warped extra dimensions with
+flavor and electroweak physics. The active program is quark-sector: audited
+ΔF=2 constraints (epsilon_K, B and D mixing), RS electroweak observables
+(oblique S,T,U, Z→bb, custodial protection), a 103-constraint flavor/collider
+catalog, and a production scan harness. The original lepton-sector machinery
+(zero-mode overlaps, KK spectra, Yukawa inversion, seesaw, μ→eγ) remains as
+first-class packages for follow-up work.
+
+**New here? Start with the documentation guide:
+[`docs/README.md`](docs/README.md).** It maps every document, which paper
+each piece of physics comes from, and where the code lives. The current
+project audit and research roadmap is
+[`docs/REPOSITORY_AUDIT_AND_RESEARCH_ROADMAP_2026-07-15.md`](docs/REPOSITORY_AUDIT_AND_RESEARCH_ROADMAP_2026-07-15.md);
+pending physics decisions are collected in
+[`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md).
 
 ## Current minimal-RS floor (post-audit, June 2026)
 
@@ -80,7 +90,7 @@ Paper note: the canonical current writeup is the June 2026 collaborator report
 (post-audit floors + literature reproductions). The earlier methodology note
 [`docs/quark_scan_methodology_note.tex`](docs/quark_scan_methodology_note.tex)
 and consolidation report
-[`docs/quark_scan_consolidation_report.tex`](docs/quark_scan_consolidation_report.tex)
+[`docs/archive/superseded/quark_scan_consolidation_report.tex`](docs/archive/superseded/quark_scan_consolidation_report.tex)
 are **legacy** ΔF=2-only documents (pre-audit; carry SUPERSEDED banners) — their
 flavor-only floors are not the current project floors. The current paper scope is
 quark-sector only; lepton-sector packages remain repo tools for follow-up work.

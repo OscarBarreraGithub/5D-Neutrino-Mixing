@@ -228,7 +228,7 @@ error. Run it before every dispatch wave. Example:
 
 Behavior: if probe returns BLOCKED, do not dispatch; wait, log a pause
 record, schedule a retry when the quota window resets. Example pause record:
-`docs/phase_logs/flavor_catalog_codex_quota_pause.md`.
+`docs/archive/phase_logs/flavor_catalog_codex_quota_pause.md`.
 
 ### 7.3 Branch policy
 
@@ -440,7 +440,7 @@ For the artifact to be re-buildable from the source tree, you need:
 - [ ] DA round worklogs + DA-N convergence verdict + any addendum closing
       bookkeeping.
 - [ ] Plan document (this project: `flavor_catalog_plan_v1.md` in
-      `docs/phase_logs/`) that captures the agent role definitions and
+      `docs/archive/phase_logs/`) that captures the agent role definitions and
       target-list rationale.
 - [ ] Orchestrator decisions document recording every adjudication made on
       the human's behalf.

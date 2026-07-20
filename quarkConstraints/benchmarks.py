@@ -190,12 +190,12 @@ def default_spurion_seed() -> SpurionSeed:
 
     Provenance: the singular-value and rotation literals below were re-derived
     against PDG-2024 MS-bar quark masses. See
-    ``docs/phase_logs/phase2_h4_impl.md`` for the re-derivation details and
+    ``docs/archive/phase_logs/phase2_h4_impl.md`` for the re-derivation details and
     audit log. The values are pinned by ``tests/test_quark_fit.py`` so any
     accidental drift surfaces as a test failure.
     """
     # Spurion seed values re-derived against PDG-2024 MS-bar quark masses
-    # (see docs/phase_logs/phase2_h4_impl.md for re-derivation details and
+    # (see docs/archive/phase_logs/phase2_h4_impl.md for re-derivation details and
     # the audit log). Tests at tests/test_quark_fit.py pin these values.
     return SpurionSeed(
         up_singular_values=np.array(

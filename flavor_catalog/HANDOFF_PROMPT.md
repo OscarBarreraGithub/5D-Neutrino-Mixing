@@ -57,11 +57,11 @@ next phase of work the PI specifies.
    twice after the initial 75-entry build (Wave-8 SECONDARY, Wave-9
    PRIMARY new family).
 
-5. `docs/phase_logs/flavor_catalog_plan_v1.md` — the plan that
+5. `docs/archive/phase_logs/flavor_catalog_plan_v1.md` — the plan that
    defines the roles, deliverables, success criteria, and
    concurrency budgets.
 
-6. `docs/phase_logs/flavor_catalog_orchestrator_decisions.md` — the
+6. `docs/archive/phase_logs/flavor_catalog_orchestrator_decisions.md` — the
    adjudications the v1-plan-era orchestrator made on the PI's behalf
    (binding unless the PI overrides). Wave-8/9-era decisions are in
    the corresponding runbooks.

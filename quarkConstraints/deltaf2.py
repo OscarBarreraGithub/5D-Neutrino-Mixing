@@ -834,7 +834,7 @@ def evaluate_delta_f2_constraints(
         Override the default ε_K direction-aware one-sigma policy with an
         explicit scalar value. Used by the ``--epsilon-k-budget`` CLI sweep
         across central / low / high edges for the band-quote sensitivity study
-        (see cleanup unit C02a-code and ``docs/phase_logs/phase2_h5_signoff.md``).
+        (see cleanup unit C02a-code and ``docs/archive/phase_logs/phase2_h5_signoff.md``).
         Has no effect on B_d, B_s, or D systems.
     """
     couplings = _coerce_couplings(source, M_KK=M_KK, xi_KK=xi_KK)

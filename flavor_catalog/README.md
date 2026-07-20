@@ -152,8 +152,8 @@ Two extension patterns for future waves are codified in
   cluster quirks, candidate next steps
 - [Cold-boot orchestrator handoff](HANDOFF_PROMPT.md)
 - [Collaborator-facing pitch (1 page)](CATALOG_METHODOLOGY.tex)
-- [Plan v1 (original design)](../docs/phase_logs/flavor_catalog_plan_v1.md)
-- [Plan-v1 orchestrator decisions](../docs/phase_logs/flavor_catalog_orchestrator_decisions.md)
-- [Plan-v1 Opus approval](../docs/phase_logs/flavor_catalog_plan_v1_opus_signoff.md)
+- [Plan v1 (original design)](../docs/archive/phase_logs/flavor_catalog_plan_v1.md)
+- [Plan-v1 orchestrator decisions](../docs/archive/phase_logs/flavor_catalog_orchestrator_decisions.md)
+- [Plan-v1 Opus approval](../docs/archive/phase_logs/flavor_catalog_plan_v1_opus_signoff.md)
 - Per-wave runbooks: `worklogs/orchestration/wave_NNN_runbook.md`
   (Wave-8, Wave-9; future waves follow the same template)

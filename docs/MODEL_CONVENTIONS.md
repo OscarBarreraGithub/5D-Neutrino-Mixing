@@ -197,4 +197,4 @@ README, STATE_OF_PROJECT), it MUST be tagged with one of the four rows above.**
   (the production model's flavor structure; `quarkConstraints/paper_0710_1869/`).
 - Bauer, Casagrande, Haisch, Neubert, 0912.1625 — anarchic scan (the reproduction
   lane; `scripts/anarchic_bauer_s1.py`).
-- `docs/FLOOR_SUMMARY.md`, `docs/RS_vs_SM_flavor_reassessment_plan.md`.
+- `docs/FLOOR_SUMMARY.md`, `docs/archive/superseded/RS_vs_SM_flavor_reassessment_plan.md`.
