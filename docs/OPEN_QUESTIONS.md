@@ -88,7 +88,20 @@ From `reports/physics_reviews/open_questions.md`:
 - The perturbativity gate bounds |Y| < 4 from above. Is there a principled
   lower bound on how small 5D Yukawa entries may be?
 
-## 7. OPEN: Yukawa substructure program (the profiled study)
+## 7. OPEN: benchmark_quark_mfv gates fail honestly (CI stays red at that step)
+
+With lint green (2026-07-20), CI now actually executes the benchmarks, and
+`scripts/benchmark_quark_mfv.py` exits 1: its frozen MFV benchmark point
+fails the `paper h_RS < 0.30` gate and the Delta F = 2 gate (K-system ratio
+about 4.96, dominant C4_LR). This is NOT a July regression: the identical
+failure reproduces at the pre-audit-fix commit (verified 2026-07-20 in a
+clean worktree at `a393c8b^`). The benchmark's expectations are stale
+relative to the audited epsilon_K budget and matching. Decision needed:
+recalibrate the benchmark point/gates against a stated convention, or retire
+this gate in favor of the Gate-4 validation matrix. Deliberately NOT patched
+by loosening tolerances.
+
+## 8. OPEN: Yukawa substructure program (the profiled study)
 
 The completed noise/gradient study is a proof of concept, not the fit
 boundary. The full program (36-dimensional perturbation space, profiled

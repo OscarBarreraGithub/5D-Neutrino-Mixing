@@ -4,7 +4,7 @@
 perturbation study (the "F7" study), the independent per-element anatomy
 result, the limitations identified by the 2026-07-15 audit, and the full
 study the results motivate. Companion decisions live in
-`docs/OPEN_QUESTIONS.md` (item 7).
+`docs/OPEN_QUESTIONS.md` (item 8).
 
 ---
 
