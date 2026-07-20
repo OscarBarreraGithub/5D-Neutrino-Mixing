@@ -32,7 +32,12 @@ if str(_REPO_ROOT) not in sys.path:
 from flavor_catalog_constraints import point_builder, registry
 from flavor_catalog_constraints.base import ConstraintResult, Severity
 from quarkConstraints.benchmarks import default_quark_targets
-from quarkConstraints.couplings import compute_quark_kk_gluon_couplings
+from quarkConstraints.couplings import (
+    COUPLING_POLICY_FIXED_GSSTAR_3,
+    COUPLING_POLICY_PERTURBATIVE_4D_LEGACY,
+    COUPLING_POLICY_RS_VOLUME_SQRT2L_PHYSICAL,
+    compute_quark_kk_gluon_couplings,
+)
 from quarkConstraints.fit import QuarkFitResult, QuarkFitSeed, fit_quark_sector
 from quarkConstraints.model import RotationParameters
 from quarkConstraints.rs_ew_spectrum import (
@@ -225,6 +230,10 @@ class ScanConfig:
     expected_registry_count: int = EXPECTED_REGISTRY_COUNT
     sanity_mkk_gev: float = 50_000.0
     sanity_c: float = 0.4
+    # KK-gluon coupling normalization. The physics decision is OPEN (audit
+    # P0-2 / M-13, docs/OPEN_QUESTIONS.md item 1); the legacy default is kept
+    # for continuity and is always echoed in logs, params, and provenance.
+    coupling_policy_id: str = COUPLING_POLICY_PERTURBATIVE_4D_LEGACY
 
 
 @dataclass(frozen=True)
@@ -554,7 +563,7 @@ def _evaluate_draw(
                 m_kk_physical_gev=scale.m_kk_physical_gev,
                 lambda_ir_gev=scale.lambda_ir_gev,
                 xi_KK=scale.xi_kk,
-                g_s_star=None,
+                coupling_policy_id=cfg.coupling_policy_id,
             )
             params.update(
                 {
@@ -681,7 +690,7 @@ def _evaluate_draw(
             m_kk_physical_gev=scale.m_kk_physical_gev,
             lambda_ir_gev=scale.lambda_ir_gev,
             xi_KK=scale.xi_kk,
-            g_s_star=None,
+            coupling_policy_id=cfg.coupling_policy_id,
         )
         params.update(
             {
@@ -1477,7 +1486,7 @@ def run_universal_c_sanity(
         m_kk_physical_gev=scale.m_kk_physical_gev,
         lambda_ir_gev=scale.lambda_ir_gev,
         xi_KK=scale.xi_kk,
-        g_s_star=None,
+        coupling_policy_id=cfg.coupling_policy_id,
     )
     _assert_scan_kk_gluon_boundary(
         params=scale.as_params(),
@@ -1726,6 +1735,8 @@ def _config_payload(cfg: ScanConfig) -> dict[str, Any]:
         payload.pop("quark_only", None)
     if cfg.ew_model == MINIMAL_RS_EW_MODEL:
         payload.pop("ew_model", None)
+    if cfg.coupling_policy_id == COUPLING_POLICY_PERTURBATIVE_4D_LEGACY:
+        payload.pop("coupling_policy_id", None)
     return payload
 
 
@@ -1802,6 +1813,21 @@ def _build_argparser() -> argparse.ArgumentParser:
     parser.add_argument("--m-kk-tev", type=str, default="1,3,5,10")
     parser.add_argument("--quark-only", action="store_true")
     parser.add_argument("--ew-model", choices=SUPPORTED_EW_MODELS, default=MINIMAL_RS_EW_MODEL)
+    parser.add_argument(
+        "--coupling-policy",
+        choices=(
+            COUPLING_POLICY_PERTURBATIVE_4D_LEGACY,
+            COUPLING_POLICY_FIXED_GSSTAR_3,
+            COUPLING_POLICY_RS_VOLUME_SQRT2L_PHYSICAL,
+        ),
+        default=COUPLING_POLICY_PERTURBATIVE_4D_LEGACY,
+        help=(
+            "KK-gluon coupling normalization for Delta F = 2 matching. The "
+            "physics choice is an OPEN decision (audit P0-2 / M-13, "
+            "docs/OPEN_QUESTIONS.md item 1); the legacy default preserves "
+            "historical behavior and is echoed in logs and provenance."
+        ),
+    )
     parser.add_argument("--xi-kk", type=float, default=DEFAULT_XI_KK)
     parser.add_argument("--k-gev", type=float, default=MPL)
     parser.add_argument("--v-gev", type=float, default=DEFAULT_V_GEV)
@@ -1888,6 +1914,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         c_half_atol=float(args.c_half_atol),
         sanity_mkk_gev=float(args.sanity_mkk_tev) * 1000.0,
         sanity_c=float(args.sanity_c),
+        coupling_policy_id=str(args.coupling_policy),
     )
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1896,7 +1923,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         "git_sha": _resolve_git_sha(),
         "dirty": _git_dirty(),
         "schema": "full_catalog_scan_w6b_row_v1",
+        "coupling_policy_id": cfg.coupling_policy_id,
     }
+    print(f"[scan] coupling_policy_id={cfg.coupling_policy_id}")
+    if cfg.coupling_policy_id == COUPLING_POLICY_PERTURBATIVE_4D_LEGACY:
+        print(
+            "[scan] WARNING: running with the LEGACY perturbative KK-gluon "
+            "coupling (g_s* ~ g_s). The physical RS volume-enhanced coupling "
+            "would rescale epsilon_K floors by ~sqrt(2L) ~ 8.5. This is the "
+            "open M-13 decision; see docs/OPEN_QUESTIONS.md item 1. Floors "
+            "from this run must be quoted with this policy id."
+        )
     if cfg.ew_model != MINIMAL_RS_EW_MODEL:
         provenance["ew_model"] = cfg.ew_model
     if cfg.quark_only:
